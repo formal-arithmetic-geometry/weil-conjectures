@@ -13,7 +13,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Evaluation comparison from raw derived Hom to restricted cohomology
 
-Source: Stacks Project, Tags 03Q8, 072W and 0BKV.
+## References
+
+* [Stacks, Tag 03Q8]
+* [Stacks, Tag 072W]
+* [Stacks, Tag 0BKV]
 -/
 
 @[expose] public section
@@ -182,9 +186,7 @@ end RawRestrictedComparison
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Apply restricted derived sections and zeroth homology to a raw class, evaluate
-at the pulled-back represented identity section, and undo the shift comparison.
-All data are explicit functorial constructions.
-Source: Stacks Project, Tag 03Q8; Tags 072W and 0BKV. -/
+at the pulled-back represented identity section, and undo the shift comparison. -/
 noncomputable def rawRestrictedCohomologyComparison {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     (abelianHigherDirectImageRawPresheaf h p F).obj (op U) ⟶

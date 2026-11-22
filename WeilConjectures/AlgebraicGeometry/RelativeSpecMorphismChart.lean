@@ -8,16 +8,21 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+
+/-! # Charts of morphisms for the relative spectrum
+
+## References
+
+* [Stacks, Tag 01SA]
+* [Stacks, Tag 01LX]
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 /-- The local chart compatibility for the relative-spectrum anti-equivalence, provided
-its forward functor acts on morphisms by the canonical section maps (`hmap`).
-Source: Stacks Project, Morphisms, Lemma 01SA and Constructions, Lemma 01LX.
-
-Proof: Apply naturality of the counit of the equivalence to an algebra morphism,
-then use the affine `toSpecΓ` naturality lemma and functoriality of `Spec.map`. -/
+its forward functor acts on morphisms by the canonical section maps (`hmap`). -/
 theorem relative_spec_morphism_chart (S : Scheme.{u})
     (E : (ObjectProperty.FullSubcategory (fun Y : Over S ↦ IsAffineHom Y.hom))ᵒᵖ ≌
       ObjectProperty.FullSubcategory (fun A : S.CommAlgebraSheaf ↦ A.toModule.IsQuasicoherent))

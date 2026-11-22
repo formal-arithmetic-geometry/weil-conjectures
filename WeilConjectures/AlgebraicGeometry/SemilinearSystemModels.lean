@@ -9,8 +9,8 @@ public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import WeilConjectures.AlgebraicGeometry.CoefficientRingedSequenceSite
 /-! # Generic ordinary semilinear systems and their representative models
 
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1;
-Stacks 03D1, 03EK, 05RU, 06YY, 07A4 and 0G7E.
+Module sheaves on the ringed sequence site of a tower of coefficient rings, their derived
+category, and representative models for scalar extension and tensor comparisons.
 
 ## Main definitions
 
@@ -18,6 +18,19 @@ Stacks 03D1, 03EK, 05RU, 06YY, 07A4 and 0G7E.
 - `evaluation`, `coefficientMap`, `reduction`: the actual component and transition operations.
 - `ScalarData`: scalar adjunctions normalized on ordinary and K-flat representatives.
 - `TensorComparisonModel`: tensor comparisons fixed on actual total-complex summands.
+
+## Implementation details
+
+Scalar adjunctions and tensor comparisons are normalized by explicit equations on ordinary
+sections and on K-flat representatives, so that the derived comparisons are the canonical ones
+rather than arbitrary isomorphisms.
+
+## References
+
+* [Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1]
+* [Stacks, Tags 03CZ, 03D1, 03DA, 03EK, 03EL, 03ER, 05RU, 06YN, 06YS, 06YU, 06YY, 07A4, 07A6,
+  08J7, 08J9, 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -37,34 +50,27 @@ section Foundation
 variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
 
-/-- The site fits in the chosen coefficient universe.
-Source: the small-site size convention.
-Proof: the supplied EssentiallySmall instance is exactly this small-model witness. -/
+/-- The site fits in the chosen coefficient universe. -/
 theorem siteSmall : EssentiallySmall.{r} C := by
   infer_instance
 
-/-- Canonical abelian sheafification in the chosen coefficient universe.
-Source: Stacks 03DA. -/
+/-- Canonical abelian sheafification in the chosen coefficient universe. -/
 instance abelianSheafify : HasSheafify J AddCommGrpCat.{r} :=
   @SheafOfModules.hasSheafify_coefficientUniverse C _ (siteSmall.{c, v, r}) J
 
-/-- The locally bijective criterion at the same coefficient universe.
-Source: Stacks 03DA. -/
+/-- The locally bijective criterion at the same coefficient universe. -/
 instance locallyBijective : J.WEqualsLocallyBijective AddCommGrpCat.{r} :=
   @SheafOfModules.wEqualsLocallyBijective_coefficientUniverse C _ (siteSmall.{c, v, r}) J
 
-/-- Forget commutativity, retaining the actual coefficient ring sheaf.
-Source: Stacks 03CZ. -/
+/-- Forget commutativity, retaining the actual coefficient ring sheaf. -/
 abbrev ring (R : Sheaf J CommRingCat.{r}) :=
   (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R
 
-/-- The recorded module-sheaf category, with the coefficient universe independent of the site.
-Source: Stacks 03D1. -/
+/-- The recorded module-sheaf category, with the coefficient universe independent of the site. -/
 abbrev Mod (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} (ring.{c, v, r} J R)
 
-/-- The canonical abelian structure on the actual module-sheaf category.
-Source: Stacks 03D1. -/
+/-- The canonical abelian structure on the actual module-sheaf category. -/
 instance moduleAbelian (R : Sheaf J CommRingCat.{r}) :
     Abelian (Mod.{c, v, r} J R) :=
   letI : HasSheafify J AddCommGrpCat.{r} :=
@@ -73,46 +79,35 @@ instance moduleAbelian (R : Sheaf J CommRingCat.{r}) :
     SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
   inferInstance
 
-/-- The standard ordinary localization at quasi-isomorphisms.
-Source: Stacks 05RU. -/
+/-- The standard ordinary localization at quasi-isomorphisms. -/
 instance hasDerived (R : Sheaf J CommRingCat.{r}) :
     HasDerivedCategory.{max c v (r + 1)} (Mod.{c, v, r} J R) :=
   HasDerivedCategory.standard _
 
-/-- The ordinary unbounded derived module category.
-Source: Stacks 05RU. -/
+/-- The ordinary unbounded derived module category. -/
 abbrev D (R : Sheaf J CommRingCat.{r}) :=
   @DerivedCategory (Mod.{c, v, r} J R) _ _ (hasDerived.{c, v, r} J R)
 
 variable (B : ℕ → Sheaf J CommRingCat.{r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- The sequence site is essentially small in the same coefficient universe.
-Source: Zheng 4.1.
-Proof: take a small model of C and its product with the natural-number poset,
-using a universe lift of the latter. The product of the two equivalences is an
-equivalence with a category whose objects and arrows lie in the coefficient universe. -/
+/-- The sequence site is essentially small in the same coefficient universe. -/
 theorem sequenceSmall : EssentiallySmall.{r} (ℕ × C) := by
   exact EssentiallySmall.mk'
     ((AsSmall.equiv : ℕ ≌ AsSmall.{r} ℕ).prod (equivSmallModel.{r} C))
 
 attribute [instance] sequenceSmall
 
-/-- A slice of an essentially small category is essentially small in the same universe.
-Source: the small-site convention.
-Proof: an equivalence with a small model induces an equivalence of slice categories.
-The slice of the small model has objects and morphisms in the same universe. -/
+/-- A slice of an essentially small category is essentially small in the same universe. -/
 theorem sliceSmall (U : C) : EssentiallySmall.{r} (Over U) := by
   exact EssentiallySmall.mk' (Over.postEquiv U (equivSmallModel.{r} C))
 
 attribute [instance] sliceSmall
 
-/-- All coefficient transitions, obtained by composing the given adjacent maps.
-Source: Zheng 4.1. -/
+/-- All coefficient transitions, obtained by composing the given adjacent maps. -/
 def rings : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r} := Functor.ofOpSequence τ
 
-/-- The ring presheaf with value B_n(U) and the given horizontal restrictions.
-Source: Zheng 4.1. -/
+/-- The ring presheaf with value B_n(U) and the given horizontal restrictions. -/
 def ringPresheaf : (ℕ × C)ᵒᵖ ⥤ CommRingCat.{r} :=
   (prodOpEquiv (C := ℕ) (D := C)).functor ⋙ Functor.uncurry.obj
     (rings.{c, v, r} J B τ ⋙ sheafToPresheaf J CommRingCat.{r})
@@ -173,11 +168,7 @@ private theorem horizontal_map' {C : Type c} [Category.{v} C]
   rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 set_option linter.unusedSectionVars false in
-/-- The actual ring presheaf is a sheaf for the vertical sequence topology.
-Source: Zheng 4.1.
-Proof: glue in B_n on the vertical covering slice. Separatedness on the pullbacks of
-that cover verifies compatibility with horizontal restrictions. The algebra operations
-commute with gluing since each B_n is a ring sheaf. -/
+/-- The actual ring presheaf is a sheaf for the vertical sequence topology. -/
 theorem ringPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (ringPresheaf.{c, v, r} J B τ) := by
   intro A
@@ -187,24 +178,18 @@ theorem ringPresheaf_isSheaf :
   rw [← Functor.assoc, uncurry_slice_eq']
   exact ((rings.{c, v, r} J B τ).obj (op n)).property A
 
-/-- The ring object B_bullet, with real presheaf data.
-Source: Zheng 4.1. -/
+/-- The ring object B_bullet, with real presheaf data. -/
 def systemRing : Sheaf (coefficientSequenceTopology J) CommRingCat.{r} :=
   ⟨ringPresheaf.{c, v, r} J B τ, ringPresheaf_isSheaf.{c, v, r} J B τ⟩
 
-/-- Strict semilinear systems, realized as module sheaves on the sequence site.
-Source: Zheng 4.1. -/
+/-- Strict semilinear systems, realized as module sheaves on the sequence site. -/
 abbrev Systems := Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
-/-- D(S(B)), rather than a category of diagrams in derived categories.
-Source: Zheng 4.1. -/
+/-- The derived category `D(S(B))` of strict semilinear systems. -/
 abbrev DS := D.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ)
 
 set_option linter.unusedSectionVars false in
-/-- The slice inclusion is continuous for the actual vertical topology.
-Source: Zheng 4.1.
-Proof: a covering sieve restricts to a covering sieve on its vertical slice by the
-definition of coefficientSequenceTopology. The sheaf condition restricts accordingly. -/
+/-- The slice inclusion is continuous for the actual vertical topology. -/
 theorem evaluation_continuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
   apply Functor.isContinuous_of_coverPreserving
@@ -226,16 +211,12 @@ theorem evaluation_continuous (n : ℕ) :
     change (S.functorPushforward (Prod.sectR n C)).functorPullback (Prod.sectR n C) ∈ J U
     exact J.superset_covering (Sieve.le_functorPushforward_pullback _ S) hS
 
-/-- Continuity used by continuous module pushforward along the vertical inclusion.
-Source: Zheng 4.1. -/
+/-- Continuity used by continuous module pushforward along the vertical inclusion. -/
 instance evaluationContinuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) :=
   evaluation_continuous J n
 
-/-- Evaluation of B_bullet is B_n, including its restriction maps.
-Source: Zheng 4.1.
-Proof: uncurry and ofOpSequence evaluate to B_n(U); the horizontal identity is the
-identity ring map. Functor extensionality gives equality of the ring sheaves. -/
+/-- Evaluation of B_bullet is B_n, including its restriction maps. -/
 theorem evaluation_ring (n : ℕ) :
     ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{r}
       J (coefficientSequenceTopology J)).obj
@@ -253,8 +234,7 @@ theorem evaluation_ring (n : ℕ) :
   rw [(rings.{c, v, r} J B τ).map_id]
   simp
 
-/-- Actual evaluation, using the identity identification of its coefficient sheaf.
-Source: Zheng 4.1. -/
+/-- Actual evaluation, using the identity identification of its coefficient sheaf. -/
 def evaluation (n : ℕ) : Systems.{c, v, r} J B τ ⥤ Mod.{c, v, r} J (B n) :=
   SheafOfModules.pushforward (F := Prod.sectR n C)
     (eqToHom (evaluation_ring.{c, v, r} J B τ n).symm)
@@ -300,11 +280,7 @@ private theorem sequenceEvaluation_exact
       { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
     exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
-/-- Evaluation is additive and exact; kernels and cokernels are componentwise.
-Source: Zheng 4.1.
-Proof: kernels are sectionwise and cokernels are sheafifications of sectionwise
-cokernels. Vertical sheafification computes the same sheafification at each level.
-Addition of maps is sectionwise as well. -/
+/-- Evaluation is additive and exact; kernels and cokernels are componentwise. -/
 theorem evaluation_exact (n : ℕ) :
     (evaluation.{c, v, r} J B τ n).Additive ∧ PreservesFiniteLimits (evaluation.{c, v, r} J B τ n) ∧
       PreservesFiniteColimits (evaluation.{c, v, r} J B τ n) := by
@@ -312,23 +288,19 @@ theorem evaluation_exact (n : ℕ) :
   exact sequenceEvaluation_exact J n
     (eqToHom (evaluation_ring.{c, v, r} J B τ n).symm)
 
-/-- Additivity of the actual evaluation.
-Source: Zheng 4.1. -/
+/-- Additivity of the actual evaluation. -/
 instance evaluationAdditive (n : ℕ) : (evaluation.{c, v, r} J B τ n).Additive :=
   (evaluation_exact.{c, v, r} J B τ n).1
 
-/-- Left exactness of the actual evaluation.
-Source: Zheng 4.1. -/
+/-- Left exactness of the actual evaluation. -/
 instance evaluationLimits (n : ℕ) : PreservesFiniteLimits (evaluation.{c, v, r} J B τ n) :=
   (evaluation_exact.{c, v, r} J B τ n).2.1
 
-/-- Right exactness of the actual evaluation.
-Source: Zheng 4.1. -/
+/-- Right exactness of the actual evaluation. -/
 instance evaluationColimits (n : ℕ) : PreservesFiniteColimits (evaluation.{c, v, r} J B τ n) :=
   (evaluation_exact.{c, v, r} J B τ n).2.2
 
-/-- Evaluation on the ordinary derived category, computed termwise by its construction.
-Source: Zheng 4.1. -/
+/-- Evaluation on the ordinary derived category, computed termwise by its construction. -/
 abbrev e (n : ℕ) : DS.{c, v, r} J B τ ⥤ D.{c, v, r} J (B n) :=
   letI := evaluationAdditive.{c, v, r} J B τ n
   letI := evaluationLimits.{c, v, r} J B τ n
@@ -337,8 +309,7 @@ abbrev e (n : ℕ) : DS.{c, v, r} J B τ ⥤ D.{c, v, r} J (B n) :=
   letI := hasDerived.{c, v, r} J (B n)
   (evaluation.{c, v, r} J B τ n).mapDerivedCategory
 
-/-- The coefficient homomorphism from m to n is the composite of the supplied tau maps.
-Source: Zheng 4.1. -/
+/-- The coefficient homomorphism from m to n is the composite of the supplied tau maps. -/
 def coefficientMap {m n : ℕ} (h : n ≤ m) : B m ⟶ B n :=
   (rings.{c, v, r} J B τ).map (homOfLE h).op
 
@@ -346,16 +317,12 @@ section Scalars
 
 variable {J} {R R' : Sheaf J CommRingCat.{r}} (φ : R ⟶ R')
 
-/-- The recorded, exact restriction-of-scalars functor.
-Source: Stacks 03CZ. -/
+/-- The recorded, exact restriction-of-scalars functor. -/
 abbrev res : Mod.{c, v, r} J R' ⥤ Mod.{c, v, r} J R :=
   SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
 
-/-- Restriction leaves the underlying abelian sheaves unchanged, hence is exact.
-Source: Stacks 03CZ.
-Proof: kernels retain their sectionwise groups and cokernels retain their sheafified
-sectionwise groups; only the ring action is restricted. -/
+/-- Restriction leaves the underlying abelian sheaves unchanged, hence is exact. -/
 theorem res_exact : PreservesFiniteLimits (res.{c, v, r} φ) ∧
     PreservesFiniteColimits (res.{c, v, r} φ) := by
   let U := SheafOfModules.toSheaf.{r} (ring.{c, v, r} J R)
@@ -368,21 +335,17 @@ theorem res_exact : PreservesFiniteLimits (res.{c, v, r} φ) ∧
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
     preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
-/-- Left exactness of scalar restriction.
-Source: Stacks 03CZ. -/
+/-- Left exactness of scalar restriction. -/
 instance resLimits : PreservesFiniteLimits (res.{c, v, r} φ) := (res_exact.{c, v, r} φ).1
 
-/-- Right exactness of scalar restriction.
-Source: Stacks 03CZ. -/
+/-- Right exactness of scalar restriction. -/
 instance resColimits : PreservesFiniteColimits (res.{c, v, r} φ) := (res_exact.{c, v, r} φ).2
 
-/-- Ordinary derived restriction of scalars, computed termwise.
-Source: Stacks 03CZ. -/
+/-- Ordinary derived restriction of scalars, computed termwise. -/
 abbrev resD : D.{c, v, r} J R' ⥤ D.{c, v, r} J R :=
   (res.{c, v, r} φ).mapDerivedCategory
 
-/-- The sectionwise generator 1 tensor x followed by the actual sheafification unit.
-Source: Stacks 03CZ. -/
+/-- The sectionwise generator 1 tensor x followed by the actual sheafification unit. -/
 def extensionUnit (M : Mod.{c, v, r} J R) (U : Cᵒᵖ) (x : M.val.obj U) :
     (SheafOfModules.changeOfRings.{v, c, r} φ M).val.obj U :=
   ((PresheafOfModules.sheafificationAdjunction.{r, v, r, c}
@@ -390,11 +353,8 @@ def extensionUnit (M : Mod.{c, v, r} J R) (U : Cᵒᵖ) (x : M.val.obj U) :
       (SheafOfModules.changeOfRingsPresheaf.{v, c, r} φ M)).app U
         ((1 : R'.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)
 
-/-- A universal derived scalar-extension pair with its normalized adjunction.
-The existing change-of-rings model fixes ordinary extension and its K-flat counit.
-The unit-section equation fixes the ordinary adjunction. The representative equation
-fixes the derived adjunction and hence its units, counits and transposes.
-Source: Stacks 06YY and 07A6. -/
+/-- A universal derived scalar-extension pair with its normalized adjunction, fixed by
+the ordinary unit on sections and by the derived transpose on representatives. -/
 structure ScalarData where
   /-- The dependency's actual everywhere-defined K-flat derived change of rings. -/
   model : @SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, r,
@@ -419,8 +379,7 @@ structure ScalarData where
       DerivedCategory.Q.map
         (((ordinaryAdjunction.mapHomologicalComplex (.up ℤ)).homEquiv P Q) f)
 
-/-- The model's actual scalar-extension functor, with all projection universes fixed.
-Source: Stacks 06YY. -/
+/-- The model's actual scalar-extension functor, with all projection universes fixed. -/
 abbrev ScalarData.T (A : ScalarData.{c, v, r} φ) :
     D.{c, v, r} J R ⥤ D.{c, v, r} J R' :=
   @SheafOfModules.DerivedChangeOfRingsCochainModel.T.{c, v, r,
@@ -430,11 +389,7 @@ abbrev ScalarData.T (A : ScalarData.{c, v, r} φ) :
 
 end Scalars
 
-/-- The canonical restriction-composition identification is the identity on sections.
-Source: Stacks 03CZ.
-Proof: the tower functor sends composition to composition of ring maps. Both scalar
-restrictions have the same section groups with this composite action. Identity section
-maps therefore give an isomorphism, uniquely determined by the displayed formula. -/
+/-- The canonical restriction-composition identification is the identity on sections. -/
 theorem restrictionComposition_existsUnique {l m n : ℕ} (h : n ≤ m) (k : m ≤ l) :
     ∃! δ : res.{c, v, r} (coefficientMap.{c, v, r} J B τ h) ⋙
         res.{c, v, r} (coefficientMap.{c, v, r} J B τ k) ≅
@@ -466,8 +421,7 @@ theorem restrictionComposition_existsUnique {l m n : ℕ} (h : n ≤ m) (k : m �
   ext x
   exact congrFun (eq_of_heq (hδ' M U)) x
 
-/-- Derived restriction composition is the localization of the section identity.
-Source: Stacks 03CZ. -/
+/-- Derived restriction composition is the localization of the section identity. -/
 def restrictionComposition {l m n : ℕ} (h : n ≤ m) (k : m ≤ l) :
     resD.{c, v, r} (coefficientMap.{c, v, r} J B τ h) ⋙
         resD.{c, v, r} (coefficientMap.{c, v, r} J B τ k) ≅
@@ -505,11 +459,7 @@ private theorem transition_generic
   ext U x
   exact congrFun (eq_of_heq (hδ' M U)) x
 
-/-- The actual semilinear transition of module systems, specified on every section.
-Source: Zheng 4.1.
-Proof: the horizontal presheaf restriction is linear over B_m after scalar
-restriction to B_n. Site naturality gives a module-sheaf map. Its formula is natural
-in the system, and sectionwise extensionality proves uniqueness. -/
+/-- The actual semilinear transition of module systems, specified on every section. -/
 theorem transition_exists {m n : ℕ} (h : n ≤ m) :
     ∃! δ : evaluation.{c, v, r} J B τ m ⟶
       evaluation.{c, v, r} J B τ n ⋙ res.{c, v, r} (coefficientMap.{c, v, r} J B τ h),
@@ -553,13 +503,11 @@ theorem transition_exists {m n : ℕ} (h : n ≤ m) :
     (ring.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ))
     (ring.{c, v, r} J (B m)) (ring.{c, v, r} J (B n)) φm φn κ α he
 
-/-- The strict transition selected by its unique presheaf-restriction formula.
-Source: Zheng 4.1. -/
+/-- The strict transition selected by its unique presheaf-restriction formula. -/
 def transition {m n : ℕ} (h : n ≤ m) :=
   (transition_exists.{c, v, r} J B τ h).exists.choose
 
-/-- The same transition on the ordinary localization, rather than an unrelated level map.
-Source: Zheng 4.1. -/
+/-- The same transition on the ordinary localization. -/
 def derivedTransition {m n : ℕ} (h : n ≤ m) :
     e.{c, v, r} J B τ m ⟶
       e.{c, v, r} J B τ n ⋙ resD.{c, v, r} (coefficientMap.{c, v, r} J B τ h) :=
@@ -574,16 +522,14 @@ def derivedTransition {m n : ℕ} (h : n ≤ m) :
     (Functor.mapDerivedCategoryCompIso (evaluation.{c, v, r} J B τ n)
       (res.{c, v, r} (coefficientMap.{c, v, r} J B τ h))).inv
 
-/-- The reduction of M is the extension/restriction transpose of its actual transition.
-Source: Zheng 4.1; Stacks 07A6. -/
+/-- The reduction of M is the extension/restriction transpose of its actual transition. -/
 def reduction {m n : ℕ} (h : n ≤ m)
     (A : ScalarData.{c, v, r} (coefficientMap.{c, v, r} J B τ h))
     (M : DS.{c, v, r} J B τ) :
     A.T.obj ((e.{c, v, r} J B τ m).obj M) ⟶ (e.{c, v, r} J B τ n).obj M :=
   (A.adjunction.homEquiv _ _).symm ((derivedTransition.{c, v, r} J B τ h).app M)
 
-/-- Normalization quantifies over all reduction maps simultaneously.
-Source: Zheng 4.1. -/
+/-- Normalization quantifies over all reduction maps simultaneously. -/
 def Normalized
     (A : ∀ {m n : ℕ} (h : n ≤ m),
       ScalarData.{c, v, r} (coefficientMap.{c, v, r} J B τ h))
@@ -598,11 +544,7 @@ variable (F : ℕ → Sheaf J CommRingCat.{r})
 
 include hα
 
-/-- A compatible coefficient map induces the unique sectionwise ring-system map.
-Source: Zheng 4.1; Stacks 03CZ.
-Proof: use α_n on each section at (n,U). Naturality in U is sheaf-map naturality;
-horizontal naturality follows by induction from hα. Component extensionality proves
-uniqueness. Thus this is the given coefficient map, not a chosen unrelated morphism. -/
+/-- A compatible coefficient map induces the unique sectionwise ring-system map. -/
 theorem systemMap_existsUnique :
     ∃! f : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ,
       ∀ (n : ℕ) (U : Cᵒᵖ), f.hom.app (op (n, U.unop)) = (α n).hom.app U := by
@@ -619,16 +561,11 @@ theorem systemMap_existsUnique :
   funext U
   exact hg U.unop.1 (op U.unop.2)
 
-/-- The coefficient-system map uniquely specified by its components α_n.
-Source: Zheng 4.1. -/
+/-- The coefficient-system map uniquely specified by its components α_n. -/
 def systemMap : systemRing.{c, v, r} J B τ ⟶ systemRing.{c, v, r} J F σ :=
   (systemMap_existsUnique.{c, v, r} J B τ F σ α hα).exists.choose
 
-/-- Restriction of scalars commutes with evaluation by the identity on sections.
-Source: Stacks 03CZ.
-Proof: both functors keep the same section groups and restrict the B_n action along
-α_n. The component identity is linear and natural, and determines the comparison
-uniquely. Its inverse is the same section identity. -/
+/-- Restriction of scalars commutes with evaluation by the identity on sections. -/
 theorem restrictionEvaluation_existsUnique (n : ℕ) :
     ∃! δ : res.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙
         evaluation.{c, v, r} J B τ n ≅
@@ -679,8 +616,7 @@ theorem restrictionEvaluation_existsUnique (n : ℕ) :
   ext U x
   exact congrFun (eq_of_heq (hδ' M U)) x
 
-/-- The derived restriction comparison is the localization of the identity on sections.
-Source: Stacks 03CZ. -/
+/-- The derived restriction comparison is the localization of the identity on sections. -/
 def restrictionEvaluation (n : ℕ) :
     resD.{c, v, r} (systemMap.{c, v, r} J B τ F σ α hα) ⋙ e.{c, v, r} J B τ n ≅
       e.{c, v, r} J F σ n ⋙ resD.{c, v, r} (α n) :=
@@ -691,8 +627,7 @@ def restrictionEvaluation (n : ℕ) :
 
 end RingSystemMap
 
-/-- Termwise localization with the standard derived-category instances explicit.
-Source: Stacks 05RU. -/
+/-- Termwise localization with the standard derived-category instances explicit. -/
 def derivedExact {C₂ : Type c₂} [Category.{v₂} C₂] [EssentiallySmall.{r} C₂]
     (J₂ : GrothendieckTopology C₂) (R : Sheaf J CommRingCat.{r})
     (R₂ : Sheaf J₂ CommRingCat.{r}) (F : Mod.{c, v, r} J R ⥤ Mod.{c₂, v₂, r} J₂ R₂)
@@ -708,28 +643,24 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- The dependency's actual derived internal Hom, on the displayed ringed site.
-Source: Stacks 08J7. -/
+/-- The dependency's actual derived internal Hom, on the displayed ringed site. -/
 abbrev internalHom (R : Sheaf J CommRingCat.{max c v r}) :
     (D.{c, v, max c v r} J R)ᵒᵖ × D.{c, v, max c v r} J R ⥤ D.{c, v, max c v r} J R :=
   @derivedInternalHomOfUniverses.{c, v, r, (max c v r) + 1} C _ J
     (abelianSheafify.{c, v, max c v r} J) (locallyBijective.{c, v, max c v r} J) R
       (hasDerived.{c, v, max c v r} J R)
 
-/-- Closed tensor data for the actual derived internal Hom.
-Source: Stacks 07A4, 08J9. -/
+/-- Closed tensor data for the actual derived internal Hom. -/
 abbrev Closed (R : Sheaf J CommRingCat.{max c v r}) :=
   CoefficientClosedStructure (internalHom.{c, v, r} J R)
 
-/-- The recorded total-tensor/K-flat representative model of closed tensor.
-Source: Stacks 06YS, 07A4. -/
+/-- The recorded total-tensor/K-flat representative model of closed tensor. -/
 abbrev Models (R : Sheaf J CommRingCat.{max c v r}) (S : Closed.{c, v, r} J R) :=
   @CoefficientTensorModels.{r, c, v, (max c v r) + 1} C _ J
     (abelianSheafify.{c, v, max c v r} J) (locallyBijective.{c, v, max c v r} J) R
       (hasDerived.{c, v, max c v r} J R) S
 
-/-- Ordinary sheaf tensor with the monoidal convention of the representative model.
-Source: Stacks 03EK. -/
+/-- Ordinary sheaf tensor with the monoidal convention of the representative model. -/
 abbrev ordinaryTensor (R : Sheaf J CommRingCat.{max c v r})
     (M N : Mod.{c, v, max c v r} J R) : Mod.{c, v, max c v r} J R :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
@@ -739,8 +670,7 @@ abbrev ordinaryTensor (R : Sheaf J CommRingCat.{max c v r})
   letI := SheafOfModules.isMonoidal_W_independentCoefficients.{c, v, max c v r} R
   (SheafOfModules.monoidalCategory.{v, c, max c v r} R).tensorObj M N
 
-/-- A local pure tensor in the actual monoidal sheaf tensor.
-Source: Stacks 03EK. -/
+/-- A local pure tensor in the actual monoidal sheaf tensor. -/
 def tensorSection (R : Sheaf J CommRingCat.{max c v r})
     (M N : Mod.{c, v, max c v r} J R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
@@ -754,15 +684,13 @@ def tensorSection (R : Sheaf J CommRingCat.{max c v r})
     (((PresheafOfModules.sheafificationAdjunction.{max c v r, v, max c v r, c}
       (𝟙 (ring.{c, v, max c v r} J R).obj)).unit.app (M.val ⊗ N.val)).app U (x ⊗ₜ[R.obj.obj U] y))
 
-/-- The recorded total tensor with the canonical coefficient-size instances.
-Source: Stacks 06YN. -/
+/-- The recorded total tensor with the canonical coefficient-size instances. -/
 abbrev totalTensor (R : Sheaf J CommRingCat.{max c v r}) :=
   @coefficientTotalTensor.{r, c, v} C _ J
     (abelianSheafify.{c, v, max c v r} J)
     (locallyBijective.{c, v, max c v r} J) R
 
-/-- Tensor of ordinary morphisms in the same canonical monoidal structure.
-Source: Stacks 03EK. -/
+/-- Tensor of ordinary morphisms in the same canonical monoidal structure. -/
 def ordinaryTensorHom (R : Sheaf J CommRingCat.{max c v r})
     {M N M' N' : Mod.{c, v, max c v r} J R} (f : M ⟶ M') (g : N ⟶ N') :
     ordinaryTensor.{c, v, r} J R M N ⟶ ordinaryTensor.{c, v, r} J R M' N' :=
@@ -773,8 +701,7 @@ def ordinaryTensorHom (R : Sheaf J CommRingCat.{max c v r})
   letI := SheafOfModules.isMonoidal_W_independentCoefficients.{c, v, max c v r} R
   (SheafOfModules.monoidalCategory.{v, c, max c v r} R).tensorHom f g
 
-/-- The actual total-tensor summand inclusion, with the required instances explicit.
-Source: Stacks 06YN. -/
+/-- The actual total-tensor summand inclusion, with the required instances explicit. -/
 def tensorSummand (R : Sheaf J CommRingCat.{max c v r})
     (P Q : CochainComplex (Mod.{c, v, max c v r} J R) ℤ)
     (p q k : ℤ) (h : p + q = k) :
@@ -792,16 +719,14 @@ def tensorSummand (R : Sheaf J CommRingCat.{max c v r})
   HomologicalComplex.ιMapBifunctor P Q (CategoryTheory.MonoidalCategory.curriedTensor _)
     (ComplexShape.up ℤ) p q k h
 
-/-- The dependency's K-flat comparison with explicit coefficient-size instances.
-Source: Stacks 06YU. -/
+/-- The dependency's K-flat comparison with explicit coefficient-size instances. -/
 abbrev tensorModelIso (R : Sheaf J CommRingCat.{max c v r})
     (A : Closed.{c, v, r} J R) (T : Models.{c, v, r} J R A) :=
   @CoefficientTensorModels.iso.{r, c, v, (max c v r) + 1} C _ J
     (abelianSheafify.{c, v, max c v r} J) (locallyBijective.{c, v, max c v r} J) R
       (hasDerived.{c, v, max c v r} J R) A T
 
-/-- The usual flat-term representative class, with independent site sizes.
-Source: Stacks 03ER, 06YS, 0G7E. -/
+/-- The usual flat-term representative class, with independent site sizes. -/
 def flatTerms (R : Sheaf J CommRingCat.{max c v r})
     (P : CochainComplex (Mod.{c, v, max c v r} J R) ℤ) : Prop :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
@@ -812,10 +737,8 @@ def flatTerms (R : Sheaf J CommRingCat.{max c v r})
     (J := J) (R := R) (P.X p)
 
 /-- Representative normalization of an exact tensor comparison. The chain map is
-fixed on every total summand by the inverse ordinary comparison. Its localized
-square fixes the derived comparison on K-flat representatives, on the system
-category itself, rather than merely after evaluation.
-Source: Stacks 03EL, 07A4. -/
+fixed on every total summand by the inverse ordinary comparison, and its localization
+gives the derived comparison on K-flat representatives. -/
 structure TensorComparisonModel {C' : Type c} [Category.{v} C']
     [EssentiallySmall.{max c v r} C'] (J' : GrothendieckTopology C')
     (R : Sheaf J CommRingCat.{max c v r}) (S : Sheaf J' CommRingCat.{max c v r})
@@ -860,10 +783,8 @@ structure TensorComparisonModel {C' : Type c} [Category.{v} C']
       (Functor.mapDerivedCategoryFactors F).hom.app
         ((totalTensor.{c, v, r} J R).obj (P, Q)) = DerivedCategory.Q.map (chain P Q)
 
-/-- The section carried by a scalar-extension functor's ordinary unit.  The
-object equality in the derived change-of-rings model is used explicitly, so
-this is the actual model `E`, rather than an unrelated extension functor.
-Source: Stacks 03CZ, 06YY. -/
+/-- The section carried by a scalar-extension functor's ordinary unit, for
+the extension functor `E` of the derived change-of-rings model. -/
 def scalarExtensionSection {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -875,8 +796,7 @@ def scalarExtensionSection {C : Type c} [Category.{v} C]
 
 /-- The ordinary scalar/tensor comparison is fixed on pure tensors.  This is
 the change-of-rings map `(x ⊗ y) ⊗ 1 ↦ (x ⊗ 1) ⊗ (y ⊗ 1)` on every generalized
-section, with the actual sheafification unit and the chosen ordinary comparison.
-Source: Stacks 03EK and 06YY. -/
+section. -/
 def ScalarTensorPure {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -894,9 +814,7 @@ def ScalarTensorPure {C : Type c} [Category.{v} C]
         (scalarExtensionSection.{c, v, r} φ A N U y)
 
 /-- The K-flat counit of the actual scalar-extension model, packaged as an
-isomorphism on a chosen K-flat representative; it is invertible there by the
-model's `computes` field.
-Source: Stacks 06YY, 07A6. -/
+isomorphism on a chosen K-flat representative. -/
 noncomputable def scalarEpsilonIso {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} [EssentiallySmall.{max c v r} C]
     {R R' : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ R')
@@ -909,10 +827,8 @@ noncomputable def scalarEpsilonIso {C : Type c} [Category.{v} C]
   @asIso _ _ _ _ (A.model.ε.app P) (A.model.computes P hP)
 
 /-- A scalar/tensor comparison carrying the K-flat representative square
-and its pure-tensor ordinary normalization. Unlike an exact inverse-image
-comparison, scalar extension is only required to preserve the K-flat class;
-its derived comparison is written with the model counits `ε`.
-Source: Stacks 03EK, 06YY, 07A4. -/
+and its pure-tensor ordinary normalization; its derived comparison is written with
+the model counits `ε`. -/
 structure ScalarTensorComparisonModel {C : Type c} [Category.{v} C]
     [EssentiallySmall.{max c v r} C] (J : GrothendieckTopology C)
     (R R' : Sheaf J CommRingCat.{max c v r}) (φ : R ⟶ R')

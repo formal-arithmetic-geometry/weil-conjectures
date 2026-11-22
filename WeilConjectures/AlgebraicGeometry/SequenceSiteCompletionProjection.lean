@@ -23,9 +23,6 @@ import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 
 /-! # The constant/limit ringed sequence projection
 
-Source: Stacks, sites-cohomology.tex, Tags 0940 and 06YY; Zheng, Construction 4.1,
-printed p. 21.
-
 The index `n : ℕ` denotes the positive level `n+1`. All systems retain their actual
 horizontal section maps. The record below specifies the geometric morphism, its
 ordinary module adjunction, and its simultaneous K-flat derived comparison.
@@ -45,6 +42,14 @@ ordinary module adjunction, and its simultaneous K-flat derived comparison.
 
 - `sequenceSiteCompletionProjection`: exactness of the canonical equivalence and
   existence of the compatible constant/limit projection data.
+
+## References
+
+* [Stacks, Tag 0940]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 00XA]
+* [Zheng, Construction 4.1]
 -/
 
 @[expose] public noncomputable section
@@ -66,8 +71,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Forgetting ring structure preserves sheaves in the selected coefficient universe.
-Source: Stacks 03CZ. -/
+/-- Forgetting ring structure preserves sheaves in the selected coefficient universe. -/
 instance (priority := 1100) ringedToposRingForgetCompose
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) : J.HasSheafCompose (forget RingCat.{r}) :=
@@ -77,8 +81,7 @@ instance (priority := 1100) ringedToposRingForgetCompose
 attribute [-instance] ringedToposRingForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposRingForgetCompose
 
-/-- Forgetting abelian-group structure preserves sheaves in the coefficient universe.
-Source: Stacks 03CZ. -/
+/-- Forgetting abelian-group structure preserves sheaves in the coefficient universe. -/
 instance (priority := 1100) ringedToposAbelianForgetCompose
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) : J.HasSheafCompose (forget AddCommGrpCat.{r}) :=
@@ -88,8 +91,7 @@ instance (priority := 1100) ringedToposAbelianForgetCompose
 attribute [-instance] ringedToposAbelianForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposAbelianForgetCompose
 
-/-- Forgetting commutativity preserves sheaves in the selected coefficient universe.
-Source: Stacks 03CZ. -/
+/-- Forgetting commutativity preserves sheaves in the selected coefficient universe. -/
 instance (priority := 1100) ringedToposCommRingForgetCompose
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) :
@@ -101,16 +103,8 @@ attribute [-instance] ringedToposCommRingForgetCompose
 scoped[CategoryTheory] attribute [instance 1100] ringedToposCommRingForgetCompose
 
 /-- A geometric morphism with a structural ring map and the induced direct image on modules.
-
-Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules.
-
-The ring identities test every generalized element of the target topos. Left exactness
-identifies the inverse image of products and the terminal object, so these are precisely
-the identities for a morphism of ring objects. The last identity specifies addition and
-scalar multiplication on the module direct image under the sheaf adjunction. It includes
-zero by taking all three module elements zero. Thus the supplied module direct image is
-the usual induced one, up to its displayed natural identification, not an arbitrary lift.
-No exactness of the tensor module pullback or preservation of K-injectives is assumed. -/
+The ring identities are tested on generalized elements of the target topos, and the module
+direct image is the usual induced one, up to its displayed natural identification. -/
 structure RingedToposMorphismOfUniverses
     {C : Type c} {D : Type d} [Category.{v} C] [Category.{w} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

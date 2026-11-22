@@ -17,8 +17,9 @@ since the fibres of `f` are discrete. If `f` is moreover quasi-compact, the prei
 set of closed points is a finite set of closed points
 (`AlgebraicGeometry.Scheme.Hom.exists_finset_preimage_of_isClosed_singleton`).
 
-This is used in the finite-support step of Gabber's Künneth formula: the support of the cone of the Künneth map is
-contained in the preimage, under a quasi-finite coordinate map, of a finite set of closed points.
+This is used in the finite-support step of Gabber's Künneth formula: the support of the cone
+of the Künneth map is contained in the preimage, under a quasi-finite coordinate map, of a
+finite set of closed points.
 -/
 
 @[expose] public section

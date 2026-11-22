@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.ConstantModuleSheavesForgetColimits
 
 /-! # The canonical scalar-forgetting inverse-image comparison
 
-Source: Stacks Project, Tags 03D3 and 03D7.
+## References
+
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03FD]
 -/
 
 @[expose] public section
@@ -38,8 +42,7 @@ namespace RawModuleScalarComparison
 
 
 
-/-- The inverse of the canonical unit-compatible coefficient comparison. Source: Stacks
-  Project, Tags 03D3 and 03D7. -/
+/-- The inverse of the canonical unit-compatible coefficient comparison. -/
 noncomputable abbrev pullbackIso (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     upperStar (ModuleCat.{u + 1} Λ) f ⋙ moduleAbelianForget Λ X ≅
@@ -57,8 +60,7 @@ noncomputable abbrev freeAbelian (S : Scheme.{u}) (U : S.Etale) :=
   (presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (uliftYoneda.{u + 1}.obj U ⋙ AddCommGrpCat.free)
 
-/-- Send the represented abelian generator to the represented module generator.
-Source: Stacks Project, Tag 03FD, the equality of section complexes. -/
+/-- Send the represented abelian generator to the represented module generator. -/
 noncomputable def freeMap (Λ : Type (u + 1)) [CommRing Λ]
     (S : Scheme.{u}) (U : S.Etale) :
     freeAbelian S U ⟶ (moduleAbelianForget Λ S).obj ((freeSheaf Λ S).obj U) := by

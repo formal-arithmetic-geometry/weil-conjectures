@@ -18,7 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 /-!
 # Embedding a quasi-coherent module into an acyclic quasi-coherent module
 
-Source: Stacks Project, Cohomology of Schemes, Tag 0BDY, Lemma 30.4.3 (1).
+## References
+
+* [Stacks, Tag 0BDY]
 -/
 
 @[expose] public section
@@ -30,21 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- On a quasi-compact scheme over a field with affine diagonal, every quasi-coherent
-module embeds into a quasi-coherent module with vanishing cohomology in positive degrees.
-Source: Stacks Project, Cohomology of Schemes, Tag 0BDY, Lemma 30.4.3 (1).
-
-Proof:
-1. Choose a finite affine open cover using quasi-compactness. Its finite disjoint union
-   `U` is affine; let `j : U ⟶ X` be the covering morphism.
-2. Affine diagonal makes intersections of affine opens affine. The inverse image under `j` of any
-   affine open is a finite disjoint union of these intersections and hence affine, so `j` is affine.
-3. The canonical map `F ⟶ j_* j^* F` is injective on stalks: choose a covering open
-   containing a given point; evaluation at its copy in `U` gives a left inverse on
-   that stalk. The tensor pullback `j^* F` is quasi-coherent.
-4. Affine vanishing (`pqf-lem-affine-vanishing`) gives vanishing of positive cohomology
-   on `U`. The affine pushforward cohomology comparison transfers it to `j_* j^* F` on `X`.
-   Affine pushforward preserves quasi-coherence. Take
-   `F' = j_* j^* F`. The field hypothesis is retained as required by the node. -/
+module embeds into a quasi-coherent module with vanishing cohomology in positive degrees. -/
 theorem exists_quasicoherent_acyclic_embedding (k : Type u) [Field k] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))] [CompactSpace X]
     [IsAffineHom (pullback.diagonal (X ↘ Spec (CommRingCat.of k)))]

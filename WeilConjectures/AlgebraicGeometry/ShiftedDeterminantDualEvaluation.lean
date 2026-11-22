@@ -16,7 +16,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 
 /-! # The shifted determinant of the dual evaluates against the determinant
 
-Source: Stacks Project, Tag 0BRT, determinant inversion in the conclusion of the proof.
+## Implementation details
+
+Unlike `shiftTensorShiftIso`, the private `tensorShiftIso` allows independent Grothendieck
+and derived universes.
+
+## References
+
+* [Stacks, Tag 0BRT]
 -/
 
 @[expose] public section
@@ -27,8 +34,7 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry
 
-/-- The degree-zero single object as the localization of its single complex.
-This is the general form of the comparison in Etale.Derived.Invertible. -/
+/-- The degree-zero single object as the localization of its single complex. -/
 private noncomputable def singleObjIsoQh
     {C : Type*} [Category C] [Abelian C] [IsGrothendieckAbelian.{u} C]
     [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -55,8 +61,7 @@ private noncomputable def singleObjUnitIso
         (HomotopyCategory.quotient C (.up ℤ)).obj (𝟙_ (CochainComplex C ℤ)) ≅ _) ≪≫
     (asIso (Functor.LaxMonoidal.ε DerivedCategory.Qh)).symm
 
-/-- A flat single complex is K-flat, so the localization tensor comparison is invertible.
-The final two comparisons identify the tensor of single complexes with a single tensor. -/
+/-- A flat single complex is K-flat, so the localization tensor comparison is invertible. -/
 private noncomputable def singleObjTensorIso
     {C : Type*} [Category C] [Abelian C] [IsGrothendieckAbelian.{u} C]
     [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -92,8 +97,7 @@ private noncomputable def singleObjTensorIso
         ((HomologicalComplex.singleMapHomologicalComplex (tensorLeft L) (.up ℤ) 0).app F))) ≪≫
     (singleObjIsoQh (L ⊗ F)).symm
 
-/-- Transport shift commutation from K-flat representatives in each variable.
-Unlike shiftTensorShiftIso, this allows independent Grothendieck and derived universes. -/
+/-- Transport shift commutation from K-flat representatives in each variable. -/
 private noncomputable def tensorShiftIso
     {C : Type*} [Category C] [Abelian C] [IsGrothendieckAbelian.{u} C]
     [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -118,22 +122,7 @@ private noncomputable def tensorShiftIso
     (shiftFunctorAdd' (DerivedCategory C) b a (a + b) (add_comm b a)).symm.app _
 
 /-- The shifted top exterior powers of a finite locally free sheaf and its dual are
-mutually inverse derived tensor objects.
-Source: Stacks Project, Tag 0BRT, final determinant inversion.
-
-Proof: on an open cover trivializing M as O_X^d, use a basis e₁,..,e_d and its dual.
-The determinant evaluation pairs their top wedges to 1 and is therefore an isomorphism
-from wedge^d M^dual tensor wedge^d M to O_X on that cover. A basis change multiplies
-the two determinant generators by inverse determinants, so this evaluation is
-independent of the chosen bases and glues. Sectionwise exterior powers sheafify to
-these local determinant lines, and internal Hom restricts to the dual free module.
-Both determinant lines are locally free of rank one, hence flat, so their ordinary
-product computes their derived tensor product. The single functor in degree zero
-therefore carries the evaluation to an isomorphism with the derived unit. Compatibility
-of derived tensor with shifts identifies the displayed product with that unshifted
-product shifted by -d+d=0. Compose with the zero-shift isomorphism. When d=0 the empty
-wedge is the structure sheaf and the evaluation is multiplication; the same argument
-works on an empty scheme as well. -/
+mutually inverse derived tensor objects. -/
 theorem shiftedDeterminant_dual_evaluation
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

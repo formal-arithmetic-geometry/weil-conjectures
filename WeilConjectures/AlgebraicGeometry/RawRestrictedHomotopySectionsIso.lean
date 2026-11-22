@@ -12,7 +12,11 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 
 /-! # Represented evaluation on homotopy classes
 
-Source: Stacks Project, Tags 03Q8, 072W and 0BKV.
+## References
+
+* [Stacks, Tag 03Q8]
+* [Stacks, Tag 072W]
+* [Stacks, Tag 0BKV]
 -/
 
 @[expose] public section
@@ -289,21 +293,7 @@ private lemma sectionsComplexIso_evaluation {S Y : Scheme.{v}} (h : Y ⟶ S)
     (HomologicalComplex.homologyπ_naturality ((R.mapHomologicalComplex (.up ℤ)).map f) 0)
       (HomologicalComplex.cyclesMap t.inv 0 b)).symm
 
-/-- The free represented sheaf identifies homotopy classes with section cohomology.
-Source: Stacks Project, Tag 03Q8; Cohomology on Sites, Tags 072W and 0BKV.
-
-Proof: the inverse-image/direct-image adjunction, the sheafification adjunction,
-free-abelian adjunction and Yoneda identify maps from the pulled-back free represented
-sheaf to each term of I with its sections over U times Y. The map is evaluation at
-`generator h U`: this follows from the unit formula for the first adjunction and the
-identity formula for Yoneda. These additive equivalences commute with every differential.
-Using the from-single cochain equivalence gives a chain isomorphism from the Hom complex
-of the degree-zero single sheaf into I to the termwise restricted-sections complex.
-Zeroth Hom-complex cohomology is homotopy classes of maps. Apply zeroth homology to the
-chain isomorphism. On a chain map this is exactly `chainEvaluation`, since the
-single-complex homology isomorphism sends the identity generator to its class.
-The argument applies to arbitrary complexes, including the zero complex, and to the
-empty pullback, where both groups are zero. No injective resolution is used here. -/
+/-- The free represented sheaf identifies homotopy classes with section cohomology. -/
 theorem exists_rawRestrictedHomotopySectionsIso {S Y : Scheme.{v}}
     (h : Y ⟶ S) (U : S.Etale)
     (I : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :

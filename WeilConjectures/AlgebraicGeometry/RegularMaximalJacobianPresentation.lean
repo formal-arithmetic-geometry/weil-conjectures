@@ -19,7 +19,15 @@ import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 /-!
 # Invertible Jacobian presentations near regular closed points
 
-Source: Stacks Project, Algebra, Lemmas 00TV and 00TS; standard smooth presentations.
+## Implementation details
+
+The `linter.unusedVariables` option on the main theorem retains the intentionally unused
+existential isomorphism binder `e`.
+
+## References
+
+* [Stacks, Tag 00TV]
+* [Stacks, Tag 00TS]
 -/
 
 @[expose] public section
@@ -30,23 +38,7 @@ namespace Algebra
 
 set_option linter.unusedVariables false in
 /-- A regular closed point has a principal neighbourhood with an explicit polynomial
-presentation and an invertible Jacobian minor. This statement concerns equations and
-an algebra isomorphism; it does not assert smoothness.
-Source: Stacks Project, Algebra, Lemma 00TV (regular points with separable residue field)
-and Lemma 00TS, implication (1) => (4) (standard smooth neighbourhood).
-
-Proof: The source library proves smoothness at a regular closed point over an
-algebraically closed field, using independent kernel generators of a regular local
-quotient and the cotangent-complex criterion. Mathlib then supplies a principal
-standard smooth neighbourhood, hence a finite submersive presentation. Reindex its
-variables by `Fin n`. Order its relation indices by their injective selection of
-variables and enumerate this finite order increasingly by `Fin c`; reindexing the
-relations now gives a strictly increasing variable selection. The presentation's
-quotient equivalence identifies the quotient image of its Jacobian with its unit
-Jacobian in the localized algebra. Its Jacobian matrix is the transpose of the matrix
-in the statement, so their determinants coincide. All finite enumerations and the
-transpose identity also apply to empty index types. The scoped linter option retains
-the original, intentionally unused existential isomorphism binder `e`. -/
+presentation and an invertible Jacobian minor. -/
 theorem exists_jacobian_unit_presentation_of_regularAtMaximal
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [IsAlgClosed k] [Algebra.FiniteType k S]

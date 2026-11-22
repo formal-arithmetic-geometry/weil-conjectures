@@ -14,7 +14,12 @@ import WeilConjectures.AlgebraicGeometry.SelfTorAffineTensorSections
 
 /-! # The algebraic exterior of conormal sections and the affine model
 
-Source: Stacks Project, Tags 01R3(2), 01I6, and 0096. -/
+## References
+
+* [Stacks, Tag 01R3]
+* [Stacks, Tag 01I6]
+* [Stacks, Tag 0096]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,26 +28,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
 /-- Exterior powers of actual conormal sections identify with sections of the
-pulled-back affine conormal exterior module. This statement does not use the
-exterior sheaf or its sheafification.
-Source: Stacks Project, Tag 01R3(2); Tag 01I6, Lemmas 26.7.1 and 26.7.3(1);
-Tag 0096 for the pullback unit.
-Proof: Put A = Gamma(Y,U), I = ker(i).ideal(U), V = i inverse-image U,
-and B = Gamma(Z,V). The closed immersion identifies B with A/I.
-Apply affine_conormal_sections with R=A, r the identity, and I the kernel
-ideal. Its equation identifies every pullback-unit ideal section with its
-class in I/I squared. Its A-linearity is B-linearity: lift each scalar of
-B through the surjection A to B and apply A-linearity. Exterior functoriality
-then identifies the exterior B-module of N(V) with the exterior A/I-module
-of I/I squared and sends the displayed pure wedges to selfTorIdealWedge.
-On V, the restriction of the pushforward from U cancels with restriction
-to U, and tensor pullback of the associated module M is associated to
-B tensor_A M. Because I annihilates M, the map b tensor m to b*m identifies
-this tensor product with M, with inverse m to 1 tensor m. The tilde unit
-and tensor-pullback unit yield exactly selfTorAffineSection, by naturality
-of the adjunction units. Compose the two identifications. In degree zero
-the map is the ring identification sending the empty wedge to 1; for an
-empty V both sides are zero. No regularity or finite-generation is needed. -/
+pulled-back affine conormal exterior module. -/
 theorem exists_selfTor_conormal_exterior_section_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :

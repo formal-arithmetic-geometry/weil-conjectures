@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Normalized restriction of a projection pullback
 
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
+## References
+
+* [Stacks, Tag 0096]
+* [Stacks, Tag 0097]
+* [Stacks, Tag 01CD]
 -/
 
 @[expose] public section
@@ -26,13 +30,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Restriction of a pullback along an open commutative triangle preserves unit sections.
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
-
-Proof: use leftAdjointUniq from the restriction adjunction to the chosen tensor-pullback
-adjunction for j, then tensorSectionsComp j b, and transport along h. Evaluate the
-leftAdjointUniq unit equation at the top open of B. The normalized composition
-unit equation then identifies the two successive units with the unit for d.
-All top restrictions are retained, so this includes an empty source.
 -/
 theorem exists_tensorPullback_openTriangle {A B C : Scheme.{w}}
     (j : A ⟶ B) [IsOpenImmersion j] (b : B ⟶ C) (d : A ⟶ C)

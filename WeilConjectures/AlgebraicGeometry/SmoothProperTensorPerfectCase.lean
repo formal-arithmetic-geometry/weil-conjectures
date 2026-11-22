@@ -23,7 +23,19 @@ import WeilConjectures.AlgebraicGeometry.SmoothProperTensorPerfectCaseCore
 
 /-! # Projection comparison for perfect complexes
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9T.
+## Implementation details
+
+The existential witnesses in the main theorem are bookkeeping for restriction of `Rf_*` to
+quasi-coherent objects, the quasi-coherence of the unit and the tensor source, and the derived
+pullback's monoidal adjunction; they are conclusions, not additional geometric hypotheses. The
+formula is stated for every choice of monoidal pullback and its adjunction, in particular for
+their canonical K-flat constructions. Finite Tor dimension is stated directly using Tor of the
+actual stalk-map restriction of scalars; the bound may depend on the point, but not on the test
+module.
+
+## References
+
+* [Stacks, Tag 0A9T]
 -/
 
 @[expose] public section
@@ -39,29 +51,7 @@ namespace AlgebraicGeometry
 The displayed equation specifies the inverse of `pf` as the canonical projection map:
 its pullback-adjoint is the inverse tensor comparison followed by the pullback counit.
 Thus `pf.hom`, followed by the right-adjoint counit and the right unitor, has exactly
-its prescribed mate under `Rf_* ⊣ c`. Full-subcategory morphisms are formed by `homMk`.
-
-The existential witnesses are bookkeeping for restriction of `Rf_*` to quasi-coherent
-objects, the quasi-coherence of the unit and the tensor source, and the derived pullback's
-monoidal adjunction. They are conclusions, not additional geometric hypotheses. The
-formula is stated for every choice of monoidal pullback and its adjunction: in particular
-for their canonical K-flat constructions. These choices do not change invertibility.
-Finite Tor dimension is stated directly using Tor of the actual stalk-map restriction
-of scalars; the bound may depend on the point, but not on the test module.
-
-Source: Stacks Project, Duality for Schemes, Tag 0A9T.
-Proof (the node's two steps):
-1. Properness implies quasi-compactness and quasi-separatedness. The projection formula gives `pf`; the displayed adjunction equation specifies
-   its canonical direction. Composing with the counit at the unit gives the comparison.
-   Restriction to quasi-coherent derived categories and the K-flat tensor construction
-   give the bookkeeping witnesses.
-2. By lem-pc-perfect-tensor-hom-duality, K has a dual Kdual, and Lf*K has dual Lf*Kdual.
-   For every quasi-coherent E, use tensor-Hom duality on X, then Rf_* ⊣ c, then the
-   projection formula for Kdual, then tensor-Hom duality on Y, then Rf_* ⊣ c again.
-   This identifies Hom(E,Lf*K ⊗ c(O_Y)) naturally with Hom(E,c(K)). Naturality and the
-   two adjunction counits identify the induced map with the displayed comparison.
-   Yoneda makes that comparison invertible. Monoidal coherence and the triangle
-   identities make the same argument independent of choices of presentation data. -/
+its prescribed mate under `Rf_* ⊣ c`. Full-subcategory morphisms are formed by `homMk`. -/
 theorem smoothProper_tensor_perfect_case
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

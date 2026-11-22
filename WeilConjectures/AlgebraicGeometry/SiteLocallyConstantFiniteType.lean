@@ -8,8 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 
 /-! # Locally constant finite type modules on a small site
 
-Source: Stacks Project, Modules on Sites, Definition 093Q;
-Cohomology on Sites, Tag 094H.
+## References
+
+* [Stacks, Tag 093Q]
+* [Stacks, Tag 094H]
+* [Stacks, Tag 00W1]
 -/
 
 @[expose] public section
@@ -21,9 +24,7 @@ open CategoryTheory
 namespace SheafOfModules
 
 /-- The constant commutative-ring sheafification unit remains locally injective after
-forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H.
-Proof: equality after the unit is locally equality before it by sheafification; forgetting
-commutativity changes neither sections nor their equality. -/
+forgetting to rings. -/
 theorem constantCommRingUnit_locallyInjective
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B] :
@@ -39,9 +40,7 @@ theorem constantCommRingUnit_locallyInjective
 attribute [instance] constantCommRingUnit_locallyInjective
 
 /-- The constant commutative-ring sheafification unit remains locally surjective after
-forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H.
-Proof: sections of a sheafification locally come from presheaf sections, and forgetting
-commutativity leaves those same sections and local lifts. -/
+forgetting to rings. -/
 theorem constantCommRingUnit_locallySurjective
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B] :
@@ -59,10 +58,7 @@ attribute [instance] constantCommRingUnit_locallySurjective
 /-- A module over the constant coefficient ring is locally constant of finite type if,
 over every object, a covering sieve trivializes it with finitely generated constant values.
 The constant module is the sheafification of the existing constant module presheaf along
-the constant-ring sheafification unit. Restriction to the slice is `overFunctor`.
-
-Source: Stacks Project, Modules on Sites, Definition 093Q;
-Cohomology on Sites, Tag 094H. -/
+the constant-ring sheafification unit. Restriction to the slice is `overFunctor`. -/
 noncomputable def IsLocallyConstantFiniteType
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B]

@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.ModuleSheafificationRestriction
 
 /-! # Restriction of sheafified ring-family complexes
 
-Source: Stacks Project, Tag 099E, restriction compatibility of K_{U,I}.
+## References
+
+* [Stacks, Tag 099E]
 -/
 
 @[expose] public noncomputable section
@@ -27,20 +29,13 @@ variable (K : RingComplexFamily.{u}) (ε : RingComplexAugmentations K)
 variable (m : RingComplexMaps K) (hm : RingComplexFunctorial K ε m)
 variable (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections)
 
-/-- Restrict the given global ring sections along the functor of sites.
-Source: Stacks Project, Tag 099E. -/
+/-- Restrict the given global ring sections along the functor of sites. -/
 def ringFamilyRestrictedSections : Fin r →
     ((((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O).obj) ⋙
       forget CommRingCat).sections :=
   fun i ↦ ⟨fun X ↦ (f i).val (F.op.obj X), fun a ↦ (f i).property (F.op.map a)⟩
 
-/-- Ring-family complexes commute with restriction and module sheafification.
-Source: Stacks Project, Tag 099E, K_{V,I O(V)} = K_{U,I}|_V.
-
-Proof: the presheaf complexes commute with restriction section by section: both use the
-same ring, generated ideal, transition map and differential. Apply the unit-compatible
-module-sheafification restriction isomorphism degreewise. Its naturality for each
-presheaf differential gives a chain isomorphism. -/
+/-- Ring-family complexes commute with restriction and module sheafification. -/
 theorem exists_ringFamilySheafModel_restrictionIso :
     ∃ e : (ringFamilySheafModel
         ((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O)

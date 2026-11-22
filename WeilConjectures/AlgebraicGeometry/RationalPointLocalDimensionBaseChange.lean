@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimen
 /-!
 # Local dimension of rational points under field extension
 
-Source: blueprint `lem-ag-group-identity-local-dimension`, first proof paragraph;
-Stacks Project, Tags 00P4 and 00OU.
+## References
+
+* [Stacks, Tag 00P4]
+* [Stacks, Tag 00OU]
 -/
 
 @[expose] public section
@@ -26,20 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Local-ring dimension at a rational point is unchanged by extending the ground field.
-
-Source: blueprint `lem-ag-group-identity-local-dimension`, first proof paragraph;
-Stacks Project, Tags 00P4 and 00OU.
-
-Proof: Choose an affine neighbourhood Spec A of the image of p. The structure map makes
-A a finite type k-algebra. Its inverse image in the pullback is Spec (A tensor_k K).
-The condition on q identifies the contraction of its prime with the prime of p.
-Both primes are maximal: the sections give residue fields k and K, respectively.
-Tag 00P4 equates the topological dimensions at these primes under scalar extension.
-Tag 00OU identifies each with the dimension of the corresponding prime localization.
-Finally the affine chart inclusions identify these localizations with the scheme stalks.
-This argument permits nilpotents, disconnected schemes, and any field extension; it uses
-no smoothness or separatedness. -/
+/-- Local-ring dimension at a rational point is unchanged by extending the ground field. -/
 theorem ringKrullDim_rationalPoint_field_baseChange
     {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f]

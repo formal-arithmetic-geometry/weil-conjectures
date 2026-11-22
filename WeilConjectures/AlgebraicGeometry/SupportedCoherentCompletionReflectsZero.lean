@@ -17,7 +17,12 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Reflection of zero for supported coherent submodules
 
-Source: Stacks Project, Tags 087T, 0880 and 088A.
+## References
+
+* [Stacks, Tag 087T]
+* [Stacks, Tag 0880]
+* [Stacks, Tag 0888]
+* [Stacks, Tag 088A]
 -/
 
 @[expose] public section
@@ -28,27 +33,6 @@ namespace AlgebraicGeometry
 
 /-- Completion on a closed thickening detects a zero coherent submodule of a
 module annihilated by the thickening's defining ideal.
-Source: Stacks Project, Tag 088A, second application of Remark 0888, using
-Tag 087T and the natural completion comparison (equation 0880).
-
-Proof:
-1. The inclusion H to F is monic, so K^q annihilates H: ideal multiplication
-commutes with this inclusion, and multiplication on F is zero. The affine
-ideal-power formula identifies this annihilation with annihilation by the
-ideal sheaf defining Z = V(K^q).
-2. The coherent closed-pushforward equivalence of Tag 087T descends H to a
-coherent module H_Z on Z, with pushforward isomorphic to H. The natural
-completion comparison identifies the pushforward of the I O_Z completion
-of H_Z with the I completion of H.
-3. Every component of the latter is zero by hypothesis. Closed pushforward
-is fully faithful and reflects zero, so every component of the former is
-zero. A diagram with zero components is zero, and the full inclusion of
-coherent formal modules reflects zero. Thus completion(H_Z) is zero.
-4. Install the Noetherian instance on Z induced by its closed immersion.
-The assumed completion equivalence for this instance reflects zero, so
-H_Z is zero. Pushforward preserves zero; its comparison with H proves H
-zero. No local faithfulness of completion is assumed. The argument also
-covers the empty thickening and the zero module.
 -/
 theorem supportedCoherent_completion_reflects_zero
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)

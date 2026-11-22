@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Canonical comparison for successive tensor pullbacks
 
-Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096.
+## References
+
+* [Stacks, Tag 0095]
+* [Stacks, Tag 0096]
 -/
 
 @[expose] public section
@@ -21,8 +24,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical composition comparison, via the adjunctions to pushforward.
-Source: Stacks Project, Tags 0095 and 0096. -/
+/-- The canonical composition comparison, via the adjunctions to pushforward. -/
 noncomputable def tensorPullbackCompositionIso
     {X Y Z : Scheme.{u}} (g : Z ⟶ Y) (h : Y ⟶ X) (k : Z ⟶ X) (w : g ≫ h = k) :
     tensorPullback k ≅ tensorPullback h ⋙ tensorPullback g :=

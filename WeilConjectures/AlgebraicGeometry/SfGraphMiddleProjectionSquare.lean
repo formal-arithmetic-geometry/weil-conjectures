@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.ProperOpenFactorProjection
 
 /-! # Projection compatibility across the graph intersection
 
-Source: `LowerShriekComposition.lean`, eC, and Stacks Tags 0B56, 0GL1 and 0F7B.
+## References
+
+* [Stacks, Tag 0B56]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0F7B]
 -/
 
 @[expose] public section
@@ -732,27 +736,6 @@ private theorem word_middle_projection_generic
   exact outer_projection_paste_etale B p K (h M) h₁ h₂ (hE M) (hE _)
 
 /-- Projection compatibility across the graph intersection.
-
-Source: `LowerShriekComposition.lean`, eC; the tensor calculation uses Stacks
-Tags 0B56, 0GL1 and 0F7B.
-
-Proof in words. Let O12 be the intersection of the two supporting opens b1:O1 -> T and
-b2:O2 -> T, with projections u1,u2 and proper graph s12. Since u1 and u2 are
-monomorphisms and s12 ui = si, the identity-top squares relating s12 to si
-are Cartesian. Specialize the proper/open tensor square to each of these
-squares. Remove extension by the identity using its canonical unitor; the
-exchange is then precisely rightDerivedLowerStarCompOpenImmersionLowerShriekIso,
-with the normalization in its defining unit/counit formula. Solve the first
-square for its inverse comparison by cancelling isomorphism components.
-Whisker by Jb1 and Jb2 and use open projection composition for u1 b1 and u2 b2.
-The equality u1 b1 = u2 b2 is pullback.condition, so the two open-composition
-coefficient comparisons agree after the canonical congruence comparison. Paste
-these squares to obtain compatibility of B12 with the successive inner proper
-and open projections. Whisker by R(p1 p) and use naturality of its projection.
-The canonical pullback composition identities identify the final coefficient
-paths with those of the two sfGraphWordProjection maps. This proves the stated
-square. Empty intersections and zero objects satisfy the same identities; no
-projection is inverted.
 -/
 theorem sfGraphMiddleIso_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]

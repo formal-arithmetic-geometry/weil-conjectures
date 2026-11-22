@@ -18,7 +18,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # The quotient criterion for an ideal subsheaf
 
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03CY; Algebraization, Tag 099I.
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03CY]
+* [Stacks, Tag 099I]
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +38,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 attribute [local irreducible] SheafOfModules.RingedTensor.tensorAdjunction
   SheafOfModules.RingedTensor.tensorFunctor
 
-/-- Restriction on sectionwise ideal quotients.
-Source: Stacks Project, Modules on Sites, Tag 03D7; Algebraization, Tag 099I. -/
+/-- Restriction on sectionwise ideal quotients. -/
 private def quotientMap (I : RingedSiteIdeal R) {X Y : Cᵒᵖ} (f : X ⟶ Y) :
     ModuleCat.of (R.obj.obj X) (R.obj.obj X ⧸ I.sections X.unop) ⟶
       (ModuleCat.restrictScalars ((siteModuleRings R).obj.map f).hom).obj
@@ -59,8 +62,7 @@ private theorem quotientMap_mk (I : RingedSiteIdeal R) {X Y : Cᵒᵖ} (f : X �
     quotientMap I f (Submodule.Quotient.mk a) =
       Submodule.Quotient.mk (R.obj.map f a) := rfl
 
-/-- The sectionwise quotient module presheaf of an ideal subsheaf.
-Source: Stacks Project, Modules on Sites, Tag 03D7; Algebraization, Tag 099I. -/
+/-- The sectionwise quotient module presheaf of an ideal subsheaf. -/
 private def quotientPresheaf (I : RingedSiteIdeal R) :
     PresheafOfModules.{u} (siteModuleRings R).obj where
   obj X := ModuleCat.of (R.obj.obj X) (R.obj.obj X ⧸ I.sections X.unop)
@@ -97,8 +99,7 @@ private def quotientProjection (I : RingedSiteIdeal R) :
     intro a
     rfl
 
-/-- An ideal section maps into the extended ideal.
-Source: Stacks Project, Modules on Sites, Tag 03D7; Algebraization, Tag 099I. -/
+/-- An ideal section maps into the extended ideal. -/
 private theorem extension_mem (I : RingedSiteIdeal R) (φ : R ⟶ B)
     (U : C) (a : I.sections U) :
     φ.hom.app (op U) a ∈ (I.extension φ).sections U := by
@@ -111,8 +112,7 @@ private theorem extension_mem (I : RingedSiteIdeal R) (φ : R ⟶ B)
   rw [← hnat]
   exact Ideal.subset_span ⟨⟨R.obj.map g.op a.val, I.restriction g a.val a.property⟩, rfl⟩
 
-/-- The map of additive section quotients induced by a ring map.
-Source: Stacks Project, Modules on Sites, Tag 03D7; Algebraization, Tag 099I. -/
+/-- The map of additive section quotients induced by a ring map. -/
 private def quotientCoefficientMap (I : RingedSiteIdeal R) (φ : R ⟶ B) (X : Cᵒᵖ) :
     AddCommGrpCat.of (R.obj.obj X ⧸ I.sections X.unop) ⟶
       AddCommGrpCat.of (B.obj.obj X ⧸ (I.extension φ).sections X.unop) := by
@@ -120,8 +120,7 @@ private def quotientCoefficientMap (I : RingedSiteIdeal R) (φ : R ⟶ B) (X : C
     (fun a ha ↦ extension_mem I φ X.unop ⟨a, ha⟩)
   exact AddCommGrpCat.ofHom g.toAddMonoidHom
 
-/-- The canonical map of additive quotient presheaves.
-Source: Stacks Project, Modules on Sites, Tag 03D7; Algebraization, Tag 099I. -/
+/-- The canonical map of additive quotient presheaves. -/
 private def quotientComparison (I : RingedSiteIdeal R) (φ : R ⟶ B) :
     (quotientPresheaf I).presheaf ⟶ (quotientPresheaf (I.extension φ)).presheaf where
   app X := quotientCoefficientMap I φ X
@@ -167,12 +166,6 @@ private theorem quotientComparison_locallySurjective (I : RingedSiteIdeal R) (φ
 
 /-- The local quotient criterion makes the canonical quotient comparison an isomorphism
 following sheafification.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03CY; Algebraization, Tag 099I.
-
-Proof: the local kernel criterion gives injectivity on section quotients. The local lifting
-criterion gives a covering sieve of preimages of every quotient section. A locally bijective
-map of presheaves becomes an isomorphism after sheafification. No claim that sectionwise
-quotients already form a sheaf is needed.
 -/
 private theorem quotientComparison_sheafification_isIso (I : RingedSiteIdeal R) (φ : R ⟶ B)
     (hquot : I.IsQuotientIso φ) :
@@ -503,16 +496,6 @@ private theorem extendedIdealMap_inclusion (I : RingedSiteIdeal R) (φ : R ⟶ B
 
 /-- The scalar-extension unit is invertible on the quotient by an ideal subsheaf when the
 coefficient morphism induces an isomorphism modulo that ideal.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03CY; Algebraization, Tag 099I.
-
-Proof: sheafify the sectionwise quotient presheaves. The local kernel and lifting criteria
-make their canonical comparison locally bijective, hence an isomorphism. Those sheaves are
-the categorical cokernels of the ideal inclusions. Scalar extension preserves cokernels and
-carries the rank-one ring module isomorphically to the target ring module. Its map from the
-source ideal onto the extended ideal is epic: locally every extended-ideal section is a
-finite linear combination of images of ideal sections, each of which lifts through the unit.
-These presentations identify scalar extension of the source cokernel with the target
-cokernel, and the adjunction unit becomes exactly the quotient comparison.
 -/
 theorem scalarExtension_unit_cokernel_isIso (I : RingedSiteIdeal R) (φ : R ⟶ B)
     (hquot : I.IsQuotientIso φ) :

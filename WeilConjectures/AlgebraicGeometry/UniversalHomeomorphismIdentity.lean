@@ -14,7 +14,10 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 /-!
 # Universal-homeomorphism identity coherence
 
-Source: Stacks Project, Tags 04DZ and 03SI.
+## References
+
+* [Stacks, Tag 04DZ]
+* [Stacks, Tag 03SI]
 -/
 
 set_option linter.style.haveILetI false
@@ -23,16 +26,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tags 04DZ and 03SI, identity coherence.
-Proof: For the identity scheme morphism, lowerStarId identifies the set-valued pushforward with the
-identity functor. Transport the sheaf pullback adjunction along this isomorphism and compare it
-with the identity adjunction by leftAdjointUniq. This gives the set-valued inverse-image identity
-isomorphism. Equivalently, the repaired comparison identifies it with the inverse sheaf
-equivalence, whose adjunction is compared to the same identity adjunction.
-Use lowerStarId with Type coefficients for the second isomorphism, upperStarId with additive
-coefficients for the third, and lowerStarId with additive coefficients for the fourth. The
-identity clause of cohomologyPullbackFunctorial gives exactly the displayed equality for every F,
-q and x. -/
+/-- The inverse-image and direct-image functors on étale sheaves along the identity are
+isomorphic to the identity functors, and cohomology pullback along the identity is the
+identity. -/
 theorem universalHomeomorphism_identity {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     Nonempty (Scheme.etaleSetPullback (𝟙 X) ≅ 𝟭 _) ∧

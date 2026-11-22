@@ -18,15 +18,19 @@ public import Mathlib.RingTheory.KrullDimension.Field
 Let `f : X ⟶ T` be locally of finite presentation over an affine scheme `T` (for instance a
 scheme of finite type over the trait `S = Spec k'⟦t⟧`, `AlgebraicGeometry.trait`), and let `x` be
 a point of `X` with local fibre dimension `q = dim_x X_{f(x)}`. Then there are an open
-neighbourhood `V` of `x` and a locally quasi-finite morphism `b : V ⟶ 𝔸^q_T` over `T`, and the base change of `V` to any field-valued
-point `Spec K ⟶ T` (for instance the geometric generic point of the trait) has dimension at
-most `q`.
+neighbourhood `V` of `x` and a locally quasi-finite morphism `b : V ⟶ 𝔸^q_T` over `T`, and the
+base change of `V` to any field-valued point `Spec K ⟶ T` (for instance the geometric generic
+point of the trait) has dimension at most `q`.
 
 ## Main results
 
 - `AlgebraicGeometry.exists_quasiFinite_affineSpace_chart`: the open neighbourhood `V` and the
   quasi-finite coordinates `b : V ⟶ 𝔸^q_T`, with `q = dim_x X_{f(x)}`.
 - `AlgebraicGeometry.topologicalKrullDim_pullback_le_of_chart`: `dim (V ×_T Spec K) ≤ q`.
+
+## References
+
+* [Stacks, Tag 00QE]
 -/
 
 @[expose] public section
@@ -63,8 +67,7 @@ end LocalDimension
 for `f : X ⟶ T` locally of finite presentation over an affine scheme `T` and a point `x` of `X`,
 with `q = dim_x X_{f(x)}` the local dimension of its fibre, there are an open neighbourhood `V`
 of `x` and a locally quasi-finite morphism `b : V ⟶ 𝔸^q_T` over `T`, locally of finite
-presentation. It is the affine chart `exists_quasiFinite_polynomial_chart` (Stacks 00QE) on an
-affine open neighbourhood of `x`, moved into `X`. -/
+presentation. -/
 theorem exists_quasiFinite_affineSpace_chart {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [LocallyOfFinitePresentation f] (x : X) :
     ∃ V : X.Opens, x ∈ V ∧ ∃ (n : ℕ) (b : V.toScheme ⟶ 𝔸(ULift.{u} (Fin n); T)),

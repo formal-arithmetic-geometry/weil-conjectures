@@ -20,7 +20,13 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackOverIsoUnit
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons
 
-Source: Stacks Project, Tags 06YH, 06YG and 00LS. -/
+## References
+
+* [Stacks, Tag 06YH]
+* [Stacks, Tag 06YG]
+* [Stacks, Tag 00LS]
+* [Stacks, Tag 01I6]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,25 +39,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The augmentation comparisons defining the affine derived-Tor charts commute
-with every augmented tensor chain comparison between the chosen resolutions.
-Source: Stacks Project, Tags 06YH, 06YG, 00LS and 01I6.
-
-Proof: Sheafify the chosen projective quotient resolution on each affine chart.
-Projective modules are summands of free modules, so their associated sheaves
-are flat. Extend into nonpositive cochain degrees and use bounded-above flat
-K-flatness. The augmentation identifies the quotient tensor with the restriction
-of the fixed derived tensor. Exactness of tilde and isoLeftDerivedObj identify
-homology with associated self-Tor. The quotient ideal annihilates this homology,
-so tensor pullback preserves it. These augmentation comparisons define t.
-For a basic inclusion and the given augmented chain map a, its sheafification
-commutes with the augmentations. The pure tensor equation for k identifies
-its sheafification with the tensor comparison. Inverting the augmentation
-quasi-isomorphisms preserves this commutative square in the derived category.
-Apply homology, the exact restriction-of-scalars comparison, and the tilde
-comparison to get the square for the explicit q. Naturality of the tilde and
-pullback units gives the section equation. Any two augmented lifts are
-homotopic, so the comparison works for every given a and k, not just one lift.
-Degree zero and empty basic opens use the same augmentation and homology maps. -/
+with every augmented tensor chain comparison between the chosen resolutions. -/
 theorem exists_selfTor_augmented_resolution_charts
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

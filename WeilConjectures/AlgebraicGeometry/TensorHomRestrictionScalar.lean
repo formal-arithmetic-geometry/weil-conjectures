@@ -13,7 +13,10 @@ import all WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Restricting a tensor-Hom transpose with prescribed scalar values
 
-Source: Stacks Project, Modules, Tag 01CN and Tag 01YB, tensor-Hom paragraph.
+## References
+
+* [Stacks, Tag 01CN]
+* [Stacks, Tag 01YB]
 -/
 
 @[expose] public section
@@ -31,20 +34,7 @@ local instance localInst_TensorHomRestrictionScalar_1
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Transposition sends a local scalar multiple of a Hom section to multiplication
-followed by the local morphism. No coherence or ideal-power hypothesis is required.
-Source: Stacks Project, Modules, Tag 01CN, and Tag 01YB, tensor-Hom paragraph.
-
-Proof: For W contained in U, the assumed equality says that alpha_W(a) is
-ι_W(a) times the restriction of the local morphism s. Evaluating at g gives
-ι_W(a) times s_W(g). The tensor-Hom characterization therefore says beta on
-local pure tensors is this same value. Multiplication is the map ι tensor id
-followed by the left unitor; its value on a tensor g is ι_W(a) times g.
-Linearity of s gives equality of these two local tensor maps. Pure tensors
-generate the presheaf tensor product. The universal property of sheafification
-then gives equality of the restricted sheaf maps. Finally, naturality of
-Scheme.Modules.overFunctorEquiv transports the slice morphism represented by
-s to the displayed restrictFunctor morphism. This also applies to the empty
-open and zero modules; no generation by global sections of U is assumed. -/
+followed by the local morphism. -/
 theorem tensorHom_restriction_of_local_scalar
     {X : Scheme.{u}} (A H F : X.Modules)
     (ι : A ⟶ SheafOfModules.unit X.ringCatSheaf) (U : X.Opens)

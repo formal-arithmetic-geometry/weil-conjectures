@@ -19,11 +19,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse pullback-square comparison respects inverse tensor constraints.
-Source: composition coherence Step 1, tensor-compositor calculation in Step 6.
-Proof: the forward pullback-square comparison respects the forward tensor constraints
-by the two pullback-composition tensor equations. Express that equality as an equality
-of isomorphisms and invert it. Precompose with the tensor constraint for v; its inverse
-cancels. This works for every commuting square, including empty schemes.
 -/
 theorem sectionPullbackTensorInterchange
     (A : Type v) [Category.{u + 1} A] [Abelian A]

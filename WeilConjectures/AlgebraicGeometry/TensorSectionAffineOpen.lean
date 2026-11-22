@@ -15,7 +15,10 @@ import Mathlib.RingTheory.Flat.Basic
 
 /-! # Tensor sections and affine nonvanishing loci
 
-Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV.
+## References
+
+* [Stacks, Tag 09NC]
+* [Stacks, Tag 01PV]
 -/
 
 @[expose] public section
@@ -134,26 +137,9 @@ private theorem affine_finite_intersection {X : Scheme.{u}} {ι : Type*}
     tauto
 
 /-- The tensor section `τ = t₀ ⊗ ⋯ ⊗ tₙ` of a nonempty finite family of invertible modules
-(the landed left-associated `positiveTensorFamily` with its section
-`positiveTensorFamilySection`, def-sc-positive-tensor-family; `n` means `n + 1` factors)
-has nonvanishing locus equal to the intersection of the factor loci. If one factor locus is
-affine, so is this intersection.
-
-Source: Stacks Project, Varieties Lemma 09NC, proof, invoking Properties Lemma 01PV.
-
-Proof:
-1. The quotient-tensor equivalence identifies a zero residue-field value with a germ
-   in the maximal ideal times the stalk module, so a nonzero value is precisely
-   membership in the nonvanishing locus. By `lem-weil-pbc-invertible-pullback-tensor`,
-   each tensor product is invertible and its fibre section is the pure tensor of the
-   factor values. Singleton nonzero vector families are linearly independent, and
-   tensoring them preserves linear independence over a field. Thus a pure tensor is
-   nonzero exactly when both factors are nonzero. Induction on the number of factors
-   gives the equality.
-2. If the `j`-th factor locus is affine, start with that affine open and intersect
-   successively with every remaining factor locus. At each step apply
-   `lem-sc-affine-cap-section-open` to the invertible factor and its section.
-   The resulting affine open is the tensor section locus by step 1.
+(the left-associated `positiveTensorFamily` with its section `positiveTensorFamilySection`;
+`n` means `n + 1` factors) has nonvanishing locus equal to the intersection of the factor
+loci. If one factor locus is affine, so is this intersection.
 -/
 theorem tensor_section_affine_open {X : Scheme.{u}} (n : ℕ)
     (L : Fin (n + 1) → X.Modules) [∀ i, (L i).IsInvertible]

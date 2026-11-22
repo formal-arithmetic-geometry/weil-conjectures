@@ -8,6 +8,16 @@ public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonData
 import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
+/-! # Existence of the tensor-pullback unit
+
+A canonical ringed tensor comparison carries a unit isomorphism compatible with the right
+unitors.
+
+## References
+
+* [Stacks, Tag 03EL]
+-/
+
 @[expose] public section
 universe u v u' v'
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
@@ -203,11 +213,9 @@ private theorem comparison_q_hom_ext
   simpa only [comparison_q_eq R S RI uInv I c L hobj k M,
     Functor.map_comp, Category.assoc] using h
 
--- Transport scalar extension and evaluate the comparison on generalized unit tensors.
 /--
-The proof constructs the unit map from pure tensors and scalar extension.
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-Proof in words: The proof constructs the unit map from pure tensors and scalar extension. -/
+A canonical ringed tensor comparison admits an isomorphism from `L` of the unit to the unit,
+compatible with the right unitors. -/
 theorem canonicalRingedTensorComparison_unit_exists
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R))} (f : M ⟶ N), L.map f =

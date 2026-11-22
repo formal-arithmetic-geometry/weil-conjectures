@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Openness of the image of a quotient factor over an isomorphism locus
 
-Source: Stacks Project, More on Algebra, proof of Tag 09XH.
+## References
+
+* [Stacks, Tag 09XH]
 -/
 
 @[expose] public section
@@ -21,13 +23,7 @@ open AlgebraicGeometry CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The first product factor has spectrum image the basic open of its idempotent.
-
-Source: Stacks Project, proof of Tag 09XH, first-factor spectrum identification.
-Auxiliary calculation for.
-The kernel of the first projection consists of the complementary factor. A prime
-contains it exactly when it omits the first-factor idempotent: use their sum 1
-in one direction and their product 0 in the other. -/
+/-- The first product factor has spectrum image the basic open of its idempotent. -/
 theorem firstFactor_range
     {R : Type u} {D₁ : Type w} {D₂ : Type z}
     [CommRing R] [CommRing D₁] [CommRing D₂] (e : R ≃+* D₁ × D₂) :
@@ -52,17 +48,7 @@ theorem firstFactor_range
       ext <;> simp [ha']
     exact (p.isPrime.mem_or_mem (hm ▸ p.asIdeal.zero_mem)).resolve_right he
 
-/-- A component of a closed fibre has relatively open image over an isomorphism locus.
-
-Source: literature/stacks-project/more-algebra.tex:2529-2541, proof of Tag 09XH.
-
-Choose a lift t of e.symm (1,0). The first factor spectrum is V(J) intersect D(t):
-a prime containing J contains exactly one of t and 1-t, since their product lies in J.
-The equality J = map i J' identifies V(J) with the inverse image of V(J').
-On the inverse image of U, the scheme isomorphism induces a homeomorphism to U.
-It sends the open intersection with D(t) to an open W in Spec(S'). The image of
-our factor is W intersect V(J'), because every point of the factor lies over U.
-Pullback along the quotient spectrum therefore gives an open subset. -/
+/-- A component of a closed fibre has relatively open image over an isomorphism locus. -/
 theorem quotient_firstFactor_image_isOpen
     {S' S : Type u} [CommRing S'] [CommRing S] (i : S' →+* S)
     (J' : Ideal S') (J : Ideal S) (hJ : Ideal.map i J' = J)

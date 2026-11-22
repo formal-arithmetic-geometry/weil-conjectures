@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.OpenDerivedLocalizationData
 
 /-! # One affine attachment for supported stabilized maps
 
-Source: Stacks Project, Tag 09IM.
+## References
+
+* [Stacks, Tag 09IM]
 -/
 
 @[expose] public section
@@ -50,29 +52,7 @@ private theorem restrict_map_comparison
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Attaching a single affine open extends the source plus its shift.
-The input source need only be perfect and supported on the old open; its behaviour
-elsewhere in X is immaterial.
-Source: Stacks Project, Tag 09IM, the case X = U union V in its proof.
-
-Proof: Restrict R and β to W. Its pointwise local perfect models make this
-restriction perfect, and its cohomology stalks vanish on W minus T. On W replace
-R by R plus R[1] and β by the first projection followed by β. The intersection
-W intersect V is quasi-compact by quasi-separatedness, as is V minus T.
-On the affine V apply supported perfect extension to R restricted to the
-intersection. This yields Q supported on T intersect V and an identification with
-(R plus R[1]) on the intersection. Compose the identification with the projection
-and restricted β. Affine perfect map lifting replaces Q by a perfect tensor
-augmentation, unchanged on the intersection and still supported on T intersect V,
-and lifts the composite to E restricted to V. Derived open gluing gives a source
-and map on W union V. At points of W or V its local models are strictly perfect,
-and its stalks vanish away from T. Extend this source and map by zero from W union V
-to X, using the exact derived adjunction. This does not affect those local properties.
-On U restrict the gluing identification and apply the biproduct and shift
-restriction comparisons. The resulting isomorphism identifies the restricted
-map with the first projection followed by β restricted to U.
-All comparisons are induced by Modules.overEquiv and iterated overFunctorMap.
-No support or perfectness outside W union V is required. Empty or redundant V
-still works, and the zero source uses the same construction. -/
+The input source need only be perfect and supported on the old open. -/
 theorem exists_supported_map_affine_attachment
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (U W V : X.Opens) (hUW : U ≤ W) (hW : IsCompact (W : Set X))

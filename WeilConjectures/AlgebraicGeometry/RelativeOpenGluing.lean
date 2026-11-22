@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionHomGluing
 
 /-! # Relative two-open gluing without local finiteness conditions
 
-Source: Stacks Project, Tag 08DG, Lemma cohomology-lemma-glue.
+## References
+
+* [Stacks, Tag 08DG]
 -/
 
 @[expose] public section
@@ -23,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Assemble relative gluing from an ambient object and gluing of morphisms.
-The compatibility calculation only uses functoriality and composition. -/
+/-- Assemble relative gluing from an ambient object and gluing of morphisms. -/
 private theorem exists_relative_gluing_of_ambient
     {C D CW CV CI : Type*} [Category C] [Category D]
     [Category CW] [Category CV] [Category CI]
@@ -61,21 +62,7 @@ private theorem exists_relative_gluing_of_ambient
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Glue derived objects and compatible maps on the union, using ambient relative
-restriction. No perfectness or support is asserted.
-Source: Stacks Project, Tag 08DG, Lemma cohomology-lemma-glue.
-
-Proof: Apply exists_ambient_open_gluing_object to obtain G on X and local
-isomorphisms jW, jV with their overlap transition equation. Compose them with
-a and b. Expand functoriality on these composites, substitute the assumed
-compatibility of a and b, and postcompose the transition equation with SV(b)
-and sV(E). This gives compatible local maps between the fixed objects G and E.
-Apply exists_open_union_hom to obtain alpha on Y = W union V. Set F = L(G),
-iW = kW(G) followed by jW and iV = kV(G) followed by jV. Reassociating the
-two restriction equations for alpha gives exactly the required equations.
-No witnesses are chosen to define data elsewhere: this is an existential theorem.
-The argument uses all derived complexes, with no boundedness, perfectness,
-quasi-coherence, quasi-compactness or support assumptions. Empty opens and empty
-Y are included by the two input theorems. -/
+restriction. -/
 theorem exists_relative_open_gluing
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

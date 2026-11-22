@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Tensor sections under an open pullback
 
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
+## References
+
+* [Stacks, Tag 0096]
+* [Stacks, Tag 0097]
+* [Stacks, Tag 01CD]
 -/
 
 @[expose] public section
@@ -25,9 +29,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Pull a section over U to the whole source of a morphism whose image lies in U.
-Source: Stacks Project, Tag 0096. This is the specified adjunction unit followed
-by restriction, with no choice of a section. -/
+/-- Pull a section over U to the whole source of a morphism whose image lies in U. -/
 def tensorPullbackOpenSection {X Y : Scheme.{w}} (a : Y ⟶ X) (M : X.Modules)
     (U : X.Opens) (hTop : ⊤ ≤ a ⁻¹ᵁ U) (s : M.val.obj (op U)) :
     ((tensorPullback a).obj M).val.obj (op ⊤) :=
@@ -35,21 +37,7 @@ def tensorPullbackOpenSection {X Y : Scheme.{w}} (a : Y ⟶ X) (M : X.Modules)
     (((Classical.choose (exists_tensorPullbackAdjunction a)).unit.app M).val.app (op U) s)
 
 /-- On an open immersion, tensor pullback transports all tensor sections, also
-when its two coefficients are identified with other modules.
-Source: Stacks Project, Tags 0096, 0097 and 01CD.
-
-Proof: The unit of the restriction adjunction on an open contained in the
-image is an isomorphism. Uniqueness of left adjoints identifies this unit
-with the specified tensor-pullback unit. Since the inverse image of U is
-the whole source, restricting its component to the top open is still an
-isomorphism. Restrict scalars along the structure morphisms; the equality
-of structure morphisms makes these section maps k-linear. Apply this to
-M tensor N and then the tensor-pullback comparison of Tag 01CD. Finally
-apply the tensor product of the supplied coefficient isomorphisms. The
-unit formula of the comparison sends a tensor section to the tensor of
-the two unit sections; restriction and the coefficient maps preserve
-this formula. This constructs eT and proves the equality for arbitrary
-sections of M and N, including zero modules and empty opens. -/
+when its two coefficients are identified with other modules. -/
 theorem exists_scalarOpenTensorTransport
     {k : Type w} [Field k] {X Y : Scheme.{w}}
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))

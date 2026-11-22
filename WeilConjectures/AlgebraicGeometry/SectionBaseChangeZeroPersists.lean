@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # Persistence of zero sections under further base change
 
-Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
-Algebra, Tags 05N7 (3) and 05LI (1).
+## References
+
+* [Stacks, Tags 01ZR, 05N7, 05LI, 0095, 0096]
 -/
 
 @[expose] public section
@@ -63,21 +64,7 @@ private theorem unit_zero_comp {X Y Z : Scheme.{u}}
   rw [hbz, map_zero] at he
   exact he.symm
 
-/-- Zero pullback of a section remains zero under a further base change.
-Source: Stacks Project, Sheaves, Tags 0095 and 0096; Limits, Tag 01ZR (3).
-
-Proof: for l ≤ k the k-to-j base-change map is the composite of the k-to-l
-and l-to-j base-change maps, by pullback uniqueness and functoriality of R.
-Tensor pullback along this composite is canonically isomorphic to the composite
-of tensor pullbacks. The unit of the composite adjunction is the first unit
-followed by pushforward of the second unit. On the inverse image of U its
-value on y is therefore the further pullback of the given zero section, which
-is zero by linearity. The composite-pullback isomorphism transports this unit
-to a unit for the k-to-j tensor pullback. Uniqueness of left adjoints compares
-that adjunction to the supplied one: their units differ by an isomorphism of
-the pullback object. Its section maps preserve zero. No quasi-coherence,
-finiteness or affineness is used; empty opens and identity transitions obey
-the same unit equation. -/
+/-- Zero pullback of a section remains zero under a further base change. -/
 theorem section_baseChange_zero_persists
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

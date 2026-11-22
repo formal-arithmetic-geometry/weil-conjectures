@@ -55,8 +55,7 @@ theorem smoothRelativeDual_eq
   unfold smoothRelativeDual
   rfl
 
-/-- The canonical relative bidual map: transpose evaluation using the braiding.
-Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, construction of the relative dual. -/
+/-- The canonical relative bidual map: transpose evaluation using the braiding. -/
 noncomputable def smoothRelativeBidualMap
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -71,19 +70,7 @@ attribute [local instance 2000] ModuleCat.hasColimitsOfShape
   ModuleCat.hasColimitsOfSize in
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 /-- Relative dual of a finite local system over any finite field, against an invertible
-finite-Tor coefficient.
-Source: blueprint lem-asd-smooth-generic-direct-image.proof.md, paragraphs 1--2.
-
-Proof: By hfield, every geometric stalk of L is a finite vector space over the coefficient field,
-so L is flat and dualizable. The degree-zero functor carries its exact dual pairing to
-an exact pairing in the derived category. Its coefficient dual is the ordinary sheaf dual
-in degree zero, by dual_singleFunctor. That sheaf is again finite locally constant and
-flat, hence bounded constructible of Tor amplitude [0,0]. Internal Hom out of a dualizable
-object is its coefficient dual tensor the second argument. Tensoring with W therefore
-preserves bounded constructibility and finite Tor amplitude. Since W is tensor-invertible,
-this tensor is dualizable. Finally, in a braided closed category evaluation against an
-invertible object gives an invertible double-dual map on every dualizable object;
-apply this to the degree-zero complex. This also covers L=0 and the empty scheme. -/
+finite-Tor coefficient. -/
 theorem finiteLisseRelativeDual
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hfield : IsField Λ) (X : Scheme.{u})
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

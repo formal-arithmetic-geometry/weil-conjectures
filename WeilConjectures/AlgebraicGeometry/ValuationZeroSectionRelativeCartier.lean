@@ -17,8 +17,10 @@ import WeilConjectures.AlgebraicGeometry.FibreCartierLocal
 /-!
 # Zero locus over a valuation base
 
-Source: More on Morphisms, Lemma 37.33.3 (Tag 0EX8), with Divisors Lemma 31.19.9
-(Tag 062Y).
+## References
+
+* [Stacks, Tag 0EX8]
+* [Stacks, Tag 062Y]
 -/
 
 @[expose] public section
@@ -38,23 +40,9 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The zero scheme of a section whose restriction to the integral closed fibre is nonzero is
-relative effective Cartier over a valuation base (Stacks, Tags 0EX8 and 062Y).
-Module pullback is `tensorPullback`; the restriction of `s` to the
-fibre `X₀ = f.fiber x₀` is the unit of its canonical adjunction applied to `s`.
-
-Proof: `Z(s)` is locally principal (lem-pc-zero-scheme-properties (1)): on an affine open
-`Spec B` where `M` is free on `e` and `s = a e`, `Z(s) ∩ U = Spec (B/(a))`, so its closed fibre
-is `Z(s|_{X₀})`. The adjunction-unit comparison with ordinary module pullback shows that
-the pulled-back section morphism is nonzero. Thus the fibre ideal is nonzero by
-`Hom.zeroLocus_eq_bot_iff`.
-It is locally principal, hence invertible on the integral fibre by
-`IdealSheafData.IsLocallyPrincipal.isInvertible`.
-For `x ∈ Z(s)` the closure `C` of `x` lies in `Z(s)`, `f(C)` is closed and nonempty, hence contains the closed point of the local scheme
-`Spec A`; so `x` specializes to some `y ∈ Z(s)` in the closed fibre. The local fibre-Cartier
-criterion (lem-pc-recd-fibre-cartier-local; `f` flat, locally of finite presentation) gives an
-open `U_y ∋ y`, hence `∋ x`, on which `Z(s)` is relative effective Cartier. These opens with
-`X \ Z(s)` cover `X`, and the property is local, so `Z(s)` is a relative effective Cartier
-divisor; in particular `Z(s) → Spec A` is flat. -/
+relative effective Cartier over a valuation base. Module pullback is `tensorPullback`; the
+restriction of `s` to the fibre `X₀ = f.fiber x₀` is the unit of its canonical adjunction
+applied to `s`. -/
 theorem valuation_zero_section_relative_cartier
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (.of A))

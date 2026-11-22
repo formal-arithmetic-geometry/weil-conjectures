@@ -15,7 +15,14 @@ import WeilConjectures.RingTheory.StrictHenselizationTriples
 
 /-! # Local structure of the affine pointed-neighbourhood colimit
 
-Source: Stacks Project, Tags 04HX, 04GW and 04GP.
+The chosen coordinate-ring colimit of the affine pointed neighbourhoods of a geometric point is
+a strictly henselian local ring.
+
+## References
+
+* [Stacks, Tag 04HX]
+* [Stacks, Tag 04GW]
+* [Stacks, Tag 04GP]
 -/
 
 @[expose] public section
@@ -25,19 +32,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The chosen coordinate-ring colimit is strictly henselian.
-Source: Stacks Project, Tag 04HX, using Tags 04GW and 04GP.
-
-Proof: Choose an affine open containing the image of the geometric point and factor
-that point through it. The theorem `Scheme.etale_local_ring_triples` identifies the
-opposite category of neighbourhoods over this open with the etale residue triples
-pointed in the relative separable closure. Its initial inclusion and its natural
-isomorphism of coordinate-ring diagrams identify their colimits. Apply
-`Scheme.strictHenselization_triples` to obtain a strictly henselian local colimit.
-The equivalence `Scheme.strictHenselizationAffineInclusion_isEquivalence` and the
-small-model equivalence identify this with the colimit defining
-`Scheme.strictHenselizationRing`. Transfer the local-ring and strictly henselian
-structures across the resulting ring equivalence. This transfer is independent of
-the choice of affine open, since each comparison is the unique colimit comparison.
 -/
 theorem strictHenselizationLocalStructure
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]

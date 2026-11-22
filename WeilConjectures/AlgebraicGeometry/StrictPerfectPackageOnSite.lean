@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 /-!
 # Strict-perfect packages with independent site universes
 
-Source: proper base change, definition 1263.
 The original package is reexported; this interface retains the small pro-etale site.
+
+## References
+
+* [Stacks, Tag 03DA]
 -/
 
 @[expose] public section
@@ -39,15 +42,13 @@ end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Abelian sheafification on a small pro-etale slice in the coefficient universe.
-Source: Stacks, Tag 03DA. -/
+/-- Abelian sheafification on a small pro-etale slice in the coefficient universe. -/
 instance strictPerfectSliceSheafify (X : Scheme.{u}) (V : X.ProEt) :
     HasSheafify ((ProEt.topology X).over V) AddCommGrpCat.{u + 1} :=
   letI : EssentiallySmall.{u + 1} (Over V) := essentiallySmallSelf.{0} _
   hasSheafifyEssentiallySmallSite _ _
 
-/-- The locally bijective sheafification criterion on that same slice.
-Source: Stacks, Tag 03DA. -/
+/-- The locally bijective sheafification criterion on that same slice. -/
 instance strictPerfectSliceLocallyBijective (X : Scheme.{u}) (V : X.ProEt) :
     ((ProEt.topology X).over V).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   letI : EssentiallySmall.{u + 1} (Over V) := essentiallySmallSelf.{0} _

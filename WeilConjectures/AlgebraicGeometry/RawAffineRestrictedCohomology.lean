@@ -11,7 +11,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Restricted single-complex cohomology and its canonical maps
 
-Source: Stacks Project, Tags 03Q8 and 0EZM.
+## References
+
+* [Stacks, Tag 03Q8]
+* [Stacks, Tag 0EZM]
 -/
 
 @[expose] public section
@@ -22,8 +25,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- Canonical cohomology pullback on an actual complex, using the derived adjunction unit.
-Source: Stacks Project, Tag 0EZM. -/
+/-- Canonical cohomology pullback on an actual complex, using the derived adjunction unit. -/
 noncomputable def rawAffineComplexPullback (p : ℤ) {X Y : Scheme.{v}} (f : X ⟶ Y)
     (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :
     (cohomology AddCommGrpCat.{v + 1} Y p).obj (DerivedCategory.Q.obj K) ⟶
@@ -50,7 +52,7 @@ noncomputable def rawAffineComplexPullback (p : ℤ) {X Y : Scheme.{v}} (f : X �
           ((upperStar AddCommGrpCat.{v + 1} f).mapDerivedCategoryFactors.hom.app K))
 
 /-- Cohomology of a sheaf restricted to the etale scheme `U ×_S Y`, in degree zero
-as a complex. No raw derived-Hom group occurs in this definition. -/
+as a complex. -/
 noncomputable def rawAffineRestrictedCohomology {S Y : Scheme.{v}} (h : Y ⟶ S)
     (p : ℕ) (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) (U : S.Etale) :
     AddCommGrpCat.{v + 1} :=
@@ -83,7 +85,7 @@ noncomputable def rawAffineRestrictedCoefficient {S Y Y' : Scheme.{v}} (a : Y' �
       (upperStar AddCommGrpCat.{v + 1} r').map φ
 
 /-- Canonical restricted-cohomology map: derived pullback followed by the restricted
-coefficient map. This definition uses neither continuity nor raw derived Hom. -/
+coefficient map. -/
 noncomputable def rawAffineRestrictedCohomologyMap {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

@@ -12,7 +12,15 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.RingTheory.Smooth.Kaehler
 
 /-! # Conormal residue kernel comparison
-Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1).
+
+## Implementation details
+
+The Artin--Rees bound `hAR` is essential: without it, e.g. for J = (t^2) in k[t]_(t) at
+N = 2, reduction of the kernel of E -> F need not identify with J/(J^2 + mJ).
+
+## References
+
+* [Stacks, Tag 02HT]
 -/
 
 @[expose] public section
@@ -131,51 +139,8 @@ private theorem truncated_kernel_to_residue_conormal
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A section at a truncation satisfying the Artin--Rees bound detects the residue kernel.
-
-Source: Stacks Project, Algebra, Tag 02HT, proof of (4) implies (1), paragraphs
-beginning "Consider the presentation" through "Since a split injection", specialized
-to reduction modulo the maximal ideal (https://stacks.math.columbia.edu/tag/02HT).
-
-Proof in words:
-Put C = P.Ring, J = P.ker, m = maximalIdeal C, n = maximalIdeal S, and k = S/n.
-The surjection C -> S identifies S with C/J, pulls n back to m, and maps m onto n.
-Set E = C/(J^2 + m^N) and F = C/(J + m^N). Its kernel K has square zero.
-The given R-algebra section sigma of E -> F gives a retraction of
-K -> F tensor_E Omega(E/R) by retractionOfSectionOfKerSqZero_comp_kerToTensor.
-The retraction is F-linear: the action on K is independent of a lift from F,
-since K^2 = 0; in particular the section gives that same action.
-The quotient F -> k exists because J + m^N is contained in m. Tensor the
-retraction over F with k. The resulting conormal map is a split injection.
-
-The natural surjection J -> K has kernel J^2 + (m^N intersect J), by the modular
-law, since J^2 is contained in J. Consequently its reduction over k is
-J/(J^2 + (m^N intersect J) + mJ). The hypothesis hAR says m^N intersect J is
-contained in mJ (m^N times top is m^N as a submodule of C), so this quotient is
-J/(J^2 + mJ), canonically (P.Cotangent)/(n times P.Cotangent).
-No Noetherian hypothesis is needed at this step; all of Artin--Rees is hAR.
-
-For the other side, let D = C/J^2 and let m_D be the image of m in D. Then
-E = D/(m_D)^N and k is a quotient of D/m_D. Apply the differential-mod-power
-lemma to D, m_D, N-1 (positive because N >= 2) and then base change to k.
-This identifies k tensor_E Omega(E/R) with k tensor_D Omega(D/R).
-Apply the same lemma to C, J, exponent 1, and then base change C/J -> k;
-it identifies this with k tensor_C Omega(C/R). Tensor cancellation identifies
-the latter with (P.CotangentSpace)/(n times P.CotangentSpace).
-Every identification is induced by a quotient map or tensor cancellation.
-On a class represented by j in J the composite sends j to 1 tensor dj,
-which is P.cotangentComplex_mk followed by reduction. These classes span the
-source, so this identifies the split injection with the reduced cotangent map.
-Its injectivity says that if P.cotangentComplex x is in n times the target,
-then the class of x modulo n is zero, exactly the asserted membership.
-
-For J = 0 the source is zero and the claim is immediate; N = 2 is allowed
-and uses exponent 1 in both differential comparisons. The Artin--Rees bound
-is essential: without it, e.g. J = (t^2) in k[t]_(t) at N = 2, reduction of
-the kernel of E -> F need not identify with J/(J^2 + mJ).
 -/
-/- Structural form of the truncated-section residue-kernel comparison.
-The proof is the Artin--Rees and square-zero conormal argument of Stacks Tag 02HT;
-see the parent theorem for the complete mathematical reduction. -/
+/- Structural form of the truncated-section residue-kernel comparison. -/
 theorem truncated_section_conormal_residue_kernel_comap
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]
@@ -233,7 +198,10 @@ theorem truncated_section_conormal_residue_kernel_comap
     (LinearMap.congr_fun hv x).symm.trans (hkill hx)
 
 
-/-- -/
+/-- Given an Artin–Rees bound and a section of the truncation
+`P.Ring ⧸ (J ^ 2 ⊔ 𝔪 ^ N) → P.Ring ⧸ (J ⊔ 𝔪 ^ N)`, where `J = P.ker`, an element of the
+cotangent module whose image in the cotangent space lies in `𝔪_S` times it lies in
+`𝔪_S` times the cotangent module. -/
 theorem truncated_section_conormal_residue_kernel
     {R S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     [IsLocalRing S] (P : Extension.{u} R S) [IsLocalRing P.Ring]

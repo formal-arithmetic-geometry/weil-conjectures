@@ -13,7 +13,9 @@ set_option linter.privateModule false
 
 /-! # Strict maps between the prescribed Godement models
 
-Source: Stacks Project, Tag 0FKS, the coordinate product-of-stalks construction.
+## References
+
+* [Stacks, Tag 0FKS], the coordinate product-of-stalks construction
 -/
 
 @[expose] public section

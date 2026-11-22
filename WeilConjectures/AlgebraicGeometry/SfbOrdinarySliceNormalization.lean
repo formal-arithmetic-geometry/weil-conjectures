@@ -12,7 +12,11 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # Ordinary module comparisons for normalized restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
+## References
+
+* [Stacks, Tag 00YY]
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 03D3]
 -/
 
 @[expose] public noncomputable section
@@ -48,22 +52,7 @@ private noncomputable def changeIsoRestriction
 
 -- The final transport compares module structures on the two site presentations.
 /-- Ordinary slice restriction commutes with transport to the AsSmall site and
-with an invertible change of coefficient rings.
-
-Source: Stacks Project, sites-modules.tex, localization of modules on a site;
-sites.tex, `lemma-localize-compare`; Tags 03D2 and 00YY.
-
-Proof: use Over.postEquiv for AsSmall to identify the two slice sites.
-Precomposition gives the module equivalence on them. Restrict e to the slice
-and then compose with c to identify the transported coefficient ring with T.
-Scalar extension along this isomorphism equals restriction along its inverse.
-The resulting pushforward functor G is additive on sections. It preserves finite
-limits, and cocontinuity gives preservation of finite colimits through the
-abelian-sheaf forgetful comparison. Its comparison with first transporting and then
-restricting is identity on
-sections and restriction maps before scalar extension. The tensor/restriction
-adjunction gives the stated comparison after scalar extension. All maps are
-natural in the input module, including for an empty slice and the zero ring. -/
+with an invertible change of coefficient rings. -/
 theorem sfbOrdinarySliceNormalization
     (S : Scheme.{u}) (U : S.ProEt)
     (R : Sheaf (ProEt.topology S) CommRingCat.{u + 1})

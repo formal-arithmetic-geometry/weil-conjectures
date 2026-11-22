@@ -14,7 +14,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Limits
 
-/-! # The canonical product map over a split finite cover -/
+/-! # The canonical product map over a split finite cover
+
+## References
+
+* [Stacks, Tag 095B]
+-/
 
 @[expose] public section
 
@@ -357,23 +362,7 @@ private theorem sectionProduct_isIso
     exact (splitSections_limit p g n t w hc N W.unop).some
   exact (Fan.nonempty_isLimit_iff_isIso_piLift c).mp ⟨hl⟩
 
-/-- The counit maps to the sheets of a split finite cover form an isomorphism.
-
-Source: Stacks Project, Tag 095B, proof by sections over a split finite cover; the
-weakly etale base-change argument for the pro-etale site.
-
-Proof in words. Compute inverse image along the weakly etale map g by restriction
-along the localization functor of pro-etale sites. For a test W over Y, the assumed
-coproduct decomposition, after base change to W, decomposes W times_X U into n
-open-and-closed copies of W. The counit on the j-th sheet is the restriction to
-that copy. The sheaf condition identifies sections on their disjoint union with
-the finite product of their sections: distinct overlaps are empty, and on a
-self-overlap the two restrictions agree. This also proves the empty case.
-The comparison is the canonical one: its components are inverse-image
-composition followed by the pushforward counit. Under the identification of
-weakly etale inverse image with restriction, these components are exactly the
-restriction maps to the sheet copies. Products and isomorphisms of sheaves are
-tested on sections, giving the assertion. -/
+/-- The counit maps to the sheets of a split finite cover form an isomorphism. -/
 theorem splitProEtaleAbelianProductMap_isIso
     {X U Y : Scheme.{u}} (p : U ⟶ X)
     (g : Y ⟶ X) [WeaklyEtale g]

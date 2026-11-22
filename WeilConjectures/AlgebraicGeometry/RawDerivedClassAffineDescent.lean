@@ -18,7 +18,11 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Descent of raw classes with bounded-below coefficients
 
-Source: Stacks Project, Tags 0EYL, 0EYM and 0GIT.
+## References
+
+* [Stacks, Tag 0EYL]
+* [Stacks, Tag 0EYM]
+* [Stacks, Tag 0GIT]
 -/
 
 @[expose] public section
@@ -78,23 +82,7 @@ private theorem raw_chart_transport {B Y Y' : Scheme.{u}}
   exact cancel_transport eF ((shiftFunctor _ q).mapIso e) t z ht
 
 -- Constructing the chart diagram and its limiting cone needs a larger elaboration budget.
-/-- A raw derived class descends with its coefficient complex fixed at the original stage.
-
-Source: Stacks Project, Tags 0EYL and 0GIT.
-
-Proof: Restrict the diagram to arrows into i. Descend V to an affine etale object
-at a stage j using finite presentation. The base changes of this object form a
-limiting diagram of qcqs schemes with affine transitions. Pull back the fixed
-bounded-below complex K to this diagram and apply derived etale cohomology
-continuity in degree q. A raw Hom from the degree-zero free representable computes
-this hypercohomology: use a bounded-below injective representative of K and the
-free-representable sections adjunction. Surjectivity of the filtered colimit map
-gives a stage l and a class y. Inverse-image composition, the single comparison
-and the shift comparison identify its image with the displayed chart pullback.
-The equations defining the cone give the displayed coefficient isomorphism.
-No direct image, exchange map, cartesian source, or restricted sheaf cohomology
-is involved. Empty V and q=0 are included by the same adjunction and continuity.
--/
+/-- A raw derived class descends with its coefficient complex fixed at the original stage. -/
 theorem exists_rawDerivedClass_affine_descent
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

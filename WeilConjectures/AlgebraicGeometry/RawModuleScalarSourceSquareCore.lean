@@ -138,18 +138,7 @@ private lemma plus_single_natIso {G H : C ⥤ D} [G.Additive] [H.Additive]
   exact derived_single_natIso e n X
 
 
-/-- Generic single-complex source-square calculation.
-Source: Mathlib DerivedCategory.ExactFunctor factorization equations and the
-private single-complex calculations of EtalePullbackSingleComp.
-Proof: the single-complex composition and natural-isomorphism equations hold
-in degree n by the canonical identity comparison, and in other degrees by
-zero-object uniqueness. Localization Q, its factorization naturality, and
-full faithfulness of the bounded-below inclusion give the two derived equations.
-Combine these equations for the composite d. Postcompose the desired square
-with d.hom and then H of the V-single hom followed by the H-single hom.
-These are isomorphisms. Naturality moves m and cB across the single comparisons;
-functoriality and inverse-hom cancellation reduce the goal to hs postcomposed
-with e.hom. Cancel e.inv followed by e.hom. -/
+/-- Generic single-complex source-square calculation. -/
 theorem plus_single_source_square_core
     (M : C ⥤ D) (V' : D ⥤ B) (V : C ⥤ E) (H : E ⥤ B)
     [M.Additive] [V'.Additive] [V.Additive] [H.Additive]

@@ -11,9 +11,17 @@ public import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersecti
 /-!
 # The relative global complete intersection condition for specified equations
 
-Source: Stacks Project, Algebra, Definition 00SP.
 The ring-map notion is `Algebra.IsRelativeGlobalCompleteIntersection` in the imported module;
 this module supplies the specified-presentation notion in the same definition.
+
+## Implementation details
+
+The condition `c ≤ n` in the definition prevents truncated natural-number subtraction from
+admitting negative dimensions.
+
+## References
+
+* [Stacks, Tag 00SP]
 -/
 
 @[expose] public section
@@ -23,9 +31,7 @@ universe u
 namespace Algebra
 
 /-- The specified quotient presentation is a relative global complete intersection when every
-nonempty fibre has dimension the number of variables minus the number of equations.
-The inequality prevents natural-number subtraction from admitting negative dimensions.
-Source: Stacks Project, Algebra, Definition 00SP. -/
+nonempty fibre has dimension the number of variables minus the number of equations. -/
 def IsRelativeGlobalCompleteIntersectionPresentation {R : Type u} [CommRing R]
     {n c : ℕ} (f : Fin c → MvPolynomial (Fin n) R) : Prop :=
   ∀ (p : Ideal R) [p.IsPrime],

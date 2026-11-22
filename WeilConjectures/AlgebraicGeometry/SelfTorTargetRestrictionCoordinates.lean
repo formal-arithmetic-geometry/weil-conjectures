@@ -23,7 +23,16 @@ import WeilConjectures.RingTheory.SelfTorRestrictionResolutionIndependence
 
 /-! # Affine Tor coordinates compatible with resolution-induced restriction
 
-Source: Stacks Project, Tags 06YH, 06YG and 00LS. -/
+Derived-homology coordinates on affine charts that commute with the algebraic Tor restriction
+maps induced by resolutions.
+
+## References
+
+* [Stacks, Tag 06YH]
+* [Stacks, Tag 06YG]
+* [Stacks, Tag 00LS]
+* [Stacks, Tag 01I6]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -105,35 +114,7 @@ private theorem tensorComparison_cycle_formula
 
 
 /-- The derived-homology coordinates commute with the actual algebraic Tor restriction
-on every Tor element, independently of the exterior-conormal comparison.
-Source: Stacks Project, Tags 06YH and 06YG (K-flat comparison), 00LS (resolution
-comparison), and 01I6 (associated sheaves).
-
-Proof: For each affine U, resolve A/I by projective A-modules and sheafify its
-augmentation using exists_affine_quotient_sheafified_resolution. Projective terms
-are summands of free modules, so their associated sheaves are flat. Extend the
-chain complex to nonpositive cochain degrees. It is bounded above and K-flat;
-its quotient tensor computes the restriction of the fixed derived tensor.
-Exact tilde commutes with homology, and the projective-resolution Tor isomorphism
-identifies that homology with tilde Tor. The ideal acts trivially on this homology.
-Applying tensor pullback therefore gives the required chart isomorphism t_U.
-Use the augmentation comparison, rather than an arbitrary chart isomorphism.
-For V=D(f), localize the chosen resolution on U and compare it over the quotient
-augmentation with the resolution on V. Flat localization preserves its exactness
-and projectivity. The resulting tensor chain map induces q. Comparison lifts for
-any other pair of resolutions are homotopic, so q has the displayed certificate
-for every P,Q. The K-flat augmentation comparisons commute with this map and
-restriction, yielding the equation for every homology class x. The tilde unit
-sends x to its associated section; naturality of the tensor-pullback unit then
-gives exactly the section equation displayed below. All choices are used only
-as existential witnesses in this theorem. Degree zero, the empty basic open,
-and zero quotient rings are included by the same augmentation construction.
-
-Lean reduction: `exists_selfTor_chosen_resolution_charts` supplies the geometric
-comparison for fixed quotient resolutions. The two private helpers construct
-the homology map and prove its cycle formula. The proved algebraic theorem
-`selfTor_restriction_certificate_of_resolution` then upgrades its explicit
-chain comparison to the certificate for every pair of resolutions. -/
+on every Tor element. -/
 theorem exists_selfTor_target_restriction_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

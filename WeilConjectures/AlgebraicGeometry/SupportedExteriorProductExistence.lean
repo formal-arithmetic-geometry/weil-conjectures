@@ -11,19 +11,9 @@ public import WeilConjectures.CategoryTheory.Triangulated.BinaryBiproductCone
 /-!
 # Unique existence of the supported exterior product from support-acyclic resolutions
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md.
-
 Suppose that every K-flat complex with bounded below cohomology admits a quasi-isomorphism to
 a K-flat complex on which the support unit is invertible. Then the resolution normalization
-`IsResolutionSupportedExteriorProduct` determines a unique morphism. Uniqueness: on such
-representatives of both inputs the tensor product of the two units is invertible.
-Existence: define the morphism on one such pair of representatives. Two such representatives
-are connected by a K-flat homotopy pushout of a K-flat roof, followed by a further
-resolution, and the normalization transfers along quasi-isomorphisms of K-flat complexes
-(`resolutionSupportedExteriorPairing_transfer`). An arbitrary K-flat representative maps to
-such a representative.
+`IsResolutionSupportedExteriorProduct` determines a unique morphism.
 
 ## Main statements
 

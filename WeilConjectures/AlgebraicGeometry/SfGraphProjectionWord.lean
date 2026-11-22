@@ -10,9 +10,15 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 /-! # Successive projection on explicit proper/open/proper factors
 
-Source: Stacks Tags 0B56 and 0GL1; canonical pullback composition from Tag 0E48.
 The coefficient category stays a parameter throughout the calculation, so the map
 and its factorization share their derived-category structures.
+
+## References
+
+* [Stacks, Tag 0B56]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E48]
+* [Stacks, Tag 0F7B]
 -/
 
 @[expose] public section
@@ -61,8 +67,7 @@ variable (B : Type u') [Category.{u + 1} B] [Abelian B]
   [∀ (Z : Scheme.{u}), Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget B)]
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- Compose the three canonical projection maps and the inverse pullback compositor.
-Source: Stacks Tags 0B56, 0GL1 and 0F7B; explicit graph-word projection. -/
+/-- Compose the three canonical projection maps and the inverse pullback compositor. -/
 noncomputable def sfGraphProjectionWord
     {X W P Y : Scheme.{u}} (a : X ⟶ W) (e : W ⟶ P) (p : P ⟶ Y)
     [IsProper a] [IsOpenImmersion e] [IsProper p] (f : X ⟶ Y)
@@ -169,14 +174,6 @@ private theorem grouped_prefix_expansion
 omit [HasSmallSiteSheafify B] in
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The successive projection factors through the compactification projection on Ra M.
-Source: Stacks Tags 0B56 and 0GL1 and the canonical pullback associativity of Tag 0E48.
-
-Proof: expand the compactification projection into its proper projection, open tensor
-comparison and inverse pullback compositor. Naturality of the proper projection for a
-moves the inverse compositor through that projection. Inverse threefold pullback
-associativity then identifies the two coefficient maps. Functoriality and associativity
-paste these equalities. This uses no inverse of a projection map and has no boundedness
-or quasi-compactness hypothesis.
 -/
 theorem sfGraphProjectionWord_proper_prefix
     {X W Y : Scheme.{u}} {f₀ : W ⟶ Y} (c : Compactification f₀)

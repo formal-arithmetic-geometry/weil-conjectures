@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomology
 
 /-! # Concrete restricted affine coefficient constructions
 
-Source: Stacks Project, Tags 09Z1 and 0EZM.
+## References
+
+* [Stacks, Tag 09Z1]
+* [Stacks, Tag 0EZM]
 -/
 
 @[expose] public section
@@ -21,8 +24,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- The diagram of the actual fibre products, with canonical pullback maps.
-Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object. -/
+/-- The diagram of the actual fibre products, with canonical pullback maps. -/
 @[implicit_reducible]
 noncomputable def restrictedAffineDiagram {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) (U : S.Etale) : Iᵒᵖ ⥤ Scheme.{v} where
@@ -87,12 +89,7 @@ noncomputable def restrictedAffineL {S : Scheme.{v}} {I : Type v} [Preorder I]
   (restrictedAffineSingle c.pt.hom U).mapCocone
     ((colimit.cocone H).whisker (unopUnop I))
 
-/-- Fibre-product restriction preserves the given inverse limit.
-Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object.
-
-Proof: Pullback on over categories is a right adjoint. The forgetful functor preserves
-connected limits. Apply these facts to the given limit in Over S and then use pullback
-symmetry to identify the result with the concrete diagram and cone. -/
+/-- Fibre-product restriction preserves the given inverse limit. -/
 noncomputable def restrictedAffineConeIsLimit {S : Scheme.{v}} {I : Type v}
     [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S) (c : Cone D)
@@ -115,7 +112,7 @@ noncomputable def restrictedAffineConeIsLimit {S : Scheme.{v}} {I : Type v}
   apply pullback.hom_ext <;>
     simp [P, e, restrictedAffineCone, rawAffineRestrictedMap, Category.assoc]
 
-/-- The restricted stages are compact because they are quasi-compact over affine U.
+/-- The restricted stages over an affine `U` are compact.
 -/
 theorem restrictedAffineDiagram_compact {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]
@@ -124,7 +121,7 @@ theorem restrictedAffineDiagram_compact {S : Scheme.{v}} {I : Type v} [Preorder 
   dsimp [restrictedAffineDiagram]
   infer_instance
 
-/-- The restricted stages are quasi-separated by base change over affine U.
+/-- The restricted stages over an affine `U` are quasi-separated.
 -/
 theorem restrictedAffineDiagram_quasiSeparated {S : Scheme.{v}} {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S) [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]

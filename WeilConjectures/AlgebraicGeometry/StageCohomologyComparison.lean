@@ -10,9 +10,20 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.Algebra.Category.Grp.Colimits
 /-! # Certificates for comparison maps on specified stages
 
-Source: Stacks Project, Tag 09YQ, comparison maps for coherent sheaf systems.
-The closure under products and transport is the finite-cover bookkeeping used
-with Tag 0A50. These certificates contain geometric data, not continuity proofs.
+Comparison maps assembled from canonical cohomology comparisons with specified stages, closed
+under isomorphisms, composition and finite products.
+
+## Implementation details
+
+The system constructor records an actual scheme limit, coherent coefficient system, sheaf
+colimit and canonical cohomology cocone, with a stage in `allowed`. It asserts no cohomology
+colimit property. These certificates contain geometric data, not continuity proofs; the closure
+under products and transport is the finite-cover bookkeeping used with Mayer–Vietoris.
+
+## References
+
+* [Stacks, Tag 09YQ]
+* [Stacks, Tag 0A50]
 -/
 
 @[expose] public section
@@ -23,16 +34,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- A comparison assembled from canonical cohomology comparisons with specified stages.
-
-Source: Stacks Project, Tag 09YQ, comparison-map construction,
-and Tag 0A50, finite direct sums in Mayer--Vietoris.
-
-The system constructor records an actual scheme limit, coherent coefficient system,
-sheaf colimit, and canonical cohomology cocone, with a stage in `allowed`.
-It asserts no cohomology colimit property. Isomorphisms, composition and products
-only transport these maps or assemble their finite direct sums. This is a proposition
-about supplied maps, and chooses no object or morphism from an existence theorem. -/
+/-- A comparison assembled from canonical cohomology comparisons with specified stages. -/
 inductive StageCohomologyComparison (allowed : Scheme.{u} → Prop) :
     {A B : AddCommGrpCat.{u + 1}} → (A ⟶ B) → Prop
   | iso {A B : AddCommGrpCat.{u + 1}} (e : A ≅ B) :

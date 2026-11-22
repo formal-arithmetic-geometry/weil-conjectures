@@ -15,7 +15,10 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Normalized comparison of right adjoints under a source isomorphism
 
-Source: Stacks Project, Tags 0ATR and 0D5S.
+## References
+
+* [Stacks, Tag 0ATR]
+* [Stacks, Tag 0D5S]
 -/
 
 @[expose] public section
@@ -50,9 +53,7 @@ private theorem normalized_comparison
     IsIso.hom_inv_id, F.map_id, Category.id_comp]
 
 /-- Counit normalization specifying the comparison uniquely. It is the counit equation
-for transport by the inverse of the isomorphism pullback adjunction.
-Source: Stacks Project, Tag 0ATR, uniqueness of right adjoints.
--/
+for transport by the inverse of the isomorphism pullback adjunction. -/
 def SchemeIsoRightAdjointNormalized
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
@@ -93,21 +94,7 @@ def SchemeIsoRightAdjointNormalized
       (schemeDerivedDirectImage f').map (φ.hom.app K) ≫
       (adjb.counit.app K).hom = (adja.counit.app K).hom
 
-/-- A normalized natural isomorphism of right adjoints under an isomorphism of sources.
-This statement concerns one vertical morphism, with no base-change square or second mate.
-Source: Stacks Project, Tag 0ATR, composite adjunction comparison, and Tag 0D5S.
-
-Proof: Pullback along e.hom is an equivalence, with inverse pullback along e.inv,
-by the identity and composition comparisons. Its pinned adjunction therefore has
-invertible unit and counit. Conjugate the pullback composition comparison for e.hom
-and f to identify Rf' with Re followed by Rf. Restrict these comparisons to the full
-quasi-coherent subcategories, using pullback preservation and qcqs pushforward
-preservation. Reverse the equivalence adjunction and compose with adja, obtaining
-a right adjoint to Rf' given by a followed by pullback along e.hom. Right-adjoint
-uniqueness against adjb gives φ. The uniqueness counit equation, multiplied by
-the unit of the pinned e.hom adjunction, is precisely the displayed normalization.
-Full faithfulness of the inclusions gives its ambient form. The triangle identities
-show that the normalization determines φ and work also on empty schemes. -/
+/-- A normalized natural isomorphism of right adjoints under an isomorphism of sources. -/
 theorem exists_schemeIsoRightAdjoint_normalized
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

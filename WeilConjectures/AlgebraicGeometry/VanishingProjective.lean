@@ -19,7 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Uniform vanishing for kernels of coherent formal systems
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0884.
+## References
+
+* [Stacks, Tag 0884]
 -/
 
 @[expose] public section
@@ -34,27 +36,7 @@ namespace AlgebraicGeometry
 
 /-- For a coherent formal system over a proper Noetherian base, an ample twist kills
 first cohomology of every successive kernel with a single bound. The index `op k`
-represents F_(k+1). The zero case uses ker(F_1 → 0) ≅ F_1. Tensor exponents are natural
-numbers, as in the node's d-fold tensor product; the bound is an integer.
-Source: Stacks Project, Cohomology of Schemes, Lemma 0884.
-
-Proof:
-1. Properness makes X Noetherian over Spec A; comap gives the quasi-coherent ideal I O_X.
-2. The graded algebra B = direct sum I^n/I^(n+1) is finitely generated over A:
-   choose finite generators of I by def-weil-pbc-noetherian-ring; their degree-one
-   classes generate B.
-3. There is a surjection from f^* tilde B onto direct sum (I O_X)^n/(I O_X)^(n+1).
-   On an affine open with coordinate ring C it sends a tensor c to c f-sharp(a).
-   Local generators show surjectivity; multiplication shows it is a graded algebra map. Only a surjection is needed, not the
-   equality printed in the Stacks proof.
-4. The direct sum G of the successive kernels is a finite type graded module over
-   that quotient algebra, hence also
-   over f^* tilde B by the surjection.
-5. Apply lem-weil-pbc-formal-systems-graded-vanishing (Stacks 0897 (2)) to G and the
-   ample invertible module to obtain one bound for H^1(X, G tensor L^d).
-6. Each kernel is a direct summand of G. Tensoring and then applying the functor
-   RingedSpace.moduleCohomology preserves this retraction, so its first cohomology
-   is a retract of zero and therefore zero. This includes the kernel of F_1 to zero. -/
+represents `F_(k+1)`. -/
 theorem coherentFormalModule_kernel_twist_vanishing
     {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of A)) [IsProper f]

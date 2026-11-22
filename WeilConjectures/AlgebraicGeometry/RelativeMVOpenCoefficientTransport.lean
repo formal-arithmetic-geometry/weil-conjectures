@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionUnitIso
 
 /-! # Coefficient comparison for an inverse-image open
 
-Source: Stacks Project, Cohomology, Tags 08HY and 0D5S.
+## References
+
+* [Stacks, Tag 01JR]
+* [Stacks, Tag 08HY]
+* [Stacks, Tag 08HZ]
+* [Stacks, Tag 0D5S]
 -/
 
 @[expose] public section
@@ -91,25 +96,7 @@ private theorem mate_unit
 
 
 /-- The open-square mate respects the exact-to-pinned coefficient comparisons.
-This is an identity on X', before any further direct image to a base scheme.
-Source: Stacks Project, Cohomology, Remark 08HY and Lemma 08HZ;
-Schemes, Tag 01JR.
-
-Proof: Precompose both sides with Lg' of the exact-open unit. This
-precomposition is injective on maps into Rp: exact restriction to the inverse
-open inverts Lg' of the unit, by the pullback/restriction comparison and the
-open-unit invertibility theorem; Lp is this exact restriction followed by
-pullback along the inverse-open isomorphism, up to the specified comparison.
-For the left side, the proved exact-open base-change unit identity leaves φ
-followed by the inverse-open unit. The localization comparison preserves
-that unit, by left- and right-adjoint uniqueness. For the right side,
-left-adjoint uniqueness replaces the exact-open unit by the pinned unit.
-Transposing the open-square mate cancels this unit with the pulled-back
-counit; naturality of the square comparison and the triangle identity leave
-φ followed by the p unit. Thus the precomposites coincide, and injectivity
-gives the result. Empty and full opens and zero objects or maps need no
-additional assumption: the same adjunction identities and invertibility
-apply in all these cases. -/
+This is an identity on X', before any further direct image to a base scheme. -/
 theorem relativeMV_open_coefficient_transport
     {X X' : Scheme.{u}} (g' : X' ⟶ X)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

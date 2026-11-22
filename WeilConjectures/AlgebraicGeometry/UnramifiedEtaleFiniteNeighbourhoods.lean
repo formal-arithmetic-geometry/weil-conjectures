@@ -17,7 +17,15 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
 /-!
 # Finite unramified neighbourhoods after étale localization
 
-The first construction in Stacks Project, Tag 04HI, using Tags 02LM, 02G6 and 02GA.
+The first construction in the proof of étale-local decomposition near unramified fibre points.
+
+## References
+
+* [Stacks, Tag 04HH]
+* [Stacks, Tag 04HI]
+* [Stacks, Tag 02LM]
+* [Stacks, Tag 02G6]
+* [Stacks, Tag 02GA]
 -/
 
 @[expose] public section
@@ -158,21 +166,10 @@ private theorem index_finite_family {A : Type u} [Finite A] (n : ℕ) :
       right_inv a := rfl }
   exact ⟨m, ⟨e.trans (Fintype.equivFin A).symm⟩⟩
 
-/-- Source: Stacks Project, Tag 04HH, used by Tag 04HI; Tag 02LM and Tags 02G6, 02GA.
-
-Proof: take the union of the given unramified open neighbourhoods. Local finite type and
-unramifiedness are local on the source, so its restriction is unramified. Remove duplicate
-listed points, keeping one representative index for each. The isolated-fibre-point theorem
-applies to this restriction. Apply `exists_etale_local_finite_multiple_points` to the distinct
-representatives. Its finite pieces remain unramified by base change and open restriction.
-The open immersion from the restricted source induces an open immersion of pullbacks;
-regard the pieces as opens of the original pullback. Open immersions identify their residue
-fields, so uniqueness and pure inseparability persist. For a nonempty original list, put
-all pieces in its first output row and give every other row size zero, using an equivalence
-of finite index types. The injectivity of the marked points is unchanged. Every lift of a
-listed point lies in this source open and is one of the enumerated points, including for
-repeated entries of the original list. For the empty list retain the obtained neighbourhood
-and take the empty family. -/
+/-- If `f` is unramified at finitely many points `x i` over `s`, then after an étale
+neighbourhood of `s` there are finite unramified open pieces of the base change, each with a
+unique point over the chosen point with purely inseparable residue field extension, and
+every lift of a listed point is one of these points. -/
 theorem exists_etale_finite_unramified_neighbourhoods
     {X S : Scheme.{u}} (f : X ⟶ S) (s : S)
     (n : ℕ) (x : Fin n → X) (hx : ∀ i, f.base (x i) = s)

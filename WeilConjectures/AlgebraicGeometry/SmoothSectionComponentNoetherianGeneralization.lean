@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SmoothTraitSectionComponents
 /-!
 # Generalization of a smooth section component over a noetherian base
 
-Source: Stacks Project, Tag 055Q.
+## References
+
+* [Stacks, Tag 055Q]
 -/
 
 @[expose] public section
@@ -94,7 +96,8 @@ theorem Smooth.exists_noetherian_section_component_stable_locus {P T : Scheme.{u
   have h := connectedComponentIn_mono (Limits.pullback.fst g b (σ' η)) hfibre himage
   simpa only [η, haη, hbase] using h
 
-/-- -/
+/-- For a smooth qcqs morphism `g` with a section `σ` over a noetherian base, the set of points
+lying in the connected component of their fibre through `σ` is stable under generalization. -/
 theorem Smooth.section_component_generalization_of_isNoetherian {P T : Scheme.{u}}
     (g : P ⟶ T) [Smooth g] [QuasiCompact g] [QuasiSeparated g] [IsNoetherian T]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) {x y : P} (hxy : y ⤳ x)

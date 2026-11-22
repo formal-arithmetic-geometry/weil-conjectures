@@ -11,7 +11,14 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # Section calculus for the ringed-topos tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL.
+Pure tensors, scalar extension and its adjunction, computed on sections, for the tensor
+comparison of ringed topoi.
+
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 03EL]
 -/
 
 @[expose] public section
@@ -21,27 +28,23 @@ open scoped ChangeOfRings
 namespace SheafOfModules.RingedTensor
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-/-- The underlying sheaf of rings of a commutative ring sheaf.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- The underlying sheaf of rings of a commutative ring sheaf. -/
 abbrev ringSheaf {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :=
   (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R
 
-/-- The functor forgetting a module sheaf to its sheaf of sets.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- The functor forgetting a module sheaf to its sheaf of sets. -/
 noncomputable abbrev underlying {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :=
   toSheaf (ringSheaf R) ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u})
 
-/-- Restriction of scalars along the given morphism of ring sheaves.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- Restriction of scalars along the given morphism of ring sheaves. -/
 noncomputable abbrev restriction
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :=
   restrictScalars ((sheafCompose K (forget₂ CommRingCat RingCat)).map c)
 
-/-- Sectionwise extension of scalars, with its action on module morphisms.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- Sectionwise extension of scalars, with its action on module morphisms. -/
 noncomputable def tensorPresheafFunctor
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :
@@ -60,16 +63,14 @@ noncomputable def tensorPresheafFunctor
     ext W : 1
     exact (ModuleCat.extendScalars (c.hom.app W).hom).map_comp _ _
 
-/-- Extension of scalars followed by module sheafification.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- Extension of scalars followed by module sheafification. -/
 noncomputable def tensorFunctor
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) :
     SheafOfModules.{u} (ringSheaf A) ⥤ SheafOfModules.{u} (ringSheaf S) :=
   tensorPresheafFunctor c ⋙ PresheafOfModules.sheafification (𝟙 (ringSheaf S).obj)
 
-/-- Evaluate a sectionwise scalar-extension map on tensors with first factor one.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- Evaluate a sectionwise scalar-extension map on tensors with first factor one. -/
 noncomputable def tensorToRestriction
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S)
@@ -89,8 +90,7 @@ noncomputable def tensorToRestriction
         rw [SheafOfModules.tensorRestriction_tmul, map_one] at h
         exact h }
 
-/-- Extend a restriction-of-scalars map by the sectionwise tensor universal property.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- Extend a restriction-of-scalars map by the sectionwise tensor universal property. -/
 noncomputable def restrictionToTensor
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S)
@@ -122,8 +122,7 @@ noncomputable def restrictionToTensor
     rw [atOne, atOne]
     exact h
 
-/-- The sectionwise extension/restriction adjunction, compatible with restrictions.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- The sectionwise extension/restriction adjunction, compatible with restrictions. -/
 noncomputable def tensorPresheafHomEquiv
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S)
@@ -141,8 +140,7 @@ noncomputable def tensorPresheafHomEquiv
     exact (ModuleCat.ExtendRestrictScalarsAdj.homEquiv (c.hom.app W).hom).apply_symm_apply
       (g.val.app W)
 
-/-- The scalar-extension Hom equivalence after module sheafification.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- The scalar-extension Hom equivalence after module sheafification. -/
 noncomputable def tensorHomEquiv
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S)
@@ -151,8 +149,7 @@ noncomputable def tensorHomEquiv
   ((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf S).obj)).homEquiv _ _).trans
     (tensorPresheafHomEquiv c M H)
 
-/-- The adjunction between sheafified extension and restriction of scalars.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- The adjunction between sheafified extension and restriction of scalars. -/
 noncomputable def tensorAdjunction
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) : tensorFunctor c ⊣ restriction c :=
@@ -173,8 +170,7 @@ noncomputable def tensorAdjunction
         intro M H H' f b
         exact SheafOfModules.tensorHomEquiv_naturality_right c M f b }
 
-/-- The underlying sheaf morphism of the scalar-extension adjunction unit.
-Source: Stacks Project, Modules on Sites, Tag 03D7. -/
+/-- The underlying sheaf morphism of the scalar-extension adjunction unit. -/
 noncomputable def tensorUnit
     {D : Type u} [Category.{u} D] {K : GrothendieckTopology D}
     {A S : Sheaf K CommRingCat.{u}} (c : A ⟶ S) (M : SheafOfModules.{u} (ringSheaf A)) :
@@ -185,8 +181,7 @@ section Pure
 variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{u})
 
-/-- The image of a sectionwise pure tensor in the sheaf tensor.
-Source: Stacks 03EK. -/
+/-- The image of a sectionwise pure tensor in the sheaf tensor. -/
 noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.obj W :=
@@ -194,7 +189,7 @@ noncomputable def pure (M N : SheafOfModules.{u} (ringSheaf R))
     (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
       (M.val ⊗ N.val)).app W (m ⊗ₜ[R.obj.obj W] n))
 
-/-- Pure tensors commute with restriction. Source: Stacks 03EK. -/
+/-- Pure tensors commute with restriction. -/
 theorem pure_restrict (M N : SheafOfModules.{u} (ringSheaf R))
     {W V : Cᵒᵖ} (i : W ⟶ V) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorObj M N).val.map i (pure R M N W m n) =
@@ -206,21 +201,19 @@ theorem pure_restrict (M N : SheafOfModules.{u} (ringSheaf R))
   have hu := PresheafOfModules.naturality_apply (adj.unit.app (M.val ⊗ N.val)) i v
   exact hi.symm.trans (congrArg ((tensorObjIsoSheafification M N).inv.val.app V) hu.symm)
 
-/-- The canonical bilinear pairing, as a presheaf morphism.
-Source: Stacks 03EK. -/
+/-- The canonical bilinear pairing, as a presheaf morphism. -/
 noncomputable def pureMap (M N : SheafOfModules.{u} (ringSheaf R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
   (PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf R).obj)).unit.app
     (M.val ⊗ N.val) ≫ (tensorObjIsoSheafification M N).inv.val
 
-/-- The linear pairing on sections. Source: Stacks 03EK. -/
+/-- The linear pairing on sections. -/
 noncomputable def pureBilin (M N : SheafOfModules.{u} (ringSheaf R)) (W : Cᵒᵖ) :
     M.val.obj W →ₗ[R.obj.obj W] N.val.obj W →ₗ[R.obj.obj W]
       ((monoidalCategory R).tensorObj M N).val.obj W :=
   TensorProduct.curry ((pureMap R M N).app W).hom
 
-/-- A map from a tensor is determined by pure sections. Source: Stacks 03EK.
-Proof: use the module sheafification adjunction, then sectionwise tensor generation. -/
+/-- A map from a tensor is determined by pure sections. -/
 theorem pure_hom_ext (M N H : SheafOfModules.{u} (ringSheaf R))
     {f g : (monoidalCategory R).tensorObj M N ⟶ H}
     (h : ∀ W m n, f.val.app W (pure R M N W m n) =
@@ -251,8 +244,7 @@ private lemma tensorIso_natural
     Category.assoc, ← Functor.map_comp, ← tensorHom_def]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The presheaf pairing into the sheaf tensor is natural in both modules.
-Source: Stacks Project, Modules on Sites, Tag 03EK. -/
+/-- The presheaf pairing into the sheaf tensor is natural in both modules. -/
 theorem pureMap_natural
     {F F' G G' : SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
@@ -279,7 +271,7 @@ theorem pureMap_natural
   erw [Category.assoc, hval, ← Category.assoc, ← hn]
   rfl
 
-/-- Tensor morphisms act componentwise on pure sections. Source: Stacks 03EK. -/
+/-- Tensor morphisms act componentwise on pure sections. -/
 theorem pure_map {M M' N N' : SheafOfModules.{u} (ringSheaf R)}
     (f : M ⟶ M') (g : N ⟶ N') (W : Cᵒᵖ) (m : M.val.obj W) (n : N.val.obj W) :
     ((monoidalCategory R).tensorHom f g).val.app W (pure R M N W m n) =

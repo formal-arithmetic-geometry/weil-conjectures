@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 /-!
 # Chern normalization of the supported Cartier Kummer class
 
-Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45.
+## References
+
+* [Stacks, Tag 03PL]
+* [Stacks, Tag 0A45]
 -/
 
 @[expose] public noncomputable section
@@ -37,16 +40,7 @@ private theorem integral_section (T : Scheme.{u})
   rfl
 
 /-- Forgetting support in the normalized relative boundary gives the positive Kummer
-Chern class of the dual Cartier ideal, with the canonical integral constant unit.
-Source: Stacks 03PL, 0A45; blueprint lemma-cycle-class-cartier-divisor, paragraphs 3--4.
-
-Proof: take the torsor extension in the boundary specification. Its fibre over the
-supported section one is the frame torsor of O(D). Pulling this extension back along
-the integral constant unit gives the extension classified by that frame torsor.
-The torsor/H1 comparison identifies its boundary with the Picard class of O(D).
-Compose with the positive Kummer boundary and the root tensor map. Naturality of
-Yoneda composition and coefficient forgetting gives the displayed Chern class.
--/
+Chern class of the dual Cartier ideal, with the canonical integral constant unit. -/
 theorem supported_kummer_chern_realization (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0)
     (hT : IsUnit (N : Γ(T, ⊤))) {D : Scheme.{u}} (i : D ⟶ T)

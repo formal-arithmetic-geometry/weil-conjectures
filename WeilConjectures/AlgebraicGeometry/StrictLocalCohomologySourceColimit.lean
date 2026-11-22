@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.DerivedCohomologyGermIso
 
 /-! # Canonical derived sections and strict-local cohomology germs
 
-Source: Stacks Project, Tags 03Q8 and 03Q9. The derived Hom comparison is the
-explicit free-abelian-sheaf construction used in AbelianHigherDirectImagePresheaf.
+## References
+
+* [Stacks, Tag 03Q8]
+* [Stacks, Tag 03Q9]
 -/
 
 @[expose] public section
@@ -24,14 +26,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical strict-local source cocone is colimiting.
-Source: Stacks, Tags 03Q8 and 03Q9, first proof paragraph.
-
-Proof: initiality of the small affine pointed representatives makes the restricted
-presheaf germ cocone colimiting. The derived-sections-to-homology-sheaf map induces
-an isomorphism on stalks. Compose it with the strict-local germ restriction and the
-exact-inverse-image homology isomorphism. Transport the germ cocone through this
-composite isomorphism; its legs are exactly the displayed canonical source legs. -/
+/-- The canonical strict-local source cocone is colimiting. -/
 theorem isColimit_strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

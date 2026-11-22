@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.RawModuleRestrictedAbelianNegative
 
 /-! # Raw module Hom and restricted abelian cohomology
 
-Source: Stacks Project, Tags 03FD, 03Q8 and 09Z1.
+## References
+
+* [Stacks, Tag 03FD]
+* [Stacks, Tag 03Q8]
+* [Stacks, Tag 09Z1]
 -/
 
 @[expose] public section
@@ -23,32 +27,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The scalar-forgetting comparison is natural for the fixed five-factor pullback.
-There are no limit, qcqs, affineness, or indexing assumptions in this comparison.
-Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian; Tag 03Q8,
-restriction to an etale object; Tag 09Z1, canonical maps in lemma-relative-colimit.
-
-Proof: For each A, resolve A.hom^*G by injective module sheaves. The free module
-sheaf/sections adjunction on U identifies the raw derived-Hom complex with sections
-on U times_S A. Restriction to this etale object preserves injectives: its left
-adjoint, extension by zero, is exact. After forgetting scalars the resolution
-computes abelian sections cohomology, because injective module sheaves are acyclic
-on every etale object by 03FD; the section complexes and their differentials
-are unchanged. Forgetting scalars commutes with inverse image, so its coefficient
-sheaf is the pullback of the underlying abelian G. The fully faithful inclusion
-of the bounded-below derived category into the derived category and its single
-and shift comparisons identify these complexes with restrictedOverCohomology.
-All comparisons preserve addition, giving isomorphisms in AddCommGrpCat. For f,
-expand the sections adjunction unit and the two pullback-composition comparisons.
-Naturality of the unit moves a class through f^*, and the adjunction triangle
-identity cancels the counit. The source comparison is the first factor of the
-raw pullback, the single-complex comparison is its second, the map on the class
-is its third, shift compatibility is its fourth, and the canonical coefficient
-identification is its fifth. On the restricted scheme side these are exactly
-rawAffineComplexPullback and rawAffineRestrictedCoefficient. Thus the displayed
-square holds for every f. For negative q both groups vanish, and the unique
-isomorphism has the same naturality. This comparison uses no continuity theorem
-and makes no assertion about a cohomology colimit. -/
+/-- The scalar-forgetting comparison is natural for the fixed five-factor pullback. -/
 theorem exists_rawModule_restrictedAbelian_natural_iso
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale) :

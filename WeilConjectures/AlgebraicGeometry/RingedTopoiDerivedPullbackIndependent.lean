@@ -14,11 +14,12 @@ set_option linter.privateModule false
 
 /-! # Ringed-topos derived pullback with independent site universes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
+The derived pullback of a morphism of ringed topoi, for sites that are essentially small
+relative to the coefficient universe, with independent object and morphism universes.
 
-This generalizes the existing interface to sites small relative to the coefficient
-universe, keeping their object and morphism universes independent. The original
-specialized declaration is retained by public import.
+## References
+
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section

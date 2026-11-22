@@ -14,8 +14,10 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 /-!
 # Torsion coefficient assembly for proper base change
 
-Source: Stacks Project, Tag 095T, and Tag 0A4B, proof paragraphs 1–3;
-blueprint `sec-proper-base-change/sk-thm-properbasechange`.
+## References
+
+* [Stacks, Tag 095T]
+* [Stacks, Tag 0A4B]
 -/
 
 @[expose] public section
@@ -30,18 +32,7 @@ namespace AlgebraicGeometry.Etale
 exchange on a torsion abelian sheaf placed in degree zero is an isomorphism, as is its
 map on every cohomology sheaf. Exactness of inverse image identifies the latter map with
 `g⁻¹ Rᵖf_* F → Rᵖf'_* g'⁻¹ F`; higher direct images mean cohomology of derived direct image.
-Source: Stacks Project, Tag 095T; Tag 0A4B, proof paragraphs 1–3.
-
-Proof: The recorded prime-proper-base-change declaration
-`hasTorsionBaseChange_of_isProper` already proves the module-coefficient theorem for all
-bounded below complexes with torsion cohomology. Its proof includes the prime-factor
-induction and filtered-colimit assembly of the unit's Step 3. We reuse that argument.
-The torsion characterization identifies the hypothesis with local torsion. Lift `F` along
-the equivalence from sheaves of `ULift ℤ`-modules to abelian sheaves. The lift is torsion,
-so its degree-zero complex has torsion cohomology. Apply proper base change to that complex
-and transport the specified exchange through the forgetful equivalence, using its
-compatibility with the degree-zero embedding. Functors preserve isomorphisms, giving the
-claim in every cohomological degree. -/
+-/
 theorem isIso_derivedBaseChangeMapPlus_torsion_assembly
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} [IsProper f] (sq : IsPullback g' f' f g)

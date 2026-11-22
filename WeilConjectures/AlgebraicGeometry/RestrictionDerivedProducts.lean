@@ -18,7 +18,15 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjointFunctors
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 
-/-! # Restriction of scalars on unbounded derived categories -/
+/-! # Restriction of scalars on unbounded derived categories
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YT]
+* [Stacks, Tag 09T5]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -131,13 +139,7 @@ private theorem exact_ind_constancy
     change H.map (𝟙 j.right) = inv (H.map j.hom) ≫ 𝟙 _ ≫ H.map j.hom
     simp
 
-/-- Derived scalar restriction is a right adjoint.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 06YS and 06YT;
-derived.tex, Tag 09T5, specialized to scalar restriction.
-Proof: sheafified extension is left adjoint to restriction. K-flat resolutions
-make its unbounded left derived functor everywhere defined. Restriction is exact,
-so its denominator ind-diagrams are constant. The derived adjunction theorem and
-uniqueness of the derived functor identify its right adjoint with exact restriction. -/
+/-- Derived scalar restriction is a right adjoint. -/
 theorem scalarRestriction_derived_isRightAdjoint
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)

@@ -15,11 +15,13 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 /-!
 # The reduced induced closed subscheme
 
-Source: Stacks Project, Schemes, Lemma 26.12.4 (Tag 01J3) and Definition 26.12.5
-(Tag 01J4).
-
 Quasi-coherent ideal sheaves are represented by `Scheme.IdealSheafData`: their affine
 ideals localize on basic opens. `idealOfOpens` gives their sections on arbitrary opens.
+
+## References
+
+* [Stacks, Tag 01J3]
+* [Stacks, Tag 01J4]
 -/
 
 @[expose] public section
@@ -30,31 +32,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.IdealSheafData
 
-/-- Stacks Project, Tags 01J3 and 01J4.
-
-The vanishing ideal is the quasi-coherent sheaf of sections vanishing at the points of `T`.
+/-- The vanishing ideal is the quasi-coherent sheaf of sections vanishing at the points of `T`.
 On each affine open its ideal is the unique radical ideal with the specified zero locus;
 localization on basic opens expresses equality with the associated ideal sheaf. Its closed
-subscheme is reduced, has image `T`, and is unique up to a unique isomorphism over `X`.
-
-Proof, following the nine steps of the node:
-1. Evaluation is germ followed by the residue map; its kernels
-   form ideals compatible with restriction. Pointwise vanishing is local, hence a sheaf.
-2. On an affine open the closed set is the zero locus of a unique radical ideal, by
-   lem-weil-pbc-affine-open-spec-points and lem-weil-pbc-zero-locus-eq-iff-radical-eq.
-3. Evaluation vanishes exactly at the corresponding prime, so the ideal is the intersection
-   of those primes, hence the radical ideal of step 2.
-4. On a basic open the same condition gives the localization of this ideal.
-5. The ideal sheaf and the associated module agree on the basis of basic opens, hence
-   agree as subsheaves; thus the ideal sheaf is quasi-coherent (pqf-def-coherent,
-   lem-weil-pbc-spec-tilde-free-module, lem-weil-pbc-spec-module-tilde-sections and
-   lem-weil-pbc-affine-tilde-gamma-adjunction).
-6. The quasi-coherent ideal cuts out a closed immersion, locally the quotient spectrum,
-   whose image is the given zero locus.
-7. Quotients by radical ideals are reduced; reducedness is affine-local.
-8. For another reduced closed immersion, its affine kernel ideals are radical with the
-   same zero loci, hence equal. Equality on the affine basis gives equality of ideal sheaves.
-9. Equal ideal sheaves give a unique isomorphism over the ambient scheme. -/
+subscheme is reduced, has image `T`, and is unique up to a unique isomorphism over `X`. -/
 theorem reduced_induced_closed_subscheme (X : Scheme.{u}) (T : TopologicalSpace.Closeds X) :
     (∀ (U : X.Opens) (f : Γ(X, U)),
       f ∈ (vanishingIdeal T).idealOfOpens U ↔

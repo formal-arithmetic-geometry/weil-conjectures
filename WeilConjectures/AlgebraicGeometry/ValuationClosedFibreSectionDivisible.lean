@@ -20,17 +20,17 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Dividing a section which vanishes on the closed fibre
 
-Source: Stacks Project, More on Morphisms, Tag 0EX8, general-case proof.
+A section of a line bundle which vanishes on the closed fibre over a valuation ring is
+divisible by an element of the maximal ideal.
 
-Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
-is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient
-fibre with the scheme-theoretic closed fibre. Uniqueness of adjoints compares the
-units by isomorphisms, so they have the same kernel. Apply the closed-fibre
-vanishing lemma to get a nonzero pi in the maximal ideal. The principal quotient
-kernel theorem identifies multiplication by pi with the restriction kernel.
-Represent s by O_X -> L, lift this morphism through the kernel, and evaluate the
-lift at 1 to obtain t. Evaluating the kernel factorization gives pi t = s. The
-integrality hypothesis is retained in the signature but is not used in this proof.
+## Implementation details
+
+The integrality hypothesis on the closed fibre is retained in the signature of
+`closed_fibre_section_is_divisible` but is not used in the proof.
+
+## References
+
+* [Stacks, Tag 0EX8]
 -/
 
 @[expose] public section
@@ -164,19 +164,7 @@ private theorem closed_fibre_unit_zero_iff (A : Type u) [CommRing A] [IsDomain A
 -- The integral-fibre hypothesis stays in the original interface but is not needed here.
 set_option linter.unusedVariables false in
 /-- A section vanishing on the closed fibre is divisible by a maximal-ideal element,
-assuming the closed fibre is integral.
-Source: Stacks Project, More on Morphisms, Tag 0EX8.
-
-Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
-is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient
-fibre with the scheme-theoretic closed fibre. Uniqueness of adjoints compares the
-units by isomorphisms, so they have the same kernel. Apply the closed-fibre
-vanishing lemma to get a nonzero pi in the maximal ideal. The principal quotient
-kernel theorem identifies multiplication by pi with the restriction kernel.
-Represent s by O_X -> L, lift this morphism through the kernel, and evaluate the
-lift at 1 to obtain t. Evaluating the kernel factorization gives pi t = s. The
-integrality hypothesis is retained in the signature but is not used in this proof.
--/
+assuming the closed fibre is integral. -/
 theorem closed_fibre_section_is_divisible
     (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A]
     (X : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of A))

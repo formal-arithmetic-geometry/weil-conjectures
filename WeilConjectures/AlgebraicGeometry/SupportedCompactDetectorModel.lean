@@ -21,8 +21,14 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # A small-Hom model for a supported compact detector
 
-Source: Stacks Project, duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G;
-derived.tex, lemma-write-as-colimit (Tag 09SN).
+## References
+
+* [Stacks, Tag 0E4G]
+* [Stacks, Tag 09SN]
+* [Stacks, Tag 09SM]
+* [Stacks, Tag 09SJ]
+* [Stacks, Tag 08DT]
+* [Stacks, Tag 009E]
 -/
 
 @[expose] public section
@@ -32,7 +38,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 /-- Full faithfulness and preservation of coproducts identify the compactness comparison
-with the comparison for the image object (Stacks Project, Tag 09SM). -/
+with the comparison for the image object. -/
 private theorem compact_of_fully_faithful
     {C : Type*} {D : Type*} [Category* C] [Category* D]
     [Preadditive C] [Preadditive D] [HasCoproducts.{u} C] [HasCoproducts.{u} D]
@@ -79,7 +85,7 @@ private theorem compact_of_fully_faithful
     exact ⟨x, b.injective hx⟩⟩
 
 /-- Shift adjunction and full faithfulness turn vanishing detection into a singleton
-weak generating family (Stacks Project, Tags 09SJ and 09SN). -/
+weak generating family. -/
 private theorem singleton_generator_of_detection
     {C : Type*} {D : Type*} [Category* C] [Category* D]
     [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]
@@ -137,7 +143,7 @@ private theorem singleton_generator_of_detection
 namespace AlgebraicGeometry
 
 /-- Cohomology and stalk direct-sum comparisons preserve vanishing on the open set,
-including the empty family (Stacks Project, Tags 08DT and 009E). -/
+including the empty family. -/
 private theorem supported_closed_coproducts (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (V : Y.Opens) (I : Type u) :
@@ -191,27 +197,7 @@ private theorem supported_closed_coproducts (Y : Scheme.{u})
   exact si.symm.injective.subsingleton
 
 /-- Prepare the supported subcategory for the compact-generator theorem, without
-constructing any tower or telescope.
-Source: Stacks Project, duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G;
-derived.tex, lemma-write-as-colimit (Tag 09SN).
-
-Proof: Form the full subcategory of ambient complexes with quasi-coherent cohomology
-and zero cohomology stalks on V. The hypothesis htri supplies its triangulated structure.
-Ambient sums have sum cohomology; stalks commute with sums, so this property is closed
-under sums, including the empty sum. The inclusion therefore creates these coproducts.
-K-injective resolutions identify derived Hom with a quotient of the small set of chain
-maps into a K-injective representative. Thus this full subcategory is locally u-small.
-Take its ShrinkHoms model, with exactly the same objects and shrunk Hom sets. Transport
-zero, addition, shifts, triangles and coproducts along the canonical equivalence.
-Compose its inverse with the full-subcategory inclusion to obtain F. The supported
-objects E and Q give e and q. Full faithfulness and agreement of coproducts identify
-the compactness comparison for e with that for E in D_QCoh(Y), so e is compact.
-The singleton coproduct is e. For a nonzero object, hgen gives a nonzero map from some
-shift of E; the shift equivalence rewrites this as a map from E into a shift of the
-object. Full faithfulness transports it to the model, proving singleton generation.
-These constructions work also for E = 0: hgen then makes the supported category zero.
-No choice of an arbitrary derived object is made; the model is ShrinkHoms of the stated
-full subcategory and F is its canonical inverse followed by the inclusion. -/
+constructing any tower or telescope. -/
 theorem supported_compact_detector_model (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (V : Y.Opens) (E Q : schemeDerivedQCohCategory Y)

@@ -10,7 +10,14 @@ import all WeilConjectures.AlgebraicGeometry.SfGraphProjectionWord
 
 /-! # Projection compatibility of the second graph side
 
-Source: `LowerShriekComposition.lean`, eB, and Stacks Tags 0B56, 0GL1 and 0F7B.
+The second side comparison of the graph model of lower shriek is compatible with the
+projection-formula maps of the two proper/open/proper words.
+
+## References
+
+* [Stacks, Tag 0B56]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0F7B]
 -/
 
 @[expose] public section
@@ -437,24 +444,9 @@ private theorem wordProjection_graph
             ((Category.assoc t.a t.e t.p).trans t.fac).symm).inv.app K) := by
   simp only [sfGraphWordProjection, sfGraphProjectionWord, wordProjection, Functor.map_comp]
 
-/-- Projection compatibility of the second graph side.
+/-- Projection compatibility of the second graph side: `sfGraphSecondSideIso` intertwines
+the word projection maps of the second presentation and of `t`. -/
 
-Source: `LowerShriekComposition.lean`, eB; the tensor calculation uses Stacks
-Tags 0B56, 0GL1 and 0F7B.
-
-Proof in words. Expand B2 into the inverse direct-image compositor for s2 q2 = a, the
-Cartesian proper/open exchange over e, and the direct-image compositor for p1 p.
-The proper projection composition identity, solved for the inverse compositor,
-splits the projection for a into the successive projections for q2 and s2.
-Whisker the proper/open tensor square for O2 = (P x_Y C) x_P U by Rs2 on its
-source side and Rp on its target side. Compose the outer proper projections
-using the normalized direct-image composition identity. Naturality allows the
-projection for s2 to pass the exchange. Pullback-composition coherence equates
-the two resulting coefficient paths: both are the canonical comparison from
-Lp Le La to Lf through s2 b2 p1 p = f. Thus all three constituent squares paste
-to the stated equation. The compositor components, rather than any projection,
-are inverted; arbitrary unbounded inputs and arbitrary supporting opens suffice.
--/
 theorem sfGraphSecondSideIso_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

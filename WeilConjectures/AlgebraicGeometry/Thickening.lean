@@ -12,12 +12,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 /-!
 # Thickenings of schemes
 
-Source: Stacks Project, More on Morphisms, Definition 37.2.1 (Tag 04EX),
-and Definition 37.11.1 (Tag 02H0).
-
 For any of the predicates below, a thickening over `S` additionally has
 `[T.Over S]`, `[T'.Over S]`, and `[i.IsOver S]`. A thickening of affine
 schemes additionally has `[IsAffine T]` and `[IsAffine T']`.
+
+## References
+
+* [Stacks, Tag 04EX]
+* [Stacks, Tag 02H0]
 -/
 
 @[expose] public section
@@ -29,25 +31,23 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A thickening is a closed immersion
-surjective on underlying points (Stacks Project, Tag 04EX, item 1). -/
+surjective on underlying points. -/
 def IsThickening {T T' : Scheme.{u}} (i : T ⟶ T') : Prop :=
   IsClosedImmersion i ∧ Surjective i
 
 /-- A first order thickening is a closed
-immersion whose defining ideal sheaf has square zero (Stacks Project, Tag 04EX,
-item 2). The ideal sheaf is `i.ker` on `T'`. -/
+immersion whose defining ideal sheaf has square zero. The ideal sheaf is `i.ker` on `T'`. -/
 def IsFirstOrderThickening {T T' : Scheme.{u}} (i : T ⟶ T') : Prop :=
   IsClosedImmersion i ∧ i.ker ^ 2 = ⊥
 
 /-- An `n`th order thickening is a
-closed immersion whose defining ideal sheaf has `(n + 1)`st power zero
-(Stacks Project, Tag 04EX, item 4). -/
+closed immersion whose defining ideal sheaf has `(n + 1)`st power zero. -/
 def IsNthOrderThickening {T T' : Scheme.{u}} (n : ℕ) (i : T ⟶ T') : Prop :=
   IsClosedImmersion i ∧ i.ker ^ (n + 1) = ⊥
 
 /-- A finite order thickening is a
 closed immersion whose defining ideal sheaf is nilpotent: its `(n + 1)`st
-power is zero for some `n : ℕ` (Stacks Project, Tag 04EX, item 3). -/
+power is zero for some `n : ℕ`. -/
 def IsFiniteOrderThickening {T T' : Scheme.{u}} (i : T ⟶ T') : Prop :=
   ∃ n : ℕ, IsNthOrderThickening n i
 

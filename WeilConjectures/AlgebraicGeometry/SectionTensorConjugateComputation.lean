@@ -8,6 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.InternalScalarPullbackNormalizat
 import WeilConjectures.AlgebraicGeometry.SectionScalarComputationTransport
 
 /-! # K-flat computation of conjugated scalar tensor comparisons
+
+## References
+
+* [Stacks, Tags 03EK, 06YY, 07A6, 0G7E]
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -227,26 +231,7 @@ private def restrictedScalarComputation (a : Λ ⟶ Λ') [IsMonHom a] (T : Schem
 attribute [local irreducible] scalarComputation restrictedScalarComputation
 
 -- Pasting the two computations elaborates both derived tensor and scalar structures.
-/-- Conjugated normalized scalar tensor maps have the section K-flat computation equation.
-Source: Stacks Project, Tags 03EK, 06YY, 0G7E and 07A6; blueprint integral proper-base-change
-proof paragraph (1); second step of lem-sfb-section-tensor-normalization-transport.
-
-Proof: first take a section complex which is the termwise image of an internal complex.
-Substitute the supplied conjugation equation for e. The scalar normalization identifies
-its scalar computation with the internal computation; the normalized section tensor
-representative equation identifies its tensor localization with the image of the internal
-localization map. TensorNormalized now replaces the latter composite by the restricted
-scalar counit followed by the localized ordinary internal comparison. The ordinary scalar
-normalization and the given generator equation for o identify the ordinary maps: both
-send every sheafified local generator z tensor x to x tensor z, and such generators detect
-equality after sheafification. The canonical composition and single-complex comparisons
-cancel, yielding the displayed equation. Every section complex is isomorphic to a termwise
-image under the exact section equivalence. Naturality of e, of the scalar computation
-counit, of the tensor localization and of the single-factor total comparison transports
-this equation along that isomorphism. Exactness and the tensor comparison preserve and
-reflect K-flatness and flat terms. Thus it holds for the stated P. The calculation uses
-no flatness of the coefficient map and no boundedness; it also covers zero coefficients
-and the empty scheme. -/
+/-- Conjugated normalized scalar tensor maps have the section K-flat computation equation. -/
 theorem section_tensor_conjugate_computation (a : Λ ⟶ Λ') [IsMonHom a]
     (T : Scheme.{u}) (s : SectionScalarComparison a T)
     (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)

@@ -15,8 +15,14 @@ import WeilConjectures.CategoryTheory.SheafAlgebrasDirectedColimit
 
 /-! # Directed colimits of quasi-coherent algebra sheaves
 
-Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24; Sheaves,
-Section 009E and Lemma 0087; Modules, Lemmas 01AH and 01AJ.
+## References
+
+* [Stacks, Tag 01ID]
+* [Stacks, Section 26.24]
+* [Stacks, Section 009E]
+* [Stacks, Tag 0087]
+* [Stacks, Tag 01AH]
+* [Stacks, Tag 01AJ]
 -/
 
 @[expose] public section
@@ -33,28 +39,7 @@ are quasi-coherent, are the sheafification of the presheaf colimit with its copr
 have colimit rings of sections on affine opens, and commute with restriction to opens.
 Being a colimit in all algebra sheaves with quasi-coherent vertex also gives the colimit
 in their full subcategory of quasi-coherent algebras. Restriction uses the open site
-`Over V`, whose objects are precisely the opens contained in `V`.
-Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24; Sheaves,
-Section 009E and Lemma 0087; Modules, Lemmas 01AH and 01AJ.
-
-1. Take the presheaf-ring colimit and apply
-   `CategoryTheory.sheafAlgebras_directed_colimit`. Evaluation preserves presheaf
-   colimits, so its hypotheses hold. This gives the algebra cocone, its sheafification
-   description with compatible legs, and its underlying module colimit.
-2. Apply `Modules.quasiCoherentModuleColimitAffineSections` to that module cocone.
-   This proves quasi-coherence and gives stage representatives and eventual vanishing
-   of sections on every affine open.
-3. On an affine open, form the canonical ring map from the ring colimit to the
-   sections of the algebra cocone. The representatives from Step 2 prove surjectivity.
-   Every element of the ring colimit comes from a stage by
-   `CategoryTheory.Limits.Concrete.colimit_exists_rep`. If its image is zero, Step 2
-   makes that stage section zero at a later stage; the ring coprojection identities
-   then make the original element zero. The comparison is therefore injective and
-   surjective, hence an isomorphism. Transport the ring colimit along it.
-4. For an open V, `Over.forgetAdjStar V` and
-   `Adjunction.sheafPushforwardContinuous` exhibit open-site restriction as a left
-   adjoint. `Under.post` of a left adjoint preserves colimits, proving the restriction
-   clause directly. -/
+`Over V`, whose objects are precisely the opens contained in `V`. -/
 theorem quasiCoherentAlgebra_colimit
     (X : Scheme.{u}) (I : Type u) [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ X.CommAlgebraSheaf)

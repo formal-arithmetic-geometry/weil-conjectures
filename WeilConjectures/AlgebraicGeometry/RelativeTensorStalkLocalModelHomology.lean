@@ -21,8 +21,13 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Relative tensor homology compared with a local stalk model
 
-Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG and 09U9;
-Modules, Tag 01AG; Tag 0B6G, condition (3).
+## References
+
+* [Stacks, Tag 01AG]
+* [Stacks, Tag 06YB]
+* [Stacks, Tag 08CG]
+* [Stacks, Tag 09U9]
+* [Stacks, Tag 0B6G]
 -/
 
 @[expose] public section
@@ -34,26 +39,7 @@ open CategoryTheory.MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
 /-- The tensor of a prescribed K-flat representative computes derived tensor of
-any local stalk model, without boundedness, projectivity or Tor assumptions.
-
-Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG and 09U9;
-Modules, Tag 01AG; Tag 0B6G, condition (3).
-
-Proof: take the stalk of the inverse-image ring sheaf at y. Its canonical ring
-isomorphism with the target structure stalk at f(y) transports the stalk of F
-to an A-module M, where A is that target structure stalk. Stalks preserve
-homology and commute with total tensor and the degree-zero single complex.
-The stalk criterion makes the transported stalk complex of P K-flat. The
-quasi-isomorphism q, exactness of scalar restriction and stalks, and the local
-derived isomorphism eL identify its derived object with the scalar-restricted
-stalk complex of L. Here hy gives cofinality of the neighbourhoods inside V,
-and the open-immersion stalk ring isomorphism is precisely the scalar transport
-used by openModuleStalkFunctor. Tensor the derived isomorphism with M[0].
-K-flat tensor computation identifies its left side with the stalk of the tensor
-complex. Apply degree-i homology and forget scalar structure to obtain the
-claimed isomorphism of abelian groups. These constructions use the same M in
-all degrees. No representative is chosen from a mere existence theorem to
-define data: M is the actual stalk of F transported by a ring isomorphism. -/
+any local stalk model. -/
 theorem relativeTensor_stalk_localModel_homology_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

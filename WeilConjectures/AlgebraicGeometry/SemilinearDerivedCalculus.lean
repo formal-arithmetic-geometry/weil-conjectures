@@ -10,13 +10,8 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 
 /-! # Ordinary derived semilinear sections
 
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, Lemma 4.10 and Proposition
-  4.17;
-Stacks Project, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6 and 08J7--08JB.
-
-The categories below are module sheaves on the actual vertical sequence site and their
-ordinary unbounded derived categories. All comparisons have specified sources, targets
-and equations; there are no free proposition-valued parameters.
+The categories below are module sheaves on the vertical sequence site and their
+ordinary unbounded derived categories.
 
 ## Main definitions and statements
 
@@ -25,6 +20,17 @@ and equations; there are no free proposition-valued parameters.
 - `TensorComparisonModel`, `InverseTensorPure`: representative and pure-tensor normalization.
 - `semilinearDerivedSections`: existence of the complete ordinary-derived calculus.
 - `evaluation_mate`: compatibility of specified adjunction transposes with evaluation.
+
+## Implementation details
+
+All comparisons have specified sources, targets and equations; the structures have no
+unconstrained proposition-valued parameters.
+
+## References
+
+* [Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10, Proposition 4.17]
+* [Stacks, Tags 0941, 079P, 06YS, 06YY, 07A4, 07A6, 08J7--08JB, 03EK, 03D1, 03EL]
 -/
 
 @[expose] public noncomputable section
@@ -413,12 +419,7 @@ private theorem evaluationTensorIso_fac (n : ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Ordinary evaluation preserves tensor by the identity on local pure tensors.
-Source: Zheng 4.1; Stacks 03EK.
-Proof: restriction to a vertical slice commutes with sectionwise tensor and
-sheafification. Map each pure tensor to the identical tensor in that slice.
-The sheafification universal property gives a natural isomorphism. Local pure
-tensors generate, so the displayed section formula determines it uniquely. -/
+/-- Ordinary evaluation preserves tensor by the identity on local pure tensors. -/
 theorem ordinaryEvaluationTensor_existsUnique (n : ℕ) :
     ∃! δ : ∀ M N : Systems.{c, v, max c v r} J B τ,
       (evaluation.{c, v, max c v r} J B τ n).obj
@@ -493,8 +494,7 @@ theorem ordinaryEvaluationTensor_existsUnique (n : ℕ) :
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The uniquely section-normalized ordinary tensor evaluation.
-Source: Zheng 4.1; Stacks 03EK. -/
+/-- The uniquely section-normalized ordinary tensor evaluation. -/
 def ordinaryEvaluationTensor (n : ℕ) :=
   (ordinaryEvaluationTensor_existsUnique.{c, v, r} J B τ n).exists.choose
 
@@ -504,10 +504,7 @@ attribute [local irreducible] ordinaryEvaluationTensor
 set_option genInjectivity false in
 set_option genSizeOf false in
 set_option genSizeOfSpec false in
-/-- The full ordinary-derived system calculus over one fixed ring tower.
-Every proposition field is a specific mathematical assertion about the displayed
-categories, functors, maps or adjunctions; none is an unconstrained Prop parameter.
-Source: Zheng 4.1 and 4.10; Stacks 06YY, 07A4, 08J7--08JB. -/
+/-- The full ordinary-derived system calculus over one fixed ring tower. -/
 structure Data where
   /-- Grothendieck abelianness of the actual category of module systems. -/
   grothendieck : IsGrothendieckAbelian.{max c v r} (Systems.{c, v, max c v r} J B τ)
@@ -565,7 +562,7 @@ structure Data where
       closed (levelClosed n) tensorModels (levelTensorModels n)
       (tensorEvaluation n)
   /-- The ordinary component of the evaluation model is exactly the
-  identity-on-sections comparison, so it cannot be sign-twisted. -/
+  identity-on-sections comparison. -/
   tensorEvaluationModel_ordinary : ∀ (n : ℕ)
     (M N : Systems.{c, v, max c v r} J B τ),
     (tensorEvaluationModel n).ordinary M N =
@@ -610,15 +607,13 @@ variable (A : Data.{c, v, r} J B τ)
 
 end Data
 
-/-- The actual underlying sheaf of sets of a module sheaf.
-Source: Stacks 03D1. -/
+/-- The underlying sheaf of sets of a module sheaf. -/
 abbrev underlying (R : Sheaf J CommRingCat.{max c v r}) :=
   SheafOfModules.toSheaf (ring.{c, v, max c v r} J R) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max c v r})
 
 /-- Pure-tensor normalization of the inverse-image tensor comparison, tested
-on all generalized sections. It fixes the ordinary comparison before deriving.
-Source: Stacks 03EL. -/
+on all generalized sections. -/
 def InverseTensorPure {C' : Type c} [Category.{v} C']
     [EssentiallySmall.{max c v r} C'] (J' : GrothendieckTopology C')
     (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
@@ -648,8 +643,7 @@ variable (F : ℕ → Sheaf J CommRingCat.{max c v r})
 
 /-- Derived extension for a compatible coefficient-system morphism.
 Its level comparison is fixed by transposition against the identity-on-sections
-restriction comparison, so it describes the canonical extension and its maps.
-Source: Stacks 06YY, 07A6. -/
+restriction comparison. -/
 structure ScalarSystems where
   /-- The actual ringed-system derived change of rings. -/
   scalar : ScalarData.{c, v, max c v r}

@@ -15,7 +15,16 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Concrete tensor pullback on modules of a ringed space
 
-Source: Stacks Project, Tags 008A and 008Y.
+We construct the concrete tensor pullback of modules along a morphism of ringed spaces,
+as inverse image followed by extension of scalars, and show it is an additive left adjoint
+to module direct image.
+
+## References
+
+* [Stacks, Tag 008A]
+* [Stacks, Tag 008Y]
+* [Stacks, Tag 0095]
+* [Stacks, Tag 0096]
 -/
 
 @[expose] public section
@@ -36,8 +45,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 variable {X Y : RingedSpace.{u}} (g : X ⟶ Y)
 
-/-- The ring map `g⁻¹ O_Y → O_X` adjoint to the structure-sheaf map of `g`.
-Source: Stacks, Tag 0095. -/
+/-- The ring map `g⁻¹ O_Y → O_X` adjoint to the structure-sheaf map of `g`. -/
 private abbrev tensorPullbackRingMap :=
   CochainComplex.tensorPullbackRingMap g.hom.base X.sheaf Y.sheaf ⟨g.hom.c⟩
 
@@ -46,11 +54,7 @@ private def tensorPullbackObj (M : (SheafOfModules.{u} (moduleRings Y))) : (Shea
   SheafOfModules.changeOfRings.{u, u, u} (tensorPullbackRingMap g)
     (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)
 
-/-- The sectionwise map of tensor presheaves is natural.
-Source: Stacks, Tag 0095.
-Proof: inverse image of `a` is linear and commutes with restriction (008X).
-The map `id ⊗ g⁻¹a` therefore commutes with restrictions on pure tensors;
-pure tensors generate each section tensor, giving the asserted naturality. -/
+/-- The sectionwise map of tensor presheaves is natural. -/
 private theorem tensorPullbackPresheafMap_naturality {M N : (SheafOfModules.{u} (moduleRings Y))}
   (a : M ⟶ N)
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
@@ -67,8 +71,7 @@ private theorem tensorPullbackPresheafMap_naturality {M N : (SheafOfModules.{u} 
     (TopCat.Sheaf.inverseImageModule g.hom.base Y.sheaf M)
     (TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a) i
 
-/-- The tensor formula on morphisms, followed by module sheafification.
-Source: Stacks, Tag 0095. -/
+/-- The tensor formula on morphisms, followed by module sheafification. -/
 private def tensorPullbackMap {M N : (SheafOfModules.{u} (moduleRings Y))} (a : M ⟶ N) :
     tensorPullbackObj g M ⟶ tensorPullbackObj g N :=
   (PresheafOfModules.sheafification (𝟙 (moduleRings X).obj)).map
@@ -77,9 +80,7 @@ private def tensorPullbackMap {M N : (SheafOfModules.{u} (moduleRings Y))} (a : 
           ((TopCat.Sheaf.inverseImageModuleMap g.hom.base Y.sheaf M a).val.app U)
       naturality := tensorPullbackPresheafMap_naturality g a }
 
-/-- Tensor pullback preserves identities. Source: Stacks, Tag 0095.
-Proof: the abelian inverse-image functor preserves identities; its module map is the
-same map with linearity supplied. Extension of scalars and sheafification preserve identities. -/
+/-- Tensor pullback preserves identities. -/
 private theorem tensorPullbackMap_id (M : (SheafOfModules.{u} (moduleRings Y))) :
     tensorPullbackMap g (𝟙 M) = 𝟙 (tensorPullbackObj g M) := by
   let p :
@@ -106,9 +107,7 @@ private theorem tensorPullbackMap_id (M : (SheafOfModules.{u} (moduleRings Y))) 
   rw [hp, CategoryTheory.Functor.map_id]
   rfl
 
-/-- Tensor pullback preserves composition. Source: Stacks, Tag 0095.
-Proof: the abelian inverse-image functor preserves composition; its module map is the
-same map with linearity supplied. Extension of scalars and sheafification preserve composition. -/
+/-- Tensor pullback preserves composition. -/
 private theorem tensorPullbackMap_comp {M N P : (SheafOfModules.{u} (moduleRings Y))} (a : M ⟶ N)
   (b : N ⟶ P) :
     tensorPullbackMap g (a ≫ b) = tensorPullbackMap g a ≫ tensorPullbackMap g b := by
@@ -128,8 +127,7 @@ private theorem tensorPullbackMap_comp {M N P : (SheafOfModules.{u} (moduleRings
     (ModuleCat.extendScalars _).map _ ≫ (ModuleCat.extendScalars _).map _
   rw [hi, CategoryTheory.Functor.map_comp]
 
-/-- Pullback of modules along a scheme morphism, defined by the tensor formula.
-Source: Stacks, Tag 0095. -/
+/-- Pullback of modules along a scheme morphism, defined by the tensor formula. -/
 private def tensorPullback : (SheafOfModules.{u} (moduleRings Y)) ⥤ (SheafOfModules.{u}
   (moduleRings X)) where
   obj := tensorPullbackObj g
@@ -210,12 +208,7 @@ private def tensorPullbackPushforwardIso :
           (moduleRings Y)) (tensorPullbackRingUnit g) (tensorPullbackRingMapUnderlying g)) ≪≫
     SheafOfModules.pushforwardCongr (tensorPullbackRingMap_unit g)
 
-/-- The tensor formula is left adjoint to the sectionwise module pushforward.
-Source: Stacks, Tag 0096.
-Proof: apply the tensor/restriction adjunction to the change of rings, then the
-inverse-image/direct-image module adjunction (008Y). The resulting bijection is natural
-and its right-hand module action is restriction along `g.hom.c`, hence the recorded pushforward.
-These are the first two steps of this node, using lem-pc-module-pullback-adjunction. -/
+/-- The tensor formula is left adjoint to the sectionwise module pushforward. -/
 private theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g ⊣
   moduleDirectImage g) := by
   obtain ⟨E, h, adj, he⟩ := SheafOfModules.exists_changeOfRingsAdjunction (X : TopCat.{u})
@@ -307,21 +300,7 @@ private theorem nonempty_tensorPullbackAdjunction : Nonempty (tensorPullback g �
 
 
 /-- The concrete inverse image followed by tensor change of rings is an additive
-left adjoint to module direct image.
-
-Source: Stacks Project, Sheaves, Tags 008A and 008Y.
-
-Proof: take the inverse-image module Hom equivalence of Tag 008Y and compose
-it with the extension/restriction-of-scalars equivalence of Tag 008A along the
-adjoint structure map. The right composite is direct image with the scalar
-structure through g-sharp: the adjunction triangle identity for the ring sheaves
-identifies the composite ring map with g-sharp. The natural Hom equivalences
-define the functor on objects and maps. On maps it is precisely inverse image
-followed by the sheafification of the sectionwise map id tensor a, by naturality
-of both equivalences. The inverse-image functor on abelian sheaves and the
-sectionwise tensor functor are additive, as is sheafification, so their composite
-is additive. This proves the prescribed object and morphism formulas and the
-underived adjunction. -/
+left adjoint to module direct image. -/
 theorem exists_tensorModulePullback
     {X Y : RingedSpace.{u}} (g : X ⟶ Y) :
     ∃ (P : SheafOfModules.{u} (moduleRings Y) ⥤ SheafOfModules.{u} (moduleRings X))

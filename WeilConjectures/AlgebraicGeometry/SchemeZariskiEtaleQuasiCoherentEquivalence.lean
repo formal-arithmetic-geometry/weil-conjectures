@@ -44,7 +44,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 /-!
 # Quasi-coherent modules on the Zariski and small étale sites
 
-Source: Stacks Project, Descent, Tags 03FH, 03DX, 03LC, 05VG and 0GN7.
+## References
+
+* [Stacks, Tags 03DU, 03DX, 03FH, 03LC, 05VG, 0GN7]
 -/
 
 @[expose] public section
@@ -61,17 +63,11 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 noncomputable section
 
-/-- The ring-valued presheaf of regular functions on the small étale site.
-Source: Stacks 03DU. -/
+/-- The ring-valued presheaf of regular functions on the small étale site. -/
 def smallEtaleModulePresheaf (X : Scheme.{u}) : X.Etaleᵒᵖ ⥤ RingCat.{u} :=
   X.etaleStructurePresheaf ⋙ forget₂ CommRingCat.{u} RingCat.{u}
 
-/-- Regular functions form a ring sheaf on the small étale site.
-Source: Stacks 03DU.
-Proof: the underlying set presheaf is the regular-function sheaf by étale descent
-(upstream isSheaf_etaleStructurePresheaf). Compatible ring homomorphisms glue pointwise;
-the sheaf separatedness identities show that the glued map preserves every ring operation.
-This proves the ring-valued sheaf condition without any enlargement of section rings. -/
+/-- Regular functions form a ring sheaf on the small étale site. -/
 theorem smallEtaleModulePresheaf_isSheaf (X : Scheme.{u}) :
     Presheaf.IsSheaf X.smallEtaleTopology (smallEtaleModulePresheaf X) := by
   have h : Presieve.IsSheaf X.smallEtaleTopology
@@ -113,17 +109,14 @@ theorem smallEtaleModulePresheaf_isSheaf (X : Scheme.{u}) :
     exact (congrArg (fun χ : E ⟶ (smallEtaleModulePresheaf X).obj (op _) ↦ χ.hom e)
       (hψ f hf)).trans (hg e f hf).symm
 
-/-- The usual structure sheaf on the small étale site, with its actual section rings.
-Source: Stacks 03DU. -/
+/-- The usual structure sheaf on the small étale site, with its actual section rings. -/
 def smallEtaleModuleRing (X : Scheme.{u}) : Sheaf X.smallEtaleTopology RingCat.{u} :=
   ⟨smallEtaleModulePresheaf X, smallEtaleModulePresheaf_isSheaf X⟩
 
-/-- Modules over the usual small étale structure sheaf.
-Source: Stacks 03DX. -/
+/-- Modules over the usual small étale structure sheaf. -/
 abbrev SmallEtaleModules (X : Scheme.{u}) := SheafOfModules.{u} (smallEtaleModuleRing X)
 
-/-- The structural map identifies functions on an open with functions on its open subscheme.
-Source: Stacks 03FH. -/
+/-- The structural map identifies functions on an open with functions on its open subscheme. -/
 def zariskiEtaleOpenRingMap (X : Scheme.{u})
     [hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology] :
@@ -131,31 +124,25 @@ def zariskiEtaleOpenRingMap (X : Scheme.{u})
       (Opens.grothendieckTopology X) X.smallEtaleTopology).obj (smallEtaleModuleRing X) :=
   ⟨Functor.whiskerRight X.restrictFunctorΓ.inv (forget₂ CommRingCat.{u} RingCat.{u})⟩
 
-/-- Restriction to Zariski opens, including restriction of scalars by the canonical ring map.
-Source: Stacks 0GN7. -/
+/-- Restriction to Zariski opens, including restriction of scalars by the canonical ring map. -/
 def zariskiEtaleModuleRestriction (X : Scheme.{u})
     [hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology] : SmallEtaleModules X ⥤ X.Modules :=
   SheafOfModules.pushforward (zariskiEtaleOpenRingMap X)
 
-/-- The ring map for an arbitrary scheme morphism is pullback of regular functions.
-Source: Stacks 03LC. -/
+/-- The ring map for an arbitrary scheme morphism is pullback of regular functions. -/
 def smallEtaleModuleRingMap {U T : Scheme.{u}} (a : U ⟶ T) :
     smallEtaleModuleRing T ⟶ (a.Etale.sheafPushforwardContinuous RingCat.{u}
       T.smallEtaleTopology U.smallEtaleTopology).obj (smallEtaleModuleRing U) :=
   ⟨Functor.whiskerRight (etaleStructurePresheafToPullback a) (forget₂ CommRingCat.{u} RingCat.{u})⟩
 
-/-- Direct image of small étale modules uses the scheme base-change functor on the sites.
-Source: Stacks 03LC. -/
+/-- Direct image of small étale modules uses the scheme base-change functor on the sites. -/
 def smallEtaleModulePushforward {U T : Scheme.{u}} (a : U ⟶ T) :
     SmallEtaleModules U ⥤ SmallEtaleModules T :=
   SheafOfModules.pushforward (smallEtaleModuleRingMap a)
 
 /-- The canonical ringed-site tensor pullback, left adjoint to restriction.
-It represents O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M;
-Mathlib constructs this functor by module-presheaf pullback and sheafification.
-Only the proof that the right adjoint exists is an argument.
-Source: Stacks 03FH. -/
+It represents O_et tensor over epsilon^{-1} O_Zar with epsilon^{-1} M. -/
 def zariskiEtaleModuleExtension (X : Scheme.{u})
     (hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology)
@@ -165,8 +152,7 @@ def zariskiEtaleModuleExtension (X : Scheme.{u})
   letI : (SheafOfModules.pushforward (zariskiEtaleOpenRingMap X)).IsRightAdjoint := hp
   SheafOfModules.pullback (zariskiEtaleOpenRingMap X)
 
-/-- The canonical tensor-extension/restriction adjunction, with its specified unit and counit.
-Source: Stacks 03FH. -/
+/-- The canonical tensor-extension/restriction adjunction, with its specified unit and counit. -/
 def zariskiEtaleModuleAdjunction (X : Scheme.{u})
     (hc : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
       (Opens.grothendieckTopology X) X.smallEtaleTopology)
@@ -176,16 +162,14 @@ def zariskiEtaleModuleAdjunction (X : Scheme.{u})
   letI : (SheafOfModules.pushforward (zariskiEtaleOpenRingMap X)).IsRightAdjoint := hp
   SheafOfModules.pullbackPushforwardAdjunction (zariskiEtaleOpenRingMap X)
 
-/-- Tensor pullback along an arbitrary morphism of small étale ringed topoi.
-Source: Stacks 03LC. -/
+/-- Tensor pullback along an arbitrary morphism of small étale ringed topoi. -/
 def smallEtaleModulePullback {U T : Scheme.{u}} (a : U ⟶ T)
     (hp : (smallEtaleModulePushforward a).IsRightAdjoint) :
     SmallEtaleModules T ⥤ SmallEtaleModules U :=
   letI : (SheafOfModules.pushforward (smallEtaleModuleRingMap a)).IsRightAdjoint := hp
   SheafOfModules.pullback (smallEtaleModuleRingMap a)
 
-/-- The tensor-pullback/direct-image adjunction on the small étale ringed topoi.
-Source: Stacks 03LC. -/
+/-- The tensor-pullback/direct-image adjunction on the small étale ringed topoi. -/
 def smallEtaleModuleAdjunction {U T : Scheme.{u}} (a : U ⟶ T)
     (hp : (smallEtaleModulePushforward a).IsRightAdjoint) :
     smallEtaleModulePullback a hp ⊣ smallEtaleModulePushforward a :=
@@ -193,8 +177,7 @@ def smallEtaleModuleAdjunction {U T : Scheme.{u}} (a : U ⟶ T)
   SheafOfModules.pullbackPushforwardAdjunction (smallEtaleModuleRingMap a)
 
 /-- Proof data permitting the canonical module pullback on these presented sites.
-There is no chosen ring, module, map or functor in this structure.
-Source: Stacks 03FH. -/
+There is no chosen ring, module, map or functor in this structure. -/
 structure ZariskiEtaleModuleContext (X : Scheme.{u}) where
   /-- The inclusion of open subschemes is continuous. -/
   continuous : (AlgebraicGeometry.gabberOpenEtale X).IsContinuous
@@ -202,25 +185,21 @@ structure ZariskiEtaleModuleContext (X : Scheme.{u}) where
   /-- Restriction of modules admits its canonical tensor left adjoint. -/
   rightAdjoint : (@zariskiEtaleModuleRestriction X continuous).IsRightAdjoint
 
-/-- Canonical restriction, with the continuity proof supplied by the context.
-Source: Stacks 0GN7. -/
+/-- Canonical restriction, with the continuity proof supplied by the context. -/
 def ZariskiEtaleModuleContext.restriction {X : Scheme.{u}} (c : ZariskiEtaleModuleContext X) :=
   @zariskiEtaleModuleRestriction X c.continuous
 
-/-- Canonical tensor extension for the presented sites.
-Source: Stacks 03FH. -/
+/-- Canonical tensor extension for the presented sites. -/
 def ZariskiEtaleModuleContext.extension {X : Scheme.{u}} (c : ZariskiEtaleModuleContext X) :=
   zariskiEtaleModuleExtension X c.continuous c.rightAdjoint
 
-/-- The canonical extension/restriction adjunction.
-Source: Stacks 03FH. -/
+/-- The canonical extension/restriction adjunction. -/
 def ZariskiEtaleModuleContext.adjunction {X : Scheme.{u}} (c : ZariskiEtaleModuleContext X) :
     c.extension ⊣ c.restriction :=
   zariskiEtaleModuleAdjunction X c.continuous c.rightAdjoint
 
 /-- The canonical pullback comparison is the left-adjoint mate of the open-restriction
-comparison for direct images. Its direction is (a^* F)_et to a_et^*(F_et).
-Source: Stacks 03FH. -/
+comparison for direct images. Its direction is (a^* F)_et to a_et^*(F_et). -/
 def zariskiEtalePullbackComparison {U T : Scheme.{u}} (a : U ⟶ T)
     (cU : ZariskiEtaleModuleContext U) (cT : ZariskiEtaleModuleContext T)
     (hp : (smallEtaleModulePushforward a).IsRightAdjoint)
@@ -231,8 +210,7 @@ def zariskiEtalePullbackComparison {U T : Scheme.{u}} (a : U ⟶ T)
     (cT.adjunction.comp (smallEtaleModuleAdjunction a hp))).symm r.symm).symm
 
 /-- The canonical direct-image comparison, defined as the counit mate of the canonical
-pullback comparison. No quasi-coherence or quasi-compactness is needed to define this map.
-Source: Stacks 03LC. -/
+pullback comparison. -/
 def zariskiEtalePushforwardComparison {U T : Scheme.{u}} (a : U ⟶ T)
     (cU : ZariskiEtaleModuleContext U) (cT : ZariskiEtaleModuleContext T)
     (hp : (smallEtaleModulePushforward a).IsRightAdjoint)
@@ -246,16 +224,7 @@ def zariskiEtalePushforwardComparison {U T : Scheme.{u}} (a : U ⟶ T)
         cU.extension.map ((Classical.choose (exists_tensorPullbackAdjunction a)).counit.app H))
 
 /-- Additive sheafification on the slices of the original small étale site, retaining
-u-small section groups despite the u+1 object universe of the presented site.
-Source: Stacks, Sites, sheafification and the affine étale basis; Descent 03DX.
-Proof: refine each étale object by its affine opens. Affine étale schemes of finite
-presentation over each affine base have a u-small skeleton: they are specified by
-finite polynomial presentations over a u-small ring. Their finite jointly surjective
-coverings form a basis. Apply the ordinary plus construction twice on this small basis,
-then extend by compatible sections on affine covers. All products are indexed by
-u-small sets; the result therefore still has u-small additive section groups. Its
-usual gluing universal property is precisely the sheafification adjunction on the
-slice site. The construction is invariant under changing the affine cover. -/
+u-small section groups despite the u+1 object universe of the presented site. -/
 @[instance] theorem smallEtaleModuleOverHasWeakSheafify (T : Scheme.{u}) (V : T.Etale) :
     HasWeakSheafify (T.smallEtaleTopology.over V) AddCommGrpCat.{u} := by
   have : HasSheafify (T.smallEtaleTopology.over V) AddCommGrpCat.{u} :=
@@ -263,14 +232,7 @@ slice site. The construction is invariant under changing the affine cover. -/
       V.left.smallEtaleTopology AddCommGrpCat.{u}
   infer_instance
 
-/-- Sheafification inverts exactly the locally bijective additive maps on these slices.
-Source: Stacks, Sites, sheafification; Descent 03DX.
-Proof: on the affine étale basis used by smallEtaleModuleOverHasWeakSheafify, the two
-plus constructions identify sections exactly when they agree locally and every section
-is locally represented. Hence a locally bijective map sheafifies to an isomorphism.
-Conversely the sheafification units are locally bijective, so a sheafified isomorphism
-forces local injectivity and surjectivity of the original map by the same local
-representatives. Refinement transfers this equivalence to the full slice site. -/
+/-- Sheafification inverts exactly the locally bijective additive maps on these slices. -/
 @[instance] theorem smallEtaleModuleOverWEqualsLocallyBijective
     (T : Scheme.{u}) (V : T.Etale) :
     (T.smallEtaleTopology.over V).WEqualsLocallyBijective AddCommGrpCat.{u} := by

@@ -12,7 +12,10 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Sections of a restriction-adjunction lift
 
-Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
+## References
+
+* [Stacks, Tag 01FB]
+* [Stacks, Tag 01E4]
 -/
 
 @[expose] public section
@@ -117,23 +120,7 @@ private lemma raw_lift_sections {X Y : Scheme.{uBC}} (p : Y ⟶ X)
 
 -- The nested complex functors and their restriction adjunction need extra elaboration fuel.
 /-- Evaluate a restriction-adjunction lift on sections, with arbitrary resolutions
-and their prescribed restriction comparisons. This calculation involves one scheme
-map only, and no base-change square or equality between composite inverse images.
-Source: Stacks Project, Tags 01FB and 01E4, the resolution and open-section
-calculation; Mathlib AlgebraicGeometry.Modules.Sheaf, restriction unit/counit.
-Proof: Work in each degree. Expand the adjoint as restriction of b followed by
-its counit. The counit is restriction along the equality U.ι⁻¹(U.ι(top))=top.
-The unit on J restricts from p⁻¹(U.ι(top)) to W.ι(W.ι⁻¹(p⁻¹(U.ι(top)))).
-The two pushforward composition comparisons are identity on sections and the
-congruence comparison restricts along the equality p ∘ W.ι = U.ι ∘ h.
-Use naturality to move the inverse target comparison past the counit and the
-specified a.inv restriction. Use B.components to expand the final section
-comparison and cancel B.comparison.inv against B.comparison.hom. Compose all
-remaining restrictions by presheaf functoriality. The resulting restriction
-is the equality W.ι(top)=W. Expand A.components and use naturality of t to
-obtain A.sections.hom followed by evaluation of t on U. The calculation uses
-neither injectivity nor the augmentations. For U empty all section groups are
-zero; for p an identity it is the cancellation of the restriction comparisons. -/
+and their prescribed restriction comparisons. -/
 theorem restrictionResolutionLift_sections {X Y : Scheme.{uBC}}
     (p : Y ⟶ X) {M : X.Modules} {N : Y.Modules}
     (I : InjectiveResolution M) (J : InjectiveResolution N)

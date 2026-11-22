@@ -16,9 +16,8 @@ public import WeilConjectures.Mathlib.RingTheory.Smooth.Local
 /-!
 # Local rings of the zero locus of a function, and regular points
 
-Auxiliary results for the local chart of blueprint `lemma-punctured-surface-punctured-curve--1`,
-where the zero locus `V(t)` of a function `t` with germ in `𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is shown to
-be a regular divisor near `x`.
+Auxiliary results for the local chart in which the zero locus `V(t)` of a function `t` with germ
+in `𝔪ₓ \ 𝔪ₓ²` on a smooth scheme is shown to be a regular divisor near `x`.
 
 - The local ring of `V(f) ⊆ Y` at `z` is `𝒪_{Y,z} ⧸ (f)`
   (`AlgebraicGeometry.Scheme.ker_stalkMap_zeroLocusSubschemeι_singleton`,
@@ -29,6 +28,10 @@ be a regular divisor near `x`.
   `AlgebraicGeometry.Scheme.Hom.isRegularLocalRing_stalk_of_mem_smoothLocus`).
 - A locally noetherian scheme with domain local rings has irreducible open neighbourhoods
   (`AlgebraicGeometry.Scheme.exists_mem_isPreirreducible_of_isDomain_stalk`).
+
+## References
+
+* [Stacks, Tag 00TV]
 -/
 
 @[expose] public section
@@ -102,9 +105,9 @@ theorem Scheme.Opens.exists_zeroLocusSubschemeι_eq {X : Scheme.{u}} (U : X.Open
   rw [U.ι_image_basicOpen_topIso_inv, X.mem_basicOpen _ _ w.2] at h
   exact (IsLocalRing.mem_maximalIdeal _).mp hw h
 
-/-- **Regular points are smooth over a perfect field** (Stacks `00TV`). Let `X` be locally of
-finite type over a perfect field `K`. Every point of `X` whose local ring is regular lies in the
-smooth locus of `X ⟶ Spec K`. -/
+/-- **Regular points are smooth over a perfect field.** Let `X` be locally of finite type over a
+perfect field `K`. Every point of `X` whose local ring is regular lies in the smooth locus of
+`X ⟶ Spec K`. -/
 theorem Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing_of_perfectField {K : Type u} [Field K]
     [PerfectField K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] {x : X}
     [IsRegularLocalRing (X.presheaf.stalk x)] : x ∈ f.smoothLocus := by

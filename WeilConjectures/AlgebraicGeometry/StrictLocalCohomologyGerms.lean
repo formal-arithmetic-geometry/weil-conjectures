@@ -12,8 +12,16 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalNeighbourhoodGeometry
 
 /-! # Canonical derived sections and strict-local cohomology germs
 
-Source: Stacks Project, Tags 03Q8 and 03Q9. The derived Hom comparison is the
-explicit free-abelian-sheaf construction used in AbelianHigherDirectImagePresheaf.
+## Implementation details
+
+The derived Hom comparison is the explicit free-abelian-sheaf construction used in
+`AbelianHigherDirectImagePresheaf`.
+
+## References
+
+* [Stacks, Tag 03Q8]
+* [Stacks, Tag 03Q9]
+* [Stacks, Tag 03QO]
 -/
 
 @[expose] public section
@@ -112,8 +120,7 @@ noncomputable def strictLocalDerivedHomToHomology
 
 end DerivedSections
 
-/-- The degree-n derived-sections presheaf of a bounded below derived sheaf.
-Source: Stacks, Tag 03Q8. -/
+/-- The degree-n derived-sections presheaf of a bounded below derived sheaf. -/
 noncomputable def strictLocalCohomologyPresheaf {S : Scheme.{v}}
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) : S.Etaleᵒᵖ ⥤ AddCommGrpCat.{v + 1} :=
@@ -122,8 +129,7 @@ noncomputable def strictLocalCohomologyPresheaf {S : Scheme.{v}}
 
 /-- The canonical map from derived sections to sections of the cohomology sheaf.
 It takes a derived morphism to its degree-zero homology, evaluates the free generator,
-and uses the homology shift isomorphism. No sheafification isomorphism is chosen.
-Source: Stacks, Tag 03Q8. -/
+and uses the homology shift isomorphism. -/
 noncomputable def strictLocalCohomologyGermMap {S : Scheme.{v}}
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) : strictLocalCohomologyPresheaf L n ⟶
@@ -133,8 +139,7 @@ noncomputable def strictLocalCohomologyGermMap {S : Scheme.{v}}
     (((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso n 0 n (add_zero n)).hom.app L).hom
 
 /-- The stalk-to-source isomorphism for the strict-local mate, using the unique germ
-restriction and commutation of exact inverse image with homology.
-Source: Stacks, Tags 03Q9 and 03QO. -/
+restriction and commutation of exact inverse image with homology. -/
 noncomputable def strictLocalCohomologySourceIso {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -158,8 +163,7 @@ noncomputable def strictLocalCohomologySourceIso {S : Scheme.{v}}
         (upperStar AddCommGrpCat.{v + 1}
           (Scheme.strictLocalizationToBase s)) n).app L)
 
-/-- Restrict the derived-sections presheaf to the small pointed affine representatives.
-Source: Stacks, Tag 03Q9, first proof paragraph. -/
+/-- Restrict the derived-sections presheaf to the small pointed affine representatives. -/
 noncomputable def strictLocalCohomologyNeighbourhoodFunctor {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -169,8 +173,7 @@ noncomputable def strictLocalCohomologyNeighbourhoodFunctor {S : Scheme.{v}}
   (strictLocalNeighbourhoods s).op ⋙ strictLocalCohomologyPresheaf L n
 
 /-- Canonical source legs: a presheaf germ, the canonical map to the cohomology-sheaf
-stalk, and the unique strict-local germ restriction transported through exact inverse image.
-Source: Stacks, Tags 03Q8 and 03Q9. -/
+stalk, and the unique strict-local germ restriction transported through exact inverse image. -/
 noncomputable def strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

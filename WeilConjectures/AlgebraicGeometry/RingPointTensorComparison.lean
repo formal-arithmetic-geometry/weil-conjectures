@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 The sheafification adjunction gives a natural tensor isomorphism after evaluation.
 This module constructs that comparison and verifies its unit normalization.
-Source: Stacks Project, More on Algebra, section-alternating-cech.
+
+## References
+
+* [Stacks, More on Algebra, Section "Alternating Čech complexes"]
 -/
 
 @[expose] public noncomputable section
@@ -24,29 +27,21 @@ open scoped TensorProduct
 
 namespace CategoryTheory.RingPointTensorComparison
 
-/-- The unique object at which module sheaves on the one-point ring site are evaluated.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+/-- The unique object at which module sheaves on the one-point ring site are evaluated. -/
 abbrev point : (Discrete PUnit.{u + 1})ᵒᵖ := op ⟨PUnit.unit⟩
 
 /-- Evaluation of a module sheaf at the unique object, expressed with explicit object and map
-fields.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+fields. -/
 abbrev pointEval (A : CommRingCat.{u}) : RingSiteModules A ⥤ ModuleCat.{u} A :=
   { obj := fun M ↦ M.val.obj point
     map := fun f ↦ f.val.app point }
 
-/-- Evaluation preserves addition of module morphisms, since their components add pointwise.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+/-- Evaluation preserves addition of module morphisms, since their components add pointwise. -/
 instance pointEval_additive (A : CommRingCat.{u}) : (pointEval A).Additive where
   map_add := by intros; rfl
 
 /-- The tensor comparison obtained from the unit of sheafification and the inverse of the sheaf
-tensor presentation.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+tensor presentation. -/
 def pointTensorMap {A : CommRingCat.{u}} (M N : RingSiteModules A) :
     M.val ⊗ N.val ⟶
       (letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
@@ -59,11 +54,7 @@ def pointTensorMap {A : CommRingCat.{u}} (M N : RingSiteModules A) :
 section
 attribute [local irreducible] SheafOfModules.tensorObjIsoSheafification
 
-/-- The comparison is invertible: every presheaf on the bottom topology is a sheaf, so the
-sheafification unit is an isomorphism. Its other factor is the underlying inverse of an
-isomorphism.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+/-- The comparison is invertible. -/
 theorem pointTensorMap_isIso {A : CommRingCat.{u}} (M N : RingSiteModules A) :
     IsIso (pointTensorMap M N) := by
   let R := CochainComplex.onePointRingSheaf A
@@ -85,9 +76,7 @@ end
 
 attribute [local irreducible] pointTensorMap
 
-/-- The evaluated tensor comparison, with inverse induced by the inverse presheaf comparison.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+/-- The evaluated tensor comparison, with inverse induced by the inverse presheaf comparison. -/
 @[irreducible]
 def pointTensorIso {A : CommRingCat.{u}} (M N : RingSiteModules A) :
     letI := SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
@@ -176,11 +165,7 @@ variable (A : CommRingCat.{u})
 local instance ringPointTensorComparisonInst1 : MonoidalCategory (RingSiteModules A) :=
   SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
 
-/-- Naturality of the evaluated tensor comparison. The two whiskering naturality formulas for the
-sheaf tensor presentation and naturality of the sheafification unit give the presheaf square;
-evaluate it at the point.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+/-- Naturality of the evaluated tensor comparison. -/
 theorem pointTensorIso_natural {M M' N N' : RingSiteModules A}
     (f : M ⟶ M') (g : N ⟶ N') (t : (pointEval A).obj M ⊗[A] (pointEval A).obj N) :
     (pointEval A).map (f ⊗ₘ g) ((pointTensorIso M N).hom t) =
@@ -189,12 +174,7 @@ theorem pointTensorIso_natural {M M' N N' : RingSiteModules A}
   rw [pointTensorIso_hom, pointTensorIso_hom]
   exact (congrArg (fun h ↦ h.app point t) (pointTensorMap_natural f g)).symm
 
-/-- The evaluated tensor comparison takes 1 tensor x to the inverse left unitor. Monoidality of
-sheafification identifies the composite with the sheaf left unitor with the presheaf left
-unitor; naturality of the adjunction unit and the triangle identity cancel sheafification. The
-ordinary module unitor takes 1 tensor x to x, and is invertible.
-Source: the tensor comparison and unit step of the localization tensor calculation,
-Stacks Project, More on Algebra, section-alternating-cech. -/
+/-- The evaluated tensor comparison takes 1 tensor x to the inverse left unitor. -/
 theorem pointTensorIso_unit (M : RingSiteModules A)
     (x : (pointEval A).obj M) :
     (pointTensorIso (ringComplexUnit A) M).hom ((1 : A) ⊗ₜ[A] x) =

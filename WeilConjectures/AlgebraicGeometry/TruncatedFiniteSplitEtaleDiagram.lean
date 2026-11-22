@@ -12,8 +12,6 @@ public import Mathlib.AlgebraicGeometry.LimitsOver
 /-!
 # Finite split truncated étale diagrams without matching covers
 
-Source: blueprint corollary-cohomology-pro-etale-affine, Detailed form proof,
-finite simplicial data and matching-cover sentences.
 -/
 
 @[expose] public section
@@ -24,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- A specified finite splitting of a truncated étale diagram.
-Source: blueprint finite-hypercover-descent, nondegenerate summands paragraph. -/
+/-- A specified finite splitting of a truncated étale diagram. -/
 structure TruncatedFiniteSplitEtaleSplitting (X : Scheme.{u}) (r : ℕ)
     (S : SimplicialObject.Truncated X.Etale r) where
   N : Fin (r + 1) → X.Etale
@@ -42,7 +39,7 @@ structure TruncatedFiniteSplitEtaleSplitting (X : Scheme.{u}) (r : ℕ)
 
 
 /-- The finite split simplicial data of a truncated hypercover, before imposing matching
-covers. Source: blueprint corollary-cohomology-pro-etale-affine, finite-data paragraph. -/
+covers. -/
 structure TruncatedFiniteSplitEtaleDiagram (X : Scheme.{u}) (r : ℕ) where
   simplicial : SimplicialObject.Truncated X.Etale r
   N : Fin (r + 1) → X.Etale

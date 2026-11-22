@@ -11,7 +11,12 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # Scalar extension and the normalized tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW.
+Scalar extension preserves the sheaf tensor product together with its normalized pairing.
+
+## References
+
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 0GMW]
 -/
 
 @[expose] public section
@@ -310,18 +315,7 @@ private theorem extendedTensor_hom_ext
   exact (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) hf).trans
     ((h W m n).trans (congrArg (fun k ↦ k.hom.app W (pure A M N W m n)) hg).symm)
 
-/-- Scalar extension preserves the sheaf tensor product and its normalized pairing.
-Source: Stacks Project, Modules on Sites, Tag 03EL, first and last equalities;
-Tag 0GMW for descent through module sheafification.
-
-Proof: Extend the bilinear pairing of the two scalar-extension units to obtain the
-forward map. For the inverse use the sectionwise formula
-(s tensor m) tensor (t tensor n) mapped to st tensor (m tensor n), and extend this
-bilinear map through both sheafifications. The tensor universal property supplies
-the inverse map. Both composites are identities on the generating original pure
-tensors; uniqueness of bilinear extension and of sheafification proves the identities.
-The same generators establish simultaneous naturality. The formula holds by construction.
-No flatness or nonzero-ring hypothesis is used. -/
+/-- Scalar extension preserves the sheaf tensor product and its normalized pairing. -/
 theorem exists_scalarTensorComparison :
     ∃ e : ∀ M N : SheafOfModules.{u} (ringSheaf A),
         changeOfRings.{u, u, u} c ((monoidalCategory A).tensorObj M N) ≅

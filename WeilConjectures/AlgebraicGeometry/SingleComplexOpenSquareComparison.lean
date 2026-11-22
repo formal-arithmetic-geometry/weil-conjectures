@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenPinnedCompositi
 
 /-! # Componentwise derived pullback square comparison
 
-Source: Stacks Project, Tags 0D5S and 08HY.
+## References
+
+* [Stacks, Tag 0D5S]
+* [Stacks, Tag 08HY]
 -/
 
 @[expose] public section
@@ -20,8 +23,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The pinned pullback-square comparison, with its component formula explicit.
-The equality transport acts on objects, as in `schemeDerivedBaseChangeMap`.
-Source: Stacks Project, Tags 0D5S and 08HY. -/
+The equality transport acts on objects, as in `schemeDerivedBaseChangeMap`. -/
 noncomputable def singleComplexOpenSquareComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

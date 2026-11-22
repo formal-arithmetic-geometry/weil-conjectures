@@ -12,7 +12,10 @@ public import
 
 /-! # Coefficient factors of the derived scalar pullback square
 
-Source: Stacks Project, Tags 03D7 and 03Q8.
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03Q8]
 -/
 
 @[expose] public section
@@ -22,8 +25,7 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The last two module pullback factors.
-Source: Stacks Project, Tag 03Q8. -/
+/-- The last two module pullback factors. -/
 noncomputable def moduleCoefficientFactor
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -37,8 +39,7 @@ noncomputable def moduleCoefficientFactor
     (higherDirectImageRawOverComplex Λ G B) ≫
     (shiftFunctor _ q).map (higherDirectImageRawOverCoefficient Λ G f)
 
-/-- The last two abelian pullback factors.
-Source: Stacks Project, Tag 03Q8. -/
+/-- The last two abelian pullback factors. -/
 noncomputable def abelianCoefficientFactor
     {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
     (A B : Over W) (f : A ⟶ B) :

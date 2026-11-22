@@ -19,6 +19,14 @@ import WeilConjectures.AlgebraicGeometry.PerfectTensorHomDuality
 import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 import WeilConjectures.AlgebraicGeometry.PerfectRightAdjointTensorHomComparison
 import Mathlib.CategoryTheory.Yoneda
+
+/-! # Core of the projection comparison for perfect complexes
+
+## References
+
+* [Stacks, Tag 0A9T]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w
@@ -41,7 +49,7 @@ private theorem projection_isIso
   rw [← hp]
   infer_instance
 
-/-- Intermediate perfect comparison clause. Source: Stacks Tag 0A9T. -/
+/-- Intermediate perfect comparison clause. -/
 theorem smoothProper_tensor_perfect_case_core
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

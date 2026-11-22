@@ -11,7 +11,12 @@ public import Mathlib.CategoryTheory.RepresentedBy
 /-!
 # Degree-zero Hom objects for finite simplicial sets
 
-Source: Stacks Project, Tags 017I, 017J, 017K and 001Q.
+## References
+
+* [Stacks, Tag 017I]
+* [Stacks, Tag 017J]
+* [Stacks, Tag 017K]
+* [Stacks, Tag 001Q]
 -/
 
 @[expose] public section
@@ -22,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite Simplicial
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Compatible maps indexed by all simplices. Source: Stacks, proof of Tag 017J. -/
+/-- Compatible maps indexed by all simplices. -/
 def SimplicialHomFamily {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (S : SSet.{t})
     (W : FormalCoproduct.{w} X.Etale) :=
@@ -30,12 +35,7 @@ def SimplicialHomFamily {X : Scheme.{u}}
     ∀ (m n : ℕ) (φ : ⦋m⦌ ⟶ ⦋n⦌) (s : S.obj (op ⦋n⦌)),
       f n s ≫ K.map φ.op = f m (S.map φ.op s)}
 
-/-- Precomposition preserves the compatibility equations. Source: Stacks, proof of Tag 017J.
-
-Proof: for each operator `φ` and simplex `s`, associativity rewrites
-`(g ≫ f n s) ≫ K.map φ.op` as `g ≫ (f n s ≫ K.map φ.op)`.
-Use the compatibility equation of `f` to obtain `g ≫ f m (S.map φ.op s)`.
-This is composition in the category of def-weil-pbc-semi-representable-object. -/
+/-- Precomposition preserves the compatibility equations. -/
 theorem SimplicialHomFamily.precomp_compatible {X : Scheme.{u}}
     {K : SimplicialObject (FormalCoproduct.{w} X.Etale)} {S : SSet.{t}}
     {W W' : FormalCoproduct.{w} X.Etale} (f : SimplicialHomFamily K S W) (g : W' ⟶ W) :
@@ -44,7 +44,7 @@ theorem SimplicialHomFamily.precomp_compatible {X : Scheme.{u}}
   intro m n φ s
   rw [Category.assoc, f.property m n φ s]
 
-/-- Precomposition of compatible families. Source: Stacks, Tag 017J. -/
+/-- Precomposition of compatible families. -/
 def SimplicialHomFamily.precomp {X : Scheme.{u}}
     {K : SimplicialObject (FormalCoproduct.{w} X.Etale)} {S : SSet.{t}}
     {W W' : FormalCoproduct.{w} X.Etale} (f : SimplicialHomFamily K S W) (g : W' ⟶ W) :
@@ -55,8 +55,7 @@ def SimplicialHomFamily.precomp {X : Scheme.{u}}
 precomposition. An object `Hom(S,K)_0` with universal family `u` is a pair `(H, u)` with
 `(simplicialHomFamilyFunctor K S).IsRepresentedBy u`;
 for `S` with finite nonempty degrees and finitely many nondegenerate simplices such a pair
-exists by `exists_simplicial_hom_object`.
-Source: Stacks, Tags 017I, 017J and 001Q. -/
+exists by `exists_simplicial_hom_object`. -/
 def simplicialHomFamilyFunctor {X : Scheme.{u}}
     (K : SimplicialObject (FormalCoproduct.{w} X.Etale)) (S : SSet.{t}) :
     (FormalCoproduct.{w} X.Etale)ᵒᵖ ⥤ Type (max u w t) where
@@ -67,7 +66,7 @@ def simplicialHomFamilyFunctor {X : Scheme.{u}}
   map_comp g h := by
     rfl
 
-/-- Restriction of a family to a simplicial subset. Source: Stacks, Tag 017J. -/
+/-- Restriction of a family to a simplicial subset. -/
 def SimplicialHomFamily.restrict {X : Scheme.{u}}
     {K : SimplicialObject (FormalCoproduct.{w} X.Etale)} {S : SSet.{t}}
     {W : FormalCoproduct.{w} X.Etale} (f : SimplicialHomFamily K S W)
@@ -78,7 +77,7 @@ def SimplicialHomFamily.restrict {X : Scheme.{u}}
 for a family `u` over `H` (the universal family of a representing pair for `S`) and a pair
 `(H', u')` representing the functor of `A`-families, the unique morphism `ρ : H ⟶ H'` with
 `u'_s ∘ ρ = u_s` for all simplices `s` of `A`, i.e. the preimage of `u.restrict A` under the
-bijection `g ↦ (u'_s ∘ g)_s` of `Functor.IsRepresentedBy`. Source: Stacks, Tags 017I and 017J. -/
+bijection `g ↦ (u'_s ∘ g)_s` of `Functor.IsRepresentedBy`. -/
 noncomputable def simplicialHomRestriction {X : Scheme.{u}}
     {K : SimplicialObject (FormalCoproduct.{w} X.Etale)} {S : SSet.{t}}
     (A : S.Subcomplex) {H H' : FormalCoproduct.{w} X.Etale}

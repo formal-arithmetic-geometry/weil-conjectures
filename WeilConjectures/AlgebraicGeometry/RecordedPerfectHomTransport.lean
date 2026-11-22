@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionCoherence
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 /-! # Canonical transport of Hom groups in the base-change system.
-Source: Stacks Project, Cohomology, Tag 0D5S and perfect.tex, Tag 09RE.
+
+## References
+
+* [Stacks, Tag 0D5S]
+* [Stacks, Tag 09RE]
 -/
 
 @[expose] public section
@@ -23,15 +27,13 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The composition lift pinned to the retained original derived-pullback counits.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The composition lift pinned to the retained original derived-pullback counits. -/
 noncomputable abbrev recordedPerfectHomComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
   recordedDerivedPullbackComposition f g
 
-/-- The counit-pinned comparison for a base-change arrow. This is the explicit
-construction used by `perfectDescentComparison`, with no independently chosen data.
-Source: Stacks Project, Tag 0D5S. -/
+/-- The counit-pinned comparison for a base-change arrow, as used by
+`perfectDescentComparison`. -/
 noncomputable def recordedPerfectHomComparison {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) :
     derivedPullback (pullback.fst s T'.hom) ≅
@@ -39,8 +41,7 @@ noncomputable def recordedPerfectHomComparison {X S : Scheme.{u}} (s : X ⟶ S)
   eqToIso (congrArg (fun k ↦ derivedPullback k) (baseChangeMap_fst s g).symm) ≪≫
     (recordedPerfectHomComposition (baseChangeMap s g) (pullback.fst s T.hom)).symm
 
-/-- Conjugate pullback on Hom by the fixed composition comparisons.
-Source: Stacks Project, Tag 09RE. -/
+/-- Conjugate pullback on Hom by the fixed composition comparisons. -/
 noncomputable def recordedPerfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q : schemeDerivedCategory X}
     (f : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -50,14 +51,14 @@ noncomputable def recordedPerfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
   (recordedPerfectHomComparison s g).hom.app P ≫
     (derivedPullback (baseChangeMap s g)).map f ≫ (recordedPerfectHomComparison s g).inv.app Q
 
-/-- -/
+/-- `recordedPerfectHomMap` sends identities to identities. -/
 @[simp] theorem recordedPerfectHomMap_id {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) (P : schemeDerivedCategory X) :
     recordedPerfectHomMap s g (𝟙 ((derivedPullback (pullback.fst s T.hom)).obj P)) =
       𝟙 _ := by
   simp [recordedPerfectHomMap]
 
-/-- -/
+/-- `recordedPerfectHomMap` is compatible with composition. -/
 @[simp] theorem recordedPerfectHomMap_comp {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q K : schemeDerivedCategory X}
     (a : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -68,7 +69,8 @@ noncomputable def recordedPerfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
       recordedPerfectHomMap s g b := by
   simp [recordedPerfectHomMap, Category.assoc]
 
-/-- -/
+/-- Two morphisms have the same image under `recordedPerfectHomMap` if and only if they
+have the same derived pullback along the base-change map. -/
 theorem recordedPerfectHomMap_eq_iff {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q : schemeDerivedCategory X}
     (a b : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -200,8 +202,7 @@ private theorem recordedHomMap_trTo {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Ove
     Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
 
 -- Reducing the fixed comparison construction exposes the conjugation formula.
-/-- Conjugated Hom transport composes along successive base-change maps.
-Source: Stacks Project, Tags 0D5S and 09RE. -/
+/-- Conjugated Hom transport composes along successive base-change maps. -/
 theorem recordedPerfectHomMap_trans {X S : Scheme.{u}} (s : X ⟶ S) {T T' T'' : Over S}
     (g : T' ⟶ T) (h : T'' ⟶ T') {P Q : schemeDerivedCategory X}
     (a : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -215,8 +216,7 @@ theorem recordedPerfectHomMap_trans {X S : Scheme.{u}} (s : X ⟶ S) {T T' T'' :
   apply ht.trans
   exact recordedTrTo_congr _ _ _ _ _ _ (baseChangeMap_comp s h g).symm a
 
-/-- Transport from one finite stage to a later finite stage.
-Source: Stacks Project, Tag 09RE. -/
+/-- Transport from one finite stage to a later finite stage. -/
 noncomputable def recordedPerfectStageMap {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k)
@@ -229,8 +229,7 @@ noncomputable def recordedPerfectStageMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (R.map (homOfLE hjk)))
       (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) f
 
-/-- Transport from a finite stage to the colimit scheme.
-Source: Stacks Project, Tag 09RE. -/
+/-- Transport from a finite stage to the colimit scheme. -/
 noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j : I} (hij : i ≤ j) {P Q : schemeDerivedCategory X}
@@ -242,7 +241,7 @@ noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (c.ι.app j))
       (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) f
 
-/-- -/
+/-- `recordedPerfectStageMap` sends identities to identities. -/
 @[simp] theorem recordedPerfectStageMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k) (P : schemeDerivedCategory X) :
@@ -255,7 +254,7 @@ noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (R.map (homOfLE hjk)))
       (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) P
 
-/-- -/
+/-- `recordedPerfectLimitMap` sends identities to identities. -/
 @[simp] theorem recordedPerfectLimitMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {X : Scheme.{u}}
     (s : X ⟶ Spec (R.obj i)) {j : I} (hij : i ≤ j) (P : schemeDerivedCategory X) :
@@ -268,18 +267,7 @@ noncomputable def recordedPerfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ C
     (Over.homMk (Spec.map (c.ι.app j))
       (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) P
 
-/-- Transport to the colimit is compatible with increasing the finite stage.
-No perfectness or finite-presentation hypothesis is needed for this coherence identity.
-Source: Stacks Project, Cohomology, Tag 0D5S, and perfect.tex, Tag 09RE.
-
-Proof: apply `derivedPullbackComposition_coherence` to the recorded counits and
-explicit composition lifts, and specialize its associativity law to the
-finite-stage base-change map, the map from the colimit scheme, and the projection
-onto X. The equality of their composite base-change map with the direct map follows
-from the pullback universal property and the cocone equation. Whisker the resulting
-comparison identity at P and Q; naturality of the composition comparison transports
-pullback of f. Cancel the adjacent comparison and inverse-comparison components.
-The resulting conjugated Hom maps are precisely the two sides below. -/
+/-- Transport to the colimit is compatible with increasing the finite stage. -/
 theorem recordedPerfectLimitMap_stage {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k) {P Q : schemeDerivedCategory X}

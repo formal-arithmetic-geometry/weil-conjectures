@@ -34,7 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- **The strict localization at an enlarged geometric point.** For a geometric point
 `s : Spec Ω ⟶ S` and an extension `a : Spec Ω' ⟶ Spec Ω` of separably closed fields, the
-strict localizations of `S` at `a ≫ s` and at `s` are isomorphic over `S` (Stacks, Tag 03PN). -/
+strict localizations of `S` at `a ≫ s` and at `s` are isomorphic over `S`. -/
 theorem exists_strictLocalization_iso_of_precomp {S : Scheme.{u}} {Ω Ω' : Type u} [Field Ω]
     [IsSepClosed Ω] [Field Ω'] [IsSepClosed Ω'] (s : Spec (.of Ω) ⟶ S)
     (a : Spec (.of Ω') ⟶ Spec (.of Ω)) :

@@ -10,7 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 /-!
 # Permanence of coverings of semi-representable étale objects
 
-Source: Stacks Project, Tag 01G4, Lemma 25.3.2.
+Coverings of semi-representable objects over the small étale site are stable under composition
+and base change.
+
+## References
+
+* [Stacks, Tag 01G4]
 -/
 
 @[expose] public section
@@ -48,20 +53,7 @@ private theorem componentSieve_mem_iff {X : Scheme.{u}}
     simpa [Category.assoc] using
       (((FormalCoproduct.hom_ext_iff _ _).mp ht).2 PUnit.unit).symm
 
-/-- Coverings of semi-representable objects are stable under composition and base change.
-Source: Stacks Project, Tag 01G4, Lemma 25.3.2.
-
-Proof: by def-weil-pbc-semi-representable-object, a covering is a covering family over each
-index of its target. For (1), fix an index of M. Compose the family of b-components over
-that index with the a-component families using lem-weil-pbc-etale-covering-composition.
-The bijection sending i to (a.f i, i) identifies the resulting family with the components
-of a ≫ b, so the composite is a covering. For (2),
-lem-weil-pbc-semi-representable-finite-limits constructs the pullback using matching pairs
-of indices and the componentwise scheme pullbacks in the étale site. Fix an index of L'.
-The projections over it are the base changes of the a-components over its image in L.
-By lem-weil-pbc-etale-covering-base-change, these are jointly surjective étale maps,
-hence a covering family. This proves the projection is a semi-representable covering.
--/
+/-- Coverings of semi-representable objects are stable under composition and base change. -/
 theorem semiRepresentableCovering_comp_baseChange {X : Scheme.{u}}
     {K L : FormalCoproduct.{w} X.Etale} (a : K ⟶ L)
     (ha : IsSemiRepresentableCovering a) :

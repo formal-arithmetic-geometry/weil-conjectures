@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSecond
 
 /-! # Base change and the two restriction squares
 
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
+## References
+
+* [Stacks, Tag 08HY]
+* [Stacks, Tag 08HZ]
 -/
 
 @[expose] public section
@@ -26,19 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace AlgebraicGeometry
 
-/-- The canonical relative restriction units and differences commute with base change.
-Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
-Proof: Expand each base-change component as the mate of the pulled-back counit.
-For an open W, the unit identity for the composite adjunction identifies the
-composite with the relative restriction unit. Naturality in the given object map
-then gives the unit square. For an inclusion of opens, expand the restriction as
-the mate of the restricted counit. Associativity of the recorded pullback
-comparisons and naturality of the counit identify its two composites with the
-base-change map. The equality of the pullback projections supplies the equality
-transport in the local component. Apply biproduct projection extensionality to
-the unit square and injection extensionality to the difference square; additive
-composition preserves the negative V restriction. This argument uses neither
-quasi-coherence nor compactness, and applies also to empty opens and zero maps. -/
+/-- The canonical relative restriction units and differences commute with base change. -/
 theorem relativeMV_restriction_squares
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

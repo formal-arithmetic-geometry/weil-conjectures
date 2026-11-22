@@ -11,8 +11,13 @@ import WeilConjectures.AlgebraicGeometry.SfbPerfectModelComplexComparison
 
 /-! # Completion of the two presentations of a coefficient model
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication; Stacks Tags 00YY,
-03CY, 093J and 093M.
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.6.11]
+* [Stacks, Tag 00YY]
+* [Stacks, Tag 03CY]
+* [Stacks, Tag 093J]
+* [Stacks, Tag 093M]
 -/
 
 @[expose] public noncomputable section
@@ -113,28 +118,7 @@ private theorem kernelComparison
     rw [hmap, (hmemR W x).mp x.property, map_zero]
 
 /-- Changing the site and constant-module presentation preserves completeness of the
-termwise completed realization of any coefficient complex. There is no perfectness,
-boundedness, maximality or completeness assumption on the coefficient ring.
-
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, coefficient-model
-calculation; Stacks Tags 00YY, 03CY, 093J and 093M.
-
-Proof: precomposition by AsSmall.down is an equivalence of sheaf categories. Its
-constant-sheaf comparison identifies the positive quotient diagrams, including every
-transition. Preservation of limits gives the canonical isomorphism from the transported
-completed coefficient ring to ConstantCompletion.completed. Its nth projection is the
-transported nth projection followed by the constant-sheaf comparison. In particular the
-first projections commute. The associated module equivalence therefore identifies their
-kernel ideals. Constant module realization is sheafification of the same constant
-module presheaf in both presentations. The universal property of sheafification gives
-its comparison, normalized on constant sections. Uniqueness of left adjoints to scalar
-restriction identifies the two scalar-extension functors. Apply these comparisons
-termwise to P and localize. The canonical localization preimage is isomorphic to the
-original complex; exact transport preserves this isomorphism. On each slice, the site
-and coefficient equivalences identify the kernel sections, section localizations and
-derived internal Hom. They preserve and reflect zero objects. Thus the local vanishing
-conditions defining the two displayed completeness predicates are equivalent. This
-argument applies to unbounded P, I=0, I=A, and the empty scheme. -/
+termwise completed realization of any coefficient complex. -/
 theorem sfbPerfectModel_completion_transport (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] (I : Ideal A)
     (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :

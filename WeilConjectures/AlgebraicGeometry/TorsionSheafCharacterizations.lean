@@ -22,8 +22,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 /-!
 # Characterizations of torsion abelian étale sheaves
 
-Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement, and
-`sec-abelian-varieties/def-weil-pbc-etale-sheaves`.
+## References
+
+* [Stacks, Tag 03PU]
+* [Stacks, Tag 03PR]
 -/
 
 @[expose] public section
@@ -34,23 +36,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: blueprint `sec-proper-base-change/sk-def-pbc`, statement.
-
-Proof: (1) Exactness of geometric stalks (definition-torsion-sheaves--3) identifies
-stalks of the kernel of multiplication by n with n-torsion in the stalk. Commutation with
-colimits (definition-torsion-sheaves--3) identifies the stalk of the canonical colimit map
-with inclusion of the union of these subgroups, namely the torsion subgroup.
-(2) Conservativity (lemma-weil-pbc-geometric-stalk-conservative, Stacks 03PU) gives the first
-condition iff every stalk is torsion. (3) Locally annihilated sections give torsion stalks:
-represent a germ on a pointed neighbourhood and lift its geometric point to the covering
-(definition-torsion-sheaves--3, Stacks 03PR).
-(4) Conversely, choose a geometric point over each point of U; its germ is annihilated by a
-positive integer. Equality with zero in the filtered stalk is witnessed on a smaller pointed
-neighbourhood. These neighbourhoods cover U. The cofiltered-neighbourhood and composition
-facts are definition-torsion-sheaves--3 and
-definition-torsion-sheaves--3. Condition (2) is the recorded local-section
-predicate `CategoryTheory.Sheaf.IsTorsion` (a covering sieve on whose arrows the restriction
-has finite additive order), condition (3) is `IsAddTorsion` of every geometric stalk. -/
+/-- Characterizations of torsion abelian étale sheaves: `IsTorsionAbelianSheaf F` holds iff
+`F` satisfies the local-section predicate `CategoryTheory.Sheaf.IsTorsion` (a covering sieve on
+whose arrows the restriction has finite additive order), iff every geometric stalk satisfies
+`IsAddTorsion`. -/
 theorem isTorsionAbelianSheaf_characterizations {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (IsTorsionAbelianSheaf F ↔ F.IsTorsion) ∧
@@ -209,18 +198,9 @@ private theorem ratModInt_dyadic_not_killed (k : ℕ) (hk : 0 < k) :
 
 -- The inherited statement names a nondependent index binder `n`.
 set_option linter.unusedVariables false in
-/-- Source: blueprint `sec-abelian-varieties/def-weil-pbc-etale-sheaves`, Q/Z example.
-
-Proof: (5) The constant sheaf has geometric stalk Q/Z by
-definition-torsion-sheaves--3, hence is torsion by the characterization above.
-(6) The coproduct of positive-integer-indexed copies of T is étale over T, with disjoint open
-coprojections (definition-torsion-sheaves--3). The sheaf condition gives the canonical
-restriction isomorphism onto the product of sections on T: off-diagonal overlaps are empty,
-and sections on the empty scheme form the zero group.
-(7) For nonempty T, a geometric stalk identifies the composite of the constant-presheaf unit
-and the germ map with the identity of Q/Z. Thus the unit is injective. The glued section with
-coordinates 1/2^n cannot be killed by any k > 0, since 2^n > k for some n, and k/2^n is then
-not an integer. The universe lift only places Q/Z in the sheaf's value universe. -/
+/-- The constant sheaf `ℚ/ℤ` is torsion, but for nonempty `T` its sections over the countable
+disjoint union of copies of `T` (the product of countably many copies of `ℚ/ℤ`) contain a
+non-torsion element. -/
 theorem constant_ratModIntSheaf_sections_not_torsion (T : Scheme.{u}) :
     IsTorsionAbelianSheaf ((constantSheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (AddCommGrpCat.of (ULift.{u + 1} (ℚ ⧸ AddSubgroup.zmultiples (1 : ℚ))))) ∧

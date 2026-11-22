@@ -10,24 +10,25 @@ public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
+/-!
+# Geometric points of a zero-dimensional base change
+
+## References
+
+* [Stacks, Tag 00KH]
+* [Stacks, Tag 00FV]
+* [Stacks, Tag 01JT]
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Geometric data for a zero-dimensional base change, independently of any sheaf.
-Source: Stacks Project, Tags 00KH, 00FV and 01JT; the point description in
-lem-weil-pbc-zero-dimensional-base-change-points.
-
-Proof: Nullstellensatz identifies every residue field of C with k. The local
-Artinian pieces remain local Artinian after extending to k', with residue field k'.
-Thus projection induces a bijection on points, and C' has dimension at most zero.
-Finite type and separatedness are stable under base change, giving IsCurve f'.
-At each point of C', the canonical residue-field morphism Spec k' → C' gives the
-chosen geometric point. For the empty scheme the equivalence and family are empty.
-An arbitrary cartesian square is isomorphic to the canonical fibre product, so
-transport these constructions across that isomorphism. -/
+/-- Geometric data for a zero-dimensional base change, independently of any sheaf: the base
+change is again a curve of dimension at most zero, the projection is a bijection on points,
+and every point of `C'` is the image of a geometric point `Spec k' ⟶ C'`. -/
 theorem zeroDimensional_baseChange_geometric_points {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] {C C' : Scheme.{u}}
     (f : C ⟶ Spec (.of k)) [IsCurve f] (hC : topologicalKrullDim C ≤ 0)

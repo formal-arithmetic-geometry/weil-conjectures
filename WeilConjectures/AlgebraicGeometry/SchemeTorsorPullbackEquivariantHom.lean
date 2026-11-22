@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleConstantSheafPullbackUnitContinuou
 /-!
 # Equivariant morphisms for scheme torsor inverse image
 
-Source: Stacks Project Tags 03Q1 (4), 03AG and 0A5G.
+## References
+
+* [Stacks, Tags 03Q1, 03AG, 0A5G]
 -/
 
 @[expose] public section
@@ -78,21 +80,7 @@ private theorem baseChange_smulHom
   rw [← Category.assoc, hb]
   simp only [Category.assoc, hact]
 
-/-- An equivariant map from the inverse-image sheaf to the represented torsor.
-Source: Stacks Project Tags 03Q1 (4), 03AG and 0A5G, final paragraph.
-
-Proof: The adjunction and Yoneda identify inverse image of the sheaf represented by
-`t` with the sheaf represented by its base change. Compose its canonical comparison
-with Yoneda of `e`, then with the given torsor identification `hrepr`. This supplies a
-sheaf morphism without any invertibility assertion. The representable comparison
-carries the unit of a section to its base change. For a constant coefficient `m`,
-`hact` and the constant-sheaf comparison's unit identity give the displayed equation.
-Every coefficient section is locally the unit of a constant presheaf section: use
-sheafification's local representation property. On that cover the preceding equation
-applies. Pull the cover back along `i`, use naturality of the two units and of the
-morphism and actions, and use separatedness of `R.sheaf` to glue the equalities.
-The inverse of the coefficient comparison in `ofIso` cancels its forward map, leaving
-exactly the coefficient adjunction unit in the formula. -/
+/-- An equivariant map from the inverse-image sheaf to the represented torsor. -/
 theorem scheme_torsor_pullback_equivariant_hom
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)
     (M : Type (u + 1)) [AddCommGroup M] [Finite M]

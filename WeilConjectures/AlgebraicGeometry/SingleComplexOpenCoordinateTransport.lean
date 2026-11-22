@@ -13,7 +13,13 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCoordinateStalkEquival
 
 /-! # Transporting K-flat coordinates to opens
 
-Source: Stacks Project, Tags 0DJ9, 08HY, and 08FE.
+## References
+
+* [Stacks, Tag 0DJ8]
+* [Stacks, Tag 0DJ9]
+* [Stacks, Tag 08HY]
+* [Stacks, Tag 08FE]
+* [Stacks, Tag 06YC]
 -/
 
 @[expose] public section
@@ -23,28 +29,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Transport one K-flat coordinate system to compatible target opens.
-This concerns the comparison in these coordinates, not the universally quantified
-stalk condition and not the base-change arrow.
-Source: Stacks Project, perfect.tex, Tag 0DJ9, first paragraph, and equation-bc
-preceding Tag 0DJ8; Cohomology, Tag 06YC.
-
-Proof: Restrict P and N termwise to U and U'. Exact restriction transports e and e'
-through the localization comparison. K-flatness of P|U follows from the stalk
-criterion: its stalk at a point of U is the original K-flat stalk. The pinned
-left-derived counit computes tensor pullback on this K-flat complex. The ordinary
-pullback composition comparison and the open-pullback adjunction comparison
-identify the restriction of t with a map from tensor pullback of P|U to N|U'.
-The leftDerivedUnique factorization equation identifies its representing equation
-with the displayed constructed restricted coefficient. These give coordinates d.
-For z in U', use open-immersion stalk isomorphisms on all four local rings. Their
-compatibility with the scheme stalk maps identifies the tensor-product algebra and
-its map to C, and the stalks of P|U and N|U' identify with those of P and N.
-The localized tensor comparison is natural under these ring and complex
-isomorphisms. The tensor-pullback stalk comparison and the homology map of the
-restricted t commute with the same identifications. Thus the two stalkComparison
-maps are conjugate by isomorphisms; invertibility is equivalent. Empty opens have
-no points, and this computation imposes no boundedness or affineness. -/
+/-- Transport one K-flat coordinate system to compatible target opens. -/
 theorem singleComplexOpen_coordinates_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
