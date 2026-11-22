@@ -156,7 +156,8 @@ variable {T₀ : ∀ X : Scheme.{u}, Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧}
   {pull₀ : ∀ {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     (f : X ⟶ Y),
-    boundedConstructibleUpperStar Λ ℓ f ⋙ T₀ X.left ≅ T₀ Y.left ⋙ boundedConstructibleUpperStar Λ' ℓ f}
+    boundedConstructibleUpperStar Λ ℓ f ⋙ T₀ X.left ≅
+      T₀ Y.left ⋙ boundedConstructibleUpperStar Λ' ℓ f}
   (C₀ : BoundedConstructibleCoefficientChange Λ Λ' ℓ P P' (fun X _ _ _ ↦ T₀ X.left) pull₀)
 
 /-- (Shriek) for the open immersion of the trivial compactification `X ⟶[𝟙] X ⟶[f] Y` of a proper

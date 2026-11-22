@@ -18,7 +18,8 @@ defines the composition isomorphism
 `R(f ≫ g)_! ≅ Rf_!^c ⋙ Rg_!^{c'}` of `P`
 (`BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications`), assembled as the
 composition isomorphisms of the coefficient rings `𝒪_E` and `ℚ̄_ℓ`
-(`boundedConstructibleLowerShriekComp_padicIntegers`, `boundedConstructibleLowerShriekComp_padicAlgCl`):
+(`boundedConstructibleLowerShriekComp_padicIntegers`,
+`boundedConstructibleLowerShriekComp_padicAlgCl`):
 the independence of the compactification for the composite compactification
 `X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, the composition isomorphisms of `j_!` and `Rf_*`, and the inverse of
 the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`.
@@ -141,8 +142,9 @@ lemma squareCompatible_openImmersionLowerShriekComp {U V W : Over (Spec (.of k))
 
 /-- **The composition isomorphisms of `Rf_!` are compatible with the coefficient comparisons**:
 under (Shriek) along the compactifications, the composition isomorphism
-`R(f ≫ g)_! ≅ Rf_!^c ⋙ Rg_!^{c'}` (`BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications`)
-over `Λ` corresponds to the one over `Λ'`. -/
+`R(f ≫ g)_! ≅ Rf_!^c ⋙ Rg_!^{c'}`
+(`BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications`) over `Λ` corresponds
+to the one over `Λ'`. -/
 lemma squareCompatible_lowerShriekCompOfCompactifications (hP : P.IsIsoRefinementPushforward)
     (hP' : P'.IsIsoRefinementPushforward) (c : Compactification f.left)
     (c' : Compactification g.left) (d : Compactification (c.overG ≫ c'.overI).left)
@@ -152,7 +154,8 @@ lemma squareCompatible_lowerShriekCompOfCompactifications (hP : P.IsIsoRefinemen
     NatTrans.SquareCompatible (C.shriekOfCompactification (compactificationOverField (f ≫ g)))
       (Functor.pasteSquareIso (C.shriekOfCompactification c) (C.shriekOfCompactification c'))
       (BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications hP c c' d hd).hom
-      (BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications hP' c c' d hd).hom := by
+      (BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications hP' c c' d
+        hd).hom := by
   have : IsOpenImmersion (c.overI ≫ d.overI).left := by
     rw [Over.comp_left]
     infer_instance

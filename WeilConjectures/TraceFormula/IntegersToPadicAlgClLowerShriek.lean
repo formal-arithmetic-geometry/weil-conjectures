@@ -216,7 +216,8 @@ variable {X' Z Z' : Over (Spec (.of k))} [LocallyOfFiniteType X'.hom] [QuasiComp
 variable (k) in
 lemma isIso_padicIntegersPushforwardData_lowerStarOpenImmersionLowerShriekExchange
     (sq : IsPullback p i' j p') :
-    IsIso ((padicIntegersPushforwardData ℓ k E.1).lowerStarOpenImmersionLowerShriekExchange sq) := by
+    IsIso
+      ((padicIntegersPushforwardData ℓ k E.1).lowerStarOpenImmersionLowerShriekExchange sq) := by
   have h := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicIntegers
     ℓ E.1 sq
   rw [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicIntegers_eq] at h
@@ -302,7 +303,8 @@ lemma squareCompatible_lowerShriekComp_extendScalars :
   have := isIso_continuousMapPushforwardData_lowerStarOpenImmersionLowerShriekExchange ℓ E k
     (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
       (compactificationOverField g)).choose_spec
-  have h := (extendScalarsCoefficientChange ℓ E k).squareCompatible_lowerShriekCompOfCompactifications
+  have h :=
+    (extendScalarsCoefficientChange ℓ E k).squareCompatible_lowerShriekCompOfCompactifications
     (isIsoRefinementPushforward_padicIntegersPushforwardData ℓ k E.1)
     (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E) _ _ _
     (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
@@ -336,7 +338,8 @@ lemma squareCompatible_lowerShriekComp_toPadicAlgCl :
   have := isIso_continuousMapPushforwardData_lowerStarOpenImmersionLowerShriekExchange ℓ E k
     (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
       (compactificationOverField g)).choose_spec
-  have h := (toPadicAlgClCoefficientChange ℓ E k).squareCompatible_lowerShriekCompOfCompactifications
+  have h :=
+    (toPadicAlgClCoefficientChange ℓ E k).squareCompatible_lowerShriekCompOfCompactifications
     (isIsoRefinementPushforward_continuousMapPushforwardData ℓ k E)
     (isIsoRefinementPushforward_padicAlgClPushforwardData ℓ k) _ _ _
     (Compactification.exists_isPullback_overG_overI (compactificationOverField f)
@@ -346,7 +349,8 @@ lemma squareCompatible_lowerShriekComp_toPadicAlgCl :
     (congrArg₂ Functor.pasteSquareIso
       (boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k f).symm
       (boundedConstructibleLowerShriekToPadicAlgClIso_eq_shriekOfCompactification ℓ E k g).symm))
-    rfl (congrArg Iso.hom (boundedConstructibleLowerShriekComp_padicAlgCl_eq_pushforwardData ℓ k f g).symm)
+    rfl (congrArg Iso.hom
+      (boundedConstructibleLowerShriekComp_padicAlgCl_eq_pushforwardData ℓ k f g).symm)
 
 /-- **The compactly supported comparison commutes with composition** (for `𝒪_E ⟶ ℚ̄_ℓ`):
 for `f : X ⟶ Y` and `g : Y ⟶ S`, the comparison `T R(f ≫ g)_! ≅ R(f ≫ g)_! T` followed by the

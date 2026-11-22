@@ -291,20 +291,6 @@ theorem integersToPadicAlgCl_map_upperStarComp_hom_app (x : Z ⟶ Y) (h : Y ⟶ 
   simp only [boundedConstructibleUpperStarIntegersToPadicAlgClIso_hom_app, Category.assoc]
   exact toPadicAlgCl_extendScalars_map_upperStarComp_hom_app ℓ E x h K
 
-/-- In the square of adjunctions of `Adjunction.pullIsoOfComapIso`, the unit of `U₂ ⊣ L₂` at
-`E₂ K` is the unit of `U₁ ⊣ L₁` followed by `pushHomOfComapIso` and the pullback comparison. -/
-lemma _root_.CategoryTheory.Adjunction.map_unit_comp_pushHomOfComapIso_app
-    {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Category* B']
-    {E₁ : A ⥤ B} {Res₁ : B ⥤ A} (adj₁ : E₁ ⊣ Res₁) {E₂ : A' ⥤ B'} {Res₂ : B' ⥤ A'}
-    (adj₂ : E₂ ⊣ Res₂) {U₁ : A' ⥤ A} {L₁ : A ⥤ A'} (adjR : U₁ ⊣ L₁) {U₂ : B' ⥤ B}
-    {L₂ : B ⥤ B'} (adjS : U₂ ⊣ L₂) (e : L₂ ⋙ Res₂ ≅ Res₁ ⋙ L₁) (K : A') :
-    E₂.map (adjR.unit.app K) ≫ (Adjunction.pushHomOfComapIso adj₁ adj₂ e).app (U₁.obj K) ≫
-        L₂.map ((Adjunction.pullIsoOfComapIso adj₁ adj₂ adjR adjS e).hom.app K) =
-      adjS.unit.app (E₂.obj K) := by
-  rw [Adjunction.pushHomOfComapIso_eq_mateEquiv adj₁ adj₂ adjR adjS, ← Category.assoc,
-    unit_mateEquiv]
-  simp
-
 /-- The unit compatibility for the coefficient change `𝒪_E ⟶ E`. -/
 lemma extendScalars_map_unit_app (h : Y ⟶ X) (K : Dᵇc(X.left)⟦𝒪⟧) :
     (boundedConstructibleExtendScalars X.left ℓ E).map
@@ -409,29 +395,6 @@ lemma lowerShriekIntegersToPadicAlgClIso_hom_app_congr {a b : Y ⟶ X} (e : a = 
   subst e
   simp
 
-/-- `integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app`, for
-`lowerShriekIntegersToPadicAlgClIso`. -/
-lemma map_lowerShriekIsoLowerStar_inv_app_comp_lowerShriekIntegersToPadicAlgClIso_hom_app
-    (h : Y ⟶ X) [IsProper h.left] (M : Dᵇc(Y.left)⟦𝒪⟧) :
-    (𝐓 X).map ((boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E.1 h).inv.app M) ≫
-        (lowerShriekIntegersToPadicAlgClIso ℓ E h).hom.app M =
-      (boundedConstructibleLowerStarIntegersToPadicAlgClIso ℓ E h).hom.app M ≫
-        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h).inv.app ((𝐓 Y).obj M) :=
-  integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app ℓ E h M
-
-/-- `integersToPadicAlgCl_map_lowerShriekComp_hom_app`, for
-`lowerShriekIntegersToPadicAlgClIso`. -/
-lemma map_lowerShriekComp_hom_app_comp_lowerShriekIntegersToPadicAlgClIso_hom_app (f : Y ⟶ X)
-    (g : X ⟶ Z) (M : Dᵇc(Y.left)⟦𝒪⟧) :
-    (𝐓 Z).map ((boundedConstructibleLowerShriekComp_padicIntegers ℓ E.1 f g).hom.app M) ≫
-        (lowerShriekIntegersToPadicAlgClIso ℓ E g).hom.app
-          ((PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 f).obj M) ≫
-        (boundedConstructibleLowerShriek ℓ g).map
-          ((lowerShriekIntegersToPadicAlgClIso ℓ E f).hom.app M) =
-      (lowerShriekIntegersToPadicAlgClIso ℓ E (f ≫ g)).hom.app M ≫
-        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.app ((𝐓 Y).obj M) :=
-  integersToPadicAlgCl_map_lowerShriekComp_hom_app ℓ E f g M
-
 /-- **The compactly supported comparison commutes with the composition isomorphisms
 `Rh_! ⋙ Ra_{X!} ≅ Ra_{Y!}` to the point**, by
 `integersToPadicAlgCl_map_lowerShriekComp_hom_app`. -/
@@ -451,8 +414,7 @@ theorem integersToPadicAlgCl_map_lowerShriekCompToPoint_hom_app (h : Y ⟶ X)
     (lowerShriekIntegersToPadicAlgClIso ℓ E (toPoint X))
     (lowerShriekIntegersToPadicAlgClIso ℓ E (h ≫ toPoint X))
     (lowerShriekIntegersToPadicAlgClIso ℓ E (toPoint Y)) M
-    (map_lowerShriekComp_hom_app_comp_lowerShriekIntegersToPadicAlgClIso_hom_app ℓ E h
-      (toPoint X) M)
+    (integersToPadicAlgCl_map_lowerShriekComp_hom_app ℓ E h (toPoint X) M)
     (lowerShriekIntegersToPadicAlgClIso_hom_app_congr ℓ E (comp_toPoint h) M)
 
 /-- **The pullback on compactly supported cohomology commutes with the extension of scalars**:
@@ -486,8 +448,7 @@ theorem integersToPadicAlgCl_map_compactPullback_app (h : Y ⟶ X) [IsProper h.l
   · intro K
     exact integersToPadicAlgCl_map_unit_app ℓ E h K
   · intro M
-    exact
-      map_lowerShriekIsoLowerStar_inv_app_comp_lowerShriekIntegersToPadicAlgClIso_hom_app ℓ E h M
+    exact integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app ℓ E h M
   · intro M
     set_option maxRecDepth 20000 in
     exact integersToPadicAlgCl_map_lowerShriekCompToPoint_hom_app ℓ E h M

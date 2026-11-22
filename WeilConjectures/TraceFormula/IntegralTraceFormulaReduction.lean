@@ -71,16 +71,6 @@ noncomputable def etaleReductionFrobenius {Φ : X ⟶ X}
         ((etaleReduction ℓ E.1 n X).obj K) ⟶ (etaleReduction ℓ E.1 n X).obj K :=
   (etaleReductionUpperStarIso ℓ E.1 n Φ).inv.app K ≫ (etaleReduction ℓ E.1 n X).map θ
 
-omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- The iterates `Φ_m` of an endomorphism of `X` over `Spec k` are the iterates of the underlying
-morphism of schemes. -/
-lemma frobeniusIterate_left (Φ : X ⟶ X) (m : ℕ) :
-    (frobeniusIterate Φ m).left = ProEtale.iterateHom Φ.left m := by
-  induction m with
-  | zero => rw [frobeniusIterate_zero, ProEtale.iterateHom_zero]; rfl
-  | succ m ih => rw [frobeniusIterate_succ, ProEtale.iterateHom_succ, Over.comp_left, ih]
-
 attribute [local instance] boundedConstructibleBraiding DerivedCategory.braidedCategory'
 
 /-- **The integral traces reduce to the traces modulo `ℓⁿ`**: for a proper endomorphism `Φ`,
@@ -114,7 +104,7 @@ theorem trace_reduction [IsSepClosed k] {Φ : X ⟶ X} [IsProper Φ.left]
       trace (graphStalkMap K (frobeniusIterate Φ m) (frobeniusCoefficientIterate θ m) x.1
         x.2) = (integersUnitEndRingHom ℓ k E a).asHom ∧
       trace (Etale.frobeniusStalkMap (x := x.1.left) (h := ProEtale.iterateHom Φ.left m)
-        (by rw [← frobeniusIterate_left, ← Over.comp_left, x.2])
+        (by rw [ProEtale.iterateHom, ← frobeniusIterate_left, ← Over.comp_left, x.2])
         (Etale.weilDatumIterate (etaleReductionFrobenius ℓ E n θ) m)) =
         (algebraMap (integersModPowCoeff.{u} ℓ E.1 n)
           (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n)))))

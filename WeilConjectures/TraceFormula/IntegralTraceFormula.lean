@@ -47,6 +47,8 @@ integral formula is deduced from it by the extension of scalars
 Applying `ρ_T` to both sides of the integral formula therefore gives the two sides of the
 `ℚ̄_ℓ`-formula for `(T K, ψ)`.
 
+The instance `ProEtale.CondensedRing.additive_constructibleToPadicAlgCl` takes the instances on
+the derived categories from the functor, to avoid an expensive search.
 -/
 
 @[expose] public section
@@ -100,8 +102,7 @@ noncomputable def boundedConstructibleIntegersToPadicAlgClBraided (X : Over (Spe
     constructibleToPadicAlgCl X.left ℓ E).Braided
 
 /-- The extension of scalars `ℚ̄_ℓ ⊗ᴸ_E -` on bounded constructible complexes is additive, as the
-derived extension of scalars, a triangulated functor, is. The instances on the derived categories
-are those of the functor, to avoid an expensive search. -/
+derived extension of scalars, a triangulated functor, is. -/
 instance additive_constructibleToPadicAlgCl (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] : (constructibleToPadicAlgCl X.left ℓ E).Additive where
   map_add {_ _ f g} := (boundedConstructible _).ι.map_injective (by
@@ -116,44 +117,6 @@ instance additive_boundedConstructibleIntegersToPadicAlgCl (X : Over (Spec (.of 
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] : (𝐓 X).Additive :=
   inferInstanceAs (boundedConstructibleExtendScalars X.left ℓ E ⋙
     constructibleToPadicAlgCl X.left ℓ E).Additive
-
-/-- Let `F : C ⥤ D` be an exact functor between abelian categories, `C` being monoidal. An
-endomorphism of the unit of `D(C)` (the unit of `C` placed in degree `0`) which is killed by the
-left derived functor `L(F)` vanishes, provided `F` kills no nonzero endomorphism of the unit of
-`C`. The instance arguments are implicit, so that they are determined by unification with `f`
-and `h` rather than by a search. -/
-lemma _root_.CategoryTheory.Functor.eq_zero_of_leftDerivedFunctor_map_eq_zero.{wC, wD}
-    {C D : Type*} {_ : Category C} {_ : Category D} {_ : Abelian C} {_ : Abelian D}
-    {_ : HasDerivedCategory.{wC} C} {_ : HasDerivedCategory.{wD} D}
-    {_ : MonoidalCategory C} {_ : MonoidalPreadditive C} {_ : HasCountableCoproducts C}
-    {_ : HasColimitsOfShape ℤ C} {_ : HasExactColimitsOfShape ℤ C}
-    {_ : ∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂}
-    {_ : ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄}
-    {_ : ∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃}
-    {_ : ∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃}
-    {_ : ∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)}
-    {_ : ∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)}
-    {_ : Abelian.HasFunctorialFlatResolution C}
-    {_ : DerivedCategory.Qh.HasDerivedMonoidalCategory
-      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))}
-    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-    (f : 𝟙_ (DerivedCategory C) ⟶ 𝟙_ (DerivedCategory C))
-    (hF : ∀ u : 𝟙_ C ⟶ 𝟙_ C, F.map u = 0 → u = 0) (h : F.leftDerivedFunctor.map f = 0) :
-    f = 0 := by
-  let G := HomologicalComplex.single C (ComplexShape.up ℤ) 0 ⋙
-    HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
-  let e : DerivedCategory.singleFunctor C 0 ≅ G :=
-    (DerivedCategory.singleFunctorIsoCompQ C 0).trans
-      (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso C).symm)
-  have : G.Full := Functor.Full.of_iso e
-  obtain ⟨u, rfl⟩ := G.map_surjective (X := 𝟙_ C) (Y := 𝟙_ C) f
-  have h₁ := NatIso.map_eq_zero_of_map_eq_zero
-    (Functor.isoWhiskerRight e.symm F.leftDerivedFunctor ≪≫
-      Functor.isoWhiskerLeft _ F.leftDerivedFunctorIsoMapDerivedCategory ≪≫
-        F.mapDerivedCategorySingleFunctor 0) (f := u) h
-  have h₂ : F.map u = 0 := (DerivedCategory.singleFunctor D 0).map_injective (by
-    rw [← Functor.comp_map, h₁, Functor.map_zero])
-  rw [hF u h₂, Functor.map_zero]
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- For `k` separably closed, the extension of scalars `ℚ̄_ℓ ⊗_{𝒪_E} -` kills no nonzero
@@ -271,8 +234,7 @@ theorem integersToPadicAlgCl_map_compactPullback_app_comp {h : X ⟶ X} [IsPrope
         (compactPullback ℓ h).app ((𝐓 X).obj K) ≫
           (boundedConstructibleLowerShriek ℓ (toPoint X)).map
             ((boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E h).inv.app K ≫
-              (𝐓 X).map v) :=
-by
+              (𝐓 X).map v) := by
   refine map_compactPullback_comp_aux (PadicIntegersRingObj.compactPullback ℓ E.1 h)
     (compactPullback ℓ h) (boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E h)
     (lowerShriekIntegersToPadicAlgClIso ℓ E (toPoint X)) K ?_ v
