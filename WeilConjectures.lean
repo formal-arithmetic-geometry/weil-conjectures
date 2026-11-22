@@ -25216,8 +25216,6 @@ public import WeilConjectures.Topology.SpectralConstructibleFiniteIntersection
 public import WeilConjectures.Topology.SpectralDirectedLimit
 public import WeilConjectures.Topology.SpectralGeneralizations
 public import WeilConjectures.Topology.SpectralLimitConstructibleClosed
-public import WeilConjectures.Topology.SpectralLimitDescendInclusionRelations
-public import WeilConjectures.Topology.SpectralLimitDescendOpens
 public import WeilConjectures.Topology.SpectralSpace.ClopenExtension
 public import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 public import WeilConjectures.Topology.SpectralSpace.Constructible
