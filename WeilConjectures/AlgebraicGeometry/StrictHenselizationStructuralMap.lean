@@ -29,7 +29,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- There is a morphism `S_(s) ⟶ S` equal, for every representative affine pointed
 neighbourhood `(V, v)`, to the limit leg `S_(s) ⟶ Spec Γ(V, ⊤)`, followed by the
-identification `Spec Γ(V, ⊤) ≅ V` and the structure morphism `V ⟶ S`.
 identification `Spec Γ(V, ⊤) ≅ V` and the structure morphism `V ⟶ S`. -/
 theorem exists_strictHenselizationStructuralMap
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

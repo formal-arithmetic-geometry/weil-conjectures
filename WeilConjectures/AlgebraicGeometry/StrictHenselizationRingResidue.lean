@@ -44,7 +44,6 @@ namespace AlgebraicGeometry
 closure: the point evaluation on `Scheme.strictHenselization`, precomposed with the canonical
 colimit comparison. Its kernel is the maximal ideal, and followed by the inclusion into Ω it
 recovers every chosen pointed neighbourhood through the legs of
-`Scheme.strictHenselizationCone`.
 `Scheme.strictHenselizationCone`. -/
 private theorem strictHenselizationRingPointedMap
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]

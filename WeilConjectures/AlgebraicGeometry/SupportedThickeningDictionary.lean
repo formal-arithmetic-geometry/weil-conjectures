@@ -53,7 +53,6 @@ private theorem restriction_iso_equation
 /-- The annihilation and isomorphism portions of the thickening dictionary: a coherent system
 `(F n, φ n)` on the thickenings whose terms are killed by the ideal of `Z` is, termwise and
 compatibly with the transition maps, the system of a coherent formal module `M` supported on
-`Z`; any algebraisation `G` of `M` restricts to the given system.
 `Z`; any algebraisation `G` of `M` restricts to the given system. -/
 theorem supportedThickening_dictionary
     (A : Type u) [CommRing A] [IsNoetherianRing A]

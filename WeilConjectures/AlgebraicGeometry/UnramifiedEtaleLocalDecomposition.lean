@@ -26,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 /-- A separated morphism unramified at finitely many points over `s` admits an étale
-A separated morphism unramified at finitely many points over `s` admits an étale
 neighbourhood with a clopen decomposition into closed immersions through the chosen point
 and a remainder whose fibre contains no point mapping to a listed point. The finite family
 is indexed by pairs `(i,j)` with `i : Fin n` and `j : Fin (m i)`. -/
