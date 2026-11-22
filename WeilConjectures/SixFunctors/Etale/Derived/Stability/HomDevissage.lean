@@ -177,16 +177,18 @@ lemma constructibleFiniteTor_derivedHom_rightDerivedLowerStar_rightDerivedLowerS
     hP hjM
   have hjH := constructibleFiniteTor_rightDerivedLowerStar Λ (j ≫ g ≫ aX) (g ≫ aX) j rfl hH
   -- `Rj_* RHom(P, Rj^! M) ≅ RHom(Rj_! P, M)`
+  obtain ⟨e₁⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ j P₀ M
   have h₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar
       (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj M) :=
     (constructibleFiniteTor _ Ubar).prop_of_iso
-      (((derivedHomRightDerivedLowerShriekIsoOfFinite Λ j).app (op P₀)).app M) hjH
+      e₁ hjH
   have h₂ := constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl h₁
   -- `Rg_* RHom(N, Rg^! L) ≅ RHom(Rg_! N, L)`
+  obtain ⟨e₃⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ g N L
   have h₃ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((R(g)_![ModuleCat.{u + 1} Λ]).obj N))).obj L) :=
     (constructibleFiniteTor _ X).prop_of_iso
-      (((derivedHomRightDerivedLowerShriekIsoOfFinite Λ g).app (op N)).app L) h₂
+      e₃ h₂
   -- `Rg_! ≅ Rg_*`
   exact (constructibleFiniteTor _ X).prop_of_iso
     (((RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj L).mapIso
