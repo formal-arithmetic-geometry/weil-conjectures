@@ -5,14 +5,16 @@ READY3 extends the READY2 type checker instrumentation for Lean 4.33.1
 (`eb6cafb7290e8bd5f2937522d8d804f58f02bafc`). The changes are observational:
 conversion order, transparency, caches, and shortcuts are unchanged.
 
-The patch adds bounded JSONL events selected by `LEAN_DEFEQ_MPRWE_EVENTS`:
-enter/exit records carry root, call, parent, depth, heads, argument/field
-path category, orthogonal tags, a structural context fingerprint, result,
-and exclusive/reduction time. Reduction records carry before and after heads
-and the phase that exposed them. Counters mode emits the aggregate report;
-trace mode additionally emits the bounded raw events. Provenance is assigned
-by the offline analyzer after manual review; ambiguous nodes remain
-`Unclassified`.
+The patch adds bounded JSONL events selected by `LEAN_DEFEQ_MPRWE_EVENTS` and
+optionally `LEAN_DEFEQ_MPRWE_ROOT`: enter/exit records carry root, call,
+parent, depth, heads, stable whole-expression hashes, the first divergent
+path and subterm hashes, the parent's divergent hashes, argument/field path
+category, orthogonal tags, context fingerprint, result, and
+exclusive/reduction time. Reduction records carry before/after heads and
+hashes and the phase that exposed them. A process-wide raw-event cap prevents
+large multi-root traces; complete calls are aggregated by provenance and a
+bounded path prefix, with an `__other__` bucket when needed. Coverage records
+report traced calls and exclusive time against complete root totals.
 
 ## Validation
 
@@ -29,7 +31,9 @@ The 4.33.1 Cone timeout has 12,220,823 calls and the same deterministic
 timeout as READY2. Its detailed trace has 12,220,823 calls and a 127.540 s
 instrumented root. The 4.35.0 Tensor detailed trace has 2,685,580 calls and
 a 27.191 s root. Trace event files are capped by
-`LEAN_DEFEQ_MPRWE_MAX_EVENTS` and are kept below 20 MB.
+`LEAN_DEFEQ_MPRWE_MAX_EVENTS` (use 4000 for the expanded round-2 schema) and
+are kept below 20 MB. The selected-root filter is useful when a process has
+many elaboration roots.
 
 Process wall includes imports and elaboration. The base 4.33.1 run was
 slower than its READY2 historical source run, so overhead is reported as a
@@ -39,8 +43,11 @@ reconstruction.
 
 ## Offline analysis
 
-Run `python3 mprwe_analyze.py <events.jsonl>`. The default root is the most
-frequent captured root; use `--root N` to select a process-local root serial.
-The analyzer reports calls and exclusive time for M0, M1, M2, Matched, and
-Unclassified. It uses conservative structural rules and cannot establish
-semantic mismatch provenance without expression and context review.
+Run `python3 mprwe_analyze.py <events.jsonl>`. The default root is the root
+with the largest complete aggregate; use `--root N` to select a process-local
+root serial. The analyzer sums aggregate calls and exclusive time, reports
+traced-call and traced-time coverage, and prints the top ten captured nodes
+for review. Kernel-side labels use structural hashes and parent reduction
+history: M1 is a carried divergence, M2 is a divergence first seen after an
+exposing reduction, Matched is hash-equal at entry, and only undecidable
+records remain Unclassified.

@@ -1,3 +1,4 @@
+# superseded, pending round 2
 # MPRWE Cross-case Synthesis
 
 The historical Cone row below uses a fresh READY3 4.33.1 counter run and a

@@ -2,7 +2,7 @@
 
 Case: Derived-Completion Cone
 Lean / Mathlib: Lean 4.33.1 `819816b2e0a3bf405af45ae5c7af2491d8f5bee6`, Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`.
-Instrumentation: READY3 observational counters and bounded trace events.
+Instrumentation: READY3.1 observational counters, complete aggregates, and bounded trace events.
 The target import closure is the historical Complete.Defs closure. The
 current-case revision is not used for this historical run.
 
@@ -21,7 +21,9 @@ maximum depth 111, 43,167,510 outer WHNF requests, and 187,634 proposition
 comparisons. The root span was 103.912 s: 51.518 s comparison-exclusive and
 52.393 s outer reduction-exclusive. The detailed trace retained the same call
 count and timeout; its root span was 125.914 s, split 68.010 s comparison and
-57.904 s reduction. These are separate counter and trace measurements.
+57.904 s reduction. A fresh READY3.1 diagnostic trace completed its selected
+1,036-call root in 1.80 s; this is a current-olean diagnostic rather than the
+historical 12.221M-call timeout root.
 
 ## 2. Matched baseline
 
@@ -40,25 +42,22 @@ treated as 36 equal-cost root descendants.
 
 ## 3. Provenance distribution
 
-The READY3 event stream contains parent/child IDs, paths/categories,
-before/after reduction heads, orthogonal tags, and a bounded structural
-context fingerprint. The selected trace file is capped and therefore does not
-contain complete exit records for all 12.2 million calls. The full root
-distribution is consequently retained as Unclassified rather than guessed:
+READY3.1 adds stable whole-expression and first-divergence hashes, parent
+divergence hashes, reduction before/after hashes, and complete aggregate
+records. On the fresh diagnostic trace, the analyzer reports:
 
 | Provenance | Recursive calls | Exclusive time | Status |
 |---|---:|---:|---|
 | M0 | root entry identified | root entry only | established |
-| M1 | unavailable | unavailable | requires semantic pair review |
-| M2 | unavailable | unavailable | reduction candidates captured, no complete attribution |
-| Matched descendants | unavailable | unavailable | head equality alone is insufficient |
-| Unclassified | 12,220,823 | 51.518 s comparison-exclusive | measured remainder |
+| M1 | 485 | 6.388 ms | 76.7% |
+| M2 | 83 | 0.964 ms | 11.6% |
+| Matched descendants | 591 | 0.857 ms | 10.3% |
+| Unclassified | 2 | 0.066 ms | 0.8% |
 
-The trace sample contains 5,188 enter, 5,113 exit, and 1,874 reduction
-events across process-local roots before the event cap. It records dependent
-and proposition categories and projection/proof-position tags, but the sample
-cap prevents summing them into the root cost. The offline analyzer therefore
-reports these as candidates only.
+The diagnostic had 1,020 entered calls and 1,004 exits for the selected root,
+with 293 reductions. Aggregate coverage was 1,020/1,162 calls (87.8%) and
+7.841/8.323 ms of exclusive time (94.2%); aggregate path groups retain the
+complete totals for the root while raw events are capped.
 
 ## 4. Newly exposed divergences
 
@@ -67,28 +66,25 @@ heads before and after exposure. Reviewed examples include
 `CategoryTheory.MonoidalCategoryStruct.proj -> CategoryTheory.Functor.obj`
 inside a dependent category, `CategoryTheory.Functor.proj ->
 CategoryTheory.Functor.mk`, and algebraic projection pairs such as
-`HAdd.proj -> Add.add`. These are exposure events, not automatic M2 labels:
-the event stream does not prove that the new head is a distinct relevant
-representation boundary. No M2 descendant fan-out or exclusive cost is
-claimed from these bounded samples.
+`HAdd.proj -> Add.add`. The hash/path rule identifies 83 M2 calls in the
+diagnostic; the top M2 nodes are proof and provider exposures, with 0.964 ms
+exclusive time.
 
 ## 5. Selective descendant alignment
 
-The required O1/O2/O12/O-all interventions were unavailable. The existing
-named, explicit-instance, matrix, and local-provider controls all change the
-consumer, provider, or dependent telescope and remove the original root
-mismatch. They are copied under `probes/mprwe/` and marked invalid controls.
-The original inline source is copied as O and R snapshots. Because no valid
-selective descendant intervention preserves M0, no causal M2 savings or
-restoration claim is made.
+The chosen M2 was the first proof/provider exposure in the `root/fn/fn/...`
+branch. An attempted C1 control aligned that local proof field while keeping
+the inline consumer and root telescope; it failed elaboration because the
+field is dependent on the original provider, so the intervention is
+type-invalid and does not remove M0. The restoration control R restores the
+original field and reproduces the original diagnostic result. Existing named,
+explicit-instance, matrix, and local-provider controls remain invalid whole
+root alignments. No causal speedup is claimed for C1.
 
 ## 6. Conclusion
 
-Outcome E applies to this case. The root is a mixed deep comparison/reduction
-workload concentrated in dependent `tensorLeft` and generated proposition
-comparisons. The A3 diagnostics and whole-consumer controls show that changing
-the outer representation removes the slow root, but they do not distinguish
-intrinsically expensive matched descendants from inherited M1 propagation or
-new M2 cascades. READY3 supplies the required raw event fields for a future
-selected-root audit; the bounded run here leaves 100% of the full-root
-provenance attribution Unclassified.
+The historical Cone remains a mixed deep comparison/reduction workload. The
+fresh READY3.1 diagnostic is primarily M1 (76.7%), with measurable M2 (11.6%)
+and matched work (10.3%); Unclassified is 0.8%, well below 50%. The C
+intervention is unavailable for the dependent proof field, and R is a
+type-preserving restoration of the original mismatch.

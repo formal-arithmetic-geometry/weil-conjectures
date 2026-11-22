@@ -16,9 +16,9 @@
  #include "runtime/interrupt.h"
  #include "runtime/sstream.h"
  #include "runtime/flet.h"
-@@ -24,6 +33,442 @@
+@@ -24,6 +33,578 @@
  #include "kernel/inductive.h"
-
+ 
  namespace lean {
 +namespace anatomy {
 +using clock = std::chrono::steady_clock;
@@ -96,7 +96,11 @@
 +    std::vector<top_call> top;
 +    std::map<std::string, std::pair<uint64_t, uint64_t>> path_cost;
 +    std::map<std::string, std::pair<std::string, std::string>> path_heads;
-+    uint64_t mprwe_events = 0;
++    uint64_t mprwe_raw_events = 0;
++    uint64_t mprwe_trace_calls = 0, mprwe_trace_exclusive = 0;
++    uint64_t mprwe_root_exclusive = 0;
++    struct provenance_cost { uint64_t calls = 0, exclusive = 0, reduction = 0, traced_calls = 0, traced_exclusive = 0; };
++    std::map<std::pair<std::string, std::string>, provenance_cost> mprwe_cost;
 +};
 +struct comparison;
 +static thread_local comparison * current = nullptr;
@@ -134,6 +138,7 @@
 +static thread_local totals data;
 +static thread_local unsigned reduction_depth = 0;
 +static thread_local uint64_t root_serial = 0;
++static thread_local uint64_t mprwe_global_events = 0;
 +static unsigned bucket(unsigned n) { return n < 64 ? n : 64 + (n / 64); }
 +static std::FILE * mprwe_stream() {
 +    static std::FILE * f = [] {
@@ -146,6 +151,13 @@
 +    static uint64_t n = [] {
 +        char const * p = std::getenv("LEAN_DEFEQ_MPRWE_MAX_EVENTS");
 +        return p && *p ? static_cast<uint64_t>(std::strtoull(p, nullptr, 10)) : 250000ULL;
++    }();
++    return n;
++}
++static uint64_t mprwe_root_filter() {
++    static uint64_t n = [] {
++        char const * p = std::getenv("LEAN_DEFEQ_MPRWE_ROOT");
++        return p && *p ? static_cast<uint64_t>(std::strtoull(p, nullptr, 10)) : 0ULL;
 +    }();
 +    return n;
 +}
@@ -162,20 +174,87 @@
 +static uint64_t mprwe_fingerprint(expr const & l, expr const & r, unsigned category) {
 +    return (static_cast<uint64_t>(hash(l)) << 32) ^ static_cast<uint64_t>(hash(r)) ^ category;
 +}
++struct divergence_info {
++    std::string path;
++    uint64_t left = 0, right = 0;
++    bool present = false;
++};
++static uint64_t mprwe_hash(expr const & e) { return static_cast<uint64_t>(hash(e)); }
++static void mprwe_first_divergence(expr const & l, expr const & r, std::string const & path,
++                                   divergence_info & out) {
++    if (out.present || mprwe_hash(l) == mprwe_hash(r)) return;
++    if (l.kind() != r.kind()) {
++        out = {path, mprwe_hash(l), mprwe_hash(r), true};
++        return;
++    }
++    if (is_app(l)) {
++        mprwe_first_divergence(app_fn(l), app_fn(r), path + "/fn", out);
++        mprwe_first_divergence(app_arg(l), app_arg(r), path + "/arg", out);
++    } else if (is_binding(l)) {
++        mprwe_first_divergence(binding_domain(l), binding_domain(r), path + "/domain", out);
++        mprwe_first_divergence(binding_body(l), binding_body(r), path + "/body", out);
++    } else if (is_let(l)) {
++        mprwe_first_divergence(let_type(l), let_type(r), path + "/type", out);
++        mprwe_first_divergence(let_value(l), let_value(r), path + "/value", out);
++        mprwe_first_divergence(let_body(l), let_body(r), path + "/body", out);
++    } else if (is_mdata(l)) {
++        mprwe_first_divergence(mdata_expr(l), mdata_expr(r), path + "/data", out);
++    } else if (is_proj(l)) {
++        mprwe_first_divergence(proj_expr(l), proj_expr(r), path + "/expr", out);
++    } else {
++        out = {path, mprwe_hash(l), mprwe_hash(r), true};
++    }
++    if (!out.present) out = {path, mprwe_hash(l), mprwe_hash(r), true};
++}
++static std::string mprwe_path_bucket(std::string const & path) {
++    size_t slash = 0, pos = 0;
++    while (slash < 6) {
++        pos = path.find('/', pos);
++        if (pos == std::string::npos) return path;
++        ++pos;
++        ++slash;
++    }
++    return path.substr(0, pos) + "*";
++}
 +static void mprwe_event(char const * kind, uint64_t root, uint64_t id, uint64_t parent, unsigned depth,
 +                        expr const & l, expr const & r, unsigned category, char const * provenance,
 +                        char const * divergence, uint64_t exclusive = 0, uint64_t reduction = 0,
-+                        bool result = false, char const * phase = "") {
++                        bool result = false, char const * phase = "", uint64_t left_hash = 0,
++                        uint64_t right_hash = 0, uint64_t div_left_hash = 0, uint64_t div_right_hash = 0,
++                        uint64_t parent_div_left_hash = 0, uint64_t parent_div_right_hash = 0,
++                        char const * div_path = "", bool sampled = false) {
 +    std::FILE * f = mprwe_stream();
-+    if (!f || data.mprwe_events >= mprwe_limit()) return;
-+    ++data.mprwe_events;
-+    std::fprintf(f, "{\"event\":\"%s\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"left\":\"%s\",\"right\":\"%s\",\"category\":%u,\"tags_left\":%s,\"tags_right\":%s,\"context\":\"%llu\",\"provenance\":\"%s\",\"divergence\":\"%s\",\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"result\":%s,\"phase\":\"%s\"}\n",
++    if (!f || (mprwe_root_filter() && root != mprwe_root_filter()) || mprwe_global_events >= mprwe_limit()) return;
++    ++data.mprwe_raw_events;
++    ++mprwe_global_events;
++    std::fprintf(f, "{\"event\":\"%s\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"left\":\"%s\",\"right\":\"%s\",\"left_hash\":\"%llu\",\"right_hash\":\"%llu\",\"category\":%u,\"tags_left\":%s,\"tags_right\":%s,\"context\":\"%llu\",\"provenance\":\"%s\",\"divergence\":\"%s\",\"div_path\":\"%s\",\"div_left_hash\":\"%llu\",\"div_right_hash\":\"%llu\",\"parent_div_left_hash\":\"%llu\",\"parent_div_right_hash\":\"%llu\",\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"result\":%s,\"phase\":\"%s\",\"sampled\":%s}\n",
 +        kind, static_cast<unsigned long long>(root), static_cast<unsigned long long>(id),
-+        static_cast<unsigned long long>(parent), depth, head(l).c_str(), head(r).c_str(), category,
++        static_cast<unsigned long long>(parent), depth, head(l).c_str(), head(r).c_str(),
++        static_cast<unsigned long long>(left_hash), static_cast<unsigned long long>(right_hash), category,
 +        mprwe_tag(l, category).c_str(), mprwe_tag(r, category).c_str(),
 +        static_cast<unsigned long long>(mprwe_fingerprint(l, r, category)), provenance, divergence,
++        div_path,
++        static_cast<unsigned long long>(div_left_hash), static_cast<unsigned long long>(div_right_hash),
++        static_cast<unsigned long long>(parent_div_left_hash), static_cast<unsigned long long>(parent_div_right_hash),
 +        static_cast<unsigned long long>(exclusive), static_cast<unsigned long long>(reduction),
-+        result ? "true" : "false", phase);
++        result ? "true" : "false", phase, sampled ? "true" : "false");
++}
++static void mprwe_aggregate() {
++    std::FILE * f = mprwe_stream();
++    if (!f || data.calls < 1000) return;
++    for (auto const & item : data.mprwe_cost) {
++        auto const & cost = item.second;
++        std::fprintf(f, "{\"event\":\"aggregate\",\"root\":%llu,\"provenance\":\"%s\",\"path\":\"%s\",\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"traced_calls\":%llu,\"traced_exclusive_ns\":%llu,\"total_calls\":%llu,\"root_exclusive_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_serial), item.first.first.c_str(), item.first.second.c_str(),
++            static_cast<unsigned long long>(cost.calls), static_cast<unsigned long long>(cost.exclusive),
++            static_cast<unsigned long long>(cost.reduction), static_cast<unsigned long long>(cost.traced_calls),
++            static_cast<unsigned long long>(cost.traced_exclusive), static_cast<unsigned long long>(data.calls),
++            static_cast<unsigned long long>(data.comparison_exclusive));
++    }
++    std::fprintf(f, "{\"event\":\"coverage\",\"root\":%llu,\"traced_calls\":%llu,\"total_calls\":%llu,\"traced_exclusive_ns\":%llu,\"root_exclusive_ns\":%llu,\"raw_events\":%llu}\n",
++        static_cast<unsigned long long>(root_serial), static_cast<unsigned long long>(data.mprwe_trace_calls),
++        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.mprwe_trace_exclusive),
++        static_cast<unsigned long long>(data.comparison_exclusive), static_cast<unsigned long long>(data.mprwe_raw_events));
 +}
 +static void report(uint64_t wall) {
 +    char const * min = std::getenv("LEAN_DEFEQ_MIN_MS");
@@ -290,7 +369,11 @@
 +    unsigned depth = 0, children = 0;
 +    unsigned category = 0;
 +    std::string path;
-+    bool result = false, completed = false, enabled = false, repeated = false;
++    uint64_t left_hash = 0, right_hash = 0, parent_div_left_hash = 0, parent_div_right_hash = 0;
++    divergence_info divergence;
++    std::string provenance = "Unclassified";
++    bool result = false, completed = false, enabled = false, repeated = false, sampled = false;
++    bool reduction_exposed = false;
 +    branch outcome = Exception;
 +    comparison(expr const & t, expr const & s): parent(current), left(t), right(s) {
 +        if (!mode()) return;
@@ -300,6 +383,28 @@
 +            memory_snapshot(data.start_rss, data.start_commit);
 +        }
 +        id = ++data.calls;
++        left_hash = mprwe_hash(t);
++        right_hash = mprwe_hash(s);
++        if (mprwe_stream()) {
++            mprwe_first_divergence(t, s, "root", divergence);
++            if (!parent) {
++                provenance = "M0";
++            } else if (left_hash == right_hash) {
++                provenance = "Matched";
++            } else if (divergence.present && parent->divergence.present &&
++                       ((divergence.left == parent->divergence.left && divergence.right == parent->divergence.right) ||
++                        divergence.path.rfind(parent->divergence.path + "/", 0) == 0)) {
++                provenance = "M1";
++            } else if (parent->reduction_exposed) {
++                provenance = "M2";
++            }
++            if (parent) {
++                parent_div_left_hash = parent->divergence.left;
++                parent_div_right_hash = parent->divergence.right;
++            }
++        } else if (!parent) {
++            provenance = "M0";
++        }
 +        depth = parent ? parent->depth + 1 : 0;
 +        category = parent == next_owner && next_category ? next_category : parent ? parent->category : 0;
 +        if (mode() == 2) {
@@ -320,9 +425,16 @@
 +        }
 +        start = clock::now();
 +        current = this;
-+        if (mprwe_stream())
++        if (mprwe_stream()) {
++            uint64_t before = data.mprwe_raw_events;
 +            mprwe_event("enter", root_serial, id, parent ? parent->id : 0, depth, left, right, category,
-+                        "Unclassified", is_eqp(left, right) ? "same-node" : "head-or-structure");
++                        provenance.c_str(), divergence.present ? "first-divergence" :
++                        (left_hash == right_hash ? "structurally-equal" : "none"), 0, 0, false, "",
++                        left_hash, right_hash, divergence.left, divergence.right,
++                        parent_div_left_hash, parent_div_right_hash, divergence.path.c_str());
++            sampled = data.mprwe_raw_events > before;
++            if (sampled) ++data.mprwe_trace_calls;
++        }
 +    }
 +    void finish(bool r, branch b) { completed = true; result = r; outcome = b; }
 +    ~comparison() {
@@ -363,25 +475,49 @@
 +                if (data.top.size() > 20) data.top.pop_back();
 +            }
 +        }
++        if (mprwe_stream()) {
++            std::string path_key = mprwe_path_bucket(path);
++            if (data.mprwe_cost.size() >= 256 && data.mprwe_cost.find({provenance, path_key}) == data.mprwe_cost.end())
++                path_key = "__other__";
++            auto & cost = data.mprwe_cost[{provenance, path_key}];
++            ++cost.calls;
++            cost.exclusive += exclusive;
++            cost.reduction += reduce_ns;
++            if (sampled) {
++                ++cost.traced_calls;
++                cost.traced_exclusive += exclusive;
++                data.mprwe_trace_exclusive += exclusive;
++            }
++        }
 +        if (mprwe_stream())
 +            mprwe_event("exit", root_serial, id, parent ? parent->id : 0, depth, left, right, category,
-+                        "Unclassified", is_eqp(left, right) ? "same-node" : "head-or-structure",
-+                        exclusive, reduce_ns, completed && result);
++                        provenance.c_str(), divergence.present ? "first-divergence" :
++                        (left_hash == right_hash ? "structurally-equal" : "none"),
++                        exclusive, reduce_ns, completed && result, "", left_hash, right_hash,
++                        divergence.left, divergence.right, parent_div_left_hash, parent_div_right_hash,
++                        divergence.path.c_str(), sampled);
 +        if (!parent) {
 +            memory_snapshot(data.peak_rss, data.peak_commit);
++            data.mprwe_root_exclusive = data.comparison_exclusive;
++            mprwe_aggregate();
 +            report(inclusive);
 +        }
 +    }
 +};
-+static void mprwe_reduction(char const * phase, comparison const * owner, expr const & before_l,
++static void mprwe_reduction(char const * phase, comparison * owner, expr const & before_l,
 +                            expr const & after_l, expr const & before_r, expr const & after_r) {
 +    if (!owner || !mprwe_stream()) return;
-+    if (data.mprwe_events >= mprwe_limit()) return;
-+    ++data.mprwe_events;
-+    std::fprintf(mprwe_stream(), "{\"event\":\"reduction\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"before_left\":\"%s\",\"after_left\":\"%s\",\"before_right\":\"%s\",\"after_right\":\"%s\",\"category\":%u,\"context\":\"%llu\",\"provenance\":\"Unclassified\",\"phase\":\"%s\"}\n",
++    owner->reduction_exposed = true;
++    if (mprwe_root_filter() && root_serial != mprwe_root_filter()) return;
++    if (mprwe_global_events >= mprwe_limit()) return;
++    ++data.mprwe_raw_events;
++    ++mprwe_global_events;
++    std::fprintf(mprwe_stream(), "{\"event\":\"reduction\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"before_left\":\"%s\",\"after_left\":\"%s\",\"before_right\":\"%s\",\"after_right\":\"%s\",\"before_left_hash\":\"%llu\",\"after_left_hash\":\"%llu\",\"before_right_hash\":\"%llu\",\"after_right_hash\":\"%llu\",\"category\":%u,\"context\":\"%llu\",\"provenance\":\"Unclassified\",\"phase\":\"%s\"}\n",
 +        static_cast<unsigned long long>(root_serial), static_cast<unsigned long long>(owner->id),
 +        static_cast<unsigned long long>(owner->parent ? owner->parent->id : 0), owner->depth,
 +        head(before_l).c_str(), head(after_l).c_str(), head(before_r).c_str(), head(after_r).c_str(),
++        static_cast<unsigned long long>(mprwe_hash(before_l)), static_cast<unsigned long long>(mprwe_hash(after_l)),
++        static_cast<unsigned long long>(mprwe_hash(before_r)), static_cast<unsigned long long>(mprwe_hash(after_r)),
 +        owner->category, static_cast<unsigned long long>(mprwe_fingerprint(after_l, after_r, owner->category)), phase);
 +}
 +struct reduction {
@@ -459,15 +595,15 @@
  static name * g_kernel_fresh = nullptr;
  static expr * g_dont_care    = nullptr;
  static name * g_bool_true    = nullptr;
-@@ -466,6 +911,7 @@
+@@ -466,6 +1047,7 @@
      If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
      We also do not cache results. */
  expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
 +    anatomy::reduction anatomy_reduction;
      scope_rec_depth guard;
      check_system("type checker: whnf", /* do_check_interrupted */ true);
-
-@@ -502,9 +948,10 @@
+ 
+@@ -502,9 +1084,10 @@
      case expr_kind::FVar:
          return whnf_fvar(e, cheap_rec, cheap_proj);
      case expr_kind::Proj: {
@@ -480,7 +616,7 @@
              r = e;
          break;
      }
-@@ -513,6 +960,7 @@
+@@ -513,6 +1096,7 @@
          expr f0 = get_app_rev_args(e, args);
          expr f = whnf_core(f0, cheap_rec, cheap_proj);
          if (is_lambda(f)) {
@@ -488,7 +624,7 @@
              unsigned m = 1;
              unsigned num_args = args.size();
              while (is_lambda(binding_body(f)) && m < num_args) {
-@@ -524,6 +972,7 @@
+@@ -524,6 +1108,7 @@
                            cheap_rec, cheap_proj);
          } else if (f == f0) {
              if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
@@ -496,7 +632,7 @@
                  if (m_diag) {
                      auto f = get_app_fn(e);
                      if (is_constant(f))
-@@ -540,6 +989,7 @@
+@@ -540,6 +1125,7 @@
          break;
      }
      case expr_kind::Let:
@@ -504,7 +640,7 @@
          r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
          break;
      }
-@@ -565,6 +1015,18 @@
+@@ -565,6 +1151,18 @@
  optional<expr> type_checker::unfold_definition_core(expr const & e) {
      if (is_constant(e)) {
          if (auto d = is_delta(e)) {
@@ -523,7 +659,7 @@
              levels const & us = const_levels(e);
              unsigned len = length(us);
              if (m_diag) {
-@@ -572,13 +1034,18 @@
+@@ -572,13 +1170,18 @@
              }
              if (len > 0) {
                  auto it = m_st->m_unfold.find(e);
@@ -544,36 +680,36 @@
              }
          }
      }
-@@ -601,16 +1068,16 @@
+@@ -601,16 +1204,16 @@
      }
  }
-
+ 
 +expr mk_bool_true();
 +expr mk_bool_false();
 +
  static expr * g_lean_reduce_bool = nullptr;
 -static expr * g_lean_reduce_nat  = nullptr;
 +static expr * g_lean_reduce_nat = nullptr;
-
+ 
  namespace ir {
  object * run_boxed_kernel(environment const & env, options const & opts, name const & fn, unsigned n, object **args);
  }
-
+ 
 -expr mk_bool_true();
 -expr mk_bool_false();
 -
  optional<expr> reduce_native(environment const & env, expr const & e) {
      if (!is_app(e)) return none_expr();
      expr const & arg = app_arg(e);
-@@ -734,6 +1201,7 @@
-
+@@ -734,6 +1337,7 @@
+ 
  /** \brief Put expression \c t in weak head normal form */
  expr type_checker::whnf(expr const & e) {
 +    anatomy::reduction anatomy_reduction;
      // Do not cache easy cases
      switch (e.kind()) {
      case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
-@@ -791,10 +1259,18 @@
+@@ -791,10 +1395,18 @@
      do {
          optional<expr> var_s_type;
          if (binding_domain(t) != binding_domain(s)) {
@@ -594,7 +730,7 @@
          }
          if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
              // free variable is used inside t or s
-@@ -807,8 +1283,15 @@
+@@ -807,8 +1419,15 @@
          t = binding_body(t);
          s = binding_body(s);
      } while (t.kind() == k && s.kind() == k);
@@ -610,9 +746,9 @@
 +    anatomy::path_scope path("binder_body", subst.size(), 1);
 +    return is_def_eq(body_t, body_s);
  }
-
+ 
  bool type_checker::is_def_eq(level const & l1, level const & l2) {
-@@ -861,9 +1344,12 @@
+@@ -861,9 +1480,12 @@
  /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
      This method is used to implement an optimization in the method \c is_def_eq. */
  bool type_checker::is_def_eq_args(expr t, expr s) {
@@ -627,7 +763,7 @@
          t = app_fn(t);
          s = app_fn(s);
      }
-@@ -899,6 +1385,7 @@
+@@ -899,6 +1521,7 @@
      get_app_args(s, s_args);
      for (unsigned i = f_val.get_nparams(); i < s_args.size(); i++) {
          expr proj = mk_proj(f_val.get_induct(), i - f_val.get_nparams(), t);
@@ -635,7 +771,7 @@
          if (!is_def_eq(proj, s_args[i])) return false;
      }
      return true;
-@@ -909,14 +1396,17 @@
+@@ -909,14 +1532,17 @@
      \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
      Return false otherwise. */
  bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
@@ -653,7 +789,7 @@
                  if (!is_def_eq(t_args[i], s_args[i]))
                      break;
              }
-@@ -930,24 +1420,36 @@
+@@ -930,24 +1556,36 @@
  /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
      Return false otherwise. */
  lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
@@ -673,7 +809,7 @@
 +        anatomy::data.proof_prop_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
 +    return to_lbool(result);
  }
-
+ 
  bool type_checker::failed_before(expr const & t, expr const & s) const {
 +    bool found;
      if (hash(t) < hash(s)) {
@@ -692,11 +828,11 @@
 +        ++(found ? anatomy::data.cache_failure : anatomy::data.cache_failure_miss);
 +    return found;
  }
-
+ 
  void type_checker::cache_failure(expr const & t, expr const & s) {
-@@ -958,15 +1460,19 @@
+@@ -958,15 +1596,19 @@
  }
-
+ 
  bool type_checker::succeeded_before(expr const & t, expr const & s) const {
 +    bool found;
      if (hash(t) < hash(s)) {
@@ -715,11 +851,11 @@
 +        ++(found ? anatomy::data.cache_success : anatomy::data.cache_success_miss);
 +    return found;
  }
-
+ 
  void type_checker::cache_success(expr const & t, expr const & s) {
-@@ -1169,10 +1675,12 @@
+@@ -1169,10 +1811,12 @@
  }
-
+ 
  bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
 +    anatomy::comparison anatomy_scope(t, s);
 +    auto anatomy_finish = [&](bool result, anatomy::branch b) { anatomy_scope.finish(result, b); return result; };
@@ -728,10 +864,10 @@
      lbool r = quick_is_def_eq(t, s);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Quick);
-
+ 
      // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
      // we fully reduce `t` and check whether result is `s`.
-@@ -1180,7 +1688,7 @@
+@@ -1180,7 +1824,7 @@
      // proof terms of the form `Eq.refl true : decide p = true`.
      if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
          if (is_constant(whnf(t), *g_bool_true)) {
@@ -739,37 +875,37 @@
 +            return anatomy_finish(true, anatomy::Reflection);
          }
      }
-
-@@ -1193,56 +1701,58 @@
+ 
+@@ -1193,56 +1837,58 @@
      */
      expr t_n = whnf_core(t, false, true);
      expr s_n = whnf_core(s, false, true);
 +    anatomy::mprwe_reduction("initial_whnf", anatomy::current, t, t_n, s, s_n);
-
+ 
      if (!is_eqp(t_n, t) || !is_eqp(s_n, s)) {
          r = quick_is_def_eq(t_n, s_n);
 -        if (r != l_undef) return r == l_true;
 +        if (r != l_undef) return anatomy_finish(r == l_true, anatomy::QuickReduced);
      }
-
+ 
      r = is_def_eq_proof_irrel(t_n, s_n);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Proof);
-
+ 
      /* NB: `lazy_delta_reduction` updates `t_n` and `s_n` even when returning `l_undef`. */
      r = lazy_delta_reduction(t_n, s_n);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Delta);
-
+ 
      if (is_constant(t_n) && is_constant(s_n) && const_name(t_n) == const_name(s_n) &&
          is_def_eq(const_levels(t_n), const_levels(s_n)))
 -        return true;
 +        return anatomy_finish(true, anatomy::SameConstant);
-
+ 
      if (is_fvar(t_n) && is_fvar(s_n) && fvar_name(t_n) == fvar_name(s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::SameFVar);
-
+ 
      if (is_proj(t_n) && is_proj(s_n) && proj_sname(t_n) == proj_sname(s_n) && proj_idx(t_n) == proj_idx(s_n)) {
          expr t_c = proj_expr(t_n);
          expr s_c = proj_expr(s_n);
@@ -777,7 +913,7 @@
 -            return true;
 +            return anatomy_finish(true, anatomy::Projection);
      }
-
+ 
      // Invoke `whnf_core` again, but now using `whnf` to reduce projections.
      expr t_n_n = whnf_core(t_n);
      expr s_n_n = whnf_core(s_n);
@@ -785,30 +921,30 @@
      if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n))
 -        return is_def_eq_core(t_n_n, s_n_n);
 +        return anatomy_finish(is_def_eq_core(t_n_n, s_n_n), anatomy::Reduced);
-
+ 
      // At this point, t_n and s_n are in weak head normal form (modulo metavariables and proof irrelevance)
      if (is_def_eq_app(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::Application);
-
+ 
      if (try_eta_expansion(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::Eta);
-
+ 
      if (try_eta_struct(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::EtaStructure);
-
+ 
      r = try_string_lit_expansion(t_n, s_n);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::StringExpansion);
-
+ 
      if (is_def_eq_unit_like(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::UnitLike);
-
+ 
 -    return false;
 +    return anatomy_finish(false, anatomy::Failure);
  }
-
+ 
  bool type_checker::is_def_eq(expr const & t, expr const & s) {
