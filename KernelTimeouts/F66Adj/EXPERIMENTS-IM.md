@@ -22,3 +22,19 @@ The trace root was 38.829 s. Its dominant inclusive path was nested `DFunLike.co
 ## Conclusion
 
 **H2 mismatch-induced, with descendant attribution.** The `hR` representation drives the measured tree; intrinsic `.app` cost is not established. A valid M would require a second non-identical counit proposition using the same provider, which is unavailable in the imported theorem.
+
+## IM round 2
+
+Fresh Expr-constructor/RSS-delta proxies (O vs M): 170,987,170 / 2,872,049,664 B versus 34,551 / 5,177,344 B. These are process proxies, not retained allocations.
+
+Revision for fresh runs: current-case source head `03f2a41973c`; oleans are the master `f21ef672d31` set plus later targeted Stability rebuilds. READY2-4.35.0. `probes/im/Matched.lean` is a **diagnostic M**: the concrete derived global-Hom counit `.app` is compared with the same counit applied to a beta-expanded copy of the same object. A local `have h` is consumed by `exact h`; its inferred and expected equality types are syntactically distinct. The provider, counit, and data-bearing derived-module type agree. O instead compares the instantiated argument-39 `hR` dependent proposition within `homIso_naturality_of_counit`; M changes that root obligation and omits its mismatched provider.
+
+| Fresh READY2 counters | O | M, final `exact h` root | A | R |
+|---|---:|---:|---:|---:|
+| root wall / calls | 29,648.574 ms / 3,897,905 | 5.933 ms / 881 | no root >=100 ms | 29,366.396 ms / 3,901,014 |
+| comparison / WHNF exclusive | 15,064.974 / 14,583.601 ms | 3.058 / 2.876 ms | no large root | 14,974.884 / 14,391.512 ms |
+| depth / Expr proxy | 121 / 170,987,170 | 93 / 34,551 | - | 121 / fresh root proxy in log |
+
+Fresh O branch exclusive: projection 832,323 calls / 9,320.076 ms; application 719,539 / 2,306.329 ms; second-WHNF 310,390 / 1,595.205 ms. M: projection 33 / 0.337 ms, application 115 / 0.546 ms, second-WHNF 149 / 1.289 ms. The fresh trace's O child chain is `CategoryStruct.comp -> DFunLike.coe -> NatTrans.app` (43,317 ms inclusive below the `DFunLike.coe` node, only 0.085 ms direct at that node). M enters `NatTrans.app -> CategoryStruct.comp -> DFunLike.coe` too (5.634, 5.286, 4.701 ms inclusive; 0.229, 0.044, 0.114 ms direct). Thus the operation heads are traversed in M, while O's many projection and application descendants are absent. The trace times are not interchangeable with counters times. The final uninstrumented M run was 2.83 s wall including import; O release time was not rerun separately.
+
+**Verdict: diagnostic H2 support, strict H1/H2 classification inconclusive.** O/A/R establish that the original `hR` representation causes a large root; M establishes that one non-identical same-provider counit component comparison is cheap. Because M replaces the dependent `hR` consumer, its 4,424-fold call difference cannot isolate the intrinsic cost of that exact proposition. No applicable source-level `unif_hint` changes the already stored implicit provider in this imported theorem.

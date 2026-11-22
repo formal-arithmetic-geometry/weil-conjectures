@@ -36,3 +36,19 @@ No genuine source-level `unif_hint` experiment is claimed. The endpoint choice i
 ## Conclusion
 
 **H2 mismatch-induced for the endpoint bundle; operation-level H1 unresolved.** Directly measured: O, A, R and the invalid M audit. A/R support causality of the full endpoint representation. The next falsifying control is a same-endpoint-provider, non-identical component equality; the available imported counit does not provide one.
+
+## IM round 2
+
+Fresh Expr-constructor/RSS-delta proxies (O vs component M): 281,230,787 / 4,751,753,216 B versus 37,724 / 1,638,400 B. These are process proxies, not retained allocations.
+
+Fresh runs: source head `03f2a41973c`, Lean/READY2-4.35.0, master `f21ef672d31` oleans plus targeted Stability rebuilds. `probes/im/Matched.lean` supplies two **diagnostic M** comparisons with the concrete `imageTensorIso A K T` and `ExternalRHom` providers on both sides: its `.hom.app` at the original endpoint object versus the same `.app` at a beta-expanded object, and the original `Functor.map (imageHomIso A M K T).hom` versus the same map at a beta-expanded morphism. Both end in `exact h` after a syntactically distinct `have h` type. O instead consumes `conjugateEquiv_counit` at the complete raw/wrapper endpoint equality, so M changes the root equality and removes the endpoint representation mismatch.
+
+| Fresh READY2 counters | O | M `.app` | M `Functor.map` | A | R |
+|---|---:|---:|---:|---:|---:|
+| root wall / calls | 48,565.681 ms / 6,359,958 | 4.680 ms / 808 | 0.201 ms / 28 | no root >=100 ms | 75,891.192 ms / 9,539,325 |
+| comparison / WHNF exclusive | 24,379.162 / 24,186.519 ms | 1.901 / 2.779 ms | 0.108 / 0.093 ms | no large root | 37,507.269 / 38,383.923 ms |
+| max depth | 204 | 63 | 7 | - | 201 |
+
+O branch comparison-exclusive: projection 1,370,691 calls / 15,326.563 ms; application 1,178,468 / 4,186.121 ms; second-WHNF 511,395 / 2,200.214 ms. The `.app` M has 30 projections / 0.267 ms, 114 applications / 0.242 ms, and 130 second-WHNF calls / 0.709 ms. Fresh O trace follows `CategoryStruct.comp -> DFunLike.coe -> Functor.map -> NatTrans.app/Iso.hom`; the `Functor.map` node has 85,614 ms inclusive subtree but only 0.110 ms direct exclusive time. The M `.app` root reaches `NatTrans.app -> CategoryStruct.comp -> DFunLike.coe` (5.430, 4.863, 3.408 ms inclusive); the map M runs 28 recursive calls. The difference is in descendants and the endpoint argument, not in a costly direct `Functor.map` branch. Final M source run: 2.84 s wall including import; O release time not rerun separately.
+
+**Verdict: diagnostic H2 support; strict intrinsic classification inconclusive.** O/A/R show the endpoint bundle is causal, and M's same-provider component and map conversions are cheap. Their root equalities are smaller than O, so the roughly 7,871-fold O/M component call gap cannot by itself allocate cost to the original mismatch rather than the removed dependent context. The old `MatchedLet` remains an invalid strict control and is retained above as history.
