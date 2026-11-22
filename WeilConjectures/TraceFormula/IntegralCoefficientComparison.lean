@@ -393,21 +393,6 @@ theorem integersToPadicAlgCl_map_unit_app (h : Y ⟶ X) (K : Dᵇc(X.left)⟦�
   simp only [← hn, reassoc_of% h₁]
   exact h₂
 
-/-- **The compactly supported comparison commutes with composition** (for `𝒪_E ⟶ ℚ̄_ℓ`):
-for `f : Y ⟶ X` and `g : X ⟶ Z`, the comparison `T R(f ≫ g)_! ≅ R(f ≫ g)_! T` followed by the
-composition isomorphism `R(f ≫ g)_! ≅ Rg_! Rf_!` is `T` of the composition isomorphism followed
-by the comparisons for `g` and `f`. -/
-theorem integersToPadicAlgCl_map_lowerShriekComp_hom_app (f : Y ⟶ X) (g : X ⟶ Z)
-    (M : Dᵇc(Y.left)⟦𝒪⟧) :
-    (𝐓 Z).map ((boundedConstructibleLowerShriekComp_padicIntegers ℓ E.1 f g).hom.app M) ≫
-        (boundedConstructibleLowerShriekIntegersToPadicAlgClIso ℓ E g).inv.app
-          ((PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 f).obj M) ≫
-        (boundedConstructibleLowerShriek ℓ g).map
-          ((boundedConstructibleLowerShriekIntegersToPadicAlgClIso ℓ E f).inv.app M) =
-      (boundedConstructibleLowerShriekIntegersToPadicAlgClIso ℓ E (f ≫ g)).inv.app M ≫
-        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).hom.app ((𝐓 Y).obj M) := by
-  sorry
-
 /-- The comparison `Rf_! ⋙ T_X ≅ T_Y ⋙ Rf_!` of the compactly supported direct images along
 `𝒪_E ⟶ ℚ̄_ℓ` (`boundedConstructibleLowerShriekIntegersToPadicAlgClIso`), with the extension of
 scalars written as `T = boundedConstructibleIntegersToPadicAlgCl`. -/
