@@ -73,9 +73,13 @@ complete. Raw coverage was 180,953/2,563,145 calls (7.1%; 2,487.607 ms).
 | Matched | 637,607 | 113.574 | 0.405% |
 | Unclassified | 4 | 0.098 | 0.000% |
 
-Manual top-five aggregate exclusive times: M1 5898.245, 3304.450, 3289.837,
-3215.088, 3208.461 ms; M2 1.607, 1.275, 1.255, 1.255, 0.968 ms; Matched
-57.089, 19.038, 9.164, 5.224, 4.548 ms; Unclassified 0.064, 0.035 ms.
+Manual top-five aggregate nodes (path; exclusive ms): M1 paths are
+argument[2]/argument[7]/argument[6]/argument[9]/argument[6]/* 5898.245;
+the corresponding argument-6/argument-7 descendants 3304.450/3289.837;
+argument[2]/argument[6]/argument[5]/argument[0]/argument[2]/* 3215.088; and
+its function/argument[0] path 3208.461. M2 top paths are 1.607, 1.275, 1.255,
+1.255, 0.968 ms with reduction exposure; Matched top paths are 57.089,
+19.038, 9.164, 5.224, 4.548 ms; Unclassified has 0.064 and 0.035 ms.
 M0 is the root entry. C is invalid because provider alignment changes the
 dependent root. Outcome: C.
 

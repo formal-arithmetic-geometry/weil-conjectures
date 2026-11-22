@@ -77,10 +77,12 @@ Final source diagnostics occurred after the selected root.
 | Matched | 6,772,753 | 3,245.707 | 10.495% |
 | Unclassified | 0 | 0.000 | 0.000% |
 
-Manual top-five aggregate paths under the generated-field body: M1
-5600.191, 5090.047, 3573.112, 3498.938, 2861.415 ms; M2 1972.574,
-1521.221, 1245.415, 1176.906, 1129.421 ms; Matched 873.394, 744.055,
-685.312, 492.219, 450.666 ms. M0 is the root entry. The aligned control
+Manual top-five aggregate nodes under generated-field body (path; exclusive
+ms): M1 argument[12] 5600.191, argument[11] 5090.047, argument[9] 3573.112,
+argument[10] 3498.938, argument[8] 2861.415; M2 uses those same five paths at
+1972.574/1521.221/1245.415/1176.906/1129.421 ms; Matched uses them at
+873.394/744.055/685.312/492.219/450.666 ms. Each M2 path has reduction
+exposure in the aggregate record. M0 is the root entry. The aligned control
 preserves the outer root; restored source retains the original context.
 
 C is valid for this case: aligned and restored controls both preserve the

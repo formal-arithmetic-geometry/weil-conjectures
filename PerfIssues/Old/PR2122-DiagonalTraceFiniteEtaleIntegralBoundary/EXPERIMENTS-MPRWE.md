@@ -74,9 +74,15 @@ Final source diagnostics occurred after the selected root.
 | Matched | 406,401 | 60.616 | 0.360% |
 | Unclassified | 1,118 | 10.876 | 0.065% |
 
-Manual top-five aggregate exclusive times: M1 6818.808, 1822.520, 1281.151,
-1224.870, 1185.153 ms; M2 359.044, 2.088, 1.957, 1.229, 1.116 ms; Matched
-38.903, 9.336, 2.614, 1.667, 1.642 ms; Unclassified 10.876 ms. M0 is the
+Manual top-five aggregate nodes (path; exclusive ms): M1 paths are
+argument[1]/argument[0]/argument[7]/argument[0]/argument[15]/* 6818.808,
+argument[0]/argument[0]/argument[4]/argument[1]/argument[0]/* 1822.520,
+argument[0]/argument[0]/argument[3]/argument[1]/argument[1]/* 1281.151,
+argument[1]/argument[0]/argument[7]/function/argument[0]/* 1224.870, and
+argument[2]/argument[0]/argument[7]/argument[0]/argument[2]/* 1185.153. M2
+uses these paths at 359.044/2.088/1.957/1.229/1.116 ms with reduction
+exposure; Matched uses 38.903/9.336/2.614/1.667/1.642 ms; Unclassified is
+10.876 ms. M0 is the
 root entry. C is invalid because recursor branch extraction changes the
 dependent root. Outcome: C.
 

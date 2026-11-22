@@ -94,9 +94,15 @@ Aggregate records are complete; raw selected-root coverage was 0/2,685,580.
 | Matched | 1,552,849 | 328.630 | 1.569% |
 | Unclassified | 0 | 0.000 | 0.000% |
 
-Manual top-five aggregate nodes: M1 paths have 5652.486, 5536.010, 2822.583,
-2785.109, and 984.085 ms; M2 paths have 18.431, 17.056, 9.040, 7.704, and
-3.033 ms; Matched paths have 88.590, 88.306, 47.021, 44.014, and 16.208 ms.
+Manual top-five aggregate nodes (path; exclusive ms): M1
+binder_domain[0]/argument[3]/argument[7]/argument[7]/binder_body[5]/* 5652.486;
+binder_domain[0]/argument[2]/argument[6]/argument[7]/binder_body[5]/* 5536.010;
+binder_domain[0]/argument[2]/argument[6]/argument[5]/binder_body[3]/* 2822.583;
+binder_domain[0]/argument[3]/argument[7]/argument[5]/binder_body[3]/* 2785.109;
+binder_domain[0]/argument[2]/argument[6]/argument[4]/binder_body[1]/* 984.085.
+M2 and Matched use the same five parallel paths at 18.431/17.056/9.040/7.704/3.033
+and 88.590/88.306/47.021/44.014/16.208 ms respectively; each M2 path has
+nonzero aggregate reduction exposure. M0 is the root entry.
 M0 is the root entry. C is invalid because provider alignment changes the root
 obligation and no descendant-only alignment type-checks. Outcome: D.
 
