@@ -4059,6 +4059,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace
 public import WeilConjectures.AlgebraicGeometry.Curve.RetractAssertions
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent
+public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRochSerreDuality
 public import WeilConjectures.AlgebraicGeometry.Curve.RootTrivializationBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
@@ -7565,6 +7566,7 @@ public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Hilbert.CurvePower
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Defs
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Representability
+public import WeilConjectures.AlgebraicGeometry.Hilbert.SmoothCurve
 public import WeilConjectures.AlgebraicGeometry.HomComplexOverEquivProjections
 public import WeilConjectures.AlgebraicGeometry.HomComplexRestrictScheme
 public import WeilConjectures.AlgebraicGeometry.HomComplexRestrictSchemeNatural
