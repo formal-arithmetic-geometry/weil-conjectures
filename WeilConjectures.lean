@@ -21711,7 +21711,6 @@ public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteChainGenerator
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteHomInvertible
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorChainEquation
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorNaturalEquality
-public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorRouteNormalization
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorModel
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorChainSquare
 public import WeilConjectures.SixFunctors.Finite.Isotypic
