@@ -53,9 +53,9 @@ reconstruction.
 
 ## Offline analysis
 
-Run `python3 mprwe_analyze.py <events.jsonl>`. The default root is the root
-with the largest complete aggregate; use `--root N` to select a process-local
-root serial. The analyzer sums aggregate calls and exclusive time, reports
+Run `python3 mprwe_analyze.py <events.jsonl>`. The default root is the covered
+root with the greatest raw-call count; use `--root N` to select a process-wide
+atomic root serial. The analyzer sums aggregate calls and exclusive time, reports
 traced-call and traced-time coverage, and prints the top ten captured nodes
 for review. Kernel-side labels use structural hashes and parent reduction
 history: M1 is a carried divergence, M2 is a divergence first seen after an
