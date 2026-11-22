@@ -58,20 +58,4 @@ structure ProjectiveBundleRealizationPullbackAtlas
           (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app V m =
           c • D'.L.presheaf.map (homOfLE hi).op (t i)
 
-/-- If the base-change map `b` is compatible with the degree-one sections via `e` (hypothesis
-`hb`), then the two realization pullback quotients admit a common frame atlas. -/
-theorem exists_projectiveBundleRealizationPullbackAtlas
-    {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
-    (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
-    (g : B' ⟶ B) (e : F' ≅ (Scheme.Modules.tensorPullback g).obj F)
-    (b : Scheme.GradedAlgebraData.PullbackData g D.A.data D'.A.data)
-    (hb : ∀ (U : B.affineOpens) (U' : B'.affineOpens) (h : U'.1 ≤ g ⁻¹ᵁ U.1)
-      (x : F.val.obj (op U.1)),
-      b.map h (D.A.sectionEquiv U (SymmetricAlgebra.ι _ _ x)) =
-        D'.A.sectionEquiv U' (SymmetricAlgebra.ι _ _ (e.inv.app U'.1
-          (((Scheme.Modules.tensorPullback g).obj F).presheaf.map (homOfLE h).op
-            (projectiveBundlePullbackSection g x))))) :
-    Nonempty (ProjectiveBundleRealizationPullbackAtlas D D' g e b) := by
-  sorry
-
 end AlgebraicGeometry
