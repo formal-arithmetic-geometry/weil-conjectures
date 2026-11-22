@@ -98,6 +98,22 @@ The historical slow trace therefore identifies `Functor.obj` as a path marker;
 its descendants, especially the dependent `NatTrans.app`/`DFunLike.coe`
 subtree, own the cost.
 
+## Unif_hint
+
+No genuine unification problem remains at this imported historical root.  A
+hint would change the already selected provider or named diagram, so U1/U2
+would not preserve the same elaborated pair.  No Kernel optimization claim is
+made.
+
+## Context control
+
+M/A and O/R retain the `Cone` consumer and the binder telescope, but M/A use a
+named-diagram diagnostic pair rather than the exact inline provider pair.  The
+direct `Functor.obj`/`Functor.map` pairs are standalone component checks and
+are not the same ordered pair as the in-situ descendants.  The context
+difference is recorded explicitly; no standalone-to-in-situ causal ratio is
+claimed.
+
 ## Experiment 3: shared-provider control (IM §6)
 
 No valid S0/S1/S2 historical matrix exists.  The Tensor candidate adds a

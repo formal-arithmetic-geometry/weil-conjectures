@@ -77,6 +77,21 @@ pre-existing dependent comparison pattern (**H3**), but this matched control
 does not show meaningful intrinsic cost for the full provider family (**H1**
 is not supported here).
 
+## Unif_hint
+
+No genuine unification problem can be isolated in the imported Tensor theorem.
+The critical provider is already elaborated in the stored declaration; adding
+a hint would change that provider or its category argument.  U1/U2 are
+therefore unavailable and no Kernel optimization claim is made.
+
+## Context control
+
+M/A keep the `tensorObj` consumer and its local category context but use a
+same-category diagnostic pair.  O/R are the same argument-2 pair under the
+original 12-binder context and have identical call counts and depth.  The
+matched pair is not the exact O pair, so the comparison supports mismatch
+induction without claiming a pure standalone context effect.
+
 ## Experiment 2: shared-provider control (IM §6)
 
 No valid S0/S1/S2 matrix exists in the historical source.  The previous
