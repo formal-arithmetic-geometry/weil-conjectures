@@ -20,3 +20,14 @@ Toolchain: Lean 4.35.0, current-case revision 2e92d5989ff, READY2-4.35.0. READY3
 3. The available selective-looking controls either remove M0 or move the first divergence. They are recorded as invalid for C rather than relabeled as selective experiments.
 4. The defensible project-level result under the READY2 fallback is Outcome E: insufficient provenance. A READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## READY3 historical update
+
+The Derived-Completion Cone now has a fresh READY3 4.33.1 run. Its timeout
+root made 12,220,823 calls with 51.518 s comparison-exclusive and 52.393 s
+reduction-exclusive time. A bounded trace records parent/child IDs, paths,
+orthogonal tags, before/after reduction heads, and context fingerprints, but
+the captured exits are incomplete; the full provenance row remains 100%
+Unclassified. The per-root report and raw event file are under the Cone
+`probes/mprwe/` directory. The cross-case synthesis is in
+`Historical/Anatomy/MPRWE-SYNTHESIS.md`.
+
