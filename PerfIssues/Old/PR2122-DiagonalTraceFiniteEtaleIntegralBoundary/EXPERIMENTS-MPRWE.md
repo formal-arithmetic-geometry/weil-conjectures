@@ -109,9 +109,10 @@ a small, measurable M2 contribution.
 The recursor branch extraction changes the motive and is invalid for C; no
 descendant-only M2 alignment type-checks under the original recursor. The
 restored source remains a historical artifact with no fresh R timing. Outcome:
-**C** (M1 dominates; M2 is below 1%).
+**C** (M1 dominates; M2 is below the 5% round-5 threshold).
 
 ## MPRWE round 3 (READY3.2; superseded historical table)
 
-Shares are M1 98.901%, M2 0.876%, Matched 0.201%, Unclassified 0.021%.
+Shares are M1 98.901%, M2 0.876%, Matched 0.201%, Unclassified 0.021%; M2
+and Matched remain below the round-5 thresholds.
 The recursor branch extraction remains root-changing and invalid for C.

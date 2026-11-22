@@ -104,7 +104,8 @@ M2 and Matched use the same five parallel paths at 18.431/17.056/9.040/7.704/3.0
 and 88.590/88.306/47.021/44.014/16.208 ms respectively; each M2 path has
 nonzero aggregate reduction exposure (0.114 ms total). M0 is the root entry.
 M0 is the root entry. C is invalid because provider alignment changes the root
-obligation and no descendant-only alignment type-checks. Outcome: D.
+obligation and no descendant-only alignment type-checks. The shares are below
+the round-5 D thresholds, so the outcome is **C**.
 
 READY3.1-4.35.0 fresh counter and trace runs completed with the original
 probe. The selected root had 2,685,580 calls, depth 81, and 20,675.658 ms
