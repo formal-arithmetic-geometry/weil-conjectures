@@ -86,7 +86,7 @@ binder_body[15]/argument[1]/argument[0]/argument[6]/argument[0]/* 75363.545;
 argument[2]/argument[0]/argument[7]/argument[0]/* 356.147;
 argument[2]/function/argument[0]/argument[4] 278.869; then two function paths
 0.273/0.218 ms. M2 top paths are 50.855/0.442/0.419/0.100/0.038 ms with
-reduction exposure; Matched 398.809/1.335/0.912/0.057/0.053 ms; Unclassified
+reduction exposure (14.445 ms total); Matched 398.809/1.335/0.912/0.057/0.053 ms; Unclassified
 0.477/0.122/0.118 ms. M0 is the root entry. C is invalid because outer-major alignment changes
 the root and removes M0. Outcome: C.
 

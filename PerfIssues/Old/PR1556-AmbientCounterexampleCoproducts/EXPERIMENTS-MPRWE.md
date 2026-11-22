@@ -92,7 +92,8 @@ argument[1]/argument[0]/argument[7]/function/argument[0]/* 0.146;
 argument[1]/argument[0]/argument[7]/argument[0]/function/* 0.123;
 argument[1]/argument[0]/argument[7]/argument[0] 0.074. M2 uses the first
 two paths at 20.904/17.160 ms plus 0.029/0.024/0.002 ms paths; Matched uses
-the first two at 143.931/18.254 ms plus 0.019/0.009/0.003 ms paths. M0 is the root entry. C is invalid:
+the first two at 143.931/18.254 ms plus 0.019/0.009/0.003 ms paths; M2
+reduction exposure totals 0.035 ms. M0 is the root entry. C is invalid:
 major-premise alignment changes the root and removes M0. Outcome: C.
 
 READY3.1-4.35.0 fresh counter and trace runs completed. The selected original

@@ -102,7 +102,7 @@ binder_domain[0]/argument[3]/argument[7]/argument[5]/binder_body[3]/* 2785.109;
 binder_domain[0]/argument[2]/argument[6]/argument[4]/binder_body[1]/* 984.085.
 M2 and Matched use the same five parallel paths at 18.431/17.056/9.040/7.704/3.033
 and 88.590/88.306/47.021/44.014/16.208 ms respectively; each M2 path has
-nonzero aggregate reduction exposure. M0 is the root entry.
+nonzero aggregate reduction exposure (0.114 ms total). M0 is the root entry.
 M0 is the root entry. C is invalid because provider alignment changes the root
 obligation and no descendant-only alignment type-checks. Outcome: D.
 

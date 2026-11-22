@@ -79,7 +79,8 @@ the corresponding argument-6/argument-7 descendants 3304.450/3289.837;
 argument[2]/argument[6]/argument[5]/argument[0]/argument[2]/* 3215.088; and
 its function/argument[0] path 3208.461. M2 top paths are 1.607, 1.275, 1.255,
 1.255, 0.968 ms with reduction exposure; Matched top paths are 57.089,
-19.038, 9.164, 5.224, 4.548 ms; Unclassified has 0.064 and 0.035 ms.
+19.038, 9.164, 5.224, 4.548 ms; Unclassified has 0.064 and 0.035 ms;
+M2 reduction exposure totals 157.969 ms.
 M0 is the root entry. C is invalid because provider alignment changes the
 dependent root. Outcome: C.
 
