@@ -1,7 +1,10 @@
-# PerfIssues MPRWE Cross-case Synthesis
+# PerfIssues MPRWE Cross-case Synthesis (round 3)
 
-Kernel: READY2-4.35.0. READY3 was absent; all descendant labels below are
-limited by missing parent IDs, paths, and reduction before/after events.
+Analyzer revision: READY3.2. The process-wide atomic root-ID correction and
+raw-coverage root selector are applied to all reported READY3.1 aggregates.
+
+Kernel: READY3.2-4.35.0. The READY2 paragraph below is superseded historical
+context; round-3 shares use the corrected READY3.2 root identity.
 Strict A0 matched roots: none. The diagnostic baselines are A1/A3 as recorded
 per case. Shares are measured only for the attributable trace total; the
 recursive portion is explicitly Unclassified rather than guessed.
@@ -55,3 +58,25 @@ alignments. Earlier R timings are labeled in the per-case reports.
 PR2122's `GmRelativeKummer.olean` is present. Its fresh counter and trace runs
 reproduced the historical 2,227,198-call root, resolving the round-1 dependency
 claim; the fresh root is classified above.
+
+## MPRWE round 3
+
+The NativePullTensor discrepancy is a root identity collision. The validation
+run was stopped at 120 s while several worker threads were active; its
+thread-local serial reused one numeric ID in the process-wide JSONL stream.
+That mixed root gave 2.3% M1 / 93.6% M2 / 1.7% Matched / 2.4% Unclassified.
+The fresh unmixed root gives 98.124% / 0.299% / 1.581% / 0.000%, and manual
+review confirms it: top M1 nodes include `CategoryTheory.Adjunction.proj`,
+`CategoryTheory.Mod.X`, `CategoryTheory.Functor.proj`, and
+`CategoryTheory.NatTrans.proj` with carried divergent hashes
+`3052377643/4045692675`; top M2 nodes include `HomologicalComplex`,
+`HomologicalComplex.instCategory`, and `Eq` with hashes
+`3131881859/4045692675` and `3031824037/2927184002`, each preceded by a
+reduction record. Equal-hash `CategoryTheory.Sheaf` and
+`AlgebraicGeometry.ProEtale.sheafMonoidalCategory` are the leading Matched
+nodes. The fresh partition is accepted.
+
+The three valid C controls for the round are FiniteBaseChange,
+IntegralComparison, and PR1627; the PR1627 generated-field control aligns the
+selected field and restores it while preserving the outer root. All other
+proposed controls are explicitly marked root-changing.

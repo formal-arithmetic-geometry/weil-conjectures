@@ -107,3 +107,9 @@ alignment was found. O and R source snapshots are byte-identical; the earlier
 R endpoint timing was 11,363 ms. Thus no causal C speedup is claimed and the
 restoration is consistent with the original mismatch. Outcome: **C** (M1
 dominates; M2 and Matched are measured and small).
+
+## MPRWE round 3 (READY3.2)
+
+The accepted unmixed root is M1 98.124%, M2 0.299%, Matched 1.581%,
+Unclassified 0.000%. The earlier 2.3%/93.6% validation is superseded by the
+process-wide root-ID correction.

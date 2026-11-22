@@ -81,3 +81,8 @@ The provider replacement in the existing aligned probe changes the dependent
 root and removes M0, so it is invalid for C. No child-only M2 alignment
 type-checks under the original telescope. O and R snapshots are byte-identical;
 the earlier aligned residual was 20.699 s. Outcome: **C**.
+
+## MPRWE round 3 (READY3.2)
+
+Shares are M1 99.733%, M2 0.025%, Matched 0.241%, Unclassified 0.001%.
+The provider alignment remains root-changing and invalid for C.

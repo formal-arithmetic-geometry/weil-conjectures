@@ -95,3 +95,8 @@ The major-premise replacement changes the root and removes M0, so it is an
 invalid C control. No type-correct descendant-only M2 alignment was found.
 O and R snapshots are byte-identical; the earlier R direct timing was
 70,107 ms. Outcome: **C**.
+
+## MPRWE round 3 (READY3.2)
+
+Shares are M1 99.700%, M2 0.072%, Matched 0.228%, Unclassified 0.000%.
+The major-premise alignment remains root-changing and invalid for C.
