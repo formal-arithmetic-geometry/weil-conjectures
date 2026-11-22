@@ -82,4 +82,12 @@ Manual top-five aggregate paths under the generated-field body: M1
 1521.221, 1245.415, 1176.906, 1129.421 ms; Matched 873.394, 744.055,
 685.312, 492.219, 450.666 ms. M0 is the root entry. The aligned control
 changes the root rather than being descendant-only; restored source retains
-the original context. Outcome: D.
+the original context.
+
+C is valid for this case: aligned and restored controls both preserve the
+10,904,899-call root. The aligned control measured 27,417.480 ms with shares
+M1 65.9%, M2 25.1%, Matched 9.0%; the restored control measured 26,371.827 ms
+with shares M1 64.3%, M2 26.1%, Matched 9.6%. Neither descendant alignment
+reduces M2 exposure; the share increases slightly, so the control does not
+support an M2-causal reduction. Outcome: D.
+
