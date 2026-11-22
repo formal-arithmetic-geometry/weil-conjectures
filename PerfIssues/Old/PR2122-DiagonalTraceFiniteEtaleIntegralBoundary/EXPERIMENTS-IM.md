@@ -19,3 +19,21 @@ but changes module construction.
 
 Conclusion: H1/H3, limited by the missing olean and recursor validity. No strict
 matched control or fresh current-case replay is available; unif_hint is not applicable.
+
+## IM round 2
+
+The original probe still cannot load the required import closure, so no fresh
+O/A/R root is claimed. `probes/im/MatchedGeneric.lean` records a diagnostic
+same-family proof body at `Exists.casesOn`, compared with an `id`-wrapped
+version. The heads are `Exists.casesOn/id`, non-structural, and both sides
+kernel-check.
+
+Fresh READY2 zero-threshold counters measured M at `0.038 ms`, two calls, depth
+`1`, `0.037/0.001 ms` comparison/reduction, one proposition comparison, and
+one `Exists.casesOn|id` proof-position entry; the source check reports `0 ms`.
+This is diagnostic only because the original motive/witness/body context is
+unavailable without the missing olean.
+
+Verdict: the isolated matched recursor body is cheap; the original case remains
+inconclusive for H1/H2/H3, limited by the missing closure. Historical O/A are
+AD-phase/reference evidence.

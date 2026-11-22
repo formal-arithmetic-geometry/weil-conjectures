@@ -21,3 +21,22 @@ The aligned construction retained a 20.699 s root.
 Conclusion: H1/H3; M is inconclusive by validity. Composition is a path marker;
 nested composition, DFunLike.coe, and Functor.map descendants own the time.
 No unif_hint or shared-provider control is valid.
+
+## IM round 2
+
+`probes/im/MatchedDiagnostic.lean` keeps the exact `CategoryStruct.comp` root
+and dependent consumer, replacing argument 5 (`Functor.map`) with an
+`id`-wrapped term from the same provider. The rebuilt root type-checks, has the
+same head, and is non-structural. This is diagnostic because only the proof
+term construction changes.
+
+Fresh explicit checks measured M `1 ms` and O `28,755 ms`. READY2 counters
+measured the fresh O root at `32,248.694 ms`, `2,573,989` calls, depth `95`,
+with `15,068.695/17,179.999 ms` comparison/reduction exclusive, dependent
+timers `12,519.403/14,085.408 ms`, and `112,996,826` expressions /
+`3,776,404,760` bytes. M stayed below the 100 ms reporting threshold; its
+direct kernel conversion was the labeled 1 ms check. A/R remain round-1
+AD-phase measurements.
+
+Verdict: diagnostic M versus fresh O strongly supports H2. The matched root
+has no meaningful recursive workload; the mismatch induces the expensive path.

@@ -25,3 +25,15 @@ were invalid for every dependent telescope touched. Context controls support
 interaction: isolated PR1563/PR1624 endpoint checks are expensive but their
 dependent parents are larger. PR2122 was not freshly replayable because of the
 missing imported olean.
+
+## IM round 2 addendum
+
+PR1563 now has a same-head diagnostic M at the exact `CategoryStruct.comp`
+root: `1 ms` versus fresh O `28,755 ms` (O counters `2,573,989` calls and
+`15,068.695/17,179.999 ms` comparison/reduction), supporting H2. PR1624,
+PR1627, and PR2122 have checked same-family diagnostic M probes, with
+zero-threshold counters below `0.050 ms`; their original consumers could not
+be replayed under the available olean closures, so those results are
+validity-limited and do not replace the round-1 root classifications. No
+relevant `unif_hint` assignment was found. Current-case revision for this
+round is `03f2a41973c`; kernel is READY2-4.35.0.

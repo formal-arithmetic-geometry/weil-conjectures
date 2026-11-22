@@ -20,3 +20,21 @@ cost 672 ms. Isolated endpoint checks were 17,942 and 30,066 ms. A retained
 Conclusion: H1/H3; strict M invalid. The endpoint pattern is intrinsically
 expensive in context, while alignment removes most mismatch-induced work.
 No valid provider-sharing or unif_hint control exists.
+
+## IM round 2
+
+The exact old-case source no longer type-checks against the available olean/API
+snapshot, and the historical worktree is unavailable. `probes/im/MatchedGeneric.lean`
+therefore records a diagnostic same-family M: two same-provider nested
+`Functor.comp` endpoints, with the right endpoint wrapped through `id`. The
+heads are `CategoryTheory.Functor.comp/id`, non-structural, and both sides
+kernel-check.
+
+Fresh READY2 zero-threshold counters measured M at `0.050 ms`, one call, depth
+`0`, and `0.036/0.014 ms` comparison/reduction; the source check reports
+`0 ms`. No fresh O/A/R root is claimed because the exact endpoint consumer
+does not elaborate in this tree; the earlier values remain AD-phase evidence.
+
+Verdict: the bare matched `Functor.comp` construction is cheap, but the
+original dependent endpoint is validity-limited and remains inconclusive for
+H1/H2 until a compatible historical closure is available.
