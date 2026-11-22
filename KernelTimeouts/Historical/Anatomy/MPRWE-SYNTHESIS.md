@@ -1,37 +1,44 @@
-# MPRWE Cross-case Synthesis (Round 3)
+# MPRWE Cross-case Synthesis (round 4)
 
-Analyzer revision: READY3.2. It uses a process-wide atomic root serial in both
-instrumented kernels and a root selector that prefers roots with actual raw
-coverage. All shares below are from the READY3.1 aggregate records under this
-revision; the NativePullTensor validation partition is rejected because its
-thread-local root ID mixed worker roots.
+Analyzer revision: READY3.2 `mprwe_analyze.py`. The instrumented kernels use
+process-wide atomic root identity and active-root pinning. Every valid trace
+root below matches the independent READY3.2 counter root in total calls;
+counter / trace times are comparison-exclusive milliseconds. Trace aggregate
+time includes hash/path bookkeeping. Raw coverage is the bounded enter/exit
+capture. Older synthesis tables are superseded.
 
-| Case | Root calls / exclusive ms | M1 | M2 | Matched | Unclassified | C result | Outcome |
-|---|---:|---:|---:|---:|---:|---:|---|
-| Derived-Completion Cone | 1,162 / 8.323 | 76.7% | 11.6% | 10.3% | 0.8% | dependent-field restoration | D |
-| FiniteBaseChange | 239,340,712 / 880,519.949 | 74.441% | 23.947% | 1.614% | 0.000% | descendant alignment restored | D |
-| IntegralComparison | 9,426,253 / 43,830.207 | 98.400% | 1.328% | 0.255% | 0.017% | first-leaf alignment restored | C |
-| RealPurity | 17,310,168 / 76,192.584 | 62.046% | 36.568% | 1.389% | 0.000% | restoration setup repaired | D |
-| OrderedSpectralRawLattices | 18,944,709 / 58,992.669 | 63.902% | 35.347% | 0.758% | 0.000% | restoration setup repaired | D |
-| EtaleHom | 3,180,470 / 21,549.825 | 99.762% | 0.001% | 0.236% | 0.001% | no valid descendant-only control | C |
-| F66Adj | 3,897,905 / 24,659.468 | 99.743% | 0.000% | 0.257% | 0.000% | no valid descendant-only control | C |
-| ImageHomCounit | 6,359,958 / 42,708.813 | 99.761% | 0.007% | 0.232% | 0.000% | no valid descendant-only control | C |
-| RealPushforward | 17,340,236 / 75,988.013 | 61.473% | 37.204% | 1.326% | 0.000% | no valid descendant-only control | D |
-| NativePullTensor | 2,685,580 / 20,675.658 | 98.124% | 0.299% | 1.581% | 0.000% | root provider alignment invalid | C |
-| PR1556 | 6,670,198 / 45,113.186 | 99.700% | 0.072% | 0.228% | 0.000% | major-premise alignment invalid | C |
-| PR1625 | 11,757,788 / 68,508.492 | 99.471% | 0.071% | 0.456% | 0.001% | outer-major alignment invalid | C |
-| PR1563 | 2,573,989 / 17,289.421 | 99.733% | 0.025% | 0.241% | 0.001% | provider alignment invalid | C |
-| PR1624 | 6,598,545 / 40,848.850 | 99.809% | 0.006% | 0.185% | 0.001% | endpoint alignment invalid | C |
-| PR1627 | 10,904,899 / 28,458.907 | 66.352% | 24.928% | 8.727% | 0.000% | generated-field descendant restored | D |
-| PR2122 | 2,227,198 / 13,821.715 | 98.901% | 0.876% | 0.201% | 0.021% | recursor alignment invalid | C |
+Shares are ordered M0 / M1 / M2 / Matched / Unclassified. The call-share and
+exclusive-time-share columns are both included because the two partitions are
+not interchangeable.
 
-## §11 Answer
+| Case | O/analyzed calls | Counter / trace ms | Raw coverage | Call shares (%) | Exclusive-time shares (%) | C result | Outcome |
+|---|---:|---:|---:|---|---|---|---|
+| Derived-Completion Cone | 12,220,823 / 12,220,823 | 82,320.997 / 84,401.270 | 1,562 / 12,220,823 (0.013%) | 0.000 / 76.560 / 0.074 / 23.366 / 0.000 | 0.000 / 99.725 / 0.064 / 0.210 / 0.000 | dependent-field alignment changes root telescope; restoration diagnostic | D |
+| FiniteBaseChange | 239,340,712 / 239,340,712 | 681,687.160 / 1,082,179.217 | 3,828 / 239,340,712 (0.002%) | 0.000 / 54.398 / 16.920 / 28.682 / 0.000 | 0.000 / 74.113 / 24.473 / 1.414 / 0.000 | descendant alignment changes root; restoration diagnostic | D |
+| IntegralComparison | 9,426,198 / 9,426,198 | 83,768.275 / 224,445.716 | 3,913 / 9,426,198 (0.042%) | 0.000 / 70.875 / 0.267 / 28.857 / 0.000 | 0.000 / 99.839 / 0.052 / 0.109 / 0.000 | After changes root; Before restores O | C |
+| RealPurity | 17,310,168 / 17,310,168 | 52,925.953 / 85,908.939 | 3,222 / 17,310,168 (0.019%) | 0.000 / 46.148 / 25.171 / 28.681 / 0.000 | 0.000 / 63.672 / 35.139 / 1.189 / 0.000 | dependent witness telescope changes | D |
+| OrderedSpectralRawLattices | 18,944,709 / 18,944,709 | 35,362.863 / 65,054.912 | 4,333 / 18,944,709 (0.023%) | 0.000 / 43.922 / 18.473 / 37.605 / 0.000 | 0.000 / 62.919 / 36.382 / 0.698 / 0.000 | route controls change dependent root | D |
+| EtaleHom | 3,180,470 / 3,180,470 | 22,573.922 / 26,975.321 | 4,124 / 3,180,470 (0.130%) | 0.000 / 75.171 / 0.001 / 24.828 / 0.000 | 0.001 / 99.800 / 0.002 / 0.197 / 0.000 | hv alignment changes root; no M0-preserving control | C |
+| F66Adj | 3,897,905 / 3,897,905 | 26,603.785 / 30,149.979 | 3,685 / 3,897,905 (0.095%) | 0.000 / 75.968 / 0.000 / 24.032 / 0.000 | 0.000 / 99.791 / 0.000 / 0.209 / 0.000 | hR/Over telescope changes root | C |
+| ImageHomCounit | 6,359,958 / 6,359,958 | 42,138.453 / 42,672.620 | 3,773 / 6,359,958 (0.059%) | 0.000 / 75.178 / 0.004 / 24.818 / 0.000 | 0.001 / 99.761 / 0.009 / 0.230 / 0.000 | endpoint alignment changes root | C |
+| RealPushforward | 17,340,236 / 17,340,236 | 125,356.436 / 105,827.556 | 3,122 / 17,340,236 (0.018%) | 0.000 / 46.148 / 25.171 / 28.680 / 0.000 | 0.000 / 63.011 / 35.985 / 1.003 / 0.000 | polynomial alignment changes dependent consumer | D |
+| NativePullTensor | 2,685,580 / 2,685,580 | 16,554.296 / 20,949.497 | 0 / 2,685,580 (0.000%) | 0.000 / 41.730 / 0.448 / 57.822 / 0.000 | 0.000 / 98.126 / 0.302 / 1.569 / 0.000 | provider alignment changes root; no descendant-only control | D |
+| PR1556 | 6,670,198 / 6,670,198 | 29,691.693 / 53,056.120 | 179,920 / 6,670,198 (2.697%) | 0.000 / 75.051 / 0.137 / 24.812 / 0.000 | 0.000 / 99.622 / 0.072 / 0.306 / 0.000 | major-premise alignment changes root and removes M0 | C |
+| PR1625 | 11,757,788 / 11,757,788 | 48,799.297 / 76,455.101 | 186,547 / 11,757,788 (1.586%) | 0.000 / 68.984 / 0.040 / 30.976 / 0.000 | 0.001 / 99.406 / 0.068 / 0.525 / 0.001 | outer-major alignment changes root and removes M0 | C |
+| PR1563 | 2,563,145 / 2,563,145 | 10,590.442 / 28,045.607 | 180,953 / 2,563,145 (7.061%) | 0.000 / 75.084 / 0.040 / 24.876 / 0.000 | 0.000 / 99.553 / 0.043 / 0.405 / 0.000 | provider alignment changes dependent root | C |
+| PR1624 | no valid root | unavailable | source failed before expensive root | unavailable | unavailable | type-level source obstruction | E |
+| PR1627 | 10,904,899 / 10,904,899 | 22,866.272 / 30,919.746 | 187,782 / 10,904,899 (1.722%) | 0.000 / 24.021 / 13.871 / 62.107 / 0.000 | 0.000 / 66.712 / 22.789 / 10.495 / 0.000 | aligned/restored preserve root; M2 shares 25.1% / 26.1% and do not fall | D |
+| PR2122 | 2,257,184 / 2,257,184 | 13,239.259 / 16,827.104 | 177,324 / 2,257,184 (7.856%) | 0.000 / 79.648 / 2.298 / 18.005 / 0.050 | 0.000 / 97.397 / 2.177 / 0.360 / 0.065 | recursor alignment changes dependent root | C |
 
-The workload is mixed. Inherited M1 propagation dominates every M1-classified
-root, while FiniteBaseChange, RealPurity, OrderedSpectralRawLattices,
-RealPushforward, and PR1627 have material newly exposed M2 shares. Matched
-descendants are measurable but never cost-dominant. The selective descendant
-experiment is valid for FiniteBaseChange, IntegralComparison, and PR1627; the
-remaining attempted alignments change the root telescope or remove M0 and are
-reported as invalid. The NativePullTensor contradiction was an event-stream
-root-ID collision, resolved by the READY3.2 atomic root identity.
+## §11 answer
+
+The workload is mixed. Inherited M1 propagation dominates the valid roots in
+Cone, IntegralComparison, EtaleHom, F66Adj, ImageHomCounit, NativePullTensor,
+PR1556, PR1625, PR1563, and PR2122. FiniteBaseChange, RealPurity,
+OrderedSpectralRawLattices, RealPushforward, and PR1627 expose material M2
+time; PR1627 also has substantial matched time. Matched descendants are not
+time-dominant in the other valid roots. PR1627's aligned/restored controls
+preserve the root but do not reduce M2; other attempted alignments change the
+dependent root or its M0 telescope. PR1624 is a source
+type-level obstruction with no valid expensive root. Branch heads are recorded
+in the two dataset reports.

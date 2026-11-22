@@ -93,3 +93,94 @@ type-preserving restoration of the original mismatch.
 
 The Cone diagnostic is re-read with the READY3.2 root identity. Its M1 76.7%,
 M2 11.6%, Matched 10.3%, and Unclassified 0.8% shares are unchanged.
+
+## MPRWE round 4 (READY3.2; current)
+
+The round-3 figures above are superseded. This section is the only current
+Cone result. The run used the clean Lean 4.33.1 release worktree with the
+READY3.2 patch (process-wide atomic root serial and thread-local active-root
+pinning), the historical 4.33.1 import closure, and the READY3.2 analyzer.
+
+### 1. Root and consistency check
+
+The original `OriginalRoot.lean` probe was run with `timeout 3600` and one
+Lean thread. The counters run selected root **1847**: **12,220,823** calls,
+**82.321 s** comparison-exclusive time, and **163.549 s** instrumented root
+span; it ended in the deterministic kernel timeout (12,220,746 successful
+exits and 77 timeout exits). The fresh trace selected the same root and call
+total, with **84.401 s** comparison-exclusive time and **147.133 s** root
+span. The 2.5% comparison-time increase is trace bookkeeping overhead; root
+identity and every workload counter match. The trace aggregate is therefore
+used for the shares below, with the counters run retained as the consistency
+control.
+
+Aggregate coverage is complete: 12,220,823/12,220,823 calls and
+84.401/84.401 s exclusive time. Raw capture contains 4,000 bounded events,
+1,562 entered calls and 1,496 exits (0.0128% and 0.0122% of root calls); raw
+events are for node review only. Analyzer revision: **READY3.2**.
+
+### 2. Provenance distribution (trace aggregate)
+
+| Provenance | Calls | Exclusive time | Time share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.000059 s | 0.00007% |
+| M1 | 9,356,263 | 84.169455 s | 99.72534% |
+| M2 | 9,087 | 0.054136 s | 0.06414% |
+| Matched | 2,855,469 | 0.177504 s | 0.21031% |
+| Unclassified | 3 | 0.000116 s | 0.00014% |
+
+M1 is inherited work in the deep
+`root/binder_body[8]/argument[4]/argument[7]/argument[4]/binder_body[1]`
+branch. M2 is small by exclusive time; matched descendants are also small
+despite 2.86M calls.
+
+### 3. Top captured nodes and reduction review
+
+The bounded raw review found these top five nodes per non-empty label (heads
+and first-divergence paths are from the raw event records; times are direct
+exclusive time):
+
+* **M1:** `LinearMap.proj` (depth 69, 0.094 ms, `root/expr/fn/fn/arg/...`),
+  `LinearMap.comp` (depth 58, 0.091 ms, `root/fn/fn/fn/...`),
+  `LinearMap.proj` (depth 74, 0.087 ms, same expression path),
+  `LinearMap.mk` (depth 59, 0.087 ms, `root/fn/fn/fn/...`), and
+  `LinearMap.proj` (depth 75, 0.087 ms, same expression path). These are
+  carried structural divergences (M1), not new reductions.
+* **M2:** `CategoryTheory.IsGrothendieckAbelian`/same head (depth 4,
+  0.048 ms, proposition path), `Eq`/`Eq` (depth 25, 0.022 ms),
+  `inlineCone._proof_2` versus
+  `GrothendieckTopology.isGrothendieckAbelian_sheaf_of_essentiallySmall`
+  (depth 3, 0.017 ms), `HomologicalComplex.d`/same head (depth 31,
+  0.017 ms), and `HomologicalComplex.X`/same head (depth 32, 0.016 ms).
+  These are the highest captured M2 nodes; the preceding exposing
+  reductions include `Functor.proj -> Functor.mk`,
+  `MonoidalCategoryStruct.proj -> Functor.obj`, `HAdd.proj -> Add.add`,
+  and `Add.proj -> LinearMap.mk` on the corresponding dependent paths.
+* **Matched:** `Category.opposite`/same head (depth 53, 0.012 ms),
+  `FullSubcategory.category`/same head (depth 17, 0.008 ms),
+  `ModuleCat.Hom.mk`/same head (depth 57, 0.007 ms), `Functor`/same head
+  (depth 27, 0.005 ms), and `ModuleCat.Hom.mk`/same head (depth 57,
+  0.005 ms). Entry hashes were equal for these descendants.
+* **Unclassified:** `DerivedCategory`/same head (depth 1, 0.028 ms);
+  no semantic provenance was forced for this retained uncertain node.
+
+### 4. Selective descendant alignment and restoration
+
+The selected top-cost M2 route is the dependent proof/provider exposure in
+the `tensorLeft` object branch. `InvalidDescendantAlignment.lean` still
+cannot align that field while retaining the original `inlineCone` consumer,
+eight-binder telescope, and root M0: the proof field type depends on the
+original provider, so replacing it changes the field type and is not a
+type-correct descendant-only intervention. `InvalidRootAlignment.lean` and
+`InvalidCombinedAlignment.lean` likewise alter the root provider/consumer and
+are invalid C controls. The original probe is the restoration R; its fresh
+READY3.2 counters reproduce the root and call total above. No causal speedup
+or C label change is claimed.
+
+### 5. Conclusion
+
+The Cone is overwhelmingly inherited M1 work by exclusive time (99.725%),
+with a small M2 component (0.064%) and a measurable but non-dominant matched
+component (0.210%). The dependent proof/provider obstruction prevents a valid
+selective descendant alignment; outcome **D** (mixed workload, M1-dominant)
+is retained, with the C result reported as unavailable/type-invalid.
