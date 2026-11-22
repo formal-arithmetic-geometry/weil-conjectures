@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
+import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreMapCore
+
 /-! # Core affine construction of the reduced generic field embedding
 
 ## References
@@ -16,7 +18,6 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 * [Stacks, Tag 0559]
 * [Stacks, Tag 030R]
 -/
-import WeilConjectures.AlgebraicGeometry.ReducedGenericFibreMapCore
 @[expose] public section
 set_option autoImplicit false
 universe u

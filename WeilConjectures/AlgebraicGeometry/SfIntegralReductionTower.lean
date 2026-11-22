@@ -70,7 +70,6 @@ private noncomputable instance sfRestrictionAdditive (n : ℕ) :
   Functor.additive_of_preserves_binary_products _
 
 /-- Additivity of the fixed scalar-extension functor, with explicit coefficients. -/
-
 noncomputable instance sfExtensionAdditive (n : ℕ) :
     (scalarReductionExtension.{u, u} l E X n).Additive :=
   scalarReductionExtensionAdditive.{u, u} l E X n

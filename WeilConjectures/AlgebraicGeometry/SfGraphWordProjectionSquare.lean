@@ -60,7 +60,6 @@ private theorem paste_graph_squares
 /-- The graph comparison intertwines projection on a compactification and successive
 projection on the proper/open/proper word.
 -/
-
 theorem sfGraphCompactificationComparison_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

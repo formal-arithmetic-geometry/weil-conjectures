@@ -86,7 +86,6 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The projection map for the identity, normalized by the specified direct-image identity:
 composed with the identity comparisons `rightDerivedLowerShriekIdIsoOfLowerStar` and
 `leftDerivedUpperStarId`, it is the identity comparison. -/
-
 theorem identityProjectionNormalization (X : Scheme.{u})
     (V M : DerivedCategoryModule A X) :
     ((derivedTensor (ModuleCat.{u + 1} A) X).map

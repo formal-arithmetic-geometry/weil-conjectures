@@ -295,7 +295,6 @@ theorem datum_diagonalClass (hS : IsUnit (N : Γ(S, ⊤)))
   rfl
 
 /-- The trace field of the concrete datum is the constructed transported trace. -/
-
 theorem datum_trace (hS : IsUnit (N : Γ(S, ⊤)))
     (τ : ordinaryFiniteP1SplittingTarget A N hA S ⟶ ordinaryFiniteUnit A S)
     (κ : Ext

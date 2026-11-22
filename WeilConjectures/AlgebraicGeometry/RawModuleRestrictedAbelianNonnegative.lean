@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawDiagram
 public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomComparison
+import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
+
 /-! # Raw module Hom and restricted abelian cohomology in nonnegative degrees
 
 ## References
@@ -16,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomComparison
 * [Stacks, Tag 03Q8]
 * [Stacks, Tag 09Z1]
 -/
-import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
 @[expose] public section
 universe u
 open CategoryTheory Limits Opposite

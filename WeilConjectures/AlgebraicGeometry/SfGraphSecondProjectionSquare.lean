@@ -446,7 +446,6 @@ private theorem wordProjection_graph
 
 /-- Projection compatibility of the second graph side: `sfGraphSecondSideIso` intertwines
 the word projection maps of the second presentation and of `t`. -/
-
 theorem sfGraphSecondSideIso_projection
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
