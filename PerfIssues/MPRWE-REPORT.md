@@ -20,6 +20,8 @@ Shares are ordered M0 / M1 / M2 / Matched / Unclassified.
 | PR2122 | 2,257,184 / 2,257,184 | 13,239.259 / 16,827.104 | 177,324 / 2,257,184 (7.856%) | 0.000 / 79.648 / 2.298 / 18.005 / 0.050 | 0.000 / 97.397 / 2.177 / 0.360 / 0.065 | recursor alignment changes dependent root | C |
 
 The valid roots are M1-dominated except PR1627, which has material M2 and
-matched exposure. NativePullTensor's earlier mixed result was a thread-local
-root-ID collision; the atomic-root run above is the accepted partition.
+matched exposure. The attempted selective alignments are root-changing or
+type-invalid; restored variants preserve the original context for diagnosis.
+NativePullTensor's earlier mixed result was a thread-local root-ID collision;
+the atomic-root run above is the accepted partition.
 Branch round4 base: `dataset/perf-issues`.

@@ -61,27 +61,25 @@ available.
 
 ## MPRWE round 2
 
-READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
-root had 10,904,899 calls, depth 61, and 28,458.907 ms aggregate
-comparison-exclusive time. Aggregate records are complete; raw selected-root
-coverage was 0 because earlier roots consumed the cap.
+## MPRWE round 4 (READY3.2; supersedes earlier tables)
+
+Fresh O root 15228 matched between counters and trace: 10,904,899 calls.
+Counter/trace comparison-exclusive times were 22,866.272 / 30,919.746 ms;
+trace reduction was 27,558.270 ms. Analyzer READY3.2; aggregate records are
+complete. Raw coverage was 187,782/10,904,899 calls (1.7%; 1,108.579 ms).
+Final source diagnostics occurred after the selected root.
 
 | Provenance | Calls | Exclusive ms | Share |
 |---|---:|---:|---:|
-| M0 | 1 | 0.032 | 0.000% |
-| M1 | 2,619,482 | 18,883.772 | 66.352% |
-| M2 | 1,512,663 | 7,091.522 | 24.928% |
-| Matched | 6,772,753 | 2,483.581 | 8.727% |
+| M0 | 1 | 0.041 | 0.000% |
+| M1 | 2,619,482 | 20,627.197 | 66.712% |
+| M2 | 1,512,663 | 7,046.801 | 22.789% |
+| Matched | 6,772,753 | 3,245.707 | 10.495% |
 | Unclassified | 0 | 0.000 | 0.000% |
 
-The top M2 groups are the generated-field paths under
-`binder_body[2]/argument[2]/argument[6]/argument[5]`, with the largest group
-1,807.321 ms. The corresponding generated-field Matched groups are larger in
-calls but total 2,483.581 ms. This is a mixed mechanism: M1 is largest, but
-M2 is a material quarter of exclusive time and Matched work is measurable.
-
-The generated-field replacement changes the generated provider/domain and
-removes M0, so it is invalid for C. No type-correct descendant-only
-alignment was found; the existing restoration source is byte-identical to O
-and restores the original field. Outcome: **D** (M1 plus a substantial M2
-contribution, with a smaller intrinsic Matched component).
+Manual top-five aggregate paths under the generated-field body: M1
+5600.191, 5090.047, 3573.112, 3498.938, 2861.415 ms; M2 1972.574,
+1521.221, 1245.415, 1176.906, 1129.421 ms; Matched 873.394, 744.055,
+685.312, 492.219, 450.666 ms. M0 is the root entry. The aligned control
+changes the root rather than being descendant-only; restored source retains
+the original context. Outcome: D.
