@@ -155,8 +155,8 @@ of strict systems, before evaluating. Restriction retains the completed coeffici
 
 - `QuotientFrobenius.quotientRing`, `QuotientFrobenius.modules`, `QuotientFrobenius.derived`:
   the quotient ring, its strict module systems and their derived category.
-- `QuotientFrobenius.diagonal`, `QuotientFrobenius.restriction`: the diagonal and restriction
-  functors comparing completed coefficients with the quotient diagram.
+- `QuotientFrobenius.diagonal`: the diagonal functor from completed coefficients to the
+  quotient diagram.
 - `QuotientFrobenius.Cube`, `QuotientFrobenius.face`: Frobenius automorphisms of a Cartesian
   square and its Cartesian faces.
 
@@ -239,26 +239,6 @@ abbrev evaluation (T : Scheme.{t}) (n : ℕ) :=
 abbrev siteMap {U V : Scheme.{t}} (u : U ⟶ V) :=
   (𝟭 ℕ).prod (proEtaleBaseChange u)
 
-/-- Vertical covers are preserved by base change. -/
-theorem siteMap_continuous {U V : Scheme.{t}} (u : U ⟶ V) :
-    (siteMap u).IsContinuous (coefficientSequenceTopology (ProEt.topology V))
-      (coefficientSequenceTopology (ProEt.topology U)) := by
-  sorry
-
-attribute [instance] siteMap_continuous
-
-/-- The vertical slice of the strict ring is the specified finite coefficient sheaf. -/
-theorem quotientRing_obj (T : Scheme.{t}) (W : (ℕ × T.ProEt)ᵒᵖ) :
-    (quotientRing d T).obj.obj W = (d.finiteRing T W.unop.1).obj.obj (op W.unop.2) := by
-  sorry
-
-/-- K-injective resolutions in the actual quotient-system abelian category. -/
-theorem modules_kinjective (T : Scheme.{t}) :
-    Abelian.HasKInjectiveResolutions (modules d T) := by
-  sorry
-
-attribute [instance] modules_kinjective
-
 /-- A constant coefficient presheaf is a sheaf on the vertical sequence site. -/
 theorem diagonalRing_isSheaf (T : Scheme.{t}) :
     Presheaf.IsSheaf (coefficientSequenceTopology (ProEt.topology T))
@@ -270,12 +250,6 @@ def diagonalRing (T : Scheme.{t}) :
     Sheaf (coefficientSequenceTopology (ProEt.topology T)) CommRingCat.{t + 1} :=
   ⟨(CategoryTheory.Prod.snd ℕ T.ProEt).op ⋙ (d.completedRing T).obj,
     diagonalRing_isSheaf d T⟩
-
-/-- The projection component uses the fixed vertical-slice identification. -/
-def diagonalProjectionComponent (T : Scheme.{t}) (W : (ℕ × T.ProEt)ᵒᵖ) :
-    (diagonalRing d T).obj.obj W ⟶ (quotientRing d T).obj.obj W :=
-  (d.projection T W.unop.1).hom.app (op W.unop.2) ≫
-    eqToHom (quotientRing_obj d T W).symm
 
 /-- Projection to the original site is continuous for vertical covers. -/
 theorem diagonal_continuous (T : Scheme.{t}) :
@@ -312,48 +286,6 @@ instance diagonal_limits (T : Scheme.{t}) : PreservesFiniteLimits (diagonal d T)
 instance diagonal_colimits (T : Scheme.{t}) : PreservesFiniteColimits (diagonal d T) :=
   (diagonal_exact d T).2
 
-/-- Restriction along Delta A_T to Q_T, followed by the normalized diagram realization. -/
-theorem moduleRestriction_exists (T : Scheme.{t}) :
-    ∃! R : modules d T ⥤ d.towers T,
-      (∀ (M : modules d T) (n : ℕ),
-        (R.obj M).obj (op n) = (reductionRestrict T (d.projection T n)).obj
-          ((SemilinearSections.evaluation.{t + 1, t, t + 1}
-            (ProEt.topology T) (d.finiteRing T) (transition d T) n).obj M)) ∧
-      (∀ (M : modules d T) (m n : ℕ) (h : n ≤ m) (U : T.ProEtᵒᵖ),
-        HEq (fun x ↦ (((R.obj M).map (homOfLE h).op).val.app U) x)
-          (fun x : M.val.obj (op (m, U.unop)) ↦
-            M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x)) ∧
-      (∀ {M N : modules d T} (a : M ⟶ N) (n : ℕ) (U : T.ProEtᵒᵖ),
-        HEq (fun x ↦ (((R.map a).app (op n)).val.app U) x)
-          (fun x : M.val.obj (op (n, U.unop)) ↦ a.val.app (op (n, U.unop)) x)) := by
-  sorry
-
-/-- The unique actual strict scalar restriction with the prescribed section maps. -/
-def moduleRestriction (T : Scheme.{t}) : modules d T ⥤ d.towers T :=
-  (moduleRestriction_exists d T).exists.choose
-
-/-- Scalar restriction is additive and exact on the strict system category. -/
-theorem moduleRestriction_exact (T : Scheme.{t}) :
-    (moduleRestriction d T).Additive ∧ PreservesFiniteLimits (moduleRestriction d T) ∧
-      PreservesFiniteColimits (moduleRestriction d T) := by
-  sorry
-
-/-- Additive scalar restriction. -/
-instance moduleRestriction_additive (T : Scheme.{t}) : (moduleRestriction d T).Additive :=
-  (moduleRestriction_exact d T).1
-
-/-- Left exact scalar restriction. -/
-instance moduleRestriction_limits (T : Scheme.{t}) :
-    PreservesFiniteLimits (moduleRestriction d T) := (moduleRestriction_exact d T).2.1
-
-/-- Right exact scalar restriction. -/
-instance moduleRestriction_colimits (T : Scheme.{t}) :
-    PreservesFiniteColimits (moduleRestriction d T) := (moduleRestriction_exact d T).2.2
-
-/-- Derived strict scalar restriction, rather than forgetting to a family of objects. -/
-abbrev restriction (T : Scheme.{t}) : derived d T ⥤ DerivedCategory (d.towers T) :=
-  (moduleRestriction d T).mapDerivedCategory
-
 /-- Underived evaluation on the strict quotient module category. -/
 abbrev moduleEvaluation (T : Scheme.{t}) (n : ℕ) :=
   @SemilinearSections.evaluation.{t + 1, t, t + 1} T.ProEt _
@@ -382,26 +314,6 @@ abbrev ambientEvaluation (T : Scheme.{t}) (n : ℕ) :=
 /-- Exact restriction of the finite coefficient action to the completed coefficient action. -/
 abbrev finiteRestriction (T : Scheme.{t}) (n : ℕ) :=
   reductionDerivedRestrict T (d.projection T n)
-
-/-- Restriction and evaluation commute by the identity on the original section carriers. -/
-theorem moduleRestrictionEvaluation_exists (T : Scheme.{t}) (n : ℕ) :
-    ∃! e : moduleRestriction d T ⋙ ambientModuleEvaluation d T n ≅
-        moduleEvaluation d T n ⋙ reductionRestrict T (d.projection T n),
-      ∀ (M : modules d T) (U : T.ProEtᵒᵖ),
-        HEq (fun x ↦ (e.hom.app M).val.app U x)
-          (fun x : M.val.obj (op (n, U.unop)) ↦ x) := by
-  sorry
-
-/-- Derived restriction/evaluation, induced by the ordinary identity of section carriers. -/
-def restrictionEvaluation (T : Scheme.{t}) (n : ℕ) :
-    restriction d T ⋙ ambientEvaluation d T n ≅
-      evaluation d T n ⋙ finiteRestriction d T n :=
-  Functor.mapDerivedCategoryCompIso (moduleRestriction d T)
-    (ambientModuleEvaluation d T n) ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (moduleRestrictionEvaluation_exists d T n).exists.choose ≪≫
-    (Functor.mapDerivedCategoryCompIso (moduleEvaluation d T n)
-      (reductionRestrict T (d.projection T n))).symm
 
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
