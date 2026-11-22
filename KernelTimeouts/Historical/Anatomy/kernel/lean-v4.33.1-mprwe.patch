@@ -17,7 +17,7 @@
  #include "runtime/interrupt.h"
  #include "runtime/sstream.h"
  #include "runtime/flet.h"
-@@ -24,6 +34,579 @@
+@@ -24,6 +34,580 @@
  #include "kernel/inductive.h"
  
  namespace lean {
@@ -139,7 +139,8 @@
 +static thread_local totals data;
 +static thread_local unsigned reduction_depth = 0;
 +static std::atomic<uint64_t> root_serial{0};
-+static uint64_t root_id() { return root_serial.load(std::memory_order_relaxed); }
++static thread_local uint64_t active_root_id = 0;
++static uint64_t root_id() { return active_root_id; }
 +static thread_local uint64_t mprwe_global_events = 0;
 +static unsigned bucket(unsigned n) { return n < 64 ? n : 64 + (n / 64); }
 +static std::FILE * mprwe_stream() {
@@ -381,7 +382,7 @@
 +        if (!mode()) return;
 +        enabled = true;
 +        if (!parent) {
-+            data = totals{}; root_serial.fetch_add(1, std::memory_order_relaxed);
++            data = totals{}; active_root_id = root_serial.fetch_add(1, std::memory_order_relaxed) + 1;
 +            memory_snapshot(data.start_rss, data.start_commit);
 +        }
 +        id = ++data.calls;
@@ -597,7 +598,7 @@
  static name * g_kernel_fresh = nullptr;
  static expr * g_dont_care    = nullptr;
  static name * g_bool_true    = nullptr;
-@@ -466,6 +1049,7 @@
+@@ -466,6 +1050,7 @@
      If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
      We also do not cache results. */
  expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
@@ -605,7 +606,7 @@
      scope_rec_depth guard;
      check_system("type checker: whnf", /* do_check_interrupted */ true);
  
-@@ -502,9 +1086,10 @@
+@@ -502,9 +1087,10 @@
      case expr_kind::FVar:
          return whnf_fvar(e, cheap_rec, cheap_proj);
      case expr_kind::Proj: {
@@ -618,7 +619,7 @@
              r = e;
          break;
      }
-@@ -513,6 +1098,7 @@
+@@ -513,6 +1099,7 @@
          expr f0 = get_app_rev_args(e, args);
          expr f = whnf_core(f0, cheap_rec, cheap_proj);
          if (is_lambda(f)) {
@@ -626,7 +627,7 @@
              unsigned m = 1;
              unsigned num_args = args.size();
              while (is_lambda(binding_body(f)) && m < num_args) {
-@@ -524,6 +1110,7 @@
+@@ -524,6 +1111,7 @@
                            cheap_rec, cheap_proj);
          } else if (f == f0) {
              if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
@@ -634,7 +635,7 @@
                  if (m_diag) {
                      auto f = get_app_fn(e);
                      if (is_constant(f))
-@@ -540,6 +1127,7 @@
+@@ -540,6 +1128,7 @@
          break;
      }
      case expr_kind::Let:
@@ -642,7 +643,7 @@
          r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
          break;
      }
-@@ -565,6 +1153,18 @@
+@@ -565,6 +1154,18 @@
  optional<expr> type_checker::unfold_definition_core(expr const & e) {
      if (is_constant(e)) {
          if (auto d = is_delta(e)) {
@@ -661,7 +662,7 @@
              levels const & us = const_levels(e);
              unsigned len = length(us);
              if (m_diag) {
-@@ -572,13 +1172,18 @@
+@@ -572,13 +1173,18 @@
              }
              if (len > 0) {
                  auto it = m_st->m_unfold.find(e);
@@ -682,7 +683,7 @@
              }
          }
      }
-@@ -601,16 +1206,16 @@
+@@ -601,16 +1207,16 @@
      }
  }
  
@@ -703,7 +704,7 @@
  optional<expr> reduce_native(environment const & env, expr const & e) {
      if (!is_app(e)) return none_expr();
      expr const & arg = app_arg(e);
-@@ -734,6 +1339,7 @@
+@@ -734,6 +1340,7 @@
  
  /** \brief Put expression \c t in weak head normal form */
  expr type_checker::whnf(expr const & e) {
@@ -711,7 +712,7 @@
      // Do not cache easy cases
      switch (e.kind()) {
      case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
-@@ -791,10 +1397,18 @@
+@@ -791,10 +1398,18 @@
      do {
          optional<expr> var_s_type;
          if (binding_domain(t) != binding_domain(s)) {
@@ -732,7 +733,7 @@
          }
          if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
              // free variable is used inside t or s
-@@ -807,8 +1421,15 @@
+@@ -807,8 +1422,15 @@
          t = binding_body(t);
          s = binding_body(s);
      } while (t.kind() == k && s.kind() == k);
@@ -750,7 +751,7 @@
  }
  
  bool type_checker::is_def_eq(level const & l1, level const & l2) {
-@@ -861,9 +1482,12 @@
+@@ -861,9 +1483,12 @@
  /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
      This method is used to implement an optimization in the method \c is_def_eq. */
  bool type_checker::is_def_eq_args(expr t, expr s) {
@@ -765,7 +766,7 @@
          t = app_fn(t);
          s = app_fn(s);
      }
-@@ -899,6 +1523,7 @@
+@@ -899,6 +1524,7 @@
      get_app_args(s, s_args);
      for (unsigned i = f_val.get_nparams(); i < s_args.size(); i++) {
          expr proj = mk_proj(f_val.get_induct(), i - f_val.get_nparams(), t);
@@ -773,7 +774,7 @@
          if (!is_def_eq(proj, s_args[i])) return false;
      }
      return true;
-@@ -909,14 +1534,17 @@
+@@ -909,14 +1535,17 @@
      \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
      Return false otherwise. */
  bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
@@ -791,7 +792,7 @@
                  if (!is_def_eq(t_args[i], s_args[i]))
                      break;
              }
-@@ -930,24 +1558,36 @@
+@@ -930,24 +1559,36 @@
  /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
      Return false otherwise. */
  lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
@@ -832,7 +833,7 @@
  }
  
  void type_checker::cache_failure(expr const & t, expr const & s) {
-@@ -958,15 +1598,19 @@
+@@ -958,15 +1599,19 @@
  }
  
  bool type_checker::succeeded_before(expr const & t, expr const & s) const {
@@ -855,7 +856,7 @@
  }
  
  void type_checker::cache_success(expr const & t, expr const & s) {
-@@ -1169,10 +1813,12 @@
+@@ -1169,10 +1814,12 @@
  }
  
  bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
@@ -869,7 +870,7 @@
  
      // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
      // we fully reduce `t` and check whether result is `s`.
-@@ -1180,7 +1826,7 @@
+@@ -1180,7 +1827,7 @@
      // proof terms of the form `Eq.refl true : decide p = true`.
      if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
          if (is_constant(whnf(t), *g_bool_true)) {
@@ -878,7 +879,7 @@
          }
      }
  
-@@ -1193,56 +1839,58 @@
+@@ -1193,56 +1840,58 @@
      */
      expr t_n = whnf_core(t, false, true);
      expr s_n = whnf_core(s, false, true);
