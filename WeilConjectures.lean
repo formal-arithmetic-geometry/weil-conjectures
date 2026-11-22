@@ -7592,7 +7592,6 @@ public import WeilConjectures.AlgebraicGeometry.HorizontalTransferInverseFormula
 public import WeilConjectures.AlgebraicGeometry.HypercoverCohomology
 public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.HypercoverFiniteSimplexLifting
-public import WeilConjectures.AlgebraicGeometry.HypercoverFreeResolution
 public import WeilConjectures.AlgebraicGeometry.HypercoverInjectiveModuleRow
 public import WeilConjectures.AlgebraicGeometry.HypercoverOneMoreSimplex
 public import WeilConjectures.AlgebraicGeometry.HypercoverStageTowerTruncation
@@ -12607,7 +12606,6 @@ public import WeilConjectures.AlgebraicGeometry.Sites.DerivedStalk
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorMap
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleGraphSectionExtensionMap
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleGrothendieckAbelian
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHypercover
