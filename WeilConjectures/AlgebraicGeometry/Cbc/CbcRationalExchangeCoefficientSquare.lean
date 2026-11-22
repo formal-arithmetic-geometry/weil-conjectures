@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedCoefficientFamilies
 import WeilConjectures.AlgebraicGeometry.Cbc.CbcProperCoefficientSquare
+import WeilConjectures.AlgebraicGeometry.Cbc.CbcOpenCoefficientSquare
 import WeilConjectures.AlgebraicGeometry.Cbc.CbcIntegralNormalizedCoefficientSquare
 import WeilConjectures.AlgebraicGeometry.Cbc.CbcLocalizedCoefficientSquare
 import all WeilConjectures.AlgebraicGeometry.Complete.CompleteCompactSupportProetale
