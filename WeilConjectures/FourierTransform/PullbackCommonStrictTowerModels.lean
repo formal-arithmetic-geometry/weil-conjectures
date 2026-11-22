@@ -103,7 +103,7 @@ Source: Stacks 099N(2),(5) and 0941.
 The helper definitions retain the actual reduction tower, derived counits and
 coefficient identity. `FdCommonStrictTowerModels` packages its strict comparisons,
 both cone coordinates and the resolution-normalized natural comparison.
-`fdPullbackCommonStrictTowerModels` states existence under the node's hypotheses.
+`fdPullbackCommonStrictTowerModels` states their existence.
 -/
 
 @[expose] public noncomputable section

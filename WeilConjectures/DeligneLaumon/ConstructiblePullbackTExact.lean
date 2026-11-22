@@ -29,7 +29,7 @@ import WeilConjectures.DeligneLaumon.PointCommonScalarCohomology
 Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), Proposition 6.8.14(2) and
 Remark 6.8.15.
 
-The comparison data below package the clauses of this node. Their cohomology maps
+The comparison data below package the clauses of the results cited above. Their cohomology maps
 are explicitly the composites of the truncation comparisons and the shift comparison.
 The scalar square is an equality of those maps, rather than an existence of unrelated
 isomorphisms. The categories and the standard pairs are the recorded intrinsic ones.

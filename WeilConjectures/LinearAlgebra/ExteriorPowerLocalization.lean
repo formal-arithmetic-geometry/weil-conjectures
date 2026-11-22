@@ -13,8 +13,8 @@ import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 
 /-! # Localization of exterior powers
 
-Source: the localization argument of, step 2, using the alternating universal property of
-exterior powers (Stacks Project, Algebra, Section 00DM). -/
+Source: the alternating universal property of exterior powers (Stacks Project, Algebra,
+Section 00DM). -/
 
 @[expose] public section
 set_option autoImplicit false

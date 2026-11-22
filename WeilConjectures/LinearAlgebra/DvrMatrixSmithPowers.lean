@@ -22,8 +22,8 @@ namespace Matrix
 uniformizer powers. The number of nonzero entries is its module rank.
 
 Source: Mathlib's `Submodule.smithNormalForm` and `Submodule.exists_smith_normal_form_of_le`;
-Stacks Project, Algebra, Tag 00PD for the DVR characterization. Agent passage to a rectangular
-matrix. (auxiliary. -/
+Stacks Project, Algebra, Tag 00PD for the DVR characterization, extended here
+to rectangular matrices. -/
 theorem exists_smith_pow {A : Type u} [CommRing A] [IsDomain A]
     [IsDiscreteValuationRing A] (π : A)
     (hπ : IsLocalRing.maximalIdeal A = Ideal.span {π}) (m n : ℕ)

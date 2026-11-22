@@ -123,8 +123,7 @@ private theorem ordinary_exact :
   exact ⟨inferInstance, h.2⟩
 
 /-- Ordinary completed-coefficient extension preserves finite limits.
-Source: Bhatt--Scholze Lemma 6.8.2(1), finite-free coordinate argument, and the integral
-paragraph of. -/
+Source: Bhatt--Scholze Lemma 6.8.2(1) and its finite-free coordinate argument. -/
 @[instance] theorem podCompletedOrdinaryScalarExtension_preservesFiniteLimits :
     PreservesFiniteLimits (completedOrdinaryScalarExtension.{u, u} l E L ι Y) := by
   exact (ordinary_exact l E L ι Y).1

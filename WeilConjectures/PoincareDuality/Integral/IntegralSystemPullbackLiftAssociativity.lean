@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralPullbackSystemCompar
 
 /-! # Associativity of a fully faithful integral lift
 
-Source: Stacks Project, Tag 0D6D and the naturality calculation in step 6 of.
+Source: Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section

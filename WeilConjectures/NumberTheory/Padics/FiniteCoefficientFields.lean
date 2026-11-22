@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-! # Finite coefficient fields inside an algebraic closure
 
-Source: Deligne, Weil II, (0.2), (1.1.1) d), pp. 144, 147 (auxiliary.
+Source: Deligne, Weil II, (0.2), (1.1.1) d), pp. 144, 147.
 
 ## Main definitions
 
@@ -31,29 +31,29 @@ variable (l : ℕ) [Fact l.Prime] (K : Type vCoeff) [Field K] [Algebra ℚ_[l] K
   [IsAlgClosure ℚ_[l] K]
 
 /-- The finite intermediate coefficient fields, ordered by inclusion.
-Source: Weil II (0.2), (1.1.1) d) (auxiliary. -/
+Source: Weil II (0.2), (1.1.1) d). -/
 abbrev FiniteCoefficientFields :=
   {E : IntermediateField ℚ_[l] K // FiniteDimensional ℚ_[l] E}
 
 /-- The recorded finiteness of each field in the directed set.
-Source: Weil II (1.1.1) d) (auxiliary. -/
+Source: Weil II (1.1.1) d). -/
 instance finiteCoefficientField_finiteDimensional (E : FiniteCoefficientFields l K) :
     FiniteDimensional ℚ_[l] E.val := E.property
 
 /-- The compositum is the supremum of the underlying intermediate fields.
 Finiteness is Mathlib's `IntermediateField.finiteDimensional_sup`.
-Source: Weil II (1.1.1) d) (auxiliary. -/
+Source: Weil II (1.1.1) d). -/
 noncomputable def finiteCoefficientCompositum (E F : FiniteCoefficientFields l K) :
     FiniteCoefficientFields l K :=
   ⟨E.val ⊔ F.val, inferInstance⟩
 
 /-- The base field is the least coefficient field, so the index set is nonempty.
-Source: Weil II (1.1.1) d) (auxiliary. -/
+Source: Weil II (1.1.1) d). -/
 noncomputable def finiteCoefficientBase : FiniteCoefficientFields l K := ⟨⊥, inferInstance⟩
 
 /-- The coefficient fields are directed, exhaust the algebraic closure, and inclusions
 are finite extensions.
-Source: Weil II (0.2), (1.1.1) d) (auxiliary. -/
+Source: Weil II (0.2), (1.1.1) d). -/
 theorem finiteCoefficientFields_properties :
     (∀ E F : FiniteCoefficientFields l K,
       E ≤ finiteCoefficientCompositum l K E F ∧ F ≤ finiteCoefficientCompositum l K E F) ∧

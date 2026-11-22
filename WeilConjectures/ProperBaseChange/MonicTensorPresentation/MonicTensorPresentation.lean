@@ -11,7 +11,7 @@ public import Mathlib.LinearAlgebra.PiTensorProduct.Basis
 
 /-! # Tensor presentations by monic equations
 
-Source: Stacks Project, Morphisms, Tag 03HW, proof of.
+Source: Stacks Project, Morphisms, Tag 03HW.
 -/
 
 @[expose] public section

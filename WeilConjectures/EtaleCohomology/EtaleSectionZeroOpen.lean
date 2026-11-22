@@ -9,7 +9,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
 
 /-! # The zero locus of an étale section is Zariski open
 
-Source: Stacks Project, Tag 04FR (auxiliary.
+Source: Stacks Project, Tag 04FR.
 -/
 
 @[expose] public section
@@ -21,7 +21,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor AlgebraicGeomet
 namespace AlgebraicGeometry.Scheme
 
 /-- The zero locus theorem for a section of an abelian sheaf on the small étale site.
-Source: Stacks Project, Tag 04FR, clauses (1)--(3) (auxiliary.
+Source: Stacks Project, Tag 04FR, clauses (1)--(3).
 -/
 theorem etale_section_zero_open
     (T : Scheme.{u})

@@ -153,8 +153,7 @@ private noncomputable abbrev lcFunctor
 
 /-- The locally constant integer cochain complex has natural additive coordinates.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential, and the construction
-part of. -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential. -/
 theorem exists_locallyConstantCochains_structure
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

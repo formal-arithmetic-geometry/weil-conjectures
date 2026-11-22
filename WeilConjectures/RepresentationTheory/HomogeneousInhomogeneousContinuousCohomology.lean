@@ -15,7 +15,7 @@ import WeilConjectures.RepresentationTheory.HomogeneousCochainEvaluationDifferen
 /-!
 # Homogeneous and inhomogeneous continuous cochains
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, , displayed differential.
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential.
 -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ namespace Rep
 /-- Invariant homogeneous continuous cochains have locally constant inhomogeneous
 coordinates, and their recursive differential becomes the usual inhomogeneous differential.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, , displayed differential. -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential. -/
 theorem exists_homogeneousCochains_inhomogeneous_coordinates
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

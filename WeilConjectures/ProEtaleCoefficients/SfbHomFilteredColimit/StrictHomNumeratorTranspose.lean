@@ -16,8 +16,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Transpose of the strict normalized Hom numerator
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08J9, and the strict numerator calculation in
-the node.
+Source: Stacks Project, sites-cohomology.tex, Tag 08J9.
 -/
 
 @[expose] public section

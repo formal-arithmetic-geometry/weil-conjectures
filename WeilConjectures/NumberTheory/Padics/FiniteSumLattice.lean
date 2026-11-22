@@ -15,7 +15,7 @@ import Mathlib.Algebra.Module.Lattice
 /-!
 # Finite sums of valuation-ring lattices
 
-Source: Stacks Project, Tag 0AUW(3), and the.
+Source: Stacks Project, Tag 0AUW(3).
 
 All topologies in the statement are explicit: the coefficient field carries the metric
 topology of its recorded absolute value, its powers carry product topologies, and the

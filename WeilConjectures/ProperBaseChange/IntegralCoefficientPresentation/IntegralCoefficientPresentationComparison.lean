@@ -41,10 +41,10 @@ Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1, Lemma 4
 6.8.2(1).
 
 The existing constants-to-functions comparison is reused. The quotient isomorphisms e_n
-and the completed comparison e_T are the unique ones with the node's normalizations:
+and the completed comparison e_T are the unique ones with the stated normalizations:
 the statement asserts their existence and uniqueness and then quantifies over any family
-so normalized. It does not import the parent stratified-perfect module (which cites this
-node in its proof), so that module can import this one.
+so normalized. It does not import the parent stratified-perfect module (which uses this
+comparison in its proof), so that module can import this one.
 The extra compatibility predicate records finite derived reductions, their genuine
 adjunction units, all quotient transitions, and the two arrows of the product Roos diagram.
 No constructibility or completeness membership is asserted. Index n means exponent n+1.

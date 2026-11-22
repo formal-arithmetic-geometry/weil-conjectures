@@ -255,7 +255,7 @@ open scoped TensorProduct in
 fixed conjugating matrix and a locally constant scalar function.
 
 Source: Stacks Project, Etale Cohomology, construction following Lemma 03R6 and preceding Theorem
-03R7, equation; Skolem-Noether, Tag 074P. The change-of-lift calculation is expanded above in the
+03R7; Skolem-Noether, Tag 074P. The change-of-lift calculation is expanded above in the
 orientation of `HasBrauerScalarDefect`. -/
 private theorem exists_locallyConstant_brauer_lift_comparison (K : Type u) [Field K]
     (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0)

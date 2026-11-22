@@ -8,7 +8,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-! Uniformizer association and existence of fraction-field factorizations in a DVR.
 
-Source: Stacks Project, Algebra, Definition 00IE and Lemma 00PD. (auxiliary.
+Source: Stacks Project, Algebra, Definition 00IE and Lemma 00PD.
 -/
 
 @[expose] public section

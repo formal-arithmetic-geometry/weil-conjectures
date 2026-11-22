@@ -16,7 +16,7 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 /-!
 # Continuous cochain delta-functor
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, label.
+Source: Stacks Project, Etale Cohomology, Tag 0DVG.
 -/
 
 @[expose] public section
@@ -164,7 +164,7 @@ end Construction
 
 /-- Continuous inhomogeneous cochains form a cohomological delta-functor.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, label. -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG. -/
 theorem continuousCochains_deltaFunctor
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

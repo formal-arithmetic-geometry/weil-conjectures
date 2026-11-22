@@ -36,15 +36,11 @@ that the adjoint of the class of the section at infinity is an isomorphism
 at infinity `𝔸¹_B ⟶ ℙ¹_B`, this class becomes the Kummer boundary of the coordinate, up to an
 automorphism of the support.
 
-The one input which is not proved here is the homotopy invariance of the étale cohomology of the
-affine line over an arbitrary base
-(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`),
-proved in the repository only over separably closed fields and, by Künneth, over schemes of
-finite type over them (`AlgebraicGeometry.Etale.isIso_unit_affineLine_of_cohomology`). Over a
-general base it amounts to the compatibility of `Rp_*` with base change to the geometric points
-(equivalently, by compactifying `𝔸¹_S ⊆ ℙ¹_S` and proper base change, of `Rj_*` for the
-complement `j` of the section at infinity: Deligne, SGA 4½, [Th. finitude] Appendice 1.3.3;
-SGA 4 XVI 3.7).
+The homotopy invariance of the affine line over an arbitrary base
+(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`) is proved
+in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicity`
+(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_strictlyHenselian`), by reduction
+to the geometric points of `S`.
 
 ## Main statements
 

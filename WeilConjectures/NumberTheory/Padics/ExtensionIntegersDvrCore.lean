@@ -18,7 +18,7 @@ This is the ring-theoretic and finite-residue-field portion of
 `Padic.extension_integers_dvr`; the uniformizer association and factorization clauses
 are supplied separately.
 
-Source: Serre, Local Fields, Chapter II, §2, Proposition 3. (auxiliary.
+Source: Serre, Local Fields, Chapter II, §2, Proposition 3.
 -/
 
 @[expose] public section

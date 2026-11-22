@@ -10,7 +10,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 /-!
 # Finiteness interface for finite p-adic coefficient extensions
 
-Source: Serre, Local Fields, Chapter II, §2 (auxiliary.
+Source: Serre, Local Fields, Chapter II, §2.
 
 The coefficient constructions are imported unchanged; this supplies their finite-ring
 interface at positive levels.
@@ -24,7 +24,7 @@ namespace Padic
 
 /-- The coefficient ring at a finite level is finite.
 
-Source: Serre, Local Fields, Chapter II, §2 (auxiliary.
+Source: Serre, Local Fields, Chapter II, §2.
 -/
 theorem finite_coefficientExtensionRing
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]

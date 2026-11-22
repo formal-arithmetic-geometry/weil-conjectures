@@ -21,7 +21,7 @@ public import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 /-!
 # Injective resolutions and locally constant inhomogeneous cochains
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, , profinite comparison.
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, profinite comparison.
 -/
 
 @[expose] public section
@@ -81,7 +81,7 @@ theorem _root_.CategoryTheory.CohomologicalDeltaFunctor.isoOfIsUniversal_hom_zer
 transported through an abelian equivalence and the homology of any complex with the locally
 constant inhomogeneous terms and differential.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, , final profinite comparison. -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison. -/
 noncomputable def invariantResolutionHomologyAddEquivInhomogeneous
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

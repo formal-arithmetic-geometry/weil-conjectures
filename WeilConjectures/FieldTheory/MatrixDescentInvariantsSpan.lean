@@ -67,7 +67,7 @@ private theorem finite_factorization (K : Type u) [Field K] (n : ℕ)
 
 /-- The separable-closure span of twisted invariant matrices is the full matrix space.
 
-Source: Stacks Project, Tag 03R6, finite descent argument expanded in steps 1--3 of. -/
+Source: Stacks Project, Tag 03R6, finite descent argument. -/
 theorem matrixDescentInvariants_span (K : Type u) [Field K] (n : ℕ)
     (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →
       Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))

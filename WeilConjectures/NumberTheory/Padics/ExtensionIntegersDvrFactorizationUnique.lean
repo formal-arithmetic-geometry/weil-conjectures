@@ -9,7 +9,7 @@ import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
 /-! Uniqueness for the unit-times-integer-power factorization in a DVR.
 
-Source: Stacks Project, Algebra, Lemma 00PD. (auxiliary.
+Source: Stacks Project, Algebra, Lemma 00PD.
 -/
 
 @[expose] public section

@@ -32,8 +32,8 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 Source: Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15.
 
-The auxiliary predicates package clauses of this node. Coefficients, operations,
-completeness, and constructibility are the published constructions. The pullback
+The auxiliary predicates package the clauses of the results cited above. Coefficients,
+operations, completeness, and constructibility are the published constructions. The pullback
 identification is normalized by tensor-unit sections and the universal derived counits.
 The completion identification is pinned by the strict tower and its Roos coordinates.
 -/

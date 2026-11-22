@@ -137,7 +137,7 @@ private theorem scalar_quotient_unit_ext (W : Scheme.{u})
   exact h n U x
 
 /-- The scalar counit on a good complex is the ordinary balanced quotient comparison.
-Source: Stacks 06YY, 0941, and the scalar-normalization step of the. -/
+Source: Stacks 06YY, 0941. -/
 theorem podScalarReduction_quotient_normalization (W : Scheme.{u})
     (ρ : IntegralComparisonRoosModel l L W)
     (S : IntegralComparisonScalarModel l E L ι W (podReindexCalculus l E W) ρ)

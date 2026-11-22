@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Degree-zero cochains and invariants
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, label.
+Source: Stacks Project, Etale Cohomology, Tag 0DVG.
 -/
 
 @[expose] public section
@@ -186,7 +186,7 @@ lemma iCycles_cyclesMap_apply {A : Type v} [Ring A] {ι : Type*} {c : ComplexSha
 set_option linter.unusedVariables false in
 /-- Degree-zero continuous cochain homology is the left exact invariant functor.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, label , degree-zero differential and
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, degree-zero differential and
 invariants. -/
 theorem continuousCochains_invariants_zero
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]

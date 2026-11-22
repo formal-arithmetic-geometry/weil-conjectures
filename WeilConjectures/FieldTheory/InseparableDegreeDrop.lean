@@ -126,7 +126,7 @@ private theorem insep_lt_of_new_separable_element
 -- The existing existential instance binders are used implicitly; keep its signature unchanged.
 set_option linter.unusedVariables false in
 /-- One coefficient-root construction strictly decreases the inseparable degree.
-Source: Stacks Project, Algebra, Tag 04KM, the induction step (steps 4--9 of). -/
+Source: Stacks Project, Algebra, Tag 04KM, the induction step. -/
 theorem exists_inseparableDegree_drop
     (k K : Type w) [Field k] [Field K] [Algebra k K]
     (hfg : (⊤ : IntermediateField k K).FG) (s : Finset K)
