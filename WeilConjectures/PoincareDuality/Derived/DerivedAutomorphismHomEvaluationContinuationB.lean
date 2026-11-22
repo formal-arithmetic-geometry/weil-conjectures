@@ -146,7 +146,6 @@ Rational maps are localized; algebraically closed maps use every common stage.
 * `podFiniteHomComparison`: transpose of pullback of finite evaluation.
 * `podPartialHomComparison`: the same construction on permitted Hom pairs.
 * `podCompletedRingMap`: completed coefficient transport from all projections.
-* `podCompletedToTower`: the completion-unit comparison with tower pullback.
 
 ## Main statements
 
@@ -170,164 +169,6 @@ namespace WeilConjectures
 attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
   HasDerivedCategory.standard
 attribute [-instance] isoReductionAbSheafify isoReductionAbBijective isoReductionSiteSmall
-
-section ReductionNormalization
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-  {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-
-/-- The canonical reduction/reindexing map: the actual reduction/limit adjunct
-of exact inverse image of the unit, followed by the inverse limit comparison.
-Source: node proof steps 8 and 13
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podReductionReindexingMap (K : DerivedCategory (integralTowerModules l E Y)) :
-    (pullbackTensorCalculus l E X).reduction.obj
-        ((podCompletedDerivedInverseImage l E g).obj K) ⟶
-      (pullbackTensorSequenceDerived l E g).obj
-        ((pullbackTensorCalculus l E Y).reduction.obj K) :=
-  ((pullbackTensorCalculus l E X).adjunction.homEquiv _ _).symm
-    ((podCompletedDerivedInverseImage l E g).map
-        ((pullbackTensorCalculus l E Y).adjunction.unit.app K) ≫
-      (podLimitReindexing l E g).inv.app ((pullbackTensorCalculus l E Y).reduction.obj K))
-
-/-- The canonical reduction adjunct is invertible and natural for every ambient
-complex, without asserting invertibility of the completion unit.
-Source: node proof steps 8 and 13.
-Proof: the two reduction functors are ordinary quotient systems on a flat-term
-K-flat representative. Reindexing commutes with every quotient and strict
-transition. Their identity-on-sections map is the displayed adjunct, by the
-actual reduction unit and projection equations. Inverse reindexing gives an
-inverse system map before localization. Naturality holds on representatives
-and descends to every derived arrow.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-theorem podReductionReindexingMap_laws :
-    (∀ K, IsIso (podReductionReindexingMap l E g K)) ∧
-    ∀ (K L : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ L),
-      (pullbackTensorCalculus l E X).reduction.map
-          ((podCompletedDerivedInverseImage l E g).map f) ≫
-        podReductionReindexingMap l E g L =
-      podReductionReindexingMap l E g K ≫
-        (pullbackTensorSequenceDerived l E g).map
-          ((pullbackTensorCalculus l E Y).reduction.map f) := by
-  classical
-  have hF : pullbackTensorSequenceDerived l E g ≅
-      integralComparisonDerivedSequencePullback l E g := by
-    have heq : pullbackTensorSequenceInverse l E g =
-        integralComparisonSequencePullback l E g := by
-      unfold pullbackTensorSequenceInverse integralComparisonSequencePullback
-      congr 1
-      unfold pullbackTensorSequenceDirect integralComparisonSequenceDirectImage
-      have hr : pullbackTensorSequenceRing l E g = integralComparisonSequenceRingMap l E g := by
-        unfold pullbackTensorSequenceRing pullbackTensorSequenceRingMap
-        rfl
-      rw [hr]
-    exact Functor.mapDerivedCategoryNatIso (eqToIso heq)
-  have hH : (integralComparisonDerivedSequencePullback l E g).IsEquivalence := by
-    let H := integralComparisonDerivedSequencePullback l E g
-    let G := integralComparisonDerivedSequencePullback l E (inv g)
-    let a : H ⋙ G ≅ 𝟭 _ :=
-      (integralComparisonSystemComposition l E (inv g) g).symm ≪≫
-        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
-          (IsIso.inv_hom_id g)) ≪≫ integralComparisonSystemUnit l E Y
-    let b : G ⋙ H ≅ 𝟭 _ :=
-      (integralComparisonSystemComposition l E g (inv g)).symm ≪≫
-        eqToIso (congrArg (integralComparisonDerivedSequencePullback l E)
-          (IsIso.hom_inv_id g)) ≪≫ integralComparisonSystemUnit l E X
-    exact (CategoryTheory.Equivalence.mk H G a.symm b).isEquivalence_functor
-  have : (pullbackTensorSequenceDerived l E g).IsEquivalence :=
-    Functor.isEquivalence_of_iso hF.symm
-  have : (podCompletedDerivedInverseImage l E g).IsEquivalence :=
-    (podCompletedInverseImage_equivalence l E g).2
-  obtain ⟨e, he⟩ := adjointSquare (podCompletedDerivedInverseImage l E g)
-    (pullbackTensorSequenceDerived l E g) (pullbackTensorCalculus l E Y).adjunction
-    (pullbackTensorCalculus l E X).adjunction (podLimitReindexing l E g).symm
-  have hmap (K : DerivedCategory (integralTowerModules l E Y)) :
-      podReductionReindexingMap l E g K = e.hom.app K := by
-    rw [podReductionReindexingMap, Equiv.symm_apply_eq, Adjunction.homEquiv_unit]
-    exact (he K).symm
-  refine ⟨fun K ↦ ?_, fun K L f ↦ ?_⟩
-  · rw [hmap]
-    infer_instance
-  · rw [hmap, hmap]
-    exact e.hom.naturality f
-
-/-- The reduction comparison is the isomorphism of that very canonical adjunct.
-Source: node proof step 13 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podReductionReindexing (K : DerivedCategory (integralTowerModules l E Y)) :=
-  @asIso _ _ _ _ (podReductionReindexingMap l E g K)
-    ((podReductionReindexingMap_laws l E g).1 K)
-
-/-- Exact inverse image to tower pullback: inverse image of the actual completion
-unit, the inverse total-limit comparison, and the inverse recorded Roos model.
-Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podCompletedToTower (K : DerivedCategory (integralTowerModules l E Y)) :
-    (podCompletedDerivedInverseImage l E g).obj K ⟶ (integralDerivedPullback l E g).obj K :=
-  (podCompletedDerivedInverseImage l E g).map
-      ((pullbackTensorCalculus l E Y).adjunction.unit.app K) ≫
-    (podLimitReindexing l E g).inv.app ((pullbackTensorCalculus l E Y).reduction.obj K) ≫
-    (pullbackTensorIntegralPullbackModel l E g).inv.app K
-
-attribute [local irreducible] pullbackTensorCalculus
-  podCompletedDerivedInverseImage integralDerivedPullback podLimitReindexing
-  pullbackTensorIntegralPullbackModel completedIntegralCoefficientSheafUnrestricted
-  scalarReductionExistence scalarReductionDerivedExistence
-
-/-- The identification with tower-defined pullback is natural, and is invertible
-on exactly the complete constructible inputs used here.
-Source: node proof step 8.
-Proof: all three factors are natural. For a constructible complete K, the
-canonical quotient-tower unit is invertible by the finite-free completed
-scalar theorem for E/E. The other two factors are isomorphisms already.
-The total-limit comparison's resolution and projection equations imply
-commutation with every reduction projection.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-theorem podCompletedToTower_laws :
-    (∀ (K L : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ L),
-      (podCompletedDerivedInverseImage l E g).map f ≫ podCompletedToTower l E g L =
-        podCompletedToTower l E g K ≫ (integralDerivedPullback l E g).map f) ∧
-    (∀ K : sfIntegralConstructibleCategory l E Y, IsIso (podCompletedToTower l E g K.obj)) := by
-  constructor
-  · intro K L f
-    let SY := pullbackTensorCalculus l E Y
-    let F := podCompletedDerivedInverseImage l E g
-    have hη := congrArg F.map (SY.adjunction.unit.naturality f)
-    have hlim := (podLimitReindexing l E g).inv.naturality (SY.reduction.map f)
-    have hrho := (pullbackTensorIntegralPullbackModel l E g).inv.naturality f
-    dsimp only [Functor.comp_map, Functor.id_map] at hη hlim hrho
-    simp only [Functor.map_comp] at hη
-    dsimp only [podCompletedToTower]
-    change F.map f ≫ F.map (SY.adjunction.unit.app L) ≫ _ ≫ _ = _
-    rw [← Category.assoc (F.map f), hη]
-    rw [Category.assoc, ← Category.assoc (F.map
-      ((coefficientSequenceLimit l E Y).map (SY.reduction.map f))), hlim]
-    simpa only [Category.assoc, pullbackTensorReferencePullback, Functor.comp_map] using
-      congrArg (fun k ↦ F.map (SY.adjunction.unit.app K) ≫
-        (podLimitReindexing l E g).inv.app (SY.reduction.obj K) ≫ k) hrho
-  · intro K
-    obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
-    let : Fact p.Prime := ⟨hp⟩
-    let D : FiniteFieldDatum.{0} := {
-      p := p, a := 1, q := p, prime := hp, exponent_pos := le_refl 1,
-      cardinality_eq := (pow_one p).symm, k₀ := ZMod p,
-      card_base := by simp [Nat.card_eq_fintype_card]
-      k := AlgebraicClosure (ZMod p) }
-    have hlp : l ≠ D.p := by change l ≠ p; omega
-    have hK : IntegralOnSlice.IsComplete l E Y none K.obj :=
-      ⟨D, hlp, (sfDerivedComplete_iff_legacy l E Y D hlp K.obj).mp K.property.1⟩
-    have : IsIso ((pullbackTensorCalculus l E Y).adjunction.unit.app K.obj) :=
-      (purNormalizedReconstructionOfScheme l E Y (pullbackTensorCalculus l E Y)).2 K.obj hK
-    dsimp only [podCompletedToTower]
-    infer_instance
-
-/-- The canonical complete-input identification, retaining its specified map.
-Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-def podCompletedToTowerIso (K : sfIntegralConstructibleCategory l E Y) :=
-  @asIso _ _ _ _ (podCompletedToTower l E g K.obj) ((podCompletedToTower_laws l E g).2 K)
-
-variable [∀ x : X, Invertible (l : X.residueField x)]
-  [∀ y : Y, Invertible (l : Y.residueField y)]
-
-end ReductionNormalization
 
 section SignedShifts
 attribute [local irreducible] homComplexFunctor
@@ -466,26 +307,6 @@ def podCompletedDerivedComp : podCompletedDerivedInverseImage l E (h ≫ g) ≅
   Functor.mapDerivedCategoryNatIso (podCompletedModuleComp l E g h) ≪≫
     (Functor.mapDerivedCategoryCompIso (podCompletedModuleInverseImage l E g)
       (podCompletedModuleInverseImage l E h)).symm
-
-variable [∀ x : X, Invertible (l : X.residueField x)]
-  [∀ y : Y, Invertible (l : Y.residueField y)]
-  [∀ z : Z, Invertible (l : Z.residueField z)]
-
-/-- Published integral tower composition has the actual completion-unit normalization.
-Source: node proof steps 7--8.
-Proof: conjugate the derived identity-on-sections composition by the three
-complete-input identifications. Their maps are fixed by completion units and
-total-limit reindexing. Hence this is the canonical tower composition, natural
-by their naturality. Its component formula determines it uniquely.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
-theorem podIntegralPullbackComp_normalization
-    (M : sfIntegralConstructibleCategory l E Y) :
-    HEq (((pullbackTensorIntegralComposition l E g h).hom.app M).hom)
-      ((podCompletedToTowerIso l E (h ≫ g) M).inv ≫
-        (podCompletedDerivedComp l E g h).hom.app M.obj ≫
-        (podCompletedDerivedInverseImage l E h).map (podCompletedToTowerIso l E g M).hom ≫
-        (podCompletedToTowerIso l E h ((constructibleIntegralPullback l E g).obj M)).hom) := by
-  sorry
 
 end IntegralComposition
 
