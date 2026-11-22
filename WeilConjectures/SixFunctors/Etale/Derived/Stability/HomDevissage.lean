@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
+public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 
 /-!
 # Internal Hom preserves `Dctf`, by dévissage
@@ -173,23 +174,62 @@ lemma constructibleFiniteTor_derivedHom_rightDerivedLowerStar_rightDerivedLowerS
   have hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar M :=
     constructibleFiniteTor_rightDerivedUpperShriek Λ aX g hL
   have hjM := constructibleFiniteTor_rightDerivedUpperShriek Λ (g ≫ aX) j hM
+  let Mstar := (D((j)^*[ModuleCat.{u + 1} Λ])).obj M
+  have hMstar : constructibleFiniteTor (ModuleCat.{u + 1} Λ) U Mstar :=
+    (constructibleFiniteTor _ U).prop_of_iso
+      ((rightDerivedUpperShriekIsoOfIsOpenImmersion Λ j).app M) hjM
   have hH := constructibleFiniteTor_derivedHom_singleFunctor_of_isFiniteLocallyConstantSheaf Λ P
-    hP hjM
+    hP hMstar
   have hjH := constructibleFiniteTor_rightDerivedLowerStar Λ (j ≫ g ≫ aX) (g ≫ aX) j rfl hH
   -- `Rj_* RHom(P, Rj^! M) ≅ RHom(Rj_! P, M)`
-  obtain ⟨e₁⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ j P₀ M
+  let adj₁ := (derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) U).comp
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} Λ) j)
+  let adj₂ := (derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) Ubar).precomp
+    R(j)_![ModuleCat.{u + 1} Λ]
+  let e₁ := ((adj₁.adj P₀).rightAdjointUniq
+    ((adj₂.adj P₀).ofNatIsoLeft
+      ((derivedTensor (ModuleCat.{u + 1} Λ) Ubar).mapIso
+          ((rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app P₀) ≪≫
+        ((derivedOpenImmersionLowerShriekProjectionIso
+          (ModuleCat.{u + 1} Λ) j).symm.app P₀)))).app M
   have h₁ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar
       (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj M) :=
     (constructibleFiniteTor _ Ubar).prop_of_iso
       e₁ hjH
   have h₂ := constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl h₁
+  let Mclosed :=
+    (closedUpperShriek (ModuleCat.{u + 1} Λ) g g.openComplement.ι).rightDerivedFunctor.obj L
+  have h₁closed : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Ubar
+      (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj Mclosed) :=
+    (constructibleFiniteTor _ Ubar).prop_of_iso
+      (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).mapIso
+        ((rightDerivedClosedUpperShriekIso Λ g).app L).symm) h₁
+  have h₂closed := constructibleFiniteTor_rightDerivedLowerStar Λ (g ≫ aX) aX g rfl h₁closed
+  let A := ((R((g)_*[ModuleCat.{u + 1} Λ])).obj
+    (((RHom(Ubar)[ModuleCat.{u + 1} Λ]).obj (op N)).obj Mclosed))
+  have hproj : IsIso (((projectionMap (ModuleCat.{u + 1} Λ) g).app N).app A) := by
+    have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ
+      (HasCompactification.compactification g).g
+    rw [projectionMap, projectionMapOfCompactification_app_app]
+    infer_instance
   -- `Rg_* RHom(N, Rg^! L) ≅ RHom(Rg_! N, L)`
-  obtain ⟨e₃⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ g N L
+  let adj₃ := (derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) Ubar).comp
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
+    ((mapDerivedCategoryLowerStarClosedUpperShriekAdjunction
+      (ModuleCat.{u + 1} Λ) g).ofNatIsoLeft
+      (mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek (ModuleCat.{u + 1} Λ) g))
+  let adj₄ := (derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} Λ) X).precomp
+    R(g)_![ModuleCat.{u + 1} Λ]
+  let e₃ := (fun e ↦ ((adj₃.adj N).rightAdjointUniq
+    ((adj₄.adj N).ofNatIsoLeft (e.app N))).app L)
+    (asIso (projectionMap (ModuleCat.{u + 1} Λ) g))
   have h₃ : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op ((R(g)_![ModuleCat.{u + 1} Λ]).obj N))).obj L) :=
+      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj
+        (op ((R(g)_![ModuleCat.{u + 1} Λ]).obj N))).obj L) :=
     (constructibleFiniteTor _ X).prop_of_iso
-      e₃ h₂
-  -- `Rg_! ≅ Rg_*`
+      e₃ h₂closed
   exact (constructibleFiniteTor _ X).prop_of_iso
     (((RHom(X)[ModuleCat.{u + 1} Λ]).flip.obj L).mapIso
       ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ g).app N).op).symm h₃
