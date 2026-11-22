@@ -146,7 +146,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 public import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 
-/-! # Strict quotient-coefficient sites and Frobenius faces
+/-! # The quotient-coefficient sequence site and Frobenius faces
 
 The quotient diagram is a ringed sequence site. All derived categories localize complexes
 of strict systems, before evaluating. Restriction retains the completed coefficient action.
@@ -154,11 +154,11 @@ of strict systems, before evaluating. Restriction retains the completed coeffici
 ## Main definitions
 
 - `QuotientFrobenius.quotientRing`, `QuotientFrobenius.modules`, `QuotientFrobenius.derived`:
-  the ring of finite quotient sheaves on the strict sequence site, its module systems and
-  their derived category.
-- `QuotientFrobenius.diagonal`: the diagonal module functor from completed coefficients.
-- `QuotientFrobenius.Cube` and `QuotientFrobenius.face`: automorphism cubes of a Cartesian
-  square and their Cartesian Frobenius faces.
+  the quotient ring, its strict module systems and their derived category.
+- `QuotientFrobenius.diagonal`: the diagonal functor from completed coefficients to the
+  quotient diagram.
+- `QuotientFrobenius.Cube`, `QuotientFrobenius.face`: Frobenius automorphisms of a Cartesian
+  square and its Cartesian faces.
 
 ## References
 
@@ -238,14 +238,6 @@ abbrev evaluation (T : Scheme.{t}) (n : ℕ) :=
 /-- Base change on the vertical sequence sites, acting identically on the index. -/
 abbrev siteMap {U V : Scheme.{t}} (u : U ⟶ V) :=
   (𝟭 ℕ).prod (proEtaleBaseChange u)
-
-/-- Direct image and the quotient site have the same target section ring. -/
-theorem coefficientTarget_obj {U V : Scheme.{t}} (u : U ⟶ V)
-    (W : (ℕ × V.ProEt)ᵒᵖ) :
-    (((proEtaleSheafDirectImage u CommRingCat.{t + 1}).obj
-      (d.finiteRing U W.unop.1)).obj.obj (op W.unop.2)) =
-      (quotientRing d U).obj.obj ((siteMap u).op.obj W) := by
-  sorry
 
 /-- A constant coefficient presheaf is a sheaf on the vertical sequence site. -/
 theorem diagonalRing_isSheaf (T : Scheme.{t}) :
