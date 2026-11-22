@@ -91,7 +91,7 @@ it is invalid for C. No descendant-only M2 alignment type-checks under the
 original endpoint. O and R snapshots are byte-identical; the earlier aligned
 measurement was 5.256 s / 456,393 calls. Outcome: **C**.
 
-## MPRWE round 3 (READY3.2)
+## MPRWE round 3 (READY3.2; superseded historical table)
 
 Shares are M1 99.809%, M2 0.006%, Matched 0.185%, Unclassified 0.001%.
 The endpoint alignment remains root-changing and invalid for C.

@@ -59,7 +59,7 @@ The restored source snapshot retains the original declaration context; the R
 source is included for replay, but no separate selective restoration timing was
 available.
 
-## MPRWE round 2
+## MPRWE round 2 (superseded historical table)
 
 ## MPRWE round 4 (READY3.2; supersedes earlier tables)
 
@@ -81,8 +81,7 @@ Manual top-five aggregate paths under the generated-field body: M1
 5600.191, 5090.047, 3573.112, 3498.938, 2861.415 ms; M2 1972.574,
 1521.221, 1245.415, 1176.906, 1129.421 ms; Matched 873.394, 744.055,
 685.312, 492.219, 450.666 ms. M0 is the root entry. The aligned control
-changes the root rather than being descendant-only; restored source retains
-the original context.
+preserves the outer root; restored source retains the original context.
 
 C is valid for this case: aligned and restored controls both preserve the
 10,904,899-call root. The aligned control measured 27,417.480 ms with shares

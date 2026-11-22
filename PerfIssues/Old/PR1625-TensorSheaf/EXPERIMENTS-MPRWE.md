@@ -112,7 +112,7 @@ is invalid for C. No descendant-only M2 alignment type-checks under the same
 dependent obligation. O and R snapshots are byte-identical; the earlier R
 timing was 109,892 ms. Outcome: **C**.
 
-## MPRWE round 3 (READY3.2)
+## MPRWE round 3 (READY3.2; superseded historical table)
 
 Shares are M1 99.471%, M2 0.071%, Matched 0.456%, Unclassified 0.001%.
 The outer-major alignment remains root-changing and invalid for C.
