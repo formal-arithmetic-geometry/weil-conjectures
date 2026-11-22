@@ -18,9 +18,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFiniteCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFgCompleteComplexes
 public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdComplexes
 public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdQbarCategory
-import WeilConjectures.SmoothPurity.Point.PointQbarFibreShiftDescent
-import WeilConjectures.SmoothPurity.Point.PointRationalSectionsHom
-import WeilConjectures.SmoothPurity.Point.PointRationalSectionsLattice
 import WeilConjectures.SmoothPurity.Finite.FiniteCoefficientPoint
 import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -83,7 +80,7 @@ variable (k B : Type u) [Field k] [IsAlgClosed k] [CommRing B] [Finite B]
 
 end FiniteReconstruction
 
-attribute [local irreducible] pointStageFibre pointStageFibreScalarIso pointQbarFibre
+attribute [local irreducible] pointStageFibre pointStageFibreScalarIso
   Functor.mapDerivedCategory DerivedCategory.pointFdQbarStageComp
 
 end WeilConjectures
