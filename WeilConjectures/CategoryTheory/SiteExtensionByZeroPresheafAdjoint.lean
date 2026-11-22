@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # Adjunction for extension by zero on a localized site
+
+## References
+
+* Stacks Project, Modules on Sites, Lemma 03DI.
 -/
 
 @[expose] public section
@@ -130,7 +134,8 @@ private noncomputable def sumAdjunction {C : Type u} [SmallCategory C] (W : C) :
       funext Y
       simp [sumHomEquiv, sumRestrict, sliceRestrict, Category.assoc] }
 
-/-- The sheafified direct-sum presheaf is left adjoint to restriction. -/
+/-- The sheafified direct-sum presheaf is left adjoint to restriction.
+Source: Stacks Project, Modules on Sites, Lemma 03DI. -/
 theorem siteExtensionByZeroPresheaf_adjunction
     {C : Type u} [SmallCategory C]
     (J : Precoverage C)

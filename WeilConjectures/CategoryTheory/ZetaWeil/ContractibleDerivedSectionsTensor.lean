@@ -171,7 +171,8 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Derived tensor evaluation on contractible objects
 
-Source: Stacks Project, Tags 0F63, 06YS and 0FPT.
+Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 4.1(1); Stacks Project, Tags 0F63,
+06YS and 0FPT.
 -/
 
 @[expose] public noncomputable section

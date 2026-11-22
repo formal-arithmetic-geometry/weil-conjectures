@@ -40,7 +40,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- The specified transpose of inverse projection comparison followed by the counit. -/
+/-- The specified transpose of inverse projection comparison followed by the counit.
+Source: Zheng, Construction 2.26, printed p. 15. -/
 noncomputable def coefficientActionAdjointMate
     {D : Type uD} {A : Type uA} {B : Type uB}
     [Category.{vD} D] [Category.{vA} A] [Category.{vB} B]

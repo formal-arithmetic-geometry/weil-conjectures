@@ -9,6 +9,10 @@ public import Mathlib.CategoryTheory.Shift.CommShift
 public import Mathlib.Algebra.Group.Int.Defs
 
 /-! # Shift and unit coherence for bifunctor isomorphisms
+
+## References
+
+* Zheng, Theorem 2.18(2), natural-isomorphism cancellation for the shift and unit equations.
 -/
 
 @[expose] public section
@@ -19,7 +23,8 @@ open CategoryTheory
 
 namespace CategoryTheory
 
-/-- Shift and unit coherence of a specified bifunctor isomorphism. -/
+/-- Shift and unit coherence of a specified bifunctor isomorphism.
+Source: the natural-isomorphism cancellation used in Zheng Theorem 2.18(2). -/
 def BifunctorProjectionCoherent
     {D E F : Type*} [Category D] [Category E] [Category F]
     [HasShift E ℤ] [HasShift F ℤ]
@@ -33,7 +38,8 @@ def BifunctorProjectionCoherent
     (e.hom.app K).app J ≫ a K = b K ∧
     (e.inv.app K).app J ≫ b K = a K
 
-/-- Coherence of a natural isomorphism and its inverse from the forward equations. -/
+/-- Coherence of a natural isomorphism and its inverse from the forward equations.
+Source: Zheng Theorem 2.18(2), natural-isomorphism cancellation. -/
 theorem bifunctorIsoCoherence
     {D E F : Type*} [Category D] [Category E] [Category F]
     [HasShift E ℤ] [HasShift F ℤ]

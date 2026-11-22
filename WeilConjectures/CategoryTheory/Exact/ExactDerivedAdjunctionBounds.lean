@@ -113,7 +113,8 @@ theorem exactDerived_reflectsIso_of_boundedBelow_faithful
   exact isIso_of_reflects_iso f F.mapDerivedCategory
 
 /-- Full faithfulness on bounded-below objects makes the counit invertible on their
-essential image, even though the adjunction itself lives on unbounded categories. -/
+essential image, even though the adjunction itself lives on unbounded categories.
+Source: Zheng, Lemma 4.10. -/
 theorem exactDerivedAdjunction_counit_isIso_of_origin
     {RD : DerivedCategory B ⥤ DerivedCategory A} (adj : FD ⊣ RD)
     (hfull : ∀ (X Y : DerivedCategory A),

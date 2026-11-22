@@ -27,7 +27,7 @@ attribute [local instance] derived_hasCoproducts
 
 /-- The well-generation and common cardinal-bound part of the perfect-class argument.
 
-Source: Neeman, Theorem 0.2.
+Source: Neeman, Theorem 0.2; Krause, Sections 6.2--6.3.
 -/
 theorem derived_exists_perfectSmallClass_core
     {A : Type u} [Category.{v} A] [Abelian A]

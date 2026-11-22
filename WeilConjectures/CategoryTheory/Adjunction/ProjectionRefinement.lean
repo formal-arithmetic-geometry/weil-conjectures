@@ -29,6 +29,10 @@ For the trivial compactification `(j, 𝟙)` of an open immersion, with `Gs ≅ 
 `G ≅ 𝟭`, the exceptional projection morphism followed by the projection comparison of `I ⊣ Is` is
 the identification
 (`CategoryTheory.Adjunction.trivial_exceptionalProjection_comp_projectionComparison`).
+
+## References
+
+* SGA 4, Exposé XVII.
 -/
 
 @[expose] public section

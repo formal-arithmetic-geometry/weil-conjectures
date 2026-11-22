@@ -12,6 +12,10 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 
 /-! # Extension closure of Krause alpha-compactness
+
+## References
+
+* Krause (2001), Lemma 5, page 124.
 -/
 
 @[expose] public section
@@ -152,7 +156,8 @@ private theorem factorsOut_cone
   rw [← hl']
   abel
 
-/-- Extensions of alpha-compact objects are alpha-compact. -/
+/-- Extensions of alpha-compact objects are alpha-compact.
+Source: Krause (2001), Lemma 5, page 124, preservation of (G4) under triangles. -/
 theorem IsAlphaCompact.extension [IsTriangulated C]
     (α : Cardinal.{v}) [Fact α.IsRegular] (T : Triangle C) (hT : T ∈ distTriang C)
     (h₁ : IsAlphaCompact T.obj₁ α) (h₃ : IsAlphaCompact T.obj₃ α) :

@@ -25,7 +25,8 @@ namespace CategoryTheory
 
 attribute [local instance] derived_hasCoproducts
 
-/-- Alpha-compactness supplies the perfectness and bounded-subcoproduct clauses. -/
+/-- Alpha-compactness supplies the perfectness and bounded-subcoproduct clauses.
+Source: Krause, Localization theory, Sections 6.2--6.3 and Proposition 6.8.1. -/
 theorem derived_perfectSmallClass_properties
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]

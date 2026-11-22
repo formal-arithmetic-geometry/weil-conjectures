@@ -10,6 +10,10 @@ public import Mathlib.CategoryTheory.EqToHom
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! Conjugating a functor by an arbitrary family of object automorphisms.
+
+## References
+
+* Zheng, Construction 5.25.
 -/
 
 @[expose] public section

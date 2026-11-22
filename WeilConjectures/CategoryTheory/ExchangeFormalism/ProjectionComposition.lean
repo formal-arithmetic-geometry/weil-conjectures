@@ -26,6 +26,10 @@ images (SGA 4). Its variant
 `CategoryTheory.ExchangeFormalism.compIso_inv_app_whiskerRight_comp_of_eq` takes the exceptional
 projection morphisms and the other data as variables subject to equations, so that it applies to
 data spelled differently (for instance through the definitions of a concrete exchange formalism).
+
+## References
+
+* SGA 4, Exposé XVII.
 -/
 
 @[expose] public section
@@ -277,7 +281,8 @@ triangle of factorizations `T` of
 `f : X ⟶ Y` and `g : Y ⟶ S`, through the composition isomorphism
 `(i₁, p₁)_! ⋙ (i₂, p₂)_! ≅ (i, p)_!` and `(f ≫ g)^* ≅ g^* ⋙ f^*`, the exceptional projection
 morphism of the composite factorization `(i, p)` of `f ≫ g` is that of `(i₂, p₂)` followed by
-`(i₂, p₂)_!` of that of `(i₁, p₁)`. -/
+`(i₂, p₂)_!` of that of `(i₁, p₁)`.
+Source: SGA 4, Exposé XVII. -/
 theorem compIso_hom_app_whiskerRight_comp_shriekProjection
     (hδ : ∀ {X Y Z : 𝒞} (f : X ⟶ Y) (g : Y ⟶ Z) (M N : F.obj Z),
       δ (F.pb (f ≫ g)) M N ≫ ((F.pbComp f g).hom.app M ⊗ₘ (F.pbComp f g).hom.app N) =

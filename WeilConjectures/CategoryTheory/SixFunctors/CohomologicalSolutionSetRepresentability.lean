@@ -75,7 +75,8 @@ variable [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
 
 /-- A cohomological functor with a small solution set is representable.
 
-Source: Stacks Project, Tag 0A8F, kernel-killing argument. -/
+Source: Krause, *Localization theory for triangulated categories*, Theorem 5.1.1, final solution-set
+argument; Stacks Project, Tag 0A8F, kernel-killing argument. -/
 theorem cohomological_isRepresentable_of_solutionSet
     (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological]
     (hH : ∀ I : Type v, PreservesLimitsOfShape (Discrete I) H)

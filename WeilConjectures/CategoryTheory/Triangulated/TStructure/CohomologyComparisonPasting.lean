@@ -12,6 +12,10 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 Cohomology is written using the existing `truncGELE j j` followed by the j-shift.
 All equations are in the ambient category; the heart is a full subcategory.
+
+## References
+
+* BBD, Proposition 1.3.3(i)--(ii), Theorem 1.3.6, printed pp. 29--31.
 -/
 
 @[expose] public noncomputable section

@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.Perfect.PerfectFamilyLocalizingHull
 
 /-! # Perfect families in set-generated derived subcategories
 
-Source: Neeman, Theorem 0.2.
+Source: Neeman, Theorem 0.2; Krause, Localization theory, Theorem 7.2.1.
 -/
 
 @[expose] public section

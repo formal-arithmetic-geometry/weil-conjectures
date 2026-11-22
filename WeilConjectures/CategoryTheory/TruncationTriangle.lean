@@ -17,6 +17,10 @@ import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 
 /-!
 # Distinguished triangle for canonical truncations
+
+## References
+
+* Stacks Project, Remark 08J5.
 -/
 
 @[expose] public section
@@ -115,7 +119,7 @@ exists and is unique; the triangle is functorial for every morphism of D(A), the
 three truncation functors acting on D(A) through their descent along Q (the
 localization lift); and the three terms are bounded below when K is (strictly,
 or in cohomology).
-Source: Stacks Project, Remark 08J5. -/
+Source: Stacks Project, Remark 08J5; BBD, Proposition 1.1.9 and Corollaire 1.1.10 (ii). -/
 theorem truncation_triangle (A : Type u) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] (q : ℤ) :
     (∀ K : CochainComplex A ℤ,

@@ -11,6 +11,10 @@ public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 
 /-! # Perfect generators of a localizing hull
+
+## References
+
+* Krause, Localization theory for triangulated categories, Theorem 7.2.1.
 -/
 
 @[expose] public section
@@ -157,7 +161,9 @@ end Factorization
 
 /-- A small triangulated hull of a perfect class gives perfect generators of its
 localizing hull, provided maps from that class into coproducts of hull objects
-factor through a hull object. -/
+factor through a hull object.
+Source: Krause, *Localization theory for triangulated categories*, Theorem 7.2.1(1)-(3), expanded
+using its factorization argument. -/
 theorem perfectFamily_of_small_hull
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

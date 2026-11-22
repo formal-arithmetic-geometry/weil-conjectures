@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Cochain specialization of the normalized inverse-mate comparison
 
-Source: Stacks 0FND and 09T5.
+Source: Zheng Construction 4.1 and Lemma 5.16; Stacks 0FND and 09T5.
 -/
 
 @[expose] public noncomputable section
@@ -44,7 +44,7 @@ private theorem cochainMate_unit
 
 /-- An ordinary right comparison between equivalences determines an inverse
 comparison whose cochain localization is prescribed by the normalized derived mate.
-Source: Stacks 0FND and 09T5. -/
+Source: Zheng Construction 4.1 and Lemma 5.16; Stacks 0FND and 09T5. -/
 theorem cochainInverseMate_comparison
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]

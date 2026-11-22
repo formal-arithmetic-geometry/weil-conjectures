@@ -17,6 +17,10 @@ import WeilConjectures.CategoryTheory.Sites.ZariskiTorsorRepresentativeExists
 
 /-!
 # Torsor classes as boundaries of the representative extension
+
+## References
+
+* Stacks Project, Cohomology of Sheaves, Lemma 02FQ.
 -/
 
 @[expose] public section

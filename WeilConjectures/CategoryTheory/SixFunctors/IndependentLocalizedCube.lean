@@ -61,7 +61,7 @@ variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory.{q} C]
   (φm : DerivedCategory.Q ⋙ mD ≅ m.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
 
 /-- Localization preserves a cube with all six faces fixed on complex representatives.
-Source: Stacks 05S7 and 014F. -/
+Source: Stacks 05S7 and 014F; Zheng Construction 4.1. -/
 theorem localized_exactCube
     (q1 : a ⋙ b ≅ d ⋙ e)
     (q2 : e ⋙ c ≅ f ⋙ g)

@@ -18,7 +18,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Compatible morphisms into a finite cokernel presentation have a limit when
-endomorphisms of the projective generator are continuous functions into a compact ring. -/
+endomorphisms of the projective generator are continuous functions into a compact ring.
+Source: Hemo--Richarz--Scholbach, Proposition 5.1 chart argument. -/
 theorem exists_cokernel_limit_of_continuous_end
     {C : Type*} [Category C] [Abelian C] [HasFiniteBiproducts C] (P : C) [Projective P]
     {S : Type*} {R : Type} [TopologicalSpace S] [CompactSpace S] [T2Space S]

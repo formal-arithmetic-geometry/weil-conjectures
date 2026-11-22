@@ -14,6 +14,10 @@ import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
 
 /-!
 # Transport of morphisms of sites across equivalences
+
+## References
+
+* Stacks Project, Definitions 00VH, 00WV, 00X1 and Lemma 03CB.
 -/
 
 @[expose] public section
@@ -28,7 +32,8 @@ namespace CategoryTheory
 /-- Transport of morphisms of sites across equivalences. Given equivalences `p : A ⥤ C` and
 `q : B ⥤ D` of sites, a morphism of sites `u : C ⥤ D`, and `u' : A ⥤ B` with
 `u' ⋙ q ≅ p ⋙ u`, the functor `u'` preserves coverings and the relevant pullbacks, is
-continuous, and its sheaf pullback preserves finite limits and finite colimits. -/
+continuous, and its sheaf pullback preserves finite limits and finite colimits.
+Source: Stacks Project, Definitions 00VH, 00WV, 00X1 and Lemma 03CB. -/
 theorem site_equivalence_morphism_transport
     {A B C D : Type u}
     [SmallCategory A] [SmallCategory B] [SmallCategory C] [SmallCategory D]

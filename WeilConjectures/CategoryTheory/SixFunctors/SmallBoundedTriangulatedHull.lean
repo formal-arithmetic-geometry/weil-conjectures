@@ -11,6 +11,10 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.CategoryTheory.IsAlphaCompact.AlphaCompactObjectProperties
 
 /-! # Small triangulated hulls closed under bounded coproducts
+
+## References
+
+* Krause (2001), Lemma 5(1), page 124.
 -/
 
 @[expose] public section
@@ -121,7 +125,8 @@ private theorem stages_bounded (α : Cardinal.{v}) [Fact α.IsRegular]
 
 /-- Inside a triangulated class closed under coproducts of fewer than alpha
 summands, every essentially small family lies in a class with the same closure
-properties which is still essentially small. -/
+properties which is still essentially small.
+Source: Krause (2001), Lemma 5(1), page 124, explicit small hull construction. -/
 theorem exists_small_bounded_triangulated_hull
     (G S : ObjectProperty C) [ObjectProperty.EssentiallySmall.{v} G]
     [S.IsClosedUnderIsomorphisms] [S.IsTriangulated]

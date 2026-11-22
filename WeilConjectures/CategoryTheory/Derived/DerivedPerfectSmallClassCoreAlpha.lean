@@ -63,7 +63,7 @@ private theorem alphaCompact_common_bound
 
 /-- The alpha-compact class supplied by the well-generation theorem.
 
-Source: Neeman, Theorem 0.2.
+Source: Neeman, Theorem 0.2; Krause, Sections 6.2--6.3.
 -/
 theorem derived_exists_alphaCompactClass_core
     {A : Type u} [Category.{v} A] [Abelian A]

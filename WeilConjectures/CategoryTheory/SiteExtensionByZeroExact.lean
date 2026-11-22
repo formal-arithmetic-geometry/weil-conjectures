@@ -25,6 +25,7 @@ adjoint to restriction.
 ## References
 
 * Stacks Project, Tags 03DH--03DJ (the direct-sum presheaf construction).
+* Stacks Project, Modules on Sites, Lemma 03DJ.
 -/
 
 @[expose] public section
@@ -83,7 +84,8 @@ private theorem siteExtensionByZero_preserves_monomorphisms
 
 /-- Extension by zero from the localized site is exact. Extension by zero is the constructed
 left adjoint to restriction. The zero-morphism witness permits mapping short complexes; it
-is a conclusion, not an additional hypothesis. -/
+is a conclusion, not an additional hypothesis.
+Source: Stacks Project, Modules on Sites, Lemma 03DJ. -/
 theorem site_extensionByZero_exact
     {C : Type u} [SmallCategory C]
     (J : Precoverage C)

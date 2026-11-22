@@ -18,6 +18,10 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 The sheaf associated to the free presheaf on a representable, with a flat
 coefficient object, is flat.
+
+## References
+
+* Stacks Project, Lemma 03EV.
 -/
 
 @[expose] public section

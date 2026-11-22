@@ -13,6 +13,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 The double truncation `t.truncGELE q q` is Mathlib's existing composite
 `t.truncLE q ⋙ t.truncGE q`. Its value shifted by `q` is the heart object `H_t^q(K)`.
 No global boundedness or nondegeneracy of the t-structure is assumed.
+
+## References
+
+* BBD, Faisceaux pervers, Propositions 1.3.3 and 1.3.5, Theorem 1.3.6 and its derived-category
+  example, pp. 29-32.
 -/
 
 @[expose] public section
@@ -94,7 +99,7 @@ namespace DerivedCategory
 /-- For the standard t-structure, `H_t^q(K)` is the ordinary cohomology object of
 this same `K` placed in degree zero. Shifting this isomorphism by `-q` identifies
 the factors in `exists_bounded_postnikov_tower` with `H^q(K)[0][-q]`.
-Source: Stacks Project, Tag 08J5. -/
+Source: BBD, Faisceaux pervers, the example after 1.3.6, p. 31; Stacks Project, Tag 08J5. -/
 theorem bounded_postnikov_cohomology_iso
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (K : DerivedCategory C) (q : ℤ) :

@@ -20,7 +20,7 @@ open CategoryTheory CategoryTheory.Functor
 namespace CategoryTheory
 
 /-- A mate comparison needs normalization by right-derived units, which need not be
-isomorphisms. Source: Stacks 0FND and 09T5.
+isomorphisms. Source: Zheng Construction 4.1; Stacks 0FND and 09T5.
 -/
 private theorem unitComparison_aux
     {A B C D AD BD CD DD : Type*}
@@ -65,7 +65,7 @@ private theorem unitComparison_aux
   simp only [Functor.id_obj, Functor.comp_map, Category.assoc]
 
 /-- An invertible mate comparison on representatives, normalized by arbitrary
-right-derived units. Source: Stacks 0FND.
+right-derived units. Source: Zheng Construction 4.1 and Lemma 5.16; Stacks 0FND.
 -/
 theorem derivedMate_unitComparison
     {A B C D AD BD CD DD : Type*}

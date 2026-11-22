@@ -19,6 +19,10 @@ import Mathlib.Topology.Algebra.Valued.LocallyCompact
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
 /-! # A uniformizer power divisible by a specified prime power
+
+## References
+
+* Serre, Local Fields, Chapter II, Section 2.
 -/
 
 @[expose] public section
@@ -27,7 +31,8 @@ universe u
 namespace Padic
 
 /-- A positive power of the chosen uniformizer is a multiple of a prescribed positive
-power of the residual prime. -/
+power of the residual prime.
+Source: Serre, Local Fields, Chapter II, Section 2. -/
 theorem exists_uniformizer_power_multiple
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
