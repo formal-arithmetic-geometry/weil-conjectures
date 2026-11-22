@@ -25,7 +25,10 @@ namespace CategoryTheory
 variable {C D : Type*} [Category* C] [Category* D]
   [Abelian C] [HasInjectiveResolutions C] [Abelian D]
 
-/-- Source: Stacks Project, Tag 0156, construction of the zeroth right derived functor. -/
+/-- The comparison maps `A ⟶ R⁰A` and `B ⟶ R⁰B` are natural in the functor: they commute with
+`α : A ⟶ B` and its zeroth right derived transformation.
+
+Source: Stacks Project, Tag 0156, construction of the zeroth right derived functor. -/
 theorem rightDerived_zero_transformation
     {A B : C ⥤ D} [A.Additive] [B.Additive] (α : A ⟶ B) (M : C) :
     A.toRightDerivedZero.app M ≫ (α.rightDerived 0).app M =

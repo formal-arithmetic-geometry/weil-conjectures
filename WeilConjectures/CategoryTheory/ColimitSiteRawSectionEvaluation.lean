@@ -28,8 +28,12 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-presentation construction and adjunction paragraphs. -/
+/-- For sheaves of types, evaluating the colimit of the Kan-extended stage presheaves `B` at the
+image of `U` gives a colimit of the diagram `D` of stage sections, compatibly with the maps `a`
+to any presheaf `T` receiving a cocone `γ` from `B`.
+
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction
+paragraphs. -/
 theorem colimit_site_raw_section_evaluation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

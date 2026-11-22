@@ -23,7 +23,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 /-!
 # The derived category of a dg algebra
 
-Source: Stacks Project, dga.tex, Definitions, and section-derived.
+Source: Stacks Project, dga.tex, Definitions, and the section on the derived category of a dg
+algebra.
 
 The category is the actual Gabriel--Zisman localization of right dg modules at
 quasi-isomorphisms. `DerivedStructure` specifies its standard triangulation by
@@ -72,7 +73,7 @@ def act (A : Algebra.{u}) (M : RightModule A) (p q : ℤ)
       (TensorProduct.tmul (ULift.{u} ℤ) m a))
 
 /-- Quasi-isomorphisms are detected on every cohomology group of the underlying complex.
-Source: Stacks, dga.tex, section-derived. -/
+Source: Stacks, dga.tex, the derived category of a dg algebra. -/
 def quasiIsomorphisms (A : Algebra.{u}) : MorphismProperty (RightModule A) :=
   fun _ _ f ↦ QuasiIso ((underlying A).map f)
 
@@ -80,11 +81,11 @@ def quasiIsomorphisms (A : Algebra.{u}) : MorphismProperty (RightModule A) :=
 Localizing dg modules directly at quasi-isomorphisms also identifies homotopic maps:
 the usual cylinder projection is a quasi-isomorphism. Hence this is equivalently the
 localization of the homotopy category used by Stacks.
-Source: Stacks, dga.tex, section-derived. -/
+Source: Stacks, dga.tex, the derived category of a dg algebra. -/
 abbrev Derived (A : Algebra.{u}) := (quasiIsomorphisms A).Localization
 
 /-- The canonical localization functor.
-Source: Stacks, dga.tex, section-derived. -/
+Source: Stacks, dga.tex, the derived category of a dg algebra. -/
 abbrev Q (A : Algebra.{u}) : RightModule A ⥤ Derived A := (quasiIsomorphisms A).Q
 
 /-- A comparison with the usual shift: a complex isomorphism whose degree maps

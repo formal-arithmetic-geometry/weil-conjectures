@@ -22,8 +22,11 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section construction and adjunction paragraphs. -/
+/-- For sheaves of types, the value at the image of `U` of the colimit of the Kan-extended stage
+presheaves `B` is a colimit of the diagram `D` of stage sections over the images of `U`, with
+coprojections given by the Kan units.
+
+Source: Stacks Project, Sites, Tag 0A35, section construction and adjunction paragraphs. -/
 theorem raw_section_presentation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

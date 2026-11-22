@@ -108,8 +108,12 @@ private theorem derived_zero {F G : C ⥤ AddCommGrpCat.{w}} [F.Additive] [G.Add
 
 end
 
-/-- Source: Stacks Project, Homology Tag 0117, finite products in the injective-resolution
-argument for Tag 0A50. -/
+/-- The `n`-th right derived functor of the binary product `B × D` of additive functors is the
+product of the `n`-th right derived functors of `B` and `D`, compatibly with the derived maps of
+the pairing `(a, b)` and of the difference `c - d`.
+
+Source: Stacks Project, Homology Tag 0117, finite products in the injective-resolution argument
+for Tag 0A50. -/
 theorem rightDerived_binaryProduct_iso
     [Abelian C] [HasInjectiveResolutions C]
     (A B D E : C ⥤ AddCommGrpCat.{w})

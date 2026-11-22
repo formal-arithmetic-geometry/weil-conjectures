@@ -100,7 +100,10 @@ private theorem triple_rep
     rw [Arrow.arrow_mk_eqToHom_comp, Arrow.mk_eq]
     exact (ConcreteCategory.congr_hom (colimit.w (F ⋙ Cat.arrows) q) d₀).trans hd₀
 
-/-- Stacks Project, Tags 09YL and 04AX. -/
+/-- An identity `i` and a composition `c` on the filtered-colimit hom-sets that agree with the
+stage identities and compositions satisfy the unit and associativity laws.
+
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_fiber_laws
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z})
     (i : ∀ X : colimit (F ⋙ Cat.objects), FilteredColimitHom F X X)

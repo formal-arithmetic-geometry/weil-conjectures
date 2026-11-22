@@ -19,7 +19,7 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ.
 
 The site and all section and index sets lie in the common containing universe
-`max u v w`, following `prose-01-10`. Covering sieves express local
+`max u v w`. Covering sieves express local
 lifting independently of the choice of a precoverage presenting the topology.
 -/
 

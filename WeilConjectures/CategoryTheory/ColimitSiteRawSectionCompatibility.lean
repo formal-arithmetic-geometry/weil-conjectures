@@ -27,8 +27,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section construction and adjunction paragraphs. -/
+/-- The colimit of the diagram `D` of stage sections over the images of `U` is isomorphic to the
+value at the image of `U` of the colimit of the Kan-extended stage presheaves `B`, compatibly
+with the coprojections.
+
+Source: Stacks Project, Sites, Tag 0A35, section construction and adjunction paragraphs. -/
 theorem raw_section_presentation_compatibility
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

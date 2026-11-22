@@ -39,9 +39,12 @@ private theorem arrow_precomp
   subst D
   rw [(Arrow.mk_inj _ _).mp w]
 
-/-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
-and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
-by Modules on Sites, Tag 03CO. -/
+/-- The sections of the inverse image of an abelian sheaf `H` to the colimit site over the image
+of `X` are the filtered colimit over `Under j` of the sections of its inverse images to the
+later stages, compatibly with the units of the stage and colimit adjunctions.
+
+Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf-condition and adjunction
+paragraphs; abelian extension by Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_section_colimit_presentation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

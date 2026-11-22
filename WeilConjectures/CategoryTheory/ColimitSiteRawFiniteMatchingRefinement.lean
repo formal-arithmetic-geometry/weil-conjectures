@@ -40,8 +40,12 @@ private theorem raw_arrow_transport {C : Type u} [Category.{u} C]
   simpa using hh.symm
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35,
-the finite overlap-equation calculation before stage gluing. -/
+/-- Stage sections `s` on a finite stage cover of `W` whose images in the colimit of the
+Kan-extended stage presheaves `B` form a compatible family are, at some later stage `t'`,
+represented by a compatible family `s'` of stage sections with the same images.
+
+Source: Stacks Project, Sites, Tag 0A35, the finite overlap-equation calculation before stage
+gluing. -/
 theorem colimit_site_raw_finite_matching_refinement
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

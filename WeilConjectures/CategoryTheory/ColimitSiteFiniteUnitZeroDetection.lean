@@ -31,9 +31,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
-and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
-by Modules on Sites, Tag 03CO. -/
+/-- A section `z` of an abelian sheaf `H` over `X` that is killed by the unit of the inverse
+image to the colimit site is already killed by the unit of the inverse image along some
+transition `d : j ⟶ k`.
+
+Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf-condition and adjunction
+paragraphs; abelian extension by Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_unit_zero_detection
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -41,8 +41,12 @@ private theorem arrow_map_apply_heq
   subst B'
   rw [(Arrow.mk_inj _ _).mp h]
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the general-object presentation,
-sheaf equalizer and adjunction paragraphs; Modules on Sites, Tag 03CO. -/
+/-- The comparison map `colimit.desc D K` from the filtered colimit of the stage section groups
+of the inverse images of `G` over the images of `U` to the section group of the colimit inverse
+image is bijective.
+
+Source: Stacks Project, Sites, Tag 0A35, the general-object presentation, sheaf equalizer and
+adjunction paragraphs; Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_section_comparison_bijective
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

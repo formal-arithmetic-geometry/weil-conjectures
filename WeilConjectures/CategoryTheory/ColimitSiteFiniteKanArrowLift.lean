@@ -28,8 +28,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35, omitted independence-of-presentation
-verification, expanded using Categories, Section Tag 04AX. -/
+/-- Finitely many costructured arrows `S` into the image of `U` under the colimit functor,
+including the identity, and finitely many arrows `T` between them lift to a later stage `r`:
+there are maps `g` from the image of `U` at `r` that commute with the arrows in `T` and send the
+identity arrow to the identity.
+
+Source: Stacks Project, Sites, Tag 0A35, omitted independence-of-presentation verification,
+expanded using Categories, Section Tag 04AX. -/
 theorem colimit_site_finite_kan_arrow_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F)

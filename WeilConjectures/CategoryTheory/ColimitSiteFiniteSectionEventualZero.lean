@@ -157,8 +157,11 @@ private theorem raw_colimit_comparison_iso
   rw [he] at hi
   exact hi
 
-/-- Source: Stacks Project, Sites, Tag 0A35, presentation construction and
-adjunction identification; abelian groups as in Modules on Sites, Tag 03CO. -/
+/-- A section at stage `t` whose image in the section group of the colimit inverse image is zero
+already becomes zero under a transition map `D.map b` to some later stage `t'`.
+
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction
+identification; abelian groups as in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_section_eventual_zero
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -50,8 +50,12 @@ private theorem arrow_precomp {X Y Z Z' : AddCommGrpCat.{u}}
   subst Z'
   simpa using congrArg (fun k ↦ Arrow.mk (f ≫ k)) hg
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section presentation; Modules on Sites, Tag 03CO (abelian colimits). -/
+/-- Two stage sections `x` and `x'` with the same image in the colimit of the Kan-extended
+stage presheaves `B` over the image of `U` become equal under transition maps to a common later
+stage `r`.
+
+Source: Stacks Project, Sites, Tag 0A35, section presentation; Modules on Sites, Tag 03CO
+(abelian colimits). -/
 theorem raw_abelian_section_relations
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

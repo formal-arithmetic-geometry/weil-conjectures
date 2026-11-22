@@ -46,8 +46,12 @@ private theorem arrow_eq_preserves_equality {S T U : Type u}
   rw [← Arrow.mk_injective _ _ h]
   exact hxy
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-finite overlap equalities in the filtered-colimit calculation. -/
+/-- Finitely many pairs of stage sections `r p` and `s p` with equal images in the colimit of
+the Kan-extended stage presheaves `B` become equal simultaneously under one transition map
+`θ t t' b` to a later stage `t'`.
+
+Source: Stacks Project, Sites, Tag 0A35, finite overlap equalities in the filtered-colimit
+calculation. -/
 theorem colimit_site_raw_finite_equality_stabilization
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

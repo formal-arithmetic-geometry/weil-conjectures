@@ -24,7 +24,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Stacks Project, Tags 09YL and 04AX. -/
+/-- For a filtered colimit of small categories, given a category structure on the colimit `O`
+of the object sets and functors `V j` presenting `O` as the colimit (on objects and on arrows),
+finite configurations of objects and arrows lift to a stage, equalities between such lifts hold
+at a later stage, every finite diagram in `O` lifts to a stage, and morphisms of `O` between
+images of stage objects are represented at a later stage, with equality detected eventually.
+
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_descent
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

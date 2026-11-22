@@ -333,7 +333,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Evaluation-transpose scalar Hom maps are natural and respect coefficient towers
 and the identity coefficient map, without flatness or boundedness assumptions.
-Source: Stacks Project, sites-cohomology.tex, Tags 08J9 (equation-internal-hom)
+Source: Stacks Project, sites-cohomology.tex, Tags 08J9
 and 07A4; the tower argument is formal, rather than
 an additional theorem asserted in Stacks. -/
 theorem scalarHomComparisonTower

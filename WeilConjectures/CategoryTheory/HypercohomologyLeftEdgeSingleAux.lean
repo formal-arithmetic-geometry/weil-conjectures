@@ -23,7 +23,12 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
   (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, derived.tex, Tag 015J. -/
+/-- On the complex `S` with `A` in degree `n` and zero elsewhere, the left edge map
+`cochainHypercohomologyLeftEdge` agrees with `G` applied to the homology projection of `S` in
+degree `n`, after composing with the canonical map from `G` of the degree-`n` cycles to the
+homology of `G S`.
+
+Source: Stacks Project, derived.tex, Tag 015J. -/
 theorem cochainHypercohomologyLeftEdge_single_aux (A : B) (n : ℕ) :
     let S := (HomologicalComplex.single B (ComplexShape.up ℕ) n).obj A
     let T := (G.mapHomologicalComplex (ComplexShape.up ℕ)).obj S

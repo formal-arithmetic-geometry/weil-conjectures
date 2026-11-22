@@ -18,7 +18,7 @@ public import WeilConjectures.Algebra.Homology.RingHomExtensionDefs
 
 /-! # Shared definitions for scalar extension of ring-site Hom complexes
 
-Source: Stacks Project, more-algebra.tex, equation-base-change-RHom, and
+Source: Stacks Project, more-algebra.tex, base change for RHom, and
 sites-cohomology.tex, section-hom-complexes (Tag 0A8X).
 
 This is a chain-level construction. It requires neither derived categories nor

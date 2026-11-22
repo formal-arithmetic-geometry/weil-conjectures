@@ -34,7 +34,11 @@ private theorem fiber_arrow_eq
   subst Y'
   exact congrArg Arrow.mk ((e _ _).injective (Subtype.ext h))
 
-/-- Stacks Project, Tags 09YL and 04AX. -/
+/-- The colimit `O` of the object sets of a filtered diagram `F` of small categories carries a
+category structure with functors `V j` from the stages, compatible with the transition functors,
+under which the arrows of `O` are the colimit of the arrow sets of the stages.
+
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_structure
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

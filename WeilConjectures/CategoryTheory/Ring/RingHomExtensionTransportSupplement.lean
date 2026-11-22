@@ -13,7 +13,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 
 /-! # Transport of a module Hom comparison to the one-point ring site
 
-Source: Stacks Project, more-algebra.tex, equation-base-change-RHom and
+Source: Stacks Project, more-algebra.tex, base change for RHom and
 Lemma 0A6A.
 -/
 

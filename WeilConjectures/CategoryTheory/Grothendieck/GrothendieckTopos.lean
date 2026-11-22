@@ -13,8 +13,8 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 Source: Stacks Project, Sites, Tags 00XA, 00Z4, 00Z8 and 00VI.
 
 Sieves, their pullbacks, Grothendieck topologies and sheaves are the existing Mathlib notions.
-The universe `w` represents the larger universe of the size convention
-`prose-01-10`: both the presenting site and the values of its sheaves lie in it.
+The universe `w` is the larger universe of the size convention: both the presenting site and
+the values of its sheaves lie in it.
 -/
 
 @[expose] public section

@@ -26,8 +26,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 09YL, and the first
-paragraph of Tag 0A35. -/
+/-- The precoverage `Q` on a filtered colimit of finitary sites, whose covers are the images of
+stage covers, contains isomorphisms, is stable under finite composition and base change, and has
+pullbacks; the colimit functors preserve the covering pullbacks and are continuous.
+
+Source: Stacks Project, Sites, Tag 09YL, and the first paragraph of Tag 0A35. -/
 theorem colimit_site_covering_construction
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

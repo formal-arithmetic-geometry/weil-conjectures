@@ -40,8 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- A K-injective resolution consists of a complex `I`, a quasi-isomorphism `K ⟶ I`, and
-K-injectivity of `I`, using the generic Mathlib notions underlying the étale specialization
-`prose-03-02`. -/
+K-injectivity of `I`, stated with the generic Mathlib notions. -/
 structure KInjectiveResolutionChoice {C : Type u₁} [Category.{v₁} C] [Abelian C]
     (K : CochainComplex C ℤ) where
   complex : CochainComplex C ℤ

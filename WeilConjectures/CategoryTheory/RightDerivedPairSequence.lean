@@ -25,7 +25,11 @@ universe v u w
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Tag 0A50, final paragraph, and Homology Tag 0117. -/
+/-- A sequence `0 ⟶ A ⟶ B × D ⟶ E ⟶ 0` of additive functors, given by `(a, b)` and `c - d`, that
+is short exact on injective objects induces connecting maps `δ` making the Mayer–Vietoris
+sequence `R^n A ⟶ R^n B × R^n D ⟶ R^n E ⟶ R^(n+1) A` exact.
+
+Source: Stacks Project, Tag 0A50, final paragraph, and Homology Tag 0117. -/
 theorem rightDerived_pair_sequence
     {C : Type u} [Category.{v} C] [Abelian C] [HasInjectiveResolutions C]
     (A B D E : C ⥤ AddCommGrpCat.{w})

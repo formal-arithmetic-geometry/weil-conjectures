@@ -32,7 +32,10 @@ private theorem arrow_comp_congr {C : Type z} [Category.{z} C]
   subst d
   rfl
 
-/-- Stacks Project, Tags 09YL and 04AX. -/
+/-- If finite configurations of objects and arrows of the colimit category `O` lift to a stage
+of the filtered diagram `F`, then every finite diagram `d : D ⥤ O` lifts to a stage `j`.
+
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_finite_functor_lift
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

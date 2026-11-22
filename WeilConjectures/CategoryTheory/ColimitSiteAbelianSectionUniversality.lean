@@ -44,8 +44,12 @@ private theorem arrow_kernel_iff
   subst C
   rw [(Arrow.mk_inj _ _).mp h]
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf equalizer,
-and adjunction paragraphs; abelian-group extension via Modules on Sites, Tag 03CO. -/
+/-- A cocone `K` over the diagram `D` of the sections of the stage inverse images of `G` over
+the images of `U`, whose legs are the unit-compatible maps `α`, is a colimit cocone: the
+section group of the colimit inverse image is the filtered colimit of the stage section groups.
+
+Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf equalizer, and adjunction
+paragraphs; abelian-group extension via Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_section_universality
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

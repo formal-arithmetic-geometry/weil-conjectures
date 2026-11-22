@@ -128,8 +128,12 @@ private theorem lift_under_arrow
     (V.w c)
   exact hvc.trans hg
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section construction, independence of the presentation and restriction arrows. -/
+/-- For sheaves of types, every section of the colimit of the Kan-extended stage presheaves `B`
+over the image of `U` comes, through the map `κ t`, from a section of the inverse image of `G`
+at some stage `t`.
+
+Source: Stacks Project, Sites, Tag 0A35, section construction, independence of the presentation
+and restriction arrows. -/
 theorem raw_section_generators
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

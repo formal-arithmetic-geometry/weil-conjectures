@@ -118,8 +118,13 @@ private theorem sheaf_triangle_id
     exact ha X
   simpa [b] using congrArg (fun z ↦ Arrow.mk (z.hom.app (op Y))) eq
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the compatible stage maps in the
-adjunction paragraph (expanded using uniqueness of adjuncts). -/
+/-- Maps `α` from the inverse images of `G` at the later stages to the restrictions of its
+inverse image on the colimit site, and transition maps `θ` between later stages, all compatible
+with the adjunction units, assemble the sections over the images of `U` into a diagram `D` over
+`Under i` with a cocone `K` whose point is the section group of the colimit inverse image.
+
+Source: Stacks Project, Sites, Tag 0A35, the compatible stage maps in the adjunction paragraph
+(expanded using uniqueness of adjuncts). -/
 theorem colimit_site_abelian_section_diagram
     (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

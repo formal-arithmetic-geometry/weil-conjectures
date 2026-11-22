@@ -16,8 +16,11 @@ universe v₁ v₂ v₃ v₄ u₁ u₂ u₃ u₄
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Categories 0B65, applied after transporting adjunctions
-across equivalences (the transport in Topologies 04HR). -/
+/-- If `G` and `H` are equivalences and `beta : R₁ ⋙ G ≅ H ⋙ R₂` is an isomorphism, then its
+mate `G ⋙ L₂ ⟶ L₁ ⋙ H` between the left adjoints is an isomorphism.
+
+Source: Stacks Project, Categories 0B65, applied after transporting adjunctions across
+equivalences (the transport in Topologies 04HR). -/
 theorem isIso_inverseMate_of_equivalences
     {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]

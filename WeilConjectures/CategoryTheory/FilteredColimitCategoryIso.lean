@@ -16,7 +16,11 @@ universe z
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
-/-- Stacks Project, Tag 09YL. -/
+/-- If finite diagrams in the colimit category `O` lift to a stage of the filtered diagram `F`,
+then an arrow of `O` is an isomorphism if and only if it is the image of an isomorphism in some
+stage.
+
+Source: Stacks Project, Tag 09YL. -/
 theorem filteredColimit_category_iso_clause
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

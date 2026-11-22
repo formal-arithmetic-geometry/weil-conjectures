@@ -38,9 +38,12 @@ private theorem arrow_zero_iff {A B C : AddCommGrpCat.{u}} (f : A ⟶ B) (g : A 
   have he : f = g := by simpa using hf
   rw [he]
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section formula and its presentation, sheaf and adjunction paragraphs; abelian
-interpretation in Modules on Sites, Tag 03CO. -/
+/-- The kernel of the unit of the inverse image to the colimit site, evaluated at `X`, is
+contained in the supremum of the kernels of the units of the inverse images to the later stages
+`a : Under j`.
+
+Source: Stacks Project, Sites, Tag 0A35, section formula and its presentation, sheaf and
+adjunction paragraphs; abelian interpretation in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_unit_kernel_bound
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

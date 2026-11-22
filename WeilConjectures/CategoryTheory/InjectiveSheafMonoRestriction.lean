@@ -27,7 +27,10 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max w v}]
 
-/-- Source: Stacks Project, Tag 093X, specialized to abelian sheaves. -/
+/-- For an injective abelian sheaf `I` and a monomorphism `a : U' ⟶ U`, the restriction map
+`I(U) ⟶ I(U')` is surjective.
+
+Source: Stacks Project, Tag 093X, specialized to abelian sheaves. -/
 theorem injective_sheaf_mono_restriction
     (I : Sheaf J AddCommGrpCat.{max w v}) [Injective I]
     {U' U : C} (a : U' ⟶ U) [Mono a] : Function.Surjective (I.obj.map a.op) := by

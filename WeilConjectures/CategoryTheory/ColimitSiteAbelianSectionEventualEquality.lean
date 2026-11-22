@@ -81,9 +81,12 @@ private theorem comparison_kernel_iff
   exact (ConcreteCategory.bijective_of_isIso
     ((e.hom.app G).hom.app (op (g.obj Y)))).1.eq_iff
 
-/-- Source: Stacks Project, Sites, Tag 0A35, presentation independence and
-unit-compatible adjunction identification; abelian extension by Modules on Sites,
-Tag 03CO. -/
+/-- Two sections of the inverse image of `G` at the stage `t` over the image of `U` that have the
+same image under `α t` in the colimit inverse image become equal under a transition map `θ t t' b`
+to some later stage `t'`.
+
+Source: Stacks Project, Sites, Tag 0A35, presentation independence and unit-compatible
+adjunction identification; abelian extension by Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_section_eventual_equality
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

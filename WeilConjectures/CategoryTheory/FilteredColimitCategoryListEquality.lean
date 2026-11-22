@@ -46,7 +46,11 @@ private theorem finite_stage_eq
     · simpa only [G.map_comp, ConcreteCategory.comp_apply] using
         congrArg (fun a ↦ G.map g a) (hf q)
 
-/-- Stacks Project, Tags 09YL and 04AX. -/
+/-- If the functors `V j` present the category `O` as the filtered colimit of `F` on objects
+and on arrows, then finitely many objects and arrows at stages `j` and `k` with equal images in
+`O` already become equal at some common later stage `t`.
+
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_list_equality
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

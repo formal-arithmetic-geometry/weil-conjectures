@@ -56,8 +56,11 @@ private theorem colimit_mem_subgroup {I : Type u} [SmallCategory I]
   change ((hc.desc c' x : S) : c.pt) = x at hx
   exact hx ▸ (hc.desc c' x).property
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section presentation; Modules on Sites, Tag 03CO (abelian colimits). -/
+/-- Every section of the colimit of the Kan-extended stage presheaves `B` over the image of `U`
+comes, through the map `κ t`, from a section of the inverse image of `G` at some stage `t`.
+
+Source: Stacks Project, Sites, Tag 0A35, section presentation; Modules on Sites, Tag 03CO
+(abelian colimits). -/
 theorem raw_abelian_section_generators
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -158,7 +158,7 @@ private theorem evaluation_of_iso
       · simp
 
 /-- Exact slice restriction preserves the representative-normalized evaluation counit.
-Source: Stacks Project, Tags 08J9 and 08JB, and equation-internal-hom. -/
+Source: Stacks Project, Tags 08J9 and 08JB. -/
 theorem ringedSlice_evaluation_coherence
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

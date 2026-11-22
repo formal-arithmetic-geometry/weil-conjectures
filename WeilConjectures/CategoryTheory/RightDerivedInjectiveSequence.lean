@@ -72,7 +72,11 @@ private noncomputable def resolutionSequenceMap {M N : C}
 end
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 0A50, passage to derived functors; Homology Tag 0117. -/
+/-- A sequence `0 ⟶ A ⟶ B ⟶ E ⟶ 0` of additive functors that is short exact on injective
+objects induces connecting maps `δ` making the sequence of right derived functors
+`R^n A ⟶ R^n B ⟶ R^n E ⟶ R^(n+1) A` exact.
+
+Source: Stacks Project, Tag 0A50, passage to derived functors; Homology Tag 0117. -/
 theorem rightDerived_injective_sequence
     {C : Type u} [Category.{v} C] [Abelian C] [HasInjectiveResolutions C]
     (A B E : C ⥤ AddCommGrpCat.{w}) [A.Additive] [B.Additive] [E.Additive]

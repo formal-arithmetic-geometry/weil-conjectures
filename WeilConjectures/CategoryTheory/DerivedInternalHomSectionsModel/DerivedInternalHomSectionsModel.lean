@@ -417,7 +417,7 @@ noncomputable def representativeHom :
     Functor.uncurry.obj (homComplexFunctor (R := R))
 
 /-- The ordinary complex of global Hom cochains, functorially in both representatives.
-Source: Stacks, Section 0A8X, equation-global-cohomology-hom-complex. -/
+Source: Stacks, Section 0A8X, the global Hom complex. -/
 noncomputable def globalHom :
     (Complexes.{c, v, r} R)ᵒᵖ × (injectiveProperty.{c, v, r} R).FullSubcategory ⥤
       CochainComplex AddCommGrpCat.{max c v r} ℤ :=

@@ -185,7 +185,12 @@ private theorem presheafLift_app
   · exact congrArg (fun k : Z ⟶ Y ↦ k.app W)
       (CartesianMonoidalCategory.lift_snd a b)
 
-/-- Source: Stacks Project, Tag 03D2. -/
+/-- A finite-limit-preserving functor `L` between categories of sheaves of types transports
+right distributivity: if `muV : X ⨯ Y ⟶ Y` distributes over the additions `axV` and `ayV`
+sectionwise, then its transport along `ex` and `ey` distributes over `ax` and `ay`, the
+transports of `axV` and `ayV`.
+
+Source: Stacks Project, Tag 03D2. -/
 theorem cartesianScalarDistributivityTransport
     {C : Type u} [Category.{v} C] {D : Type u} [Category.{v} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

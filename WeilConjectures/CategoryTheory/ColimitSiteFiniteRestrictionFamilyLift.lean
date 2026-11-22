@@ -55,8 +55,12 @@ private theorem lift_same_stage_arrow
   exact (congrArg (fun H : F.obj k ⟶ V.pt ↦ H.toFunctor.mapArrow.obj (Arrow.mk g))
     (V.w c)).trans hg
 
-/-- Source: Stacks Project, Sites, Tags 0A35 and 09YL, finite diagram lifting
-in the section presentation. -/
+/-- A finite family of maps `f` from the image of `U` to the images of `W q` in the colimit
+category, compatible with finitely many stage arrows `a` and equal to the identity at `q₀`,
+lifts to a family `g` at some later stage `r` with the same compatibilities.
+
+Source: Stacks Project, Sites, Tags 0A35 and 09YL, finite diagram lifting in the section
+presentation. -/
 theorem colimit_site_finite_restriction_family_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))

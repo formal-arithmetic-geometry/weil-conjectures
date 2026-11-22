@@ -59,9 +59,13 @@ private theorem sheaf_triangle_unit
   have eq' := congrArg (fun k ↦ k.hom.app (op X)) eq
   exact congrArg Arrow.mk eq'
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-the presentation construction and adjunction argument; the abelian extension uses
-Sites, Modules, Tag 03CO. -/
+/-- For a filtered colimit of finitary sites with colimit precoverage `Q`, the inverse image of
+an abelian sheaf `G` from stage `i` to the colimit site has, over the image of `U`, the filtered
+colimit over `Under i` of the sections of the inverse images of `G` to the later stages, with
+coprojections and transition maps compatible with the units of the adjunctions.
+
+Source: Stacks Project, Sites, Tag 0A35, the presentation construction and adjunction argument;
+the abelian extension uses Sites, Modules, Tag 03CO. -/
 theorem colimit_site_abelian_inverse_image
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

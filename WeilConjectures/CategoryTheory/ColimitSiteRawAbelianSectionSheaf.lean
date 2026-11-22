@@ -38,9 +38,11 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35,
-presentation construction and adjunction paragraphs; abelian colimits
-as in Modules on Sites, Tag 03CO. -/
+/-- The colimit over `Under i` of the left Kan extensions `B t` of the stage inverse images of an
+abelian sheaf `G` along the colimit functors is a sheaf for the colimit topology.
+
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction paragraphs;
+abelian colimits as in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_raw_abelian_section_isSheaf
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

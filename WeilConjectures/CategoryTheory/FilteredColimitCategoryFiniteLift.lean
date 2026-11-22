@@ -88,7 +88,11 @@ private theorem arrow_composite_congr {C : Type z} [Category.{z} C]
   subst c'
   rfl
 
-/-- Stacks Project, Tags 09YL and 04AX. -/
+/-- If the functors `V j` present the category `O` as the filtered colimit of `F` on objects
+and on arrows, then finitely many objects and arrows of `O` lift to a single stage `j`,
+preserving their sources, targets, the given composites and the given identities.
+
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_finite_lift
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

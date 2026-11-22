@@ -19,8 +19,7 @@ import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 # Right derived functors computed on adapted complexes
 
 Source: Stacks Project, Derived Categories, Tag 06XN,
-in Situation 05S8, with the universal comparison of Definition 05S9 and
-`equation-everywhere`.
+in Situation 05S8, with the universal comparison of Definition 05S9.
 -/
 
 @[expose] public section

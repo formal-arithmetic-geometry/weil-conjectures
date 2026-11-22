@@ -70,8 +70,12 @@ private theorem finite_colimit_relation_support
       (Finset.mem_union_right _ hf) a)
     exact h₁.trans h₂
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-section construction, independence of the presentation and restriction arrows. -/
+/-- If `K` is a left Kan extension of the type-valued stage presheaf `A t` along the colimit
+functor, two sections of `A t` over `U` with the same image in `K` become equal under the
+transition map `θ r b` to some later stage `r`.
+
+Source: Stacks Project, Sites, Tag 0A35, section construction, independence of the presentation
+and restriction arrows. -/
 theorem raw_section_kan_unit_relations
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F)

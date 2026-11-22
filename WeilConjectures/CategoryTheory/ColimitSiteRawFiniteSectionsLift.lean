@@ -174,8 +174,10 @@ private theorem untransport_raw
   simpa using hz
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35,
-the raw section presentation and construction. -/
+/-- Finitely many sections `x p` of the colimit of the Kan-extended stage presheaves `B` over the
+images of objects `Y p` of stage `j` all come from stage sections `s p` at one later stage `t`.
+
+Source: Stacks Project, Sites, Tag 0A35, the raw section presentation and construction. -/
 theorem colimit_site_raw_finite_sections_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

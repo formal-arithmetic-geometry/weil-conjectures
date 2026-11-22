@@ -299,8 +299,13 @@ private theorem colimit_site_raw_comparison_unit_compatibility
   exact NatTrans.congr_app (congrArg (fun k ↦ k.hom) hc) (op X)
 
 
-/-- Source: Stacks Project, Sites, Tag 0A35,
-presentation construction and adjunction paragraphs. -/
+/-- The left Kan extensions `B t` of the stage inverse images of a sheaf of types `G` along the
+colimit functors form a diagram over `Under i`, with transition maps compatible with `θ` and a
+cocone `γ` to the underlying presheaf of the colimit inverse image whose composites with the Kan
+units are `α`.
+
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction
+paragraphs. -/
 theorem colimit_site_raw_section_diagram
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))
