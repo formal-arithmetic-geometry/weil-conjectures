@@ -88,3 +88,19 @@ import and unknown constant were repaired in the restoration snapshot. The
 restoration now reaches the recorded root; shares remain M1 62.046%, M2
 36.568%, Matched 1.389%, Unclassified 0.000%.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. Counter O: 17,310,168 calls / 52,925.953 ms comparison-exclusive. Pinned root 13603: 17,310,168 calls / 85,908.939 ms aggregate exclusive; raw coverage 3,222 calls (0.019%) and 35.756 ms (0.042%). Calls match.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.015 | 0.000% |
+| M1 | 7,988,264 | 54,699.657 | 63.672% |
+| M2 | 4,357,093 | 30,187.585 | 35.139% |
+| Matched | 4,964,810 | 1,021.681 | 1.189% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 AlgebraicGeometry.Scheme.Hom.toLRSHom, CategoryTheory.ObjectProperty.FullSubcategory.proj, DFunLike.coe, LinearEquiv.proj, AlgebraicGeometry.PresheafedSpace.comp; M2 CategoryTheory.Limits.IsLimit.proj versus CategoryTheory.Iso.proj, AlgebraicGeometry.Scheme.Hom.proj (two), and AlgebraicGeometry.LocallyRingedSpace.Hom.proj versus CategoryTheory.CategoryStruct.comp, exposed by initial_whnf; Matched AddCommGroup.toAddCommMonoid, Semiring.toModule, TopCat.carrier, Eq, ContinuousMap.
+
+C: ring-leaf alignment changes the dependent real-purity witness telescope; no M0-preserving descendant control type-checks. Outcome D.

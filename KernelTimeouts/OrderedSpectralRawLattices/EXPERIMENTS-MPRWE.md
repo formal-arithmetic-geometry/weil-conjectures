@@ -88,3 +88,19 @@ unknown constant were repaired in the restoration snapshot. The restoration
 now reaches the recorded root; shares remain M1 63.902%, M2 35.347%, Matched
 0.758%, Unclassified 0.000%.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. Counter O: 18,944,709 calls / 35,362.863 ms comparison-exclusive. Pinned root 62844: 18,944,709 calls / 65,054.912 ms aggregate exclusive; raw coverage 4,333 calls (0.023%) and 37.769 ms (0.058%). Calls match.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.264 | 0.000% |
+| M1 | 8,320,909 | 40,931.987 | 62.919% |
+| M2 | 3,499,646 | 23,668.561 | 36.382% |
+| Matched | 7,124,151 | 454.038 | 0.698% |
+| Unclassified | 2 | 0.063 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 CategoryTheory.Functor.LaxMonoidal.proj, CategoryTheory.Functor.CoreMonoidal.proj (two), CategoryTheory.MonoidalCategory.proj, CategoryTheory.Sheaf.monoidalCategory._aux_7; M2 CategoryTheory.MonObj.proj (three), CategoryTheory.Functor.monObjObj, and another CategoryTheory.MonObj.proj, exposed by initial_whnf; Matched CategoryTheory.Functor.op, Opposite, CategoryTheory.Functor.category, and two CategoryTheory.Category.opposite nodes.
+
+C: domain, henselian, and regular route controls change the dependent small_spectral_raw_lattices root, so they are invalid descendant-only C. The route-level dependent telescope is the obstruction. Outcome D.

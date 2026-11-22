@@ -86,3 +86,19 @@ Root 2281 has complete aggregate coverage: 3,897,905 calls and 24,659.468 ms com
 Root identity and analysis are corrected; shares are M1 99.743%, M2 0.000%,
 Matched 0.257%, Unclassified 0.000%. The hR replacement remains root-changing.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. Counter O: 3,897,905 calls / 26,603.785 ms comparison-exclusive. Pinned root 6122: 3,897,905 calls / 30,149.979 ms aggregate exclusive; raw coverage 3,685 calls (0.095%) and 42.008 ms (0.139%). Calls match.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.026 | 0.000% |
+| M1 | 2,961,163 | 30,086.859 | 99.791% |
+| M2 | 9 | 0.065 | 0.000% |
+| Matched | 936,732 | 63.029 | 0.209% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 DFunLike.coe, Add.proj, 7, another Add.proj, CategoryTheory.Functor.proj; M2 CategoryTheory.Sheaf.monoidalPreadditive versus AlgebraicGeometry.Etale.ExternalRHom.complexesMonoidal._proof_5 and DerivedCategory.hasDerivedMonoidalCategory versus AlgebraicGeometry.Etale.ExternalRHom.siteDerivedMonoidal._proof_6, exposed by initial_whnf; Matched Eq, ModuleCat.monoidalCategory, 1, CategoryTheory.Functor.obj, RingHom.id.
+
+C: hR alignment changes the dependent counit proposition root; the hR/Over telescope is the type-level obstruction. Outcome C remains supported.

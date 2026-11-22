@@ -87,3 +87,19 @@ Root identity and analysis are corrected; shares are M1 99.761%, M2 0.007%,
 Matched 0.232%, Unclassified 0.000%. The endpoint replacement remains
 root-changing.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. Counter O: 6,359,958 calls / 42,138.453 ms comparison-exclusive. Pinned root 2129: 6,359,958 calls / 42,672.620 ms aggregate exclusive; raw coverage 3,773 calls (0.059%) and 34.133 ms (0.080%). Calls match.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.272 | 0.001% |
+| M1 | 4,781,271 | 42,570.499 | 99.761% |
+| M2 | 276 | 3.841 | 0.009% |
+| Matched | 1,578,409 | 97.986 | 0.230% |
+| Unclassified | 1 | 0.020 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 DerivedCategory.tensorHomAdjunctionQhObj, DerivedCategory.instMonoidalCategory._aux_5, CategoryTheory.ShrinkHoms.instCategory._proof_1, DerivedCategory.internalHomQhObj, DFunLike.coe; M2 CategoryTheory.Functor.proj (two), 6 versus AlgebraicGeometry.Etale.IndEtaleMapping.imagePullback._proof_5, and two more CategoryTheory.Functor nodes, exposed by initial_whnf; Matched 7 (two), AlgebraicGeometry.Etale.sheafMonoidalCategory, and two CategoryTheory.CategoryStruct.comp nodes.
+
+C: endpoint alignment changes the dependent counit root and restoration is not O. No M0-preserving descendant control type-checks. Outcome C remains.

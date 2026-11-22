@@ -94,3 +94,32 @@ its purpose is provenance alignment, not a claim that the whole root becomes
 cheap. Shares are unchanged under the corrected root identity: M1 74.441%,
 M2 23.947%, Matched 1.614%, Unclassified 0.000%.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. Counter O:
+239,340,712 calls / 681,687.160 ms comparison-exclusive. Pinned root 16563:
+239,340,712 calls / 1,082,179.217 ms aggregate exclusive; raw coverage 3,828
+calls (0.002%) and 49.997 ms (0.005%). Calls match; trace timing includes
+hash/path overhead.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.050 | 0.000% |
+| M1 | 130,197,227 | 802,030.873 | 74.113% |
+| M2 | 40,495,866 | 264,845.916 | 24.473% |
+| Matched | 68,647,618 | 15,302.378 | 1.414% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 Add.add, ModuleCat.Hom._mkInternal, CommRingCat.carrier,
+PresheafOfModules.proj, OfNat.ofNat; M2 CommRing.toRing, AddCommGroup.toAddCommMonoid,
+SheafOfModules.proj (two nodes), and
+SheafOfModules.OpenTensorNormalization.openInclusion. The M2 reduction
+events exposing the first three are initial_whnf; Matched 1, Eq, and three
+CategoryTheory.Functor.obj nodes.
+
+C rerun: C-descendant-alignment reaches only 19,783 calls / 75.950 ms
+counter comparison-exclusive, changing the original root; it is invalid as a
+descendant-only control. The Restored snapshot is 6 calls / 0.027 ms and is
+also diagnostic. The dependent right-square telescope does not admit the
+requested local alignment while retaining M0. Outcome D.

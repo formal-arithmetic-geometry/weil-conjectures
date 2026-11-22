@@ -81,3 +81,19 @@ Root 1633 has complete aggregate coverage: 3,180,470 calls and 21,549.825 ms com
 
 **Outcome C (M1 propagation).** 99.762% of original exclusive time is M1 and M2 is negligible. READY3.1 resolves the former provenance uncertainty without relying on the invalid whole-root ablation.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. Counter O: 3,180,470 calls / 22,573.922 ms comparison-exclusive. Pinned root 2632: 3,180,470 calls / 26,975.321 ms aggregate exclusive; raw coverage 4,124 calls (0.130%) and 37.049 ms (0.137%). Calls match.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.181 | 0.001% |
+| M1 | 2,390,795 | 26,921.393 | 99.800% |
+| M2 | 22 | 0.497 | 0.002% |
+| Matched | 789,652 | 53.251 | 0.197% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 DerivedCategory.internalHomQhObjUnit, CategoryTheory.ShrinkHoms.instCategory._proof_1, DerivedCategory.isRightDerivedFunctor_internalHomQhObj_comp_tensorLeft, Small, DerivedCategory.tensorLeftQhObjCounit; M2 CategoryTheory.MonoidalCategoryStruct.tensorObj, CategoryTheory.Functor.proj, CategoryTheory.MonoidalClosed.closed, and two CategoryTheory.Functor nodes, exposed by initial_whnf; Matched DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, CategoryTheory.Functor, HasDerivedCategory.ofIsGrothendieckAbelian, 1, and the derived-monoidal-category instance.
+
+C: hv alignment changes the dependent proposition root and restoration does not reproduce O; no M0-preserving descendant control type-checks. Outcome C.

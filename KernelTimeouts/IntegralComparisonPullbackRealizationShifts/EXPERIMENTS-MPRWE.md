@@ -90,3 +90,19 @@ the selected `CategoryStruct.comp -> NatTrans.app` subterm with a local
 the original term. The corrected shares are M1 98.400%, M2 1.328%, Matched
 0.255%, Unclassified 0.017%.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. The valid expensive O is the full Before.lean source, not the diagnostic snapshot ending at sorry. Counter O: 9,426,198 calls and 83,768.275 ms comparison-exclusive. Pinned trace root 29958: 9,426,198 calls, 224,445.716 ms aggregate exclusive, raw coverage 3,913 calls (0.042%) and 70.147 ms (0.031%). Trace hash/path overhead explains the timing increase.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.037 | 0.000% |
+| M1 | 6,680,842 | 224,084.071 | 99.839% |
+| M2 | 25,198 | 115.882 | 0.052% |
+| Matched | 2,720,157 | 245.726 | 0.109% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 PresheafOfModules.proj (three nodes), SubNegMonoid.toAddMonoid, and CategoryTheory.NatTrans.app; M2 CategoryTheory.Functor.CommShift.proj, CategoryTheory.CategoryStruct.id, and three CategoryTheory.Functor.obj nodes, each exposed by initial_whnf; Matched AlgebraicGeometry.Scheme.ProEt, WeilConjectures.scalarReductionSource, AlgebraicGeometry.Scheme.ProEt.topology, DerivedCategory, and RingHom.id.
+
+C rerun: full After.lean reaches 309,364 calls / 1,305.397 ms counter comparison-exclusive and changes the root, so it is invalid descendant-only C. Restoring Before.lean returns the O root and shares above. The obstruction is the dependent P,m localization telescope. Outcome C.

@@ -87,3 +87,19 @@ Root identity and analysis are corrected; shares are M1 61.473%, M2 37.204%,
 Matched 1.326%, Unclassified 0.000%. The polynomial replacement remains
 root-changing.
 
+
+## MPRWE round 4 (READY3.2; supersedes round 2/3 figures)
+
+Analyzer: READY3.2 mprwe_analyze.py; revision 2e92d5989ff. The pinned expensive root is 2005; helper root 2003 (2,873 calls) is excluded. Counter O root 2005: 17,340,236 calls / 125,356.436 ms comparison-exclusive (the run records the root before its deterministic timeout). Pinned trace root 2005 has 17,340,236 calls / 105,827.556 ms aggregate exclusive; raw coverage 3,122 calls (0.018%) and 32.981 ms (0.031%). The helper run exposed the same 17,340,236-call aggregate root; helper root was 2,873 calls / 11.772 ms.
+
+| Label | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.018 | 0.000% |
+| M1 | 8,002,209 | 66,683.369 | 63.011% |
+| M2 | 4,364,762 | 38,082.400 | 35.985% |
+| Matched | 4,973,262 | 1,061.742 | 1.003% |
+| Unclassified | 2 | 0.028 | 0.000% |
+
+M0 is the root entry; no separate raw child was captured under the cap. Top raw review: M1 AlgebraicGeometry.Scheme.Hom.toLRSHom, SMul.smul, 6, HSMul.hSMul, another 6; M2 CategoryTheory.Limits.IsLimit.proj versus CategoryTheory.Iso.proj, AlgebraicGeometry.Scheme.Hom.proj, and three AlgebraicGeometry.LocallyRingedSpace.Hom.proj versus CategoryTheory.CategoryStruct.comp nodes, exposed by initial_whnf; Matched AlgebraicGeometry.Scheme.toLocallyRingedSpace, ContinuousMap, ContinuousMap.mk, TopCat.carrier, FrobeniusModule.module; Unclassified has two tiny 7 versus 5 entries.
+
+C: polynomial alignment changes the final dependent consumer and restoration is not O. No M0-preserving descendant control type-checks; the polynomial/charpolyRev consumer is the obstruction. Outcome D.
