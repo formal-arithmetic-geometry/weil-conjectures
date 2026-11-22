@@ -92,6 +92,26 @@ original 12-binder context and have identical call counts and depth.  The
 matched pair is not the exact O pair, so the comparison supports mismatch
 induction without claiming a pure standalone context effect.
 
+## IM round 2: matched-control validity
+
+The existing M probe was rerun with the READY2-4.33.1 counters kernel in a temporary measurement copy, with its explicit matched conversion instrumented.  The
+elaborated operands remained `letE` / `letE`, sizes `2782/2782`, with
+`Expr.equal=false`.  The explicit matched conversion entered a nontrivial
+counter root: 34 recursive calls, maximum depth 7, 24 WHNF requests, 2
+delta unfolds, 9 proof attempts, 2 proposition comparisons, and 4 binder
+instantiations.  Comparison-exclusive time was 0.249 ms and reduction
+exclusive time 0.010 ms.  The root had cache successes and misses and no
+identity-equality shortcut.  The aligned copy was also non-identical, but
+its later comparison benefited from the process-local cache; it is not used
+as the validity measurement for M.
+
+This confirms that M performs real conversion of the `tensorObj` family.
+It remains a **diagnostic** M: its same-category provider and smaller
+matched obligation cannot preserve the original cross-representation
+provider pair and full dependent root.  The round-two result therefore
+strengthens the H2 evidence from O/A/R but does not prove that the complete
+historical root would be cheap under a strict matched replacement.
+
 ## Experiment 2: shared-provider control (IM §6)
 
 No valid S0/S1/S2 matrix exists in the historical source.  The previous

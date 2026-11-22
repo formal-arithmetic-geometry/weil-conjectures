@@ -114,6 +114,25 @@ are not the same ordered pair as the in-situ descendants.  The context
 difference is recorded explicitly; no standalone-to-in-situ causal ratio is
 claimed.
 
+## IM round 2: matched-control validity
+
+The existing M probe was rerun with the READY2-4.33.1 counters kernel in a temporary measurement copy, with its explicit matched conversion instrumented.  Its
+inferred and declared operands were still non-identical `forallE` terms of
+sizes `1169/1493` (`Expr.equal=false`).  The explicit matched conversion
+entered a nontrivial counter root: 34 recursive calls, maximum depth 7, 24
+WHNF requests, 2 delta unfolds, 9 proof attempts, 2 proposition comparisons,
+and 4 binder instantiations.  Comparison-exclusive time was 0.249 ms and
+reduction-exclusive time 0.010 ms; cache successes and misses were both
+observed.  Thus the result is not pointer/identity equality or a cached
+zero-work shortcut.
+
+This confirms that M performs real conversion of the `Cone` family.  It is
+still a **diagnostic** M: independently named diagram wrappers and the
+smaller matched obligation do not preserve the original inline provider
+divergence and full dependent root.  The round-two result strengthens the
+H2 evidence from O/A/R, but does not prove that the complete historical root
+would be cheap under a strict matched replacement.
+
 ## Experiment 3: shared-provider control (IM §6)
 
 No valid S0/S1/S2 historical matrix exists.  The Tensor candidate adds a

@@ -1,7 +1,7 @@
 # KernelTimeouts intrinsic-versus-mismatch synthesis
 
 Branch: `dataset/kernel-timeouts`, commit `fe11150bfa1`.
-Current-case revision used for the IM probes: `a2ec460045b`.
+Current-case revision used for the IM probes: `03f2a41973c`.
 The O/A/R measurements below are the immutable READY2-4.35.0 AD profiles recorded in each case report; the reports identify them as reused baselines. The Image matched diagnostic was rerun in this phase.
 
 | Operation family | Matched M | Original O | Aligned A | Restored R | Exclusive owner | Verdict |
