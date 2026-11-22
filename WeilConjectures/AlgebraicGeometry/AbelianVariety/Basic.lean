@@ -31,6 +31,7 @@ varieties are the same thing.
   geometrically integral over the base field.
 - `AlgebraicGeometry.IsAbelianVariety.irreducibleSpace`: its underlying space is irreducible.
 - `AlgebraicGeometry.IsAbelianVariety.isCommMonObj`: an abelian variety is commutative.
+- `AlgebraicGeometry.IsAbelianVariety.geometricallyIntegral_and_isCommMonObj`: both together.
 - `AlgebraicGeometry.isAbelianVariety_iff_geometricallyConnected`: abelian varieties are the
   proper smooth geometrically connected group schemes.
 - `AlgebraicGeometry.IsAbelianVariety.pullback`: the base change of an abelian variety to an
@@ -90,6 +91,11 @@ variety satisfies (see Stacks 04KV for geometric connectedness). -/
 instance IsAbelianVariety.isCommMonObj (A : Over (Spec (.of K))) [GrpObj A]
     [IsAbelianVariety A] : IsCommMonObj A :=
   isCommMonObj_of_isProper_of_geometricallyIntegral A
+
+/-- An abelian variety over `K` is geometrically integral over `K` and commutative. -/
+theorem IsAbelianVariety.geometricallyIntegral_and_isCommMonObj (A : Over (Spec (.of K)))
+    [GrpObj A] [IsAbelianVariety A] : GeometricallyIntegral A.hom ∧ IsCommMonObj A :=
+  ⟨inferInstance, inferInstance⟩
 
 /-- Blueprint `definition-abelian-variety--1`: an abelian variety is geometrically connected over
 the base field.
