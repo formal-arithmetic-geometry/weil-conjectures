@@ -37,7 +37,7 @@ variable {X : Scheme.{u}}
 /-- **Conrad's Theorem 2.4, Case 1: a quasi-affine target over an affine base**
 
 Over an affine base, the quasi-affineness of `Y` as a scheme is the same as the
-quasi-affineness of `p` as a morphism.. -/
+quasi-affineness of `p` as a morphism. -/
 theorem exists_isAdmissible_extend_of_isQuasiAffine [IsAffine X]
     {U : X.Opens} (hU : IsCompact (U : Set X)) {Y : Scheme.{u}} [Y.IsQuasiAffine]
     {p : Y ⟶ X} [LocallyOfFiniteType p]

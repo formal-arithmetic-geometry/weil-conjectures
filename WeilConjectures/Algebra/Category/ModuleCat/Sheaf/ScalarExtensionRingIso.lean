@@ -38,7 +38,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   {R S : Sheaf J CommRingCat.{r}}
 
 /-- The canonical sheafification-unit image of a local scalar-extension pure tensor.
-This is `eta(x ⊗ s)` with the scalar first, with no choice of a sectionwise inverse. -/
+This is `eta(s ⊗ x)`, with the scalar first and with no choice of a sectionwise inverse. -/
 noncomputable def scalarExtensionRingIsoTmul (a : R ⟶ S)
     (M : ringedSiteModules.{max r m}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))

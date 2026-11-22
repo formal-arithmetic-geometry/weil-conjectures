@@ -30,7 +30,7 @@ variable {X : Scheme.{u}}
 
 /-- **Transporting a partial extension along a lift over an open of the base** (Conrad,
 Theorem 2.4, Case 2): an extension `g` of `fV` over an open `W` of `Bl`, with closed graph,
-pulls back along `ρ : X' ⟶ Bl` to a morphism `G : W' ⟶ Y` over `X` agreeing with `f` wherever
+pulls back along `ρ : π ⁻¹ᵁ V ⟶ Bl` to a morphism `G : W' ⟶ Y` over `X` agreeing with `f` wherever
 both are defined, with graph closed above `V`. -/
 theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' ⟶ X}
     {U V : X.Opens} {f : U.toScheme ⟶ Y}

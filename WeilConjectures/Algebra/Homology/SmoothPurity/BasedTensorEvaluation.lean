@@ -67,7 +67,7 @@ variable {C : Type uC} [Category.{vC} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]
   {R S : Sheaf J CommRingCat.{u}}
 
-/-- Evaluate a finite power using its coordinate projections., sectionwise limits -/
+/-- Evaluate a finite power using its coordinate projections. -/
 def basedTensorProductSections (d : ℕ)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
     (U : Cᵒᵖ) :

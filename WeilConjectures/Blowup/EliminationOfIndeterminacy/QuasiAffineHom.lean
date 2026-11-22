@@ -43,7 +43,7 @@ extended to the whole base. Let `X` be qcqs, `U` a quasi-compact open of `X`, `V
 affine open of `X` and `q : Z ⟶ V` a morphism locally of finite type with `Z`
 quasi-affine, and let `fV : V ⊓ U ⟶ Z` be a morphism over `V`. Then there is a
 `U`-admissible center `C` on `X` whose blow-up restricts over `V` to the blow-up `Bl` of
-a center on `V`, carrying an extension of `fV` with closed graph.. -/
+a center on `V`, carrying an extension of `fV` with closed graph. -/
 theorem exists_isAdmissible_extend_of_isAffineOpen
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) {V : X.Opens} (hV : IsAffineOpen V)

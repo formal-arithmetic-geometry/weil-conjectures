@@ -43,8 +43,6 @@ All operation presentations below are conclusions of the theorem, not hypotheses
 * Stacks Project, Tag 0H7J
 -/
 
--- Owning definition node.
-
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false

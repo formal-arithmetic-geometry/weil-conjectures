@@ -142,7 +142,7 @@ def sliceScalarAlgebra (O : Sheaf J CommRingCat.{max c v r})
 
 /-- The full generator-normalized comparison, including its construction on strict
 systems before forgetting coefficients. All fields are asserted to exist by the
-statement below; none is an extra input hypothesis., refined as in the DAG proof -/
+statement below; none is an extra input hypothesis. -/
 structure SemilinearSliceScalarGenerators (O : Sheaf J CommRingCat.{max c v r})
     (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) where
   /-- A_X on the actual modules, with strict coefficient transitions. -/

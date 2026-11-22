@@ -32,7 +32,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 * `Intersection`: the module-linear comparisons with their adjunction normalizations.
 * `JointDetection`: the zero, exactness, cohomology and quasi-isomorphism tests.
-* `nested` is imported from `SiteNestedExtensionMap`, its definition-node module.
+* `nested` is imported from `SiteNestedExtensionMap`, where it is defined.
 
 ## Main statements
 
