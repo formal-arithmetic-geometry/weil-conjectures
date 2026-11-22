@@ -1,6 +1,6 @@
 # Intrinsic vs mismatch-induced DefEq: PerfIssues
 
-Current-case revision: a2ec460045b. Kernel: READY2-4.35.0.
+Current-case revision: 03f2a41973c. Kernel: READY2-4.35.0.
 
 | Case | Family | M / O / A evidence | Verdict |
 |---|---|---|---|
