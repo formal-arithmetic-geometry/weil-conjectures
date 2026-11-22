@@ -40,14 +40,13 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Limits.Preserves.Creates.Finite
 
 /-!
-# Vanishing topoi and derived module categories
+# The vanishing site of a morphism of schemes
 
 ## Main definitions
 
-* `VanishingTopos`, `p₁`, `p₂`: the vanishing topos of a morphism and its two projections.
-* `EtaleDerived`, `VanishingDerived`: unbounded derived module sheaves on the étale site and on
-  the vanishing topos.
-* `tensorModel`, `pullTensor`: K-flat tensor models and their compatibility with pullback.
+* `EtaleSite`, `etaleMorphism`: the transported small étale sites and their base-change morphisms.
+* `VanishingSite`, `vanishingTopology`, `VanishingTopos`: the oriented-product vanishing site.
+* `etaleDatum`, `vanishingDatum`, `moduleMorphism`: the constant-coefficient module data.
 
 The étale sites are transported through `AsSmall.equiv`. This changes neither
 coverings nor the associated topoi and accommodates independent scheme/coefficient sizes.
@@ -183,48 +182,23 @@ abbrev first {T B : Scheme.{u}} (f : T ⟶ B) :=
 abbrev second {T B : Scheme.{u}} (f : T ⟶ B) :=
   OrientedProduct.second (etaleBaseChange.{u, v} f) (𝟭 (EtaleSite.{u, v} B))
 
-/-- The projection site functors are continuous and preserve finite limits. -/
-theorem projection_properties {T B : Scheme.{u}} (f : T ⟶ B) :
-    (first.{u, v} f).IsContinuous (etaleTopology T) (vanishingTopology f) ∧
-    PreservesFiniteLimits (first.{u, v} f) ∧
-    (second.{u, v} f).IsContinuous (etaleTopology B) (vanishingTopology f) ∧
-    PreservesFiniteLimits (second.{u, v} f) := by
-  sorry
-
-/-- Continuity of the first projection's site functor. -/
-instance first_continuous {T B : Scheme.{u}} (f : T ⟶ B) :
-    (first.{u, v} f).IsContinuous (etaleTopology T) (vanishingTopology f) :=
-  (projection_properties f).1
-
-/-- Finite-limit preservation of the first projection's site functor. -/
-instance first_finiteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
-    PreservesFiniteLimits (first.{u, v} f) := (projection_properties f).2.1
-
-/-- Continuity of the second projection's site functor. -/
-instance second_continuous {T B : Scheme.{u}} (f : T ⟶ B) :
-    (second.{u, v} f).IsContinuous (etaleTopology B) (vanishingTopology f) :=
-  (projection_properties f).2.2.1
-
-/-- Finite-limit preservation of the second projection's site functor. -/
-instance second_finiteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
-    PreservesFiniteLimits (second.{u, v} f) := (projection_properties f).2.2.2
-
-/-- The first projection from the actual vanishing topos. -/
-def p₁ {T B : Scheme.{u}} (f : T ⟶ B) :=
-  siteMorphism (etaleTopology.{u, v} T) (vanishingTopology f) (first f)
-
-/-- The second projection from the actual vanishing topos. -/
-def p₂ {T B : Scheme.{u}} (f : T ⟶ B) :=
-  siteMorphism (etaleTopology.{u, v} B) (vanishingTopology f) (second f)
-
 /-- The identity geometric morphism, with the identity adjunction. -/
 def identity (E : Type (s + 1)) [Category.{s} E] : GeometricMorphism E E :=
   ⟨𝟭 E, 𝟭 E, Adjunction.id, inferInstance⟩
 
+/-- A type-(c) covering becomes invertible in every sheaf. -/
+theorem map_toFirst_isIso {T B : Scheme.{u}} (f : T ⟶ B)
+    (H : VanishingTopos.{u, v} f) (V : EtaleSite.{u, v} B) :
+    IsIso (H.obj.map (OrientedProduct.toFirst (etaleBaseChange f) (𝟭 _)
+      (OrientedProduct.middle (etaleBaseChange f) (𝟭 _) V)).op) := by
+  sorry
+
+attribute [instance] map_toFirst_isIso
+
 /-- A sheaf category is a topos, using its actual small-site presentation. -/
 theorem sheaf_isTopos {C : Type s} [SmallCategory C] (J : GrothendieckTopology C) :
-    IsGrothendieckTopos.{s} (Sheaf J (Type s)) := by
-  sorry
+    IsGrothendieckTopos.{s} (Sheaf J (Type s)) :=
+  ⟨C, inferInstance, J, ⟨CategoryTheory.Equivalence.refl⟩⟩
 
 /-- Base-change associativity transported through the two `AsSmall` equivalences. -/
 def etaleBaseChangeComp {T' T B : Scheme.{u}} (h : T' ⟶ T) (f : T ⟶ B) :
@@ -312,70 +286,5 @@ def flatRepresentatives (S : Site.{s}) (A : Type s) [CommRing A] :
 def tensorInput (S : Site.{s}) (A : Type s) [CommRing A] :=
   ((flatRepresentatives S A).ι ⋙ DerivedCategory.Q).prod
     ((flatRepresentatives S A).ι ⋙ DerivedCategory.Q)
-
-/-- The representative comparison, with its localization universal property.
-Its data determine the tensor presentation up to the unique compatible isomorphism. -/
-theorem tensorModel_exists (S : Site.{s}) (A : Type s) [CommRing A] :
-    ∃ i : SheafOfModules.RingedTensorModel (tensorCorner S A),
-      ∀ (F : S.derived A × S.derived A ⥤ S.derived A)
-        (j : SheafOfModules.RingedTensorModel { tensorCorner S A with tensor := F }),
-        ∃! e : derivedTensor S A ≅ F,
-          i.representative.hom ≫ Functor.whiskerLeft (tensorInput S A) e.hom =
-            j.representative.hom := by
-  sorry
-
-/-- The universal K-flat representative identification, retaining its normalization. -/
-def tensorModel (S : Site.{s}) (A : Type s) [CommRing A] :
-    SheafOfModules.RingedTensorModel (tensorCorner S A) :=
-  (tensorModel_exists S A).choose
-
-/-- The actual scalar-extension functor has the recorded formula on module maps. -/
-theorem modulePull_map {V U : Site.{s}} (f : Morphism V U)
-    (A : Type s) [CommRing A] {M N : V.modules A} (a : M ⟶ N) :
-    (f.modulePull A).map a =
-      eqToHom (rfl : (f.modulePull A).obj M =
-        SheafOfModules.changeOfRings (constantMap f.algebra A)
-          ((f.algebra.algebra (V.ring A)).modules.obj M)) ≫
-      SheafOfModules.changeOfRingsHom (constantMap f.algebra A)
-        ((f.algebra.algebra (V.ring A)).modules.obj M)
-        ((f.algebra.algebra (V.ring A)).modules.map a) ≫
-      eqToHom (rfl : SheafOfModules.changeOfRings (constantMap f.algebra A)
-        ((f.algebra.algebra (V.ring A)).modules.obj N) = (f.modulePull A).obj N) := by
-  sorry
-
-/-- The specified inverse image as the existing ringed tensor edge. Its ordinary tensor
-comparison is the unique one with the generalized pure-tensor and tensor-unit formulas. -/
-def tensorEdge {V U : Site.{s}} (f : Morphism V U) (A : Type s) [CommRing A] :
-    SheafOfModules.RingedTensorEdge (tensorCorner V A) (tensorCorner U A) :=
-  letI := f.finiteLimits
-  { inverse := f.inverse
-    direct := f.direct
-    adjunction := f.adjunction
-    finiteLimits := f.finiteLimits
-    inverseRing := f.algebra.rings.obj (V.ring A)
-    algebraic := f.algebra.algebra (V.ring A)
-    ringMap := constantMap f.algebra A
-    pullback := f.modulePull A
-    object_eq := fun _ ↦ rfl
-    map_eq := modulePull_map f A
-    ordinaryTensor :=
-      (SheafOfModules.canonicalRingedTensorComparison_existsUnique (V.ring A) (U.ring A)
-        (f.algebra.rings.obj (V.ring A)) f.inverse (f.algebra.algebra (V.ring A))
-        (constantMap f.algebra A) (f.modulePull A) (fun _ ↦ rfl) f.direct f.adjunction
-        (modulePull_map f A)).1.some
-    pushforward := f.modulePush A
-    moduleAdjunction := f.moduleAdjunction A
-    left := f.pull A
-    epsilon := (f.modulePull A).mapDerivedCategoryFactorsh.hom
-    isLeftDerived := Functor.isLeftDerivedFunctor_of_inverts
-      (HomotopyCategory.quasiIso (V.modules A) (ComplexShape.up ℤ))
-        (f.pull A) (f.modulePull A).mapDerivedCategoryFactorsh
-    right := f.push A
-    derivedAdjunction := f.adj A }
-
-/-- Canonical preservation of derived tensor, characterized on K-flat representatives. -/
-def pullTensor {V U : Site.{s}} (f : Morphism V U) (A : Type s) [CommRing A] :
-    derivedTensor V A ⋙ f.pull A ≅ ((f.pull A).prod (f.pull A)) ⋙ derivedTensor U A :=
-  (tensorEdge f A).tensorComparison (tensorModel V A) (tensorModel U A)
 
 end AlgebraicGeometry.OrientedNearbyCycles
