@@ -34,7 +34,7 @@ components of `v`.
 - `DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ`: the
   same for any braiding for which `Qh` is braided on K-flat complexes.
 
-## Implementation notes
+## Implementation details
 
 Three things are hypotheses rather than instances.
 
@@ -91,7 +91,7 @@ lemma ε_Qh_comp_map_single_map_algebraMap_comp_inv (r : R) :
   erw [Category.id_comp]
   erw [Category.id_comp, IsIso.inv_id]
 
-/-- Blueprint `proposition-properties-trace`, via `proposition-properties-trace--4`: for a
+/-- For a
 commutative ring `R`, a bounded complex `P` of finitely generated free `R`-modules and a chain
 endomorphism `v : P ⟶ P`, the categorical trace of `v` on the object of `D(R)` represented by `P` is
 the alternating sum of the ordinary `R`-module traces of the components of `v`:
@@ -150,7 +150,7 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     rfl
 
 
-/-- Blueprint `proposition-properties-trace`, via `proposition-properties-trace--4`: for the
+/-- For the
 braiding `DerivedCategory.braidedCategory'` of the derived tensor product on `D(R)` (the Koszul
 braiding of complexes, descended along K-flat resolutions), the categorical trace of a chain
 endomorphism `v` of a bounded complex `P` of finitely generated free `R`-modules is the alternating

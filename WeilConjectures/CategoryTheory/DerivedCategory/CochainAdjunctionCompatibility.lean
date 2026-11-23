@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Derived adjunction normalization on cochain representatives
 
-Source: Stacks 0FND, compatibility of a derived adjunction with its original adjunction.
+## References
+
+* Stacks 0FND, compatibility of a derived adjunction with its original adjunction.
 -/
 
 @[expose] public noncomputable section
@@ -25,13 +27,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 /-- A normalized Hom formula on homotopy representatives gives the corresponding formula
-on complexes, with the prescribed cochain comparison. Source: Stacks 0FND
-(auxiliary; not a blueprint node).
-Proof: apply the homotopy formula to the images of the two complexes and the chain map.
-The homotopy adjunction unit on a complex is the quotient of the termwise adjunction unit,
-so the strict transposes agree after quotienting. The comparison between Qh and Q has
-identity components. The exact right functor's two localization comparisons therefore
-also have the same components. Substitution gives the cochain formula. -/
+on complexes, with the prescribed cochain comparison. Source: Stacks 0FND. -/
 theorem adjunction_cochain_transpose
     (a : E ⊣ R) (T : DerivedCategory A ⥤ DerivedCategory B)
     (εc : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)

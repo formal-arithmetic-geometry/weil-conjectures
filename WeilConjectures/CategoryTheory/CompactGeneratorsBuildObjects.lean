@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.CompactGeneratorTelescopeIso
 /-!
 # Building objects from compact generators
 
-Source: Stacks Project, Derived Categories, Lemma 13.37.4 (Tag 09SN)
-(blueprint: lem-pc-compact-generators-build-objects).
+Source: Stacks Project, Derived Categories, Lemma 13.37.4 (Tag 09SN).
 -/
 
 @[expose] public section
@@ -68,20 +67,7 @@ private theorem generatorStep_exists
   simpa only [a, Sigma.ι_comp_desc_assoc, comp_zero] using h
 
 /-- Every object is the sequential homotopy colimit of a sequence built from coproducts
-of shifts of compact generators (Stacks, Tag 09SN)
-(blueprint: lem-pc-compact-generators-build-objects).
-
-For the proof, start with the coproduct of all shifted generators mapping to `Y`.
-At each stage take the coproduct of all shifted generators mapping to the current
-object whose composites to `Y` vanish, and complete its map to a distinguished
-triangle. Exactness gives compatible maps from the successive objects to `Y`.
-Their coproduct map vanishes on identity minus shift, so it factors through the
-homotopy colimit. Complete that map to a triangle with cone `C`. Compactness
-lets every map from a shifted generator to the telescope factor through a stage;
-the next triangle kills it. Exactness then lifts any map from a shifted generator
-to `C` to a shifted map into `Y`. This map occurs among the summands at the first
-stage, so its image in `C` is zero. Generation forces `C` to be zero, making the
-telescope map an isomorphism; transport the telescope triangle along it. -/
+of shifts of compact generators (Stacks, Tag 09SN). -/
 theorem compactGenerators_buildObjects
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

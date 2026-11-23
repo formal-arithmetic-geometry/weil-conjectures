@@ -28,7 +28,7 @@ exchange morphisms `CategoryTheory.Adjunction.exchangeRight` and
 compatible with the commutation squares.
 
 This is the formal part of the compatibility of the six operations with the coefficient
-comparisons (blueprint `sk-thm-sf-compatibility` (7)).
+comparisons.
 -/
 
 @[expose] public section

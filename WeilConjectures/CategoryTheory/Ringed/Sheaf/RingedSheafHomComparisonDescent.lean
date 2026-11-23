@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.K.KInjectiveHomComparisonDescent
 
 /-! # Descent on the actual ringed sheaf-Hom models
 
-Source: Stacks Project, Tags 0A95 and 08J7; the localization step of the ringed-forgetting
-argument (blueprint: lem-sf-ringed-sheaf-hom-comparison-descent).
+Source: Stacks Project, Tags 0A95 and 08J7.
 -/
 
 @[expose] public noncomputable section

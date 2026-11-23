@@ -11,13 +11,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 /-!
 # The exact comparison for a specified total left derived functor
 
-Source: blueprint `def-sfb-left-derived-exact`; Stacks, derived.tex, Tag 015F
-(blueprint: def-sfb-left-derived-exact).
+Source: Stacks, derived.tex, Tag 015F.
 
 The comparison is expressed in terms of its universal counit. This accepts both the
-recorded total-tensor implementation and the published module-object implementation,
-without changing either construction or requiring their K-flat interfaces to coincide.
-The previous total-tensor interface remains publicly available.
+total-tensor implementation and the module-object implementation, without requiring their
+K-flat interfaces to coincide.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +33,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- The canonical comparison `LF ≅ D(F)` for the specified total left derived functor
-with its universal counit. Source: blueprint `def-sfb-left-derived-exact`; Stacks Tag 015F
-(blueprint: def-sfb-left-derived-exact).
+with its universal counit. Source: Stacks Tag 015F.
 
 Exactness makes `mapDerivedCategoryFactorsh` an invertible universal counit. Uniqueness
 of left derived functors compares it with the given universal counit. This is the same

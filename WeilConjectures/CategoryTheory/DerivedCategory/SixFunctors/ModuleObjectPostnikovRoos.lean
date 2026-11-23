@@ -91,18 +91,14 @@ open scoped CategoryTheory.Obj
 
 namespace DerivedCategory
 
-/-- The inverse tower of canonical lower truncations, with the canonical transition maps.
-Source: blueprint main-20261015, lemma-proper-direct-image-unbounded-complexes--1, limit
-presentation (blueprint: lem-module-object-postnikov-roos). -/
+/-- The inverse tower of canonical lower truncations, with the canonical transition maps. -/
 def lowerPostnikovTower {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (K : DerivedCategory C) : ℕᵒᵖ ⥤ DerivedCategory C :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ (TStructure.t.truncGE (-(n : ℤ))).obj K)
     (fun n ↦ (TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ))
       (by omega)).app K)
 
-/-- The canonical quotient cone over the lower Postnikov tower.
-Source: blueprint main-20261015, lemma-proper-direct-image-unbounded-complexes--1, limit
-presentation (blueprint: lem-module-object-postnikov-roos). -/
+/-- The canonical quotient cone over the lower Postnikov tower. -/
 def lowerPostnikovCone {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (K : DerivedCategory C) : Cone (lowerPostnikovTower K) :=
   Cone.mk K (NatTrans.ofOpSequence
@@ -212,22 +208,7 @@ private theorem exact_products (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The derived direct image of the canonical Postnikov cone is a homotopy limit cone,
-and cohomology on the target preserves countable products.
-Source: blueprint main-20261015, det-proper-unbounded-window-arbitrary.proof.md,
-Limit presentation, and proposition-exact-products--2
-(blueprint: lem-module-object-postnikov-roos).
-
-Proof: Transfer exact countable products across the internal/sectionwise module
- equivalence. The general derived-product theorem then makes cohomology preserve them.
-Complete 1-T on the product of the lower truncations to a distinguished triangle,
-with first object L. The canonical projection cone factors through L by exactness.
-In each cohomological degree the truncation projections and transitions are eventually
-isomorphisms. The eventual-tower Milnor lemma therefore shows that the factor K -> L
-is an isomorphism on every cohomology object, hence an isomorphism. Transport the
-homotopy-limit cone along its inverse, keeping all canonical projections. Finally the
-derived direct image is triangulated and a right adjoint, so preserves the product
-and the entire homotopy-limit cone. No properness or boundedness is used.
--/
+and cohomology on the target preserves countable products. -/
 theorem moduleObjectDerivedPushforward_postnikov_roos
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y)

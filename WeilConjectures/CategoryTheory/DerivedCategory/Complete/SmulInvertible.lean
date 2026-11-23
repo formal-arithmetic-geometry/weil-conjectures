@@ -18,12 +18,11 @@ class `DerivedCategory.smulInvertible J ϖ` of objects of `D(J, R)` on which `ϖ
 invertibly, and shows that a derived complete object for an ideal containing `ϖ` receives no
 nonzero map from such an object (`DerivedCategory.rightOrthogonal_of_derivedComplete`).
 
-## Implementation notes
+## Implementation details
 
 The monoidal structure of `D(J, R)` is taken from the fields of
 `DerivedCategory.sheafTensorStructure J R`, as explained in the implementation notes of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs`.
-
 -/
 
 @[expose] public section

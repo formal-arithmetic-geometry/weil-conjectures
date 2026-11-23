@@ -22,9 +22,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Hypercohomology filtrations for an étale base-change square
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1315;
-Stacks Project, Tags 0DDE and 015J
-(blueprint: def-weil-pbc-hypercohomology-filtrations).
+Source: Stacks Project, Tags 0DDE and 015J.
 
 The three functors are Rf_*, g^{-1}Rf_*, and Rf'_*g'^{-1}. The generic construction
 below applies cohomology to their images of the canonical truncation triangles.
@@ -441,27 +439,11 @@ returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 / -- The three spectral sequences have the stated E₂ terms, finite filtrations, and unconditional
-  convergence, the first couple is the truncation couple of def-sp-truncation-couple for f_*
+  convergence, the first couple is the truncation couple for f_*
   through `TruncationCouple.bridgeIso`, and the middle one is the exact inverse image of the
   first.
-Source: blueprint order 1315; Stacks Tags 0DDE, 015J
-(blueprint: def-weil-pbc-hypercohomology-filtrations).
-
-Proof: Transfer the lower cohomological bound along the supplied representative isomorphism.
-  Each of the three functors preserves lower bounds: use the bounded-below compatibility of
-  right derived functors and exact inverse image. The truncation cone then shows that the
-  degree-n abutment map from tau≤n is invertible. Apply half-plane convergence and
-  lem-sp-abutment-image-filtration, using the actual truncation inclusions as the cocone, to
-  obtain the finite canonical image filtrations and all three abutments. The bridge equations
-  follow from the definitions and equality-transport naturality. Shift the single complex to
-  degree zero to identify each E₂ term with the classical right derived functor. For termwise
-  inverse image, factor the mapped truncation inclusion through the target truncation; its
-  components are invertible below the cutoff, its top cycle map is invertible by exactness,
-  and both sides vanish above it. The cohomology comparison is natural and commutes with shifts,
-  hence with all three couple maps, including the boundary. Apply lem-sp-exact-functor-couple
-  and couple functoriality in both directions; cancellation at the kernel inclusions and
-  quotient projections proves that the page maps are inverses. Finally, exactness preserves
-  the epi-image factorization of each abutment map, giving the stated filtration comparison. - /
+Source: Stacks Tags 0DDE, 015J.
+ - /
 theorem hypercohomologyFiltrations_spec
     (sq : IsPullback g' f' f g)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

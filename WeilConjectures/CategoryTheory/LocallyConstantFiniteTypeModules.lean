@@ -9,8 +9,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Local constant finite-module descriptions on a site
 
-Source: Stacks Project, sites-cohomology.tex, Tags 094H and 094I
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 094H and 094I.
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace SheafOfModules
 
 /-- Local trivializations by constant sheaves of finitely generated coefficient modules.
 The module may vary with the member of the covering sieve; no points are used.
-Source: Stacks Project, Tags 094H and 094I
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 094H and 094I. -/
 def IsLocallyConstantFiniteTypeModules {C : Type u} [Category.{u} C]
     (J : GrothendieckTopology C) (B : Type u) [CommRing B]
     (F : SheafOfModules.{u} (constantCoefficientRing J B)) : Prop :=

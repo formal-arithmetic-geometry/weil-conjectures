@@ -18,21 +18,7 @@ associator: the two isomorphisms `(K⟦a⟧ ⊗ᴸ L⟦b⟧) ⊗ᴸ M⟦c⟧ ≅
 by moving the shifts out before or after applying the associator agree
 (`DerivedCategory.shiftTensorShiftIso_assoc`). No sign appears.
 
-## Strategy
-
-The associator, viewed as a natural transformation in one of the three variables
-(`CategoryTheory.MonoidalCategory.associatorNatTrans₁`, `associatorNatTrans₂`,
-`associatorNatTrans₃`), commutes with the shifts. For the other two variables in the image of
-K-flat complexes, this is checked through the localization functor
-`CochainComplex C ℤ ⥤ D(C)`: there the associator of `D(C)` is identified with the associator of
-cochain complexes by the comparisons `L P ⊗ᴸ L Z ≅ L (P ⊗ Z)`, which commute with shifts, and
-the associator of cochain complexes commutes with shifts
-(`CochainComplex.associator_hom_comp_mapBifunctorShift₁Iso_hom` and its variants). Every object
-is isomorphic to the image of a K-flat complex, and the statement is invariant under
-isomorphisms (`CategoryTheory.MonoidalCategory.commShift_associatorNatTrans₁_of_iso`, ...).
-The compatibility with `DerivedCategory.shiftTensorShiftIso` is then a formal consequence.
-
-## Main statements
+## Main results
 
 - `DerivedCategory.shiftTensorShiftIso_assoc`
 -/

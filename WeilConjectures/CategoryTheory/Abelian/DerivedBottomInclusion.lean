@@ -11,7 +11,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 /-! # The canonical inclusion of bottom homology
 
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-inclusion).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
 /-- The canonical inclusion `H^n(M)[-n] ⟶ M` for an object with no homology below n.
 It is the inverse double-truncation identification, inverse lower projection,
-and upper inclusion. Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-inclusion). -/
+and upper inclusion. Source: Stacks Project, Tag 05TC (2). -/
 noncomputable def bottomHomologyInclusion (n : ℤ) (M : Plus C) [M.IsGE n] :
     (singleFunctor C n).obj ((homologyFunctor C n).obj M) ⟶ M := by
   let t := TStructure.t (C := C)
@@ -37,17 +35,7 @@ noncomputable def bottomHomologyInclusion (n : ℤ) (M : Plus C) [M.IsGE n] :
 
 /-- Every map from an object in degree n to an object concentrated in degrees ≥ n
 factors through the canonical inclusion of bottom homology.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-inclusion).
-
-Proof: The upper truncation inclusion on the source single object is invertible.
-Naturality factors f through the upper truncation of M. Since M is ≥ n, the
-lower projection of its upper truncation is invertible. Thus this factor is a
-map between objects concentrated in degree n. Apply the faithful homology
-functor on these objects. The homology formula for the double-truncation
-isomorphism identifies its image with the homology of f, conjugated by the
-single/homology identification. Faithfulness gives equality of the factors;
-compose with the inverse lower projection and upper inclusion. -/
+Source: Stacks Project, Tag 05TC (2). -/
 theorem single_map_bottomHomologyInclusion (n : ℤ) (M : Plus C) [M.IsGE n]
     (Y : C) (f : (singleFunctor C n).obj Y ⟶ M) :
     f = (singleFunctor C n).map

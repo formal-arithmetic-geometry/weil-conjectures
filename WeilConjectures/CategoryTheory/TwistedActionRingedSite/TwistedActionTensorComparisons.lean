@@ -11,7 +11,12 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionInclu
 
 /-! # Normalized tensor comparisons for action-site restriction
 
-Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument.
+Restriction and translation along the degree-zero inclusion preserve the normalized tensor and
+unit of an action-site presentation.
+
+## References
+
+Motivated by Stacks Project, Tag 00W0.
 -/
 
 @[expose] public section
@@ -33,9 +38,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- Only the tensor and unit part of a full action-site presentation.
-Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument
-(blueprint: lem-sf-twisted-action-tensor-comparisons). -/
+/-- Only the tensor and unit part of a full action-site presentation. -/
 structure TensorComparisons (P : RestrictionPresentation J s R a) where
   /-- The restriction of the sheaf tensor is the ordinary sheaf tensor. -/
   tensor :
@@ -380,34 +383,8 @@ private theorem restrictedUnitIso_action (P : RestrictionPresentation J s R a) :
 
 attribute [irreducible] restrictedTensorIso translatedTensorIso
 
-/-- Restriction and translation preserve the normalized tensor and unit.
-Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument;
-Stacks 03EK for the sheafified sectionwise tensor.
-(blueprint: lem-sf-twisted-action-tensor-comparisons).
-
-Proof: the degree-zero inclusion is continuous and cocontinuous. Restriction therefore
-preserves local injectivity and local surjectivity of presheaf morphisms. Transpose the
-restricted module-sheafification unit along the source sheafification adjunction. Its
-composite with the source unit is the restricted target unit, so local bijectivity shows
-that this transpose is an isomorphism of sheaves. Apply it to the sectionwise tensor,
-composing with sheafification of the scalar-restriction tensorator and the canonical
-sheaf-tensor isomorphisms. The scalar-restriction tensorator is invertible because the
-coefficient map is an isomorphism: tensor the semilinear identity equivalences of its
-two factors. The unit equation computes the composite on pure tensors. Transport the
-result through P.restriction to obtain tensor and its displayed normalization.
-Inverse-site translation is cocontinuous by continuity of the forward equivalence;
-the same construction gives sigmaTensor and its normalization. The coefficient
-isomorphisms give explicit linear equivalences of the rank-one modules, hence unit and
-sigmaUnit with precisely the prescribed section maps. The coefficient-generator and
-module-generator equations prove unit_action. Maps out of a sheaf tensor are determined
-on pure tensors by the sheafification adjunction, proving naturality and symmetry.
-For tensor_action, cancel the tensor comparisons, test on pure tensors, and apply the
-degree-minus-one generator restriction. This restriction is injective because the
-module-generator equation expresses it through the invertible pair action and the
-sectionwise restriction isomorphisms. The resulting equality is the pure-tensor
-restriction formula and the module-generator equation for each factor. No induction,
-internal-Hom or exactness data are used. Empty sites and the zero ring require no change.
--/
+/-- Restriction and translation preserve the normalized tensor and unit. Stacks Project,
+Tag 03EK. -/
 theorem tensorComparisons [HasPullbacks C] (P : RestrictionPresentation J s R a) :
     Nonempty (TensorComparisons J s R a P) := by
   let := P.category

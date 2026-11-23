@@ -17,16 +17,6 @@ dominating `ℵ₀` and the cardinalities of the subobject lattices of the finit
 We prove that in an *acyclic* cochain complex `Q`, every degreewise `κ`-generated subobject `S`
 is contained in a degreewise `κ`-generated subobject which is itself acyclic.
 
-The proof is an `ω`-iteration. At each stage, the cycles of the current subcomplex which are not
-yet boundaries in it are `κ`-generated; the cover lemma
-`CategoryTheory.exists_isCardinalGenerated_subobject_of_epi` produces a `κ`-generated family of
-subobjects of `Q` whose image under the differential contains them, and the subcomplex generated
-by that family is added to the current stage. The union of the resulting chain is acyclic because
-intersections commute with directed joins of subobjects in a Grothendieck abelian category.
-
-Everything takes place in the subobject lattices of the fixed objects `Q.X n`, so no
-homology-versus-colimit machinery is needed.
-
 ## Main results
 
 - `CochainComplex.degreewiseCardinalGenerated_iSup` and

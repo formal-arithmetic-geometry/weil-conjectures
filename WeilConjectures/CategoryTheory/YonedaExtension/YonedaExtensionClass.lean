@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 Source: Stacks Project, Derived Categories, Tag 06XU and the Yoneda composition
 following Tag 06XV. Cut at the cokernel of the first injection and recursively
 compose short exact connecting classes, with the positive-projection signs.
-(blueprint: def-coef-yoneda-recursive-class)
 -/
 
 @[expose] public section
@@ -28,27 +27,21 @@ open Limits Abelian
 variable {A : Type u} [Category.{v} A] [Abelian A]
 
 /-- The canonical first short complex of an extension, ending in the actual cokernel.
-Source: Stacks Project, Tag 06XU, cutting an extension at its first image.
-(blueprint: def-coef-yoneda-recursive-class) -/
+Source: Stacks Project, Tag 06XU, cutting an extension at its first image. -/
 noncomputable def head {V U : A} {n : ℕ} (E : YonedaExtension A V U (n + 1)) :
     ShortComplex A :=
   ShortComplex.mk (E.sequence.map' 0 1) (cokernel.π (E.sequence.map' 0 1))
     (cokernel.condition _)
 
 /-- The remaining sequence after replacing the first two terms by their cokernel.
-Source: Stacks Project, Tag 06XU, first-image cut.
-(blueprint: def-coef-yoneda-recursive-class) -/
+Source: Stacks Project, Tag 06XU, first-image cut. -/
 noncomputable def tailSequence {V U : A} {n : ℕ}
     (E : YonedaExtension A V U (n + 2)) : ComposableArrows A (n + 2) :=
   E.sequence.δ₀.δ₀.precomp
     (cokernel.desc (E.sequence.map' 0 1) (E.sequence.map' 1 2)
       (E.exact.toIsComplex.zero 0))
 
-/-- Exactness of the cokernel tail. Source: Stacks Project, Tag 06XU.
-Proof: its first arrow is monic by exactness of the first two original arrows.
-At the next term, precomposing with the epic cokernel projection identifies the
-new pair with the old exact pair; all later pairs are unchanged.
-(blueprint: def-coef-yoneda-recursive-class) -/
+/-- Exactness of the cokernel tail. Stacks Project, Tag 06XU. -/
 theorem tailSequence_exact {V U : A} {n : ℕ} (E : YonedaExtension A V U (n + 2)) :
     E.tailSequence.Exact := by
   apply ComposableArrows.exact_of_δ₀
@@ -69,21 +62,19 @@ theorem tailSequence_exact {V U : A} {n : ℕ} (E : YonedaExtension A V U (n + 2
   · exact E.exact.δ₀.δ₀
 
 /-- The first arrow of the tail is monic, by the cokernel characterization of
-exactness. Source: Stacks Project, Tag 06XU.
-(blueprint: def-coef-yoneda-recursive-class) -/
+exactness. Source: Stacks Project, Tag 06XU. -/
 theorem tailSequence_first_mono {V U : A} {n : ℕ}
     (E : YonedaExtension A V U (n + 2)) : Mono (E.tailSequence.map' 0 1) := by
   exact (E.exact.exact 0).mono_cokernelDesc
 
-/-- The last epimorphism is unchanged. Source: Stacks Project, Tag 06XU.
-(blueprint: def-coef-yoneda-recursive-class) -/
+/-- The last epimorphism is unchanged. Source: Stacks Project, Tag 06XU. -/
 theorem tailSequence_last_epi {V U : A} {n : ℕ}
     (E : YonedaExtension A V U (n + 2)) : Epi (E.tailSequence.map' (n + 1) (n + 2)) := by
   change Epi (E.sequence.map' (n + 2) (n + 3))
   exact E.last_epi
 
 /-- The cokernel tail as an extension of one smaller degree.
-Source: Stacks Project, Tag 06XU. (blueprint: def-coef-yoneda-recursive-class) -/
+Source: Stacks Project, Tag 06XU. -/
 noncomputable def tail {V U : A} {n : ℕ} (E : YonedaExtension A V U (n + 2)) :
     YonedaExtension A (cokernel (E.sequence.map' 0 1)) U (n + 1) where
   sequence := E.tailSequence
@@ -94,7 +85,7 @@ noncomputable def tail {V U : A} {n : ℕ} (E : YonedaExtension A V U (n + 2)) :
   last_epi := E.tailSequence_last_epi
 
 /-- Every degree-one extension gives its endpoint-normalized short exact sequence.
-Source: Stacks Project, Tag 06XV. (blueprint: def-coef-yoneda-recursive-class) -/
+Source: Stacks Project, Tag 06XV. -/
 theorem shortExact {V U : A} (E : YonedaExtension A V U 1) :
     (E.sequence.sc E.exact.toIsComplex 0).ShortExact := by
   exact { exact := E.exact.exact 0

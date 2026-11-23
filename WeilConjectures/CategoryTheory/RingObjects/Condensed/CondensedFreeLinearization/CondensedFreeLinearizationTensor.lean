@@ -68,9 +68,7 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Free linearization of condensed sets and tensor products
 
-Source: blueprint direct-image stability, paragraph (3), internal bar input;
-Stacks Project, Modules on Sites, Tags 04BL, 03CY and 0GMW
-(blueprint: lem-sfb-condensed-free-linearization-tensor).
+Source: Stacks Project, Modules on Sites, Tags 04BL, 03CY and 0GMW.
 -/
 
 @[expose] public section
@@ -93,35 +91,35 @@ namespace Profinite.CondensedFreeLinearization
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
 /-- The existing reconstructed coefficient ring sheaf.
-Source: Stacks 04BL (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 04BL. -/
 abbrev coefficients := sectionRingSheaf (coherentTopology Profinite.{u}) R.X
 
 /-- The fixed equivalence, retaining the underlying abelian sheaves.
-Source: Stacks 03CY (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 03CY. -/
 abbrev sections := (sectionModuleEquivalence (coherentTopology Profinite.{u}) R.X).functor
 
 /-- The actual sectionwise free presheaf, with semilinear restriction maps.
-Source: Stacks 04BL (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 04BL. -/
 abbrev presheafFree (X : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))) :=
   PresheafOfModules.freeObj (R := (SheafFreeModule.ring (coefficients R)).obj) X.obj
 
 /-- The existing module sheafification of the sectionwise free presheaf.
-Source: Stacks 04BL and 03CY (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 04BL and 03CY. -/
 abbrev sheafFree := SheafFreeModule.free (coefficients R)
 
 /-- Generalized generators from the unit of the fixed internal free adjunction.
-Source: Stacks 04BL (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 04BL. -/
 def generator (X : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)))
     (S : Profinite.{u}) (x : X.obj.obj (op S)) : sectionModule R ((free R).obj X) S :=
   (((freeAdjunction R).unit.app X).hom.app (op S)) x
 
 /-- The existing module sheafification functor, with identity coefficient map.
-Source: Stacks 03CY (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 03CY. -/
 abbrev sheafify := PresheafOfModules.sheafification.{u + 1}
   (R := SheafFreeModule.ring (coefficients R)) (𝟙 _)
 
 /-- Restriction to the fixed generators, as a morphism of condensed sets.
-Source: Stacks 04BL (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 04BL. -/
 def restrictGenerators (X : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)))
     (M : Modules R) (f : (free R).obj X ⟶ M) :=
   (freeAdjunction R).unit.app X ≫
@@ -131,8 +129,7 @@ def restrictGenerators (X : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)
 /-- All normalized comparisons for the fixed free internal adjunction. The presheaf
 comparison is fixed sectionwise, and the tensor comparison is its sheafification through
 the specified internal-to-section and module-sheafification tensor comparisons.
-Source: blueprint direct-image stability, paragraph (3), extracted free linearization;
-Stacks 04BL, 03CY and 0GMW (blueprint: lem-sfb-condensed-free-linearization-tensor). -/
+Source: Stacks 04BL, 03CY and 0GMW. -/
 structure Comparison where
   /-- The natural identification with sheafification of the sectionwise free presheaf. -/
   linearization : free R ⋙ sections R ≅ sheafFree R

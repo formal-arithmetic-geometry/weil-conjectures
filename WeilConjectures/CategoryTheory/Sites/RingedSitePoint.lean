@@ -19,8 +19,7 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-!
 # Ring and module inverse images at a topos point
 
-Source: Stacks Project, Sites, Proposition 00YV; Modules on Sites, Section 03D2;
-Cohomology on Sites, Tag 0DEN (auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Proposition 00YV; Cohomology on Sites, Tag 0DEN.
 
 The operation graphs are tested on every sheaf T, including the products of operand
 sheaves. They specify the finite-product transport, rather than an arbitrary lift.
@@ -39,7 +38,7 @@ namespace CategoryTheory
 operations. The natural underlying-set isomorphism fixes the maps as well as the
 objects. Testing operation graphs on product sheaves specifies exactly transport
 by the inverse finite-product comparison; constants use the terminal sheaf.
-Source: Stacks 00YV and 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV and 03D2. -/
 structure RingedSitePoint
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
@@ -814,17 +813,7 @@ end PointTransport
 open PointTransport
 
 /-- The finite-product transport has a normalized presentation at every point.
-Source: Stacks 00YV, 03D2 (auxiliary; not a blueprint node).
-
-Proof: use the inverse binary-product and terminal comparisons of p.inverse to
-transport the ring operations, and the addition and scalar action of every module.
-Apply p.inverse to each algebraic identity and cancel its finite-product comparison;
-this proves the ring and module axioms. Naturality makes the inverse image of a
-module map linear and gives the natural underlying-set isomorphism. Addition of
-module maps is addition followed by the diagonal pairing, so its transport also
-proves additivity. The same calculation for arbitrary generalized sections gives
-all the displayed operation-graph equations. No choice of unrelated ring or module
-structures is involved: their operations are prescribed by these formulas. -/
+Source: Stacks 00YV, 03D2. -/
 theorem RingedSitePoint.nonempty
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})

@@ -35,7 +35,7 @@ quasi-isomorphisms.
   the internal hom complexes `CochainComplex.internalHom`.
 - `DerivedCategory.DualizabilityDatum P`: the chain-level data of the criterion.
 
-## Main statements
+## Main results
 
 - `CochainComplex.isKInjective_map_of_adjunction`: a functor with an exact left adjoint
   preserves K-injective complexes.

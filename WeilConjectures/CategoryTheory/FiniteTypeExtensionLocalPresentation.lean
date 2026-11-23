@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.LocalModuleIso
 # Local constant presentations of extensions
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), extension paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -32,18 +31,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 /-- Locally split finite-free presentations give constant finite-module presentations
 of the middle term of an extension.
-Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node).
-
-Proof: Choose a finite free surjection onto the constant quotient module. Its kernel is
-finite by Noetherianity. Constant-module exactness and exact restriction give the
-corresponding short exact sequence on every slice. Lift the finite-free morphism through
-the extension epi on a covering sieve. The kernel property produces a map from the
-constant relation module to the constant submodule. The cokernel-presentation lemma
-expresses the middle term as the cokernel of the map with components minus this map and
-the original relation inclusion. Preservation of binary biproducts identifies its target
-with the constant of the finite direct sum. No local linearity of this relation map is
-asserted here. -/
+Source: Stacks Project, Modules on Sites, Tag 093U (3). -/
 theorem exists_cover_constant_presentation [IsNoetherianRing B]
     (S : ShortComplex (ringedSiteModules.{u}
       ((constantSheaf J RingCat.{u}).obj (RingCat.of B))))

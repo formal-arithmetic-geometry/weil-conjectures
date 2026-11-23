@@ -26,7 +26,9 @@ so the `c_k` are `R`-linear for the action of `R` on `S` through `φ`
 For every `R`-module object `M`, the maps `e_k : M ⟶ S ⊗_R M`, `m ↦ c_k(1) ⊗ m`, then exhibit
 `S ⊗_R M` as the colimit of the sequence `M --n--> M --n--> ⋯`
 (`CategoryTheory.Mod.isColimitExtendScalarsCocone`), naturally in `M`
-(`CategoryTheory.Mod.extendScalarsCoconeι_extendScalarsMap`). Consequently, when `C` is
+(`CategoryTheory.Mod.extendScalarsCoconeι_extendScalarsMap`). For an `S`-module `N`, the counit
+`S ⊗_R N ⟶ N` of extension and restriction of scalars is then an isomorphism
+(`CategoryTheory.Mod.isIso_extendRestrictAdjunction_counit`). Consequently, when `C` is
 abelian with exact sequential colimits, the extension of scalars along `φ` is exact
 (`CategoryTheory.Mod.preservesFiniteLimits_extendScalars_of_isColimit`): it preserves
 monomorphisms, these being preserved by sequential colimits.
@@ -262,6 +264,52 @@ lemma linear_of_isColimit (hc : ∀ k, n • c (k + 1) = c k)
     rw [← cancel_mono (n • 𝟙 S)]
     simp only [Preadditive.comp_nsmul, Category.comp_id]
     rw [← Preadditive.nsmul_comp, ← nsmul_whiskerRight, hc, ih, ← Preadditive.comp_nsmul, hc]
+
+
+omit [Preadditive C] [MonoidalPreadditive C] in
+/-- If `c_0 = φ`, the map `e_0 : M ⟶ S ⊗_R M` is the unit `m ↦ 1 ⊗ m`. -/
+lemma extendScalarsCoconeι_zero (h0 : c 0 = φ) (M : Mod C R) :
+    extendScalarsCoconeι φ c M 0 = extendUnitHom φ M := by
+  rw [extendScalarsCoconeι, extendUnitHom, h0, IsMonHom.one_hom]
+
+/-- **`S ⊗_R N = N` for an `S`-module `N`**: if `S = colim(R --n--> R --n--> ⋯)` along maps
+`c_k : R ⟶ S` with `c_0 = φ`, the counit `S ⊗_R N ⟶ N` of extension and restriction of scalars
+along `φ` is an isomorphism. -/
+lemma isIso_extendRestrictAdjunction_counit (hc : ∀ k, n • c (k + 1) = c k)
+    (hS : IsColimit (smulSequenceCocone n c hc)) (h0 : c 0 = φ) :
+    IsIso (extendRestrictAdjunction φ).counit := by
+  have hlin := linear_of_isColimit hc hS h0
+  have (N : Mod C S) : IsIso ((extendRestrictAdjunction φ).counit.app N) := by
+    let M := (comap φ).obj N
+    let hM := isColimitExtendScalarsCocone hc hS hlin M
+    let Y := (extendScalarsObj φ M).X
+    have hmono : Mono (n • 𝟙 Y) := mono_nsmul_id_of_isColimit _ hM
+    have hpow (k : ℕ) : Mono (n ^ k • 𝟙 Y) := by
+      induction k with
+      | zero => rw [pow_zero, one_smul]; infer_instance
+      | succ k ih =>
+        have : n ^ (k + 1) • 𝟙 Y = (n ^ k • 𝟙 Y) ≫ (n • 𝟙 Y) := by
+          rw [Preadditive.nsmul_comp, Category.id_comp, smul_smul, ← pow_succ]
+        rw [this]
+        exact mono_comp _ _
+    let ε := ((extendRestrictAdjunction φ).counit.app N).hom
+    have h1 : extendUnitHom φ M ≫ ε = 𝟙 M.X := extendUnitHom_extendHom φ (𝟙 _)
+    have h2 : ε ≫ extendUnitHom φ M = 𝟙 Y := hM.hom_ext fun k ↦ by
+      have he : n ^ k • extendScalarsCoconeι φ c M k = extendUnitHom φ M := by
+        simpa [extendScalarsCoconeι_zero h0] using
+          pow_sub_nsmul_eq (nsmul_extendScalarsCoconeι_succ φ hc M) (Nat.zero_le k)
+      dsimp only [smulSequenceCocone]
+      rw [← cancel_mono (n ^ k • 𝟙 Y)]
+      calc _ = (n ^ k • extendScalarsCoconeι φ c M k) ≫ ε ≫ extendUnitHom φ M := by
+            simp only [Preadditive.comp_nsmul, Preadditive.nsmul_comp, Category.comp_id]
+        _ = _ := by
+            rw [he, reassoc_of% h1]
+            simp only [Category.comp_id, Preadditive.comp_nsmul]
+            exact he.symm.trans (congrArg (n ^ k • ·) (Category.comp_id _).symm)
+    have : IsIso ((forget S).map ((extendRestrictAdjunction φ).counit.app N)) :=
+      ⟨extendUnitHom φ M, h2, h1⟩
+    exact isIso_of_reflects_iso _ (forget S)
+  exact NatIso.isIso_of_isIso_app _
 
 end Colimit
 

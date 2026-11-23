@@ -12,8 +12,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Sectionwise localization on a slice site
 
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af, displayed resolution
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0997, displayed resolution.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory
 The restriction rule is imposed on all fractions, which exhaust every localization; hence
 this specifies the presheaf up to a unique coordinate-preserving isomorphism. This structure
 contains actual presheaf data, rather than selecting data from an existence assertion.
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af, displayed resolution on the slice.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0997, displayed resolution on the slice. -/
 structure SliceAwayLocalization {C : Type uC} [Category.{vC} C]
     {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (O : Sheaf J CommRingCat.{u}) (U : C)

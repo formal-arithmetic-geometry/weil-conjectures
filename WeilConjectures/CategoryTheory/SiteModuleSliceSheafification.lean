@@ -10,8 +10,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Module sheafification under restriction, at independent universes
 
-Source: Stacks Project, Tags 03CY, 03DH and 04IX.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CY, 03DH and 04IX.
 -/
 
 @[expose] public noncomputable section
@@ -39,19 +40,19 @@ set_option quotPrecheck false in
 local notation "A" => (F.sheafPushforwardContinuous RingCat.{r} J K).obj R
 
 /-- Restriction of module presheaves along the given site functor.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks 04IX. -/
 def slicePresheafRestrictionIndependent :
     PresheafOfModules.{max u₁ u₂ v₁ v₂ r} R.obj ⥤ PresheafOfModules.{max u₁ u₂ v₁ v₂ r} (A).obj :=
   PresheafOfModules.pushforward₀.{max u₁ u₂ v₁ v₂ r} F R.obj
 
 /-- The corresponding restriction of sheaf modules.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+Source: Stacks 04IX. -/
 def sliceModuleRestrictionIndependent :
     SheafOfModules.{max u₁ u₂ v₁ v₂ r} R ⥤ SheafOfModules.{max u₁ u₂ v₁ v₂ r} A :=
   pushforward.{max u₁ u₂ v₁ v₂ r} (F := F) (𝟙 A)
 
 /-- Extend the restricted global sheafification unit by the local sheafification adjunction.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 def sliceSheafificationComparisonIndependent :
     slicePresheafRestrictionIndependent (J := J) F R ⋙
       PresheafOfModules.sheafification (𝟙 (A).obj) ⟶
@@ -79,13 +80,7 @@ def sliceSheafificationComparisonIndependent :
         exact congrArg P.map (a.unit.naturality f) }
 
 /-- The comparison is an isomorphism for continuous cocontinuous restriction.
-Source: Stacks 03CY and 03DH
-(auxiliary; not a blueprint node).
-Proof: The sheafification adjunction identifies the comparison composed with the
-local unit with the restricted global unit. The global unit is locally bijective,
-and cocontinuity preserves local injectivity and local surjectivity under restriction.
-Cancel the locally bijective local unit to see that the comparison is locally
-bijective. Its source and target are sheaves, so it is an isomorphism. -/
+Source: Stacks 03CY and 03DH. -/
 theorem sliceSheafificationComparisonIndependent_isIso :
     IsIso (sliceSheafificationComparisonIndependent (J := J) F R) := by
   let P := slicePresheafRestrictionIndependent (J := J) F R

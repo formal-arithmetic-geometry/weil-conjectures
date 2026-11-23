@@ -17,19 +17,8 @@ import WeilConjectures.CategoryTheory.DegreewiseFiltration
 universe uA vA
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
-/-- Construction of the degreewise image-sum filtration.
-Source: Stacks Project, Homology, Tag 0133.  The construction takes the
-finite supremum of the images of the diagonal summands whose complex index is
-at least `p`, together with the cone inclusion of `K` when `p ≤ n+1`.  The
-canonical biproduct and diagonal coproduct maps give these images directly;
-the total differential preserves the indicated index, while the augmentation
-equation places its off-diagonal component in index `n+1`.  Factoring these
-maps through the monic image-sum inclusions therefore supplies subcomplexes.
-The interval `Finset.Icc (max b p) n` is finite, so the supremum exists, and
-the interval inclusions prove antitonicity in `p`; the resulting subcomplexes
-are the required decreasing filtration.
-Source: Stacks Project, Homology, Tag 0133.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration-data). -/
+/-- The degreewise image-sum filtration of the cone of the diagonal augmentation.
+Stacks Project, Homology, Tag 0133. -/
 theorem cartanEilenberg_cone_filtration_data
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

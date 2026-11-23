@@ -13,10 +13,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 /-!
 # Base change of compactifications in the six-functor setting
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-shriek-base-change-morphism-compactification.md,
-clauses 1--3 (blueprint: remark-base-change-compactification--1).
-
 The compactification and its base change are the existing constructions. Objects of
 `Over (Spec (.of k))` and their morphisms retain all the structure maps over the field.
 -/
@@ -36,34 +32,7 @@ set_option linter.unusedVariables false in
 finite-type schemes over the field remains in that setting. The induced open arrow is
 unique, both component squares are cartesian, and the new proper arrow and open immersion
 form the existing base-changed compactification. All three new arrows are over `k`:
-`overBaseChangeFst`, `overI` and `overG` are morphisms of `Over (Spec (.of k))`.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-shriek-base-change-morphism-compactification.md,
-clauses 1--3 (blueprint: remark-base-change-compactification--1).
-
-Proof plan, following the node's five steps:
-1. The factorization `c.comm` and the given cartesian square make the pair `(g' ≫ i, f')`
-compatible. The universal property of `def-pc-fibre-product` gives its unique lift, namely
-`ofIsPullback`. The proper square is the defining pullback. Cancel that square from the
-outer cartesian rectangle using `lem-weil-pbc-cartesian-square-pasting` to obtain the open
-square. This uses `definition-compactification-refinement`.
-2. Apply `lem-weil-pbc-open-immersion-base-change` and `lem-weil-pbc-proper-base-change`
-to these two squares. Neither application needs a flatness hypothesis.
-3. Give each middle scheme the composite structure map through the target. The projection
-equation, `Over.w g`, and the factorization show that all arrows are over the field,
-exactly as in `def-weil-scheme-over-base`.
-4. Properness implies separatedness and finite type (`def-weil-proper-morphism`). Compose
-with the structure maps of `Y` and `Y'`, using clause (e) of
-`lem-weil-pbc-proper-fp-permanence` and clause (1) of
-`lem-sfb-finite-type-composition-base-change`. Both middle schemes are consequently
-separated and of finite type over `k`.
-5. Apply clause (b) of `lemma-nagata-finite-type-to-separated-target` to the induced open
-arrow and the new middle scheme's separated structure map. Its composite is the finite-type
-structure map of `X'`, so the induced arrow is quasi-compact. Along with step 2 and the
-factorization, this is the compactification of `definition-compactification-refinement`, obtained by
-`remark-base-change-compactification--1`.
--/
+`overBaseChangeFst`, `overI` and `overG` are morphisms of `Over (Spec (.of k))`. -/
 theorem baseChange_compactification_in_setting
     (ℓ p₀ : ℕ) (hℓ : ℓ.Prime) (k : Type u) [Field k] [CharP k p₀]
     (hp₀ : 0 < p₀) (hp₀ℓ : p₀ ≠ ℓ)

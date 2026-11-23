@@ -12,11 +12,10 @@ public import WeilConjectures.Compactification.RefinementUniqueness
 
 # Strict refinements of compactifications
 
-In the blueprint (`definition-compactification-refinement--3`) a refinement `h : c ⟶ d` of
-compactifications of `f : X ⟶ Y` is required to satisfy, besides the two commutativity
+A *strict* refinement `h : c ⟶ d` of
+compactifications of `f : X ⟶ Y` satisfies, besides the two commutativity
 conditions of `AlgebraicGeometry.Compactification.Refinement`, the condition
-`h⁻¹(d.i(X)) = c.i(X)`: the refinement maps the boundary of `c` into the boundary of `d`. We
-call such refinements *strict*.
+`h⁻¹(d.i(X)) = c.i(X)`: the refinement maps the boundary of `c` into the boundary of `d`.
 
 ## Main definitions
 
@@ -37,10 +36,9 @@ call such refinements *strict*.
   a morphism over `Y` out of a dense compactification commuting with the open immersions
   automatically pulls the copy of `X` back to the copy of `X`;
 - `AlgebraicGeometry.Compactification.refinement_morphisms`: such a morphism is proper, strict
-  and unique (blueprint `proposition-dense-compactifications-form-cofiltered-category--2`);
+  and unique;
 - `AlgebraicGeometry.Compactification.Refinement.isStrict_of_isSchemeTheoreticallyDominant`:
   every refinement out of a dense compactification is strict.
-
 -/
 
 @[expose] public section
@@ -57,11 +55,8 @@ namespace Refinement
 
 variable {c d e : Compactification f}
 
-/-- Blueprint `definition-compactification-refinement--3`: Refinement of compactifications.
-
-A refinement `r` of `d` by `c` is *strict* if `r.hom⁻¹(d.i(X)) = c.i(X)`, i.e. the refinement
-maps the boundary of `c` into the boundary of `d`. The refinements of the blueprint are the
-strict refinements in this sense. -/
+/-- A refinement `r` of `d` by `c` is *strict* if `r.hom⁻¹(d.i(X)) = c.i(X)`, i.e. the
+refinement maps the boundary of `c` into the boundary of `d`. -/
 def IsStrict (r : c.Refinement d) : Prop :=
   r.hom ⁻¹ᵁ d.i.opensRange = c.i.opensRange
 
@@ -77,8 +72,7 @@ theorem IsStrict.comp {r : c.Refinement d} {s : d.Refinement e} (hr : r.IsStrict
 end Refinement
 
 variable (f) in
-/-- The morphism property of strict refinements on the category of compactifications of `f`
-(blueprint `definition-compactification-refinement--3`). -/
+/-- The morphism property of strict refinements on the category of compactifications of `f`. -/
 def strictRefinement : MorphismProperty (Compactification f) :=
   fun _ _ r ↦ Refinement.IsStrict r
 
@@ -87,7 +81,7 @@ instance : (strictRefinement f).IsMultiplicative where
   comp_mem _ _ hr hs := Refinement.IsStrict.comp hr hs
 
 variable (f) in
-/-- Blueprint `definition-compactification-refinement--3`: the category of compactifications of `f`
+/-- the category of compactifications of `f`
 whose morphisms are the strict refinements, i.e. the refinements `h` with
 `h⁻¹(j(X)) = j'(X)`. It is a wide subcategory of `AlgebraicGeometry.Compactification.category`.
 -/
@@ -131,7 +125,7 @@ theorem preimage_opensRange_eq_of_isSchemeTheoreticallyDominant [QuasiCompact f]
   rw [← IsOpenImmersion.range_pullbackFst d.i h, Scheme.Hom.coe_opensRange, ← hsf,
     Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, hrange, Set.image_univ]
 
-/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category--2`: Morphisms out of a
+/-- Morphisms out of a
 dense compactification.
 
 Let `c` be a dense compactification and `d` a compactification of a quasi-compact `f`, and let
@@ -148,8 +142,7 @@ theorem refinement_morphisms [QuasiCompact f] {c d : Compactification f}
     fun h' hi' hg' ↦ congrArg Refinement.hom
       (Refinement.ext_of_isSchemeTheoreticallyDominant ‹_› ⟨h', hi', hg'⟩ ⟨h, hi, hg⟩)⟩
 
-/-- Every refinement out of a dense compactification of a quasi-compact morphism is strict
-(blueprint `proposition-dense-compactifications-form-cofiltered-category--2`). -/
+/-- Every refinement out of a dense compactification of a quasi-compact morphism is strict. -/
 theorem Refinement.isStrict_of_isSchemeTheoreticallyDominant [QuasiCompact f]
     {c d : Compactification f} (hc : IsSchemeTheoreticallyDominant c.i) (r : c.Refinement d) :
     r.IsStrict :=

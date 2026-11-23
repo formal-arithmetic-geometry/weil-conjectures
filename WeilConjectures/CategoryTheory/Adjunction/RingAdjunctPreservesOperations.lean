@@ -23,24 +23,7 @@ namespace CategoryTheory.Adjunction
 set_option autoImplicit false
 
 /-- The forward adjunct preserves ring operations.
-Source: Stacks Project, Proposition 00YV, proof of (2), extended there to rings.
-
-Proof: For a binary operation m, write lambda for the comparison of L and rho for that of R.
-Naturality of eta at the two projections gives eta_(X times X) followed by R(lambda) and rho equal
-to eta_X times eta_X: the two projections of these maps are eta_X followed by the corresponding
-projection. Thus eta_(X times X) followed by R(lambda) equals (eta_X times eta_X) followed
-by rho inverse. Naturality at m_X gives m_X followed by eta_X equal to eta_(X times X) followed by
-RL(m_X). Combine these identities with opsL, opsR, and the equation m_(LF X) followed by f equals
-(f times f) followed by m_Y. Cancel the component isomorphisms eL and eR to obtain m_X followed by
-the displayed conjugated adjunct equal to the product of two copies of that adjunct followed by
-m_(RF Y). Apply this once to addition and once to multiplication. For a constant q, naturality at
-q_X gives q_X followed by eta_X equal to eta_terminal followed by RL(q_X). The composite of
-eta_terminal with the images of the two terminal comparison maps is the unique terminal
-endomorphism, hence the identity. Using opsL, opsR and the constant equation for f gives q_X
-followed by the conjugated adjunct equal to q_(RF Y), for q zero and one. The zero and addition
-equations give IsAddMonHom; the one and multiplication equations give IsMonHom. These yield
-IsRingHom. No separate negation equation is required for IsRingHom.
-(blueprint: lem-weil-pbc-ring-adjunct-preserves-operations) -/
+Stacks Project, Tag 00YV. -/
 theorem ringAdjunctPreservesOperations
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]
     {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]

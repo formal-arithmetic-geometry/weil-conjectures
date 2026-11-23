@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.EssentiallyConstant
 /-! # Saturated multiplicative systems and pointwise left-derived values
 
 Source: Stacks Project, Categories, Tags 04VC, 05Q8, 05Q4; Derived Categories,
-Tags 05R2, 05S8, 05S9 (blueprint: def-pur-saturated-triangulated-localization).
+Tags 05R2, 05S8, 05S9.
 
 ## Main definitions
 
@@ -37,15 +37,13 @@ namespace MorphismProperty
 
 /-- A multiplicative system satisfies both fraction-calculus axioms: identities and composition
 (MS1), the two square completions (MS2), and the two cancellation conditions (MS3).
-Source: Stacks Project, Categories, Tag 04VC
-(blueprint: def-pur-saturated-triangulated-localization). -/
+Source: Stacks Project, Categories, Tag 04VC. -/
 def IsMultiplicativeSystem {C : Type u} [Category.{v} C] (S : MorphismProperty C) : Prop :=
   S.HasLeftCalculusOfFractions ∧ S.HasRightCalculusOfFractions
 
 /-- A saturated multiplicative system satisfies MS1--MS3 and MS4: if `h ≫ g` and `g ≫ f`
 belong to `S`, then `g` belongs to `S`.
-Source: Stacks Project, Categories, Tag 05Q8
-(blueprint: def-pur-saturated-triangulated-localization). -/
+Source: Stacks Project, Categories, Tag 05Q8. -/
 def IsSaturatedMultiplicativeSystem {C : Type u} [Category.{v} C]
     (S : MorphismProperty C) : Prop :=
   S.IsMultiplicativeSystem ∧
@@ -55,8 +53,7 @@ def IsSaturatedMultiplicativeSystem {C : Type u} [Category.{v} C]
 /-- A saturated multiplicative system compatible with the triangulation: MS1--MS4 together
 with shift invariance (MS5) and completion of a square of distinguished triangles by a third
 map in `S` (MS6). Integer-shift compatibility is equivalent to the Stacks shift-by-one iff.
-Source: Stacks Project, Derived Categories, Tags 05R2 and 05S8
-(blueprint: def-pur-saturated-triangulated-localization). -/
+Source: Stacks Project, Derived Categories, Tags 05R2 and 05S8. -/
 def IsSaturatedTriangulatedMultiplicativeSystem {C : Type u} [Category.{v} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -71,8 +68,7 @@ namespace Functor
 /-- The localization universal property, strict on functors and natural transformations.
 For every target category, functors inverting `S` factor uniquely through `Q`, and whiskering
 with `Q` is bijective on natural transformations. Target universes are arbitrary parameters.
-Source: Stacks Project, Categories, localization section (Tag 04VB)
-(blueprint: def-pur-saturated-triangulated-localization). -/
+Source: Stacks Project, Categories, localization section (Tag 04VB). -/
 def IsStrictLocalizationAt {C : Type u} {D : Type uD}
     [Category.{v} C] [Category.{vD} D] (Q : C ⥤ D) (S : MorphismProperty C) : Prop :=
   S.IsInvertedBy Q ∧ ∀ (E : Type uE) (_ : Category.{vE} E),
@@ -83,8 +79,7 @@ def IsStrictLocalizationAt {C : Type u} {D : Type uD}
 sending `s : X' ⟶ X` to `F(X')`, is essentially constant as a pro-object with value `Y`.
 `S.Over ⊤ X` has all commuting triangles as morphisms; no denominator condition is imposed
 on these morphisms. Cofilteredness is included in `IsEssentiallyConstantProDiagram`.
-Source: Stacks Project, Categories, Tag 05Q4; Derived Categories, Tags 05S8 and 05S9(2)
-(blueprint: def-pur-saturated-triangulated-localization). -/
+Source: Stacks Project, Categories, Tag 05Q4; Derived Categories, Tags 05S8 and 05S9(2). -/
 def IsTriangulatedLeftDerivedValue {C : Type u} {D : Type uD}
     [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
@@ -100,8 +95,7 @@ def IsTriangulatedLeftDerivedValue {C : Type u} {D : Type uD}
 
 /-- In Situation 05S8, the left derived functor is defined at `X` if its denominator
 pro-diagram is essentially constant with some value `Y`.
-Source: Stacks Project, Derived Categories, Tag 05S9(2)
-(blueprint: def-pur-saturated-triangulated-localization). -/
+Source: Stacks Project, Derived Categories, Tag 05S9(2). -/
 def IsTriangulatedLeftDerivedDefinedAt {C : Type u} {D : Type uD}
     [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

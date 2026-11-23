@@ -48,14 +48,7 @@ private theorem finiteHypercover_isSheaf_comp
     PreOneHypercover.multicospanCompIso, PreOneHypercover.multifork])
 
 /-- Colimits commuting with finite limits are computed pointwise on a site generated
-by finite one-hypercovers. Source: Stacks Project, Tag 0738, finite sheaf-condition limits.
-(blueprint: stage3-finite-hypercover-colimits).
-
-Proof: Combine the diagram of sheaf presheaves into a presheaf valued in the functor
-category. Evaluation jointly reflects limits, so it is a sheaf. Each finite hypercover
-has a finite multicospan category; the colimit functor preserves its limiting multifork.
-Thus the pointwise colimit is a sheaf. The presheaf colimit therefore creates the sheaf
-colimit, proving preservation by the sheaf inclusion. Empty diagrams are covered too. -/
+by finite one-hypercovers. Source: Stacks Project, Tag 0738, finite sheaf-condition limits. -/
 theorem sheafToPresheaf_preservesColimits_of_finiteHypercovers
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [(J.finiteOneHypercover.{v, u, w}).IsGenerating]

@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteLocalization
 /-!
 # RingedSiteCompleteElement
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998.
 -/
 
 @[expose] public section
@@ -28,11 +27,8 @@ namespace CategoryTheory
 /-- The local vanishing criterion R internal Hom(O_U[1/f], K|U) = 0.
 The localization is placed in degree zero. IsZero means the derived object
 is zero, with no boundedness, coherence or finite-generation assumption.
-The local instance only reconciles the definitionally equal presentations
-of the slice ring sheaf (forgetting commutativity before or after slicing).
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998. -/
 def IsRingedSiteCompleteElement {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u}

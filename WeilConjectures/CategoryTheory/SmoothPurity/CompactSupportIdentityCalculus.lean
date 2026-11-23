@@ -24,7 +24,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 The proved generic identity and shift helpers used by compact-support projection
 are kept together here so the geometric file compiles within its time limit.
-(blueprint: lem-pur-compact-support-identity-calculus).
 -/
 
 @[expose] public noncomputable section

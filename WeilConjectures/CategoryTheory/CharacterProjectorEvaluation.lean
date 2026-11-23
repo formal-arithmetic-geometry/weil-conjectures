@@ -28,18 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- If a finite product is acted on by translations of its index group, the image of
-its normalized character projector is identified with a single factor by evaluation at zero.
-
-Source: latest blueprint, `prop-kernel-lisse.proof.md`, splitting-chart calculation
-(blueprint: lem-kernel-character-projector-evaluation).
-
-Proof. Write `q` for the order of the group. The map from one factor to the product with
-components `χ(a)` is `j`. The map `r` in the other direction is the normalized weighted
-sum of projections with weights `χ(-a)`. Character cancellation gives `j ≫ r = 1`.
-Reindexing by translation gives `e = r ≫ j`, and evaluation at zero satisfies
-`j ≫ ρ(0) = 1`. Thus the maps `image(e) → N` and `N → image(e)` obtained from evaluation
-and `j` are inverse, as can be checked after the monomorphism `image.ι e` and the
-epimorphism `factorThruImage e`. This works for the trivial character and zero objects. -/
+its normalized character projector is identified with a single factor by evaluation at zero. -/
 theorem characterProjector_evaluation_isIso
     {C : Type u} [Category.{v} C] [Abelian C]
     {K : Type w} [CommRing K] [Linear K C]
@@ -90,15 +79,7 @@ theorem characterProjector_evaluation_isIso
     simp only [Category.assoc, reassoc_of% hjr, hj₀]
   exact ⟨⟨g, hfg, hgf⟩⟩
 
-/-- Evaluation on a character image can use any finite enumeration of the product chart.
-
-Source: the splitting-chart character calculation, with its factors enumerated by Fin n
-(blueprint: lem-kernel-character-projector-evaluation).
-
-Proof. The product over the group is obtained from the enumerated product by the
-reindexing isomorphism. Compare their projections to identify the two product maps.
-The group-indexed product map is therefore invertible, and the character-image
-evaluation theorem applies. All reindexing takes place in the abstract category. -/
+/-- Evaluation on a character image can use any finite enumeration of the product chart. -/
 theorem characterProjector_reindexed_evaluation_isIso
     {C : Type u} [Category.{v} C] [Abelian C]
     {K : Type w} [CommRing K] [Linear K C]

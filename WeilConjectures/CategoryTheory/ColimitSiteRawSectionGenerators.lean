@@ -16,9 +16,8 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 
 /-! # Stage representatives for the raw Kan section colimit
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-generators).
 -/
 
 @[expose] public section
@@ -129,23 +128,12 @@ private theorem lift_under_arrow
     (V.w c)
   exact hvc.trans hg
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-section construction, independence of the presentation and restriction arrows.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-generators).
+/-- For sheaves of types, every section of the colimit of the Kan-extended stage presheaves `B`
+over the image of `U` comes, through the map `κ t`, from a section of the inverse image of `G`
+at some stage `t`.
 
-Proof: Evaluate the outer presheaf colimit at V_i(U). Evaluation preserves
-colimits, so every element comes from B_t at V_i(U). The pointwise left Kan
-extension formula expresses such an element as a section s at an object W of
-F(t.right), paired with an arrow V_i(U) to V_t(W). Represent this arrow in the
-arrow colimit. Move its representative, t.right and i to a common stage. The
-object-colimit equality criterion aligns its endpoints with the forward images
-of U and W; equalize the two maps out of i so the refinement defines an arrow
-b out of t in Under i. Apply theta_b to s and restrict along the lifted arrow.
-The inverse of E at that refinement turns the resulting section into y in D.
-Naturality of beta and hbeta_map identify its raw image with the original Kan
-generator. The displayed formula for kappa then gives kappa(y) = x. This uses
-only one Kan generator, not the relation or injectivity calculation.
--/
+Source: Stacks Project, Sites, Tag 0A35, section construction, independence of the presentation
+and restriction arrows. -/
 theorem raw_section_generators
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

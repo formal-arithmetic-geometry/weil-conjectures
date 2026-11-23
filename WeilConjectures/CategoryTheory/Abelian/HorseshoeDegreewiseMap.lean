@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 # Degreewise middle maps for horseshoe rows
 
 Source: the classical horseshoe naturality argument of Weibel, Theorem 2.4.6,
-using Stacks Project, Tags 0136, 013R, 013P and 013T
-(blueprint: lem-weil-pbc-horseshoe-degreewise-map).
+using Stacks Project, Tags 0136, 013R, 013P and 013T.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ of their first terms. If r is the source retraction and s' the target section, s
 `t n = r n ≫ φA.f n ≫ α'.f n + β.f n ≫ φC.f n ≫ s' n`.
 Distribute composition over addition and use αr = 1, s'β' = 1 and the two zero
 composites. This yields the two squares, without claiming differential compatibility.
-Source: Stacks Project, homology.tex, Tag 0136; horseshoe naturality Step 1.
-(blueprint: lem-weil-pbc-horseshoe-degreewise-map) -/
+Source: Stacks Project, homology.tex, Tag 0136. -/
 theorem horseshoe_degreewise_map
     {C : Type u} [Category.{v} C] [Abelian C]
     {X Y Z X' Y' Z' : CochainComplex C ℕ}

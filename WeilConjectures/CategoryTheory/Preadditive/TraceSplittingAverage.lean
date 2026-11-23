@@ -19,7 +19,6 @@ retraction `(Φ c)⁻¹ ≫ Φ r` of `Φ u` has idempotent `1/n` times the sum o
 actions `(Φ c)⁻¹ ≫ Φ (ρ a) ≫ Φ c`, which are the actions `σ a` on `Φ T` whenever `c` is
 equivariant (`CategoryTheory.nsmul_inv_map_comp_map_comp_eq_sum`). This is the form in which
 the finite-level splitting of Galois covers is applied to nearby cycles.
-
 -/
 
 @[expose] public section

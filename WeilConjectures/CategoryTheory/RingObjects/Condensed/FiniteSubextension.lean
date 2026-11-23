@@ -39,15 +39,6 @@ identity is a theorem, not the definition of `ℚ̲̄_ℓ`, which is defined by 
 because filtered colimits of condensed abelian groups are computed sectionwise on profinite sets
 (the coverings of `*_proét` being refined by finite ones), and
 sectionwise `ℚ̲̄_ℓ(S)` is the union of the subgroups `C(S, E)` of `C(S, ℚ̄_ℓ)` by definition.
-
-## Proof of the colimit comparison
-
-The comparison is proved sectionwise using the filtered-colimit criterion for types. Every
-section of `ℚ̲̄_ℓ` is represented by a continuous map into a finite subextension by definition,
-and the maps from `C(S, E)` are injective. The forgetful functor from abelian groups reflects
-these filtered colimits. Evaluation jointly reflects colimits of presheaves, and the fully
-faithful inclusion of sheaves into presheaves reflects colimits.
-
 -/
 
 @[expose] public section

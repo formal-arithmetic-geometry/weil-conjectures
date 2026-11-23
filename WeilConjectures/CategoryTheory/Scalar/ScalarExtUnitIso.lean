@@ -34,13 +34,8 @@ variable {A : Type uA} {B : Type uB}
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
   [PreservesFiniteLimits V] [PreservesFiniteColimits V]
 /-- For exact additive functors U,V:A→B and an isomorphism ε:U≅V, if e∈Ext^n(F,UH) is a derived Ext
-unit [def-sp-derived-scalar-ext-unit], then e composed with mk0(ε_H) is a V-derived Ext unit.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-scalar-ext-unit-iso).
-Proof: The derived natural isomorphism sends each target Hom set for U to the corresponding one for
-V. Compose this bijection with the unit bijection for e. Naturality of the exact-functor single
-comparison and the shift equation for the derived natural isomorphism identify the composed function
-with the unit function of e composed with mk0(ε_H). -/
+unit, then e composed with mk0(ε_H) is a V-derived Ext unit.
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem derivedExtUnit_iso (ε : U ≅ V) (F : B) (H : A) (n : ℕ)
     (η : Ext.{wE} F (U.obj H) n) (h : U.DerivedExtUnit F H n η) :
     V.DerivedExtUnit F H n (η.comp (Ext.mk₀ (ε.hom.app H)) (add_zero n)) := by

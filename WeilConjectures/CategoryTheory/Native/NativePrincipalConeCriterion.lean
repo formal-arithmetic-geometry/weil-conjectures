@@ -26,8 +26,7 @@ import WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
 import WeilConjectures.CategoryTheory.Principal.PrincipalConeSmallSiteCriterion
 /-! # Principal cone criterion with independent site and coefficient sizes
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 0999, 099B, 0A0E and 0941.
-(blueprint: lem-pur-native-principal-cone-criterion). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 0999, 099B, 0A0E and 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -75,15 +74,9 @@ variable [HasCountableProducts (NativeModules.{max c v r, c, v} R)]
 attribute [local irreducible] CochainComplex.PrincipalCone.completion
   CochainComplex.PrincipalCone.unit
 
-/-- The principal cone completion satisfies the local criterion before shrinking the site. Restrict
-the complex and scalar to AsSmall and apply the small-site criterion. The additive-equivalence
-comparison identifies its cone completion and its specified unit with the restriction of the
-native ones. Transfer local completeness by the small-model equivalence. For the unit criterion
-use the derived comparison square, cancel its two isomorphisms, and reflect invertibility
-through the derived equivalence.
+/-- The principal cone completion satisfies the local criterion before shrinking the site.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 0999, 099B, 0A0E and 0941.
-(blueprint: lem-pur-native-principal-cone-criterion). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 0999, 099B, 0A0E and 0941. -/
 theorem nativePrincipalConeCriterion
     (a : (R.obj ⋙ forget CommRingCat).sections)
     (P : CochainComplex (NativeModules.{max c v r, c, v} R) ℤ) (μ : End P)

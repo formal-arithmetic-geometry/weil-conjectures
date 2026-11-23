@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Constant modules with independent site universes
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093T
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03CY and 093T.
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +29,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (Λ : Type (max u v)) [CommRing Λ]
 
 /-- The constant module presheaf, without identifying site object and arrow universes.
-Source: Stacks Tags 03CY and 093T (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 093T. -/
 def siteConstantModulePresheafGeneral :
     ModuleCat.{max u v} Λ ⥤
       PresheafOfModules.{max u v} ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) where
@@ -38,7 +37,7 @@ def siteConstantModulePresheafGeneral :
   map f := { app := fun _ ↦ f }
 
 /-- Sheafify the genuine constant module presheaf and extend along ring sheafification.
-Source: Stacks Tags 03CY and 093T (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03CY and 093T. -/
 def siteConstantModuleFunctorGeneral :
     ModuleCat.{max u v} Λ ⥤ SheafOfModules.{max u v}
       ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)) :=
