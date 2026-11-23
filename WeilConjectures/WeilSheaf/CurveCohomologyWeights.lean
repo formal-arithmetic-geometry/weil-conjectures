@@ -26,20 +26,23 @@ needed here.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.hasWeightsAtMostOver_globalSections`: if `F` is
-  punctually of weights `≤ a`, then so is `H⁰(X, F)`.
-- `HasWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology_two`: if `F` is lisse and
-  punctually of weights `≤ a`, then `H_c²(X, F)` has weights `≤ a + 2`.
+All names are in the namespace `AlgebraicGeometry.WeilSheaf`.
+
+- `HasWeightsAtMost.hasWeightsAtMostOver_globalSections`: if `F` is punctually of weights `≤ a`,
+  then so is `H⁰(X, F)`.
+- `IsPunctuallyPureOfWeight.isPureOfWeightOver_globalSections`: if `F` is punctually pure of
+  weight `a`, then so is `H⁰(X, F)`.
 - `IsPunctuallyPureOfWeight.isPureOfWeightOver_globalSections_and_compactlySupportedCohomology_two`:
   if `F` is lisse and punctually pure of weight `a`, then `H⁰(X, F)` and `H_c²(X, F)` are pure of
   weights `a` and `a + 2`.
 
+The bound on the weights of `H_c²(X, F)` for `F` lisse and punctually of weights `≤ a` is
+`HasWeightsAtMost.compactlySupportedCohomology_two`.
+
 ## Implementation details
 
-`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two_of_isLisse` repeats
-the Poincaré duality argument of
-`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`, which only uses
-that `X₀` is a smooth curve.
+The statements on `H_c²` rest on `nonempty_equiv_compactlySupportedCohomology_two`, which holds
+on any smooth separated curve of finite type over `k₀`.
 -/
 
 @[expose] public section
@@ -58,12 +61,7 @@ theorem HasWeightsAtMost.hasWeightsAtMostOver_globalSections {F : WeilSheaf k₀
     (hF : F.HasWeightsAtMost ι a) : F.globalSections.HasWeightsAtMostOver k₀ ι a := by
   intro β hβ
   obtain ⟨x, hx⟩ := exists_hasEigenvalue_stalk_of_hasEigenvalue_globalSections F hβ
-  have h := hF x _ hx
-  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
-  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
-  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
-    mul_comm, Real.rpow_mul_natCast hq] at h
-  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
+  exact norm_le_rpow_of_norm_pow_degreeOver_le (hF x _ hx)
 
 /-- If `F` is punctually `ι`-pure of weight `a`, then `H⁰(X, F)` is `ι`-pure of weight `a`
 (possibly zero). -/
@@ -72,65 +70,21 @@ theorem IsPunctuallyPureOfWeight.isPureOfWeightOver_globalSections {F : WeilShea
     F.globalSections.IsPureOfWeightOver k₀ ι a := by
   intro β hβ
   obtain ⟨x, hx⟩ := exists_hasEigenvalue_stalk_of_hasEigenvalue_globalSections F hβ
-  have h := hF x _ hx
-  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
-  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
-  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
-    mul_comm, Real.rpow_mul_natCast hq] at h
-  exact (pow_left_inj₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
-
-variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-  [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
-
-/-- `H_c²(X, F) ≃ V_{π₁(X)}(-1)` for a lisse Weil sheaf `F` on a smooth curve `X₀`, not
-necessarily affine or geometrically connected. -/
-theorem nonempty_equiv_compactlySupportedCohomology_two_of_isLisse (F : WeilSheaf k₀ l X)
-    (hF : F.IsLisse) :
-    Nonempty ((F.compactlySupportedCohomology 2).Equiv
-      ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
-  obtain ⟨P, hP, hPF⟩ :=
-    exists_isPerfPair_compactlySupportedCohomology_dual_mul 1 F hF 2 0 (by norm_num)
-  have hq : (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) ≠ 0 :=
-    zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
-  exact ⟨(FrobeniusModule.Equiv.ofIsPerfPair P hq fun x y ↦ by
-    rw [hPF, neg_neg, zpow_one, pow_one]).trans
-      ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
-
-/-- If `F` is lisse and punctually of weights `≤ a`, then the weights of `H_c²(X, F)` are at most
-`a + 2`. -/
-theorem HasWeightsAtMost.hasWeightsAtMostOver_compactlySupportedCohomology_two
-    {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {a : ℝ} (hw : F.HasWeightsAtMost ι a) :
-    (F.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (a + 2) := by
-  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_two_of_isLisse F hF
-  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
-  have hc : (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) ≠ 0 :=
-    zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
-  intro α hα
-  obtain ⟨β, rfl⟩ : ∃ β, α = (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) * β :=
-    ⟨((Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)))⁻¹ * α, by field_simp⟩
-  have h₁ := (FrobeniusModule.hasEigenvalue_frobeniusEnd_rescale_iff hc β).1 (e.hasEigenvalue hα)
-  have h₃ := hasWeightsAtMostOver_geometricCoinvariants ι hF hw β h₁
-  have hcn : ‖ι ((Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)))‖ = Nat.card k₀ := by simp
-  rw [map_mul, norm_mul, hcn]
-  calc (Nat.card k₀ : ℝ) * ‖ι β‖ ≤ (Nat.card k₀ : ℝ) * (Nat.card k₀ : ℝ) ^ (a / 2) :=
-        mul_le_mul_of_nonneg_left h₃ hq.le
-    _ = (Nat.card k₀ : ℝ) ^ ((a + 2) / 2) := by
-        rw [add_div, div_self two_ne_zero, Real.rpow_add_one hq.ne', mul_comm]
+  exact norm_eq_rpow_of_norm_pow_degreeOver_eq (hF x _ hx)
 
 namespace IsPunctuallyPureOfWeight
 
-/-- If `F` is lisse and punctually `ι`-pure of weight `a`, then `H⁰(X, F)` and `H_c²(X, F)` are
-`ι`-pure of weights `a` and `a + 2` respectively (possibly zero). -/
+/-- If `F` is lisse and punctually `ι`-pure of weight `a` on a smooth curve `X₀`, then
+`H⁰(X, F)` and `H_c²(X, F)` are `ι`-pure of weights `a` and `a + 2` respectively (possibly
+zero). -/
 theorem isPureOfWeightOver_globalSections_and_compactlySupportedCohomology_two
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
     {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {a : ℝ} (hw : F.IsPunctuallyPureOfWeight ι a) :
     F.globalSections.IsPureOfWeightOver k₀ ι a ∧
-      (F.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (a + 2) := by
-  refine ⟨hw.isPureOfWeightOver_globalSections, ?_⟩
-  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_two_of_isLisse F hF
-  have h := (isPureOfWeightOver_geometricCoinvariants ι F hF hw).tateTwist Nat.card_pos (-1)
-  have ha : a - 2 * ((-1 : ℤ) : ℝ) = a + 2 := by push_cast; ring
-  rw [ha] at h
-  exact FrobeniusModule.IsPureOfWeight.of_equiv e h
+      (F.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (a + 2) :=
+  ⟨hw.isPureOfWeightOver_globalSections,
+    WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two ι F hF hw⟩
 
 end IsPunctuallyPureOfWeight
 
