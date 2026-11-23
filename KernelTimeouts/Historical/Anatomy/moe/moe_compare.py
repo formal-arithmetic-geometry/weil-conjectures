@@ -60,7 +60,9 @@ def first_divergence(left: dict[str, Node], right: dict[str, Node]) -> str:
         if l.payload != r.payload:
             detail = "universe" if "level" in l.payload or "level" in r.payload else "payload"
             return f"path={path} kind={detail} left={l.payload} right={r.payload}"
-        if l.hash != r.hash:
+        child_prefix = key + "/"
+        has_children = any(k.startswith(child_prefix) for k in set(left) | set(right))
+        if l.hash != r.hash and not has_children:
             return f"path={path} kind=structural-hash left={l.hash} right={r.hash}"
     return "none"
 
@@ -83,6 +85,10 @@ def main() -> int:
         rn = {k: v for k, v in rn.items()
               if (not args.stage or k.startswith(args.stage + ":"))
               and (not args.right_side or k.split(":", 2)[1] == args.right_side)}
+    if args.left_side:
+        ln = {k.split(":", 1)[0] + ":" + v.path: v for k, v in ln.items()}
+    if args.right_side:
+        rn = {k.split(":", 1)[0] + ":" + v.path: v for k, v in rn.items()}
     print("MOE_COMPARE schema=S0-S6")
     print(f"stages-left={ls}")
     print(f"stages-right={rs}")
