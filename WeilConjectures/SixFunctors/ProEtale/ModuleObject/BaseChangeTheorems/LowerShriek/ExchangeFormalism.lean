@@ -6,9 +6,12 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionPadicAlgCl
+public import
+  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleExchangeFormalism
+public import
+  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
+public import
+  WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionPadicAlgCl
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
 public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 
@@ -360,10 +363,16 @@ lemma boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq'
     (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
   have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+    (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+    (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
   rw [boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq_refinementIso,
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refinementIso',
     boundedConstructibleLowerShriekRefinementIso_eq',
-    boundedConstructibleLowerShriekRefinementIso_eq']
+    boundedConstructibleLowerShriekRefinementIso_eq',
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper_eq,
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper_eq]
 
 end Independence
 

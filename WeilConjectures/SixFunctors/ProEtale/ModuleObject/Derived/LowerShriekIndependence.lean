@@ -110,6 +110,51 @@ noncomputable def boundedConstructibleLowerShriekRefinementIso'
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarComp ℓ h p₁ ≪≫ eqToIso (by rw [wp]))
 
+section ProperOnlyRefinement
+
+variable {X Z Z₁ Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom] [IsSeparated Z₁.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
+
+include ℓ k
+
+noncomputable def boundedConstructibleLowerStarOfIsProperId :=
+  boundedConstructibleLowerStarId ℓ X
+
+noncomputable def boundedConstructibleLowerShriekRefinementIsoOfIsProper
+    (sq : IsPullback (𝟙 X) i i₁ h)
+    {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsProper p₁.left] [IsProper p.left] [IsProper h.left] :
+    boundedConstructibleOpenImmersionLowerShriek
+        (Profinite.padicAlgClRingObj ℓ) ℓ i₁ ⋙
+        boundedConstructibleLowerStarOfIsProper ℓ p₁ ≅
+      boundedConstructibleOpenImmersionLowerShriek
+        (Profinite.padicAlgClRingObj ℓ) ℓ i ⋙
+        boundedConstructibleLowerStarOfIsProper ℓ p :=
+  let _ : IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq) :=
+    isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq
+  Functor.isoWhiskerRight ((Functor.leftUnitor _).symm ≪≫
+      Functor.isoWhiskerRight (boundedConstructibleLowerStarOfIsProperId ℓ).symm _ ≪≫
+      asIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ sq)) _ ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _
+      (boundedConstructibleLowerStarOfIsProperComp ℓ h p₁ ≪≫ eqToIso (by subst wp; rfl))
+
+lemma boundedConstructibleLowerShriekRefinementIsoOfIsProper_eq
+    (sq : IsPullback (𝟙 X) i i₁ h)
+    {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p)
+    [IsProper p₁.left] [IsProper p.left] [IsProper h.left]
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' ℓ sq)] :
+    boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ sq wp =
+      boundedConstructibleLowerShriekRefinementIso' ℓ sq wp := by
+  change boundedConstructibleLowerShriekRefinementIso' ℓ sq wp = _
+  rfl
+
+end ProperOnlyRefinement
+
 end Refinement
 
 /-! ### Independence of the compactification -/
@@ -135,12 +180,12 @@ noncomputable irreducible_def boundedConstructibleLowerShriekOfCompactificationI
   let r₂ := hc.choose_spec.2.some
   have := r₁.isProper
   have := r₂.isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
     r₁.isPullback
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
     r₂.isPullback
-  boundedConstructibleLowerShriekRefinementIso' ℓ r₁.isPullback r₁.hom_overG ≪≫
-    (boundedConstructibleLowerShriekRefinementIso' ℓ r₂.isPullback r₂.hom_overG).symm
+  boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ r₁.isPullback r₁.hom_overG ≪≫
+    (boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ r₂.isPullback r₂.hom_overG).symm
 
 /-- Unfolding `boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`: the comparison
 through the chosen common refinement. -/
@@ -148,15 +193,19 @@ lemma boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq_refine
     (c₁ c₂ : Compactification f.left) :
     haveI := (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isProper
     haveI := (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isProper
-    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
-      (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
-    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
-      (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
+    let _ : IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+        (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback) :=
+      isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+        (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
+    let _ : IsIso (boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+        (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback) :=
+      isIso_boundedConstructibleLowerStarOfIsProperOpenImmersionLowerShriekExchange' ℓ
+        (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
     boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ =
-      boundedConstructibleLowerShriekRefinementIso' ℓ
+      boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.isPullback
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.1.some.hom_overG ≪≫
-        (boundedConstructibleLowerShriekRefinementIso' ℓ
+        (boundedConstructibleLowerShriekRefinementIsoOfIsProper ℓ
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.isPullback
           (Compactification.exists_overRefinement c₁ c₂).choose_spec.2.some.hom_overG).symm := by
   rw [boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_def]
