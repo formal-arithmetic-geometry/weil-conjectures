@@ -163,8 +163,7 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Normalized derived pullback of strict reduction towers
 
-Source: Stacks Project, Tags 06YS, 06YY, 07A4 and 03EL
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower).
+Source: Stacks Project, Tags 06YS, 06YY, 07A4 and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -179,14 +178,12 @@ namespace CategoryTheory.StrictReduction
 variable {A : Type a} [Category.{b} A] [Abelian A] [MonoidalCategory A]
 
 /-- Tensor with the actual coefficient tower, retaining every transition.
-Source: Stacks 06YY, applied to strict towers
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 06YY, applied to strict towers. -/
 def reduction (Q : ℕᵒᵖ ⥤ A) : A ⥤ (ℕᵒᵖ ⥤ A) :=
   Functor.const ℕᵒᵖ ⋙ tensorRight Q
 
 /-- The ordinary augmentation induced by the coefficient unit.
-Source: Stacks 03CZ and 06YY
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 03CZ and 06YY. -/
 def augmentation (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ A) ⟶ Q) :
     Functor.const ℕᵒᵖ ⟶ reduction Q :=
   Functor.whiskerLeft (Functor.const ℕᵒᵖ)
@@ -195,8 +192,7 @@ def augmentation (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_
 variable [MonoidalPreadditive A]
 
 /-- Additivity of termwise tensor reduction.
-Source: Stacks 03EK, bilinearity of tensor
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 03EK, bilinearity of tensor. -/
 instance reduction_additive (Q : ℕᵒᵖ ⥤ A) : (reduction Q).Additive where
   map_add {M N} f g := by
     ext n
@@ -204,29 +200,28 @@ instance reduction_additive (Q : ℕᵒᵖ ⥤ A) : (reduction Q).Additive where
     exact (tensorRight (Q.obj n)).map_add (f := f) (g := g)
 
 /-- Exact termwise pullback on strict towers.
-Source: Stacks 02MZ, limits and colimits in diagram categories
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 02MZ, limits and colimits in diagram categories. -/
 abbrev termwise {B : Type c} [Category.{d} B] (F : A ⥤ B) :=
   (Functor.whiskeringRight ℕᵒᵖ A B).obj F
 
 variable {B : Type c} [Category.{d} B] [Abelian B]
 
 /-- Termwise preservation of finite limits, using pointwise limits.
-Source: Stacks 02MZ (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 02MZ. -/
 instance termwise_limits (F : A ⥤ B) [PreservesFiniteLimits F] :
     PreservesFiniteLimits (termwise F) where
   preservesFiniteLimits L := preservesLimitsOfShape_of_evaluation _ L (fun n ↦
     inferInstanceAs (PreservesLimitsOfShape L ((evaluation ℕᵒᵖ A).obj n ⋙ F)))
 
 /-- Termwise preservation of finite colimits, using pointwise colimits.
-Source: Stacks 02MZ (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 02MZ. -/
 instance termwise_colimits (F : A ⥤ B) [PreservesFiniteColimits F] :
     PreservesFiniteColimits (termwise F) where
   preservesFiniteColimits L := preservesColimitsOfShape_of_evaluation _ L (fun n ↦
     inferInstanceAs (PreservesColimitsOfShape L ((evaluation ℕᵒᵖ A).obj n ⋙ F)))
 
 /-- Constant towers commute with actual termwise pullback.
-Source: Stacks 06YY (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 06YY. -/
 def constantSquare (F : A ⥤ B) :
     Functor.const ℕᵒᵖ ⋙ termwise F ≅ F ⋙ Functor.const ℕᵒᵖ :=
   NatIso.ofComponents (fun M ↦ Functor.constComp ℕᵒᵖ M F)
@@ -235,7 +230,7 @@ variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ℕᵒᵖ ⥤ A)]
 
 /-- The universal derived reduction and its augmentation. The counit is part of the
 left-derived universal property, and is required to compute every good representative.
-Source: Stacks 06YY and 06XN (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 06YY and 06XN. -/
 structure Model (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ A) ⟶ Q)
     (good : CochainComplex A ℤ → Prop) where
   B : DerivedCategory A ⥤ DerivedCategory (ℕᵒᵖ ⥤ A)
@@ -252,7 +247,7 @@ structure Model (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ 
 variable [MonoidalCategory B]
 
 /-- The pulled-back coefficient unit, using the normalized pullback unit isomorphism.
-Source: Stacks 03EL (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 03EL. -/
 def pulledUnit (F : A ⥤ B) (j : F.obj (𝟙_ A) ≅ 𝟙_ B)
     (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ A) ⟶ Q) :
     (Functor.const ℕᵒᵖ).obj (𝟙_ B) ⟶ Q ⋙ F :=
@@ -260,7 +255,7 @@ def pulledUnit (F : A ⥤ B) (j : F.obj (𝟙_ A) ≅ 𝟙_ B)
     Functor.whiskerRight e F
 
 /-- The ordinary comparison as one isomorphism of strict towers, natural in the input.
-Source: Stacks 03EL (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 03EL. -/
 def ordinaryComparison (F : A ⥤ B)
     (mu : ∀ M N, F.obj (M ⊗ N) ≅ F.obj M ⊗ F.obj N)
     (hmu : ∀ {M M' N N'} (f : M ⟶ M') (g : N ⟶ N'),
@@ -281,7 +276,7 @@ def ordinaryComparison (F : A ⥤ B)
 variable [HasDerivedCategory.{w'} B] [HasDerivedCategory.{t'} (ℕᵒᵖ ⥤ B)]
 
 /-- The canonical localization of the constant-tower square.
-Source: Stacks 06YY (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 06YY. -/
 def constantDerivedSquare (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
     (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory ⋙ (termwise F).mapDerivedCategory ≅
@@ -302,8 +297,7 @@ variable [MonoidalPreadditive B]
 
 /-- Normalization by the universal reduction counits on every good representative.
 The equation is the conjugation formula, with both exact-localization factors explicit.
-Source: Stacks 06YY and 07A4
-(blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 06YY and 07A4. -/
 def IsNormalized (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (Q : ℕᵒᵖ ⥤ A) (e : (Functor.const ℕᵒᵖ).obj (𝟙_ A) ⟶ Q)
@@ -383,7 +377,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   {R : Sheaf J CommRingCat.{r}} {S : Sheaf K CommRingCat.{r}}
 
 /-- Exactly the flat-term K-flat representatives in the statement.
-Source: Stacks 06YS (blueprint: lem-weil-pbc-reduction-pullback-derived-tower). -/
+Source: Stacks 06YS. -/
 def flatRepresentatives (R : Sheaf J CommRingCat.{r}) (P : Complex R) : Prop :=
   P.IsKFlatIndependentCoefficients ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite (P.X n)
 

@@ -55,7 +55,6 @@ at `M` (`Rationalization.linear`), compatibly with its `R`-linear structure
 - `CategoryTheory.Rationalization.W_smul_id` : `m • 𝟙 X` lies in `W M C` for `m ∈ M`.
 - `CategoryTheory.Rationalization.isIso_smul_id` : `m • 𝟙 Y` is an isomorphism of the
   rationalization for `m ∈ M`.
-
 -/
 
 @[expose] public section
@@ -153,7 +152,7 @@ end Rationalization
 variable [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [∀ n : ℤ, (shiftFunctor C n).Linear R] [Pretriangulated C] [IsTriangulated C]
 
-/-- Blueprint `proposition-inverting-ell--2`: Rationalization (scalar localization),
+/-- Rationalization (scalar localization),
 `C[1/ϖ]`: the same objects as `C` (`CategoryTheory.Rationalization.essSurj_Q`) and morphisms
 `Hom_C(K, L) ⊗_{𝒪_E} E` (`CategoryTheory.Rationalization.isLocalizedModule_mapLinearMap`); no
 Karoubi completion is taken.

@@ -159,7 +159,6 @@ private theorem rightDerived_defined_pointwiseKan
 
 /-- Pointwise essentially constant systems assemble into derived functors.
 Source: Stacks Project, Derived Categories, Definition 05S9 and Lemma 05SA.
-(auxiliary; not a blueprint node)
 
 The construction chooses the representing values supplied by the hypotheses and
 uses the universal comparison maps to define the functors on the localized

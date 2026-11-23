@@ -13,12 +13,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Derived forgetting of fixed pairs
 
-Source: `WeilConjectures/CategoryTheory/Endofunctor/IsoAlgebra.lean`, Free and
-isGrothendieckAbelian; `DerivedCategory/RightDerivedFunctor/IsoAlgebra.lean`,
-Free.preservesHomology_functor and rightDerivedFunctorMapOfNatIsoCompForgetIso;
-`DerivedCategory/RightDerivedFunctor/IsoAlgebraComp.lean`, derived conservativity
-(blueprint: lem-sf-fixed-pair-derived-forget-comparison).
-
 The fixed-pair category is the existing full subcategory `Endofunctor.IsoAlgebra`.
 Right derivation uses the recorded arbitrary-quasi-isomorphism interface. The comparison
 is characterized by its derived units; evaluating its equation on the homotopy class
@@ -35,27 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Endofunctor.IsoAlgebra
 
-/-- Structural clauses for forgetting fixed pairs. Source: Endofunctor/IsoAlgebra.lean,
-Free.adjunction and isGrothendieckAbelian; RightDerivedFunctor/IsoAlgebra.lean,
-Free.preservesHomology_functor and preservesKInjectiveComplexes_forget; IsoAlgebraComp.lean,
-isIso_of_isIso_forget_mapDerivedCategory_map
-(blueprint: lem-sf-fixed-pair-derived-forget-comparison).
-
-Proof plan (steps 1--8 of the node): create limits and colimits on underlying objects,
-using preservation by the autoequivalence. Addition of commuting maps gives the
-preadditive structure; created kernels and cokernels give abelianness and exactness.
-An invertible commuting map has a commuting inverse. Construct the free pair as the
-coproduct of integer powers, using the quasi-inverse in negative degrees and shifting
-summands. Maps out of it are determined by their degree-zero summand, with positive
-and negative recursion giving the adjunction. Its value on a generator is a generator;
-filtered colimits are exact after forgetting, giving the Grothendieck property
-(lem-sfb-grothendieck-filtered-finite-limits, lem-galois-equivalence-preserves-limits).
-Direct sums are filtered colimits of finite sums, so the free functor is exact. Its
-right adjoint preserves injectives and K-injectives (lem-exc-rg-right-adjoint-preserves-
-injectives, lem-weil-pbc-right-adjoint-preserves-kinjective). Finally, forgetting
-commutes with cohomology and detects its isomorphisms, hence detects derived
-isomorphisms (situation-conventions,
-lem-weil-pbc-unbounded-derived-iso-cohomology). -/
+/-- Structural clauses for forgetting fixed pairs. -/
 theorem fixedPair_forget_properties
     {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]
     (F : C ⥤ C) [F.Additive] [F.IsEquivalence]
@@ -112,26 +86,7 @@ private theorem homotopy_unit_ext
   dsimp only [Functor.comp_map] at ha hb
   rw [← ha, ← hb, he I hI]
 
-/-- Canonical comparison, including its unit normalization. Source:
-RightDerivedFunctor/IsoAlgebra.lean, rightDerivedFunctorMapOfNatIsoCompForgetIso,
-normalized on the common K-injective resolution, as in the node's final paragraph
-(blueprint: lem-sf-fixed-pair-derived-forget-comparison).
-
-Proof plan (steps 9--12 of the node): `mapOfNatIso e` sends a pair to the stated pair
-and a morphism to L of that morphism; naturality of e gives the commuting equation.
-The forgetful functor creates finite limits, so this lift is left exact. For a
-K-injective replacement K → I of a fixed-pair complex, forgetting gives a K-injective
-replacement of its underlying complex (lem-weil-pbc-kinjective-functorial-existence
-and the structural clauses above). Both derived functors are computed by the same
-complex L(U_F I) (lem-weil-pbc-kinjective-total-derived), so the identity of that
-complex gives the comparison. Derived morphisms into I are chain maps modulo homotopy
-(lem-weil-pbc-kinjective-hom-derived); applying L U_F to those maps proves naturality
-and independence of resolution. Both units are L U_F of the replacement map. Thus
-the displayed equation holds on every homotopy object, in particular on M[0]; the
-unit-compatible universal property of def-sfb-right-derived-functor gives uniqueness.
-The two resolution witnesses below are universally quantified choices, not extra
-existence hypotheses; Grothendieck categories have such witnesses by the cited
-functorial-existence node. -/
+/-- Canonical comparison, including its unit normalization. -/
 theorem exists_fixedPairDerivedForgetComparison
     {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]
     {D : Type uD} [Category.{vD} D] [Abelian D] [IsGrothendieckAbelian.{vD} D]

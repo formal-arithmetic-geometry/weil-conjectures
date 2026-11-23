@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-! The explicit strict Roos cone and its ordinary-limit inclusion.
-Source: Stacks Project, Cohomology on Sites, Tag 0941, proof of
-lemma-derived-limit-is-ok (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 0941. -/
 
 @[expose] public section
 
@@ -81,8 +80,7 @@ noncomputable def roosConeFunctor :
 /-- The strict Roos functor: the shifted mapping cone of one minus transition shift on
 termwise products of a tower complex. Its maps are the shifted cone maps induced by
 products of strict tower morphisms.
-Source: Stacks Project, Cohomology on Sites, Tag 0941, proof of
-lemma-derived-limit-is-ok (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 0941. -/
 noncomputable def roosF :
     CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ :=
   roosConeFunctor ⋙ shiftFunctor _ (-1 : ℤ)

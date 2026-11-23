@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Sites.Subsheaf
 
 /-! # Local representatives in filtered colimits of module sheaves
 
-Source: Stacks Project, Sites, Tag 0738, proof of (4).
+Source: Stacks Project, Sites, Tag 0738.
 -/
 
 @[expose] public section
@@ -26,28 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Every section of a filtered sheaf colimit locally comes from a diagram stage.
-Source: Stacks Project, Sites, Tag 0738, proof of (4), local representability before
-finite selection (blueprint: lem-weil-pbc-filtered-module-sheaf-colimit-local-representatives).
-
-Proof (the local-image argument written out by Y2): Inside the colimit sheaf H, take
-the sectionwise union of the images of all
-coprojections. This is a subpresheaf of modules: filteredness places any two images
-in one common stage, where addition and scalar multiplication preserve the image.
-Close this subpresheaf under local membership. The resulting subpresheaf K is a
-subsheaf of H: restrictions preserve local membership, and gluing in H followed by
-transitivity of covering sieves proves local membership of each amalgamation.
-All coprojections factor through K. The colimit universal property gives H → K
-whose composite with the inclusion K → H is the identity, since this composite
-agrees with the identity on every coprojection. Thus every section of H belongs
-locally to a coprojection image. The sieve of arrows admitting such a representative
-is closed under precomposition by naturality of the coprojections and is covering.
-Use this sieve as S. This argument uses only subsets of H's section modules, so
-requires no relation between the site universe and the module universe and no
-sheafification existence assumption. To pass between the module and type sheaf
-conditions in independent universes, identify the module forgetful functor with
-Hom from the lifted rank-one module ULift Λ. This represents it by a module in
-the section universe and proves preservation of limits of the size of the site.
-Reflection follows by factoring through additive groups. -/
+Source: Stacks Project, Sites, Tag 0738. -/
 theorem filtered_module_sheaf_colimit_local_representatives
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (Λ : Type r) [CommRing Λ]

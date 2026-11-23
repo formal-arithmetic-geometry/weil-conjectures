@@ -11,8 +11,8 @@ public import WeilConjectures.CategoryTheory.SpectralSequence.Grothendieck
 /-!
 # Composable pairs and acyclicity
 
-Source: blueprint, node def-sp-composite-acyclicity; Stacks Project, Derived Categories,
-Section 13.22, Lemma 13.22.1 (Tag 015M) (blueprint: def-sp-composite-acyclicity).
+Source: Stacks Project, Derived Categories,
+Section 13.22, Lemma 13.22.1 (Tag 015M).
 
 ## Main definitions
 
@@ -30,7 +30,7 @@ namespace CategoryTheory
 open Limits
 
 /-- A composable pair of left exact additive functors between Grothendieck abelian
-categories (Stacks Project, Tag 015M). (blueprint: def-sp-composite-acyclicity) -/
+categories (Stacks Project, Tag 015M). -/
 structure GrothendieckComposablePair
     (A : Type u₁) (B : Type u₂) (C : Type u₃)
     [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
@@ -45,7 +45,7 @@ structure GrothendieckComposablePair
 
 /-- The first functor of a composable pair sends injectives to objects acyclic for the
 second precisely when all positive right derived functors of the second vanish on their
-images (Stacks Project, Tag 015M). (blueprint: def-sp-composite-acyclicity) -/
+images (Stacks Project, Tag 015M). -/
 def GrothendieckComposablePair.SendsInjectivesToAcyclics
     {A : Type u₁} {B : Type u₂} {C : Type u₃}
     [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]

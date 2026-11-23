@@ -19,15 +19,6 @@ The intended application is `a = ϖ • 𝟙 K` for an element `ϖ` of the coeff
 `G` followed by the reduction `- ⊗ᴸ Λ/ϖ`, which kills `ϖ`: then the statement says that a
 natural transformation which is an isomorphism on `ϖ`-torsion objects becomes an isomorphism
 after reduction modulo `ϖ`. No compatibility of `τ` with the shifts is needed.
-
-## Proof
-
-Let `K →a K →v₁ K₁ →w₁ K⟦1⟧` and `K →a≫a K →v₂ K₂ →w₂ K⟦1⟧` be the two triangles. The
-obstruction `G v₁ ≫ τ_{K₁}⁻¹ ≫ F w₁ : G K ⟶ F (K⟦1⟧)` factors through `F (a⟦1⟧) = 0`, by
-naturality of `τ` along a morphism of triangles `(a, 𝟙, ρ)` from the second triangle to the first
-one. So `G v₁ ≫ τ_{K₁}⁻¹` lifts along `F v₁` to some `s : G K ⟶ F K`, and `s` is a two-sided
-inverse of `τ_K`: the defects `s ≫ τ_K - 𝟙` and `τ_K ≫ s - 𝟙` are killed by `G v₁`, resp. `F v₁`,
-hence factor through `G a = 0`, resp. `F a = 0`.
 -/
 
 @[expose] public section

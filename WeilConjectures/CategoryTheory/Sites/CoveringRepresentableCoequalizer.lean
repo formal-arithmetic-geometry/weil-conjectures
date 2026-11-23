@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Sites.RegularEpi
 /-!
 # A coequalizer presentation using covering representables
 
-Source: Stacks Project, Sites, Tag 00WS, lemma-sheaf-coequalizer-representable.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Sites, Tag 00WS.
 -/
 
 @[expose] public section
@@ -26,16 +27,8 @@ namespace CategoryTheory
 /-- For a covering family of site objects, every set-valued sheaf is covered by a
 coproduct of sheafified representables indexed by that family.
 
-Source: Stacks Project, Sites, Tag 00WS, first paragraph (the construction of the
-coproduct and its locally surjective map).
-(auxiliary; not a blueprint node)
-
-Take the coproduct of sheafified representables indexed by pairs `(V,t)` with
-`V ∈ E` and `t ∈ H(V)`. The sheafification adjunction and Yoneda give its map to
-`H`. If two arrows out of `H` agree after that map, they agree on every section
-at every object of `E`. Naturality gives equality after restriction to the assumed
-cover of any object; separatedness of the target sheaf gives equality globally.
-This proves the epimorphism assertion directly, including empty coverings. -/
+Stacks Project, Sites, Tag 00WS, first paragraph (the construction of the
+coproduct and its locally surjective map). -/
 private theorem exists_coveringRepresentable_epi
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
@@ -95,32 +88,7 @@ property: for each sheaf `K`, composition with `q` bijects maps `H ⟶ K` with m
 The `uliftYoneda` is just the representable presheaf with its Hom sets raised to the
 universe of the sheaf values, with restriction by precomposition.
 
-Source: Stacks Project, Sites, Tag 00WS, lemma-sheaf-coequalizer-representable.
-(auxiliary; not a blueprint node)
-
-Proof:
-1. Sheafification and Yoneda identify maps from the sheafification of `h_V` to a sheaf
-   `T` with elements of `T(V)`, sending the identity section to the chosen element.
-   Use lem-weil-pbc-sheafification-plus-theorem, def-weil-pbc-sheafification and
-   lem-galois-yoneda-hom-bijection. No subcanonicity assumption is needed.
-2. For `T`, index by pairs `(V,t)` with `V ∈ E` and `t ∈ T(V)`. Sheafify the presheaf
-   disjoint union of these representables. Maps out of the disjoint union are precisely
-   families of maps out of its summands; the sheafification adjunction gives the same
-   universal property after sheafification, proving the coproduct assertion, even for
-   an empty index set. The maps of step 1 induce `q_T : P(T) ⟶ T`, taking `(V,t,f)` to
-   `T(f)(t)`. Use def-weil-pbc-category-colimit and the sheafification inputs of step 1.
-3. Given `s ∈ T(W)`, take a covering of `W` by objects `V_i ∈ E`. Its restriction to
-   `V_i` lifts via the identity in the summand `(V_i,T(f_i)(s))`. Thus `q_T` is locally
-   surjective and hence epi by lem-weil-pbc-site-sheaf-sets-epi-locally-surjective.
-4. Set `P₀ = P(H)` and `q = q_H`. Form the sectionwise kernel pair `G` of `q`, with
-   projections `r,s`, using lem-weil-pbc-site-sheaf-sets-limits-sectionwise. Apply the
-   same construction to `G`, obtaining `P₁ = P(G)` and an epi `e : P₁ ⟶ G`. Set
-   `d₀ = e ≫ r`, `d₁ = e ≫ s`; the kernel-pair equation gives `d₀ ≫ q = d₁ ≫ q`.
-5. By lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer, the epi `q` is the
-   coequalizer of `r,s`.
-6. If `a` equalizes `d₀,d₁`, cancel the epi `e` to see that it equalizes `r,s`.
-   Step 5 gives a unique factorization through `q`. Conversely, composition with `q`
-   always equalizes `d₀,d₁`. This is exactly the required coequalizer property. -/
+Stacks Project, Sites, Tag 00WS. -/
 theorem exists_coveringRepresentable_coequalizer
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

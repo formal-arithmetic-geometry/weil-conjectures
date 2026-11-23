@@ -17,10 +17,6 @@ import Mathlib.Algebra.Group.TransferInstance
 import Mathlib.Data.Set.Finite.Lattice
 
 /-! # Coherent common-stage pair functor descent
-
-Source: blueprint sketches 32, finite common-stage principle, and 42,
-Proposition `prop:pseudocone-functor`, Theorems `thm:pair-universal` and
-`thm:karoubi-universal` (blueprint: lem-sbc-coherent-pair-functor-descent).
 -/
 
 @[expose] public section
@@ -33,8 +29,7 @@ namespace CategoryTheory.CommonStage
 
 -- Bundling the category carriers puts both independent category universes in a maximum.
 set_option linter.checkUnivs false in
-/-- Normalized additive transition diagrams. Source: sketch 42, finite-stage transitions
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Normalized additive transition diagrams. -/
 structure Diagram (I : Type w) [PartialOrder I] where
   C : I → Type u
   [category : ∀ i, Category.{v} (C i)]
@@ -58,43 +53,36 @@ attribute [instance] Diagram.category Diagram.preadditive Diagram.biproducts Dia
 
 variable {I : Type w} [PartialOrder I]
 
-/-- Pair objects. Source: sketch 42, Definition `def:pair-objects`
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Pair objects. -/
 def Pair (A : Diagram.{w, u, v} I) := Σ i, A.C i
 
-/-- A common-stage representative. Source: sketch 42, common-stage morphism representatives
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- A common-stage representative. -/
 structure Rep (A : Diagram.{w, u, v} I) (X Y : Pair A) where
   stage : I
   source_le : X.1 ≤ stage
   target_le : Y.1 ≤ stage
   arrow : (A.U source_le).obj X.2 ⟶ (A.U target_le).obj Y.2
 
-/-- Transport by the specified associators, with the inverse on the source.
-Source: sketch 42, transport (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Transport by the specified associators, with the inverse on the source. -/
 def transport {A : Diagram.{w, u, v} I} {X Y : Pair A} (r : Rep A X Y)
     {n : I} (h : r.stage ≤ n) :
     (A.U (r.source_le.trans h)).obj X.2 ⟶ (A.U (r.target_le.trans h)).obj Y.2 :=
   (A.a r.source_le h).inv.app X.2 ≫ (A.U h).map r.arrow ≫
     (A.a r.target_le h).hom.app Y.2
 
-/-- Equality after transport to a common overfield. Source: sketch 42, common-stage equality
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Equality after transport to a common overfield. -/
 def EventuallyEqual {A : Diagram.{w, u, v} I} {X Y : Pair A}
     (r s : Rep A X Y) : Prop :=
   ∃ (n : I) (h : r.stage ≤ n) (h' : s.stage ≤ n), transport r h = transport s h'
 
-/-- The actual quotient of representatives; no choice of a category is hidden in its Hom sets.
-Source: sketch 42, pair morphisms (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The actual quotient of representatives; no choice of a category is hidden in its Hom sets. -/
 def Hom (A : Diagram.{w, u, v} I) (X Y : Pair A) := Quot (@EventuallyEqual I _ A X Y)
 
-/-- The class of a representative. Source: sketch 42, pair morphisms
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The class of a representative. -/
 def repr {A : Diagram.{w, u, v} I} {X Y : Pair A} (r : Rep A X Y) : Hom A X Y :=
   Quot.mk _ r
 
-/-- Operations and laws on the explicit quotient Hom types.
-Source: sketch 42 (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Operations and laws on the explicit quotient Hom types. -/
 structure PairStructure (A : Diagram.{w, u, v} I) where
   [group : ∀ X Y : Pair A, AddCommGroup (Hom A X Y)]
   id : ∀ X : Pair A, Hom A X X
@@ -108,12 +96,10 @@ structure PairStructure (A : Diagram.{w, u, v} I) where
   comp_add : ∀ {X Y Z : Pair A} (f : Hom A X Y) (g h : Hom A Y Z),
     comp f (g + h) = comp f g + comp f h
 
-/-- The category carrier records which canonical operations are in use.
-Source: sketch 42, pair category (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The category carrier records which canonical operations are in use. -/
 def PairStructure.Obj {A : Diagram.{w, u, v} I} (_R : PairStructure A) := Pair A
 
-/-- Category structure assembled from the stated pair laws, with the actual quotient Hom.
-Source: sketch 42, composition laws (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Category structure assembled from the stated pair laws, with the actual quotient Hom. -/
 instance pairCategory {A : Diagram.{w, u, v} I} (R : PairStructure A) : Category R.Obj where
   Hom := Hom A
   id := R.id
@@ -122,21 +108,18 @@ instance pairCategory {A : Diagram.{w, u, v} I} (R : PairStructure A) : Category
   comp_id := R.comp_id
   assoc := R.assoc
 
-/-- Preadditivity assembled from the pair laws. Source: sketch 42, composition laws
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Preadditivity assembled from the pair laws. -/
 instance pairPreadditive {A : Diagram.{w, u, v} I} (R : PairStructure A) :
     Preadditive R.Obj where
   homGroup := R.group
   add_comp := fun _ _ _ ↦ R.add_comp
   comp_add := fun _ _ _ ↦ R.comp_add
 
-/-- The class map with its categorical type made explicit. Source: sketch 42, pair morphisms
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The class map with its categorical type made explicit. -/
 def PairStructure.repr {A : Diagram.{w, u, v} I} (R : PairStructure A)
     {X Y : R.Obj} (r : Rep A X Y) : X ⟶ Y := CategoryTheory.CommonStage.repr r
 
-/-- Stage functors with specified comparison isomorphisms, before imposing coherence.
-Source: sketch 42, pseudocone comparisons (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Stage functors with specified comparison isomorphisms, before imposing coherence. -/
 structure Family (A B : Diagram.{w, u, v} I) where
   φ : ∀ i, A.C i ⥤ B.C i
   [additive : ∀ i, (φ i).Additive]
@@ -144,8 +127,7 @@ structure Family (A B : Diagram.{w, u, v} I) where
 
 attribute [instance] Family.additive
 
-/-- The normalized unit and tower equations, retaining both diagrams' associators.
-Source: sketch 42, pseudocone tower (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The normalized unit and tower equations, retaining both diagrams' associators. -/
 structure Family.Coherent {A B : Diagram.{w, u, v} I} (Φ : Family A B) : Prop where
   unit : ∀ i,
     Φ.b (le_refl i) =
@@ -157,13 +139,11 @@ structure Family.Coherent {A B : Diagram.{w, u, v} I} (Φ : Family A B) : Prop w
       (B.U h').map ((Φ.b h).hom.app X) ≫
         (Φ.b h').hom.app ((A.U h).obj X) ≫ (Φ.φ k).map ((A.a h h').hom.app X)
 
-/-- The descended object formula. Source: sketch 42, pseudocone functor
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The descended object formula. -/
 def Family.obj {A B : Diagram.{w, u, v} I} (Φ : Family A B) (X : Pair A) : Pair B :=
   ⟨X.1, (Φ.φ X.1).obj X.2⟩
 
-/-- The descended representative formula, with `b` at the source and its inverse at the target.
-Source: sketch 42, pseudocone functor (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The descended representative formula, with `b` at the source and its inverse at the target. -/
 def Family.rep {A B : Diagram.{w, u, v} I} (Φ : Family A B) {X Y : Pair A}
     (r : Rep A X Y) : Rep B (Φ.obj X) (Φ.obj Y) where
   stage := r.stage
@@ -172,14 +152,12 @@ def Family.rep {A B : Diagram.{w, u, v} I} (Φ : Family A B) {X Y : Pair A}
   arrow := (Φ.b r.source_le).hom.app X.2 ≫ (Φ.φ r.stage).map r.arrow ≫
     (Φ.b r.target_le).inv.app Y.2
 
-/-- The identity family, using only canonical unitors.
-Source: sketch 42, pair universal property (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- The identity family, using only canonical unitors. -/
 def Family.identity (A : Diagram.{w, u, v} I) : Family A A where
   φ i := 𝟭 (A.C i)
   b h := (A.U h).leftUnitor ≪≫ (A.U h).rightUnitor.symm
 
-/-- Composite comparisons are obtained by whiskering the two given comparisons.
-Source: sketch 42, pair universal property (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Composite comparisons are obtained by whiskering the two given comparisons. -/
 def Family.comp {A B C : Diagram.{w, u, v} I} (Φ : Family A B) (Θ : Family B C) :
     Family A C where
   φ i := Φ.φ i ⋙ Θ.φ i
@@ -187,8 +165,7 @@ def Family.comp {A B C : Diagram.{w, u, v} I} (Φ : Family A B) (Θ : Family B C
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (Φ.b h) (Θ.φ _) ≪≫
       Functor.associator _ _ _
 
-/-- Compatible transformations are the stage naturality squares with the comparisons.
-Source: sketch 42, pseudocone morphisms (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+/-- Compatible transformations are the stage naturality squares with the comparisons. -/
 def Compatible {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
     (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) : Prop :=
   ∀ {i j} (h : i ≤ j) (X : A.C i),
@@ -196,8 +173,7 @@ def Compatible {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
       (B.U h).map ((η i).app X) ≫ (Ψ.b h).hom.app X
 
 /-- Characterization of the functor by its formulas on all objects and representatives.
-`HEq` only accommodates the displayed object equality; it imposes equality of the arrows.
-Source: sketch 42, pseudocone functor (blueprint: lem-sbc-coherent-pair-functor-descent). -/
+`HEq` only accommodates the displayed object equality; it imposes equality of the arrows. -/
 structure IsDescent {A B : Diagram.{w, u, v} I} (RA : PairStructure A) (RB : PairStructure B)
     (Φ : Family A B) (F : RA.Obj ⥤ RB.Obj) : Prop where
   obj : ∀ X, F.obj X = Φ.obj X
@@ -206,8 +182,7 @@ structure IsDescent {A B : Diagram.{w, u, v} I} (RA : PairStructure A) (RB : Pai
   additive : F.Additive
 
 /-- The component `[E, η_E,K]`, written using the literal identity transition to make its
-source and target types explicit. Source: sketch 42, pseudocone morphisms
-(blueprint: lem-sbc-coherent-pair-functor-descent). -/
+source and target types explicit. -/
 def transformationRep {A B : Diagram.{w, u, v} I} {Φ Ψ : Family A B}
     (η : ∀ i, Φ.φ i ⟶ Ψ.φ i) (X : Pair A) : Rep B (Φ.obj X) (Ψ.obj X) :=
   ⟨X.1, le_refl _, le_refl _, (B.U (le_refl X.1)).map ((η X.1).app X.2)⟩

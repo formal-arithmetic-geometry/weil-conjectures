@@ -602,13 +602,7 @@ structure Data where
   unit : NatTrans.IsMonoidal adj.mapDerivedCategoryAdjunction.unit
   counit : NatTrans.IsMonoidal adj.mapDerivedCategoryAdjunction.counit
 
-/-- Source: the K-flat derived tensor construction and its localization universal property.
-First descend the left equivalence's tensor comparison using K-flat representatives. Its
-comparison with the exact localized functor transports this strong structure. Give the right
-functor the strong right-adjoint structure. The mate identities for the quotient and localization
-comparisons identify their canonical right comparisons with monoidal mates. Composing these
-squares gives the prescribed comparisons from complexes. The unit and counit are monoidal by
-the right-adjoint construction. (auxiliary; not a blueprint node) -/
+/-- The monoidal data `Data adj` on the derived functors of the adjunction `adj` exists. -/
 theorem nonempty_data : Nonempty (Data adj) := by
   obtain ⟨l⟩ := left_data F
   let := l.homotopyMonoidal

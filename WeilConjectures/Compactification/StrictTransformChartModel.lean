@@ -38,7 +38,6 @@ chart models.
   strict transform meets the chart `Spec C_a` in `Spec C_a^st`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.strictTransformChartModel_eq`: the glued chart model
   is the strict transform.
-
 -/
 
 @[expose] public section
@@ -264,8 +263,7 @@ theorem comap_ker_baseChangeChartι {J : Ideal B} (h : I.map (algebraMap A B) = 
 
 /-- **The strict-transform chart is closed in the base-change chart**: the quotient map
 `C_a(A, B, I) → C_a^st(A, B, I)` defines a closed immersion
-`Spec C_a^st(A, B, I) ⟶ Spec C_a(A, B, I)`.
-(blueprint: `definition-strict-transform--1`) -/
+`Spec C_a^st(A, B, I) ⟶ Spec C_a(A, B, I)`. -/
 instance isClosedImmersion_specMap_strictChart (a : A) :
     IsClosedImmersion (Spec.map (CommRingCat.ofHom
       (Ideal.Quotient.mk (baseChangeChartTorsion B I a)))) :=
@@ -279,7 +277,7 @@ variable {X Y : Scheme.{u}} (I : X.IdealSheafData) (f : Y ⟶ X)
 
 /-- The data `(U, V, a)` of a chart of the strict transform of `Y` in `Y ×_X Bl_I(X)`: an affine
 open `U = Spec A` of `X`, an affine open `V = Spec B` of `Y` lying over `U` and an element
-`a ∈ I(U)`. (blueprint: `definition-strict-transform--1`, chart data) -/
+`a ∈ I(U)`. -/
 structure StrictTransformChart where
   /-- The affine open `U = Spec A` of `X`. -/
   U : X.affineOpens
@@ -304,8 +302,7 @@ attribute [local instance] algebra
 noncomputable abbrev Ring : Type u :=
   AffineBlowup.BaseChangeChart Γ(Y, c.V.1) (I.ideal c.U) c.a
 
-/-- The chart `Spec C_a(A, B, I) ⟶ Y ×_X Bl_I(X)` of the fibre product at `(U, V, a)`.
-(blueprint: `definition-strict-transform--1`, chart embeddings) -/
+/-- The chart `Spec C_a(A, B, I) ⟶ Y ×_X Bl_I(X)` of the fibre product at `(U, V, a)`. -/
 noncomputable def ι : Spec (.of c.Ring) ⟶ pullback f I.blowupMap :=
   AffineBlowup.baseChangeChartι Γ(Y, c.V.1) (I.ideal c.U) c.mem ≫
     pullbackChart I f c.U c.V c.le_preimage
@@ -345,8 +342,7 @@ lemma isPullback_pullbackChart {ρ : (I.comap f).blowup ⟶ I.blowup}
 
 /-- **The strict transform on a chart**: the strict transform of `Y` meets the chart
 `Spec C_a(A, B, I)` of `Y ×_X Bl_I(X)` in the closed subscheme `Spec C_a^st(A, B, I)` cut out by
-the `a`-power torsion. (blueprint: `definition-strict-transform--1`,
-chartwise form) -/
+the `a`-power torsion. -/
 theorem comap_ker_strictTransformι :
     (I.strictTransformι f).ker.comap c.ι = c.strictι.ker := by
   obtain ⟨ρ, hρ⟩ := I.exists_lift_blowup (t := (I.comap f).blowupMap ≫ f) (by
@@ -390,16 +386,14 @@ end StrictTransformChart
 from the chart ideals `Γ_(a) C_a(A, B, I)` of the closed subschemes
 `Spec C_a^st(A, B, I) ⊆ Spec C_a(A, B, I)`, i.e. the largest ideal sheaf whose restriction to
 every chart `Spec C_a(A, B, I)` is contained in the `a`-power torsion. Its restriction to every
-chart is the `a`-power torsion (`comap_strictTransformChartModel`).
-(blueprint: `definition-strict-transform--1`) -/
+chart is the `a`-power torsion (`comap_strictTransformChartModel`). -/
 noncomputable def strictTransformChartModel : (pullback f I.blowupMap).IdealSheafData :=
   sSup {J | ∀ c : I.StrictTransformChart f, J.comap c.ι ≤ c.strictι.ker}
 
 /-- **The global strict transform is the closed chart model**: the ideal sheaf glued from the
 chart ideals `Γ_(a) C_a(A, B, I)` is the ideal of the strict transform of `Y` in
 `Y ×_X Bl_I(X)`; in particular the chart model is a closed subscheme of `Y ×_X Bl_I(X)` which
-agrees with the strict transform.
-(blueprint: `definition-strict-transform--1`) -/
+agrees with the strict transform. -/
 theorem strictTransformChartModel_eq :
     I.strictTransformChartModel f = (I.strictTransformι f).ker := by
   refine IsGreatest.csSup_eq ⟨fun c ↦ (c.comap_ker_strictTransformι).le, fun J hJ ↦ ?_⟩
@@ -409,8 +403,7 @@ theorem strictTransformChartModel_eq :
   exact hJ c
 
 /-- The restriction of the chart model of the strict transform to the chart `Spec C_a(A, B, I)`
-is the ideal of `Spec C_a^st(A, B, I)`, the `a`-power torsion.
-(blueprint: `definition-strict-transform--1`) -/
+is the ideal of `Spec C_a^st(A, B, I)`, the `a`-power torsion. -/
 theorem comap_strictTransformChartModel (c : I.StrictTransformChart f) :
     (I.strictTransformChartModel f).comap c.ι = c.strictι.ker := by
   rw [strictTransformChartModel_eq, c.comap_ker_strictTransformι]
@@ -418,8 +411,7 @@ theorem comap_strictTransformChartModel (c : I.StrictTransformChart f) :
 /-- **Cocycle for strict-transform charts**: on the overlap of two charts `Spec C_a(A, B, I)` and
 `Spec C_{a'}(A', B', I)` of `Y ×_X Bl_I(X)`, the closed subschemes `Spec C_a^st(A, B, I)` and
 `Spec C_{a'}^st(A', B', I)` agree, i.e. the two chart ideals have the same restriction to the
-overlap. Hence the chart models glue (to `strictTransformChartModel`).
-(blueprint: `definition-strict-transform--1`) -/
+overlap. Hence the chart models glue (to `strictTransformChartModel`). -/
 theorem StrictTransformChart.comap_ker_strictι_fst_eq (c c' : I.StrictTransformChart f) :
     c.strictι.ker.comap (pullback.fst c.ι c'.ι) =
       c'.strictι.ker.comap (pullback.snd c.ι c'.ι) := by

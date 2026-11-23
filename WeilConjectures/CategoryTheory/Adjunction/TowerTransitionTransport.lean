@@ -14,7 +14,7 @@ Given adjunctions `E₀ ⊣ R₀`, `E₁ ⊣ R₁` with `Q ⋙ R₁ ≅ R₀`, t
 two such configurations, compatible with the units and with the comparison isomorphisms,
 intertwine the transitions.
 
-(auxiliary; not a blueprint node).
+.
 -/
 
 @[expose] public section
@@ -33,11 +33,11 @@ variable {A A' B₀ B₁ B₀' B₁' : Type*} [Category A] [Category A'] [Catego
   {E₁' : A' ⥤ B₁'} {R₁' : B₁' ⥤ A'} (adj₁' : E₁' ⊣ R₁')
   {Q : B₀ ⥤ B₁} {Q' : B₀' ⥤ B₁'} (c : Q ⋙ R₁ ≅ R₀) (c' : Q' ⋙ R₁' ≅ R₀')
 
-/-- The adjoint of the unit followed by the comparison. (auxiliary; not a blueprint node). -/
+/-- The adjoint of the unit followed by the comparison. -/
 def towerReduction (K : A) : E₁.obj K ⟶ Q.obj (E₀.obj K) :=
   (adj₁.homEquiv _ _).symm (adj₀.unit.app K ≫ c.inv.app (E₀.obj K))
 
-/-- The induced transition. (auxiliary; not a blueprint node). -/
+/-- The induced transition. -/
 def towerTransition (K : A) : R₁.obj (E₁.obj K) ⟶ R₀.obj (E₀.obj K) :=
   R₁.map (towerReduction adj₀ adj₁ c K) ≫ c.hom.app (E₀.obj K)
 
@@ -46,17 +46,13 @@ variable (Ψ : A' ⥤ A) (M₀ : B₀' ⥤ B₀) (M₁ : B₁' ⥤ B₁)
   (s : Q' ⋙ M₁ ≅ M₀ ⋙ Q)
   (β₀ : Ψ ⋙ E₀ ≅ E₀' ⋙ M₀) (β₁ : Ψ ⋙ E₁ ≅ E₁' ⋙ M₁)
 
-/-- The base change comparison of the composite functors.
-(auxiliary; not a blueprint node). -/
+/-- The base change comparison of the composite functors. -/
 def towerBaseChange (σ : R₀' ⋙ Ψ ≅ M₀ ⋙ R₀) (β : Ψ ⋙ E₀ ≅ E₀' ⋙ M₀) (K : A') :
     Ψ.obj (R₀'.obj (E₀'.obj K)) ≅ R₀.obj (E₀.obj (Ψ.obj K)) :=
   σ.app (E₀'.obj K) ≪≫ R₀.mapIso (β.app K).symm
 
 include adj₀ adj₁ adj₀' adj₁' in
-/-- Base change intertwines the transitions. (auxiliary; not a blueprint node).
-Proof: transpose the reduction maps along `E₁ ⊣ R₁`. The unit compatibilities of the base
-change isomorphisms and the coherence of the comparison isomorphisms identify the two
-adjoints; whiskering by `R₁` and the comparison gives the transitions. -/
+/-- Base change intertwines the transitions. -/
 theorem towerTransition_baseChange
     (hβ₀ : ∀ K : A', Ψ.map (adj₀'.unit.app K) ≫ σ₀.hom.app (E₀'.obj K) =
       adj₀.unit.app (Ψ.obj K) ≫ R₀.map (β₀.hom.app K))

@@ -16,8 +16,7 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-! Coherence comparisons for constant left-module inverse images.
-Source: Stacks Project, Sites, Tags 00YV and 00XZ (blueprint:
-lem-pe-constant-left-module-inverse-image).
+Source: Stacks Project, Sites, Tags 00YV and 00XZ.
 -/
 
 -- After pruning, this module only keeps private declarations.

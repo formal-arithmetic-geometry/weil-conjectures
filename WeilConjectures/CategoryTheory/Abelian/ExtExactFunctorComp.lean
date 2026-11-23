@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 /-!
 # Ext composition comparison
 
-Source: Stacks Project, derived.tex, Tag 015F; Mathlib Ext.Map.
-(blueprint: `lem-weil-pbc-ext-exact-functor-composition-comparison`)
+Source: Stacks Project, derived.tex, Tag 015F.
 -/
 
 @[expose] public section
@@ -41,19 +40,9 @@ private lemma singleComparison_hom {A B : Type*} [Category A] [Category B] [Abel
     Functor.whiskerRight_app, NatTrans.id_app, Category.comp_id, Category.id_comp]
   erw [Category.id_comp]
 /-- Exact functors respect composition after transport by a natural isomorphism.
-Source: Stacks Project, derived.tex, Tag 015F (lemma-right-derived-exact-functor:
+Source: Stacks Project, derived.tex, Tag 015F (:
 every complex computes an exact functor), and Mathlib Ext.Map's definition through
-localized shifted morphisms.
-
-Proof: identify Ext with shifted morphisms between complexes concentrated in degree zero.
-The induced functor for F followed by G agrees with that for their composite, through
-its canonical comparison. The natural isomorphism e induces an isomorphism on complexes
-and their localization. Its naturality for the shifted morphism representing x says
-that mapping x by H and then e at Y equals e at X followed by mapping x by F then G.
-The degree-zero components are precisely Ext.mk₀ of e.hom.app. The comparison with
-single complexes and the shift isomorphisms cancel on both sides, giving the equality.
-(blueprint: `lem-weil-pbc-ext-exact-functor-composition-comparison`)
--/
+localized shifted morphisms. -/
 theorem exactFunctorCompositionComparison
     {C D E : Type*} [Category C] [Category D] [Category E]
     [Abelian C] [Abelian D] [Abelian E]

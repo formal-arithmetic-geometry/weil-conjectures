@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ContinuousCocontinuousRin
 
 /-! # Geometric restriction for the twisted action site
 
-Source: the agent-formulated twisted variant of Stacks Tag 00W0, original steps 6.
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -110,27 +112,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 omit [s.functor.IsContinuous J J] in
 /-- Geometric restriction and its ordinary module-restriction adjunction.
-
-Source: original step 6 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group; Stacks 00XO and 04IE
-(blueprint: lem-sf-twisted-action-geometric-restriction).
-
-Proof: apply continuous_cocontinuous_ringed_restriction to the coefficient ring
-on the fixed action site, using the supplied cocontinuity of inclusion. This gives
-the set adjunction and the module adjunction for the literally restricted ring.
-The heterogeneous sectionwise identity of its structural map identifies that map
-with transport along its inverse-image equality: after equality induction every
-component is the identity. Now transport the source coefficient ring through
-coefficientRestriction. Postcompose the structural map with that ring isomorphism;
-its ring-operation laws follow from those of the original map and the ring map.
-Precompose the module direct image with restriction of scalars in the opposite
-direction. This leaves its underlying set functor fixed, and its linearity formula
-is the original one with the scalar action transported. Scalar restriction along
-a ring isomorphism is an equivalence, obtained from Mathlib's module pushforward
-equivalence on the identity site. Compose the original module adjunction with the
-inverse scalar-equivalence adjunction to get ordinary module restriction as left
-adjoint. The structural map is invertible and has exactly the displayed formula.
-No fixed-pair equivalence, underlying Site construction, or nonempty site is used. -/
+Source: Stacks 00XO and 04IE. -/
 theorem geometricRestriction [HasPullbacks C] (S : Site J s R a) :
     letI := S.category
     letI := S.inclusion_continuous

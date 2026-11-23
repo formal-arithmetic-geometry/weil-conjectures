@@ -19,8 +19,7 @@ namespace CategoryTheory
 Source: Stacks Project, Derived Categories, Lemma 13.34.2, Tag 07KC.
 The construction takes termwise products of representative complexes and descends
 through the derived localization; exactness of products makes products of
-quasi-isomorphisms quasi-isomorphisms.
-(blueprint: lem-weil-derived-countable-products-existence) -/
+quasi-isomorphisms quasi-isomorphisms. -/
 theorem derivedCategory_hasCountableProducts
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableProducts A] [CountableAB4Star A] :

@@ -74,8 +74,7 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Ordinary chain evaluation under exact ringed forgetting
 
-Source: Stacks 08J9, 070I; steps 5--8 of ringed tensor transposition
-(blueprint: lem-sf-ringed-forget-chain-uncurry).
+Source: Stacks 08J9, 070I.
 -/
 
 -- After pruning, this module only keeps private declarations.

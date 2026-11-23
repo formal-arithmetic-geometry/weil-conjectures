@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
 /-- Intermediate algebraic-object equivalence component.
-(blueprint: lem-weil-pbc-sheaf-algebraic-structures-abelian-component)
 Source: Stacks Project Section 00YR, quadruple description and Proposition 00YV.
 The construction of sectionwise abelian-group objects and its inverse, including
 the morphism criterion, is proved by evaluating structure maps on sections and

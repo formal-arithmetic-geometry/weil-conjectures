@@ -26,15 +26,12 @@ Let `A ⥤ B ⥤ C` be left exact additive functors such that `F` sends injectiv
 spectral sequence with `E₂`-page `R^p G (R^q F X)` abutting to `R^{p + q} (F ⋙ G) X`.
 
 Convergence is expressed through `CategoryTheory.SpectralSequence.AbutsTo` of
-`WeilConjectures/Mathlib/Algebra/Homology/SpectralSequence/Basic.lean`; the blueprint's
-`det-def-groth-ss` describes both the acyclicity hypothesis on the pair `(F, G)` and the image
-filtration attached to a first quadrant double complex, and the second half of that subsection
-is what `SpectralSequence.Abutment` records.
+`WeilConjectures/Mathlib/Algebra/Homology/SpectralSequence/Basic.lean`.
+The structure `SpectralSequence.Abutment` records the abutment.
 
 ## The construction
 
-The blueprint builds the spectral sequence from a Cartan–Eilenberg resolution of `F(I)`, `I` an
-injective resolution of `X`. We use instead the equivalent construction through the canonical
+The spectral sequence is constructed through the canonical
 t-structure on the bounded below derived category `D⁺(B)`, for which Mathlib provides spectral
 objects and their spectral sequences. Let `K = RF(X) = R⁺F(X[0]) ∈ D⁺(B)`. To `a ≤ b` in `EInt`
 and `n : ℤ` we attach `Hⁿ(RG(τ_{≥ a} τ_{< b} K))`; this is a first quadrant spectral object in
@@ -42,9 +39,7 @@ and `n : ℤ` we attach `Hⁿ(RG(τ_{≥ a} τ_{< b} K))`; this is a first quadr
 spectral sequence (`Functor.grothendieckSpectralSequence`). Its `E₂`-terms are
 `H^{p+q}(RG(τ_{≥ q} τ_{< q+1} K)) = H^{p+q}(RG((R^q F X)[-q])) = R^p G (R^q F X)`, and it
 converges to `Hⁿ(RG(K))`, which is `Hⁿ(G(F(I))) = R^n (F ⋙ G) X` because `F(I)` is a complex
-of `G`-acyclic objects. The two filtrations of the Cartan–Eilenberg double complex in the
-blueprint are replaced by the truncation filtration (giving the `E₂`-page) and the
-identification of the abutment through acyclic resolutions.
+of `G`-acyclic objects.
 
 ## Main definitions
 
@@ -61,8 +56,7 @@ identification of the abutment through acyclic resolutions.
 - `CategoryTheory.Functor.grothendieckSpectralSequencePageTwoIso`: `E₂^{p,q} ≅ R^p G (R^q F X)`.
 - `CategoryTheory.Functor.grothendieckBottomEdgeMap`,
   `CategoryTheory.Functor.grothendieckLeftEdgeMap`: the edge maps
-  `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)`, natural in `X`
-  (`lem-sp-grothendieck-edge-maps`).
+  `R^n G (F X) ⟶ R^n (F ⋙ G) X ⟶ G (R^n F X)`, natural in `X`.
 - `CategoryTheory.Functor.grothendieckE₂BaseChange`: the base change morphism
   `γ (R^p G (R^q F X)) ⟶ R^p G' (R^q F' (α X))` on `E₂`-terms.
 - `CategoryTheory.Functor.grothendieckSpectralObjectBaseChange`: the base change morphism of the
@@ -77,7 +71,7 @@ identification of the abutment through acyclic resolutions.
 - `CategoryTheory.Functor.exists_grothendieckSpectralSequence`: the Grothendieck spectral
   sequence of a composable pair with acyclicity.
 - `CategoryTheory.Functor.exists_grothendieckSpectralObject_baseChange`: compatibility with base
-  change along exact functors (`thm-sp-grothendieck-base-change`).
+  change along exact functors.
 -/
 
 @[expose] public section
@@ -97,8 +91,7 @@ every injective object `I` of `A` to a `G`-acyclic object of `B`, that is, one a
 higher right derived functors `R^q G` for `q > 0` vanish. This is what makes an injective
 resolution of `X : A` compute `R^n (F ⋙ G) X` after applying `F`, and hence what makes the
 Grothendieck spectral sequence of `Functor.exists_grothendieckSpectralSequence` exist.
-
-(blueprint: `det-def-groth-ss`) -/
+-/
 def Functor.IsAcyclicComposablePair (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] : Prop :=
   ∀ (I : A) [Injective I] (q : ℕ), 0 < q → IsZero ((G.rightDerived q).obj (F.obj I))
 
@@ -114,9 +107,9 @@ theorem Functor.isAcyclicComposablePair_of_preservesInjectiveObjects (F : A ⥤ 
 omit [IsGrothendieckAbelian.{v₁} A] in
 /-- **The acyclicity hypothesis for a right adjoint of an exact functor.** If `F : A ⥤ B` has a
 left adjoint `u` which is exact (it is enough that `u` preserves finite limits), then `F` preserves
-injective objects (`lem-sp-right-adjoint-preserves-injectives`), so `(F, G)` is a composable pair
+injective objects, so `(F, G)` is a composable pair
 with acyclicity for every `G`. This is the situation of `F = f_*`, `u = f⁻¹` for a morphism of
-sites `f` (Step 1 of the proof of `det-thm-groth-ss`). -/
+sites `f`. -/
 theorem Adjunction.isAcyclicComposablePair {u : B ⥤ A} {F : A ⥤ B} (adj : u ⊣ F)
     [PreservesFiniteLimits u] (G : B ⥤ C) [F.Additive] [G.Additive] :
     F.IsAcyclicComposablePair G :=
@@ -246,11 +239,10 @@ transformation in `X : A`. Its source `H^n(RG(τ_{≥ 0} τ_{< 1} RF(X)))` is `R
 is left exact (`Functor.grothendieckBottomEdgeSourceIso`) and its target `H^n(RG(RF(X)))` is
 `R^n (F ⋙ G) X` for a composable pair with acyclicity
 (`Functor.grothendieckSpectralObjectHBotTopIso`); through these natural identifications it
-gives the blueprint edge map `Functor.grothendieckBottomEdgeMap`. It is the composite
+gives the edge map `Functor.grothendieckBottomEdgeMap`. It is the composite
 `E₂^{n,0} ↠ E∞^{n,0} = Fⁿ Hⁿ ↪ Hⁿ`, its image being the last step of the abutment filtration
 (`Abelian.SpectralObject.imageSubobject_bottomEdge`).
-
-(blueprint: `lem-sp-grothendieck-edge-maps`) -/
+-/
 noncomputable def grothendieckBottomEdge (n : ℤ) :
     F.grothendieckSpectralObjectFunctor G ⋙ Abelian.SpectralObject.hFunctor n
         (mk₁ (homOfLE (show ((0 : ℤ) : EInt) ≤ ((1 : ℤ) : EInt) by simp))) ⟶
@@ -265,9 +257,8 @@ transformation in `X : A`. Its source `H^n(RG(RF(X)))` is `R^n (F ⋙ G) X` for 
 with acyclicity (`Functor.grothendieckSpectralObjectHBotTopIso`) and its target
 `H^n(RG(τ_{≥ n} τ_{< n+1} RF(X)))` is `G (R^n F X)` when `G` is left exact
 (`Functor.grothendieckLeftEdgeTargetIso`); through these natural identifications it gives the
-blueprint edge map `Functor.grothendieckLeftEdgeMap`.
-
-(blueprint: `lem-sp-grothendieck-edge-maps`) -/
+edge map `Functor.grothendieckLeftEdgeMap`.
+-/
 noncomputable def grothendieckLeftEdge (n : ℤ) :
     F.grothendieckSpectralObjectFunctor G ⋙ Abelian.SpectralObject.hFunctor n
         (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))) ⟶
@@ -400,8 +391,7 @@ sequence, natural in `X`. It is the composite `E₂^{n,0} ↠ E∞^{n,0} = Fⁿ 
 
 For `F = f_*` and `G = h_*` along morphisms of sites `X ⟶ Y ⟶ Z`, this is the edge map
 `R^n h_* (f_* 𝓕) ⟶ R^n (h ∘ f)_* 𝓕`.
-
-(blueprint: `lem-sp-grothendieck-edge-maps`) -/
+-/
 noncomputable def grothendieckBottomEdgeMap [PreservesFiniteLimits F] [PreservesFiniteLimits G]
     (hFG : F.IsAcyclicComposablePair G) (n : ℕ) :
     F ⋙ G.rightDerived n ⟶ (F ⋙ G).rightDerived n :=
@@ -415,8 +405,7 @@ natural in `X`. It is the composite `Hⁿ ↠ Hⁿ / F¹ Hⁿ = E∞^{0,n} ↪ E
 
 For `F = f_*` and `G = h_*` along morphisms of sites `X ⟶ Y ⟶ Z`, this is the edge map
 `R^n (h ∘ f)_* 𝓕 ⟶ h_* (R^n f_* 𝓕)`.
-
-(blueprint: `lem-sp-grothendieck-edge-maps`) -/
+-/
 noncomputable def grothendieckLeftEdgeMap [PreservesFiniteLimits G]
     (hFG : F.IsAcyclicComposablePair G) (n : ℕ) :
     (F ⋙ G).rightDerived n ⟶ F.rightDerived n ⋙ G :=
@@ -720,8 +709,7 @@ cartesian square, which are exact.
 The acyclicity hypotheses are only needed to identify the abutments of the two spectral sequences
 with `R^n (F ⋙ G) X` and `R^n (F' ⋙ G') (α X)`; the construction of the morphism does not use
 them.
-
-(blueprint: `thm-sp-grothendieck-base-change`) -/
+-/
 theorem exists_grothendieckSpectralObject_baseChange [PreservesFiniteLimits F]
     [PreservesFiniteLimits G] [PreservesFiniteLimits F'] [PreservesFiniteLimits G']
     (_hFG : F.IsAcyclicComposablePair G) (_hFG' : F'.IsAcyclicComposablePair G')
@@ -767,8 +755,7 @@ For `A` the abelian sheaves on a site `X`, `F = f_*` and `G = h_*` along morphis
 `R^p h_* R^q f_* F ⟹ R^{p + q} (h ∘ f)_* F`. Taking `Z` to be the punctual site, so that
 `h_* = Γ(Y, -)`, it specializes further to the Leray spectral sequence
 `H^p(Y, R^q f_* F) ⟹ H^{p + q}(X, F)`.
-
-(blueprint: `det-thm-groth-ss`) -/
+-/
 theorem Functor.exists_grothendieckSpectralSequence (F : A ⥤ B) (G : B ⥤ C)
     [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteLimits G]
     (hFG : F.IsAcyclicComposablePair G) (X : A) :

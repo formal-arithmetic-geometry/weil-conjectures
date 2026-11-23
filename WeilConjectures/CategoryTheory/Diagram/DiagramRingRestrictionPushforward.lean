@@ -138,9 +138,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-!
 # Coefficient restriction and direct image on derived diagram topoi
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E,
-lemma-derived-pushforward-composition, applied on the small diagram sites
-(blueprint: lem-pur-diagram-ring-restriction-pushforward).
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E, applied on the small diagram sites.
 
 Ring diagrams are represented by ring sheaves on `diagramSiteTopology J C K`.
 Their module sheaves have precisely the semilinear horizontal transition maps.
@@ -163,8 +161,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- Forget module structure to the underlying sheaf of sets on a diagram site.
 This is only the composite of the existing forgetful functors.
-Source: Stacks Project, Modules on Sites, Tag 03DA
-(blueprint: lem-pur-diagram-ring-restriction-pushforward). -/
+Source: Stacks Project, Modules on Sites, Tag 03DA. -/
 noncomputable abbrev diagramCoefficientUnderlying
     {C : Type u} [SmallCategory C] {K : GrothendieckTopology C}
     (R : Sheaf K RingCat.{u}) :=

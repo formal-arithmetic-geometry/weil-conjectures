@@ -49,8 +49,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # Derived direct images for subterminal slices
 
-Source: Stacks Project, Tags 03CE, 08DG, 08FI and 09T5
-(blueprint: lem-sp-subterminal-derived-image-calculus).
+Source: Stacks Project, Tags 03CE, 08DG, 08FI and 09T5.
 
 The auxiliary records package chosen derived functors with their localization comparisons.
 Every functor on module sheaves is the existing Mathlib functor, including its scalar map.
@@ -67,8 +66,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.SubterminalImageCalculus
 
-/-- Pushforward acts additively componentwise. Source: Stacks 03CE, module specialization
-(blueprint: lem-sp-subterminal-derived-image-calculus). -/
+/-- Pushforward acts additively componentwise. Source: Stacks 03CE, module specialization. -/
 instance pushforwardAdditive
     {C : Type a} [Category.{va} C] {D : Type b} [Category.{vb} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -79,21 +77,20 @@ instance pushforwardAdditive
   map_add := rfl
 
 /-- Restriction is the additive pushforward along the forgetful functor.
-Source: Stacks 03CE (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03CE. -/
 instance overAdditive {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) (Z : C) :
     (SheafOfModules.overFunctor.{w} R Z).Additive := pushforwardAdditive (𝟙 _)
 
 /-- Relocalization is additive on sectionwise maps.
-Source: Stacks 03DH (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03DH. -/
 instance overMapAdditive {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) {X Y : C} (f : X ⟶ Y) :
     (SheafOfModules.overMap.{w} R f).Additive :=
   pushforwardAdditive (Sheaf.pushforwardOverMapIso R f).inv
 
 /-- A chosen derived restriction/direct-image adjunction, normalized on complexes.
-Source: Stacks 08FI, 070I, 070K and 09T5
-(blueprint: lem-sp-subterminal-derived-image-calculus).
+Source: Stacks 08FI, 070I, 070K and 09T5.
 The two preservation fields and two resolution fields are assertions, not assumptions
 on the site. The comparison `qG` computes direct image on K-injective complexes.
 The last field fixes the derived adjunction to the ordinary chain-map transpose. -/
@@ -126,13 +123,13 @@ structure DerivedPair
 
 /-- The actual sectionwise right adjoint, evaluating at `Z × C → Z` (the product order
 used by Mathlib's `Over.star`). The scalar map is restriction along the other projection.
-Source: Stacks 03CE (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03CE. -/
 abbrev direct {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{max u r}) (Z : C) :=
   SheafOfModules.pushforward.{max u r} (SheafOfModules.pushforwardOver (R := R) Z)
 
 /-- The overlap map is the transpose of the restricted counit.
-Source: Stacks 08DG (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 08DG. -/
 def overlap {A : Type a} [Category.{va} A]
     {B : Type b} [Category.{vb} B] {D : Type w} [Category.{r} D]
     {f : A ⥤ B} {g : B ⥤ A} {h : A ⥤ D} {k : D ⥤ A} {t : B ⥤ D}
@@ -141,18 +138,18 @@ def overlap {A : Type a} [Category.{va} A]
   adjW.homEquiv _ _ (comp.hom.app (g.obj X) ≫ t.map (adj.counit.app X))
 
 /-- The forgetful change from commutative ring sheaves to ring sheaves.
-Source: Stacks 03CE (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03CE. -/
 abbrev ring {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) : Sheaf J RingCat.{max u r} :=
   (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
 
 /-- The recorded module category, with coefficient and site universes both retained.
-Source: Stacks 03CE (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03CE. -/
 abbrev modules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) := ringedSiteModules.{max u r} (ring R)
 
 /-- The recorded module category on the localized ringed site.
-Source: Stacks 03CE (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03CE. -/
 abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u r}) (Z : C) :=
   ringedSiteModules.{max u r} ((ring.{u, r} R).over Z)
@@ -160,7 +157,7 @@ abbrev sliceModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 set_option synthInstance.maxHeartbeats 100000 in
 -- Additivity of the composite restriction functor is found by a deep search.
 /-- The sectionwise identity for iterated restriction, on complexes.
-Source: Stacks 03DH (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03DH. -/
 def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max u r})
     {X Y : C} (f : X ⟶ Y) :
@@ -173,7 +170,7 @@ def restrictionComp {C : Type u} [SmallCategory C] [HasFiniteLimits C]
 universe d vd wd
 
 /-- Compatibility of iterated derived restriction with the termwise product comparison.
-Source: Stacks 03DH and 08DG (blueprint: lem-sp-subterminal-derived-image-calculus). -/
+Source: Stacks 03DH and 08DG. -/
 def CompositionNormalization
     {A : Type a} [Category.{va} A] [Abelian A]
     {B : Type b} [Category.{vb} B] [Abelian B]
@@ -197,8 +194,7 @@ def CompositionNormalization
 universe q0 qU qV qW v0 vU vV vW
 
 /-- The natural comparison isomorphisms and their canonical mate equations.
-Source: Stacks 08DG and 03CE (blueprint: lem-sp-subterminal-derived-image-calculus).
-This auxiliary record lists exactly the comparison and overlap assertions of the node.
+Source: Stacks 08DG and 03CE.
 The six final laws are the two unit identities, two cross identities and two W identities. -/
 structure Comparisons
     {D0 : Type q0} [Category.{v0} D0] {DU : Type qU} [Category.{vU} DU]

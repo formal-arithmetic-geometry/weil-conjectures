@@ -23,15 +23,12 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 /-!
 # Cofinal subsequence comparison of strict Roos complexes
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941, lemma-derived-limit-is-ok;
-More on Algebra, Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps.
-The strict cochain refinement is the nine-step agent proof of
-(blueprint: lem-fix-cofinal-roos-restriction).
-
 Positive indices are encoded by their predecessors. Thus an order embedding `φ`
-represents the positive-index function `n + 1 ↦ φ n + 1`. The two product maps
-are real constructions; the theorem specifies one family of cone maps by both
-coordinates, so its existential quantifier leaves no choice of cone completion.
+represents the positive-index function `n + 1 ↦ φ n + 1`.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0941; More on Algebra, Tag 0H9K.
 -/
 
 @[expose] public section
@@ -45,23 +42,20 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.CofinalRoos
 
 /-- Restriction of complexes of strict towers along an increasing subsequence.
-Source: Stacks Tag 0H9K, indices `m_n`
-(blueprint: lem-fix-cofinal-roos-restriction). -/
+Source: Stacks Tag 0H9K, indices `m_n`. -/
 abbrev restriction (A : Type u) [Category.{v} A] [Abelian A] (φ : ℕ ↪o ℕ) :=
   ((Functor.whiskeringLeft ℕᵒᵖ ℕᵒᵖ A).obj φ.monotone.functor.op).mapHomologicalComplex
     (ComplexShape.up ℤ)
 
 /-- Coordinate selection `a_φ` on the source product of `1-s`.
-Source: Stacks Tag 0H9K, map φ′ with identity component maps
-(blueprint: lem-fix-cofinal-roos-restriction). -/
+Source: Stacks Tag 0H9K, map φ′ with identity component maps. -/
 noncomputable def selection {A : Type u} [Category.{v} A] [Abelian A]
     [HasCountableProducts A] (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (φ : ℕ ↪o ℕ) :
     roosP X ⟶ roosP ((restriction A φ).obj X) :=
   Pi.lift (fun n ↦ Pi.π (fun i : ℕ ↦ X.asFunctor.obj (op i)) (φ n))
 
 /-- Finite-block summation `b_φ`: the summand `k` has original index `φ n + k`.
-Source: Stacks Tag 0H9K, map φ″ with identity component maps
-(blueprint: lem-fix-cofinal-roos-restriction). -/
+Source: Stacks Tag 0H9K, map φ″ with identity component maps. -/
 noncomputable def block {A : Type u} [Category.{v} A] [Abelian A]
     [HasCountableProducts A] (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (φ : ℕ ↪o ℕ) :
     roosP X ⟶ roosP ((restriction A φ).obj X) :=

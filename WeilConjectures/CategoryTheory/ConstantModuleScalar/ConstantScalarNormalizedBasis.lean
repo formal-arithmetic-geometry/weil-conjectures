@@ -230,21 +230,8 @@ end Normalized
 
 /-- The scalar-unit inclusions are finite-biproduct inclusions with their prescribed
 pure-tensor representatives on every unbounded complex.
-Source: Stacks 03CY, 03CZ and 07A6; finite-coefficient transport Steps 1 and 3
-(blueprint: lem-pur-constant-scalar-normalized-basis).
-Proof: sheafify the basis of B over A and its dual coordinate functionals. They give
-mutually inverse maps between restricted tensor extension of M and a finite power
-of M. Define each inclusion as the scalar unit followed by multiplication by its
-basis vector; the adjunction formula makes this precisely x maps to b_a tensor x.
-The coordinate functional sends c tensor x to q_a(c)x. Tensor balancing proves
-linearity, including for locally constant coefficient sections. The basis expansion
-and Kronecker identities prove both finite-matrix identities before sheafification;
-the universal property of sheafification preserves them. All maps are natural in M,
-so they commute with differentials. Apply the exact localization to these cochain
-maps and their matrix identities. The localized unit and both exact-functor
-factorizations yield exactly the last equation below. Transport the matrix
-identities along Q.objObjPreimageIso to arbitrary derived objects. The empty
-basis gives the zero object and the same empty-sum identity. -/
+Source: Stacks 03CY, 03CZ and 07A6.
+-/
 theorem normalized_basis
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C)

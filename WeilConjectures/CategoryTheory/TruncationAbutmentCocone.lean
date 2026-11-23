@@ -21,20 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Canonical truncation maps form a normalized diagonal cocone whose degree-zero
-component is invertible.
-Source: Stacks Tag 05TC (2), and truncation spectral sequence blueprint step 5.
-(blueprint: lem-sp-truncation-abutment-cocone)
-
-Proof: Set H to the cohomology of RF(K), j to the inverse bridge followed by
-RF of the truncation inclusion, and c to the degree-zero component of j.
-The inclusion tau<=n K -> K induces an isomorphism in degree n by 05TC (2);
-transport this isomorphism through the bridge to obtain invertibility of c.
-For the cocone equation, substitute the definition of alpha. The adjacent
-bridge and inverse bridge cancel. Functoriality reduces the result to the
-transition followed by the truncation inclusion being the preceding inclusion.
-Iterate this equation p times for p>=0. At p=0 the normalization is the
-definition of c; the successor step uses the incoming-alpha recursion.
-Integer transports respect these compositions by proof irrelevance. -/
+component is invertible. Source: Stacks Tag 05TC (2). -/
 theorem truncation_abutment_cocone
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]

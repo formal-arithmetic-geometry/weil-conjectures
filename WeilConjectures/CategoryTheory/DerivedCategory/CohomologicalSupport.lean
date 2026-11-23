@@ -12,9 +12,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructur
 # The cohomological support of an object of a derived category
 
 For an abelian category `C` and `K : D(C)`, the *cohomological support* of `K` is the set of
-degrees `r ∈ ℤ` in which the cohomology object `Hʳ(K)` does not vanish (blueprint
-`def-weil-cohomological-support`). For the small pro-étale site `C = Sh(Y_proét, Λ)` the
-cohomology objects are the cohomology sheaves `ℋʳ(K)` of the blueprint.
+degrees `r ∈ ℤ` in which the cohomology object `Hʳ(K)` does not vanish. For the small pro-étale
+site `C = Sh(Y_proét, Λ)` the cohomology objects are the cohomology sheaves `ℋʳ(K)`.
 
 ## Main definitions
 
@@ -27,7 +26,6 @@ cohomology objects are the cohomology sheaves `ℋʳ(K)` of the blueprint.
 - `DerivedCategory.bounded_iff_exists_cohomologicalSupport_subset_Icc`: `K` is bounded exactly
   when its support lies in some interval.
 - `DerivedCategory.cohomologicalSupport_shift`: shifting by `n` translates the support by `-n`.
-
 -/
 
 @[expose] public section
@@ -40,7 +38,7 @@ namespace DerivedCategory
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
-/-- Blueprint `def-weil-cohomological-support`: Cohomological support.
+/-- Cohomological support.
 
 The *cohomological support* of `K : D(C)` is the set of degrees in which its cohomology does not
 vanish: `Supp_coh(K) = {r ∈ ℤ | Hʳ(K) ≠ 0}`. -/

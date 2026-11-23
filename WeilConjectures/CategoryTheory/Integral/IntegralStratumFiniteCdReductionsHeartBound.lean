@@ -13,11 +13,6 @@ public import WeilConjectures.CategoryTheory.Integral.IntegralStratumFiniteCdRed
 public import WeilConjectures.CategoryTheory.Integral.IntegralStratumFiniteCdReductionsSectionsFromData
 
 /-! Heart-level section bound for the continuous integral coefficient.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
-
-The proof transports the continuous coefficient to the normalized integral coefficient,
-uses the finite local two-term resolution and the integral dual-torsion heart theorem,
-and transports the resulting section bound back.
 -/
 
 @[expose] public noncomputable section
@@ -33,26 +28,11 @@ attribute [local instance 20000] HasDerivedCategory.ofIsGrothendieckAbelian
 namespace CategoryTheory
 
 /-- Heart-level dual-torsion section bound for the continuous integral coefficient.
-Source: blueprint latest, `part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the dual-tensor step (Tor amplitude [0,1] of `L^∨`, then `RΓ(S,-)` raises degrees by
-at most `cd_ℓ(S)`); Stacks Tags 08JJ and 099Y.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
+Source: Stacks Tags 08JJ and 099Y.
 
 The hypothesis `hD` pins `D` to `stratumModuleDual _ S L = RHom(L[0], A[0])`; the
 statement is false for an arbitrary object `D` (take `D = A[0]⟦10⟧` and `F` the
-constant sheaf `A/ℓ` on a nonempty `S`: then `H^{-10}` is `H^0(S, A/ℓ) ≠ 0`).
-
-Proof plan: choose the finite local free resolution supplied by `hL` and form its
-derived dual `D`.  On each finite local chart, the dual is a two-term complex of
-finite free modules, so tensoring it with a classical locally ell-power-torsion
-heart object preserves the hypotheses of `integral_dual_torsion_heart_sections`.
-That theorem gives vanishing below degree zero and above `s+1`; the bound on
-`cohomologicalDimension` supplies the displayed value `s`.  Descent along the
-finite local model transports the chartwise estimate to `stratumModuleDerivedSections`.
-The continuous coefficient/action comparison is realized by equality of the bundled
-ring presentations, obtained from the equality of their coefficient topologies.
--/
+constant sheaf `A/ℓ` on a nonempty `S`: then `H^{-10}` is `H^0(S, A/ℓ) ≠ 0`). -/
 theorem integralStratumFiniteCdReductions_heart_bound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

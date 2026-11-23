@@ -10,13 +10,14 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Finite ordered Postnikov towers
 
-Source: BBD, Faisceaux pervers, Propositions 1.3.3 and 1.3.5, Theorem 1.3.6 and its
-derived-category example, pp. 29-32; Stacks Project, derived.tex, Tag 08J5
-(auxiliary; not a blueprint node).
-
 The double truncation `t.truncGELE q q` is Mathlib's existing composite
 `t.truncLE q ⋙ t.truncGE q`. Its value shifted by `q` is the heart object `H_t^q(K)`.
 No global boundedness or nondegeneracy of the t-structure is assumed.
+
+## References
+
+* BBD, Faisceaux pervers, Propositions 1.3.3 and 1.3.5, Theorem 1.3.6 and its derived-category
+  example, pp. 29-32.
 -/
 
 @[expose] public section
@@ -32,32 +33,7 @@ namespace CategoryTheory.Triangulated.TStructure
 exactly `n` triangles and with its own cohomology objects as the successive factors.
 The `n + 1` vertices are the upper truncations, up to isomorphism, starting at zero
 and ending at the given object. For `n = 0` these endpoints identify the object with zero.
-
-Source: BBD, Faisceaux pervers, 1.3.3-1.3.6, pp. 29-32, and the finite filtrations
-of 1.3.13, pp. 34-35 (auxiliary; not a blueprint node).
-
-Proof:
-1. Set `L_j = tau^{<= a+j-1} K`. The truncation right adjunction from
-   lemma-perverse-sheaves-curve--1 identifies maps from any object of degree
-   at most `r` into `tau^{<=r} K` with maps into `K`.
-2. Applying this bijection twice identifies `tau^{<=q-1} tau^{<=q} K` with
-   `tau^{<=q-1} K`, compatibly with their maps to `K`. The two inverse maps and their
-   inverse relations follow from the uniqueness in the adjunction.
-3. Apply the truncation triangle at `q-1` to `tau^{<=q} K`. Its third vertex is
-   `C_q = tau^{>=q} tau^{<=q} K`. It is at least `q`; rotating the triangle and
-   applying extension closure shows it is at most `q`. Thus `C_q[q]` is in the heart.
-   Substitute the isomorphism of step 2 and cancel opposite shifts to obtain the
-   triangle with third vertex `H_t^q(K)[-q]`.
-4. Orthogonality gives `Hom(L_0,K) = 0`. The right adjunction gives
-   `End(L_0) = 0`, so its identity is zero and `L_0` is isomorphic to zero.
-5. Since `K` is at most `a+n-1`, the same right adjunction makes the counit
-   `L_n -> K` invertible: factor its identity through the counit, and use uniqueness
-   for the other inverse relation.
-6. Use `q = a+j` for each of the `n` adjacent pairs. The triangles have the common
-   vertices chosen in step 1 and increasing cohomological degrees. If `n=0`, there
-   are no adjacent pairs; the two endpoint isomorphisms still give `K` isomorphic
-   to zero. Only the given bounds on `K` were used, not global boundedness.
--/
+Source: BBD, Faisceaux pervers, 1.3.3-1.3.6, pp. 29-32, and 1.3.13, pp. 34-35. -/
 theorem exists_bounded_postnikov_tower
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ m : ℤ, (shiftFunctor C m).Additive] [Pretriangulated C] [IsTriangulated C]
@@ -123,19 +99,7 @@ namespace DerivedCategory
 /-- For the standard t-structure, `H_t^q(K)` is the ordinary cohomology object of
 this same `K` placed in degree zero. Shifting this isomorphism by `-q` identifies
 the factors in `exists_bounded_postnikov_tower` with `H^q(K)[0][-q]`.
-
-Source: BBD, Faisceaux pervers, the example after 1.3.6, p. 31; Stacks Project,
-derived.tex, Tag 08J5 (auxiliary; not a blueprint node).
-
-Proof (step 7 of the node): use the good truncations of
-proposition-open-direct-image-preserves-finite on a cochain representative `E`. The upper truncation
-has `ker d^q` in degree `q` and zero above it. Lower truncation at `q` leaves only the cokernel of
-the map from `E^{q-1}` into this kernel, namely `H^q(E)`, in degree `q`. Shift by `q` to put it
-in degree zero. The localization and descended cohomology functors of
-def-weil-abstract-derived-category identify this with `H^q(K)[0]`. The standard
-t-structure of def-sbc-standard-tstructure-derived-category has exactly these
-good truncations, so this computes its double truncation, for every integer `q`.
--/
+Source: BBD, Faisceaux pervers, the example after 1.3.6, p. 31; Stacks Project, Tag 08J5. -/
 theorem bounded_postnikov_cohomology_iso
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (K : DerivedCategory C) (q : ℤ) :

@@ -23,16 +23,7 @@ open CategoryTheory.BraidedCategory
 
 namespace CategoryTheory.Mod
 
-/-- Relative tensor product is bilinear for any scalar action through global sections.
-
-Source: the balanced tensor product construction, and latest blueprint
-`prop-kernel-lisse.proof.md`, multiplication of character eigensections
-(blueprint: lem-kernel-module-monoidal-linear).
-
-Proof. A scalar acts through the natural transformation multiplying a module by the
-corresponding global section. Its value on a tensor product equals multiplication on
-the second factor, by the balancing relation. This proves linearity of left tensoring.
-Naturality of the braiding transfers it to right tensoring. -/
+/-- Relative tensor product is bilinear for any scalar action through global sections. -/
 theorem monoidalLinearOfRingHom
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C]
     [Preadditive C] [MonoidalPreadditive C] [HasCoequalizers C]
@@ -57,9 +48,7 @@ theorem monoidalLinearOfRingHom
   rw [braiding_naturality_left, Linear.smul_comp, braiding_naturality_left,
     hleft, Linear.comp_smul]
 
-/-- The unit of the relative tensor product is the regular module.
-Source: the relative tensor construction
-(blueprint: lem-kernel-module-monoidal-linear). -/
+/-- The unit of the relative tensor product is the regular module. -/
 theorem tensorUnit_eq_regular
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C]
     [HasCoequalizers C]
@@ -68,8 +57,7 @@ theorem tensorUnit_eq_regular
     (R : C) [MonObj R] [IsCommMonObj R] : 𝟙_ (Mod C R) = regular R := rfl
 
 /-- The scalar action induced through global sections acts on the regular module by
-its regular endomorphism. Source: multiplication on the regular module
-(blueprint: lem-kernel-module-monoidal-linear). -/
+its regular endomorphism. -/
 theorem regularEndRingHom_eq_smul
     {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C]
     [Preadditive C] [MonoidalPreadditive C]

@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteDerivedRestriction
 /-!
 # Slice restriction with independent site and coefficient universes
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +24,7 @@ namespace CategoryTheory
 
 /-- Restrict the canonical localization representative and localize on the slice.
 This is the recorded construction, with independent object, Hom and coefficient sizes.
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998. -/
 def ringedSiteDerivedRestrictionOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) (U : C)

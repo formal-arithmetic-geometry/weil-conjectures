@@ -39,7 +39,6 @@ public import WeilConjectures.AlgebraicGeometry.Pur.PurCompletedReindexingData
 import WeilConjectures.AlgebraicGeometry.Pur.PurCompletedModuleReindexing
 import WeilConjectures.AlgebraicGeometry.Pur.PurReindexingLimitNormalization
 import WeilConjectures.AlgebraicGeometry.Pur.PurReindexingOrdinaryMate
-import WeilConjectures.AlgebraicGeometry.Pur.PurReindexingDerivedMates
 import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

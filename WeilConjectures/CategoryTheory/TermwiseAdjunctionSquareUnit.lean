@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Termwise normalization of an adjunction square
 
-Source: Stacks Project, Modules on Sites, Tag 03DI; termwise adjunction calculation.
-(blueprint: lem-cbc-termwise-adjunction-square-unit). -/
+Source: Stacks Project, Modules on Sites, Tag 03DI. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,8 +21,7 @@ open CategoryTheory CategoryTheory.Functor
 namespace CategoryTheory
 
 /-- The square isomorphism induced by right whiskering.
-Source: Stacks Project, Tag 03DI; termwise functor construction.
-(blueprint: lem-cbc-termwise-adjunction-square-unit). -/
+Source: Stacks Project, Tag 03DI. -/
 def termwiseAdjunctionIso {I A B C D : Type*}
     [Category I] [Category A] [Category B] [Category C] [Category D]
     {F : A ⥤ B} {G : B ⥤ D} {H : A ⥤ C} {K : C ⥤ D}
@@ -35,13 +33,7 @@ def termwiseAdjunctionIso {I A B C D : Type*}
 
 /-- A normalized transpose equation is preserved by passage to functor categories.
 
-Apply extensionality of natural transformations. At each indexing object, the
-whiskered adjunction unit and the mapped natural isomorphism evaluate to the original
-unit and isomorphism component. The resulting equation is exactly the assumed one,
-written using the unit formula for the adjunction bijection.
-
-Source: Stacks Project, Modules on Sites, Tag 03DI; componentwise adjunction calculation.
-(blueprint: lem-cbc-termwise-adjunction-square-unit). -/
+Source: Stacks Project, Modules on Sites, Tag 03DI. -/
 theorem termwiseAdjunctionSquareUnit {I A B C D : Type*}
     [Category I] [Category A] [Category B] [Category C] [Category D]
     {J : A ⥤ B} {P : B ⥤ A} {J' : C ⥤ D} {P' : D ⥤ C}

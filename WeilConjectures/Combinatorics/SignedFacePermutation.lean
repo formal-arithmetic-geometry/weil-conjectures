@@ -13,7 +13,6 @@ import Mathlib.GroupTheory.Perm.Option
 # Signed permutations of deleted finite indices
 
 Source: the signed-face calculation implicit in Stacks Project, Tag 01FG.
-(blueprint: lem-pc-signed-face-permutation)
 -/
 
 @[expose] public section
@@ -23,17 +22,7 @@ namespace Fin
 
 /-- Deleting `k` from the domain and `σ k` from the range induces a permutation whose
 sign compensates for the two deleted positions.
-Source: Stacks 01FG, omitted verification of differential stability; Mathlib's
-`Fin.cycleRange_succAbove`, `Fin.sign_cycleRange`, and `Equiv.optionCongr_sign`.
-
-Proof: conjugate σ between the cycles moving k and σ(k) to zero. The resulting
-permutation π fixes zero. Transport π to Option (Fin n) and remove its fixed none;
-this constructs τ. The cycle identities show σ(k.succAbove a) = (σ k).succAbove (τ a).
-Adding a fixed point and conjugating preserve sign, whereas the two cycles have signs
-(-1)^k and (-1)^(σ k). Thus sign τ = (-1)^(σ k) sign σ (-1)^k. Multiplication by
-(-1)^(σ k), whose square is one, gives the displayed identity. For n = 0 the face
-condition is empty and both signs are one.
-(blueprint: lem-pc-signed-face-permutation) -/
+Stacks Project, Tag 01FG. -/
 theorem signed_face_permutation (n : ℕ) (σ : Equiv.Perm (Fin (n + 1)))
     (k : Fin (n + 1)) :
     ∃ τ : Equiv.Perm (Fin n),

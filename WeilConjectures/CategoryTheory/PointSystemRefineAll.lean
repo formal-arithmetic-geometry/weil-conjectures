@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.PointSystemRefinementChainExists
 /-!
 # Simultaneous refinement of an inverse system on a site
 
-Source: Stacks Project, Sites, Tag 00YP, Lemma `lemma-refine-all-at-once`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP, Lemma.
 
 An inverse system is encoded covariantly in the opposite category. An order embedding
 identifies the old index set with a subset carrying the induced order; equality of the
@@ -30,22 +29,12 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 00YP, Lemma `lemma-refine-all-at-once`
-(auxiliary; not a blueprint node).
-For a sheaf and two distinct germs in a directed inverse system, there is a refinement
+/-- For a sheaf and two distinct germs in a directed inverse system, there is a refinement
 preserving distinctness and lifting every original germ of a representable functor through
 some member of every finite covering. `uliftYoneda` only places Hom sets in the common set
 universe and its elements are exactly lifted morphisms.
 
-Proof: Form the set of finite-covering/original-Hom-germ pairs. Apply the general
-refinement scheduling theorem, with the one-cover refinement Tag 00YO as its successor
-step. It constructs strict refinements, retaining distinctness at limit unions by the
-filtered-colimit equality criterion, and replaces preorder indices by cofinal posets
-without changing the original indices. Naturality makes each lifting condition persist.
-A transfinite iteration solving a missing request must terminate before a well-order
-larger than the request set. Passing through its chain presentation preserves the two
-distinct germs and the lifting equations. Represent the lifted Hom-colimit element at
-one index; naturality of the colimit cocone gives the required composite b ≫ a k. -/
+Source: Stacks Project, Sites, Tag 00YP, Lemma. -/
 theorem exists_pointSystem_refinement_all
     {C : Type u} [Category.{v} C] (K : Precoverage C)
     (hK : K.IsSiteForCoverings)

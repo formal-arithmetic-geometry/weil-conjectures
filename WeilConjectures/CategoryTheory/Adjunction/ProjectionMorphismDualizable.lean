@@ -22,7 +22,7 @@ monoidal. For a dualizable object `B`, the left projection morphism
 it is the conjugate of the isomorphism `F (Bᘁ ⊗ -) ≅ F Bᘁ ⊗ F -` under the adjunctions
 `(Bᘁ ⊗ -) ⊣ (B ⊗ -)` composed with `F ⊣ G` (`CategoryTheory.monoidal_projection_conjugate`).
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Adjunction.isIso_leftProjectionMorphism_of_isDualizable`: the left projection
   morphism is an isomorphism at a dualizable object.
@@ -38,7 +38,6 @@ it is the conjugate of the isomorphism `F (Bᘁ ⊗ -) ≅ F Bᘁ ⊗ F -` under
 - `CategoryTheory.Adjunction.isIso_homEquiv_δ_tensorHom_exchangeRight_of_isDualizable`: the
   Künneth map along a base change with a dualizable first factor is an isomorphism if the
   exchange morphism is.
-
 -/
 
 @[expose] public section

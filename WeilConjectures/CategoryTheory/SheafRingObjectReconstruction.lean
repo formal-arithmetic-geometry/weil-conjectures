@@ -14,8 +14,9 @@ public import Mathlib.Algebra.Category.Ring.Limits
 /-!
 # Sectionwise reconstruction of a commutative ring sheaf
 
-Source: Stacks Project, Section 00YR, proof of Proposition 00YV,
-`proposition-functoriality-algebraic-structures-topoi` (rings as sextuples).
+## References
+
+* Stacks Project, Section 00YR, proof of Proposition 00YV (rings as sextuples).
 -/
 
 @[expose] public section
@@ -113,26 +114,7 @@ private def reconstructedPresheaf
 /-- An internal commutative ring object can be realized on exactly the same
 underlying sheaf by a sheaf of commutative rings.
 
-Source: Stacks Project, Section 00YR, proof of Proposition 00YV, rings as sextuples.
-(blueprint: lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction)
-
-Proof in words: On the set of sections over U define addition, zero, negation,
-multiplication and one by evaluating the corresponding internal morphisms.
-The tensor product of sheaves of sets is sectionwise Cartesian product and its
-unit has one section, so evaluation of the internal associativity, unit,
-inverse, commutativity and distributivity diagrams proves the ordinary
-commutative ring axioms. Naturality of the five morphisms says that every
-restriction function preserves these operations, hence is a ring homomorphism.
-Bundle these very same section sets, ring structures and restriction functions
-into a presheaf A of commutative rings. Its underlying presheaf is equal to the
-original presheaf, rather than merely isomorphic to it. The forgetful functor
-from commutative rings creates limits, so the underlying set sheaf condition
-implies the ring-valued sheaf condition. Bundle A with this sheaf witness.
-Functor extensionality and proof irrelevance give the asserted equality h of
-underlying sheaves. Transport along h preserves the five operations because
-these operations were defined by their evaluations on R in the first place.
-This argument also covers empty section sets and the zero ring: the unit maps
-force inhabited section sets, and no nontriviality axiom is imposed. -/
+Stacks Project, Section 00YR, proof of Proposition 00YV (rings as sextuples). -/
 theorem sheafRingObject_sectionwise_reconstruction
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : CommRingObjCat (Sheaf J (Type (max u v w)))) :

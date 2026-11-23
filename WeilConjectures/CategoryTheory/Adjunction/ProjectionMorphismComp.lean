@@ -23,13 +23,12 @@ We also record that the invertibility of the projection morphism only depends on
 argument up to isomorphism, and that it is equivalent to the invertibility of the left projection
 morphism for left adjoints compatible with the braidings.
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Adjunction.whiskerRight_projectionMorphism`: the projection morphism of a
   composite.
 - `CategoryTheory.Adjunction.isIso_projectionMorphism_of_comp`: the projection morphism of a
   composite is an isomorphism if those of the factors are.
-
 -/
 
 @[expose] public section

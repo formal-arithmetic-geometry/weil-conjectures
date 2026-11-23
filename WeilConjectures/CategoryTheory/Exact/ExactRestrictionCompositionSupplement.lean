@@ -10,8 +10,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionCom
 public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Composition of the inverse factorization comparisons of exact functors
-
-Source: functoriality of ordinary unbounded localization.
 -/
 
 @[expose] public noncomputable section
@@ -28,11 +26,7 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 
-/-- The exact derived identity comparison on a cochain representative.
-Source: functoriality of localization
-(blueprint: lem-pur-exact-restriction-composition).
-Proof: use the homotopy representative formula, and identify the two factorization
-components through the quotient-to-derived comparison, whose components are identities. -/
+/-- The exact derived identity comparison on a cochain representative. -/
 theorem mapDerivedCategoryIdIso_hom_app_Q_obj (K : CochainComplex A ℤ) :
     (mapDerivedCategoryIdIso A).hom.app (DerivedCategory.Q.obj K) =
       (𝟭 A).mapDerivedCategoryFactors.hom.app K := by
@@ -41,19 +35,13 @@ theorem mapDerivedCategoryIdIso_hom_app_Q_obj (K : CochainComplex A ℤ) :
   rw [h]
   erw [DerivedCategory.Q.map_id, Category.comp_id]
 
-/-- The derived comparison of an exact restriction identified with the identity.
-Source: localization functoriality
-(blueprint: lem-pur-exact-restriction-composition). -/
+/-- The derived comparison of an exact restriction identified with the identity. -/
 def exactDerivedRestrictionUnit (R : A ⥤ A) [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R] (η : R ≅ 𝟭 A) :
     R.mapDerivedCategory ≅ 𝟭 (DerivedCategory A) :=
   mapDerivedCategoryNatIso η ≪≫ mapDerivedCategoryIdIso A
 
-/-- The inverse factorization formula for an identity restriction.
-Source: localization functoriality
-(blueprint: lem-pur-exact-restriction-composition).
-Proof: use the natural-isomorphism factorization equation and the cochain formula for
-the derived identity. The factorization and its inverse cancel. -/
+/-- The inverse factorization formula for an identity restriction. -/
 theorem exactDerivedRestrictionUnit_inv_factors (R : A ⥤ A) [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R] (η : R ≅ 𝟭 A)
     (K : CochainComplex A ℤ) :
@@ -71,11 +59,7 @@ theorem exactDerivedRestrictionUnit_inv_factors (R : A ⥤ A) [R.Additive]
     NatIso.mapHomologicalComplex_hom_app_f, mapHomologicalComplexIdIso_hom_app_f]
   exact (Category.comp_id _).symm
 
-/-- The inverse unit comparison commutes with the forward localization factorization.
-Source: functoriality of localization
-(blueprint: lem-pur-exact-restriction-composition).
-Proof: cancel the invertible localized ordinary unit. The inverse-factor equation
-and both isomorphism inverse laws reduce each composite to the identity. -/
+/-- The inverse unit comparison commutes with the forward localization factorization. -/
 theorem exactDerivedRestrictionUnit_inv_fac (R : A ⥤ A) [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R] (η : R ≅ 𝟭 A)
     (K : CochainComplex A ℤ) :

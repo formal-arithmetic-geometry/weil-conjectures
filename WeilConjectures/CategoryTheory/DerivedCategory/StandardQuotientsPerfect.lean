@@ -14,9 +14,7 @@ set_option linter.privateModule false
 /-!
 # Perfectness of the standard coefficient quotients
 
-Source: literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/
-lem-weil-pbc-standard-quotients-perfect.md, node order 1254; Stacks Project, Tag 0657
-(blueprint: lemma-reduction-derived-nakayama--1).
+Source: Stacks Project, Tag 0657.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits HomologicalComplex
 namespace AlgebraicGeometry
 
 /-- An exact scalar presentation gives its normalized two-term finite-free resolution.
-Source: Stacks Tags 0115 and 0657, the cohomology calculation in proof steps 3--4
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+Source: Stacks Tags 0115 and 0657. -/
 private theorem twoTermResolution {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R)
     (q : ModuleCat.of R R ⟶ M)
@@ -122,9 +119,7 @@ private theorem twoTermResolution {R : Type u} [CommRing R]
       · exact ExactAt.of_isZero (hz i hm hi)
   exact ⟨P, hge, hle, hterms, em, e0, double_d f hrel (by omega), ε, hε, hε0, hεi⟩
 
-/-- A quotient whose kernel is a principal ideal is exact after scalar multiplication.
-Source: the elementary divisibility calculation in proof step 2
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- A quotient whose kernel is a principal ideal is exact after scalar multiplication. -/
 private theorem principalExact {R : Type u} [CommRing R]
     (a : R) (M : ModuleCat.{u} R) (q : ModuleCat.of R R ⟶ M)
     (hq : ∀ x : R, q x = 0 ↔ x ∈ Ideal.span ({a} : Set R)) :
@@ -143,9 +138,7 @@ private theorem principalExact {R : Type u} [CommRing R]
   obtain ⟨y, hy⟩ := this
   exact ⟨y, hy.symm⟩
 
-/-- The recorded generator of the nonzero maximal ideal is nonzero.
-Source: `Padic.extension_integers_dvr`, proof step 1
-(blueprint: lemma-reduction-derived-nakayama--1). -/
+/-- The recorded generator of the nonzero maximal ideal is nonzero. -/
 private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Padic.coefficientExtensionUniformizer l E ≠ 0 := by

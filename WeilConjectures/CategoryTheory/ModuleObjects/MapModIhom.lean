@@ -34,7 +34,6 @@ and carries the two maps to the corresponding maps for `F M` and `F N` up to the
 isomorphisms of `F` (`Mod.map_pre_act_comp_ihomComparison`,
 `Mod.map_homModB_comp_ihomComparison`); and the comparison map of `F.mapMod R` is compatible with
 the two equalizer maps (`Mod.ihomComparison_mapMod_app_hom_comp`).
-
 -/
 
 @[expose] public section

@@ -16,9 +16,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 
 /-! # A coproduct comparison of truncation exact couples
 
-Source: Stacks Project, Tags 015J, 05TC and 08DZ; the exact-couple construction and
-coproduct glue of lem-pc-bounded-below-coproduct-filtration, Steps 1 and 2
-(blueprint: lem-pc-coproduct-truncation-couple).
+Source: Stacks Project, Tags 015J, 05TC and 08DZ.
 -/
 
 @[expose] public section
@@ -77,40 +75,8 @@ on both the initial E terms and D at first index zero. This asserts construction
 naturality only; no initial-page or abutment isomorphism hypothesis is imposed.
 
 Source: Stacks Project, Tag 015J (the natural hypercohomology second page and abutment),
-Tag 05TC (derived lower bounds and truncation comparison), and Tag 08DZ (the direct-sum reduction).
-(blueprint: lem-pc-coproduct-truncation-couple).
-
-Proof:
-1. Use canonical lower truncation and K-injective representatives for K_i and S,
-with the common cohomological lower bound a. For each representative apply the
-truncation hypercohomology theorem. Its D terms are H^{p+r}(RF(tau_le_r K_i));
-its E terms are H^{p+r}(RF(H^r(K_i)[-r])). Apply the same construction to S.
-The canonical truncation triangle is functorial in a derived morphism. Applying
-RF and homology to its naturality squares gives maps of these exact couples for
-u_i, including commutation with the connecting maps. Equivalently represent u_i
-by maps between K-injectives and use naturality of the truncation triangles there.
-2. Form X by taking the coproduct of the summands' D and E objects at every
-bidegree, and the maps induced by their structure maps. Grothendieck exactness of
-small coproducts preserves the three exact sequences defining an exact couple,
-so these maps give an exact couple. Let Y be the target couple. The maps to Y are
-the coproduct descents of the individual couple maps. Precomposing each required
-square with every coproduct inclusion reduces it to the individual square; this
-gives T. When r<a, each truncated complex is zero, hence each summand D term and
-the target D term vanish. Their coproduct vanishes too. Left exactness of F makes
-RF of an object in degree zero connective, so both E terms vanish when p<0.
-3. At p=0 the truncation inclusion induces an isomorphism on H^n after RF:
-the cone is cohomologically at least n+1, and RF preserves that lower bound.
-These maps give the individual D-to-abutment isomorphisms. Their coproduct gives
-eX; the target gives eY. Naturality of truncation inclusion gives the displayed
-D square; check it after precomposing with each coproduct inclusion.
-4. For p>=0, the single-functor shift, RF shift commutation, and homology shift
-isomorphisms identify each E^{p,r} with H^p(RF(H^r(K_i)[0])). These isomorphisms
-are natural, as are their counterparts for S. Taking their coproduct gives s;
-the target comparison gives t. Naturality and the coproduct universal property
-prove the displayed E equation. No comparison is asserted to be invertible.
-For an empty family X is the zero exact couple and the same universal-property
-proofs apply. Choices made here witness an existential theorem and define no
-library data. -/
+Tag 05TC (derived lower bounds and truncation comparison), and Tag 08DZ.
+-/
 theorem exists_coproduct_truncation_couple
     {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
     [HasDerivedCategory.{wA} A]

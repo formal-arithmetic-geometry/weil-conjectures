@@ -13,10 +13,12 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 /-!
 # Exact functors transport exact couples
 
-Source: Stacks Project, Homology, Section 12.21, Tags 011Q, 011R, 011S, 0AMJ,
-and the transport argument of the blueprint (blueprint: lem-sp-exact-functor-couple).
 The index `r` denotes the actual page `r + 2`. Object equalities identify the initial
 mapped datum; subsequent identifications of subobjects are commuting isomorphisms.
+
+## References
+
+* Stacks Project, Homology, Section 12.21, Tags 011Q, 011R, 011S and 0AMJ.
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -329,7 +331,6 @@ private noncomputable def gradedIso (X : BigradedExactCouple C 0)
   quotientIso Φ _ _ (filtrationIso X AX AY eA hA n (p + 1))
     (filtrationIso X AX AY eA hA n p) (filtrationIso_step X AX AY eA hA n p)
 
-/-! Transport of exact couples along an exact additive functor.
-Source: Stacks Project, Homology, Section 12.21; blueprint: lem-sp-exact-functor-couple.
-The full transport construction is retained as the next proof obligation. -/
+/-! Transport of exact couples along an exact additive functor
+(Stacks Project, Homology, Section 12.21). -/
 end CategoryTheory.BigradedExactCouple

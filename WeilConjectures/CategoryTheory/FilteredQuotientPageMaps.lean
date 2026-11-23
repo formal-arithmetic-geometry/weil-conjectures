@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentatives
 # Canonical maps between concrete quotient pages
 
 Source: Stacks Project, Tag 012K, Lemmas 12.24.2 and 12.24.4.
-(blueprint: lem-sp-filtered-quotient-page-maps).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The four representative squares specify a map on quotient pages.
-Source: Stacks Project, Tag 012K, Lemma 12.24.4.
-(blueprint: lem-sp-filtered-quotient-page-maps). -/
+Source: Stacks Project, Tag 012K, Lemma 12.24.4. -/
 def FilteredQuotientPageMapProperty
     (U V : ObjectProperty.FullSubcategory
       (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (t : U ⟶ V) (r : ℤ)
@@ -330,22 +328,7 @@ private noncomputable def quotientPageMap
 set_option linter.unusedVariables false in
 /-- The quotient page maps exist, obey the category laws, and are determined uniquely.
 This statement constructs no successor-page comparison.
-Source: Stacks Project, Tag 012K, Lemmas 12.24.2 and 12.24.4.
-(blueprint: lem-sp-filtered-quotient-page-maps).
-
-Proof. Restrict a filtered map to every step by its preservation property; these
-restrictions are unique after the monic step inclusions. Descend to each graded
-piece by the cokernel universal property. Preservation of the pullback defining
-cycle representatives induces a map on their graded images. Preservation of the
-boundary images makes it descend to the quotient Z_r/B_r. On the epic cover by
-cycle representatives, the chain map equation shows that this quotient map
-commutes with the representative differentials, hence gives a page chain map.
-Cancel the monic cycle inclusion and epic quotient projection to show that any
-four squares specify this same map. The squares for identity maps use identity
-restrictions; the squares for composites use composites of restrictions. The same
-cancellation proves the identity and composition laws. Finally the canonical
-restrictions and descents provide squares for each filtered map, so the universal
-square property determines every component, and therefore the whole family. -/
+Source: Stacks Project, Tag 012K, Lemmas 12.24.2 and 12.24.4. -/
 theorem filteredQuotient_page_maps
     (D : ∀ (U : ObjectProperty.FullSubcategory
       (fun W : WeilFilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (r : ℤ)

@@ -22,8 +22,7 @@ resolutions, and `Y` an object of `D(A)` which is a finite direct sum `⨁ⱼ �
 the unit (`CategoryTheory.ShiftDecomposition`). For an endomorphism `w` of `Y`, the categorical
 trace of `w` in `D(A)`, for the Koszul braiding `DerivedCategory.braidedCategory'`, is the
 supertrace `∑ᵢ (-1)ⁱ Tr(Hⁱ(w) | Hⁱ(Y))` of the endomorphisms induced on the homology objects,
-placed in degree `0` (`DerivedCategory.trace_eq_singleFunctor_map_superTrace`; blueprint
-`proposition-properties-trace`, item (4)).
+placed in degree `0` (`DerivedCategory.trace_eq_singleFunctor_map_superTrace`).
 
 The scalar `Tr(Hⁱ(w))` in `End (𝟙_ A)` is placed in degree `0` by
 `DerivedCategory.singleFunctorUnitEndRingHom`.
@@ -170,7 +169,7 @@ lemma trace_eq_singleFunctor_map_superTrace_of_shift (n : ℤ)
     End.zsmul_asHom, Category.id_comp, Category.comp_id]
   rfl
 
-/-- **The trace as a supertrace** (blueprint `proposition-properties-trace`, item (4)): for an
+/-- **The trace as a supertrace**: for an
 object `Y` of `D(A)` which is a finite direct sum of shifts of the unit, with dualizable
 homology objects, the categorical trace of an endomorphism `w` of `Y`, for the Koszul braiding, is
 the alternating sum `∑ᵢ (-1)ⁱ Tr(Hⁱ(w) | Hⁱ(Y))` of the traces on the homology objects, placed in

@@ -25,18 +25,7 @@ namespace CategoryTheory.Functor
 
 /-- A compatible normalized family on injective complexes extends to all objects
 of the bounded-below derived category.
-Source: Stacks Tags 06XR (1) and 070I.
-Proof: a bounded-below injective complex is K-injective, so every derived
-morphism between two such complexes lifts to a chain map. The compatibility
-field therefore applies to every derived morphism between injective models.
-Choose a model `QI ≅ X` for each object and conjugate its additive comparison
-by this isomorphism, using the induced cohomology map on the source and shifted
-postcomposition on the target. Compatibility applied to the conjugate of a
-morphism `X ⟶ Y` proves naturality. Applied to the model isomorphism of `QJ`,
-it identifies the extension with the original comparison on every injective
-complex `J`; the inverse isomorphisms cancel on both sides.
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map-extension)
--/
+Source: Stacks Tags 06XR (1) and 070I. -/
 theorem extend_rhom_injective_cocycle_family
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}]

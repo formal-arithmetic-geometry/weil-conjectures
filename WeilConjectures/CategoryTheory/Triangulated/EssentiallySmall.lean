@@ -21,7 +21,7 @@ triangle is determined by the class `X₃ ⟶ X₁⟦1⟧`, which ranges over a 
 Consequently, for an essentially small property `P` of objects of an abelian category `A`, the
 bounded complexes all of whose cohomology objects satisfy `P` form an essentially small property
 of `D(A)` (`DerivedCategory.essentiallySmall_bounded_homologyProperty`), by induction on the
-length along the truncation triangles (blueprint `lemma-hypotheses-brown-representability--5`).
+length along the truncation triangles.
 -/
 
 @[expose] public section
@@ -106,7 +106,7 @@ lemma essentiallySmall_isGE_isLE_homologyProperty (n : ℕ) (a : ℤ) :
         (homologyFunctor A b).mapIso e ≪≫ (singleFunctorCompHomologyFunctorIso A b).app Y) (hM b),
         ⟨e.symm⟩⟩, ⟨Iso.refl _⟩⟩
 
-/-- Blueprint `lemma-hypotheses-brown-representability--5`: for an essentially small property `P` of
+/-- for an essentially small property `P` of
 objects of an abelian category `A`, the bounded objects of `D(A)` all of whose cohomology objects
 satisfy `P` form an essentially small property. -/
 instance essentiallySmall_bounded_homologyProperty :

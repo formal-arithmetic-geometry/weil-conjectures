@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-! # Restriction of scalars as a ringed-topos direct image
 
 Source: Stacks, Modules on Sites, restriction of scalars and ringed topoi.
-(blueprint: lem-weil-pbc-restriction-ringed-topos-module-direct-image).
 -/
 
 @[expose] public section
@@ -63,10 +62,7 @@ private noncomputable def siteRestrictionRingedTopos
     exact hz U t
 /-- Restriction along a ring-sheaf morphism is the direct image of its identity-site
 ringed-topos morphism. Source: Stacks, Modules on Sites, Definition 01D3 and restriction
-of scalars (blueprint: lem-weil-pbc-restriction-ringed-topos-module-direct-image).
-Proof: take both set functors to be the identity and use the given ring map as the
-structural map. Ring-homomorphism laws verify its four operations; restriction retains
-the underlying additive sheaf, so the module identity is the given scalar-action law. -/
+of scalars. -/
 theorem restrictionRingedToposModuleDirectImage_exists
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R S : Sheaf J RingCat.{u}} (c : S ⟶ R) :

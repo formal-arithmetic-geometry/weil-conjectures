@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.RingedSiteLocalizationCech
 /-! # Addition of complete local sections
 
 Source: Stacks Project, Tags 0997 and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,23 +29,7 @@ open CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
-/-- Completeness is closed under addition of local sections.
-
-Proof: Put h=f+g and work on the slice over U. In O[1/h], the images of f and g
-generate the unit ideal. The binary localization Cech sequence is short exact:
-0 → O[1/h] → O[1/(fh)] ⊕ O[1/(gh)] → O[1/(fgh)] → 0.
-Injectivity and middle exactness follow from standard-covering gluing. For
-surjectivity, write a fraction with denominator (fg)^n and use a binomial
-expansion of (f/h+g/h)^(2*n-1)=1 to express 1 as u*f^n+v*g^n. Sheafification
-is exact, so this sectionwise sequence gives the displayed sheaf sequence.
-Multiplication closure makes the derived internal Homs from the last three
-localizations zero. Apply derived internal Hom into K to its distinguished
-triangle; exactness makes the internal Hom from O[1/h] zero too. This argument
-also applies when f, g, or h is zero, and imposes no bound on K.
-
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998;
-sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node). -/
+/-- Completeness is closed under addition of local sections. -/
 theorem ringedSite_completeElement_add
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

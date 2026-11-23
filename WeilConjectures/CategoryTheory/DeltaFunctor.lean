@@ -13,8 +13,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-!
 # Cohomological delta-functors
 
-Source: Stacks Project, Homology, Definitions 010Q, 010R, 010S
-(blueprint: def-weil-pbc-delta-functor).
+Source: Stacks Project, Homology, Definitions 010Q, 010R, 010S.
 
 ## Main definitions
 
@@ -35,7 +34,7 @@ connecting maps indexed by short exact sequences, including their arrows. The in
 monic. Exactness at each of the three repeating positions is expressed using Mathlib's
 `ShortComplex.Exact`; the witnessing zero composites are part of the exactness assertions.
 The final field is naturality in a morphism of short exact sequences.
-Stacks Project, Homology, Definition 010Q (blueprint: def-weil-pbc-delta-functor). -/
+Stacks Project, Homology, Definition 010Q. -/
 structure CohomologicalDeltaFunctor (A : Type u₁) (B : Type u₂)
     [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B] where
   F : ℕ → A ⥤ B
@@ -61,7 +60,7 @@ namespace CohomologicalDeltaFunctor
 
 /-- A morphism of cohomological delta-functors is a natural transformation in each degree
 whose components commute with every connecting map.
-Stacks Project, Homology, Definition 010R (blueprint: def-weil-pbc-delta-functor). -/
+Stacks Project, Homology, Definition 010R. -/
 structure Hom {A : Type u₁} {B : Type u₂}
     [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B]
     (F G : CohomologicalDeltaFunctor A B) where
@@ -72,7 +71,7 @@ structure Hom {A : Type u₁} {B : Type u₂}
 
 /-- Universality means every natural transformation in degree zero extends to a unique
 morphism of cohomological delta-functors.
-Stacks Project, Homology, Definition 010S (blueprint: def-weil-pbc-delta-functor). -/
+Stacks Project, Homology, Definition 010S. -/
 def IsUniversal {A : Type u₁} {B : Type u₂}
     [Category.{v₁} A] [Abelian A] [Category.{v₂} B] [Abelian B]
     (F : CohomologicalDeltaFunctor A B) : Prop :=
