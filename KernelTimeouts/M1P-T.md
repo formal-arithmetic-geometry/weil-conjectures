@@ -1,27 +1,32 @@
-# KernelTimeouts M1 propagation: part T
+# KernelTimeouts M1 propagation: READY4.2
 
-All measured rows are fresh READY4.1 Lean 4.35.0 runs on the expensive
-original root with the case's O probe, at current import revision
-`15b8acba63e`. Kernel/analyzer revision is dataset commit
-`5ae674db0c7` (analyzer SHA-256 prefix `7e2ee5f4e23895e3`). The
-comparison shares use complete-root exclusive time; the raw trace is
-bounded. Counter and trace call counts agree in every measured row.
+All rows are fresh Lean 4.35.0 runs from the reserved `m1p` import revision
+`105ac3f5b23`, using the READY4.2 kernel/analyzer (`0311a15b5f4`). Counter
+root calls equal analyzed aggregate calls in every completed case. Aggregate
+label, transition, depth, and fan-out values cover the complete selected
+root; raw enter/exit coverage is bounded and reported in each case report.
 
-| Case | M1 share | M1 calls | M1 max / median depth | 50% time band | Mean fan-out | Largest complete-root transition | Shape | C result |
-|---|---:|---:|---:|---|---:|---|---|---|
-| EtaleHom | 99.724% | 2,390,795 | 111 / 79 | 71--83 | 1.330 | projection to projection | mixed | no M0-preserving cut at dependent `hv` endpoint |
-| FiniteBaseChange | 72.981% | 130,197,227 | 87 / 75 | 71--74 | 1.081 | failure to projection (all labels) | mixed | local candidate leaves O workload; no valid cut |
-| RealPurity | unavailable | unavailable | unavailable | unavailable | unavailable | unavailable | unavailable | O blocked by missing imported `.olean` |
-| OrderedSpectralRawLattices | 64.323% | 8,320,909 | 71 / 64 | 60--65 | 1.754 | lazy-delta to dependent body (near tie with failure to argument) | mixed | not requested |
-| RealPushforward | 62.315% | 8,002,209 | 89 / 84 | 82--84 | 1.274 | failure to projection | mixed | not requested |
-| IntegralComparison | 99.568% | 6,680,842 | 181 / 109 | 93--113 | 1.406 | projection to projection | mixed | not requested |
-| F66Adj | 99.722% | 2,961,163 | 121 / 90 | 82--96 | 1.316 | projection to projection | mixed | not requested |
-| ImageHomCounit | 99.774% | 4,781,271 | 204 / 162 | 154--166 | 1.330 | projection to projection | mixed | not requested |
+For mixed cases, the table reports the median of three trace runs and the
+minimum--maximum time-share spread. Call shares and call counts are
+deterministic. Shape is the analyzer rule: deep means median depth >=75,
+mean fan-out <=1.5, and 90%-time band width <=32; wide means fan-out p90 >=8
+and median depth <75; all remaining cases are mixed.
 
-`READY4.1` emits complete branch/kind rows but does not key them by child
-provenance or report row mean fan-out. In mixed roots, the listed largest
-row cannot be treated as the dominant M1-only transition. A `failure`
-parent label records the parent's final outcome rather than the precise
-branch initiating each child. The case reports give conservative M1 time
-coverage bounds and sampled label-to-label edges. The kernel patch was
-not changed.
+| Case | Calls | M1 call share | M1 time share | M1 calls | Depth median/p90/max | 50% band | Mean fan-out | Fan-out p90 | M1->M1 / Matched / M2 | Dominant M1 transition | Shape | C |
+|---|---:|---:|---:|---:|---|---|---:|---:|---:|---|---|---|
+| EtaleHom | 3,180,470 | 75.171% | 99.735% | 2,390,795 | 79/90/111 | 71--83 | 1.330 | 3 | 2,390,783 / 789,627 / 15 | projection -> projection | deep | no M0-preserving `hv` cut |
+| FiniteBaseChange | 239,340,712 | 54.398% | 72.869% [72.843--73.112%] | 130,197,227 | 75/79/87 | 71--74 | 1.081 | 1 | 89,755,076 / 23,447,508 / 27,479,827 | projection -> projection | deep | step-2 no-effect / no valid new cut |
+| RealPurity | 17,310,168 | 46.148% | 62.315% [62.170--64.097%] | 7,988,264 | 86/88/91 | 84--86 | 1.274 | 1 | 6,491,456 / 1,695,794 / 1,987,467 | projection -> projection | deep | not requested |
+| OrderedSpectralRawLattices | 18,944,709 | 43.922% | 64.684% [62.351--64.750%] | 8,320,909 | 64/68/71 | 60--65 | 1.754 | 8 | 5,076,832 / 6,741,771 / 2,780,258 | application -> argument | wide | not requested |
+| RealPushforward | 17,340,236 | 46.148% | 61.446% [61.312--63.086%] | 8,002,209 | 84/86/89 | 82--84 | 1.274 | 1 | 6,502,766 / 1,698,481 / 1,990,961 | projection -> projection | deep | not requested |
+| IntegralComparison | 9,426,198 | 70.875% | 99.551% | 6,680,842 | 109/133/181 | 97--116 | 1.406 | 3 | 6,672,675 / 2,702,845 / 20,527 | projection -> projection | mixed | not requested |
+| F66Adj | 3,897,905 | 75.968% | 99.803% | 2,961,163 | 90/102/121 | 85--98 | 1.316 | 3 | 2,961,160 / 936,731 / 9 | projection -> projection | mixed | not requested |
+| ImageHomCounit | 6,359,958 | 75.178% | 99.768% | 4,781,271 | 162/173/204 | 155--167 | 1.330 | 3 | 4,781,165 / 1,578,192 / 157 | projection -> projection | deep | not requested |
+
+The new M1-parent matrices make projection descent the dominant M1 strategy
+in EtaleHom, FiniteBaseChange, RealPurity, RealPushforward, IntegralComparison,
+F66Adj, and ImageHomCounit. OrderedSpectralRawLattices is the exception:
+application-argument descent is its largest M1-only row while M2 remains
+34.5% of time. The detailed case reports give the rows covering at least 90%
+of M1 exclusive time; mixed roots include non-M1 parents that feed M1
+children so that the coverage claim is complete.

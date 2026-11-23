@@ -1,62 +1,37 @@
-# RealPushforward M1 propagation (READY4.1)
+# RealPushforward M1 propagation (READY4.2)
 
-Fresh O is the full `Before.lean` source on Lean 4.35.0, current import
-revision `15b8acba63e`, READY4.1 kernel/analyzer revision `5ae674db0c7`.
-The expensive original root is 2005. O counters and analyzed root both
-record 17,340,236 calls, exactly the accepted READY3.2 count. Counter
-root wall/comparison/reduction are 59,267.968/59,265.094/2.874 ms;
-trace comparison exclusive is 93,214.215 ms. Aggregate coverage is
-17,340,236/17,340,236; raw entered coverage is 3,122/17,340,236
-(0.018%). The deterministic kernel timeout is the expected O outcome.
+The three fresh O repeats use `RealPushforward/Before.lean` from `m1p`
+revision `105ac3f5b23`, with READY4.2 (`0311a15b5f4`). Root 2005 reaches the
+expected deterministic timeout after complete aggregate capture.
 
-| Label | Calls | Exclusive ms | Share |
-|---|---:|---:|---:|
-| M0 | 1 | 0.021 | 0.000% |
-| M1 | 8,002,209 | 58,086.434 | 62.315% |
-| M2 | 4,364,762 | 34,071.861 | 36.552% |
-| Matched | 4,973,262 | 1,055.871 | 1.133% |
-| Unclassified | 2 | 0.027 | 0.000% |
+| Repeat result | Value |
+|---|---:|
+| O counters / analyzed calls | 17,340,236 / 17,340,236 (all repeats) |
+| Raw entered calls | 3,122 (0.018%) per repeat |
+| M1 calls / call share | 8,002,209 / 46.148% |
+| M1 time share | 61.446% [61.312--63.086%] |
+| M2 / Matched median time shares | 37.303% / 1.250% |
 
-M1's time share differs from the accepted READY3.2 share by more than
-0.5 percentage points, though every provenance call count and the root count match.
-The time-share difference is exclusively measured time weighting,
-consistent with READY4.1's additional branch/depth bookkeeping and
-run-to-run variation in the mixed failure/projection path. It is not
-a changed root. Counter and trace times are separate runs.
+Root and label call counts match READY4.1. Aggregate coverage is complete;
+raw records are only the bounded review sample.
 
-## A2: depth and fan-out
+## A2/A3
 
-M1 depth mean/median/p90/p99/max is 83.865/84/86/88/89.
-The narrowest 50% and 90% M1 exclusive-time bands are 82--84 and
-79--87. M1 fan-out mean/median/p90/max is 1.274/1/1/18.
-Its count histogram is 0: 69,232; 1: 7,658,286; 2: 129;
-3: 79; 4--9: 95,644; 10+: 178,839. No depth was clamped.
-This is mixed propagation: most nodes extend a deep unary chain, while
-178,839 nodes have ten or more children. In the bounded raw sample,
-M1 parents have 1,363 M1, 376 Matched, and 304 M2 child edges;
-these are not whole-root label-edge totals.
+M1 depth mean/median/p90/p99/max is 83.865/84/86/88/89. The 50% and 90%
+bands are 82--84 and 74--87. Fan-out mean/median/p90/max is 1.274/1/1/18.
+The analyzer verdict is **deep**. M1 edges are M1->M1 6,502,766,
+M1->Matched 1,698,481, and M1->M2 1,990,961.
 
-## A3: transition matrix
+The rows below cover 93.2% of M1 exclusive time; parent=M2 rows expose the
+M1 children below the large M2 branch.
 
-The five largest complete-root rows total 90.444 s. Even if all
-35,127.781 ms of non-M1 time fell in those rows, they still contain at
-least 95.2% of M1 time. READY4.1 does not emit label-specific row counts
-or row mean fan-out.
+| Parent | Child | Branch / kind | Calls | Exclusive ms | Mean fan-out |
+|---|---|---|---:|---:|---:|
+| M1 | M1 | projection / projection | 4,294,654 | 19,423.987 | 1.000 |
+| M2 | M1 | quick / dependent-body | 957,710 | 18,592.956 | 1.000 |
+| M1 | M1 | quick / dependent-body | 501,963 | 12,847.939 | 1.000 |
+| M2 | M1 | application / argument | 540,587 | 8,195.500 | 8.802 |
+| M1 | M1 | application / argument | 274,594 | 6,103.110 | 9.227 |
 
-| Parent outcome/branch | Child kind | Calls | Exclusive ms |
-|---|---|---:|---:|
-| failure | projection | 7,157,257 | 33,623.025 |
-| lazy_delta | dependent-body | 1,430,736 | 21,625.442 |
-| failure | field | 2,864,586 | 19,070.038 |
-| failure | argument | 3,542,981 | 11,594.005 |
-| failure | function-head | 2,245,822 | 4,531.172 |
-
-The transition matrix has 17,340,235 child calls, equal to root calls
-minus one. `failure` records the parent's final outcome, so these rows
-do not by themselves identify the branch that initiated the child.
-The Cone and EtaleHom primary roots have projection descent as their
-largest complete-root row; NativePullTensor emphasizes application
-congruence (`M1P-KERNEL.md`). This mixed root's largest row is
-failure-to-projection and its M2 share is 36.552%. The raw sample retains
-projection and argument M1 children, but the M1-only dominant kernel
-strategy cannot be established from the unlabeled complete-root rows.
+Projection to projection remains the dominant M1 transition, matching
+EtaleHom despite the large M2 share. C was not requested for this control.
