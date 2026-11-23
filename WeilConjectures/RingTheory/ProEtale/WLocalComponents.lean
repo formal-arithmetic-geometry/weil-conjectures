@@ -25,8 +25,7 @@ public import WeilConjectures.Topology.SpectralSpace.WLocal.Generalization
 variable {R : Type*} [CommRing R]
 
 /-- If `R` is w-local, the connected component of `Spec R` containing a closed point `m` is the
-image of `Spec R_m`, i.e. the set of primes contained in `m`.
-Blueprint: `proposition-w-local-components--2`. -/
+image of `Spec R_m`, i.e. the set of primes contained in `m`. -/
 theorem IsWLocalRing.connectedComponent_eq_range_comap_localization [IsWLocalRing R]
     (m : Ideal R) [m.IsMaximal] :
     connectedComponent (⟨m, inferInstance⟩ : PrimeSpectrum R) =
@@ -39,9 +38,8 @@ theorem IsWLocalRing.connectedComponent_eq_range_comap_localization [IsWLocalRin
   exact (Set.disjoint_compl_left_iff_subset (s := (m : Set R))).symm
 
 /-- If `R` is w-strictly local, every connected component of `Spec R` is the spectrum of a
-strictly henselian local ring: it is the image of the embedding `Spec R_m → Spec R` for the
-maximal ideal `m` corresponding to the unique closed point of the component, and `R_m` is
-strictly henselian. Blueprint: `proposition-w-local-components--3`. -/
+strictly henselian local ring: it is the image of the embedding `Spec R_m → Spec R` for some
+maximal ideal `m` with `R_m` strictly henselian. -/
 theorem IsWStrictlyLocalRing.exists_connectedComponent_eq_range_comap_localization
     [IsWStrictlyLocalRing R] (x : PrimeSpectrum R) :
     ∃ (m : Ideal R) (_ : m.IsMaximal),

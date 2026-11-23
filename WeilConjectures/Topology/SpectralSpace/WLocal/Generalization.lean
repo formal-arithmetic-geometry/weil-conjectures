@@ -22,8 +22,7 @@ generalizations of `c`.
 @[expose] public section
 
 /-- In a w-local space, the connected component of a closed point `c` consists exactly of the
-generalizations of `c`. This is the topological content of blueprint
-`proposition-w-local-components--2`. -/
+generalizations of `c`. -/
 lemma WLocalSpace.connectedComponent_eq_setOf_specializes {X : Type*} [TopologicalSpace X]
     [WLocalSpace X] {c : X} (hc : c ∈ closedPoints X) :
     connectedComponent c = {x | x ⤳ c} := by
