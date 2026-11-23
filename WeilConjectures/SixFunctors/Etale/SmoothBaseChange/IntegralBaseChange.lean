@@ -241,19 +241,14 @@ theorem Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom (π : S'' ⟶ S')
 
 end Source
 
-/-- Blueprint `lemma-integral-changes-source-base`: Integral changes of source and base.
+/-- Integral changes of source and base. Assume `BC(p, Λ, q - 1)` for some `q ≥ 1`. Then
 
-Assume `BC(p, Λ, q - 1)` for some `q ≥ 1`. A failure of base change along `p` in degree `q`
-
-1. persists after an integral surjective change `π : T' ⟶ T` of the source of the
-   quasi-compact quasi-separated morphism `g : T ⟶ S` along which we take direct image: if
+1. for an integral surjective `π : T' ⟶ T` and a quasi-compact quasi-separated `g : T ⟶ S`, if
    the base-change map over `π ≫ g` is an isomorphism at `π⁻¹ F`, then so is the one over `g`
-   at `F` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective`);
-2. persists after an integral change `π : S' ⟶ S` of the base through which this morphism
-   factors: for the base change `p'` of `p` along `π` and `g' : T ⟶ S'`, the base-change map
-   over `g' ≫ π` is an isomorphism at `F` if and only if the one for `p'` over `g'` is
-   (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom`, which needs
-   neither `BC(p, Λ, q - 1)` nor that `g'` be quasi-compact quasi-separated). -/
+   at `F`;
+2. for an integral `π : S' ⟶ S`, the base change `p'` of `p` along `π` and `g' : T ⟶ S'`, the
+   base-change map over `g' ≫ π` is an isomorphism at `F` if and only if the one for `p'` over
+   `g'` is. -/
 theorem Etale.BaseChangeProperty.isIso_baseChangeHomologyMap_of_integral_source_and_base
     {X S : Scheme.{u}} {p : X ⟶ S} {q : ℤ} (hq : 1 ≤ q)
     (hprev : Etale.BaseChangeProperty Λ p (q - 1)) :

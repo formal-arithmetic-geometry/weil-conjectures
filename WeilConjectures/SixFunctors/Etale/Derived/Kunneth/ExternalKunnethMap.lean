@@ -28,12 +28,17 @@ for the projections `pᵢ` of `Y₁ ×_S Y₂` and `qᵢ` of `X₁ ×_S X₂`, a
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.externalKunnethMap` (`definition-kunneth-map`): the Künneth map.
+- `AlgebraicGeometry.Etale.externalKunnethMap`: the Künneth map.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.map_externalKunnethMap_comp_counit`: the Künneth map is the adjoint
   transpose of `ε_{f₁} ⊠ ε_{f₂}`.
+
+## Implementation details
+
+The map is classically defined for `S = Spec k`, separated `k`-schemes of finite type and
+`Mᵢ ∈ Dᵇ_ctf(Xᵢ, A)`; none of these hypotheses is needed to define it.
 -/
 
 @[expose] public section
@@ -81,20 +86,8 @@ noncomputable def externalKunnethMapAdj
         (L((pullback.snd (f₁ ≫ b₁) (f₂ ≫ b₂))^*[A])).map
           ((derivedUpperStarLowerStarAdjunction A f₂).counit.app M₂))
 
-/-- Blueprint `definition-kunneth-map`: the Künneth map.
-
-For `f₁ : X₁ ⟶ Y₁`, `f₂ : X₂ ⟶ Y₂` with `Y₁`, `Y₂` over `S` through `b₁`, `b₂`, put
-`h = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`. For `M₁ ∈ D(X₁,ét)` and `M₂ ∈ D(X₂,ét)` the Künneth map
-
-`Rf₁_* M₁ ⊠ Rf₂_* M₂ ⟶ Rh_* (M₁ ⊠ M₂)`
-
-is the adjoint transpose, for `Lh^* ⊣ Rh_*`, of the morphism
-`Lh^* (Rf₁_* M₁ ⊠ Rf₂_* M₂) ⟶ Lf₁^* Rf₁_* M₁ ⊠ Lf₂^* Rf₂_* M₂ ⟶ M₁ ⊠ M₂`
-(`AlgebraicGeometry.Etale.externalKunnethMapAdj`) given by the monoidality of `Lh^*`, the
-isomorphisms `Lh^* Lpᵢ^* ≅ Lqᵢ^* Lfᵢ^*` and the counits `ε_{fᵢ}` of `Lfᵢ^* ⊣ Rfᵢ_*`.
-
-The blueprint takes `S = Spec k`, separated `k`-schemes of finite type and
-`Mᵢ ∈ Dᵇ_ctf(Xᵢ, A)`; none of these hypotheses is needed to define the map. -/
+/-- The Künneth map `Rf₁_* M₁ ⊠ Rf₂_* M₂ ⟶ Rh_* (M₁ ⊠ M₂)` for `h = f₁ × f₂`, the adjoint
+transpose of `AlgebraicGeometry.Etale.externalKunnethMapAdj`. -/
 noncomputable def externalKunnethMap
     (M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A))
     (M₂ : _root_.DerivedCategory (Sheaf X₂.smallEtaleTopology A)) :
@@ -104,7 +97,7 @@ noncomputable def externalKunnethMap
   (derivedUpperStarLowerStarAdjunction A (pullback.mapOverBase f₁ f₂ b₁ b₂)).homEquiv _ _
     (externalKunnethMapAdj A b₁ b₂ f₁ f₂ M₁ M₂)
 
-/-- Blueprint `definition-kunneth-map`: the Künneth map
+/-- The Künneth map
 `AlgebraicGeometry.Etale.externalKunnethMap` is the adjoint transpose of
 `AlgebraicGeometry.Etale.externalKunnethMapAdj`: applying `Lh^*` and composing with the counit
 of `Lh^* ⊣ Rh_*` recovers `ε_{f₁} ⊠ ε_{f₂}` precomposed with the monoidality of `Lh^*`. -/
