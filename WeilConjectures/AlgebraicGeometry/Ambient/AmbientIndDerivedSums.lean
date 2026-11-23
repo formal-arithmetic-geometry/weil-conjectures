@@ -153,8 +153,10 @@ private theorem localizing_of_small_sums
   have hr' := cofanIsColimit (hr.whiskerEquivalence e)
   exact hsum _ _ _ hr' (fun j ↦ hK ((equivShrink J).symm j).val)
 
-/-- The sums and truncations assertions for ind-constructible cohomology, for a finite
-subextension `E`. -/
+/-- Ind-constructible cohomology with coefficients in a finite subextension `E`: cohomology
+commutes with small sums; complexes with ind-constructible cohomology are closed under small sums
+and under truncations; bounded constructible complexes have ind-constructible cohomology; and so
+does every object of the localizing subcategory they generate. -/
 theorem indConstructibleDerived_sums_and_truncations
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -225,8 +227,11 @@ theorem indConstructibleDerived_sums_and_truncations
   · intro K hK
     exact hK _ hlocal hdbc
 
-/-- The sums and truncations assertions for ind-constructible cohomology, for the
-finite-subextension-valued condensed algebraic closure. -/
+/-- Ind-constructible cohomology with coefficients in the condensed algebraic closure (valued in
+finite subextensions): cohomology commutes with small sums; complexes with ind-constructible
+cohomology are closed under small sums and under truncations; bounded constructible complexes
+have ind-constructible cohomology; and so does every object of the localizing subcategory they
+generate. -/
 theorem indConstructibleDerived_sums_and_truncations_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]
     (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ)

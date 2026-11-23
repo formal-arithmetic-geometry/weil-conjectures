@@ -63,7 +63,7 @@ def upper (C : Scheme.{u}) (n : ℤ) : ObjectProperty (DerivedCategory (Modules 
   fun K ↦ (∀ a : ℤ, n < a → IsZero ((DerivedCategory.homologyFunctor _ a).obj K)) ∧
     IsPunctual Λ C ((DerivedCategory.homologyFunctor _ n).obj K)
 
-/-- The lower curve class at n: cohomology below n-1 vanishes and H^ has no
+/-- The lower curve class at n: cohomology below n-1 vanishes and H^(n-1) has no
 nonzero punctual subsheaf. This is the shift by -n of the displayed class at zero. -/
 def lower (C : Scheme.{u}) (n : ℤ) : ObjectProperty (DerivedCategory (Modules Λ C)) :=
   fun K ↦ (∀ a : ℤ, a < n - 1 → IsZero ((DerivedCategory.homologyFunctor _ a).obj K)) ∧

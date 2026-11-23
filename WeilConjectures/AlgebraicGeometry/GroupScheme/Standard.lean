@@ -404,7 +404,7 @@ theorem alphaGroup_existsUnique (p : ℕ) [NeZero p] [CharP k p] :
 noncomputable instance alphaGroup (p : ℕ) [NeZero p] [CharP k p] : GrpObj (alpha k p) :=
   (alphaGroup_existsUnique k p).exists.choose
 
-/-- The coordinate of μₙ is a unit, with inverse x^ (Stacks, Tag 040M). -/
+/-- The coordinate of μₙ is a unit, with inverse x^(n-1) (Stacks, Tag 040M). -/
 theorem rootsCoordinate_inverse (n : ℕ) [NeZero n] :
     rootsCoordinate k n * rootsCoordinate k n ^ (n - 1) = 1 ∧
       rootsCoordinate k n ^ (n - 1) * rootsCoordinate k n = 1 := by
@@ -427,7 +427,7 @@ theorem rootsLaurent_commutes (n : ℕ) [NeZero n] (c : k) :
   simp [← LaurentPolynomial.C_eq_algebraMap, LaurentPolynomial.eval₂_C]
 
 /-- The displayed quotient surjection k[t,t⁻¹] → k[t]/(t^n-1), sending
-t to its residue class and t⁻¹ to its-st power (Stacks, Tag 040M). -/
+t to its residue class and t⁻¹ to its (n-1)-st power (Stacks, Tag 040M). -/
 noncomputable def rootsQuotient (n : ℕ) [NeZero n] :
     LaurentPolynomial k →ₐ[k] rootsAlgebra k n :=
   { LaurentPolynomial.eval₂ (algebraMap k (rootsAlgebra k n)) (rootsCoordinateUnit k n) with

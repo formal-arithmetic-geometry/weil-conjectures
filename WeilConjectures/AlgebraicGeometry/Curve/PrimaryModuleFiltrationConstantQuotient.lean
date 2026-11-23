@@ -65,7 +65,8 @@ private theorem constant_fin_power (T : Scheme.{u}) (ℓ d : ℕ) :
       F.mapBiprod (AddCommGrpCat.of (Fin d → ULift.{u + 1} (ZMod ℓ)))
         (AddCommGrpCat.of (ULift.{u + 1} (ZMod ℓ))) ≪≫ biprod.mapIso hd (Iso.refl _)⟩
 
-/-- A trivial primary representation gives a constant prime-field sheaf. -/
+/-- The primary sheaf associated with a trivial representation on an abelian group `V` is the
+constant sheaf with value `V`. -/
 private theorem primary_trivialRepresentation_constant
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

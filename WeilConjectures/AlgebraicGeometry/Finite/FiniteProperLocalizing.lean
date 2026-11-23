@@ -437,7 +437,7 @@ include hℓ hp hpℓ hA k
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Keep the canonical derived functors abstract during elaboration.
-/-- Clause (1): proper pushforward preserves the recorded finite-coefficient Dctf and
+/-- Proper pushforward preserves the recorded finite-coefficient Dctf and
 restricts to an exact sum-preserving functor of the localizing closures. -/
 theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] :
     finiteCoefficientLocalizingProperties (finiteDiscreteCondensedCoefficient A)

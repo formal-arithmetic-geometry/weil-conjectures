@@ -23,7 +23,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
 /-- Primitive-root trivializations of the constant sheaf commute with extension of the base
-field, in the proper case. -/
+field. -/
 theorem constant_root_trivialization_baseChange
     {k K : Type u} [Field k] [Field K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) (n : ℕ) [NeZero n]

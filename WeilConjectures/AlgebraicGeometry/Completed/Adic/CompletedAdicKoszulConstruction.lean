@@ -446,7 +446,7 @@ def completedAdicKoszulOneSubShift (T : Scheme.{t}) (d : AdicCoefficientDatum A)
   𝟙 _ - Pi.lift (fun m ↦ Pi.π (completedAdicKoszulTensor T d r a C) (m + 1) ≫
     completedAdicKoszulTensorStep T d r a C m)
 
-/-- The mapping fibre with degree i terms B^i and B^. Taking the cone of -(1-s)
+/-- The mapping fibre with degree i terms B^i and B^(i-1). Taking the cone of -(1-s)
 and shifting by -1 gives exactly the differential (dx,(1-s)x-dy), under the canonical
 index isomorphisms of the shift. -/
 def completedAdicKoszulFibre (T : Scheme.{t}) (d : AdicCoefficientDatum A)

@@ -190,7 +190,7 @@ lemma chartEquivExtendedReesAlgebra_comp_awayAlgebraMap :
 
 /-- **The Rees model of the deformation space is the chart `D₊(t·X)` of the blow-up**: the open
 immersion `Spec R[t, I t⁻¹] ⟶ Bl_J (Spec R[t])`, `J = I R[t] + (t)`, onto the basic open of
-`t·X`. (form.) -/
+`t·X`. -/
 noncomputable def deformationChart :
     Spec (.of I.extendedReesAlgebra) ⟶ AffineBlowup (deformationCenter I) :=
   Spec.map (CommRingCat.ofHom (chartEquivExtendedReesAlgebra I).toRingHom) ≫

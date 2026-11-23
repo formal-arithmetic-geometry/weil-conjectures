@@ -120,6 +120,9 @@ private theorem localDim_fiber_point {X S : Scheme.{u}} (f : X ⟶ S)
   simpa using hy
 
 /--
+The dimension of the fibre at a point is invariant under base change: the fibre dimension of
+`f'` at `x'` equals the fibre dimension of `f` at its image `x`.
+
 The fibre `(X')_{s'}` is identified with `X_s ×_{κ(s)} κ(s')` by an isomorphism
 compatible with the maps to `X_s` and to `Spec κ(s')` (the base change of `X_s` along
 `κ(s) → κ(s')`); `f x = s` is the cartesian-square relation `s = g(s') = f(x)`.
