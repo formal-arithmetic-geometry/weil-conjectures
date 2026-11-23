@@ -11,8 +11,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Grothendieck module sheaves with independent site and coefficient universes
 
-Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Cohomology on Sites,
-Section 07A5; Injectives, Tag 079Q (auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Injectives, Tag 079Q.
 -/
 
 @[expose] public section
@@ -96,23 +95,7 @@ end
 
 /-- Module sheaves form a Grothendieck abelian category in a common universe containing
 both the small site and its ring coefficients. The rings need not be commutative.
-Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Cohomology on Sites,
-Section 07A5; Injectives, Tag 079Q (auxiliary; not a blueprint node).
-
-Proof:
-1. Construct free representable presheaves in the common module universe as finitely
-supported functions on the lifted hom sets, with coefficients in the original rings.
-Restrictions precompose the basis labels and apply the ring restriction to coefficients.
-A section x over X defines a map out of this free presheaf by sending the basis label
-f : Y ⟶ X to the restriction of x along f; its value at the identity basis vector is x.
-2. Sheafify these free presheaves. If two maps agree after every map from each such
-sheaf, adjunction makes their underlying maps agree on all free presheaf maps.
-Evaluation at the identity basis vector gives equality on every section, hence equality
-of the original maps. Their coproduct is therefore a separator.
-3. Module-sheaf colimits exist by sheafifying presheaf colimits. The underlying abelian
-sheaf functor preserves colimits and finite limits and reflects isomorphisms. Since
-filtered colimits of abelian sheaves are exact, they are exact for module sheaves too.
-The separator and these properties give the stated Grothendieck abelian structure. -/
+Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Injectives, Tag 079Q. -/
 theorem isGrothendieckAbelianOfUniverses
     {C : Type c} [Category.{h} C] (J : GrothendieckTopology C)
     (R : Sheaf J RingCat.{r}) :

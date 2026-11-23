@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 /-!
 # Essentially constant inverse systems of abelian groups
 
-Source: Stacks Project, Categories, Definitions 4.22.1(2) and 4.22.2, Tags 05PU and 05PV
-(blueprint: def-weil-pbc-essentially-constant-system).
+Source: Stacks Project, Categories, Definitions 4.22.1(2) and 4.22.2, Tags 05PU and 05PV.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace CategoryTheory.Functor
 /-- An inverse system of abelian groups is essentially constant with value `X` when there are
 compatible maps `π n : X ⟶ F.obj (op n)` which split at one index `i₀`. Every transition
 map into `j` then eventually factors through `X` using that splitting. The index `n : ℕ`
-represents the positive integer `n + 1` (Stacks, Tags 05PU(2), 05PV).
-(blueprint: def-weil-pbc-essentially-constant-system) -/
+represents the positive integer `n + 1` (Stacks, Tags 05PU(2), 05PV). -/
 def IsEssentiallyConstantWithValue (F : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (X : AddCommGrpCat.{u}) :
     Prop :=
   ∃ π : ∀ n : ℕ, X ⟶ F.obj (Opposite.op n),
@@ -42,8 +40,7 @@ def IsEssentiallyConstantWithValue (F : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (X : Ad
 
 /-- An inverse system of abelian groups is essentially constant when it is essentially constant
 with some value `X` (`IsEssentiallyConstantWithValue`). The index `n : ℕ` represents the
-positive integer `n + 1` (Stacks, Tags 05PU(2), 05PV).
-(blueprint: def-weil-pbc-essentially-constant-system) -/
+positive integer `n + 1` (Stacks, Tags 05PU(2), 05PV). -/
 def IsEssentiallyConstant (F : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) : Prop :=
   ∃ X : AddCommGrpCat.{u}, F.IsEssentiallyConstantWithValue X
 

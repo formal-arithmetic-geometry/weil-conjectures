@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 /-!
 # Tor as the kernel of a tensor image inclusion
 
-Source: Stacks Project, Tag 0653, the Tor argument in `lemma-last-one-flat`.
-(blueprint: lem-pc-module-opcycles-tor-kernel-iso).
+Source: Stacks Project, Tag 0653, the Tor argument in.
 -/
 
 @[expose] public section
@@ -50,21 +49,7 @@ private theorem isZero_tor_one_flat
     Module.Flat.rTensor_shortComplex_exact M _ (Q.exact_succ 0)
 
 /-- The first Tor of the opcycles is the kernel of the image inclusion after tensoring.
-Source: Stacks Project, Tag 0653, Tor argument; Algebra, Tags 00M0 and 00M3.
-(blueprint: lem-pc-module-opcycles-tor-kernel-iso)
-
-Proof: Put K = im(P.d (a-1) a). The image inclusion and the opcycles projection form
-an exact sequence 0 -> K -> P.X a -> P.opcycles a -> 0. Apply the first-variable
-low-degree Tor sequence. Flatness of P.X a makes Tor_1(P.X a,N) zero: Tor symmetry
-identifies it with Tor_1(N,P.X a), computed from a projective resolution of N
-whose tensor with the flat module P.X a remains exact in positive degrees.
-Exactness of the Tor sequence then makes the boundary injective with image exactly
-ker(K tensor N -> P.X a tensor N). Factor the boundary through that kernel; the
-factor is both injective and surjective, hence an isomorphism. The boundary is
-natural in N by the long exact sequence theorem. Kernel inclusions are monic, so
-this naturality passes to the factors. Finally, evaluation of a functor-category
-kernel is canonically the kernel of its evaluated map, giving the stated natural
-isomorphism. No flatness of any other term of P is required. -/
+Source: Stacks Project, Tag 0653, Tor argument; Algebra, Tags 00M0 and 00M3. -/
 theorem nonempty_tor_opcycles_tensor_image_kernel_iso
     (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ)
     (a : ℤ) (hflat : Module.Flat A (P.X a)) :

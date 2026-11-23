@@ -14,10 +14,6 @@ public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiber
 
 /-! # Cohomology modules of coefficient complexes
 
-Source: Weil blueprint, `def-weil-ordinary-compact-cohomology`, order 1510,
-with the four coefficient categories of `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: def-weil-coefficient-cohomology-modules).
-
 The generic ring-level functor is Mathlib's `DerivedCategory.homologyFunctor`.
 Its value on a representing complex is ker(d)/im(d), by
 `DerivedCategory.homologyFunctorFactors` and `ShortComplex.moduleCatHomologyIso`.
@@ -42,8 +38,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
 
-/-- Cohomology restricted to bounded finite-dimensional coefficient complexes.
-Source: blueprint order 1510 (blueprint: def-weil-coefficient-cohomology-modules). -/
+/-- Cohomology restricted to bounded finite-dimensional coefficient complexes. -/
 noncomputable def coefficientFdCohomology (F : Type u) [Field F] (i : ℤ) :
     (pointFiniteDimensional F).FullSubcategory ⥤ ModuleCat.{u} F :=
   (pointFiniteDimensional F).ι ⋙ homologyFunctor (ModuleCat.{u} F) i

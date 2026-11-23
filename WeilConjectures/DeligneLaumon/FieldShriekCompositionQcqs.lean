@@ -19,7 +19,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 import WeilConjectures.DeligneLaumon.FieldShriekCompositionCoefficientSquare
 import WeilConjectures.DeligneLaumon.FieldShriekCompositionIntegralComponent
-import WeilConjectures.DeligneLaumon.FieldShriekCompositionIntegralNaturality
 import WeilConjectures.CategoryTheory.ScalarLocalization.PbcRationalTransport
 
 /-! # Canonical compact-support composition with field coefficients on qcqs schemes

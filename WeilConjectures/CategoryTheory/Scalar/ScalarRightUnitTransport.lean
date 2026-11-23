@@ -15,11 +15,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Normalized tensor and unit representative squares imply right unitality.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-right-unit-transport).
-Proof: tensor the unit normalization with the representative at X. Tensorator
-naturality and its normalization turn one side into the image of the ordinary
-right-unit law. The other side is the proposed right-unit composite followed by
-the representative. Cancel that monomorphism. -/
+Source: Stacks 07A4. -/
 theorem rightUnit_on_representative
     {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E] [MonoidalCategory H]
@@ -71,7 +67,7 @@ theorem rightUnit_on_representative
   exact hright.symm.trans (h.symm.trans hleft)
 
 /-- The right-unit composite of a natural scalar tensor comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-right-unit-transport). -/
+Source: Stacks 07A4. -/
 def scalarRightUnitMap
     {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D]

@@ -9,7 +9,7 @@ import WeilConjectures.CategoryTheory.StrictTowerArithmetic.StrictTowerArithmeti
 import Mathlib.CategoryTheory.Limits.Final
 /-! # The normalized derived arithmetic comparison
 
-Source: Stacks Project, Tags 0941 and 0H9K; uniqueness of right derived functors.
+Source: Stacks Project, Tags 0941 and 0H9K.
 -/
 
 -- After pruning, this module only keeps private declarations.

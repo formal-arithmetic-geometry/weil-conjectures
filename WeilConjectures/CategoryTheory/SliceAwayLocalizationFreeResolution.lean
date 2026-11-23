@@ -15,8 +15,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # The free telescope resolution of a localized ring sheaf
 
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af, displayed resolution
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0997, displayed resolution.
 -/
 
 @[expose] public section
@@ -124,15 +123,7 @@ private lemma telescope_normal_form (f : R) (x : ℕ →₀ R) :
 /-- The weighted successor presents localization over any commutative ring, including
 rings with zero divisors and localization at zero.
 
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af, sectionwise displayed resolution.
-(auxiliary; not a blueprint node).
-
-Proof: coordinate induction proves injectivity of D. The fractions telescope, giving QD=0.
-Modulo the image of D, move each coordinate to a common later coordinate using
-[e_n a]=[e_m f^(m-n)a]. A finite sum is therefore represented by e_m a. If its fraction is
-zero, invertibility of f in the localization gives algebraMap(a)=0. The localization
-relation supplies k with f^k a=0. Moving to coordinate m+k now kills this representative.
-Every fraction is Q(e_n a), which proves surjectivity. No cancellation in R is used. -/
+Source: Stacks Project, Tag 0997, sectionwise displayed resolution. -/
 private theorem localization_telescope_exact (f : R) :
     Function.Injective (localizationTelescopeD f) ∧
       Function.Exact (localizationTelescopeD f) (localizationTelescopeQ f) ∧
@@ -617,26 +608,7 @@ end
 coordinate inclusions determine the maps uniquely and imply the finite-support formulas
 on local representatives. Rings are commutative, as in the Stacks convention.
 
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af, displayed resolution.
-(auxiliary; not a blueprint node).
-
-Proof:
-1. On the slice (def-pur-localized-ringed-site), form the presheaves P of finite-support
-sequences and L of fractions, with the restriction maps on coefficients. Define D by
-identity minus the f-weighted forward shift and Q by summing x_n/f^n.
-2. Coordinate induction makes D injective. Telescoping gives QD = 0, and a single
-coordinate gives every fraction, so Q is surjective sectionwise.
-3. Modulo im D, move each coordinate a e_n to f^(m-n)a e_m for m ≥ n.
-Induction on finite sequences then writes x - a e_m in im D. If Qx = 0,
-invertibility of f in the localization gives algebraMap(a) = 0.
-4. The localization relation supplies k with f^k a = 0, without cancelling f in R.
-Move a e_m to coordinate m+k: it is zero there. Hence x lies in im D.
-This includes k = 0, the zero sequence, and localization at zero.
-5. Apply lem-weil-pbc-ringed-site-module-sheafification-exact to this exact sequence;
-its Mathlib instances are imported through Presheaf.Sheafification.
-6. The adjunction def-weil-presheaf-modules-sheafification identifies P's sheafification
-with the countable coproduct of unit modules. The coordinate formulas descend to the
-sheafification and give precisely d and q. -/
+Source: Stacks Project, Tag 0997, displayed resolution. -/
 theorem sliceAwayLocalization_free_resolution {C : Type uC} [Category.{vC} C]
     {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] (O : Sheaf J CommRingCat.{u}) (U : C)

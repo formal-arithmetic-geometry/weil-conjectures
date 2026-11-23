@@ -147,7 +147,6 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E (application); sites-cohomology.tex,
 Tag 0941 (resolved Roos triangle); derived.tex, Tags 070I, 08BJ, 0BK6.
-(blueprint: lem-weil-pbc-finite-free-strict-tower-transport).
 
 The helpers specify canonical maps and their cochain factorizations. Positive
 levels are indexed by `n : ℕ` meaning level `n + 1`. All complexes are unbounded.
@@ -168,13 +167,13 @@ open SheafOfModules
 namespace CategoryTheory
 
 /-- The ordinary inverse-limit functor on cochain complexes of strict towers.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 abbrev strictTowerLimitComplex (A : Type uA) [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] :=
   (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The canonical inclusion of the ordinary strict limit into the product of evaluations.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 def strictTowerLimitInclusion {A : Type uA} [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
     (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
@@ -184,7 +183,7 @@ def strictTowerLimitInclusion {A : Type uA} [Category.{vA} A] [Abelian A]
 
 /-- Product comparison from a cochain tower to its derived evaluations, including the
 specified evaluation factorization of the strict-limit interface.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 def strictTowerResolvedProduct {A : Type uA} [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
@@ -199,7 +198,7 @@ def strictTowerResolvedProduct {A : Type uA} [Category.{vA} A] [Abelian A]
 /-- Normalization of the whole Roos triangle on injective-term K-injective towers.
 The last equation fixes the connecting arrow as the actual short-exact-sequence boundary.
 It does not choose a completion of an abstract triangle.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 def strictTowerRoosNormalized
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
@@ -249,7 +248,7 @@ private theorem towerProductComparison_middle
 /-- Finite-free transport data with the normalized ordinary and derived comparisons,
 all three Roos squares and the strict augmentation formula. `augmentation` quantifies
 all maps to the ordinary limit, equivalently all compatible strict augmented towers.
-Source: Stacks 0A0E, 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0A0E, 0941. -/
 structure FiniteFreeStrictTowerTransport
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B]
@@ -1433,38 +1432,7 @@ and the complete functorial Roos triangles of strict towers, including strict au
 The hypothesis is only existence of a finite basis, not the choice of one. The counit equation
 identifies the exact cochain model with the recorded derived tensor functor.
 
-Source: Stacks 0A0E, 0941, 070I, 08BJ, 0BK6
-(blueprint: lem-weil-pbc-finite-free-strict-tower-transport).
-
-Proof:
-1. Tensor cancellation at the unit identifies restriction of scalar extension with
-   tensor by the restricted unit. A finite basis and the finite biproduct comparison
-   identify this with a finite power. Exact conservative restriction therefore detects
-   exactness and preservation of limits by scalar extension, also on strict towers.
-2. Localize the exact ordinary scalar adjunction. Derived restriction preserves products
-   and detects isomorphisms by homology. Finite powers are self-adjoint and their derived
-   functors preserve products. The composite comparison proves that exact derived scalar
-   extension preserves countable products, including rank zero. Left-derived uniqueness
-   identifies it with the recorded derived tensor, with the specified counit equation.
-3. Use the normalized resolution construction of total derived inverse limit. The absolute
-   right-derived universal property constructs the comparison from the ordinary limit map;
-   localization constructs the evaluation comparison. Product projections and the first
-   normalization give the first Roos square on resolved towers and then on every tower.
-4. An exact functor preserves the actual short-exact-sequence boundary: cancel the cone
-   quasi-isomorphism and use the mapping-cone comparison, including its third arrow and
-   the standard shift compatibility of the localization factorization. Ordinary limit and
-   product comparisons give an isomorphism of Roos short complexes.
-5. Naturality extends the target boundary formula to every tower with a short exact Roos
-   sequence by passing to an injective-term K-injective resolution. Apply this to the image
-   source resolution. Boundary naturality and the comparison unit equation give the last
-   Roos square. Resolution naturality extends it to all derived towers. Additivity and
-   product projections give the middle square.
-6. The three squares form a morphism of distinguished triangles with invertible product
-   components. The triangulated five lemma makes the limit comparison invertible.
-   Composing its unit equation with a strict augmentation proves the augmentation equation;
-   naturality gives the equation for maps of entire augmented towers.
-No exactness of countable sheaf products or boundedness is used. Basis choices occur only
-in proving invertibility, so the canonical comparisons are independent of them. -/
+Source: Stacks 0A0E, 0941, 070I, 08BJ, 0BK6. -/
 theorem finiteFreeStrictTowerTransport
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

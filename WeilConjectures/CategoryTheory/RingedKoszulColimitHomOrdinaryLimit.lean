@@ -69,26 +69,7 @@ set_option backward.isDefEq.respectTransparency true in
 of the strict dual tensor tower, naturally in the coefficient complex and compatibly
 with the actual degree-zero units. This is a statement before localization.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals, finite evaluation and Hom of a colimit;
-more-algebra.tex, Tag 0913.
-(auxiliary; not a blueprint node).
-
-Proof: for each positive Koszul complex P_m, finite evaluation gives
-Hom(P_m,N) = N tensor Hom(P_m,O[0]). Its component on the summand of source degree p
-and coefficient degree q uses the usual total-complex sign; the two differential
-terms therefore agree with d(f) = d_N f - (-1)^degree(f) f d_P. This evaluation is
-natural in P_m and N, hence identifies the dual transition maps with the actual
-strict tensor-tower transitions. Internal Hom sends colimits in its first variable
-to limits: degreewise use the tensor-Hom adjunction and the colimit universal
-property, then commute the products over source degrees and tower indices.
-The resulting degreewise isomorphisms commute with differentials and coefficient
-maps, giving the displayed natural isomorphism. Precomposition with the colimit
-augmentation restricts at stage m to precomposition with P_m -> O[0]. Evaluation
-at one identifies this with tensoring the dual degree-zero unit, so equality after
-every limit projection gives the asserted unit equation. For the empty list these
-are the constant unit tower and the unit evaluation isomorphism; zero and invertible
-generators require no division in this construction. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; more-algebra.tex, Tag 0913. -/
 theorem exists_ringedKoszul_colimitHom_ordinaryLimit_iso :
     ∃ e : (homComplexFunctor (R := O)).obj (op (colimit (ringedKoszulDiagram O r b))) ≅
         ringedKoszulTensorTowerFunctor O r b ⋙

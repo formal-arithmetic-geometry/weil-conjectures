@@ -12,8 +12,7 @@ import Mathlib.Data.Fintype.Option
 
 /-! # Common refinements of denominator triangles
 
-Source: Stacks Project, Derived Categories, Tag 05R9, with arrows reversed
-(blueprint: lem-pur-triangle-common-refinement-ms3-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9, with arrows reversed.
 -/
 
 @[expose] public section
@@ -311,27 +310,7 @@ private lemma finite_triangle_refinement
 
 /-- Finite families of distinguished denominator triangles over `T` have a common predecessor,
 and parallel denominator triangle morphisms are equalized by another denominator triangle.
-Source: Stacks Project, Derived Categories, Tag 05R9, dual construction
-(blueprint: lem-pur-triangle-common-refinement-ms3-05r9).
-
-Proof: (1) The right fraction calculus makes `S/X` cofiltered. Saturation ensures every
-commuting arrow between denominators lies in `S`: use MS2 to complete a square, MS3 to
-cancel its denominator, and MS4 on the two resulting composites. For two triangles choose
-an X-predecessor and complete its S-map to a distinguished denominator triangle by
-`lem-pur-triangle-completion-ms6-05r9`. Rotate and repeat for Y and Z. The candidate component
-maps agree with the fixed maps into T. MS3 gives a further S-precomposition making the
-first triangle square commute; complete this map to a denominator triangle. Rotate and
-repeat for the remaining squares. Earlier equalities persist under precomposition and MS1
-keeps all components in S. Iterate for a finite nonempty family; for the empty family use
-the identity of T.
-(2) For parallel maps, their composites with the target denominator agree. MS3 gives an
-S-map into the common source equalizing their first components. Complete it to a
-triangle map by `lem-pur-triangle-completion-ms6-05r9`. Rotate and repeat for the second and
-third components. Precomposition preserves earlier equalities and MS1 preserves membership
-in S. The final composite is the required equalizer arrow.
-(3) All chosen triangles are distinguished, all component maps lie in S, and all maps
-commute over T. Thus these are precisely the finite-predecessor and parallel-equalization
-conditions of the category in the node. -/
+Source: Stacks Project, Derived Categories, Tag 05R9, dual construction. -/
 theorem triangle_common_refinement_and_equalization
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

@@ -85,13 +85,12 @@ import WeilConjectures.CategoryTheory.ProductShift.ProductCommShift
 
 /-! # Strict Roos cone calculus
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-lem-pe-derived-nakayama-first-reduction, Cones paragraph; Stacks Tags 08TC,
-07KC, 014E and 011G (blueprint: lem-pe-roos-cone-calculus).
+Source: Stacks Tags 08TC,
+07KC, 014E and 011G.
 
 The construction is `CategoryTheory.roosF`, without a second Roos model.
 The helper predicates specify its comparisons by their actual component maps.
-Natural-number level n means the positive level n+1 of the blueprint.
+Natural-number level n means the positive level n+1.
 -/
 
 @[expose] public section
@@ -111,37 +110,31 @@ namespace CategoryTheory.RoosConeCalculus
 section Coordinates
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The product projection in a specified degree. Source: Stacks 08TC
-(blueprint: lem-pe-roos-cone-calculus). -/
+/-- The product projection in a specified degree. Source: Stacks 08TC. -/
 noncomputable abbrev π (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) (n : ℕ) :=
   (Pi.π (fun n : ℕ => N.asFunctor.obj (op n)) n).f q
 
-/-- The coordinate v of the existing Roos fibre. Source: Stacks 08TC
-(blueprint: lem-pe-roos-cone-calculus). -/
+/-- The coordinate v of the existing Roos fibre. Source: Stacks 08TC. -/
 noncomputable abbrev v (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ) :=
   (roosProj N).f q
 
-/-- The coordinate u of the existing Roos fibre. Source: Stacks 08TC
-(blueprint: lem-pe-roos-cone-calculus). -/
+/-- The coordinate u of the existing Roos fibre. Source: Stacks 08TC. -/
 noncomputable abbrev ucoord (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)
     (q p : ℤ) (h : q - 1 = p) : (roosF.obj N).X q ⟶ (roosP N).X p :=
   (mappingCocone.snd (roosU N)).v q p (by omega)
 
-/-- The target coordinate of a cone. Source: Stacks 014E
-(blueprint: lem-pe-roos-cone-calculus). -/
+/-- The target coordinate of a cone. Source: Stacks 014E. -/
 noncomputable abbrev coneTarget {B : Type a} [Category.{b} B] [Abelian B]
     {K L : CochainComplex B ℤ} (f : K ⟶ L) (q : ℤ) :=
   (mappingCone.snd f).v q q (add_zero q)
 
-/-- The source coordinate of a cone. Source: Stacks 014E
-(blueprint: lem-pe-roos-cone-calculus). -/
+/-- The source coordinate of a cone. Source: Stacks 014E. -/
 noncomputable abbrev coneSource {B : Type a} [Category.{b} B] [Abelian B]
     {K L : CochainComplex B ℤ} (f : K ⟶ L) (q p : ℤ) (h : q + 1 = p) :=
   (mappingCone.fst f).1.v q p h
 
 /-- Four projection equations for (b,a,b',a') ↦ (b,b',a,-a').
-Source: Stacks 014E and blueprint Cones paragraph
-(blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 014E. -/
 def ConeFormula {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N')
     (e : roosF.obj (mappingCone f) ≅ mappingCone (roosF.map f)) : Prop :=
   ∀ (q : ℤ) (n : ℕ),
@@ -161,8 +154,7 @@ def ConeFormula {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N')
         (coneSource f (q - 1) q (by omega)).app (op n)))
 
 /-- The component equations for the signed coherent shift comparison.
-Source: Stacks 011G and blueprint Cones paragraph
-(blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 011G. -/
 def ShiftFormula (cs : (roosF (A := A)).CommShift ℤ) : Prop :=
   ∀ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r q : ℤ) (n : ℕ),
     (((Functor.commShiftIso roosF (self := cs) r).hom.app N).f q ≫
@@ -177,23 +169,20 @@ def ShiftFormula (cs : (roosF (A := A)).CommShift ℤ) : Prop :=
         ((shiftFunctorObjXIso N r (q - 1) ((q - 1) + r) rfl).hom).app (op n)))
 
 /-- A cone over the evaluated tower has its already defined strict augmentation.
-Source: blueprint Cones paragraph; Stacks 08TC
-(blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 08TC. -/
 noncomputable abbrev augmentation {N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
     (j : Cone N.asFunctor) : j.pt ⟶ roosF.obj N :=
   roosAugment (fun n => j.π.app (op n)) (fun n => by
     exact j.w (homOfLE (Nat.le_succ n)).op)
 
-/-- Compatibility of maps between augmented towers, before taking fibres.
-Source: blueprint Cones paragraph (blueprint: lem-pe-roos-cone-calculus). -/
+/-- Compatibility of maps between augmented towers, before taking fibres. -/
 def AugmentedSquare {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N')
     (j : Cone N.asFunctor) (j' : Cone N'.asFunctor) (g : j.pt ⟶ j'.pt) : Prop :=
   ∀ n : ℕ, j.π.app (op n) ≫
     (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f).app (op n) =
       g ≫ j'.π.app (op n)
 
-/-- Naturality of zero-second-coordinate augmentations.
-Source: blueprint Cones paragraph (blueprint: lem-pe-roos-cone-calculus). -/
+/-- Naturality of zero-second-coordinate augmentations. -/
 def AugmentationNaturality (A : Type a) [Category.{b} A] [Abelian A]
     [HasCountableProducts A] : Prop :=
   ∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N')
@@ -202,8 +191,7 @@ def AugmentationNaturality (A : Type a) [Category.{b} A] [Abelian A]
       augmentation j ≫ roosF.map f = g ≫ augmentation j'
 
 /-- Naturality and preservation of inclusion and the signed cone boundary.
-Source: blueprint Cones paragraph and Stacks 014E
-(blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 014E. -/
 def ConeCompatibility (cs : (roosF (A := A)).CommShift ℤ)
     (e : ∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N'),
       roosF.obj (mappingCone f) ≅ mappingCone (roosF.map f)) : Prop :=
@@ -221,8 +209,7 @@ def ConeCompatibility (cs : (roosF (A := A)).CommShift ℤ)
       (e f).hom ≫ (mappingCone.triangle (roosF.map f)).mor₃))
 
 /-- Cone augmentations are the induced cone maps of the two strict augmentations.
-The hypotheses specify exactly the two levelwise cone coordinates.
-Source: blueprint Cones paragraph (blueprint: lem-pe-roos-cone-calculus). -/
+The hypotheses specify exactly the two levelwise cone coordinates. -/
 def ConeAugmentation
     (e : ∀ {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N'),
       roosF.obj (mappingCone f) ≅ mappingCone (roosF.map f))
@@ -241,8 +228,7 @@ def ConeAugmentation
         (hnat f j j' g h).symm
 
 /-- Induced shifted augmentations commute with the coherent comparison.
-Source: blueprint Cones paragraph and Stacks 011G
-(blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 011G. -/
 def ShiftAugmentation (cs : (roosF (A := A)).CommShift ℤ) : Prop :=
   ∀ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (j : Cone N.asFunctor) (r : ℤ)
     (js : Cone (N⟦r⟧).asFunctor) (c : js.pt ⟶ j.pt⟦r⟧),
@@ -255,8 +241,7 @@ def ShiftAugmentation (cs : (roosF (A := A)).CommShift ℤ) : Prop :=
       c ≫ (augmentation j)⟦r⟧'
 
 /-- The actual differential, diagonal maps and zero-second-coordinate augmentation.
-Source: blueprint Cones paragraph; Stacks 014E, 011G and 08TC
-(blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 014E, 011G and 08TC. -/
 def CoordinateCalculus (A : Type a) [Category.{b} A] [Abelian A]
     [HasCountableProducts A] : Prop :=
   (∀ (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : ℤ),
@@ -275,7 +260,7 @@ def CoordinateCalculus (A : Type a) [Category.{b} A] [Abelian A]
 
 /-- The localized triangle uses the actual localized termwise product projections.
 It is a Roos triangle for the tower, with its product identified by those projections.
-Source: Stacks 08TC and 07KC (blueprint: lem-pe-roos-cone-calculus). -/
+Source: Stacks 08TC and 07KC. -/
 def DerivedRoos [HasDerivedCategory.{w} A]
     (N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : Prop :=
   Nonempty (IsLimit (DerivedCategory.Q.mapCone
@@ -1513,42 +1498,8 @@ set_option backward.isDefEq.respectTransparency.types true in
 Roos derived limits, and has the specified natural cone and coherent shift comparisons,
 including compatibility with the actual zero-second-coordinate augmentations.
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-lem-pe-derived-nakayama-first-reduction, Cones paragraph; Stacks 08TC, 07KC,
-014E and 011G (blueprint: lem-pe-roos-cone-calculus).
-
-Proof plan:
-1. Use the product universal property (def-weil-category-product) to define the transition
-   shift and verify it commutes with d and strict product maps (def-weil-inverse-system).
-   The existing roosF of def-weil-strict-roos-model is Cone(1-T)[-1]; expanding its
-   coordinates gives (dv,-du-(1-T)v). Projectionwise verification gives additivity,
-   the diagonal map formula and naturality of the zero-second-coordinate augmentation.
-2. By proposition-exact-products--2, the product of levelwise quasi-isomorphisms is a
-   quasi-isomorphism. Apply lem-pe-roos-coordinates-quasi-iso with endomorphism -(1-T)
-   to get the same result for the diagonal Roos map; no boundedness is required.
-3. The actual localized product cone is limiting by proposition-exact-products--2. Thus Q(1-T)
-   is the derived transition endomorphism. Inverse rotation of the cone triangle using
-   def-weil-triangulated-category gives the localized mapping-cocone triangle, with
-   projection v and last map w↦(0,w). This is def-weil-derived-limit's Roos triangle;
-   transport along the unique projection-preserving product isomorphism.
-4. For epsilon=(-1)^r the shift comparison (v,u)↦(v,epsilon u) commutes with d, is
-   natural, and is involutive in these coordinates. The identities epsilon(0)=1 and
-   epsilon(r+s)=epsilon(r)epsilon(s) give coherent shifts. This is the existing signed
-   comparison of lem-weil-roos-comm-shift transported to the strict-tower presentation.
-5. Expand both double cones: the source differential on (b,a,b',a') is
-   (db+Fa,-da,-db'-Fa'-(1-T')b,da'-(1-T)a). The permutation with sign
-   (b,a,b',a')↦(b,b',a,-a') intertwines it with the target differential, and has
-   inverse (b,b',a,c)↦(b,a,b',-c). The four projection equations uniquely specify it.
-6. Every strict square acts by the four diagonal product maps, which commute with
-   this permutation and sign. The inclusion sends (b,b') to (b,0,b',0).
-   The boundary -p followed by the shift comparison is (-a,a'), also -p after
-   the cone comparison. These establish naturality, inclusion and boundary identities.
-7. For a compatible family j, (1-T)J=0 after every product projection. Therefore
-   (J,0) is the existing chain map roosAugment; diagonal product maps give naturality.
-8. Shifts multiply its zero coordinate by a sign and preserve it. The induced cone
-   augmentation ((J'm',Jm),(0,0)) goes to ((J'm',0),(Jm,0)), the cone map of the
-   two augmentations. Checking the two levelwise coordinates proves the stated
-   conditional compatibility for every induced cone and shifted augmentation. -/
+Source: Stacks 08TC, 07KC,
+014E and 011G. -/
 theorem roos_cone_calculus
     (X : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) RingCat.{max u (t + 1)})

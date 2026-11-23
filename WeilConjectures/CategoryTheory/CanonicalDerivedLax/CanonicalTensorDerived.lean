@@ -15,9 +15,6 @@ An exact additive lax monoidal functor induces a lax monoidal functor on the nat
 unbounded derived categories. Descend through the strong monoidal localization of
 K-flat source complexes, then transport the normalization to arbitrary complexes by
 functorial K-flat quasi-isomorphisms. The functor need not preserve flat objects.
-
-Source: blueprint local boundary duality, Step 5, deriving the evaluation tensor pairing.
-(blueprint: lem-a1-canonical-lax-derived)
 -/
 
 @[expose] public noncomputable section
@@ -56,16 +53,7 @@ variable {A B : Type*} [Category.{u} A] [Category.{u} B]
     (F : A ⥤ B) [F.Additive] [F.LaxMonoidal]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
-/-- Exact-derived lax monoidality with the specified chain-level normalization.
-
-Proof: the inclusion of K-flat complexes followed by localization is strong monoidal.
-Compose the termwise lax structure with target localization and descend along this
-strong localization, using the canonical exact-derived factor as lifting. The descent
-formulas give the unit equation and the tensor equation on K-flat complexes. For any
-P,Q, precompose the two tensor equations by the localized K-flat resolutions. Naturality
-identifies them, and their invertible images cancel to give the equation on P,Q.
-Source: blueprint local boundary duality, Step 5, derived evaluation pairing.
-(blueprint: lem-a1-canonical-lax-derived) -/
+/-- Exact-derived lax monoidality with the specified chain-level normalization. -/
 theorem exists_normalized :
     ∃ m : F.mapDerivedCategory.LaxMonoidal,
       (m.ε ≫ F.mapDerivedCategory.map (Functor.LaxMonoidal.ε DerivedCategory.Q) ≫

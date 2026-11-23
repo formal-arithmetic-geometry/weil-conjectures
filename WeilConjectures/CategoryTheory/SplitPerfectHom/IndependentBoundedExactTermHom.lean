@@ -24,9 +24,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 /-! # Bounded exact-term Hom with independent site universes
 
 Source: Stacks Project, Tags 08DM, 0A8X and 0117.
-(blueprint: lem-sfb-independent-bounded-exact-term-hom).
-This extends the existing bounded exact-term proof without equating the site,
-coefficient and morphism universes. All auxiliary proofs are private.
+The site, coefficient and morphism universes are independent.
 -/
 
 @[expose] public section
@@ -74,22 +72,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Internal Hom from a complex concentrated in one degree preserves quasi-isomorphisms
 if internal Hom from its sole possibly nonzero term preserves short exact sequences.
 
-Source: Stacks Project, Tag 0A8X, Hom complexes; Tag 08DM, bounded Hom calculation;
-Tag 010N, exact functors.
-(blueprint: lem-pc-single-degree-exact-term-hom-quasi-iso).
-
-Proof: all factors of the degree-n Hom product other than the factor at k are zero:
-internal Hom from a zero object is zero. The product universal property identifies
-that degree with internal Hom from P.X k to M.X (k+n). The source differential is zero,
-so the Hom differential is just postcomposition with the target differential. These
-identifications commute with postcomposition by f. Internal Hom from P.X k is additive,
-as follows sectionwise from addition of localized linear maps. Its short-exact-sequence
-preservation implies finite-limit and finite-colimit preservation by the exact-functor
-criterion (Tag 010N). The natural homology comparison for an exact functor identifies
-homology of its degreewise image with its image of homology. Thus the map at every
-homology degree is an isomorphism since f is a quasi-isomorphism. Translating the
-integer grading by k preserves this assertion; no bound on M or N is needed.
-The argument includes the case P.X k is zero and then all Hom terms are zero. -/
+Source: Stacks Project, Tags 0A8X, 08DM and 010N. -/
 private theorem quasiIso_homComplex_map_of_single_degree_exact_term
     {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C)
@@ -318,28 +301,7 @@ tail occur as the three components of a morphism of short exact sequences.
 The arrow isomorphisms include the identifications of each Hom complex and its map,
 so the statement supplies naturality in the second variable as well as exactness.
 
-Source: Stacks Project, Tag 0A8X, product Hom differential;
-Tag 0117, natural long exact cohomology sequence.
-(blueprint: lem-pc-stupid-tail-hom-short-exact).
-
-Proof: let T be the stupid tail of P in degrees at least k+1 and let G be P.X k
-placed in degree k. Since P vanishes below k, inclusion of T and projection to G
-give a degreewise split short exact sequence 0 to T to P to G to 0. Applying
-internal Hom into M gives 0 to Hom(G,M) to Hom(P,M) to Hom(T,M) to 0.
-Construct the maps by extending a family at k by zero and restricting a family
-to degrees at least k+1. The formula d_M h - (-1)^n h d_P proves both are chain
-maps: for the extension map, its source-composition term vanishes because the
-only possible incoming source differential is from the zero term P.X (k-1);
-restriction is compatible because the differential at a source degree p only
-uses p and p+1. In each Hom degree, splitting the product index set into the
-singleton k, the tail, and the zero terms below k makes this sequence split.
-Use the same maps for N. Postcomposition by f commutes with extension and
-restriction componentwise, giving a morphism of these short exact sequences.
-Take S and T to be these two short exact Hom sequences and φ to have
-these three postcomposition maps as its components. The product identifications
-with the named Hom complexes give the required arrow isomorphisms.
-The product splitting uses no exactness of an infinite product; it is a
-splitting of an existing product into two factors, valid for unbounded P, M, N. -/
+Source: Stacks Project, Tags 0A8X and 0117. -/
 private theorem exists_homComplex_stupid_tail_shortExact
     {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C)
@@ -623,26 +585,7 @@ sends every quasi-isomorphism in the second variable to a quasi-isomorphism. The
 variable is arbitrary, and no K-injective resolution or derived category occurs here.
 
 The site object and morphism universes may differ from the coefficient universe.
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation;
-Homology, Tag 0117, long exact cohomology sequence.
-(blueprint: lem-sfb-independent-bounded-exact-term-hom).
-
-Proof:
-1. Prove the assertion for a source supported in [a,a+d], by induction on the
-   natural number d. For d=0 use the single-degree exact-term Hom calculation.
-2. For a successor width, take the stupid tail starting at a+1. Its terms are
-   either zero or isomorphic to the corresponding terms of P. Internal Hom from
-   zero is zero; transport short exactness through the other term isomorphisms.
-   The tail has width d, so the induction hypothesis applies. The single complex
-   on P.X a is handled by the base calculation, transporting the exact-term
-   hypothesis through its degree-a term isomorphism.
-3. Extension by zero and restriction of the Hom product factors give a natural
-   short exact sequence with singleton and tail as its outer terms. Apply the
-   upstream long-exact-sequence lemma quasiIso_τ₂ to the outer quasi-isomorphisms
-   and transport the middle quasi-isomorphism through its arrow isomorphism.
-4. For the original bounds a,b choose d=(b-a).toNat, so b ≤ a+d even if b<a.
-   Apply the interval induction. Both target complexes may be unbounded, and no
-   exactness of an infinite product is needed. -/
+Source: Stacks Project, Tags 08DM and 0117. -/
 theorem quasiIso_homComplex_map_of_bounded_exact_terms
     {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C)

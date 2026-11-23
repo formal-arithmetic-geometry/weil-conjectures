@@ -43,15 +43,4 @@ structure RealizationScalarFunctorCoreDerivedData
       (pbcAdicCompletion T (pbcIntegralDatum l E))) ℤ,
     IsIso (pbcComplexCounit φ P)
 
-/-- The derived scalar extension construction supplies the two core identities.
-Source: Stacks Tags 06YY and 0DVC. -/
-theorem realization_scalar_functor_core_derived_data
-    [HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1}]
-    [(ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
-    [EssentiallySmall.{u + 1} T.ProEt]
-    (φ : pbcAdicCompletion T (pbcIntegralDatum l E) ⟶
-      rationalCoefficientSheaf l T E) :
-    Nonempty (RealizationScalarFunctorCoreDerivedData l E T φ) := by
-  sorry
-
 end WeilConjectures

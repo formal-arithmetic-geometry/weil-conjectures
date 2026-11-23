@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-! # Transport of the two monoid action diagrams
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-transport-scalar-action-diagrams). -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -59,18 +58,8 @@ private theorem actionPair_lift
   · simpa [actionPair, Category.assoc, ← L.map_comp] using ha
   · simpa [actionPair, Category.assoc, ← L.map_comp] using hb
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-transport-scalar-action-diagrams).
-
-Proof: Apply L to the two given source action equations. Compare the image of
-(RV times RV) times AV with (RU times RU) times AU using the inverse binary
-product comparisons and er and ea. Its projections identify the image of the
-left associative composite with multiplication on RU followed by mu, using
-hMul. The projections identify the right composite with the nested mu
-composite. Cancel ea.hom to obtain the associative equation. For the unit
-composite use the unique map to the terminal object, its preserved terminal
-comparison and hOne; cancel ea.hom again. Only product and terminal universal
-properties are used; there is no assumption about addition or commutativity. -/
+/-- A product-preserving functor transports the associativity and unit equations of a scalar
+action along compatible product comparisons. -/
 theorem transportScalarActionDiagrams
     {C : Type u₁} [Category.{v₁} C] [HasFiniteProducts C]
     {D : Type u₂} [Category.{v₂} D] [HasFiniteProducts D]

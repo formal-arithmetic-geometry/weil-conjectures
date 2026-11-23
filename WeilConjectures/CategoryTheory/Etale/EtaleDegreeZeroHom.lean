@@ -162,7 +162,6 @@ public import Mathlib.CategoryTheory.HomCongr
 /-! # Local derived morphisms between degree-zero objects
 
 Source: Stacks Project, Tags 05RU and 03EH.
-(blueprint: lem-amb-etale-degree-zero-hom).
 -/
 
 @[expose] public noncomputable section
@@ -252,8 +251,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor upperStar
   _root_.DerivedCategory.singleFunctors ordinaryFinitePullback
 
 /-- Inverse image of a single complex is the single complex of its restriction.
-Source: Stacks Project, Tags 05RU and 03EH.
-(blueprint: lem-amb-etale-degree-zero-hom). -/
+Source: Stacks Project, Tags 05RU and 03EH. -/
 @[irreducible]
 def etaleSingleRestrictionIso (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] :
@@ -269,8 +267,7 @@ def etaleSingleRestrictionIso (A : Type (u + 1)) [CommRing A]
           (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) 0)
 
 /-- A local derived morphism corresponds to a sheaf morphism by degree-zero full
-faithfulness. Source: Stacks Project, Tags 05RU and 03EH.
-(blueprint: lem-amb-etale-degree-zero-hom). -/
+faithfulness. Source: Stacks Project, Tags 05RU and 03EH. -/
 @[irreducible]
 def etaleDegreeZeroHomEquiv (A : Type (u + 1)) [CommRing A]
     {X U : Scheme.{u}} (f : U ⟶ X) [Etale f]
@@ -286,8 +283,7 @@ def etaleDegreeZeroHomEquiv (A : Type (u + 1)) [CommRing A]
     (etaleSingleRestrictionIso A f) (N := N) α
 
 /-- Naturality of the degree-zero Hom correspondence on global maps.
-Source: Stacks Project, Tags 05RU and 03EH.
-(blueprint: lem-amb-etale-degree-zero-hom). -/
+Source: Stacks Project, Tags 05RU and 03EH. -/
 theorem etaleDegreeZeroHomEquiv_map (A : Type (u + 1)) [CommRing A]
     {X U : Scheme.{u}} (f : U ⟶ X) [Etale f]
     {K : DerivedCategoryModule A X}
@@ -302,8 +298,7 @@ theorem etaleDegreeZeroHomEquiv_map (A : Type (u + 1)) [CommRing A]
 
 /-- The degree-zero correspondence converts the constant-object normalization
 into the restriction equation for the corresponding sheaf map.
-Source: Stacks Project, Tags 05RU and 03EH.
-(blueprint: lem-amb-etale-degree-zero-hom). -/
+Source: Stacks Project, Tags 05RU and 03EH. -/
 theorem etaleDegreeZeroHomEquiv_unit_normalization
     (A : Type (u + 1)) [CommRing A] {X U : Scheme.{u}} (f : U ⟶ X) [Etale f]
     {K : DerivedCategoryModule A X}

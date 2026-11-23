@@ -22,7 +22,6 @@ this file presents `M ⊗_R N` as the coequalizer of the two actions of `R` on `
 identifies the coequalizer tensor functor `Mod.tensorLeft N` with the monoidal tensor product
 (`Mod.relativeTensorRightIso`). It is used by
 `WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian`.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

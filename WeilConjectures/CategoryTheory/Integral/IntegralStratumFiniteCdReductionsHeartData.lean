@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.Integral.IntegralDualTorsionHeartSecti
 import all WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
 
 /-! Finite-local dual data for the continuous integral coefficient.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 -/
 
 @[expose] public noncomputable section
@@ -57,17 +56,7 @@ private theorem integral_bundle_eq
     (integral_ring_sheaf_eq l E)
 
 /-- The finite-local dual has Tor amplitude `[0,1]`, and its tensor with a classical
-locally ell-power-torsion heart object has classical locally ell-power-torsion cohomology.
-Source: blueprint latest, `part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-dual-tensor and derived-sections bullets.
-Proof: equality of the two coefficient topologies identifies their continuous-ring
-presheaves and hence their bundled monoids. Transport the entire data predicate along
-this equality. For the normalized presentation, the local two-term resolution and dual
-pairing give Tor amplitude [0,1]. The finite-level classicality theorem and exact filtered
-kernel colimits give classical torsion tensor cohomology. Finally use the equivalence of
-the kernel-colimit and local formulations of ell-power torsion.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions). -/
+locally ell-power-torsion heart object has classical locally ell-power-torsion cohomology. -/
 theorem integralStratumFiniteCdReductions_heart_data
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

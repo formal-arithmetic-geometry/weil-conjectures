@@ -10,10 +10,8 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionTrans
 
 /-! # Equivariant currying for twisted-action fixed pairs
 
-Source: Stacks, sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction
-and lemma-internal-hom-adjoint-tensor; the formal conjugate-action argument
-for steps 11--12 of the twisted action-site construction.
-(blueprint: lem-sf-twisted-action-hom-pair-currying).
+Source: Stacks, sites-modules.tex, section-internal-hom
+and.
 -/
 
 @[expose] public section
@@ -196,21 +194,7 @@ private theorem curry_equivariant (P : RestrictionPresentation J s R a)
 
 omit [s.functor.IsContinuous J J] in
 /-- The canonical conjugate Hom action is invertible, and currying preserves equivariance.
-Source: Stacks, sites-modules.tex, lemma-internal-hom-adjoint-tensor; formal
-conjugate-action calculation in steps 11--12 of the twisted action construction.
-(blueprint: lem-sf-twisted-action-hom-pair-currying).
-
-Proof: translation is an equivalence. Its natural tensor comparison and the
-ordinary tensor-Hom adjunction identify postcomposition with the transpose of
-translated evaluation with a bijection on Hom sets. Essential surjectivity and
-Yoneda therefore make this transpose invertible. Composing it with Hom of the
-inverse source action and the target action gives the displayed invertible
-conjugate action. Naturality of the tensor comparison rewrites its evaluation
-as translated evaluation followed by the target action. A map commutes with
-the conjugate action exactly when its untranspose commutes with the diagonal
-tensor action: apply evaluation, cancel the invertible source action and tensor
-comparison, and use injectivity of the tensor-Hom adjunction. This includes
-zero modules, the zero ring, and empty sites without additional hypotheses. -/
+Source: Stacks Project, sites-modules.tex. -/
 theorem homPair_currying (P : RestrictionPresentation J s R a)
     (T : TensorComparisons J s R a P) (M N : Pairs (sigma J s R a)) :
     let h :=

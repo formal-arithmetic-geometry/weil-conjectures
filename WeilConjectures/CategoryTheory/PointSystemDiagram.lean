@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 /-!
 # Inverse systems and strict refinements
 
-Source: Stacks Project, Sites, the refinement relation preceding Tag 00YO
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, the refinement relation preceding Tag 00YO.
 -/
 
 @[expose] public section

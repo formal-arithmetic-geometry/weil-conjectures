@@ -100,21 +100,10 @@ private theorem triple_rep
     rw [Arrow.arrow_mk_eqToHom_comp, Arrow.mk_eq]
     exact (ConcreteCategory.congr_hom (colimit.w (F ⋙ Cat.arrows) q) d₀).trans hd₀
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph,
-and Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-fiber-laws).
+/-- An identity `i` and a composition `c` on the filtered-colimit hom-sets that agree with the
+stage identities and compositions satisfy the unit and associativity laws.
 
-Proof: An arbitrary element of a Hom fiber has a stage arrow representative.
-For the identity laws choose such a representative and identify its endpoints with
-the given objects. The two preservation formulas reduce the assertion to the stage
-identity laws. For associativity choose representatives of the three arrows, move
-them to a common stage, and use eventual equality in the object colimit to make
-both middle endpoint equalities hold at a further stage. Both iterated composites
-are then represented by the iterated composites at that stage, by the preservation
-formula. Stage associativity equates them. Equality in a fiber is equality of its
-underlying arrow colimit elements, since endpoint certificates are propositions.
-Thus transporting endpoint equalities introduces no additional choice. The empty
-object colimit case has no arrows and the assertions are vacuous. -/
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_fiber_laws
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z})
     (i : ∀ X : colimit (F ⋙ Cat.objects), FilteredColimitHom F X X)

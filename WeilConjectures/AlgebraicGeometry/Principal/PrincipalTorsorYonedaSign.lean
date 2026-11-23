@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.PrincipalTorsorSignTypes
-import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorNormalizedComparison
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorConnectingComparison
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorFramedComparison
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorNormalizedNatural
@@ -66,7 +65,9 @@ private lemma principal_section_rep_unique
       ComplexShape.embeddingUpNat rfl).hom).1
   exact hz.trans hz'.symm
 
-private theorem principal_torsor_yoneda_sign_formula
+/-- For normalized principal torsor comparisons, the coefficient Yoneda splice of a globally
+framed relative torsor is minus the supported localization boundary. -/
+theorem principal_torsor_yoneda_sign_formula
     (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) : C.Formula := by
   classical
   intro T Z i hi W h G P e s g hs E a b hab hE F hF hbF hFs
@@ -91,14 +92,5 @@ private theorem principal_torsor_yoneda_sign_formula
       (ShortComplex.mk aK bK habK) hK I J L α β hαβ hα hβ hsplit hE.extClass
     rw [hbclass, map_neg, hδ] at hcomp
     rw [hcomp, map_neg]
-
-/-- A globally framed relative torsor is the inverse-section localization pushout;
-its coefficient Yoneda splice is minus the supported localization boundary.
-All identifications are supplied with their cocycle normalization and naturality. -/
-theorem principal_torsor_yoneda_sign :
-    ∃ C : PrincipalTorsorComparisons.{u}, C.Normalized ∧ C.Natural ∧ C.Formula := by
-  obtain ⟨C, hC⟩ := principalTorsorNormalizedComparison.{u}
-  exact ⟨C, hC, principalTorsorNormalizedNatural C hC,
-    principal_torsor_yoneda_sign_formula C hC⟩
 
 end AlgebraicGeometry.Etale

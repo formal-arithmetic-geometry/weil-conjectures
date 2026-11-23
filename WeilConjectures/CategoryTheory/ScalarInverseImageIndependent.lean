@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 /-! # Scalar extension and inverse image on independently sized sites
 
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03EL.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -129,8 +128,7 @@ private theorem towerLeftComparison
   simpa only [Adjunction.homEquiv_id, Functor.comp_obj] using h
 
 /- Elementary operation graphs, used directly without the general tensor or
-K-flat pullback constructions. Source: the operation-transport calculations in
-RingedToposKFlatPullback and RingedTopoiInverseImageTensorPairingIsIso. -/
+K-flat pullback constructions. -/
 
 private theorem binary_of_graph
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
@@ -521,14 +519,7 @@ private theorem directData
 set_option backward.isDefEq.respectTransparency true
 -- The unit equation compares two adjunctions and two restriction functors.
 /-- Scalar extension commutes with inverse image, with the unit fixed.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node).
-
-Proof: transport the direct-image additive group and action along the set adjunction.
-The operation mate equations identify linear maps on its two sides. Composing with
-the scalar-extension adjunctions gives two left adjoints to the same right adjoint.
-Their unique adjunction comparison is the required isomorphism. Its defining equation
-is the stated unit normalization. The two sites may have independent universes. -/
+Source: Stacks Project, Modules on Sites, Tag 03EL. -/
 theorem exists_scalarInverseImageIndependent
 {SY : Type uC} {SX : Type uD} [Category.{vC} SY] [Category.{vD} SX]
   [EssentiallySmall.{u} SY] [EssentiallySmall.{u} SX]

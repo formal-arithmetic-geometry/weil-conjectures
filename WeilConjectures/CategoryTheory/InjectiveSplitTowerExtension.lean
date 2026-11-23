@@ -21,8 +21,7 @@ At level zero use injectivity. At a successor level, extend the given component 
 using injectivity, then correct its transition error using a section of the split transition.
 The correction vanishes on the original tower. Recursion gives adjacent compatibility,
 and `NatTrans.ofOpSequence` gives compatibility with every tower map.
-Related inverse-system construction: Stacks Project Tag 07KW.
-(blueprint: lem-pc-injective-split-tower-extension) -/
+Related inverse-system construction: Stacks Project Tag 07KW. -/
 theorem injective_split_tower_extension (I : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (hI : ∀ n : ℕ, Injective (I.obj (Opposite.op n)))
     (hp : ∀ n : ℕ, IsSplitEpi (I.map (homOfLE (Nat.le_add_right n 1)).op))

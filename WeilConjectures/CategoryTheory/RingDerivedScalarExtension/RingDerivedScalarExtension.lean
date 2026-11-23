@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantR
 
 /-! # Derived scalar extension for ordinary modules
 
-Source: Stacks Project Tags 06YY and 07A6 (blueprint: def-zl-ring-derived-scalar-extension).
+Source: Stacks Project Tags 06YY and 07A6.
 
 This module records the canonical ordinary-module derived restriction and its left
 adjoint used by the condensed evaluation statement.  The underlying constructions are
@@ -33,7 +33,7 @@ namespace CategoryTheory.RingDerivedScalarExtension
 
 /-- Derived restriction of scalars along a commutative ring homomorphism.
 
-Source: Stacks Project Tag 07A6 (blueprint: def-zl-ring-derived-scalar-extension).
+Source: Stacks Project Tag 07A6.
 -/
 abbrev moduleDerivedRestriction {A B : Type r} [CommRing A] [CommRing B]
     (f : A →+* B) [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
@@ -43,7 +43,7 @@ abbrev moduleDerivedRestriction {A B : Type r} [CommRing A] [CommRing B]
 
 /-- The derived restriction functor has the canonical right-adjoint structure.
 
-Source: Stacks Project Tag 07A6 (blueprint: def-zl-ring-derived-scalar-extension).
+Source: Stacks Project Tag 07A6.
 -/
 instance moduleDerivedRestriction_rightAdjoint {A B : Type r} [CommRing A] [CommRing B]
     (f : A →+* B) [HasDerivedCategory.{wR} (ModuleCat.{r} A)]
@@ -53,8 +53,7 @@ instance moduleDerivedRestriction_rightAdjoint {A B : Type r} [CommRing A] [Comm
 
 /-- Derived extension of scalars, fixed as the left adjoint of restriction.
 
-Source: Stacks Project Tags 06YY and 07A6
-(blueprint: def-zl-ring-derived-scalar-extension).
+Source: Stacks Project Tags 06YY and 07A6.
 -/
 def moduleDerivedExtension {A B : Type r} [CommRing A] [CommRing B]
     (f : A →+* B) [HasDerivedCategory.{wR} (ModuleCat.{r} A)]

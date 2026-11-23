@@ -12,15 +12,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # Derived scalar extension for fixed-coefficient module sheaves
 
-Source: Stacks Project, Tags 06YY and 06XN
-(blueprint: lem-pur-derived-change-of-rings).
+Source: Stacks Project, Tags 06YY and 06XN.
 
-The general ringed-site and ordinary-module universal pairs are publicly retained.
-The DAG declaration list retains `nonempty_derivedChangeOfRingsCochainModel`:
-its structure records both K-flat invariance and the full universal derived pair.
-The theorem below is an additional specialization, not a replacement of that statement.
-This presentation supplies their fixed-coefficient sheaf specialization, on the actual
-small sites, as the left adjoint to the existing exact derived restriction of scalars.
+The general ringed-site and ordinary-module universal pairs are retained
+(`nonempty_derivedChangeOfRingsCochainModel` records both K-flat invariance and the full
+universal derived pair). This file gives their fixed-coefficient sheaf specialization, as the
+left adjoint to the existing exact derived restriction of scalars.
 -/
 
 @[expose] public noncomputable section
@@ -35,17 +32,7 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C)
 
 /-- Derived restriction has a left adjoint for every map of constant coefficient rings.
-Source: Stacks 06YY, 06XN (blueprint: lem-pur-derived-change-of-rings).
-
-Proof: sheafify sectionwise extension of scalars. After restriction to the source ring
-this is tensoring with the constant target-ring module. Hence it preserves
-quasi-isomorphisms between K-flat complexes: tensoring an acyclic K-flat complex with
-any module is acyclic, and exact faithful restriction reflects acyclicity. K-flat
-resolutions give the everywhere defined total left derived functor and its universal
-counit, invertible on K-flat representatives. Derive the ordinary scalar adjunction;
-exactness identifies the right derived restriction with `derivedRestrictScalars`.
-Thus the derived extension is left adjoint to precisely the restriction already defined.
-This uses neither flatness nor finite projective dimension of the coefficient map. -/
+Source: Stacks 06YY, 06XN. -/
 theorem fixedCoefficientDerivedRestriction_isRightAdjoint
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     (derivedRestrictScalars J φ).IsRightAdjoint := by
@@ -65,7 +52,7 @@ theorem fixedCoefficientDerivedRestriction_isRightAdjoint
 adjunction-compatible isomorphism by the existing derived restriction functor.
 The preceding theorem constructs it by sheafified tensor and K-flat resolutions;
 no arbitrary map or independent scalar action is selected.
-Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
+Source: Stacks 06YY. -/
 noncomputable def fixedCoefficientDerivedScalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤

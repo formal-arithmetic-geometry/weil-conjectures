@@ -13,8 +13,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Exact orbit induction for an additive autoequivalence
 
-Source: steps 7--8 of the twisted ringed-action-site construction, motivated by
-Stacks Tag 00W0 (blueprint: lem-sf-equivalence-orbit-induction).
+## References
+
+* Stacks Project, Tag 00W0.
 -/
 
 @[expose] public section
@@ -127,9 +128,7 @@ private noncomputable def powerSum [HasCoproducts.{0} A] (X : A) :
     eqToIso ((congrArg (fun G : A ⥤ A ↦ G.obj X) (powerFunctor_eq F n)).trans
       (obj_eq F X n)))
 
-/-- The normalizations of exact orbit induction for an additive autoequivalence.
-Source: steps 7--8 of the twisted ringed-action-site construction
-(blueprint: lem-sf-equivalence-orbit-induction). -/
+/-- The normalizations of exact orbit induction for an additive autoequivalence. -/
 structure ExactOrbitInduction [Abelian A] [F.Additive] where
   /-- The free fixed-pair functor. -/
   induction : A ⥤ IsoAlgebra F
@@ -161,19 +160,7 @@ structure ExactOrbitInduction [Abelian A] [F.Additive] where
   colimits : PreservesFiniteColimits induction
 
 /-- Orbit-sum induction is additive and exact, with the specified power and zero-summand
-normalizations. Source: steps 7--8 of the twisted action-site construction; AB5 implies AB4.
-(blueprint: lem-sf-equivalence-orbit-induction).
-
-Proof: use the source library's explicit free algebra, whose sum is indexed by all integers.
-Identify its recursively defined iterates with the powers of the chosen autoequivalence.
-Conjugate its successor comparisons by those identifications. The source shift formula
-then gives the displayed shift equation, and the free adjunction is restriction at zero.
-The same restriction proves additivity. Coproducts preserve monomorphisms by AB4, and each
-iterate preserves them because it is an equivalence. Thus the free functor preserves
-monomorphisms. Its adjunction preserves cokernels; in abelian categories these two facts
-imply preservation of homology and hence all finite limits. The adjunction also supplies
-all finite colimits. The proof applies to the zero category and empty input objects as well.
--/
+normalizations. -/
 theorem exists_exactOrbitInduction [Abelian A] [F.Additive]
     [IsGrothendieckAbelian.{v} A] : Nonempty (ExactOrbitInduction F) := by
   classical

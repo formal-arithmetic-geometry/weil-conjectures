@@ -18,8 +18,11 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 
 /-! # Finite-basis coordinates for constant scalar extension
 
-Source: Stacks 03EK and the finite-dual-basis calculation in step 6 of
-`lem-pur-compact-support-roos-cofinality`.
+Coordinates of the constant scalar extension of a finite free module in terms of a finite basis.
+
+## References
+
+* Stacks Project, Tag 03EK.
 -/
 
 -- After pruning, this module only keeps private declarations.

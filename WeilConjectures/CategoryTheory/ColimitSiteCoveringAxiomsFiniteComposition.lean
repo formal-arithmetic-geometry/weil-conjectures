@@ -49,27 +49,7 @@ private theorem ofArrows_transport_eq {C : Type u} [Category.{u} C]
 set_option linter.unusedVariables false in
 /-- Then $Q$ is stable under composition of finite indexed covering families, with finite inner
 index at each outer index.
-Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms-finitecomposition)
-
-Proof: Fix a finite indexed outer covering f and finite indexed coverings
-of each of its sources. Use hQ to represent each covering presieve by a finite
-stage covering. There are finitely many coverings because the outer index is
-finite. For each requested arrow choose a member of the corresponding stage
-presieve whose image is that arrow; conversely, for each stage presieve member
-choose an index whose requested arrow is its image. These are finite choices
-by hfinite, even when arrows are repeated. Move all stages to one common stage
-and enforce all source and target equalities using eventual equality in the
-object colimit. Enforce the finitely many equalities between representatives
-using eventual equality in the arrow colimit. Thus the transported stage
-presieves equal the families with the original index types, and inner targets
-are exactly outer sources. Transition maps keep the stage presieves covering
-by hcover. Apply (P j).IsStableUnderFiniteComposition at this stage to those
-families. The composite family is finite, and its image is precisely the
-requested composite family by functoriality of composition. Apply hQ to its
-covering presieve to obtain the Q-cover. For an empty outer index only its target
-needs a representative; hcover and the empty stage covering suffice. Empty
-inner indices cause no additional lifting equations. -/
+Source: Stacks Project, Sites, Tag 09YL. -/
 theorem colimit_site_covering_axioms_FiniteComposition
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

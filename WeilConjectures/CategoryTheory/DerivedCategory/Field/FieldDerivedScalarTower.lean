@@ -10,9 +10,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-! # Canonical derived scalar-extension comparisons
 
-Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: lem-weil-derived-field-scalar-extension-tower).
-
 ## Main definitions and statements
 
 * `fieldScalarTower`, `fieldScalarUnit`: the uniquely normalized tensor comparisons.
@@ -30,8 +27,7 @@ namespace DerivedCategory
 
 variable {K L M : Type u} [Field K] [Field L] [Field M]
 
-/-- The prescribed component of the tower comparison on a representing complex.
-Source: blueprint order 1509 (blueprint: lem-weil-derived-field-scalar-extension-tower). -/
+/-- The prescribed component of the tower comparison on a representing complex. -/
 noncomputable def fieldScalarTowerComponent (f : K →+* L) (g : L →+* M)
     (C : CochainComplex (ModuleCat.{u} K) ℤ) :
     ((fieldDerivedScalarExtension f ⋙ fieldDerivedScalarExtension g).obj
@@ -46,12 +42,7 @@ noncomputable def fieldScalarTowerComponent (f : K →+* L) (g : L →+* M)
         (ComplexShape.up ℤ)).app C) ≪≫
     ((ModuleCat.extendScalars (g.comp f)).mapDerivedCategoryFactors.app C).symm
 
-/-- Localization gives the unique tower comparison with these prescribed components.
-Source: blueprint order 1509 (blueprint: lem-weil-derived-field-scalar-extension-tower).
-Proof: the termwise tensor tower isomorphism is natural and inverts quasi-isomorphisms.
-Lift it through Q using localization. Every derived object is represented by a complex,
-and precomposition with Q is fully faithful on the resulting functors, so the
-prescribed components determine the lift uniquely. -/
+/-- Localization gives the unique tower comparison with these prescribed components. -/
 theorem existsUnique_fieldScalarTower (f : K →+* L) (g : L →+* M) :
     ∃! e : fieldDerivedScalarExtension f ⋙ fieldDerivedScalarExtension g ≅
         fieldDerivedScalarExtension (g.comp f),
@@ -86,8 +77,7 @@ theorem existsUnique_fieldScalarTower (f : K →+* L) (g : L →+* M) :
     exact congrArg Iso.hom (he C) |>.trans (by
       simpa [e₀, fieldScalarTowerComponent] using hc.symm)
 
-/-- The canonical tower comparison, selected from a uniquely determined natural isomorphism.
-Source: blueprint order 1509 (blueprint: lem-weil-derived-field-scalar-extension-tower). -/
+/-- The canonical tower comparison, selected from a uniquely determined natural isomorphism. -/
 noncomputable def fieldScalarTower (f : K →+* L) (g : L →+* M) :
     fieldDerivedScalarExtension f ⋙ fieldDerivedScalarExtension g ≅
       fieldDerivedScalarExtension (g.comp f) :=

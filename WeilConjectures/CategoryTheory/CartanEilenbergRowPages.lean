@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.SecondFiltrationRowCohomology
 
 /-! # Signed row identifications for the second-filtration spectral sequence
 
-Source: Stacks Project, Tag 0130; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-cartan-eilenberg-row-pages).
+Source: Stacks Project, Tag 0130.
 -/
 
 @[expose] public section
@@ -29,26 +28,7 @@ namespace CategoryTheory.Functor
 
 /-- The second-filtration pages, with the signed injective-resolution comparison.
 This statement asserts no convergence or derived interpretation of total cohomology.
-Source: Stacks Project, Tag 0130; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-cartan-eilenberg-row-pages).
-
-Proof.
-Construct the spectral sequence of L by the filtered-complex construction, retaining
-its connecting-map description of d₁ as well as its page-zero and cycle/boundary
-identifications. The second-degree graded complex at s is the F-image of I.X s,
-extended by zero and placed in total degrees s+r. Its differential is the row
-differential. A row augmentation a.f s is a quasi-isomorphism and all its terms
-are injective, so it is an injective resolution of K^s. The canonical comparison
-with the ordinary right derived functor identifies row cohomology in degree r with
-R^r F(K^s); naturality applies to the square a.comm s (s+1).
-For d₁ lift a row cocycle to the quotient L^s/L^(s+2). Its differential has only
-the component raising complex degree, with sign (-1)^r, so the connecting map
-is (-1)^r times the map of row cohomology. Multiply the comparison at (s,r)
-by (-1)^(r*s). This is an automorphism, and the consecutive multipliers differ
-by (-1)^r, cancelling the sign. This gives the unsigned naturality equation
-for every integer s, including negative s. Extension by zero makes the graded
-complex vanish below total degree s; therefore row cohomology, and hence E₁,
-vanishes in negative complementary degree. -/
+Source: Stacks Project, Tag 0130. -/
 theorem cartanEilenberg_row_pages
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

@@ -14,9 +14,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 
 /-! # Natural evaluation of a sheaf cohomology class on an injective resolution
 
-Source: Stacks Project, Cohomology on Sites, Section 21.2; Mathlib's computation
-of Ext using injective resolutions.
-(blueprint: lem-sc-cohomology-resolution-evaluation-natural)
+## References
+
+* Stacks Project, Cohomology on Sites, Section 21.2.
 -/
 
 @[expose] public section
@@ -80,26 +80,7 @@ private theorem exists_resolution_evaluation_iso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation on a terminal object computes cohomology, naturally for resolution maps.
-Source: Stacks Project, Cohomology on Sites, Section 21.2; Mathlib
-`InjectiveResolution.extMk_comp_mk₀`.
-(blueprint: lem-sc-cohomology-resolution-evaluation-natural)
-
-Proof: Let Z be the constant sheaf of lifted integers. The constant-sheaf
-adjunction and evaluation at 1 identify Hom(Z,G) additively with G(T), naturally
-in G. Lift G(T) to the universe of the Hom groups and package this as a natural
-isomorphism b. Compute Ext in that Hom universe using hasExt_of_enoughInjectives.
-Ext.homAddEquiv and its inverse reindex the given Ext groups into this universe.
-The reindexing commutes with postcomposition: both sides have the same derived
-morphism by Ext.comp_hom and Ext.mk₀_hom. Apply the library's proved natural
-Ext/derived-Hom comparison, then compute derived Hom on R by isoRightDerivedObj.
-Apply homology to b.mapHomologicalComplex on R, and use mapHomologyIso for ULift
-followed by lowering. These comparisons give e before theta and phi are introduced.
-For phi over theta, combine naturality of the Ext/derived-Hom comparison,
-isoRightDerivedObj_hom_naturality, naturality of b on complexes after applying
-homology, and mapHomologyIso_hom_naturality. Lowering this equality gives the
-claimed equation. This also works for the zero sheaf and arbitrary terminal
-objects; no nonemptiness assumption on the site is used.
--/
+Source: Stacks Project, Cohomology on Sites, Section 21.2. -/
 theorem exists_cohomology_resolution_evaluation_natural_succ
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{w}] [HasExt.{z} (Sheaf J AddCommGrpCat.{w})]

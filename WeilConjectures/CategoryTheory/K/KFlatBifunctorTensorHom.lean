@@ -15,8 +15,7 @@ set_option linter.privateModule false
 /-! # Derived tensor--Hom representability for an additive bifunctor
 
 Source: Stacks Project, Tags 0A96 and 08J9, the K-flat/K-injective proof of
-unbounded tensor--Hom adjunction
-(blueprint: lem-sf-kflat-bifunctor-tensor-hom).
+unbounded tensor--Hom adjunction.
 -/
 
 @[expose] public section

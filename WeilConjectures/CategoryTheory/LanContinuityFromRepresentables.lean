@@ -42,18 +42,7 @@ private noncomputable def colimitEvaluationComparison
 
 /-- A set-valued left Kan extension preserves a colimit if the representables in
 its defining image preserve that colimit.
-Source: the density theorem for presheaves and commutation of colimits, applied to
-the finite-presentation argument in Bhatt--Scholze, Lemma 5.1.1.
-(auxiliary; not a blueprint node).
-
-Proof: The canonical map from the colimit of values to the value at the colimit
-is natural in a presheaf. Both its source and target preserve presheaf colimits:
-Kan extension is a left adjoint, restriction and evaluation compute colimits
-pointwise, and colimits commute with colimits. On a representable the Kan
-extension is the representable of its image, so the given hypothesis makes this
-map invertible. Express an arbitrary presheaf as the canonical colimit of its
-representables. Preservation of that colimit makes the same map invertible for
-the arbitrary presheaf. This is exactly the preservation criterion. -/
+Source: Bhatt--Scholze, Lemma 5.1.1. -/
 theorem lan_preserves_colimit_of_representables
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     (B : C ⥤ D) (G : Cᵒᵖ ⥤ Type (u + 1))

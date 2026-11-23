@@ -9,8 +9,6 @@ public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizati
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Localized comparison for a functor composed with a restricted pair operation
-
-Source: blueprint dual-Tate compatibility, Step 5, raw coefficient transport.
 -/
 
 @[expose] public noncomputable section
@@ -63,21 +61,7 @@ private def bilinear_pre {M N P M' N' : Type*}
   map_zero' := by ext y; simp
   map_add' x y := by ext z; simp
 
-/-- A comparison between an operation and pullback extends over scalar-localized arrows.
-Source: blueprint dual-Tate compatibility, Step 5
-(blueprint: lem-pod-localized-pullback-pair-comparison).
-Proof: the source composite has the object formula obtained by composing the two
-object formulas. The target composite has the same formula because the induced
-pair functor sends each underlying integral pair to its integral pullback pair.
-Postcompose the source operation's separately linear action with pullback's
-additive map. Precompose the target operation's action in both variables with
-pullback's additive maps. Their pure-tensor formulas follow respectively from
-the operation formula followed by pullback's formula, and from the two pullback
-formulas followed by the operation formula. Equality of permitted pairs handles
-the different endpoint presentations without assuming their literal equality.
-Apply restrictedPairIso_existsUnique to these two separately additive actions.
-Its tensor induction supplies naturality on all arrows, including sums and zero;
-its component identities prescribe both directions and ensure uniqueness. -/
+/-- A comparison between an operation and pullback extends over scalar-localized arrows. -/
 theorem pullbackPairIso_existsUnique
     {R : Type*} [CommRing R] {C D : Type*}
     [Category* C] [Preadditive C] [Linear R C]

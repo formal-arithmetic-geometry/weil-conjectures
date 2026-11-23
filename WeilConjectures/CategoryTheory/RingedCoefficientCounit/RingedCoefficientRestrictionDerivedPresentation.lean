@@ -150,7 +150,6 @@ set_option linter.privateModule false
 # Existence of normalized derived coefficient presentations
 
 Source: Stacks, Tags 07A6 and 0D6E.
-(blueprint: lem-pur-ringed-coefficient-derived-presentation-exists).
 -/
 
 @[expose] public noncomputable section

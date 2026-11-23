@@ -19,7 +19,7 @@ and `F` satisfies the projection formula `F (-) ⊗ M ≅ F (- ⊗ P M)` at `M`,
 respectively, since tensoring with an invertible object is an equivalence.
 
 This is the formal part of the co-projection formula `Ri^! (K ⊗ L) ≅ Ri^! K ⊗ Li^* L` of the
-purity chapter (blueprint `lem-pur-coprojection`), with `F = Ri_!`, `G = Ri^!` and `P = Li^*`.
+purity chapter, with `F = Ri_!`, `G = Ri^!` and `P = Li^*`.
 
 ## Main definitions
 

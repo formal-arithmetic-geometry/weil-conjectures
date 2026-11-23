@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-! # Raw sections: separated on stage-image covers
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-separated).
 -/
 
 @[expose] public section
@@ -33,35 +32,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-finite-cover matching-family calculation, with the raw Kan presentation explicit.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-separated).
-
-Proof: First compute raw sections by the pointwise Kan formula. A generator is
-represented by a stage section and an arrow from the object in the limit site
-to the image of its stage object. Move that arrow, its endpoints, and the stage
-section to a common stage receiving i and the stage of the object, using the
-object and arrow set-colimit hypotheses, and restrict the section along the
-lifted arrow. This represents the generator at the lifted object. For any
-finite chain of Kan relations, lift its arrows and equations to a later common
-stage. Naturality of beta and hβmap identify each lifted relation with section
-restriction or transport by theta. Conversely these operations are Kan
-relations. Thus two representatives agree precisely when they agree after
-further stage refinement. The unit condition hθ identifies theta with the
-adjunction transpose of the unit at the target stage; uniqueness of transposes
-makes these transports compatible with composition and with the stage sheaves.
-
-For two sections with the same restrictions on the image of a stage cover R,
-put their representatives at a common stage receiving that stage and i.
-Enumerate the distinct arrows of R, a finite set by hfinite. The finitely many
-equalities of restrictions hold at a single further stage by the equality
-criterion just established and filteredness. hcover makes the transported R
-a stage cover. The stage inverse-image sheaf is separated for this cover,
-so the two represented sections are equal there. Their raw colimit classes
-are therefore equal. Applying this to two amalgamations gives the assertion.
-For the empty cover the stage sheaf has at most one section, so the same
-argument applies without any restriction equalities to lift.
--/
+/-- Separatedness of the raw colimit-site sections for covering families.
+Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_raw_section_isSeparatedFor
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

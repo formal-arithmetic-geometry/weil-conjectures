@@ -60,7 +60,6 @@ Note the asymmetry in the hypotheses: left derivation via K-flat resolutions req
 source category to carry a monoidal structure with functorial flat resolutions, while
 right derivation via K-injective resolutions only requires
 `CategoryTheory.Abelian.HasKInjectiveResolutions`.
-
 -/
 
 @[expose] public section

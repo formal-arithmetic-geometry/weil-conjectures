@@ -13,9 +13,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 
 /-! # Transport of a module Hom comparison to the one-point ring site
 
-Source: Stacks Project, more-algebra.tex, equation-base-change-RHom and
-Lemma 0A6A; the one-point-site realization used in the parent statement.
-(blueprint: lem-pc-ring-hom-extension-transport)
+Source: Stacks Project, more-algebra.tex, base change for RHom and
+Lemma 0A6A.
 -/
 
 -- After pruning, this module only keeps private declarations.

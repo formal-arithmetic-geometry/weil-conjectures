@@ -10,8 +10,9 @@ public import WeilConjectures.CategoryTheory.Endofunctor.CyclicDerivedOffDiagona
 
 /-! # Comparison of the free and off-diagonal boundaries
 
-Source: Stacks Tags 0149, 0152, and the normalized cyclic free resolution.
-(blueprint: lem-sf-cyclic-free-boundary-comparison).
+## References
+
+* Stacks Tags 0149, 0152.
 -/
 
 @[expose] public noncomputable section
@@ -273,22 +274,7 @@ end BoundaryComparison
 presented off-diagonal boundary. This only identifies two concrete morphisms; it
 does not assert additivity, naturality, or any exactness statement.
 
-Proof: take a strict presentation S of u. Let e be the free adjunct of the chosen
-underlying splitting s, and let f₀ be the adjunct of its off-diagonal entry.
-On summand zero, e d = j f₀ follows by inserting the inverse triangular action:
-the difference between s and its translate is exactly the inclusion composed
-with the off-diagonal entry. Also p e = epsilon because p s = 1. The free
-adjunction shows these identities hold on all summands, so f₀,e,1 define a
-morphism of short exact sequences. Naturality of triangleOfSESδ gives the
-presented boundary as delta_free followed by f₀[1]. The standard localization
-comparisons, differential_fac, delta_fac, and the two adjunctions defining
-cyclicDerivedFreeShiftedHomEquiv turn this expression into the displayed one.
-Use naturality of delta to transport the presentation's endpoint isomorphisms.
-Finally cyclicDerivedOffDiagonalBoundary_eq identifies the presented morphism
-with the specified boundary. The computation uses the normalized SES sign,
-and works for unbounded complexes and independent localizations.
-Source: parent calculus step 2, Stacks 0152 and parent presentation step 8
-(blueprint: lem-sf-cyclic-free-boundary-comparison). -/
+Stacks Project, Tag 0152. -/
 theorem cyclicDerivedFreeBoundary_comparison (R : CyclicDerivedFreeResolution F)
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1)) :
     cyclicDerivedOffDiagonalBoundary F u =

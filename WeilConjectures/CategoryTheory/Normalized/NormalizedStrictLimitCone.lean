@@ -30,21 +30,7 @@ exact coefficient equivalence and a positive-tail identification. The initial te
 of the new tower is arbitrary. The normalization concerns every ordinary map into
 the termwise inverse limit, and does not involve principal quotients or completion.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0940 and 0941, the natural Roos
-triangle and its ordinary-limit inclusion
-(blueprint: lem-sfb-normalized-strict-limit-cone).
-
-Proof: normalizedStrictLimitBase gives the homotopy-limit cone and the identity
-eta followed by its nth leg = Q of the ordinary nth limit projection. The exact
-derived equivalence preserves products and distinguished triangles. Transport the
-cone through the given tail isomorphism. Choose a homotopy-limit cone on the full
-tower G; its positive-tail restriction is again a homotopy-limit cone. Uniqueness
-of homotopy limits gives an isomorphism from the transported normalized cone to
-that restriction, compatible with every positive leg. Extend the full cone along
-this isomorphism. It remains a homotopy limit and retains the required positive
-legs. The normalization identity, precomposed by Q(b), gives the assertion. All
-steps apply to zero and unbounded complexes and arbitrary initial terms; no
-regularity or exactness of ordinary products is required. -/
+Source: Stacks Project, Tags 0940 and 0941. -/
 theorem normalizedStrictLimitCone
     {A : Type a} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{g} A]
     {B : Type b} [Category.{t} B] [Abelian B]

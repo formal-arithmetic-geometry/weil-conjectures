@@ -37,7 +37,6 @@ with right modules being bimodules over `(𝟙, R)` and left modules bimodules o
 
 If moreover `C` is preadditive and its tensor product is additive in each variable, then so is
 the relative tensor product (`MonoidalPreadditive (Mod C R)`).
-
 -/
 
 @[expose] public section

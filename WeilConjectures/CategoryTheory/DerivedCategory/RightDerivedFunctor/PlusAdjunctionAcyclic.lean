@@ -27,7 +27,6 @@ isomorphism since `L(I)` is a bounded below complex of `R`-acyclic objects
 
 - `CategoryTheory.Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic`: the derived unit is
   invertible under the above hypotheses.
-
 -/
 
 @[expose] public section
@@ -44,16 +43,7 @@ variable {C D : Type*} [Category* C] [Category* D]
 
 /-- If the unit of `adj : L ⊣ R` is an isomorphism on injective objects and `L` sends injective
 objects to `R`-acyclic objects, then the unit of the bounded below derived adjunction
-`L.mapDerivedCategoryPlus ⊣ R.rightDerivedFunctorPlus` is an isomorphism.
-
-On a bounded below complex `I` of injectives the derived unit factors as
-
-```
-  I --adj.unit--> R (L I) --unit of R⁺--> R⁺R (L I)
-```
-
-where the first map is invertible termwise by `h₁` and the second because `L I` is a complex of
-`R`-acyclic objects by `h₂`. -/
+`L.mapDerivedCategoryPlus ⊣ R.rightDerivedFunctorPlus` is an isomorphism. -/
 theorem isIso_derivedPlus_unit_app_of_rightAcyclic
     (h₁ : ∀ (I : C) [Injective I], IsIso (adj.unit.app I))
     (h₂ : ∀ (I : C) [Injective I], R.rightAcyclic (L.obj I)) (X : DerivedCategory.Plus C) :

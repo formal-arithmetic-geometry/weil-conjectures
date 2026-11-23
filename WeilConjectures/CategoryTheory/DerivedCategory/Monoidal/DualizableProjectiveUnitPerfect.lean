@@ -18,21 +18,6 @@ tensor products (`CategoryTheory.UnitFactorsThroughFiniteCoproducts`,
 `CategoryTheory.UnitTensorFinite`). We prove that every dualizable object `K` of `D(C)` is
 isomorphic to a bounded complex of finite projective objects, that is, of retracts of finite
 direct sums `𝟙ʳ` (`DerivedCategory.exists_iso_Q_obj_of_isDualizable`).
-
-## Strategy
-
-By `DerivedCategory.exists_retract_of_exactPairing_of_projective_unit`, a dualizable `K` is a
-retract of a bounded complex whose terms are quotients of some `𝟙ʳ`. Hence `K` is bounded, its
-top homology is a quotient of some `𝟙ʳ`, and, its dual being bounded as well, `K` has finite Tor
-amplitude. We argue by induction on the length of the interval `[a, b]`, where `K` vanishes above
-`b` and `K ⊗ G[0]` vanishes below `a` for every `G : C`.
-
-* If `a = b`, then `K = H[-a]`, where `H` is a quotient of `𝟙ʳ` such that `H[0]` is dualizable of
-  Tor amplitude `[0, 0]`. Its dual `X` then vanishes above `0`, so `Hom(H[0], G[1])`, which is
-  `Hom(𝟙, G[1] ⊗ X)`, vanishes; the surjection `𝟙ʳ ⟶ H` splits, and `H` is finite projective.
-* If `a < b`, a map `𝟙ʳ[-b] ⟶ K` which is surjective on `Hᵇ` has a dualizable cone `C'` vanishing
-  above `b - 1` with the same lower Tor bound `a`. By induction `C'` is a bounded complex of
-  finite projective objects, and so is `K`, an extension of `C'` by `𝟙ʳ[-b]`.
 -/
 
 @[expose] public section
@@ -360,10 +345,7 @@ braided monoidal closed Grothendieck abelian category with functorial flat resol
 unit `𝟙` is projective, with morphisms from `𝟙` finite on coproducts and on tensor products
 (as for sheaves of modules on the pro-étale site of a weakly contractible affine scheme). Then
 every dualizable object of `D(C)` is isomorphic to a bounded complex of retracts of finite direct
-sums `𝟙ʳ` (the forward direction of Stacks 0FPV in this setting).
-
-The object `K` is bounded, vanishing above some `b`, and has Tor amplitude in `[a, b]` for some
-`a`; conclude by `DerivedCategory.finProjComplex_of_isDualizable_of_isLE`. -/
+sums `𝟙ʳ` (the forward direction of Stacks 0FPV in this setting). -/
 theorem exists_iso_Q_obj_of_isDualizable [Projective (𝟙_ C)]
     (hC : UnitFactorsThroughFiniteCoproducts C) (hT : UnitTensorFinite C)
     {K : DerivedCategory C} (hK : IsDualizable K) :

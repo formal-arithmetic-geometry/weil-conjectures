@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tags 0A07
 and 0941; more-algebra.tex, Tag 0913.
-(auxiliary; not a blueprint node).
 
 ## Main statements
 
@@ -50,13 +49,11 @@ variable {R B : Sheaf J CommRingCat.{u}}
 variable [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules B)]
 variable [HasDerivedCategory.{w} (Towers R)] [HasDerivedCategory.{w} (Towers B)]
 
-/-- Exact scalar restriction on unbounded derived categories. Source: Stacks 0A07
-(auxiliary; not a blueprint node). -/
+/-- Exact scalar restriction on unbounded derived categories. Source: Stacks 0A07. -/
 abbrev restrictDerived (φ : R ⟶ B) := (restriction φ).mapDerivedCategory
 
 /-- The canonical ordinary inverse-limit projection, applied degreewise.
-Source: Stacks 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 abbrev limitProjection (O : Sheaf J CommRingCat.{u}) (m : ℕᵒᵖ) :=
   NatTrans.mapHomologicalComplex
     (lim.π m : (lim : Towers O ⥤ Modules O) ⟶ (evaluation ℕᵒᵖ (Modules O)).obj m) (.up ℤ)

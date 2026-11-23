@@ -23,8 +23,7 @@ namespace CategoryTheory
 Source: Stacks Project, Tag 08JC, tensor-Hom shift adjunction.
 This is the explicit equation obtained by applying tensorLeft(K[-n]) to the
 signed Hom shift, cancelling the opposite tensor shifts, and evaluating. It is a
-predicate on a specified coherent shift, and chooses no objects or morphisms.
-(blueprint: def-coef-hom-shift-evaluation-normalization) -/
+predicate on a specified coherent shift, and chooses no objects or morphisms. -/
 def homShiftEvaluationNormalization
     {D : Type*} [Category D] [Preadditive D] [HasShift D ℤ]
     [MonoidalCategory D] [MonoidalClosed D]

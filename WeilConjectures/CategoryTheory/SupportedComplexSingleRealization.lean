@@ -20,20 +20,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory B]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A normalized map from a supported complex is represented by its homology projection.
-Source: Stacks Project, derived.tex, Tag 015J, single-complex specialization;
-Mathlib's `HomologicalComplex.mkHomToSingle` and pure-degree homology faithfulness.
-(blueprint: lem-pc-supported-complex-single-realization)
-
-Proof: All differentials of L vanish, since each has a zero source or target.
-Consequently the cycle inclusion and the homology projection in degree n are
-isomorphisms. Set φ to the inverse cycle inclusion followed by the homology
-projection and the inverse quotient homology comparison. Construct the complex map
-with mkHomToSingle φ; the incoming differential equations hold because those
-sources are zero. Its degree-n component, followed by the single coefficient
-identification, is φ, giving the second equality. Quotient homology naturality and
-the single-complex homology comparison show that its derived image induces the
-identity on X. Both it and f are maps between pure degree-n objects; faithfulness
-of degree-n homology gives the first equality. This also covers n=0 and X=0. -/
+Source: Stacks Project, derived.tex, Tag 015J, single-complex specialization. -/
 theorem supported_complex_single_realization
     (L : CochainComplex.Plus B) (n : ℕ)
     (hL : ∀ i : ℤ, i ≠ (n : ℤ) → IsZero (L.obj.X i)) :

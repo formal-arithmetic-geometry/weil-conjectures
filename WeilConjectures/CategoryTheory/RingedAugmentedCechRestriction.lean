@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 /-! # Restriction of the augmented extended Cech complex
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -223,22 +222,7 @@ variable [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}
 /-- Exact restriction carries the actual augmented Cech complex to the augmented
 Cech complex of the restricted list, including further restrictions between slices.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 099E.
-(auxiliary; not a blueprint node).
-
-Proof: restriction of the localization presheaf is the localization presheaf of the
-restricted section: both maps on fractions are the same universal localization lift.
-Continuous cocontinuous slice restriction commutes with module sheafification, and
-the comparison carries the section one to one. This identifies the two-term complex
-[O -> O[1/b_i]] with its augmentation. Slice restriction commutes with tensor products,
-finite sums and totalization, so induction on the ordered list gives an isomorphism
-of augmented complexes. In the base case use restriction of the degree-zero ring
-complex. Apply localization Q and the exact restriction factorization to obtain the
-first arrow isomorphism. Repeat for Over.map f; on an object over V the denominator
-is the same original section evaluated at that object's domain. Thus the further
-restricted list is precisely the list displayed below, giving the second assertion.
-All comparisons preserve the actual augmentation. The argument includes empty lists,
-zero and invertible sections, and the zero ring. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 099E. -/
 theorem exists_ringed_augmented_cech_restriction :
     (∀ U : C, Nonempty
       (Arrow.mk ((ringedDerivedRestriction O U).map
