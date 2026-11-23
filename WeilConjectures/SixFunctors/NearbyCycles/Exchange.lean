@@ -19,7 +19,7 @@ Let `φ : M ⟶ N` be a morphism of models
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.Hom`) over `f : X ⟶ Y` and
 `f' : X' ⟶ Y'`, with morphisms `t` of total spaces and `g` of geometric generic fibres. This file
 constructs the exchange maps of the nearby cycles `Ψ = Li^* Rj_* Lε^*` on the
-unbounded derived categories of module objects (blueprint `det-sp-nearby-cycles-exchanges`):
+unbounded derived categories of module objects (blueprint `prose-E-03`):
 
 * the *pullback exchange* `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*`
   (`NearbyCyclesModel.Hom.pullbackExchange`), assembled from the pullback comparisons of the
@@ -34,10 +34,10 @@ unbounded derived categories of module objects (blueprint `det-sp-nearby-cycles-
 
 - `NearbyCyclesModel.Hom.map_unit_comp_pullbackExchange_app`: the unit law
   `α_f(Λ) ∘ Lf'^* σ_N = Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹` (blueprint
-  `sk-lem-tf-nearby-mate-coherences` (2)).
+  `sec-Base-change-for-nearby-cycles` (2)).
 - `NearbyCyclesModel.Hom.unit_comp_map_comp_pushforwardExchange_app`: the unit identity
-  `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}` (blueprint `det-tf-sp-trace-morphism`), and
-  `NearbyCyclesModel.Hom.homEquiv_symm_unit_comp_pushforwardExchange_app`: specialization
+  `χ_f ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}` (blueprint `proposition-specialization-trace-class`),
+  and `NearbyCyclesModel.Hom.homEquiv_symm_unit_comp_pushforwardExchange_app`: specialization
   commutes with the adjunction `Lf^* ⊣ Rf_*`.
 - `NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso`: a morphism of models whose morphisms
   of total spaces and of geometric generic fibres are isomorphisms has an invertible pullback
@@ -351,7 +351,7 @@ lemma commSq_j : CommSq φ.generic M.j N.j φ.total := ⟨φ.comm_j⟩
 lemma commSq_ε : CommSq M.ε φ.generic f N.ε := ⟨φ.comm_ε.symm⟩
 
 /-- The *pullback exchange* `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of a morphism of models (blueprint
-`det-sp-nearby-cycles-exchanges` (1)): the pullback comparison `Lf'^* Li_N^* ≅ Li_M^* Lt^*` of the
+`prose-E-03` (1)): the pullback comparison `Lf'^* Li_N^* ≅ Li_M^* Lt^*` of the
 special fibres (`t` the morphism of total spaces), then `Li_M^*` of the base change morphism
 `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres (`g` the morphism of
 geometric generic fibres; the mate of the pullback comparison `Lj_M^* Lt^* ≅ Lg^* Lj_N^*`, that is
@@ -390,7 +390,7 @@ lemma isIso_pullbackExchange_of_isIso [IsIso φ.total] [IsIso φ.generic] :
   infer_instance
 
 /-- The *pushforward exchange* `χ_f : Ψ_N Rf_* ⟶ Rf'_* Ψ_M` of a morphism of models (blueprint
-`det-sp-nearby-cycles-exchanges` (2)): the mate of the pullback exchange `α_f` along the
+`prose-E-03` (2)): the mate of the pullback exchange `α_f` along the
 adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
 noncomputable def pushforwardExchange :
     R((f)_*⟦Λ⟧) ⋙ N.nearbyCycles Λ ⟶ M.nearbyCycles Λ ⋙ R((f')_*⟦Λ⟧) :=
@@ -423,7 +423,7 @@ lemma map_pushforwardExchange_app_comp_counit_app
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
     rfl E
 
-/-- **Unit law of the pullback exchange** (blueprint `sk-lem-tf-nearby-mate-coherences` (2)):
+/-- **Unit law of the pullback exchange** (blueprint `sec-Base-change-for-nearby-cycles` (2)):
 `α_f(Λ) ∘ Lf'^* σ_N = Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹`, where `ε_f : Λ_X ≅ Lf^* Λ_Y` and
 `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}` are the unit comparisons. -/
 lemma map_unit_comp_pullbackExchange_app :
@@ -460,9 +460,9 @@ lemma homEquiv_symm_unit_comp_pushforwardExchange_app
     (N.unit Λ) (M.unit Λ) (leftDerivedUpperStarUnitIso Λ f') (leftDerivedUpperStarUnitIso Λ f)
     (φ.map_unit_comp_pullbackExchange_app Λ) h
 
-/-- **Unit identity of the pushforward exchange** (blueprint `det-tf-sp-trace-morphism`):
-`χ_f(Λ_X) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`, up to the unit comparisons
-`ε_f : Λ_X ≅ Lf^* Λ_Y` and `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}`. -/
+/-- **Unit identity of the pushforward exchange** (blueprint
+`proposition-specialization-trace-class`): `χ_f(Λ_X) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(σ_M) ∘ η_{f'}`, up to
+the unit comparisons `ε_f : Λ_X ≅ Lf^* Λ_Y` and `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}`. -/
 lemma unit_comp_map_comp_pushforwardExchange_app :
     N.unit Λ ≫ (N.nearbyCycles Λ).map ((derivedUpperStarLowerStarAdjunction Λ f).unit.app (𝟙_ _) ≫
         R((f)_*⟦Λ⟧).map (leftDerivedUpperStarUnitIso Λ f).hom) ≫

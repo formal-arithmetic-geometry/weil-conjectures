@@ -16,7 +16,7 @@ public import WeilConjectures.WeilSheaf.FourierTraceAux
 /-!
 # Fourier inversion: the composite of two Fourier transforms
 
-`FT_{ψ⁻¹} ∘ FT_ψ` computed on the triple product `𝔸³` (blueprint `lem-fd-kernel-composition`).
+`FT_{ψ⁻¹} ∘ FT_ψ` computed on the triple product `𝔸³` (blueprint `proposition-fourier-inversion`).
 -/
 
 @[expose] public section
@@ -39,7 +39,8 @@ theorem nonempty_iso_fourierKernel_artinSchreierOf (ψ : AddChar k₀ (PadicAlgC
 
 /-- The Fourier kernels for `ψ` and `ψ⁻¹` pulled back to the triple product `𝔸³` with points
 `(x, ξ, y)` multiply to `ℒ_ψ((x - y) ξ)`: tensoring with `r₁₂^* μ^* ℒ_ψ` and then with
-`r₂₃^* μ^* ℒ_{ψ⁻¹}` is tensoring with `ℒ_ψ((x - y) ξ)` (blueprint `lem-fd-as-lisse`). -/
+`r₂₃^* μ^* ℒ_{ψ⁻¹}` is tensoring with `ℒ_ψ((x - y) ξ)` (blueprint
+`lemma-artin-schreier-character-sheaf--2`). -/
 theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_sub
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (WeilComplex.tensorLisse
@@ -111,7 +112,7 @@ theorem WeilComplex.nonempty_iso_tensorLisse_upperStar_fourierKernel_comp_sub
     (isLisse_artinSchreierOf ψ _)
   exact ⟨Functor.isoWhiskerRight eT₁ _ ≪≫ Functor.isoWhiskerLeft _ eT₂ ≪≫ eT₁₂ ≪≫ eT⟩
 
-/-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`, without
+/-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `proposition-fourier-inversion`, without
 forming the convolution kernel). On `𝔸³` with points `(x, ξ, y)`,
 
 `FT_{ψ⁻¹} FT_ψ (K) ≅ Rr₃₀!(ℒ_ψ((x - y) ξ) ⊗ r₁^* K)[1][1]`
@@ -122,7 +123,7 @@ from compact-support
 base change along `pr₁ : (ξ, y) ↦ ξ`
 (`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_upperStar`), the projection
 formula for `r₂₃` and the composition `R(r₂₃ ≫ pr₂)₀! ≅ Rpr₂₀! Rr₂₃₀!`, together with
-`ℒ_ψ(x ξ) ⊗ ℒ_{ψ⁻¹}(ξ y) ≅ ℒ_ψ((x - y) ξ)` (blueprint `lem-fd-as-lisse`). -/
+`ℒ_ψ(x ξ) ⊗ ℒ_{ψ⁻¹}(ξ y) ≅ ℒ_ψ((x - y) ξ)` (blueprint `lemma-artin-schreier-character-sheaf--2`). -/
 theorem nonempty_iso_fourierTransform_comp_fourierTransform_inv
     (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (fourierTransform (l := l) ψ ⋙ fourierTransform ψ⁻¹ ≅

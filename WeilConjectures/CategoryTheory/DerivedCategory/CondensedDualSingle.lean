@@ -28,19 +28,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [MonoidalClosed A] [BraidedCategory A]
   [HasDerivedCategory.{v} A] [Abelian.HasFunctorialFlatResolution A]
 
-/-- The dual of a dualizable object placed in degree `n` lies in degree `-n`.
-Source: `lem-fin-lisse-field-dual`, the single-degree base case of Step 2 of
-`thm-a1-curve-perverse-heart`
-(blueprint: lem-per-condensed-dual-single).
-
-Proof: represent the single object by the single cochain complex `Q`. Every term
-is either the given dualizable object or zero. Choose its canonical internal dual
-as right dual. The bounded-complex exact-pairing theorem pairs `Q Q` with the
-termwise dual complex. Swap the pairing using the derived braiding and identify
-internal Hom into the unit with the resulting left dual. The termwise dual is
-supported in degree `-n`; its sole term is the internal dual of the original
-object. The argument also covers the zero object.
--/
+/-- The dual of a dualizable object placed in degree `n` lies in degree `-n`. -/
 theorem nonempty_ihom_single_unit (E : A) (hE : IsDualizable E) (n : ℤ) :
     Nonempty ((ihom ((singleFunctor A n).obj E)).obj (𝟙_ _) ≅
       (singleFunctor A (-n)).obj ((ihom E).obj (𝟙_ _))) := by

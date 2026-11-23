@@ -31,10 +31,6 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-!
 # Coordinates of a finite subfield basis on condensed modules
-
-Source: blueprint main-20261015, sec-proetale-coefficients,
-sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md, first two sentences
-(blueprint: lem-sfb-condensed-subfield-basis).
 -/
 
 -- After pruning, this module only keeps private declarations.

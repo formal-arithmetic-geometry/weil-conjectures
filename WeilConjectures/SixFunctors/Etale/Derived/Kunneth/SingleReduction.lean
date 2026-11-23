@@ -20,7 +20,7 @@ map (`AlgebraicGeometry.Etale.tensorBaseChangeMap`)
 We show that it is an isomorphism for every `E` of Tor amplitude in `[n, ∞)` and every bounded
 below `F` as soon as it is an isomorphism when `E` is a flat sheaf and `F` is a sheaf, both
 placed in degree `0` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_single`). This is the
-first part of the proof of blueprint `lem-kun-0f1j`.
+first part of the proof of blueprint `lemma-kunneth-field-coefficients--1`.
 
 * In the variable `F`, for `E` a flat sheaf: both sides do not lower the cohomological degree, so
   in a fixed degree they only depend on a truncation `τ^{≤ q} F`, which is bounded
@@ -330,7 +330,8 @@ lemma isIso_tensorBaseChangeMap_of_isIso_flat (p : X' ⟶ X)
   · exact _root_.DerivedCategory.isZero_of_isGE _ (N + 1 + m) q (by lia) (hX := h₂)
   · exact _root_.DerivedCategory.isZero_of_isGE _ (N + 1 + m) (q + 1) (by lia) (hX := h₂)
 
-/-- First step of the proof of blueprint `lem-kun-0f1j`: reduction to single sheaves.
+/-- First step of the proof of blueprint `lemma-kunneth-field-coefficients--1`: reduction to single
+sheaves.
 
 The base change map `Lp^* E ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Lp^* E ⊗ᴸ Le^* F)` is an isomorphism
 for every `E` of Tor amplitude in `[n, ∞)` and every `F` concentrated in degrees `≥ m`, provided

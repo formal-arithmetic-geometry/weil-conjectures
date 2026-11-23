@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Boundary factorization for an exact presheaf-valued realization of a Roos triangle
 
-Source: Stacks Project, Tags 07KW and 07KY; the boundary-extraction step of
-`prop-weil-pbc-roos-triangle` (blueprint: lem-weil-pbc-roos-cohomology-boundary).
+Source: Stacks Project, Tags 07KW and 07KY.
 -/
 
 @[expose] public noncomputable section

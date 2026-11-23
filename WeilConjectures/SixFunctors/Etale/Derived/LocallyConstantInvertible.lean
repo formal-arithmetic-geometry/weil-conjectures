@@ -27,7 +27,7 @@ isomorphism. On a trivialising étale cover `U_i ⟶ X` the pullback of `L` is t
 
 Placed in any degree, such an `L` is then invertible in `D(X_ét, Λ)`.
 
-This is step (4c) of the proof of blueprint `sk-prop-cohsm`.
+This is step (4c) of the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism`.
 
 ## Main statements
 
@@ -66,7 +66,8 @@ lemma nonempty_iso_unit_of_isConstant (F : Sheaf X.smallEtaleTopology (ModuleCat
   exact ⟨eM.symm ≪≫ (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso eΛ ≪≫
     (Functor.Monoidal.εIso (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).symm⟩
 
-/-- Blueprint `sk-prop-cohsm`, step (4c): a lisse sheaf of rank one is invertible.
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4c): a lisse sheaf of
+rank one is invertible.
 
 For a locally constant sheaf `L` of `Λ`-modules on `X_ét` whose stalk at every geometric point
 is `Λ`, the evaluation `L ⊗ [L, Λ_X] ⟶ Λ_X` is an isomorphism. On every nonempty member `U_i` of
@@ -95,7 +96,8 @@ theorem isIso_ihom_ev_app_unit_of_isLocallyConstantSheaf
   exact (nonempty_iso_unit_of_isConstant (G.obj L) t
     ((Etale.upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (𝒰.f i) t).app L ≪≫ eL)).some
 
-/-- Blueprint `sk-prop-cohsm`, step (4c): a lisse sheaf of rank one is invertible.
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4c): a lisse sheaf of
+rank one is invertible.
 
 A locally constant sheaf `L` of `Λ`-modules on `X_ét` whose stalks are `Λ` has the tensor inverse
 `[L, Λ_X]`. -/
@@ -132,8 +134,8 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
-/-- Blueprint `sk-prop-cohsm`, step (4d): a lisse sheaf of rank one is invertible in
-`D(X_ét, Λ)`: `L[0]` has the tensor inverse `[L, Λ_X][0]`
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4d): a lisse sheaf of
+rank one is invertible in `D(X_ét, Λ)`: `L[0]` has the tensor inverse `[L, Λ_X][0]`
 (`AlgebraicGeometry.Etale.isInvertible_singleFunctor_obj_of_tensorIso`). -/
 theorem isInvertible_singleFunctor_obj_of_isLocallyConstantSheaf
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf L]
@@ -142,8 +144,8 @@ theorem isInvertible_singleFunctor_obj_of_isLocallyConstantSheaf
     IsInvertible ((_root_.DerivedCategory.singleFunctor _ 0).obj L) :=
   isInvertible_singleFunctor_obj_of_tensorIso (tensorIhomUnitIsoOfIsLocallyConstantSheaf L hL)
 
-/-- Blueprint `sk-prop-cohsm`, step (4d): a lisse sheaf of rank one placed in any degree is
-invertible in `D(X_ét, Λ)`
+/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`, step (4d): a lisse sheaf of
+rank one placed in any degree is invertible in `D(X_ét, Λ)`
 (`AlgebraicGeometry.Etale.isInvertible_singleFunctor_obj_of_isLocallyConstantSheaf`), shifts of
 invertible complexes being invertible. -/
 theorem isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf

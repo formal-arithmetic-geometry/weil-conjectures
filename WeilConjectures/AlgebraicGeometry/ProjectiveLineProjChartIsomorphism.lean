@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearProjection
 # Chart-compatible comparison of the two models of the projective line
 
 Source: Stacks Project, Constructions, Tag 01NG; blueprint proof of
-`lem-sc-p1-graded-resolution` (blueprint: def-sc-p1-proj-chart-isomorphism).
+`theorem-riemann-roch-coherent-serre-duality` (blueprint: def-sc-p1-proj-chart-isomorphism).
 -/
 
 @[expose] public section

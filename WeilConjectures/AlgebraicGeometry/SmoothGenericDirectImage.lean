@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.SmoothCompactDualModel
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
 `lem-asd-smooth-generic-direct-image.md`, statement and proof
-(blueprint: lem-asd-smooth-generic-direct-image).
+(blueprint: lemma-smooth-morphisms-locally-constant-sheaves).
 -/
 
 @[expose] public section
@@ -83,28 +83,33 @@ has bounded finite locally constant ordinary derived direct image on a nonempty 
 where its canonical ordinary exchange is invertible for every Noetherian test scheme.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
 `lem-asd-smooth-generic-direct-image.md`
-(blueprint: lem-asd-smooth-generic-direct-image).
+(blueprint: lemma-smooth-morphisms-locally-constant-sheaves).
 
 Proof:
-1. The schemes are Noetherian by pqf-lem-locnoeth-lft. The locally constant relative
-   dimension (sbc-lem-smooth-relative-dimension-locally-constant) and quasi-compactness
+1. The schemes are Noetherian by lemma-smooth-morphisms-locally-constant-sheaves--1. The locally
+constant relative
+   dimension (lemma-smooth-morphisms-locally-constant-sheaves) and quasi-compactness
    split X into finitely many open-and-closed pure-dimensional pieces. Compactify each
-   by thm-nagata-compactification.
+   by theorem-nagata-s-compactification-theorem--1.
 2. On one piece put omega = f^times lambda and N = L^dual tensor omega.
-   By thm-asd-smooth-tensor, omega is a rank-one lisse sheaf shifted by 2d. Finite-free
-   biduality gives L = RHom(N, omega): compute on trivializing etale neighborhoods and
-   use lemma-weil-pbc-geometric-stalk-conservative. Thus N is bounded constructible.
-3. prop-asd-internal-adjunction identifies Rf_*L with RHom(Rf_!N, lambda).
-   lem-fin-compact-bounded-and-base-change makes C = Rf_!N bounded constructible.
+   By proposition-exceptional-inverse-image-smooth-morphism, omega is a rank-one lisse sheaf shifted
+   by 2d. Finite-free biduality gives L = RHom(N, omega): compute on trivializing etale
+   neighborhoods and use lemma-weil-pbc-geometric-stalk-conservative. Thus N is bounded
+   constructible.
+3. lemma-internal-adjunction-two-exchange-formulas--1 identifies Rf_*L with RHom(Rf_!N, lambda).
+   lemma-smooth-morphisms-locally-constant-sheaves makes C = Rf_!N bounded constructible.
    In each of its finitely many cohomological degrees, the stratum through the generic
-   point contains a nonempty open. Intersect these opens and apply lem-fin-lisse-field-dual
-   to obtain bounded finite locally constant cohomology of the dual.
-4. For every Noetherian T, prop-asd-smooth-base-change identifies the pulled-back omega
+   point contains a nonempty open. Intersect these opens and apply
+   lemma-smooth-morphisms-locally-constant-sheaves to obtain bounded finite locally constant
+   cohomology of the dual.
+4. For every Noetherian T, proposition-exceptional-inverse-image-smooth-morphism--6 identifies the
+pulled-back omega
    and N with those for f_T. Base-changed compactification and finite type make the
    ambient adjunction available (lemma-nagata-compactification-base-change and
-   lem-pod-separated-finite-type-base-change). Compact-support exchange and
-   lem-fin-lisse-field-dual then give an isomorphism between the desired objects.
-5. Identify this map with sbc-def-base-change-map: transpose the internal-adjunction
+   lemma-smooth-morphisms-locally-constant-sheaves--1). Compact-support exchange and
+   lemma-smooth-morphisms-locally-constant-sheaves then give an isomorphism between the desired
+   objects.
+5. Identify this map with definition-derived-base-change-map--1: transpose the internal-adjunction
    pairing obtained from the ordinary counit f^*Rf_*L -> L and evaluation L tensor N ->
    omega. Compact exchange is natural for this pairing; exceptional exchange is the
    transpose of compact exchange followed by the exceptional counit. Pulling back these

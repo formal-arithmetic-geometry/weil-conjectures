@@ -19,12 +19,11 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 /-!
 # Derived tensor with a fixed complex in the second factor
 
-Source: Stacks Project, More on Algebra, Tags 064L and 06Y6 and Section 06Y5
-(blueprint: lem-pc-derived-tensor-second-factor-functor).
+Source: Stacks Project, More on Algebra, Tags 064L and 06Y6 and Section 06Y5.
 
-The tensor bifunctor is the landed mixed module tensor, totalized in the order `(E, N)`.
+The tensor bifunctor is the mixed module tensor, totalized in the order `(E, N)`.
 Thus the differential is `d_E ⊗ 1 + (-1)^p 1 ⊗ d_N`, and the `A`-action comes from `N`.
-K-flatness uses the landed ordinary-module specialization of the ringed-site notion.
+K-flatness uses the ordinary-module specialization of the ringed-site notion.
 -/
 
 @[expose] public section
@@ -48,30 +47,9 @@ local notation "QA" => (Q : CochainComplex (ModuleCat A) ℤ ⥤
 set_option quotPrecheck false in
 local notation "W" => HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)
 
-/-- The fixed-second-factor derived tensor satisfies all three clauses of the node.
-Source: Stacks Project, Tags 064L and 06Y6, construction in Section 06Y5
-(blueprint: lem-pc-derived-tensor-second-factor-functor).
-
-Proof outline (the DAG's four steps):
-1. Apply `lem-pc-kflat-tensor-quasi-iso` on the one-point site, with `N` restricted to
-   `R`. The total map is `A`-linear through `N`; its cohomology isomorphisms are `A`-linear.
-2. Tensoring homotopies gives homotopies. Reindexing the cone and shifted total complexes
-   identifies tensoring a cone with the cone of the tensor map, with the same signs.
-   Thus the induced functor on the homotopy category is exact. The same computation works
-   in the second variable (`def-pc-tensor-complex-sheaves`, `def-weil-abstract-derived-category`).
-3. Apply `lem-pur-left-derived-from-kflat-class`: resolutions exist by
-   `lem-pc-kflat-resolution`, and clause (1) inverts quasi-isomorphisms between K-flat models.
-   The derived comparison `ε` is an isomorphism on K-flat complexes. For `s : F → E`, the
-   canonical comparison is `L(Q s)⁻¹ ≫ ε_F`. It is uniquely characterized by the displayed
-   equation; comparisons between resolutions factor through this common derived object
-   and satisfy the cocycle identity.
-4. Tensoring a morphism `u : N → N'` gives a natural transformation of the underived
-   functors. The left-derived universal property induces the transformation of derived
-   functors and gives identities and composition. The comparison equation describes its
-   K-flat representative. If `u` is a quasi-isomorphism, its cone is acyclic after restriction
-   to `R`. K-flatness and signed symmetry make `Tot(F ⊗ Cone(u))` acyclic; step 2 identifies
-   it with the cone of `Tot(1_F ⊗ u)`. The cone criterion gives the claimed quasi-isomorphism.
-   Every derived object has a K-flat model, so the derived transformation is an isomorphism. -/
+/-- The derived tensor product with a fixed second factor `N` exists as a functor in `N`, and is
+a triangulated left derived functor with the compatibilities stated below.
+Source: Stacks Project, Tags 064L and 06Y6, construction in Section 06Y5. -/
 theorem exists_derivedTensor_second_factor_functor (f : R →+* A) :
     let B := (ModuleCat.mixedTensor f).flip.map₂CochainComplex
     (∀ (N : CochainComplex (ModuleCat.{u} A) ℤ)

@@ -28,7 +28,7 @@ cohomology objects are (Stacks 09B9).
 
 For `𝒪_{E,X}`-module objects on `X_proét` and the action of a uniformizer `ϖ` of `𝒪_E`, this
 yields (Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 3.4.4; blueprint
-`sk-def-pe-derived-completion`):
+`definition-derived-adic-completeness`):
 
 ## Main results
 

@@ -10,8 +10,10 @@ import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.ExactTensor.Proje
 import WeilConjectures.AlgebraicGeometry.ProjectionRestriction.ExactTensor.ProjectionExactTensorSecondShift
 
 /-! Exact tensor functors on resolving representatives.
-Source: Stacks Project, Tags 06YU, 07A4 and 0FNH.
-(blueprint: lem-weil-pbc-projection-exact-tensor-comparison).
+
+## References
+
+* Stacks Project, Tags 06YU, 07A4 and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -31,19 +33,7 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
 namespace ExactTensor
 
 /-- An exact tensor functor preserving coproducts and resolving complexes descends
-with its representative normalization and both signed shift squares.
-Source: Stacks Project, Tags 06YU, 07A4 and 0FNH.
-(blueprint: lem-weil-pbc-projection-exact-tensor-comparison).
-
-Proof: totalize the natural ordinary comparison. Coproduct preservation makes
-this a cochain isomorphism, and additivity identifies its two signed shift squares.
-The resolving-pair localization is fully faithful, so the cochain isomorphism
-has a unique derived descent. Cancel the representative and total isomorphisms
-to obtain its normalization. On resolving pairs the shift square is a composite
-of the representative shift squares, the exact-functor factorization square,
-and the cochain tensor shift square. Cancel those outer isomorphisms; essential
-surjectivity of resolving representatives extends the resulting equality to all
-objects in each variable. No site-map presentation of the exact functor is needed. -/
+with its representative normalization and both signed shift squares. -/
 theorem exactTensorComparison_exists (L : Mod R ⥤ Mod S) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesColimitsOfSize.{0, 0} L]

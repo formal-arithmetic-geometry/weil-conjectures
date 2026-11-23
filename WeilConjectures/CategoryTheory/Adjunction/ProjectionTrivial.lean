@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionRefinement
 
 This file collects formal facts about projection morphisms and projection comparisons used for
 the projection formula of a proper morphism, computed through its trivial compactification
-`X ⟶[𝟙] X ⟶[f] Y` (blueprint `prop-sf-pf-coherence`).
+`X ⟶[𝟙] X ⟶[f] Y`.
 
 - `CategoryTheory.Adjunction.id_projectionComparison`: the projection comparison of the identity
   adjunction is the identity.
@@ -26,7 +26,6 @@ the projection formula of a proper morphism, computed through its trivial compac
 - `CategoryTheory.Adjunction.map_comp_ofNatIsoRight_counit`: a morphism identified with the
   projection morphism through `e : G ≅ G'` has the adjoint of a projection morphism for the
   transported adjunction `(adj.ofNatIsoRight e)`.
-
 -/
 
 @[expose] public section

@@ -29,7 +29,7 @@ namespace AlgebraicGeometry.Scheme
 /-- Pullback of an abelian etale sheaf preserves constructibility of its underlying
 set sheaf, including the finiteness of its geometric stalks.
 
-Source: blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`, step 1;
+Source: blueprint `lemma-detection-proper-direct-image--1`, step 1;
 Stacks Project, Tag 095A.
 (blueprint: lem-weil-pbc-constructible-etale-set-pullback).
 

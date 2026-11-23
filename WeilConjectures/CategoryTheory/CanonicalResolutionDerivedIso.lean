@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # Resolution comparisons and the composite derived unit
 
 Source: Stacks Project, derived.tex, Tags 015M and 015N.
-(blueprint: lem-pc-grothendieck-resolution-unit-comparison).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The augmentation of the prescribed injective resolution, inverted after localization.
-Source: Stacks Project, Tag 015M.
-(blueprint: def-pc-canonical-resolution-derived-iso). -/
+Source: Stacks Project, Tag 015M. -/
 noncomputable def resolutionAugmentationIso
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory A]
     {X : A} (I : InjectiveResolution X) :
@@ -35,8 +33,7 @@ noncomputable def resolutionAugmentationIso
       asIso (DerivedCategory.Q.map I.ι'))
 
 /-- Apply the derived functor to the augmentation and invert its unit on injectives.
-Source: Stacks Project, Tag 015M.
-(blueprint: def-pc-canonical-resolution-derived-iso). -/
+Source: Stacks Project, Tag 015M. -/
 noncomputable def resolutionDerivedIso
     {A : Type uA} [Category.{vA} A] [Abelian A] [EnoughInjectives A]
     {B : Type uB} [Category.{vB} B] [Abelian B]
@@ -57,8 +54,7 @@ noncomputable def resolutionDerivedIso
 /-- Canonical comparison with the extension of the natural-number-indexed complex F(I).
 It is constructed from the augmentation, the inverse derived unit on injectives, and the
 map/extension comparison; no witness of an unproved existence theorem is chosen.
-Source: Stacks Project, Tag 015M.
-(blueprint: def-pc-canonical-resolution-derived-iso). -/
+Source: Stacks Project, Tag 015M. -/
 noncomputable def canonicalResolutionDerivedIso
     {A : Type uA} [Category.{vA} A] [Abelian A] [EnoughInjectives A]
     {B : Type uB} [Category.{vB} B] [Abelian B]

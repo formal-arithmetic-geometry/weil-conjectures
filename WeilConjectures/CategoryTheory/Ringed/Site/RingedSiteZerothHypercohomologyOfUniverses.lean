@@ -24,8 +24,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 /-!
 # Zeroth hypercohomology with independent site universes
 
-Source: Stacks Project, Sections 07A5 and 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology).
+Source: Stacks Project, Sections 07A5 and 08JA.
 
 The original construction is retained by the public import. This companion composes the
 same right derived global sections functor with zeroth homology on the actual ringed site.
@@ -46,8 +45,7 @@ arrows and ring sections. Global sections are `Hom_R(R, -)`; the right derived f
 uses the canonical functorial K-injective replacement, followed by zeroth homology.
 No representative or site equivalence is chosen by an unspecified existence theorem.
 
-Source: Stacks Project, Section 07A5 and Lemma 08JA
-(blueprint: def-pur-ringed-site-zeroth-hypercohomology). -/
+Source: Stacks Project, Section 07A5 and Lemma 08JA. -/
 noncomputable def ringedSiteZerothHypercohomologyOfUniverses
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]

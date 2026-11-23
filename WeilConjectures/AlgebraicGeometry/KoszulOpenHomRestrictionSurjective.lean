@@ -46,8 +46,6 @@ private theorem affine_qcoh_representative
         (e.functor.mapIso (DerivedCategory.Q.objObjPreimageIso (e.inverse.obj E)) ≪≫
           e.counitIso.app E)
 
-set_option maxHeartbeats 500000 in
--- The repeated derived restriction expressions require extra elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 /-- Every derived section on the principal-open union comes from a finite Koszul stage.
 Source: Stacks Project, Tag 08DD, proof of Proposition 36.9.5.
@@ -126,18 +124,10 @@ theorem koszulOpenHom_restriction_surjective
         (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
     ∀ ψ : R.obj (koszulOpenStructure A) ⟶ R.obj E.1,
       ∃ (e : ℕ) (φ : koszulOpenObject A r f e ⟶ E.1), v e ≫ R.map φ = ψ := by
-  dsimp only
+  intro R
   classical
   let := HasDerivedCategory.standard (ModuleCat.{uMain} A)
   obtain ⟨F, hF, ⟨i⟩⟩ := affine_qcoh_representative A E
-  let R := ((SheafOfModules.overFunctor.{uMain}
-      (moduleRings (Spec (.of A)).toRingedSpace) (koszulOpen A r f)) ⋙
-      Equivalence.functor
-        (C := SheafOfModules.{uMain}
-          ((moduleRings (Spec (.of A)).toRingedSpace).over (koszulOpen A r f)))
-        (D := SheafOfModules.{uMain}
-          (moduleRings (koszulOpen A r f).toScheme.toRingedSpace))
-        (Scheme.Modules.overEquiv (koszulOpen A r f))).mapDerivedCategory
   let j (e : ℕ) : R.obj (koszulOpenObject A r f e) ≅ R.obj (koszulOpenStructure A) :=
     ⟨R.map (koszulOpenUnit A r f e), v e, hv₁ e, hv₂ e⟩
   let H := DerivedCategory.homologyFunctor (ModuleCat.{uMain} A) 0
@@ -153,10 +143,11 @@ theorem koszulOpenHom_restriction_surjective
   obtain ⟨e, z, hz⟩ := sequentialColimit_derivedHomology_representative A D x
   let φ := (a e).symm z
   refine ⟨e, φ, b.injective ?_⟩
-  have hs := hsquare e φ (v e ≫ R.map φ) (by
-    rw [← Category.assoc, (j e).hom_inv_id, Category.id_comp])
-  rw [hs, Equiv.apply_symm_apply, hz]
-  change H.map c (inv (H.map c) (b ψ)) = b ψ
-  exact ConcreteCategory.congr_hom (IsIso.inv_hom_id (H.map c)) (b ψ)
+  have hs := hsquare e φ (v e ≫ R.map φ) ((j e).hom_inv_id_assoc (R.map φ))
+  have hz' : H.map (DerivedCategory.Q.map (colimit.ι D e)) (a e φ) = x :=
+    (congrArg (fun z ↦ H.map (DerivedCategory.Q.map (colimit.ι D e)) z)
+      ((a e).apply_symm_apply z)).trans hz
+  exact hs.trans ((congrArg (fun z ↦ H.map c z) hz').trans
+    (ConcreteCategory.congr_hom (IsIso.inv_hom_id (H.map c)) (b ψ)))
 
 end AlgebraicGeometry

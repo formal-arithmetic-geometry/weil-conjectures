@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 /-! # Restriction of one augmented localization factor
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 0996.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -237,22 +236,7 @@ variable (O : Sheaf J CommRingCat.{u})
 /-- Slice restriction preserves the two-term localization complex and its projection
 onto the ring complex, including restriction between two slices.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 0996.
-(auxiliary; not a blueprint node).
-
-Proof: the fraction presheaf restricted along Over.forget U is the fraction presheaf
-of the restricted section: its objectwise identity maps commute with the restriction
-maps, which are the same universal localization lifts. The continuous cocontinuous
-restriction/sheafification comparison identifies their sheafifications. The defining
-sheafification adjunction equation carries the unit section one to one, so the
-localization units commute with this comparison and restriction of the rank-one
-module. Take these isomorphisms in degrees zero and one, and the zero-object
-isomorphism in every other degree. The unit square is precisely the only nonzero
-differential square. The degree-zero ring-complex comparison makes the augmentation
-square commute; all its other components vanish. This gives the first arrow
-isomorphism. The same construction along Over.map f gives the second. No bounded
-totalization, derived internal Hom, K-injective replacement or Koszul limit occurs.
-Empty sites, zero rings, and zero or invertible sections satisfy the same construction. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 0996. -/
 theorem exists_ringed_localization_factor_restriction :
     (∀ (U : C) (s : (O.obj ⋙ forget CommRingCat).sections), Nonempty
       (Arrow.mk

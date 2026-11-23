@@ -119,7 +119,7 @@ Proof:
    Transport the inverse images and units using
    lem-weil-pbc-site-equivalence-sheaf-transport and
    lem-weil-pbc-sets-affine-etale-inverse-image-comparison. Their transition maps are
-   isomorphisms with the cocycle law, so lem-weil-pbc-colimit-constant-connected-diagram
+   isomorphisms with the cocycle law, so definition-torsion-sheaves--3
    identifies their inverse-image colimit with the inverse image at the limit.
 2. Apply lem-weil-pbc-colimit-of-sites-sections to each affine descended object.
    The unit compatibility of lem-weil-pbc-sets-affine-etale-inverse-image-comparison

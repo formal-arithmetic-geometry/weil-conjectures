@@ -29,7 +29,7 @@ gives a `Π`-irreducible subspace stable under `Fᵐ`.
 ## Main statements
 
 - `Representation.exists_filtration_isIrreducible_restrict`: blueprint
-  `lem-zl-geometric-constituents-any-base`.
+  `lemma-geometric-constituents-after-constant-extension--1`.
 -/
 
 @[expose] public section
@@ -390,10 +390,10 @@ variable {k W V : Type*} [Field k] [IsAlgClosed k] [Group W] [AddCommGroup V] [M
   [FiniteDimensional k V]
 
 /-- **Geometric constituents after a constant extension**
-(blueprint: `lem-zl-geometric-constituents-any-base`). Let `ρ` be a finite-dimensional
-representation of `W` over an algebraically closed field, `P` a normal subgroup of `W` and
-`F ∈ W`. There are `m ≥ 1` and a finite chain of subspaces `0 = U₀ < U₁ < ⋯ < Uₙ = V`, each
-stable under `P` and under `ρ (F ^ m)`, such that every successive quotient `Uᵢ₊₁ / Uᵢ` is
+(blueprint: `lemma-geometric-constituents-after-constant-extension--1`). Let `ρ` be a
+finite-dimensional representation of `W` over an algebraically closed field, `P` a normal subgroup
+of `W` and `F ∈ W`. There are `m ≥ 1` and a finite chain of subspaces `0 = U₀ < U₁ < ⋯ < Uₙ = V`,
+each stable under `P` and under `ρ (F ^ m)`, such that every successive quotient `Uᵢ₊₁ / Uᵢ` is
 irreducible under `P`: no `P`-stable subspace lies strictly between `Uᵢ` and `Uᵢ₊₁`. -/
 theorem exists_filtration_isIrreducible_restrict (ρ : Representation k W V) (P : Subgroup W)
     [P.Normal] (F : W) :

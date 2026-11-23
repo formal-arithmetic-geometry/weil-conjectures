@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Objectwise Brown representability with small Hom sets
 
-Source: Stacks Project, Derived Categories, Proposition 0A8G, proof of
-`proposition-brown` (blueprint: lem-pc-brown-hom-representability-locally-small).
+Source: Stacks Project, Derived Categories, Proposition 0A8G.
 -/
 
 @[expose] public section
@@ -33,25 +32,7 @@ namespace CategoryTheory
 /-- For an exact coproduct-preserving functor with compactly generated source,
 `Hom(F(-), Y)` is representable. The Hom types may live in unrelated universes,
 provided both categories are locally small in the coproduct indexing universe.
-Source: Stacks Project, Derived Categories, Tag 0A8G, proof of `proposition-brown`,
-and Tag 0A8F, `lemma-brown`
-(blueprint: lem-pc-brown-hom-representability-locally-small).
-
-Proof: Replace both categories by their equivalent `ShrinkHoms` models with Hom
-sets in universe `w`. Transport the additive, zero, shift and triangulated structures
-along the equivalences; distinguished triangles are exactly those carried to
-original distinguished triangles. Equivalences preserve coproducts. For the chosen
-compact generating family, the additive Hom bijections identify the canonical
-maps from direct sums of Hom groups with those in the original category, so the
-transported family is compact. Its coproduct remains a weak generator because
-zero objects, shifts and nonzero morphisms are preserved and reflected. Transport
-`F` by composing with the inverse source equivalence and target equivalence.
-It is exact and preserves coproducts. Apply `brownRepresentabilityRightAdjoint`
-with all three indexing/Hom universes equal to `w`. At the image of `Y`, the
-resulting adjunction represents `Hom(F(-), Y)`. Transport the representing object
-and its natural Hom bijections back through the equivalences. This yields a
-`RepresentableBy` witness and hence the stated `IsRepresentable` instance; no
-choice of adjoint on morphisms is needed in this objectwise assertion. -/
+Stacks Project, Derived Categories, Tags 0A8G and 0A8F. -/
 theorem brownHomRepresentabilityLocallySmall
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [LocallySmall.{w} C] [LocallySmall.{w} D]

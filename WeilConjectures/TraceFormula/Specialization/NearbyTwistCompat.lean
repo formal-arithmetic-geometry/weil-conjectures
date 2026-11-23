@@ -18,7 +18,7 @@ import WeilConjectures.Tactic.TransportExact
 # The exceptional exchanges and the twists by invertible objects
 
 The inputs `m`, `n`, `hm`, `hκP` of `NearbyCyclesModel.exists_twist_of_composition_law` for the
-twist `T = ℚ̄_ℓ(0)[n]` (blueprint `det-tf-nearby-duality-slice`, the twist (1)).
+twist `T = ℚ̄_ℓ(0)[n]` (blueprint `lemma-nearby-duality-slice--1`, the twist (1)).
 
 For a morphism of models `φ : N ⟶ M` over proper `i₁`, `i₂`, the exceptional exchange
 `β = exceptionalExchange ν` of a compact-support exchange `ν` inverse to the proper exchange

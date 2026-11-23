@@ -29,7 +29,7 @@ kills that section after pullback, and a monomorphism into `ℚ̄_ℓⁿ` would 
 
 This is the sheaf-theoretic content of "inertia acts on the fibre of `N` through the nontrivial
 character `χ`", used for the Artin–Schreier sheaves at infinity (blueprint
-`lem-a1-artin-schreier-ramified-infinity`).
+`lemma-unramified-at-infinity-no-linear-characters--1`).
 
 ## Main statements
 

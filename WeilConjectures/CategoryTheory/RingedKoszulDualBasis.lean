@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.SignedKoszulBasisCoproduct
 /-! # Finite subset coordinates for the actual dual Koszul tower
 
 Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -229,31 +228,7 @@ private theorem negative_basis_step
 This statement concerns only the ringed-site complexes: it has no additive
 realization functor or exterior algebra comparison.
 
-Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E,
-lemma-derived-completion-koszul, finite free duality and its transition maps.
-(auxiliary; not a blueprint node).
-
-Proof: use the supported-subset coproduct of the canonical negative tensor
-basis for positive length. For the empty tensor, its sole basis in degree zero
-is the inverse single-complex identification; in other degrees its term is zero
-and the index type is empty. The canonical negative basis has the actual exterior
-boundary coefficients by ringedNegativeKoszulBasis_exterior_d.
-
-Compute the actual one-factor transition on its two basis maps. It acts by its
-section in degree minus one and by identity in degree zero. Naturality of the
-ordered tensor inclusions combines these calculations inductively: the inverse
-unit unitor converts the tensor of scalar endomorphisms into their product.
-Splitting the subset product into its first-index contribution and its successor
-indices gives the one-step diagonal formula.
-
-Compose the canonical negative basis with the proved negative-to-dual tensor
-isomorphisms, including their separate empty-list case. Transport the coproduct
-universal property and the differential equation along these isomorphisms.
-Their naturality gives the actual one-step dual-tower transition, and induction
-on n <= m, using functoriality and the product-of-powers identity, gives the full
-transition formula. Their normalized empty-basis equation is exactly the stated
-dual unit. No scalar is inverted, so empty lists, zero rings, zero or unit
-sections, and empty sites are included. -/
+Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E. -/
 theorem exists_ringedKoszulDualBasis
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]

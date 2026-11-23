@@ -47,9 +47,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.Inte
 
 /-! # The augmented internal homogeneous bar resolution
 
-Source: blueprint, direct-image stability, paragraph (3), formal internal bar input
-(blueprint: lem-sfb-condensed-internal-bar-resolution).
-
 Free objects are the actual composite of free abelian sheaf and free internal module.
 The resolution specification retains all generator formulas, including the equivariant
 induced presentation. No object is selected from the postponed existence theorem.

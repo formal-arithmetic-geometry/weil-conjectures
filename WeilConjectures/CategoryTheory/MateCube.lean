@@ -14,15 +14,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Functor
 namespace CategoryTheory
 
-/-- Four inverse mate comparisons transport a commutative cube.
-Source: Mathlib's adjunction mate formulas and the final tensor-compatibility
-paragraph of the latest blueprint's lem-fix-compact-support-coefficient-change.
-(blueprint: lem-sp-scalar-mate-cube)
-Proof: transpose both composites by the last adjunction. Use its unit naturality
-and the four unit_mateEquiv_symm equations. Naturality of qI moves the first
-inverse mate, and naturality of c moves the initial unit. Substitute hc. On the
-other side naturality of qH moves the remaining inverse mate. Functoriality and
-associativity identify the transposes, and homEquiv injectivity gives equality. -/
+/-- Four inverse mate comparisons transport a commutative cube. -/
 theorem scalarMateCube
     {C₀ C₁ C₂ C₃ D₀ D₁ D₂ D₃ : Type*}
     [Category C₀] [Category C₁] [Category C₂] [Category C₃]

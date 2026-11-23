@@ -21,8 +21,7 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-! # Constant sheaves with a specified finite basis
 
-Source: Stacks Project, Tags 03CY and 00WJ; the finite-basis argument in
-`lem-pur-adic-basis-limit`, step 2.
+Source: Stacks Project, Tags 03CY and 00WJ.
 -/
 
 @[expose] public noncomputable section
@@ -317,20 +316,8 @@ private theorem basisForward_iso (n : ℕ) (b : Module.Basis (Fin n) A B) :
 /-- The specified finite basis induces the corresponding constant-ring-sheaf
 isomorphism, with its actual basis-vector columns.
 
-Source: Stacks Project, Tags 03CY and 00WJ, and the basis calculation in
-`lem-pur-adic-basis-limit`, step 2 (blueprint: lem-pur-constant-specified-basis).
-
-Proof: Regard the basis equivalence and its coordinate maps as morphisms of
-constant presheaves of modules. Sheafify over the unit from the constant ring
-presheaf to its associated ring sheaf. Module sheafification preserves finite
-products. Its comparison with the constant ring sheaf is an isomorphism:
-both units are locally bijective, and local bijectivity is equivalent to being
-an isomorphism for sheaves. Under the resulting coordinate isomorphism, the
-constant section of the j-th basis vector has i-th coordinate delta(i,j).
-Therefore the finite sum of the coordinate projections followed by
-multiplication by these constant sections is the inverse isomorphism. Its
-sectionwise formula is the displayed finite sum. This argument includes the
-empty basis and objects admitting empty covering sieves. -/
+Stacks Project, Tags 03CY and 00WJ.
+-/
 theorem constantSheaf_specifiedBasis (n : ℕ) (b : Module.Basis (Fin n) A B)
     (f : A →+* B) (hf : f = algebraMap A B) :
     ∃ β : (∏ᶜ (fun _ : Fin n ↦ SheafOfModules.unit

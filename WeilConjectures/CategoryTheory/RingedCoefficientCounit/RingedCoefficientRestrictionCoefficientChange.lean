@@ -158,7 +158,6 @@ set_option linter.privateModule false
 # Naturality of normalized coefficient changes
 
 Source: Stacks, Tags 03D7, 07A6 and 0D6E.
-(blueprint: lem-pur-ringed-coefficient-change-normalization).
 -/
 
 @[expose] public noncomputable section

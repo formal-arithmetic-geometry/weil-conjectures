@@ -21,7 +21,7 @@ For instance, the iterated structure isomorphisms `Fⁿ K ≅ K` give such a fam
 - `CategoryTheory.Endofunctor.IsoAlgebra.liftOfStr`: the functor
   `IsoAlgebra F ⥤ IsoAlgebra G`, `K ↦ (K, φ K)`.
 
-## Implementation notes
+## Implementation details
 
 The functor and its compatibilities are stated for arbitrary `F` and `G`, so their proofs are
 checked once. Proving them for a concrete pair of functors would make the kernel compare `F` with

@@ -147,8 +147,7 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSup
 
 /-! # Hom-complex composition and the normalized derived adjunction
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A91 and 0A98, with 08J9
-(blueprint: lem-sfb-ringed-hom-composition-model).
+Source: Stacks Project, sites-cohomology.tex, Tags 0A91 and 0A98, with 08J9.
 
 The local formula uses the actual Hom-product projections and sheafified tensor
 summand generators. The derived comparison uses the fixed augmentation, not an
@@ -179,8 +178,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v u})
 
 /-- The sign-free local homogeneous composition formula, as equality of maps on
-all slices. Source: Stacks 0A91, following More on Algebra 0A8I
-(blueprint: lem-sfb-ringed-hom-composition-model). -/
+all slices. Source: Stacks 0A91, following More on Algebra 0A8I. -/
 def RingedHomCompositionFormula
     (E F G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (m : (coefficientTotalTensor.{u, c, v} J R).obj
@@ -636,15 +634,7 @@ private lemma formula_unique
 end HomCompositionProof
 
 /-- There is exactly one chain map with the specified homogeneous composition formula.
-Source: Stacks 0A91 and More on Algebra 0A8I
-(blueprint: lem-sfb-ringed-hom-composition-model).
-Proof: use the sign-free chain tensor-Hom equivalence. Evaluation is the inverse
-transpose of the identity, and composition is the transpose of two evaluations
-and the native associator. These constructions already give chain maps. Their
-homogeneous pure-section formulas give f(g(x)); restriction naturality gives the
-formula on every slice. The total-tensor summand inclusions, Hom-product projections,
-and sheaf-tensor universal property prove uniqueness. No infinite sum of Hom-product
-coordinates is used. -/
+Source: Stacks 0A91 and More on Algebra 0A8I. -/
 theorem ringedHomComposition_existsUnique
     (E F G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     ∃! m : (coefficientTotalTensor.{u, c, v} J R).obj
@@ -672,7 +662,7 @@ theorem ringedHomComposition_existsUnique
     (HomCompositionProof.comp_formula.{c, v, u} J R E F G)
 
 /-- The actual Hom-complex composition, determined uniquely by its local formula.
-Source: Stacks 0A91 (blueprint: lem-sfb-ringed-hom-composition-model). -/
+Source: Stacks 0A91. -/
 def ringedHomComposition
     (E F G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     (coefficientTotalTensor.{u, c, v} J R).obj
@@ -680,7 +670,7 @@ def ringedHomComposition
   (ringedHomComposition_existsUnique.{c, v, u} J R E F G).exists.choose
 
 /-- The fixed augmentation used by the recorded derived Hom construction.
-Source: Stacks 079P, 0A95 (blueprint: lem-sfb-ringed-hom-composition-model). -/
+Source: Stacks 079P, 0A95. -/
 def ringedHomAugmentation
     (F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     F ⟶ (coefficientHomResolution.{u, c, v} J R).obj F :=
@@ -694,7 +684,7 @@ variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 /-- Canonical comparison from a Hom representative to the fixed derived internal Hom.
 It is an isomorphism for a K-injective target: postcompose by its fixed augmentation,
 then invert the recorded localization-factorization comparison.
-Source: Stacks 0A95, 0A98 (blueprint: lem-sfb-ringed-hom-composition-model). -/
+Source: Stacks 0A95, 0A98. -/
 def ringedHomRepresentativeMap
     (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     DerivedCategory.Q.obj (homComplex (R := R) E F) ⟶

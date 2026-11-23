@@ -39,7 +39,7 @@ direction: its open part is the inverse `(derivedOpenImmersionLowerShriekProject
 - `AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso j`: the resulting
   isomorphism of bifunctors.
 - `AlgebraicGeometry.ProEtale.derivedTensorOpenImmersionLowerShriekIso j K L`: the projection
-  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)` (blueprint `lem-cbc-extension-zero-projection-formula`).
+  formula `j_!K ⊗ᴸ L ≅ j_!(K ⊗ᴸ Lj^*L)` (blueprint `lemma-change-coefficients-compact-support`).
 
 ## The argument
 
@@ -222,7 +222,7 @@ lemma derivedOpenImmersionLowerShriekProjectionIso_hom :
   rfl
 
 
-/-- Blueprint `lem-cbc-extension-zero-projection-formula`: Projection formula for extension by
+/-- Blueprint `lemma-change-coefficients-compact-support`: Projection formula for extension by
 zero.
 
 For an open immersion `j : U ⟶ X`, `K` in `D(U_proét)` and `L` in `D(X_proét)`, the canonical map

@@ -12,8 +12,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # The normalized stationary quotient presentation
 
-Source: Stacks Project, Tag 012Q, proof of the stationary-page formula.
-(blueprint: lem-sp-filtered-normalized-quotient-presentation).
+Source: Stacks Project, Tag 012Q.
 -/
 
 @[expose] public section
@@ -213,24 +212,7 @@ private theorem filtered_preimage {C : Type u} [Category.{v} C] [Abelian C]
     hc T
 
 /-- The quotient of normalized cycle and boundary subobjects has the cycle presentation.
-Source: Stacks Project, Tag 012Q, final quotient calculation, Equation 12.24.5.2.
-(blueprint: lem-sp-filtered-normalized-quotient-presentation).
-
-Proof. Set A=L^pK^n, A'=L^(p+1)K^n, Z=ker(d^n), B=im(d^(n-1)).
-The degree-n projection q from L^pK to gr^pK is an epimorphism whose kernel
-is the degree-n image of L^(p+1)K. Evaluation preserves cokernels, so its
-kernel inside A is the restriction of A'. The normalized cycle subobject
-is the image of (A intersection Z)+A', restricted to A, under q; the
-normalized boundary subobject is the image of (A intersection B)+A'.
-Map A intersection Z onto the former, then onto its quotient by the latter.
-This map is epic: adding A' does not change an image under q. Its kernel
-is the restriction to A intersection Z of (A intersection B)+A'.
-Since B is contained in Z by d squared equal to zero and A' is contained
-in A by antitonicity, the modular identity identifies that kernel with
-(A intersection B)+(A' intersection Z), restricted to A intersection Z.
-The first isomorphism theorem gives the displayed cokernel isomorphism.
-This calculation uses neither cohomology nor stationarity hypotheses.
--/
+Source: Stacks Project, Tag 012Q, Equation 12.24.5.2. -/
 theorem normalizedStationaryQuotient_presentation
     {C : Type u} [Category.{v} C] [Abelian C]
     {K : CochainComplex C ℤ} (L : DecreasingFiltration K) (p n : ℤ) :

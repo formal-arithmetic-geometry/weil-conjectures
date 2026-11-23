@@ -168,7 +168,7 @@ and $C\to B$ is smooth by the same node applied to the smooth $C\to B'$. Composi
 localization establish the required smoothness over $R$
 [lem-weil-pbc-smooth-ring-map-base-change-composition](2). Finally
 $\Omega_{B'/R}\cong(B'\otimes_C\Omega_{C/R})\oplus B'^{\oplus c}$
-[lem-weil-pbc-kahler-differentials-polynomial-extension] and $\Omega_{B/R}\cong(\Omega_{B'/R})_g$
+[theorem-finite-etale-covers-proper-henselian--2] and $\Omega_{B/R}\cong(\Omega_{B'/R})_g$
 [lem-weil-pbc-kahler-differentials-localization]; with step 2 this gives $\dim_{\kappa(\mathfrak
 Q)}\Omega_{B/R}\otimes_B\kappa(\mathfrak Q)=(n-c)+c=n$ for every prime $\mathfrak Q\subset B$ (if
 $Q$ is the inverse image of $\mathfrak Q$ in $C$, then
@@ -176,7 +176,7 @@ $(B\otimes_C\Omega_{C/R})\otimes_B\kappa(\mathfrak
 Q)=(\Omega_{C/R}\otimes_C\kappa(Q))\otimes_{\kappa(Q)}\kappa(\mathfrak Q)$). Uses:
 lem-weil-pbc-smooth-ring-map-principal-localization,
 lem-weil-pbc-smooth-ring-map-base-change-composition,
-lem-weil-pbc-kahler-differentials-polynomial-extension,
+theorem-finite-etale-covers-proper-henselian--2,
 lem-weil-pbc-kahler-differentials-localization.
 
 7. (The fibre over a prime of $R$.) Fix a prime $\mathfrak p\subset R$, let $k=\kappa(\mathfrak

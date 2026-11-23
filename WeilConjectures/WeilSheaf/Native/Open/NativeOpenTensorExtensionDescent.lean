@@ -326,7 +326,6 @@ private theorem castExtension_gamma
   exact HEq.rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1000000 in
 -- This assembly combines totalization, two localizations and the fixed-model square.
 private theorem extensionAbstract
     (E : ProEtaleWeilSheaf k₀ l U ⥤ ProEtaleWeilSheaf k₀ l Z)
@@ -357,14 +356,22 @@ private theorem extensionAbstract
       HEq d.gamma gamma := by
   have : E.IsLeftAdjoint := ⟨R, ⟨adj⟩⟩
   obtain ⟨g, hg⟩ := sheafAbstract k₀ l E R adj r rho hr sg hs
-  obtain ⟨hSA, _, hTA, hiA⟩ := native_open_tensor_canonical_data k₀ l U
-  obtain ⟨hSB, _, hTB, hiB⟩ := native_open_tensor_canonical_data k₀ l Z
+  have : (nativeTensorBifunctor k₀ l U).flip.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
+  have : ∀ M, ((nativeTensorBifunctor k₀ l U).flip.obj M).PreservesZeroMorphisms :=
+    fun M ↦ Functor.preservesZeroMorphisms_of_additive _
+  have : (nativeTensorBifunctor k₀ l Z).flip.PreservesZeroMorphisms :=
+    Functor.preservesZeroMorphisms_of_additive _
+  have : ∀ M, ((nativeTensorBifunctor k₀ l Z).flip.obj M).PreservesZeroMorphisms :=
+    fun M ↦ Functor.preservesZeroMorphisms_of_additive _
+  have hA := native_open_tensor_canonical_data k₀ l U
+  have hB := native_open_tensor_canonical_data k₀ l Z
   obtain ⟨t', ht⟩ := NativeExtensionDescentProof.totalWithInsertions E R
     (nativeTensorBifunctor k₀ l U).flip (nativeTensorBifunctor k₀ l Z).flip
     (fun M N ↦ tensor k₀ l U N M) (fun M N ↦ tensor k₀ l Z N M)
     (nativeTensorTotal k₀ l U) (nativeTensorTotal k₀ l Z)
     (nativeOpenTensorInsertion k₀ l U) (nativeOpenTensorInsertion k₀ l Z)
-    hSA hSB hTA hTB hiA hiB g sg (fun M N ↦ heq_of_eq (hg M N))
+    hA.1 hB.1 hA.2.2.1 hB.2.2.1 hA.2.2.2 hB.2.2.2 g sg (fun M N ↦ heq_of_eq (hg M N))
   let c := inputAbstract k₀ l E R
   let m := modelsAbstract k₀ l E R sg rho
   have : ((ObjectProperty.ι c.flatA) ⋙ DerivedCategory.Q).IsLocalization

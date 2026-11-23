@@ -11,9 +11,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact transport of the cyclic conjugation action
 
-Source: Stacks Project, Derived Categories, Tag 0152; the exact-functor part of
-steps 5--6 of `lem-sf-cyclic-derived-hom-exact-sequence`.
-(blueprint: lem-sf-cyclic-derived-exact-action).
+## References
+
+* Stacks Project, Derived Categories, Tag 0152.
 -/
 
 @[expose] public noncomputable section
@@ -193,30 +193,7 @@ private theorem action_apply (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
             ((forget F).mapDerivedCategory.obj N) ≫
           ((cyclicDerivedStructure F).hom.app N)⟦r⟧') := rfl
 
-/-- Exact equivariant transport commutes with the conjugation action in every degree.
-
-Proof: let J=D(mapOfNatIso e), H=D(L), U=D(forget F), V=D(forget G),
-P=D(F), R=D(G), alpha the prescribed comparison, and
-beta=(mapDerivedCategoryCompIso L G).symm followed by D(e) followed by
-mapDerivedCategoryCompIso F L. The ordinary equation defining mapOfNatIso gives
-R(alpha_M) beta_(UM) H(theta_M) = theta_(JM) alpha_M after localization.
-It is verified on complexes using mapDerivedCategoryNatIso_fac and
-mapDerivedCategoryCompIso_fac; naturality transports it to every derived object.
-The exact-functor composition and natural-isomorphism comparisons commute with shifts,
-so beta does too. Expand the two conjugations. The structure equation at M gives
-alpha_M H(theta_M inverse) = theta_(JM) inverse R(alpha_M) beta_(UM).
-Naturality of beta moves H(P(u)) across beta. Its shift equation identifies the
-canonical shift factors. The structure equation at N gives
-beta_(UN) H(theta_N) alpha_N inverse = R(alpha_N inverse) theta_(JN).
-Shift this last equality by r. Associativity and the inverse-isomorphism equations
-now identify all four factors of the two expressions. No boundedness or resolution
-hypothesis enters this calculation.
-
-Source: the action calculation in step 7 of the parent node; the termwise structure
-equation of def-weil-endofunctor-fixed-pair-category, localized by
-lem-sf-exact-functor-derived-triangulated. This algebraic expansion is agent-written;
-Stacks derived.tex, Tag 0152 supplies the surrounding canonical-boundary construction.
-(blueprint: lem-sf-cyclic-derived-exact-action). -/
+/-- Exact equivariant transport commutes with the conjugation action in every degree. -/
 theorem cyclicDerivedHomTransport_exact_action
     (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
     (u : CyclicDerivedHom F M N r) :

@@ -18,8 +18,7 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Left exactness of finite-free constant scalar extension
 
-Source: Stacks 03CZ and 03EK; finite-basis argument in
-`lem-pur-topos-finite-free-compact-constituents`, proof Step 1.
+Source: Stacks 03CZ and 03EK.
 -/
 
 @[expose] public section
@@ -242,23 +241,8 @@ end CategoryTheory.ConstantFiniteFreeIndependent
 
 /-- Ordinary sheafified extension of finite-free constant scalars is left exact.
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ and 03EK; the finite-basis
-argument in proof Step 1 of lem-pur-topos-finite-free-compact-constituents.
-(blueprint: lem-pur-constant-finite-free-extension-left-exact).
-
-Proof: choose a finite A-basis of B and its dual coordinates. On constant ring
-presheaves the basis expansion and the Kronecker identities are inverse formulas.
-Sheafifying gives a finite basis of the constant B-sheaf as a module over the
-constant A-sheaf. This does not assert that its sections are constant. For any
-module sheaf M, tensoring the basis and its dual coordinates identifies the
-underlying abelian sheaf of E(M) with the corresponding finite power of the
-underlying abelian sheaf of M. Check the inverse identities on pure tensors and
-then use the universal property of module sheafification. These identifications
-are natural by the prescribed map equation. Finite powers preserve finite limits,
-as does the forgetful functor from module sheaves to abelian sheaves. That
-forgetful functor reflects finite limits, so E preserves them. All formulas use
-finite sums and also apply to the empty basis and to the zero coefficient ring.
-The assumed sheafifications suffice with independent site and coefficient universes. -/
+Source: Stacks Project, Modules on Sites, Tags 03CZ and 03EK.
+-/
 theorem CategoryTheory.constantFiniteFree_extensionLeftExact
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) [HasWeakSheafify J CommRingCat.{r}]

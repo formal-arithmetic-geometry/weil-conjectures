@@ -19,8 +19,11 @@ import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarDirectNormalizat
 
 /-! # Composition of finite compact-support scalar comparisons
 
-Source: Stacks Tags 03DI and 0D6E
-(blueprint: lem-sf-compact-support-restriction-of-scalars). -/
+## References
+
+* Bhatt--Scholze, Sections 6.5 and 6.7
+* Stacks Tags 03DI, 0D6E and 0D6J
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -73,7 +76,7 @@ private theorem directImage_map_apply {Z Y : Scheme.{u}} (g : Z ⟶ Y)
       f.val.app ((proEtaleBaseChange g).op.obj V) x := rfl
 
 /-- The inverse direct-image comparisons paste by uniqueness of their derived unit
-normalizations. Source: Stacks Tag 0D6E. -/
+normalizations. -/
 private theorem derivedImageRestriction_inv_comp {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (φ : A →+* B) (ψ : B →+* C) :
     (sfDerivedImageRestriction g (ψ.comp φ)).symm =
@@ -147,16 +150,7 @@ private theorem derivedImageRestriction_comp {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The compact-support coefficient comparisons compose for composable ring maps.
 The comparison in SfCompactSupportRestrictionData is the extension-by-zero comparison
-followed by the ordinary derived direct-image comparison.
-Source: Bhatt--Scholze, Sections 6.5 and 6.7; Stacks Tags 03DI, 0D6E and 0D6J
-(blueprint: lem-sf-compact-support-restriction-of-scalars).
-Proof: the sectionwise realization and restriction composition maps preserve constant
-scalars. Uniqueness of the left-adjoint comparison gives the composition identity for
-extension by zero. For direct image, compute on a K-injective representative and a
-K-injective resolution after restriction; both composites are the same comparison of
-the two ringed-topos factorizations. Uniqueness of the normalized derived comparison
-and its naturality give the identity on all derived objects. Whiskering these two
-identities proves the displayed compatibility for their compact-support composite. -/
+followed by the ordinary derived direct-image comparison. -/
 theorem sfCompactSupportRestriction_comp
     (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

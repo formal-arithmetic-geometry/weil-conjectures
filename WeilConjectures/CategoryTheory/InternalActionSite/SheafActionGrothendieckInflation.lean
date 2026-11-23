@@ -18,10 +18,6 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 
 /-!
 # Grothendieck structure and exact restriction of internal sheaf actions
-
-Source: main-20261015, sk-thm-sf-ctf-stability-direct-images, paragraph (3),
-agent-formulated categorical input
-(blueprint: lem-sfb-sheaf-action-grothendieck-inflation).
 -/
 
 -- After pruning, this module only keeps private declarations.

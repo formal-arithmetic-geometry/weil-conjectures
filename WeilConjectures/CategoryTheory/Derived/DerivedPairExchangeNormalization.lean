@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullback
 /-!
 # Representative normalization for a square of derived functor pairs
 
-Source: blueprint finite exchange before Rlim; Stacks Tag 06YY.
-(blueprint: def-cbc-derived-pair-exchange-normalization).
+Source: Stacks Tag 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +22,7 @@ open CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The inverse exchange commutes with the actual complex-level derived counits.
-Source: blueprint finite exchange before Rlim; Stacks Tag 06YY
-(blueprint: def-cbc-derived-pair-exchange-normalization).
+Source: Stacks Tag 06YY.
 The construction is the representative equation itself, quantified over the
 specified resolving class. No replacement or derived functor is chosen here. -/
 def DerivedPairExchangeNormalization

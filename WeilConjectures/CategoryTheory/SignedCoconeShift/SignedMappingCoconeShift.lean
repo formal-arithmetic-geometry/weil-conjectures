@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 /-! # Coherent signed shifts of mapping cocones
 
 Source: Stacks Project, Tags 011G and 014E.
-(blueprint: lem-weil-signed-mapping-cocone-shift)
 -/
 
 @[expose] public section

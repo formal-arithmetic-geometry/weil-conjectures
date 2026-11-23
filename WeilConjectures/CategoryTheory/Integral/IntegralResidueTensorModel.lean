@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 /-! # A common homotopy-level model for the residue tensor square
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-model)
 -/
 
 @[expose] public section
@@ -39,9 +38,7 @@ attribute [local instance] instBraidedCategoryDerivedCategory_sheaf
 
 attribute [local instance] CategoryTheory.derivedTensorPresentationBraiding
 
-/-- The existing derived monoidal structure, with its base-category data fixed.
-Source: the derived tensor construction used by `tensorModelTarget` below.
-(blueprint: new-integral-residue-tensor-model) -/
+/-- The existing derived monoidal structure, with its base-category data fixed. -/
 noncomputable abbrev tensorModelDerivedMonoidal : MonoidalCategory (DerivedCategory D) :=
   inferInstance
 
@@ -60,8 +57,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCateg
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The residue coefficient as an ordinary integral module.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(blueprint: new-integral-residue-tensor-model) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15. -/
 noncomputable abbrev residueExchangeOrdinaryCoefficient (T : Scheme.{u}) :=
   (Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj
     (Mod.regular (condensedRingObj
@@ -74,8 +70,7 @@ variable (P : HomotopyCategory
     (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ))
 
 /-- The explicit comparison from the target of the residue square to its ordinary model.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(blueprint: new-integral-residue-tensor-model) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15. -/
 @[irreducible]
 noncomputable def residueExchangeTensorModelTarget :
     (residueExchangeUpperStar (integralCoeff ℓ E) f).obj (DerivedCategory.Qh.obj P) ⊗
@@ -91,8 +86,7 @@ noncomputable def residueExchangeTensorModelTarget :
     (residueExchangeOrdinaryCoefficient ℓ E Y) P
 
 /-- The explicit common map for the two routes in the residue square.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
-(blueprint: new-integral-residue-tensor-model) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15. -/
 noncomputable def residueExchangeTensorModelMap :
     (residueExchangeUpperStar (integralCoeff ℓ E) f).obj
         ((residueExchangeRestriction ℓ E Y).obj

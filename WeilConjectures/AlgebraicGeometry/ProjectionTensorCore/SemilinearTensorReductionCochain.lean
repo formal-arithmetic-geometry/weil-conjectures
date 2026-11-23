@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalculusSupplement
+import all WeilConjectures.AlgebraicGeometry.System.SystemCochainTensorReduction
 import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 import all WeilConjectures.CategoryTheory.AlgebraicInverseImage
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf
@@ -51,8 +52,11 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Tensor reduction without internal-Hom comparison data
 
-Source: Zheng Construction 4.1; Stacks 03EK, 06YY, 07A4.
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain).
+## References
+
+* Zheng Construction 4.1
+* Stacks 03EK, 03CZ, 06YY
+* Stacks 06YN, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -73,9 +77,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
 /-- The normalized tensor models and scalar comparisons, without internal-Hom
-or cartesianness data. These are the tensor fields of the ordinary calculus.
-Source: Zheng Construction 4.1; Stacks 07A4
-(blueprint: def-coef-semilinear-tensor-reduction-models). -/
+or cartesianness data. These are the tensor fields of the ordinary calculus. -/
 structure SystemTensorReductionModels where
   scalar : ∀ {m n : ℕ} (h : n ≤ m),
     ScalarData.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h)
@@ -274,9 +276,7 @@ private theorem transition_apply_cast {m n : ℕ} (h : n ≤ m)
     (M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x)
   exact eq_of_heq (hh.trans hy.symm)
 
-/-- The ordinary scalar-adjunction transpose of the actual horizontal restriction.
-Source: Zheng Construction 4.1; Stacks 03CZ, 06YY
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain). -/
+/-- The ordinary scalar-adjunction transpose of the actual horizontal restriction. -/
 def ordinaryReduction (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (M : Systems.{c, v, max c v r} J B τ) :
     (A.scalar h).model.E.obj ((evaluation.{c, v, max c v r} J B τ m).obj M) ⟶
@@ -312,16 +312,7 @@ attribute [local irreducible] ordinaryTensorHom tensorSection
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.defeqAttrib.useBackward true in
-/-- Ordinary reduction commutes with tensor under the canonical comparisons.
-Source: Zheng Construction 4.1; Stacks 03EK, 03CZ, 06YY
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain).
-Proof: transpose both maps through extension/restriction adjunction. Precompose with
-inverse tensor evaluation and test on pure tensors, which generate the sheafified
-module tensor. The adjunction unit sends x to its scalar-extension section. The
-ordinary scalar comparison sends the extension of x tensor y to the tensor of the
-two extended sections. Horizontal restriction commutes with pure tensor sections,
-and evaluation's comparison is the identity on these sections. Thus the two
-transposes agree on pure sections, hence on the whole tensor sheaf. -/
+/-- Ordinary reduction commutes with tensor under the canonical comparisons. -/
 private theorem ordinary_tensor_reduction
     (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ}
     (h : n ≤ m) (M N : Systems.{c, v, max c v r} J B τ) :
@@ -385,9 +376,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v r} C]
   (J : GrothendieckTopology C) (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- The degreewise ordinary horizontal adjoints form a cochain morphism.
-Source: Zheng Construction 4.1; Stacks 06YN
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain). -/
+/-- The degreewise ordinary horizontal adjoints form a cochain morphism. -/
 def cochainReduction (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
     ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj
@@ -414,10 +403,7 @@ private theorem cochainReduction_f
     (cochainReduction.{c, v, r} J B τ A h P).f k =
       ordinaryReduction.{c, v, r} J B τ A h (P.X k) := rfl
 
-/-- The degreewise construction agrees with the induced cochain adjunction.
-Source: Stacks 06YN (blueprint: lem-coef-semilinear-tensor-reduction-cochain).
-Proof: the inverse Hom equivalence is extension of the map followed by the
-counit in both constructions, and the cochain counit is degreewise. -/
+/-- The degreewise construction agrees with the induced cochain adjunction. -/
 theorem cochainReduction_eq_transpose
     (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
@@ -493,17 +479,8 @@ private theorem tensorSummand_map (R : Sheaf J CommRingCat.{max c v r})
   rfl
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 400000 in
 -- The summand calculation compares three dependent ringed module categories.
-/-- Cochain reduction commutes with the normalized total tensor comparisons.
-Source: Zheng Construction 4.1; Stacks 06YN, 07A4
-(blueprint: lem-coef-semilinear-tensor-reduction-cochain).
-Proof: test equality in each total degree on every (p,q) summand. The comparison
-model summand equations express both maps using the inverse ordinary comparisons.
-Naturality moves the horizontal adjoint past the system tensor summand. The
-ordinary tensor reduction identity then equates the two remaining maps. This
-argument uses every summand of the unbounded total and changes no differential
-or Koszul sign. -/
+/-- Cochain reduction commutes with the normalized total tensor comparisons. -/
 theorem cochain_tensor_reduction
     (A : SystemTensorReductionModels.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)
     (P Q : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :
@@ -543,18 +520,9 @@ theorem cochain_tensor_reduction
       (((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Pm)
       (((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj Qm)
       p q k hpq ≫ _ = _
-  erw [← Category.assoc, hs, Category.assoc, ← (A.scalar h).model.E.map_comp_assoc, hm]
-  erw [(A.scalar h).model.E.map_comp, Category.assoc,
-    cochainReduction_f.{c, v, r} J B τ A h
-      ((totalTensor.{c, v, r} (coefficientSequenceTopology J)
-        (systemRing.{c, v, max c v r} J B τ)).obj (P, Q)) k]
-  erw [hnat]
-  erw [reassoc_of% hmap, hn]
-  erw [cochainReduction_f.{c, v, r} J B τ A h P p,
-    cochainReduction_f.{c, v, r} J B τ A h Q q]
-  erw [A.tensorEvaluationModel_ordinary m (P.X p) (Q.X q),
-    A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)]
-  have hinv := ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q)
-  erw [reassoc_of% hinv]
+  rw [A.tensorEvaluationModel_ordinary m (P.X p) (Q.X q)] at hm
+  rw [A.tensorEvaluationModel_ordinary n (P.X p) (Q.X q)] at hn
+  exact cochainReduction_summand_paste (A.scalar h).model.E hs hm hn hmap hnat
+    (ordinary_tensor_reduction_inv.{c, v, r} J B τ A h (P.X p) (Q.X q))
 
 end WeilConjectures.SemilinearSections.ProjectionTensorCore

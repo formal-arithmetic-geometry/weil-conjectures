@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Coefficient-compatible K-flat tensor models under a scheme isomorphism
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
-(blueprint: lem-weil-isomorphism-scalar-completed-model).
+## References
+
+* Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4)
+* Stacks Project, Tag 03EL
+* Tag 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -31,16 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The completed chain comparison and preservation of flat-term K-flat models.
-
-Source: Stacks Project, sites-modules.tex, Tag 03EL; sites-cohomology.tex, Tag 0G7E;
-Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4).
-(blueprint: lem-weil-isomorphism-scalar-completed-model).
-
-The two strictly simpler components are supplied by the completed pure-tensor
-comparison and preservation statements. Their conjunction is exactly the item
-statement, so this wrapper performs no additional mathematical identification.
--/
+/-- The completed chain comparison and preservation of flat-term K-flat models. -/
 theorem scalar_completed_model
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
     (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) :

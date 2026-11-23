@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 /-!
 # Compactly generated triangulated categories
 
-Source: Stacks Project, Derived Categories, Definition 13.37.5 (Tag 09SQ)
-(blueprint: def-pc-compactly-generated).
+Source: Stacks Project, Derived Categories, Definition 13.37.5 (Tag 09SQ).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ variable (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
 
 /-- A triangulated category with arbitrary coproducts is compactly generated when some
 set-indexed family consists of compact objects and its coproduct generates the category
-(Stacks, Tag 09SQ) (blueprint: def-pc-compactly-generated). -/
+(Stacks, Tag 09SQ). -/
 def IsCompactlyGeneratedTriangulated : Prop :=
   ∃ (I : Type w) (E : I → C),
     (∀ i : I, IsCompactObject (E i)) ∧ IsTriangulatedGeneratingFamily E

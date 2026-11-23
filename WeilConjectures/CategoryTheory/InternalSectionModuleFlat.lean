@@ -482,8 +482,7 @@ same universal pairing. Source: Stacks Project, Tag 03EK.
 The inverse is the sheafification lift of the balanced pairing into the coequalizer.
 The forward map is the coequalizer descent of the sectionwise tensor pairing; their
 composites are identities by the two universal properties. The formula follows
-from the sheafification unit equation.
-(auxiliary; not a blueprint node) -/
+from the sheafification unit equation. -/
 theorem exists_sectionTensorIso (M N : IM) :
     ∃ e : (E).obj (M ⊗ N) ≅ (PresheafOfModules.sheafification
         (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj
@@ -585,7 +584,7 @@ sectionwise balanced tensor. Both identities follow on pure tensors and descend
 through sheafification and the coequalizer. These maps are natural, so the section
 module equivalence transports exactness of right tensoring. The braiding supplies
 left tensoring. Empty covers and zero modules are included by the same universal
-properties. (auxiliary; not a blueprint node) -/
+properties. -/
 theorem flat_iff_sectionModule (M : IM) :
     ObjectProperty.flat M ↔ SheafOfModules.IsFlatOnSite ((E).obj M) := by
   constructor

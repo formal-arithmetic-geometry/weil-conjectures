@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorCompariso
 /-!
 # Comparing the native and canonical global projection mates
 
-Source: Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-global-comparison).
+## References
+
+* Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -150,23 +151,7 @@ private theorem globalOrdinary_square
       (proEtaleRingModuleAdjunction f R S c)) (tensor R) (tensor S)
     (proEtaleOrdinaryTensorPullback f R S c) M N
 
-/-- Comparing normalized global models does not involve a slice or exactness data.
-Source: Stacks Project, Tags 06YU, 07A4, 07A6 and 0B56.
-(blueprint: lem-weil-pbc-proetale-projection-global-comparison).
-
-Proof: the tensor-model descent bijections lift the representative comparisons to
-natural tensor isomorphisms. The coefficient equality identifies the operation with
-the constructive global operation. Transposition and pure-tensor extensionality
-identify its ordinary tensor comparison with the constructive transported one.
-Ordinary left-adjoint uniqueness gives the pullback isomorphism; exact-derived
-factorization gives its derived normalization. Apply the proved tensor-comparison
-transport theorem: its total-complex square follows on each bidegree summand from
-naturality, and its derived square follows by fully faithful resolving restriction.
-Conjugate the derived pullback isomorphism under the actual adjunctions to obtain
-the right-adjoint isomorphism. Curry and compose the tensor and adjoint isomorphisms
-to construct s and t. The proved abstract projection-mate square theorem, with
-identity horizontal functors, gives the requested equation. No slice, shift,
-perfectness or boundedness data is used. -/
+/-- Comparing normalized global models does not involve a slice or exactness data. -/
 theorem proEtaleProjectionGlobalComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

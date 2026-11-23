@@ -75,9 +75,16 @@ private theorem square_of_normalizations
     l ≫ b ≫ d = a ≫ c ≫ t := by
   rw [hd, hl, ← Category.assoc a, hc]
 
+private theorem postcompose_comparison_transport
+    {D : Type*} [Category D] {U V W X Y Z : D}
+    {l : U ⟶ V} {p : V ⟶ W} {q : U ⟶ X} {a : X ⟶ Y} {b : Y ⟶ W}
+    {c : W ⟶ Z} {d : Y ⟶ Z} {e : X ⟶ Z}
+    (hl : l ≫ p = q ≫ a ≫ b) (hbc : b ≫ c = d) (had : a ≫ d = e) :
+    l ≫ p ≫ c = q ≫ e := by
+  simpa only [Category.assoc, hbc, had] using congrArg (fun k ↦ k ≫ c) hl
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1600000 in
 -- The two squares require elaborating distinct nested stalk cohomology models.
 /-- Pointwise comparison arrows are conjugate when the spectrum representatives
 are the termwise pullbacks. This does not construct such representatives, nor
@@ -175,14 +182,11 @@ theorem nonempty_affineSpectrum_stalkComparison_arrow_iso
     simp only [Functor.map_comp] at hcF hdF
     have hk := congrArg (fun a => F0.map (H0.map a)) hphi
     simp only [Functor.map_comp] at hk
-    have hl' := congrArg (fun a => a ≫
-      F0.map (H0.map (affineSpectrumDerivedMorphism g' K K' φ))) hl
-    simp only [Functor.map_comp, Category.assoc] at hl'
-    rw [hk] at hl'
     have hn' : T.hom.app ((derivedPullback g').obj K) ≫
         F0.map (H0.map ((derivedPullback X'.isoSpec.inv).map φ)) =
       F.map (H.map φ) ≫ T.hom.app K' := hn.symm
-    rw [hn'] at hl'
+    have hl' := postcompose_comparison_transport hl hk hn'
+    simp only [Functor.map_comp, Category.assoc] at hl'
     exact square_of_normalizations l.hom _ _ _ _ _ _ _ hcF hdF
       (by simpa only [Category.assoc] using hl')
   refine ⟨Arrow.isoMk l r ?_⟩

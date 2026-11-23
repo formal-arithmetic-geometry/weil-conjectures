@@ -16,10 +16,6 @@ public import WeilConjectures.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
 /-!
 # Preservation of quasi-isomorphisms between K-flat complexes
 
-Source: Weil conjectures blueprint, main-20261015, `sec-proetale-coefficients`,
-`sk-def-sfb-derived-categories`, definition `def-sfb-preserves-kflat-quasi-iso`
-(blueprint: def-sfb-preserves-kflat-quasi-iso).
-
 The binary total tensor is Mathlib's `HomologicalComplex.tensorObj`, with maps
 `HomologicalComplex.tensorHom`. Its degree `n` is the coproduct indexed by pairs
 `(p, q)` with `p + q = n`. The differential is `d_P ⊗ 1 + (-1)^p (1 ⊗ d_Q)`

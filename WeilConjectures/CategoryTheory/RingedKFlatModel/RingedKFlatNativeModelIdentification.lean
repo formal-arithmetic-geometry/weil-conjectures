@@ -132,7 +132,6 @@ import Mathlib.CategoryTheory.Localization.Prod
 /-! # Identification of ringed and native K-flat tensor models
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YP, 06YT, 06YU and 0FPT.
-(blueprint: lem-pd-ringed-kflat-native-model-identification).
 -/
 
 @[expose] public noncomputable section
@@ -375,13 +374,13 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 
 /-- The existing abstract native tensor, with its monoidal instance explicitly named.
-Source: Stacks 06YU, 0FPT (blueprint: lem-pd-ringed-kflat-native-model-identification). -/
+Source: Stacks 06YU, 0FPT. -/
 def nativeTensor :=
   @tensor (DerivedCategory (RingedTensorModules.{c, v, u} J R)) _
     (RingedDerivedNative.monoidal.{c, v, u, w} J R)
 
 /-- The actual native derived-to-ordinary transformation, the localization tensorator.
-Source: Stacks 06YU (blueprint: lem-pd-ringed-kflat-native-model-identification). -/
+Source: Stacks 06YU. -/
 def nativeLocalization
     (P Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     (nativeTensor.{c, v, u, w} J R).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ⟶
@@ -395,7 +394,7 @@ variable
   (T : CoefficientTensorModels.{u, c, v, w} J R S)
 
 /-- The resolving-pair normalization determining a tensor comparison uniquely.
-Source: Stacks 06YS, 06YU (blueprint: lem-pd-ringed-kflat-native-model-identification). -/
+Source: Stacks 06YS, 06YU. -/
 def Normalized (e : nativeTensor.{c, v, u, w} J R ≅ S.tensor) : Prop :=
   ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients),
@@ -406,14 +405,14 @@ def Normalized (e : nativeTensor.{c, v, u, w} J R ≅ S.tensor) : Prop :=
         (T.iso J R S P Q hP hQ).hom
 
 /-- The type of all-complex localization transformations for the given ringed tensor.
-Source: Stacks 06YU (blueprint: lem-pd-ringed-kflat-native-model-identification). -/
+Source: Stacks 06YU. -/
 abbrev Localization :=
   (DerivedCategory.Q.prod DerivedCategory.Q) ⋙ S.tensor ⟶
     coefficientTotalTensor.{u, c, v} J R ⋙ DerivedCategory.Q.{w}
 
 /-- The three monoidal comparison diagrams with a shared, identified unit.
 This uses arbitrary monoidal structures only to keep the identical site diagrams small.
-Source: Stacks 0FPT (blueprint: lem-pd-ringed-kflat-native-model-identification). -/
+Source: Stacks 0FPT. -/
 def Constraints {D : Type d} [Category.{h} D]
     (a r : MonoidalCategory D) (I : D)
     (ua : a.tensorUnit ≅ I) (ur : r.tensorUnit ≅ I)

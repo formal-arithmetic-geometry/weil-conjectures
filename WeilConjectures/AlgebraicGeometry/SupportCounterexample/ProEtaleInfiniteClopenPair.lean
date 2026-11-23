@@ -13,7 +13,7 @@ import Mathlib.RingTheory.Spectrum.Prime.RingHom
 /-!
 # The affine pair associated to an infinite product of fields
 
-Source: the explicit affine pair in step 5 of `def-pur-flasque-support`.
+Source: the explicit affine pair in step 5 of `definition-local-cohomology`.
 -/
 
 @[expose] public section

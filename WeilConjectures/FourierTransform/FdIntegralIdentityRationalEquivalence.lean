@@ -662,7 +662,7 @@ Restrict the ambient functors to the full subcategories. In their common realiza
 are identity on objects and arrows.
 2. By lem-weil-integral-constructible-triangulated and
 lem-weil-pbc-uniform-complete-triangulated, shifts and triangles are inherited.
-lem-weil-pbc-exact-functor-derived-factorization supplies the shift comparisons induced
+situation-conventions supplies the shift comparisons induced
 by the degreewise identity: coefficient restriction does not change differentials,
 shift signs or the cone matrix. Consequently the two restrictions preserve triangles.
 lem-weil-integral-constructible-linear identifies the Hom action with constant sections;

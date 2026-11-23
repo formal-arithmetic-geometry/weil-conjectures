@@ -165,7 +165,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # A derived left adjoint with independent localization universes
 
 Source: Stacks Project, Tags 06XN and 09T5.
-(blueprint: lem-weil-pbc-ringed-derived-adjunction-independent-universes).
 -/
 
 @[expose] public section

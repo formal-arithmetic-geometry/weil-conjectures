@@ -17,7 +17,7 @@ For a commutative ring `R` and a set `Z` of points of `Spec R`, the reduced clos
 support the closure of `Z` is `Spec (R ⧸ I(Z))`, `I(Z)` the vanishing ideal
 (`AlgebraicGeometry.Scheme.reducedClosed`). It is reduced, its closed immersion into `Spec R` has
 image the closure of `Z`, and the kernel of the map on global sections is `I(Z)`. These are the
-reduced inverse images `G' ∪ V'`, `H'`, `B'` of blueprint `det-tf-restriction-zero-covers`.
+reduced inverse images `G' ∪ V'`, `H'`, `B'` of blueprint `lemma-tangent-cones-on-cover`.
 
 -/
 

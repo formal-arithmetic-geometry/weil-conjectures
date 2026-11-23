@@ -19,8 +19,8 @@ namespace AlgebraicGeometry
 set_option autoImplicit false
 
 /-- The lifted étale structure-module sheaf has natural additive section identifications.
-Source: blueprint `lem-sc-as-sequence`, the maps paragraph; Stacks, Tags 03DR and 03DU
-for the section presheaf, and Tags 0096 and 01CA for pullback of the structure module.
+Source: blueprint `lemma-p-torsion-affine-curve-characteristic--3`, the maps paragraph; Stacks, Tags
+03DR and 03DU for the section presheaf, and Tags 0096 and 01CA for pullback of the structure module.
 (blueprint: lem-sc-as-sequence-construction-helper)
 
 Proof: Choose G to be the displayed lifted sheaf, with the identity isomorphism.

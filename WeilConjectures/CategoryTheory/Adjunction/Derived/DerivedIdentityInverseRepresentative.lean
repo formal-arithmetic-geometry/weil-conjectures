@@ -19,13 +19,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 namespace CategoryTheory.Adjunction
 
 /-- On a cochain representative, the inverse exact-derived identity comparison is the
-localized inverse chain comparison followed by the inverse localization factor.
-Source: the homotopy representative formula in `AdjunctionIdIso` and Mathlib localization.
-(blueprint: lem-sf-derived-identity-inverse-representative)
-
-Proof: compose on the right with the localization factor. Apply the existing homotopy
-formula to the quotient of the cochain complex. The quotient comparison and the termwise
-homotopy comparison are identity maps; remove them with functoriality and cancel the factor. -/
+localized inverse chain comparison followed by the inverse localization factor. -/
 theorem mapDerivedCategoryNatIso_trans_idIso_inv_app_Q_obj {D : Type*} [Category D] [Abelian D]
     [HasDerivedCategory D] (R : D ⥤ D) [R.Additive]
     [CategoryTheory.Limits.PreservesFiniteLimits R]

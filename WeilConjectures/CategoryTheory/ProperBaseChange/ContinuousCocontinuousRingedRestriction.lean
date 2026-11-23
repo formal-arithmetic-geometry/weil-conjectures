@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.Pullback
 /-!
 # Ringed localization for continuous cocontinuous restriction
 
-Source: Stacks Project, Tag 04IE; sites.tex Tag 00XO
-(blueprint: lem-weil-pbc-continuous-cocontinuous-ringed-restriction).
+Source: Stacks Project, Tags 04IE and 00XO.
 -/
 
 @[expose] public section
@@ -397,18 +396,7 @@ end
 
 /-- Ringed localization for continuous cocontinuous restriction.
 
-Source: literature/stacks-project/sites-modules.tex, Tag 04IE; sites.tex Tag 00XO
-(blueprint: lem-weil-pbc-continuous-cocontinuous-ringed-restriction).
-Proof: Use Mathlib Functor.sheafAdjunctionCocontinuous to obtain the set adjunction with continuous
-precomposition as inverse image. Sectionwise limits prove left exactness. Take the structural
-ring map to be the identity of the restricted ring. The generalized-element ring identities
-follow by evaluating at F(U). Construct the module direct image by compatible families, defining
-addition and the R-action coordinatewise; its underlying set sheaf is the same compatible-family
-direct image. Transposition along the set adjunction takes linear maps to linear maps, since its
-unit and counit are evaluated coordinatewise and the structural map is identity. Restrict its
-hom equivalence to obtain the module adjunction. The same evaluation proves additivity, the
-natural underlying comparison, and the module_linear field, using arbitrary rings rather than
-commutative rings. -/
+Source: Stacks Project, Tags 04IE and 00XO. -/
 theorem continuous_cocontinuous_ringed_restriction
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

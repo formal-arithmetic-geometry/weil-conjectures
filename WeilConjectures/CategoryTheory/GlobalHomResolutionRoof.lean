@@ -30,9 +30,8 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.HomComplexGlobalHomotopyO
 
 /-! # The ordinary-to-resolved global Hom roof
 
-Source: Stacks Project, dga.tex, Example 09L9 (example-category-complexes),
-derived.tex, Lemma 070I (lemma-K-injective), and sites-cohomology.tex, Section 0B6E.
-(blueprint: lem-sf-global-hom-resolution-roof)
+Source: Stacks Project, dga.tex, Example 09L9,
+derived.tex, Lemma 070I, and sites-cohomology.tex, Section 0B6E.
 -/
 
 @[expose] public noncomputable section
@@ -48,7 +47,7 @@ namespace CategoryTheory
 variable (B : Type v) [CommRing B] {A : Type u} [Category.{v} A] [Abelian A] [Linear B A]
 
 /-- Product Hom with scalars retained, using Mathlib's cochains and exact signed differential.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 09L9. -/
 def globalLinearHom (X Y : CochainComplex A ℤ) : CochainComplex (ModuleCat.{v} B) ℤ where
   X n := ModuleCat.of B (Cochain X Y n)
   d n m := ModuleCat.ofHom (δ_hom B X Y n m)
@@ -64,7 +63,7 @@ def globalLinearHom (X Y : CochainComplex A ℤ) : CochainComplex (ModuleCat.{v}
     exact δ_δ n m k z
 
 /-- The degreewise pre/postcomposition map on the existing linear cochains.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 09L9. -/
 def globalLinearHomMapTerm {X X' Y Y' : CochainComplex A ℤ}
     (a : X' ⟶ X) (b : Y ⟶ Y') (n : ℤ) :
     (globalLinearHom B X Y).X n ⟶ (globalLinearHom B X' Y').X n :=
@@ -75,9 +74,7 @@ def globalLinearHomMapTerm {X X' Y Y' : CochainComplex A ℤ}
       map_smul' := by intros; simp }
 
 /-- The pre/postcomposition maps commute with the Hom differential.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof).
-Proof: expand both differentials as `d_Y f - (-1)^n f d_X`, and use the chain-map
-identities for `a` and `b`. The two expressions agree componentwise. -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomMap_comm {X X' Y Y' : CochainComplex A ℤ}
     (a : X' ⟶ X) (b : Y ⟶ Y') (n m : ℤ) :
     globalLinearHomMapTerm B a b n ≫ (globalLinearHom B X' Y').d n m =
@@ -92,7 +89,7 @@ theorem globalLinearHomMap_comm {X X' Y Y' : CochainComplex A ℤ}
   rw [δ_ofHom_comp, δ_comp_ofHom]
 
 /-- Actual pre/postcomposition chain map, with its prescribed component formula.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 09L9. -/
 def globalLinearHomMap {X X' Y Y' : CochainComplex A ℤ} (a : X' ⟶ X) (b : Y ⟶ Y') :
     globalLinearHom B X Y ⟶ globalLinearHom B X' Y' where
   f := globalLinearHomMapTerm B a b
@@ -100,7 +97,7 @@ def globalLinearHomMap {X X' Y Y' : CochainComplex A ℤ} (a : X' ⟶ X) (b : Y 
 
 /-- A resolution is only a complex and its given quasi-isomorphism, with the usual
 K-injectivity predicate; no linear or functorial choice is part of this input.
-Source: Stacks 070I (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 070I. -/
 structure GlobalHomResolution (X : CochainComplex A ℤ) where
   I : CochainComplex A ℤ
   ι : X ⟶ I
@@ -112,25 +109,25 @@ attribute [instance] GlobalHomResolution.injective GlobalHomResolution.quasiIso
 variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)]
 
 /-- The identity resolution of a K-injective complex.
-Source: Stacks 070I (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 070I. -/
 def GlobalHomResolution.self (X : CochainComplex A ℤ) [X.IsKInjective] :
     GlobalHomResolution X := ⟨X, 𝟙 X, inferInstance, inferInstance⟩
 
 /-- Shift the actual augmentation, using the standard signed cochain shift.
-Source: Stacks 09L9, 070I (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 09L9, 070I. -/
 def GlobalHomResolution.shift {X : CochainComplex A ℤ} (R : GlobalHomResolution X) (n : ℤ) :
     GlobalHomResolution (X⟦n⟧) :=
   ⟨R.I⟦n⟧, (shiftFunctor _ n).map R.ι, inferInstance, inferInstance⟩
 
 /-- The resolved Hom object on the specified resolutions, exactly `q H(I_X,I_Y)`.
-Source: Stacks 0B6E (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 0B6E. -/
 def globalResolvedHom {X Y : CochainComplex A ℤ}
     (R : GlobalHomResolution X) (S : GlobalHomResolution Y) :
     DerivedCategory (ModuleCat.{v} B) :=
   DerivedCategory.Q.obj (globalLinearHom B R.I S.I)
 
 /-- The actual class of an abstract cycle in the cohomology of the localized complex.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 09L9. -/
 def globalLinearHomClass (X Y : CochainComplex A ℤ) (n : ℤ)
     (z : (globalLinearHom B X Y).cycles n) :
     (DerivedCategory.homologyFunctor (ModuleCat.{v} B) n).obj
@@ -563,7 +560,7 @@ private theorem roof_unit_formula (X : CochainComplex A ℤ) (b : B) :
 
 /-- The target-shift square of `GlobalHomResolutionRoof.targetShift_roof`, for any `c` satisfying
 the roof equation and any `targetShift` given by the family identification.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-shift-fields). -/
+Source: Stacks 09L9. -/
 structure GlobalHomResolutionRoofShiftFields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -587,7 +584,7 @@ structure GlobalHomResolutionRoofShiftFields
 
 /-- Ordinary composition and its two coherences, for any `c` satisfying the roof equation and
 any `comparison` given by conjugation with representing homotopy equivalences.
-Source: Stacks 09L9, 06XY (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9, 06XY. -/
 structure GlobalHomResolutionRoofCompositionFields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -632,7 +629,7 @@ structure GlobalHomResolutionRoofCompositionFields
 
 /-- The unit roof and the cohomology interpretation, for any `c` satisfying the roof equation
 and any `unit` given by the scalar formula.
-Source: Stacks 070I, 0B6E (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 070I, 0B6E. -/
 structure GlobalHomResolutionRoofCohomologyFields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -723,15 +720,7 @@ private theorem roof_targetShift_naturality
 
 /-- The shift square holds for every `c` satisfying the roof equation and every `targetShift`
 given by the family identification (both hypotheses of the field).
-Source: Stacks 09L9 and step 7 of lem-sf-global-hom-resolution-roof.
-Proof: the roof equation determines `c`, since `Q (globalLinearHomMap B R.ι (𝟙 S.I))` is
-invertible (precomposition by a quasi-isomorphism into a K-injective is a quasi-isomorphism),
-and the family formula determines `targetShift`. Pre- and postcomposition by degree-0 chain
-maps commute with `rightUnshift`, so the family identification is natural for the
-precomposition leg `j` (by `R.ι`) and the postcomposition leg `p` (by `S.ι`, resp. its shift).
-Apply `Q` and naturality of `Q.commShiftIso`. Postcompose both sides with the shift of the
-invertible `Q.map j`; by the roof equation both become the image of `Q.map p`; cancel.
-(blueprint: lem-sf-global-hom-resolution-roof-shift-fields). -/
+Source: Stacks 09L9. -/
 theorem globalHom_resolution_roof_shift_fields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -757,7 +746,7 @@ section CompositionChainMap
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)]
 
 /-- Composition of cochains `g ⊗ f ↦ f.comp g`, as a `B`-bilinear map in fixed degrees.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 def globalLinearHomCompBilin (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h : r + s = n) :
     Cochain Y Z r →ₗ[B] Cochain X Y s →ₗ[B] Cochain X Z n :=
   LinearMap.mk₂ B (fun g f ↦ f.comp g (by omega))
@@ -767,7 +756,7 @@ def globalLinearHomCompBilin (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h : r
     (fun _ _ _ ↦ Cochain.smul_comp _ _ _ _)
 
 /-- The degree-`n` component of composition, out of the total-tensor coproduct.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 def globalLinearHomCompTerm (X Y Z : CochainComplex A ℤ) (n : ℤ) :
     (globalLinearHom B Y Z ⊗ globalLinearHom B X Y).X n ⟶ (globalLinearHom B X Z).X n :=
   HomologicalComplex.mapBifunctorDesc (fun r s h ↦
@@ -781,7 +770,7 @@ private theorem roof_compTerm_ι (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h
 
 /-- Composition commutes with the differentials, by the Leibniz rule
 `δ (f.comp g) = f.comp (δ g) + (-1)^|g| (δ f).comp g`.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomComp_comm (X Y Z : CochainComplex A ℤ) (n m : ℤ) :
     globalLinearHomCompTerm B X Y Z n ≫ (globalLinearHom B X Z).d n m =
       (globalLinearHom B Y Z ⊗ globalLinearHom B X Y).d n m ≫
@@ -811,14 +800,14 @@ theorem globalLinearHomComp_comm (X Y Z : CochainComplex A ℤ) (n m : ℤ) :
     simp
 
 /-- Ordinary composition `H(Y,Z) ⊗ H(X,Y) ⟶ H(X,Z)`, `g ⊗ f ↦ f.comp g`.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 def globalLinearHomComp (X Y Z : CochainComplex A ℤ) :
     globalLinearHom B Y Z ⊗ globalLinearHom B X Y ⟶ globalLinearHom B X Z where
   f := globalLinearHomCompTerm B X Y Z
   comm' n m _ := globalLinearHomComp_comm B X Y Z n m
 
 /-- The pure-tensor formula for ordinary composition.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomComp_formula (X Y Z : CochainComplex A ℤ) (r s n : ℤ) (h : r + s = n)
     (g : Cochain Y Z r) (f : Cochain X Y s) :
     (globalLinearHomComp B X Y Z).f n
@@ -853,7 +842,7 @@ private theorem roof_whiskerRight_apply {K K' : CochainComplex (ModuleCat.{v} B)
   congrArg (fun ψ ↦ ψ.hom (x ⊗ₜ[B] y)) (CochainComplex.Monoidal.ι_whiskerRight φ r s n h)
 
 /-- Composition is natural in the source: `j ∘ comp = A ∘ (1 ⊗ j)`.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomComp_precomp {X X' Y Z : CochainComplex A ℤ} (a : X' ⟶ X) :
     globalLinearHomComp B X Y Z ≫ globalLinearHomMap B a (𝟙 Z) =
       globalLinearHom B Y Z ◁ globalLinearHomMap B a (𝟙 Y) ≫ globalLinearHomComp B X' Y Z := by
@@ -867,7 +856,7 @@ theorem globalLinearHomComp_precomp {X X' Y Z : CochainComplex A ℤ} (a : X' �
   simp
 
 /-- Composition is dinatural in the middle variable: `A ∘ (1 ⊗ p) = B' ∘ (j ⊗ 1)`.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomComp_middle {X Y Y' Z : CochainComplex A ℤ} (b : Y ⟶ Y') :
     globalLinearHom B Y' Z ◁ globalLinearHomMap B (𝟙 X) b ≫ globalLinearHomComp B X Y' Z =
       globalLinearHomMap B b (𝟙 Z) ▷ globalLinearHom B X Y ≫ globalLinearHomComp B X Y Z := by
@@ -882,7 +871,7 @@ theorem globalLinearHomComp_middle {X Y Y' Z : CochainComplex A ℤ} (b : Y ⟶ 
   simp
 
 /-- Composition is natural in the target: `p ∘ comp = B' ∘ (p ⊗ 1)`.
-Source: Stacks 09L9 (blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9. -/
 theorem globalLinearHomComp_postcomp {X Y Z Z' : CochainComplex A ℤ} (c : Z ⟶ Z') :
     globalLinearHomComp B X Y Z ≫ globalLinearHomMap B (𝟙 X) c =
       globalLinearHomMap B (𝟙 Y) c ▷ globalLinearHom B X Y ≫ globalLinearHomComp B X Y Z' := by
@@ -900,8 +889,7 @@ end CompositionChainMap
 omit [HasDerivedCategory.{w} A] in
 /-- Abstract composition roof: if `c₁, c₂, c₃` satisfy roof equations along `a, b, e`, with the
 final precomposition by `a` invertible after `Q`, then they are compatible with composition.
-Source: Stacks 09L9, 06XY (blueprint: lem-sf-global-hom-resolution-roof-composition-fields).
-Proof: naturality of `μ` and the three naturality squares of composition; cancel `Q.map j`. -/
+Source: Stacks 09L9, 06XY. -/
 theorem globalLinearHomComp_roof {X Y Z X' Y' Z' : CochainComplex A ℤ}
     (a : X ⟶ X') (b : Y ⟶ Y') (e : Z ⟶ Z')
     (c₁ : DerivedCategory.Q.obj (globalLinearHom B Y Z) ⟶
@@ -948,18 +936,7 @@ private theorem roof_conj_roof {X X' Y Y' : CochainComplex A ℤ}
 /-- Ordinary composition out of the total tensor exists, and is compatible with every `c`
 satisfying the roof equation and every `comparison` given by conjugation with representing
 homotopy equivalences (the hypotheses of the two coherence fields).
-Source: Stacks 09L9, 06XY and steps 1, 8-10 of lem-sf-global-hom-resolution-roof.
-Proof: composition is bilinear and satisfies `d(gf) = d(g)f + (-1)^|g| g d(f)`, so it
-descends through the total-tensor coproduct, with the pure-tensor formula by construction.
-For `composition_roof` use the mixed pairings `A : H(I_Y,I_Z) ⊗ H(X,I_Y) → H(X,I_Z)` and
-`B' : H(Y,I_Z) ⊗ H(X,Y) → H(X,I_Z)`: associativity gives `j comp = A(1 ⊗ j)`,
-`A(1 ⊗ p) = B'(j ⊗ 1)`, `B'(p ⊗ 1) = p comp`; apply `Q`, naturality of `μ`, the roof
-equation twice, and cancel the invertible final `Q.map j`. For `composition_comparison`,
-choose representing homotopy equivalences `a, b` (they exist by the K-injective lifting);
-the hypothesis makes the comparison conjugation by them, with `b a - 1 = dh + hd`;
-`S(g ⊗ f) = (-1)^|g| a g h f b` is a homotopy on the total tensor, so the inserted
-middle factor disappears after `Q`.
-(blueprint: lem-sf-global-hom-resolution-roof-composition-fields). -/
+Source: Stacks 09L9, 06XY. -/
 theorem globalHom_resolution_roof_composition_fields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -982,7 +959,7 @@ theorem globalHom_resolution_roof_composition_fields
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- The cocycle underlying a cycle of the linear Hom complex.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalLinearHomCyclesCocycle (X Y : CochainComplex A ℤ) (n : ℤ) :
     (globalLinearHom B X Y).cycles n →+ Cocycle X Y n where
   toFun z := Cocycle.mk ((globalLinearHom B X Y).iCycles n z) (n + 1) rfl (by
@@ -993,7 +970,7 @@ def globalLinearHomCyclesCocycle (X Y : CochainComplex A ℤ) (n : ℤ) :
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- The underlying cochain of `globalLinearHomCyclesCocycle` is the image of the cycle.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomCyclesCocycle_coe (X Y : CochainComplex A ℤ) (n : ℤ)
     (z : (globalLinearHom B X Y).cycles n) :
     (globalLinearHomCyclesCocycle B X Y n z : Cochain X Y n) =
@@ -1002,7 +979,7 @@ theorem globalLinearHomCyclesCocycle_coe (X Y : CochainComplex A ℤ) (n : ℤ)
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- Cycles of the linear Hom complex are exactly the cocycles.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomCyclesCocycle_bijective (X Y : CochainComplex A ℤ) (n : ℤ) :
     Function.Bijective (globalLinearHomCyclesCocycle B X Y n) := by
   constructor
@@ -1019,14 +996,14 @@ theorem globalLinearHomCyclesCocycle_bijective (X Y : CochainComplex A ℤ) (n :
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- Cycles of the linear Hom complex are exactly the cocycles.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalLinearHomCyclesAddEquiv (X Y : CochainComplex A ℤ) (n : ℤ) :
     (globalLinearHom B X Y).cycles n ≃+ Cocycle X Y n :=
   AddEquiv.ofBijective _ (globalLinearHomCyclesCocycle_bijective B X Y n)
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- The underlying cochain of the cocycle attached to a cycle.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomCyclesAddEquiv_coe (X Y : CochainComplex A ℤ) (n : ℤ)
     (z : (globalLinearHom B X Y).cycles n) :
     (globalLinearHomCyclesAddEquiv B X Y n z : Cochain X Y n) =
@@ -1035,7 +1012,7 @@ theorem globalLinearHomCyclesAddEquiv_coe (X Y : CochainComplex A ℤ) (n : ℤ)
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- The cocycle attached to a boundary is the corresponding coboundary.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomCyclesAddEquiv_toCycles (X Y : CochainComplex A ℤ) (m n : ℤ)
     (β : Cochain X Y m) :
     (globalLinearHomCyclesAddEquiv B X Y n ((globalLinearHom B X Y).toCycles m n β) :
@@ -1045,7 +1022,7 @@ theorem globalLinearHomCyclesAddEquiv_toCycles (X Y : CochainComplex A ℤ) (m n
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- Pre/postcomposition of cycles corresponds to pre/postcomposition of cocycles.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomCyclesAddEquiv_cyclesMap {X X' Y Y' : CochainComplex A ℤ}
     (a : X' ⟶ X) (b : Y ⟶ Y') (n : ℤ) (z : (globalLinearHom B X Y).cycles n) :
     globalLinearHomCyclesAddEquiv B X' Y' n
@@ -1061,7 +1038,7 @@ theorem globalLinearHomCyclesAddEquiv_cyclesMap {X X' Y Y' : CochainComplex A �
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- From cohomology classes of cocycles to the homology of the linear Hom complex.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalLinearHomClassToHomology (X Y : CochainComplex A ℤ) (n : ℤ) :
     CohomologyClass X Y n →+ (globalLinearHom B X Y).homology n :=
   CohomologyClass.descAddMonoidHom
@@ -1083,7 +1060,7 @@ def globalLinearHomClassToHomology (X Y : CochainComplex A ℤ) (n : ℤ) :
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- The class of a cocycle is sent to the homology class of the corresponding cycle.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomClassToHomology_mk (X Y : CochainComplex A ℤ) (n : ℤ)
     (z : (globalLinearHom B X Y).cycles n) :
     globalLinearHomClassToHomology B X Y n
@@ -1093,7 +1070,7 @@ theorem globalLinearHomClassToHomology_mk (X Y : CochainComplex A ℤ) (n : ℤ)
 
 omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{t} (ModuleCat.{v} B)] in
 /-- The homology of the linear Hom complex is the group of cohomology classes.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomClassToHomology_bijective (X Y : CochainComplex A ℤ) (n : ℤ) :
     Function.Bijective (globalLinearHomClassToHomology B X Y n) := by
   constructor
@@ -1122,7 +1099,7 @@ theorem globalLinearHomClassToHomology_bijective (X Y : CochainComplex A ℤ) (n
 omit [HasDerivedCategory.{w} A] in
 /-- Degree-`n` cohomology of the localized linear Hom complex is the group of cohomology
 classes of degree-`n` cocycles.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalLinearHomCohomologyClassEquiv (X Y : CochainComplex A ℤ) (n : ℤ) :
     (DerivedCategory.homologyFunctor (ModuleCat.{v} B) n).obj
         (DerivedCategory.Q.obj (globalLinearHom B X Y)) ≃+ CohomologyClass X Y n :=
@@ -1134,7 +1111,7 @@ def globalLinearHomCohomologyClassEquiv (X Y : CochainComplex A ℤ) (n : ℤ) :
 
 omit [HasDerivedCategory.{w} A] in
 /-- The actual class of a cycle corresponds to the cohomology class of its cocycle.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomCohomologyClassEquiv_class (X Y : CochainComplex A ℤ) (n : ℤ)
     (z : (globalLinearHom B X Y).cycles n) :
     globalLinearHomCohomologyClassEquiv B X Y n (globalLinearHomClass B X Y n z) =
@@ -1149,7 +1126,7 @@ theorem globalLinearHomCohomologyClassEquiv_class (X Y : CochainComplex A ℤ) (
 
 omit [HasDerivedCategory.{w} A] in
 /-- Every degree-`n` cohomology class of the localized linear Hom complex is an actual class.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomClass_surjective (X Y : CochainComplex A ℤ) (n : ℤ) :
     Function.Surjective (globalLinearHomClass B X Y n) := by
   intro w
@@ -1164,7 +1141,7 @@ theorem globalLinearHomClass_surjective (X Y : CochainComplex A ℤ) (n : ℤ) :
 
 omit [HasDerivedCategory.{w} A] in
 /-- The actual class is natural for pre/postcomposition maps.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalLinearHomClass_naturality {X X' Y Y' : CochainComplex A ℤ}
     (a : X' ⟶ X) (b : Y ⟶ Y') (n : ℤ) (z : (globalLinearHom B X Y).cycles n) :
     (DerivedCategory.homologyFunctor (ModuleCat.{v} B) n).map
@@ -1182,7 +1159,7 @@ theorem globalLinearHomClass_naturality {X X' Y Y' : CochainComplex A ℤ}
     (globalLinearHom B X' Y')).hom y) h'
 
 /-- Conjugation by isomorphisms, as an additive equivalence of Hom groups.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalHomIsoHomCongrAddEquiv {C : Type*} [Category* C] [Preadditive C] {X X' Y Y' : C}
     (e₁ : X ≅ X') (e₂ : Y ≅ Y') : (X ⟶ Y) ≃+ (X' ⟶ Y') :=
   { e₁.homCongr e₂ with map_add' := fun f g ↦ by simp [Iso.homCongr_apply] }
@@ -1190,7 +1167,7 @@ def globalHomIsoHomCongrAddEquiv {C : Type*} [Category* C] [Preadditive C] {X X'
 
 /-- Cohomology classes between resolutions are derived-category maps between the resolved
 objects: maps into the K-injective `S.I⟦n⟧` in the homotopy category are maps in `D(A)`.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalHomResolutionClassAddEquiv {X Y : CochainComplex A ℤ} (R : GlobalHomResolution X)
     (S : GlobalHomResolution Y) (n : ℤ) :
     CohomologyClass R.I S.I n ≃+ (DerivedCategory.Q.obj X ⟶ (DerivedCategory.Q.obj Y)⟦n⟧) :=
@@ -1205,7 +1182,7 @@ def globalHomResolutionClassAddEquiv {X Y : CochainComplex A ℤ} (R : GlobalHom
           (shiftFunctor (DerivedCategory A) n).mapIso (asIso (DerivedCategory.Q.map S.ι)).symm)))
 
 /-- Formula for `globalHomResolutionClassAddEquiv`.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalHomResolutionClassAddEquiv_apply {X Y : CochainComplex A ℤ}
     (R : GlobalHomResolution X) (S : GlobalHomResolution Y) (n : ℤ)
     (c : CohomologyClass R.I S.I n) :
@@ -1218,7 +1195,7 @@ theorem globalHomResolutionClassAddEquiv_apply {X Y : CochainComplex A ℤ}
   simp [globalHomResolutionClassAddEquiv, globalHomIsoHomCongrAddEquiv, Iso.homCongr_apply]
 
 /-- The derived-category map attached to the class of a cocycle, after the shifted `Q.map S.ι`.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalHomResolutionClassAddEquiv_mk {X Y : CochainComplex A ℤ}
     (R : GlobalHomResolution X) (S : GlobalHomResolution Y) (n : ℤ) (f : Cocycle R.I S.I n) :
     globalHomResolutionClassAddEquiv R S n (CohomologyClass.mk f) ≫
@@ -1231,7 +1208,7 @@ theorem globalHomResolutionClassAddEquiv_mk {X Y : CochainComplex A ℤ}
   simp
 
 /-- Two cocycles with the same cohomology class give the same derived-category map.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalHom_Q_map_equivHomShift_eq {K L : CochainComplex A ℤ} {n : ℤ}
     (f g : Cocycle K L n) (h : CohomologyClass.mk f = CohomologyClass.mk g) :
     DerivedCategory.Q.map (Cocycle.equivHomShift.symm f) =
@@ -1241,7 +1218,7 @@ theorem globalHom_Q_map_equivHomShift_eq {K L : CochainComplex A ℤ} {n : ℤ}
   exact DerivedCategory.Q_map_eq_of_homotopy (C := A) (HomotopyCategory.homotopyOfEq _ _ h')
 
 /-- The cohomology of resolved Hom, as derived-category maps `Q X ⟶ (Q Y)⟦n⟧`.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 def globalHomResolutionCohomology {X Y : CochainComplex A ℤ} (R : GlobalHomResolution X)
     (S : GlobalHomResolution Y) (n : ℤ) :
     (DerivedCategory.homologyFunctor (ModuleCat.{v} B) n).obj (globalResolvedHom B R S) ≃+
@@ -1251,7 +1228,7 @@ def globalHomResolutionCohomology {X Y : CochainComplex A ℤ} (R : GlobalHomRes
   e.trans (globalHomResolutionClassAddEquiv R S n)
 
 /-- The cohomology of resolved Hom on the actual class of a cycle.
-Source: Stacks 0B6E, 09L9 (blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 0B6E, 09L9. -/
 theorem globalHomResolutionCohomology_class {X Y : CochainComplex A ℤ}
     (R : GlobalHomResolution X) (S : GlobalHomResolution Y) (n : ℤ)
     (z : (globalLinearHom B R.I S.I).cycles n) :
@@ -1267,16 +1244,7 @@ theorem globalHomResolutionCohomology_class {X Y : CochainComplex A ℤ}
 
 /-- The unit roof (for every `c` satisfying the roof equation and every `unit` given by the
 scalar formula) and the cohomology interpretation of resolved Hom.
-Source: Stacks 070I, 0B6E and steps 10-11 of lem-sf-global-hom-resolution-roof.
-Proof: by the scalar formula `p (unit X) = R.ι = j (unit R.I)` on the generator, so the roof
-equation and cancellation of the invertible `Q.map j` give `unit_roof`. Cohomology of
-`H(R.I,S.I)` is maps `R.I → S.I⟦n⟧` modulo homotopy
-(`CochainComplex.HomComplex.CohomologyClass.toHom_bijective`), and maps into the K-injective
-`S.I⟦n⟧` in the homotopy category are maps in `D(A)` (`IsKInjective.Qh_map_bijective`);
-conjugating by `Q.map R.ι` and `Q.map S.ι` defines `cohomology` and gives
-`cohomology_resolved`. The roof equation on a cocycle `f : X → Y⟦n⟧` gives `cohomology_roof`;
-naturality follows on representatives from the homotopy squares of the lifts.
-(blueprint: lem-sf-global-hom-resolution-roof-cohomology-fields). -/
+Source: Stacks 070I, 0B6E and steps 10-11 of. -/
 theorem globalHom_resolution_roof_cohomology_fields
     (c : ∀ (X Y : CochainComplex A ℤ) (R : GlobalHomResolution X)
       (S : GlobalHomResolution Y),
@@ -1373,8 +1341,7 @@ theorem globalHom_resolution_roof_cohomology_fields
 /-- The complete canonical resolution-roof assertion, with all maps specified on cochains.
 The only data in the assertion are maps constrained by the displayed formulas; no
 arbitrary comparison, tensor or resolution functor is an input.
-Source: Stacks 09L9, 070I, 0B6E and 06XY; the resolution-roof extension in the node.
-(blueprint: lem-sf-global-hom-resolution-roof). -/
+Source: Stacks 09L9, 070I, 0B6E and 06XY. -/
 structure GlobalHomResolutionRoof where
   /-- Precomposition by every resolution is a quasi-isomorphism into any K-injective. -/
   precomp_quasiIso : ∀ (X J : CochainComplex A ℤ) (R : GlobalHomResolution X),
@@ -1535,49 +1502,7 @@ structure GlobalHomResolutionRoof where
         (shiftFunctor (DerivedCategory A) n).map (DerivedCategory.Q.map b)
 
 /-- Canonical ordinary-to-resolved global Hom roof, including composition and cohomology.
-Source: Stacks 09L9, 070I, 0B6E and 06XY; agent-formulated resolution-roof extension.
-(blueprint: lem-sf-global-hom-resolution-roof).
-
-Proof (the node's eleven steps):
-1. The product cochains are B-modules. Expand the differential: its square is zero,
-   and `d(gf) = d(g)f + (-1)^|g| g d(f)`. Composition therefore defines a map from
-   the direct-sum total tensor, without any boundedness requirement.
-2. By lem-sc-hom-cocycle-homotopy-quotient-formulas, Hom cohomology is maps to shifts
-   modulo homotopy. Shifts preserve K-injectivity. Apply lem-weil-pbc-kinjective-hom-derived
-   to conclude that precomposition by a quasi-isomorphism into a K-injective target
-   is an isomorphism on every cohomology group, hence a quasi-isomorphism.
-3. A homotopy `h` of target maps gives the Hom homotopy `f ↦ hf`; for source maps
-   use `f ↦ (-1)^|f| fh`. Thus localized Hom arrows depend only on homotopy classes.
-4. Define the roof by inverting its precomposition leg. The K-injective Hom bijection
-   lifts derived arrows to chain maps uniquely up to homotopy, with augmentation squares.
-5. For either variable, postcompose both naturality expressions with the invertible
-   precomposition leg. The augmentation homotopies reduce both to the same map; cancel.
-6. Lift identity derived arrows between two resolutions to homotopy equivalences.
-   Conjugation on Hom is independent of representatives, preserves the roof, and
-   satisfies the cocycle law by uniqueness of the lifted homotopy classes. Identities
-   give the identity roof when both original complexes are K-injective.
-7. The family identity gives `H(X,Y[n]) ≅ H(X,Y)[n]`: both differentials are
-   `(-1)^n d_Y f - (-1)^s f d_X`. Shift the augmentation and use the preceding comparison.
-8. Use lem-sfb-derived-tensor-modules-derived for the canonical lax localization map;
-   the module Grothendieck and functorial-flat-resolution inputs are supplied by
-   lem-weil-pbc-ring-modules-grothendieck-abelian and
-   lem-sfb-abelian-functorial-flat-resolution. Define resolved composition by ordinary
-   composition after this comparison.
-9. For R=H(I,I), M=H(X,I), O=H(X,X), the three mixed-composition identities are
-   `j comp_R = A(1 ⊗ j)`, `A(1 ⊗ p) = B(j ⊗ 1)`, `B(p ⊗ 1) = p comp_O`.
-   Apply localization and naturality of the tensor comparison, substitute `j c = p`
-   twice, and cancel the invertible final j. No tensor of a quasi-isomorphism with
-   an arbitrary nonflat complex is inverted.
-10. Both sides of the identity assertion map to the augmentation under j. Conjugation
-    preserves composition: insert `b_Y a_Y - 1 = dh + hd`, and use the tensor homotopy
-    `S(g ⊗ f) = (-1)^|g| a_Z g h f b_X`. Ordinary associativity and units and lax
-    localization coherence give derived associativity and units.
-11. Identify resolved Hom cohomology with derived arrows between the resolutions,
-    then conjugate by the augmentations. The roof equation sends the class of an
-    ordinary cocycle to exactly Qf. All constructions use products of sets only,
-    with no flatness, boundedness or scalar-linear choice of resolutions.
-In Lean, the roof data above are assembled with the shift, composition and cohomology
-field theorems; the K-injective resolution hypothesis is not needed for this. -/
+Source: Stacks 09L9, 070I, 0B6E and 06XY. -/
 theorem globalHom_resolution_roof
     (_hres : ∀ X : CochainComplex A ℤ,
       ∃ (I : CochainComplex A ℤ) (uX : X ⟶ I), I.IsKInjective ∧ QuasiIso uX) :

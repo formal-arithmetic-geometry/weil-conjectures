@@ -11,8 +11,9 @@ import WeilConjectures.CategoryTheory.Right.RightDerivedExactRestrictionNormaliz
 
 /-! # Transport a commuting cube through equivalences
 
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-equivalence-cube-transport).
+## References
+
+* Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +29,6 @@ namespace CategoryTheory.EquivalenceCubeTransport
 universe u wA wB wC wD
 
 /-- The canonical derived equivalence, with its two functors exposed as record fields.
-Source: the canonical exact-functor localization of an equivalence.
-(blueprint: lem-sf-equivalence-cube-transport).
 The unit, counit and triangle equation are those of mapDerivedCategory. -/
 @[implicit_reducible] def liftEquivalence
     {A B : Type (u + 1)} [Category.{u} A] [Category.{u} B] [Abelian A] [Abelian B]
@@ -53,8 +52,8 @@ variable {A B C D : Type (u + 1)}
   [F.Additive] [G.Additive] [eU.functor.Additive] [eV.functor.Additive]
   (c : F ⋙ eV.inverse ≅ eU.inverse ⋙ G)
 /-- Right derive an inverse-equivalence direct-image comparison.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-equivalence-cube-transport). -/
+
+Stacks Project, Tag 0D6E. -/
 def inverseDerivedPush :
     F.rightDerivedFunctor ⋙ eV.inverse.mapDerivedCategory ≅
       eU.inverse.mapDerivedCategory ⋙ G.rightDerivedFunctor :=
@@ -64,10 +63,7 @@ def inverseDerivedPush :
         Functor.isoWhiskerRight eU.inverse.rightDerivedFunctorIsoMapDerivedCategory
           G.rightDerivedFunctor
 /-- This comparison has the canonical full cochain-unit normalization.
-Source: Stacks, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-sf-equivalence-cube-transport).
-Proof: specialize the proved exact-restriction normalization to the two inverse
-equivalences. Its composite is exactly inverseDerivedPush. -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 theorem inverseDerivedPush_normalized :
     IndependentDerivedCube.unitNormalized F G eU.inverse eV.inverse
       eU.inverse.mapDerivedCategory eV.inverse.mapDerivedCategory
@@ -77,9 +73,7 @@ theorem inverseDerivedPush_normalized :
   exact rightDerivedExactRestriction_normalization F G eU.inverse eV.inverse c I
 end
 
-/-- Recover the forward comparison by full faithfulness of the inverse equivalence.
-Source: the unit equations of an equivalence.
-(blueprint: lem-sf-equivalence-cube-transport). -/
+/-- Recover the forward comparison by full faithfulness of the inverse equivalence. -/
 def forwardOfInverse
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (eA : A ≌ C) (eB : B ≌ D) (F : A ⥤ B) (G : C ⥤ D)
@@ -110,12 +104,7 @@ private theorem forwardOfInverse_unit
   erw [Category.comp_id]
 
 /-- An inverse-presentation cube gives the corresponding forward-presentation cube.
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; formal equivalence transport.
-(blueprint: lem-sf-equivalence-cube-transport).
-Proof: apply the faithful inverse functor and postcompose with the inverse cube's
-isomorphisms. Naturality moves the four comparison maps through the cube. Their unit
-equations cancel each equivalence unit; canceling the remaining isomorphisms proves
-the displayed forward equation. No derived or scalar-extension hypothesis is needed. -/
+Source: Stacks, Modules on Sites, Tags 03D6 and 03D7. -/
 theorem forwardCube
     {A0 A1 B0 B1 C0 C1 D0 D1 : Type*}
     [Category A0] [Category A1] [Category B0] [Category B1]

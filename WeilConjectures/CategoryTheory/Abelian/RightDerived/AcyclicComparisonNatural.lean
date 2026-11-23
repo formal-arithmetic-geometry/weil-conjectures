@@ -13,8 +13,7 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 /-!
 # Naturality of acyclic-resolution comparisons
 
-Source: literature/stacks-project/derived.tex, Tag 015E (blueprint:
-`lem-sc-acyclic-comparison-natural`).
+Source: literature/stacks-project/derived.tex, Tag 015E.
 -/
 
 @[expose] public section
@@ -51,27 +50,8 @@ variable {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D] [Abelian 
 
 /-- Naturality of the comparison from an acyclic resolution to a right derived functor.
 
-(blueprint: lem-sc-acyclic-comparison-natural).
-
 Source: Stacks Project, Tag 015E, canonical acyclic-resolution comparison.
-The comparison maps are the inverses of `F.rightDerivedObjIsoOfResolution`.
-
-Proof (the four steps of the node):
-1. Choose injective resolutions of `X` and `X'`, and a lift of `h` between them using
-   `lem-weil-pbc-injective-resolution-lift-exists`. Use
-   `InjectiveResolution.descOfQuasiIso` to lift the identities from the acyclic resolutions
-   into these injective resolutions. Item 2 of `lemma-weil-pbc-leray-acyclicity` identifies
-   the induced homology maps with the displayed comparison isomorphisms.
-2. The two composites from `I` to the injective resolution of `X'` agree after `ι`, by `w`.
-   Extend by zero to ℤ, apply
-   `lem-weil-pbc-lift-to-injective-unique-up-to-homotopy`, and restrict the homotopy to ℕ.
-3. Apply the additive functor `F` to this homotopy. By
-   `lem-weil-pbc-homotopic-maps-equal-cohomology`, the induced homology maps agree.
-4. Identify the homology map of the lift of `h` with `(F.rightDerived n).map h` using
-   `lem-weil-pbc-derived-functor-map-via-lift`. Substitute the comparison maps in the equality
-   from Step 3 to obtain the displayed square.
-(blueprint: lem-sc-acyclic-comparison-natural).
--/
+The comparison maps are the inverses of `F.rightDerivedObjIsoOfResolution`. -/
 theorem acyclicComparison_naturality
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
     {X X' : C} {I I' : CochainComplex C ℕ}

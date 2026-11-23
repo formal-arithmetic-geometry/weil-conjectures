@@ -14,9 +14,7 @@ import Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Localized sheaves over a sheafified representable
 
-Source: Stacks Project, Sites, Tag 00Y1, lemma-essential-image-j-shriek, and
-lemma-describe-j-shriek in Section 00XZ
-(blueprint: lem-weil-pbc-localized-sheaves-over-representable).
+Source: Stacks Project, Sites, Tag 00Y1, and in Section 00XZ.
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -406,15 +404,7 @@ private noncomputable def counitTransformation {C : Type u} [SmallCategory C]
     congr 1
 
 /-- The fibre/extension equivalence for an arbitrary Grothendieck topology.
-Source: Stacks Project, Sites, Tag 00Y1, lemma-essential-image-j-shriek.
-(blueprint: lem-weil-pbc-localized-sheaves-over-representable).
-
-Proof: use the same disjoint-union presheaf, sheafification, and fibre constructions
-as in the precoverage interface. The unit is locally bijective by local representation
-of sheafification sections and local equality of representable arrows; the counit is
-locally bijective by forgetting those arrows. Their already proved formulas supply
-the equivalence and all the displayed section and restriction identifications.
-None of these constructions needs a precoverage presentation of the topology. -/
+Source: Stacks Project, Sites, Tag 00Y1. -/
 theorem exists_localizedSheavesOverRepresentable_general
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) [HasWeakSheafify J (Type u)] (U : C) :

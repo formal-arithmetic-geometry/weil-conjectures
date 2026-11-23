@@ -104,7 +104,7 @@ reductions modulo `𝔪_Eⁿ` are the étale `Rf_!` of the reductions `K_n`
 (`nonempty_iso_reductionModIdeal_rightDerivedLowerShriekDerivedCompleteIntegral`),
 and, being derived complete, it is the homotopy limit of its reductions; so it is the
 blueprint's `R lim_n Res_n Rf_{!,n} K_n`, computed for the chosen compactification of `f`
-(blueprint `def-compact-support-direct-image-detailed`). -/
+(blueprint `proposition-construction-independence-rf-shriek`). -/
 noncomputable def rightDerivedLowerShriekDerivedCompleteIntegral :
     DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E :=
@@ -116,7 +116,7 @@ noncomputable instance : (rightDerivedLowerShriekDerivedCompleteIntegral l E f).
     DerivedCategoryDerivedCompleteIntegral.completion _ l E).CommShift ℤ)
 
 /-- The integral compact-support functor is exact, being a composite of triangulated functors
-(`lem-compact-support-direct-image-triangulated` for `Rf_!`, and the derived completion). -/
+(`proposition-construction-independence-rf-shriek--1` for `Rf_!`, and the derived completion). -/
 instance : (rightDerivedLowerShriekDerivedCompleteIntegral l E f).IsTriangulated :=
   inferInstanceAs ((DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ R(f)_![𝐌] ⋙
     DerivedCategoryDerivedCompleteIntegral.completion _ l E).IsTriangulated)

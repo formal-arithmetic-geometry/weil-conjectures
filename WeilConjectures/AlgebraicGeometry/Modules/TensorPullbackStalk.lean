@@ -14,13 +14,14 @@ import WeilConjectures.AlgebraicGeometry.Modules.InverseImageStalkScalarTranspor
 /-!
 # Stalks and germs of the tensor pullback of modules
 
-Source: Stacks Project, Sheaves, Lemma 6.26.4 (Tag 0098)
-(blueprint: lem-weil-pbc-module-stalk-pullback).
-
 Stalks of module sheaves are taken with the recorded stalk functor
-`RingedSpace.moduleStalkFunctor` (def-pc-module-stalk-functor). Mathlib writes extension of
-scalars as `O_{X,x} ⊗ G_{f(x)}`. This is the tensor product in the node via its canonical
-symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
+`RingedSpace.moduleStalkFunctor`. Mathlib writes extension of
+scalars as `O_{X,x} ⊗ G_{f(x)}`. This is the tensor product `G_{f(x)} ⊗ O_{X,x}` via its
+canonical symmetry; the corresponding pure tensor is `1 ⊗ s_{f(x)}`.
+
+## References
+
+* Stacks Project, Sheaves, Lemma 6.26.4 (Tag 0098)
 -/
 
 @[expose] public section
@@ -39,26 +40,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The stalk of tensor pullback is naturally the extension of scalars of the original
-stalk along `f.stalkMap x`; a pulled-back section has germ `1 ⊗ s_{f(x)}`.
-Source: Stacks Project, Tag 0098 (blueprint: lem-weil-pbc-module-stalk-pullback).
-
-Proof:
-0. By def-pc-module-pullback and the canonical adjunction (Tag 0096), the unit sends
-   a section `s` to the sheafification of `1 ⊗ η(s)`, where `η` is the inverse-image unit.
-1. By lem-weil-pbc-topological-inverse-image-stalk (008H), inverse-image stalks are the
-   original stalks, naturally and compatibly with germs. The module identification is
-   semilinear over the corresponding ring-stalk identification, since the inverse-image
-   unit respects the scalar action on sections.
-2. The stalk of the adjoint ring map composed with that ring-stalk identification is
-   `f.stalkMap x`: on every germ this follows from the ring-map adjunction identity.
-3. By lem-weil-pbc-stalk-change-of-rings-tensor (008B), the stalk of the change of rings
-   is the change of rings of the stalk, naturally and with the pure-tensor germ formula.
-4. Transport this tensor along the identifications in steps 1 and 2. The balanced map
-   sends `b ⊗ m` to `b ⊗ c(m)`; its inverse uses `c⁻¹`, so it is an isomorphism.
-5. Combining the germ formulas in steps 0, 1 and 3 sends the germ of the pulled-back
-   section to `1 ⊗ s_{f(x)}`.
-6. The identifications of inverse-image stalks and tensor stalks are natural. Their
-   composite is therefore a natural isomorphism between the two composite functors. -/
+stalk along `f.stalkMap x`; a pulled-back section has germ `1 ⊗ s_{f(x)}`. -/
 theorem exists_tensorPullback_stalk_iso {X Y : Scheme.{u}} (f : X ⟶ Y) (x : X) :
     ∃ e : tensorPullback f ⋙ RingedSpace.moduleStalkFunctor X.toRingedSpace x ≅
         RingedSpace.moduleStalkFunctor Y.toRingedSpace (f x) ⋙

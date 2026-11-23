@@ -110,7 +110,6 @@ public import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 Source: Stacks Project, proetale.tex, Tag 099M, transport of the Koszul pro-isomorphism;
 sites-cohomology.tex, Tags 06YN and 0941.
-(blueprint: lem-weil-pbc-flat-constant-tensor-pro-zero-cones).
 
 ## Main declarations
 

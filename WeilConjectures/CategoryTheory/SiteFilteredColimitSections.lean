@@ -23,8 +23,9 @@ import WeilConjectures.CategoryTheory.FinitePresieveFilteredColimit
 /-!
 # Sections of filtered colimits on sites with finite coverings
 
-Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO
-(blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
+## References
+
+* Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO.
 -/
 
 @[expose] public section
@@ -52,25 +53,8 @@ private theorem isSheaf_filteredColimit_types
 
 /-- On a site with finite covering presieves, the canonical map from the filtered
 colimit of sections to the sections of a given sheaf colimit is bijective.
-Source: Stacks Project, Sites, Lemma 0738(4)
-(blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
-
-Proof:
-1. Evaluation preserves presheaf colimits. For each finite covering presieve R,
-finitePresieve_isSheafFor_filteredColimit shows that a presheaf colimit satisfies the
-sheaf condition for R. The precoverage supplies pairwise pullbacks. Checking these
-covering presieves suffices for the associated Grothendieck topology, so the
-presheaf colimit is a sheaf.
-2. Sheaf.createsColimitOfIsSheaf then shows that inclusion into presheaves creates
-this colimit. Composing the resulting preservation with evaluation proves that the
-section cocone of c is a colimit cocone.
-3. The canonical colimit descent to a colimit cocone is an isomorphism. Its inverse
-has the left- and right-inverse equations, and the existing bijectivity theorem
-applies Function.bijective_iff_has_inverse. 
-(blueprint: aux-site-filtered-colimit-sections-inverse)
--/
-/- The sectionwise map admits a two-sided inverse.
-(blueprint: aux-site-filtered-colimit-sections-inverse) -/
+Source: Stacks Project, Sites, Lemma 0738(4). -/
+/- The sectionwise map admits a two-sided inverse. -/
 theorem siteFilteredColimit_sections_inverse
     {C : Type u} [SmallCategory C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
@@ -100,7 +84,8 @@ theorem siteFilteredColimit_sections_inverse
   let e := asIso (colimit.desc (D ⋙ F) (F.mapCocone c))
   exact ⟨e.inv, fun x ↦ e.hom_inv_id_apply x, fun x ↦ e.inv_hom_id_apply x⟩
 
-/-- (blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings) -/
+/-- On a site with finite covering presieves, the canonical map from the filtered colimit of
+sections to the sections of a given sheaf colimit of set-valued sheaves is bijective. -/
 theorem siteFilteredColimit_sections_bijective
     {C : Type u} [SmallCategory C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
@@ -117,20 +102,7 @@ theorem siteFilteredColimit_sections_bijective
 
 /-- For abelian sheaves on a site with finite coverings, the canonical map from the
 filtered colimit of section groups to the sections of a given sheaf colimit is an isomorphism.
-Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO
-(blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
-
-Proof:
-1. The forgetful functor from abelian groups to sets preserves filtered colimits,
-so postcomposing a presheaf colimit with it gives a colimit of set-valued presheaves.
-It also preserves limits and reflects isomorphisms, hence detects the sheaf condition.
-The finite-presieve argument used for sets therefore proves that the abelian
-presheaf colimit is a sheaf.
-2. Sheaf.createsColimitOfIsSheaf shows that inclusion into abelian presheaves creates
-this colimit. Evaluation preserves presheaf colimits, so the section cocone of c is
-a colimit cocone of abelian groups.
-3. By uniqueness of colimits, the canonical descent from the chosen section colimit
-to this cocone is an isomorphism. -/
+Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO. -/
 theorem siteFilteredColimit_sections_isIso
     {C : Type u} [SmallCategory C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]

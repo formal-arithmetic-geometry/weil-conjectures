@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Full subcategories under scalar localization
 
-Source: the Hom formula of `def-weil-rationalization-karoubi`.
-(blueprint: lem-sf-scalar-localization-full-subcategory).
 The inclusion applies the underlying full-subcategory Hom equivalence to the tensor factor.
 -/
 
@@ -21,9 +19,7 @@ open CategoryTheory TensorProduct
 namespace CategoryTheory.ScalarLocalization
 variable (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
   [Preadditive C] [Linear R C] (P : ObjectProperty C) (p : R)
-/-- The inherited linear Hom equivalence of a full subcategory.
-Source: the raw rationalization Hom formula
-(blueprint: lem-sf-scalar-localization-full-subcategory). -/
+/-- The inherited linear Hom equivalence of a full subcategory. -/
 def fullSubcategoryHomEquiv (K M : P.FullSubcategory) :
     (K ⟶ M) ≃ₗ[R] (K.obj ⟶ M.obj) where
   toFun f := f.hom
@@ -32,9 +28,7 @@ def fullSubcategoryHomEquiv (K M : P.FullSubcategory) :
   right_inv _ := rfl
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
-/-- The ambient inclusion after localizing scalars.
-Source: the raw rationalization Hom formula
-(blueprint: lem-sf-scalar-localization-full-subcategory). -/
+/-- The ambient inclusion after localizing scalars. -/
 noncomputable def fullSubcategoryInclusion : ScalarLocalization R P.FullSubcategory p ⥤
     ScalarLocalization R C p where
   obj K := ⟨K.obj.obj⟩
@@ -59,13 +53,7 @@ noncomputable def fullSubcategoryInclusion : ScalarLocalization R P.FullSubcateg
         simp only [map_add, hx, hy]
     | add x y hx hy =>
       simp only [map_add, LinearMap.add_apply, hx, hy]
-/-- Tensoring the inherited Hom equivalence proves full faithfulness.
-Source: the raw rationalization Hom formula
-(blueprint: lem-sf-scalar-localization-full-subcategory).
-Proof: tensor the identity equivalence on localized coefficients with the underlying
-Hom equivalence. Its inverse is the preimage map; the inverse laws are those of the
-tensor-product linear equivalence. Composition follows on pure tensors from the
-inherited composition, and tensor induction extends this to arbitrary morphisms. -/
+/-- Tensoring the inherited Hom equivalence proves full faithfulness. -/
 noncomputable def fullyFaithfulFullSubcategoryInclusion :
     (fullSubcategoryInclusion R C P p).FullyFaithful where
   preimage {K M} f :=

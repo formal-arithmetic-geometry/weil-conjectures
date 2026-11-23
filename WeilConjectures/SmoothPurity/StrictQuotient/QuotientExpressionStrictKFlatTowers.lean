@@ -753,7 +753,7 @@ Proof:
 10. Restriction along pi_n makes t completed-linear, since q pi_m=pi_n. Localize
     this actual complex of towers. Exact restriction and evaluation carry its
     objects to Res_n QK_n and its arrows to the localized actual transitions, as in
-    lem-sf-exact-functor-derived-triangulated. This is the coherent tower datum only;
+    situation-conventions. This is the coherent tower datum only;
     invertibility of transition adjoints is a separate theorem.
 -/
 theorem quotientExpressionStrictKFlatTowers

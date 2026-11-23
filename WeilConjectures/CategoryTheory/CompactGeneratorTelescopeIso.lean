@@ -16,9 +16,12 @@ import Mathlib.Algebra.DirectSum.Module
 /-!
 # Recognizing a generator approximation telescope
 
-Source: Stacks Project, Derived Categories, Tag 09SN, lemma-write-as-colimit,
-proof: vanishing of the cone of the comparison map.
-(blueprint: lem-pc-compact-generator-telescope-iso).
+A morphism from the homotopy colimit of a generator approximation telescope to `Y` is an
+isomorphism once the cone of the comparison map vanishes.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 09SN.
 -/
 
 @[expose] public section
@@ -41,32 +44,8 @@ set_option backward.defeqAttrib.useBackward true
 /-- The comparison from a telescope to `Y` is an isomorphism if every map from a
 shifted generator to `Y` lifts at stage zero and every map to a stage with zero
 composite to `Y` is killed at the next stage.
-Source: Stacks Project, Derived Categories, Tag 09SN, lemma-write-as-colimit,
-proof: the paragraph beginning "Choose a distinguished triangle".
-(blueprint: lem-pc-compact-generator-telescope-iso).
-
-Proof: let `ι n` be the coprojection followed by `q`. Restricting the zero
-composition in the telescope triangle to each summand gives `t n ≫ ι (n+1) = ι n`.
-Shifts of compact objects are compact: the inverse shift equivalence preserves
-coproducts, and the additive adjunction Hom equivalences identify the direct-sum
-comparison with that for the unshifted object. The compact-Hom telescope theorem
-(Tag 094A) and joint surjectivity of type-colimit inclusions therefore factor every
-map from a shifted generator to `H` through a stage.
-Postcomposition with `c` is bijective on these Hom groups. Surjectivity follows
-from `hstart` and `hstage`. If a map has zero composite with `c`, factor it through
-stage `n`; `hstage` gives zero composite with `f n`, so `hkill` and the telescope
-relation make its image in `H` zero. Applying this to the difference of two maps
-proves injectivity. Shift adjunction and the shift-addition isomorphism transport
-this bijectivity to postcomposition with every target shift of `c`.
-Complete `c` to `H → Y → D → H[1]`. For a map from a shifted generator to `D`,
-its composite to `H[1]` is zero by injectivity for `c[1]` and consecutive-composition
-vanishing. Triangle exactness factors it through `Y`; surjectivity for `c` lifts
-that factor through `H`, so the original map is zero. Shift adjunction then makes
-every map from `E i` to `D[n]` zero. Coproduct extensionality and `hgenerate` imply
-`IsZero D`, and the triangle criterion for a zero third vertex gives `IsIso c`.
-The empty generator family forces all objects zero; zero stages satisfy the same
-argument. No shape assumption on the tower or compatibility hypothesis on `f`
-is needed beyond the displayed `hstage` equations. -/
+Source: Stacks Project, Derived Categories, Tag 09SN.
+-/
 theorem compactGenerator_telescope_isIso
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

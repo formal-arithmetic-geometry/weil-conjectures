@@ -13,7 +13,12 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.RingTheory.TensorProduct.Quotient
 
-/-! Finite coefficient descent of lisse rational sheaves. -/
+/-! Finite coefficient descent of lisse rational sheaves.
+
+## References
+
+* Deligne, Weil II (1.1.1) d), pp. 146-147, the displayed Hom base-change formula
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -331,6 +336,31 @@ private theorem quotientCoordinateSheaf_tmul (b : Module.Basis ι R S) (I : Idea
   exact h.trans (ringQuotientCoordinate_tmul b I _ _ i s m)
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
+private theorem quotientCoordinateSheaf_tmul_explicit (b : Module.Basis ι R S) (I : Ideal R)
+    (M : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} R))
+    (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥) (i : ι)
+    (U : Y.Etale) (s : S) (m : M.obj.obj (op U)) :
+    (quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
+      (((toSheafification Y.smallEtaleTopology
+        (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
+          (M.obj ⋙ ModuleCat.ringExtendScalars.{d + 1, d + 1}
+            (algebraMap R (S ⧸ I.map (algebraMap R S))))).app (op U)
+        (ModuleCat.ringExtensionTmul.{d + 1, d + 1}
+          (algebraMap R (S ⧸ I.map (algebraMap R S))) _ (Ideal.Quotient.mk _ s) m)) =
+      b.repr s i • m := by
+  have h := congrArg (fun v ↦ v.app (op U)
+      (ModuleCat.ringExtensionTmul.{d + 1, d + 1}
+        (algebraMap R (S ⧸ I.map (algebraMap R S)))
+          (M.obj.obj (op U)) (Ideal.Quotient.mk _ s) m))
+    (show Functor.whiskerRight (toSheafify Y.smallEtaleTopology
+        (M.obj ⋙ ModuleCat.ringExtendScalars.{d + 1, d + 1} _))
+          (ModuleCat.restrictScalars.{d + 1} _) ≫ (quotientCoordinateSheaf Y b I M hM i).hom =
+        quotientCoordinatePresheaf Y b I M hM i by
+      dsimp only [quotientCoordinateSheaf]
+      rw [← Category.assoc, sheafComposeIso_inv_fac, toSheafify_sheafifyLift])
+  exact h.trans (ringQuotientCoordinate_tmul b I _ _ i s m)
+
+omit [IsNoetherian Y] [Y.IsSeparated] in
 private theorem sheaf_sum_apply {A : Type (d + 1)} [Ring A]
     {M N : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A)}
     {α : Type*} (t : Finset α) (f : α → (M ⟶ N)) (U : Y.Etale)
@@ -341,6 +371,22 @@ private theorem sheaf_sum_apply {A : Type (d + 1)} [Ring A]
       map_zero' := rfl
       map_add' := fun _ _ ↦ rfl }
   exact map_sum ev f t
+
+omit [IsNoetherian Y] [Y.IsSeparated] in
+private theorem sheaf_comp_app_apply {A : Type (d + 1)} [Ring A]
+    {M N P : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A)}
+    (f : M ⟶ N) (g : N ⟶ P) (U : Y.Etale) (x : M.obj.obj (op U)) :
+    (f ≫ g).hom.app (op U) x = g.hom.app (op U) (f.hom.app (op U) x) := by
+  rw [ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, ModuleCat.comp_apply]
+
+omit [IsNoetherian Y] [Y.IsSeparated] in
+private theorem sheaf_iso_hom_inv_app_apply {A : Type (d + 1)} [Ring A]
+    {M N : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} A)} (e : M ≅ N)
+    (U : Y.Etale) (x : N.obj.obj (op U)) :
+    e.hom.hom.app (op U) (e.inv.hom.app (op U) x) = x := by
+  rw [← ModuleCat.comp_apply, ← NatTrans.comp_app,
+    ← ObjectProperty.FullSubcategory.comp_hom, e.inv_hom_id,
+    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app, ModuleCat.id_apply]
 
 omit [IsNoetherian Y] [Y.IsSeparated] in
 private theorem restrictedScalarSheaf_ext
@@ -398,8 +444,6 @@ private def quotientReconstructMap (b : Module.Basis ι R S) (I : Ideal R)
 
 omit [IsNoetherian Y] [Y.IsSeparated]
 
-set_option maxHeartbeats 1000000 in
--- Kernel checking the sheafification reconstruction expands the chosen scalar adjunction.
 private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
     (I : Ideal R) (M : Sheaf Y.smallEtaleTopology (ModuleCat.{d + 1} R))
     (hM : ∀ U : Y.Etale, I • (⊤ : Submodule R (M.obj.obj (op U))) = ⊥) :
@@ -418,11 +462,19 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
       (ModuleCat.ringExtensionTmul.{d + 1, d + 1} _ _ (Ideal.Quotient.mk _ s) x))
   simp only [map_sum, map_smul, ringQuotientCoordinate_tmul] at hh
   rw [sheaf_sum_apply]
-  change (∑ i, (quotientReconstructMap Y b I M i).hom.app (op U)
-    ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
-      (lisseCoherence_quotientScalarGenerator Y _ _ M U (Ideal.Quotient.mk _ s) x))) = _
-  simp only [quotientCoordinateSheaf_tmul]
   calc
+    _ = ∑ i, (quotientReconstructMap Y b I M i).hom.app (op U)
+        ((quotientCoordinateSheaf Y b I M hM i).hom.app (op U)
+          (((toSheafification Y.smallEtaleTopology
+            (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
+              (M.obj ⋙ ModuleCat.ringExtendScalars.{d + 1, d + 1}
+                (algebraMap R (S ⧸ I.map (algebraMap R S))))).app (op U)
+            (ModuleCat.ringExtensionTmul.{d + 1, d + 1}
+              (algebraMap R (S ⧸ I.map (algebraMap R S))) _
+              (Ideal.Quotient.mk _ s) x))) := by
+      apply Finset.sum_congr rfl
+      intro i _
+      rw [sheaf_comp_app_apply]
     _ = ∑ i, Ideal.Quotient.mk (I.map (algebraMap R S)) (b i) •
         ((toSheafification Y.smallEtaleTopology
           (ModuleCat.{d + 1} (S ⧸ I.map (algebraMap R S)))).app
@@ -432,6 +484,7 @@ private theorem quotientSheaf_reconstruct [Fintype ι] (b : Module.Basis ι R S)
             (algebraMap R (S ⧸ I.map (algebraMap R S))) _ 1 (b.repr s i • x)) := by
       apply Finset.sum_congr rfl
       intro i _
+      rw [quotientCoordinateSheaf_tmul_explicit]
       dsimp only [quotientReconstructMap, ObjectProperty.FullSubcategory.comp_hom,
         NatTrans.comp_app]
       erw [ModuleCat.comp_apply, lisseCoherence_scalarSheafUnit_apply]
@@ -745,8 +798,6 @@ attribute [local irreducible] lisseIntegerInclusion lisseRamificationIndex lisse
   Padic.coefficientExtensionAbsoluteValue Padic.coefficientExtensionUniformizer
   Padic.coefficientExtensionMaximalIdeal
 
-set_option maxHeartbeats 5000000 in
--- Kernel checking the chosen scalar-extension transports needs a larger heartbeat budget.
 private theorem coefficientCofinal_reconstruct
     (F : LisseIntegralSheaf l E Y) (n : ℕ) (U : Y.Etale)
     (z : ((((lisseIntegralScalarExtension l E Y L ι).obj F).obj.obj
@@ -771,9 +822,8 @@ private theorem coefficientCofinal_reconstruct
       ((lisseCoherence_scalarSheafUnit Y _ (F.obj.obj (op n))).hom.app (op U)
         ((quotientCoordinateSheaf Y b _ _ _ i).hom.app (op U)
           (e.hom.hom.app (op U) z)))) = _
-  erw [← ModuleCat.comp_apply, ← NatTrans.comp_app,
-    ← ObjectProperty.FullSubcategory.comp_hom, e.inv_hom_id,
-    ObjectProperty.FullSubcategory.id_hom, NatTrans.id_app, ModuleCat.id_apply]
+  congr 1
+  exact sheaf_iso_hom_inv_app_apply Y e U _
 
 private def coefficientHomCoordinate
     (b : letI := (lisseIntegerInclusion l E L ι).toAlgebra
@@ -975,26 +1025,7 @@ end CofinalLevels
 
 -- Preserve the existing target signature, including its algebraic-closure hypothesis.
 set_option linter.unusedSectionVars false in
-/-- Finite coefficient extension spans the rational morphisms between extended sheaves.
-Source: Deligne, Weil II (1.1.1) d), pp. 146-147, the displayed Hom base-change formula.
-(blueprint: lem-pod-lisse-coefficient-hom-base-change).
-
-Proof: put B equal to the least coefficient field and E equal to the given field.
-The coefficient-integer extension is finite free. Choose a finite integral basis
-and base it to the quotient rings at the cofinal target levels e * (n + 1) - 1.
-Its coordinate maps on tensor products induce coordinate maps on sheafifications.
-The generator transition formulas make these coordinates compatible with the
-adic systems, and the integral basis identity reconstructs every local section.
-
-For an integral morphism u between E-extensions of F and G, precompose its
-restriction with the unit of F and postcompose with each coordinate projection.
-These compatible maps define original-coefficient morphisms g_i. Reconstruction
-on scalar generators gives u = sum b_i extension(g_i) at every cofinal level.
-The transition maps are epimorphisms, so the identity holds for whole systems.
-Tensor induction and induction on the integral span give the rational spanning
-statement. Unfolding the explicit coefficient diagram identifies this scalar
-extension with T and its recorded object identification with Q. The same formulas
-include equal coefficient fields and zero sheaves. -/
+/-- Finite coefficient extension spans the rational morphisms between extended sheaves. -/
 theorem lisseCoefficientHomBaseChange_span
     (E₀ : Padic.FiniteCoefficientFields l K) :
     let P := (lisseCoefficientDiagramData l Y K).diagram

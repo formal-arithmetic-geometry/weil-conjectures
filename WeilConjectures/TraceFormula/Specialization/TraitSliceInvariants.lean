@@ -27,8 +27,8 @@ M'' --θ--> M_T --ψ--> M
 where `θ` (`NearbyCyclesModel.geometricSliceTraitChangeHom`) is the base change of the identity of
 `M` along `𝔸¹_S ⟶ S`: the slice of `M_T` along the section `T ⟶ 𝔸¹_T` given by the
 coordinate `x ∈ K`. This file defines `θ`. It splits the generic-slicing identification (blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2); SGA 4½,
-[Th. finitude], §§3.4, 3.7) into the two facts about traits used in the blueprint:
+`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2); SGA
+4½, [Th. finitude], §§3.4, 3.7) into the two facts about traits used in the blueprint:
 
 * the pullback exchange of `ψ` is invertible: nearby cycles do not change under the change of
   trait `T ⟶ S` (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`);

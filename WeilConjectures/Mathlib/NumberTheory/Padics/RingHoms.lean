@@ -118,7 +118,7 @@ theorem toZModPow_monoidHomOfCompatible (f : ∀ n : ℕ, G →* Multiplicative 
 end Characters
 
 variable (p) in
-/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes, the group-theoretic half.
 
 For a topological group `G`, a continuous homomorphism `G → ℤ_[p]` is the same thing as a
@@ -165,7 +165,7 @@ theorem continuousMonoidHomEquiv_apply_coe {G : Type*} [Group G] [TopologicalSpa
   simp only [continuousMonoidHomEquiv, Equiv.coe_fn_mk]
   rfl
 
-/-- Blueprint `lem-wf-additive-characters-h1`: Continuous `ℤ_ℓ`-characters are compatible
+/-- Blueprint `lemma-invariant-additive-characters`: Continuous `ℤ_ℓ`-characters are compatible
 finite-level classes, the naturality.
 
 The bijection `PadicInt.continuousMonoidHomEquiv` is natural in the group: the reductions of

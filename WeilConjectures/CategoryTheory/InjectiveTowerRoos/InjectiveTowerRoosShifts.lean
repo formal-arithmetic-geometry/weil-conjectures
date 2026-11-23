@@ -26,9 +26,7 @@ import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 # Injective tower Roos comparisons and signed integer shifts
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941; derived.tex, Tags 014E,
-070I, 08BJ and 0BK6; homology.tex, Tag 011G. Blueprint main-20261015,
-sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md, coefficient comparisons.
-(blueprint: lem-pur-injective-tower-roos-shifts)
+070I, 08BJ and 0BK6; homology.tex, Tag 011G.
 
 The cone, its coordinates and its kernel inclusion are the existing `roosF`, `roosχ`
 and `roosι`. Natural-number level n denotes positive level n+1. Products below are
@@ -55,14 +53,13 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 variable [HasLimitsOfShape ℕᵒᵖ A]
 
 /-- The actual product of the ordinary limit-cone components.
-Source: Stacks Tag 0941 (blueprint: lem-pur-injective-tower-roos-shifts). -/
+Source: Stacks Tag 0941. -/
 noncomputable abbrev inclusion (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     limit I.asFunctor ⟶ roosP I :=
   Pi.lift (fun n : ℕ ↦ limit.π I.asFunctor (op n))
 
 /-- The insertion boundary in the inverse rotation of the fixed cone triangle.
-Source: Stacks Tags 014E and 0941
-(blueprint: lem-pur-injective-tower-roos-shifts).
+Source: Stacks Tags 014E and 0941.
 In the coordinates `roosχ` this is b ↦ (b,0), with the canonical [-1][1] reindexing. -/
 noncomputable abbrev boundary (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     roosP I ⟶ (roosF.obj I)⟦(1 : ℤ)⟧ :=
@@ -71,8 +68,7 @@ noncomputable abbrev boundary (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
 variable [HasDerivedCategory.{w} A]
 
 /-- Localize a specified termwise shift comparison and apply the localization's shift.
-Source: Stacks Tags 011G and 0941
-(blueprint: lem-pur-injective-tower-roos-shifts). -/
+Source: Stacks Tags 011G and 0941. -/
 noncomputable def localizedShift
     (F : CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ)
     (cs : F.CommShift ℤ) (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (m : ℤ) :
@@ -81,7 +77,7 @@ noncomputable def localizedShift
     (DerivedCategory.Q.commShiftIso m).hom.app (F.obj I)
 
 /-- The actual localized product of limit projections, in the termwise derived-product model.
-Source: Stacks Tag 0941 (blueprint: lem-pur-injective-tower-roos-shifts). -/
+Source: Stacks Tag 0941. -/
 noncomputable abbrev projection (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     DerivedCategory.Q.obj (limit I.asFunctor) ⟶ DerivedCategory.Q.obj (roosP I) :=
   DerivedCategory.Q.map (inclusion I)

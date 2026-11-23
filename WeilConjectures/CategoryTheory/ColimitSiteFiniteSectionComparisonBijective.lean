@@ -23,7 +23,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteFiniteSectionEventualZero
 
 Source: Stacks Project, Sites, Tag 0A35, independence of presentations and
 identification by adjunction; abelian extension via Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-comparison-bijective).
 -/
 
 @[expose] public section
@@ -42,51 +41,12 @@ private theorem arrow_map_apply_heq
   subst B'
   rw [(Arrow.mk_inj _ _).mp h]
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the general-object presentation,
-sheaf equalizer and adjunction paragraphs; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-comparison-bijective).
+/-- The comparison map `colimit.desc D K` from the filtered colimit of the stage section groups
+of the inverse images of `G` over the images of `U` to the section group of the colimit inverse
+image is bijective.
 
-Proof: A presentation of a limit object Y is a triple (t, W, p), with
-t : Under i, W in F(t.right), and p : V(t.right)(W) = Y. A refinement
-b : t to t' satisfies F(b.right)(W) = W', with the corresponding endpoint
-transports. The section group at this presentation is L_t(W), where
-L_t = F(t.hom) inverse image of G. Use the unique adjunct of the stage
-unit for every refinement, evaluated at W and transported at the endpoint,
-as its transition map. Adjunct uniqueness gives identity and composition.
-
-The presentation category is nonempty: lift Y to a stage using hobjects,
-then choose a common stage with i. For two presentations, a common stage
-in Under i followed by eventual equality of their object representatives
-gives a common refinement with equal W. Parallel refinements are equalized
-by filteredness. Define the section group at Y as this filtered colimit.
-To restrict along f : Y to Y', lift f by harrows and move its stage, i,
-and chosen endpoint presentations to a common stage. Eventual object
-equality corrects the endpoints. Two such lifts agree after refinement
-by harrows; naturality of the adjunct transition maps then proves that
-restriction is independent of these choices. Lift finitely many arrows
-together to prove the presheaf identity and composition laws. Thus this
-construction defines an abelian presheaf. A Q-cover comes from a finite stage cover;
-the covering pullbacks are preserved. Lift the finite matching-family data
-and equations to a common stage. Filtered abelian colimits commute with the
-finite products and equalizers expressing the sheaf condition, so this is a
-sheaf. Empty covers give the zero group.
-
-Maps from this sheaf to any sheaf T are compatible stage maps. The stage
-adjunctions identify these with maps G to restriction of T along V i; the
-identity presentation gives the reverse assignment. Uniqueness of adjuncts
-and the colimit universal property give inverse natural correspondences.
-The unique unit-compatible left-adjoint isomorphism identifies this sheaf
-with the canonical inverse image. At V i U the carried-forward presentations
-are final: lift representatives and arrows to common stages and equalize
-using the object and arrow colimits. Thus the comparison from the stage
-section colimit to the canonical inverse-image sections is an isomorphism.
-The unit equations uniquely characterize α and θ, while hD and hK identify
-the supplied diagram and cocone with this comparison via E and e. Hence
-colimit.desc D K is bijective. This asserts only the comparison property of
-supplied coherent data, and constructs none of the diagrams, maps or units
-required by the parent theorem. Empty source stages have no U; identity and
-constant diagrams reduce to the ordinary identity comparison.
--/
+Source: Stacks Project, Sites, Tag 0A35, the general-object presentation, sheaf equalizer and
+adjunction paragraphs; Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_section_comparison_bijective
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

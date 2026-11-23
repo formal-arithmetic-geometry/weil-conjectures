@@ -47,7 +47,7 @@ private theorem isIso_sigmaRestrictInclusion
 an isomorphism over the corresponding inverse image, their composite coproduct
 map is an isomorphism over U.
 Source: the coproduct and restriction gluing in
-`lem-weil-pbc-dense-open-component-modifications`, step 3 (Stacks Project,
+`theorem-cohomology-curves`, step 3 (Stacks Project,
 Morphisms, Tag 0BAJ, componentwise reduction).
 
 Proof: Write p = Sigma.desc ι and q = Sigma.map ν. The composite q ≫ p is

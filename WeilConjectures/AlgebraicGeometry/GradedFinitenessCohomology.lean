@@ -59,7 +59,7 @@ hence \mathcal G is quasi-coherent as a \mathcal B-module. The local homogeneous
 (iv) give a surjection \mathcal B|_U^{\oplus r}\to\mathcal G|_U: every section in a homogeneous
 summand is locally a sum of the stipulated b_{ij}s_i, and every section of \mathcal G is locally a
 finite sum of homogeneous sections. Thus \mathcal G has finite type over \mathcal B. Dependencies:
-pqf-def-coherent, def-weil-pbc-finite-type-algebra, def-weil-sheaf-of-modules-category.
+pqf-def-coherent, def-weil-pbc-finite-type-algebra, situation-conventions.
 
 3. The base-change description of relative spectrum [lem-weil-pbc-relative-spec-base-change](2),
 applied to \widetilde B on \operatorname{Spec}A, identifies X' over X with

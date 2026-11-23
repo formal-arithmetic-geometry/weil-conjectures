@@ -12,7 +12,7 @@ public import WeilConjectures.Compactification.BaseChange
 
 /-! # Boundary point classes under base change
 
-Source: affine case of `thm-sc-constant-invariance`, boundary paragraph.
+Source: affine case of `proposition-cohomology-smooth-affine-curve`, boundary paragraph.
 (blueprint: lem-sc-boundary-point-class-base-change).
 -/
 
@@ -24,7 +24,7 @@ namespace AlgebraicGeometry
 
 /-- Base change bijects the rational boundary points and pulls back their point classes.
 
-Source: affine case of `thm-sc-constant-invariance`, boundary paragraph.
+Source: affine case of `proposition-cohomology-smooth-affine-curve`, boundary paragraph.
 (blueprint: lem-sc-boundary-point-class-base-change).
 
 Proof: the smooth connected curve c.Z is integral and noetherian of dimension one.

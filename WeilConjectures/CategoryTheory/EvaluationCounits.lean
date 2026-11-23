@@ -8,9 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Evaluation comparisons determined by the counit
-
-Source: current blueprint sk-prop-sp-tower-geometric, final evaluation paragraph.
-(blueprint: lem-sp-evaluation-counits-adjunction)
 -/
 
 @[expose] public noncomputable section
@@ -31,11 +28,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
       Fn.map (comparison K).hom ≫ finite.counit.app (evY.obj K))
 
 include adj finite support counit in
-/-- The counit equation forces naturality of the finite right-adjoint comparisons.
-Source: blueprint sk-prop-sp-tower-geometric, final evaluation paragraph.
-Proof: transpose by the finite adjunction and use naturality of the two counits and
-of the compact-support comparison. Injectivity of transposition concludes.
-(blueprint: lem-sp-evaluation-counits-adjunction) -/
+/-- The counit equation forces naturality of the finite right-adjoint comparisons. -/
 theorem evaluationCounit_naturality {K L : D} (f : K ⟶ L) :
     evX.map (G.map f) ≫ (comparison L).hom =
       (comparison K).hom ≫ Gn.map (evY.map f) := by
@@ -56,22 +49,12 @@ theorem evaluationCounit_naturality {K L : D} (f : K ⟶ L) :
     finite.counit.app (evY.obj K) ≫ evY.map f at hf
   exact congrArg (fun z ↦ Fn.map (comparison K).hom ≫ z) hf.symm
 
-/-- An objectwise counit-preserving identification is a natural evaluation comparison.
-Source: blueprint sk-prop-sp-tower-geometric, evaluation and uniqueness.
-(blueprint: lem-sp-evaluation-counits-adjunction) -/
+/-- An objectwise counit-preserving identification is a natural evaluation comparison. -/
 def evaluationCounitComparison : G ⋙ evX ≅ evY ⋙ Gn :=
   NatIso.ofComponents comparison (fun f ↦
     evaluationCounit_naturality adj finite evX evY support comparison counit f)
 
-/-- Counit-preserving evaluation comparisons also preserve the unit.
-Source: blueprint sk-prop-sp-tower-geometric, final paragraph.
-Proof: transposition by the finite adjunction is injective. On the left it gives
-finite pushforward of the evaluated unit, followed by the evaluated tower counit,
-conjugated by the support comparison. Naturality of that comparison and the tower
-triangle identity reduce this to the identity. This is the transpose of the finite
-unit. Naturality of the comparison follows in the same way from naturality of both
-counits; no faithfulness of evaluation on derived morphisms is assumed.
-(blueprint: lem-sp-evaluation-counits-adjunction) -/
+/-- Counit-preserving evaluation comparisons also preserve the unit. -/
 theorem evaluationCounitComparison_unit (M : C) :
     evX.map (adj.unit.app M) ≫
       (evaluationCounitComparison adj finite evX evY support comparison counit).hom.app

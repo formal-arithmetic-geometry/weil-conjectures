@@ -49,8 +49,8 @@ namespace Etale
 
 variable {p : ℕ} (hp : p.Prime) {X : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)
 
-/-- Étale analogue of blueprint `lem-trf-absolute-frobenius-site` (stated there for the small
-pro-étale site), derived form: the absolute Frobenius acts as the
+/-- Étale analogue of blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (stated there for
+the small pro-étale site), derived form: the absolute Frobenius acts as the
 identity on the derived étale topos. For a scheme `X` of characteristic `p`, the derived pullback
 `L(F_X)^*` along the absolute `p ^ n`-power Frobenius is isomorphic to the derived pullback
 `L(𝟙 X)^*` along the identity: it is the derived functor of

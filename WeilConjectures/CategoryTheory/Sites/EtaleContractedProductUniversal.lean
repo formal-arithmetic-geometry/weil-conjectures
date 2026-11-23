@@ -18,16 +18,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Sheaf.Torsor
 
 /-- Invariant natural maps factor uniquely through the actual sheafified orbit quotient.
-Source: Stacks Project, Tags 03AH and 03AJ, contracted-product quotient construction;
-the set quotient universal property and the sheafification adjunction.
-(blueprint: lem-sc-etale-contracted-product-exists-universal)
-
-Proof: Invariance makes the function on pairs constant on every generating relation,
-so Quot.lift defines its map on orbit sections. Naturality on representatives gives a
-presheaf morphism by quotient induction. Apply sheafifyLift to that morphism into F;
-the unit equation proves the required values on every pair. For uniqueness, those values
-determine the composite with the sheafification unit by quotient induction. The
-sheafification hom-ext theorem then makes the two sheaf morphisms equal. -/
+Source: Stacks Project, Tags 03AH and 03AJ, contracted-product quotient construction. -/
 theorem contracted_product_universal (S : Scheme.{u})
     {G G' : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (φ : G ⟶ G') (T : Torsor G)

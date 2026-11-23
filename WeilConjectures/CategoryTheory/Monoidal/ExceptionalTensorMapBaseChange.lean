@@ -28,10 +28,9 @@ as in `WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange`: `g : 𝒵 
 The *tensor map* `γ_K : gs K ⊗ gu 𝟙 ⟶ gu K` is the adjoint of the symmetry, the inverse projection
 morphism and the counit at the unit; the *exceptional base change* `b_K : qZ (gu K) ⟶ Gu (q K)` is
 the adjoint of the inverse base change followed by the pulled-back counit. The main statement
-`CategoryTheory.ProjectionBaseChange.map_tensorMap_comp_baseChange` (blueprint `sk-prop-cohsm`,
-compatibility of (G11) with (G12); `det-sp-purity-bc-factors`, tensor map) says that
-`qZ γ_K ≫ b_K` is the tensor map of `G` at `q K` precomposed with the base change at the unit:
-if the projection morphisms are compatible with base change (`PFBaseChange`), then
+`CategoryTheory.ProjectionBaseChange.map_tensorMap_comp_baseChange` says that `qZ γ_K ≫ b_K` is
+the tensor map of `G` at `q K` precomposed with the base change at the unit: if the projection
+morphisms are compatible with base change (`PFBaseChange`), then
 ```
 qZ (gs K ⊗ gu 𝟙) ──qZ γ_K──▶ qZ (gu K) ──b_K──▶ Gu (q K)
       │≅                                          ▲
@@ -40,7 +39,6 @@ Gs (q K) ⊗ qZ (gu 𝟙) ──1 ⊗ b_𝟙──▶ Gs (q K) ⊗ Gu (q 𝟙) �
 ```
 commutes. The morphisms `γ`, `γ'`, `b` are taken as variables characterised by their adjoints, so
 that the statement applies to any construction of them.
-
 -/
 
 @[expose] public section

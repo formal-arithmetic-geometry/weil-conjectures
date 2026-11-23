@@ -36,8 +36,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D] (v : C 
 
 /-- **K-injective resolutions of `X[0]` compute the classical right derived functors**: for a
 K-injective resolution `R` of `X[0]`, `Hᵖ(Rv(X[0])) ≅ Rᵖv(X)`.
-
-(blueprint: `lem-sp-kinjective-computes`) -/
+-/
 noncomputable def rightDerivedHomologyIsoRightDerived [HasInjectiveResolutions C] {X : C}
     (R : ((CochainComplex.singleFunctor C 0).obj X).KInjectiveResolution) (p : ℕ) :
     R.rightDerivedHomology v p ≅ (v.rightDerived p).obj X :=
@@ -46,8 +45,7 @@ noncomputable def rightDerivedHomologyIsoRightDerived [HasInjectiveResolutions C
 
 /-- **K-injective resolutions compute `R⁺v`**: for a bounded below complex `K` and a K-injective
 resolution `R` of `K`, `Hᵖ(R⁺v(K)) ≅ Hᵖ(v(I))`.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+-/
 noncomputable def homologyRightDerivedFunctorPlusObjIso [EnoughInjectives C]
     [HasDerivedCategory C] [HasDerivedCategory D] (K : CochainComplex.Plus C)
     (R : K.obj.KInjectiveResolution) (p : ℤ) :
@@ -72,8 +70,7 @@ variable [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveRes
 
 /-- **K-injective resolutions compute the unbounded right derived functor**: for a K-injective
 resolution `K ⟶ I`, `R(v)(K) ≅ v(I)` in the derived category.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+-/
 noncomputable def rightDerivedFunctorObjIso :
     v.rightDerivedFunctor.obj (DerivedCategory.Q.obj K) ≅
       DerivedCategory.Qh.obj (R.rightDerived v) :=
@@ -83,8 +80,7 @@ noncomputable def rightDerivedFunctorObjIso :
 
 /-- The cohomology of the unbounded right derived functor is computed by K-injective
 resolutions: `Hᵖ(R(v)(K)) ≅ Hᵖ(v(I))`.
-
-(blueprint: `def-sp-kinjective-bridge`) -/
+-/
 noncomputable def homologyRightDerivedFunctorObjIso (p : ℤ) :
     (DerivedCategory.homologyFunctor D p).obj
         (v.rightDerivedFunctor.obj (DerivedCategory.Q.obj K)) ≅

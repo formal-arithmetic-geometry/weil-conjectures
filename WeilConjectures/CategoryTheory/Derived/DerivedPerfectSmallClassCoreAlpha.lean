@@ -64,16 +64,6 @@ private theorem alphaCompact_common_bound
 /-- The alpha-compact class supplied by the well-generation theorem.
 
 Source: Neeman, Theorem 0.2; Krause, Sections 6.2--6.3.
-(blueprint: new-sfb-derived-perfect-small-class-core-alpha)
-
-Proof: choose a regular cardinal above a well-generation bound and above the
-compactness ranks of representatives of `P`.  Let `S` be the class of
-alpha-compact objects.  Neeman's well-generation theorem and Krause's
-cardinal arguments give essential smallness, repleteness, triangulated closure,
-closure under coproducts of fewer than `alpha` objects, and alpha-smallness.
-The same cardinal bound makes every member of `P` alpha-compact; this last
-fact is recorded separately so that the caller can derive `P ≤ S` by unfolding
-`S` rather than hiding that step in the existence theorem.
 -/
 theorem derived_exists_alphaCompactClass_core
     {A : Type u} [Category.{v} A] [Abelian A]

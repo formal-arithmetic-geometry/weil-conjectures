@@ -16,19 +16,11 @@ universe z
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its
-finite-diagram remark.
-(blueprint: lem-weil-pbc-filtered-colimit-category-iso).
+/-- If finite diagrams in the colimit category `O` lift to a stage of the filtered diagram `F`,
+then an arrow of `O` is an isomorphism if and only if it is the image of an isomorphism in some
+stage.
 
-Proof: Encode an invertible arrow as the image of the unique arrow from false to
-true in the finite groupoid on two objects with one arrow between any ordered
-pair. The functor is defined from the given isomorphism by choosing an isomorphism
-from each of its endpoints to the source. Lift this finite functor to a stage.
-The lifted arrow is invertible because its inverse in the two-object groupoid is
-preserved by the stage functor. Equality of the composite functor with the given
-one yields equality of its image as an Arrow, including both endpoints. Conversely,
-a stage isomorphism maps to an isomorphism under any functor. No compatibility or
-colimit hypothesis is required for this consequence of finite-functor lifting. -/
+Source: Stacks Project, Tag 09YL. -/
 theorem filteredColimit_category_iso_clause
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

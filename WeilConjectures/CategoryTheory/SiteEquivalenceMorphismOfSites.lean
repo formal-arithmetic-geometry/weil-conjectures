@@ -21,8 +21,10 @@ namespace CategoryTheory
 
 /-! # Equivalence of sites gives morphisms of sites
 
-Source: Stacks Project, Sites, Definitions 00VH, 00WV, 00X1 and Lemmas 00WW,
-00WX (blueprint: lem-weil-pbc-site-equivalence-is-morphism-of-sites).
+## References
+
+* Stacks Project, Sites, Definitions 00VH, 00WV, 00X1 and Lemmas 00WW,
+  00WX.
 -/
 
 private theorem covering_map_iso_id
@@ -54,18 +56,7 @@ quasi-inverse on sheaves of sets and on abelian sheaves; (4) `p_s` and `p'_s` on
 of sets are exact, so `p` and `p'` define morphisms of sites (Definition 00X1), and `p_s`
 is a quasi-inverse of `p^s`, `p'_s` a quasi-inverse of `p'^s`.
 
-Proof: (1) by the isomorphic-family lemma and naturality of `epsilon`, which makes the
-hypotheses symmetric in `(p, p')`; fibre products are preserved since `p` is a right
-adjoint of `p'` (`Equivalence.mk` and `toAdjunction`) and right adjoints preserve limits;
-continuity follows; `p^s`, `p'^s` are quasi-inverse via Lemma 00WW and `epsilon`, `eta`;
-`p_s` is isomorphic to `p'^s` by uniqueness of left adjoints, hence a quasi-inverse of
-`p^s`; exactness: `p_s` is a left adjoint, so preserves colimits, and is isomorphic to the
-right adjoint `p'^s`, so preserves limits; `p'` by symmetry.
-
-Source: Stacks Project, Sites, Definitions 00VH, 00WV, 00X1 and Lemmas 00WW,
-00WX; Categories, Definitions 001J and 0034.
-(blueprint: lem-weil-pbc-site-equivalence-is-morphism-of-sites)
--/
+Stacks Project, Sites, Definitions 00VH, 00WV, 00X1 and Lemmas 00WW, 00WX. -/
 theorem site_equivalence_is_morphism_of_sites
     {A C : Type u} [SmallCategory A] [SmallCategory C]
     (JA : Precoverage A) (JC : Precoverage C)

@@ -21,9 +21,9 @@ X' --g'--> X
 Y' --g---> Y
 ```
 and a compactification `c = (X ⟶[c.i] c.Z ⟶[c.g] Y)` of `f`, with base change
-`c' = c.ofIsPullback sq` (blueprint `def-cbc-compact-support-square`), whose compactifying scheme
-is `c.Z ×_Y Y'` with projection `h : c'.Z ⟶ c.Z`. The *pro-étale compact-support exchange map*
-(blueprint `def-cbc-exchange-map`, transported to the pro-étale site)
+`c' = c.ofIsPullback sq` (blueprint `remark-base-change-compactification--1`), whose compactifying
+scheme is `c.Z ×_Y Y'` with projection `h : c'.Z ⟶ c.Z`. The *pro-étale compact-support exchange
+map* (blueprint `prose-05-31`, transported to the pro-étale site)
 
 `Ex_!(c) : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*`
 
@@ -33,19 +33,19 @@ on the unbounded derived categories of pro-étale sheaves is the derived base ch
 applied after `(c.i)_!`, followed by the inverse of the base change isomorphism
 `(c'.i)_! g'^* ≅ h^* (c.i)_!` of the extension by zero
 (`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`, blueprint
-`lem-cbc-proetale-extension-zero-base-change`).
+`proposition-extension-zero-restriction-closed-subscheme--11`).
 
 For a finite coefficient ring, it is an isomorphism on every complex `K` of étale origin
-(`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét)`, blueprint `def-weil-pbc-etale-origin-witness`),
-blueprint
-`thm-cbc-finite-level-proetale`. The extension by zero `(c.i)_! K ≅ ν^* (c.i)_!^{ét} L` is again
-of
-étale origin (blueprint `lem-cbc-proetale-extension-zero-comparison`), so the claim reduces to the
+(`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét)`, blueprint
+`proposition-proper-direct-image-constructible-complexes--5`), blueprint
+`proposition-composition-base-change-rf-shriek--4`. The extension by zero
+`(c.i)_! K ≅ ν^* (c.i)_!^{ét} L` is again of
+étale origin (blueprint `proposition-comparison-immersions--1`), so the claim reduces to the
 pro-étale proper base change for complexes of étale origin (blueprint
-`thm-weil-pbc-finite-level-proetale`), which is the étale proper base change
+`proposition-proper-direct-image-constructible-complexes--5`), which is the étale proper base change
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`) transported along
 the site comparison (`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`, blueprint
-`lem-weil-pbc-transport-identifies-exchange`).
+`lemma-naturality-pasting-comparison--3`).
 
 ## Main definitions
 
@@ -55,10 +55,11 @@ the site comparison (`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`: pro-étale proper base
-  change for complexes of étale origin (`thm-weil-pbc-finite-level-proetale`).
+  change for complexes of étale origin
+  (`proposition-proper-direct-image-constructible-complexes--5`).
 - `AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app`:
   pro-étale compact-support base change for complexes of étale origin
-  (`thm-cbc-finite-level-proetale`).
+  (`proposition-composition-base-change-rf-shriek--4`).
 -/
 
 @[expose] public section
@@ -81,7 +82,7 @@ variable {A} in
 /-- The extension by zero along an open immersion of a complex bounded below of étale origin is
 bounded below of étale origin: `j_! ν_U^* L ≅ ν_X^* j_!^{ét} L`
 (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekComparisonUpperStarIso`, blueprint
-`lem-cbc-proetale-extension-zero-comparison`), and `j_!^{ét}` is exact. -/
+`proposition-comparison-immersions--1`), and `j_!^{ét}` is exact. -/
 lemma plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology U) A)}
@@ -102,7 +103,8 @@ section Proper
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `thm-weil-pbc-finite-level-proetale`: Finite-level pro-etale proper base change.
+/-- Blueprint `proposition-proper-direct-image-constructible-complexes--5`: Finite-level pro-etale
+proper base change.
 
 For a finite coefficient ring `Λ`, a cartesian square
 ```
@@ -112,9 +114,9 @@ Y' --g---> Y
 ```
 with `f` proper and `g` arbitrary, and a complex `K` of pro-étale sheaves on `X` bounded below of
 étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`, an étale-origin witness of blueprint
-`def-weil-pbc-etale-origin-witness`), the pro-étale exchange map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K`
-is an isomorphism. Being a statement about a component of a natural transformation, it does not
-depend on the choice of the witness.
+`proposition-proper-direct-image-constructible-complexes--5`), the pro-étale exchange map
+`Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism. Being a statement about a component of a natural
+transformation, it does not depend on the choice of the witness.
 
 The proof conjugates the étale proper base change isomorphism
 (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`) by the site
@@ -155,7 +157,7 @@ compact-support exchange map: the derived pullbacks are computed degreewise
 (`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory`) and the extension by zero
 commutes with base change
 (`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`,
-blueprint `lem-cbc-proetale-extension-zero-base-change`). -/
+blueprint `proposition-extension-zero-restriction-closed-subscheme--11`). -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeIso
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     (D((c.i)_!open[A]) ⋙ L((pullback.fst c.g g)^*[A])) ⋙ R(((c.ofIsPullback sq).g)_*[A]) ≅
@@ -170,13 +172,13 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeIso
       R(((c.ofIsPullback sq).g)_*[A]) ≪≫
     Functor.associator _ _ _
 
-/-- Blueprint `def-cbc-exchange-map`: Compact-support exchange map, on the pro-étale site.
+/-- Blueprint `prose-05-31`: Compact-support exchange map, on the pro-étale site.
 
 **The pro-étale compact-support exchange map along a compactification** `Ex_!(c)`: for a
 cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f`, the natural
 transformation `Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*` of functors
 `D(X_proét) ⥤ D(Y'_proét)`, where `c ×_Y Y' = c.ofIsPullback sq` is the base changed
-compactification of `f'` (blueprint `def-cbc-compact-support-square`), with
+compactification of `f'` (blueprint `remark-base-change-compactification--1`), with
 `h : c.Z ×_Y Y' ⟶ c.Z` the projection. It is the composite
 ```
 Lg^* R(c.g)_* (c.i)_! ⟶ R(c'.g)_* Lh^* (c.i)_! ≅ R(c'.g)_* h^* (c.i)_!
@@ -261,8 +263,8 @@ lemma isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactificatio
   isIso_derivedBaseChangeMap_app_of_isProper Λ (c.isPullback_g_ofIsPullback sq).flip _
     (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek c.i hK)
 
-/-- Blueprint `thm-cbc-finite-level-proetale`: Finite-level pro-etale compact-support base
-change.
+/-- Blueprint `proposition-composition-base-change-rf-shriek--4`: Finite-level pro-etale
+compact-support base change.
 
 For a finite coefficient ring `Λ`, a cartesian square
 ```
@@ -271,11 +273,11 @@ X' --g'--> X
 Y' --g---> Y
 ```
 with `g` arbitrary, a compactification `c` of `f` (`f` separated of finite type) with base change
-`c ×_Y Y'` (blueprint `def-cbc-compact-support-square`), and a complex `K` of pro-étale sheaves on
-`X` bounded below of étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`, an étale-origin
+`c ×_Y Y'` (blueprint `remark-base-change-compactification--1`), and a complex `K` of pro-étale
+sheaves on `X` bounded below of étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`, an étale-origin
 witness
-of blueprint `def-weil-pbc-etale-origin-witness`), the pro-étale exchange map
-`Ex_!(c) : Lg^* Rf_!(c) K ⟶ Rf'_!(c ×_Y Y') Lg'^* K` of
+of blueprint `proposition-proper-direct-image-constructible-complexes--5`), the pro-étale exchange
+map `Ex_!(c) : Lg^* Rf_!(c) K ⟶ Rf'_!(c ×_Y Y') Lg'^* K` of
 `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` is an
 isomorphism. As the statement concerns a component of a natural transformation, it is
 independent of the witness.

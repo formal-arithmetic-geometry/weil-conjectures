@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # Naturality of the injective-resolution computation
 
 Source: Stacks Project, Tag 0156, Lemma 13.20.1.
-(blueprint: lem-sp-derived-injective-resolution-naturality).
 -/
 
 @[expose] public section
@@ -26,12 +25,8 @@ namespace CochainComplex.mappingCone
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory C]
 
 /-- A commuting square of quasi-isomorphisms induces a quasi-isomorphism on cones.
-Source: Stacks Project, Tag 014A (five lemma for distinguished triangles)
-(blueprint: lem-sp-derived-injective-resolution-naturality).
-
-Proof. Localize the morphism of mapping-cone triangles. Its first two components
-are isomorphisms, hence so is its third component. Localization reflects
-quasi-isomorphisms. -/
+Source: Stacks Project, Tag 014A (five lemma for distinguished triangles).
+-/
 theorem quasiIso_map_of_quasiIso
     {K L I J : CochainComplex C ℤ} (f : K ⟶ L) (g : I ⟶ J)
     (a : K ⟶ I) (b : L ⟶ J) (h : f ≫ b = a ≫ g)

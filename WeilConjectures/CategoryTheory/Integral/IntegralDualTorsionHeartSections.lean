@@ -33,9 +33,6 @@ public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalen
 
 /-!
 # The sections bound for the integral derived dual on classical torsion sheaves
-
-Source: blueprint `sk-lem-int-ext.proof.md`, paragraph (2), finite-reduction bullets.
-(blueprint: lem-route-integral-dual-torsion-heart-sections).
 -/
 
 @[expose] public section
@@ -506,26 +503,7 @@ private theorem sections_bound_of_tor_and_classical_cohomology
 finite constant integral local model followed by derived sections has amplitude `[0,s+1]`.
 The target sheaf need not be constructible or annihilated by one uniform prime power.
 
-Source: blueprint `sk-lem-int-ext.proof.md`, paragraph (2), second and third bullets;
-`lem-sf-integral-stratum-reduction-ext-bound`, steps 4 and 8--9;
-Stacks Tags 08JJ, 099Y and 08J5.
-(blueprint: lem-route-integral-dual-torsion-heart-sections).
-
-Proof: the local two-term resolution of L makes each local single L dualizable of
-Tor amplitude [-1,0]; proetale descent and the exact dual pairing give Tor amplitude
-[0,1] for the derived dual, so K = L-dual tensor F[0] has cohomology only in [0,1].
-For every r the kernel F_r of l^r on F is classical (classical sheaves are the essential
-image of comparison inverse image, closed under kernels) and killed by l^(r+1), so the
-finite-level dual-classicality theorem makes every cohomology sheaf of L-dual tensor
-F_r[0] classical. Local torsion writes F as the filtered colimit of the F_r; a K-flat
-model of the dual and exact filtered colimits show that each fixed-degree cohomology of
-L-dual tensor (-)[0] preserves this colimit, so the cohomology sheaves of K are classical
-(closure of the essential image under colimits) and l-power torsion (an additive functor
-preserving the kernel colimit preserves local torsion). Module sections agree with
-abelian proetale sections through the internal/sectionwise module equivalence and the
-ringed-site evaluation comparison (transported along ULiftHom); the definition of cd_l
-and s = cd_l bound them in [0,s]. Bounded-heart amplitude for the triangulated derived
-sections functor gives [0,s+1]. -/
+Source: Stacks Tags 08JJ, 099Y and 08J5. -/
 theorem integral_dual_torsion_heart_sections
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

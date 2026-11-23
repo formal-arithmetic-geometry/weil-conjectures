@@ -21,22 +21,6 @@ the truncation triangle of `K` induced by `e`.
 - `CategoryTheory.Triangulated.TStructure.karoubi`: the t-structure on `Karoubi C`.
 - `CategoryTheory.Triangulated.TStructure.karoubiHeartEquivalence`: the heart of `t.karoubi` is
   canonically equivalent to the Karoubi envelope of the heart of `t`.
-
-## Blueprint nodes formalised in Mathlib
-
-Several blueprint nodes of the t-structure and Karoubi-envelope argument are Mathlib
-definitions and instances:
-
-- `def-weil-t-structure` (t-structures, their hearts, boundedness, truncation functors and
-  truncation triangles) is `CategoryTheory.Triangulated.TStructure`, with
-  `CategoryTheory.Triangulated.TStructure.heart`, `CategoryTheory.Triangulated.TStructure.bounded`,
-  `CategoryTheory.Triangulated.TStructure.truncLE`, `CategoryTheory.Triangulated.TStructure.truncGE`
-  and `CategoryTheory.Triangulated.TStructure.triangleLEGE_distinguished`.
-- `def-weil-derived-cohomology-sheaves` (the cohomology sheaves `𝓗ʳ(K)` of a complex of sheaves of
-  modules for the standard t-structure) is `DerivedCategory.homologyFunctor` applied to the
-  derived category of a category of sheaves of modules, the standard t-structure being
-  `DerivedCategory.TStructure.t`; this standard t-structure on the derived category of an
-  abelian category is blueprint `def-sbc-standard-tstructure-derived-category`.
 -/
 
 @[expose] public section

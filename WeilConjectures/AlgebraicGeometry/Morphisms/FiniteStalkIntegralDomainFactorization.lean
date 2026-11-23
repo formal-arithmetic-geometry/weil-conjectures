@@ -15,10 +15,15 @@ import Mathlib.RingTheory.Unramified.Finite
 /-!
 # Integral domain factorization of a finite stalk map
 
-Source: the affine localization argument of
-new-finite-normal-dense-etale-stalk-going-down, steps 1 and 3;
-Mathlib's localization of integral maps and flatness over quotient algebras.
-(blueprint: new-finite-stalk-integral-domain-factorization)
+## References
+
+* Stacks Project, Tag 00GI (integral ring maps) and the localization description of affine stalks
+* B. Iversen, I.2.7
+
+## Implementation details
+
+The proof uses Mathlib's `Algebra.FormallyUnramified.flat_of_restrictScalars`
+(Iversen, I.2.7).
 -/
 
 @[expose] public section
@@ -27,31 +32,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- A finite map factors at any domain source stalk through an integral domain
-algebra over the target stalk, followed by a flat map.
-
-Source: the affine localization argument of
-new-finite-normal-dense-etale-stalk-going-down, steps 1 and 3; Stacks Project,
-Tag 00GI (integral ring maps) and the localization description of affine stalks.
-The shorter image-algebra argument uses Mathlib's
-`Algebra.FormallyUnramified.flat_of_restrictScalars` (Iversen, I.2.7).
-(blueprint: new-finite-stalk-integral-domain-factorization)
-
-Proof: Choose an affine neighbourhood Spec A of f(x), with finite affine
-preimage Spec C. The target stalk R is A_p, and the source stalk T is C_q.
-Localize C at the image M of A minus p to obtain S. The finite map A -> C is
-integral, so its localization a0 : R -> S is integral. Elements of M become
-units in T, giving b0 : S -> T. The map C -> T is flat, and since S is a
-localization of C, T is flat over S as well. Naturality of germs, followed by
-the uniqueness of maps from A_p, identifies b0.comp a0 with f.stalkMap x.
-Take B to be the image subring of b0 in T. Since T is a domain, so is B.
-Every element of B is the image of an element of S; map its monic integral
-equation along S -> B to show that a : R -> B is integral. The surjection
-S -> B is formally unramified and finite, so flatness of T over S implies
-flatness over B by Iversen I.2.7. Inclusion b : B -> T satisfies b.comp a =
-b0.comp a0. No normality, dominance or Noetherianity is needed, and the first
-map may have a kernel. The point x and its domain stalk exclude zero target
-localizations; the empty-source case is vacuous. -/
+/-- For a finite morphism `f` and a point `x` with `𝒪_{X,x}` a domain, the stalk map
+`𝒪_{Y,f x} ⟶ 𝒪_{X,x}` factors as an integral map to an integral domain followed by a flat map. -/
 theorem finite_stalk_integral_domain_factorization {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] (x : X) (hX : IsDomain (X.presheaf.stalk x)) :
     ∃ (B : CommRingCat.{u}) (a : Y.presheaf.stalk (f x) →+* B)

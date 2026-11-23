@@ -87,25 +87,7 @@ private theorem coadjunct_constant
   rw [ht, Category.id_comp]
 
 /-- The inverse adjunct preserves ring operations.
-Source: Stacks Project, Proposition 00YV, proof of (2), extended there to rings.
-
-Proof: For a binary operation m, let rho be R's product comparison and lambda L's. Naturality of
-epsilon at the two projections, together with the projection equations of rho and lambda, gives
-L(rho inverse) followed by epsilon_(Y times Y) equal to lambda_(RY,RY) followed by (epsilon_Y
-times epsilon_Y). Check this equality by composing with each projection; cancel the invertible
-product comparisons when checking. Naturality of epsilon at m_Y then identifies the composite of L
-of the transported binary operation with epsilon_Y with the product of epsilon_Y's followed by
-m_Y. Substitute opsL and opsR and the equation m_X followed by g equals (g times g) followed by
-m_(RF Y). Cancel eL and eR to obtain m_(LF X) followed by the conjugated inverse adjunct equal to
-the product of two copies of that adjunct followed by m_Y. Apply this to addition and
-multiplication. For a constant q, naturality at q_Y and uniqueness of the map into the terminal
-object identify the composite of the inverse terminal comparisons and epsilon_terminal with the
-identity. With the constant equations opsL, opsR, and that for g, this proves q_(LF X) followed by
-the inverse adjunct equals q_Y, both for zero and for one. Package zero and addition as
-IsAddMonHom and one and multiplication as IsMonHom; these give IsRingHom. Negation preservation
-follows from additivity and is not a field of IsRingHom.
-(blueprint: lem-weil-pbc-ring-coadjunct-preserves-operations)
--/
+Stacks Project, Tag 00YV. -/
 theorem ringCoadjunctPreservesOperations
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]
     {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]

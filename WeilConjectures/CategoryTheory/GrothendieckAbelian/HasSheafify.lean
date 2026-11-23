@@ -40,7 +40,6 @@ in `u + 1`.
 The localized instances are what lets the constructible-sheaf definitions of
 `WeilConjectures.ConstructibleSheaf.Defs` restrict a sheaf to a member of an étale cover
 without carrying `HasWeakSheafify` for the localized sites as a hypothesis.
-
 -/
 
 @[expose] public section

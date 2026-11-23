@@ -13,9 +13,6 @@ import Mathlib.Logic.Function.Basic
 import Mathlib.Lean.Meta.CongrTheorems
 
 /-! # Factoring the normalized projective-line unit
-
-Source: the literal ambient unit clause in the first rational projective-line triangle
-calculation, before any trace functional is applied.
 -/
 
 @[expose] public noncomputable section
@@ -210,22 +207,7 @@ private theorem unit_factorization_generic
 
 -- Fix the coefficient and all native endpoints before spelling out the unit paste.
 /-- Factor the normalized unit into kernel insertion and the remaining inverse exchange paste.
-No counit, trace functional, trace transport or integration equation occurs in this statement.
-
-Source: current blueprint, sec-six-functors-basics/sk-prop-p1-adjunction-rational/
-sk-prop-p1-adjunction-rational-triangle.proof.md, First identity, description of the unit;
-unit clause 2 of the ambient formulas
-(blueprint: lem-sfb-rational-p1-unit-factorization).
-
-Proof: Open hη to obtain invertibility witnesses and its HEq with unitComponent.
-Use those witnesses, through definitional equality of the fixed-arrow interfaces, as hb and hp.
-Proof irrelevance identifies their uses. Replace η by the specified unit.
-Expand unitComponent and diagonalClassMap.
-Apply the second direct-image functor's map_comp to split the tensor-shift comparison from
-the diagonal tensor comparison and the supported class. Associativity groups the section,
-diagonal tensor map and class as firstKernelInsertion; the remaining three arrows are
-exactly the displayed tail. This calculation holds for M = 0 and for a zero class, and
-requires no assertion about the diagonal integral. -/
+No counit, trace functional, trace transport or integration equation occurs in this statement. -/
 theorem rationalP1_unit_factorization
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

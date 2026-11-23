@@ -13,7 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 /-! # Canonical compactification site comparison
 
 Source: Stacks Project, Tags 09AF and 099R; blueprint order 1806
-(blueprint: lem-sf-class-compact-support-comparison).
+(blueprint: proposition-comparison-immersions--4).
 The proper factor is the specified counit mate, rather than a choice of an isomorphism.
 -/
 
@@ -25,7 +25,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The compact-support site comparison on bounded below complexes, from the exact open
 comparison and the canonical proper direct-image mate. Source: Stacks Tags 09AF and 099R
-(blueprint: lem-sf-class-compact-support-comparison). -/
+(blueprint: proposition-comparison-immersions--4). -/
 def compactSupportSiteComparisonPlus (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c ⋙
@@ -43,7 +43,7 @@ def compactSupportSiteComparisonPlus (A : Type (u + 1)) [CommRing A] [Finite A]
 support to comparison pullback of etale compact support. A witness is inserted by
 naturality, so the construction applies to every isomorphic pro-etale realization.
 Source: Stacks Tags 09AF and 099R
-(blueprint: lem-sf-class-compact-support-comparison). -/
+(blueprint: proposition-comparison-immersions--4). -/
 def compactSupportSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙

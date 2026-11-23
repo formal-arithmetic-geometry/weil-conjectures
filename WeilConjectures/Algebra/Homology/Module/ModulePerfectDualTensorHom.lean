@@ -126,8 +126,8 @@ set_option linter.style.haveILetI false in
 endomorphism complex.
 
 Source: Stacks Project, More on Algebra, Tags 0A6A and 0ATK, finite-projective
-Hom calculation; current blueprint `sk-prop-integral-local-structure`, uniform-bound
-paragraph.
+Hom calculation; current blueprint `proposition-local-structure-integral-constructible-complexes`,
+uniform-bound paragraph.
 (blueprint: lem-pe-module-perfect-dual-tensor-hom).
 
 Proof: in dual degree r, projection to the only possibly nonzero target degree

@@ -13,9 +13,12 @@ import WeilConjectures.CategoryTheory.DerivedCoupleMapExactness
 /-!
 # Bigraded exact couples and their spectral sequences
 
-Source: Stacks Project, Homological Algebra, Definitions 12.21.1 and 12.21.3,
-Lemma 12.21.2 and Remark 12.21.5 (Tags 011Q, 011S, 011R, 0AMJ), in the
-bigraded convention of the blueprint (blueprint: def-sp-exact-couple).
+We use the bigraded convention.
+
+## References
+
+* Stacks Project, Homological Algebra, Definitions 12.21.1 and 12.21.3,
+  Lemma 12.21.2 and Remark 12.21.5 (Tags 011Q, 011S, 011R, 0AMJ).
 -/
 
 @[expose] public section
@@ -27,8 +30,9 @@ open CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- A type-`s` exact couple. The image and kernel equalities compare subobjects
-of the same bidegree. Type zero is the initial couple of the blueprint.
-Source: Stacks Project, Tags 011Q and 0AMJ (blueprint: def-sp-exact-couple). -/
+of the same bidegree. Type zero is the initial couple.
+
+Stacks Project, Tags 011Q and 0AMJ. -/
 structure BigradedExactCouple (C : Type u) [Category.{v} C] [Abelian C] (s : ℕ) where
   D : ℤ → ℤ → C
   E : ℤ → ℤ → C
@@ -50,31 +54,36 @@ namespace BigradedExactCouple
 variable {C : Type u} [Category.{v} C] [Abelian C] {s : ℕ}
 
 /-- The differential has bidegree `(s+2,-s-1)`.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 def d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.E p q ⟶ X.E (p + 2 + s) (q - 1 - s) :=
   X.f p q ≫ X.g (p + 2) (q - 1)
 
 /-- The consecutive differentials compose to zero, since `f ≫ g ≫ f = 0`.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 theorem d_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.d p q ≫ X.d (p + 2 + s) (q - 1 - s) = 0 := by
   simp only [d, Category.assoc, ← Category.assoc (X.g (p + 2) (q - 1)),
     X.f_g_zero, zero_comp, comp_zero]
 
 /-- The image of `g` lies in the cycles, since `g ≫ f = 0`.
-Source: Stacks Project, Tag 0AMJ (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 0AMJ. -/
 theorem g_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.g p q ≫ X.d (p + s) (q - s) = 0 := by
   simp only [d, ← Category.assoc, X.f_g_zero, zero_comp]
 
 /-- The derived `D`-term is the image of the incoming `alpha`.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 noncomputable def derivedD (X : BigradedExactCouple C s) (p q : ℤ) : C :=
   image (X.alpha (p + 1) (q - 1))
 
 /-- The incoming differential transported to its prescribed target bidegree.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 def dInto (X : BigradedExactCouple C s) (p q : ℤ) :
     X.E (p - s - 2) (q + s + 1) ⟶ X.E p q :=
   X.d (p - s - 2) (q + s + 1) ≫ eqToHom (by
@@ -83,7 +92,8 @@ def dInto (X : BigradedExactCouple C s) (p q : ℤ) :
 /-- The incoming differential lands in the kernel of the outgoing one: after
 rewriting the indices, `dInto p q ≫ d p q` is `d ≫ d` at `(p - s - 2, q + s + 1)`,
 which vanishes by `d_comp_d`.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 theorem dInto_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
     X.dInto p q ≫ X.d p q = 0 := by
   have transport (a b p' q' : ℤ) (hp : a + 2 + s = p') (hq : b - 1 - s = q') :
@@ -95,31 +105,36 @@ theorem dInto_comp_d (X : BigradedExactCouple C s) (p q : ℤ) :
 
 /-- The derived `E`-term is cycles modulo boundaries, represented by the
 cokernel of the incoming differential lifted into the kernel of the outgoing one.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 noncomputable def derivedE (X : BigradedExactCouple C s) (p q : ℤ) : C :=
   cokernel (kernel.lift (X.d p q) (X.dInto p q) (X.dInto_comp_d p q))
 
 /-- Inclusion of a derived `D`-term into the original `D`-term.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 noncomputable def derivedDInclusion (X : BigradedExactCouple C s) (p q : ℤ) :
     X.derivedD p q ⟶ X.D p q :=
   image.ι (X.alpha (p + 1) (q - 1)) ≫ eqToHom (by congr 1 <;> omega)
 
 /-- Projection from cycles onto the derived `E`-term.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 noncomputable def derivedEProjection (X : BigradedExactCouple C s) (p q : ℤ) :
     kernel (X.d p q) ⟶ X.derivedE p q :=
   cokernel.π (kernel.lift (X.d p q) (X.dInto p q) (X.dInto_comp_d p q))
 
 /-- The map `g` factors through cycles.
-Source: Stacks Project, Tag 0AMJ (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 0AMJ. -/
 noncomputable def gToCycles (X : BigradedExactCouple C s) (p q : ℤ) :
     X.D p q ⟶ kernel (X.d (p + s) (q - s)) :=
   kernel.lift (X.d (p + s) (q - s)) (X.g p q) (X.g_comp_d p q)
 
 /-- The maps of the derived couple are the restrictions and induced maps
 described by Stacks. The three equalities state exactness at each term.
-Source: Stacks Project, Tags 011R and 0AMJ (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tags 011R and 0AMJ. -/
 structure DerivedMaps (X : BigradedExactCouple C s) where
   alpha : ∀ p q, X.derivedD p q ⟶ X.derivedD (p - 1) (q + 1)
   f : ∀ p q, X.derivedE p q ⟶ X.derivedD (p + 2) (q - 1)
@@ -150,12 +165,7 @@ type `s+1`. The restriction equations uniquely determine them: `alpha'`
 commutes with the image inclusions, `f'` agrees with `f` on cycles, and `g'`
 agrees with `g` after choosing a preimage under `alpha`.
 
-Indeed, `f(ker d)` lies in `ker g = im alpha`, and `f(im d) = 0` because
-`f ≫ g = 0`. Also `d(g(y)) = 0`, while changing a lift of an image element
-by `ker alpha = im f` changes its `g`-image by a `d`-boundary. These
-observations construct the three maps. The exactness of the derived triangle
-then follows by the element chases of Stacks Lemma 12.21.2.
-Source: Stacks Project, Tags 011R and 0AMJ (blueprint: def-sp-exact-couple). -/
+Stacks Project, Tags 011R and 0AMJ. -/
 theorem derivedMaps_exists (X : BigradedExactCouple C s) : Nonempty (DerivedMaps X) := by
   have hβ : ∀ p q, X.dInto p q ≫ X.f p q ≫ X.g (p + 2) (q - 1) = 0 :=
     X.dInto_comp_d
@@ -208,7 +218,8 @@ instance (X : BigradedExactCouple C s) (p q : ℤ) : Epi (X.derivedEProjection p
 /-- The induced maps of the derived couple are unique:`alpha'` is determined by the mono
 inclusion of the derived `D`-terms, `f'` by this inclusion and the epi projection from
 cycles, and `g'` by the epi `D → im alpha`.
-Source: Stacks Project, Tag 011R (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011R. -/
 instance (X : BigradedExactCouple C s) : Subsingleton (DerivedMaps X) where
   allEq M N := by
     have hα : M.alpha = N.alpha := by
@@ -233,7 +244,8 @@ instance (X : BigradedExactCouple C s) : Subsingleton (DerivedMaps X) where
 /-- The derived couple. Its data comes from the maps whose existence and
 exactness are stated in `derivedMaps_exists`; they are unique by the `Subsingleton`
 instance on `DerivedMaps`.
-Source: Stacks Project, Tags 011R and 0AMJ (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tags 011R and 0AMJ. -/
 noncomputable def derived (X : BigradedExactCouple C s) : BigradedExactCouple C (s + 1) :=
   let M := Classical.choice X.derivedMaps_exists
   { D := X.derivedD
@@ -249,19 +261,22 @@ noncomputable def derived (X : BigradedExactCouple C s) : BigradedExactCouple C 
     exact_g := M.exact_g }
 
 /-- The iterated exact couples, indexed so that the initial couple is page two.
-Source: Stacks Project, Tags 011S and 0AMJ (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tags 011S and 0AMJ. -/
 noncomputable def pageCouple (X : BigradedExactCouple C 0) :
     (n : ℕ) → BigradedExactCouple C n
   | 0 => X
   | n + 1 => (pageCouple X n).derived
 
 /-- The `E_r` term for `r ≥ 2`, with `E₂ = E`.
-Source: Stacks Project, Tag 011S (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tag 011S. -/
 noncomputable def page (X : BigradedExactCouple C 0) (r : ℕ) (p q : ℤ) : C :=
   (X.pageCouple (r - 2)).E p q
 
 /-- The differential on page `r` has bidegree `(r,1-r)` when `r ≥ 2`.
-Source: Stacks Project, Tags 011S and 0AMJ (blueprint: def-sp-exact-couple). -/
+
+Stacks Project, Tags 011S and 0AMJ. -/
 noncomputable def pageDifferential (X : BigradedExactCouple C 0) (r : ℕ)
     (p q : ℤ) : X.page r p q ⟶
       X.page r (p + 2 + ((r - 2 : ℕ) : ℤ)) (q - 1 - ((r - 2 : ℕ) : ℤ)) :=
