@@ -1,0 +1,65 @@
+CCMOA raw snapshot: Slow Derived Tensor
+
+Source baseline: bdab171985a
+Control source: 428569e1ce1
+Lean: 4.33.1
+
+S4/S5 MOE root:
+  result=true
+  first unequal path:
+  root/body/body/body/body/body/body/body/body/body/body/body/body/arg/fn/fn/fn/fn/fn
+  kind=structural-hash
+  left=684061942
+  right=3524748218
+  M0 head=CategoryTheory.MonoidalCategoryStruct.tensorObj
+  provider heads=inferInstance/inferInstance
+  provider sizes=1785/11973
+
+S4 hints:
+  baseline CategoryTheory.Functor.HasLeftDerivedFunctor2=abbrev
+  baseline CategoryTheory.Functor.IsLeftDerivedFunctor2=abbrev
+  control CategoryTheory.Functor.HasLeftDerivedFunctor2=regular reducible
+  control CategoryTheory.Functor.IsLeftDerivedFunctor2=regular reducible
+  CategoryTheory.MonoidalCategoryStruct.tensorObj=abbrev
+  CategoryTheory.DerivedMonoidal=regular:2
+  CategoryTheory.MonoidalCategory.ofBifunctor=regular:5
+  CategoryTheory.DerivedMonoidal.bifunctor=regular:8
+  CategoryTheory.Functor.leftDerived2=regular:7
+  DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory=regular:27
+  DerivedCategory.Qh=regular:15
+  DerivedCategory.Q=regular:15
+
+Round-two A0 (original abbrev):
+  tensor value check=2 ms
+  tensor forward/reverse=45744/51072 ms
+  tensor node=51749 ms
+  tensor arg 0/1/2=0/1/52157 ms
+  full consumer value check=1 ms
+  full consumer forward/reverse=119953/127832 ms
+  tensor sizes=2279/15735
+  provider sizes=1785/11973
+
+Round-two A2 (same bodies as reducible definitions):
+  tensor value check=1 ms
+  tensor forward/reverse=46358/51680 ms
+  tensor node=52491 ms
+  tensor arg 0/1/2=0/1/52885 ms
+  full consumer value check=1 ms
+  full consumer forward/reverse=2/2 ms
+  tensor sizes=2279/15735
+  provider sizes=1785/11973
+
+READY4.2 counter baseline (provider-variants log, root 613):
+  calls=6269622
+  comparison_exclusive_ms=23642.214
+  reduction_exclusive_ms=19981.705
+  whnf_calls=18804316
+  delta_calls=10639573
+  beta=9414298
+  projection=1409880
+  proof_attempts=2905225
+  proposition_compares=79290
+
+The A2 round-two output has timings but no separate counter dataset.
+The original and A2 tensor argument remained the same recorded Expr
+shape; only the declaration-kind boundary was changed.
