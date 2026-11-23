@@ -13,9 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 /-!
 # Tensoring a chain map with a module map
 
-
-
-The unsigned tensor bicomplex of two chain complexes `P` and `Q` of the node, with terms
+The unsigned tensor bicomplex of two chain complexes `P` and `Q`, with terms
 `Pᵢ ⊗ Qⱼ`, is Mathlib's
 `((Functor.mapBifunctorHomologicalComplex (curriedTensor _) _ _).obj P).obj Q`, and its action on
 pairs of chain maps is the `map` of that functor.

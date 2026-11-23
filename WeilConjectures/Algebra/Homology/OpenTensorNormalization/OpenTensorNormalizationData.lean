@@ -344,8 +344,8 @@ structure Input (m : Mode) where
   coefficient : R ⟶ ((baseChange m g).sheafPushforwardContinuous CommRingCat.{u + 1}
     (topology m X) (topology m X')).obj S
 
-/-- Convert precisely the inverse-image ring map in the node into its
-adjoint sectionwise form, without assuming the ring map invertible or flat. -/
+/-- Convert the inverse-image ring map `g^* R ⟶ S` into its adjoint sectionwise form
+`R ⟶ g_* S`, without assuming the ring map invertible or flat. -/
 def ordinaryInput {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -663,9 +663,9 @@ abbrev finiteInput (A : Type (u + 1)) [CommRing A]
   S := (constantSheaf (ProEt.topology X') CommRingCat.{u + 1}).obj (CommRingCat.of A)
   coefficient := proEtaleConstantDirectImageMap g CommRingCat.{u + 1} (CommRingCat.of A)
 
-/-- The published finite projection arrow in the direction of the node's gamma.
-This is its actual inverse projection map, with explicit endpoints to keep
-elaboration independent of the surrounding realization square. -/
+/-- The finite projection map `j_! M ⊗ N ⟶ j_! (M ⊗ j^* N)`, the inverse of the open-immersion
+projection isomorphism, with explicit endpoints to keep elaboration independent of the
+surrounding realization square. -/
 def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : FiniteD A U) (N : FiniteD A X) :

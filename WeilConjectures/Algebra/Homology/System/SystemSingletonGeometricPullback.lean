@@ -286,8 +286,8 @@ def systemSingletonLowerMap {n m : ℕ} (h : n ≤ m)
     ((systemSingleDerivedBelow BY h SY TY).inv.app P)
 
 /-- The geometric singleton comparison, together with all its specified normalizations.
-This is the full conclusion of the node, including the ordinary representatives and the
-canonical scalar comparison used in the lower-singleton square. It is not an unnormalized
+It includes the ordinary representatives and the canonical scalar comparison used in the
+lower-singleton square. It is not an unnormalized
 existence assertion about an arbitrary isomorphism. -/
 def SystemSingletonGeometricComparisons
     (F : SystemGeometricInverseImageData BY BX u I) : Prop :=
