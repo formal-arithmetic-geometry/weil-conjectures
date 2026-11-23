@@ -86,8 +86,7 @@ def SignedLinePullbackNormalized
           (scalarTensorPower R L (n + 1)) V x)) =
       a.hom.app (op V) (φ.app (op (Over.mk (𝟙 V))) x))
 
-/-- The actual scalar/pullback square, tested on its canonical local generators: the pulled
-image of `x ⊗ s` is `(pulled x ⊗ 1) ⊗ b(s)`. -/
+/-- The actual scalar/pullback square, tested on its canonical local generators. -/
 def SignedLineScalarPullbackSquare
     {R S : Sheaf J CommRingCat.{max u v w}}
     {R' S' : Sheaf K CommRingCat.{max u v w}} (ι : R ⟶ S) (ι' : R' ⟶ S')

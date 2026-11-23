@@ -40,7 +40,7 @@ variable (R : Type uR) (B : Type uB) [CommRing R] [CommRing B]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uB v} B)]
 
 /-- The universal total left derived extension of scalars exists, is triangulated, and its
-counit is invertible on a K-flat resolution of every complex. -/
+counit is invertible on a resolution of every complex. -/
 theorem exists_baseDerivedExtension_resolution
     [(extendScalars.{_, _, max uR uB v} (algebraMap R B)).Additive] :
     ∃ (L : DerivedCategory (ModuleCat.{max uR uB v} R) ⥤

@@ -57,8 +57,8 @@ namespace SheafOfModules
 
 /-- The ordinary pullback object, expressed in any algebraic inverse-image presentation.
 For a geometric inverse image `L`, `I` transports ring and module operations, and
-`c : RI ⟶ A` is the structural ring map in this
-presentation: the sheafification of the presheaf `U ↦ A(U) ⊗[RI(U)] I(M)(U)`. -/
+`c : RI ⟶ A` is the structural ring map in this presentation. The result is the
+sheafification of the presheaf `U ↦ A(U) ⊗[RI(U)] I(M)(U)`. -/
 noncomputable def ordinaryRingedToposPullback
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
