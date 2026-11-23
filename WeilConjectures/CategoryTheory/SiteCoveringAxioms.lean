@@ -11,8 +11,10 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 /-!
 # Site axioms for actual covering presieves
 
-Source: Stacks Project, Sites, Definition 00VH, including the clarification after
-axiom (3) (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Sites, Definition 00VH, including the clarification after
+  axiom (3).
 -/
 
 @[expose] public section
@@ -23,17 +25,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Precoverage
 
-/-- Source: Stacks Project, Sites, Definition 00VH
-(auxiliary; not a blueprint node).
+/-- The precoverage `J` satisfies the axioms of a site (isomorphisms cover, covering presieves
+compose via `Presieve.bind`, and covering arrows admit covering pullbacks for some choice of
+fibre products). Finite covering presieves are allowed.
 
-The site component of the dependency, with composition as `Presieve.bind`, as in
-`Pretopology.transitive`, and existence of covering pullbacks only. Pullbacks are
-required for some choice of fibre products, exactly as in the clarification after
-00VH(3); no global pullback instance or closure under all choices is imposed.
-The composition clause chooses one further covering per distinct covering arrow,
-not independently for arbitrarily many repeated presentations of the same arrow.
-Thus finite covering presieves are allowed. Sheaves and cohomology retain the
-existing `Sheaf J.toGrothendieck` and `Sheaf.H'` definitions. -/
+Stacks Project, Sites, Definition 00VH. -/
 def IsSiteForCoverings {C : Type u} [Category.{v} C] (J : Precoverage C) : Prop :=
   J.HasIsos ∧
   (∀ (X : C) (R : Presieve X)

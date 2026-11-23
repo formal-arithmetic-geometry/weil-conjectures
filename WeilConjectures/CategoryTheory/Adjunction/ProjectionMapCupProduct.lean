@@ -43,7 +43,7 @@ results apply to the six operations on derived categories of étale sheaves.
 - `CategoryTheory.Adjunction.cupProductOfProjection`: the cup product `P K ⊗ G M ⟶ P (K ⊗ M)`
   attached to a projection map of `P`; applied to `compProjectionMap` it is the mixed cup product.
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Adjunction.compProjectionMap_associativity`,
   `CategoryTheory.Adjunction.compProjectionMap_rightUnitality`,

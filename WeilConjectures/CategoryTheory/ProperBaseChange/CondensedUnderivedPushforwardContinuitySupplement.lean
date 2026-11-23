@@ -22,9 +22,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace CategoryTheory.Functor
 
 /-- Degree zero of the derived functor on single complexes is the original left exact
-functor, naturally in the module.
-Source: the injective-resolution computation of the zeroth right derived functor.
-(blueprint: lem-weil-pbc-condensed-underived-pushforward-continuity) -/
+functor, naturally in the module. -/
 noncomputable def singleComplexRightDerivedZeroIso
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]

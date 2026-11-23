@@ -10,10 +10,8 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 
 /-! # Common-stage cone triangles
 
-Source: blueprint `sec-proper-base-change/sk-thm-properbasechange`, common-stage cones
-(blueprint: def-weil-pbc-common-stage-cones).
-The construction is stated for the directed exact stage system supplied by that node.
-Its application has finite coefficient fields as indices and the raw rational stages.
+The construction is stated for a directed exact stage system. Its application has finite
+coefficient fields as indices and the raw rational stages.
 -/
 
 @[expose] public section
@@ -33,8 +31,7 @@ variable [∀ i, Preadditive (C i)] [∀ i, Limits.HasZeroObject (C i)]
 
 /-- The distinguished triangles are precisely the isomorphic images of distinguished
 finite-stage triangles. This is equivalently the common-stage cone criterion, since
-isoToStage identifies the first two pairs with their common-stage representatives.
-Source: blueprint common-stage cones (blueprint: def-weil-pbc-common-stage-cones). -/
+isoToStage identifies the first two pairs with their common-stage representatives. -/
 def CommonStageDistinguished (T : Triangle S.PairCategory) : Prop :=
   ∃ (i : I) (U : Triangle (C i)),
     U ∈ distTriang (C i) ∧ Nonempty (T ≅ (S.ι i).mapTriangle.obj U)

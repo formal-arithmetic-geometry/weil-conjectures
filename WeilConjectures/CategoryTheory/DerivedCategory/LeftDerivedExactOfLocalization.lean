@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.LeftDerivedExactWhenDefined
 /-! # Exactness on a chosen derived category
 
 Source: Stacks Project, Tag 05SE and the localization universal property.
-(blueprint: lem-pur-left-derived-exact-chosen-localization).
 -/
 
 @[expose] public section
@@ -26,20 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
 /-- Exactness of an everywhere-defined left derived functor on the chosen derived category.
-Source: Stacks Project, Tag 05SE, left derived part.
-(blueprint: lem-pur-left-derived-exact-chosen-localization).
-
-Proof: Let E be the equivalence from the strict constructed localization of the homotopy
-category at quasi-isomorphisms to the chosen derived category. Descend the shift structure
-of Qh along the constructed localization to E. The shift-compatible factorization and
-representation of distinguished triangles make E exact. Precompose the supplied right Kan
-extension LF with E: invariance of right Kan extensions under this equivalence makes E⋙LF
-universal along the strict constructed localization. Apply `leftDerived_exact_when_defined`
-there, using the supplied essential constancy at every object. Finally, E is itself a
-localization at all isomorphisms. Descend the shift structure of E⋙LF along E to LF; the
-comparison is shift-compatible. Representation of distinguished triangles along the exact
-equivalence E then descends preservation of distinguished triangles from E⋙LF to LF.
-Strict factorization is needed only for the constructed localization, not for Qh. -/
+Source: Stacks Project, Tag 05SE, left derived part. -/
 theorem leftDerived_exact_of_localization
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (D' : Type u') [Category.{v'} D'] [Preadditive D'] [HasZeroObject D']

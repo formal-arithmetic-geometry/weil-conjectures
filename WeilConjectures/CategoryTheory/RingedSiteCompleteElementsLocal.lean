@@ -11,7 +11,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-! # Restriction of complete local sections
 
 Source: Stacks Project, Tags 0997 and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -230,21 +229,7 @@ private theorem completeElementHom_comparison
 /-- The vanishing-localization criterion is preserved by restrictions and descends
 through every covering sieve.
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998;
-sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node).
-
-Proof: Exact slice restriction preserves the defining sequential colimit: its
-unit module and multiplication maps restrict to the unit and restricted section.
-The derived internal-Hom restriction comparison, the comparison with degree-zero
-objects, and composition of derived restriction identify restricted RHom with the
-RHom for the restricted section. Additive restriction preserves a zero object.
-Conversely, the comparison makes RHom vanish after each arrow of a covering
-sieve. Restriction commutes with cohomology. A section of each cohomology sheaf
-over W vanishes after every arrow of the pulled-back covering sieve, since the
-corresponding restricted sheaf is zero. The sheaf uniqueness axiom makes this
-section zero. All cohomology sheaves thus vanish, so the derived object is zero.
-This includes identity arrows, the zero ring, and empty covering sieves. -/
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998; sites-cohomology.tex, Tag 08JB. -/
 theorem ringedSite_completeElements_locality
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

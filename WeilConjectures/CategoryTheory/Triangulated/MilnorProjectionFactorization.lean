@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 # Surjectivity of the cohomology projection of a derived inverse limit
 
 Source: Stacks Project, Derived Categories, Tag 07KC; More on Algebra, Tag 07KY.
-(blueprint: lem-pc-milnor-projection-factorization).
 -/
 
 @[expose] public section
@@ -30,19 +29,7 @@ noncomputable section
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A map with the cohomology projection equations of a Roos triangle is epi.
-Source: Stacks Project, Derived Categories, Tag 07KC; More on Algebra, Tag 07KY.
-(blueprint: lem-pc-milnor-projection-factorization).
-
-Proof: Tag 07KC makes the product comparison in degree i an isomorphism.
-Given an element y of the inverse limit, take its tuple of limit projections
-and pull it back along this comparison to x in H^i of the product. The limit
-cone equations and the formula for the transition endomorphism show that
-H^i(1-s)(x) is zero, by joint injectivity of the cohomology projections.
-Exactness of the long cohomology sequence at H^i of the product gives an
-antecedent z in H^i(L) under H^i(p). The stipulated projection equations of b
-show that b(z) and y have identical limit coordinates. Thus b is surjective,
-hence epi in abelian groups. No boundedness or surjective-transition hypothesis
-is used. This argument also applies when any of the objects are zero. -/
+Source: Stacks Project, Derived Categories, Tag 07KC; More on Algebra, Tag 07KY. -/
 theorem milnor_projection_epi [HasDerivedCategory.{v} AddCommGrpCat.{u}]
     (i : ℤ) (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})
     [HasProduct (fun n : ℕ => K.obj (Opposite.op n))]

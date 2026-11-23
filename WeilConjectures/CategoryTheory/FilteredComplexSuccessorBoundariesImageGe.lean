@@ -16,7 +16,6 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- Reverse containment in the successor-boundaries image calculation.
 Source: Stacks Project, Homology, Tag 012K.
-(blueprint: new-filtered-complex-successor-boundaries-image-ge).
 The representative chase lifts each successor boundary to an incoming page
 boundary, modulo the existing boundary ambiguity. -/
 theorem filteredComplex_successor_boundaries_image_ge

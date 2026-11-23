@@ -22,8 +22,7 @@ cf.Z --q--> cfg.Z --q'--> cfgh.Z
                 S ----ch.i---> ch.Z
 ```
 with all squares cartesian. It is the configuration on which the associativity of the composition
-isomorphism of `Rf_!` is a pasting identity (blueprint
-`proposition-composition-base-change-rf-shriek--1`).
+isomorphism of `Rf_!` is a pasting identity.
 
 ## Main definitions
 

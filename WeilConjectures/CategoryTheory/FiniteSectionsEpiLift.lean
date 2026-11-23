@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 /-! # Simultaneous local lifting of finitely many module sections
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), lifting the chosen generators.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,14 +29,7 @@ namespace SheafOfModules
 
 /-- Finitely many sections lift through a module-sheaf epimorphism on a common covering
 sieve, including the case of no sections.
-Source: Stacks Project, Modules on Sites, Tag 093U (3), extension paragraph.
-(auxiliary; not a blueprint node).
-
-Proof: Forgetting to abelian sheaves preserves epimorphisms because it preserves
-cokernels. An epimorphism of abelian sheaves is locally surjective, so the image sieve
-of every chosen section is covering. Their finite intersection is covering, and on
-each member every section has a lift. For an empty family the intersection is the
-maximal sieve and the lifting assertion is vacuous. -/
+Source: Stacks Project, Modules on Sites, Tag 093U (3), extension paragraph. -/
 theorem exists_cover_lift_finite_sections {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
     {F G : SheafOfModules.{u} R} (p : F ⟶ G) [Epi p] (U : C)

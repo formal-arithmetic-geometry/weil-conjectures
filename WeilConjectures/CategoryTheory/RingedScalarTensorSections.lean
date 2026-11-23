@@ -11,7 +11,6 @@ import all WeilConjectures.Algebra.Homology.RingedTensorComplexConstraints
 /-! # Pure sections of the scalar tensor comparison
 
 Source: Stacks Project, section-tensor-product (03EK).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ attribute [local implicit_reducible] SheafOfModules.unit SheafOfModules.restrict
   PresheafOfModules.toPresheaf
 
 /-- The constructed ordinary module comparison sends x tensor s to s tensor x.
-Source: Stacks Project, section-tensor-product (03EK).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, section-tensor-product (03EK). -/
 theorem scalarTensorModuleIso_pure (f : R ⟶ S) (M : Mod R)
     (V : Cᵒᵖ) (x : M.val.obj V) (s : S.obj.obj V) :
     (scalarTensorModuleIso f M).hom.val.app V
@@ -70,8 +68,7 @@ theorem scalarTensorModuleIso_pure (f : R ⟶ S) (M : Mod R)
       (one_smul _ _)
 
 /-- The ordinary right unitor inverse inserts the section one.
-Source: Stacks Project, section-tensor-product (03EK).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, section-tensor-product (03EK). -/
 theorem scalarTensorRightUnit_pure (M : Mod R) (V : Cᵒᵖ) (x : M.val.obj V) :
     (ρ_ M).inv.val.app V x =
       moduleTmul (R := R) M (SheafOfModules.unit (siteModuleRings R)) V x

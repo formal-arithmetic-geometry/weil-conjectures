@@ -32,13 +32,7 @@ variable {C : Type u} [Category.{v} C] [HasFiniteProducts C]
   {A : Type u'} [Category.{v'} A] [Abelian A] [HasProducts.{w} A] {ι : Type w}
 
 /-- If some member of the family `U` receives a morphism from the terminal object, then the
-Čech complex of any presheaf with respect to `U` is exact in positive degrees.
-
-Proof: the augmented Čech object has an extra degeneracy
-(`FormalCoproduct.extraDegeneracyCech`). Evaluating the presheaf turns it into an augmented
-simplicial object of `Aᵒᵖ` with an extra degeneracy, whose alternating face map complex is
-homotopy equivalent to a complex concentrated in degree zero. Its unopposite is the Čech
-complex. -/
+Čech complex of any presheaf with respect to `U` is exact in positive degrees. -/
 theorem cechComplexFunctor_exactAt_succ_of_hom (U : ι → C) {T : C} (hT : IsTerminal T)
     {i₀ : ι} (s : T ⟶ U i₀) (P : Cᵒᵖ ⥤ A) (q : ℕ) :
     ((cechComplexFunctor U).obj P).ExactAt (q + 1) := by

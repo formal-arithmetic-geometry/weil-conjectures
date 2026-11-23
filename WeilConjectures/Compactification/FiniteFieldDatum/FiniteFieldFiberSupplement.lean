@@ -17,10 +17,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteFieldFiber
 /-!
 # Global finite-field datum and geometric base change
 
-Source: Weil conjectures blueprint, `chap-Nagata-compactification-and-Chows-lemma`,
-`sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md`, order 411
-(blueprint: def-weil-finite-field-fiber).
-
 The global datum permits any field with the specified cardinality and any fixed algebraic
 closure. Its inclusion is `algebraMap D.k₀ D.k`. Closed points and residue fields use the
 existing `closedPoints S` and `S.residueField s`, without new definitions.
@@ -52,9 +48,7 @@ attribute [instance] FiniteFieldDatum.field_base FiniteFieldDatum.finite_base
 namespace FiniteFieldDatum
 
 /-- `F_{q^n}` is the unique subfield supplied by the dependency theorem. Its uniqueness
-fixes the data up to equality of subfields, even before that theorem is proved.
-Source: blueprint order 411, `def-weil-finite-field-fiber.md`
-(blueprint: def-weil-finite-field-fiber). -/
+fixes the data up to equality of subfields, even before that theorem is proved. -/
 noncomputable def extensionSubfield (D : FiniteFieldDatum.{u}) (n : ℕ) (hn : 1 ≤ n) :
     Subfield D.k :=
   (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
@@ -62,26 +56,20 @@ noncomputable def extensionSubfield (D : FiniteFieldDatum.{u}) (n : ℕ) (hn : 1
 
 /-- The inclusion `k₀ → F_{q^n}` is the corestriction of the structure homomorphism.
 The dependency specifies its composite with the injective subfield inclusion, so this
-homomorphism is uniquely determined.
-Source: blueprint order 411, `def-weil-finite-field-fiber.md`
-(blueprint: def-weil-finite-field-fiber). -/
+homomorphism is uniquely determined. -/
 noncomputable def extensionEmbedding (D : FiniteFieldDatum.{u}) (n : ℕ) (hn : 1 ≤ n) :
     D.k₀ →+* D.extensionSubfield n hn :=
   (FiniteField.exists_unique_subfield_of_closure D.p D.a D.q D.prime D.exponent_pos
     D.cardinality_eq D.k₀ D.card_base D.k n hn).choose_spec.2.2.2.2.2.2.choose
 
 /-- `Y₀ ×_{k₀} k`, bundled with its second projection `a_Y` to `Spec k`.
-The finite-type condition means locally of finite type and quasi-compact.
-Source: blueprint order 411, `def-weil-finite-field-fiber.md`
-(blueprint: def-weil-finite-field-fiber). -/
+The finite-type condition means locally of finite type and quasi-compact. -/
 noncomputable def geometricFiber (D : FiniteFieldDatum.{u})
     (Y₀ : Over (Spec (CommRingCat.of D.k₀)))
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] : Over (Spec (CommRingCat.of D.k)) :=
   (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).obj Y₀
 
-/-- The `F_{q^n}`-valued points are precisely morphisms over `Spec k₀`.
-Source: blueprint order 411, `def-weil-finite-field-fiber.md`
-(blueprint: def-weil-finite-field-fiber). -/
+/-- The `F_{q^n}`-valued points are precisely morphisms over `Spec k₀`. -/
 noncomputable def extensionPoints (D : FiniteFieldDatum.{u})
     (Y₀ : Over (Spec (CommRingCat.of D.k₀)))
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (n : ℕ) (hn : 1 ≤ n) : Type u :=
@@ -89,9 +77,7 @@ noncomputable def extensionPoints (D : FiniteFieldDatum.{u})
 
 /-- A single choice of coefficient prime `l ≠ p` and algebraic closure of `ℚ_[l]`.
 The base coefficient field and its valuation ring are the existing `Padic l` and
-`PadicInt l`. Finite extensions use the existing coefficient-extension constructions.
-Source: blueprint order 411, `def-weil-finite-field-fiber.md`
-(blueprint: def-weil-finite-field-fiber). -/
+`PadicInt l`. Finite extensions use the existing coefficient-extension constructions. -/
 structure CoefficientDatum (D : FiniteFieldDatum.{u}) where
   l : ℕ
   [prime : Fact l.Prime]

@@ -28,21 +28,8 @@ open Limits
 
 /-- An additive equivalence compatible with shifts preserves compact generation.
 Source: Stacks Project, Derived Categories, Definition 13.37.1 (Tag 09SM),
-Definition 13.36.3 (Tag 09SJ) and Definition 13.37.5 (Tag 09SQ)
-(blueprint: lem-pc-compact-generation-equivalence).
-
-Proof: Choose the original compact generating family and map it by e.functor.
-For a family in D, use e.inverse to pull it back to C. The additive Hom equivalences
-and the canonical isomorphism identifying a preserved coproduct identify the canonical
-map from the direct sum of Hom groups with the original one. This proves compactness
-of each image generator. The coproduct of the images is isomorphic to the image of
-the original coproduct. Given a nonzero K in D, its inverse image is nonzero, since an
-equivalence preserves and reflects zero objects. The original generator therefore
-has a nonzero map to a shift of that inverse image. Apply e.functor, then compose
-with its shift comparison and counit to obtain a nonzero map to the corresponding
-shift of K. Faithfulness and the invertibility of the comparison maps preserve
-nonvanishing. This proves the generator condition, including an empty indexing type:
-the argument uses only the generator assumption and never chooses an index. -/
+Definition 13.36.3 (Tag 09SJ) and Definition 13.37.5 (Tag 09SQ).
+-/
 theorem compactGenerationEquivalence
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]

@@ -47,8 +47,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-!
 # Representative-normalized coefficient counit diagrams
 
-Source: Stacks, Tags 03D7, 07A6 and 0D6E
-(blueprint: def-pur-ringed-coefficient-counit-presentations).
+Source: Stacks, Tags 03D7, 07A6 and 0D6E.
 Ordinary maps are fixed on sections; derived maps are fixed by localization and
 K-flat/K-injective representative equations. No counit identity is a field.
 -/
@@ -66,21 +65,18 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ChangeOfRings
 namespace CategoryTheory.RingedCoefficientCounit
 
-/-- Constant coefficient ring. Source: Stacks 03D7
-(blueprint: def-pur-ringed-coefficient-counit-presentations). -/
+/-- Constant coefficient ring. Source: Stacks 03D7. -/
 abbrev constantRing {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasWeakSheafify J CommRingCat.{r}] (A : CommRingCat.{r}) :=
   (constantSheaf J CommRingCat.{r}).obj A
 
-/-- The recorded category of module sheaves. Source: Stacks 03D7
-(blueprint: def-pur-ringed-coefficient-counit-presentations). -/
+/-- The recorded category of module sheaves. Source: Stacks 03D7. -/
 abbrev modules {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{r})
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] :=
   ringedSiteModules.{r, r, v, u} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
-/-- Forget to the sheaf of sets. Source: Stacks 03D7
-(blueprint: def-pur-ringed-coefficient-counit-presentations). -/
+/-- Forget to the sheaf of sets. Source: Stacks 03D7. -/
 abbrev underlying {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{r})
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -88,23 +84,20 @@ abbrev underlying {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   SheafOfModules.toSheaf.{r} ((sheafCompose J
     (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⋙ sheafCompose J (forget AddCommGrpCat.{r})
 
-/-- Ordinary restriction of scalars. Source: Stacks 03D7
-(blueprint: def-pur-ringed-coefficient-counit-presentations). -/
+/-- Ordinary restriction of scalars. Source: Stacks 03D7. -/
 abbrev restriction {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     {R S : Sheaf J CommRingCat.{r}}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] (a : R ⟶ S) :
     modules S ⥤ modules R :=
   SheafOfModules.restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map a)
 
-/-- Termwise complex functor. Source: Stacks 07A6
-(blueprint: def-pur-ringed-coefficient-counit-presentations). -/
+/-- Termwise complex functor. Source: Stacks 07A6. -/
 abbrev onComplex {B : Type u₁} [Category.{v₁} B] [Preadditive B]
     {E : Type u₂} [Category.{v₂} E] [Preadditive E] (F : B ⥤ E) [F.Additive] :=
   F.mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- A canonical derived adjunction, including the representative Hom formula.
-Source: Stacks 07A6 and 0FND
-(blueprint: def-pur-ringed-coefficient-counit-presentations).
+Source: Stacks 07A6 and 0FND.
 The equation fixes the adjunction itself, rather than only its two adjoint functors. -/
 structure DerivedAdjunction
     {B : Type u₁} [Category.{v₁} B] [Abelian B] [HasDerivedCategory.{w} B]
@@ -144,7 +137,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {IR : SheafOfModules.AlgebraicInverseImage inverse RY RI} {c : RI ⟶ RX}
 
 /-- Tensor pullback, induced direct images and the scalar-unit comparison.
-Source: Stacks 03D7 (blueprint: def-pur-ringed-coefficient-counit-presentations).
+Source: Stacks 03D7.
 Object and morphism equations fix tensor pullback without assuming it exact.
 The two Hom equations fix both adjunctions relative to the geometric adjunction.
 The scalar-unit formula is the sheafified map `x ↦ 1 ⊗ x`. -/
@@ -206,8 +199,7 @@ attribute [instance] OrdinaryPresentation.pullAdditive
   OrdinaryPresentation.pushRAdditive OrdinaryPresentation.pushAAdditive
 
 /-- Exactness supplied by the construction, not an extra flatness hypothesis.
-Source: Stacks 03D7 and 07A6
-(blueprint: def-pur-ringed-coefficient-counit-presentations). -/
+Source: Stacks 03D7 and 07A6. -/
 structure CoefficientExactness
     (aX : constantRing JX A ⟶ RX) (aY : constantRing JY A ⟶ RY) where
   xLimits : PreservesFiniteLimits (restriction aX)
@@ -216,8 +208,7 @@ structure CoefficientExactness
   yColimits : PreservesFiniteColimits (restriction aY)
 
 /-- The canonical derived maps with actual representative normalization equations.
-Source: Stacks 03D7, 07A6, 0FND and 0D6E
-(blueprint: def-pur-ringed-coefficient-counit-presentations).
+Source: Stacks 03D7, 07A6, 0FND and 0D6E.
 The counit square and coefficient naturality are conclusions of the item theorem;
 they are deliberately absent from this definition. -/
 structure DerivedPresentation

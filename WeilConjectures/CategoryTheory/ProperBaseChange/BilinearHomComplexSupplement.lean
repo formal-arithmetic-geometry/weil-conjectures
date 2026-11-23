@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Linear.Basic
 import Mathlib.Algebra.Module.Basic
 public import WeilConjectures.Algebra.Homology.BilinearHomComplex
 /-! # Product Hom complexes for a separately additive coefficient bifunctor
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
-(blueprint: lem-weil-pbc-bilinear-hom-complex).
+Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I.
 -/
 
 -- After pruning, this module only keeps private declarations.

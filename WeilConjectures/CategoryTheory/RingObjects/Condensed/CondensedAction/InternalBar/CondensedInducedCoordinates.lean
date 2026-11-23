@@ -87,9 +87,6 @@ import Mathlib.CategoryTheory.Sites.LocalSite
 import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Induced coordinates for diagonal free modules
-
-Source: blueprint direct-image stability, paragraph (3), internal bar input,
-step 4 (blueprint: lem-sfb-condensed-induced-coordinates).
 -/
 
 @[expose] public noncomputable section

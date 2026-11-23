@@ -29,27 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the general-object section construction,
-finite-cover sheaf equalizers and adjunction paragraphs; abelian extension by
-Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-representatives).
-
-Proof: Construct the additive subpresheaf B of the canonical inverse image H
-whose sections are finite sums of restrictions of stage images. Restrictions
-preserve its explicitly defined subgroups. The finite-cover descent lemma says
-B is a sheaf. Factor the adjunction unit G to V i restriction of H through B:
-for each source section, the h-alpha equation at the identity presentation
-expresses its unit image as a generator, transported by cocone naturality.
-This gives a sheaf map G to V i restriction of B. Transpose it to b : H to B.
-The composite of b with the inclusion B to H has the same adjunct as the
-identity of H, hence equals the identity. Thus every section of H belongs
-to B. At V i U the finite-expression refinement lemma turns this subgroup
-membership into one stage representative. That lemma uses only the object
-and arrow colimit hypotheses and filteredness, not finite-cover descent.
-All transports are explicit, and the conclusion retains the original HEq.
-For empty covers the sheaf condition enforces the zero group. If a source
-stage is empty there is no U; zero has the zero stage representative.
--/
+/-- Sections of the abelian colimit-site sheaf are represented by sections at a finite stage.
+Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_section_representatives
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 # Functorial split envelope of an inverse system
 
 Source: literature/stacks-project/derived.tex, the explicit replacement step
-for Lemma Tag 070M (blueprint: lem-weil-tower-split-envelope).
+for Lemma Tag 070M.
 -/
 
 @[expose] public section
@@ -142,31 +142,7 @@ The isomorphisms `e` identify each envelope term with the specified finite produ
 the three component equations specify its transition projections, its action on
 morphisms, and the embedding by composites of the original transition maps.
 
-Source: literature/stacks-project/derived.tex, explicit replacement step for
-Lemma Tag 070M (lemma-difficulty-K-injectives).
-
-Proof:
-1. By `def-sp-abelian`, finite products are biproducts. Use their projections and
-   injections and the composite transition maps of `def-weil-inverse-system`.
-2. Define the action on morphisms componentwise. Comparing projections proves
-   compatibility with transitions, preservation of identities and composition,
-   and additivity by bilinearity (`def-weil-preadditive-category`).
-3. The envelope transitions forget the last factor; inclusion with zero last
-   component is a section (`def-weil-additive-category`).
-4. The identities f(m+1,k) = f(m+1,m) followed by f(m,k) show that j is a tower
-   morphism. Naturality of the original tower morphisms gives naturality of j.
-   The last projection retracts each component of j, proving it monic.
-   By `lem-weil-tower-category-levelwise-abelian`, cokernels are computed levelwise.
-5. The automorphism subtracting f(m,k) times the last component from each earlier
-   component carries j to the last summand injection. Its inverse adds these
-   terms. Thus projection to the earlier factors after this automorphism is a
-   cokernel, identifying C(m) with the product of the factors before m (zero at 1).
-6. The induced cokernel transition is the map with components pr(k)-f(m,k)pr(m):
-   this follows by expanding its composite with the preceding cokernel projection
-   and cancelling using f(m+1,k)=f(m,k)f(m+1,m). Inclusion with last component
-   zero is its section. Uniqueness of cokernels transports these sections to the
-   chosen cokernel tower, proving it split.
-(blueprint: lem-weil-tower-split-envelope) -/
+Source: Stacks Project, Tag 070M. -/
 theorem tower_split_envelope
     {C : Type u} [Category.{v} C] [Abelian C] :
     ∃ (E : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ C)) (j : 𝟭 (ℕᵒᵖ ⥤ C) ⟶ E)

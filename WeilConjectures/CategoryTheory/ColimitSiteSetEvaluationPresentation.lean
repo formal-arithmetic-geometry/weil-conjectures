@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 /-! # General-object section functor presentation
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-evaluation-presentation).
 -/
 
 @[expose] public section
@@ -108,30 +107,9 @@ private theorem exists_unit_transition_nat
   rw [A.homEquiv_unit] at he
   exact congrArg (fun k ↦ Arrow.mk (k.hom.app (op Z))) he
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-section formula, adjunction paragraph, and final left-exactness paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-evaluation-presentation).
-
-Proof: At t : Under i evaluate the stage inverse image along F(t.hom) at
-F(t.hom)(U). Transpose the unit at t' through the adjunction at t to obtain
-the refinement map; Under.w identifies the composite restriction functor.
-Injectivity of the hom equivalence proves identities and composition, and its
-naturality proves functoriality in the source sheaf. This constructs L. Each
-L followed by evaluation is a stage inverse image followed by sheaf sections,
-hence preserves finite limits. Objectwise detection gives preservation by L.
-Use the unit-transposed maps to the inverse image along V i as its colimit
-cocone. The specified-transition section formula identifies this cocone as a
-colimit for every sheaf G. Explicitly compare its diagram with the diagram D
-in that formula using the objectwise section isomorphisms; the transition
-equation proves naturality of the comparison. Transport the colimit structure
-along this diagram isomorphism and the section isomorphism of cocone points.
-The universal property gives the map from L followed by colim to evaluation
-of V i inverse image. Coprojection equations and naturality of the unit
-transposes prove this map natural in G. Its components are isomorphisms
-because the cocones are colimits, hence it is a natural isomorphism.
-The under category is filtered because J is filtered. Empty source stages
-have no U, while empty covers are included in the existing section formula.
--/
+/-- Evaluation of the inverse image to the colimit site at the image of an object of stage `i`
+is a filtered colimit of finite-limit-preserving functors out of the stage sheaves.
+Stacks Project, Sites, Tag 0A35. -/
 private theorem source_evaluation_presentation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))
@@ -254,25 +232,9 @@ private theorem source_evaluation_presentation
   exact ⟨L, ⟨hlim⟩, ⟨(asIso τ).symm⟩⟩
 
 
-/-- Source: Stacks Project, Sites, Tag 0A35, general-object section construction and
-final left-exactness paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-evaluation-presentation).
-
-Proof: Represent Y by an object X of some stage j, using joint surjectivity
-of the object colimit. Choose a common stage k receiving i and j, and transport
-X to U in F(k). Cocone naturality identifies V(k)(U) with Y. The helper
-source_evaluation_presentation constructs the section diagram over Under k,
-proves its finite-limit preservation objectwise and proves its natural colimit
-formula from the specified-transition section-presentation theorem. Compose
-this diagram with inverse image from stage i to k. This preserves finite limits
-by the transition hypothesis. Composition of the inverse-image adjunctions and
-uniqueness of left adjoints identify V(i) inverse image with the composite
-through k. Whisker this isomorphism by sections at Y and compose it with the
-source-stage formula to obtain the required natural isomorphism. Under k is
-small and filtered. An empty limit category has no Y. An empty source stage
-causes no extra case: the transition hypothesis supplies finite-limit
-preservation, including terminal objects, for the composite used here.
--/
+/-- Evaluation of the inverse image to the colimit site at any object `Y` is a filtered colimit
+of finite-limit-preserving functors out of the stage sheaves.
+Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_set_evaluation_presentation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

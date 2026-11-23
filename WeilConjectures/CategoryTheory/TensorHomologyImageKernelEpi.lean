@@ -21,8 +21,7 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 /-!
 # Tensor homology maps onto the kernel of the image inclusion
 
-Source: Stacks Project, Tag 0653, the Tor argument in `lemma-last-one-flat`.
-(blueprint: lem-pc-module-tensor-homology-image-kernel-epi).
+Source: Stacks Project, Tag 0653, the Tor argument in.
 -/
 
 @[expose] public section
@@ -50,24 +49,7 @@ private theorem tensorSingleIso_inv_naturality
 -- Comparing total tensor complexes with termwise tensoring requires extra type reductions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensor homology surjects naturally onto the kernel of the tensor image inclusion.
-Source: Stacks Project, Tag 0653, the Tor argument in `lemma-last-one-flat`.
-(blueprint: lem-pc-module-tensor-homology-image-kernel-epi)
-
-Proof: Factor d = P.d (a-1) a as the epimorphism pi onto K = im(d), followed by
-its monic inclusion iota. Tensor pi with N; right exactness preserves its
-surjectivity. The total tensor complex with N in degree zero is naturally
-isomorphic to the complex obtained by tensoring every term and differential
-of P with N. Its cycles in degree a-1 map under pi tensor N into the kernel
-of iota tensor N, since d = pi followed by iota. The preceding differential
-is killed by pi: cancel the monic iota in d_previous followed by pi followed
-by iota = 0. Thus the map on cycles kills boundaries and descends to homology.
-To prove surjectivity, lift any element y of the tensor kernel along pi tensor N
-to x. Its outgoing differential equals (iota tensor N)(y) = 0, so x is a cycle
-and its homology class maps to y. Tensor bifunctoriality makes this construction
-commute with each map N -> N'; cancel the epimorphism from cycles to homology
-and the monic kernel inclusion to verify naturality. Evaluation preserves
-kernels, so these components define a map into the functor-category kernel.
-This argument needs no flatness of P. -/
+Source: Stacks Project, Tag 0653. -/
 theorem exists_epi_tensor_homology_to_image_kernel
     (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ) (a : ℤ) :
     ∃ σ : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0 ⋙

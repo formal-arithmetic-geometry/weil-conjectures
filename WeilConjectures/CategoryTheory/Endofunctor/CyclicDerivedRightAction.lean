@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 
 /-! # Right-derived transport of cyclic presentations
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070K, 070Y and 0152;
-the right-derived companion proof plan in CyclicDerivedHomExactSequence.
+## References
+
+* Stacks Project, Derived Categories, Tags 070I, 070K, 070Y and 0152.
 -/
 
 @[expose] public noncomputable section
@@ -353,22 +354,7 @@ private theorem right_action_structure
 include hσ in
 /-- Right-derived transport with a unit-compatible shift commutes with cyclic conjugation.
 
-Proof: construct beta : RL ⋙ D(G) ≅ D(F) ⋙ RL by uniqueness of right derivation.
-The two comparison units are invertible on K-injectives, since the exact
-source autoequivalence preserves K-injectives. Their shift equations imply that
-beta commutes with shifts. Next compare the two composites from D(G)D(U')R(L~)
-to RL D(U). It suffices to test on K-injective fixed-pair complexes. Precompose
-with D(G)D(U') of the computation unit and postcompose with RL of the forgetting
-factorization. The normalized equations for alpha and beta reduce the assertion
-to naturality of the RL unit and the termwise structure equation defining L~.
-Cancel these invertible factors and extend along K-injective resolutions. Finally
-expand the two conjugations: the structure equation at M moves the inverse
-structure past alpha; naturality of beta moves the arbitrary derived morphism;
-its shift equation and the structure equation at N identify the remaining factors.
-Thus no representation of the arbitrary degree-r morphism is required.
-Source: the action calculation in the parent right-derived companion, and the comparison of
-lem-sf-fixed-pair-derived-forget-comparison; Stacks Tags 070I, 070K and 070Y.
-(blueprint: lem-sf-cyclic-derived-right-action). -/
+Stacks Project, Tags 070I, 070K and 070Y. -/
 theorem cyclicDerivedHomTransport_rightDerived_action
     (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
     (u : CyclicDerivedHom F M N r) :

@@ -75,7 +75,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Koszul exchange for any normalized tensor presentation
 
-Source: Stacks Project, Tags 06YU and 0FPQ; descent of signed total-tensor exchange.
+Source: Stacks Project, Tags 06YU and 0FPQ.
 -/
 
 @[expose] public noncomputable section
@@ -116,15 +116,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
 /-- The signed exchange descends to every specified K-flat tensor presentation.
-Source: Stacks Project, Tags 06YU and 0FPQ
-(blueprint: lem-weil-pbc-ringed-tensor-koszul-existence).
-
-Proof: the full subcategory of K-flat complexes presents the derived category.
-Compare the specified natural tensor model with the native localized tensor model,
-then descend this natural isomorphism through the product localization. Conjugate
-native symmetry by this comparison. On K-flat representatives the descended
-comparison is the original comparison, so the native symmetry square and its
-pure-section formula give the asserted square and the sign (-1)^(pq). -/
+Source: Stacks Project, Tags 06YU and 0FPQ. -/
 theorem ringedTensor_koszul_exists
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J A))
     (T : CoefficientTensorModels.{u, c, v, w} J A S) :

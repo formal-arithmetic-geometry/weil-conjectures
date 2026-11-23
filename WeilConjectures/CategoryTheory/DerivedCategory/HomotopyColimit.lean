@@ -48,7 +48,7 @@ section Colimit
 variable [Abelian.HasKInjectiveResolutions C] [HasColimitsOfShape ℕ C]
   [HasExactColimitsOfShape ℕ C] [HasCoproductsOfShape ℕ C]
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Sequential colimits represent
+/-- Sequential colimits represent
 homotopy colimits.
 
 For a sequence `F₀ ⟶ F₁ ⟶ ⋯` of cochain complexes in an abelian category `C` with exact colimits
@@ -185,7 +185,7 @@ noncomputable def complexTruncLESequenceCompQIso (K : CochainComplex C ℤ) :
     complexTruncLESequence K ⋙ Q ≅ truncLESequence (Q.obj K) :=
   asIso (complexTruncLESequenceCompQHom K)
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Recovery from bounded-above
+/-- Recovery from bounded-above
 truncations.
 
 For every `E ∈ D(C)`, `C` an abelian category with exact colimits of shape `ℕ` (e.g. étale
@@ -193,8 +193,7 @@ sheaves of modules), the canonical morphism `hocolim_N τ^{≤ N} E ⟶ E` is an
 cocone `τ^{≤ N} E ⟶ E` is a homotopy colimit cocone. Writing `E = Q(K)`, the complex `K` is the
 termwise colimit of its truncations `τ^{≤ N} K` (in each degree they are eventually constant),
 so `Q(K)` is the homotopy colimit of the `Q(τ^{≤ N} K) = τ^{≤ N} E`
-(`DerivedCategory.isHomotopyColimitCocone_mapCocone_Q`,
-`proposition-open-direct-image-preserves-finite`). -/
+(`DerivedCategory.isHomotopyColimitCocone_mapCocone_Q`). -/
 theorem isHomotopyColimitCocone_truncLECocone [Abelian.HasKInjectiveResolutions C]
     [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] [HasCoproductsOfShape ℕ C]
     (E : DerivedCategory C) : IsHomotopyColimitCocone (truncLECocone E) := by

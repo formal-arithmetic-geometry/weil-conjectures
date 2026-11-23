@@ -26,7 +26,6 @@ computed on the full subcategories as on the ambient categories
 (`CategoryTheory.Adjunction.ι_map_exceptionalProjection_restrictFullyFaithful`). This is the
 exceptional projection morphism of a compactification `f = p ∘ i`, restricted to bounded
 constructible complexes.
-
 -/
 
 @[expose] public section

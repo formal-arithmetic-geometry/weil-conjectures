@@ -36,7 +36,7 @@ the induced map on the endomorphisms of the unit sends `a • 𝟙` to `φ a •
 - `CategoryTheory.Functor.leftDerivedFunctor_map_smul_id` and
   `CategoryTheory.Functor.ε_comp_leftDerivedFunctor_map_smul_id_comp_η`: semilinearity.
 
-## Implementation notes
+## Implementation details
 
 The compatibility of the comonoidal structure of `G.mapHomotopyCategory` with the Koszul
 braidings (`CategoryTheory.Functor.mapHomotopyCategory_map_braiding_hom_comp_δ`) is the same as

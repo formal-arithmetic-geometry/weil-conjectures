@@ -8,9 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Transport of a composite counit equation through scalar comparisons
-
-Source: sk-prop-sp-composition.proof.md, inversion of ell and coefficient descent
-(blueprint: lem-pur-composition-counit-scalar-transport).
 -/
 
 @[expose] public section
@@ -20,17 +17,7 @@ namespace CategoryTheory.Adjunction
 
 /-- Compatible invertible source and support comparisons transport a composite
 counit equation to a scalar image. This is a categorical pasting assertion; it
-assumes neither faithfulness nor essential surjectivity of scalar extension.
-
-Source: sk-prop-sp-composition.proof.md, coefficient passage
-(blueprint: lem-pur-composition-counit-scalar-transport).
-
-Proof. Map the given equality through UZ. Naturality of the support comparisons,
-the three scalar counit equations, and the source-composition square identify
-its two sides with a common invertible prefix followed by the desired two
-composites. Cancel that prefix. This reuses the proved scalarComposition argument
-of FieldCompositionTraceTransport, with no finite-field indices or purity-family
-choices in the statement. -/
+assumes neither faithfulness nor essential surjectivity of scalar extension. -/
 theorem composition_counit_of_scalar
     {X Y Z X' Y' Z' : Type*}
     [Category X] [Category Y] [Category Z]

@@ -10,8 +10,6 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import WeilConjectures.CategoryTheory.CoproductsOfCopowers
 
 /-! # A projection formula implies coproduct preservation
-
-Source: the projection-formula argument, followed by the copower retract argument.
 -/
 
 @[expose] public section
@@ -23,21 +21,7 @@ open CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
 /-- If F preserves coproducts and the tensor unit, and G satisfies the projection
-formula, then G preserves coproducts.
-Source: the categorical projection-formula argument; the final retract argument
-is written by V3.
-(auxiliary; not a blueprint node)
-
-Proof in words: tensoring by any object preserves coproducts because the monoidal
-categories are closed. For M in C, the projection formula identifies F followed
-by tensoring by M followed by G with tensoring by G(M). Consequently G preserves
-the coproduct obtained by applying F and tensoring by M to a family of tensor
-units. F sends the tensor unit to a tensor unit, so that family becomes a family
-of copies of M, using the right unitor. Thus G preserves every copower of M.
-Every family is a retract of the constant family on its coproduct, since each
-summand is a retract of the coproduct using zero on all other summands.
-The coproduct comparison is therefore a retract of an invertible copower
-comparison, and is invertible. Empty families are included throughout. -/
+formula, then G preserves coproducts. -/
 theorem preservesCoproducts_of_projectionFormula
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [MonoidalClosed C]
     [HasZeroMorphisms C]

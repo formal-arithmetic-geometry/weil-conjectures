@@ -21,9 +21,6 @@ public import WeilConjectures.CategoryTheory.CondensedActionModule
 
 /-! # Internal modules with an action of a profinite condensed group
 
-Source: blueprint, direct-image stability, paragraph (3), internal-action categorical input
-(blueprint: def-sfb-condensed-action-module).
-
 The underlying object is the recorded internal module object. Its section module is read
 through the existing section-module equivalence. Actions use all continuous maps from a
 profinite test object and commute with restriction; they are not abstract group actions.
@@ -42,8 +39,7 @@ namespace Profinite.CondensedAction
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
 
-/-- Read the sectionwise module through the recorded internal-module equivalence.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Read the sectionwise module through the recorded internal-module equivalence. -/
 noncomputable abbrev sectionModule (M : Modules R) (S : Profinite.{u}) :=
   ((InternalAbelianSheafModule.sectionModuleFunctor
     (coherentTopology Profinite.{u}) R.X).obj M).val.obj (op S)
@@ -52,8 +48,7 @@ variable (P : Type u) [TopologicalSpace P] [Group P] [IsTopologicalGroup P]
 
 /-- A linear internal action: sectionwise linear endomorphisms, unit and multiplication
 encoded by a monoid homomorphism, compatible with every profinite restriction. Inverses
-in the group imply these endomorphisms are automorphisms.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+in the group imply these endomorphisms are automorphisms. -/
 structure ActionModule where
   /-- The internal module object, with no topological presentation assumed. -/
   module : Modules R
@@ -69,19 +64,14 @@ structure ActionModule where
 
 variable {R P}
 
-/-- Equivariance is required at every profinite test object.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Equivariance is required at every profinite test object. -/
 def Equivariant (M N : ActionModule R P) (f : M.module ⟶ N.module) : Prop :=
   ∀ (S : Profinite.{u}) (g : C(S, P)) (m : sectionModule R M.module S),
     (f.hom.hom.app (op S)).hom (M.act S g m) =
       N.act S g ((f.hom.hom.app (op S)).hom m)
 
 /-- Equivariant linear maps contain identities and zero and are closed under composition,
-addition and negation. Source: blueprint paragraph (3)
-(blueprint: def-sfb-condensed-action-module).
-Proof: evaluate on a test object. The identity and composite commute with the action by
-substitution. Zero, sums and negatives commute because each action endomorphism is linear.
--/
+addition and negation. -/
 theorem equivariant_closure (M N L : ActionModule R P) :
     Equivariant M M (𝟙 M.module) ∧
     (∀ (f : M.module ⟶ N.module) (g : N.module ⟶ L.module),
@@ -111,16 +101,14 @@ theorem equivariant_closure (M N L : ActionModule R P) :
       N.act S g (-((f.hom.hom.app (op S)).hom m))
     rw [map_neg, hf S g m]
 
-/-- The additive subgroup of equivariant internal-module morphisms.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- The additive subgroup of equivariant internal-module morphisms. -/
 def homSubgroup (M N : ActionModule R P) : AddSubgroup (M.module ⟶ N.module) where
   carrier := {f | Equivariant M N f}
   zero_mem' := (equivariant_closure M N N).2.2.1
   add_mem' := (equivariant_closure M N N).2.2.2.1 _ _
   neg_mem' := (equivariant_closure M N N).2.2.2.2 _
 
-/-- The category has exactly the equivariant linear maps and ordinary composition.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- The category has exactly the equivariant linear maps and ordinary composition. -/
 instance actionCategory : Category (ActionModule R P) where
   Hom M N := homSubgroup M N
   id M := ⟨𝟙 M.module, (equivariant_closure M M M).1⟩
@@ -130,23 +118,20 @@ instance actionCategory : Category (ActionModule R P) where
   comp_id f := Subtype.ext (Category.comp_id f.val)
   assoc f g h := Subtype.ext (Category.assoc f.val g.val h.val)
 
-/-- Addition of equivariant maps is the underlying addition of internal-module maps.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Addition of equivariant maps is the underlying addition of internal-module maps. -/
 instance actionPreadditive : Preadditive (ActionModule R P) where
   homGroup M N := inferInstanceAs (AddCommGroup (homSubgroup M N))
   add_comp _ _ _ f g h := Subtype.ext (Preadditive.add_comp _ _ _ f.val g.val h.val)
   comp_add _ _ _ f g h := Subtype.ext (Preadditive.comp_add _ _ _ f.val g.val h.val)
 
-/-- Forget the action while retaining the original internal module and map.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Forget the action while retaining the original internal module and map. -/
 def forgetAction : ActionModule R P ⥤ Modules R where
   obj M := M.module
   map f := f.val
 
 variable {Q : Type u} [TopologicalSpace Q] [Group Q] [IsTopologicalGroup Q]
 
-/-- Inflation precomposes the section action and changes neither the module nor its maps.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Inflation precomposes the section action and changes neither the module nor its maps. -/
 def inflate (π : P →ₜ* Q) : ActionModule R Q ⥤ ActionModule R P where
   obj M :=
     { module := M.module
@@ -155,14 +140,12 @@ def inflate (π : P →ₜ* Q) : ActionModule R Q ⥤ ActionModule R P where
       naturality := fun S T f g m ↦ M.naturality S T f (π.toContinuousMap.comp g) m }
   map f := ⟨f.val, fun S g m ↦ f.property S (π.toContinuousMap.comp g) m⟩
 
-/-- Inflation from the trivial group, directly on ordinary internal modules.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Inflation from the trivial group, directly on ordinary internal modules. -/
 def trivial : Modules R ⥤ ActionModule R P where
   obj M := { module := M, act := fun _ ↦ 1, naturality := fun _ _ _ _ _ ↦ rfl }
   map f := ⟨f, fun _ _ _ ↦ rfl⟩
 
-/-- Simultaneous fixed sections, retaining the same quantification over base changes.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+/-- Simultaneous fixed sections, retaining the same quantification over base changes. -/
 def FixedAll (M : ActionModule R P) (S : Profinite.{u})
     (m : sectionModule R M.module S) : Prop :=
   ∀ (T : Profinite.{u}) (f : T ⟶ S) (g : C(T, P)),
@@ -172,8 +155,7 @@ variable (R P)
 
 /-- A normalized invariants adjunction. The inclusion identifies its sections with exactly
 all fixed sections; the two adjunction directions retain the original section maps.
-This is a specification, not a choice of unspecified invariants data.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
+This is a specification, not a choice of unspecified invariants data. -/
 structure Invariants where
   /-- The invariants functor. -/
   functor : ActionModule R P ⥤ Modules R

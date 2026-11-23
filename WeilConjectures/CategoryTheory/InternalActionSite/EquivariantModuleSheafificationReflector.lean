@@ -19,9 +19,7 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 # Equivariant module sheafification as a reflector
 
 Source: Stacks Project, Modules on Sites, Tag 03CY, and Sites, Tags 00WH, 00WJ,
-00YR; the agent-formulated internal-action extension supporting paragraph (3) of
-main-20261015, sk-thm-sf-ctf-stability-direct-images
-(blueprint: lem-sfb-equivariant-module-sheafification-reflector).
+00YR.
 -/
 
 @[expose] public section
@@ -423,38 +421,7 @@ end ActionConstruction
 /-- Ordinary module sheafification carries the unique natural linear action extending
 the given action, has the equivariant universal property, and gives the reflector.
 
-Source: Stacks Tags 03CY, 00WH, 00WJ and 00YR; agent-formulated equivariant extension
-(blueprint: lem-sfb-equivariant-module-sheafification-reflector).
-
-Proof:
-1. By lem-pc-sites-module-sheafification-interface, the underlying abelian sheaf and
-   unit are ordinary abelian sheafification. By lem-pc-sites-sheafification-underlying-sets
-   the same holds after forgetting to sets. The universal property in
-   def-weil-pbc-sheafification fixes the sheaves K and R. Finite-product preservation
-   (situation-conventions) identifies products of their identities and
-   the unit of P with the corresponding sheafification units. Hence maps from these
-   product sheaves are determined after those units.
-2. Extend the composite of the action K times P to P with the unit P to P-sharp
-   uniquely across the product unit, by def-weil-pbc-sheafification. This gives the
-   natural action map and its uniqueness among maps making the unit equivariant.
-3. Check identity, multiplication, addition and scalar-linearity after the product
-   units, using situation-conventions and
-   def-weil-pbc-sheafification. They become the corresponding laws on P; its unit is
-   linear by lem-pc-sites-module-sheafification-interface. The action fixes zero
-   directly. The action by the inverse group section is inverse to the action by
-   that section. Thus the maps give the displayed LinearAction, without assuming K
-   abelian.
-4. An equivariant map to a module sheaf has its unique ordinary linear extension
-   by lem-pc-sites-module-sheafification-interface. Compare its two action composites
-   after the product unit. They agree by the original equivariance; product-unit
-   uniqueness from def-weil-pbc-sheafification and
-   situation-conventions makes the extension equivariant. Ordinary
-   uniqueness gives equivariant uniqueness.
-5. Extend the composite of each presheaf map with the target unit. The uniqueness
-   from lem-pc-sites-module-sheafification-interface gives identity and composition
-   laws, and naturality of the extension bijections in both arguments. This gives
-   the adjunction. Forgetting actions gives ordinary module sheafification on
-   objects and maps; the comparison preserves the unit, naturally in P. -/
+Source: Stacks Tags 03CY, 00WH, 00WJ and 00YR. -/
 theorem equivariantModuleSheafification_reflector
     {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     (J : GrothendieckTopology C) (K : Cᵒᵖ ⥤ GrpCat.{u})

@@ -24,8 +24,7 @@ import all WeilConjectures.CategoryTheory.Strict.StrictRoosDerivedLimitCompariso
 /-! # Arithmetic normalization of a unit-normalized Roos comparison
 
 The selection/block coordinate formula fixes the derived restriction map and
-its value on every strict augmentation. Source: Stacks 0941
-(blueprint: lem-pur-roos-arithmetic-normalization).
+its value on every strict augmentation. Source: Stacks 0941.
 -/
 
 @[expose] public noncomputable section

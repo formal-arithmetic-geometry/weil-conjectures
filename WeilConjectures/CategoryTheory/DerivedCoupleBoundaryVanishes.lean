@@ -11,7 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCoupleMapConstruction
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory.BigradedExactCouple
-/-- (blueprint: lem-sp-derived-couple-boundary-vanishes)
+/--
 The image of the incoming alpha maps to zero in the cycle quotient.
 This is the boundary calculation in Stacks Tag 011R. -/
 theorem derived_couple_boundary_vanishes {C : Type u} [Category.{v} C] [Abelian C]

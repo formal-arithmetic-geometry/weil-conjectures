@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.LeftDerivedKanTriangleValueComparison
 /-! # Distinguished source triangles under a left derived Kan extension
 
 Source: Stacks Project, Derived Categories, Lemmas Tags 05SA, 05SU, 05SC.
-(blueprint: lem-pur-left-derived-kan-source-triangles).
 -/
 
 @[expose] public section
@@ -29,30 +28,7 @@ namespace CategoryTheory.Functor
 
 /-- The supplied shift-compatible Kan extension preserves distinguished source triangles.
 Source: Stacks Project, Derived Categories, Lemmas Tags 05SA, 05SU, 05SC,
-and the pointwise Kan interpretation of Definition Tag 05S9.
-(blueprint: lem-pur-left-derived-kan-source-triangles).
-
-Proof: Essential constancy at every X gives a limit over the denominator category.
-The pointwise Kan bridge extends each such limit to the structured-arrow diagram at Q(X).
-Essential surjectivity of the localization Q then gives pointwise Kan limits everywhere.
-Consequently the given global right Kan extension is pointwise, by Kan uniqueness.
-Its value LF(Q(X)) is canonically isomorphic to any supplied denominator value at X,
-and the cone-point isomorphism identifies every inverse-denominator projection.
-Apply Lemma 05SC to T, using definedness at its first two vertices. It gives values
-LX, LY, LZ, their witnessing cones, maps lf, lg, lh, and a distinguished triangle.
-Identify these values with the three values LF(Q(T.obj_i)) by their pointwise limit
-properties. For each denominator square, naturality of alpha and the relation
-Q(f) composed with the inverse denominator equals the inverse denominator composed
-with Q(f') show that the map induced by Q followed by LF satisfies the equations
-of Lemma 05SA. Cancellation at a split-mono cone leg identifies the first two maps
-with lf and lg.
-For the last map, the shift-compatibility square of alpha identifies the shifted cone
-legs with those in Lemma 05SC; cancellation at a shifted split-mono cone leg
-gives the equation with lh.
-The three value isomorphisms therefore form an isomorphism of triangles from the
-image of T to Triangle.mk lf lg lh. Closure of distinguished triangles under
-isomorphism proves the claim. This only treats source triangles; descent to arbitrary
-triangles of L is a separate step. -/
+and the pointwise Kan interpretation of Definition Tag 05S9. -/
 theorem leftDerived_kan_map_source_distinguished
     (D : Type u) [Category.{v} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]

@@ -44,33 +44,12 @@ private theorem arrow_kernel_iff
   subst C
   rw [(Arrow.mk_inj _ _).mp h]
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf equalizer,
-and adjunction paragraphs; abelian-group extension via Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-universality).
+/-- A cocone `K` over the diagram `D` of the sections of the stage inverse images of `G` over
+the images of `U`, whose legs are the unit-compatible maps `α`, is a colimit cocone: the
+section group of the colimit inverse image is the filtered colimit of the stage section groups.
 
-Proof: Construct sections at a limit object from all its presentations above i.
-Object and arrow colimit representatives put finitely many presentations and
-restriction arrows at one stage. Eventual equality makes their refinements
-filtered and makes restrictions independent of representatives. The category
-above a fixed presentation is final, by common refinement and eventual equality,
-so its filtered section colimit computes the same group. A Q-cover is the image
-of a finite stage cover. Its covering pullbacks are preserved; filtered colimits
-of abelian groups commute with the finite products and equalizers in its sheaf
-condition. Thus these groups form a sheaf, including zero sections for empty
-covers. Maps from this sheaf to H are compatible stage maps. Adjunction sends
-them to maps G to V_i's restriction of H. The identity presentation and the unit
-provide the inverse correspondence; uniqueness of adjuncts verifies both inverse
-identities and naturality. This identifies the constructed sheaf with the
-canonical inverse image, compatibly with units. At V_i U, finality identifies
-its section colimit with the diagram on Under i. The two unit equations uniquely
-determine α and θ; hD identifies D's transitions with these maps, and hK
-identifies K's legs through e with the canonical coprojections. Transport the
-colimit universal property along E and e to get IsColimit K. The forgetful
-functor on abelian groups preserves filtered colimits and finite limits and
-reflects isomorphisms, justifying the equalizer and comparison arguments.
-There is no U at an empty source stage, so that case is vacuous. All objects in
-this statement are supplied data; the conclusion only proves a universal property.
--/
+Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf equalizer, and adjunction
+paragraphs; abelian-group extension via Modules on Sites, Tag 03CO. -/
 theorem colimit_site_abelian_section_universality
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

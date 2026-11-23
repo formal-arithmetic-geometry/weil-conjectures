@@ -16,8 +16,10 @@ import WeilConjectures.CategoryTheory.Exact.ExactInputDerivedTransformation
 /-! # Native derived morphisms of fixed pairs
 
 Proofs of the cyclic invariant/coinvariant sequence and its functoriality.
-Source: Stacks Project, Derived Categories, Tags 0149, 0152, 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence).
+
+## References
+
+* Stacks Project, Derived Categories, Tags 0149, 0152, 070I.
 -/
 
 @[expose] public noncomputable section
@@ -55,35 +57,7 @@ private theorem normalized_boundary_on_presentation
 
 /-- The invariant/coinvariant sequence with its canonical boundary and naturality.
 
-Proof plan, following node steps 1--8 and the uniqueness implicit in its normalization:
-1. Use lem-sf-free-derived-weil-resolution: the exact free/forgetful adjunction gives
-   the natural triangle IUM → IUM → M → IUM[1], with the specified summand formula.
-2. Under adjunction, the component of an adjunct at summand n is the iterated structure
-   map composed with P^n(u). Evaluating the differential at summand zero gives
-   1-(T^r)⁻¹, and the counit gives precisely the forgetting map.
-3. Apply lem-weil-pbc-hom-out-of-triangle-exact and rotations to obtain the five-term
-   Hom segment in degrees -1 and 0, with boundary u ↦ u_tilde[1] δ_M.
-4. The identity 1-T⁻¹ = -T⁻¹(1-T) identifies the actual kernels and images. Factor through
-   the actual quotient and subgroup, retaining the free-resolution sign, to get exactness.
-5. Naturality of the free triangle and adjunction gives the pre/postcomposition square;
-   localization of the fixed-pair equation gives commutation with T.
-6. By enough injectives, lem-weil-pbc-dplus-injective-representative and the K-injective
-   Hom and shift lemmas, represent a degree-minus-one underlying morphism by a chain
-   map u: UJ → UA, with A representing N[-1].
-7. On UA ⊕ UJ put the triangular action with diagonal θ_A, θ_J and upper entry θ_A P(u).
-   Its inverse has upper entry -P(u)θ_J⁻¹. Inclusion and projection give a short exact
-   fixed-pair sequence with a split underlying chain sequence.
-8. In the free comparison let s be the second inclusion, e its adjunct and f the adjunct
-   of u. Evaluation at summand zero gives ed_J=jf and pe=ε_J. Naturality of the canonical
-   SES boundary (lem-weil-pbc-complex-ses-triangle; Stacks Tag 0152) identifies its boundary
-   with f[1]δ_J. Thus it has exactly the required normalization. Every quotient class has
-   such a representative. Naturality and this formula force uniqueness after transport
-   along the representing isomorphisms. No derived faithfulness claim is used.
-
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 theorem exists_cyclicDerivedHomBoundary [IsGrothendieckAbelian.{v} C] :
     ∃! b : CyclicDerivedHomBoundary F,
       CyclicDerivedHomBoundaryExact F b ∧ CyclicDerivedHomBoundaryNatural F b ∧
@@ -205,30 +179,7 @@ variable (L : C ⥤ D) [L.Additive] (e : L ⋙ G ≅ F ⋙ L)
 
 /-- Exact functors preserve the entire sequence, including its normalized boundary.
 
-Proof plan, node steps 6--12 in the exact case:
-1. Represent M and N by bounded-below complexes J,K of injectives in the fixed-pair
-   category, using lem-weil-pbc-dplus-injective-representative. Forgetting preserves
-   K-injectives by lem-sf-fixed-pair-derived-forget-comparison. The K-injective Hom
-   and shift lemmas represent u by UJ → U(K[-1]).
-2. Construct the off-diagonal extension A → E → J as above. Its degrees split in the
-   fixed-pair category because A is termwise injective; E and the cone of its inclusion
-   are bounded-below complexes of injectives, hence K-injective. The cone projection to
-   J has contractible kernel, so it is a quasi-isomorphism by the cohomology long exact
-   sequence and a homotopy equivalence by the K-injective Hom lemma.
-3. Additivity preserves finite sums, shifts, cones and chain homotopies. An exact H
-   acts termwise on the derived category (situation-conventions).
-   The formula -Qπ (Qq)⁻¹ of Stacks Tag 0152 is consequently preserved, including its sign.
-4. Naturality of e gives the new upper entry H(θ_A)e P′H(u); thus the image extension
-   is precisely the normalized extension for the prescribed underlying morphism.
-   The normalization predicates identify its boundary with the required target boundary.
-5. The fixed-pair equation and the canonical comparison show additivity, T-compatibility,
-   and the forgetting square. The two boundary naturality predicates transport these
-   calculations from representatives to all native derived objects and morphisms.
-
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 theorem cyclicDerivedHom_exact_functorial [IsGrothendieckAbelian.{v} C]
     [IsGrothendieckAbelian.{vD} D] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (b : CyclicDerivedHomBoundary F) (b' : CyclicDerivedHomBoundary G)
@@ -253,32 +204,7 @@ theorem cyclicDerivedHom_exact_functorial [IsGrothendieckAbelian.{v} C]
 
 /-- Total right derived functors preserve the normalized connecting map.
 
-Proof plan, node steps 6--12 in the left exact case:
-1. Use bounded-below injective representatives and the off-diagonal extension as in the
-   exact-functor proof. The injectivity extension property splits its degrees, so A,E,J
-   and the cone are K-injective (def-sp-injective-resolutions and the dplus/K-injective
-   nodes). The cone projection is a homotopy equivalence.
-2. The recorded right-derived universal pair computes RH^eq on these representatives
-   by H^eq. Its shift comparison is induced by shifting K-injective resolutions; the
-   universal property makes it coherent and compatible with its unit. The same argument
-   supplies the underlying shift comparison for RH (lem-pc-right-derived-functor-
-   triangulated, transported to the arbitrary-resolution interface).
-3. Additivity of H^eq preserves the degreewise split sequence, its cone, the cone
-   projection and its homotopy inverse. The formula -Qπ (Qq)⁻¹ therefore proves preservation
-   of the actual SES boundary, even when H^eq is not exact on arbitrary sequences.
-4. The unique comparison of lem-sf-fixed-pair-derived-forget-comparison identifies both
-   computations with H(UI), and has the identity normalization there. Naturality of e
-   identifies the image off-diagonal entry with θ_FA P′H(u). Normalization of b and b′
-   and their morphism naturality give the left square on the specified quotient class.
-5. The same unit and shift comparisons give the induced maps on every V^r. Their
-   additivity and T-compatibility give the prescribed outer maps, and forgetting gives
-   the right square. Resolution witnesses are universally quantified proof choices;
-   their existence is the Grothendieck K-injective theorem, not an added hypothesis.
-
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 theorem cyclicDerivedHom_rightDerived_functorial [IsGrothendieckAbelian.{v} C]
     [IsGrothendieckAbelian.{vD} D] [PreservesFiniteLimits L]
     (hF : ∀ K : CochainComplex (IsoAlgebra F) ℤ,

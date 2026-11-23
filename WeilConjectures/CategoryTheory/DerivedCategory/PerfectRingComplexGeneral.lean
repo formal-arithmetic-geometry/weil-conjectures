@@ -7,9 +7,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
 /-! # Perfect ring complexes with an arbitrary localization universe
-
-Source: blueprint def-pc-perfect-ring-complex, bounded finite projective definition
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -21,9 +18,7 @@ open CategoryTheory
 namespace DerivedCategory
 
 /-- Perfectness means a bounded complex of finitely generated projective modules,
-without identifying the localization universe with the coefficient universe.
-Source: blueprint def-pc-perfect-ring-complex
-(auxiliary; not a blueprint node). -/
+without identifying the localization universe with the coefficient universe. -/
 def IsPerfectRingComplex {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)] (C : DerivedCategory (ModuleCat.{u} R)) :
     Prop :=

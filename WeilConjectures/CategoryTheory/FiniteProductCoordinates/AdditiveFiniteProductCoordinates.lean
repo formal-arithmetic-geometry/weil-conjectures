@@ -11,9 +11,6 @@ public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 public import Mathlib.CategoryTheory.Pi.Basic
 
 /-! # Coordinate bilimits of an additive finite-product equivalence
-
-Source: the finite-product argument for the clopen derived decomposition.
-(blueprint: lem-pur-additive-finite-product-coordinate-decomposition)
 -/
 
 @[expose] public noncomputable section
@@ -21,9 +18,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.FiniteProductCoordinates
 
-/-- Pointwise preadditivity on a family of categories.
-Source: the pointwise additive-category construction
-(blueprint: lem-pur-additive-finite-product-coordinate-decomposition). -/
+/-- Pointwise preadditivity on a family of categories. -/
 @[instance_reducible]
 def piPreadditive {J : Type*} (D : J → Type*)
     [∀ i, Category (D i)] [∀ i, Preadditive (D i)] : Preadditive (∀ i, D i) where
@@ -130,15 +125,7 @@ private theorem coordinateBicone_total {J : Type*} [Fintype J] (D : J → Type*)
     simp [coordinateProjection, coordinateInclusion, NatTrans.pi', hi]
   · simp
 
-/-- An additive equivalence with a finite product gives zero insertions and two bilimits.
-Source: finite-product calculation in the clopen derived decomposition
-(blueprint: lem-pur-additive-finite-product-coordinate-decomposition).
-
-Proof: insert at one coordinate and use the chosen zero object at all other coordinates.
-The coordinate projection-inclusion composites sum to the identity. Map this bicone
-through the additive inverse equivalence to obtain a bilimit on the product side and,
-after conjugating by the unit isomorphism, a bilimit on the source side. The diagonal
-and off-diagonal comparison formulas follow from the counit and the zero objects. -/
+/-- An additive equivalence with a finite product gives zero insertions and two bilimits. -/
 theorem equivalenceCoordinateDecomposition
     {C : Type*} [Category C] [Preadditive C] {J : Type*} [Finite J]
     (D : J → Type*) [∀ i, Category (D i)] [∀ i, Preadditive (D i)]

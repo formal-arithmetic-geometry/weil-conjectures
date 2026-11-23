@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.SiteModuleExtensionByZeroExact
 
 /-! # Restriction to a slice preserves K-injective complexes
 
-Source: Stacks Project, Cohomology on Sites, restriction of K-injectives to an open.
+## References
+
+* Stacks Project, Cohomology on Sites, restriction of K-injectives to an open.
 -/
 
 @[expose] public section
@@ -20,17 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Slice restriction preserves K-injectives, with an independent ring universe.
-Source: Stacks Project, Cohomology on Sites, lemma-restrict-K-injective-to-open;
-Modules on Sites, Tags 03DI and 03DJ.
-(auxiliary; not a blueprint node).
-
-Proof: The explicit sheafified direct-sum construction is exact and left adjoint to
-restriction. Under the termwise adjunction, a map from an acyclic complex to the
-restriction of a K-injective complex corresponds to a map from its extension by zero.
-Exact extension preserves acyclicity, so the latter map is null-homotopic. Transport
-that homotopy through the adjunction. This works for every slice object, without a
-cover or subterminality hypothesis.
--/
+Source: Stacks Project, Cohomology on Sites; Modules on Sites, Tags 03DI and 03DJ. -/
 theorem overFunctor_preservesKInjectiveComplexes_ofUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}]

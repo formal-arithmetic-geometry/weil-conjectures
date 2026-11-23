@@ -19,11 +19,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Realization of a single invertible derived action
 
-Source: blueprint main-20261015, sec-six-functors/sk-thm-sf-package,
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence;
-the agent-formulated native-derived foundation and its sequential-colimit proof
-(blueprint: lem-sf-cyclic-derived-action-realization).
-
 The action is the canonical composition comparison followed by localization of the
 structure isomorphisms of fixed pairs. No functorial realization is chosen.
 -/
@@ -254,45 +249,7 @@ private theorem action_comparison
 
 /-- Realize a bounded derived object with its prescribed invertible twisted action in
 the ordinary derived category of fixed pairs, preserving its cohomology intervals
-and every isomorphism-invariant class of underlying cohomology objects.
-
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction
-sentence; the agent construction in the DAG supplies the missing realization.
-(blueprint: lem-sf-cyclic-derived-action-realization).
-
-Proof plan, following the seven steps of the node:
-1. The source IsoAlgebra library supplies exact, faithful forgetting. Represent N by
-   a K-injective I with a : QI ≅ N (prose-03-02). By
-   lem-weil-pbc-kinjective-hom-derived, the morphism a⁻¹ v D(P)(a) is represented
-   by a chain map f : PI → I. Exact termwise derivation identifies its image
-   (situation-conventions); f is a quasi-isomorphism.
-   Only the target is required to be K-injective; no strict inverse is chosen.
-2. Choose a quasi-inverse R of P, with unit η and counit ε satisfying the triangle
-   identities. Put g = R(f)η_I, X_n = RⁿI, and g_n = Rⁿ(g). Equivalences preserve
-   limits and colimits (lem-galois-equivalence-preserves-limits), so R is exact
-   and all g_n are quasi-isomorphisms. Form the degreewise sequential colimit C
-   with legs j_n (def-sp-grothendieck-abelian, def-weil-pbc-category-colimit).
-   Its differential and its square are determined on these legs.
-3. AB5 and src-weil-homology-preserves-exact-colimits identify H^q(C) with the
-   colimit of H^q(X_n). The transition maps are isomorphisms. The inverses of
-   their initial composites form a cocone inverse to H^q(j_0): check both
-   composites on each colimit leg. Thus j_0 : I → C is a quasi-isomorphism.
-4. The maps Rⁿ(g) followed by R(j_n) define a cocone to RC, inducing σ : C → RC.
-   As R preserves colimits, the legs j_(n+1) induce s : RC → C. Checking on
-   j_n and R(j_n) shows that these maps are inverse by colimit uniqueness.
-5. Apply P to σ and compose with the counit to obtain τ : PC ≅ C. Counit
-   naturality and the triangle identity give P(j_0) ≫ τ = f ≫ j_0. Its
-   components and the differentials of C form a complex of fixed pairs.
-6. Let M be this complex's derived image and e = a Q(j_0)⁻¹. Exact derivation
-   identifies D(U)M with QC and its canonical structure with Q(τ). The equation
-   τ P(j_0) = j_0 f implies e θ_M = v D(P)(e), by cancellation of the
-   invertible D(P)(Q(j_0)); use situation-conventions.
-7. Exact forgetting gives UH^q(M) ≅ H^q(D(U)M) ≅ H^q(N). Conservativity
-   reflects zero objects, so every cohomology interval of N is one for M.
-   Isomorphism invariance transports membership in any S along these same
-   isomorphisms. No closure of S under colimits is required and no functorial
-   choice or equivalence of derived categories with fixed pairs is asserted.
--/
+and every isomorphism-invariant class of underlying cohomology objects. -/
 theorem exists_cyclicDerivedActionRealization
     {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     (F : C ⥤ C) [F.Additive] [F.IsEquivalence]

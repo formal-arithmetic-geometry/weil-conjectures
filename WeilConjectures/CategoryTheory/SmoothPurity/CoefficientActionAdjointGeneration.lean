@@ -24,8 +24,7 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 /-! # Generation for the specified coefficient-action adjoint mate
 
 Source: Zheng, Six operations and Lefschetz–Verdier formula for Deligne–Mumford stacks,
-Construction 2.26, printed p. 15; Stacks Project, More on Algebra, Tag 09PB
-(blueprint: lem-pur-coefficient-action-adjoint-generation).
+Construction 2.26, printed p. 15; Stacks Project, More on Algebra, Tag 09PB.
 
 The actions are curried with the category variable first and the coefficient variable second.
 The mate is defined by the fixed adjunction's hom equivalence, without any choice of map.
@@ -42,8 +41,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The specified transpose of inverse projection comparison followed by the counit.
-Source: Zheng, Construction 2.26, printed p. 15
-(blueprint: lem-pur-coefficient-action-adjoint-generation). -/
+Source: Zheng, Construction 2.26, printed p. 15. -/
 noncomputable def coefficientActionAdjointMate
     {D : Type uD} {A : Type uA} {B : Type uB}
     [Category.{vD} D] [Category.{vA} A] [Category.{vB} B]
@@ -54,8 +52,7 @@ noncomputable def coefficientActionAdjointMate
   adj.homEquiv _ _ ((P.inv.app (G.obj M)).app V ≫ (TB.map (adj.counit.app M)).app V)
 
 /-- The full subcategory of coefficients where the specified transpose is invertible.
-Source: Zheng, Construction 2.26, and Stacks Project, Tag 09PB
-(blueprint: lem-pur-coefficient-action-adjoint-generation). -/
+Source: Zheng, Construction 2.26, and Stacks Project, Tag 09PB. -/
 def coefficientActionAdjointIsoLocus
     {D : Type uD} {A : Type uA} {B : Type uB}
     [Category.{vD} D] [Category.{vA} A] [Category.{vB} B]
@@ -69,32 +66,7 @@ all coefficient shifts, and invertible on the entire unbounded derived module ca
 The explicit isomorphism locus contains the ring and is closed under isomorphisms, all
 integer shifts, distinguished cones, retracts, and arbitrary set-indexed coproducts.
 
-Source: Zheng, Construction 2.26, printed p. 15; blueprint
-`lemma-checking-isomorphisms-constructible-complexes--1`; Stacks Project, More on Algebra, Tag 09PB
-(blueprint: lem-pur-coefficient-action-adjoint-generation).
-
-Proof:
-1. Set q = inverse projection comparison followed by the action on the counit. The
-   adjunction hom equivalence defines alpha. For each coefficient, `mateEquiv` with the
-   adjunction on both horizontal sides gives naturality in M. Naturality of P and the
-   action gives naturality in V after applying the injective adjunction hom equivalence.
-2. At the degree-zero ring, projection normalization rewrites q as the counit composed
-   with F of the A-unit, after the inverse B-unit. Naturality of the B-unit and transposition
-   give alpha followed by G of the B-unit equal to the A-unit. Both units are invertible,
-   so the ring lies in the isomorphism locus.
-3. Write a and b for the action shift comparisons. Shift compatibility of P and naturality
-   of b in the counit give b q(V[n]) = q(V)[n] c_F F(a). Compatibility of the adjunction
-   shifts gives epsilon(Y[n]) F(c_G inverse) = epsilon(Y)[n] c_F. These equalities show
-   that alpha(V[n]) followed by the composite B-shift and a followed by alpha(V)[n]
-   have equal inverse adjuncts. Injectivity gives the stated shift equation.
-4. For each M, apply `lemma-checking-isomorphisms-constructible-complexes--1` to the two exact,
-   coproduct-preserving coefficient functors and the shift-compatible transformation from
-   steps 1 and 3. Its locus is triangulated, coproduct-closed and retract-closed. Naturality
-   at an isomorphism conjugates components, giving repleteness. Step 2 supplies the ring.
-5. All shifts of the ring are consequently in the locus. Apply
-   `lem-pc-derived-module-free-generation`: coproducts, distinguished cones and retracts
-   generate every coefficient object. Thus the locus is top and each specified alpha is
-   invertible. No determination of a transformation by its generator value is asserted. -/
+Source: Zheng, Construction 2.26, printed p. 15; Stacks Project, More on Algebra, Tag 09PB. -/
 theorem coefficientActionAdjointGeneration
     (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]

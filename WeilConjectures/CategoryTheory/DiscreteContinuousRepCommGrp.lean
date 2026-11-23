@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrpAux
 /-!
 # Commutative group objects in discrete continuous actions
 
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-discrete-continuous-rep-commgrp)
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -29,31 +28,10 @@ namespace Rep
 attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
   AlgebraicGeometry.etaleFieldActionForget₂
 
-/-- Source: Stacks Project, Tag 04JQ, proof of
-`lemma-equivalence-abelian-sheaves-point`.
-(blueprint: lem-exc-discrete-continuous-rep-commgrp).
-
-Proof: A commutative group object in discrete continuous G-sets gives an abelian
-law on its carrier: interpret its product as the Cartesian product via the
-unique product comparison, and its unit as the singleton. The internal group
-identities then give the abelian group identities on elements. Give this abelian
-group its canonical integer module structure. Equivariance of the group law
-and unit makes each action map additive, hence integer-linear. The inverse
-group element gives its inverse. Joint continuity on a discrete carrier implies
-open stabilizers: the orbit map at x is continuous, so the inverse image of {x}
-is open. This gives a discrete continuous integer representation.
-Conversely, for a representation with open stabilizers put the discrete topology
-on its carrier. Its action is jointly continuous: at (g,x) the open set g times
-the stabilizer of x, paired with the singleton {x}, maps constantly to g x.
-The abelian operations are equivariant and therefore are morphisms of continuous
-G-sets; the group identities give a commutative group object. On morphisms both
-constructions retain the underlying equivariant map; preserving the group law
-is equivalent to additivity, hence to integer-linearity. Recovering the original
-operations gives the unit and counit, whose underlying maps are identity maps.
-They are natural because morphisms retain their underlying maps. The underlying
-action comparison is consequently natural. Any choice of Cartesian products
-is allowed, since their unique comparison isomorphisms transport these laws.
-The zero group, trivial group, and non-Hausdorff topological groups are included. -/
+/-- Commutative group objects in discrete continuous `G`-sets are equivalent to discrete
+continuous integer representations of `G`, compatibly with the forgetful functors to
+`G`-sets.
+Source: Stacks Project, Tag 04JQ. -/
 theorem discreteContinuousRep_commGrp
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]

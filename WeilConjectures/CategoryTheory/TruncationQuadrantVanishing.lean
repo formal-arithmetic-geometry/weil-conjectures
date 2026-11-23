@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
-/-! Canonical truncation-couple proof step. -/
+/-! Quadrant vanishing for the truncation couple. -/
 
 @[expose] public section
 
@@ -22,16 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The lower-half-plane vanishing of the raw truncation terms.
-Source: Stacks Tags 05TC (1), 0118; blueprint step 3 of lemma-uniform-bound-proper-direct-image--1
-(blueprint: lem-sp-truncation-quadrant-vanishing).
-
-Proof: For q<a the truncation has zero homology in every degree: below and at q
-use the homology isomorphism of its inclusion and the hypothesis on K; above q
-use strict upper support. Its image in the derived category is zero, and additive
-RF and homology preserve zero objects. For E with q<a the single complex is zero
-because H^q(K) is zero. For p<0, RF of the degree-zero single object has no negative
-homology; shift it by -q and use commutation of RF and homology with shifts.
-Finally transport all three zero-object assertions through `bridgeIso`. -/
+Source: Stacks Tags 05TC (1), 0118. -/
 theorem truncation_quadrant_vanishing
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]

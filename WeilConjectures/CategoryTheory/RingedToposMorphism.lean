@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Sites.Limits
 /-!
 # Ringed-topos morphisms with their induced module direct images
 
-Source: Stacks Project, Sites, Definition 00XA; Modules on Sites, morphisms of ringed
-topoi and pushforward of modules (auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Definition 00XA.
 
 The structural map is written on inverse-image underlying sheaves. Ring operations and
 module actions are specified using generalized elements. This avoids requiring a morphism
@@ -30,16 +29,12 @@ namespace CategoryTheory
 
 /-- A geometric morphism with a structural ring map and the induced direct image on modules.
 
-Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules.
 
-The ring identities test every generalized element of the target topos. Left exactness
-identifies the inverse image of products and the terminal object, so these are precisely
-the identities for a morphism of ring objects. The last identity specifies addition and
-scalar multiplication on the module direct image under the sheaf adjunction. It includes
-zero by taking all three module elements zero. Thus the supplied module direct image is
-the usual induced one, up to its displayed natural identification, not an arbitrary lift.
-No exactness of the tensor module pullback or preservation of K-injectives is assumed. -/
+The ring identities test every generalized element of the target topos, and the last
+identity specifies addition and scalar multiplication on the module direct image under the
+sheaf adjunction. No exactness of the tensor module pullback or preservation of
+K-injectives is assumed. -/
 structure RingedToposMorphism
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

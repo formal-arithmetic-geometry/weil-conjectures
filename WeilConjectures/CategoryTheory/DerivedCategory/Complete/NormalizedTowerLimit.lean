@@ -25,7 +25,7 @@ from the cohomological range:
   (`DerivedCategory.IsNormalizedTower.exists_derivedCompletionDiagram_iso`);
 * `K_R` is derived complete (`DerivedCategory.IsNormalizedTower.derivedComplete`).
 
-The proof follows the blueprint: the tower is strictified into a normalized adic tower of
+The tower is strictified into a normalized adic tower of
 complexes (`DerivedCategory.exists_isNormalizedAdicTower`), for which `- ⊗ᴸ_R A_n` is the mapping
 cone of `ϖⁿ`, commutes with the derived limit, and the tower of the first terms of the cones is
 pro-zero (`DerivedCategory.exists_derivedCompletionDiagram_iso_of_isNormalizedAdicTower`).

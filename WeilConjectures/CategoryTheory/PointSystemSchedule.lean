@@ -12,7 +12,7 @@ import Mathlib.SetTheory.Ordinal.Arithmetic
 /-!
 # Scheduling a small set of persistent requirements
 
-Source: Stacks Project, Sites, Tag 00YP (auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP.
 -/
 
 @[expose] public section
@@ -26,13 +26,7 @@ namespace CategoryTheory
 /-- If a persistent requirement can always be added, all requirements hold in some
 object obtained by transfinite iteration.
 
-Source: Stacks Project, Sites, Tag 00YP, well-ordering the set of lifting requests
-(auxiliary; not a blueprint node).
-Proof: Iterate a successor which adds a missing requirement. Use a well-order of
-cardinality strictly larger than the set of requirements. If no stage satisfies all
-requirements, choose the newly added requirement at every stage. Persistence makes
-these choices injective, contrary to the cardinality of the well-order. Colimits at
-limit stages exist by the hypothesis. This proof also covers an empty request set. -/
+Source: Stacks Project, Sites, Tag 00YP, well-ordering the set of lifting requests. -/
 theorem exists_object_all_requirements
     {D : Type u} [Category.{v} D] [Nonempty D] {A : Type w}
     (hcolim : ∀ (B : Type w) [LinearOrder B] [Nonempty B], HasColimitsOfShape B D)

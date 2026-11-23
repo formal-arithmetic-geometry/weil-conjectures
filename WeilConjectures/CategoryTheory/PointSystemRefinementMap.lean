@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 /-!
 # Canonical maps between colimits of refined diagrams
 
-Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO.
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO.
 The canonical map on colimits induced by an inclusion of inverse systems, after applying
 any presheaf. The equality `h` identifies the old diagram with the restricted new one.
 This is the version for preorder indices; on partial orders it is
@@ -40,8 +38,7 @@ noncomputable def pointSystemRefinementMapOfPreorder
     (Functor.associator e.monotone.functor U P).hom) ≫
       colimit.pre (U ⋙ P) e.monotone.functor
 
-/-- Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Sites, the refinement maps preceding Tag 00YO.
 The canonical map on colimits induced by an inclusion of inverse systems, after applying
 any presheaf. The equality `h` identifies the old diagram with the restricted new one. -/
 noncomputable def pointSystemRefinementMap

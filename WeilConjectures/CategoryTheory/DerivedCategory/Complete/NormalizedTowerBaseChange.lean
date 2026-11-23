@@ -18,21 +18,6 @@ tower: its transitions `t_n : L_{n+1} ⟶ Res L_n` exhibit `L_n` as the derived 
 `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`. For a homotopy limit `K = R lim_n Res L_n`, each leg
 `K ⟶ Res L_n` exhibits `L_n` as the derived base change `K ⊗ᴸ_R A_n`
 (`DerivedCategory.isDerivedBaseChange_π_comp_towerFunctorIso_hom`).
-
-## Proof
-
-The tower is represented by its strict model `T_n = Res P_n`
-(`DerivedCategory.towerFunctor`), with `P_n` a K-flat complex of flat sheaves of
-`A_n`-modules. The reduction `K ⊗ᴸ R ⧸ Iⁿ` of the leg, followed by the *action map*
-`cone(ϖⁿ on Res P_n) ⟶ Res P_n` (`DerivedCategory.restrictScalarsActionMap`), is an isomorphism
-(`DerivedCategory.isIso_reduction_comp_coneToLevel`). The action map is natural with respect to
-the restrictions of scalars of all morphisms of `D(J, A_n)`
-(`DerivedCategory.reductionFunctor_map_comp_actionMap`). Choosing a K-flat model `P` of `K`
-with flat terms, the strict reduction `P ⟶ Res(P ⧸ ϖⁿ)` is a derived base change
-(`CategoryTheory.Functor.ReductionDatum.bijective_comp_map`), and its reduction followed by the
-action map is the quasi-isomorphism `cone(ϖⁿ on P) ⟶ Res(P ⧸ ϖⁿ)`. So the morphism
-`P ⧸ ϖⁿ ⟶ L_n` adjoint to the leg becomes an isomorphism after restriction of scalars, and
-restriction of scalars reflects isomorphisms.
 -/
 
 @[expose] public section

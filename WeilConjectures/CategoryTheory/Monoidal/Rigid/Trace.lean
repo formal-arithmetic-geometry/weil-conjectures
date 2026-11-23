@@ -18,9 +18,8 @@ of a braided monoidal category does not depend on the choice of the right dual o
 functors which are compatible with the braidings on the pair `(X, Xᘁ)`
 (`CategoryTheory.MonoidalCategory.trace_map`).
 
-These are used for blueprint `proposition-properties-trace`: the trace of an endomorphism of a
-perfect complex in the derived category is computed in the category of complexes, where it is the
-supertrace (blueprint `proposition-properties-trace--4`).
+For instance, the trace of an endomorphism of a perfect complex in the derived category is
+computed in the category of complexes, where it is the supertrace.
 -/
 
 @[expose] public section
