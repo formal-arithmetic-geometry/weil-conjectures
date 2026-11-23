@@ -1,0 +1,14 @@
+version: Lean 4.35.0
+githash: eb6cafb7290e8bd5f2937522d8d804f58f02bafc
+build: Release, STAGE=0, USE_MIMALLOC=ON, READY4 branch-reason build
+baseline-source: <leank-root>/build35-mprwe-base/bin/lean
+instrumented: <leank-root>/build35-m1p-cpp-ready4/stage1/bin/lean
+patch: KernelTimeouts/Historical/Anatomy/kernel/lean-v4.35.0-m1p.patch
+analyzer: KernelTimeouts/Historical/Anatomy/kernel/mprwe_analyze.py
+usage: python3 mprwe_analyze.py <events.jsonl> --root <process-wide-root-id>
+root-identity: process-wide relaxed atomic serial; active root pinned per comparison tree
+schema: per-call child branch/kind/index, reduction side/exposure, child result, failure-followup; complete transition and depth/fanout aggregates
+validation: NativePullTensor root 18506; 2,685,580 calls; M1 98.051%, M2 0.326%, Matched 1.623%, Unclassified 0.000%
+transition-validation: 2,685,579 child edges; 22,165.121 ms edge exclusive + 0.015 ms root direct = 22,165.136 ms root exclusive
+raw-capture: 0 entered/exited calls in selected root; aggregate coverage is complete and independent of bounded raw capture
+compatibility: observational only; reduction order, transparency, caches, shortcuts, and root operation unchanged

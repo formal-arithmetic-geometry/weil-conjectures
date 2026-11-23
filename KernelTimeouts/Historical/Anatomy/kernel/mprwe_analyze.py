@@ -114,6 +114,10 @@ def classify(events, root=None):
     root_exclusive = int(coverage_row.get("root_exclusive_ns", sum(row["exclusive_ns"] for row in totals.values())))
     traced_calls = int(coverage_row.get("traced_calls", sum(int(e.get("traced_calls", 0)) for e in aggregate_rows)))
     traced_exclusive = int(coverage_row.get("traced_exclusive_ns", sum(int(e.get("traced_exclusive_ns", 0)) for e in aggregate_rows)))
+    transitions = [event for event in events
+                   if event.get("event") == "transition" and event.get("root") == root]
+    distributions = [event for event in events
+                     if event.get("event") == "distribution" and event.get("root") == root]
     return {
         "root": root,
         "totals": totals,
@@ -126,6 +130,8 @@ def classify(events, root=None):
         "traced_calls": traced_calls,
         "traced_exclusive_ns": traced_exclusive,
         "aggregate": bool(aggregate_rows),
+        "transitions": transitions,
+        "distributions": distributions,
     }
 
 
@@ -146,6 +152,27 @@ def main():
         print("%s calls=%d exclusive_ms=%.3f reduction_ms=%.3f share=%.3f" %
               (label, row["calls"], row["exclusive_ns"] / 1e6, row["reduction_ns"] / 1e6,
                row["exclusive_ns"] / result["root_exclusive_ns"] if result["root_exclusive_ns"] else 0))
+    transition_calls = sum(int(row.get("calls", 0)) for row in result["transitions"])
+    transition_exclusive = sum(int(row.get("exclusive_ns", 0)) for row in result["transitions"])
+    print("transition_totals calls=%d expected=%d exclusive_ms=%.3f root_direct_ms=%.3f" %
+          (transition_calls, max(result["total_calls"] - 1, 0), transition_exclusive / 1e6,
+           max(result["root_exclusive_ns"] - transition_exclusive, 0) / 1e6))
+    print("transition_matrix:")
+    for row in sorted(result["transitions"], key=lambda e: int(e.get("exclusive_ns", 0)), reverse=True):
+        print("parent=%s child=%s calls=%d exclusive_ms=%.3f reduction_ms=%.3f failure_followup=%d reduction_before_child=%d" %
+              (row.get("parent_branch", "unknown"), row.get("child_kind", "unknown"),
+               int(row.get("calls", 0)), int(row.get("exclusive_ns", 0)) / 1e6,
+               int(row.get("reduction_ns", 0)) / 1e6,
+               int(row.get("failure_followup", 0)), int(row.get("reduction_before_child", 0))))
+    for label in LABELS:
+        for metric in ("depth", "fanout"):
+            rows = [row for row in result["distributions"]
+                    if row.get("label") == label and row.get("metric") == metric]
+            total = sum(int(row.get("calls", 0)) for row in rows)
+            if total:
+                weighted = sum(int(row.get("bucket", 0)) * int(row.get("calls", 0)) for row in rows)
+                print("distribution label=%s metric=%s calls=%d max_bucket=%d mean_bucket=%.3f" %
+                      (label, metric, total, max(int(row.get("bucket", 0)) for row in rows), weighted / total))
     print("top_exclusive:")
     for ns, call, label, left, right, depth, path in result["top"]:
         print("call=%d label=%s depth=%s exclusive_ms=%.3f path=%s left=%s right=%s" %

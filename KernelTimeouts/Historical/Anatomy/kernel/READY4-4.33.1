@@ -1,0 +1,15 @@
+version: Lean 4.33.1
+githash: 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+build: Release, USE_MIMALLOC=ON, READY4 branch-reason build
+baseline-source: <leank-root>/build33-mprwe-base/bin/lean
+instrumented: <leank-root>/build33-m1p-cpp-ready4/stage1/bin/lean
+patch: KernelTimeouts/Historical/Anatomy/kernel/lean-v4.33.1-m1p.patch
+analyzer: KernelTimeouts/Historical/Anatomy/kernel/mprwe_analyze.py
+usage: python3 mprwe_analyze.py <events.jsonl> --root <process-wide-root-id>
+root-identity: process-wide relaxed atomic serial; active root pinned per comparison tree
+schema: per-call child branch/kind/index, reduction side/exposure, child result, failure-followup; complete transition and depth/fanout aggregates
+validation: Derived-Completion Cone root 1869; 12,220,818 calls; M1 99.685%, M2 0.064%, Matched 0.251%, Unclassified 0.000%
+transition-validation: 12,220,817 child edges; 86,451.813 ms edge exclusive + 0.063 ms root direct = 86,451.877 ms root exclusive
+raw-capture: 808 entered/746 exited calls in selected root; aggregate coverage is complete and independent of bounded raw capture
+control: accepted READY3.2 full Cone root was 12,220,823 calls; READY4 counters and trace agree at 12,220,818 (five-call timeout-boundary drift under added bookkeeping)
+compatibility: observational only; reduction order, transparency, caches, shortcuts, and root operation unchanged
