@@ -1,0 +1,88 @@
+name: Technical debt PR summary
+
+# One sticky comment per pull request with the change in the technical-debt counters
+# (`scripts/tech_debt/metrics.py`: linter suppressions, heartbeat modifications, sorry, erw, ...)
+# between the merge base and the PR head. Mathlib's analogue is the tech-debt part of its
+# `PR_summary.yml`.
+#
+# Security. Commenting on a pull request from a fork needs a write token, which `pull_request`
+# does not give, so this uses `pull_request_target`, as Mathlib does. That event runs this file
+# as it is on the *base* branch, with a token that can write. Therefore:
+#   - the checkout is the base branch (the default for `pull_request_target`), so the only code
+#     that runs is the base branch's `scripts/tech_debt/metrics.py`;
+#   - the PR's commits are fetched as git objects and only read (`git diff`, `git cat-file`):
+#     no file of the PR is executed, sourced, imported or built, and nothing is checked out;
+#   - no secrets; the token can only read contents and write pull-request comments;
+#   - GitHub-hosted runner only: PR content never reaches the self-hosted `big-server`;
+#   - event fields are passed through `env`, never interpolated into the script.
+# The counters are text matches: no build, about a minute per run.
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.repository }}-tech-debt-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      # The base branch, with history (for the merge base). Credentials are not kept in
+      # .git/config; the repository is public, so the fetch below needs none.
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Fetch the PR head (as data)
+        env:
+          PR: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "+refs/pull/$PR/head:refs/remotes/pr/head"
+          git cat-file -e "$HEAD_SHA^{commit}"
+
+      - name: Compute the technical-debt diff
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          set -euo pipefail
+          base=$(git merge-base HEAD "$HEAD_SHA")
+          {
+            echo "<!-- tech-debt-summary -->"
+            echo "### Technical debt"
+            echo
+            python3 scripts/tech_debt/metrics.py diff "$base" "$HEAD_SHA" --repo-url "$REPO_URL"
+          } > "$RUNNER_TEMP/comment.md"
+          cat "$RUNNER_TEMP/comment.md"
+
+      # Edit this workflow's earlier comment if there is one; otherwise comment only when a
+      # counter changed, so that PRs without tech-debt changes get no comment.
+      - name: Post or update the comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          body="$RUNNER_TEMP/comment.md"
+          id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR/comments" \
+                 --jq '.[] | select(.user.login == "github-actions[bot]")
+                           | select(.body | startswith("<!-- tech-debt-summary -->")) | .id' | head -n 1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -F "body=@$body" > /dev/null
+            echo "updated comment $id"
+          elif grep -q "No changes to the technical-debt counters" "$body"; then
+            echo "no changes; not commenting"
+          else
+            gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F "body=@$body" > /dev/null
+            echo "posted a comment"
+          fi
