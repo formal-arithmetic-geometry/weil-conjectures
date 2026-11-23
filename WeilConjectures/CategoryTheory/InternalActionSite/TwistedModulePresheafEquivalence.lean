@@ -16,10 +16,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Module presheaves and sheaves on the internal action site
 
-Source: the agent-formulated categorical foundation accompanying main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3), returned steps 4--6;
-Stacks Sites, Tags 00Z8, 00ZC, and Modules on Sites, Section 03CS for background
-(blueprint: lem-sfb-twisted-module-presheaf-equivalence).
+Source: Stacks Sites, Tags 00Z8, 00ZC, and Modules on Sites, Section 03CS for background.
 
 All categories, actions and coefficient objects are the existing constructions in
 `InternalActionSitePresentation`, exposed by the sieve-geometry dependency. The theorem
@@ -522,38 +519,7 @@ private theorem coefficient_sheaf [HasFiniteLimits C] (J : Precoverage C)
   exact ht
 
 /-- The explicit additive equivalence of module presheaves, preserving and reflecting sheaves.
-
-Source: agent-formulated categorical foundation for main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3), returned steps 4--6;
-Stacks Sites 00Z8, 00ZC and Modules on Sites 03CS are background only
-(blueprint: lem-sfb-twisted-module-presheaf-equivalence).
-
-Proof: (1) Use `lem-sfb-twisted-site-sieve-geometry` to identify every covering sieve
-with all labels over a base covering sieve, and factor (f,a) as (1,a) followed by (f,1).
-(2) Extend P by E(P)(f,a)m = a.f*m. Naturality and the left action law give
-b.g*(a.f*m) = (b g*a).(fg)*m, so this is contravariantly functorial.
-(3) For a base sieve T, extend a matching family by y_(f,a) = a.x_f. Restricting to
-label-one arrows is its inverse: compatibility along (1,a) forces this formula.
-These assignments preserve precisely the same amalgamating sections, including uniqueness.
-(4) The covering-sieve comparison and `def-weil-pbc-topos` therefore identify the two
-sheaf conditions directly for the generated Grothendieck topologies in the statement.
-No pretopology conversion is needed.
-(5) Give R the trivial action. Its extended restrictions are exactly f*, so (4) makes
-the existing coefficient presheaf a sheaf of commutative unital rings.
-(6) Each extended restriction is semilinear: a.(f*r f*m) = f*r (a.f*m). A natural,
-equivariant componentwise linear map commutes with these restrictions, defining E on maps.
-(7) Recover restrictions N(f,1) and action N(1,a). The label-one composition law gives
-functorial restrictions. Contravariance on vertical arrows gives a left action;
-R_K(1,a) = id gives linearity. The two factorizations of (f,f*a) give action naturality.
-A morphism of module presheaves is natural at both kinds of arrows, giving the recovered map.
-(8) On P the recovered restrictions and action are the original ones. On N, factorization
-gives N(1,a)N(f,1) = N(f,a). Both round trips keep every component map. Hence the
-round trips are identities, with identity section components for the unit and counit.
-Pointwise addition and zero of linear maps commute with the action, so both functors
-are additive, using `def-weil-presheaf-modules-sheafification` for module presheaves.
-(9) By (4), restrict these same inverse functors to the full subcategories of sheaves
-of `situation-conventions`. Their underlying objects and maps are unchanged,
-so the sheaf equivalence is additive and has exactly the stated restrictions and actions. -/
+Source: Stacks Sites 00Z8, 00ZC and Modules on Sites 03CS are background only. -/
 theorem module_presheaf_equivalence [HasFiniteLimits C] (J : Precoverage C)
     (hJ : J.IsSiteForCoverings)
     (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u}))

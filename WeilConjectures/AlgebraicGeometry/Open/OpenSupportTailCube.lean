@@ -295,9 +295,6 @@ import all WeilConjectures.AlgebraicGeometry.EtaleGraphFromOpenBaseChange
 import all WeilConjectures.AlgebraicGeometry.Open.OpenSupportGraphExchange
 
 /-! # The graph-free proper/open part of the support cube
-
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i).
-(blueprint: lem-asd-open-support-tail-cube)
 -/
 
 @[expose] public section
@@ -552,30 +549,7 @@ private theorem tail_exact
   erw [reassoc_of% hP, reassoc_of% hC, hM, ← reassoc_of% hN]
   rfl
 
-/-- The proper/open interchange and open compositor commute with base change.
-Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherence (i), applied
-to the two base changes of the proper/open compactification diagram.
-
-Proof: write k for the first projection of cf.g against j, k' for the corresponding
-projection after base change, and z for the first projection of cf.g against g.
-The hypothesis hw identifies the square (w,k',k,z), while hp is the square for
-the proper parts. Apply the proper/open exchange cube to these squares and sqj.
-Its proper exchanges are the mates of the commuting inverse-image squares;
-proper mate pasting identifies the composite proper exchanges on the two paths.
-Whisker this equality by the open extension along (cf.ofIsPullback sqU).i.
-For the remaining factors, transpose the two paths under the composite open
-adjunction. The unit equations of open base change, inverse-image composition
-coherence, and the triangle identities give the same transpose. Exactness of
-open extension descends this identity degreewise to the unbounded derived
-category. The open compositor associativity and the equations defining the
-base-changed open embeddings identify its two outer composites with a followed
-by cf.i and a' followed by (cf.ofIsPullback sq).i. Substitute these identities
-and reassociate. This first gives the equation for exact inverse image. Conjugate
-by its canonical comparison with left derived inverse image; naturality cancels
-the endpoint comparisons and gives the displayed equation. There is no graph
-comparison in this calculation, no quasi-compactness assumption, and the same
-unit equations cover empty opens and the zero coefficient ring.
-(blueprint: lem-asd-open-support-tail-cube) -/
+/-- The proper/open interchange and open compositor commute with base change. -/
 theorem openSupportTail_cube
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y X' Y' U V U' V' : Scheme.{u}}

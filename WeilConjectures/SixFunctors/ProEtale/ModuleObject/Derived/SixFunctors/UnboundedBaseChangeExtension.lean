@@ -48,7 +48,7 @@ private theorem extend_iso
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     (S : ObjectProperty C) (hloc : IsLocalizingSubcategory (localizingClosure S))
     (F G : C ⥤ D) (η : F ⟶ G) [η.isoLocus.IsTriangulated]
-    (hsums : ∀ (I : Type u) (J : Discrete I ⥤ (localizingClosure S).FullSubcategory),
+    (hsums : ∀ (I : Type v) (J : Discrete I ⥤ (localizingClosure S).FullSubcategory),
       PreservesColimit (J ⋙ (localizingClosure S).ι) F ∧
         PreservesColimit (J ⋙ (localizingClosure S).ι) G)
     (hS : ∀ K, S K → IsIso (η.app K)) :
@@ -223,6 +223,29 @@ private theorem composite_sums
     exact hp'.2 I J'
   constructor <;> infer_instance
 
+/-- `composite_sums` for a sum indexed by the universe of the morphisms: lift the index along
+`ULift`, the index categories being equivalent. -/
+private theorem composite_sums_small
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hp : ProperLocalizingHypotheses Λ p)
+    (hp' : ProperLocalizingHypotheses Λ p')
+    (hg : UnboundedLocalizingPullback Λ g)
+    (hg' : UnboundedLocalizingPullback Λ g')
+    (I : Type (u + 1)) (J : Discrete I ⥤ (localizingClosureProEtale Λ X).FullSubcategory) :
+    PreservesColimit (J ⋙ (localizingClosureProEtale Λ X).ι)
+      ((lowerStar Λ p).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor) ∧
+    PreservesColimit (J ⋙ (localizingClosureProEtale Λ X).ι)
+      ((upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ p').rightDerivedFunctor) := by
+  let e := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)
+  obtain ⟨h₁, h₂⟩ := composite_sums Λ hp hp' hg hg' (ULift.{u + 2} I) (e.functor ⋙ J)
+  have h₁' : PreservesColimit (e.functor ⋙ (J ⋙ (localizingClosureProEtale Λ X).ι))
+    ((lowerStar Λ p).rightDerivedFunctor ⋙ (upperStar Λ g).leftDerivedFunctor) := h₁
+  have h₂' : PreservesColimit (e.functor ⋙ (J ⋙ (localizingClosureProEtale Λ X).ι))
+    ((upperStar Λ g').leftDerivedFunctor ⋙ (lowerStar Λ p').rightDerivedFunctor) := h₂
+  exact ⟨Functor.Final.preservesColimit_of_comp (F := e.functor),
+    Functor.Final.preservesColimit_of_comp (F := e.functor)⟩
+
 private theorem extension_of_preservation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (sq : ChosenCartesianSquare g' p' p g)
@@ -238,7 +261,7 @@ private theorem extension_of_preservation
   apply (he K).2
   let := condensedAmbientExchange_isoLocus_triangulated Λ sq
   apply extend_iso _ _ _ _ (condensedAmbientExchange Λ sq)
-    (composite_sums Λ hp hp' hg hg') (fun M hM ↦ (he M).1 (h M hM)) K hK
+    (composite_sums_small Λ hp hp' hg hg') (fun M hM ↦ (he M).1 (h M hM)) K hK
   exact (localizingClosure_exists Λ X
     (constantModelBoundedConstructible Λ X ⊓ fun M ↦
       _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1

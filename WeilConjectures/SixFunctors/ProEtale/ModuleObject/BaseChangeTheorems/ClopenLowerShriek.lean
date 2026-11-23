@@ -382,6 +382,8 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
   simp only [Iso.trans_inv, Iso.trans_hom, Category.assoc, Functor.isoWhiskerLeft_inv,
     Functor.isoWhiskerRight_hom]
   simp only [← hc, Category.assoc, Iso.inv_hom_id_assoc, hr]
+  -- the proper-only `Rp_*` of the shriek and the general one agree definitionally
+  rfl
 
 /-- Composing with an identity and the image of an identity does nothing. -/
 lemma id_comp_map_id_comp {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (X : C) {Y : D}

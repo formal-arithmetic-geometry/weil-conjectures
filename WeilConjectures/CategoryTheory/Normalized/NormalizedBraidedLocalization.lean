@@ -11,9 +11,9 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # A braided comparison through a K-flat localization
 
-Source: Stacks Project, Tags 06YS and 06YT; uniqueness of derived bifunctors.
+Source: Stacks Project, Tags 06YS and 06YT.
 
-(blueprint: lem-pur-u2-normalized-braided-localization).
+.
 -/
 
 @[expose] public noncomputable section
@@ -102,12 +102,7 @@ private theorem square_monoidal [G.Monoidal] [IsIso (ε L)]
     exact (hδ X Y).symm
 
 /-- Braided localization together with the monoidal factorization it constructs.
-Source: Stacks Project, Tags 06YS and 06YT. The proof is the localization-square
-construction, retaining its monoidal factorization conclusion.
-Source: literature/stacks-project/sites-cohomology.tex; Tags 06YS and 06YT; same normalized
-derived-bifunctor square as lem-sfb-braided-localization-square, retaining its
-monoidal-factorization conclusion.
-(blueprint: lem-pur-u2-normalized-braided-localization). -/
+Source: Stacks Project, Tags 06YS and 06YT. -/
 theorem normalizedBraidedLocalization (W : MorphismProperty A)
     [W.ContainsIdentities] [W.RespectsIso] [Q.IsLocalization W]
     [W.localizerMorphismKFlat.IsLeftDerivabilityStructure]

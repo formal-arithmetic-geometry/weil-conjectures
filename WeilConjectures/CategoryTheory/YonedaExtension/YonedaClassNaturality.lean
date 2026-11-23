@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.YonedaExtension.YonedaExtensionClas
 /-! # Naturality of the concrete extension class
 
 Source: Stacks Project, Tag 06XU, functoriality of the class construction.
-(blueprint: lem-coef-yoneda-class-naturality)
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -20,9 +20,8 @@ This file defines the strict transform of a morphism `f : Y ⟶ X` along a morph
 
 Given `f : Y ⟶ X`, `π : X' ⟶ X` and an open `U ⊆ X`, the fibre product `Y ×_X X'`
 contains the open locus lying over `U`. The strict transform of `Y` is the
-scheme-theoretic image of this open locus inside `Y ×_X X'`
-(blueprint: `def:nagata-strict-transform`). For a blow-up `π = Bl_I(X) ⟶ X` and `U` the
-complement of the support of `I`, this recovers the classical strict transform; the
+scheme-theoretic image of this open locus inside `Y ×_X X'`. For a blow-up `π = Bl_I(X) ⟶ X` and `U`
+the complement of the support of `I`, this recovers the classical strict transform; the
 specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 
 ## Main definitions
@@ -31,8 +30,7 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
 - `AlgebraicGeometry.strictTransformOpenLift`: the factorization through the open locus
   of a morphism to `Y ×_X X'` whose composite to the base lands in `U`;
 - `AlgebraicGeometry.strictTransform f π U`: the strict transform, i.e. the
-  scheme-theoretic image of the open locus in `Y ×_X X'`
-  (blueprint: `def:nagata-strict-transform`);
+  scheme-theoretic image of the open locus in `Y ×_X X'`;
 - `AlgebraicGeometry.strictTransformι`: the closed immersion into `Y ×_X X'`;
 - `AlgebraicGeometry.strictTransformOpenIso`: if `π` is an isomorphism over `U`, the
   identification of the open locus with the preimage `f ⁻¹ᵁ U` in `Y`;
@@ -50,26 +48,22 @@ specialization is `AlgebraicGeometry.Scheme.IdealSheafData.strictTransform`.
   the `U`-part of the image (`mem_range_strictTransformMap_of_mem_of_mem_range`) and
   the full inverse image of the image
   (`range_strictTransformMap_subset_preimage_range`); consequently
-  disjointness of closed subschemes persists along strict transforms
-  (`disjoint_range_strictTransformMap_of_disjoint`; blueprint:
-  `lemma:nagata-boundary-disjoint-persists`; proof order item 37);
+  disjointness of closed subschemes persists along strict transforms;
 - `AlgebraicGeometry.isPullback_strictTransformOpen`: if `π` is an isomorphism over
   `U`, the open locus is canonically `Y ×_X U`;
 - `AlgebraicGeometry.isPullback_strictTransform_over`: the combination of the previous
   two, identifying the part of the strict transform lying over `U` with the ordinary base
-  change `Y ×_X U` (blueprint: `lemma:nagata-strict-transform-over-complement`);
+  change `Y ×_X U`;
 - `AlgebraicGeometry.quasiCompact_strictTransformOpen_ι_of_isCompact`: the standing
   quasi-compactness assumption of the comparison API, discharged from finiteness data;
 - `AlgebraicGeometry.ker_strictTransformMap`: when the inclusion of the open locus is
   quasi-compact, the strict transform and its open locus have the same scheme-theoretic
   image in `X'`, since the factorization of the open locus through the strict transform
-  is scheme-theoretically dominant
-  (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`);
+  is scheme-theoretically dominant;
 - `AlgebraicGeometry.ker_eq_ker_strictTransformOpen_ι`: a morphism to `Y ×_X X'` whose
   first component is an isomorphism over `f ⁻¹ᵁ U`, on a schematically dense preimage of
   `f ⁻¹ᵁ U`, cuts out the same closed subscheme as the open locus over `U`. This is the
   key step of Stacks Project Tag 080E.
-
 -/
 
 @[expose] public section
@@ -143,7 +137,7 @@ end Lift
 /-- The strict transform of `f : Y ⟶ X` along `π : X' ⟶ X` relative to the open
 `U ⊆ X`: the scheme-theoretic image of the open locus of `Y ×_X X'` lying over `U`.
 For `π` the blow-up of an ideal with support complement `U` this is the classical
-strict transform. (Blueprint: `def:nagata-strict-transform`.) -/
+strict transform. -/
 def strictTransform : Scheme.{u} :=
   ((strictTransformOpen f π U).ι).image
 
@@ -241,7 +235,7 @@ instance : IsSchemeTheoreticallyDominant (strictTransformFactor f π U) :=
   inferInstanceAs (IsSchemeTheoreticallyDominant ((strictTransformOpen f π U).ι).toImage)
 
 /-- **The strict transform and its open locus have the same scheme-theoretic image in
-`X'`** (blueprint: `lemma:nagata-scheme-image-transport-strict-transform`).
+`X'`**.
 
 This is the half of the transport of scheme-theoretic images along an admissible blow-up
 (Stacks Project Tag 0F3Y) that is pure strict-transform theory. -/
@@ -294,8 +288,7 @@ theorem mem_range_strictTransformMap_of_mem_of_mem_range {x' : X'} (hU : π x' �
     _ = pullback.snd f π ((strictTransformOpen f π U).ι w₀) := Scheme.Hom.comp_apply _ _ _
     _ = x' := hw2
 
-/-- **Disjointness of boundary closures persists along strict transforms**
-(blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order item 37).
+/-- **Disjointness of boundary closures persists along strict transforms**.
 
 Each strict transform is contained in the full inverse image of the corresponding closed
 subscheme. -/
@@ -312,15 +305,14 @@ end Range
 section OverComplement
 
 /-- Over the preserved open locus, the ideal sheaf cutting out the strict transform
-vanishes: nothing is lost over `U`.
-(Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
+vanishes: nothing is lost over `U`. -/
 theorem strictTransform_ker_comap_openι :
     ((strictTransformOpen f π U).ι).ker.comap (strictTransformOpen f π U).ι = ⊥ :=
   Scheme.Hom.comap_ker_self _
 
 /-- The strict transform contains the whole open locus over `U`: the base change of the
 closed immersion `strictTransform f π U ⟶ Y ×_X X'` to the open locus over `U` is an
-isomorphism. (Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
+isomorphism. -/
 instance isIso_pullback_fst_strictTransformι :
     IsIso (pullback.fst (strictTransformOpen f π U).ι (strictTransformι f π U)) := by
   have h1 : (pullback.fst (strictTransformOpen f π U).ι (strictTransformι f π U)).ker = ⊥ := by
@@ -336,7 +328,7 @@ variable [IsIso (π ∣_ U)]
 
 /-- **The open locus over `U` is the ordinary pullback when `π` is an isomorphism over
 `U`** — for instance when `π` is the blow-up of an ideal whose support is disjoint from
-`U` (blueprint: `lemma:nagata-strict-transform-over-complement`). -/
+`U`. -/
 theorem isPullback_strictTransformOpen :
     IsPullback ((strictTransformOpen f π U).ι ≫ pullback.fst f π)
       ((pullback.snd f π ∣_ (π ⁻¹ᵁ U)) ≫ (π ∣_ U)) f U.ι := by
@@ -350,8 +342,7 @@ theorem isPullback_strictTransformOpen :
   · simp
   · simp [morphismRestrict_ι]
 
-/-- **The strict transform over the preserved open is the ordinary base change**
-(blueprint: `lemma:nagata-strict-transform-over-complement`).
+/-- **The strict transform over the preserved open is the ordinary base change**.
 
 This combines `AlgebraicGeometry.isIso_pullback_fst_strictTransformι` with
 `AlgebraicGeometry.isPullback_strictTransformOpen`. -/
@@ -423,8 +414,7 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 variable {X Y : Scheme.{u}} (I : X.IdealSheafData) (f : Y ⟶ X)
 
 /-- The strict transform of `f : Y ⟶ X` along the blow-up of the ideal sheaf `I`,
-preserving the complement of the support of `I`.
-(Blueprint: `def:nagata-strict-transform`.) -/
+preserving the complement of the support of `I`. -/
 def strictTransform : Scheme.{u} :=
   AlgebraicGeometry.strictTransform f I.blowupMap I.support.compl
 
@@ -438,8 +428,7 @@ instance : IsClosedImmersion (I.strictTransformι f) :=
 /-- Away from the centre, the open locus of `Y ×_X Bl_I X` over the complement of the
 support of `I` is canonically the ordinary pullback, compatibly with the projection
 to `Y`. This combines the blow-up complement theorem
-(`thm:nagata-global-blowup-complement`) with the strict transform comparison.
-(Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
+with the strict transform comparison. -/
 theorem isPullback_strictTransformOpen_blowupMap :
     IsPullback
       ((strictTransformOpen f I.blowupMap I.support.compl).ι ≫ pullback.fst f I.blowupMap)
@@ -450,8 +439,7 @@ theorem isPullback_strictTransformOpen_blowupMap :
   AlgebraicGeometry.isPullback_strictTransformOpen f I.blowupMap I.support.compl
 
 /-- The strict transform along a blow-up agrees with the ordinary base change over the
-complement of the centre.
-(Blueprint: `lemma:nagata-strict-transform-over-complement`.) -/
+complement of the centre. -/
 theorem isPullback_strictTransform_over_blowupMap :
     IsPullback
       (pullback.fst (strictTransformOpen f I.blowupMap I.support.compl).ι

@@ -37,7 +37,6 @@ This generalizes the pro-étale base change of
 `WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat`.
 
 Source: Stacks Project, Tags 00YV, 03D2, 05VD.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -968,20 +967,7 @@ end Comparison
 inverse image `Mod.mapModComap ρ`, transported through the section-module equivalences, is the
 module part of an algebraic inverse image along the set-valued sheaf pullback `U^*`.
 
-Source: Stacks Project, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node)
-
-Proof. Both the set-valued and the abelian sheaf pullbacks are left Kan extension along `U.op`
-followed by sheafification. The comma categories `CostructuredArrow U.op W` are filtered since
-`U` is representably flat, so the forgetful functor of abelian groups commutes with the Kan
-extension and with sheafification. Composing with the inverse of `ρ` and the equal-universe
-`ULift` isomorphisms gives the ring comparison; the section-equivalence counit gives the module
-comparison. Each operation graph equation is checked after transposing through the set-valued
-adjunction `U^* ⊣ U_*`: the transposed maps are the source maps followed by the abelian
-adjunction unit and the inverse coefficient isomorphism. The additive unit preserves addition
-and zero, its monoid-homomorphism property (from the monoidal adjunction) preserves
-multiplication and one, and the lifted module-adjunction unit preserves scalar multiplication.
-Choose the constructed module functor itself, with the identity comparison isomorphism. -/
+Source: Stacks Project, Tags 00YV and 03D2. -/
 theorem exists_sectionModuleAlgebraicInverseImage
     (R : Sheaf J Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf K Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
@@ -1133,18 +1119,7 @@ theorem exists_sectionModuleAlgebraicInverseImage
 `ρ : S ⟶ U^* R` an isomorphism of commutative ring objects in abelian sheaves. Then the
 internal inverse image `Mod.mapModComap ρ` preserves flat module objects.
 
-Source: Stacks Project, Tag 05VD, lemma-pullback-flat.
-(auxiliary; not a blueprint node)
-
-Proof. The explicit balanced tensor comparison transports internal flatness to site-flatness
-of section modules. The set-valued sheaf pullback `U^*` is left Kan extension along `U.op`
-followed by sheafification, with right adjoint `U_*`. The comma categories are filtered since
-`U` is representably flat, and filtered colimits of types commute with finite limits, so `U^*`
-is left exact. By `exists_sectionModuleAlgebraicInverseImage` its module inverse image is the
-internal inverse image, so the universe-polymorphic algebraic inverse-image flatness theorem
-applies. Transfer the result through the source equivalence unit and the comparison
-isomorphism, using that the local equational criterion is invariant under isomorphism, and use
-the reverse tensor comparison to recover internal flatness. -/
+Source: Stacks Project, Tag 05VD. -/
 theorem preservesFlat_mapModComap
     (R : Sheaf J Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf K Ab.{u + 1}) [MonObj S] [IsCommMonObj S]

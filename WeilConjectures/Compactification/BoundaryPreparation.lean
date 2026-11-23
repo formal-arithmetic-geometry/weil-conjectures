@@ -15,32 +15,16 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 # Boundary preparation for the two-open compactification theorem
 
 This file provides the boundary-preparation inputs of the two-open compactification
-theorem, following the blueprint chapter "Nagata compactification", sections
-"Separating boundary pieces" and "The two-open compactification theorem"
-(proof order items 34 and 36):
+theorem:
 
 - `AlgebraicGeometry.Compactification.denseRefinement`: the scheme-theoretically dense
   refinement of a compactification, replacing the ambient scheme by the
-  scheme-theoretic image of the open immersion (blueprint:
-  `def:nagata-dense-refinement`, `prop:nagata-dense-refinement`), together with
-  `AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant`
-  (blueprint: `def:nagata-two-open-dense-compactifications`,
-  `lemma:nagata-two-open-dense-compactifications`; proof order item 34);
+  scheme-theoretic image of the open immersion, together with
+  `AlgebraicGeometry.exists_compactification_isSchemeTheoreticallyDominant`;
 - `AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures`: the
   **constructible-boundary separation blow-up** (Stacks Project Tags 080P and 0F3V):
   two disjoint constructible closed subsets of a quasi-compact open `U ⊆ X` acquire
-  disjoint closures of their inverse images after a `U`-admissible blow-up
-  (blueprint: `def:nagata-separate-constructible-closed`,
-  `lemma:nagata-separate-constructible-closed`,
-  `def:nagata-two-open-prepared-boundaries`; proof order item 36).
-
-The proof of `exists_admissibleBlowup_disjoint_closures` combines the boundary
-separation theorem `disjoint_range_strictTransformMap_sup` of
-`WeilConjectures.Blowup.AdmissibleBlowup` (Stacks Tag 0F3V) with the range
-comparisons of `WeilConjectures.Compactification.StrictTransform`: the closure of
-the inverse image of the `U`-part of a closed center is contained in the strict
-transform (`IsAdmissible.closure_preimage_subset_range_strictTransformMap`).
-
+  disjoint closures of their inverse images after a `U`-admissible blow-up.
 -/
 
 @[expose] public section
@@ -58,7 +42,7 @@ section DenseRefinement
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- The **scheme-theoretically dense refinement** of a compactification of a
-quasi-compact morphism (blueprint: `def:nagata-dense-refinement`).
+quasi-compact morphism.
 
 The refined open immersion is the factor map `c.i.toImage`, an open immersion because
 `c.i` is a quasi-compact immersion; the refined proper morphism is the composite of the
@@ -78,16 +62,14 @@ def Compactification.denseRefinement (c : Compactification f) [QuasiCompact f] :
 
 /-- The open immersion into the dense refinement of a compactification is
 scheme-theoretically dominant: it is the factor map through the scheme-theoretic
-image. (Blueprint: `prop:nagata-dense-refinement`.) -/
+image. -/
 theorem Compactification.isSchemeTheoreticallyDominant_denseRefinement_i
     (c : Compactification f) [QuasiCompact f] :
     IsSchemeTheoreticallyDominant c.denseRefinement.i :=
   have : QuasiCompact c.i := c.quasiCompact_openImmersion ‹_›
   inferInstanceAs (IsSchemeTheoreticallyDominant c.i.toImage)
 
-/-- **Choice of dense compactifications** (blueprint:
-`def:nagata-two-open-dense-compactifications`,
-`lemma:nagata-two-open-dense-compactifications`; proof order item 34).
+/-- **Choice of dense compactifications**.
 
 The compactification produced is the dense refinement of any chosen compactification. -/
 theorem exists_compactification_isSchemeTheoreticallyDominant
@@ -125,17 +107,8 @@ theorem IsAdmissible.closure_preimage_subset_range_strictTransformMap
   exact hT htT
 
 /-- **The constructible-boundary separation blow-up** (Stacks Project Tags 080P and
-0F3V; blueprint: `def:nagata-separate-constructible-closed`,
-`lemma:nagata-separate-constructible-closed`,
-`def:nagata-two-open-prepared-boundaries`, `lemma:nagata-prepared-boundaries`;
-proof order item 36).
-
-The blow-up is the boundary-separation blow-up of the sum of two finite-type ideals
-`I₁`, `I₂` extending the vanishing ideals of `T₁`, `T₂` from `U` (Stacks Tags 01PH
-and 01PF, `Scheme.IdealSheafData.exists_finiteType_preimage_coe_support_eq`); the
-closure of the inverse image of `Tᵢ` is contained in the strict transform of `V(Iᵢ)`
-(`IsAdmissible.closure_preimage_subset_range_strictTransformMap`), and these strict
-transforms are disjoint by `disjoint_range_strictTransformMap_sup`. -/
+0F3V): two disjoint constructible closed subsets `T₁`, `T₂` of a quasi-compact open `U ⊆ X`
+acquire disjoint closures of their inverse images after a `U`-admissible blow-up. -/
 theorem exists_admissibleBlowup_disjoint_closures
     [CompactSpace X] [QuasiSeparatedSpace X] (hU : IsCompact (U : Set X))
     {T₁ T₂ : Set U.toScheme} (hT₁ : IsClosed T₁) (hT₂ : IsClosed T₂)

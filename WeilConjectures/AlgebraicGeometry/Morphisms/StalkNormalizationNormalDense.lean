@@ -18,8 +18,10 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.StalkNormalizationDensePart
 /-!
 # Normality and density of the localized relative normalization
 
-Source: Stacks Project, Tags 035L, 035K, 035I, 0307 and 0EYJ.
-(blueprint: lem-sbc-stalk-normalization-normal-dense)
+## References
+
+* Stacks Project, Tags 035L (normality of relative normalization), 035K (locality), 035I
+  (dominance), 0307 (localization), and 0EYJ
 -/
 
 @[expose] public section
@@ -28,22 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Localization of the relative normalization is normal, with dense punctured source.
-
-Source: Stacks Project, Tags 035L (normality of relative normalization),
-035K (locality), 035I (dominance), 0307 (localization), and 0EYJ.
-(blueprint: lem-sbc-stalk-normalization-normal-dense)
-
-Proof: Smoothness over a normal base makes C normal. The finite etale scheme P over
-C_U is normal and locally Noetherian, with locally finite irreducible components.
-Relative normalization in P is therefore normal: on an affine chart decompose P
-into its normal integral components, take integral closures in their rings of
-sections, and localize. Each such integral closure is a normal domain. Localization
-at s commutes with integral closure, so the same description proves normality of
-the displayed pullback. The map from P to its relative normalization is
-schematically dominant. After localization it remains schematically dominant,
-since localization is flat. Its image lies over C_U, so the displayed open
-preimage is dense. If P is empty both claims are vacuous. -/
+/-- Localization of the relative normalization is normal, with dense punctured source. -/
 theorem stalk_normalization_normal_and_dense {S C : Scheme.{u}}
     [IsNoetherian S] [QuasiSeparatedSpace S] [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))

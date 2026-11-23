@@ -20,8 +20,9 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Reduced-case Noetherian induction for the generic affine property: every closed subset
-admits a finite reduced stratification with support exactly that subset.
+/-- Reduced-case Noetherian induction for the generic affine property: a reduced
+Noetherian scheme admits a finite locally closed stratification with reduced strata
+satisfying `P`.
 (Stacks, Tags 01OZ and 01J3.) -/
 theorem exists_reduced_stratification_of_integral_affine_generic_reduced
     (Y : Scheme.{u}) [IsLocallyNoetherian Y] [CompactSpace Y] [IsReduced Y]

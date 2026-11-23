@@ -88,20 +88,11 @@ private theorem arrow_composite_congr {C : Type z} [Category.{z} C]
   subst c'
   rfl
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph;
-Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-category-finite-lift).
+/-- If the functors `V j` present the category `O` as the filtered colimit of `F` on objects
+and on arrows, then finitely many objects and arrows of `O` lift to a single stage `j`,
+preserving their sources, targets, the given composites and the given identities.
 
-Proof: Choose stage representatives of the objects and arrows using joint
-surjectivity of their set colimits. Move the finitely many stages to a common
-stage. For each arrow endpoint that equals a listed object in the colimit,
-use eventual equality in the object colimit and refine until the equality holds.
-Do the same for every pair of arrow endpoints that coincide. At this stage every
-listed composite is defined. Functoriality identifies its colimit image with
-the listed composite in O. Eventual equality in the arrow colimit now makes
-each required composition and identity equation hold at a further stage.
-There are finitely many of these equations; a common refinement preserves all
-of them. The empty-list case uses the nonemptiness of the filtered category. -/
+Source: Stacks Project, Tags 09YL and 04AX. -/
 theorem filteredColimit_category_finite_lift
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

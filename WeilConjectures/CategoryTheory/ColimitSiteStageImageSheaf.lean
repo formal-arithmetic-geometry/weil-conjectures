@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteStageImageSheafAux
 /-! # ColimitSiteStageImageSheaf
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-stage-image-sheaf).
 -/
 
 @[expose] public section
@@ -26,24 +25,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-stage-image-sheaf).
-
-Proof: Lift a finite Q-cover, its arrows and covering pullbacks to a common stage.
-Lift the finitely many presenting arrows and local stage sections to a later
-stage. The presentation categories are filtered by eventual object and arrow
-equality. Their section colimits form a presheaf: restriction arrows lift to
-stages, with independence and functoriality following after refinement.
-Filtered colimits commute with the finite matching-family equalizers of stage
-sheaves, including the empty-cover equalizer. This presheaf is thus a sheaf.
-Stage adjunctions identify its maps into any sheaf with maps from G into
-restriction along V i, by transposition and the identity presentation.
-The resulting unit-compatible comparison to the limit inverse image is an
-isomorphism. Its sections are exactly the stage images followed by restriction:
-object presentations exist, and further refinements are final. Uniqueness of
-adjunction transposes identifies these image maps with alpha using hα.
-Consequently this explicitly constructed image subpresheaf is a sheaf.
--/
+/-- The stage-image presheaf is a sheaf for the topology of the colimit site.
+Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_stage_image_isSheaf
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

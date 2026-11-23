@@ -15,9 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.Integral.IntegralIndConstructibleHe
 
 /-!
 # Constructibility of proper higher direct images with rational coefficients
-
-Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph
-(blueprint: lem-proper-heart-constructible-cohomology).
 -/
 
 @[expose] public section
@@ -37,38 +34,21 @@ private lemma constantModelBoundedConstructible_eq_rational
     (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
       Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨
       Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ))
-    (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)
+    (k : Type u) [Field k]
     (T : Scheme.{u}) [T.Over (Spec (.of k))]
-    [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
-    [QuasiCompact (T ↘ Spec (.of k))] :
+    [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] :
     constantModelBoundedConstructible Λ.X T = boundedConstructible (condensedRingObj Λ.X T) := by
-  have h := (finiteCoefficientDescentTwoColimit k p₀ ℓ hp₀ hpℓ T).2.2.2
   rcases hΛ with ⟨E, hE⟩ | hQ
   · subst Λ
-    exact (h.1 E).1
+    exact constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType k ℓ E T
   · subst Λ
-    exact h.2.1.1
+    exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType k ℓ T
 
 attribute [local irreducible] Functor.rightDerivedFunctor
 
 /-- Proper higher direct images of finite constant-model constructible rational modules
 are again finite constant-model constructible, for finite extensions and the condensed
-algebraic closure.
-
-Source: blueprint main-20261015, lemma-uniform-bound-proper-direct-image, final paragraph, first
-sentence; proposition-proper-direct-image-constructible-complexes, rational bounded-constructibility
-clause (blueprint: lem-proper-heart-constructible-cohomology).
-
-Proof: place M in degree zero. Its degree-zero cohomology is isomorphic to M;
-all other cohomology modules are zero. Transport finite constant local models through
-the isomorphism and use the rank-zero constant model for zero modules, obtaining
-finite-constant-model bounded constructibility. In the standing finite-type setting,
-clause (4) of finiteCoefficientDescentTwoColimit identifies this predicate with the
-boundedConstructible predicate for both rational coefficient rings. Use that equality
-on X, apply properPushforward_boundedConstructible_rational to the actual morphism
-over Spec k, and use the equality on Y in the reverse direction. Extract degree q.
-The zero module and empty schemes are included by the same construction. No uniform
-fibre dimension bound or passage to ind-objects is used. -/
+algebraic closure. -/
 theorem properHeart_constructible_cohomology
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -90,7 +70,7 @@ theorem properHeart_constructible_cohomology
       [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))]
       [QuasiCompact (T ↘ Spec (.of k))] :
       constantModelBoundedConstructible Λ T = boundedConstructible (condensedRingObj Λ T) :=
-    constantModelBoundedConstructible_eq_rational ℓ (Mon.mk Λ) hΛ k p₀ hp₀ hpℓ T
+    constantModelBoundedConstructible_eq_rational ℓ (Mon.mk Λ) hΛ k T
   have : Fact (ringChar k).Prime := ⟨by
     rw [ringChar.eq k p₀]
     exact (CharP.char_is_prime_or_zero k p₀).resolve_right hp₀.ne'⟩

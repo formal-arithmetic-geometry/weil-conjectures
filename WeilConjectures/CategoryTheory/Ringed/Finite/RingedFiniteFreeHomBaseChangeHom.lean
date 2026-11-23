@@ -12,9 +12,11 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 /-! # The internal-Hom transpose component of finite-free base change.
 
 The finite-free hypothesis and the normalized strong tensor comparison determine the
-transpose uniquely; the proof is the restriction-of-scalars finite-biproduct argument
-from Stacks Tags 08J9 and 08JA.
-(blueprint: lem-sf-ringed-finite-free-hom-base-change)
+transpose uniquely.
+
+## References
+
+* Stacks Project, Tags 08J9 and 08JA.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -251,28 +253,7 @@ private theorem conservative
 /-- The evaluation transpose for normalized finite-free scalar extension is invertible.
 The ordinary functor, its universal derived pair and both representative tensor
 normalizations are hypotheses; an arbitrary tensor-preserving functor is insufficient.
-Source: Stacks Project, sites-cohomology.tex, Tags 08J9 and 08JA,
-labels lemma-internal-hom and lemma-section-RHom-over-U; finite-free specialization.
-(blueprint: lem-sf-ringed-finite-free-hom-transpose).
-
-Proof: let U be exact restriction of scalars. A basis S = R^d gives natural
-isomorphisms X^d ≅ U(T X), computed on K-flat representatives by the maps
-(x_j) mapped to sum e_j tensor x_j and the inverse basis coefficient maps.
-The normalized scalar-Hom adjunction identifies U H_S(TP,TQ) with H_R(P,UTQ).
-Its transpose is restricted S-evaluation after the scalar unit on P.
-The right adjoint H_R(P,-) preserves finite products. Finite products are finite
-biproducts, so the target identifies with H_R(P,Q)^d, as does U T H_R(P,Q).
-Under these identifications the proposed evaluation transpose has matrix entry
-(i,j) equal to delta_ij times identity: on K-flat tensors the scalar unit inserts
-1, and κ and μ multiply it by e_j. The two normalization assumptions identify
-this calculation with the actual derived morphism. Uniqueness of transpose
-therefore identifies every matrix entry. The matrix is the identity, so U sends
-the comparison to an isomorphism. Restriction reflects isomorphisms because it
-is exact and reflects isomorphisms of cohomology sheaves. Thus each comparison
-is invertible. Naturality of evaluation and μ, together with uniqueness of
-transpose, makes these components a natural transformation; their inverses
-assemble to a natural inverse. Rank zero is the empty biproduct and obeys the
-same argument. The defining transpose is basis independent. -/
+Stacks Project, Tags 08J9 and 08JA. -/
 theorem ringedFiniteFreeHomBaseChange_hom
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]

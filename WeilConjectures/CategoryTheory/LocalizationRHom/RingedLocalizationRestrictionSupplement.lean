@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.RingedLocalizationRestriction
 /-! # Restriction of fraction sheaves and localized complexes
 
 Source: Stacks Project, Tags 04IX, 08JB and 0996.
-(blueprint: lem-weil-pbc-ringed-localization-restriction).
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +41,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{u})
 
 /-- Sheafification commutes with the further slice restriction used here.
-Source: Stacks 03CY, 03DH and 04IX
-(blueprint: lem-weil-pbc-ringed-localization-restriction). -/
+Source: Stacks 03CY, 03DH and 04IX. -/
 def sheafificationOverMapIso {U V : C} (a : V ⟶ U) :
     PresheafOfModules.sheafification
       (𝟙 ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj
@@ -62,8 +60,7 @@ def sheafificationOverMapIso {U V : C} (a : V ⟶ U) :
     ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))
 
 /-- A fraction presheaf restricted further in a slice has the restricted denominator.
-Source: Stacks 04IX and 0996
-(blueprint: lem-weil-pbc-ringed-localization-restriction). -/
+Source: Stacks 04IX and 0996. -/
 def coefficientPresheafIso {U V : C} (a : V ⟶ U) (f : R.obj.obj (op U)) :
     (PresheafOfModules.pushforward₀ (Over.map a)
       ((sheafCompose (J.over U) (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U)).obj).obj

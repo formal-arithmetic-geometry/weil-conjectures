@@ -26,7 +26,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-! # ColimitSiteRawAbelianSectionSheaf
 
 Source: Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-sheaf).
 -/
 
 @[expose] public section
@@ -39,45 +38,11 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-presentation construction and adjunction paragraphs; abelian colimits
-as in Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-sheaf).
+/-- The colimit over `Under i` of the left Kan extensions `B t` of the stage inverse images of an
+abelian sheaf `G` along the colimit functors is a sheaf for the colimit topology.
 
-Proof: Fix an object Y of the limit category. A presentation is a stage t
-above i, an object W at that stage, and an equality V_t(W) = Y. Refinements
-transport W along the stage functor and the equality along the cocone equation.
-The object-colimit hypothesis supplies a presentation, and eventual equality in
-the object colimit gives common refinements. Equalizing parallel stage arrows
-makes this category filtered. Adjunction uniqueness under hθ identifies all
-refinement maps on the section groups and proves their coherence.
-
-Compute each left Kan extension by its pointwise abelian colimit. Its elements
-are finite sums of generators (W, x, f : Y → V_t(W)), modulo linearity and
-restriction relations. Lift the finitely many f and their endpoints to a common
-stage using harrows and hobjects. Restrict the transported sections there.
-They now belong to one presentation group, so their sum is a single section.
-Lift the finitely many relations witnessing any equality in the same manner;
-Kan relations become restriction, linearity or transition identities. Eventual
-arrow equality and hβmap make these identities hold at one refinement. This
-identifies (colimit B)(Y) with the filtered presentation colimit, naturally in Y;
-lifting two composable arrows verifies naturality and the presheaf laws.
-
-For a Q-cover use hQ to choose an equality-transported image of a stage cover.
-Its finite indexing set is the set of distinct arrows of that cover, by hfinite;
-repeated image arrows cause no problem since their local sections agree. Lift
-any finite family of local representatives and its pairwise overlap equations
-to one later stage. Covering pullbacks exist and hpullback and hVpullback
-identify their images with the limit-site pullbacks. The lifted matching data
-therefore form the finite product/equalizer diagram for the transported cover,
-which remains covering by hcover. Filtered abelian colimits commute with finite
-products and equalizers. The stage sheaf equalizers thus give the equalizer for
-the limit covering. With an empty cover the stage equalizer is the zero group,
-so existence and uniqueness hold as well. Finite base change makes pullbacks
-of finite covers covering, and finite composition and isomorphism covers extend
-this condition to Q.toGrothendieck. This proves sheafness only; no comparison
-with the canonical inverse image or zero-detection is used.
--/
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction paragraphs;
+abelian colimits as in Modules on Sites, Tag 03CO. -/
 theorem colimit_site_raw_abelian_section_isSheaf
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

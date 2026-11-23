@@ -19,9 +19,6 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Universal contraction of the pointed free deletion complex
 
-Source: blueprint main-20261015, direct-image stability proof, paragraph (3),
-extracted internal bar input (blueprint: lem-sfb-pointed-free-deletion-contraction).
-
 Powers, deletion, and insertion are constructed in condensed sets. Their free maps
 use the recorded free adjunction. The existence statement specifies the augmentation
 and its section on generalized generators; it is never used to choose any definition.
@@ -42,29 +39,24 @@ open Profinite.CondensedAction
 
 namespace Profinite.CondensedAction.PointedDeletion
 
-/-- The condensed sets in the prescribed size convention.
-Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
+/-- The condensed sets in the prescribed size convention. -/
 abbrev Sets := Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))
 
-/-- The actual finite power, including the terminal zero-fold power.
-Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
+/-- The actual finite power, including the terminal zero-fold power. -/
 def power (X : Sets.{u}) (n : ℕ) : Sets.{u} := ∏ᶜ fun _ : Fin n ↦ X
 
-/-- Delete coordinate i, retaining the order of every other coordinate.
-Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
+/-- Delete coordinate i, retaining the order of every other coordinate. -/
 def deletion (X : Sets.{u}) (n : ℕ) (i : Fin (n + 1)) :
     power X (n + 1) ⟶ power X n :=
   Pi.lift fun j ↦ Pi.π (fun _ : Fin (n + 1) ↦ X) (i.succAbove j)
 
-/-- The singleton tuple given by a global point.
-Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
+/-- The singleton tuple given by a global point. -/
 def pointTuple (X : Sets.{u}) (e : ⊤_ Sets.{u} ⟶ X) : ⊤_ Sets.{u} ⟶ power X 1 :=
   Pi.lift fun _ ↦ e
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- Q_n is the canonical free internal module on X^(n+1).
-Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
+/-- Q_n is the canonical free internal module on X^(n+1). -/
 def term (X : Sets.{u}) (n : ℕ) : Modules R :=
   (InternalBar.free R).obj (power X (n + 1))
 

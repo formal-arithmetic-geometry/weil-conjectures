@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPresentatio
 /-! # The canonical restricted residue tensor presentation
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), and derived scalar extension.
-(blueprint: new-integral-residue-tensor-presentation)
 -/
 
 @[expose] public section
@@ -42,9 +41,7 @@ attribute [local instance] derivedTensorPresentationBraiding
 
 end NormalizationAPI
 
-/-- The derived monoidal structure for the fixed generic base-category data.
-Source: the derived tensor construction above.
-(blueprint: new-integral-residue-tensor-presentation) -/
+/-- The derived monoidal structure for the fixed generic base-category data. -/
 noncomputable abbrev tensorPresentationMonoidal : MonoidalCategory (DerivedCategory C) :=
   inferInstance
 
@@ -71,8 +68,7 @@ attribute [local instance 20000] sheafBraidedCategory
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The fixed balanced tensor counit, retaining the named reduction functor.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and the canonical balanced tensor counit.
-(blueprint: new-integral-residue-tensor-presentation) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), and the canonical balanced tensor counit. -/
 @[irreducible] noncomputable def residueExchangeTensorCounit (T : Scheme.{u}) :
     DerivedCategory.Qh ⋙ (residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T) ⟶
       (tensorLeft ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj
@@ -82,9 +78,7 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), and the canonical balanced tensor counit
   unfold residueExchangeReduction integralReduction residueExchangeRestriction
   exact Mod.tensorPresentationDerivedCounit (coefficientMap (integralReductionMap ℓ E) T)
 
-/-- The named counit presents the same left-derived tensor functor.
-Source: the canonical balanced tensor left-derived property.
-(blueprint: new-integral-residue-tensor-presentation) -/
+/-- The named counit presents the same left-derived tensor functor. -/
 theorem residueExchangeTensorCounit_isLeftDerivedFunctor (T : Scheme.{u}) :
     (residueExchangeReduction ℓ E T ⋙ residueExchangeRestriction ℓ E T).IsLeftDerivedFunctor
       (residueExchangeTensorCounit ℓ E T) (HomotopyCategory.quasiIso _ (.up ℤ)) := by
@@ -94,8 +88,7 @@ theorem residueExchangeTensorCounit_isLeftDerivedFunctor (T : Scheme.{u}) :
     (coefficientMap (integralReductionMap ℓ E) T)
 
 /-- The canonical tensor presentation, using the fixed named functor and counit.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-presentation) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15. -/
 @[irreducible] noncomputable def residueExchangeTensorIso (T : Scheme.{u}) :
     letI : MonoidalCategory (residueExchangeDerived (integralCoeff ℓ E) T) :=
       CategoryTheory.tensorPresentationMonoidal

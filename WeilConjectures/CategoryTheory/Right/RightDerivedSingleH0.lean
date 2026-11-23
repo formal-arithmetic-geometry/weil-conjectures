@@ -285,7 +285,7 @@ variable [Abelian.HasKInjectiveResolutions C]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical augmentation from `F M[0]` to `RF(M[0])`, natural in `M`.
-Source: Stacks Project, Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
+Source: Stacks Project, Tag 05TD. -/
 @[no_expose] def singleRightDerivedUnit (F : C ⥤ D) [F.Additive] :
     F ⋙ DerivedCategory.singleFunctor D 0 ⟶
       DerivedCategory.singleFunctor C 0 ⋙ F.rightDerivedFunctor where
@@ -307,8 +307,7 @@ Source: Stacks Project, Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -
     exact hu
 
 /-- The canonical unit is the localized single-complex comparison followed by the derived unit.
-Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
-Proof: this is the defining formula of the canonical natural transformation. -/
+Source: Stacks Tag 05TD. -/
 theorem singleRightDerivedUnit_app (F : C ⥤ D) [F.Additive] (M : C) :
     F.singleRightDerivedUnit.app M =
       DerivedCategory.Q.map
@@ -319,7 +318,7 @@ theorem singleRightDerivedUnit_app (F : C ⥤ D) [F.Additive] (M : C) :
   rfl
 
 /-- The canonical zeroth-homology identification for a left exact functor.
-Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
+Source: Stacks Tag 05TD. -/
 @[no_expose, irreducible] def singleRightDerivedH0Iso (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F]
     [EnoughInjectives C] (M : C) :
@@ -336,16 +335,7 @@ open Abelian in
 /-- The canonical map from the single object of `F M` to `RF(M[0])` is inverse on H⁰
  to the canonical left-exact zeroth-derived identification.
 
-Source: Stacks Project, Tag 05TD, lemma-left-exact-higher-derived (3).
-(blueprint: lem-kun-right-derived-single-h0).
-
-Proof: compare the unbounded right-derived unit with its bounded-below unit by
-uniqueness of right derived functors. Naturality on the injective-resolution
-augmentation computes its homology as the classical map `toRightDerivedZero`.
-The single-complex comparison cancels the single-map comparison in that computation.
-Left exactness makes `toRightDerivedZero` inverse to `rightDerivedZeroIsoSelf`,
-and the remaining map is the canonical single-complex homology identification.
-The construction also applies to zero objects and zero functors. -/
+Source: Stacks Project, Tag 05TD (3). -/
 theorem CategoryTheory.Functor.rightDerivedFunctorUnit_homology_zero
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]

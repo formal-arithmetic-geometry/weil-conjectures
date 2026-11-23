@@ -19,13 +19,6 @@ morphism `exchangeRight adj₁ adj₂ β : g₁ ⋙ u ⟶ v ⋙ g₂` is an isom
 morphism of the derived adjunctions `Lf₁ ⊣ Rg₁` and `Lf₂ ⊣ Rg₂`
 (`CategoryTheory.Adjunction.isIso_exchangeRight_derivedAdjunction_of_leftAdjoint`), without any
 exactness assumption on `g₁` and `g₂`.
-
-The proof goes through the exchange morphism `exchangeLeft au av β : f₂ ⋙ vl ⟶ ul ⋙ f₁`, which is
-conjugate to `exchangeRight adj₁ adj₂ β`
-(`CategoryTheory.Adjunction.isIso_exchangeRight_iff_isIso_exchangeLeft`). Since all the functors
-in it are exact, it is computed levelwise on derived categories
-(`CategoryTheory.Adjunction.exchangeLeft_mapDerivedCategoryAdjunction`), and conjugating back at
-the derived level gives the result.
 -/
 
 @[expose] public section

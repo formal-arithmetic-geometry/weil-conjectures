@@ -13,7 +13,6 @@ import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 /-! # Resolution comparisons and the composite derived unit
 
 Source: Stacks Project, derived.tex, Tags 015M and 015N.
-(blueprint: lem-pc-grothendieck-resolution-unit-comparison).
 -/
 
 @[expose] public section
@@ -26,20 +25,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical comparison computes the prescribed resolution comparison.
-Source: Stacks Project, Tag 015M, resolution computation of derived functors.
-(blueprint: lem-pc-canonical-resolution-homology-comparison).
-
-Proof: For the chosen injective resolution, expand the single-object homology comparison;
-its final inverse resolution comparison cancels the resolution comparison in the left
-side. For the prescribed resolution, choose a comparison lifting the identity of X.
-Its extension induces a homotopy equivalence, and naturality of the derived unit shows
-that the chosen derived comparison followed by its image is resolutionDerivedIso F I.
-Naturality of homologyFunctorObjQIso and isoRightDerivedObjCochainComplex identifies
-its map on homology with the prescribed resolution comparison. Finally expand
-isoRightDerivedObjCochainComplex: its inverse map/extension homology comparison cancels
-the map/extension factor in canonicalResolutionDerivedIso, and its inverse extension
-homology comparison cancels the last factor on the right. This works also for n = 0.
--/
+Stacks Project, Tag 015M. -/
 theorem resolution_homology_transport
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [EnoughInjectives A] {B : Type uB} [Category.{vB} B]

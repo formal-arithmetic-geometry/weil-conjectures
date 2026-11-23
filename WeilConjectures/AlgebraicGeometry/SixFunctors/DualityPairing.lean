@@ -85,22 +85,30 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeInternal
 
 /-! # Evaluation and the ambient double-dual morphism
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-order 2122; Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: definition-verdier-dual-evaluation--4).
-
 ## Main definitions and statement
 
 * `CategoryTheory.dualityDoubleFunctor`: the covariant double internal Hom.
 * `CategoryTheory.DualityPairingCompatibility`: the naturality, shift and triangle clauses.
 * `AlgebraicGeometry.Etale.AmbientDualityPairing` and
   `AlgebraicGeometry.ProEtale.AmbientDualityPairing`: the canonical evaluation and transpose,
-  specified by the existing adjunction and the descended Koszul symmetry.
-* `AlgebraicGeometry.Etale.ambient_duality_pairing`: the two site assertions of the node.
+  specified by the tensor-Hom adjunction and the descended Koszul symmetry.
+* `AlgebraicGeometry.Etale.ambient_duality_pairing`: the evaluation pairing exists on the étale
+  site (with the dualizing complex) and on the pro-étale site.
 
 The tensor-Hom adjunction has left tensor as its left adjoint. Evaluation in the order
 DK tensor K therefore includes the Koszul symmetry. Its adjunct, with left tensor DK,
 is the double-dual morphism. All derived categories here are unbounded.
+
+## Implementation details
+
+The Koszul symmetry condition is named (`AlgebraicGeometry.Etale.IsEtaleKoszulSymmetry`) to keep
+the large derived-monoidal instance out of the implicit predicate argument of
+`Classical.choose`. The double-dual morphisms `bidualityMap` extract uniquely determined data:
+the symmetry is fixed, evaluation is the adjunct of the identity and the arrow is its transpose.
+
+## References
+
+* Stacks Project, Tags 08J9, 08JA and 08JC
 -/
 
 @[expose] public section
@@ -114,16 +122,14 @@ open CategoryTheory.MonoidalCategory Opposite
 
 namespace CategoryTheory
 
-/-- Double application of the contravariant internal Hom into W.
-Source: Stacks Project, Tag 08J9 (blueprint: definition-verdier-dual-evaluation--4). -/
+/-- Double application of the contravariant internal Hom into W. -/
 def dualityDoubleFunctor {C : Type u} [Category.{v} C]
     (H : Cᵒᵖ ⥤ C ⥤ C) (W : C) : C ⥤ C :=
   (H.flip.obj W).rightOp ⋙ H.flip.obj W
 
 /-- The compatibility assertions for the specified evaluation and its specified transpose.
 This packages the conclusion, including the connecting square of triangles. The shift
-isomorphisms include coherence for zero and addition, through Functor.CommShift.
-Source: Stacks Project, Tags 08J9 and 08JC (blueprint: definition-verdier-dual-evaluation--4). -/
+isomorphisms include coherence for zero and addition, through Functor.CommShift. -/
 def DualityPairingCompatibility {C : Type u} [Category.{v} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -318,8 +324,7 @@ private theorem nativeTensorRaw
 
 /-- Evaluation and biduality with specified tensor, Hom, adjunction and interchange.
 The predicate P fixes the interchange by its components; the remaining clauses are the
-normalizations, naturality, integral shift coherence and triangle morphism.
-Source: Stacks Tags 08J9 and 08JC (blueprint: definition-verdier-dual-evaluation--4). -/
+normalizations, naturality, integral shift coherence and triangle morphism. -/
 private def NormalizedDualityPairing {C : Type u} [Category.{v} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -374,9 +379,7 @@ namespace Etale
 /-- Evaluation and its adjoint double-dual arrow with their canonical normalizations.
 The tensor symmetry is the descended Koszul symmetry. After interchanging its factors,
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
-transpose, rather than an arbitrary natural map with the same endpoints.
-Source: Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: definition-verdier-dual-evaluation--4). -/
+transpose. -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) : Prop :=
   ∃ b : derivedTensor A X ≅ (derivedTensor A X).flip,
@@ -406,9 +409,7 @@ namespace ProEtale
 /-- Evaluation and its adjoint double-dual arrow with their canonical normalizations.
 The tensor symmetry is the descended Koszul symmetry. After interchanging its factors,
 evaluation corresponds to the identity under tensor-Hom adjunction. The arrow δ is its
-transpose, rather than an arbitrary natural map with the same endpoints.
-Source: Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: definition-verdier-dual-evaluation--4). -/
+transpose. -/
 def AmbientDualityPairing
     (W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)) : Prop :=
   let T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
@@ -445,43 +446,7 @@ namespace Etale
 
 /-- Evaluation and its transpose are natural and compatible with shifts and distinguished
 triangles, on the entire ambient derived category. The dualizing object is the ordinary
-ambient exceptional inverse image of A, not a constructible exceptional functor.
-
-Source: Weil conjectures blueprint, order 2122; Stacks Project, Tags 08J9, 08JA and 08JC
-(blueprint: definition-verdier-dual-evaluation--4).
-
-Proof:
-1. On a small ringed site, use lem-weil-pbc-ringed-internal-hom-exact-restriction and
-   lem-pur-rhom-global-sections for tensor-Hom adjunction. The tensor symmetry is
-   x_p tensor y_q ↦ (-1)^(pq) y_q tensor x_p; its chain-map identity follows by
-   expanding the two differentials of def-pc-tensor-complex-sheaves. Descend it by
-   lem-weil-pbc-site-derived-tensor-descent.
-2. Evaluation is the adjunct of the identity, in the order K tensor DK. Precompose
-   with symmetry and transpose to define δ. Adjunction naturality gives the
-   dinaturality equation for evaluation, and transposition gives naturality of δ.
-3. Choose a K-injective representative I of W by prop-pur-kinjective-resolutions-exist.
-   Put T(C) = Hom-complex(C,I). The chain map b_C(x)(f) = (-1)^(pq) f(x), for
-   x in degree p and f in degree q, commutes with the Hom differential because the
-   two d_I f(x) terms cancel. Choose K-flat representatives P of C and Q of T(P)
-   by lem-pc-kflat-resolution. By lem-pur-hom-kflat-into-kinjective, T(P) and T(Q)
-   are K-injective. Ordinary currying identifies the transpose of evaluation with
-   T(Q → T(P)) composed with b_P. By lem-pur-rhom-well-defined the first map is a
-   quasi-isomorphism; hence b_C localizes to the specified δ.
-4. The chain shift comparison s_(C,m):T(C[m]) → T(C)[-m] multiplies a degree-q
-   map by (-1)^(mq). On double Hom use χ_C = -s_(T(C),-1) composed with
-   T(s_(C,1)) inverse. For u:A → B and E=Cone(u), write T²(E) as pairs (α,β).
-   The map (α,β) ↦ (α,γ), γ(y)=(-1)^(p+r)β(y), identifies its differential with
-   that of Cone(T²u). It preserves the inclusion and carries T²(-π), followed by
-   χ, to the negative projection. Thus χ gives an exact shift comparison.
-   Substituting b in χ gives χ_C b_(C[1])=b_C[1]. Iteration and inversion give
-   the coherent comparisons and compatibility for every integer shift.
-5. Apply lem-weil-pbc-commshift-nattrans-triangle-morphism to id, D² and δ.
-   Naturality and the shift identity supply all three squares, including the
-   connecting square; the cone calculation makes the image triangle distinguished.
-6. Specialize to the etale site and its ordinary ambient dualizing object, and to
-   the pro-etale site with the supplied W. Nothing restricts K or DK to a
-   constructible subcategory, and no equivalence between the sites is used.
--/
+ambient exceptional inverse image of A. -/
 theorem ambient_duality_pairing
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
@@ -491,8 +456,7 @@ theorem ambient_duality_pairing
       (dualizingComplex Λ aY) ∧
     ∀ W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)),
       ProEtale.AmbientDualityPairing (ModuleCat.{u + 1} Λ) Y W := by
-  -- The formal proof uses the native adjunction and its unit. The ringed-site model
-  -- sketched above is replaced by the route recorded in the updated DAG node.
+  -- The proof uses the native adjunction and its unit.
   constructor
   · change NormalizedDualityPairing
       (derivedTensor (ModuleCat.{u + 1} Λ) Y) (derivedHom (ModuleCat.{u + 1} Λ) Y)
@@ -583,11 +547,7 @@ variable (A : Type a) [Category.{u + 1} A] [Abelian A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   (X : Scheme.{u})
 
-/-- The double-dual morphism specified by the etale evaluation-pairing theorem.
-Its value is uniquely determined: the symmetry is fixed to the descended Koszul
-symmetry, evaluation is the adjunct of the identity, and this arrow is its transpose.
-Thus this extracts determined data, rather than choosing an arbitrary pairing.
-Source: Stacks Project, Tags 08J9 and 08JA (blueprint: definition-verdier-dual-evaluation--4). -/
+/-- The double-dual morphism `K ⟶ D(D(K))` specified by an étale evaluation pairing. -/
 noncomputable def Etale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (h : Etale.AmbientDualityPairing A X W)
@@ -595,9 +555,7 @@ noncomputable def Etale.AmbientDualityPairing.bidualityMap
     K ⟶ (dualityDoubleFunctor (Etale.derivedHom A X) W).obj K :=
   h.choose_spec.2.choose_spec.2.choose K
 
-/-- The double-dual morphism specified by the pro-etale evaluation-pairing theorem.
-The normalization fixes its value uniquely, just as in the etale presentation.
-Source: Stacks Project, Tags 08J9 and 08JA (blueprint: definition-verdier-dual-evaluation--4). -/
+/-- The double-dual morphism `K ⟶ D(D(K))` specified by a pro-étale evaluation pairing. -/
 noncomputable def ProEtale.AmbientDualityPairing.bidualityMap
     {W : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
     (h : ProEtale.AmbientDualityPairing A X W)
@@ -609,11 +567,8 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- A componentwise characterization of the actual descended Koszul symmetry.
-Naming this predicate keeps the large derived-monoidal instance out of the implicit
-predicate argument to Classical.choose; it imposes exactly the original HEq clause.
-Source: ambient_duality_pairing proof step 1; Stacks 08J9 and 08JA
-(blueprint: definition-verdier-dual-evaluation--4). -/
+/-- The isomorphism `b : M ⊗ N ≅ N ⊗ M` agrees componentwise with the descended Koszul
+symmetry. -/
 def IsEtaleKoszulSymmetry (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (b : ∀ M N : DerivedCategoryModule A X,
       ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ≅

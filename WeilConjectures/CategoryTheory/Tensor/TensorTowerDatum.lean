@@ -17,9 +17,7 @@ universe u v
 namespace CategoryTheory
 
 /-- The category structures, functors and normalized comparisons of one tensor tower.
-This record keeps changes of category presentation outside the component equation.
-Source: the tensor clause of the coefficient-tower argument.
-(blueprint: def-weil-tensor-tower-datum). -/
+This record keeps changes of category presentation outside the component equation. -/
 structure TensorTowerDatum (C D E : Type u) where
   [catC : Category.{v} C]
   [catD : Category.{v} D]
@@ -38,9 +36,7 @@ structure TensorTowerDatum (C D E : Type u) where
 namespace TensorTowerDatum
 variable {C D E : Type u}
 
-/-- The actual component equality, with all its category data held in a single record.
-Source: the tensor clause of scalarOperationsOrdinary_tower.
-(blueprint: def-weil-tensor-tower-datum). -/
+/-- The actual component equality, with all its category data held in a single record. -/
 @[irreducible] def Coherent (d : TensorTowerDatum.{u, v} C D E) : Prop :=
   letI := d.catC
   letI := d.catD

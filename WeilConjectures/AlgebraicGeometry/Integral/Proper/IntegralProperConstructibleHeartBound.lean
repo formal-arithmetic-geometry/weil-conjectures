@@ -73,9 +73,7 @@ private theorem complete_upper_of_levels
 
 /-- The integral constructible proper heart estimate over a Noetherian source, with no base
 field. Derived completeness of the image comes from integral direct-image limits and the
-residue criterion; the finite reductions use the Noetherian finite-reduction bound.
-Source: blueprint lem-sfb-integral-proper-constructible-heart-bound
-(blueprint: lem-sfb-integral-proper-constructible-heart-bound). -/
+residue criterion; the finite reductions use the Noetherian finite-reduction bound. -/
 theorem integralProperConstructibleHeartBound_of_isNoetherian
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {X Y : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Y) [IsProper p] (d : ℕ)
@@ -129,20 +127,7 @@ theorem integralProperConstructibleHeartBound_of_isNoetherian
   exact (hb q hq).of_iso ((DerivedCategory.homologyFunctor _ q).mapIso hi)
 
 set_option linter.unusedVariables false in
-/-- Proper direct image of a constructible integral sheaf vanishes above 2d+1.
-Source: blueprint main-20261015, proposition-compactness-proper-direct-image--2, proof (1),
-constructible heart estimate (blueprint: lem-sfb-integral-proper-constructible-heart-bound).
-
-Proof: Transport the continuous integer coefficients to the completion convention.
-Proper integral preservation gives derived completeness of the image of N[0].
-The finite-reduction estimate with b=0 bounds every positive reduction of this image
-above by 2d. Its proof uses finite classical models and the geometric proper torsion
-bound. Unpack derived completeness to obtain the specified augmented Roos triangle
-and the invertible completion map. Exact countable products commute with cohomology,
-so both product vertices are bounded above by 2d. Inverse rotation and the triangle
-upper-bound lemma give 2d+1 for the completed image. The exact faithful coefficient
-transport reflects this upper bound. This includes torsion N, d=0, and empty schemes;
-no flatness of N is used. -/
+/-- Proper direct image of a constructible integral sheaf vanishes above 2d+1. -/
 theorem integralProperConstructibleHeartBound
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ)

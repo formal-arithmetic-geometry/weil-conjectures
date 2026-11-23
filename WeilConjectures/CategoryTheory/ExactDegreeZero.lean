@@ -29,21 +29,18 @@ variable {V W X : Type*} [Category V] [Category W] [Category X]
   [Abelian V] [Abelian W] [Abelian X]
   [HasDerivedCategory V] [HasDerivedCategory W] [HasDerivedCategory X]
 
-/-- The canonical degree-zero object, kept behind a named object function.
-(auxiliary; not a blueprint node) -/
+/-- The canonical degree-zero object, kept behind a named object function. -/
 @[irreducible]
 def obj (V : Type*) [Category V] [Abelian V] [HasDerivedCategory V] (M : V) :
     DerivedCategory V := (DerivedCategory.singleFunctor V 0).obj M
 
-/-- The canonical degree-zero image of a morphism.
-(auxiliary; not a blueprint node) -/
+/-- The canonical degree-zero image of a morphism. -/
 @[irreducible]
 def map {M N : V} (f : M ⟶ N) : obj V M ⟶ obj V N := by
   unfold obj
   exact (DerivedCategory.singleFunctor V 0).map f
 
-/-- The degree-zero functor with named object and morphism functions.
-(auxiliary; not a blueprint node) -/
+/-- The degree-zero functor with named object and morphism functions. -/
 def functor (V : Type*) [Category V] [Abelian V] [HasDerivedCategory V] :
     V ⥤ DerivedCategory V where
   obj := obj V
@@ -55,8 +52,7 @@ def functor (V : Type*) [Category V] [Abelian V] [HasDerivedCategory V] :
     unfold map obj
     exact (DerivedCategory.singleFunctor V 0).map_comp f g
 
-/-- The exact-functor comparison for the named degree-zero functor.
-(auxiliary; not a blueprint node) -/
+/-- The exact-functor comparison for the named degree-zero functor. -/
 def comparison (F : V ⥤ W) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
     functor V ⋙ F.mapDerivedCategory ≅ F ⋙ functor W := by
@@ -76,8 +72,7 @@ def comparison (F : V ⥤ W) [F.Additive]
     unfold map obj
     exact e.hom.naturality f
 
-/-- The canonical derived unit attached to an ordinary morphism into an exact functor.
-(auxiliary; not a blueprint node) -/
+/-- The canonical derived unit attached to an ordinary morphism into an exact functor. -/
 @[irreducible]
 def unit (F : V ⥤ W) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -85,23 +80,20 @@ def unit (F : V ⥤ W) [F.Additive]
     obj W K ⟶ F.mapDerivedCategory.obj (obj V M) :=
   map η ≫ (comparison F).inv.app M
 
-/-- The named derived unit represents extension to arbitrary unbounded test objects.
-(auxiliary; not a blueprint node) -/
+/-- The named derived unit represents extension to arbitrary unbounded test objects. -/
 def Universal (F : V ⥤ W) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     {K : W} {M : V} (η : K ⟶ F.obj M) : Prop :=
   ∀ N : DerivedCategory V,
     Function.Bijective (fun f : obj V M ⟶ N ↦ unit F η ≫ F.mapDerivedCategory.map f)
 
-/-- Degree-zero maps preserve composition.
-(auxiliary; not a blueprint node) -/
+/-- Degree-zero maps preserve composition. -/
 theorem map_comp {M N P : V} (f : M ⟶ N) (g : N ⟶ P) :
     map (f ≫ g) = map f ≫ map g := by
   unfold map obj
   exact (DerivedCategory.singleFunctor V 0).map_comp f g
 
-/-- Degree-zero maps preserve identities.
-(auxiliary; not a blueprint node) -/
+/-- Degree-zero maps preserve identities. -/
 theorem map_id (M : V) : map (𝟙 M) = 𝟙 (obj V M) := by
   unfold map obj
   exact (DerivedCategory.singleFunctor V 0).map_id M
@@ -109,8 +101,7 @@ theorem map_id (M : V) : map (𝟙 M) = 𝟙 (obj V M) := by
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- The named universal property is exactly the usual single-functor formula.
-The two formulas differ only by associativity of composition.
-(auxiliary; not a blueprint node) -/
+The two formulas differ only by associativity of composition. -/
 theorem universal_iff (F : V ⥤ W) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     {K : W} {M : V} (η : K ⟶ F.obj M) :
@@ -128,23 +119,20 @@ theorem universal_iff (F : V ⥤ W) [F.Additive]
 universe u
 
 /-- Sheafification on an essentially small module site, used without searching for an
-arbitrary right-adjoint decomposition of the sheaf inclusion.
-(auxiliary; not a blueprint node) -/
+arbitrary right-adjoint decomposition of the sheaf inclusion. -/
 theorem scalarWeakSheafify {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
     (R : Type (u + 1)) [CommRing R] : HasWeakSheafify J (ModuleCat.{u + 1} R) :=
   HasSheafify.isRightAdjoint
 
-/-- The canonical degree-zero sheaf object, with the site's derived-category data fixed once.
-(auxiliary; not a blueprint node) -/
+/-- The canonical degree-zero sheaf object, with the site's derived-category data fixed once. -/
 def scalarObj {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) (R : Type (u + 1)) [CommRing R]
     (M : Sheaf J (ModuleCat.{u + 1} R)) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
   obj (Sheaf J (ModuleCat.{u + 1} R)) M
 
-/-- The canonical degree-zero scalar unit, with its restriction functor fixed on a general site.
-(auxiliary; not a blueprint node) -/
+/-- The canonical degree-zero scalar unit, with its restriction functor fixed on a general site. -/
 @[irreducible]
 def scalarUnit {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {R S : Type (u + 1)} [CommRing R] [CommRing S]
@@ -154,8 +142,7 @@ def scalarUnit {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     scalarObj J R F ⟶ (Sheaf.derivedRestrictScalars J φ).obj (scalarObj J S G) :=
   unit (Sheaf.restrictScalars J φ) η
 
-/-- The unbounded universal property of the canonical scalar unit on a general site.
-(auxiliary; not a blueprint node) -/
+/-- The unbounded universal property of the canonical scalar unit on a general site. -/
 def scalarUniversal {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (F : Sheaf J (ModuleCat.{u + 1} R))
@@ -163,8 +150,7 @@ def scalarUniversal {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1
     (η : F ⟶ (Sheaf.restrictScalars J φ).obj G) : Prop :=
   Sheaf.IsDerivedBaseChange (scalarUnit J φ F G η)
 
-/-- The site specialization retains precisely the original raw single-functor formula.
-(auxiliary; not a blueprint node) -/
+/-- The site specialization retains precisely the original raw single-functor formula. -/
 theorem scalarUniversal_iff {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
     {R S : Type (u + 1)} [CommRing R] [CommRing S]

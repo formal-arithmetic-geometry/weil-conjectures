@@ -17,12 +17,6 @@ product in the sense that `σ_{M ⊗ N} = M ◁ σ_N` (for instance the multipli
 scalar). Then the induced natural endomorphism `DerivedCategory.natTransId σ` of the identity of
 the derived category satisfies the same compatibility with the derived tensor product
 (`DerivedCategory.natTransId_app_tensor`).
-
-The proof compares the two natural endomorphisms `(P, Z) ↦ σ_{P ⊗ Z}` and `(P, Z) ↦ P ◁ σ_Z` of
-the derived tensor bifunctor, which is a left derived bifunctor, after precomposition with its
-counit `μ Qh` (`NatTrans.app_tensor_eq_whiskerLeft_of_isLeftDerivedFunctor₂`); on cochain
-complexes, the identity holds degreewise on each summand `X^p ⊗ Y^q` of `(X ⊗ Y)^n`
-(`HomologicalComplex.natTransId_app_tensorObj`).
 -/
 
 @[expose] public section

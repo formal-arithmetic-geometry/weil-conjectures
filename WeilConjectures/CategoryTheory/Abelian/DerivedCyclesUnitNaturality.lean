@@ -15,7 +15,6 @@ public import WeilConjectures.CategoryTheory.Abelian.DerivedSingleShiftNormaliza
 
 /-! # Derived-unit naturality on canonical cycles
 Source: Stacks Project, Tags 05TC (2) and 05TD (3).
-(blueprint: new-lem-pc-derived-cycles-unit-naturality).
 -/
 
 @[expose] public section
@@ -35,23 +34,7 @@ omit [PreservesFiniteLimits S] in
 /-- Naturality of the actual derived unit for the map from cycles in one degree.
 This holds for any bounded-below target M and any q, without a truncation
 or concentration hypothesis on M.
-Source: Stacks Project, Tags 05TC (2) and 05TD (3).
-(blueprint: new-lem-pc-derived-cycles-unit-naturality).
-
-Proof: Use the chain map whose component in degree n is iCycles and whose
-other components are zero. Naturality of the unbounded derived unit for
-this chain map expresses the homology of the unit after the canonical
-cycle lift as the homology of the unit on the single cycles object followed
-by the derived image of cyclesDerivedMap. The mapped chain map has degree-n
-component S(iCycles); the kernel lifting property and homologyπ naturality
-identify its homology with the liftCycles in the formula. Compose with q.
-Naturality of the bounded-below/unbounded compatibility moves its inverse
-past the derived image of cyclesDerivedMap followed by q. The uniqueness
-comparison defining this compatibility intertwines the actual derived
-units. On the single object this is exactly rightDerivedPlusSingleUnitAt,
-including its homotopy-single/localization comparison. Apply homology and
-cancel the single/homology and localization/homology isomorphisms to give
-the stated equation. -/
+Source: Stacks Project, Tags 05TC (2) and 05TD (3). -/
 theorem rightDerived_cycles_unit_naturality (n : ℤ) (K : CochainComplex C ℤ)
     (M : DerivedCategory.Plus C) (q : DerivedCategory.Q.obj K ⟶
       DerivedCategory.Plus.ι.obj M) :

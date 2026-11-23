@@ -61,14 +61,7 @@ theorem rank_add_rank_eq_card_of_isZero_homology_pullback {Z : Scheme.{u}}
 
 /-- **A finite free complex with exact fibres is exact.** Let `P` be a bounded complex of finite
 free `𝒪_Y`-modules and `q` an integer. If every point `y` of `Y` is the image of a field point
-`g : Spec K ⟶ Y` such that `g^* P` is exact in degree `q`, then `P` is exact in degree `q`.
-
-At `y` the exactness of the fibre says that the matrices `C_{q-1}`, `C_q` of the differentials
-satisfy `rank C_{q-1}(y) + rank C_q(y) = rank P^q`
-(`AlgebraicGeometry.Scheme.Modules.rank_add_rank_eq_card_of_isZero_homology_pullback`). Near `y`
-they then have split rank factorisations
-(`AlgebraicGeometry.Scheme.exists_opens_split_of_rank_add_eq`), which make the complex split
-exact in degree `q`. -/
+`g : Spec K ⟶ Y` such that `g^* P` is exact in degree `q`, then `P` is exact in degree `q`. -/
 theorem IsFiniteFreeComplex.isZero_homology_of_isZero_homology_pullback
     {P : CochainComplex Y.Modules ℤ} {d : ℕ} (hP : IsFiniteFreeComplex P d) (q : ℤ)
     (h : ∀ y : Y, ∃ (R : CommRingCat.{u}) (_ : IsField R) (g : Spec R ⟶ Y) (x : Spec R),

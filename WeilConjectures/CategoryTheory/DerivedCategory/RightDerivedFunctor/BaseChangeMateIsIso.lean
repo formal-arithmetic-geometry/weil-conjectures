@@ -263,10 +263,7 @@ lemma leftDerivedFunctorSquareIso_hom_app_Q_obj (α : N_D ⋙ F' ≅ F ⋙ N_C)
 /-- **The isomorphism `CategoryTheory.Functor.leftDerivedFunctorSquareIso α` on complexes**, as an
 identity of natural transformations of functors `CochainComplex D ℤ ⥤ DerivedCategory C'`: after
 precomposition with `Q`, it is the counit of `LF'` on `N_D P` followed by the image under `Q` of
-the termwise isomorphism `α`, all functors being composed explicitly (with associators). This
-is the form of `CategoryTheory.Functor.leftDerivedFunctorSquareIso_hom_app_Q_obj` in which no
-identification of objects by definitional unfolding is needed, so it can be instantiated with
-concrete functors at no cost. -/
+the termwise isomorphism `α`, all functors being composed explicitly (with associators). -/
 lemma whiskerLeft_Q_leftDerivedFunctorSquareIso_hom (α : N_D ⋙ F' ≅ F ⋙ N_C) :
     whiskerLeft DerivedCategory.Q (leftDerivedFunctorSquareIso α).hom =
       (Functor.associator _ _ _).inv ≫

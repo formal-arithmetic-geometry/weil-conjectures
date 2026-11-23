@@ -16,9 +16,7 @@ degree `0`) have homology only in degrees `≤ e`. Then for an object `K` with h
 `[a, b]`, `F K` has homology only in degrees `≤ b + e`
 (`DerivedCategory.isZero_homology_obj_of_isGE_of_isLE`). This is the spectral-sequence-free
 form of the estimate "the `E₂^{p,q}`-terms vanish for `p > e`, so unbounded degrees can only enter
-through `q`" of blueprints `rem-sf-fullcd-reduction` (3) and `rem-sf-fullcd-general-form` (a).
-The proof is by induction on `b - a`, splitting `K` by the truncation triangle
-`τ_{< b} K ⟶ K ⟶ τ_{≥ b} K` and using the long exact homology sequence.
+through `q`".
 -/
 
 @[expose] public section

@@ -20,15 +20,6 @@ transition functors commute with internal homs, i.e. their comparison maps
 functors `Φ i` (`CategoryTheory.CategoryCocone.isIso_ihomComparison_Φ`). No coherence between the
 transition functors is used.
 
-The proof is by Yoneda: writing `v` for the comparison map `Φ i [A, B] ⟶ [Φ i A, Φ i B]`, every
-morphism to `[Φ i A, Φ i B]` from an object coming from a finite stage factors through `v`
-(`CategoryTheory.CategoryCocone.exists_comp_ihomComparison_app_eq_of_obj`): by adjunction it is
-a morphism `Φ (A ⊗ y) ⟶ Φ B`, which is defined at a finite stage. Composition with `v` is
-injective on morphisms from such objects
-(`CategoryTheory.CategoryCocone.eq_of_comp_ihomComparison_app_eq`): two morphisms with the same
-composite become equal at a finite stage. Every object of `D` comes from a finite stage, so `v`
-has a section which is also a retraction.
-
 The general computations with comparison maps, along a monoidal natural isomorphism
 `T ⋙ F' ≅ F`, are in the namespace `CategoryTheory.Functor.LaxMonoidal`.
 -/

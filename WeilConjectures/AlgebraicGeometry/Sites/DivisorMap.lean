@@ -314,11 +314,7 @@ lemma eq_bot_of_comap_stalkMap_eq_bot [IsIntegral X] (V : X.Etale) (y : V.left)
 /-- **The local generic ring is the fraction field of the local ring.** Let `X` be an integral
 regular scheme and `V` an étale `X`-scheme. At every point `y` of `V`, with image `x` in `X`, the
 local generic ring `Γ(Spec 𝒪_{V,y} ×_X Spec k(X), 𝒪) = 𝒪_{V,y} ⊗_{𝒪_{X,x}} k(X)` is a fraction
-ring of the domain `𝒪_{V,y}`: the map `𝒪_{X,x} ⟶ 𝒪_{V,y}` is flat and local, hence injective,
-and every nonzero prime of `𝒪_{V,y}` meets `𝒪_{X,x}` in a nonzero prime
-(`AlgebraicGeometry.Scheme.Etale.eq_bot_of_comap_stalkMap_eq_bot`), so inverting the nonzero
-elements of `𝒪_{X,x}` inverts all nonzero elements of `𝒪_{V,y}`
-(`IsFractionRing.tensorProduct_of_comap_eq_bot`). -/
+ring of the domain `𝒪_{V,y}`. -/
 lemma isFractionRing_localGenericRing (V : X.Etale) (y : V.left) :
     letI := (stalkToLocalGenericRing V y).hom.toAlgebra
     IsFractionRing (V.left.presheaf.stalk y) (localGenericRing V y) := by

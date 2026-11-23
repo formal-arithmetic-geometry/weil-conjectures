@@ -10,8 +10,9 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Evaluation of the fixed native small-site Hom comparison
 
-Source: Stacks 03D6 and 03EO; native Frobenius comparison step 2.
-(blueprint: lem-sf-native-frobenius-hom-evaluation)
+## References
+
+* Stacks 03D6 and 03EO
 -/
 
 @[expose] public section
@@ -23,9 +24,7 @@ open CategoryTheory.TwistedActionRingedSite
 open WeilConjectures.WeilFrobeniusAction
 namespace AlgebraicGeometry.ProEtale.NativeFrobenius
 
-/-- The section counit for the specified small-site-to-native equivalence.
-Source: Stacks 03D6 and 03EO.
-(blueprint: lem-sf-native-frobenius-hom-evaluation). -/
+/-- The section counit for the specified small-site-to-native equivalence. -/
 noncomputable def sectionCounit (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime] :
     (equivalence Y l).functor ⋙ (adicSectionModuleEquivalence l Y).functor ≅
       SheafOfModules.SmallSite.restriction (Scheme.ProEt.topology Y) (comparisonRing l Y) :=
@@ -108,18 +107,7 @@ private theorem homComparison_map (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
 
 end
 
-/-- The fixed Hom comparison is normalized by evaluation on the identity slice.
-
-Source: Stacks 03D6 and 03EO; native comparison step 2.
-(blueprint: lem-sf-native-frobenius-hom-evaluation)
-
-Proof: expand inverse Hom transport for an abstract equivalence. Apply its forward
-functor and cancel the unit with the counit. Naturality of the counit moves the
-small-site Hom comparison through this formula. The ordinary Hom bifunctor map
-is precomposition with the module counit and postcomposition with its inverse.
-Evaluate at the identity slice, use the normalization field of `H`, and cancel
-the remaining target counit inverse. The small-site Hom comparison simply
-unlifts that identity slice. -/
+/-- The fixed Hom comparison is normalized by evaluation on the identity slice. -/
 theorem comparison_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (H : AdicModuleHomComparisonCore l Y) (M N : Modules (ring Y l))
     (V : Y.ProEtᵒᵖ)

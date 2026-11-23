@@ -95,7 +95,7 @@ lemma boundedConstructibleLowerShriekOfCompactificationBaseChange_eq :
         (Functor.associator _ _ _).inv ≫
         Functor.whiskerRight (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
             (Profinite.padicAlgClRingObj ℓ) ℓ hi).hom
-          (boundedConstructibleLowerStar ℓ c'.overG) ≫
+          (boundedConstructibleLowerStarOfIsProper ℓ c'.overG) ≫
         (Functor.associator _ _ _).hom := by
   rw [boundedConstructibleLowerShriekOfCompactificationBaseChange,
     ExchangeFormalism.shriekBaseChange, boundedConstructibleBaseChange_eq_pfBaseChange,

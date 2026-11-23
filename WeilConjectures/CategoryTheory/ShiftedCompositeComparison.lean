@@ -7,8 +7,6 @@ module
 public import Mathlib.Algebra.Ring.Int.Defs
 public import Mathlib.CategoryTheory.Shift.CommShift
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Shifting a composite coefficient comparison -/
 @[expose] public section

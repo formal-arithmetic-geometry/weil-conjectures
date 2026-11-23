@@ -7,8 +7,7 @@ module
 public import Mathlib.CategoryTheory.Shift.CommShift
 public import Mathlib.Algebra.Ring.Int.Defs
 
-/-! # Shifting universal units
-(blueprint: lem-sp-universal-unit-shift).
+/-! # Shifting universal units.
 -/
 
 @[expose] public noncomputable section
@@ -21,13 +20,8 @@ variable {C : Type uC} {B : Type uB} [Category.{vC} C] [Category.{vB} B]
   [HasShift C ℤ] [HasShift B ℤ] (U : C ⥤ B) [U.CommShift ℤ]
 /-- Let U:C→D commute with integer shifts. If p:F→U(H) induces bijections Hom(H,K)→Hom(F,U(K)) for
 every K, then for every integer n its shifted map p[n] followed by the inverse commutation with
-shift induces bijections Hom(H[n],K)→Hom(F[n],U(K)) [def-weil-abstract-derived-category].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-universal-unit-shift).
-Proof: First test on shifted objects K[n]. The shift functors are fully faithful, so the original
-Hom bijection transfers to these tests; commutation with shift gives the specified formula. Every
-object is isomorphic to a shifted object by shifting back and forward. Naturality transports the
-bijection to an arbitrary test object. -/
+shift induces bijections Hom(H[n],K)→Hom(F[n],U(K)).
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem universal_unit_shift {F : B} {H : C} (p : F ⟶ U.obj H)
     (h : ∀ K : C, Function.Bijective (fun f : H ⟶ K ↦ p ≫ U.map f)) (n : ℤ) :
     ∀ K : C, Function.Bijective (fun f : H⟦n⟧ ⟶ K ↦

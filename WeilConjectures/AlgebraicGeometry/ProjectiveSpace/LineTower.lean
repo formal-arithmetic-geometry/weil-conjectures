@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineOver
 
 /-!
-
 # Towers of projective lines
 
 For a scheme `S`, the *tower of projective lines* `Scheme.projectiveLineTower S d` is the
@@ -19,10 +18,9 @@ relative dimension one, so the tower is proper over `S`. Over a field `k`, the a
 an immersion into a tower of projective lines
 (`AlgebraicGeometry.Scheme.exists_isImmersion_projectiveLineTower`).
 
-This is the geometry behind the proof of the trace formula for Frobenius correspondences
-(blueprint `theorem-trace-formula-frobenius-correspondence`): the only compactification used is
+This is the geometry behind the proof of the trace formula for Frobenius correspondences: the only
+compactification used is
 `𝔸¹ ⊆ ℙ¹`, applied in each coordinate.
-
 -/
 
 @[expose] public section

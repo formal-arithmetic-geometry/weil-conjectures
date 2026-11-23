@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
 # Descent of properties of morphisms along fpqc coverings
 
 We record the descent of properties of morphisms of schemes along fpqc coverings
-(Stacks, Section 02KM), following the blueprint of the proper base change theorem.
+(Stacks, Section 02KM).
 
 ## Main results
 
@@ -23,6 +23,11 @@ We record the descent of properties of morphisms of schemes along fpqc coverings
   along faithfully flat morphisms of affine schemes descends along fpqc coverings (Stacks 02KP).
 - `AlgebraicGeometry.Scheme.fpqcCover_of_smallEtaleCover`: a covering family of the small étale
   site is an fpqc covering.
+
+## References
+
+* [Stacks: Section 02KM](https://stacks.math.columbia.edu/tag/02KM)
+* [Stacks: Tag 02KP](https://stacks.math.columbia.edu/tag/02KP)
 -/
 
 @[expose] public section
@@ -127,10 +132,8 @@ be a property of morphisms of schemes which
 * (2) is Zariski local on the base, and
 * (3) descends along faithfully flat morphisms of affine schemes.
 
-Then `P` descends along fpqc coverings: if `{g i : T i ⟶ S}` is an fpqc covering of `S` and all
-the base changes `pullback.snd f (g i)` of `f : X ⟶ S` have `P`, then `f` has `P`.
-
-(blueprint: `lem-weil-pbc-fpqc-local-on-base-criterion`) -/
+Then `P` descends along fpqc coverings: if `{g i: T i ⟶ S}` is an fpqc covering of `S` and all
+the base changes `pullback.snd f (g i)` of `f: X ⟶ S` have `P`, then `f` has `P`. -/
 theorem fpqc_local_on_base_criterion
     (h₀ : ∀ ⦃X S X' S' : Scheme.{u}⦄ (f : X ⟶ S) (f' : X' ⟶ S') (a : X ≅ X')
       (b : S ≅ S'),
@@ -171,10 +174,8 @@ theorem fpqc_local_on_base_criterion
 end Criterion
 
 /-- **The fpqc topology is finer than the small étale topology**: a covering family
-`{f i : V i ⟶ U}` of the small étale site of `T` is an fpqc covering of `U`; in particular every
-`f i` is flat.
-
-(blueprint: `lem-weil-pbc-fpqc-finer-than-etale`) -/
+`{f i: V i ⟶ U}` of the small étale site of `T` is an fpqc covering of `U`; in particular every
+`f i` is flat. -/
 theorem Scheme.fpqcCover_of_smallEtaleCover {T : Scheme.{u}} {U : T.Etale} {ι : Type v}
     {V : ι → T.Etale} (f : ∀ i, V i ⟶ U)
     (hf : Sieve.ofArrows V f ∈ T.smallEtaleTopology U) :

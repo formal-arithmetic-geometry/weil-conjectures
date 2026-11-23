@@ -11,11 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Normalized comparison for an exact square preserving K-injectives
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K; exact-square
-extraction of the tower normalization argument
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison).
+Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K.
 
-The units are expressed on the homotopy category, as in def-sfb-right-derived-functor.
+The units are expressed on the homotopy category.
 The canonical localization factors are retained in the two normalization arrows.
 
 ## Main definitions and statements
@@ -53,8 +51,7 @@ variable {A' : Type uA'} {A : Type uA} {B' : Type uB'} {B : Type uB}
     DerivedCategory.Qh ⋙ RH)
 
 /-- The canonical strict-square identification on homotopy categories, directed from Hr to sH'.
-Source: Stacks Tags 070I and 070Y, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070I and 070Y. -/
 def sourceIso :
     r.mapHomotopyCategory (.up ℤ) ⋙ H.mapHomotopyCategory (.up ℤ) ≅
       H'.mapHomotopyCategory (.up ℤ) ⋙ s.mapHomotopyCategory (.up ℤ) :=
@@ -62,8 +59,7 @@ def sourceIso :
     (Functor.mapHomotopyCategoryCompIso (eqToIso h) (.up ℤ)).symm
 
 /-- The arrow a_J, including the inverse exact-localization factor for s.
-Source: Stacks Tags 070Y and 070K, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070Y and 070K. -/
 noncomputable def leftUnit (J : CochainComplex A' ℤ) :
     DerivedCategory.Qh.obj ((H.mapHomotopyCategory (.up ℤ)).obj
       ((r.mapHomotopyCategory (.up ℤ)).obj
@@ -77,8 +73,7 @@ noncomputable def leftUnit (J : CochainComplex A' ℤ) :
     s.mapDerivedCategory.map (η'.app ((HomotopyCategory.quotient A' (.up ℤ)).obj J))
 
 /-- The arrow b_J, including RH of the inverse exact-localization factor for r.
-Source: Stacks Tags 070Y and 070K, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070Y and 070K. -/
 noncomputable def rightUnit (J : CochainComplex A' ℤ) :
     DerivedCategory.Qh.obj ((H.mapHomotopyCategory (.up ℤ)).obj
       ((r.mapHomotopyCategory (.up ℤ)).obj
@@ -91,8 +86,7 @@ noncomputable def rightUnit (J : CochainComplex A' ℤ) :
       ((HomotopyCategory.quotient A' (.up ℤ)).obj J))
 
 /-- The normalized comparison δ_J = b_J a_J⁻¹, when a_J is invertible.
-Source: Stacks Tags 070I, 070Y and 070K, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070I, 070Y and 070K. -/
 noncomputable def delta (J : CochainComplex A' ℤ)
     (ha : IsIso (leftUnit H' H r s h RH' η' J)) :
     (RH' ⋙ s.mapDerivedCategory).obj
@@ -123,29 +117,7 @@ private theorem unit_isIso
 
 /-- An exact strictly commuting square preserving K-injectives has a unique comparison
 normalized only on K-injectives, natural on homotopy classes and independent of resolutions.
-Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K; exact-square extraction
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison).
-
-Proof plan:
-1. The units of the fixed universal pairs are invertible on K-injectives by
-   def-sfb-right-derived-functor. The preservation hypothesis applies this also to rJ.
-   The canonical factors of situation-conventions are invertible,
-   so a_J and b_J are isomorphisms with common source Q(HrJ).
-2. Additive functors preserve chain homotopies. Naturality of the units and localization
-   factors gives A(Qf)a_J = a_J'V(f) and B(Qf)b_J = b_J'V(f). Cancelling a gives naturality
-   of delta for every homotopy class between K-injectives.
-3. By lem-weil-pbc-kinjective-hom-derived every derived map between these objects is the
-   image of a homotopy class. Every derived object is isomorphic to QJ for a K-injective J,
-   by the arbitrary-quasi-isomorphism hypothesis and def-weil-abstract-derived-category.
-4. For u : M ≅ QJ define beta_M = A(u) delta_J B(u inverse). For another v : M ≅ QJ',
-   apply step 3 to u inverse followed by v. Its naturality identity proves independence.
-5. For f : M ⟶ N use resolutions u and v and the derived map u inverse followed by f
-   followed by v. Step 3 proves naturality of beta. Its factors are invertible, hence beta
-   is a natural isomorphism. Choosing u = identity gives the normalization and the formula.
-6. Any other normalized natural isomorphism agrees with delta on QJ by cancelling a_J.
-   Naturality along each u gives the same formula everywhere, proving uniqueness using
-   normalization only on K-injectives. No adjunction, tower or monomorphic resolution is used.
--/
+Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K. -/
 theorem existsUnique_normalized
     (enough' : ∀ K : CochainComplex A' ℤ,
       ∃ (J : CochainComplex A' ℤ) (f : K ⟶ J), J.IsKInjective ∧ QuasiIso f)

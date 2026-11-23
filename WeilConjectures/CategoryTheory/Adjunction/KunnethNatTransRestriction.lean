@@ -140,9 +140,7 @@ compatible with the oplax structure maps, the structure maps of `W` and `W'` and
 morphism of `β` are isomorphisms, the transposes `C₀ ⟶ G D₀` and `C₀' ⟶ G' D₀'` of the second
 factors `c` and `c'` are isomorphisms and the Künneth map of `F' ⊣ G'` at `M'` is an isomorphism,
 then so is `W` of the Künneth map of `F ⊣ G` at `M`, for any isomorphisms `a₁`, `a₂`, `b₂`
-comparing the ingredients. Indeed, through `a₂`, `β` and `b₂` the restriction of `c` is a second
-factor `c''` for `F' ⊣ G'` whose transpose is an isomorphism, so that `c'' = F' w ≫ c'` for an
-isomorphism `w`. -/
+comparing the ingredients. -/
 lemma isIso_map_kunnethNatTrans_app_of_isIso_homEquiv
     (hβ : ∀ A B : D, β.hom.app (A ⊗ B) ≫ W'.map (δ F A B) ≫ δ W' (F.obj A) (F.obj B) =
       F'.map (δ W A B) ≫ δ F' (W.obj A) (W.obj B) ≫ (β.hom.app A ⊗ₘ β.hom.app B))

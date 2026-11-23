@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport
 /-! # Canonical-cycle normalization of the specified bottom comparison
 
 Source: Stacks Project, Tags 05TC, 08D4 and 0AVW.
-(blueprint: new-lem-pc-derived-bottom-unit-normalization-formula).
 -/
 
 @[expose] public section
@@ -27,28 +26,7 @@ namespace CategoryTheory.Functor
 using only the canonical cycle kernel and homology quotient.
 
 Source: Stacks Project, Tag 05TC (2), and the degree-zero comparison used in
-Tags 08D4 and 0AVW.
-(blueprint: new-lem-pc-derived-bottom-unit-normalization-formula).
-
-Proof: Model the lower truncation by the smart truncation of K. Its term in
-bottom degree is the quotient of K's term by boundaries, and the kernel of
-its outgoing differential is H^n(K). The upper truncation of this lower
-truncation is therefore the single object H^n(K) in degree n. Under this
-identification, the map from cycles of K is its homology quotient. Apply S
-and use naturality of the actual derived unit for the smart truncation and
-for the inclusion of the double truncation. In the explicit comparison,
-the inverse of the upper-truncation map cancels this inclusion; the
-double-truncation map identifies its cycle class with H^n(K). Shift the
-single object to degree zero. Compatibility of the single-object comparison
-with the derived unit identifies the resulting map with toRightDerivedZero.
-The final rightDerivedZeroIsoSelf is its inverse, so their composite is the
-identity. The homology shift and single shift identifications on the two
-sides are the same and cancel. Finally use bounded-below/unbounded derived
-compatibility, which intertwines the actual units, and the inverse homology
-of the lower-truncation projection. This gives S applied to the canonical
-cycle quotient and localization/homology comparison, as displayed. This
-calculation fixes the comparison by its explicit construction and makes no
-claim about an arbitrary witness of a Nonempty isomorphism statement. -/
+Tags 08D4 and 0AVW. -/
 theorem normalized_bottom_unit_formula
     {C : Type uC} [Category.{vC} C] [Abelian C]
     [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]

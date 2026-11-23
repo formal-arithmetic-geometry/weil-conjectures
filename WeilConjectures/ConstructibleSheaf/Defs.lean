@@ -56,7 +56,7 @@ involving finiteness require `A` to be moreover concrete, finite generation refe
 elements of the underlying type `CategoryTheory.ToType`. This covers sheaves of abelian groups
 (`A = Ab.{u + 1}`) and of `Λ`-modules (`A = ModuleCat.{u + 1} Λ`), for all the coefficient
 stages of the `ℓ`-adic formalism: the finite rings `Λₙ = 𝒪_E/ϖⁿ`, the valuation rings `𝒪_E` and
-the fields `E` and `ℚ̄_ℓ` (`definition-constructible-sheaves--6`). Over a finite ring a finitely
+the fields `E` and `ℚ̄_ℓ`. Over a finite ring a finitely
 generated module is finite; over a field it is finite-dimensional, so constructible sheaves over a
 field are not forced to vanish.
 
@@ -80,7 +80,7 @@ along an immersion, the left adjoint of the pushforward `AlgebraicGeometry.Etale
   abelian `A` it is supplied by the instance
   `CategoryTheory.GrothendieckTopology.hasSheafify_over_smallEtaleTopology` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, a slice of an
-  essentially small site being again essentially small; it is a case of the sorried
+  essentially small site being again essentially small; it is a case of
   `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall` there. This replaces
   what used to be a `HasWeakSheafify` hypothesis quantified over all schemes and all étale `U`, the
   quantification being forced by the existential quantifier over stratifications.

@@ -58,9 +58,10 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! Base restriction and tensor data for localized projection sites.
 
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites,
-Tags 08FI, 0FN5 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-base-data).
+## References
+
+* Stacks Project, Modules on Sites, Tag 04J0
+* Cohomology on Sites, Tags 08FI, 0FN5 and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -73,9 +74,6 @@ set_option linter.privateModule false
 namespace AlgebraicGeometry.Scheme.ProjectionRestriction
 
 /-- The restriction and tensor portion of localized projection data.
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites,
-Tags 08FI, 0FN5 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-base-data).
 
 This package records the localized module operation, its derived adjunction,
 and all normalized tensor models and comparisons.  The direct-image and
@@ -185,16 +183,9 @@ private theorem restrictionWithTensor_exists {C : Type (u + 1)} [Category.{u} C]
     L a b sa sb r.ordinaryTensor hn hp
   exact ⟨r, b, sb, t, ht⟩
 
-/-- The base restriction/tensor package exists.
-Source: Stacks Project, Modules on Sites, Tag 04J0; Cohomology on Sites,
-Tags 08FI, 0FN5 and 07A4.
-(blueprint: lem-weil-pbc-ringed-projection-local-base-data).
-
-Restrict the coefficient map to the two localized sites.  The localized module
-adjunction and exactness give the operation and its derived adjunction.  Apply
-the normalized tensor descent construction on each localized site and to the
-restriction functors; the pure-tensor formulas determine the ordinary and
-derived comparisons and their signed shift equations. -/
+/-- For every object `V` of the pro-etale site of `Y`, the base restriction and tensor data
+`LocalBaseData g V` (localized coefficient restriction, its derived adjunction and the tensor
+comparisons) exists. -/
 theorem localBaseData_exists {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

@@ -17,34 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Simultaneous lifting of an outer covering and its finite family of inner coverings.
-Source: Stacks Project, Sites, Tag 09YL, the paragraph verifying axiom (2), together
-with the finite-diagram observation at the start of its proof.
-(blueprint: lem-weil-pbc-colimit-site-covering-families-lift)
-
-Proof: Use hQ to choose a stage covering presieve for the outer family and for
-each inner family. Each of these presieves has finitely many arrows by hfinite.
-For every arrow of a requested indexed family, the equality of presieves in hQ
-supplies a stage member with that image, including its source equality. Conversely,
-choose for every member of each stage presieve an index of the requested family
-with the same image arrow. There are finitely many choices, since the outer index,
-each inner index, and each stage presieve are finite. Move the finitely many stages
-and all these representatives to a common stage using filteredness.
-
-Apply eventual equality in the object colimit to align the target of the outer
-presieve, its members' sources with the requested outer-source representatives,
-and the targets and sources of each inner presieve with the corresponding outer
-and inner representatives. Apply eventual equality in the arrow colimit to the
-finitely many pairs consisting of a chosen member and its indexed representative,
-in both directions of the presieve comparison. Refine to one common stage where
-all these equalities hold. Transport along the endpoint equalities defines a and b.
-The comparisons in both directions say that their indexed presieves equal the
-transported original stage presieves, which are covering by hcover. Cocone
-naturality preserves their image arrows, giving the two Arrow.mk equalities.
-For an empty outer family, hQ still supplies its target and an empty covering
-presieve (a nonempty presieve cannot have empty image); its image stays empty
-at every transition. An empty inner family is treated in the same way. Repeated
-indices impose only finitely many arrow equalities and do not change a presieve.
-No stage composition axiom is used: this statement lifts the input families only. -/
+Stacks Project, Sites, Tag 09YL. -/
 theorem colimit_site_covering_families_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

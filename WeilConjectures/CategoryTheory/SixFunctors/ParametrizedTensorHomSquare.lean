@@ -24,8 +24,7 @@ variable {C : Type u₁} [Category.{v₁} C]
   {HE : Eᵒᵖ ⥤ E ⥤ E} {HJ : Jᵒᵖ ⥤ J ⥤ J}
 
 /-- Evaluation comparison using the supplied, rather than inferred, Hom adjunction.
-Source: tensor--Hom adjunction, Stacks 07A4.
-(blueprint: lem-sf-parametrized-tensor-hom-square). -/
+Source: tensor--Hom adjunction, Stacks 07A4. -/
 def paramTensorComparisonHom (aC : TC ⊣₂ HC)
     (aD : TD ⊣₂ HD) (F : C ⥤ D)
     (t : Functor.uncurry.obj TC ⋙ F ≅

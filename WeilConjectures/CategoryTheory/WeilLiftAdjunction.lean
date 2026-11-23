@@ -23,8 +23,7 @@ If `T ⊣ RW` and `T₀ ⊣ R₀`, and `θ : U_C (RW L') ≅ R₀ (U_D L')` is c
 *exceptional datum* `rightWeilDatum adj₀ e (σ_D L')`: the unique Weil datum on `R₀ (U_D L')`
 for which the counit `T₀ R₀ (U_D L') ⟶ U_D L'` is equivariant
 (`CategoryTheory.isWeilEquivariant_rightWeilDatum_of_counitCompat`). This is the formal content
-of "the Frobenius structure of the Weil `Rf^!` is the exceptional datum of the Frobenius square"
-(blueprint `proposition-purity-trace-commute-frobenius`).
+of "the Frobenius structure of the Weil `Rf^!` is the exceptional datum of the Frobenius square".
 
 Lifts and counit-compatible comparisons compose (`CategoryTheory.isWeilLift_comp`,
 `CategoryTheory.counitCompat_comp`) and transport along isomorphisms of the left adjoint

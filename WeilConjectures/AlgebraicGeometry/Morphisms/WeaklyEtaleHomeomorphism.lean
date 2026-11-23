@@ -34,8 +34,8 @@ namespace AlgebraicGeometry.WeaklyEtale
 
 variable {U V S : Scheme.{u}}
 
-/-- Blueprint `lemma-stability--5`: Morphisms between weakly etale objects.
-Let `u : U ⟶ S` and `v : V ⟶ S` be weakly étale. Every `S`-morphism `f : U ⟶ V` is weakly
+/-- Morphisms between weakly etale objects.
+Let `u: U ⟶ S` and `v: V ⟶ S` be weakly étale. Every `S`-morphism `f: U ⟶ V` is weakly
 étale: its composite with the weakly étale `v` is the weakly étale `u` (Stacks 0951,
 `AlgebraicGeometry.WeaklyEtale.of_comp`). -/
 theorem of_comp_eq (u : U ⟶ S) (v : V ⟶ S) [WeaklyEtale u] [WeaklyEtale v] (f : U ⟶ V)
@@ -51,8 +51,8 @@ theorem isIso_diagonal_of_universallyInjective (f : V ⟶ S) [WeaklyEtale f]
     ((tfae_universallyInjective f).out 1 4).1 ‹UniversallyInjective f›
   exact Flat.isIso_of_surjective_of_mono _
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius--1`: A weakly etale universal
-homeomorphism is an isomorphism. Let `f : V ⟶ W` be weakly étale and a universal homeomorphism. Then
+/-- A weakly etale universal
+homeomorphism is an isomorphism. Let `f: V ⟶ W` be weakly étale and a universal homeomorphism. Then
 `f` is an isomorphism: its diagonal is a flat surjective closed immersion, hence an isomorphism, so
 `f` is a flat surjective quasi-compact monomorphism, hence an isomorphism. -/
 theorem isIso_of_isUniversalHomeomorphism (f : V ⟶ S) [WeaklyEtale f]

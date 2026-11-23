@@ -14,11 +14,7 @@ import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! Finite-support coordinates for the condensed algebraic closure.
-
-Source: the finite-subextension-valued section model of
-`WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension`, and the
-finite-basis template `continuousBasisSheafIso` in Colimit/Compatibility.lean.
-(blueprint: lem-weil-pbc-condensed-qbar-point-basis) -/
+-/
 
 -- After dropping the copy of upstream's declaration, this module only keeps private declarations.
 set_option linter.privateModule false

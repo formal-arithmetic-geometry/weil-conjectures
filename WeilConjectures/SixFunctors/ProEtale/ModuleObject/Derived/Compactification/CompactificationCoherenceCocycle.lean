@@ -419,7 +419,12 @@ private theorem refinementMap_isIso
   have hz : IsZero (F.obj K) := by
     apply CategoryTheory.extend_zero S hloc F _ _ K hK
     · intro I L hL
-      have : PreservesColimit L (J ⋙ R) := hsums I L hL
+      -- the sum is indexed by the morphism universe: lift its index to the universe of `hsums`
+      have : PreservesColimit L (J ⋙ R) := by
+        let e := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)
+        have h' : PreservesColimit (e.functor ⋙ L) (J ⋙ R) :=
+          hsums (ULift.{u + 2} I) (e.functor ⋙ L) (fun i ↦ hL (Equiv.ulift i))
+        exact Functor.Final.preservesColimit_of_comp (F := e.functor)
       change PreservesColimit L ((J ⋙ R) ⋙ V)
       have : PreservesColimit (L ⋙ J ⋙ R) V :=
         adj.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit

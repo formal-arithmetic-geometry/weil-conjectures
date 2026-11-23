@@ -16,8 +16,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenOfSmoothZeroFibreDimension
 /-!
 # Etale fibres of a flat morphism of finite presentation
 
-Source: Stacks Project, Tags 02GM, 02G8, and 02GK, and their pointwise algebra arguments.
-(blueprint: lem-sbc-flat-fibre-etale-neighbourhoods)
+## References
+
+* Stacks Project, Tags 02GM, 02G8, and 02GK, and their pointwise algebra arguments
+* Stacks Project, Tag 02GM, together with Tags 02G8 and
+  02GK for unramifiedness and the pointwise etale criterion
 -/
 
 @[expose] public section
@@ -27,23 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- For a flat morphism locally of finite presentation, an etale fibre is equivalent to
-etale source neighbourhoods at all points over the chosen target point.
-
-Source: Stacks Project, Tag 02GM, morphisms-lemma-etale-flat-etale-fibres, together with Tags
-02G8 and 02GK for unramifiedness and the pointwise etale criterion.
-(blueprint: lem-sbc-flat-fibre-etale-neighbourhoods)
-
-Proof: Suppose the fibre is etale. It is smooth of relative dimension zero, hence its
-local dimension at every point is zero. For x over y the pointwise flat finite-presentation
-smooth fibre criterion puts x in the smooth locus of f. The restriction of f to its smooth
-locus is smooth: its smooth locus is the preimage of that of f under the open immersion,
-which is the whole source. Apply exists_etale_open_of_smooth_of_fibre_dimension_zero to
-this neighbourhood and the zero local fibre dimension to obtain an etale neighbourhood.
-Conversely, base change each etale source neighbourhood to Spec(kappa(y)). These opens
-cover the fibre, since its points identify with the points of X mapping to y. Their
-morphisms to the residue field are etale by base change. Etaleness is local on the source,
-so the whole fibre is etale. For an empty fibre both its etaleness and the universal
-assertion hold. No finiteness of f or Noetherian condition on Y is used. -/
+etale source neighbourhoods at all points over the chosen target point. -/
 theorem etale_fibre_iff_forall_etale_neighbourhood
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [LocallyOfFinitePresentation f] (y : Y) :
     Etale (f.fiberToSpecResidueField y) ↔

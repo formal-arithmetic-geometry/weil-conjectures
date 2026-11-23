@@ -181,14 +181,12 @@ import WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import WeilConjectures.CategoryTheory.Augmented.AugmentedCechObjectPullback
 import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonIndependent
 
 /-! # Pullback of augmented extended Cech tensor actions
 
 Source: Stacks Project, algebraization.tex, Tag 0A0G, the final pullback identity,
 and sites-cohomology.tex, Tags 07A4 and 08J9.
-(blueprint: lem-weil-pbc-augmented-cech-tensor-pullback).
 -/
 
 @[expose] public section

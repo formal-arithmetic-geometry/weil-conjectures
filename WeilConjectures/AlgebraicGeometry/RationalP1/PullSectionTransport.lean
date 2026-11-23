@@ -39,10 +39,6 @@ structure PullSectionTransportData
 The maps `d₁` and `d₂` compare applying `G` after `U` with applying `T` after `G`.
 The hypotheses record the two section compatibilities and the compatibility of `b`.
 The conclusion is the elementary categorical calculation used for the Tate-line factor.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, tensor and shift transport.
-(blueprint: lem-sfb-rational-p1-second-pull-section-transport).
 -/
 theorem pull_section_transport
     {C D : Type*} [Category C] [Category D]

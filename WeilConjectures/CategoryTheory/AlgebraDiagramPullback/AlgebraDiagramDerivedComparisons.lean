@@ -13,7 +13,6 @@ import WeilConjectures.Algebra.Homology.ExactPullbackSigned.ExactPullbackSignedC
 /-! # Derived normalized comparison maps
 
 Source: Stacks 03EL and 07A4.
-(blueprint: lem-pur-algebra-diagram-derived-comparisons).
 -/
 
 @[expose] public noncomputable section

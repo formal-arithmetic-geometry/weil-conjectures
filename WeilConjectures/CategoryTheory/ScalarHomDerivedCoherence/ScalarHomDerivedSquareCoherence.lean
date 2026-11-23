@@ -13,10 +13,7 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Flat scalar evaluation on an arbitrary first complex
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 08J9 and 06YP;
-the one-K-flat-factor scalar evaluation refinement recorded in the DAG, rather
-than a verbatim assertion of these tags
-(blueprint: lem-sfb-scalar-hom-derived-square-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 08J9 and 06YP.
 
 All tensors, Hom products, sections and localization functors below are the
 recorded constructions. The data asserted to exist are fixed by generator
@@ -191,8 +188,7 @@ def DerivedCoherenceDerivedSquare : Prop :=
             (((ScalarHomModels.scalar.{c, v, r, w} (J := J) M) a).derived.obj L)
 
 
-/-- Generic storage for the four coefficient coherence equations.
-Source: this module (blueprint: lem-sfb-scalar-hom-derived-square-coherence). -/
+/-- Generic storage for the four coefficient coherence equations. -/
 structure CoherencePackage (Natural Composition Identity Square : Prop) : Prop where
   naturality : Natural
   composition : Composition
@@ -200,7 +196,7 @@ structure CoherencePackage (Natural Composition Identity Square : Prop) : Prop w
   derived_square : Square
 
 /-- Exactly the displayed naturality, composition, identity and square equations.
-Source: Stacks 07A4, 0D6D (blueprint: lem-sfb-scalar-hom-derived-square-coherence). -/
+Source: Stacks 07A4, 0D6D. -/
 abbrev DerivedCoherence :=
   CoherencePackage (DerivedCoherenceNaturality.{c, v, r, w} (J := J) M μ)
     (DerivedCoherenceComposition.{c, v, r, w} (J := J) M μ)
@@ -210,17 +206,7 @@ abbrev DerivedCoherence :=
 
 /-- Derived scalar-Hom comparison is natural and coherent for composition, identities
 and coefficient squares on arbitrary derived inputs.
-Source: Stacks 07A4, 08J9, 0D6D
-(blueprint: lem-sfb-scalar-hom-derived-square-coherence).
-
-Proof: the normalized scalar tensor coherence supplies the unit and composition
-equations, and the scalar-Hom comparison tower transfers these through the
-closed adjunction. For a commuting coefficient square, the direct composite
-comparisons agree after transport along equality of the coefficient maps.
-Conjugate both composition equations by their source and target composition
-isomorphisms. Functoriality of Hom and cancellation of the inverse isomorphisms
-identify the two square routes. These are equations for all derived morphisms,
-so inverse quasi-isomorphisms are included. -/
+Source: Stacks 07A4, 08J9, 0D6D. -/
 theorem coherence : DerivedCoherence.{c, v, r, w} (J := J) M μ := by
   obtain ⟨ht, hid⟩ := scalarHomTensorCoherence (J := J) M μ
   obtain ⟨hn, hc, hi⟩ := scalarHomComparisonTower (J := J) M μ ht hid

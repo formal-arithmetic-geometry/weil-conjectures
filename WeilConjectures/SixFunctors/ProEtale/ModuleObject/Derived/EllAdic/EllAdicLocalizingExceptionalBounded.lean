@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicProperLocalizingPushforward
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicLocalizingBrownRepresentability
+import WeilConjectures.CategoryTheory.SixFunctors.LocalizingSubcategoryUniverse
 import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoConstructible
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
@@ -234,104 +235,27 @@ private theorem closure_isLocalizing
   intro P hP hGP
   exact hP.2.2 A hA (fun i ↦ h i P hP hGP)
 
-private theorem closedUnderCoproducts
-    {C : Type u₁} [Category.{v₁} C]
-    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    (P : ObjectProperty C) (hP : IsLocalizingSubcategoryOfSize.{w} P) (I : Type w) :
-    P.IsClosedUnderColimitsOfShape (Discrete I) := by
-  have := hP.2.1
-  apply ObjectProperty.IsClosedUnderColimitsOfShape.mk'
-  rintro _ ⟨A, hA⟩
-  exact hP.2.2 A inferInstance (fun i ↦ hA ⟨i⟩)
-
-private theorem coproduct_small_support
-    {C : Type u₁} [Category.{v₁} C] [Preadditive C] [LocallySmall.{w} C]
-    {I : Type u₂} (K : I → C) (c : Cofan K) (hc : IsColimit c) :
-    Small.{w} {i // ¬ IsZero (K i)} := by
-  classical
-  let p (i : I) : c.pt ⟶ K i := hc.desc (Cofan.mk (K i) (Pi.single i (𝟙 (K i))))
-  have hp (i j : I) :
-      c.inj j ≫ p i = Pi.single (M := fun j ↦ K j ⟶ K i) i (𝟙 (K i)) j :=
-    hc.fac (Cofan.mk (K i) (Pi.single i (𝟙 (K i)))) (Discrete.mk j)
-  apply small_of_injective (f := fun i : {i // ¬ IsZero (K i)} ↦ p i.val ≫ c.inj i.val)
-  intro i j hij
-  apply Subtype.ext
-  by_contra hne
-  have he := congrArg (fun f ↦ c.inj i.val ≫ f ≫ p i.val) hij
-  have hi : c.inj i.val ≫ p i.val = 𝟙 (K i.val) := by simp [hp]
-  have hj : c.inj i.val ≫ p j.val = 0 := by simp [hp, hne]
-  have hid : 𝟙 (K i.val) = 0 := by
-    simpa only [← Category.assoc, hi, hj, Category.id_comp, zero_comp] using he
-  exact i.property ((IsZero.iff_id_eq_zero _).mpr hid)
-
-private theorem localizing_large
-    {C : Type u₁} [Category.{v₁} C]
-    [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
-    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    [LocallySmall.{w} C]
-    (P : ObjectProperty C) (hP : IsLocalizingSubcategoryOfSize.{w} P) :
-    IsLocalizingSubcategoryOfSize.{u₂} P := by
-  classical
-  have := hP.1
-  have := hP.2.1
-  refine ⟨hP.1, hP.2.1, ?_⟩
-  intro I A hA h
-  have := hA
-  let K : I → C := fun i ↦ A.obj ⟨i⟩
-  let c : Cofan K := (Cocone.precompose (Discrete.natIsoFunctor (F := A)).symm.hom).obj
-    (colimit.cocone A)
-  have hc : IsColimit c :=
-    (IsColimit.precomposeHomEquiv _ _).symm (colimit.isColimit A)
-  have : Small.{w} {i // ¬ IsZero (K i)} := coproduct_small_support K c hc
-  let J := {i // ¬ IsZero (K i)}
-  have := closedUnderCoproducts P hP (Shrink.{w} J)
-  have : P.IsClosedUnderColimitsOfShape (Discrete J) :=
-    ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-      (Discrete.equivalence (equivShrink J).symm)
-  let U : J → C := fun i ↦ K i.val
-  let r : Cofan U := Cofan.mk c.pt (fun i ↦ c.inj i.val)
-  have hr : IsColimit r := by
-    refine Cofan.IsColimit.mk r (fun s ↦ hc.desc (Cofan.mk s.pt
-      (fun i ↦ if hi : ¬ IsZero (K i) then s.inj ⟨i, hi⟩ else 0))) ?_ ?_
-    · intro s i
-      obtain ⟨i, hi⟩ := i
-      change c.ι.app (Discrete.mk i) ≫ _ = _
-      rw [hc.fac]
-      simp only [Cofan.mk_ι_app, dite_eq_left hi]
-    · intro s m hm
-      apply hc.hom_ext
-      intro ⟨i⟩
-      rw [hc.fac]
-      by_cases hi : ¬ IsZero (K i)
-      · simpa only [r, cofan_mk_inj, Cofan.inj, Cofan.mk_ι_app, dite_eq_left hi]
-          using hm ⟨i, hi⟩
-      · exact (not_not.mp hi).eq_of_src _ _
-  exact P.prop_of_isColimit (J := Discrete J) (c := r) hr (fun i ↦ h i.as.val)
-
 private theorem closure_index_eq
     {C : Type u₁} [Category.{v₁} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
-    [LocallySmall.{w} C] [UnivLE.{w, u₁}] (G : ObjectProperty C) :
+    [LocallySmall.{w} C] (G : ObjectProperty C) :
     localizingClosure G = localizingClosureOfSize.{w} G := by
   apply le_antisymm
   · intro K hK
-    exact hK _ (localizing_large _ (closure_isLocalizing.{w} G))
-      (fun X hX P hP hGP ↦ hGP X hX)
+    exact hK _ (@isLocalizingSubcategory_of_locallySmall C _ _ _ _ _ _ ‹LocallySmall.{w} C› _
+      (closure_isLocalizing.{w} G)) (fun X hX P hP hGP ↦ hGP X hX)
   · intro K hK P hP hGP
     have := hP.2.1
-    have hlarge : IsLocalizingSubcategoryOfSize.{u₁} P := hP
-    apply hK P ?_ hGP
-    refine ⟨hP.1, hP.2.1, ?_⟩
-    intro I A hA h
-    have := hA
-    have : P.IsClosedUnderColimitsOfShape (Discrete (Shrink.{u₁} I)) :=
-      closedUnderCoproducts _ hlarge _
-    have : P.IsClosedUnderColimitsOfShape (Discrete I) :=
-      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
-        (Discrete.equivalence (equivShrink I).symm)
-    exact P.prop_colimit A (fun i ↦ h i.as)
+    -- `IsLocalizingSubcategory` is indexed by the morphism universe `v₁`: restate `hP` with that
+    -- index written out and enlarge it to the index `w` with
+    -- `isLocalizingSubcategoryOfSize_of_locallySmall` at the instance `locallySmall_self C`,
+    -- passed explicitly (instance resolution would pick the ambient `LocallySmall.{w} C` and fix
+    -- the index to `w`)
+    have hv : IsLocalizingSubcategoryOfSize.{v₁} P :=
+      ⟨hP.1, hP.2.1, fun F hF h ↦ hP.2.2 F hF h⟩
+    exact hK P (@isLocalizingSubcategoryOfSize_of_locallySmall C _ _ _ _ _ _ (locallySmall_self C)
+      P hv) hGP
 
 end CategoryTheory.Functor
 
@@ -768,7 +692,7 @@ private theorem hull_eq
     have := hP.1
     have := hP.2.1
     have (I : Type (u + 1)) : P.IsClosedUnderColimitsOfShape (Discrete I) :=
-      CategoryTheory.Functor.closedUnderCoproducts.{u + 1, u + 1, u + 2} P hP I
+      hP.isClosedUnderColimitsOfShape_discrete I
     exact boundedConstructibleLocalizingClosure_le Λ T P hS K hK
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

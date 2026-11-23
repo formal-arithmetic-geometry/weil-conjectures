@@ -15,10 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ProEtaleCoefficients.Deriv
 /-!
 # Closed derived tensor structure and integer-shift comparisons
 
-Source: latest Weil blueprint, `sec-smooth-purity/sk-lem-sp-tower`,
-`lem-weil-finite-duality-site-comparison.proof.md`, second proof paragraph
-(blueprint: lem-sf-native-derived-closed-tensor-shifts).
-
 The statement packages the derived closed structure, the canonical two-variable shift
 comparisons, and their normalization by the lax-monoidal comparison of the localization.
 The chain comparisons are Mathlib's `mapBifunctorShift₁Iso` and `mapBifunctorShift₂Iso`:
@@ -291,42 +287,9 @@ end NativeTensorCoherence
 
 /-- Closedness and the normalized integer-shift equations for the derived tensor.
 
-Source: latest Weil blueprint, `sec-smooth-purity/sk-lem-sp-tower`,
-`lem-weil-finite-duality-site-comparison.proof.md`, second proof paragraph
-(blueprint: lem-sf-native-derived-closed-tensor-shifts).
-
-Clause (i) is the first conjunct.  Clause (ii) is the instance
-`DerivedCategory.commShift₂CurriedTensor : (curriedTensor (DerivedCategory C)).CommShift₂Int`:
-`λ_a(K,L)` is `((curriedTensor _).flip.obj L).commShiftIso a` at `K`, `ρ_b(K,L)` is
-`((curriedTensor _).obj K).commShiftIso b` at `L`; the `CommShift` fields give the zero and
-addition laws, `commShift_map`/`commShift_flip_map` naturality, and `CommShift₂.comm` the sign
-`(-1)^(a*b)`.  The second and third conjuncts are (iii), with `s_a = mapBifunctorShift₁Iso`
-(identity on summands) and `t_b = mapBifunctorShift₂Iso` (`(p*b).negOnePow` on summands).
-The last two conjuncts are the premises of the final determination sentence.
-
-Proof (as written, step by step):
-1. (i): `tensorLeft_isLeftAdjoint_of_hasFunctorialFlatResolution` (independent derived-category
-   universe) [prose-03-02], then `exists_rightAdjoint`.
-2. Write `L = quotient ⋙ Qh`. The source construction `TensorCommShift₂`
-   [lem-sc-derived-tensor-shift-independent-universe] supplies, for every complex `X`, a
-   K-flat left resolution `q : P → X`, inverted by `L`, and the shift compatibility
-   `commShift_liftingIsoApp` of its lifting on `KFlat × CoCh(C)`, whose component is the
-   tensorator `μ(L)` (the quotient tensorator is the identity).
-3. Second variable: for fixed `X`, naturality gives `μ(L)_X = α⁻¹ μ(L)_P β` with `α`, `β`
-   commuting with shifts (`β` by `CommShift₂.commShift_map` for the chain total tensor
-   [lem-weil-pbc-total-tensor-integer-shifts]); hence `μ(L)_X` commutes with shifts.
-4. First variable: the flipped lifting gives shift compatibility after restriction to K-flat
-   complexes; the private `of_left_resolutions` cancels the invertible `L(q[a]) ⊗ᴸ 1` to
-   extend it to every complex.
-5. Transport both through the shift-compatible `quotientCompQhIso : L ≅ Q`; then
-   `NatTrans.shift_app_comm`, with `commShiftIso_map₂CochainComplex(_flip)_hom_app`
-   identifying the chain comparisons with `mapBifunctorShift₂Iso`/`mapBifunctorShift₁Iso`,
-   is exactly the two equations of (iii).
-6. For K-flat `X`, `μ(Qh)` at `πX, πZ` is invertible
-   (`isIso_counit_app_app_of_kFlat_left`, `kFlat_quotient_obj_iff`) [prose-03-02],
-   hence so is `μ(Q)_{X,Z}`; `exists_kFlat_iso` and `quotient_obj_surjective` give the K-flat
-   representatives `QX ≅ K` [def-weil-abstract-derived-category].
--/
+The first conjunct is closedness, the second and third are the equations for the shifts of the
+first and of the second variable of the tensorator, and the last two are the premises of the
+final determination sentence. -/
 theorem nativeDerivedClosedTensorShifts
     (C : Type u) [Category.{v} C] [Abelian C]
     [IsGrothendieckAbelian.{v} C] [HasDerivedCategory.{w} C]

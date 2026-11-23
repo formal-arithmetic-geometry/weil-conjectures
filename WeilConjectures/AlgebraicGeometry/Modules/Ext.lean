@@ -64,9 +64,7 @@ variable {X : Scheme.{u}} [HasExt.{u} X.Modules]
 /-- The **Ext groups** `Ext^i_X(ℱ, 𝒢)` of two `𝒪_X`-modules: the morphisms `ℱ ⟶ 𝒢[i]` in the
 derived category of `𝒪_X`-modules, equivalently the right derived functors of `Hom_{𝒪_X}(ℱ, -)`
 evaluated at `𝒢` (`𝒪_X`-modules have enough injectives but in general not enough projectives).
-In degree `0` this is `Hom_{𝒪_X}(ℱ, 𝒢)` (`CategoryTheory.Abelian.Ext.homEquiv₀`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+In degree `0` this is `Hom_{𝒪_X}(ℱ, 𝒢)` (`CategoryTheory.Abelian.Ext.homEquiv₀`). -/
 abbrev Ext (ℱ 𝒢 : X.Modules) (i : ℕ) : Type u :=
   Abelian.Ext ℱ 𝒢 i
 
@@ -74,9 +72,7 @@ abbrev Ext (ℱ 𝒢 : X.Modules) (i : ℕ) : Type u :=
 `𝒪_X`-modules gives, for every `𝒢` and `1 + n₀ = n₁`, the exact sequence
 `Ext^{n₀}(ℱ₃, 𝒢) → Ext^{n₀}(ℱ₂, 𝒢) → Ext^{n₀}(ℱ₁, 𝒢) → Ext^{n₁}(ℱ₃, 𝒢) → Ext^{n₁}(ℱ₂, 𝒢) →
 Ext^{n₁}(ℱ₁, 𝒢)`. The comparison with sheaf cohomology for finite locally free `ℱ` is
-`AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`AlgebraicGeometry.Scheme.Modules.nonempty_ext_addEquiv_H`. -/
 theorem contravariantSequence_ext_exact {S : ShortComplex X.Modules} (hS : S.ShortExact)
     (𝒢 : X.Modules) (n₀ n₁ : ℕ) (h : 1 + n₀ = n₁) :
     (Abelian.Ext.contravariantSequence hS 𝒢 n₀ n₁ h).Exact :=
@@ -388,9 +384,7 @@ end LocallyFree
 /-- **Ext of a finite locally free module.** For a finite locally free `𝒪_X`-module `ℱ` and any
 `𝒪_X`-module `𝒢`, `Ext^i_X(ℱ, 𝒢) ≅ H^i(X, ℱᵛ ⊗ 𝒢)`. Indeed `Hom(ℱ, -) = Γ(X, ℱᵛ ⊗ -)` is the
 composite of the exact functor `ℱᵛ ⊗ -` with `Γ(X, -)`. In particular
-`Ext^i_X(𝒪_X, 𝒢) = H^i(X, 𝒢)`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+`Ext^i_X(𝒪_X, 𝒢) = H^i(X, 𝒢)`. -/
 theorem nonempty_ext_addEquiv_H (ℱ 𝒢 : X.Modules) [ℱ.IsFiniteLocallyFree] (i : ℕ) :
     Nonempty (Ext ℱ 𝒢 i ≃+ (ℱᵛ ⊗ 𝒢).H i) := by
   have : IsGrothendieckAbelian.{u} X.Modules := SheafOfModules.isGrothendieckAbelian X.ringCatSheaf
@@ -464,9 +458,7 @@ instance additive_ihom (ℱ : X.Modules) [ℱ.IsFiniteLocallyFree] : (ihom ℱ).
 `Ext^i(ℱ, 𝒢) = Ext^i(ℱ ⊗ 𝒪_X, 𝒢) ≃ Ext^i(𝒪_X, Hom(ℱ, 𝒢))` (the `Ext`-adjunction for the exact
 adjoint functors `ℱ ⊗ -` and `Hom(ℱ, -)`), of `Hom(ℱ, 𝒢) ≅ ℱᵛ ⊗ 𝒢`, and of the comparison
 `AlgebraicGeometry.Scheme.Modules.extUnitAddEquivH`. It is natural in `𝒢`
-(`AlgebraicGeometry.Scheme.Modules.extAddEquivH_comp_mk₀`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+(`AlgebraicGeometry.Scheme.Modules.extAddEquivH_comp_mk₀`). -/
 noncomputable def extAddEquivH (ℱ 𝒢 : X.Modules) [ℱ.IsFiniteLocallyFree] (i : ℕ) :
     Ext ℱ 𝒢 i ≃+ (ℱᵛ ⊗ 𝒢).H i :=
   (extAddEquivOfIsoLeft (ρ_ ℱ) i).trans

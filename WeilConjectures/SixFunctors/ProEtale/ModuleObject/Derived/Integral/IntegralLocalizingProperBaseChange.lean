@@ -218,17 +218,17 @@ theorem integralLocalizing_properBaseChange
   obtain ⟨hg'⟩ := pullback_of_constructible Λ g' (pullback_constructible Λ g')
   have hK' : localizingClosureProEtale Λ X K := (congrFun (hclosure X) K).mpr hK
   have push := localizingClosure_map _ _ (lowerStar Λ p).rightDerivedFunctor
-    (fun M hM ↦ hp.1 ⟨M, hM⟩) hp.2 K hK'
+    (fun M hM ↦ hp.1 ⟨M, hM⟩) (preservesColimit_of_properLocalizingHypotheses Λ p hp) K hK'
   have pull := hg'.localizing ⟨K, hK'⟩
   refine ⟨(congrFun (hclosure Y') _).mp (hg.localizing ⟨_, push⟩),
     (congrFun (hclosure Y') _).mp ?_, ?_⟩
   · exact localizingClosure_map _ _ (lowerStar Λ p').rightDerivedFunctor
-      (fun M hM ↦ hp'.1 ⟨M, hM⟩) hp'.2 _ pull
+      (fun M hM ↦ hp'.1 ⟨M, hM⟩) (preservesColimit_of_properLocalizingHypotheses Λ p' hp') _ pull
   · let := condensedAmbientExchange_isoLocus_triangulated
       (Profinite.padicIntegersRingObj ℓ E) sq
     apply extend_iso _ _ _ _
       (condensedAmbientExchange (Profinite.padicIntegersRingObj ℓ E) sq)
-      (composite_sums (Profinite.padicIntegersRingObj ℓ E) hp hp' hg hg')
+      (composite_sums_small (Profinite.padicIntegersRingObj ℓ E) hp hp' hg hg')
       (fun M hM ↦ properBaseChange_admissible_generators ℓ
         (Profinite.padicIntegersRingObj ℓ E) hadm k p g sq M hM) K hK'
     exact (localizingClosure_exists (Profinite.padicIntegersRingObj ℓ E) X

@@ -12,16 +12,14 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 /-!
 # Canonical direct-image mate in fixed coefficients
 
+Stacks Project, Tags 099R and 0B65.
+
 ## Main definitions and statements
 
 * `fixedComparisonPullbackPlus`: the canonical termwise pullback comparison.
 * `fixedComparisonDirectImageMatePlus`: the canonical derived direct-image mate.
 * `isIso_fixedComparisonDirectImageMatePlus`: its qcqs invertibility.
 * `fixedComparisonDirectImageMatePlus_counit`: its specified counit normalization.
-
-## References
-
-* Stacks Project, Tags 099R and 0B65.
 -/
 
 @[expose] public section
@@ -40,7 +38,7 @@ set_option backward.defeqAttrib.useBackward true
 namespace AlgebraicGeometry.ProEtale
 
 /-- The pullback comparison, induced termwise from the specified sheaf comparison.
-Exact pro-etale pullback is its own left derived functor. (Stacks, Tags 099R and 0B65.) -/
+Exact pro-etale pullback is its own left derived functor (Stacks Project, Tags 099R and 0B65). -/
 noncomputable def fixedComparisonPullbackPlus (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V) :
     (Etale.upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus ⋙
@@ -57,7 +55,9 @@ noncomputable def fixedComparisonPullbackPlus (Λ : Type (u + 1)) [CommRing Λ]
     (upperStar (ModuleCat.{u + 1} Λ) f)
 
 /-- The canonical derived direct-image mate of the underived counit comparison.
-(Stacks, Tags 099R and 0B65.) -/
+Its data is the existing right-derived base-change transformation, with its universal
+property normalization, not a chosen isomorphism between the endpoints
+(Stacks Project, Tags 099R and 0B65). -/
 noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing Λ]
     {U V : Scheme.{u}} (f : U ⟶ V) :
     Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙
@@ -67,7 +67,15 @@ noncomputable def fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRi
   Functor.rightDerivedFunctorPlusBaseChange
     (lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ))
 
-/-- Invertibility of the specified mate for a qcqs morphism. (Stacks, Tag 099R.) -/
+/-- Invertibility of the specified mate for a qcqs morphism (Stacks Project, Tag 099R).
+
+Proof: the canonical underived comparison is invertible for qcqs f by
+`isIso_lowerStarComparisonUpperStarBaseChange`. The comparison pullback of every
+injective etale sheaf is acyclic for the pro-etale direct image by
+`rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective`. Apply the general
+right-derived base-change invertibility theorem to this actual underived map.
+Thus it is the specified transformation, rather than an arbitrary comparison,
+that is invertible. -/
 theorem isIso_fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {U V : Scheme.{u}} (f : U ⟶ V)
     [QuasiCompact f] [QuasiSeparated f] :
@@ -79,11 +87,21 @@ theorem isIso_fixedComparisonDirectImageMatePlus (Λ : Type (u + 1)) [CommRing �
       (ModuleCat.{u + 1} Λ) f I)
 
 /-- The specified counit-mate normalization. It also characterizes the named component
-as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison.
-(Stacks, Tag 0B65.) -/
+as the adjoint transpose of the pulled-back etale counit after inverse pullback comparison
+(Stacks Project, Tag 0B65). No finiteness of the coefficient ring and no quasi-compactness or
+quasi-separatedness of `f` is needed.
+
+Proof: the iterated-mate identity identifies the underived direct-image comparison
+as the mate of the specified pullback comparison. On bounded-below homotopy categories,
+the factorization equations for the induced pullback comparison verify the hypothesis of
+`Adjunction.derivedPlus_mateEquiv_app_fac`. Compare its conclusion with the defining
+factorization of derived base change. Uniqueness of right-derived transformations gives
+the derived mate identity. Identify the restricted adjunctions with `derivedPlus`, apply
+`mateEquiv_counit`, and cancel the inverse pullback comparison. Compatibility of the
+induced natural isomorphism with inversion is checked through the faithful inclusion
+of D+ into the unbounded derived category. Naturality is built into the transformation. -/
 theorem fixedComparisonDirectImageMatePlus_counit (Λ : Type (u + 1)) [CommRing Λ]
-    [Finite Λ] {U V : Scheme.{u}} (f : U ⟶ V)
-    [QuasiCompact f] [QuasiSeparated f]
+    {U V : Scheme.{u}} (f : U ⟶ V)
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (fixedComparisonPullbackPlus Λ f).hom.app
         ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj K) ≫

@@ -32,7 +32,7 @@ namespace CategoryTheory
 
 /-- The inverse of an isomorphism of monoid objects is a morphism of monoid objects, with
 the monoid structures given explicitly.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV. -/
 theorem IsMonHom.inv_of_hom {D : Type*} [Category D]
     [MonoidalCategory D] {M N : D} (mM : MonObj M) (mN : MonObj N) (e : M ≅ N)
     (h : @IsMonHom _ _ _ M N mM mN e.hom) : @IsMonHom _ _ _ N M mN mM e.inv := by
@@ -42,7 +42,7 @@ theorem IsMonHom.inv_of_hom {D : Type*} [Category D]
 
 /-- A composite of morphisms of monoid objects is a morphism of monoid objects, with the
 monoid structures given explicitly.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV. -/
 theorem IsMonHom.comp_of_monObj {D : Type*} [Category D]
     [MonoidalCategory D] {M N O : D} (mM : MonObj M) (mN : MonObj N) (mO : MonObj O)
     (f : M ⟶ N) (g : N ⟶ O) (hf : @IsMonHom _ _ _ M N mM mN f)
@@ -54,7 +54,7 @@ theorem IsMonHom.comp_of_monObj {D : Type*} [Category D]
 
 /-- A lax monoidal functor maps morphisms of monoid objects to morphisms of monoid objects,
 with the monoid structures given explicitly.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV. -/
 theorem Functor.isMonHom_map_of_monObj {D E : Type*} [Category D]
     [Category E] [MonoidalCategory D] [MonoidalCategory E] (F : D ⥤ E) [F.LaxMonoidal]
     {M N : D} (mM : MonObj M) (mN : MonObj N) (f : M ⟶ N)
@@ -70,7 +70,7 @@ variable {C : Type*} [Category C] (J : GrothendieckTopology C)
 attribute [local instance] Sheaf.monoidalCategory in
 /-- The ring object structure of a constant abelian sheaf on a commutative ring is the
 sheafification of the constant presheaf of rings.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV. -/
 theorem constantSheaf_monObjObj_eq [HasWeakSheafify J Ab.{u + 1}]
     [(J.W (A := Ab.{u + 1})).IsMonoidal] (B : Type (u + 1)) [CommRing B] :
     (constantSheaf J Ab.{u + 1}).monObjObj (AddCommGrpCat.of B) =
@@ -85,7 +85,7 @@ theorem constantSheaf_monObjObj_eq [HasWeakSheafify J Ab.{u + 1}]
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse of the constant-sheaf comparison for the forgetful functor from commutative
 rings to abelian groups restricts, along the sheafification unit, to the forgotten unit.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 theorem toSheafify_comp_constantCommuteCompose_inv_app_hom
     [HasWeakSheafify J Ab.{u + 1}] [HasWeakSheafify J CommRingCat.{u + 1}]
     [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙
@@ -113,7 +113,7 @@ theorem toSheafify_comp_constantCommuteCompose_inv_app_hom
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse of the constant-sheaf comparison for the forgetful functor from commutative
 rings to abelian groups, written as the sheafified unit followed by the counit isomorphism.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 theorem constantCommuteCompose_inv_app_eq
     [HasWeakSheafify J Ab.{u + 1}] [HasWeakSheafify J CommRingCat.{u + 1}]
     [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]
@@ -144,7 +144,7 @@ theorem constantCommuteCompose_inv_app_eq
 attribute [local instance] Sheaf.monoidalCategory in
 /-- The inverse constant-sheaf comparison for the forgetful functor from commutative rings to
 abelian groups is a morphism of ring objects.
-Source: Stacks 00YV and 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV and 03CY. -/
 theorem isMonHom_constantCommuteCompose_inv_app
     [HasWeakSheafify J Ab.{u + 1}] [(J.W (A := Ab.{u + 1})).IsMonoidal]
     [HasWeakSheafify J CommRingCat.{u + 1}]
@@ -177,7 +177,7 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory in
 /-- A morphism of ring objects from a constant abelian presheaf on a commutative ring into an
 internal commutative ring sheaf, as a morphism of presheaves of commutative rings into its
 reconstructed section rings.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+Source: Stacks 00YV. -/
 def InternalAbelianSheafModule.constantToSectionRings {C : Type v}
     [Category.{w} C] (J : GrothendieckTopology C) [UnivLE.{max v w, u + 1}]
     [HasSheafify J Ab.{u + 1}] [(J.W (A := Ab.{u + 1})).IsMonoidal]

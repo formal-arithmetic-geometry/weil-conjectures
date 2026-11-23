@@ -31,7 +31,6 @@ In a pretriangulated category, the reduction `π` modulo `ℓ` given by a distin
 (`CategoryTheory.Pretriangulated.exists_eq_nsmul_of_comp_eq_zero`), which gives
 `CategoryTheory.End.eq_one_of_distinguished` and
 `CategoryTheory.End.eq_one_of_distinguished_of_separated`.
-
 -/
 
 @[expose] public section

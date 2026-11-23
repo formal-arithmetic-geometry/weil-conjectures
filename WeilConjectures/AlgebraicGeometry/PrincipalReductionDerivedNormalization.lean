@@ -9,6 +9,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalConeTensorNormalization
 import WeilConjectures.AlgebraicGeometry.PrincipalTensorScalarExtension
 
 /-! # Normalized derived principal quotient cones
+
+The scalar principal cones compute the canonical derived quotient functors, with their quotient
+maps, adjunction units and signed shifts.
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +37,25 @@ abbrev reduction (n : ℕ) :=
   AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n
 
 /-- The scalar principal cone computes the canonical derived quotient functor,
-with the quotient maps and adjunction units, and with its standard signed shifts. -/
+with the quotient maps and adjunction units, and with its standard signed shifts.
+
+Proof: the scalar formula identifies d with multiplication by the uniformizer.
+The resolution theorem gives the short exact sequence R --d^(n+1)--> R --> B_n.
+Its cone augments to B_n[0], and its two free terms make it K-flat. Tensoring an
+arbitrary complex with this resolution gives the scalar cone, by the signed
+cone--tensor interchange. On K-flat complexes, tensoring the augmentation is a
+quasi-isomorphism and agrees with extension of scalars followed by restriction:
+both balanced maps send a tensor of coefficients and a module section to its
+scalar extension. The universal left-derived comparison extends this equality
+to all complexes and all derived morphisms. The quotient coefficient map lifts
+to (d,id) on the two-term resolutions, so the normalized tensor comparison
+identifies its cone map with integralStep. The degree-zero inclusion is the
+ordinary scalar-extension unit and hence descends to the specified derived
+adjunction unit. The tensor shift comparison has coordinates (x,(-1)^r y),
+which is the inverse of mappingCone.shiftIso. Its coherence descends through
+localization and gives sF. Tensoring is additive and takes cone triangles to
+cone triangles with this boundary sign, proving exactness. These constructions
+include zero complexes and empty sites and use no boundedness assumption. -/
 theorem derived_principal_normalization
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
@@ -84,7 +105,7 @@ theorem derived_principal_normalization
   let (n : ℕ) : (DerivedNakayama.reductionFunctor l E X (n + 1)).IsTriangulated := by
     change (tensorRight _).IsTriangulated
     infer_instance
-  obtain ⟨c, hc, hu, hsigned⟩ := principal_cone_tensor_normalization l E X d hd hs
+  obtain ⟨c, hc, hu, hsigned⟩ := principal_cone_tensor_normalization l E X d hd
   obtain ⟨e, he, hunit⟩ := principal_tensor_scalar_extension l E X
   let e' (n : ℕ) : DerivedNakayama.reductionFunctor l E X (n + 1) ≅
       reduction l E X n := e n

@@ -10,7 +10,6 @@ import Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 /-! # The cocycle product with a single coefficient complex
 Source: Stacks Project, Tag 0H7Z, equation simple-tor-product.
-(blueprint: lem-pur-kunneth-model-single-product)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,8 +40,7 @@ private theorem single_element_condition (M : ModuleCat.{u} R) (a : M) :
   simp
 
 /-- The cochain map induced by a coefficient element, via the ordinary tensor unit.
-Source: Stacks Project, Tag 0H7Z, simple-tor-product.
-(blueprint: lem-pur-kunneth-model-single-product) -/
+Source: Stacks Project, Tag 0H7Z, simple-tor-product. -/
 def modelCoefficientAction (P : CochainComplex (ModuleCat.{u} R) ℤ)
     (M : ModuleCat.{u} R) (a : M) :
     P ⟶ P ⊗ (HomologicalComplex.single (ModuleCat.{u} R) (.up ℤ) 0).obj M :=
@@ -70,8 +68,7 @@ private theorem modelCoefficientAction_f
 
 /-- The cocycle product with a coefficient element: the coefficient action sends the class
 of a cocycle `z` to the class of the cocycle `z ⊗ a`.
-Source: Stacks Project, Tag 0H7Z, simple-tor-product.
-(blueprint: lem-pur-kunneth-model-single-product) -/
+Source: Stacks Project, Tag 0H7Z, simple-tor-product. -/
 theorem homologyMap_modelCoefficientAction_homologyπ
     (P : CochainComplex (ModuleCat.{u} R) ℤ) (M : ModuleCat.{u} R) (a : M) (q : ℤ)
     (z : P.cycles q) :

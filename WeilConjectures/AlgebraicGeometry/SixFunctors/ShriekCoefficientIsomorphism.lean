@@ -39,10 +39,6 @@ import WeilConjectures.CategoryTheory.SixFunctors.MateIsoAlongEquivalences
 /-!
 # Coefficient-isomorphism transport of compactification functors
 
-Source: blueprint main-20261015, sk-thm-existence/det-existence-restriction and
-sk-def-sfb-coefficient-comparisons, Push and extension by zero
-(blueprint: lem-sfb-shriek-coefficient-isomorphism).
-
 The comparison is constructed from the two canonical scalar-restriction comparisons.
 All categories are the ordinary unbounded derived module-object categories.
 -/
@@ -63,23 +59,17 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 attribute [local irreducible] upperStarFromPoint CondensedRing.upperStar
 
-/-- Termwise restriction along the inverse coefficient isomorphism.
-Source: blueprint coefficient comparisons, ring-isomorphism specialization
-(blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
+/-- Termwise restriction along the inverse coefficient isomorphism. -/
 noncomputable abbrev shriekCoefficientTransport (e : Mon.mk Λ ≅ Mon.mk Λ') (T : Scheme.{u}) :=
   (Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
     (coefficientMap e.inv.hom T)).mapDerivedCategory
 
-/-- The existing finite-constant-model, finite-Tor property, as an object property.
-Source: blueprint theorem-exceptional-inverse-image--18, coefficient specializations
-(blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
+/-- The existing finite-constant-model, finite-Tor property, as an object property. -/
 abbrev shriekCoefficientCtf (T : Scheme.{u}) :=
   constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _
 
 /-- The existing intersection-defined localizing closure, with coproducts indexed in
-`Type (u + 1)`, the fixed ambient Hom universe.
-Source: blueprint theorem-exceptional-inverse-image and coefficient comparisons
-(blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
+`Type (u + 1)`, the fixed ambient Hom universe. -/
 abbrev shriekCoefficientLocalizing (T : Scheme.{u}) :=
   (shriekCoefficientCtf (Λ := Λ) T).localizingClosure
 
@@ -87,9 +77,7 @@ abbrev shriekCoefficientLocalizing (T : Scheme.{u}) :=
 set_option backward.isDefEq.respectTransparency true
 
 /-- The ambient canonical comparison, obtained by the direct-image comparison and
-then the termwise open-extension comparison, with associators inserted.
-Source: blueprint coefficient comparisons, Push and extension by zero
-(blueprint: lem-sfb-shriek-coefficient-isomorphism). -/
+then the termwise open-extension comparison, with associators inserted. -/
 noncomputable def shriekCoefficientCompactificationIso
     (e : Mon.mk Λ ≅ Mon.mk Λ') {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification.BoundaryCompactification f) :
@@ -220,19 +208,7 @@ private theorem map_closure
     (Q := Q.localizingClosure.inverseImage F)
     (fun K hK ↦ Q.le_localizingClosure _ (h K hK))
 
-/-- Exact scalar transport identifies both the constructible classes and their closures.
-Source: blueprint theorem-exceptional-inverse-image--18 and coefficient comparisons
-(blueprint: lem-sfb-shriek-coefficient-isomorphism).
-
-Proof: The sheaf tensor, module-object Grothendieck, and derived coproduct theorems
-supply all ambient small coproducts, including the empty one. Restriction along the
-inverse and forward ring isomorphisms gives inverse exact module equivalences.
-Apply exact-functor derived factorization to obtain inverse triangulated functors.
-Equivalences preserve coproducts. Apply constantModelCtf_coefficientIso to e and its
-inverse and use repleteness to identify the constructible classes. The inverse image
-of the primed localizing closure is replete, triangulated and closed under coproducts,
-and contains the unprimed constructible class. Minimality of the defining intersection
-gives preservation of the closure. Repeat for the inverse to obtain reflection. -/
+/-- Exact scalar transport identifies both the constructible classes and their closures. -/
 theorem shriekCoefficientIso_transport (e : Mon.mk Λ ≅ Mon.mk Λ') (T : Scheme.{u}) :
     (shriekCoefficientTransport e T).IsEquivalence ∧
     (shriekCoefficientTransport e T).IsTriangulated ∧

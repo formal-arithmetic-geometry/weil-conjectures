@@ -8,8 +8,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Essentially constant filtered diagrams
 
-Source: Stacks Project, Categories, Definition 05PU
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Categories, Definition 05PU.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace CategoryTheory
 `p j : D.obj j ⟶ X`, a section `s : X ⟶ D.obj j₀` of `p j₀`, and for every `j` a common
 later stage `k` at which the transition map from `j` factors through `p j`, `s` and `j₀ ⟶ k`.
 
-Source: Stacks Project, Categories, Definition 05PU(1)
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Categories, Definition 05PU(1). -/
 def IsEssentiallyConstantIndDiagram {J : Type uJ} {C : Type uC}
     [Category.{vJ} J] [Category.{vC} C] (D : J ⥤ C) (X : C) : Prop :=
   IsFiltered J ∧ ∃ p : D ⟶ (Functor.const J).obj X, ∃ j₀ : J, ∃ s : X ⟶ D.obj j₀,

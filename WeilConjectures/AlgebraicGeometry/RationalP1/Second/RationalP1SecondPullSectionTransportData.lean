@@ -395,16 +395,7 @@ attribute [local irreducible] moduleObjectDerivedPullback moduleObjectDerivedPus
 set_option linter.unusedVariables false in
 /-- The native tensor and shift comparisons commute with restriction to the diagonal.
 The fields are exactly the two section naturality equations and the square comparison
-naturality equation needed by `pull_section_transport`.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, tensor comparison and shift coherence.
-(blueprint: lem-sfb-rational-p1-second-pull-section-transport-data).
-Proof: use the unrestricted delta and composition comparison clauses for the module-ringed
-topos equivalence. On K-flat representatives the pullback tensor comparison sends pure
-tensors to pure tensors and the canonical shift comparison is natural. The equations
-then descend to the unbounded derived category and are preserved by the fixed Tate-line
-comparison. The same argument applies to finite and closure coefficient indices. -/
+naturality equation needed by `pull_section_transport`. -/
 theorem second_pull_section_transport_data
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

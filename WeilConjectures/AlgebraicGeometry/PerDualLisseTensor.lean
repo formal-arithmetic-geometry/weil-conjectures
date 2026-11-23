@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStra
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
-# Dual of a lisse tensor
+# The Verdier dual of a tensor product
 
-The statement is formulated in the closed symmetric monoidal category `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of bounded
+The comparison map is defined in the closed symmetric monoidal category `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` of bounded
 constructible complexes, with the Verdier dual `𝔻_X K = RHom(K, ω_X)` of
 `ProEtale.CondensedRing.verdierDual`. The dual `L^∨` of `L` is its internal Hom `RHom(L, ℚ̄_ℓ)`
 into the unit; for `L` a lisse module placed in degree zero, this is the linear dual.
@@ -53,20 +53,5 @@ noncomputable def verdierDualTensorComparison {X : Over (Spec (.of k))}
   curry (tensorμ K L (verdierDual ℓ K) ((ihom L).obj (𝟙_ _)) ≫
     ((ihom.ev K).app (dualizingComplex ℓ X) ⊗ₘ (ihom.ev L).app (𝟙_ _)) ≫
     (ρ_ (dualizingComplex ℓ X)).hom)
-
-/-- The Verdier dual of a bounded constructible complex tensored with a lisse module is
-canonically the tensor of its Verdier dual with the dual module: the canonical map
-`verdierDualTensorComparison : 𝔻_X K ⊗ᴸ L^∨ ⟶ 𝔻_X (K ⊗ᴸ L)` is an isomorphism, for `L` a lisse
-module `M` placed in degree zero. -/
-theorem per_dual_lisse_tensor {X : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    (d : ℕ) [SmoothOfRelativeDimension d X.hom]
-    (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
-    (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
-    (hM : IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ) M)
-    (e : L.obj ≅ (DerivedCategory.singleFunctor _ 0).obj M) :
-    IsIso (verdierDualTensorComparison ℓ K L) := by
-  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

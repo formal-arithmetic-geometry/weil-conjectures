@@ -15,9 +15,7 @@ set_option linter.privateModule false
 /-!
 # Tensor pullback and induced pushforward for an arbitrary geometric morphism
 
-Source: Stacks Project, Modules on Sites, Tags 03D1--03D3, 03CZ and 03D7,
-`lemma-adjoint-pullback-pushforward-modules`.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03D1--03D3, 03CZ and 03D7.
 
 The construction is stated existentially, with explicit underlying-sheaf and
 operation identifications. No module adjunction or module functor is assumed.

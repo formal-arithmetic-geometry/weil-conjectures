@@ -23,10 +23,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 /-!
 # Coefficient cocycle for normalized open scalar comparisons
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction,
-sk-lem-sp-reduction-direct-image.proof.md, Steps 1 and 4
-(blueprint: lem-sp-proetale-open-scalar-cocycle).
-
 The equation uses the prescribed scalar associator and the prescribed comparison for
 sectionwise sheafified extension by zero on the full ordinary unbounded categories.
 -/

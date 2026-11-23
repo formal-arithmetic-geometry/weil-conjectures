@@ -162,7 +162,7 @@ open InjectiveCocycle in
 /-- The first Čech cohomology of an injective presheaf of abelian groups with respect to the
 representable "cover" `X` vanishes: a family `c Z g₁ g₂ ∈ P(Z)` indexed by pairs of morphisms
 `g₁ g₂ : Z ⟶ X`, natural in `Z` and satisfying the cocycle identity, is the coboundary of some
-`w ∈ P(X)`. (blueprint: `lem-sc-cech-spectral`, injective case in degree one) -/
+`w ∈ P(X)`. -/
 theorem exists_eq_sub_of_injective {C : Type w} [Category.{v} C] (X : C)
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{max w v}) [Injective P]
     (c : ∀ Z : C, (Z ⟶ X) → (Z ⟶ X) → P.obj (Opposite.op Z))

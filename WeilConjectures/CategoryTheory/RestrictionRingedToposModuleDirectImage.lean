@@ -11,7 +11,6 @@ set_option linter.privateModule false
 /-! # Restriction of scalars as a ringed-topos direct image
 
 Source: Stacks, Modules on Sites, restriction of scalars and ringed topoi.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

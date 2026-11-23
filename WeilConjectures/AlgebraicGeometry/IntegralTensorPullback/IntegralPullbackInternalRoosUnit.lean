@@ -14,8 +14,9 @@ set_option linter.privateModule false
 
 /-! # Ordinary pullback and the actual completion augmentation
 
-Source: blueprint lemma-inverse-image-tensor-product, first paragraph; Stacks 099M.
-(blueprint: lem-sfb-internal-pullback-roos-unit).
+## References
+
+* Stacks 099M
 -/
 
 @[expose] public noncomputable section

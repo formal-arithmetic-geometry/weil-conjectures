@@ -19,9 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Injectives and the module Čech acyclicity criterion
 
-Source: Stacks Project, Cohomology on Sites, Tags 03F9, 03FB, 03FC;
-blueprint, Proper base change, Injectives and the Cech acyclicity criterion
-(blueprint: lemma-acyclicity-pulled-back-injectives).
+Source: Stacks Project, Cohomology on Sites, Tags 03F9, 03FB, 03FC.
 -/
 
 @[expose] public section
@@ -120,36 +118,7 @@ have zero positive derived sections. The last clause computes derived sections o
 injective resolution in module sheaves, rather than resolving the underlying abelian sheaf.
 `products` chooses the iterated products, and `hproducts` expresses closure of the basis
 for these choices. Ordered tuples, including repetitions, are built into `SiteCechComplex`.
-Source: Stacks Project, Cohomology on Sites, Tags 03F9, 03FB, 03FC
-(blueprint: lemma-acyclicity-pulled-back-injectives).
-
-Proof:
-1. The finite basis coverings are cofinal by `hrefine`; their chosen iterated products
-   lie in the basis by `hproducts` (def-weil-pbc-site-cech-complex). No coproduct in C is used.
-2. An injective module sheaf is an injective module presheaf by
-   lem-weil-pbc-ringed-site-injective-module-injective-presheaf. The cocycle lifting of
-   lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift makes every positive cocycle
-   a boundary. The shared universe contains the required free module presheaves.
-3. Module sheaves form a Grothendieck abelian category by
-   lem-weil-pbc-ring-sheaves-grothendieck, hence have enough injectives by
-   lem-sp-grothendieck-enough-injectives. Embed a Čech-acyclic A into an injective I and
-   take Q = I/A. The underlying abelian sheaves form a short exact sequence: kernels
-   are sectionwise (situation-conventions), and module sheafification has
-   underlying abelian sheafification (def-weil-presheaf-modules-sheafification).
-4. For U in B, lem-weil-pbc-site-ses-cech-h1-surjective gives I(U) → Q(U) surjective.
-   Indeed lift a section locally on a finite basis refinement. The differences form an
-   A-valued one-cocycle on overlaps. Its primitive adjusts the lifts to agree, so they
-   glue. Left exactness then gives a short exact section sequence on each basis object.
-5. Finite products of these sequences over all ordered tuples are short exact in each
-   degree. Naturality commutes with alternating restrictions. The long exact sequence
-   of lem-weil-pbc-complex-ses-homology-long-exact shows positive Čech cohomology of Q
-   vanishes, between the zero groups for I and A.
-6. Evaluation is additive and left exact. Apply lem-weil-pbc-derived-functor-long-exact
-   and lem-weil-pbc-derived-functor-injective-vanishing in module sheaves. Surjectivity
-   in step 4 gives H¹(U,A)=0. For q>1 dimension shifting identifies H^q(U,A) with
-   H^(q-1)(U,Q). Induct on q for all Čech-acyclic A, using step 5 for Q. Finally use
-   InjectiveResolution.isoRightDerivedObj (def-sp-left-exact-additive) to compute on
-   any chosen module injective resolution of M. -/
+Source: Stacks Project, Cohomology on Sites, Tags 03F9, 03FB, 03FC. -/
 theorem module_cech_acyclicity_criterion
     {C : Type u} [SmallCategory C]
     (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]

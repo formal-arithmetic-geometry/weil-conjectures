@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # Local finite generation of an ideal sheaf on a ringed site
 
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099E.
 
 An ideal subsheaf is represented by a monomorphism of module sheaves into the rank-one
 module sheaf. Specified lists are matched to Mathlib's `GeneratingSections`. Local finite generation
@@ -29,8 +28,7 @@ namespace CategoryTheory
 
 /-- A specified finite list generates an ideal subsheaf when it is the image of Mathlib's
 generating sections of that subsheaf on the slice.
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099E.
 The generating sections are indexed by a type equivalent to `Fin r`, and their images at
 the terminal slice object are the prescribed ring sections. -/
 def IsRingedIdealGeneratingList
