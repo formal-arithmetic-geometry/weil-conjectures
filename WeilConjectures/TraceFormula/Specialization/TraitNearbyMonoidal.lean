@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
+public import WeilConjectures.CategoryTheory.Adjunction.UnitDualizable
 public import WeilConjectures.CategoryTheory.Shift.ShiftDecompositionIsIso
 public import WeilConjectures.TraceFormula.PointDualizable
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
@@ -52,31 +52,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace CategoryTheory
 
 namespace Adjunction
-
-section
-
-variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalCategory D]
-  {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.OplaxMonoidal]
-
-/-- The lax tensor map `G F B ⊗ G A ⟶ G (F B ⊗ A)` of the right adjoint `G` (the transpose of the
-tensor product of the counits), precomposed with the unit `B ⟶ G F B`, is the left projection
-morphism `B ⊗ G A ⟶ G (F B ⊗ A)`. -/
-lemma whiskerRight_unit_comp_homEquiv (B : D) (A : C) :
-    adj.unit.app B ▷ G.obj A ≫ adj.homEquiv _ _
-        (Functor.OplaxMonoidal.δ F (G.obj (F.obj B)) (G.obj A) ≫
-          (adj.counit.app (F.obj B) ⊗ₘ adj.counit.app A)) =
-      adj.leftProjectionMorphism B A := by
-  rw [← homEquiv_naturality_left, leftProjectionMorphism]
-  congr 1
-  refine (Functor.OplaxMonoidal.δ_natural_left_assoc F (adj.unit.app B) (G.obj A)
-    (adj.counit.app (F.obj B) ⊗ₘ adj.counit.app A)).symm.trans ?_
-  congr 1
-  rw [← tensorHom_id, tensorHom_comp_tensorHom]
-  erw [left_triangle_components]
-  rw [Category.id_comp, id_tensorHom]
-  rfl
-
-end
 
 variable {C D : Type*} [Category C] [MonoidalCategory C] [Category D] [MonoidalCategory D]
   {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G) [F.Monoidal]
