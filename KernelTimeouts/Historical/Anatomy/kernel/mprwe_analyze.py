@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze READY3.1 MPRWE events.
+"""Analyze READY4.1 MPRWE events.
 
 Raw enter/exit records are bounded. The kernel emits aggregate records for
 every call, grouped by provenance and path, so exclusive totals remain
@@ -11,6 +11,40 @@ import json
 
 
 LABELS = ("M0", "M1", "M2", "Matched", "Unclassified")
+
+
+def quantile(rows, field, fraction):
+    total = sum(int(row.get(field, 0)) for row in rows)
+    if not total:
+        return 0
+    threshold = (total * fraction.numerator + fraction.denominator - 1) // fraction.denominator
+    cumulative = 0
+    for row in sorted(rows, key=lambda row: int(row["bucket"])):
+        cumulative += int(row.get(field, 0))
+        if cumulative >= threshold:
+            return int(row["bucket"])
+    raise AssertionError("unreachable quantile")
+
+
+def time_band(rows, fraction):
+    """Narrowest contiguous depth interval containing the target share of time."""
+    ordered = sorted(rows, key=lambda row: int(row["bucket"]))
+    total = sum(int(row.get("exclusive_ns", 0)) for row in ordered)
+    if not total:
+        return (0, 0)
+    threshold = (total * fraction.numerator + fraction.denominator - 1) // fraction.denominator
+    best = None
+    left = running = 0
+    for right, row in enumerate(ordered):
+        running += int(row.get("exclusive_ns", 0))
+        while left <= right and running - int(ordered[left].get("exclusive_ns", 0)) >= threshold:
+            running -= int(ordered[left].get("exclusive_ns", 0))
+            left += 1
+        if running >= threshold:
+            band = (int(ordered[left]["bucket"]), int(row["bucket"]))
+            if best is None or (band[1] - band[0], band[0]) < (best[1] - best[0], best[0]):
+                best = band
+    return best
 
 
 def load(path):
@@ -118,6 +152,8 @@ def classify(events, root=None):
                    if event.get("event") == "transition" and event.get("root") == root]
     distributions = [event for event in events
                      if event.get("event") == "distribution" and event.get("root") == root]
+    depth_clamps = {event["label"]: int(event["calls"]) for event in events
+                    if event.get("event") == "depth_clamp" and event.get("root") == root}
     return {
         "root": root,
         "totals": totals,
@@ -132,6 +168,7 @@ def classify(events, root=None):
         "aggregate": bool(aggregate_rows),
         "transitions": transitions,
         "distributions": distributions,
+        "depth_clamps": depth_clamps,
     }
 
 
@@ -164,15 +201,45 @@ def main():
                int(row.get("calls", 0)), int(row.get("exclusive_ns", 0)) / 1e6,
                int(row.get("reduction_ns", 0)) / 1e6,
                int(row.get("failure_followup", 0)), int(row.get("reduction_before_child", 0))))
+    from fractions import Fraction
     for label in LABELS:
         for metric in ("depth", "fanout"):
             rows = [row for row in result["distributions"]
                     if row.get("label") == label and row.get("metric") == metric]
             total = sum(int(row.get("calls", 0)) for row in rows)
-            if total:
+            if not total:
+                print("distribution label=%s metric=%s calls=0 statistics=NA" % (label, metric))
+            else:
+                depth_rows = [row for row in result["distributions"]
+                              if row.get("label") == label and row.get("metric") == "depth"]
+                if not depth_rows or not all("exclusive_ns" in row and "reduction_ns" in row
+                                             for row in depth_rows):
+                    print("distribution label=%s metric=%s calls=%d legacy_buckets=true" %
+                          (label, metric, total))
+                    continue
                 weighted = sum(int(row.get("bucket", 0)) * int(row.get("calls", 0)) for row in rows)
-                print("distribution label=%s metric=%s calls=%d max_bucket=%d mean_bucket=%.3f" %
-                      (label, metric, total, max(int(row.get("bucket", 0)) for row in rows), weighted / total))
+                summary = ("distribution label=%s metric=%s calls=%d mean=%.3f median=%d p90=%d max=%d" %
+                           (label, metric, total, weighted / total, quantile(rows, "calls", Fraction(1, 2)),
+                            quantile(rows, "calls", Fraction(9, 10)),
+                            max(int(row["bucket"]) for row in rows)))
+                if metric == "depth":
+                    depth_time = sum(int(row.get("exclusive_ns", 0)) for row in rows)
+                    reduction_time = sum(int(row.get("reduction_ns", 0)) for row in rows)
+                    band50 = time_band(rows, Fraction(1, 2))
+                    band90 = time_band(rows, Fraction(9, 10))
+                    summary += (" p99=%d clamped=%d exclusive_ms=%.3f reduction_ms=%.3f"
+                                " time50=%d-%d time90=%d-%d" %
+                                (quantile(rows, "calls", Fraction(99, 100)),
+                                 result["depth_clamps"].get(label, 0), depth_time / 1e6,
+                                 reduction_time / 1e6, *band50, *band90))
+                    if result["depth_clamps"].get(label, 0):
+                        summary += " depth_statistics_capped=true"
+                    assert total == result["totals"][label]["calls"], (label, "depth calls")
+                    assert depth_time == result["totals"][label]["exclusive_ns"], (label, "depth time")
+                    assert reduction_time == result["totals"][label]["reduction_ns"], (label, "depth reduction")
+                else:
+                    assert total == result["totals"][label]["calls"], (label, "fanout calls")
+                print(summary)
     print("top_exclusive:")
     for ns, call, label, left, right, depth, path in result["top"]:
         print("call=%d label=%s depth=%s exclusive_ms=%.3f path=%s left=%s right=%s" %

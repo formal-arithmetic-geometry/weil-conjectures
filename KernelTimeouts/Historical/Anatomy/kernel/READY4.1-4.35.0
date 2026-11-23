@@ -1,0 +1,16 @@
+version: Lean 4.35.0
+githash: eb6cafb7290e8bd5f2937522d8d804f58f02bafc
+build: Release, STAGE=1, USE_MIMALLOC=ON, READY4.1 exact-depth build
+baseline-source: <leank-root>/build35-mprwe-base/bin/lean
+instrumented: <leank-root>/build35-m1p-cpp-ready4/stage1/bin/lean
+patch: KernelTimeouts/Historical/Anatomy/kernel/lean-v4.35.0-m1p.patch
+analyzer: KernelTimeouts/Historical/Anatomy/kernel/mprwe_analyze.py
+usage: python3 mprwe_analyze.py <events.jsonl> --root <process-wide-root-id>
+root-identity: process-wide relaxed atomic serial; active root pinned per comparison tree
+schema: READY4 branch/kind/index/reduction/result/followup, complete transition matrix, exact depth through 4096 with clamp count, per-label depth calls/exclusive/reduction, exact fan-out
+validation: NativePullTensor root 18506; 2,685,580 calls (READY4 2,685,580); M1 98.085%, M2 0.323%, Matched 1.592%, Unclassified 0.000% (all within 0.1 pp of READY4)
+depth-validation: M1 mean 43.511, median 44, p90 55, p99 65, max 81; exclusive-time 50% band 36--47, 90% band 26--56; fan-out mean 2.375, median 0, p90 9, max 28; clamped calls 0
+distribution-validation: each label's exact-depth calls, exclusive time, and reduction time equal its aggregate totals
+transition-validation: 2,685,579 child edges; 21,518.988 ms edge exclusive + 0.012 ms root direct = 21,519.000 ms root exclusive
+raw-capture: 0 entered/exited calls in selected root; aggregate coverage is complete and independent of bounded raw capture
+compatibility: observational only; reduction order, transparency, caches, shortcuts, and root operation unchanged

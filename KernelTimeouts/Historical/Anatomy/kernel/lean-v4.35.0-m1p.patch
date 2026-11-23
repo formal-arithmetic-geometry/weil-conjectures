@@ -18,9 +18,9 @@
  #include "runtime/interrupt.h"
  #include "runtime/sstream.h"
  #include "runtime/flet.h"
-@@ -24,6 +35,699 @@
+@@ -24,6 +35,709 @@
  #include "kernel/inductive.h"
-
+ 
  namespace lean {
 +namespace anatomy {
 +using clock = std::chrono::steady_clock;
@@ -90,7 +90,9 @@
 +    std::map<std::pair<unsigned, unsigned>, uint64_t> kinds;
 +    std::map<std::pair<unsigned, unsigned>, uint64_t> structural;
 +    std::map<std::pair<unsigned, unsigned>, uint64_t> prop_structural;
-+    std::map<std::pair<std::string, unsigned>, uint64_t> label_depth;
++    struct depth_cost { uint64_t calls = 0, exclusive = 0, reduction = 0; };
++    std::map<std::pair<std::string, unsigned>, depth_cost> label_depth;
++    std::map<std::string, uint64_t> depth_clamped;
 +    std::map<std::pair<std::string, unsigned>, uint64_t> label_fanout;
 +    struct transition_cost { uint64_t calls = 0, exclusive = 0, reduction = 0, followup = 0, reduced = 0; };
 +    std::map<std::pair<unsigned, std::string>, transition_cost> transitions;
@@ -175,7 +177,7 @@
 +static thread_local uint64_t active_root_id = 0;
 +static uint64_t root_id() { return active_root_id; }
 +static thread_local uint64_t mprwe_global_events = 0;
-+static unsigned bucket(unsigned n) { return n < 64 ? n : 64 + (n / 64); }
++static unsigned depth_bucket(unsigned n) { return std::min(n, 4096u); }
 +static std::FILE * mprwe_stream() {
 +    static std::FILE * f = [] {
 +        char const * p = std::getenv("LEAN_DEFEQ_MPRWE_EVENTS");
@@ -306,9 +308,13 @@
 +            static_cast<unsigned long long>(cost.reduced));
 +    }
 +    for (auto const & item : data.label_depth)
-+        std::fprintf(f, "{\"event\":\"distribution\",\"root\":%llu,\"label\":\"%s\",\"metric\":\"depth\",\"bucket\":%u,\"calls\":%llu}\n",
++        std::fprintf(f, "{\"event\":\"distribution\",\"root\":%llu,\"label\":\"%s\",\"metric\":\"depth\",\"bucket\":%u,\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu}\n",
 +            static_cast<unsigned long long>(root_id()), item.first.first.c_str(), item.first.second,
-+            static_cast<unsigned long long>(item.second));
++            static_cast<unsigned long long>(item.second.calls), static_cast<unsigned long long>(item.second.exclusive),
++            static_cast<unsigned long long>(item.second.reduction));
++    for (auto const & item : data.depth_clamped)
++        std::fprintf(f, "{\"event\":\"depth_clamp\",\"root\":%llu,\"label\":\"%s\",\"calls\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.c_str(), static_cast<unsigned long long>(item.second));
 +    for (auto const & item : data.label_fanout)
 +        std::fprintf(f, "{\"event\":\"distribution\",\"root\":%llu,\"label\":\"%s\",\"metric\":\"fanout\",\"bucket\":%u,\"calls\":%llu}\n",
 +            static_cast<unsigned long long>(root_id()), item.first.first.c_str(), item.first.second,
@@ -511,7 +517,7 @@
 +        }
 +        if (parent) ++parent->children;
 +        data.max_depth = std::max<uint64_t>(data.max_depth, depth);
-+        ++data.depth_hist[bucket(depth)];
++        ++data.depth_hist[depth_bucket(depth)];
 +        ++data.kinds[{static_cast<unsigned>(t.kind()), static_cast<unsigned>(s.kind())}];
 +        if (mode() == 2 && data.pair_captured < 5000000) {
 +            ++data.pair_captured;
@@ -546,9 +552,13 @@
 +        ++data.branches[outcome];
 +        data.branch_comparison_ns[outcome] += exclusive;
 +        data.branch_reduction_ns[outcome] += reduce_ns;
-+        ++data.fanout_hist[bucket(children)];
-+        ++data.label_depth[{provenance, bucket(depth)}];
-+        ++data.label_fanout[{provenance, bucket(children)}];
++        ++data.fanout_hist[children];
++        auto & depth_row = data.label_depth[{provenance, depth_bucket(depth)}];
++        ++depth_row.calls;
++        depth_row.exclusive += exclusive;
++        depth_row.reduction += reduce_ns;
++        if (depth > 4096) ++data.depth_clamped[provenance];
++        ++data.label_fanout[{provenance, children}];
 +        data.comparison_exclusive += exclusive;
 +        data.reduction_exclusive += reduce_ns;
 +        if (category == 1) {
@@ -718,15 +728,15 @@
  static name * g_kernel_fresh = nullptr;
  static expr * g_dont_care    = nullptr;
  static name * g_bool_true    = nullptr;
-@@ -466,6 +1170,7 @@
+@@ -466,6 +1180,7 @@
      If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
      We also do not cache results. */
  expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
 +    anatomy::reduction anatomy_reduction;
      scope_rec_depth guard;
      check_system("type checker: whnf", /* do_check_interrupted */ true);
-
-@@ -502,9 +1207,10 @@
+ 
+@@ -502,9 +1217,10 @@
      case expr_kind::FVar:
          return whnf_fvar(e, cheap_rec, cheap_proj);
      case expr_kind::Proj: {
@@ -739,7 +749,7 @@
              r = e;
          break;
      }
-@@ -513,6 +1219,7 @@
+@@ -513,6 +1229,7 @@
          expr f0 = get_app_rev_args(e, args);
          expr f = whnf_core(f0, cheap_rec, cheap_proj);
          if (is_lambda(f)) {
@@ -747,7 +757,7 @@
              unsigned m = 1;
              unsigned num_args = args.size();
              while (is_lambda(binding_body(f)) && m < num_args) {
-@@ -524,6 +1231,7 @@
+@@ -524,6 +1241,7 @@
                            cheap_rec, cheap_proj);
          } else if (f == f0) {
              if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
@@ -755,7 +765,7 @@
                  if (m_diag) {
                      auto f = get_app_fn(e);
                      if (is_constant(f))
-@@ -540,6 +1248,7 @@
+@@ -540,6 +1258,7 @@
          break;
      }
      case expr_kind::Let:
@@ -763,7 +773,7 @@
          r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
          break;
      }
-@@ -565,6 +1274,18 @@
+@@ -565,6 +1284,18 @@
  optional<expr> type_checker::unfold_definition_core(expr const & e) {
      if (is_constant(e)) {
          if (auto d = is_delta(e)) {
@@ -782,7 +792,7 @@
              levels const & us = const_levels(e);
              unsigned len = length(us);
              if (m_diag) {
-@@ -572,13 +1293,18 @@
+@@ -572,13 +1303,18 @@
              }
              if (len > 0) {
                  auto it = m_st->m_unfold.find(e);
@@ -803,15 +813,15 @@
              }
          }
      }
-@@ -704,6 +1430,7 @@
-
+@@ -704,6 +1440,7 @@
+ 
  /** \brief Put expression \c t in weak head normal form */
  expr type_checker::whnf(expr const & e) {
 +    anatomy::reduction anatomy_reduction;
      // Do not cache easy cases
      switch (e.kind()) {
      case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
-@@ -758,10 +1485,18 @@
+@@ -758,10 +1495,18 @@
      do {
          optional<expr> var_s_type;
          if (binding_domain(t) != binding_domain(s)) {
@@ -832,7 +842,7 @@
          }
          if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
              // free variable is used inside t or s
-@@ -774,8 +1509,15 @@
+@@ -774,8 +1519,15 @@
          t = binding_body(t);
          s = binding_body(s);
      } while (t.kind() == k && s.kind() == k);
@@ -848,9 +858,9 @@
 +    anatomy::path_scope path("binder_body", subst.size(), 1);
 +    return is_def_eq(body_t, body_s);
  }
-
+ 
  bool type_checker::is_def_eq(level const & l1, level const & l2) {
-@@ -828,9 +1570,12 @@
+@@ -828,9 +1580,12 @@
  /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
      This method is used to implement an optimization in the method \c is_def_eq. */
  bool type_checker::is_def_eq_args(expr t, expr s) {
@@ -865,7 +875,7 @@
          t = app_fn(t);
          s = app_fn(s);
      }
-@@ -844,6 +1589,7 @@
+@@ -844,6 +1599,7 @@
          if (!is_pi(s_type))
              return false;
          expr new_s  = mk_lambda(binding_name(s_type), binding_domain(s_type), mk_app(s, mk_bvar(0)), binding_info(s_type));
@@ -873,7 +883,7 @@
          if (!is_def_eq(t, new_s))
              return false;
          return true;
-@@ -861,11 +1607,15 @@
+@@ -861,11 +1617,15 @@
      constructor_val f_val = f_info.to_constructor_val();
      if (get_app_num_args(s) != f_val.get_nparams() + f_val.get_nfields()) return false;
      if (!is_non_rec_structure(env(), f_val.get_induct())) return false;
@@ -890,7 +900,7 @@
          if (!is_def_eq(proj, s_args[i])) return false;
      }
      return true;
-@@ -876,14 +1626,17 @@
+@@ -876,14 +1636,17 @@
      \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
      Return false otherwise. */
  bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
@@ -908,7 +918,7 @@
                  if (!is_def_eq(t_args[i], s_args[i]))
                      break;
              }
-@@ -897,24 +1650,36 @@
+@@ -897,24 +1660,36 @@
  /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
      Return false otherwise. */
  lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
@@ -928,7 +938,7 @@
 +        anatomy::data.proof_prop_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
 +    return to_lbool(result);
  }
-
+ 
  bool type_checker::failed_before(expr const & t, expr const & s) const {
 +    bool found;
      if (hash(t) < hash(s)) {
@@ -947,11 +957,11 @@
 +        ++(found ? anatomy::data.cache_failure : anatomy::data.cache_failure_miss);
 +    return found;
  }
-
+ 
  void type_checker::cache_failure(expr const & t, expr const & s) {
-@@ -925,15 +1690,19 @@
+@@ -925,15 +1700,19 @@
  }
-
+ 
  bool type_checker::succeeded_before(expr const & t, expr const & s) const {
 +    bool found;
      if (hash(t) < hash(s)) {
@@ -970,9 +980,9 @@
 +        ++(found ? anatomy::data.cache_success : anatomy::data.cache_success_miss);
 +    return found;
  }
-
+ 
  void type_checker::cache_success(expr const & t, expr const & s) {
-@@ -1002,6 +1771,7 @@
+@@ -1002,6 +1781,7 @@
                  // If they are, then t_n and s_n must be definitionally equal, and we can
                  // skip the delta-reduction step.
                  if (!failed_before(t_n, s_n)) {
@@ -980,7 +990,7 @@
                      if (is_def_eq(const_levels(get_app_fn(t_n)), const_levels(get_app_fn(s_n))) &&
                          is_def_eq_args(t_n, s_n)) {
                          return reduction_status::DefEqual;
-@@ -1046,6 +1816,7 @@
+@@ -1046,6 +1826,7 @@
      optional<expr> pred_t = is_nat_succ(t);
      optional<expr> pred_s = is_nat_succ(s);
      if (pred_t && pred_s) {
@@ -988,8 +998,8 @@
          return to_lbool(is_def_eq_core(*pred_t, *pred_s));
      }
      return l_undef;
-@@ -1059,8 +1830,10 @@
-
+@@ -1059,8 +1840,10 @@
+ 
          if ((!has_fvar(t_n) && !has_fvar(s_n)) || m_eager_reduce) {
              if (auto t_v = reduce_nat(t_n)) {
 +                anatomy::path_scope path("lazy_delta", 0);
@@ -999,7 +1009,7 @@
                  return to_lbool(is_def_eq_core(t_n, *s_v));
              }
          }
-@@ -1092,9 +1865,11 @@
+@@ -1092,9 +1875,11 @@
              if (to_proj_idx(idx, i)) {
                  if (auto t = reduce_proj_core(t_n, sname, i)) {
                  if (auto s = reduce_proj_core(s_n, sname, i)) {
@@ -1011,22 +1021,22 @@
              return is_def_eq_core(t_n, s_n);
          }
      }
-@@ -1105,6 +1880,7 @@
-
+@@ -1105,6 +1890,7 @@
+ 
  lbool type_checker::try_string_lit_expansion_core(expr const & t, expr const & s) {
      if (is_string_lit(t) && is_app(s) && app_fn(s) == *g_string_mk) {
 +        anatomy::path_scope path("fallback", 0);
          return to_lbool(is_def_eq_core(whnf(string_lit_to_constructor(t)), s));
      }
      return l_undef;
-@@ -1126,14 +1902,17 @@
+@@ -1126,14 +1912,17 @@
      constructor_val ctor_val = env().get(ctor_name).to_constructor_val();
      if (ctor_val.get_nfields() != 0)
          return false;
 +    anatomy::path_scope path("fallback", 0);
      return is_def_eq_core(t_type, infer_type(s));
  }
-
+ 
  bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
 +    anatomy::comparison anatomy_scope(t, s);
 +    auto anatomy_finish = [&](bool result, anatomy::branch b) { anatomy_scope.finish(result, b); return result; };
@@ -1035,10 +1045,10 @@
      lbool r = quick_is_def_eq(t, s);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Quick);
-
+ 
      // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
      // we fully reduce `t` and check whether result is `s`.
-@@ -1141,7 +1920,7 @@
+@@ -1141,7 +1930,7 @@
      // proof terms of the form `Eq.refl true : decide p = true`.
      if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
          if (is_constant(whnf(t), *g_bool_true)) {
@@ -1046,37 +1056,37 @@
 +            return anatomy_finish(true, anatomy::Reflection);
          }
      }
-
-@@ -1154,56 +1933,58 @@
+ 
+@@ -1154,56 +1943,58 @@
      */
      expr t_n = whnf_core(t, false, true);
      expr s_n = whnf_core(s, false, true);
 +    anatomy::mprwe_reduction("initial_whnf", anatomy::current, t, t_n, s, s_n);
-
+ 
      if (!is_eqp(t_n, t) || !is_eqp(s_n, s)) {
          r = quick_is_def_eq(t_n, s_n);
 -        if (r != l_undef) return r == l_true;
 +        if (r != l_undef) return anatomy_finish(r == l_true, anatomy::QuickReduced);
      }
-
+ 
      r = is_def_eq_proof_irrel(t_n, s_n);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Proof);
-
+ 
      /* NB: `lazy_delta_reduction` updates `t_n` and `s_n` even when returning `l_undef`. */
      r = lazy_delta_reduction(t_n, s_n);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Delta);
-
+ 
      if (is_constant(t_n) && is_constant(s_n) && const_name(t_n) == const_name(s_n) &&
          is_def_eq(const_levels(t_n), const_levels(s_n)))
 -        return true;
 +        return anatomy_finish(true, anatomy::SameConstant);
-
+ 
      if (is_fvar(t_n) && is_fvar(s_n) && fvar_name(t_n) == fvar_name(s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::SameFVar);
-
+ 
      if (is_proj(t_n) && is_proj(s_n) && proj_sname(t_n) == proj_sname(s_n) && proj_idx(t_n) == proj_idx(s_n)) {
          expr t_c = proj_expr(t_n);
          expr s_c = proj_expr(s_n);
@@ -1084,7 +1094,7 @@
 -            return true;
 +            return anatomy_finish(true, anatomy::Projection);
      }
-
+ 
      // Invoke `whnf_core` again, but now using `whnf` to reduce projections.
      expr t_n_n = whnf_core(t_n);
      expr s_n_n = whnf_core(s_n);
@@ -1092,30 +1102,30 @@
      if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n))
 -        return is_def_eq_core(t_n_n, s_n_n);
 +        return anatomy_finish(is_def_eq_core(t_n_n, s_n_n), anatomy::Reduced);
-
+ 
      // At this point, t_n and s_n are in weak head normal form (modulo metavariables and proof irrelevance)
      if (is_def_eq_app(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::Application);
-
+ 
      if (try_eta_expansion(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::Eta);
-
+ 
      if (try_eta_struct(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::EtaStructure);
-
+ 
      r = try_string_lit_expansion(t_n, s_n);
 -    if (r != l_undef) return r == l_true;
 +    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::StringExpansion);
-
+ 
      if (is_def_eq_unit_like(t_n, s_n))
 -        return true;
 +        return anatomy_finish(true, anatomy::UnitLike);
-
+ 
 -    return false;
 +    return anatomy_finish(false, anatomy::Failure);
  }
-
+ 
  bool type_checker::is_def_eq(expr const & t, expr const & s) {
