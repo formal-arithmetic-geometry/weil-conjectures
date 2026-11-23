@@ -26,9 +26,12 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The inverse image is left Kan extension followed by sheafification, as in
-`Scheme.etaleSetPullback`. The direct image is precomposition with base change, hence its
-sections over `V` are `F(V ×_T T')` (Stacks, Tags 03Q1, 03PZ, 00X1). -/
+/-- For a morphism `h : T' ⟶ T`, base change along `h` is continuous for the small étale
+sites, and the resulting inverse image of étale sheaves of sets is left adjoint to the direct
+image and preserves finite limits and finite colimits. The inverse image is left Kan extension
+followed by sheafification, as in `Scheme.etaleSetPullback`. The direct image is precomposition
+with base change, hence its sections over `V` are `F(V ×_T T')` (Stacks, Tags 03Q1, 03PZ, 00X1).
+-/
 theorem etaleSetInverseImage_exact {T T' : Scheme.{u}} (h : T' ⟶ T) :
     (MorphismProperty.Over.pullback @Etale ⊤ h).IsContinuous
       (T.smallGrothendieckTopology @Etale) (T'.smallGrothendieckTopology @Etale) ∧

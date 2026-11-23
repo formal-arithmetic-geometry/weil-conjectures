@@ -52,9 +52,9 @@ open CategoryTheory Opposite
 
 section Ring
 
-/-- The Frobenius endomorphism `a ↦ a ^ p` of a ring of characteristic `p` and its iterates
-`a ↦ a ^ p ^ n`; it only assumes `(p : A) = 0` and agrees with Mathlib's `frobenius`
-(`iterateFrobeniusOfPrime_eq_iterateFrobenius`). -/
+/-- For rings of exponential characteristic `p`, the Frobenius is `a ↦ a ^ p`, its `n`-th
+iterate is `a ↦ a ^ p ^ n` and equals the `n`-th power of the Frobenius, and every ring
+homomorphism commutes with the Frobenius. -/
 theorem frobenius_spec (A B : Type*) [CommRing A] [CommRing B] (p : ℕ) [ExpChar A p]
     [ExpChar B p] (φ : A →+* B) (n : ℕ) :
     (∀ a, frobenius A p a = a ^ p) ∧ (∀ a, iterateFrobenius A p n a = a ^ p ^ n) ∧
@@ -164,8 +164,8 @@ section Frobenius
 
 variable {p : ℕ} (hp : p.Prime)
 
-/-- The absolute `q = p ^ a`-power Frobenius `F_X^a : X ⟶ X` of a scheme `X` of characteristic
-`p`: the identity on the underlying space with `g ↦ g ^ q` on sections over every open. -/
+/-- The absolute Frobenius `F_X : X ⟶ X` of a scheme `X` of characteristic `p`: the identity
+on the underlying space with `g ↦ g ^ p` on sections over every open. -/
 noncomputable def absoluteFrobenius (X : Scheme.{u}) (hX : X.IsOfCharacteristic p) : X ⟶ X :=
   X.iterateFrobenius hp hX 1
 

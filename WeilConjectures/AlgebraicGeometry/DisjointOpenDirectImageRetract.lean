@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The direct image of a component of a finite disjoint open partition is a retract
 of the full direct image. No finite-morphism or local-constancy hypothesis is needed.
-of the full direct image. No finite-morphism or local-constancy hypothesis is needed.
 (Stacks, Tag 0A5D) -/
 theorem nonempty_retract_lowerStar_of_disjoint_open_partition
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
