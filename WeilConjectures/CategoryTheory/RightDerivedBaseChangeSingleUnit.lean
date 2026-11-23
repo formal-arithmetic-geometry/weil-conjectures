@@ -12,10 +12,6 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-!
 # The derived unit equation for base change on single complexes
-
-Source: `rightDerivedFunctorPlusBaseChange_fac` in
-`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange`
-(blueprint: lem-sbc-right-derived-base-change-single-unit).
 -/
 
 @[expose] public section
@@ -199,21 +195,7 @@ private theorem single_naturality (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The derived base-change equation on single complexes, before taking homology.
-
-Source: `rightDerivedFunctorPlusBaseChange_fac` in `PlusBaseChange.lean`.
-(blueprint: lem-sbc-right-derived-base-change-single-unit).
-
-Proof: evaluate the defining base-change unit equation on the homotopy single
-complex Y[0]. Expand the auxiliary transformation. The composition comparisons
-identify the transformation induced by e with the single-complex map of e(Y).
-Transport the source and target along the canonical isomorphisms from Qh of
-homotopy single complexes to derived single complexes. Naturality of the derived
-base-change transformation moves this transport to its target; naturality of the
-unit for G' identifies the resulting map with its unit on beta(Y)[0]. The exact
-functor comparisons for gamma and beta supply the displayed single-complex
-comparison maps. This yields the equation without any left-exactness assumption
-on G or G'. -/
+/-- The derived base-change equation on single complexes, before taking homology. -/
 theorem rightDerivedBaseChange_single_unit (e : G ⋙ γ ⟶ β ⋙ G') (Y : B) :
     γ.mapDerivedCategoryPlus.map (G.rightDerivedPlusSingleUnit Y) ≫
       (rightDerivedFunctorPlusBaseChange e).app

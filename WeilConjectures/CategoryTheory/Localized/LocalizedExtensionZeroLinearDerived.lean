@@ -14,8 +14,7 @@ set_option linter.privateModule false
 /-!
 # Linearity of localized extension by zero on derived module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03DI and 03DJ
-(blueprint: lem-cbc-localized-extension-zero-linear-derived).
+Source: Stacks Project, Modules on Sites, Tags 03CY, 03DI and 03DJ.
 -/
 
 @[expose] public section

@@ -51,7 +51,6 @@ deleted.
 - `CategoryTheory.Sheaf.isGrothendieckAbelian_of_hasSmallSiteSheafify`: for `A` Grothendieck
   abelian with `HasSmallSiteSheafify A`, the sheaf categories on essentially `u + 1`-small
   sites are again Grothendieck abelian.
-
 -/
 
 @[expose] public section

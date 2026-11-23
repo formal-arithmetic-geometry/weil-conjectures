@@ -17,7 +17,6 @@ Source: Stacks Project, Cohomology of Sheaves, Tag 01FJ. A contravariant coeffic
 functor on a complete lattice gives an ordered Cech differential on the biproducts
 indexed by increasing tuples. Double deletions agree by functoriality and their
 signs cancel.
-(blueprint: new-finite-cover-ordered-cech-square)
 -/
 
 @[expose] public noncomputable section
@@ -36,15 +35,13 @@ variable {L : Type uL} [CompleteLattice L] {C : Type uC} [Category.{vC} C]
     (fun a : Fin (p + 1) ↪o Fin m ↦ F.obj (op (⨅ k, U (a k)))))
 
 /-- The ordered Cech terms of a contravariant coefficient functor.
-Source: Stacks Project, Tag 01FJ.
-(blueprint: new-finite-cover-ordered-cech-square) -/
+Source: Stacks Project, Tag 01FJ. -/
 def finiteOrderedCechTerm (p : ℕ) : C := by
   letI := hB p
   exact ⨁ (fun a : Fin (p + 1) ↪o Fin m ↦ F.obj (op (⨅ k, U (a k))))
 
 /-- One deletion coface on ordered Cech terms.
-Source: Stacks Project, Tag 01FJ.
-(blueprint: new-finite-cover-ordered-cech-square) -/
+Source: Stacks Project, Tag 01FJ. -/
 def finiteOrderedCechCoface (p : ℕ) (j : Fin (p + 2)) :
     finiteOrderedCechTerm F U hB p ⟶ finiteOrderedCechTerm F U hB (p + 1) := by
   letI := hB p
@@ -60,8 +57,7 @@ Source: Stacks Project, Tag 01FJ. Project onto a final increasing tuple. Both
 composites first project onto that tuple with two entries deleted and then
 restrict along the same inclusion of intersections. The simplex identity
 identifies the deleted tuple; the source lattice is a thin category, so the
-inclusions agree.
-(blueprint: new-finite-cover-ordered-cech-square) -/
+inclusions agree. -/
 theorem finiteOrderedCechCoface_comp (p : ℕ) (i : Fin (p + 2))
     (j : Fin (p + 3)) (h : j.val ≤ i.val) :
     finiteOrderedCechCoface F U hB p i ≫ finiteOrderedCechCoface F U hB (p + 1) j =
@@ -102,8 +98,7 @@ theorem finiteOrderedCechCoface_comp (p : ℕ) (i : Fin (p + 2))
 
 /-- The signed ordered Cech differential squares to zero.
 Source: Stacks Project, Tag 01FJ. The preceding double-deletion identity gives the
-hypothesis of `alternatingCofaceSquare`.
-(blueprint: new-finite-cover-ordered-cech-square) -/
+hypothesis of `alternatingCofaceSquare`. -/
 theorem finiteOrderedCechDifferential_squared (p : ℕ) :
     (∑ i : Fin (p + 2), (-1 : ℤ) ^ (i : ℕ) • finiteOrderedCechCoface F U hB p i) ≫
       (∑ j : Fin (p + 3), (-1 : ℤ) ^ (j : ℕ) •

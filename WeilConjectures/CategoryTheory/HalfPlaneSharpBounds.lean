@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import Mathlib.Data.Int.Interval
 
-/-! Canonical truncation-couple proof step. -/
+/-! Sharp stabilization bounds for half-plane exact couples. -/
 
 @[expose] public section
 
@@ -33,19 +33,7 @@ private theorem pullback_bot_eq_kernel
     exact (Subobject.bot_factors_iff_zero _).mpr (kernelSubobject_arrow_comp f)
 
 /-- Sharp numerical stabilization bounds for a lower-half-plane exact couple.
-Source: Stacks Tags 011T, 0BDU, 0BDV; blueprint steps 3--5 of
-lemma-uniform-bound-proper-direct-image--1 (blueprint: lem-sp-half-plane-sharp-bounds).
-
-Proof: Each later E term is a subquotient of the initial E term, so induction
-preserves its lower-half-plane support. A nonzero term therefore has p>=0 and
-q>=a; on a total-degree diagonal this leaves finitely many indices, proving
-boundedness. The outgoing differential has zero target when r>q-a+1, and the
-incoming differential has zero source when r>p. The defining recurrences for
-cycles and boundaries then become equalities from max(2,q-a+2,p+1) onwards;
-induction gives the displayed equalities with their initial stable values.
-This proves regularity. The source of the incoming alpha iterate is D(p+r,q-r),
-zero when r>q-a, so its image is bottom. For each bidegree these images are
-therefore eventually bottom, proving completeness. -/
+Source: Stacks Tags 011T, 0BDU, 0BDV. -/
 theorem halfPlane_sharp_bounds
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
     (X : BigradedExactCouple B 0) (a : ℤ)

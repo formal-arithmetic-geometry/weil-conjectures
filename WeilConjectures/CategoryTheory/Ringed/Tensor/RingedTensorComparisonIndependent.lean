@@ -149,7 +149,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Tensor comparison for a supplied derived pullback in independent universes
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-ringed-tensor-comparison-independent).
 -/
 
 @[expose] public section

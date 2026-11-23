@@ -16,8 +16,9 @@ import WeilConjectures.CategoryTheory.SheafRingObjectsBijective
 /-!
 # Sectionwise ring objects and strict inverse functors
 
-Source: Stacks Project, Section 00YR and Proposition 00YV,
-`proposition-functoriality-algebraic-structures-topoi`.
+## References
+
+* Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -200,28 +201,8 @@ private theorem forward_full
 
 
 /-- Sectionwise ring structures and their strict inverse construction.
-(blueprint: lem-weil-pbc-sheaf-algebraic-structures-ring-core)
-Source: Stacks Project Section 00YR, rings as sextuples in Proposition 00YV.
 
-Proof in words:
-1. Keep the underlying sheaf of sets of a ring sheaf. Define addition and
-   multiplication on the sectionwise product by the existing section operations;
-   define zero and one on the singleton sheaf, and negation sectionwise.
-   Restrictions preserve each operation. Ring identities on sections give all
-   ring-object diagrams, including commutativity and distributivity. Send a
-   ring-sheaf morphism to its underlying natural transformation.
-2. Conversely, on each section set of an internal commutative ring object,
-   evaluate its five operation maps (using the unique singleton section for
-   constants). Evaluation of its diagrams gives the commutative ring axioms.
-   Naturality makes restrictions ring homomorphisms. The underlying set presheaf
-   is the original sheaf, so Presheaf.isSheaf_iff_isSheaf_forget makes this a ring
-   sheaf. Evaluate ring-object morphisms to obtain natural ring homomorphisms.
-3. Both constructions keep section sets and underlying maps. Each round trip
-   recovers every operation pointwise; extensionality identifies the operation
-   maps and the structures, while proof irrelevance identifies axiom and sheaf
-   witnesses. Functor extensionality yields the four asserted strict equalities.
-   The chosen equality hF transports the unchanged underlying sets, giving all
-   five displayed operation formulas. -/
+Stacks Project, Section 00YR, rings as sextuples in Proposition 00YV. -/
 theorem sheavesAlgebraicStructuresRing_core
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     (∃ (F : Sheaf J CommRingCat.{max u v w} ⥤ CommRingObjCat (Sheaf J (Type (max u v w))))

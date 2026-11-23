@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 # The explicit derived comparison with an injective resolution
 
 Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
 /-- Compare with the chosen resolution, commute the termwise functor past extension
 by zero, and then apply a lift of the identity to the specified resolution.
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison). -/
+Source: Stacks Project, Derived Categories, Tags 05TE and 015B. -/
 noncomputable def injectiveResolutionDerivedComparison
     (v : A ⥤ B) [v.Additive] {X : A} (I : InjectiveResolution X) :
     (v.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι).obj
@@ -51,17 +49,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The explicit derived comparison induces the usual injective-resolution
 identification on homology.
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison).
-
-Proof: Expand the chosen-resolution single-object identification. Naturality of
-localization homology moves the two localized chain maps through its homology
-isomorphism. Naturality of extension homology moves the lifted identity through
-extension by zero. The map/extension isomorphism cancels with its inverse in
-`isoRightDerivedObjCochainComplex`. The homology factorization through the homotopy
-category cancels too. Finally naturality of `isoRightDerivedObj` for the lift of
-`id_X` identifies the result with the prescribed resolution's identification.
--/
+Source: Stacks Project, Derived Categories, Tags 05TE and 015B. -/
 theorem injectiveResolutionDerivedComparison_homology
     (v : A ⥤ B) [v.Additive] {X : A} (I : InjectiveResolution X) (n : ℕ) :
     (DerivedCategory.homologyFunctor B (n : ℤ)).map

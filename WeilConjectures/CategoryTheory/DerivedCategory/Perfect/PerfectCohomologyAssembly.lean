@@ -17,8 +17,7 @@ set_option linter.privateModule false
 /-!
 # Perfectness from bounded perfect cohomology
 
-Source: Stacks Project, More on Algebra, Tag 066U, lemma-cohomology-perfect
-(blueprint: lem-sf-perfect-cohomology-assembly).
+Source: Stacks Project, More on Algebra, Tag 066U.
 -/
 
 @[expose] public section

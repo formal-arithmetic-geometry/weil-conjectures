@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 # Čech cochains using products of presheaves
 
 Source: Stacks Project, Cohomology on Sites, Tags 03AK, 03AS, 03AT.
-(blueprint: def-sc-presheaf-cech-complex)
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace CategoryTheory
 into `F` to the nerve of a map of presheaves of sets. All fibre products are taken
 in the presheaf category, so the original category need not have pullbacks.
 Source: Stacks Project, Cohomology on Sites, Tags 03AK and 03AS, with the nerve
-formed in presheaves as in Hypercoverings, Tag 01GC.
-(blueprint: def-sc-presheaf-cech-complex) -/
+formed in presheaves as in Hypercoverings, Tag 01GC. -/
 noncomputable def presheafCechComplex {C : Type u} [Category.{v} C]
     (f : Arrow (Cᵒᵖ ⥤ Type v)) (F : Cᵒᵖ ⥤ AddCommGrpCat.{v}) :
     CochainComplex AddCommGrpCat.{max u v} ℕ :=

@@ -32,7 +32,6 @@ public import Mathlib.Data.Int.Interval
 /-! # Bounded ordinary evaluation on a ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08JJ and 0A8X.
-(blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly)
 
 ## Main statements
 
@@ -60,7 +59,7 @@ variable [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v 
   (R : Sheaf J CommRingCat.{max u v w})
 
 /-- The recorded module category, in a universe containing the site.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 abbrev Modules := ringedSiteModules.{max u v w, max u v w, v, u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
@@ -80,40 +79,40 @@ local instance (B : Modules.{u, v, w} R) (U : Cᵒᵖ) (V : (Over U.unop)ᵒᵖ)
   inferInstanceAs (SMul (R.obj.obj (op V.unop.left)) (B.val.obj (op V.unop.left)))
 
 /-- The structure sheaf placed in degree zero.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 def unitComplex : CochainComplex (Modules.{u, v, w} R) ℤ :=
   (HomologicalComplex.single (Modules.{u, v, w} R) (.up ℤ) 0).obj (𝟙_ (Modules.{u, v, w} R))
 
 /-- The ordinary Hom dual, with its recorded signed differential.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 0A8X. -/
 def dual (E : CochainComplex (Modules.{u, v, w} R) ℤ) : CochainComplex (Modules.{u, v, w} R) ℤ :=
   homComplex E (unitComplex.{u, v, w} R)
 
 /-- The small coproducts used by total complexes exist by module sheafification.
-Source: Stacks 03EK (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 03EK. -/
 instance smallColimits : HasColimitsOfSize.{0, 0} (Modules.{u, v, w} R) := inferInstance
 
 /-- Supply the total-complex coproducts directly, avoiding a search through special totals.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 0A8X. -/
 instance hasTotal (E F : CochainComplex (Modules.{u, v, w} R) ℤ) :
     F.HasMapBifunctor (dual.{u, v, w} R E) (curriedTensor (Modules.{u, v, w} R)) := fun _ ↦
       inferInstance
 
 /-- The existing direct-sum total tensor complex, with sign on the second differential.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 0A8X. -/
 def total (E F : CochainComplex (Modules.{u, v, w} R) ℤ) : CochainComplex (Modules.{u, v, w} R) ℤ :=
   letI := hasTotal.{u, v, w} R E F
   CochainComplex.mapBifunctor F (dual.{u, v, w} R E) (curriedTensor (Modules.{u, v, w} R))
 
 /-- The actual coproduct inclusion into the total tensor, with its codomain fixed.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 0A8X. -/
 def inclusion (E F : CochainComplex (Modules.{u, v, w} R) ℤ) (p q n : ℤ) (h : p + q = n) :
     F.X p ⊗ (dual.{u, v, w} R E).X q ⟶ (total.{u, v, w} R E F).X n :=
   letI := hasTotal.{u, v, w} R E F
   CochainComplex.ιMapBifunctor F (dual.{u, v, w} R E) (curriedTensor (Modules.{u, v, w} R)) p q n h
 
 /-- Local pure tensors enter the tensor sheaf through its sheafification unit.
-Source: Stacks 03EK (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 03EK. -/
 def pureTensor (A B : Modules.{u, v, w} R) (U : Cᵒᵖ)
     (x : A.val.obj U) (y : B.val.obj U) : (A ⊗ B).val.obj U :=
   (((PresheafOfModules.sheafificationAdjunction.{max u v w}
@@ -123,7 +122,7 @@ def pureTensor (A B : Modules.{u, v, w} R) (U : Cᵒᵖ)
         (x ⊗ₜ[R.obj.obj U] y)
 
 /-- Projection from the ordinary dual to its unique possibly nonzero Hom factor.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 def dualProjection (E : CochainComplex (Modules.{u, v, w} R) ℤ) (q i : ℤ) (h : i + q = 0) :
     (dual.{u, v, w} R E).X q ⟶ SheafOfModules.homObj (E.X i) (𝟙_ (Modules.{u, v, w} R)) :=
   homComplexπ E (unitComplex.{u, v, w} R) q i 0 h ≫
@@ -131,7 +130,7 @@ def dualProjection (E : CochainComplex (Modules.{u, v, w} R) ℤ) (q i : ℤ) (h
       (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (𝟙_ (Modules.{u, v, w} R))).hom
 
 /-- The canonical module comparison is specified on every slice and every pure tensor.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 def IsModuleEvaluation (A B : Modules.{u, v, w} R)
     (θ : B ⊗ SheafOfModules.homObj A (𝟙_ (Modules.{u, v, w} R)) ⟶ SheafOfModules.homObj A B) :
     Prop :=
@@ -144,19 +143,19 @@ def IsModuleEvaluation (A B : Modules.{u, v, w} R)
         ((φ.app V).hom x) • B.val.map V.unop.hom.op y
 
 /-- The source finite-sum family, indexed by the complete closed interval, possibly empty.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 def sourceFamily (E F : CochainComplex (Modules.{u, v, w} R) ℤ) (a b n : ℤ)
     (i : ↥(Finset.Icc a b)) : Modules.{u, v, w} R :=
   F.X (i.val + n) ⊗ SheafOfModules.homObj (E.X i.val) (𝟙_ (Modules.{u, v, w} R))
 
 /-- The target finite-sum family, using the same indexing and degree convention.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 def targetFamily (E F : CochainComplex (Modules.{u, v, w} R) ℤ) (a b n : ℤ)
     (i : ↥(Finset.Icc a b)) : Modules.{u, v, w} R :=
   SheafOfModules.homObj (E.X i.val) (F.X (i.val + n))
 
 /-- Finite biproducts from the existing sectionwise finite products; no new objects chosen.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly). -/
+Source: Stacks 08JJ. -/
 instance finiteBiproducts : HasFiniteBiproducts (Modules.{u, v, w} R) :=
   HasFiniteBiproducts.of_hasFiniteProducts
 
@@ -1001,35 +1000,8 @@ private theorem evaluationDegree_slice
     ((dualProjection R E q r hrq).val.app U φ) V x)
 
 /-- Finite-support assembly of the actual ordinary tensor-Hom evaluation.
-Source: Stacks 08JJ, last three displays of `lemma-dual-perfect-complex`, and
-0A8X, the Hom and total tensor differentials.
-(blueprint: lem-sfb-ringed-site-bounded-evaluation-assembly).
-
-Proof: (1) Project the dual onto Hom(E^i,R) in degree -i; all other factors
-vanish. Inserting zero maps in the other factors constructs the inverse by
-the product universal property. Project its Hom differential to obtain its sign.
-(2) Discard zero tensor summands outside the finite interval and reindex by
-(p,q)=(i+n,-i). The coproduct universal property gives the source identification.
-Zero tensor factors follow sectionwise and then by module sheafification.
-(3) Discard zero Hom factors outside that interval. The remaining finite product
-is the biproduct: its inclusions have identity diagonal and zero off-diagonal,
-and the sum of inclusion-projection composites is the identity.
-(4) The slice formula y tensor phi maps to (x maps to phi(x) times y) is balanced
-and compatible with restriction. Sheafification and the coproduct universal
-property give the degree maps. The analogous construction defines theta.
-(5) On a pure tensor in degrees p,q, the tensor differential gives d_F y tensor
-phi + (-1)^(p+q+1) y tensor (phi d_E). The Hom differential gives d_F f -
-(-1)^(p+q) f d_E. Both have the same two components, at -q and -q-1, and zero
-elsewhere, so the maps form a chain map without an additional sign.
-(6) Under the specified identifications its matrix is diagonal with blocks theta.
-(7) The finite diagonal of the inverses of theta is an inverse in each degree;
-this includes the empty interval and requires no bound on F.
-(8) Invert the chain-map equation to show that these degreewise inverses form
-an inverse chain map. These eight steps are the node's complete proof plan.
-
-The first existential constructs the canonical module comparisons and pins their
-values on all slices. The implication then imposes precisely their invertibility,
-so no additional existence assumption about those comparisons is needed. -/
+Source: Stacks 08JJ, last three displays of, and
+0A8X, the Hom and total tensor differentials. -/
 theorem assembly (E F : CochainComplex (Modules.{u, v, w} R) ℤ) (a b : ℤ)
     (hbounded : ∀ i : ℤ, i < a ∨ b < i → IsZero (E.X i)) :
     ∃ θ : ∀ (i : ℤ) (M : Modules.{u, v, w} R),

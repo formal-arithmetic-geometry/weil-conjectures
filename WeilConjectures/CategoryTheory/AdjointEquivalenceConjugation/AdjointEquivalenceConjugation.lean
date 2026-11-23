@@ -9,10 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Counits, transposes and composition under adjoint-equivalence conjugation
 
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/
-sk-thm-purity-transport/prop-pur-adic-reconstruction-trace-coherence.proof.md,
-sole paragraph, abstract counit transport and coherence calculations; Stacks 0037 and 0DV0
-(blueprint: lem-pur-adjoint-equivalence-conjugation-calculus).
+Source: Stacks 0037 and 0DV0.
 
 An equivalence `E : C ≌ N` packages the specified `R ⊣ L`, with `R = E.functor`,
 `L = E.inverse`, unit `E.unitIso.hom` and counit `E.counitIso.hom`.
@@ -49,13 +46,7 @@ variable {C₁ : Type u₁} {C₂ : Type u₂} {C₃ : Type u₃}
   [Category.{z₁} N₁] [Category.{z₂} N₂] [Category.{z₃} N₃]
 
 /-- Counit of the adjunction obtained by the three specified compositions.
-Source: blueprint reconstruction-trace-coherence proof, counit transport; Stacks 0037, 0DV0.
-Proof: Step 2 of the node identifies the reverse adjunction, using the inverse triangle
-identities. Step 3 applies `Adjunction.comp_counit_app` twice to
-`E₁.toAdjunction`, `adj`, `E₂.symm.toAdjunction`. The result is
-`L₂(ε ≫ F(e₁)) ≫ u₂⁻¹`; expand `L₂.map_comp` to obtain the displayed formula.
-These are exactly the composite adjunctions of def-weil-pbc-composite-adjunction.
-(blueprint: lem-pur-adjoint-equivalence-conjugation-calculus). -/
+Source: Stacks 0037, 0DV0. -/
 theorem conjugation_counit (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂)
     {F : N₁ ⥤ N₂} {G : N₂ ⥤ N₁} (adj : F ⊣ G) (K : C₂) :
     ((E₁.toAdjunction.comp adj).comp E₂.symm.toAdjunction).counit.app K =
@@ -64,16 +55,7 @@ theorem conjugation_counit (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂)
   simp [Adjunction.comp_counit_app, Functor.map_comp, Category.assoc]
 
 /-- The transpose of `L₁(a) ≫ c_G⁻¹` under the specified composite adjunction.
-Source: blueprint reconstruction-trace-coherence proof, abstract transpose calculation;
-Stacks 0037 and 0DV0.
-Proof: Step 1 writes the inverse Hom bijection as `t ↦ F(t) ≫ ε`.
-Step 4 identifies the comparison and its inverse with the images of `e` and `e⁻¹`.
-Step 5 applies the three inverse Hom bijections of def-weil-pbc-composite-adjunction
-successively. Naturality of `e₁` gives `e₁ ≫ a ≫ G(e₂⁻¹)` after the first;
-naturality of `ε` gives `F(e₁) ≫ F(a) ≫ ε ≫ e₂⁻¹` after the second.
-Step 6 applies `L₂` and then `u₂⁻¹`. The reverse triangle from Step 2 cancels
-`L₂(e₂⁻¹) ≫ u₂⁻¹`, leaving `c_F ≫ L₂(F(a) ≫ ε)` as asserted.
-(blueprint: lem-pur-adjoint-equivalence-conjugation-calculus). -/
+Source: Stacks 0037 and 0DV0. -/
 theorem conjugation_transpose (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂)
     {F : N₁ ⥤ N₂} {G : N₂ ⥤ N₁} (adj : F ⊣ G)
     (P : N₁) (N : N₂) (a : P ⟶ G.obj N) :

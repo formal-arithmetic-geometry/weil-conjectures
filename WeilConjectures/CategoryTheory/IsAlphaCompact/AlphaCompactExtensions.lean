@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 
 /-! # Extension closure of Krause alpha-compactness
 
-Source: Krause (2001), Lemma 5, page 124.
-(blueprint: lem-sfb-alpha-compact-extensions)
+## References
+
+* Krause (2001), Lemma 5, page 124.
 -/
 
 @[expose] public section
@@ -156,17 +157,7 @@ private theorem factorsOut_cone
   abel
 
 /-- Extensions of alpha-compact objects are alpha-compact.
-Source: Krause (2001), Lemma 5, page 124, preservation of (G4) under triangles.
-(blueprint: lem-sfb-alpha-compact-extensions)
-
-Proof: form the finite extension closure H of the canonical alpha-compact class.
-It is shift closed and triangulated, and all its objects are alpha-small.
-Induct on the extension length to factor maps through coproducts of H-objects.
-For the cone step, factor the restriction to the second vertex, take component
-fiber triangles, and lift the first vertex into their coproduct. Factor this
-lift and complete a square of triangles. The discrepancy factors through the
-shifted first vertex and is absorbed by a componentwise binary sum.
-Thus H satisfies (G4), so maximality puts H in the canonical class. -/
+Source: Krause (2001), Lemma 5, page 124, preservation of (G4) under triangles. -/
 theorem IsAlphaCompact.extension [IsTriangulated C]
     (α : Cardinal.{v}) [Fact α.IsRegular] (T : Triangle C) (hT : T ∈ distTriang C)
     (h₁ : IsAlphaCompact T.obj₁ α) (h₃ : IsAlphaCompact T.obj₃ α) :

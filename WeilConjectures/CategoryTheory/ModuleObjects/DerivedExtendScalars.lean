@@ -51,7 +51,6 @@ S ⊗ᴸ_R - ⊣ D(comap φ)
 The remaining `sorry`s of this file are inherited from
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory` and
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
-
 -/
 
 @[expose] public section

@@ -20,7 +20,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Coproduct preservation by exact derived functors
 
-Source: Stacks 07D9 and 070I.
+## References
+
+* Stacks 07D9 and 070I.
 -/
 
 @[expose] public noncomputable section
@@ -32,10 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Localization preserves termwise coproducts in the presence of K-injective resolutions.
-Source: Stacks 07D9 and 070I (blueprint: lem-pur-exact-derived-coproducts).
-Proof: compute maps into a K-injective resolution of the target. Both chain maps and
-homotopies out of a termwise coproduct are families of maps and homotopies. Thus the
-localized termwise coproduct cofan has the coproduct universal property. -/
+Stacks Project, Tags 07D9 and 070I. -/
 theorem derived_Q_preservesCoproducts
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [Abelian.HasKInjectiveResolutions A] [HasCoproducts.{s} A] (I : Type s) :
@@ -53,13 +52,7 @@ theorem derived_Q_preservesCoproducts
   exact preservesColimitsOfShape_of_discrete Q
 
 /-- An exact functor preserving coproducts also preserves them on unbounded derived categories.
-Source: Stacks 07D9 and 015F (blueprint: lem-pur-exact-derived-coproducts).
-Proof: represent every derived summand by a complex. The source coproduct is the
-localization of the termwise coproduct. Exactness identifies its image with the
-localization of the image complex; ordinary coproduct preservation makes that complex
-the coproduct of the image complexes. The target localization preserves this coproduct
-by the K-injective universal-property argument. Transport along the representative
-isomorphisms and the exact-functor factorization. -/
+Stacks Project, Tags 07D9 and 015F. -/
 theorem Functor.mapDerivedCategory_preservesCoproducts
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     {D : Type u'} [Category.{v'} D] [Abelian D] [HasDerivedCategory.{w'} D]

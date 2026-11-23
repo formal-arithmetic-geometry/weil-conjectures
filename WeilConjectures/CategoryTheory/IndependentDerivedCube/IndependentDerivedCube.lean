@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # Normalized derived cubes with independent localization universes
 
-Source: Stacks, Cohomology on Sites, Tag 0D6E; the unit-normalization argument of
-DerivedExactSquareCoherence, allowing each chosen derived category its own morphism universe.
-(blueprint: lem-sf-independent-universe-derived-cube).
+Source: Stacks, Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +35,7 @@ variable {A B C D : Type (u + 1)}
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
   [PreservesFiniteLimits J] [PreservesFiniteColimits J]
 
-/-- Localize an exact square, retaining a folded interface for its composition factors.
-Source: exact localization and its canonical composition isomorphisms.
-(blueprint: lem-sf-independent-universe-derived-cube). -/
+/-- Localize an exact square, retaining a folded interface for its composition factors. -/
 @[irreducible] def localizedSquare (h : F ⋙ G ≅ H ⋙ J) :
     F.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ J.mapDerivedCategory :=
@@ -104,8 +100,7 @@ private theorem derived_unit_ext_general
   rw [← a.naturality e.hom, ← b.naturality e.hom, hi]
 
 /-- A square normalized by the canonical right-derived units and localization factors.
-Source: Stacks Tag 0D6E
-(blueprint: lem-sf-independent-universe-derived-cube). -/
+Source: Stacks Tag 0D6E. -/
 def unitNormalized
     (X : DerivedCategory.{wA} A ⥤ DerivedCategory.{wAp} Ap)
     (Y : DerivedCategory.{wB} B ⥤ DerivedCategory.{wBp} Bp)
@@ -122,12 +117,7 @@ def unitNormalized
 omit [PreservesFiniteLimits x] [PreservesFiniteColimits x]
   [PreservesFiniteLimits y] [PreservesFiniteColimits y] in
 /-- A square normalized by right-derived units respects a morphism of ordinary squares.
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation.
-(blueprint: lem-sf-independent-universe-derived-cube).
-Proof: evaluate on a K-injective representative, cancel the invertible source unit,
-and use the two normalization equations. The ordinary square's naturality and the
-naturality of the target derived unit then identify the two composites. Essential
-surjectivity of K-injective representatives gives the equation on every object. -/
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation. -/
 private theorem normalized_naturality
     (x' : A ⥤ Ap) (y' : B ⥤ Bp) [x'.Additive] [y'.Additive]
     (X X' : DerivedCategory.{wA} A ⥤ DerivedCategory.{wAp} Ap)
@@ -244,14 +234,12 @@ variable {A B Ap Bp App Bpp : Type (u + 1)}
     x'.mapDerivedCategory ⋙ H.rightDerivedFunctor)
 
 /-- Paste two ordinary comparison squares.
-Source: Stacks Tag 0D6E, composition of squares.
-(blueprint: lem-sf-independent-universe-derived-cube). -/
+Source: Stacks Tag 0D6E, composition of squares. -/
 def compSquare : F ⋙ (y ⋙ y') ≅ (x ⋙ x') ⋙ H :=
   Functor.isoWhiskerRight c y' ≪≫ Functor.isoWhiskerLeft x c'
 
 /-- Paste two derived squares and transport by the exact localization composition factors.
-Source: Stacks Tag 0D6E, derived composition.
-(blueprint: lem-sf-independent-universe-derived-cube). -/
+Source: Stacks Tag 0D6E, derived composition. -/
 private def compDerivedSquare :
     F.rightDerivedFunctor ⋙ (y ⋙ y').mapDerivedCategory ≅
       (x ⋙ x').mapDerivedCategory ⋙ H.rightDerivedFunctor :=
@@ -338,15 +326,7 @@ end CompositeSquares
 /-- Right-derived unit normalization transports an ordinary cube with independently
 chosen localization universes.
 
-Source: Stacks, Cohomology on Sites, Tag 0D6E; the normalized cube argument.
-(blueprint: lem-sf-independent-universe-derived-cube).
-
-Proof: paste the two full-unit equations along each route. The ordinary cube is a
-morphism of these pasted squares. Its exact-localization factors agree by the
-composition factor equations. Evaluate the resulting naturality equation on a
-K-injective representative, cancel its invertible right-derived unit, and transport
-along the representative isomorphism to every derived object. All operations are
-in the supplied derived categories; their morphism universes need not agree. -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 private theorem normalized_cube
     {App Bpp A2 B2 : Type (u + 1)}
     [Category.{u} App] [Category.{u} Bpp] [Category.{u} A2] [Category.{u} B2]
@@ -535,13 +515,7 @@ include b0 b1 x y d hb0 hb1 hx hy hd h in
 /-- The normalized cube for two successive exact restrictions, expressed using the
 composite of their two specified localized functors.
 
-Source: Stacks, Cohomology on Sites, Tag 0D6E; exact localization composition factors.
-(blueprint: lem-sf-independent-universe-derived-cube).
-
-Proof: apply normalized_cube to the ordinary composite restriction. Its derived
-comparison is compDerivedSquare, normalized by the two full-unit equations. Conjugate
-the horizontal functors by mapDerivedCategoryCompIso; naturality of X cancels the
-composition factors. This gives the cube with the two specified derived restrictions. -/
+Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
 theorem normalized_composite_cube :
     let KU := Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso sU tU)
       iU.mapDerivedCategory ≪≫ localizedSquare kU

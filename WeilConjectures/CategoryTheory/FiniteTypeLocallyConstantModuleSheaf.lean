@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 /-!
 # Finite type locally constant module sheaves on a small site
 
-Source: Stacks Project, Modules on Sites, Tag 093U (3)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 093U (3).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace SheafOfModules
 sieve on whose members it is isomorphic to a constant finitely generated module sheaf.
 Constants use the existing constant-module sheafification functor, restricted to the slice;
 its canonical comparison with slice constants gives the usual definition. No points or
-terminal object are required. Source: Stacks Project, Modules on Sites, Tag 093U (3)
-(auxiliary; not a blueprint node). -/
+terminal object are required. Source: Stacks Project, Modules on Sites, Tag 093U (3). -/
 def IsFiniteTypeLocallyConstant {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (B : Type u) [CommRing B]
     (F : CategoryTheory.ringedSiteModules.{u}

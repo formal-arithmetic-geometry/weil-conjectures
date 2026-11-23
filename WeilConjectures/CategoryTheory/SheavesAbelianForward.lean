@@ -14,7 +14,9 @@ public import Mathlib.Algebra.Category.Grp.Limits
 /-!
 # Sectionwise abelian sheaves and commutative group objects
 
-Source: Stacks Project, Section 00YR and Proposition 00YV.
+## References
+
+* Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -23,19 +25,10 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
-/-- Source: Stacks Project Section 00YR, abelian sheaves as quadruples before Proposition 00YV.
-(blueprint: lem-weil-pbc-sheaf-abelian-forward)
-Proof: retain the underlying set-valued sheaf and use pointwise addition, zero, and
-negation as the internal multiplication, unit, and inverse. Restriction maps preserve
-these operations, hence they are natural transformations. The group identities and
-commutativity hold on each section and therefore hold as sheaf morphism equations.
-On a morphism use its underlying natural transformation; additivity gives preservation
-of multiplication and unit. Identities and composition are inherited from the
-underlying sheaves. Forgetting recovers the original functor, and its equality
-components give exactly the stated section formulas. Conversely, an internal morphism
-preserves the pointwise unit and multiplication, so its components are additive
-homomorphisms. Naturality gives a morphism of additive sheaves, whose image is the
-original internal morphism; this proves fullness. -/
+/-- There is a full functor from abelian sheaves to internal commutative group objects in
+sheaves of sets, compatible with the forgetful functors and with the sectionwise operations.
+
+Stacks Project, Section 00YR (abelian sheaves as quadruples before Proposition 00YV). -/
 theorem sheavesAbelianForward
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     (∃ (F : Sheaf J AddCommGrpCat.{max u v w} ⥤ CommGrp (Sheaf J (Type (max u v w))))

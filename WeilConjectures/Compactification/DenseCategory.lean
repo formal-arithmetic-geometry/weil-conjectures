@@ -40,7 +40,6 @@ on the dense compactifications.
 - `AlgebraicGeometry.Compactification.DenseCategory.isThin` and
   `AlgebraicGeometry.Compactification.DenseCategory.isCofiltered`: the category of dense
   compactifications is a cofiltered preorder.
-
 -/
 
 @[expose] public section

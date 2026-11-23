@@ -33,7 +33,6 @@ private theorem boundaries_mono (K : CochainComplex C ℤ)
 
 /-- Forward containment in the successor-boundaries image calculation.
 Source: Stacks Project, Homology, Tag 012K.
-(blueprint: new-filtered-complex-successor-boundaries-image-le).
 The representative chase shows every pullback of an incoming page boundary is
 represented by a successor boundary. -/
 theorem filteredComplex_successor_boundaries_image_le

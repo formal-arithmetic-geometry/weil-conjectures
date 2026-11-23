@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-! # Descent of a cochain augmentation computed on resolutions
 
 Source: Stacks Project, Derived Categories, Tags 06XN and 05SU.
-(blueprint: lem-cbc-cochain-augmentation-descent).
 -/
 
 @[expose] public section
@@ -27,15 +26,7 @@ namespace CategoryTheory.Functor
 /-- An augmentation which is invertible on resolving models identifies the localization of
 its source functor with the derived target. The comparison uses the specified counit.
 
-Source: Stacks Project, Derived Categories, Tags 06XN and 05SU
-(blueprint: lem-cbc-cochain-augmentation-descent).
-
-Proof: Localize H and its inclusion. Postcompose the pointwise universal counit with the
-right adjoint V; it remains universal because right adjoints preserve limits. Lift the
-localized augmentation through that universal counit. On resolving models both the counit
-and the augmentation are invertible, so the lift is invertible. For any complex resolve it
-and use naturality to transport this fact. Essential surjectivity of Q then gives an
-isomorphism of functors. The universal factorization is the asserted component equation. -/
+Source: Stacks Project, Derived Categories, Tags 06XN and 05SU. -/
 theorem exists_cochainAugmentationDescent
     {A : Type u} [Category.{v} A] [Abelian A]
     {B : Type u'} [Category.{v'} B] [Abelian B]

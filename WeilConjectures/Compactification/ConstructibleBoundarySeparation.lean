@@ -21,7 +21,6 @@ This is `AlgebraicGeometry.exists_admissibleBlowup_disjoint_closures`, which ask
 that the complements of the closed subsets be quasi-compact: a constructible subset of the
 quasi-compact space `U` is retrocompact, so the complement of a constructible closed subset
 is quasi-compact.
-
 -/
 
 @[expose] public section

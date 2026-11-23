@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 /-! # The right-derived unit on a single object
 
 Source: Stacks Project, Tag 0156, and the injective-resolution definition of derived functors.
-(blueprint: lem-sbc-right-derived-single-zero-unit).
 -/
 
 @[expose] public section
@@ -30,9 +29,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
 /-- The localization unit on a single object, with its source and target expressed
 using the single functors. It is an actual composite of the existing comparisons.
-Source: Stacks Project, Tag 0156, Section 13.20; `rightDerivedFunctorUnit` and
-`mapCochainComplexSingleFunctor` give the localization unit and single comparison.
-(blueprint: lem-sbc-right-derived-single-zero-unit). -/
+Source: Stacks Project, Tag 0156, Section 13.20. -/
 noncomputable def rightDerivedSingleUnit (F : C ⥤ D) [F.Additive] (M : C) :
     (DerivedCategory.singleFunctor D 0).obj (F.obj M) ⟶
       F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M) :=
@@ -145,21 +142,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The right-derived unit induces the inverse of the canonical zeroth comparison.
-Source: Stacks Project, Tag 0156; the augmentation of an injective resolution and
-Mathlib's definition of `toRightDerivedZero`.
-(blueprint: lem-sbc-right-derived-single-zero-unit).
-
-Proof: Choose the injective resolution I of M used in the single comparison.
-The localization unit is represented by F applied to the augmentation M[0] → I.
-The bounded-below/unbounded compatibility carries this unit to the same map,
-by its defining equality with the two right-derived units. On zeroth homology,
-the augmentation is precisely toRightDerivedZero: this follows by the description
-of the kernel of F(I⁰) → F(I¹). The single homology comparison identifies the
-source with F(M). The single right-derived homology comparison identifies the
-target with R⁰F(M). Finally rightDerivedZeroIsoSelf is the inverse of
- toRightDerivedZero for a left exact F. Their composite is the identity of F(M),
-which proves the formula. This uses no exactness beyond left exactness of F;
-zero objects and the zero functor give the same identity. -/
+Source: Stacks Project, Tag 0156. -/
 theorem rightDerivedSingleUnit_zero (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] (M : C) :
     (DerivedCategory.homologyFunctor D 0).map (F.rightDerivedSingleUnit M) ≫

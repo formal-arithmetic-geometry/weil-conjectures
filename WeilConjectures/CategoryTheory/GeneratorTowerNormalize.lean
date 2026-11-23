@@ -13,9 +13,8 @@ import Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Rotating, mapping and prepending zero to a generator tower
 
-Source: Stacks Project, derived.tex, lemma-write-as-colimit (Tag 09SN), and
-duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G.
-(blueprint: lem-sc-generator-tower-normalize).
+Source: Stacks Project, derived.tex (Tag 09SN), and
+duality.tex, Section Tag 0E4G.
 -/
 
 @[expose] public section
@@ -61,26 +60,8 @@ private noncomputable def mapped_sum_cofan
 
 /-- Normalize an already constructed telescope under an exact coproduct-preserving
 functor. This assertion uses no compactness or generation assumption.
-Source: Stacks Project, derived.tex, lemma-write-as-colimit (Tag 09SN), and
-duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G.
-(blueprint: lem-sc-generator-tower-normalize).
-
-Proof: Rotate Z_n -> A_n -> A_(n+1) -> Z_n[1] once. Shifts preserve coproducts,
-so Z_n[1] is a coproduct of the shifts e[m+1]. Prepend the zero object: set
-X_0 = 0 and X_(n+1) = A_n, with zero first transition and the given subsequent
-transitions. The first distinguished triangle is the inverse rotation of the
-contractible triangle on A_0; its third object is A_0, a sum of shifts by hstart.
-The canonical coproduct isomorphism deleting the zero summand sends each successor
-coprojection to the corresponding old coprojection. Check on coprojections that
-it conjugates the new transition endomorphism to the old one. The zero component
-is zero on both sides. Additivity also conjugates identity minus these maps.
-Transport the given telescope triangle along this isomorphism. Map all triangles
-by F. Its shift comparison identifies mapped shifts, and preservation of coproducts
-maps each colimiting cofan to an ambient colimiting cofan. Replace F(e) by E and
-F(q) by Q using the given isomorphisms, transporting triangles along triangle
-isomorphisms. Reindex the ULift-indexed countable cofan along n -> ULift.up n.
-This yields the stated sequence and cofan equations. Empty summand sets and zero
-objects require no special choices and satisfy the same universal properties. -/
+Source: Stacks Project, derived.tex (Tag 09SN), and
+duality.tex, Section Tag 0E4G. -/
 theorem generator_tower_normalize
     {C : Type c} {D : Type d} [Category.{u} C] [Category.{v} D]
     [HasZeroObject C] [HasZeroObject D] [HasShift C ℤ] [HasShift D ℤ]

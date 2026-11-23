@@ -40,7 +40,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
 /-- **Uniqueness of refinements out of a dense compactification**: if the open immersion of the
 compactification `c` is scheme-theoretically dominant, then any two refinements of `d` by `c`
 are equal. This is what makes the comparison morphism between two compactifications
-well defined. (blueprint: `GEO-BA43-DENSE-REFINEMENT-UNIQUENESS`) -/
+well defined. -/
 theorem ext_of_isSchemeTheoreticallyDominant (hc : IsSchemeTheoreticallyDominant c.i)
     (r r' : c.Refinement d) : r = r' := by
   have := hc

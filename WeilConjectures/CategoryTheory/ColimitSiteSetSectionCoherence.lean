@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 /-! # Unit-compatible section maps satisfy the functor and cocone laws.
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-section-coherence).
 -/
 
 @[expose] public section
@@ -124,27 +123,9 @@ private theorem sheaf_triangle_id
 
 -- The arrow binder in the given family m does not occur in its codomain.
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-set-section-coherence).
+/-- Source: Stacks Project, Sites, Tag 0A35.
 
 Unit-compatible section maps satisfy the functor and cocone laws.
-
-Proof: The equalities of functors supplied by F.map_id, F.map_comp, Under.w,
-and V.w identify all composite restriction functors. For each transition, the
-adjunction hom equivalence sends a sheaf map to its composite with the unit.
-Consequently the componentwise unit equations hθ determine the transition
-uniquely: equality of components gives equality of natural transformations,
-and injectivity of the hom equivalence gives equality of sheaf maps. The
-identity sheaf map satisfies the identity unit equation. A composite of two
-transitions satisfies the composite unit equation, by naturality of the units
-and of the second transition. Uniqueness therefore proves identity and
-composition. Likewise, the composite of a transition with the later α has
-unit composite equal to the limit-site unit by hθ and hα, so equals the earlier
-α. Evaluate these three sheaf-map equalities at the image of U. The Arrow
-identities hm and hc identify m and c with these evaluated maps, after the
-endpoint transports forced by the functor equalities. Transport respects
-identities and composition, giving the three stated laws. No filteredness,
-covering finiteness, or category-colimit hypothesis is needed.
 -/
 theorem colimit_site_set_section_coherence
     (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})

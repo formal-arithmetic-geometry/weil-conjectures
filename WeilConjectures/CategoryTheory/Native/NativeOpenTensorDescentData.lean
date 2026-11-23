@@ -9,8 +9,7 @@ public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorComparisonDa
 
 /-! # Native open tensor descent components
 
-Source: Stacks 0GL1, 06YN and 012Z; native open tensor proof steps 3--6.
-(blueprint: def-sf-native-open-tensor-descent-components)
+Source: Stacks 0GL1, 06YN and 012Z.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ universe v w
 
 /-- The common inputs to the two independent open tensor descent calculations.
 No chain or derived open comparison is included.
-Source: Stacks 0GL1 and 07A4; the input fields of OpenTensorPresentation.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+Source: Stacks 0GL1 and 07A4. -/
 structure OpenTensorDescentInput
     (A B : Type v) [Category.{w} A] [Category.{w} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B] where
@@ -90,8 +88,7 @@ attribute [local instance] OpenTensorDescentInput.e_add OpenTensorDescentInput.r
   OpenTensorDescentInput.e_zero OpenTensorDescentInput.r_zero
 
 /-- Representative models and sheaf maps for a fixed descent input.
-Source: the corresponding fields of OpenTensorPresentation, Stacks 0GL1 and 07A4.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+Source: the corresponding fields of OpenTensorPresentation, Stacks 0GL1 and 07A4. -/
 structure OpenTensorDescentModels
     {A B : Type v} [Category.{w} A] [Category.{w} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -116,8 +113,7 @@ structure OpenTensorDescentModels
   sheafRestriction : ∀ M N, c.R.obj (c.SB.obj (M, N)) ≅ c.SA.obj (c.R.obj M, c.R.obj N)
 
 /-- Extension comparisons for a fixed tensor descent input.
-Source: Stacks 0GL1 and 06YN.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+Source: Stacks 0GL1 and 06YN. -/
 structure OpenTensorExtensionDescentData
     {A B : Type v} [Category.{w} A] [Category.{w} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -141,8 +137,7 @@ structure OpenTensorExtensionDescentData
     c.flatA c.flatB hE hR m.modelA m.modelB total gamma
 
 /-- Restriction comparisons for a fixed tensor descent input.
-Source: Stacks 07A4 and 06YN.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+Source: Stacks 07A4 and 06YN. -/
 structure OpenTensorRestrictionDescentData
     {A B : Type v} [Category.{w} A] [Category.{w} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -189,8 +184,7 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 
 Source: native open operations and Stacks 0GL1/07A4.
 Every field is the existing native construction. Models and sheaf maps are kept
-in a separate record with explicit compatibility equalities.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+in a separate record with explicit compatibility equalities. -/
 def nativeOpenTensorDescentInput :
     OpenTensorDescentInput (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z) :=
   { E := extensionByZero k₀ l j
@@ -213,9 +207,7 @@ def nativeOpenTensorDescentInput :
     flatB := NativeIsKFlat k₀ l Z
  }
 
-/-- The representative and sheaf fields agree with the actual native ones.
-Source: the compatibility fields of the native open tensor presentation.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+/-- The representative and sheaf fields agree with the actual native ones. -/
 structure NativeOpenTensorModelsCompatibility (s : NativeOpenTensorData k₀ l j)
     (m : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j)) : Prop where
   /-- The open representative is the native one. -/
@@ -232,8 +224,7 @@ structure NativeOpenTensorModelsCompatibility (s : NativeOpenTensorData k₀ l j
   sheafRestriction : HEq m.sheafRestriction s.sheafRestriction
 
 /-- The normalized extension component with its actual representative and sheaf data.
-Source: Stacks 0GL1 and 06YN.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+Source: Stacks 0GL1 and 06YN. -/
 structure NativeOpenTensorExtensionDescentData (s : NativeOpenTensorData k₀ l j) where
   /-- The representative models and sheaf maps. -/
   models : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j)
@@ -247,8 +238,7 @@ structure NativeOpenTensorExtensionDescentData (s : NativeOpenTensorData k₀ l 
   gamma_compatible : HEq component.gamma gamma
 
 /-- The normalized restriction component with its actual representative and sheaf data.
-Source: Stacks 07A4 and 06YN.
-(blueprint: def-sf-native-open-tensor-descent-components) -/
+Source: Stacks 07A4 and 06YN. -/
 structure NativeOpenTensorRestrictionDescentData (s : NativeOpenTensorData k₀ l j)
     (models : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j)) where
   /-- The restriction comparison and its normalizations. -/

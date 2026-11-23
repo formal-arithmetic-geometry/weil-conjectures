@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.Ringed.Sheaf.RingedSheafSliceConstr
 /-!
 # Descent along the element site
 
-Source: Stacks Project, Tag 0791, lemma-localize-topos-site; sites-modules.tex Tag 04J4
-(blueprint: lem-weil-pbc-element-site-descent).
+Source: Stacks Project, Tags 0791 and 04J4.
 -/
 
 @[expose] public section
@@ -498,19 +497,7 @@ private theorem fibre_essSurj {C : Type u} [SmallCategory C]
 
 /-- Descent along the element site.
 
-Source: literature/stacks-project/sites.tex, Tag 0791, lemma-localize-topos-site;
-sites-modules.tex Tag 04J4
-(blueprint: lem-weil-pbc-element-site-descent).
-Proof: Lift every arrow v:V→U uniquely below (U,s) to (V,A(v)s)→(U,s). Sieves below these objects
-identify with sieves below U, compatibly with pullback and transitivity. The resulting topology
-is restrictedTopology, and precomposition preserves sheaves, so Mathlib
-restrictedTopology_eq_inducedTopology identifies it with J_A. Lift covering sieves to prove
-cocontinuity. Fibre sections glue uniquely in F; their images agree with s by separatedness of
-A. Conversely pairs (s,x) glue by first gluing s in A and then x on the lifted element cover.
-The maps x↦(p(x),x) and fibre evaluation give inverse natural isomorphisms, including all
-restrictions. A sheaf map B→A carries lifted covering families to lifted covering families and
-preserves this sheaf gluing condition, giving continuity of the element map. Empty fibres and
-empty covers satisfy the same sheaf condition. -/
+Source: Stacks Project, Tags 0791 and 04J4. -/
 theorem element_site_descent
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (A : Sheaf J (Type u)) :

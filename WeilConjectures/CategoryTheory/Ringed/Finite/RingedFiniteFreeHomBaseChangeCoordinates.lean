@@ -1111,8 +1111,7 @@ end FiniteFreeScalarProof
 /-- The basis components of a finite-free scalar-extension isomorphism, specified
 on every K-flat representative. The degreewise map is multiplication by the actual
 basis section, followed by sheafification; the localization square fixes its derived class.
-Source: Stacks Project, Tags 08J9 and 08JA.
-(blueprint: lem-sf-ringed-finite-free-hom-coordinates). -/
+Source: Stacks Project, Tags 08J9 and 08JA. -/
 def RingedFiniteFreeBasisCoordinates
     [HasDerivedCategory.{w} (SheafOfModules.scalarModules J R)]
     [HasDerivedCategory.{w} (SheafOfModules.scalarModules J S)]
@@ -1241,34 +1240,10 @@ attribute [local irreducible] FiniteFreeLocalizationProof.adjunction
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-/-- Basis coordinates of the restricted evaluation comparison.
-The basis identifications are fixed on every K-flat representative by their actual
-basis sections. The ordinary scalar adjunction is fixed by its unit sections, its
-derived adjunction by its chain transposes, and β by restricted evaluation. Only
-the resulting equation on basis inclusions remains to be calculated. Product preservation,
-the matrix calculation, naturality, conservativity and assembly of the internal-Hom
-isomorphism are proved outside.
-Source: Stacks Project, sites-cohomology.tex, Tags 08J9 and 08JA, finite-free
-specialization of lemma-internal-hom and lemma-section-RHom-over-U.
-(blueprint: lem-sf-ringed-finite-free-hom-coordinates).
-
-Proof: use the displayed basis of S over R. On K-flat representatives the maps
-(x_j) ↦ sum e_j tensor x_j and the basis coefficient maps are inverse chain maps.
-Finite sums preserve quasi-isomorphisms, giving a_X : X^d ≅ U(TX).
-The normalized scalar-Hom adjunction identifies U H_S(TP,TQ) with H_R(P,UTQ),
-giving β. Transport its ordinary and derived adjunctions to E and T using their
-actual object and map formulas and the unique universal counit comparison. Their
-unit and chain-transpose equations fix the transported adjunctions. The displayed
-transpose equation for β expands scalarHomRestrictedEvaluation: insert eta_P,
-apply the counit mate of μ, and restrict S-evaluation. Transpose bijectivity fixes β.
-Use a_H and a_Q for the two displayed basis isomorphisms. Transpose
-β after the restricted comparison and the i-th basis inclusion. The normalized
-scalar unit inserts 1, while the κ formula and μ square multiply it by e_i.
-Its transpose is evaluation followed by the i-th basis inclusion on Q.
-Uniqueness of transpose gives precisely H_R(P,ι_i followed by a_Q), the equation
-asserted here. These identities can be checked on actual K-flat representatives
-and localized. Rank zero has no inclusions; no boundedness is used.
-No preservation of products or invertibility of the comparison is asserted here. -/
+/-- Basis coordinates of the restricted evaluation comparison: the basis identifications are
+fixed on every K-flat representative by their actual basis sections, the ordinary scalar
+adjunction by its unit sections, its derived adjunction by its chain transposes, and `β` by
+restricted evaluation. Stacks Project, Tags 08J9 and 08JA. -/
 theorem ringedFiniteFreeHomBaseChange_coordinates
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]

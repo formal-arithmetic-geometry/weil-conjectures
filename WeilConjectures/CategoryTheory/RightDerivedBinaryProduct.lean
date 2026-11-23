@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 
 Source: Stacks Project, Homology Tag 0117, and the componentwise description of
 cycles and boundaries for finite products.
-(blueprint: lem-weil-pbc-right-derived-binary-product)
 -/
 
 @[expose] public section
@@ -109,21 +108,12 @@ private theorem derived_zero {F G : C ⥤ AddCommGrpCat.{w}} [F.Additive] [G.Add
 
 end
 
-/-- Source: Stacks Project, Homology Tag 0117, finite products in the injective-resolution
-argument for Tag 0A50.
-(blueprint: lem-weil-pbc-right-derived-binary-product)
+/-- The `n`-th right derived functor of the binary product `B × D` of additive functors is the
+product of the `n`-th right derived functors of `B` and `D`, compatibly with the derived maps of
+the pairing `(a, b)` and of the difference `c - d`.
 
-Proof: Let P be the pointwise Cartesian product functor. Its two projections p,q
-and inclusions i,j satisfy ip = id, iq = 0, jp = 0, jq = id, and pi + qj = id.
-Right derivation preserves composition and identity. It also preserves addition and zero:
-compute transformation components through isoRightDerivedObj and rightDerived_app_eq,
-then use additivity of homology. Thus the five identities still hold after derivation.
-The derived projections define a map to the Cartesian product, and the sum of the derived
-inclusions defines its inverse. The five identities prove both inverse equations.
-The pair map followed by either projection is a or b, so derivation gives the asserted
-pair equation. The difference is pc + q(-d), so additivity and composition give the
-asserted difference equation. No left exactness is required, including at degree zero;
-zero functors and split sequences satisfy the same identities. -/
+Source: Stacks Project, Homology Tag 0117, finite products in the injective-resolution argument
+for Tag 0A50. -/
 theorem rightDerived_binaryProduct_iso
     [Abelian C] [HasInjectiveResolutions C]
     (A B D E : C ⥤ AddCommGrpCat.{w})

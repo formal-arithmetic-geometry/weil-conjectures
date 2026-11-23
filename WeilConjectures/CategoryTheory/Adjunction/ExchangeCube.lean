@@ -75,6 +75,15 @@ lemma pushHomOfComapIso_eq_mateEquiv :
   rw [← h]
   exact ((mateEquiv adj₁ adj₂).symm_apply_apply _)
 
+/-- In the square of adjunctions of `Adjunction.pullIsoOfComapIso`, the unit of `U₂ ⊣ L₂` at
+`E₂ K` is the unit of `U₁ ⊣ L₁` followed by `pushHomOfComapIso` and the pullback comparison. -/
+lemma map_unit_comp_pushHomOfComapIso_app (K : A') :
+    E₂.map (adjR.unit.app K) ≫ (pushHomOfComapIso adj₁ adj₂ e).app (U₁.obj K) ≫
+        L₂.map ((pullIsoOfComapIso adj₁ adj₂ adjR adjS e).hom.app K) =
+      adjS.unit.app (E₂.obj K) := by
+  rw [pushHomOfComapIso_eq_mateEquiv adj₁ adj₂ adjR adjS, ← Category.assoc, unit_mateEquiv]
+  simp
+
 end PushHom
 
 section Cube

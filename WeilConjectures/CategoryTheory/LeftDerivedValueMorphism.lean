@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBri
 
 /-! # Morphisms between pointwise left-derived values
 
-Source: Stacks Project, Derived Categories, Lemma 05SA(2)
-(blueprint: lem-pur-derived-functor-morphisms-05sa).
+Source: Stacks Project, Derived Categories, Lemma 05SA(2).
 -/
 
 @[expose] public section
@@ -28,21 +27,7 @@ morphism between its values, compatible with every denominator square. The suppl
 natural transformations are the cone maps exhibiting these values as essentially
 constant pro-objects: `huX` and `huY` are precisely the retraction and common-stage
 conditions of `IsEssentiallyConstantProDiagram`, with its existential cone made explicit.
-Source: Stacks Project, Derived Categories, Lemma 05SA(2)
-(blueprint: lem-pur-derived-functor-morphisms-05sa).
-
-Proof: (1) The bridge `lem-pur-left-derived-defined-pointwise-kan-bridge` supplies limit
-cones over `(Q(X) ↓ Q)` and `(Q(Y) ↓ Q)`, whose denominator projections are the given
-cone maps. (2) Precomposition with `Q(f)` sends `(Z', φ)` over `Q(Y)` to `(Z', Q(f) ≫ φ)`
-over `Q(X)`. Restrict the first limit cone along this functor and use the second limit's
-universal property to obtain the morphism between values.
-(3) For a denominator square, the identity
-`Q(f) ≫ inv (Q(s')) = inv (Q(s)) ≫ Q(f')` and cone naturality give the first square.
-Applying `F` to the original square gives the second square, hence the outer rectangle.
-(4) For uniqueness, `lem-pc-right-localization-hom-colimit` writes every structured-arrow
-projection as a denominator projection followed by `F(g)`. MS2 completes `f` and that
-denominator to a square. The required first-square equation makes both candidate maps
-agree after every projection; the limit universal property then makes them equal. -/
+Source: Stacks Project, Derived Categories, Lemma 05SA(2). -/
 theorem leftDerived_value_morphism
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

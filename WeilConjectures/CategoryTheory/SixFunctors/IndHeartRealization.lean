@@ -9,10 +9,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.CategoryTheory.Presentable.Finite
 /-!
 # Realizing ind-objects of a finitely presentable full subcategory
-
-Source: blueprint main-20261015, proposition-ind-constructible-sheaves,
-`sk-prop-ind-heart-full-faithfulness.proof.md`, paragraphs (2) and the statement's image clause.
-(blueprint: det-ind-heart-full-faithfulness-realization)
 -/
 
 @[expose] public noncomputable section
@@ -348,36 +344,7 @@ namespace CategoryTheory
 /-- The ind-category of a full subcategory of finitely presentable objects realizes
 fully faithfully in the ambient category with filtered colimits.
 
-Source: blueprint main-20261015, proposition-ind-constructible-sheaves,
-`sk-prop-ind-heart-full-faithfulness.proof.md`, paragraph (2), and the essential-image
-clause of its statement; Stacks 05PW and 002F.
-(blueprint: det-ind-heart-full-faithfulness-realization)
-
-Proof: work directly with Mathlib ind-objects and their chosen small filtered
-presentations; the essential-smallness assumption is retained to match the source
-and its coefficient-heart application. Write A = P.FullSubcategory and let
-F : A ⥤ C be the inclusion. For every
-ind-object Z choose its Mathlib presentation Z_i and put RZ = colim_i F(Z_i).
-For any Y in C, the colimit universal property and Yoneda lemma identify maps
-RZ → Y with natural transformations from Z's presheaf to Hom(F(-), Y). These
-bijections define R on arrows by precomposition; uniqueness gives identities
-and composition, so R is an actual functor. For an ind-object W, finite
-presentability of every F(Z_i) identifies Hom(F(Z_i), RW) with the colimit of
-Hom(F(Z_i), F(W_j)). Fullness of F identifies this diagram with Hom(Z_i,W_j).
-Taking compatible families over i gives exactly Hom(Z,W). The construction of
-R on arrows is this bijection, hence R is full and faithful.
-
-The same universal property applied to a representable gives a natural
-isomorphism Ind.yoneda ⋙ R ≅ F. For an arbitrary small filtered diagram T in A,
-the universal-property Hom bijection identifies R(colim Ind.yoneda(T)) with
-colim F(T), compatibly with every cocone leg, proving the presentation-colimit
-clause. Every image object is a filtered colimit of P-objects, hence satisfies
-P.ind; this property is closed under isomorphisms. Conversely, given a witness
-for P.ind M, lift its diagram to A using the witness that each object satisfies
-P, take its colimit after Ind.yoneda, and apply the preceding comparison to
-obtain an isomorphism from its realization to M. Thus the essential image is
-precisely P.ind. This argument allows the empty property and arbitrary filtered
-categories with parallel arrows, and uses only diagrams in the hom universe. -/
+Source: Stacks 05PW and 002F. -/
 theorem ind_realization_of_finitelyPresentable
     {C : Type u} [Category.{v} C] [HasFilteredColimits C]
     (P : ObjectProperty C) [EssentiallySmall.{v} P.FullSubcategory]

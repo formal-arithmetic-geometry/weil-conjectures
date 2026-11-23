@@ -12,11 +12,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 
 /-!
 # Localizing subcategories and the indexing universe
-
-Source: the nonzero-support argument of
-`lem-exc-coproduct-preservation-universe-extension`, applied to the definition of a
-localizing subcategory in `definition-localizing-subcategory`
-(blueprint: lem-sfb-localizing-subcategory-universe).
 -/
 
 @[expose] public section

@@ -40,7 +40,7 @@ Hence it contains:
    union of its stupid truncations, bounded complexes of projective modules;
 5. every complex `L`, which is the union of the bounded subcomplexes `σ^{≥ -m} τ^{≤ m} L`.
 
-## Main statements
+## Main results
 
 - `CategoryTheory.NatTrans.isIso_app_of_isColimit_cofan` (in
   `WeilConjectures.CategoryTheory.DerivedCategory.Telescope`): closure under coproducts. Closure
@@ -102,7 +102,7 @@ variable [Preadditive T] [HasZeroObject T] [∀ n : ℤ, (CategoryTheory.shiftFu
   [Pretriangulated T] [F.IsTriangulated] [G.IsTriangulated]
 
 /-- If `τ` is an isomorphism at all the terms `Lⁱ[0]` of a bounded complex `L`, then it is an
-isomorphism at `L`. The proof is by induction along the stupid truncations of `L`. -/
+isomorphism at `L`. -/
 lemma isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE (L : CochainComplex (ModuleCat.{v} R) ℤ)
     (a b : ℤ) [L.IsStrictlyGE a] [L.IsStrictlyLE b]
     (hL : ∀ i, IsIso (τ.app ((singleFunctor _ 0).obj (L.X i)))) : IsIso (τ.app (Q.obj L)) := by

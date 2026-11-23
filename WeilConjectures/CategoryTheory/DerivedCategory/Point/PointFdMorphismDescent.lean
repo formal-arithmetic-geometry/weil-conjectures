@@ -17,9 +17,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 
 /-! # Descent of a morphism between finite coefficient complexes
-
-Source: blueprint order 1509, the common-stage Hom construction for
-`lemma-perfect-complexes-geometric-point` (blueprint: lem-weil-point-fd-morphism-descent).
 -/
 
 @[expose] public section

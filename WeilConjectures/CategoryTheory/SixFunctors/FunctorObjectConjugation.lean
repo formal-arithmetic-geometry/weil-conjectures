@@ -10,9 +10,10 @@ public import Mathlib.CategoryTheory.EqToHom
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! Conjugating a functor by an arbitrary family of object automorphisms.
-Source: Mathlib's definition of a functor and natural isomorphism; the change of
-presentation in Zheng, Construction 5.25.
-(blueprint: lem-sf-functor-comparison-normalization)
+
+## References
+
+* Zheng, Construction 5.25.
 -/
 
 @[expose] public section

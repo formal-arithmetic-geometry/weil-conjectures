@@ -32,23 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Cycles comparison for the mapped single complex after shift.
 
-Source: Stacks Project, derived.tex, Tag 015J, proof remark (1), and the
-canonical single-functor, quotient and homology shift comparisons.
-(blueprint: lem-pc-mapped-single-cycles-shift-comparison)
-
-Proof: Expand mapHomotopyCategoryPlusSingleFunctorQhObjIso and use naturality
-of homologyFunctorObjQIso to replace its homology map by homologyMap of the
-singleMapHomologicalComplex coefficient isomorphism. Naturality of homologyπ
-then identifies the source map with iCycles followed by the mapped sole-term
-coefficient identification and the inverse single-object homology comparison
-in degree n. The inverse single-functor shift isomorphism carries the sole term
-from n to zero, while H₀.shiftIso identifies the resulting homology in degree n
-with degree-zero homology. Both comparisons are induced by the identity on the
-sole nonzero coefficient, so their composite takes the inverse degree-n single
-homology comparison to singleFunctorCompHomologyFunctorIso 0 inverse. This gives
-the displayed equality. The shift sign occurs only in the differential, which
-is zero for a single complex; n=0 uses the shift unit laws and X=0 uses the
-same natural maps. No right-derived unit or enough-injectives argument is used. -/
+Source: Stacks Project, Tag 015J. -/
 theorem mappedSingle_cycles_shift_comparison (X : B) (n : ℕ) :
     let S : CochainComplex.Plus B :=
       ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩

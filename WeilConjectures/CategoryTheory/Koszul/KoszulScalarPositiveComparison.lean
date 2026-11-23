@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.ScalarKoszulTransport.KoszulScalarTran
 /-! # KoszulScalarPositiveComparison for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-positive-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +42,7 @@ attribute [local instance] gradedTensorCache gradedGoodTensorLeftCache
   cachedComplexBraided cachedComplexClosed
 
 /-- The scalar-extension unit isomorphism intertwines every scalar in the ordered list.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-positive-comparison). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem scalar_intertwines_any (φ : R ⟶ B)
     (s : (R.obj ⋙ forget CommRingCat).sections)
     (e : (extension φ).obj (one R) ≅ one B) :
@@ -135,13 +133,7 @@ private theorem positiveIso_projection (φ : R ⟶ B) (r : ℕ)
     simpa only [← ScalarKoszulTransport.koszulUnit_right] using! hp
 
 /-- Positive Koszul comparison preserving projection.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Intertwine the scalar maps for each entry of the list using the scalar-extension
-generator formula. Powers intertwine by the generic power lemma.
-Proof step 2: Apply the generic factor comparison and its transition naturality to obtain the
-positive diagram isomorphism. Tensor induction and the normalized right-unit formula give the
-projection identity. Pair the explicitly constructed isomorphism with this proved identity.
-(blueprint: lem-f5-koszul-scalar-positive-comparison). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private def positiveComparison (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (H : ScalarKoszulTransport.TensorPullbackComparison

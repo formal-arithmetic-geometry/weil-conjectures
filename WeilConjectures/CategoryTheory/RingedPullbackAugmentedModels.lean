@@ -58,7 +58,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Pullback transports augmented models on flat K-flat representatives
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E, 06XN.
-(blueprint: lem-weil-pbc-ringed-pullback-augmented-models).
 -/
 
 @[expose] public section
@@ -87,18 +86,7 @@ private theorem transport_augmented_iso
 flat-term K-flat complexes to the corresponding ordinary pulled-back complexes.
 The target of the augmentation need not be K-flat.
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E, 06XN.
-(blueprint: lem-weil-pbc-ringed-pullback-augmented-models).
-
-Proof: compare the given left adjoint with the supplied tensor pullback by uniqueness
-of left adjoints. Tensor pullback preserves quasi-isomorphisms between flat-term K-flat
-complexes. Transport that property through the comparison. The class of flat-term
-K-flat complexes resolves every homotopy-category object, so the resolving-class theorem
-constructs a left derived functor, with its comparison invertible on both source
-complexes. Apply this derived functor to the augmented isomorphism and compose the
-comparison isomorphisms. Naturality at the two augmentation arrows proves the required
-equation, without any assumption on their common target. The resolving-class theorem
-allows the two derived categories to have independent localization universes. -/
+Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E, 06XN. -/
 theorem ringed_pullback_augmented_models
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

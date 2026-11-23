@@ -175,7 +175,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantRealizationDerivedScalar
 # Derived constant realization and scalar extension
 
 Source: Stacks Project, Cohomology on Sites, Tags 0G7E and 0D6D; Modules on Sites,
-Tags 093J, 0GMW and 03CY (blueprint: lem-sfb-constant-realization-derived-scalar-extension).
+Tags 093J, 0GMW and 03CY.
 Scalar extension is the left adjoint to actual restriction; its universal property
 fixes the construction up to the unique unit-preserving isomorphism. The comparison
 below is its mate, not a choice of an unspecified natural isomorphism.
@@ -572,7 +572,8 @@ variable [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)]
   [HasDerivedCategory.{dS} (realizationModules J S)]
 
 /-- Localize the exact ordinary restriction comparison.
-Source: Stacks 07A6 (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
+Source: Stacks 07A6.
+-/
 def derivedRestrictionIso :
     commutativeSiteDerivedConstantModuleFunctor.{u, v, wS, dS} J S ⋙
         derivedRestriction.{u, v, dR, dS} J q ≅
@@ -591,8 +592,8 @@ def derivedRestrictionIso :
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The comparison map is the mate of the realized scalar-extension unit.
-Source: Stacks 0G7E and 07A6
-(blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
+Source: Stacks 0G7E and 07A6.
+-/
 def comparison (M : DerivedCategory (ModuleCat.{max u v} R)) :
     (derivedExtension.{u, v, dR, dS} J q).obj
         ((commutativeSiteDerivedConstantModuleFunctor.{u, v, wR, dR} J R).obj M) ⟶
@@ -605,8 +606,8 @@ def comparison (M : DerivedCategory (ModuleCat.{max u v} R)) :
           ((moduleDerivedExtension.{wR, wS, max u v} q).obj M))
 
 /-- Canonical sheaf representative map, the transpose of the localized ordinary unit.
-Source: Stacks 06YY and 07A6
-(blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
+Source: Stacks 06YY and 07A6.
+-/
 def sheafRepresentative (P : CochainComplex (realizationModules J R) ℤ) :
     (derivedExtension.{u, v, dR, dS} J q).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj (((extension J q).mapHomologicalComplex (.up ℤ)).obj P) :=
@@ -620,9 +621,8 @@ def sheafRepresentative (P : CochainComplex (realizationModules J R) ℤ) :
         (((extension J q).mapHomologicalComplex (.up ℤ)).obj P))
 
 /-- Naturality of the derived mate.
-Source: Stacks 0D6D (blueprint: lem-sfb-constant-realization-derived-scalar-extension).
-Proof: transpose the two sides using derivedAdjunction. Naturality of the module
-unit and derivedRestrictionIso makes them equal; the transpose bijection is injective. -/
+Source: Stacks 0D6D.
+-/
 theorem comparison_naturality
     {M N : DerivedCategory (ModuleCat.{max u v} R)} (f : M ⟶ N) :
     (derivedExtension.{u, v, dR, dS} J q).map
@@ -644,7 +644,8 @@ theorem comparison_naturality
     ((moduleDerivedExtension.{wR, wS, max u v} q).map f)
 
 /-- The canonical derived comparison as a natural transformation.
-Source: Stacks 0D6D (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
+Source: Stacks 0D6D.
+-/
 def comparisonTransformation :
     commutativeSiteDerivedConstantModuleFunctor.{u, v, wR, dR} J R ⋙
         derivedExtension.{u, v, dR, dS} J q ⟶
@@ -658,9 +659,8 @@ attribute [local irreducible] adjunction derivedExtension moduleDerivedExtension
   derivedAdjunction moduleDerivedAdjunction
 
 /-- The scalar-extension unit is compatible with constant realization.
-Source: Stacks 0D6D and 07A6 (blueprint: lem-sfb-constant-realization-derived-scalar-extension).
-Proof: transpose both sides under the derived adjunction; the two transposes are the
-realized ordinary scalar-extension unit followed by the restriction comparison. -/
+Source: Stacks 0D6D and 07A6.
+-/
 private theorem comparison_unit :
     (∀ M : DerivedCategory (ModuleCat.{max u v} R),
       (derivedAdjunction.{u, v, dR, dS} J q).unit.app
@@ -912,17 +912,8 @@ private theorem comparison_isIso (M : DerivedCategory (ModuleCat.{max u v} R)) :
 
 /-- Constant realization commutes with unbounded derived scalar extension, including
 its canonical flat-term K-flat model and scalar-extension unit.
-Source: Stacks 0G7E, 0D6D, 093J, 0GMW, 03CY and 07A6
-(blueprint: lem-sfb-constant-realization-derived-scalar-extension).
-Proof: constant realization preserves flat modules by the local relation criterion
-and preserves colimits by its presheaf and sheafification construction. The flat-term
-K-flat preservation theorem therefore applies. The canonical representative maps are
-the transported left-derived counits of the ordinary scalar adjunctions, hence are
-invertible on K-flat complexes. Transposing the representative square reduces it to
-the ordinary comparison-unit identity and exact-functor localization naturality.
-Every derived object admits a flat-term K-flat representative, so this square makes
-the comparison invertible everywhere. The mate definition proves the unit identity.
-All complexes are unbounded and no finiteness or Noetherian assumption is used. -/
+Source: Stacks 0G7E, 0D6D, 093J, 0GMW, 03CY and 07A6.
+-/
 theorem constantRealizationDerivedScalarExtension :
     IsIso (comparisonTransformation.{u, v, wR, wS, dR, dS} J q) ∧
     (∀ (P : CochainComplex (ModuleCat.{max u v} R) ℤ),
@@ -961,7 +952,8 @@ theorem constantRealizationDerivedScalarExtension :
       comparison_representative_square J q P⟩
 
 /-- The canonical natural isomorphism, with the preceding representative normalization.
-Source: Stacks 0D6D (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
+Source: Stacks 0D6D.
+-/
 def comparisonIso :
     commutativeSiteDerivedConstantModuleFunctor.{u, v, wR, dR} J R ⋙
         derivedExtension.{u, v, dR, dS} J q ≅
@@ -976,10 +968,8 @@ section Tower
 variable {T : Type (max u v)} [CommRing T] (b : S →+* T)
 
 /-- Ordinary sheaf restriction composes by the identity on the underlying sections.
-Source: Stacks 03DA (blueprint: lem-sfb-constant-realization-derived-scalar-extension).
-Proof: the ring functor sends the composite ring map to the composite constant-sheaf
-map. Both restricted scalar actions and all section restrictions therefore coincide.
-The identity section maps are linear and natural; they give the unique such isomorphism. -/
+Source: Stacks 03DA.
+-/
 theorem restrictionComposition_existsUnique :
     ∃! e : restriction J b ⋙ restriction J q ≅ restriction J (b.comp q),
       ∀ (M : realizationModules J T) (V : Cᵒᵖ) (x : M.val.obj V),
@@ -1017,7 +1007,8 @@ theorem restrictionComposition_existsUnique :
     exact he' M V x
 
 /-- The normalized ordinary restriction composition isomorphism.
-Source: Stacks 03DA (blueprint: lem-sfb-constant-realization-derived-scalar-extension). -/
+Source: Stacks 03DA.
+-/
 def restrictionComposition : restriction J b ⋙ restriction J q ≅ restriction J (b.comp q) :=
   Classical.choose (restrictionComposition_existsUnique J q b)
 

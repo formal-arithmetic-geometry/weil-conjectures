@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 These are the existing ordered-coordinate definitions for scalar comparison, separated
 from the derived comparison so that the finite calculation can be used independently.
 Source: Stacks Project, Tags 0A0E, 0913, 0A07 and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -27,34 +26,28 @@ namespace CategoryTheory.FlatScalarKoszul
 
 variable {S : Type u} [SmallCategory S] {J : GrothendieckTopology S}
 
-/-- The existing category of module sheaves. Source: Stacks 0A0E
-(auxiliary; not a blueprint node). -/
+/-- The existing category of module sheaves. Source: Stacks 0A0E. -/
 abbrev Modules (O : Sheaf J CommRingCat.{u}) :=
   ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)
 
-/-- Strict inverse towers in the existing module category. Source: Stacks 0941
-(auxiliary; not a blueprint node). -/
+/-- Strict inverse towers in the existing module category. Source: Stacks 0941. -/
 abbrev Towers (O : Sheaf J CommRingCat.{u}) := ℕᵒᵖ ⥤ Modules O
 
-/-- The tensor bifunctor already used by the Koszul system. Source: Stacks 0A0E
-(auxiliary; not a blueprint node). -/
+/-- The tensor bifunctor already used by the Koszul system. Source: Stacks 0A0E. -/
 abbrev tensor (O : Sheaf J CommRingCat.{u}) :=
   @curriedTensor (Modules O) _ (SheafOfModules.monoidalCategory O)
 
-/-- The rank-one module sheaf. Source: Stacks 0A0E
-(auxiliary; not a blueprint node). -/
+/-- The rank-one module sheaf. Source: Stacks 0A0E. -/
 abbrev one (O : Sheaf J CommRingCat.{u}) :=
   SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)
 
-/-- The number of selected factors, as an integer degree. Source: Stacks 0913
-(auxiliary; not a blueprint node). -/
+/-- The number of selected factors, as an integer degree. Source: Stacks 0913. -/
 def degree : (r : ℕ) → (Fin r → Bool) → ℤ :=
   fun r ↦ Nat.rec (fun _ ↦ 0)
     (fun _ ih e ↦ (if e 0 then 1 else 0) + ih (fun i ↦ e i.succ)) r
 
 /-- The basis inclusion in degree zero or one of a positive Koszul factor.
-Source: Stacks 0913
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0913. -/
 def factorBasis (O : Sheaf J CommRingCat.{u})
     (a : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (e : Bool) :
     one O ⟶ (ringedKoszulFactor O a m).X (if e then 1 else 0) :=
@@ -63,8 +56,7 @@ def factorBasis (O : Sheaf J CommRingCat.{u})
   | true => (HomologicalComplex.doubleXIso₁ _ _ (by decide)).inv
 
 /-- The ordered tensor basis inclusion into the positive Koszul complex.
-Source: Stacks 0913; the empty tensor has its sole basis vector in degree zero.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0913. -/
 def positiveBasis (O : Sheaf J CommRingCat.{u}) : (r : ℕ) →
     (a : Fin r → (O.obj ⋙ forget CommRingCat).sections) → (m : ℕ) →
     (e : Fin r → Bool) → one O ⟶ (ringedKoszulDiagram O r a).obj m |>.X (degree r e) :=
@@ -84,8 +76,7 @@ def positiveBasis (O : Sheaf J CommRingCat.{u}) : (r : ℕ) →
           (if e 0 then 1 else 0) (degree r (fun i ↦ e i.succ)) (degree (r + 1) e) rfl) r
 
 /-- Evaluate the dual Koszul complex on a specified positive tensor basis vector.
-It is zero outside the vector's dual degree. Source: Stacks 0A0E and 0913
-(auxiliary; not a blueprint node). -/
+It is zero outside the vector's dual degree. Source: Stacks 0A0E and 0913. -/
 def dualCoordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (a : Fin r → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ)
     (e : Fin r → Bool) (q : ℤ) :
@@ -100,8 +91,7 @@ def dualCoordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
 
 /-- The actual exterior-coordinate projection of a tensor-tower term.
 The total complex uses coproducts, and this map is their universal descendent.
-Source: Stacks 0A0E; the projection sends c tensor e_S to c.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0A0E. -/
 def coordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (a : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O)
     (m : ℕ) (e : Fin r → Bool) (n : ℤ) :
@@ -120,13 +110,11 @@ def coordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
           (ρ_ (N.X p)).hom ≫ eqToHom (congrArg N.X hp)
       else 0)
 
-/-- Restriction of scalars, exactly Mathlib's ring-sheaf functor. Source: Stacks 0A07
-(auxiliary; not a blueprint node). -/
+/-- Restriction of scalars, exactly Mathlib's ring-sheaf functor. Source: Stacks 0A07. -/
 abbrev restriction {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
   SheafOfModules.restrictScalars.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
 
-/-- Ordinary inverse limit on complexes of strict towers. Source: Stacks 0941
-(auxiliary; not a blueprint node). -/
+/-- Ordinary inverse limit on complexes of strict towers. Source: Stacks 0941. -/
 abbrev limitComplex (O : Sheaf J CommRingCat.{u}) :=
   (lim : Towers O ⥤ Modules O).mapHomologicalComplex (.up ℤ)
 

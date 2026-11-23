@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import Mathlib.CategoryTheory.Adjunction.Limits
 /-! # Products of functors commuting with shifts
 
-Source: Stacks Project, Tag 011G; preservation of products by equivalences.
-(blueprint: lem-weil-product-comm-shift)
+Source: Stacks Project, Tag 011G.
 -/
 
 @[expose] public section

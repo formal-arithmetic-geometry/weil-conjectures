@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 Source: Stacks Project, algebra.tex, Tag 00CM (section-localization), and
 sites-modules.tex, Tags 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-unit-shift)
 -/
 
 @[expose] public noncomputable section
@@ -48,15 +47,7 @@ private theorem commShift_of_precomp
   exact (cancel_epi (F.map ((L.commShiftIso k).hom.app K))).1 h
 
 /-- An exact derived adjunction commutes with shifts when its normalized complex unit does.
-Source: Stacks Project, Derived Categories, Tags 05RU and 015F.
-(blueprint: lem-weil-pbc-scalar-localization-unit-shift).
-
-Proof: compose the unit precomposed with Q with the exact-derived factorization
-isomorphisms. Its components are Q applied to the complex unit, so its shift
-compatibility follows from that of the complex unit and Q. Cancel the factorization
-isomorphisms, which commute with shifts. Faithful precomposition by the localization
-Q then gives shift compatibility of the derived unit. The adjunction triangle
-identities give compatibility of the counit. -/
+Source: Stacks Project, Derived Categories, Tags 05RU and 015F. -/
 theorem scalarLocalization_unit_commShift
     {B B' : Type*} [Category B] [Category B'] [Abelian B] [Abelian B']
     [HasDerivedCategory.{w} B] [HasDerivedCategory.{w} B']

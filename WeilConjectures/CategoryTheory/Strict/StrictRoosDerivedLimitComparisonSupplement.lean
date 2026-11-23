@@ -66,8 +66,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 # The strict Roos comparison and its evaluation maps
 
 Source: Stacks Project, Derived Categories, Tags 07KC and 08TC, and Cohomology on Sites,
-Tags 0940 and 0941; the explicit comparison and evaluation square in the DAG proof
-(blueprint: lem-sf-strict-roos-derived-limit-comparison).
+Tags 0940 and 0941.
 
 The helper definitions spell out the products, transition endomorphism and signed cone
 already introduced by this statement. The comparison maps are uniquely specified by
@@ -87,28 +86,25 @@ namespace CategoryTheory
 variable {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]
 
 /-- The termwise product of the evaluated strict tower complexes. Index `n` means the
-paper's positive index `n+1`. Source: Stacks 07KC and 08TC
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+paper's positive index `n+1`. Source: Stacks 07KC and 08TC. -/
 def strictRoosProduct (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : CochainComplex A ℤ :=
   ∏ᶜ (fun n : ℕ ↦ X.asFunctor.obj (op n))
 
 /-- The existing transition endomorphism, applied in the category of complexes.
-Source: Stacks 08TC (blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+Source: Stacks 08TC. -/
 def strictRoosEndomorphism (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     strictRoosProduct X ⟶ strictRoosProduct X :=
   towerTransitionEndomorphism
     (fun n ↦ X.asFunctor.map (homOfLE (Nat.le_succ n)).op)
 
 /-- The actual shifted mapping cone of `1-s`. In the coordinate order `(y,x)`, its
- differential is `(-dy-(1-s)x,dx)`. Source: Stacks 07KC and 08TC
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+ differential is `(-dy-(1-s)x,dx)`. Source: Stacks 07KC and 08TC. -/
 def strictRoosComplex (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : CochainComplex A ℤ :=
   (CochainComplex.mappingCone (strictRoosEndomorphism X))⟦(-1 : ℤ)⟧
 
 /-- The degree `p+1` coordinates `(y,x)`, interchanging Mathlib's source-first cone
 summands. All transports are the canonical shift and cone isomorphisms.
-Source: Stacks 08TC and the displayed differential of the node
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+Source: Stacks 08TC. -/
 def strictRoosCoordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     (strictRoosComplex X).X (p + 1) ≅
       (strictRoosProduct X).X p ⊞ (strictRoosProduct X).X (p + 1) :=
@@ -119,8 +115,7 @@ def strictRoosCoordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     biprod.braiding _ _
 
 /-- The product map induced by a strict map of tower complexes, on both cone coordinates.
-Source: Stacks 07KC and the strict naturality square of the DAG proof
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+Source: Stacks 07KC. -/
 def strictRoosProductMap {X I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : X ⟶ I) :
     strictRoosProduct X ⟶ strictRoosProduct I :=
   Limits.Pi.map (fun n ↦
@@ -177,28 +172,7 @@ The sectionwise commutativity binder is the commutative-ring-sheaf hypothesis. T
 module universe contains both site universes, without equating them. The sheafification
 instances and the derived-category instance only supply the standard category structures.
 
-Source: Stacks 07KC, 08TC, 0940 and 0941; explicit arbitrary-K-injective extension and
-evaluation square in the node's proof
-(blueprint: lem-sf-strict-roos-derived-limit-comparison).
-
-Proof plan:
-1. Exact countable products preserve quasi-isomorphisms (Stacks 07KC). Naturality of
-   towerTransitionEndomorphism makes the two product maps commute with `1-s`; the
-   induced cone map is `ρ` with the displayed coordinates. Thus `ρ` is a quasi-isomorphism,
-   as also follows from the functor clause of lem-weil-strict-roos-comparison.
-   Evaluation is exact by lem-weil-tower-category-levelwise-abelian.
-2. The tower category is Grothendieck by lem-weil-pbc-small-module-diagrams-grothendieck.
-   Apply lem-pur-kinjective-degreewise-existence to resolve I by a K-injective J with
-   injective terms. The map I to J is a homotopy equivalence by
-   lem-weil-pbc-kinjective-hom-derived. The injective-term normalization of
-   lem-weil-strict-roos-comparison makes the inclusion lim J to Roos(J) a quasi-isomorphism.
-3. Termwise limit preserves the homotopies of this equivalence. The coordinate identity
-   Roos(v) η_I = η_J lim(v) and two-out-of-three on cohomology make the prescribed η_I
-   a quasi-isomorphism, without requiring I to have injective terms.
-4. lem-weil-pbc-ringed-strict-tower-homotopy-limit identifies lim I with total derived
-   inverse limit. Set θ = Roos(u) η_I inverse. The chain projections a_n satisfy
-   a_n^I η_I = pr_n and a_n^I Roos(u) = u_n a_n^X. Inverting the evaluated resolution
-   gives e_n θ = a_n^X, for the actual zigzag. -/
+Source: Stacks 07KC, 08TC, 0940 and 0941. -/
 theorem strictRoosDerivedLimitComparison
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

@@ -15,7 +15,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 /-! # Internal abelian module sheaves as sectionwise module sheaves
 
 Source: Stacks Project, Tag 00YV, algebraic structures in a ringed topos.
-(auxiliary; not a blueprint node).
 
 We reconstruct the section rings and their modules from the tensor multiplication
 and action. Presheaf module objects identify with sectionwise presheaf modules.
@@ -422,7 +421,7 @@ noncomputable def sectionModuleFunctor_counit
       inv_hom_id := SheafOfModules.hom_ext z.inv_hom_id }
 
 /-- The existing equivalence construction, retained as a named record.
-Source: Stacks 00YV (auxiliary; not a blueprint node).
+Source: Stacks 00YV.
 This is the original equivalence with no choice or construction changed. -/
 noncomputable def sectionModuleEquivalenceCore
     (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R] :
@@ -441,7 +440,6 @@ noncomputable def sectionModuleEquivalenceCore
 /-- Internal modules over a commutative monoid in abelian sheaves are sectionwise
 module sheaves over its reconstructed ring sheaf, with unchanged underlying sheaves.
 Source: Stacks Project, Tag 00YV, algebraic structures in a ringed topos.
-(auxiliary; not a blueprint node).
 The sectionwise functor is fully faithful by the tensor-sheafification adjunction.
 Every sectionwise module lifts by monoidal sheafification; the adjunction unit is
 invertible since its underlying presheaf already is a sheaf. -/

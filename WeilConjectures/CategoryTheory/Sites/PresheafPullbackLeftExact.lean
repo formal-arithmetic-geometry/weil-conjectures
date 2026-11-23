@@ -37,8 +37,7 @@ For `b : C ⥤ D` between small categories, `b_p := b.op.lan` on presheaves of a
    over the costructured arrows `(X, Y ⟶ b X)`;
 2. if `C` has finite limits and `b` preserves them, then every category
    `I_Y = StructuredArrow Y b` is cofiltered (`I_Yᵒᵖ` is filtered), `b_p` preserves finite
-   limits, and in particular `b_p (ker φ) ≅ ker (b_p φ)` for every morphism `φ`.
-(blueprint: `lem-weil-pbc-presheaf-pullback-left-exact`) -/
+   limits, and in particular `b_p (ker φ) ≅ ker (b_p φ)` for every morphism `φ`. -/
 theorem lan_op_addCommGrp_adjunction_and_preservesFiniteLimits :
     Nonempty ((b.op.lan : (Cᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ _) ⊣
         (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ AddCommGrpCat.{u}).obj b.op) ∧

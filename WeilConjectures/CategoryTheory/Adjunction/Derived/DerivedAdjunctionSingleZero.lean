@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 /-! # The degree-zero unit of a derived adjunction
 
 Source: Stacks Project, Tag 0GJU, degree-zero unit identification.
-(blueprint: lem-weil-pbc-derived-adjunction-single-zero).
 -/
 
 @[expose] public section
@@ -167,16 +166,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Degree-zero homology of the actual derived adjunction unit is the ordinary unit.
-Source: Stacks Project, Tag 0GJU, degree-zero identification; Tag 05TD, derived functors.
-(blueprint: lem-weil-pbc-derived-adjunction-single-zero).
-
-Proof: on a single complex the derived-unit factorization and naturality of the
-right-derived unit identify the map with the ordinary unit followed by the
-right-derived-functor single unit. This follows degreewise from the ordinary adjunction
-unit and the single-complex comparisons. Apply degree-zero homology. The proved
-single-unit homology comparison identifies the second map with toRightDerivedZero.
-This is invertible for a left exact right adjoint, giving the asserted target
-isomorphism. Naturality of single-complex homology gives the displayed equality. -/
+Source: Stacks Project, Tag 0GJU, degree-zero identification; Tag 05TD, derived functors. -/
 theorem derivedPlus_unit_homology_zero [PreservesFiniteLimits R] (M : C) :
     ∃ e : (DerivedCategory.Plus.homologyFunctor C 0).obj
           ((L.mapDerivedCategoryPlus ⋙ R.rightDerivedFunctorPlus).obj

@@ -14,18 +14,18 @@ public import WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange
 We continue `WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionUnit` and
 `WeilConjectures.CategoryTheory.Monoidal.KernelAdjunctionBaseChange`, for an object `T = F τ`
 pulled back from `C` (for `q : ℙ¹_S ⟶ S`, `τ = Λ_S(1)[2]`), and prove the abstract form of
-blueprint `proposition-adjunction-projective-line` (G5)–(G9): the unit given by a kernel and the
+the adjunction for the projective line: the unit given by a kernel and the
 trace counit are the unit and counit of an adjunction `G ⊣ T ⊗ F (-)` as soon as the two *integrals
 of the diagonal class* are `1` (`CategoryTheory.Adjunction.kernelAdjunction`).
 
-* The normalization at `T` (the second triangle identity, (G9)) follows from the integral along
+* The normalization at `T` (the second triangle identity) follows from the integral along
   `a` of the class `𝟙 ⟶ A' (A T) ≅ A' (B T)`, against the trace `t_a : A' B T ≅ F G T ⟶ 𝟙`
   given by base change of `t` (`CategoryTheory.Adjunction.kernelAdjunctionUnit_app_comp_trace`).
   Here the factor `T` coming from the coefficient is exchanged with the factor `T` carrying the
   class: this uses that the braiding of `A T ⊗ A T` is the identity (for `Λ(1)[2]` the shift is
   even and the Tate twist is a line),
   `CategoryTheory.Adjunction.monoidalProjection_comp_map_whiskerLeft`.
-* The normalization at `𝟙` (the first triangle identity, (G8)) follows from the integral along
+* The normalization at `𝟙` (the first triangle identity) follows from the integral along
   `b` (`CategoryTheory.Adjunction.map_kernelAdjunctionUnit_app_comp_traceCounit`).
 
 ## Main definitions
@@ -104,8 +104,7 @@ lemma kernelAdjunctionUnit_app_comp_trace (τ : C)
 
 variable {B' : E ⥤ D} (adjB : B ⊣ B')
 
-/-- **The adjunction given by a kernel** (blueprint `proposition-adjunction-projective-line`,
-(G5)–(G9)).
+/-- **The adjunction given by a kernel.**
 
 Setting: `F ⊣ G` (`q^* ⊣ q_*` for `q : P ⟶ S`) with `F` strong monoidal; strong monoidal
 `A, B : D ⥤ E` (`a^*, b^*` for the projections of `W = P ×_S P`) with right adjoints `A'`, `B'`,

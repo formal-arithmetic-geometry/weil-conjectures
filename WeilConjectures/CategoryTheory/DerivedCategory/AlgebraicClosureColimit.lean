@@ -15,10 +15,10 @@ public import WeilConjectures.CategoryTheory.RingObjects.EllAdic
 # `Dᵇ_fd(ℚ̄_ℓ)` as the 2-colimit of the `Dᵇ_fd(E)`
 
 Let `E` run over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
-(`PadicAlgCl.FiniteIntermediateField ℓ`). Blueprint `lemma-perfect-complexes-geometric-point`
-defines `Dᵇ_fd(ℚ̄_ℓ) := 2-colim_E Dᵇ_fd(E)`, with transition functors `- ⊗_E F`. This file shows
-that the bounded derived category of finite-dimensional `ℚ̄_ℓ`-vector spaces, with the extensions of
-scalars `- ⊗_E ℚ̄_ℓ`, *is* this filtered 2-colimit (`PadicAlgCl.fdCocone_isFilteredTwoColimit`,
+(`PadicAlgCl.FiniteIntermediateField ℓ`). We define `Dᵇ_fd(ℚ̄_ℓ) := 2-colim_E Dᵇ_fd(E)`, with
+transition functors `- ⊗_E F`. This file shows that the bounded derived category of
+finite-dimensional `ℚ̄_ℓ`-vector spaces, with the extensions of scalars `- ⊗_E ℚ̄_ℓ`, *is* this
+filtered 2-colimit (`PadicAlgCl.fdCocone_isFilteredTwoColimit`,
 in the sense of `CategoryTheory.CategoryCocone.IsFilteredTwoColimit`):
 
 * morphisms descend to a finite stage: for `X`, `Y` in `Dᵇ_fd(E)`,
@@ -305,7 +305,7 @@ theorem fdCocone_essSurjObj : (fdCocone.{u} ℓ).EssSurjObj := by
   obtain ⟨E, x, ⟨e⟩⟩ := h
   exact ⟨E, x, ⟨(boundedFiniteCohomology _).isoMk e⟩⟩
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point` (the target `Dᵇ_fd(ℚ̄_ℓ)`): the bounded
+/-- The bounded
 derived category of finite-dimensional `ℚ̄_ℓ`-vector spaces, with the extensions of scalars
 `- ⊗_E ℚ̄_ℓ : Dᵇ_fd(E) ⥤ Dᵇ_fd(ℚ̄_ℓ)`, is the filtered 2-colimit
 `Dᵇ_fd(ℚ̄_ℓ) = 2-colim_E Dᵇ_fd(E)` over the finite subextensions `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, with the

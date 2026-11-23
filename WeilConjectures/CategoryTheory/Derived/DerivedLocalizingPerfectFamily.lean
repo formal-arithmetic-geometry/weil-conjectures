@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.Perfect.PerfectFamilyLocalizingHull
 /-! # Perfect families in set-generated derived subcategories
 
 Source: Neeman, Theorem 0.2; Krause, Localization theory, Theorem 7.2.1.
-(blueprint: lem-sfb-derived-localizing-perfect-family)
 -/
 
 @[expose] public section
@@ -35,30 +34,7 @@ attribute [local instance] derived_hasCoproducts
 /-- A set-generated localizing subcategory of a Grothendieck derived category admits
 small, shift-closed perfect generators.
 
-Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2;
-Krause, *Localization theory for triangulated categories*, Theorem 7.2.1 and
-Section 5.1, conditions (PG1) and (PG2).
-(blueprint: lem-sfb-derived-localizing-perfect-family)
-
-Proof: choose an ambient essentially small replete triangulated perfect class S
-containing P, with bounded-subcoproduct factorization. Put B = S intersect Q.
-This class is replete, triangulated, essentially small, and contains P. A map
-from S into a coproduct of B objects factors through a subcoproduct belonging
-to S; that subcoproduct also belongs to Q by coproduct closure, hence to B.
-Apply perfectFamily_of_small_hull. Its proof shows that the objects X for which
-all maps from S to X factor through B form a localizing class. The extension
-check uses two cone constructions and corrects the lift by a map through the
-first vertex; the coproduct check uses evaluation covers, ambient perfectness,
-and small factorization after flattening the covers. This class contains P,
-so minimality makes it contain Q. Componentwise surjectivity on B consequently
-implies it on S for maps in Q. Ambient perfectness then gives surjectivity on B
-after coproducts. A small skeleton of B supplies J, its closure under shifts
-supplies the displayed isomorphisms, and P <= B supplies the representatives.
-The inclusion of Q is fully faithful and preserves the coproducts, so its
-comparison isomorphisms transport the surjectivity to Q.FullSubcategory.
-
-References: https://ems.press/journals/dm/articles/8965042 (Theorem 0.2);
-https://webhomes.maths.ed.ac.uk/~v1ranick/papers/krause2.pdf, Theorem 7.2.1.
+Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2.
 -/
 theorem setGeneratedDerived_exists_perfectFamily
     {A : Type u} [Category.{v} A] [Abelian A]
