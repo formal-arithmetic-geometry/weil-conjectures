@@ -26,7 +26,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- The constant-section map on the recorded equivalent sites. This is sheafification of
 `a ↦` the constant section `a`, along the transported inclusion of etale objects.
 Source: Stacks Tags 099R and 00WX; blueprint constructible comparison, proof step 1
-(blueprint: sk-thm-pe-constructible-comparison). -/
+(blueprint: theorem-comparison-constructible-sheaves). -/
 def constructibleComparisonRingMap (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     siteModuleRings (ConstantCompletion.constant
@@ -55,7 +55,7 @@ def constructibleComparisonRingMap (X : Scheme.{u})
 The ring map is the canonical constant-section map, so this is inverse image with the
 canonical identification of the constant coefficient rings. No arbitrary map is chosen.
 Source: Stacks Tags 00WX and 03D2; blueprint constructible comparison, proof steps 1 and 3
-(blueprint: sk-thm-pe-constructible-comparison). -/
+(blueprint: theorem-comparison-constructible-sheaves). -/
 abbrev constructibleComparisonPullback (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     ConstantCompletion.Mod (ConstantCompletion.constant
@@ -69,7 +69,7 @@ abbrev constructibleComparisonPullback (X : Scheme.{u})
 supplied by Mathlib's theorem for the existing module pullback adjunction, explicitly
 rather than by an expensive instance search. No mathematical assertion is postponed here.
 Source: Stacks Tag 09AL; blueprint constructible comparison, proof step 4
-(blueprint: sk-thm-pe-constructible-comparison). -/
+(blueprint: theorem-comparison-constructible-sheaves). -/
 def constructibleComparisonComplexPullback (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     ConstantCompletion.Cx (ConstantCompletion.constant

@@ -94,11 +94,7 @@ variable {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Categor
 `E : D' ⥤ D` be exact, `F : C ⥤ D` and `F' : C' ⥤ D'` additive and `α : P ⋙ F ≅ F' ⋙ E`.
 If `F` sends every quasi-isomorphism `P(I) ⟶ J` from the image of a K-injective complex `I` to
 a K-injective complex `J` to a quasi-isomorphism, then there is a unique isomorphism
-`D(P) ⋙ RF ≅ RF' ⋙ D(E)` compatible with the units of `RF`, `RF'` and with `α`.
-
-It is the inverse of the pullback map `R(F' ⋙ E) ⟶ D(P) ⋙ RF` along `α⁻¹`, composed with
-`RF' ⋙ D(E) ≅ R(F' ⋙ E)`; it is invertible since on a K-injective complex `I` it is
-`F'(I) ⟶ F(P I) ⟶ F(J)` for a K-injective resolution `P(I) ⟶ J`. -/
+`D(P) ⋙ RF ≅ RF' ⋙ D(E)` compatible with the units of `RF`, `RF'` and with `α`. -/
 theorem existsUnique_rightDerivedFunctor_comparison_of_acyclic
     (P : C' ⥤ C) [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
     (F : C ⥤ D) (F' : C' ⥤ D') (E : D' ⥤ D) [F.Additive] [F'.Additive] [E.Additive]

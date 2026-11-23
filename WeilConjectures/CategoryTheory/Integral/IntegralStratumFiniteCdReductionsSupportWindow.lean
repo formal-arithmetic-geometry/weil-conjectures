@@ -18,9 +18,6 @@ import Mathlib.CategoryTheory.Comma.Arrow
 
 /-!
 # Supported cohomology of a finite integral reduction
-
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the first two finite-reduction steps.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +37,7 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
-/-- The continuous coefficient map, with both rings retained for dependent transport.
-Source: actual quotient projection in the item node. -/
+/-- The continuous coefficient map, with both rings retained for dependent transport. -/
 private def coefficientArrow (A B : Type u) [CommRing A] [CommRing B]
     (tA : TopologicalSpace A) (tB : TopologicalSpace B)
     (hA : @IsTopologicalRing A tA _) (hB : @IsTopologicalRing B tB _)
@@ -69,8 +65,7 @@ private theorem coefficientArrow_eq (A B : Type u) [CommRing A] [CommRing B]
   subst tB'
   rfl
 
-/-- The two norm presentations give the same actual positive quotient arrow.
-Source: the spectral-norm coefficient comparison and the finite quotient calculation. -/
+/-- The two norm presentations give the same actual positive quotient arrow. -/
 private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
     Arrow.mk (Mon.ofHom (DerivedNakayama.reductionRing l E (n + 1))) =
@@ -94,28 +89,11 @@ private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
   exact coefficientArrow_eq _ _ _ _ _ _ _ _ _ _ _ _ _ hti hd
 
 -- The generalized coefficient arrow needs the exact module-derived functor instances.
-set_option maxHeartbeats 1600000 in
 -- Generalizing the coefficient arrow requires the module-derived category instances.
 /-- The open restriction of supported sections of a finite reduction has cohomology
 in `[-1,c+1]`, and its underlying cohomology sheaves are classical local torsion.
 
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-first two finite-reduction steps; Stacks Tags 0A45, 09B1 and 09AA.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions-support-window).
-
-Proof: use the length-one uniformizer resolution to identify the scalar restriction
-of the positive quotient reduction with the cone of the uniformizer power on N[0].
-Its cohomology is the kernel in degree -1 and the cokernel in degree 0. Positive
-reduction constructibility and finite-coefficient comparison show these sheaves
-are classical, even when N has torsion. Identify the continuous integral and quotient
-coefficient presentations with those of the supported-window theorem, transporting
-the reduction map and restriction functor as well. The unit assumption on ell gives
-invertibility in every residue field. Apply finite_quotient_supported_classical_window
-with a=-1, b=0 and exponent n+1. It gives the claimed bound and classical local torsion
-before restriction to S. Exact open inverse image commutes with homology; the
-etale/pro-etale inverse-image comparison preserves classicality, and inverse image
-preserves the filtered union of prime-power kernels. This gives both conclusions
-on S. Zero N and empty strata give zero complexes, so require no extra hypotheses. -/
+Source: Stacks Tags 0A45, 09B1 and 09AA. -/
 theorem integralStratumFiniteCdReductions_support_window
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

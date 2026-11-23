@@ -12,9 +12,8 @@ import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubc
 /-!
 # Bounded cohomology in a weak Serre class is thick
 
-Source: Stacks Project, Tag 06UQ, `lemma-cohomology-in-serre-subcategory`, including
-bounded versions; Homology, Tag 0754, `lemma-characterize-weak-serre-subcategory`
-(blueprint: lem-sfb-weak-serre-bounded-thick).
+Source: Stacks Project, Tag 06UQ, including
+bounded versions; Homology, Tag 0754.
 -/
 
 @[expose] public section
@@ -29,32 +28,8 @@ namespace CategoryTheory
 For each ambient retract, its cohomology inclusion is the kernel inclusion of one minus
 its cohomological idempotent, and every interval bound passes to the retract unchanged.
 
-Source: Stacks Project, Tag 06UQ, `lemma-cohomology-in-serre-subcategory` (bounded and
-saturated versions), and Tag 0754, `lemma-characterize-weak-serre-subcategory`.
-(blueprint: lem-sfb-weak-serre-bounded-thick)
-
-Proof:
-1. By def-weil-pbc-bounded-derived-subcategories, boundedness is finite cohomological
-   support, equivalently vanishing outside an integer interval. The empty support is
-   bounded by [0, 0]. Thus the object property is homologyProperty P intersected with
-   the bounded property of the standard t-structure.
-2. Apply lem-sbc-cohomology-in-weak-serre-subcategory and its bounded-intersection
-   clause. This gives zero, every integer shift and triangle closure. Both factors are
-   closed under isomorphisms. Rotation gives all three two-out-of-three cases, with
-   inherited triangles as in def-weil-triangulated-subcategory.
-3. Given i : L → K and r : K → L with i ≫ r = 1, fix n and put I = H^n(i), R = H^n(r).
-   Functoriality (def-weil-abstract-derived-category) gives I ≫ R = 1. Set q = 1 - R ≫ I.
-   Bilinearity (def-weil-preadditive-category) gives I ≫ q = 0. If u ≫ q = 0, then
-   u = u ≫ R ≫ I, so u factors through I by u ≫ R. This factorization is unique since
-   v ≫ I = u implies v = v ≫ I ≫ R = u ≫ R. This is the kernel universal property
-   in the abelian category def-sp-abelian and gives the displayed isomorphism.
-4. If K belongs to the property, H^n(K) belongs to P. Kernel closure applied to the
-   endomorphism q, followed by isomorphism closure, puts H^n(L) in P. If H^n(K) is zero,
-   the equality I ≫ R = 1 forces the identity of H^n(L) to be zero; thus H^n(L) is zero.
-   In particular, every interval bound for K also bounds L, giving boundedness of L.
-5. These give triangulated and ambient retract closure, hence thickness as in
-   pur9-def-thick. Step 3 gives the kernel identification and step 4 the same bounds.
--/
+Source: Stacks Project, Tag 06UQ (bounded and
+saturated versions), and Tag 0754. -/
 lemma weakSerre_bounded_homology_thick
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (P : ObjectProperty A) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]

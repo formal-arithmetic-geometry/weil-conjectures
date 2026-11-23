@@ -216,7 +216,7 @@ Source: Stacks Project, Algebra, Tags 00M0 and 00M3; More on Algebra, proof of
 Tag 0912. The direct proof below uses Algebra 065P and Homology 0111.
 (blueprint: lem-weil-pbc-tor-long-exact-first-variable)
 
-1. By `lem-weil-pbc-free-resolution-ses-split`, choose free resolutions `F`, `F'`,
+1. By `theorem-finite-etale-covers-proper-henselian--2`, choose free resolutions `F`, `F'`,
    `F''` of `Q`, `Q'`, `Q''`, with augmentation-compatible lifts `α` of `u` and `β`
    of `v`. Choose degreewise splittings `π`, `s` with `βα = 0`, `πα = 1`, `βs = 1`,
    and `απ + sβ = 1`. Fix these choices independently of `N`.

@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceTwistedSplit
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceSingleFaithful
 
 /-! # Degree of the whole-system normalized completed Chern adjunct
-
-Source: the diagonal-tower trace proof, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -25,20 +23,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.RationalP1
 
-/-- A whole-system normalized completed Chern adjunct has degree one.
-
-Source: latest blueprint, diagonal-tower trace proof, paragraph (1)
-(blueprint: lem-sfb-rational-p1-completed-chern-degree).
-
-Proof: The strict twisted-splitting component formula identifies the Chern
-adjunct with the second injection into the invertible twisted splitting. The
-trace is the inverse splitting followed by the second projection. Cancel the
-splitting to obtain degree one. Apply restriction to the entire equation,
-using the fixed varying-coefficient comparison. The completed Chern normalization
-and the defining completed trace square turn this into the identity after
-restriction and the unit-limit comparison. That comparison is invertible and
-restriction is faithful on the completed unit; cancelling them proves the
-completed degree equation. -/
+/-- A whole-system normalized completed Chern adjunct has degree one. -/
 theorem completed_chern_degree
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

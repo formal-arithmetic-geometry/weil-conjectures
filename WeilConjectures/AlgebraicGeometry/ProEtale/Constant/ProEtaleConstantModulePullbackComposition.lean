@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Composition of canonical constant-coefficient module restrictions
 
-Source: Stacks Project, Modules on Sites, Tag 03D8, lemma-push-pull-composition-modules
-(blueprint: lem-pur-proetale-constant-module-pullback-composition).
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D8
 -/
 
 @[expose] public section
@@ -119,19 +120,7 @@ private noncomputable def pullbackComp {T Y X : Scheme.{u}} (a : Y ⟶ T) (b : X
         proEtaleConstantModulePullbackFunctor b A :=
   ((constAdj (b ≫ a) A).ofNatIsoRight (directComp a b A).symm).leftAdjointUniq
     ((constAdj a A).comp (constAdj b A))
-/-- The actual canonical constant-coefficient pullbacks compose up to isomorphism.
-Source: Stacks Project, Modules on Sites, Tag 03D8, lemma-push-pull-composition-modules
-(blueprint: lem-pur-proetale-constant-module-pullback-composition).
-
-Proof: the constant-sheaf unit followed by the defining coefficient direct-image
-map is the constant-sheaf unit on the base-changed object. Naturality of that unit
-along the cartesian pasting isomorphism proves compatibility with composition.
-After forgetting commutativity these are the scalar maps for the actual module
-direct images. The module pushforward composition and natural-isomorphism APIs
-therefore give their composition isomorphism. The existing canonical module
-adjunction agrees with the constant-module direct image because the coefficient
-map is the transpose of its defining direct-image map. Uniqueness of left adjoints
-now gives the displayed natural isomorphism, for arbitrary schemes and rings. -/
+/-- The actual canonical constant-coefficient pullbacks compose up to isomorphism. -/
 theorem proEtaleConstantModulePullback_comp {T Y X : Scheme.{u}}
     (a : Y ⟶ T) (b : X ⟶ Y) (A : Type u) [CommRing A] :
     Nonempty (proEtaleConstantModulePullbackFunctor (b ≫ a) A ≅

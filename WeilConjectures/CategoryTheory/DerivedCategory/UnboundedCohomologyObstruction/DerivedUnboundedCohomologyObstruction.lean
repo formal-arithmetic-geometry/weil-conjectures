@@ -28,9 +28,6 @@ public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 /-!
 # Unbounded cohomology obstructs right adjoints
 
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-smooth-base-change/
-sec-sbc-uniform/sk-rem-sbc-scope/sk-rem-sf-fullcd-scope.md,
-consequences (ii) and (iii) (blueprint: lem-sf-derived-unbounded-cohomology-obstruction).
 The natural number `n` indexes the strictly positive integer `n + 1`.
 -/
 
@@ -50,9 +47,7 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{dA} A]
   {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{dB} B]
   {R : Type r} [CommRing R] [HasDerivedCategory.{dM} (ModuleCat.{max r m} R)]
 
-/-- The family `K_n = F[0][n]`, with `n ≥ 1` indexed by `ℕ`.
-Source: scope remark, consequence (ii)
-(blueprint: lem-sf-derived-unbounded-cohomology-obstruction). -/
+/-- The family `K_n = F[0][n]`, with `n ≥ 1` indexed by `ℕ`. -/
 abbrev shifts (F : A) (n : ℕ) : DerivedCategory A :=
   ((DerivedCategory.singleFunctor A 0).obj F)⟦((n + 1 : ℕ) : ℤ)⟧
 
@@ -60,22 +55,16 @@ variable (e : B ⥤ ModuleCat.{max r m} R) [e.Additive]
   [PreservesFiniteLimits e] [PreservesFiniteColimits e]
   (T : DerivedCategory A ⥤ DerivedCategory B)
 
-/-- Evaluation of degree-zero cohomology after the exact termwise functor `e`.
-Source: scope remark, consequence (ii)
-(blueprint: lem-sf-derived-unbounded-cohomology-obstruction). -/
+/-- Evaluation of degree-zero cohomology after the exact termwise functor `e`. -/
 abbrev evaluation : DerivedCategory B ⥤ ModuleCat.{max r m} R :=
   e.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor (ModuleCat.{max r m} R) 0
 
-/-- The modules `H^(n+1)(eT(F[0]))`.
-Source: scope remark, consequence (ii)
-(blueprint: lem-sf-derived-unbounded-cohomology-obstruction). -/
+/-- The modules `H^(n+1)(eT(F[0]))`. -/
 abbrev cohomology (F : A) (n : ℕ) : ModuleCat.{max r m} R :=
   (DerivedCategory.homologyFunctor (ModuleCat.{max r m} R) ((n + 1 : ℕ) : ℤ)).obj
     (e.mapDerivedCategory.obj (T.obj ((DerivedCategory.singleFunctor A 0).obj F)))
 
-/-- The canonical shift identification `H⁰(eT(K_n)) ≅ H^(n+1)(eT(F[0]))`.
-Source: scope remark, consequence (ii), exact functor and shift compatibility
-(blueprint: lem-sf-derived-unbounded-cohomology-obstruction). -/
+/-- The canonical shift identification `H⁰(eT(K_n)) ≅ H^(n+1)(eT(F[0]))`. -/
 def shiftIdentification [T.CommShift ℤ] (F : A) (n : ℕ) :
     (evaluation e).obj (T.obj (shifts F n)) ≅ cohomology e T F n :=
   (DerivedCategory.homologyFunctor (ModuleCat.{max r m} R) 0).mapIso
@@ -88,9 +77,7 @@ def shiftIdentification [T.CommShift ℤ] (F : A) (n : ℕ) :
 /-- The canonical map `Hom(T(K_n), v(J)[0]) → Hom_R(H^(n+1)(eT(F[0])), J)`: apply `e`
 termwise and degree-zero cohomology, identify `H⁰(eT(K_n))` by `shiftIdentification` and
 `H⁰(e(v(J))[0])` with `e(v(J))`, then compose with the counit `e(v(J)) → J`. This is the
-derived adjunction isomorphism followed by the injective-target `H⁰` bijection.
-Source: scope remark, consequence (iii), injective-cogenerator Hom calculation
-(blueprint: lem-sf-derived-unbounded-cohomology-obstruction). -/
+derived adjunction isomorphism followed by the injective-target `H⁰` bijection. -/
 def injectiveHomMap [T.CommShift ℤ] {v : ModuleCat.{max r m} R ⥤ B} (a : e ⊣ v)
     (F : A) (n : ℕ) (J : ModuleCat.{max r m} R) :
     (T.obj (shifts F n) ⟶ (DerivedCategory.singleFunctor B 0).obj (v.obj J)) →
@@ -192,27 +179,7 @@ private theorem injectiveHomMap_bijective [T.CommShift ℤ]
   rw [← hb]
   exact b'.bijective
 
-/-- Unbounded positive cohomology prevents coproduct preservation and either right adjoint.
-
-Source: scope remark, consequences (ii) and (iii)
-(blueprint: lem-sf-derived-unbounded-cohomology-obstruction).
-
-Proof: In each degree the family of shifted single complexes has at most one nonzero term,
-so its direct sum and product coincide. The Grothendieck derived coproduct theorem and
-exact-product localization identify them in the derived category. Exactness and shift
-compatibility give `shiftIdentification`. Applying degree-zero evaluated cohomology to
-the coproduct comparison gives the canonical inclusion of the direct sum into the product:
-the two characterizations below check this on every summand and coordinate. Choose a
-nonzero element in each cohomology module; the resulting infinite-support tuple proves
-that inclusion is not surjective. Thus `T` cannot preserve countable coproducts, and cannot
-be a left adjoint. For any injective cogenerator `J`, its image under the exact right
-adjoint `v` is injective. Computing derived Hom into its injective single complex, then
-applying the ordinary adjunction and the exact-functor homology comparison, shows that the
-canonical map `injectiveHomMap` to module Hom into `J` is bijective.
-They are nonzero by cogeneration. If the restriction to `D⁺` had a right adjoint `G`, these
-same groups would equal `Hom(F[n+1],G(v(J)[0]))`; bounded-below t-structure orthogonality
-makes these vanish for all sufficiently large `n`, a contradiction.
--/
+/-- Unbounded positive cohomology prevents coproduct preservation and either right adjoint. -/
 theorem obstruction
     [IsGrothendieckAbelian.{vA} A] [IsGrothendieckAbelian.{vB} B]
     [HasExactLimitsOfShape (Discrete ℕ) A] [HasExactLimitsOfShape (Discrete ℕ) B]

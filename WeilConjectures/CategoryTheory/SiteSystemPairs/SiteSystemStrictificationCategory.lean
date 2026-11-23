@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Equivalence
 /-! # The pair-category construction for coherent systems
 
 Source: Stacks Project, Categories, Tag 004A, applied fibrewise.
-(blueprint: lem-weil-pbc-site-system-strictification-category)
 -/
 
 @[expose] public section

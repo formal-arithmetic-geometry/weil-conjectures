@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.TruncationAbutmentCocone
 import WeilConjectures.CategoryTheory.AbutmentImageFiltration
 import WeilConjectures.CategoryTheory.AbutmentFinitePageComparison
 
-/-! Canonical truncation-couple proof step. -/
+/-! Canonical abutment of the truncation couple. -/
 
 @[expose] public section
 
@@ -89,28 +89,7 @@ private noncomputable def quotientOfLECongr
   exact Iso.refl _
 
 /-- Canonical abutment maps and finite image filtration of a truncation couple.
-Source: Stacks Tags 011R, 011T, 012F, 012U (3), 05TC (2);
-blueprint steps 5--7 of thm-sp-truncation-e2
-(blueprint: lem-sp-truncation-canonical-abutment).
-
-Proof: Include each iterated D image recursively in D. Sharp stabilization identifies
-its stable cycles and boundaries with their intersection and union, defining L.
-Take H^n=H^n(RF K), and define j by the bridge followed by RF of the truncation
-inclusion. Functoriality and the transition-inclusion equation identify j with the
-alpha composites. The inclusion tau<=n K -> K is an isomorphism after degree-n
-derived cohomology by 05TC (2), so c is an isomorphism. Filter D(0,n) by incoming
-alpha images and transport this filtration along c. Negative initial E degrees
-make alpha an isomorphism to the left of p=0, giving fullness for p<=0; lower D
-vanishing gives zero for p>=n-a+1. Thus the filtration is finite, exhaustive,
-separated, and its quotient tower is eventually H^n, proving the inverse-limit
-property. At r=max(p+3,q-a+2), lambda=alpha^(-u) identifies F^p with D_r(u,v)
-and F^(p+1) with its incoming alpha image. The next D is zero. Exactness therefore
-makes g_r induce the quotient isomorphism psi, with the displayed commuting
-equation. Transport across c on graded objects and the stabilized quotient map
-to obtain Theta. For p<0 both graded objects and the infinite page vanish.
-The alpha diagonal colimit is D(0,n); transport its cocone along c to H^n.
-The cocone equation follows from the composite-inclusion identity. Its canonical
-comparison with the stable page is exactly Theta, so these maps give convergence. -/
+Source: Stacks Tags 011R, 011T, 012F, 012U (3), 05TC (2). -/
 theorem truncation_canonical_abutment
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]

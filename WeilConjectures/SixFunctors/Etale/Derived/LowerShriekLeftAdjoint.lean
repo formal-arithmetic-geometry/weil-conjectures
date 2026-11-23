@@ -16,14 +16,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 
 For a finite coefficient ring `Λ` and a compactification `X ⟶[i] Z ⟶[g] Y` of `f : X ⟶ Y`, the
 derived lower shriek `Rf_! = D(i_!) ⋙ Rg_*` on the unbounded derived categories of étale sheaves
-of `Λ`-modules is a left adjoint (blueprint `thm-amb-etale-exceptional-adjoint`). The right
-adjoint is the exceptional inverse image `Rf^!` of
+of `Λ`-modules is a left adjoint (blueprint `theorem-existence-exceptional-inverse-image--1`). The
+right adjoint is the exceptional inverse image `Rf^!` of
 `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek`, where the result is registered as the
 instance `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`.
 
 The proof follows the blueprint:
 
-* the proper direct image `Rg_*` preserves coproducts (blueprint `lem-amb-proper-coproducts`):
+* the proper direct image `Rg_*` preserves coproducts (blueprint
+`corollary-proper-direct-image-finite-coefficients-localizing`):
   the higher direct images `R^q g_*` commute with direct sums, and at each geometric point of
   `Y` they vanish above twice the dimension of the geometric fibre
   (`AlgebraicGeometry.Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper`), so
@@ -45,9 +46,9 @@ induced by the adjunction `D(g^*) ⊣ Rg_*` is rebuilt locally.
   commutes with coproducts if `F` does, `F` sends exact complexes of `F`-acyclic objects to exact
   complexes, and coproducts of `F`-acyclic objects are `F`-acyclic.
 - `AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`
-  (`lem-amb-proper-coproducts`).
+  (`corollary-proper-direct-image-finite-coefficients-localizing`).
 - `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification`
-  (`thm-amb-etale-exceptional-adjoint`).
+  (`theorem-existence-exceptional-inverse-image--1`).
 -/
 
 @[expose] public section
@@ -175,7 +176,8 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `lem-amb-proper-coproducts`: proper direct image preserves arbitrary coproducts.
+/-- Blueprint `corollary-proper-direct-image-finite-coefficients-localizing`: proper direct image
+preserves arbitrary coproducts.
 
 For a coefficient ring `Λ` which is torsion as an additive group and a proper morphism
 `g : X ⟶ Y`, the derived pushforward `Rg_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` on the unbounded derived
@@ -195,7 +197,8 @@ theorem preservesColimitsOfShape_rightDerivedLowerStar_of_isProper (hΛ : IsAddT
     (fun y ↦ Etale.upperStar (ModuleCat.{u + 1} Λ) (Y.algClosurePoint y))
     (Etale.isZero_of_forall_isZero_upperStar_algClosurePoint Λ) d hd hM'
 
-/-- Blueprint `thm-amb-etale-exceptional-adjoint`: the ordinary ambient exceptional adjoint.
+/-- Blueprint `theorem-existence-exceptional-inverse-image--1`: the ordinary ambient exceptional
+adjoint.
 
 For a finite coefficient ring `Λ` and a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, the
 derived lower shriek `Rf_! = D(i_!) ⋙ Rg_*` on the unbounded derived categories of étale sheaves

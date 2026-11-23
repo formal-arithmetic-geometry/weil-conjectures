@@ -23,7 +23,7 @@ objects `Mod_{Λ_X}` over `Λ_X = p_X^* Λ`:
   `ProEtale.CondensedRing.jointlyReflectIsomorphisms_upperStar_of_isCompl`), from the same
   statement for abelian sheaves
   (`ProEtale.isZero_of_isZero_upperStar_of_isCompl_addCommGrp`, blueprint
-  `lem-exc-open-closed-detection`);
+  `proposition-extension-zero-restriction-closed-subscheme`);
 * the pullback of an extension by zero `j_! M` along a morphism `g` whose range misses the
   range of `j` vanishes
   (`ProEtale.CondensedRing.isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint`).
@@ -50,9 +50,9 @@ namespace ProEtale
 
 variable {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [QuasiCompact j]
 
-/-- Blueprint `lem-exc-open-closed-detection`, for abelian sheaves: let `i : Z ⟶ X` be a closed
-immersion with quasi-compact open complement `j : U ⟶ X`. A pro-étale abelian sheaf `F` on `X`
-with `i^* F = 0` and `j^* F = 0` is zero. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, for abelian sheaves: let
+`i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j : U ⟶ X`. A pro-étale
+abelian sheaf `F` on `X` with `i^* F = 0` and `j^* F = 0` is zero. -/
 theorem isZero_of_isZero_upperStar_of_isCompl_addCommGrp
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (F : Sheaf (ProEt.topology X) Ab.{u + 1})
@@ -107,9 +107,9 @@ lemma isZero_upperStar_obj_openImmersionLowerShriek_of_disjoint {U W X : Scheme.
 
 variable {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [QuasiCompact j]
 
-/-- Blueprint `lem-exc-open-closed-detection`, for module objects over `Λ`: let `i : Z ⟶ X` be
-a closed immersion with quasi-compact open complement `j : U ⟶ X`. A module object `M` over
-`Λ_X` with `i^* M = 0` and `j^* M = 0` is zero. -/
+/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, for module objects over
+`Λ`: let `i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j : U ⟶ X`. A module
+object `M` over `Λ_X` with `i^* M = 0` and `j^* M = 0` is zero. -/
 theorem isZero_of_isZero_upperStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))

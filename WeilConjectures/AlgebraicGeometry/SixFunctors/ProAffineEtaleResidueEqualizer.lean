@@ -10,7 +10,6 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! Residue-field equality loci for maps into a pro-affine etale object.
-(blueprint: lem-sfb-pro-affine-etale-residue-equalizer)
 -/
 
 @[expose] public section
@@ -68,24 +67,7 @@ private theorem etale_residue_equalizer
 
 /-- The equality locus of two maps into a pro-affine etale object is closed and
 saturated under connected components. A map whose image lies in this locus equalizes
-those arrows as scheme morphisms, including on nonreduced test schemes.
-
-Source: `CompletedAffineFreeLocalDual.lean`, closed stage-equality loci in the proof of
-`completedAffineFree_localDual_detect`.
-(blueprint: lem-sfb-pro-affine-etale-residue-equalizer)
-
-Proof: present U as a cofiltered limit of absolutely affine etale X-schemes. For each
-stage, pull back its diagonal along the two maps from W. This diagonal is open because
-the stage is etale, and closed because an absolutely affine scheme is separated over
-X. The equalizer is therefore a clopen subscheme of W. A residue-field point belongs
-to its underlying clopen precisely when the two residue-field maps agree at that
-stage. The equality locus into U is the intersection of these clopens, by the limit
-universal property, so it is closed and saturated under connected components.
-If f maps into this intersection, then it maps into every stage equalizer. Each such
-equalizer is an open subscheme, so the factorization is a factorization of schemes,
-without a reducedness assumption on the domain of f. The resulting equalities at all
-stages imply equality into U by the limit universal property. Empty loci and empty
-test schemes are included in these factorizations. -/
+those arrows as scheme morphisms, including on nonreduced test schemes. -/
 theorem proAffineEtale_residue_equalizer
     (X : Scheme.{u}) (U W : X.ProEt) (hU : proAffineEtale U.hom) (p q : W ⟶ U) :
     let E := {x : W.left | W.left.fromSpecResidueField x ≫ p.left =

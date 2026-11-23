@@ -9,8 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTauto
 public import WeilConjectures.AlgebraicGeometry.Modules.FreeGeneratorIso
 
 /-! # Local frame atlases for realization base change
-Source: Stacks Project, Tags 01NQ, 01NR and 01OB.
-(blueprint: lem-pur-projective-bundle-realization-pullback-atlas).
+
+## References
+
+* Stacks Project, Tags 01NQ, 01NR and 01OB
 -/
 
 @[expose] public section
@@ -55,27 +57,5 @@ structure ProjectiveBundleRealizationPullbackAtlas
           ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
           (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient).app V m =
           c • D'.L.presheaf.map (homOfLE hi).op (t i)
-
-/-- The affine-fraction calculation and normalized quotient equations produce a common frame
-atlas for arbitrary normalized realizations.  This is the local geometric part of the proof.
-Source: Stacks Project, Tags 01NQ, 01NR and 01OB.
-Proof: refine the affine base cover by degree-one standard opens.  Pull the source frame to the
-corresponding target standard open and use the generator equation `hb`; homogeneous fractions
-show that transition coefficients agree on every overlap.  Tensor pullback sections generate
-locally, giving the coefficient equation for every source section.
-(blueprint: lem-pur-projective-bundle-realization-pullback-atlas). -/
-theorem exists_projectiveBundleRealizationPullbackAtlas
-    {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
-    (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
-    (g : B' ⟶ B) (e : F' ≅ (Scheme.Modules.tensorPullback g).obj F)
-    (b : Scheme.GradedAlgebraData.PullbackData g D.A.data D'.A.data)
-    (hb : ∀ (U : B.affineOpens) (U' : B'.affineOpens) (h : U'.1 ≤ g ⁻¹ᵁ U.1)
-      (x : F.val.obj (op U.1)),
-      b.map h (D.A.sectionEquiv U (SymmetricAlgebra.ι _ _ x)) =
-        D'.A.sectionEquiv U' (SymmetricAlgebra.ι _ _ (e.inv.app U'.1
-          (((Scheme.Modules.tensorPullback g).obj F).presheaf.map (homOfLE h).op
-            (projectiveBundlePullbackSection g x))))) :
-    Nonempty (ProjectiveBundleRealizationPullbackAtlas D D' g e b) := by
-  sorry
 
 end AlgebraicGeometry

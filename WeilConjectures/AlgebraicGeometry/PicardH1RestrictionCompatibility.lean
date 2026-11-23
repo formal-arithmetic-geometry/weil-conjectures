@@ -35,7 +35,8 @@ Source: Stacks Project, Tag 09NY, final sentence, with Tags 02UV and 09NU
 (blueprint: lem-sc-picard-h1-restriction-compatibility).
 
 Proof:
-1. By thm-sc-hilbert-90, the class of `L` corresponds to the Zariski units torsor
+1. By lemma-cohomology-multiplicative-group--3, the class of `L` corresponds to the Zariski units
+torsor
    `Isom(O_X,L)` of its local generators.
 2. A local generator `s` pulls back to `1 ⊗ s`. The identity
    `1 ⊗ us = i♯(u)(1 ⊗ s)` identifies the pushout along `O_Xˣ → i_* O_Zˣ` with
@@ -44,7 +45,7 @@ Proof:
 3. The canonical closed-immersion comparison of
    lem-sc-cohomology-closed-immersion-pushforward and clause (2) of
    lem-sc-torsor-h1-functoriality send this class to `Isom(O_Z,i*L)`.
-   Applying thm-sc-hilbert-90 on `Z` gives the asserted equality. -/
+   Applying lemma-cohomology-multiplicative-group--3 on `Z` gives the asserted equality. -/
 theorem picard_h1_restriction_compatibility {Z X : Scheme.{v}} (i : Z ⟶ X)
     [IsClosedImmersion i] (L : X.Modules) [Modules.IsInvertible L] :
     ∃ h : Modules.IsInvertible ((Modules.tensorPullback i).obj L),

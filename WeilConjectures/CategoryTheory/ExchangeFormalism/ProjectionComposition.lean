@@ -22,11 +22,14 @@ followed by the inverse of the projection comparison of `i_! ⊣ i^*` and the id
 The composition isomorphism of a triangle of factorizations intertwines these morphisms
 (`CategoryTheory.ExchangeFormalism.compIso_hom_app_whiskerRight_comp_shriekProjection`): this is
 the compatibility of the projection formula with the composition of compactly supported direct
-images (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). Its variant
+images (SGA 4). Its variant
 `CategoryTheory.ExchangeFormalism.compIso_inv_app_whiskerRight_comp_of_eq` takes the exceptional
 projection morphisms and the other data as variables subject to equations, so that it applies to
 data spelled differently (for instance through the definitions of a concrete exchange formalism).
 
+## References
+
+* SGA 4, Exposé XVII.
 -/
 
 @[expose] public section
@@ -273,12 +276,13 @@ lemma exchange_whiskerRight_comp_projectionMorphism_triangle
   simpa only [Category.assoc, Functor.map_comp] using
     F.inv_projectionComparison_triangle hδ i₁ p₁ i₂ p₂ q r i p f g hf hg hi hp w hfg K B
 
-/-- **The composition isomorphism intertwines the exceptional projection morphisms** (blueprint
-`prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): for a triangle of factorizations `T` of
+/-- **The composition isomorphism intertwines the exceptional projection morphisms** (SGA 4): for a
+triangle of factorizations `T` of
 `f : X ⟶ Y` and `g : Y ⟶ S`, through the composition isomorphism
 `(i₁, p₁)_! ⋙ (i₂, p₂)_! ≅ (i, p)_!` and `(f ≫ g)^* ≅ g^* ⋙ f^*`, the exceptional projection
 morphism of the composite factorization `(i, p)` of `f ≫ g` is that of `(i₂, p₂)` followed by
-`(i₂, p₂)_!` of that of `(i₁, p₁)`. -/
+`(i₂, p₂)_!` of that of `(i₁, p₁)`.
+Source: SGA 4, Exposé XVII. -/
 theorem compIso_hom_app_whiskerRight_comp_shriekProjection
     (hδ : ∀ {X Y Z : 𝒞} (f : X ⟶ Y) (g : Y ⟶ Z) (M N : F.obj Z),
       δ (F.pb (f ≫ g)) M N ≫ ((F.pbComp f g).hom.app M ⊗ₘ (F.pbComp f g).hom.app N) =

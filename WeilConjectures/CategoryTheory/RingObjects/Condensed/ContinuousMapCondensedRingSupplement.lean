@@ -26,10 +26,6 @@ public import WeilConjectures.Topology.ContinuousMapCondensedRing
 /-!
 # Continuous-map condensed rings with arbitrary coefficient universe
 
-Source: blueprint `sec-proetale-coefficients/sk-def-sfb-condensed-ring/`
-`def-sfb-continuous-map-condensed-ring.md`
-(blueprint: def-sfb-continuous-map-condensed-ring).
-
 The upstream continuous-map construction fixes the coefficient ring in `Type 0`.
 These universe-polymorphic versions retain the same sections, restrictions and canonical
 ring-object construction, allowing independent universes for the profinite sets and ring.

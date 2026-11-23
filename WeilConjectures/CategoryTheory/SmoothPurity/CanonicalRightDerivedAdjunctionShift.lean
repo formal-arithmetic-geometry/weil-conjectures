@@ -10,9 +10,7 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Canonical unbounded derived adjunctions commute with shifts
 
-Source: Stacks Project, Tags 07A6 and 0DVC. The proof uses the normalized-unit
-argument from DerivedAdjunctionShift and the K-injective unit calculation from
-RestrictedDerivedSectionsShiftTransport, without their geometric specializations.
+Source: Stacks Project, Tags 07A6 and 0DVC.
 -/
 
 @[expose] public noncomputable section
@@ -149,18 +147,7 @@ private theorem canonical_unit_commShift
 
 /-- The adjunction induced by an exact left adjoint and the canonical K-injective
 right-derived functor respects their canonical shifts.
-Source: Stacks Project, Tags 07A6 and 0DVC.
-(blueprint: lem-sp-canonical-right-derived-adjunction-shift).
-
-Proof: on K-injective complexes the canonical derived unit is invertible, and
-its comparison with the K-injective equivalence makes it commute with shifts.
-Every homotopy object admits a quasi-isomorphism into a K-injective complex,
-so the same holds for the unit on all objects. The unit of the derived adjunction
-satisfies the universal derived-unit factorization. Its right side is built from
-the ordinary adjunction unit and the canonical derived unit, both compatible with
-shifts. The right Kan universal property, after the adjoint postcomposition,
-detects equality of these shift squares. Hence the derived adjunction unit
-commutes with shifts; the triangle identities imply the same for its counit. -/
+Source: Stacks Project, Tags 07A6 and 0DVC. -/
 theorem canonicalRightDerivedAdjunctionShift
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions D]

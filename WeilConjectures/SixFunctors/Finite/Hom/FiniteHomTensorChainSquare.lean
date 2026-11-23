@@ -12,7 +12,7 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # General proof tools for the intrinsic scalar tensor composition square
 
-Source: blueprint thm-coef-finite-hom, successive quotient paragraph.
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotient paragraph.
 The public chain square is the generator calculation used before localization.
 -/
 
@@ -152,7 +152,7 @@ private theorem leftComp_transpose
 
 /-- Localization of a specified counit comparison through the fixed quotient functors.
 This is the literal four-arrow composite used by the finite scalar models.
-Source: blueprint thm-coef-finite-hom, representative normalization. -/
+Source: blueprint lemma-change-coefficients-internal-hom--1, representative normalization. -/
 def finiteHomTensorRepresentativeComparison
     {A : Type a₁} {B : Type b₁} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
@@ -202,7 +202,7 @@ private def scalarUnitSection
 attribute [local irreducible] scalarUnitSection
 
 /-- The termwise image of the ordinary left-adjoint composition mate.
-Source: blueprint thm-coef-finite-hom, successive quotients. -/
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive quotients. -/
 def finiteHomTensorComplexAssociator
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Abelian A] [Abelian B] [Abelian C]
@@ -307,7 +307,7 @@ private theorem total_scalar_unit_ext
 
 attribute [local semireducible] scalarUnitSection in
 /-- The ordinary scalar tensor square, tested on total pure generators.
-Source: blueprint thm-coef-finite-hom, successive-quotient tensor square
+Source: blueprint lemma-change-coefficients-internal-hom--1, successive-quotient tensor square
 (blueprint: lem-coef-finite-hom-tensor-chain-square).
 Proof: apply the composite scalar adjunction in each degree. Pure generators detect
 maps out of the total tensor. Naturality moves the second scalar unit through the

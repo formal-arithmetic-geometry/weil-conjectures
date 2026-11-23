@@ -36,7 +36,7 @@ Proof (the five steps of the node):
    pieces over `V j`. The inverse of `V j → X` identifies each piece with `W`;
    the maps `σ j = (id, s j ∘ w)` are their inclusions and form an étale cover.
    Use def-pc-fibre-product, lem-weil-pbc-open-fibre-product, and
-   lem-weil-pbc-etale-composition-cancellation.
+   definition-torsion-sheaves--3.
 2. Apply the sheaf equalizer condition to this cover. Distinct pieces have empty
    overlap and the empty covering gives `H(∅) = 0`; the two projections on a
    self-overlap agree. Every family of sections is compatible, so the restriction
@@ -47,7 +47,7 @@ Proof (the five steps of the node):
    `h_Y ∘ σ_{j,W'} = σ_{j,W} ∘ h` gives naturality of the restriction maps.
 4. Both coefficient maps `Λ_X → Λ_Y|_{s j}` send a constant `λ` to the same
    section, hence agree by def-weil-pbc-sheafification. Semilinearity of the
-   restrictions then gives `Λ_X`-linearity (def-weil-sheaf-of-modules-category;
+   restrictions then gives `Λ_X`-linearity (situation-conventions;
    Stacks sites-modules, 03D6 and 03DH).
 5. The componentwise inverse is linear and natural, giving the asserted
    isomorphism with the specified components. The sectionwise product has the

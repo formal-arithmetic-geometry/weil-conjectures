@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Open restriction of the intrinsic proper/open comparison
 
-Source: Stacks 0F7B and 07A7; the normalization calculation for the intrinsic
-proper/open lambda (blueprint: lem-sf-system-proper-open-lambda-exchange). -/
+Source: Stacks 0F7B and 07A7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,7 +26,7 @@ open CategoryTheory AlgebraicGeometry
 namespace CategoryTheory
 
 /-- A natural inverse-open-unit normalization of an exchange map.
-Source: Stacks 07A7 (blueprint: lem-sf-system-proper-open-lambda-exchange). -/
+Source: Stacks 07A7. -/
 def OpenExchangeUnitFormula
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (Jk : A ⥤ B) (Rp : B ⥤ D) (Pi : D ⥤ C) (Pk : B ⥤ A) (Rr : A ⥤ C)
@@ -475,24 +474,7 @@ private theorem restrictFactor_formula (a : OpenComparisons l E o c)
     (a.unit l E o c (Limits.pullback.fst p i))
 
 /-- The prescribed lambda is proper exchange followed by the inverse open unit.
-Source: Stacks 0F7B (restriction of proper/open interchange) and 07A7 (mates)
-(blueprint: lem-sf-system-proper-open-lambda-exchange).
-
-Proof: write s for the canonical clopen lift, b and q for the two projections of
-B times_D C. Associativity of the recorded pullback compositors identifies the
-square for k,r,p,i with the square for b,q,p,i followed by restriction along s,
-using s b = k and s q = r. Take the proper-adjunction mates. The first mate is
-cartesianConjugate: the beta inverse transpose and the two open units identify
-its open mate with the inverse-image square; iterating mates equals conjugation
-under the composite adjunction. The second mate inserts the s-direct-image unit
-and the direct-image compositor. On k-extension objects the inverse k-unit,
-transported through the canonical open compositor, becomes restrictFactor followed
-by the inverse s-open unit. By clopen_transpose, the latter unit is precisely the
-transpose of the clopen comparison. The resulting factors are, in order,
-cartesianConjugate, restrictFactor, clopen, pushComp and equality transport,
-which is the definition of properOpenLambda. This is an equality of unbounded
-system maps before evaluation. For identity arrows it is the adjunction triangle;
-for an empty open, the same unit and counit equalities apply to the zero category. -/
+Source: Stacks 0F7B (restriction of proper/open interchange) and 07A7 (mates). -/
 theorem systemProperOpenLambdaExchange
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

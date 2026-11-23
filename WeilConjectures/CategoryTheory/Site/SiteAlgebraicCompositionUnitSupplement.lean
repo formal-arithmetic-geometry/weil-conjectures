@@ -27,8 +27,7 @@ public import WeilConjectures.CategoryTheory.SiteAlgebraicCompositionUnit
 /-!
 # Algebraic transport of unit-normalized site composition and identity
 
-Source: Stacks Project, Sites, Tags 03CB, 00VE, 00WX, 00WH and 00YV;
-Modules on Sites, Tag 03D2 (blueprint: lem-pur-site-algebraic-composition-unit).
+Source: Stacks Project, Sites, Tags 03CB, 00VE, 00WX, 00WH and 00YV; Modules on Sites, Tag 03D2.
 
 The composite inverse image is the specified comma-colimit/sheafification construction.
 Its comparison is obtained from the specified adjunctions, without choosing another unit.

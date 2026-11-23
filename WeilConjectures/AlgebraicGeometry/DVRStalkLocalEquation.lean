@@ -16,7 +16,7 @@ instance a point of codimension one of a normal scheme). If `p` is a section nea
 a uniformizer, every section `h` with nonzero germ is, on a neighbourhood of `y`, a unit times a
 power `p^n` (`AlgebraicGeometry.Scheme.exists_span_eq_span_pow_of_irreducible_germ`), and `n ≥ 1`
 when `h` vanishes at `y`. This is the "shrink around a generic point of the divisor" step of
-blueprint `det-sp-generic-divisor-constant`: near `ζ`, `V(h) = V(p^n)`.
+blueprint `lemma-vanishing-generic-points-principal-divisor`: near `ζ`, `V(h) = V(p^n)`.
 -/
 
 @[expose] public section

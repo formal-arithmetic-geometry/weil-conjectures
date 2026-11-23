@@ -9,25 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNormaliz
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 
 /-!
-# Naturality of the resolution pairing of supported sections
+# Naturality of the pairing of supported sections
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: def-pur-supported-exterior-product).
+def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
 
 The pullback and tensor of supported sections, its totalization, the comparison with the
-derived exterior product and the support units are natural in the cochain complexes. We
-package the right-hand side of the resolution normalization
-`IsResolutionSupportedExteriorProduct` as `resolutionSupportedExteriorPairing` and show that
-the normalization transfers along quasi-isomorphisms of K-flat representatives.
-
-## Main definitions and statements
-
-- `resolutionSupportedExteriorPairing`: the resolution pairing on two K-flat complexes.
-- `resolutionSupportedExteriorPairing_naturality`: its naturality in chain maps.
-- `resolutionSupportedExteriorPairing_transfer`: the normalization equation on targets of
-  compatible chain maps implies it on the sources.
-- `isResolutionSupportedExteriorProduct_iff`: the normalization in terms of the pairing.
+derived exterior product and the support units are natural in the cochain complexes.
 -/
 
 @[expose] public section
@@ -115,26 +104,6 @@ theorem exteriorProductResolutionComparison_naturality
     (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).map ψ)]
   rw [Category.assoc]
 
-/-- The inverse comparison of the derived exterior product is natural on K-flat complexes. -/
-@[reassoc]
-theorem exteriorProductResolutionIso_inv_naturality
-    {P P' : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ}
-    {Q Q' : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ} (φ : P ⟶ P') (ψ : Q ⟶ Q')
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hP' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P')
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)
-    (hQ' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q') :
-    DerivedCategory.Q.map (tensorHom
-        (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).map φ)
-        (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).map ψ)) ≫
-      (exteriorProductResolutionIso C f g P' Q' hP' hQ').inv =
-    (exteriorProductResolutionIso C f g P Q hP hQ).inv ≫
-      derivedTensorHom C
-        ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map (DerivedCategory.Q.map φ))
-        ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map (DerivedCategory.Q.map ψ)) := by
-  rw [Iso.comp_inv_eq, Category.assoc, Iso.eq_inv_comp]
-  exact (exteriorProductResolutionComparison_naturality C f g φ ψ).symm
-
 variable {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
 
 /-- The defining property of the totalized supported pairing. -/
@@ -181,122 +150,6 @@ theorem exteriorSupportedSectionsComplex_naturality
   erw [HomologicalComplex.ι_mapBifunctorMap]
   rw [curriedTensor_map_app, curriedTensor_obj_map, ← tensorHom_def_assoc]
   rfl
-
-/-- The resolution pairing of supported sections on a pair of K-flat complexes: the tensor
-localization, the totalized pairing, the support unit of the exterior complex and the
-inverse comparison with the derived exterior product. -/
-noncomputable def resolutionSupportedExteriorPairing
-    (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
-    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) :
-    DerivedCategory.Q.obj (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P) ⊗
-        DerivedCategory.Q.obj
-          (((globalSectionsWithSupport C j).mapHomologicalComplex (.up ℤ)).obj Q) ⟶
-      (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).obj
-        (externalProduct C f g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)) :=
-  Functor.LaxMonoidal.μ DerivedCategory.Q _ _ ≫
-    DerivedCategory.Q.map (exteriorSupportedSectionsComplex C f g i j P Q) ≫
-    exteriorSupportResolutionUnit C (supportedProductImmersion f g i j)
-      (exteriorSectionsComplexTarget C f g P Q) ≫
-    (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-      (exteriorProductResolutionIso C f g P Q hP hQ).inv
-
-/-- The resolution pairing is natural in both K-flat complexes. -/
-@[reassoc]
-theorem resolutionSupportedExteriorPairing_naturality
-    {P P' : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ}
-    {Q Q' : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ} (φ : P ⟶ P') (ψ : Q ⟶ Q')
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hP' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P')
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)
-    (hQ' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q') :
-    tensorHom
-        (DerivedCategory.Q.map
-          (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).map φ))
-        (DerivedCategory.Q.map
-          (((globalSectionsWithSupport C j).mapHomologicalComplex (.up ℤ)).map ψ)) ≫
-        resolutionSupportedExteriorPairing C f g i j P' Q' hP' hQ' =
-      resolutionSupportedExteriorPairing C f g i j P Q hP hQ ≫
-        (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-          (derivedTensorHom C
-            ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map (DerivedCategory.Q.map φ))
-            ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map
-              (DerivedCategory.Q.map ψ))) := by
-  rw [resolutionSupportedExteriorPairing, resolutionSupportedExteriorPairing,
-    Functor.LaxMonoidal.μ_natural_assoc, ← Functor.map_comp_assoc,
-    exteriorSupportedSectionsComplex_naturality, Functor.map_comp_assoc]
-  erw [exteriorSupportResolutionUnit_naturality_assoc]
-  rw [← Functor.map_comp]
-  erw [exteriorProductResolutionIso_inv_naturality C f g φ ψ hP hP' hQ hQ']
-  simp only [Category.assoc, Functor.map_comp]
-
-/-- On two K-flat representatives which map to two other K-flat representatives by
-quasi-isomorphisms compatible with the identifications, the normalization equation on the
-targets implies it on the sources. -/
-theorem resolutionSupportedExteriorPairing_transfer
-    {K : DerivedCategory (Sheaf X.smallEtaleTopology C)}
-    {L : DerivedCategory (Sheaf Y.smallEtaleTopology C)}
-    {P P' : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ}
-    {Q Q' : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ} (φ : P ⟶ P') (ψ : Q ⟶ Q')
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hP' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P')
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)
-    (hQ' : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q')
-    (eP : DerivedCategory.Q.obj P ⟶ K) (eQ : DerivedCategory.Q.obj Q ⟶ L)
-    (eP' : DerivedCategory.Q.obj P' ⟶ K) (eQ' : DerivedCategory.Q.obj Q' ⟶ L)
-    (hφ : DerivedCategory.Q.map φ ≫ eP' = eP) (hψ : DerivedCategory.Q.map ψ ≫ eQ' = eQ)
-    (κ : (rightDerivedSectionsWithSupport C i).obj K ⊗
-        (rightDerivedSectionsWithSupport C j).obj L ⟶
-      (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).obj
-        (externalProduct C f g K L))
-    (h' : tensorHom
-        (exteriorSupportResolutionUnit C i P' ≫ (rightDerivedSectionsWithSupport C i).map eP')
-        (exteriorSupportResolutionUnit C j Q' ≫ (rightDerivedSectionsWithSupport C j).map eQ') ≫
-          κ =
-      resolutionSupportedExteriorPairing C f g i j P' Q' hP' hQ' ≫
-        (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-          (derivedTensorHom C ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map eP')
-            ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map eQ'))) :
-    tensorHom
-        (exteriorSupportResolutionUnit C i P ≫ (rightDerivedSectionsWithSupport C i).map eP)
-        (exteriorSupportResolutionUnit C j Q ≫ (rightDerivedSectionsWithSupport C j).map eQ) ≫
-          κ =
-      resolutionSupportedExteriorPairing C f g i j P Q hP hQ ≫
-        (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-          (derivedTensorHom C ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map eP)
-            ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map eQ)) := by
-  subst hφ hψ
-  rw [Functor.map_comp, Functor.map_comp, ← exteriorSupportResolutionUnit_naturality_assoc,
-    ← exteriorSupportResolutionUnit_naturality_assoc, ← tensorHom_comp_tensorHom_assoc, h',
-    resolutionSupportedExteriorPairing_naturality_assoc C f g i j φ ψ hP hP' hQ hQ',
-    Functor.map_comp, Functor.map_comp, ← Functor.map_comp, derivedTensorHom_comp]
-
-/-- The resolution normalization in terms of the resolution pairing. -/
-theorem isResolutionSupportedExteriorProduct_iff
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology C))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology C))
-    (κ : (rightDerivedSectionsWithSupport C i).obj K ⊗
-        (rightDerivedSectionsWithSupport C j).obj L ⟶
-      (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).obj
-        (externalProduct C f g K L)) :
-    IsResolutionSupportedExteriorProduct C f g i j K L κ ↔
-      ∀ (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
-        (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
-        (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-        (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)
-        (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ L),
-        tensorHom
-            (exteriorSupportResolutionUnit C i P ≫
-              (rightDerivedSectionsWithSupport C i).map eP.hom)
-            (exteriorSupportResolutionUnit C j Q ≫
-              (rightDerivedSectionsWithSupport C j).map eQ.hom) ≫ κ =
-          resolutionSupportedExteriorPairing C f g i j P Q hP hQ ≫
-            (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-              (derivedTensorHom C ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map eP.hom)
-                ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map eQ.hom)) := by
-  simp only [IsResolutionSupportedExteriorProduct, resolutionSupportedExteriorPairing,
-    Functor.map_comp, Category.assoc]
 
 end Naturality
 

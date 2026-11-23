@@ -161,8 +161,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Derived direct image and strict tower limits
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0940
-(blueprint: lem-weil-ringed-tower-pushforward-limit-comparison).
+Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0940.
 -/
 
 -- After pruning, this module only keeps private declarations.

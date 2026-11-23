@@ -11,9 +11,9 @@ import WeilConjectures.CategoryTheory.RingedKoszulDualBasis
 
 /-! # Finite exterior Koszul complexes under scalar realization
 
-Source: Stacks Project, more-algebra.tex, lemma-join-sequences-koszul-complex
-(0664), and algebraization.tex, lemma-derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, more-algebra.tex (0664), and algebraization.tex (0A0E).
 -/
 
 @[expose] public noncomputable section
@@ -209,30 +209,7 @@ private theorem exteriorKoszulBasis_zero {A : Type w} [CommRing A]
 identifies the finite exterior Koszul complex with the ordered positive tensor's dual.
 No exactness, Noetherianity, quotients, augmentations or cones are involved.
 
-Source: Stacks Project, more-algebra.tex, lemma-join-sequences-koszul-complex
-(0664), and algebraization.tex, lemma-derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
-
-Proof: conjugate the image under E of scalar multiplication by the regular-module
-isomorphism c. Functoriality and additivity make this a ring homomorphism from A
-to the endomorphisms of O, and hs identifies its values on the generators with
-the prescribed section scalars. In each integer degree the increasing exterior
-wedge inclusions form a finite coproduct of copies of A; the positive-degree
-case is the coproduct of an empty family into a zero object. E preserves these
-finite coproducts, and precomposing their legs with c gives copies of O.
-Take the normalized finite-subset basis of the actual dual tower from
-exists_ringedKoszulDualBasis. Uniqueness of coproducts gives degreewise
-isomorphisms matching these two bases. Test the chain square on each source
-basis leg and use exteriorKoszulBasis_d and the dual differential matrix.
-Additivity and the conjugated scalar identities identify the two finite sums.
-For every n<=m, exteriorPower.map acts on the I wedge by the product of the
-specified diagonal entries; the proof derives this directly from alternating
-multilinearity. Comparing with the actual dual transition matrix proves the
-whole naturality square, including n=m. Finally, the empty exterior basis
-inclusion equals inverse zeroEquiv followed by the extension coordinate.
-The normalization of the dual empty basis therefore gives the exact displayed
-unit equation. Every construction works for r=0, the zero ring, and empty sites,
-and no scalar or factorial is inverted. -/
+Stacks Project, Tags 0664 and 0A0E. -/
 theorem exteriorKoszul_scalar_realization
     {C : Type w} [SmallCategory C] {T : GrothendieckTopology C}
     (O : Sheaf T CommRingCat.{w}) {A : Type w} [CommRing A]

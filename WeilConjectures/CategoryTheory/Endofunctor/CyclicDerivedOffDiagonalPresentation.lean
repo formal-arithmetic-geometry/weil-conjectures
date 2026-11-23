@@ -16,9 +16,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Strict presentations of the cyclic connecting morphism
 
-Source: the free-resolution comparison and off-diagonal construction in steps 6--8 of
-`lem-sf-cyclic-derived-hom-exact-sequence`; Stacks Project, Derived Categories,
-Tags 0152 and 070I (blueprint: lem-sf-cyclic-derived-off-diagonal-presentation).
+## References
+
+* Stacks Project, Derived Categories, Tags 0152 and 070I.
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +42,8 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- A strict off-diagonal extension, together with isomorphisms identifying its two
 endpoints with M and N. Both the underlying shifted morphism and the native connecting
 morphism are prescribed; a presentation includes the sign of the canonical SES boundary.
-Source: Stacks Tag 0152 and node steps 6--8
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tag 0152. -/
 def CyclicDerivedOffDiagonalPresentation
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1))
     (f : M ⟶ N) : Prop :=
@@ -159,11 +159,8 @@ private def triangularSequence (A J : CochainComplex (IsoAlgebra F) ℤ)
 omit [HasDerivedCategory C] [HasDerivedCategory (IsoAlgebra F)] in
 /-- Any chain-level off-diagonal entry gives an actual short exact sequence of fixed
 pairs with a split underlying chain sequence and exactly that off-diagonal entry.
-Proof: give UA ⊕ UJ the invertible triangular action. Its inclusion and projection are
-equivariant. Forgetting identifies their sequence with the standard split biproduct
-sequence, and faithful exact forgetting reflects exactness, monomorphisms and epimorphisms.
-Source: step 7 of the parent node, the triangular construction preceding Stacks Tag 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tag 0152. -/
 theorem exists_cyclicDerivedStrictExtension (A J : CochainComplex (IsoAlgebra F) ℤ)
     (u : ((forget F).mapHomologicalComplex (.up ℤ)).obj J ⟶
       ((forget F).mapHomologicalComplex (.up ℤ)).obj A) :
@@ -193,12 +190,8 @@ theorem exists_cyclicDerivedStrictExtension (A J : CochainComplex (IsoAlgebra F)
     exact congrArg (fun f ↦ f.f n) (triangularAction_inr F A J u)
 
 /-- Every underlying shifted morphism admits a strict off-diagonal presentation.
-Proof: choose K-injective representatives for M and N[-1]. Forgetting
-preserves K-injectives, so the localized underlying morphism is represented by a chain
-map. Apply the triangular extension construction, then transport its endpoints by the
-chosen model isomorphisms and the canonical shift cancellation.
-Source: steps 6--7 of the parent node, Stacks Tags 070I and 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tags 070I and 0152. -/
 theorem exists_cyclicDerivedOffDiagonalPresentation [IsGrothendieckAbelian.{v} C]
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1)) :
     ∃ f : M ⟶ N, CyclicDerivedOffDiagonalPresentation F u f := by
@@ -578,22 +571,7 @@ end Comparison
 /-- Two strict off-diagonal presentations of the same shifted morphism have the same
 native connecting morphism.
 
-Proof: use the natural two-term free resolution of J. For a splitting s of the
-underlying projection of a presented extension, let e be its free adjunct and let f₀
-be the free adjunct of the off-diagonal map u₀. Evaluation on summand zero, with the
-inverse triangular action, gives e d = j f₀ and p e = ε. These two equations define a
-map from the free short exact sequence to the presented one. Naturality of the
-canonical SES boundary gives δ_S = δ_free ≫ f₀[1], with the canonical shift
-cancellation. Passing to the free/forgetful derived adjunction identifies f₀ with
-the prescribed underlying shifted morphism. Thus every presentation computes the
-same adjunct formula δ_M ≫ adjunct(u)[1], followed by cancellation of the opposite
-shifts. Naturality of the free triangle handles the endpoint isomorphisms in the
-presentation. Both presented morphisms equal this formula. The free resolution is
-unbounded, so no cohomological bound is used.
-
-Source: step 8 of lem-sf-cyclic-derived-hom-exact-sequence and Stacks Tag 0152,
-using the explicit free-resolution summand formula.
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+Stacks Project, Tag 0152. -/
 theorem cyclicDerivedOffDiagonalPresentation_unique [IsGrothendieckAbelian.{v} C]
     {M N : DerivedCategory (IsoAlgebra F)} {u : CyclicDerivedHom F M N (-1)}
     {f g : M ⟶ N} (hf : CyclicDerivedOffDiagonalPresentation F u f)
@@ -619,10 +597,8 @@ theorem cyclicDerivedOffDiagonalPresentation_unique [IsGrothendieckAbelian.{v} C
 
 /-- Every underlying shifted morphism determines exactly one native morphism represented
 by a strict off-diagonal extension. The strict extension itself is not claimed unique.
-Proof: combine the explicit triangular construction on K-injective representatives with
-the free-resolution comparison of any two presentations.
-Source: steps 6--8 of the parent node and Stacks Tags 070I and 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tags 070I and 0152. -/
 theorem exists_unique_cyclicDerivedOffDiagonalPresentation [IsGrothendieckAbelian.{v} C]
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1)) :
     ∃! f : M ⟶ N, CyclicDerivedOffDiagonalPresentation F u f := by
@@ -631,23 +607,23 @@ theorem exists_unique_cyclicDerivedOffDiagonalPresentation [IsGrothendieckAbelia
 
 /-- The uniquely specified native morphism represented by the off-diagonal extension.
 Only its unique value is chosen, not a complex, resolution, or extension witness.
-Source: the unique-value characterization above, Stacks Tag 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tag 0152. -/
 def cyclicDerivedOffDiagonalBoundary [IsGrothendieckAbelian.{v} C]
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1)) : M ⟶ N :=
   Classical.choose (exists_unique_cyclicDerivedOffDiagonalPresentation F u)
 
 /-- The boundary has its prescribed strict presentation.
-Source: the unique-value characterization, Stacks Tag 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tag 0152. -/
 theorem cyclicDerivedOffDiagonalBoundary_presentation [IsGrothendieckAbelian.{v} C]
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1)) :
     CyclicDerivedOffDiagonalPresentation F u (cyclicDerivedOffDiagonalBoundary F u) :=
   (Classical.choose_spec (exists_unique_cyclicDerivedOffDiagonalPresentation F u)).1
 
 /-- Any strict presentation computes the specified boundary.
-Source: uniqueness in the presentation characterization, Stacks Tag 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-presentation). -/
+
+Stacks Project, Tag 0152. -/
 theorem cyclicDerivedOffDiagonalBoundary_eq [IsGrothendieckAbelian.{v} C]
     {M N : DerivedCategory (IsoAlgebra F)} {u : CyclicDerivedHom F M N (-1)} {f : M ⟶ N}
     (h : CyclicDerivedOffDiagonalPresentation F u f) :

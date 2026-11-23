@@ -87,8 +87,7 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarIsoInternalHom
 
 /-! # Derived Hom under a site equivalence and coefficient identification
 
-Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-site-equivalence-hom-transport).
+Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95.
 -/
 
 @[expose] public noncomputable section
@@ -218,8 +217,6 @@ private def sheafHomIso (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
 
 
 -- Categorical comparisons elaborate several nested restriction and localization functors.
-set_option maxHeartbeats 800000 in
--- The nested functor comparisons require additional elaboration heartbeats.
 set_option backward.isDefEq.respectTransparency false in
 private theorem sheafHomIso_naturality
     (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
@@ -256,21 +253,10 @@ private def scalarEquivalence {C : Type c} [Category.{vc} C]
   counitIso := scalarRoundTrip a.symm
   functor_unitIso_comp M := by ext V x; rfl
 
-set_option maxHeartbeats 1800000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- A site equivalence with an identified coefficient sheaf gives a module
  equivalence compatible with the actual derived internal Hom.
-Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-site-equivalence-hom-transport).
-
-Proof: take direct restriction along the inverse site equivalence, followed by
-scalar restriction along the given ring isomorphism. Both are additive
-equivalences. The first preserves sheaf Hom by equivalence on every slice, and
-the second by scalar surjectivity. Compose their ordinary comparisons and their
-naturality squares. Countable products give the natural Hom-complex comparison;
-functorial K-injective resolutions then give the natural derived comparison.
-The composite module functor is the actual structural pushforward: its section
-modules, scalar action, restriction maps, and morphism maps agree. -/
+Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95. -/
 theorem siteCoefficientEquivalence_derivedHom
     {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

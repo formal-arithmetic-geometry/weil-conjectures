@@ -36,7 +36,6 @@ the role of the exceptional projection morphism `PF^!`, for a morphism `c : C �
   isomorphism if the projection morphisms `pf` at `(T, M)` are, by the Yoneda lemma.
 * `CategoryTheory.Verdier.curry'_comp_exceptionalHomMap`: the exchange morphism sends the mate
   of `u : F M ⟶ S N` to the exceptional adjoint of its class.
-
 -/
 
 @[expose] public section
@@ -129,15 +128,8 @@ lemma exceptionalHomMap_comp_eq {T : C} (M N : D) (u : T ⟶ (ihom (F.obj M)).ob
     exceptionalHomPairing, leftProjection_naturality_assoc, Adjunction.homEquiv_counit,
     uncurry_eq, Functor.map_comp, Category.assoc]
 
-/-- **The exceptional internal hom exchange is an isomorphism** (blueprint
-`lem-trf-exceptional-internal-hom-exchange`) as soon as the projection morphisms
-`(pf.app T).app M` are, for every `T`: by the Yoneda lemma, composing with it is the chain of
-bijections
-```
-Hom(T, RHom(F M, S N)) ≃ Hom(F M ⊗ T, S N) ≃ Hom(P (F M ⊗ T), N) ≃ Hom(M ⊗ P T, N)
-  ≃ Hom(P T, RHom(M, N)) ≃ Hom(T, S RHom(M, N)),
-```
-the third one being precomposition with the isomorphism `leftProjection`. -/
+/-- **The exceptional internal hom exchange is an isomorphism**
+as soon as the projection morphisms `(pf.app T).app M` are, for every `T`. -/
 theorem isIso_exceptionalHomMap_of_isIso (M N : D) [∀ T, IsIso ((pf.app T).app M)] :
     IsIso (exceptionalHomMap adj' pf M N) := by
   rw [isIso_iff_yoneda_map_bijective]
@@ -160,8 +152,7 @@ section CorrespondenceClass
 
 /-- The bijection `Hom(P 𝟙, RHom(M, N)) ≃ Hom(F M, S N)`, i.e.
 `Hom(Rc_! Λ_C, RHom(M, N)) ≃ Hom(Lc^* M, Rc^! N)`: the tensor–hom adjunction, the inverse of the
-projection morphism `M ⊗ P 𝟙 ≅ P (F M ⊗ 𝟙)`, the right unitor and the exceptional adjunction
-(blueprint `lem-trf-correspondence-class`). -/
+projection morphism `M ⊗ P 𝟙 ≅ P (F M ⊗ 𝟙)`, the right unitor and the exceptional adjunction. -/
 noncomputable def correspondenceClassEquiv (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)] :
     (P.obj (𝟙_ C) ⟶ (ihom M).obj N) ≃ (F.obj M ⟶ S.obj N) :=
   ((ihom.adjunction M).homEquiv _ _).symm.trans
@@ -176,8 +167,7 @@ lemma correspondenceClassEquiv_apply (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)
   simp [correspondenceClassEquiv, Iso.homCongr_apply, uncurry_eq]
   rfl
 
-/-- **The exchange of the mate is the adjoint of the class** (blueprint
-`lem-trf-trace-class-diagonal-pairing`, Step 1): for `u : F M ⟶ S N` with class
+/-- **The exchange of the mate is the adjoint of the class**: for `u : F M ⟶ S N` with class
 `[u] = correspondenceClassEquiv.symm u`, the exceptional internal hom exchange sends the mate
 `𝟙 ⟶ RHom(F M, S N)` of `u` to the exceptional adjoint `𝟙 ⟶ S RHom(M, N)` of `[u]`. -/
 theorem curry'_comp_exceptionalHomMap (M N : D) [IsIso ((pf.app (𝟙_ C)).app M)]
@@ -214,7 +204,7 @@ lemma leftProjection_naturality_left {M M' : D} (a : M' ⟶ M) (T : C) :
     ← P.map_comp, BraidedCategory.braiding_naturality_right]
 
 omit [MonoidalClosed C] in
-/-- The class bijection is natural in the target `N` (blueprint `lem-trf-correspondence-class`). -/
+/-- The class bijection is natural in the target `N`. -/
 lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
     [IsIso ((pf.app (𝟙_ C)).app M)] (b : N ⟶ N') (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :
     correspondenceClassEquiv adj' pf M N' (g ≫ (ihom M).map b) =
@@ -224,8 +214,8 @@ lemma correspondenceClassEquiv_naturality_right (M : D) {N N' : D}
   simp only [Category.assoc]
 
 omit [MonoidalClosed C] in
-/-- The class bijection is natural in the source `M` (blueprint `lem-trf-correspondence-class`):
-precomposing a class with `RHom(a, N)` corresponds to precomposing with `F a`. -/
+/-- The class bijection is natural in the source `M`: precomposing a class with `RHom(a, N)`
+corresponds to precomposing with `F a`. -/
 lemma correspondenceClassEquiv_naturality_left {M M' : D} (N : D)
     [IsIso ((pf.app (𝟙_ C)).app M)] [IsIso ((pf.app (𝟙_ C)).app M')] (a : M' ⟶ M)
     (g : P.obj (𝟙_ C) ⟶ (ihom M).obj N) :

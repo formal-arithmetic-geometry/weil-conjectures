@@ -24,7 +24,7 @@ attribute [local irreducible] Functor.mapDerivedCategory HasDerivedCategory.stan
   Scheme.finiteEtaleTateLine
 
 /-- Every arrow to the finite line shifted by two has an ordinary etale preimage.
-Source: bounded-below cohomology comparison (sk-prop-sf-comparison).
+Source: bounded-below cohomology comparison (theorem-bounded-below-cohomology-comparison).
 (blueprint: lem-diagonal-finite-comparison-surjective).
 
 Proof: the target is a sheaf in degree zero shifted by two, so it lies in degrees

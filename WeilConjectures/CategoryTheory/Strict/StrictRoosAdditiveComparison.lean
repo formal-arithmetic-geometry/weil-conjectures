@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-! # Additive comparison for the strict Roos cone
 
-Source: Stacks 08TC and 0H9K; finite-product/cone portion of proof step 7 of
-`lem-pur-compact-support-roos-cofinality`.
+Source: Stacks 08TC and 0H9K.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable {A : Type u} [Category.{vA} A] [Abelian A] [HasCountableProducts A]
 open HomologicalComplex
 open StrictTowerArithmetic
 /-- The shifted cone map induced by a commuting square of Roos differentials.
-Source: Stacks 08TC and 0H9K
-(blueprint: lem-pur-roos-additive-comparison). -/
+Source: Stacks 08TC and 0H9K. -/
 noncomputable def strictRoosMapOfSquare {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
     (a b : strictRoosProduct X ⟶ strictRoosProduct Y)
     (h : a ≫ strictRoosEndomorphism Y = strictRoosEndomorphism X ≫ b) :
@@ -66,8 +64,7 @@ private theorem roosConeMap_coordinates {P Q P' Q' : CochainComplex A ℤ}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The induced shifted cone map has its prescribed two coordinates.
-Source: Stacks 08TC and 0H9K
-(blueprint: lem-pur-roos-additive-comparison). -/
+Source: Stacks 08TC and 0H9K. -/
 theorem strictRoosMapOfSquare_coordinates {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
     (a b : strictRoosProduct X ⟶ strictRoosProduct Y)
     (h : a ≫ strictRoosEndomorphism Y = strictRoosEndomorphism X ≫ b) (p : ℤ) :
@@ -81,8 +78,7 @@ theorem strictRoosMapOfSquare_coordinates {X Y : CochainComplex (ℕᵒᵖ ⥤ A
   exact roosConeMap_coordinates _ _ _ p
 
 /-- A strict tower morphism commutes with the Roos differential.
-Source: Stacks 08TC and 0H9K
-(blueprint: lem-pur-roos-additive-comparison). -/
+Source: Stacks 08TC and 0H9K. -/
 theorem strictRoosProductMap_comm {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : X ⟶ Y) :
     strictRoosProductMap f ≫ strictRoosEndomorphism Y =
       strictRoosEndomorphism X ≫ strictRoosProductMap f := by
@@ -92,8 +88,7 @@ theorem strictRoosProductMap_comm {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite telescoping makes selection and block a square of Roos differentials.
-Source: Stacks 08TC and 0H9K
-(blueprint: lem-pur-roos-additive-comparison). -/
+Source: Stacks 08TC and 0H9K. -/
 theorem strictRoosBlock_comm (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (e : ℕ) (he : 1 ≤ e) :
     selection e X.asFunctor ≫
         strictRoosEndomorphism ((complexRestriction A e).obj X) =

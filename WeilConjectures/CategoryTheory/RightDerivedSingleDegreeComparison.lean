@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # The shifted degree-zero comparison for the right derived functor
 
-Source: Stacks Project, derived.tex, Tags 015J and 015N.
+Source: Stacks Project, Tags 015J and 015N.
 -/
 
 @[expose] public section
@@ -26,10 +26,8 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
   (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]
 
 /-- Identify degree-n derived cohomology of an object placed in degree n with its image
-under the left exact functor. The construction shifts to degree zero, commutes the derived
-functor with the shift, and uses the classical degree-zero comparison.
-Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1).
-(blueprint: def-pc-right-derived-single-degree-comparison) -/
+under the left exact functor. 
+Source: Stacks Project, Tag 015J. -/
 noncomputable def rightDerivedSingleDegreeComparison (n : ℕ) :
     DerivedCategory.Plus.singleFunctor B n ⋙ G.rightDerivedFunctorPlus ⋙
       DerivedCategory.Plus.homologyFunctor C n ≅ G := by

@@ -11,8 +11,7 @@ public import WeilConjectures.Compactification.FiniteTypeExtension
 # Powers of a finite-type ideal sheaf inside an ideal sheaf
 
 If `A` and `B` are quasi-coherent ideal sheaves on a quasi-compact scheme with `B` of
-finite type and `V(A) ⊆ V(B)`, then some power of `B` is contained in `A`
-(blueprint: `lemma:nagata-finite-type-ideal-power-in-ideal`).
+finite type and `V(A) ⊆ V(B)`, then some power of `B` is contained in `A`.
 
 The containment `V(A) ⊆ V(B)` says exactly that `B` is contained in the radical of `A`, so
 on every affine open the ideal of sections of `B` is a finitely generated ideal inside the
@@ -26,7 +25,6 @@ an affine cover (`Scheme.IdealSheafData.le_of_iSup_eq_top`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.exists_pow_le`: on a quasi-compact scheme, a
   finite-type ideal sheaf whose support contains the support of another ideal sheaf has a
   power contained in that ideal sheaf.
-
 -/
 
 @[expose] public section

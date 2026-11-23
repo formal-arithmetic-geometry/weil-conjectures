@@ -18,7 +18,7 @@ Let `A` be a Grothendieck abelian category and `I` an injective `A`-valued sheaf
 acyclic for the restriction `ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`.
 
 The proof follows [Stacks, Tag 099U] and the blueprint
-(`lem-weil-pbc-comparison-injective-acyclicity`, `prop-weil-pbc-site-comparison-finite-level`).
+(`lemma-acyclicity-pulled-back-injectives`, `prop-weil-pbc-site-comparison-finite-level`).
 On an affine scheme `W`, the higher cohomology of `ν^* I` on `W_proét` is computed on the affine
 pro-étale site, and vanishes by the Čech criterion
 (`AlgebraicGeometry.Scheme.AffineProEt.isZero_rightDerived_of_exactAt_overCechComplex`): the
@@ -52,7 +52,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 an injective étale sheaf on `W`. Then `H^q(W_proét, ν^* I) = 0` for `q > 0`: on the affine
 pro-étale site, the Čech complexes of `ν^* I` for surjections are exact in positive degrees
 (`exactAt_overCechComplex_comparisonUpperStar`), so the Čech criterion applies.
-(blueprint: `lem-weil-pbc-comparison-injective-acyclicity`) -/
+(blueprint: `lemma-acyclicity-pulled-back-injectives`) -/
 theorem isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar {W : Scheme.{u}}
     [IsAffine W] (I : Sheaf W.smallEtaleTopology A) [Injective I] (q : ℕ) :
     IsZero (((globalSectionsFunctor A W).rightDerived (q + 1)).obj
@@ -104,7 +104,7 @@ lemma _root_.AlgebraicGeometry.Etale.exact_of_exact_affineEtale_sections
   refine (ShortComplex.exact_iff_of_iso ?_).1 hT'
   exact (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm
 
-/-- Blueprint `prop-weil-pbc-site-comparison-finite-level`: Exactness and full faithfulness at
+/-- Blueprint `lemma-acyclicity-pulled-back-injectives--1`: Exactness and full faithfulness at
 finite level
 
 *Acyclicity.* For every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is acyclic for

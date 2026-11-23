@@ -15,7 +15,7 @@ public import Mathlib.LinearAlgebra.Matrix.BilinearForm
 
 - `LinearMap.BilinForm.even_finrank_of_isAlt` — a finite-dimensional vector space over a field
   of characteristic different from `2` carrying a nondegenerate alternating bilinear form has even
-  dimension (blueprint `lem-weil-alternating-form-dimension`).
+  dimension (blueprint `corollary-functional-equation--5`).
 -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ namespace LinearMap.BilinForm
 variable {K V : Type*} [Field K] [NeZero (2 : K)] [AddCommGroup V] [Module K V]
   [FiniteDimensional K V]
 
-/-- Blueprint `lem-weil-alternating-form-dimension`: over a field of characteristic different
+/-- Blueprint `corollary-functional-equation--5`: over a field of characteristic different
 from `2`, a nondegenerate alternating bilinear form on a finite-dimensional vector space forces the
 dimension to be even: the Gram matrix `M` of the form in any basis is skew-symmetric, so
 `det M = det Mᵀ = (-1) ^ dim V * det M`, and `det M ≠ 0` by nondegeneracy. -/

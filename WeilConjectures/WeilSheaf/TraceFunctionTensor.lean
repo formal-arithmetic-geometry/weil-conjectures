@@ -21,9 +21,9 @@ Weil sheaf.
 
 ## Blueprint
 
-These are the properties of the trace function (blueprint `def-fd-trace-function`,
-`def-weil-local-frobenius-trace`) used in the proof of the Fourier trace formula
-(sketch blueprint `thm-fd-fourier-trace`).
+These are the properties of the trace function (blueprint `definition-trace-function`,
+`definition-trace-function`) used in the proof of the Fourier trace formula
+(sketch blueprint `sec-The-Plancherel-formula`).
 -/
 
 @[expose] public section

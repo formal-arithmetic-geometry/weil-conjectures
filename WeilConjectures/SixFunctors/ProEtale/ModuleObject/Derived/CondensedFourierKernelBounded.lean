@@ -19,8 +19,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstruc
 
 /-! Bounded constructibility of the condensed Fourier kernels.
 
-Source: Fourier specialization paragraph of `lem-fd-kernel-composition`
-(blueprint: lem-fd-kernel-composition), using `prop-kernel-lisse`.
+Source: Fourier specialization paragraph of `proposition-fourier-inversion`
+(blueprint: proposition-fourier-inversion), using `lemma-artin-schreier-character-sheaf`.
 -/
 
 @[expose] public noncomputable section
@@ -36,12 +36,12 @@ set_option linter.unusedVariables false in
 constructible, including the noninvertible-cardinality branch of its definition.
 
 Source: latest blueprint Fourier specialization in `lem-fd-kernel-composition.md`,
-`prop-kernel-lisse`, and the actual projector definition of `def-fd-artin-schreier-sheaf`
-(blueprint: lem-fd-fourier-kernel-bounded).
+`lemma-artin-schreier-character-sheaf`, and the actual projector definition of
+`lemma-artin-schreier-character-sheaf--1` (blueprint: lem-fd-fourier-kernel-bounded).
 
 Proof: if the finite-field cardinality is invertible in the scalar coefficient ring,
-prop-kernel-lisse gives a cover on which the kernel is the regular module. Identify
-the regular module with the free module of rank one; local freeness gives finite
+lemma-artin-schreier-character-sheaf gives a cover on which the kernel is the regular module.
+Identify the regular module with the free module of rank one; local freeness gives finite
 presentation on the trivial stratification, hence constructibility. The degree-zero
 single functor then gives bounded constructibility. If the cardinality is not a unit,
 Ring.inverse is zero, so every term of the character projector vanishes. Its image

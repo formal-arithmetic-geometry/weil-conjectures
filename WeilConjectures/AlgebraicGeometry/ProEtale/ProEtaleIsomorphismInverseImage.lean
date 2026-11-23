@@ -35,9 +35,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppl
 
 /-! # Inverse image along an isomorphism of schemes
 
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-
 ## Main statements
 
 - `proEtaleIsoPostcompose_equivalence`: the covering-preserving site equivalence.
@@ -47,6 +44,10 @@ Source: Stacks Project, Tags 09A5 and 00WX
 - `proEtaleIso_constantComparison`: invertible constant comparison and naturality.
 - `proEtaleIso_constantModuleEquivalence`: the same equivalence for module sheaves.
 - `proEtaleIso_constantRingModuleEquivalence`: module sheaves over any constant ring.
+
+## References
+
+* Stacks Project, Tags 09A5, 00WX and 0H7J
 -/
 
 @[expose] public section
@@ -59,18 +60,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Change only the structure map of an object of the pro-etale site.
-Source: Stacks Project, Tag 09A5
-(blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- Change only the structure map of an object of the pro-etale site. -/
 def proEtaleIsoPostcompose {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] : X.ProEt ⥤ Y.ProEt :=
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale f)
 
-/-- The site equivalence and its specified inverse preserve covering families.
-Source: Stacks Project, Tag 09A5
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: compose structure maps with `f` or its inverse; the composites identify naturally
-with the identity, with the identity on underlying schemes. These functors preserve weak
-etaleness and coverings since the underlying schemes and covering arrows are unchanged. -/
+/-- The site equivalence and its specified inverse preserve covering families. -/
 theorem proEtaleIsoPostcompose_equivalence {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] :
     (proEtaleIsoPostcompose f).IsEquivalence ∧
       Nonempty (proEtaleIsoPostcompose f ⋙ proEtaleIsoPostcompose (inv f) ≅ 𝟭 X.ProEt) ∧
@@ -95,9 +89,7 @@ theorem proEtaleIsoPostcompose_equivalence {X Y : Scheme.{u}} (f : X ⟶ Y) [IsI
     ⟨ProEt.coverPreserving_overMap (inferInstance : WeaklyEtale f)⟩,
     ⟨ProEt.coverPreserving_overMap (inferInstance : WeaklyEtale (inv f))⟩⟩
 
-/-- The distinguished comma-category arrow `(u,id)` from the map/pullback adjunction.
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- The distinguished comma-category arrow `(u,id)` from the map/pullback adjunction. -/
 noncomputable def proEtaleIsoCommaArrow {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
     (U : X.ProEt) : U ⟶ (proEtaleBaseChange f).obj ((proEtaleIsoPostcompose f).obj U) :=
   (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ f
@@ -117,15 +109,7 @@ private noncomputable def isoSheafAdjunction {X Y : Scheme.{u}}
   (MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ f
     (inferInstance : WeaklyEtale f) trivial).sheafPushforwardContinuous _ _
 
-/-- The canonical identification is uniquely fixed by the coprojection at `(u,id)`.
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: the distinguished comma object is initial before taking opposites, hence terminal
-in the colimit index. Its coprojection is invertible. The inverse evaluates each
-coprojection by the unique arrow into that terminal object. The resulting presheaf is
-already a sheaf because the site equivalence preserves covers and overlap schemes;
-sheafification leaves it unchanged. The construction is natural in objects and sheaves.
-The prescribed inverse determines the natural isomorphism uniquely. -/
+/-- The canonical identification is uniquely fixed by the coprojection at `(u,id)`. -/
 theorem existsUnique_proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsIso f] (D : Type v) [Category.{u + 1} D]
     [HasColimitsOfSize.{u + 1, u + 1} D] [HasWeakSheafify (ProEt.topology X) D] :
@@ -170,9 +154,7 @@ theorem existsUnique_proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
         Functor.leftUnitor_hom_app, Category.comp_id, e, a, b]
       erw [Category.id_comp])
 
-/-- The canonical section identification, natural both in the sheaf and in the site object.
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image). -/
+/-- The canonical section identification, natural both in the sheaf and in the site object. -/
 noncomputable def proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsIso f] (D : Type v) [Category.{u + 1} D]
     [HasColimitsOfSize.{u + 1, u + 1} D] [HasWeakSheafify (ProEt.topology X) D] :
@@ -183,12 +165,7 @@ noncomputable def proEtaleIsoInverseImageIdentification {X Y : Scheme.{u}}
 
 /-- The recorded adjunction is an equivalence, so its quasi-inverse is the recorded direct
 image. Its inverse image preserves arbitrary limits and colimits, and is exact in the
-abelian case by preservation of finite limits and colimits.
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: both site functors are inverse equivalences preserving covers; the section
-identification identifies inverse image with transport of sheaves. Thus the unit and
-counit are isomorphisms, and an equivalence preserves every existing limit and colimit. -/
+abelian case by preservation of finite limits and colimits. -/
 theorem proEtaleIsoInverseImage_equivalence {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (ProEt.topology X) D] :
@@ -220,12 +197,7 @@ theorem proEtaleIsoInverseImage_equivalence {X Y : Scheme.{u}} (f : X ⟶ Y) [Is
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 /-- The canonical comparison induced by the inverse images of all tower projections.
-The indexing natural number `r` denotes the original positive index `r+1`.
-Source: Stacks Project, Tags 09A5 and 00WX
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: the equivalence preserves the limit cone; its comparison `limit.post` is therefore
-invertible. By its universal property its composites with the projections are exactly
-the inverse images of the original projections. -/
+The indexing natural number `r` denotes the original positive index `r+1`. -/
 theorem proEtaleIso_inverseLimitComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (ProEt.topology X) D]
@@ -279,12 +251,7 @@ private theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   infer_instance
 
 /-- Constant coefficient comparisons are isomorphisms and natural in the coefficient
-object; in particular this asserts the ring-sheaf statement for every commutative ring.
-Source: Stacks Project, Tags 09A5, 00WX and 0H7J
-(blueprint: lem-weil-proetale-isomorphism-inverse-image).
-Proof: under the canonical section identification the constant-presheaf map is the
-identity. Sheafification preserves this identification. Naturality follows from the
-naturality of the constant-presheaf map and the inverse-image adjunction counit. -/
+object; in particular this asserts the ring-sheaf statement for every commutative ring. -/
 theorem proEtaleIso_constantComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f]
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (ProEt.topology X) D] [HasWeakSheafify (ProEt.topology Y) D] :

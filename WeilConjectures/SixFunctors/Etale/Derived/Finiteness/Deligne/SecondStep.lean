@@ -15,8 +15,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 Let `j : X ⟶ Y` be an immersion of finite type `S`-schemes with `X` smooth over `S`, and
 `F` a finite locally constant sheaf on `X`, with generic fibre of dimension `≤ n`. Granting
 the generic constructibility theorem in generic dimension `< n` and the smooth case
-`lem-asd-smooth-generic-direct-image`, there is a nonempty open of `S` over which `Rj_* F` is
-bounded constructible and commutes with every base change from a noetherian scheme
+`lemma-smooth-morphisms-locally-constant-sheaves`, there is a nonempty open of `S` over which
+`Rj_* F` is bounded constructible and commutes with every base change from a noetherian scheme
 (`AlgebraicGeometry.Etale.exists_hasDirectImageBaseChangeOnPlus_of_smooth`).
 
 The question being local on `Y`, cover `Y` by finitely many affine opens, embed each into a

@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Monoidal.Functor
 /-! # Ordinary constant-module realization of a geometric inverse image
 
 Source: Stacks Project, Sites, Tag 00YV (6), Modules on Sites, Tag 03EL,
-and Cohomology on Sites, Tag 07A4
-(blueprint: lem-sfb-constant-module-ordinary-realization).
+and Cohomology on Sites, Tag 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -79,7 +78,6 @@ private def scalarSection
     (constantCommuteCompose J (forget CommRingCat.{max u v})).inv.app (CommRingCat.of B)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Compare the commutative-ring and ring sheafification units.
 private theorem restriction_scalar (M : Modules J A) (U : Cᵒᵖ) (a : A)
     (x : M.val.obj U) :

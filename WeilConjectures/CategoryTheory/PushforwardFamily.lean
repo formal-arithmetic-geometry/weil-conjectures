@@ -19,7 +19,6 @@ adjoints `P f ⊣ Q f`. For a commutative square `g' ≫ f = f' ≫ g`, the base
 comparison `P g ⋙ P f' ≅ P f ⋙ P g'` of the composition isomorphisms
 (`CategoryTheory.pullbackFamilySquareComparison`). The base-change morphisms of two horizontally
 pasted squares paste (`CategoryTheory.pushforwardBaseChange_app_paste`).
-
 -/
 
 @[expose] public section

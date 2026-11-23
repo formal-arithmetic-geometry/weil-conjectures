@@ -25,8 +25,7 @@ namespace CategoryTheory
 
 variable {C : Type u} {D : Type u'} [Category.{v} C] [Category.{w} D]
 
-/-- A natural equivalence of all represented Hom sets gives an isomorphism.
-This is the explicit Yoneda argument in proof step 11. -/
+/-- A natural equivalence of all represented Hom sets gives an isomorphism. -/
 noncomputable def isoOfNaturalHomEquiv {A B : C}
     (E : ∀ T : C, (T ⟶ A) ≃ (T ⟶ B))
     (h : ∀ {S T : C} (f : S ⟶ T) (g : T ⟶ A), E S (f ≫ g) = f ≫ E T g) :
@@ -55,11 +54,7 @@ noncomputable def projectionInternalHomMap (L : D) (N : C) :
     (φ L _ ≫ (aC.adj (e.obj L)).counit.app N)))
 
 /-- Projection isomorphisms give an isomorphism of internal Hom objects.
-Source: Bhatt--Scholze Lemma 6.7.13, formal adjunction argument, steps 9--11.
-(blueprint: lem-sfb-projection-internal-hom-formal)
-Proof: tensor-Hom, projection, e adjoint to s, tensor-Hom and r adjoint to q give
-natural bijections on Hom from every test object. Apply the bijections to identities;
-naturality proves the inverse identities. The hom is the evaluation transpose. -/
+Source: Bhatt--Scholze Lemma 6.7.13, formal adjunction argument, steps 9--11. -/
 theorem projectionInternalHomMap_isIso
     (hφ : ∀ L T, IsIso (φ L T))
     (hn : ∀ (L : D) {T T' : C} (f : T ⟶ T'),

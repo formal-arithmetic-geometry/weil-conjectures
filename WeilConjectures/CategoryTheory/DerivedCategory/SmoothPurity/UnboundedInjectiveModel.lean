@@ -26,14 +26,7 @@ namespace DerivedCategory
 
 /-- Every derived object in a Grothendieck abelian category has a K-injective model
 with injective terms.
-Source: Stacks Project, Tag 079P, using the functorial injective complex embedding.
-(blueprint: lem-pur-unbounded-injective-model).
-
-Proof: Factor a complex-to-zero map by the monomorphic quasi-isomorphism weak
-factorization system. Its middle complex I is K-injective and has the right lifting
-property. Embed I by a monomorphic quasi-isomorphism through injective subobjects in
-each degree. The lifting property retracts that embedding, so each I^n is a retract of
-an injective object. Localizing the original factorization gives the required model. -/
+Source: Stacks Project, Tag 079P. -/
 theorem nonempty_injectiveModel
     (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
     [HasDerivedCategory C] (M : DerivedCategory C) : Nonempty M.InjectiveModel := by

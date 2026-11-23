@@ -12,8 +12,7 @@ public import Mathlib.Order.Directed
 # Choosing a posetal subsystem that contains a fixed partial order
 
 Source: the antisymmetrization construction, used to express Stacks Project, Sites,
-Tag 00YO in terms of partially ordered indices
-(auxiliary; not a blueprint node).
+Tag 00YO in terms of partially ordered indices.
 -/
 
 @[expose] public section
@@ -22,9 +21,7 @@ universe w
 
 namespace CategoryTheory
 
-/-- A preorder has a cofinal posetal subsystem containing a given embedded partial order.
-Source: antisymmetrization, with representatives fixed on the given partial order
-(auxiliary; not a blueprint node). -/
+/-- A preorder has a cofinal posetal subsystem containing a given embedded partial order. -/
 theorem exists_pointSystem_posetal_replacement
     {J I : Type w} [PartialOrder J] [Preorder I]
     [Nonempty J] [IsDirected I (· ≤ ·)] (e : J ↪o I) :

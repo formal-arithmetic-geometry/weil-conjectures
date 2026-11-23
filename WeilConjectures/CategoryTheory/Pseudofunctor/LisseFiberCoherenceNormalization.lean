@@ -15,7 +15,6 @@ set_option linter.privateModule false
 # Normalization of coefficient comparisons
 
 The categorical coherence argument used for Weil II (1.1.1) d).
-(blueprint: lem-pod-lisse-fiber-coherence-normalization).
 -/
 
 @[expose] public section

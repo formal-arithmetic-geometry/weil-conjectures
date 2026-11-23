@@ -54,15 +54,16 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- The ordinary closed exceptional right adjoint supplied by lem-exc-closed-ambient.
-Source: blueprint thm-coef-finite-hom, paragraph 3
-(blueprint: lem-coef-etale-locally-closed-shriek). -/
+/-- The ordinary closed exceptional right adjoint supplied by
+lemma-local-cohomology-right-adjoint--1. Source: blueprint
+lemma-change-coefficients-internal-hom--1, paragraph 3 (blueprint:
+lem-coef-etale-locally-closed-shriek). -/
 abbrev etaleShriekClosedExceptional (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] :=
   (R(lowerStar (ModuleCat.{u + 1} A) g)).rightAdjoint
 
 /-- The fixed ordinary closed exceptional adjunction.
-Source: blueprint thm-coef-finite-hom, paragraph 3
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraph 3
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def etaleShriekClosedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g] :
@@ -71,7 +72,7 @@ def etaleShriekClosedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The composite ordinary adjunction `g_* j_! ⊣ j^* Rg^!`, with its pasted counit.
 This is the locally closed case of the recorded compact-support construction.
-Source: blueprint thm-coef-finite-hom, paragraph 4
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def etaleShriekLocallyClosedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
     {S Z X : Scheme.{u}} (g : Z ⟶ X) [IsClosedImmersion g]
@@ -84,7 +85,7 @@ def etaleShriekLocallyClosedAdjunction (A : Type (u + 1)) [CommRing A] [Finite A
 /-- Inverse of the actual coefficient comparison on its isomorphism locus.
 The zero extension elsewhere merely makes the formula total; the theorem explicitly
 asserts invertibility of this comparison on every input on which it uses the inverse.
-Source: blueprint thm-coef-finite-hom, paragraph 3
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraph 3
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def etaleShriekDirectInverse
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
@@ -98,7 +99,7 @@ def etaleShriekDirectInverse
 
 /-- The specified closed coefficient map: the exceptional-adjunction transpose of
 `c_g⁻¹` followed by scalar extension of the A-exceptional counit.
-Source: blueprint thm-coef-finite-hom, paragraph 3
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraph 3
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def etaleShriekClosedCoefficientMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -112,7 +113,7 @@ def etaleShriekClosedCoefficientMap
 
 /-- Restrict the closed coefficient map, with the canonical scalar/restriction
 identification. This is precisely the map `b_s = j^* b_g` under that identification.
-Source: blueprint thm-coef-finite-hom, paragraphs 3--4
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraphs 3--4
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def etaleShriekLocallyClosedCoefficientMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -128,7 +129,7 @@ def etaleShriekLocallyClosedCoefficientMap
 /-- The fixed compact-support coefficient map `g_*(q_j) ∘ c_{g,j_!P}`.
 The open comparison is the published natural isomorphism normalized to the identity
 on the open stratum, not an arbitrary choice of scalar comparison.
-Source: blueprint thm-coef-finite-hom, paragraph 4
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraph 4
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def etaleShriekLocallyClosedSupportMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
@@ -145,7 +146,7 @@ def etaleShriekLocallyClosedSupportMap
 on the specified finite-Tor constructible domains and the counit identity.
 The final theorem supplies the existing finite-stage predicate as `ctf`; this parameter
 only packages the assertions and introduces no alternative constructibility definition.
-Source: blueprint thm-coef-finite-hom, paragraphs 3--4
+Source: blueprint lemma-change-coefficients-internal-hom--1, paragraphs 3--4
 (blueprint: lem-coef-etale-locally-closed-shriek). -/
 def EtaleLocallyClosedShriekComparisons
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -564,7 +565,7 @@ private lemma closedCoefficient_isIso
 
 /-- Finite quotient coefficient change commutes with ordinary étale locally closed
 exceptional restriction and compact support, with the normalized counit identity.
-Source: blueprint thm-coef-finite-hom, proof paragraphs 3--4
+Source: blueprint lemma-change-coefficients-internal-hom--1, proof paragraphs 3--4
 (blueprint: lem-coef-etale-locally-closed-shriek).
 
 Proof (the twelve steps of the DAG node):
@@ -574,32 +575,33 @@ Proof (the twelve steps of the DAG node):
    a finite A-module since it is a quotient (def-weil-l-adic-coefficient-extension).
 2. The complementary open has finite cohomological dimension by
    lem-etale-finite-type-sep-closed-derived-dimension. Its higher images are
-   constructible by sbc-thm-finiteness-finite-type. A power of l kills A, since
+   constructible by theorem-results-from-etale-theory. A power of l kills A, since
    l is a unit times a positive power of the uniformizer
-   (lem-weil-l-adic-extension-integers-dvr). Apply prop-exc-closed-tor to get
+   (lem-weil-l-adic-extension-integers-dvr). Apply theorem-f-shriek-finite-coefficients--1 to get
    finite-Tor bounded constructibility of Ng in the ambient ordinary adjunction.
 3. Exact inverse image preserves constructibility (prop-constructible-pullback).
-   Bounded flat models (lem-sf-flat-model), K-flatness of bounded flat complexes,
+   Bounded flat models (lemma-flat-models-generators--1), K-flatness of bounded flat complexes,
    and lem-weil-pbc-ringed-topoi-derived-tensor-pullback give the Tor bounds on
    both open restrictions; lem-coef-etale-open-tensor fixes their scalar comparison.
-4. The closed-support equivalence lem-kun-04ca lifts to module sheaves by transporting
+4. The closed-support equivalence proposition-extension-zero-restriction-closed-subscheme--5 lifts
+to module sheaves by transporting
    scalar actions. The closed stalk formula and exact conservative geometric stalks
    show that g_* is exact. The inverse-image/direct-image adjunction descends,
    with invertible counit, so derived g_* is fully faithful and reflects isomorphisms.
    On its image, composition with the exceptional counit is a Hom bijection.
-5. Apply lem-coef-finite-direct-image to Ng and to the complementary-open restriction
+5. Apply lemma-change-coefficients-direct-image--1 to Ng and to the complementary-open restriction
    of M. Its counit normalization fixes the comparisons, including the third terms
    of the closed-support triangles.
 6. Transpose the complementary-open unit square. The defining coefficient-counit
    equation and the triangle identity identify both transposes with the identity.
 7. Apply the exact scalar functor (lem-pur-derived-change-of-rings) to the A-support
-   triangle (lem-exc-closed-support-triangle). Rotate, use TR3, and rotate back.
+   triangle (lemma-local-cohomology-right-adjoint--2). Rotate, use TR3, and rotate back.
    The identity on middle terms and the isomorphism on third terms give an isomorphism
    on first terms (lem-sf-triangle-morphism-iso), whose counit composite is F(epsilon_A).
 8. The Hom bijection in step 4 identifies that first map with g_*b_g composed with c_g.
    Reflect invertibility to obtain b_g. Its defining adjunction transpose gives naturality.
 9. Apply exact restriction to b_g and the canonical open scalar identification to get b_s.
-   Extension by zero preserves bounded constructibility (lem-fin-extension-by-zero)
+   Extension by zero preserves bounded constructibility (proposition-six-operations-dctf--6)
    and finite Tor amplitude by lem-coef-etale-open-tensor and its K-flat models.
 10. Compose the degreewise open adjunction with the ambient closed adjunction.
     Its counit is g_*(epsilon_j) followed by epsilon_g. Compose c_g with g_*(q_j)

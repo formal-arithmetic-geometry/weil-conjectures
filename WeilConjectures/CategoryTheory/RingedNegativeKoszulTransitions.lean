@@ -8,9 +8,7 @@ public import WeilConjectures.CategoryTheory.SignedKoszulCompletionModel
 
 /-! # Explicit transitions for the ordered negative Koszul complex
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the negative finite free Koszul system.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, the negative finite free Koszul system.
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +26,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
 /-- The negative-factor transition has components (b,1) in degrees (-1,0).
-Source: Stacks, Tag 0A0E
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0A0E. -/
 def ringedNegativeKoszulFactorTransitionF
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n : ℤ) :
     (ringedNegativeKoszulFactor O b (m + 1)).X n ⟶
@@ -47,10 +44,7 @@ def ringedNegativeKoszulFactorTransitionF
   else 0
 
 /-- The only nonzero chain square is b times b^(m+1) = b^(m+2).
-Source: Stacks, Tag 0A0E
-(auxiliary; not a blueprint node).
-Proof: in degree -1 use the power identity; outside that degree both differentials
-vanish by the two-term support. No scalar is inverted. -/
+Source: Stacks, Tag 0A0E. -/
 theorem ringedNegativeKoszulFactorTransitionF_comm
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n k : ℤ)
     (h : (ComplexShape.up ℤ).Rel n k) :
@@ -71,8 +65,7 @@ theorem ringedNegativeKoszulFactorTransitionF_comm
     simp
 
 /-- The actual chain map (b,1), with no choice of a transition.
-Source: Stacks, Tag 0A0E
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0A0E. -/
 def ringedNegativeKoszulFactorTransition
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedNegativeKoszulFactor O b (m + 1) ⟶ ringedNegativeKoszulFactor O b m where
@@ -80,8 +73,7 @@ def ringedNegativeKoszulFactorTransition
   comm' := ringedNegativeKoszulFactorTransitionF_comm O b m
 
 /-- Tensor the explicit negative-factor transitions in their original order.
-Source: Stacks, Tag 0A0E
-(auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0A0E. -/
 def ringedNegativeKoszulTransition : (r : ℕ) →
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) → (m : ℕ) →
       ringedNegativeKoszul O r b (m + 1) ⟶ ringedNegativeKoszul O r b m :=
@@ -93,11 +85,7 @@ def ringedNegativeKoszulTransition : (r : ℕ) →
       ((ringedKoszulTensor O).obj _).map (ih (fun i ↦ b i.succ) m)) r
 
 /-- The empty negative tensor is the dual of the empty positive tensor.
-Source: Stacks, Tag 0A0E, the empty finite free complex
-(auxiliary; not a blueprint node).
-Proof: inverse Hom-unit evaluation identifies O[0] with Hom(O[0],O[0]).
-Both transitions are identities. The positive projection is identity, so its
-dual unit is this same inverse evaluation; the empty basis is the single unit. -/
+Source: Stacks, Tag 0A0E, the empty finite free complex. -/
 theorem ringedNegativeKoszulZeroDuality
     (b : Fin 0 → (O.obj ⋙ forget CommRingCat).sections) :
     ∃ e : ∀ m : ℕ, ringedNegativeKoszul O 0 b m ≅

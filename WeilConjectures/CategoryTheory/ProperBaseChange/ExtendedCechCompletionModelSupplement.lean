@@ -342,8 +342,7 @@ public import WeilConjectures.AlgebraicGeometry.ExtendedCechCompletionModel
 /-!
 # Global extended Cech model and its derived completion unit
 
-Source: Stacks Project, algebraization.tex, Tags 099E and 099F
-(blueprint: lem-weil-pbc-extended-cech-completion-model).
+Source: Stacks Project, algebraization.tex, Tags 099E and 099F.
 -/
 
 @[expose] public section
@@ -368,7 +367,6 @@ private theorem compose_three_squares {D : Type*} [Category D]
     _ = a ≫ b ≫ (h ≫ c') := by rw [hb]; simp only [Category.assoc]
     _ = _ := by rw [hc]; simp only [Category.assoc]
 
-set_option maxHeartbeats 1200000 in
 -- Descending evaluation compares several expanded product-localization functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem unit_isIso_of_complete_universal

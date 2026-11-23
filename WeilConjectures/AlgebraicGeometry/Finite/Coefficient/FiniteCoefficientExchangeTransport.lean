@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteLevelRingedProEtale
 # Transport of finite coefficient exchange
 
 This is the coefficient transport step for the finite-level proper base-change theorem.
-Source: Stacks Tags 09C8 and 09C9 (blueprint: thm-weil-pbc-finite-level-proetale).
-(blueprint: lem-weil-pbc-finite-origin-exchange-transport).
+Source: Stacks Tags 09C8 and 09C9 (blueprint:
+proposition-proper-direct-image-constructible-complexes--5). (blueprint:
+lem-weil-pbc-finite-origin-exchange-transport).
 -/
 
 @[expose] public section
@@ -35,16 +36,16 @@ constant-coefficient proper-base-change theorem through the canonical coefficien
 using the mate compatibility of exact restriction of scalars. This statement is strictly an
 intermediate transport result: it retains arbitrary coefficient identifications and only asserts
 invertibility after applying `finiteOriginToConstant`.
-Source: Stacks Tags 09C8 and 09C9 (blueprint: thm-weil-pbc-finite-level-proetale).
-(blueprint: lem-weil-pbc-finite-origin-exchange-transport).
-Proof: use the constants-to-functions isomorphism at each corner as the scalar-change
-square. The coherence hypothesis makes the scalar-change comparison commute on both paths of
-the chosen Cartesian square. The derived pullback and direct-image comparison isomorphisms from
-`proEtaleRingSheafChangeAdjunction` identify the restriction of the function-coefficient mate
-with the constant-coefficient mate. Apply `finiteConstantRingedExchange_isIso` to the
-finite-coefficient object obtained by realizing the retained étale complex. Finally conjugate
-by the witness isomorphism `_W.iso`; isomorphism reflection for exact restriction gives the
-displayed restricted map.
+Source: Stacks Tags 09C8 and 09C9 (blueprint:
+proposition-proper-direct-image-constructible-complexes--5). (blueprint:
+lem-weil-pbc-finite-origin-exchange-transport). Proof: use the constants-to-functions isomorphism at
+each corner as the scalar-change square. The coherence hypothesis makes the scalar-change comparison
+commute on both paths of the chosen Cartesian square. The derived pullback and direct-image
+comparison isomorphisms from `proEtaleRingSheafChangeAdjunction` identify the restriction of the
+function-coefficient mate with the constant-coefficient mate. Apply
+`finiteConstantRingedExchange_isIso` to the finite-coefficient object obtained by realizing the
+retained étale complex. Finally conjugate by the witness isomorphism `_W.iso`; isomorphism
+reflection for exact restriction gives the displayed restricted map.
 -/
 theorem finiteOriginToConstant_map_ambientExchange_isIso
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

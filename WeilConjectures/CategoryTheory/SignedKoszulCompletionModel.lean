@@ -10,8 +10,8 @@ public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 /-!
 # The explicit signed Koszul completion model
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, and the finite-coordinate calculation
-in lem-cbc-exact-linear-koszul-fiber (auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, and calculation
+in.
 
 The negative Koszul factors are actual two-term complexes and their ordered tensor uses
 `ringedKoszulTensor`, hence `CochainComplex.mapBifunctor` and its total-tensor signs.
@@ -32,7 +32,7 @@ open scoped BigOperators
 namespace CategoryTheory
 
 /-- The negative Koszul factor in degrees -1 and 0, at exponent m+1.
-Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0A0E. -/
 def ringedNegativeKoszulFactor {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u})
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) : ringedSiteComplex O :=
@@ -40,7 +40,7 @@ def ringedNegativeKoszulFactor {C : Type u} [SmallCategory C]
     (by decide : (ComplexShape.up ℤ).Rel (-1) 0)
 
 /-- The ordered tensor of negative factors; the empty tensor is O[0].
-Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0A0E. -/
 def ringedNegativeKoszul {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) :
     (r : ℕ) → (Fin r → (O.obj ⋙ forget CommRingCat).sections) →
@@ -51,7 +51,7 @@ def ringedNegativeKoszul {C : Type u} [SmallCategory C]
       (ringedNegativeKoszulFactor O (b 0) m)).obj (ih (fun i ↦ b i.succ) m)) r
 
 /-- Tensoring a complex with the ordered negative Koszul complex at exponent m+1.
-Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0A0E. -/
 def ringedNegativeKoszulTensor {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u})
     {A : Type z} [CommRing A]
@@ -61,7 +61,7 @@ def ringedNegativeKoszulTensor {C : Type u} [SmallCategory C]
     (ringedNegativeKoszul O r (fun i ↦ ⟨(ρ (a i)).val, (ρ (a i)).property⟩) m)
 
 /-- A one in a specified degree of the negative two-term factor, zero off its support.
-Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0A0E. -/
 def ringedNegativeKoszulFactorBasis {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u})
     (b : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n : ℤ) :
@@ -78,7 +78,7 @@ def ringedNegativeKoszulFactorBasis {C : Type u} [SmallCategory C]
 /-- The pure tensor with entries one, in the ordered subset coordinate of Q.
 The recursion uses the canonical tensor inclusions and the inverse unitor, with no sign
 change. The off-degree entries are zero.
-Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0A0E. -/
 def ringedNegativeKoszulBasis {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) :
     (r : ℕ) → (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) →
@@ -113,7 +113,7 @@ def ringedNegativeKoszulBasis {C : Type u} [SmallCategory C]
 
 /-- The canonical inclusion z ↦ z tensor e_I into the total tensor, where every
 factor of e_I is one. This fixes the finite-coordinate normalization, including I empty.
-Source: Stacks Tag 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0A0E. -/
 def ringedNegativeKoszulSummand {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u})
     {A : Type z} [CommRing A]
@@ -137,7 +137,7 @@ def ringedNegativeKoszulSummand {C : Type u} [SmallCategory C]
 
 /-- The existing global-section Hom scalar action, restricted along the coefficient map.
 This transparent wrapper supplies the recorded Hom-module instance explicitly.
-Source: Stacks Tags 03DD, 04TT (auxiliary; not a blueprint node). -/
+Source: Stacks Tags 03DD, 04TT. -/
 def ringedKoszulCoefficientSMul {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u})
     {A : Type z} [CommRing A]

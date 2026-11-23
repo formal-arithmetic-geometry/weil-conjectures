@@ -67,7 +67,6 @@ import all WeilConjectures.Algebra.Homology.Monoidal.Dual
 /-! # KoszulModuleBasisEvaluation for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-module-basis-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -132,7 +131,6 @@ private theorem signedUncurryInverse {D : Type*} [Category D] [Preadditive D]
   rw [uncurry_units_smul, MonoidalClosed.uncurry_curry] at h'
   rw [h', smul_smul, Int.units_mul_self, one_smul]
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the tensor and Hom comparison through their explicit site instances.
 private theorem complexEvaluation_component (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (p q n : ℤ) (h : p + q = n) :
@@ -223,17 +221,7 @@ private theorem curryUnit (O : Sheaf J CommRingCat.{u}) {X Y : Modules O}
     CategoryTheory.sheaf_unit O X, Category.id_comp]
 
 /-- Evaluate the curry of a sheaf tensor map on a unit basis vector.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Identify categorical curry with the actual sheaf tensorHomEquiv by applying uncurry
-injectivity. On sections, evaluation Hom(unit,Y) is natural in Y. Write any map unit tensor X to
-Y as its left-unitor factorization; tensorHomEquiv naturality and the existing sheaf-unit
-normalization identify its curry followed by unit evaluation with that factorization.
-Proof step 2: Apply tensorHomEquiv naturality for precomposition by b and then the unit case.
-This gives the displayed curryBasis formula.
-Proof step 3: For cochain evaluation use the existing signed curry-component formula on the
-evaluation map. Curry of evaluation is the identity. Apply uncurry and cancel the square of the
-integer sign to get the evaluation component identity.
-(blueprint: lem-f5-koszul-module-basis-evaluation). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem curryBasis (O : Sheaf J CommRingCat.{u}) {P X Y : Modules O}
     (b : one O ⟶ P) (g : ((tensor O).obj P).obj X ⟶ Y) :
     let := SheafOfModules.monoidalCategory O

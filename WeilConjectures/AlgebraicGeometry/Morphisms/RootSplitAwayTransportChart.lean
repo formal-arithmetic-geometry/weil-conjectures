@@ -10,6 +10,13 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Algebra.Pi
 
+/-! # Transporting a root splitting through an affine chart
+
+## References
+
+* Stacks Project, Tag 0EYG, off-divisor case
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -119,26 +126,9 @@ private theorem root_split_degree_one_chart
   ext x
   exact E.commutes x
 
-/-- Transport a specified root splitting through an affine chart over the base.
-
-Source: Stacks Project, Tag 0EYG, off-divisor branch, and affine localization.
-(blueprint: lem-sbc-root-split-away-transport-chart)
-
-Proof: The isomorphism e and its compatibility he identify the two base maps.
-Functoriality of pullbacks identifies Y times Spec S with Y times V. Compose
-with delta and transport every coproduct summand through the inverse of e.
-Naturality and hdelta show that the resulting isomorphism to d copies of Spec S
-commutes with the second projection. Evaluation T at phi(g) gives an S-algebra
-isomorphism S[T]/(T-phi(g)) to S, inverse to the algebra map. Take its finite
-product and apply Spec, which carries finite products of rings to coproducts
-of affine schemes. Since phi(g) is a unit, its image in the product is a unit,
-so the displayed basic open is the whole spectrum. Compose the preceding
-isomorphisms to obtain gamma. Each constituent commutes with the structure
-map, yielding the asserted projection equation. For d=0 the product is the
-zero ring and both the coproduct and its spectrum are empty. For d=1 this is
-just the evaluation isomorphism. No descent along a root cover is asserted:
-the affine chart is required to be isomorphic to that cover over the base.
--/
+/-- Transport a specified root splitting through an affine chart over the base: if the pullback
+of the punctured root cover along `p` splits as `d` copies of it, then the pullback of `p` along
+an affine chart `Spec S ≅ D(g)` is the punctured cover of `d` degree-one root algebras over `S`. -/
 theorem root_split_away_transport_chart
     (R : CommRingCat.{u}) (g : R) (n : ℕ) {Y : Scheme.{u}}
     (p : Y ⟶ Spec R) (d : ℕ) (S : CommRingCat.{u}) (φ : R →+* S)

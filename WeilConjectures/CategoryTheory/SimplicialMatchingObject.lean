@@ -10,9 +10,10 @@ public import Mathlib.CategoryTheory.Limits.Shapes.FiniteMultiequalizer
 public import Mathlib.CategoryTheory.Limits.Shapes.Terminal
 
 /-!
-# Blueprint statements
+# Matching boundary diagram of a simplicial object
 
-lem-weil-pbc-hypercover-refinement.
+This file defines the multicospan shape and index used to describe the matching boundary
+of a simplicial object.
 -/
 
 @[expose] public section
@@ -24,14 +25,16 @@ open scoped Simplicial
 
 namespace CategoryTheory.SimplicialObject
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- The shape of the multicospan diagram of pairs `i < j` of faces of an `(n + 2)`-simplex. -/
 def matchingBoundaryShape (n : ℕ) : MulticospanShape where
   L := Fin (n + 3)
   R := {p : Fin (n + 3) × Fin (n + 3) // p.1 < p.2}
   fst p := p.val.1
   snd p := p.val.2
 
-/-- Required definitions for lem-weil-pbc-hypercover-refinement. -/
+/-- The multicospan index of a simplicial object `K` in degree `n`, with the `n + 3` faces
+`K _⦋n + 1⦌` on the left, the pairs `i < j` of faces on the right, and the face maps
+`δ` as the two maps from each face to the pairwise intersections. -/
 def matchingBoundaryIndex {C : Type u} [Category.{v} C] (K : SimplicialObject C) (n : ℕ) :
     MulticospanIndex (matchingBoundaryShape n) C where
   left _ := K _⦋n + 1⦌

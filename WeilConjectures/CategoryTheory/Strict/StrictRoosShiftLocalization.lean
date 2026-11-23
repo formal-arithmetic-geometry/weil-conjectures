@@ -23,9 +23,7 @@ import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 /-!
 # Signed strict Roos shifts and prescribed localization
 
-Source: Stacks Project, Tag 014E, definition-cone; Tag 011G,
-definition-shift-cochain; Tag 04VG, localization universal property
-(blueprint: lem-a1-strict-roos-shift-localization).
+Source: Stacks Project, Tag 014E; Tag 011G; Tag 04VG, localization universal property.
 
 The strict functor and inclusion are `roosF` and `roosι`. Natural tower index `n`
 represents positive index `n+1`. The localization categories, their universes and

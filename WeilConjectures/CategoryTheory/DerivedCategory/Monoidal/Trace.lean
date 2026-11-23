@@ -22,8 +22,6 @@ categorical trace in `D(A)` of the image of a chain endomorphism `v` of `P` is t
 categorical trace of `v` in the category of complexes, for the termwise dual of `P`
 (`DerivedCategory.trace_Qh_map_quotient_map`). The latter is the supertrace
 `∑ₚ (-1)ᵖ tr(vᵖ | Pᵖ)` (`CochainComplex.trace_f_zero`).
-
-This is used for blueprint `sk-p-trace`, together with `lem-trf-chain-supertrace`.
 -/
 
 @[expose] public section
@@ -48,12 +46,12 @@ lemma braiding_hom_μ_Qh (X Y : HomotopyCategory A (.up ℤ)) :
     (β_ (Qh.obj X) (Qh.obj Y)).hom ≫ μ Qh Y X = μ Qh X Y ≫ Qh.map (β_ X Y).hom :=
   DerivedMonoidal.braiding_hom_μ _ _ X Y
 
-/-- Blueprint `sk-p-trace` (via `lem-trf-chain-supertrace`): let `P` be a bounded complex of
-dualizable objects and `v : P ⟶ P` a chain map. If the lax monoidal structure of
-`Qh : K(A) ⥤ D(A)` is compatible with the Koszul braiding of complexes and the braiding of
-`D(A)` on K-flat complexes, then the categorical trace in `D(A)` of the image of `v` is the image
-of the categorical trace of `v` in the category of complexes, computed with the termwise dual of
-`P` (`CochainComplex.hasRightDual`). The right dual of the image of `P` in `D(A)` is arbitrary. -/
+/-- Let `P` be a bounded complex of dualizable objects and `v : P ⟶ P` a chain map. If the lax
+monoidal structure of `Qh : K(A) ⥤ D(A)` is compatible with the Koszul braiding of complexes and
+the braiding of `D(A)` on K-flat complexes, then the categorical trace in `D(A)` of the image of
+`v` is the image of the categorical trace of `v` in the category of complexes, computed with the
+termwise dual of `P` (`CochainComplex.hasRightDual`). The right dual of the image of `P` in
+`D(A)` is arbitrary. -/
 theorem trace_Qh_map_quotient_map [BraidedCategory (DerivedCategory A)]
     (hβ : ∀ X Y : HomotopyCategory A (.up ℤ), (HomotopyCategory.quasiIso A (.up ℤ)).kFlat X →
       (HomotopyCategory.quasiIso A (.up ℤ)).kFlat Y →

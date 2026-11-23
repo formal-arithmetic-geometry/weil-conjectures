@@ -13,7 +13,10 @@ set_option linter.privateModule false
 /-! # Rank-zero projective bundles
 
 The sole normalized coordinate is a global free generator on each frame open.
-Source: Stacks Project, Tag 01OE.
+
+## References
+
+* Stacks Project, Tag 01OE
 -/
 
 @[expose] public section

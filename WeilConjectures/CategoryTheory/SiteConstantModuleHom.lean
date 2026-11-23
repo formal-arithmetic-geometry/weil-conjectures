@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Sites.ConstantForget
 
 /-! # Internal Hom of constant module sheaves
 
-Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H.
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical identification of the constant ring sheaf with the underlying ring sheaf
-of the constant commutative ring sheaf. Source: Stacks Tags 03CY and 093T
-(auxiliary; not a blueprint node). -/
+of the constant commutative ring sheaf. Source: Stacks Tags 03CY and 093T. -/
 def constantModuleHomRingIso :
     (constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ) ≅
       (sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
@@ -53,8 +51,7 @@ def constantModuleHomRingIso :
       ((Functor.const Cᵒᵖ).obj (CommRingCat.of Λ))
 
 /-- The recorded constant-module functor, transported along the canonical ring isomorphism
-so that the recorded internal Hom applies. Source: Stacks Tags 03CY and 093T
-(auxiliary; not a blueprint node). -/
+so that the recorded internal Hom applies. Source: Stacks Tags 03CY and 093T. -/
 def constantModuleHomFunctor :
     ModuleCat.{max u v} Λ ⥤ SheafOfModules.{max u v}
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj
@@ -63,8 +60,7 @@ def constantModuleHomFunctor :
     SheafOfModules.pushforward (F := 𝟭 C) (constantModuleHomRingIso J Λ).inv
 
 /-- The constant-section unit, retaining the underlying additive sheafification unit after
-canonical coefficient transport. Source: Stacks Tags 03CY and 093T
-(auxiliary; not a blueprint node). -/
+canonical coefficient transport. Source: Stacks Tags 03CY and 093T. -/
 def constantModuleHomUnit (M : ModuleCat.{max u v} Λ) :
     (Functor.const Cᵒᵖ).obj ((forget₂ (ModuleCat Λ) AddCommGrpCat).obj M) ⟶
       ((constantModuleHomFunctor J Λ).obj M).val.presheaf :=

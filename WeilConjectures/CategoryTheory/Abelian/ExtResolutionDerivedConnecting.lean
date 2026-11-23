@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Abelian.SplitSESCocycleBoundary
 /-!
 # Injective-resolution and derived connecting morphisms agree
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 06XR
-(blueprint: lem-sc-p1-ext-resolution-derived-connecting).
+Source: Stacks Project, Derived Categories, Tags 05TE and 06XR.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The injective-resolution boundary, computed by lifting a cocycle and taking its
  differential, agrees with the boundary of the distinguished short-exact-sequence triangle.
-Source: Stacks Project, Derived Categories, Tags 05TE and 06XR
-(blueprint: lem-sc-p1-ext-resolution-derived-connecting).
+Source: Stacks Project, Derived Categories, Tags 05TE and 06XR.
 
 Here `i`, `p`, `hιi`, `hιp`, and `hexact` describe any horseshoe resolution of `S`.
 For a cocycle `c`, choose a lift `b` through `p`, and factor its differential as `a ≫ i`.
@@ -40,16 +38,7 @@ The resolution connecting map sends the class of `c` to the class of `a`. Degree
 short exactness splits because the first resolution is injective, so all these lifts exist.
 The constructor `extMk` is the inverse of the canonical Ext/cohomology-class comparison.
 Thus the equation below is equality of the two connecting maps on every class, with
-all choices of representatives and lifts allowed, including in degree zero.
-
-Proof: Extend the horseshoe to integer degrees and split each row, transporting the
-injective-kernel splittings through the canonical degree isomorphisms. Below zero use
-the zero splitting. The augmentations give a morphism of short exact rows. Apply
-triangleOfSESδ_naturality and lem-sc-p1-split-ses-boundary-comparison to identify the
-single-object boundary with the split boundary after the augmentations. Transport
-c,b,a to integer degrees and apply lem-sc-p1-split-ses-cocycle-boundary. Finally rewrite
-extMk_hom as its cocycle roof and homologySequenceδ as shifted composition. Invert the
-augmentation maps and use associativity of shifted composition to obtain the equation. -/
+all choices of representatives and lifts allowed, including in degree zero. -/
 theorem extMk_resolution_connecting_eq_triangle
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     {S : ShortComplex C} (hS : S.ShortExact) (M : C)

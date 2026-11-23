@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryMonoidal
 
 Balanced tensor coequalizers give the tensorator, with coherence checked on their
 presentation epimorphisms. Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-ordinary-monoidal)
 -/
 
 @[expose] public section
@@ -133,7 +132,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   {R : C} [MonObj R] [IsCommMonObj R] {S : D} [MonObj S] [IsCommMonObj S]
   {G : C ⥤ D} [G.Braided] (ρ : S ⟶ G.obj R) [IsMonHom ρ] [IsIso ρ]
   [PreservesColimitsOfShape WalkingParallelPair (mapModComap ρ)]
-set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 private theorem mapModComap_braided (M N : Mod C R) :
     let := mapModComapMonoidal ρ
@@ -159,7 +157,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 attribute [local instance 20000] sheafBraidedCategory
 local instance instEssentiallySmallProfinite_integralResidueOrdinaryMonoidal
     : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
-set_option maxHeartbeats 600000 in
 -- Allow elaboration of the explicitly constructed module tensor comparisons.
 @[instance_reducible] private noncomputable def ordinary_braided
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -192,12 +189,7 @@ set_option maxHeartbeats 600000 in
       braided := h.braided }
 /-- Canonical ordinary module pullback commutes with the braiding.
 
-The relative tensor coequalizer epimorphism reduces this to braiding compatibility
-of ambient sheaf pullback. Transport along the coefficient pullback isomorphism
-preserves that equation; invert the monoidal tensorator to obtain the oplax form.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(5); ordinary symmetric monoidal pullback.
-(blueprint: new-integral-residue-ordinary-braiding) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(5). -/
 theorem residueOrdinaryUpperStar_braiding
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)

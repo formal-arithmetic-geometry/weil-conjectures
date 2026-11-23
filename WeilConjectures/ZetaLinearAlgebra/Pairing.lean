@@ -25,6 +25,8 @@ the pairing is Poincaré duality and `c = qᵈ`.
 
 * `LinearMap.injective_of_similitude`, `LinearMap.injective_right_of_similitude`: both members
   of a similitude pair are automatically injective, hence bijective.
+* `LinearMap.isUnit_of_similitude_of_isField`: the first member of a similitude pair over a
+  commutative ring that is a field is invertible.
 * `LinearMap.dualMap_mul_conj_of_similitude`,
   `LinearMap.charpoly_eq_smul_inverse_dualMap_of_similitude`: transported along the isomorphism
   `W ≃ₗ[L] Dual L V` given by the pairing, `G` becomes `c • (F.dualMap)⁻¹`.
@@ -362,6 +364,15 @@ structure of `L` alone, without comparing two `Field`-derived instance paths. -/
 variable {L V W : Type*} [CommRing L] [AddCommGroup V] [Module L V] [AddCommGroup W]
   [Module L W] {p : V →ₗ[L] W →ₗ[L] L} [p.IsPerfPair] {F : Module.End L V}
   {G : Module.End L W} {c : L}
+
+/-- Over a commutative ring `L` that is a field, the first member `F` of a similitude pair
+`p (F v) (G w) = c * p v w`, `c ≠ 0`, for a perfect pairing `p` is invertible. -/
+theorem isUnit_of_similitude_of_isField (hL : IsField L) (hc : c ≠ 0)
+    (hFG : ∀ v w, p (F v) (G w) = c * p v w) : IsUnit F := by
+  let := hL.toField
+  have := Module.IsReflexive.of_isPerfPair p
+  have hinj := injective_of_similitude hc hFG
+  exact (Module.End.isUnit_iff F).2 ⟨hinj, LinearMap.injective_iff_surjective.mp hinj⟩
 
 /-- `LinearMap.conj_toPerfPair_eq_smul_inverse_dualMap_of_similitude` over a commutative ring
 that is a field. -/

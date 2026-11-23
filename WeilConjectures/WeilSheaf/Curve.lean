@@ -85,7 +85,7 @@ theorem subsingleton_compactlySupportedCohomology_zero_of_isZero (F : WeilSheaf 
   exact ModuleCat.subsingleton_of_isZero
     ((WeilCoefficients.toModuleCat l).map_isZero (h.of_iso e))
 
-/-- Blueprint `lem-a1-affine-hc0`: Vanishing of `H_c⁰` on a nonproper curve.
+/-- **Vanishing of `H_c⁰` on a nonproper curve.**
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
 Then `H_c⁰ (U, ℱ) = 0`.
@@ -142,10 +142,12 @@ theorem subsingleton_compactlySupportedCohomology_of_notMem [IsAffine U]
   rw [Finset.mem_insert, Finset.mem_singleton] at hi
   obtain rfl | hi' : i = 0 ∨ i < 0 ∨ 2 < i := by omega
   · exact subsingleton_compactlySupportedCohomology_zero F hF
-  · exact subsingleton_compactlySupportedCohomology_of_isAffine F hi'
+  · rcases hi' with hi' | hi'
+    · exact subsingleton_compactlySupportedCohomology_of_neg F hi'
+    · exact subsingleton_compactlySupportedCohomology_of_isLisse hF hi'
 
 open PowerSeries in
-/-- Blueprint `cor-rp-euler-product`: Euler product of the `L`-function of a lisse sheaf.
+/-- **Euler product of the `L`-function of a lisse sheaf.**
 
 Let `U₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `U₀`.
 Then, as power series in `T`,
@@ -155,9 +157,9 @@ Then, as power series in `T`,
 the product over the closed points being locally finite: for every `n`, the coefficient of
 `T ^ n` of the finite product over any finite set `s` of closed points containing those of
 degree at most `n` is the coefficient of `T ^ n` of the right-hand side. This is the
-Euler-product form of the trace formula (`thm-trf-l-function-euler-product`) for `ℱ` placed in
-degree zero, whose compactly supported cohomology is concentrated in degrees `0, 1, 2`, together
-with `H_c⁰ (U, ℱ) = 0` (`lem-a1-affine-hc0`). -/
+Euler-product form of the trace formula for `ℱ` placed in degree zero, whose compactly supported
+cohomology is concentrated in degrees `0, 1, 2`, together with `H_c⁰ (U, ℱ) = 0`
+(`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero`). -/
 theorem coeff_prod_inv_localPolynomial_stalk_eq [IsAffine U]
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
     [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)

@@ -87,7 +87,6 @@ theorem IsIrreducibleLisse.of_iso {F G : WeilSheaf k₀ l X} (e : F ≅ G)
   · have : IsIso i := IsIso.of_isIso_comp_right i e.inv
     exact Or.inr this
 
-set_option synthInstance.maxHeartbeats 80000 in
 -- The instances `PreservesZeroMorphisms` of the equivalence take longer to find with the full
 -- import context (`WeilSheaf.Localization` upstream).
 /-- An autoequivalence `E` of Weil sheaves whose inverse preserves lisse sheaves maps irreducible

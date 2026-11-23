@@ -1050,7 +1050,7 @@ private theorem trace_square_tensor (w : p ≫ f = q ≫ f) :
 end SquareCoherence
 
 /-- The base twist R_Y(1)[2], its recorded integral line placed in degree zero.
-Source: sk-def-sp-tate-twist (blueprint: lem-sfb-trace-base-change-first). -/
+Source: definition-tate-twists (blueprint: lem-sfb-trace-base-change-first). -/
 @[irreducible]
 def traceTate (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (Z : Scheme.{u}) : TraceD (Profinite.padicIntegersRingObj ℓ E.1) Z :=

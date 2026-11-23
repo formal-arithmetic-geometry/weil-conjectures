@@ -56,7 +56,7 @@ Proof:
    witnesses. Localizing at the compatible primes gives colimit `T`. The tail is cofinal.
    Use [lem-weil-pbc-polynomial-scalar-extension], [lem-weil-pbc-tensor-quotient-base-change],
    [lem-weil-pbc-filtered-colimit-rings-zero],
-   [lem-weil-pbc-filtered-colimit-localization-at-prime],
+   [lemma-quasi-finite-coordinates--1],
    [lem-weil-pbc-colimit-initial-full-subcategory] and
    [lem-weil-pbc-filtered-colimit-modules-criterion].
 3. Base change of localization gives an intermediate localization of the polynomial

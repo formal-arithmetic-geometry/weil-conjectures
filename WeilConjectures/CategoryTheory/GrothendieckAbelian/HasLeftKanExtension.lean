@@ -77,7 +77,6 @@ For an étale `g` both are also proved in
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs`, and for a weakly étale `g` in
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs`, via the adjunction
 `MorphismProperty.Over.mapPullbackAdj`.
-
 -/
 
 @[expose] public section

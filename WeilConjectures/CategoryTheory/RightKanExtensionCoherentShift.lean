@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 /-! # Shift structures on right Kan extensions
 
 Source: Stacks Project, Derived Categories, Tag 05SU and Proposition Tag 05SE.
-(blueprint: lem-pur-right-kan-extension-coherent-shift).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -176,22 +175,7 @@ private lemma kanShiftIso_add
 
 
 /-- A right Kan extension inherits coherent integer shifts from its two input functors.
-Source: Stacks Project, Derived Categories, Tag 05SU and Proposition Tag 05SE;
-the universal-property argument assembling the shift comparisons.
-(blueprint: lem-pur-right-kan-extension-coherent-shift).
-
-Proof: For each integer n, precomposition with the shift equivalence on the source and
-postcomposition with the shift equivalence on the target preserve right Kan extensions.
-The shift isomorphisms of Q and F therefore exhibit both shifted copies of LF as right
-Kan extensions of the same functor. Their unique comparison gives an isomorphism
-shiftFunctor L n ⋙ LF ≅ LF ⋙ shiftFunctor D' n. The comparison is characterized by the
-commuting square with alpha. For n = 0, the standard unit comparison satisfies that
-square, so Kan uniqueness identifies it with the constructed comparison. For a + b,
-the composite of the a and b comparisons satisfies the same square as the a + b
-comparison, using the coherence laws of Q and F; Kan uniqueness identifies them.
-These equations give CommShift, and the defining square gives NatTrans.CommShift alpha.
-No choice of a value of a mere existence statement is used: each comparison is determined
-uniquely by the right Kan universal property. -/
+Source: Stacks Project, Derived Categories, Tag 05SU and Proposition Tag 05SE. -/
 theorem rightKanExtension_coherentShift
     {D : Type u} [Category.{v} D] [HasShift D ℤ]
     {D' : Type u'} [Category.{v'} D'] [HasShift D' ℤ]

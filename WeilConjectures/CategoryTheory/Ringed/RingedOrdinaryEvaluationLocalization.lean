@@ -79,8 +79,7 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Unsigned ordinary evaluation and its derived localization
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A98 and Section 0A8X
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A98 and Section 0A8X.
 
 The formulas use the recorded sheafified tensor generators, Hom-product projections,
 coefficient-unit identifications, and fixed K-injective augmentation. The ordinary map
@@ -107,8 +106,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v u})
 
 /-- Evaluate the actual Hom-product projection at the identity of the localized site.
-Source: Stacks Section 0A8X, Tag 08JE
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Section 0A8X, Tag 08JE. -/
 def ringedOrdinaryHomValue
     (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (n a b : ℤ) (h : a + n = b) (U : Cᵒᵖ)
@@ -119,8 +117,7 @@ def ringedOrdinaryHomValue
 
 /-- Extract the coefficient from the supported component of the ordinary dual.
 Both transports are the actual degree-zero coefficient-unit identifications.
-Source: Stacks Section 0A8X, Tag 08JE
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Section 0A8X, Tag 08JE. -/
 def ringedOrdinaryDualValue
     (E : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (q a : ℤ) (h : a + q = 0) (U : Cᵒᵖ)
@@ -135,8 +132,7 @@ def ringedOrdinaryDualValue
 /-- The unsigned formula on every sheafified tensor generator and Hom projection.
 Supported components act by the actual coefficient scalar; all other components vanish.
 The equality `hp` only transports between equal integer degrees.
-Source: Stacks Tag 08JE, Section 0A8X
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tag 08JE, Section 0A8X. -/
 def RingedOrdinaryEvaluationFormula
     (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (aEF : (coefficientTotalTensor.{u, c, v} J R).obj
@@ -160,8 +156,7 @@ def RingedOrdinaryEvaluationFormula
           p q n hn U y φ)) x = 0)
 
 /-- Apply ordinary Hom to the fixed augmentation already used to define derived Hom.
-Source: Stacks Tags 0A95 and 08J9
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tags 0A95 and 08J9. -/
 def ringedHomAugmentationMap
     (E G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     homComplex (R := R) E G ⟶
@@ -174,8 +169,7 @@ section DerivedDefinitions
 variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 
 /-- The comparison induced by the fixed augmentation and localization factorization.
-Source: Stacks Tags 0A95 and 08J9
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tags 0A95 and 08J9. -/
 def ringedOrdinaryHomComparison
     (E G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     DerivedCategory.Q.obj (homComplex (R := R) E G) ⟶
@@ -186,8 +180,7 @@ def ringedOrdinaryHomComparison
 
 /-- The transpose of reassociation, coefficient evaluation and the right unit action.
 The coefficient object is identified with the monoidal unit by the recorded coherence.
-Source: Stacks Tags 08JD, 08JE and 0A98
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tags 08JD, 08JE and 0A98. -/
 def ringedDualTensorHom
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (unitIso : S.monoidal.tensorUnit ≅
@@ -990,7 +983,6 @@ attribute [local irreducible] CoefficientClosedStructure.tensor
   CoefficientClosedStructure.transpose ringedOrdinaryHomComparison ringedDualTensorHom
   derivedInternalHomOfUniverses CoefficientTensorModels.iso ringedTensorUnitComplex
 
-set_option maxHeartbeats 400000 in
 -- The localized evaluation square needs more time after the upstream bump.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -1154,27 +1146,7 @@ variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 /-- The ordinary unsigned evaluation exists uniquely and represents derived evaluation
 through precisely the two fixed augmentation comparisons.
 
-Source: Stacks Tags 08JD/08JE, 0A98, 08J9 and Section 0A8X
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization).
-
-Proof:
-1. Curry ordinary reassociation, tensor with evaluation into the coefficient unit, and
-   the right unitor using the proved unsigned chain-level tensor-Hom equivalence.
-   Its generator formula gives the stated formula; the unit complex vanishes off zero.
-   Generator detection proves uniqueness and identifies the coherence representatives.
-2. Naturality of the fixed Hom comparison gives its precomposition identity for every
-   s:L→E. Each assumed augmentation quasi-isomorphism makes its own comparison invertible.
-3. Choose a K-flat resolution s:L→E. Put D=Hom(E,O), P=Tot(F tensor D), and let v be
-   the uncurrying of Hom(s,O). P is K-flat. The two fixed curry normalizations identify
-   inverse transposes with the localized maps v and c, where c uncurries a followed
-   by Hom(s,F). Ordinary naturality expresses c by reassociation, F tensor v and the unit.
-4. Closed-adjunction naturality computes the other inverse transpose using the derived
-   associator, tensor with the normalized inverse transpose for O, and the unit constraint.
-   The supplied associator, tensor-comparison naturality and right-unitor models identify
-   this composite with Q(c), after precomposition with the tensor comparison.
-5. Injectivity of inverse transposition and cancellation of the isomorphism H(Qs,1)
-   give the square. Only F and D are assumed K-flat, and only the two Hom augmentation
-   maps are assumed quasi-isomorphisms; E need not be K-flat or F K-injective. -/
+Source: Stacks Tags 08JD/08JE, 0A98, 08J9 and Section 0A8X. -/
 theorem ringedOrdinaryEvaluation_localization
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)

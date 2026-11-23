@@ -6,7 +6,10 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Sites.Pullback
 /-! # Forgetting algebraic structure in the constructed inverse image
-Source: Stacks Project, Tags 00YV and 03D2.
+
+## References
+
+* Stacks Project, Tags 00YV and 03D2.
 -/
 @[expose] public section
 universe u v w
@@ -48,11 +51,8 @@ noncomputable def sheafPullbackForgetIso :
       congr 2
       exact (U.lanCompIsoOfPreserves F.op).hom.naturality g.hom)
 /-- The underlying comparison sends the algebraic inverse-image unit to the set unit.
-Source: Stacks Project, Tags 00YV and 03D2.
 
-Proof: expand the composite adjunction unit. The sheafification comparison satisfies
-its defining unit equation. Naturality of the set sheafification unit then moves the
-Kan-extension comparison to the left, where its defining unit equation applies. -/
+Stacks Project, Tags 00YV and 03D2. -/
 theorem sheafPullbackForgetIso_unit (S : Sheaf J E) :
     (sheafCompose J U).map ((sheafAdjunctionContinuous F E J K).unit.app S) ≫
       (F.sheafPushforwardContinuous (Type (max u v)) J K).map

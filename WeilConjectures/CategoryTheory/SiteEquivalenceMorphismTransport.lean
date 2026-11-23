@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
 /-!
 # Transport of morphisms of sites across equivalences
 
-Source: literature/stacks-project/sites.tex, Definitions 00VH, 00WV, 00X1 and
-Lemma 03CB (blueprint: lem-weil-pbc-site-equivalence-morphism-transport).
+## References
+
+* Stacks Project, Definitions 00VH, 00WV, 00X1 and Lemma 03CB.
 -/
 
 @[expose] public section
@@ -28,15 +29,11 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: literature/stacks-project/sites.tex, Definitions 00VH, 00WV, 00X1
-and Lemma 03CB (blueprint: lem-weil-pbc-site-equivalence-morphism-transport).
-
-The proof transports continuity and exactness through the two equivalences, using
-site-equivalence-is-morphism, site-morphism-composition, and invariance under
-isomorphic covering families.  The natural isomorphism identifies the two
-functors and hence identifies their sheaf pullbacks; exactness is invariant under
-that identification.
--/
+/-- Transport of morphisms of sites across equivalences. Given equivalences `p : A ⥤ C` and
+`q : B ⥤ D` of sites, a morphism of sites `u : C ⥤ D`, and `u' : A ⥤ B` with
+`u' ⋙ q ≅ p ⋙ u`, the functor `u'` preserves coverings and the relevant pullbacks, is
+continuous, and its sheaf pullback preserves finite limits and finite colimits.
+Source: Stacks Project, Definitions 00VH, 00WV, 00X1 and Lemma 03CB. -/
 theorem site_equivalence_morphism_transport
     {A B C D : Type u}
     [SmallCategory A] [SmallCategory B] [SmallCategory C] [SmallCategory D]

@@ -8,8 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.RingedSiteDg.SheafDgHomotopySystem
 
 /-! Shared data records for finite-free sheaf DG coinduction.
-
-(blueprint: def-sf-finite-free-dg-coinduction-data-stage3) -/
+-/
 
 @[expose] public noncomputable section
 
@@ -27,10 +26,9 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   {O : Sheaf J CommRingCat.{u}}
 
-set_option maxHeartbeats 800000 in
 -- Elaborating the comparison evaluation uses the same budget as the full record.
 /-- The ordinary coinduction and tensor-dual data, without free extension.
-Source: Stacks 0FRS (blueprint: lem-sf-finite-free-dg-coinduction-ordinary-core-stage3). -/
+Source: Stacks 0FRS. -/
 structure FiniteFreeCoinductionOrdinaryCore (A : Algebra O) where
   coinduction : Complex O ⥤ Module A
   evaluation (M : Complex O) : (underlying A).obj (coinduction.obj M) ⊗ A.X ⟶ M

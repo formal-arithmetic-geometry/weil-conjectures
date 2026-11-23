@@ -127,7 +127,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Residue cohomology of a finite integral reduction
 
-Source: Weil blueprint, `lem-coef-integral-residue-tor`, proof step 2;
+Source: Weil blueprint, `lemma-bounds-finite-reductions--2`, proof step 2;
 Stacks Project, Cohomology on Sites, Tags 06YY and 0D6D.
 (blueprint: lem-coef-integral-residue-tor-residue-amplitude).
 
@@ -608,7 +608,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 vanishing cohomology in exactly the same degrees. No constructibility, completeness
 or cohomological bound is assumed.
 
-Source: blueprint `lem-coef-integral-residue-tor`, proof, first sentence;
+Source: blueprint `lemma-bounds-finite-reductions--2`, proof, first sentence;
 Stacks Project, Cohomology on Sites, Tags 06YS and 06YY.
 Proof:
 1. Ordinary scalar extensions with the prescribed objects and maps are naturally

@@ -16,8 +16,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 The cohomology of a sheaf of `Λ`-modules on `X_ét` is, as an abelian group, that of its
 underlying abelian sheaf (Stacks 03FD). Hence `RΓ(X, G) = 0` in `D(Λ)` if and only if all the
-abelian cohomology groups `H^q(X, G)` vanish (blueprint `det-tf-transverse-corner-vanishing`,
-forgetting `Λ`).
+abelian cohomology groups `H^q(X, G)` vanish (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`, forgetting `Λ`).
 
 ## Main statements
 
@@ -34,9 +34,9 @@ namespace AlgebraicGeometry.Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `det-tf-transverse-corner-vanishing` (forgetting `Λ`, Stacks 03FD): the derived
-global sections of a sheaf of `Λ`-modules vanish if and only if the abelian cohomology of the
-underlying abelian sheaf vanishes in every degree. -/
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1` (forgetting `Λ`, Stacks 03FD): the
+derived global sections of a sheaf of `Λ`-modules vanish if and only if the abelian cohomology of
+the underlying abelian sheaf vanishes in every degree. -/
 theorem isZero_rightDerivedGlobalSections_singleFunctor_iff (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsZero ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj

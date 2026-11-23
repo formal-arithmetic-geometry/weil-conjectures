@@ -16,9 +16,10 @@ For a geometrically connected curve `C₀` over a finite field, the geometric pa
 group `W` of `C₀` is the étale fundamental group of the geometric curve, Frobenius-equivariantly
 (the homotopy exact sequence, `AlgebraicGeometry.WeilGroup.isEtaleQuotient`). This is the
 hypothesis `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` of the purity theorems of
-`sk-p-real-rankone`, `sk-p-real-rankin` and `sk-p-real-purity`. Since it is an instance, those
-theorems apply as stated to every Weil group of a smooth geometrically connected curve, for
-instance to `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`.
+`theorem-rank-one-sheaves-have-finite`, `proposition-bound-largest-determinant-weight--1` and
+`theorem-purity-real-sheaves-curves--1`. Since it is an instance, those theorems apply as stated to
+every Weil group of a smooth geometrically connected curve, for instance to
+`AlgebraicGeometry.WeilGroup.ofFundamentalGroup`.
 
 ## Main statements
 

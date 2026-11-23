@@ -20,7 +20,7 @@ stalk of `M = Rj_* i_! E` at the corner point vanishes:
 
 `(Rj_* i_! E)_z ≅ RΓ(S - Y_S, i_! E) = 0` in `D(Λ)`
 
-(blueprint `det-tf-transverse-corner-vanishing`).
+(blueprint `lemma-cohomology-near-two-transverse-divisors--1`).
 
 ## Main statements
 
@@ -42,10 +42,10 @@ variable {k : Type u} [Field k] [IsAlgClosed k] (C : TransverseCorner k) {ℓ : 
   (hℓ : (ℓ : k) ≠ 0) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
 
 include hℓ hΛ in
-/-- Blueprint `det-tf-transverse-corner-vanishing`: Vanishing at the transverse corner. For a
-bounded complex `E` on `Z - (X ∪ Y)` with finite locally constant cohomology whose monodromy
-factors through a finite `ℓ`-group, the stalk of `M = Rj_* i_! E` at a geometric point `z̄` over
-the corner point vanishes: `M_z̄ ≅ RΓ(S - Y_S, i_! E) = 0` in `D(Λ)`. -/
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`: Vanishing at the transverse
+corner. For a bounded complex `E` on `Z - (X ∪ Y)` with finite locally constant cohomology whose
+monodromy factors through a finite `ℓ`-group, the stalk of `M = Rj_* i_! E` at a geometric point
+`z̄` over the corner point vanishes: `M_z̄ ≅ RΓ(S - Y_S, i_! E) = 0` in `D(Λ)`. -/
 theorem isZero_leftDerivedUpperStar_boundaryComplex
     (E : DerivedCategory (Sheaf C.V.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hE : Etale.IsBoundedFiniteEllGroupMonodromy ℓ E) {Ω : Type u} [Field Ω] [IsSepClosed Ω]

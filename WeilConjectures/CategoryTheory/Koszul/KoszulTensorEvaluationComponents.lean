@@ -11,7 +11,6 @@ import all WeilConjectures.CategoryTheory.Koszul.KoszulModuleBasisEvaluation
 /-! # KoszulTensorEvaluationComponents for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-tensor-evaluation-components).
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +41,7 @@ attribute [local instance] gradedTensorCache gradedGoodTensorLeftCache
   cachedComplexBraided cachedComplexClosed
 
 /-- Move a unit basis vector through braiding and contract the resulting tensor.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-tensor-evaluation-components). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem basisContraction {D : Type*} [Category D] [MonoidalCategory D]
     [BraidedCategory D] {P X Y : D} (b : 𝟙_ D ⟶ P) (g : P ⊗ Y ⟶ 𝟙_ D) :
     (λ_ (X ⊗ Y)).inv ≫ b ▷ (X ⊗ Y) ≫ P ◁ (β_ X Y).hom ≫
@@ -151,20 +149,9 @@ private theorem signedTripleEvaluation_component
   simp only [Units.smul_def, zsmul_whiskerRight, Preadditive.comp_zsmul,
     Preadditive.zsmul_comp, smul_smul, Units.val_mul]
 
-set_option maxHeartbeats 3000000 in
 -- Normalize the recursive total-tensor basis and its component inclusions.
 /-- Homogeneous components of uncurried tensor-Hom evaluation.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Define the uncurried evaluation as the braiding, inverse associator, evaluation and
-left unitor. Curry naturality identifies its curry with canonical tensor-Hom evaluation.
-Proof step 2: Rewrite the threefold total inclusion through the braiding and associator using
-their named inclusion identities. The braiding contributes (-1)^(pq); the evaluation component
-identity contributes (-1)^(dq). Combine these signs using bilinearity.
-Proof step 3: The basis contraction identity follows from braiding naturality and its unit
-formulas: moving a unit basis vector past a tensor then evaluating is exactly right whiskering by
-evaluation against that basis. This identifies the module contraction used in the component
-formula.
-(blueprint: lem-f5-koszul-tensor-evaluation-components). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private theorem evaluationUncurry_component (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (d p q t k : ℤ) (ht : d + q = t) (h : d + p + q = k) :
     let : IsGrothendieckAbelian.{u} (Modules O) := SheafOfModules.isGrothendieckAbelian _

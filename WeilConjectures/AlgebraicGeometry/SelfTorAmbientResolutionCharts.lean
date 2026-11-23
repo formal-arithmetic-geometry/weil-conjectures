@@ -121,8 +121,43 @@ private theorem affine_iso_of_section_equiv {X : Scheme.{u}} (U : X.affineOpens)
     exact hx
   exact transport _ V.ι_image_top (V.ι_image_le ⊤) e₀ rfl ht
 
-set_option maxHeartbeats 800000 in
--- The chart scalar transports and projective homology comparisons need elaboration fuel.
+private theorem selfTor_ambient_isQuasicoherent
+    {Z Y : Scheme.{u}} (i : Z ⟶ Y)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
+    [IsClosedImmersion i] (n : ℕ) :
+    let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
+    let S := DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
+    ((DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj
+        (S.obj B ⊗ S.obj B)).IsQuasicoherent := by
+  intro B S
+  have : (SheafOfModules.unit Z.ringCatSheaf).IsQuasicoherent :=
+    SheafOfModules.isQuasicoherent_unit (R := Z.ringCatSheaf)
+  have : B.IsQuasicoherent :=
+    Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom i _
+  exact canonical_derivedTensor_preserve_QCoh Y
+    (S.obj B) (S.obj B) (qc_single Y B) (qc_single Y B) (-(n : ℤ))
+
+private theorem affine_iso_of_chart_coordinates {Y : Scheme.{u}} (U : Y.affineOpens)
+    (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (Q : Y.Modules) [Q.IsQuasicoherent]
+    (c : M ≃ₗ[Γ(Y, U.1)] Γ(Q, U.1)) :
+    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
+      Scheme.Modules.pushforward U.1.ι
+    let L := (tilde.functor Γ(Y, U.1)).obj M
+    ∃ t : (T.obj M).over U.1 ≅ Q.over U.1, ∀ x,
+      t.hom.val.app (op (Over.mk (𝟙 U.1)))
+        ((Scheme.Modules.restrictAppIso U.2.isoSpec.hom L (U.1.ι ⁻¹ᵁ U.1)).inv
+          (L.val.map (homOfLE le_top).op ((tilde.adjunction.unit.app M) x))) = c x := by
+  intro T L
+  obtain ⟨d, hD, hd⟩ := exists_selfTor_affine_chart_sections U M
+  have : ((T.obj M).restrict U.1.ι).IsQuasicoherent := hD
+  have := Scheme.Modules.isQuasicoherent_restrictFunctor U.1.ι Q
+  obtain ⟨t, ht⟩ := affine_iso_of_section_equiv U (T.obj M) Q (d.symm.trans c)
+  refine ⟨t, fun x ↦ ?_⟩
+  rw [← hd x, ht]
+  exact congrArg c (d.symm_apply_apply x)
+
 /-- The affine quotient tensor resolutions compute the ambient homology sheaf,
 before any pullback to the closed subscheme.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG, and Tag 00LS.
@@ -206,45 +241,17 @@ theorem exists_selfTor_ambient_resolution_charts
               (t V).hom.val.app (op (Over.mk (𝟙 (V.1))))
                 (s V _ (q x)) := by
   classical
-  dsimp only
-  let B := (Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf)
-  let S := DerivedCategory.singleFunctor
-    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) 0
-  let Q := (DerivedCategory.homologyFunctor
-    (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (-(n : ℤ))).obj (S.obj B ⊗ S.obj B)
+  intro B S Q T s₀
   let M := fun U : Y.affineOpens ↦
     ((tensorRight (ModuleCat.of (Γ(Y, U.1) : Type u)
       ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))).leftDerived n).obj
       (ModuleCat.of (Γ(Y, U.1) : Type u) ((Γ(Y, U.1) : Type u) ⧸ i.ker.ideal U))
-  let T := fun U : Y.affineOpens ↦
-    tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
-      Scheme.Modules.pushforward U.1.ι
-  let s := fun (U : Y.affineOpens) (x : M U) ↦
-    let L := (tilde.functor Γ(Y, U.1)).obj (M U)
-    (Scheme.Modules.restrictAppIso U.2.isoSpec.hom L (U.1.ι ⁻¹ᵁ U.1)).inv
-      (L.val.map (homOfLE le_top).op ((tilde.adjunction.unit.app (M U)) x))
-  have : (SheafOfModules.unit Z.ringCatSheaf).IsQuasicoherent :=
-    SheafOfModules.isQuasicoherent_unit (R := Z.ringCatSheaf)
-  have : B.IsQuasicoherent :=
-    Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom i _
-  have : Q.IsQuasicoherent := canonical_derivedTensor_preserve_QCoh Y
-    (S.obj B) (S.obj B) (qc_single Y B) (qc_single Y B) (-(n : ℤ))
+  let s := fun (U : Y.affineOpens) (x : M U) ↦ s₀ U (M U) x
+  have : Q.IsQuasicoherent := selfTor_ambient_isQuasicoherent i n
   obtain ⟨c, hc⟩ := exists_selfTor_ambient_section_coordinates.{u, w} i n
-  have hcharts (U : Y.affineOpens) :
-      ∃ t : ((T U).obj (M U)).over U.1 ≅ Q.over U.1,
-        ∀ x, t.hom.val.app (op (Over.mk (𝟙 U.1))) (s U x) = c U x := by
-    obtain ⟨d, hD, hd⟩ := exists_selfTor_affine_chart_sections U (M U)
-    have : (((T U).obj (M U)).restrict U.1.ι).IsQuasicoherent := hD
-    have := Scheme.Modules.isQuasicoherent_restrictFunctor U.1.ι Q
-    obtain ⟨t, ht⟩ := affine_iso_of_section_equiv U ((T U).obj (M U)) Q
-      (d.symm.trans (c U))
-    refine ⟨t, fun x ↦ ?_⟩
-    change t.hom.val.app (op (Over.mk (𝟙 U.1))) (s U x) = c U x
-    rw [show s U x = d x from (hd x).symm, ht]
-    exact congrArg (c U) (d.symm_apply_apply x)
-  choose t ht using hcharts
+  choose t ht using fun U ↦ affine_iso_of_chart_coordinates U (M U) Q (c U)
   refine ⟨t, ?_⟩
-  intro V U h hbasic ψ a k hψ ha hk x
+  intro V U h hbasic A C I J φ P R TA TC ψ a k hψ ha hk e q x
   let f : Over.mk (homOfLE h) ⟶ Over.mk (𝟙 U.1) := Over.homMk (homOfLE h)
   have hn := congr($((t U).hom.val.naturality f.op) (s U x))
   change (t U).hom.val.app (op (Over.mk (homOfLE h)))

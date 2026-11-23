@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.Koszul.KoszulTensorEvaluationComponent
 /-! # KoszulTensorEvaluationCoordinates for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-tensor-evaluation-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +68,7 @@ private theorem unitTensor_inclusion (O : Sheaf J CommRingCat.{u})
     Category.id_comp]
 
 /-- Evaluate the degree-n Hom component on a fixed homogeneous unit vector.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-tensor-evaluation-coordinates). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def basisHomCoordinate (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (d : ℤ) (b : one O ⟶ P.X d) (n : ℤ) :
     (homComplex (R := O) P N).X n ⟶ N.X (n + d) :=
@@ -79,8 +77,7 @@ def basisHomCoordinate (O : Sheaf J CommRingCat.{u})
     (SheafOfModules.homObjUnitIso (R := O) (N.X (n + d))).hom
 
 /-- The dual coordinate is zero unless the vector and Hom degrees sum to zero.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-tensor-evaluation-coordinates). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def basisDualCoordinate (O : Sheaf J CommRingCat.{u})
     (P : ringedSiteComplex O) (d : ℤ) (b : one O ⟶ P.X d) (q : ℤ) :
     (homComplex (R := O) P (ringedSiteRingComplex O)).X q ⟶ one O :=
@@ -92,8 +89,7 @@ def basisDualCoordinate (O : Sheaf J CommRingCat.{u})
   else 0
 
 /-- Descend dual-coordinate contraction along the total tensor coproduct.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-tensor-evaluation-coordinates). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def basisTensorCoordinate (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (d : ℤ) (b : one O ⟶ P.X d) (n : ℤ) :
     (((ringedKoszulTensor O).obj N).obj
@@ -111,23 +107,9 @@ def basisTensorCoordinate (O : Sheaf J CommRingCat.{u})
           (ρ_ (N.X p)).hom ≫ eqToHom (congrArg N.X hp)
       else 0)
 
-set_option maxHeartbeats 3000000 in
 -- Compare the total tensor inclusions and cancel the signed evaluation factors.
 /-- Canonical signed tensor-Hom evaluation preserves every homogeneous basis coordinate.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Define the Hom coordinate by homComplex projection, precomposition with b and Hom-
-unit evaluation. Define the dual coordinate to be zero outside degree -d; in that degree use the
-single-unit component and Hom-unit evaluation. Define the tensor coordinate by the total-tensor
-coproduct descent with this dual coordinate.
-Proof step 2: It suffices to compare composites with each tensor inclusion N[p] tensor
-Hom(P,unit)[q], p+q=n. The signed curry component formula and curryBasis contribute (-1)^(dn).
-The explicit uncurried evaluation component contributes (-1)^(pq+dq).
-Proof step 3: When p=n+d, one has d+q=0. The three signs multiply to one because dn+pq+dq=2dq.
-Apply the unit tensor inclusion and module basis contraction identities; naturality of Hom and
-unit evaluation identify the remaining map with the dual coordinate followed by the right unitor.
-Otherwise d+q is nonzero; the corresponding single-unit component is zero, so evaluation and the
-defined tensor coordinate both vanish. Tensor coproduct extensionality finishes.
-(blueprint: lem-f5-koszul-tensor-evaluation-coordinates). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem evaluation_coordinates (O : Sheaf J CommRingCat.{u})
     (P N : ringedSiteComplex O) (d : ℤ) (b : one O ⟶ P.X d) (n : ℤ) :
     (ringedComplexTensorEvaluation O P N).f n ≫ basisHomCoordinate O P N d b n =

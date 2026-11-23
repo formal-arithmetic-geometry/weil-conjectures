@@ -23,7 +23,7 @@ import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 /-!
 # Restriction normalization of derived immersion comparisons
 
-Source: blueprint main-20261015, proof of `lem-weil-finite-duality-site-comparison`,
+Source: blueprint main-20261015, proof of `proposition-six-operations-dctf--15`,
 second paragraph; Stacks Tags 09AF, 09BM, 09AA, 015F and 0FND
 (blueprint: lem-sf-derived-immersion-comparison-normalization).
 -/
@@ -228,8 +228,8 @@ exactness is the right-adjoint structure. Source: Stacks Tag 09BM
 (blueprint: lem-sf-derived-immersion-comparison-normalization).
 
 Proof: the complement open immersion is quasi-compact: every open in a Noetherian
-scheme is quasi-compact. Apply lem-exc-proetale-closed-exact to this complement.
-No constructibility hypothesis is used. -/
+scheme is quasi-compact. Apply proposition-extension-zero-restriction-closed-subscheme--4 to this
+complement. No constructibility hypothesis is used. -/
 @[instance] theorem derivedImmersionClosedProEtale_exact (A : Type (u + 1)) [CommRing A]
     [Finite A] {Z X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X]
     (h : Z ⟶ X) [IsClosedImmersion h] :

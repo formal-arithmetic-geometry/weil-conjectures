@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedTens
 /-! # Symmetric monoidal coherence of the canonical derived tensor comparison
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0FPT.
-(blueprint: lem-sfb-ringed-derived-tensor-lift).
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory.RingedDerivedComparisons
 
 /-- The tensor and action-unit portion of a lift, with specified representative models.
-Source: Stacks Project, Tags 07A4 and 0FPT.
-(blueprint: lem-sfb-ringed-derived-tensor-lift). -/
+Source: Stacks Project, Tags 07A4 and 0FPT. -/
 structure TensorLift {X Y : Site.{u, w}} (e : RingedTensorEdge Y.corner X.corner)
     (rY : RingedTensorModel Y.corner) (rX : RingedTensorModel X.corner) where
   monoidal : @Functor.CoreMonoidal Y.D _ Y.closed.monoidal X.D _ X.closed.monoidal e.left

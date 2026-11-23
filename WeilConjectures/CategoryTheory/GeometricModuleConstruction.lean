@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 # Constructing module functors through a geometric morphism
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -721,47 +720,10 @@ open GeometricConstruction
 
 -- Keep the pre-existing named nondependent forall binder `hRing` unchanged.
 set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
 -- The statement records every operation and its underlying comparison.
 /-- Construct the transported module functors and their operation comparisons.
-Source: Stacks Project, Tags 03D1 and 03D2, `lemma-pushforward-module`
-and `lemma-pullback-module`.
-(auxiliary; not a blueprint node).
-
-Proof: L preserves finite products, and V does so because it is a right adjoint.
-For M, transport addition, zero, negation and scalar multiplication through L,
-using the inverse terminal and binary-product comparisons and the ring
-identification eR. Each module identity is an equality between composites of
-these operations; functoriality and product preservation transport these
-identities. More explicitly, give L the monoidal structure from its chosen
-finite products. Addition, zero and negation are the image additive-group
-object. The image module-object action satisfies multiplicative associativity
-and the unit law. Transport the two distributivity diagrams by the invertible
-comparisons for R times M times M and R times R times M; naturality carries
-their projections and pairings to the target projections and pairings. The
-resulting four equations are the minimal module axioms on sections.
-The comparison eR preserves addition and multiplication by hRing. Transport
-the multiplicative monoid along eR; its multiplication is the given one on A.
-The uniqueness theorem for a monoid structure with fixed multiplication
-(`MonObj.ext`) identifies its unit with A's unit. The same argument identifies
-zero for the additive group, and inverse preservation follows by uniqueness.
-Thus no missing unit hypothesis is used. Evaluating on each object gives an A-module,
-and naturality makes restrictions linear. The set presheaf is the sheaf L(M),
-so this defines I(M). Applying L to a linear map gives I on morphisms and eI.
-Likewise, transport H through V, then restrict its scalar action along the
-adjunct of eR.inv followed by c. This adjunct is a ring morphism: the unit
-of a cartesian monoidal adjunction preserves the transported ring operations,
-and composing it with V of the ring morphism eR.inv followed by c preserves
-those operations. Equivalently, compute its binary-operation mates and its
-terminal-operation mate. Evaluating gives P(H) with underlying sheaf
-V(H); V on maps gives P and eP. The sectionwise operation formulas hold by
-construction. The addition comparison is product preservation. The scalar
-map k is the inverse product comparison for V applied to the pair of the
-adjunct of c and eP.hom; composing with either projection yields its stated
-projection equation, and composing with V of scalar multiplication gives
-the final scalar-action equation. These constructions also apply to the
-zero ring, zero modules and the empty site because they use only finite
-product diagrams, with no choice of local nonzero elements. -/
+Source: Stacks Project, Tags 03D1 and 03D2
+and. -/
 theorem geometric_module_construction
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)
@@ -1151,7 +1113,6 @@ theorem geometric_module_construction
 /-- Construct the module direct image from a structural ring map.
 
 Source: Stacks Project, Modules on Sites, pushforward of modules on ringed topoi.
-(auxiliary; not a blueprint node).
 The underlying sheaf is literally the given direct image. The scalar action is
 restriction along the adjunct of the structural map, and the Hom adjunction
 transports this action and addition to those of the original module. -/

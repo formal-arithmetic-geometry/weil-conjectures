@@ -15,7 +15,7 @@ Let `φ : M ⟶ N` be a morphism of models over `f : X ⟶ Y` and `f' : X' ⟶ Y
 preserve bounded constructible complexes. This file restricts the pullback exchange
 `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` to bounded constructible complexes
 (`NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange`) and transports the unit identity
-of the pushforward exchange (blueprint `det-tf-sp-trace-morphism`)
+of the pushforward exchange (blueprint `proposition-specialization-trace-class`)
 ```
 χ_f(Lf^* Λ) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹) ∘ η_{f'}
 ```
@@ -249,7 +249,7 @@ private lemma unit_comp_map_unit_comp_liftExchange_app_aux
           (Profinite.padicAlgClRingObj ℓ) f.left).inv)) hη').symm
 
 /-- **Unit identity of the pushforward exchange on bounded constructible complexes** (blueprint
-`det-tf-sp-trace-morphism`):
+`proposition-specialization-trace-class`):
 `χ_f(Lf^* ℚ̲̄_ℓ) ∘ Ψ_N(η_f) ∘ σ_N = Rf'_*(Ψ_M(ε_f) ∘ σ_M ∘ ε_{f'}⁻¹) ∘ η_{f'}`, where
 `ε_f : Λ_X ≅ Lf^* Λ_Y` and `ε_{f'} : Λ_{X'} ≅ Lf'^* Λ_{Y'}` are the unit comparisons of the
 strong monoidal pullbacks. -/

@@ -20,8 +20,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # The constant realization on unbounded derived categories
 
-Source: Stacks Project, Cohomology on Sites, paragraph immediately before Tag 09BD
-(blueprint: def-sfb-site-derived-constant-module-functor).
+Source: Stacks Project, Cohomology on Sites, paragraph immediately before Tag 09BD.
 -/
 
 @[expose] public noncomputable section

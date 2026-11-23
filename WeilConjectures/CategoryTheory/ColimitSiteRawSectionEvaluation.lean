@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionPresentation
 /-! # ColimitSiteRawSectionEvaluation
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-evaluation).
 -/
 
 @[expose] public section
@@ -29,26 +28,12 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-presentation construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-evaluation).
+/-- For sheaves of types, evaluating the colimit of the Kan-extended stage presheaves `B` at the
+image of `U` gives a colimit of the diagram `D` of stage sections, compatibly with the maps `a`
+to any presheaf `T` receiving a cocone `γ` from `B`.
 
-Proof: The pointwise left Kan extension formula presents B(t)(V(i)U) by sections
-of the stage inverse image at W, paired with an arrow V(i)U to V(t)W.
-Lift this arrow and its endpoints to a stage receiving i and t.right, using
-the object and arrow colimit hypotheses. Restrict the transported section
-along the lifted arrow to obtain a section at the image of U. Each generator
-is therefore represented by D at a later stage through E. Lift each finite
-Kan relation to a common stage; eventual arrow equality and hβmap identify
-the two resulting D representatives after refinement, using hm. These
-constructions give inverse maps between the evaluated presheaf colimit and
-the set colimit of D, compatible with their coprojections. Transfer the
-chosen set-colimit cocone to obtain R and q. Evaluation of colimit.desc B γ
-on a Kan-unit representative is γ(t) composed with β(t). Naturality handles
-the endpoint transport, and ha gives the displayed Arrow equation. This is
-purely a raw-presheaf computation: T need not be a sheaf, and no equality
-criterion in a limit-site inverse-image sheaf is assumed.
--/
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction
+paragraphs. -/
 theorem colimit_site_raw_section_evaluation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

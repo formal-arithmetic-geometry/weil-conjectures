@@ -11,9 +11,7 @@ public import Mathlib.CategoryTheory.NatIso
 set_option autoImplicit false
 namespace CategoryTheory
 /-- Seven invertibility claims and the specified six-factor equality, with all objects
-and arrows explicit so that geometric specializations share their category instances.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: def-coef-normalized-comparison-word). -/
+and arrows explicit so that geometric specializations share their category instances. -/
 def NormalizedComparisonWord
     {C D : Type*} [Category C] [Category D] {U V : C}
     (i : U ⟶ V) {X₀ X₁ X₂ X₃ X₄ X₅ X₆ : D}
@@ -21,9 +19,7 @@ def NormalizedComparisonWord
     (d : X₃ ⟶ X₄) (e : X₄ ⟶ X₅) (f : X₅ ⟶ X₆) (v : X₀ ⟶ X₆) : Prop :=
   IsIso i ∧ IsIso a ∧ IsIso b ∧ IsIso c ∧ IsIso d ∧ IsIso e ∧ IsIso f ∧
     a ≫ b ≫ c ≫ d ≫ e ≫ f = v
-/-- Assemble a normalized word from its exact factors and equality.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: def-coef-normalized-comparison-word). -/
+/-- Assemble a normalized word from its exact factors and equality. -/
 theorem NormalizedComparisonWord.mk
     {C D : Type*} [Category C] [Category D] {U V : C}
     (i : U ⟶ V) {X₀ X₁ X₂ X₃ X₄ X₅ X₆ : D}
@@ -34,9 +30,7 @@ theorem NormalizedComparisonWord.mk
     NormalizedComparisonWord i a b c d e f v :=
   ⟨inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, h⟩
-/-- Assemble the word with mapped isomorphisms and a contravariant Hom factor.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: def-coef-normalized-comparison-word). -/
+/-- Assemble the word with mapped isomorphisms and a contravariant Hom factor. -/
 theorem NormalizedComparisonWord.of_maps
     {C D E : Type*} [Category C] [Category D] [Category E]
     (F : C ⥤ D) (G : E ⥤ D) (H : Dᵒᵖ ⥤ D ⥤ D)
@@ -50,9 +44,7 @@ theorem NormalizedComparisonWord.of_maps
     NormalizedComparisonWord i (F.map (inv i)) b (G.map c) (G.map d) e
       ((H.map q.op).app M) v :=
   NormalizedComparisonWord.mk _ _ _ _ _ _ _ _ h
-/-- Cancel a mapped inverse from the exact functorial pairing equation.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: lem-coef-locally-closed-pairing-cancellation). -/
+/-- Cancel a mapped inverse from the exact functorial pairing equation. -/
 theorem cancelMappedPairing
     {C D E : Type*} [Category C] [Category D] [Category E]
     (F : C ⥤ D) (G : E ⥤ D) {U V : C} (i : U ⟶ V) [IsIso i]
@@ -63,9 +55,7 @@ theorem cancelMappedPairing
     F.map (inv i) ≫ b ≫ G.map c ≫ G.map d ≫ e ≫ f = v := by
   rw [Functor.map_inv, IsIso.inv_comp_eq]
   simpa only [Functor.map_comp, Category.assoc] using h
-/-- The mapped comparison word, retaining its functors as parameters.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: def-coef-normalized-comparison-word). -/
+/-- The mapped comparison word, retaining its functors as parameters. -/
 def MappedComparisonWord
     {C D E : Type*} [Category C] [Category D] [Category E]
     (F : C ⥤ D) (G : E ⥤ D) (H : Dᵒᵖ ⥤ D ⥤ D)
@@ -76,9 +66,7 @@ def MappedComparisonWord
     (v : F.obj V ⟶ (H.obj (Opposite.op Y)).obj M) : Prop :=
   NormalizedComparisonWord i (F.map (inv i)) b (G.map c) (G.map d) e
     ((H.map q.op).app M) v
-/-- The equality part of the mapped comparison word.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: def-coef-normalized-comparison-word). -/
+/-- The equality part of the mapped comparison word. -/
 def MappedComparisonEquation
     {C D E : Type*} [Category C] [Category D] [Category E]
     (F : C ⥤ D) (G : E ⥤ D) (H : Dᵒᵖ ⥤ D ⥤ D)
@@ -88,9 +76,7 @@ def MappedComparisonEquation
     (e : G.obj R ⟶ (H.obj (Opposite.op Y')).obj M)
     (v : F.obj V ⟶ (H.obj (Opposite.op Y)).obj M) : Prop :=
   F.map (inv i) ≫ b ≫ G.map c ≫ G.map d ≫ e ≫ (H.map q.op).app M = v
-/-- Construct the mapped word using only isomorphisms of the unmapped factors.
-Source: thm-coef-finite-hom, paragraph 4
-(blueprint: def-coef-normalized-comparison-word). -/
+/-- Construct the mapped word using only isomorphisms of the unmapped factors. -/
 theorem MappedComparisonWord.mk
     {C D E : Type*} [Category C] [Category D] [Category E]
     (F : C ⥤ D) (G : E ⥤ D) (H : Dᵒᵖ ⥤ D ⥤ D)

@@ -19,12 +19,13 @@ projection-formula maps `t : f^! M ⊗ f^* N ⟶ f^!(M ⊗ N)`, `t'` on the spec
 external-duality maps `ξ : Q ⟶ f^! 𝟙`, `ξ' : Q' ⟶ f_s^! 𝟙` the normalized external-duality maps
 are `κ_M = t(ξ ⊗ 1)` (followed by the unitor).
 
-Blueprint `det-nearby-structural-product` derives its second equation (the *twisted case*)
+Blueprint `lemma-base-change-maps-external-duality--1` derives its second equation (the *twisted
+case*)
 
 `β_f S(κ_M) μ (a ⊗ α_f) = κ_{S M} (b ⊗ 1)`
 
 from its first equation (the *constant case*) `β_f S(ξ) a = f_s^! σ ξ_s b`, from
-`det-nearby-exceptional-tensor` (2) and from the unit law `μ (σ ⊗ 1) = 1`
+`lemma-compatibilities-base-change-maps` (2) and from the unit law `μ (σ ⊗ 1) = 1`
 (`CategoryTheory.exceptionalTwisted_of_constant`). Here `a : Q₀ ⟶ S_V Q` is `α_{p₂}` and
 `b : Q₀ ⟶ Q'` is `p_{2s}^* θ`, on `Q₀ = p_{2s}^* S_X ω`.
 
@@ -47,10 +48,11 @@ variable {V V' W W' : Type*} [Category V] [Category V'] [Category W] [Category W
   {L : W ⥤ V} {R : W ⥤ V} {L' : W' ⥤ V'} {R' : W' ⥤ V'}
 
 /-- **The twisted case of the exceptional exchange and external duality** (blueprint
-`det-nearby-structural-product`, constant case ⇒ twisted case): with `κ_M = t(ξ ⊗ 1) ≫ R(λ)` and
-`κ'_N = t'(ξ' ⊗ 1) ≫ R'(λ)`, the compatibility `hET` of `β` with the projection formula (blueprint
-`det-nearby-exceptional-tensor` (2)), the naturality of `t'` in its first variable and the constant
-case `hconst` give `(a ⊗ α) ≫ μ ≫ S_V(κ_M) ≫ β = (b ⊗ 1) ≫ κ'_{S_W M}`. -/
+`lemma-base-change-maps-external-duality--1`, constant case ⇒ twisted case): with
+`κ_M = t(ξ ⊗ 1) ≫ R(λ)` and `κ'_N = t'(ξ' ⊗ 1) ≫ R'(λ)`, the compatibility `hET` of `β` with the
+projection formula (blueprint `lemma-compatibilities-base-change-maps` (2)), the naturality of `t'`
+in its first variable and the constant case `hconst` give
+`(a ⊗ α) ≫ μ ≫ S_V(κ_M) ≫ β = (b ⊗ 1) ≫ κ'_{S_W M}`. -/
 theorem exceptionalTwisted_of_constant (α : SW ⋙ L' ⟶ L ⋙ SV) (β : R ⋙ SV ⟶ SW ⋙ R')
     (t : ∀ M N : W, R.obj M ⊗ L.obj N ⟶ R.obj (M ⊗ N))
     (t' : ∀ M N : W', R'.obj M ⊗ L'.obj N ⟶ R'.obj (M ⊗ N))
@@ -90,10 +92,10 @@ variable {DS Ds CX CX' CP CP' : Type*} [Category DS] [Category Ds] [Category CX]
   {R1' : CP' ⥤ CX'} {S1' : CX' ⥤ CP'}
 
 /-- **The constant case of the exceptional exchange and external duality** (blueprint
-`det-nearby-structural-product`, first equation, for a proper family): let `ξ : p₂^* a^! A ⟶
-p₁^! a^* A` be the external-duality map, whose `Rp₁ ⊣ p₁^!`-adjoint is the inverse of proper base
-change `Q : a^* Ra_* ⟶ Rp₁* p₂^*` followed by `a^*(ε_a)`, and similarly `ξ'` on the special fibre.
-Let `β_{p₁}`, `β_a` be the mates of the compact-support exchanges `ν_{p₁}`, `ν_a`,
+`lemma-base-change-maps-external-duality--1`, first equation, for a proper family): let
+`ξ : p₂^* a^! A ⟶ p₁^! a^* A` be the external-duality map, whose `Rp₁ ⊣ p₁^!`-adjoint is the inverse
+of proper base change `Q : a^* Ra_* ⟶ Rp₁* p₂^*` followed by `a^*(ε_a)`, and similarly `ξ'` on the
+special fibre. Let `β_{p₁}`, `β_a` be the mates of the compact-support exchanges `ν_{p₁}`, `ν_a`,
 `θ = β_a(A) ≫ a_s^!(u⁻¹)` and `σ = a_s^*(u) ≫ α_a(A)` for `u : A' ≅ S_S A`. If `ν` is compatible
 with proper base change (`hQ`, the composition rule for `α` along `a p₁ = a p₂`), then
 `α_{p₂} ≫ S(ξ) ≫ β_{p₁} = p_{2s}^*(θ) ≫ ξ' ≫ p_{1s}^!(σ)`. -/

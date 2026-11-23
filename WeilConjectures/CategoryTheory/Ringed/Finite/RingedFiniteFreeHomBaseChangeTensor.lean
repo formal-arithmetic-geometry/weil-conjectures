@@ -36,8 +36,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Descent of the scalar tensor comparison from K-flat representatives.
 
-Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK.
-(blueprint: lem-sf-ringed-finite-free-tensor-data). -/
+Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -57,17 +56,7 @@ variable {C : Type c} [Category.{v} C]
 /-- The strong scalar tensor comparison and its representative normalization.
 The universal scalar pair and both normalized closed models are already supplied;
 this assertion constructs only the chain comparison and its derived localization.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 08J9.
-(blueprint: lem-sf-ringed-finite-free-tensor-data).
-
-Proof: use the actual chain scalar tensor comparison and preservation of K-flatness.
-K-flat resolutions make restriction of two-variable functors to K-flat representatives
-fully faithful. Compose the inverse R tensor representative comparison, the universal
-scalar counit on the tensor, the chain comparison, the S tensor representative
-comparison and the inverse scalar counits on the two factors. The existing tensor
-descent theorem lifts this natural isomorphism uniquely to the derived categories and
-proves its displayed square. The counit on the tensor is invertible because the tensor
-of two K-flat complexes is K-flat. The chain generator formula is retained unchanged. -/
+Source: Stacks Project, Tags 07A4 and 08J9. -/
 theorem ringedFiniteFreeHomBaseChange_tensor
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]

@@ -266,15 +266,7 @@ private theorem localizationSheafMap_zeroAux
 
 /-- The localization of the regular module is its multiplication colimit, with
 zeroth leg the localization unit.
-Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY.
-(blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).
-
-Proof: the nth fraction map sends r to r/t^n. The module-localization colimit
-comparison proves the universal property sectionwise. Evaluation jointly reflects
-presheaf-module colimits, so the fraction cocone is a presheaf colimit. For a sheaf
-target, the sheafification adjunction extends its descent map uniquely; the unit
-naturality and the presheaf colimit equations prove factorization and uniqueness.
-The zeroth fraction map sends r to r/1, hence is the stated localization unit. -/
+Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY. -/
 private theorem scalarLocalization_regularColimitAux
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ∃ c : Cocone (Functor.ofSequence (X := fun _ : ℕ ↦
@@ -455,20 +447,9 @@ private theorem tensor_scalar_colimitAux
     simp only [Linear.smul_comp, Linear.comp_smul, Category.id_comp, Category.comp_id]
 
 set_option linter.style.whitespace false in
-set_option maxHeartbeats 400000 in
 -- The sectionwise tensor normalization has a large elaborated type.
 /-- The fraction legs exhibit restricted scalar extension as the module-sheaf colimit.
-Source: Stacks Project, algebra.tex Tag 00CM; sites-modules.tex Tags 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).
-
-Proof: the sectionwise fraction maps from R into R[1/t] give a colimit: a
-compatible family sends r/t^n to the stage-n image of r. The fraction equality
-criterion gives equality at a common stage, including t-torsion. These maps
-commute with restrictions and descend through module sheafification. Tensoring
-with M preserves this colimit by tensor--Hom adjunction. The comparison between
-restricted extension of scalars and the sheaf tensor identifies the resulting
-object with U(N); the normalized unit fixes the zeroth leg, and multiplication
-by the inverse powers of t fixes all the other legs. -/
+Source: Stacks Project, algebra.tex Tag 00CM; sites-modules.tex Tags 03CY and 03EK. -/
 private theorem scalarLocalization_moduleColimitAux
     (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
@@ -643,23 +624,8 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 set_option linter.style.whitespace false in
-set_option maxHeartbeats 800000 in
--- Elaborating the sectionwise tensor normalization requires additional heartbeats.
 /-- The ordinary sequential colimit of a scalar sequence of complexes.
-Source: Stacks Project, algebra.tex, Tag 00CM; sites-modules.tex, Tags 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).
-
-Proof: on each object V and degree i, send the stage-n element x to t^(-n) tensor x.
-For any compatible family, send a fraction x/t^n to the stage-n image of x.
-If two fractions agree, a power of t kills their cross difference; passing to the
-common stage n+m+k makes their images equal. This proves well-definedness even
-with t-torsion. Common stages prove additivity and linearity; all fractions prove
-uniqueness. These maps commute with restriction. Module sheafification gives the
-universal property for sheaf modules, and tensor--Hom adjunction extends it from
-R to every module. Apply it degreewise. The maps commute with differentials by
-linearity, as do their inverses. Thus the termwise restricted scalar extension is
-isomorphic to the sequential colimit complex. The displayed normalization is the
-fraction formula, using the section normalization of the zeroth leg. -/
+Source: Stacks Project, algebra.tex, Tag 00CM; sites-modules.tex, Tags 03CY and 03EK. -/
 theorem scalarLocalization_complexColimitOfUniverses
     (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})

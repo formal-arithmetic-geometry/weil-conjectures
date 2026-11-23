@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 /-!
 # Matching objects as limits over proper faces
 
-Source: Stacks Project, simplicial.tex, Lemma 0186 (lemma-formula-limit), restricted to
-injective proper faces (auxiliary; not a blueprint node).
+Source: Stacks Project, Lemma 0186, restricted to
+injective proper faces.
 -/
 
 @[expose] public section
@@ -24,23 +24,23 @@ open scoped Simplicial
 namespace CategoryTheory.SimplicialObject
 
 /-- The property selecting injective proper faces in the over category of `[n]`.
-Source: Stacks, Tag 0186 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0186. -/
 def properFaceProperty (n : ℕ) : ObjectProperty (Over ⦋n⦌) :=
   fun a ↦ a.left.len < n ∧ Function.Injective a.hom.toOrderHom
 
 /-- The category `I_n` of injective proper faces, with commuting triangles as arrows.
-Source: Stacks, Tag 0186 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0186. -/
 abbrev ProperFaceCategory (n : ℕ) := (properFaceProperty n).FullSubcategory
 
 /-- The codimension-one face omitting `i` as an object of `I_(n+1)`.
-Source: Stacks, Tag 0186 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0186. -/
 def properFace (n : ℕ) (i : Fin (n + 2)) : ProperFaceCategory (n + 1) :=
   ⟨Over.mk (SimplexCategory.δ i), Nat.lt_succ_self n,
     SimplexCategory.mono_iff_injective.mp
       (inferInstance : Mono (SimplexCategory.δ i))⟩
 
 /-- The contravariant proper-face diagram `P_n(K)`.
-Source: Stacks, Tag 0186 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tag 0186. -/
 def properFaceDiagram {C : Type u} [Category.{v} C] (K : SimplicialObject C) (n : ℕ) :
     (ProperFaceCategory n)ᵒᵖ ⥤ C :=
   ((properFaceProperty n).ι ⋙ Over.forget ⦋n⦌).op ⋙ K
@@ -203,12 +203,7 @@ private theorem restrict_compatible {C : Type u} [Category.{v} C]
 /-- Degree one: compatible proper-face families are arbitrary pairs, naturally in the
 vertex. The same matching object is a limit over proper faces, with components computed
 by any face factorization, and its matching map has the prescribed components uniquely.
-Source: Stacks, Tag 0186 (auxiliary; not a blueprint node).
-Proof: every proper injective face factors through a codimension-one face
-[lem-weil-pbc-simplex-face-factorization]. In degree one these are exactly the two vertices,
-so restriction is a bijection onto pairs, commuting with precomposition. The product
-universal property [lem-weil-pbc-simplicial-matching-object] gives the limit over these
-faces; the matching-map identities give all its components and limit uniqueness. -/
+Source: Stacks, Tag 0186. -/
 theorem matching_object_proper_faces_one {C : Type u} [Category.{v} C] [HasFiniteLimits C]
     (K : SimplicialObject C) (c : Fan (fun _ : Fin 2 ↦ K _⦋0⦌))
     (hc : IsLimit c) (μ : K _⦋1⦌ ⟶ c.pt)
@@ -279,18 +274,7 @@ theorem matching_object_proper_faces_one {C : Type u} [Category.{v} C] [HasFinit
 /-- Degrees at least two: restriction to codimension-one faces gives the natural compatible
 face-tuple bijection. Every limiting boundary cone is also a limit over all proper faces;
 its components are independent of factorization, and characterize its matching map.
-Source: Stacks, Tag 0186 (auxiliary; not a blueprint node).
-Proof: factor each proper face through a missing vertex using
-[lem-weil-pbc-simplex-face-factorization]. Restriction of a compatible family satisfies the
-face-pair equations by [lem-weil-pbc-simplex-face-face-identity]. Conversely assign to a
-proper face the composite through any missing vertex. Two choices factor through the face
-omitting both vertices; the same identity and the tuple equation identify the composites.
-This proves independence and, using functoriality [def-weil-pbc-simplicial-object], family
-compatibility. The constructions are inverse and commute with precomposition. Apply this
-to the boundary projections; composing the resulting bijection with the matching object's
-universal property [lem-weil-pbc-simplicial-matching-object] proves the limit property.
-Finally the matching-map face equations and functoriality give every proper-face component;
-uniqueness follows from the limit property. -/
+Source: Stacks, Tag 0186. -/
 theorem matching_object_proper_faces_succ_succ {C : Type u} [Category.{v} C]
     [HasFiniteLimits C] (K : SimplicialObject C) (n : ℕ)
     (c : Cone (matchingBoundaryIndex K n).multicospan) (hc : IsLimit c)

@@ -5,9 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.SixFunctors.Coef.CoefFiniteHomSiteDescentData
-import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorRouteNormalization
+import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorChainEquation
 import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientKFlatRepresentatives
-/-! # Equality of the two normalized finite site tensor routes -/
+/-! # The two finite site tensor routes in the direction of beta -/
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -50,10 +50,9 @@ def finiteHomTensorBetaRightOfComparisons
   Functor.whiskerLeft A β ≫ Functor.whiskerRight δ V ≫
     Functor.whiskerLeft (F.prod F) γ
 
-set_option maxHeartbeats 0 in
 -- Comparing the chosen intrinsic closed structures requires a larger kernel budget.
 /-- The route through the intrinsic scalar tensorator, in the direction of beta.
-Source: blueprint thm-coef-finite-hom, final site-comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
 noncomputable def finiteHomSiteTensorBetaLeft
     (l : ℕ) [Fact l.Prime]
@@ -72,10 +71,9 @@ noncomputable def finiteHomSiteTensorBetaLeft
     (finiteHomNuTensor l E X n).hom (coefFiniteHomProTensor l E X h).hom
     (finiteHomSiteBeta l E X h)
 
-set_option maxHeartbeats 0 in
 -- Comparing the chosen etale closed structures requires a larger kernel budget.
 /-- The route through the etale scalar tensorator, in the direction of beta.
-Source: blueprint thm-coef-finite-hom, final site-comparison paragraph
+Source: blueprint lemma-change-coefficients-internal-hom--1, final site-comparison paragraph
 (blueprint: lem-coef-finite-hom-site-tensor-natural-equality). -/
 noncomputable def finiteHomSiteTensorBetaRight
     (l : ℕ) [Fact l.Prime]
@@ -93,52 +91,4 @@ noncomputable def finiteHomSiteTensorBetaRight
     (finiteHomNu l E X n) (finiteHomNu l E X m)
     (finiteHomEtaleTensor l E X h).hom (finiteHomNuTensor l E X m).hom
     (finiteHomSiteBeta l E X h)
-
-set_option maxHeartbeats 0 in
--- The chain-model formulas involve separately encoded localization functors.
-private theorem beta_routes_on_representatives
-    (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (X : Scheme.{u}) {n m : ℕ} (h : m ≤ n)
-    (P Q : CochainComplex (Sheaf X.smallEtaleTopology
-      (ModuleCat.{u + 1} (ULift.{u + 1, u}
-        (Padic.coefficientExtensionRing l E (n + 1))))) ℤ)
-    (hP : finiteHomKFlat l E X n P) (hQ : finiteHomKFlat l E X n Q) :
-    (finiteHomSiteTensorBetaLeft l E X h).app
-        ((finiteHomEtaleQ l E X n).obj P, (finiteHomEtaleQ l E X n).obj Q) =
-      (finiteHomSiteTensorBetaRight l E X h).app
-        ((finiteHomEtaleQ l E X n).obj P, (finiteHomEtaleQ l E X n).obj Q) := by
-  obtain ⟨e, he, s, t, hs, ht⟩ :=
-    finiteHomSiteTensorRouteNormalization l E X h P Q hP hQ
-  exact models_eq s t hs ht
-    (congrArg (finiteHomIntrinsicQ l E X m).map
-      (finiteHomSiteTensorChainEquation l E X h P Q e he))
-
-set_option maxHeartbeats 0 in
--- Fully faithful descent compares the recorded derived-category presentations.
-/-- The beta oriented tensor transformations agree after K-flat localization.
-Source: blueprint thm-coef-finite-hom, final scalar/site comparison paragraph
-(blueprint: lem-coef-finite-hom-site-tensor-natural-equality).
-Proof: restrict the two natural transformations to pairs of K-flat representatives.
-The route normalization theorem supplies comparison isomorphisms for each route;
-the ordinary chain equation identifies their chain maps. Fully faithful restriction,
-followed by cancellation of those comparison isomorphisms, yields equality. -/
-theorem finiteHomSiteTensorNaturalEquality
-    (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (X : Scheme.{u}) {n m : ℕ} (h : m ≤ n) :
-    finiteHomSiteTensorBetaLeft l E X h = finiteHomSiteTensorBetaRight l E X h := by
-  let : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
-    Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
-  obtain ⟨ff⟩ := finiteCoefficientKFlatRepresentativesFullyFaithful
-    (Padic.coefficientExtensionRing l E (n + 1)) X
-    (hD := inferInstanceAs (HasDerivedCategory.{u + 1}
-      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
-        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))))
-    (normalizedDVRDerived l E X m)
-  apply ff.map_injective
-  apply NatTrans.ext
-  funext pq
-  obtain ⟨⟨P, hP⟩, ⟨Q, hQ⟩⟩ := pq
-  exact beta_routes_on_representatives l E X h P Q hP hQ
 end WeilConjectures

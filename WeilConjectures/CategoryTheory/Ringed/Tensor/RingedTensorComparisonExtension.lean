@@ -38,8 +38,7 @@ import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import all Mathlib.RingTheory.Flat.CategoryTheory
 /-! # Extending tensor comparisons to one K-flat representative
 
-Source: Stacks Project, Tags 06YS, 06YT and 0FPT
-(blueprint: lem-sfb-ringed-tensor-comparison-extension).
+Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -124,7 +123,6 @@ private def resolvedTensorIso
     S.tensor.mapIso (Iso.prod (asIso (DerivedCategory.Q.{w}.map (η.app P)))
       (asIso (DerivedCategory.Q.{w}.map (η.app Q))))
 
-set_option maxHeartbeats 800000 in
 -- Naturality compares composites through dependent total-tensor and resolution models.
 private theorem resolvedTensorIso_naturality
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
@@ -264,16 +262,7 @@ private theorem flatResolutionFamily :
 /-- A simultaneous K-flat comparison extends to a natural comparison whenever either factor
 is K-flat, retaining its prescribed value when both factors are K-flat.
 
-Source: Stacks Project, Tags 06YS, 06YT and 0FPT
-(blueprint: lem-sfb-ringed-tensor-comparison-extension).
-
-Proof: take the reduced functorial flat resolution and its augmentation. Its complexes
-are K-flat. Tensoring the two augmentations is a quasi-isomorphism whenever either
-unresolved factor is K-flat, by factoring it into tensor products with a K-flat factor.
-Invert its localization, apply the given comparison to the two resolutions, and then
-apply derived tensor to the localized augmentations. Naturality follows from naturality
-of the augmentations and of the original comparison. On two K-flat inputs the same
-naturality square identifies the construction with the prescribed comparison. -/
+Source: Stacks Project, Tags 06YS, 06YT and 0FPT. -/
 theorem ringedTensorComparison_extension
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (T : CoefficientTensorModels.{r, c, v, w} J R S) :

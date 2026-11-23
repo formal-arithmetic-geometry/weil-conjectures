@@ -97,8 +97,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Derived projection for extension from a ringed slice
 
-Source: Stacks Project, Tags 0E8I and 06YN
-(blueprint: lem-weil-pbc-ringed-open-derived-tensor-projection).
+Source: Stacks Project, Tags 0E8I and 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -178,7 +177,6 @@ private theorem chosenProjection_naturality :
     type_of% ((chosenProjection_spec.{c, v, r} J R U).choose_spec.2) :=
   (chosenProjection_spec.{c, v, r} J R U).choose_spec.2
 
-set_option maxHeartbeats 2000000 in
 -- Descending the unbounded tensor comparison elaborates several localization functors.
 private def complexProjection :
     ((𝟭 _).prod (ringedOpenRestrictionOnComplexes.{c, v, r} R U)) ⋙
@@ -203,25 +201,12 @@ variable [HasDerivedCategory.{w} (RingedDerivedNative.Modules.{c, v, r} J R)]
   [HasDerivedCategory.{w}
     (RingedDerivedNative.Modules.{max c v, v, r} (J.over U) (R.over U))]
 
-set_option maxHeartbeats 2000000 in
 -- The unbounded derived comparisons require elaborating several functor structures.
 attribute [local irreducible] complexProjection RingedDerivedNative.comparison
   coefficientTotalTensor in
 /-- Extension from a slice satisfies the unbounded derived tensor projection formula,
 naturally in the slice object and the ambient object.
-Source: Stacks Project, Tags 0E8I and 06YN
-(blueprint: lem-weil-pbc-ringed-open-derived-tensor-projection).
-
-Proof: on complexes, extension of P tensor the restriction of Q is naturally
-isomorphic to the tensor of the extension of P with Q. This is the sheafified
-summand projection formula, totalized with the same cochain signs. Restriction
-and extension both preserve K-flat complexes. On their K-flat presentations the
-specified derived tensor comparisons, the exact-functor localization comparisons,
-and the complex projection formula therefore give a natural isomorphism between
-the two displayed derived functors. The product of the two K-flat localization
-functors is a localization. Precomposition with it is fully faithful, so the
-natural isomorphism descends uniquely. This treats unbounded complexes, empty
-slices, and zero objects without finiteness hypotheses. -/
+Source: Stacks Project, Tags 0E8I and 06YN. -/
 theorem ringedOpenDerived_tensorProjection :
     let F : RingedDerivedNative.Modules.{c, v, r} J R ⥤
         RingedDerivedNative.Modules.{max c v, v, r} (J.over U) (R.over U) :=

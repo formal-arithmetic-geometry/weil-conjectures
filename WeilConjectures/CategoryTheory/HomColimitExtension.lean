@@ -37,8 +37,7 @@ variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
   {I : Type v} [SmallCategory I] [IsFiltered I]
 
 /-- Objects whose shifted additive Hom functors carry a specified cocone to colimits.
-Source: the canonical comparison in Hemo--Richarz--Scholbach, Lemma 5.3(2).
-(auxiliary; not a blueprint node) -/
+Source: the canonical comparison in Hemo--Richarz--Scholbach, Lemma 5.3(2). -/
 def homColimitProperty (D : I ⥤ C) (c : Cocone D) : ObjectProperty C :=
   fun K ↦ ∀ n : ℤ, IsIso (colimit.desc _
     ((shiftFunctor C n ⋙ preadditiveCoyoneda.obj (op K)).mapCocone c))
@@ -146,15 +145,7 @@ private theorem iso_middle_of_homological
     (inferInstanceAs (Mono (α.app (T.obj₁⟦(1 : ℤ)⟧))))
 
 /-- Filtered Hom continuity is closed under distinguished extensions.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), long exact Hom sequence argument.
-(auxiliary; not a blueprint node)
-
-Proof: for a distinguished triangle A → B → C → A[1], take its contravariant
-long exact additive Hom sequence into each Dᵢ[n] and into c.pt[n]. Filtered colimits
-of abelian groups are exact. The cocone legs induce a morphism of the two exact
-five-term windows with terms Hom(A,-[n-1]), Hom(C,-[n]), Hom(B,-[n]), Hom(A,-[n]),
-and Hom(C,-[n+1]). The four outer vertical maps are invertible by the hypotheses
-on A and C. The five lemma makes the middle map invertible, for every integer n. -/
+Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), long exact Hom sequence argument. -/
 theorem homColimitProperty_extensions (D : I ⥤ C) (c : Cocone D)
     (T : Pretriangulated.Triangle C) (hT : T ∈ distTriang C)
     (h₁ : homColimitProperty D c T.obj₁) (h₃ : homColimitProperty D c T.obj₃) :

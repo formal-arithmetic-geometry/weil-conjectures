@@ -22,7 +22,7 @@ variable {C : Type u} [Category.{v} C] {T : Type v} {U : C}
   {f : T → C} {hom : ∀ t, f t ⟶ U} (S : SiteCechComplex f hom)
 
 /-- The coproduct of representables on the degree-p products, as a presheaf of sets.
-Source: Stacks 03AT (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
+Source: Stacks 03AT. -/
 def tuplePresheaf (p : ℕ) : Cᵒᵖ ⥤ Type v where
   obj X := Σ t : Fin (p + 1) → T, X.unop ⟶ S.W p t
   map g := ↾fun x ↦ ⟨x.1, g.unop ≫ x.2⟩
@@ -40,7 +40,7 @@ def tuplePresheaf (p : ℕ) : Cᵒᵖ ⥤ Type v where
     rw [Category.assoc]
 
 /-- A map of tuple indices induces a map of the corresponding representable sums.
-Source: Stacks 03AT (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
+Source: Stacks 03AT. -/
 def tupleMap {p q : ℕ} (α : Fin (q + 1) → Fin (p + 1)) :
     S.tuplePresheaf p ⟶ S.tuplePresheaf q where
   app X := ↾fun x ↦ ⟨x.1 ∘ α, x.2 ≫ S.indexMap x.1 α⟩
@@ -53,7 +53,7 @@ def tupleMap {p q : ℕ} (α : Fin (q + 1) → Fin (p + 1)) :
     rw [Category.assoc]
 
 /-- The simplicial representable sums; index-map laws follow from product uniqueness.
-Source: Stacks 03AT (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
+Source: Stacks 03AT. -/
 abbrev tupleSimplicial : SimplicialObject (Cᵒᵖ ⥤ Type v) where
   obj n := S.tuplePresheaf n.unop.len
   map α := S.tupleMap α.unop.toOrderHom
@@ -105,7 +105,7 @@ abbrev tupleSimplicial : SimplicialObject (Cᵒᵖ ⥤ Type v) where
     rfl
 
 /-- The actual alternating chain complex of free module presheaves on the tuple sums.
-Source: Stacks 03F5 (blueprint: lem-weil-pbc-site-cech-free-complex-exact). -/
+Source: Stacks 03F5. -/
 noncomputable abbrev freeComplex (R : Cᵒᵖ ⥤ RingCat.{v}) :
     ChainComplex (PresheafOfModules.{v} R) ℕ :=
   (AlgebraicTopology.alternatingFaceMapComplex _).obj
@@ -295,22 +295,7 @@ private theorem freeComplex_d_app (R : Cᵒᵖ ⥤ RingCat.{v}) (p : ℕ) (X : C
   congr 1
 
 /-- The evaluated free Čech complex has a contracting identity in each positive degree.
-Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03F5.
-(blueprint: lem-weil-pbc-site-cech-free-complex-exact-fibrewise)
-
-Proof: Fix X. For each basis tuple x, its projections have a common composite
-φ:X→U. The zeroth projection proves that φ has a lift to one of the f(i).
-Choose a lift depending only on φ; proof irrelevance makes this independent
-of the existence proof. Prefix it to the projections of x, using the unique
-product lift to construct the resulting basis tuple. Deleting coordinate zero
-returns x. Deleting coordinate i+1 commutes with prefixing after deleting i,
-since deletion preserves φ and hence preserves the selected lift.
-Apply ModuleCat.free to extend these functions R(X)-linearly. Evaluation is
-additive, so the differential is the alternating sum of the free face maps.
-In h followed by d, the zeroth face gives the identity and each successor face
-cancels its opposite-signed term in d followed by k. This works also for n=0.
-If T is empty there are no basis tuples and no nonexistent lift is chosen.
-These maps are constructed only at the fixed X; no naturality is asserted. -/
+Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03F5. -/
 theorem freeComplex_evaluation_contracting (R : Cᵒᵖ ⥤ RingCat.{v})
     (n : ℕ) (X : Cᵒᵖ) :
     ∃ h : ((S.freeComplex R).X (n + 1)).obj X ⟶

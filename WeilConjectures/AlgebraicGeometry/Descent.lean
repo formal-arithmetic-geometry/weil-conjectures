@@ -110,7 +110,7 @@ variable {T : Scheme.{u}} {ι : Type w} {T' : ι → Scheme.{u}} (g : ∀ i, T' 
 
 /-- **Finite presentation descends along an fpqc covering.**
 
-(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+(blueprint: `lemma-rigidification-along-section--1`; `det-thm-picard-descent`, part (D1)) -/
 theorem isFinitePresentation_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
     (M : modulesPseudofunctor.obj (.mk (op T)))
@@ -126,7 +126,7 @@ components are of finite presentation and locally free, i.e. finite locally free
 allowed to vary locally, comes from a module on `T` which is locally free; it is of finite
 presentation by `isFinitePresentation_of_toDescentData_iso`.
 
-(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+(blueprint: `lemma-rigidification-along-section--1`; `det-thm-picard-descent`, part (D1)) -/
 theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
     (M : modulesPseudofunctor.obj (.mk (op T)))
@@ -142,7 +142,7 @@ theorem isLocallyFree_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.
 /-- **Fpqc descent for modules: existence.** For an fpqc covering `{g i : T i ⟶ T}`, every
 descent datum whose components are quasi-coherent comes from a sheaf of modules on `T`.
 
-(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+(blueprint: `lemma-rigidification-along-section--1`; `det-thm-picard-descent`, part (D1)) -/
 theorem exists_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
     (hD : ∀ i, (D.obj i : (T' i).Modules).IsQuasicoherent) :
@@ -255,7 +255,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 quasi-coherent module: this is part (2) of the blueprint lemma, which is stated for
 quasi-coherent modules.
 
-(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+(blueprint: `lemma-rigidification-along-section--1`; `det-thm-picard-descent`, part (D1)) -/
 theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso_of_isQuasicoherent
     (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
@@ -275,7 +275,7 @@ finite locally free of rank `r`. This refines `isLocallyFree_of_toDescentData_is
 of a finite locally free module is locally constant, and can be read off after a faithfully
 flat base change.
 
-(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+(blueprint: `lemma-rigidification-along-section--1`; `det-thm-picard-descent`, part (D1)) -/
 theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso
     (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
@@ -293,7 +293,7 @@ theorem isFiniteLocallyFreeOfRank_of_toDescentData_iso
 /-- **Invertibility descends along an fpqc covering**: a compatible family of invertible
 modules `ℒ i` on the `T i` glues to an invertible module `ℒ` on `T` with `ℒ|_{T i} ≅ ℒ i`.
 
-(blueprint: `lem-pc-fpqc-descent`; `det-thm-picard-descent`, part (D1)) -/
+(blueprint: `lemma-rigidification-along-section--1`; `det-thm-picard-descent`, part (D1)) -/
 theorem isInvertible_of_toDescentData_iso (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     (D : modulesPseudofunctor.DescentData g)
     (M : modulesPseudofunctor.obj (.mk (op T)))
@@ -344,7 +344,7 @@ theorem eq_of_forall_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {S : Sieve X}
 /-- **Fpqc descent for closed subschemes: uniqueness.** Two ideal sheaves on `X` whose pullbacks
 along every member of an fpqc covering family agree are equal.
 
-(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem eq_of_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
     (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
     {J J' : X.IdealSheafData} (h : ∀ i, J.comap (p i) = J'.comap (p i)) : J = J' := by
@@ -358,13 +358,13 @@ mapping compatibly to two members of the covering. Then the `I i` are the pullba
 ideal sheaf on `X`.
 
 This is the step "descending the quotients" of the proof of
-`lem-pc-descent-finite-flat-closed-subschemes`. Over an affine open `U` of `X` the covering is
+`theorem-hilbert-schemes-points-smooth-curve--1`. Over an affine open `U` of `X` the covering is
 refined by finitely many flat morphisms `f j : W j ⟶ U` from affine schemes, and the ideal sheaf
 `⨅ j, (I j).map (f j)` on `U` restricts to the given ones by flat base change
 (`Scheme.IdealSheafData.comap_iInf_map_of_flat`); these local ideal sheaves are unique, hence
 glue (`Scheme.IdealSheafData.exists_comap_ι_eq`).
 
-(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`) -/
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
 theorem exists_comap_eq_of_mem_fpqcTopology {X : Scheme.{u}} {X' : ι → Scheme.{u}}
     (p : ∀ i, X' i ⟶ X) (hp : Sieve.ofArrows X' p ∈ Scheme.fpqcTopology X)
     (I : ∀ i, (X' i).IdealSheafData)
@@ -439,7 +439,7 @@ locally free of degree `d` over `T i` and whose pullbacks agree over `X i ×_X X
 is a unique closed subscheme `Z ⊆ X` with `Z ×_T T i = Z i`, and `Z` is finite locally
 free of degree `d` over `T`.
 
-(blueprint: `lem-pc-descent-finite-flat-closed-subschemes`; `det-thm-picard-descent`,
+(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`; `det-thm-picard-descent`,
 part (D2)) -/
 theorem isSheaf_fpqc_finiteLocallyFreeSubscheme (hg : Sieve.ofArrows T' g ∈ Scheme.fpqcTopology T)
     {X : Scheme.{u}} (f : X ⟶ T) (d : ℕ)

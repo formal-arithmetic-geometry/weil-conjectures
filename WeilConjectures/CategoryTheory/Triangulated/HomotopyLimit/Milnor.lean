@@ -49,8 +49,7 @@ def milnorMap {F : ℕᵒᵖ ⥤ C} (c : Cone F) (L : C) (f : L ⟶ c.pt) : towe
 /-- *Mittag-Leffler vanishing* for homotopy limits: if `c` is a homotopy limit cone over a tower
 `F` and the groups `Hom(L⟦1⟧, Fₙ)` are finite, then the Milnor map
 `Hom(L, R lim F) → limₙ Hom(L, Fₙ)` is bijective. Its kernel is `lim¹ₙ Hom(L⟦1⟧, Fₙ)` by the
-Milnor triangle, which vanishes for a tower of finite groups.
-(blueprint: `lem-weil-pbc-mittag-leffler`) -/
+Milnor triangle, which vanishes for a tower of finite groups. -/
 theorem IsHomotopyLimit.bijective_milnorMap {F : ℕᵒᵖ ⥤ C} {c : Cone F}
     (hc : IsHomotopyLimit c) (L : C) [∀ n : ℕ, Finite (L⟦(1 : ℤ)⟧ ⟶ F.obj (op n))] :
     Function.Bijective (milnorMap c L) := by

@@ -9,9 +9,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 
 /-! # Essential smallness from bounded homology
-
-Source: blueprint `det-brown-hypotheses-small`, the Postnikov induction in steps 11–13.
-(blueprint: lem-sfb-bounded-homology-essentially-small)
 -/
 
 @[expose] public section
@@ -59,19 +56,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
 /-- Bounded complexes whose homology belongs to an essentially small class form an
 essentially small class. No stability of that class under extensions is required.
 
-Source: blueprint `det-brown-hypotheses-small`, steps 11–13, the ambient Postnikov
-induction; Stacks Project, Tags 014A and 014B, uniqueness of cones up to isomorphism.
-(blueprint: lem-sfb-bounded-homology-essentially-small)
-
-Proof: extensions of two essentially small classes are essentially small. Choose
-representatives of the two classes and one cone for every connecting morphism
-between them; these arrows form a small set by local smallness. TR3 identifies all
-other extensions with one of these cones. For the interval [a,a+n-1], induct on n.
-At n=0 every complex is zero. The truncation triangle at b=a+n expresses a complex
-in [a,a+n] as an extension of its truncation below b by H^b[-b]. The former lies in
-the previous interval, and the latter is the image of the given essentially small
-class under the single-term functor. Take the small union over all a and n.
--/
+Source: Stacks Project, Tags 014A and 014B, uniqueness of cones up to isomorphism. -/
 theorem bounded_homologyProperty_essentiallySmall
     (P : ObjectProperty A) [P.IsClosedUnderIsomorphisms]
     [ObjectProperty.EssentiallySmall.{w} P] :

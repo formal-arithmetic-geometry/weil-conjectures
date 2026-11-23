@@ -10,8 +10,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralObject.SpectralSe
 
 /-! # Bottom-page maps to the abutment
 
-Source: Stacks Project, Tags 012K and 015N; spectral-object cycles model.
-(blueprint: def-sc-spectral-object-bottom-page-map)
+Source: Stacks Project, Tags 012K and 015N.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
     (Y : SpectralObject C EInt) [Y.IsFirstQuadrant]
 
 /-- The map from a bottom-row page to the abutment, using the cycles realization.
-Source: Stacks Project, Tags 012K and 015N.
-(blueprint: def-sc-spectral-object-bottom-page-map) -/
+Source: Stacks Project, Tags 012K and 015N. -/
 noncomputable def bottomPageMap (p : ℕ) (r : ℤ) (hr : 2 ≤ r) :
     (Y.E₂SpectralSequenceNat.page r hr).X (p, 0) ⟶
       (Y.H p).obj (mk₁ (homOfLE (bot_le : (⊥ : EInt) ≤ ⊤))) :=

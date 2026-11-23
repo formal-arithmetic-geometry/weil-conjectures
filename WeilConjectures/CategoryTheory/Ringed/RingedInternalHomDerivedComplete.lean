@@ -81,8 +81,7 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoida
 /-!
 # Derived internal Hom into a locally derived complete object
 
-Source: Stacks Project, algebraization.tex, Lemma 099A and Definition 0999
-(blueprint: lem-sf-ringed-rhom-derived-complete).
+Source: Stacks Project, algebraization.tex, Lemma 099A and Definition 0999.
 -/
 
 -- After pruning, this module only keeps private declarations.

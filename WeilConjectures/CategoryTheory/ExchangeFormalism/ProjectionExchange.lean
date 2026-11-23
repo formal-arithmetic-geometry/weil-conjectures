@@ -24,7 +24,6 @@ of `t^* ⊣ t_*` read through the projection formula of `r_!` and the projection
 `b^* ⊣ b_*` read through the projection formula of `l_!`
 (`CategoryTheory.ExchangeFormalism.exchange_whiskerRight_comp_projectionMorphism`; SGA 4,
 Exposé XVII, 5.2.2).
-
 -/
 
 @[expose] public section

@@ -95,9 +95,7 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRe
 
 /-! # Slice restriction of evaluation, transpose and Koszul symmetry
 
-Source: Stacks Project, Tags 07A4, 08J9, 08JB, 08FI and 03EL;
-main-20261015 blueprint, `lem-weil-delta-restriction`, final paragraph
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose).
+Source: Stacks Project, Tags 07A4, 08J9, 08JB, 08FI and 03EL.
 
 The comparison data below retain their representative characterizations. In particular,
 no arbitrary natural tensor or Hom isomorphism can stand for the canonical comparison.
@@ -124,7 +122,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (A : Sheaf J CommRingCat.{max c v u})
 
 /-- Restriction of complexes is the actual termwise slice functor.
-Source: Stacks 08JB (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 08JB. -/
 def ringedSliceComplexRestriction (U : C) : CochainComplex (SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ ⥤ CochainComplex
   (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂ CommRingCat.{max c v u}
@@ -136,7 +134,7 @@ def ringedSliceComplexRestriction (U : C) : CochainComplex (SheafOfModules.{max 
       U).mapHomologicalComplex (.up ℤ)
 
 /-- The actual augmentation to the fixed functorial K-injective model.
-Source: Stacks 079P (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 079P. -/
 def coefficientHomAugmentation (I : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J
   (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) :
     I ⟶ (coefficientHomResolution.{u, c, v} J A).obj I :=
@@ -149,7 +147,7 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (f
   CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
 /-- The recorded exact derived restriction with its slice ring written as A.over U.
-Source: Stacks 08JB (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 08JB. -/
 def ringedSliceDerivedRestriction (U : C) [hU : HasDerivedCategory.{w'} (SheafOfModules.{max c v u}
   ((sheafCompose (J.over U) (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
   :
@@ -164,7 +162,7 @@ def ringedSliceDerivedRestriction (U : C) [hU : HasDerivedCategory.{w'} (SheafOf
     ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A) U
 
 /-- The fixed localization comparison for exact slice restriction.
-Source: Stacks 08JB (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 08JB. -/
 def ringedSliceLocalizationIso (U : C) [hU : HasDerivedCategory.{w'} (SheafOfModules.{max c v u}
   ((sheafCompose (J.over U) (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
   :
@@ -186,7 +184,7 @@ def ringedSliceLocalizationIso (U : C) [hU : HasDerivedCategory.{w'} (SheafOfMod
 
 /-- The canonical identification with an already K-injective target, specified by the
 actual augmentation to the fixed replacement. The displayed equation uniquely fixes it.
-Source: Stacks 08J7, 08JB (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 08J7, 08JB. -/
 def RingedKInjectiveHomModel (L I : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J
   (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
     (κ : (derivedInternalHomOfUniverses.{c, v, u, w} J A).obj
@@ -198,7 +196,7 @@ def RingedKInjectiveHomModel (L I : CochainComplex (SheafOfModules.{max c v u} (
     (coefficientHomResolutionIso.{u, c, v, w} J A L I).hom
 
 /-- The resolving class preserved by the identity-ring-map localization.
-Source: Stacks 0G7E, 07A4 (blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 0G7E, 07A4. -/
 def RingedSliceFlatRestriction (U : C) : Prop :=
   ∀ P : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J (forget₂ CommRingCat.{max c v u}
     RingCat.{max c v u})).obj A)) ℤ,
@@ -210,13 +208,11 @@ def RingedSliceFlatRestriction (U : C) : Prop :=
       A.over U)
       (((ringedSliceComplexRestriction.{c, v, u} J A U).obj P).X n)
 
-set_option maxHeartbeats 600000 in
 -- The two-variable representative squares have long dependent endpoint types.
 /-- Categorical data for the slice comparisons, normalized by the following predicates.
 The tensor comparisons are identity on sheafified pure-tensor summands. The Hom
 comparison is identity on local families of maps, and symmetry is the Koszul sign.
-Source: Stacks 07A4, 08J9, 08JB, 03EL
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 07A4, 08J9, 08JB, 03EL. -/
 structure RingedSliceEvaluationComparisons
     {D : Type a} [Category.{x} D] {E : Type b} [Category.{y} E]
     (H : Dᵒᵖ × D ⥤ D) (HU : Eᵒᵖ × E ⥤ E) (r : D ⥤ E)
@@ -252,11 +248,9 @@ structure RingedSliceEvaluationComparisons
   /-- Preservation of the specified resolving class. -/
   kflat : K
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Canonical pure-tensor normalization of rho, including its localization square.
-Source: Stacks 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 07A4, 08J9 and 08JB. -/
 def RingedSliceTensorModel (U : C)
     [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
@@ -308,11 +302,9 @@ def RingedSliceTensorModel (U : C)
           ((ringedSliceComplexRestriction.{c, v, u} J A U).obj Q)
           (d.kflat P hP fP).1 (d.kflat Q hQ fQ).1).hom
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Canonical local-family normalization of eta, including the fixed K-injective comparisons.
-Source: Stacks 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 07A4, 08J9 and 08JB. -/
 def RingedSliceHomModel (U : C)
     [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
@@ -365,11 +357,9 @@ def RingedSliceHomModel (U : C)
           (((ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).inv.app L).op,
             (ringedSliceLocalizationIso.{c, v, u, w, w'} J A U).hom.app I) ≫ κU.hom
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Koszul normalization of the source symmetry on total-tensor representatives.
-Source: Stacks 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 07A4, 08J9 and 08JB. -/
 def RingedSliceKoszulModel (U : C)
     [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
@@ -398,11 +388,9 @@ def RingedSliceKoszulModel (U : C)
         (d.sigma (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom =
       DerivedCategory.Q.map β.hom ≫ (T.iso J A S Q P hQ hP).hom
 
-set_option maxHeartbeats 600000 in
 -- Elaborate the dependent representative square without changing the file time limit.
 /-- Koszul normalization of the slice symmetry on total-tensor representatives.
-Source: Stacks 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 07A4, 08J9 and 08JB. -/
 def RingedSliceKoszulModelU (U : C)
     [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
@@ -434,8 +422,7 @@ def RingedSliceKoszulModelU (U : C)
       DerivedCategory.Q.map β.hom ≫ (TU.iso (J.over U) (A.over U) SU Q P hQ hP).hom
 
 /-- The simultaneous representative normalization of all four comparisons.
-Source: Stacks 07A4, 08J9, 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose). -/
+Source: Stacks 07A4, 08J9, 08JB. -/
 def RingedSliceEvaluationNormalized (U : C)
     [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

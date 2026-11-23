@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionSheaf
 
 /-! # Extension of a fixed module pair to the action site
 
-Source: the agent-formulated twisted variant of Stacks Tag 00W0, step 4.
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -164,30 +166,7 @@ private theorem generator_induction (S : Site J s R a) :
   exact hall n X Y g
 
 /-- An individual fixed module pair extends to a module sheaf on the action site.
-
-Source: the object and sheaf-condition part of step 4 of the agent-formulated twisted
-variant of Stacks 00W0, `sites.tex`, proposition-sheaves-on-group; Stacks 03CV
-(blueprint: lem-sf-twisted-action-module-object-extension).
-
-Proof: for a fixed pair P, put its section module at X on the copied object X,
-transporting scalars along coefficientRestriction.hom. Define restriction along
-an integer-labelled arrow by the base restriction followed by the corresponding
-iterate of the pair isomorphism, using its inverse for negative powers. Start
-with the minus-one restriction equal to the inverse of P.str. Successive powers
-of s are compared by the specified powerComp maps; arrows_comp and naturality
-of P.str give identity and composition. The coefficient_generator equation gives
-semilinearity for the generator; iteration gives semilinearity for every labelled
-arrow. On degree-zero covering sieves a matching family and its unique gluing
-are exactly those of the original module sheaf P.obj.a. Each other arrow factors
-through an invertible power generator, so no new gluing condition is introduced.
-The sheaf topologies agree on this basis by topology_eq: the sheaf-condition
-Grothendieck topology contains every generating sieve, and these generators
-already require the base sheaf condition. Thus the constructed presheaf is a
-module sheaf N. Its degree-zero restriction is P.obj.a, with the scalar transport
-providing b. On the minus-one generator the defining formula reads exactly as
-the displayed equation. This only constructs objects and their restriction
-isomorphisms; it asserts no extension of morphisms, functor, or equivalence. Zero
-modules, the zero ring, and empty covering families use the same construction. -/
+Source: Stacks 03CV. -/
 theorem moduleObjectExtension [HasPullbacks C] (S : Site J s R a) :
     letI := S.category
     letI := S.inclusion_continuous

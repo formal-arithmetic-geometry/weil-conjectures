@@ -39,7 +39,7 @@ abbrev reduction (_d : SixFunctorOperationDatum D C E n hn) (m : ℕ)
     (X : SixFunctorSpace D) := sixFunctorIntegralReduction D C E m X
 
 /-- Each integral input reduces to a finite-Tor object, by integral residue Tor.
-Source: lem-coef-integral-residue-tor
+Source: lemma-bounds-finite-reductions--2
 (blueprint: def-sf-integral-projection-reduction-coordinates). -/
 theorem reduction_finiteTor (X : SixFunctorSpace D)
     (K : sfIntegralConstructibleCategory C.l E X.obj.left) :

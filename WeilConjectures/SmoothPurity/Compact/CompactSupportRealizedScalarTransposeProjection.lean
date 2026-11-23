@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.FrobeniusExchange.SystemOperationExcha
 
 /-! # Projection-normalized transpose before the final reduction isomorphism
 
-Source: lem-fix-operation-reduction, compact-support and final paragraphs.
+Source: proposition-six-operations-change-coefficients, compact-support and final paragraphs.
 (blueprint: lem-sf-compact-support-realized-scalar-transpose-projection)
 
 This is the transpose equation with the target reduction isomorphism removed from

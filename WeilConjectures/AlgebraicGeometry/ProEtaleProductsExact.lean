@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
 
 Source: Weil conjectures blueprint, snapshot main-20261015,
 sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.md
-(blueprint: det-pe-products-exact).
+(blueprint: proposition-exact-products--1).
 -/
 
 @[expose] public section
@@ -37,16 +37,16 @@ The module universe contains the site and the indexing set.
 
 Source: Weil conjectures blueprint, snapshot main-20261015,
 sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-exact.md
-(blueprint: det-pe-products-exact).
+(blueprint: proposition-exact-products--1).
 
 Proof: Evaluate at an affine weakly contractible object W. Evaluation commutes with
-products by det-pe-sections-limits-colimits, and det-pe-wc-sections-exact makes each
-evaluated sequence short exact. The product of these module sequences is exact:
+products by proposition-exact-products--1, and corollary-evaluation-weakly-contractible-objects--1
+makes each evaluated sequence short exact. The product of these module sequences is exact:
 injectivity and equality of image and kernel are coordinatewise, and choice supplies
 a preimage in every coordinate of any tuple in the target. Therefore the product
-sequence is exact after evaluation at every such W. Apply det-pe-sections-conservative
-to detect exactness at its middle term and, using zero terms, at both endpoints.
-This is exactness of the product functor. -/
+sequence is exact after evaluation at every such W. Apply
+corollary-evaluation-weakly-contractible-objects to detect exactness at its middle term and, using
+zero terms, at both endpoints. This is exactness of the product functor. -/
 theorem products_exact (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u w (t + 1)}) (I : Type w) :
     HasExactLimitsOfShape (Discrete I) (SheafOfModules.{max u w (t + 1)} R) := by

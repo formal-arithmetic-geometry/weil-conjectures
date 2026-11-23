@@ -667,7 +667,6 @@ theorem coefficientSequenceRestrictedEvaluationAb_eq
     ((coefficientSequenceEvaluation l E W n).obj M) U).trans
       (coefficientSequenceEvaluationAb_eq l E W M n U)
 
-set_option maxHeartbeats 500000 in
 -- The concrete quotient tower comparison unfolds several scalar restriction interfaces.
 private theorem coefficientSequenceRingHorizontal {m n : ℕ} (h : n ≤ m) :
     eqToHom (coefficientSequenceEvaluationRing_eq l E W m).symm ≫
@@ -718,7 +717,6 @@ private theorem coefficientSequenceRingHorizontal {m n : ℕ} (h : n ≤ m) :
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 500000 in
 -- Comparing the concrete pushforward and scalar-restriction interfaces is expensive.
 /-- The actual quotient transition, characterized on every section of every system.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).
@@ -799,7 +797,6 @@ private theorem moduleSheaf_hom_eq_of_heq
   ext V x
   exact congrFun (eq_of_heq (h V)) x
 
-set_option maxHeartbeats 500000 in
 -- Comparing composite module pushforwards with restriction uses concrete quotient actions.
 /-- Exact restriction of scalars as an actual strict tower, with unchanged sections.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site).

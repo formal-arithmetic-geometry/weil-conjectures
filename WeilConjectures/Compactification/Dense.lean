@@ -32,11 +32,9 @@ a chosen dense compactification.
 
 - `AlgebraicGeometry.Compactification.isDense_denseRefinement`: the dense refinement of a
   compactification of a quasi-compact morphism is dense;
-- `AlgebraicGeometry.exists_isDense_compactification` (blueprint:
-  `lemma:nagata-two-open-dense-compactifications`): a separated, quasi-compact morphism
+- `AlgebraicGeometry.exists_isDense_compactification`: a separated, quasi-compact morphism
   locally of finite type over a quasi-compact quasi-separated base admits a dense
   compactification.
-
 -/
 
 @[expose] public section
@@ -60,15 +58,13 @@ theorem Compactification.IsDense.isSchemeTheoreticallyDominant {c : Compactifica
   hc
 
 
-/-- The dense refinement of a compactification of a quasi-compact morphism is dense
-(blueprint: `prop:nagata-dense-refinement`). -/
+/-- The dense refinement of a compactification of a quasi-compact morphism is dense. -/
 theorem Compactification.isDense_denseRefinement (c : Compactification f) [QuasiCompact f] :
     c.denseRefinement.IsDense :=
   c.isSchemeTheoreticallyDominant_denseRefinement_i
 
 variable (f) in
-/-- **Existence of dense compactifications** (blueprint:
-`def:nagata-two-open-dense-compactifications`, `lemma:nagata-two-open-dense-compactifications`).
+/-- **Existence of dense compactifications**.
 
 A separated, quasi-compact morphism locally of finite type over a quasi-compact
 quasi-separated base admits a compactification whose open immersion is scheme-theoretically

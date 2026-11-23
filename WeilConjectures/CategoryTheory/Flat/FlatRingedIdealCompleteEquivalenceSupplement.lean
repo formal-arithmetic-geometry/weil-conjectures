@@ -253,8 +253,7 @@ public import WeilConjectures.AlgebraicGeometry.FlatRingedIdealCompleteEquivalen
 /-!
 # Flat ringed-site equivalence on locally derived complete objects
 
-Source: Stacks Project, Algebraization, Tags 099I and 0999
-(blueprint: lem-weil-pbc-flat-ringed-ideal-complete-equivalence).
+Source: Stacks Project, Algebraization, Tags 099I and 0999.
 -/
 
 @[expose] public section
@@ -272,12 +271,7 @@ attribute [local instance 20000] ringedCompletionHasSheafCompose
 attribute [local irreducible] homComplexFunctor ringedHomUnitEvaluationIso
 
 /-- Restriction of scalars preserves small limits, in particular the products in Hom complexes.
-Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime
-(blueprint: lem-weil-pbc-flat-ringed-ideal-complete-equivalence).
-Proof: compose with the faithful forgetful functor to additive presheaves. Both
-forgetful functors preserve small limits, and this composite is the same over B.
-The forgetful composite reflects isomorphisms and therefore reflects limits.
-Reflection then gives preservation of limits by restriction itself. -/
+Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime. -/
 theorem siteRestrictScalars_preservesLimits
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
@@ -309,7 +303,6 @@ private theorem locallyDerivedRingedIdealComplete_of_iso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1200000 in
 -- The localization comparison contains both product variables and resolution functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem ringedDerivedHomUnit_Q_obj
@@ -386,7 +379,6 @@ private theorem ringedDerivedHomUnit_Q_obj
     rfl
   exact (hu (Q.obj M)).trans (hd M)
 
-set_option maxHeartbeats 800000 in
 -- Computing the unit unfolds the product localization and its chosen resolution.
 set_option backward.isDefEq.respectTransparency false in
 private theorem ringedCechCompletionUnit_Q_obj

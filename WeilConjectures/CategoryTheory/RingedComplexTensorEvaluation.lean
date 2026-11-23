@@ -44,7 +44,7 @@ local instance instHasColimitsOfSizeRingedComplexTensorEvaluation :
   hasColimitsOfSizeShrink.{0, 0, u, u} _
 
 /-- The ordinary product Hom, with its specified sign, is right adjoint to total tensor.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
+Source: Stacks 0A8X. -/
 @[irreducible]
 def ringedComplexHomAdjunction (P : ringedSiteComplex O) :
     tensorLeft P ⊣ (homComplexFunctor (R := O)).obj (op P) :=
@@ -52,7 +52,7 @@ def ringedComplexHomAdjunction (P : ringedSiteComplex O) :
     (homComplexFunctorObjIsoInternalHom P).symm
 
 /-- The closed structure using the ordinary product Hom and its signed adjunction.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
+Source: Stacks 0A8X. -/
 @[instance_reducible]
 def ringedComplexClosed : MonoidalClosed (ringedSiteComplex O) where
   closed P :=
@@ -62,7 +62,7 @@ def ringedComplexClosed : MonoidalClosed (ringedSiteComplex O) where
 attribute [local instance] ringedComplexClosed
 
 /-- The transpose has the Koszul sign imposed by the product-Hom convention.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
+Source: Stacks 0A8X. -/
 theorem ringedComplexCurry_component {P K N : ringedSiteComplex O} (g : P ⊗ K ⟶ N)
     (n p q : ℤ) (h : p + n = q) :
     (MonoidalClosed.curry g).f n ≫ homComplexπ P N n p q h =
@@ -159,7 +159,7 @@ private theorem evaluation_unit (N : D) :
 end Generic
 
 /-- Canonical evaluation, with coefficients on the left and the strict Hom dual on the right.
-Source: Stacks 08JJ (auxiliary; not a blueprint node). -/
+Source: Stacks 08JJ. -/
 def ringedComplexTensorEvaluation (P N : ringedSiteComplex O) :
     ((ringedKoszulTensor O).obj N).obj
         (homComplex (R := O) P (ringedSiteRingComplex O)) ⟶ homComplex (R := O) P N :=
@@ -167,7 +167,7 @@ def ringedComplexTensorEvaluation (P N : ringedSiteComplex O) :
     MonoidalClosed.ihomUnitTensorToIhom P N
 
 /-- Evaluation is natural in the coefficient complex.
-Source: Stacks 08JJ (auxiliary; not a blueprint node). -/
+Source: Stacks 08JJ. -/
 theorem ringedComplexTensorEvaluation_naturality (P : ringedSiteComplex O)
     {N M : ringedSiteComplex O} (f : N ⟶ M) :
     ((ringedKoszulTensor O).map f).app _ ≫ ringedComplexTensorEvaluation O P M =
@@ -176,7 +176,7 @@ theorem ringedComplexTensorEvaluation_naturality (P : ringedSiteComplex O)
   exact evaluation_naturality P f
 
 /-- Evaluation against a dualizable complex is invertible.
-Source: Stacks 08JJ (auxiliary; not a blueprint node). -/
+Source: Stacks 08JJ. -/
 theorem ringedComplexTensorEvaluation_isIso (P N : ringedSiteComplex O)
     (hP : IsDualizable P) : IsIso (ringedComplexTensorEvaluation O P N) := by
   let _ := hP.some
@@ -185,7 +185,7 @@ theorem ringedComplexTensorEvaluation_isIso (P N : ringedSiteComplex O)
   exact IsIso.comp_isIso
 
 /-- Evaluation commutes with precomposition by any chain map.
-Source: Stacks 08JJ (auxiliary; not a blueprint node). -/
+Source: Stacks 08JJ. -/
 theorem ringedComplexTensorEvaluation_source {P P' : ringedSiteComplex O}
     (f : P' ⟶ P) (N : ringedSiteComplex O) :
     ((ringedKoszulTensor O).obj N).map
@@ -198,21 +198,21 @@ theorem ringedComplexTensorEvaluation_source {P P' : ringedSiteComplex O}
   exact h
 
 /-- The transpose of the ordinary tensor left unitor.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
+Source: Stacks 0A8X. -/
 @[irreducible]
 def ringedComplexHomUnit (N : ringedSiteComplex O) :
     N ⟶ homComplex (R := O) (ringedSiteRingComplex O) N :=
   MonoidalClosed.unitNatIso.hom.app N
 
 /-- The Hom unit is the transpose of the tensor left unitor.
-Source: Stacks 0A8X (auxiliary; not a blueprint node). -/
+Source: Stacks 0A8X. -/
 theorem ringedComplexHomUnit_eq_curry (N : ringedSiteComplex O) :
     ringedComplexHomUnit O N = MonoidalClosed.curry (λ_ N).hom := by
   unfold ringedComplexHomUnit
   exact MonoidalClosed.unitNatIso_hom_app N
 
 /-- The tensor-Hom comparison respects the unit of the closed adjunction.
-Source: Stacks 08JJ (auxiliary; not a blueprint node). -/
+Source: Stacks 08JJ. -/
 theorem ringedComplexTensorEvaluation_unit (N : ringedSiteComplex O) :
     (ringedKoszulRightUnitIso O N).inv ≫
         ((ringedKoszulTensor O).obj N).map

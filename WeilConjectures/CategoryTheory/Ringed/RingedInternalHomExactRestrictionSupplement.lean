@@ -126,8 +126,7 @@ public import WeilConjectures.Algebra.Homology.RingedInternalHomExactRestriction
 /-!
 # Internal derived Hom calculus on small ringed sites
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JB and 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JB and 08JC.
 
 The tensor functor is specified by its natural total-tensor comparison on K-flat
 representatives. Restriction uses Mathlib's slice functors and their induced functors
@@ -183,7 +182,6 @@ private theorem ringedSite_pushforward_colimits
     { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
-set_option maxHeartbeats 400000 in
 -- Descending the trifunctor comparison requires several large tensor instances.
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] derivedInternalHom homComplexFunctor

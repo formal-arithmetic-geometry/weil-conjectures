@@ -798,7 +798,7 @@ theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.
   rw [hφ]
   constructor <;> infer_instance
 
-/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
+/-- Blueprint `theorem-proper-base-change-classical-pro`: Higher direct images for quasi-compact
 quasi-separated morphisms, for complexes.
 
 Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `K ∈ D⁺(Y_ét, Λ)`. Then the `q`-th
@@ -836,7 +836,7 @@ theorem Etale.isIso_higherDirectImagePresheafToSheaf {X Y : Scheme.{u}}
     exact Presheaf.isLocallySurjective_of_isLocallySurjective X.smallEtaleTopology
       (toSheafify _ _) ψ.hom
 
-/-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
+/-- Blueprint `theorem-proper-base-change-classical-pro`: Higher direct images for quasi-compact
 quasi-separated morphisms.
 
 Let `h : Y ⟶ X` be quasi-compact and quasi-separated and `F` an étale sheaf of `Λ`-modules on
@@ -968,8 +968,8 @@ lemma Etale.higherDirectImagePresheafFunctor_map {X Y : Scheme.{u}} (h : Y ⟶ X
 
 end FilteredColimits
 
-/-- Blueprint `sbc-lem-higher-direct-image-presheaf`, in the vanishing form used for constant
-coefficients: Higher direct image as a sheafified cohomology presheaf.
+/-- Blueprint `proposition-base-change-larger-algebraically-closed`, in the vanishing form used for
+constant coefficients: Higher direct image as a sheafified cohomology presheaf.
 
 Let `h : Y ⟶ X` be quasi-compact and quasi-separated, let `d : ℕ` and `q : ℕ`. Suppose that for
 every `e ∣ d`, every affine scheme `U` étale over `X` and every class

@@ -22,7 +22,7 @@ v             v              v
 X  --c.i-->  c.Z  --c.g-->  Y
 ```
 commutes, the left square being cartesian. The *compact-support exchange map*
-(blueprint `def-exchange-projection`, `def-cbc-exchange-map`)
+(blueprint `def-exchange-projection`, `prose-05-31`)
 
 `Ex_! : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*`
 
@@ -32,8 +32,9 @@ on the unbounded derived categories of pro-étale sheaves is the derived base ch
 inverse of the base change isomorphism `(c'.i)_! g'^* ≅ gZ^* (c.i)_!` of the extension by zero
 along the cartesian left square
 (`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`, blueprint
-`lem-cbc-proetale-extension-zero-base-change`). For `c' = c ×_Y Y'` and a cartesian outer square
-it is the map `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap`.
+`proposition-extension-zero-restriction-closed-subscheme--11`). For `c' = c ×_Y Y'` and a cartesian
+outer square it is the map
+`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap`.
 
 ## Main definitions
 
@@ -86,7 +87,7 @@ section Compactification
 variable {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} (c : Compactification f)
   (c' : Compactification f') {g : Y' ⟶ Y} {g' : X' ⟶ X} {gZ : c'.Z ⟶ c.Z}
 
-/-- Blueprint `def-exchange-projection`, `def-cbc-exchange-map`: compact-support exchange map
+/-- Blueprint `def-exchange-projection`, `prose-05-31`: compact-support exchange map
 along compactifications compatible with `g`.
 
 **The pro-étale compact-support exchange map along compatible compactifications**: for

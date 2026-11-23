@@ -10,9 +10,9 @@ import WeilConjectures.CategoryTheory.SignedKoszulSummandTermTransport
 /-!
 # The differential on a negative Koszul pure tensor
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public section
@@ -331,18 +331,7 @@ end Basis
 /-- The ordered negative Koszul basis differential, before tensoring with coefficients.
 The erased-index coefficient includes the preceding-index sign and the scalar power m+1.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul; the finite ordered-tensor calculation.
-(auxiliary; not a blueprint node).
-
-Proof in words: induct on the number of factors.  The empty tensor has zero
-differential.  In the successor step use the differential of the two-term head
-factor and the induction hypothesis for the tail.  A head in degree zero has no
-outgoing differential; a head in degree -1 contributes its scalar power.  The
-tensor differential contributes one minus sign for every selected preceding
-factor.  Reindexing the tail subsets by `Fin.succ` gives the displayed erased-
-index sum and its degree transports.
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulBasis_d_succ
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]
@@ -392,34 +381,7 @@ theorem ringedNegativeKoszulBasis_d_succ
 The ordered tensor has positive length. This contains neither the coefficient-complex
 differential nor a coordinate isomorphism.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul; the second step of
-lem-cbc-signed-koszul-tensor-coordinates.
-(auxiliary; not a blueprint node).
-
-Proof in words: use HomologicalComplex.mapBifunctor.ι_D₂ to evaluate the
-second total differential on the inclusion in ringedNegativeKoszulSummand.
-Induct on the number of ordered Koszul factors. The empty tensor is O[0],
-whose differential is zero, giving the induction base. In the successor step
-apply the two total-differential formulas to the recursive basis map. The head
-factor contributes only when zero belongs to I. Its preceding-index count is
-zero. For each successor index the tail induction gives its coefficient;
-the additional head sign is minus one exactly when zero belongs to I.
-Thus the earlier-index count is the tail count plus that indicator.
-This expands the differential of the ordered Koszul basis vector.
-A factor in degree zero contributes zero. A factor i in degree
--1 contributes multiplication by a_i^(m+1) and changes its degree to zero,
-leaving the basis vector for I.erase i. The total-tensor sign is minus one for
-each earlier factor in degree -1, hence (-1) to the cardinality of the filter
-of elements of I smaller than i. Tensoring with K adds the sign (-1)^(q+|I|),
-written by parity in A. Multiplication on the rank-one factor acts on a tensor
-through the same global-section scalar action ringedKoszulCoefficientSMul.
-For i in I, card (I.erase i)=card I-1, so the displayed equality of coefficient
-degrees holds. Insert its equality transport to give exactly the corresponding
-summand below. Additivity of tensor and composition gives the finite sum.
-For the empty subset the sum is empty. For r=1 its only erased coefficient is
-(-1)^(q+1) a_0^(m+1). The proof involves neither scalar inversion nor boundedness
-of K and is valid for zero rings, zero sections, and the empty site. -/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulSummand_D₂_succ
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]

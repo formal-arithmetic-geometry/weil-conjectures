@@ -25,8 +25,8 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseTensorScalarExtension
 /-!
 # Data of the Galois correspondence for lisse sheaves
 
-Source: Stacks Project, Tag 0DV5; the blueprint, `sec-poincare-duality`,
-`sk-lem-finite` (blueprint: def-pod-galois-correspondence-data-e4);
+Source: Stacks Project, Tag 0DV5; the blueprint, `chap-Verdier-and-Poincare-duality`,
+`lemma-perfect-complexes-geometric-point` (blueprint: def-pod-galois-correspondence-data-e4);
 Deligne, Weil II (1.1.1), (1.1.6).
 -/
 

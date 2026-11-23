@@ -19,7 +19,7 @@ namespace AlgebraicGeometry
 /-- An open containing the closed fiber of a scheme proper over an adically complete
 base is the whole scheme.
 Source: Stacks Project, Tag 0GS2, complete Noetherian essential-surjectivity paragraph.
-(blueprint: lem-weil-pbc-etale-infinitesimal-restrictions-proper-open)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof: Put h = g ≫ f and let C be the closed complement of W. Properness makes
 h(C) closed; write it as V(K). If x belongs to C, K is contained in the prime h(x),

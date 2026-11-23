@@ -131,8 +131,6 @@ section KernelFactor
 attribute [local irreducible] tensorGradedAlgebraMap tensorGradedUnit
   commAlgebraSheafModule tensorPullback
 
-set_option maxHeartbeats 900000 in
--- Comparing the two adjunction units and ideal multiplication maps needs extra elaboration.
 private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (A : TensorGradedAlgebraData j L) :
     let M : X.Modules := commAlgebraSheafModule X.sheaf A.B
@@ -146,7 +144,8 @@ private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
     j.ker.toModulesι ▷ F ≫ (λ_ F).hom
   let adj := Classical.choice (nonempty_tensorPullbackAdjunction j)
   let adj' := Classical.choose (exists_tensorPullbackAdjunction j)
-  obtain ⟨D⟩ := tensorGradedDegreeData_exists j L A
+  -- Direct choice avoids dependent elimination through the surrounding local definitions.
+  let D := Classical.choice (tensorGradedDegreeData_exists j L A)
   have factors (d : ℕ) : ∃ f : kernel (tensorGradedUnit j (L.tensorPow d)) ⟶
       image (μ M), f ≫ image.ι (μ M) =
         kernel.ι (tensorGradedUnit j (L.tensorPow d)) ≫ A.b d := by
@@ -189,8 +188,9 @@ private theorem gradedKernelFactor {X Z : Scheme.{u}} (j : Z ⟶ X)
   change D.k d.as ≫ (_ ≫ image.ι (μ M)) = D.k d.as ≫ _
   have hd : D.k d.as ≫ D.k_colimit.desc (Cofan.mk (image (μ M)) f) = f d.as :=
     D.k_colimit.fac _ d
-  rw [← Category.assoc, hd, hf]
-  exact (D.k_inclusion d.as).symm
+  exact (Category.assoc _ _ _).symm.trans
+    ((congrArg (fun g ↦ g ≫ image.ι (μ M)) hd).trans
+      ((hf d.as).trans (D.k_inclusion d.as).symm))
 
 end KernelFactor
 
