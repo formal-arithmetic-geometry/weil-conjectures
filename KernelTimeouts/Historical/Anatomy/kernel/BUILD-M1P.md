@@ -71,3 +71,7 @@ printing and no change to conversion semantics.
 Root wall measurements are reported with the validation reports. They are
 paired measurements, not normalized overhead claims, because the historical
 Cone rebuild and timeout boundary differ from the READY3.2 control runs.
+For the current Native probe, a separate no-instrumentation 4.35 binary
+completed in 262.87 s process wall but emitted no root counter; that result is
+therefore retained as an explicit baseline observation rather than used for a
+misleading root-span ratio.
