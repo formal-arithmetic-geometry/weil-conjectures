@@ -231,9 +231,9 @@ abbrev StrictEtaleCoefficientTransport.derivedEvaluation
 end
 
 attribute [instance] StrictEtaleCoefficientTransport.additive
-/-- The canonical interchange of scalar extension and quotient tensor. The ordinary
-square is fixed by tensor units; the derived square is fixed by the universal counits.
-No flatness of a quotient map is imposed. -/
+/-- The coherence predicate for `StrictEtaleTransportQuotient`: the ordinary interchange
+isomorphism is compatible with the tensor units, and the derived one with the counits on
+complexes. -/
 def StrictEtaleTransportQuotientCoherence
     {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     {phi : O →+* O'} {index : ℕ →o ℕ}
@@ -270,8 +270,9 @@ def StrictEtaleTransportQuotientCoherence
             (index.monotone h)).mapHomologicalComplex (.up ℤ) |>.obj K) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (ordinary h) (.up ℤ)).hom.app K))
 
-/-- The coherence predicate for `StrictEtaleTransportQuotient`: exactly the displayed
-canonical diagram equations. -/
+/-- The interchange of scalar extension and quotient tensor: ordinary and derived
+interchange isomorphisms satisfying `StrictEtaleTransportQuotientCoherence`. No flatness of
+a quotient map is imposed. -/
 def StrictEtaleTransportQuotient
     {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     {phi : O →+* O'} {index : ℕ →o ℕ}
@@ -325,9 +326,9 @@ def strictEtaleInverseUnderlying {O : Type (u + 1)} [CommRing O] {ell : O}
           Scheme.etaleSetPullback g) :=
   isoWhiskerRight (A.inverseEvaluation n) _ ≪≫ Functor.associator _ _ _ ≪≫
     isoWhiskerLeft _ (A.lift n).moduleUnderlying
-/-- Inverse-image transport, fixed by tensor units on the underlying set sheaves.
-Its derived comparison is fixed on strict complexes. These equations determine
-canonical geometric comparisons and exclude arbitrary natural automorphisms. -/
+/-- The coherence predicate for `StrictEtaleInverseTransport`: the ordinary comparison is
+compatible with the tensor units on the underlying set sheaves, and the derived one is
+determined on strict complexes. -/
 def StrictEtaleInverseTransportCoherence
     {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     {phi : O →+* O'} {index : ℕ →o ℕ}
@@ -362,8 +363,8 @@ def StrictEtaleInverseTransportCoherence
         DB.inverseFactors.hom.app ((US.ordinary.mapHomologicalComplex (.up ℤ)).obj K) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ordinary (.up ℤ)).hom.app K))
 
-/-- The coherence predicate for `StrictEtaleInverseTransport`: exactly the displayed
-canonical diagram equations. -/
+/-- Compatibility of coefficient transport with inverse image along `g`: ordinary and
+derived comparison isomorphisms satisfying `StrictEtaleInverseTransportCoherence`. -/
 def StrictEtaleInverseTransport
     {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     {phi : O →+* O'} {index : ℕ →o ℕ}
@@ -479,8 +480,8 @@ def StrictEtaleCoefficientChange.comp
   ring n := (b.ring n).comp (a.ring (r₂₃ n))
   generators := fun n x ↦
     (congrArg (b.ring n) (a.generators (r₂₃ n) x)).trans (b.generators n (phi₁₂ x))
-/-- The canonical tensor associator on strict systems, characterized on tensor units,
-and its exact descent to complexes. This includes the identity coefficient-index cases. -/
+/-- The coherence predicate for `StrictEtaleTransportComposition`: the ordinary associator
+is compatible with the tensor units, and the derived one is its descent to complexes. -/
 def StrictEtaleTransportCompositionCoherence
     {O₁ O₂ O₃ : Type (u + 1)} [CommRing O₁] [CommRing O₂] [CommRing O₃]
     {ell₁ : O₁} {ell₂ : O₂} {ell₃ : O₃} {phi₁₂ : O₁ →+* O₂} {phi₂₃ : O₂ →+* O₃}
@@ -508,8 +509,8 @@ def StrictEtaleTransportCompositionCoherence
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ordinary (.up ℤ)).hom.app K) =
       derived.hom.app (DerivedCategory.Q.obj K) ≫ U₁₃.factors.hom.app K)
 
-/-- The coherence predicate for `StrictEtaleTransportComposition`: exactly the displayed
-canonical diagram equations. -/
+/-- The tensor associator for composite coefficient transport: ordinary and derived
+isomorphisms with `U₁₃` satisfying `StrictEtaleTransportCompositionCoherence`. -/
 def StrictEtaleTransportComposition
     {O₁ O₂ O₃ : Type (u + 1)} [CommRing O₁] [CommRing O₂] [CommRing O₃]
     {ell₁ : O₁} {ell₂ : O₂} {ell₃ : O₃} {phi₁₂ : O₁ →+* O₂} {phi₂₃ : O₂ →+* O₃}
@@ -548,7 +549,8 @@ abbrev StrictEtaleTransportComposition.derived
 
 end
 
-/-- The canonical tensor unit on strict systems and its exact descent. -/
+/-- The coherence predicate for `StrictEtaleTransportIdentity`: the ordinary isomorphism is
+compatible with the tensor units, and the derived one is its descent to complexes. -/
 def StrictEtaleTransportIdentityCoherence
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {a : StrictEtaleCoefficientChange O O ell ell (RingHom.id O) (OrderHom.id : ℕ →o ℕ)}
@@ -567,8 +569,8 @@ def StrictEtaleTransportIdentityCoherence
       U.factors.hom.app K ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex ordinary (.up ℤ)).hom.app K))
 
-/-- The coherence predicate for `StrictEtaleTransportIdentity`: exactly the displayed
-canonical diagram equations. -/
+/-- The tensor unit for identity coefficient transport: ordinary and derived isomorphisms
+with the identity functor satisfying `StrictEtaleTransportIdentityCoherence`. -/
 def StrictEtaleTransportIdentity
     {O : Type (u + 1)} [CommRing O] {ell : O}
     {a : StrictEtaleCoefficientChange O O ell ell (RingHom.id O) (OrderHom.id : ℕ →o ℕ)}

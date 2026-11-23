@@ -152,9 +152,7 @@ lemma chartToLaurent_mem (z) : chartToLaurent I z ∈ I.extendedReesAlgebra :=
   awayXEquivLaurent_mem_extendedReesAlgebra (homogeneousAwayToChart _ _ z).2
 
 /-- **The blow-up chart at `t·X` is the extended Rees algebra**: for `J = I R[t] + (t)`,
-`Away (reesGrading J) (t·X) ≃+* R[t, I t⁻¹]`, `x·Xⁿ / (t·X)ⁿ ↦ x t⁻ⁿ`.
-(comparison of the Rees model with
-the blow-up model.) -/
+`Away (reesGrading J) (t·X) ≃+* R[t, I t⁻¹]`, `x·Xⁿ / (t·X)ⁿ ↦ x t⁻ⁿ`. -/
 noncomputable def chartEquivExtendedReesAlgebra :
     HomogeneousLocalization.Away (reesGrading (deformationCenter I))
       (reesX _ X X_mem_deformationCenter) ≃+* I.extendedReesAlgebra :=

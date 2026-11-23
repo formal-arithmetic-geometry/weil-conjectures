@@ -155,7 +155,9 @@ attribute [local instance] ProFiniteModels.asSmallDownEquivalence
   ProFiniteModels.asSmallUpEquivalence ProFiniteModels.asSmallDense
   ProFiniteModels.asSmallUpDense
 
-/-- Apply the coefficient-sized chart theorem, then undo the site equivalences. -/
+/-- A pro-étale sheaf of `B`-modules on `X` that is pro-étale locally constant on finitely
+generated modules is étale-locally so: there is an étale cover `U` of `X` on which its
+pullback is the constant sheaf on a finitely generated `B`-module. -/
 private theorem fixed_etale_charts (X : Scheme.{t}) (B : Type (t + 1))
     [CommRing B] [IsNoetherianRing B]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{t + 1} B))

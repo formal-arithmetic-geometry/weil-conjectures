@@ -144,7 +144,9 @@ private theorem transport_apply {A B A' B' : AddCommGrpCat.{u + 1}}
   change HEq (f.hom x) (g.hom y)
   rw [hf', hx']
 
-/-- Scalar extension of the root module over the base p-adic coefficient field. -/
+/-- The finite Tate-line identification: the restriction of the line module (the scalar
+extension of the root module to the `p`-adic coefficient field) has underlying tower
+isomorphic to the roots of unity `roots l T`. -/
 @[no_expose] def diagonalTraceLineIdentification (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (c : Chern l (ULift.{u} (Padic l)) T)
     (r : Restriction l (ULift.{u} (Padic l)) T) :

@@ -37,7 +37,8 @@ def ScalarPullbackTensorLaw
     L'.map (dQ.hom.app (P, R)) ≫ (dL' (Q.obj P) (Q.obj R)).hom ≫
       (a.hom.app P ⊗ₘ a.hom.app R)
 
-/-- The normalized scalar/pullback isomorphism respects the binary tensor comparison. -/
+/-- A transformation `F (T X Y) ⟶ S (F X) (F Y)` of curried bifunctors, viewed as a
+transformation of the uncurried functors on `C × C`. -/
 private def uncurryTensorComparison
     {C D : Type*} [Category C] [Category D]
     (F : C ⥤ D) (T : C ⥤ C ⥤ C) (S : D ⥤ D ⥤ D)

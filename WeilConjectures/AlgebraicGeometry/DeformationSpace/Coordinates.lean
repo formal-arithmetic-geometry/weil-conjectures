@@ -289,7 +289,7 @@ lemma exists_etale_coordinates_deformationSpace_of_mem (d : ℕ) (g : V ⟶ B)
         AffineSpace.zeroSection_appTop_coord]
       exact (congrArg _ hΓ).trans (map_zero _)
 
-/-- **Étale coordinates on the deformation space** ((4), (5)).
+/-- **Étale coordinates on the deformation space**.
 There are a separated surjective étale `v : B' ⟶ B` and a quasi-compact open `j : W ⟶ 𝒟'` of the
 base change `𝒟' = D_s V ×_{𝔸¹_B} 𝔸¹_{B'}` containing the base-changed section `σ`, with a
 quasi-compact compactifiable étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` to the

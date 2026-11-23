@@ -18,7 +18,9 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
-/-- Cancel the exact coefficient-realization equivalence from unbounded comparison.
+/-- For a finite `ℓ`-power-torsion coefficient ring `A` and `X` of finite type over a finite
+or algebraically closed field, the derived pullback from étale to pro-étale `A`-module
+sheaves on `X` is fully faithful.
 -/
 theorem finiteComparisonOrdinary_fullyFaithful
     (A : Type (u + 1)) [CommRing A] [TopologicalSpace A]

@@ -24,10 +24,9 @@ namespace RealSheaves.Condensed
 
 universe u v w z
 
-/-- Choose a composition series in every common graded piece. Refinement matches both sets of
-composition factors with the same disjoint union; compose the two bijections and their factor
-isomorphisms. Every irreducible subquotient occurs in a composition series, so these same
-bijections also give both constituent inclusions.
+/-- Two finite-dimensional representations `ρ` and `σ` with the same graded pieces `τ i`
+have the same constituents, and any composition series of `ρ` and of `σ` have the same
+factors up to a bijection and isomorphism.
 -/
 theorem commonGradedRepresentationFactors
     {k : Type u} [Field k] {W : Type w} [Group W]

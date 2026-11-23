@@ -21,10 +21,9 @@ namespace RealSheaves.Condensed
 
 universe u v w z
 
-/-- Refine each graded piece by a composition series, then compare the resulting composition
-series with the prescribed series by Jordan–Hölder. The refinement indices are pairs consisting
-of a graded-piece index and a factor index, so multiplicities are retained, including empty
-series for zero pieces.
+/-- If `ρ` has graded pieces `τ i` with composition series `t i`, then the factors of any
+composition series `c` of `ρ` are, up to isomorphism, in bijection with the pairs `⟨i, j⟩`
+of a graded-piece index and a factor index of `t i`. Multiplicities are retained.
 -/
 theorem filteredRepresentationFactors
     {k : Type u} [Field k] {W : Type w} [Group W]

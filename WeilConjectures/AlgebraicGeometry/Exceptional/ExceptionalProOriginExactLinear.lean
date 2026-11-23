@@ -40,8 +40,8 @@ variable {O : Type (u + 1)} [CommRing O] {ell : O}
 variable (P : ExceptionalProCompactSupport O ell c
     CX.proEvaluation CY.proEvaluation CZ.proEvaluation)
 
-/-- The actual pro-etale compact support and site-transported right functor carry
-triangulated and coefficient-linear structures. -/
+/-- A functor `FD` on derived categories that factors through the localization like an exact
+additive functor `F` is isomorphic to `F.mapDerivedCategory`. -/
 private def derivedExactIso {A B : Type*} [Category A] [Category B]
     [Abelian A] [Abelian B] [HasDerivedCategory A] [HasDerivedCategory B]
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]

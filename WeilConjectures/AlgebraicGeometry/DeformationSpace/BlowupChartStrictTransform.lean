@@ -325,7 +325,7 @@ end AwayChart
 
 /-- **The Rees chart is the complement of the strict transform of the zero fibre**: in the
 blow-up of `Spec R[t]` along `J = I R[t] + (t)`, the complement of the closure of the locus over
-`V(t) ∖ V(J)` is the image of `Spec R[t, I t⁻¹]` (form). -/
+`V(t) ∖ V(J)` is the image of `Spec R[t, I t⁻¹]`. -/
 theorem compl_closure_zeroFibreOffCenter :
     (closure (zeroFibreOffCenter I))ᶜ =
       ((deformationChart I).opensRange : Set (AffineBlowup (deformationCenter I))) := by
