@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # A normalized split injection from the retained column cone
 
-Source: Stacks Project, Homology, Tags 012X and 0133; retained-column construction
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection).
+Source: Stacks Project, Homology, Tags 012X and 0133.
 -/
 
 @[expose] public section
@@ -24,20 +23,7 @@ namespace CategoryTheory.Functor
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The retained column cone lifts to the filtration step, with ambient normalization.
-Source: Stacks Project, Tags 012X and 0133, retained-column filtration calculation.
-
-Proof: each retained resolution term maps into the image supremum defining step p:
-when p >= b and r+p=m it is the s=p term of the finite interval; when p<b it
-is zero by the assumed vanishing of I.X p. Factor its inclusion through the
-step's degreewise monomorphism using the image-subobject universal property.
-In degree m=p-1 the extended resolution term is zero. The extended single
-term is zero unless m+1=p; in that case the K inclusion belongs to the first
-summand of the supremum, and factors through the step. Transport these
-factorizations by extendXIso, and use the mapping-cone degreewise biproduct
-to combine them into w. Cancellation of the step monomorphism identifies
-all the transported lifts with w on their respective cone coprojections.
-This asserts no retraction and involves no quotient.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection). -/
+Source: Stacks Project, Tags 012X and 0133, retained-column filtration calculation. -/
 private theorem cartanEilenberg_cone_retained_lift
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)
@@ -175,23 +161,7 @@ private theorem cartanEilenberg_cone_retained_lift
     simp [jL, hmp]
 
 /-- An ambient projection selects the retained column and kills the next filtration step.
-Source: Stacks Project, Tags 012X and 0133, retained-column filtration calculation.
-
-Proof: on the total-complex coproduct select the complex-index-p component,
-using zero on every other component, and undo the identity-functor extension
-identification. Compose with the target-side inclusion into the column cone.
-On the source cone summand use zero unless m+1=p; in that case identify K
-indices, extend the degree-zero single term, and include it into the column
-cone. Combine these maps by the ambient cone biproduct. Its composites with
-the retained inclusions are the displayed canonical column-cone inclusions.
-Every term of the finite supremum defining step p+1 has column index at
-least p+1 and is killed by the selected projection. The source summand of
-that step occurs only when p+1 <= m+1, so m+1 differs from p and is killed
-too. Hence the map annihilates the degreewise step inclusion, by the
-universal property of the supremum of image subobjects. Empty intervals
-and p<b need no exceptional choices. No lift, quotient or splitting is
-asserted here.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection). -/
+Source: Stacks Project, Tags 012X and 0133, retained-column filtration calculation. -/
 private theorem cartanEilenberg_cone_retained_projection
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)
@@ -316,27 +286,7 @@ private theorem cartanEilenberg_cone_retained_projection
     simp [c]
 
 /-- The retained cone summands give a normalized map into the quotient with a left inverse.
-Source: Stacks Project, Tags 012X and 0133; retained-column quotient construction.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection).
-
-Proof: in degree m, project the ambient cone onto the complex-index-p summands.
-The cone K summand is retained only when m+1=p; otherwise the corresponding
-extended-single source in the column cone is zero. On the total summand use
-its coproduct universal property to project onto index p, and identify this
-summand with the extended resolution term. The projection kills every
-column of index greater than p and the K summand present in step p+1.
-It therefore descends from step p through the evaluated cokernel to a map u.
-For each retained term, its ambient inclusion factors through step p since
-its image is one of the summands in the stipulated supremum. Below b that
-term is zero, so use its unique zero map. The two resulting lifts, with
-extension identifications, define v by the degreewise cone biproduct.
-Their quotient composites are the displayed normalization equations.
-The ambient projection after each inclusion is identity. Thus v followed
-by u is identity, checked on the two cone coprojections. When m=p-1 the
-resolution term is zero; when m>=p the extended-single term is zero. These
-cases also cover p<b, when both retained terms vanish. No identity for u
-followed by v is asserted here: surjectivity is a separate generating-family
-argument. -/
+Source: Stacks Project, Tags 012X and 0133. -/
 theorem cartanEilenberg_cone_graded_split_injection
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

@@ -9,9 +9,6 @@ module
 public import Mathlib.Algebra.Homology.Homotopy
 
 /-! # Null homotopies in a split abelian category
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4, vector-space
-splitting argument. (blueprint: lem-pc-split-category-null-homotopy).
 -/
 
 @[expose] public section
@@ -21,28 +18,7 @@ open CategoryTheory Limits
 
 namespace CochainComplex
 
-/-- A map inducing zero on homology in a split abelian category is null homotopic.
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, step 4, the boundary/complement
-contraction in new-field-complex-single-cohomology, steps 1 and 2.
-(blueprint: lem-pc-split-category-null-homotopy).
-
-Proof: Choose a retraction r_i of the cycles inclusion Z_K^i → K^i,
-using injectivity of Z_K^i. Since f induces zero on homology, its map
-Z_K^i → Z_L^i is killed by Z_L^i → H_L^i. Exactness of
-L^(i-1) → Z_L^i → H_L^i and projectivity of Z_K^i give a lift t_i
-with t_i d_L = inclusion_K f_i. Put A_i = r_i t_i and
-T = d_K A + A d_L. The chain map T is null homotopic, and its restriction
-to cycles equals that of f. Therefore g = f - T kills cycles. It also has
-image in cycles, because g_i d_L = d_K g_(i+1) = 0: the image of d_K
-lies in cycles, where g_(i+1) vanishes. The cycles retraction gives
-inclusion_K (id - r_i inclusion_K) = 0. Exactness of
-Z_K^i → K^i → K^(i+1) and injectivity of K^i give u_i with
-d_K u_i = id - r_i inclusion_K. Put B_i = u_(i-1) g_(i-1).
-Then d_K B equals g, since g kills cycles, and B d_L is zero, since g
-has image in cycles. Thus g is null homotopic. Adding the homotopies
-for T and g proves f is null homotopic. Only adjacent degrees occur,
-so the construction also covers unbounded and acyclic complexes. -/
+/-- A map inducing zero on homology in a split abelian category is null homotopic. -/
 theorem nonempty_nullHomotopy_of_homologyMap_zero
     {C : Type*} [Category* C] [Abelian C]
     [∀ X : C, Projective X] [∀ X : C, Injective X]

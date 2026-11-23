@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 # Boundaries lie in filtered-complex cycles
 
 Source: Stacks Project, Homology, Tag 012K, the displayed inclusions between B and Z.
-(blueprint: lem-sp-filtered-complex-boundaries-le-cycles).
 -/
 
 @[expose] public section
@@ -38,13 +37,7 @@ private theorem image_le_pullback {A B D : C} (f : A ⟶ B) (g : B ⟶ D)
     (Subobject.factors_zero : T.Factors (0 : (S : C) ⟶ D))
 
 /-- Boundaries lie in cycles, even before requiring a positive page.
-Source: Stacks Project, Tag 012K, the displayed inclusions between B and Z.
-(blueprint: lem-sp-filtered-complex-boundaries-le-cycles).
-
-Proof. The image of the incoming differential is contained in the inverse image
-of every filtration step under the outgoing differential, since d squared is zero.
-Intersect with F^p, add F^(p+1), pull back to F^p, and take the graded image.
-All these operations preserve the containment. -/
+Source: Stacks Project, Tag 012K, the displayed inclusions between B and Z. -/
 theorem filteredComplex_boundaries_le_cycles (K : CochainComplex C ℤ)
     (F : DecreasingFiltration K) (p n r : ℤ) :
     F.complexBoundaries p n r ≤ F.complexCycles p n r := by

@@ -23,9 +23,8 @@ public import WeilConjectures.CategoryTheory.RingedDerivedRestrictionGeneral
 /-!
 # Derived slice restriction with independent universes
 
-Source: Stacks Project, Modules on Sites, Section 03DH (including Tag 03DJ);
-Cohomology on Sites, Tag 08JB
-(blueprint: def-weil-pbc-ringed-derived-restriction).
+Source: Stacks Project, Modules on Sites, Section 03DH (including Tag 03DJ); Cohomology on Sites,
+Tag 08JB.
 -/
 
 @[expose] public noncomputable section

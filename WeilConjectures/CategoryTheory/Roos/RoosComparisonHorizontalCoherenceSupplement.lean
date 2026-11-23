@@ -19,13 +19,13 @@ public import WeilConjectures.CategoryTheory.RoosComparisonHorizontalCoherence
 
 /-! # Horizontal coherence of the canonical additive Roos comparison
 
-Source: Stacks Tag 0941, lemma-derived-limit-is-ok, product-cone context, and the
-agent-written coordinate calculation in the DAG proof
-(blueprint: lem-pur-roos-comparison-horizontal-coherence).
-
 The comparison is constructed directly by Mathlib's `mappingCocone.lift` on the fixed
 `roosF` model, using the two mapped projections and the canonical product comparison.
 No exactness or preservation of products is assumed for its definition.
+
+## References
+
+* Stacks Project, Tag 0941 (product-cone context).
 -/
 
 @[expose] public noncomputable section
@@ -157,10 +157,7 @@ private lemma roos_map_snd {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
     simp
 
 /-- Naturality is equality of strict cochain maps.
-Source: Stacks Tag 0941 (blueprint: lem-pur-roos-comparison-horizontal-coherence).
-Proof: DAG step 4. Postcompose with each product projection of each biproduct
-coordinate. Both sides are the functor image of the same coordinate of the tower
-map, by functoriality. Product and biproduct extensionality give equality. -/
+Source: Stacks Tag 0941. -/
 theorem roosAdditiveComparison_natural (F : A ⥤ B) [F.Additive]
     {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (h : X ⟶ Y) :
     (F.mapHomologicalComplex (ComplexShape.up ℤ)).map (roosF.map h) ≫
@@ -233,12 +230,7 @@ private lemma productComparison_horizontal
     exact α.naturality ((Pi.π (fun n : ℕ ↦ X.asFunctor.obj (op n)) n).f p)
 
 /-- Horizontal coherence for an arbitrary natural transformation GF → L.
-Source: Stacks Tag 0941 (blueprint: lem-pur-roos-comparison-horizontal-coherence).
-Proof: DAG step 5. For either coordinate e and any product level, the left side
-becomes alpha at that level followed by GF(e), while the right side is L(e)
-following alpha at the Roos object. These agree by naturality of alpha at e.
-Product and biproduct projections jointly detect equality of cochain maps.
-Neither alpha nor either product comparison needs to be invertible. -/
+Source: Stacks Tag 0941. -/
 theorem roosComparison_horizontal_coherence
     (F : A ⥤ B) [F.Additive] (G : B ⥤ D) [G.Additive]
     (L : A ⥤ D) [L.Additive] (α : F ⋙ G ⟶ L)
@@ -290,9 +282,7 @@ theorem roosComparison_horizontal_coherence
           (α.naturality ((roosχ X p).hom ≫ biprod.snd))
 
 /-- The identity comparison is the canonical identity identification.
-Source: Stacks Tag 0941 (blueprint: lem-pur-roos-comparison-horizontal-coherence).
-Proof: DAG step 6. Every coordinate of the comparison for the identity functor is
-unchanged. Joint monicity of the two sets of product projections proves equality. -/
+Source: Stacks Tag 0941. -/
 theorem roosAdditiveComparison_id (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     roosAdditiveComparison (𝟭 A) X =
       (Functor.mapHomologicalComplexIdIso A (ComplexShape.up ℤ)).hom.app (roosF.obj X) ≫

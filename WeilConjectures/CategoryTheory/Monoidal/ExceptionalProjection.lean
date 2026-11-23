@@ -32,7 +32,6 @@ G (J K) ⊗ B --π--> G (J K ⊗ Lg B) --G (q⁻¹)--> G (J (K ⊗ Li (Lg B))) -
   G (J (K ⊗ Lf B)),
 ```
 natural in both variables (`CategoryTheory.MonoidalCategory.exceptionalProjection`).
-
 -/
 
 @[expose] public section

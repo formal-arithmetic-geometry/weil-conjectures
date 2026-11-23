@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.Bilinear
 
 /-! # Braiding representatives in a directed tensor family
 
-Source: the agent-written common-stage representative construction.
 The derived-tensor application follows Stacks 06YS, 07A4 and 0941.
 -/
 
@@ -114,15 +113,7 @@ private theorem braidingAt_transport (X Y : S.PairCategory) {L H : I}
 
 include hn hc in
 /-- Scalar-compatible braidings give isomorphisms with the prescribed representative at
-all common stages. Source: the common-stage quotient calculation in the
-paper constraints node, steps 2–4 (derived-tensor context: Stacks 06YS, 07A4, 0941).
-(blueprint: lem-pur-stage-tensor-braiding-descent).
-Proof: conjugate the finite braiding by the endpoint comparisons at one common upper
-stage. Its inverse gives an inverse representative. The family tower law, the scalar
-square, and naturality show that this representative transports to the identical
-formula at every enlargement. Compare any two stages at a common upper stage. The
-quotient calculus identifies their classes; composition and inverse identities are
-computed at the original stage. -/
+all common stages. Stacks Project, Tags 06YS, 07A4 and 0941 (derived tensor context). -/
 theorem braiding_exists (X Y : S.PairCategory) :
     ∃ e : output U join left right (X, Y) ≅ output U join left right (Y, X),
       ∀ (L : I) (hS : join X.stage Y.stage ≤ L) (hT : join Y.stage X.stage ≤ L),

@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteDg.RingedSiteDgModules
 
 /-! Derived restriction descends from the literal dg restriction.
 
-Source: the restriction part of Stacks sdga, Tags 0FT4 and 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact).
+Source: the restriction part of Stacks sdga, Tags 0FT4 and 0FT5.
 
 Restriction keeps the underlying complex, hence preserves quasi-isomorphisms.
 The localization universal property supplies the functor and its
@@ -40,8 +39,7 @@ structure RestrictionDescentData {O : Sheaf J CommRingCat.{u}}
   restrictionExact : restriction.IsTriangulated
 
 /-- Restriction retains the whole underlying complex, so it preserves quasi-isomorphisms.
-Source: Stacks sdga, 0FT4
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT4. -/
 theorem restriction_preserves_quasiisomorphisms
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
     {M N : Module B} (f : M ⟶ N) (hf : quasiIsomorphisms B f) :
@@ -49,8 +47,7 @@ theorem restriction_preserves_quasiisomorphisms
   exact hf
 
 /-- The literal descended restriction, constructed by localization.
-Source: Stacks sdga, 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT5. -/
 def derivedRestriction
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B) :
     Derived B ⥤ Derived A :=
@@ -59,8 +56,7 @@ def derivedRestriction
       (restriction_preserves_quasiisomorphisms φ f hf)) (Q B)
 
 /-- The fixed factorization of the literal descended restriction.
-Source: Stacks sdga, 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT5. -/
 def derivedRestrictionIso
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B) :
     Q B ⋙ derivedRestriction φ ≅ RingedSiteDg.restriction φ ⋙ Q A :=

@@ -18,12 +18,6 @@ dominating the cardinalities of the subobject lattices of the finite copowers of
 We prove the *cover lemma*: if `p : X ⟶ Y` is an epimorphism and `V` is a `κ`-generated
 subobject of `Y`, then `V` is the image under `p` of a `κ`-generated subobject of `X`.
 
-The proof reduces to the case where `V` is the image of a single morphism `g : G ⟶ Y`.
-There the pullback `E := pullback p g` maps epimorphically onto `G`, and it is enough to
-cover `G` by the images of fewer than `κ` many morphisms `G ⟶ E`: the images in `G` of all
-morphisms `G ⟶ E` join to the whole of `G` (because `G` is a separator), and they take fewer
-than `κ` distinct values inside `Subobject G`, so one witness per value suffices.
-
 ## Main results
 
 - `CategoryTheory.exists_isCardinalGenerated_subobject_of_epi`: the cover lemma.

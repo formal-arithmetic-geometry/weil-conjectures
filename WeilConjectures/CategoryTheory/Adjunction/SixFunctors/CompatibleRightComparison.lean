@@ -10,7 +10,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # The right comparison determined by a left adjunction square
 
 Source: Mathlib's mates correspondence and Stacks Project, Tag 0037.
-(blueprint: new-lem-sf-adjunction-compatible-right-comparison)
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ variable {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
 
 /-- A right comparison with its two adjunction equations. Invertibility of this
 comparison is unnecessary for the mate calculation.
-Source: Stacks Project, Tag 0037; Mathlib's `mateEquiv`.
-(blueprint: new-lem-sf-adjunction-compatible-right-comparison) -/
+Source: Stacks Project, Tag 0037. -/
 structure CompatibleRightComparison (adj : F ⊣ G) (adj' : F' ⊣ G')
     (q : F ⋙ V ≅ U ⋙ F') where
   hom : G ⋙ U ⟶ V ⋙ G'
@@ -42,8 +40,7 @@ structure CompatibleRightComparison (adj : F ⊣ G) (adj' : F' ⊣ G')
 /-- Construct the right comparison as the mate of the inverse left comparison.
 The unit and counit equations follow from Mathlib's two mate identities and
 cancellation of the inverse left comparison.
-Source: Stacks Project, Tag 0037; `unit_mateEquiv` and `mateEquiv_counit`.
-(blueprint: new-lem-sf-adjunction-compatible-right-comparison) -/
+Source: Stacks Project, Tag 0037. -/
 def compatibleRightComparison (adj : F ⊣ G) (adj' : F' ⊣ G')
     (q : F ⋙ V ≅ U ⋙ F') : CompatibleRightComparison adj adj' q where
   hom := (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ q.inv))

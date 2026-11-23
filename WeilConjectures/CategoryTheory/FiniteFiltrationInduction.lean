@@ -24,12 +24,12 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 namespace WeilFilteredObject
 
-/-- lem-sp-finite-filtration-induction. -/
+/-- The restriction of a filtered morphism to the `p`-th filtration steps. -/
 noncomputable def restriction {A B : WeilFilteredObject C} (f : Hom A B) (p : ℤ) :
     (A.filtration.F p : C) ⟶ (B.filtration.F p : C) :=
   Classical.choose (f.preserves p)
 
-/-- lem-sp-finite-filtration-induction. -/
+/-- The map on the `p`-th graded pieces induced by a filtered morphism. -/
 noncomputable def gradedMap {A B : WeilFilteredObject C} (f : Hom A B) (p : ℤ) :
     A.filtration.gr p ⟶ B.filtration.gr p :=
 by

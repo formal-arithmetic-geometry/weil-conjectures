@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # A coefficient push comparison detects copower continuity
 
-Source: the finite-basis mate calculation in
-`WeilConjectures/CategoryTheory/Adjunction/ProjectionMapMate.lean`, BaseChange section.
 This version allows an arbitrary basis and makes its required copower comparison explicit.
 -/
 
@@ -25,19 +23,7 @@ namespace CategoryTheory.Adjunction
 set_option backward.isDefEq.respectTransparency false
 
 /-- A scalar-basis decomposition identifies invertibility of a coefficient push mate
-with invertibility of the corresponding copower comparison.
-
-Source: `ProjectionMapMate.lean`, `isIso_mateEquiv_app_of_isIso_biproductDesc`, with the
-finite biproduct calculation replaced by a coproduct calculation.
-(auxiliary; not a blueprint node)
-
-Proof: write β' for the mate of β. The unit-mate identity and compatibility with each
-basis scalar identify U_D(β_M), conjugated by the two basis decompositions, with the
-copower comparison followed by G of the source basis decomposition and β' at N_C(M).
-Check this equality on each coprojection. The latter two factors are isomorphisms, as
-are both basis decompositions. Thus the copower comparison is invertible exactly when
-U_D(β_M) is. Reflection of isomorphisms by U_D gives the stated equivalence. No
-preservation of infinite coproducts by G is assumed or inferred without this comparison. -/
+with invertibility of the corresponding copower comparison. -/
 theorem isIso_iff_unitCoproductComparison
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {A' : Type uA'} [Category.{vA'} A'] {B' : Type uB'} [Category.{vB'} B']

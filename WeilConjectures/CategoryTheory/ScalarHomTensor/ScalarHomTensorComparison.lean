@@ -114,16 +114,7 @@ attribute [local irreducible] monoidalCategory scalarPairComplexComparison
   CoefficientTensorModels.iso
 
 /-- The normalized strong tensor comparison for scalar extension.
-Source: Stacks 07A4 (blueprint: lem-sfb-scalar-tensor-comparison).
-
-Proof: use the normalized ordinary tensor comparison in each bidegree and sum its
-inverse over the total coproduct. Naturality commutes with both differentials and
-additivity preserves the signs. Left adjoints preserve the coproducts, giving a chain
-isomorphism whose summand formula is the required generator formula. Scalar extension
-preserves all K-flat complexes by tensor cancellation. The universal derived comparison
-is invertible on them and their total tensors. Fully faithful restriction to resolving
-K-flat representatives descends the chain comparison and gives exactly the recorded
-normalization square. -/
+Source: Stacks 07A4. -/
 theorem scalarHomTensorComparison_exists : Nonempty (ScalarHomTensorComparison M a) := by
   classical
   let s := M.scalar a

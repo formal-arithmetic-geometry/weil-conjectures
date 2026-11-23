@@ -134,8 +134,7 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Natural transport of derived internal Hom
 
-Source: Stacks Project, Tags 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-derived-hom-transport).
+Source: Stacks Project, Tags 08J7 and 0A95.
 -/
 
 @[expose] public noncomputable section
@@ -147,18 +146,7 @@ namespace CategoryTheory.NativeRestriction
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- An exact additive module equivalence with a natural Hom-complex comparison
 transports the actual derived internal Hom bifunctors naturally.
-Source: Stacks Project, Tags 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-derived-hom-transport).
-
-Proof: precompose with the product of the two derived localization functors.
-Compute derived Hom using the canonical functorial K-injective replacements.
-Transport the source replacement through the equivalence and use the given
-natural cochain comparison. An additive equivalence preserves K-injectives.
-The transported replacement and the target replacement compare naturally through
-the target replacement of the transported replacement. Both comparison maps are
-quasi-isomorphisms between K-injectives, so Hom followed by localization inverts
-them. This gives a natural isomorphism before localization. The product
-localization has fully faithful precomposition, so the isomorphism descends. -/
+Source: Stacks Project, Tags 08J7 and 0A95. -/
 theorem derivedHom_transport
     {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

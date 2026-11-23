@@ -65,7 +65,6 @@ pro-étale instances at the end of the file are obtained from the general ones b
 - `AlgebraicGeometry.ProEtale.sheafMonoidalClosed`,
   `AlgebraicGeometry.ProEtale.preservesColimitsOfSize_tensorLeft_sheaf`: the special cases
   for the small pro-étale site.
-
 -/
 
 @[expose] public section

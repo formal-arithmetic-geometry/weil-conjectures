@@ -10,7 +10,6 @@ public import Mathlib.CategoryTheory.Sites.SheafHom
 /-! # Local morphisms of module sheaves
 
 Source: Stacks Project, Modules on Sites, Tag 093T, proof of (1).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

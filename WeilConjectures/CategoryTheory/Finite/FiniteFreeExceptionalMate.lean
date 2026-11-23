@@ -27,10 +27,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Finite-free scalar extension and the exceptional counit mate
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower,
-lem-coef-finite-free-extension.proof.md, paragraph 1, counit-defined comparison.
-(blueprint: lem-sf-finite-free-exceptional-mate)
-
 Constant coefficients use module-valued sheaves, equivalently modules over the constant
 ring sheaf by `constant_ring_module_sheaves`. The presentation below retains the universal
 left-derived pair, its normalized scalar adjunction, and the specified basis coordinates.
@@ -62,8 +58,7 @@ by the ordinary tensor unit on every complex. The basis columns are its unit fol
 by multiplication by the basis element, fixing the coordinate isomorphism uniquely.
 These are presentation data for the scalar functors in the statement, not an arbitrary
 comparison or an additional invertibility hypothesis on the exceptional mate.
-Source: Stacks 03CZ, 06YY, 07A6; blueprint finite-free-extension proof, paragraph 1
-(blueprint: lem-sf-finite-free-exceptional-mate). -/
+Source: Stacks 03CZ, 06YY, 07A6. -/
 structure FiniteFreeExceptionalScalarPresentation
     {C : Type a} [Category.{vA} C] (J : GrothendieckTopology C)
     {A B : Type (max u a vA)} [CommRing A] [CommRing B] [Algebra A B]

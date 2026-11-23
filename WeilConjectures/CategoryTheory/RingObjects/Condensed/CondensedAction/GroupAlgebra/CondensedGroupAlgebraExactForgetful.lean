@@ -72,10 +72,6 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Internal condensed group algebras and the exact forgetful functor
 
-Source: main-20261015, six-functors direct-image stability, paragraph (3),
-agent-formulated internal bar input (independent reference WANTED).
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful).
-
 All normalization formulas use the actual free adjunction and internal relative tensor.
 The data below specify constructions uniquely by their generators, without choosing
 objects from the postponed existence assertion.
@@ -98,19 +94,14 @@ variable (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
   [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 
 /-- The condensed group as its representable sheaf of continuous maps, lifted into
-its coefficient universe. Source: paragraph (3), internal bar input
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/
+its coefficient universe. -/
 abbrev groupSet : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) :=
   ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj (Profinite.of G)
 
-/-- The internal group algebra's underlying module is the existing free module.
-Source: paragraph (3), internal bar input
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/
+/-- The internal group algebra's underlying module is the existing free module. -/
 abbrev algebra : Modules A := (free A).obj (groupSet G)
 
-/-- The coefficient ring of sections, read through the fixed dependency interface.
-Source: paragraph (3), bilinear extension
-(blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/
+/-- The coefficient ring of sections, read through the fixed dependency interface. -/
 abbrev scalars (S : Profinite.{u}) :=
   (InternalAbelianSheafModule.sectionRings
     (coherentTopology Profinite.{u}) A.X).obj (op S)

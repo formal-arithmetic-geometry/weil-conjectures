@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Testing categorical sheaf epimorphisms by local lifts on finite covers
 
-Source: Stacks Project, Tags 00W1, 00W9 and 00WL, expressed using coefficient
-epimorphisms and exact filtered colimits rather than underlying elements.
+## References
+
+* Stacks Project, Tags 00W1, 00W9 and 00WL, expressed using coefficient
+  epimorphisms and exact filtered colimits rather than underlying elements.
 -/
 
 @[expose] public section
@@ -80,21 +82,7 @@ private theorem finiteProduct_exact {K : Type} [Finite K]
 /-- A map out of sections vanishes if it vanishes on every generalized section
 admitting local lifts through a sheaf epimorphism on a finite basis cover.
 Source: Stacks Project, Tags 00W1, 00W9 and 00WL (the plus construction and local
-description of epimorphisms), with Grothendieck abelian coefficients.
-(blueprint: stage3-categorical-finite-cover-local-epi).
-
-Proof: The hypothesis applied to restrictions of a global P-section shows that
-b annihilates f(V). Thus b descends to the pointwise presheaf cokernel R(V).
-Sheafification of R is zero: it preserves the cokernel and sends f to an
-epimorphism, after identifying the sheafifications of P and Q with P and Q.
-Apply the locally-zero test for R. For a generalized R-section killed by a
-finite cover, first lift it to Q(V) after an epimorphism of coefficient objects.
-Its restrictions are killed by the presheaf cokernel projections. Finite
-products of the pointwise exact cokernel sequences are exact, so after a second
-coefficient epimorphism they lift simultaneously to the degree-zero P-cochains.
-The hypothesis kills this refined Q-section under b. Cancel the two coefficient
-epimorphisms to kill the original R-section under the descended map. The
-locally-zero test makes the descended map zero, hence b is zero. -/
+description of epimorphisms), with Grothendieck abelian coefficients. -/
 theorem hom_eq_zero_of_finite_cover_lifts
     (B : C → Prop)
     (hcov : ∀ V, B V → ∀ R ∈ J V, ∃ (n : ℕ) (U : Fin n → Over V),

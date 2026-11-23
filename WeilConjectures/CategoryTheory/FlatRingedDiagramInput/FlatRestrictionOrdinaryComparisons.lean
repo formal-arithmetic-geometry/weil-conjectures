@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Ordinary coefficient comparison isomorphisms
 
 Source: Stacks Project, Modules on Sites, Tag 03D3.
-(blueprint: lem-weil-pbc-flat-restriction-ordinary-comparisons).
 -/
 
 @[expose] public section
@@ -232,13 +231,13 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   (x : FlatRingedDiagramInput K H) (J : Type u) [SmallCategory J]
 
 /-- The actual termwise restriction of scalars at V.
-Source: Stacks 03D3 (blueprint: def-weil-pbc-flat-ringed-diagram-input). -/
+Source: Stacks 03D3. -/
 noncomputable abbrev restrictV : x.diagramsSV J ⥤ x.diagramsRV J :=
   (Functor.whiskeringRight J _ _).obj (SheafOfModules.restrictScalars.{u}
     ((sheafCompose K (forget₂ CommRingCat RingCat)).map x.aV))
 
 /-- The actual termwise restriction of scalars at U.
-Source: Stacks 03D3 (blueprint: def-weil-pbc-flat-ringed-diagram-input). -/
+Source: Stacks 03D3. -/
 noncomputable abbrev restrictU : x.diagramsSU J ⥤ x.diagramsRU J :=
   (Functor.whiskeringRight J _ _).obj (SheafOfModules.restrictScalars.{u}
     ((sheafCompose H (forget₂ CommRingCat RingCat)).map x.aU))

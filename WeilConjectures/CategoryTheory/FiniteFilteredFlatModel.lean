@@ -27,12 +27,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 
 /-! # Split flat filtered complexes and the convolution filtration
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-lefschetz-verdier/sec-trace-classes-and-the-lefschetz-verdier-formula/
-sec-additivity-of-trace-classes/sk-i-additivity/sk-i-additivity.proof.md,
-Filtered operations, paragraphs 1–3
-(blueprint: lem-trf-finite-filtered-flat-model).
 -/
 
 @[expose] public section
@@ -49,17 +43,13 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{w})
 
-/-- The module sheaves over the coefficient sheaf on the given site.
-Source: blueprint sk-i-additivity.proof.md, Filtered operations, coefficient category
-(blueprint: lem-trf-finite-filtered-flat-model). -/
+/-- The module sheaves over the coefficient sheaf on the given site. -/
 abbrev finiteFilteredModules (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} ((sheafCompose J
     (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
 
-/-- Cochain complexes of the module sheaves, with the coefficient universe explicit.
-Source: blueprint sk-i-additivity.proof.md, Filtered operations, complexes
-(blueprint: lem-trf-finite-filtered-flat-model). -/
+/-- Cochain complexes of the module sheaves, with the coefficient universe explicit. -/
 abbrev finiteFilteredComplex (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{w}) :=
   CochainComplex (finiteFilteredModules J R) ℤ
@@ -67,9 +57,7 @@ abbrev finiteFilteredComplex (J : GrothendieckTopology C)
 /-- The split-flat and K-flat hypotheses used for a resolving filtered complex.
 Splitting is imposed on module-sheaf maps in each degree, not on chain maps.
 For a finite filtration the successor inclusions split exactly when the whole
-filtration is degreewise a sum of its graded pieces.
-Source: blueprint sk-i-additivity.proof.md, Filtered operations, flat resolutions
-(blueprint: lem-trf-finite-filtered-flat-model). -/
+filtration is degreewise a sum of its graded pieces. -/
 def IsSplitFlatFiltered
     (K : WeilFilteredObject (finiteFilteredComplex J R)) : Prop :=
   (∀ p n : ℤ,
@@ -86,9 +74,7 @@ def IsSplitFlatFiltered
 
 /-- The split-flat property on objects of the actual filtered homotopy category.
 The homotopy quotient has the same objects as the complex category. Its full
-subcategory on these objects is the homotopy category of split-flat complexes.
-Source: blueprint sk-i-additivity.proof.md, Filtered operations, resolving models
-(blueprint: lem-trf-finite-filtered-flat-model). -/
+subcategory on these objects is the homotopy category of split-flat complexes. -/
 def finiteFilteredSplitFlatProperty (a b : ℤ) :
     ObjectProperty (UniformFilteredHomotopyCategory (finiteFilteredModules J R)
       (some (a, b)) (CochainComplex.minus (finiteFilteredModules J R))) :=
@@ -96,9 +82,7 @@ def finiteFilteredSplitFlatProperty (a b : ℤ) :
 
 /-- The canonical localization functor induced by the split-flat inclusion.
 This is the localization lift of the inclusion of actual filtered homotopy
-categories, at graded quasi-isomorphisms on both sides.
-Source: blueprint sk-i-additivity.proof.md, Filtered operations, deriving tensor
-(blueprint: lem-trf-finite-filtered-flat-model). -/
+categories, at graded quasi-isomorphisms on both sides. -/
 def finiteFilteredLocalizationComparison (a b : ℤ) :
     ((uniformFilteredHomotopyQuasiIso (some (a, b))
       (CochainComplex.minus (finiteFilteredModules J R))).inverseImage
@@ -116,9 +100,7 @@ def finiteFilteredLocalizationComparison (a b : ℤ) :
 
 /-- The sum of the images defining the convolution filtration at weight `r`.
 The image of the coproduct map is the sum of the images. Indexing by `p`
-with second index `r-p` is exactly the condition `p+q=r`.
-Source: blueprint sk-i-additivity.proof.md, Filtered operations, convolution tensor
-(blueprint: lem-trf-finite-filtered-flat-model). -/
+with second index `r-p` is exactly the condition `p+q=r`. -/
 def finiteFilteredConvolutionStep
     (P Q : WeilFilteredObject (finiteFilteredComplex J R)) (r : ℤ) :
     Subobject (HomologicalComplex.tensorObj P.obj Q.obj) :=

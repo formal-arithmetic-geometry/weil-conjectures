@@ -21,16 +21,6 @@ are exact, such that all `F.obj j` and `c.pt` vanish in degrees `< a` and the co
 of `c` are colimits. Then for every `W ∈ D(C)` vanishing in degrees `< b`, the cohomology objects
 of `c ⊗ᴸ W` are colimits
 (`DerivedCategory.nonempty_isColimit_homologyFunctor_tensorRight_mapCocone`).
-
-The proof:
-* for `W = M[0]`, `- ⊗ᴸ M[0]` is the functor `D(- ⊗ M)` induced by the exact functor `- ⊗ M`
-  (`DerivedCategory.tensorRightSingleFunctorIso`, `M[0]` being K-flat), so
-  `Hᵠ(Y ⊗ᴸ M[0]) ≅ Hᵠ(Y) ⊗ M`, which commutes with colimits;
-* the class of such `W` is stable under shifts and under extensions (five lemma for colimits,
-  `DerivedCategory.nonempty_isColimit_homologyFunctor_mapCocone_π₂`, applied to `Y ⊗ᴸ -` of a
-  distinguished triangle), hence contains bounded objects;
-* for `W` bounded below, `Hᵠ(Y ⊗ᴸ τ^{≤ m} W) ≅ Hᵠ(Y ⊗ᴸ W)` for `Y` vanishing below `a` and
-  `m ≥ q - a`, since `Y ⊗ᴸ τ^{≥ m + 1} W` vanishes below `a + m + 1` (Tor amplitude).
 -/
 
 @[expose] public section

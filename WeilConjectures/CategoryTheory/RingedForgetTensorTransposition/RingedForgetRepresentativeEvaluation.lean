@@ -76,8 +76,7 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 
 /-! # Evaluation compatibility on K-flat and K-injective representatives
 
-Source: Stacks 08J9, 070I; steps 5--8 of ringed tensor transposition
-(blueprint: lem-sf-ringed-forget-representative-evaluation).
+Source: Stacks 08J9, 070I.
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -12,8 +12,12 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.Construction.Twist
 
 /-! # Underlying twisted action site and coefficient sheaf
 
-Source: the agent-formulated twisted variant of Stacks Tag 00W0,
-original steps 1, 2, and the coefficient part of 4.
+Every site with a continuous autoequivalence `s` and a ring sheaf with a compatible isomorphism
+`a` has an underlying integer-labelled twisted action site with a coefficient sheaf.
+
+## References
+
+Motivated by Stacks Project, Tag 00W0.
 -/
 
 @[expose] public section
@@ -31,29 +35,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
     (a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R)
 
-/-- The underlying integer-labelled site and its coefficient sheaf.
-
-Source: original steps 1, 2, and the coefficient part of step 4 of the agent-formulated
-argument motivated by Stacks 00W0, `sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-site-core).
-
-Proof: apply the proved integer tensor-power coherence construction to the
-endofunctor of s and its chosen inverse. Transport its integer family to the exact
-functors (s^n).functor, and use the existing integer-action category on the prescribed
-object copy. The zero comparison and shifted-hom composition give the normalized
-identities, inclusion and composition formulas. Each integer power preserves and
-reflects covers, by continuity of both directions and its equivalence inverse.
-Transport the existing integer-action topology to this object copy. Its universal
-property identifies it with the required infimum; normalization of labelled arrows
-in slices proves the cover and restricted sheaf criteria, hence continuity and
-cocontinuity. Extend the given ring comparison to all integer shifts using the proved
-integer-shift extension theorem, and compose these comparisons with the original
-ring restriction maps. The addition axiom gives the presheaf laws. Its degree-zero
-restriction is R, so the sheaf criterion makes it a ring sheaf. The addition identity
-at minus one plus one, using the same comparison that defined the positive
-generator, recovers exactly the prescribed inverse a. Package these
-constructions into Site. The same argument treats empty sites, empty covering
-families and the zero ring without extra hypotheses. -/
+/-- The underlying integer-labelled site and its coefficient sheaf. -/
 theorem siteCore [HasPullbacks C] :
     ∃ S : Site J s R a,
       letI := S.category

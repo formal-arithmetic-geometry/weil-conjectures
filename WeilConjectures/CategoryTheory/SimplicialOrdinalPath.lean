@@ -19,7 +19,6 @@ import Mathlib.Tactic
 The ordered join of two copies of `[n]` gives a simplicial object with two endpoint
 maps and their canonical homotopy. This is the finite-simplex version of the endpoint
 construction in Stacks, Tags 01GN and 01GS.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -357,9 +356,7 @@ lemma ordinalPathPullback_right {U V : SimplicialObject C} (a b : U ⟶ V) :
     Category.assoc, prod.lift_snd] using h
 
 /-- The canonical homotopy on the explicitly constructed endpoint pullback.
-Source: Stacks, Tag 01GS, endpoint pullback step; the ordered-simplex formulas above
-supply the homotopy without invoking any existence theorem.
-(auxiliary; not a blueprint node) -/
+Source: Stacks, Tag 01GS, endpoint pullback step. -/
 noncomputable def ordinalPathPullbackHomotopy {U V : SimplicialObject C} (a b : U ⟶ V) :
     Homotopy (ordinalPathPullbackFst a b ≫ a) (ordinalPathPullbackFst a b ≫ b) := by
   rw [ordinalPathPullback_left, ordinalPathPullback_right]

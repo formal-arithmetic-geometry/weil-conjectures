@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 # Derived sequence for three functors exact on injectives
 
 Source: Stacks Project, Tags 0A50 and 0117.
-(blueprint: lem-weil-pbc-right-derived-injective-sequence)
 -/
 
 @[expose] public section
@@ -73,18 +72,11 @@ private noncomputable def resolutionSequenceMap {M N : C}
 end
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 0A50, passage to derived functors; Homology Tag 0117.
-(blueprint: lem-weil-pbc-right-derived-injective-sequence)
+/-- A sequence `0 ⟶ A ⟶ B ⟶ E ⟶ 0` of additive functors that is short exact on injective
+objects induces connecting maps `δ` making the sequence of right derived functors
+`R^n A ⟶ R^n B ⟶ R^n E ⟶ R^(n+1) A` exact.
 
-Proof: Evaluate the three functors and the two transformations on a chosen injective
-resolution of each object. Exactness gives the zero composite, and the injectivity and
-surjectivity hypotheses give a short exact sequence of complexes degree by degree.
-Use its homology connecting map, conjugated by the canonical resolution comparisons.
-A lift of a coefficient morphism gives a morphism of short exact sequences of complexes;
-naturality of the homology connecting map and of the comparison isomorphisms gives a
-natural transformation. The three homology exactness assertions transport along those
-isomorphisms to the asserted three exact pairs. This works in degree zero as well as in
-positive degrees, including the zero and split sequences. -/
+Source: Stacks Project, Tag 0A50, passage to derived functors; Homology Tag 0117. -/
 theorem rightDerived_injective_sequence
     {C : Type u} [Category.{v} C] [Abelian C] [HasInjectiveResolutions C]
     (A B E : C ⥤ AddCommGrpCat.{w}) [A.Additive] [B.Additive] [E.Additive]

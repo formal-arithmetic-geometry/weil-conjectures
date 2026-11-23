@@ -25,10 +25,8 @@ import WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdjuncti
 
 /-! # Derived restriction calculus for internal condensed actions
 
-Source: main-20261015 direct-images proof, paragraph (3), formal derived-restriction
-infrastructure (blueprint: def-sfb-condensed-derived-invariants).
-The source records this auxiliary infrastructure as agent-formulated, with a reference wanted.
-No assertion that underived continuous cochains compute derived invariants is made.
+This is auxiliary infrastructure. No assertion that underived continuous cochains compute
+derived invariants is made.
 -/
 
 @[expose] public noncomputable section
@@ -43,30 +41,19 @@ namespace CategoryTheory.CondensedDerivedRestriction
 variable (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
   [IsTopologicalGroup G]
 
-/-- The given additive category of internal actions is abelian, for arbitrary topological G.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: use the action-site presentation and the internal/sectionwise module equivalence.
-Kernels and sheafified cokernels carry the induced action; normality and finite products
-are computed on underlying internal modules. -/
+/-- The given additive category of internal actions is abelian, for arbitrary topological G. -/
 theorem actionAbelianData : Nonempty (ActionAbelian A G) := by
   exact ActionSite.actionAbelian_nonempty A G
 
 /-- Abelian-category structure on the existing action category; its data fields are
-propositions, so this selects no unspecified mathematical object.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+propositions, so this selects no unspecified mathematical object. -/
 instance actionAbelian : ActionAbelian A G := Classical.choice (actionAbelianData A G)
 
-/-- The action-site presentation transports the generator, colimits and AB5.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: the action-site module equivalence preserves all limits and colimits; apply the
-Grothendieck abelian theorem for modules on a small ringed site. -/
+/-- The action-site presentation transports the generator, colimits and AB5. -/
 @[instance] theorem actionGrothendieck : IsGrothendieckAbelian.{u + 1} (Equivariant A G) := by
   exact ActionSite.isGrothendieckAbelian A G
 
-/-- Forgetting the action creates kernels and cokernels and detects exactness.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: the equivariance equation restricts to kernels and descends to sheafified cokernels.
-The forgetful functor is faithful and detects zero; exactness is therefore detected. -/
+/-- Forgetting the action creates kernels and cokernels and detects exactness. -/
 theorem forgetExact :
     PreservesFiniteLimits (CondensedBar.forgetAction (A := A) (G := G)) ∧
     PreservesFiniteColimits (CondensedBar.forgetAction (A := A) (G := G)) ∧
@@ -100,21 +87,15 @@ private theorem forgetReflects (A : CondensedBar.Ring.{u}) (G : Type u) [Group G
 /-- Existence of the normalized invariant-submodule adjunction already specified by the
 recorded action-module definition. Its universal property determines it up to the unique
 isomorphism commuting with its inclusion.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: fully fixed sections form submodules stable under restriction and gluing. Restrict
-codomains of maps from trivial actions; composition with the inclusion is the inverse. -/
+-/
 theorem invariantsExist : Nonempty (Invariants A G) :=
   Profinite.CondensedAction.nonempty_invariants
 
-/-- Trivial action is additive and exact on the underlying modules.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: it leaves objects and maps unchanged and preserves the induced kernels and cokernels. -/
+/-- Trivial action is additive and exact on the underlying modules. -/
 @[instance] theorem trivialAdditive : (trivial (R := A.toMon) (P := G)).Additive := by
   exact ⟨by intros; rfl⟩
 
-/-- Exactness of trivial action, on kernels.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: the underlying kernel with trivial action is the equivariant kernel. -/
+/-- Exactness of trivial action, on kernels. -/
 @[instance] theorem trivialLimits :
     PreservesFiniteLimits (trivial (R := A.toMon) (P := G)) := by
   let U := CondensedBar.forgetAction (A := A) (G := G)
@@ -124,9 +105,7 @@ Proof: the underlying kernel with trivial action is the equivariant kernel. -/
     show PreservesFiniteLimits (𝟭 (Modules A)) from inferInstance
   exact preservesFiniteLimits_of_reflects_of_preserves _ U
 
-/-- Exactness of trivial action, on cokernels.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: the underlying sheafified cokernel retains trivial action. -/
+/-- Exactness of trivial action, on cokernels. -/
 @[instance] theorem trivialColimits :
     PreservesFiniteColimits (trivial (R := A.toMon) (P := G)) := by
   let U := CondensedBar.forgetAction (A := A) (G := G)
@@ -138,16 +117,12 @@ Proof: the underlying sheafified cokernel retains trivial action. -/
 
 variable {A G} {H : Type u} [Group H] [TopologicalSpace H] [IsTopologicalGroup H]
 
-/-- Restriction of actions along a continuous group map is additive.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: precomposition changes no underlying map, hence preserves sums. -/
+/-- Restriction of actions along a continuous group map is additive. -/
 @[instance] theorem restrictionAdditive (v : H →ₜ* G) :
     (inflate (R := A.toMon) v).Additive := by
   exact ⟨by intros; rfl⟩
 
-/-- Restriction is left exact, with the induced action on the same kernel.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: precomposition of the action commutes with the kernel construction. -/
+/-- Restriction is left exact, with the induced action on the same kernel. -/
 @[instance] theorem restrictionLimits (v : H →ₜ* G) :
     PreservesFiniteLimits (inflate (R := A.toMon) v) := by
   let U := CondensedBar.forgetAction (A := A) (G := H)
@@ -158,9 +133,7 @@ Proof: precomposition of the action commutes with the kernel construction. -/
       (forgetExact A G).1
   exact preservesFiniteLimits_of_reflects_of_preserves _ U
 
-/-- Restriction is right exact, with the induced action on the same cokernel.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: precomposition of the action commutes with sheafified cokernels. -/
+/-- Restriction is right exact, with the induced action on the same cokernel. -/
 @[instance] theorem restrictionColimits (v : H →ₜ* G) :
     PreservesFiniteColimits (inflate (R := A.toMon) v) := by
   let U := CondensedBar.forgetAction (A := A) (G := H)
@@ -177,10 +150,7 @@ variable [HasDerivedCategory.{u + 1} (Modules A)]
   [HasDerivedCategory.{u + 1} (Equivariant A H)]
 
 set_option linter.unusedSectionVars false in
-/-- The invariant inclusion uniquely determines the underived restriction map.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: a fully G-fixed section is H-fixed after precomposition. Restrict the codomain
-using the normalized invariant inclusion, which is a monomorphism on every section. -/
+/-- The invariant inclusion uniquely determines the underived restriction map. -/
 theorem invariantRestrictionExist (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
     ∃! b : V.functor ⟶ inflate (R := A.toMon) v ⋙ W.functor,
       ∀ N, b.app N ≫ W.inclusion.app ((inflate v).obj N) = V.inclusion.app N := by
@@ -211,15 +181,13 @@ theorem invariantRestrictionExist (V : Invariants A G) (W : Invariants A H) (v :
     erw [Equiv.symm_apply_apply]
     exact (hb' N).trans (hc N).symm
 
-/-- The unique map into the invariant subsheaf; uniqueness fixes the actual arrow.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- The unique map into the invariant subsheaf; uniqueness fixes the actual arrow. -/
 def invariantRestriction (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
     V.functor ⟶ inflate (R := A.toMon) v ⋙ W.functor :=
   Classical.choose (invariantRestrictionExist V W v)
 
 /-- Canonical total derived restriction, obtained by right deriving the fixed-section
-inclusion along the exact restriction functor, not by assuming it preserves injectives.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+inclusion along the exact restriction functor, not by assuming it preserves injectives. -/
 def restriction (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
     V.functor.rightDerivedFunctor ⟶
       (inflate (R := A.toMon) v).mapDerivedCategory ⋙ W.functor.rightDerivedFunctor :=
@@ -227,40 +195,33 @@ def restriction (V : Invariants A G) (W : Invariants A H) (v : H →ₜ* G) :
 
 end Derived
 
-/-- Canonical invariants, selected by their fixed-section inclusion universal property.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Canonical invariants, selected by their fixed-section inclusion universal property. -/
 def invariants (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : Invariants A G := Classical.choice (invariantsExist A G)
 
-/-- Ordinary unbounded right derived invariants, in the existing small-Hom localization.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Ordinary unbounded right derived invariants, in the existing small-Hom localization. -/
 def derived (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : DerivedCategory.{u + 1} (Equivariant A G) ⥤
       DerivedCategory.{u + 1} (Modules A) := (invariants A G).functor.rightDerivedFunctor
 
-/-- The exact trivial-action functor on ordinary derived categories.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- The exact trivial-action functor on ordinary derived categories. -/
 def trivialDerived (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : DerivedCategory.{u + 1} (Modules A) ⥤
       DerivedCategory.{u + 1} (Equivariant A G) :=
   (trivial (R := A.toMon) (P := G)).mapDerivedCategory
 
-/-- The canonical derived adjunction, with its actual resolution-normalized unit and counit.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- The canonical derived adjunction, with its actual resolution-normalized unit and counit. -/
 def adjunction (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : trivialDerived A G ⊣ derived A G :=
   (invariants A G).adjunction.mapDerivedCategoryRightDerivedAdjunction
 
-/-- The derived invariant functor has its canonical integer-shift structure.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- The derived invariant functor has its canonical integer-shift structure. -/
 instance derivedShift : (derived A G).CommShift ℤ :=
   inferInstanceAs ((invariants A G).functor.rightDerivedFunctor.CommShift ℤ)
 
 /-- Degree zero is the actual invariant functor, with the comparison induced by the
 right-derived unit, not an arbitrarily chosen cohomology isomorphism.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: in an injective resolution, H⁰ of invariants is the kernel of the first invariant
-differential, which is invariants of the original module by left exactness. -/
+-/
 theorem degreeZero : ∃ e :
     (DerivedCategory.singleFunctor (Equivariant A G) 0 ⋙ derived A G) ⋙
       DerivedCategory.homologyFunctor (Modules A) 0 ≅ (invariants A G).functor,
@@ -278,8 +239,7 @@ theorem degreeZero : ∃ e :
 
 /-- The degree-zero identification fixed by the computation unit. That equation
 uniquely determines this isomorphism, since the two comparison maps in degree zero
-are invertible by left exactness.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+are invertible by left exactness. -/
 def degreeZeroIso :
     (DerivedCategory.singleFunctor (Equivariant A G) 0 ⋙ derived A G) ⋙
       DerivedCategory.homologyFunctor (Modules A) 0 ≅ (invariants A G).functor :=
@@ -287,21 +247,14 @@ def degreeZeroIso :
 
 variable {A' : CondensedBar.Ring.{u}}
 
-/-- The existing normalized scalar-action specification has a canonical realization.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: use the same underlying abelian sheaf and action, and restrict its scalar action
-along the given ring map. The displayed underlying comparison is identity on sections. -/
+/-- The existing normalized scalar-action specification has a canonical realization. -/
 theorem scalarActionExist (a : A ⟶ A') : Nonempty (ScalarAction a G) :=
   nonempty_scalarAction a G
 
-/-- Scalar restriction on actions, fixed by its underlying module and section action.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Scalar restriction on actions, fixed by its underlying module and section action. -/
 def scalarAction (a : A ⟶ A') : ScalarAction a G := Classical.choice (scalarActionExist a)
 
-/-- Scalar restriction of actions is exact, without flatness of the ring map.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: kernels and sheafified cokernels have the same underlying abelian sheaves before
-and after restricting scalars; their induced group actions are unchanged. -/
+/-- Scalar restriction of actions is exact, without flatness of the ring map. -/
 theorem scalarExact (a : A ⟶ A') :
     PreservesFiniteLimits (scalarAction (G := G) a).functor ∧
     PreservesFiniteColimits (scalarAction (G := G) a).functor := by
@@ -320,33 +273,27 @@ theorem scalarExact (a : A ⟶ A') :
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves _ U,
     preservesFiniteColimits_of_reflects_of_preserves _ U⟩
 
-/-- Exactness on kernels, from the preceding statement.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Exactness on kernels, from the preceding statement. -/
 instance scalarLimits (a : A ⟶ A') :
     PreservesFiniteLimits (scalarAction (G := G) a).functor := (scalarExact a).1
 
-/-- Exactness on cokernels, from the preceding statement.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Exactness on cokernels, from the preceding statement. -/
 instance scalarColimits (a : A ⟶ A') :
     PreservesFiniteColimits (scalarAction (G := G) a).functor := (scalarExact a).2
 
-/-- Termwise scalar restriction on derived action modules.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Termwise scalar restriction on derived action modules. -/
 def scalarDerived (a : A ⟶ A') (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : DerivedCategory.{u + 1} (Equivariant A' G) ⥤
       DerivedCategory.{u + 1} (Equivariant A G) :=
   (scalarAction (G := G) a).functor.mapDerivedCategory
 
-/-- Termwise scalar restriction on derived internal modules.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- Termwise scalar restriction on derived internal modules. -/
 def scalarBase (a : A ⟶ A') : DerivedCategory.{u + 1} (Modules A') ⥤
     DerivedCategory.{u + 1} (Modules A) := (Mod.comap a.hom.hom).mapDerivedCategory
 
 /-- Scalar restriction and taking the fully fixed subsheaf commute canonically. The
 normalization fixes this isomorphism on the actual invariant inclusions.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: both sides consist of the same sections fixed after every profinite base change;
-their inclusions identify the same submodule of the restricted underlying sheaf. -/
+-/
 theorem scalarInvariantsExist (a : A ⟶ A') :
     ∃! e : (scalarAction (G := G) a).functor ⋙ (invariants A G).functor ≅
         (invariants A' G).functor ⋙ Mod.comap a.hom.hom,
@@ -355,8 +302,7 @@ theorem scalarInvariantsExist (a : A ⟶ A') :
         e.hom.app N ≫ (Mod.comap a.hom.hom).map ((invariants A' G).inclusion.app N) := by
   exact existsUnique_scalarInvariantsIso _ _ _
 
-/-- The unique scalar/invariants comparison fixed by the invariant inclusions.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- The unique scalar/invariants comparison fixed by the invariant inclusions. -/
 def scalarInvariants (a : A ⟶ A') :
     (scalarAction (G := G) a).functor ⋙ (invariants A G).functor ≅
       (invariants A' G).functor ⋙ Mod.comap a.hom.hom :=
@@ -364,12 +310,7 @@ def scalarInvariants (a : A ⟶ A') :
 
 /-- The scalar comparison is the unique derived transformation whose computation units
 are the underived fixed-section identification, and is invertible for any ring map.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants).
-Proof: view scalar restriction and invariants as direct images of the identity ringed
-topos and the action projection. Their two composites are the same ringed direct image.
-The canonical derived-composition comparisons give this isomorphism, compatibly with
-computation units; uniqueness follows from the right-derived universal property. No
-preservation of injectives by scalar restriction and no flatness is used. -/
+-/
 theorem scalarComparisonExist (a : A ⟶ A') :
     ∃! d : scalarDerived a G ⋙ derived A G ≅ derived A' G ⋙ scalarBase a,
       ∀ K : CochainComplex (Equivariant A' G) ℤ,
@@ -385,15 +326,13 @@ theorem scalarComparisonExist (a : A ⟶ A') :
   exact Functor.existsUnique_rightDerivedFunctor_comparison_of_acyclic _ _ _ _ _
     fun I _ J _ j _ ↦ scalarAction_quasiIso_invariants_map (scalarAction a) (invariants A G) I J j
 
-/-- The unique derived coefficient isomorphism normalized by the computation units.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+/-- The unique derived coefficient isomorphism normalized by the computation units. -/
 def scalarComparison (a : A ⟶ A') :
     scalarDerived a G ⋙ derived A G ≅ derived A' G ⋙ scalarBase a :=
   Classical.choose (scalarComparisonExist a)
 
 /-- Coefficient map for any derived equivariant morphism. Modules enter via the ordinary
-single-degree embedding; this formula also applies to every complex.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+single-degree embedding; this formula also applies to every complex. -/
 def coefficientMap (a : A ⟶ A') {N : DerivedCategory.{u + 1} (Equivariant A G)}
     {N' : DerivedCategory.{u + 1} (Equivariant A' G)}
     (f : N ⟶ (scalarDerived a G).obj N') :
@@ -401,8 +340,7 @@ def coefficientMap (a : A ⟶ A') {N : DerivedCategory.{u + 1} (Equivariant A G)
   (derived A G).map f ≫ (scalarComparison a).hom.app N'
 
 /-- The canonical coefficient restriction to a subgroup, with degree-zero trivial
-coefficients retained as the original regular module.
-Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+coefficients retained as the original regular module. -/
 def regularTrivial (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] :=
   (trivial (R := A.toMon) (P := G)).obj (Mod.regular A.X)

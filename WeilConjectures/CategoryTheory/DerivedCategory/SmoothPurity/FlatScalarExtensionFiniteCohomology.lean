@@ -15,8 +15,7 @@ import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Flat scalar extension and bounded finite cohomology
-Source: Stacks Project, Tags 00HD and 00HT.
-(blueprint: lem-weil-point-flat-scalar-extension-finite-cohomology). -/
+Source: Stacks Project, Tags 00HD and 00HT. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,10 +29,8 @@ namespace DerivedCategory
 
 /-- An exact scalar extension to a field preserves finite cohomological support and
 turns finite modules into finite-dimensional vector spaces.
-Source: Stacks Project, Tag 00HD, exactness of flat tensor products;
-(blueprint: lem-weil-point-flat-scalar-extension-finite-cohomology).
-Proof: exactness identifies the cohomology of the tensor complex with tensor products
-of the cohomology modules. An exact additive functor preserves zero objects, so the
+Source: Stacks Project, Tag 00HD, exactness of flat tensor products. An exact additive functor
+preserves zero objects, so the
 same finite support works. Tensor products of finitely generated modules are finitely
 generated over the target field, which is finite dimensionality. -/
 theorem pointFiniteDimensional_of_flat_scalar_extension

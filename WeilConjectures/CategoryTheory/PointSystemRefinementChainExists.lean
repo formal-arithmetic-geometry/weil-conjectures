@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.PointSystemSchedule
 /-!
 # Scheduling one-step inverse-system refinements
 
-Source: Stacks Project, Sites, Tag 00YP, transfinite recursion on the set of requests
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP, transfinite recursion on the set of requests.
 -/
 
 @[expose] public section
@@ -28,21 +27,7 @@ namespace CategoryTheory
 /-- A set of lifting requests can be scheduled in a nested chain of refinements.
 
 Source: Stacks Project, Sites, Tag 00YP, the paragraph beginning "In order to circumvent
-this we choose a well ordering on E"
-(auxiliary; not a blueprint node).
-
-Proof: Consider the category of strict refinements of V which preserve the two
-classes. Directed unions exist in this category: form the filtered colimit of the
-index posets and descend the object assignment and transition maps. Each index is in
-one stage, so the union is directed; any equality of the two classes has a witness
-in a stage and contradicts that stage's separation property. A lifting request is
-persistent under refinement by naturality of colimit maps. If one is missing, apply
-the supplied step to its current image. Replace the resulting preorder by a choice
-of representatives of its antisymmetrization, retaining the original indices. This
-cofinal restriction preserves the lifting witness and separation. Transfinite
-iteration of this operation eventually satisfies all requests: otherwise its choices
-of missing requests inject a well-order larger than A into A. Finally present the
-resulting system as a chain with a single stage (the whole index poset). -/
+this we choose a well ordering on E". -/
 theorem exists_pointSystem_refinement_chain
     {C : Type u} [Category.{v} C]
     {J : Type w} [PartialOrder J] [Nonempty J] [IsDirectedOrder J]

@@ -141,10 +141,7 @@ import WeilConjectures.WeilSheaf.SixFunctors.UnderlyingStandardHomRepresentative
 
 /-! # Two K-injective models and forgetting the ringed action
 
-Source: Stacks Project, Tags 0A95 and 08J7; the internal-Hom paragraph of
-blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md;
-the native signed model in WeilConjectures.WeilSheaf.DerivedHom
-(blueprint: lem-sf-ringed-forget-two-injective-hom).
+Source: Stacks Project, Tags 0A95 and 08J7.
 
 The comparison data specify product projections, not global Hom groups. The native
 normalization retains the row sign of bifunctorHomObj and its degree/source-index correction.
@@ -200,27 +197,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
 
 /-- The twisted-action-site two-injective model is canonically the native model after its
 explicit sign normalization, and commutes with forgetting the Frobenius structure.
-Source: Stacks 0A95 and 08J7; native DerivedHom.lean and BifunctorHomComplex.lean
-(blueprint: lem-sf-ringed-forget-two-injective-hom).
-Proof:
-1. Locally finite span and locally finite-subextension values agree: finitely many spanning
-values generate a finite intermediate field by algebraicity. Conversely the span of values
-in a finite intermediate field is finite dimensional. This argument is local on every test
-space, without a compactness assumption.
-2. Apply standardHomModel to the native and underlying Hom bifunctors. It retains the actual
-native complex and rescales the degree-n, source-p projection by (-1)^(np). Its proved product,
-differential and map equations give StandardModel. The identity chain map then has the
-required sign_projection, and its naturality is immediate.
-3. Use nativeStandardHomRepresentatives and underlyingStandardHomRepresentatives for the two
-derived extensions and their natural arbitrary-source/K-injective-target representative maps.
-The former also supplies the slice comparison with derivedHom, normalized by the actual
-bifunctorRHomOfComplexObjIso. Since the sign map is the identity, this is native_normalization.
-4. The actual forgetting functor preserves products and K-injectives by forgetKInjective.
-Its internal-Hom comparison is the identity on the underlying modules. Apply
-ringedHomComplexComparison using both standard models to obtain the chain comparison with
-its specified projection formula. Apply kInjectiveHomComparisonDescent to this comparison
-and the two representative systems. Its representative equation includes both localization
-factor legs and is exactly the final required compatibility. Assemble all fields. -/
+Source: Stacks 0A95 and 08J7. -/
 theorem native_two_injective_hom_model
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

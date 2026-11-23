@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Shift.Opposite
 
 /-! # Coefficients on the integer-labelled category
 
-Source: the coefficient part of step 3 of lem-sf-twisted-action-site-core.
 The given generator is extended using the source library's proved integer-shift
 extension theorem. No data are selected from an unproved existence statement.
 -/
@@ -28,9 +27,7 @@ namespace CategoryTheory.TwistedActionRingedSite.Construction
 
 variable {C : Type u} [SmallCategory C] (s : C ≌ C)
 
-/-- The identity action on the value category.
-Source: the constant shift by identity functors
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The identity action on the value category. -/
 def trivialShiftCore (A : Type v) [Category.{w} A] : ShiftMkCore A ℤ where
   F _ := 𝟭 A
   zero := Iso.refl _
@@ -39,9 +36,7 @@ def trivialShiftCore (A : Type v) [Category.{w} A] : ShiftMkCore A ℤ where
   zero_add_hom_app := by intros; simp
   add_zero_hom_app := by intros; simp
 
-/-- The opposite shift retains the integer label.
-Source: Mathlib's naive opposite shift
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The opposite shift retains the integer label. -/
 @[instance_reducible] noncomputable def opShift : HasShift Cᵒᵖ ℤ :=
   letI := shift s
   hasShiftMk Cᵒᵖ ℤ (HasShift.mkShiftCoreOp C ℤ)
@@ -51,9 +46,7 @@ variable (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})
     (a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R)
 
-/-- The comparison at positive one is forced by the given negative generator.
-Source: apply the chosen cancellation comparison and the inverse of a
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The comparison at positive one is forced by the given negative generator. -/
 noncomputable def positiveComparison : s.functor.op ⋙ R.obj ≅ R.obj := by
   let b : s.functor ⋙ s.inverse ≅ 𝟭 C := by
     change (s ^ (1 : ℤ)).functor ⋙ (s ^ (-1 : ℤ)).functor ≅ (s ^ ((-1 : ℤ) + 1)).functor
@@ -62,9 +55,7 @@ noncomputable def positiveComparison : s.functor.op ⋙ R.obj ≅ R.obj := by
     (Functor.associator _ _ _).symm ≪≫
     isoWhiskerRight (NatIso.op b.symm) R.obj ≪≫ R.obj.leftUnitor
 
-/-- A coherent comparison, chosen from a fully proved extension theorem.
-Source: `Functor.exists_commShift_of_one`
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- A coherent comparison, chosen from a fully proved extension theorem. -/
 @[instance_reducible] noncomputable def coefficientCommShift :
     letI := opShift s
     letI := hasShiftMk CommRingCat.{u} ℤ (trivialShiftCore CommRingCat.{u})
@@ -73,9 +64,7 @@ Source: `Functor.exists_commShift_of_one`
   letI := hasShiftMk CommRingCat.{u} ℤ (trivialShiftCore CommRingCat.{u})
   exact Classical.choose (R.obj.exists_commShift_of_one (positiveComparison s J R a))
 
-/-- The coherent comparison between each integer translate of R and R itself.
-Source: integer iteration of the positive comparison
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The coherent comparison between each integer translate of R and R itself. -/
 noncomputable def coefficientComparison (n : ℤ) : (s ^ n).functor.op ⋙ R.obj ≅ R.obj :=
   letI := opShift s
   letI := hasShiftMk CommRingCat.{u} ℤ (trivialShiftCore CommRingCat.{u})
@@ -83,9 +72,7 @@ noncomputable def coefficientComparison (n : ℤ) : (s ^ n).functor.op ⋙ R.obj
   R.obj.commShiftIso n
 
 omit [s.functor.IsContinuous J J] in
-/-- Its positive generator is the comparison from a.
-Source: the normalization of `exists_commShift_of_one`
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- Its positive generator is the comparison from a. -/
 theorem coefficientComparison_one :
     coefficientComparison s J R a 1 = positiveComparison s J R a := by
   let := opShift s
@@ -93,9 +80,7 @@ theorem coefficientComparison_one :
   exact Classical.choose_spec (R.obj.exists_commShift_of_one (positiveComparison s J R a))
 
 omit [s.functor.IsContinuous J J] in
-/-- Its zero generator is the identity.
-Source: the zero axiom of a coherent shift comparison
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- Its zero generator is the identity. -/
 theorem coefficientComparison_zero : coefficientComparison s J R a 0 = Iso.refl R.obj := by
   let := shift s
   let := opShift s
@@ -116,9 +101,7 @@ theorem coefficientComparison_zero : coefficientComparison s J R a 0 = Iso.refl 
   exact R.obj.map_id X
 
 omit [s.functor.IsContinuous J J] in
-/-- The scalar transport respects concatenation of integer-labelled arrows.
-Source: the addition axiom of a coherent shift comparison
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The scalar transport respects concatenation of integer-labelled arrows. -/
 theorem coefficientComparison_add (n m : ℤ) (Z : C) :
     (coefficientComparison s J R a (n + m)).inv.app (op Z) ≫
       R.obj.map ((powerComp s n m).hom.app Z).op =
@@ -151,9 +134,7 @@ theorem coefficientComparison_add (n m : ℤ) (Z : C) :
   exact Category.comp_id _
 
 omit [s.functor.IsContinuous J J] in
-/-- The originally prescribed minus-one ring map is recovered exactly.
-Source: the addition law at -1 and 1, followed by cancellation of a
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The originally prescribed minus-one ring map is recovered exactly. -/
 theorem coefficientComparison_neg_one_inv :
     (coefficientComparison s J R a (-1)).inv = a.inv.hom := by
   apply ((whiskeringLeft Cᵒᵖ Cᵒᵖ CommRingCat).obj s.functor.op).map_injective
@@ -184,18 +165,14 @@ theorem coefficientComparison_neg_one_inv :
   rw [ha]
   exact (Category.comp_id _).symm
 
-/-- The coefficient arrow map is an actual composite of ring homomorphisms.
-Source: semilinear extension of R to labelled arrows
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The coefficient arrow map is an actual composite of ring homomorphisms. -/
 noncomputable def coefficientMap {X Y : Object C}
     (f : Σ n : ℤ, X.base ⟶ (s ^ n).functor.obj Y.base) :
     R.obj.obj (op Y.base) ⟶ R.obj.obj (op X.base) :=
   (coefficientComparison s J R a f.1).inv.app (op Y.base) ≫ R.obj.map f.2.op
 
 omit [s.functor.IsContinuous J J] in
-/-- Ring transport reverses the explicitly specified arrow composition.
-Source: naturality and the addition identity for the coefficient comparisons
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- Ring transport reverses the explicitly specified arrow composition. -/
 theorem coefficientMap_comp {X Y Z : Object C}
     (f : Σ n : ℤ, X.base ⟶ (s ^ n).functor.obj Y.base)
     (g : Σ m : ℤ, Y.base ⟶ (s ^ m).functor.obj Z.base) :
@@ -215,9 +192,7 @@ theorem coefficientMap_comp {X Y Z : Object C}
       R.obj.map ((s ^ n).functor.map g).op at hn
   rw [← Category.assoc _ _ (R.obj.map f.op), ← hn, Category.assoc]
 
-/-- The presheaf of commutative rings on the labelled category.
-Source: the coherent comparisons and contravariant functoriality of R
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The presheaf of commutative rings on the labelled category. -/
 noncomputable def coefficientPresheaf :
     letI := category s
     (Object C)ᵒᵖ ⥤ CommRingCat.{u} := by
@@ -238,9 +213,7 @@ noncomputable def coefficientPresheaf :
     exact coefficientMap_comp s J R a g.unop.hom f.unop.hom
 
 omit [s.functor.IsContinuous J J] in
-/-- The coefficient map on a degree-zero arrow is the original restriction map.
-Source: the zero comparison
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The coefficient map on a degree-zero arrow is the original restriction map. -/
 theorem coefficientPresheaf_map_zero {X Y : C} (f : X ⟶ Y) :
     letI := category s
     (coefficientPresheaf s J R a).map ((inclusion s).map f).op = R.obj.map f.op := by
@@ -249,9 +222,7 @@ theorem coefficientPresheaf_map_zero {X Y : C} (f : X ⟶ Y) :
   rw [arrows_inclusion]
   simp [coefficientMap, coefficientComparison_zero]
 
-/-- Restriction of the constructed presheaf is naturally the original presheaf R.
-Source: the degree-zero normalization
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- Restriction of the constructed presheaf is naturally the original presheaf R. -/
 noncomputable def coefficientPresheafRestriction :
     letI := category s
     (inclusion s).op ⋙ coefficientPresheaf s J R a ≅ R.obj := by
@@ -264,9 +235,7 @@ noncomputable def coefficientPresheafRestriction :
   exact coefficientPresheaf_map_zero s J R a f.unop
 
 omit [s.functor.IsContinuous J J] in
-/-- The coefficient restriction at minus one is exactly the supplied generator.
-Source: the minus-one comparison and functoriality of the original ring presheaf
-(blueprint: lem-sf-twisted-action-coefficient). -/
+/-- The coefficient restriction at minus one is exactly the supplied generator. -/
 theorem coefficientPresheaf_generator (X : C) :
     letI := category s
     (coefficientPresheaf s J R a).map

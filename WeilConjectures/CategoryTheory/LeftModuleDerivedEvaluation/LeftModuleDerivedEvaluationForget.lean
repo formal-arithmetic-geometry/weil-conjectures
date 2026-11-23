@@ -32,8 +32,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Derived evaluation and forgetting constant left-module scalars
 
-Source: Stacks Project, sites-cohomology.tex, Tag 03FD, and derived.tex, Tags 05TA and 015E
-(blueprint: lem-pe-left-module-derived-evaluation-forget).
+Source: Stacks Project, sites-cohomology.tex, Tag 03FD, and derived.tex, Tags 05TA and 015E.
 -/
 
 @[expose] public noncomputable section
@@ -57,7 +56,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (Λ : Type u) [Ring Λ] [HasWeakSheafify J RingCat.{u}]
 
 /-- Restrict the sectionwise action along the constant-ring sheafification unit.
-Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 abbrev constantPresheafModules : Modules J Λ ⥤
     PresheafOfModules.{u} ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) :=
   SheafOfModules.forget ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) ⋙
@@ -65,29 +64,28 @@ abbrev constantPresheafModules : Modules J Λ ⥤
       (toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)))
 
 /-- Evaluation with its constant left `Λ`-action, including for noncommutative `Λ`.
-Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 abbrev G (W : C) : Modules J Λ ⥤ ModuleCat.{u} Λ :=
   constantPresheafModules J Λ ⋙
     PresheafOfModules.evaluation ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) (op W)
 
 /-- Evaluation on abelian sheaves.
-Source: Stacks, 01FT/03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 01FT/03FD. -/
 abbrev G₀ (W : C) : Sheaf J AddCommGrpCat.{u} ⥤ AddCommGrpCat.{u} :=
   (sheafSections J AddCommGrpCat.{u}).obj (op W)
 
 /-- The scalar-forgetting functor on left modules.
-Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 abbrev v : ModuleCat.{u} Λ ⥤ AddCommGrpCat.{u} :=
   forget₂ (ModuleCat.{u} Λ) AddCommGrpCat.{u}
 
 /-- The literal identity between the two underlying abelian evaluation functors.
-Source: Stacks, 03FD, first proof paragraph
-(blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 def evaluationIdentity (W : C) : G J Λ W ⋙ v Λ ≅ V J Λ ⋙ G₀ J W :=
   Iso.refl _
 
 /-- Restriction of evaluated left-module sections along an arrow in the site.
-Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 def restriction {W W' : C} (f : W' ⟶ W) : G J Λ W ⟶ G J Λ W' :=
   Functor.whiskerLeft (constantPresheafModules J Λ)
     (PresheafOfModules.restriction ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) f.op ≫
@@ -96,24 +94,24 @@ def restriction {W W' : C} (f : W' ⟶ W) : G J Λ W ⟶ G J Λ W' :=
         (ModuleCat.restrictScalarsId' (RingHom.id Λ) rfl).hom)
 
 /-- Restriction of evaluated abelian sections along the same site arrow.
-Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 abbrev restriction₀ {W W' : C} (f : W' ⟶ W) : G₀ J W ⟶ G₀ J W' :=
   (sheafSections J AddCommGrpCat.{u}).map f.op
 
 /-- Additivity inherited from Mathlib's presheaf scalar restriction and evaluation.
-Source: Stacks, 03FD (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD. -/
 instance gAdditive (W : C) : (G J Λ W).Additive :=
   inferInstanceAs ((constantPresheafModules J Λ ⋙
     PresheafOfModules.evaluation ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) (op W)).Additive)
 
 /-- Additivity inherited from the underlying presheaf evaluation.
-Source: Stacks, 01FT (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 01FT. -/
 instance g₀Additive (W : C) : (G₀ J W).Additive :=
   inferInstanceAs ((sheafToPresheaf J AddCommGrpCat.{u} ⋙
     (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op W)).Additive)
 
 /-- Exactness of scalar forgetting, from the recorded colimit theorem.
-Source: Stacks, 03DA/03DB (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03DA/03DB. -/
 instance vPreservesFiniteColimits : PreservesFiniteColimits (V J Λ) :=
   (moduleSheaves_colimits_forgetful
     ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))).2.2.1
@@ -124,7 +122,7 @@ variable [HasDerivedCategory.{w} (Modules J Λ)]
   [EnoughInjectives (Modules J Λ)] [EnoughInjectives (Sheaf J AddCommGrpCat.{u})]
 
 /-- The canonical derived square comparison, obtained from the underived identity.
-Source: Stacks, 03FD/05TA (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 03FD/05TA. -/
 def comparison (W : C) :
     (G J Λ W).rightDerivedFunctorPlus ⋙ (v Λ).mapDerivedCategoryPlus ⟶
       (V J Λ).mapDerivedCategoryPlus ⋙ (G₀ J W).rightDerivedFunctorPlus :=
@@ -132,7 +130,7 @@ def comparison (W : C) :
 
 /-- Pull a section back as a map from the terminal constant sheaf. This is the
 geometric adjunction's global-cohomology map before derivation.
-Source: Stacks, 00YV/0736 (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 00YV/0736. -/
 def pullbackSection {D : Type u} [SmallCategory D] (K : GrothendieckTopology D)
     {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
     (p : L.obj ((constantSheaf J (Type u)).obj PUnit.{u + 1}) ≅
@@ -160,7 +158,7 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
 /-- The canonical global pullback maps, normalized on sections using the geometric
 inverse image and its underlying-set comparisons. The normalization determines each
 component on every element, so the maps are unique.
-Source: Stacks, 00YV/0736 (blueprint: lem-pe-left-module-derived-evaluation-forget). -/
+Source: Stacks, 00YV/0736. -/
 structure GlobalPullback
     (d : ConstantLeftModuleInverseImageLift J K Λ L R adj hL)
     {T : C} (hT : IsTerminal T) {S : D} (hS : IsTerminal S) where

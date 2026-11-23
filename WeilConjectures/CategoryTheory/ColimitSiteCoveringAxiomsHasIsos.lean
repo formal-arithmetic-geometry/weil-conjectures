@@ -17,22 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 /-- Then every singleton presieve of an isomorphism belongs to $Q$.
-Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms-hasisos)
-
-Proof: Given an isomorphism f in the cocone category, represent f and its
-inverse using joint surjectivity of the arrow colimit. Move them to a common
-stage by filteredness. Their endpoint equalities hold in the object colimit;
-eventual equality moves to a later stage where the endpoints match literally.
-Transport the arrows along these equalities. The two inverse equations hold in
-the arrow colimit, so eventual equality and a common refinement make both hold
-at one further stage. Functoriality preserves these equations under refinement.
-The resulting stage arrow is an isomorphism, and its singleton is covering by
-(P j).HasIsos. A functor maps its singleton presieve to the singleton of its
-image. The equality of image arrows includes both endpoints, so transporting
-this singleton along the target equality gives exactly the singleton of f.
-The reverse implication in hQ makes that singleton a Q-cover. This proves
-Q.HasIsos. If the cocone category is empty there is no f to check. -/
+Source: Stacks Project, Sites, Tag 09YL. -/
 theorem colimit_site_covering_axioms_HasIsos
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

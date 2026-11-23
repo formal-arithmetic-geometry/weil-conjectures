@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Bottom edge factorization for a first-quadrant spectral object
 
-Source: Stacks Project, Tags 012K, 015J and 015N; image filtration of the abutment.
-(blueprint: lem-sc-spectral-object-bottom-filtration)
+Source: Stacks Project, Tags 012K, 015J and 015N.
 -/
 
 @[expose] public section
@@ -139,27 +138,7 @@ spectral object, after any specified isomorphism of its abutment. The filtration
 and its bounds are constructed separately; this theorem supplies only the
 graded comparisons and their compatibility with the iterated bottom projection.
 
-Source: Stacks Project, Tags 012K, 015J and 015N.
-(blueprint: lem-sc-spectral-object-bottom-filtration)
-
-Proof: The existing spectral-object abutment identifies raw consecutive image
-quotients with the stable page. Transport these cokernel isomorphisms by h and
-hT to obtain graded comparisons. Define the bottom-page map by the page
-comparison, iota-E, fromOpcycles, the inverse H(bottom,c) -> H(0,c), and the
-map to H(bottom,top). At page two it is the interval comparison followed by
-bottomEdge; at page p+2 it is monic by first-quadrant vanishing. The local
-cycles-to-homology compatibility square and ht identify its successor
-composites with t. Integer induction using hb2 and hbt gives b followed by
-the page-r map equal to the page-two map; the same induction proves b epi.
-The epi-mono factorization therefore identifies the stable bottom page with
-the image of bottomEdge, namely imageFiltration(p,1). Transport this mono
-through h to obtain k. Since T_p^(p+1) is bottom, the quotient projection is
-invertible. On the bottom row choose g to be that inverse projection followed
-by k inverse; off the bottom row use the previously constructed graded
-comparisons. The quotient identity follows by cancellation and the bottom
-factorization follows from the induction. All constructions also apply at
-p=0, where the first page and stable bottom page are both page two.
--/
+Source: Stacks Project, Tags 012K, 015J and 015N. -/
 theorem exists_spectral_object_bottom_filtration
     {C : Type u} [Category.{v} C] [Abelian C]
     (Y : Abelian.SpectralObject C EInt) [Y.IsFirstQuadrant]

@@ -27,21 +27,7 @@ namespace CategoryTheory
 
 /-- The sections of inverse images of sheafified representables form a cover.
 
-Source: Stacks Project, Sites, Tag 00WN; Modules on Sites, Tag 03DO (5).
-(blueprint: lem-weil-pbc-ringed-topos-pullback-cover-data).
-
-Proof: The canonical maps from the sheafifications of `yoneda.obj (Y i)` to the
-terminal sheaf are jointly epic. Indeed, the covering sieves `ofObjects Y W` locally
-supply arrows to some `Y i`, hence sections lifting the unique terminal section.
-A left adjoint preserves joint epimorphy: transpose two maps agreeing after all
-family members and cancel the original family. Since `L` preserves terminal objects,
-the inverse-image family is jointly epic over the target terminal sheaf. The local
-lifting criterion for jointly epic families therefore says that each object of `C`
-is covered by arrows whose domains carry a section of one of these inverse images.
-Such a domain is exactly an object indexed by the displayed dependent sum. Thus
-its `ofObjects` sieve contains a covering sieve, and the topology's upward-closure
-property proves the asserted `CoversTop`. This includes the empty covering family and
-degenerate topoi; no subcanonical topology or site-functor presentation is used. -/
+Source: Stacks Project, Sites, Tag 00WN; Modules on Sites, Tag 03DO (5). -/
 theorem inverseImage_section_cover
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

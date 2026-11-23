@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 /-! # Coproduct generators of shifted free quotient complexes
 
 Source: Stacks Project, Remark 15.60.11 (Tag 09PB).
-(blueprint: lem-pc-derived-shifted-free-coproduct).
 -/
 
 @[expose] public section
@@ -29,18 +28,7 @@ namespace CategoryTheory
 
 /-- A direct sum of complexes supported in single degrees becomes a coproduct of
 shifts of the rank-one module after localization and shift by `-1`.
-Source: Stacks Project, Remark 15.60.11 (Tag 09PB).
-(blueprint: lem-pc-derived-shifted-free-coproduct).
-
-Proof: apply `derivedModuleDirectSums` to the family of single complexes. Transport
-that coproduct along the image of the given quotient isomorphism under `Q`. The shift
-functor by `-1` is an equivalence and therefore preserves the coproduct. A single complex
-supported in degree `d` is the shift by `-d` of the complex supported in degree zero;
-compatibility of `Q` with shifts identifies its image with the corresponding shift of
-`singleFunctor 0`. Combine the shifts to obtain degree `-d - 1`, and precompose the
-shifted coprojections with these comparison isomorphisms. Isomorphic diagrams have
-isomorphic colimit cocones, which gives the asserted universal property. This argument
-also applies to the empty family and to a ring with `0 = 1`. -/
+Source: Stacks Project, Remark 15.60.11 (Tag 09PB). -/
 theorem derivedShiftedFreeCoproduct (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]
     (T : CochainComplex (ModuleCat.{max u v} R) ℤ)

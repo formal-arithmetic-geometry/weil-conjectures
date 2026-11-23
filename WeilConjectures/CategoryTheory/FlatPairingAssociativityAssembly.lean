@@ -19,11 +19,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Naturality and the canonical associator square imply associativity for arbitrary pairings.
-Source: Stacks, Cohomology on Sites, Tag 06YU, functorial tensor coherence.
-(auxiliary; not a blueprint node).
-Proof: move the two pairing arrows through the tensorators using naturality. Apply the
-canonical associator square to their common initial composite. Both remaining tails are
-the images of the two sides of the given ordinary associativity equation. -/
+Source: Stacks, Cohomology on Sites, Tag 06YU, functorial tensor coherence. -/
 theorem flatPairing_associativity_assembly
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [MonoidalCategory C] [MonoidalCategory D]

@@ -15,9 +15,8 @@ For adjunctions `c_! ⊣ c^!` and `d_! ⊣ d^!`, functors `ι^*` and `Δ^*` and 
 `σ : c_! ⋙ Δ^* ≅ ι^* ⋙ d_!`, the mate `c^! ⋙ ι^* ⟶ Δ^* ⋙ d^!` of `σ⁻¹` has component
 `ι^* c^! P ⟶ d^! Δ^* P` the `d_! ⊣ d^!` adjoint of `σ⁻¹` followed by `Δ^*` of the counit of
 `c_! ⊣ c^!` (`CategoryTheory.Adjunction.mateEquiv_app_eq_homEquiv`). For the fixed square
-of a correspondence this is the supported restriction of the trace formula (blueprint
-`lemma-local-term-restriction-map--1`). This file proves how it behaves under a change of
-coefficients `T` commuting with `c_!`, `d_!` and `Δ^*`.
+of a correspondence this is the supported restriction of the trace formula. This file proves
+how it behaves under a change of coefficients `T` commuting with `c_!`, `d_!` and `Δ^*`.
 
 ## Main statements
 
@@ -27,7 +26,6 @@ coefficients `T` commuting with `c_!`, `d_!` and `Δ^*`.
 - `CategoryTheory.Adjunction.exists_map_mateEquiv_app_comp_eq`: if the new `d_!` is full,
   `T` of the exchange restriction factors through the new exchange restriction, without any
   compatibility with the base change isomorphisms.
-
 -/
 
 @[expose] public section

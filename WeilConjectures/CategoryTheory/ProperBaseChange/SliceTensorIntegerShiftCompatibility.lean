@@ -29,10 +29,9 @@ import all WeilConjectures.Algebra.Homology.KFlatFixedTensor.KFlatFixedTensorTri
 
 /-! # Integer shifts of the normalized slice tensor comparison
 
-Source: Stacks Project, more-algebra.tex, Tag 0FNH, item-shift-tensor;
-sites-cohomology.tex, Tags 06YS, 06YU and 07A4. The slice squares and their
-representative-independent descent are the agent-written refinement in the DAG.
-(blueprint: lem-weil-pbc-slice-tensor-integer-shift-compatibility).
+## References
+
+* Stacks Project, Tag 0FNH, and Tags 06YS, 06YU and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +57,7 @@ namespace CategoryTheory
 
 /-- The two natural integer shift comparisons of a specified tensor bifunctor.
 Their normalization is stated separately on actual total-tensor representatives.
-Source: Stacks 0FNH, item-shift-tensor, and 06YU, 07A4
-(blueprint: lem-weil-pbc-slice-tensor-integer-shift-compatibility). -/
+Source: Stacks Tags 0FNH, 06YU and 07A4. -/
 structure TensorIntegerShiftComparisons
     {D : Type a} [Category.{b} D] [HasShift D ℤ] (B : D × D ⥤ D) where
   /-- Extract the shift in the first argument, naturally in both inputs. -/
@@ -228,8 +226,7 @@ private theorem coefficient_total_exists :
 
 /-- The canonical total shifts, characterized on sheafified pure-tensor summands.
 The first comparison is unsigned; the second has coefficient (-1)^(np).
-Source: Stacks 0FNH, item-shift-tensor, and 06YU, 07A4
-(blueprint: lem-weil-pbc-slice-tensor-integer-shift-compatibility). -/
+Source: Stacks Tags 0FNH, 06YU and 07A4. -/
 def TotalTensorIntegerShiftFormula
     (s : TensorIntegerShiftComparisons (coefficientTotalTensor.{u, c, v} J A)) : Prop :=
   (∀ (P Q : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J
@@ -250,15 +247,7 @@ def TotalTensorIntegerShiftFormula
 
 /-- Flat-term K-flat complexes remain so under all integer shifts, and the
 canonical natural chain shift comparisons exist.
-
-Proof: use the unsigned and signed total shifts of
-lem-weil-pbc-total-tensor-integer-shifts. If E is acyclic,
-Tot(E tensor P[n]) is the shift of Tot(E tensor P), hence acyclic by
-def-pc-kflat-complex; shifting reindexes kernels and images and changes
-differentials only by units. Terms of P[n] are terms of P, so remain flat.
-The summand formulas characterize the natural comparisons in both variables.
-Source: Stacks 0FNH, item-shift-tensor, and 06YU, 07A4
-(blueprint: lem-weil-pbc-slice-tensor-integer-shift-compatibility). -/
+Source: Stacks Tags 0FNH, 06YU and 07A4. -/
 theorem total_tensor_integer_shift_models :
     (∀ (P : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J
     (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ),

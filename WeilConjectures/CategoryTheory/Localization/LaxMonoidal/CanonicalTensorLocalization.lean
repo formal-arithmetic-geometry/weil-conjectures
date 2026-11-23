@@ -14,10 +14,6 @@ The tensorator of a lax monoidal functor descends as a natural transformation,
 without an invertibility assumption. This adapts Mathlib's strong monoidal descent
 proof, retaining the same coherence argument and recording the unit and tensor
 normalizations for the specified lifting isomorphism.
-
-Source: the canonical evaluation pairing in blueprint local boundary duality,
-Step 5, and Mathlib's `CategoryTheory.Localization.Monoidal.Functor`.
-(blueprint: lem-a1-canonical-lax-localization)
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -90,13 +86,7 @@ lemma laxTensor_app_app' {X₁ X₂ : C} {Y₁ Y₂ : D}
     tensorHom_comp_tensorHom, Iso.inv_hom_id, Iso.inv_hom_id, tensorHom_id, id_whiskerRight,
     Category.comp_id]
 
-/-- Descend a lax structure along `L`, normalized by the specified lifting isomorphism.
-
-Proof: lift the curried tensor natural transformation in both variables and transport
-its unit by the lifting isomorphism. Localization extensionality reduces all three
-coherence diagrams to those of `G` and `L`. Only the tensorators of `L` are inverted.
-Source: blueprint local boundary duality, Step 5; Mathlib's strong descent argument.
-(blueprint: lem-a1-canonical-lax-localization) -/
+/-- Descend a lax structure along `L`, normalized by the specified lifting isomorphism. -/
 @[simps!, instance_reducible]
 noncomputable def functorLaxMonoidalOfComp : F.LaxMonoidal := by
   letI e := Lifting.iso L W G F

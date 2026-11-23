@@ -22,7 +22,6 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 /-! The explicit basic complex `P₀` and its map `f₀` of Stacks Tag 0H7X.
 Global and filtered cocycles index a free zero-differential complex, with the filtration
 spanned by the filtered generators whose step index is at least the filtration index.
-(blueprint: lem-pur-kunneth-basic-filtered-surjection-global)
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ noncomputable def P0Index.map (R : Type u) [CommRing R]
   | Sum.inr z => z.2.1
 
 /-- The cochain complex which is free on `ι n` in degree `n`, with zero differential.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, construction of `P₀` (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable def freeZeroComplex (R : Type u) [CommRing R] (ι : ℤ → Type u) :
     CochainComplex (ModuleCat.{u} R) ℤ where
   X n := ModuleCat.of R (ι n →₀ R)
@@ -71,8 +69,7 @@ instance (R : Type u) [CommRing R] (ι : ℤ → Type u) (n : ℤ) :
   inferInstanceAs (Module.Free R (ι n →₀ R))
 
 /-- The map of free zero-differential complexes induced by maps of the generators.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, construction of `P₀` (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable def freeZeroComplexMap (R : Type u) [CommRing R] {ι ι' : ℤ → Type u}
     (g : ∀ n, ι n → ι' n) : freeZeroComplex R ι ⟶ freeZeroComplex R ι' where
   f n := ModuleCat.ofHom (Finsupp.lmapDomain R R (g n))
@@ -100,8 +97,7 @@ lemma mono_freeZeroComplexMap (R : Type u) [CommRing R] {ι ι' : ℤ → Type u
 
 /-- A chain map into a complex `M` whose components factor through a monomorphism `L ⟶ M`
 factors through `L` as a chain map.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, filtration of `P₀` (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem HomologicalComplex.exists_lift_of_degreewise_lift {V : Type*} [Category* V]
     [Abelian V] {ι : Type*} {c : ComplexShape ι} {A L M : HomologicalComplex V c}
     (i : L ⟶ M) [Mono i] (φ : A ⟶ M) (h : ∀ n, A.X n ⟶ L.X n)
@@ -114,9 +110,7 @@ theorem HomologicalComplex.exists_lift_of_degreewise_lift {V : Type*} [Category*
     exact hh n
 
 /-- A cocycle of a cochain complex of modules lifts to the cycles object.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, surjectivity of `f₀` on cohomology
-(blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem CochainComplex.exists_iCycles_eq_of_d_eq_zero {R : Type u} [CommRing R]
     (L : CochainComplex (ModuleCat.{u} R) ℤ) (n : ℤ) (x : L.X n)
     (hx : L.d n (n + 1) x = 0) : ∃ z : L.cycles n, L.iCycles n z = x := by
@@ -130,9 +124,7 @@ theorem CochainComplex.exists_iCycles_eq_of_d_eq_zero {R : Type u} [CommRing R]
 
 /-- A chain map of cochain complexes of modules is surjective on `Hⁿ` as soon as every
 `n`-cocycle of the target is the image of an `n`-cocycle of the source.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, surjectivity of `f₀` on cohomology
-(blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem CochainComplex.epi_homologyMap_of_forall_cocycle {R : Type u} [CommRing R]
     {L M : CochainComplex (ModuleCat.{u} R) ℤ} (φ : L ⟶ M) (n : ℤ)
     (h : ∀ x : M.X n, M.d n (n + 1) x = 0 →
@@ -163,21 +155,18 @@ lemma Subobject.ofLE_arrow_f_apply {R : Type u} [CommRing R]
 variable (R : Type u) [CommRing R] (K : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ))
 
 /-- The generators of `F^i P₀` in degree `n`: the filtered cocycles of `F^j K` with `j ≥ i`.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, construction of `P₀` (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 abbrev P0StepIndex (i n : ℤ) :=
   {z : Σ j : ℤ, P0StepCycle R K j n // i ≤ z.1}
 
 /-- The basic complex `P₀`: free on all global and filtered cocycles of `K`, with zero
 differential.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, construction of `P₀` (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable abbrev P0Complex : CochainComplex (ModuleCat.{u} R) ℤ :=
   freeZeroComplex R (P0Index R K)
 
 /-- The model of `F^i P₀`, free on the generators of `P0StepIndex`.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, construction of `P₀` (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable abbrev P0StepComplex (i : ℤ) : CochainComplex (ModuleCat.{u} R) ℤ :=
   freeZeroComplex R (P0StepIndex R K i)
 
@@ -213,8 +202,7 @@ noncomputable def P0Filtered : WeilFilteredObject (CochainComplex (ModuleCat.{u}
   filtration := P0Filtration R K
 
 /-- The map `f₀ : P₀ ⟶ K`, sending each generator to the cocycle that indexes it.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable def P0Map : P0Complex R K ⟶ K.obj where
   f n := ModuleCat.ofHom (Finsupp.linearCombination R (P0Index.map R K n))
   comm' p q hpq := by
@@ -272,8 +260,7 @@ theorem P0Map_preserves (i : ℤ) : ∃ lift : ((P0Filtered R K).filtration.F i 
     (congrArg (· ≫ P0Map R K) (Subobject.underlyingIso_hom_comp_eq_mk _))
 
 /-- `f₀` is surjective on cohomology in every degree.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof (blueprint: lem-pur-kunneth-basic-filtered-surjection-global). -/
+Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem epi_homologyMap_P0Map (n : ℤ) : Epi (HomologicalComplex.homologyMap (P0Map R K) n) := by
   refine CochainComplex.epi_homologyMap_of_forall_cocycle _ n fun x hx => ?_
   refine ⟨Finsupp.single (Sum.inl ⟨x, hx⟩) 1, rfl, ?_⟩

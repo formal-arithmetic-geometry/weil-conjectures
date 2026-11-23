@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.RationalSqu
 
 /-! # Finite-stage rational exchange and its coefficient coherence
 
-Source: sketch32, lines 1191--1228, 1262--1279 and 1291--1321
-(blueprint: lem-sbc-finite-stage-rational-exchange-coherence).
-
 The raw composites and exchange are the already published `sbcRationalLeft`,
 `sbcRationalRight` and `sbcRationalExchange`. The witness propositions below specify
 individual operations, canonical tensor comparisons, their units and towers, and

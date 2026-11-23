@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # Lifting a homology quotient through an epimorphism
 
-Source: blueprint def-sp-convergence, cycle/boundary recursion; Stacks Section 12.20
-(blueprint: lem-sp-subobject-homology-step).
+Source: Stacks Section 12.20.
 -/
 
 @[expose] public section
@@ -43,17 +42,9 @@ private theorem pullback_kernel {A B D : C} (f : A ⟶ B) (g : B ⟶ D) :
 
 /-- One local step of the cycle/boundary recursion, for a short complex and an epimorphic
 presentation of its middle object. Pull back its kernel and image to `Z`, then embed them
-in `T`, obtaining `Z'` and `B'`. The image of the incoming map lies in the outgoing kernel,
-so `B' ≤ Z' ≤ Z`. The old kernel lies in the inverse image of every subobject, so `B ≤ B'`.
-The pullback projection `Z' → kernel d` is uniquely specified by its composite with the
-kernel inclusion; pullback stability of epimorphisms makes it epi. Composing with the
-cokernel of `kernel.lift d b w` stays epi. The kernel of that composite is the inverse
-image of `image b`: the kernel of the cokernel in an abelian category is the image of its
-input, and inverse image commutes with kernel. Under the inclusion in `T`, that inverse
-image is exactly `B'`, hence the displayed kernel-subobject identity.
-This is a single local quotient step, with no grading, page recursion or infinite tower.
-Source: blueprint def-sp-convergence, sentences defining the successor cycles, boundaries
-and quotient; Stacks Section 12.20 (blueprint: lem-sp-subobject-homology-step). -/
+in `T`, obtaining `Z'` and `B'`, with `B' ≤ Z' ≤ Z`, `B ≤ B'`, and `Z' → kernel d`
+an epimorphism with kernel the inverse image of `image b`.
+Source: Stacks Section 12.20. -/
 theorem subobjectHomology_step {T E H F : C} (Z B : Subobject T) (hBZ : B ≤ Z)
     (π : (Z : C) ⟶ E) [Epi π]
     (hker : kernelSubobject π = Subobject.mk (Subobject.ofLE B Z hBZ))

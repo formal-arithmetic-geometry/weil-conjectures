@@ -14,7 +14,6 @@ import all WeilConjectures.CategoryTheory.Koszul.KoszulScalarFactorBasis
 /-! # KoszulScalarPositiveBasis for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-positive-basis).
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +44,7 @@ attribute [local instance] gradedTensorCache gradedGoodTensorLeftCache
   cachedComplexBraided cachedComplexClosed
 
 /-- The homogeneous summand inclusion is natural in both complexes.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-positive-basis). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem tensorInclusion_natural (O : Sheaf J CommRingCat.{u})
     (P Q P' Q' : ringedSiteComplex O) (f : P ⟶ P') (g : Q ⟶ Q')
     (p q n : ℤ) (h : p + q = n) :
@@ -131,16 +129,7 @@ private theorem scalarTensorMap_inclusion (φ : R ⟶ B)
 
 -- Normalize the recursive total-tensor basis and its component inclusions.
 /-- Scalar extension of every ordered positive Koszul basis vector.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Prove naturality of total tensor inclusions by the mapBifunctor inclusion formula.
-Transport inclusions across the total scalar tensor comparison using its inverse generator
-formula.
-Proof step 2: Induct on the length of the list. For zero entries use the rank-one comparison. In
-the successor case rewrite positiveBasis as the total tensor inclusion of the factor and tail
-basis; apply the factor basis comparison and the induction hypothesis. Tensor naturality, the
-scalar tensor inclusion identity and the scalar unit tensor formula identify the resulting
-composite with the image basis.
-(blueprint: lem-f5-koszul-scalar-positive-basis). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private theorem scalarPositiveBasis (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections) (m : ℕ) (b : Fin r → Bool) :
     (extension φ).map (positiveBasis R r a m b) ≫
