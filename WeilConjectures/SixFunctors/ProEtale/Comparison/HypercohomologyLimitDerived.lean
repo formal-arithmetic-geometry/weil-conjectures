@@ -382,13 +382,6 @@ lemma homologyFunctor_map_ι_sectionsColimitToRightDerivedGlobalSections (i : I)
   erw [← h]
   rfl
 
-/-- Filtered colimits of `Λ`-modules indexed by a small cofiltered category are exact. -/
-private lemma hasExactColimitsOfShape_moduleCat [IsCofiltered I] :
-    HasExactColimitsOfShape Iᵒᵖ (ModuleCat.{u + 1} Λ) := by
-  have : PreservesFilteredColimitsOfSize.{u, u} (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat) :=
-    preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
-  exact HasExactColimitsOfShape.domain_of_functor Iᵒᵖ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
-
 /-- **Cohomology of a pro-étale affine, in the derived category.** Let `K ∈ D⁺(X_ét, Λ)` and let
 `U = lim Uᵢ` be a cofiltered limit of affine étale `X`-schemes. Let `L` be a bounded below
 complex of injective étale sheaves with `e : Q(L) ≅ K`. Then the canonical map
@@ -400,7 +393,7 @@ theorem isIso_sectionsColimitToRightDerivedGlobalSections [IsCofiltered I]
     IsIso (sectionsColimitToRightDerivedGlobalSections K D c e) := by
   rw [DerivedCategory.isIso_iff]
   intro q
-  have : HasExactColimitsOfShape Iᵒᵖ (ModuleCat.{u + 1} Λ) := hasExactColimitsOfShape_moduleCat
+  have : AB5OfSize.{u, u} (ModuleCat.{u + 1} Λ) := AB5OfSize_of_univLE.{u, u, u + 1, u + 1} _
   have : PreservesFilteredColimitsOfSize.{u, u} (forget (ModuleCat.{u + 1} Λ)) :=
     preservesFilteredColimitsOfSize_of_univLE.{u + 1, u + 1, u, u} _
   let 𝒞 := Etale.restrictOverSectionsDiagram (ModuleCat.{u + 1} Λ) D L

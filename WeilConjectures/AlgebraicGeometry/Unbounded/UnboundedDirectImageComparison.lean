@@ -40,8 +40,7 @@ namespace AlgebraicGeometry.ProEtale
 algebraically closed field, `ℓ` a prime invertible in `k`, `A` a finite `ℓ`-primary ring and
 `g : X ⟶ Y` a morphism of schemes of finite type over `k`. For every
 `K ∈ D(X_ét, A)`, the comparison map `ν_Y^* Rg_* K ⟶ Rg_* ν_X^* K`
-(`AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap`) is an isomorphism. The proof only
-uses that `A` is finite and the finite type hypotheses. -/
+(`AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap`) is an isomorphism. -/
 theorem isIso_unboundedDirectImageComparisonMap
     (k : Type u) [Field k] (_hbase : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))
@@ -113,4 +112,5 @@ theorem isIso_unboundedDirectImageComparisonMap
     rw [← hw]
     infer_instance
   exact IsIso.of_isIso_comp_right _ ((DerivedCategory.homologyFunctor D m).map (S.map (FX.map f)))
+
 end AlgebraicGeometry.ProEtale

@@ -82,7 +82,9 @@ theorem shortComplex_exact_iff_forall_isWeaklyContractible (X : Scheme.{t})
   (sections_conservative X R).1 A B C f g h
 
 /-- An unbounded complex `K` of sheaves of `R`-modules on `X_proét` is acyclic if and only if
-the complex of sections `K(W)` is acyclic for every affine weakly contractible object `W`. -/
+the complex of sections `K(W)` is acyclic for every affine weakly contractible object `W`.
+For constant coefficients `Λ` this is
+`AlgebraicGeometry.ProEtale.acyclic_iff_forall_isWeaklyContractible`. -/
 theorem acyclic_iff_forall_isWeaklyContractible (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{u})
     (K : CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ) :

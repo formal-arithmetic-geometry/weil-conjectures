@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportRoot
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.IntegersModPow
+public import WeilConjectures.SmoothPurity.IntegralTateTwistExtendScalars
 public import WeilConjectures.TateTwist.Integral
 import all WeilConjectures.AlgebraicGeometry.PurityTransport.TransportRootPullStep
 
@@ -226,22 +227,22 @@ lemma tateModuleLevelSuccHom_naturality (n : ℕ) :
     tensorHom_comp_tensorHom, tensorHom_comp_tensorHom, Category.id_comp, Category.assoc,
     Category.assoc, spEllReduction_comp_transition, hc]
 
-/-- The shift `n ↦ n + 1` of `ℕᵒᵖ`. -/
-def succOpFunctor : ℕᵒᵖ ⥤ ℕᵒᵖ :=
+/-- The shift `n ↦ n + 1` of `ℕᵒᵖ`, reindexing the Tate module tower. -/
+def tateModuleIndexShift : ℕᵒᵖ ⥤ ℕᵒᵖ :=
   (show Monotone (fun n : ℕ ↦ n + 1) from fun _ _ h ↦ Nat.add_le_add_right h 1).functor.op
 
 /-- The shift `n ↦ n + 1` is initial in `ℕᵒᵖ`. -/
-instance : succOpFunctor.Initial :=
-  Functor.initial_of_exists_of_isCofiltered succOpFunctor
+instance : tateModuleIndexShift.Initial :=
+  Functor.initial_of_exists_of_isCofiltered tateModuleIndexShift
     (fun n ↦ ⟨n, ⟨(homOfLE (Nat.le_succ n.unop)).op⟩⟩)
     (fun {_ c} _ _ ↦ ⟨c, 𝟙 _, Subsingleton.elim _ _⟩)
 
 /-- The comparison of the shifted Tate module tower `n ↦ ℤ_ℓ ⊗ μ_{ℓ^{n+1}}` with the tower of
 `𝒪_{ℚ_ℓ,X}(1)`, restricted to `ℤ_{ℓ,X}`. -/
 noncomputable def tateModuleSystemShiftHom :
-    succOpFunctor ⋙ tateModuleSystem X ℓ ⟶ spIntegralTwistSystem X ℓ 𝔼 ⋙ Mod.comap φ :=
+    tateModuleIndexShift ⋙ tateModuleSystem X ℓ ⟶ spIntegralTwistSystem X ℓ 𝔼 ⋙ Mod.comap φ :=
   NatTrans.ofOpSequence (fun n ↦ tateModuleLevelSuccHom X ℓ n) (fun n ↦ by
-    have h : succOpFunctor.map (homOfLE (Nat.le_add_right n 1)).op =
+    have h : tateModuleIndexShift.map (homOfLE (Nat.le_add_right n 1)).op =
         (homOfLE (Nat.le_add_right (n + 1) 1)).op := Subsingleton.elim _ _
     simp only [Functor.comp_map, h, tateModuleSystem, spIntegralTwistSystem,
       Functor.ofOpSequence_map_homOfLE_succ]
@@ -260,19 +261,9 @@ noncomputable def tateModuleIsoComapSpIntegralTwist :
     tateModule X ℓ ≅ (Mod.comap φ).obj (spIntegralTwist X ℓ 𝔼) :=
   have : PreservesLimitsOfSize.{0, 0} (Mod.comap φ) :=
     (Mod.extendRestrictAdjunction φ).rightAdjoint_preservesLimits
-  (Functor.Initial.limitIso succOpFunctor (tateModuleSystem X ℓ)).symm ≪≫
+  (Functor.Initial.limitIso tateModuleIndexShift (tateModuleSystem X ℓ)).symm ≪≫
     HasLimit.isoOfNatIso (asIso (tateModuleSystemShiftHom X ℓ)) ≪≫
     (preservesLimitIso (Mod.comap φ) (spIntegralTwistSystem X ℓ 𝔼)).symm
-
-/-- The inclusions `𝒪̲_E ⟶ E̲ ⟶ ℚ̲̄_ℓ` compose to the inclusion `𝒪̲_E ⟶ ℚ̲̄_ℓ`. -/
-lemma padicIntegersRingObjToContinuousMapRingObj_comp_padicSubfieldRingObjToPadicAlgCl
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
-    padicIntegersRingObjToContinuousMapRingObj.{u} ℓ E ≫
-        Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E =
-      Profinite.padicIntegersRingObjToPadicAlgCl ℓ E.1 := by
-  rw [padicIntegersRingObjToContinuousMapRingObj, Profinite.padicSubfieldRingObjToPadicAlgCl,
-    Profinite.padicIntegersRingObjToPadicAlgCl, ← Functor.map_comp]
-  congr 1
 
 /-- The canonical isomorphism `ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1) ≅ ℚ̄_{ℓ,X} ⊗_{ℚ_{ℓ,X}} ℚ_{ℓ,X}(1)`,
 where `ℚ_{ℓ,X}(1) = 𝒪_{ℚ_ℓ,X}(1)[1/ℓ]` is the rational twist for the bottom field `E = ℚ_ℓ`:
@@ -284,8 +275,8 @@ noncomputable def tateTwistOneIsoExtendScalarsSpRationalTwist :
         (spRationalTwist X ℓ 𝔼) :=
   (extendScalarsIntegralTateTwistOneIso X ℓ (𝔼).1).symm ≪≫
     ((Mod.extendScalarsCompIsoOfEq (CondensedRing.coefficientMap_comp_eq _ _ _
-      (padicIntegersRingObjToContinuousMapRingObj_comp_padicSubfieldRingObjToPadicAlgCl ℓ 𝔼)
-        X)).app _).symm ≪≫
+      (Profinite.padicIntegersRingObjToContinuousMapRingObj_comp_padicSubfieldRingObjToPadicAlgCl
+        ℓ 𝔼) X)).app _).symm ≪≫
     (Mod.extendScalars (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ 𝔼) X)).mapIso
       ((Mod.extendScalars (padicIntegersToPadicSubfield X ℓ 𝔼)).mapIso
         ((Mod.extendScalars φ).mapIso (tateModuleIsoComapSpIntegralTwist X ℓ) ≪≫
