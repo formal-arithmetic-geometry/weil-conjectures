@@ -22,7 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.AdicCompletion
 
 /-- The actual Roos completion of a K-flat representative is itself complete.
-Source: Stacks 099B and 0A0E; blueprint det-pbc-complete-derived-completion
+Source: Stacks 099B and 0A0E; blueprint proposition-proper-base-change-complete-integral
 (auxiliary; not a blueprint node).
 
 Proof: choose the coefficient uniformizer endomorphism d. The normalized comparison

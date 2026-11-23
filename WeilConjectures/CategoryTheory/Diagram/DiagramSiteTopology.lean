@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Limits
 
 /-! The topology and coefficient sheaf used for a product-site realization.
 
-Source: Stacks Project, Sites, Tags 00Z4, 00Z8 and 00XA; explicit product-site
-construction (blueprint: lem-weil-pbc-diagram-site-topology).
+Source: Stacks Project, Sites, Tags 00Z4, 00Z8 and 00XA.
 -/
 
 @[expose] public section

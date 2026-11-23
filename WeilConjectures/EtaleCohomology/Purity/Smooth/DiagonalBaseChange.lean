@@ -266,7 +266,7 @@ theorem exchangeCompCompatible_diagonal_fst :
     rw [pullback.diagonal_fst]; infer_instance
   have : QuasiCompact (pullback.diagonal f' ≫ pullback.fst f' f') := by
     rw [pullback.diagonal_fst]; infer_instance
-  exact exchangeCompCompatible_rightDerivedLowerShriekCompIso _ _ _
+  exact exchangeCompCompatible_of_paste_vert _ _ _
 
 -- the ascription compares `dualizingComplex` with `R^!` of `constantComplex` (deep, fast)
 set_option maxRecDepth 20000 in

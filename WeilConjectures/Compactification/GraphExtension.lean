@@ -16,8 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 # Graph extension of a compactification
 
 This file constructs the **graph extension** of a compactification (Stacks Project
-Tag 0F3Z; blueprint `def:proper-extension`, `thm:0F3Z`, `def:nagata-graph-extension`,
-`lemma:nagata-graph-extension`; proof order item 33):
+Tag 0F3Z):
 
 - `AlgebraicGeometry.Compactification.ProperExtension`: the data of a graph extension of
   a compactification `c` of a quasi-compact open `V ⊆ U`;
@@ -48,7 +47,7 @@ section GraphExtension
 variable {S U : Scheme.{u}}
 
 /-- The data of a **graph extension** of a compactification `c` of a quasi-compact open
-`V ⊆ U` (Stacks Project Tag 0F3Z; blueprint: `def:nagata-graph-extension`). -/
+`V ⊆ U` (Stacks Project Tag 0F3Z). -/
 structure Compactification.ProperExtension (u : U ⟶ S) (V : U.Opens)
     (c : Compactification (V.ι ≫ u)) where
   /-- The `V`-admissible blow-up of the compactification. -/
@@ -80,14 +79,13 @@ attribute [instance] Compactification.ProperExtension.isProper_ψ
 
 /-- **Graph extension** (Stacks Project Tag 0F3Z): a compactification of a
 quasi-compact open `V ⊆ U` extends, after a `V`-admissible blow-up of the
-compactification, to a proper morphism `V^gr ⟶ U` restricting to the identity on `V`.
-(Blueprint: `lemma:nagata-graph-extension`; proof order item 33.) -/
+compactification, to a proper morphism `V^gr ⟶ U` restricting to the identity on `V`. -/
 theorem Compactification.nonempty_properExtension
     [CompactSpace S] [QuasiSeparatedSpace S] (u : U ⟶ S)
     [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     (V : U.Opens) (hV : IsCompact (V : Set U)) (c : Compactification (V.ι ≫ u)) :
     Nonempty (Compactification.ProperExtension u V c) := by
-  -- The graph construction of the blueprint: `V^gr` is the open strict transform of
+  -- The graph construction: `V^gr` is the open strict transform of
   -- the scheme-theoretic image of the graph `V ⟶ c.Z ×_S U`, supplied by the
   -- partial-section lemma (`partialSectionRestrictIso`), the image transport
   -- lemma (`Scheme.Hom.ker_lift_admissibleBlowup`) and elimination of indeterminacy
@@ -123,7 +121,7 @@ theorem Compactification.nonempty_properExtension
   have hV₀ : IsCompact ((c.i.opensRange : c.Z.Opens) : Set c.Z) :=
     isCompact_range c.i.continuous
   have hpV₀ : IsIso (p ∣_ c.i.opensRange) := isIso_restrict_imageι_comp_fst c.g u c.i γ hγfst
-  obtain ⟨B, hB⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hV₀ p hpV₀
+  obtain ⟨B, hB, -⟩ := exists_admissibleBlowup_isOpenImmersion_strictTransformMap hV₀ p hpV₀
   let π : B.I.blowup ⟶ c.Z := B.I.blowupMap
   let W : c.Z.Opens := B.preservedOpen
   have hOIst : IsOpenImmersion (strictTransformMap p π W) := hB

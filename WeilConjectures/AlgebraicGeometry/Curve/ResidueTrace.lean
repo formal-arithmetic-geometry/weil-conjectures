@@ -54,7 +54,7 @@ element of the field `Γ(X, 𝒪_X)`, hence a unit.
   `H¹(X, ℱ) ⊗ H⁰(X, ℱᵛ ⊗ ω) → H¹(X, ℱ ⊗ ℱᵛ ⊗ ω) → H¹(X, ω) → k` with the residue trace is
   perfect.
 
-(blueprint: `det-thm-picard-duality`)
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -203,7 +203,7 @@ variable [IsProper (X ↘ Spec (.of k))]
 Tate's abstract residue theorem `TateResidue.residue_theorem` for the local rings `𝒪_{X,x}`,
 whose hypotheses are the finiteness of `H⁰(X, 𝒪_X)` and `H¹(X, 𝒪_X)`.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem residueSum_differentialsPrincipalPartsMap [NoetherianSpace X]
     (hdim : topologicalKrullDim X ≤ 1) (η : Ω[X.functionField⁄k]) :
     residueSum k X (differentialsPrincipalPartsMap k hdim η) = 0 := by
@@ -232,7 +232,7 @@ theorem residueSum_differentialsPrincipalPartsMap [NoetherianSpace X]
 `∑_x res_x(η_x)` (`residueTrace_symm_mk`); it is well defined by the residue theorem
 `residueSum_differentialsPrincipalPartsMap`.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 noncomputable def residueTrace :
     Module.Dual k (Modules.H (X := X) (X ↘ Spec (.of k)).relativeDifferentials 1) :=
   have := SmoothOfRelativeDimension.smooth 1 (X ↘ Spec (.of k))
@@ -258,7 +258,7 @@ lemma residueTrace_symm_mk_eq_residueSum [NoetherianSpace X] [Smooth (X ↘ Spec
 `d ∈ ⨁_x Ω[K⁄k] ⧸ ω_x`, `d_x = η_x mod ω_x` for differentials `η_x ∈ Ω[K⁄k]`, then
 `t_X` takes the value `∑_x res_x(η_x)`, where `res_x` is Tate's residue at `x`.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 lemma residueTrace_symm_mk [NoetherianSpace X] [Smooth (X ↘ Spec (.of k))]
     (hdim : topologicalKrullDim X ≤ 1)
     (d : Π₀ x : closedPoints X, Ω[X.functionField⁄k] ⧸
@@ -379,7 +379,7 @@ free `ℱ` the trace pairing
 `H¹(X, ℱ) → H⁰(X, ℱᵛ ⊗ ω)^∨` are bijective. This is the case `n = 1` of Serre duality with the
 explicit trace of the blueprint.
 
-(blueprint: `det-thm-picard-duality`) -/
+(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
 theorem serreDuality_residueTrace (ℱ : X.Modules)
     (hℱ : SheafOfModules.IsFiniteLocallyFree (R := X.ringCatSheaf) ℱ) :
     Function.Bijective (Modules.cupPairing (residueTrace k X) ℱ) ∧

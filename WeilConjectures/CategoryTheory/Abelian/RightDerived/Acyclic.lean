@@ -86,7 +86,7 @@ instance : F.rightAcyclic.ContainsZero where
 
 variable {F}
 
-/-- Injective objects are `F`-acyclic. (blueprint: `lemma-weil-pbc-leray-acyclicity`, item 1) -/
+/-- Injective objects are `F`-acyclic. -/
 lemma rightAcyclic_of_injective (A : C) [Injective A] : F.rightAcyclic A :=
   fun q ↦ F.isZero_rightDerived_obj_injective_succ q A
 
@@ -157,9 +157,7 @@ bounded below and whose terms are all `F`-acyclic to an exact complex `F(K)`:
                       │ F
                       ▼
   0 ──▶ F Kᵃ ──F d──▶ F Kᵃ⁺¹ ──F d──▶ F Kᵃ⁺² ──▶ ⋯    exact
-```
-The proof is by dimension shifting: the short exact sequences `0 ⟶ Zⁿ ⟶ Kⁿ ⟶ Zⁿ⁺¹ ⟶ 0` of
-cycles show inductively that all `Zⁿ` are `F`-acyclic, so `F` keeps them short exact. -/
+``` -/
 theorem Acyclic.map_of_rightAcyclic {K : CochainComplex C ℤ} (hK : K.Acyclic) (F : C ⥤ D)
     [F.Additive] [PreservesFiniteLimits F] (a : ℤ) [K.IsStrictlyGE a]
     (hK' : ∀ n, F.rightAcyclic (K.X n)) :
@@ -214,9 +212,7 @@ quasi-isomorphism `F(φ) : F(K) ⟶ F(L)`:
      │F φᵃ          │F φᵃ⁺¹
      ▼              ▼
     F Lᵃ ──F d──▶ F Lᵃ⁺¹ ──F d──▶ ⋯
-```
-The proof applies `HomologicalComplex.Acyclic.map_of_rightAcyclic` to the mapping cone.
-(blueprint: `lem-weil-pbc-leray-acyclicity-quasi-iso`) -/
+``` -/
 theorem quasiIso_map_of_rightAcyclic {K L : CochainComplex C ℤ} (φ : K ⟶ L) [QuasiIso φ]
     (a : ℤ) [K.IsStrictlyGE a] [L.IsStrictlyGE a] (hK : ∀ n, F.rightAcyclic (K.X n))
     (hL : ∀ n, F.rightAcyclic (L.X n)) :
@@ -233,8 +229,8 @@ theorem quasiIso_map_of_rightAcyclic {K L : CochainComplex C ℤ} (φ : K ⟶ L)
 
 /-- The `ℕ`-indexed version of `Functor.quasiIso_map_of_rightAcyclic`: `F` sends a
 quasi-isomorphism `φ : K ⟶ L` between `ℕ`-indexed cochain complexes whose terms are all
-`F`-acyclic to a quasi-isomorphism `F(φ) : F(K) ⟶ F(L)`. The proof extends `φ` to `ℤ` along
-`e = ComplexShape.embeddingUpNat` and uses that `F` commutes with extension:
+`F`-acyclic to a quasi-isomorphism `F(φ) : F(K) ⟶ F(L)`. The diagram uses that `F` commutes
+with extension along `e = ComplexShape.embeddingUpNat`:
 ```
   F(K.extend e) ──F(extendMap φ e)──▶ F(L.extend e)
         │ ≅ mapExtendIso                    │ ≅ mapExtendIso
@@ -266,8 +262,7 @@ complex `I` of `F`-acyclic objects to an injective resolution `J` of `X`:
 ```
     R^q F X ──J.isoRightDerivedObj F q──▶ H^q(F J) ◀──H^q(F φ)── H^q(F I)
 ```
-`H^q(F φ)` is an isomorphism by `Functor.quasiIso_map_of_rightAcyclic_nat`. This generalises
-`InjectiveResolution.isoRightDerivedObj`. -/
+`H^q(F φ)` is an isomorphism by `Functor.quasiIso_map_of_rightAcyclic_nat`. -/
 @[simps!]
 noncomputable def isoRightDerivedObjOfQuasiIso (hI : ∀ n, F.rightAcyclic (I.X n)) (q : ℕ) :
     (F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q :=
@@ -291,8 +286,7 @@ It is `InjectiveResolution.isoRightDerivedObjOfQuasiIso` applied to the lift
         ╲          │ φ = descOfQuasiIso (𝟙 X) J ι
       J.ι ╲        ▼
             ╲────▶ J
-```
-(blueprint: `lemma-weil-pbc-leray-acyclicity`, item 2) -/
+``` -/
 noncomputable def rightDerivedObjIsoOfResolution (hI : ∀ n, F.rightAcyclic (I.X n)) (q : ℕ) :
     (F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q :=
   (injectiveResolution X).isoRightDerivedObjOfQuasiIso F
@@ -302,8 +296,7 @@ include ι in
 /-- **Acyclic resolutions compute right derived functors.** Let `F : C ⥤ D` be a left exact
 additive functor. If `ι : single₀ X ⟶ I` is a resolution `X → I⁰ → I¹ → ⋯` of `X` by
 `F`-acyclic objects, then `R^q F X ≅ H^q(F I)` for all `q`. The witness is the natural
-isomorphism `Functor.rightDerivedObjIsoOfResolution`. (blueprint: `sk-thm-acyclicity`;
-`lemma-weil-pbc-leray-acyclicity`, item 2) -/
+isomorphism `Functor.rightDerivedObjIsoOfResolution`. -/
 theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyclic (I.X n))
     (q : ℕ) :
     Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) :=
@@ -324,11 +317,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [HasInjectiveReso
 /-- **A criterion for acyclicity.** Let `P` be a property of objects of `C` which holds for the
 injective objects and passes to the cokernel of a monomorphism between objects of `P`, and such
 that `F` sends every short exact sequence `0 ⟶ A ⟶ B ⟶ C ⟶ 0` with `A` in `P` to an
-epimorphism `F B ⟶ F C`. Then every object of `P` is `F`-acyclic.
-
-Embed `A` into an injective object `I`, with cokernel `Q` in `P`. In the long exact sequence
-`R^q F I ⟶ R^q F Q ⟶ R^{q+1} F A ⟶ R^{q+1} F I = 0`, the first map is an epimorphism for
-`q = 0`, and `R^q F Q = 0` for `q > 0` by induction. -/
+epimorphism `F B ⟶ F C`. Then every object of `P` is `F`-acyclic. -/
 theorem rightAcyclic_of_epi_map_g (P : ObjectProperty C) (hinj : ∀ (I : C) [Injective I], P I)
     (hX₃ : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → P S.X₂ → P S.X₃)
     (hepi : ∀ S : ShortComplex C, S.ShortExact → P S.X₁ → Epi (F.map S.g)) {A : C}

@@ -12,11 +12,7 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # The augmented derived tower unit
 
-Source: Stacks Project, Tag 099M (`proetale.tex`, lemma-naive-completion),
-agent-written categorical refinement of the canonical completion-map construction
-(blueprint: lem-weil-pbc-augmented-derived-tower-unit).
-
-## Main statements
+## Main results
 
 - `CategoryTheory.exists_augmentedDerivedTowerUnit`: the two unique natural lifts and
   their ordinary-unit normalization at every object.
@@ -25,6 +21,10 @@ agent-written categorical refinement of the canonical completion-map constructio
 
 The functor `RF` and comparison `γ` are supplied data. The property
 `CategoryTheory.IsDerivedLimit` alone does not choose either of them.
+
+## References
+
+* Stacks Project, Tag 099M.
 -/
 
 @[expose] public section
@@ -34,30 +34,8 @@ universe u₀ u₁ u₂ u₃ v₀ v₁ v₂ v₃
 namespace CategoryTheory
 
 /-- The universal right Kan lift and the localization lift give a normalized completion map.
-
-Source: Stacks Project, Tag 099M, canonical completion-map context; agent-written
-categorical refinement (blueprint: lem-weil-pbc-augmented-derived-tower-unit).
-Here `v ≫ whiskerRight t RF` is the natural transformation called `c` in the node.
-
-Proof:
-1. The composite `α.hom ≫ whiskerRight η q'` is natural. The universal right Kan
-   property of `(LT, β)` gives the unique `t` with the first displayed equation.
-2. Compose `q.map (ν.app X)`, `γ.app (G.obj X)`, and `RF.map (α.inv.app X)`.
-   These components form a natural transformation from `q` to `q ⋙ DG ⋙ RF`.
-   Clause (2) of lem-weil-pbc-localization-universal-property, implemented by
-   `Localization.liftNatTrans`, lifts it uniquely to `v`. Functors preserve
-   isomorphisms, so both source functors invert `W`. Cancel `RF.map (α.hom.app X)`
-   to obtain the displayed characterization of `v` and its uniqueness.
-3. For the composite `c`, functoriality of `RF` and the equation for `t` give
-   `RF(β_X)c_(qX) = RF(q'(η_X))RF(α_X)v_(qX)`. The equation for `v`, followed by
-   naturality of `γ` at `η.app X` and functoriality of `q`, gives the final equation.
-   Only `α` is inverted; neither `β` nor `γ` must be invertible. No adjunction is used.
-4. In the tower specialization, def-weil-inverse-system supplies the strict towers
-   and natural augmentation. The unit of `constLimAdj` has identity projections;
-   applying `limMap_π` therefore identifies the ordinary composite with the lift
-   of the augmentation cone. This is `towerAugmentation_ordinaryUnit` below.
-   Substitution gives the actual ordinary-map normalization on every complex.
-   The Roos property of def-weil-derived-limit is not used to choose `RF` or `γ`. -/
+Here `v ≫ whiskerRight t RF` is the natural transformation called `c` in the original
+construction. Stacks Project, Tag 099M. -/
 theorem exists_augmentedDerivedTowerUnit
     {C₀ : Type u₀} {C₁ : Type u₁} {D₀ : Type u₂} {D₁ : Type u₃}
     [Category.{v₀} C₀] [Category.{v₁} C₁] [Category.{v₂} D₀] [Category.{v₃} D₁]

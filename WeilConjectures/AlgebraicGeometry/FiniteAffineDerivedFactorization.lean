@@ -27,8 +27,14 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
--- Unfolding the two ring-sheaf presentations and the derived composition consumes extra heartbeats.
+private lemma moduleDirectImage_restrictScalars_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    RingedSpace.moduleDirectImage (toDirectImageAlgebraSpace f) ⋙
+      SheafOfModules.restrictScalars
+        (R := moduleRings Y.toRingedSpace)
+        (R' := moduleRings (directImageAlgebraSpace f))
+        ⟨Functor.whiskerRight f.c (forget₂ CommRingCat RingCat)⟩ =
+      RingedSpace.moduleDirectImage f.toLRSHom.toShHom := rfl
+
 /-- Scalar restriction of the algebra-valued derived pushforward is the scheme pushforward.
 Source: Stacks Project, Tag 0AVW, final pushforward identification
 (blueprint: lem-sc-finite-affine-derived-factorization).
@@ -73,10 +79,14 @@ theorem finite_affine_derived_factorization {X Y : Scheme.{u}}
     sheafAlgebraRestrictScalars_preservesFiniteColimits Y
       (Under.mk (⟨f.c⟩ : Y.sheaf ⟶
         (TopCat.Sheaf.pushforward CommRingCat f.base).obj X.sheaf))
-  let e : F ⋙ S ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom := Iso.refl _
-  exact ⟨Functor.isoWhiskerLeft F.rightDerivedFunctor
-      S.rightDerivedFunctorIsoMapDerivedCategory ≪≫
-    (Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S).symm ≪≫
-    Functor.rightDerivedFunctorNatIso e⟩
+  let e : F ⋙ S ≅ RingedSpace.moduleDirectImage f.toLRSHom.toShHom :=
+    eqToIso (moduleDirectImage_restrictScalars_eq f)
+  let eS : S.rightDerivedFunctor ≅ S.mapDerivedCategory :=
+    S.rightDerivedFunctorIsoMapDerivedCategory
+  let eComp : (F ⋙ S).rightDerivedFunctor ≅ F.rightDerivedFunctor ⋙ S.mapDerivedCategory :=
+    Functor.rightDerivedFunctorCompMapDerivedCategoryIso F S
+  let eF : (F ⋙ S).rightDerivedFunctor ≅ schemeDerivedDirectImage f :=
+    Functor.rightDerivedFunctorNatIso e
+  exact ⟨Functor.isoWhiskerLeft F.rightDerivedFunctor eS ≪≫ eComp.symm ≪≫ eF⟩
 
 end AlgebraicGeometry

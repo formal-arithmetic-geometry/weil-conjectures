@@ -27,13 +27,14 @@ the preservation clauses for `Rf^!`:
 ## Main statements
 
 - `Etale.preservation_rightDerivedUpperShriek_of_openComplementBound_constructible`
-  (`thm-pur-general-admissibility`, constructibility clause).
+  (`theorem-f-shriek-finite-coefficients`, constructibility clause).
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_unconditional`
-  (`cor-pur-general-admissibility-datum`): the open-complement condition holds with
+  (`theorem-f-shriek-finite-coefficients--1`): the open-complement condition holds with
   `c_U = 2 (d_U + dim Y)` over a separably closed field.
 - `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_class`
-  (`thm-sf-preservation-class`): `Rf^!` sends `D_c^[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`,
-  with the same Tor bound, at every finite coefficient ring at once.
+  (`theorem-f-shriek-finite-coefficients--1`): `Rf^!` sends `D_c^[a, b]` into
+  `D_c^[a - 2D, b + 2 dim Y + 1]`, with the same Tor bound, at every finite coefficient ring at
+  once.
 -/
 
 @[expose] public section

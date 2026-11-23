@@ -107,15 +107,7 @@ private noncomputable def coyonedaDerivedZeroOnComplexes (P : A) :
 
 /-- Additive coyoneda derived by K-injective resolutions computes maps from a single
 complex, naturally on the unbounded derived category and in every integer degree.
-Source: Stacks Project, Tags 08JJ and 0A8Z.
-(auxiliary; not a blueprint node)
-
-Proof: on K-injective complexes, zeroth homology of the ordinary Hom complex is the
-additive group of homotopy classes, and localization identifies these with derived maps.
-The comparison to the right derived functor is invertible on K-injectives.  Apply these
-natural identifications after a functorial K-injective resolution and descend through
-localization.  Commutation of right derivation with shift and the cohomology shift
-isomorphism give every integer degree. -/
+Source: Stacks Project, Tags 08JJ and 0A8Z. -/
 theorem derived_coyoneda_evaluation (P : A) (n : ℤ) : Nonempty
     (shiftFunctor (DerivedCategory A) n ⋙
         preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor A 0).obj P)) ≅

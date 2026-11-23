@@ -29,7 +29,6 @@ over `Z°`, and `A ∪ V` is dense in `B`. Such density statements identify inve
 (`AlgebraicGeometry.isPullback_id_of_dense`): an open `N ⊆ B` over an open `N ⊆ X` along a
 separated `B ⟶ X` is the whole inverse image as soon as a dense subset of `B` meets the inverse
 image only in `N`, the section `N ⟶ B ×_X N` being open, closed and dense.
-
 -/
 
 @[expose] public section

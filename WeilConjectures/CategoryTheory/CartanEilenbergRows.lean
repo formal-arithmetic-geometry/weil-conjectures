@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Compatible rows for the Cartan--Eilenberg construction
 
-Source: Stacks Project, Derived Categories, Lemma 015I, alternating short exact rows
-(blueprint: def-sp-cartan-eilenberg-rows).
+Source: Stacks Project, Derived Categories, Lemma 015I, alternating short exact rows.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ universe u v
 
 /-- Two alternating short exact rows, with their compatible augmentations.
 These are genuine diagram data, with no injectivity or quasi-isomorphism assumptions.
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: def-sp-cartan-eilenberg-rows). -/
+Stacks Project, Derived Categories, Lemma 015I. -/
 structure CartanEilenbergRows {C : Type u} [Category.{v} C] [Abelian C]
     (S : CochainComplex C ℤ) where
   A : ℤ → C
@@ -56,8 +54,7 @@ namespace CartanEilenbergRows
 variable {C : Type u} [Category.{v} C] [Abelian C] {S : CochainComplex C ℤ}
 
 /-- The horizontal differential is the composite through the boundary and cycle rows.
-Source: Stacks Project, Derived Categories, Lemma 015I, last paragraph
-(blueprint: def-sp-cartan-eilenberg-rows). -/
+Source: Stacks Project, Derived Categories, Lemma 015I, last paragraph. -/
 noncomputable def complex (R : CartanEilenbergRows S) : CochainComplex C ℤ where
   X := R.A
   d p q := if h : p + 1 = q then
@@ -72,16 +69,14 @@ noncomputable def complex (R : CartanEilenbergRows S) : CochainComplex C ℤ whe
     subst r
     simp [Category.assoc, reassoc_of% (R.uv (p + 1))]
 
-/-- In adjacent degrees the differential is the prescribed composite. 
-(blueprint: def-sp-cartan-eilenberg-rows)
+/-- In adjacent degrees the differential is the prescribed composite.
 -/
 @[simp] theorem complex_d (R : CartanEilenbergRows S) (p : ℤ) :
     R.complex.d p (p + 1) = R.v p ≫ R.w (p + 1) ≫ R.u (p + 1) := by
   simp [complex]
 
 /-- The row augmentations form a morphism of complexes.
-Source: Stacks Project, Derived Categories, Lemma 015I, last paragraph
-(blueprint: def-sp-cartan-eilenberg-rows). -/
+Source: Stacks Project, Derived Categories, Lemma 015I, last paragraph. -/
 noncomputable def augmentation (R : CartanEilenbergRows S) : S ⟶ R.complex where
   f := R.jA
   comm' p q hpq := by

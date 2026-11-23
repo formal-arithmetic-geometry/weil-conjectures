@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient
 
 /-! # The second-filtration spectral sequence and its total abutment
 
-Source: blueprint thm-sp-if-e1, proof paragraph 1; Stacks Tags 0130 and 0132.
-(blueprint: lem-sp-cartan-eilenberg-second-filtration).
+Source: Stacks Tags 0130 and 0132.
 -/
 
 @[expose] public section
@@ -32,29 +31,7 @@ namespace CategoryTheory.Functor
 /-- The resolution-degree cohomology spectral sequence converges to the cohomology
 of the mapped total complex. Its filtration may be transported to any isomorphic family.
 This statement makes no claim that this total computes a derived functor on complexes.
-Source: blueprint thm-sp-if-e1, proof paragraph 1; Stacks Tags 0130 and 0132.
-(blueprint: lem-sp-cartan-eilenberg-second-filtration).
-
-Proof.
-1. Form the filtration by complex degree of the flipped, extended, F-mapped bicomplex.
-The total differential preserves or raises complex degree, so these are subcomplexes.
-If b bounds I below, the step is the whole object for p at most b and zero for p>n
-in total degree n. This proves degreewise finiteness, also for n<b.
-2. Apply the filtered-complex construction, retaining its page-zero differential and
-cycle/boundary quotient identifications. Its first page is row cohomology, zero in
-negative resolution degree. Each augmented row is an injective resolution by hterms
-and hrows, so its F-cohomology is the ordinary right derived functor on K^s.
-3. The second-filtration differential is (-1)^r times the row-cohomology map induced
-by the complex differential (Stacks 0130). Multiply the row identification at (s,r)
-by (-1)^(rs). The factors in consecutive complex degrees differ by (-1)^r, giving
-the unsigned differential in the statement for all integer s and natural r.
-4. In total degree n, the filtration and the adjacent degrees have finite support.
-For a sufficiently large page the cycle and boundary subobjects are stationary and
-their quotient is the graded piece of the image filtration on total cohomology.
-That image filtration is finite. For any given family of isomorphisms c, take images
-of its steps along c.hom. An isomorphism preserves top, bottom, inclusions and their
-cokernels, so the transported filtration is finite, has the displayed steps, and
-its graded pieces are isomorphic to the same stationary spectral-sequence terms. -/
+Source: Stacks Tags 0130 and 0132. -/
 theorem cartanEilenberg_second_filtration
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

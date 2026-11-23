@@ -12,16 +12,24 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitTransport
+import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 
 /-!
 # The forward cochain tensor counit square
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, tensor pullback comparison.
-Unpack the defining equation of the published comparison on homotopy objects. Its two
-counits are the tensor of the pullback counits followed by the target tensorator, and
-the source tensorator followed by the pullback counit. Evaluate at the homotopy
-quotients of the two complexes, expand the native cochain tensorator transport, and
-identify the pullback counits with the canonical exact-derived factors.
+The derived pullback tensor comparison satisfies the forward counit square on cochain complexes.
+
+## Implementation details
+
+The defining equation of the comparison (`leftDerivedUpperStarTensorComparison_app_app_fac`) is
+evaluated at the homotopy quotients of the two complexes; the cochain tensorators agree with the
+homotopy tensorators (`cochainLocalization_tensorator_eq`), and
+`leftDerivedFactors_eq_counit` identifies the pullback counits with the exact-derived factors.
+No tensorator is inverted.
+
+## References
+
+* Stacks Project, Tag 07A4, tensor pullback comparison
 -/
 
 @[expose] public section
@@ -77,17 +85,8 @@ local notation "ShX" => Sheaf (Scheme.ProEt.topology X) (ModuleCat A)
 local notation "ShU" => Sheaf (Scheme.ProEt.topology U) (ModuleCat A)
 local notation "pull" => (j)^*[ModuleCat A]
 
-set_option maxHeartbeats 1000000 in
--- Checking the concrete native sheaf tensor instances requires a larger kernel budget.
-/-- The published comparison satisfies its forward counit square on arbitrary complexes.
-
-Proof. Apply `leftDerivedUpperStarTensorComparison_app_app_fac` to the homotopy
-quotients of `P` and `Q`. Expand the two counits and combine their whiskered components
-into a tensor of morphisms. The cochain tensorators equal the homotopy tensorators by
-`cochainLocalization_tensorator_eq`; the homotopy oplax comparison is the quotient of
-the signed-total cochain comparison. Finally `leftDerivedFactors_eq_counit` identifies
-each pullback counit with its exact-derived factors. No tensorator is inverted.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-forward-transport) -/
+/-- The derived pullback tensor comparison satisfies its forward counit square on arbitrary
+complexes `P` and `Q`. -/
 theorem forward_transport
     (P Q : CochainComplex ShX ℤ) :
     ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso
@@ -116,24 +115,7 @@ theorem forward_transport
       (DerivedCategory.Q (C := ShU)).map
         (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
           pull).app P).app Q) := by
-  rw [CategoryTheory.Functor.leftDerivedFactors_eq_counit,
-    CategoryTheory.Functor.leftDerivedFactors_eq_counit,
-    CategoryTheory.Functor.leftDerivedFactors_eq_counit]
-  rw [CategoryTheory.Functor.cochainLocalization_tensorator_eq,
-    CategoryTheory.Functor.cochainLocalization_tensorator_eq]
-  have h := leftDerivedUpperStarTensorComparison_app_app_fac
-    (A := ModuleCat.{u + 1} A) j
-    ((HomotopyCategory.quotient ShX (.up ℤ)).obj P)
-    ((HomotopyCategory.quotient ShX (.up ℤ)).obj Q)
-  rw [leftDerivedUpperStarDerivedTensorCounit_app_app,
-    derivedTensorLeftDerivedUpperStarCounit_app_app] at h
-  dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂,
-    Functor.whiskeringLeft, Functor.whiskeringRight, Functor.comp_obj] at h
-  with_unfolding_all
-    simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
-      mapH_quotient, quotient_tensor, cochain_tensor_obj,
-      Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
-      Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc, cast_eq] using h
+  exact forward_transport_general (ModuleCat.{u + 1} A) j P Q
 
 end MixedRepForward
 end AlgebraicGeometry.ProEtale

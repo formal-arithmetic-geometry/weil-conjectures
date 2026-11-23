@@ -18,20 +18,21 @@ structure morphism `a_X : X ⟶ Spec k`, and `Λ` a finite commutative ring whos
 invertible in `k` (an `ℓ`-primary ring with `ℓ ≠ char k`). For `K ∈ Dctf(X, Λ)` the complexes
 `RΓ_c(X, K)` and `K_x̄`, for `x̄` a geometric point of `X`, are perfect complexes of
 `Λ`-modules, so the traces of their endomorphisms are defined
-(`DerivedCategory.IsPerfect.categoricalTrace`). This is blueprint `sk-lem-tf-compact-trace`.
+(`DerivedCategory.IsPerfect.categoricalTrace`). This is blueprint
+`lemma-perfect-complexes-geometric-point`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerShriek_and_geometricStalk`
-  (`det-compact-trace-point-objects`): `Ra_{X!} K ∈ Dctf(Spec k, Λ)`, and every geometric stalk
-  `K_x̄` is bounded with finitely generated cohomology and of finite Tor amplitude.
+  (`lemma-perfect-complexes-geometric-point`): `Ra_{X!} K ∈ Dctf(Spec k, Λ)`, and every geometric
+  stalk `K_x̄` is bounded with finitely generated cohomology and of finite Tor amplitude.
 - `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_and_geometricStalk`
-  (`sk-lem-tf-compact-trace`, `det-compact-trace-perfect-at-point`): `RΓ_c(X, K)` and every
-  `K_x̄` are perfect.
+  (`lemma-perfect-complexes-geometric-point`, `lemma-perfect-complexes-geometric-point--1`):
+  `RΓ_c(X, K)` and every `K_x̄` are perfect.
 
 ## Implementation notes
 
-The algebraic statement `det-compact-trace-perfect-at-point` (a bounded complex over a
+The algebraic statement `lemma-perfect-complexes-geometric-point--1` (a bounded complex over a
 Noetherian, e.g. finite, ring with finitely generated cohomology and finite Tor amplitude is
 perfect) is `DerivedCategory.isPerfect_of_finiteTorAmplitude` and is not restated here.
 
@@ -58,13 +59,14 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
 
-/-- Blueprint `det-compact-trace-point-objects`: the point objects in the compact trace lemma.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: the point objects in the compact trace
+lemma.
 
 Let `k` be algebraically closed, `X` separated of finite type over `k` with structure morphism
 `a_X`, `Λ` a finite ring whose exponent is invertible in `k` and `K ∈ Dctf(X, Λ)`. Then
-`Ra_{X!} K` lies in `Dctf(Spec k, Λ)` (`sk-thm-sf-ctf-stability`, clause (iv), for `f = a_X`),
-and for every geometric point `x̄ : Spec Ω ⟶ X` the stalk `K_x̄ = RΓ(Spec Ω, Lx̄^* K)` is a
-bounded complex of `Λ`-modules with finitely generated cohomology modules and finite Tor
+`Ra_{X!} K` lies in `Dctf(Spec k, Λ)` (`proposition-six-operations-dctf`, clause (iv), for
+`f = a_X`), and for every geometric point `x̄ : Spec Ω ⟶ X` the stalk `K_x̄ = RΓ(Spec Ω, Lx̄^* K)`
+is a bounded complex of `Λ`-modules with finitely generated cohomology modules and finite Tor
 amplitude: `Lx̄^*` preserves `Dctf`, and `RΓ` over the separably closed point `Spec Ω` is exact
 and preserves finiteness and Tor amplitude. -/
 theorem constructibleFiniteTor_rightDerivedLowerShriek_and_geometricStalk
@@ -90,18 +92,18 @@ theorem constructibleFiniteTor_rightDerivedLowerShriek_and_geometricStalk
       (Scheme.IsConstructibleSheaf.isFiniteSheaf (hc i)),
     a, b, torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed hta⟩
 
-/-- Blueprint `sk-lem-tf-compact-trace`: The complexes whose traces occur.
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: The complexes whose traces occur.
 
-Also blueprint `det-compact-trace-perfect-at-point` (its consequence for `RΓ_c(X, K)` and the
-geometric stalks).
+Also blueprint `lemma-perfect-complexes-geometric-point--1` (its consequence for `RΓ_c(X, K)` and
+the geometric stalks).
 
 Let `k` be separably (e.g. algebraically) closed, `X` separated of finite type over `k` with
 structure morphism `a_X`, `Λ` a finite ring whose exponent is invertible in `k` and
 `K ∈ Dctf(X, Λ)`. Then `RΓ_c(X, K)` and every geometric stalk `K_x̄ = RΓ(Spec Ω, Lx̄^* K)` are
 perfect complexes of `Λ`-modules, so the traces of their endomorphisms are defined
 (`DerivedCategory.IsPerfect.categoricalTrace`). Both are bounded with finitely generated
-cohomology and of finite Tor amplitude (`det-compact-trace-point-objects`), hence perfect over
-the finite ring `Λ` (`DerivedCategory.isPerfect_of_finiteTorAmplitude`). -/
+cohomology and of finite Tor amplitude (`lemma-perfect-complexes-geometric-point`), hence perfect
+over the finite ring `Λ` (`DerivedCategory.isPerfect_of_finiteTorAmplitude`). -/
 theorem isPerfect_compactlySupportedGlobalSections_and_geometricStalk
     {k : Type u} [Field k] [IsSepClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [HasCompactification aX]

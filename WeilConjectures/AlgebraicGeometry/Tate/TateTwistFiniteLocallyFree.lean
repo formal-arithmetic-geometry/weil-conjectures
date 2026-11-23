@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
 sk-def-sp-tate-twist-locally-free.md`, clauses (1)--(3) for finite coefficients
-(blueprint: det-def-sp-tate-twist-locally-free).
+(blueprint: definition-tate-twists).
 
 The finite part of `WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree`, in its own module
 so that the finite twists do not depend on the integral, rational and algebraically closed
@@ -52,12 +52,12 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 namespace AlgebraicGeometry.Scheme
 
 /-- The constant commutative coefficient sheaf in clause (2).
-Source: blueprint clause (2) (blueprint: det-def-sp-tate-twist-locally-free). -/
+Source: blueprint clause (2) (blueprint: definition-tate-twists). -/
 abbrev tateFiniteCoefficient (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :=
   (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of A)
 
 /-- Apply the canonical quotient coefficient homomorphism to constant sheaves.
-Source: blueprint clause (2) (blueprint: det-def-sp-tate-twist-locally-free). -/
+Source: blueprint clause (2) (blueprint: definition-tate-twists). -/
 def tateFiniteScalar (X : Scheme.{u}) (ℓ : ℕ) (A : Type (u + 1)) [CommRing A]
     (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) :
     purTwistFiniteRing X ℓ n ⟶ tateFiniteCoefficient X A :=
@@ -65,14 +65,14 @@ def tateFiniteScalar (X : Scheme.{u}) (ℓ : ℕ) (A : Type (u + 1)) [CommRing A
     (CommRingCat.ofHom (a.comp ULift.ringEquiv.toRingHom))
 
 /-- The finite A-line is exactly the recorded roots module tensored with A_X.
-Source: blueprint clauses (2)--(3) (blueprint: det-def-sp-tate-twist-locally-free). -/
+Source: blueprint clauses (2)--(3) (blueprint: definition-tate-twists). -/
 def tateFiniteLine (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) :=
   SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
     (tateFiniteScalar X ℓ A n a) (purTwistRootsModule X ℓ n)
 
 /-- The normalized pure tensor used to specify the Kummer-induced morphism.
-Source: blueprint clause (2) (blueprint: det-def-sp-tate-twist-locally-free). -/
+Source: blueprint clause (2) (blueprint: definition-tate-twists). -/
 def tateFiniteTensor (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (A : Type (u + 1)) [CommRing A] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A)
     (V : X.ProEt) (b : (tateFiniteCoefficient X A).obj.obj (op V))
@@ -83,7 +83,7 @@ def tateFiniteTensor (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
 /-- Signed line clauses on a specified cover: rank one, the same-cover trivializations,
 and the positive/negative tensor pairing. All powers and duals are the recorded ones.
-Source: blueprint clause (3) (blueprint: det-def-sp-tate-twist-locally-free). -/
+Source: blueprint clause (3) (blueprint: definition-tate-twists). -/
 def TateSignedLine (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (L : SheafOfModules.{u + 1} (purTwistRing X R))
@@ -98,7 +98,7 @@ def TateSignedLine (X : Scheme.{u})
 
 /-- The recorded exact tensor model of K(m), now also for an arbitrary finite A-line.
 Source: blueprint clause (3), final paragraph
-(blueprint: det-def-sp-tate-twist-locally-free). -/
+(blueprint: definition-tate-twists). -/
 def tateComplexTwist (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (L : SheafOfModules.{u + 1} (purTwistRing X R))
@@ -112,13 +112,13 @@ def tateComplexTwist (X : Scheme.{u})
   (SheafOfModules.siteSheafTensorRight (A := R) (coefficientTwistLine X L m)).mapDerivedCategory
 
 /-- Fixing the right input of a published tensor bifunctor retains its full arrow action.
-Source: blueprint K(m) formula (blueprint: det-def-sp-tate-twist-locally-free). -/
+Source: blueprint K(m) formula (blueprint: definition-tate-twists). -/
 def tateTensorRight {C : Type c} [Category.{h} C] (T : C × C ⥤ C) (L : C) : C ⥤ C :=
   (𝟭 C).prod' ((Functor.const C).obj L) ⋙ T
 
 /-- An equivalence whose actual functor and inverse are the two prescribed twists.
 Source: blueprint clause (3), final sentence
-(blueprint: det-def-sp-tate-twist-locally-free). -/
+(blueprint: definition-tate-twists). -/
 def TateInverseTwists {C : Type c} [Category.{h} C] (F G : C ⥤ C) : Prop :=
   ∃ e : C ≌ C, e.functor = F ∧ e.inverse = G
 
@@ -571,7 +571,7 @@ closed coefficient is involved.
 
 Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/
 sk-def-sp-tate-twist-locally-free.md`, clauses (1)--(3) for finite coefficients
-(blueprint: det-def-sp-tate-twist-locally-free).
+(blueprint: definition-tate-twists).
 
 Proof: the compatible root-tower local model gives the cover, the generators and the
 basis isomorphisms with their transition and slice formulas. For a finite ring A killed

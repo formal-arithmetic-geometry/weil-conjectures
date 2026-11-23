@@ -145,9 +145,7 @@ import WeilConjectures.CategoryTheory.ConstantModuleScalar.AlgebraicOpenScalarRe
 /-!
 # Finite-free constant scalars and the constituents of compact support
 
-Source: blueprint main-20261015, sk-thm-purity-transport.proof.md, Steps 1 and 3;
-Stacks, Tags 03DI, 03DJ, 03CZ, 07A6, 0D6D and 0D6E
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
+Source: Stacks, Tags 03DI, 03DJ, 03CZ, 07A6, 0D6D and 0D6E.
 
 Presentations retain the geometric Hom bijections, the constant-section normalization,
 and the actual sheafified tensor functor. Every comparison below is an adjunction mate.
@@ -174,7 +172,7 @@ set_option linter.checkUnivs false
 
 /-- A fixed small-site presentation. The coefficient universe contains the site;
 object and morphism universes are independent.
-Source: Stacks 00XA, 00VI (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 00XA, 00VI. -/
 structure Site where
   C : Type u
   [category : Category.{v} C]
@@ -197,16 +195,16 @@ attribute [local instance 1000000] Site.ringCompose Site.ringSetCompose Site.gro
 variable (A B : CommRingCat.{r}) [Algebra A B]
 
 /-- The actual constant ring homomorphism.
-Source: Stacks 03CZ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CZ. -/
 def coefficientMap (T : Site.{u, v, r}) : constantRing T.J A ⟶ constantRing T.J B :=
   (constantSheaf T.J CommRingCat.{r}).map (CommRingCat.ofHom (algebraMap A B))
 
 /-- Constant-coefficient module sheaves in the recorded ringed-site category.
-Source: Stacks 03D7 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03D7. -/
 abbrev Mod (T : Site.{u, v, r}) (R : CommRingCat.{r}) := modules.{u, v, r} (constantRing T.J R)
 
 /-- Ordinary coefficient restriction, retaining its actual section modules.
-Source: Stacks 03CZ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CZ. -/
 abbrev res (T : Site.{u, v, r}) : Mod T B ⥤ Mod T A :=
   restriction.{u, v, r} (coefficientMap A B T)
 
@@ -228,13 +226,7 @@ private theorem exact_derived_counit_isIso
 
 /-- Finite-free extension is exact and its universal derived counit is invertible
 on every unbounded complex.
-Source: blueprint transport Steps 1 and 3; Stacks 06YY
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: use a finite basis and its coordinate maps to identify restricted extension
-with a finite direct sum. The two inverse formulas hold locally on pure tensors,
-then sheafify. Restriction is exact and detects zero sheaves. Thus extension is exact,
-and its universal left-derived counit is the exact-functor localization isomorphism.
-The empty basis gives the zero functor; no boundedness is used. -/
+Source: Stacks 06YY. -/
 theorem scalar_exact (T : Site.{u, v, r})
     [HasDerivedCategory.{w} (Mod T A)] [HasDerivedCategory.{w} (Mod T B)]
     [Module.Finite A B] [Module.Free A B]
@@ -255,8 +247,7 @@ theorem scalar_exact (T : Site.{u, v, r})
 /-- A normalized presentation of the scalar adjunction on a fixed site. Its extension
 is the recorded sheafified tensor construction, and the Hom formula fixes the ordinary
 adjunction on pure tensors. The two derived categories are ordinary unbounded localizations.
-Source: Stacks 03CZ, 06YY, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CZ, 06YY, 07A6. -/
 structure ScalarSite extends Site.{u, v, r} where
   [derivedA : HasDerivedCategory.{w} (Mod toSite A)]
   [derivedB : HasDerivedCategory.{w} (Mod toSite B)]
@@ -283,29 +274,27 @@ attribute [instance] ScalarSite.derivedA ScalarSite.derivedB
 
 variable {A B}
 
-/-- Exactness of the specified tensor extension.
-Source: finite-free coordinates (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+/-- Exactness of the specified tensor extension. -/
 instance scalarLimits [Module.Finite A B] [Module.Free A B]
     (T : ScalarSite.{u, v, r, w} A B) : PreservesFiniteLimits T.model.E :=
   (scalar_exact A B T.toSite T.model).1
 
-/-- Exactness of the specified tensor extension.
-Source: finite-free coordinates (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+/-- Exactness of the specified tensor extension. -/
 instance scalarColimits [Module.Finite A B] [Module.Free A B]
     (T : ScalarSite.{u, v, r, w} A B) : PreservesFiniteColimits T.model.E :=
   (scalar_exact A B T.toSite T.model).2.1
 
 /-- Exact restriction on the ordinary unbounded derived categories.
-Source: Stacks 03CZ, 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CZ, 07A6. -/
 def U (T : ScalarSite.{u, v, r, w} A B) := (res A B T.toSite).mapDerivedCategory
 
 /-- Derived extension, in its exact termwise model.
-Source: Stacks 06YY (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 06YY. -/
 def S [Module.Finite A B] [Module.Free A B] (T : ScalarSite.{u, v, r, w} A B) :=
   T.model.E.mapDerivedCategory
 
 /-- The original scalar adjunction localized termwise, retaining its unit normalization.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def scalarAdj [Module.Finite A B] [Module.Free A B] (T : ScalarSite.{u, v, r, w} A B) :
     S T ⊣ U T := CategoryTheory.Adjunction.onDerivedCategory T.adj
 
@@ -313,8 +302,7 @@ def scalarAdj [Module.Finite A B] [Module.Free A B] (T : ScalarSite.{u, v, r, w}
 are normalized on every scalar summand, and the ordinary Hom equations retain the
 original geometric adjunction. The restriction square is the identity on underlying
 inverse images. These are presentations of the specified functors, not arbitrary maps.
-Source: Stacks 00YV, 03D7, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 00YV, 03D7, 07A6. -/
 structure Geometric (T W : ScalarSite.{u, v, r, w} A B) where
   inverse : Sheaf W.J (Type r) ⥤ Sheaf T.J (Type r)
   direct : Sheaf T.J (Type r) ⥤ Sheaf W.J (Type r)
@@ -378,37 +366,37 @@ attribute [instance] Geometric.addA Geometric.addB Geometric.limA Geometric.coli
   Geometric.limB Geometric.colimB Geometric.pushAddA Geometric.pushAddB
 
 /-- Actual derived inverse image with A coefficients.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def LA {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :=
   f.liftA.modules.mapDerivedCategory
 
 /-- Actual derived inverse image with B coefficients.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def LB {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :=
   f.liftB.modules.mapDerivedCategory
 
 /-- Actual unbounded derived direct image with A coefficients.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def RA {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :=
   f.pushA.rightDerivedFunctor
 
 /-- Actual unbounded derived direct image with B coefficients.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def RB {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :=
   f.pushB.rightDerivedFunctor
 
 /-- The exact inverse-image/derived-direct-image adjunction.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def adjA {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) : LA f ⊣ RA f :=
   f.adjA.mapDerivedCategoryRightDerivedAdjunction
 
 /-- The exact inverse-image/derived-direct-image adjunction.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def adjB {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) : LB f ⊣ RB f :=
   f.adjB.mapDerivedCategoryRightDerivedAdjunction
 
 /-- Exact localization of the identity on underlying pulled-back module sheaves.
-Source: Stacks 03D7 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03D7. -/
 def tau {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     U W ⋙ LA f ≅ LB f ⋙ U T :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -417,8 +405,7 @@ def tau {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
 variable [Module.Finite A B] [Module.Free A B]
 
 /-- The tensor comparison in the reverse direction, defined by its scalar adjunct.
-Source: Stacks 03CZ, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CZ, 07A6. -/
 def tensorPullbackInv {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     LA f ⋙ S T ⟶ S W ⋙ LB f :=
   ((mateEquiv (scalarAdj W) (scalarAdj T)).symm
@@ -555,12 +542,7 @@ private theorem ordinary_tensor_mate_isIso {T W : ScalarSite.{u, v, r, w} A B}
 end
 
 /-- Tensor and geometric inverse image commute, with the canonical scalar adjunct.
-Source: Stacks 03EL, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: the ordinary tensor balancing map and its inverse send each local pure tensor
-of a pulled-back section to the same tensor. Sheafification gives inverse natural
-maps. Their scalar adjunct is the identity on underlying inverse images, hence is
-tau. Exact localization and its Hom bijection give precisely tensorPullbackInv. -/
+Source: Stacks 03EL, 07A6. -/
 theorem tensorPullbackInv_isIso {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) : IsIso (tensorPullbackInv f) := by
   let := ordinary_tensor_mate_isIso f
@@ -569,34 +551,27 @@ theorem tensorPullbackInv_isIso {T W : ScalarSite.{u, v, r, w} A B}
 attribute [instance] tensorPullbackInv_isIso
 
 /-- The specified tensor/inverse-image isomorphism, fixed by the scalar unit.
-Source: Stacks 03EL, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03EL, 07A6. -/
 def lambda {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     S W ⋙ LB f ≅ LA f ⋙ S T :=
   letI := tensorPullbackInv_isIso f
   (asIso (tensorPullbackInv f)).symm
 
 /-- The direct-image comparison, as the geometric mate of lambda.
-Source: Stacks 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 07A6. -/
 def chi {T W : ScalarSite.{u, v, r, w} A B} (f : Geometric T W) :
     RA f ⋙ S W ⟶ S T ⋙ RB f :=
   (mateEquiv (adjA f) (adjB f) (TwoSquare.mk _ _ _ _ (lambda f).hom))
 
 /-- The canonical restriction/direct-image comparison, obtained from the underlying
 inverse-image identity by the geometric Hom bijections.
-Source: Stacks 03D7, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03D7, 07A6. -/
 def restrictionPushforward {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) : RB f ⋙ U W ⟶ U T ⋙ RA f :=
   (mateEquiv (adjB f) (adjA f) (TwoSquare.mk _ _ _ _ (tau f).hom))
 
 /-- Restriction commutes with the derived direct image by its canonical mate.
-Source: Stacks 03D7, 07A6, 0D6E
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: on underlying section modules restriction and direct image are identical.
-Their ordinary adjunction transposes give the displayed mate. Resolve by K-injectives
-and use the two universal right-derived factorizations. The resulting comparison is
-invertible and its counit square identifies it with restrictionPushforward. -/
+Source: Stacks 03D7, 07A6, 0D6E. -/
 theorem restrictionPushforward_isIso {T W : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) : IsIso (restrictionPushforward f) := by
   let := tensorPullbackInv_isIso f
@@ -609,7 +584,7 @@ theorem restrictionPushforward_isIso {T W : ScalarSite.{u, v, r, w} A B}
 /-- An open subtopos is the slice at a subterminal sheaf. Its extension is the exact
 fully faithful left adjoint to its actual module inverse image; this determines the
 extension together with its unit up to the unique adjunction-preserving isomorphism.
-Source: Stacks 03DI, 03DJ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 03DJ. -/
 structure Open (V T : ScalarSite.{u, v, r, w} A B) where
   geometric : Geometric V T
   subterminal : Sheaf T.J (Type r)
@@ -633,41 +608,36 @@ attribute [instance] Open.addA Open.addB Open.limA Open.limB Open.colimA Open.co
   Open.unitA Open.unitB
 
 /-- Actual exact extension by zero, localized termwise with A coefficients.
-Source: Stacks 03DI, 03DJ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 03DJ. -/
 def IA {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :=
   j.extensionA.mapDerivedCategory
 
 /-- Actual exact extension by zero, localized termwise with B coefficients.
-Source: Stacks 03DI, 03DJ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 03DJ. -/
 def IB {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :=
   j.extensionB.mapDerivedCategory
 
 /-- Localize the original open adjunction, retaining its unit.
-Source: Stacks 03DI, 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 07A6. -/
 def openAdjA {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IA j ⊣ LA j.geometric :=
   CategoryTheory.Adjunction.onDerivedCategory j.adjA
 
 /-- Localize the original open adjunction, retaining its unit.
-Source: Stacks 03DI, 07A6 (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 07A6. -/
 def openAdjB {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IB j ⊣ LB j.geometric :=
   CategoryTheory.Adjunction.onDerivedCategory j.adjB
 
 /-- The inverse balancing map, specified by the open Hom bijection.
-Source: Stacks 03DI, 0E8I (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 0E8I. -/
 def betaInv {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     S V ⋙ IB j ⟶ IA j ⋙ S T :=
   ((mateEquiv (openAdjA j) (openAdjB j)).symm
     (TwoSquare.mk _ _ _ _ (lambda j.geometric).inv))
 
 /-- The balancing mate is invertible, on unbounded inputs.
-Source: Stacks 03DI, 03DJ, 0E8I
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: on the localized-site sum presheaf both maps send a summand tensor to the same
-summand tensor; on the complement the module is zero. Tensor balancing and sheafification
-prove the inverse identities. All ordinary functors are exact, so termwise localization
-preserves them. The open Hom formula identifies the inverse with betaInv. -/
+Source: Stacks 03DI, 03DJ, 0E8I. -/
 theorem betaInv_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (betaInv j) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm (openAdjA j) (openAdjB j)
@@ -679,29 +649,27 @@ theorem betaInv_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
   exact hi
 
 /-- The canonical balancing isomorphism for extension by zero.
-Source: Stacks 03DI, 0E8I (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 0E8I. -/
 def beta {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IA j ⋙ S T ≅ S V ⋙ IB j :=
   letI := betaInv_isIso j
   (asIso (betaInv j)).symm
 
 /-- Restriction/open extension comparison, fixed by the open adjunction and tau.
-Source: Stacks 03DI, 03CZ
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 03CZ. -/
 def restrictionOpen {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     U V ⋙ IA j ⟶ IB j ⋙ U T :=
   ((mateEquiv (openAdjB j) (openAdjA j)).symm
     (TwoSquare.mk _ _ _ _ (tau j.geometric).inv))
 
 /-- The constant scalar section, obtained by the associated-sheaf unit.
-Source: Stacks 03CZ (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CZ. -/
 def constantSection (T : Site.{u, v, r}) (R : CommRingCat.{r})
     (V : T.Cᵒᵖ) (a : R) : (constantRing T.J R).obj.obj V :=
   (toSheafify T.J ((Functor.const T.Cᵒᵖ).obj R)).app V a
 
 /-- The actual sheafified pure tensor in the specified tensor-extension model.
-Source: Stacks 03CY, 03CZ
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03CY, 03CZ. -/
 def tensorSection (T : ScalarSite.{u, v, r, w} A B) (M : Mod T.toSite A)
     (V : T.Cᵒᵖ) (b : B) (x : M.val.obj V) : (T.model.E.obj M).val.obj V :=
   (eqToHom (T.model.obj_eq M).symm).val.app V
@@ -748,11 +716,7 @@ private theorem matrix_isIso
 
 set_option linter.unusedSectionVars false in
 /-- The restriction/open comparison is the identity on defining section sums.
-Source: Stacks 03DI, 03DJ, 03CZ
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: the ordinary sum-presheaf identity is invertible on the open and zero on its
-complement. Its adjoint is the restriction/inverse-image identity tau. Exact
-localization retains this adjoint equation and both inverse identities. -/
+Source: Stacks 03DI, 03DJ, 03CZ. -/
 theorem restrictionOpen_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (restrictionOpen j) := by
   let : IsIso ((mateEquiv j.adjB j.adjA).symm
@@ -773,23 +737,17 @@ theorem restrictionOpen_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T)
 
 attribute [instance] restrictionOpen_isIso
 
-/-- The specified compact-support functor with A coefficients.
-Source: blueprint transport Step 1
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+/-- The specified compact-support functor with A coefficients. -/
 def FA {X T Y : ScalarSite.{u, v, r, w} A B}
     (j : Open X T) (p : Geometric T Y) :
     DerivedCategory (Mod X.toSite A) ⥤ DerivedCategory (Mod Y.toSite A) := IA j ⋙ RA p
 
-/-- The specified compact-support functor with B coefficients.
-Source: blueprint transport Step 1
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+/-- The specified compact-support functor with B coefficients. -/
 def FB {X T Y : ScalarSite.{u, v, r, w} A B}
     (j : Open X T) (p : Geometric T Y) :
     DerivedCategory (Mod X.toSite B) ⥤ DerivedCategory (Mod Y.toSite B) := IB j ⋙ RB p
 
-/-- The prescribed direct-image mate followed by open balancing.
-Source: blueprint transport Steps 1 and 3
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+/-- The prescribed direct-image mate followed by open balancing. -/
 def compactComparison {X T Y : ScalarSite.{u, v, r, w} A B}
     (j : Open X T) (p : Geometric T Y) : FA j p ⋙ S Y ⟶ S X ⋙ FB j p :=
   (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (IA j) (chi p) ≫
@@ -797,8 +755,7 @@ def compactComparison {X T Y : ScalarSite.{u, v, r, w} A B}
       (Functor.associator _ _ _).hom
 
 /-- The canonical sectionwise restriction comparison, with its prescribed order.
-Source: Stacks 03DI, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI, 07A6. -/
 def rho {X T Y : ScalarSite.{u, v, r, w} A B}
     (j : Open X T) (p : Geometric T Y) : U X ⋙ FA j p ≅ FB j p ⋙ U Y :=
   letI := restrictionOpen_isIso j
@@ -967,31 +924,23 @@ private theorem localized_unit_isIso
 
 set_option linter.unusedSectionVars false in
 /-- The localized open units retain the ordinary full-faithfulness normalization.
-Source: Stacks 03DI, 03DJ, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: exact localization sends the inverse ordinary unit to an inverse derived
-unit, by the localization factorization of the original adjunction. -/
+Source: Stacks 03DI, 03DJ, 07A6. -/
 theorem open_units_isIso {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (openAdjA j).unit ∧ IsIso (openAdjB j).unit := by
   exact ⟨localized_unit_isIso j.adjA, localized_unit_isIso j.adjB⟩
 
 /-- Invertibility of the A-coefficient open unit after exact localization.
-Source: Stacks 03DI (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI. -/
 instance openUnitA {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (openAdjA j).unit := (open_units_isIso j).1
 
 /-- Invertibility of the B-coefficient open unit after exact localization.
-Source: Stacks 03DI (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 03DI. -/
 instance openUnitB {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T) :
     IsIso (openAdjB j).unit := (open_units_isIso j).2
 
 /-- The unit-normalization identity for the specified B-linear balancing map.
-Source: Stacks 03DI, 03CZ, 07A6
-(blueprint: lem-pur-topos-finite-free-compact-constituents).
-Proof: under the open Hom bijection the inverse balancing map is lambda inverse
-following scalar extension of the open unit: both send each local summand tensor
-to that same tensor. Exact localization preserves this equation. Invert the two
-open units and rearrange; this yields exactly the displayed identity. -/
+Source: Stacks 03DI, 03CZ, 07A6. -/
 theorem beta_unit {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T)
     (M : DerivedCategory (Mod V.toSite A)) :
     (lambda j.geometric).hom.app ((IA j).obj M) ≫
@@ -1013,8 +962,7 @@ theorem beta_unit {V T : ScalarSite.{u, v, r, w} A B} (j : Open V T)
 /-- A presentation of a composite geometric morphism. The inverse-image compositor
 is specified on sheaves of sets; the module compositors are its unique lifts on the
 actual underlying inverse images, rather than arbitrary derived identifications.
-Source: Stacks 0D6D, 0D6E
-(blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 0D6D, 0D6E. -/
 structure Composite {T W Z : ScalarSite.{u, v, r, w} A B}
     (f : Geometric T W) (g : Geometric W Z) (h : Geometric T Z) where
   inverse : h.inverse ≅ g.inverse ⋙ f.inverse
@@ -1034,14 +982,14 @@ structure Composite {T W Z : ScalarSite.{u, v, r, w} A B}
         f.liftB.moduleUnderlying.inv.app (g.liftB.modules.obj M)
 
 /-- The exact localization of the canonical A-coefficient inverse-image compositor.
-Source: Stacks 0D6D (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 0D6D. -/
 def compLA {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) : LA h ≅ LA g ⋙ LA f :=
   Functor.mapDerivedCategoryNatIso c.moduleA ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- The exact localization of the canonical B-coefficient inverse-image compositor.
-Source: Stacks 0D6D (blueprint: lem-pur-topos-finite-free-compact-constituents). -/
+Source: Stacks 0D6D. -/
 def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) : LB h ≅ LB g ⋙ LB f :=
@@ -1050,8 +998,23 @@ def compLB {T W Z : ScalarSite.{u, v, r, w} A B}
 section
 omit [Module.Finite A B] [Module.Free A B]
 
-set_option maxHeartbeats 1600000 in
--- Comparing the dependent module and sheaf presentations needs extra elaboration time.
+-- Perform the composition calculation before specializing to dependent module presentations.
+private theorem restriction_compositor_of_underlying_isos
+    {C₀ D₀ : Type*} [Category C₀] [Category D₀] (F : C₀ ⥤ D₀)
+    {X Y Z : C₀} {P Q R S V H : D₀}
+    (eA : X ≅ Z) (eB : Y ≅ Z)
+    (fA : P ≅ F.obj X) (fA' : Q ≅ F.obj Y) (fB : R ≅ F.obj Y)
+    (hA : S ≅ H) (hB : V ≅ H) (k : H ⟶ F.obj Z)
+    (m : X ⟶ Y) (n : P ⟶ Q)
+    (hm : m = eA.hom ≫ eB.inv)
+    (hn : F.map m ≫ fA'.inv = fA.inv ≫ n) :
+    (hA.hom ≫ k ≫ F.map eA.inv ≫ fA.inv) ≫ n ≫ (fA'.hom ≫ fB.inv) =
+      (hA.hom ≫ hB.inv) ≫ (hB.hom ≫ k ≫ F.map eB.inv ≫ fB.inv) := by
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← reassoc_of% hn, hm, F.map_comp]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← F.map_comp_assoc, eA.inv_hom_id, F.map_id, Category.id_comp]
+
 private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
     {f : Geometric T W} {g : Geometric W Z} {h : Geometric T Z}
     (c : Composite f g h) (M : Mod Z.toSite B) :
@@ -1060,18 +1023,23 @@ private theorem restriction_comp {T W Z : ScalarSite.{u, v, r, w} A B}
           f.restriction.hom.app (g.liftB.modules.obj M) =
       h.restriction.hom.app M ≫ (res A B T.toSite).map (c.moduleB.hom.app M) := by
   apply (underlying (constantRing T.J A)).map_injective
-  simp only [Functor.map_comp, Category.assoc, f.restrictionFormula,
-    h.restrictionFormula, c.underlyingA]
-  change _ = h.liftA.moduleUnderlying.hom.app ((res A B Z.toSite).obj M) ≫
-    h.liftB.moduleUnderlying.inv.app M ≫
-      (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
-  erw [c.underlyingB, Iso.inv_hom_id_app_assoc]
-  have hn := f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M)
-  dsimp only [Functor.comp_map] at hn
-  erw [← reassoc_of% hn]
-  erw [g.restrictionFormula]
-  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app_assoc]
-  rfl
+  simp only [Functor.map_comp]
+  change _ = (underlying (constantRing T.J A)).map (h.restriction.hom.app M) ≫
+    (underlying (constantRing T.J B)).map (c.moduleB.hom.app M)
+  simp only [c.underlyingA, c.underlyingB, f.restrictionFormula, h.restrictionFormula]
+  exact restriction_compositor_of_underlying_isos f.inverse
+    (g.liftA.moduleUnderlying.app ((res A B Z.toSite).obj M))
+    (g.liftB.moduleUnderlying.app M)
+    (f.liftA.moduleUnderlying.app (g.liftA.modules.obj ((res A B Z.toSite).obj M)))
+    (f.liftA.moduleUnderlying.app ((res A B W.toSite).obj (g.liftB.modules.obj M)))
+    (f.liftB.moduleUnderlying.app (g.liftB.modules.obj M))
+    (h.liftA.moduleUnderlying.app ((res A B Z.toSite).obj M))
+    (h.liftB.moduleUnderlying.app M)
+    (c.inverse.hom.app ((underlying (constantRing Z.J B)).obj M))
+    ((underlying (constantRing W.J A)).map (g.restriction.hom.app M))
+    ((underlying (constantRing T.J A)).map (f.liftA.modules.map (g.restriction.hom.app M)))
+    (g.restrictionFormula M)
+    (f.liftA.moduleUnderlying.inv.naturality (g.restriction.hom.app M))
 
 -- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 private theorem tau_comp {T W Z : ScalarSite.{u, v, r, w} A B}

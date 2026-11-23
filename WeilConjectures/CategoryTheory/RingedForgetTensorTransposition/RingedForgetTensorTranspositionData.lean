@@ -33,8 +33,7 @@ public import WeilConjectures.SixFunctors.CoefficientClosedStructure.Coefficient
 
 These are the existing comparison data, factored out so that tensor descent and
 normalized uncurrying can be proved independently.
-Source: Stacks 06YU, 08J9, 0FPT
-(blueprint: def-sf-ringed-forget-tensor-transposition-data).
+Source: Stacks 06YU, 08J9, 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -57,7 +56,7 @@ variable {B : Type b} [Category.{vb} B] {A : Type a} [Category.{va} A]
 /-- Unit, associativity and symmetry coherence for the specified comparison, oriented
 from the image of a tensor to the tensor of the images. These are equations on existing
 monoidal structures, not a new tensor construction.
-Source: Stacks 0FPT (blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 0FPT. -/
 structure TensorCoherence (mB : MonoidalCategory B) (mA : MonoidalCategory A)
     (βB : @SymmetricCategory B _ mB) (βA : @SymmetricCategory A _ mA)
     (F : B ⥤ A)
@@ -99,8 +98,7 @@ structure TensorCoherence (mB : MonoidalCategory B) (mA : MonoidalCategory A)
       μ.hom.app (X, Y) ≫ (βA.toBraidedCategory.braiding (F.obj X) (F.obj Y)).hom
 
 /-- The actual double-dual arrow, defined by the fixed adjunction and symmetry.
-Source: Stacks 08J9, 0FPT and the blueprint transposition paragraph
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 08J9, 0FPT. -/
 def delta {H : Bᵒᵖ × B ⥤ B} (S : CoefficientClosedStructure H)
     (β : @SymmetricCategory B _ S.monoidal) (W K : B) :
     K ⟶ H.obj (op (H.obj (op K, W)), W) :=
@@ -108,8 +106,7 @@ def delta {H : Bᵒᵖ × B ⥤ B} (S : CoefficientClosedStructure H)
     ((β.toBraidedCategory.braiding K (H.obj (op K, W))).hom ≫ S.evaluation K W)
 
 /-- The normalized uncurrying, evaluation and double-dual equations for fixed comparisons.
-Source: Stacks 08J9 and the blueprint transposition paragraph
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 08J9. -/
 structure TranspositionLaws
     (HB : Bᵒᵖ × B ⥤ B) (HA : Aᵒᵖ × A ⥤ A)
     (SB : CoefficientClosedStructure HB) (SA : CoefficientClosedStructure HA)
@@ -162,7 +159,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
 
 /-- The actual sheafified pure tensor, using the sheafification unit.
-Source: Stacks 03EK (blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 03EK. -/
 def sheafTensorGenerator (K L : RingedTensorModules.{c, v, r} J R)
     (V : Cᵒᵖ) (x : K.val.obj V) (y : L.val.obj V) :
     ((SheafOfModules.monoidalCategory R).tensorObj K L).val.obj V :=
@@ -177,7 +174,7 @@ def sheafTensorGenerator (K L : RingedTensorModules.{c, v, r} J R)
 /-- The full componentwise characterization of ordinary sheaf-Hom evaluation.
 Pure tensors generate locally after sheafification, so this characterizes the existing
 canonical evaluation uniquely. It does not select an arbitrary pairing.
-Source: Stacks 03EK, 08J9 (blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 03EK, 08J9. -/
 def IsSheafEvaluation (K L : RingedTensorModules.{c, v, r} J R)
     (e : (SheafOfModules.monoidalCategory R).tensorObj
       (SheafOfModules.homObj (R := R) K L) K ⟶ L) : Prop :=
@@ -189,7 +186,7 @@ def IsSheafEvaluation (K L : RingedTensorModules.{c, v, r} J R)
 
 /-- The actual summand inclusion in the direct-sum total tensor.
 The total functor has differential d_P tensor 1 + (-1)^p 1 tensor d_Q.
-Source: Stacks 06YN (blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 06YN. -/
 def tensorSummand (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (p q n : ℤ) (hpq : p + q = n) :
     (SheafOfModules.monoidalCategory R).tensorObj (P.X p) (Q.X q) ⟶
@@ -208,8 +205,7 @@ variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)
   [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 
 /-- The specified coherent underlying-module comparisons, including evaluation.
-Source: blueprint internal-Hom paragraph; Stacks 08J9, 0FPT
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 08J9, 0FPT. -/
 structure Underived where
   /-- The specified underived tensor comparison. -/
   tensor : @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R) ⋙ U ≅
@@ -255,7 +251,7 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
     J R J' R' U u.hom)
 
 /-- The prescribed representative square for an arbitrary natural transformation.
-Source: Stacks 06YU, 0G7D (blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 06YU, 0G7D. -/
 def RepresentativeModel
     (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
       ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙
@@ -285,8 +281,7 @@ def RepresentativeModel
           ((U.mapHomologicalComplex (.up ℤ)).obj Q) hUP hUQ).hom
 
 /-- The total-tensor comparison and its unique, coherent derived extension, for the fixed χ.
-Source: Stacks 06YU, 0G7D, 08J9 and blueprint transposition paragraph
-(blueprint: lem-sf-ringed-forget-tensor-transposition). -/
+Source: Stacks 06YU, 0G7D, 08J9. -/
 structure Comparison where
   /-- The sum of the specified underived comparisons, on actual total tensor complexes. -/
   chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
@@ -299,7 +294,7 @@ structure Comparison where
       u.tensor.hom.app (P.X p, Q.X q) ≫
         tensorSummand.{d, vd, s} J' R' ((U.mapHomologicalComplex (.up ℤ)).obj P)
           ((U.mapHomologicalComplex (.up ℤ)).obj Q) p q n hpq
-  /-- The natural derived isomorphism μ, in the orientation of the node. -/
+  /-- The natural derived isomorphism μ. -/
   derived : SB.tensor ⋙ U.mapDerivedCategory ≅
     (U.mapDerivedCategory.prod U.mapDerivedCategory) ⋙ SA.tensor
   /-- The extension agrees with the total comparison on all flat-term K-flat models. -/

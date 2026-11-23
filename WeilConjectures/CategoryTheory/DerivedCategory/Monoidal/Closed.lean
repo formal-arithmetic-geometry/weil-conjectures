@@ -32,50 +32,12 @@ is again monoidal closed, the monoidal structure being the derived tensor produc
 This K-flat derivability structure is the only hypothesis beyond those needed to tensor
 complexes: the monoidal structure on `D(C)` is itself deduced from it.
 
+## Implementation details
+
 Since `MonoidalClosed` only asks for a right adjoint of `X ⊗^L -` for every object `X` of
-`D(C)`, no binary `RHom` bifunctor has to be constructed by hand: the bifunctoriality of the
-internal hom is produced by the closed structure itself. The proof of the instance below is
-therefore organized in the following four steps.
-
-1. **Closedness at the homotopy level** (done in
-   `WeilConjectures.Algebra.Homology.HomotopyCategory.InternalHom`). For cochain complexes
-   `P`, `Y` in `C`, the internal hom complex `CochainComplex.internalHomObj P Y` has
-   `(iHom P Y)ⁿ = ∏_{p + n = q} iHom (P.X p) (Y.X q)`, with differential
-   `(-1)ᵖ • (f ≫ d_Y - d_P ≫ f)` on the factor indexed by `(p, q)` (the products exist since
-   `C` is Grothendieck abelian). The tensor-hom bijection `(P ⊗ X ⟶ Y) ≃ (X ⟶ iHom P Y)` is
-   plain currying on morphisms of complexes, and currying with the sign `(-1) ^ (p * n)` on
-   cochains of degree `n` commutes with `δ`, so it is compatible with homotopies. This gives
-   `HomotopyCategory.tensorHomAdjunction P : tensorLeft P ⊣ H_P` on
-   `K(C) := HomotopyCategory C (ComplexShape.up ℤ)`, with `H_P = HomotopyCategory.internalHom P`.
-2. **Fixing one variable of the binary derived tensor.** Deduce from the fact that the derived
-   tensor product is the binary left derived functor of the tensor product on `K(C)` (the
-   `IsLeftDerivedFunctor₂` instance in
-   `WeilConjectures.FromJoel.Algebra.Homology.DerivedCategory.Monoidal`) that `Qh.obj P ⊗^L -`
-   is the (unary) left derived functor of `P ⊗ -`: the comparison map
-   `Qh.obj P ⊗^L Qh.obj Z ⟶ Qh.obj (P ⊗ Z)` is an isomorphism for K-flat `Z`
-   (`DerivedCategory.tensorLeftQhObjCounit`, a specialisation of
-   `CategoryTheory.DerivedMonoidal.isIso_counit_app_app_of_kFlat_right`).
-3. **Deriving the adjunction.** Right derive `H_P` using K-injective resolutions, which exist
-   since `C` is Grothendieck abelian
-   (`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`), and apply
-   `CategoryTheory.Adjunction.derived` to `P ⊗ - ⊣ H_P` to obtain `Qh.obj P ⊗^L - ⊣ R H_P`
-   (`DerivedCategory.tensorHomAdjunctionQhObj`). The absoluteness hypotheses of
-   `Adjunction.derived` are checked on K-flat, respectively K-injective, complexes, by
-   `CategoryTheory.LocalizerMorphism.isLeftDerivedFunctor_comp_of_isLeftDerivabilityStructure`
-   and its dual. Only the individual right derived functors are needed here, not their
-   functoriality in `P`.
-4. **Transport to an arbitrary object.** Every `X : DerivedCategory C` is isomorphic to
-   `Qh.obj P` for some `P` (essential surjectivity of the localization functor), and
-   closedness transfers along an isomorphism of objects, since an isomorphism `Qh.obj P ≅ X`
-   induces a natural isomorphism `Qh.obj P ⊗^L - ≅ X ⊗^L -`, along which the adjunction of
-   step 3 can be transported (`CategoryTheory.Adjunction.ofNatIsoLeft`). The object `P` is
-   chosen with `Qh.objPreimage X`, so `ihom X` is `R H_P` for this *noncanonical* choice of
-   `P`.
-
-Once the instance is available, its internal hom is *the* derived internal hom. By uniqueness of
-right adjoints, `ihom (Qh.obj P) ≅ R H_P` for every `P`, independently of the choice made in
-step 4; this identification, and the one with the concrete hom-complex-of-a-K-injective-replacement
-model, is further work, which is what an `RHom` API would be about.
+`D(C)`, no binary `RHom` bifunctor is constructed by hand: the bifunctoriality of the internal
+hom is produced by the closed structure itself. The internal hom `ihom X` is `R H_P` for the
+noncanonical choice `P := Qh.objPreimage X`.
 -/
 
 @[expose] public section
@@ -156,8 +118,7 @@ K(C) ──P ⊗ -──▶ K(C) ──Qh──▶ D(C)
  ▼                            ▼
 D(C) ─Qh P ⊗ᴸ -─▶ D(C) ─R H_P─▶ D(C)
 ```
-obtained by whiskering `tensorLeftQhObjCounit P` with `R H_P`. It holds because
-`tensorLeftQhObjCounit P` is an isomorphism at K-flat complexes. -/
+obtained by whiskering `tensorLeftQhObjCounit P` with `R H_P`. -/
 lemma isLeftDerivedFunctor_tensorLeft_comp_internalHomQhObj :
     (tensorLeft (Qh.obj P) ⋙ internalHomQhObj P).IsLeftDerivedFunctor
       ((Functor.associator _ _ _).inv ≫
@@ -177,8 +138,7 @@ K(C) ─iHom P -─▶ K(C) ──Qh──▶ D(C)
  ▼                             ▼
 D(C) ──R H_P──▶ D(C) ─Qh P ⊗ᴸ -─▶ D(C)
 ```
-obtained by whiskering `internalHomQhObjUnit P` with `Qh.obj P ⊗^L -`. It holds because
-`internalHomQhObjUnit P` is an isomorphism at K-injective complexes. -/
+obtained by whiskering `internalHomQhObjUnit P` with `Qh.obj P ⊗^L -`. -/
 lemma isRightDerivedFunctor_internalHomQhObj_comp_tensorLeft :
     (internalHomQhObj P ⋙ tensorLeft (Qh.obj P)).IsRightDerivedFunctor
       (Functor.whiskerRight (internalHomQhObjUnit P) (tensorLeft (Qh.obj P)) ≫
@@ -207,11 +167,7 @@ variable (C) in
 /-- The derived category of a monoidal closed Grothendieck abelian category is monoidal
 closed for the derived tensor product, provided K-flat complexes form a left derivability
 structure (which holds whenever `Abelian.HasFunctorialFlatResolution C` does): for every
-`X : DerivedCategory C`, the functor `X ⊗^L -` admits a right adjoint.
-
-The right adjoint `ihom X` is `R H_P` for the noncanonical choice `P := Qh.objPreimage X`.
-Its adjunction is `tensorHomAdjunctionQhObj P`, transported along the natural isomorphism
-`Qh.obj P ⊗^L - ≅ X ⊗^L -` that `tensoringLeft` induces from `Qh.objObjPreimageIso X`. -/
+`X : DerivedCategory C`, the functor `X ⊗^L -` admits a right adjoint. -/
 noncomputable instance monoidalClosed : MonoidalClosed (DerivedCategory C) where
   closed X :=
     { rightAdj := internalHomQhObj (Qh.objPreimage X)

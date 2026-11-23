@@ -11,9 +11,6 @@ public import Mathlib.CategoryTheory.Sites.Subsheaf
 
 /-! # Normalized invariants of condensed action modules
 
-Source: blueprint, direct-image stability, paragraph (3)
-(blueprint: def-sfb-condensed-action-module).
-
 For an action module `M`, the sections fixed after every base change form a sub-sheaf of
 modules of the sectionwise sheaf of `M` (`fixedSheaf`). Reading it back through the
 section-module equivalence gives the invariants functor, with its inclusion into `M`. A map

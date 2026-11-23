@@ -76,8 +76,7 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 # Scalar localization of shifted derived Hom
 
 Source: Bhatt–Scholze, The pro-étale topology for schemes, Lemma 6.8.12 and
-Proposition 6.8.14(2), with the abstract bounded-below telescope argument
-(blueprint: lem-weil-pbc-scalar-localization-derived-hom).
+Proposition 6.8.14(2), with the abstract bounded-below telescope argument.
 -/
 
 @[expose] public noncomputable section
@@ -98,8 +97,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 /-- Linear equivalences from the existing fraction quotient, using its canonical
 localized scalar action. This only installs Mathlib's module structure in the type.
-Source: Stacks Project, algebra.tex, Tags 07JZ and 07K0
-(blueprint: lem-weil-pbc-scalar-localization-derived-hom). -/
+Source: Stacks Project, algebra.tex, Tags 07JZ and 07K0. -/
 abbrev scalarLocalizationHomEquiv (A : Type v) [CommRing A] (t : A)
     (M : Type w) [AddCommGroup M] [Module A M]
     (N : Type w) [AddCommGroup N] [Module (Localization.Away t) N] :=
@@ -138,8 +136,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 contravariant/covariant naturality, identity, composition and simultaneous shift.
 The predicates P and B specify respectively the allowed sources and targets;
 the theorem below substitutes the actual continuity and lower-bound predicates.
-Source: Bhatt–Scholze, Lemma 6.8.12 and Proposition 6.8.14(2)
-(blueprint: lem-weil-pbc-scalar-localization-derived-hom). -/
+Source: Bhatt–Scholze, Lemma 6.8.12 and Proposition 6.8.14(2). -/
 def scalarLocalizationHomComparison (A : Type v) [CommRing A] (t : A)
     {D : Type x} [Category.{w} D] [Preadditive D] [HasShift D ℤ] [Linear A D]
     {T : Type y} [Category.{w} T] [Preadditive T] [HasShift T ℤ]

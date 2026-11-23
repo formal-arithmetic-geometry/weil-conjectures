@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkHomotopySpread
 
 /-! # Local homotopy normal form after pullback at a good residue point
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-residue-local-homotopy)
 -/
 
@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Local homotopy normal form after pullback at a good residue point.
 
-Source: blueprint lem-pc-perfect-locus, proof step 4.
+Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4.
 (blueprint: lem-pc-finite-free-residue-local-homotopy).
 
 Proof: At the local ring at g(z), split a unit differential coefficient until none

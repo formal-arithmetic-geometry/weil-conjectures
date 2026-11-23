@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # Retained summands detect morphisms from the column-tail quotient
 
-Source: Stacks Project, Homology, Tag 012X; column filtration and its graded pieces
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-hom-ext).
+Source: Stacks Project, Homology, Tag 012X.
 -/
 
 @[expose] public section
@@ -55,26 +54,7 @@ private theorem lift_next_quotient_zero
   rw [he, Category.assoc, hq, comp_zero]
 
 /-- Maps out of the graded piece agree if they agree on every retained summand lift.
-Source: Stacks Project, Homology, Tag 012X; quotient of the column-tail sum.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-hom-ext).
-
-Proof: cancel the epic evaluated cokernel projection from step p. Its two
-composites agree on the K generator and on every diagonal generator of the
-finite image supremum describing that step. A diagonal index s>p factors
-through step p+1 and is killed by the cokernel projection. Index s=p has
-nonnegative resolution degree m-p, so the first hypothesis applies after
-extendXIso. Columns s<p do not occur. If p<b the index-p term does not occur
-in the generating interval.
-For the K generator, when p<=m it belongs to step p+1 and is killed there;
-when m+1=p use the second hypothesis after the index identification. These
-are the only possibilities under p-1<=m. Equality on these generators
-implies equality on their image supremum: take the equalizer of the two
-composites, compose its monic inclusion with the step inclusion, and use
-the image-supremum formula to show that this subobject contains step p.
-The equalizer inclusion is consequently split epic and monic, forcing the
-two composites to agree. Monicity of the step inclusion makes all lifts
-unique, so the statement can test every lift. Empty intervals and zero
-retained terms require no separate nonemptiness assumption. -/
+Source: Stacks Project, Homology, Tag 012X. -/
 theorem cartanEilenberg_cone_graded_hom_ext
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

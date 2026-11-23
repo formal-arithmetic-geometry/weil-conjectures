@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 /-!
 # Counits in an exact square of derived adjunctions
 
-Source: Stacks Project, Derived Categories, Tags 09T5 and 070Y; exact-square extraction
-of tower normalization, steps 6--8 (blueprint: lem-weil-pbc-exact-square-derived-counit).
+Source: Stacks Project, Derived Categories, Tags 09T5 and 070Y.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ variable {A : Type uA} {Ap : Type uAp} {B : Type uB} {Bp : Type uBp}
   [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wBp} Bp]
 
 /-- The Hom formula specifying the derived adjunction on the fixed functors and fixed
-right-derived unit, for every chain map. Source: Stacks Tag 09T5, with Tag 070Y
-(blueprint: lem-weil-pbc-exact-square-derived-counit). -/
+right-derived unit, for every chain map. Source: Stacks Tag 09T5, with Tag 070Y. -/
 def Adjunction.HasExactDerivedHomFormula
     (F : B ⥤ A) (G : A ⥤ B) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (adj : F ⊣ G)

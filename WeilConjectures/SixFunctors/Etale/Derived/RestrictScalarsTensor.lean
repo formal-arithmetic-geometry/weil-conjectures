@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 
@@ -131,6 +132,17 @@ local instance instIsLeftAdjointModuleCatExtendScalars_restrictScalarsTensor
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {φ : Λ →+* Λ'}
   (hφ : Function.Surjective φ) {a : Λ} (ha : RingHom.ker φ = Ideal.span {a}) (X : Scheme.{u})
 
+/-- A K-flat representative can be chosen in the category of cochain complexes. -/
+private lemma exists_kFlat_quotient_iso (L : 𝐃(X, Λ)) :
+    ∃ (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ),
+      (HomotopyCategory.quasiIso _ (.up ℤ)).kFlat
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ∧
+        Nonempty (_root_.DerivedCategory.Qh.obj
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≅ L) := by
+  obtain ⟨P, hP, e⟩ := _root_.DerivedCategory.exists_kFlat_iso L
+  obtain ⟨P', rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  exact ⟨P', hP, e⟩
+
 /-- The projection isomorphism `Res((Λ' ⊗_Λ P) ⊗ M) ≅ P ⊗ Res M` for cochain complexes `P` of
 étale sheaves of `Λ`-modules and `M` of étale sheaves of `Λ'`-modules. -/
 noncomputable def extendScalarsTensorRestrictScalarsComplexIso
@@ -168,8 +180,6 @@ noncomputable def extendScalarsTensorRestrictScalarsComplexIso
       (HomologicalComplex.mapBifunctorHomologicalComplexObjObjIso
         (Sheaf.extendScalarsTensorRestrictScalarsIso X.smallEtaleTopology hφ ha) P M) (.up ℤ)
 
-set_option maxHeartbeats 400000 in
--- the kernel checks the chain of isomorphisms below
 include hφ ha in
 /-- **The projection formula for extension and restriction of scalars.** For `L ∈ D(X_ét, Λ)` and
 `N ∈ D(X_ét, Λ')`, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ N) ≅ L ⊗ᴸ Res N`: on a K-flat representative `P` of `L`
@@ -185,45 +195,33 @@ theorem nonempty_iso_derivedRestrictScalars_derivedTensor (L : 𝐃(X, Λ)) (N :
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
   let F := Sheaf.extendScalars X.smallEtaleTopology φ
   let R := Sheaf.restrictScalars X.smallEtaleTopology φ
-  obtain ⟨P, hP, ⟨e⟩⟩ := _root_.DerivedCategory.exists_kFlat_iso L
-  obtain ⟨P', rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  obtain ⟨P', hP, ⟨e⟩⟩ := exists_kFlat_quotient_iso X L
   have hP' := (HomotopyCategory.kFlat_quotient_obj_iff P').1 hP
-  obtain ⟨Q, hQ, ⟨eN⟩⟩ := _root_.DerivedCategory.exists_kFlat_iso N
-  obtain ⟨M, rfl⟩ := HomotopyCategory.quotient_obj_surjective Q
+  obtain ⟨M, hQ, ⟨eN⟩⟩ := exists_kFlat_quotient_iso X N
   have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P' hP'
-  have := _root_.DerivedCategory.isIso_tensorLeftCounit _ hP
-  have := _root_.DerivedCategory.isIso_tensorRightCounit _ hQ
-  let qF := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
-    ((F.mapHomologicalComplex _).obj P')
-  let qM := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj M
-  let qRM := (HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj
-    ((R.mapHomologicalComplex _).obj M)
-  -- `L ⊗ᴸ Λ' ≅ Qh (Λ' ⊗ P)`
-  let j₁ : (derivedExtendScalars hφ ha X).obj L ≅ _root_.DerivedCategory.Qh.obj qF :=
+  have hM := (HomotopyCategory.kFlat_quotient_obj_iff M).1 hQ
+  -- Compute scalar extension and restriction on the chosen representatives.
+  have j₁ : (derivedExtendScalars hφ ha X).obj L ≅
+      _root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex _).obj P') :=
     (derivedExtendScalars hφ ha X).mapIso e.symm ≪≫
       asIso (F.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P')) ≪≫
-      _root_.DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors _).app P')
-  -- `Res N ≅ Qh (Res M)`
-  let j₂ : R.mapDerivedCategory.obj N ≅ _root_.DerivedCategory.Qh.obj qRM :=
+      _root_.DerivedCategory.Qh.mapIso ((F.mapHomotopyCategoryFactors _).app P') ≪≫
+      (_root_.DerivedCategory.quotientCompQhIso _).app _
+  have j₂ : R.mapDerivedCategory.obj N ≅
+      _root_.DerivedCategory.Q.obj ((R.mapHomologicalComplex _).obj M) :=
     R.mapDerivedCategory.mapIso (eN.symm ≪≫
         (_root_.DerivedCategory.quotientCompQhIso _).app M) ≪≫
-      R.mapDerivedCategoryFactors.app M ≪≫
-      ((_root_.DerivedCategory.quotientCompQhIso _).app ((R.mapHomologicalComplex _).obj M)).symm
-  let k₁ := R.mapDerivedCategory.mapIso (tensorIso j₁ eN.symm ≪≫
-      asIso ((_root_.DerivedCategory.tensorRightCounit qM).app qF) ≪≫
-      _root_.DerivedCategory.Qh.mapIso
-        (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) _ M) ≪≫
-      (_root_.DerivedCategory.quotientCompQhIso _).app (((F.mapHomologicalComplex _).obj P') ⊗ M))
-  let k₂ := R.mapDerivedCategoryFactors.app (((F.mapHomologicalComplex _).obj P') ⊗ M)
-  let k₃ := _root_.DerivedCategory.Q.mapIso
+      R.mapDerivedCategoryFactors.app M
+  -- Use the tensor comparison once for each K-flat factor.
+  have k₁ := R.mapDerivedCategory.mapIso
+    (tensorIso j₁ (eN.symm ≪≫ (_root_.DerivedCategory.quotientCompQhIso _).app M) ≪≫
+      _root_.DerivedCategory.QObjTensorQObjIsoOfKFlatRight _ M hM)
+  have k₂ := R.mapDerivedCategoryFactors.app (((F.mapHomologicalComplex _).obj P') ⊗ M)
+  have k₃ := _root_.DerivedCategory.Q.mapIso
     (extendScalarsTensorRestrictScalarsComplexIso hφ ha X P' M)
-  let k₄ := ((_root_.DerivedCategory.quotientCompQhIso _).app
-      (P' ⊗ (R.mapHomologicalComplex _).obj M)).symm ≪≫
-    _root_.DerivedCategory.Qh.mapIso
-      (Functor.Monoidal.μIso (HomotopyCategory.quotient _ (ComplexShape.up ℤ)) P' _).symm ≪≫
-    (asIso ((_root_.DerivedCategory.tensorLeftCounit
-      ((HomotopyCategory.quotient _ _).obj P')).app qRM)).symm ≪≫
-    tensorIso e j₂.symm
+  have k₄ := (_root_.DerivedCategory.QObjTensorQObjIsoOfKFlatLeft P'
+      ((R.mapHomologicalComplex _).obj M) hP').symm ≪≫
+    tensorIso (((_root_.DerivedCategory.quotientCompQhIso _).app P').symm ≪≫ e) j₂.symm
   exact ⟨k₁ ≪≫ k₂ ≪≫ k₃ ≪≫ k₄⟩
 
 end Etale

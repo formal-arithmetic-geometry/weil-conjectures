@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteKanUnitRelations
 /-! # Finite raw section equality stabilization
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-equality-stabilization).
 -/
 
 @[expose] public section
@@ -47,41 +46,12 @@ private theorem arrow_eq_preserves_equality {S T U : Type u}
   rw [← Arrow.mk_injective _ _ h]
   exact hxy
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-finite overlap equalities in the filtered-colimit calculation.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-equality-stabilization).
+/-- Finitely many pairs of stage sections `r p` and `s p` with equal images in the colimit of
+the Kan-extended stage presheaves `B` become equal simultaneously under one transition map
+`θ t t' b` to a later stage `t'`.
 
-Proof: The unit condition htheta determines each theta uniquely by the sheaf
-adjunction hom-equivalence. Consequently theta preserves identity and composition,
-with the object transports supplied by F and the triangles in Under i.
-
-For one p, evaluate the outer presheaf colimit at Y = V_t(X_p). Evaluation
-preserves colimits and Under i is filtered, so equality of its two representatives
-holds in B_k(Y) after one transition t -> k. By hbeta-map these are beta_k images
-of theta-transported r_p and s_p, with the cocone object transport to Y.
-The pointwise left Kan formula presents B_k(Y) by triples (W, a, x), with
-W in F(k.right), a : Y -> V_k(W), and x a section at W. Equality is a finite
-zigzag of relations identifying (W, a, restriction along h of x') with
-(W', a followed by V_k(h), x'), for h : W -> W'.
-
-Lift all the finitely many arrows a to a stage receiving k, using surjectivity
-of the arrow cocone. Use eventual equality in the object cocone to align their
-sources with the forward image of X_p and their targets with the forward images
-of W. Refine again so eventual equality in the arrow cocone enforces each
-relation triangle and identifies both endpoint arrows with the identity of
-the forward image of X_p. Filteredness equalizes the competing stage maps,
-including the maps from i, so this is one transition in Under i.
-Send each triple to the section obtained by theta-transporting x and restricting
-along its lifted arrow. Naturality of theta and the lifted triangles make the
-two sides of each generating relation equal. Thus the zigzag endpoints agree;
-the identity endpoint arrows and composition of theta identify them with the
-original r_p and s_p transported through the composite transition from t.
-
-Repeat this construction for each p. Since K is finite, filteredness supplies a
-common receiving stage and equalizes the finitely many maps from t. Transport
-of an equality remains an equality, and composition of theta gives every
-required equation for that single transition. If K is empty, take the identity
-of t. This argument uses no covering family, pullback, or gluing. -/
+Source: Stacks Project, Sites, Tag 0A35, finite overlap equalities in the filtered-colimit
+calculation. -/
 theorem colimit_site_raw_finite_equality_stabilization
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

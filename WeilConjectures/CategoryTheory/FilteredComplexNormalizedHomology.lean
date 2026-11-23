@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.FilteredComplexSuccessorBoundariesImage
 # The normalized successor homology comparison
 
 Source: Stacks Project, Tag 012K, Lemma 12.24.2, the cycle and boundary formulas.
-(blueprint: lem-sp-filtered-complex-normalized-homology).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- Normalize the homology comparison by its action on successor cycles.
-Source: Stacks Project, Tag 012K, Lemma 12.24.2.
-(blueprint: lem-sp-filtered-complex-normalized-homology). -/
+Source: Stacks Project, Tag 012K, Lemma 12.24.2. -/
 def FilteredComplexHomologyNormalized
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ)
     (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ)
@@ -41,8 +39,7 @@ def FilteredComplexHomologyNormalized
     f ≫ D.page.homologyπ pq ≫ e.hom = filteredComplexPageπ K F (r + 1) pq
 
 /-- Successor cycles are contained in the current cycles.
-Source: Stacks Project, Tag 012K, the displayed formula for cycles.
-(blueprint: lem-sp-filtered-complex-normalized-homology). -/
+Source: Stacks Project, Tag 012K, the displayed formula for cycles. -/
 theorem filteredComplex_cycles_successor_le
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (pq : ℤ × ℤ) :
     F.complexCycles pq.1 (pq.1 + pq.2) (r + 1) ≤
@@ -64,16 +61,7 @@ theorem filteredComplex_cycles_successor_le
   rw [Category.assoc, imageSubobject_arrow_comp, hfac]
 
 /-- There is exactly one successor homology isomorphism with this normalization.
-Source: Stacks Project, Tag 012K, Lemma 12.24.2.
-(blueprint: lem-sp-filtered-complex-normalized-homology).
-
-Proof. The successor-cycle cover f is epic. The successor-boundary image formula
-identifies the kernel of f followed by the homology projection with the image of
-the successor boundary inclusion. Thus this composite is a cokernel of that
-inclusion, as is the successor page projection. The unique comparison of these
-two cokernels is the desired isomorphism. Its equation is independent of the
-chosen cycle cover because the page cycle inclusion is monic. Cancelling the
-epic composite f followed by the homology projection proves uniqueness. -/
+Source: Stacks Project, Tag 012K, Lemma 12.24.2. -/
 theorem filteredComplex_normalized_homology
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)
     (D : FilteredComplexPageDifferential K F r) (pq : ℤ × ℤ) :

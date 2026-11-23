@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 /-! # The intrinsic compact scalar mate on bounded constructible inputs
 
 Source: Stacks 0GL6 and 09AL; the compact-support paragraph of
-`lem-fix-operation-reduction`.
+`proposition-six-operations-change-coefficients`.
 -/
 
 @[expose] public noncomputable section
@@ -98,8 +98,8 @@ private theorem bounded_interval
 /-- The actual intrinsic scalar transpose is invertible if its input is bounded
 constructible and its scalar extension has bounded cohomology.
 
-Source: Stacks 0GL6 and 09AL; `lem-fix-operation-reduction`, compact-support paragraph.
-(blueprint: lem-sf-finite-compact-scalar-constructible).
+Source: Stacks 0GL6 and 09AL; `proposition-six-operations-change-coefficients`, compact-support
+paragraph. (blueprint: lem-sf-finite-compact-scalar-constructible).
 
 Proof: the finite-ring essential-image criterion gives a bounded constructible
 etale antecedent G. The normalized site/scalar isomorphism identifies the intrinsic

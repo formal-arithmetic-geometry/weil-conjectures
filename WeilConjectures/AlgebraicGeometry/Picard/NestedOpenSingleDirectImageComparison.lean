@@ -12,8 +12,6 @@ import WeilConjectures.AlgebraicGeometry.OpenImmersionRestrictionDerivedProperti
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Nested open restriction of a single direct image
-Source: Stacks Project, Tag 08FE (lemma-restrict-direct-image-open).
-(blueprint: lem-pc-nested-open-single-direct-image-comparison).
 -/
 
 @[expose] public section
@@ -24,22 +22,7 @@ namespace AlgebraicGeometry
 noncomputable section
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
-/-- Nested open restriction of a single direct image.
-Source: Stacks Project, Tag 08FE (lemma-restrict-direct-image-open).
-Proof: derive the sectionwise identity for open restriction using a K-injective
-resolution. Restrict first along U.ι and then along V.ι; both restrictions are exact
-and preserve K-injectives, and their composite is restriction along V.ι ≫ U.ι.
-Identify the inverse-image open with the pullback of this composite open immersion,
-using the unique projection-preserving isomorphism. Its exact coefficient restriction
-is tensor pullback along the first projection. Exact functors commute with the single
-functor. Compute both right-derived direct images on this restricted resolution.
-Localization uniqueness intertwines Qh and hence Q, so the sectionwise comparison
-holds for the supplied localization on X and the standard one on the pullback.
-Finally apply the inverse exact overEquiv V. The unit and counit cancel the preceding
-forward equivalence, yielding the displayed localized comparison. No flatness,
-quasi-coherence, quasi-compactness or separatedness is needed. The construction
-also applies to empty opens and zero modules.
-(blueprint: lem-pc-nested-open-single-direct-image-comparison). -/
+/-- Nested open restriction of a single direct image. -/
 theorem nestedOpen_single_directImage_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{wX}

@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawFiniteMatchingRefinement
 /-! # Matching lifts of raw sections
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-matching-lift).
 -/
 
 @[expose] public section
@@ -51,35 +50,8 @@ private theorem image_cover_eq
     exact Presieve.ofArrows.mk (⟨⟨_, L.map _⟩, .of hf⟩ : (R.map L).uncurry)
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-the finite-cover equalizer calculation, before applying the stage sheaf condition.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-matching-lift).
-
-Proof: Compute each left Kan extension pointwise. Its generators are sections of a
-stage inverse image together with an arrow from the evaluation object to a stage image.
-The object and arrow set-colimits let us lift that arrow and its endpoints to a common
-stage; restrict the section along the lifted arrow. A finite chain of Kan relations
-can likewise be lifted to a later stage. Naturality of beta and h-beta-map turn its
-relations into restriction and theta transport. The equation h-theta identifies theta
-with the unique adjunction transpose of the unit, so these transports compose.
-Consequently every raw section has a stage representative and every equality of raw
-representatives holds after further refinement.
-
-Index the original cover by R.uncurry. Its finiteness allows us to lift all its local
-sections simultaneously to a stage receiving i and j. Transport the original cover
-there; hcover makes it covering. For each pair of covering arrows, hx gives equality
-on their pullback in the limit category. Covering pullbacks exist at the stage, and
-hpullback and hVpullback identify their images with these limit pullbacks. Apply the
-raw equality criterion to the finitely many resulting equations and refine once more
-so all hold. The pullback universal property then gives compatibility on every common
-test object. The resulting family y has the prescribed beta/colimit images by
-naturality and h-beta-map. The cocone equation identifies the transported target W
-with the original image target; its equality is e. The transported covering arrows,
-indexed by T.uncurry, give exactly the original image presieve, including duplicates,
-which is hT. If R is empty, use its transported empty cover and the empty family:
-there are no sections or equations to lift. No amalgamation or uniqueness is asserted
-and no arbitrary existential witness is used to define data.
--/
+/-- Matching families of sections of the raw colimit site lift to a finite stage.
+Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_raw_section_matching_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

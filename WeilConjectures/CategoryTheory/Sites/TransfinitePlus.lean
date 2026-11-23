@@ -41,7 +41,6 @@ treated here.
 
 * `CategoryTheory.GrothendieckTopology.preservesFiniteLimits_transfinitePlus`
 * `CategoryTheory.GrothendieckTopology.W_toTransfinitePlus_app`
-
 -/
 
 @[expose] public section

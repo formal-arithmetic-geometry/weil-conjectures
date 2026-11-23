@@ -38,11 +38,8 @@ Then the *fixed-square identity*
 Rι'_* β_d ∘ χ_ι ∘ Ψ_C(B) = B' ∘ c'^!(χ_Δ) ∘ β_c(Δ_*)
 ```
 
-holds (`CategoryTheory.fixedSquare_of_compactSupportExchange`). This is the abstract form of
-blueprint `sk-lem-tf-nearby-mate-coherences` (6), proved as in the blueprint: after taking
-adjoints, both sides are the exchange of the composite `cι = Δd` followed by the counit of
-`d_! ⊣ d^!`.
-
+holds (`CategoryTheory.fixedSquare_of_compactSupportExchange`). This is the abstract form of the
+base change theorem for nearby cycles.
 -/
 
 @[expose] public section
@@ -97,7 +94,7 @@ private lemma mateEquiv_ofNatIsoRight_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L�
 
 end
 
-/-- Step 1 of the fixed-square identity: the base change isomorphisms intertwine the
+/-- The base change isomorphisms intertwine the
 compact-support exchanges `ν_c`, `ν_d` with the pullback exchanges `α_ι`, `α_Δ`. -/
 private lemma baseChange_exchange_comm
     (hBC : BC.hom = (mateEquiv (adjι.ofNatIsoRight isoι.symm)
@@ -153,8 +150,8 @@ private lemma baseChange_exchange_comm
     reassoc_of% hαΔ]
   rfl
 
-/-- **The fixed-square identity for exchange transformations** (the abstract form of blueprint
-`sk-lem-tf-nearby-mate-coherences` (6)): if the base change isomorphisms `BC`, `BC'` are the mates
+/-- **The fixed-square identity for exchange transformations** (the abstract form of the
+base change theorem for nearby cycles): if the base change isomorphisms `BC`, `BC'` are the mates
 of the composition isomorphisms `Sq`, `Sq'`, if the compact-support exchanges `ν_ι`, `ν_Δ` of the
 proper maps are inverse to the proper exchanges `χ_ι`, `χ_Δ` (the mates of `α_ι`, `α_Δ`), and if
 the compact-support exchanges are compatible with the composition `cι = Δd`, then the mates

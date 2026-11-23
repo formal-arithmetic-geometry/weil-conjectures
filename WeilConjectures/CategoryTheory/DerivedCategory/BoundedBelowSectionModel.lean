@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleHypercoverComputesBoundedComple
 /-!
 # Comparing a bounded-below section model with the right derived functor
 
-Source: Stacks Project, Tag 09A2, proof by a bounded-below injective resolution.
+## References
+
+* Stacks Project, Tag 09A2.
 -/
 
 @[expose] public section
@@ -45,15 +47,7 @@ private noncomputable def chainRightDerivedUnit
 
 /-- A section-total model which inverts bounded-below quasi-isomorphisms and whose
 augmentation is a quasi-isomorphism on injective complexes computes the derived functor.
-Source: Stacks Project, Tag 09A2, injective-resolution comparison.
-(auxiliary; not a blueprint node).
-Proof: choose a bounded-below injective resolution of each input. Both the model of
-the resolution map and the augmentation on its injective target become invertible
-in the derived category. Compose their inverses with the derived unit at that target.
-For naturality, lift each coefficient map to its injective resolutions up to homotopy.
-The derived functor and the model identify homotopic bounded-below maps: a cylinder
-stays bounded below and its quasi-isomorphic projection becomes invertible. Naturality
-of the augmentation and of the derived unit then proves the desired square. -/
+Source: Stacks Project, Tag 09A2, injective-resolution comparison. -/
 theorem boundedBelow_sectionModel
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
     {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]

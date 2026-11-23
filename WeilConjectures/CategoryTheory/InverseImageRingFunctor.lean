@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 # Ring-sheaf lift of a finite-limit-preserving inverse image
 
 Source: Stacks Project, Sites, Tag 00YV, the discussion before the proposition and
-its proof for rings as sextuples (auxiliary; not a blueprint node).
+its proof for rings as sextuples.
 
 The four helper maps are the actual sectionwise operations of a ring sheaf, regarded
 as maps of sheaves of sets. The theorem records their transport by the canonical
@@ -31,8 +31,7 @@ open CategoryTheory.CartesianMonoidalCategory
 namespace CategoryTheory
 
 /-- Addition of a ring sheaf as a map of sheaves of sets.
-Source: Stacks Project, Sites, Tag 00YV, rings as sextuples
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YV, rings as sextuples. -/
 def ringSheafAdd {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :
     (sheafCompose J (forget CommRingCat.{u})).obj R ⊗
@@ -48,8 +47,7 @@ def ringSheafAdd {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
        exact (map_add _ _ _).symm }⟩
 
 /-- Multiplication of a ring sheaf as a map of sheaves of sets.
-Source: Stacks Project, Sites, Tag 00YV, rings as sextuples
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YV, rings as sextuples. -/
 def ringSheafMul {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :
     (sheafCompose J (forget CommRingCat.{u})).obj R ⊗
@@ -65,8 +63,7 @@ def ringSheafMul {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
        exact (map_mul _ _ _).symm }⟩
 
 /-- Zero of a ring sheaf as a map from the terminal sheaf of sets.
-Source: Stacks Project, Sites, Tag 00YV, rings as sextuples
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YV, rings as sextuples. -/
 def ringSheafZero {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :
     𝟙_ (Sheaf J (Type u)) ⟶ (sheafCompose J (forget CommRingCat.{u})).obj R :=
@@ -78,8 +75,7 @@ def ringSheafZero {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
        exact (map_zero _).symm }⟩
 
 /-- One of a ring sheaf as a map from the terminal sheaf of sets.
-Source: Stacks Project, Sites, Tag 00YV, rings as sextuples
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YV, rings as sextuples. -/
 def ringSheafOne {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :
     𝟙_ (Sheaf J (Type u)) ⟶ (sheafCompose J (forget CommRingCat.{u})).obj R :=
@@ -161,30 +157,7 @@ private theorem homEquivCast
 /-- A finite-limit-preserving left adjoint on set sheaves lifts to commutative ring
 sheaves, naturally on underlying sheaves and compatibly with operations and adjunction.
 Source: Stacks Project, Sites, Tag 00YV, discussion before the proposition and proof
-for rings as sextuples (auxiliary; not a blueprint node).
-
-The components of `e` are the stated `e_R`; its naturality is exactly the equation
-for every ring-sheaf morphism. The comparison `v` identifies the underlying right
-adjoint, so that the final equation compares hom-equivalences in the same hom-set.
-The operation equations have domain `L (|R| × |R|)` or `L (*)`, respectively, and
-are equivalent to transporting by the inverses of the canonical comparisons.
-
-Proof:
-1. Use `sheaves_algebraicStructures_objects`
-   (lem-weil-pbc-sheaf-algebraic-structures-objects) on each site to identify ring
-   sheaves with internal commutative ring objects, compatibly with forgetting.
-2. Finite-limit preservation implies preservation of binary products and the terminal
-   object. Apply `Adjunction.liftsGroupRingObjects`
-   (lem-weil-pbc-adjunction-lifts-group-ring-objects) to the given adjunction. Its
-   ring branch supplies both functors, their adjunction, underlying comparisons,
-   and the transport equations for all ring operations.
-3. Conjugate both functors and the adjunction by the identifications from step 1.
-   The underlying comparisons give `e` and `v`; their naturality gives the asserted
-   equation on ring morphisms. The sectionwise operations in step 1 convert the
-   operation equations from step 2 to the four displayed equations here.
-4. Transport the hom-equivalence clause from step 2 through the same identifications.
-   This gives the last equation, hence exactly the original set-sheaf hom-equivalence
-   after forgetting rings and applying the underlying comparisons. -/
+for rings as sextuples. -/
 theorem inverseImage_ring_functor
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

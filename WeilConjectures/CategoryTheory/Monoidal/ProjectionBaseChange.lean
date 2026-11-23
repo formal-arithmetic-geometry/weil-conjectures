@@ -47,7 +47,6 @@ along `q_V` and `q_W`, and `BC : g ⋙ q ⟶ qZ ⋙ G` is compact-support base c
   `Z` correspond under the trace and the Verdier exchange of `G`.
 - `CategoryTheory.ProjectionBaseChange.isIso_curry_iff`: hence one is an isomorphism if and only if
   the image of the other under `G` is.
-
 -/
 
 @[expose] public section

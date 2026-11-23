@@ -45,23 +45,7 @@ attribute [local irreducible] homComplexFunctor ringedComplexTensorEvaluation
 
 /-- Finite-free evaluation, including transition, coefficient and unit compatibility.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals; more-algebra.tex, Tag 0913.
-(auxiliary; not a blueprint node).
-
-Proof: each positive two-term factor is bounded with dualizable unit terms.
-The bounded-complex duality theorem and induction on the actual tensor diagram
-therefore make every finite Koszul stage dualizable. Transport the tensor-Hom
-adjunction along the signed comparison with the ordinary product Hom. Its canonical
-tensor evaluation is invertible on these stages and natural in both variables,
-so the evaluations assemble to an isomorphism from the strict tensor tower to
-the Hom tower. Take its inverse. Coefficient naturality follows by cancellation.
-For the projection P_m -> O[0], source naturality and the closed-category unit law
-identify the tensor unit with precomposition by that projection. In degree zero
-the signed adjunction has sign one, so its unit agrees with inverse evaluation
-at one, giving the required unit equation. The empty tensor and zero or
-invertible generators require no additional assumptions.
-No colimit or inverse limit is taken in this statement. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; more-algebra.tex, Tag 0913. -/
 theorem exists_ringedKoszul_finiteEvaluation :
     ∃ e : ∀ N : ringedSiteComplex O,
       (ringedKoszulDiagram O r b).op ⋙ (homComplexFunctor (R := O)).flip.obj N ≅

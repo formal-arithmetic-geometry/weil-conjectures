@@ -19,9 +19,7 @@ unique up to non-unique isomorphism.
 
 A triangulated functor commuting with countable products sends homotopy limit cones to homotopy
 limit cones (`CategoryTheory.Pretriangulated.IsHomotopyLimit.map`), so it commutes with `R lim`
-up to an isomorphism compatible with the legs
-(`CategoryTheory.Pretriangulated.IsHomotopyLimit.exists_iso_map`, blueprint
-`lem-cbc-exact-functor-rlim`).
+up to an isomorphism compatible with the legs.
 
 ## Main definitions
 
@@ -219,7 +217,7 @@ end Map
 variable {D : Type*} [Category D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
   [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
 
-/-- Blueprint `lem-cbc-exact-functor-rlim`: Exact functors commute with derived limits of
+/-- Exact functors commute with derived limits of
 towers.
 
 Let `Φ : C ⥤ D` be a triangulated functor which commutes with the countable product `∏ₙ Mₙ` of

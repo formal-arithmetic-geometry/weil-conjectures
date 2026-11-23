@@ -22,8 +22,9 @@ Let `S` be the strict localization of the surface of a transverse corner at a ge
 `z̄` (with algebraically closed field), `i' : S - (X_S ∪ Y_S) ⟶ S - Y_S` and
 `p' : S - (X_S ∪ Y_S) ⟶ Z - (X ∪ Y)`. Assuming that the restriction maps
 `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective (blueprint
-`det-tf-transverse-corner-constant`), this file proves that `(Rj_* i_! E)_z̄ = 0` for every
-bounded `E` with finite `ℓ`-group monodromy (blueprint `det-tf-transverse-corner-vanishing`):
+`lemma-punctured-surface-punctured-curve--1`), this file proves that `(Rj_* i_! E)_z̄ = 0` for every
+bounded `E` with finite `ℓ`-group monodromy (blueprint
+`lemma-cohomology-near-two-transverse-divisors--1`):
 
 * *constant coefficients*: `RΓ(S - Y_S, i'_! N) = 0` for a finite `Λ`-module `N` killed by `ℓ`,
   as an abelian sheaf a finite sum of copies of `ℤ/ℓ`;
@@ -55,7 +56,7 @@ variable {k : Type u} [Field k] (C : TransverseCorner k) {ℓ : ℕ} [Fact ℓ.P
   (zbar : Spec (.of Ω) ⟶ C.Z)
 
 /-- The property of `K ∈ D(S - (X_S ∪ Y_S), Λ)` that `RΓ(S - Y_S, i'_! K) = 0`, to which the
-dévissage is applied (blueprint `det-tf-transverse-corner-vanishing`). -/
+dévissage is applied (blueprint `lemma-cohomology-near-two-transverse-divisors--1`). -/
 def IsAcyclicExtension :
     ObjectProperty (DerivedCategory
       (Sheaf (C.strictLocalizationComplement zbar).smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
@@ -93,9 +94,9 @@ lemma isAcyclicExtension_ext (T : Pretriangulated.Triangle (DerivedCategory
         T hT)) h₁ h₃
 
 omit [Finite Λ] in
-/-- Constant coefficients (blueprint `det-tf-transverse-corner-vanishing`): if the restriction
-maps `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective, then `RΓ(S - Y_S, i'_! N) = 0` for
-every finite `Λ`-module `N` killed by `ℓ`. -/
+/-- Constant coefficients (blueprint `lemma-cohomology-near-two-transverse-divisors--1`): if the
+restriction maps `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)` are bijective, then
+`RΓ(S - Y_S, i'_! N) = 0` for every finite `Λ`-module `N` killed by `ℓ`. -/
 lemma isAcyclicExtension_constantSheaf
     (hbij : ∀ q : ℕ, Function.Bijective (Etale.cohomologyMap
       (pullback.snd (pullback.snd C.iX C.j) (pullback.fst C.j (strictLocalizationToBase zbar)))
@@ -127,8 +128,8 @@ lemma isAcyclicExtension_constantSheaf
       ((C.strictLocalizationComplementι zbar)_!open[AddCommGrpCat.{u + 1}]).mapIso
         ((Etale.constantSheafSheafComposeForget₂Iso Λ).app N)))))
 
-/-- Sheaves (blueprint `det-tf-transverse-corner-vanishing`): for a sheaf `H` on `Z - (X ∪ Y)`
-with finite `ℓ`-group monodromy, the stalk at `z̄` of `Rj_* i_! H` vanishes. -/
+/-- Sheaves (blueprint `lemma-cohomology-near-two-transverse-divisors--1`): for a sheaf `H` on
+`Z - (X ∪ Y)` with finite `ℓ`-group monodromy, the stalk at `z̄` of `Rj_* i_! H` vanishes. -/
 lemma isZero_leftDerivedUpperStar_rightDerivedLowerStar_singleFunctor
     (hΛ : ∃ n : ℕ, (ℓ : Λ) ^ n = 0)
     (hbij : ∀ q : ℕ, Function.Bijective (Etale.cohomologyMap
@@ -163,8 +164,8 @@ lemma isZero_leftDerivedUpperStar_rightDerivedLowerStar_singleFunctor
       (asIso ((Etale.openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} Λ)
         hsq.toCommSq).app H)).symm)))
 
-/-- Blueprint `det-tf-transverse-corner-vanishing`, assuming `det-tf-transverse-corner-constant`
-in the form of the bijectivity of the restriction maps
+/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, assuming
+`lemma-punctured-surface-punctured-curve--1` in the form of the bijectivity of the restriction maps
 `H^q(S - Y_S, ℤ/ℓ) ⟶ H^q(X_S - z, ℤ/ℓ)`: for a geometric point `z̄` with algebraically closed
 field, the stalk at `z̄` of `M = Rj_* i_! E` vanishes for every bounded `E` with finite `ℓ`-group
 monodromy. -/

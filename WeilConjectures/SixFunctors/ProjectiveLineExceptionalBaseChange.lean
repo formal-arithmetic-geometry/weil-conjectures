@@ -13,8 +13,8 @@ import WeilConjectures.SixFunctors.ProjectiveLineTraceCounitBaseChange
 /-!
 # The projective-line case of exceptional base change
 
-Source: blueprint `sk-lem-geo-affine-local`, proof (1), and
-`prop-asd-smooth-base-change`, proof, projective-line model.
+Source: blueprint `lemma-affine-space-etale-localization`, proof (1), and
+`proposition-exceptional-inverse-image-smooth-morphism--6`, proof, projective-line model.
 -/
 
 @[expose] public section
@@ -91,8 +91,8 @@ private theorem exceptionalBaseChange_isIso_of_counit
 /-- The canonical exceptional base-change map for a projective-line projection over an
 arbitrary base is invertible, for finite coefficients of invertible exponent.
 
-Source: blueprint `sk-lem-geo-affine-local`, proof (1), and
-`prop-asd-smooth-base-change`, projective-line computation.
+Source: blueprint `lemma-affine-space-etale-localization`, proof (1), and
+`proposition-exceptional-inverse-image-smooth-morphism--6`, projective-line computation.
 (auxiliary; not a blueprint node)
 
 Proof: use the projective-line adjunction whose right adjoint is pullback followed by

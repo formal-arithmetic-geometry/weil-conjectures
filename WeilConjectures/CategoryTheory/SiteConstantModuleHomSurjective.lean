@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.SiteConstantModuleOverHom
 
 /-! # Local surjectivity of the constant module Hom comparison
 
-Source: Stacks Project, Modules on Sites, Tag 093T, proof of (1).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093T, proof of (1).
 -/
 
 @[expose] public noncomputable section

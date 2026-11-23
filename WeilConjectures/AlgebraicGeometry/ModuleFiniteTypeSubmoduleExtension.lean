@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeImageExtension
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentExtensionQcOpen
 import WeilConjectures.AlgebraicGeometry.ModuleFiniteTypeApproximation
 
@@ -34,8 +34,41 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option autoImplicit false
 
-set_option maxHeartbeats 600000 in
--- Transporting generators and the image factorization need extra elaboration heartbeats.
+private theorem finiteType_of_submodule_extension_iso.{u₁, v₁}
+    {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
+    {R : Sheaf J RingCat.{u}}
+    [∀ A, HasSheafify (J.over A) AddCommGrpCat.{u}]
+    [∀ A, (J.over A).WEqualsLocallyBijective AddCommGrpCat.{u}]
+    {M N : SheafOfModules.{u} R} (e : M ≅ N) [M.IsFiniteType] : N.IsFiniteType := by
+  obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData M
+  let q' : N.LocalGeneratorsData :=
+    { I := q.I
+      X := q.X
+      coversTop := q.coversTop
+      generators i := (q.generators i).ofEpi (e.hom.over (q.X i)) }
+  refine ⟨q', ⟨fun i ↦ ?_⟩⟩
+  exact ⟨(hq.isFiniteType i).finite⟩
+
+private theorem restricted_image_iso.{u₁, v₁, u₂, v₂}
+    {C : Type u₁} [Category.{v₁} C] [Abelian C]
+    {D : Type u₂} [Category.{v₂} D] [Abelian D]
+    (R : C ⥤ D) [R.PreservesEpimorphisms]
+    {E F : C} (r : E ⟶ F) {G : D} (ι : G ⟶ R.obj F) [Mono ι]
+    (e : R.obj E ≅ G) (hr : R.map r = e.hom ≫ ι) :
+    ∃ e' : R.obj (Abelian.image r) ≅ G,
+      R.map (Abelian.image.ι r) = e'.hom ≫ ι := by
+  have : Mono (R.map r) := by rw [hr]; infer_instance
+  have : Mono (R.map (Abelian.factorThruImage r)) :=
+    mono_of_mono_fac (by rw [← Functor.map_comp, Abelian.image.fac])
+  have : Epi (R.map (Abelian.factorThruImage r)) := R.map_epi _
+  have : IsIso (R.map (Abelian.factorThruImage r)) := isIso_of_mono_of_epi _
+  refine ⟨(asIso (R.map (Abelian.factorThruImage r))).symm ≪≫ e, ?_⟩
+  apply (cancel_epi (R.map (Abelian.factorThruImage r))).mp
+  simp only [Iso.trans_hom, Iso.symm_hom, asIso_inv, Category.assoc,
+    IsIso.hom_inv_id_assoc]
+  rw [← R.map_comp, Abelian.image.fac]
+  exact hr
+
 set_option backward.isDefEq.respectTransparency false in
 /-- A finite-type quasi-coherent submodule on a quasi-compact open extends to the scheme.
 
@@ -73,19 +106,7 @@ theorem exists_quasicoherent_finiteType_submodule_extension
   obtain ⟨H, hH, ψ, α, hψ⟩ :=
     exists_quasiCoherent_extension_of_quasiCompact_open X U inferInstance F G ι
   have : H.IsQuasicoherent := hH
-  have : (H.over U).IsFiniteType := by
-    obtain ⟨q, hq⟩ := IsFiniteType.exists_localGeneratorsData G
-    have (i : q.I) : Epi (α.inv.over (q.X i)) := IsIso.epi_of_iso _
-    let q' : (H.over U).LocalGeneratorsData :=
-      { I := q.I
-        X := q.X
-        coversTop := q.coversTop
-        generators i := (q.generators i).ofEpi (α.inv.over (q.X i)) }
-    have : q'.IsFiniteType :=
-      { isFiniteType := fun i ↦ by
-          have := hq.isFiniteType i
-          exact inferInstanceAs ((q.generators i).ofEpi _).IsFiniteType }
-    exact { exists_localGeneratorsData := ⟨q', inferInstance⟩ }
+  have : (H.over U).IsFiniteType := finiteType_of_submodule_extension_iso.{u, u, u} α.symm
   obtain ⟨E, hE, hEft, j, hj, hjU⟩ := exists_finiteType_global_approximation X U hU H
   have : E.IsQuasicoherent := hE
   have : E.IsFiniteType := hEft
@@ -98,22 +119,14 @@ theorem exists_quasicoherent_finiteType_submodule_extension
     change R.map j ≫ (SheafOfModules.overFunctor _ U).map ψ = _
     rw [hψ]
     rfl
-  have : Mono (R.map r) := by rw [hr]; infer_instance
-  have : Mono (R.map (Abelian.factorThruImage r)) :=
-    mono_of_mono_fac (by rw [← Functor.map_comp, Abelian.image.fac])
   have : R.PreservesEpimorphisms :=
     Functor.preservesEpimorphisms_of_adjunction
       (SheafOfModules.overPushforwardOverAdj (R := moduleRings X.toRingedSpace) U)
-  have : Epi (R.map (Abelian.factorThruImage r)) := R.map_epi _
-  have : IsIso (R.map (Abelian.factorThruImage r)) := isIso_of_mono_of_epi _
-  have himg := quasiCoherent_cokernel_image r
-  refine ⟨Abelian.image r, himg.2.2.2.2.2.2.2.1,
+  obtain ⟨e, he⟩ := restricted_image_iso R r ι (asIso (R.map j) ≪≫ α) hr
+  have := isQuasicoherent_cokernel r
+  have himg := isQuasicoherent_kernel (CategoryTheory.Limits.cokernel.π r)
+  exact ⟨Abelian.image r, himg,
     (RingedSpace.finiteType_image_extension X.toRingedSpace).2.1 r,
-    Abelian.image.ι r, inferInstance,
-    (asIso (R.map (Abelian.factorThruImage r))).symm ≪≫ asIso (R.map j) ≪≫ α, ?_⟩
-  apply (cancel_epi (R.map (Abelian.factorThruImage r))).1
-  simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc]
-  rw [← Functor.map_comp, Abelian.image.fac, hr]
-  simp
+    Abelian.image.ι r, inferInstance, e, he⟩
 
 end AlgebraicGeometry.Scheme.Modules

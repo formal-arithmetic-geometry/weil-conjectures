@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.SiteConstantModuleFunctorGeneral
 /-!
 # The commutative-coefficient presentation of exact constant realization
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093J; Cohomology on Sites,
-paragraph preceding 09BD (auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03CY and 093J.
 The ring sheaf here is the constant CommRingCat sheaf with commutativity forgotten.
 The old interface uses constant RingCat sheafification instead. Their canonical
 constantCommuteCompose isomorphism identifies the two presentations.
@@ -29,18 +28,21 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- The usual constant commutative ring sheaf.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 093J.
+-/
 abbrev realizationRing (R : Type (max u v)) [CommRing R] :=
   (constantSheaf J CommRingCat.{max u v}).obj (CommRingCat.of R)
 
 /-- The existing module category over its underlying ring sheaf.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks 03DA.
+-/
 abbrev realizationModules (R : Type (max u v)) [CommRing R] :=
   SheafOfModules.{max u v} ((sheafCompose J
     (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (realizationRing J R))
 
 /-- The coefficient sheafification unit with commutativity forgotten.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY.
+-/
 def realizationRingUnit (R : Type (max u v)) [CommRing R] :
     (Functor.const Cᵒᵖ).obj (RingCat.of R) ⟶
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (realizationRing J R)).obj :=
@@ -49,9 +51,8 @@ def realizationRingUnit (R : Type (max u v)) [CommRing R] :
     (forget₂ CommRingCat RingCat)
 
 /-- Forgetting commutativity retains the locally bijective sheafification unit.
-Source: Stacks 03CY (auxiliary; not a blueprint node).
-Proof: local injectivity and local surjectivity only concern the underlying functions
-of sections and covering sieves. Forgetting commutativity changes none of them. -/
+Source: Stacks 03CY.
+-/
 theorem realizationRingUnit_locallyBijective (R : Type (max u v)) [CommRing R] :
     Presheaf.IsLocallyInjective J (realizationRingUnit J R) ∧
       Presheaf.IsLocallySurjective J (realizationRingUnit J R) := by
@@ -67,7 +68,8 @@ theorem realizationRingUnit_locallyBijective (R : Type (max u v)) [CommRing R] :
 
 /-- The recorded constant module construction with the commutative coefficient
 presentation: the same constant module presheaf followed by module sheafification.
-Source: Stacks 03CY and 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY and 093J.
+-/
 def commutativeSiteConstantModuleFunctor (R : Type (max u v)) [CommRing R] :
     ModuleCat.{max u v} R ⥤ realizationModules J R :=
   letI := (realizationRingUnit_locallyBijective J R).1
@@ -76,9 +78,8 @@ def commutativeSiteConstantModuleFunctor (R : Type (max u v)) [CommRing R] :
     PresheafOfModules.sheafification (realizationRingUnit J R)
 
 /-- The commutative-coefficient presentation is additive and exact.
-Source: Stacks 093J and 03CY (auxiliary; not a blueprint node).
-Proof: constant presheaves preserve exact sequences sectionwise. Module sheafification
-is additive and exact, so their composite preserves finite limits and finite colimits. -/
+Source: Stacks 093J and 03CY.
+-/
 theorem commutativeSiteConstantModuleFunctor_exact (R : Type (max u v)) [CommRing R] :
     (commutativeSiteConstantModuleFunctor J R).Additive ∧
       PreservesFiniteLimits (commutativeSiteConstantModuleFunctor J R) ∧
@@ -121,32 +122,32 @@ theorem commutativeSiteConstantModuleFunctor_exact (R : Type (max u v)) [CommRin
   infer_instance
 
 /-- Additivity supplied by exact constant realization.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 093J.
+-/
 instance commutativeSiteConstantModuleFunctor_additive
     (R : Type (max u v)) [CommRing R] :
     (commutativeSiteConstantModuleFunctor J R).Additive :=
   (commutativeSiteConstantModuleFunctor_exact J R).1
 
 /-- Left exactness supplied by exact constant realization.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 093J.
+-/
 instance commutativeSiteConstantModuleFunctor_limits
     (R : Type (max u v)) [CommRing R] :
     PreservesFiniteLimits (commutativeSiteConstantModuleFunctor J R) :=
   (commutativeSiteConstantModuleFunctor_exact J R).2.1
 
 /-- Right exactness supplied by exact constant realization.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 093J.
+-/
 instance commutativeSiteConstantModuleFunctor_colimits
     (R : Type (max u v)) [CommRing R] :
     PreservesFiniteColimits (commutativeSiteConstantModuleFunctor J R) :=
   (commutativeSiteConstantModuleFunctor_exact J R).2.2
 
 /-- Forgetting commutativity preserves sheafification equivalences.
-Source: Stacks 00WJ and 093J (auxiliary; not a blueprint node).
-Proof: a morphism of ring presheaves is inverted by sheafification exactly when its
-underlying functions are locally injective and locally surjective. The underlying
-functions and covering sieves are unchanged by forgetting commutativity. Hence every
-CommRingCat sheafification equivalence is a RingCat sheafification equivalence. -/
+Source: Stacks 00WJ and 093J.
+-/
 theorem realization_forget_preservesSheafification :
     J.PreservesSheafification (forget₂ CommRingCat.{max u v} RingCat.{max u v}) := by
   constructor
@@ -160,13 +161,15 @@ theorem realization_forget_preservesSheafification :
   · exact ⟨fun x ↦ Presheaf.imageSieve_mem J f x⟩
 
 /-- The coefficient-forgetful sheafification instance.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 093J.
+-/
 instance realization_forget_preservesSheafification_instance :
     J.PreservesSheafification (forget₂ CommRingCat.{max u v} RingCat.{max u v}) :=
   realization_forget_preservesSheafification J
 
 /-- The canonical comparison with the original RingCat coefficient presentation.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+Source: Stacks 093J.
+-/
 def realizationRingIso (R : Type (max u v)) [CommRing R] :
     (sheafCompose J (forget₂ CommRingCat RingCat)).obj (realizationRing J R) ≅
       (constantSheaf J RingCat).obj (RingCat.of R) :=
@@ -257,11 +260,8 @@ end Transport
 
 /-- The repaired presentation is the recorded constant-module functor after canonical
 coefficient transport, rather than a second constant realization.
-Source: Stacks 03CY and 093J (auxiliary; not a blueprint node).
-Proof: constantCommuteCompose identifies the two ring-sheafification units. Transport
-along this identification identifies their module-sheafification adjunctions. The
-identity of constant module presheaves therefore extends uniquely to the displayed
-natural isomorphism; its inverse is obtained using the inverse ring identification. -/
+Source: Stacks 03CY and 093J.
+-/
 theorem commutativeSiteConstantModuleFunctor_transport
     (R : Type (max u v)) [CommRing R] :
     Nonempty (commutativeSiteConstantModuleFunctor J R ⋙
@@ -287,8 +287,8 @@ theorem commutativeSiteConstantModuleFunctor_transport
   rfl
 
 /-- Constant realization by exact-functor localization, at independent localization sizes.
-Source: Stacks, paragraph before 09BD
-(auxiliary; not a blueprint node). -/
+Source: Stacks, paragraph before 09BD.
+-/
 def commutativeSiteDerivedConstantModuleFunctor (R : Type (max u v)) [CommRing R]
     [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)]
     [HasDerivedCategory.{wS} (realizationModules J R)] :

@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.Sites.NormalizedFreeModuleComparison
 /-!
 # Geometric inverse image of free module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 04BL, 03CY, 03D3 and 08TQ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 04BL, 03CY, 03D3 and 08TQ.
 
 The free module is module sheafification of the sectionwise free module, on an arbitrary
 sheaf of generators. Algebraic inverse-image presentations record precisely the transported
@@ -137,7 +136,7 @@ private theorem transportedFreeProperty
   exact hBij E
 
 /-- The underlying comparison with the canonical inverse-image identification retained.
-Source: Stacks 08TQ (auxiliary; not a blueprint node). -/
+Source: Stacks 08TQ. -/
 noncomputable def comparison
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -149,8 +148,7 @@ noncomputable def comparison
   F.moduleUnderlying.inv.app ((free B).obj E) ≫ (moduleSets BI).map p.hom
 
 /-- Generator normalization of the comparison, an equality of sheaf maps and hence
-valid on all generalized sections. Source: Stacks 08TQ
-(auxiliary; not a blueprint node). -/
+valid on all generalized sections. Source: Stacks 08TQ. -/
 def IsComparison
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -160,19 +158,7 @@ def IsComparison
   f.inverse.map (generator B E) ≫ comparison f F E p = generator BI (f.inverse.obj E)
 
 /-- Inverse image preserves the free module sheaf on any sheaf of sets, with its uniquely
-normalized isomorphism. Source: Stacks 04BL, 03CY, 03D3 and 08TQ
-(auxiliary; not a blueprint node).
-
-Proof: first extend a map E → |M| sectionwise by summing coefficients times the images
-of generators. The free presheaf universal property and module sheafification give
-Hom_B(B[E], M) ≃ Hom(E, |M|). The geometric module transport adjunction of 03D3,
-with coefficient map the identity on the transported ring, then gives
-Hom_BI(F(B[E]), H) ≃ Hom_B(B[E], f_* H) ≃ Hom(E, f_* |H|) ≃ Hom(f⁻¹ E, |H|).
-The transport normalization identifies this bijection with restriction to f⁻¹ of the
-generator map. Thus source and target are free on f⁻¹ E with those generator maps.
-Extend each generator map into the other free module. Their composites fix generators,
-so freeness makes them identities. This gives the isomorphism; the same uniqueness
-makes it the only generator-normalized isomorphism. -/
+normalized isomorphism. Source: Stacks 04BL, 03CY, 03D3 and 08TQ. -/
 theorem inverseFreeModule_existsUnique
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -210,14 +196,7 @@ theorem inverseFreeModule_existsUnique
 
 /-- Naturality in both generator sheaves and coefficient-ring maps, expressed on
 underlying sheaves to retain semilinear coefficient changes. The compatibility hypothesis
-only identifies the transported coefficient map. Source: Stacks 04BL and 08TQ
-(auxiliary; not a blueprint node).
-
-Proof: both composites are semilinear along the same transported ring map. On f⁻¹ E
-they both equal the target generator map after f⁻¹ e, by the two normalization equations
-and the sectionwise definition of change. The transported free universal property
-therefore identifies the two composites. Taking b and bi to be identities gives
-naturality in E; taking e to be identity gives coefficient naturality. -/
+only identifies the transported coefficient map. Source: Stacks 04BL and 08TQ. -/
 theorem inverseFreeModule_naturality
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B B' : Sheaf J CommRingCat.{w}} {BI BI' : Sheaf K CommRingCat.{w}}
@@ -241,12 +220,7 @@ theorem inverseFreeModule_naturality
     (transportedFreeProperty f F E) p p' hp hp'
 
 /-- Finite-product compatibility on the generator sheaves, including the empty product.
-Source: Stacks 08TQ (auxiliary; not a blueprint node).
-
-Proof: normalize the comparison at the product sheaf. The free functor applied to the
-finite-product comparison carries [s] to [lambda(s)], by its sectionwise construction
-and sheafification. Composing the normalization equation gives the asserted equality.
-Left exactness makes lambda invertible; no product decomposition of free modules is used. -/
+Source: Stacks 08TQ. -/
 theorem inverseFreeModule_products
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -263,11 +237,7 @@ theorem inverseFreeModule_products
 
 /-- The identity comparison is identity after its underlying-module identification.
 The ring presentation is normalized to the identity, rather than requiring equality of
-chosen module structures. Source: Stacks 08TQ
-(auxiliary; not a blueprint node).
-
-Proof: both the normalized comparison and the identity fix the generator map. The free
-universal property identifies them on the entire free sheaf. -/
+chosen module structures. Source: Stacks 08TQ. -/
 theorem inverseFreeModule_identity
     (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w))
     (F : SheafOfModules.AlgebraicInverseImageOfUniverses.{uC, vC, uC, vC, w, w}
@@ -305,14 +275,7 @@ local instance : T.HasSheafCompose (forget AddCommGrpCat.{w} ⋙ uliftFunctor.{w
 
 
 /-- Composition coherence with the actual composite inverse image and ring comparison.
-Source: Stacks 08TQ (auxiliary; not a blueprint node).
-
-Proof: the comparison for the composite sends the twice transported generator to the
-target generator. Applying g⁻¹ to the first normalization equation and then using the
-second proves that the successive comparisons have the same effect. The compatibility
-of the ring presentations makes both maps linear over the same target ring. The free
-universal property for the composite identifies them, with the underlying-module
-comparisons retained explicitly as in the equation. -/
+Source: Stacks 08TQ. -/
 theorem inverseFreeModule_composition
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     (g : GeometricMorphism (Sheaf T (Type w)) (Sheaf K (Type w)))

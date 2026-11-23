@@ -46,20 +46,6 @@ private theorem derivedModuleHasCoproducts
 
 /-- A compactly generated triangulated model for the derived category of modules.
 Source: Stacks Project, Tags 0F5V and 0F5X.
-
-(auxiliary; not a blueprint node)
-
-Proof in words: construct the small-Hom derived category of modules by the
-Grothendieck construction.  The rank-one free module in degree zero represents
-cohomology, so its shifted Hom groups are the corresponding cohomology groups;
-these commute with the displayed coproducts, proving compactness.  The same
-calculation shows that vanishing of all shifted Hom groups detects the zero
-object.  The coproduct construction is compatible with the triangulated
-structure and shifts.  Choose the resulting small-Hom model, lift its object
-universe to the displayed universe, and transport its zero object,
-preadditive structure, shifts, distinguished triangles, coproducts, and the
-compact-generation property along the chosen equivalence.  The equivalence
-therefore commutes with integer shifts and its functor is triangulated.
 -/
 theorem compact_derived_source_core
     {A : Type uA} [Category.{vA} A] [Abelian A]

@@ -247,7 +247,7 @@ private theorem pe_evaluation_preserves_coproducts
 /--
 Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
 sk-cor-pe-sections/det-pe-sections-limits-colimits.proof.md
-(blueprint: det-pe-sections-limits-colimits).
+(blueprint: corollary-evaluation-weakly-contractible-objects).
 
 First compute limits sectionwise in the common module universe. For coproducts, write
 the sum as the filtered colimit of its finite subsums. The comparison from the presheaf

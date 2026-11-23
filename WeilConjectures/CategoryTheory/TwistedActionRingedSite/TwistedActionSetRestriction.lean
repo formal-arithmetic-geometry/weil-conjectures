@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionSheaf
 
 /-! # Sets on a fixed twisted action site
 
-Source: the agent-formulated twisted variant of Stacks Tag 00W0, original steps 3.
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -474,38 +476,7 @@ private theorem setRestrictionFunctor_essSurj [HasPullbacks C] (S : Site J s R a
             simp [Category.assoc]
       exact ⟨N, ⟨ObjectProperty.isoMk _ (Endofunctor.Algebra.isoMk e he)⟩⟩ }
 
-/-- Set-sheaf restriction for a specified underlying twisted action site.
-
-Source: original step 3 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-set-restriction).
-
-Proof: let γ_X be the arrow labelled (-1, identity). Its composites with the
-arrow labelled (1, s.counitInv at X) are images of base isomorphisms, so γ_X is
-invertible. The identity and composition rules normalize the power comparisons
-in degrees (0,-1) and (-1,0), giving naturality of γ. Restrict each sheaf and take
-the inverse of its γ restriction as its fixed-pair structure. Naturality of a
-sheaf morphism gives the intertwining equation.
-
-For full faithfulness, consider any property of arrows closed under composition
-and inversion which holds on base arrows and γ. Degree one follows by composing
-an inverse γ with a base isomorphism. To combine degrees n and m, compose the
-arrows labelled (n, f followed by powerComp.inv) and (m, identity). Their composite
-is exactly (n+m,f). Integer induction therefore proves the property for every
-arrow. Apply this to naturality of an intertwiner, and transport its components
-along inclusion_obj to obtain a sheaf map. Its restriction is the original
-intertwiner, and these same object identifications prove uniqueness.
-
-For essential surjectivity, twistedPresheafExtension extends the underlying
-presheaf and invertible translation of one fixed pair. Its degree-zero comparison
-identifies its restriction with the original sheaf; twistedSheafOfRestriction
-therefore makes the extension a sheaf. The extension's generator equation,
-multiplied by the invertible structure maps, makes the comparison an isomorphism
-of fixed pairs. Use Functor.asEquivalence on this full, faithful and essentially
-surjective functor. Forgetting the pair is definitionally restriction, so take
-the identity natural comparison. The asserted section equation is the inverse
-identity for the γ restriction map. No module operation, geometric adjunction,
-nonzero ring, or nonempty site is used. -/
+/-- Set-sheaf restriction for a specified underlying twisted action site. -/
 theorem setRestriction [HasPullbacks C] (S : Site J s R a) :
     letI := S.category
     letI := S.inclusion_continuous

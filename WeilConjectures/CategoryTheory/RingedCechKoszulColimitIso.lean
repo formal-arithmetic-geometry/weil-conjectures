@@ -10,8 +10,6 @@ import WeilConjectures.CategoryTheory.RingedKoszulFactorColimit
 
 /-! The augmentation-compatible colimit identification for the ringed Koszul system.
 Source: Stacks Project, More on Algebra, Tag 0913.
-(auxiliary; not a blueprint node).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -30,12 +28,7 @@ set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- The colimit of the positive ringed Koszul system is the extended Cech complex,
 compatibly with the augmentation. The one-section fraction cocone is a colimit;
-tensoring its factors and restricting to the final diagonal gives the finite-list colimit.
-(auxiliary; not a blueprint node).
-Proof: identify the one-section colimit by fractions, then induct over the ordered tensor factors.
-Tensor preserves colimits by its right adjoint, and the diagonal of the filtered index is final.
-The factor augmentation equations combine by tensor naturality; uniqueness of colimits gives
-the required isomorphism and its augmentation equation. -/
+tensoring its factors and restricting to the final diagonal gives the finite-list colimit. -/
 theorem exists_ringed_cech_koszul_colimit_iso :
     ∃ alpha : colimit (ringedKoszulDiagram O r b) ≅ (ringedExtendedCech O r b).1,
       alpha.hom ≫ (ringedExtendedCech O r b).2 =

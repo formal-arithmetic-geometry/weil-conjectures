@@ -117,10 +117,46 @@ private theorem compatible_single_adjunction
     (HomotopyCategory.quasiIso (SheafOfModules.{u} (moduleRings Y)) (.up ℤ))
     α (moduleDirectImage f).rightDerivedFunctorUnit K
 
+private theorem pasted_adjunction_unit_fac
+    {C₀ : Type*} {C₁ : Type*} {C₂ : Type*} {D₀ : Type*} {D₁ : Type*} {D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    (Q₀ : C₀ ⥤ D₀) (Q₁ : C₁ ⥤ D₁) (Q₂ : C₂ ⥤ D₂)
+    {Pg : C₀ ⥤ C₁} {Pf : C₁ ⥤ C₂} {Fg : C₁ ⥤ C₀} {Ff : C₂ ⥤ C₁}
+    {Lg : D₀ ⥤ D₁} {Lf : D₁ ⥤ D₂} {Rg : D₁ ⥤ D₀} {Rf : D₂ ⥤ D₁}
+    (ag : Pg ⊣ Fg) (af : Pf ⊣ Ff) (dg : Lg ⊣ Rg) (df : Lf ⊣ Rf)
+    (αg : Q₀ ⋙ Lg ⟶ Pg ⋙ Q₁) (αf : Q₁ ⋙ Lf ⟶ Pf ⋙ Q₂)
+    (βg : Fg ⋙ Q₀ ⟶ Q₁ ⋙ Rg) (βf : Ff ⋙ Q₁ ⟶ Q₂ ⋙ Rf)
+    (hg : ∀ K, dg.unit.app (Q₀.obj K) ≫ Rg.map (αg.app K) =
+      Q₀.map (ag.unit.app K) ≫ βg.app (Pg.obj K))
+    (hf : ∀ K, df.unit.app (Q₁.obj K) ≫ Rf.map (αf.app K) =
+      Q₁.map (af.unit.app K) ≫ βf.app (Pf.obj K)) (K : C₀) :
+    let α : Q₀ ⋙ (Lg ⋙ Lf) ⟶ (Pg ⋙ Pf) ⋙ Q₂ :=
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight αg Lf ≫
+        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Pg αf ≫
+        (Functor.associator _ _ _).inv
+    let β : (Ff ⋙ Fg) ⋙ Q₀ ⟶ Q₂ ⋙ (Rf ⋙ Rg) :=
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Ff βg ≫
+        (Functor.associator _ _ _).inv ≫ Functor.whiskerRight βf Rg ≫
+        (Functor.associator _ _ _).hom
+    (dg.comp df).unit.app (Q₀.obj K) ≫ (Rf ⋙ Rg).map (α.app K) =
+      Q₀.map ((ag.comp af).unit.app K) ≫ β.app ((Pg ⋙ Pf).obj K) := by
+  intro α β
+  simp only [Adjunction.comp_unit_app, α, β, NatTrans.comp_app,
+    Functor.associator_inv_app, Functor.associator_hom_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
+    Category.comp_id, Functor.comp_obj, Functor.comp_map, Functor.map_comp, Category.assoc]
+  have hn := df.unit.naturality (αg.app K)
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hn
+  have hb := βg.naturality (af.unit.app (Pg.obj K))
+  dsimp only [Functor.comp_obj, Functor.comp_map] at hb
+  rw [← Rg.map_comp_assoc, ← hn, Functor.map_comp]
+  rw [Category.assoc, ← Functor.map_comp, hf, Functor.map_comp]
+  rw [← Category.assoc, hg, Category.assoc]
+  rw [← reassoc_of% hb]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Elaborating the pasted comparison and unit uses several large sheaf-category instances.
 /-- Successive tensor pullbacks and their derived functors have compatible
 adjunctions; the left comparison is invertible on K-flat complexes.
 Source: Stacks Project, Cohomology, lemma-adjoint (079W),
@@ -180,16 +216,29 @@ theorem exists_pasted_tensorPullback_adjunction
           (α.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧
       ∀ K, adj'.unit.app (DerivedCategory.Qh.obj K) ≫ R.map (α.app K) =
         DerivedCategory.Qh.map (adj.unit.app K) ≫ β.app (G.obj K) := by
+  intro F R β
   obtain ⟨Pf, hf, hfm, haf, ⟨af⟩⟩ := exists_tensorModulePullback f
   obtain ⟨Pg, hg, hgm, hag, ⟨ag⟩⟩ := exists_tensorModulePullback g
   have := haf
   have := hag
-  obtain ⟨Lf, αf, hLf, hKf, habsf⟩ :=
-    exists_absolute_leftDerived_tensorModulePullback f Pf hf hfm
-  obtain ⟨Lg, αg, hLg, hKg, habsg⟩ :=
-    exists_absolute_leftDerived_tensorModulePullback g Pg hg hgm
-  obtain ⟨df, hdf⟩ := compatible_single_adjunction f Pf af Lf αf hLf habsf
-  obtain ⟨dg, hdg⟩ := compatible_single_adjunction g Pg ag Lg αg hLg habsg
+  have hf' := exists_absolute_leftDerived_tensorModulePullback f Pf hf hfm
+  have hg' := exists_absolute_leftDerived_tensorModulePullback g Pg hg hgm
+  let Lf := hf'.choose
+  let Lg := hg'.choose
+  let αf := hf'.choose_spec.choose
+  let αg := hg'.choose_spec.choose
+  have hLf := hf'.choose_spec.choose_spec.1
+  have hLg := hg'.choose_spec.choose_spec.1
+  have hKf := hf'.choose_spec.choose_spec.2.1
+  have hKg := hg'.choose_spec.choose_spec.2.1
+  have habsf := hf'.choose_spec.choose_spec.2.2
+  have habsg := hg'.choose_spec.choose_spec.2.2
+  have hfadj := compatible_single_adjunction f Pf af Lf αf hLf habsf
+  have hgadj := compatible_single_adjunction g Pg ag Lg αg hLg habsg
+  let df := hfadj.choose
+  let dg := hgadj.choose
+  have hdf := hfadj.choose_spec
+  have hdg := hgadj.choose_spec
   let G := Pg.mapHomotopyCategory (.up ℤ) ⋙ Pf.mapHomotopyCategory (.up ℤ)
   let L := Lg ⋙ Lf
   let α : DerivedCategory.Qh ⋙ L ⟶ G ⋙ DerivedCategory.Qh :=
@@ -214,26 +263,10 @@ theorem exists_pasted_tensorPullback_adjunction
       Functor.whiskerLeft_app, Functor.comp_obj, Category.id_comp, Category.comp_id]
     exact hi
   · intro K
-    simp only [Adjunction.comp_unit_app, α, G, L, NatTrans.comp_app,
-      Functor.associator_inv_app, Functor.associator_hom_app,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.id_comp,
-      Category.comp_id, Functor.comp_map, Functor.map_comp, Category.assoc]
-    have hn := df.unit.naturality
-      (X := Lg.obj (DerivedCategory.Qh.obj K))
-      (Y := DerivedCategory.Qh.obj ((Pg.mapHomotopyCategory (.up ℤ)).obj K)) (αg.app K)
-    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hn
-    have hb := (moduleDirectImage g).rightDerivedFunctorUnit.naturality
-      (X := (Pg.mapHomotopyCategory (.up ℤ)).obj K)
-      (Y := ((moduleDirectImage f).mapHomotopyCategory (.up ℤ)).obj
-        ((Pf.mapHomotopyCategory (.up ℤ)).obj ((Pg.mapHomotopyCategory (.up ℤ)).obj K)))
-      ((af.mapHomotopyCategory (.up ℤ)).unit.app
-        ((Pg.mapHomotopyCategory (.up ℤ)).obj K))
-    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hb
-    rw [← (derivedModuleDirectImage g).map_comp_assoc, ← hn, Functor.map_comp]
-    rw [Category.assoc, ← Functor.map_comp, hdf, Functor.map_comp]
-    rw [← Category.assoc, hdg, Category.assoc]
-    rw [← reassoc_of% hb]
-    simp only [Functor.comp_obj]
+    exact pasted_adjunction_unit_fac DerivedCategory.Qh DerivedCategory.Qh DerivedCategory.Qh
+      (ag.mapHomotopyCategory (.up ℤ)) (af.mapHomotopyCategory (.up ℤ)) dg df
+      αg αf (moduleDirectImage g).rightDerivedFunctorUnit
+      (moduleDirectImage f).rightDerivedFunctorUnit hdg hdf K
 
 end
 

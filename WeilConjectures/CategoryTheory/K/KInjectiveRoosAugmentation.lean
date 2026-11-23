@@ -23,8 +23,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # The canonical Roos augmentation on arbitrary K-injective towers
 
-Source: Stacks 0941 and 070I; extension from injective-term replacements by homotopy
-equivalence (blueprint: lem-pur-kinjective-roos-augmentation).
+Source: Stacks 0941 and 070I.
 -/
 
 @[expose] public noncomputable section
@@ -40,18 +39,8 @@ namespace CategoryTheory
 /-- The actual ordinary-limit augmentation is a quasi-isomorphism on every K-injective
 tower, including towers whose terms are not injective.
 
-Source: Stacks 0941, proof of lemma-derived-limit-is-ok, and 070I, comparison of
-K-injective resolutions (blueprint: lem-pur-kinjective-roos-augmentation).
-
-Proof: Resolve the supplied tower by a K-injective tower with injective terms. Since
-both towers are K-injective, the resolution map is a homotopy equivalence. The additive
-ordinary-limit functor preserves this equivalence; identify its complex-valued model
-with the ordinary limit of evaluated complexes by the limit universal property.
-The strict Roos homotopy functor preserves the same equivalence. The augmentation
-on the injective-term target is a quasi-isomorphism by the split-transition/kernel
-argument of Stacks 0941. Naturality gives the square with these two equivalences.
-Two-out-of-three then proves the assertion for the supplied tower. This uses no
-exactness assumption on products and applies to the zero tower as well. -/
+Source: Stacks 0941, and 070I, comparison of
+K-injective resolutions. -/
 theorem kInjectiveRoosAugmentation
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory.{w} A]

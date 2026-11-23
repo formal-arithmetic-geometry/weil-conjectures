@@ -9,9 +9,6 @@ public import WeilConjectures.CategoryTheory.Exact.ExactDegreeZeroSupplement
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Adjunction transposes of exact degree-zero insertions
-
-Source: Mathlib exact-single comparisons and adjunction composition
-(blueprint: def-sp-exact-degree-zero-adjoint-interface).
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +19,7 @@ set_option backward.isDefEq.respectTransparency.types false
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace SheafExactDegreeZero
 
-/-- The adjunction transpose of an ordinary insertion under an exact right adjoint.
-Source: the exact-functor single comparison and adjunction hom equivalence.
-(blueprint: def-sp-exact-degree-zero-adjoint-interface) -/
+/-- The adjunction transpose of an ordinary insertion under an exact right adjoint. -/
 @[irreducible]
 def adjointInsertion
     {V W : Type*} [Category V] [Category W] [Abelian V] [Abelian W]
@@ -97,9 +92,7 @@ private theorem raw_unit_comp
   exact ht
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-/-- Exact degree-zero insertion transposes compose by the canonical adjoint comparison.
-Source: Mathlib's exact-functor single coherence and adjunction composition.
-(blueprint: def-sp-exact-degree-zero-adjoint-interface) -/
+/-- Exact degree-zero insertion transposes compose by the canonical adjoint comparison. -/
 theorem adjointInsertion_comp
     {V W X : Type*} [Category V] [Category W] [Category X]
     [Abelian V] [Abelian W] [Abelian X]
@@ -126,9 +119,7 @@ theorem adjointInsertion_comp
   rw [raw_unit_comp S R T e η θ ζ hζ]
   exact transpose_comp a b c _ _ _
 
-/-- A universal ordinary insertion has invertible adjunction transpose.
-Source: the representing universal property and Yoneda's criterion for an isomorphism.
-(blueprint: def-sp-exact-degree-zero-adjoint-interface) -/
+/-- A universal ordinary insertion has invertible adjunction transpose. -/
 theorem isIso_adjointInsertion
     {V W : Type*} [Category V] [Category W] [Abelian V] [Abelian W]
     [HasDerivedCategory V] [HasDerivedCategory W]
@@ -156,8 +147,7 @@ attribute [local instance 10000] scalarWeakSheafify
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.mapDerivedCategory
 
-/-- The exact adjunction insertion with all site-dependent derived data fixed once.
-(blueprint: def-sp-exact-degree-zero-adjoint-interface) -/
+/-- The exact adjunction insertion with all site-dependent derived data fixed once. -/
 @[irreducible]
 def scalarAdjointInsertion {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
@@ -171,8 +161,7 @@ def scalarAdjointInsertion {C : Type (u + 1)} [Category.{u} C]
   adjointInsertion (Sheaf.restrictScalars J φ)
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J φ)) η
 
-/-- General-site scalar insertions compose via the fixed right-adjoint compositor.
-(blueprint: def-sp-exact-degree-zero-adjoint-interface) -/
+/-- General-site scalar insertions compose via the fixed right-adjoint compositor. -/
 theorem scalarAdjointInsertion_comp {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
     {A B D : Type (u + 1)} [CommRing A] [CommRing B] [CommRing D]
@@ -206,8 +195,7 @@ theorem scalarAdjointInsertion_comp {C : Type (u + 1)} [Category.{u} C]
     (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J (ψ.comp φ)))
     (Sheaf.restrictScalarsCompIso J φ ψ (ψ.comp φ) rfl) η θ ζ hζ
 
-/-- A universal scalar insertion has invertible transpose on any essentially small site.
-(blueprint: def-sp-exact-degree-zero-adjoint-interface) -/
+/-- A universal scalar insertion has invertible transpose on any essentially small site. -/
 theorem isIso_scalarAdjointInsertion {C : Type (u + 1)} [Category.{u} C]
     [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)

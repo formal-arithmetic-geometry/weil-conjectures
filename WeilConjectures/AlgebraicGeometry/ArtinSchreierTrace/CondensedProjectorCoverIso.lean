@@ -66,8 +66,6 @@ private lemma pull_hom
     ProEtale.CondensedRing.lowerStarCongr_hom_app_hom]
   rfl
 
-set_option maxHeartbeats 1000000 in
--- Iterated scheme pushforward transports need extra elaboration heartbeats.
 private lemma functionPull_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y Z P : Scheme.{u}}
@@ -93,7 +91,7 @@ private lemma functionPull_comp
       (ProEtale.lowerStarCongr Ab.{u + 1} hf).hom.app
         (ProEtale.condensedRingObj Λ Y) := by
   subst pY pZ
-  rw [ProEtale.condensedPushforwardHom_comp, Functor.map_comp, Functor.map_comp]
+  simp only [ProEtale.condensedPushforwardHom_comp, Functor.map_comp]
   have hc := congrArg (fun e ↦ e.hom.app (ProEtale.condensedRingObj Λ Y))
     (ProEtale.legacy_lowerStarComp_assoc Ab.{u + 1} f g pP)
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
@@ -101,11 +99,18 @@ private lemma functionPull_comp
     Functor.whiskerRight_app, Category.id_comp] at hc
   simp only [ProEtale.lowerStarCongr_rfl, Iso.refl_hom, NatTrans.id_app,
     Category.comp_id] at hc ⊢
-  rw [Category.assoc, Category.assoc]
-  erw [← hc]
-  rw [Category.assoc]
-  erw [← (ProEtale.lowerStarComp Ab.{u + 1} g pP).hom.naturality_assoc]
-  rfl
+  simp only [Category.assoc]
+  refine (congrArg (fun t ↦
+    (ProEtale.lowerStar Ab.{u + 1} pP).map (ProEtale.condensedPushforwardHom Λ g) ≫
+      (ProEtale.lowerStar Ab.{u + 1} pP).map
+        ((ProEtale.lowerStar Ab.{u + 1} g).map (ProEtale.condensedPushforwardHom Λ f)) ≫ t)
+    hc.symm).trans ?_
+  exact congrArg (fun t ↦
+    (ProEtale.lowerStar Ab.{u + 1} pP).map (ProEtale.condensedPushforwardHom Λ g) ≫ t)
+    ((ProEtale.lowerStarComp Ab.{u + 1} g pP).hom.naturality_assoc
+      (ProEtale.condensedPushforwardHom Λ f)
+      ((ProEtale.lowerStarComp Ab.{u + 1} f (g ≫ pP)).hom.app
+        (ProEtale.condensedRingObj Λ Y)))
 
 private lemma pull_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

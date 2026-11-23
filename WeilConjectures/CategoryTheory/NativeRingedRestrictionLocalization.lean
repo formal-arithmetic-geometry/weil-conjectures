@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.NativeRingedRestrictionSheafification
 /-! # Restriction of section localizations
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG, 04IY and 0996.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +26,7 @@ variable {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
   (R : Sheaf J CommRingCat.{max c d vc vd r})
 
 /-- Restrict a compatible global section along the site functor.
-Source: Stacks 03A0, 03CH, 03DA, 03DG.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG. -/
 def restrictedSection (s : (R.obj ⋙ forget CommRingCat).sections) :
     ((restrictedCommRing.{_, _, _, _, r} (K := K) F R).obj ⋙
       forget CommRingCat).sections :=
@@ -36,12 +34,7 @@ def restrictedSection (s : (R.obj ⋙ forget CommRingCat).sections) :
 
 /-- Restriction commutes with localization at a compatible section.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 04IY and 0996.
-(auxiliary; not a blueprint node).
-
-Proof: sectionwise restriction of the localization presheaf is the localization
-presheaf of the restricted section: the rings, the sections and the universal
-localization lifts are identical. Apply the sheafification restriction comparison. -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 04IY and 0996. -/
 theorem localizationRestriction [F.IsCocontinuous K J]
     [HasSheafify J CommRingCat.{max c d vc vd r}]
     [HasSheafify K CommRingCat.{max c d vc vd r}]

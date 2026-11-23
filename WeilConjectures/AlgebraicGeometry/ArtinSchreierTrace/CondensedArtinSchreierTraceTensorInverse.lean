@@ -17,7 +17,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 /-! # Tensor inverse and inverse character of condensed Artin–Schreier sheaves
 
 Source: latest blueprint, sec-fourier-transform/sk-lem-as-properties,
-lem-fd-as-characters, proof Step 5, tensor inverse (blueprint: lem-fd-as-trace-tensor-inverse).
+lemma-artin-schreier-character-sheaf, proof Step 5, tensor inverse (blueprint:
+lem-fd-as-trace-tensor-inverse).
 
 Stated for any condensed coefficient ring in which `q = #k` is a unit and any nontrivial
 character of `k`; the Qbar trace-character case gives the inverse clauses of
@@ -463,7 +464,7 @@ namespace AlgebraicGeometry.ArtinSchreierTrace
 
 /-- `L_{ψ,f} ⊗ L_{ψ,-f}` and `L_{ψ,-f} ⊗ L_{ψ,f}` are the regular module, and
 `L_{ψ⁻¹,f} ≅ L_{ψ,-f}`.
-Source: blueprint lem-fd-as-characters, proof Step 5
+Source: blueprint lemma-artin-schreier-character-sheaf, proof Step 5
 (blueprint: lem-fd-as-trace-tensor-inverse).
 
 Proof: the existing character-projector evaluation theorem identifies the pullback of
@@ -616,7 +617,8 @@ private theorem scaling_projector_conjugate (ψ : AddChar k (MonObj.Γ Λ)) :
 
 /-- Pullback along the scaling `[c] : x ↦ c x` of the affine line by `c ∈ kˣ` carries the
 condensed Artin–Schreier sheaf of `ψ` to that of the shifted character `ψ(c ·)`.
-Source: blueprint lem-wft-as-comparison (2) (blueprint: lem-fd-as-lisse).
+Source: blueprint lemma-artin-schreier-character-sheaf (2) (blueprint:
+lemma-artin-schreier-character-sheaf--2).
 
 Proof: the scaling `[c]` is an automorphism commuting with Artin–Schreier and conjugating
 translation by `c⁻¹ a` to translation by `a`. As for negation, pullback along `[c]` is

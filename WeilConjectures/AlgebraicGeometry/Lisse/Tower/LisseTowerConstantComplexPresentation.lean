@@ -16,8 +16,12 @@ The constant comparisons of `lisseTower_constant_complex_comparisons` are exact
 localizations of ordinary comparisons. This file records the natural constant model
 and the ordinary natural isomorphisms represented by all derived comparisons involved.
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Sites, Tag 0H7J;
-Cohomology on Sites, Tag 06YY; Derived Categories, Tag 05RU.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03DA
+* Sites, Tag 0H7J
+* Cohomology on Sites, Tag 06YY
+* Derived Categories, Tag 05RU
 -/
 
 public noncomputable section
@@ -205,9 +209,7 @@ private def canonicalDerivedConstantModel {X Z : Scheme.{u}} (g : Z ⟶ X)
 
 /-- The natural constant model: constants commute with the etale/pro-etale comparison
 and with the two inverse images, and the fixed realization of constants is the constant
-quotient realization.
-Source: Stacks Tags 03DA and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-constant-complex-comparisons). -/
+quotient realization. -/
 def lisseTowerConstantModel :
     lisseTowerConstantInput g a b d n ≅ constantAdicQuotientRealization g d n := by
   let B := lisseTowerEtaleRing d n
@@ -220,9 +222,7 @@ def lisseTowerConstantModel :
     Functor.isoWhiskerRight (derivedFixedConstantPullIso b B) _ ≪≫
     canonicalDerivedConstantModel g d n
 
-/-- The ordinary natural constant model, before localization.
-Source: Stacks Tags 03DA and 0H7J
-(blueprint: lem-weil-pbc-lisse-tower-constant-complex-comparisons). -/
+/-- The ordinary natural constant model, before localization. -/
 def lisseTowerOrdinaryConstantModel :
     constantSheaf S.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) ⋙
         (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (lisseTowerEtaleRing d n)) S ⋙

@@ -24,7 +24,7 @@ at `η₀` are the `k₀`-embeddings `A ⟶ Ω`. Hence `Spec σ ≫ η = η ≫ 
 (`AlgebraicGeometry.WeilGroup.specMap_comp_genericGeomPoint`): inertia elements (`n = 0`) act on
 `Spec Ω` over `Ū`, and residue Frobenius lifts (`n = deg z`) act over the geometric Frobenius.
 This is used to compare the boundary stalks of direct images with the inertia invariants of the
-Weil fundamental representation (blueprint `lem-wf-boundary-stalk-invariants`).
+Weil fundamental representation (blueprint `lemma-boundary-stalk--1`).
 -/
 
 @[expose] public section

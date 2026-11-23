@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Category.Grp.Basic
 
 /-! # Extending a presheaf action through sheafification
 
-Source: Stacks Project, Tag 00WH; finite-product preservation of sheafification.
-(blueprint: lem-sc-sheafify-add-action).
+Source: Stacks Project, Tag 00WH.
 -/
 
 @[expose] public section
@@ -26,22 +25,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [Presheaf.IsLocallySurjective J (toSheafify J P)]
 
 /-- Extending an action through sheafification.
-Source: Stacks Project, Tag 00WH; local bijectivity of the associated-sheaf unit.
-(blueprint: lem-sc-sheafify-add-action)
-
-Proof: Local injectivity of the unit and separatedness show that translating two
-representatives with the same image gives the same image. For a section x of the
-associated sheaf and a group section g, take the covering image sieve of x. On
-that sieve translate each local representative by the restriction of g. The
-preceding independence proves compatibility, so these images glue uniquely.
-The glued section has the expected formula after every restriction on every
-representative, by applying separatedness on the pulled-back image sieve.
-This formula characterizes the glued section uniquely. Define the operation by
-this unique section. Naturality, zero and addition follow from its characterizing
-formula and the corresponding identities for the presheaf action. Any other
-natural operation with the unit formula satisfies the same characterization,
-and therefore is equal to it. The construction works without local nonemptiness,
-including empty covers and the zero group. -/
+Source: Stacks Project, Tag 00WH. -/
 theorem existsUnique_sheafify_add_action
     (a : ∀ U, G.obj.obj U → P.obj U → P.obj U)
     (hz : ∀ U t, a U 0 t = t)

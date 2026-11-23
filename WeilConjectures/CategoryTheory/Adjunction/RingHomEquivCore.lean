@@ -22,30 +22,7 @@ namespace CategoryTheory.Adjunction
 
 /-- Restriction of the original natural hom-bijection to ring morphisms, once the
 transported functors and their operation equations have been constructed.
-(blueprint: lem-weil-pbc-ring-hom-equiv-core)
-Source: Stacks Project, Proposition 00YV, proof of (2), details of adjunct restriction.
-
-Proof: identify the underlying objects using hL and hR. Naturality of the unit
-on each product projection gives its compatibility with the binary comparisons:
-if lambda : L(X x X) -> LX x LX and rho : R(LX x LX) -> RLX x RLX
-are the comparisons, then rho o R(lambda) o eta_(X x X) = eta_X x eta_X.
-Both sides have projections eta_X o pr_k by naturality. Dually,
-epsilon_(Y x Y) o L(rho^(-1)) = (epsilon_Y x epsilon_Y) o lambda_(RY,RY),
-as follows from counit naturality after checking the two projections.
-Naturality at addition and multiplication, followed by the given
-operation equations, makes the unit preserve both binary operations. At zero and
-one use naturality and uniqueness of maps into the terminal object; negation
-uses naturality directly. Dually the counit preserves the five operations by
-checking the comparison identity on each product projection. Thus the adjunct
-of a ring morphism is a ring morphism, since it is its R-image composed with the
-unit; the inverse adjunct is a ring morphism, since it is its L-image followed
-by the counit. The original adjunction identities prove the two maps inverse.
-The original naturality equalities restrict to ring morphisms because the lifted
-functors have the specified underlying maps. This is a CoreHomEquiv. Its forward
-formula is the original adjunct, conjugated by eL and eR. Evaluating on identity
-morphisms gives the unit and counit formulas, cancelling inverse comparisons.
-This proof works for any braided structures in which the supplied ring objects
-exist; only their given operation equations and Cartesian products are used. -/
+Stacks Project, Tag 00YV. -/
 theorem ringHomEquivCore
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]
     {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]

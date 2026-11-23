@@ -19,11 +19,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTrian
 /-!
 # Compactness from a uniform Ext bound against a heart
 
-Blueprints `sk-thm-constructible-compactness`, `sk-lem-finite-window` and
-`det-prop-int-compactness-compact`, in the abstract form used there. Let `C` be an abelian
-category with exact coproducts and exact countable products, and `P` a class of objects of `C`
-closed under coproducts (the ind-constructible sheaves). Let `s` be an object of `D(C)` which is
-bounded above (a constructible sheaf in degree `0`) such that
+Let `C` be an abelian category with exact coproducts and exact countable products, and `P` a class
+of objects of `C` closed under coproducts (the ind-constructible sheaves). Let `s` be an object of
+`D(C)` which is bounded above (a constructible sheaf in degree `0`) such that
 
 * `Hom(s, B[-n]) = 0` for `B` in `P` and `n` large (the uniform bound `Ext^q(s, B) = 0` for
   `q > d`), and
@@ -31,13 +29,6 @@ bounded above (a constructible sheaf in degree `0`) such that
 
 Then `Hom(s, -)` commutes with direct sums of objects of `D(C)` with cohomology in `P`
 (`DerivedCategory.compactFor_of_homologyProperty`).
-
-The proof follows the blueprint: by induction on the amplitude, `s` is compact for uniformly
-bounded families (`DerivedCategory.compactFor_of_isGE_of_isLE`); maps from `s` to an object
-with cohomology in `P` in sufficiently negative degrees vanish, by induction on the amplitude for
-bounded objects and by left completeness of `D(C)` in general
-(`DerivedCategory.eq_zero_of_isLE`); hence morphisms out of `s` only see a finite window of
-degrees, on which the bounded case applies.
 -/
 
 @[expose] public section
@@ -161,7 +152,7 @@ lemma compactFor_of_isGE_of_isLE_self {s : DerivedCategory C}
     (singleFunctorCompHomologyFunctorIso C a).app (M j)) (hK j a)
 
 omit [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-constructible-compactness-bounded`: if `Hom(s, -)` commutes with direct sums
+/-- if `Hom(s, -)` commutes with direct sums
 of shifted objects of `P`, it commutes with direct sums of families of objects with cohomology in
 `P` concentrated in a common interval `[a, a + d]`, by induction on `d`, using the truncation
 triangles and the five lemma (`CategoryTheory.CompactFor.of_distTriang`). -/
@@ -213,8 +204,8 @@ lemma eq_zero_of_isGE_of_isLE_self {s : DerivedCategory C} (N : ℤ)
 
 omit [Abelian.HasKInjectiveResolutions C] [HasColimitsOfShape (Discrete J) C]
   [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-finite-window-bounded`: if `Hom(s, B[-n]) = 0` for `B` in `P` and `n ≤ N`,
-then `Hom(s, L) = 0` for every bounded `L` with cohomology in `P` in degrees `≤ N`. -/
+/-- if `Hom(s, B[-n]) = 0` for `B` in `P` and
+`n ≤ N`, then `Hom(s, L) = 0` for every bounded `L` with cohomology in `P` in degrees `≤ N`. -/
 lemma eq_zero_of_isGE_of_isLE {s : DerivedCategory C} (N : ℤ)
     (hvan : ∀ B, P B → ∀ n ≤ N, ∀ f : s ⟶ (singleFunctor C n).obj B, f = 0) (d : ℕ) :
     ∀ (a : ℤ) (L : DerivedCategory C) (_ : homologyProperty P L) [L.IsGE a] [L.IsLE (a + d)],
@@ -248,9 +239,9 @@ section LeftComplete
 variable [HasLimitsOfShape (Discrete ℕ) C] [HasExactLimitsOfShape (Discrete ℕ) C]
 
 omit [HasColimitsOfShape (Discrete J) C] [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-finite-window-unbounded`: if `Hom(s, B[-n]) = 0` for `B` in `P` and `n ≤ N`,
-then `Hom(s, L) = 0` for every `L` with cohomology in `P` in degrees `≤ N - 1`, with no lower
-bound: `L` is the homotopy limit of its truncations `τ_{≥ -n} L` (left completeness), and the
+/-- if `Hom(s, B[-n]) = 0` for `B` in `P` and
+`n ≤ N`, then `Hom(s, L) = 0` for every `L` with cohomology in `P` in degrees `≤ N - 1`, with no
+lower bound: `L` is the homotopy limit of its truncations `τ_{≥ -n} L` (left completeness), and the
 maps from `s` and `s⟦1⟧` to these vanish by the bounded case. -/
 lemma eq_zero_of_isLE {s : DerivedCategory C} (N : ℤ)
     (hvan : ∀ B, P B → ∀ n ≤ N, ∀ f : s ⟶ (singleFunctor C n).obj B, f = 0)
@@ -282,12 +273,11 @@ lemma eq_zero_of_isLE {s : DerivedCategory C} (N : ℤ)
       Iso.hom_inv_id_app_assoc, comp_zero] at h
     exact (shiftFunctor (DerivedCategory C) (-1 : ℤ)).map_eq_zero_iff.mp h
 
-/-- Blueprints `sk-lem-finite-window` and `det-constructible-compactness-sheaf`, abstract form:
-let `s` be bounded above, such that `Hom(s, B[-n]) = 0` for `B` in `P` and `n ≤ N`, and
-`Hom(s, -[-n])` commutes with direct sums of objects of `P`. Then `Hom(s, -)` commutes with
-direct sums of objects with cohomology in `P`. Morphisms out of `s` only see the truncations
-`τ_{≥ N - 1} τ_{≤ m}`, on which the bounded case applies
-(`DerivedCategory.compactFor_of_isGE_of_isLE`). -/
+/-- Abstract form of compactness from a uniform Ext bound: let `s` be bounded above, such that
+`Hom(s, B[-n]) = 0` for `B` in `P` and `n ≤ N`, and `Hom(s, -[-n])` commutes with direct sums of
+objects of `P`. Then `Hom(s, -)` commutes with direct sums of objects with cohomology in `P`.
+Morphisms out of `s` only see the truncations `τ_{≥ N - 1} τ_{≤ m}`, on which the bounded case
+applies (`DerivedCategory.compactFor_of_isGE_of_isLE`). -/
 theorem compactFor_of_homologyProperty [P.IsClosedUnderColimitsOfShape (Discrete J)]
     {s : DerivedCategory C} (b N : ℤ) [s.IsLE b]
     (hvan : ∀ B, P B → ∀ n ≤ N, ∀ f : s ⟶ (singleFunctor C n).obj B, f = 0)
@@ -351,10 +341,9 @@ instance preservesColimitsOfShape_singleFunctor (n : ℤ) (J : Type*)
       (PreservesColimitsOfShape (Discrete J) (HomologicalComplex.single C (ComplexShape.up ℤ) n))
   preservesColimitsOfShape_of_natIso (singleFunctorIsoCompQ C n).symm
 
-/-- A morphism `s ⟶ B[n]` out of `s` *factors through filtered colimits* (blueprint
-`sk-lem-constructible-ext-continuity`, surjectivity part, for targets in degree `0`) if for every
-filtered colimit `B = colim Bᵢ` of objects of `C` (indexed by a category in `Type w`), every
-morphism `s ⟶ B[n]` factors through some `Bᵢ[n]`. -/
+/-- A morphism `s ⟶ B[n]` out of `s` *factors through filtered colimits*
+if for every filtered colimit `B = colim Bᵢ` of objects of `C` (indexed by a category in `Type w`),
+every morphism `s ⟶ B[n]` factors through some `Bᵢ[n]`. -/
 def HomFactorsThroughFilteredColimits (s : DerivedCategory C) : Prop :=
   ∀ (I : Type w) [SmallCategory I] [IsFiltered I] (F : I ⥤ C) (c : Cocone F)
     (_ : IsColimit c) (n : ℤ) (f : s ⟶ (singleFunctor C n).obj c.pt),
@@ -364,7 +353,7 @@ def HomFactorsThroughFilteredColimits (s : DerivedCategory C) : Prop :=
 variable (P) in
 omit [Abelian.HasKInjectiveResolutions C] [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
   [HasColimitsOfShape (Discrete J) C] [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-ind-heart-ii-vanishing`: if morphisms out of `s` factor through filtered
+/-- if morphisms out of `s` factor through filtered
 colimits, and `Hom(s, B[n])` vanishes for `B` in `P` and `n ≤ N`, it vanishes for `B` a filtered
 colimit of objects of `P` and `n ≤ N`. -/
 lemma eq_zero_of_ind {s : DerivedCategory C} (hcont : HomFactorsThroughFilteredColimits.{w} s)
@@ -378,7 +367,7 @@ lemma eq_zero_of_ind {s : DerivedCategory C} (hcont : HomFactorsThroughFilteredC
 attribute [local instance] Abelian.hasFiniteBiproducts in
 omit [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [HasColimitsOfShape (Discrete J) C]
   [HasExactColimitsOfShape (Discrete J) C] in
-/-- Blueprint `det-ind-heart-ii-sums`: if morphisms out of `s` factor through filtered colimits,
+/-- if morphisms out of `s` factor through filtered colimits,
 then `Hom(s, -[n])` commutes with direct sums of objects of `C`: a direct sum is the filtered
 colimit of its finite subsums. -/
 lemma compactFor_singleFunctor_of_homFactorsThroughFilteredColimits {s : DerivedCategory C}

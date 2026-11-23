@@ -17,7 +17,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! # Multiplication of complete local sections
 
 Source: Stacks Project, Tags 0997 and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -151,22 +150,7 @@ private theorem localization_flat
     preservesFiniteLimits_of_natIso e.symm
   exact ((ObjectProperty.flat_iff_preservesFiniteLimits (colimit D)).mpr inferInstance).tensorRight
 
-/-- For a complete section f and any a, completeness is preserved by multiplication by a.
-
-Proof: Work on the slice over U. Localization at af is the tensor product of the
-localizations at a and f. These localization modules are flat, so the ordinary tensor
-is the derived tensor. Tensor-Hom currying identifies RHom(O[1/(af)],K) with
-RHom(O[1/a],RHom(O[1/f],K)). The inner derived object is zero by the hypothesis,
-and internal Hom into zero is zero. The tensor formula follows directly from
-preservation of sequential colimits
-by tensor and the cofinal diagonal ℕ→ℕ×ℕ; the transition map is multiplication
-by af. Exact filtered colimits show that these colimits of the flat unit module
-are flat. No cancellation
-or nonzero assumption is used; a=0 and f=0 give the zero localization.
-
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998;
-sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node). -/
+/-- For a complete section f and any a, completeness is preserved by multiplication by a. -/
 theorem ringedSite_completeElement_mul
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

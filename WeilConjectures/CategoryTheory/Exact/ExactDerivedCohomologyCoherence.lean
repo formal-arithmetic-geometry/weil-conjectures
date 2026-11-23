@@ -13,16 +13,14 @@ import Mathlib.CategoryTheory.Localization.Predicate
 /-!
 # Normalized cohomology comparisons for exact derived functors
 
-Source: Stacks Project, Tag 015F, `lemma-right-derived-exact-functor`, with the
-kernel/quotient and localization coherence argument in the DAG node
-(blueprint: lem-pur-exact-derived-cohomology-coherence).
+The comparisons are `Functor.mapDerivedCategoryHomologyFunctorIso`. Their normalization on
+representatives is `Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_Q`: the inverse complex
+homology comparison, transported through `homologyFunctorFactors` and
+`mapDerivedCategoryFactors`.
 
-The comparisons are the existing `Functor.mapDerivedCategoryHomologyFunctorIso`, not
-arbitrary isomorphisms. Their normalization on representatives is
-`Functor.mapDerivedCategoryHomologyFunctorIso_hom_app_Q`: the inverse complex homology
-comparison, transported through `homologyFunctorFactors` and `mapDerivedCategoryFactors`.
-Being natural isomorphisms on the entire derived category, they are natural for all
-derived morphisms and independent of representatives.
+## References
+
+* Stacks Project, Tag 015F.
 -/
 
 @[expose] public section
@@ -43,41 +41,11 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized cohomology comparisons for exact functors respect the termwise
 compositor and every natural isomorphism from the composite to another exact functor.
-Source: Stacks Project, Tag 015F, `lemma-right-derived-exact-functor`; the canonical
-coherence strengthening (blueprint: lem-pur-exact-derived-cohomology-coherence).
 
 Here theta is `mapDerivedCategoryHomologyFunctorIso`, c is `mapDerivedCategoryCompIso`,
-and d is c inverse followed by `mapDerivedCategoryNatIso eta`. These existing constructions
-use ordinary unbounded derived categories. The representative formula for theta is
-`mapDerivedCategoryHomologyFunctorIso_hom_app_Q`.
+and d is c inverse followed by `mapDerivedCategoryNatIso eta`.
 
-Proof plan, following the node's seven steps:
-1. Exactness preserves kernels, images and quotients by
-   `lem-sp-exact-functor-preserves-homology`. Inverting its homology comparison gives
-   t, characterized by t F(p) = p z on cycles and their homology quotient. Its naturality
-   also shows that the termwise functor preserves quasi-isomorphisms in every degree.
-2. Lift t through the complex localization using clause (2) of
-   `lem-weil-pbc-localization-universal-property`. Transport by the cohomology and
-   termwise-functor factorizations gives exactly the existing theta. Uniqueness makes
-   it natural for all derived morphisms, independently of the representative.
-3. The two cycle maps for GF agree after the kernel inclusion, so cancel that mono.
-   Compose with the homology quotient and cancel the preserved epi GF(p); this proves
-   t_GF = t_G G(t_F) on complexes.
-4. The termwise identity lifts to c with its normalization `mapDerivedCategoryCompIso_fac`.
-   Substitute the representative formula of step 2 and use naturality of theta_G.
-   Cancel the factorization isomorphisms, apply step 3, and descend equality using
-   clause (3) of `lem-weil-pbc-localization-universal-property`.
-5. For eta, naturality on the cycle inclusion and its monicity give compatibility of
-   cycle maps. Naturality on the homology quotient and its preserved epicity then give
-   H(eta) t_GF = t_L eta_H on complexes.
-6. Lift eta by clause (2) of the localization property. Substitute step 2, cancel the
-   functor factorizations, and use naturality of the cohomology factorizations and eta.
-   Step 5 and clause (3) give H(D eta) theta_GF = theta_L eta_H on the derived category.
-7. Substitute step 4 into the second asserted equation. Since d = c inverse followed
-   by D eta, functoriality of cohomology cancels c with its inverse and step 6 finishes.
-   Only three consecutive complex terms and the unbounded localization were used;
-   neither boundedness nor a resolution is required.
--/
+Stacks Project, Tag 015F. -/
 theorem exactDerivedCohomologyCoherence
     (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]

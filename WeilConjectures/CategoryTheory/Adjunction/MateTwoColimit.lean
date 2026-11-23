@@ -30,19 +30,6 @@ The main result, `CategoryTheory.CategoryCocone.isIso_mateEquiv_of_isFilteredTwo
 that if the mates `R i ⋙ c₁.T h ⟶ c₂.T h ⋙ R j` of the transition squares `αT h` are
 isomorphisms, then so are the mates `R i ⋙ c₁.Φ i ⟶ c₂.Φ i ⋙ RΩ` of the squares `α i`: the right
 adjoints commute with passage to the 2-colimit as soon as they commute with the transitions.
-
-## Proof sketch
-
-Write `β i` for the mate of `α i` and `m h` for the mate of `αT h`.
-* `iso_hom_app_comp_mateEquiv_app`: by the cocycle condition, `β i` agrees, up to the structure
-  isomorphisms of the cocones, with `c₁.Φ j` applied to `m h`, followed by `β j`.
-* `exists_comp_mateEquiv_app_eq`: every morphism `d ⟶ RΩ ((c₂.Φ i) k)` factors through
-  `β i`; reduce to `d = (c₁.Φ j) x`, transpose along `GΩ ⊣ RΩ`, descend the transpose to a
-  finite stage with `c₂.HomSurj`, transpose back along `G l ⊣ R l` and correct by `(m h)⁻¹`.
-* `map_eq_map_of_map_comp_mateEquiv_eq`: `β l` is "injective" on morphisms coming from the
-  stage `l`, using `c₂.HomInj` and the invertibility of the `m h`.
-* The section `s` of `β i` obtained from the first point is a two-sided inverse: `β i ≫ s` comes
-  from a finite stage by `c₁.HomSurj`, and the second point shows it is the identity.
 -/
 
 

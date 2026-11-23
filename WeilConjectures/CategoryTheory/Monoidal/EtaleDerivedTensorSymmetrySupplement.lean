@@ -13,8 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 /-!
 # The canonical symmetry of the etale derived tensor product
 
-Source: Stacks Project, Tag 06YU, symmetry of the derived tensor product
-(blueprint: lem-kun-tensor-sym).
+Source: Stacks Project, Tag 06YU, symmetry of the derived tensor product.
 
 The recorded existence theorem forgets the canonical map. This interface exposes the actual
 braiding descended from the signed braiding of cochain complexes, without choosing an arbitrary
@@ -36,7 +35,7 @@ open CategoryTheory Limits
 namespace CategoryTheory.DerivedMonoidal
 
 /-- The canonical natural symmetry induced on the derived tensor bifunctor by a braiding.
-Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym).
+Source: Stacks Project, Tag 06YU.
 This packages the existing `braiding` and its two existing naturality identities before
 specializing to etale sheaves, avoiding repeated reduction of their monoidal instances. -/
 noncomputable def canonicalBraidingNatIso
@@ -67,7 +66,7 @@ variable (C : Type u') [Category.{u + 1} C] [Abelian C]
   [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
 
 /-- The generic wrapper agrees with the original localization construction.
-Source: Stacks Project, Tag 06YU (blueprint: lem-kun-tensor-sym). -/
+Source: Stacks Project, Tag 06YU. -/
 lemma canonicalTensorSymmetry_eq :
     canonicalTensorSymmetry C =
       DerivedMonoidal.canonicalBraidingNatIso Qh (HomotopyCategory.quasiIso C (.up ℤ)) := by

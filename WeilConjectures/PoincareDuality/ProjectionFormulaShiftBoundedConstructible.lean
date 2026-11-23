@@ -107,7 +107,7 @@ instance commShift_boundedConstructibleExceptionalProjectionOfCompactificationNa
   simp [e₂, ObjectProperty.tensorLeftCompιIso, ObjectProperty.tensorLeftIsoLift,
     ObjectProperty.liftFullSubcategoryCompιIso, boundedConstructibleUpperStarCompatibility,
     boundedConstructibleLowerShriekOfCompactificationCompatibility,
-    boundedConstructibleLowerStarCompatibility,
+    boundedConstructibleLowerStarOfIsProperCompatibility,
     boundedConstructibleOpenImmersionLowerShriekCompatibility]
   erw [Category.id_comp, CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id,
     Category.comp_id]

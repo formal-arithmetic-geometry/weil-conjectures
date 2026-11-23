@@ -14,9 +14,9 @@ universe u
 set_option autoImplicit false
 set_option linter.unusedVariables false
 namespace AlgebraicGeometry.Scheme
-/-- Proof: isolate the finite orbit-model construction and the comparison with supplied
-fixed orbit data.
-(blueprint: lem-sbc-fixed-orbit-product-equiv) -/
+/-- If the subgroups `K k` of `G` agree, up to a reindexing `Fin m ≃ Fin D.m`, with the
+stabilizers of the fixed orbit data `D`, then the products of the fixed subalgebras `C^{K k}`
+and `C^{D.stabilizer k}` are isomorphic as `H`-algebras. -/
 theorem fixed_orbit_product_equiv
     (H C : Type u) [CommRing H] [CommRing C] [Algebra H C]
     (G : Type u) [Group G] (ρ : G → C →ₐ[H] C)

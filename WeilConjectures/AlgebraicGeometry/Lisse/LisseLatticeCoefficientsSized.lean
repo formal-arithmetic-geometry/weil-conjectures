@@ -10,10 +10,15 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseLatticeCoefficientsSu
 /-!
 # Continuous coefficients in the universe of module values
 
-Source: Bhatt--Scholze, Definitions 6.8.1 and 6.8.3
-(blueprint: def-weil-pbc-lisse-lattice-coefficients).
 The coefficient universe is allowed to be the larger site universe. The old
 small-coefficient constructions and slice-site inclusion remain available.
+
+## References
+
+* Bhatt--Scholze, Definitions 6.8.1 and 6.8.3
+* Bhatt--Scholze, Definition 6.8.1
+* Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12
+* Bhatt--Scholze, Lemma 6.8.2
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +31,7 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Continuous functions with pointwise ring operations, allowing larger coefficients.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- Continuous functions with pointwise ring operations, allowing larger coefficients. -/
 def lisseContinuousCommRingPresheafSized (X : Scheme.{u}) (T : Type (u + 1))
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} where
@@ -40,13 +43,7 @@ def lisseContinuousCommRingPresheafSized (X : Scheme.{u}) (T : Type (u + 1))
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- The continuous-function presheaf is a sheaf, with no small-coefficient restriction.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 4.2.12
-(blueprint: def-weil-pbc-lisse-lattice-coefficients).
-Proof: the underlying set presheaf is the restriction of `continuousMapPresheaf T`,
-followed by `ULift`. The fpqc sheaf theorem for that presheaf applies in arbitrary
-coefficient universes. Restriction to the pro-etale site and lifting preserve the
-sheaf condition. The forgetful functor from commutative rings reflects it. -/
+/-- The continuous-function presheaf is a sheaf, with no small-coefficient restriction. -/
 theorem isSheaf_lisseContinuousCommRingPresheafSized (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X)
@@ -66,36 +63,28 @@ theorem isSheaf_lisseContinuousCommRingPresheafSized (X : Scheme.{u})
   exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
     Scheme.proetaleTopology_le_fpqcTopology
 
-/-- The continuous coefficient sheaf in the module-value universe.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- The continuous coefficient sheaf in the module-value universe. -/
 def lisseContinuousCommRingSheafSized (X : Scheme.{u}) (T : Type (u + 1))
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   ⟨lisseContinuousCommRingPresheafSized X T,
     isSheaf_lisseContinuousCommRingPresheafSized X T⟩
 
-/-- The rational coefficients with the spectral norm topology.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- The rational coefficients with the spectral norm topology. -/
 def lisseFieldSheafSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   letI := spectralNorm.normedField ℚ_[l] E
   lisseContinuousCommRingSheafSized X E
 
-/-- The integral coefficients with the subspace topology.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- The integral coefficients with the subspace topology. -/
 def lisseIntegerSheafSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
   letI := spectralNorm.normedField ℚ_[l] E
   lisseContinuousCommRingSheafSized X (Padic.coefficientExtensionIntegers l E)
 
-/-- Postcomposition with the valuation-ring inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.2
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- Postcomposition with the valuation-ring inclusion. -/
 def lisseIntegerToFieldSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) :
     lisseIntegerSheafSized l E X ⟶ lisseFieldSheafSized l E X :=
@@ -106,9 +95,7 @@ def lisseIntegerToFieldSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field 
            continuous_subtype_val).comp ULift.ringEquiv.toRingHom))
      naturality := fun _ _ _ ↦ rfl }⟩
 
-/-- The constant integral section, in the same topology as the coefficient sheaf.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- The constant integral section, in the same topology as the coefficient sheaf. -/
 def lisseIntegerConstantSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (U : X.ProEtᵒᵖ) (a : Padic.coefficientExtensionIntegers l E) :
@@ -116,18 +103,14 @@ def lisseIntegerConstantSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field
   letI := spectralNorm.normedField ℚ_[l] E
   ULift.up (ContinuousMap.const U.unop.left a)
 
-/-- The constant rational section.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-lisse-lattice-coefficients). -/
+/-- The constant rational section. -/
 def lisseFieldConstantSized (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (U : X.ProEtᵒᵖ) (a : E) : (lisseFieldSheafSized l E X).obj.obj U :=
   letI := spectralNorm.normedField ℚ_[l] E
   ULift.up (ContinuousMap.const U.unop.left a)
 
-/-- The existing pointwise continuous-function presheaf, retaining commutativity.
-Source: Bhatt--Scholze, Definition 6.8.1.
-(blueprint: def-weil-pbc-lisse-lattice-coefficients) -/
+/-- The existing pointwise continuous-function presheaf, retaining commutativity. -/
 def lisseContinuousCommRingPresheafUniverses (X : Scheme.{u}) (T : Type v)
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     X.ProEtᵒᵖ ⥤ CommRingCat.{max (u + 1) v} where

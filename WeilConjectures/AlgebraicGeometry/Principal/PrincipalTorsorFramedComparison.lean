@@ -8,7 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.Princ
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorSignedRepresentatives
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorLocalizationSections
 import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
-/-! Independent comparison result for the principal torsor sign calculation. -/
+/-! Independent comparison result for the principal torsor sign calculation.
+
+## References
+
+* Stacks 03AJ, 06XU
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -44,16 +49,7 @@ theorem InjectiveResolution.extMk_eq_neg_extClass {T : Scheme.{u}}
   rw [he, ← R.mk₀_comp_extMk _ _ _ (by simp), hfirst, Ext.comp_neg]
   exact congrArg Neg.neg hnat.symm
 /-- A framed extension is the inverse-section localization pushout and its normalized
-relative class is minus the class of (0,aug(g)).
-Source: Stacks 03AJ, 06XU; framed-extension cocycle calculation of the principal-torsor node.
-Proof: evaluate F at the global frame and extend it from the constant integer sheaf.
-The equation F(s)=0 gives the left component adjoint to -g of a morphism from localization
-to the given extension, proving the pushout-class equation by Ext-class naturality.
-Extend the coefficient augmentation over E using injectivity. Factor its differential through
-Q into cycles c. The first resolution extension-class formula gives beta=-extMk(c).
-For u=hF(e), du=c(p1) and res(u)=-aug(g). Add the relative differential of u to the
-normalized representative of beta to obtain (0,-aug(g)), proving the asserted negative class.
-(blueprint: lem-pur-principal-torsor-framed-comparison). -/
+relative class is minus the class of (0,aug(g)). -/
 theorem principalTorsorFramedComparison
     (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) :
   ∀ (T Z : Scheme.{u}) (i : Z ⟶ T) [IsClosedImmersion i]

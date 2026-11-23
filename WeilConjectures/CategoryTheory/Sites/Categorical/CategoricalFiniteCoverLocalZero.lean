@@ -12,8 +12,10 @@ import all WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-! # Locally zero generalized sections of a presheaf with zero sheafification
 
-Source: Stacks Project, Tags 00W1 and 00WB, expressed using exact filtered
-colimits of local restriction kernels rather than underlying elements.
+## References
+
+* Stacks Project, Tags 00W1 and 00WB, expressed using exact filtered
+  colimits of local restriction kernels rather than underlying elements.
 -/
 
 @[expose] public section
@@ -452,47 +454,7 @@ private theorem mono_plusUnderIteration
 all generalized sections killed by restriction to a finite basis cover.
 Source: Stacks Project, Section 7.10 (Tag 00W1), the filtered-colimit equality
 description before Lemma 7.10.8 and Theorem 7.10.10 (Tag 00WB), extended using
-AB5 to Grothendieck abelian coefficients.
-(blueprint: stage3-categorical-finite-cover-local-zero).
-
-Proof: AB5 computes the kernel of the plus unit as the filtered union of the
-kernels of the matching-family restriction maps. Each covering sieve has a finite
-refinement as in hcov. Its matching restriction kills every one-fold nerve restriction,
-so the hypothesis on b shows that b kills the kernel of the plus unit.
-
-We show that this kernel already equals the kernel of sheafification at B-objects.
-First, if a presheaf K has zero plus unit, its plus object vanishes at every object
-whose covering sieves have finite refinements. Given a matching family over S, choose
-finite generators U of a covering subsieve. Take the filtered product of the cover
-categories of the U. AB5 commutes that filtered colimit with the finite product of
-matching objects. The induced map from the S-matching object to this colimit is zero,
-since each component factors through the zero plus unit of K. Its kernel is the union
-of the kernels at finite stages. For each stage, compose its chosen covers with U:
-the corresponding kernel vanishes on this composite cover, hence vanishes in plus.
-Consequently every colimit inclusion defining plus K is zero. This includes empty U.
-
-Apply this to the kernel of P → P⁺. Naturality and preservation of monomorphisms by
-plus show that the kernel's own plus unit is zero. Left exactness of plus then makes
-P⁺ → P⁺⁺ monic at B-objects. Also, plus preserves maps monic at B-objects: their
-kernels vanish on B, and so do their plus objects. For this last assertion refine
-covers by the one-fold nerve family. Its members satisfy B literally, and its sieve
-is still covering by the diagonals into singleton products. Thus no invariance of B
-under isomorphisms is needed.
-
-Starting with Q = P⁺, iterate plus in the category of objects under Q. The property
-that Q → R is monic at all B-objects is preserved at successors by naturality and
-the preceding preservation result, and at nonempty filtered colimits by AB5. Hence
-Q → R remains monic through the iteration. Choose a regular cardinal larger than
-the arrow cardinal of C at which a separator of A is presentable. The colimit of
-the iteration is a sheaf: matching-family objects preserve colimits of this shape,
-and the maps from matching families to the successor plus stage interleave the
-sheaf-condition maps with the transition maps. Their colimit maps are isomorphisms.
-This is the source library's convergence argument, applied to the iteration under Q;
-it also works when C's hom universe is smaller than its object universe.
-
-Finally P → Q → R factors through the zero sheafification of P, hence is zero.
-Since Q(V) → R(V) is monic, the plus unit of P at V is zero. Its kernel is therefore
-all of P(V), and the first paragraph gives b = 0. -/
+AB5 to Grothendieck abelian coefficients. -/
 theorem hom_eq_zero_of_sheafification_zero
     (B : C → Prop)
     (hcov : ∀ V, B V → ∀ R ∈ J V, ∃ (n : ℕ) (U : Fin n → Over V),

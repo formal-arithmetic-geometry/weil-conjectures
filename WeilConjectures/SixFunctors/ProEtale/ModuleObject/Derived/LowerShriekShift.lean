@@ -246,7 +246,7 @@ instance commShift_boundedConstructibleLowerShriekOfCompactificationOfIsProperIs
   have : NatTrans.CommShift (Functor.isoWhiskerRight
       (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso (Profinite.padicAlgClRingObj ℓ) ℓ
           f)
-      (boundedConstructibleLowerStar ℓ (Compactification.ofIsProper f.left).overG) ≪≫
+      (boundedConstructibleLowerStarOfIsProper ℓ (Compactification.ofIsProper f.left).overG) ≪≫
       Functor.leftUnitor _).hom ℤ := inferInstance
   exact this
 

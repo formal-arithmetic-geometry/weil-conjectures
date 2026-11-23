@@ -32,7 +32,6 @@ a morphism over `Y` whose source is proper over `Y` and whose target is separate
 
 - `AlgebraicGeometry.Compactification.Refinement.isProper`: the ambient morphism of a
   refinement is proper. This is an instance.
-
 -/
 
 @[expose] public section
@@ -94,8 +93,7 @@ theorem comp_assoc {c' : Compactification f} (r : Refinement c d) (s : Refinemen
 
 end Refinement
 
-/-- Blueprint `def-weil-compactifications-refinements`: Compactifications and refinements, the
-category `Comp(f)`; also part of `sk-prop-nagata-sketch-comp-category`.
+/-- The category `Comp(f)` of compactifications and refinements.
 
 The compactifications of `f : X ⟶ Y` form a category, with the refinements as
 morphisms: a morphism `r : c ⟶ d` is a morphism `r.hom : c.Z ⟶ d.Z` making both triangles

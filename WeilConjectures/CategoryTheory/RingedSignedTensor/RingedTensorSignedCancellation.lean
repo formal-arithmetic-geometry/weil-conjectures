@@ -33,32 +33,27 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   (R : Sheaf J CommRingCat.{max c v r})
 
-/-- The native ringed module category.
-(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+/-- The native ringed module category. -/
 abbrev Modules := RingedDerivedNative.Modules.{c, v, r} J R
 
 variable [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
-/-- The native tensor, with the monoidal presentation explicitly retained.
-(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+/-- The native tensor, with the monoidal presentation explicitly retained. -/
 def nativeTensor : DerivedCategory (Modules.{c, v, r} J R) ×
     DerivedCategory (Modules.{c, v, r} J R) ⥤ DerivedCategory (Modules.{c, v, r} J R) :=
   @tensor _ _ (RingedDerivedNative.monoidal.{c, v, r, w} J R)
 
-/-- The proved native closed structure, retaining its recorded evaluation model.
-(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+/-- The proved native closed structure, retaining its recorded evaluation model. -/
 def nativeClosed :
     CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R) :=
   (RingedDerivedNative.closedAdjunction.{c, v, r, w} J R).choose
 
-/-- The closed structure uses exactly the native monoidal structure.
-(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+/-- The closed structure uses exactly the native monoidal structure. -/
 theorem nativeClosed_monoidal :
     (nativeClosed.{c, v, r, w} J R).monoidal = RingedDerivedNative.monoidal.{c, v, r, w} J R :=
   (RingedDerivedNative.closedAdjunction.{c, v, r, w} J R).choose_spec.1
 
-/-- The evaluation-preserving comparison with the native tensor.
-(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+/-- The evaluation-preserving comparison with the native tensor. -/
 def comparison
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R)) :
     S.tensor ≅ nativeTensor.{c, v, r, w} J R :=

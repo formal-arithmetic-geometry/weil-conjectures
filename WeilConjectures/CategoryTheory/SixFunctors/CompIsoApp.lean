@@ -17,9 +17,7 @@ namespace CategoryTheory.Functor
 /-- Apply an isomorphism between composite functors with both object expressions
 written explicitly. This is `Iso.app`; the explicit object interface prevents
 conversion from unfolding a concrete derived functor before reducing a functor
-composition. Source: the exact-derived composition square in diagonal coefficient
-changes (1), using Mathlib's natural-isomorphism application.
-(blueprint: def-diagonal-composite-iso-pointwise). -/
+composition. -/
 @[irreducible]
 def compIsoApp {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
     {F : C ⥤ D} {G : D ⥤ V} {H : C ⥤ E} {I : E ⥤ V}

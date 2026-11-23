@@ -22,7 +22,7 @@ Hom_A(E, ω)^G ≃ Hom_A(E^G, ω),
 ```
 with inverse `φ ↦ φ ∘ avg`, where `avg = Representation.discreteAverage` is the averaging
 retraction `E → E^G`. This is the module-level profinite step of blueprint
-`det-tf-invariants-duality`; the finite-group core in an arbitrary linear category is
+`lemma-duality-invariants-pro-p--1`; the finite-group core in an arbitrary linear category is
 `CategoryTheory.invariantsDualIso`. Note that no finiteness hypothesis on `E` is needed: an
 invariant functional is automatically constant on the fibres of the averaging map
 (`Representation.map_discreteAverage_of_mem_invariants`).
@@ -81,9 +81,9 @@ lemma map_discreteAverage_of_mem_invariants
     IsUnit.val_inv_mul, one_smul]
 
 /-- **Duality commutes with invariants under a pro-`p` group** (blueprint
-`det-tf-invariants-duality`, module level). Let `G` be a compact group in which the index of every
-open normal subgroup is invertible in `A`, `ρ` a discrete representation of `G` on `E` and `ω` an
-`A`-module with trivial action. Then restriction to the invariants is an isomorphism
+`lemma-duality-invariants-pro-p--1`, module level). Let `G` be a compact group in which the index of
+every open normal subgroup is invertible in `A`, `ρ` a discrete representation of `G` on `E` and `ω`
+an `A`-module with trivial action. Then restriction to the invariants is an isomorphism
 `Hom_A(E, ω)^G ≃ Hom_A(E^G, ω)` for the contragredient action on `Hom_A(E, ω)`; its inverse is
 precomposition with the averaging retraction `Representation.discreteAverage`. -/
 noncomputable def invariantsDualEquiv

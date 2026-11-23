@@ -28,7 +28,7 @@ while `Rp_* τ^{< 1} K₀` lies in degrees `≤ d` by dévissage
 (`DerivedCategory.isLE_obj_of_isLE_of_homologyProperty`).
 
 This is the passage from the integral to the rational coefficients, and from finite
-subextensions `E` to `ℚ̄_ℓ`, in the proof of blueprint `det-proper-heart-bound-rational`.
+subextensions `E` to `ℚ̄_ℓ`, in the proof of blueprint `lemma-uniform-bound-proper-direct-image--1`.
 -/
 
 @[expose] public section
@@ -76,9 +76,6 @@ variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [IsCommMonObj
   [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
   [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a X))]
 
-set_option maxHeartbeats 1000000 in
--- instance search for the t-structure on module objects, with the exactness hypotheses on all
--- schemes in context, is slow
 /-- **Amplitude along an exact change of coefficients.** Let `a : Λ ⟶ Λ'` have exact extensions
 of scalars, and let `p : Z ⟶ Y` have invertible (Push) comparisons on bounded below complexes. If
 `Rp_*` sends the constructible `Λ_Z`-modules, in degree `0`, into degrees `≤ d`, it sends `N[0]`
@@ -106,7 +103,7 @@ theorem isLE_rightDerivedLowerStar_singleFunctor_of_extendScalars {Z Y : Scheme.
     have hZ : IsZero (φZ.leftDerivedFunctor.obj ((t.truncGE 1).obj K₀)) := by
       have : t.IsLE ((DerivedCategory.singleFunctor _ 0).obj N) 0 := inferInstance
       have h0 : IsZero ((t.truncGE 1).obj ((DerivedCategory.singleFunctor _ 0).obj N)) :=
-        t.isZero_truncGE_obj_of_isLE 0 1 (by lia) _
+        t.isZero_truncGE_obj_of_isLE 0 1 (by decide) _
       have e₁ : φZ.leftDerivedFunctor.obj ((t.truncGE 1).obj K₀) ≅
           φZ.mapDerivedCategory.obj ((t.truncGE 1).obj K₀) :=
         φZ.leftDerivedFunctorIsoMapDerivedCategory.app _

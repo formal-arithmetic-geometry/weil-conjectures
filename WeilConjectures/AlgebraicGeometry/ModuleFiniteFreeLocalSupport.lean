@@ -54,9 +54,55 @@ private theorem factor_restricted_coproduct
   rw [← Category.assoc, CategoryTheory.Limits.Cofan.IsColimit.fac]
   exact ha i
 
+private theorem factor_restricted_free_map
+    (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    (U : X.Opens) (J : Type u) {D : Type*} [Category D]
+    (F : SheafOfModules.{u} (R.over U) ⥤ D)
+    [CategoryTheory.Limits.PreservesColimit
+      (Discrete.functor (fun _ : J ↦ unit (R.over U))) F]
+    {M : SheafOfModules.{u} (R.over U)} {N : D} (p : N ⟶ F.obj M)
+    (l : free (R := R.over U) J ⟶ M)
+    (a : J → (F.obj (unit (R.over U)) ⟶ N))
+    (ha : ∀ i : J, a i ≫ p = F.map (ιFree (R := R.over U) i ≫ l)) :
+    ∃ A : F.obj (free (R := R.over U) J) ⟶ N, A ≫ p = F.map l := by
+  exact factor_restricted_coproduct X R U J F p (F.map l) a
+    (fun i ↦ (ha i).trans (F.map_comp (ιFree (R := R.over U) i) l))
+
+private theorem factor_direct_restricted_free_map
+    (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    (V U W : X.Opens) (hUV : U ≤ V) (hWU : W ≤ U) (J : Type u)
+    {M N : SheafOfModules.{u} (R.over V)} (p : N ⟶ M)
+    (l : free (R := R.over U) J ⟶ (overMap R (homOfLE hUV)).obj M)
+    (a : J → ((overMap R (homOfLE hWU)).obj (unit (R.over U)) ⟶
+      (overMap R (homOfLE (hWU.trans hUV))).obj N))
+    (ha : ∀ i : J, a i ≫ (overMap R (homOfLE (hWU.trans hUV))).map p =
+      (overMap R (homOfLE hWU)).map (ιFree (R := R.over U) i ≫ l)) :
+    ∃ A : (overMap R (homOfLE hWU)).obj (free (R := R.over U) J) ⟶
+        (overMap R (homOfLE (hWU.trans hUV))).obj N,
+      A ≫ (overMap R (homOfLE (hWU.trans hUV))).map p =
+        (overMap R (homOfLE hWU)).map l := by
+  exact factor_restricted_free_map X R U J (overMap R (homOfLE hWU))
+    (M := (overMap R (homOfLE hUV)).obj M)
+    ((overMap R (homOfLE (hWU.trans hUV))).map p) l a ha
+
+private theorem exists_restricted_unit_support_enlargement
+    (X : Scheme.{u}) (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
+    (V U W Z : X.Opens) (hUV : U ≤ V) (hWU : W ≤ U) (hZU : Z ≤ U) (hZW : Z ≤ W)
+    (I : Type u) (S T : Finset I) (hST : S ⊆ T)
+    (b : unit (R.over U) ⟶ (overMap R (homOfLE hUV)).obj (free (R := R.over V) I))
+    (a : unit (R.over W) ⟶
+      (overMap R (homOfLE (hWU.trans hUV))).obj (free (R := R.over V) S))
+    (ha : a ≫ (overMap R (homOfLE (hWU.trans hUV))).map
+        (freeMap (R := R.over V) ((↑) : S → I)) =
+      (overMap R (homOfLE hWU)).map b) :
+    ∃ a' : (overMap R (homOfLE hZU)).obj (unit (R.over U)) ⟶
+        (overMap R (homOfLE (hZU.trans hUV))).obj (free (R := R.over V) T),
+      a' ≫ (overMap R (homOfLE (hZU.trans hUV))).map
+          (freeMap (R := R.over V) ((↑) : T → I)) =
+        (overMap R (homOfLE hZU)).map b := by
+  exact ⟨_, enlarge_restricted_unit_support X R V U W Z hUV hWU hZU hZW I S T hST b a ha⟩
+
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 350000 in
--- Dependent finite choices and comparison of restriction functors exceed the default budget.
 private theorem exists_finite_support_of_unit_support
     (X : Scheme.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u}) (V U : X.Opens) (hUV : U ≤ V)
@@ -95,26 +141,11 @@ private theorem exists_finite_support_of_unit_support
     refine ⟨Finset.univ.biUnion S, ?_⟩
     intro i j hj
     exact Finset.mem_biUnion.mpr ⟨i, Finset.mem_univ _, hj⟩
-  let inc (i : J) : S i → S' := fun j ↦ ⟨j.val, hS i j.property⟩
-  let F := overMap R (homOfLE hW'U)
-  let G := overMap R (homOfLE (hW'U.trans hUV))
-  let L : F.obj (free (R := R.over U) J) ⟶ G.obj (free (R := R.over V) I) :=
-    direct_restrict_map X R V U W' hUV hW'U l
-  let a₀ (i : J) : F.obj (unit (R.over U)) ⟶ G.obj (free (R := R.over V) (S i)) :=
-    (overMap R (homOfLE (hW' i))).map (a i)
-  let a' (i : J) : F.obj (unit (R.over U)) ⟶ G.obj (free (R := R.over V) S') :=
-    a₀ i ≫
-      G.map (freeMap (R := R.over V) (inc i))
-  have ha' (i : J) :
-      a' i ≫ G.map (freeMap (R := R.over V) ((↑) : S' → I)) =
-      F.map (ιFree (R := R.over U) i) ≫ L := by
-    have h : a' i ≫ G.map (freeMap (R := R.over V) ((↑) : S' → I)) = F.map (b i) :=
-      enlarge_restricted_unit_support X R V U (W i) W' hUV (hWU i) hW'U (hW' i)
-        I (S i) S' (hS i) (b i) (a i) (ha i)
-    apply h.trans
-    exact F.map_comp (ιFree (R := R.over U) i) l
-  obtain ⟨A, hA⟩ := factor_restricted_coproduct X R U J F
-    (G.map (freeMap (R := R.over V) ((↑) : S' → I))) L a' ha'
+  choose a' ha' using fun i : J ↦
+    exists_restricted_unit_support_enlargement X R V U (W i) W' hUV (hWU i) hW'U (hW' i)
+      I (S i) S' (hS i) (b i) (a i) (ha i)
+  obtain ⟨A, hA⟩ := factor_direct_restricted_free_map X R V U W' hUV hW'U J
+    (freeMap (R := R.over V) ((↑) : S' → I)) l a' ha'
   exact ⟨W', hW'U, hx', S', A, hA⟩
 
 set_option backward.isDefEq.respectTransparency false in

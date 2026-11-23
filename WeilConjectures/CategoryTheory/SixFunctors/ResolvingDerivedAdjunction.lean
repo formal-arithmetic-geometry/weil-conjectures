@@ -148,7 +148,6 @@ import all Mathlib.Algebra.Homology.Localization
 # Derived adjunctions computed by a left resolving class
 
 Source: Stacks Project, Derived Categories, Tags 06XN, 05SE, 09T5, 0FND.
-(blueprint: lem-sfb-resolving-derived-adjunction-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -216,16 +215,7 @@ private theorem leftDerivedOnComplexes
 
 /-- A resolving left derived functor and a K-injective right derived functor have the
 canonical derived adjunction, with its Hom bijection normalized on every chain map.
-Source: Stacks Project, Tags 06XN, 05SE and 09T5, applied in the proof of Tag 07A6.
-(blueprint: lem-sfb-resolving-derived-adjunction-normalization).
-
-Proof: resolving-class essential constancy makes the left-derived Kan extension
-absolute, so postcomposition by the right derived functor preserves it. The
-K-injective derivability structure shows that postcomposition of the right-derived
-comparison by the left derived functor is again right derived. Transfer the left
-universal property across the full, object-surjective homotopy quotient and apply
-the derived-adjunction theorem on complexes. Its unit factorization and naturality
-of the right-derived comparison give the displayed Hom formula. -/
+Source: Stacks Project, Tags 06XN, 05SE, 09T5 and 07A6. -/
 theorem derivedAdjunctionOfResolvingClass
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]

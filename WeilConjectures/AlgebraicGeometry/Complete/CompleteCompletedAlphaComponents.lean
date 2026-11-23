@@ -15,8 +15,8 @@ The completed proper/open comparison `cbcProperOpenAlpha` is the abstract compar
 `ProperOpenTransport.absAlpha` of its adjunction data, with the abstract clopen projection
 and open base-change transpose.
 
-Source: Weil conjectures blueprint, node thm-cbc-complete-proetale, proof step 8
-(blueprint: thm-cbc-complete-proetale).
+Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
+step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public noncomputable section

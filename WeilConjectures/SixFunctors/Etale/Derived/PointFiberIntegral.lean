@@ -29,8 +29,8 @@ are derived complete.
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`: on `Spec k`,
   the integral stage consists of the bounded constructible complexes.
 - `AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` and, for `Λ = 𝒪_E`,
-  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence` (`def-weil-finite-coefficient-point`,
-  integral stage): `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
+  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
+  (`lemma-perfect-complexes-geometric-point`, integral stage): `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
 - `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`: the objects of `Dᵇ_fg(Λ)` are
   derived complete, i.e. receive no nonzero map from an object on which `ϖ` acts invertibly.
 
@@ -178,7 +178,7 @@ noncomputable def pointFiberIntegral :
         (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.1
         (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.2 K.property))
 
-/-- Blueprint `def-weil-finite-coefficient-point`: Finite coefficient categories over a point
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
 (integral stage `𝒪_E`).
 
 Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
@@ -285,7 +285,7 @@ instance _root_.PadicAlgCl.finite_quotient_maximalIdealShrink :
     inferInstanceAs (Finite (IsLocalRing.ResidueField (PadicAlgCl.integers l E)))
   Finite.of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E) rfl).toEquiv
 
-/-- Blueprint `def-weil-finite-coefficient-point`: Finite coefficient categories over a point
+/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finite coefficient categories over a point
 (integral stage `𝒪_E`).
 
 For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at

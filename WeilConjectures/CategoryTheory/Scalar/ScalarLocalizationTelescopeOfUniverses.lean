@@ -322,35 +322,12 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-set_option maxHeartbeats 1200000 in
--- Comparing tensor objects and both derived scalar actions requires extensive instance search.
 /-- Restriction of localized coefficients is the normalized scalar telescope.
 The statement has independent object, morphism and coefficient universes and makes no
 assertion about Hom groups or Hom continuity.
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2), pp. 61--62;
-Stacks Tags 093W, 0949 and 015F; the universe-independent form of
-lem-weil-pbc-scalar-localization-underlying-telescope.
-(blueprint: lem-weil-pbc-scalar-localization-telescope-of-universes).
-
-Proof: take ordinary restriction along the sheaf localization unit. It is additive and
-exact, and tensor extension is its left adjoint, with unit m mapped to 1 tensor m.
-Descend this exact adjunction through the quasi-isomorphism localizations of complexes.
-On each module, restriction of localization is the filtered colimit of multiplication
-by t. Sectionwise localization fractions identify the colimit maps with t^(-n) times
-the unit; sheafification preserves this filtered colimit. Apply this degreewise to a
-bounded-below complex. Exact filtered colimits compute the derived colimit, so its
-mapping telescope is the cone of identity minus successor on the countable direct sum.
-The resulting triangle is distinguished. Its comparison with restricted localization
-has precisely the displayed legs. The unit is natural, and its termwise tensor formula
-commutes with every shift; descent gives the naturality and shift laws in the telescope
-predicate. The scalar equation follows first on identity morphisms from tensor balancing,
-then on every map by composition, and then descends through the derived localization.
-The tensor comparison and fraction colimit are constructed directly with independent
-site universes. Coefficient-universe Grothendieck instances provide the exact filtered
-colimits and countable coproducts used by the complex-colimit theorem. No
-invertibility or regularity of t in the original ring is used; t=0 gives zero localization.
-The empty site and zero modules are included. -/
+Stacks Tags 093W, 0949 and 015F. -/
 theorem scalarLocalization_telescopeOfUniverses
     (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A)
@@ -387,12 +364,18 @@ theorem scalarLocalization_telescopeOfUniverses
   let φ := ringedLocalizationRingUnitOfUniverses R (a t)
   let U := SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
-  obtain ⟨hUlim, hUcol, hadj⟩ :=
+  -- Share the witnesses and their specifications without repeatedly reducing the
+  -- large dependent goal when eliminating the existential statements.
+  have hU :=
     SheafOfModules.scalarLocalizationCoefficientAdjunctionOfUniverses φ
-  have : PreservesFiniteLimits U := hUlim
-  have : PreservesFiniteColimits U := hUcol
-  obtain ⟨adj, hnorm⟩ := hadj F hF _hmap
-  obtain ⟨d, hd⟩ := exact_adjunction_descends F U adj
+  have : PreservesFiniteLimits U := hU.choose
+  have : PreservesFiniteColimits U := hU.choose_spec.choose
+  have hadj := hU.choose_spec.choose_spec F hF _hmap
+  let adj := hadj.choose
+  have hnorm := hadj.choose_spec
+  have hderived := exact_adjunction_descends F U adj
+  let d := hderived.choose
+  have hd := hderived.choose_spec
   let η := fun K ↦ (adj.mapHomologicalComplex (.up ℤ)).unit.app K
   have hsections : ∀ K i,
       scalarLocalizationUnitSectionsOfUniverses φ (K.X i) (F.obj (K.X i)) (hF (K.X i))

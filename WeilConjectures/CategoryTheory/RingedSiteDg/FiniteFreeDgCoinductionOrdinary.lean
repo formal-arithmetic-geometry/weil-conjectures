@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 
 /-! Ordinary finite-free coinduction package.
 
-Source: Stacks Project, `sdga.tex`, Tags 0FRS and finite-basis evaluation
-(blueprint: lem-sf-finite-free-dg-coinduction-ordinary-core-stage3).
+Source: Stacks Project, `sdga.tex`, Tags 0FRS and evaluation.
 -/
 
 @[expose] public noncomputable section
@@ -225,13 +224,11 @@ theorem finiteFreeDgExtension_unit (A : Algebra O) (M : Complex O) :
       (ρ_ M).inv ≫ (M ◁ (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) := by
   rfl
 
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem right_action_assoc {A : Algebra O} (M : Module A) :
     (action M ▷ A.X) ≫ action M =
       (α_ ((underlying A).obj M) A.X A.X).hom ≫
         (((underlying A).obj M) ◁ (MonObj.mul : A.X ⊗ A.X ⟶ A.X)) ≫ action M := by
   exact congrArg Quiver.Hom.unmop (ModObj.assoc_flip M.X)
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem right_action_unit {A : Algebra O} (M : Module A) :
     (((underlying A).obj M) ◁ (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) ≫ action M =
       (ρ_ ((underlying A).obj M)).hom := by
@@ -248,7 +245,6 @@ private theorem liftUnderlying_eval {A : Algebra O}
     (liftUnderlying core M N f ▷ A.X) ≫ core.evaluation N = action M ≫ f :=
   ((core.hom_universal N ((underlying A).obj M)).surjective (action M ≫ f)).choose_spec
 
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem liftUnderlying_linear {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Module A) (N : Complex O)
     (f : (underlying A).obj M ⟶ N) :
@@ -268,7 +264,6 @@ private def evaluationOne {A : Algebra O}
     (((underlying A).obj (core.coinduction.obj N)) ◁
       (MonObj.one : 𝟙_ (Complex O) ⟶ A.X)) ≫ core.evaluation N
 
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem liftUnderlying_evaluationOne {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Module A) (N : Complex O)
     (f : (underlying A).obj M ⟶ N) :
@@ -277,7 +272,6 @@ private theorem liftUnderlying_evaluationOne {A : Algebra O}
   rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange_assoc,
     liftUnderlying_eval, reassoc_of% (right_action_unit M), Iso.inv_hom_id_assoc]
 
--- Elaborating right actions through the monoidal opposite needs a larger budget.
 private theorem action_evaluationOne {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (N : Complex O) :
     action (core.coinduction.obj N) ≫ evaluationOne core N = core.evaluation N := by
@@ -330,7 +324,7 @@ private theorem evaluationOne_natural {A : Algebra O}
 /-- The coinduction adjunction follows from the representing evaluation and action.
 Transpose the module action, then evaluate at the unit for the inverse map.
 Associativity proves linearity; the action and unit laws prove the two inverses.
-Source: Stacks 0FRS (blueprint: lem-sf-finite-free-dg-coinduction). -/
+Source: Stacks 0FRS. -/
 private def coinductionAdjunction {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) : underlying A ⊣ core.coinduction :=
   Adjunction.mkOfHomEquiv
@@ -352,7 +346,7 @@ private def coinductionAdjunction {A : Algebra O}
         rw [liftUnderlying_evaluationOne, reassoc_of% (liftUnderlying_evaluationOne core X Y f)] }
 
 /-- The counit of the constructed adjunction is evaluation at the algebra unit.
-Source: Stacks 0FRS (blueprint: lem-sf-finite-free-dg-coinduction). -/
+Source: Stacks 0FRS. -/
 private theorem coinductionAdjunction_counit {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) (M : Complex O) :
     (coinductionAdjunction core).counit.app M = evaluationOne core M := by
@@ -363,7 +357,7 @@ private theorem coinductionAdjunction_counit {A : Algebra O}
 /-- Representing evaluation and its action equation imply the normalized
 forgetful-coinduction adjunction. Transposing a module action gives the forward
 Hom map. Evaluation at one is its natural inverse, as proved above.
-Source: Stacks 0FRS (blueprint: lem-sf-finite-free-dg-coinduction). -/
+Source: Stacks 0FRS. -/
 theorem finiteFreeDgCoinductionAdjunction_exists {A : Algebra O}
     (core : FiniteFreeCoinductionOrdinaryCore A) :
     ∃ adj : underlying A ⊣ core.coinduction, ∀ M : Complex O,
@@ -418,48 +412,9 @@ private theorem finiteFreeDualizable (A : Algebra O)
   obtain ⟨r, ⟨e⟩⟩ := finiteFree n
   exact (finiteCopiesDualizable r).of_iso e.symm
 
-set_option maxHeartbeats 800000 in
--- The representing evaluation and monoidal-opposite transports need a larger budget.
-/-- Ordinary finite-free coinduction with its representing evaluation and tensor-dual map.
-
-Source: Stacks 0FRS; the bounded-dual construction in
-`WeilConjectures.Algebra.Homology.Monoidal.Dual` and the cofree construction in
-`WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree`.
-
-Proof: Finite coproducts of the tensor unit are dualizable, by induction using
-biproducts (including the empty coproduct). The bounded-complex duality theorem
-then makes A dualizable. Reverse the tensor order to turn its right dual into a
-left dual; this supplies the closed structure needed for this single object A,
-without requiring every unbounded complex to be closed. The cofree construction
-above transposes multiplication into the right action on the representing Hom.
-Currying and uncurrying prove the universal property for every unbounded L and M,
-and their naturality proves the functor and evaluation laws.
-
-Tensor the cofree tensor unit with M, with action on its dual factor. The map to
-coinduction is the transpose of evaluation at the unit. Its uncurried formula is
-exactly tensor-dual evaluation. Uniqueness of right adjoints to tensoring by A
-identifies the underlying comparison with the two tensor-dual isomorphisms, hence
-it is invertible. Forgetting reflects isomorphisms, so the comparison is a module
-isomorphism. Its naturality and evaluation equation are proved above.
-
-(blueprint: lem-sf-finite-free-dg-coinduction-ordinary-core-stage3) -/
-theorem finite_free_dg_coinduction_core (A : Algebra O)
-    (bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (A.X.X n))
-    (finiteFree : ∀ n : ℤ, ∃ r : ℕ,
-      Nonempty (A.X.X n ≅ ∐ (fun _ : Fin r ↦ 𝟙_ (Coeff O)))) :
-    Nonempty (FiniteFreeCoinductionOrdinaryCore A) := by
-  let : HasRightDual A.X := (finiteFreeDualizable A bounded finiteFree).some
-  let : ExactPairing (mop A.Xᘁ) (mop A.X) :=
-    { coevaluation' := (η_ A.X A.Xᘁ).mop
-      evaluation' := (ε_ A.X A.Xᘁ).mop
-      coevaluation_evaluation' := by
-        apply Quiver.Hom.unmop_inj
-        exact ExactPairing.evaluation_coevaluation A.X A.Xᘁ
-      evaluation_coevaluation' := by
-        apply Quiver.Hom.unmop_inj
-        exact ExactPairing.coevaluation_evaluation A.X A.Xᘁ }
-  let : HasLeftDual (mop A.X) := ⟨mop A.Xᘁ⟩
-  let : Closed (mop A.X) := closedOfHasLeftDual (mop A.X)
+/-- Construct the core with the closed structure kept as a parameter during the transport proofs. -/
+private theorem coinductionCoreOfClosed (A : Algebra O) [HasLeftDual (mop A.X)]
+    [Closed (mop A.X)] : Nonempty (FiniteFreeCoinductionOrdinaryCore A) := by
   let := Mod.comparisonNat_iso (mop A.X)
   refine ⟨{
     coinduction := mopFunctor (Complex O) ⋙ Mod.localCofree (mop A.X)
@@ -498,5 +453,28 @@ theorem finite_free_dg_coinduction_core (A : Algebra O)
     have h := congrArg Quiver.Hom.unmop
       (Mod.comparison_evaluation (mop A.X) (mop M))
     exact h
+
+
+/-- Ordinary finite-free coinduction with its representing evaluation and tensor-dual map.
+
+Source: Stacks 0FRS. -/
+theorem finite_free_dg_coinduction_core (A : Algebra O)
+    (bounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (A.X.X n))
+    (finiteFree : ∀ n : ℤ, ∃ r : ℕ,
+      Nonempty (A.X.X n ≅ ∐ (fun _ : Fin r ↦ 𝟙_ (Coeff O)))) :
+    Nonempty (FiniteFreeCoinductionOrdinaryCore A) := by
+  let : HasRightDual A.X := (finiteFreeDualizable A bounded finiteFree).some
+  let : ExactPairing (mop A.Xᘁ) (mop A.X) :=
+    { coevaluation' := (η_ A.X A.Xᘁ).mop
+      evaluation' := (ε_ A.X A.Xᘁ).mop
+      coevaluation_evaluation' := by
+        apply Quiver.Hom.unmop_inj
+        exact ExactPairing.evaluation_coevaluation A.X A.Xᘁ
+      evaluation_coevaluation' := by
+        apply Quiver.Hom.unmop_inj
+        exact ExactPairing.coevaluation_evaluation A.X A.Xᘁ }
+  let : HasLeftDual (mop A.X) := ⟨mop A.Xᘁ⟩
+  let : Closed (mop A.X) := closedOfHasLeftDual (mop A.X)
+  exact coinductionCoreOfClosed A
 
 end CategoryTheory.RingedSiteDg

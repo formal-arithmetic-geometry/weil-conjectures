@@ -600,7 +600,7 @@ Source: Stacks 0940/0941, 06YY, 07A6, 03D7, 09T5 and 0FND
 Proof plan:
 1. Use `strictSystemSequenceEquivalence` (lem-pur-system-ringed-sequence-site).
 Vertical covers give componentwise kernels, sheafified cokernels and quasi-isomorphisms
-(def-weil-sheaf-of-modules-category).
+(situation-conventions).
 2. The compatible families of sections form an A-module sheaf. Componentwise gluing
 proves the limit universal property for the scalar restrictions (def-pc-sheaf-restrict-scalars).
 3. Apply lem-weil-pbc-ringed-topoi-module-adjunction. At each level the tensor is the

@@ -178,7 +178,7 @@ Proof:
    with scalars. Thus restriction commutes with direct image. The splitting gives
    a finite product of restrictions of G by lem-weil-pbc-direct-image-split-cover-product.
    The sheet composites are etale by lem-weil-pbc-etale-scheme-base-change and
-   lem-weil-pbc-etale-composition-cancellation. Each factor is constructible by
+   definition-torsion-sheaves--3. Each factor is constructible by
    prop-constructible-pullback and lem-weil-pbc-constructible-etale-module-sheaf-comparison.
 4. A finite product is constructible by induction using clause (2) of
    thm-constructible-serre. The empty product is the zero module sheaf with finite

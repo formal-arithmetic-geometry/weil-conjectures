@@ -13,12 +13,14 @@ import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeInverse
 /-!
 # The mixed representative equation for general coefficients
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product).
 This is the coefficient-generic form of clause (3) of
 `AlgebraicGeometry.ProEtale.finiteOpenMixedTensorRepresentative`, normalized as in
-`SheafOfModules.OpenTensorNormalization.mixed_representation_normalized`. Stating it for an
-abstract coefficient category keeps elaboration and kernel checking cheap; the finite
-coefficient statements are obtained by instantiation.
+`SheafOfModules.OpenTensorNormalization.mixed_representation_normalized`.
+
+## Implementation details
+
+Stating it for an abstract coefficient category keeps elaboration and kernel checking cheap;
+the finite coefficient statements are obtained by instantiation.
 -/
 
 @[expose] public section
@@ -42,10 +44,7 @@ private theorem cochain_tensor_obj_general
       (curriedTensor (Sheaf (ProEt.topology X) A)) (.up ℤ) := rfl
 
 /-- The mixed inverse representative square for general coefficients: clause (3) of
-`finiteOpenMixedTensorRepresentative`.
-
-Proof. Feed `forward_transport_general` to `mixedTensor_inverse_transport`.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative) -/
+`finiteOpenMixedTensorRepresentative`. -/
 theorem mixed_inverse_transport_general
     (P Q : CochainComplex (Sheaf (ProEt.topology X) A) ℤ) :
     (((j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv.app
@@ -95,12 +94,8 @@ theorem mixed_inverse_transport_general
     MonoidalCategory.curriedTensor_obj_obj, cochain_tensor_obj_general,
     Category.assoc, Iso.app_hom, asIso_hom] using hf
 
-/-- Normalization of the mixed representative equation for general coefficients.
-
-Proof. Expand `mapDerivedCategoryUpperStarDerivedTensorIso` into the derived-tensor map of
-`κ⁻¹`, the inverse tensor comparison and `κ`, identify the derived tensor map with tensoring
-by the identity, and apply `mixed_inverse_transport_general`.
-(blueprint: lem-sf-mixed-representation-normalized) -/
+/-- The normalized mixed representative equation for general coefficients, stated with
+`mapDerivedCategoryUpperStarDerivedTensorIso`. -/
 theorem mixed_representation_general
     (P Q : CochainComplex (Sheaf (ProEt.topology X) A) ℤ) :
     let F := (j)^*[A]

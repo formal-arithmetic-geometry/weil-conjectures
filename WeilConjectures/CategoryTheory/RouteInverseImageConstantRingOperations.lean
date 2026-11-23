@@ -17,8 +17,7 @@ namespace CategoryTheory
 
 /-- Ring-operation part of an inverse-image lift.
 
-Source: Stacks Project, `sites.tex`, Tag 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, `sites.tex`, Tag 00YV. -/
 structure RingInverseImage
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
@@ -335,28 +334,7 @@ private theorem comparison_binary
 /-- The underlying comparison with a single constant ring preserves its four operations.
 
 Source: Stacks Project, Sites, Tag 00YV (rings as algebraic objects), and Tag 0H7J
-(constant sheaves); original constant-comparison node, proof step 3.
-(auxiliary; not a blueprint node).
-
-Proof: write the underlying sheaf of the constant ring as the constant set sheaf,
-using `constantCommuteCompose`. The constant sheaf of `A × A` maps isomorphically
-to the product of two copies of the constant sheaf of `A`, because set sheafification
-preserves finite products. Its projections are the constant maps of the two
-projections. Addition and multiplication composed with this isomorphism are the
-constant maps of addition and multiplication: check this after precomposing with
-the sheafification unit, where it is the ring-homomorphism property of that unit.
-Naturality of `kappa` for the two projections and the two operations therefore
-shows that the comparison transports addition and multiplication. Apply the
-`ringAdd` and `ringMul` graph equations of `e` to this pair object. The pair
-comparison and its image under `L` are isomorphisms (use finite-limit preservation),
-so this checks every pair of target sections. For zero and one use the constant
-singleton sheaf and the constant maps selecting zero and one. Naturality of
-`kappa`, terminality, and `ringZero`/`ringOne` give the two nullary identities.
-Finally conjugate these identities by `e.ringUnderlying`, which is invertible,
-to obtain the displayed identities for its inverse followed by the comparison.
-This argument works for the zero ring and for sites with empty covering sieves;
-it never assumes injectivity of a sheafification unit or a final object of a site.
--/
+(constant sheaves). -/
 theorem constantComparison_ring_operations
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)

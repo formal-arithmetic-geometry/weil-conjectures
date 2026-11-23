@@ -15,7 +15,7 @@ public import WeilConjectures.Compactification.Dense
 The compactification datum the construction `Rf_! = Rp_* j_!` of the proper base change
 chapter asks for consists of a factorisation `f = j ≫ p` in which `j` is a
 scheme-theoretically dense open immersion *and* `p` is proper *and locally of finite
-presentation* (blueprint: `proper_base_change.tex`, §A43, `BA43-DENSE-DATA`). Over a general
+presentation*. Over a general
 quasi-compact quasi-separated base the two halves are available separately —
 `AlgebraicGeometry.exists_isDense_compactification` for density and
 `AlgebraicGeometry.exists_compactification_locallyOfFinitePresentation` for finite
@@ -31,15 +31,14 @@ refinement of `AlgebraicGeometry.Compactification.CommonRefinement`.
 ## Main results
 
 - `AlgebraicGeometry.exists_isDense_compactification_locallyOfFinitePresentation`
-  (blueprint: `proper_base_change.tex`, §A43, `BA43-DENSE-DATA`): over a locally Noetherian
+  : over a locally Noetherian
   quasi-compact quasi-separated base, a separated, quasi-compact morphism locally of finite
   type admits a dense compactification whose structure morphism is locally of finite
   presentation;
 - `AlgebraicGeometry.Compactification.exists_common_refinement_isDense_locallyOfFinitePresentation`
-  (blueprint: `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`): over a locally Noetherian base, two
+  : over a locally Noetherian base, two
   compactifications of a quasi-compact morphism are refined by a common one that is
   scheme-theoretically dense and whose structure morphism is locally of finite presentation.
-
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ namespace AlgebraicGeometry
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 variable (f) in
-/-- **A dense compactification of finite presentation over a locally Noetherian base**
-(blueprint: `proper_base_change.tex`, §A43, `BA43-DENSE-DATA`).
+/-- **A dense compactification of finite presentation over a locally Noetherian base**.
 
 Over a locally Noetherian quasi-compact quasi-separated base, the chosen dense
 compactification `AlgebraicGeometry.denseCompactification` already has structure morphism
@@ -66,8 +64,7 @@ theorem exists_isDense_compactification_locallyOfFinitePresentation [IsSeparated
   ⟨denseCompactification f, denseCompactification_isDense f,
     (denseCompactification f).locallyOfFinitePresentation_g⟩
 
-/-- **A dense common refinement of finite presentation over a locally Noetherian base**
-(blueprint: `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`).
+/-- **A dense common refinement of finite presentation over a locally Noetherian base**.
 
 The common refinement produced by
 `AlgebraicGeometry.Compactification.exists_common_refinement_isSchemeTheoreticallyDominant`

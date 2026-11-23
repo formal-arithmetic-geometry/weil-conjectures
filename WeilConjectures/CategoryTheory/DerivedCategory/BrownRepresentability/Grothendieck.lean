@@ -16,20 +16,11 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 
 Let `A` be a Grothendieck abelian category. We show that every triangulated functor
 `F : D(A) ⥤ T` which preserves coproducts has a right adjoint
-(`DerivedCategory.isLeftAdjoint_of_preservesCoproducts`, Stacks Proposition 19.15.2, Tag 0F5Y).
+(`DerivedCategory.isLeftAdjoint_of_preservesCoproducts`).
 
-## The proof (Stacks Lemma 19.15.1)
+## References
 
-Let `G` be a separator of `A` and `R = (End G)ᵐᵒᵖ`. By the Gabriel-Popescu theorem, the functor
-`U = Hom(G, -) : A ⥤ ModuleCat R` is fully faithful and has an exact left adjoint `T = - ⊗ G`.
-Hence `Φ = D(T) : D(R) ⥤ D(A)` is a triangulated functor, left adjoint to the right derived
-functor `Ψ = RU`, which is fully faithful as `U` is fully faithful and preserves K-injective
-complexes. The functor `Φ ⋙ F : D(R) ⥤ T` is triangulated and preserves coproducts, so it has a
-right adjoint by Brown representability for `D(R)`
-(`DerivedCategory.isLeftAdjoint_of_preservesCoproducts_moduleCat`), and then so does `F`
-(`CategoryTheory.Functor.isLeftAdjoint_of_isLeftAdjoint_comp`).
-
-This is the homological input of the blueprint node `thm-amb-etale-exceptional-adjoint`.
+* Stacks Project, Proposition 19.15.2 (Tag 0F5Y) and Lemma 19.15.1.
 -/
 
 @[expose] public section
@@ -44,8 +35,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A]
 
 /-- **Brown representability for the derived category of a Grothendieck abelian category**
-(Stacks Proposition 19.15.2, Tag 0F5Y; blueprint `thm-amb-etale-exceptional-adjoint`): a
-triangulated functor `F : D(A) ⥤ T` which preserves coproducts is a left adjoint. -/
+(Stacks Proposition 19.15.2, Tag 0F5Y):
+a triangulated functor `F : D(A) ⥤ T` which preserves coproducts is a left adjoint. -/
 theorem isLeftAdjoint_of_preservesCoproducts {T : Type u'} [Category.{v} T] [Preadditive T]
     [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T]
     (F : DerivedCategory A ⥤ T) [F.CommShift ℤ] [F.IsTriangulated]
