@@ -15,9 +15,6 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.GroupAlgebra.CondensedGroupAlgebraExactForgetful
 
 /-! # Equivariant linearization of the deletion complex
-
-Source: blueprint direct-image stability, paragraph (3), internal bar input,
-steps 1--3 (blueprint: lem-sfb-condensed-equivariant-deletion-comparison).
 -/
 
 @[expose] public noncomputable section

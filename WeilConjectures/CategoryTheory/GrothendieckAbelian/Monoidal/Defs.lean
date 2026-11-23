@@ -38,12 +38,8 @@ That monoidality is `CategoryTheory.GrothendieckTopology.W.monoidal`: for a *clo
 braided* coefficient category `A`, the class `W` is stable under tensoring on either
 side, because tensoring by `F` is left adjoint to the internal hom `[F, -]`, which
 preserves sheaves (`CategoryTheory.Presheaf.isSheaf_functorEnrichedHom`), and the
-braiding exchanges the two sides. This replaces the earlier stalkwise argument, which
-required `A` to be concrete with a limit- and filtered-colimit-preserving forgetful
-functor and could not be carried out with the coefficient category at `Type (u + 1)`:
-mathlib's stalkwise criterion `ObjectProperty.IsConservativeFamilyOfPoints.isMonoidal_W`
-wants a conservative family of `Point.{u + 1}`-points of the small étale site, while
-mathlib only supplies `Point.{u}`-points. No concreteness hypothesis on `A` is left in
+braiding exchanges the two sides.
+No concreteness hypothesis on `A` is left in
 this folder.
 
 The enriched-hom hypotheses of `GrothendieckTopology.W.monoidal` — the ends
@@ -65,7 +61,6 @@ The preadditivity of this monoidal structure needs no transport of its own: it i
 `WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal`, which applies to any sheaf
 category. The remaining transports are in the sibling files `TensorColimits` and
 `FlatResolution` of this folder; the latter is still recorded with `sorry`.
-
 -/
 
 @[expose] public section

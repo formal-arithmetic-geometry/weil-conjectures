@@ -19,14 +19,7 @@ nerve `U (y 0) ×_V ⋯ ×_V U (y k)` lies in `B`. If an abelian sheaf `F` has v
 cohomology on all these families, then its higher cohomology vanishes.
 
 This is [Stacks, Cohomology on Sites, Lemma 21.10.9] (tag `03F7`), and the site analogue of
-`TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex`. The proof is the usual dimension
-shifting: embed `F` into an injective sheaf `I` with cokernel `Q`. The vanishing of the first
-Čech cohomology of `F` shows that `I(V) → Q(V)` is surjective for every `V` in `B`, hence that
-the Čech complexes of `F`, `I` and `Q` on the families form a short exact sequence. Since the
-Čech complexes of `I` are exact in positive degrees
-(`CategoryTheory.Presheaf.exactAt_cechComplex_of_injective`), `Q` again has vanishing higher
-Čech cohomology, and `H^{q + 1}(F) ≅ H^q(Q)` for `q > 0` while `H^1(F)` is the cokernel of
-`I(T) → Q(T)`.
+`TopCat.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex`.
 
 ## Main statements
 
@@ -296,10 +289,7 @@ such that, for every short exact sequence `0 → F → I → Q → 0`, sections 
 the members of a class `B` of objects. If every covering sieve of `T` contains a finite family
 `U` generating a covering sieve, whose Čech nerve lies in `B` and on which the second Čech
 cohomology of `F` vanishes, then `H²(F) = 0`.
-
-Embedding `F` into an injective sheaf `I` with cokernel `Q`, the Čech complexes of `F`, `I` and
-`Q` on the families form a short exact sequence, so the first Čech cohomology of `Q` vanishes on
-them, hence `H¹(Q) = 0`, and `H²(F)` is a quotient of `H¹(Q)`. -/
+-/
 theorem subsingleton_H_two_of_exactAt_cechComplex (B : C → Prop)
     (F : Sheaf J AddCommGrpCat.{max w v})
     (hsurj : ∀ {S : ShortComplex (Sheaf J AddCommGrpCat.{max w v})}, S.ShortExact →

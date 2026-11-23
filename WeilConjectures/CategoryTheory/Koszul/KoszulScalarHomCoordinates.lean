@@ -13,7 +13,6 @@ import all WeilConjectures.Algebra.Homology.StrictScalarHom.StrictScalarHomChain
 /-! # KoszulScalarHomCoordinates for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-hom-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +43,7 @@ attribute [local instance] gradedTensorCache gradedGoodTensorLeftCache
   cachedComplexBraided cachedComplexClosed
 
 /-- Evaluate the Hom projection on a specified positive Koszul basis vector.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-hom-coordinates). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def homCoordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (a : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O)
     (m : ℕ) (e : Fin r → Bool) (n : ℤ) :
@@ -57,14 +55,7 @@ def homCoordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)
     (SheafOfModules.homObjUnitIso (R := O) (N.X (n + degree r e))).hom
 
 /-- Coordinates of the scalar Koszul Hom comparison.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Expand the Hom coordinate and comparison into theta and precomposition by the
-positive comparison. Apply the normalized theta local-evaluation formula to identify the
-coordinate after theta.
-Proof step 2: The assumed positive basis identity replaces the image of the R basis by the B
-basis after the unit isomorphism. Naturality of the module Hom maps and unit evaluation cancels
-this unit isomorphism. Reassociate the composites to obtain restricted B Hom coordinate.
-(blueprint: lem-f5-koszul-scalar-hom-coordinates). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 private theorem homDiagramComparison_coordinates (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙

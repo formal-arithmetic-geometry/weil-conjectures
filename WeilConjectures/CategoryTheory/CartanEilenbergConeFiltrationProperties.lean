@@ -26,19 +26,7 @@ private theorem comp_zero_of_image_le
   rw [← he, Category.assoc, hg, comp_zero]
 
 /-- Bounds and graded-piece calculation for the constructed filtration.
-Source: Stacks Project, Homology, Tag 0133.  On a fixed diagonal `n`, every
-nonzero bicomplex summand has complex index between `b` and `n`, while the
-cone's `K` summand has index `n+1`; hence the displayed image-sum is the whole
-cone at step `b` and is zero at step `n+2`, including empty intervals.  For
-the quotient of consecutive steps, all summands except those of index `p`
-vanish.  The surviving differential is the column differential, and the
-off-diagonal map is identified with `a.f p` by `haug` and the extension
-isomorphism.  Reindexing degree `n` to `n-p` therefore identifies the graded
-complex with the mapping cone of `extendMap (a.f p)`; applying homology gives
-the asserted isomorphism.  This argument uses only canonical projections and
-inclusions, so it also covers zero columns and all integer indices.
-Source: Stacks Project, Homology, Tag 0133.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration-properties). -/
+Stacks Project, Homology, Tag 0133. -/
 theorem cartanEilenberg_cone_filtration_properties
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

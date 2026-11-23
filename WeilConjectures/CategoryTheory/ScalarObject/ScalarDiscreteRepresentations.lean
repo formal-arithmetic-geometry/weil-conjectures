@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 /-! # Scalar objects in discrete representations
 
 Source: Stacks Project, Tag 04JQ, scalar enhancement.
-(blueprint: lem-exc-scalar-discrete-representations)
 -/
 
 @[expose] public section

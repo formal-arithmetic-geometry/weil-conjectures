@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 # The split-row boundary on cocycles
 
 Source: Stacks Project, Derived Categories, Tags 0152 and 06XR.
-(blueprint: lem-sc-p1-split-ses-cocycle-boundary).
 -/
 
 @[expose] public section
@@ -30,18 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A lift followed by its differential computes composition with the split boundary.
 Source: Stacks Project, Derived Categories, Tags 0152 and 06XR, the canonical
-boundary and its computation by homotopy classes of maps into resolutions.
-(blueprint: lem-sc-p1-split-ses-cocycle-boundary).
-
-Proof: The split boundary has component sⁿ d₂ rⁿ⁺¹. Put t = b rⁿ. The splitting
-identity gives b = t fⁿ + c sⁿ. Multiply by d₂ and use f d₂ = d₁ f. Since
-b d₂ = a fⁿ⁺¹ and fⁿ⁺¹ rⁿ⁺¹ = id, obtain c sⁿ d₂ rⁿ⁺¹ = a - t d₁.
-Thus the cocycle obtained by composing c with the degree-one split boundary differs
-from a by the coboundary of t. The unsigned shift of fromSingleMk identifies
-composition of these shifted maps with this component formula. The maps from the
-single complex are consequently homotopic; Q identifies them. No injectivity,
-boundedness, or augmentation is used, and n may be any integer. In the zero row the
-same identities give zero on both sides. -/
+boundary and its computation by homotopy classes of maps into resolutions. -/
 theorem degreewiseSplit_cocycle_boundary
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (S : ShortComplex (CochainComplex C ℤ))

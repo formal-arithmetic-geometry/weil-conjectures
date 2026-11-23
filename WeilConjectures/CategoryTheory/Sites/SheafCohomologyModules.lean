@@ -192,8 +192,7 @@ positive degrees: `I` is a retract of the coinduced sheaf `Hom_ℤ(Λ, A)` of an
 sheaf `A` containing the underlying abelian sheaf of `I`, and the latter is acyclic by
 `CategoryTheory.Sheaf.subsingleton_H_forget₂_coinduce_of_injective`.
 
-This is used to compare the cohomology of sheaves of `Λ`-modules with abelian sheaf cohomology
-(blueprint `lem-sf-etale-direct-image-vanishing`). -/
+This is used to compare the cohomology of sheaves of `Λ`-modules with abelian sheaf cohomology. -/
 theorem subsingleton_H_forget₂_of_injective [EnoughInjectives (Sheaf J AddCommGrpCat.{max w v})]
     (Λ : Type (max w v)) [CommRing Λ] [Finite Λ]
     [J.HasSheafCompose (forget₂ (ModuleCat.{max w v} Λ) AddCommGrpCat.{max w v})]

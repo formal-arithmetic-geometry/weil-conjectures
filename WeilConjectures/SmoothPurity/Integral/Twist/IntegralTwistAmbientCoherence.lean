@@ -10,7 +10,7 @@ public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLine
 
 /-! # Ambient tower and unit laws for the published twist comparison
 
-Source: blueprint `prop-weil-twist-preserves`, final integral/common-stage sentence.
+Source: blueprint `definition-tate-twists--10`, final integral/common-stage sentence.
 -/
 
 @[expose] public noncomputable section

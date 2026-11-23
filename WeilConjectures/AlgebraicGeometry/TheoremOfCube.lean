@@ -28,6 +28,8 @@ written with `CartesianMonoidalCategory.lift`.
 
 ## Main statements
 
+- `AlgebraicGeometry.nonempty_iso_unit_fiber_snd_iff_and_isClosed`: triviality of an invertible
+  module on the fibres of `P ×_K T ⟶ T` is detected by sections and is a closed condition.
 - `AlgebraicGeometry.nonempty_iso_of_nonempty_iso_overPullback_slices`: the theorem of the cube.
 
 The proof follows Stacks: the locus of points of `Z` over which `M` and `N` are locally
@@ -35,6 +37,14 @@ isomorphic is open, closed (`AlgebraicGeometry.isClosed_setOf_exists_nonempty_is
 and contains `z` (`AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd`), hence is all of the
 connected scheme `Z`, and an isomorphism locally over `Z` globalises
 (`AlgebraicGeometry.nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd`).
+
+## Implementation details
+
+Triviality on the fibres of `P ×_K T ⟶ T` is stated for an arbitrary `K`-scheme `T`; no finite
+type hypothesis is needed. The projection is proper, flat, of finite presentation and has
+geometrically integral fibres, so the statement is the seesaw principle
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_fiber_iff` applied to `L ⊗ Lᵛ ≅ 𝒪`, together
+with `AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber` applied to `L` and `𝒪`.
 -/
 
 @[expose] public section
@@ -143,6 +153,29 @@ theorem isClosed_setOf_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
         (Scheme.Modules.pullback
           (Limits.pullback.fst (snd (X ⊗ Y) Z).left (Z.left.fromSpecResidueField t))).obj N)} :=
   Scheme.Modules.isClosed_setOf_nonempty_iso_fiber (snd (X ⊗ Y) Z).left M N
+
+/-- **Triviality on fibres.**
+
+Let `P` be proper and geometrically integral over a field `K`, let `T` be a `K`-scheme and let
+`L` be an invertible module on `P ×_K T`. For `t ∈ T` write `L_t` for the restriction of `L` to
+the fibre `P_t = P ×_K Spec κ(t)` of the projection `P ×_K T ⟶ T`. Then
+1. `L_t` is trivial if and only if `H⁰(P_t, L_t) ≠ 0` and `H⁰(P_t, L_t⁻¹) ≠ 0`;
+2. the set of `t ∈ T` such that `L_t` is trivial is closed. -/
+theorem nonempty_iso_unit_fiber_snd_iff_and_isClosed (P T : Over (Spec (.of K)))
+    [IsProper P.hom] [GeometricallyIntegral P.hom] (L : (P ⊗ T).left.Modules) [L.IsInvertible] :
+    (∀ t : T.left,
+      Nonempty ((Scheme.Modules.pullback ((snd P T).left.fiberι t)).obj L ≅ 𝟙_ _) ↔
+        (∃ s : Γ((Scheme.Modules.pullback ((snd P T).left.fiberι t)).obj L, ⊤), s ≠ 0) ∧
+        ∃ s : Γ((Scheme.Modules.pullback ((snd P T).left.fiberι t)).obj Lᵛ, ⊤), s ≠ 0) ∧
+    IsClosed {t : T.left |
+      Nonempty ((Scheme.Modules.pullback ((snd P T).left.fiberι t)).obj L ≅ 𝟙_ _)} := by
+  refine ⟨fun t ↦ ?_, ?_⟩
+  · obtain ⟨e⟩ := nonempty_tensorObj_dual_iso_unit L
+    rw [nonempty_iso_unit_fiber_iff _ e, pos_hFiber_zero_iff, pos_hFiber_zero_iff]
+  · convert Scheme.Modules.isClosed_setOf_nonempty_iso_fiber (snd P T).left L
+      (𝟙_ (P ⊗ T).left.Modules) using 1
+    ext t
+    exact ⟨fun ⟨e⟩ ↦ ⟨e ≪≫ (pullbackObjUnitIso _).symm⟩, fun ⟨e⟩ ↦ ⟨e ≪≫ pullbackObjUnitIso _⟩⟩
 
 /-- If `M ≅ N` over an open `U ⊆ Z`, then `M ≅ N` on the fibre over every field-valued point
 of `U`. -/

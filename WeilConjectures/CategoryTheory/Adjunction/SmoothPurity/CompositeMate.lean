@@ -10,8 +10,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # The Hom formula for the mate of a transition between right adjoints
 
-Source: Zheng, Construction 4.1, p. 21, the adjunction formula for truncation maps.
-(blueprint: lem-pur-evaluation-transition-mate).
+## References
+
+* Zheng, Construction 4.1, p. 21, the adjunction formula for truncation maps.
 -/
 
 @[expose] public section
@@ -25,19 +26,13 @@ variable {A : Type uA} {B : Type uB} {S : Type uS}
   {E₂ : A ⥤ S} {e₂ : S ⥤ A}
 
 /-- The transition's conjugate under the composite scalar/evaluation adjunction.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-evaluation-transition-mate). -/
+Zheng, Construction 4.1, p. 21. -/
 def compositeMate (a₁ : E₁ ⊣ e₁) (a₂ : E₂ ⊣ e₂) (b : T ⊣ R)
     (t : e₂ ⟶ e₁ ⋙ R) : T ⋙ E₁ ⟶ E₂ :=
   (conjugateEquiv a₂ (b.comp a₁)).symm t
 
 /-- The mate of a right-adjoint transition has the required iterated Hom formula.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-evaluation-transition-mate).
-Proof: take the conjugate of the transition under the adjunctions for `E₂` and
-`T` followed by `E₁`. The unit equation for conjugation and naturality of the
-transition identify its composite Hom transpose. Apply the scalar Hom equivalence
-and its left-variable naturality to separate the two transposes. -/
+Zheng, Construction 4.1, p. 21. -/
 theorem compositeMate_homEquiv (a₁ : E₁ ⊣ e₁) (a₂ : E₂ ⊣ e₂) (b : T ⊣ R)
     (t : e₂ ⟶ e₁ ⋙ R) :
     ∀ N M (f : E₂.obj N ⟶ M),

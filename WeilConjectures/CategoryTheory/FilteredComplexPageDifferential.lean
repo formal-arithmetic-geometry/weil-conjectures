@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.FilteredComplexSingleDifferentialDescent
 # Differentials on individual filtered-complex pages
 
 Source: Stacks Project, Homology, Tag 012K, the displayed differential formula
-preceding lemma-spectral-sequence-filtered-complex.
-(blueprint: lem-sp-filtered-complex-page-differential).
+preceding.
 -/
 
 @[expose] public section
@@ -29,16 +28,14 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The actual cycles/boundaries quotient in bidegree `pq`.
-Source: Stacks Project, Tag 012K, the formula E = Z/B.
-(blueprint: lem-sp-filtered-complex-page-differential). -/
+Source: Stacks Project, Tag 012K, the formula E = Z/B. -/
 noncomputable def filteredComplexPageObject (K : CochainComplex C ℤ)
     (F : DecreasingFiltration K) (r : ℤ) (pq : ℤ × ℤ) : C :=
   cokernel (Subobject.ofLE _ _
     (filteredComplex_boundaries_le_cycles K F pq.1 (pq.1 + pq.2) r))
 
 /-- Projection from the graded cycles to their quotient by boundaries.
-Source: Stacks Project, Tag 012K, the formula E = Z/B.
-(blueprint: lem-sp-filtered-complex-page-differential). -/
+Source: Stacks Project, Tag 012K, the formula E = Z/B. -/
 noncomputable def filteredComplexPageπ (K : CochainComplex C ℤ)
     (F : DecreasingFiltration K) (r : ℤ) (pq : ℤ × ℤ) :
     (F.complexCycles pq.1 (pq.1 + pq.2) r : C) ⟶ filteredComplexPageObject K F r pq :=
@@ -47,8 +44,7 @@ noncomputable def filteredComplexPageπ (K : CochainComplex C ℤ)
 
 /-- Differential data on one concrete quotient page. The representative equation
 specifies the map by `z ↦ dz`; all page objects are already constructed cokernels.
-Source: Stacks Project, Tag 012K, the displayed differential formula.
-(blueprint: lem-sp-filtered-complex-page-differential). -/
+Source: Stacks Project, Tag 012K, the displayed differential formula. -/
 structure FilteredComplexPageDifferential (K : CochainComplex C ℤ)
     (F : DecreasingFiltration K) (r : ℤ) where
   d : ∀ i j : ℤ × ℤ,
@@ -77,8 +73,7 @@ private theorem filteredComplexPageDifferential_ext
   congr
 
 /-- Assemble the specified differential with the concrete quotient objects.
-Source: Stacks Project, Tag 012K, the complexes (E_r,d_r).
-(blueprint: lem-sp-filtered-complex-page-differential). -/
+Source: Stacks Project, Tag 012K, the complexes (E_r,d_r). -/
 noncomputable def FilteredComplexPageDifferential.page
     {K : CochainComplex C ℤ} {F : DecreasingFiltration K} {r : ℤ}
     (D : FilteredComplexPageDifferential K F r) :
@@ -92,24 +87,7 @@ set_option linter.unusedVariables false in
 /-- The differential induced by K exists and is uniquely specified by its action
 on filtered cycle representatives. This assertion concerns only one page; it
 asserts neither a successor page nor a homology identification.
-Source: Stacks Project, Tag 012K, the displayed differential formula preceding
-lemma-spectral-sequence-filtered-complex.
-(blueprint: lem-sp-filtered-complex-page-differential).
-
-Proof. Put n = p+q. Restrict d to F^p K^n ∩ d⁻¹(F^(p+r) K^(n+1)).
-It lands in F^(p+r) K^(n+1) ∩ ker d, hence in the target r-cycles. Project
-there to the target quotient. Changing a representative by an element of
-F^(p+1) that is an r-cycle changes its differential by an r-boundary in
-filtration degree p+r: the allowed incoming filtration degree there is p+1.
-Changing it by a source r-boundary has zero differential. The two cokernel
-universal properties therefore descend d to the stated quotient map.
-Put this map at related bidegrees and zero elsewhere. Its square is zero
-because it is induced by d squared. For the displayed representative equation,
-precompose the descended map with the cycle representative projection. This
-projection is epic onto the graded cycles, and the cycles-to-page projection
-is epic too; thus their composite is epic and the equation determines the
-map uniquely. This is a componentwise finite-limit and cokernel construction,
-valid without infinite sums or a finite-filtration assumption. -/
+Source: Stacks Project, Tag 012K, the displayed differential formula preceding. -/
 theorem filteredComplex_page_differential_exists_unique
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r) :
     ∃! D : FilteredComplexPageDifferential K F r, True := by

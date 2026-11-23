@@ -12,6 +12,7 @@ import all WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 import all WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
@@ -296,6 +297,148 @@ private theorem transpose_iso_target (X Y : A) (f : F.obj X ⟶ F.obj Y)
   simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
   exact transpose_comparison q r F V a L U adj e h X (F.obj Y) f hunit
 end Comparison
+
+private theorem strength_tensor_naturality_second
+    (K : ObjectProperty C) (B : C ⥤ C ⥤ C) (q : C ⥤ D) (S : D × D ⥤ D)
+    (rep : (K.ι.prod K.ι) ⋙ Functor.uncurry.obj B ⋙ q ≅
+      (K.ι ⋙ q).prod (K.ι ⋙ q) ⋙ S)
+    {P Z Q : C} (hP : K P) (hZ : K Z) (hQ : K Q) (f : Z ⟶ Q) :
+    (rep.app (⟨P, hP⟩, ⟨Z, hZ⟩)).hom ≫
+        S.map (Prod.mkHom (𝟙 (q.obj P)) (q.map f)) =
+      q.map ((B.obj P).map f) ≫ (rep.app (⟨P, hP⟩, ⟨Q, hQ⟩)).hom := by
+  have hn := rep.hom.naturality
+    (X := (⟨P, hP⟩, ⟨Z, hZ⟩)) (Y := (⟨P, hP⟩, ⟨Q, hQ⟩))
+    (𝟙 _, ObjectProperty.homMk f)
+  change q.map ((B.map (𝟙 P)).app Z ≫ (B.obj P).map f) ≫ _ =
+    _ ≫ S.map (Prod.mkHom (q.map (𝟙 P)) (q.map f)) at hn
+  erw [B.map_id, NatTrans.id_app, Category.id_comp, q.map_id] at hn
+  exact hn.symm
+
+section Representatives
+variable {A B : Type*} [Category A] [Category B]
+
+private theorem strength_representative_mate
+    (q : A ⥤ C) (r : B ⥤ D)
+    (F : A ⥤ B) (V : B ⥤ A) (a : F ⊣ V)
+    (c : q ⋙ L ⟶ F ⋙ r) (h : r ⋙ U ≅ V ⋙ q)
+    (P Q Z : A) (TP : A ⥤ A) (SP : B ⥤ B)
+    (e : TP ⋙ q ≅ q ⋙ (Functor.curry.obj T).obj (q.obj P))
+    (t : Z ⟶ V.obj (F.obj Q)) [IsIso (q.map t)]
+    [IsIso (c.app P)] [IsIso (c.app Z)] [IsIso (c.app Q)]
+    (b : TP.obj (V.obj (F.obj Q)) ⟶ V.obj (F.obj (TP.obj Q)))
+    (βZ : SP.obj (F.obj Z) ⟶ F.obj (TP.obj Z)) [IsIso βZ]
+    (βQ : SP.obj (F.obj Q) ⟶ F.obj (TP.obj Q)) [IsIso βQ]
+    (aZ : q.obj (TP.obj Z) ≅ T.obj (q.obj P, q.obj Z))
+    (aQ : q.obj (TP.obj Q) ≅ T.obj (q.obj P, q.obj Q))
+    (heZ : e.hom.app Z = aZ.hom) (heQ : e.hom.app Q = aQ.hom)
+    (dZ : r.obj (SP.obj (F.obj Z)) ≅ S.obj (r.obj (F.obj P), r.obj (F.obj Z)))
+    (dQ : r.obj (SP.obj (F.obj Q)) ≅ S.obj (r.obj (F.obj P), r.obj (F.obj Q)))
+    (hnZ : L.map aZ.hom ≫ μ.hom.app (q.obj P, q.obj Z) ≫
+      S.map (Prod.mkHom (c.app P) (c.app Z)) ≫ dZ.inv ≫ r.map βZ = c.app (TP.obj Z))
+    (hnQ : L.map aQ.hom ≫ μ.hom.app (q.obj P, q.obj Q) ≫
+      S.map (Prod.mkHom (c.app P) (c.app Q)) ≫ dQ.inv ≫ r.map βQ = c.app (TP.obj Q))
+    (hr : dZ.hom ≫ S.map
+      (Prod.mkHom (𝟙 (r.obj (F.obj P))) (r.map ((a.homEquiv _ _).symm t))) =
+        r.map (SP.map ((a.homEquiv _ _).symm t)) ≫ dQ.hom)
+    (ho : a.homEquiv _ _ (inv βZ ≫ SP.map ((a.homEquiv _ _).symm t) ≫ βQ) =
+      TP.map t ≫ b)
+    (huZ : adj.unit.app (q.obj Z) ≫ U.map (c.app Z) ≫ h.hom.app (F.obj Z) =
+      q.map (a.unit.app Z))
+    (huTPZ : adj.unit.app (q.obj (TP.obj Z)) ≫ U.map (c.app (TP.obj Z)) ≫
+      h.hom.app (F.obj (TP.obj Z)) = q.map (a.unit.app (TP.obj Z))) :
+    T.map (Prod.mkHom (𝟙 (q.obj P)) (U.map (c.app Q) ≫ h.hom.app (F.obj Q))) ≫
+      e.inv.app (V.obj (F.obj Q)) ≫ q.map b =
+      mate T S L U adj μ (q.obj P) (q.obj Q) ≫ U.map (L.map (e.inv.app Q)) ≫
+        U.map (c.app (TP.obj Q)) ≫ h.hom.app (F.obj (TP.obj Q)) := by
+  let t' := (a.homEquiv Z (F.obj Q)).symm t
+  let ψ := inv βZ ≫ SP.map t' ≫ βQ
+  let eZ := L.mapIso (e.app Z) ≪≫ μ.app (q.obj P, q.obj Z)
+  let eQ := L.mapIso (e.app Q) ≪≫ μ.app (q.obj P, q.obj Q)
+  let kZ := (r.mapIso (asIso βZ)).symm ≪≫ dZ
+  let kQ := (r.mapIso (asIso βQ)).symm ≪≫ dQ
+  have hNZ : eZ.hom ≫ S.map (Prod.mkHom (c.app P) (c.app Z)) =
+      c.app (TP.obj Z) ≫ kZ.hom := by
+    have hh := congrArg (fun k ↦ k ≫ r.map (inv βZ) ≫ dZ.hom) hnZ
+    rw [← heZ] at hh
+    simpa only [eZ, kZ, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+      Functor.mapIso_inv, asIso_inv, Iso.app_hom, Category.assoc,
+      ← r.map_comp_assoc, IsIso.hom_inv_id, r.map_id, Category.id_comp,
+      Iso.inv_hom_id, Category.comp_id] using hh
+  have hNQ : eQ.hom ≫ S.map (Prod.mkHom (c.app P) (c.app Q)) =
+      c.app (TP.obj Q) ≫ kQ.hom := by
+    have hh := congrArg (fun k ↦ k ≫ r.map (inv βQ) ≫ dQ.hom) hnQ
+    rw [← heQ] at hh
+    simpa only [eQ, kQ, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
+      Functor.mapIso_inv, asIso_inv, Iso.app_hom, Category.assoc,
+      ← r.map_comp_assoc, IsIso.hom_inv_id, r.map_id, Category.id_comp,
+      Iso.inv_hom_id, Category.comp_id] using hh
+  have hμ := normalize_conjugate S eZ eQ
+    (asIso (c.app P)) (asIso (c.app Z)) (asIso (c.app Q))
+    kZ kQ (c.app (TP.obj Z)) (c.app (TP.obj Q)) (r.map t') hNZ hNQ
+  simp only [eZ, eQ, kZ, kQ, Iso.trans_hom, Iso.trans_inv,
+    Functor.mapIso_hom, Functor.mapIso_inv, Iso.symm_hom, Iso.symm_inv,
+    Iso.app_hom, Iso.app_inv, asIso_hom, asIso_inv, Category.assoc] at hμ
+  erw [reassoc_of% hr, Iso.hom_inv_id_assoc] at hμ
+  simp only [← r.map_comp] at hμ
+  have hf := transpose_iso_target q r F V a L U adj c h Z Q t' huZ
+  rw [(a.homEquiv Z (F.obj Q)).apply_symm_apply t] at hf
+  have hg := transpose_comparison q r F V a L U adj c h
+    (TP.obj Z) (F.obj (TP.obj Q)) ψ huTPZ
+  have hg' : adj.homEquiv _ _ (c.app (TP.obj Z) ≫ r.map ψ) =
+      q.map (TP.map t) ≫ q.map b ≫ h.inv.app (F.obj (TP.obj Q)) := by
+    rw [ho, q.map_comp] at hg
+    apply (cancel_mono (h.hom.app (F.obj (TP.obj Q)))).1
+    simp only [Category.assoc]
+    erw [Iso.inv_hom_id_app, Category.comp_id]
+    exact hg
+  have hn : (e.app Z).hom ≫ T.map (Prod.mkHom (𝟙 (q.obj P)) (q.map t)) =
+      q.map (TP.map t) ≫ (e.app (V.obj (F.obj Q))).hom :=
+    (e.hom.naturality t).symm
+  have hh := mate_paste T S L U adj μ
+    (e.app Z) (e.app Q) (e.app (V.obj (F.obj Q)))
+    (U.mapIso (asIso (c.app Q)) ≪≫ h.app (F.obj Q)) (q.map t)
+    (q.map (TP.map t)) (q.map b ≫ h.inv.app (F.obj (TP.obj Q)))
+    (c.app (TP.obj Z)) (c.app (TP.obj Q))
+    (c.app Z ≫ r.map t' ≫ inv (c.app Q)) (r.map ψ) hn hf hμ hg'
+  have hh' := congrArg (fun k ↦ k ≫ h.hom.app (F.obj (TP.obj Q))) hh
+  simp only [Category.assoc, Iso.inv_hom_id_app, Iso.trans_hom, Functor.mapIso_hom,
+    asIso_hom, Iso.app_hom, Iso.app_inv] at hh'
+  erw [Category.comp_id] at hh'
+  exact hh'
+
+end Representatives
+
+private theorem cochainCounit_quotient
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ) :
+    L.map ((DerivedCategory.quotientCompQhIso C).app P).inv ≫
+        ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).app P).hom ≫
+        ((DerivedCategory.quotientCompQhIso D).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj P)).hom =
+      ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) := by
+  change L.map (𝟙 _) ≫ ε.app _ ≫ DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ = _
+  erw [L.map_id, (DerivedCategory.Qh (C := D)).map_id]
+  simp only [Category.id_comp, Category.comp_id]
+  exact Category.comp_id _
+
+private theorem quotientRestrictionFactors
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive]
+    [CategoryTheory.Limits.PreservesFiniteLimits F]
+    [CategoryTheory.Limits.PreservesFiniteColimits F] (P : CochainComplex C ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
+      F.mapDerivedCategoryFactors.hom.app P := by
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  change F.mapDerivedCategory.map (𝟙 _) ≫ _ ≫ 𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _) = _
+  erw [F.mapDerivedCategory.map_id, (DerivedCategory.Qh (C := D)).map_id]
+  simp only [Category.id_comp]
+  exact Category.comp_id _
+
 end StrengthGenericMate
 
 /- Compare the derived scalar counit and unit with their ordinary
@@ -305,7 +448,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p) (n : ℕ)
 
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
+private theorem strengthReductionExtension_eq :
+    integralReductionChangeOfRings l E X D hl n = scalarReductionExtension l E X n := rfl
+
 private def reductionNat :
     DerivedCategory.Q ⋙ scalarReductionDerivedExtension l E X n ⟶
       (scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ) ⋙
@@ -321,13 +466,10 @@ private def reductionNat :
       ((integralReductionChangeOfRings l E X D hl n).mapHomologicalComplex (.up ℤ))
       (DerivedCategory.quotientCompQhIso _).hom
 
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionNat_app
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (reductionNat l E X D hl n).app P = reductionCounit l E X D hl n P := rfl
 
-set_option maxHeartbeats 1600000 in
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem reductionCounit_isIso
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) P) :
@@ -336,8 +478,6 @@ private theorem reductionCounit_isIso
   unfold reductionCounit
   infer_instance
 
-set_option maxHeartbeats 1600000 in
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem restrictionComparison_eq
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (scalarReductionDerivedRestriction l E X n).map (reductionCounit l E X D hl n P) ≫
@@ -347,43 +487,19 @@ private theorem restrictionComparison_eq
   have hc : reductionCounit l E X D hl n P =
       (scalarReductionCounit l E X n).app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P) := by
-    unfold reductionCounit
-    change (scalarReductionDerivedExtension l E X n).map (𝟙 _) ≫
-        (scalarReductionCounit l E X n).app
-          ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-        (DerivedCategory.Qh (C := scalarReductionTarget l E X n)).map
-          (𝟙 (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
-            ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) ≫ 𝟙 _ = _
-    erw [(scalarReductionDerivedExtension l E X n).map_id,
-      (DerivedCategory.Qh (C := scalarReductionTarget l E X n)).map_id]
-    simp only [Category.id_comp, Category.comp_id]
-    exact Category.comp_id _
-  have hf : (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) =
-      (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.hom.app
-        (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P) := by
-    change (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P)) = _
-    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
-    change (scalarReductionDerivedRestriction l E X n).map (𝟙 _) ≫
-      (scalarReductionRestriction l E X n).mapDerivedCategoryFactors.hom.app _ ≫
-      𝟙 _ ≫ (DerivedCategory.Qh (C := scalarReductionSource l E X)).map
-        (𝟙 ((HomotopyCategory.quotient _ (.up ℤ)).obj
-          (((scalarReductionRestriction l E X n).mapHomologicalComplex (.up ℤ)).obj
-            (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P)))) = _
-    erw [(scalarReductionDerivedRestriction l E X n).map_id,
-      (DerivedCategory.Qh (C := scalarReductionSource l E X)).map_id]
-    simp only [Category.id_comp]
-    exact Category.comp_id _
+    exact StrengthGenericMate.cochainCounit_quotient
+      (integralReductionChangeOfRings l E X D hl n)
+      (integralDerivedReduction l E X D hl n)
+      (integralDerivedReductionCounit l E X D hl n) P
+  have hf := StrengthGenericMate.quotientRestrictionFactors
+    (scalarReductionRestriction l E X n)
+    (((scalarReductionExtension l E X n).mapHomologicalComplex (.up ℤ)).obj P)
   change _ = (scalarReductionDerivedRestriction l E X n).map
     ((scalarReductionCounit l E X n).app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫ _
   exact congrArg₂ (fun f g ↦ (scalarReductionDerivedRestriction l E X n).map f ≫ g)
     hc hf.symm
 
--- Comparing the quotient and coefficient wrappers needs additional elaboration time.
 private theorem unit_compatibility
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hP : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) P) :
@@ -449,6 +565,24 @@ private noncomputable def rawIso (M : Modules.{t, u} X R) :
     | tmul s x =>
       exact (Classical.choose_spec (SheafOfModules.exists_changeOfRingsMap c M f) s x))
 
+private theorem rawIso_apply (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
+    (s : S.obj.obj U) (x : M.val.obj U) :
+    (rawIso X R S c M).hom.app U (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x) =
+      s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x := rfl
+
+private theorem sheafification_map_unit_section
+    (A : Sheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)})
+    (P Q : PresheafOfModules.{max u (t + 1)} A.obj) (f : P ⟶ Q)
+    (U : X.ProEtᵒᵖ) (x : P.obj U) :
+    (((PresheafOfModules.sheafification.{max u (t + 1)} (𝟙 A.obj)).map f).val.app U)
+        (((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app P).app
+          U x) =
+      ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.app Q).app U
+        (f.app U x) := by
+  have h := congrArg (fun g ↦ g.app U x)
+    ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)} (𝟙 A.obj)).unit.naturality f)
+  exact h.symm
+
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in
 private noncomputable def coefficientIso (M : Modules.{t, u} X R) :
@@ -463,7 +597,6 @@ private noncomputable def coefficientIso (M : Modules.{t, u} X R) :
     (SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
       (R := R) (coefficient X R S c) M).symm
 
-set_option maxHeartbeats 800000 in
 -- Compare the scalar and module sheafifications explicitly.
 attribute [-instance] tensorLocalization abSheafify abLocallyBijective
   WeilConjectures.integralReductionSiteEssentiallySmall in
@@ -501,15 +634,15 @@ private theorem coefficientIso_pure (M : Modules.{t, u} X R) (U : X.ProEtᵒᵖ)
     exact congrArg (fun f ↦ f.val.app U
       ((adj.unit.app ((PresheafOfModules.restrictScalars.{max u (t + 1)} α.hom).obj P)).app U
         (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))) e.hom_inv_id
-  change (SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
-    (R := R) (coefficient X R S c) M).inv.val.app U
-    ((a.map (rawIso X R S c M).hom).val.app U (e.inv.val.app U _)) = _
-  rw [hei]
-  have hn := congrArg (fun f ↦ f.app U
-    (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x))
-    (adj.unit.naturality (rawIso X R S c M).hom)
-  exact congrArg ((SheafOfModules.tensorObjIsoSheafification.{t, t + 1, max u (t + 1)}
-    (R := R) (coefficient X R S c) M).inv.val.app U) hn.symm
+  simp only [coefficientIso, pair, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
+    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  -- Retain the common tensor comparison while comparing its inputs.
+  congr 1
+  erw [hei]
+  have hn := sheafification_map_unit_section X A _ _ (rawIso X R S c M).hom U
+    (s ⊗ₜ[R.obj.obj U, (c.hom.app U).hom] x)
+  rw [rawIso_apply] at hn
+  exact hn
 
 section Levels
 
@@ -536,17 +669,16 @@ private noncomputable def levelIso (n : ℕ) (M : scalarReductionSource l E X) :
     (eqToIso ((scalarReductionExistence.{t, u} l E X n).choose_spec.choose M)) ≪≫
     coefficientIso X (base X l E) (level X l E n) (projection X l E n) M
 
-set_option maxHeartbeats 1600000 in
--- Total tensor comparison types require unfolding the coefficient wrappers.
 private theorem levelIso_pure (n : ℕ) (M : scalarReductionSource l E X)
     (U : X.ProEtᵒᵖ) (s : (level X l E n).obj.obj U) (x : M.val.obj U) :
     (levelIso X l E n M).hom.val.app U (strengthReductionTensor l E X n M U s x) =
       pair.{t, u} X (base X l E) (coeff X l E n) M U s x := by
   let h := (scalarReductionExistence.{t, u} l E X n).choose_spec.choose M
-  change (coefficientIso X (base X l E) (level X l E n)
-    (projection X l E n) M).hom.val.app U
-      (((eqToHom h.symm ≫ eqToHom h).val.app U) _) = _
-  simp only [eqToHom_trans, eqToHom_refl]
+  simp only [levelIso, strengthReductionTensor, Iso.trans_hom, Functor.mapIso_hom,
+    eqToIso.hom, SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
+    SheafOfModules.restrictScalars,
+    PresheafOfModules.restrictScalars_map_app]
+  erw [SheafOfModules.eqToHom_val_app_eqToHom_symm h U]
   exact coefficientIso_pure X (base X l E) (level X l E n) (projection X l E n) M U s x
 
 private theorem levelIso_inv_pure (n : ℕ) (M : scalarReductionSource l E X)
@@ -661,7 +793,36 @@ private theorem beta_scalar (n : ℕ)
   erw [totalPair_smul_right, map_smul, hbeta]
   exact (reduction_smul X l E n _ V s _).symm
 
-set_option maxHeartbeats 1600000 in
+private theorem reductionUnit_section (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
+    (n : ℕ) (M : scalarReductionSource l E X) (V : X.ProEtᵒᵖ) (x : M.val.obj V) :
+    (reductionUnit l E X D hl n M).val.app V x =
+      strengthReductionTensor l E X n M V 1 x :=
+  (scalarReductionExtension_adjunction l E X n).choose_spec M V x
+
+private theorem normalized_beta_scalar (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
+    (n : ℕ) (P Q : CochainComplex (scalarReductionSource l E X) ℤ)
+    (beta : ((totalTensor.{t, u} X (S X l E n)).obj ((F X l E n).obj P)).obj
+      ((F X l E n).obj Q) ⟶
+      (F X l E n).obj (((totalTensor.{t, u} X (B X l E)).obj P).obj Q))
+    (hbeta : ∀ (i j : ℤ) (V : X.ProEtᵒᵖ)
+      (x : (P.X i).val.obj V) (y : (Q.X j).val.obj V),
+      (beta.f (i + j)).val.app V
+        (totalPair.{t, u} X (S X l E n) ((F X l E n).obj P) ((F X l E n).obj Q)
+          i j V ((reductionUnit l E X D hl n (P.X i)).val.app V x)
+            ((reductionUnit l E X D hl n (Q.X j)).val.app V y)) =
+      (reductionUnit l E X D hl n _).val.app V
+        (totalPair.{t, u} X (B X l E) P Q i j V x y))
+    (i j : ℤ) (V : X.ProEtᵒᵖ) (s : (S X l E n).obj.obj V)
+    (x : (P.X i).val.obj V) (y : (Q.X j).val.obj V) :
+    (beta.f (i + j)).val.app V
+      (totalPair.{t, u} X (S X l E n) ((F X l E n).obj P) ((F X l E n).obj Q)
+        i j V (strengthReductionTensor l E X n (P.X i) V 1 x)
+          (strengthReductionTensor l E X n (Q.X j) V s y)) =
+    strengthReductionTensor l E X n _ V s
+      (totalPair.{t, u} X (B X l E) P Q i j V x y) := by
+  simp only [reductionUnit_section] at hbeta
+  exact beta_scalar X l E n P Q beta hbeta i j V s x y
+
 -- The unit normalization crosses the finite coefficient wrappers.
 private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
     {V W : X.ProEtᵒᵖ} (i : V ⟶ W) (x : M.val.obj V) :
@@ -674,9 +835,8 @@ private theorem unit_restrict (n : ℕ) (M : scalarReductionSource l E X)
       (((scalarReductionExtension_adjunction l E X n).choose.unit.app M).val.app W y) =
         strengthReductionTensor l E X n M W 1 y :=
     (scalarReductionExtension_adjunction l E X n).choose_spec M W y
-  change _ = _ at h
-  rw [hu, hu] at h
-  exact h.symm
+  exact (congrArg (((scalarReductionExtension l E X n).obj M).val.map i)
+    (hu V x)).symm.trans (h.symm.trans (hu W (M.val.map i x)))
 
 private theorem beta_restricted (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -981,8 +1141,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   completedIntegralCommRingSheafUnrestricted integralCoefficientCommRingSheaf
   integralCoefficientSheaf
 
-set_option maxHeartbeats 16000000 in
--- Keep the coefficient wrappers folded while elaborating the comparison squares.
+-- Normalize the coefficient wrappers before applying the generic mate calculation.
 /-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
 This is a one-level calculation: no consecutive quotient map occurs in it.
 
@@ -1100,140 +1259,45 @@ private theorem restrictionTensor_mate_model
   let t' : F.obj Z ⟶ F.obj Q := (adj₀.homEquiv Z (F.obj Q)).symm t
   have hZ₀ : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) Z := hZ
   have normZ := m.normalization P Z hP hZ₀
+  dsimp only [StrengthDerived.strengthReductionExtension_eq, completedIntegralCommRingSheaf]
+    at normZ
   obtain ⟨hFP, hFZ, betaZ₀, hiZ₀, hbZ, hnZ⟩ := normZ
-  obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := m.normalization P Q hP hQ
-  let betaZ : T'.obj (F.obj Z) ⟶ F.obj (TP.obj Z) := betaZ₀
-  let betaQ : T'.obj (F.obj Q) ⟶ F.obj (TP.obj Q) := betaQ₀
+  have hQ₀ : flat.{t, u} X (completedIntegralCommRingSheaf l E X D hl) Q := hQ
+  have normQ := m.normalization P Q hP hQ₀
+  dsimp only [StrengthDerived.strengthReductionExtension_eq, completedIntegralCommRingSheaf]
+    at normQ
+  obtain ⟨hFP', hFQ, betaQ₀, hiQ₀, hbQ, hnQ⟩ := normQ
+  let betaZ := betaZ₀
+  let betaQ := betaQ₀
   have hiZ : IsIso betaZ := hiZ₀
   have hiQ : IsIso betaQ := hiQ₀
-  let ψ := inv betaZ ≫ T'.map t' ≫ betaQ
-  have ho : adj₀.homEquiv _ _ ψ = TP.map t ≫ b := by
-    apply StrengthOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ b
-    · intro i j W x z
-      have hh := hbZ i j W x z
-      dsimp only [reductionUnit] at hh
-      erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
-      exact hh
-    · intro i j W x y
-      have hh := hbQ i j W x y
-      dsimp only [reductionUnit] at hh
-      erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec,
-        (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
-      exact hh
-    · exact hb
+  have ho := StrengthOrdinary.ordinary_square X l E n P Q Z t betaZ betaQ b
+    (fun i j W x z ↦ StrengthOrdinary.normalized_beta_scalar X l E D hl n P Z
+      betaZ hbZ i j W 1 x z)
+    (fun i j W x y ↦ StrengthOrdinary.normalized_beta_scalar X l E D hl n P Q
+      betaQ hbQ i j W 1 x y) hb
   let repZ := m.target.representative.app (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩)
   let repQ := m.target.representative.app (⟨F.obj P, hFP'⟩, ⟨F.obj Q, hFQ⟩)
-  let eZ := L.mapIso (e.app Z) ≪≫ m.mu.app (q.obj P, q.obj Z)
-  let eQ := L.mapIso (e.app Q) ≪≫ m.mu.app (q.obj P, q.obj Q)
-  let dZ := (r.mapIso (asIso betaZ)).symm ≪≫ repZ
-  let dQ := (r.mapIso (asIso betaQ)).symm ≪≫ repQ
-  have hNZ : eZ.hom ≫ m.target.tensor.map
-      (Prod.mkHom (c.app P) (c.app Z)) = c.app (TP.obj Z) ≫ dZ.hom := by
-    have hs := hnZ
-    change L.map (a.representative.hom.app (⟨P, hP⟩, ⟨Z, hZ⟩)) ≫
-      m.mu.hom.app (q.obj P, q.obj Z) ≫
-      m.target.tensor.map (Prod.mkHom (reductionCounit l E X D hl n P)
-        (reductionCounit l E X D hl n Z)) ≫ repZ.inv ≫ r.map betaZ =
-      reductionCounit l E X D hl n (TP.obj Z) at hs
-    rw [← he Z hZ] at hs
-    have hh := congrArg (fun k ↦ k ≫ r.map (inv betaZ) ≫ repZ.hom) hs
-    simp only [Category.assoc, ← r.map_comp_assoc, IsIso.hom_inv_id,
-      r.map_id, Category.id_comp, Iso.inv_hom_id, Category.comp_id] at hh
-    simpa only [eZ, dZ, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
-      Functor.mapIso_inv, asIso_inv, Category.assoc, Iso.app_hom,
-      c, StrengthDerived.reductionNat_app] using hh
-  have hNQ : eQ.hom ≫ m.target.tensor.map
-      (Prod.mkHom (c.app P) (c.app Q)) = c.app (TP.obj Q) ≫ dQ.hom := by
-    have hs := hnQ
-    change L.map (a.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩)) ≫
-      m.mu.hom.app (q.obj P, q.obj Q) ≫
-      m.target.tensor.map (Prod.mkHom (reductionCounit l E X D hl n P)
-        (reductionCounit l E X D hl n Q)) ≫ repQ.inv ≫ r.map betaQ =
-      reductionCounit l E X D hl n (TP.obj Q) at hs
-    rw [← he Q hQ] at hs
-    have hh := congrArg (fun k ↦ k ≫ r.map (inv betaQ) ≫ repQ.hom) hs
-    simp only [Category.assoc, ← r.map_comp_assoc, IsIso.hom_inv_id,
-      r.map_id, Category.id_comp, Iso.inv_hom_id, Category.comp_id] at hh
-    simpa only [eQ, dQ, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom,
-      Functor.mapIso_inv, asIso_inv, Category.assoc, Iso.app_hom,
-      c, StrengthDerived.reductionNat_app] using hh
-  have hr := m.target.representative.hom.naturality
-    (X := (⟨F.obj P, hFP⟩, ⟨F.obj Z, hFZ⟩))
-    (Y := (⟨F.obj P, hFP'⟩, ⟨F.obj Q, hFQ⟩)) (𝟙 _, ObjectProperty.homMk t')
-  have hr' : repZ.hom ≫ m.target.tensor.map
-      (Prod.mkHom (𝟙 (r.obj (F.obj P))) (r.map t')) =
-        r.map (T'.map t') ≫ repQ.hom := by
-    change r.map ((((totalTensor.{t, u} X S).map (𝟙 (F.obj P))).app (F.obj Z)) ≫
-      T'.map t') ≫ repQ.hom = repZ.hom ≫
-      m.target.tensor.map (Prod.mkHom (r.map (𝟙 (F.obj P))) (r.map t')) at hr
-    erw [(totalTensor.{t, u} X S).map_id, NatTrans.id_app, Category.id_comp,
-      r.map_id] at hr
-    exact hr.symm
-  have hμ := StrengthGenericMate.normalize_conjugate m.target.tensor eZ eQ
-    (asIso (c.app P)) (asIso (c.app Z)) (asIso (c.app Q))
-    dZ dQ (c.app (TP.obj Z)) (c.app (TP.obj Q)) (r.map t') hNZ hNQ
-  have hμ' := hμ
-  simp only [eZ, eQ, dZ, dQ, Iso.trans_hom, Iso.trans_inv,
-    Functor.mapIso_hom, Functor.mapIso_inv, Iso.symm_hom, Iso.symm_inv,
-    Iso.app_hom, Iso.app_inv, asIso_hom, asIso_inv, Category.assoc] at hμ'
-  erw [reassoc_of% hr', Iso.hom_inv_id_assoc] at hμ'
-  simp only [← r.map_comp] at hμ'
-  have hf := StrengthGenericMate.transpose_iso_target q r F U adj₀ L V adj c h Z Q t'
-    (StrengthDerived.unit_compatibility l E X D hl n Z hZ)
-  have := strengthComparison_isIso l E X n Q hQ
-  have hf' : adj.homEquiv _ _ (c.app Z ≫ r.map t' ≫ inv (c.app Q)) =
-      q.map t ≫ (asIso (strengthReductionRepresentativeComparison l E X n Q)).inv := by
-    have := strengthComparison_isIso l E X n Q hQ
-    have hc : (V.mapIso (asIso (c.app Q)) ≪≫ h.app (F.obj Q)) =
-        asIso (strengthReductionRepresentativeComparison l E X n Q) := by
-      apply Iso.ext
-      exact StrengthDerived.restrictionComparison_eq l E X D hl n Q
-    have ht' : adj₀.homEquiv Z (F.obj Q) t' = t :=
-      (adj₀.homEquiv Z (F.obj Q)).apply_symm_apply t
-    rw [ht', hc] at hf
-    exact hf
+  have hr' := StrengthGenericMate.strength_tensor_naturality_second
+    (flat.{t, u} X S) (totalTensor.{t, u} X S) r m.target.tensor
+    m.target.representative hFP hFZ hFQ t'
   have hTPZ : flat.{t, u} X R (TP.obj Z) :=
     coefficientTotalTensor_isKFlat.{u, t + 1, t} (Scheme.ProEt.topology X) R P Z hP hZ
-  have hg := StrengthGenericMate.transpose_comparison q r F U adj₀ L V adj c h
-    (TP.obj Z) (F.obj (TP.obj Q)) ψ
-    (StrengthDerived.unit_compatibility l E X D hl n (TP.obj Z) hTPZ)
-  have hg' : adj.homEquiv _ _ (c.app (TP.obj Z) ≫ r.map ψ) =
-      q.map (TP.map t) ≫ q.map b ≫ h.inv.app (F.obj (TP.obj Q)) := by
-    have hg₀ := hg
-    erw [ho, q.map_comp] at hg₀
-    apply (cancel_mono (h.hom.app (F.obj (TP.obj Q)))).1
-    simp only [Category.assoc]
-    erw [Iso.inv_hom_id_app, Category.comp_id]
-    exact hg₀
-  have hnat := e.hom.naturality t
-  have hnat' : (e.app Z).hom ≫ a.tensor.map (Prod.mkHom (𝟙 (q.obj P)) (q.map t)) =
-      q.map (TP.map t) ≫ (e.app (U.obj (F.obj Q))).hom := by
-    exact hnat.symm
-  have := strengthComparison_isIso l E X n Q hQ
-  have hh := StrengthGenericMate.mate_paste a.tensor m.target.tensor L V adj m.mu
-    (e.app Z) (e.app Q) (e.app (U.obj (F.obj Q)))
-    (asIso (strengthReductionRepresentativeComparison l E X n Q)) (q.map t)
-    (q.map (TP.map t)) (q.map b ≫ h.inv.app (F.obj (TP.obj Q)))
-    (c.app (TP.obj Z)) (c.app (TP.obj Q))
-    (c.app Z ≫ r.map t' ≫ inv (c.app Q)) (r.map ψ) hnat' hf' hμ' hg'
-  have hh' := congrArg (fun k ↦ k ≫ h.hom.app (F.obj (TP.obj Q))) hh
-  change a.tensor.map (Prod.mkHom (𝟙 (q.obj P))
-      (strengthReductionRepresentativeComparison l E X n Q)) ≫
-    (e.app (U.obj (F.obj Q))).inv ≫ q.map b =
-    StrengthGenericMate.mate a.tensor m.target.tensor L V adj m.mu (q.obj P) (q.obj Q) ≫
-      V.map (L.map (e.app Q).inv) ≫
-      strengthReductionRepresentativeComparison l E X n (TP.obj Q)
-  have hc : V.map (c.app (TP.obj Q)) ≫ h.hom.app (F.obj (TP.obj Q)) =
-      strengthReductionRepresentativeComparison l E X n (TP.obj Q) := by
-    simpa only [c, StrengthDerived.reductionNat_app] using
-      (StrengthDerived.restrictionComparison_eq l E X D hl n (TP.obj Q))
-  simp only [Category.assoc, Iso.inv_hom_id_app, asIso_hom] at hh'
-  erw [Category.comp_id] at hh'
-  rw [hc] at hh'
-  exact hh'
+  have hm := StrengthGenericMate.strength_representative_mate
+    a.tensor m.target.tensor L V adj m.mu q r F U adj₀ c h P Q Z TP T' e t b betaZ betaQ
+    (a.representative.app (⟨P, hP⟩, ⟨Z, hZ⟩))
+    (a.representative.app (⟨P, hP⟩, ⟨Q, hQ⟩)) (he Z hZ) (he Q hQ) repZ repQ
+  simp only [c, StrengthDerived.reductionNat_app] at hm
+  have huZ := StrengthDerived.unit_compatibility l E X D hl n Z hZ
+  have huTPZ := StrengthDerived.unit_compatibility l E X D hl n (TP.obj Z) hTPZ
+  simp only [StrengthDerived.reductionNat_app] at huZ huTPZ
+  have hh := hm hnZ hnQ hr' ho huZ huTPZ
+  have hc (K : CochainComplex (scalarReductionSource l E X) ℤ) :
+      V.map (reductionCounit l E X D hl n K) ≫ h.hom.app (F.obj K) =
+        strengthReductionRepresentativeComparison l E X n K :=
+    StrengthDerived.restrictionComparison_eq l E X D hl n K
+  rw [hc Q, hc (TP.obj Q)] at hh
+  exact hh
 
 end WeilConjectures.IntegralHom
 
@@ -1244,7 +1308,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-set_option maxHeartbeats 16000000 in
 -- Elaborating the normalized contraction retains independent coefficient universes.
 /-- The normalized reduction tensor mate is invertible on K-flat representatives.
 Source: Stacks 03CZ, 06YY, 07A4; integral Hom reduction, paragraphs 1--2.
@@ -1288,12 +1351,18 @@ theorem scalarTensorStrength_on_kflat_representatives
   let UC := U₀.mapHomologicalComplex (.up ℤ)
   let T := totalTensor.{t, u} X R
   let TS := totalTensor.{t, u} X S
-  obtain ⟨hEP, hEQ, beta, hbeta, hsec, _⟩ := m.normalization P Q hP hQ
-  have : IsIso beta := hbeta
-  obtain ⟨bc, _, hbc⟩ := CategoryTheory.tensorComplexCancellation
+  have norm := m.normalization P Q hP hQ
+  dsimp only [StrengthDerived.strengthReductionExtension_eq, completedIntegralCommRingSheaf]
+    at norm
+  let beta := norm.choose_spec.choose_spec.choose
+  have : IsIso beta := norm.choose_spec.choose_spec.choose_spec.1
+  have hsec := norm.choose_spec.choose_spec.choose_spec.2.1
+  have cancellation := CategoryTheory.tensorComplexCancellation
     (completedIntegralCommRingProjectionUnrestricted l E X n) E₀
     (scalarReductionExistence l E X n).choose_spec.choose
     (scalarReductionExistence l E X n).choose_spec.choose_spec.choose
+  let bc := cancellation.choose
+  have hbc := cancellation.choose_spec.2
   let b : (T.obj P).obj (UC.obj (EC.obj Q)) ≅ UC.obj (EC.obj ((T.obj P).obj Q)) :=
     bc P (EC.obj Q) ≪≫ UC.mapIso (asIso beta)
   have hb (i j : ℤ) (V : X.ProEtᵒᵖ) (s : S.obj.obj V)
@@ -1315,15 +1384,10 @@ theorem scalarTensorStrength_on_kflat_representatives
     change (beta.f (i+j)).val.app V
       (((bc P (EC.obj Q)).hom.f (i+j)).val.app V _) = _
     erw [← hi']
-    apply StrengthOrdinary.beta_scalar X l E n P Q beta
-    intro i j V x y
-    have hh := hsec i j V x y
-    dsimp only [reductionUnit] at hh
-    erw [(scalarReductionExtension_adjunction l E X n).choose_spec,
-      (scalarReductionExtension_adjunction l E X n).choose_spec,
-      (scalarReductionExtension_adjunction l E X n).choose_spec] at hh
-    exact hh
-  obtain ⟨e, _, he⟩ := restrictionTensor_mate_model l E X D hl a P hP
+    exact StrengthOrdinary.normalized_beta_scalar X l E D hl n P Q beta hsec i j V s x y
+  have model := restrictionTensor_mate_model l E X D hl a P hP
+  let e := model.choose
+  have he := model.choose_spec.2
   have hpq := he n m Q hQ b.hom hb
   have hTPQ : flat.{t, u} X R ((T.obj P).obj Q) :=
     coefficientTotalTensor_isKFlat.{u, t + 1, t} J R P Q hP hQ

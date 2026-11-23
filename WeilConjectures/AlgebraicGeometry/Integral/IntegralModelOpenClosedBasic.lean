@@ -25,9 +25,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSuppl
 /-!
 # Concrete continuous-coefficient functors for open and closed immersions
 
-Source: Stacks Project, Tags 09AA, 09BN, 03D6, 03DI and 03EK;
-Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.13
-(blueprint: def-weil-pbc-integral-model-open-closed-basic).
+## References
+
+* Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.13
+* Stacks Project, Tags 09BN and 00XZ, and the localization used in Tag 03DI
+* Stacks Project, Tags 09AA and 03D6
+* Bhatt--Scholze, Definition 6.8.1
+* Bhatt--Scholze, Lemma 6.8.13
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +43,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Regard a module on the open scheme as a module on the slice site. The concrete
 site equivalence retains the underlying schemes and maps, so the coefficient map is
-sectionwise the identity on continuous functions. Only the site presentation changes.
-Source: Stacks Project, Tags 09BN and 00XZ, and the localization used in Tag 03DI
-(blueprint: def-weil-pbc-integral-model-open-closed-basic). -/
+sectionwise the identity on continuous functions. Only the site presentation changes. -/
 def openSliceModules {X : Scheme.{u}} (U : X.ProEt)
     (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     SheafOfModules.{u + 1} (latticeModuleRing U.left T) ⥤
@@ -55,10 +58,8 @@ def openSliceModules {X : Scheme.{u}} (U : X.ProEt)
        naturality := fun _ _ _ ↦ rfl }⟩
 
 /-- Direct image with the continuous coefficient action. First restrict scalars along
-the canonical coefficient inverse-image map, then apply the published ringed direct
-image. Its action is through the adjoint continuous-function pullback map.
-Source: Stacks Project, Tags 09AA and 03D6; Bhatt--Scholze, Definition 6.8.1
-(blueprint: def-weil-pbc-integral-model-open-closed-basic). -/
+the canonical coefficient inverse-image map, then apply the ringed direct
+image. Its action is through the adjoint continuous-function pullback map. -/
 def continuousModuleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     SheafOfModules.{u + 1} (latticeModuleRing X T) ⥤
@@ -70,17 +71,13 @@ def continuousModuleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     Scheme.proEtaleRingedDirectImage f (latticeCoefficientSheaf Y T)
 
 /-- Extension by zero with continuous coefficients: use the concrete slice-site
-transport, followed by the published direct-sum presheaf extension and sheafification.
-Source: Stacks Project, Tags 03DI and 09BN
-(blueprint: def-weil-pbc-integral-model-open-closed-basic). -/
+transport, followed by the direct-sum presheaf extension and sheafification. -/
 def continuousModuleExtensionByZero {X : Scheme.{u}} (U : X.ProEt)
     (T : Type u) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :=
   openSliceModules U T ⋙ Scheme.proEtaleRingedExtensionByZero U (latticeCoefficientSheaf X T)
 
-/-- Ordinary rationalization `E_X ⊗_{A_X} M`, as the published sheafified
-sectionwise change of rings along the continuous integral inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.13; Stacks Project, Tag 03EK
-(blueprint: def-weil-pbc-integral-model-open-closed-basic). -/
+/-- Ordinary rationalization `E_X ⊗_{A_X} M`, as the sheafified
+sectionwise change of rings along the continuous integral inclusion. -/
 def integralModelRationalize (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (M : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E))) :=

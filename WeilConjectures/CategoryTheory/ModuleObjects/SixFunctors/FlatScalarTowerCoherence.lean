@@ -30,8 +30,7 @@ set_option linter.privateModule false
 /-!
 # Coherence of exact scalar extension for sheaf module objects
 
-Source: blueprint main-20261015, `sk-thm-sfb-qlbar-two-colimit`, proof (4) and the final
-cocone paragraph; Stacks Tag 03CZ (blueprint: lem-sfb-flat-scalar-tower-coherence).
+Source: Stacks Tag 03CZ.
 
 The comparisons are the existing `Mod.extendScalarsComp` (in the inverse orientation)
 and `Mod.extendScalarsId`. The derived comparisons below apply the existing exact-functor

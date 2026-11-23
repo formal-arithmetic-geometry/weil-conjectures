@@ -161,7 +161,6 @@ lemma unit_map_restrictOpenLowerShriekIso
     Functor.whiskerLeft_app, Iso.symm_hom, Category.assoc]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
 omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
 /-- The coherence of the graph isomorphisms `Lq^* ⋙ Lσ^* ≅ Dj_! ⋙ Lq_Z^* ⋙ Lσ^*` with the
@@ -210,8 +209,10 @@ lemma compactificationEtaleGraphIso_restrictOpen
       (leftDerivedUpperStarCompSectionIso _ (c.restrictOpen v).selfGraph
         (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.restrictOpen v).selfGraph_snd).hom.app
         (L((v)^*[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)) := by
-    rw [← hpre, ← Functor.map_comp_assoc]
-    simp [derivedSquareUpperStarIso]
+    exact (Iso.eq_inv_comp
+      (L(((c.restrictOpen v).selfGraph)^*[ModuleCat.{u + 1} Λ]).mapIso
+        ((derivedSquareUpperStarIso _ (c.isPullback_selfGraphRestrict v).toCommSq).app
+          (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N)))).1 hpre.symm
   -- the open immersions `j` and `v ≫ j`
   have hθ := unit_map_restrictOpenLowerShriekIso Λ c v N
   have hpost := leftDerivedUpperStarComp_triangle_coherence (ModuleCat.{u + 1} Λ)

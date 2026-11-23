@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 The adjunct of a transported operation is the operation on the adjuncts.
 Source: Stacks Project, Modules on Sites, Tag 03CR, induced module direct image.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

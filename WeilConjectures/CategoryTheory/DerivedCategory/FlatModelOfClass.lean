@@ -64,11 +64,7 @@ kernels, cokernels and isomorphisms and containing the zero objects, and let `S`
 of flat objects of `T`, closed under binary biproducts and isomorphisms, containing the zero
 objects and lifting along epimorphisms onto `T`. Then an object `K` of Tor amplitude in `[a, b]`
 whose cohomology objects lie in `T` is represented by a complex of flat objects of `T`
-concentrated in degrees `[a, b]`.
-
-The proof is that of `DerivedCategory.exists_iso_Q_obj_flat_of_torAmplitudeIn`, with the flat
-resolution replaced by a resolution by objects of `S`
-(`CochainComplex.exists_quasiIso_of_liftsAlongEpi`). -/
+concentrated in degrees `[a, b]`. -/
 lemma exists_iso_Q_obj_flat_of_torAmplitudeIn_of_liftsAlongEpi {S T : ObjectProperty C}
     [T.IsClosedUnderKernels] [T.IsClosedUnderCokernels] [T.ContainsZero]
     [T.IsClosedUnderIsomorphisms] [S.ContainsZero] [S.IsClosedUnderIsomorphisms]

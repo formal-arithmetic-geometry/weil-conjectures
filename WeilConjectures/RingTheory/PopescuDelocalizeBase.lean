@@ -93,7 +93,7 @@ Proof (the eleven steps of the blueprint node):
 11. Multiply all chosen denominators. The product times every remaining relation belongs
     to the initial relation ideal. The identity in step 7, multiplied by the equation
     denominators, makes the product divisible by the initial Jacobian minor in the quotient.
-    These are both conditions of `def-weil-pbc-strictly-standard-element` (1). -/
+    These are both conditions of `theorem-finite-etale-covers-proper-henselian--2` (1). -/
 theorem exists_factorization_isElementaryStandardElement_of_localized_smooth
     {R : Type u} {A : Type v} {Λ : Type w}
     [CommRing R] [CommRing A] [CommRing Λ] [Algebra R A] [Algebra R Λ]

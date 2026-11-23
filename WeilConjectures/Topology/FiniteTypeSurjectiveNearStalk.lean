@@ -65,7 +65,7 @@ to obtain one neighbourhood `U` where every generator has a lift in `G`.
 3. For any section over an open `W ≤ U`, the generating epimorphism gives local
 coefficients on a cover of `W`, by lem-weil-pbc-ringed-space-module-exactness-local-lifting (1).
 Substitute the lifted generators into those linear combinations. Linearity of
-`φ` (def-weil-sheaf-of-modules-category) makes them local lifts of the section.
+`φ` (situation-conventions) makes them local lifts of the section.
 With no generators take `U = U₀`; all local sections vanish and their lifts are zero. -/
 theorem exists_surjective_neighbourhood_of_surjective_stalk (X : RingedSpace.{u})
     {G F : SheafOfModules.{u} (moduleRings X)} (φ : G ⟶ F) (x : X) [F.IsFiniteType]

@@ -24,7 +24,7 @@ and conversely for a scheme with a single point.
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`: blueprint
-  `lem-zl-quasi-finite`, part 3.
+  `lemma-finite-quasi-finite-direct-images`, part 3.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite`,
   `AlgebraicGeometry.WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite`.
 - `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.compactlySupportedCohomology_zero`,
@@ -93,10 +93,10 @@ theorem WeilSheaf.exists_hasEigenvalue_stalk_of_hasEigenvalue_stalk_higherLowerS
   exact Scheme.Hom.degreeOver_ne_zero _ x.2 hde.symm
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
-preserves punctual upper weight bounds (blueprint: `sk-l-dl-general-quasifinite`,
-`lem-zl-quasi-finite`, part 3): at a closed point `y` the Frobenius permutes the points above
-`y`; on an orbit of length `e` an eigenvalue `α` upstairs contributes eigenvalues `β` with
-`βᵉ = α` downstairs, whose normalized weights agree because `q_x = q_yᵉ`. -/
+preserves punctual upper weight bounds (blueprint: `lemma-finite-quasi-finite-direct-images`,
+`lemma-finite-quasi-finite-direct-images`, part 3): at a closed point `y` the Frobenius permutes the
+points above `y`; on an orbit of length `e` an eigenvalue `α` upstairs contributes eigenvalues `β`
+with `βᵉ = α` downstairs, whose normalized weights agree because `q_x = q_yᵉ`. -/
 theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
     ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w := by
@@ -108,9 +108,9 @@ theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : �
   exact (pow_le_natCast_pow_rpow_iff (norm_nonneg _) _ he _).1 hw
 
 /-- For a separated quasi-finite morphism `f` of `k₀`-schemes the exact functor `f₀!` preserves
-punctual purity of weight `w` (blueprint: `lem-zl-quasi-finite`): every eigenvalue `β` of the
-local Frobenius at `y` has a power `βᵉ` which is an eigenvalue at a point `x` above `y` with
-`q_x = q_yᵉ`. -/
+punctual purity of weight `w` (blueprint: `lemma-finite-quasi-finite-direct-images`): every
+eigenvalue `β` of the local Frobenius at `y` has a power `βᵉ` which is an eigenvalue at a point `x`
+above `y` with `q_x = q_yᵉ`. -/
 theorem WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.IsPunctuallyPureOfWeight ι w) :
     ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsPunctuallyPureOfWeight ι w := by

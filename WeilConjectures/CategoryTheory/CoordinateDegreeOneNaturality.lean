@@ -30,11 +30,7 @@ attribute [local implicit_reducible] Functor.shift Functor.ShiftSequence.induced
 The hypothesis on degree zero is the augmentation square, and the second hypothesis is
 only the square of degree-one morphisms before applying either derived functor.
 Source: Stacks Tag 05TD.
-Proof: naturality of the transformation moves it across the degree-one morphism.
-Its shift compatibility then moves it past the shift comparison. Naturality of the
-homology shift identifies the resulting degree-one map. Apply the prescribed
-coefficient square and the augmentation equation.
-(blueprint: aux-lem-pur-coordinate-degree-one-naturality). -/
+-/
 theorem degree_one_evaluation_naturality
     {T : Type u} [Category.{v} T] [HasShift T ℤ]
     {T' : Type u'} [Category.{v'} T'] [HasShift T' ℤ]

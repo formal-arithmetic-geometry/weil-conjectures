@@ -303,17 +303,7 @@ private noncomputable def homologyObjEquiv [HasExt.{w} A] (X : A) (q : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Ext is computed by the Hom complex of any injective resolution, naturally in the
-first variable. Source: blueprint det-thm-picard-cech, Step 2.
-
-Proof: Extend the resolution from natural to integer degrees by zero. The from-single
-additive equivalence identifies the Hom complex from thedegree-zero single complex
-with the degreewise additive Hom complex. Mathlib identifies its homology with
-cohomology classes, and its Ext equivalence identifies those classes with Ext.
-Extension by zero does not change homology in nonnegative degrees, including zero.
-Precomposition acts on the single complex and on each Hom group. All the comparison
-maps commute with it: on a cocycle this is associativity of composition, and on Ext
-it is the formula for composing an Ext class represented by a cocycle with a
-degree-zero morphism. Descending to cohomology gives the claimed natural isomorphism. -/
+first variable. -/
 private theorem nonempty_homologyFunctor_iso_ext [HasExt.{w} A] (q : ℕ) :
     Nonempty (I.homologyFunctor q ⋙ AddCommGrpCat.uliftFunctor.{w} ≅
       (extFunctor.{w} q).flip.obj F ⋙ AddCommGrpCat.uliftFunctor.{v}) := by
@@ -421,9 +411,7 @@ private noncomputable def sectionsComplexIso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Objectwise comparison isomorphisms for the cohomology of an injective resolution,
-with the restriction compatibility needed to assemble them into a natural isomorphism.
-Source: blueprint lem-sc-injective-resolution-cohomology-presheaf, Step 2.
-(blueprint: lem-sc-injective-resolution-cohomology-presheaf-data) -/
+with the restriction compatibility needed to assemble them into a natural isomorphism. -/
 theorem Sheaf.injectiveResolution_cohomologyPresheaf_data
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]

@@ -11,8 +11,7 @@ public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMate
 /-!
 # Mixed tensor-action squares and projection mates
 
-Source: Stacks, sites-cohomology.tex, Tags 0B56 and 07A7; the agent mixed-action
-calculation in the node, steps 1–6 (blueprint: lem-sf-tensor-square-mate-transfer).
+Source: Stacks, sites-cohomology.tex, Tags 0B56 and 07A7.
 The tensor products are arbitrary bifunctors. In particular the mixed actions below
 are not monoidal structures on the horizontal functors.
 -/
@@ -33,8 +32,7 @@ variable {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
 /-- The existing right-adjoint projection map with an uncurried tensor interface,
 allowing a noninvertible tensor comparison. This is its actual bifunctor construction,
 not a choice of a map with a desired property.
-Source: Stacks Tag 0B56, equation-projection-formula-map, and node step 1
-(blueprint: lem-sf-tensor-square-mate-transfer). -/
+Source: Stacks Tag 0B56. -/
 noncomputable def tensorSquareProjectionMap
     (P : C ⥤ A) (R : A ⥤ C) (adj : P ⊣ R)
     (TC : C × C ⥤ C) (TA : A × A ⥤ A)
@@ -68,8 +66,7 @@ private noncomputable def projectionNatTrans
     simpa [tensorSquareProjectionMap, ← Functor.map_comp] using h
 
 /-- The first path, `d_i`, followed by `J(pi_r)` and the proper-adjunction mate `g`.
-Source: Stacks Tags 0B56 and 07A7; node step 2
-(blueprint: lem-sf-tensor-square-mate-transfer). -/
+Source: Stacks Tags 0B56 and 07A7. -/
 noncomputable def tensorSquareMateFirst
     (Pr : C ⥤ A) (Rr : A ⥤ C) (Pp : D ⥤ B) (Rp : B ⥤ D)
     (ar : Pr ⊣ Rr) (ap : Pp ⊣ Rp) (Pi : D ⥤ C) (J : C ⥤ D) (K : A ⥤ B)
@@ -87,8 +84,7 @@ noncomputable def tensorSquareMateFirst
 /-- The second path, `(g tensor 1)`, followed by `pi_p` and `R_p(d_k)`.
 The final inverse comparison makes the suppressed identification explicit; both paths
 land in `R_p K (M tensor P_r P_i N)`.
-Source: Stacks Tags 0B56 and 07A7; node steps 3–4
-(blueprint: lem-sf-tensor-square-mate-transfer). -/
+Source: Stacks Tags 0B56 and 07A7. -/
 noncomputable def tensorSquareMateSecond
     (Pr : C ⥤ A) (Rr : A ⥤ C) (Pp : D ⥤ B) (Rp : B ⥤ D)
     (ar : Pr ⊣ Rr) (ap : Pp ⊣ Rp) (Pi : D ⥤ C) (Pk : B ⥤ A)
@@ -106,8 +102,7 @@ noncomputable def tensorSquareMateSecond
 
 /-- The specified common transpose `P_p(d_i)` followed by `a` and `K(c)`, where
 `c` is the tensor comparison followed by the first counit tensored with identity.
-Source: Stacks Tags 0B56 and 07A7; node steps 2–4
-(blueprint: lem-sf-tensor-square-mate-transfer). -/
+Source: Stacks Tags 0B56 and 07A7. -/
 noncomputable def tensorSquareMateCommonTranspose
     (Pr : C ⥤ A) (Rr : A ⥤ C) (Pp : D ⥤ B) (ar : Pr ⊣ Rr)
     (Pi : D ⥤ C) (J : C ⥤ D) (K : A ⥤ B)
@@ -125,32 +120,7 @@ noncomputable def tensorSquareMateCommonTranspose
 Both displayed paths are components of one natural transformation, and each has the
 specified common transpose. No comparison except `theta` is required to be invertible.
 
-Source: Stacks Tags 0B56 and 07A7; agent mixed-action calculation, node steps 1–6
-(blueprint: lem-sf-tensor-square-mate-transfer).
-
-Proof:
-1. The inverse adjunction bijection sends `b` to `P(b)` followed by the counit.
-Its naturality transports pre- and postcomposition. `mateEquiv_counit` gives the
-transpose of `g`, namely `a` followed by `K(epsilon_r)`. The defining transpose of
-`rightAdjointProjectionMap` is `mu` followed by counit tensor identity.
-2. Transpose the first path. Naturality of `a` at `pi_r` moves `P_p J(pi_r)` past
-`a`. The counit identity for `pi_r` reduces the result to `P_p(d_i)`, then `a`, then
-`K(c)`, exactly `tensorSquareMateCommonTranspose`.
-3. Transpose the second path. Naturality of `muP` moves `P_p(g tensor 1)` through
-the tensor comparison. The mate counit identity replaces `epsilon_p P_p(g)` by
-`K(epsilon_r) a`.
-4. Naturality of `dk` at `epsilon_r` moves that counit to the final tensor factor.
-Bifunctoriality separates it from `a`. The assumed mixed square at `H = Rr M`
-then identifies the preceding factors with `P_p(d_i)`, `a`, and `K(muR)`.
-Cancel the specified identification with its inverse to obtain the same `K(c)`.
-5. Injectivity of the inverse hom bijection gives equality. Counit and comparison
-naturality give naturality of the projections in both variables; the mate is natural
-by `mateEquiv`, and the mixed actions are natural by their types. Composing gives
-one natural transformation whose components are both paths.
-6. For ringed sites the maps in `ringedProjectionMateExact` are the same
-counit-defined projections; the identification is recorded below. The argument uses
-no inverses of `a`, its mate, the projections, tensor comparisons or mixed actions,
-and no exactness, boundedness or Tor assumptions. -/
+Source: Stacks Tags 0B56 and 07A7. -/
 theorem tensorSquare_mate_transfer
     (Pr : C ⥤ A) (Rr : A ⥤ C) (Pp : D ⥤ B) (Rp : B ⥤ D)
     (ar : Pr ⊣ Rr) (ap : Pp ⊣ Rp) (Pi : D ⥤ C) (Pk : B ⥤ A)

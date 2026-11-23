@@ -285,7 +285,7 @@ theorem sfCompactSupportFiniteIntegralFunctor_obj
 
 /-- The canonical n-th reduction comparison is the tensor/restriction adjoint of
 the fixed n-th projection in the definition of sfIntegralCompactSupportValue.
-Source: blueprint definition order 1490 and lem-fix-operation-reduction
+Source: blueprint definition order 1490 and proposition-six-operations-change-coefficients
 (blueprint: def-weil-compact-support-finite-action). -/
 def sfCompactSupportChosenReduction (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
@@ -310,8 +310,8 @@ def sfCompactSupportChosenReduction (E : Type u) [Field E] [Algebra (Padic l) E]
 
 /-- The specified projection adjunct is invertible, without an extra Tor or
 finite-base-field assumption.
-Source: definition order 1490; lem-fix-operation-reduction, compact-support paragraph
-(blueprint: def-weil-compact-support-finite-action).
+Source: definition order 1490; proposition-six-operations-change-coefficients, compact-support
+paragraph (blueprint: def-weil-compact-support-finite-action).
 Proof: the source is the chosen derived limit of the actual compact-support tower.
 Proper direct image commutes with the perfect two-term quotient tensor, and open
 extension is exact and commutes with that tensor. These are the normalized unit/counit
@@ -335,7 +335,7 @@ theorem sfCompactSupportChosenReduction_isIso (E : Type u) [Field E] [Algebra (P
 
 /-- Reduction of the fixed integral functor, using its actual value equality and
 the uniquely specified projection adjunct, rather than a freely chosen isomorphism.
-Source: definition order 1490; lem-fix-operation-reduction
+Source: definition order 1490; proposition-six-operations-change-coefficients
 (blueprint: def-weil-compact-support-finite-action). -/
 def sfCompactSupportFiniteReductionIso (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

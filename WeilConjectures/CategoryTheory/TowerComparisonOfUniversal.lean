@@ -18,8 +18,7 @@ class of objects containing the values of `E` on the levels of `RC`, and the ima
 `E` of the units of `RC` are universal for the same class, then `E` commutes with the
 towers by a unique isomorphism compatible with the units.
 
-Source: Stacks Project, Categories, Tag 0036 (uniqueness of universal arrows)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Categories, Tag 0036 (uniqueness of universal arrows).
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ variable {C D : Type*} [Category C] [Category D]
 
 /-- A left adjoint carries an arrow universal for maps into the image of the right adjoint
 to an arrow universal for the corresponding maps.
-Source: Stacks Project, Categories, Tag 0036 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Categories, Tag 0036. -/
 theorem existsUnique_comp_map_of_adjunction {E : C ⥤ D} {G : D ⥤ C} (adj : E ⊣ G)
     {M R : C} (η : M ⟶ R) (Q : D) (h : ∀ f : M ⟶ G.obj Q, ∃! g : R ⟶ G.obj Q, η ≫ g = f)
     (f : E.obj M ⟶ Q) : ∃! g : E.obj R ⟶ Q, E.map η ≫ g = f := by
@@ -48,7 +47,7 @@ theorem existsUnique_comp_map_of_adjunction {E : C ⥤ D} {G : D ⥤ C} (adj : E
 
 /-- Units of a tower of reflections commuting with a functor determine a unique tower
 isomorphism, provided they are universal for the same class of targets.
-Source: Stacks Project, Categories, Tag 0036 (auxiliary; not a blueprint node). -/
+Source: Stacks Project, Categories, Tag 0036. -/
 theorem existsUnique_tower_iso_of_universal (E : C ⥤ D)
     (RC : C ⥤ ℕᵒᵖ ⥤ C) (ηC : Functor.const ℕᵒᵖ ⟶ RC)
     (RD : D ⥤ ℕᵒᵖ ⥤ D) (ηD : Functor.const ℕᵒᵖ ⟶ RD) (K : ℕ → D → Prop)

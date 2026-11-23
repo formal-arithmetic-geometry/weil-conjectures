@@ -22,8 +22,7 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 import all Mathlib.CategoryTheory.Abelian.ShortExact
 import WeilConjectures.CategoryTheory.SmoothPurity.UniversalUnitShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-/-! # Composition of derived scalar units
-(blueprint: lem-sp-scalar-ext-unit-composition). -/
+/-! # Composition of derived scalar units. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,16 +40,10 @@ variable {A : Type uA} {B : Type uB} {C : Type uC}
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
   [PreservesFiniteLimits V] [PreservesFiniteColimits V]
 
-/-- Let U:A→B and V:B→C be exact additive functors, e∈Ext^n(F,VG) a V-derived Ext unit
-[def-sp-derived-scalar-ext-unit], and θ:G→UH an ordinary U-derived unit
-[def-sp-exact-functor-derived-unit]. Then e composed with mk0(Vθ) is a degree-n derived Ext unit for
-U⋙V.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-scalar-ext-unit-composition).
-Proof: Shift the ordinary unit bijection for θ by n using universal-unit shift. Compose it with the
-universal bijection for e. The exact derived functor composition isomorphism transfers the resulting
-target Hom set to D(U⋙V). Naturality of single comparisons, shift commutation and the formula for
-composition with mk0 identify the resulting unit with e composed with mk0(Vθ). -/
+/-- Let U:A→B and V:B→C be exact additive functors, e∈Ext^n(F,VG) a V-derived Ext unit,
+and θ:G→UH an ordinary U-derived unit. Then e composed with mk0(Vθ) is a degree-n derived
+Ext unit for U⋙V.
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem derivedExtUnit_comp {F : C} {G : B} {H : A} (n : ℕ)
     (e : Ext.{wE} F (V.obj G) n) (θ : G ⟶ U.obj H)
     (hη : V.DerivedExtUnit F G n e) (hθ : U.DerivedUnit G H θ) :

@@ -64,7 +64,10 @@ import WeilConjectures.CategoryTheory.FiniteTypeRestrictionMapExact
 
 /-! # Finitely presented local constant models on the pro-etale site
 
-Source: Stacks Project, Tags 09AJ and 093U.
+## References
+
+* Stacks Project, Tags 09AJ and 093U
+* Stacks Project, Tag 093U (3)
 -/
 
 @[expose] public section
@@ -73,19 +76,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Finitely presented constant local models satisfy the local weak Serre clauses.
-Source: Stacks Project, Tag 093U (3), lemma-kernel-finite-locally-constant.
-(blueprint: lem-sfb-proetale-fp-local-models-serre).
-
-Proof: use the equivalent AsSmall model of the pro-etale site. Forgetting commutativity
-commutes with constant-ring sheafification, and restriction of scalars along the resulting
-ring isomorphism is an exact equivalence. The module sheafification universal property
-identifies constants and their localized restrictions in these two presentations.
-Over a Noetherian ring finite presentation is equivalent to finite generation. Therefore
-the generic finiteTypeLocallyConstant_closedUnder_kernels_cokernels_extensions theorem
-applies. Transport its kernel, cokernel, and extension conclusions through the exact
-coefficient and site equivalences, retaining the same finite module values and converting
-them back to finite presentations. Empty objects cause no exception. -/
+/-- Finitely presented constant local models satisfy the local weak Serre clauses. -/
 theorem proEtale_fp_localModels_serre (X : Scheme.{u}) (R : Type u)
     [CommRing R] [IsNoetherianRing R] :
     (∀ (F G : proEtaleRingModules X (proEtaleConstantRing X R)) (f : F ⟶ G),

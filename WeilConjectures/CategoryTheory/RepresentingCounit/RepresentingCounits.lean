@@ -8,10 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Right adjoints constructed from representing counits
-
-Source: current blueprint sk-prop-sp-tower-geometric, Charts and gluing: construct
-functoriality from representing pairs, without a functorial choice of cones.
-(blueprint: lem-sp-representing-counits-adjunction)
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +20,7 @@ namespace CategoryTheory
 
 variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 
-/-- A specified object and counit representing `Hom(F(-), Y)`.
-Source: blueprint sk-prop-sp-tower-geometric, Charts and gluing.
-(blueprint: lem-sp-representing-counits-adjunction) -/
+/-- A specified object and counit representing `Hom(F(-), Y)`. -/
 structure RepresentingCounit (F : C ⥤ D) (Y : D) where
   object : C
   counit : F.obj object ⟶ Y
@@ -36,9 +30,7 @@ namespace RepresentingCounit
 
 variable {F : C ⥤ D} {Y : D} (P : RepresentingCounit F Y)
 
-/-- The representing bijection, in the orientation of an adjunction.
-Source: blueprint sk-prop-sp-tower-geometric, Charts and gluing.
-(blueprint: lem-sp-representing-counits-adjunction) -/
+/-- The representing bijection, in the orientation of an adjunction. -/
 def homEquiv (X : C) : (F.obj X ⟶ Y) ≃ (X ⟶ P.object) :=
   (Equiv.ofBijective _ (P.bijective X)).symm
 
@@ -49,20 +41,14 @@ def homEquiv (X : C) : (F.obj X ⟶ Y) ≃ (X ⟶ P.object) :=
     F.map (P.homEquiv X f) ≫ P.counit = f :=
   (P.homEquiv X).symm_apply_apply f
 
-/-- Naturality in the test object follows from associativity and functoriality.
-Source: blueprint sk-prop-sp-tower-geometric, Charts and gluing.
-(blueprint: lem-sp-representing-counits-adjunction) -/
+/-- Naturality in the test object follows from associativity and functoriality. -/
 theorem homEquiv_naturality {X X' : C} (f : X' ⟶ X) (g : F.obj X ⟶ Y) :
     P.homEquiv X' (F.map f ≫ g) = f ≫ P.homEquiv X g := by
   apply (P.homEquiv X').symm.injective
   simp only [Equiv.symm_apply_apply, homEquiv_symm_apply, F.map_comp, Category.assoc,
     map_homEquiv_counit]
 
-/-- Representing pairs are uniquely isomorphic by the equation on their counits.
-Source: blueprint sk-prop-sp-tower-geometric, Charts and gluing, uniqueness sentence.
-Proof: transpose each counit by the other representing bijection. Injectivity proves
-both inverse identities and uniqueness of the counit-preserving isomorphism.
-(blueprint: lem-sp-representing-counits-adjunction) -/
+/-- Representing pairs are uniquely isomorphic by the equation on their counits. -/
 theorem unique_iso (Q : RepresentingCounit F Y) :
     ∃! e : P.object ≅ Q.object, F.map e.hom ≫ Q.counit = P.counit := by
   obtain ⟨a, ha⟩ := (Q.bijective P.object).2 P.counit
@@ -82,20 +68,12 @@ end RepresentingCounit
 
 variable {F : C ⥤ D} (P : ∀ Y : D, RepresentingCounit F Y)
 
-/-- The map of the right adjoint is the unique transpose of the composed counit.
-Source: blueprint sk-prop-sp-tower-geometric, Charts and gluing.
-(blueprint: lem-sp-representing-counits-adjunction) -/
+/-- The map of the right adjoint is the unique transpose of the composed counit. -/
 def representingCounitRightAdjoint : D ⥤ C :=
   Adjunction.rightAdjointOfEquiv (fun X Y ↦ (P Y).homEquiv X)
     (fun _ _ Y f g ↦ (P Y).homEquiv_naturality f g)
 
-/-- The representing bijections give the adjunction and its actual chosen counit.
-Source: blueprint sk-prop-sp-tower-geometric, Charts and gluing.
-Proof: the inverse representing bijection sends a map `a` to `F(a)` followed by
-its specified counit. Functoriality follows from naturality in the test object.
-Mathlib's right-adjoint constructor supplies both triangle identities. Its counit
-is the inverse bijection applied to the identity, hence the specified counit.
-(blueprint: lem-sp-representing-counits-adjunction) -/
+/-- The representing bijections give the adjunction and its actual chosen counit. -/
 theorem representingCounits_adjunction :
     ∃ adj : F ⊣ representingCounitRightAdjoint P,
       ∀ Y : D, adj.counit.app Y = (P Y).counit := by

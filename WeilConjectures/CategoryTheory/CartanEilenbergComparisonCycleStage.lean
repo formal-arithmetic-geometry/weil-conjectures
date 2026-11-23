@@ -373,28 +373,7 @@ private structure CartanEilenbergCycleRowPresentation
 /-- Put the two given augmented boundary/cycle/homology rows over single coefficient
 complexes, including the coefficient morphism induced by `u`. No injectivity hypothesis
 is required, and no lift or comparison between the resolution columns is produced.
-
-Source: Stacks Project, Tag 015I, the rows `B → Z → H`, and Tag 015K, naturality.
-
-Proof: In any abelian category, factor the image inclusion of the incoming differential
-through its kernel at the next degree. The sequence from this boundary to cycles to
-homology is short exact: the last map is the cokernel of the incoming differential
-viewed as a map to cycles, and its image is unchanged by the epimorphism onto boundaries.
-Use these rows for K, L, I and J. Evaluation in a resolution degree is exact. Applying F
-preserves each short exact row and each given augmented quasi-isomorphism.
-The exact single-degree functor preserves the kernels, images and homology of K and L.
-Use its canonical preservation isomorphisms, and the natural isomorphism between applying
-F to a single complex and taking the single complex of F, to define the six augmentations.
-Transport the three quasi-isomorphisms of each augmentation along these isomorphisms.
-The coefficient-row map is induced by u on boundaries, cycles and homology; their two
-commuting squares follow by image and homology naturality. The same identities applied
-to eI and eJ give hi, hπ, hα and hβ. At degree zero, the cycle preservation isomorphism
-and singleObjXSelf give source_zero_iso, source_zero and coefficient_zero.
-Finally precompose the desired boundary augmentation square at zero with the epimorphism
-from F(K.X (p-1)) onto F(boundaries K p). Image naturality turns its two sides into the
-assumed equation. Cancel this epimorphism. At every positive degree its source is zero,
-so these component equations give the complex equation boundary_square.
-The image factorization through cycles gives source_factor and target_inclusion. -/
+Stacks Project, Tags 015I and 015K. -/
 private theorem exists_cartanEilenberg_cycle_row_presentation
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]
@@ -624,26 +603,7 @@ private theorem exists_cartanEilenberg_cycle_row_presentation
 /-- Extend an augmented incoming boundary comparison to the cycles, without choosing
 an object-column or outgoing-boundary comparison. The augmentation equation is written after
 inclusion into the target object column, so no identification of single-complex cycles is needed.
-
-Source: Stacks Project, Tags 015I, 015K and 013P(2);
-(blueprint: lem-weil-pbc-ce-comparison-cycle-stage).
-
-Proof: Form the short exact boundary → cycles → homology rows of the two single
-bicomplexes and the resolutions. Apply F to the source rows and evaluate both coefficient
-rows in resolution degree zero. Each column of a single bicomplex is supported at zero:
-this follows for boundaries and cycles by their inclusions into an object column, and for
-homology by the epimorphism from cycles. Hence each coefficient column is canonically
-isomorphic to the single complex of its degree-zero object. Transport the augmentations
-through these explicit isomorphisms. Exactness and the given quasi-isomorphisms survive
-F and evaluation. The single-complex comparison induced by u gives the coefficient-row map.
-Cancel the epimorphism onto the source boundary at degree zero to obtain the augmented
-boundary square from hb. At positive degrees the coefficient complex is zero.
-Bundle the three target columns as injective resolutions. Use descOfQuasiIso to lift
-the coefficient homology map, then apply the exact-source horseshoe morphism theorem
-with this homology lift and the prescribed boundary map. Its middle map is y.
-Include the degree-zero augmentation square into the target object column for the first
-formula. Compose the boundary square with the source factorThruImage and target cycle
-inclusion for the second formula, using the image factorization through cycles. -/
+Stacks Project, Tags 015I, 015K and 013P(2). -/
 theorem exists_cartanEilenberg_comparison_cycle_stage
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]

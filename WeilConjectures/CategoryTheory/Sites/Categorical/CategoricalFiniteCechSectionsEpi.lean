@@ -14,8 +14,10 @@ import WeilConjectures.CategoryTheory.Sites.Categorical.CategoricalFiniteCoverLo
 
 /-! # Lifting categorical sections from finite Čech exactness
 
-Source: Stacks Project, Tag 03F8, with finite products and exact
-filtered colimits in the coefficient category replacing elementwise lifts.
+## References
+
+* Stacks Project, Tag 03F8, with finite products and exact
+  filtered colimits in the coefficient category replacing elementwise lifts.
 -/
 
 @[expose] public section
@@ -316,22 +318,7 @@ private theorem glue_categoricalCech_lift
 
 /-- Vanishing of first finite Čech cohomology makes a short exact sheaf sequence
 right exact on the specified objects.
-Source: Stacks Project, Tag 03F8.
-(blueprint: stage3-categorical-finite-cech-sections-epi).
-
-Proof: Apply the local test for sheaf epimorphisms to the coefficient cokernel
-projection of I(V) → Q(V). For any generalized Q(V)-section with simultaneous
-local I-lifts, their Čech differential maps to zero in Q. Evaluation is left
-exact, so lift its components uniquely to F. Their differential is zero by
-monicity of the map on F-cochains. Exactness at degree one gives a Čech primitive
-after an epimorphism of coefficient objects. Subtract its image from the local
-I-lifts. Their differential is now zero. Projecting onto pairs proves ordinary
-compatibility, so the sheaf axiom glues them uniquely to an I(V)-section. Its
-image is the original Q(V)-section after the coefficient epimorphism, by monicity
-of Q's augmentation. The cokernel projection therefore vanishes on each locally
-liftable generalized section, and the local test makes it zero. Its vanishing
-is equivalent to epimorphy of I(V) → Q(V). The argument works for empty covers:
-degree-zero gluing and uniqueness use the empty-family sheaf axiom. -/
+Source: Stacks Project, Tag 03F8. -/
 theorem epi_app_of_finite_cech_exact_one
     (B : C → Prop)
     (hcov : ∀ V, B V → ∀ R ∈ J V, ∃ (n : ℕ) (U : Fin n → Over V),

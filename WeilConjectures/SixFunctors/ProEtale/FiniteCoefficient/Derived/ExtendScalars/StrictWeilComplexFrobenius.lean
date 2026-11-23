@@ -18,7 +18,7 @@ automorphism of `X` (the geometric Frobenius `g_γ` of the geometric fibre of a 
 finite field) and `c = (X ⟶[c.i] c.Z ⟶[c.g] Spec k)` a compactification of `a_X` with an
 endomorphism `gZ` of `c.Z` compatible with `g` over the identity of `Spec k` (the base change
 of a compactification of the model). Compact cohomology is `RΓ_c(X, K) = Ra_{X!}(c) K`
-(blueprint `lem-trf-compactification-cohomology`) with the global Frobenius operators
+(blueprint `proposition-construction-independence-rf-shriek--7`) with the global Frobenius operators
 `F_{c,m} = RΓ_c(X, φ_m) ∘ g_c^{m,*}` (`AlgebraicGeometry.ProEtale.compactFrobenius`), and the
 geometric stalk at a point `x : Spec k ⟶ X` fixed by `g_m = g^m` is `K_x̄ = Lx^* K` with the
 local Frobenius `F_{x,m}` (`AlgebraicGeometry.ProEtale.stalkFrobenius`).
@@ -26,7 +26,7 @@ local Frobenius `F_{x,m}` (`AlgebraicGeometry.ProEtale.stalkFrobenius`).
 For a strict Weil complex `(K, φ)` over `R` with scalar extension `(K_S, φ_S)`
 (`AlgebraicGeometry.ProEtale.StrictWeilComplex.extendScalars`), compact cohomology and the
 geometric stalks commute with `Ψ`, compatibly with the Frobenius operators (blueprint
-`sk-p-trace-coeff`).
+`theorem-grothendieck-lefschetz-trace-formula--7`).
 
 ## Main definitions
 
@@ -38,7 +38,7 @@ geometric stalks commute with `Ψ`, compatibly with the Frobenius operators (blu
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.StrictWeilComplex.extendScalars_compactCohomology_stalk`:
-  blueprint `sk-p-trace-coeff`.
+  blueprint `theorem-grothendieck-lefschetz-trace-formula--7`.
 -/
 
 @[expose] public section
@@ -59,19 +59,19 @@ variable {R : Type (u + 1)} [CommRing R] [IsNoetherianRing R] {k : Type u} [Fiel
   {X : Scheme.{u}} {aX : X ⟶ Spec (.of k)} {g : X ≅ X} (c : Compactification aX)
   {gZ : c.Z ⟶ c.Z} (hi : IsPullback g.hom c.i c.i gZ) (hg : CommSq gZ c.g c.g (𝟙 _))
 
-/-- Blueprint `def-trf-frobenius-operators` (item 1): the *global Frobenius operator*
+/-- Blueprint `definition-frobenius-operator--1` (item 1): the *global Frobenius operator*
 `F_{c,m} : RΓ_c(X, K) ⟶ RΓ_c(X, K)` of a strict Weil complex `(K, φ)`, for
 `RΓ_c(X, K) = Ra_{X!}(c) K`: the compact Frobenius
 (`AlgebraicGeometry.ProEtale.compactFrobenius`) of the iterated Weil datum `φ_m`
 (`AlgebraicGeometry.ProEtale.weilDatumIterate`) for the iterates `g^m` and `gZ^m`,
 `F_{c,m} = RΓ_c(X, φ_m) ∘ g_c^{m,*}` (blueprint
-`lem-trf-frobenius-operator-compact-description`). -/
+`lemma-scheme-frobenius-geometric-frobenius--3`). -/
 noncomputable def globalFrobenius (W : StrictWeilComplex (ModuleCat.{u + 1} R) g) (m : ℕ) :
     Rf_!(c)[ModuleCat.{u + 1} R].obj W.obj.obj ⟶ Rf_!(c)[ModuleCat.{u + 1} R].obj W.obj.obj :=
   compactFrobenius _ c (hi.iterateHom m) (commSq_iterateHom_id hg m)
     (weilDatumIterate W.frobenius.hom m)
 
-/-- Blueprint `def-trf-frobenius-operators` (item 2): the *local Frobenius operator*
+/-- Blueprint `definition-frobenius-operator--1` (item 2): the *local Frobenius operator*
 `F_{x,m} : K_x̄ ⟶ K_x̄` of a strict Weil complex `(K, φ)` at a point `x : Spec k ⟶ X` fixed by
 `g^m`: the local Frobenius (`AlgebraicGeometry.ProEtale.stalkFrobenius`) of the iterated Weil
 datum `φ_m` on the stalk complex `K_x̄ = Lx^* K`. -/
@@ -105,11 +105,11 @@ theorem localFrobenius_extendScalars (W : StrictWeilComplex (ModuleCat.{u + 1} R
     ← extendScalarsWeilDatum_weilDatumIterate]
   exact stalkFrobenius_extendScalarsWeilDatum_comp R S hx _
 
-/-- Blueprint `sk-p-trace-coeff`: **finite-level coefficient change**. Let `R → S` be a
-homomorphism of finite commutative rings whose exponent is invertible on `X`, `(K, φ)` a strict
-Weil complex over `R` and `(K_S, φ_S)` its scalar extension. Then compact cohomology and the
-geometric stalks commute with derived scalar extension `Ψ = - ⊗ᴸ_R S`, with their Frobenius
-operators:
+/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7`: **finite-level coefficient
+change**. Let `R → S` be a homomorphism of finite commutative rings whose exponent is invertible on
+`X`, `(K, φ)` a strict Weil complex over `R` and `(K_S, φ_S)` its scalar extension. Then compact
+cohomology and the geometric stalks commute with derived scalar extension `Ψ = - ⊗ᴸ_R S`, with their
+Frobenius operators:
 - the comparison map `ξ : RΓ_c(X, K) ⊗ᴸ_R S ⟶ RΓ_c(X, K_S)` is an isomorphism, and it carries
   `F_{c,m} ⊗ᴸ_R S` to the global Frobenius operator `F_{c,m}` of `(K_S, φ_S)`, for every `m`;
 - at every point `x : Spec k ⟶ X` fixed by `g^m`, the isomorphism

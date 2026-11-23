@@ -20,7 +20,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.AdicCompletion.Topology
 import Mathlib.RingTheory.Noetherian.Basic
 
-/-! Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
+/-! Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
 (blueprint: lem-weil-point-sections-integral-finiteness). -/
 @[expose] public section
 set_option autoImplicit false

@@ -35,7 +35,6 @@ set_option linter.privateModule false
 
 The ordinary ringed square and its canonical normalizations, separated from the
 unbounded derived comparison. Source: Stacks Project, Tags 04IF and 04H1.
-(blueprint: def-sbc-ringed-sheaf-slice-ordinary-data).
 -/
 
 @[expose] public noncomputable section

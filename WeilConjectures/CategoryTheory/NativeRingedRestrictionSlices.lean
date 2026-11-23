@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.NativeRingedRestrictionEquivalence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Restriction on slices and its derived square
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,8 +27,7 @@ variable {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
 correspondence; pushforward then becomes the original site pushforward, so density follows from
 its covering criterion.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 theorem sliceDense (U : C) :
     (Over.post F (X := U)).IsDenseSubsite (K.over U) (J.over (F.obj U)) where
   functorPushforward_mem_iff := by
@@ -45,8 +43,7 @@ variable (R : Sheaf J CommRingCat.{max c d vc vd r})
 covering-sieve calculation, so apply the module equivalence associated with that ringed site
 equivalence.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 theorem sliceModulesEquivalence (U : C) :
     (restrictModules.{max c vc, max d vd, vc, vd, r}
       (K := K.over U) (Over.post F) (R.over (F.obj U))).IsEquivalence := by
@@ -58,8 +55,7 @@ theorem sliceModulesEquivalence (U : C) :
 /-- Direct restriction on the original site is an equivalence. Apply the structural ringed
 equivalence comparison to the inverse of the given equivalence.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 theorem globalModulesEquivalence :
     (restrictModules.{c, d, vc, vd, r} (K := K) F R).IsEquivalence := by
   let : F.asEquivalence.symm.inverse.IsDenseSubsite K J := inferInstanceAs

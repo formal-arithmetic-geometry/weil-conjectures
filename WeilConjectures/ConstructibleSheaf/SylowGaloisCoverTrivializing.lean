@@ -18,7 +18,7 @@ import Mathlib.GroupTheory.Sylow
 # A Sylow cover trivializing finitely many lisse sheaves up to an `ℓ`-group
 
 Source: Stacks Project, Tags 0A3R, 0DV5 and 0DV6.
-(blueprint: det-tf-restriction-zero-covers, sk-lem-curve-sylow-trace)
+(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
 -/
 
 @[expose] public section
@@ -33,7 +33,7 @@ open Etale
 connected scheme `U` become constant, with finite values, on a connected `P`-torsor over a
 connected finite étale `v : V ⟶ U` of degree prime to `ℓ`, where `P` is an `ℓ`-group.
 Source: Stacks Project, Tags 0A3R, 0DV5 and 0DV6.
-(blueprint: det-tf-restriction-zero-covers, sk-lem-curve-sylow-trace)
+(blueprint: lemma-tangent-cones-on-cover, lemma-reduction-unipotent-local-system)
 
 Proof:
 1. `exists_galoisCover_trivializing` gives a connected Galois `Q`-cover `c` of `U` on

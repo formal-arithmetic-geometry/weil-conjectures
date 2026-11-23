@@ -25,8 +25,7 @@ isomorphism `ι : A ⋙ Δ ≅ B ⋙ Δ` (both are the identity, as `a Δ = b Δ
 * For a *kernel* `κ : Δ' Δ Y ⟶ K ⊗ Y`, natural in `Y : E` (the action of
   `δ : Δ_* 1 ⟶ K`), the *kernel unit*
   `ψ_M : M ⟶ A' Δ' Δ A M ≅ A' Δ' Δ B M ⟶ A' (K ⊗ B M)`
-  (`CategoryTheory.Adjunction.kernelUnit`) is the map `M = a_* Δ_* M ⟶ a_*(K ⊗ b^* M)` of
-  blueprint `sk-prop-geo-p1-adjunction` (G6).
+  (`CategoryTheory.Adjunction.kernelUnit`) is the map `M = a_* Δ_* M ⟶ a_*(K ⊗ b^* M)`.
 
 When `Φ` is invertible, `u = Φ⁻¹ ∘ ψ : M ⟶ T ⊗ F G M` (with `K = A T`) is linear in the sense of
 `CategoryTheory.Adjunction.ofTraceCounit`
@@ -325,8 +324,7 @@ lemma kernelUnit_obj
 
 /-- The *trace along `a`*, `t_a : A' B T ≅ F G T ⟶ F 𝟙 ≅ 𝟙`: the base change of a trace
 `t : G T ⟶ 𝟙` along the base change map `CategoryTheory.Adjunction.kernelBaseChange`
-(for `a : P ×_S P ⟶ P`, the trace of the projective line `a` over `P`, by
-`det-sp-p1-trace` (2)). -/
+(for `a : P ×_S P ⟶ P`, the trace of the projective line `a` over `P`). -/
 noncomputable def kernelTraceA (T : D) (t : G.obj T ⟶ 𝟙_ C)
     [IsIso (kernelBaseChange adj adjA e T)] : A'.obj (B.obj T) ⟶ 𝟙_ D :=
   inv (kernelBaseChange adj adjA e T) ≫ F.map t ≫ η F

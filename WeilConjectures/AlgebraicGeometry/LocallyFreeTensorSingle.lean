@@ -19,7 +19,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructib
 /-! # Tensoring a locally finite free sheaf with a sheaf in degree zero
 
 Source: Bhatt--Scholze, Proposition 6.8.11(3), the finite free local calculation.
-(a step of blueprint `lem-sfb-dc-tensor-preserves`)
+(a step of blueprint `proposition-six-operations-dctf--14`)
 -/
 
 @[expose] public section
@@ -111,7 +111,7 @@ copies of the second factor in degree zero. Exact inverse image and monoidal pul
 identify the restricted cohomology. Covering detection descends vanishing; binding the
 covers of finite presentations descends local finite presentation. Finite sums preserve
 local finite presentation by the split short exact sequences, including the empty sum.
-(a step of blueprint `lem-sfb-dc-tensor-preserves`) -/
+(a step of blueprint `proposition-six-operations-dctf--14`) -/
 theorem locallyFree_tensor_single
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (X : Scheme.{u})

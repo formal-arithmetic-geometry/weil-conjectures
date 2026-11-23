@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Sites.CoverLifting
 /-!
 # Special cocontinuous functors between sites
 
-Source: Stacks Project, Definitions 00XJ and 03CG, Lemma 03A0, conditions (1)-(5)
-(blueprint: def-weil-pbc-special-cocontinuous-functor).
+Source: Stacks Project, Definitions 00XJ and 03CG, Lemma 03A0, conditions (1)-(5).
 
 Cocontinuity itself is `Functor.IsCocontinuous` for the generated topologies.
 The remaining conditions use the actual covering presieves, not their saturation.
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
-/-- Source: Stacks Project, Lemma 03A0, conditions (1)-(5), and Definition 03CG
-(blueprint: def-weil-pbc-special-cocontinuous-functor).
+/-- Source: Stacks Project, Lemma 03A0, conditions (1)-(5), and Definition 03CG.
 
 The sites use covering presieves and their generated topologies. No strict indexed
 composition class is imposed: finite coverings form a pretopology, but do not satisfy
@@ -43,7 +41,7 @@ Finally each target object has an actual covering by image objects; its index ty
 `Type (max uc vd)` holds every family of pairs `(U, F.obj U ⟶ V)`. Empty coverings
 are allowed throughout. The categories are not required to be small, so that large
 sites such as the small etale site `X.Etale` are covered (as in
-`siteContinuous_pushforward_isSheaf`). As in the node, the equivalence-of-topoi
+`siteContinuous_pushforward_isSheaf`). The equivalence-of-topoi
 conclusion of 03A0 is not included as an additional condition. -/
 def IsSpecialCocontinuousForCoverings
     {C : Type uc} [Category.{vc} C] {D : Type ud} [Category.{vd} D]

@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverse
 /-!
 # Changing universes in the Brown representability criterion
 
-Source: Stacks Project, Tag 0A8F, Lemma `lemma-brown`, with its set-indexing
-convention made explicit (blueprint: lem-pc-brown-representability-universe-transfer).
+## References
+
+* Stacks Project, Tag 0A8F.
 -/
 
 @[expose] public section
@@ -26,7 +27,9 @@ open CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
-/-- (blueprint: lem-pc-brown-representability-universe-transfer) -/
+/-- Brown representability for a compactly generated triangulated category `C` whose coproduct
+indexing universe `max w v vH` may exceed the morphism universe `v`: every cohomological
+functor `H` to `AddCommGrpCat.{vH}` preserving the corresponding products is representable. -/
 theorem brownCohomologicalRepresentabilityUniverseTransfer
     (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

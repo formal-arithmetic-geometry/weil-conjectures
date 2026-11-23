@@ -26,38 +26,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 09YL (lemma-colimit-sites), and the first
-paragraph of Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-covering-construction).
+/-- The precoverage `Q` on a filtered colimit of finitary sites, whose covers are the images of
+stage covers, contains isomorphisms, is stable under finite composition and base change, and has
+pullbacks; the colimit functors preserve the covering pullbacks and are continuous.
 
-Proof: Define Q Y to consist of transported images of stage covering presieves.
-Represent finite objects and arrows using the object and arrow colimit cocones.
-Move their representatives to a common stage and enforce their finitely many
-endpoint and composition equations there by eventual equality. This also works
-above a prescribed stage. For a covering arrow and any arrow into its target,
-represent the whole cospan at a common stage. Its pullback exists there by
-P.HasPullbacks, and every further stage preserves it by hpullback. For every
-represented test object the Hom pullback square remains a pullback on taking
-filtered colimits of sets, because these commute with finite limits. This proves
-both existence in the limit category and preservation by each canonical functor.
-To compose a covering with coverings of its sources, use finiteness of the outer
-covering to move all coverings and their target identifications to one stage.
-Only finite outer and inner indexed families are involved; their finitely many
-arrows and equations have a common stage. Stage composition gives the composite. The preceding
-pullback
-argument and stage base change give stability under base change. Lift an
-isomorphism, its inverse, and both inverse equations to one stage; the singleton
-is then a covering by P.HasIsos. Thus Q has all four precoverage properties.
-Empty coverings require no lift of members; the target alone lifts. If all
-stage categories are empty, the limit category is empty and the claims are vacuous. Every
-Q-cover is finite, since it is an image of a finite
-stage presieve. The same finite covering equalizer argument on their preserved
-pullbacks proves that precomposition sends sheaves for Q.toGrothendieck to sheaves
-for (P j).toGrothendieck. For generated topologies it suffices to check the
-generating finite coverings and their pullbacks: the sheaf condition extends
-through the generating identity, base-change and local-character rules. This
-proves the asserted canonical continuity without an unrestricted index axiom.
--/
+Source: Stacks Project, Sites, Tag 09YL, and the first paragraph of Tag 0A35. -/
 theorem colimit_site_covering_construction
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

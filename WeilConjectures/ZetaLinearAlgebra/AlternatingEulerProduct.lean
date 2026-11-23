@@ -30,6 +30,8 @@ coefficientwise locally finite.
 
 ## Main statements
 
+- `LinearMap.alternatingCharpolyRevProd_eq_of_subset`: enlarging the set of degrees by zero
+  spaces does not change the alternating determinant.
 - `LinearMap.X_mul_derivative_inv_alternatingCharpolyRevProd`: the logarithmic derivative of
   `Δ_e⁻¹`.
 - `LinearMap.hasProd_inv_alternatingCharpolyRevProd_of_sum_trace_eq`: the Euler product.
@@ -55,6 +57,15 @@ theorem alternatingCharpolyRevProd_eq_expand (s : Finset ℤ) (F : ∀ i, Module
   split_ifs
   · rfl
   · rw [expand_inv]
+
+/-- Enlarging the set of degrees by degrees with zero spaces does not change the alternating
+determinant `∏_i det (1 - T ^ e F i)^{(-1)^i}`. -/
+theorem alternatingCharpolyRevProd_eq_of_subset {s t : Finset ℤ} (hst : s ⊆ t)
+    (F : ∀ i, Module.End K (W i)) (ht : ∀ i ∈ t, i ∉ s → Subsingleton (W i)) (e : ℕ) :
+    alternatingCharpolyRevProd s F e = alternatingCharpolyRevProd t F e := by
+  refine Finset.prod_subset hst fun i hit his ↦ ?_
+  have := ht i hit his
+  rw [charpolyRev_of_subsingleton, Polynomial.one_comp, Polynomial.coe_one, inv_one, ite_self]
 
 /-- The alternating determinant `∏_i det (1 - T ^ e F i)^{(-1)^i}`, `e ≠ 0`, has constant
 coefficient `1`. -/

@@ -284,7 +284,7 @@ theorem autAction_comp_θ_of_isProper (D : NearbyDualizingDataOfGenericBase k' �
   rw [← actS.naturality_assoc, hunit']
 
 /-- **Invariance of the dualizing maps under Galois automorphisms** (blueprint
-`det-tf-nearby-duality-slice`, "the map `θ`"): for a trait model `M` of `X₁` over the generic
+`lemma-nearby-duality-slice--1`, "the map `θ`"): for a trait model `M` of `X₁` over the generic
 base and a self-map `ψ` of `M` over the identities which is the identity on the total space and
 acts on the geometric generic point through an automorphism `σ` of `Spec Ω` over `η`
 (`ψ.generic ≫ g = g ≫ σ`), the action `ρ(ψ)` of `ψ` on `Ψ_M ω_{X₁}` fixes the dualizing map:

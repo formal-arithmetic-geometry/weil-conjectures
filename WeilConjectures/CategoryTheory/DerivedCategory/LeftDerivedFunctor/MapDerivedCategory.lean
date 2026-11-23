@@ -49,7 +49,6 @@ These are the general inputs needed to identify the derived pullback `Lg^*` of Ã
 sheaves (which is left derived from the *exact* functor `g^*`) with the levelwise
 functor, and to obtain its composition, homology, and single-degree compatibilities; see
 `WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar`.
-
 -/
 
 @[expose] public section

@@ -19,7 +19,7 @@ the restriction of `f`. Write `ε_{X,Z}(L) : Le^* Ψ_X(L) ⟶ Ψ_Z(Li^* L)` for 
 the morphisms of models induced by `f`, with special fibres `f_s` and `g_s`.
 
 This file proves, for arbitrary coefficients, the commutative squares of the proof of blueprint
-`det-sp-defect-proper-smooth`:
+`lemma-base-change-cone-x-z`:
 
 * the *pullback square* (`ProEtale.CondensedRing.zeroSectionMap_upperStar_square`): through the
   pullback exchanges `α_{f̃}` and `α_{f̃_Z}`, `Lg_s^* ε_{X,Z}(L)` corresponds to
@@ -33,7 +33,7 @@ This file proves, for arbitrary coefficients, the commutative squares of the pro
   `Rg_{s*} ε_{X',Z'}(L')`; both sides have the same adjoint for `Lg_s^* ⊣ Rg_{s*}`, by the pullback
   square.
 
-It also proves the triangulated step of blueprint `det-sp-defect-closed-vanishing`
+It also proves the triangulated step of blueprint `lemma-base-change-cone-x-z`
 (`ProEtale.CondensedRing.nonempty_specializationDefect_iso_of_distTriang`): for a distinguished
 triangle `A ⟶ B ⟶ D ⟶ A[1]` with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible,
 `C_{X,Z}(A) ≅ C_{X,Z}(B)`, both being `Le^* Ψ_X(A)[1]`.
@@ -235,7 +235,7 @@ lemma nonempty_iso_obj₃_of_comp_aux {D : Type*} [Category D] [Preadditive D] [
   exact ⟨Triangle.π₃.mapIso φ⟩
 
 /-- **The defect along a triangle whose first term is killed by `Ψ_Z Li^*`** (the triangulated step
-of blueprint `det-sp-defect-closed-vanishing`): for a distinguished triangle `A ⟶ B ⟶ D ⟶ A[1]`
+of blueprint `lemma-base-change-cone-x-z`): for a distinguished triangle `A ⟶ B ⟶ D ⟶ A[1]`
 with `Ψ_Z(Li^* A) = 0` and `ε_{X,Z}(D)` invertible, `C_{X,Z}(A) ≅ C_{X,Z}(B)`. Indeed both are
 `Le^* Ψ_X(A)[1]`: the first since `ε_{X,Z}(A)` has target zero, the second since `ε_{X,Z}(B)` is
 `Le^* Ψ_X(B ⟶ D)` up to the isomorphisms `Ψ_Z Li^*(B) ≅ Ψ_Z Li^*(D)` and `ε_{X,Z}(D)`. -/
@@ -308,7 +308,7 @@ theorem nonempty_specializationDefect_lowerStar_iso_of_isIso
 
 
 omit [Algebra k k'] in
-/-- **The defect of the zero ideal vanishes** (blueprint `det-sp-defect-closed-vanishing`, first
+/-- **The defect of the zero ideal vanishes** (blueprint `lemma-base-change-cone-x-z`, first
 assertion): for `J = ⊥`, the zero section `Y × S ⟶ 𝒟_⊥ Y` is an isomorphism of models, so the
 zero-section map is invertible and `C_{Y,Y} = 0`. -/
 theorem isZero_specializationDefect_of_eq_bot [Algebra k k'] (Y : Over (Spec (.of k)))

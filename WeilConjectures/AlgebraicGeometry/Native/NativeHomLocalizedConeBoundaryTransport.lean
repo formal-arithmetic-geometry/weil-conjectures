@@ -10,7 +10,9 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 
 /-! # Transport of the native Hom cone boundary
 
-Source: Stacks Project, Tags 08J9 and 08JC.
+## References
+
+* Stacks Project, Tags 08J9 and 08JC
 -/
 
 @[expose] public noncomputable section
@@ -36,16 +38,8 @@ private theorem signedSource_coefficient_naturality
     Preadditive.zsmul_comp, Units.smul_def, Functor.comp_map] using
     congrArg (fun z ↦ (n * (n + 1) / 2).negOnePow • z) h
 
-/-- Naturality transports the K-injective cone boundary to any coefficient.
-Source: Stacks Project, Tag 08JC, the evaluation-characterized transport in
-lemma-RHom-triangulated (blueprint: lem-sf-native-hom-localized-cone-boundary-transport).
-
-For an isomorphism from the localization of a K-injective complex to a derived
-object, naturality of the evaluation comparison and of the signed source mate
-identifies the model triangle with the triangle formed using that object.  The
-statement records only this triangle isomorphism; distinguishedness is supplied
-by the model theorem and the main cone-boundary theorem.
--/
+/-- An isomorphism `e` from the localization of a K-injective complex `I` to `M` induces an
+isomorphism between the internal-Hom cone triangles of `f` with coefficients in `I` and in `M`. -/
 theorem nativeHom_localized_cone_boundary_transport
     {C : Type d} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]

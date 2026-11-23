@@ -13,8 +13,7 @@ set_option linter.privateModule false
 
 /-! # Normalization of derived composition by the specified adjunctions
 
-Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND;
-Cohomology on Sites, Tag 0D6E (blueprint: lem-sfb-derived-composition-adjunction-normalization).
+Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND; Cohomology on Sites, Tag 0D6E.
 
 The derived left comparison is the canonical descent of the ordinary comparison.
 The theorem specifies the right comparison, its K-injective representative, and both

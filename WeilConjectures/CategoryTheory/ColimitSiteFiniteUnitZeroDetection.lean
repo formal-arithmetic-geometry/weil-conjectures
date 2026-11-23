@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 Source: Stacks Project, Sites, Tag 0A35, the section formula and its adjunction
 paragraph; Modules on Sites, Tag 03CO, abelian extension.
-(blueprint: lem-weil-pbc-colimit-site-finite-unit-zero-detection).
 -/
 
 @[expose] public section
@@ -32,37 +31,12 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
-and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
-by Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-unit-zero-detection).
+/-- A section `z` of an abelian sheaf `H` over `X` that is killed by the unit of the inverse
+image to the colimit site is already killed by the unit of the inverse image along some
+transition `d : j ⟶ k`.
 
-Proof: Fix a source-stage sheaf H and source object X. For a limit object Y,
-use presentations by stage objects above j. The object and arrow set colimit
-properties lift any finite family of objects, arrows and equations to one
-stage. Filteredness and eventual equality make the category of presentations
-filtered, equalize parallel refinements, and make the category above a given
-presentation final. Take filtered abelian colimits of the stage inverse images
-of H. Lifting restriction arrows and their equations defines a presheaf,
-independent of lifts. Every Q-cover is a transported finite stage cover by hQ;
-hVpullback identifies its covering pullbacks. The matching-family equalizer
-is a finite limit of stage section groups, so filtered colimits preserve it.
-This gives a sheaf, including the zero group for an empty cover. Only finite
-indexed covering composition and base change are used. A morphism from this
-sheaf to any sheaf T is a compatible family of stage maps. Transposing these
-maps through the stage adjunctions gives exactly one map H to V(j)-restriction
-of T. The identity presentation and unit give the inverse assignment. Thus
-uniqueness of left adjoints identifies the constructed sheaf with V(j) inverse
-image, compatibly with the unit. At V(j)(X), the presentations carrying X
-forward are final. The section z is represented by the identity inverse-image
-unit, and its image is the V(j) unit applied to z. Its equality with zero in
-the filtered colimit is witnessed at a later stage. The refinement map out of
-the identity presentation is the adjunction unit for d : j to k, by uniqueness
-of adjuncts. All maps and transports are additive, so the other representative
-is zero. This proves the asserted unit vanishing. If H is zero, d may be the
-identity; an empty source stage has no X. No arbitrary section of an inverse
-image, or family of supplied comparison maps, occurs in this assertion.
--/
+Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf-condition and adjunction
+paragraphs; abelian extension by Modules on Sites, Tag 03CO. -/
 theorem colimit_site_finite_unit_zero_detection
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

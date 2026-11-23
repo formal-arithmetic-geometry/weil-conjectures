@@ -11,8 +11,7 @@ import Mathlib.Data.Int.Interval
 
 /-! # Finite diagonals of a bounded-below bicomplex
 
-Source: Stacks Project, Homology, Tag 012Z
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Homology, Tag 012Z.
 -/
 
 @[expose] public section
@@ -43,14 +42,7 @@ private theorem hasCoproduct_of_finite_nonzero
     simpa [c, i.property] using hm i.val
 
 /-- A common lower bound in the first degree and nonnegative second degree give a total.
-Source: Stacks Project, Homology, Tag 012Z
-(auxiliary; not a blueprint node).
-
-Proof: in total degree n, the potentially nonzero summands have a ≤ p ≤ n
-and q = n-p. This is a finite set, even when a is negative or n < a.
-Form its finite coproduct, put zero inclusion maps on all omitted summands,
-and extend the coproduct universal property using their zero-object property.
-These coproducts give `HasTotal` degree by degree. -/
+Source: Stacks Project, Homology, Tag 012Z. -/
 theorem hasTotal_of_boundedBelow
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))

@@ -20,7 +20,6 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 /-! # Coherence equations for the explicit canonical derived comparisons
 
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0FPT.
-(blueprint: lem-sfb-ringed-derived-tensor-diagrams).
 -/
 
 @[expose] public noncomputable section

@@ -644,7 +644,7 @@ Source: `literature/stacks-project/sites-cohomology.tex`, Lemma 21.18.4 (Tag 07A
 label `lemma-pullback-tensor-product`), for the morphism of ringed topoi
 (X_proet, (A_{E,n})_X) -> (Y_proet, (A_{E,n})_Y); the integral, rational and Qlbar
 levels follow the level-by-level definitions of the operations in
-def-weil-derived-pullback-tensor-hom.
+prose-03-02.
 
 Proof plan (the node's numbered steps):
 
@@ -653,7 +653,7 @@ Proof plan (the node's numbered steps):
    ringed topoi. By [prop-weil-pbc-proetale-constant-exact], module pullback is exact and agrees
    with inverse image with the coefficient action transported through
    $f^{-1}(A_{E,n})_Y\cong(A_{E,n})_X$. Thus its derived functor is precisely the finite operation
-   in [def-weil-derived-pullback-tensor-hom]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-
+   in [prose-03-02]. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-
    pullback] with $R=(A_{E,n})_Y$ and $S=(A_{E,n})_X$. Its displayed isomorphism, natural in both
    arguments, is $\mu_{f;M,N}$. That theorem is unbounded, so it applies to all the finite-level
    inputs claimed here; no finite Tor dimension of $A_{E,n}$ is assumed.
@@ -676,7 +676,7 @@ Proof plan (the node's numbered steps):
    $W_n=\operatorname{Tot}(U_n\otimes V_n)$. The quotient and pullback models are flat-term K-flat
    by [lem-pur-kflat-change-of-rings, lem-weil-pbc-ringed-pullback-preserves-kflat], and the
    tensor totals by step 2. The normalization and coherent reduction assertions of [lem-pur-
-   completed-operation-tower-substitution] and [lem-coef-normalized-dvr-effectivity] identify
+   completed-operation-tower-substitution] and [lemma-sp-tower-adjunction-foundation--2] identify
    these systems with the reductions of the completed operations in [def-pur-integral-derived-
    operations]. Here $B_{Y,n}=(A_{E,n})_Y$ and $R_Y=\varprojlim B_{Y,n}$, as in the normalized
    tower convention [def-coef-normalized-dvr-tower].
@@ -703,7 +703,8 @@ Proof plan (the node's numbered steps):
    pur-completed-operation-tower-substitution] and [lem-weil-pbc-ringed-strict-tower-homotopy-
    limit].
 
-8. The coherent counit comparisons of [lem-coef-normalized-dvr-effectivity], applied to the source
+8. The coherent counit comparisons of [lemma-sp-tower-adjunction-foundation--2], applied to the
+source
    and target systems of the strict comparison, identify its reduction with the finite comparison.
    Their naturality applies to this actual map of systems, and [lem-pur-completed-operation-tower-
    substitution] carries the counits to the completed operations. No faithfulness assertion for
@@ -735,7 +736,7 @@ Proof plan (the node's numbered steps):
 
 12. For objects $(E,M),(E',N)$ at the algebraically closed level, choose a common finite
    coefficient field $L$ and form the rational comparison there, conjugated by the scalar-
-   extension comparisons as prescribed in [def-weil-derived-pullback-tensor-hom]. Represent the
+   extension comparisons as prescribed in [prose-03-02]. Represent the
    inverse by the inverse rational comparison with the inverse conjugating comparisons. In [def-
    weil-algebraically-closed-coefficients], morphisms are classes over common finite fields, and
    two representatives agree if they agree after passage to a further common field. The scalar-

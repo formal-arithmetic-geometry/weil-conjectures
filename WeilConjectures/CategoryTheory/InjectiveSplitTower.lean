@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.InjectiveSplitTowerExtension
 /-!
 # Injectivity of split towers of injective abelian groups
 
-Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1 proof footnote
-(blueprint: lem-pc-injective-split-tower-injective).
+Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1 proof footnote.
 -/
 
 @[expose] public section
@@ -39,8 +38,7 @@ On `A_{n+1}`, subtract the section applied to the previous lift composed with th
 transition of `B` from the given map to `I_{n+1}`. Compatibility makes this difference
 land in `ker p_n`. The kernel is an injective direct summand of `I_{n+1}`, so extend
 the difference to `B_{n+1}` and add back the section term. The resulting level maps
-form a compatible tower morphism extending the original map.
-(blueprint: lem-pc-injective-split-tower-injective) -/
+form a compatible tower morphism extending the original map. -/
 theorem injective_of_injective_split_tower (I : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (hI : ∀ n : ℕ, Injective (I.obj (Opposite.op n)))
     (hp : ∀ n : ℕ, IsSplitEpi (I.map (homOfLE (Nat.le_add_right n 1)).op)) :

@@ -26,7 +26,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 /-!
 # The two Kummer-normalized projective-line components
 
-Source: blueprint thm-amb-p1-decomposition and its proof.
+Source: blueprint lemma-cohomology-projective-line-trace and its proof.
 (auxiliary; not a blueprint node).
 -/
 
@@ -92,7 +92,7 @@ local instance (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (f : X ⟶ Y) 
 attribute [local irreducible] ordinaryFinitePullback ordinaryFinitePushforward
 
 /-- A family of projective-line Chern arrows on Noetherian bases.
-Source: blueprint thm-amb-p1-decomposition.
+Source: blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node). -/
 abbrev OrdinaryFiniteP1ChernFamily (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) :=
@@ -101,7 +101,7 @@ abbrev OrdinaryFiniteP1ChernFamily (A : Type (u + 1)) [CommRing A]
       (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
 
 /-- The Chern family represents the actual scalar-extended Kummer boundary of O(1).
-Source: blueprint thm-amb-p1-decomposition.
+Source: blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node). -/
 def OrdinaryFiniteP1ChernFamilySpec (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (c : OrdinaryFiniteP1ChernFamily A N hA) : Prop :=
@@ -110,7 +110,7 @@ def OrdinaryFiniteP1ChernFamilySpec (A : Type (u + 1)) [CommRing A]
       (affineTraceProjectiveInvertible N S hS) (c S hS)
 
 /-- The specified twisted-unit and Chern components, before proving invertibility.
-Source: blueprint thm-amb-p1-decomposition.
+Source: blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node). -/
 def ordinaryFiniteP1KummerMap (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -123,7 +123,7 @@ def ordinaryFiniteP1KummerMap (A : Type (u + 1)) [CommRing A]
     (ordinaryFiniteP1ChernPushforward A N hA S (c S hS))
 
 /-- The decomposition square uses the exact ordinary-etale exchange of the item.
-Source: blueprint thm-amb-p1-decomposition, base-change assertion.
+Source: blueprint lemma-cohomology-projective-line-trace, base-change assertion.
 (auxiliary; not a blueprint node). -/
 def OrdinaryFiniteP1KummerMapBaseChange (A : Type (u + 1)) [CommRing A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -210,7 +210,7 @@ theorem ordinaryFiniteP1_geometric_kummer_normalization
 in degrees zero and two, both cyclic of order N. The isomorphisms here do not yet
 normalize the actual Chern arrow.
 Source: ProjectiveLineGenusZero and Curve.Estimate, the geometric-fibre part of
-blueprint thm-amb-p1-decomposition.
+blueprint lemma-cohomology-projective-line-trace.
 (auxiliary; not a blueprint node).
 Proof: apply the proper-curve calculation to the genus-zero projective line. Its
 first cohomology is a function group on Fin 0, hence zero. A primitive root

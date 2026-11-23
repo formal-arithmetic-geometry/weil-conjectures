@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCoupleExact
 /-!
 # Incoming-alpha image lifts to derived-D terms
 
-Source: Stacks Tags 011S and 0AMJ; blueprint thm-sp-truncation-e2, step 5.
-(blueprint: lem-sp-finite-page-image-lift)
+Source: Stacks Tags 011S and 0AMJ.
 -/
 
 @[expose] public section
@@ -118,27 +117,8 @@ private theorem incoming_split_heq
     congr! 1 <;> omega
 
 /-- The incoming-alpha filtration step lifts isomorphically to the derived-D term.
-Source: blueprint thm-sp-truncation-e2, proof step 5; Stacks Tags 011S and 0AMJ.
-(blueprint: lem-sp-finite-page-image-lift)
-
-Proof: Put R=max(p+3,q-a+2), r=R-2, u=p-r and v=q+r. First identify the families
-A and I in pageCouple_image with incomingAlphaIter and inc. Their initial values
-and successor recurrences determine both families uniquely by natural-number
-induction. The recurrence for incomingAlphaIter follows by expanding alphaIter
-and comparing the index transports. Thus inc r u v is monomorphic and its image
-is the incoming r-fold alpha image. Induction on the first number of iterations
-shows that an (m+n)-fold alpha iterate is the m-fold iterate followed by the
-n-fold iterate at its endpoint. Split the r-fold incoming iterate after p steps,
-at first index zero. Since r>=p, this is the incoming p-fold iterate followed by
-lambda, with the canonical endpoint transports. Precomposition by the source
-transport does not change its image. Factor the incoming p-fold iterate through
-its image and cancel its epimorphic image projection when computing the image
-after lambda. The filtration formula identifies that image with F(p), so the
-image of inc r u v is the subobject represented by F(p).arrow followed by lambda.
-Both this composite and inc are monomorphic. Subobject.isoOfMkEqMk therefore
-gives the isomorphism between their domains, and its defining commutative equation
-is exactly the required lift equation. For p=0 the first part of the split is
-an identity; nothing in this argument requires q>=a. -/
+Source: Stacks Tags 011S and
+0AMJ. -/
 theorem finitePage_image_lift
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
     (X : BigradedExactCouple B 0) (a : ℤ)

@@ -33,8 +33,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 /-! # Geometric constructibility and internal Hom for native Weil complexes
 
-Source: blueprint lem-fix-weil-operations, internal-Hom paragraph;
-sk-lem-coefficient-heart, opening equality Dctf = Dbc; lem-sfb-dc-hom-preserves.
+Source: blueprint prose-10-20, internal-Hom paragraph;
+lemma-constructible-sheaves, opening equality Dctf = Dbc; proposition-six-operations-dctf--15.
 (blueprint: lem-sf-weil-geometric-hom-constructibility).
 
 The forgetful functor includes the canonical coefficient realization from native modules
@@ -59,7 +59,7 @@ set_option synthInstance.maxSize 2048
 /-- Termwise forgetting Frobenius, scalar linearity, and transport along the canonical
 coefficient realization theta from R_X to B_X. This uses precisely the internal-module
 presentation underlying nativeToOrdinaryModules, before its sectionwise presentation.
-Source: lem-fix-weil-operations, internal-Hom paragraph, and the module comparison
+Source: prose-10-20, internal-Hom paragraph, and the module comparison
 (blueprint: lem-sf-weil-geometric-hom-constructibility). -/
 abbrev nativeGeometricForget (k₀ : Type u) [Field k₀] [Finite k₀]
     (ℓ : ℕ) [Fact ℓ.Prime] (X₀ : Scheme.{u})
@@ -72,8 +72,8 @@ abbrev nativeGeometricForget (k₀ : Type u) [Field k₀] [Finite k₀]
 set_option linter.style.haveILetI false in
 /-- The geometric cohomology criterion, with exact support intervals, and finiteness of
 relative derived sheaf Hom between arbitrary native Weil complexes.
-Source: lem-fix-weil-operations, internal-Hom paragraph; sk-lem-coefficient-heart,
-opening equality Dctf = Dbc; lem-sfb-dc-hom-preserves, finite-subextension Qlbar case.
+Source: prose-10-20, internal-Hom paragraph; lemma-constructible-sheaves,
+opening equality Dctf = Dbc; proposition-six-operations-dctf--15, finite-subextension Qlbar case.
 (blueprint: lem-sf-weil-geometric-hom-constructibility).
 
 Proof:
@@ -88,13 +88,13 @@ Proof:
    vanishing outside each prescribed interval and constructibility in each degree are
    equivalent. Existence of an interval gives the bounded constructibility criterion.
 3. For two Weil complexes the criterion gives geometric bounded constructibility. The
-   field-coefficient equality Dctf = Dbc of sk-lem-coefficient-heart makes each input
+   field-coefficient equality Dctf = Dbc of lemma-constructible-sheaves makes each input
    have finite Tor amplitude, without asserting site-perfectness.
 4. Finite type over a field makes the geometric fibre Noetherian
    (lem-weil-pbc-finite-type-over-noetherian). Apply
    lem-sfb-adic-constructibility-predicate-comparison to pass to the bounded constructible
    predicate of sk-def-sfb-bounded-constructible. The finite-subextension Qlbar case of
-   lem-sfb-dc-hom-preserves gives bounded constructibility of the ambient relative
+   proposition-six-operations-dctf--15 gives bounded constructibility of the ambient relative
    internal Hom. Return through the predicate comparison and use Dctf = Dbc once more
    to get finite Tor amplitude. This applies to both arbitrary inputs, with no lissity
    hypothesis, and takes no Frobenius invariants of global Hom groups. -/

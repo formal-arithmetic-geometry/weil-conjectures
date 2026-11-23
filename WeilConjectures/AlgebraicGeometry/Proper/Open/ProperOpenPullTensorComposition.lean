@@ -10,13 +10,16 @@ import all WeilConjectures.AlgebraicGeometry.Compactification.CompactificationPr
 
 /-! # Tensor compatibility of derived inverse-image composition
 
-Source: the monoidal pullback composition calculation in the proper/open
-projection proof (blueprint: lem-sf-proper-open-pull-tensor-composition).
-
 The theorem is an intermediate result: it identifies the two canonical routes
 from a derived tensor through two successive inverse images. Its proof uses the
 monoidal comparison of the left-derived inverse image, naturality, and the
-composition coherence of derived inverse-image functors. -/
+composition coherence of derived inverse-image functors.
+
+## References
+
+* Stacks 07A4 and 03EL
+* Stacks Project, Tag 0F7B
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -115,22 +118,7 @@ private theorem pullTensor_hom_eq
   rw [leftDerivedUpperStarTensorIso_hom,
     leftDerivedUpperStarTensorComparison_eq_leftDerivedTensorComparison]
 
-/-- Canonical derived inverse-image composition preserves the tensor comparison.
-Source: Stacks 07A4 and 03EL; the monoidal composition square used in the tensor
-refinement of Stacks 0F7B
-(blueprint: lem-sf-proper-open-pull-tensor-composition).
-
-Proof: the ordinary inverse-image compositor is monoidal: its right-adjoint
-conjugate is the direct-image compositor, whose lax tensor formula is composition
-of sections. Apply the composition formula for leftDerivedTensorComparison to
-upperStar b followed by upperStar s. Expand leftDerivedUpperStarComp into the
-left-derived ordinary compositor and the derived-functor composition isomorphism.
-The inverse/hom factors of the latter cancel. Naturality of the derived tensor
-comparison for the monoidal ordinary compositor gives the comparison for s ≫ b.
-Finally tensorHom_comp_tensorHom combines the tensor factors of the two
-compositors, giving the displayed uncurry map. All objects are arbitrary unbounded
-derived objects. For an identity arrow these same cancellations give the unit
-law; zero objects and the empty scheme require no additional hypothesis. -/
+/-- Canonical derived inverse-image composition preserves the tensor comparison. -/
 theorem properOpenPullTensorComposition
     (V₀ : Type*) [Category.{u + 1} V₀] [Abelian V₀]
     [IsGrothendieckAbelian.{u + 1} V₀] [MonoidalCategory V₀]

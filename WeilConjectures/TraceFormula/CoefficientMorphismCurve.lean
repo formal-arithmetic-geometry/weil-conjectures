@@ -18,10 +18,10 @@ cases:
 
 * `X` is proper and smooth of relative dimension one
   (`ProEtale.CondensedRing.traceFormulaHolds_of_smoothOfRelativeDimension_one`): the
-  Lefschetz–Verdier formula (blueprint `sk-p-proper`) writes the trace as the sum of the local
-  terms at the fixed points, and the Frobenius local term on a curve (blueprint `sk-p-frob`) is the
-  trace of the stalk map. This is the case of `ℙ¹` in the proof of blueprint
-  `sk-thm-tf-coefficient-morphism-formula`;
+  Lefschetz–Verdier formula (blueprint `theorem-proper-pushforward-lefschetz-verdier`) writes the
+  trace as the sum of the local terms at the fixed points, and the Frobenius local term on a curve
+  (blueprint `proposition-frobenius-local-term-curve`) is the trace of the stalk map. This is the
+  case of `ℙ¹` in the proof of blueprint `theorem-trace-formula-frobenius-correspondence`;
 * `X` is empty or a point, that is `X ⟶ Spec k` is a closed immersion
   (`ProEtale.CondensedRing.traceFormulaHolds_of_isClosedImmersion`): the local term at the
   point is the trace of the stalk map, the open piece being zero.
@@ -69,12 +69,12 @@ lemma range_sigmaPointι_eq_liftPoint [IsAlgClosed k] (hΦ : IsModelFrobenius Φ
 
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a model with given local terms** (blueprint
-`sk-thm-tf-coefficient-morphism-formula`, the case of the affine line through `ℙ¹`): for a proper
-`X` with the model Frobenius `Φ` and `m ≥ 1`, if the local term of every map
+`theorem-trace-formula-frobenius-correspondence`, the case of the affine line through `ℙ¹`): for a
+proper `X` with the model Frobenius `Φ` and `m ≥ 1`, if the local term of every map
 `v : LΦ_m^* K ⟶ K` at every fixed rational point `x` is the trace of the stalk map `v_x`, the
 trace formula in degree one holds for `Φ_m`. The Lefschetz–Verdier formula (blueprint
-`sk-p-proper`) writes the trace as the sum of the local terms over the components `∐ Spec k` of
-the fixed locus. -/
+`theorem-proper-pushforward-lefschetz-verdier`) writes the trace as the sum of the local terms over
+the components `∐ Spec k` of the fixed locus. -/
 theorem traceFormulaHolds_frobeniusIterate_of_localTerm [IsAlgClosed k] [IsProper X.hom]
     [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p) [IsProper Φ.left] (hm : 1 ≤ m)
     (hLT : ∀ (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
@@ -101,14 +101,15 @@ theorem traceFormulaHolds_frobeniusIterate_of_localTerm [IsAlgClosed k] [IsPrope
 
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve** (blueprint
-`sk-thm-tf-coefficient-morphism-formula`, the case of the affine line through `ℙ¹`; detailed form
-`thm-trf-coefficient-morphism-trace-formula`, Step 2): for `X` proper and smooth of relative
-dimension one over `k` with the model Frobenius `Φ` of a model over a finite field, the trace
-formula in degree one holds for `Φ_m`, `m ≥ 1`. The Lefschetz–Verdier formula (blueprint
-`sk-p-proper`) writes the trace as the sum of the local terms at the fixed points, and the
-Frobenius local term on a curve (blueprint `sk-p-frob`,
-`Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`) is the trace of the
-stalk map. -/
+`theorem-trace-formula-frobenius-correspondence`, the case of the affine line through `ℙ¹`; detailed
+form `theorem-trace-formula-frobenius-correspondence--1`, Step 2): for `X` proper and smooth of
+relative dimension one over `k` with the model Frobenius `Φ` of a model over a finite field, the
+trace formula in degree one holds for `Φ_m`, `m ≥ 1`. The Lefschetz–Verdier formula (blueprint
+`theorem-proper-pushforward-lefschetz-verdier`) writes the trace as the sum of the local terms at
+the fixed points, and the Frobenius local term on a curve (blueprint
+`proposition-frobenius-local-term-curve`,
+`Correspondence.localTerm_traceClass_frobeniusGraph_eq_trace_of_smooth`) is the trace of the stalk
+map. -/
 theorem traceFormulaHolds_frobeniusIterate_of_smoothOfRelativeDimension_one [IsAlgClosed k]
     [IsProper X.hom] [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀]
     (hΦ : IsModelFrobenius Φ f₀ p) [IsProper Φ.left] (hm : 1 ≤ m) :
@@ -120,7 +121,7 @@ theorem traceFormulaHolds_frobeniusIterate_of_smoothOfRelativeDimension_one [IsA
 
 set_option linter.overlappingInstances false in
 /-- **The trace formula on a proper smooth curve**, degree one (blueprint
-`sk-thm-tf-coefficient-morphism-formula`, the case of `ℙ¹`). -/
+`theorem-trace-formula-frobenius-correspondence`, the case of `ℙ¹`). -/
 theorem traceFormulaHolds_of_smoothOfRelativeDimension_one [IsAlgClosed k] [IsProper X.hom]
     [SmoothOfRelativeDimension 1 X.hom] [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
     [IsProper Φ.left] : TraceFormulaHolds ℓ Φ := by
@@ -135,8 +136,8 @@ lemma subsingleton_left_of_isClosedImmersion [IsClosedImmersion X.hom] : Subsing
   ⟨fun _ _ ↦ X.hom.isEmbedding.injective (Subsingleton.elim _ _)⟩
 
 set_option linter.overlappingInstances false in
-/-- **The trace formula on a point** (blueprint `sk-thm-tf-coefficient-morphism-formula`, finite
-schemes): if `X ⟶ Spec k` is a closed immersion, so that `X` is empty or a point, the trace
+/-- **The trace formula on a point** (blueprint `theorem-trace-formula-frobenius-correspondence`,
+finite schemes): if `X ⟶ Spec k` is a closed immersion, so that `X` is empty or a point, the trace
 formula in degree one holds for the model Frobenius `Φ`. The Lefschetz–Verdier formula writes the
 trace as the sum of the local terms, and the local term at the point is the trace of the stalk
 map, the open piece being zero

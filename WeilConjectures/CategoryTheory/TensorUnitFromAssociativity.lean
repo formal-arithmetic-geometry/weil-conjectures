@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! # Recovering the unit comparison from associative tensor comparisons
 
-Source: factors proof (2), coefficient-unit identification; inverse-image context: Stacks 07A4.
-(blueprint: lem-sp-associative-tensor-unit-comparison).
+Source: inverse-image context: Stacks 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -146,17 +145,7 @@ private theorem unit_from_tensor
     simpa only [id_tensorHom] using h
 
 /-- An associative tensor comparison and preservation of the unit object determine
-one unit isomorphism satisfying every right-unit equation.
-Source: factors proof (2), coefficient-unit identification; elementary tensor-unit cancellation.
-(blueprint: lem-sp-associative-tensor-unit-comparison).
-
-Proof: tensoring by the image of the unit is fully faithful because that image
-is isomorphic to the target unit. Pull back the composite of the inverse binary
-comparison and the two right unitors to define epsilon. Its right-unit equation
-at the source unit holds by construction. Associativity, naturality and the
-triangle identity give all left-unit equations, then all right-unit equations.
-For uniqueness use the right-unit equation at the unit, cancel its invertible
-comparison and unitor, and apply faithfulness of tensoring by its image. -/
+one unit isomorphism satisfying every right-unit equation. -/
 theorem tensorUnitFromAssociativity
     {C : Type a} [Category.{b} C] [MonoidalCategory C]
     {D : Type c} [Category.{d} D] [MonoidalCategory D]

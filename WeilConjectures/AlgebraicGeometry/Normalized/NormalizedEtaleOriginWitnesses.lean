@@ -15,13 +15,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 /-!
 # Compatible etale origins of normalized finite-coefficient towers
 
-Source: blueprint main-20261015, proper base change,
-prop-weil-pbc-preservation-constructible.proof.md, compatible witness sentence;
-Stacks Project, proetale.tex, Tag 09B1, lemma-compare-derived (2)
-(blueprint: lem-weil-pbc-normalized-etale-origin-witnesses).
-
-The published fixed-ring presentation is used through its canonical coefficient
+The fixed-ring presentation is used through its canonical coefficient
 realization. Index n denotes the positive exponent n+1. No level is omitted.
+
+## References
+
+* Stacks Project, Tag 09B1
 -/
 
 @[expose] public noncomputable section

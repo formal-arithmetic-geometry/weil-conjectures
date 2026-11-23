@@ -9,12 +9,12 @@ public import WeilConjectures.CategoryTheory.SignedKoszulCompletionModel
 /-!
 # Transport of one signed Koszul summand
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
-
 This isolates the scalar-action and equality-transport calculation for one erased
 index. It is strictly smaller than the finite sum differential theorem.
+
+## References
+
+* Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public section
@@ -44,6 +44,37 @@ private theorem tensor_degree_transport
   simp only [eqToHom_refl, Category.comp_id, HomologicalComplex.XIsoOfEq_rfl,
     Iso.refl_hom, Category.id_comp, MonoidalCategory.id_tensorHom]
   rfl
+
+private theorem signed_tensor_degree_transport
+    {E : Type*} [Category* E] [Preadditive E] [HasCountableCoproducts E]
+    [MonoidalCategory E] [MonoidalPreadditive E]
+    {R A : Type*} [CommRing R] [CommRing A] [Linear R E]
+    (ρ : A →+* R) (b : A) (K Q : CochainComplex E ℤ)
+    (p p' n n' t : ℤ) (hp : p = p') (hn : n = n')
+    (h : p + n = t) (h' : p' + n' = t)
+    (s : MonoidalCategory.tensorUnit E ⟶ MonoidalCategory.tensorUnit E)
+    (hs : (MonoidalCategory.rightUnitor (K.X p)).inv ≫
+      (MonoidalCategory.tensorLeft (K.X p)).map s =
+        (ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv)
+    (β : MonoidalCategory.tensorUnit E ⟶ Q.X n') :
+    ((-1 : ℤˣ) ^ p) • (MonoidalCategory.rightUnitor (K.X p)).inv ≫
+        (MonoidalCategory.tensorLeft (K.X p)).map
+          (s ≫ β ≫ eqToHom (congrArg Q.X hn.symm)) ≫
+        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p n t h =
+      ((ρ ((if Even p then 1 else -1) * b)) • (K.XIsoOfEq hp).hom) ≫
+        (MonoidalCategory.rightUnitor (K.X p')).inv ≫
+        MonoidalCategory.tensorHom (𝟙 _) β ≫
+        CochainComplex.ιMapBifunctor K Q (MonoidalCategory.curriedTensor E) p' n' t h' := by
+  have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
+  rw [Functor.map_comp]
+  simp only [Category.assoc]
+  rw [← Category.assoc, hs]
+  simp only [Linear.smul_comp]
+  rw [ht, neg_one_zpow_eq_ite]
+  by_cases he : Even p
+  · simp only [ite_eq_left he, one_smul, one_mul]
+  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
+      neg_one_mul, map_neg, neg_smul, one_smul]
 
 section Scalars
 
@@ -209,7 +240,6 @@ private theorem signed_power_scalar {A : Type z} [CommRing A] (ρ : A →+* S) (
   rw [zsmul_eq_mul]
   simp only [map_mul, map_pow, map_neg, map_one, Int.cast_pow, Int.cast_neg, Int.cast_one]
 
-set_option maxHeartbeats 600000 in
 -- The transport compares the canonical sheaf tensor and Hom scalar instances.
 private theorem signed_scalar_degree_transport
     {A : Type z} [CommRing A]
@@ -242,44 +272,19 @@ private theorem signed_scalar_degree_transport
   let := Classical.choice (SheafOfModules.tensorClosed O).2.1
   let := coefficientLinear O
   intro β
-  have hs := unitor_tensor_scalar O (K.X p) (ρ b)
-  have ht := tensor_degree_transport K Q p p' n n' t hp hn h h' β
-  rw [Functor.map_comp]
-  simp only [Category.assoc]
-  rw [← Category.assoc, hs]
-  change ((-1 : ℤˣ) ^ p) •
-      (((ρ b) • (MonoidalCategory.rightUnitor (K.X p)).inv) ≫ _ ≫ _) = _
-  simp only [Linear.smul_comp]
-  rw [ht]
-  simp only [ringedKoszulCoefficientSMul, Linear.smul_comp]
-  rw [neg_one_zpow_eq_ite]
-  by_cases he : Even p
-  · simp only [ite_eq_left he, one_smul, one_mul]
-  · simp only [ite_eq_right he, Units.smul_def, Units.val_neg, Units.val_one,
-      neg_one_mul, map_neg, neg_smul, one_smul]
+  exact signed_tensor_degree_transport ρ b K Q p p' n n' t hp hn h h'
+    (ringedKoszulScalar O ⟨(ρ b).val, (ρ b).property⟩).asHom
+    (unitor_tensor_scalar O (K.X p) (ρ b)) β
 
 end Scalars
 
 attribute [local irreducible] ringedNegativeKoszul ringedNegativeKoszulBasis
 
 /-- One erased-index term after the ordered basis differential is tensorized.
+This statement is one summand of the finite sum and does not assert the differential
+formula for the full subset.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E.
-
-Proof in words: rewrite the tensor-left map of a composite as the composite of
-its tensor-left maps. On presheaf pure tensors, the signed (m+1)-st power of
-multiplication by a_i acts by rho((-1)^c a_i^(m+1)), where c counts preceding
-selected indices. Tensor balancing moves this scalar onto the coefficient
-module; the equality descends to sheafification. Naturality of the right unitor
-moves the equality
-transport on the coefficient degree across the tensor inclusion. The global
-section scalar action is the recorded `ringedKoszulCoefficientSMul`; its scalar
-is the total-tensor sign times the earlier-index sign and the power of `a i`.
-The two degree equalities identify the equality transports by proof
-irrelevance. This statement is one summand of the finite sum and does not
-assert the differential formula for the full subset.
-(auxiliary; not a blueprint node).
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulSummand_D₂_term
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) {A : Type z} [CommRing A]

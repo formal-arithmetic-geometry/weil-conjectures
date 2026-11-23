@@ -64,9 +64,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Finite free scalar extension and strict quotient completion
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941;
-the finite-free and arithmetic comparison extracted in the DAG proof.
-(blueprint: lem-pur-finite-free-completion-exchange).
+Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941.
 
 The comparison is specified on K-flat representatives by its two product coordinates.
 No basis occurs in its specification.
@@ -87,8 +85,7 @@ attribute [local irreducible] quotientTower roosF SheafOfModules.monoidalCategor
 
 /-- The two coordinates of scalar extension of the actual Roos cone, formed from
 its product comparison. This uses only the given functor and canonical cone projections.
-Source: Stacks 0941, additive cone comparison in DAG proof step 4
-(blueprint: lem-pur-finite-free-completion-exchange). -/
+Source: Stacks 0941. -/
 noncomputable def scalarRoosCoordinates
     {A : Type a} [Category.{va} A] [Abelian A] [HasCountableProducts A]
     {B : Type b} [Category.{vb} B] [Abelian B] [HasCountableProducts B]
@@ -169,12 +166,12 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (ringedSiteModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J S))]
 
 /-- Termwise application of the recorded ordinary scalar extension.
-Source: Stacks 06YT (blueprint: lem-pur-finite-free-completion-exchange). -/
+Source: Stacks 06YT. -/
 noncomputable abbrev extendedComplex (F : SheafOfModules.DerivedChangeOfRingsCochainModel φ) :=
   F.E.mapHomologicalComplex (.up ℤ)
 
 /-- The source quotient tower of a representative.
-Source: Stacks 0941 (blueprint: lem-pur-finite-free-completion-exchange). -/
+Source: Stacks 0941. -/
 noncomputable abbrev sourceTower
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)
@@ -183,7 +180,7 @@ noncomputable abbrev sourceTower
   (quotientTower R t).obj P
 
 /-- The target quotient tower, before arithmetic restriction.
-Source: Stacks 0941 (blueprint: lem-pur-finite-free-completion-exchange). -/
+Source: Stacks 0941. -/
 noncomputable abbrev targetTower (F : SheafOfModules.DerivedChangeOfRingsCochainModel φ)
     (vS : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J S)).sections)
@@ -193,8 +190,7 @@ noncomputable abbrev targetTower (F : SheafOfModules.DerivedChangeOfRingsCochain
 
 /-- The actual Roos comparison data for scalar extension and arithmetic restriction.
 Product projections and the two signed cone coordinates specify all maps without a basis.
-Source: Stacks 0941 and 0H9K, DAG proof steps 3--6
-(blueprint: lem-pur-finite-free-completion-exchange). -/
+Source: Stacks 0941 and 0H9K. -/
 structure RepresentativeRoosComparison
     {A : Type a} [Category.{va} A] [Abelian A] [HasCountableProducts A]
     {B : Type b} [Category.{vb} B] [Abelian B] [HasCountableProducts B]
@@ -231,8 +227,7 @@ structure RepresentativeRoosComparison
 The quotient maps are degreewise epimorphisms, so their equation pins the balanced
 finite-stage formula. The final equation specifies inverse arithmetic restriction
 following the canonical tensor/product comparison, using the fixed cochain counits.
-Source: Stacks 06YT, 0941 and 0H9K, DAG proof steps 3--6
-(blueprint: lem-pur-finite-free-completion-exchange). -/
+Source: Stacks 06YT, 0941 and 0H9K. -/
 def RepresentativeComparison
     (F : SheafOfModules.DerivedChangeOfRingsCochainModel φ)
     (t : (SheafOfModules.unit

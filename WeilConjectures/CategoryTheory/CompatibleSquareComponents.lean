@@ -8,9 +8,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Compatible compositor squares
 
-Source: Stacks Categories Tag 0B65; the elementary pasting calculation in the
-internal/sectionwise module operation transport proof, Step 6.
-(auxiliary; not a blueprint node)
+Source: Stacks Categories Tag 0B65.
 
 Store both prescribed square isomorphisms and their component compatibility together.
 -/
@@ -85,11 +83,8 @@ private theorem comparison_eq
 
 /-- Pasting the two compositor comparisons and the comparison induced by an equality
 of indices gives the comparison around the whole square.
-Source: Stacks Categories Tag 0B65; node Step 6, elementary pasting calculation.
-Proof: substitute the equality of indices for the middle comparison. Cancel the right
-compositor in the second comparison and concatenate the three equalities, using
-functoriality and associativity of composition.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Categories Tag 0B65.
+-/
 theorem square_pasting
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
@@ -112,8 +107,8 @@ theorem square_pasting
     ab (eqToIso (congrArg G w)) kb M _ _ _ _ _ _ hl he hr'
 
 /-- The two composition-square isomorphisms and their component transport equation.
-Source: Stacks Categories Tag 0B65; pasting the comparison squares in node Step 6.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Categories Tag 0B65.
+-/
 structure CompatibleSquareComponents
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]
@@ -127,10 +122,9 @@ structure CompatibleSquareComponents
     H.map (internal.hom.app M) ≫ cr M ≫ dr M
 
 /-- Construct compatible component squares by pasting the normalized comparisons.
-Source: Stacks Categories Tag 0B65; the data are the given two compositors and the
-isomorphism induced by the equality of composite scheme maps. Pasting the two
+Source: Stacks Categories Tag 0B65. Pasting the two
 comparison equations and their inverses proves the compatibility field.
-(auxiliary; not a blueprint node) -/
+-/
 noncomputable def compatibleSquareComponents
     {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
     {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]

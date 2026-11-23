@@ -18,8 +18,9 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Directed colimits of sheaves of commutative algebras
 
-Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089;
-Modules, Lemma 01AH (blueprint: lem-weil-pbc-sheaf-algebras-directed-colimit).
+## References
+
+* Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089.
 -/
 
 @[expose] public section
@@ -34,29 +35,8 @@ namespace CategoryTheory
 and the underlying module colimit. The structure morphism of the presheaf colimit is
 independent of the stage, and its composite with sheafification is the structure morphism
 of the resulting algebra. The legs are exactly the sheafified presheaf coprojections.
-Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089;
-Modules, Lemma 01AH (blueprint: lem-weil-pbc-sheaf-algebras-directed-colimit).
 
-1. On each open U, take the colimit of O(U)-algebras. By
-   lem-weil-pbc-commutative-algebras-colimits-exist and
-   lem-weil-pbc-filtered-colimit-algebras-elementwise it is also the ring colimit.
-   Its structure map equals every coprojection composed with the stage structure map.
-   The universal property induces restriction maps; uniqueness proves functoriality
-   and compatibility of the structure map with restriction.
-2. Each section is represented at a stage, and two representatives agree at a later
-   stage. These facts give the module colimit sectionwise, hence in presheaves of modules
-   by lem-weil-pbc-presheaf-modules-colimits-sectionwise.
-3. Sheafify the ring presheaf, using lem-weil-pbc-ring-sheafification-space-underlying-abelian.
-   Compose the structure map and coprojections with the sheafification unit. They are
-   algebra maps and satisfy the cocone identities.
-4. A compatible family of algebra maps gives a unique presheaf ring map from the
-   sectionwise colimit. Sheafification factors this uniquely through the sheafified ring;
-   the resulting map commutes with the structure maps, proving the algebra universal property.
-5. By lem-weil-pbc-left-adjoint-preserves-colimits, module sheafification takes the
-   presheaf module colimit to a module sheaf colimit. The ring and module sheafifications
-   have the same underlying abelian sheafification. Its comparison is an O-linear bijection,
-   hence a module isomorphism, respecting the coprojections. Transport the module colimit
-   along it. -/
+Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089. -/
 theorem sheafAlgebras_directed_colimit
     (X : Type u) [TopologicalSpace X]
     (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})

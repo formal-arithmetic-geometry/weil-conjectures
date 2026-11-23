@@ -12,7 +12,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.ClopenTransfer
 
 /-! # Restriction of the canonical exceptional base-change mate
 
-Source: blueprint `prop-asd-smooth-base-change`, coherences (i) and (iii).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherences (i) and
+(iii).
 -/
 
 @[expose] public section
@@ -27,7 +28,8 @@ attribute [local irreducible] openRestrictionGraphIso openRestrictionCompactSupp
 set_option maxRecDepth 100000
 
 /-- Restriction to an open of the original base preserves the canonical base-change square.
-Source: blueprint `prop-asd-smooth-base-change`, proof, coherences (i) and (iii).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, proof, coherences (i)
+and (iii).
 
 Proof: write D(T) for the ordinary unbounded etale derived category, L for exact
 inverse image, F for compact support, and R for its right adjoint. Restrict the chosen

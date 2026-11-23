@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 /-! # Scalar actions on the constructed abelian inverse image
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public section
 universe u
@@ -27,9 +26,7 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   (M : SheafOfModules.{u} A)
 /-- An action on the actual abelian inverse image, with semilinear restrictions and unit.
 The carrier, additive operations and unit map are fixed, rather than chosen.
-Source: Stacks Project, Tags 03D2 and 03D3, lemma-pullback-module and
-lemma-adjoint-push-pull-modules.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03D2 and 03D3 and. -/
 structure InverseImageAction where
   module : ∀ U : Dᵒᵖ, Module (B.obj.obj U)
     (((sheafPullback F AddCommGrpCat.{u} J K).obj ((toSheaf A).obj M)).obj.obj U)
@@ -50,16 +47,14 @@ structure InverseImageAction where
             ((sheafAdjunctionContinuous F AddCommGrpCat.{u} J K).unit.app
               ((toSheaf A).obj M)).hom.app U m)
 /-- Regard an action with semilinear restrictions as a sheaf of modules.
-Source: Stacks Project, Tag 03D2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03D2. -/
 noncomputable def InverseImageAction.toModule (a : InverseImageAction φ M) :
     SheafOfModules.{u} B := by
   let T := (sheafPullback F AddCommGrpCat.{u} J K).obj ((toSheaf A).obj M)
   letI (U : Dᵒᵖ) : Module (B.obj.obj U) (T.obj.obj U) := a.module U
   exact ⟨PresheafOfModules.ofPresheaf T.obj (fun {_ _} i r m ↦ a.restriction i r m), T.property⟩
 /-- The abelian carrier of the action construction is unchanged.
-Source: Stacks Project, Tag 03D2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03D2. -/
 noncomputable def InverseImageAction.underlyingIso (a : InverseImageAction φ M) :
     (toSheaf B).obj a.toModule ≅
       (sheafPullback F AddCommGrpCat.{u} J K).obj ((toSheaf A).obj M) := Iso.refl _

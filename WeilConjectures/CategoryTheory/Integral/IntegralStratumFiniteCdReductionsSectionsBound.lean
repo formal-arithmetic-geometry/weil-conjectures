@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortEx
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-! Bounded-heart devissage for the continuous integral coefficient.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 -/
 
 @[expose] public noncomputable section
@@ -30,26 +29,12 @@ attribute [local instance 20000] HasDerivedCategory.ofIsGrothendieckAbelian
 namespace CategoryTheory
 
 /-- Bounded-heart section bound for an arbitrary bounded classical local-torsion complex.
-Source: blueprint latest, `part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the dual-tensor and filtration steps; Stacks Tag 08J5. The proof applies
-bounded-heart amplitude to the heart bound and the triangulated derived sections functor.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
+Source: Stacks Tag 08J5.
 
 The hypothesis `hD` pins `D` to `stratumModuleDual _ S L = RHom(L[0], A[0])`.  Since
 `L` has a finite constant local model, `L[0]` is dualizable (local length-one free
 resolutions and pro-étale descent), so `RHom(L[0], -) ≅ D ⊗ -`; this identifies the
-conclusion with degree-`r` cohomology of `RΓ(D ⊗ K)`.
-
-Proof plan: regard derived tensor by `D` and derived sections as triangulated
-functors, using a K-flat representative for the former.  Apply
-`DerivedCategory.bounded_heart_amplitude` to the truncation triangles of `K`;
-the supplied `hheart` is the heart case, while `hK` and `hab` give the lower and
-upper truncation bounds.  The resulting sections object has no homology above
-`b+s+1`.  Since `hr` is larger than this bound, commute the shift by `r` through
-the triangulated functors and evaluate at degree zero, yielding the displayed
-zero object for the internal Hom from `L[0]`.
--/
+conclusion with degree-`r` cohomology of `RΓ(D ⊗ K)`. -/
 theorem integralStratumFiniteCdReductions_sections_bound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

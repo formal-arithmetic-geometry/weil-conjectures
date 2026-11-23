@@ -25,7 +25,7 @@ This is deduced from the étale finiteness theorems through the comparison
 
 - `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerShriek` and
   `AlgebraicGeometry.ProEtale.constructibleIn_rightDerivedLowerShriek`
-  (`prop-finite-compact-support-constructibility`).
+  (`theorem-results-from-etale-theory--3`).
 -/
 
 @[expose] public section
@@ -64,7 +64,7 @@ lemma exists_rightDerivedLowerShriek_obj_iso {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact ⟨K', hK', ⟨e⟩, ⟨(ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).mapIso
     e.symm ≪≫ (rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} Λ) f).app L⟩⟩
 
-/-- Blueprint `prop-finite-compact-support-constructibility`: Finite-level bounded
+/-- Blueprint `theorem-results-from-etale-theory--3`: Finite-level bounded
 constructibility for proper support (bounded constructibility).
 
 Let `f : X ⟶ Y` be a separated finite-type morphism (here: one admitting a compactification)
@@ -90,7 +90,7 @@ theorem boundedConstructible_rightDerivedLowerShriek [HasInvertibleExponent Λ (
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedLowerShriek Λ f aX aY hf K' hK'))
 
-/-- Blueprint `prop-finite-compact-support-constructibility`: Finite-level bounded
+/-- Blueprint `theorem-results-from-etale-theory--3`: Finite-level bounded
 constructibility for proper support (amplitude).
 
 In the situation of `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerShriek`,
@@ -101,7 +101,7 @@ image sends `D_c^{[a, b]}(X, Λ)` into `D_c^{[a, b + 2e]}(Y, Λ)`; the bounds on
 The lower bound holds because `Rf_! = Rg_* ∘ Di_!` with `i_!` exact and `Rg_*` left t-exact; the
 upper bound is the dévissage `AlgebraicGeometry.Etale.isLE_rightDerivedLowerShriek_obj` of the
 sheaf case `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor`
-(`sbc-thm-finiteness-finite-type`) on the étale site, transported along the comparison. -/
+(`theorem-results-from-etale-theory`) on the étale site, transported along the comparison. -/
 theorem constructibleIn_rightDerivedLowerShriek [HasInvertibleExponent Λ (Spec (.of k))]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]

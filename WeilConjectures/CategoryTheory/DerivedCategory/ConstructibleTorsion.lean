@@ -15,14 +15,9 @@ public import WeilConjectures.ConstructibleSheaf.RestrictScalars
 Let `Λ` be a noetherian ring and `J` an ideal of `Λ` with `Λ ⧸ J` finite. In a distinguished
 triangle `K ⟶ L ⟶ M ⟶ K⟦1⟧` of `D(X_ét, Λ)` with `K` and `M` bounded constructible and `L`
 killed by `J`, the middle vertex `L` is bounded constructible
-(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`): each
-homology sheaf of `L` is killed by `J` and is an extension of a kernel by a cokernel of maps
-between constructible sheaves, so it is constructible by
-`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact_of_smul_eq_zero`.
-
-This replaces the closure of constructible sheaves under extensions, which is only available
-over a finite coefficient ring, for the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` at the integral stage
-`Λ = 𝒪_E` of the `ℓ`-adic formalism.
+(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`). This is
+used for the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` at the integral stage `Λ = 𝒪_E`, where constructible
+sheaves are not closed under extensions.
 -/
 
 @[expose] public section

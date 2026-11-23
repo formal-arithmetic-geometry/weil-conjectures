@@ -18,10 +18,7 @@ import WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom
 /-!
 # Coefficient-isomorphism invariance of Brown hypotheses
 
-Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
-and the coefficient identifications in sk-lem-brown-hypotheses-generation.proof.md.
-The proof uses an equivalence of localizing categories and the compact-object
-adjunction theorem, independently of the geometric finite-field compactness inputs.
+This is independent of the geometric finite-field compactness inputs.
 -/
 
 @[expose] public section
@@ -53,7 +50,7 @@ private theorem localizingClosure_map_of_preservesColimits
     [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
     (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated]
-    [PreservesColimitsOfSize.{v, v} F]
+    [PreservesColimitsOfSize.{w, w} F]
     (S : ObjectProperty C) (T : ObjectProperty D) (hST : S ≤ T.inverseImage F) :
     localizingClosure S ≤ (localizingClosure T).inverseImage F := by
   intro M hM P hP hTP
@@ -168,21 +165,7 @@ private theorem brownHypothesesFor_of_coefficientIso
 
 open scoped CategoryTheory.Obj in
 /-- Brown's bundle is invariant under isomorphisms of commutative condensed rings.
-No admissibility, Noetherian, finite-type, or field hypothesis is required.
-
-Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
-and sk-lem-brown-hypotheses-generation.proof.md, coefficient identifications.
-(blueprint: lem-sfb-brown-coefficient-iso-invariance).
-
-Proof: scalar restriction along the inverse ring isomorphism is an exact monoidal
-equivalence. Its derived functor preserves and reflects constructibility, boundedness,
-and finite Tor amplitude. Consequently Dctf is the inverse image of Dctf for the other
-coefficient. Triangulation and closure under retracts pull back along this functor;
-the induced equivalence of full subcategories transports essential smallness.
-Compactness transports across the induced equivalence of localizing full subcategories
-by the compact-object adjunction theorem. The objectwise Brown
-criterion supplies generation and the other structural clauses. Repeat with the inverse
-ring isomorphism for the converse. No arbitrary-field compactness assertion is used. -/
+No admissibility, Noetherian, finite-type, or field hypothesis is required. -/
 theorem brownHypothesesFor_coefficientIso_iff
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [MonObj Λ'] [IsCommMonObj Λ] [IsCommMonObj Λ']

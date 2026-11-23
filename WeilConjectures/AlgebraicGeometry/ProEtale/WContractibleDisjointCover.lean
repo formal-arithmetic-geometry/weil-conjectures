@@ -75,8 +75,7 @@ lemma isDisjointCover_of_comp_sigmaDesc_eq_id {W : T.ProEt} {κ : Type u}
 
 /-- An object of the small pro-étale site whose underlying scheme is the spectrum of a
 w-contractible ring has finite disjoint refinements: every covering sieve contains the members
-of a finite cover by pairwise disjoint open immersions (the proof of
-`AlgebraicGeometry.Scheme.ProEt.isWeaklyContractible_of_iso`). -/
+of a finite cover by pairwise disjoint open immersions. -/
 theorem hasFiniteDisjointRefinements_of_iso {W : T.ProEt} {R : CommRingCat.{u}}
     [IsWContractibleRing R] (e : W.left ≅ Spec R) :
     (topology T).HasFiniteDisjointRefinements W := by

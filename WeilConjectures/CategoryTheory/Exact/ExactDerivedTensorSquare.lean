@@ -39,7 +39,6 @@ variable {E H : Type*} [Category E] [Category H]
     @δ _ _ _ _ _ _ F n.toOplaxMonoidal X Y)
 include hd in
 /-- The invertible tensor comparison determines the monoidal structure, including its unit.
-Source: the monoidal unit axioms and uniqueness of inverses.
 -/
 private theorem monoidal_eq_of_delta : m = n := by
   letI := m

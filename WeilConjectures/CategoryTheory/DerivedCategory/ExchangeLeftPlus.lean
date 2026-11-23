@@ -17,10 +17,6 @@ morphism of the bounded below levelwise derived adjunctions `D⁺(jS) ⊣ D⁺(j
 restricts the one induced by `θ` on unbounded derived categories
 (`CategoryTheory.Adjunction.isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction`).
 
-The proof embeds everything into the unbounded derived categories along the fully faithful
-inclusions `DerivedCategory.Plus.ι`, where the statement is
-`CategoryTheory.Adjunction.exchangeLeft_mapDerivedCategoryAdjunction`.
-
 The variant
 `CategoryTheory.Adjunction.isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction_of_eqToIso` covers
 square isomorphisms passing through a diagonal, as the pullback comparisons of squares of

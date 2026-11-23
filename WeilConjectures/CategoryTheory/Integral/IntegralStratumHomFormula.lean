@@ -48,10 +48,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratificatio
 /-!
 # Integral stratum filtrations and the global derived Hom formula
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-ext,
-sk-lem-int-ext-formula.md and its proof, clauses (1)--(2)
-(blueprint: det-lem-int-ext-formula).
-
 The coefficients, constructibility, ordinary relative derived tensor and internal Hom
 are the recorded constructions. Global sections are Hom from the regular module,
 as in the ringed-site hypercohomology definition, here in the module-object encoding.
@@ -318,26 +314,20 @@ private theorem dualConsequences
     (fun n : ℕ ↦ DerivedCategory.Q.obj (B.obj (op n)))
     (fun n ↦ DerivedCategory.Q.map (B.map (homOfLE (Nat.le_succ n)).op)) A p δ h
 
-/-- Derived global sections for modules over a condensed coefficient ring.
-Source: blueprint det-lem-int-ext-formula, global-sections convention
-(blueprint: det-lem-int-ext-formula). -/
+/-- Derived global sections for modules over a condensed coefficient ring. -/
 abbrev stratumModuleDerivedSections
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] (X : Scheme.{u}) :=
   (preadditiveCoyoneda.obj (op (Mod.regular (condensedRingObj Λ X))) :
     supportModules Λ X ⥤ Ab.{u + 1}).rightDerivedFunctor
 
-/-- The uncompleted derived dual, with the coefficient ring kept abstract.
-Source: blueprint det-lem-int-ext-formula, clause (2)
-(blueprint: det-lem-int-ext-formula). -/
+/-- The uncompleted derived dual, with the coefficient ring kept abstract. -/
 def stratumModuleDual
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u}) (L : supportModules Λ S) :=
   ((derivedHom Λ S).obj (op ((DerivedCategory.singleFunctor _ 0).obj L))).obj
     (𝟙_ (DerivedCategory (supportModules Λ S)))
 
-/-- Tensor by the uncompleted derived dual over an abstract coefficient ring.
-Source: blueprint det-lem-int-ext-formula, clause (2)
-(blueprint: det-lem-int-ext-formula). -/
+/-- Tensor by the uncompleted derived dual over an abstract coefficient ring. -/
 def stratumModuleDualTensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u}) (L : supportModules Λ S) :=
@@ -347,15 +337,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Full derived sections, computed by the canonical K-injective replacement, before
-applying any homology functor. Source: blueprint det-lem-int-ext-formula, opening convention;
-Stacks Project, Section 07A5 (blueprint: det-lem-int-ext-formula). -/
+applying any homology functor. Source: Stacks Project, Section 07A5. -/
 def integralStratumDerivedSections (X : Scheme.{u}) :
     integralDerived l E X ⥤ DerivedCategory Ab.{u + 1} :=
   stratumModuleDerivedSections (integralCoefficientRing l E) X
 
-/-- Tensoring by the recorded derived dual, using the existing uncompleted relative tensor.
-Source: blueprint det-lem-int-ext-formula, clause (2)
-(blueprint: det-lem-int-ext-formula). -/
+/-- Tensoring by the recorded derived dual, using the existing uncompleted relative tensor. -/
 def integralStratumDualTensor (S : Scheme.{u})
     (L : pulledBackModuleObjects (integralCoefficientRing l E) S) :
     integralDerived l E S ⥤ integralDerived l E S :=

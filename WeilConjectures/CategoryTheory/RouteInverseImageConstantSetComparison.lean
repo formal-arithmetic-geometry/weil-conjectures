@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The canonical set-sheaf comparison for a left exact inverse-image.
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV. -/
 theorem canonicalConstantSetComparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)
@@ -51,8 +50,7 @@ theorem canonicalConstantSetComparison
   exact ⟨kappaType⟩
 
 /-- Conjugate a comparison natural in all sets by the constant-sheaf/forget
-comparison. Source: Stacks, Sites, Tag 00YV
-(auxiliary; not a blueprint node). -/
+comparison. Source: Stacks, Sites, Tag 00YV. -/
 noncomputable def constantRingSetComparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)
@@ -150,8 +148,7 @@ private theorem constantMap_unit
     (toSheafify_naturality J ((Functor.const Cᵒᵖ).map (TypeCat.ofHom f)))).symm
 
 /-- The canonical comparison fixes sheafified constant sections.
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV. -/
 theorem canonicalConstantSectionComparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)

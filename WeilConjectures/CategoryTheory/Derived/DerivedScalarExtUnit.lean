@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ExactFunctorDerivedUnit
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! # Derived units represented by Ext classes
-(blueprint: def-sp-derived-scalar-ext-unit).
+/-! # Derived units represented by Ext classes.
 -/
 
 @[expose] public noncomputable section
@@ -21,15 +20,11 @@ universe uC uB vC vB wC wB wE
 open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
-/-- Let U:A→B be exact additive between abelian categories with unbounded derived categories and Ext
-[def-weil-abstract-derived-category]. For F in B, H in A, n≥0 and e∈Ext^n(F,UH), define
-DerivedExtUnit to mean that e, the inverse single comparison and the inverse commutation with shift
-induce bijections Hom((single H)[n],K)→Hom(single F,DU(K)) for every unbounded complex K.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: def-sp-derived-scalar-ext-unit).
-Proof: The three comparisons have composable endpoints. This is the ordinary derived adjunction
-universal property, expressed at a degree-n Ext representative and with the existing positive shift
-convention. -/
+/-- Let U:A→B be exact additive between abelian categories with unbounded derived categories and
+Ext. For F in B, H in A, n≥0 and e∈Ext^n(F,UH), `DerivedExtUnit` states that e, the inverse single
+comparison and the inverse commutation with shift induce bijections
+Hom((single H)[n],K)→Hom(single F,DU(K)) for every unbounded complex K.
+Stacks Project, Tags 0152, 06YY and 0GLZ. -/
 def DerivedExtUnit
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
     {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] [HasExt.{wE} B]

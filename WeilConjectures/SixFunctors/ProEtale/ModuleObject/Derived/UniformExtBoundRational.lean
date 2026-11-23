@@ -15,7 +15,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Preadditive
 /-!
 # Helpers for the uniform `Ext` bound for constructible `E`-sheaves, from `𝒪_E`
 
-Blueprint `det-uniform-constructible-ext-rational`, coefficients `E`. Let `E ⊆ ℚ̄_ℓ` be a finite
+Blueprint `lemma-uniform-ext-bound`, coefficients `E`. Let `E ⊆ ℚ̄_ℓ` be a finite
 subextension of `ℚ_ℓ` and `X` a scheme. This file computes `Ext` between extensions of scalars
 `E ⊗_{𝒪_E} M₀` of `𝒪_{E,X}`-modules: by adjunction
 `Ext^q_E(E ⊗ M₀, E ⊗ B₀) = Ext^q_{𝒪_E}(M₀, E ⊗ B₀)`, and `E ⊗ B₀` is the filtered colimit of
@@ -52,12 +52,6 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C] [Monoida
   [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight X)] [BraidedCategory C]
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] {φ : R ⟶ S} [IsMonHom φ] {n : ℕ}
   {c : ℕ → (R ⟶ S)}
-
-omit [Preadditive C] [MonoidalPreadditive C] in
-/-- The cocone map `e_0 : M ⟶ S ⊗_R M` is the unit of extension of scalars when `c_0 = φ`. -/
-lemma extendScalarsCoconeι_zero (h0 : c 0 = φ) (M : Mod C R) :
-    extendScalarsCoconeι φ c M 0 = extendUnitHom φ M := by
-  rw [extendScalarsCoconeι, extendUnitHom, h0, IsMonHom.one_hom]
 
 /-- If `c_0 = φ` and multiplication by `n` on `S ⊗_R M` is a monomorphism, the cocone maps
 `e_k : M ⟶ S ⊗_R M` are `R`-linear: `n^k e_k = e_0` is the unit of extension of scalars. -/

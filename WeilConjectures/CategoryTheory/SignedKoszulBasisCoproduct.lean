@@ -10,8 +10,10 @@ public import WeilConjectures.CategoryTheory.SignedKoszulCompletionModel
 # Degreewise basis coproduct for the negative Koszul tensor
 
 This isolates the finite graded basis calculation from the coefficient-complex tensor.
-Source: Stacks Project, algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public section
@@ -95,13 +97,7 @@ private theorem basis_one_iso
 
 /-- The one-factor negative Koszul basis has the degreewise coproduct property.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul,
-one two-term factor.  Proof: split on the integer degree.  In degrees `-1` and `0`
-the corresponding factor basis map is an isomorphism from the tensor unit, and in every
-other degree the factor is zero and the indexing subtype is empty.  The coproduct
-universal property is therefore the isomorphism case or the zero-object case.
-(auxiliary; not a blueprint node).
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem isColimit_ringedNegativeKoszulBasis_base
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})
@@ -186,16 +182,7 @@ private theorem extendSubset_recover (k : ℕ) (I : Finset (Fin (k + 1))) :
 
 /-- The successor step for the recursive negative Koszul basis coproduct.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul,
-finite free tensor calculation.  Proof: tensor the tail coproducts supplied by `h`
-with the two degree-supported basis maps of the head factor.  The finite coproduct
-preservation of tensor identifies the resulting legs with the recursive maps
-`ringedNegativeKoszulBasis`; reindexing by adjoining zero or applying `Fin.succ`
-identifies the resulting pair of indices with subsets of `Fin (r+2)` having the
-specified cardinality.  The corresponding coproduct transport is the displayed
-cofan.
-(auxiliary; not a blueprint node).
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem isColimit_ringedNegativeKoszulBasis_step
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)
@@ -351,12 +338,7 @@ theorem isColimit_ringedNegativeKoszulBasis_step
 /-- The recursive negative Koszul basis is a degreewise coproduct.  The source of a
 subset is the tensor unit in its supported degree and the zero object otherwise.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite free negative Koszul
-calculation.  Proof: induction on the ordered tensor length, using the one-factor base
-case and the successor tensor step above.  This proves the universal property degree by
-degree, including length one, zero rings, and empty sites.
-(auxiliary; not a blueprint node).
--/
+Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem isColimit_ringedNegativeKoszulBasis_succ
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)

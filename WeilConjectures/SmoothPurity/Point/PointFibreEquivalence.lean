@@ -18,9 +18,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFiniteCo
 public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFgCompleteComplexes
 public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdComplexes
 public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdQbarCategory
-import WeilConjectures.SmoothPurity.Point.PointQbarFibreShiftDescent
-import WeilConjectures.SmoothPurity.Point.PointRationalSectionsHom
-import WeilConjectures.SmoothPurity.Point.PointRationalSectionsLattice
 import WeilConjectures.SmoothPurity.Finite.FiniteCoefficientPoint
 import Mathlib.RingTheory.Localization.BaseChange
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
@@ -43,7 +40,7 @@ set_option linter.privateModule false
 /-!
 # Exact equivalences given by the four geometric-point fibre functors
 
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509;
+Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509;
 main-20261015, sec-six-functors-basics/sk-def-sf-admissible, order 1868
 (blueprint: lem-weil-point-fibre-equivalence).
 
@@ -83,7 +80,7 @@ variable (k B : Type u) [Field k] [IsAlgClosed k] [CommRing B] [Finite B]
 
 end FiniteReconstruction
 
-attribute [local irreducible] pointStageFibre pointStageFibreScalarIso pointQbarFibre
+attribute [local irreducible] pointStageFibre pointStageFibreScalarIso
   Functor.mapDerivedCategory DerivedCategory.pointFdQbarStageComp
 
 end WeilConjectures

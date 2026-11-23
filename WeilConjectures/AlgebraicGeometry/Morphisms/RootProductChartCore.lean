@@ -13,7 +13,12 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootFactorStalkLocalization
 
-/-! Local algebra presentation at a point of a root product chart. -/
+/-! Local algebra presentation at a point of a root product chart.
+
+## References
+
+* Stacks Project, Tags 0EYH and 0EYI, affine root charts and pointed neighborhoods
+-/
 
 @[expose] public section
 
@@ -29,26 +34,7 @@ private theorem stalkMap_comp_hom {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ 
 -- Dependent stalk types across the chart isomorphism require extra elaboration steps.
 set_option backward.isDefEq.respectTransparency false in
 /-- A root product chart, localized at a specified point, is the localization of one
-root factor over the base stalk, compatibly with the structural ring map.
-
-Source: Stacks Project, Tags 0EYH and 0EYI, affine root charts and pointed neighborhoods.
-(blueprint: lem-sbc-root-product-chart-stalk-localization-core)
-
-Proof: Transport z by alpha to a prime of the finite product. A prime of a finite
-product comes from exactly one factor k, so localization of the product at this
-prime is the localization of that factor. The empty product has empty spectrum,
-so cannot contain the transported point. Localize the base R at the contraction
-y = q(z), and put f0 equal to the image of f. The hypothesis f in y ensures f0
-is in the maximal ideal of this base localization. The spectrum stalk identifies
-this localization with O_(Spec R,y). Base change for the polynomial quotient
-identifies the selected factor after base localization with the concrete AdjoinRoot
-quotient over that stalk. Its prime P contracts to the maximal ideal of the base.
-The polynomial is monic because its exponent is positive, hence its quotient is
-finite integral over the base, and P is maximal. Transitivity of localization
-identifies the factor stalk with D_P. Compose these identifications with alpha's
-stalk isomorphism to obtain theta. All identifications respect the structural
-ring maps; the hypothesis on alpha gives the final compatibility equality.
-No flatness, etaleness of q, or maximal-ideal extension identity is asserted. -/
+root factor over the base stalk, compatibly with the structural ring map. -/
 theorem rootProductChart_stalk_localization_core {Z : Scheme.{u}}
     (R : CommRingCat.{u}) (q : Z ⟶ Spec R) (z : Z)
     (f : R) (hf : f ∈ (q z).asIdeal)

@@ -38,7 +38,7 @@ variable {J : Type u} [SmallCategory J] [IsFiltered J] {F : J ⥤ CommRingCat.{u
 rings and `p` is a prime of `R` such that the localizations `(R_i)_{p_i}` at all contracted
 primes `p_i = ι_i⁻¹(p)` are domains, then `R_p` is a domain.
 
-(blueprint: `lem-weil-pbc-filtered-colimit-normal-ring-domain`) -/
+(blueprint: `proposition-proper-direct-image-constructible-complexes`) -/
 theorem isDomain_localization_of_isColimit (hc : IsColimit c)
     (h : ∀ j, IsDomain (Localization.AtPrime (p.comap (c.ι.app j).hom))) :
     IsDomain (Localization.AtPrime p) :=

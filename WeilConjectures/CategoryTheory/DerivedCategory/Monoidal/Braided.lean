@@ -44,7 +44,7 @@ The construction follows the chain
    its inverse; the two are mutually inverse by binary left derived uniqueness
    (`Functor.leftDerived₂_ext`).
 
-## Implementation notes
+## Implementation details
 
 No braided structure is declared here. For a general complex shape `c`, the sign of
 `TotalComplexShapeSymmetry c c c` is only determined up to a global sign, and replacing `σ` by

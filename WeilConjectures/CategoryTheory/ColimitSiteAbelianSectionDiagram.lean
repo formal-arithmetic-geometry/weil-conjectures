@@ -118,24 +118,13 @@ private theorem sheaf_triangle_id
     exact ha X
   simpa [b] using congrArg (fun z ↦ Arrow.mk (z.hom.app (op Y))) eq
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the compatible stage maps in the
-adjunction paragraph (expanded using uniqueness of adjuncts).
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-diagram).
+/-- Maps `α` from the inverse images of `G` at the later stages to the restrictions of its
+inverse image on the colimit site, and transition maps `θ` between later stages, all compatible
+with the adjunction units, assemble the sections over the images of `U` into a diagram `D` over
+`Under i` with a cocone `K` whose point is the section group of the colimit inverse image.
 
-Proof: Evaluate the inverse image along t.hom at its image of U. For b : t ⟶ t',
-map sections by θ b and transport the target along F.map_comp and Under.w b.
-Choose these evaluations as D's objects and the identity component isomorphisms E.
-The unit equations determine each θ uniquely: transpose back through the stage
-adjunction and use equality of all presheaf components. This proves identity and
-composition, so D is a functor. Use the evaluation of the limit inverse image as
-K.pt and the components of α as K's legs, transported along cocone naturality.
-Transposing θ b followed by the restriction of α t' shows that it equals α t:
-both transpose to the limit unit. Evaluating gives K's naturality. Take e to be
-the identity. The asserted arrow equalities are the definitions of the legs and
-transition maps, with endpoint transports recorded. This argument uses neither
-filteredness nor a colimit hypothesis. Empty source categories have no U and
-empty indexing categories have no i; no group is chosen from mere existence.
--/
+Source: Stacks Project, Sites, Tag 0A35, the compatible stage maps in the adjunction paragraph
+(expanded using uniqueness of adjuncts). -/
 theorem colimit_site_abelian_section_diagram
     (J : Type u) [SmallCategory J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

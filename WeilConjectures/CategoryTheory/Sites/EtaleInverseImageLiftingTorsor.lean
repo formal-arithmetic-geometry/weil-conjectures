@@ -13,8 +13,10 @@ import WeilConjectures.CategoryTheory.Sites.EtaleInverseImageLiftsFibre
 
 /-! # Inverse image of a lifting torsor
 
-Source: Stacks Project, Tag 03AJ, lifting-torsor construction and its inverse-image
-compatibility (blueprint: lem-sc-etale-inverse-image-lifting-torsor).
+## References
+
+* Stacks Project, Tag 03AJ, lifting-torsor construction and its inverse-image
+  compatibility.
 -/
 
 @[expose] public section
@@ -26,19 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory.Sheaf.Torsor
 
 /-- Inverse image preserves the fibre torsor of a short exact sequence over a section.
-Source: Stacks Project, Tag 03AJ, construction of the torsor of lifts;
-inverse-image fibre compatibility in lem-sc-etale-torsor-inverse-image-extension.
-(blueprint: lem-sc-etale-inverse-image-lifting-torsor)
-
-Proof: Express the sheaf of lifts as the pullback of the underlying sheaf map to the
-quotient along the global section. Set inverse image preserves finite limits and the
-terminal sheaf, and its comparison with abelian inverse image preserves the underlying
-maps and addition. Consequently this pullback is the sheaf of lifts of the pulled-back
-section. Pull back the given equivariant isomorphism from T to the original lifting torsor
-and compose it with this fibre comparison. Translation in a fibre is addition of the
-image of the kernel; naturality of the comparisons and of the adjunction units gives the
-asserted equivariance on pulled-back sections. This argument requires no injectivity
-of the middle object after pullback. -/
+Source: Stacks Project, Tag 03AJ, construction of the torsor of lifts. -/
 theorem etale_inverse_image_lifting_torsor
     (X Y : Scheme.{u}) (f : Y ⟶ X)
     (S : ShortComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

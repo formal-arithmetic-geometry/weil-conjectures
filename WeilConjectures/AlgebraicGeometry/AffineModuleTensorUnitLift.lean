@@ -72,8 +72,33 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
-set_option maxHeartbeats 800000 in
--- The two transported tensor adjunctions require extra definitional-equality checks.
+private theorem tensor_changeOfRings_adjunct
+    (Y : TopCat.{u}) (B C : Y.Sheaf CommRingCat.{u}) (φ : B ⟶ C)
+    (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 C))
+    (k : SheafOfModules.changeOfRings.{u, u, u} φ M ⟶ N) :
+    ∃ q : M ⟶ (SheafOfModules.restrictScalars (𝓻 φ)).obj N,
+      ∀ (W : (TopologicalSpace.Opens Y)ᵒᵖ) (m : M.val.obj W),
+        q.val.app W m = k.val.app W
+          (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 C).obj)).unit.app
+            (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M)).app W
+              ((1 : C.obj.obj W) ⊗ₜ[B.obj.obj W,(φ.hom.app W).hom] m)) := by
+  obtain ⟨E, hE, adj, he⟩ := SheafOfModules.exists_changeOfRingsAdjunction Y B C φ
+  exact ⟨adj.homEquiv M N (eqToHom (hE M) ≫ k), he M N k⟩
+
+private theorem tensor_ring_counit_unit_section
+    [∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+      (Opens.map f.base).op.HasLeftKanExtension F]
+    (V : (Opens X)ᵒᵖ) (r : (A).obj.obj V) :
+    (show IA ⟶ U.sheaf from e₀).hom.app ((Opens.map f.base).op.obj V)
+      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A).hom.app V r) = r := by
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)
+  have h := (adj.homEquiv_unit A U.sheaf
+    ((adj.homEquiv A U.sheaf).symm (𝟙 A))).symm.trans
+      ((adj.homEquiv A U.sheaf).apply_symm_apply (𝟙 A))
+  exact congrArg (fun a ↦ a.hom.app V r) h
+
 /-- The adjoint of γ is linear over the affine direct-image algebra, objectwise.
 Source: Stacks Project, Morphisms, Lemma 01SB, construction of h and elucidation.
 (blueprint: lem-weil-pbc-affine-module-tensor-unit-lift).
@@ -137,32 +162,35 @@ theorem affine_module_tensor_unitLift
       ∃ a : G ⟶ (R).obj (H.obj G),
         (S).map a = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G) := by
   classical
+  have : ∀ (F : (Opens X)ᵒᵖ ⥤ CommRingCat.{u}),
+      (Opens.map f.base).op.HasLeftKanExtension F := fun F ↦ by
+    have : (Opens.map f.base).op.HasPointwiseLeftKanExtension F := fun _ ↦ inferInstance
+    exact Functor.HasLeftKanExtension.mk _
+      (Functor.pointwiseLeftKanExtensionUnit (Opens.map f.base).op F)
+  let : (Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U.toTopCat) :=
+    inferInstanceAs ((Opens.map f.base).IsContinuous (𝓙 X) (𝓙 U))
   have _ := hpush
   have _ := hb
   intro G
   -- The second extension unit is B-linear and agrees with γ after κ.
-  obtain ⟨Eε, heε, adjε, hε⟩ :=
-    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat B U.sheaf ε
-  let z : P.obj G ⟶ (SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G) :=
-    adjε.homEquiv (P.obj G) (H.obj G)
-      (eqToHom (heε (P.obj G)) ≫ eqToHom (hobj G).symm)
+  have hzData := tensor_changeOfRings_adjunct U.toTopCat B U.sheaf ε
+    (P.obj G) (H.obj G) (eqToHom (hobj G).symm)
+  let z := hzData.choose
+  have hz₀ := hzData.choose_spec
   have hz (W : (Opens U)ᵒᵖ) (p : (P.obj G).val.obj W) :
       z.val.app W p = (γ.app G).val.app W ((κ.hom.app G).val.app W p) := by
-    have hz₀ := hε (P.obj G) (H.obj G) (eqToHom (hobj G).symm) W p
-    change z.val.app W p = _ at hz₀
-    rw [hz₀]
-    erw [← hH.2 G W p]
+    refine (hz₀ W p).trans ((congrArg ((eqToHom (hobj G).symm).val.app W)
+      (hH.2 G W p).symm).trans ?_)
     change ((eqToHom (hobj G) ≫ eqToHom (hobj G).symm).val.app W)
       ((γ.app G).val.app W ((κ.hom.app G).val.app W p)) = _
     simp only [eqToHom_trans, eqToHom_refl]
     rfl
   -- Composing the two tensor units gives an IA-linear map.
-  obtain ⟨Et, het, adjt, hunit⟩ :=
-    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
-  let q : I G ⟶ (SheafOfModules.restrictScalars (𝓻 t)).obj
-      ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G)) :=
-    adjt.homEquiv (I G) ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))
-      (eqToHom (het (I G)) ≫ eqToHom (pobj G).symm ≫ z)
+  have hqData := tensor_changeOfRings_adjunct U.toTopCat IA B t (I G)
+    ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))
+    (eqToHom (pobj G).symm ≫ z)
+  let q := hqData.choose
+  have hunit := hqData.choose_spec
   let adjAb := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)
   let d := (adj₀).homEquiv ((S).obj G) (H.obj G) (γ.app G)
@@ -171,51 +199,42 @@ theorem affine_module_tensor_unitLift
       d.val.app V g = q.val.app ((Opens.map f.base).op.obj V)
         ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g) := by
     let W := (Opens.map f.base).op.obj V
-    have hq₀ := hunit (I G)
-      ((SheafOfModules.restrictScalars (𝓻 ε)).obj (H.obj G))
-      (eqToHom (pobj G).symm ≫ z) W
+    have hq₀ := hunit W
       ((adjAb.unit.app ((SheafOfModules.toSheaf (𝓡 A)).obj G)).hom.app V g)
-    change q.val.app W _ = _ at hq₀
-    rw [hq₀]
-    change d.val.app V g = z.val.app W ((eqToHom (pobj G).symm).val.app W _)
-    erw [← hP.2 G V g]
-    change d.val.app V g = z.val.app W
+    symm
+    refine hq₀.trans ((congrArg ((eqToHom (pobj G).symm ≫ z).val.app W)
+      (hP.2 G V g).symm).trans ?_)
+    change z.val.app W
       ((eqToHom (pobj G) ≫ eqToHom (pobj G).symm).val.app W
-        ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g)))
+        ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g))) = _
     simp only [eqToHom_trans, eqToHom_refl]
-    change d.val.app V g = z.val.app W
-      ((κ.inv.app G).val.app W (((adj₀).unit.app ((S).obj G)).val.app V g))
-    rw [hz]
-    change d.val.app V g = (γ.app G).val.app W
+    refine (hz W _).trans ?_
+    change (γ.app G).val.app W
       ((κ.inv.app G ≫ κ.hom.app G).val.app W
-        (((adj₀).unit.app ((S).obj G)).val.app V g))
-    rw [κ.inv_hom_id_app]
-    dsimp [d]
-    rw [Adjunction.homEquiv_unit]
-    rfl
+        (((adj₀).unit.app ((S).obj G)).val.app V g)) = _
+    have hk := congrArg (fun a ↦ a.val.app W
+      (((adj₀).unit.app ((S).obj G)).val.app V g)) (κ.inv_hom_id_app G)
+    refine (congrArg ((γ.app G).val.app W) hk).trans ?_
+    exact (congrArg (fun a ↦ a.val.app V g)
+      ((adj₀).homEquiv_unit ((S).obj G) (H.obj G) (γ.app G))).symm
   -- Semilinearity of inverse image and the ring triangle give A-linearity.
   have hscalar (V : (Opens X)ᵒᵖ) (r : (A).obj.obj V) (g : G.val.obj V) :
       d.val.app V (r • g) =
         @SMul.smul _ _ (((R).obj (H.obj G)).val.obj V).isModule.toSMul r
           (d.val.app V g) := by
-    rw [hd, hd]
-    rw [(Classical.choose_spec
-      (TopCat.Sheaf.exists_inverseImageModuleInstances f.base A G)).2]
-    erw [(q.val.app ((Opens.map f.base).op.obj V)).hom.map_smul]
+    refine (hd V (r • g)).trans ?_
+    refine (congrArg (q.val.app ((Opens.map f.base).op.obj V))
+      ((Classical.choose_spec
+        (TopCat.Sheaf.exists_inverseImageModuleInstances f.base A G)).2 V r g)).trans ?_
+    refine ((q.val.app ((Opens.map f.base).op.obj V)).hom.map_smul _ _).trans ?_
     let adjRing := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
       (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)
-    have htriangle : adjRing.unit.app A ≫
-        ((Opens.map f.base).sheafPushforwardContinuous CommRingCat.{u}
-          (𝓙 X) (𝓙 U)).map e₀ = 𝟙 A := by
-      erw [← Adjunction.homEquiv_unit]
-      exact (adjRing.homEquiv A U.sheaf).apply_symm_apply (𝟙 A)
     have hr : ε.hom.app ((Opens.map f.base).op.obj V)
         (t.hom.app ((Opens.map f.base).op.obj V)
           ((adjRing.unit.app A).hom.app V r)) = r := by
       have he := congrArg (fun a ↦ a.hom.app ((Opens.map f.base).op.obj V)
         ((adjRing.unit.app A).hom.app V r)) ht
-      have hu := congrArg (fun a ↦ a.hom.app V r) htriangle
-      exact he.trans hu
+      exact he.trans (tensor_ring_counit_unit_section f V r)
     change @SMul.smul _ _
       ((H.obj G).val.obj ((Opens.map f.base).op.obj V)).isModule.toSMul
       (ε.hom.app ((Opens.map f.base).op.obj V)
@@ -223,13 +242,18 @@ theorem affine_module_tensor_unitLift
           ((adjRing.unit.app A).hom.app V r))) _ =
       @SMul.smul _ _
         ((H.obj G).val.obj ((Opens.map f.base).op.obj V)).isModule.toSMul r _
-    rw [hr]
+    exact congrArg₂ (fun r p ↦ @SMul.smul _ _
+      ((H.obj G).val.obj ((Opens.map f.base).op.obj V)).isModule.toSMul r p)
+      hr (hd V g).symm
   let a : G ⟶ (R).obj (H.obj G) :=
     ⟨PresheafOfModules.homMk
       ((PresheafOfModules.toPresheaf X.ringCatSheaf.obj).map d.val) hscalar⟩
   refine ⟨a, ?_⟩
-  ext V g
-  rfl
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.hom_ext
+  exact LinearMap.ext fun _ ↦ rfl
 
 end
 end AlgebraicGeometry.Scheme.Modules

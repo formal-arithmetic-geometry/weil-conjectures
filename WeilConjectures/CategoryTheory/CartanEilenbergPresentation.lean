@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 
 /-! # Presentations by injective and Cartan--Eilenberg resolutions
 
-Source: Stacks Project, Derived Categories, Tags 015H and 015K
-(blueprint: def-sp-cartan-eilenberg-presentation).
+Source: Stacks Project, Derived Categories, Tags 015H and 015K.
 -/
 
 @[expose] public section
@@ -31,7 +30,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B]
 /-- A presentation of an object by an injective resolution and a Cartan--Eilenberg
 resolution of its image. The five properties are exactly the witnesses of
 `exists_cartanEilenberg_resolution`, with their shared augmentation.
-Source: Stacks, Tags 015H and 015K (blueprint: def-sp-cartan-eilenberg-presentation). -/
+Source: Stacks, Tags 015H and 015K. -/
 structure CartanEilenbergPresentation (F : A ⥤ B) [F.Additive] where
   X : A
   J : InjectiveResolution X
@@ -57,7 +56,7 @@ variable {F : A ⥤ B} [F.Additive]
 /-- A comparison consists of the original map, its injective-resolution lift and
 its Cartan--Eilenberg lift, with both augmentation squares in resolution degree zero
 (the form of `cartanEilenberg_doubleComplex_homotopy`).
-Source: Stacks, Tag 015K (blueprint: def-sp-cartan-eilenberg-presentation). -/
+Source: Stacks, Tag 015K. -/
 structure Comparison (P Q : CartanEilenbergPresentation F) where
   f : P.X ⟶ Q.X
   β : P.J.cocomplex ⟶ Q.J.cocomplex
@@ -70,7 +69,7 @@ structure Comparison (P Q : CartanEilenbergPresentation F) where
 variable {C : Type uC} [Category.{vC} C] [Abelian C]
 
 /-- Apply `G` vertically and extend the resolution degree by zero.
-Source: Stacks, Tag 015K (blueprint: def-sp-cartan-eilenberg-presentation). -/
+Source: Stacks, Tag 015K. -/
 noncomputable def mappedFunctor (G : B ⥤ C) [G.Additive] :
     HomologicalComplex₂ B (ComplexShape.up ℤ) (ComplexShape.up ℕ) ⥤
       HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ) :=
@@ -78,7 +77,7 @@ noncomputable def mappedFunctor (G : B ⥤ C) [G.Additive] :
     ComplexShape.embeddingUpNat.extendFunctor C).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The total complex after applying `G`, extended by zero in negative resolution degrees.
-Source: Stacks, Tag 015K (blueprint: def-sp-cartan-eilenberg-presentation). -/
+Source: Stacks, Tag 015K. -/
 noncomputable def total (G : B ⥤ C) [G.Additive] [IsGrothendieckAbelian.{vC} C]
     (P : CartanEilenbergPresentation F) : CochainComplex C ℤ :=
   ((mappedFunctor G).obj P.I).total (ComplexShape.up ℤ)

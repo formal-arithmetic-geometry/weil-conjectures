@@ -19,8 +19,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Terminal sections as convolution global sections
-Source: the constant-sheaf adjunction and tensor unit universal property.
-(blueprint: lem-zl-section-ring-global-sections).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -37,9 +35,7 @@ variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
   [HasSheafify J Ab.{u}] [(J.W (A := Ab.{u})).IsMonoidal]
   (R : Sheaf J Ab.{u}) [MonObj R] [IsCommMonObj R]
 
-/-- Evaluation at the generator of the abelian tensor unit.
-Source: free abelian group universal property and tensor multiplication
-(blueprint: lem-zl-section-ring-global-sections). -/
+/-- Evaluation at the generator of the abelian tensor unit. -/
 def abelianGlobalEval (R : Ab.{u}) [MonObj R] :
     letI := ring R
     MonObj.Γ R →+* R := by
@@ -56,9 +52,7 @@ def abelianGlobalEval (R : Ab.{u}) [MonObj R] :
       (f.hom.hom (ULift.up 1) ⊗ₜ[ℤ] g.hom.hom (ULift.up 1)) = _
     rfl
 
-/-- Evaluate a global tensor-unit section at the canonical integer section 1.
-Source: tensor-unit universal property and the constant-sheaf adjunction
-(blueprint: lem-zl-section-ring-global-sections). -/
+/-- Evaluate a global tensor-unit section at the canonical integer section 1. -/
 def sectionGlobalEval (U : C) :
     MonObj.Γ R →+* (sectionRingSheaf J R).obj.obj (Opposite.op U) := by
   let F := sheafToPresheaf J Ab.{u}
@@ -70,9 +64,7 @@ def sectionGlobalEval (U : C) :
   letI := (F ⋙ E).monObjObj R
   exact (abelianGlobalEval ((F ⋙ E).obj R)).comp (MonObj.Γ.mapFunctor (F ⋙ E))
 
-/-- Terminal evaluation is bijective on tensor-unit global sections.
-Source: constant-sheaf adjunction and the free abelian group on one generator
-(blueprint: lem-zl-section-ring-global-sections). -/
+/-- Terminal evaluation is bijective on tensor-unit global sections. -/
 theorem sectionGlobalEval_bijective (U : C) (hU : IsTerminal U) :
     Function.Bijective (sectionGlobalEval J R U) := by
   let e := ((constantSheafAdj J Ab.{u} hU).homEquiv (𝟙_ Ab.{u}) R).trans
@@ -84,9 +76,7 @@ theorem sectionGlobalEval_bijective (U : C) (hU : IsTerminal U) :
   rw [h]
   exact e.bijective
 
-/-- The terminal section ring is the convolution ring of global sections.
-Source: constant-sheaf adjunction and free abelian generator
-(blueprint: lem-zl-section-ring-global-sections). -/
+/-- The terminal section ring is the convolution ring of global sections. -/
 def sectionGlobalEquiv (U : C) (hU : IsTerminal U) :
     MonObj.Γ R ≃+* (sectionRingSheaf J R).obj.obj (Opposite.op U) :=
   RingEquiv.ofBijective (sectionGlobalEval J R U) (sectionGlobalEval_bijective J R U hU)

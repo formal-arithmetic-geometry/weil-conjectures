@@ -305,7 +305,6 @@ lemma exists_retraction_map_unit_integersModPow (n : ℕ)
         (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω)))) K)
     exact comp_comp_eq_id_of_comp_eq e hR.choose_spec.1
 
-set_option maxHeartbeats 800000 in
 -- the retractions are compared through the large types of the reductions
 /-- **Uniqueness of invariant torsion retractions**: two retractions of the reduction modulo `ℓⁿ`
 of the unit `K ⟶ Rg_* Lg^* K`, invariant under the reductions of the Galois action, are equal. -/
@@ -377,11 +376,9 @@ lemma eq_of_retraction_map_unit_integersModPow (n : ℕ)
       (pullbackAction h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ)
       (pullbackAction_fst h _ specGaloisAction_comp σ) K)
-  exact eq_of_retraction_of_iso e ea
-    (fun R R' hR hR' hi hi' ↦ eq_of_invariant_retraction_derivedUnit_galois_integersModPow E h n
-      hunit _ hred R R' hR hR' hi hi') hr hr' h₁ h₁'
+  refine eq_of_retraction_of_iso e ea ?_ hr hr' h₁ h₁'
+  exact eq_of_invariant_retraction_derivedUnit_galois_integersModPow E h n hunit _ hred
 
-set_option maxHeartbeats 800000 in
 -- the torsion retractions are matched against the large types of the reductions
 /-- **The derived unit of an infinite Galois extension of degrees prime to `ℓ` splits with
 `𝒪_E`-coefficients** at every derived complete complex whose reductions modulo `ℓⁿ⁺¹` are bounded
@@ -400,17 +397,21 @@ theorem isSplitMono_derivedUnit_galois_padicIntegers
   have hunit (n : ℕ) : ∀ L' : FiniteGaloisIntermediateField L Ω,
       IsUnit ((Module.finrank L L' : ℕ) : integersModPow ℓ E.1 n) := fun L' ↦
     isUnit_natCast_integersModPow E.1 n (hp L')
-  refine ProEtale.isSplitMono_of_derivedCompleteIntegers_of_unique_retractions _ hK
+  refine ProEtale.isSplitMono_of_derivedCompleteIntegers_of_unique_retractions
+    ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1)
+      (pullback.fst h (Spec.map (CommRingCat.ofHom (algebraMap L Ω))))).unit.app K) hK
     (fun n r ↦ ∀ σ : Ω ≃ₐ[L] Ω, L(Mod.extendScalars (integersModPowReduction G ℓ E.1 (n + 1))).map
         (derivedUnitTransport (Profinite.padicIntegersRingObj ℓ E.1)
           (pullbackAction h _ specGaloisAction_comp σ)
           (pullbackAction_fst h _ specGaloisAction_comp σ)
           (pullbackAction_fst h _ specGaloisAction_comp σ) K) ≫ r = r)
-    (fun n ↦ exists_retraction_map_unit_integersModPow E h (n + 1) (hunit _) K (hred n))
-    (fun n r r' hr hr' h₁ h₁' ↦
-      eq_of_retraction_map_unit_integersModPow E h (n + 1) (hunit _) K m (hred n) r r' hr hr' h₁
-        h₁')
-    (fun n r hr _ σ ↦ ?_)
-  rw [← Mod.derivedExtendScalarsReduction_map_comp, hr σ]
+    ?_ ?_ ?_
+  · intro n
+    exact exists_retraction_map_unit_integersModPow E h (n + 1) (hunit _) K (hred n)
+  · intro n
+    exact eq_of_retraction_map_unit_integersModPow E h (n + 1) (hunit _) K m (hred n)
+  · intro n r hr _ σ
+    exact (Mod.derivedExtendScalarsReduction_map_comp _ _ _ _ _ r).symm.trans
+      (congrArg (Mod.derivedExtendScalarsReduction _ _ _ _) (hr σ))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

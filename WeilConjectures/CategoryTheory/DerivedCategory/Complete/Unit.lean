@@ -31,14 +31,6 @@ invertibly (`DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor`): in the te
   `DerivedCategory.exists_homologyFunctor_map_eq`: for an injective object `J`, morphisms
   `L ⟶ J[0]` of the derived category are the morphisms `H⁰(L) ⟶ J`.
 - `DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor`: the statement above.
-
-## Implementation notes
-
-The proof uses the injective resolution `0 ⟶ R ⟶ K ⟶ K/R ⟶ 0`, with `K` the fraction field. A
-morphism `f : L ⟶ R[0]` composed with `R ⟶ K` is determined by `H⁰(f) : H⁰(L) ⟶ R`, which
-vanishes as `H⁰(L)` is `ϖ`-divisible and `R` is `ϖ`-adically separated. So `f` comes from a
-morphism `L⟦1⟧ ⟶ (K/R)[0]`, which is determined by a map `H¹(L) ⟶ K/R`; that map lifts to `K`,
-so `f` factors through two consecutive maps of a distinguished triangle and vanishes.
 -/
 
 @[expose] public section

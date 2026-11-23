@@ -17,8 +17,7 @@ the summands. We record how this property moves along families of morphisms whic
 bijections (or surjections) on morphisms out of `s`, and when such bijections come from
 distinguished triangles whose third (or first) term receives no morphisms from `s`.
 
-These are the formal steps of the truncation argument for compactness used in blueprint
-`det-ctf-finite-compact-proetale`.
+These are the formal steps of the truncation argument for compactness.
 -/
 
 @[expose] public section

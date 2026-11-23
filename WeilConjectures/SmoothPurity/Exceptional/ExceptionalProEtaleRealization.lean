@@ -8,7 +8,7 @@ public import WeilConjectures.SmoothPurity.Exceptional.ExceptionalFiniteRealizat
 public import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 /-! # Finite coordinates and projections on the actual pro-etale systems
-Source: blueprint def-weil-exceptional-inverse-image. The scalar-unit equations and
+Source: blueprint theorem-f-shriek-finite-coefficients. The scalar-unit equations and
 exact localization squares fix all comparisons, including their maps.
 (blueprint: def-pur-adic-proetale-realization).
 -/

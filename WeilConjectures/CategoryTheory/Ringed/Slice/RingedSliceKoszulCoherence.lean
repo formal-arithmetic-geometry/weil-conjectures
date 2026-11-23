@@ -28,8 +28,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompa
 
 /-! # Slice Koszul compatibility
 
-Source: Stacks Project, Tags 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-koszul-coherence).
+Source: Stacks Project, Tags 07A4, 08J9 and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -161,16 +160,10 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (f
 
 attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestriction
 
-set_option maxHeartbeats 500000 in
 -- The representative squares compare long dependent tensor endpoints at independent universes.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction preserves the normalized Koszul exchange.
-Source: Stacks Project, Tags 06YN and 07A4
-(blueprint: lem-weil-pbc-ringed-slice-koszul-coherence).
-Proof: compare the two chain maps on sheafified pure-tensor summands. Both send
-x tensor y in bidegree (p,q) to (-1)^(pq) y tensor x. The representative squares
-for rho and both symmetries identify their localizations. Naturality transports
-this equality along flat-term K-flat resolutions to arbitrary derived objects. -/
+Source: Stacks Project, Tags 06YN and 07A4. -/
 theorem ringedSlice_koszul_coherence
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]
@@ -191,6 +184,7 @@ theorem ringedSlice_koszul_coherence
       (d.rho L M).hom ≫
         (d.sigmaU ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj L)
           ((ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U).obj M)).hom := by
+  classical
   let r := ringedSliceDerivedRestriction.{c, v, u, w, w'} J A U
   let R := ringedSliceComplexRestriction.{c, v, u} J A U
   let α := ringedSliceLocalizationIso.{c, v, u, w, w'} J A U
@@ -205,11 +199,24 @@ theorem ringedSlice_koszul_coherence
           (d.rho (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj P)).hom =
         (d.rho (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q)).hom ≫
           (d.sigmaU (r.obj (DerivedCategory.Q.obj P)) (r.obj (DerivedCategory.Q.obj Q))).hom := by
-    obtain ⟨γ, hγ, hρ⟩ := hd.1 P Q hP hQ fP fQ
-    obtain ⟨γ', hγ', hρ'⟩ := hd.1 Q P hQ hP fQ fP
-    obtain ⟨β, hβ, hσ⟩ := hd.2.2.1 P Q hP hQ
-    obtain ⟨βU, hβU, hσU⟩ := hd.2.2.2 (R.obj P) (R.obj Q)
+    -- Share the representatives and project their specifications without dependent elimination.
+    have hγ := hd.1 P Q hP hQ fP fQ
+    let γ := hγ.choose
+    have hρ := hγ.choose_spec.2
+    have hγ := hγ.choose_spec.1
+    have hγ' := hd.1 Q P hQ hP fQ fP
+    let γ' := hγ'.choose
+    have hρ' := hγ'.choose_spec.2
+    have hγ' := hγ'.choose_spec.1
+    have hβ := hd.2.2.1 P Q hP hQ
+    let β := hβ.choose
+    have hσ := hβ.choose_spec.2
+    have hβ := hβ.choose_spec.1
+    have hβU := hd.2.2.2 (R.obj P) (R.obj Q)
       (d.kflat P hP fP).1 (d.kflat Q hQ fQ).1
+    let βU := hβU.choose
+    have hσU := hβU.choose_spec.2
+    have hβU := hβU.choose_spec.1
     have hchain : R.map β.hom ≫ γ'.hom = γ.hom ≫ βU.hom := by
       apply (cancel_epi γ.inv).mp
       simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
@@ -283,7 +290,6 @@ theorem ringedSlice_koszul_coherence
       have hh := congrArg (fun f ↦ DerivedCategory.Q.map f) hchain
       simp only [Functor.map_comp] at hh
       exact congrArg (α.hom.app _ ≫ ·) hh
-  classical
   let X := DerivedCategory.Q.objPreimage L
   let Y := DerivedCategory.Q.objPreimage M
   obtain ⟨P, f, hP, fP, hf, _⟩ :=

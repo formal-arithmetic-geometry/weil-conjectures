@@ -17,11 +17,7 @@ namespace CategoryTheory.Mod
 
 /-- The unit projection of the scalar extension–restriction adjunction for ordinary internal
 modules is invertible.
-Source: the balanced projection formula, Stacks 07A4.
-Proof: braiding puts the restricted unit first. The resulting map is exactly the
-balanced projectionHom followed by restriction of the left unitor, both
-isomorphisms. This argument also applies to the zero ring.
-(blueprint: lem-per-scalar-unit-projection-ordinary). -/
+Source: the balanced projection formula, Stacks 07A4. -/
 theorem isIso_unitProjection_extendRestrictAdjunction
     {C : Type*} [Category* C] [MonoidalCategory C] [SymmetricCategory C]
     [HasCoequalizers C]

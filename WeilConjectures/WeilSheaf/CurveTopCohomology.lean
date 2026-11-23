@@ -14,9 +14,9 @@ public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.LissePoincarePairing
 
 /-!
-# Top compactly supported cohomology of a lisse Weil sheaf on an affine curve
+# Top compactly supported cohomology of a lisse Weil sheaf on a smooth curve
 
-On a smooth geometrically connected affine curve `U₀` over a finite field `k₀ = 𝔽_q`, the top
+On a smooth separated curve `U₀` of finite type over a finite field `k₀ = 𝔽_q`, the top
 compactly supported cohomology `H_c²(U, F)` of a lisse Weil sheaf `F` is the geometric
 coinvariants `V_{π₁(U)}` of its generic fibre `V`, Tate-twisted by `(-1)`: by global Verdier
 duality on the smooth curve `U`, `H_c²(U, F)` is dual to `H⁰(U, F^∨(1))`, and the global sections
@@ -28,9 +28,9 @@ The geometric coinvariants are `AlgebraicGeometry.WeilSheaf.geometricCoinvariant
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`
-  (`lem-a1-affine-hc2`), from the lisse Poincaré pairing
+  (`lemma-degree-zero-top-cohomology--2`), from the lisse Poincaré pairing
   `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul` (from the
-  lisse case of `thm-pod-degreewise-perfectness-over-a-field`).
+  lisse case of `corollary-degreewise-duality-over-fields--1`).
 -/
 
 @[expose] public section
@@ -49,15 +49,14 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lem-a1-affine-hc2`: Description of `H_c²` on an affine curve.
+/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on a smooth curve.
 
-Let `U₀` be a smooth geometrically connected affine curve over `k₀ = 𝔽_q` and `F` a lisse Weil
+Let `U₀` be a smooth separated curve of finite type over `k₀ = 𝔽_q` and `F` a lisse Weil
 sheaf on `U₀`, with local generic fibre `V`. There is a Frobenius-equivariant isomorphism
 `H_c²(U, F) ≃ V_{π₁(U)}(-1)`, where the geometric coinvariants `V_{π₁(U)} = Γ(U, F^∨)^∨` carry the
 Frobenius induced by the Weil structure and the Tate twist `(-1)` multiplies it by `q`. -/
-theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
-    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
+theorem nonempty_equiv_compactlySupportedCohomology_two
+    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)
     (hF : F.IsLisse) :
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
@@ -69,17 +68,16 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     rw [hPF, neg_neg, zpow_one, pow_one]).trans
       ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
-/-- Blueprint `lem-a1-affine-hc2-pure`: Purity of `H_c²` on an affine curve.
+/-- Blueprint `lemma-degree-zero-top-cohomology--7`: Purity of `H_c²` on a smooth curve.
 
-Let `U₀` be a smooth geometrically connected affine curve and `F` a lisse Weil sheaf on `U₀`,
+Let `U₀` be a smooth separated curve of finite type over `k₀` and `F` a lisse Weil sheaf on `U₀`,
 punctually `ι`-pure of weight `w`. Then `H_c²(U, F)` is `ι`-pure of weight `w + 2` (possibly
 zero): it is the Tate twist `(-1)` of the geometric coinvariants
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`), which are pure
 of weight `w` (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`), and the
 twist `(-1)` raises weights by two. -/
-theorem isPureOfWeightOver_compactlySupportedCohomology_two [IsAffine U]
-    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
+theorem isPureOfWeightOver_compactlySupportedCohomology_two
+    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
     (F.compactlySupportedCohomology 2).IsPureOfWeightOver k₀ ι (w + 2) := by
   obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_two F hF

@@ -24,9 +24,7 @@ Indeed, `Hᵐ(G M)` only depends on the truncation `τ_{[m - e, m]} M`: the map
 `G(τ_{< m - e} τ_{≤ m} M)` lies in degrees `< m`. Truncations commute with coproducts, the
 cohomology functors commuting with exact coproducts.
 
-This is the formal part of the comparison of blueprint `lem-exc-direct-image-coproducts`, in
-the form used for the finite-coefficient localizing categories of blueprint
-`det-sf-comp-coherence-single`.
+This is the formal part of the comparison for the finite-coefficient localizing categories.
 -/
 
 @[expose] public section

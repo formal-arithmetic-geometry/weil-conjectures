@@ -80,8 +80,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 import Mathlib.CategoryTheory.Monoidal.Subcategory
 /-! # Strong monoidality of derived scalar extension.
 
-Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK.
-(blueprint: lem-fix-ringed-scalar-tensor-monoidal). -/
+Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -513,32 +512,10 @@ variable {C : Type c} [Category.{v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
 
-set_option maxHeartbeats 3000000 in
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product,
-and Tag 0FPT, lemma-symmetric-monoidal-derived
-(blueprint: lem-fix-ringed-scalar-tensor-monoidal).
-
-Proof: use the supplied canonical scalar total-tensor comparison and its
-normalization. The generator formula uniquely fixes the chain comparison;
-the K-flat counit square uniquely fixes its derived comparison. The coefficient unit
-is K-flat in degree zero; scalar multiplication identifies its scalar extension with
-the target unit.
-Localize this map using D's invertible K-flat counit and the recorded unit
-identifications to obtain an invertible derived unit comparison. On three
-K-flat representatives, the associativity diagram sends every generator
-s tensor ((x tensor y) tensor z) to
-(s tensor x) tensor ((1 tensor y) tensor (1 tensor z)) on both routes.
-The two unit diagrams are the scalar action laws. Sheafification and the
-total coproduct summands detect these equalities. The normalization squares, recorded associator
-and unitors, and coefficient unit
-identifications descend them to derived objects. K-flat resolutions and
-naturality give the equations for arbitrary objects. Package the inverse
-unit map and inverse tensor comparison with CoreMonoidal.mk'. This gives m
-with precisely the displayed tensorator. Neither flatness of the coefficient map
-nor boundedness of complexes is required.
--/
+Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
+and Tag 0FPT. -/
 theorem ringedScalarTensorMonoidal
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]
@@ -632,7 +609,7 @@ theorem ringedScalarTensorMonoidal
       exact D.ε.naturality f.hom)
   apply ScalarMonoidalProof.normalizedDescent L W D.T (E ⋙ LS) e μ
   intro P Q
-  obtain ⟨hEP, hEQ, hh⟩ := hμ P.obj Q.obj P.property Q.property
+  have hh := (hμ P.obj Q.obj P.property Q.property).choose_spec.choose_spec
   with_unfolding_all change (
     D.T.map (MR.iso J R AR P.obj Q.obj P.property Q.property).hom ≫
       μ.hom.app (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj) ≫
@@ -640,7 +617,7 @@ theorem ringedScalarTensorMonoidal
     D.ε.app ((coefficientTotalTensor.{r, c, v} J R).obj (P.obj, Q.obj)) ≫
       (DerivedCategory.Q.map ((mE.μIso P.obj Q.obj).inv) ≫
         (MS.iso J S AS _ _ (hk P.obj P.property) (hk Q.obj Q.property)).hom))
-  rw [hmE]
+  simp only [hmE]
   with_unfolding_all exact hh
 
 end Site

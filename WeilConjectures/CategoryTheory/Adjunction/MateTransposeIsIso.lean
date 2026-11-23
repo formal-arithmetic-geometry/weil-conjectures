@@ -24,7 +24,9 @@ invertible.
   left adjoints, a square of right adjoints has invertible left mate as soon as its other mate
   is invertible (iterated mates are conjugates).
 
-Source: Stacks Project, Tag 0GLL (adjunctions, mates and conjugates; Mac Lane, IV.7).
+## References
+
+* Stacks Project, Tag 0GLL (adjunctions, mates and conjugates); Mac Lane, IV.7.
 -/
 
 @[expose] public section
@@ -38,9 +40,7 @@ section Transpose
 variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
   {G : A ⥤ C} {H : B ⥤ D} {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
 
-/-- The transpose of `G f ≫ β_Y` is the mate of `β` followed by `H` of the transpose of `f`.
-Proof: apply the hom equivalence of `L₂ ⊣ R₂`; the unit formula of the inverse mate and the
-naturality of `β` reduce both sides to `G f ≫ β_Y`. -/
+/-- The transpose of `G f ≫ β_Y` is the mate of `β` followed by `H` of the transpose of `f`. -/
 theorem Adjunction.homEquiv_symm_map_comp_app (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (β : TwoSquare R₁ H G R₂) {Z : A} {Y : B} (f : Z ⟶ R₁.obj Y) :
     (adj₂.homEquiv _ _).symm (G.map f ≫ β.app Y) =
@@ -63,9 +63,7 @@ variable {A B C : Type*} [Category* A] [Category* B] [Category* C]
   {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : B ⥤ C} {R₂ : C ⥤ B} {L₃ : A ⥤ C} {R₃ : C ⥤ A}
 
 /-- Let `L₁ ⊣ R₁`, `L₂ ⊣ R₂`, `L₃ ⊣ R₃` and `e : R₂ ⋙ R₁ ≅ R₃`. If `t : L₁ M ⟶ R₂ (L₃ M)`
-satisfies `η₁ ≫ R₁ t = η₃ ≫ e⁻¹`, then the transpose of `t` along `L₂ ⊣ R₂` is invertible.
-Proof: it is the component at `M` of the comparison isomorphism `L₁ ⋙ L₂ ≅ L₃` of the left
-adjoints of `R₃`, as both have the same transpose along `L₁ ⋙ L₂ ⊣ R₃`. -/
+satisfies `η₁ ≫ R₁ t = η₃ ≫ e⁻¹`, then the transpose of `t` along `L₂ ⊣ R₂` is invertible. -/
 theorem Adjunction.isIso_homEquiv_symm_of_unit_comp (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (adj₃ : L₃ ⊣ R₃) (e : R₂ ⋙ R₁ ≅ R₃) (M : A) (t : L₁.obj M ⟶ R₂.obj (L₃.obj M))
     (ht : adj₁.unit.app M ≫ R₁.map t = adj₃.unit.app M ≫ e.inv.app (L₃.obj M)) :
@@ -92,9 +90,7 @@ variable {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* 
 
 /-- If all four sides of a square are left adjoints, a square `β : R₁ ⋙ F₁ ⟶ F₂ ⋙ R₂` has
 invertible inverse mate `F₁ ⋙ L₂ ⟶ L₁ ⋙ F₂` as soon as its mate `U₂ ⋙ R₁ ⟶ R₂ ⋙ U₁` along
-`F₂ ⊣ U₂` and `F₁ ⊣ U₁` is invertible.
-Proof: the iterated mate is the conjugate (`iterated_mateEquiv_conjugateEquiv`), and a
-transformation of left adjoints with invertible conjugate is invertible. -/
+`F₂ ⊣ U₂` and `F₁ ⊣ U₁` is invertible. -/
 theorem isIso_mateEquiv_symm_of_isIso_mateEquiv (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
     (adj₃ : F₁ ⊣ U₁) (adj₄ : F₂ ⊣ U₂) (β : TwoSquare R₁ F₂ F₁ R₂)
     [IsIso (mateEquiv adj₄ adj₃ β)] :

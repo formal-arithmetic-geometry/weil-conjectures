@@ -12,8 +12,8 @@ public import Mathlib.CategoryTheory.Whiskering
 /-!
 # Total right derived functors from enough K-injective complexes
 
-Source: Stacks Project, Derived Categories, Tag 070K, lemma-enough-K-injectives-implies,
-and Tag 070Y, lemma-K-injective-defined (blueprint: lem-weil-pbc-kinjective-total-derived).
+Source: Stacks Project, Derived Categories, Tag 070K,
+and Tag 070Y.
 -/
 
 @[expose] public section
@@ -25,25 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Enough K-injective complexes give a total right derived functor, computed on every
-K-injective complex. Source: Stacks Project, Derived Categories, Tag 070K,
-lemma-enough-K-injectives-implies; Tag 070Y, lemma-K-injective-defined
-(blueprint: lem-weil-pbc-kinjective-total-derived).
-
-Proof plan:
-1. Choose a representative of each derived object and a K-injective replacement of its
-   underlying complex. The replacement and the quotient-to-derived comparison give an
-   isomorphism e_X : X ≅ Qh (R X), where R X is K-injective.
-2. Use the Hom bijection into K-injective targets to lift
-   e_X.inv ≫ a ≫ e_Y.hom, defining a functor R : D(A) → K(A). Injectivity of that
-   bijection proves preservation of identities and composition.
-3. Lift e_(Qh K).hom to a natural transformation u : 𝟭 → Qh ⋙ R, and set
-   η = whiskerRight u F. The same injectivity proves naturality of u.
-4. For K-injective K, lift e_(Qh (π K)).inv and use the two inverse identities of e to
-   prove that u_(π K) and hence η_(π K) are invertible.
-5. Given α : F → Qh ⋙ G, define β_X = α_(R X) ≫ G(e_X.inv). The formulas for R and
-   u prove that β is natural and is the inverse to composition with η. Evaluating an
-   equality at R X and cancelling the invertible component at that object proves
-   uniqueness. -/
+K-injective complex. Source: Stacks Project, Derived Categories, Tag 070K; Tag 070Y. -/
 theorem exists_rightDerived_of_enough_isKInjective
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (h : ∀ K : CochainComplex A ℤ,

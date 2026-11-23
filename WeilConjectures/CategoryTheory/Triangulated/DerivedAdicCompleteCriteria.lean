@@ -27,7 +27,6 @@ We collect some elementary criteria for derived `n`-adic completeness
   objects are derived complete.
 - `AddCommGrpCat.isDerivedAdicComplete_iff_bijective`: an abelian group `G` is derived
   `n`-adically complete if and only if `(xᵢ) ↦ (xᵢ - n • xᵢ₊₁)` is a bijection of `ℕ → G`.
-
 -/
 
 @[expose] public section
