@@ -10,7 +10,7 @@ public import WeilConjectures.TraceFormula.GrothendieckLefschetz.Integral
 public import WeilConjectures.ZetaFunction.PerfectComplexLogDeterminant
 
 /-!
-# The Grothendieck–Lefschetz trace formula with coefficients in a finite extension of `ℚ_ℓ`
+# Reduction of the `E`-coefficient Grothendieck–Lefschetz trace formula to the integral one
 
 Let `E` be a finite extension of `ℚ_ℓ` with ring of integers `R = 𝒪_E`. An object `K_E` of
 `Dᵇc(X, E)` with a Weil structure `ψ_E` has an integral model: a normalized system `L_•` over
@@ -18,7 +18,8 @@ Let `E` be a finite extension of `ℚ_ℓ` with ring of integers `R = 𝒪_E`. A
 and an integer `N ≥ 0` with `ψ_E = π_E^{-N} (θ ⊗ E)`. Its compact cohomology and its stalks are
 the scalar extensions `G(P) = P ⊗ᴸ_{𝒪_E} E` of the integral realizations `P`, and the Frobenius
 operators of `ψ_E` are `π_E^{-Nm} G(V)` for the lifts `V` of the integral operators of `θ`. This
-file proves the trace formula for them
+file proves the reduction step of the trace formula for them: the integral trace formula
+transported along `G` and scaled by `π_E^{-Nm}`
 (`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.trace_smul_map_eq_finsum_trace`).
 
 ## Implementation details
@@ -32,7 +33,9 @@ The scalar extension `G` is any additive braided monoidal functor `D(𝒪_E) ⥤
 scalar `π_E^{-Nm}` is any `t ∈ E`. No `E`-coefficient sheaf appears in the statement: this is the
 reduction step, the integral formula transported along `G` and scaled by `t`. The identification
 of `RΓ_c(X, K_E)`, of the stalks `(K_E)_x̄` and of their Frobenius operators with `G(P_R)`,
-`G(P_{x̄,R})` and `t • G(V)`, `t • G(V_x̄)` is not part of this file.
+`G(P_{x̄,R})` and `t • G(V)`, `t • G(V_x̄)` is not part of this file; it is the separate
+comparison of the integral and rational operators
+(`ProEtale.CondensedRing.pow_smul_frobeniusCompactOperator_eq`, in the pro-étale framework).
 -/
 
 @[expose] public section
@@ -58,18 +61,15 @@ variable {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spe
   {S : AdicSystem I f.geometricFiber}
   {E : Type (u + 1)} [Field E]
 
-/-- **The Grothendieck–Lefschetz trace formula with coefficients in a finite extension `E` of
-`ℚ_ℓ`**: with the notation of `trace_eq_finsum_trace`, for `R = 𝒪_E`, the derived scalar
-extension `G : D(𝒪_E) ⥤ D(E)` and `t = π_E^{-Nm}`, the global Frobenius operator `t • G(V)` on
-`RΓ_c(X, K_E) = G(P_R)` and the local Frobenius operators `t • G(V_x̄)` on the stalks
-`(K_E)_x̄ = G(P_{x̄,R})` satisfy
+/-- **Reduction of the trace formula with coefficients in a finite extension `E` of `ℚ_ℓ` to the
+integral one**: with the notation of `trace_eq_finsum_trace`, for `R = 𝒪_E`, the derived scalar
+extension `G : D(𝒪_E) ⥤ D(E)` and `t = π_E^{-Nm}`, the operator `t • G(V)` on `G(P_R)` and the
+operators `t • G(V_x̄)` on `G(P_{x̄,R})` satisfy
 ```
-tr_E(Frob_{X,K_E}^m ∣ RΓ_c(X, K_E)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_E(Frob_{x̄,m} ∣ (K_E)_x̄).
+tr_E(t • G(V) ∣ G(P_R)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_E(t • G(V_x̄) ∣ G(P_{x̄,R})).
 ```
-This is only the reduction step: the statement holds for any braided additive `G` and any scalar
-`t`, and no `E`-coefficient sheaf appears. Identifying `Frob_{X,K_E}` with `t • G(V)` is the
-separate comparison of the integral and rational operators
-(`ProEtale.CondensedRing.pow_smul_frobeniusCompactOperator_eq`, in the pro-étale framework). -/
+Once `t • G(V)` and `t • G(V_x̄)` are identified with `Frob_{X,K_E}^m` on `RΓ_c(X, K_E)` and
+`Frob_{x̄,m}` on `(K_E)_x̄`, this is the trace formula for `K_E`. -/
 theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
     (hI : I = Ideal.span {ϖ})
     (F : S.FrobeniusSystem f.geometricGaloisFrobenius.asIso.hom) {m : ℕ} (hm : m ≠ 0)

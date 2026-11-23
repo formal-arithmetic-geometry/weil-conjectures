@@ -62,7 +62,8 @@ right duals, as in
 traces do not depend on their choice. The Frobenius operators use the iterates `endIterate` and
 the Frobenius correspondences the iterates `ProEtale.iterateHom`; they agree
 (`AlgebraicGeometry.Etale.endIterate_eq_iterateHom`,
-`AlgebraicGeometry.Etale.eqToHom_comp_iterateWeilDatum`).
+`AlgebraicGeometry.Etale.eqToHom_comp_iterateWeilDatum`). The lemma `endIterate_eq_iterateHom` is
+`endIterate_eq_pow` with the right-hand side folded back into `iterateHom`, for rewriting.
 -/
 
 @[expose] public section
@@ -96,8 +97,7 @@ open ProEtale (iterateHom)
 
 section Iterate
 
-/-- The iterate `endIterate g m` is the iterate `ProEtale.iterateHom g m`. This is
-`endIterate_eq_pow` with the right-hand side folded back into `iterateHom`, for rewriting. -/
+/-- The iterate `endIterate g m` is the iterate `ProEtale.iterateHom g m`. -/
 lemma endIterate_eq_iterateHom {X : Scheme.{u}} (g : X ⟶ X) (m : ℕ) :
     endIterate g m = iterateHom g m :=
   endIterate_eq_pow g m
