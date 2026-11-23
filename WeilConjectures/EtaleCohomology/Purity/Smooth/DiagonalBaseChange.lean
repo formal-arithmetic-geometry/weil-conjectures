@@ -243,7 +243,7 @@ theorem dualizingComplexPullbackFstBaseChangeIso_hom_eq :
 variable [IsSeparated f] [IsSeparated f']
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X'] [QuasiSeparatedSpace Y]
-  [QuasiSeparatedSpace Y'] in
+  [QuasiSeparatedSpace Y'] [QuasiCompact f] in
 /-- **Vertical pasting of `Ex_!` along `Δ ≫ p₁ = 𝟙`**: the compactly supported base change maps
 of the squares of `Δ`, `p₁` and `𝟙 = Δ ≫ p₁` are compatible with the composition
 isomorphisms. -/
@@ -271,7 +271,7 @@ theorem exchangeCompCompatible_diagonal_fst :
 -- the ascription compares `dualizingComplex` with `R^!` of `constantComplex` (deep, fast)
 set_option maxRecDepth 20000 in
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X'] [QuasiSeparatedSpace Y]
-  [QuasiSeparatedSpace Y'] in
+  [QuasiSeparatedSpace Y'] [QuasiCompact f] in
 /-- The pasting of the exceptional base changes along `Δ ≫ p₁ = 𝟙` at the unit, through the
 conjugates of the composition isomorphisms. -/
 lemma mate_paste_unit_diagonal :
