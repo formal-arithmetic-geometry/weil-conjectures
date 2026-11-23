@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 /-! # Flat ordinary scalar units compute derived scalar units
 
 Source: Stacks Project, sites-cohomology, K-flat resolutions and derived change of rings.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -250,21 +249,7 @@ private theorem universal_of_flat_adjoint [E.PreservesKFlatQuasiIso] (a : E ⊣ 
 end FlatAdjunction
 
 /-- A flat source lets an ordinary scalar-extension unit compute the unbounded derived unit.
-Source: Stacks Project, sites-cohomology, lemma-bounded-flat-K-flat,
-lemma-derived-base-change, and lemma-adjoint, applied to a change of constant rings.
-(auxiliary; not a blueprint node).
-
-Proof: Let E be sheafified sectionwise extension of scalars along φ, left adjoint to
-restriction. Restriction is exact and conservative. Its composite with E is tensoring
-with the constant R-module A. Thus E preserves quasi-isomorphisms between K-flat
-complexes, by the tensor criterion for K-flatness. Derive this adjunction on unbounded
-complexes. Flatness of F makes F[0] K-flat, so the derived counit identifies LE(F[0])
-with (EF)[0]. The ordinary Hom bijections say that the adjunction transpose EF → G
-of η is invertible: both EF and G represent Hom(F, res(-)). Compose the K-flat
-comparison with this isomorphism. The derived adjunction then gives the asserted
-bijections for every unbounded test complex. Naturality of the derived counit on
-single complexes identifies its unit with scalarUnit(η), including the exact-single
-comparison. This uses flatness of F alone, never flatness of A over R. -/
+Source: Stacks Project, sites-cohomology, and, applied to a change of constant rings. -/
 theorem scalarUniversal_of_flat
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {R A : Type (u + 1)} [CommRing R] [CommRing A]

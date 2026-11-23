@@ -24,17 +24,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 private abbrev tensorAdj := PresheafOfModules.sheafificationAdjunction (𝟙 (ring S).obj)
 
 /-- Maps from an iterated sheaf tensor agree if they agree on all pure triples.
-
-Source: Stacks 03EK, sheaf tensor as the sheafification of presheaf tensor
-(blueprint: lem-sf-sheaf-tensor-pure-triple-ext).
-
-Proof: tensor the inner sheafification unit with the third factor, then sheafify.
-This morphism is invertible because tensor preserves local equivalences. Compose
-it with the two tensor/sheafification comparison isomorphisms and cancel the result.
-The sheafification adjunction reduces the remaining equality to presheaf maps, where
-sectionwise triple tensor extensionality applies. Naturality of the adjunction unit
-and the pure-tensor map formula identify each tested generator with the prescribed
-sheafified pure triple. Thus no assertion of global pure generation is needed. -/
+Source: Stacks 03EK, sheaf tensor as the sheafification of presheaf tensor. -/
 theorem pure_triple_ext (M N T H : Modules S) {f g : (M ⊗ N) ⊗ T ⟶ H}
     (h : ∀ X x y z,
       f.val.app X (pureTensor (M ⊗ N) T X (pureTensor M N X x y) z) =

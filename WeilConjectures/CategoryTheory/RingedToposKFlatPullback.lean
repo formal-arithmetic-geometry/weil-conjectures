@@ -19,7 +19,7 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 # Tensor pullback for a supplied ringed-topos module direct image
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Cohomology on Sites,
-Tags 0G7E and 06YY (auxiliary; not a blueprint node).
+Tags 0G7E and 06YY.
 -/
 
 @[expose] public section
@@ -497,9 +497,45 @@ private theorem h4_supplied_operations
   · simpa only [u, Equiv.apply_symm_apply] using
       (binary_mate_iff f.adj (msmul B (f.modules.obj H)) (msmul A H) f.ringMap u u).mp hs
 
-set_option maxHeartbeats 600000 in
--- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
-private theorem supplied_adjunction
+-- Naturality of a lifted mate correspondence can be checked after a faithful functor.
+private theorem faithful_mate_naturality_left
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (U : A ⥤ C) [U.Faithful] (V : B ⥤ D) (I : A ⥤ B)
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (e : I ⋙ V ≅ U ⋙ L)
+    {Y : B} {Z : A} (p : U.obj Z ≅ R.obj (V.obj Y))
+    (E : ∀ M, (I.obj M ⟶ Y) ≃ (M ⟶ Z))
+    (hE : ∀ M a, U.map (E M a) ≫ p.hom =
+      adj.homEquiv _ _ (e.inv.app M ≫ V.map a))
+    {M N : A} (a : M ⟶ N) (b : I.obj N ⟶ Y) :
+    E M (I.map a ≫ b) = a ≫ E N b := by
+  apply U.map_injective
+  apply (cancel_mono p.hom).mp
+  rw [hE, U.map_comp, Category.assoc, hE, V.map_comp]
+  have hn : e.inv.app M ≫ V.map (I.map a) =
+      L.map (U.map a) ≫ e.inv.app N := (e.inv.naturality a).symm
+  rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
+
+private theorem faithful_mate_naturality_right
+    {A B C D H : Type*} [Category A] [Category B] [Category C] [Category D] [Category H]
+    (U : A ⥤ C) [U.Faithful] (V : B ⥤ D) (S : H ⥤ B) (P : H ⥤ A)
+    {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) (p : P ⋙ U ≅ (S ⋙ V) ⋙ R)
+    {X : B} {M : A} (e : V.obj X ≅ L.obj (U.obj M))
+    (E : ∀ Y, (X ⟶ S.obj Y) ≃ (M ⟶ P.obj Y))
+    (hE : ∀ Y a, U.map (E Y a) ≫ p.hom.app Y =
+      adj.homEquiv _ _ (e.inv ≫ V.map a))
+    {Y Y' : H} (a : X ⟶ S.obj Y) (b : Y ⟶ Y') :
+    E Y' (a ≫ S.map b) = E Y a ≫ P.map b := by
+  apply U.map_injective
+  apply (cancel_mono (p.hom.app Y')).mp
+  rw [hE, U.map_comp, Category.assoc]
+  have hn : U.map (P.map b) ≫ p.hom.app Y' =
+      p.hom.app Y ≫ R.map (V.map (S.map b)) := p.hom.naturality b
+  rw [hn, ← Category.assoc, hE, V.map_comp, ← Category.assoc,
+    adj.homEquiv_naturality_right]
+
+-- Keep the linearity witnesses inside the construction of the hom equivalence, so
+-- naturality uses only its underlying-sheaf equation.
+private theorem supplied_hom_equiv
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
@@ -508,7 +544,10 @@ private theorem supplied_adjunction
     (c : RI ⟶ A)
     (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
       I.ringUnderlying.inv ≫ f.ringMap) :
-    Nonempty (I.modules ⋙ tensorFunctor c ⊣ f.modules) := by
+    ∃ E : ∀ M H, (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) ≃ (M ⟶ f.modules.obj H),
+      ∀ M H a, (mset B).map (E M H a) ≫ f.underlying.hom.app H =
+        f.adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫ (mset RI).map a) := by
   let _ := f.leftExact
   let _ : PreservesLimits f.direct := f.adj.rightAdjoint_preservesLimits
   let eR := I.ringUnderlying.symm
@@ -580,26 +619,33 @@ private theorem supplied_adjunction
       f.adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
     rw [restrictHomEquiv_map]
     exact (mateIsoEquiv_equation f.adj (eI.app M) (eP.app H) _).symm
+  exact ⟨B', hB⟩
+
+private theorem supplied_adjunction
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
+    (f : RingedToposMorphism.{u} (C := C) (D := D) (J := J) (K := K) (base A) (base B))
+    (RI : Sheaf J CommRingCat.{u}) (I : AlgebraicInverseImage f.inverse B RI)
+    (c : RI ⟶ A)
+    (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map c =
+      I.ringUnderlying.inv ≫ f.ringMap) :
+    Nonempty (I.modules ⋙ tensorFunctor c ⊣ f.modules) := by
+  obtain ⟨B', hB⟩ := supplied_hom_equiv f RI I c hc
+  let eI := I.moduleUnderlying
+  let eP := f.underlying
   have hBL {M N} (a : M ⟶ N) H b :
-      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
-    apply (mset B).map_injective
-    apply (cancel_mono (eP.hom.app H)).mp
-    rw [hB, (mset B).map_comp, Category.assoc, hB, (mset RI).map_comp]
-    have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
-        f.inverse.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
-    rw [← Category.assoc, hn, Category.assoc, f.adj.homEquiv_naturality_left]
+      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b :=
+    faithful_mate_naturality_left (mset B) (mset RI) I.modules f.adj eI
+      (Y := (restrictScalars ((sheafCompose J
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).obj H) (Z := f.modules.obj H)
+      (eP.app H) (fun M ↦ B' M H) (fun M ↦ hB M H) a b
   have hBR M {H H'} a (b : H ⟶ H') :
       B' M H' (a ≫ (restrictScalars ((sheafCompose J
-        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = B' M H a ≫ f.modules.map b := by
-    apply (mset B).map_injective
-    apply (cancel_mono (eP.hom.app H')).mp
-    rw [hB, (mset B).map_comp, Category.assoc]
-    have hn : (mset B).map (f.modules.map b) ≫ eP.hom.app H' =
-        eP.hom.app H ≫ f.direct.map ((mset A).map b) := eP.hom.naturality b
-    rw [hn, ← Category.assoc, hB, (mset RI).map_comp]
-    change f.adj.homEquiv _ _ (eI.inv.app M ≫
-      ((mset RI).map a ≫ (mset A).map b)) = _
-    rw [← Category.assoc, f.adj.homEquiv_naturality_right]
+        (forget₂ CommRingCat.{u} RingCat.{u})).map c)).map b) = B' M H a ≫ f.modules.map b :=
+    faithful_mate_naturality_right (mset B) (mset RI)
+      (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map c))
+      f.modules f.adj eP (eI.app M) (B' M) (hB M) a b
   let T := I.modules ⋙ tensorFunctor c
   let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ f.modules.obj H) :=
     fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
@@ -647,21 +693,7 @@ namespace CategoryTheory
 K-flat complexes with flat terms, and preserves quasi-isomorphisms between them.
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Cohomology on Sites,
-Tags 0G7E and 06YY (auxiliary; not a blueprint node).
-
-Proof: Transport the commutative ring and its modules through the finite-limit-preserving
-inverse image of sheaves of sets. The structural map of the ringed-topos morphism gives a
-ring map from this inverse-image ring to the source ring. Compose inverse image of modules
-with extension of scalars along this ring map. The tensor adjunction and the underlying
-sheaf adjunction restrict to linear maps. The generalized scalar-action equation in
-`RingedToposMorphism.module_linear` identifies their right adjoint with the supplied
-`modules` functor, naturally, so transport the adjunction across that identification.
-The pullback preservation theorem 0G7E gives K-flatness and flat terms for its image.
-For a quasi-isomorphism between such complexes, the derived-pullback comparison of 06YY
-is invertible at both endpoints. Its naturality square identifies the localized termwise
-pullback map with the image of an isomorphism, so this map is a quasi-isomorphism.
-No flatness of the structural ring map is used; the identity and zero-ring cases are
-included by the same tensor adjunction and localization argument. -/
+Tags 0G7E and 06YY. -/
 theorem RingedToposMorphism.exists_kFlatPullback
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

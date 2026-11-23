@@ -107,9 +107,6 @@ private theorem combine_restriction_square
     _ = a ≫ (y ≫ z) ≫ c₀ := by rw [hc]; simp [Category.assoc]
     _ = _ := by rw [hy]; simp [Category.assoc]
 
-set_option maxHeartbeats 600000 in
--- The remote check exhausted 200000 heartbeats at the final composition after the
--- targeted source rewrite (22s); the original theorem used a 1000000 budget.
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Construct the target comparison and prove mate compatibility from two
 independent ingredients: restriction of the pinned tensor counit and invariance
@@ -204,9 +201,9 @@ theorem open_pinned_single_degree_zero_target
         schemeDerivedBaseChangeMap (f ∣_ V) (f' ∣_ W) (g.resLE V W hWV) j hsq.w K₀ ≫
           Q.map (singleComplexRestrictedCoefficient g' K ((derivedPullback g').obj K)
             (𝟙 _) U Z j hj) ≫ d.inv.app _ at hb
-    rw [hb]
-    simp only [Category.assoc, Iso.inv_hom_id_app]
-    erw [Category.comp_id]
+    apply (Iso.eq_comp_inv (d.app _)).mp
+    with_unfolding_all
+      simpa only [Category.assoc, δ, R, Q, Functor.comp_obj, Iso.app_inv] using hb
   have hc' : δ ≫ RZ.map (openPinnedSingleDegreeZeroCounit g' G) ≫ t.hom.app G =
       L.map s ≫ openPinnedSingleDegreeZeroCounit j H := hc
   have hb₀ : b₀.hom.app G = d.hom.app _ ≫ Q.map (t.hom.app G) := by
@@ -243,11 +240,17 @@ theorem open_pinned_single_degree_zero_target
       rhs
       lhs
       rw [← openPinnedSingleDegreeZeroSourceIso_app f g V W hWV G]
+    change R.map (schemeDerivedBaseChangeMap f f' g g' sq.w K ≫
+      (schemeDerivedDirectImage f').map (openPinnedSingleDegreeZeroCounit g' G)) ≫
+        b₀.hom.app G =
+      (openPinnedSingleDegreeZeroSourceIso f g V W hWV).hom.app G ≫
+        (schemeDerivedBaseChangeMap (f ∣_ V) (f' ∣_ W) (g.resLE V W hWV) j hsq.w
+          ((DerivedCategory.singleFunctor _ 0).obj H) ≫
+            Q.map (openPinnedSingleDegreeZeroCounit j H))
+    rw [Functor.map_comp, hb₀]
     with_unfolding_all
-      simp only [singleDegreeBaseChangeComposite, openPinnedSingleDegreeZeroCounit, cast_eq,
-        Functor.map_comp, hb₀, Category.assoc, R, Q, K, U, H,
-        singleDegreeBaseChangeSource, singleDegreeBaseChangeTarget, Functor.comp_obj] at h ⊢
-      exact h
+      simpa only [Category.assoc, R, Q, K, U, H, singleDegreeBaseChangeSource,
+        singleDegreeBaseChangeTarget, Functor.comp_obj] using h
   simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
     Functor.whiskerLeft_app,
     Category.assoc, U, H] using

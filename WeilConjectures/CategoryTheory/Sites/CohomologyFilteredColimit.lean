@@ -47,11 +47,7 @@ abelian sheaves commutes with filtered colimits ([Stacks 03Q6], [Stacks 0738]).
 ## Implementation notes
 
 The small étale site version `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small` is a
-special case. Sections over members of `B` commute with filtered colimits, hence so do the Čech
-complexes on the finite families; a filtered colimit of injective sheaves thus has vanishing
-higher cohomology by the Čech criterion, and we conclude by dimension shifting along the
-functorial injective embedding `CategoryTheory.Functor.toInjectiveExtension`, filtered colimits
-being exact.
+special case.
 -/
 
 @[expose] public section
@@ -503,12 +499,7 @@ colimit cocone of a filtered diagram `D` of abelian sheaves indexed by a small c
 for every `q` the canonical map `colim_k Hᵠ(D_k) ⟶ Hᵠ(c.pt)` is bijective, spelled out
 elementwise.
 
-Degree zero is `CategoryTheory.Sheaf.H_zero_map_isColimit`. In higher degrees, we embed `D` into
-the diagram of injective sheaves `D.injectiveExtension` with cokernel `Q`; since filtered
-colimits are exact, the colimit sequence `0 → c.pt → colim I → colim Q → 0` is short exact,
-`colim I` has no higher cohomology
-(`CategoryTheory.Sheaf.subsingleton_H_succ_of_isColimit_of_injective`), and we conclude by
-`CategoryTheory.Sheaf.H_map_isColimit_succ_of_shortExact`. -/
+Degree zero is `CategoryTheory.Sheaf.H_zero_map_isColimit`. -/
 @[stacks 03Q6]
 theorem H_map_isColimit_of_isFiltered_small (hT : IsTerminal T) (B : C → Prop) (hBT : B T)
     (hcov : ∀ V, B V → ∀ R ∈ J V, ∃ (n : ℕ) (U : Fin n → Over V),

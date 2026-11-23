@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Coproducts and the supported right adjoint
 
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4)
-(blueprint: lem-weil-pbc-supported-right-adjoint-coproducts).
+Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4).
 -/
 
 @[expose] public noncomputable section
@@ -27,20 +26,7 @@ namespace CategoryTheory
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- The supported right adjoint preserves any coproduct preserved by the open
 localization endofunctor.
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4)
-(blueprint: lem-weil-pbc-supported-right-adjoint-coproducts).
-
-Proof: closed restriction and open restriction jointly detect isomorphisms.
-For an object killed by open restriction, the closed-adjunction unit becomes
-invertible after closed restriction, by the triangle identity, and after open
-restriction, because both objects are zero. Thus the object lies in the closed
-essential image. The recollement theorem gives its supported localization
-triangle. Take these triangles on the family and on its coproduct. Naturality
-of recollement supplies a morphism from their coproduct triangle to the latter
-triangle. The middle component is the identity; the third is the invertible
-open-localization coproduct comparison. The triangulated five lemma inverts the
-first component, which is the supported-endofunctor comparison. Fully faithful
-closed inclusion reflects colimits, giving the right-adjoint conclusion. -/
+Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4). -/
 theorem supportedRightAdjoint_preservesCoproduct
     {C : Type c} [Category.{vc} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

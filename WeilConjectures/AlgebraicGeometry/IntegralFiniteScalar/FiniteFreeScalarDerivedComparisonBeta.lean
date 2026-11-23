@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDe
 import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDerivedComparisonBetaMate
 
 /-! The normalized beta part of the finite-free derived comparison.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-beta)
 -/
 
 @[expose] public noncomputable section
@@ -28,12 +27,9 @@ namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 open CondensedRing
 
 /--
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, formal-properties
-paragraphs.  This is strictly the beta, pullback, and mate conjunct of the
+This is strictly the beta, pullback, and mate conjunct of the
 finite-free derived comparison; the independent flatness conjunct is recorded
 separately.
-(blueprint: lem-sfb-finite-free-scalar-derived-comparison-beta)
 -/
 theorem finiteFreeScalarDerivedComparison_beta
     (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}

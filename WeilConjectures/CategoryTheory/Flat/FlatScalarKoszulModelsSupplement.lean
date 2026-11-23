@@ -94,7 +94,6 @@ public import WeilConjectures.CategoryTheory.FlatScalarKoszulModels
 These are the existing ordered-coordinate definitions for scalar comparison, separated
 from the derived comparison so that the finite calculation can be used independently.
 Source: Stacks Project, Tags 0A0E, 0913, 0A07 and 0941.
-(blueprint: def-weil-pbc-flat-scalar-koszul-models).
 -/
 
 @[expose] public noncomputable section
@@ -110,23 +109,19 @@ namespace CategoryTheory.FlatScalarKoszul
 
 variable {S : Type u} [SmallCategory S] {J : GrothendieckTopology S}
 
-/-- Termwise restriction on complexes. Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
+/-- Termwise restriction on complexes. Source: Stacks 0A07. -/
 abbrev restrictComplex {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
   (restriction φ).mapHomologicalComplex (.up ℤ)
 
-/-- Levelwise restriction on strict towers. Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
+/-- Levelwise restriction on strict towers. Source: Stacks 0A07. -/
 abbrev restrictTower {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
   (Functor.whiskeringRight ℕᵒᵖ (Modules B) (Modules R)).obj (restriction φ)
 
-/-- Termwise levelwise restriction. Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
+/-- Termwise levelwise restriction. Source: Stacks 0A07. -/
 abbrev restrictTowerComplex {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :=
   (restrictTower φ).mapHomologicalComplex (.up ℤ)
 
-/-- The image list of global sections. Source: Stacks 0A0E
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
+/-- The image list of global sections. Source: Stacks 0A0E. -/
 def imageSections {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) {r : ℕ}
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections) :
     Fin r → (B.obj ⋙ forget CommRingCat).sections :=
@@ -135,8 +130,7 @@ def imageSections {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) {r : ℕ}
       (congrArg (φ.hom.app _) ((a i).property f))⟩
 
 /-- The canonical comparison, identity on compatible families, before deriving limit.
-Source: Stacks 0A07
-(blueprint: def-weil-pbc-flat-scalar-koszul-models). -/
+Source: Stacks 0A07. -/
 def limitComparison {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     limitComplex B ⋙ restrictComplex φ ⟶ restrictTowerComplex φ ⋙ limitComplex R :=
   letI : PreservesLimitsOfSize.{0, 0} (restriction φ) :=

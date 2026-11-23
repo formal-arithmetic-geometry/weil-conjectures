@@ -21,6 +21,9 @@ import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 /-!
 # The two-term resolution of the finite coefficient sheaves
 
+The finite coefficient sheaves `O_E / π^n` are resolved by the two-term complex
+`[O_E --π^n--> O_E]`, and derived reduction of an unbounded complex is computed by a cone.
+
 All coefficients are continuous condensed rings pulled back from the point. A natural
 cone is expressed using the standard cone functor on complexes, with its standard maps.
 The comparison with a functor on the derived category also asserts its descent and naturality.
@@ -437,6 +440,8 @@ private theorem quotientDiscrete (n : ℕ) :
     rw [← isQuotientMap_quot_mk.isOpen_preimage]
     exact hq.isOpen_fiber _
 
+/-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
+`O_E`, as a morphism of sheaves of abelian groups. -/
 private def uniformizerMap : integerRing l E ⟶ integerRing l E := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   refine ⟨{ app := fun S ↦ ?_, naturality := ?_ }⟩
@@ -448,6 +453,8 @@ private def uniformizerMap : integerRing l E ⟶ integerRing l E := by
   · intro S T f
     rfl
 
+/-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
+`O_E`, as an endomorphism of the regular `O_E`-module object. -/
 private def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   refine .of (Mod.homMk (uniformizerMap l E) ?_)
@@ -471,6 +478,8 @@ private def uniformizerEnd : End (Mod.regular (integerRing l E)) := by
     f.down x * (Padic.coefficientExtensionUniformizer l E * g.down x)
   ring
 
+/-- The quotient map `O_E ⟶ O_E/π_E^n` of continuous condensed rings, as a morphism of
+`O_E`-module objects from the regular module to the quotient with its restricted action. -/
 private def reductionHom (n : ℕ) :
     Mod.regular (integerRing l E) ⟶ quotientModule l E n :=
   Mod.homMk (reductionRing l E n) (by
@@ -512,6 +521,7 @@ private theorem uniformizerPower_apply (n : ℕ) (S : Profinite.{u}ᵒᵖ)
       (((uniformizerEnd l E).asHom.hom.hom.app S) f)).down s = _
     rw [ih, uniformizerEnd_apply, pow_succ, mul_assoc]
 
+/-- Multiplication by `π_E^n` followed by the quotient map `O_E ⟶ O_E/π_E^n` is zero. -/
 private theorem reduction_zero (n : ℕ) :
     (uniformizerEnd l E ^ n).asHom ≫ reductionHom l E n = 0 := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -625,6 +635,38 @@ private theorem pointResolution (n : ℕ) :
   have : Epi S.g := Functor.epi_of_epi_map (Mod.forget _) hs.epi_g
   exact ⟨(S.exact_map_iff_of_faithful (Mod.forget _)).mp hs.exact⟩
 
+/-- Multiplication by the chosen uniformizer `π_E` on the continuous condensed integer ring
+`O_E`, as an endomorphism of the regular `O_E`-module object. -/
+@[no_expose]
+def resolutionUniformizerEnd : End (Mod.regular (integerRing l E)) := uniformizerEnd l E
+
+/-- The quotient map `O_E ⟶ O_E/π_E^n` of continuous condensed rings, as a morphism of
+`O_E`-module objects from the regular module to the quotient with its restricted action. -/
+@[no_expose]
+def resolutionReductionHom (n : ℕ) :
+    Mod.regular (integerRing l E) ⟶ quotientModule l E n :=
+  reductionHom l E n
+
+/-- Multiplication by `π_E^n` followed by the quotient map `O_E ⟶ O_E/π_E^n` is zero. -/
+theorem resolutionReduction_zero (n : ℕ) :
+    (resolutionUniformizerEnd l E ^ n).asHom ≫ resolutionReductionHom l E n = 0 :=
+  reduction_zero l E n
+
+/-- **The finite quotients of the coefficient sheaf on `X_proét`.** For every `n` the sequence
+`0 ⟶ O_{E,X} ⟶ O_{E,X} ⟶ (O_E/π_E^n)_X ⟶ 0` of `O_{E,X}`-module objects on the small pro-étale
+site of `X`, with first map multiplication by `π_E^n` and second map the quotient map, is short
+exact. The coefficient sheaves are the pullbacks from the point of the continuous condensed
+integer ring and of its finite quotient (with its restricted `O_E`-action), and the arrows are
+the pullbacks of multiplication by the uniformizer power and of the quotient map; no assumption
+on `ℓ` being invertible on `X` is made. The sequence on the point is short exact
+(sectionwise, by continuous division by the uniformizer power and continuous lifting along the
+finite discrete quotient), and the pullback from the point is exact. -/
+theorem shortExact_pullback_reductionShortComplex (X : Scheme.{u}) (n : ℕ) :
+    ∃ h : (pullback l E X).map (resolutionUniformizerEnd l E ^ n).asHom ≫
+      (pullback l E X).map (resolutionReductionHom l E n) = 0,
+      (ShortComplex.mk _ _ h).ShortExact :=
+  ⟨_, (pointResolution l E n).map_of_exact (pullback l E X)⟩
+
 private def unitEndOnX (X : Scheme.{u})
     (d : End (Mod.regular (integerRing l E))) :
     UnitScalar.Scalars (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -695,8 +737,7 @@ theorem derived_nakayama_resolution :
   refine ⟨uniformizerEnd l E, uniformizerEnd_apply l E,
     reductionHom l E, fun _ ↦ rfl, i, q, hi, hq, ?_⟩
   intro X n hn
-  have hs := (pointResolution l E n).map_of_exact (pullback l E X)
-  refine ⟨⟨_, hs⟩, naturalCone l E X n, ?_⟩
+  refine ⟨shortExact_pullback_reductionShortComplex l E X n, naturalCone l E X n, ?_⟩
   intro m hm hmn K
   obtain ⟨hz, hshort⟩ := hseq m n
   let A := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

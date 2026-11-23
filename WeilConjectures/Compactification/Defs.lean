@@ -46,6 +46,14 @@ separated and locally of finite type; these are instances.
 A choice of compactification is extracted from `HasCompactification f` by
 `HasCompactification.compactification f`.
 
+## Implementation details
+
+The open immersion `i` is not required to be quasi-compact, unlike in the definition of
+Stacks/Conrad, where `j` is a quasi-compact open immersion. When `f` is quasi-compact, which is
+the case in all uses of Nagata's theorem, the two notions agree: `i` is then automatically
+quasi-compact (`AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff`). The weaker
+requirement is what lets a compactification be restricted along an arbitrary open immersion
+(`AlgebraicGeometry.Compactification.precomp`).
 -/
 
 @[expose] public section
@@ -57,15 +65,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The data of a compactification of `f : X ⟶ Y`: a scheme `Z` together with a proper
-morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`.
-
-The open immersion `i` is not required to be quasi-compact, unlike in the blueprint
-(`definition-compactification-refinement--1`) and in Stacks/Conrad, where `j` is a quasi-compact
-open immersion. When `f` is quasi-compact, which is the case in all uses of Nagata's theorem, the
-two notions agree: `i` is then automatically quasi-compact
-(`AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff`). The weaker
-requirement is what lets a compactification be restricted along an arbitrary open immersion
-(`AlgebraicGeometry.Compactification.precomp`). -/
+morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`. -/
 structure Compactification {X Y : Scheme.{u}} (f : X ⟶ Y) where
   /-- The scheme in which `X` is compactified. -/
   Z : Scheme.{u}
@@ -224,7 +224,7 @@ variable {X Y : Scheme.{u}}
 
 /-- A morphism `f : X ⟶ Y` has a compactification if it factors as an open
 immersion followed by a proper morphism, i.e. `f` is *compactifiable*, such a factorization
-being a `Compactification f`. This is blueprint `definition-compactification-refinement--1`. -/
+being a `Compactification f`. -/
 class HasCompactification (f : X ⟶ Y) : Prop where
   /-- Some compactification of `f` exists. -/
   nonempty_compactification : Nonempty (Compactification f)

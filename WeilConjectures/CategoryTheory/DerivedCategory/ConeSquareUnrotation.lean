@@ -168,28 +168,7 @@ private lemma comparisonIso_hom₃
 presentation, naturally on its first and third vertices.
 
 Source: Stacks Project, Derived Categories, Tag 014D (mapping cones and the
-canonical double-cone homotopy equivalences), and Tag 05QK (rotation).
-(blueprint: lem-pc-derived-cone-square-unrotation).
-
-Proof: Take A = L[-1], B = Cone(g)[-1], t = inr(g)[-1], and the
-corresponding primed objects; take the vertical maps r[-1] and Cone(s,r)[-1].
-The shifted cone-inclusion naturality square is strictly commutative. The
-canonical homotopy equivalence from K[1] to Cone(inr(g)) identifies the rotation
-of the cone triangle of g with the cone triangle of inr(g). Shift this
-identification by -1 and use the cone-shift comparison to identify the cone
-triangle of t with the shifted rotation of the cone triangle of g. The
-cone-shift comparison includes the sign on its middle vertex. Compose with the
-shifted rotation of e. Three rotations of T identify canonically with T[1];
-cancel shifts 1 and -1 to obtain the displayed isomorphism d, and similarly d'.
-On first vertices, the comparison is the shift comparison followed by e's
-second component and shift cancellation. Shift naturality and coherence give
-the first identity. On third vertices, its comparison is the shifted inverse
-of the canonical double-cone homotopy equivalence, followed by e's first
-component. Cone-shift comparisons are natural in strict squares, as is the
-inverse double-cone equivalence: both identities follow degreewise from the
-cone matrix formulas. Applying these naturality identities and shift
-cancellation gives the second identity. All objects and maps are these explicit
-constructions; the argument also applies when any complex is zero. -/
+canonical double-cone homotopy equivalences), and Tag 05QK (rotation). -/
 theorem derived_cone_square_unrotation
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     {K L K' L' : CochainComplex C ℤ}

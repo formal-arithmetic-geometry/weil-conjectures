@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 /-! # Module sheaves as scalar objects in abelian sheaves
 
 Source: Stacks Project, Tag 04JQ, transport of module structures.
-(blueprint: lem-exc-scalar-module-sheaves)
 -/
 
 @[expose] public section

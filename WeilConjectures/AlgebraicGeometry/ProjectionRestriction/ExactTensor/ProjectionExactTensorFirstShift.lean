@@ -10,8 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.ProjectionRestriction.ProjectionExa
 import all WeilConjectures.AlgebraicGeometry.ProjectionRestriction.RingedProjectionTensorShifts
 
 /-! Signed shift verification for exact tensor descent.
-Source: Stacks 07A4 and 0FNH.
-(blueprint: lem-weil-pbc-projection-exact-tensor-shift-first).
+
+## References
+
+* Stacks 07A4 and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -164,12 +166,7 @@ private theorem fixedFirst_global (o : Data R S)
   rw [ht]
   infer_instance
 
-/-- The first signed shift square for the descended tensor comparison.
-Source: Stacks 07A4 and 0FNH (blueprint: lem-weil-pbc-projection-exact-tensor-shift-first).
-Proof: on resolving representatives conjugate the comparison by the representative
-and exact-derived factor isomorphisms. Their normalized shifts and the total-complex
-comparison shift theorem imply the square. Cancel the outside isomorphisms, then
-use essential surjectivity of flat-term K-flat resolutions to obtain all objects. -/
+/-- The first signed shift square for the descended tensor comparison. -/
 theorem exactTensorComparison_shiftFirst (L : Mod R ⥤ Mod S) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     [PreservesColimitsOfSize.{0, 0} L]

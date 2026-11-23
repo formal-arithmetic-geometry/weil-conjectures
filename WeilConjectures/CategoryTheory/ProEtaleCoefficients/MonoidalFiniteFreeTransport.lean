@@ -17,10 +17,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 /-!
 # Additive monoidal transport of a finite free internal module
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md, third sentence.
-(blueprint: lem-sfb-monoidal-finite-free-transport)
-
 The biproducts are taken in the existing category of internal modules. Their actions
 are componentwise, as constructed in `CategoryTheory.ModuleObjects.Abelian`.
 -/
@@ -40,37 +36,7 @@ attribute [local instance] CategoryTheory.Limits.hasBinaryBiproducts_of_finite_b
 namespace CategoryTheory.Functor
 
 /-- An additive strong monoidal functor transports a specified finite free basis,
-including its coordinate maps and the Kronecker and finite-sum identities.
-
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md, third sentence.
-(blueprint: lem-sfb-monoidal-finite-free-transport)
-
-Proof:
-1. Form the biproduct of regular modules with the componentwise action. On its
-   underlying biproduct the action is the sum of projection, multiplication and
-   inclusion. Projecting its unit and associativity equations reduces them to the
-   regular-module axioms. Tensor additivity and the Kronecker identities make both
-   inclusions and projections linear (sk-def-sfb-module-objects).
-2. Put u_i = inclusion_i followed by theta, and v_i = theta inverse followed by
-   projection_i. They are linear, v_i u_j is the Kronecker identity, and the sum
-   of u_i v_i is the identity, using bilinearity of composition
-   (def-weil-preadditive-category).
-3. Apply mapMod from def-sfb-modobj-transport to these maps. The transported regular
-   action is exactly the multiplication of the transported ring. The strong monoidal
-   structure supplies its lax structure, with no symmetry requirement.
-4. Additivity of P preserves zero and finite sums; functoriality therefore gives
-   the same Kronecker and total identities for P(u_i) and P(v_i)
-   (def-weil-pbc-additive-functor).
-5. Define alpha as the sum of target projections followed by P(u_i), and beta as
-   the sum of P(v_i) followed by target inclusions. Every summand is linear;
-   tensor additivity and bilinearity make their finite sums linear too.
-6. Expand both composites of alpha and beta and use the identities of step 4 and
-   the target biproduct identities. They are identities, and composing with one
-   inclusion or projection gives the two required formulas. For n = 0 all sums
-   are empty, the target biproduct is zero, and step 4 gives id on P(M) equal to
-   zero, so the same construction remains an isomorphism.
--/
+including its coordinate maps and the Kronecker and finite-sum identities. -/
 theorem monoidalFiniteFreeTransport
     {C : Type u₁} [Category.{v₁} C] [Preadditive C] [MonoidalCategory C]
     [HasFiniteBiproducts C] [MonoidalPreadditive C]

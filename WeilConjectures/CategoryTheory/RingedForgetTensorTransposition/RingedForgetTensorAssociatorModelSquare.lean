@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 /-! # The associativity square for ringed tensor chain models
 
 Source: Stacks Project, Tags 0FPT and 06YU.
-(blueprint: lem-sf-ringed-forget-associator-model-square).
 -/
 
 @[expose] public noncomputable section
@@ -68,17 +67,7 @@ variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)
   [U.Additive]
 
 /-- The two local pure-triple formulas imply the ringed chain associativity square.
-Source: Stacks Project, Tags 0FPT and 06YU.
-(blueprint: lem-sf-ringed-forget-associator-model-square)
-
-Proof: the sheafification detection theorem identifies both supplied model
-associators with the native complex associators from their local pure-triple
-formulas. Install the canonical monoidal structures on both sites and expand
-only the total-tensor and summand aliases in the comparison data. Cancel the
-underived comparison to express its associativity in inverse form, and apply the
-abstract model-chain associativity theorem. The result concerns only chain
-complexes and is independent of derived representatives and their normalization.
--/
+Source: Stacks Project, Tags 0FPT and 06YU. -/
 theorem ringed_associator_model_square
     (u : Underived.{c, v, r, d, vd, s} J R J' R' U)
     (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅

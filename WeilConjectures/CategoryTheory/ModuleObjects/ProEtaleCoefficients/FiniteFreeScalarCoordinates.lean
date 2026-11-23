@@ -30,10 +30,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 /-!
 # Finite free coordinates for internal scalar extension
 
-Source: blueprint main-20261015, `chap-The-pro-etale-site`,
-`sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md`, last sentence,
-first inference (blueprint: lem-sfb-finite-free-scalar-coordinates).
-
 The formulas are equalities of morphisms involving the canonical coequalizer projection.
 They consequently specify the formulas on local elementary tensors without identifying
 sections of a tensor sheaf with objectwise tensors. Finite products represent the finite
@@ -52,14 +48,9 @@ open CategoryTheory.MonObj
 namespace CategoryTheory.Mod
 
 /-- The finite-free coordinate assertion, including existence of the coequalizers and
-preservation properties needed to form scalar extension. The quantification over their
-instances merely allows the statement to use these consequences; it is independent of
-proof choices. The finite-power functor is the constant-diagram functor followed by limit.
-The chosen free module and its basis inclusions use `Mod.finiteFree` and `biproduct.ι`.
-
-Source: blueprint main-20261015, `lem-sfb-subfield-flat.proof.md`, last sentence,
-first inference (blueprint: lem-sfb-finite-free-scalar-coordinates).
--/
+preservation properties needed to form scalar extension.
+The finite-power functor is the constant-diagram functor followed by limit.
+The chosen free module and its basis inclusions use `Mod.finiteFree` and `biproduct.ι`. -/
 def FiniteFreeScalarCoordinates
     {H : Type u} [Category.{v} H] [MonoidalCategory H] [BraidedCategory H]
     [Abelian H] : Prop :=

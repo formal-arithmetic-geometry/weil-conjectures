@@ -16,11 +16,9 @@ Let `C` be an abelian category and `s` an object of its derived category. We say
 `Hom(s, -[n])` *commutes with filtered colimits* of objects of `C`
 (`DerivedCategory.HomCommutesWithFilteredColimits`) if for every filtered colimit
 `B = colim Bᵢ` in `C` and every `n`, the canonical map `colim Hom(s, Bᵢ[n]) ⟶ Hom(s, B[n])` is
-bijective. This is blueprint `lemma-continuity-ext-out-constructible-complex--1` for targets in
-degree `0`.
+bijective.
 
-* The class of such `s` contains zero, is closed under isomorphisms, shifts and extensions
-  (blueprint `lemma-continuity-ext-out-constructible-complex--1`, five lemma).
+* The class of such `s` contains zero, is closed under isomorphisms, shifts and extensions.
 * For `s` bounded above, the comparison is then bijective for every filtered diagram `Yᵢ` in
   `D(C)` of uniformly bounded below objects with a cocone `Y` inducing colimits on cohomology
   (`DerivedCategory.HomCommutesWithFilteredColimits.diagram`), by induction on the amplitude
@@ -384,7 +382,7 @@ lemma isColimit_homologyFunctor_mapCocone_truncGE
 
 end Truncation
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` for targets in degree `0`: for
+/-- For targets in degree `0`: for
 every filtered colimit `B = colim Bᵢ` of objects of `C` (indexed by a category in `Type w`) and
 every `n`, the map `colim Hom(s, Bᵢ[n]) ⟶ Hom(s, B[n])` is surjective (every morphism factors
 through some `Bᵢ[n]`) and injective (a morphism to `Bᵢ[n]` which vanishes in `B[n]` vanishes in some
@@ -431,7 +429,7 @@ lemma shift {s : DerivedCategory C} (hs : HomCommutesWithFilteredColimits.{w} s)
       (IsCoyonedaColimit.mapCocone_of_iso c
         ((singleFunctors C).shiftIso (-a) (n + a) n (by lia)).symm (hs I F c hc (n + a)))
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1`: the class is closed under
+/-- the class is closed under
 extensions (five lemma on the long exact `Hom` sequences, filtered colimits of abelian groups
 being exact). -/
 lemma ext₂ (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)

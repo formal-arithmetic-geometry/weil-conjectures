@@ -31,8 +31,6 @@ local notation "𝓡" S => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 set_option hygiene false in
 local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
-set_option maxHeartbeats 400000 in
--- Tensor and scalar-restriction elaboration needs more than the default heartbeat budget.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Existence clause for the balancing factorization (Stacks, Tag 01SB). -/
@@ -65,13 +63,9 @@ theorem changeOfRings_tensor_balancing_universal_exists (Y : Scheme.{u})
       ∀ (Q : Y.Modules) (f : S ⟶ Q), a ≫ f = d ≫ f → ∃ t : T ⟶ Q, g ≫ t = f := by
   classical
   -- Evaluate the equality of action composites on a nested pure tensor.
-  dsimp
-  intro a d g ha hd hg Q f hfd
-  let P₀ := (SheafOfModules.restrictScalars (𝓻 B.hom)).obj P
+  intro P₀ S T a d g ha hd hg Q f hfd
   let K := (PresheafOfModules.restrictScalars (𝓻 C.hom).hom).obj
     (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ.right P)
-  let T := (SheafOfModules.restrictScalars (𝓻 C.hom)).obj
-    (SheafOfModules.changeOfRings.{u, u, u} φ.right P)
   have hb (W : Y.Opens) (b : B.right.obj.obj (op W))
       (c : C.right.obj.obj (op W)) (p : P.val.obj (op W)) :
       f.app W (tmulSection (M := C.toModule) (N := P₀)

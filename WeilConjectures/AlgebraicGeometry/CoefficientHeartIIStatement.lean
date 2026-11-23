@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.Data.Fin.Tuple.Basic
-public import WeilConjectures.AlgebraicGeometry.CoefficientHeartStatement
+public import WeilConjectures.AlgebraicGeometry.CoefficientHeartGeneralStatement
 public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedCohomologyConeWitness
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty

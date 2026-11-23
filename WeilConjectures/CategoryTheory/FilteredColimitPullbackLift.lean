@@ -106,18 +106,7 @@ private theorem arrow_comp_congr
   simpa using congrArg₂ (fun a b ↦ Arrow.mk (a ≫ b)) ha hb
 
 /-- Existence of a mediating arrow for the image of a stable stage pullback.
-Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and Hom calculation.
-(blueprint: lem-weil-pbc-filtered-colimit-pullback-exists)
-
-Proof: Lift the vertex and two legs using joint surjectivity of the object and
-arrow set colimits. Pass to a common stage above these representatives and j.
-Successive applications of eventual equality in the object colimit identify
-all endpoints with the transitioned cospan objects. Eventual equality in the
-arrow colimit makes the cone equation hold after a further transition.
-The pullback is preserved by the composite transition from j, so its limiting
-cone supplies a mediating arrow at this stage. Apply the cocone functor; its
-transition equations and preservation of composition give both factorization
-equations in V.pt. No uniqueness assertion is used here. -/
+Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and Hom calculation. -/
 theorem filteredColimit_pullback_exists
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F)

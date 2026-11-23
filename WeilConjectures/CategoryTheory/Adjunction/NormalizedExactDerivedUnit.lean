@@ -27,12 +27,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 
 /-- Under the standard exact-functor comparisons, the derived unit is the
 localization of the termwise ordinary unit, on every complex.
-Source: Stacks Tag 015F and Mathlib localization of adjunctions.
-(blueprint: lem-weil-pbc-normalized-exact-derived-unit).
-
-Proof: use the component formula for the localized adjunction's unit. Its two
-comparison inverses cancel the specified forward comparisons, leaving precisely
-the localization of the termwise unit. No resolution or boundedness is needed. -/
+Stacks Project, Tag 015F. -/
 theorem mapExactDerivedCategory_unit (a : F ⊣ G) (P : CochainComplex C ℤ) :
     a.mapExactDerivedCategory.unit.app (DerivedCategory.Q.obj P) ≫
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app P) ≫

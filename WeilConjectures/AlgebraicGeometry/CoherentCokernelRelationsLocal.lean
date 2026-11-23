@@ -35,8 +35,28 @@ private theorem overMap_preserves_kernel (X : RingedSpace.{u})
     (RingCat.Hom.hom (𝟙 ((moduleRings X).obj.obj (Opposite.op W.unop.left))))
   exact isLimitOfPreserves (E ⋙ T) (kernelIsKernel g)
 
+-- Prove the kernel comparison in an abstract abelian category, so constructing
+-- the pushout and composing epimorphisms does not unfold sheaf restriction.
+private theorem exists_epi_kernel_pullback_snd
+    {C : Type*} [Category C] [Abelian C] {L B B' H P K : C}
+    (g : L ⟶ H) (q : B ⟶ H) (p : P ⟶ pullback g q) [Epi p]
+    (eB : B ≅ B') (k : kernel g ≅ K) :
+    ∃ e : kernel (p ≫ pullback.snd g q ≫ eB.hom) ⟶ K, Epi e := by
+  let ψ := p ≫ pullback.snd g q
+  let a := kernel.map ψ (pullback.snd g q) p (𝟙 _) (by simp only [ψ, Category.comp_id])
+  let b := kernel.map (pullback.snd g q) g (pullback.fst g q) q
+    pullback.condition.symm
+  have sq : IsPushout ψ p (𝟙 _) (pullback.snd g q) :=
+    IsPushout.of_vert_isIso_epi ⟨by simp only [ψ, Category.comp_id]⟩
+  have : Epi a := Abelian.epi_kernel_map_of_isPushout sq
+  have : IsIso b :=
+    isIso_kernel_map_of_isPullback (IsPullback.of_hasPullback g q).flip
+  let i : kernel ψ ≅ kernel (p ≫ pullback.snd g q ≫ eB.hom) :=
+    kernel.mapIso _ _ (Iso.refl _) eB (by simp only [ψ, Iso.refl_hom,
+      Category.id_comp, Category.assoc])
+  exact ⟨i.inv ≫ a ≫ b ≫ k.hom, inferInstance⟩
+
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 500000 in
 -- Unfold the slice restriction functor in the kernel and pullback comparisons.
 /-- Finite-free replacement for cokernel relations on a neighbourhood of each point
 (Stacks, Tag 01BY). -/
@@ -61,31 +81,12 @@ theorem coherent_cokernel_relations_local (X : RingedSpace.{u})
   let D := SheafOfModules.overMap.{u} (moduleRings X) (homOfLE hVU)
   let gV := D.map g
   let q := D.map ((cokernel.π f).over U)
-  let ψ := p ≫ pullback.snd gV q
+  let cG := (SheafOfModules.overFunctorMap (moduleRings X) (homOfLE hVU)).app G
+  let ψ := p ≫ pullback.snd gV q ≫ cG.hom
   have : Epi p := hp
-  let a := kernel.map ψ (pullback.snd gV q) p (𝟙 _) (by simp [ψ])
-  let b := kernel.map (pullback.snd gV q) gV (pullback.fst gV q) q
-    pullback.condition.symm
-  have sq : IsPushout ψ p (𝟙 _) (pullback.snd gV q) := by
-    refine IsPushout.of_isColimit
-      (PushoutCocone.IsColimit.mk (by simp [ψ]) (fun s ↦ s.inl)
-        (fun s ↦ by simp) (fun s ↦ ?_) (fun s t ht _ ↦ by simpa using ht))
-    apply (cancel_epi p).mp
-    simpa only [ψ, pullback.snd, limit.π, Category.assoc] using s.condition
-  have : Epi a := Abelian.epi_kernel_map_of_isPushout sq
-  have : IsIso b :=
-    isIso_kernel_map_of_isPullback (IsPullback.of_hasPullback gV q).flip
   have := overMap_preserves_kernel X U V hVU g
-  have : Epi b := by infer_instance
-  have : Epi (PreservesKernel.iso D g).inv := by infer_instance
-  let e : kernel ψ ⟶ D.obj (kernel g) :=
-    a ≫ b ≫ (PreservesKernel.iso D g).inv
-  refine ⟨V, hVU, hxV, m, ψ, e, ?_⟩
-  constructor
-  intro Z t₁ t₂ ht
-  apply (cancel_epi (PreservesKernel.iso D g).inv).mp
-  apply (cancel_epi b).mp
-  apply (cancel_epi a).mp
-  simpa only [e, Category.assoc] using ht
+  obtain ⟨e, he⟩ :=
+    exists_epi_kernel_pullback_snd gV q p cG (PreservesKernel.iso D g).symm
+  exact ⟨V, hVU, hxV, m, ψ, e, he⟩
 
 end AlgebraicGeometry.RingedSpace

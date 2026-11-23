@@ -37,8 +37,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-set_option maxHeartbeats 400000 in
--- Finite-generator transport and several image comparisons need extra elaboration heartbeats.
 /-- A local map from a finite closed free source extends from an ideal lattice.
 The lattice inclusion is invertible over the given open; no injectivity of the
 extended map or generic stalk hypothesis on the target is asserted
@@ -65,22 +63,8 @@ theorem coherent_local_free_ideal_lattice
   let E : Z.Modules := ∐ fun _ : Fin r ↦ SheafOfModules.unit Z.ringCatSheaf
   let H := (pushforward i).obj E
   let E' : Z.Modules := SheafOfModules.free (R := Z.ringCatSheaf) (ULift.{u} (Fin r))
-  have hE' : SheafOfModules.IsFiniteLocallyFree.{u, u, u} E' := by
-    let q := (SheafOfModules.free.generatingSections
-      (R := Z.ringCatSheaf) (ULift.{u} (Fin r))).localGeneratorsData
-    apply SheafOfModules.IsFiniteLocallyFree.mk.{u, u, u} (M := E')
-    refine ⟨q, inferInstance, ?_⟩
-    have : (SheafOfModules.free.generatingSections
-        (R := Z.ringCatSheaf) (ULift.{u} (Fin r))).IsFiniteType :=
-      SheafOfModules.GeneratingSections.IsFiniteType.mk.{u, u, u}
-        (by change Finite (ULift.{u} (Fin r)); infer_instance)
-    exact SheafOfModules.LocalGeneratorsData.IsFiniteType.mk.{u, u, u, u}
-      (p := q) (fun V ↦ by
-        change ((SheafOfModules.free.generatingSections
-          (R := Z.ringCatSheaf) (ULift.{u} (Fin r))).map
-            (SheafOfModules.pushforward (𝟙 (Z.ringCatSheaf.over V)))
-            (Iso.refl _)).IsFiniteType
-        infer_instance)
+  have hE' : SheafOfModules.IsFiniteLocallyFree.{u, u, u} E' :=
+    SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree E' r
   have : SheafOfModules.IsFiniteLocallyFree.{u, u, u} E :=
     SheafOfModules.IsFiniteLocallyFree.of_iso.{u, u, u} (M := E') (h := hE')
       (Sigma.whiskerEquiv (f := fun _ : ULift.{u} (Fin r) ↦

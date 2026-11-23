@@ -10,7 +10,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
 
-/-! Canonical exceptional tensor extraction and its projection/counit coherence. -/
+/-! The inverse of the tensor comparison of right adjoints for a tensor-invertible object is the
+projection tensor map. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -94,19 +95,4 @@ lemma tensorRightCompIsoOfTensorIso_inv_app (e : M ⊗ L ≅ 𝟙_ D) (e' : L �
     ← reassoc_of% key]
   simp
 
-
 end CategoryTheory.Adjunction
-
-namespace AlgebraicGeometry.Etale
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
-/-- The co-projection comparison for the exceptional inverse image is the mate of the
-lower-shriek right-adjoint tensor map. -/
-theorem exceptionalCoprojectionMate
-    (K L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (e : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj L ≅ constantComplex Λ Y)
-    (e' : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj L).obj M ≅ constantComplex Λ Y) :
-    (derivedTensorRightCompRightDerivedUpperShriekIso Λ f L M e e').inv.app K =
-      lowerShriekRightAdjointTensorMap (rightDerivedUpperShriekAdjunction Λ f) K L := by
-  sorry
-end AlgebraicGeometry.Etale

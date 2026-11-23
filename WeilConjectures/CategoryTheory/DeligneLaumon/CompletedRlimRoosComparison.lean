@@ -171,8 +171,7 @@ set_option linter.privateModule false
 
 /-! # The normalized Roos comparison for the actual total inverse limit
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0941,
-lemma-derived-limit-is-ok (blueprint: lem-a1-completed-rlim-roos-comparison).
+Source: Stacks Project, sites-cohomology.tex, Tag 0941.
 -/
 
 @[expose] public noncomputable section

@@ -515,44 +515,4 @@ structure CompactSupportCompositeTransposeDomains
       (pi_h K hK M hM).hom ≫
         (𝟙 K ⊗ₘ canonicalAlphaComponent A f g hY hZ f_qc g_qc hf₁ hf₂ hg₁ hg₂ hfg₁ hfg₂ M hM)
 
-
-
-/-- The concrete domain and normalization statement for smooth compact-support composition. -/
-theorem compactSupportCompositeTransposeDomains
-    (ell : ℕ) [Fact ell.Prime]
-    (k : Type u) [Field k] [Fact (ringChar k).Prime]
-    [Fact (ringChar k ≠ ell)] (_hk : Finite k ∨ IsAlgClosed k)
-    (A : Type (u + 1)) [CommRing A] [Finite A]
-    [TopologicalSpace A] [IsTopologicalRing A] [DiscreteTopology A]
-    (hA : ∃ n : ℕ, (ell ^ n : A) = 0)
-    {X Y Z : Over (Spec (.of k))}
-    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
-    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
-    (f : X ⟶ Y) (g : Y ⟶ Z)
-    (d e : ℕ)
-    [IsSeparated f.left] [IsSeparated g.left]
-    (hf : SmoothOfRelativeDimension d f.left)
-    (hg : SmoothOfRelativeDimension e g.left)
-    [HasCompactification f.left] [HasCompactification g.left]
-    [HasCompactification (f.left ≫ g.left)]
-    (theta_f_iso : ∀ (hWf : CompactSupportDctf A (W A f.left))
-      (B : CompactSupportD A Y.left) (hB : CompactSupportDctf A B)
-      (hY : CompactSpace Y.left)
-      (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X.left
-        (compactSupportTensor A ((compactSupportPullback A f.left).obj B) (W A f.left)))
-      (hBplus : DerivedCategory.TStructure.t.plus B)
-      (hUnitplus : DerivedCategory.TStructure.t.plus (𝟙_ (CompactSupportD A Y.left))),
-      IsIso (canonicalTheta A f.left B hB hWf hY hK hBplus hUnitplus))
-    (theta_g_iso : ∀ (hWg : CompactSupportDctf A (W A g.left))
-      (B : CompactSupportD A Z.left) (hB : CompactSupportDctf A B)
-      (hZ : CompactSpace Z.left)
-      (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Y.left
-        (compactSupportTensor A ((compactSupportPullback A g.left).obj B) (W A g.left)))
-      (hBplus : DerivedCategory.TStructure.t.plus B)
-      (hUnitplus : DerivedCategory.TStructure.t.plus (𝟙_ (CompactSupportD A Z.left))),
-      IsIso (canonicalTheta A g.left B hB hWg hZ hK hBplus hUnitplus)) :
-    Nonempty (CompactSupportCompositeTransposeDomains A d e hf hg) := by
-  sorry
-
 end AlgebraicGeometry.ProEtale

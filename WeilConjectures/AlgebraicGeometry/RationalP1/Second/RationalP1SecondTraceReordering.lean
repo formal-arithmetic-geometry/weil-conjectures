@@ -12,8 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import WeilConjectures.AlgebraicGeometry.RationalP1.Second.RationalP1SecondScalarTrace
 
 /-! # The diagonal-free second trace rearrangement
-
-Source: the second identity of the rational projective-line triangle calculation.
 -/
 
 @[expose] public noncomputable section
@@ -171,30 +169,7 @@ private theorem counitComponent_factor
 -- The statement compares several fixed derived pullback and tensor interfaces.
 /-- The forward p2 projection cancels the exchange/projection tail against the
 pulled counit. This equation has no unit insertion, diagonal tensor comparison,
-diagonal class, supported-source map, or integral.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-triangle.proof.md,
-Second identity, extraction of q*K and trace base change
-(blueprint: lem-sfb-rational-p1-second-trace-reordering).
-
-Proof: open the counit normalization to obtain hq and rewrite epsilon as counitComponent.
-Put A=q*K, T=Lambda_P(1)[2], M=A tensor T, using tensorShiftIso.
-Apply the normalized exchange/tensor coherence square to inside T and outside K.
-Its pullback comparison is the published self-square comparison. Invert its projection
-and exchange factors using hb,hp,hq. Tensor associativity for the projection separates
-the outside T; the comparison on A is pullback composition, while the comparison on T
-is the Cartesian Tate comparison in secondPullComparison. The two pulled Tate lines
-have identity interchange: on a root frame the degree-zero rank-one line has trivial
-self-symmetry, and their degree-two shifts give the sign (-1)^4=1. Cancel the specified
-inverse projection in counitComponent against the remaining forward projection.
-The completed traces commute with this base change because pullback preserves the
-unit and positive Chern splitting, its inverse, and its constant projection. Reference
-fixes these completed trace maps and the projective models; the scalar squares of
-Family carry their equality to the selected rational or closure coefficient. Thus the
-remaining trace is d.trace2 transported by d.p2_canonical. Naturality of the unitors
-and of tensor with this trace gives the displayed right hand side. No property of the
-diagonal class and neither integration identity is used. -/
+diagonal class, supported-source map, or integral. -/
 theorem second_trace_reordering
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpl : p ≠ l)

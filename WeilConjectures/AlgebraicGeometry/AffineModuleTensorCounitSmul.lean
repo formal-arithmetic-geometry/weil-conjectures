@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalarsSquare
 /-! # Scalar compatibility of the affine tensor counit
 
 ## References
@@ -69,8 +70,75 @@ local notation "e₀" =>
     (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf).symm (𝟙 A)
 set_option hygiene false in
 local notation "adj₀" => Classical.choose (exists_tensorPullbackAdjunction f)
-set_option maxHeartbeats 1000000 in
--- The explicit inverse-image and tensor transports require additional elaboration fuel.
+
+/-- Evaluating the tensor extension of the direct image at a ring retraction
+recovers each direct-image section on the canonical tensor unit. -/
+private theorem exists_affine_tensor_evaluation
+    (B : U.toTopCat.Sheaf CommRingCat.{u}) (t : IA ⟶ B)
+    (ε : B ⟶ U.sheaf) (ht : t ≫ ε = e₀) (F : U.Modules) :
+    ∃ d : SheafOfModules.changeOfRings.{u, u, u} t (I ((R).obj F)) ⟶
+      (SheafOfModules.restrictScalars (𝓻 ε)).obj F,
+    ∀ (V : (Opens X)ᵒᵖ) (m : ((R).obj F).val.obj V),
+      d.val.app ((Opens.map f.base).op.obj V)
+        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
+          (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I ((R).obj F)))).app
+            ((Opens.map f.base).op.obj V)
+            ((1 : B.obj.obj ((Opens.map f.base).op.obj V)) ⊗ₜ[_,
+              (t.hom.app ((Opens.map f.base).op.obj V)).hom]
+              (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+                (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
+                  ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m))) = m := by
+  classical
+  let ηA : (𝓡 A) ⟶
+      ((Opens.map f.base).sheafPushforwardContinuous RingCat.{u} (𝓙 X) (𝓙 U)).obj
+        (𝓡 IA) :=
+    𝓻 ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A)
+  have hring : ηA ≫
+      ((Opens.map f.base).sheafPushforwardContinuous RingCat.{u} (𝓙 X) (𝓙 U)).map
+        ((𝓻 t) ≫ (𝓻 ε)) = 𝟙 (𝓡 A) := by
+    have he := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf
+        |>.apply_symm_apply (𝟙 A)
+    ext V r
+    exact (congrArg (fun a ↦ a.hom.app ((Opens.map f.base).op.obj V)
+      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+        (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A).hom.app V r)) ht).trans
+        (congrArg (fun a ↦ a.hom.app V r) he)
+  -- The ring triangle makes direct-image identity linear for the composite action.
+  let N := (SheafOfModules.restrictScalars (𝓻 ε)).obj F
+  let K := (SheafOfModules.restrictScalars (𝓻 t)).obj N
+  let g : (R).obj F ⟶ (SheafOfModules.pushforward.{u} ηA).obj K :=
+    ((SheafOfModules.pushforwardCongr.{u} hring).app F).inv
+  -- Compose inverse-image and change-of-rings Hom equivalences.
+  let miAdj := SheafOfModules.moduleInverseImageAdjunction f.base A
+  let φ := miAdj.choose
+  have hφ := miAdj.choose_spec.1
+  let v : I ((R).obj F) ⟶ K := (φ ((R).obj F) K).symm g
+  let crAdj := SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
+  let hE := crAdj.choose_spec.choose
+  let adE := crAdj.choose_spec.choose_spec.choose
+  have heE := crAdj.choose_spec.choose_spec.choose_spec
+  let d : SheafOfModules.changeOfRings.{u, u, u} t (I ((R).obj F)) ⟶ N :=
+    eqToHom (hE _).symm ≫ (adE.homEquiv _ N).symm v
+  refine ⟨d, ?_⟩
+  intro V m
+  have hv := congrArg (fun a ↦ a.val.app V m)
+    ((φ ((R).obj F) K).apply_symm_apply g)
+  have hv' := (hφ ((R).obj F) K v V m).symm.trans hv
+  have hd' := heE (I ((R).obj F)) N d ((Opens.map f.base).op.obj V)
+    (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
+        ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m)
+  have heq : eqToHom (hE _) ≫ d = (adE.homEquiv _ N).symm v :=
+    (eqToIso (hE _)).hom_inv_id_assoc _
+  have heval := (congrArg (adE.homEquiv _ N) heq).trans
+    ((adE.homEquiv _ N).apply_symm_apply v)
+  exact hd'.symm.trans ((congrArg (fun a ↦ a.val.app ((Opens.map f.base).op.obj V)
+    (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+      (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
+        ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m)) heval).trans hv')
+
 /-- Scalar compatibility of the transported pullback counit (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_counit_smul
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B) (t : IA ⟶ B)
@@ -108,95 +176,22 @@ theorem affine_module_tensor_counit_smul
   -- generation argument using the pushout is necessary.
   have _ := hpush
   intro F W c p
-  let ηA : (𝓡 A) ⟶
-      ((Opens.map f.base).sheafPushforwardContinuous RingCat.{u} (𝓙 X) (𝓙 U)).obj
-        (𝓡 IA) :=
-    𝓻 ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A)
-  have hring : ηA ≫
-      ((Opens.map f.base).sheafPushforwardContinuous RingCat.{u} (𝓙 X) (𝓙 U)).map
-        ((𝓻 t) ≫ (𝓻 ε)) = 𝟙 (𝓡 A) := by
-    have he := (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-      (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).homEquiv A U.sheaf
-        |>.apply_symm_apply (𝟙 A)
-    rw [Adjunction.homEquiv_unit] at he
-    ext V r
-    change ε.hom.app ((Opens.map f.base).op.obj V)
-      (t.hom.app ((Opens.map f.base).op.obj V)
-        (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-          (Opens.map f.base) CommRingCat.{u} (𝓙 X) (𝓙 U)).unit.app A).hom.app V r)) = r
-    rw [show ∀ z, ε.hom.app ((Opens.map f.base).op.obj V)
-        (t.hom.app ((Opens.map f.base).op.obj V) z) =
-          (e₀).hom.app ((Opens.map f.base).op.obj V) z from
-      fun z ↦ congrArg (fun a ↦ a.hom.app ((Opens.map f.base).op.obj V) z) ht]
-    exact congrArg (fun a ↦ a.hom.app V r) he
-  -- The ring triangle makes direct-image identity linear for the composite action.
   let N := (SheafOfModules.restrictScalars (𝓻 ε)).obj F
-  let K := (SheafOfModules.restrictScalars (𝓻 t)).obj N
-  let g : (R).obj F ⟶ (SheafOfModules.pushforward.{u} ηA).obj K := by
-    refine ⟨PresheafOfModules.homMk (𝟙 ((R).obj F).val.presheaf) ?_⟩
-    intro V r m
-    change r • m =
-      (ε.hom.app ((Opens.map f.base).op.obj V)
-        (t.hom.app ((Opens.map f.base).op.obj V)
-          (ηA.hom.app V r))) • m
-    have hh := congrArg (fun a ↦ a.hom.app V r) hring
-    change ε.hom.app ((Opens.map f.base).op.obj V)
-      (t.hom.app ((Opens.map f.base).op.obj V) (ηA.hom.app V r)) = r at hh
-    rw [hh]
-  -- Compose inverse-image and change-of-rings Hom equivalences.
-  obtain ⟨φ, hφ, _, _⟩ := SheafOfModules.moduleInverseImageAdjunction f.base A
-  let v : I ((R).obj F) ⟶ K := (φ ((R).obj F) K).symm g
-  obtain ⟨E, hE, adE, heE⟩ :=
-    SheafOfModules.exists_changeOfRingsAdjunction U.toTopCat IA B t
-  let d : SheafOfModules.changeOfRings.{u, u, u} t (I ((R).obj F)) ⟶ N :=
-    eqToHom (hE _).symm ≫ (adE.homEquiv _ N).symm v
-  have hd (V : (Opens X)ᵒᵖ) (m : ((R).obj F).val.obj V) :
-      d.val.app ((Opens.map f.base).op.obj V)
-        (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
-          (SheafOfModules.changeOfRingsPresheaf.{u, u, u} t (I ((R).obj F)))).app
-            ((Opens.map f.base).op.obj V)
-            ((1 : B.obj.obj ((Opens.map f.base).op.obj V)) ⊗ₜ[_,
-              (t.hom.app ((Opens.map f.base).op.obj V)).hom]
-              (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-                (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
-                  ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m))) = m := by
-    have hv := congrArg (fun a ↦ a.val.app V m)
-      ((φ ((R).obj F) K).apply_symm_apply g)
-    rw [hφ] at hv
-    have hd' := heE (I ((R).obj F)) N d ((Opens.map f.base).op.obj V)
-      (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-        (Opens.map f.base) AddCommGrpCat.{u} (𝓙 X) (𝓙 U)).unit.app
-          ((SheafOfModules.toSheaf (𝓡 A)).obj ((R).obj F))).hom.app V m)
-    have heq : eqToHom (hE _) ≫ d = (adE.homEquiv _ N).symm v := by
-      simp [d]
-    rw [heq, Equiv.apply_symm_apply] at hd'
-    exact hd'.symm.trans hv
+  let evaluation := exists_affine_tensor_evaluation f B t ε ht F
+  let d := evaluation.choose
+  have hd := evaluation.choose_spec
   -- Restriction along b is O_U-linear because b followed by ε is the identity.
   let dP : P.obj ((R).obj F) ⟶ N := eqToHom (pobj _) ≫ d
-  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F := by
-    refine ⟨PresheafOfModules.homMk
-      ((PresheafOfModules.toPresheaf (𝓡 B).obj).map dP.val) ?_⟩
-    intro V r m
-    have hh := (dP.val.app V).hom.map_smul (b.hom.app V r)
-      (show (P.obj ((R).obj F)).val.obj V from m)
-    change dP.val.app V ((b.hom.app V r) •
-      (show (P.obj ((R).obj F)).val.obj V from m)) =
-      (ε.hom.app V (b.hom.app V r)) •
-        (show F.val.obj V from dP.val.app V m) at hh
-    have hbr : ε.hom.app V (b.hom.app V r) = r :=
-      congrArg (fun a ↦ a.hom.app V r) hb
-    change dP.val.app V ((b.hom.app V r) •
-      (show (P.obj ((R).obj F)).val.obj V from m)) =
-        r • (show F.val.obj V from dP.val.app V m)
-    rw [hbr] at hh
-    exact hh
+  have hb' : (𝓻 b) ≫ (𝓻 ε) = 𝟙 U.ringCatSheaf :=
+    congrArg ((sheafCompose (𝓙 U) (forget₂ CommRingCat.{u} RingCat.{u})).map) hb
+  let dU : (SheafOfModules.restrictScalars (𝓻 b)).obj (P.obj ((R).obj F)) ⟶ F :=
+    (SheafOfModules.restrictScalars (𝓻 b)).map dP ≫
+      (SheafOfModules.restrictScalarsCancelIso (𝓻 b) (𝓻 ε) hb').hom.app F
   let a : (tensorPullback f).obj ((S).obj ((R).obj F)) ⟶ F :=
     κ.inv.app ((R).obj F) ≫ dU
   -- The κ-unit formula identifies the adjunct of this evaluation with the identity.
   have ha : ((adj₀).homEquiv ((S).obj ((R).obj F)) F) a =
       𝟙 ((pushforward f).obj F) := by
-    rw [Adjunction.homEquiv_unit]
     apply SheafOfModules.hom_ext
     apply PresheafOfModules.hom_ext
     intro V
@@ -205,25 +200,20 @@ theorem affine_module_tensor_counit_smul
       ((eqToHom (pobj _)).val.app ((Opens.map f.base).op.obj V)
         ((κ.inv.app ((R).obj F)).val.app ((Opens.map f.base).op.obj V)
           (((adj₀).unit.app ((S).obj ((R).obj F))).val.app V m))) = m
-    rw [hP.2]
-    exact hd V m
-  have hac : a = (adj₀).counit.app F := by
-    rw [← (adj₀).homEquiv_symm_id F]
-    exact ((adj₀).homEquiv ((S).obj ((R).obj F)) F).injective
-      (ha.trans (((adj₀).homEquiv ((S).obj ((R).obj F)) F).apply_symm_apply _).symm)
+    exact (congrArg (d.val.app ((Opens.map f.base).op.obj V))
+      (hP.2 ((R).obj F) V m)).trans (hd V m)
+  have hac : a = (adj₀).counit.app F :=
+    (((adj₀).homEquiv ((S).obj ((R).obj F)) F).eq_symm_apply.mpr ha).trans
+      ((adj₀).homEquiv_symm_id F)
+  have heq : κ.hom.app ((R).obj F) ≫ (adj₀).counit.app F = dU :=
+    (congrArg (fun q ↦ κ.hom.app ((R).obj F) ≫ q) hac.symm).trans
+      ((κ.app ((R).obj F)).hom_inv_id_assoc dU)
   have hq (V : (Opens U)ᵒᵖ) (m : (P.obj ((R).obj F)).val.obj V) :
-      dP.val.app V m = ((adj₀).counit.app F).val.app V
-        ((κ.hom.app ((R).obj F)).val.app V m) := by
-    have hi := congrArg (fun k ↦ k.val.app V m) (κ.app ((R).obj F)).hom_inv_id
-    change (κ.inv.app ((R).obj F)).val.app V
-      ((κ.hom.app ((R).obj F)).val.app V m) = m at hi
-    have he := congrArg (fun k ↦ k.val.app V
-      ((κ.hom.app ((R).obj F)).val.app V m)) hac
-    change dP.val.app V ((κ.inv.app ((R).obj F)).val.app V
-      ((κ.hom.app ((R).obj F)).val.app V m)) = _ at he
-    rwa [hi] at he
-  rw [← hq, ← hq]
-  exact (dP.val.app W).hom.map_smul c p
+      ((adj₀).counit.app F).val.app V
+        ((κ.hom.app ((R).obj F)).val.app V m) = dP.val.app V m :=
+    congrArg (fun q ↦ q.val.app V m) heq
+  exact (hq W (c • p)).trans (((dP.val.app W).hom.map_smul c p).trans
+    (congrArg (fun m : F.val.obj W ↦ (ε.hom.app W c) • m) (hq W p).symm))
 
 end
 end AlgebraicGeometry.Scheme.Modules

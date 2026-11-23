@@ -68,7 +68,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-! # Cochain comparisons for finite free principal quotient towers
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YT and 0941, and the
-balanced quotient calculation in lem-pur-finite-free-completion-exchange.
+balanced quotient calculation in.
 -/
 
 @[expose] public section
@@ -99,10 +99,7 @@ local instance (T : Sheaf J CommRingCat.{r}) (I : Type r) :
   PresheafOfModules.hasColimitsOfShape _ _
 
 /-- Cochain data for scalar extension of principal quotient towers. No derived
-completion functor occurs here. Naturality is required for all cochain maps.
-Source: the balanced quotient calculation and additive cone construction in steps
-1--5 of lem-pur-finite-free-completion-exchange
-(blueprint: lem-pur-finite-free-quotient-roos-comparison). -/
+completion functor occurs here. Naturality is required for all cochain maps. -/
 structure QuotientRoosExchange
     (F : SheafOfModules.DerivedChangeOfRingsCochainModel φ)
     (t : (SheafOfModules.unit
@@ -863,25 +860,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Finite free scalar extension gives the balanced comparison of strict quotient
 Roos complexes, natural before localization.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YT and 0941; the explicit
-finite-basis, balancing and arithmetic calculations in steps 1--5 of
-lem-pur-finite-free-completion-exchange
-(blueprint: lem-pur-finite-free-quotient-roos-comparison).
-
-Proof: After restriction of scalars, scalar extension is tensor with the underlying
-finite free R-module S, hence a finite direct sum of the identity. Faithful exact
-forgetting detects exactness and invertibility of its canonical countable-product
-comparison. The equality φ(t)^n = u^n v^(en), with u^n invertible, identifies
-the cokernels of multiplication by these sections after extension. Balancing gives
-β_n on pure local tensors, and the inverse sends a quotient lift s to 1 tensor s;
-changing the lift by v^(en) changes the tensor by zero. These formulas commute with
-restrictions, differentials, quotient transitions, and maps of the input complex.
-Apply the additive Roos comparison to the canonical product comparison followed
-by β; its two cone coordinates are exactly the displayed formula for δ. The
-selection/block square gives a, which is a quasi-isomorphism by arithmetic
-restriction and exact products. Its two coordinates are the selection and block
-maps, and their formulas give naturality. The construction also works in rank
-zero; positive e ensures that the arithmetic subsequence is cofinal. -/
+Source: Stacks Project, Tags 06YT and 0941. -/
 theorem finiteFreeQuotientRoosComparison
     (F : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ)
     (hfree : ∃ d : ℕ, Nonempty

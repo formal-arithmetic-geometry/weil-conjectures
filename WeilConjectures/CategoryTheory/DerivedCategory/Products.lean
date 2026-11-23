@@ -20,7 +20,7 @@ We choose K-injective resolutions `K j ⟶ I j`. A product of K-injective comple
 (`DerivedCategory.isLimitFanMkQObjOfIsKInjective`). As homology commutes with exact products,
 the product of the resolutions `∏ K j ⟶ ∏ I j` is a quasi-isomorphism.
 
-## Main statements
+## Main results
 
 - `CochainComplex.isKInjective_of_isLimitFan`: a product of K-injective complexes is
   K-injective.

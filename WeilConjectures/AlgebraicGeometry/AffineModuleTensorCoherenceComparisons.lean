@@ -186,8 +186,22 @@ private theorem comparisons_from_objectwise
   obtain ⟨β, hc⟩ := liftNatural Q (H ⋙ J) τ hinj hβ
   exact ⟨α, β, ha, hc⟩
 
-set_option maxHeartbeats 800000 in
--- Converting scheme pushforward to the composite right adjoint needs extra heartbeats.
+-- Identify the composite right adjoint with the left adjoint still abstract.
+private theorem tensorComparisons_from_adjunction
+    (L : X.Modules ⥤ U.Modules) (adj : L ⊣ pushforward f)
+    (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ L ⟶ H)
+    (hf : ∀ F : U.Modules, (∃ a : H.obj ((R).obj F) ⟶ F,
+      γ.app ((R).obj F) ≫ a = adj.counit.app F) ∧ Epi (γ.app ((R).obj F)))
+    (hβ : ∀ G : SheafOfModules.{u} (𝓡 A), ∃ a : G ⟶ (R).obj (H.obj G),
+      (S).map a = (adj.homEquiv ((S).obj G) (H.obj G)) (γ.app G)) :
+    ∃ (α : R ⋙ H ⟶ 𝟭 U.Modules) (β : 𝟭 (SheafOfModules.{u} (𝓡 A)) ⟶ H ⋙ R),
+      (∀ F : U.Modules, γ.app ((R).obj F) ≫ α.app F = adj.counit.app F) ∧
+      (∀ G : SheafOfModules.{u} (𝓡 A),
+        (S).map (β.app G) = (adj.homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
+  exact comparisons_from_objectwise
+    (C := SheafOfModules.{u} (𝓡 A)) (D := X.Modules) (E := U.Modules)
+    S R L adj H γ (scalarRestriction_injective f) hf hβ
+
 private theorem tensorComparisons_from_objectwise
     (H : SheafOfModules.{u} (𝓡 A) ⥤ U.Modules) (γ : S ⋙ tensorPullback f ⟶ H)
     (hf : ∀ F : U.Modules, (∃ a : H.obj ((R).obj F) ⟶ F,
@@ -200,10 +214,8 @@ private theorem tensorComparisons_from_objectwise
         (S).map (β.app G) = ((adj₀).homEquiv ((S).obj G) (H.obj G)) (γ.app G)) := by
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
-    exact comparisons_from_objectwise S R (tensorPullback f) (adj₀) H γ
-      (scalarRestriction_injective f) hf hβ
+    exact tensorComparisons_from_adjunction f (tensorPullback f) (adj₀) H γ hf hβ
 
--- Elaborating the nested tensor transports requires additional heartbeats.
 /-- The tensor extension is quasi-coherent and carries the canonical comparison maps
 (Stacks, Tag 01SB). -/
 theorem affine_module_tensor_coherenceComparisons [IsAffineHom f]

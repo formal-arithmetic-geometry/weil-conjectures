@@ -13,16 +13,12 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 /-!
 # Dual base change: pasting compatibilities
 
-The dual base change isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!` is the existing
-`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` (the inverse conjugate
-of the compact-support exchange `Ex_!`, invertible by
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`), and its proper form is
-`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerShriekBaseChangeIso`. This file states the
-remaining clauses: compatibility of that isomorphism with horizontal and vertical
-pasting of Cartesian squares, with respect to the canonical compositors
-`AlgebraicGeometry.Etale.rightDerivedLowerStarComp` and the exceptional compositor
-`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek` conjugate to
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`.
+The dual base change isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!` is
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso`. This file defines the
+conditions that it is compatible with horizontal and vertical pasting of Cartesian squares, with
+respect to the direct-image compositors `AlgebraicGeometry.Etale.rightDerivedLowerStarComp` and
+the exceptional compositor `AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek`
+conjugate to `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`.
 -/
 
 @[expose] public noncomputable section
@@ -75,23 +71,5 @@ def DualBaseChangeVerticalPasting {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g�
       Functor.isoWhiskerRight (rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq) R(e)^![Λ] ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft R(f')^![Λ] (rightDerivedUpperShriekLowerStarBaseChangeIso Λ t)
-
-/-- Dual base change in the finite-coefficient unbounded datum: compatibility of the dual base
-change isomorphism `rightDerivedUpperShriekLowerStarBaseChangeIso Λ sq : Rf^! Rg_* ≅ Rg'_* Rf'^!`
-with horizontal and vertical pasting of Cartesian squares, and stability of properness of `g`
-under the base change, which makes the proper form
-`rightDerivedUpperShriekLowerShriekBaseChangeIso` applicable. -/
-theorem dualBaseChange (sq : IsPullback g' f' f g) :
-    (∀ {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'} {g₂' : X₂ ⟶ X'} {f₂ : X₂ ⟶ Y₂}
-      [HasCompactification f₂] [QuasiCompact f₂] (sq₂ : IsPullback g₂' f₂ f' g₂),
-      DualBaseChangeHorizontalPasting Λ sq sq₂) ∧
-    (∀ {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g₀' : X₀' ⟶ X₀} {f₀' : X₀' ⟶ X'}
-      [HasCompactification e] [HasCompactification (e ≫ f)] [QuasiCompact (e ≫ f)]
-      [HasCompactification f₀'] [QuasiCompact f₀']
-      [HasCompactification (f₀' ≫ f')] [QuasiCompact (f₀' ≫ f')]
-      (t : IsPullback g₀' f₀' e g'),
-      DualBaseChangeVerticalPasting Λ sq t) ∧
-    (IsProper g → IsProper g') := by
-  sorry
 
 end AlgebraicGeometry.Etale

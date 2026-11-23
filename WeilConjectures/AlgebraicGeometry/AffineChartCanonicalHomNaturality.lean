@@ -78,8 +78,6 @@ theorem colimitScalarExtensionComp_one_tmul
         ((1 : ↑(F.obj x)) ⊗ₜ[F.obj t, (F.map h).hom] m) := by
   exact scalarExtensionCompOfEq_one_tmul _ _ _ _ P m
 
-set_option maxHeartbeats 600000 in
--- The dependent chart and section-model witnesses require substantial elaboration.
 /-- Affine Hom comparisons commute with the canonical scalar-extension map
 (Stacks, Tags 01ZR, 01I6, 0095 and 0096). -/
 theorem affine_chart_canonical_hom_naturality
@@ -149,18 +147,7 @@ theorem affine_chart_canonical_hom_naturality
                 (ModuleCat.extendScalars r₁).map s ≫
                 (colimitScalarExtensionComp F (homOfLE htx) Q).inv)) (β s) := by
   classical
-  let rep := (OrderEmbedding.ofAntisymmetrization
-    (α := {k : I // j ≤ k})).monotone.functor
-  let g := U.f a ≫ pullback.snd f (Spec.map (R.map (homOfLE hij)))
-  let F := rep ⋙ (upperTailChartDiagram R j g).rightOp ⋙ Scheme.Γ
-  let t := toAntisymmetrization (· ≤ ·) (⟨j, le_rfl⟩ : {k : I // j ≤ k})
-  let B : (U.X a).Modules → ModuleCat.{u} (F.obj t) := fun L ↦ by
-    let k := rep.obj t
-    let r := Spec.map (R.map (homOfLE k.property))
-    change ModuleCat.{u} Γ(pullback r g, ⊤)
-    exact ModuleCat.of _ Γ((Scheme.Modules.pullback (pullback.snd r g)).obj L, ⊤)
-  let P := B M
-  let Q := B N
+  intro rep g F t B P Q r₀ q₀
   obtain ⟨δM, δN, ρ₀, e₀M, e₀N, α, _h₀M, h₀N, n₀M, n₀N, hα, hx⟩ :=
     affine_chart_normalized_section_models R c hc i f j hij U a ha M N hMq hNq
   refine ⟨α, ?_⟩
@@ -170,7 +157,6 @@ theorem affine_chart_canonical_hom_naturality
   intro s
   let r := (F.map (homOfLE htx)).hom
   let r₁ := (colimit.ι F x).hom
-  let r₀ := (colimit.ι F t).hom
   let cP := colimitScalarExtensionComp F (homOfLE htx) P
   let cQ := colimitScalarExtensionComp F (homOfLE htx) Q
   let τ := cP.hom ≫ (ModuleCat.extendScalars r₁).map s ≫ cQ.inv

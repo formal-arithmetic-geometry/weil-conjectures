@@ -299,9 +299,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Finite-free scalar extension and Koszul completion
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 0A0E; the finite-free
-scalar-extension argument extracted from blueprint `prop-weil-pbc-scalar-extension`,
-steps 6--7 (blueprint: lem-weil-pbc-finite-free-completion-transport).
+Source: Stacks Project, algebraization.tex, Tags 099B and 0A0E.
 
 The four statements give existence and uniqueness of the unit-normalized comparison,
 preservation of local completeness, integer-shift compatibility, the actual tensor-unit

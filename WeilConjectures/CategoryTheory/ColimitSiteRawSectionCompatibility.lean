@@ -17,9 +17,8 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionRelations
 
 /-! # Compatibility of the raw section colimit presentation
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-compatibility).
 -/
 
 @[expose] public section
@@ -28,22 +27,11 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-compatibility).
+/-- The colimit of the diagram `D` of stage sections over the images of `U` is isomorphic to the
+value at the image of `U` of the colimit of the Kan-extended stage presheaves `B`, compatibly
+with the coprojections.
 
-Proof: Cocone naturality gives V_t(F(t.hom)(U)) = V_i(U). Compose E_t,
-beta_t, the raw presheaf colimit coprojection and this object transport to
-obtain kappa_t. The equations hm and hbeta_map, followed by naturality of the
-coprojections, prove D(b) followed by kappa_t' equals kappa_t. Equality in the
-arrow category handles the varying endpoints, and proof irrelevance removes
-the final equality transports. These maps define a cocone T on D.
-
-The stage-generator theorem supplies a representative for every element of
-T.pt. The stage-relation theorem says that equal representatives become equal
-at a common refinement. Mathlib's filtered-set colimit recognition therefore
-makes T a colimit cocone. The unique isomorphism from the supplied colimit R
-to T has exactly the required coprojection formula. -/
+Source: Stacks Project, Sites, Tag 0A35, section construction and adjunction paragraphs. -/
 theorem raw_section_presentation_compatibility
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

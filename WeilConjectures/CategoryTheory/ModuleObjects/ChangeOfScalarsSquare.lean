@@ -51,7 +51,6 @@ The file also records two further formal compatibilities of restriction of scala
 Finally, for a monoidal adjunction `G ⊣ F` (the adjunction `f^* ⊣ f_*` on sheaves), the mates
 `α = G η ≫ counit : G R_Y ⟶ R_X` of the morphisms `η` also form a commutative square with
 `φ_X` and `G φ_Y` (`Adjunction.pullbackHom_square`).
-
 -/
 
 @[expose] public section

@@ -177,8 +177,6 @@ private theorem hom_exact_of_open_triangle
         d (r f) = eA (a ≫ b ≫ f) := by rw [← hb, ← ha]
         _ = 0 := by rw [hzero, map_zero]
 
-set_option maxHeartbeats 700000 in
--- Specializing the triangle identifications compares three large derived restriction functors.
 /-- Mayer--Vietoris exactness at global Hom and at the pair of local Hom groups (Stacks, Tag 08BW).
 -/
 theorem derived_hom_mayer_vietoris
@@ -199,8 +197,10 @@ theorem derived_hom_mayer_vietoris
           derivedOpenHomRestriction X (homOfLE inf_le_left) p.1 -
             derivedOpenHomRestriction X (homOfLE inf_le_right) p.2) := by
   classical
-  obtain ⟨A, B, a, b, δ, hT, eB, eA, eN, hb, ha⟩ :=
+  -- Bind the witness first so that `rcases` does not generalize its large functor expression.
+  have htriangle :=
     SheafOfModules.open_hom_triangle_realization X (moduleRings X) rfl U V hcover E F
+  rcases htriangle with ⟨A, B, a, b, δ, hT, eB, eA, eN, hb, ha⟩
   refine hom_exact_of_open_triangle a b δ hT eB eA eN
     (fun f ↦ ((SheafOfModules.overFunctor.{u} (moduleRings X) U).mapDerivedCategory.map f,
       (SheafOfModules.overFunctor.{u} (moduleRings X) V).mapDerivedCategory.map f))

@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarSingleTensorRepre
 /-!
 # Scalar tensor representatives with their specified derived endpoints
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 07A4 and 0FPH
-(blueprint: lem-pur-scalar-tensor-representative-calculus).
+## References
+
+* Stacks Project, Tags 06YY, 07A4 and 0FPH
 -/
 
 @[expose] public noncomputable section
@@ -100,8 +101,7 @@ private theorem normalized_tensor_representative
   erw [Category.comp_id] at h
   simpa only [tensorSingleRepresentative, Category.assoc] using h
 
-/-- The localization tensor representative with the scalar tensor functor's endpoint.
-Source: Stacks 06YY (blueprint: lem-pur-scalar-tensor-representative-calculus). -/
+/-- The localization tensor representative with the scalar tensor functor's endpoint. -/
 def scalarTensorRepresentative
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -112,12 +112,7 @@ def scalarTensorRepresentative
   (eqToIso (scalarTensorFunctor_eq φ T)).hom.app (DerivedCategory.Q.obj P) ≫
     tensorSingleRepresentative (scalarCoefficientSheaf φ T) P
 
-/-- The scalar/tensor normalization with the functor transport kept explicit.
-Source: Stacks 06YY (blueprint: lem-pur-scalar-tensor-representative-calculus).
-Proof: specialize the defining normalization of scalarTensorIso. The canonical
-complex-composition iso for an identity functor comparison is degreewise identity.
-Its image under Q is identity, so it cancels at the right. Reassociate the functor
-transport with the total-tensor representative; this is scalarTensorRepresentative. -/
+/-- The scalar/tensor normalization with the functor transport kept explicit. -/
 theorem scalarTensorIso_representative
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
@@ -137,10 +132,7 @@ theorem scalarTensorIso_representative
   simpa only [scalarTensorRepresentative, Iso.trans_hom, NatTrans.comp_app,
     Category.assoc] using h
 
-/-- The scalar tensor representative is invertible on a K-flat first factor.
-Source: Stacks 06YY (blueprint: lem-pur-scalar-tensor-representative-calculus).
-Proof: the localization tensorator is invertible when the first complex is K-flat.
-The total-tensor/single-complex comparison and the functor transport are isomorphisms. -/
+/-- The scalar tensor representative is invertible on a K-flat first factor. -/
 theorem scalarTensorRepresentative_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)

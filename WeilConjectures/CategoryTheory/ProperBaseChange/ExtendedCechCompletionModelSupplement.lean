@@ -342,8 +342,7 @@ public import WeilConjectures.AlgebraicGeometry.ExtendedCechCompletionModel
 /-!
 # Global extended Cech model and its derived completion unit
 
-Source: Stacks Project, algebraization.tex, Tags 099E and 099F
-(blueprint: lem-weil-pbc-extended-cech-completion-model).
+Source: Stacks Project, algebraization.tex, Tags 099E and 099F.
 -/
 
 @[expose] public section

@@ -81,8 +81,6 @@ local notation "qU" => SheafOfModules.isQuasicoherent U.ringCatSheaf
 set_option hygiene false in
 local notation "qA" => SheafOfModules.isQuasicoherent (𝓡 A)
 
-set_option maxHeartbeats 1400000 in
--- The deeply nested functor and transport equalities require additional elaboration steps.
 /-- The tensor pushout, its extension-of-scalars functors, and the canonical comparison maps.
 This assertion constructs the maps; it does not assert that they are isomorphisms
 (Stacks, Tag 01SB). -/
@@ -138,22 +136,25 @@ theorem affine_module_tensor_construction [IsAffineHom f] :
     simpa [tensorPullbackRingMap, TopCat.Sheaf.inverseImageConstruction] using
       adj.homEquiv_naturality_left_symm ρ (𝟙 A)
   have : HasPushout r₀ t₀ := inferInstance
-  let B := pushout r₀ t₀
-  let b := pushout.inl r₀ t₀
-  let t := pushout.inr r₀ t₀
+  let B : U.toTopCat.Sheaf CommRingCat.{u} := pushout r₀ t₀
+  let b : U.sheaf ⟶ B := pushout.inl r₀ t₀
+  let t : IA ⟶ B := pushout.inr r₀ t₀
   let ε : B ⟶ U.sheaf := pushout.desc (𝟙 U.sheaf) e₀ (by simpa using hc)
   have hp : IsPushout r₀ t₀ b t := IsPushout.of_hasPushout r₀ t₀
   have hb : b ≫ ε = 𝟙 U.sheaf := pushout.inl_desc _ _ _
   have ht : t ≫ ε = e₀ := pushout.inr_desc _ _ _
   refine ⟨B, b, t, ε, hp, hb, ht, ?_⟩
-  obtain ⟨P, pobj, κ, hmapP, hunitP⟩ :=
-    affine_module_tensor_baseChange f B b t hp
-  obtain ⟨H, hobj, γ, hmapH, hunitH⟩ :=
-    affine_module_tensor_extensionUnit f B b t ε hb P pobj κ
-  obtain ⟨hqc, α, β, hα, hβ⟩ :=
-    affine_module_tensor_coherenceComparisons f B b t ε
-      hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
-  exact ⟨P, pobj, κ, hmapP, hunitP, H, hobj, γ, hmapH, hunitH, hqc, α, β, hα, hβ⟩
+  -- Assemble each layer before introducing the next to keep elimination goals small.
+  have hbase :=
+    affine_module_tensor_baseChange (U := U) (X := X) f B b t hp
+  rcases hbase with ⟨P, pobj, κ, hmapP, hunitP⟩
+  refine ⟨P, pobj, κ, hmapP, hunitP, ?_⟩
+  have hext :=
+    affine_module_tensor_extensionUnit (U := U) (X := X) f B b t ε hb P pobj κ
+  rcases hext with ⟨H, hobj, γ, hmapH, hunitH⟩
+  refine ⟨H, hobj, γ, hmapH, hunitH, ?_⟩
+  exact affine_module_tensor_coherenceComparisons (U := U) (X := X) f B b t ε
+    hp hb ht P pobj κ H hobj γ ⟨hmapP, hunitP⟩ ⟨hmapH, hunitH⟩
 
 end
 end AlgebraicGeometry.Scheme.Modules

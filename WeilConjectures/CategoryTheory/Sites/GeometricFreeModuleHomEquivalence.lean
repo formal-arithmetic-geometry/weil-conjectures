@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-!
 # The normalized Hom chain for a transported free module sheaf
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 04BL and 08TQ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 04BL and 08TQ.
 
 The free object, its generator, and its algebraic inverse-image presentation are the
 published constructions. The right module is specified by its underlying direct image
@@ -44,8 +43,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
 /-- Restrict a linear map to the transported canonical generator, retaining the
-underlying-sheaf identification. Source: Stacks 08TQ, free-module identifications
-(auxiliary; not a blueprint node). -/
+underlying-sheaf identification. Source: Stacks 08TQ, free-module identifications. -/
 def inverseFreeRestriction
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -58,8 +56,7 @@ def inverseFreeRestriction
     (moduleSets BI).map h
 
 /-- Transpose a generalized section of a module's underlying direct image.
-Source: Stacks 03D3, underlying sheaf adjunction
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03D3, underlying sheaf adjunction. -/
 def directModuleTranspose
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -567,24 +564,7 @@ private theorem normalized_hom_naturality
 /-- The module adjunction, free-module bijection, and inverse set adjunction form the
 claimed natural chain, whose composite is restriction to the inverse-image generator.
 The existential right functor carries the prescribed direct-image operations, not an
-unspecified adjoint. Source: Stacks 03D2, 03D3, 04BL and 08TQ
-(auxiliary; not a blueprint node).
-
-Proof: (1) apply geometric_module_construction with R = B, A = S = BI and c = id.
-Its comparisons transport exactly the operations of F, so uniqueness of transported
-operations identifies its left functor with F.modules. Its right functor P has underlying
-f.direct and scalar action restricted along B to f.direct BI; the two graph clauses
-below are the adjunct forms of those addition and scalar-action comparisons.
-(2) geometric_module_transport restricts the given set adjunction to linear maps.
-At B[E] this gives A, normalized by the first equation below. Its naturality gives
-the two equations for A. (3) freeModule_restrict_bijective gives G by restriction to
-i, and freeModule_restrict_naturality gives its two naturality equations. Follow G
-by the underlying comparison eP and the inverse of f.adj.homEquiv. Counit naturality
-moves the map h past the counit, and the triangle identity cancels the counit against
-the image of the unit. The composite is therefore exactly h after L(i), as displayed.
-(4) each arrow is bijective, so inverseFreeRestriction is bijective for every H.
-Functoriality and generator naturality give the two final equations, proving naturality
-in E and H. The third arrow is the given inverse set adjunction and is natural too. -/
+unspecified adjoint. Source: Stacks 03D2, 03D3, 04BL and 08TQ. -/
 theorem geometricFreeModule_hom_chain
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}

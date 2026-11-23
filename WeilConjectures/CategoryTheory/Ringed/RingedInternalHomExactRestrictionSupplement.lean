@@ -126,8 +126,7 @@ public import WeilConjectures.Algebra.Homology.RingedInternalHomExactRestriction
 /-!
 # Internal derived Hom calculus on small ringed sites
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JB and 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JB and 08JC.
 
 The tensor functor is specified by its natural total-tensor comparison on K-flat
 representatives. Restriction uses Mathlib's slice functors and their induced functors

@@ -44,11 +44,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLi
 /-!
 # Derived limits of surjective towers on the small pro-etale site
 
-Source: Bhatt--Scholze, Proposition 3.1.10, Proposition 3.2.3(1), and Proposition 4.2.8;
-Stacks Project, Tags 07KC, 08TC, and 06XS
-(blueprint: lem-weil-proetale-surjective-tower-derived-limit).
-
-`n : ℕ` denotes positive level `n + 1`. Products and inverse limits are the existing
+`n: ℕ` denotes positive level `n + 1`. Products and inverse limits are the existing
 Mathlib constructions. The derived product is asserted to exist and the Roos assertion
 works for every choice of its limit structure, without an existence hypothesis.
 
@@ -58,6 +54,13 @@ works for every choice of its limit structure, without an existence hypothesis.
   Mathlib's sheafification structures to larger coefficient universes.
 * `proEtale_surjectiveTower_derivedLimit` states the short exact Roos sequence, its
   derived-limit triangle, and uniqueness of compatible lifts from degree-zero sheaves.
+
+## References
+
+* Bhatt--Scholze, Proposition 3.1.10, Proposition 3.2.3(1), and Proposition 4.2.8
+* Stacks Project, Tags 07KC, 08TC, and 06XS
+* Bhatt--Scholze, Proposition 3.1.10 (sign changed to `1 - s`), Proposition 3.2.3(1), and
+  Proposition 4.2.8
 -/
 
 @[expose] public section
@@ -378,38 +381,6 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- A surjective tower of module sheaves has its ordinary limit as a derived limit,
 with its canonical projections and the triangle of its short exact Roos sequence.
-
-Source: Bhatt--Scholze, Proposition 3.1.10 (sign changed to `1 - s`), Proposition 3.2.3(1),
-and Proposition 4.2.8; Stacks Project, Tags 07KC, 08TC, and 06XS
-(blueprint: lem-weil-proetale-surjective-tower-derived-limit).
-
-Proof plan:
-1. Form the sectionwise product by `lem-weil-proetale-countable-products-exact` and the
-inverse limit by `def-pur-sheaf-inverse-limit`. The existing transition endomorphism is
-`1 - s` with nth coordinate `x n - t n (x (n + 1))`.
-2. Cover any site object by affine weakly contractible objects using
-`lem-weil-pbc-proetale-affine-wcontractible-covering-family`. Exact evaluation from
-`lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits` makes all transitions
-surjective on the sections of each member of this same cover.
-3. Choose set-theoretic sections sigma_n of these surjections. Starting with x_0 = 0,
-set x_(n+1) = sigma_n (x_n - y_n). This locally lifts any section of the product under
-`1 - s`. These choices need not be linear or natural; only the preimage is needed.
-4. Sheaf uniqueness (`def-weil-pbc-sites-and-cohomology`) makes this local lifting an
-epimorphism. Its sectionwise kernel is exactly the compatible sequences, with inclusion
-the tuple of limit projections. Thus the displayed short complex is short exact.
-5. Exact countable products and clause 2 of `lemma-reduction-derived-nakayama` show
-that the degree-zero product, with its localized projections, is a derived product.
-No enough-injectives hypothesis is used. The short exact sequence gives the canonical
-triangle `hSES.singleTriangle` by `lem-sf-derived-ses-triangle`. The product comparison
-identifies its second arrow with `1 - s`, making it `def-weil-derived-limit`'s triangle.
-6. For compatible g_n, the sheaf limit gives a unique sheaf map h_0. Full faithfulness
-of the degree-zero embedding (`lem-weil-pbc-derived-single-fully-faithful`) says every
-derived map between these sheaves comes from a unique sheaf map. Its composites with
-all limit projections determine it. Thus the unique derived lift is the image of h_0.
-7. For the parenthesis, the standard t-structure (`def-sbc-standard-tstructure-derived-category`)
-and orthogonality (`def-weil-t-structure`) give Hom(G[0], P[0][-1]) = 0. The shift is
-supported in cohomological degree 1. Two lifts have zero difference; in particular that
-difference factors through the zero morphism to P[0][-1] and the shifted connecting map.
 -/
 theorem proEtale_surjectiveTower_derivedLimit
     (Y : Scheme.{t})

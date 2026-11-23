@@ -20,15 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
-/-- A conservative functor preserving equalizers is faithful.
-
-Source: the equalizer criterion for equality of morphisms, used for descent on the
-Artin–Schreier cover (blueprint: lem-kernel-conservative-left-exact-faithful).
-
-Proof. When the images of two arrows coincide, the image of their equalizer inclusion
-is invertible, since preservation identifies it with the equalizer inclusion of equal
-arrows. Conservativity makes the original inclusion invertible. Cancel its epimorphism
-property in the equalizer equation. -/
+/-- A conservative functor preserving equalizers is faithful. -/
 theorem faithful_of_preservesEqualizers_of_reflectsIsomorphisms
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [HasEqualizers C] [HasEqualizers D] (F : C ⥤ D)

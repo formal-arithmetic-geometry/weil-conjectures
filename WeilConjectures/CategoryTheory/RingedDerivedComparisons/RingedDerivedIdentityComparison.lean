@@ -47,7 +47,6 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 Source: Stacks Project, Modules on Sites and Cohomology on Sites,
 Tags 03D7, 03D8, 0D6D, 0D6E and 07A6.
-(blueprint: lem-sfb-ringed-derived-identity-comparison).
 -/
 
 @[expose] public noncomputable section

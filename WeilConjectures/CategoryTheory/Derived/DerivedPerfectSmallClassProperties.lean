@@ -26,15 +26,7 @@ namespace CategoryTheory
 attribute [local instance] derived_hasCoproducts
 
 /-- Alpha-compactness supplies the perfectness and bounded-subcoproduct clauses.
-
-Source: Krause, Localization theory, Sections 6.2--6.3 and Proposition 6.8.1.
-(blueprint: new-sfb-derived-perfect-small-class-properties)
-
-Proof: the canonical alpha-compact class satisfies Krause's (G4). Factor a map
-into a coproduct through a coproduct of objects Z_i in that class. The componentwise
-surjectivity hypothesis lifts each map Z_i to X_i, and their coproduct gives the
-required lift. For the second clause alpha-smallness gives a support J of size
-less than alpha; closure under such coproducts puts the supported coproduct in S. -/
+Source: Krause, Localization theory, Sections 6.2--6.3 and Proposition 6.8.1. -/
 theorem derived_perfectSmallClass_properties
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A]

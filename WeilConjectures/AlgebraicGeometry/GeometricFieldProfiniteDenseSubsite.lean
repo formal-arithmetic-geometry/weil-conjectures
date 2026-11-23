@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 import all WeilConjectures.AlgebraicGeometry.ProEtalePointComponentsMaps
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
@@ -14,8 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 /-!
 # The profinite basis over a separably closed field
 
-Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11; Stacks Tags 092Q, 096D, 096T.
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Examples 4.1.10 and 4.2.11; Stacks Tags 092Q, 096D, 096T.
 -/
 
 @[expose] public section
@@ -478,8 +478,7 @@ private theorem testCoverPreserving (K : Type u) [Field K] :
 /-- The specified relative profinite test functor is a dense subsite over a
 separably closed field.
 
-Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11; Stacks Tags 092Q, 096D, 096T
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Examples 4.1.10 and 4.2.11; Stacks Tags 092Q, 096D, 096T.
 
 Proof: Locally constant functions commute with extension of scalars from the integers,
 as follows by evaluating a ring map at each prime localization and using characteristic
@@ -505,4 +504,58 @@ theorem geometricFieldProfiniteDenseSubsite (K : Type u) [Field K] [IsSepClosed 
   have := testCoverDense K
   exact { functorPushforward_mem_iff := fun {_ _} ↦
     ⟨testTopologyReflect K, (testCoverPreserving K).cover_preserve⟩ }
+
+/-! ### Profinite sets as the affine pro-étale objects over a separably closed field -/
+
+/-- The profinite test-object functor over a field is fully faithful. -/
+theorem profiniteToProEtOf_full_and_faithful (K : Type u) [Field K] :
+    (profiniteToProEtOf (Spec (.of K))).Full ∧ (profiniteToProEtOf (Spec (.of K))).Faithful :=
+  testFullyFaithful K
+
+instance full_profiniteToProEtOf (K : Type u) [Field K] :
+    (profiniteToProEtOf (Spec (.of K))).Full :=
+  (testFullyFaithful K).1
+
+instance faithful_profiniteToProEtOf (K : Type u) [Field K] :
+    (profiniteToProEtOf (Spec (.of K))).Faithful :=
+  (testFullyFaithful K).2
+
+/-- The profinite test objects over a field are affine: `Spec K[S] = Spec LC(S, K)`. -/
+instance isAffine_profiniteToProEtOf_obj_left (K : Type u) [Field K] (S : Profinite.{u}) :
+    IsAffine ((profiniteToProEtOf (Spec (.of K))).obj S).left :=
+  IsAffine.of_isIso (TestLC.lcIso K S).inv
+
+/-- Over a separably closed field, every affine object of the pro-étale site is a profinite
+test object. -/
+theorem exists_profinite_iso_of_isAffine (K : Type u) [Field K] [IsSepClosed K]
+    (U : (Spec (.of K)).ProEt) [IsAffine U.left] :
+    ∃ S : Profinite.{u}, Nonempty (U ≅ (profiniteToProEtOf (Spec (.of K))).obj S) :=
+  affineClassification K U
+
+/-- Profinite sets as affine objects of the pro-étale site of `Spec K` (reducible, so that the
+fullness and faithfulness instances of `ObjectProperty.lift` apply to it). -/
+noncomputable abbrev profiniteToAffineProEtOf (K : Type u) [Field K] :
+    Profinite.{u} ⥤
+      ObjectProperty.FullSubcategory (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left) :=
+  ObjectProperty.lift (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left)
+    (profiniteToProEtOf (Spec (.of K))) fun S ↦ isAffine_profiniteToProEtOf_obj_left K S
+
+instance essSurj_profiniteToAffineProEtOf (K : Type u) [Field K] [IsSepClosed K] :
+    (profiniteToAffineProEtOf K).EssSurj where
+  mem_essImage U := by
+    have : IsAffine U.obj.left := U.property
+    obtain ⟨S, ⟨e⟩⟩ := affineClassification K U.obj
+    exact ⟨S, ⟨(ObjectProperty.ι _).preimageIso e.symm⟩⟩
+
+instance isEquivalence_profiniteToAffineProEtOf (K : Type u) [Field K] [IsSepClosed K] :
+    (profiniteToAffineProEtOf K).IsEquivalence where
+
+/-- **Profinite sets are the affine pro-étale objects over a separably closed field**: the
+functor `S ↦ Spec LC(S, K)` is an equivalence between profinite sets and the full subcategory of
+the pro-étale site of `Spec K` on the objects with affine underlying scheme. -/
+noncomputable def profiniteAffineProEtEquivalence (K : Type u) [Field K] [IsSepClosed K] :
+    Profinite.{u} ≌
+      ObjectProperty.FullSubcategory (fun U : (Spec (.of K)).ProEt ↦ IsAffine U.left) :=
+  (profiniteToAffineProEtOf K).asEquivalence
+
 end AlgebraicGeometry.ProEtale

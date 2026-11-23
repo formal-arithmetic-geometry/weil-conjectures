@@ -12,8 +12,10 @@ import WeilConjectures.CategoryTheory.Abelian.FirstResolutionExtensionClass
 /-!
 # Ordinary normalization of framed relative classes
 
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6.
-(blueprint: lem-amb-relative-torsor-forget-normalization).
+## References
+
+* Stacks Project, Tag 03AJ
+* Tags 06XR and 06XV
 -/
 
 @[expose] public section
@@ -23,16 +25,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Forgetting the open lift identifies the framed cocycle with the negative extension class.
-Source: Stacks Project, Tag 03AJ, relative refinement, step 6; Tags 06XR and 06XV.
-(blueprint: lem-amb-relative-torsor-forget-normalization).
-Proof: the projection to absolute section homology is represented by the global
-cycles coordinate. Use the constant-sheaf adjunction to express this section as a
-morphism from the integer sheaf, and apply the canonical comparison's cocycle formula.
-The first extension of the resolution has class minus the cycles inclusion under
-extMk, as follows from the cone homotopy with degree-zero component minus identity.
-Precomposition with the integer-sheaf morphism is exactly the sheaf H0 identification
-used to define the connecting class. -/
+/-- Forgetting the open lift identifies the framed cocycle with the negative extension class. -/
 theorem relativeFrameClass_forget
     (T : Scheme.{u}) (U : T.Etale)
     {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution G)

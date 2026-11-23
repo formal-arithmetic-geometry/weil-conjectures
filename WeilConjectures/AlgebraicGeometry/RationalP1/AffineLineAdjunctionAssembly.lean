@@ -59,8 +59,6 @@ import all Mathlib.Algebra.BigOperators.Ring.Finset
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-! # The projective-line adjunction with its canonical diagonal data supplied
-
-Source: the affine-line proof, step 9, and the rational projective-line triangle theorem.
 -/
 
 @[expose] public noncomputable section
@@ -89,7 +87,9 @@ private theorem selectNormalizedArrow
   obtain ⟨e, he⟩ := select a b c d h
   exact ⟨e, a, b, c, d, h, he⟩
 
-@[irreducible] private noncomputable def diagonalLocalizations (ℓ : ℕ) [Fact ℓ.Prime]
+/-- The derived categories and `Ext` groups used by the diagonal tower over `X`, all coming from
+the Grothendieck abelian structures in the coefficient universe. -/
+@[irreducible, no_expose] noncomputable def diagonalLocalizations (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) : DiagonalTraceLocalizations ℓ X := by
   letI : IsGrothendieckAbelian.{u + 1} (DiagonalCompleted ℓ X) :=
     SheafOfModules.isGrothendieckAbelian_coefficientUniverse _
@@ -167,28 +167,21 @@ private theorem triangleAdjunction
       Y hY D hcompletion hsystem δ hlimit family reference).2.2.2.2.1).nonempty
 
 /-- Supply the normalized strict cycle system, its unique completed limit, and its
-coefficient realization to the projective-line triangle identities.
-Source: blueprint affine-line proof step 9; projective-line triangle proof and diagonal
-limit and coefficient theorems (blueprint: proposition-projective-line-rational-coefficients--1).
-Proof plan: the characteristic assumptions make ell a unit in the field and in global
-sections. Construct the strict cycle system with `exists_diagonalTowerSystem`. Apply
-`diagonalTower_limit` and package its unique arrow and normalization as
-`DiagonalTrace.IsDiagonalLimit`. Apply `diagonalTower_coefficients` to obtain its
-Family and Reference. The derived sequence and completed coefficient categories are
-Grothendieck abelian in the coefficient universe: sequence categories use the standard
-coproduct of evaluation-left-adjoint separators, while completed modules use
-`SheafOfModules.isGrothendieckAbelian_coefficientUniverse`. The resulting localization
-instances discharge the hypotheses of `rationalP1_triangle`; its adjunction clause is
-then the required result. -/
+coefficient realization to the projective-line triangle identities. -/
 theorem rationalP1_adjunction_assembly
     (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]
     [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
-    [IsSeparated (Y ↘ Spec (.of k))]
-    [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] :
+    [IsSeparated (Y ↘ Spec (.of k))] :
     Nonempty (push ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y ⊣
       exceptional ℓ c k (ringChar k) (Fact.out : ringChar k ≠ ℓ) Y) := by
+  have : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (.of k))
+  have : IsNoetherian (ProjectiveLine Y) :=
+    isNoetherian_of_locallyOfFiniteType (ProjectiveLine Y ↘ Y)
+  have : IsNoetherian (diagonalSurface Y) :=
+    isNoetherian_of_locallyOfFiniteType
+      (pullback.fst (ProjectiveLine Y ↘ Y) (ProjectiveLine Y ↘ Y))
   let := diagonalLocalizations ℓ Y
   let := diagonalLocalizations ℓ (ProjectiveLine Y)
   let := diagonalLocalizations ℓ (diagonalSurface Y)

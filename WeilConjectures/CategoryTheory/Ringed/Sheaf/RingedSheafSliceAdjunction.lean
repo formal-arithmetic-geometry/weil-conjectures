@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 # Slice-site localization for ringed sheaves
 
 Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction).
+Tag 04IE.
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace CategoryTheory
 /-- Data of the ringed slice presentation and its exact module adjunction.
 
 Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction). -/
+Tag 04IE. -/
 structure RingedSheafSliceAdjunctionData
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) where
@@ -95,29 +95,7 @@ structure RingedSheafSliceAdjunctionData
 exact extension-by-zero/module-restriction adjunction, including relocalization.
 
 Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction).
-
-Proof.
-1. The element category is small; covering families are those whose underlying families cover,
-   and the site axioms are inherited from the original site (sites.tex 0791, 00VH).
-2. The fibre presheaf `(U,s) ↦ {x ∈ F(U) | p_U x = s}` of `F ⟶ A` is a sheaf; conversely a sheaf
-   `L` on the element site gives the sheafified presheaf of pairs `(s, x)`, `x ∈ L(U,s)`, over `A`.
-   The maps `x ↦ (p x, x)` and evaluation at the fibre are mutually inverse and natural.
-3. The projection `(U,s) ↦ U` is continuous and cocontinuous, so restriction is the inverse image
-   of a morphism of topoi, which under step 2 is `G ↦ (G × A → A)`; this is `j_A`. The ring
-   `R × A → A` has fibre `R(U)`, so `R_A = j_A⁻¹ R` and the structural map is the identity; the
-   module pullback `R_A ⊗_{j_A⁻¹R} j_A⁻¹M = j_A⁻¹M` has sections `M(U)` at `(U,s)`
-   and is left adjoint to the induced module direct image `j_A*`.
-4. The presheaf `u_p L` at `U` is a colimit over triples `(V,t,φ : U → V)`, whose discrete part
-   `(U,s,id)` is final; so it is `⨁_{s ∈ A(U)} L(U,s)` with the stated restrictions. Its module
-   sheafification is `j_{A!}L`, and the sheafification universal property gives `j_{A!} ⊣ j_A^*`.
-5. Kernels are sectionwise, so `j_A^*` preserves kernels and, as a left adjoint, cokernels.
-   `j_{A!}` is right exact as a left adjoint; it preserves injections since a direct sum of
-   injections is injective, abelian sheafification is exact, and the forgetful functor from module
-   sheaves is faithful and preserves kernels (sites-modules.tex 03DJ).
-6. For `B ⟶ A`, objects of the iterated element site are `(U,s,b)` with `b ↦ s`, that is `(U,b)`;
-   arrows and coverings agree, `R × A` restricts to `R × B`, and the composite restriction evaluates
-   at `(U,b)` as `M(U)`, so it is canonically `j_B^*` (sites-modules.tex 04J4). -/
+Tag 04IE. -/
 theorem ringed_sheaf_slice_adjunction
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) :

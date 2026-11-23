@@ -21,43 +21,17 @@ enough injectives. If `F` preserves injective objects, then the canonical compar
 
 is an isomorphism (`Functor.rightDerivedFunctorPlusCompIso`).
 
-## Why this is not a corollary of the unbounded statement
+## Implementation details
 
-`Functor.rightDerivedFunctorCompIso` in
-`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp` proves the same
-theorem for the unbounded derived category, but it assumes `HasKInjectiveResolutions` on
-both `C` and `D`, whose only source in this repository is a `sorry`. The bounded below
-statement needs only
-enough injectives, so it rests on proved theorems; see
-`WeilConjectures.SixFunctors.Etale.Derived` for why that distinction matters here. This file
-therefore deliberately does not import anything from
+The unbounded statement `Functor.rightDerivedFunctorCompIso` in
+`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp` requires
+`HasKInjectiveResolutions` and that `F` preserves K-injective complexes. The bounded below
+statement only needs enough injectives and that `F` preserves injective objects
+(`Functor.PreservesInjectiveObjects`, which holds for the right adjoint of a
+monomorphism-preserving functor by
+`Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms`). This file
+therefore deliberately does not import
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
-
-## The proof, and where it differs from the unbounded one
-
-The shape is the same: the composite `R⁺F ⋙ R⁺G`, equipped with the composite unit
-`Functor.rightDerivedFunctorPlusCompUnit`, is itself a right derived functor of
-`(F ⋙ G).mapHomotopyCategoryPlus ⋙ Qh`, and the isomorphism then follows from uniqueness
-of right derived functors.
-
-The hypothesis on `F` is where the two arguments part company. The unbounded derivability
-structure is indexed by K-injective complexes, so there the requirement is that `F` send
-K-injective complexes to K-injective complexes
-(`Functor.PreservesKInjectiveComplexes`). The bounded below derivability structure is
-indexed by bounded below complexes of *injective objects*, so here the requirement is only
-that `F` preserve injective objects — Mathlib's `Functor.PreservesInjectiveObjects`, which
-for a right adjoint of a monomorphism-preserving functor is
-`Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms`. That is a
-weaker and much more readily available hypothesis than the K-injective one, which needs the
-left adjoint to be exact.
-
-Concretely, the check that the composite unit is invertible at a bounded below complex `K`
-of injectives uses Mathlib's criterion that the unit of a bounded below right derived
-functor is invertible at any complex all of whose terms are injective
-(the instance in `Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean`).
-Applied to `G` this is exactly where `F.PreservesInjectiveObjects` enters: the terms of
-`F.mapHomotopyCategoryPlus.obj K` are the `F.obj (K.X n)`, injective because `F` preserves
-injectives.
 
 ## Main definitions
 
@@ -82,7 +56,6 @@ Finally, `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso_id_comp`,
 laws relating `rightDerivedFunctorPlusCompIso` and `rightDerivedFunctorPlusIdIso`, and
 `CategoryTheory.Functor.rightDerivedFunctorPlusCompIso'_assoc` is the associativity law for
 the primed composition isomorphism.
-
 -/
 
 @[expose] public section

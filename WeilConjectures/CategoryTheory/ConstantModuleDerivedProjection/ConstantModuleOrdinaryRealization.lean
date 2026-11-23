@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Monoidal.Functor
 /-! # Ordinary constant-module realization of a geometric inverse image
 
 Source: Stacks Project, Sites, Tag 00YV (6), Modules on Sites, Tag 03EL,
-and Cohomology on Sites, Tag 07A4
-(blueprint: lem-sfb-constant-module-ordinary-realization).
+and Cohomology on Sites, Tag 07A4.
 -/
 
 @[expose] public noncomputable section

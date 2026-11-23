@@ -32,6 +32,13 @@ For a morphism `g : W ⟶ X` intertwining endomorphisms `e_W` and `e_X`, the com
 - `CategoryTheory.PullbackPseudonatural.lifted`: pseudonaturality is preserved by restriction along
   fully faithful functors.
 
+## Implementation details
+
+In `Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso` the categories are passed as
+variables, with `Sigma`-type equations to the generic ones, and the functors through `HEq`
+hypotheses. This avoids elaboration problems: instantiated directly with the pullbacks of module
+objects, the generic statement makes the elaborator and the kernel unfold these pullbacks while
+comparing the instances of the generic categories with the concrete ones.
 -/
 
 @[expose] public section
@@ -282,14 +289,7 @@ lemma PullbackPseudonatural.pullbackFamilyComparison (hθ : PullbackPseudonatura
 pullbacks**: for `g : W ⟶ X` with `e_W ≫ g = g ≫ e_X` and an algebra `K` for `L e_X`, the
 comparison `θ g` is an isomorphism between the transport along `θ e_W` of the pullback of `K`
 and the pullback of the transport of `K` along `θ e_X`. The functors are given through
-equations, so that concrete instances can use their own functors.
-
-Implementation note: the categories are passed as variables, with their category instances, together
-with `Sigma`-type equations to the generic ones, and the functors through `HEq` hypotheses. This
-works around elaboration problems: instantiated directly with the pullbacks of module objects,
-the generic statement makes the elaborator and the kernel unfold these pullbacks while comparing
-the instances of the generic categories with the concrete ones. Concrete callers pass their own
-categories and functors, together with `rfl` and functor-level equations. -/
+equations, so that concrete instances can use their own functors. -/
 theorem Endofunctor.IsoAlgebra.nonempty_mapOfNatIso_pullback_iso (hθ : PullbackPseudonatural c Lc θ)
     {W X : C} (g : W ⟶ X) (eW : W ⟶ W) (eX : X ⟶ X) (hg : eW ≫ g = g ≫ eX)
     (𝒦X 𝒦W 𝒮X 𝒮W : Type _) {i𝒦X : Category 𝒦X} {i𝒦W : Category 𝒦W} {i𝒮X : Category 𝒮X}

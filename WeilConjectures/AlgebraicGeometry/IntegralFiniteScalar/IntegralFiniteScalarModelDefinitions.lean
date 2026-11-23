@@ -80,10 +80,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-! # The integral-to-finite perfect scalar model
-
-Source: current blueprint, scalar-six direct-image proof, finite free and finitely
-presented coefficient extensions and formal properties
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model).
 -/
 
 @[expose] public noncomputable section
@@ -102,81 +98,59 @@ namespace AlgebraicGeometry.ProEtale.IntegralFiniteScalar
 
 open CondensedRing
 
-/-- The existing internal module category at the profinite point.
-Source: blueprint finite free resolution
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The existing internal module category at the profinite point. -/
 abbrev PointModules (Λ : ScalarSixRing.{u}) :=
   Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ.X
 
-/-- Exact strong monoidal pullback of modules from the point.
-Source: blueprint pulling back the square free resolution
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Exact strong monoidal pullback of modules from the point. -/
 abbrev pointPull (Λ : ScalarSixRing.{u}) (Z : Scheme.{u}) :=
   (sfbPullbackFromPoint Z).mapMod Λ.X
 
-/-- Additivity of the existing point direct image, which is precomposition.
-Source: blueprint point inverse-image adjunction
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Additivity of the existing point direct image, which is precomposition. -/
 instance pointRightAdditive : pointLowerStar.{u}.Additive where
   map_add := rfl
 
-/-- The existing strong monoidal and braided structures bundled together.
-Source: blueprint monoidal comparison
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The existing strong monoidal and braided structures bundled together. -/
 instance pointBraided (Z : Scheme.{u}) : (sfbPullbackFromPoint Z).Braided where
   toMonoidal := inferInstance
   braided := Functor.LaxBraided.braided
 
-/-- Additivity inherited from the existing point/geometric adjunction.
-Source: blueprint exact point inverse image
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Additivity inherited from the existing point/geometric adjunction. -/
 instance pointAbAdditive (Z : Scheme.{u}) : (sfbPullbackFromPoint Z).Additive :=
   (pointUpperStarLowerStarAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ Z))).left_adjoint_additive
 
-/-- Additivity of point pullback, read on the faithful underlying abelian sheaves.
-Source: blueprint exact point inverse image
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Additivity of point pullback, read on the faithful underlying abelian sheaves. -/
 instance pointPull_additive (Λ : ScalarSixRing.{u}) (Z : Scheme.{u}) :
     (pointPull Λ Z).Additive where
   map_add {_X _Y f g} := Mod.hom_ext _ _
     ((sfbPullbackFromPoint Z).map_add (f := f.hom) (g := g.hom))
 
-/-- The specified two-term cone, pulled back from the point degreewise.
-Source: blueprint two-term model in degrees -1,0
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The specified two-term cone, pulled back from the point degreewise. -/
 def complex (Λ : ScalarSixRing.{u}) (S : ShortComplex (PointModules Λ))
     (Z : Scheme.{u}) :=
   ((pointPull Λ Z).mapHomologicalComplex (.up ℤ)).obj
     (CochainComplex.monoCokernelComplex S.f)
 
-/-- Its degree-zero target, also pulled back degreewise.
-Source: blueprint augmentation to A_Z[0]
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Its degree-zero target, also pulled back degreewise. -/
 def target (Λ : ScalarSixRing.{u}) (S : ShortComplex (PointModules Λ))
     (Z : Scheme.{u}) :=
   ((pointPull Λ Z).mapHomologicalComplex (.up ℤ)).obj
     ((CochainComplex.singleFunctor _ 0).obj S.X₃)
 
-/-- Pullback of the actual quotient augmentation.
-Source: blueprint specified q_Z
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Pullback of the actual quotient augmentation. -/
 def augmentation (Λ : ScalarSixRing.{u}) (S : ShortComplex (PointModules Λ))
     (Z : Scheme.{u}) : complex Λ S Z ⟶ target Λ S Z :=
   ((pointPull Λ Z).mapHomologicalComplex (.up ℤ)).map
     (CochainComplex.monoCokernelAugmentation S)
 
-/-- The canonical adjunction with the exact, termwise inverse image as left adjoint.
-Source: blueprint ordinary unbounded geometric adjunction
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The canonical adjunction with the exact, termwise inverse image as left adjoint. -/
 def geometricAdjunction (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     scalarSixPull Λ f ⊣ moduleObjectDerivedPushforward Λ.X f :=
   (derivedUpperStarLowerStarAdjunction Λ.X f).ofNatIsoLeft
     (leftDerivedUpperStarIsoMapDerivedCategory Λ.X f)
 
-/-- The tensor comparison of that exact pullback, with its canonical derived normalization.
-Source: blueprint monoidal pullback comparison
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The tensor comparison of that exact pullback, with its canonical derived normalization. -/
 def tensorPull (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)) :
     (scalarSixPull Λ f).obj (B ⊗ K) ⟶
@@ -187,9 +161,7 @@ def tensorPull (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
         (leftDerivedUpperStarIsoMapDerivedCategory Λ.X f).hom.app K)
 
 /-- The actual coefficient-change mate, defined with the inverse of the normalized
-pullback comparison and the actual geometric counit.
-Source: blueprint formal properties, definition of gamma
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+pullback comparison and the actual geometric counit. -/
 def gamma (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X)) :=
@@ -197,21 +169,18 @@ def gamma (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}} (a : Λ �
     ((D.theta a f).inv.app ((moduleObjectDerivedPushforward Λ.X f).obj K) ≫
       (scalarSixChange a X).map ((geometricAdjunction Λ f).counit.app K))
 
-/-- Exact derived restriction for the point-induced scalar map.
-Source: blueprint scalar restriction (blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Exact derived restriction for the point-induced scalar map. -/
 abbrev restriction {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u}) :
     DerivedCategory (ModuleRingedComparison.internalModules Λ'.X Z) ⥤
       DerivedCategory (ModuleRingedComparison.internalModules Λ.X Z) :=
   (Mod.comap (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Z)).mapDerivedCategory
 
-/-- The actual scalar adjunction, including its normalized unit and counit.
-Source: blueprint scalar adjunction (blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The actual scalar adjunction, including its normalized unit and counit. -/
 abbrev scalarAdjunction {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u}) :=
   Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Z)
 
 /-- The canonical restriction/direct-image comparison, obtained by conjugating the
-normalized pullback/scalar comparison under the two composite adjunctions.
-Source: blueprint formal properties (blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+normalized pullback/scalar comparison under the two composite adjunctions. -/
 def restrictionPush (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     (a : Λ ⟶ Λ') {X Y : Scheme.{u}} (f : X ⟶ Y) :
     moduleObjectDerivedPushforward Λ'.X f ⋙ restriction a Y ≅
@@ -220,8 +189,7 @@ def restrictionPush (D : ScalarSixPullbackData.{u}) {Λ Λ' : ScalarSixRing.{u}}
     ((geometricAdjunction Λ f).comp (scalarAdjunction a X)) (D.theta a f)
 
 /-- Pullback of the restricted regular coefficient module is the restricted regular
-module on the scheme, via the standard mapMod/comap and unit comparisons.
-Source: blueprint A_Z (blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+module on the scheme, via the standard mapMod/comap and unit comparisons. -/
 def coefficientModuleIso {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u}) :
     (pointPull Λ Z).obj ((Mod.comap a.hom.hom).obj (Mod.regular Λ'.X)) ≅
       (Mod.comap (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Z)).obj
@@ -231,8 +199,7 @@ def coefficientModuleIso {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Sche
     (Mod.comap (coefficientMap (Λ := Λ.X) (Λ' := Λ'.X) a.hom.hom Z)).mapIso
       ((sfbPullbackFromPoint Z).mapModUnitIso (R := Λ'.X)).symm
 
-/-- The scalar-first projection map, defined by the tensor comparison and O-counit.
-Source: blueprint projection formula (blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The scalar-first projection map, defined by the tensor comparison and O-counit. -/
 def projection (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y))
     (P : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X))
@@ -242,9 +209,7 @@ def projection (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tensorPull Λ f B ((moduleObjectDerivedPushforward Λ.X f).obj K) ≫
       (e.hom ⊗ₘ (geometricAdjunction Λ f).counit.app K))
 
-/-- The degree-zero coefficient identification supplied by the chosen point quotient.
-Source: blueprint quotient augmentation
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The degree-zero coefficient identification supplied by the chosen point quotient. -/
 def targetZeroIso {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))
     (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X)) (Z : Scheme.{u}) :
@@ -255,9 +220,7 @@ def targetZeroIso {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (pointPull Λ Z).mapIso t ≪≫ coefficientModuleIso a Z
 
 /-- The derived-to-ordinary scalar counit on a complex, retaining the localization
-comparisons instead of choosing an unspecified scalar comparison.
-Source: blueprint computation on K-flat representatives
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+comparisons instead of choosing an unspecified scalar comparison. -/
 def scalarCounit {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u})
     (C : CochainComplex (ModuleRingedComparison.internalModules Λ.X Z) ℤ) :
     (scalarSixChange a Z).obj (DerivedCategory.Q.obj C) ⟶
@@ -274,9 +237,7 @@ def scalarCounit {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (Z : Scheme.{u})
 /-- The explicit ordinary augmentation normalization for a proposed derived beta.
 The ordinary extension comparison is fixed on underlying abelian sheaves, and the
 signed direct-sum total comparison is fixed on its (0,n) summands. Thus this condition
-cannot hold for an arbitrary isomorphism with the same endpoints.
-Source: blueprint resolving-class computation
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+cannot hold for an arbitrary isomorphism with the same endpoints. -/
 def AugmentationNormalized {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
     (S : ShortComplex (PointModules Λ))
     (t : S.X₃ ≅ (Mod.comap a.hom.hom).obj (Mod.regular Λ'.X)) (Z : Scheme.{u})
@@ -310,16 +271,13 @@ def AugmentationNormalized {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
             DerivedCategory.Q.map τ.hom
 
 /-- Canonical module comparison induced by upperStarFromPointComp, with its specified
-extension-of-scalars unit, so it retains the monoidal point-pullback normalization.
-Source: blueprint p_X = f* p_Y (blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+extension-of-scalars unit, so it retains the monoidal point-pullback normalization. -/
 def pointModuleComp (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pointPull Λ Y ⋙ CondensedRing.upperStar Λ.X f ≅ pointPull Λ X :=
   Functor.mapModCompExtendScalarsIso (sfbPullbackFromPoint Y)
     (ProEtale.upperStar Ab.{u + 1} f) (upperStarFromPointComp f).hom Λ.X
 
-/-- The same specified point comparison on complexes, before localization.
-Source: blueprint inverse-image compatibility
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- The same specified point comparison on complexes, before localization. -/
 def pointComplexComp (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : CochainComplex (PointModules Λ) ℤ) :
     ((CondensedRing.upperStar Λ.X f).mapHomologicalComplex (.up ℤ)).obj
@@ -327,9 +285,7 @@ def pointComplexComp (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((pointPull Λ X).mapHomologicalComplex (.up ℤ)).obj C :=
   (Functor.mapHomologicalComplexCompIso (pointModuleComp Λ f) (.up ℤ)).app C
 
-/-- Localization of the specified complex comparison, using exact geometric pullback.
-Source: blueprint compatibility in D(O)
-(blueprint: lem-sfb-integral-finite-scalar-perfect-model). -/
+/-- Localization of the specified complex comparison, using exact geometric pullback. -/
 def modelPull (Λ : ScalarSixRing.{u}) (S : ShortComplex (PointModules Λ))
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (scalarSixPull Λ f).obj (DerivedCategory.Q.obj (complex Λ S Y)) ≅

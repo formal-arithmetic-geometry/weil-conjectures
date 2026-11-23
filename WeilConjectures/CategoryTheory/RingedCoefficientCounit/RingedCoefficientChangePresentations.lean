@@ -12,8 +12,7 @@ set_option linter.privateModule false
 /-!
 # Coefficient changes of normalized counit diagrams
 
-Source: Stacks, Tags 03D7, 07A6 and 0D6E
-(blueprint: def-pur-ringed-coefficient-change-presentations).
+Source: Stacks, Tags 03D7, 07A6 and 0D6E.
 Ordinary maps are fixed on sections; derived maps are fixed by localization and
 K-flat/K-injective representative equations. No counit identity is a field.
 -/

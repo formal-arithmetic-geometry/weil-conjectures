@@ -12,14 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Representable
 /-!
 # Functoriality of the strict localization
 
-Let `g : S' ⟶ S` be a morphism of schemes and `s' : Spec Ω ⟶ S'` a geometric point. Pulling
+Let `g: S' ⟶ S` be a morphism of schemes and `s': Spec Ω ⟶ S'` a geometric point. Pulling
 back a pointed étale neighbourhood `(V, v)` of `s' ≫ g` along `g` gives the pointed étale
 neighbourhood `(V ×_S S', (v, s'))` of `s'`. Hence the legs of the limit cone of
 `S'_(s')` give a cone over the affine pointed étale neighbourhoods of `s' ≫ g`, and we obtain
-the morphism `strictLocalizationMap g s' : S'_(s') ⟶ S_(s' ≫ g)` over `g`, compatible with the
+the morphism `strictLocalizationMap g s': S'_(s') ⟶ S_(s' ≫ g)` over `g`, compatible with the
 canonical geometric points.
-
-(blueprint: `lemma-tangent-cones-on-cover`)
 
 ## Main definitions
 
@@ -149,9 +147,7 @@ noncomputable def strictLocalizationMapCone : Cone (affineNeighborhoodDiagram (s
         exact pullback.lift_fst _ _ _ }
 
 /-- **Functoriality of the strict localization**: the morphism `S'_(s') ⟶ S_(s' ≫ g)` induced
-by `g : S' ⟶ S`, given by the base change of pointed étale neighbourhoods along `g`.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+by `g: S' ⟶ S`, given by the base change of pointed étale neighbourhoods along `g`. -/
 noncomputable def strictLocalizationMap : strictLocalization s' ⟶ strictLocalization (s' ≫ g) :=
   (isLimitStrictLocalizationCone (s' ≫ g)).lift (strictLocalizationMapCone g s')
 
@@ -164,9 +160,7 @@ lemma strictLocalizationMap_comp_strictLocalizationCone_π_app
             ((AffinePointedEtaleNeighborhood.ι _).obj x)) ≫ pullback.fst x.obj.1.hom g :=
   (isLimitStrictLocalizationCone (s' ≫ g)).fac _ x
 
-/-- The morphism `strictLocalizationMap g s'` lies over `g`.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+/-- The morphism `strictLocalizationMap g s'` lies over `g`. -/
 @[reassoc (attr := simp)]
 lemma strictLocalizationMap_comp_strictLocalizationToBase :
     strictLocalizationMap g s' ≫ strictLocalizationToBase (s' ≫ g) =
@@ -180,9 +174,7 @@ lemma strictLocalizationMap_comp_strictLocalizationToBase :
   exact pullback.condition
 
 /-- The morphism `strictLocalizationMap g s'` carries the canonical geometric point of `S'_(s')`
-to the canonical geometric point of `S_(s' ≫ g)`.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+to the canonical geometric point of `S_(s' ≫ g)`. -/
 @[reassoc (attr := simp)]
 lemma spec_map_strictHenselizationEval_comp_strictLocalizationMap :
     Spec.map (strictHenselizationEval s') ≫ strictLocalizationMap g s' =

@@ -50,8 +50,25 @@ private theorem moduleComparisonEquiv_apply_of_component
   rw [h]
   rfl
 
-set_option maxHeartbeats 800000 in
--- Elaborating the specialized derived-functor types needs additional instance conversions.
+private theorem comparisonNatIso_symm_app
+    {C D : Type*} [Category C] [Category D] {F G : C ⥤ D} (e : F ≅ G) (X : C) :
+    e.symm.app X = (e.app X).symm := rfl
+
+private theorem siteSectionsSourceChange_app
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    [HasSheafify J AddCommGrpCat.{u}] [HasExt.{u} (Sheaf J AddCommGrpCat.{u})]
+    (U : C) (F : Sheaf J AddCommGrpCat.{u}) (p : ℕ)
+    (e : (presheafToSheaf J AddCommGrpCat.{u}).obj
+      (yoneda.obj U ⋙ AddCommGrpCat.free) ≅
+        (constantSheaf J AddCommGrpCat.{u}).obj (AddCommGrpCat.of (ULift.{u} ℤ))) :
+    ((siteSectionsNatIso J U p).symm ≪≫ siteExtNatIso J U p ≪≫
+      extSourceNatIso e p ≪≫ siteHNatIso J p).app F =
+      (siteSectionsObjIso J U F p).symm ≪≫
+        (Abelian.Ext.precompAddEquiv e F p).symm.toAddCommGrpIso := by
+  simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl,
+    NatIso.trans_app, comparisonNatIso_symm_app, siteSectionsObjIso,
+    extSourceNatIso, NatIso.ofComponents.app]
+
 /-- The fixed module-to-Ext comparison factors through abelian derived sections.
 Source: Stacks Project, Tags 015E and 03FD; the Ext-to-sections half of the defining
 composite in ModuleCohomologyExtResolutionNaturality.
@@ -116,8 +133,8 @@ theorem ext_sections_factorization
       siteExtNatIso (Opens.grothendieckTopology X) ⊤ p ≪≫
         extSourceNatIso (terminalSourceIso X) p ≪≫
           siteHNatIso (Opens.grothendieckTopology X) p).app (T.obj F) = _
-    simp only [siteExtNatIso, siteHNatIso, Iso.refl_trans, Iso.trans_refl]
-    rfl
+    exact siteSectionsSourceChange_app (Opens.grothendieckTopology X) ⊤ (T.obj F) p
+      (terminalSourceIso X)
   have h := moduleComparisonEquiv_apply_of_component
     (moduleCohomologyExtResolutionNatIso X p) F (a.app F) b c.symm hcomp x
   dsimp only [id, Functor.comp_obj, RingedSpace.moduleCohomology,

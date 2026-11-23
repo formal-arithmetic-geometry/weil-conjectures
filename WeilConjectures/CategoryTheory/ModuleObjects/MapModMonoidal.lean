@@ -55,7 +55,6 @@ The balancing conditions (`Functor.mapMod_μ_balanced`, `Functor.mapMod_δ_balan
 `Functor.mapModCoreMonoidal` and `Mod.comapCoreMonoidal` are checked after precomposition with the
 projections onto the coequalizers (`Mod.tensorObjπ`), where they reduce to the coherences of `μ F`
 and of the algebra structures.
-
 -/
 
 @[expose] public section

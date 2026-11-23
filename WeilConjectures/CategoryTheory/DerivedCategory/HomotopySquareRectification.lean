@@ -134,22 +134,7 @@ private lemma rect_cone_homotopy (t : C ⟶ D) (t' : C' ⟶ D')
 
 /-- Rectification changes only the source middle term and preserves the cone
 map induced by the specified homotopy, after localization.
-Source: Stacks Project, Tags 013N and 013O, with the cone formulas of Tag 014P.
-(blueprint: lem-pc-homotopy-square-cone-rectification).
-
-Proof: Write T = D biproduct Cone(id C), i = (t,inr(id C)) and p = fst.
-For H : t beta homotopic to alpha t', write h for its degree-minus-one cochain,
-so delta h = t beta - alpha t'. The map k : Cone(id C) -> D' with components
-(-h, alpha t' - t beta) is a chain map by this equation. Put b = (beta,k).
-Then i b = alpha t' strictly. Cone(id C) is contractible, so Q(p) is an
-isomorphism and Q(b) = Q(p) Q(beta). The square (id C,p) from i to t is
-strict and induces q : Cone(i) -> Cone(t); q is a quasi-isomorphism by the
-cone triangle since id C and p are quasi-isomorphisms. Expanding the cone
-maps, Cone.map(i,t',alpha,b) and q Cone.mapOfHomotopy(H) differ by the
-boundary of the cochain whose only nonzero component is -h on the extra
-contractible summand. Thus they are homotopic and their Q images agree.
-Take eD = Q(p) and eCone = Q(q), using their isomorphism structures. This
-also covers zero complexes and H = 0; it uses no geometric hypotheses. -/
+Source: Stacks Project, Tags 013N and 013O, with the cone formulas of Tag 014P. -/
 theorem homotopy_square_cone_rectification
     {E : Type u} [Category E] [Abelian E] [HasDerivedCategory.{w} E]
     {C D C' D' : CochainComplex E ℤ}

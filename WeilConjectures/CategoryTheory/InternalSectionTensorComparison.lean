@@ -21,8 +21,7 @@ import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 
 /-! # Internal and sectionwise tensor products
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW;
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW
 -/
 
 @[expose] public section
@@ -38,10 +37,7 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
 
 namespace CategoryTheory.InternalAbelianSheafModule
-/-- The site is essentially small in the coefficient universe.
-Source: the size hypothesis of the node (auxiliary; not a blueprint node).
-Proof: shrink its object and arrow types into the coefficient universe using UnivLE;
-the resulting small category is equivalent to the original category. -/
+/-- The site is essentially small in the coefficient universe. -/
 @[instance] theorem comparison_essentiallySmall
     {D : Type v} [Category.{w} D] [UnivLE.{max v w, u}] :
     EssentiallySmall.{u} D := by
@@ -54,16 +50,14 @@ variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
   [(J.W (A := AddCommGrpCat.{u})).IsMonoidal]
 
 /-- Left tensor on abelian sheaves preserves the colimits used in relative tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
-Proof: use closedness in sk-def-sfb-sheaf-tensor; left tensor is a left adjoint. -/
+Source: Stacks 03EK. -/
 @[instance] theorem comparison_sheafTensorLeft (M : Sheaf J AddCommGrpCat.{u}) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
   let _ : HasWeakSheafify J AddCommGrpCat.{u} := HasSheafify.isRightAdjoint
   exact (sfbSheafTensor_properties (A := AddCommGrpCat.{u}) J).2.2 M |>.1
 
 /-- Right tensor on abelian sheaves preserves the colimits used in relative tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
-Proof: conjugate left tensor by the symmetry of det-def-sfb-sheaf-tensor-structure. -/
+Source: Stacks 03EK. -/
 @[instance] theorem comparison_sheafTensorRight (M : Sheaf J AddCommGrpCat.{u}) :
     PreservesColimitsOfSize.{0, 0} (tensorRight M) := by
   exact preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
@@ -71,28 +65,20 @@ Proof: conjugate left tensor by the symmetry of det-def-sfb-sheaf-tensor-structu
 variable (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R]
 
 /-- Module objects have the coproducts used in direct-sum totalization.
-Source: Stacks 03DA--03DB (auxiliary; not a blueprint node).
-Proof: section module sheaves have small colimits by
-situation-conventions. Transfer their universal property
-through sectionModuleEquivalence: applying its inverse to a coproduct gives a
-coproduct of the original internal modules by the equivalence's Hom bijections. -/
+Source: Stacks 03DA--03DB. -/
 @[instance] theorem comparison_internalColimits :
     HasColimitsOfSize.{0, 0} (Mod (Sheaf J AddCommGrpCat.{u}) R) := by
   exact Adjunction.has_colimits_of_equivalence (sectionModuleEquivalence J R).functor
 
 /-- The fixed sectionwise equivalence is additive on morphisms.
-Source: Stacks 00YV (auxiliary; not a blueprint node).
-Proof: its map is the original map on underlying abelian sheaves; addition of module
-maps is computed on those underlying maps (prose-03-02). -/
+Source: Stacks 00YV. -/
 @[instance] theorem comparison_additive : (sectionModuleEquivalence J R).functor.Additive := by
   have : HasBinaryProducts (Mod (Sheaf J AddCommGrpCat.{u}) R) :=
     Adjunction.hasLimitsOfShape_of_equivalence (sectionModuleEquivalence J R).functor
   exact Functor.additive_of_preserves_binary_products _
 
 /-- Every pair of internal complexes admits its direct-sum total tensor.
-Source: Stacks 012Z (auxiliary; not a blueprint node).
-Proof: comparison_internalColimits supplies every coproduct indexed by p+q=n,
-which is the defining HasMapBifunctor condition. -/
+Source: Stacks 012Z. -/
 @[instance] theorem comparison_internalTotalExists
     (K L : CochainComplex (Mod (Sheaf J AddCommGrpCat.{u}) R) ℤ) :
     K.HasMapBifunctor L (curriedTensor _) := by
@@ -101,7 +87,7 @@ which is the defining HasMapBifunctor condition. -/
 
 /-- The pure tensor in the coequalizer relative tensor, formed using the lax tensor
 comparison of the inclusion of sheaves into presheaves, then the coequalizer projection.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def comparison_internalTmul
     (M N : Mod (Sheaf J AddCommGrpCat.{u}) R) (U : Cᵒᵖ)
     (x : M.X.obj.obj U) (y : N.X.obj.obj U) : (M ⊗ N).X.obj.obj U :=
@@ -111,7 +97,7 @@ noncomputable def comparison_internalTmul
 
 /-- The pure tensor in the sectionwise sheaf tensor: apply the module-sheafification
 unit to the balanced section tensor and the inverse canonical tensor comparison.
-Source: Stacks 03EK and 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 0GMW. -/
 noncomputable def comparison_sectionTmul
     (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
       (sectionRingSheaf J R))) (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
@@ -635,27 +621,7 @@ private theorem comparison_flat (M : IM) :
 its tensor comparison pinned on local pure tensors, and identifies the unbounded
 sum-total tensors, acyclicity, flatness and K-flatness.
 
-Source: Stacks Project, Modules on Sites, Tags 03EK, 0GMW and 03ER; Cohomology on
-Sites, Definition 06YN (auxiliary; not a blueprint node).
-
-Proof:
-The fixed equivalence preserves finite limits and colimits. The normalized tensor
-isomorphism comes from exists_sectionTensorIso, followed by the inverse of
-SheafOfModules.tensorObjIsoSheafification. Both maps come from the balanced
-pairing and sheafification universal properties, so the displayed pure tensors
-are fixed. Naturality and coherence follow from tensor induction after cancelling
-the coequalizer projections and sheafification comparisons. The unit comparison
-is the identity on sections, and the unitors are the action maps.
-
-The tensor comparisons give an isomorphism of tensor bicomplexes. Compose its
-totalization with the inverse additive mapTotalIso; the coproduct injection
-formulas give the asserted summand equation, including the differential signs.
-Exactness of the short complexes in each degree is preserved and reflected by
-the exact faithful equivalence. Flatness follows from flat_iff_sectionModule and
-symmetry. For K-flatness transport every acyclic test using the termwise inverse
-equivalence and its counit, then use the total-complex and acyclicity comparisons.
-The argument applies to zero rings, empty sites and unbounded complexes.
--/
+Source: Stacks Project, Modules on Sites, Tags 03EK, 0GMW and 03ER. -/
 theorem internal_section_tensor_comparison :
     exactFunctor _ _ (sectionModuleEquivalence J R).functor ∧
     ∃ e : ∀ M N : Mod (Sheaf J AddCommGrpCat.{u}) R,

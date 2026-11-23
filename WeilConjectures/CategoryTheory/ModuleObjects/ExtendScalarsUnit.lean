@@ -225,12 +225,7 @@ lemma extendUnitHom_mapModCompExtendScalarsIso_hom_app_hom (M : Mod C R) :
   exact Category.comp_id _
 
 /-- `Functor.extendUnitHom_mapModCompExtendScalarsIso_hom_app_hom` at the unit `R`, for any
-isomorphism `e` equal to the comparison `Functor.mapModCompExtendScalarsIso`.
-
-The unit of `Mod C R` is written as the unit of the monoidal category `Mod C R`, the form in which
-it occurs in the unit comparisons of monoidal functors. The isomorphism `e` is an argument so that
-the lemma applies to a concrete comparison isomorphism without the kernel comparing its components
-with those of `Functor.mapModCompExtendScalarsIso`, see the implementation notes of this file. -/
+isomorphism `e` equal to the comparison `Functor.mapModCompExtendScalarsIso`. -/
 lemma extendUnitHom_hom_app_unit_hom_of_eq_mapModCompExtendScalarsIso [BraidedCategory C]
     [IsCommMonObj R] [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
     [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]

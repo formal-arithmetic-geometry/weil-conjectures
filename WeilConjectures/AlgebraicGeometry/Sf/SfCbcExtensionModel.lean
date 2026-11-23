@@ -104,9 +104,16 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-!
 # Exact extension and resolving models for completed extension by zero
 
-Source: blueprint proposition-composition-base-change-rf-shriek, integral open factor, Steps 1–2;
-Stacks Project Tags 099M, 099N and 0941
-(blueprint: lem-sf-cbc-extension-model).
+## References
+
+* Stacks Project Tags 099M, 099N and 0941
+* Stacks Tags 098K and 00VC
+* Stacks Tag 00XZ
+* Stacks Tag 03D1
+* Stacks 05RU
+* Stacks Tags 06YS, 03DI and 0E8I
+* Stacks Tags 03DJ and 0941
+* Stacks Tags 099M and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -226,13 +233,7 @@ private theorem sfCbcConstantSliceIso_unit (X : Scheme.{t}) (W : X.ProEt)
     (sfCbcSheafificationCompatibility_app (cbcSliceFunctor X W)
       ((ProEt.topology X).over W) (ProEt.topology W.left) P' (op V))
 
-/-- Constant sections uniquely identify the coefficient sheaf on the localized site.
-Source: Stacks Tags 098K and 00XZ; Step 1 of the node.
-Proof: the concrete slice functor is an equivalence of sites by
-lem-weil-proetale-weakly-etale-localization. Restrict the constant presheaf and
-apply the sheafification adjunction. Its unit gives the displayed equality;
-local generation by constant sections gives uniqueness.
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Constant sections uniquely identify the coefficient sheaf on the localized site. -/
 theorem sfCbcConstantSliceMap_existsUnique (X : Scheme.{t}) (W : X.ProEt)
     (A : Type t) [CommRing A] :
     ∃! φ : (adicConstantRing X A).over W ⟶
@@ -273,16 +274,12 @@ theorem sfCbcConstantSliceMap_existsUnique (X : Scheme.{t}) (W : X.ProEt)
 
 attribute [local irreducible] sfCbcConstantSliceIso constantSheaf
 
-/-- The canonical constant coefficient map, fixed by sheafification's unit.
-Source: Stacks Tags 098K and 00XZ
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The canonical constant coefficient map, fixed by sheafification's unit. -/
 def sfCbcConstantSliceMap (X : Scheme.{t}) (W : X.ProEt)
     (A : Type t) [CommRing A] :=
   (sfCbcConstantSliceMap_existsUnique X W A).exists.choose
 
-/-- Regard modules on the open scheme as modules on the ambient localized site.
-Source: Stacks Tags 098K and 03DI
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Regard modules on the open scheme as modules on the ambient localized site. -/
 def sfCbcConstantModuleToSlice (X : Scheme.{t}) (W : X.ProEt)
     (A : Type t) [CommRing A] :
     SheafOfModules.{t + 1} (adicModuleRing W.left A) ⥤
@@ -294,9 +291,7 @@ def sfCbcConstantModuleToSlice (X : Scheme.{t}) (W : X.ProEt)
         (sfCbcConstantSliceMap X W A))
 
 /-- Ordinary extension by zero of constant-coefficient module sheaves, for arbitrary A.
-It is the direct-sum extension presheaf followed by module sheafification.
-Source: Stacks Tags 03DI and 03DJ; Step 1 of the node
-(blueprint: lem-sf-cbc-extension-model). -/
+It is the direct-sum extension presheaf followed by module sheafification. -/
 def sfCbcOpenExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     SheafOfModules.{t + 1} (adicModuleRing U A) ⥤
@@ -360,13 +355,7 @@ private theorem sfCbcModuleTransport
   exact inferInstanceAs
     (SheafOfModules.pushforwardPushforwardEquivalence e.symm c.hom ψ H₁ H₂).functor.IsEquivalence
 
-/-- The constant coefficient extension is additive and exact.
-Source: Stacks Tags 03DI and 03DJ; Step 1 of the node.
-Proof: the ringed-slice transport is an equivalence, by the uniquely specified
-constant coefficient comparison and weakly-etale localization. Compose it with
-lem-pur-site-restriction-module-adjunction-exact. This requires no quasi-compactness
-and applies equally to the empty open and the zero ring.
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The constant coefficient extension is additive and exact. -/
 theorem sfCbcOpenExtension_exact {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     (sfCbcOpenExtension j A).Additive ∧
@@ -426,46 +415,34 @@ theorem sfCbcOpenExtension_exact {U X : Scheme.{t}} (j : U ⟶ X)
         SheafOfModules.localizedModuleExtension (adicConstantRing X A) W)
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Additivity supplied by localized extension's exactness. Source: Stacks Tag 03DI
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Additivity supplied by localized extension's exactness. -/
 instance sfCbcOpenExtension_additive {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     (sfCbcOpenExtension j A).Additive := (sfCbcOpenExtension_exact j A).1
 
-/-- Left exactness supplied by localized extension. Source: Stacks Tag 03DJ
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Left exactness supplied by localized extension. -/
 instance sfCbcOpenExtension_limits {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     PreservesFiniteLimits (sfCbcOpenExtension j A) := (sfCbcOpenExtension_exact j A).2.1
 
-/-- Right exactness supplied by localized extension. Source: Stacks Tag 03DI
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Right exactness supplied by localized extension. -/
 instance sfCbcOpenExtension_colimits {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     PreservesFiniteColimits (sfCbcOpenExtension j A) := (sfCbcOpenExtension_exact j A).2.2
 
-/-- The ordinary uncompleted derived extension functor.
-Source: Stacks Tag 03DJ; Step 1 of the node
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The ordinary uncompleted derived extension functor. -/
 abbrev sfCbcDerivedExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     proEtaleDerivedCategory U A ⥤ proEtaleDerivedCategory X A :=
   (sfCbcOpenExtension j A).mapDerivedCategory
 
-/-- Constant coefficients on the published small model of the pro-etale site.
-Source: Stacks Tags 098K and 00VC
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Constant coefficients on the small model of the pro-etale site. -/
 abbrev sfCbcModelRing (X : Scheme.{t}) (A : Type t) [CommRing A] :=
   ConstantCompletion.constant (proEtaleModelTopology X) (ULift.{t + 1, t} A)
 
 attribute [local semireducible] constantSheaf
 
-/-- The coefficient transport is fixed on constant sections.
-Source: Stacks Tags 00VC and 00XZ.
-Proof: precomposition by AsSmall.down is an equivalence of sites. The
-sheafification adjunction extends the displayed unit map uniquely, and the
-result is invertible because the presheaf equivalence preserves sheafification.
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The coefficient transport is fixed on constant sections. -/
 theorem sfCbcModelRingMap_existsUnique (X : Scheme.{t}) (A : Type t) [CommRing A] :
     ∃! c : sfCbcModelRing X A ⟶
       ((AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
@@ -500,14 +477,11 @@ theorem sfCbcModelRingMap_existsUnique (X : Scheme.{t}) (A : Type t) [CommRing A
 
 attribute [local irreducible] constantSheaf
 
-/-- Canonical map from the small model's constant ring to the transported ring.
-Source: Stacks Tag 00XZ (blueprint: lem-sf-cbc-extension-model). -/
+/-- Canonical map from the small model's constant ring to the transported ring. -/
 def sfCbcModelRingMap (X : Scheme.{t}) (A : Type t) [CommRing A] :=
   (sfCbcModelRingMap_existsUnique X A).exists.choose
 
-/-- Exact small-model transport with the canonical constant scalar action.
-Source: Stacks Tags 00VC and 03D1
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Exact small-model transport with the canonical constant scalar action. -/
 def sfCbcModelModules (X : Scheme.{t}) (A : Type t) [CommRing A] :
     SheafOfModules.{t + 1} (adicModuleRing X A) ⥤
       ConstantCompletion.Mod (sfCbcModelRing X A) :=
@@ -560,13 +534,7 @@ private theorem sfCbcRingIsoRestriction_isEquivalence
         congrArg (fun f : R ⟶ R ↦ (f.hom.app V).hom x) c.hom_inv_id)
   exact inferInstanceAs e.functor.IsEquivalence
 
-/-- Small-model transport is an additive equivalence.
-Source: Stacks Tags 00VC and 03D1.
-Proof: sectionwise precomposition by AsSmall.down is an equivalence with inverse
-precomposition by AsSmall.up. The coefficient map is invertible by
-sfCbcModelRingMap_existsUnique. Restriction of scalars along that map is an
-additive equivalence as well. Compose these equivalences.
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Small-model transport is an additive equivalence. -/
 theorem sfCbcModelModules_properties (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (sfCbcModelModules X A).IsEquivalence ∧ (sfCbcModelModules X A).Additive := by
   have h := (sfCbcModelRingMap_existsUnique X A).exists.choose_spec.1
@@ -588,13 +556,11 @@ theorem sfCbcModelModules_properties (X : Scheme.{t}) (A : Type t) [CommRing A] 
 attribute [local irreducible] sfCbcModelModules sfCbcModelRingMap
   Functor.mapDerivedCategoryFactors Functor.mapDerivedCategory
 
-/-- The canonical model transport is an equivalence. Source: Stacks Tag 00VC
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The canonical model transport is an equivalence. -/
 instance sfCbcModelModules_isEquivalence (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (sfCbcModelModules X A).IsEquivalence := (sfCbcModelModules_properties X A).1
 
-/-- The canonical model transport preserves addition. Source: Stacks Tag 03D1
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The canonical model transport preserves addition. -/
 instance sfCbcModelModules_additive (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (sfCbcModelModules X A).Additive := (sfCbcModelModules_properties X A).2
 
@@ -614,33 +580,27 @@ private theorem sfCbcInverseCompositeAdditive
     CategoryTheory.Equivalence.inverse_additive F.asEquivalence
   infer_instance
 
-/-- Additivity of the forward equivalence in its bundled presentation.
-Source: Stacks Tag 03D1 (blueprint: lem-sf-cbc-extension-model). -/
+/-- Additivity of the forward equivalence in its bundled presentation. -/
 instance sfCbcModelEquivalence_additive (X : Scheme.{t}) (A : Type t) [CommRing A] :
     (sfCbcModelModules X A).asEquivalence.functor.Additive :=
   sfCbcEquivalenceAdditive (sfCbcModelModules X A)
 
-/-- Standard localization size on the equivalent small site. Source: Stacks Tag 05RU
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Standard localization size on the equivalent small site. -/
 instance sfCbcModelModules_derived (X : Scheme.{t}) (A : Type t) [CommRing A] :
     HasDerivedCategory (ConstantCompletion.Mod (sfCbcModelRing X A)) :=
   HasDerivedCategory.standard _
 
-/-- Standard localization size for strict towers. Source: Stacks Tag 05RU
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Standard localization size for strict towers. -/
 instance sfCbcModelTowers_derived (X : Scheme.{t}) (A : Type t) [CommRing A] :
     HasDerivedCategory (ℕᵒᵖ ⥤ ConstantCompletion.Mod (sfCbcModelRing X A)) :=
   HasDerivedCategory.standard _
 
-/-- The ordinary derived equivalence to the small model.
-Source: Stacks Tags 00VC and 05RU
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The ordinary derived equivalence to the small model. -/
 def sfCbcModelDerived (X : Scheme.{t}) (A : Type t) [CommRing A] :
     proEtaleDerivedCategory X A ≌ ConstantCompletion.D (sfCbcModelRing X A) :=
   (sfCbcModelModules X A).asEquivalence.mapDerivedCategory
 
-/-- The standard factorization, expressed with the published model equivalence.
-Source: Stacks 05RU (blueprint: lem-sf-cbc-extension-model). -/
+/-- The standard factorization, expressed with the model equivalence. -/
 def sfCbcModelDerivedFactors (X : Scheme.{t}) (A : Type t) [CommRing A] :
     adicLocalization X A ⋙ (sfCbcModelDerived X A).functor ≅
       (sfCbcModelModules X A).mapHomologicalComplex (.up ℤ) ⋙
@@ -649,14 +609,11 @@ def sfCbcModelDerivedFactors (X : Scheme.{t}) (A : Type t) [CommRing A] :
 
 attribute [local irreducible] sfCbcModelDerived
 
-/-- The ideal in the same lifted coefficient ring used by constant sheaves.
-Source: Stacks Tag 099M (blueprint: lem-sf-cbc-extension-model). -/
+/-- The ideal in the same lifted coefficient ring used by constant sheaves. -/
 abbrev sfCbcModelIdeal {A : Type t} [CommRing A] (d : CompleteCoefficientDatum A) :
     Ideal (ULift.{t + 1, t} A) := d.ideal.map ULift.ringEquiv.symm.toRingHom
 
-/-- The derived category of actual strict towers in the small-site presentation.
-Source: Stacks Tags 0941 and 00VC
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The derived category of actual strict towers in the small-site presentation. -/
 abbrev sfCbcTowerDerived (X : Scheme.{t}) (A : Type t) [CommRing A] :=
   ConstantCompletion.TD (sfCbcModelRing X A)
 
@@ -899,15 +856,7 @@ private theorem sfCbcSpecifiedModel_existsUnique (X : Scheme.{t})
   intro N' hN'
   exact sfCbcKFlatModel_ext X A N' N hN'.1 hN'.2
 
-/-- The flat K-flat model of extension is the actual termwise extended complex.
-Source: Stacks Tags 06YS, 03DI and 0E8I; Step 1 of the node.
-Proof: the projection formula identifies tensoring an extended flat module
-with exact restriction, tensoring on U, and exact extension. Thus its terms
-are flat. Extension is a left adjoint, so it preserves the direct sums in
-total tensor complexes. Exact restriction sends acyclic complexes to acyclic
-complexes, K-flatness makes their tensor acyclic on U, and exact extension
-preserves that acyclicity. Exactness also descends the realization map.
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The flat K-flat model of extension is the actual termwise extended complex. -/
 theorem sfCbcExtensionModel_existsUnique {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A]
     {K : proEtaleDerivedCategory U A} (M : AdicKFlatModel U A K) :
@@ -955,8 +904,7 @@ end TensorTransport
 
 attribute [local irreducible] sfCbcOpenExtension
 
-/-- The canonical termwise extended model; its complex and realization determine it.
-Source: Step 1 of the node (blueprint: lem-sf-cbc-extension-model). -/
+/-- The canonical termwise extended model; its complex and realization determine it. -/
 def sfCbcExtensionModel {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] {K : proEtaleDerivedCategory U A}
     (M : AdicKFlatModel U A K) :=
@@ -964,9 +912,7 @@ def sfCbcExtensionModel {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
 attribute [local irreducible] sfCbcExtensionModel
 
-/-- Ordinary extension transported to the equivalent small-site module categories.
-Source: Stacks Tags 00VC and 03DI
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Ordinary extension transported to the equivalent small-site module categories. -/
 def sfCbcModelExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     ConstantCompletion.Mod (sfCbcModelRing U A) ⥤
@@ -974,40 +920,33 @@ def sfCbcModelExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
   (sfCbcModelModules U A).asEquivalence.inverse ⋙ sfCbcOpenExtension j A ⋙
     sfCbcModelModules X A
 
-/-- Additivity is preserved through the two model equivalences.
-Source: Stacks Tags 00VC and 03DI
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Additivity is preserved through the two model equivalences. -/
 instance sfCbcModelExtension_additive {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     (sfCbcModelExtension j A).Additive :=
   sfCbcInverseCompositeAdditive (sfCbcModelModules U A)
     (sfCbcOpenExtension j A) (sfCbcModelModules X A)
 
-/-- Left exactness survives the equivalence transport. Source: Stacks Tag 00VC
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Left exactness survives the equivalence transport. -/
 instance sfCbcModelExtension_limits {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     PreservesFiniteLimits (sfCbcModelExtension j A) :=
   inferInstanceAs (PreservesFiniteLimits ((sfCbcModelModules U A).asEquivalence.inverse ⋙
     sfCbcOpenExtension j A ⋙ sfCbcModelModules X A))
 
-/-- Right exactness survives the equivalence transport. Source: Stacks Tag 00VC
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Right exactness survives the equivalence transport. -/
 instance sfCbcModelExtension_colimits {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     PreservesFiniteColimits (sfCbcModelExtension j A) :=
   inferInstanceAs (PreservesFiniteColimits ((sfCbcModelModules U A).asEquivalence.inverse ⋙
     sfCbcOpenExtension j A ⋙ sfCbcModelModules X A))
 
-/-- Exact termwise extension on the derived small-site presentation.
-Source: Stacks Tags 03DJ and 00VC
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Exact termwise extension on the derived small-site presentation. -/
 abbrev sfCbcModelDerivedExtension {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :=
   (sfCbcModelExtension j A).mapDerivedCategory
 
-/-- The standard factorization for model extension, with its named derived functor.
-Source: Stacks 05RU (blueprint: lem-sf-cbc-extension-model). -/
+/-- The standard factorization for model extension, with its named derived functor. -/
 def sfCbcModelExtensionFactors {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     ConstantCompletion.Q (sfCbcModelRing U A) ⋙ sfCbcModelDerivedExtension j A ≅
@@ -1015,8 +954,7 @@ def sfCbcModelExtensionFactors {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion
         ConstantCompletion.Q (sfCbcModelRing X A) :=
   (sfCbcModelExtension j A).mapDerivedCategoryFactors
 
-/-- The termwise ordinary extension functor on actual strict towers.
-Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-model). -/
+/-- The termwise ordinary extension functor on actual strict towers. -/
 abbrev sfCbcTowerExtension {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (sfCbcModelExtension j A)
@@ -1032,13 +970,7 @@ private theorem sfCbcWhiskeringRightExact {C D I : Type*}
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
   · exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Termwise extension is exact also on strict towers.
-Source: Stacks Tags 03DJ and 0941; Step 2 of the node.
-Proof: kernels and cokernels of diagrams are computed pointwise. At every
-index the functor is the exact ordinary module extension. Evaluations jointly
-reflect the finite-limit and finite-colimit universal properties, proving both
-preservation clauses. Additivity is checked at the same evaluations.
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Termwise extension is exact also on strict towers. -/
 theorem sfCbcTowerExtension_exact {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     (sfCbcTowerExtension j A).Additive ∧
@@ -1046,33 +978,28 @@ theorem sfCbcTowerExtension_exact {U X : Scheme.{t}} (j : U ⟶ X)
       PreservesFiniteColimits (sfCbcTowerExtension j A) := by
   exact sfCbcWhiskeringRightExact (I := ℕᵒᵖ) (sfCbcModelExtension j A)
 
-/-- Additivity of termwise extension. Source: Stacks Tag 0941
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Additivity of termwise extension. -/
 instance sfCbcTowerExtension_additive {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     (sfCbcTowerExtension j A).Additive := (sfCbcTowerExtension_exact j A).1
 
-/-- Left exactness of termwise extension. Source: Stacks Tag 0941
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Left exactness of termwise extension. -/
 instance sfCbcTowerExtension_limits {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     PreservesFiniteLimits (sfCbcTowerExtension j A) := (sfCbcTowerExtension_exact j A).2.1
 
-/-- Right exactness of termwise extension. Source: Stacks Tag 0941
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- Right exactness of termwise extension. -/
 instance sfCbcTowerExtension_colimits {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     PreservesFiniteColimits (sfCbcTowerExtension j A) := (sfCbcTowerExtension_exact j A).2.2
 
-/-- The ordinary exact extension functor on derived strict towers.
-Source: Stacks Tag 0941 (blueprint: lem-sf-cbc-extension-model). -/
+/-- The ordinary exact extension functor on derived strict towers. -/
 abbrev sfCbcDerivedTowerExtension {U X : Scheme.{t}} (j : U ⟶ X)
     [IsOpenImmersion j] (A : Type t) [CommRing A] :
     sfCbcTowerDerived U A ⥤ sfCbcTowerDerived X A :=
   (sfCbcTowerExtension j A).mapDerivedCategory
 
-/-- The standard factorization for strict tower extension with named endpoints.
-Source: Stacks 05RU (blueprint: lem-sf-cbc-extension-model). -/
+/-- The standard factorization for strict tower extension with named endpoints. -/
 def sfCbcTowerExtensionFactors {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
     (A : Type t) [CommRing A] :
     ConstantCompletion.TQ (sfCbcModelRing U A) ⋙ sfCbcDerivedTowerExtension j A ≅
@@ -1080,9 +1007,7 @@ def sfCbcTowerExtensionFactors {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion
         ConstantCompletion.TQ (sfCbcModelRing X A) :=
   (sfCbcTowerExtension j A).mapDerivedCategoryFactors
 
-/-- The published universal K-flat presentation of strict reductions on the small model.
-Source: Stacks Tags 099M and 06YY
-(blueprint: lem-sf-cbc-extension-model). -/
+/-- The universal K-flat presentation of strict reductions on the small model. -/
 abbrev sfCbcQuotientPresentation (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : CompleteCoefficientDatum A) :=
   ConstantCompletion.quotientPresentation (proEtaleModelTopology X)

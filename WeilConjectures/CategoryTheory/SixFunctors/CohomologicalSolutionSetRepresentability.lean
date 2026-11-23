@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 
 Source: Krause, *Localization theory for triangulated categories*, Theorem 5.1.1,
 and the cofiber/kernel-killing argument in Stacks Project, Tag 0A8F.
-(blueprint: lem-sfb-cohomological-solution-set-representability)
 -/
 
 @[expose] public section
@@ -76,23 +75,8 @@ variable [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
 
 /-- A cohomological functor with a small solution set is representable.
 
-Source: Krause, *Localization theory for triangulated categories*, Theorem 5.1.1,
-final solution-set argument; Stacks Project, Tag 0A8F, kernel-killing argument.
-(blueprint: lem-sfb-cohomological-solution-set-representability)
-
-Proof: Take the coproduct of the solution objects and lift their distinguished
-values using preservation of products. Its value x is weakly universal. Form the
-coproduct of all endomorphisms f of this object G for which H(f)(x)=0, and take the
-cofiber p:G→Y of the evaluation map. Exactness lifts x to y in H(Y). Weak universality
-gives s:Y→G with H(s)(x)=y. Every kernel endomorphism is killed by p; applying this
-to ps-id gives psp=p. For an arbitrary f:Z→G in the kernel, lift x to its cofiber
-and map that pair to (G,x). The resulting endomorphism q has H(q)(x)=x and fq=0.
-Since (q-id)p=0, fp=fqp=0. Hence e=ps is idempotent and kills all kernels, while
-H(e)(x)=x. Split e as i:E→G and r:G→E. The element H(i)(x) gives bijections
-Hom(Z,E)→H(Z): a lift f:Z→G maps to fr, and injectivity follows by applying the
-kernel-annihilation assertion to the difference of the two maps composed with i.
-These bijections are natural because they are induced by a single element.
--/
+Source: Krause, *Localization theory for triangulated categories*, Theorem 5.1.1, final solution-set
+argument; Stacks Project, Tag 0A8F, kernel-killing argument. -/
 theorem cohomological_isRepresentable_of_solutionSet
     (H : Cᵒᵖ ⥤ AddCommGrpCat.{v}) [H.IsHomological]
     (hH : ∀ I : Type v, PreservesLimitsOfShape (Discrete I) H)

@@ -50,12 +50,7 @@ theorem nsmul_id_coimage_eq_zero (G : C) (p m : ℕ) (hkill : (p * m) • 𝟙 G
 `G ↦ ker (p • 𝟙 G)` and `G ↦ coim (p • 𝟙 G)`, and let `P` be a property which holds for zero
 objects, is stable under extensions, and holds for the objects of `L` killed by a prime `p`
 invertible in `R`. Then `P` holds for every object of `L` killed by a positive integer `n`
-invertible in `R`.
-
-Proof: induction on `n`. For `n = 1` the object is zero. Otherwise choose a prime `p ∣ n` and
-write `n = p * m`; both `p` and `m` are invertible in `R`. In the short exact sequence
-`0 ⟶ ker (p • 𝟙 G) ⟶ G ⟶ coim (p • 𝟙 G) ⟶ 0` the kernel is killed by `p` and the coimage by
-`m < n` (`CategoryTheory.Abelian.nsmul_id_coimage_eq_zero`). -/
+invertible in `R`. -/
 theorem prop_of_nsmul_id_eq_zero_of_isUnit {R : Type*} [CommRing R]
     (L P : C → Prop)
     (hker : ∀ (G : C), L G → ∀ p : ℕ, L (kernel (p • 𝟙 G)))

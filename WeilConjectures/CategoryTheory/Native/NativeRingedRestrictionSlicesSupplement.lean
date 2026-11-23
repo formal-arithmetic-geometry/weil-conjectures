@@ -20,8 +20,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.CategoryTheory.NativeRingedRestrictionSlices
 /-! # Restriction on slices and its derived square
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(blueprint: lem-pur-native-ringed-restriction-slices). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,8 +40,7 @@ variable (R : Sheaf J CommRingCat.{max c d vc vd r})
 same presheaf at the same object and arrow, so the comparison is the identity natural
 isomorphism.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(blueprint: lem-pur-native-ringed-restriction-slices). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 def sliceRestrictionIso (U : C) :
     SheafOfModules.overFunctor.{max c d vc vd r}
         (NativeRings.{max c d vc vd r, d, vd} R) (F.obj U) ⋙
@@ -78,8 +76,7 @@ variable
 equivalences; the two over-functors are exact. Descend their identity square to derived
 categories and compose the two derived-composition comparison isomorphisms.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7.
-(blueprint: lem-pur-native-ringed-restriction-slices). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 08J7. -/
 def sliceDerivedRestrictionIso :
     let Tg := restrictModules.{c, d, vc, vd, r} (K := K) F R
     let Ts := restrictModules.{max c vc, max d vd, vc, vd, r}

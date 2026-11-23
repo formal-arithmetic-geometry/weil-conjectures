@@ -8,9 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Reconstruction and projection identities for adjoint mates
-
-Source: blueprint integral direct-image proof (2), its unit/counit and mate calculations.
-(blueprint: lem-sp-adjunction-reconstruction-mates).
 -/
 
 @[expose] public section
@@ -28,9 +25,7 @@ variable {C : Type v₁} [Category.{v₂} C]
 variable (L₁ : C ⥤ S) (R₁ : S ⥤ C) (L₂ : D ⥤ T) (R₂ : T ⥤ D)
   (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
 
-/-- The component formula for the right mate of a square.
-Source: blueprint proof (2), adjunction identities
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+/-- The component formula for the right mate of a square. -/
 def rightMate {F : C ⥤ D} {H : S ⥤ T}
     (β : F ⋙ L₂ ⟶ L₁ ⋙ H) : R₁ ⋙ F ⟶ H ⋙ R₂ where
   app Z := a₂.unit.app (F.obj (R₁.obj Z)) ≫
@@ -50,9 +45,7 @@ def rightMate {F : C ⥤ D} {H : S ⥤ T}
     rw [Category.assoc, ← H.map_comp, hc]
     simp only [H.map_comp]
 
-/-- Reconstruction by the input unit is the output adjoint transpose.
-Source: blueprint proof (2), adjunction identities
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+/-- Reconstruction by the input unit is the output adjoint transpose. -/
 theorem reconstruction_eq {F : C ⥤ D} {H : S ⥤ T}
     (β : F ⋙ L₂ ⟶ L₁ ⋙ H) (M : C) :
     F.map (a₁.unit.app M) ≫ (rightMate L₁ R₁ L₂ R₂ a₁ a₂ β).app (L₁.obj M) =
@@ -70,9 +63,7 @@ theorem reconstruction_eq {F : C ⥤ D} {H : S ⥤ T}
   rw [← H.map_comp, a₁.left_triangle_components]
   simp
 
-/-- Transposing reconstruction returns the original scalar map.
-Source: blueprint proof (2), adjunction identities
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+/-- Transposing reconstruction returns the original scalar map. -/
 theorem transpose_reconstruction {F : C ⥤ D} {H : S ⥤ T}
     (β : F ⋙ L₂ ⟶ L₁ ⋙ H) (M : C) :
     L₂.map (F.map (a₁.unit.app M) ≫
@@ -81,9 +72,7 @@ theorem transpose_reconstruction {F : C ⥤ D} {H : S ⥤ T}
   rw [reconstruction_eq L₁ R₁ L₂ R₂ a₁ a₂ β M]
   exact (a₂.homEquiv _ _).symm_apply_apply (β.app M)
 
-/-- Reconstruction is natural in the input.
-Source: blueprint proof (2), adjunction identities
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+/-- Reconstruction is natural in the input. -/
 theorem reconstruction_naturality {F : C ⥤ D} {H : S ⥤ T}
     (β : F ⋙ L₂ ⟶ L₁ ⋙ H) {M N : C} (f : M ⟶ N) :
     F.map f ≫ (F.map (a₁.unit.app N) ≫
@@ -99,9 +88,7 @@ theorem reconstruction_naturality {F : C ⥤ D} {H : S ⥤ T}
   simp only [← R₂.map_comp, Category.assoc]
   exact congrArg (fun z ↦ a₂.unit.app (F.obj M) ≫ R₂.map z) (β.naturality f)
 
-/-- Finite projection of an adjunct is its finite adjoint transpose.
-Source: blueprint proof (2), adjunction identities
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+/-- Finite projection of an adjunct is its finite adjoint transpose. -/
 theorem projection_transpose {B : Type*} [Category B] (E : T ⥤ B) (R : B ⥤ D)
     (b : L₂ ⋙ E ⊣ R) {M : D} {N : T} (f : L₂.obj M ⟶ N) :
     (a₂.homEquiv _ _ f) ≫ b.homEquiv _ _ (E.map (a₂.counit.app N)) =
@@ -112,8 +99,7 @@ theorem projection_transpose {B : Type*} [Category B] (E : T ⥤ B) (R : B ⥤ D
   rw [← E.map_comp]
   exact congrArg E.map ((a₂.homEquiv _ _).symm_apply_apply f)
 
-/-- Right mates preserve pasting. Source: the mates correspondence and its pasting law.
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+/-- Right mates preserve pasting. -/
 theorem rightMate_pasting
     {B : Type*} [Category B] {U : Type*} [Category U]
     (L₃ : B ⥤ U) (R₃ : U ⥤ B) (a₃ : L₃ ⊣ R₃)
@@ -130,8 +116,7 @@ theorem rightMate_pasting
     Functor.map_comp, Category.assoc] using h
 
 /-- A final natural transformation is carried through the right mate by its right
-adjoint. Source: naturality of the counit; blueprint composition of proper/open mates.
-(blueprint: lem-sp-adjunction-reconstruction-mates). -/
+adjoint. -/
 theorem rightMate_postcompose
     {F : C ⥤ D} {H K : S ⥤ T}
     (β : F ⋙ L₂ ⟶ L₁ ⋙ H) (e : H ⟶ K) (Z : S) :

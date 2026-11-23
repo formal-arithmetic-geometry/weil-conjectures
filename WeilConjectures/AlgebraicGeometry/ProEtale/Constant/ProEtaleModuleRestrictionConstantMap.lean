@@ -15,7 +15,9 @@ For a ring map `g : B →+* B'`, restricting scalars along the induced map of co
 sheaves and then encoding by constant scalars agrees with encoding first and then restricting
 the scalars of the fixed coefficient ring along `g`. Both are the identity on sections.
 
-Source: Stacks Project, Tags 093I and 03CY.
+## References
+
+* Stacks Project, Tags 093I and 03CY
 -/
 
 @[expose] public noncomputable section

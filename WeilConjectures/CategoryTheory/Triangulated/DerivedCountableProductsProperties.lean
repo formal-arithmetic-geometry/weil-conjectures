@@ -252,8 +252,7 @@ preserves countable discrete limits, once those products exist.
 Source: Stacks Project, Derived Categories, Lemma 13.34.2, Tag 07KC.
 Exactness of countable products identifies cycles, boundaries and homology of a
 termwise product with the corresponding products; localization by
-quasi-isomorphisms then transfers the universal property to the derived category.
-(blueprint: lem-weil-derived-countable-products-properties) -/
+quasi-isomorphisms then transfers the universal property to the derived category. -/
 theorem derivedCategory_countableProducts_properties
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableProducts A] [CountableAB4Star A]

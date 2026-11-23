@@ -72,7 +72,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 This is the nonfinite-coefficient compactness input needed by the corrected Brown theorem.
 The adopted source currently records the corresponding compactness declarations over finite
 or separably closed fields; this theorem isolates the finite-cd extension.
-(blueprint: lem-sfb-brown-finite-cd-integral-ext)
 -/
 
 @[expose] public section
@@ -116,7 +115,7 @@ private theorem hom_shift_product_zero
   exact (h n.as).elim _ _
 
 /-- Vanishing in two adjacent degrees propagates from the levels to their Roos limit.
-Source: the final paragraph of the integral Ext-bound proof and Stacks Tag 0149. -/
+Stacks Project, Tag 0149. -/
 private theorem hom_roos_zero
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (Q N : DerivedCategory C) (K : ℕ → DerivedCategory C) [HasProduct K]
@@ -475,22 +474,7 @@ attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
 -- The derived coefficient equivalence compares large canonical single-functor constructions.
 /-- Uniform Ext bounds for valuation-ring coefficients over a field of finite
-ℓ-cohomological dimension.
-
-Source: blueprint latest, `sk-lem-int-ext.proof.md`, bound paragraph, and
-`sk-lem-brown-hypotheses.proof.md`, integral compactness.
-(blueprint: lem-sfb-brown-finite-cd-integral-ext).
-
-Proof: filter the first constructible sheaf by degree-zero extensions from finitely
-many locally closed strata. On a stratum use a finite presentation of its coefficient
-module. The finite reductions of the second sheaf are controlled by the closed-support
-triangle and the finite absolute and relative ℓ-cohomological dimensions of the stratum
-and boundary. Their bound is independent of the second sheaf and the reduction exponent.
-Recover the integral target by its derived inverse system of reductions. The Milnor
-triangle adds at most one to the bound; no immersion inverse image is commuted with
-this inverse limit. Take a maximum over the finitely many pieces of the filtration
-and apply Hom exactness along its triangles. The empty filtration gives the zero case.
-The cohomological-dimension assumption supplies all bounds by Stacks 0F10. -/
+ℓ-cohomological dimension. Stacks Project, Tag 0F10. -/
 theorem brownHypotheses_integral_uniformExtBound_of_finite_cd
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]

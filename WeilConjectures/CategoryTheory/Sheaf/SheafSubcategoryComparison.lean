@@ -23,8 +23,7 @@ import Mathlib.CategoryTheory.Sites.DenseSubsite.InducedTopology
 /-!
 # A generating subcategory of sheaves presents the topos
 
-Source: Stacks Project, Sites, Tag 03A1, and Sets, Tag 000X
-(blueprint: lem-weil-pbc-sheaf-subcategory-comparison).
+Source: Stacks Project, Sites, Tag 03A1, and Sets, Tag 000X.
 -/
 
 @[expose] public section

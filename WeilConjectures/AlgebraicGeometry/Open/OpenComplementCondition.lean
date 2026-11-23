@@ -12,10 +12,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # Open-complement cohomological-dimension condition
-
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/
-`sk-prop-a1-kummer/def-exc-open-complement-bound.md` (blueprint:
-`theorem-f-shriek-finite-coefficients--1`).
 -/
 
 @[expose] public section
@@ -31,15 +27,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The open-complement condition at a finite coefficient ring: higher direct images along
 an open immersion vanish above the prescribed bound, and all higher direct images of
 constructible coefficient sheaves remain constructible.
-
-Source: blueprint node `theorem-f-shriek-finite-coefficients--1`, order 1914
-(blueprint: theorem-f-shriek-finite-coefficients--1).
-
-Proof: This is a definition. The first conjunct is clause (1) of the node: for every
-sheaf of `A`-modules on `Vₑₜ` and every integer `q` strictly above `c`, the `q`th
-cohomology sheaf of the canonical right-derived direct image is zero. The second
-conjunct is clause (2): for every constructible sheaf and every integer `q`, that
-same cohomology sheaf is constructible on `Tₑₜ`.
 -/
 def HasOpenComplementCondition
     (A : Type (u + 1)) [CommRing A] [Finite A]

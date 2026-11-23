@@ -143,19 +143,7 @@ attribute [local irreducible] ringedHomUnitEvaluationIso
 /-- Transposing the tensor left unitor gives inverse evaluation at one.
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, Hom complexes and
-its tensor-Hom adjunction; sites-modules.tex, internal Hom from the ring sheaf.
-(auxiliary; not a blueprint node).
-
-Proof: project to source degree zero. The signed comparison between the two
-Hom conventions has sign (-1)^(0*n)=1 on this component. The tensor left unitor
-on the (0,n) summand is multiplication of a section of the ring sheaf with a
-section of N^n, after the canonical single-complex identification. Its transpose
-sends a section y to the localized linear map a ↦ a*y. Evaluation at one returns y.
-Conversely every localized linear map out of the rank-one unit is determined by
-its value at one, so this transpose is inverse to evaluation. In other source
-degrees the source unit complex is zero and the Hom component is zero. The Hom
-product universal property therefore proves equality of the degree maps, hence
-of the chain maps. No boundedness condition on N is used. -/
+its tensor-Hom adjunction. -/
 theorem ringedComplexHomUnit_eq (N : ringedSiteComplex O) :
     ringedComplexHomUnit O N = (ringedHomUnitEvaluationIso O N).inv := by
   rw [ringedComplexHomUnit_eq_curry]

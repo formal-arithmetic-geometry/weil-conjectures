@@ -164,16 +164,16 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 /-!
 # Normalized systems of ordinary supported Cartier Kummer maps
 
-Source: Stacks Project, Tags 03PL and 0A45; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
-(blueprint: def-asd-ordinary-supported-kummer-system).
-
 ## Main definitions
 
 * `supportedDerivedUnit`: the canonical derived unit.
 * `supportedExactDerivedMap`: the existing exact-functor/Ext comparison in general form.
 * `OrdinarySupportedKummerSystem`: relative, Chern, pullback and scalar normalizations.
 * The class families and compatibility predicates keep the dependent fields compact.
+
+## References
+
+* Stacks Project, Tags 03PL and 0A45
 -/
 
 @[expose] public noncomputable section

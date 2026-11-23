@@ -13,7 +13,6 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 # Naturality and shifts of inverse-scalar adjunction legs
 
 Source: Stacks Project, Derived Categories, Tags 05RU and 015F.
-(blueprint: lem-weil-pbc-scalar-localization-telescope-leg-laws)
 -/
 
 @[expose] public noncomputable section
@@ -27,12 +26,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Inverse-scalar adjunction legs are natural and respect coherent shifts.
-Source: Stacks Project, Derived Categories, Tags 05RU and 015F.
-(blueprint: lem-weil-pbc-scalar-localization-telescope-leg-laws).
-Proof: central scalars commute with every morphism in the target. Combine this
-with naturality of the adjunction unit. For shifts use linearity of the target
-shift, naturality of the two shift comparisons, and compatibility of the unit.
-The hypotheses on the unit and on linear shifts are essential. -/
+Source: Stacks Project, Derived Categories, Tags 05RU and 015F. -/
 theorem scalarLocalizationTelescopeLegLaws
     (A : Type v) [CommRing A] (t : A)
     {D : Type uD} [Category.{vD} D] [HasShift D ℤ]

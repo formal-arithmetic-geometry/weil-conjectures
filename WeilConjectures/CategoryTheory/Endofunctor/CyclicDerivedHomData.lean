@@ -13,17 +13,15 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 
 /-! # Data for native derived morphisms of fixed pairs
 
-Source: blueprint main-20261015, sec-six-functors/sk-thm-sf-package,
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence;
-the native-derived foundation is the agent-formulated DAG node below. Its detailed
-proof uses Stacks Project, derived.tex, Tags 0149, 0152, 013K, 070I, 070J and 0159.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence).
-
 `exists_cyclicDerivedHomBoundary` states the invariant/coinvariant exact sequence.
 The normalized boundary is the actual boundary of the off-diagonal extension.
 The other three theorems state naturality for exact functors, total right derived
 functors, and finite composites, including the empty composite. The last theorem
 requires bounded cohomology only at the endpoints, not at intermediate stages.
+
+## References
+
+* Stacks Project, Tags 0149, 0152, 013K, 070I, 070J and 0159.
 -/
 
 @[expose] public noncomputable section
@@ -44,10 +42,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- The derived structure isomorphism D(P)D(U) ≅ D(U), obtained by localizing the termwise structure
 isomorphisms and using the canonical exact-functor composition comparison.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedStructure :
     (forget F).mapDerivedCategory ⋙ F.mapDerivedCategory ≅
       (forget F).mapDerivedCategory :=
@@ -58,20 +53,14 @@ def cyclicDerivedStructure :
 /-- The underlying degree-r derived Hom group V^r. The shift is in the ordinary derived category of
 the underlying abelian category.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 abbrev CyclicDerivedHom (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ) :=
   (forget F).mapDerivedCategory.obj M ⟶ ((forget F).mapDerivedCategory.obj N)⟦r⟧
 
 /-- The additive action u ↦ θ_N[r] D(P)(u) θ_M⁻¹, with the canonical shift comparison of the exact
 functor D(P).
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedHomAction (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ) :
     CyclicDerivedHom F M N r →+ CyclicDerivedHom F M N r :=
   (Preadditive.rightComp _
@@ -82,39 +71,27 @@ def cyclicDerivedHomAction (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ) :
 
 /-- The endomorphism 1-T on the degree-r underlying derived Hom group.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedHomDefect (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ) :
     CyclicDerivedHom F M N r →+ CyclicDerivedHom F M N r :=
   AddMonoidHom.id _ - cyclicDerivedHomAction F M N r
 
 /-- The subgroup ker(1-T) in degree zero.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 abbrev CyclicDerivedHomInvariants (M N : DerivedCategory (IsoAlgebra F)) :=
   (cyclicDerivedHomDefect F M N 0).ker
 
 /-- The quotient coker(1-T) in degree minus one, as an abelian group.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 abbrev CyclicDerivedHomCoinvariants (M N : DerivedCategory (IsoAlgebra F)) :=
   CyclicDerivedHom F M N (-1) ⧸ (cyclicDerivedHomDefect F M N (-1)).range
 
 /-- The additive forgetting map, followed by the canonical degree-zero shift identification. It
 imposes no faithfulness assertion on native derived morphisms.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedForget (M N : DerivedCategory (IsoAlgebra F)) :
     (M ⟶ N) →+ CyclicDerivedHom F M N 0 :=
   (Preadditive.rightComp _
@@ -125,10 +102,7 @@ def cyclicDerivedForget (M N : DerivedCategory (IsoAlgebra F)) :
 morphisms, indexed by pairs with bounded cohomology. Boundedness is Mathlib’s canonical
 t-structure boundedness predicate.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 abbrev CyclicDerivedHomBoundary :=
   ∀ (M N : DerivedCategory (IsoAlgebra F)),
     DerivedCategory.TStructure.t.bounded M → DerivedCategory.TStructure.t.bounded N →
@@ -138,10 +112,7 @@ abbrev CyclicDerivedHomBoundary :=
 its underlying map is forgetting. Injectivity, exactness and surjectivity express both zeros and
 exactness at the middle term.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def CyclicDerivedHomBoundaryExact (b : CyclicDerivedHomBoundary F) : Prop :=
   ∀ (M N : DerivedCategory (IsoAlgebra F))
     (hM : DerivedCategory.TStructure.t.bounded M)
@@ -155,10 +126,7 @@ def CyclicDerivedHomBoundaryExact (b : CyclicDerivedHomBoundary F) : Prop :=
 morphisms. The representative on the right uses precisely their underlying morphisms and the
 degree-minus-one shift.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def CyclicDerivedHomBoundaryNatural (b : CyclicDerivedHomBoundary F) : Prop :=
   ∀ (M N M' N' : DerivedCategory (IsoAlgebra F))
     (hM : DerivedCategory.TStructure.t.bounded M)
@@ -175,10 +143,7 @@ def CyclicDerivedHomBoundaryNatural (b : CyclicDerivedHomBoundary F) : Prop :=
 exact forgetting comparison and inverse shift-cancellation isomorphism identify Q(A) with
 Q(A)[1][-1]; no arbitrary map or sign is selected.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedOffDiagonalClass
     {S : ShortComplex (CochainComplex (IsoAlgebra F) ℤ)}
     (u : ((forget F).mapHomologicalComplex (ComplexShape.up ℤ)).obj S.X₃ ⟶
@@ -199,10 +164,7 @@ the off-diagonal entry is θ_A P(u). The boundary on [u] must equal Mathlib’s 
 connecting morphism Q(J) → Q(A)[1]. Every term in the equation has the carrier type written
 explicitly to avoid relying on local notation.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def CyclicDerivedHomBoundaryNormalized (b : CyclicDerivedHomBoundary F) : Prop :=
   ∀ (S : ShortComplex (CochainComplex (IsoAlgebra F) ℤ)) (hS : S.ShortExact)
     (hM : DerivedCategory.TStructure.t.bounded (DerivedCategory.Q.obj S.X₃))
@@ -232,10 +194,7 @@ variable {D : Type uD} [Category.{vD} D] [Abelian D]
 specified shift comparison, and the specified comparison with forgetting. The comparison
 direction is D(U′)J ≅ H D(U).
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedHomTransport
     (J : DerivedCategory (IsoAlgebra F) ⥤ DerivedCategory (IsoAlgebra G))
     (H : DerivedCategory C ⥤ DerivedCategory D)
@@ -252,10 +211,7 @@ every degree, so they induce the prescribed maps on the actual kernel and quotie
 clause is the forgetting square and the last clause is the connecting-map square on every
 quotient representative. Only source and final target boundedness are required.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def CyclicDerivedHomBoundaryFunctorial
     (b : CyclicDerivedHomBoundary F) (b' : CyclicDerivedHomBoundary G)
     (J : DerivedCategory (IsoAlgebra F) ⥤ DerivedCategory (IsoAlgebra G))
@@ -291,10 +247,7 @@ variable (L : C ⥤ D) [L.Additive] (e : L ⋙ G ≅ F ⋙ L)
 /-- The canonical exact-functor comparison with forgetting, obtained from the strict equality of the
 ordinary transported functor with H after forgetting.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedExactForgetComparison [PreservesFiniteLimits L] [PreservesFiniteColimits L] :
     (mapOfNatIso e).mapDerivedCategory ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.mapDerivedCategory :=
@@ -302,14 +255,11 @@ def cyclicDerivedExactForgetComparison [PreservesFiniteLimits L] [PreservesFinit
     Functor.mapDerivedCategoryNatIso (mapOfNatIsoCompForgetIso e) ≪≫
       (Functor.mapDerivedCategoryCompIso (forget F) L).symm
 
-/-- The unique comparison supplied by lem-sf-fixed-pair-derived-forget-comparison. Its derived-unit
+/-- The unique comparison supplied by `exists_fixedPairDerivedForgetComparison`. Its derived-unit
 equation fixes the comparison to the identity on the common K-injective computation H(UI). This
 definition chooses a uniquely specified isomorphism, not an arbitrary comparison.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def cyclicDerivedRightForgetComparison [IsGrothendieckAbelian.{v} C]
     [IsGrothendieckAbelian.{vD} D] [PreservesFiniteLimits L]
     (hF : ∀ K : CochainComplex (IsoAlgebra F) ℤ,
@@ -331,10 +281,7 @@ autoequivalence, and the ordinary derived categories in chosen morphism universe
 morphism, base-localization and fixed-pair-localization universes remain separate. The universe
 linter is suppressed only for this data package because its sort is their common maximum.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 structure CyclicDerivedSetting where
   category : Type u
   [categoryStruct : Category.{v} category]
@@ -352,12 +299,9 @@ attribute [instance] CyclicDerivedSetting.categoryStruct CyclicDerivedSetting.ab
 
 /-- One arrow of a finite composable diagram, carrying its native and underlying functors, coherent
 underlying shift comparison, and comparison with forgetting. The Generated predicate below
-restricts these data to exactly the functors named in the node.
+restricts these data to the admissible exact and total right derived functors.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 structure CyclicDerivedTransport (X Y : CyclicDerivedSetting.{u, v, w, wF}) where
   native : DerivedCategory (IsoAlgebra X.action) ⥤ DerivedCategory (IsoAlgebra Y.action)
   underlying : DerivedCategory X.category ⥤ DerivedCategory Y.category
@@ -372,10 +316,7 @@ variable {X Y Z : CyclicDerivedSetting.{u, v, w, wF}}
 /-- The coherent shift comparison stored in a transport datum, exposed without installing a
 competing global instance.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def shiftIso (t : CyclicDerivedTransport X Y) (r : ℤ) :
     shiftFunctor (DerivedCategory X.category) r ⋙ t.underlying ≅
       t.underlying ⋙ shiftFunctor (DerivedCategory Y.category) r :=
@@ -384,10 +325,7 @@ def shiftIso (t : CyclicDerivedTransport X Y) (r : ℤ) :
 /-- The canonical transport datum of an additive exact functor equipped with the specified
 commutation isomorphism with the autoequivalences.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def exact (L : X.category ⥤ Y.category) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (e : L ⋙ Y.action ≅ X.action ⋙ L) : CyclicDerivedTransport X Y where
@@ -400,10 +338,7 @@ def exact (L : X.category ⥤ Y.category) [L.Additive]
 resolution witnesses. Its forgetting comparison is the unique unit-normalized one. The Generated
 constructor requires that the chosen underlying shift comparison commute with the derived unit.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def rightDerived (L : X.category ⥤ Y.category) [L.Additive] [PreservesFiniteLimits L]
     (e : L ⋙ Y.action ≅ X.action ⋙ L)
     (hX : ∀ K : CochainComplex (IsoAlgebra X.action) ℤ,
@@ -421,10 +356,7 @@ def rightDerived (L : X.category ⥤ Y.category) [L.Additive] [PreservesFiniteLi
 standard composite, and the forgetting comparison is the pasted comparison, with the canonical
 associators.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def comp (s : CyclicDerivedTransport X Y) (t : CyclicDerivedTransport Y Z) :
     CyclicDerivedTransport X Z where
   native := s.native ⋙ t.native
@@ -439,10 +371,7 @@ def comp (s : CyclicDerivedTransport X Y) (t : CyclicDerivedTransport Y Z) :
 
 /-- The transport datum of the empty composite, with identity functors and the canonical unitors.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 def id (X : CyclicDerivedSetting.{u, v, w, wF}) : CyclicDerivedTransport X X where
   native := 𝟭 _
   underlying := 𝟭 _
@@ -454,10 +383,7 @@ the identity. The right-derived constructor retains the canonical unit-compatibl
 comparison. No condition on the cohomological bounds of intermediate images occurs in this
 inductive predicate.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Stacks Project, Tags 0149, 0152 and 070I. -/
 inductive Generated : {X Y : CyclicDerivedSetting.{u, v, w, wF}} →
     CyclicDerivedTransport X Y → Prop where
   | id (X : CyclicDerivedSetting.{u, v, w, wF}) : Generated (id X)

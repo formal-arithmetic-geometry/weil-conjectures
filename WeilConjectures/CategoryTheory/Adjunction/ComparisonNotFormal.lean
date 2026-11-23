@@ -89,7 +89,7 @@ noncomputable def sectLZeroCompBiprodFunctorIso [Limits.HasZeroObject D] :
 
 variable {D}
 
-/-- Blueprint `ex-exc-comparison-not-formal`: **full faithfulness does not identify ambient
+/-- **full faithfulness does not identify ambient
 right adjoints.** Let `D` be a preadditive category with binary biproducts (for instance the
 derived category of vector spaces over a field), `G` any right adjoint of the biproduct functor
 `⊞ : D × D ⥤ D`, and `K` a nonzero object. Then no morphism `(K, 0) ⟶ G K` is an isomorphism;
@@ -97,8 +97,7 @@ in particular the comparison `v_X ∘ G_et ⟶ G_proet ∘ v_Y` of the right adj
 with `v_X = (-, 0)` (fully faithful, `CategoryTheory.Limits.fullyFaithfulSectLZero`),
 `v_Y = F_et = 𝟭` and `F_proet = ⊞` (which satisfies `F_proet ∘ v_X ≅ 𝟭`,
 `CategoryTheory.Limits.sectLZeroCompBiprodFunctorIso`) is not an isomorphism at `K`: indeed
-`G K ≅ (K, K)` by uniqueness of adjoints and `CategoryTheory.Limits.biprodDiagAdjunction`.
-(blueprint: `ex-exc-comparison-not-formal`) -/
+`G K ≅ (K, K)` by uniqueness of adjoints and `CategoryTheory.Limits.biprodDiagAdjunction`. -/
 theorem not_isIso_of_biprodFunctor_adjunction [Limits.HasZeroObject D] {G : D ⥤ D × D}
     (adj : biprodFunctor D ⊣ G) (K : D) (hK : ¬ IsZero K)
     (f : (Prod.sectL D (0 : D)).obj K ⟶ G.obj K) : ¬ IsIso f := by
@@ -109,8 +108,7 @@ theorem not_isIso_of_biprodFunctor_adjunction [Limits.HasZeroObject D] {G : D �
 
 /-- **The counterexample in the derived category of a field.** For a field `k` and a nonzero
 object `K` of the derived category `D(k)` of `k`-vector spaces, and any right adjoint `G` of
-the biproduct functor `D(k) × D(k) ⥤ D(k)`, no morphism `(K, 0) ⟶ G K` is an isomorphism.
-(blueprint: `ex-exc-comparison-not-formal`) -/
+the biproduct functor `D(k) × D(k) ⥤ D(k)`, no morphism `(K, 0) ⟶ G K` is an isomorphism. -/
 theorem _root_.DerivedCategory.not_isIso_of_biprodFunctor_adjunction (k : Type u) [Field k]
     [HasDerivedCategory.{w} (ModuleCat.{v} k)]
     {G : DerivedCategory (ModuleCat.{v} k) ⥤ DerivedCategory (ModuleCat.{v} k) ×

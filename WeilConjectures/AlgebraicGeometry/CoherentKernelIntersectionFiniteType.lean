@@ -24,8 +24,6 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 400000 in
--- The composite open-site equivalence and its kernel comparison require this budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition on a single open `U` controls the restriction to `W ∩ U`
 of a kernel initially defined on `W`. This comparison requires neither an open
@@ -45,6 +43,25 @@ theorem coherent_kernel_intersection_finiteType
   let Z : X.Opens := U.ι ''ᵁ V
   have hZ : Z = W ⊓ U := by
     simp [Z, V, Scheme.Hom.image_preimage_eq_opensRange_inf, inf_comm]
+  -- Reuse sheafification instances throughout the over-site comparisons.
+  have : HasSheafify ((Opens.grothendieckTopology X).over W) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology X).over W).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify ((Opens.grothendieckTopology X).over Z) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology X).over Z).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have : HasSheafify ((Opens.grothendieckTopology U).over V) AddCommGrpCat.{u} :=
+    inferInstance
+  have : ((Opens.grothendieckTopology U).over V).WEqualsLocallyBijective
+      AddCommGrpCat.{u} := inferInstance
+  have hSheafZ : ∀ B : Over Z,
+      HasSheafify (((Opens.grothendieckTopology X).over Z).over B) AddCommGrpCat.{u} :=
+    inferInstance
+  have hLocalZ : ∀ B : Over Z,
+      (((Opens.grothendieckTopology X).over Z).over B).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let i : Z ⟶ W := homOfLE (by rw [hZ]; exact inf_le_left)
   let A : SheafOfModules.{u} (X.ringCatSheaf.over W) ⥤
       SheafOfModules.{u} (X.ringCatSheaf.over Z) :=
@@ -88,15 +105,10 @@ theorem coherent_kernel_intersection_finiteType
       ((Scheme.Modules.restrictFunctor s.inv).obj
         ((Scheme.Modules.overEquiv V).functor.obj (kernel g)))
   have hA : PreservesLimit (parallelPair f 0) A := by
-    apply preservesLimit_of_preserves_limit_cone (kernelIsKernel f)
-    apply isLimitOfReflects (SheafOfModules.forget (X.ringCatSheaf.over Z))
-    apply PresheafOfModules.evaluationJointlyReflectsLimits
-    intro B
-    let Q := SheafOfModules.evaluation (X.ringCatSheaf.over W)
-      (Opposite.op ((Over.map i).obj B.unop))
-    let S := ModuleCat.restrictScalars
-      (RingCat.Hom.hom ((Sheaf.pushforwardOverMapIso X.ringCatSheaf i).inv.hom.app B))
-    exact isLimitOfPreserves (Q ⋙ S) (kernelIsKernel f)
+    change PreservesLimit (parallelPair f 0)
+      (SheafOfModules.pushforward (F := Over.map i)
+        (Sheaf.pushforwardOverMapIso X.ringCatSheaf i).inv)
+    infer_instance
   let ek : T.obj (kernel f) ≅ kernel g :=
     PreservesKernel.iso T f ≪≫
       kernel.mapIso (T.map f) g efree.symm eF (by simp [g])
@@ -104,6 +116,19 @@ theorem coherent_kernel_intersection_finiteType
     E.inverse.mapIso ek.symm ≪≫ E.unitIso.symm.app (A.obj (kernel f))
   have : (A.obj (kernel f)).IsFiniteType := finiteType_of_iso (R := X.ringCatSheaf.over Z) ek'
   let D : Over W := Over.mk i
+  -- Match the slice equivalence's presentation when reusing the instances over Z.
+  have : ∀ B : Over D.left,
+      HasSheafify (((Opens.grothendieckTopology X).over D.left).over B) AddCommGrpCat.{u} :=
+    hSheafZ
+  have : ∀ B : Over D.left,
+      (((Opens.grothendieckTopology X).over D.left).over B).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := hLocalZ
+  have : ∀ B : Over D,
+      HasSheafify ((((Opens.grothendieckTopology X).over W).over D).over B)
+        AddCommGrpCat.{u} := inferInstance
+  have : ∀ B : Over D,
+      ((((Opens.grothendieckTopology X).over W).over D).over B).WEqualsLocallyBijective
+        AddCommGrpCat.{u} := inferInstance
   let H := SheafOfModules.pushforwardPushforwardEquivalence.{u}
     (Over.iteratedSliceEquiv D)
     (S := (X.ringCatSheaf.over W).over D) (R := X.ringCatSheaf.over D.left) (𝟙 _) (𝟙 _)
@@ -117,8 +142,9 @@ theorem coherent_kernel_intersection_finiteType
       ((Functor.IsDenseSubsite.coverPreserving _ _
         (Over.iteratedSliceEquiv D).functor).overPost B)
   have : (H.functor.obj (A.obj (kernel f))).IsFiniteType :=
-    finiteType_pushforward_leftAdjoint (Over.iteratedSliceEquiv D).functor
-      (𝟙 _) (Iso.refl _)
+    finiteType_pushforward_leftAdjoint
+      (R := X.ringCatSheaf.over D.left) (S := (X.ringCatSheaf.over W).over D)
+      (M := A.obj (kernel f)) (Over.iteratedSliceEquiv D).functor (𝟙 _) (Iso.refl _)
   let eover : H.functor.obj (A.obj (kernel f)) ≅ (kernel f).over D :=
     (SheafOfModules.fullyFaithfulForget _).preimageIso
       (PresheafOfModules.isoMk (fun B ↦ Iso.refl _))
@@ -130,7 +156,6 @@ theorem coherent_kernel_intersection_finiteType
     subst Z'
     congr 1
   have hD : D = Over.mk (homOfLE (inf_le_left : W ⊓ U ≤ W)) := mk_eq Z hZ i
-  rw [← hD]
-  exact hfinal
+  exact hD ▸ hfinal
 
 end AlgebraicGeometry

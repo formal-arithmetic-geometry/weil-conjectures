@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.SiteRestrictionKInjective
 
 /-! # K-injectives under relocalization
 
-Source: Stacks Project, Cohomology on Sites, restriction of K-injectives to an open.
+## References
+
+* Stacks Project, Cohomology on Sites, restriction of K-injectives to an open.
 -/
 
 @[expose] public section
@@ -24,18 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Relocalization preserves K-injectives, with an independent coefficient universe.
-Source: Stacks Project, Cohomology on Sites, lemma-restrict-K-injective-to-open;
-Modules on Sites, Tags 03DI and 03DJ.
-(auxiliary; not a blueprint node).
-
-Proof: Regard f as an object X of C/U. Restriction from C/U to (C/U)/X preserves
-K-injectives by exact extension by zero. The iterated-slice equivalence identifies
-(C/U)/X with C/V, and induces an additive equivalence of their module categories.
-An additive equivalence preserves K-injectives. Its composite with restriction is
-sectionwise the original relocalization functor, so transport the preservation
-property through this identity comparison. The topology and coefficient sheaf on
-the iterated slice agree with those transported from C/V.
--/
+Source: Stacks Project, Cohomology on Sites; Modules on Sites, Tags 03DI and 03DJ. -/
 theorem overMap_preservesKInjectiveComplexes_ofUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) {U V : C} (f : V ⟶ U)

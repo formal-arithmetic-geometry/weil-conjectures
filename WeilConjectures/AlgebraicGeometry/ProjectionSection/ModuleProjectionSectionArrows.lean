@@ -43,9 +43,10 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Canonical module projection and section comparisons
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md, clause (1), and Stacks 0B56
-(blueprint: def-sfb-module-projection-section-arrows).
+## References
+
+* Stacks 07A4
+* Stacks 0B56
 -/
 
 @[expose] public noncomputable section
@@ -75,9 +76,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A typed alias of the existing total left derived pullback, keeping its inferred
-K-flat structure fixed when using the tensor comparison. There is no new functor.
-Source: blueprint derived pullback convention; Stacks 07A4
-(blueprint: def-sfb-module-projection-section-arrows). -/
+K-flat structure fixed when using the tensor comparison. There is no new functor. -/
 abbrev moduleDerivedPullback :
     DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
@@ -87,9 +86,7 @@ abbrev moduleDerivedPullback :
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A typed alias of the existing total right derived direct image, retaining its
-canonical K-injective construction. There is no new functor.
-Source: blueprint derived direct-image convention; Stacks 0B56
-(blueprint: def-sfb-module-projection-section-arrows). -/
+canonical K-injective construction. There is no new functor. -/
 abbrev moduleDerivedPushforward :
     DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤
@@ -104,8 +101,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The left-ordered projection map is the adjunct of the canonical tensor comparison
-followed by identity tensor the counit. Source: blueprint displayed definition of pi
-(blueprint: def-sfb-module-projection-section-arrows). -/
+followed by identity tensor the counit. -/
 def projection {Z B : Scheme.{u}} (f : Z ⟶ B)
     (M : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B)))
@@ -121,9 +117,8 @@ def projection {Z B : Scheme.{u}} (f : Z ⟶ B)
           (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app N))
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The canonical section pullback comparison, using the published composition and
-identity comparisons. Source: blueprint identification i^* r^* = id
-(blueprint: def-sfb-module-projection-section-arrows). -/
+/-- The canonical section pullback comparison, using the composition and
+identity comparisons. -/
 def pullbackSection {X V : Scheme.{u}} (r : V ⟶ X) (i : X ⟶ V) (h : i ≫ r = 𝟙 X) :
     (moduleDerivedPullback Λ r) ⋙
       (moduleDerivedPullback Λ i) ≅ 𝟭 _ :=

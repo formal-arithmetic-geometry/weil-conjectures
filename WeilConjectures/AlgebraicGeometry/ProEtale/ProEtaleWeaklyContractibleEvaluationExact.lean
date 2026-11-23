@@ -22,7 +22,10 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Exact evaluation at weakly contractible objects
 
-Source: Stacks Project, Tags 0946, 03DA, 03CN and 00WN.
+## References
+
+* Stacks Project, Tags 0946, 03DA, 03CN and 00WN
+* Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA
 -/
 
 @[expose] public section
@@ -39,15 +42,7 @@ local instance (X : Scheme.{u}) (R : Sheaf (topology X) RingCat.{u + 1}) (W : X.
   inferInstanceAs ((SheafOfModules.forget R ⋙
     PresheafOfModules.evaluation R.obj (op W)).Additive)
 
-/-- Evaluation at a weakly contractible object preserves homology of module complexes.
-Source: Stacks Project, Tag 0946 (1), with the module sheaf epimorphism criterion 03DA.
-(blueprint: lem-weil-pbc-proetale-weakly-contractible-evaluation-exact).
-
-Proof: forgetting module structure preserves cokernels, hence epimorphisms. Such a map
-of abelian sheaves is locally surjective, and the same local lifts make its underlying
-set-sheaf map epic. Weak contractibility makes its evaluation surjective. Thus evaluation
-preserves epimorphisms; it also preserves kernels, which are computed sectionwise.
-In an abelian category these two properties imply preservation of homology. -/
+/-- Evaluation at a weakly contractible object preserves homology of module complexes. -/
 theorem weaklyContractible_evaluation_preservesHomology
     (X : Scheme.{u}) (R : Sheaf (topology X) CommRingCat.{u + 1}) (W : X.ProEt)
     (hW : ∀ (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),

@@ -41,9 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The termwise scalar model B tensor over constant A with constant P, localized.
-The universe lift only enlarges the module carriers, retaining the scalar ring A.
-Source: current blueprint proposition-local-structure-integral-constructible-complexes, Compatible
-isomorphisms (blueprint: def-pe-internal-perfect-reduction-hom-data). -/
+The universe lift only enlarges the module carriers, retaining the scalar ring A. -/
 def internalPerfectScalarModel (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
     DerivedCategory (AdicCompletion.Modules l E W) :=
@@ -59,9 +57,7 @@ def internalPerfectScalarModel (W : Scheme.{u})
   DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- The scalar complex Q = P dual tensor P. The dual is the signed Hom complex
-into A placed in degree zero, and the tensor is the ordinary direct-sum total tensor.
-Source: current blueprint proposition-local-structure-integral-constructible-complexes,
-uniform-bound paragraph (blueprint: def-pe-internal-perfect-reduction-hom-data). -/
+into A placed in degree zero, and the tensor is the ordinary direct-sum total tensor. -/
 def internalPerfectScalarDualTensor
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
     CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ :=
@@ -71,17 +67,13 @@ def internalPerfectScalarDualTensor
         (ModuleCat.of (Padic.coefficientExtensionIntegers l E)
           (Padic.coefficientExtensionIntegers l E)))) P (curriedTensor _)
 
-/-- Hom at exponent n+1, with the actual derived coefficient extensions.
-Source: current blueprint proposition-local-structure-integral-constructible-complexes, Hom tower
-(blueprint: def-pe-internal-perfect-reduction-hom-data). -/
+/-- Hom at exponent n+1, with the actual derived coefficient extensions. -/
 abbrev internalReductionHom (W : Scheme.{u})
     (T K : DerivedCategory (AdicCompletion.Modules l E W)) (n : ℕ) :=
   (AdicCompletion.derivedReduction l E W n).obj T ⟶
     (AdicCompletion.derivedReduction l E W n).obj K
 
-/-- Canonical Hom reduction: alpha_T inverse, extension of f, then alpha_K.
-Source: current blueprint proposition-local-structure-integral-constructible-complexes, Hom tower
-(blueprint: def-pe-internal-perfect-reduction-hom-data). -/
+/-- Canonical Hom reduction: alpha_T inverse, extension of f, then alpha_K. -/
 def internalReductionHomStep (W : Scheme.{u})
     (T K : DerivedCategory (AdicCompletion.Modules l E W)) (n : ℕ)
     (f : internalReductionHom l E W T K (n + 1)) : internalReductionHom l E W T K n :=
@@ -89,9 +81,7 @@ def internalReductionHomStep (W : Scheme.{u})
     (AdicCompletion.finiteExtend l E W n).map f ≫
     (AdicCompletion.reductionComp l E W n).hom.app K
 
-/-- The Hom inverse system, whose longer arrows are composites of the specified steps.
-Source: current blueprint proposition-local-structure-integral-constructible-complexes, Hom tower
-(blueprint: def-pe-internal-perfect-reduction-hom-data). -/
+/-- The Hom inverse system, whose longer arrows are composites of the specified steps. -/
 def internalReductionHomTower (W : Scheme.{u})
     (T K : DerivedCategory (AdicCompletion.Modules l E W)) : ℕᵒᵖ ⥤ Type _ :=
   Functor.ofOpSequence (X := fun n ↦ internalReductionHom l E W T K n)

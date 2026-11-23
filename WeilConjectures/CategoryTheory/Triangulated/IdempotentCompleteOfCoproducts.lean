@@ -13,8 +13,8 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 
 Let `C` be a pretriangulated category with coproducts indexed by `Type w`, for any universe `w`.
 Then `C` is idempotent complete
-(`CategoryTheory.Pretriangulated.isIdempotentComplete_of_hasCoproducts`, Bökstedt–Neeman, Stacks
-Tag 05QW, blueprint `lemma-hypotheses-brown-representability`). Only the countable coproduct `∐ₙ A`,
+(Bökstedt–Neeman, Stacks
+Tag 05QW). Only the countable coproduct `∐ₙ A`,
 indexed by `ULift.{w} ℕ`, is used.
 
 For an idempotent `e : A ⟶ A`, let `Z` be the telescope (homotopy colimit) of
@@ -114,14 +114,7 @@ lemma exists_split : ∃ (r : Z ⟶ A) (i : A ⟶ Z), r ≫ i = 𝟙 Z ∧ i ≫
 end IdempotentTelescope
 
 /-- A pretriangulated category with coproducts indexed by `Type w` is idempotent complete
-(Bökstedt–Neeman, Stacks Tag 05QW).
-
-Proof: let `p : X ⟶ X` be idempotent, `q = 𝟙 - p`, and `S = ∐ₙ X` (indexed by `ULift.{w} ℕ`).
-The map `φ : S ⟶ S` sending the summand `n` by `q` to the summand `n` plus by `p` to the summand
-`n + 1` is a split monomorphism, so in a distinguished triangle `S ⟶[φ] S ⟶[a] G ⟶ S⟦1⟧` the
-third map vanishes and `a` is an epimorphism. The map `c : S ⟶ X` which is `p` on the summand `0`
-and zero elsewhere kills `φ`, so it factors as `a ≫ i`; then `i : G ⟶ X` and the composite of the
-summand `0` with `a` split `p`. -/
+(Bökstedt–Neeman, Stacks Tag 05QW). -/
 theorem isIdempotentComplete_of_hasCoproducts [HasCoproducts.{w} C] : IsIdempotentComplete C := by
   classical
   constructor

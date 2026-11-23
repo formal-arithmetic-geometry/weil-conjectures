@@ -130,12 +130,7 @@ lemma commShift_mapDerivedCategoryProjectionMap (E : DerivedCategory D) :
 
 /-- If `G` does not lower the cohomological degree, `E` is bounded below and the projection map
 `τ_E : G E ⊗ᴸ K ⟶ G (E ⊗ᴸ D(F) K)` is an isomorphism at the flat objects placed in degree `0`,
-then it is an isomorphism at every `K` of Tor amplitude in `[b, ∞)`.
-
-Represent `K` by a K-flat complex `P` of flat objects vanishing below `b` with `F(P)` K-flat. In
-a fixed degree `q`, for `N` large, both sides vanish in degrees `q` and `q + 1` on the stupid
-truncation `σ^{≥ N + 1} P`, a K-flat complex concentrated in degrees `≥ N + 1`, so the map in
-degree `q` is the one at `σ^{≤ N} P`, a bounded complex of flat objects. -/
+then it is an isomorphism at every `K` of Tor amplitude in `[b, ∞)`. -/
 theorem isIso_mapDerivedCategoryProjectionMap_app_of_torAmplitudeGE
     (hG : ∀ (Y : DerivedCategory D) (n : ℤ), Y.IsGE n → (G.obj Y).IsGE n)
     (E : DerivedCategory D) (a : ℤ) [E.IsGE a]

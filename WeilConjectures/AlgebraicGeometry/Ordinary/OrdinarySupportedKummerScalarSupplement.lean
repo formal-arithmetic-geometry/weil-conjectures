@@ -14,14 +14,14 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerScalar
 /-!
 # Derived coefficient change of supported Kummer classes
 
-Source: Stacks Project, Tag 07A6; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md, final paragraph
-(blueprint: def-asd-ordinary-supported-kummer-scalar).
-
 ## Main definitions
 
 * `SupportedDerivedScalarUnit`: the derived scalar-unit universal property.
 * `SupportedKummerScalar`: the normalized scalar-extension square for the classes.
+
+## References
+
+* Stacks 07A6
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +40,7 @@ attribute [local instance 10000] SheafExactDegreeZero.scalarWeakSheafify
 /-- The scalar-extension clause, with the comparison maps fixed on generators.
 Both displayed universal properties refer to the canonical sectionwise scalar maps:
 constants send r to φ(r), roots send a ⊗ z to φ(a) ⊗ z. The Ext square is the assertion
-that the class itself is obtained by the same derived scalar extension.
-Source: Stacks 07A6 and blueprint lemma-cycle-class-cartier-divisor, final paragraph
-(blueprint: def-asd-ordinary-supported-kummer-scalar). -/
+that the class itself is obtained by the same derived scalar extension. -/
 @[irreducible]
 def SupportedKummerScalar {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (N : ℕ) (hR : (N : R) = 0) (hS : (N : S) = 0)

@@ -21,7 +21,8 @@ Assuming the affine Artin bound in dimensions `< d`
 (`AlgebraicGeometry.Scheme.ArtinBound`), we show `cd_tor(Spec R[1/u]) ≤ d - a`
 (`AlgebraicGeometry.Scheme.hasTorsionCohomologicalDimensionLE_strictHenselization_away`).
 
-This is the local calculation of the blueprint proof of `lemma-uniform-bounds-pro-etale-affines`.
+## Implementation details
+
 Lifts `τ₁, …, τₐ ∈ P` of algebraically independent elements of the residue field embed `K(τ)` into
 the henselian local domain `R`, whose integral closure `F` of `K(τ)` is a separably closed field
 (`exists_isSepClosed_of_henselianLocalRing`). The local equation `u` gives an embedding

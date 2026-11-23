@@ -17,7 +17,6 @@ import all WeilConjectures.CategoryTheory.Localized.LocalizedSheavesOverRepresen
 /-! # The canonical set-sheaf comparison for localization of a site
 
 Source: Stacks Project, Sites, Tag 03CF; Modules on Sites, Tag 04J0.
-(blueprint: lem-weil-pbc-slice-set-pullback-isIso).
 -/
 
 @[expose] public noncomputable section
