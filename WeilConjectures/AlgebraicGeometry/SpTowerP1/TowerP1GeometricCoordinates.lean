@@ -14,10 +14,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-geometric-coordinates).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -45,8 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
 /-- Pullback coordinates are the adjoint of the normalized direct-image coordinates.
-This mate equality fixes the actual unit and counit, including scalar normalization.
-Source: Levels (blueprint: def-sp-p1-geometric-coordinates). -/
+This mate equality fixes the actual unit and counit, including scalar normalization. -/
 structure GeometricCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y)
     extends PushCoordinates l E n f where
   pull : (realization l E n Y).mapDerivedCategory ⋙
@@ -59,8 +54,7 @@ structure GeometricCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Adjunction.mapDerivedCategoryRightDerivedAdjunction
       (proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f)) pull.hom) = derived.inv
 
-/-- Exact site inverse-image coordinates, including the canonical left-derived/exact iso.
-Source: Levels (blueprint: def-sp-p1-geometric-coordinates). -/
+/-- Exact site inverse-image coordinates, including the canonical left-derived/exact iso. -/
 def exactSitePull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     EtaleWords.pull (ULift.{u + 1} (SpTowerShriek.R l E n)) f ⋙
         (comparisonUpperStar
@@ -78,8 +72,7 @@ def exactSitePull {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f).symm ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The ordinary total-derived direct-image mate; its restriction is fixedComparison's mate.
-Source: Levels (blueprint: def-sp-p1-geometric-coordinates). -/
+/-- The ordinary total-derived direct-image mate; its restriction is fixedComparison's mate. -/
 def exactSitePush {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (mateEquiv
     (Etale.derivedUpperStarLowerStarAdjunction

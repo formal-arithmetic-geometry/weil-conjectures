@@ -220,26 +220,7 @@ private def chartAddIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     Functor.isoWhiskerLeft (Over.forget (n, U)).op (coefficientPresheafIso l T).symm
 
 /-- The integral root system is locally free of rank one on the
-vertical sequence site.
-
-Source: blueprint latest, `sk-prop-diagonal-tower/_section.md`, Tate-twist paragraph;
-`sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: lem-sfb-kummer-root-rank-one).
-
-Proof: choose the common pro-etale primitive-root cover with generators zeta_n
-satisfying zeta_(n+1)^l = zeta_n. On each covering chart the maps a to a zeta_n
-identify the root modules with the constant quotient rings Z/l^(n+1). The
-sections, restrictions and transitions equations of F and e transport these
-maps to M. They are linear: the
-constant quotient-ring action is locally determined by integer multiplication,
-so every additive map between these torsion sheaves is linear. Compatibility
-of the generators gives compatibility also along the sequence direction.
-Restrict to every slice of the sequence site; these isomorphisms identify the
-root system with the coefficient unit locally. Thus M is locally free on one
-generator. The covering
-criterion for finite local freeness gives rank one. This argument includes
-zero section rings and empty charts, and uses the positive level n+1 also at
-n=0 and at l=2. -/
+vertical sequence site. -/
 theorem kummerRoot_rank_one (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤)))
     (F : Forget T (Rrings l T)) (M : Systems T (Rrings l T))

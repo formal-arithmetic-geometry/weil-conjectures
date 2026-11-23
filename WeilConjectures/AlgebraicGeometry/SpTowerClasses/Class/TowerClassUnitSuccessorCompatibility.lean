@@ -7,7 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassCoefficients
 
-/-! # Quotient compatibility of normalized finite unit maps -/
+/-! # Quotient compatibility of normalized finite unit maps
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D2, 03D7
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -519,26 +526,7 @@ private theorem normalized_naturality
     ((heq_of_eq (coefficient_ring_naturality l E f n U x₀)).trans hsX.symm))
 
 /-- The adjacent horizontal equation for already supplied finite maps, without an
-existence or invertibility assertion.
-Source: Stacks 03D2, 03D7; Zheng Construction 4.1; blueprint
-`sk-lem-sp-tower-bound-operations.proof.md`, clause (2).
-(blueprint: lem-sfb-tower-class-unit-successor-compatibility).
-
-Proof: apply ordinaryPullTransition to the source coefficient system. After
-conjugating by ordinaryPullEvaluation the proposed square becomes the square
-between pullback of the quotient map followed by restrictionPullback, and the
-quotient map on the target regular modules. Transpose at level n + 1. The level unit
-underlying equation identifies the transpose with the original set-sheaf
-adjunction, since levelPushUnderlying is identity on sections. The underlying
-normalization of restrictionPullback moves the restriction edge through this
-transpose. Substitute the assumed formulas for the transposes of the two finite
-maps. Naturality of proEtaleConstantDirectImageMap in the coefficient ring shows
-that both resulting maps are the same constant direct-image map composed with
-the quotient R_(n+1) to R_n. Faithfulness of the underlying module functor and
-injectivity of the adjunction Hom equivalence give the square. Conjugating back
-cancels the evaluation isomorphisms. The argument uses unital maps, including
-on empty charts, and needs no flatness
-or inverse of a quotient map. -/
+existence or invertibility assertion. -/
 theorem unit_successor_compatibility {X Y : Scheme.{u}} {f : X ⟶ Y}
     {b : SpTowerShriek.Base l E} (g : SpTowerShriek.Geometry l E b f)
     (hpush : ∀ (n : ℕ)

@@ -14,7 +14,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 Only the model-specific geometric sections and their compatibility are constructed here.
 Restriction and its universal property use the general PointedEtaleSectionCone API.
 
-Source: Stacks Project, Tags 03Q9 and 03QO.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q9, 03QO
 -/
 
 @[expose] public section
@@ -26,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 variable {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
   (s : Spec (.of Ω) ⟶ S)
 
-/-- The geometric section obtained from a limit leg of the small strict-local cone.
-Source: Stacks, Tag 03Q9 (blueprint: def-weil-pbc-small-strict-local-section-cone). -/
+/-- The geometric section obtained from a limit leg of the small strict-local cone. -/
 noncomputable def strictLocalNeighbourhoodSection
     (j : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
     Scheme.Etale.mk (𝟙 (Scheme.strictHenselizationScheme s)) ⟶
@@ -49,11 +50,7 @@ noncomputable def strictLocalNeighbourhoodSection
       simp
       rfl) (by trivial)
 
-/-- The small strict-local cone supplies compatible sections over an initial diagram.
-Source: Stacks, Tag 03Q9 (blueprint: def-weil-pbc-small-strict-local-section-cone).
-Proof: initiality is strictHenselization_properties. For compatibility, compare both
-pullback projections. The base projection is the identity, and the other projection
-is natural by the limit-cone equation and naturality of the affine spectrum comparison. -/
+/-- The small strict-local cone supplies compatible sections over an initial diagram. -/
 noncomputable def strictLocalSectionCone :
     PointedEtaleSectionCone (Scheme.strictHenselizationStructuralMap s)
       ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙

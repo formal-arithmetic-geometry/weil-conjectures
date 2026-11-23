@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassLinePull
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearSystemIsoAssembly
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerOrdinaryUnitEvaluation
 
-/-! # Pullback of the ordinary roots-of-unity line -/
+/-! # Pullback of the ordinary roots-of-unity line
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -67,29 +72,7 @@ private theorem adjoint_evaluation
       (SpTowerShriek.geometry_unit_evaluation l E b g n M) h
 
 set_option linter.unusedVariables false in
-/-- The normalized Tate line is cartesian for the unit-normalized tensor inverse image.
-
-Source: blueprint `sk-prop-sp-tower-geometric-classes.proof.md`, clause (4),
-using the scalar extension in clause (2); Stacks 03EL and roots base change.
-(blueprint: lem-sfb-tower-class-line-pullback-existence).
-
-Proof: the existing finite Tate comparison theorem, specialized to every actual
-coefficient quotient, gives normalized finite isomorphisms. Invertibility of ell
-on Y supplies its residue-field invertibility hypotheses on both Y and X.
-Conjugate these finite comparisons by the ordinary pull-evaluation isomorphism
-and the two canonical lineEvaluation isomorphisms. The horizontal compatibility
-lemma says precisely that the resulting isomorphisms commute with the ordinary
-system transitions. The systemIsoOfEvaluation_exists theorem therefore assembles
-them into an isomorphism of systems with these exact evaluated components.
-
-Evaluation of an ordinary adjoint is the finite adjoint of the evaluated map
-transported by the inverse pull-evaluation comparison: this follows from
-geometry_unit_evaluation and naturality of the push-evaluation comparison.
-Apply this identity to the assembled isomorphism. Cancel the evaluation
-comparisons and use naturality of the finite adjunction. The normalized finite
-tensor formula is then exactly LinePullback.normalization. This includes empty
-charts and imposes no finiteness condition on f.
--/
+/-- The normalized Tate line is cartesian for the unit-normalized tensor inverse image. -/
 theorem linePullback_nonempty
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : SpTowerShriek.Geometry l E b f)

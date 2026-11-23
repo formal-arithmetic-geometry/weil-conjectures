@@ -20,8 +20,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The positive connecting arrow, shifted once with its shift-addition comparison.
-Source: blueprint latest, geometric classes proof, clause (2).
-(blueprint: def-sfb-positive-exact-boundary).
 This is the actual connecting arrow of the supplied short exact sequence,
 constructed with the category witnesses still abstract. -/
 def positiveExactBoundary {C : Type u} [Category.{v} C] [Abelian C]

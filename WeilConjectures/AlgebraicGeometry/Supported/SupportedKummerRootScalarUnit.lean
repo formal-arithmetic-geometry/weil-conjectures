@@ -118,7 +118,12 @@ import all Mathlib.Algebra.Homology.ShortComplex.Ab
 import all Mathlib.CategoryTheory.Sites.ConstantSheaf
 import all Mathlib.CategoryTheory.Sites.PreservesSheafification
 
-/-! # The normalized derived coefficient unit on the ordinary Tate root line -/
+/-! # The normalized derived coefficient unit on the ordinary Tate root line
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PK, 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -207,15 +212,7 @@ private theorem boundaryScalarLineMap_unit
     (boundaryScalarLineMap_universal φ T N hR hS)
 
 /-- The coefficient map on the ordinary Tate root line, normalized on pure roots,
-is an unbounded derived scalar unit, without flatness of the target coefficient ring.
-Source: blueprint lemma-cycle-class-cartier-divisor, final scalar-extension paragraph;
-Stacks 03PK and 07A6 (blueprint: lem-asd-supported-kummer-root-scalar-unit).
-
-Proof: the root-line Hom equivalence constructs the coefficient map from the target
-root generator. Its value at one and linearity give the displayed generator formula.
-The same Hom equivalences give its ordinary scalar universal property. The source
-line has a tensor inverse, hence is flat; the flat scalar-unit theorem upgrades the
-ordinary universal property to the full unbounded derived one. -/
+is an unbounded derived scalar unit, without flatness of the target coefficient ring. -/
 theorem supported_kummer_root_scalar_unit
     {R S : Type (u + 1)} [CommRing R] [CommRing S]
     (φ : R →+* S) (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)

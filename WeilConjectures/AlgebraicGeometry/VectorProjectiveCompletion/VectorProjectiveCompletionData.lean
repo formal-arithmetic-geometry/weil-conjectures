@@ -17,14 +17,14 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-! # Data for the projective completion of a vector bundle
 
-Source: Stacks Project, Constructions, Tag 01OA (projective bundles), Tags 01OB,
-01OE and 01NG; blueprint `sec-smooth-purity/sk-prop-an`, the first sentence of
-`thm-amb-vector-bundle-purity.proof.md` (blueprint: def-amb-vector-projective-presentation-data).
-
 The affine presentation below specifies the actual symmetric algebra of O plus F,
 its symmetric grading and its restriction maps. No projective scheme or compactification
 is selected from an uncharacterized existence assertion. All witnesses, including the
 chart equivalences, are characterized in the theorem by their coefficients and generators.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OA, 01OB, 01OE, 01NG
 -/
 
 @[expose] public section
@@ -41,8 +41,7 @@ noncomputable section
 namespace AlgebraicGeometry.VectorProjectiveCompletion
 
 /-- Affine-basis presentation of Sym(O_S ⊕ F), with its symmetric grading and its
-actual restriction maps. A finite direct sum has section module R × F(V).
-Source: Stacks Tag 01OA (blueprint: def-amb-vector-projective-presentation-data). -/
+actual restriction maps. A finite direct sum has section module R × F(V). -/
 structure Presentation (S : Scheme.{u}) (F : S.Modules) where
   algebra : S.GradedAlgebraData
   equiv (V : S.affineOpens) :
@@ -57,14 +56,12 @@ structure Presentation (S : Scheme.{u}) (F : S.Modules) where
       equiv U (SymmetricAlgebra.ι _ _
         (S.presheaf.map (homOfLE h).op a, F.val.map (homOfLE h).op m))
 
-/-- The degree-one coordinate from the first summand, namely t = j(1,0).
-Source: Stacks Tag 01OA (blueprint: def-amb-vector-projective-presentation-data). -/
+/-- The degree-one coordinate from the first summand, namely t = j(1,0). -/
 def t {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) (V : S.affineOpens) :
     P.algebra.obj V :=
   P.equiv V (SymmetricAlgebra.ι _ _ (1, 0))
 
-/-- The degree-one coordinate from a section of F, namely x(m) = j(0,m).
-Source: Stacks Tag 01OA (blueprint: def-amb-vector-projective-presentation-data). -/
+/-- The degree-one coordinate from a section of F, namely x(m) = j(0,m). -/
 def x {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) (V : S.affineOpens)
     (m : F.val.obj (op V.1)) : P.algebra.obj V :=
   P.equiv V (SymmetricAlgebra.ι _ _ (0, m))

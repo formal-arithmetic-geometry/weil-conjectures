@@ -14,9 +14,6 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 /-!
 # The three meanings for the specified support cone
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1-kummer,
-`def-pur-triangle-meaning` (blueprint: def-pur-triangle-meaning).
-
 These predicates refer to the actual module functors, cone, and quotient map.
 Triangle maps have all three specified components; uniqueness then expresses the
 identity and composition laws. Base change specifies the map on the short exact
@@ -35,13 +32,11 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Notational abbreviation for the existing category of constant-coefficient complexes.
-Source: blueprint def-pur-triangle-meaning (blueprint: def-pur-triangle-meaning). -/
+/-- Notational abbreviation for the existing category of constant-coefficient complexes. -/
 abbrev SupportComplex (X : Scheme.{u}) :=
   CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) ℤ
 
-/-- A bounded below complex with injective terms; the lower bound is not fixed.
-Source: blueprint def-pur-triangle-meaning (blueprint: def-pur-triangle-meaning). -/
+/-- A bounded below complex with injective terms; the lower bound is not fixed. -/
 def IsSupportInjectiveModel {X : Scheme.{u}} (I : SupportComplex Λ X) : Prop :=
   (∃ n : ℤ, I.IsStrictlyGE n) ∧ ∀ n : ℤ, Injective (I.X n)
 

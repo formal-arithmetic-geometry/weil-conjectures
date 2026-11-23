@@ -12,11 +12,13 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Strict ordinary étale system interfaces
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16
-(blueprint: def-per-strict-etale-system-interfaces).
+Interfaces for strict ordinary étale coefficient systems.
 
-These declarations are relocated, with their original names and data, from the
-adjoint theorem module. No existence theorem is needed to import these notions.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 00W1, 03D7, 05RU
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Constructions 4.1, 5.14 and 5.15, Lemmas 4.10, 5.16 and 5.22, Proposition 2.29(2)
 -/
 
 @[expose] public noncomputable section
@@ -32,98 +34,67 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
 open SheafOfModules
-/-- Reuse the existing ring-sheafification witness once at the concrete etale-site size.
-This instance only caches an existing proof, so the constant sheaf construction is unchanged.
-Source: Stacks Tag 00W1; Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The ring-sheafification witness at the concrete étale-site size. -/
 instance (priority := 2000) strictEtaleCommRingSheafify (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology CommRingCat.{u + 1} := inferInstance
-/-- Reuse the existing additive-sheafification witness at the ordinary etale-site size.
-Source: Stacks Tag 00W1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The additive-sheafification witness at the ordinary étale-site size. -/
 instance (priority := 2000) strictEtaleAddCommGrpSheafify (T : Scheme.{u}) :
     HasSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1} := inferInstance
-/-- Reuse the existing local-bijection characterization for additive sheaves.
-Source: Stacks Tag 00W1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The local-bijection characterization for additive sheaves. -/
 instance (priority := 2000) strictEtaleAddCommGrpLocal (T : Scheme.{u}) :
     T.smallEtaleTopology.WEqualsLocallyBijective AddCommGrpCat.{u + 1} := inferInstance
-/-- Reuse the existing forgetful composition witness for constant coefficient rings.
-Source: Stacks Tag 03D7
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The forgetful composition witness for constant coefficient rings. -/
 instance (priority := 2000) strictEtaleRingCompose (T : Scheme.{u}) :
     T.smallEtaleTopology.HasSheafCompose
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := inferInstance
-/-- Cache the existing set-sheafification witness at the concrete etale-site size.
-Source: Stacks Tag 00W1; Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The set-sheafification witness at the concrete étale-site size. -/
 instance (priority := 2000) strictEtaleTypeSheafify (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology (Type (u + 1)) := inferInstance
-/-- Cache the existing ring-to-set sheaf composition witness.
-Source: Stacks Tag 03D7; Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- Cache the existing ring-to-set sheaf composition witness. -/
 instance (priority := 2000) strictEtaleRingSetCompose (T : Scheme.{u}) :
     T.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1}) :=
   inferInstance
-/-- Cache the existing additive-to-set sheaf composition witness.
-Source: Stacks Tag 03D7; Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- Cache the existing additive-to-set sheaf composition witness. -/
 instance (priority := 2000) strictEtaleAddCommGrpSetCompose (T : Scheme.{u}) :
     T.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
   inferInstance
-/-- The recorded strict system category on the ordinary étale site.
-Source: Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The recorded strict system category on the ordinary étale site. -/
 abbrev strictEtaleCoefficientSystem (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) :=
   CoefficientSystem (J := T.smallEtaleTopology) O ell
-/-- The recorded coefficient-level category, with positive exponent `n+1`.
-Source: Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The recorded coefficient-level category, with positive exponent `n+1`. -/
 abbrev strictEtaleLevel (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) (n : ℕ) :=
   coefficientLevelModules (J := T.smallEtaleTopology) O ell n
-/-- Use Mathlib's standard localization for the strict system category.
-Source: Zheng, Construction 4.1; Stacks Tag 05RU
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- Use Mathlib's standard localization for the strict system category. -/
 @[irreducible]
 instance (priority := 100) strictEtaleSystemDerived (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) :
     HasDerivedCategory.{u + 2} (strictEtaleCoefficientSystem T O ell) :=
   HasDerivedCategory.standard _
-/-- Use the same standard localization at every finite coefficient level.
-Source: Zheng, Construction 4.1; Stacks Tag 05RU
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- Use the same standard localization at every finite coefficient level. -/
 @[irreducible]
 instance (priority := 100) strictEtaleLevelDerived (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) (n : ℕ) :
     HasDerivedCategory.{u + 2} (strictEtaleLevel T O ell n) :=
   HasDerivedCategory.standard _
 /-- Specialize the existing levelwise additive witness before elaborating projections
-of the evaluation package. No additive structure is changed.
-Source: Zheng, Construction 4.1
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+of the evaluation package. No additive structure is changed. -/
 instance (priority := 3000) strictEtaleEvaluationAdditive
     (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O] (ell : O) :
     ∀ n, (coefficientEvaluation.{u + 1, u, u + 1}
       (J := T.smallEtaleTopology) (O := O) (ell := ell) n).Additive :=
   fun n ↦ coefficientEvaluation_additive.{u + 1, u, u + 1} n
-/-- The recorded derived evaluation interface at the ordinary etale-site sizes.
-Source: Zheng, Construction 4.1 and Lemma 4.10
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The recorded derived evaluation interface at the ordinary etale-site sizes. -/
 abbrev StrictEtaleEvaluation (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O] (ell : O) :=
   CoefficientEvaluationDerivedPackage.{u + 1, u, u + 1, u + 2}
     (J := T.smallEtaleTopology) (O := O) (ell := ell)
-/-- The actual set-sheaf adjunction along base change.
-Source: Zheng, Constructions 4.1 and 5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The actual set-sheaf adjunction along base change. -/
 abbrev strictEtaleSetAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1))
     (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)
-/-- The canonical geometric lift already specified by the system-comparison node.
-Source: Zheng, Constructions 4.1 and 5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The canonical geometric lift `CoefficientSystemOrdinaryImage` along `g`. -/
 abbrev StrictEtaleOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
     {T S : Scheme.{u}} (g : T ⟶ S) :=
   CoefficientSystemOrdinaryImage (J := S.smallEtaleTopology) (K := T.smallEtaleTopology)
@@ -134,9 +105,7 @@ abbrev StrictEtaleOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
 
 /-- Multiplication by a coefficient on strict and derived systems. Its normalization
 is the actual constant-ring sheafification unit and its localization on complexes.
-Together with additivity, preservation of this action means `O`-linearity on all Homs.
-Source: Zheng, the Brown adjoint after Lemma 5.16
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+Together with additivity, preservation of this action means `O`-linearity on all Homs. -/
 def StrictEtaleScalarActionCoherence (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O)
     (ordinary : O → (𝟭 (strictEtaleCoefficientSystem T O ell) ⟶ 𝟭 _))
@@ -154,9 +123,7 @@ def StrictEtaleScalarActionCoherence (T : Scheme.{u}) (O : Type (u + 1))
           (((ordinary r).mapHomologicalComplex (.up ℤ)).app K))
 
 /-- The coherence predicate for `StrictEtaleScalarAction`, separated from its data to share
-its type during kernel checking. It is exactly the displayed canonical diagram equations.
-Source: Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+its type during kernel checking. It is exactly the displayed canonical diagram equations. -/
 def StrictEtaleScalarAction (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O) :=
   { record : (O → (𝟭 (strictEtaleCoefficientSystem T O ell) ⟶ 𝟭 _)) ×
@@ -168,9 +135,7 @@ variable (T : Scheme.{u}) (O : Type (u + 1))
     [CommRing O] (ell : O)
 variable {T O ell}
 
-/-- The specified component of `StrictEtaleScalarAction`.
-Source: Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified component of `StrictEtaleScalarAction`. -/
 abbrev StrictEtaleScalarAction.derived (record : StrictEtaleScalarAction T O ell) :
     O → (𝟭 (DerivedCategory (strictEtaleCoefficientSystem T O ell)) ⟶ 𝟭 _) :=
   record.val.2
@@ -183,9 +148,7 @@ variable (O : Type (u + 1)) [CommRing O] (ell : O)
 /-- The termwise open extension and proper direct image, with universal derived images.
 The open functor is fixed as the left adjoint of the canonical geometric inverse image.
 The equations on ordinary evaluations and Hom transposes fix the system functor and all
-its transition maps. The proper derived functor uses the universal K-injective interface.
-Source: Zheng, Constructions 5.14--5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+its transition maps. The proper derived functor uses the universal K-injective interface. -/
 structure StrictEtaleCompactSupportData where
   PX : StrictEtaleEvaluation X O ell
   PY : StrictEtaleEvaluation Y O ell
@@ -222,9 +185,7 @@ structure StrictEtaleCompactSupportData where
 attribute [instance] StrictEtaleCompactSupportData.openAdditive
   StrictEtaleCompactSupportData.levelOpenAdditive
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 def StrictEtaleCompactSupportCoherence
     (record : StrictEtaleCompactSupportData O ell c) : Prop :=
     -- openExact
@@ -262,9 +223,7 @@ def StrictEtaleCompactSupportCoherence
         DerivedCategory.Q.map
           ((NatIso.mapHomologicalComplex (record.openEvaluation n) (.up ℤ)).hom.app K))
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 def StrictEtaleCompactSupport :=
   { record : StrictEtaleCompactSupportData O ell c //
     StrictEtaleCompactSupportCoherence O ell c record }
@@ -272,77 +231,53 @@ def StrictEtaleCompactSupport :=
 section
 variable {O ell c}
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.PX (record : StrictEtaleCompactSupport O ell c) :=
   record.val.PX
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.PY (record : StrictEtaleCompactSupport O ell c) :=
   record.val.PY
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.PZ (record : StrictEtaleCompactSupport O ell c) :=
   record.val.PZ
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.openImage (record : StrictEtaleCompactSupport O ell c) :=
   record.val.openImage
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.properImage (record : StrictEtaleCompactSupport O ell c) :=
   record.val.properImage
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.properDerived (record : StrictEtaleCompactSupport O ell c) :=
   record.val.properDerived
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.derivedOpen (record : StrictEtaleCompactSupport O ell c) :=
   record.val.derivedOpen
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.openDerived (record : StrictEtaleCompactSupport O ell c) :=
   record.val.openDerived
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.derivedOpenAdjunction
     (record : StrictEtaleCompactSupport O ell c) :=
   record.val.derivedOpenAdjunction
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.levelDerivedOpen (record : StrictEtaleCompactSupport O ell c) :=
   record.val.levelDerivedOpen
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.levelDerivedOpenAdjunction
     (record : StrictEtaleCompactSupport O ell c) :=
   record.val.levelDerivedOpenAdjunction
 
-/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`.
-Source: Zheng, Construction 4.1, Construction 5.15, Lemma 5.22 and Proposition 2.29(2)
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The specified data and canonical coherence of `StrictEtaleCompactSupport`. -/
 abbrev StrictEtaleCompactSupport.openDerivedEvaluation
     (record : StrictEtaleCompactSupport O ell c) :=
   record.val.openDerivedEvaluation
@@ -350,20 +285,14 @@ abbrev StrictEtaleCompactSupport.openDerivedEvaluation
 end
 
 variable {O ell c}
-/-- `Rp_* j_!`, as a composite of the specified actual derived functors.
-Source: Zheng, Construction 5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- `Rp_* j_!`, as a composite of the specified actual derived functors. -/
 def StrictEtaleCompactSupport.functor (S : StrictEtaleCompactSupport O ell c) :=
   S.derivedOpen ⋙ S.properDerived.system.direct
-/-- The ordinary finite-level compact-support functor in the constant-ring encoding.
-Source: Zheng, Construction 5.15
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+/-- The ordinary finite-level compact-support functor in the constant-ring encoding. -/
 def StrictEtaleCompactSupport.levelFunctor (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :=
   S.levelDerivedOpen n ⋙ (S.properDerived.level n).direct
 /-- The canonical evaluated compact-support comparison, constructed from the open and
-proper comparisons, rather than selected as an unspecified isomorphism.
-Source: Zheng, Lemma 5.16
-(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+proper comparisons, rather than selected as an unspecified isomorphism. -/
 def StrictEtaleCompactSupport.evaluation (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :
     S.functor ⋙ S.PY.evaluation n ≅ S.PX.evaluation n ⋙ S.levelFunctor n :=
   Functor.associator _ _ _ ≪≫

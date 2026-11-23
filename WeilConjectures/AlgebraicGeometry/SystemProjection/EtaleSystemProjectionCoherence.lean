@@ -11,7 +11,11 @@ import WeilConjectures.CategoryTheory.Integral.IntegralResidueMatePasting
 
 /-! # Composition and unit of the system coefficient mate
 
-Source: Zheng, Constructions 4.1 and 5.14--5.15, Lemma 5.16; Stacks Tag 0GL6.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0GL6
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Constructions 4.1 and 5.14--5.15, Lemma 5.16
 -/
 
 @[expose] public noncomputable section

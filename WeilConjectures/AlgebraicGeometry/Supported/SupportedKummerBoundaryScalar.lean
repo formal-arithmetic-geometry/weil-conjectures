@@ -74,8 +74,9 @@ import WeilConjectures.AlgebraicGeometry.Supported.SupportedKummerScalarOfSource
 /-!
 # Derived scalar extension of the supported Kummer boundary
 
-Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45
-(blueprint: lem-asd-supported-kummer-boundary-scalar).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03PL, 0A45, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -90,21 +91,7 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 /-- The normalized supported boundary over A is the derived scalar extension of
-its normalized Z/N boundary, with the sectionwise coefficient maps.
-Source: Stacks 07A4, 03PL; blueprint lemma-cycle-class-cartier-divisor, final paragraph
-(blueprint: lem-asd-supported-kummer-boundary-scalar).
-
-Proof: the supported constant over Z/N has geometric stalk Z/N on D and zero off
-D, so its degree-zero complex is K-flat. Its derived extension to A is i_* A_D,
-with coefficient unit r mapped to its image in A. The etale roots line is locally
-free of rank one over Z/N. Thus its derived extension is the ordinary root tensor
-line over A, and the unit sends a pure tensor r tensor z to its coefficient image
-tensor z. These give both unbounded scalar-unit universal properties, without
-assuming A flat over Z/N. Applying the derived scalar-extension functor to the
-relative torsor Kummer boundary produces the relative boundary over A: the torsor
-extension and abelian Kummer boundary are unchanged and the root map is extended
-on pure tensors. The relative boundary uniquely determines its Ext representative.
-The resulting functoriality square is exactly SupportedKummerScalar. -/
+its normalized Z/N boundary, with the sectionwise coefficient maps. -/
 theorem supported_kummer_boundary_scalar (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)
     [NeZero N]
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)

@@ -187,14 +187,15 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Completeness of limits of power-torsion pro-etale sheaves
 
-Source: Stacks Project, Tags 099P and 099Q (1), (4), (5)
-(blueprint: lem-weil-pbc-torsion-limit-sheaf-completeness).
-
 We use the existing coefficient-sized small model of the unchanged small pro-etale site.
 It is equivalent via AsSmall.down to X.ProEt; its topology is the induced topology.
 Thus this changes sizes only, not objects, covers, slices, or coefficient sheaves up to
 canonical equivalence. Local completeness is the existing slice internal-Hom definition.
 The extended ideal is constructed as the kernel of the constant quotient map.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 099P, 099Q
 -/
 
 -- After pruning, this module only keeps private declarations.

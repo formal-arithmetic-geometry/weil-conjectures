@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassChern
 
 /-! # The scalar counit on degree-zero module systems
-
-Source: blueprint classes proof (2), derived-to-ordinary scalar extension.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +23,7 @@ variable {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The universal scalar counit restricted to singles. Its component at the root
-module is exactly `lineComparison`.
-Source: classes (2), scalar realization (blueprint: def-sp-tower-scalar-single-counit). -/
+module is exactly `lineComparison`. -/
 def scalarSingleCounit {T : Scheme.{u}} (c : Chern l E T) :
     DerivedCategory.singleFunctor (Systems T (Rrings l T)) 0 ⋙ c.scalar.T ⟶
       c.scalar.model.E ⋙ DerivedCategory.singleFunctor (Systems T (Arings l E T)) 0 :=

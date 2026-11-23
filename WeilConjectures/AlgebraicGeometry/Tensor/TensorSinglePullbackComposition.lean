@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSinglePullbackCompos
 import WeilConjectures.AlgebraicGeometry.TensorCoefficientPullbackComposition
 
 /-! # Composition of tensor coefficient single-pullback comparisons
-Source: Stacks Project, Tag 0D5S.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D5S, 0096
 -/
 
 @[expose] public section
@@ -68,10 +71,7 @@ private theorem paste_maps {D : Type*} [Category D]
 variable [∀ Y : Scheme.{v},
   HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
 
-/-- The single-complex coefficient morphism of a commuting triangle.
-It uses the fixed ordinary-to-tensor identification, without inverting the
-single-pullback map. Source: Stacks Project, Tags 0096 and 0D5S.
-(blueprint: def-sc-tensor-single-coefficient-map) -/
+/-- The single-complex coefficient morphism of a commuting triangle. -/
 @[irreducible]
 def tensorSingleCoefficientMap {A B X : Scheme.{v}}
     (q : A ⟶ X) (q1 : B ⟶ X) (a : B ⟶ A) (h : a ≫ q = q1)
@@ -87,9 +87,7 @@ def tensorSingleCoefficientMap {A B X : Scheme.{v}}
       (SheafOfModules.{v} (moduleRings B.toRingedSpace)) 0).map
         (Scheme.Modules.tensorCoefficientComparison q q1 a h L).hom
 
-/-- Defining equation of the single-complex coefficient morphism.
-Source: Stacks Project, Tags 0096 and 0D5S.
-(blueprint: def-sc-tensor-single-coefficient-map) -/
+/-- Defining equation of the single-complex coefficient morphism. -/
 theorem tensorSingleCoefficientMap_eq {A B X : Scheme.{v}}
     (q : A ⟶ X) (q1 : B ⟶ X) (a : B ⟶ A) (h : a ≫ q = q1)
     (L : X.Modules) :
@@ -193,25 +191,7 @@ private theorem derived_glue {A B C : Scheme.{v}} (a : B ⟶ A) (b : C ⟶ B)
           (SheafOfModules.{v} (moduleRings A.toRingedSpace)) 0).obj M))
     (Scheme.Modules.canonicalSinglePullbackMap (b ≫ a) M) hn hd' hc
 
-/-- Coefficient comparisons compose, before any direct image or base-change mate.
-Source: Stacks Project, Tag 0D5S; step 3 of
-lem-sc-picard-coefficient-transpose-pasting.
-(blueprint: lem-sc-tensor-single-pullback-composition)
-
-Proof: Apply canonicalSinglePullbackComposition to b,a and the module
-q tensor-pullback L. Naturality of the single-pullback comparison moves the
-single embedding of d1 through the b comparison. The remaining underived
-identity says pullbackComp(b,a), transport along hab, and d3 equal the
-pullback of d1 followed by d2. Transpose that identity under the composed
-ordinary pullback adjunctions and the selected tensor adjunctions. The
-leftAdjointUniq counit identities cancel the ordinary-to-tensor comparisons.
-The definition of each c as the conjugate of pushforwardComp then reduces
-the equality to associativity of pushforward composition, with transports
-along h1,h2,h3. These transports agree by hab and proof irrelevance.
-Injectivity of the adjunction equivalences proves the underived identity;
-map it by the single functor and substitute in the derived composition
-formula. No single comparison is inverted. Thus zero modules, identity
-morphisms and empty schemes require no special hypotheses. -/
+/-- Coefficient comparisons compose, before any direct image or base-change mate. -/
 theorem tensorSinglePullback_composition
     {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X)
     (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A)
@@ -252,11 +232,7 @@ theorem tensorSinglePullback_composition
       (Scheme.Modules.tensorCoefficientComparison q1 q2 b h2 L).hom
       (Scheme.Modules.tensorCoefficientComparison q q2 (b ≫ a) h3 L).hom hd'
 
-/-- Composition API for the fixed single-complex coefficient morphisms.
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-sc-tensor-single-pullback-composition)
-Proof: unfold only the coefficient-morphism wrapper and apply the recorded
-coefficient composition theorem. The generic schemes stay as parameters. -/
+/-- Composition of the fixed single-complex coefficient morphisms. -/
 theorem tensorSingleCoefficientMap_composition
     {A B C X : Scheme.{v}} (q : A ⟶ X) (q1 : B ⟶ X) (q2 : C ⟶ X)
     (a : B ⟶ A) (b : C ⟶ B) (a' : C ⟶ A)
