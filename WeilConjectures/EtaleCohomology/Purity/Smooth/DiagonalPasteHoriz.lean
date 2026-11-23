@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExceptionalBaseChangePas
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeIso
 
 /-!
-# Horizontal pasting of the exceptional base change and the law `H3`
+# Horizontal pasting of the exceptional base change
 
 The horizontal pasting law of the compactly supported base change `Ex_!`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_horiz`) gives, by the mate
@@ -18,12 +18,9 @@ calculus (`CategoryTheory.Adjunction.exceptionalBaseChange_paste_horiz'`), the h
 law of the exceptional base change `Ex^! : Lg'^* Rf^! ⟶ Rf'^! Lg^*`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap_paste_horiz`).
 
-Applied to the two decompositions of the rectangle `p₁' / f` of an isomorphism of squares, it
-identifies the comparison `Le^* ω_{p₁} ≅ ω_{p₁'}` of
-`AlgebraicGeometry.Etale.IsoSquare.dualizingComplexFstIso` with the exceptional base change of
-`p₁` at the unit: this is the law `H3` of
-`AlgebraicGeometry.Etale.IsoSquare.compEqId_baseChange`
-(`AlgebraicGeometry.Etale.IsoSquare.dualizingComplexFstIso_hom_eq`).
+Applied to the two decompositions of the rectangle `p₁' / f`, it identifies the comparison of the
+dualizing complexes of the first projections with the exceptional base change of `p₁` at the unit
+(`AlgebraicGeometry.Etale.dualizingComplexPullbackFstBaseChangeIso_hom_eq`).
 -/
 
 @[expose] public section
@@ -114,10 +111,10 @@ end PasteHoriz
 namespace IsoSquare
 
 variable {X Y X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-  (sq : IsPullback g' f' f g) [IsIso g'] [IsIso g]
+  (sq : IsPullback g' f' f g)
 
 variable (Λ) in
-omit [Finite Λ] [IsIso g'] [IsIso g] in
+omit [Finite Λ] in
 /-- The two factorizations of `L(f' ≫ g)^* Λ_Y ≅ Λ_{X'}` through `g' ≫ f = f' ≫ g`. -/
 lemma unit_coherence :
     (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g' f (f' ≫ g) sq.w.symm).inv.app
@@ -133,87 +130,6 @@ lemma unit_coherence :
   have e₂ := congrArg Iso.hom (leftDerivedUpperStarConstantComplexIso_comp Λ f' g (f' ≫ g) rfl)
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom] at e₁ e₂
   rw [← e₂, e₁, Iso.inv_hom_id_app_assoc]
-
-variable (Λ) (d : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension d f']
-  [HasCompactification f] [HasCompactification f'] [HasInvertibleExponent Λ X]
-  [HasInvertibleExponent Λ X'] [QuasiSeparatedSpace Y] [QuasiSeparatedSpace Y'] [QuasiCompact f]
-  [QuasiCompact f']
-
--- the ascriptions compare `constantComplex` with the tensor unit (deep, fast)
-set_option maxRecDepth 20000 in
-/-- **The law `H3`** of `AlgebraicGeometry.Etale.IsoSquare.compEqId_baseChange`: the comparison
-`Le^* ω_{p₁} ≅ ω_{p₁'}` of `AlgebraicGeometry.Etale.IsoSquare.dualizingComplexFstIso` induced by
-the exceptional base change `Lg'^* ω_f ≅ ω_{f'}` is the exceptional base change of `p₁` at the
-unit. Both are the exceptional base change of the rectangle `p₁' / f`, by horizontal pasting. -/
-theorem dualizingComplexFstIso_hom_eq :
-    (dualizingComplexFstIso sq Λ d (IsoSquare.dualizingComplexIso Λ sq)).hom =
-      (rightDerivedUpperShriekBaseChangeMap Λ (isPullback_fst sq)).app (constantComplex Λ X) ≫
-        (R(pullback.fst f' f')^![Λ]).map (leftDerivedUpperStarConstantComplexIso Λ g').hom := by
-  have S₀ : IsPullback (pullback.snd f f) (pullback.fst f f) f f :=
-    (IsPullback.of_hasPullback f f).flip
-  have S₀' : IsPullback (pullback.snd f' f') (pullback.fst f' f') f' f' :=
-    (IsPullback.of_hasPullback f' f').flip
-  have R : IsPullback (map sq ≫ pullback.snd f f) (pullback.fst f' f') f (f' ≫ g) := by
-    rw [(commSq_snd sq).w]; exact S₀'.paste_horiz sq
-  have h1 := rightDerivedUpperShriekBaseChangeMap_paste_horiz (Λ := Λ) S₀ (isPullback_fst sq) R
-    sq.w.symm rfl (constantComplex Λ Y)
-  have h2 := rightDerivedUpperShriekBaseChangeMap_paste_horiz (Λ := Λ) sq S₀' R rfl
-    (commSq_snd sq).w (constantComplex Λ Y)
-  -- the pasting law `h1 = h2`, solved for the second decomposition
-  have hE : (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) (pullback.snd f' f') g'
-          (map sq ≫ pullback.snd f f) (commSq_snd sq).w).hom.app (dualizingComplex Λ f) ≫
-        (L((pullback.snd f' f')^*[ModuleCat.{u + 1} Λ])).map
-          ((rightDerivedUpperShriekBaseChangeMap Λ sq).app (constantComplex Λ Y)) ≫
-        (rightDerivedUpperShriekBaseChangeMap Λ S₀').app
-          ((L((g)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ Y)) =
-      (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) (map sq) (pullback.snd f f)
-          (map sq ≫ pullback.snd f f) rfl).hom.app (dualizingComplex Λ f) ≫
-        (L((map sq)^*[ModuleCat.{u + 1} Λ])).map
-          ((rightDerivedUpperShriekBaseChangeMap Λ S₀).app (constantComplex Λ Y)) ≫
-        (rightDerivedUpperShriekBaseChangeMap Λ (isPullback_fst sq)).app
-          ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ Y)) ≫
-        (R(pullback.fst f' f')^![Λ]).map
-          ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g' f (f' ≫ g) sq.w.symm).inv.app
-              (constantComplex Λ Y) ≫
-            (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f' g (f' ≫ g) rfl).hom.app
-              (constantComplex Λ Y)) := by
-    have h := congrArg (fun t ↦ t ≫ (R(pullback.fst f' f')^![Λ]).map
-      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f' g (f' ≫ g) rfl).hom.app
-        (constantComplex Λ Y))) (h1.symm.trans h2)
-    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
-      CategoryTheory.Functor.map_id, Category.comp_id, Functor.comp_obj] at h
-    exact h.symm
-  -- naturality of the exceptional base changes along the unit identifications
-  have hN := (rightDerivedUpperShriekBaseChangeMap Λ S₀').naturality
-    (leftDerivedUpperStarConstantComplexIso Λ g).hom
-  have hN2 := (rightDerivedUpperShriekBaseChangeMap Λ (isPullback_fst sq)).naturality
-    (leftDerivedUpperStarConstantComplexIso Λ f).hom
-  simp only [Functor.comp_map] at hN hN2
-  -- the unit coherence, under `Rp₁'^!`
-  have hU : (R(pullback.fst f' f')^![Λ]).map
-        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g' f (f' ≫ g) sq.w.symm).inv.app
-            (constantComplex Λ Y) ≫
-          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) f' g (f' ≫ g) rfl).hom.app
-            (constantComplex Λ Y)) ≫
-        (R(pullback.fst f' f')^![Λ]).map ((L((f')^*[ModuleCat.{u + 1} Λ])).map
-          (leftDerivedUpperStarConstantComplexIso Λ g).hom) ≫
-        (R(pullback.fst f' f')^![Λ]).map (leftDerivedUpperStarConstantComplexIso Λ f').hom =
-      (R(pullback.fst f' f')^![Λ]).map ((L((g')^*[ModuleCat.{u + 1} Λ])).map
-          (leftDerivedUpperStarConstantComplexIso Λ f).hom) ≫
-        (R(pullback.fst f' f')^![Λ]).map (leftDerivedUpperStarConstantComplexIso Λ g').hom := by
-    simp only [← Functor.map_comp, Category.assoc, unit_coherence Λ sq]
-  -- unfold the comparison
-  have hI := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d S₀
-  have hI' : IsIso (dualizingComplexBaseChangeMap Λ S₀) :=
-    (isIso_dualizingComplexBaseChangeMap_iff Λ S₀).2 inferInstance
-  simp only [dualizingComplexFstIso, dualizingComplexPullbackFstIso, IsoSquare.dualizingComplexIso,
-    upperShriekBaseChangeMap_eq, derivedSquareUpperStarIso, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.symm_inv, Iso.app_hom, asIso_hom, asIso_inv, Functor.mapIso_hom,
-    NatTrans.comp_app, Category.assoc]
-  rw [Functor.map_inv, IsIso.inv_comp_eq, dualizingComplexBaseChangeMap_eq,
-    dualizingComplexBaseChangeMap_eq, ← leftDerivedUpperStarConstantComplexIso_hom]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% hN, reassoc_of% hE, Iso.inv_hom_id_app_assoc, hU, ← reassoc_of% hN2]
 
 end IsoSquare
 

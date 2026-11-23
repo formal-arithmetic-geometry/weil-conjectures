@@ -18,10 +18,30 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 /-!
 # Noetherian finite-Tor comparison
 
+For a quasi-compact quasi-separated scheme `X` and a Noetherian coefficient ring `A`, the
+comparison functor from the étale to the pro-étale derived category preserves and reflects
+each Tor-amplitude interval of bounded constructible complexes, and hence restricts to an
+equivalence between the bounded constructible complexes of finite Tor amplitude.
+
+## Main results
+
+* `AlgebraicGeometry.ProEtale.finiteTorComparisonNoetherian`: the comparison preserves and
+  reflects Tor amplitude and restricts to the finite-Tor equivalence.
+
+## Implementation details
+
 We use the same coefficient-sized small site models, constant ring sheaves and standard
 localizations as `constructibleComparison`. The Tor predicates test all module sheaves in
 degree zero using K-flat representatives. The equivalence retains all ambient derived
 morphisms and is identified with the specified comparison inverse image.
+
+Preservation of a Tor interval uses a bounded flat model supported in that interval
+(`coefficientModelTorAmplitude_iff_flatModel`) and the fact that the comparison pullback
+preserves flat sheaves (`constructibleComparisonPullback_flat`). Reflection pulls back a
+flat K-flat representative, which stays K-flat, and uses
+`constructibleComparisonTensorTest_reflects_zero` to reflect vanishing of the tensor test.
+The equivalence is then restricted along the bounded constructible equivalence of
+`constructibleComparison`.
 
 ## References
 
