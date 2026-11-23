@@ -252,7 +252,7 @@ theorem isZero_homology_rightDerivedLowerStar_of_etaleOrigin
 
 include hp hd in
 /-- For `p : X ⟶ Y` proper between finite-type `k`-schemes, `k` separably closed and `dim X ≤ d`,
-the class-restricted bound `FullCD_cls(p, Λ; 2d)` holds. As above, the hypothesis
+the class-restricted bound `FullCD_cls(p, Λ; 2d)` holds. The hypothesis
 `[HasInvertibleExponent Λ X]` is not used. -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin :
     HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) p (2 * d) :=

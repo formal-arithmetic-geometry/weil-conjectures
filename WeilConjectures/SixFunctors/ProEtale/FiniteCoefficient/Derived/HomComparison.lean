@@ -359,11 +359,16 @@ a finite ring whose exponent is invertible on `X`, and let `ν : X_proét ⟶ X_
 comparison.
 
 1. For `K ∈ Dctf(X_ét, Λ)` and `M ∈ Dᵇc(X_ét, Λ)`, `ν^* RHom(K, M) ≅ RHom(ν^* K, ν^* M)`.
-2. Moreover `ν^* ω_X ≅ ω_{X, proét}` for the dualizing complexes `Ra_X^! Λ` of the two sites.
-3. These comparisons identify the Verdier duals and the double-dual maps: for
-   `K ∈ Dctf(X_ét, Λ)`, `ν^* 𝔻_X K ≅ 𝔻_{X, proét} (ν^* K)`, and `ν^* K ≅ 𝔻 𝔻 (ν^* K)` on the
-   pro-étale site. In particular finite-stage Verdier duality on the pro-étale constructible
-   category is transported from étale Verdier duality. -/
+
+Whenever `a_X` has a compactification (`HasCompactification aX`), so that the dualizing
+complexes `Ra_X^! Λ` of the two sites are defined:
+
+2. `ν^* ω_X ≅ ω_{X, proét}`.
+3. For `K ∈ Dctf(X_ét, Λ)`, `ν^* 𝔻_X K ≅ 𝔻_{X, proét} (ν^* K)` and `ν^* K ≅ 𝔻 𝔻 (ν^* K)` on the
+   pro-étale site.
+
+Only the existence of these isomorphisms is stated, not that they are the canonical
+comparison maps. -/
 theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [Field k]
     {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]

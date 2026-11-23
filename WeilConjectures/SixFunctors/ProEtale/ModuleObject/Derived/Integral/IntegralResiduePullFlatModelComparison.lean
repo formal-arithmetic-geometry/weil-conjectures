@@ -30,8 +30,8 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   Functor.mapDerivedCategory
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The comparison equality in the flat-model theorem.
--/
+/-- The comparison equality in the flat-model theorem: the second conjunct of
+`residueExchangePull_flatModel`. -/
 theorem residueExchangePull_flatModel_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex

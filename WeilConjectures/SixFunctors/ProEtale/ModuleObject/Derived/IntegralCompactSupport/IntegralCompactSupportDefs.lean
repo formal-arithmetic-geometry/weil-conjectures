@@ -267,7 +267,8 @@ abbrev Compositions :=
 
 /-- Canonicity, identity, cocycle, composition and base-change compatibility for the
 specified module-object compact-support functors, with the base-change map the specified mate.
-These are natural transformations on the ambient derived categories, restricted to Dbc. -/
+The maps `φ` and `μ` are natural transformations on the full localizing subcategories `Loc`,
+and they restrict to Dbc. -/
 structure Coherence (h : Preservation Λ k) (φ : Comparisons Λ k)
     (μ : Compositions Λ k) : Prop where
   identity : ∀ {X Y : Spaces k} (f : X ⟶ Y) (c : Compactifications k f),

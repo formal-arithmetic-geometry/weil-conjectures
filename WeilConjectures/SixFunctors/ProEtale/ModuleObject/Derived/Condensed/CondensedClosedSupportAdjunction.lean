@@ -720,9 +720,9 @@ private theorem supportOpenUnitComparison {U X : Scheme.{u}} (j : U ⟶ X)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Explicit fibre comparison on K-injective representatives: the canonical map
-`i*H(J) → cone(g)[-1]` is a quasi-isomorphism, where the fibre is the actual shifted mapping cone
-of the canonical unit. -/
+/-- Explicit fibre comparison on K-injective representatives: if `K ≅ Q(I)` with `I`
+K-injective, then `RΓ_Z(K) ≅ i^*(cone(I → j_*j^*I)[-1])`, where the fibre is the actual shifted
+mapping cone of the canonical unit. -/
 theorem closedSupport_fiber {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)

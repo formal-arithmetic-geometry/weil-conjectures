@@ -165,7 +165,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 /-- A sheaf `F` of `Λ`-modules on the
 small pro-étale site of `X` is *locally constant with finitely generated stalks* if there is a
 pro-étale covering family `g i : W i ⟶ X` such that every pullback `(g i)^* F` is the constant
-sheaf of a finitely generated `Λ`-module -/
+sheaf of a finitely generated `Λ`-module. -/
 def IsFiniteLocallyConstant {X : Scheme.{u}}
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) : Prop :=
   ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ X),
