@@ -21,7 +21,7 @@ Let `ℓ` be a prime invertible on a scheme `X`. The twist
 `𝒪_{E,X}(1) = lim_n (𝒪_E/ℓ^{n+1})_X ⊗ μ_{ℓ^{n+1}}` (`AlgebraicGeometry.ProEtale.spQbarTwist`), is
 isomorphic to `ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1)` with `ℤ_{ℓ,X}(1) = lim_n μ_{ℓ^n}`
 (`AlgebraicGeometry.ProEtale.tateTwistOne`); this is
-`AlgebraicGeometry.ProEtale.nonempty_spQbarTwist_iso_tateTwistOne`.
+`AlgebraicGeometry.ProEtale.spQbarTwistIsoTateTwistOne`.
 
 ## Implementation details
 
@@ -295,9 +295,21 @@ noncomputable def tateTwistOneIsoExtendScalarsSpRationalTwist :
 /-- **Scalar description of the algebraic Tate twist.** If `ℓ` is invertible on `X`, the
 twist `ℚ̄_{ℓ,X}(1) = colim_E E_X(1)`, `E_X(1) = (lim_n (𝒪_E/ℓ^n)_X(1))[1/ℓ]`, is isomorphic to
 `ℚ̄_{ℓ,X} ⊗_{ℤ_{ℓ,X}} ℤ_{ℓ,X}(1)` with `ℤ_{ℓ,X}(1) = lim_n μ_{ℓ^n,X}`. -/
-theorem nonempty_spQbarTwist_iso_tateTwistOne (hX : IsUnit (ℓ : Γ(X, ⊤))) :
-    Nonempty (spQbarTwist X ℓ ≅ tateTwistOne X ℓ) := by
-  obtain ⟨q, -⟩ := DiagonalCoefficients.diagonalClosure_ordinaryLine ℓ 𝔼 X hX
-  exact ⟨q.symm ≪≫ (tateTwistOneIsoExtendScalarsSpRationalTwist X ℓ).symm⟩
+noncomputable def spQbarTwistIsoTateTwistOne (hX : IsUnit (ℓ : Γ(X, ⊤))) :
+    spQbarTwist X ℓ ≅ tateTwistOne X ℓ :=
+  (DiagonalCoefficients.diagonalClosure_ordinaryLine ℓ 𝔼 X hX).choose.symm ≪≫
+    (tateTwistOneIsoExtendScalarsSpRationalTwist X ℓ).symm
+
+/-- The isomorphism `spQbarTwistIsoTateTwistOne` is characterised by: after
+`tateTwistOneIsoExtendScalarsSpRationalTwist`, the unit of extension of scalars followed by its
+inverse is the colimit leg `DiagonalCoefficients.closureLineMap : ℚ_{ℓ,X}(1) ⟶ ℚ̄_{ℓ,X}(1)`. -/
+lemma extendUnitHom_comp_spQbarTwistIsoTateTwistOne_inv (hX : IsUnit (ℓ : Γ(X, ⊤))) :
+    Mod.extendUnitHom (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ 𝔼) X)
+        (spRationalTwist X ℓ 𝔼) ≫
+      ((tateTwistOneIsoExtendScalarsSpRationalTwist X ℓ).inv ≫
+        (spQbarTwistIsoTateTwistOne X ℓ hX).inv).hom =
+        DiagonalCoefficients.closureLineMap ℓ 𝔼 X := by
+  simpa [spQbarTwistIsoTateTwistOne] using
+    (DiagonalCoefficients.diagonalClosure_ordinaryLine ℓ 𝔼 X hX).choose_spec
 
 end AlgebraicGeometry.ProEtale
