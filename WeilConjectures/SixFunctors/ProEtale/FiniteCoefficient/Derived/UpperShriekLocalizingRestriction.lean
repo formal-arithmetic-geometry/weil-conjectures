@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureRepresentable
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AmbientAdjointClass
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizingConstructible
 
 /-!
 # The exceptional adjunction on `Dctf` is the restriction of the one on `Loc(Dctf)`
@@ -101,18 +102,6 @@ noncomputable def rightDerivedUpperShriekLocalizingObjIso
   have := ObjectProperty.isIso_homEquiv_of_bijective_localizingClosure adj ε hε
   exact ((ObjectProperty.ι _).mapIso (asIso (adj.homEquiv T L ε))).symm
 
-/-- The exceptional inverse image
-`f^! : Loc(Dctf(Y, Λ)) ⥤ Loc(Dctf(X, Λ))` carries objects of `Dctf(Y, Λ)` to objects of
-`Dctf(X, Λ)`. -/
-theorem constructibleFiniteTor_rightDerivedUpperShriekLocalizing_obj
-    (L : DerivedCategoryLocalizingFiniteTor Λ Y)
-    (hL : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y L.obj) :
-    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
-      ((rightDerivedUpperShriekLocalizing Λ hk aX aY c).obj L).obj :=
-  (DerivedCategory.constructibleFiniteTor _ X).prop_of_iso
-    (rightDerivedUpperShriekLocalizingObjIso Λ hk aX aY c L hL).symm
-    (constructibleFiniteTor_rightDerivedUpperShriek Λ aY f hL)
-
 namespace DerivedCategoryFiniteTor
 
 variable (X) in
@@ -159,6 +148,7 @@ noncomputable def rightDerivedLowerShriekLocalizingAdjunction :
     (ObjectProperty.fullyFaithfulιOfLE _) (ObjectProperty.fullyFaithfulιOfLE _)
     (Iso.refl _) (Iso.refl _)
 
+omit [HasCompactification f] [QuasiCompact f] in
 /-- The unit of the adjunction on `Dctf` is the unit of the ambient adjunction on `Loc(Dctf)`. -/
 theorem map_rightDerivedLowerShriekLocalizingAdjunction_unit_app
     (K : (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).FullSubcategory) :
@@ -169,6 +159,7 @@ theorem map_rightDerivedLowerShriekLocalizingAdjunction_unit_app
   rw [rightDerivedLowerShriekLocalizingAdjunction, Adjunction.map_restrictFullyFaithful_unit_app]
   simp
 
+omit [HasCompactification f] [QuasiCompact f] in
 /-- The counit of the adjunction on `Dctf` is the counit of the ambient adjunction on
 `Loc(Dctf)`. -/
 theorem map_rightDerivedLowerShriekLocalizingAdjunction_counit_app

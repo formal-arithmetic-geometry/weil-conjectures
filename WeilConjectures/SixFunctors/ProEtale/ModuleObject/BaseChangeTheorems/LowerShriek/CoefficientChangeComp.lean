@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeRefinement
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeComposition
 
 /-!
 # Coefficient changes and the composition isomorphisms of the lower shriek
@@ -55,26 +55,6 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {ℓ : ℕ} [F
 namespace BoundedConstructiblePushforwardData
 
 variable (P : BoundedConstructiblePushforwardData Λ ℓ k)
-
-section Exchange
-
-variable {X Z X' Z' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
-  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
-  {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
-  [IsOpenImmersion j.left] [IsOpenImmersion i'.left]
-
-/-- The exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of a cartesian square with open immersions
-`j` and `i'`: the exchange morphism, under the adjunctions `Lp^* ⊣ Rp_*` and `Lp'^* ⊣ Rp'_*`, of
-the base change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the extension by zero. -/
-noncomputable def lowerStarOpenImmersionLowerShriekExchange (sq : IsPullback p i' j p') :
-    P.lowerStar p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
-      boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙ P.lowerStar p' :=
-  Adjunction.exchangeRight (P.adj p) (P.adj p')
-    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq)
-
-end Exchange
 
 /-- The exchange morphisms `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` of cartesian squares with `p'` proper are
 isomorphisms. -/
@@ -144,27 +124,6 @@ variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ'] 
     (f : X ⟶ Y),
     boundedConstructibleUpperStar Λ ℓ f ⋙ T X ≅ T Y ⋙ boundedConstructibleUpperStar Λ' ℓ f}
   (C : BoundedConstructibleCoefficientChange Λ Λ' ℓ P P' T pull)
-
-section OpenImmersion
-
-variable {X Y V : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom]
-  [IsSeparated V.hom] (j : X ⟶ Y) (j' : Y ⟶ V) [IsOpenImmersion j.left]
-  [IsOpenImmersion j'.left] [IsOpenImmersion (j ≫ j').left]
-
-/-- The composition isomorphisms `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero are
-compatible with the coefficient comparisons (Shriek). -/
-lemma squareCompatible_openImmersionLowerShriekComp :
-    NatTrans.SquareCompatible (C.shriek (j ≫ j'))
-      (Functor.pasteSquareIso (C.shriek j) (C.shriek j'))
-      (boundedConstructibleOpenImmersionLowerShriekComp Λ ℓ j j').hom
-      (boundedConstructibleOpenImmersionLowerShriekComp Λ' ℓ j j').hom :=
-  NatTrans.SquareCompatible.conjugateEquiv_symm
-    ((C.isMateSquare_shriek_pull j).comp (C.isMateSquare_shriek_pull j'))
-    (C.isMateSquare_shriek_pull (j ≫ j')) (C.pull_comp j j').inv
-
-end OpenImmersion
 
 section Exchange
 
