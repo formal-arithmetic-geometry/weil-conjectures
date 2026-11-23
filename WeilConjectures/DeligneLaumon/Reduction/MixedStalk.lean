@@ -24,7 +24,7 @@ filtration gives the bound.
 - `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.hasWeightsAtMost`: a sheaf mixed of weights
   at most `w` has weights at most `w`.
 - `AlgebraicGeometry.WeilSheaf.IsMixed.isMixedOfWeightsAtMost_iff_hasWeightsAtMost`: for a mixed
-  sheaf, the two upper bounds agree (blueprint `lemma-bounding-weights-mixed-sheaf`).
+  sheaf, the two upper bounds agree.
 -/
 
 @[expose] public section
@@ -100,8 +100,7 @@ theorem IsMixedOfWeightsAtMost.hasWeightsAtMost {ι : PadicAlgCl l →+* ℂ} {F
 /-- **Bounding the weights of a mixed sheaf.** On a separated `k₀`-scheme of finite type, a mixed
 Weil sheaf has weights at most `w` (it admits a mixed filtration with quotients of weights at
 most `w`) if and only if it is punctually of weights `≤ w`: every eigenvalue `α` of the local
-Frobenius at every closed point `x` satisfies `|ι α| ≤ q_x ^ (w / 2)`.
-(blueprint: `lemma-bounding-weights-mixed-sheaf`) -/
+Frobenius at every closed point `x` satisfies `|ι α| ≤ q_x ^ (w / 2)`. -/
 theorem IsMixed.isMixedOfWeightsAtMost_iff_hasWeightsAtMost
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X} (hF : F.IsMixed ι) {w : ℝ} :

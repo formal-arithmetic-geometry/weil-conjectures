@@ -17,19 +17,21 @@ Let `X` be a nonempty connected normal scheme of finite type over a field and le
 separated and étale. If `p` satisfies the existence part of the valuative criterion, then every
 connected component of `Y` is finite étale and surjective over `X`.
 
+## Main statements
+
+- `AlgebraicGeometry.isFinite_and_surjective_of_valuativeCriterion_existence`: the case of a
+  connected `Y`.
+- `AlgebraicGeometry.exists_connectedComponent_isFinite_etale_surjective`: every connected
+  component of `Y` is an open subscheme which is finite, étale and surjective over `X`.
+
+## Implementation details
+
 A connected component `Y₁` of `Y` is open (`Y` is locally noetherian), and it embeds over `X` as
 an open subscheme of a finite normalization `N` of `X`
 (`AlgebraicGeometry.det_wrp_cover_open_immersion`). As `N` is noetherian, `Y₁ ⟶ X` is
 quasi-compact, so the valuative criterion makes it proper; being also quasi-finite it is finite
 (Zariski's main theorem, `AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite`). Its
 image is then open and closed, hence all of `X`.
-
-## Main statements
-
-- `AlgebraicGeometry.isFinite_and_surjective_of_valuativeCriterion_existence`: the case of a
-  connected `Y`.
-- `AlgebraicGeometry.exists_connectedComponent_isFinite_etale_surjective`: blueprint
-  `lemma-geometric-coverings-normal-scheme`.
 -/
 
 @[expose] public section
@@ -77,9 +79,7 @@ Spec K ⟶ Y
 Spec V ⟶ X
 ```
 with `V` a valuation ring with fraction field `K` has a lift `Spec V ⟶ Y`. Then every connected
-component of `Y` is (an open subscheme) finite étale and surjective over `X`.
-(blueprint: `lemma-geometric-coverings-normal-scheme`,
-`lemma-geometric-coverings-normal-scheme--1`) -/
+component of `Y` is (an open subscheme) finite étale and surjective over `X`. -/
 theorem exists_connectedComponent_isFinite_etale_surjective {Y : Scheme.{u}} (p : Y ⟶ X)
     [IsSeparated p] [Etale p] (hp : ValuativeCriterion.Existence p) (y : Y) :
     ∃ U : Y.Opens, (U : Set Y) = connectedComponent y ∧

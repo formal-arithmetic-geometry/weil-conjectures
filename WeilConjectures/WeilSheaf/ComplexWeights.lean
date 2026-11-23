@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.HomologyShift
 /-!
 # Upper weight bounds of Weil complexes
 
-The blueprint definition `definition-weights--6` has two halves. A Weil complex `K` on a
+The definition of the weights of a Weil complex has two halves. A Weil complex `K` on a
 `k₀`-scheme `Y` has *weights at most* `w` if every cohomology sheaf `𝓗ʲK` is `ι`-mixed of
 weights at most `w + j`; it has *weights at least* `w` if its Verdier dual `D_Y K` has weights
 at most `-w`. The upper half is `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost`
@@ -27,16 +27,15 @@ the Verdier dual of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Deri
 the derived category of pro-étale sheaves without Weil structure, and the only derived internal hom
 of Weil complexes is `AlgebraicGeometry.WeilComplex.ihomLisse`, out of a lisse Weil sheaf.
 
-The file also defines purity of a Weil complex in the sense of `definition-weights--7`: `K` is
-pure of weight `w` if each nonzero `𝓗ʲK` is punctually pure of weight `w + j`
-(`AlgebraicGeometry.WeilComplex.IsPunctuallyPureOfWeight`).
+The file also defines purity of a Weil complex: `K` is pure of weight `w` if each nonzero `𝓗ʲK`
+is punctually pure of weight `w + j` (`AlgebraicGeometry.WeilComplex.IsPunctuallyPureOfWeight`).
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_iff`: the upper half of
-  `definition-weights--6`.
+- `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_iff`: the upper half of the definition
+  of the weights of a Weil complex.
 - `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_shift_iff`: shifts.
-- `AlgebraicGeometry.WeilComplex.IsPunctuallyPureOfWeight`: `definition-weights--7`.
+- `AlgebraicGeometry.WeilComplex.IsPunctuallyPureOfWeight`: a Weil complex is pure of weight `w`.
 - `AlgebraicGeometry.WeilComplex.IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost`: a pure complex
   has weights at most its weight.
 -/
@@ -59,8 +58,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 /-- *Weights at most `w` of a Weil complex.* A Weil complex `K` has weights at most `w` if and
 only if for every `j ∈ ℤ` its cohomology sheaf `𝓗ʲK` is `ι`-mixed of weights at most `w + j`.
 This is the upper half of the blueprint definition; its lower half, through the Verdier dual,
-is not available for Weil complexes (see the module docstring).
-(blueprint: `definition-weights--6`) -/
+is not available for Weil complexes (see the module docstring). -/
 theorem isMixedOfWeightsAtMost_iff :
     K.IsMixedOfWeightsAtMost ι w ↔
       ∀ j : ℤ, ((homologySheaf j).obj K).IsMixedOfWeightsAtMost ι (w + j) :=
@@ -87,14 +85,14 @@ theorem isMixedOfWeightsAtMost_shift_iff (n : ℤ) :
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil complex `K` is *pure of weight `w`* if each nonzero cohomology sheaf `𝓗ʲK` is
-punctually `ι`-pure of weight `w + j`. (blueprint: `definition-weights--7`) -/
+punctually `ι`-pure of weight `w + j`. -/
 def IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X) (w : ℝ) : Prop :=
   ∀ j : ℤ, ¬ IsZero ((homologySheaf j).obj K) →
     ((homologySheaf j).obj K).IsPunctuallyPureOfWeight ι (w + j)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 /-- A Weil complex is pure of weight `w` if and only if every cohomology sheaf `𝓗ʲK` is
-punctually pure of weight `w + j`: a zero sheaf is punctually pure of every weight. -/
+punctually pure of weight `w + j`. -/
 theorem isPunctuallyPureOfWeight_iff :
     K.IsPunctuallyPureOfWeight ι w ↔
       ∀ j : ℤ, ((homologySheaf j).obj K).IsPunctuallyPureOfWeight ι (w + j) := by
@@ -103,13 +101,10 @@ theorem isPunctuallyPureOfWeight_iff :
   · exact WeilSheaf.isPunctuallyPureOfWeight_of_isZero hj _
   · exact h j hj
 
-/-- A Weil complex pure of weight `w` has weights at most `w`: each cohomology sheaf `𝓗ʲK`,
-punctually pure of weight `w + j`, is mixed of weights at most `w + j` by the filtration
-`0 ⊆ 𝓗ʲK`. -/
+/-- A Weil complex pure of weight `w` has weights at most `w`. -/
 theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost (h : K.IsPunctuallyPureOfWeight ι w) :
-    K.IsMixedOfWeightsAtMost ι w := fun j ↦ by
-  rw [WeilSheaf.isMixedOfWeightsAtMost_iff_filtrationClosure]
-  exact ObjectProperty.le_filtrationClosure _ ⟨w + j, le_rfl, isPunctuallyPureOfWeight_iff.1 h j⟩
+    K.IsMixedOfWeightsAtMost ι w := fun j ↦
+  (isPunctuallyPureOfWeight_iff.1 h j).isMixedOfWeightsAtMost
 
 end WeilComplex
 
