@@ -16,9 +16,8 @@ For a morphism of schemes `g : X ⟶ Y`, let `c_g : ν_Y^* Rg_* ⟶ Rg_* ν_X^*`
 of bounded below direct images (`fixedComparisonDirectImageMatePlus`) and
 `β_g : g^* ν_Y^* ≅ ν_X^* g^*` the comparison of inverse images
 (`fixedComparisonPullbackPlus`). We show that `ν_Y^*` of the étale unit followed by `c_g`
-equals the pro-étale unit followed by `Rg_*(β_g)`. The counit version is
-`fixedComparisonDirectImageMatePlus_transpose`, the general form of
-`fixedComparisonDirectImageMatePlus_counit` (which assumes `Λ` finite and `g` qcqs).
+equals the pro-étale unit followed by `Rg_*(β_g)`. It is deduced from the counit version
+`fixedComparisonDirectImageMatePlus_counit`.
 -/
 
 @[expose] public section
@@ -29,64 +28,17 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-/-- Counit compatibility of the comparison of direct images, for an arbitrary morphism `g` and
-coefficient ring `Λ`: `g^*(c_g)` followed by the pro-étale counit equals `β_g` followed by
-`ν_X^*` of the étale counit, where the direction of `β_g` is
-`ν_X^* g^* ⟶ g^* ν_Y^*`. -/
-theorem fixedComparisonDirectImageMatePlus_transpose (Λ : Type (u + 1)) [CommRing Λ]
-    {U V : Scheme.{u}} (f : U ⟶ V)
-    (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (fixedComparisonPullbackPlus Λ f).hom.app
-        ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj K) ≫
-      (upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategoryPlus.map
-        ((fixedComparisonDirectImageMatePlus Λ f).app K) ≫
-      (derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app
-        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategoryPlus.obj K) =
-      (comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategoryPlus.map
-        ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) f).counit.app
-          K) := by
-  dsimp only [derivedUpperStarLowerStarAdjunctionPlus,
-    Etale.derivedUpperStarLowerStarAdjunctionPlus]
-  rw [Adjunction.derivedAdjunctionPlus_eq_derivedPlus,
-    Adjunction.derivedAdjunctionPlus_eq_derivedPlus]
-  let σ := comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f
-  let θ := (Functor.mapDerivedCategoryPlusCompIso
-    (comparisonUpperStar (ModuleCat.{u + 1} Λ) V)
-    (upperStar (ModuleCat.{u + 1} Λ) f)).symm ≪≫
-    Functor.mapDerivedCategoryPlusNatIso σ ≪≫
-    Functor.mapDerivedCategoryPlusCompIso (Etale.upperStar (ModuleCat.{u + 1} Λ) f)
-      (comparisonUpperStar (ModuleCat.{u + 1} Λ) U)
-  have hb : fixedComparisonDirectImageMatePlus Λ f =
-      (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus
-        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus θ.hom) := by
-    unfold fixedComparisonDirectImageMatePlus
-    rw [ComparisonCore.underived_comparison_mate,
-      Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv]
-  rw [hb, mateEquiv_counit]
-  have hθ : (fixedComparisonPullbackPlus Λ f).hom = θ.inv := by
-    have hσ : (Functor.mapDerivedCategoryPlusNatIso σ.symm).hom =
-        (Functor.mapDerivedCategoryPlusNatIso σ).inv := by
-      apply NatTrans.ext
-      funext X
-      apply DerivedCategory.Plus.ι.map_injective
-      rw [Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
-        Functor.mapDerivedCategoryNatIso_symm]
-      have h : DerivedCategory.Plus.ι.mapIso
-          ((Functor.mapDerivedCategoryPlusNatIso σ).app X) =
-          (Functor.mapDerivedCategoryNatIso σ).app X.obj :=
-        Iso.ext (Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app σ X)
-      exact (congrArg Iso.inv h).symm
-    simp only [fixedComparisonPullbackPlus, θ, Iso.trans_hom, Iso.trans_inv,
-      Iso.symm_hom, Iso.symm_inv, hσ, Category.assoc, σ]
-  rw [hθ]
-  exact θ.inv_hom_id_app_assoc _ _
-
 /-- Unit compatibility of the comparison of direct images: for `L ∈ D⁺(Y_ét, Λ)`, the composite
 `ν_Y^* L ⟶ ν_Y^* Rg_* g^* L ⟶ Rg_* ν_X^* g^* L` of `ν_Y^*` of the étale unit with `c_g` equals
-the pro-étale unit `ν_Y^* L ⟶ Rg_* g^* ν_Y^* L` followed by `Rg_*(β_g)`. -/
+the pro-étale unit `ν_Y^* L ⟶ Rg_* g^* ν_Y^* L` followed by `Rg_*(β_g)`:
+```
+ν_Y^* L ────────────→ ν_Y^* Rg_* g^* L
+   │                        │ c_g
+   ↓                        ↓
+Rg_* g^* ν_Y^* L ──────→ Rg_* ν_X^* g^* L
+           Rg_*(β_g)
+```
+-/
 theorem fixedComparisonDirectImageMatePlus_unit (Λ : Type (u + 1)) [CommRing Λ]
     {X Y : Scheme.{u}} (g : X ⟶ Y)
     (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -110,7 +62,7 @@ theorem fixedComparisonDirectImageMatePlus_unit (Λ : Type (u + 1)) [CommRing Λ
       β.inv.app _ ≫ (comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategoryPlus.map
         (adjE.counit.app
           ((Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlus.obj L)) := by
-    rw [← fixedComparisonDirectImageMatePlus_transpose]
+    rw [← fixedComparisonDirectImageMatePlus_counit]
     exact (β.inv_hom_id_app_assoc _ _).symm
   simp only [Adjunction.homEquiv_counit, Functor.id_obj]
   erw [Functor.map_comp, Category.assoc, hc]

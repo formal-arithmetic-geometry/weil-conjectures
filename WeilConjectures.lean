@@ -9480,7 +9480,6 @@ public import WeilConjectures.AlgebraicGeometry.Open.OpenScalarRestrictionUnit
 public import WeilConjectures.AlgebraicGeometry.Open.OpenSectionClopen
 public import WeilConjectures.AlgebraicGeometry.Open.OpenSingleCoefficientTransport
 public import WeilConjectures.AlgebraicGeometry.Open.OpenSiteEvaluationCounit
-public import WeilConjectures.AlgebraicGeometry.Open.OpenSiteEvaluationCounitGeneral
 public import WeilConjectures.AlgebraicGeometry.Open.OpenSourceComposition
 public import WeilConjectures.AlgebraicGeometry.Open.OpenSupportBaseChangedCube
 public import WeilConjectures.AlgebraicGeometry.Open.OpenSupportCompactificationModel
@@ -17904,6 +17903,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.CommSq
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
@@ -22706,6 +22706,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStarMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.HypercohomologyLimit
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.HypercohomologyLimitDerived
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.InjectiveAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Linear
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyClosedUpperStarHomotopyLimit

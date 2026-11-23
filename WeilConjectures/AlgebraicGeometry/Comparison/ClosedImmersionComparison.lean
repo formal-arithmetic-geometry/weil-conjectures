@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDirectImageUnit
-public import WeilConjectures.AlgebraicGeometry.Open.OpenSiteEvaluationCounitGeneral
+public import WeilConjectures.AlgebraicGeometry.Open.OpenSiteEvaluationCounit
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonLowerStarCanonical
@@ -124,7 +124,14 @@ theorem Etale.exists_distTriang_openClosed_plus (hij : Set.range i.base = (Set.r
 `e₁ : ν_X^* j_! j^* K ≅ j_! j^* ν_X^* K` and `e₃ : ν_X^* Ri_* i^* K ≅ Ri_* i^* ν_X^* K` carry
 `ν_X^*` of the étale localization triangle `j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶` to a distinguished
 triangle `j_! j^* ν^* K ⟶ ν^* K ⟶ Ri_* i^* ν^* K ⟶` whose first two maps are the counit of
-`j_! ⊣ j^*` and the unit of `i^* ⊣ Ri_*` on `X_proét`. -/
+`j_! ⊣ j^*` and the unit of `i^* ⊣ Ri_*` on `X_proét`:
+```
+ν^* j_! j^* K ──────→ ν^* K ──────→ ν^* Ri_* i^* K ──────→ (ν^* j_! j^* K)[1]
+      │ e₁                 ║                │ e₃                       │ e₁[1]
+      ↓                    ║                ↓                          ↓
+j_! j^* ν^* K ──────→ ν^* K ──────→ Ri_* i^* ν^* K ──────→ (j_! j^* ν^* K)[1]
+```
+-/
 theorem ProEtale.comparisonUpperStar_openClosed_triangle
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (w : (Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) i).obj
@@ -174,7 +181,7 @@ theorem ProEtale.comparisonUpperStar_openClosed_triangle
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.obj K) ≪≫
     (ProEtale.lowerStar (ModuleCat.{u + 1} Λ) i).rightDerivedFunctorPlus.mapIso
       ((ProEtale.fixedComparisonPullbackPlus Λ i).app K)
-  have h₁ := ProEtale.comparisonUpperStar_map_openImmersionLowerShriek_counit Λ j K
+  have h₁ := ProEtale.openSiteEvaluationCounit Λ j K
   have h₂ := ProEtale.fixedComparisonDirectImageMatePlus_unit Λ i K
   let T := ν.mapTriangle.obj (Triangle.mk
     ((Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
