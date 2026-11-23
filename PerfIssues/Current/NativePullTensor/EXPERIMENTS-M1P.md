@@ -55,4 +55,7 @@ Native controls report 16.554 s counter comparison-exclusive and 20.949 s
 trace comparison-exclusive for the accepted root. These are paired
 observations rather than a normalized overhead percentage because the
 instrumentation schema and source/build setup differ; no semantic path was
-changed.
+changed. A fresh no-instrumentation 4.35 binary run of the same probe
+completed successfully in 262.87 s process wall, but it emits no recursive
+call counter and its root span cannot be matched to the READY4 root. It is
+recorded as a baseline observation, not divided into an overhead percentage.
