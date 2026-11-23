@@ -10,17 +10,18 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 
 /-! # Constructible compact-support exceptional adjoint
 
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and Proposition 6.8.14
-(blueprint: lem-per-condensed-structural-exceptional-adjoint).
-
-For a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the blueprint lemma asserts
-that the bounded constructible compact-support functor `Rf_!` is computed by `i_! ⋙ Rp_*` for
-every compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, and that it has a right adjoint `Rf^!` on
-bounded constructible complexes. The adjunction is
-`ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`
+For a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the bounded constructible
+compact-support functor `Rf_!` is computed by `i_! ⋙ Rp_*` for every compactification
+`c = (X ⟶[i] Z ⟶[p] Y)` of `f`, and it has a right adjoint `Rf^!` on bounded constructible
+complexes. The adjunction is `ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`
 (`Rf_! = boundedConstructibleLowerShriek ⊣ Rf^! = boundedConstructibleUpperShriek`); this file
 supplies the compactification-independence clause, comparing `Rf_!` on `Dᵇc` with the derived
 lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧` on the ambient derived categories for an arbitrary `c`.
+
+## References
+
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6, Lemmas 6.7.7 and
+  6.7.19, Proposition 6.8.14 and Remark 6.8.15]
 -/
 
 @[expose] public noncomputable section
@@ -43,16 +44,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The bounded constructible compact-support functor `Rf_!`, the left adjoint in
 `boundedConstructibleUpperShriekAdjunction ℓ f : Rf_! ⊣ Rf^!`, is independent of the
 compactification: for every compactification `c` of `f`, it is the restriction to `Dᵇc` of the
-derived lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧ = i_! ⋙ Rp_*` attached to `c`.
-
-Source: Bhatt--Scholze, Definition 6.7.6, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and
-Proposition 6.8.14; (blueprint: lem-per-condensed-structural-exceptional-adjoint).
-
-Construction: the independence isomorphism
-`boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` from the chosen
-compactification to `c`, followed by the comparison
-`boundedConstructibleLowerShriekOfCompactificationCompatibility` of `i_! ⋙ Rp_*` on `Dᵇc`
-with the ambient derived lower shriek. -/
+derived lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧ = i_! ⋙ Rp_*` attached to `c`. -/
 noncomputable def boundedConstructibleLowerShriekCompatibilityOfCompactification
     {f : X ⟶ Y} (c : Compactification f.left) :
     boundedConstructibleLowerShriek ℓ f ⋙ (boundedConstructible _).ι ≅

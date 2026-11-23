@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # Degree-zero restricted resolution section classes
 
-Source: Stacks Project, Cohomology, Tag 01E4.
-(blueprint: lem-weil-pbc-resolution-section-class-zero-augmentation).
+## References
+
+* [Stacks, Tag 01E4]
 -/
 
 @[expose] public section
@@ -269,21 +270,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 /-- The class of an augmented restricted section is the direct-image augmentation
-of the same section on the original open.
-Source: Stacks Project, Cohomology, Tag 01E4 (lemma-describe-higher-direct-images).
-(blueprint: lem-weil-pbc-resolution-section-class-zero-augmentation).
-
-Proof: Expand the two canonical augmentations using
-InjectiveResolution.toRightDerivedZero_eq. Cancel the inverse derived-resolution
-comparison on the right. The augmentation equation of R and its pinned degree-zero
-section component identify the section zero-cycle with the augmentation of s in I.
-Naturality of the cycles-to-homology projection transports this identity to homology.
-The sheafification adjunction defining sectionCohomologyTheta sends that class to
-its homology-sheaf class: the counit is the identity on the original sheaf complex,
-and exact sheafification commutes with its cycles and homology. Thus the section
-class followed by the inverse resolution comparison is precisely the canonical
-augmentation evaluated on the section identified by restrictAppIso. This argument
-uses no special hypothesis on f or F and includes the empty open and zero section. -/
+of the same section on the original open. -/
 theorem resolutionSectionClass_zero_augmentation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (I : InjectiveResolution F) (V : Y.Opens)
     (R : RestrictedResolutionSections I (f ⁻¹ᵁ V))

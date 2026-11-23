@@ -13,8 +13,17 @@ import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 
-/-! Natural comparison transformation for the derived stalk extension.
-(blueprint: lem-pc-stalk-derived-extension-comparison-core) -/
+/-! # The derived stalk extension comparison transformation
+
+Natural comparison transformation for the derived stalk extension.
+
+## References
+
+* [Stacks, Tag 0DJ7]
+* [Stacks, Tag 06YB]
+* [Stacks, Tag 0D5S]
+* [Stacks, Tag 06Y6]
+-/
 
 @[expose] public section
 
@@ -156,23 +165,7 @@ private theorem derivedPullback_stalk_isLeftDerivedFunctor (z : X') :
 set_option linter.unusedVariables false in
 set_option synthInstance.maxSize 2048 in
 /-- A natural comparison with the specified K-flat representative equation, without an
-invertibility assertion.
-
-Proof: identify the composite stalk ring map with the actual stalk map of g'.
-On K-flat sheaf complexes use the scalar-extension counit, the Q/Qh factors,
-the specified tensorStalkIso, the inverse exact-stalk factor and the inverse
-pullback counit in the displayed order. Exact stalks preserve quasi-isomorphisms,
-and their K-flatness follows from the stalk criterion. Naturality of the counits
-and the degreewise pullback-stalk identification gives naturality for chain maps
-between K-flat representatives. Every derived arrow is represented by a roof;
-replace its middle complex by a K-flat resolution. Common refinements show the
-induced maps are independent of the roof and resolution. They therefore descend
-to a natural transformation on derived categories. For a K-flat P with invertible
-pullback counit use P itself as its resolution; the construction is precisely the
-stated equation. Invertibility of this transformation is a separate argument.
-Source: Stacks Project, perfect.tex, equation-bc before Tag 0DJ8 (Tag 0DJ7);
-Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison-core). -/
+invertibility assertion. -/
 theorem exists_stalkDerivedExtensionComparisonTransformation (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

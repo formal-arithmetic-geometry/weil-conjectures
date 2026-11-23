@@ -29,8 +29,11 @@ Mathlib's notions once the finite-type conditions are added.
 - `AlgebraicGeometry.Scheme.Hom.isQuasiFinite_iff`:
   `IsQuasiFinite f ↔ LocallyQuasiFinite f ∧ LocallyOfFiniteType f ∧ QuasiCompact f`.
 
-Source: Stacks Project, Morphisms of Schemes, Tags 01TD, 01TF and 01TJ
-(blueprint: pqf-def-quasifinite).
+## References
+
+* [Stacks, Tag 01TD]
+* [Stacks, Tag 01TF]
+* [Stacks, Tag 01TJ]
 -/
 
 @[expose] public section
@@ -45,7 +48,7 @@ variable {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- For a morphism locally of finite type, quasi-finiteness at a point in the sense of Stacks
 Tag 01TD is Mathlib's `Scheme.Hom.QuasiFiniteAt`: both say that the point is isolated in its
-fibre (Stacks, Tag 01TF). -/
+fibre. -/
 theorem isQuasiFiniteAtPoint_iff_quasiFiniteAt [LocallyOfFiniteType f] (x : X) :
     IsQuasiFiniteAtPoint f x ↔ f.QuasiFiniteAt x := by
   rw [Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber]
@@ -73,7 +76,7 @@ theorem isLocallyQuasiFinite_iff :
     exact (isQuasiFiniteAtPoint_iff_quasiFiniteAt f x).2 (f.quasiFiniteAt x)
 
 /-- Quasi-finite in the sense of Stacks Tag 01TD is Mathlib's `LocallyQuasiFinite` together with
-`LocallyOfFiniteType` and `QuasiCompact` (Stacks, Tag 01TJ). -/
+`LocallyOfFiniteType` and `QuasiCompact`. -/
 theorem isQuasiFinite_iff :
     IsQuasiFinite f ↔ LocallyQuasiFinite f ∧ LocallyOfFiniteType f ∧ QuasiCompact f := by
   rw [isQuasiFinite_iff_isLocallyQuasiFinite_and_quasiCompact, isLocallyQuasiFinite_iff,

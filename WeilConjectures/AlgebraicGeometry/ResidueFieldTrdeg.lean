@@ -19,9 +19,7 @@ degree of the residue field extension `κ(x) / κ(f x)`.
 * `AlgebraicGeometry.Scheme.Hom.trdegAt_eq_zero_of_isPreimmersion`: it vanishes for
   preimmersions (e.g. open immersions).
 * `AlgebraicGeometry.Scheme.Pullback.trdegAt_snd_le`: for a point `t` of `X ×_S Y`,
-  `trdeg_{κ(y)} κ(t) ≤ trdeg_{κ(s)} κ(x)`, where `x`, `y`, `s` are the images of `t`. Indeed
-  `κ(t)` is the fraction field of the image of `κ(x) ⊗_{κ(s)} κ(y)`, which is generated over
-  `κ(y)` by the image of `κ(x)`.
+  `trdeg_{κ(y)} κ(t) ≤ trdeg_{κ(s)} κ(x)`, where `x`, `y`, `s` are the images of `t`.
 -/
 
 @[expose] public section

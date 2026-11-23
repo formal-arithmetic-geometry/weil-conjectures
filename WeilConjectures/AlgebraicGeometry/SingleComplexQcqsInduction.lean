@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexTargetLocality
 
 /-! # Quasi-compact quasi-separated base change for one complex
 
-Source: Stacks Project, perfect.tex, Tag 0DJ9, lemma-single-complex-base-change
-(blueprint: lem-pc-rf-single-complex-qcqs-induction).
+## References
+
+* [Stacks, Tag 0DJ9]
 -/
 
 @[expose] public section
@@ -32,22 +33,7 @@ namespace AlgebraicGeometry
 /-- A stalkwise single-complex condition implies qcqs derived base change.
 The hypothesis uses the canonical localized tensor-cohomology comparison followed
 by the given phi, expressed in K-flat representative coordinates. The conclusion
-is the canonical base-change morphism followed by Rf'_* of that same phi.
-
-Proof (the four steps of the node):
-1. Apply singleComplexBaseChange_targetLocal, supplying the affine-base criterion
-   proved below. Its open restriction argument reduces to affine S and S'.
-2. QuasiCompact f and QuasiSeparated f make X compact and quasi-separated over
-   these affine bases. Define P(U) as invertibility of singleComplexOpenComparison.
-   The affine case is singleComplexOpenComparison_affine, which transports the
-   existing affine single-complex criterion to source-open coordinates.
-3. For compact U and affine V, their intersection is compact by Mathlib's
-   QuasiSeparatedSpace.inter_isCompact. singleComplexOpenComparison_union transports
-   relative Mayer--Vietoris to U union V. Apply quasiCompactOpen_induction to obtain P(X).
-4. singleComplexOpenComparison_top identifies this top-open comparison with the
-   original comparison, completing the affine-base criterion of step 1.
-Source: Stacks Project, perfect.tex, Tag 0DJ9
-(blueprint: lem-pc-rf-single-complex-qcqs-induction). -/
+is the canonical base-change morphism followed by Rf'_* of that same phi. -/
 theorem singleComplexBaseChangeQcqsInduction
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
