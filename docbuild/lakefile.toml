@@ -1,0 +1,17 @@
+# doc-gen4 documentation of this repository, built by .github/workflows/docs.yml.
+#
+# A separate Lake package, as for Mathlib's docs (leanprover-community/mathlib4_docs): it
+# requires doc-gen4 and this repository (as a path dependency), so that doc-gen4 does not
+# become a dependency of the project itself. The workflow moves the root's
+# `.lake/packages` (Mathlib with its cached oleans) here before `lake update`.
+name = "docbuild"
+version = "0.1.0"
+
+[[require]]
+scope = "leanprover"
+name = "doc-gen4"
+rev = "v4.33.1"   # the tag for this repository's toolchain, leanprover/lean4:v4.33.1
+
+[[require]]
+name = "weil-conjectures"
+path = "../"
