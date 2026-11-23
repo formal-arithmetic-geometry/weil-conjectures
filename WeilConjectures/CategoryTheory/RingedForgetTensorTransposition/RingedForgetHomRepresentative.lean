@@ -73,8 +73,7 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # The Hom representative square for arbitrary source complexes
 
-Source: Stacks 08J9, 070I; steps 5--8 of ringed tensor transposition
-(blueprint: lem-sf-ringed-forget-hom-representative).
+Source: Stacks 08J9, 070I.
 -/
 
 @[expose] public noncomputable section

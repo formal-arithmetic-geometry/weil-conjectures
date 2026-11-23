@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 /-!
 # Monicity of the sequential telescope map
 
-Source: Stacks Project, Derived Categories, Tag 093W, `lemma-compute-colimit`.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Derived Categories, Tag 093W.
 -/
 
 @[expose] public section
@@ -61,19 +60,7 @@ private theorem inj_telescope_coordinate
       simp [hki, hki', h]
 
 /-- The map given on the nth coprojection by identity minus the next transition is monic.
-Source: Stacks Project, Derived Categories, Tag 093W, `lemma-compute-colimit`.
-(auxiliary; not a blueprint node).
-
-Proof: Regard the coproduct as the filtered colimit of its finite subcoproducts.
-For each finite subset S and i in S, map the whole coproduct to E_i by the transition
-E_k to E_i when k is at most i, and zero otherwise. Composing this map with the
-telescope map on E_k gives identity if k=i and zero otherwise: the two transition
-maps cancel when k<i. Their finite product therefore retracts the restriction of
-the telescope map to the finite sum indexed by S. Each restriction is consequently
-monic. Exactness of filtered colimits carries this diagram of monomorphisms into
-the constant target coproduct to a monomorphism on its colimit, which is precisely
-the original telescope map. The empty finite subset has zero source, and the
-coordinate calculation does not assume that any transition map is monic. -/
+Source: Stacks Project, Derived Categories, Tag 093W. -/
 theorem sequentialTelescope_mono
     {A : Type u} [Category.{v} A] [Abelian A]
     [HasFilteredColimitsOfSize.{0, 0} A] [AB5OfSize.{0, 0} A]

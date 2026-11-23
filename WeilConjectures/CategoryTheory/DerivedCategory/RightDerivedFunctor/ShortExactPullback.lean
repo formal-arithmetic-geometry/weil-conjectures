@@ -24,8 +24,7 @@ with `P` (`CategoryTheory.ShortComplex.rightDerivedTrianglePullback`); in partic
 with the connecting maps. Both constructions are compatible with composition of exact functors
 (`CategoryTheory.Functor.rightDerivedPullback_comp`,
 `CategoryTheory.ShortComplex.rightDerivedTrianglePullback_comp`). This gives the
-functoriality of the long exact sequence of cohomology with support in the pair (blueprint
-`thm-pur-with-support-exactness`).
+functoriality of the long exact sequence of cohomology with support in the pair.
 -/
 
 @[expose] public section

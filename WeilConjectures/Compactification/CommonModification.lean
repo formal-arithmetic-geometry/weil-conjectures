@@ -39,7 +39,6 @@ pulled-back centre) with the extension and composition of admissible centres.
 
 Everything here rests on elimination of indeterminacy
 (`WeilConjectures.Compactification.EliminationOfIndeterminacy`, Tag 081S).
-
 -/
 
 @[expose] public section
@@ -107,14 +106,9 @@ attribute [instance] CommonModification.isOpenImmersion_k₁
 (the second half of the construction of Stacks Project Tag 0F3X). Let `X` be qcqs, `U ⊆ X`
 an open contained in the range of a quasi-compact morphism `p : V ⟶ X`, and `B` a
 `U`-admissible blow-up of `X` whose strict transform of `p` is an open immersion into the
-blown-up scheme `X'`. By Stacks Project Tag 080E
-(`Scheme.IdealSheafData.exists_blowup_comap_iso_strictTransform`) that strict transform is
-the blow-up of `V` at the pulled-back centre `B.I.comap p`, so a further finite-type centre
-`M` on it, whose support avoids the locus over `U`, has a blow-up `Bl_M` which is a blow-up
-of an open subscheme of `X'`. Extending `M` across that open
-(`IsAdmissible.exists_extend`) and composing the two admissible blow-ups
-(`IsAdmissible.exists_comp`) exhibits `Bl_M` as an open subscheme of a single
-`U`-admissible blow-up of `X`, lying over `V` as prescribed. -/
+blown-up scheme `X'`. Then any blow-up `Bl_M` of that strict transform at a finite-type centre
+`M` whose support avoids the locus over `U` is an open subscheme of a single `U`-admissible
+blow-up of `X`, lying over `V` as prescribed. -/
 theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {U : X.Opens} (p : V ⟶ X) [QuasiCompact p]
     (hpU : (U : Set X) ⊆ Set.range p) (B : IsAdmissible X U)
@@ -199,13 +193,7 @@ theorem IsAdmissible.exists_isOpenImmersion_blowup {X V : Scheme.{u}} [CompactSp
         simp only [Category.assoc]
     _ = M.blowupMap ≫ (B.I.comap p).blowupMap ≫ p := by rw [hφι, hq]
 
-/-- **Existence of a common modification** (Stacks Project Tag 0F3X).
-
-Form the scheme-theoretic image
-`X₁₂ ⊆ X₁ ×_S X₂` of `U`, eliminate the indeterminacy of both projections
-(`exists_admissibleBlowup_isOpenImmersion_strictTransformMap`), dominate the two center
-ideals by their product (`Scheme.IdealSheafData.exists_blowup_mul_iso`) and extend the
-resulting common blow-up of `X₁₂` across the open strict transforms. -/
+/-- **Existence of a common modification** (Stacks Project Tag 0F3X). -/
 theorem nonempty_commonModification [CompactSpace S] [QuasiSeparatedSpace S]
     (s₁ : X₁ ⟶ S) (s₂ : X₂ ⟶ S) (j₁ : U ⟶ X₁) (j₂ : U ⟶ X₂)
     [IsOpenImmersion j₁] [IsOpenImmersion j₂] [QuasiCompact j₁] [QuasiCompact j₂]

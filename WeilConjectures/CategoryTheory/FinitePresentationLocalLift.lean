@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.Sites.ConstantForget
 /-! # Lifting maps from finitely presented modules locally
 
 Source: Stacks Project, Modules on Sites, Tag 093T, the finite presentation argument.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

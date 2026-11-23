@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Deriving an adjoint square with exact vertical functors
 
-Source: blueprint thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure";
-Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
+Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
 -/
 
 @[expose] public noncomputable section
@@ -57,23 +56,7 @@ private lemma homotopy_comp_inv_app
 -- Preserve the original resolution hypothesis, although this calculation does not need it.
 set_option linter.unusedSectionVars false in
 /-- The canonical right-derived comparison is the mate of the localized left comparison.
-Source: blueprint thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure";
-Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
-(blueprint: lem-sf-derived-exact-forget-mate).
-
-Proof: lift the compatible abelian adjunction square to cochain complexes and then to
-homotopy categories. Both `RR ⋙ D(U)` and `D(V) ⋙ RR₀` are right derived functors of the
-same homotopy functor: exactness of U gives the first assertion and preservation of
-K-injectives by V gives the second. Uniqueness of right derived functors identifies their
-comparison with the displayed composition of the four canonical comparison isomorphisms.
-Its defining equation on localized complexes is the right-derived unit equation. The
-canonical derived adjunction has the localized Hom formula (equivalently its unit and
-counit satisfy `derivedη_fac_app` and `derivedε_fac_app`). Apply the compatible derived
-adjoint-square comparison to the underived mate equality, the localized left comparison,
-and this normalized right comparison. It gives the derived unit equation. The mate is
-uniquely determined by that unit equation, by adjunction transposition, proving the claim.
-No invertibility of a general mate is inferred: invertibility here comes from the two
-right-derived universal properties. -/
+Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND. -/
 theorem derived_exact_forget_mate (a : L ⋙ V ≅ U ⋙ L₀) (b : R ⋙ U ≅ V ⋙ R₀)
     (hb : (mateEquiv adj adj₀ (TwoSquare.mk _ _ _ _ a.inv)) = b.hom) :
     (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction

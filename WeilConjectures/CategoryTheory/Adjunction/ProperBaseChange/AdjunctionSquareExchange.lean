@@ -8,8 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 
-/-! # Exchange transformations presented by their adjuncts
-(blueprint: def-weil-pbc-adjunction-square-exchange). -/
+/-! # Exchange transformations presented by their adjuncts. -/
 
 @[expose] public section
 
@@ -55,8 +54,7 @@ variable {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D
   (θ : G ⋙ L' ≅ L ⋙ H)
 
 /-- The exchange map is the adjoint of the square comparison followed by the counit.
-Source: Bhatt--Scholze, Remark 6.8.15; Mathlib's adjunction hom equivalence.
-(blueprint: def-weil-pbc-adjunction-square-exchange). -/
+Source: Bhatt--Scholze, Remark 6.8.15. -/
 noncomputable def squareExchange : R ⋙ G ⟶ H ⋙ R' where
   app N := b.homEquiv _ _ (θ.hom.app (R.obj N) ≫ H.map (a.counit.app N))
   naturality _ _ h := squareExchange_naturality a b G H θ h

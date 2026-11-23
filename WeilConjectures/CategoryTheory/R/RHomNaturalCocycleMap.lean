@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.R.RHomNaturalCocycleExtension
 /-!
 # The natural cocycle comparison for RHom
 
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map).
+Source: Stacks Tags 06XR (1) and 070I.
 -/
 
 @[expose] public section
@@ -29,21 +28,7 @@ open CochainComplex.HomComplex
 namespace CategoryTheory.Functor
 
 /-- There is a natural additive comparison, normalized on injective complexes.
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map).
-
-Proof: On a bounded below complex of injectives I, send a cocycle M → Iⁿ to its
-localized map M[0] → I[n]. A boundary gives a null-homotopic map by
-Cocycle.fromSingleMk_mem_coboundaries_iff, so this descends to cohomology and is additive.
-The invertible total-derived unit identifies this cohomology with Hⁿ(RHom(M,QI)).
-A map of injective complexes preserves the cocycle construction. A homotopy between
-maps induces equal maps on cohomology and in the derived category. The equivalence
-from the bounded below homotopy category of injective objects to D+ therefore extends
-these homomorphisms to D+. Its counit and the naturality of the derived unit give
-naturality for all derived morphisms. For an arbitrary injective complex, lift its
-representing isomorphism through the fully faithful K-injective localization; the
-same cocycle calculation gives the displayed normalization. Thus the normalization
-determines the maps uniquely, and no arbitrary cohomology comparison is chosen. -/
+Source: Stacks Tags 06XR (1) and 070I. -/
 theorem exists_rhom_natural_cocycle_map
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C) :

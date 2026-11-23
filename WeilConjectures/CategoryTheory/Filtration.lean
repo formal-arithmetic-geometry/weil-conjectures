@@ -10,9 +10,10 @@ public import Mathlib.CategoryTheory.Subobject.Lattice
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
-# Blueprint statements
+# Filtered objects of an abelian category
 
-lem-sp-finite-filtration-induction.
+Filtered objects `WeilFilteredObject`, their filtration-preserving morphisms and the finiteness
+predicate for decreasing filtrations.
 -/
 
 @[expose] public section
@@ -25,14 +26,15 @@ open Limits
 
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- lem-sp-finite-filtration-induction. -/
+/-- A filtered object: an object of `C` together with a decreasing filtration. -/
 structure WeilFilteredObject (C : Type u) [Category.{v} C] [Abelian C] where
   obj : C
   filtration : DecreasingFiltration obj
 
 namespace WeilFilteredObject
 
-/-- lem-sp-finite-filtration-induction. -/
+/-- A morphism of filtered objects: a morphism of the underlying objects mapping each
+filtration step into the corresponding step. -/
 structure Hom (A B : WeilFilteredObject C) where
   hom : A.obj ⟶ B.obj
   preserves : ∀ i : ℤ, ∃ lift : (A.filtration.F i : C) ⟶
@@ -43,7 +45,7 @@ end WeilFilteredObject
 
 namespace DecreasingFiltration
 
-/-- lem-sp-finite-filtration-induction. -/
+/-- A decreasing filtration is finite if some step is `⊤` and some step is `⊥`. -/
 def IsFinite {A : C} (F : DecreasingFiltration A) : Prop :=
   ∃ n m : ℤ, F.F n = ⊤ ∧ F.F m = ⊥
 

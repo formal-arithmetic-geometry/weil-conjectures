@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHo
 /-! # The derived counit for acyclic cohomology
 
 Source: Stacks, Cohomology on Sites, Tags 0D7S and 0D7U; Homology, Tag 0117.
-(blueprint: lem-fd-acyclic-cohomology-derived-counit).
 -/
 
 @[expose] public section
@@ -293,23 +292,7 @@ omit [EnoughInjectives C] in
 /-- Acyclic cohomology and an invertible ordinary counit give cohomology
 isomorphisms for R⁺ and an invertible canonical derived counit.
 
-Source: Stacks, Cohomology on Sites, Tags 0D7S and 0D7U; Homology, Tag 0117.
-(blueprint: lem-fd-acyclic-cohomology-derived-counit).
-
-Proof: represent L by a bounded-below complex I of injectives. Starting at its
-lower bound, use 0 → ZⁿI → Iⁿ → Bⁿ⁺¹I → 0 and
-0 → Bⁿ⁺¹I → Zⁿ⁺¹I → Hⁿ⁺¹I → 0 to prove all cycles and boundaries R-acyclic.
-The long exact sequences show these sequences remain exact after R, so R
-preserves the relevant homology cokernel. Kernel preservation identifies the
-cycles, and the canonical edge Hⁿ(RI) → R(HⁿI) is therefore invertible.
-Compose it with the injective-model comparison to obtain the asserted isomorphisms.
-To compute the counit, cancel the epimorphism from cycles. Naturality at the
-cycle inclusion and quotient identifies the adjoint of the edge with homology
-of the termwise counit, after the inverse exact-functor homology comparison.
-Thus the termwise counit is a quasi-isomorphism. In the derived counit
-factorization on I the exact localization comparison, localization of this
-quasi-isomorphism, and right-derived unit on I are invertible. Cancel the
-unit and transport to L by naturality. No Grothendieck hypothesis is used. -/
+Source: Stacks, Cohomology on Sites, Tags 0D7S and 0D7U; Homology, Tag 0117. -/
 theorem acyclic_cohomology_counit [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives D]
     (F : C ⥤ D) (R : D ⥤ C) [F.Additive] [R.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits R]

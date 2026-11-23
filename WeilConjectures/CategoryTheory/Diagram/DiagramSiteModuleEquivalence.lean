@@ -15,8 +15,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! The module part of the product-site realization.
 
-Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA (blueprint:
-lem-weil-pbc-diagram-site-module-equivalence).
+Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA.
 -/
 
 @[expose] public section

@@ -27,18 +27,7 @@ variable {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*}
   {T₁ : C₁ ⥤ D₁} {T₂ : C₂ ⥤ D₂} {T₃ : C₃ ⥤ D₃} {T₄ : C₄ ⥤ D₄}
 
 /-- Coherent pullback and pushforward comparisons satisfying the unit and counit
-identities identify the three exchange factors.
-Source: Mathlib `unit_mateEquiv` and `mateEquiv_counit`
-(blueprint: lem-weil-pbc-three-step-adjunction-comparison).
-
-Proof. At the first vertex compose the horizontal pullback comparison with the
-first right-adjoint comparison. At the middle vertices insert the second
-right-adjoint comparison and the pullback comparisons and their functorial images.
-At the last vertex use the second right-adjoint comparison and the remaining
-horizontal comparison. Naturality and the unit equation give the first square.
-The pullback cube and naturality give the second. The counit equation, cancellation
-of inverse isomorphisms and naturality give the third. No exchange invertibility
-is assumed. -/
+identities identify the three exchange factors. No exchange invertibility is assumed. -/
 theorem threeStepComparison
     (θ : G ⋙ V ≅ U ⋙ H) (θe : Ge ⋙ Ve ≅ Ue ⋙ He)
     (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
@@ -96,9 +85,7 @@ theorem threeStepComparison
     simp only [← He.map_comp, Iso.hom_inv_id_app_assoc]
     exact αH.hom.naturality (a.counit.app K)
 
-/-- The same comparison with endpoints fixed by the two exchange diagrams.
-Source: threeStepComparison. Proof: its factors are the defining diagram fields.
-(blueprint: lem-weil-pbc-three-step-adjunction-comparison). -/
+/-- The same comparison with endpoints fixed by the two exchange diagrams. -/
 theorem threeStepComparison_chains
     (θ : G ⋙ V ≅ U ⋙ H) (θe : Ge ⋙ Ve ≅ Ue ⋙ He)
     (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
@@ -123,15 +110,7 @@ namespace CategoryTheory.Adjunction
 
 open AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Apply the diagram comparison to one square in a coherent family.
-Source: threeStepComparison_chains and FunctorComparisonSquare
-(blueprint: lem-weil-pbc-three-step-adjunction-comparison).
-
-Proof. Evaluate the family cube at the given square. Its three terms are the
-three cube terms in threeStepComparison_chains. Apply that theorem with the
-four family pullback comparisons, the two direct-image comparisons, and the
-unchanged unit and counit equations. Keeping the families as arguments avoids
-normalizing their concrete object maps during specialization. -/
+/-- Apply the diagram comparison to one square in a coherent family. -/
 theorem threeStepComparison_family
     {J : Type*} [Category J] {C D : J → Type*}
     [∀ T, Category (C T)] [∀ T, Category (D T)]

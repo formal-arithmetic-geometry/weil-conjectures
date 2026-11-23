@@ -26,20 +26,7 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Every degree of derived module homology preserves an ambient coproduct.
-Source: Stacks Project, Injectives, Lemma 07D9, and the direct-sum calculation
-in the proof of Tag 09M1.
-(blueprint: lem-pc-derived-module-homology-coproduct)
-Proof: Choose complex representatives K_i of E_i using the localization functor.
-The termwise coproduct of the K_i represents their coproduct in the derived
-category by Lemma 07D9. Transport the specified colimit to this coproduct along
-the unique isomorphism commuting with coprojections. Module coproducts are exact:
-kernels, images, and the quotient of cycles by boundaries commute with sums.
-Thus complex homology preserves the termwise coproduct. The natural comparison
-Q followed by derived homology with complex homology transports this colimit
-and its coprojections to the derived category. Finally transport it back along
-the colimit isomorphism and the representative isomorphisms. All these comparisons
-are natural, so their legs are H(ι_i). This works in every degree, for arbitrary
-unbounded complexes, and for empty coproducts (whose homology is zero). -/
+Source: Stacks Project, Injectives, Lemma 07D9, and Tag 09M1. -/
 theorem derivedModuleHomology_coproduct (R : Type u) [Ring R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)] (q : ℤ)
     (I : Type u) (E : I → DerivedCategory (ModuleCat.{u} R))

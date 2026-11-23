@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-! # Transport of a scalar distributivity diagram
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-cartesian-scalar-distributivity-transport). -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -186,19 +185,12 @@ private theorem presheafLift_app
   · exact congrArg (fun k : Z ⟶ Y ↦ k.app W)
       (CartesianMonoidalCategory.lift_snd a b)
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-cartesian-scalar-distributivity-transport).
+/-- A finite-limit-preserving functor `L` between categories of sheaves of types transports
+right distributivity: if `muV : X ⨯ Y ⟶ Y` distributes over the additions `axV` and `ayV`
+sectionwise, then its transport along `ex` and `ey` distributes over `ax` and `ay`, the
+transports of `axV` and `ayV`.
 
-Proof: Regard the sectionwise hypothesis as equality of morphisms from
-`(X tensor X) tensor Y` to Y, using the two projections to X and the projection
- to Y. Apply L to this equality. The comparison from each chosen tensor product
- to its image is invertible, since L preserves finite limits. Naturality of
- product comparisons carries projections and pairing to their target versions.
- Precompose with the comparison for the three-variable product and conjugate
- by ex and ey. The two assumed equations replace transported addition with ax
- and ay. Cancel the comparison isomorphisms. Evaluate the resulting morphism
- equality at ((r,s),x). This proves the displayed equality; no ring, group,
- adjunction, or module structures are needed. -/
+Source: Stacks Project, Tag 03D2. -/
 theorem cartesianScalarDistributivityTransport
     {C : Type u} [Category.{v} C] {D : Type u} [Category.{v} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

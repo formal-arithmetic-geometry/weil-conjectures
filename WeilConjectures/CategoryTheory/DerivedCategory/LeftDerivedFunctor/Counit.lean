@@ -16,7 +16,7 @@ isomorphisms `Functor.leftDerivedFunctorNatIso` and `Functor.leftDerivedFunctorC
 compatible with the counits `Qh ⋙ L(F) ⟶ F ⋙ Qh` of the left derived functors. Since these
 counits are isomorphisms for exact functors, this characterizes both isomorphisms.
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Functor.leftDerivedFunctorNatIso_hom_app_comp_counit`
 - `CategoryTheory.Functor.leftDerivedFunctorCompIso_hom_app_comp_counit`

@@ -57,45 +57,9 @@ private theorem exists_unit_transition
   rw [A.homEquiv_unit] at he
   exact congrArg (fun k ↦ Arrow.mk (k.hom.app (op X))) he
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-its section formula and final paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-inverse-image).
-
-Proof: For a stage sheaf G, transpose the unit at a later stage through the
-original inverse-image adjunction. Cocone naturality identifies the two composite
-restriction functors, so the transpose gives the transition map. The unit equation
-uniquely characterizes it; injectivity of the adjunction hom equivalence proves
-the identity and composition laws and naturality in G. At any limit-site object Y,
-use all presentations (a : i to j, W in F j, V j W = Y), ordered by refinement.
-This category is filtered: finite presentations have a common refinement using
-filteredness and eventual equality in the object colimit; parallel refinements
-are equalized at a later stage. Its slice above any presentation is final by the
-filtered final-functor criterion. Take the filtered colimit of stage inverse-image
-sections over this category. Lift every restriction arrow to a common stage;
-naturality of transition maps and eventual equality show independence of the lift.
-Lifting identity and composition equations makes these restrictions a presheaf.
-Every Q-cover lifts to a finite stage cover by hQ. Its covering pullbacks are
-preserved by hVpullback. The sheaf equalizer of finite products remains an equalizer
-under filtered colimits, hence the constructed presheaf is a sheaf. Compatible
-maps from it to a sheaf H are, by the stage adjunctions, precisely maps from G to
-the restriction of H along V i. The inverse bijection takes the component at the
-identity presentation and composes with the unit. The colimit universal property
-and uniqueness of adjuncts show these bijections are inverse and natural. Thus
-this sheaf is canonically isomorphic to the constructed sheafPullback, compatibly
-with its unit. Evaluation at V i U gives D, E, K and e in the asserted formula;
-the transition and coprojection equations follow from the unit characterization.
-At a general object the same presentation formula is natural in G. Each stage
-inverse image and section evaluation preserves finite limits; filtered colimits
-commute with finite limits, so each evaluation of the limit-site inverse image
-preserves them. Limits of sheaves are computed in presheaves, so this proves
-PreservesFiniteLimits for the inverse image itself. If all stage
-categories are empty, both the section assertions and the objectwise limit checks
-are vacuous. If only the source stage is empty, its sheaf category is terminal;
-the assumed left exactness of transitions then forces the inverse image of its
-unique sheaf to be terminal at every later stage. The same general-object formula
-proves preservation of the terminal object in the limit. Empty coverings impose
-terminal sections and are included in the finite equalizer argument.
--/
+/-- The inverse images to the colimit site preserve finite limits, and their sections are the
+filtered colimits of the stage inverse-image sections along the unit-transposed transition
+maps. Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_set_inverse_image
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

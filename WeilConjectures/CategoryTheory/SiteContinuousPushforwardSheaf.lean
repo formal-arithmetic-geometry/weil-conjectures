@@ -13,8 +13,9 @@ public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 /-!
 # Precomposition with a continuous functor of sites
 
-Source: Stacks Project, Definition 00WV and Lemma 00WW
-(blueprint: lem-weil-pbc-site-continuous-pushforward-sheaf).
+## References
+
+* Stacks Project, Definition 00WV and Lemma 00WW.
 -/
 
 @[expose] public section
@@ -25,8 +26,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Definition 00WV and Lemma 00WW
-(blueprint: lem-weil-pbc-site-continuous-pushforward-sheaf).
+/-- The pushforward of a sheaf along a functor satisfying the continuity hypotheses is a sheaf,
+both for sheaves of sets and for abelian sheaves.
 
 The four precoverage instances express the site axioms of 00VH. Covering families
 are encoded by their presieves of arrows. The generated topology has exactly the
@@ -35,20 +36,7 @@ as preservation of the pullback of a covering arrow with any arrow to its target
 Existence of the source pullback follows from `J.HasPullbacks`; preservation gives
 existence of the target pullback and invertibility of the canonical comparison.
 
-Proof:
-1. For a covering presieve `R`, `hcover` makes `R.map F` covering. Apply `hpullback`
-   to two arrows of `R`: the canonical comparison identifies their fibre products,
-   compatibly with both projections (00WV).
-2. The sheaf on the target satisfies the equalizer condition on `R.map F`.
-   The definition of sheaf and its algebraic-valued version are those of
-   situation-conventions.
-3. Transport this equalizer along the comparison isomorphisms. Its sections and
-   maps are precisely those of `F.op ⋙ G.obj` on `R`. This proves the per-covering
-   equivalence and the sheaf condition on every covering (00WW). The comparison
-   between covering-family sheaves and generated-topology sheaves gives `IsSheaf`.
-4. For abelian groups the same argument on underlying sets applies: restrictions
-   and comparison maps are homomorphisms, so the equalizer is also an equalizer
-   of abelian groups, using situation-conventions. -/
+Stacks Project, Definition 00WV and Lemma 00WW. -/
 theorem siteContinuous_pushforward_isSheaf
     {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
     (J : Precoverage C) (K : Precoverage D)

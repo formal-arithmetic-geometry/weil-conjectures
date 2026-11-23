@@ -27,18 +27,6 @@ uniformly bounded below objects. Then the total right derived functor of `mapOfN
 restricted to the objects whose underlying object lies in `P_C` (the Weil complexes), is a left
 adjoint
 (`CategoryTheory.Endofunctor.IsoAlgebra.isLeftAdjoint_liftFullSubcategory_rightDerivedFunctor`).
-
-## Proof
-
-For `L' ∈ P_D` lifted to the algebras, `ḡ^! (U L')` carries the Weil structure mate of
-`RL ∘ F ≅ G ∘ RL`, and it is realized as an object `H` of `D(IsoAlgebra F)`
-(`CategoryTheory.Endofunctor.IsoAlgebra.exists_cyclicDerivedActionRealization`). The counit
-`RL (ḡ^! U L') ⟶ U L'` is equivariant, hence it lifts to `d : R(mapOfNatIso e) H ⟶ L'`. That
-`u ↦ R(mapOfNatIso e) u ≫ d` is bijective follows from the five lemma applied to the free
-resolution triangle `Free U M ⟶ Free U M ⟶ M ⟶` of the source
-(`CategoryTheory.Endofunctor.IsoAlgebra.exists_freeDerivedWeilResolution`): on the free terms
-the map is the adjunction bijection of `RL ⊣ ḡ^!`, as `R(mapOfNatIso e)` commutes with the free
-functor on bounded objects (this is where coproducts are used).
 -/
 
 @[expose] public section

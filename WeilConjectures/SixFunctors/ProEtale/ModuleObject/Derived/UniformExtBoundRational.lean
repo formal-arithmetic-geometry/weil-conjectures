@@ -53,12 +53,6 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [Preadditive C] [Monoida
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] {φ : R ⟶ S} [IsMonHom φ] {n : ℕ}
   {c : ℕ → (R ⟶ S)}
 
-omit [Preadditive C] [MonoidalPreadditive C] in
-/-- The cocone map `e_0 : M ⟶ S ⊗_R M` is the unit of extension of scalars when `c_0 = φ`. -/
-lemma extendScalarsCoconeι_zero (h0 : c 0 = φ) (M : Mod C R) :
-    extendScalarsCoconeι φ c M 0 = extendUnitHom φ M := by
-  rw [extendScalarsCoconeι, extendUnitHom, h0, IsMonHom.one_hom]
-
 /-- If `c_0 = φ` and multiplication by `n` on `S ⊗_R M` is a monomorphism, the cocone maps
 `e_k : M ⟶ S ⊗_R M` are `R`-linear: `n^k e_k = e_0` is the unit of extension of scalars. -/
 lemma smul_extendScalarsCoconeι (hc : ∀ k, n • c (k + 1) = c k) (h0 : c 0 = φ) (M : Mod C R)

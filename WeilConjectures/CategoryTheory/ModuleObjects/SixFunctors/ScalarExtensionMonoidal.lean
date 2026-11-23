@@ -356,14 +356,8 @@ private lemma canonicalOplax_normalized (M N : Mod C R) :
   rfl
 
 /-- Extension of scalars of internal modules has a scalar-unit normalized strong
-monoidal structure. Source: Stacks, sites-modules.tex, lemma-tensor-product-pullback;
-Tag 07A4, balanced tensors and change of rings.
-(blueprint: lem-sfb-internal-extension-monoidal).
-Proof: restriction is lax monoidal by the balanced tensor universal property. Its
-left adjoint is therefore oplax monoidal. Bimodule associativity and the regular
-bimodule unit laws give inverse isomorphisms for these oplax maps; they agree by
-precomposition with scalar units. The adjunction makes this precomposition injective.
--/
+monoidal structure.
+Source: Stacks Project, Tag 07A4. -/
 theorem exists_extendScalarsMonoidal :
     ∃ m : (extendScalars φ).Monoidal, ∀ M N : Mod C R,
       tensorObjπ M N ≫ (extendUnit φ (M ⊗ N)).hom ≫

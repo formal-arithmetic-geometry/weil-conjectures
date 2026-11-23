@@ -29,7 +29,6 @@ public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 /-! # Ordinary scalar extension as tensor with the coefficient module
 
 Source: Stacks Project, Tags 03EK and 03CZ.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -63,8 +62,7 @@ def scalarTensorModuleIso (f : R ⟶ S) (M : Mod R) :
     (res f).mapIso (λ_ ((change f).obj M))
 
 /-- Naturality of the explicit module contraction.
-Source: Stacks Project, Section tensor-product (03EK).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Section tensor-product (03EK). -/
 theorem scalarTensorModuleIso_naturality (f : R ⟶ S)
     {M N : Mod R} (a : M ⟶ N) :
     (SheafOfModules.monoidalCategory R).tensorHom a (𝟙 _) ≫

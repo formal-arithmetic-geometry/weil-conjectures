@@ -21,9 +21,8 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Basic filtered complexes surjecting on cohomology
 
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-construction of the initial basic filtered complex (blueprint:
-lem-pur-kunneth-basic-filtered-surjection).
+Source: Stacks Project, More on Algebra, Tag 0H7X,
+construction of the initial basic filtered complex.
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ namespace CategoryTheory
 
 /-- `B` is basic when all terms of `B`, of each filtered subcomplex, and of each graded
 piece are free modules, and every differential is zero. Source: Stacks Project, More on
-Algebra, Tag 0H7X, lemma-resolution-filtered-complex (blueprint:
-lem-pur-kunneth-basic-filtered-surjection). -/
+Algebra, Tag 0H7X. -/
 def BasicFilteredComplex (R : Type u) [CommRing R]
     (B : WeilFilteredObject (CochainComplex (ModuleCat.{u} R) ℤ)) :
     Prop :=

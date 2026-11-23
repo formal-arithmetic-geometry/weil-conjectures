@@ -21,8 +21,7 @@ of whose cohomology objects satisfy `P`, is obtained from the shifted objects `M
 (`DerivedCategory.iteratedExtensions_of_isGE_of_isLE`), using the truncation triangles
 `τ_{<b} K ⟶ K ⟶ τ_{≥b} K ⟶ (τ_{<b} K)⟦1⟧` of the canonical t-structure and the long exact
 cohomology sequence. Consequently, if `P` is essentially small, then so are the bounded complexes
-with cohomology in `P` (`DerivedCategory.essentiallySmall_bounded_inf`). This is the argument of
-blueprint `lemma-hypotheses-brown-representability--5`.
+with cohomology in `P` (`DerivedCategory.essentiallySmall_bounded_inf`).
 -/
 
 @[expose] public section
@@ -122,7 +121,7 @@ lemma iteratedExtensions_le {Q : ObjectProperty (DerivedCategory C)} [Q.IsTriang
     rintro K ⟨Y, Z, f, g, h, hT, hY, hZ⟩
     exact Q.ext_of_isTriangulatedClosed₂ _ hT (ih Y hY) (hQ Z hZ)
 
-/-- Blueprint `lemma-hypotheses-brown-representability--5` (formal part): if `P` is essentially
+/-- If `P` is essentially
 small and closed under isomorphisms, the bounded objects of `D(C)` all of whose cohomology objects
 satisfy `P` are essentially small. -/
 theorem essentiallySmall_bounded_inf [P.IsClosedUnderIsomorphisms]

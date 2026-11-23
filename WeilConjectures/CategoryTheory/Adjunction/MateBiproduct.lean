@@ -38,7 +38,7 @@ For a preadditive category `C` with finite biproducts and `d : ℕ`, the *biprod
   biproduct decompositions are built from the units and natural endomorphisms `μ₁ i`, `μ₂ i` of
   the identity functors intertwined by `L₂`; the compatibility is then automatic.
 
-## Implementation notes
+## Implementation details
 
 The compatibility hypotheses cannot be dropped: an arbitrary isomorphism
 `finBiproductPow ⋙ G ≅ G ⋙ finBiproductPow` is a `d × d` matrix with entries in `End G`, and its

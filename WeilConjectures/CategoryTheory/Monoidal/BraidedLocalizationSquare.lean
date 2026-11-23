@@ -9,7 +9,7 @@ import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 
 /-! # A braided comparison through a K-flat localization
 
-Source: Stacks Project, Tags 06YS and 06YT; uniqueness of derived bifunctors.
+Source: Stacks Project, Tags 06YS and 06YT.
 -/
 
 @[expose] public noncomputable section
@@ -99,18 +99,7 @@ private theorem square_monoidal [G.Monoidal] [IsIso (ε L)]
 
 /-- A tensor comparison descends to a braided comparison if both
 localization tensorators are invertible on the resolving K-flat models.
-Source: Stacks Project, Tags 06YS and 06YT
-(auxiliary; not a blueprint node).
-
-Proof: the target tensor composed with G in both variables and the source tensor
-postcomposed with G have counits to the same bifunctor on A. Both counits are invertible
-on resolving models: use the given tensorator invertibility and the isomorphism e.
-The resolving-subcategory criterion makes them left derived bifunctors. Uniqueness gives
-a natural isomorphism between them, with the asserted square. The lax-square construction
-proves its associator and unit coherence; its unit map is invertible. The square makes e
-monoidal. The braided square for e, F, Q and L then proves the braided square for G on
-resolving representatives by cancellation of the source tensorator. Naturality and the
-existence of resolving representatives extend it to all objects. -/
+Source: Stacks Project, Tags 06YS and 06YT. -/
 theorem braidedLocalizationSquare (W : MorphismProperty A)
     [W.ContainsIdentities] [W.RespectsIso] [Q.IsLocalization W]
     [W.localizerMorphismKFlat.IsLeftDerivabilityStructure]

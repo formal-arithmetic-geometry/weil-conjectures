@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 # Isomorphisms of integer tensor families
 
 A comparison in degree one uniquely extends to a multiplicative comparison of
-coherent integer tensor families. Source: the universal property of the group of integers.
-(auxiliary; not a blueprint node).
+coherent integer tensor families.
 -/
 
 @[expose] public noncomputable section

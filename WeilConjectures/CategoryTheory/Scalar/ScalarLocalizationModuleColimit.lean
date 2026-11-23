@@ -29,7 +29,6 @@ public import WeilConjectures.Algebra.Homology.ProperBaseChange.ExtensionTensorC
 # Scalar localization as an ordinary module-sheaf colimit
 
 Source: Stacks Project, Tags 00CM, 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-module-colimit)
 -/
 
 @[expose] public noncomputable section

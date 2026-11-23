@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Extension of intertwining module maps
 
-Source: the agent-formulated twisted variant of Stacks Tag 00W0, step 4.
+## References
+
+* Stacks Project, Tag 00W0 (motivation for the twisted construction).
 -/
 
 @[expose] public section
@@ -265,27 +267,7 @@ private theorem extendMap_app (S : Site J s R a) :
 -- Preserve the original continuity instance in the public theorem interface.
 set_option linter.unusedSectionVars false in
 /-- An intertwining map on the base extends to the integer-action site.
-
-Source: the map part of step 4 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group; module linearity as in Stacks 03CV
-(blueprint: lem-sf-twisted-action-module-morphism-extension).
-
-Proof: at an object of the form inclusion X, take the given component of h.
-The equality inclusion_obj identifies every object with such an object. The
-coefficient restriction is a ring isomorphism, so these maps are linear for the
-original coefficient ring as well: write each scalar as the image of its inverse
-under that ring isomorphism and use linearity of h. Naturality on degree-zero
-arrows is the naturality of h. The displayed equation gives naturality on the
-minus-one generator. That generator is invertible: composing with the degree-one
-arrow furnished by the counit of s gives degree-zero isomorphisms in both orders,
-by arrows_comp. Thus the equation also holds for its inverse. Every arrow with
-label n factors into a degree-zero base arrow and a string of these generators
-or their inverses. To see this, induct on positive and negative n, using
-arrows_comp to combine the last generator; the powerComp isomorphism is absorbed
-into the degree-zero base arrow. Consequently the component family is natural on
-every arrow and defines a morphism of module sheaves. Its restriction is h by
-construction. This proof uses no gluing, choice of a module object, or nonzero
-coefficient assumption. -/
+Source: Stacks 03CV (module linearity). -/
 theorem moduleMorphismExtension (S : Site J s R a) :
     letI := S.category
     letI := S.inclusion_continuous

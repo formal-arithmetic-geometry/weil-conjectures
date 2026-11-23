@@ -12,9 +12,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 
 /-! # PointFiniteCohomologyComplexes
-
-Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: def-weil-point-finite-cohomology-complexes).
 -/
 
 @[expose] public section
@@ -26,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- The full-subcategory predicate: cohomology has finite support and the specified
-finiteness property.
-Source: blueprint order 1509 (blueprint: def-weil-point-finite-cohomology-complexes). -/
+finiteness property. -/
 noncomputable def pointFiniteCohomology (R : Type u) [CommRing R] :
     ObjectProperty (DerivedCategory (ModuleCat.{u} R)) :=
   fun K ↦ (∃ s : Finset ℤ, ∀ i : ℤ, i ∉ s →

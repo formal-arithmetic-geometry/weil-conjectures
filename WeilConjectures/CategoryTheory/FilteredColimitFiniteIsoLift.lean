@@ -56,24 +56,8 @@ private theorem arrow_comp_congr {C : Type u} [Category.{u} C]
   rfl
 
 /-- Finitely many isomorphisms out of fixed stage objects lift above that stage.
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation, and Categories,
-Tag 04AX, the object and arrow description of filtered colimits.
-(blueprint: lem-weil-pbc-filtered-colimit-finite-iso-lift)
-
-Proof: Represent the hom and inverse arrows of each E i by surjectivity of the
-arrow cocone. Move this finite family above j using maxima and IsFiltered.wideSpan.
-The images of the inverse targets and hom sources equal the images of D i, and
-the hom targets and inverse sources have equal images. Apply eventual equality
-in the object colimit to these three endpoint equations for each i, synchronizing
-all transitions with wideSpan. Transport the arrows along the resulting equalities.
-Cocone naturality preserves their Arrow images, including endpoints. Consequently
-their composites have the same Arrow images as identities. Eventual equality in
-the arrow colimit, again synchronized with wideSpan, makes both inverse equations
-hold at one refinement. They define isomorphisms; transport the codomains along
-F.map_comp to the images under the composite transition out of j. Naturality gives
-the required Arrow images. The finite-family constructions also work for an empty
-index, since wideSpan has the given stage as its source. No stage category needs
-to be finite. -/
+Source: Stacks Project, Sites, Tag 09YL observation, and Categories,
+Tag 04AX, the object and arrow description of filtered colimits. -/
 theorem filteredColimit_finite_iso_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))

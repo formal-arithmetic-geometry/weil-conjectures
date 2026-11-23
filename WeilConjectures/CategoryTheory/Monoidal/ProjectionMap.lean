@@ -17,7 +17,7 @@ with `π_{K, L ⊗ N_Y}` through the induced comparison `c_M = π_{M, N_Y} ≫ R
 isomorphism if and only if the other is
 (`CategoryTheory.Adjunction.isIso_projectionMap_whiskerRight_iff`). This is the formal input for
 the compatibility of the projection formula for compactly supported direct images with finite
-reduction of coefficients (blueprint `sk-prop-sf-pf-reduction`).
+reduction of coefficients.
 -/
 
 @[expose] public section

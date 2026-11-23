@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 /-!
 # Algebraic transport of unit-normalized site composition and identity
 
-Source: Stacks Project, Sites, Tags 03CB, 00VE, 00WX, 00WH and 00YV;
-Modules on Sites, Tag 03D2 (auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 03CB, 00VE, 00WX, 00WH and 00YV; Modules on Sites, Tag 03D2.
 
 The composite inverse image is the specified comma-colimit/sheafification construction.
 Its comparison is obtained from the specified adjunctions, without choosing another unit.
@@ -37,8 +36,7 @@ The ring isomorphism and additive natural isomorphism have precisely the prescri
 underlying maps; semilinearity is required on every section. Isomorphisms of ring sheaves
 preserve zero, one, addition and multiplication; additive sheaf isomorphisms preserve zero
 and addition. The natural-isomorphism type includes naturality on all module morphisms.
-Source: Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YV, and Modules on Sites, Tag 03D2. -/
 def SiteAlgebraicComparison
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

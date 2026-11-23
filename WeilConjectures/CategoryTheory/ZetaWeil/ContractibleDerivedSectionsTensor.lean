@@ -171,9 +171,8 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Derived tensor evaluation on contractible objects
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 4.1(1);
-Stacks Project, Tags 0F63, 06YS and 0FPT
-(blueprint: lem-zl-contractible-derived-sections-tensor).
+Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 4.1(1); Stacks Project, Tags 0F63,
+06YS and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -195,8 +194,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r}) (U : Cᵒᵖ)
 
 /-- The actual section functor with its coefficient action.
-Source: HRS Lemma 4.1(1), Stacks 03DA
-(blueprint: lem-zl-contractible-derived-sections-tensor). -/
+Source: HRS Lemma 4.1(1), Stacks 03DA. -/
 abbrev contractibleModuleEvaluation :
     RingedTensorModules.{c, v, r} J R ⥤ ModuleCat.{max c v r} (R.obj.obj U) :=
   SheafOfModules.evaluation.{max c v r}

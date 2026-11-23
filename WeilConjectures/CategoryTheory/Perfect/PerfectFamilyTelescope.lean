@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 
 /-! # The perfect-family calculation on a Brown telescope
 
-Source: Krause, Derived categories, resolutions, and Brown representability, Section 4.5.
-(blueprint: lem-sfb-perfect-family-telescope)
+## References
+
+* Krause, Derived categories, resolutions, and Brown representability, Section 4.5.
 -/
 
 @[expose] public section
@@ -312,28 +313,9 @@ end TowerSeparation
 
 /-- A compatible telescope element is universal on a perfect family if the initial
 stage surjects and each transition kills the preceding kernel.
-
-Source: Krause, *Derived categories, resolutions, and Brown representability*,
-Section 4.5, the lemma on coherent functors and the comparison of (4.1) with the
-telescope triangle; Krause, *Localization theory for triangulated categories*, 5.1.1.
-(blueprint: lem-sfb-perfect-family-telescope)
-
-Proof: cover each X n by X 0 plus the evaluation coproduct of generator maps
-in the kernel of its element. Perfectness lifts generator maps into the sum of X n
-through the sum of these covers. Since every kernel summand dies at the next stage,
-its composite to the telescope vanishes. Consequently, any generator map which
-lifts through the telescope projection factors through X 0.
-
-For the lifting, prove that identity minus the transition is injective on generator
-maps into the sum. If f is fixed by the transition, use the preceding covers to
-factor it through the sum of copies of X 0. Perfectness and coproducts of weak
-kernels show that the difference from its constant-sequence shift is killed by the
-sum of the first transition a 0. Both shift and identity-minus-shift on a constant
-sequence are split monomorphisms, with explicit retractions. Cancelling these
-monomorphisms makes f zero. Shift closure and exactness of the telescope triangle
-now give the required lifting. Surjectivity follows from the initial stage;
-injectivity follows because its kernel is killed by a 0.
--/
+Source: Krause, *Derived categories, resolutions, and Brown representability*, Section 4.5, the
+lemma on coherent functors and the comparison of (4.1) with the telescope triangle; Krause,
+*Localization theory for triangulated categories*, 5.1.1. -/
 theorem perfectFamily_telescope_bijective
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
     [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

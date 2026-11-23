@@ -16,9 +16,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Flat scalars and the normalized direct-image/strict-limit square
 
-Source: blueprint main-20261015, proper base change, completed exchange coherence,
-second paragraph; scalar supplement using Stacks Tags 0A07, 08BJ, 070I, 070Y and 070K
-(blueprint: lem-weil-pbc-flat-scalar-tower-limit-square).
+Source: scalar supplement using Stacks Tags 0A07, 08BJ, 070I, 070Y and 070K.
 
 The auxiliary structures merely bundle the universal units and their normalization
 identities. Ordinary scalar-limit maps are fixed by `limit.post`, which sends a
@@ -108,8 +106,7 @@ variable {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'}
 
 /-- The ordinary and derived scalar comparison, retaining both exact-localization
 factors and the equation with universal right-derived units on K-injectives.
-Source: Stacks Tags 070I, 070Y and 070K, scalar supplement to completed exchange coherence
-(blueprint: lem-weil-pbc-flat-scalar-tower-limit-square). -/
+Source: Stacks Tags 070I, 070Y and 070K, scalar supplement to completed exchange coherence. -/
 structure ScalarComparison
     (F' : A' ⥤ B') (F : A ⥤ B) (r : A' ⥤ A) (s : B' ⥤ B)
     [F'.Additive] [F.Additive] [r.Additive] [s.Additive]
@@ -131,7 +128,7 @@ structure ScalarComparison
 
 /-- The additive structure of ordinary limit, supplied by Mathlib's limit-preservation
 criterion, so additivity is not an extra hypothesis of the scalar square.
-Source: Stacks Tag 02MZ (blueprint: lem-weil-pbc-flat-scalar-tower-limit-square). -/
+Source: Stacks Tag 02MZ. -/
 abbrev limitAdditive {E : Type uA} [Category.{vA} E] [Abelian E]
     [HasLimitsOfShape ℕᵒᵖ E] :
     (lim : (ℕᵒᵖ ⥤ E) ⥤ E).Additive :=

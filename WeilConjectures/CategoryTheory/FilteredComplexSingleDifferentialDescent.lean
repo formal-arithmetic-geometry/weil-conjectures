@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 # Descent of one filtered differential through the cycle-boundary quotients
 
 Source: Stacks Project, Homology, Tag 012K, displayed differential formula.
-(blueprint: lem-sp-filtered-complex-single-differential-descent).
 -/
 
 @[expose] public section
@@ -40,22 +39,7 @@ private theorem graded_kernel (K : CochainComplex C ℤ) (F : DecreasingFiltrati
   exact ((ShortComplex.exact_iff_image_eq_kernel _).mp h).symm
 
 /-- A representative of the zero source page class differentiates to a zero target class.
-Source: Stacks Project, Tag 012K, displayed boundary and differential formulas.
-
-Proof. Put p = i.1 and n = i.1+i.2. Factor x through the source boundary
-inclusion using its cokernel. Refine along the epimorphism from boundary
-representatives to their graded image. The difference between the given t and
-the resulting boundary representative has zero graded projection, hence factors
-through F^(p+1), the degreewise kernel of that projection. The differential
-sends the ambient boundary representative sum into d(F^(p+1)): it kills the
-incoming differential image by d squared = 0, and maps F^(p+1) into its image.
-The difference has its differential in this same image. Their sum dt therefore
-lies in d(F^(p+1)). Since dt=tprime also lies in F^(p+r), it is a target boundary,
-whose incoming filtration degree is (p+r)-r+1=p+1. Project to target graded
-boundaries and use monicity of the cycle inclusion to obtain a factorization
-of the refined y through the boundary inclusion. Its cokernel projection is
-zero, and cancellation of the refining epimorphism concludes. The argument
-works for every integer r and uses no elementwise lifting. -/
+Source: Stacks Project, Tag 012K, displayed boundary and differential formulas. -/
 private theorem filteredComplex_differential_zero_class
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ)
     (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j)
@@ -184,21 +168,7 @@ private theorem filteredComplex_differential_zero_class
 
 /-- The underlying complex differential descends between the two actual cokernels
 in one related pair of bidegrees. No square-zero or uniqueness assertion is included.
-Source: Stacks Project, Tag 012K, displayed differential formula.
-(blueprint: lem-sp-filtered-complex-single-differential-descent).
-
-Proof. Take an epimorphic family of simultaneous representatives t,tprime,x,y
-from filteredComplex_differential_representatives_cover and let e = x followed
-by the source boundary cokernel projection. This composite is epic. Apply the
-zero-class calculation to the kernel of e: its target representative projects
-to zero. The abelian cokernel universal property therefore descends y followed
-by the target projection through e to a morphism delta between the page objects.
-For any other representatives, pull back e along their source page class. The
-projection to their test object is epic. Subtract the two families after this
-pullback; their source page class is zero by the pullback equation. The
-zero-class calculation makes their target page classes equal. Use the descent
-equation, then cancel the pullback epimorphism, to obtain the asserted formula
-on the original test object. All constructions use finite limits and cokernels. -/
+Source: Stacks Project, Tag 012K, displayed differential formula. -/
 theorem filteredComplex_single_differential_descent
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)
     (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j) :

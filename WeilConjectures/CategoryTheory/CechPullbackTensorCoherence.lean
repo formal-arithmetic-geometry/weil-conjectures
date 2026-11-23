@@ -21,7 +21,6 @@ import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 # Tensor coherence for a Cech pullback functor
 
 Source: Stacks Project, sites-modules.tex, Tag 03EL.
-(blueprint: lem-weil-pbc-cech-pullback-tensor-coherence).
 
 The tensor comparison and its unit compatibility are isolated here so that the
 ordinary-complex assembly can use them as a single piece of data. The tensor
@@ -93,18 +92,7 @@ private theorem tensorCoherence_of_comparison
 
 /--
 For the canonical tensor products of sheaves of modules, the supplied left adjoint `F` of
-`h.modules` carries a tensor comparison normalized at `v`.
-
-Proof. By uniqueness of left adjoints, `F` is isomorphic to the module pullback along `h`,
-which preserves tensor products (Stacks 03EL; lem-weil-pbc-ringed-topoi-module-pullback-tensor);
-transporting that comparison through the isomorphism gives `tensor`, natural in both variables.
-Take `unitA`, `unitB` the identities (`SheafOfModules.unit` is the tensor unit). The canonical
-comparison satisfies the unit equation with the canonical unit comparison `v0`; `v = v0 ≫ a`
-for an automorphism `a` of the target unit, i.e. a unit global section acting centrally, and
-multiplying the tensor comparison by `a⁻¹` keeps it natural and turns the unit equation for
-`v0` into the one for `v`.
-(blueprint: lem-weil-pbc-cech-pullback-tensor-coherence)
--/
+`h.modules` carries a tensor comparison normalized at `v`. -/
 theorem cech_pullback_tensor_coherence
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

@@ -19,9 +19,7 @@ import WeilConjectures.CategoryTheory.TruncationCoupleNaturality
 
 /-! # Individual natural truncation couples
 
-Source: Stacks Project, Tags 015J, 05TC and 08J5; the individual construction and naturality
-in steps 1, 3 and 4 of lem-pc-coproduct-truncation-couple.
-(blueprint: lem-pc-natural-bounded-below-truncation-couples).
+Source: Stacks Project, Tags 015J, 05TC and 08J5.
 -/
 
 @[expose] public section
@@ -90,30 +88,7 @@ private theorem abutmentMap_isIso
 /-- Choose truncation couples for individual derived objects with a fixed lower bound.
 The comparisons commute with every individual morphism. No coproduct is involved.
 
-Source: Stacks Project, Tags 015J, 05TC and 08J5; steps 1, 3 and 4 of
-lem-pc-coproduct-truncation-couple.
-(blueprint: lem-pc-natural-bounded-below-truncation-couples).
-
-Proof:
-1. Use Mathlib's standard t-structure to choose a strictly bounded-below
-representative of each object. The localization comparison identifies its
-cohomology with that of the original object. Build its exact couple explicitly
-from `truncation_raw_exact`, retaining the raw objects and three maps. Apply
-`truncation_quadrant_vanishing` and transport the lower-bound hypothesis.
-2. `truncation_abutment_cocone` proves the canonical degree-n inclusion is
-invertible. Compose this map with RF and homology of the representative
-isomorphism to obtain `eD`.
-3. Construct `eE` from the inverse bridge and the single-functor, RF and homology
-shift isomorphisms, followed by the cohomology comparison of the representative.
-4. Conjugate a given derived morphism by the representative isomorphisms and
-apply `TruncationCouple.raw_naturality`. Assemble the three raw squares into
-`T`; equality-transport naturality handles the type-zero indexing of g.
-Compose the raw comparison squares with the representative comparisons. In D,
-functoriality and cancellation of the representative isomorphisms give the
-claimed equation. In E, cancel the homologyFunctorFactors and representative
-isomorphisms, then apply the single/RF/homology composite functor to the resulting
-cohomology square. Zero objects and morphisms require no exception.
-Choices witness only this existential proposition, and define no library object. -/
+Source: Stacks Project, Tags 015J, 05TC and 08J5. -/
 theorem exists_natural_boundedBelow_truncation_couples
     {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
     [HasDerivedCategory.{wA} A]

@@ -12,7 +12,7 @@ public import Mathlib.Algebra.DirectSum.Basic
 # Countable Hom continuity on bounded-below families
 
 Source: Bhatt–Scholze, The pro-étale topology for schemes, Lemma 6.8.12 and
-Proposition 6.8.14(2) (blueprint: def-weil-pbc-countable-bounded-below-hom-continuity).
+Proposition 6.8.14(2).
 -/
 
 @[expose] public section
@@ -29,8 +29,7 @@ namespace DerivedCategory
 cohomological lower bound, after every integer shift. The definition quantifies
 all coproduct cofans, avoiding a choice of coproduct. Their shifted legs define
 exactly the canonical comparison. No bound on K itself is imposed.
-Source: Bhatt–Scholze, Lemma 6.8.12, used in Proposition 6.8.14(2)
-(blueprint: def-weil-pbc-countable-bounded-below-hom-continuity). -/
+Source: Bhatt–Scholze, Lemma 6.8.12, used in Proposition 6.8.14(2). -/
 def CountableBoundedBelowHomContinuous {A : Type u} [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] (K : DerivedCategory A) : Prop :=
   ∀ (L : ℕ → DerivedCategory A) (b : ℤ), (∀ n : ℕ, (L n).IsGE b) →

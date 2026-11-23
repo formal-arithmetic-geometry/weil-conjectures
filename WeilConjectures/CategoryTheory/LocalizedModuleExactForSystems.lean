@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Localized module adjunction for independent site universes
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
 The construction retains the actual direct-sum presheaf and its sheafification.
 -/
 
@@ -28,7 +27,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max c v r}) (U : C)
 
 /-- Actual direct-sum extension followed by sheafification, at independent site universes.
-Source: Stacks 03DI (auxiliary; not a blueprint node). -/
+Source: Stacks 03DI. -/
 abbrev localizedSystemExtension :
     SheafOfModules.{max c v r}
       (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U) ⥤
@@ -39,7 +38,7 @@ abbrev localizedSystemExtension :
       PresheafOfModules.sheafification (𝟙 _)
 
 /-- Actual restriction to the slice, retaining the same section modules and maps.
-Source: Stacks 03DJ (auxiliary; not a blueprint node). -/
+Source: Stacks 03DJ. -/
 abbrev localizedSystemRestriction :
     SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) ⥤
@@ -233,17 +232,7 @@ private noncomputable def extensionSheafAdjunction
     exact extensionPresheafHomEquiv_naturality_right.{c, v, r} R U F G H _ b
 
 /-- Exactness of both actual localized module functors.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node).
-Proof: the direct-sum Hom correspondence followed by module sheafification gives the
-extension/restriction adjunction. Restriction is additive componentwise, and its left
-adjoint is additive. Extension preserves colimits by adjunction and monomorphisms by
-sectionwise injectivity of direct sums and left exactness of module sheafification.
-The abelian exactness criteria then give its finite-limit preservation. Restriction
-preserves limits by adjunction. Its composite with the module forgetful functor is
-abelian-sheaf restriction, which preserves colimits by the cocontinuous site adjunction.
-Reflect finite colimits through the faithful exact module forgetful functor.
-All constructions remain in max c v r; no equality of the site universes is imposed. -/
+Source: Stacks 03DI--03DJ. -/
 theorem localizedSystemExact :
     (localizedSystemExtension.{c, v, r} R U).Additive ∧
     PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) ∧
@@ -308,53 +297,42 @@ theorem localizedSystemExact :
     inferInstance, inferInstance, inferInstance⟩
 
 /-- Exactness component for the actual localized functor.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 instance localizedSystemExtensionAdditive : (localizedSystemExtension.{c, v, r} R U).Additive :=
   (localizedSystemExact.{c, v, r} R U).1
 
 /-- Exactness component for the actual localized functor.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 instance localizedSystemExtensionLimits :
     PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) :=
   (localizedSystemExact.{c, v, r} R U).2.1
 
 /-- Exactness component for the actual localized functor.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 instance localizedSystemExtensionColimits :
     PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R U) :=
   (localizedSystemExact.{c, v, r} R U).2.2.1
 
 /-- Exactness component for the actual localized functor.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 instance localizedSystemRestrictionAdditive : (localizedSystemRestriction.{c, v, r} R U).Additive :=
   (localizedSystemExact.{c, v, r} R U).2.2.2.1
 
 /-- Exactness component for the actual localized functor.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 instance localizedSystemRestrictionLimits :
     PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} R U) :=
   (localizedSystemExact.{c, v, r} R U).2.2.2.2.1
 
 /-- Exactness component for the actual localized functor.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 instance localizedSystemRestrictionColimits :
     PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} R U) :=
   (localizedSystemExact.{c, v, r} R U).2.2.2.2.2
 
 open Classical in
 /-- The normalized localized adjunction, uniquely fixed by the summand injection unit.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node).
-Proof: direct-sum elimination sends a map from the extension to a compatible map on each
-slice object. Its inverse includes each section in the summand of its structure arrow.
-Sheafification extends this natural bijection uniquely to sheaves. The summands generate
-locally, so the displayed unit determines the adjunction uniquely. -/
+Source: Stacks 03DI--03DJ. -/
 theorem localizedSystemAdjunction_existsUnique :
     ∃! adj : localizedSystemExtension.{c, v, r} R U ⊣
       localizedSystemRestriction.{c, v, r} R U,
@@ -384,8 +362,7 @@ theorem localizedSystemAdjunction_existsUnique :
     exact h' M W x
 
 /-- The actual adjunction selected by the unique prescribed unit.
-Source: Stacks 03DI--03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03DI--03DJ. -/
 def localizedSystemAdjunction : localizedSystemExtension.{c, v, r} R U ⊣
     localizedSystemRestriction.{c, v, r} R U :=
   (localizedSystemAdjunction_existsUnique.{c, v, r} R U).exists.choose

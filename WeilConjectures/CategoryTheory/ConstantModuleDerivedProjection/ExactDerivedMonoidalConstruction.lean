@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 /-! # Construction of normalized exact derived monoidal functors
 
 Source: Stacks Project, Tags 07A4, 0FPQ and 0FPT.
-(blueprint: lem-sfb-exact-derived-monoidal-construction).
 -/
 
 @[expose] public noncomputable section
@@ -127,18 +126,8 @@ private theorem tensor_localization_iso (P R : CochainComplex E ℤ)
 /-- An exact flat-preserving monoidal functor has a representative-normalized derived
 strong monoidal structure, for the chosen derived-category universes.
 Source: Stacks Project, Derived Categories, Tags 0FPQ and 0FPT, and Cohomology on Sites,
-Tag 07A4 (blueprint: lem-sfb-exact-derived-monoidal-construction).
-
-Proof: take the subcategory of source K-flat complexes whose termwise images are K-flat.
-Functorial flat-term resolutions land in it, because the functor preserves flat objects
-and the countable colimits used to form these resolutions. Its inclusion is therefore a
-left derivability structure. Derive the source and target tensor bifunctors: their
-comparison maps are invertible when the second input lies in this subcategory. The
-canonical isomorphism between these two left-derived bifunctors gives an oplax tensorator.
-The defining representative equation and `ofLaxSquare` transfer all associativity and
-unit axioms. Its tensor components and its unit are invertible, so the structure is strong.
-The left-derived comparison factor equation is the asserted normalization. The argument
-uses the chosen localization functors directly and does not compare localization universes. -/
+Tag 07A4.
+-/
 theorem exact_monoidal_normalization
     (G : B ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
     [PreservesColimitsOfSize.{0, 0} G] [G.PreservesFlat] (m : G.Monoidal) :

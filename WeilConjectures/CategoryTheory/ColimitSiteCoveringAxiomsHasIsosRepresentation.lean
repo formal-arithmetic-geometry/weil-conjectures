@@ -48,16 +48,7 @@ private theorem inverse_equations_of_arrow_eq
   exact ⟨hfg, hgf⟩
 
 /-- Stage representation of an isomorphism in a filtered colimit category.
-Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-filtered-colimit-iso-presieve-representation)
-
-Proof: Represent the arrow and its inverse in the arrow colimit. Filteredness gives
-one stage containing both representatives and all endpoint equalities. The two
-inverse equations are equalities in the arrow colimit, hence become equalities at
-a further common stage by the filtered colimit equality criterion. The resulting
-stage arrow is an isomorphism; transporting its singleton along the target
-identification gives the singleton of the original arrow.
--/
+Source: Stacks Project, Sites, Tag 09YL. -/
 theorem filtered_colimit_iso_presieve_representation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))
