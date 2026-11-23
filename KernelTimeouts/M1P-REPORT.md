@@ -52,13 +52,12 @@ so no normalized instrumentation-overhead percentage is claimed.
 
 Calls in this table are both counter and analyzed counts. Time shares are
 comparison-exclusive; bracketed intervals are three-repeat min--max values,
-with the median outside the brackets. A dash for Cone's call share means the
-READY4.2 summary did not tabulate that percentage. The transition column
+with the median outside the brackets. The transition column
 names the largest M1-parent to M1-child row, not the most frequent child.
 
 | Case | Calls | M1 call share | M1 time share | M1 calls | M1 depth median/p90/max | 50%-time band | M1 fan-out mean/p90 | Dominant transition | Shape | C result |
 |---|---:|---:|---:|---:|---|---|---:|---|---|---|
-| Derived-Completion Cone | 12,220,822 | -- | 99.734% | 9,356,262 | 82/93/111 | 78--90 | 1.305/3 | projection -> projection | deep | telescope changes |
+| Derived-Completion Cone | 12,220,822 | 76.560% | 99.734% | 9,356,262 | 82/93/111 | 78--90 | 1.305/3 | projection -> projection | deep | telescope changes |
 | NativePullTensor | 2,685,580 | 41.730% | 98.164% | 1,120,689 | 44/55/81 | 36--47 | 2.375/9 | application -> function-head | wide | provider-dependent type |
 | PR1556 | 6,670,198 | 75.051% | 99.707% | 5,006,059 | 122/181/213 | 87--125 | 1.330/3 | projection -> projection | mixed | dependent domain |
 | PR1625 | 11,757,788 | 68.984% | 99.546% | 8,111,028 | 101/112/125 | 95--107 | 1.448/3 | projection -> projection | deep | outer telescope changes |
