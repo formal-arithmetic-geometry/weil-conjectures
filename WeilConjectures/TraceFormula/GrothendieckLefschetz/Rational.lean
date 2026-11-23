@@ -66,7 +66,10 @@ extension `G : D(𝒪_E) ⥤ D(E)` and `t = π_E^{-Nm}`, the global Frobenius op
 ```
 tr_E(Frob_{X,K_E}^m ∣ RΓ_c(X, K_E)) = ∑_{x̄ ∈ X₀(𝔽_{q^m})} tr_E(Frob_{x̄,m} ∣ (K_E)_x̄).
 ```
--/
+This is only the reduction step: the statement holds for any braided additive `G` and any scalar
+`t`, and no `E`-coefficient sheaf appears. Identifying `Frob_{X,K_E}` with `t • G(V)` is the
+separate comparison of the integral and rational operators
+(`ProEtale.CondensedRing.pow_smul_frobeniusCompactOperator_eq`, in the pro-étale framework). -/
 theorem trace_smul_map_eq_finsum_trace (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
     (hI : I = Ideal.span {ϖ})
     (F : S.FrobeniusSystem f.geometricGaloisFrobenius.asIso.hom) {m : ℕ} (hm : m ≠ 0)
