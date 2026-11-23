@@ -11,8 +11,9 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Pasting scalar mates after exact localization
 
-Source: Stacks Tags 05S7 and 014F; the elementary adjunction mate identities.
-(blueprint: lem-weil-pbc-exact-scalar-mate-pasting).
+## References
+
+* Stacks Tags 05S7 and 014F.
 -/
 
 @[expose] public section
@@ -78,12 +79,7 @@ private theorem mate_paste_isIso
   infer_instance
 
 /-- Pasting exact coefficient squares preserves invertibility of their derived scalar mates.
-Source: Stacks Tags 05S7, 014F and the adjunction mate identities.
-(blueprint: lem-weil-pbc-exact-scalar-mate-pasting).
-Proof: localization carries the specified ordinary pasting identity to the derived
-squares. The mate of a pasted square is the pasted mate. The compositor
-isomorphisms conjugate this paste, so invertibility of its two factors implies
-invertibility of the specified total mate. -/
+Stacks Project, Tags 05S7 and 014F. -/
 theorem derivedScalarMatePasting
     {A B C D E F : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category E] [Category F]

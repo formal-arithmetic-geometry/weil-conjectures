@@ -28,7 +28,7 @@ point (`AlgebraicGeometry.WeilGroup.genericStalkEquiv`), and for `σ ∈ Gal(Ω 
 
 For `σ` in the inertia group at a boundary point and for a residue Frobenius lift, this is the
 action of the inertia group and of the Frobenius on the generic stalk in blueprint
-`lem-wf-boundary-stalk-invariants`.
+`lemma-boundary-stalk--1`.
 -/
 
 @[expose] public section

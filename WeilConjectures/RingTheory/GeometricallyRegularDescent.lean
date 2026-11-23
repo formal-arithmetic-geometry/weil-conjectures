@@ -33,10 +33,11 @@ Source: Stacks Project, Algebra, Lemma Tag 07NH
 Proof: assume `B` is geometrically regular and fix a finite purely inseparable extension
 `k'/k`, as in `def-weil-pbc-finite-purely-inseparable-extension`. The map from
 `A ⊗[k] k'` to `B ⊗[k] k'` is faithfully flat by the faithfully-flat base-change lemma.
-Geometric regularity of `B` makes `B ⊗[k] k'` regular by `def-weil-pbc-g-ring` and
-`def-weil-regular-scheme`. Regularity descends along this faithfully flat map by
-`lem-weil-pbc-regular-ring-faithfully-flat-descent`, so `A ⊗[k] k'` is regular. Since
-`k'/k` was arbitrary, `def-weil-pbc-g-ring` gives geometric regularity of `A`. -/
+Geometric regularity of `B` makes `B ⊗[k] k'` regular by
+`theorem-finite-etale-covers-proper-henselian--2` and `def-weil-regular-scheme`. Regularity descends
+along this faithfully flat map by `lem-weil-pbc-regular-ring-faithfully-flat-descent`, so
+`A ⊗[k] k'` is regular. Since `k'/k` was arbitrary,
+`theorem-finite-etale-covers-proper-henselian--2` gives geometric regularity of `A`. -/
 theorem isGeometricallyRegular_of_faithfullyFlat
     (k : Type u) (A : Type v) (B : Type w) [Field k] [CommRing A] [CommRing B]
     [Algebra k A] [Algebra k B] [Algebra A B] [IsScalarTower k A B]

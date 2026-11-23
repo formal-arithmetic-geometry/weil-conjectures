@@ -11,7 +11,7 @@ public import WeilConjectures.WeilSheaf.HomologyShift
 /-!
 # Upper weight bounds of Weil complexes
 
-The blueprint definition `def-weil-complex-weights` has two halves. A Weil complex `K` on a
+The blueprint definition `definition-weights--6` has two halves. A Weil complex `K` on a
 `k₀`-scheme `Y` has *weights at most* `w` if every cohomology sheaf `𝓗ʲK` is `ι`-mixed of
 weights at most `w + j`; it has *weights at least* `w` if its Verdier dual `D_Y K` has weights
 at most `-w`. The upper half is `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost`
@@ -30,7 +30,7 @@ of Weil complexes is `AlgebraicGeometry.WeilComplex.ihomLisse`, out of a lisse W
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_iff`: the upper half of
-  `def-weil-complex-weights`.
+  `definition-weights--6`.
 - `AlgebraicGeometry.WeilComplex.isMixedOfWeightsAtMost_shift_iff`: shifts.
 -/
 
@@ -53,7 +53,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 only if for every `j ∈ ℤ` its cohomology sheaf `𝓗ʲK` is `ι`-mixed of weights at most `w + j`.
 This is the upper half of the blueprint definition; its lower half, through the Verdier dual,
 is not available for Weil complexes (see the module docstring).
-(blueprint: `def-weil-complex-weights`) -/
+(blueprint: `definition-weights--6`) -/
 theorem isMixedOfWeightsAtMost_iff :
     K.IsMixedOfWeightsAtMost ι w ↔
       ∀ j : ℤ, ((homologySheaf j).obj K).IsMixedOfWeightsAtMost ι (w + j) :=

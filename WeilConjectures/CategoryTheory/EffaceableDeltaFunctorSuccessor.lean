@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.EffacingSequencePushout
 /-!
 # Successor transformations by effacement
 
-Source: Stacks Project, Homology, Lemma 010T and the parent node's comparison arguments.
-(blueprint: lem-weil-pbc-effaceable-delta-functor-successor).
+## References
+
+* Stacks Project, Homology, Lemma 010T
 -/
 
 @[expose] public section
@@ -73,16 +74,7 @@ private theorem candidate_comparison
 
 /-- The induction step of Grothendieck's effacement construction.
 
-Source: Stacks Project, Homology, Lemma 010T, construction of the successor degree.
-Choose an effacing embedding of each object and take its cokernel short exact sequence.
-Exactness makes the connecting map a cokernel of the preceding map, so the given
-transformation induces a unique successor component. Compare two such embeddings using
-their direct sum: the projections induce morphisms of short exact sequences, and
-cancellation of the epimorphic connecting map proves independence and naturality.
-Finally push out an arbitrary short exact sequence along an effacing embedding; its
-map to an effacing sequence, together with naturality of connecting maps, proves the
-required compatibility for every short exact sequence.
-(blueprint: lem-weil-pbc-effaceable-delta-functor-successor) -/
+Source: Stacks Project, Homology, Lemma 010T. -/
 theorem effaceable_deltaFunctor_successor
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B]

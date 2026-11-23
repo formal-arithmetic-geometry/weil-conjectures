@@ -39,16 +39,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace DerivedCategory
 
 /-- A finitely presented module over a Noetherian ring has bounded finite free
-approximations with arbitrarily low error cone. Source: Stacks Project, Tag 0944,
-finite free resolution and brutal truncation in the projection formula proof.
-(blueprint: lem-sf-finite-free-approximation-triangle).
-
-Proof: the module in degree zero is pseudo-coherent by the Noetherian cohomology
-criterion. Its m-pseudo-coherent approximation is bounded finite free and induces
-isomorphisms in all degrees above m. Complete its map to a distinguished triangle.
-For i above m, exactness and the two adjacent isomorphisms force degree i cohomology
-of its cone to vanish. Choosing m equal to the prescribed cone bound suffices.
-Identify each finite free term with a finite power of the ring using a finite basis. -/
+approximations with arbitrarily low error cone. Source: Stacks Project, Tag 0944. -/
 theorem exists_finiteFree_approximation_triangle
     (R : Type u) [CommRing R] [IsNoetherianRing R]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]

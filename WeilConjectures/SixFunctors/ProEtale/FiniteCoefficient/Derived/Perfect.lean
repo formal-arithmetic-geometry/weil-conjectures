@@ -46,9 +46,9 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   the coefficient dual and its evaluation `AlgebraicGeometry.ProEtale.derivedDualEval` are
   formed with the derived internal hom.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleTorAmplitudeIn_single_of_retract`
-  (`prop-pod-perfect-local-model`): a finite projective `Λ_X`-module is flat and constructible.
+  (`theorem-poincare-duality--4`): a finite projective `Λ_X`-module is flat and constructible.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_Q_obj_of_retract`
-  (`prop-pod-perfect-local-model`): a bounded complex of finite projective `Λ_X`-modules lies in
+  (`theorem-poincare-duality--4`): a bounded complex of finite projective `Λ_X`-modules lies in
   `Dctf(X, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isFiniteLocallyConstant_homology_of_retract`:
   the cohomology sheaves of a complex of finite projective `Λ_X`-modules are locally constant
@@ -57,11 +57,11 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   locally quasi-isomorphic to bounded complexes of finite projective modules is bounded, on a
   quasi-compact quasi-separated scheme.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_of_isDualizable`
-  (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
+  (`theorem-poincare-duality--4`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
   bounded complex of finite projective modules
   (`AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`, the node
   `sk-def-perfect`), so its cohomology sheaves are locally constant with finite stalks, hence of
-  étale origin (`lem-sf-proetale-constructible-origin`).
+  étale origin (`theorem-comparison-constructible-sheaves`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`
   (`sk-def-perfect`, Stacks 0FPV): an object of `D(X_proét, Λ)` is dualizable if and only if it
   is locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. Being
@@ -74,10 +74,10 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   `AlgebraicGeometry.ProEtale.projective_unit_and_finite_of_isWContractibleRing`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
   `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
-- `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
+- `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`theorem-poincare-duality--4`):
   the coefficient dual of a perfect complex is perfect.
 - `AlgebraicGeometry.ProEtale.constructibleFiniteTor_derivedDual`
-  (`lem-pod-coefficient-dual-perfect`): the coefficient dual of a perfect complex in
+  (`theorem-poincare-duality--4`): the coefficient dual of a perfect complex in
   `Dctf(X, Λ)` lies in `Dctf(X, Λ)`.
 
 ## Implementation notes
@@ -97,7 +97,7 @@ since `Λ_Xʳ = ν^* Λ_{X_ét}ʳ` and `ν^*` is full and exact; so is a bounded
 `ν^*` is fully faithful. The same lift, to finite locally constant étale sheaves, shows that the
 cohomology sheaves of such a complex are locally constant with finite stalks.
 
-As in the blueprint (`def-pod-perfect-complex-on-x`), the coefficient dual is shown to lie in
+As in the blueprint (`theorem-poincare-duality`), the coefficient dual is shown to lie in
 `Dctf(X, Λ)` for perfect complexes which already lie in `Dctf(X, Λ)`, in the Poincaré duality
 setting of a scheme of finite type over an algebraic closure of `𝔽_p` and a coefficient ring
 whose exponent is invertible on `X`. The proof goes through the étale site rather than through
@@ -149,7 +149,7 @@ lemma derivedDualEval_eq_uncurry
     derivedDualEval K = MonoidalClosed.uncurry (𝟙 ((derivedDual A X).obj (op K))) :=
   (MonoidalClosed.uncurry_id_eq_ev _ _).symm
 
-/-- Blueprint `lem-pod-coefficient-dual-perfect`: Perfectness is preserved by coefficient
+/-- Blueprint `theorem-poincare-duality--4`: Perfectness is preserved by coefficient
 duality.
 
 The coefficient dual `K^∨ = RHom(K, Λ_X)` of a perfect (that is, dualizable) complex `K` of
@@ -311,7 +311,7 @@ theorem torAmplitudeIn_single_of_retract
   _root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
     (flat_of_retract_biproduct_unit hP)
 
-/-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
+/-- Blueprint `theorem-poincare-duality--4`: The local finite projective model.
 
 A finite projective `Λ_X`-module `P` on the small pro-étale site, that is, a direct summand of
 a finite free module `Λ_Xʳ`, is flat and constructible: regarded as a complex in degree `0`, it
@@ -325,7 +325,7 @@ theorem constructibleTorAmplitudeIn_single_of_retract
   ⟨⟨boundedConstructible_single_of_retract hP,
     _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn h⟩, h⟩
 
-/-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
+/-- Blueprint `theorem-poincare-duality--4`: The local finite projective model.
 
 A bounded complex `P` of finite projective `Λ_X`-modules on the small pro-étale site, each a
 direct summand of a finite free module `Λ_Xʳ`, lies in `Dctf(X, Λ)`. Its terms are flat, so it
@@ -435,7 +435,7 @@ section Local
 
 attribute [local instance] Abelian.hasFiniteBiproducts
 
-/-- Blueprint `def-pod-perfect-complex-on-x`: a complex `K` of pro-étale `Λ`-sheaves on `X` is
+/-- Blueprint `theorem-poincare-duality`: a complex `K` of pro-étale `Λ`-sheaves on `X` is
 *locally perfect* if there is a pro-étale covering family `g i : W i ⟶ X` such that every
 derived pullback `Lg_i^* K` is quasi-isomorphic to a bounded complex of finite projective
 `Λ_{W_i}`-modules, that is, of direct summands of finite free modules. -/
@@ -599,7 +599,7 @@ It is locally quasi-isomorphic to a bounded complex `P` of finite projective mod
 are locally those of `P`, hence locally constant with finite stalks
 (`isFiniteLocallyConstant_homology_of_retract`, `isFiniteLocallyConstant_of_cover`). They are
 then constructible for the trivial stratification, hence of étale origin
-(`lem-sf-proetale-constructible-origin`). -/
+(`theorem-comparison-constructible-sheaves`). -/
 theorem bounded_and_homology_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) :
@@ -627,7 +627,7 @@ theorem bounded_and_homology_of_isDualizable
 end Local
 
 variable [IsNoetherian X] in
-/-- Blueprint `prop-pod-perfect-local-model`: The local finite projective model.
+/-- Blueprint `theorem-poincare-duality--4`: The local finite projective model.
 
 A perfect complex of pro-étale `Λ`-sheaves, that is a complex locally quasi-isomorphic to a
 bounded complex of finite projective `Λ_X`-modules (rendered as a dualizable object of
@@ -681,7 +681,7 @@ theorem boundedConstructible_derivedDual_of_iso
 
 end DerivedCategory
 
-/-- Blueprint `lem-pod-coefficient-dual-perfect`: Perfectness is preserved by coefficient
+/-- Blueprint `theorem-poincare-duality--4`: Perfectness is preserved by coefficient
 duality.
 
 Let `X` be of finite type over an algebraic closure `k` of `𝔽_p` and `Λ` a finite ring whose
@@ -689,10 +689,10 @@ exponent is invertible on `X`. The coefficient dual `K^∨ = RHom(K, Λ_X)` of a
 `K ∈ Dctf(X, Λ)` of pro-étale `Λ`-sheaves lies in `Dctf(X, Λ)`.
 
 As `K` is of étale origin, `K ≅ ν^* K'` with `K' ∈ Dctf(X_ét, Λ)`
-(`lem-exc-comparison-tor-interval`), and `K^∨ ≅ RHom(ν^* K', ν^* Λ) ≅ ν^* RHom(K', Λ)`
-(`thm-sf-hom-comparison-constructible`) is of étale origin, `RHom(K', Λ)` being bounded
-constructible on `X_ét` (`sk-thm-sf-hom-ctf`). As `K` is perfect, `K^∨` is its dual, whose Tor
-amplitude is that of `K` reflected
+(`corollary-finite-tor-amplitude-under-comparison--1`), and
+`K^∨ ≅ RHom(ν^* K', ν^* Λ) ≅ ν^* RHom(K', Λ)` (`proposition-six-operations-dctf--15`) is of étale
+origin, `RHom(K', Λ)` being bounded constructible on `X_ét` (`sk-thm-sf-hom-ctf`). As `K` is
+perfect, `K^∨` is its dual, whose Tor amplitude is that of `K` reflected
 (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_derivedDual`). -/
 theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fact p.Prime]
     [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
@@ -725,11 +725,11 @@ theorem constructibleFiniteTor_derivedDual {k : Type u} [Field k] {p : ℕ} [Fac
   exact DerivedCategory.boundedConstructible_derivedDual_of_iso Λ e c
     (Etale.boundedConstructible_derivedHom Λ aX a b 0 0 hK' hKt' hU hUt)
 
-/-- Blueprint `rem-ptr-pod-coefficient-dual-on-x-4`: Pointer to the properties of the coefficient
+/-- Blueprint `theorem-poincare-duality--4`: Pointer to the properties of the coefficient
 dual.
 
 The coefficient dual `K^∨ = RHom(K, Λ_X)` of a perfect complex `K ∈ Dctf(X, Λ)` is again perfect,
-and it lies in `Dctf(X, Λ)`: these are the two clauses of `lem-pod-coefficient-dual-perfect`
+and it lies in `Dctf(X, Λ)`: these are the two clauses of `theorem-poincare-duality--4`
 (`AlgebraicGeometry.ProEtale.isDualizable_derivedDual` and
 `AlgebraicGeometry.ProEtale.constructibleFiniteTor_derivedDual`). -/
 theorem isDualizable_derivedDual_and_constructibleFiniteTor {k : Type u} [Field k] {p : ℕ}

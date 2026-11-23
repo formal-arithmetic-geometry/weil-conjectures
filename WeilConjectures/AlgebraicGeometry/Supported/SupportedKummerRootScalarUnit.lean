@@ -208,7 +208,7 @@ private theorem boundaryScalarLineMap_unit
 
 /-- The coefficient map on the ordinary Tate root line, normalized on pure roots,
 is an unbounded derived scalar unit, without flatness of the target coefficient ring.
-Source: blueprint lem-amb-cartier-kummer-map, final scalar-extension paragraph;
+Source: blueprint lemma-cycle-class-cartier-divisor, final scalar-extension paragraph;
 Stacks 03PK and 07A6 (blueprint: lem-asd-supported-kummer-root-scalar-unit).
 
 Proof: the root-line Hom equivalence constructs the coefficient map from the target

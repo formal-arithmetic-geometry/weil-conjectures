@@ -25,23 +25,6 @@ shows that the internal hom is exact in its first variable: for a distinguished 
 
 whose first two maps are induced by the given ones
 (`DerivedCategory.exists_distinguished_ihom_pre`).
-
-## Strategy
-
-The derived internal hom is not constructed as a bifunctor by hand, so the statement is proved
-on a model. Write `M = Q I` for a K-injective complex `I`.
-
-* On cochain complexes, precomposition `iHom(P', I) ⟶ iHom(P, I)` with a morphism `P ⟶ P'`
-  (`CochainComplex.internalHomPre`) is given in each degree by the maps
-  `[P'ᵖ, Iᵠ] ⟶ [Pᵖ, Iᵠ]` on the factors of the products defining the internal hom complexes.
-  Hence it carries a degreewise split short exact sequence of complexes to one
-  (`CochainComplex.internalHomShortComplexSplitting`).
-* The map `Q iHom(P, I) ⟶ RHom(Q P, Q I)` adjoint to the evaluation
-  (`DerivedCategory.qhInternalHomToIhom`) is natural in `P` and is an isomorphism, `I` being
-  K-injective: it is the unit of the right derived functor of `iHom(P, -)`, followed by the
-  identification of the derived adjunction with the closed structure of `D(C)`.
-* Every distinguished triangle of `D(C)` is isomorphic to the image of the triangle attached to
-  a degreewise split short exact sequence of complexes.
 -/
 
 @[expose] public section
@@ -272,10 +255,7 @@ open HomotopyCategory in
 /-- The first-variable exactness of the derived internal hom on a model: for a degreewise split
 short exact sequence `S` of cochain complexes and a K-injective complex `I`, the images under
 `RHom(-, Q I)` of the maps `Q S.f` and `Q S.g` extend to a distinguished triangle
-`RHom(Q S.X₃, Q I) ⟶ RHom(Q S.X₂, Q I) ⟶ RHom(Q S.X₁, Q I) ⟶ RHom(Q S.X₃, Q I)[1]`. It is the
-image of the distinguished triangle attached to the degreewise split short exact sequence
-`iHom(S.X₃, I) ⟶ iHom(S.X₂, I) ⟶ iHom(S.X₁, I)` under the isomorphisms
-`qhInternalHomToIhom`. -/
+`RHom(Q S.X₃, Q I) ⟶ RHom(Q S.X₂, Q I) ⟶ RHom(Q S.X₁, Q I) ⟶ RHom(Q S.X₃, Q I)[1]`. -/
 lemma exists_distinguished_ihom_pre_of_degreewiseSplit
     (S : ShortComplex (CochainComplex C ℤ))
     (σ : ∀ n, (S.map (HomologicalComplex.eval C _ n)).Splitting)
@@ -344,17 +324,14 @@ lemma exists_distinguished_ihom_pre_of_iso {T T' : Triangle (DerivedCategory C)}
     simp only [assoc, ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id,
       CategoryTheory.Functor.map_id, comp_id]
 
-/-- Blueprint `lem-sf-hom-triangulated`: Exactness of the internal Hom in each variable, first
-variable.
+/-- Exactness of the internal Hom in each
+variable, first variable.
 
 For a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(C)` and any `M`, the maps
 `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` induced by the first two maps extend to a
 distinguished triangle `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M) ⟶ RHom(K'', M)[1]`, the
 internal hom being that of the closed structure of `D(C)`.
-
-As in the blueprint, `M` is represented by a K-injective complex `I` and the internal hom by the
-internal hom complex into `I` (`DerivedCategory.qhInternalHomToIhom`), which carries degreewise
-split short exact sequences of complexes to degreewise split short exact sequences. -/
+-/
 theorem exists_distinguished_ihom_pre (T : Triangle (DerivedCategory C))
     (hT : T ∈ distTriang _) (M : DerivedCategory C) :
     ∃ h, Triangle.mk ((pre T.mor₂).app M) ((pre T.mor₁).app M) h ∈ distTriang _ := by

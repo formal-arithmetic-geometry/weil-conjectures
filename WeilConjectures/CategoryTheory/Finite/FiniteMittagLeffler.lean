@@ -22,8 +22,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
 /-!
 # Mittag--Leffler vanishing for finite abelian groups
 
-Source: blueprint sec-deligne-laumon-a1/sk-l-dl-a1-endpoints, order 2731;
-Stacks Project, Tags 07KW and 07KY (blueprint: lem-weil-pbc-mittag-leffler).
+Source: Stacks Project, Tags 07KW and 07KY.
 The natural index n denotes positive level n+1. Canonical maps in D(Ab) are specified
 by their limit-projection equations, exactly as in `milnor_shortExact`.
 -/
@@ -36,21 +35,14 @@ namespace CategoryTheory
 
 /-- The first right derived inverse limit with the recorded canonical instance parameters.
 This abbreviates the existing right derived functor; it does not replace it by a cokernel.
-Source: Stacks Tag 07KW (blueprint: lem-weil-pbc-mittag-leffler). -/
+Source: Stacks Tag 07KW. -/
 abbrev firstDerivedLimitAb (B : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) : AddCommGrpCat.{u} :=
   letI := roosTowerEnoughInjectives
   letI := roosLimitAdditive
   ((lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).rightDerived 1).obj B
 
 /-- Finite abelian groups form an ML tower and its first derived inverse limit vanishes.
-Source: Stacks Tags 02N0, 0597 and 07KW (blueprint: lem-weil-pbc-mittag-leffler).
-Proof: for a fixed level the descending images are subgroups of a finite group.
-Choose an image of minimum cardinality; all later images equal it. For any tuple y,
-the finite nonempty sets of prefix solutions x_j-f_j(x_(j+1))=y_j form an ML tower:
-choose the last x to be zero and solve backwards; descending finite images stabilize.
-By Mathlib's finite cofiltered-system theorem there is a compatible family of prefixes,
-hence a full solution. Thus roosMap is surjective. The cokernel description in
-lem-pc-derived-limit-roos-abelian-groups identifies R¹ lim with zero. -/
+Source: Stacks Tags 02N0, 0597 and 07KW. -/
 theorem finiteTower_mittagLeffler_vanishing (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (hA : ∀ n : ℕᵒᵖ, Finite (A.obj n)) :
     (A ⋙ forget AddCommGrpCat).IsMittagLeffler ∧

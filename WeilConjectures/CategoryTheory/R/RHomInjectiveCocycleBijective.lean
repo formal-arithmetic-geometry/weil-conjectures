@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Bijectivity of the normalized comparison on an injective complex
 
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-injective-cocycle-bijective).
+Source: Stacks Tags 06XR (1) and 070I.
 -/
 
 @[expose] public section
@@ -27,20 +26,7 @@ open CochainComplex.HomComplex
 namespace CategoryTheory.Functor
 
 /-- The cocycle normalization forces a comparison on an injective complex to be bijective.
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-injective-cocycle-bijective).
-
-Proof: The inverse cohomology-to-Q isomorphism followed by the derived unit induces
-an isomorphism from Hⁿ(Hom(M,I)) to Hⁿ(RHom(M,QI)), since I is degreewise injective.
-Every cohomology class is represented by a cocycle M → Iⁿ. Its class vanishes exactly
-when that cocycle is a boundary. HomComplexSingle identifies these boundaries with
-null-homotopic maps M[0] → I[n], and identifies all such maps with these cocycles.
-A bounded below injective complex is K-injective, so Qh_map_bijective identifies
-homotopy classes with all derived-category maps into I[n]. The quotient comparison
-isomorphism does not change bijectivity. Consequently the prescribed values on
-cocycles identify β with this bijection, proving both injectivity and surjectivity.
-This also covers negative degrees and zero complexes: the same quotient description
-has no degree restriction. -/
+Source: Stacks Tags 06XR (1) and 070I. -/
 theorem rhom_injective_cocycle_map_bijective
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}] (M : C)

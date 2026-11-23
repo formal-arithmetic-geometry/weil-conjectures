@@ -20,7 +20,7 @@ be a bounded complex on `T - (D ∪ H)` with finite locally constant cohomology 
 ```
 RΓ(T - D, i_! E) ⟶ RΓ(B - t, (i_! E)|_{B - t})
 ```
-is zero (blueprint `sk-lem-tf-blowup-restriction`).
+is zero (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`).
 
 The curves are given by equations `f, g, h ∈ R = 𝒪^{sh}_{S,t}` (`T = Spec R` is the spectrum of a
 two-dimensional regular local ring, a factorial ring, so every curve through `t` is principal),
@@ -62,8 +62,8 @@ lemma maximalIdeal_le_radical_of_smooth (ht : t ≫ S.hom = 𝟙 _)
   rw [Ideal.span_insert]
   exact hfg.maximalIdeal_le_radical
 
-/-- **Blowup restriction vanishing** (blueprint `sk-lem-tf-blowup-restriction`). Let
-`T = Spec R` be the strict localization of a smooth surface `S` over the algebraically closed
+/-- **Blowup restriction vanishing** (blueprint `lemma-vanishing-restrictions-after-blowing-up--1`).
+Let `T = Spec R` be the strict localization of a smooth surface `S` over the algebraically closed
 field `k` at a `k`-point `t`, `ℓ` a prime invertible in `k` and `Λ` a finite `ℓ`-primary ring. Let
 `D = V(f)`, `B = V(g)` be curves through `t` (`f, g ≠ 0`, `g ∈ 𝔪`) and `H = V(h)` a regular
 curve through `t` (`h ∈ 𝔪 ∖ 𝔪²`) such that `C_t D ∩ C_t B = {0}` and `C_t D ∩ T_t H = {0}`.

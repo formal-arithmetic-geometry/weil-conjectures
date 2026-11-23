@@ -76,8 +76,7 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Normalized uncurrying under exact ringed forgetting
 
-Source: Stacks 08J9, 070I; steps 5--8 of ringed tensor transposition
-(blueprint: lem-sf-ringed-forget-normalized-uncurry).
+Source: Stacks 08J9, 070I.
 -/
 
 @[expose] public noncomputable section

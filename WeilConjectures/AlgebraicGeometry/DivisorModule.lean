@@ -15,7 +15,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 /-!
 # The module associated to a divisor
 
-Source: blueprint, sec-abelian-varieties, def-sc-picard-group, node def-sc-divisor
+Source: blueprint, chap-Abelian-varieties, def-sc-picard-group, node def-sc-divisor
 (blueprint: def-sc-divisor).
 
 ## Main definitions
@@ -281,7 +281,7 @@ namespace AlgebraicGeometry.Scheme.Divisor
 Noetherian hypotheses are added: those instances follow from smoothness, connectedness
 and finite type over the field. Divisors, degree, principal divisors and the class group
 remain the existing declarations in Curve.Divisor.
-Source: blueprint sec-abelian-varieties, def-sc-picard-group, def-sc-divisor
+Source: blueprint chap-Abelian-varieties, def-sc-picard-group, def-sc-divisor
 (blueprint: def-sc-divisor). -/
 noncomputable def moduleOfSmoothConnectedCurve (k : Type u) [Field k] [IsAlgClosed k]
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

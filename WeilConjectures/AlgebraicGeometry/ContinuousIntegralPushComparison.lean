@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationMate
 
 @[expose] public section
 
-universe u
+universe u v
 open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
@@ -64,7 +64,82 @@ theorem localization_comparison_zero (ℓ : ℕ)
   change adjY.unit.app (G.obj K) ≫ g = 𝟙 _ ≫ G.map (adjX.unit.app K)
   exact hg.trans (Category.id_comp (G.map (adjX.unit.app K))).symm
 
+private noncomputable def isColimit_mapCocone_precompose_whisker
+    {I J A B C : Type*} [Category I] [Category J]
+    [Category A] [Category B] [Category C]
+    (p : I ⥤ J) {F : J ⥤ A} (G : A ⥤ B) (H : B ⥤ C)
+    {F' : J ⥤ B} (σ : F ⋙ G ≅ F') (c : Cocone F)
+    (hc : IsColimit ((G ⋙ H).mapCocone (c.whisker p))) :
+    IsColimit (H.mapCocone
+      (((Cocone.precompose σ.inv).obj (G.mapCocone c)).whisker p)) := by
+  let e := Functor.isoWhiskerRight (Functor.isoWhiskerLeft p σ) H
+  refine (IsColimit.precomposeHomEquiv e _) ?_
+  apply hc.ofIsoColimit
+  refine Cocone.ext (Iso.refl _) ?_
+  intro j
+  change H.map (G.map (c.ι.app (p.obj j))) ≫ 𝟙 _ =
+    H.map (σ.hom.app (p.obj j)) ≫
+      H.map (σ.inv.app (p.obj j) ≫ G.map (c.ι.app (p.obj j)))
+  rw [Category.comp_id, ← H.map_comp, ← Category.assoc, Iso.hom_inv_id_app,
+    Category.id_comp]
+
+private theorem localization_mate_isIso (ℓ : ℕ)
+    {A B C D T : Type*} [Category A] [Category B] [Category C] [Category D] [Category T]
+    [Preadditive A] [Preadditive B] [Preadditive C] [Preadditive D]
+    {LX : A ⥤ B} {UX : B ⥤ A} {LY : C ⥤ D} {UY : D ⥤ C}
+    [UX.Additive] [UY.Additive] [UY.ReflectsIsomorphisms]
+    (adjX : LX ⊣ UX) (adjY : LY ⊣ UY)
+    {G : A ⥤ C} [G.Additive] {H : B ⥤ D} (κ : H ⋙ UY ≅ UX ⋙ G) (K : A)
+    [IsIso (ℓ • 𝟙 (LX.obj K))] [IsIso (ℓ • 𝟙 (LY.obj (G.obj K)))]
+    (P : ℤ → C ⥤ T)
+    (hdetect : ∀ {M N : C} (z : M ⟶ N), (∀ q, IsIso ((P q).map z)) → IsIso z)
+    (hX : ∀ q, Nonempty (IsColimit ((G ⋙ P q).mapCocone
+      ((scalarLocalizationUnitCocone ℓ adjX K).whisker
+        (ULift.orderIso : ULift.{v} ℕ ≃o ℕ).equivalence.functor))))
+    (hY : ∀ q, Nonempty (IsColimit ((P q).mapCocone
+      ((scalarLocalizationUnitCocone ℓ adjY (G.obj K)).whisker
+        (ULift.orderIso : ULift.{v} ℕ ≃o ℕ).equivalence.functor)))) :
+    IsIso ((Adjunction.pushHomOfComapIso adjX adjY κ).app K) := by
+  let β := (Adjunction.pushHomOfComapIso adjX adjY κ).app K
+  let cX := scalarLocalizationUnitCocone ℓ adjX K
+  let cY := scalarLocalizationUnitCocone ℓ adjY (G.obj K)
+  let σ := Mod.smulSequenceCompIso G K ℓ
+  let d := (Cocone.precompose σ.inv).obj (G.mapCocone cX)
+  let g : cY.pt ⟶ d.pt := UY.map β ≫ κ.hom.app (LX.obj K)
+  have : IsIso (ℓ • 𝟙 d.pt) := by
+    have h : IsIso (G.map (UX.map (ℓ • 𝟙 (LX.obj K)))) := inferInstance
+    change IsIso (ℓ • 𝟙 (G.obj (UX.obj (LX.obj K))))
+    simpa only [Functor.map_nsmul, CategoryTheory.Functor.map_id] using h
+  have hzero : cY.ι.app 0 ≫ g = d.ι.app 0 :=
+    localization_comparison_zero ℓ adjX adjY G K g (mate_unit_comap adjX adjY κ K)
+  have : IsIso g := hdetect g fun q ↦ by
+    obtain ⟨hc⟩ := hY q
+    obtain ⟨hd⟩ := hX q
+    exact integralLocalization_cocone_map_isIso ℓ cY d g hzero (P q) hc
+      (isColimit_mapCocone_precompose_whisker
+        (ULift.orderIso : ULift.{v} ℕ ≃o ℕ).equivalence.functor G (P q) σ cX hd)
+  have : IsIso (UY.map β) := by
+    have heq : UY.map β = g ≫ κ.inv.app (LX.obj K) := by
+      simp only [g, Category.assoc, Iso.hom_inv_id_app]
+      exact (Category.comp_id (UY.map β)).symm
+    rw [heq]
+    infer_instance
+  exact isIso_of_reflects_iso β UY
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+
+private lemma rightDerived_isGE
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]
+    (K : DerivedCategory C) (n : ℤ) (hK : K.IsGE n) :
+    (F.rightDerivedFunctor.obj K).IsGE n := by
+  let K' : DerivedCategory.Plus C := ⟨K, ⟨n, hK⟩⟩
+  have hK' : K'.IsGE n := (K'.isGE_ι_obj_iff n).1 hK
+  refine (DerivedCategory.isGE_iff _ n).2 fun q hq ↦ ?_
+  exact (F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE K' n hq).of_iso
+    ((DerivedCategory.homologyFunctor D q).mapIso
+      (F.rightDerivedFunctorPlusCompatibility.app K')).symm
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -76,8 +151,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-set_option maxHeartbeats 400000 in
--- The cocone comparisons below unify large derived module categories.
 /-- The specified scalar-extension/pushforward mate is invertible on integral bounded
 constructible complexes for a qcqs map.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2.
@@ -115,15 +188,10 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   let G := (lowerStar (integralCoeff ℓ E) f).rightDerivedFunctor
   let U := (Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
     (coefficientMap a Y)).mapDerivedCategory
-  let UX := (Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (coefficientMap a X)).mapDerivedCategory
   let LX := (Mod.extendScalars (coefficientMap a X)).leftDerivedFunctor
   let adjX := Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a X)
   let adjY := Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap a Y)
   let κ := derivedComapLowerStarIso a f
-  let β : (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.obj (G.obj K.obj) ⟶
-      (lowerStar (Profinite.continuousMapRingObj E) f).rightDerivedFunctor.obj
-        (LX.obj K.obj) := (derivedPushHom a f).app K.obj
   have : G.IsRightAdjoint :=
     (derivedUpperStarLowerStarAdjunction (integralCoeff ℓ E) f).isRightAdjoint
   have : PreservesBinaryBiproducts G :=
@@ -133,29 +201,10 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   have hGK : DerivedCategory.TStructure.t.plus (G.obj K.obj) := by
     obtain ⟨n, hn⟩ := hK
     have : K.obj.IsGE n := hn
-    let K' : DerivedCategory.Plus _ := ⟨K.obj, ⟨n, hn⟩⟩
-    have : K'.IsGE n := (K'.isGE_ι_obj_iff n).1 hn
-    refine ⟨n, (DerivedCategory.isGE_iff _ n).2 fun q hq ↦ ?_⟩
-    exact (Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
-      (lowerStar (integralCoeff ℓ E) f) K' n hq).of_iso
-        ((DerivedCategory.homologyFunctor _ q).mapIso
-          ((lowerStar (integralCoeff ℓ E) f).rightDerivedFunctorPlusCompatibility.app K')).symm
-  let cX := integralLocalizationCocone ℓ E X K.obj
-  let cY := integralLocalizationCocone ℓ E Y (G.obj K.obj)
-  let σ := Mod.smulSequenceCompIso G K.obj ℓ
-  let d := (Cocone.precompose σ.inv).obj (G.mapCocone cX)
-  let g : cY.pt ⟶ d.pt := U.map β ≫ κ.hom.app (LX.obj K.obj)
-  have : IsIso (ℓ • 𝟙 d.pt) := by
-    have := derived_nsmul_isIso ℓ E X (LX.obj K.obj)
-    have h : IsIso (G.map (UX.map (ℓ • 𝟙 (LX.obj K.obj)))) := inferInstance
-    change IsIso (ℓ • 𝟙 (G.obj (UX.obj (LX.obj K.obj))))
-    simpa only [Functor.map_nsmul, CategoryTheory.Functor.map_id] using h
+    exact ⟨n, rightDerived_isGE (lowerStar (integralCoeff ℓ E) f) K.obj n hn⟩
   have := derived_nsmul_isIso ℓ E X (LX.obj K.obj)
   have := derived_nsmul_isIso ℓ E Y
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.obj (G.obj K.obj))
-  have hzero : cY.ι.app 0 ≫ g = d.ι.app 0 := by
-    exact localization_comparison_zero ℓ adjX adjY G K.obj g
-      (mate_unit_comap adjX adjY κ K.obj)
   have hU : U.ReflectsIsomorphisms := by
     let V := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (coefficientMap a Y)
     have : V.ReflectsIsomorphisms := by
@@ -174,39 +223,13 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       (NatIso.isIso_map_iff (V.mapDerivedCategoryHomologyFunctorIso q) z).2
         (by rw [Functor.comp_map]; infer_instance)
     exact isIso_of_reflects_iso _ V
-  have : IsIso (U.map β) := by
-    have hgg : IsIso g := by
-      rw [DerivedCategory.isIso_iff]
-      intro q
-      let H := DerivedCategory.homologyFunctor
-        (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-          (condensedRingObj (integralCoeff ℓ E) Y)) q
-      obtain ⟨hc⟩ := integralLocalization_homology_isColimit ℓ E Y (G.obj K.obj) hGK q
-      obtain ⟨hd⟩ := integralLocalization_push_homology_isColimit ℓ E f K.obj hK q
-      apply integralLocalization_cocone_map_isIso ℓ cY d g hzero H hc
-      let J := (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.functor
-      let e := Functor.isoWhiskerRight (Functor.isoWhiskerLeft J σ) H
-      refine (IsColimit.precomposeHomEquiv e _) ?_
-      apply hd.ofIsoColimit
-      exact Cocone.ext (Iso.refl _) (by
-        intro n
-        simp only [Functor.comp_obj, Mod.smulSequenceCompIso, NatIso.ofComponents_hom_app,
-          Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
-          Cocone.precompose_obj_pt, Functor.mapCocone_pt, Cocone.whisker_pt,
-          Functor.mapCocone_ι_app, Functor.comp_map, Iso.refl_hom, Category.comp_id,
-          Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.const_obj_obj,
-          Functor.whiskerRight_app, Functor.whiskerLeft_app,
-          CategoryTheory.Functor.map_id, Cocone.whisker_ι, Functor.whiskerLeft_comp,
-          Functor.map_comp, e, σ, d]
-        change H.map (G.map (cX.ι.app n.down)) =
-          𝟙 _ ≫ H.map (𝟙 _) ≫ H.map (G.map (cX.ι.app n.down))
-        rw [H.map_id, Category.id_comp, Category.id_comp])
-    have : U.map β = g ≫ κ.inv.app (LX.obj K.obj) := by
-      simp only [g, Category.assoc, Iso.hom_inv_id_app]
-      exact (Category.comp_id (U.map β)).symm
-    rw [this]
-    infer_instance
-  exact isIso_of_reflects_iso β U
+  apply localization_mate_isIso ℓ adjX adjY κ K.obj (DerivedCategory.homologyFunctor _)
+  · intro M N z hz
+    rw [DerivedCategory.isIso_iff]
+    intro q
+    exact hz q
+  · exact integralLocalization_push_homology_isColimit ℓ E f K.obj hK
+  · exact integralLocalization_homology_isColimit ℓ E Y (G.obj K.obj) hGK
 
 end
 

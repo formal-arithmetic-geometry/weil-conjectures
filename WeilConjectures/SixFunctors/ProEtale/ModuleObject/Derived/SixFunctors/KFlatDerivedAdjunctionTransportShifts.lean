@@ -56,7 +56,7 @@ adjunction; blueprint proper base change rational proof, paragraph (3)
 Proof: (1) Apply `lem-sfb-abstract-derived-unit-factorization` to the two derived-unit
 lifts, using the termwise adjunction of `lem-weil-pbc-termwise-adjunction-homotopy` and
 the same right comparison beta. The exact factorization is invertible by
-`lem-weil-pbc-exact-functor-derived-factorization`; the K-flat factorization is its
+`situation-conventions`; the K-flat factorization is its
 composite with the canonical exact comparison. Postcomposing either invertible
 factorization with the right derived functor gives a universal left-derived pair by
 the fully faithful descent of `lem-weil-pbc-localization-universal-property`.

@@ -76,7 +76,7 @@ def unitIsoIhomDualizingComplex :
 variable (f : X ⟶ Y)
 
 /-- **The exceptional internal hom exchange** `RHom(f^* M, Rf^! N) ≅ Rf^! RHom(M, N)` on bounded
-constructible `ℚ̄_ℓ`-complexes (blueprint `lem-trf-exceptional-internal-hom-exchange`), from the
+constructible `ℚ̄_ℓ`-complexes (blueprint `lemma-external-duality-trace-morphism--2`), from the
 derived projection formula `boundedConstructibleExceptionalProjection` and the exceptional
 adjunction, as `TraceFormula.TraceClass.exceptionalHomIso`. -/
 def upperShriekExceptionalHomIso (M N : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

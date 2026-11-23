@@ -23,7 +23,7 @@ families of natural transformations descend to natural transformations
 This file proves the two statements of the `ℚ̄_ℓ`-stage which concern the compact-support direct
 image, for any such stage-system structure on the rational stages and any descent data of the
 finite-stage functors (the scalar-extension compatibilities of `Rf_!` and `Lg^*`, blueprint
-`lem-cbc-extension-zero-projection-formula`, which are taken as data here):
+`lemma-change-coefficients-compact-support`, which are taken as data here):
 
 - `AlgebraicGeometry.ProEtale.nonempty_iso_ι_obj_rationalRightDerivedLowerShriek`: the value of
   the descended compact-support direct image on an object of the `ℚ̄_ℓ`-stage may be computed at

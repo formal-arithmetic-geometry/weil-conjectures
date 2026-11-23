@@ -47,12 +47,6 @@ finite-type schemes is cofiltered.
   an isomorphism, i.e. the common refinement commutes with flat base change;
 - `AlgebraicGeometry.Compactification.isCofiltered_of_field`: over a field, the category of
   compactifications of a separated morphism of finite-type schemes is cofiltered.
-
-## Blueprint
-
-This file implements the base change part of `sk-prop-nagata-sketch-comp-category` and of
-`prop-nagata-compactification-category`, and `prop-compactification-refinement`.
-
 -/
 
 @[expose] public section
@@ -69,9 +63,8 @@ namespace Refinement
 
 variable {c d e : Compactification f}
 
-/-- **Base change of a refinement** (blueprint `sk-prop-nagata-sketch-comp-category`,
-`prop-nagata-compactification-category`): a refinement `r : c ⟶ d` of compactifications of
-`f` base changes along `t : T ⟶ S` to the refinement `r.hom ×_S T` of `d.baseChange t` by
+/-- **Base change of a refinement**: a refinement `r : c ⟶ d` of compactifications of `f` base
+changes along `t : T ⟶ S` to the refinement `r.hom ×_S T` of `d.baseChange t` by
 `c.baseChange t`. -/
 @[simps]
 noncomputable def baseChange (r : c.Refinement d) (t : T ⟶ S) :
@@ -101,12 +94,10 @@ lemma baseChange_comp (r : c.Refinement d) (s : d.Refinement e) (t : T ⟶ S) :
 
 end Refinement
 
-/-- **Base change of the category of compactifications** (blueprint
-`sk-prop-nagata-sketch-comp-category`, `prop-nagata-compactification-category`): base change
-along `t : T ⟶ S` is a functor from compactifications of `f` to compactifications of
-`f' = pullback.snd f t`. Being a functor, it carries common refinements to common refinements
-and refinements equalizing two parallel refinements to refinements equalizing their base
-changes. -/
+/-- **Base change of the category of compactifications**: base change along `t : T ⟶ S` is a functor
+from compactifications of `f` to compactifications of `f' = pullback.snd f t`. Being a functor, it
+carries common refinements to common refinements and refinements equalizing two parallel refinements
+to refinements equalizing their base changes. -/
 @[simps]
 noncomputable def baseChangeFunctor (t : T ⟶ S) :
     Compactification f ⥤ Compactification (pullback.snd f t) where
@@ -180,14 +171,13 @@ lemma infBaseChangeHom_snd :
         pullback.fst (c.baseChange t).g (d.baseChange t).g ≫ pullback.snd c.g t :=
   pullback.lift_snd _ _ _
 
-/-- **The common refinement commutes with base change up to a closed immersion** (blueprint
-`prop-nagata-compactification-category`, base change, second part): for compactifications
-`c`, `d` of a quasi-compact `f` and any `t : T ⟶ S`, the common refinement of the base changes
-`c' = c.baseChange t` and `d' = d.baseChange t` refines the base change of the common
+/-- **The common refinement commutes with base change up to a closed immersion**: for
+compactifications `c`, `d` of a quasi-compact `f` and any `t : T ⟶ S`, the common refinement of the
+base changes `c' = c.baseChange t` and `d' = d.baseChange t` refines the base change of the common
 refinement of `c` and `d`. The ambient morphism is a closed immersion
-(`isClosedImmersion_infBaseChange_hom`), an isomorphism if `t` is flat
-(`isIso_infBaseChange_hom`), and the refinement lies over the two projections
-(`infBaseChange_comp_infFst`, `infBaseChange_comp_infSnd`). -/
+(`isClosedImmersion_infBaseChange_hom`), an isomorphism if `t` is flat (`isIso_infBaseChange_hom`),
+and the refinement lies over the two projections (`infBaseChange_comp_infFst`,
+`infBaseChange_comp_infSnd`). -/
 noncomputable def infBaseChange :
     (inf (c.baseChange t) (d.baseChange t)).Refinement ((inf c d).baseChange t) where
   hom := infBaseChangeHom c d t
@@ -249,9 +239,8 @@ instance isClosedImmersion_infBaseChange_hom : IsClosedImmersion (infBaseChange 
   have : IsClosedImmersion ((infBaseChange c d t).hom ≫ h) := by rw [hh]; infer_instance
   exact .of_comp _ h
 
-/-- **The common refinement commutes with flat base change** (blueprint
-`prop-nagata-compactification-category`): if `t` is flat, the comparison `infBaseChange` is an
-isomorphism of ambient schemes. -/
+/-- **The common refinement commutes with flat base change**: if `t` is flat, the comparison
+`infBaseChange` is an isomorphism of ambient schemes. -/
 instance isIso_infBaseChange_hom [Flat t] : IsIso (infBaseChange c d t).hom := by
   have : QuasiCompact (inf c d).i := (inf c d).quasiCompact_openImmersion inferInstance
   have : IsSchemeTheoreticallyDominant ((inf c d).baseChange t).i :=
@@ -267,11 +256,10 @@ end Inf
 
 /-! ### Compactifications over a field -/
 
-/-- **Compactifications over a field form a cofiltered category** (blueprint
-`prop-compactification-refinement`): let `X` and `Y` be schemes of finite type over a field
-`K` and `f : X ⟶ Y` a separated `K`-morphism (automatically of finite type). Then the
-category of compactifications of `f` is nonempty, by Nagata's compactification theorem, and
-cofiltered: any finite family of compactifications has a common refinement, and any two
+/-- **Compactifications over a field form a cofiltered category**: let `X` and `Y` be schemes of
+finite type over a field `K` and `f : X ⟶ Y` a separated `K`-morphism (automatically of finite
+type). Then the category of compactifications of `f` is nonempty, by Nagata's compactification
+theorem, and cofiltered: any finite family of compactifications has a common refinement, and any two
 parallel refinements become equal after a further refinement. -/
 theorem isCofiltered_of_field {K : Type u} [Field K] {X Y : Scheme.{u}}
     (pX : X ⟶ Spec (.of K)) (pY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType pX] [QuasiCompact pX]

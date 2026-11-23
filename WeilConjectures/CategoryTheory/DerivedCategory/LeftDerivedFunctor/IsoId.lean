@@ -21,7 +21,7 @@ compatible with composition and with commutative squares of exact functors; both
 are checked on the image of the homotopy category, through the counits of the derived
 functors (`CategoryTheory.Functor.leftDerivedFunctorIdIso_hom_app_Qh_obj`).
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Functor.leftDerivedFunctorIdIso_comp`: compatibility with composition.
 - `CategoryTheory.Functor.leftDerivedFunctorIdIso_square`: compatibility with a commutative

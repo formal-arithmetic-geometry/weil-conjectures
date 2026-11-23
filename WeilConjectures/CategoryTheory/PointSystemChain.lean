@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 /-!
 # Directed unions of nested inverse systems
 
-Source: Stacks Project, Sites, Tag 00YP, the union of a chain of refinements
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP, the union of a chain of refinements.
 -/
 
 @[expose] public section
@@ -108,8 +107,7 @@ theorem map_stage_comp (a : c.Stage) (P : Cᵒᵖ ⥤ Type (max w t)) :
   simpa only [eqToHom_refl, Category.id_comp, he] using h
 
 /-- Equality in the union is already witnessed in a stage containing the witnesses.
-Source: Stacks Project, Sites, Tag 00YP, condition (2) for a union of refinements
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YP, condition (2) for a union of refinements. -/
 theorem ne_of_stage_ne [Nonempty J] [IsDirectedOrder J]
     (P : Cᵒᵖ ⥤ Type (max w t)) (s s' : colimit (V ⋙ P))
     (hne : ∀ a, pointSystemRefinementMapOfPreorder V (c.stageDiagram a) (c.stageEmbedding a)

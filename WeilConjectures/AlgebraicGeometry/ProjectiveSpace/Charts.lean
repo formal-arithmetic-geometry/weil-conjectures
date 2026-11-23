@@ -251,9 +251,8 @@ private lemma subsingleton_ne_one : Subsingleton {j : ULift.{u} (Fin 2) // j ≠
     rfl⟩
 
 /-- **The standard affine chart of the projective line**: the open immersion
-`𝔸¹_S ↪ ℙ¹_S`, `x ↦ [x : 1]`, onto the standard open `D₊(T₁)`. Its complement is the closed
-locus `V(T₁)`, the point `∞ = [1 : 0]` over `S`, see `ProjectiveLine.range_infinity`
-(blueprint: `d-lines`). -/
+`𝔸¹_S ↪ ℙ¹_S`, `x ↦ [x: 1]`, onto the standard open `D₊(T₁)`. Its complement is the closed
+locus `V(T₁)`, the point `∞ = [1: 0]` over `S`, see `ProjectiveLine.range_infinity`. -/
 def affineChart : 𝔸(PUnit.{u + 1}; S) ⟶ ProjectiveLine S :=
   AffineSpace.reindex (fun _ : {j : ULift.{u} (Fin 2) // j ≠ ⟨1⟩} ↦ PUnit.unit) S ≫
     (standardOpenIso (ULift.{u} (Fin 2)) S ⟨1⟩).inv ≫ (standardOpen (ULift.{u} (Fin 2)) S ⟨1⟩).ι

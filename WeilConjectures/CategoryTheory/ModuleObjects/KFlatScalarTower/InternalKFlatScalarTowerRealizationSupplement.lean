@@ -17,12 +17,11 @@ public import WeilConjectures.Algebra.Homology.InternalKFlatScalarTowerRealizati
 
 /-! # Realizing a scalar tower on native K-flat internal modules
 
-This is the internal-module counterpart of the scalar realization in
-`lem-pe-kflat-scalar-tower-realization`. It concerns individual scalar extensions,
+This is the internal-module counterpart of the scalar realization of K-flat scalar towers.
+It concerns individual scalar extensions,
 their transitions and units; it involves neither products nor inverse limits.
 -/
 
--- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
 

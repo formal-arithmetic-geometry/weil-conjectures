@@ -14,53 +14,28 @@ public import WeilConjectures.Mathlib.Topology.Maps.Basic
 
 # Nagata compactification over a Noetherian base
 
-This file proves **Nagata's compactification theorem over a Noetherian base**
-(`AlgebraicGeometry.nagataCompactification_of_isNoetherian`; blueprint `thm:nagata-noetherian`,
-proof order item 52): a separated, quasi-compact morphism locally of finite type to a
-Noetherian scheme factors as an open immersion followed by a proper morphism.
-
-The proof is an induction over a finite affine open cover of the source with dense total
-intersection. Such a cover exists because the source is Noetherian, hence has finitely many
-irreducible components
-(`AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter`); a
-choice of one is packaged as `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter`.
-Writing `U 0, …, U (n - 1)` for the cover and `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` for its partial
-unions (`AlgebraicGeometry.Scheme.partialAffineOpenUnions`), the induction runs as follows:
-
-- `X_0` is empty, so `X_0 ⟶ S` is proper and in particular compactifiable;
-- `X_1 = U 0` is affine, so the affine case
-  `AlgebraicGeometry.HasCompactification.of_isQuasiAffine` applies;
-- `X_{r+1} = X_r ∪ U r` is covered by the two opens `X_r` and `U r`, whose intersection
-  contains the (dense) total intersection of the cover and is therefore dense in `X_{r+1}`
-  (`Dense.preimage_val_inter`); the two-open theorem
-  `AlgebraicGeometry.HasCompactification.of_two_open_cover` then compactifies `X_{r+1} ⟶ S`.
-
-Separatedness, finite type and quasi-compactness of `X_r ⟶ S` — the hypotheses of the
-two-open theorem — hold at every stage because they are inherited from `X ⟶ S` by the open
-subscheme `X_r`. Since `X_n = X`, the last stage compactifies `X ⟶ S`.
+This file proves **Nagata's compactification theorem over a Noetherian base**: a separated,
+quasi-compact morphism locally of finite type to a Noetherian scheme factors as an open immersion
+followed by a proper morphism.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter`: a chosen finite affine open
   cover of a quasi-compact scheme with finitely many irreducible components, with dense
-  total intersection (blueprint: `def:nagata-dense-affine-cover`);
+  total intersection;
 - `AlgebraicGeometry.Scheme.partialAffineOpenUnions`: the partial unions
-  `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` of a finite family of opens (blueprint:
-  `def:nagata-partial-affine-unions`);
+  `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` of a finite family of opens;
 - `AlgebraicGeometry.noetherianCompactificationConstruction`: the dependent recursion
-  producing a compactification of `X_r ⟶ S` for every `r` (blueprint:
-  `def:nagata-noetherian-compactification`).
+  producing a compactification of `X_r ⟶ S` for every `r`.
 
 ## Main results
 
 - `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec`: the selected cover
-  consists of affine opens, covers the scheme, and has dense total intersection (blueprint:
-  `lemma:nagata-dense-affine-cover`);
+  consists of affine opens, covers the scheme, and has dense total intersection;
 - `AlgebraicGeometry.HasCompactification.of_sup_of_dense_subset`: the gluing step, an
   application of the two-open theorem to two opens sharing a dense subset;
 - `AlgebraicGeometry.nagataCompactification_of_isNoetherian`: Nagata's compactification
-  theorem over a Noetherian base (blueprint: `thm:nagata-noetherian`).
-
+  theorem over a Noetherian base.
 -/
 
 @[expose] public section
@@ -78,15 +53,13 @@ variable {X S : Scheme.{u}}
 /-- **The selected dense affine cover**: a chosen finite affine open cover of a quasi-compact
 scheme `X` with finitely many irreducible components whose total intersection is dense, given
 as the pair of its length and the family itself. Its defining properties are
-`AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec`.
-(blueprint: `def:nagata-dense-affine-cover`) -/
+`AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter_spec`. -/
 noncomputable def Scheme.finiteAffineOpenCoverDenseIInter (X : Scheme.{u}) [CompactSpace X]
     (hX : (irreducibleComponents X).Finite) : (n : ℕ) × (Fin n → X.Opens) :=
   ⟨_, (exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter X hX).choose_spec.choose⟩
 
 /-- **Properties of the selected dense affine cover**: the selected family consists of affine
-opens, covers `X`, and its total intersection is dense in `X`.
-(blueprint: `lemma:nagata-dense-affine-cover`) -/
+opens, covers `X`, and its total intersection is dense in `X`. -/
 theorem Scheme.finiteAffineOpenCoverDenseIInter_spec (X : Scheme.{u}) [CompactSpace X]
     (hX : (irreducibleComponents X).Finite) :
     (∀ i, IsAffineOpen ((X.finiteAffineOpenCoverDenseIInter hX).2 i)) ∧
@@ -100,17 +73,13 @@ theorem Scheme.finiteAffineOpenCoverDenseIInter_spec (X : Scheme.{u}) [CompactSp
 quasi-separated scheme `X`, a finite set `s` of generic points of irreducible components of `X`
 and a point `x`, a chosen affine open `A(x; s)` containing `x` and every point of `s`, selected
 from `AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`. Its defining
-properties are `AlgebraicGeometry.Scheme.affineOpenGenericPoints_spec`.
-(blueprint: `def-nagata-affine-neighbourhood-generic-points`) -/
+properties are `AlgebraicGeometry.Scheme.affineOpenGenericPoints_spec`. -/
 noncomputable def Scheme.affineOpenGenericPoints (X : Scheme.{u}) [QuasiSeparatedSpace X]
     {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) : X.Opens :=
   (exists_isAffineOpen_mem_of_subset_genericPoints hsf hs x).choose
 
 /-- **Properties of the selected affine neighbourhood**: `A(x; s)` is affine and contains `x`
-and every point of `s`.
-(blueprint: `lemma-nagata-affine-neighbourhood-generic-points`; the existence statement
-`lemma-nagata-affine-neighbourhood-generic-points` is
-`AlgebraicGeometry.exists_isAffineOpen_mem_of_subset_genericPoints`) -/
+and every point of `s`. -/
 theorem Scheme.affineOpenGenericPoints_spec (X : Scheme.{u}) [QuasiSeparatedSpace X]
     {s : Set X} (hsf : s.Finite) (hs : s ⊆ genericPoints X) (x : X) :
     IsAffineOpen (X.affineOpenGenericPoints hsf hs x) ∧ x ∈ X.affineOpenGenericPoints hsf hs x ∧
@@ -120,8 +89,7 @@ theorem Scheme.affineOpenGenericPoints_spec (X : Scheme.{u}) [QuasiSeparatedSpac
 /-! ### Partial unions -/
 
 /-- **The partial unions of a finite family of opens**: `X_r = U 0 ∪ ⋯ ∪ U (r - 1)`, so that
-`X_0 = ∅` and `X_n` is the union of the whole family.
-(blueprint: `def:nagata-partial-affine-unions`) -/
+`X_0 = ∅` and `X_n` is the union of the whole family. -/
 def Scheme.partialAffineOpenUnions {n : ℕ} (U : Fin n → X.Opens) (r : ℕ) : X.Opens :=
   ⨆ i : Fin n, ⨆ _ : (i : ℕ) < r, U i
 
@@ -160,9 +128,7 @@ end Scheme
 
 /-! ### The gluing step -/
 
-/-- **The gluing step of the induction over a dense affine cover** (blueprint: the
-induction step of `def:nagata-noetherian-compactification`, using
-`lemma:nagata-partial-union-overlap-dense`).
+/-- **The gluing step of the induction over a dense affine cover**.
 
 This is the two-open theorem `AlgebraicGeometry.HasCompactification.of_two_open_cover` applied
 to the two opens `V` and `W` of `V ∪ W`: their intersection contains `D`, which is dense in
@@ -196,13 +162,7 @@ theorem HasCompactification.of_sup_of_dense_subset [IsNoetherian S] (f : X ⟶ S
 
 /-- **The recursive Noetherian compactification construction**: given a finite family of
 affine opens `U` of `X` with dense total intersection, a compactification of every partial
-union `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` over `S`, constructed by recursion on `r`.
-
-`X_0` is empty, hence proper over `S`; `X_1 = U 0` is affine, so the affine case applies;
-and `X_{r+1} = X_r ∪ U r` is obtained from `X_r` and `U r` by the two-open theorem, whose
-density hypothesis holds because the total intersection of the cover is contained in both
-`X_r` and `U r`.
-(blueprint: `def:nagata-noetherian-compactification`) -/
+union `X_r = U 0 ∪ ⋯ ∪ U (r - 1)` over `S`, constructed by recursion on `r`. -/
 noncomputable def noetherianCompactificationConstruction [IsNoetherian S] (f : X ⟶ S)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {n : ℕ} (U : Fin n → X.Opens)
     (hUaff : ∀ i, IsAffineOpen (U i)) (hUdense : Dense (⋂ i, (U i : Set X))) (r : ℕ) :
@@ -241,7 +201,7 @@ noncomputable def noetherianCompactificationConstruction [IsNoetherian S] (f : X
     · rw [iSup_neg hrn, sup_bot_eq]
       exact HasCompactification.compactification _
 
-/-- **Nagata compactification over a Noetherian base** (blueprint: `thm:nagata-noetherian`).
+/-- **Nagata compactification over a Noetherian base**.
 
 The last stage `X_n = X` of the recursion
 `AlgebraicGeometry.noetherianCompactificationConstruction` over the selected dense affine
@@ -263,8 +223,7 @@ theorem nagataCompactification_of_isNoetherian [IsNoetherian S] (f : X ⟶ S) [I
 /-- **The constructed Noetherian compactification** `C_Noeth(X/S)`: the last stage `X_n = X`
 of the recursion `AlgebraicGeometry.noetherianCompactificationConstruction` over the selected
 dense affine cover `AlgebraicGeometry.Scheme.finiteAffineOpenCoverDenseIInter` of `X`,
-transported along the identification `X ≅ X_n`.
-(blueprint: `def-nagata-noetherian-compactification`, `thm-nagata-noetherian`) -/
+transported along the identification `X ≅ X_n`. -/
 noncomputable def noetherianCompactification [IsNoetherian S] (f : X ⟶ S) [IsSeparated f]
     [LocallyOfFiniteType f] [QuasiCompact f] : Compactification f :=
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f

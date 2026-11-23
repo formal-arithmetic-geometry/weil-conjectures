@@ -20,8 +20,9 @@ namespace CategoryTheory
 
 /-! # Essential constancy under initial restriction
 
-Source: Stacks Project, Categories, Lemma Tag 0A1T (lemma-initial-essentially-constant),
-the pro form of Lemma Tag 0A1S (blueprint: lem-pur-essential-constant-cofinal-0a1s).
+## References
+
+* Stacks Project, Categories, Lemma Tag 0A1T, the pro form of Lemma Tag 0A1S.
 -/
 
 private theorem restrict_witness
@@ -107,25 +108,7 @@ clause of `IsEssentiallyConstantProDiagram`), then the restricted cone `H.whiske
 with components `u.app (H.obj i)`, exhibits `H ⋙ M` as essentially constant; and if `v`
 exhibits `H ⋙ M` as essentially constant, there is a cone `u` exhibiting `M` as essentially
 constant with `H.whiskerLeft u = v`, i.e. `u.app (H.obj i) = v.app i` for all `i`.
-
-Proof (in words). We use Definition 05PU(2) directly, rather than Hom-colimits.
-For restriction, choose `p : H.obj i₀ ⟶ j₀` by initiality and use `M.map p ≫ r`
-as the retraction. Naturality of `u` proves the splitting identity. For an index `i`,
-take a common stage `j` witnessing the original factorization to `H.obj i`, and choose
-`q : H.obj l ⟶ j`. Cofilteredness gives a stage over `i₀`, `l`, and `i`. Initiality's
-cofiltered equalization criterion refines this stage twice: first the two arrows to
-`j₀` agree, then the two arrows to `H.obj i` agree. Applying `M` to these equalities
-and to the original factorization gives the required restricted factorization.
-
-Conversely, extend the cone `v` with Mathlib's `Functor.Initial.extendCone`, whose
-component at any `j`, for any `p : H.obj i ⟶ j`, is `v.app i ≫ M.map p`.
-At `H.obj i` use the identity arrow to recover exactly `v.app i`; in particular the
-old retraction still splits. For an arbitrary `j`, choose `p : H.obj i ⟶ j` by
-initiality and postcompose the common-stage factorization for `i` with `M.map p`.
-The component formula gives the factorization for the extended cone. Finally these
-two witness constructions prove the equivalence by unpacking the definition.
-Source: Stacks Project, Categories, Lemma Tag 0A1T
-(blueprint: lem-pur-essential-constant-cofinal-0a1s). -/
+Source: Stacks Project, Categories, Lemma Tag 0A1T. -/
 theorem initial_iff_essentiallyConstantProDiagram
     {I : Type uI} {J : Type uJ} {C : Type uC}
     [Category.{vI} I] [Category.{vJ} J] [Category.{vC} C]

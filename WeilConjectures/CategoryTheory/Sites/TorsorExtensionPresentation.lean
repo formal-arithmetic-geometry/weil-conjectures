@@ -12,7 +12,7 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 # The canonical extension presentation of an étale torsor
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03AJ, construction from the free abelian
-sheaf (auxiliary; not a blueprint node).
+sheaf.
 -/
 
 @[expose] public section
@@ -32,8 +32,7 @@ namespace CategoryTheory.Sheaf.Torsor
 property. It is the quotient of `G ⊕ ℤ[T]` by `j(g +ᵥ t) = j(t) + i(g)`; maps out of this
 quotient are precisely a homomorphism out of `G` and a natural map out of `T` satisfying
 that relation. The augmentation kills `G` and sends every generator to the constant `1`.
-This characterizes the construction in Stacks, Tag 03AJ, without choosing representatives.
-(auxiliary; not a blueprint node) -/
+This characterizes the construction in Stacks, Tag 03AJ, without choosing representatives. -/
 structure ExtensionPresentation (S : AlgebraicGeometry.Scheme.{uE})
     {G : Sheaf S.smallEtaleTopology AddCommGrpCat.{max uE wE + 1}} (T : Torsor G) where
   middle : Sheaf S.smallEtaleTopology AddCommGrpCat.{max uE wE + 1}

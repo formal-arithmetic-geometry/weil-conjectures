@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.Projection.ProjectionFormulaArrows
 /-!
 # Mate coherence from tensor-square coherence
 
-Source: Stacks 07A4, 0D6D and 0E48
-(blueprint: lemma-weil-pbc-projection-mate-square-coherence).
+Source: Stacks 07A4, 0D6D and 0E48.
 -/
 
 @[expose] public section
@@ -26,10 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- A tensor square identity implies the corresponding identity for projection mates.
-This is the abstract mate calculation used by the concrete pro-etale specialization below.
-The proof is the transpose calculation: apply the right adjunction hom-equivalence, use
-naturality of the square isomorphism and of all four tensor comparisons, and cancel the
-unit and counit by the triangle identities. -/
+This is the abstract mate calculation used by the concrete pro-etale specialization below. -/
 theorem projectionMate_square_of_tensor_coherence
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D} {S : D ⥤ C}

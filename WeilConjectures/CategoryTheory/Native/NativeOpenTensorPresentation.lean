@@ -13,11 +13,10 @@ public import Mathlib.CategoryTheory.Products.Basic
 
 The existing normalization definitions and presentation records are extracted
 verbatim from NativeOpenDerivedTensor to bound compilation time per file.
-Source: Stacks 0GL1, 0E8I and the original declaration docstrings
-(blueprint: lem-sf-native-open-derived-tensor).
+Source: Stacks 0GL1, 0E8I and the original declaration docstrings.
 -/
 
-/-! Factored construction (blueprint: def-sf-generic-open-tensor-presentation). -/
+/-! Factored construction. -/
 
 @[expose] public noncomputable section
 
@@ -30,7 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- The unit-transpose normalization of an open tensor comparison.
-Source: Stacks 0E8I, 0GL1 (blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 0E8I, 0GL1. -/
 def OpenTensorUnitNormalization {A B : Type a} [Category.{b} A] [Category.{b} B]
     (E : A ⥤ B) (R : B ⥤ A) (TA : A × A ⥤ A) (TB : B × B ⥤ B)
     (adj : E ⊣ R)
@@ -41,7 +40,7 @@ def OpenTensorUnitNormalization {A B : Type a} [Category.{b} A] [Category.{b} B]
 
 /-- The two-sided localization square for a total-complex open tensor map.
 The comparison is fixed on arbitrary K-flat representatives.
-Source: Stacks 0GL1, 06YN (blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 0GL1, 06YN. -/
 def OpenTensorRepresentativeNormalization
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
@@ -78,7 +77,7 @@ def OpenTensorRepresentativeNormalization
         DerivedCategory.Q.map (total P T).hom
 
 /-- Localization normalization of restriction/tensor, on arbitrary K-flat inputs.
-Source: Stacks 0GL1, 06YN (blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 0GL1, 06YN. -/
 def OpenTensorRestrictionNormalization
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
@@ -111,8 +110,7 @@ def OpenTensorRestrictionNormalization
 
 /-- Forgetting the equivariant open map gives the ordinary map under the specified
 open and tensor comparisons. Both inverses are fixed by the same square.
-Source: Stacks 0GL1; native closed-forgetful normalization
-(blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 0GL1. -/
 def OpenTensorForgetNormalization
     {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
     [Category.{b} A'] [Category.{b} B']
@@ -133,7 +131,7 @@ def OpenTensorForgetNormalization
 
 /-- Every summand of the total open map is its sheaf map. The input insertion maps
 are the actual total-complex coproduct insertions, not chosen generators.
-Source: Stacks 012Z, 0GL1 (blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 012Z, 0GL1. -/
 def OpenTensorSummandNormalization
     {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     (E : A ⥤ B) (R : B ⥤ A) [E.Additive] [R.Additive]
@@ -156,7 +154,7 @@ def OpenTensorSummandNormalization
 /-- A presentation of the open tensor calculation, with all functors, K-flat models,
 and normalizations retained. The theorem pins every functor and representative map
 to the existing native constructions, using equality rather than recomputation.
-Source: Stacks 0E8I, 0GL1 (blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 0E8I, 0GL1. -/
 structure OpenTensorPresentation
     (A B : Type a) [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
     [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B] where
@@ -246,8 +244,7 @@ structure OpenTensorPresentation
 
 /-- Normalized comparison with ordinary module categories. Its tensor comparisons
 are required to be the canonical ones, and its open maps are fixed by their units.
-Source: Stacks 0GL1 and openTensorNormalization
-(blueprint: lem-sf-native-open-derived-tensor). -/
+Source: Stacks 0GL1 and openTensorNormalization. -/
 structure OpenTensorForgetData
     {A B A' B' : Type a} [Category.{b} A] [Category.{b} B]
     [Category.{b} A'] [Category.{b} B']

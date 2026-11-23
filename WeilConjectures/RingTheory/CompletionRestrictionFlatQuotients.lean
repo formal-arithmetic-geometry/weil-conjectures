@@ -29,7 +29,7 @@ of the extended ideal.
 
 Source: Stacks Project, More on Algebra, Lemma 0C4G, second paragraph, together with
 Algebra, Lemma 05GG (completion modulo powers) and Lemma 00HI (flat base change).
-(blueprint: lem-weil-pbc-completion-restriction-flat-quotients)
+(blueprint: theorem-finite-etale-covers-proper-henselian--2)
 
 Proof: Write C = AdicCompletion I A, J = I C. Finite generation of I identifies
 C/J^n with A/I^n: evaluation is surjective, its kernel is I^n C = J^n,

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Transitions on an augmented product of direct images
 
 Source: Stacks Project, Sites, Lemma 0EXZ, product and transition construction.
-(blueprint: lem-weil-pbc-transition-identity-defect)
 -/
 
 @[expose] public section
@@ -24,15 +23,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0EXZ, transition cocycle; nonunital
-identity correction written by X3 in the parent node, step 3.
-(blueprint: lem-weil-pbc-transition-identity-defect)
-
-Proof in words: set e_k=φ_id followed by the identity comparison E_k.
-The cocycle for a and id_k, together with a≫id_k=a and the coherence of the
-identity and composition comparisons, says φ_a R_a(e_k)=φ_a. Since pushforward
-is additive, φ_a R_a(1-e_k)=φ_a-φ_a=0. Postcomposing with R_a(ι_k) proves
-this assertion. The argument also covers zero identity transitions and empty J. -/
+/-- For a compatible system of abelian sheaves with transitions `φ`, the transition `φ a`
+composed with the identity defect of `φ (𝟙 k)` (after the canonical identification of the
+pushforward along the identity) and the inclusion `ι k` into `A k` vanishes.
+Stacks Project, Sites, Tag 0EXZ. -/
 theorem colimitSystem_transition_identity_defect
     {J : Type u} [SmallCategory J]
     (F : J ⥤ Cat.{u, u}) (T : ∀ j : J, GrothendieckTopology (F.obj j))

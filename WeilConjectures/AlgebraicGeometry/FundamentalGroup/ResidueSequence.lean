@@ -18,7 +18,7 @@ Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraical
 `k`, with boundary `D = C ∖ U`, and let `N` be invertible in `k`. The residues
 `res_z : H¹(U, ℤ / N) → Hom(μ_N(k), ℤ / N) = ℤ / N (-1)` at the boundary points
 (`AlgebraicGeometry.Scheme.EtaleTorsor.residue`) fit in the exact sequence (5.1) of blueprint
-`lem-wf-open-curve-residue-sequence`
+`proposition-no-fixed-class-degree-one--1`
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ D} ℤ / N (-1)`.
 
@@ -105,7 +105,7 @@ lemma residue_eq_add_of_galoisCharacter_eq_add {T T₁ T₂ : EtaleTorsor (ULift
     show T.galoisCharacter j = T₁.galoisCharacter j + T₂.galoisCharacter j from funext h]
   exact kummerResidue_add z hξΩ hx₁ hf₁ hχ₁ hx₂ hf₂ hχ₂
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the residues are compatible with the
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the residues are compatible with the
 reduction of coefficients `ℤ / N d → ℤ / N`.
 
 If the Galois character of a `ℤ / N`-torsor `T'` is the reduction of that of a
@@ -177,7 +177,7 @@ variable {C U : Scheme.{u}} [IsIntegral C] [ConnectedSpace C] [ConnectedSpace U]
 local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 variable (M) in
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the restriction map
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the restriction map
 `j^* : H¹(C, M) → H¹(U, M)` of the residue sequence, in the torsor model of `H¹`: the class of a
 torsor `T` on `C` is sent to the class of its base change `T ×_C U`
 (`AlgebraicGeometry.Scheme.EtaleTorsor.restrictH1_classH1`). -/
@@ -210,8 +210,8 @@ lemma restrictH1_classH1 (T : EtaleTorsor M C) :
     rw [← classH1_eq_classH1_iff, classH1_out]
   exact classH1_eq_classH1_iff.2 (h.pullback j)
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the restriction maps are compatible with the
-maps `H¹(-, M) → H¹(-, M')` induced by a homomorphism of coefficients `φ : M →+ M'`, for
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the restriction maps are compatible with
+the maps `H¹(-, M) → H¹(-, M')` induced by a homomorphism of coefficients `φ : M →+ M'`, for
 instance the reduction `ℤ / ℓⁿ⁺¹ → ℤ / ℓⁿ`. -/
 theorem restrictH1_map {M' : Type (u + 1)} [AddCommGroup M'] [Finite M'] [TopologicalSpace M']
     [DiscreteTopology M'] (φ : M →+ M')
@@ -235,7 +235,7 @@ theorem restrictH1_map {M' : Type (u + 1)} [AddCommGroup M'] [Finite M'] [Topolo
 variable [IsLocallyNoetherian C] {k : Type u} [Field k] (p : C ⟶ Spec (.of k)) (N : ℕ) [NeZero N]
   [NeZero (N : k)] [HasEnoughRootsOfUnity k N]
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the residue map
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the residue map
 `res : H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} Hom(μ_N(k), ℤ / N)` of the residue sequence, in the torsor
 model of `H¹`: the class of a torsor `T` is sent to its residues at the boundary points
 (`AlgebraicGeometry.Scheme.EtaleTorsor.residueH1_classH1`). Here `Hom(μ_N(k), ℤ / N)` is the
@@ -265,7 +265,7 @@ lemma residueH1_classH1 (T : EtaleTorsor (ULift.{u + 1} (ZMod N)) U)
   exact congrFun (residue_eq_of_isIsomorphic j p h) z.1
 
 omit [ConnectedSpace C] in
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: the residue maps are compatible with the
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: the residue maps are compatible with the
 reduction of coefficients `ℤ / N d → ℤ / N`, along the transition map
 `Hom(μ_{N d}, ℤ / N d) → Hom(μ_N, ℤ / N)` induced by `ξ ↦ ξ ^ d`. -/
 theorem residueH1_map_castHom {d : ℕ} [NeZero (N * d)] [NeZero ((N * d : ℕ) : k)]
@@ -299,7 +299,7 @@ local notation "Ω" => SeparableClosure (Scheme.functionField C)
 
 
 -- instance search through `SeparableClosure` and its integral closures is slow
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence at one
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: exactness of the residue sequence at one
 boundary point.
 
 Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
@@ -424,7 +424,7 @@ lemma monodromy_pullback_eq_one_of_mem_fixingSubgroup {M : Type (u + 1)} [AddCom
     (by rw [fiber_map_vaddHom_zero]; exact (hg T.toFiniteEtale y).symm)
 
 omit [IsCurve p] [SmoothOfRelativeDimension 1 p] in
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: injectivity of `H¹(C, M) → H¹(U, M)`.
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: injectivity of `H¹(C, M) → H¹(U, M)`.
 
 Torsors on a connected regular locally noetherian scheme `C` (for instance a smooth connected
 curve over a field) whose restrictions to a nonempty open `U` are isomorphic are isomorphic. -/
@@ -440,7 +440,7 @@ theorem isIsomorphic_of_isIsomorphic_pullback_of_isRegular [IsRegular C] {M : Ty
   exact isIsomorphic_of_isIsomorphic_pullback j s
     (fundamentalGroupMap_surjective_of_isRegular j (pullbackFiberIso j s) G G') h
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: exactness of the residue sequence
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} ℤ / N (-1)` in the middle.
 
 Let `U ⊆ C` be a nonempty open of a smooth connected curve over an algebraically closed field
@@ -524,7 +524,7 @@ theorem exists_isIsomorphic_pullback_iff_residue_eq_zero {N : ℕ} [NeZero N] [N
       (fundamentalGroupMap_surjective_of_isRegular j (pullbackFiberIso j s) G G') T hkill
 
 omit [IsCurve p] [SmoothOfRelativeDimension 1 p] in
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: exactness of the residue sequence
 `0 → H¹(C, M) → H¹(U, M)` on the left: the restriction map is injective, for `C` connected,
 regular and locally noetherian (for instance a smooth connected curve over a field). -/
 theorem injective_restrictH1 [IsRegular C] {M : Type (u + 1)} [AddCommGroup M] [Finite M]
@@ -537,7 +537,7 @@ theorem injective_restrictH1 [IsRegular C] {M : Type (u + 1)} [AddCommGroup M] [
   rw [restrictH1_classH1, restrictH1_classH1, classH1_eq_classH1_iff] at h
   exact classH1_eq_classH1_iff.2 (isIsomorphic_of_isIsomorphic_pullback_of_isRegular h)
 
-/-- Blueprint `lem-wf-open-curve-residue-sequence`: exactness of the residue sequence (5.1)
+/-- Blueprint `proposition-no-fixed-class-degree-one--1`: exactness of the residue sequence (5.1)
 
 `0 → H¹(C, ℤ / N) → H¹(U, ℤ / N) → ⊕_{z ∈ C ∖ U} ℤ / N (-1)`
 

@@ -14,13 +14,13 @@ public import Mathlib.CategoryTheory.Abelian.Refinements
 
 Let `t` be a t-structure on a triangulated category `C`. The functor
 `H⁰ = τ_{≥ 0} τ_{≤ 0} : C ⥤ t.heart.FullSubcategory` to the (abelian) heart is a homological
-functor (blueprint `lem-weil-heart-short-exact-triangles` (5)). Combined with the shift, a
+functor. Combined with the shift, a
 distinguished triangle `X ⟶ Y ⟶ Z ⟶ X⟦1⟧` thus induces a long exact sequence
 `⋯ ⟶ Hⁱ X ⟶ Hⁱ Y ⟶ Hⁱ Z ⟶ Hⁱ⁺¹ X ⟶ ⋯` in the heart.
 
-The proof follows [BBD, Théorème 1.3.6]: the sequence `H⁰ X ⟶ H⁰ Y ⟶ H⁰ Z` is left exact if
-`X, Y, Z ≥ 0` and right exact if `X, Y, Z ≤ 0`, by adjunction; the general case is reduced to
-these by the octahedral axiom.
+## References
+
+* [BBD, Théorème 1.3.6]
 -/
 
 @[expose] public section
@@ -40,8 +40,7 @@ noncomputable instance abelianHeartFullSubcategory : Abelian t.heart.FullSubcate
   letI := t.hasHeartFullSubcategory
   t.abelianHeart t.heart.FullSubcategory
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (1): the cohomology functor
-`H⁰ = τ_{≥ 0} τ_{≤ 0}`, with values in the heart. -/
+/-- The cohomology functor `H⁰ = τ_{≥ 0} τ_{≤ 0}`, with values in the heart. -/
 noncomputable def homology₀ : C ⥤ t.heart.FullSubcategory :=
   t.heart.lift (t.truncGELE 0 0) (fun _ ↦ (t.mem_heart_iff _).2 ⟨inferInstance, inferInstance⟩)
 
@@ -277,8 +276,8 @@ lemma homology₀_exact_epi_of_isLE₁ (T : Triangle C) (hT : T ∈ distTriang C
     infer_instance
   exact epi_of_epi (t.homology₀.map v) _
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (5): for a distinguished triangle
-`X ⟶ Y ⟶ Z ⟶ X⟦1⟧`, the sequence `H⁰ X ⟶ H⁰ Y ⟶ H⁰ Z` is exact. -/
+/-- For a distinguished triangle `X ⟶ Y ⟶ Z ⟶ X⟦1⟧`, the sequence `H⁰ X ⟶ H⁰ Y ⟶ H⁰ Z` is
+exact. -/
 lemma homology₀_exact (T : Triangle C) (hT : T ∈ distTriang C) :
     (t.homology₀ShortComplex T hT).Exact := by
   have h₁₂ : Triangle.mk ((t.truncLEι 0).app T.obj₁) ((t.truncGEπ 1).app T.obj₁)
@@ -301,8 +300,7 @@ lemma homology₀_exact (T : Triangle C) (hT : T ∈ distTriang C) :
   have : Mono φ.τ₃ := hmono
   exact (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).1 hex
 
-/-- Blueprint `lem-weil-heart-short-exact-triangles` (5): the cohomology functor
-`H⁰ : C ⥤ t.heart.FullSubcategory` is homological. -/
+/-- The cohomology functor `H⁰ : C ⥤ t.heart.FullSubcategory` is homological. -/
 instance isHomological_homology₀ : t.homology₀.IsHomological where
   exact T hT := t.homology₀_exact T hT
 

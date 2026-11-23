@@ -18,8 +18,8 @@ the graph correspondence `(𝟙, h)`, and `v` induces coefficient maps on the pi
 ```
 K^Z = Rx_* Lx^* K,        K^U = j_! Lj^* K
 ```
-of the open–closed triangle `K^U ⟶ K ⟶ K^Z ⟶` (blueprint `prop-trf-trace-class-additivity`,
-`lem-trf-trace-triangle-compatibility`):
+of the open–closed triangle `K^U ⟶ K ⟶ K^Z ⟶` (blueprint `proposition-additivity-trace-classes--2`,
+`proposition-additivity-trace-classes--2`):
 
 * `u^Z = [x, x]_! v_x`, the proper pushforward along the diagram `(x, x)` of the point
   correspondence `(s, 𝟙, 𝟙)` with coefficient the stalk map `v_x : K_x ⟶ K_x`
@@ -37,7 +37,7 @@ of the open–closed triangle `K^U ⟶ K ⟶ K^Z ⟶` (blueprint `prop-trf-trace
 
 The trace class of `v` is the sum of the trace classes of `u^Z` and `u^U`
 (`ProEtale.CondensedRing.Correspondence.traceClass_ofGraph_eq_add` in
-`WeilConjectures.TraceFormula.PieceAdditivity`, blueprint `prop-trf-trace-class-additivity`,
+`WeilConjectures.TraceFormula.PieceAdditivity`, blueprint `proposition-additivity-trace-classes--2`,
 item 1).
 
 -/

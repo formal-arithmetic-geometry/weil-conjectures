@@ -31,10 +31,10 @@ whose pullback by `g` is K-flat (`AlgebraicGeometry.ProEtale.kFlatUpperStar`).
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsAdjunction`: the adjunction between
-  derived scalar extension `- ⊗ᴸ_R S` (blueprint `def-weil-derived-tensor`) and restriction of
+  derived scalar extension `- ⊗ᴸ_R S` (blueprint `prose-03-02`) and restriction of
   scalars.
 - `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso`: the isomorphism
-  `(Lg^* K) ⊗ᴸ_R S ≅ Lg^*(K ⊗ᴸ_R S)` (blueprint `thm-trf-finite-coefficient-map`).
+  `(Lg^* K) ⊗ᴸ_R S ≅ Lg^*(K ⊗ᴸ_R S)` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
 -/
 
 @[expose] public section
@@ -99,7 +99,7 @@ instance preservesKFlatQuasiIso_sheafExtendScalars :
     exact h₃
 
 /-- Derived scalar extension `- ⊗ᴸ_R S : D(X_proét, R) ⥤ D(X_proét, S)` (blueprint
-`def-weil-derived-tensor`) is left adjoint to restriction of scalars. -/
+`prose-03-02`) is left adjoint to restriction of scalars. -/
 noncomputable def leftDerivedSheafExtendScalarsAdjunction :
     L(sheafExtendScalars (algebraMap R S) X) ⊣
       D(sheafCompose (ProEt.topology X) (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))) :=
@@ -198,7 +198,7 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarSheafExtendScalars :
 isomorphism `Lg^*(K ⊗ᴸ_R S) ≅ (Lg^* K) ⊗ᴸ_R S` of functors `D(Y_proét, R) ⥤ D(Z_proét, S)`
 induced by the isomorphism `g^*(S ⊗_R F) ≅ S ⊗_R g^* F` of
 `AlgebraicGeometry.ProEtale.sheafExtendScalarsCompUpperStarIso`: both composites are total left
-derived functors of the two sides (blueprint `thm-trf-finite-coefficient-map`). -/
+derived functors of the two sides (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`). -/
 noncomputable def leftDerivedUpperStarExtendScalarsIso :
     L(sheafExtendScalars (algebraMap R S) Y) ⋙ L((g)^*[ModuleCat.{u + 1} S]) ≅
       L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars (algebraMap R S) Z) :=

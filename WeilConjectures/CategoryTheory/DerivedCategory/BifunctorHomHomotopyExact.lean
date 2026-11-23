@@ -12,17 +12,15 @@ import WeilConjectures.Algebra.Homology.BifunctorHomCone
 /-!
 # Exactness of the signed bifunctor Hom complex on the homotopy category
 
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, termwise-split Hom argument,
-generalized to a separately additive bifunctor; the signed model is
-`CochainComplex.bifunctorHomObj` in
-`WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
-(auxiliary; not a blueprint node)
-
 The existing `bifunctorHomHomotopyFunctor H I` takes values in the opposite derived
 category. Its `leftOp` is the functor from the opposite homotopy category to the derived
-category in the node. The source uses the usual opposite triangulation: its shift by
-`m` is the underlying shift by `-m`. The shift structure is existential data, and the
-triangulated assertion uses that same structure.
+category. It carries the usual opposite triangulation: its shift by `m` is the underlying shift
+by `-m`. The shift structure is existential data, and the triangulated assertion uses that same
+structure.
+
+## References
+
+* Stacks Project, Tag 08JC.
 -/
 
 @[expose] public section
@@ -499,39 +497,7 @@ end ShiftConstruction
 commutation with all integer shifts making it triangulated on the opposite homotopy category.
 No K-injectivity of `I`, exactness of products, or preservation of quasi-isomorphisms is needed.
 
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`; the arbitrary-bifunctor signed
-calculation is the explicit generalization in the blueprint proof.
-(auxiliary; not a blueprint node)
-
-Proof plan, following the five steps of the node:
-1. Put `U(K) = bifunctorHomObj H K I`. Its degree `n` is the product over `p + n = q`.
-   On the `(p,q)` projection its differential is `(-1)^p` times postcomposition by `d_I`
-   minus precomposition by `d_K`. The pure terms of its square vanish by `d^2 = 0`;
-   the mixed terms cancel by naturality and the opposite signs for consecutive `p`.
-   Precomposition defines an additive contravariant functor on complexes.
-2. If `f - g = d h + h d`, precomposition by `h^p` with multiplier `(-1)^p` is a
-   degree-minus-one homotopy between `U(f)` and `U(g)`: the `d_I` terms cancel and the
-   remaining terms give precomposition by `f - g`. Thus the existing quotient lift
-   `bifunctorHomHomotopyFunctor` is defined on homotopy classes, before any localization.
-3. For an integer `r`, set `b(r) = r(r+1)/2`. Reindex by `j = p+r` and multiply the
-   original `p` factor by `(-1)^(r*p+b(r))` to obtain `U(K[r]) ≅ U(K)[-r]`.
-   The signs at consecutive `p` differ by `(-1)^r`, so this is a chain isomorphism,
-   natural in `K`. The identity `b(r+s)=b(r)+b(s)+r*s` gives the addition coherence;
-   at zero the comparison is the identity. On the opposite source use `r = -m`.
-4. For `f : K ⟶ L`, use `lem-sf-signed-bifunctor-cone-iso` to identify
-   `U(Cone(f))` with `Cone(U(f))[-1]`. In coordinates `(y,x)` the differential is
-   `(-d y - U(f) x, d x)`, and `U(i)` is projection to `x`. For the third arrow of
-   the reversed cone triangle, `w[-1]` with `w = -projection`, the shift comparison
-   contributes `(-1)^(j+1)` and the minus projection contributes another minus.
-   The cone comparison contributes `(-1)^j`, giving the inclusion of `y` into
-   `Cone(U(f))`. This is exactly the inverse rotation of the cone triangle of `U(f)`.
-   By `lem-pur-homotopy-category-triangulated`, cone triangles and their inverse
-   rotations are distinguished and every distinguished triangle is isomorphic to one.
-5. Compose with the exact localization `DerivedCategory.Qh` from
-   `lem-pur-homotopy-category-triangulated`. Its coherent shift structure preserves
-   the zero and addition laws, and it preserves the distinguished triangles of step 4.
-   The resulting functor is precisely `(bifunctorHomHomotopyFunctor H I).leftOp`.
--/
+Stacks Project, Tag 08JC. -/
 theorem bifunctorHomHomotopyFunctor_leftOp_exact
     {A : Type u₁} {B : Type u₂} {C : Type u₃}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C]

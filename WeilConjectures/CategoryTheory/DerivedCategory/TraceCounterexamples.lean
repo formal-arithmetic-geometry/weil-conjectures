@@ -15,19 +15,17 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 /-!
 # Counterexamples for the categorical trace in the derived category
 
-Let `ℓ` be a prime and `A = ℤ/ℓ²`. This file formalizes two blueprint statements showing that
+Let `ℓ` be a prime and `A = ℤ/ℓ²`. This file formalizes two statements showing that
 the categorical trace in `D(A)` (for the Koszul braiding `DerivedCategory.braidedCategory'`) is
 not as well behaved as over a field.
 
 ## Main results
 
-- `DerivedCategory.trace_not_determined_by_homology` (blueprint
-  `example-trace-not-determined-cohomology`): on the perfect complex `P = [A --ℓ--> A]` in
+- `DerivedCategory.trace_not_determined_by_homology`: on the perfect complex `P = [A --ℓ--> A]` in
   degrees `0` and `1`, the endomorphisms `1_P = (1, 1)` and `v = (1 + ℓ, 1)` induce the same
   maps (the identity) on cohomology, but `tr (1_P ∣ P) = 0` and `tr (v ∣ P) = ℓ ≠ 0`.
-- `DerivedCategory.exists_triangle_endomorphism_trace_ne_add` (blueprint
-  `remark-coherent-additivity`): there are a distinguished triangle `T` of dualizable objects of
-  `D(A)` and an endomorphism `φ : T ⟶ T` of triangles with
+- `DerivedCategory.exists_triangle_endomorphism_trace_ne_add`: there are a distinguished
+  triangle `T` of dualizable objects of `D(A)` and an endomorphism `φ : T ⟶ T` of triangles with
   `tr φ.hom₂ ≠ tr φ.hom₁ + tr φ.hom₃`.
 
 ## Implementation notes
@@ -372,7 +370,7 @@ open TraceCounterexample
 
 variable [Fact ℓ.Prime]
 
-/-- Blueprint `example-trace-not-determined-cohomology`: over `A = ℤ/ℓ²`, the trace of an
+/-- over `A = ℤ/ℓ²`, the trace of an
 endomorphism of a perfect complex is not determined by the maps it induces on cohomology. Let
 `P = [A --ℓ--> A]` in degrees `0` and `1`, and `v = (1 + ℓ, 1)`. Then `v` induces the identity on
 all cohomology objects of `P`, `P` is dualizable in `D(A)`, and for any choice of right dual,
@@ -404,14 +402,10 @@ theorem trace_not_determined_by_homology :
   exact fun h ↦ natCast_ne_zero_of_sq ℓ
     (algebraMap_end_unit_injective (End.ext (h.trans (by simp))))
 
-/-- Blueprint `remark-coherent-additivity`: over `A = ℤ/ℓ²`, the trace is not additive for
+/-- Over `A = ℤ/ℓ²`, the trace is not additive for
 endomorphisms of distinguished triangles whose squares only commute in `D(A)`. There are a
 distinguished triangle `T` of dualizable objects of `D(A)` and an endomorphism `φ : T ⟶ T` of
-triangles such that, for any choice of right duals, `tr φ.hom₂ ≠ tr φ.hom₁ + tr φ.hom₃`.
-
-Here `T` is the triangle `A[-1] ⟶ P ⟶ A ⟶ A[-1][1]` of the degreewise split short exact
-sequence, with `P = [A --ℓ--> A]` in degrees `0` and `1`, and `φ = (1, v, 1)` with
-`v = (1 + ℓ, 1)`; the traces are `-1`, `ℓ` and `1`. -/
+triangles such that, for any choice of right duals, `tr φ.hom₂ ≠ tr φ.hom₁ + tr φ.hom₃`. -/
 theorem exists_triangle_endomorphism_trace_ne_add :
     ∃ (T : Triangle (DerivedCategory (ModuleCat.{0} (ZMod (ℓ ^ 2))))) (φ : T ⟶ T),
       T ∈ distTriang _ ∧ Nonempty (HasRightDual T.obj₁) ∧ Nonempty (HasRightDual T.obj₂) ∧

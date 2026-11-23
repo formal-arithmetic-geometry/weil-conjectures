@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-! # Exact further restriction of module sheaves between slices
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), localization step.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -29,14 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Further restriction between slices of a small ringed site is exact.
-Source: Stacks Project, Modules on Sites, Tag 093U (3), relocalization step.
-(auxiliary; not a blueprint node).
-
-Proof: On underlying abelian sheaves this is precomposition by the functor between the
-slice categories. This functor is both continuous and cocontinuous for the slice
-topologies. Its sheaf restriction is therefore a right adjoint and also a left adjoint,
-so it preserves finite limits and colimits. The faithful exact forgetful functor reflects
-short exact sequences. The exact-functor criterion gives the result for module sheaves. -/
+Source: Stacks Project, Modules on Sites, Tag 093U (3), relocalization step. -/
 theorem overMap_exact {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
     {X Y : C} (f : X ⟶ Y) :

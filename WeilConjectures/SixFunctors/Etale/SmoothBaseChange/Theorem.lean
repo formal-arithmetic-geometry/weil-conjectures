@@ -177,7 +177,7 @@ theorem Etale.baseChangeProperty_of_smooth (n : ℕ) (hΛ : (n : Λ) = 0)
         q).baseChangeProperty)
     p hn
 
-/-- Blueprint `sk-thm-smooth-base-change`, `sbc-thm-smooth-base-change`: Smooth base change.
+/-- Blueprint `theorem-smooth-base-change-classical-torsion--1`: Smooth base change.
 
 **The smooth base change theorem** in étale cohomology: for a Cartesian square
 

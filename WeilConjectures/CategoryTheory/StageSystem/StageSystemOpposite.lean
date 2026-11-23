@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Opposites
 
 The opposite of a stage system uses the inverse opposite associator. Reversing
 finite-stage representatives identifies its pair category with the opposite of
-the original pair category. This implements the representative construction in
-blueprint `thm-coef-qbar-verdier`, proof steps 1--2.
+the original pair category.
 -/
 
 @[expose] public noncomputable section

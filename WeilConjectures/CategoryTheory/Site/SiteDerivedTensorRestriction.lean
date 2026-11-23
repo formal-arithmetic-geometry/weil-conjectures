@@ -100,10 +100,7 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 /-!
 # Derived tensor with scalar restriction on a ringed site
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-sk-lem-sf-kunneth-star/lem-trf-ordinary-kunneth.proof.md, Step 2;
-Stacks Project, Tags 03EK, 06YS, 06YU, 06YY
-(blueprint: lem-trf-site-derived-tensor-restriction).
+Source: Stacks Project, Tags 03EK, 06YS, 06YU, 06YY.
 
 The comparison on one K-flat factor is normalized by the recorded two-factor descent
 comparison. The representative formula uses this comparison, the change-of-rings counit,
@@ -141,14 +138,14 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 
 
 /-- Termwise restriction, exactly the recorded scalar restriction functor.
-Source: Stacks, Tag 03DA (blueprint: lem-trf-site-derived-tensor-restriction). -/
+Source: Stacks, Tag 03DA. -/
 abbrev siteTensorRestriction (φ : R ⟶ S) :=
   SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
 
 /-- Local section of change of rings, through its actual module-sheafification unit.
 The conventional order in `changeOfRings` is `s ⊗ x`, representing `x ⊗ s` in the paper.
-Source: Stacks, Tag 03EK (blueprint: lem-trf-site-derived-tensor-restriction). -/
+Source: Stacks, Tag 03EK. -/
 def siteExtensionTmul (φ : R ⟶ S) (M : (ringedSiteModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)))
     (E₀ : (ringedSiteModules.{r}

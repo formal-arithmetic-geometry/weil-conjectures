@@ -31,7 +31,7 @@ Source: Stacks Project, Smoothing Ring Maps, proof of Lemma Tag 07CA, first para
 
 Proof (the six steps of the blueprint node):
 1. Choose the presentation `P → A`, with kernel `I = (f₁, …, fₘ)`, and the integer `c`
-from `def-weil-pbc-strictly-standard-element`. By
+from `theorem-finite-etale-covers-proper-henselian--2`. By
 `lem-weil-pbc-polynomial-ring-kahler-basis`, the differentials of the variables form a basis
 of the base-changed differential module. The conormal differential composed with the map
 `A^c → I/I²` taking the standard basis to the first `c` relation classes has Jacobian matrix.

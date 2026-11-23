@@ -46,9 +46,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Mathlib.CategoryTheory.Sites.PreservesLimits
 
 /-! # Finite étale representation of the native finite Tate diagram
-
-Source: the Integral twist paragraph of the current blueprint proof of
-`sk-prop-sfb-cartesian-coefficients-twists`.
 -/
 
 @[expose] public noncomputable section
@@ -245,32 +242,7 @@ private theorem quotient_basis (ℓ : ℕ) [Fact ℓ.Prime]
   exact ⟨d, ⟨Module.Basis.ofEquivFun eA⟩⟩
 
 /-- One finite native Tate level is represented by a finite étale scheme.
-This involves no tower transitions, infinite limits, or inverse-image functors.
-
-Source: current blueprint, sec-smooth-purity/sk-prop-an,
-`sk-prop-sfb-cartesian-coefficients-twists.proof.md`, Integral twist paragraph.
-(blueprint: lem-pur-native-integral-tate-finite-representation).
-
-Proof: the integers of E are finite over Z_ell: coordinates in a Q_ell-basis
-are continuous and bounded on the compact integer ball, so this ring embeds
-in ell^(-N) Z_ell^d for some N. The latter is finite over the noetherian ring
-Z_ell, and therefore so is its submodule. The integer ring is torsion free
-as a subring of a field; a finite torsion-free module over the PID Z_ell is
-free. Choose an integral basis of rank [E : Q_ell]. Its reduction modulo ell^(n+1)
-identifies B_E,n as a module with that many copies of Z/ell^(n+1).
-The finite discrete quotient's continuous-function coefficient sheaf agrees
-with its constant sheaf: locally constant functions are finite clopen labelled
-partitions, and the comparison is compatible with pullback from the point.
-The root sheaf is annihilated by ell^(n+1), so the ordinary integral tensor
-B_E,n tensor_Z mu agrees with the tensor over Z/ell^(n+1). The reduced basis
-therefore identifies the underlying level with the finite direct sum of that
-many copies of mu_(ell^(n+1)). A finite direct sum of abelian sheaves is the
-finite product. The root sheaf is represented by the relative scheme
-Spec(O_Y[t]/(t^(ell^(n+1))-1)). This scheme is finite locally free, and etale:
-the derivative is ell^(n+1)*t^(ell^(n+1)-1), which is a unit on the root scheme
-because ell and t are units. Its indicated finite fibre power is finite etale
-and represents the finite product, since Yoneda preserves products.
-The construction works on arbitrary bases and on the empty base scheme. -/
+This involves no tower transitions, infinite limits, or inverse-image functors. -/
 theorem spIntegralTwistLevel_finiteEtale_representation
     (Y : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ y : Y, Invertible (ℓ : Y.residueField y)]

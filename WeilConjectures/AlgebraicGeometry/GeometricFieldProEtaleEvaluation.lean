@@ -12,12 +12,12 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.AlgebraicGeometry.GeometricFieldProfiniteDenseSubsite
 import WeilConjectures.CategoryTheory.DenseSubsiteModuleRestriction
+import WeilConjectures.AlgebraicGeometry.ProEtale.SepClosedPointLift
 
 /-!
-# Pro-etale evaluation over an algebraically closed field
+# Pro-etale evaluation over a separably closed field
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Examples 4.1.10 and 4.2.11
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, The pro-etale topology for schemes, Examples 4.1.10 and 4.2.11.
 -/
 
 @[expose] public section
@@ -29,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Continuity of the relative test-object functor, by composition of the published
-continuous functors. Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+continuous functors. See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable instance geometricFieldTest_isContinuous (X : Scheme.{u}) :
     (profiniteToProEtOf X).IsContinuous (coherentTopology Profinite.{u})
       (Scheme.ProEt.topology X) :=
@@ -39,16 +38,14 @@ noncomputable instance geometricFieldTest_isContinuous (X : Scheme.{u}) :
     (Scheme.ProEt.topology X)
 
 /-- Restriction along the specified relative profinite test objects, on objects and
-arrows. Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
-(auxiliary; not a blueprint node). -/
+arrows. See Bhatt--Scholze, Examples 4.1.10 and 4.2.11. -/
 noncomputable abbrev geometricFieldRestriction (X : Scheme.{u})
     (D : Type v) [Category.{u + 1} D] :=
   (profiniteToProEtOf X).sheafPushforwardContinuous D
     (coherentTopology Profinite.{u}) (Scheme.ProEt.topology X)
 
 /-- The canonical structural map from the singleton test object to the final scheme.
-Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable def geometricFieldTestFinalMap (X : Scheme.{u}) :
     (profiniteToProEtOf X).obj (Profinite.of (ULift.{u, 0} PUnit.{1})) ⟶
       Scheme.ProEt.mk (𝟙 X) :=
@@ -56,8 +53,7 @@ noncomputable def geometricFieldTestFinalMap (X : Scheme.{u}) :
     (((profiniteToProEtOf X).obj (Profinite.of (ULift.{u, 0} PUnit.{1}))).hom)
 
 /-- The point adjunction, with restriction as its actual right adjoint.
-Source: Bhatt--Scholze, Example 4.2.11
-(auxiliary; not a blueprint node). -/
+See Bhatt--Scholze, Example 4.2.11. -/
 noncomputable def geometricFieldPointAdjunction (X : Scheme.{u}) :
     profinitePointSetSchemeInverseImage X ⊣ geometricFieldRestriction X (Type (u + 1)) :=
   (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous profiniteToProEt
@@ -65,16 +61,14 @@ noncomputable def geometricFieldPointAdjunction (X : Scheme.{u}) :
       (Scheme.proEtaleSheafAdjunction (toSpecZ X) (Type (u + 1)))
 
 /-- The same specified adjunction for abelian sheaves.
-Source: Bhatt--Scholze, Example 4.2.11
-(auxiliary; not a blueprint node). -/
+See Bhatt--Scholze, Example 4.2.11. -/
 noncomputable def geometricFieldAbelianPointAdjunction (X : Scheme.{u}) :
     upperStarFromPoint X ⊣ geometricFieldRestriction X Ab.{u + 1} :=
   pointUpperStarLowerStarAdjunction.comp
     (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
 
 /-- Canonical base change of relative profinite test objects, fixed by the fibre-product
-composition comparison. Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+composition comparison. See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable def geometricFieldTestBaseChange {X Y : Scheme.{u}} (f : X ⟶ Y) :
     profiniteToProEtOf Y ⋙ Scheme.proEtaleBaseChange f ≅ profiniteToProEtOf X :=
   Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft profiniteToProEt
@@ -83,8 +77,7 @@ noncomputable def geometricFieldTestBaseChange {X Y : Scheme.{u}} (f : X ⟶ Y) 
 
 /-- The canonical comparison from restriction to restriction after inverse image:
 apply the adjunction unit and then the specified test-object base-change isomorphism.
-Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable def geometricFieldRestrictionComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (Scheme.ProEt.topology X) D] :
@@ -101,8 +94,7 @@ noncomputable def geometricFieldRestrictionComparison {X Y : Scheme.{u}} (f : X 
 /-- The canonical evaluation comparison, not an unrelated isomorphism: the scheme
 adjunction unit followed by restriction along the final-object base-change isomorphism.
 It is defined for any coefficient category for which inverse image exists, hence its
-components for rings are ring maps. Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+components for rings are ring maps. See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable def geometricFieldEvaluationComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (Scheme.ProEt.topology X) D] :
@@ -118,8 +110,7 @@ noncomputable def geometricFieldEvaluationComparison {X Y : Scheme.{u}} (f : X �
 
 /-- Composition of arbitrary coefficient inverse images, obtained by conjugating the
 canonical fibre-product comparison of direct images.
-Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable def geometricFieldInverseImageComp {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (D : Type v) [Category.{u + 1} D]
     [HasColimitsOfSize.{u + 1, u + 1} D]
@@ -136,8 +127,7 @@ noncomputable def geometricFieldInverseImageComp {X Y Z : Scheme.{u}}
       (Scheme.ProEt.topology X)).symm).symm
 
 /-- The identity inverse-image comparison, as the adjunction conjugate of the canonical
-identity direct-image comparison. Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node). -/
+identity direct-image comparison. See Bhatt--Scholze, Example 4.1.10. -/
 noncomputable def geometricFieldInverseImageIdentity (X : Scheme.{u})
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (Scheme.ProEt.topology X) D] :
@@ -149,8 +139,7 @@ noncomputable def geometricFieldInverseImageIdentity (X : Scheme.{u})
 
 /-- Restriction of modules uses the same profinite test objects and the identity scalar
 map, so it is restriction of both the sections and their ring action.
-Source: Bhatt--Scholze, Example 4.2.11
-(auxiliary; not a blueprint node). -/
+See Bhatt--Scholze, Example 4.2.11. -/
 noncomputable abbrev geometricFieldModuleRestriction (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) RingCat.{u + 1}) :=
   SheafOfModules.pushforward.{u + 1} (F := profiniteToProEtOf X)
@@ -174,12 +163,11 @@ private theorem geometricField_finalMap_isIso (X : Scheme.{u}) :
         exact (Category.comp_id f.left).symm.trans hw)
   exact isIso_of_isTerminal (hs.isTerminalObj (profiniteToProEtOf X) _) ht _
 
-/-- Over an algebraically closed field, the specified restriction is the profinite-site
+/-- Over a separably closed field, the specified restriction is the profinite-site
 identification, its left adjoint is the specified point inverse image, and evaluation
 at the scheme is evaluation at the singleton. This includes ring and module structures.
 
-Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Examples 4.1.10 and 4.2.11.
 
 Proof: The proved geometricFieldProfiniteDenseSubsite identifies the specified test
 functor with a dense subsite. Mathlib's comparison theorem gives restriction
@@ -190,7 +178,7 @@ For an arbitrary ring sheaf, the proved module transport theorem lifts its scala
 action through the set and abelian restriction equivalences and checks the module
 laws on the cover-dense subsite. This proves equivalence for the specified module
 restriction with its identity scalar map. -/
-theorem geometric_field_proetale_evaluation (K : Type u) [Field K] [IsAlgClosed K] :
+theorem geometric_field_proetale_evaluation (K : Type u) [Field K] [IsSepClosed K] :
     (geometricFieldRestriction (Spec (.of K)) (Type (u + 1))).IsEquivalence ∧
     (geometricFieldRestriction (Spec (.of K)) Ab.{u + 1}).IsEquivalence ∧
     (geometricFieldRestriction (Spec (.of K)) RingCat.{u + 1}).IsEquivalence ∧
@@ -224,7 +212,7 @@ theorem geometric_field_proetale_evaluation (K : Type u) [Field K] [IsAlgClosed 
 
 /-- The upstream site lemmas import the incompatible generic star API.
 This argument uses their lower-level weakly-etale section API directly. -/
-private theorem geometricField_cover_id (K : Type u) [Field K] [IsAlgClosed K]
+private theorem geometricField_cover_id (K : Type u) [Field K] [IsSepClosed K]
     {S : Sieve (Scheme.ProEt.mk (𝟙 (Spec (.of K))))}
     (hS : S ∈ Scheme.ProEt.topology (Spec (.of K)) _) : S (𝟙 _) := by
   obtain ⟨R, hR, hRS⟩ := Scheme.ProEt.mem_topology_iff.1 hS
@@ -233,7 +221,7 @@ private theorem geometricField_cover_id (K : Type u) [Field K] [IsAlgClosed K]
   obtain ⟨Y, g, hg, x, -⟩ := hR'.1 (IsLocalRing.closedPoint K)
   obtain ⟨hg⟩ := hg
   obtain @⟨V, f, hf⟩ := hg
-  obtain ⟨σ, hσ⟩ := exists_comp_eq_id_of_weaklyEtale V.hom x
+  obtain ⟨σ, hσ⟩ := exists_comp_eq_id_of_weaklyEtale_of_isSepClosed V.hom x
   let s : Scheme.ProEt.mk (𝟙 (Spec (.of K))) ⟶ V :=
     MorphismProperty.Over.homMk σ hσ
   have h := S.downward_closed (hRS _ _ hf) s
@@ -247,7 +235,7 @@ private theorem geometricField_cover_id (K : Type u) [Field K] [IsAlgClosed K]
   rw [hf]
   exact hσ.symm
 
-private theorem geometricField_abelian_colimits (K : Type u) [Field K] [IsAlgClosed K]
+private theorem geometricField_abelian_colimits (K : Type u) [Field K] [IsSepClosed K]
     (J : Type) [SmallCategory J] : PreservesColimitsOfShape J
       ((sheafSections (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1}).obj
         (op (Scheme.ProEt.mk (𝟙 (Spec (.of K)))))) := by
@@ -286,8 +274,7 @@ private theorem geometricField_abelian_colimits (K : Type u) [Field K] [IsAlgClo
 and evaluation of arbitrary ring-sheaf modules preserves cokernels and finite free modules.
 The latter are the colimits of finite families of copies of the coefficient sheaf.
 
-Source: Bhatt--Scholze, Example 4.1.10; Stacks Project, Tag 03CN
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Example 4.1.10; Stacks Project, Tag 03CN.
 
 Proof: (5) A covering member contains a point above the unique point of Spec K.
 The weakly-etale section theorem splits its structure map. Hence every covering sieve
@@ -299,7 +286,7 @@ reduces preservation of colimits to pointwise presheaf colimits. Limits are sect
 The forgetful functor from module sheaves to abelian sheaves preserves colimits;
 forgetting modules to abelian groups reflects them. This proves the module assertions,
 including cokernels, rank zero and a zero coefficient ring. -/
-theorem geometric_field_proetale_evaluation_exact (K : Type u) [Field K] [IsAlgClosed K] :
+theorem geometric_field_proetale_evaluation_exact (K : Type u) [Field K] [IsSepClosed K] :
     (∀ (S : Presieve (Scheme.ProEt.mk (𝟙 (Spec (.of K))))),
       Sieve.generate S ∈ Scheme.ProEt.topology (Spec (.of K)) _ →
       ∃ (U : (Spec (.of K)).ProEt)
@@ -375,8 +362,7 @@ identifications and preserve evaluation by the canonical unit-normalized compari
 This includes arbitrary, nonalgebraic extensions and identities. Ring components are
 ring homomorphisms, and the restriction comparison for modules respects their action.
 
-Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Example 4.1.10.
 
 Proof: (7) The canonical pullback-composition isomorphism already identifies the
 relative profinite test objects after arbitrary base change. The resulting isomorphism
@@ -485,8 +471,7 @@ private theorem geometricField_final_pullback_hom_ext {X Y : Scheme.{u}} (f : X 
 /-- The evaluation and restriction comparisons have the same singleton component and
 respect composition. This formulation is uniform in the coefficient category, so the
 same equations hold for sets, abelian groups and rings, and for their operation maps.
-Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Examples 4.1.10 and 4.2.11.
 
 Proof: (8) The singleton base-change isomorphism commutes with the structural maps to
 terminal objects, proving the evaluation square. On finite clopen partitions the two
@@ -599,8 +584,7 @@ theorem geometric_field_proetale_evaluation_coherence
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Identity compatibility, including the actual inverse-image identity comparison.
-Source: Bhatt--Scholze, Example 4.1.10
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Example 4.1.10.
 
 Proof: (8) Base change along the identity has its canonical projection to the original
 test object. The unit triangle identity makes its conjugate the identity inverse-image
@@ -680,8 +664,7 @@ theorem geometric_field_proetale_evaluation_identity
 apply this to addition, multiplication, units and an arbitrary ring-sheaf module action.
 The inverse-image operation is its image under the specified scheme inverse image;
 the product comparisons specify the product identification rather than choosing one.
-Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11
-(auxiliary; not a blueprint node).
+See Bhatt--Scholze, Examples 4.1.10 and 4.2.11.
 
 Proof: (8) The restriction comparison is natural at all operation morphisms, since it
 is built from an adjunction unit and a test-object isomorphism. Inverse image preserves

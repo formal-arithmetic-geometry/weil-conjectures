@@ -749,28 +749,7 @@ private theorem tor_of_continuous_pid
     (scalar_pid_model_tor Λ (ULift.{u + 1} A)
       (continuousScalarHom A ≫ j.inv.hom) (U.X i) P hP)
 
-/-- Finite constant local models have a uniform scalar Tor interval, on every scheme.
-
-Source: blueprint main-20261015, localizing-closure ctf-equals-bc proof,
-Local models and Locality paragraphs
-(blueprint: lem-sfb-padic-constant-local-model-tor).
-
-Proof: evaluate coefficients at the point. Constant functions identify the scalar ring
-with the indicated DVR or field, including the finite-subextension-valued algebraic
-closure. On a cover exhibiting the finite constant model, write its finitely presented
-scalar module as the cokernel of a finite scalar matrix. Over a DVR choose a finite
-free basis of the kernel of a finite free presentation; over a field choose a finite
-basis of the module itself. The constant-to-continuous scalar map is flat for the DVR:
-continuous functions with values in the torsion-free DVR are torsion-free, and modules
-over a PID are flat. Constant sheafification and the monoidal inverse image are exact.
-Consequently the scalar resolution gives a resolution of the local model by finite
-free coefficient modules, in degrees -1 and 0, or just degree 0 in the field case.
-These bounded flat resolutions compute derived tensor with every test module and
-remain concentrated in the same interval. Exact restriction to the trivializing
-pro-etale cover commutes with derived tensor; joint conservativity of restriction
-therefore gives the same interval before restriction. Transport along the coefficient
-isomorphism using exact monoidal scalar restriction. Empty covers and rank zero are
-included. No compactness or Noetherian assumption on the scheme is required. -/
+/-- Finite constant local models have a uniform scalar Tor interval, on every scheme. -/
 theorem padic_constant_local_model_tor
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]

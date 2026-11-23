@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Composition of morphisms of sites
 
-Source: Stacks Project, Lemma 03CB and Definition 03CC
-(blueprint: lem-weil-pbc-site-morphism-composition).
+## References
+
+* Stacks Project, Lemma 03CB and Definition 03CC.
 -/
 
 @[expose] public section
@@ -43,8 +44,10 @@ private theorem leftAdjointUniq_existsUnique
 
 -- The original existential continuity binder is used only through instance synthesis.
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Lemma 03CB and Definition 03CC
-(blueprint: lem-weil-pbc-site-morphism-composition).
+/-- The composite of two morphisms of sites, given by continuous functors whose sheaf
+pullbacks preserve finite limits and finite colimits, is a morphism of sites: the composite
+functor is continuous, its sheaf pullback is the composite of the sheaf pullbacks (with
+the unit given by the composite unit), and it preserves finite limits and colimits.
 
 The precoverages encode the sites of 00VH, and the covering and pullback hypotheses
 are the two conditions of 00WV. The `IsContinuous` instances are their consequences
@@ -52,23 +55,7 @@ by `siteContinuous_pushforward_isSheaf`; they only make the sheaf functors typea
 `sheafPullback` here is the left-Kan-extension followed by sheafification construction,
 not the arbitrarily chosen left adjoint. Both coefficients use the same construction.
 
-Proof:
-1. Apply each covering condition successively. Compose the two pullback comparison
-   isomorphisms. This proves Stacks continuity of the composite. Precomposition
-   agrees objectwise and on restriction maps, hence agrees as a functor, for sets
-   and abelian groups (lem-weil-pbc-site-continuous-pushforward-sheaf and
-   lem-weil-pbc-sheaf-algebraic-structures-objects).
-2. Compose the adjunctions of
-   lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction using
-   def-weil-pbc-composite-adjunction. The composite right adjoint is the functor in
-   step 1. Uniqueness of left adjoints gives the unique isomorphism compatible with
-   units (lem-weil-pbc-conjugate-iso-unit-equation). Its component equation below
-   is exactly the composite unit: eta_v followed by v^s applied to eta_u at v_s F.
-3. Finite limits and colimits are preserved by successive application of the two
-   preservation hypotheses. Transport along the isomorphism of step 2. This is
-   exactness of the composite left adjoint. Together with step 1 it defines the
-   composite morphism of sites; its direct and inverse images are the functors in
-   steps 1 and 2, as in 03CC. -/
+Stacks Project, Lemma 03CB and Definition 03CC. -/
 theorem siteMorphism_composition
     {C₁ C₂ C₃ : Type u} [SmallCategory C₁] [SmallCategory C₂] [SmallCategory C₃]
     (J₁ : Precoverage C₁) (J₂ : Precoverage C₂) (J₃ : Precoverage C₃)

@@ -47,8 +47,8 @@ positive Koszul homology. In degree zero, the differential of
 quasi-isomorphism. Exactness of sheafification preserves this quasi-isomorphism.
 (3) Exterior-power bases make the Koszul terms finite free, and terms above the
 length vanish. The resulting local strictly perfect representatives give
-`def-pc-perfect-complex`. (4) These bounded finite free quotient resolutions
-satisfy `def-sc-perfect-closed-immersion`. No Noetherian hypothesis is required. -/
+`lemma-coherent-base-change-invertible-sheaves--1`. (4) These bounded finite free quotient
+resolutions satisfy `def-sc-perfect-closed-immersion`. No Noetherian hypothesis is required. -/
 theorem koszulRegular_closedImmersion_perfect {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

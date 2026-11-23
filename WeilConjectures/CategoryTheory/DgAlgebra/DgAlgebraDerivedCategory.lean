@@ -23,9 +23,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 /-!
 # The derived category of a dg algebra
 
-Source: Stacks Project, dga.tex, Definitions definition-dga, definition-dgm,
-definition-shift, definition-cone, and section-derived
-(blueprint: def-sfb-dg-derived-category).
+Source: Stacks Project, dga.tex, Definitions, and the section on the derived category of a dg
+algebra.
 
 The category is the actual Gabriel--Zisman localization of right dg modules at
 quasi-isomorphisms. `DerivedStructure` specifies its standard triangulation by
@@ -45,27 +44,27 @@ open CategoryTheory.MonoidalOpposite CategoryTheory.Pretriangulated
 namespace CategoryTheory.DgAlgebra
 
 /-- Integer cochain complexes of abelian groups, expressed as modules over the integers.
-Source: Stacks, dga.tex, definition-dga (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex. -/
 abbrev Complex := CochainComplex (ModuleCat.{u} (ULift.{u} ℤ)) ℤ
 
 /-- An associative unital dg algebra is a monoid in cochain complexes. The chain-map
 condition on multiplication is precisely the signed Leibniz rule, and the complex
 identity is d squared equals zero. No graded commutativity is required.
-Source: Stacks, dga.tex, definition-dga (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex. -/
 abbrev Algebra := Mon Complex.{u}
 
 /-- A module object in the reversed tensor category has action M tensor A to M.
 Thus these are right dg modules, with d(ma)=d(m)a+(-1)^degree(m)m d(a).
-Source: Stacks, dga.tex, definition-dgm (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex. -/
 abbrev RightModule (A : Algebra.{u}) := Mod Complex.{u}ᴹᵒᵖ (mop A.X)
 
 /-- Forget the right action, retaining the actual differential.
-Source: Stacks, dga.tex, definition-dgm (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex. -/
 def underlying (A : Algebra.{u}) : RightModule A ⥤ Complex.{u} :=
   Mod.forget (mop A.X) ⋙ unmopFunctor _
 
 /-- The homogeneous right action, evaluated on a pure tensor in the total tensor complex.
-Source: Stacks, dga.tex, definition-dgm (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex. -/
 def act (A : Algebra.{u}) (M : RightModule A) (p q : ℤ)
     (m : ((underlying A).obj M).X p) (a : A.X.X q) :
     ((underlying A).obj M).X (p + q) :=
@@ -74,7 +73,7 @@ def act (A : Algebra.{u}) (M : RightModule A) (p q : ℤ)
       (TensorProduct.tmul (ULift.{u} ℤ) m a))
 
 /-- Quasi-isomorphisms are detected on every cohomology group of the underlying complex.
-Source: Stacks, dga.tex, section-derived (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex, the derived category of a dg algebra. -/
 def quasiIsomorphisms (A : Algebra.{u}) : MorphismProperty (RightModule A) :=
   fun _ _ f ↦ QuasiIso ((underlying A).map f)
 
@@ -82,17 +81,17 @@ def quasiIsomorphisms (A : Algebra.{u}) : MorphismProperty (RightModule A) :=
 Localizing dg modules directly at quasi-isomorphisms also identifies homotopic maps:
 the usual cylinder projection is a quasi-isomorphism. Hence this is equivalently the
 localization of the homotopy category used by Stacks.
-Source: Stacks, dga.tex, section-derived (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex, the derived category of a dg algebra. -/
 abbrev Derived (A : Algebra.{u}) := (quasiIsomorphisms A).Localization
 
 /-- The canonical localization functor.
-Source: Stacks, dga.tex, section-derived (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex, the derived category of a dg algebra. -/
 abbrev Q (A : Algebra.{u}) : RightModule A ⥤ Derived A := (quasiIsomorphisms A).Q
 
 /-- A comparison with the usual shift: a complex isomorphism whose degree maps
 preserve the unchanged right action. The complex isomorphism includes the sign
 (-1)^n on the differential. No boundedness is imposed.
-Source: Stacks, dga.tex, definition-shift (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex. -/
 structure ShiftComparison (A : Algebra.{u}) (n : ℤ) (M S : RightModule A) where
   iso : (underlying A).obj S ≅ ((underlying A).obj M)⟦n⟧
   action (p q : ℤ) (m : ((underlying A).obj S).X p) (a : A.X.X q) :
@@ -106,8 +105,7 @@ structure ShiftComparison (A : Algebra.{u}) (n : ℤ) (M S : RightModule A) wher
 /-- A dg mapping-cone triangle. The two projection equations force the action on
 the cone to be the componentwise action on M[1] plus N; the map equations force
 its actual inclusion and signed connecting map. An arbitrary extension is excluded.
-Source: Stacks, dga.tex, definition-cone and section-distinguished; Mathlib's
-mapping-cone sign convention (blueprint: def-sfb-dg-derived-category). -/
+Source: Stacks, dga.tex and section-distinguished. -/
 structure ConeComparison (A : Algebra.{u}) {M N : RightModule A} (f : M ⟶ N)
     (K S : RightModule A) (s : ShiftComparison A 1 M S) (g : N ⟶ K) (h : K ⟶ S) where
   iso : (underlying A).obj K ≅ CochainComplex.mappingCone ((underlying A).map f)
@@ -133,10 +131,7 @@ structure ConeComparison (A : Algebra.{u}) {M N : RightModule A} (f : M ⟶ N)
 /-- The standard triangulated structure on the specified localization. Its comparisons
 are natural for every map of shifted dg modules, and the distinguished-triangle
 predicate is fixed by an iff with the actual dg mapping cones. The coproduct universe
-is the universe of the component modules. This is structural data of D(A,d), not an
-assumption of generation or of a theorem about an adjunction.
-Source: Stacks, dga.tex, section-derived, definition-shift, definition-cone and
-section-distinguished (blueprint: def-sfb-dg-derived-category). -/
+is the universe of the component modules. -/
 class DerivedStructure (A : Algebra.{u}) where
   [preadditive : Preadditive (Derived A)]
   [zero : HasZeroObject (Derived A)]

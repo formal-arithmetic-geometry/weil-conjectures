@@ -94,38 +94,8 @@ private theorem finite_map
   exact ⟨⟨⟨_, _⟩, hf⟩, rfl⟩
 
 /-- A matching family of generated sections admits a matching lift on a stage cover.
-Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and finite-cover
-paragraphs; Modules on Sites, Tag 03CO, for abelian coefficients.
-(blueprint: lem-weil-pbc-colimit-site-abelian-stage-matching-lift).
-
-Proof: Finite base change and composition, together with the finiteness of stage covers,
-show that a covering sieve contains the image of a finite stage cover: sieves containing
-such a cover form a topology, since base change preserves covers and transitivity
-requires only finitely many further finite covers. Present its target
-at a stage above i using the object colimit. Each of the finitely many local sections is
-a finite additive expression in stage images and restrictions. Lift the objects and
-restriction arrows to a common stage using the object and arrow colimits; eventual
-object equality aligns their endpoints. Transpose the adjunction units to obtain the
-transition maps. Uniqueness of adjuncts gives their composition laws and identifies
-their composites with alpha by h-alpha. Thus the finitely many local expressions have
-stage section representatives on a common transported cover.
-
-To lift compatibility, compare the restrictions of these representatives to each
-pairwise covering pullback. Their alpha images agree by compatibility of x and
-naturality. Uniqueness of left adjoints identifies alpha with the cocone inverse-image
-unit followed by the canonical composition isomorphism; hence their difference is
-killed by that unit. Apply the existing finite source-unit zero-detection theorem to
-the stage inverse image as a source sheaf and to each such difference. It gives a
-transition whose unit kills the difference. The same composition isomorphism for
-transition inverse images identifies this with equality after the canonical stage
-transition. There are finitely many pairs of covering arrows; a common refinement
-in the filtered under category makes all these equalities hold at once. Transition
-functors preserve the covering pullbacks, so the transported family is pullback
-compatible, hence compatible. Naturality and the unit equations preserve its alpha
-images. An empty cover has no sections or compatibility equations to lift, and its
-empty matching family is compatible. This asserts only a matching lift: amalgamation
-and uniqueness are not part of the conclusion. No arbitrary witness defines an object.
--/
+Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and
+paragraphs; Modules on Sites, Tag 03CO, for abelian coefficients. -/
 theorem colimit_site_abelian_stage_matching_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

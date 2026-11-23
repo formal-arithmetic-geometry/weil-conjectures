@@ -10,8 +10,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 
 The universal tensor comparison for an exact strong monoidal left adjoint, retaining
 its counit square for the supplied `HasDerivedCategory` instances.
-Source: Stacks 06YT, 07A4; the two-variable left derived universal property.
-(blueprint: lem-sf-derived-exact-monoidal-localization).
+
+## References
+
+* Stacks 06YT, 07A4.
 -/
 
 @[expose] public section

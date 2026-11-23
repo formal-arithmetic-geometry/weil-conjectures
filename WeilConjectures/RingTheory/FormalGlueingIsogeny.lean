@@ -113,7 +113,7 @@ vanish, so the given map becomes an isomorphism (module localization and its
 exactness, def-weil-pbc-module-localization-away and
 lem-weil-pbc-localization-module-exact). Build the glueing datum using these
 localized isomorphisms and the canonical comparison maps
-(def-weil-pbc-formal-glueing-data). The formal glueing equivalence
+(theorem-finite-etale-covers-proper-henselian--2). The formal glueing equivalence
 (prop-weil-pbc-formal-glueing-equivalence) algebraizes the datum and its map;
 comparison of components gives `ψ` and `β`. The localized `ψ` are isomorphisms.
 Thus each element of its kernel and cokernel is killed by a power of every
@@ -207,7 +207,7 @@ vanish, so the given map becomes an isomorphism (module localization and its
 exactness, def-weil-pbc-module-localization-away and
 lem-weil-pbc-localization-module-exact). Build the glueing datum using these
 localized isomorphisms and the canonical comparison maps
-(def-weil-pbc-formal-glueing-data). The formal glueing equivalence
+(theorem-finite-etale-covers-proper-henselian--2). The formal glueing equivalence
 (prop-weil-pbc-formal-glueing-equivalence) algebraizes the datum and its map;
 comparison of components gives `ψ` and `β`. The localized `ψ` are isomorphisms.
 Thus each element of its kernel and cokernel is killed by a power of every

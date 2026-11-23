@@ -16,13 +16,7 @@ namespace CategoryTheory
 
 /-- Pasting scalar restriction with a left mate gives the left mate of the
 transported tensor comparison. Source: the unit form of the mates correspondence,
-Stacks Tag 0GL6 (blueprint: lem-pur-restricted-open-mate-tensor).
-
-Proof: transpose the composite under the first adjunction. Naturality moves the
-unit past the scalar/tensor comparison. The unit equations for the two mates
-replace the two open comparisons. Naturality of the restriction comparison and
-of the scalar/tensor comparison leaves the inverse of the given pullback square.
-Cancel its invertible factors. -/
+Stacks Tag 0GL6. -/
 theorem restricted_left_mate_tensor
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {J : A ⥤ B} {P : B ⥤ A} {J' : C ⥤ D} {P' : D ⥤ C}

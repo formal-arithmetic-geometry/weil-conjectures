@@ -69,8 +69,7 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso [PreservesFiniteLimi
 
 /-- **Acyclic resolutions of complexes compute `R⁺F`.** If `F` is left exact and `φ : K ⟶ L`
 is a quasi-isomorphism from a bounded below complex `K` to a bounded below complex `L` of
-`F`-acyclic objects, then `H^n(R⁺F(K)) ≅ H^n(F(L))` for all `n`.
-(blueprint: `lemma-weil-pbc-leray-acyclicity`, item 3) -/
+`F`-acyclic objects, then `H^n(R⁺F(K)) ≅ H^n(F(L))` for all `n`. -/
 theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso [PreservesFiniteLimits F]
     {K L : CochainComplex.Plus C} (φ : K ⟶ L) [QuasiIso φ.hom]
     (hL : ∀ n, F.rightAcyclic (L.obj.X n)) (n : ℤ) :
@@ -87,17 +86,7 @@ theorem nonempty_homology_rightDerivedFunctorPlus_obj_Q_iso_of_quasiIso [Preserv
 
 /-- **Acyclic complexes compute `R⁺F`, at the level of the unit.** If `F` is left exact and `L`
 is a bounded below complex of `F`-acyclic objects, then the unit `F(L) ⟶ R⁺F(L)` is an
-isomorphism in `DerivedCategory.Plus D`. Choose a quasi-isomorphism `i : L ⟶ T` to a bounded
-below complex of injectives. In the naturality square of the unit
-```
-F(L) ----unit----> R⁺F(L)
- |                   |
-F(i)              R⁺F(i)
- v                   v
-F(T) ----unit----> R⁺F(T)
-```
-the bottom map is an isomorphism as `T` is injective, `R⁺F(i)` is an isomorphism as `i` is a
-quasi-isomorphism, and `F(i)` is an isomorphism by `Functor.quasiIso_map_of_rightAcyclic`. -/
+isomorphism in `DerivedCategory.Plus D`. -/
 theorem isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic [PreservesFiniteLimits F]
     (L : CochainComplex.Plus C) (hL : ∀ n, F.rightAcyclic (L.obj.X n)) :
     IsIso (F.rightDerivedFunctorPlusUnith.app ((HomotopyCategory.Plus.quotient C).obj L)) := by

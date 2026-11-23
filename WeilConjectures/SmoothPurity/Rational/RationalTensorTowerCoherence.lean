@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.Tensor.TensorTowerDatum
 
 /-! # Tensor coherence for successive rational scalar extensions
 
-Source: the common-stage tensor argument of def-weil-derived-pullback-tensor-hom,
+Source: the common-stage tensor argument of prose-03-02,
 using the normalized scalar-extension comparisons of
 lem-pur-integral-operations-scalar-extension; Stacks Project, Tags 07A4 and 08J9.
 -/

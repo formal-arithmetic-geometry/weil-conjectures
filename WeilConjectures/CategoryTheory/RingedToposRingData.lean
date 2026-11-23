@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.RingedToposMorphism
 The geometric adjunction and its structural ring map, before constructing the induced
 module direct image. Source: Stacks Project, Modules on Sites, ringed topoi and
 pushforward of modules.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

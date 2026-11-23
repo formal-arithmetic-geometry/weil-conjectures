@@ -193,6 +193,8 @@ lemma boundedConstructibleLowerShriekExtendScalarsIso_eq_shriekOfCompactificatio
   dsimp only [boundedConstructibleLowerShriekExtendScalarsIso,
     boundedConstructibleLowerShriekOfCompactificationExtendScalarsIso,
     BoundedConstructibleCoefficientChange.shriekOfCompactification, Functor.pasteSquareIso,
-    extendScalarsCoefficientChange, padicIntegersPushforwardData, continuousMapPushforwardData]
+    extendScalarsCoefficientChange, padicIntegersPushforwardData, continuousMapPushforwardData,
+    PadicIntegersRingObj.boundedConstructibleLowerStarOfIsProper_eq,
+    ContinuousMapRingObj.boundedConstructibleLowerStarOfIsProper_eq]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -36,12 +36,16 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 /-!
 # Local factorization of the exceptional inverse image
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-thm-restriction/sk-thm-restriction-local.md (blueprint: det-thm-restriction-local).
+On affine charts, the exceptional inverse image `f^!` factors through the exceptional inverse
+images of a projection and a closed immersion, and preserves bounded constructibility
+(`AlgebraicGeometry.ProEtale.restrictionLocal`).
 
-The right adjoints below are the localizing exceptional right adjoints supplied by
-`sk-prop-sf-existence`; the pullbacks are the canonical derived pullback lifts.  Thus the
-statement does not introduce a second exceptional inverse image or a second pullback.
+## Implementation details
+
+The exceptional inverse images are arbitrary right adjoints of the corresponding
+`localizingLowerShriek` (for arbitrary boundary compactifications), taken as arguments, so the
+factorization holds for every choice; the pullbacks are the canonical derived pullback lifts.
+No second exceptional inverse image or pullback is introduced.
 -/
 
 @[expose] public section
@@ -175,7 +179,7 @@ private theorem inverseImage_localizing
   have : PreservesColimitsOfShape (Discrete I) F :=
     F.asEquivalence.toAdjunction.leftAdjoint_preservesColimits.preservesColimitsOfShape
   have : HasColimit (D ⋙ F) := Adjunction.hasColimit_comp_equivalence D F
-  have hcol : P (colimit (D ⋙ F)) := hP.2.2 (I := I) (D ⋙ F) inferInstance hobj
+  have hcol : P (colimit (D ⋙ F)) := hP.prop_colimit (I := I) (D ⋙ F) inferInstance hobj
   exact P.prop_of_iso (preservesColimitIso F D).symm hcol
 
 -- Keep the open adjunction's large normalization clause outside the chart calculation.
@@ -572,37 +576,8 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option linter.unusedVariables false in
 -- Composite adjunctions and full-subcategory comparisons require explicit elaboration.
 /-- Local factorization of `f^!` on affine charts, together with bounded constructibility.
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-restriction/
-sk-thm-restriction-local (blueprint: det-thm-restriction-local).
-
-The exceptional inverse images are the right adjoints of `sk-prop-sf-existence`: for
-`f`, the projection `p` and the closed immersion `i`, an arbitrary boundary
-compactification, its localizing-closure preservation proof and an arbitrary right
-adjoint (`Ff`, `Fp`, `Fi`) of the corresponding `localizingLowerShriek` are taken as
-arguments, so the factorization holds for every choice.  The pullbacks are the canonical
-derived pullback lifts `huStar`, `hvStar`.
-
-Proof (the steps of the blueprint proof):
-1. `k` is Noetherian; `X`, `Y` are Noetherian, quasi-compact and quasi-separated, and
-   affine opens of them are of finite type over `k`.
-2. `A^d_V` is separated of finite type over `k`; `U`, `V`, `A^d_V` stay in the standing
-   setting.
-3. `Dctf = Dbc` and their localizing closures agree (det-def-localizing-closure-ctf-equals-bc);
-   the closed immersion `i` is proper, so `u, v, i, p` satisfy the adjunction hypotheses.
-4. Finitely many affine `V_β` cover `Y`, and finite affine covers `U_{βα}` of `f⁻¹(V_β)`
-   by finitely generated algebras cover `X`.
-5. Generators `b_1, …, b_d` give a surjection `A[t_1, …, t_d] → B`, hence the closed
-   immersion `i` with `f u = v p i` (also for `d = 0`): the finite-cover clause.
-6. `Rb_! Ra_! ≅ R(ba)_!` on the localizing closures
-   (lem-sfb-localizing-lower-shriek-composition).
-7. Composite adjunctions and uniqueness of right adjoints give `(ba)^! ≅ a^! b^!`.
-8. `u^! ≅ u^*`, `v^! ≅ v^*` (det-sf-mate-open-restriction), whence
-   `u^* f^! ≅ (f u)^! = (v p i)^! ≅ i^! p^! v^*`.
-9. For `K ∈ Dbc(Y)`, `v^* K ∈ Dbc(V)` and `H = p^! v^* K ≅ p^* v^* K (d)[2d] ∈ Dbc(A^d_V)`.
-10. `i^! H ≅ RΓ_U H` (closed-immersion normalization, det-prop-closed-adjoint-constructible-yoneda),
-    and `RΓ_U H ∈ Dbc(U)` (lem-sfb-rational-closed-support-constructible).
-11. Evaluating step 8 at `K` gives `u^* f^! K ∈ Dbc(U)`. -/
+Here `Ff`, `Fp`, `Fi` are right adjoints of `localizingLowerShriek` for `f`, the projection `p`
+and the closed immersion `i`, and `huStar`, `hvStar` are the derived pullback lifts. -/
 theorem restrictionLocal
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

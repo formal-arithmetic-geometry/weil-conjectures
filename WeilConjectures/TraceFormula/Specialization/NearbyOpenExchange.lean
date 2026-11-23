@@ -480,7 +480,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k').P
   [IsSeparated Y'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom] in
 /-- **The composition law of the exchanges `ν_h` of open immersions of models** (blueprint
-`det-nearby-exchange-maps`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
+`prose-E-15`): `ν_{jι} = ι'_!(ν_j) ∘ ν_ι(j_!)` through the conjugates
 `(j ≫ ι)_! ≅ j_! ⋙ ι_!` of the composition isomorphisms of the pullbacks. -/
 theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_openImmersion_app
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
@@ -580,10 +580,8 @@ variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   {T : NearbyCyclesModel (point k).left (point k').left}
   (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
-set_option maxHeartbeats 800000 in
--- the instantiation and the three identities `H` together exceed the default budget
 /-- **The compact-support exchanges along an open immersion of compactified models** (blueprint
-`det-nearby-exchange-maps`, compatibility of `ν` with composition): for open immersions of models
+`prose-E-15`, compatibility of `ν` with composition): for open immersions of models
 `φ : N ⟶ M` over `j`, `j'` and `ψ : M ⟶ P` over `ι`, `ι'`, with `P` proper over the base with
 structure morphism `a` to the trait, the compact-support exchange of the compactification
 `j ≫ ι : N ⊆ P` is the composite of `ν_j` (adjoint to `α_j⁻¹`) and of the compact-support exchange
@@ -609,7 +607,32 @@ theorem compactSupportExchangeOfCompactification_comp_app
         ((φ.boundedConstructibleLowerShriekExchange ℓ hN hM).app K) ≫
       (compactSupportExchangeOfCompactification ℓ hM hS (comp_toPoint ι) (comp_toPoint ι') ψ a
         ha).app ((boundedConstructibleLowerShriek ℓ j).obj K) := by
+  -- Fix the functors before elaborating the lifted isomorphisms and compatibility identities.
   have h := CondensedRing.compactSupportExchangeAux_lift_comp_app_of_heq
+    (PC := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left))
+    (PC' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left))
+    (PX := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
+    (PX' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X'.left))
+    (PP := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left))
+    (PP' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z'.left))
+    (Ps := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k).left))
+    (Ps' := boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (point k').left))
+    (ΨC := N.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (ΨX := M.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (ΨP := P.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (Ψs := T.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+    (DhN := D(((j ≫ ι).left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (DhN' := D(((j' ≫ ι').left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (DhM := D((ι.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (DhM' := D((ι'.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (Rp := R(((toPoint Z).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (Rp' := R(((toPoint Z').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧))
+    (LSfN := boundedConstructibleLowerShriek ℓ (toPoint Y))
+    (LSfN' := boundedConstructibleLowerShriek ℓ (toPoint Y'))
+    (LSfM := boundedConstructibleLowerShriek ℓ (toPoint X))
+    (LSfM' := boundedConstructibleLowerShriek ℓ (toPoint X'))
+    (Dj := boundedConstructibleLowerShriek ℓ j)
+    (Dj' := boundedConstructibleLowerShriek ℓ j')
     (Sp := NearbyCyclesModel.boundedConstructibleNearbyCycles hN)
     (SpX := NearbyCyclesModel.boundedConstructibleNearbyCycles hM)
     (Ts := NearbyCyclesModel.boundedConstructibleNearbyCycles hS)
@@ -650,7 +673,7 @@ theorem compactSupportExchangeOfCompactification_comp_app
         ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j').inv.app
           ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)).hom, ?_, ?_, ?_⟩
   · simp only [eqToHom_refl, CategoryTheory.Functor.map_id, Category.id_comp]
-    cast_proofs NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp ℓ φ ψ hN hM M
+    exact NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp ℓ φ ψ hN hM M
   · cast_proofs compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp
       ℓ j' ι' (toPoint Z') (comp_toPoint ι') (comp_toPoint j') (comp_toPoint (j' ≫ ι'))
       ((NearbyCyclesModel.boundedConstructibleNearbyCycles hN).obj M)
@@ -739,7 +762,7 @@ lemma Compactification.compactSupportExchange_ofOpen (C : hM.Compactification)
   rfl
 
 /-- **The compact-support exchanges along an open sub-model** (blueprint
-`det-nearby-exchange-maps`, `det-nearby-exceptional-tensor` (3)): for an open sub-model `N ⊆ M`
+`prose-E-15`, `lemma-compatibilities-base-change-maps` (3)): for an open sub-model `N ⊆ M`
 over open immersions `j`, `j'` and a compactification `M ⊆ P`, the compact-support exchange of
 the restricted compactification `N ⊆ P` is the composite of the exchange `ν_j` (adjoint to
 `α_j⁻¹`) and of the compact-support exchange of `M ⊆ P`, through the composition isomorphisms

@@ -58,9 +58,7 @@ private theorem syzygy_ext_vanish
           rw [hzero, Ext.comp_zero]
 
 /-- Kernel criterion for the presheaf Cech Ext edge map.
-Source: the kernel step in Tag 079Z; this is the direct lifting argument reducing
-edge injectivity to vanishing of a kernel class.
-(blueprint: lem-sc-presheaf-cech-ext-edge-kernel) -/
+Source: the kernel step in Tag 079Z. -/
 theorem presheafCech_ext_edge_kernel
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}]

@@ -102,9 +102,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 /-!
 # Closed inverse image preserves limits
 
-Source: blueprint, pro-etale coefficients, `sk-prop-sf-open-closed-triangle`,
-`det-sf-open-closed-pullback-limits` (blueprint: det-sf-open-closed-pullback-limits).
-
 A sheaf of rings is a monoid object in abelian sheaves, and its module sheaves are
 `CategoryTheory.Mod`. This includes noncommutative rings. The canonical inverse image
 is the existing `Functor.mapMod` applied to the monoidal sheaf inverse image.

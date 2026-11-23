@@ -28,8 +28,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.Algebra.Homology.PrincipalKoszulQuotientTowers
 /-! # Canonical principal Koszul and quotient towers
 
-Source: Stacks Project, algebraization.tex Tag 0A0E and sites-cohomology.tex Tag 0941
-(blueprint: def-pur-principal-koszul-quotient-towers).
+Source: Stacks Project, algebraization.tex Tag 0A0E and sites-cohomology.tex Tag 0941.
 
 The principal Koszul complexes are represented by mapping cones of multiplication on the
 single complex. The transitions are the strict `t/id` and quotient maps,
@@ -79,8 +78,7 @@ attribute [local instance 20000] principalKoszulHasSheafCompose
 
 /-- The quotient augmentation from the principal Koszul cone to the degree-zero quotient.
 
-Source: Stacks Project, algebraization.tex Tag 0A0E (blueprint:
-def-pur-principal-koszul-quotient-towers).
+Source: Stacks Project, algebraization.tex Tag 0A0E.
 -/
 noncomputable def principalAugmentation
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
@@ -103,9 +101,7 @@ noncomputable def principalAugmentation
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmentations commute with the specified strict transitions.
-Source: Stacks Tag 0A0E (blueprint: def-pur-principal-koszul-quotient-towers).
-Proof: the two composites vanish on the degree `-1` summand of the cone, and on its
-other summand both are the quotient map to `O/t^(m+1)`. Cone extensionality gives equality. -/
+Source: Stacks Tag 0A0E. -/
 theorem principalAugmentation_naturality
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     principalKoszulTransition R t m ≫ principalAugmentation R t m =
@@ -128,9 +124,8 @@ theorem principalAugmentation_naturality
 
 
 
-/-- The strict quotient comparison; its naturality is the first proof step of the node.
-Source: Stacks Tags 0A0E and 0941
-(blueprint: def-pur-principal-koszul-quotient-towers). -/
+/-- The strict quotient comparison.
+Source: Stacks Tags 0A0E and 0941. -/
 noncomputable def principalTowerComparison (t : (SheafOfModules.unit 𝓞).sections) :
     principalKoszulTower R t ⟶ principalReductionTower R t :=
   NatTrans.ofOpSequence (principalAugmentation R t) (by
@@ -140,7 +135,7 @@ noncomputable def principalTowerComparison (t : (SheafOfModules.unit 𝓞).secti
 
 
 /-- Rearrange a strict tower map degree by degree.
-Source: Stacks Tag 0941 (blueprint: def-pur-principal-koszul-quotient-towers). -/
+Source: Stacks Tag 0941. -/
 def koszulTowerComplexMap {X Y : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ} (f : X ⟶ Y) :
     koszulTowerComplex R X ⟶ koszulTowerComplex R Y where
   f i := { app := fun n ↦ (f.app n).f i
@@ -195,8 +190,7 @@ private theorem tensorClosedUnitLeft_comm
 
 
 /-- The canonical strict tensor comparison.
-Source: Stacks Tags 0A0E and 0941
-(blueprint: def-pur-principal-koszul-quotient-towers). -/
+Source: Stacks Tags 0A0E and 0941. -/
 noncomputable def koszulTensorTowerComparison (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) :
     koszulTensorTower R P t ⟶ reductionTensorTower R P t :=
@@ -206,11 +200,7 @@ noncomputable def koszulTensorTowerComparison (P : CochainComplex 𝒜 ℤ)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The augmentation followed by the quotient comparison is the prescribed quotient map.
-Source: Stacks Tags 0A0E and 0941
-(blueprint: def-pur-principal-koszul-quotient-towers).
-Proof: the cone inclusion followed by its cokernel augmentation equals the degree-zero
-quotient projection (`mappingCone.inr_descShortComplex`). Applying the tensor functor and
-precomposing with its unit inclusion gives the asserted equation. -/
+Source: Stacks Tags 0A0E and 0941. -/
 theorem koszulRepresentativeAugmentation_quotient (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     koszulRepresentativeAugmentation R P t m ≫

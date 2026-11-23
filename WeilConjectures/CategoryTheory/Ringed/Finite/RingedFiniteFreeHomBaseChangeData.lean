@@ -106,8 +106,7 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomAdjunction
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 /-! # Normalized tensor comparison for scalar extension
 
-Source: Stacks Project, Tags 07A4 and 08J9.
-(blueprint: lem-sf-ringed-finite-free-tensor-data). -/
+Source: Stacks Project, Tags 07A4 and 08J9. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -132,8 +131,7 @@ variable {C : Type c} [Category.{v} C]
 
 /-- A pure scalar-extension section, transported along the specified object equality.
 It is the sheafification unit applied to s tensor x; no basis is used.
-Source: Stacks 03EK, 08J9
-(blueprint: lem-sf-ringed-finite-free-hom-base-change). -/
+Source: Stacks 03EK, 08J9. -/
 def ringedFiniteFreeScalarSection
     (E : SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R) ⥤ SheafOfModules.{max c v r}
@@ -196,22 +194,7 @@ private theorem scalarComparison_natural
   rw [hu, hu]
 
 /-- The actual scalar tensor comparison on complexes and preservation of K-flatness.
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 06YT and 08J9.
-(blueprint: lem-sf-ringed-finite-free-tensor-complex).
-
-Proof: on sheafified pure tensors send s tensor (x tensor y) to
-(s tensor x) tensor (1 tensor y). The inverse multiplies the scalars.
-Balanced relations make both maps well-defined, and sheafification extends them.
-Naturality in both factors gives a map on total complexes: the two tensor
-differentials are preserved separately, including the sign on the second one.
-Extension is a left adjoint and preserves the coproducts in each total degree,
-so these mutually inverse maps assemble to a natural chain isomorphism.
-For an acyclic S-complex F, restriction is exact and U(F) is acyclic.
-The cancellation isomorphism U(F tensor_S E(P)) = U(F) tensor_R P
-identifies the signed total differentials. K-flatness of P makes the right side
-acyclic. Faithful exact restriction detects acyclicity, proving E(P) K-flat.
-The generator formula is the same pure-tensor formula at scalar 1.
-The argument includes the zero algebra and all unbounded complexes. -/
+Source: Stacks Project, Tags 07A4, 06YT and 08J9. -/
 theorem ringedFiniteFreeHomBaseChange_complex
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R))]

@@ -361,8 +361,6 @@ theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-set_option maxHeartbeats 400000 in
--- Generator calculus on both total tensors needs extra elaboration.
 attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceEvaluation coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
@@ -392,9 +390,12 @@ theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
     (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W n)
     (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
     (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q) k _
-  intro p q hpq U x y
-  obtain ⟨x0, rfl⟩ := coefficientEvaluationSection_surjective l E W (P.X p) n U x
-  obtain ⟨y0, rfl⟩ := coefficientEvaluationSection_surjective l E W (Q.X q) n U y
+  intro p q hpq U
+  -- Lift sections without substituting through the tensor constructions.
+  refine (coefficientEvaluationSection_surjective l E W (P.X p) n U).forall.2 ?_
+  intro x0
+  refine (coefficientEvaluationSection_surjective l E W (Q.X q) n U).forall.2 ?_
+  intro y0
   have hi := coefficientEvaluationTensorIso_inv_generator l E W n P Q p q k hpq U x0 y0
   change (e'.hom.f k).val.app U
       (((coefficientSequenceEvaluation l E W n).map
@@ -402,11 +403,36 @@ theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
           (coefficientSequenceTopology (Scheme.ProEt.topology W))
           (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom a b)).f k)).val.app U
         ((e.inv.f k).val.app U _)) = _
-  erw [hi, coefficientEvaluationSection_map]
-  erw [CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}]
-  erw [coefficientEvaluationTensorIso_hom_generator l E W n P' Q']
-  erw [CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}]
-  erw [coefficientEvaluationSection_map, coefficientEvaluationSection_map]
+  let t := (coefficientTotalTensor.{u, t + 1, t}
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom a b)
+  have hs := CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}
+    a b p q k hpq (op (n, U.unop)) x0 y0
+  have hm := coefficientEvaluationSection_map l E W (t.f k) n U
+    (coefficientTensorGenerator.{u, t + 1, t}
+      (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (coefficientSequenceCommRingSheaf l E W) P Q p q k hpq (op (n, U.unop)) x0 y0)
+  have ht := CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}
+    (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map a)
+    (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map b)
+    p q k hpq U
+    (coefficientEvaluationSection l E W (P.X p) n U x0)
+    (coefficientEvaluationSection l E W (Q.X q) n U y0)
+  have ha := coefficientEvaluationSection_map l E W (a.f p) n U x0
+  have hb := coefficientEvaluationSection_map l E W (b.f q) n U y0
+  -- Compose the generator formulas without rewriting the surrounding large types.
+  exact (congrArg (fun z ↦ (e'.hom.f k).val.app U
+      (((coefficientSequenceEvaluation l E W n).map (t.f k)).val.app U z)) hi).trans
+    ((congrArg (fun z ↦ (e'.hom.f k).val.app U z)
+      (hm.trans (congrArg (coefficientEvaluationSection l E W _ n U) hs))).trans
+      ((coefficientEvaluationTensorIso_hom_generator l E W n P' Q' p q k hpq U
+        ((a.f p).val.app (op (n, U.unop)) x0)
+        ((b.f q).val.app (op (n, U.unop)) y0)).trans
+        ((congrArg₂ (fun x y ↦ coefficientTensorGenerator.{u, t + 1, t}
+          (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n)
+          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P')
+          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q')
+          p q k hpq U x y) ha hb).symm.trans ht.symm)))
 
 /-- Composition of product morphisms under a bifunctor.
 Source: Stacks 0011. -/

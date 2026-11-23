@@ -8,8 +8,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 /-! # The invertible-factor co-projection is the inverse tensor mate
 
-The evaluation, associativity and unit calculations in the blueprint's co-projection
-Hom chain identify the right-adjoint comparison with the inverse tensor mate.
+The right-adjoint comparison given by the co-projection is the inverse tensor mate.
 -/
 
 @[expose] public noncomputable section
@@ -105,14 +104,7 @@ private theorem tensorCoprojection_inverse
     congrArg (· ≫ adj.counit.app K) (heval (G.obj K)).symm
 
 /-- The inverse of the invertible-factor right-adjoint comparison is the canonical
-tensor mate. The projection formula is assumed natural, associative, and right unital.
-Source: current blueprint sk-lem-coprojection, displayed Hom calculation
-(blueprint: lem-pur-invertible-coprojection-tensor-mate).
-Proof: transpose the comparison under the composite tensor adjunction. Its counit is
-evaluation followed by the right unitor. Naturality of the projection formula moves
-the transpose across projection at the inverse factor. Associativity, naturality at
-the evaluation and right unitality identify the two counits. Injectivity of the
-adjunction Hom equivalence then identifies the original maps. -/
+tensor mate. The projection formula is assumed natural, associative, and right unital. -/
 theorem tensorRightCompIso_inv_eq_projectionTensorMap
     (π : ∀ N : D, F ⋙ tensorRight N ≅ tensorRight (P.obj N) ⋙ F)
     (hn : ∀ (Z : C) {N N' : D} (f : N ⟶ N'),

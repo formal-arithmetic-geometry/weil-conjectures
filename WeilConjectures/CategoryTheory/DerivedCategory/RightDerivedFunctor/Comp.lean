@@ -20,13 +20,7 @@ K-injective complexes to K-injective complexes, then the canonical comparison
 
 `R(F ⋙ G) ≅ RF ⋙ RG`
 
-is an isomorphism (`Functor.rightDerivedFunctorCompIso`). The composite `RF ⋙ RG`,
-equipped with the composite unit `Functor.rightDerivedFunctorCompUnit`, is itself a right
-derived functor of `(F ⋙ G).mapHomotopyCategory ⋙ Qh`: by the K-injective right
-derivability structure it suffices to check that the composite unit is an isomorphism on
-K-injective complexes, which holds since the unit of `RF` is an isomorphism on K-injective
-complexes and the unit of `RG` is an isomorphism on their images under `F`. The
-isomorphism then follows from the uniqueness of right derived functors.
+is an isomorphism (`Functor.rightDerivedFunctorCompIso`).
 
 The K-injectivity hypothesis is packaged as the type class
 `Functor.PreservesKInjectiveComplexes`, for which the main criterion is
@@ -34,10 +28,7 @@ The K-injectivity hypothesis is packaged as the type class
 functor preserves K-injective complexes. (For the intended application, the pushforward
 `f_*` of étale sheaves is right adjoint to the exact pullback `f^*`, so that the Leray
 composition isomorphism `RΓ(Y, Rf_* K) ≅ RΓ(X, K)` becomes an instance of the theorem;
-see `Etale.derivedGlobalSectionsComp`.) The proof of the criterion uses the induced
-adjunction on categories of homological complexes,
-`CategoryTheory.Adjunction.mapHomologicalComplex`, and transport of null-homotopies along
-the adjunction.
+see `Etale.derivedGlobalSectionsComp`.)
 
 The file also records the functoriality of the total right derived functor in natural
 transformations (`Functor.rightDerivedFunctorNatTrans`,
@@ -58,7 +49,6 @@ functors yields `RF ⋙ RG ≅ RH` in one step
   `R(F ⋙ G) ≅ RF ⋙ RG`.
 - `CategoryTheory.Functor.rightDerivedFunctorCompIso'`: the composition isomorphism
   `RF ⋙ RG ≅ RH` associated with an isomorphism `F ⋙ G ≅ H`.
-
 -/
 
 @[expose] public section

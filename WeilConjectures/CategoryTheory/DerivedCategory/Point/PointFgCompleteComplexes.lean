@@ -17,9 +17,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-! # PointFgCompleteComplexes
-
-Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
-(blueprint: def-weil-point-fg-complete-complexes).
 -/
 
 @[expose] public section
@@ -31,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- The full-subcategory predicate: cohomology has finite support and the specified
-finiteness property, and the object is derived complete for I.
-Source: blueprint order 1509 (blueprint: def-weil-point-fg-complete-complexes). -/
+finiteness property, and the object is derived complete for I. -/
 noncomputable def pointFgComplete (R : Type u) [CommRing R] (I : Ideal R) :
     ObjectProperty (DerivedCategory (ModuleCat.{u} R)) :=
   fun K ↦ (∃ s : Finset ℤ, ∀ i : ℤ, i ∉ s →

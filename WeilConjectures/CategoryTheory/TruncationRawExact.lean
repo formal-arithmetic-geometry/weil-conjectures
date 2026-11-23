@@ -9,7 +9,7 @@ module
 public import WeilConjectures.CategoryTheory.TruncationCouple
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 
-/-! Canonical truncation-couple proof step. -/
+/-! Exactness of the raw maps of the truncation couple. -/
 
 @[expose] public section
 
@@ -93,18 +93,7 @@ private theorem exact_cast_last
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Exactness of the raw truncation maps for arbitrary derived-category instances.
-Source: Stacks Tags 08J5, 05SE, 0148, 011Q; blueprint step 1 of thm-sp-truncation-e2
-(blueprint: lem-sp-truncation-raw-exact).
-
-Proof: The triangle tau<=q-1 K -> tau<=q K -> H^q(K)[-q] with the boundary
-chosen by `TruncationCouple.existsUnique_boundary` is distinguished. Apply the
-triangulated right derived functor and its homology sequence. Transport exactness
-across the three bridge isomorphisms. The g-f and f-alpha pairs use the triangle at q,
-in total degrees p+q
-and p+q+1 respectively; the alpha-g pair uses the triangle at q+1, in total
-degree p+q.
-The index identities preserve total degree, and transport of exact short complexes
-preserves both their zero composites and their image-equals-kernel condition. -/
+Source: Stacks Tags 08J5, 05SE, 0148, 011Q. -/
 theorem truncation_raw_exact
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     [IsGrothendieckAbelian.{v₁} A] [HasDerivedCategory.{w₁} A]

@@ -9,12 +9,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
 public import WeilConjectures.CategoryTheory.Monoidal.UnitComparison
 
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Projection cancellation along a section
-
-Source: blueprint thm-amb-p1-adjunction.proof.md, contraction along the diagonal section.
 -/
 
 @[expose] public section

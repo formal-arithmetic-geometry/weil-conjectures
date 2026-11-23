@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.SiteExtensionByZeroPresheaf
 /-!
 # Extension by zero for an arbitrary localized Grothendieck topology
 
-Source: Stacks Project, Modules on Sites, Lemmas 03DI and 03DJ
-(blueprint: new-over-pullback-adjunction-mono).
+Source: Stacks Project, Modules on Sites, Lemmas 03DI and 03DJ.
 
 The presheaf hom-equivalence and injectivity arguments adapt the private helpers of
 `SiteExtensionByZeroPresheafAdjoint` and `SiteExtensionByZeroExact`. Sheafification

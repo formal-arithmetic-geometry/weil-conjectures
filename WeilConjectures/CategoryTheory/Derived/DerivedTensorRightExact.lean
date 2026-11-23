@@ -126,8 +126,7 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
 
 /-- The total left-derived counit on a cochain representative, transported through
 both quotient-to-homotopy comparison isomorphisms.
-Source: Stacks 06YY, localization construction of the total derived functor
-(blueprint: lem-derived-right-exact-tensor-comparison). -/
+Source: Stacks 06YY, localization construction of the total derived functor. -/
 noncomputable def rightExact_cochainCounit
     (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] (P : CochainComplex C ℤ) :
     F.leftDerivedFunctor.obj (DerivedCategory.Q.obj P) ⟶
@@ -510,8 +509,7 @@ end CachedMonoidalStructures
 
 /-- The ordinary oplax tensorator equation on flat-term K-flat models.
 Source: Stacks 06YY and 07A4. This predicate keeps the cochain equation behind
-one interface when the coefficient category is specialized to sheaves.
-(blueprint: lem-derived-right-exact-tensor-comparison). -/
+one interface when the coefficient category is specialized to sheaves. -/
 def rightExactTensorModelNormalization
     (F : C ⥤ D) [F.Additive] [F.IsLeftAdjoint] [F.OplaxMonoidal]
     (G : DerivedCategory C ⥤ DerivedCategory D)
@@ -536,16 +534,7 @@ def rightExactTensorModelNormalization
 
 /-- A strong monoidal left adjoint preserving flat objects has a uniquely normalized
 binary comparison on its total left derived functor, and on any isomorphic functor.
-Source: the universal property of total left derived bifunctors, computed on flat
-K-flat resolutions; Stacks 06YY and 07A4.
-Proof: derive the ordinary oplax tensorator on pairs of K-flat models whose images
-are K-flat. Flat resolutions supply those models. Both derived counits are invertible
-there, so the comparison is an isomorphism. Transport it along the given functor
-isomorphism. The cochain counit equation follows from the homotopy counit equation.
-Every object has a flat K-flat representative with K-flat image, and on two such
-representatives the normalization determines the inverse comparison by cancellation.
-Naturality transports this equality to every pair of derived objects.
-(blueprint: lem-derived-right-exact-tensor-comparison). -/
+Source: Stacks 06YY and 07A4. -/
 theorem rightExact_tensorComparison_existsUnique
     (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
     [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]

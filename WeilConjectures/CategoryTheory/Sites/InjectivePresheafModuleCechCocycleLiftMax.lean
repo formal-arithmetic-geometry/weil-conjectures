@@ -75,22 +75,7 @@ private theorem liftModule_injective
 
 /-- A positive cocycle in an injective module presheaf has a primitive when its
 coefficient universe contains the hom and index universes. No topology is required.
-Source: Stacks Project, Cohomology on Sites, proof of Tag 03FC after Tag 03FB,
-using Tags 03AS, 03F5 and 03AT.
-(blueprint: lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max)
-
-Proof: Replace C by ULiftHom.{w} C, whose homs lie in max v w. Precompose R and M
-with its down functor. This preserves injectivity: pull an extension problem back
-along the up functor, whose component maps preserve monomorphisms, extend into M,
-and use the same component maps on the lifted category. Lift the chosen products,
-projections and index maps using ULift.up; lift and uniqueness in the original
-category prove their universal properties. Apply the existing common-universe
-cocycle theorem to this data. Its cochains and alternating restriction differential
-reduce to the original ones, so its primitive is the required primitive.
-The common-universe theorem implements the free-complex contraction and Yoneda
-argument of Tags 03AS, 03F5 and 03AT. This transport does not change coefficient
-universes and requires no topology or covering condition; it also covers q=0,
-the empty family, and zero coefficients. -/
+Source: Stacks Project, Cohomology on Sites, Tags 03FC, 03AS, 03F5 and 03AT. -/
 theorem injective_presheaf_module_cech_cocycle_lift_max
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{max v w})
     (M : PresheafOfModules.{max v w} R) [Injective M]

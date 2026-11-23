@@ -157,9 +157,7 @@ end DerivedSquare
 namespace CategoryTheory.Adjunction
 
 /-- Tensor comparison data for a square of pullbacks. The tensor bifunctors are inferred
-from the two specified pullback comparisons, preserving their native structure arguments.
-Source: blueprint finite coefficient transport, tensor/pullback compatibility
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+from the two specified pullback comparisons, preserving their native structure arguments. -/
 structure TensorPullbackCompatibility
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     {F : D ⥤ C} {F' : D' ⥤ C'} (N_D : D ⥤ D') (N_C : C ⥤ C')
@@ -176,9 +174,7 @@ structure TensorPullbackCompatibility
     (((Functor.whiskeringLeft₂ D').obj N_D).obj N_D).obj T_D'
   compatible : ComparisonCompatible pullback φ φ' tensorX tensorY
 
-/-- Tensor-compatible equivalences preserve and reflect canonical projection isomorphisms.
-Source: the adjunction projection mate comparison and equivalence reflection
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+/-- Tensor-compatible equivalences preserve and reflect canonical projection isomorphisms. -/
 theorem TensorPullbackCompatibility.projection_isIso_iff_of_equivalences
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
@@ -221,9 +217,7 @@ theorem TensorPullbackCompatibility.projection_isIso_iff_of_equivalences
     exact isIso_of_reflects_iso _ N_D
 
 /-- An adjunction with the two tensor bifunctors and its pullback tensor comparison.
-The fields are the native constructions, bundled to retain their structure arguments.
-Source: the canonical adjunction projection construction
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+The fields are the native constructions, bundled to retain their structure arguments. -/
 structure ProjectionContext (C D : Type*) [Category* C] [Category* D] where
   pull : D ⥤ C
   push : C ⥤ D
@@ -233,17 +227,13 @@ structure ProjectionContext (C D : Type*) [Category* C] [Category* D] where
   comparison : (Functor.postcompose₂.obj pull).obj tensorD ⟶
     (((Functor.whiskeringLeft₂ C).obj pull).obj pull).obj tensorC
 
-/-- The canonical projection associated to a bundled context.
-Source: the adjunction projection construction
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+/-- The canonical projection associated to a bundled context. -/
 def ProjectionContext.projection
     {C D : Type*} [Category* C] [Category* D] (P : ProjectionContext C D)
     (K : C) (M : D) :=
   ((P.adj.rightAdjointProjectionMap P.comparison).app K).app M
 
-/-- The mate comparison preserves and reflects invertibility in bundled contexts.
-Source: the projection-mate comparison and reflection by equivalences
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+/-- The mate comparison preserves and reflects invertibility in bundled contexts. -/
 theorem ProjectionContext.projection_isIso_iff
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
     (P : ProjectionContext C D) (Q : ProjectionContext C' D')
@@ -256,9 +246,7 @@ end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The native internal projection data, with resolving constructions behind one bundle.
-Source: the internal derived geometric adjunction and tensor comparison
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+/-- The native internal projection data, with resolving constructions behind one bundle. -/
 @[irreducible] def internalProjectionContext
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
@@ -274,9 +262,7 @@ Source: the internal derived geometric adjunction and tensor comparison
   tensorD := _
   comparison := CondensedRing.leftDerivedUpperStarTensor R p
 
-/-- The native ordinary projection data in the fixed scalar universe.
-Source: the ordinary derived geometric adjunction and tensor comparison
-(blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding). -/
+/-- The native ordinary projection data in the fixed scalar universe. -/
 @[irreducible] def ordinaryProjectionContext
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     {X Y : Scheme.{u}} (p : X ⟶ Y) :
@@ -346,27 +332,8 @@ private instance internalTensorFour (T : Scheme.{u})
 set_option cleanup.letToHave false in
 set_option backward.isDefEq.respectTransparency true in
 /-- The normalized encoding identifies derived tensors compatibly with geometric pullback.
-
-Source: blueprint proper-base-change-finite, transport paragraph and clause (3);
-lem-sfb-finite-coefficient-projection-encoding, proof steps 1--2; Stacks 03D3,
-08BJ and 08FZ. (blueprint: lem-sfb-finite-coefficient-tensor-pullback-encoding).
-
-Proof: restriction along the inverse coefficient isomorphism identifies balanced tensors:
-the two balancing relations coincide after applying the ring isomorphism. Compose with the
-section-action comparison and restriction to constant scalar sections. The normalization of
-Encoding sends each constant scalar to that same scalar; therefore all three comparisons
-send a pure tensor to the same pure tensor. They are natural isomorphisms, compatible with
-associators and unitors. On sections over a fibre product the direct-image encoding is the
-identity. Conjugate its adjunction to obtain the pullback comparison. Before deriving, the
-two composites expressing compatibility with the pullback tensorator agree on pure tensors,
-hence agree by the balanced tensor universal property. Apply the comparisons termwise to
-flat-term K-flat resolutions and use signed direct-sum totalization. Exact monoidal
-equivalences and their inverses preserve flatness and K-flatness. The universal property of
-the left derived bifunctor extends the tensor isomorphisms to all derived objects, and the
-universal property of derived pullback extends the pullback isomorphism. The underived
-pure-tensor equality gives ComparisonCompatible for the published derived comparisons.
 This uses no properness, boundedness or constructibility. For an empty scheme or the zero
-coefficient ring the same tensor universal properties apply, including the zero tensor. -/
+coefficient ring the statement holds as well. Stacks Project, Tags 03D3, 08BJ and 08FZ. -/
 theorem finiteCoefficientTensorPullbackEncoding
     (e : Mon.mk R ≅ Mon.mk (coefficient A))
     (E : ∀ T : Scheme.{u}, Encoding A T)

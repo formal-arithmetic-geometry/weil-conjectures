@@ -19,9 +19,8 @@ public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 /-!
 # The termwise product functor on strict tower complexes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0941, proof of
-lemma-derived-limit-is-ok, the termwise product of evaluated tower complexes.
-(blueprint: def-pur-tower-product-functor)
+Source: Stacks Project, sites-cohomology.tex, Tag 0941, the termwise product of evaluated tower
+complexes.
 
 This packages the existing `roosP` and `roosPmap` as a functor, using their
 existing identity and composition laws. No shift comparison is part of this definition.
@@ -41,8 +40,7 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
 /-- The product of the evaluated complexes of a strict tower complex, acting on
 strict maps by the product of their evaluated maps.
-Source: Stacks Project, sites-cohomology.tex, Tag 0941, proof of
-lemma-derived-limit-is-ok (blueprint: def-pur-tower-product-functor). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0941. -/
 noncomputable def productFunctor :
     CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ where
   obj := roosP

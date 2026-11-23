@@ -21,8 +21,8 @@ on `X`,
 
 `RHom(Rf₀! M, ω_Y) ≅ Rf_* RHom(M, ω_X)`
 
-(blueprint: `fix-cor-verdier-exchange`). The proof is the Yoneda argument of
-`fix-lem-tensor-adjunction`: for a test Weil complex `T` on `Y`,
+(blueprint: `lemma-internal-adjunction-two-exchange-formulas--2`). The proof is the Yoneda argument
+of `lemma-internal-adjunction-two-exchange-formulas--1`: for a test Weil complex `T` on `Y`,
 
 `Hom(T, RHom(Rf₀! M, ω_Y)) = Hom(Rf₀! M ⊗ T, ω_Y) = Hom(Rf₀!(M ⊗ f^* T), ω_Y)`
 `= Hom(Ra_{X,0}!(M ⊗ f^* T), Q) = Hom(M ⊗ f^* T, ω_X) = Hom(f^* T, RHom(M, ω_X))`
@@ -150,7 +150,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **The tensor–hom adjunction for the derived internal hom, natural in both variables**
-(blueprint: `def-weil-derived-pullback-tensor-hom`): `Hom(P ⊗ T, Q) ≅ Hom(T, RHom(P, Q))`,
+(blueprint: `prose-03-02`): `Hom(P ⊗ T, Q) ≅ Hom(T, RHom(P, Q))`,
 naturally in `P` and `T`, the tensor product being the native derived tensor product. -/
 noncomputable def nativeDerivedTensorCurryYonedaIso
     (Q : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
@@ -198,10 +198,11 @@ noncomputable def nativeConstructibleTensorCurryYonedaIso (Q : WeilComplex k₀ 
 variable (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
-/-- **Verdier exchange, natural form** (blueprint: `fix-cor-verdier-exchange`, with
-`fix-lem-tensor-adjunction`): let `a_X = f ≫ a_Y` be morphisms to a base `S`, `G_X`, `G_Y` right
-adjoints of `Ra_{X,0}!` and `Ra_{Y,0}!`, and `Q` a Weil complex on `S`. If `RHom(-, G_X Q)` and
-`RHom(-, G_Y Q)` send Weil complexes to Weil complexes, then
+/-- **Verdier exchange, natural form** (blueprint:
+`lemma-internal-adjunction-two-exchange-formulas--2`, with
+`lemma-internal-adjunction-two-exchange-formulas--1`): let `a_X = f ≫ a_Y` be morphisms to a base
+`S`, `G_X`, `G_Y` right adjoints of `Ra_{X,0}!` and `Ra_{Y,0}!`, and `Q` a Weil complex on `S`. If
+`RHom(-, G_X Q)` and `RHom(-, G_Y Q)` send Weil complexes to Weil complexes, then
 `RHom(Rf₀! M, G_Y Q) ≅ Rf_* RHom(M, G_X Q)`, naturally in the Weil complex `M`. -/
 theorem nonempty_derivedLowerShriek_op_comp_iso_of_adjunction {S : Scheme.{u}}
     [S.Over (Spec (CommRingCat.of k₀))]

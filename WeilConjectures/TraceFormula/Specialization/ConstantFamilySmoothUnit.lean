@@ -26,7 +26,7 @@ This is the case `L = Λ` of blueprint `lemma-nearby-cycles-constant-family` for
 
 - `ProEtale.CondensedRing.isIso_deformationModel_bot_unit_of_smooth`: for `ℚ̄_ℓ`-coefficients.
 - `ProEtale.CondensedRing.isIso_deformationModel_bot_unit_of_smooth_finiteCoefficient`: for
-  coefficients in a finite ring `T` killed by a prime `ℓ ≠ char k'`.
+  coefficients in a finite ring `T` killed by a power of a prime `ℓ ≠ char k'`.
 
 -/
 
@@ -87,10 +87,11 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 
 /-- **The constant family of a smooth scheme, with finite coefficients** (blueprint
 `lemma-nearby-cycles-constant-family`, for `L = T̲` and `Y` smooth, with `T` a finite ring killed
-by a prime `ℓ ≠ char k'`): for a smooth separated `k`-scheme `Y` of finite type, the
+by a power of a prime `ℓ ≠ char k'`): for a smooth separated `k`-scheme `Y` of finite type, the
 specialization unit `σ_Y : T̲ ⟶ Ψ_{Y × S}(T̲)` of the constant family `Y × S` is an isomorphism. -/
 theorem isIso_deformationModel_bot_unit_of_smooth_finiteCoefficient [LocallyOfFiniteType Y.hom]
-    [QuasiCompact Y.hom] [IsSeparated Y.hom] [Smooth Y.hom] (hT : (ℓ : T) = 0) :
+    [QuasiCompact Y.hom] [IsSeparated Y.hom] [Smooth Y.hom] {n : ℕ}
+    (hT : (ℓ : T) ^ n = 0) :
     IsIso ((deformationModel Y ⊥ k').unit (Profinite.continuousMapRingObj.{u} T)) := by
   have hφ := isIso_pullbackExchange_deformationModel_app_of_smooth_finiteCoefficient k' T
     (constantFamilyToPointModelHom Y k') (isPullback_deformationGenericMap _ _ k') hT

@@ -11,19 +11,14 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 /-!
 # The equalizer internal hom for the relative monoidal tensor
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
-unit sk-prop-sfb-module-category, definition def-sfb-modobj-internal-hom
-(blueprint: def-sfb-modobj-internal-hom).
-
 The object and functor are the existing `CategoryTheory.Mod.ihom'`. Its equalizer uses
 `homModPre` and `homModB`, with the action through the target given by `homAct`.
 The statement below identifies this specified functor as a right adjoint for the
-monoidal tensor of `CategoryTheory.Mod.monoidalCategory`, with the factor order of the
-blueprint. The existing `ihom'Adjunction` instead uses `Mod.tensorLeft`, the separately
-constructed coequalizer functor computing tensoring on the right.
+monoidal tensor of `CategoryTheory.Mod.monoidalCategory`.
+The existing `ihom'Adjunction` instead uses `Mod.tensorLeft`, the separately constructed
+coequalizer functor computing tensoring on the right.
 -/
 
--- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
 @[expose] public section

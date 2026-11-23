@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedCechDegreeCorepresenter
 
 /-! # Ambient corepresenters for closed Čech cochains
-
-Source: the free-module construction in the affine matching-relations step of
-`lem-sp-proetale-closed-injective-affine-cech`.
 -/
 
 @[expose] public section
@@ -97,19 +94,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
-/-- The degreewise universal properties determine both adjacent boundary maps.
-
-Source: the free-module construction in Step 3 of
-`lem-sp-proetale-closed-injective-affine-cech`.
-(blueprint: lem-sp-proetale-closed-cech-presentation).
-
-Proof: choose the three degreewise corepresenters. Transpose each differential
-by evaluating it at the identity of the preceding corepresenter. Naturality of
-the universal properties proves compatibility with every coefficient sheaf.
-Applying the degree-q+2 universal property to the composite boundary identifies
-it with the composite of the two Čech differentials, which is zero. Thus the
-transposed arrows form a short complex. This only uses universal properties and
-asserts no exactness. The same argument includes zero corepresenters. -/
+/-- The degreewise universal properties determine both adjacent boundary maps. -/
 theorem exists_closedCech_corepresentingShortComplex
     (A : Type u) [CommRing A] {B O : Scheme.{u}}
     (b : O ⟶ B) [IsOpenImmersion b] [QuasiCompact b]

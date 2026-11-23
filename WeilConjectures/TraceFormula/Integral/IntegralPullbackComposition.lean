@@ -229,7 +229,7 @@ triangle (lem-weil-proetale-countable-products-exact and
 lem-weil-pbc-ringed-strict-tower-homotopy-limit) make this an identification on maps.
 2. The system-adjunction counit gives beta_f: R F_f -> U_f R. Its evaluations are
 the adjoints of the actual tower projections, hence the specified rho maps.
-lem-coef-normalized-dvr-effectivity makes beta invertible on normalized systems.
+lemma-sp-tower-adjunction-foundation--2 makes beta invertible on normalized systems.
 lem-pur-integral-operations-preserve-constructible types every pullback value in
 D^b_c. The triangle identity makes the adjunction unit eta invertible on these
 values, giving full faithfulness of reduction on the objects used below.

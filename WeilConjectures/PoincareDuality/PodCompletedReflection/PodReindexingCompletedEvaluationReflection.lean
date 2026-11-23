@@ -26,7 +26,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Completed evaluation by reflection and its normalized reindexing
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, proof Steps 2 and 4;
+Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 2 and 4;
 Stacks Tags 099B, 0A0E and 099M
 (blueprint: lem-pod-reindexing-completed-evaluation-reflection).
 -/

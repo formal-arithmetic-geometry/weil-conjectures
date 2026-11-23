@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedFunctorValueTriangle
 /-!
 # Left derived functors preserve distinguished triangles
 
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
-(blueprint: lem-pur-derived-functor-triangles-05sc).
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause.
 -/
 
 @[expose] public section
@@ -31,37 +30,7 @@ namespace CategoryTheory.Functor
 vertices, then the value at the third exists and the three values form a
 distinguished triangle, with the third map viewed through the canonical shift
 isomorphism.
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
-(blueprint: lem-pur-derived-functor-triangles-05sc).
-
-Proof (the LF dual of the source proof):
-1. For values A at X and B at Y, use `lem-pur-derived-functor-morphisms-05sa`
-   to obtain LF(f). Choose denominator stages with retractions alpha and beta
-   using `def-pc-essentially-constant-pro-diagram`. MS2 and a common-stage
-   refinement make beta composed with F(f') equal to LF(f) composed with alpha.
-   Complete f' to a distinguished triangle; MS6 supplies its third denominator.
-   Complete LF(f) to a distinguished triangle (A,B,C); exactness of F and TR3
-   extend (alpha,beta) to a triangle morphism (alpha,beta,gamma).
-2. Use `lem-pur-triangle-morphism-category-05r9`: the category of denominator
-   triangle morphisms into T is cofiltered and its three projections are initial.
-   By `lem-pur-essential-constant-cofinal-0a1s`, the first two diagrams have
-   values A,B, and essential constancy of the third with value C suffices.
-3. Apply Hom(-,W) to the F-image triangles. The colimit over the opposite
-   indexing category is exact by `lem-weil-pbc-filtered-colimit-abelian-groups-exact`.
-   Compare with the five-term exact Hom sequence of (A,B,C) using the retractions.
-   The outer four maps are bijective by `lem-pc-essentially-constant-pro-hom-colimit`
-   (use W[-1] for the shifted terms). `lem-weil-pbc-five-lemma` makes the middle
-   comparison Hom(C,W) to the Hom colimit bijective.
-4. `lem-pur-essential-constant-pro-criterion-05py`, with gamma at the chosen
-   denominator triangle, supplies the cone with value C. Transport it along
-   `lem-pur-essential-constant-cofinal-0a1s`. The cone equations and uniqueness
-   in `lem-pur-derived-functor-morphisms-05sa` identify b with LF(g), and c with
-   LF(h) followed by the inverse shift comparison of
-   `lem-pur-derived-functor-shift-05su`. The shifted cone equation below expresses
-   this identification directly. For the other pairs of defined vertices, rotate
-   T once or twice, apply the first case, and rotate back, transporting values
-   and definedness using `lem-pur-derived-functor-shift-05su`.
--/
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause. -/
 theorem leftDerived_map_distinguished_of_two_defined
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

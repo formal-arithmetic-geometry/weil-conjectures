@@ -21,7 +21,7 @@ The direct image along a closed immersion of a bounded constructible complex has
 every subset of the base
 (`AlgebraicGeometry.Etale.hasDirectImageBaseChangeOnPlus_of_isClosedImmersion`), by finite base
 change. Together these give the passage from a closed subscheme `i : W ⟶ X` to `X`
-in the third step of the proof of `thm-fin-deligne-generic-open`.
+in the third step of the proof of `theorem-generic-constructibility-base-change-rj`.
 -/
 
 @[expose] public section

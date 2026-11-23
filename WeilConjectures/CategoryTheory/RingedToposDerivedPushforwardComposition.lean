@@ -21,8 +21,7 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 /-!
 # Composition of unbounded derived direct images of ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public section
@@ -390,41 +389,7 @@ private theorem flatKFlat_inverts
 /-- The total derived module direct images compose canonically, including the normalization
 on arbitrary K-injective resolutions of the intermediate direct image.
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E
-(auxiliary; not a blueprint node).
-
-The three existential functors and their units are total right derived functors, computed
-on K-injectives as asserted by the invertibility clauses. The direct image of the composite
-is the composite module functor. The unit equation characterizes the canonical comparison.
-The final equation identifies its component with the class of `g_*j`: the comparison units
-at `I` and `J` and the inverse of `Q(j)` are precisely the resolution identifications.
-
-Proof plan:
-1. Use the tensor module pullback adjunction for each ringed-topos map. Pass termwise to
-   homotopy categories. K-injective resolutions exist on each small ringed site by
-   prop-pur-kinjective-resolutions-exist. Apply lem-weil-pbc-kinjective-total-derived and
-   lem-pc-derived-adjoint-functors to obtain the canonical derived adjunctions, normalized
-   by the fraction formula of lem-pc-pre-derived-adjoint-functors-general.
-2. The underlying direct images and the structural coefficient actions identify the
-   composite module direct image with g_*f_*. Conjugation of this identification gives
-   the underived module pullback composition and its composite counit equation.
-3. Choose a K-flat resolution with flat terms using lem-pc-kflat-resolution. Pullback
-   preserves these representatives. The termwise pullback comparison descends through
-   the K-flat localization (lem-weil-pbc-site-derived-tensor-descent) to a natural derived
-   pullback composition isomorphism, independently of the resolution.
-4. Conjugate that isomorphism through the canonical derived adjunctions to obtain kappa.
-   The adjunction hom bijections characterize it and give its inverse and naturality.
-5. For a K-injective I and a resolution j:f_*I→J, represent maps into Qg_*f_*I by right
-   fractions, and refine the denominator by a K-flat resolution with flat terms.
-6. Apply the canonical fraction adjunction formula twice. Naturality of the module
-   counits cancels Q(j) against its inverse in D(B). The composite counit equation from
-   step 2 identifies the resulting map with the adjunct of Q(g_*j). Hence Q(g_*j) is
-   exactly the kappa component under the displayed resolution identifications.
-7. Since that component is invertible, the cohomology criterion implies g_*j is a
-   quasi-isomorphism. Uniqueness of maps into K-injectives in the derived category gives
-   resolution independence; all comparisons are natural. Universal uniqueness of the
-   total right derived functor makes the unit characterization unique. No claim that
-   f_* preserves K-injectives is used. -/
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E. -/
 theorem ringedToposDerivedPushforwardComposition
     {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

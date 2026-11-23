@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # Countable coproducts and idempotent completeness
 
-Source: Stacks Project, Tag 05QW, `derived-lemma-countable-products-karoubian`.
+Source: Stacks Project, Tag 05QW, `derived-.
 -/
 
 @[expose] public section
@@ -23,18 +23,7 @@ open CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
 /-- A pretriangulated category admitting countable coproducts is idempotent complete.
-Source: Stacks Project, Tag 05QW, Lemma 13.4.14, coproduct assertion.
-(blueprint: lem-countable-coproducts-idempotent-complete)
-
-Proof in words: the opposite category has countable products. To split an
-idempotent in an additive category with countable products it suffices to have
-kernels for split epimorphisms (the countable-product criterion of Stacks Tag 05QV).
-In a pretriangulated category every epimorphism has a kernel: complete the map
-to a distinguished triangle and rotate once, then apply the exact Hom sequences;
-the connecting map is zero because the original map is epic, and exactness gives
-the kernel universal property. Apply this criterion to the opposite category,
-then take opposites of the splitting maps. The coproduct is indexed by ULift ℕ
-so that the statement works in an arbitrary indexing universe w. -/
+Source: Stacks Project, Tag 05QW, Lemma 13.4.14, coproduct assertion. -/
 theorem isIdempotentComplete_of_countableCoproducts
     (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

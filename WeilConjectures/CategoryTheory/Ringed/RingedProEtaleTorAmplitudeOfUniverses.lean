@@ -85,8 +85,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Tor tests on the original site with independent universes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08FZ
-(blueprint: def-weil-proetale-tor-amplitude).
+Source: Stacks Project, sites-cohomology.tex, Tag 08FZ.
 The coefficient-sized small-model predicates remain available. This interface applies
 exactly the same degree-zero module tests to the original ringed site and its slices.
 
@@ -105,7 +104,7 @@ namespace CategoryTheory
 
 /-- Tor amplitude on a ringed site: test the canonical K-flat derived tensor against
 all module sheaves in degree zero, with one common ordered interval.
-Source: Stacks Project, Tag 08FZ (blueprint: def-weil-proetale-tor-amplitude).
+Source: Stacks Project, Tag 08FZ.
 For the pro-etale application R is the constant coefficient ring; on a slice it is
 its ordinary restriction, canonically the same constant coefficient ring there. -/
 def HasRingedSiteTorAmplitudeOfUniverses {C : Type c} [Category.{h} C]

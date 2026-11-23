@@ -33,7 +33,6 @@ If `E'` is the restriction of `E` and `E` induces `b` on homology, the transport
 `b` (`CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoHomologyExchangeIso`). This is the
 compatibility of the homology sheaves of the pushforward of Weil objects with the pushforward of
 Weil sheaves.
-
 -/
 
 @[expose] public section
@@ -177,11 +176,7 @@ variable {𝒟X 𝒟Y 𝒦X 𝒦Y 𝒮X 𝒮Y : Type*} [Category 𝒟X] [Categor
   {B' : R' ⋙ LY' ≅ LX' ⋙ R'} {b : r ⋙ pY ≅ pX ⋙ r} {bc : r ⋙ pY ⟶ pX ⋙ r}
 
 /-- `Endofunctor.IsoAlgebra.mapOfNatIsoHomologyExchangeIsoOfRestrict` at an object, for functors
-given through equations, so that concrete instances can use their own functors.
-
-Implementation note: the categories are passed as variables, with their category instances,
-together with `Sigma`-type equations to the generic ones, and the functors through `HEq`
-hypotheses, as in `Endofunctor.IsoAlgebra.nonempty_obj_obj_iso_of_eq`. -/
+given through equations, so that concrete instances can use their own functors. -/
 theorem nonempty_mapOfNatIso_obj_iso_of_restrict (adj : LfD ⊣ R)
     (hιX : ιX.FullyFaithful) (hιY : ιY.FullyFaithful)
     (hθ : ∀ K, LfD.map (cY.inv.app K) ≫ cF.inv.app (LY'.obj K) ≫ ιX.map (θK.hom.app K) =

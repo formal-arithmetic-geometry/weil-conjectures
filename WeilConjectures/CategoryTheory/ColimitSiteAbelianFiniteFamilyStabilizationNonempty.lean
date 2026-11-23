@@ -63,7 +63,6 @@ private theorem presieve_map_eq_ofArrows
 
 /-- Nonempty-cover reduction for finite family stabilization.
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-abelian-finite-family-stabilization-nonempty)
 -/
 theorem colimit_site_abelian_finite_family_stabilization_nonempty
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})

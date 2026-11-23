@@ -63,7 +63,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 # Relative condensed derived tensor and its geometric Frobenius
 
 Source: latest blueprint, sec-six-functors/sk-rem-sf-pf-done,
-(blueprint: def-wf-tensor-product).
+(blueprint: prose-03-02).
 The current blueprint uses `wfCondensedTensor`, the native relative derived tensor
 on modules over the pulled-back condensed ring. Its first argument is computed by
 a K-flat representative. `wfCondensedTensorFrobenius` composes the normalized tensor
@@ -212,7 +212,7 @@ variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDa
 attribute [local instance] WeilConjectures.instEssentiallySmallProEt_weilConjectures
 
 /-- Ordinary uncompleted derived tensor over the actual completed coefficient sheaf.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev wfOrdinaryDerivedTensor :
     PbcCompletedDerived X d × PbcCompletedDerived X d ⥤ PbcCompletedDerived X d :=
   SheafOfModules.wfSiteDerivedTensor (ProEt.topology X) (pbcAdicCompletion X d)
@@ -336,7 +336,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralOperationsSiteSmall in
 set_option backward.isDefEq.respectTransparency false in
 /-- The localization model's natural comparison on flat-term K-flat representatives.
-Source: Stacks 06YT; blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: Stacks 06YT; blueprint order 2107 (blueprint: prose-03-02).
 Proof: take the natural representative comparison from site-derived-tensor descent.
 The homotopy quotient comparison identifies its source with total tensor of complexes.
 Flatness means exactness of sheaf tensor, so the two flat-term subcategories coincide.
@@ -425,14 +425,14 @@ theorem wfTensorRepresentative_exists :
   exact WfTensorLinearity.uniqueComparison _ ff' i b.representative
 
 /-- The existing pullback-comparison interface with this very localized tensor.
-Source: Stacks 06YT; blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: Stacks 06YT; blueprint order 2107 (blueprint: prose-03-02). -/
 def wfTensorModel : ProEtaleTensorModel X (pbcAdicCompletion X d) where
   tensor := wfOrdinaryDerivedTensor X d
   representative := (wfTensorRepresentative_exists X d).choose
 
 /-- Integral completed tensor is ordinary derived tensor followed by the Koszul reflector.
 Source: blueprint order 2107; Bhatt--Scholze Definition 3.4.10
-(blueprint: def-wf-tensor-product). -/
+(blueprint: prose-03-02). -/
 def wfIntegralTensor : WfCompleteCategory X d r a ha × WfCompleteCategory X d r a ha ⥤
     WfCompleteCategory X d r a ha :=
   ((ObjectProperty.ι (WfIsComplete X d r a ha)).prod
@@ -440,12 +440,12 @@ def wfIntegralTensor : WfCompleteCategory X d r a ha × WfCompleteCategory X d r
       wfOrdinaryDerivedTensor X d ⋙ wfCompletion X d r a ha
 
 /-- The ambient rational category keeps all integral complete objects, without boundedness.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev WfAmbientRationalCategory (p : A) :=
   ScalarLocalization A (WfCompleteCategory X d r a ha) p
 
 /-- The underlying object of rational tensor, before specifying its localized Hom action.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfRationalTensorObj (p : A)
     (M N : WfAmbientRationalCategory X d r a ha p) :
     WfAmbientRationalCategory X d r a ha p :=
@@ -483,7 +483,7 @@ private theorem completionLinear :
     rw [Linear.comp_smul, wfCompletion_unit_map, wfCompletion_unit_map, Linear.smul_comp]
 
 /-- Bilinear scalar extension is uniquely determined on pure tensors, including denominators.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: sheaf tensor is linear in each variable. Its K-flat localization is linear by
 extension of transformations from K-flat representatives; the reflector is linear by its
 unit and the Hom bijection. Extend this bilinear map along A→A[1/p] in both variables.
@@ -536,7 +536,7 @@ theorem wfRationalTensorHom_exists (p : A)
   exact WfTensorLinearity.rationalTensorHom_exists A T p M M' N N'
 
 /-- The unique localized bilinear map; its values are prescribed on every numerator.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfRationalTensorHom (p : A)
     (M M' N N' : WfAmbientRationalCategory X d r a ha p) :=
   (wfRationalTensorHom_exists X d r a ha p M M' N N').exists.choose
@@ -551,7 +551,7 @@ private theorem wfRationalTensorHom_tmul (p : A)
 attribute [local irreducible] wfRationalTensorHom
 
 /-- The extended tensor maps satisfy the bifunctor laws.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: on pure tensors the identity law follows from integral tensor's identity law and
 1*1=1. Composition follows from integral functoriality and commutative multiplication of
 localized scalars. Bilinearity extends these equations to all localized morphisms. -/
@@ -601,7 +601,7 @@ theorem wfRationalTensor_laws (p : A) :
             ac_rfl
 
 /-- Completed tensor rationalized with the stated product-of-denominators convention.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfRationalTensor (p : A) :
     WfAmbientRationalCategory X d r a ha p × WfAmbientRationalCategory X d r a ha p ⥤
       WfAmbientRationalCategory X d r a ha p where
@@ -827,7 +827,7 @@ private theorem wfPullback_preservesComplete :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The completion comparison is uniquely fixed by its unit square.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: compare the canonical Koszul completeness predicate with completeness in the
 presentation category, using the exact coefficient equivalence and independence of the
 Koszul representative and generating list. Direct image commutes with completion and
@@ -890,7 +890,7 @@ theorem wfPullbackCompletion_exists (M : PbcCompletedDerived X d) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact coefficient transport preserves intrinsic completeness for the actual scalar list.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: the finite coefficient comparisons preserve every constant section a_j, and commute
 with quotient maps. Their limit fixes a_j on the completed ring. Apply the exact inverse
 site equivalences to the strict Koszul tower. They preserve products and both finite
@@ -906,7 +906,7 @@ theorem wfIsoPullback_complete (M : WfCompleteCategory X d r a ha) :
   infer_instance
 
 /-- The same exact transport on all complete objects, before raw rationalization.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfCompletePullback : WfCompleteCategory X d r a ha ⥤ WfCompleteCategory X d r a ha :=
   ObjectProperty.lift (WfIsComplete X d r a ha)
     (ObjectProperty.ι (WfIsComplete X d r a ha) ⋙ pbcIsoAmbientPullback e.asIso.hom d)
@@ -1010,7 +1010,7 @@ private theorem wfCompletedSection_directImage (U : X.ProEtᵒᵖ) (b : A) :
   exact h
 
 /-- Constant sections are fixed by the completed coefficient identification.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: check the scalar action after every finite quotient projection. The constant
 inverse-image comparison is adjoint to identity on constants, so fixes each residue.
 The limit map therefore fixes every scalar. The sectionwise linear equation descends
@@ -1050,28 +1050,28 @@ theorem wfCompletePullback_linear :
     exact (pbcIsoAmbientPullback e.asIso.hom d).map_smul b f.hom
 
 /-- The additive part of the specified coefficient transport.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 instance wfCompletePullback_additive : (wfCompletePullback X d r a ha e).Additive :=
   (wfCompletePullback_linear X d r a ha e).1
 
 /-- The A-linear part of the specified coefficient transport.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 instance wfCompletePullback_isLinear : (wfCompletePullback X d r a ha e).Linear A :=
   (wfCompletePullback_linear X d r a ha e).2
 
 /-- Frobenius transport on the ambient raw rationalization, on every complete object.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev wfAmbientRationalPullback (p : A) :=
   ScalarLocalization.map A (WfCompleteCategory X d r a ha) p
     (wfCompletePullback X d r a ha e)
 
 /-- The specified product/fiber comparison, determined equivalently by the unit square.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfPullbackCompletion (M : PbcCompletedDerived X d) :=
   (wfPullbackCompletion_exists X d r a ha e M).exists.choose
 
 /-- The integral comparison is the completed canonical derived tensor comparison.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfIntegralTensorPullback (M N : WfCompleteCategory X d r a ha) :
     (wfCompletePullback X d r a ha e).obj ((wfIntegralTensor X d r a ha).obj (M, N)) ≅
       (wfIntegralTensor X d r a ha).obj
@@ -1144,7 +1144,7 @@ private theorem wfIntegralTensorPullback_naturality
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Rationalizing the constructed integral comparison fixes every component uniquely.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: tensor with one the integral comparison and its inverse on Hom modules. The
 integral comparison is natural by naturality of the canonical tensor comparison and
 of the product/fiber comparison. Its naturality extends to all fractions by A-linearity
@@ -1200,12 +1200,12 @@ theorem wfRationalTensorPullback_exists (p : A) :
   exact hnu MN.1.obj MN.2.obj
 
 /-- The typed pullback/tensor comparison in the displayed direction of the source.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfRationalTensorPullback (p : A) :=
   (wfRationalTensorPullback_exists X d r a ha e p).exists.choose
 
 /-- The exact PBC integral subcategory lies in this same intrinsically complete category.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: its first defining condition supplies an intrinsic-completion witness after the
 canonical completed-ring presentation comparison. The mutually inverse exact coefficient
 restrictions preserve the strict Koszul tower and unit. The Koszul reflector shows
@@ -1217,7 +1217,7 @@ theorem wfConstructible_complete (M : PbcBoundedConstructibleComplete X d) :
   exact wfComplete_of_presentation X d r a ha M.obj s b hb C eC hC
 
 /-- Inclusion of the specified constructible objects, retaining all their derived arrows.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfIntegralConstructibleInclusion :
     PbcBoundedConstructibleComplete X d ⥤ WfCompleteCategory X d r a ha :=
   ObjectProperty.lift (WfIsComplete X d r a ha)
@@ -1225,7 +1225,7 @@ def wfIntegralConstructibleInclusion :
     (wfConstructible_complete X d r a ha)
 
 /-- The inclusion on rational coefficients is uniquely determined by integral localization.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: the inclusion is A-linear since its underlying maps are unchanged. Extend its
 Hom maps by tensor with the identity of A[1/p]. This respects the given composition
 and identity formulas. Every localized morphism is a fraction of an integral morphism,
@@ -1270,12 +1270,12 @@ theorem wfConstructibleInclusion_exists (p : A) :
   exact scalarLocalization_precomp_injective p G F (hG.trans hF.symm)
 
 /-- The raw rational inclusion with its actual unchanged integral object function.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfConstructibleInclusion (p : A) :=
   (wfConstructibleInclusion_exists X d r a ha p).exists.choose
 
 /-- Inclusion commutes with the same coefficient transport, normalized by identity on objects.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: both inclusions and both pullbacks act on the same ambient derived objects and
 maps. Their integral composites agree after the faithful ambient inclusion. The unique
 rational extension retains these object identities and sends every integral arrow to
@@ -1317,7 +1317,7 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
   (E : Padic.FiniteCoefficientFields c.l c.Qbar)
 
 /-- The singleton generator is exactly the stipulated uniformizer ideal.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product).
+Source: blueprint order 2107 (blueprint: prose-03-02).
 Proof: the range of the constant function on Fin 1 is the singleton uniformizer, and
 pbcIntegralDatum defines its ideal as the span of that singleton. -/
 theorem wfUniformizer_generates :
@@ -1328,25 +1328,25 @@ theorem wfUniformizer_generates :
   rfl
 
 /-- The actual ambient rational category at the finite coefficient field E.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev WfAmbient := WfAmbientRationalCategory (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
   (wfUniformizer_generates D c E) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
 /-- Completed tensor at E on arbitrary ambient objects, with the specified scalar ring.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev wfTensor := wfRationalTensor (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
   (wfUniformizer_generates D c E) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
 /-- Geometric Frobenius on this ambient category, using the coefficient-limit identification.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev wfAmbientFrobenius := wfAmbientRationalPullback (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
   (wfUniformizer_generates D c E) (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
 /-- Inclusion of the node's Weil-complex carriers into the stipulated ambient category.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 abbrev wfWeilCarrier (K : WeilD D c X₀ E) : WfAmbient D c X₀ E :=
   (wfConstructibleInclusion (D.geometricFiber X₀).left
     (pbcStageDatum.{u} c.l c.Qbar E) 1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
@@ -1355,7 +1355,7 @@ abbrev wfWeilCarrier (K : WeilD D c X₀ E) : WfAmbient D c X₀ E :=
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The given Weil isomorphism, transported by the faithful ambient coefficient inclusion.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfWeilStructure (K : WeilD D c X₀ E) :
     (wfAmbientFrobenius D c X₀ E).obj (wfWeilCarrier D c X₀ E K) ≅
       wfWeilCarrier D c X₀ E K :=
@@ -1373,7 +1373,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Tensor Frobenius is mu followed by tensor of the two given Weil isomorphisms.
 The output is ambient; restriction to an exact bifunctor of Weil complexes is separate.
-Source: blueprint order 2107 (blueprint: def-wf-tensor-product). -/
+Source: blueprint order 2107 (blueprint: prose-03-02). -/
 def wfTensorFrobenius (K L : WeilD D c X₀ E) :
     (wfAmbientFrobenius D c X₀ E).obj
         ((wfTensor D c X₀ E).obj (wfWeilCarrier D c X₀ E K, wfWeilCarrier D c X₀ E L)) ≅

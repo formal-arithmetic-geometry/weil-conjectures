@@ -12,8 +12,10 @@ import WeilConjectures.SmoothBaseChange.SbcCompletedOperations
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Canonical constructible reduction cohomology under completed pullback
-Source: blueprint preservation proof, step 5; Stacks Tags 099N and 09AL
-(blueprint: lem-weil-pbc-constructible-reduction-pullback).
+
+## References
+
+* Stacks Tags 099N and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -45,18 +47,7 @@ private theorem constructible_iso (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
     ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing T A)).mapIso e) (hS i)
 
 /-- Completed pullback preserves intrinsic completeness, intrinsic reduction
-constructibility, and every common cohomological support interval.
-Source: blueprint preservation proof, step 5; Stacks Tags 099N and 09AL
-(blueprint: lem-weil-pbc-constructible-reduction-pullback).
-
-Proof: sbcOperations_preserveComplete gives intrinsic completeness for the actual
-strict-tower completed pullback. sbcPullReduction and its invertibility theorem identify
-each output reduction with ordinary quotient-coefficient pullback of the input reduction.
-The latter is the exact derived functor of proEtaleRingModulePullback. Its homology
-comparison and pbc_finite_pullback_constructibility give constructibility in each degree.
-Exact pullback preserves zero, so every support interval is retained, including an
-empty interval. Transport through the canonical quotient-linear comparison gives the
-assertions for the specified completedPullbackObject. -/
+constructibility, and every common cohomological support interval. -/
 theorem pbc_constructible_reduction_pullback
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]

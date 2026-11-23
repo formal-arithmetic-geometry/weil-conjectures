@@ -16,7 +16,7 @@ import Mathlib.RingTheory.Nakayama
 # Homogeneous independence survives localization at a rational point
 
 Source: blueprint `lem-wf-height-of-homogeneous-independence`, steps 1 to 3, in the
-local dimension argument of `lem-wf-same-lie-closed-subgroup`, clause (2).
+local dimension argument of `lemma-connected-components-images-homomorphisms--3`, clause (2).
 -/
 
 @[expose] public section

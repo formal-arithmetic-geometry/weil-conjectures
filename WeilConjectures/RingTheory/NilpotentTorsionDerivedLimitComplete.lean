@@ -31,7 +31,7 @@ Source: Stacks Project, Tag 091W, `lemma-naive-derived-completion`, with tensor 
 
 Proof:
 1. Products of modules are exact: kernels are coordinatewise, and tuples lift across
-products of surjections by choice. Apply `lem-weil-derived-limit-existence` to obtain
+products of surjections by choice. Apply `lemma-reduction-derived-nakayama` to obtain
 countable products and derived limits in `D(A)`, unique up to isomorphism.
 2. Fix a level and `a ∈ I`, and choose `e ≥ 1` annihilating that level. On the product
 of the constant tower, its shift `s` satisfies `pr_j s^r = a^r pr_{j+r}`, by induction

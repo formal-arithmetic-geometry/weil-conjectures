@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionComparisonData
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
-public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeCoefficientComparison
+public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeCoefficientData
 public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
@@ -39,8 +39,9 @@ import WeilConjectures.AlgebraicGeometry.PulledReduction.PulledReductionStrictMo
 import WeilConjectures.AlgebraicGeometry.PulledReduction.RestrictionLimitProjectionUnit
 /-! # Augmented strict reduction tower comparison
 
-Source: Stacks 099N(5)
-(blueprint: lem-weil-pbc-pulled-reduction-strict-tower-comparison).
+## References
+
+* Stacks 099N(5)
 -/
 
 @[expose] public noncomputable section

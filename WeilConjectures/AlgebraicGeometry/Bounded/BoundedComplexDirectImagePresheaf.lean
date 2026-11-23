@@ -61,7 +61,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 # The presheaf description of bounded-below higher direct images
 
 Source: Stacks Project, Tag 0D6I, lemma-unbounded-describe-higher-direct-images,
-and the first paragraph of the blueprint det-pe-bounded-continuity-direct-image
+and the first paragraph of the blueprint corollary-continuity-cohomology--2
 (blueprint: lem-pe-bounded-complex-direct-image-presheaf).
 
 All coefficient sheaves, complexes, presheaves and conclusions use the original

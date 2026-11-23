@@ -128,15 +128,15 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.Algebra.Homology.ScalarInternalHomData
 /-! # Internal Hom and arbitrary changes of ring-sheaf coefficients
 
-Source: Bhatt--Scholze, Remark 6.8.15 (ambient derived operations);
-Stacks Project, sites-cohomology.tex, Tags 07A6, 07A4, 08J9, 08JA and 0D6D,
-and derived.tex, Tag 05RT
-(blueprint: def-sfb-scalar-hom-comparison-data).
-This is the auxiliary scalar-adjunction comparison extracted from the final
-paragraph of lem-sfb-dc-hom-preserves in the current blueprint.
 Every comparison is normalized on actual K-flat tensors. In particular these
 are ordinary unbounded module derived categories, with no flatness or
 perfectness assumption on a coefficient map or a derived input.
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15 (ambient derived operations).
+* Stacks Project, `sites-cohomology.tex`, Tags 07A6, 07A4, 08J9, 08JA and 0D6D, and
+  `derived.tex`, Tag 05RT.
 -/
 
 @[expose] public section
@@ -174,7 +174,7 @@ variable {J} (M : ScalarHomModels.{c, v, r, w} J)
   {R S T : Sheaf J CommRingCat.{max c v r}}
 
 /-- Actual scalar-unit sections used by every tensor normalization below.
-Source: Stacks 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6. -/
 noncomputable def scalarHomUnitSection (a : R ⟶ S) (P : scalarModules J R)
     (V : Cᵒᵖ) (x : P.val.obj V) : ((M.scalar a).extension.obj P).val.obj V :=
   ((M.scalar a).ordinaryAdjunction.unit.app P).val.app V x
@@ -184,7 +184,7 @@ attribute [local irreducible] scalarPairComplexComparison
 
 /-- The representative square for a scalar tensor comparison, packaged to keep
 structure projections from repeatedly elaborating total-complex instances.
-Source: Stacks 07A4 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A4. -/
 def ScalarHomTensorNormalization (a : R ⟶ S)
     (hE : ∀ (P : CochainComplex (scalarModules J R) ℤ),
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
@@ -222,8 +222,7 @@ attribute [local irreducible] ScalarHomTensorNormalization
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Strong scalar tensor comparison, retaining its actual pure-tensor normalization
 before and after passage to the derived category.
-Source: Stacks 07A4 and 0D6D
-(blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A4 and 0D6D. -/
 structure ScalarHomTensorComparison (a : R ⟶ S) where
   /-- Scalar extension carries K-flat complexes to K-flat complexes. -/
   preservesKFlat : ∀ (P : CochainComplex (scalarModules J R) ℤ),
@@ -255,7 +254,7 @@ structure ScalarHomTensorComparison (a : R ⟶ S) where
   normalization : ScalarHomTensorNormalization M a preservesKFlat complexIso iso
 
 /-- The actual source bifunctor U RHom_S(F(-),-).
-Source: Stacks 07A6 and 08J9 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6 and 08J9. -/
 noncomputable def scalarHomSource (a : R ⟶ S) :
     (DerivedCategory (scalarModules J R))ᵒᵖ × DerivedCategory (scalarModules J S) ⥤
       DerivedCategory (scalarModules J R) :=
@@ -263,16 +262,15 @@ noncomputable def scalarHomSource (a : R ⟶ S) :
     derivedInternalHomOfUniverses.{c, v, r, w} J S ⋙ scalarDerivedRestriction a
 
 /-- The actual target bifunctor RHom_R(-,U(-)).
-Source: Stacks 07A6 and 08J9 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6 and 08J9. -/
 noncomputable def scalarHomTarget (a : R ⟶ S) :
     (DerivedCategory (scalarModules J R))ᵒᵖ × DerivedCategory (scalarModules J S) ⥤
       DerivedCategory (scalarModules J R) :=
   ((𝟭 _).prod (scalarDerivedRestriction a)) ⋙
     derivedInternalHomOfUniverses.{c, v, r, w} J R
 
-/-- The five canonical representing Hom bijections, in the order of the node's proof.
-Source: Stacks 07A6, 07A4 and 08J9
-(blueprint: def-sfb-scalar-hom-comparison-data). -/
+/-- The five canonical representing Hom bijections.
+Source: Stacks 07A6, 07A4 and 08J9. -/
 noncomputable def scalarHomBijection (a : R ⟶ S) (μ : ScalarHomTensorComparison M a)
     (A K : DerivedCategory (scalarModules J R)) (N : DerivedCategory (scalarModules J S)) :
     (A ⟶ (scalarHomSource M a).obj (op K, N)) ≃
@@ -290,7 +288,7 @@ noncomputable def scalarHomBijection (a : R ⟶ S) (μ : ScalarHomTensorComparis
 
 /-- The canonical lax tensor map on scalar restriction, the counit mate of the
 strong scalar extension tensor comparison.
-Source: Stacks 07A4 and 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A4 and 07A6. -/
 noncomputable def scalarHomRestrictionTensor (a : R ⟶ S) (μ : ScalarHomTensorComparison M a)
     (H V : DerivedCategory (scalarModules J S)) :
     (M.closed R).tensor.obj
@@ -303,7 +301,7 @@ noncomputable def scalarHomRestrictionTensor (a : R ⟶ S) (μ : ScalarHomTensor
           ((M.scalar a).adjunction.counit.app V)))
 
 /-- Restricted S-linear evaluation after the actual scalar-extension unit.
-Source: Stacks 07A6 and 08J9 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6 and 08J9. -/
 noncomputable def scalarHomRestrictedEvaluation (a : R ⟶ S) (μ : ScalarHomTensorComparison M a)
     (K : DerivedCategory (scalarModules J R)) (N : DerivedCategory (scalarModules J S)) :
     (M.closed R).tensor.obj ((scalarHomSource M a).obj (op K, N), K) ⟶
@@ -316,13 +314,13 @@ noncomputable def scalarHomRestrictedEvaluation (a : R ⟶ S) (μ : ScalarHomTen
       (scalarDerivedRestriction a).map ((M.closed S).evaluation ((M.scalar a).derived.obj K) N)
 
 /-- Termwise restriction composes by the identity on the underlying module sheaves.
-Source: Stacks 0D6D and 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 0D6D and 07A6. -/
 noncomputable def scalarHomOrdinaryRestrictionComp (a : R ⟶ S) (b : S ⟶ T) :
     scalarRestriction (a ≫ b) ≅ scalarRestriction b ⋙ scalarRestriction a :=
   Iso.refl _
 
 /-- The canonical composition comparison for actual derived scalar restriction.
-Source: Stacks 0D6D and 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 0D6D and 07A6. -/
 noncomputable def scalarHomRestrictionComp (a : R ⟶ S) (b : S ⟶ T) :
     scalarDerivedRestriction (a ≫ b) ≅
       scalarDerivedRestriction b ⋙ scalarDerivedRestriction a :=
@@ -330,13 +328,13 @@ noncomputable def scalarHomRestrictionComp (a : R ⟶ S) (b : S ⟶ T) :
     (Functor.mapDerivedCategoryCompIso (scalarRestriction b) (scalarRestriction a)).symm
 
 /-- Identity coefficient restriction is the identity on the underlying module sheaves.
-Source: Stacks 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6. -/
 noncomputable def scalarHomOrdinaryRestrictionId (R : Sheaf J CommRingCat.{max c v r}) :
     scalarRestriction (𝟙 R) ≅ 𝟭 (scalarModules J R) :=
   Iso.refl _
 
 /-- The canonical identity comparison for actual derived scalar restriction.
-Source: Stacks 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6. -/
 noncomputable def scalarHomRestrictionId (R : Sheaf J CommRingCat.{max c v r}) :
     scalarDerivedRestriction (𝟙 R) ≅ 𝟭 (DerivedCategory (scalarModules J R)) :=
   Functor.mapDerivedCategoryNatIso (scalarHomOrdinaryRestrictionId.{c, v, r} R) ≪≫
@@ -345,14 +343,14 @@ noncomputable def scalarHomRestrictionId (R : Sheaf J CommRingCat.{max c v r}) :
 /-- The canonical scalar extension composition comparison, uniquely fixed by units.
 On K-flat representatives it is t tensor (s tensor x) mapped to t b(s) tensor x;
 this is the unique left-adjoint comparison for the actual restriction comparison.
-Source: Stacks 0D6D and 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 0D6D and 07A6. -/
 noncomputable def scalarHomExtensionComp (a : R ⟶ S) (b : S ⟶ T) :
     (M.scalar a).derived ⋙ (M.scalar b).derived ≅ (M.scalar (a ≫ b)).derived :=
   Adjunction.leftAdjointUniq ((M.scalar a).adjunction.comp (M.scalar b).adjunction)
     ((M.scalar (a ≫ b)).adjunction.ofNatIsoRight (scalarHomRestrictionComp.{c, v, r, w} a b))
 
 /-- The unit-normalized identity comparison for scalar extension.
-Source: Stacks 07A6 (blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6. -/
 noncomputable def scalarHomExtensionId (R : Sheaf J CommRingCat.{max c v r}) :
     (M.scalar (𝟙 R)).derived ≅ 𝟭 (DerivedCategory (scalarModules J R)) :=
   Adjunction.leftAdjointUniq
@@ -363,8 +361,7 @@ noncomputable def scalarHomExtensionId (R : Sheaf J CommRingCat.{max c v r}) :
 Naturality is encoded by the natural isomorphism of the two actual bifunctors.
 Evaluation and representing Hom bijections uniquely determine it. The tower and
 identity equations include all necessary coefficient transports explicitly.
-Source: Stacks 07A6, 07A4, 08J9, 08JA, 0D6D and 05RT
-(blueprint: def-sfb-scalar-hom-comparison-data). -/
+Source: Stacks 07A6, 07A4, 08J9, 08JA, 0D6D and 05RT. -/
 structure ScalarInternalHomAdjunction
     (μ : ∀ {R S : Sheaf J CommRingCat.{max c v r}} (a : R ⟶ S),
       ScalarHomTensorComparison M a) where

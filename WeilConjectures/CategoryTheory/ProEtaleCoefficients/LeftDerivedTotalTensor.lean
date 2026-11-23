@@ -17,10 +17,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # Left derived functors computed on K-flat complexes
 
-Source: blueprint main-20261015, `sec-proetale-coefficients`,
-`sk-def-sfb-derived-categories`, `def-sfb-left-derived-functor`
-(blueprint: def-sfb-left-derived-functor).
-
 The functor and its counit are Mathlib's canonical total left derived functor and
 counit. This interface uses the binary total-tensor K-flatness recorded by the
 statement dependency, without requiring a chosen monoidal structure on complexes.

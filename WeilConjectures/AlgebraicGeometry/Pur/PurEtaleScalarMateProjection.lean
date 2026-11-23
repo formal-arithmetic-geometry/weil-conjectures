@@ -19,9 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoUniqueness
 /-!
 # Restriction of the derived coefficient mate equals the projection morphism
 
-Source: Stacks Project, more-etale.tex, Tag 0GL6, with the canonical counit calculation
-in sites-cohomology.tex, Tags 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-mate-projection).
+## References
+
+* Stacks 0GL6
+* Stacks Project, Tags 07A4, 0G7E and 07A7
 -/
 
 @[expose] public noncomputable section
@@ -119,17 +120,7 @@ private theorem scalar_natTrans_ext
   apply (cancel_epi (F.map (_root_.DerivedCategory.Q.map π))).1
   rw [α.naturality, β.naturality, h P hP]
 
-/-- The canonical scalar/pullback comparison is uniquely normalized on K-flat models.
-Source: Stacks 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-mate-projection).
-Proof: resolve the input by a K-flat complex with flat terms (lem-pc-kflat-resolution).
-Inverse image preserves those properties by
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback; scalar extension is termwise
-extension on these models by lem-pur-derived-change-of-rings. Apply the ordinary
-scalar/pullback isomorphism termwise. The derived counits give the displayed square.
-Naturality and invariance under quasi-isomorphisms descend it to derived categories.
-Every object has such a model and the vertical counits on these models are invertible,
-so the displayed equations determine the natural isomorphism uniquely. -/
+/-- The canonical scalar/pullback comparison is uniquely normalized on K-flat models. -/
 theorem scalarPullbackIso_existsUnique
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -150,8 +141,7 @@ theorem scalarPullbackIso_existsUnique
   intro d hd
   exact (scalarPullbackIso_unique φ f (c := c) (d := d) hc hd).symm
 
-/-- The uniquely normalized derived scalar/pullback isomorphism.
-Source: Stacks 07A4 and 0G7E (blueprint: lem-pur-etale-scalar-mate-projection). -/
+/-- The uniquely normalized derived scalar/pullback isomorphism. -/
 def scalarPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -160,8 +150,7 @@ def scalarPullbackIso
   (scalarPullbackIso_existsUnique φ f).choose
 
 /-- The B-linear scalar-change mate; its components are precisely the transposes
-of the scalar extension of the A-geometric counit after scalarPullbackIso.
-Source: Stacks 0GL6 (blueprint: lem-pur-etale-scalar-mate-projection). -/
+of the scalar extension of the A-geometric counit after scalarPullbackIso. -/
 def scalarMate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -225,24 +214,7 @@ private theorem scalar_tensor_pullback_square
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- After canonical scalar/tensor and restriction/direct-image identifications,
-the coefficient mate is the specified projection morphism, naturally in J.
-Source: Stacks more-etale.tex 0GL6; sites-cohomology.tex 07A4, 0G7E and 07A7
-(blueprint: lem-pur-etale-scalar-mate-projection).
-
-Proof: apply scalarTensorPullback_normalization_kFlat to the defining
-normalization of scalarPullbackIso on a K-flat model. The two sides form natural
-transformations. Every complex receives a quasi-isomorphism from a flat-term
-K-flat complex, so naturality, cancellation and localization extensionality
-extend the square to every derived object. Apply the A-geometric adjunction
-Hom equivalence to the restricted B-mate followed by the direct-image comparison.
-The two mate counit identities and naturality of the restriction/pullback and
-scalar/tensor comparisons reduce this transpose to the pullback/tensor square
-followed by tensor of the A-geometric counit. Tensor naturality moves the
-coefficient identification past that counit. Naturality of the adjunction Hom
-equivalence identifies the result with the specified projection map followed
-by direct image of the coefficient identification. Finally compose with the
-inverse target scalar/tensor comparison. This ambient argument retains the
-stated boundedness hypotheses without using them. -/
+the coefficient mate is the specified projection morphism, naturally in J. -/
 theorem scalarMate_restrict_eq_projection
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W)

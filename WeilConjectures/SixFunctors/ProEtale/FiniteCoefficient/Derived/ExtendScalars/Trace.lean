@@ -23,7 +23,8 @@ functor for the Koszul braidings `DerivedCategory.braidedCategory'`, its comonoi
 being the tensor comparison `Functor.leftDerivedTensorComparison`. Hence `Ψ` preserves categorical
 traces, and the induced map on the endomorphisms of the unit sends `a • 𝟙` to
 `algebraMap R S a • 𝟙`: the trace over `S` of `Ψ v` is the image of the trace of `v` over `R`
-(blueprint `thm-trf-finite-coefficient-map`, using item (3) of `prop-trf-trace-formal-laws`).
+(blueprint `theorem-grothendieck-lefschetz-trace-formula--7`, using item (3) of
+`proposition-properties-trace`).
 
 ## Main definitions and results
 
@@ -109,12 +110,12 @@ noncomputable def leftDerivedSheafExtendScalarsBraided :
   (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorBraided
     (sheafExtendScalars_map_braiding_hom_δ (algebraMap R S) X)
 
-/-- **Derived scalar extension preserves traces** (blueprint `thm-trf-finite-coefficient-map`,
-via item (3) of `prop-trf-trace-formal-laws`). For the monoidal structure
-`leftDerivedSheafExtendScalarsMonoidal` of `Ψ = L(S ⊗_R -)` and the Koszul braidings
-`DerivedCategory.braidedCategory'`, the trace over `S` of `Ψ v` is the image of the trace over `R`
-of `v`: `tr(Ψ v) = ε ≫ Ψ(tr v) ≫ η`, for an endomorphism `v` of a dualizable `P` such that `Ψ P`
-is dualizable. -/
+/-- **Derived scalar extension preserves traces** (blueprint
+`theorem-grothendieck-lefschetz-trace-formula--7`, via item (3) of `proposition-properties-trace`).
+For the monoidal structure `leftDerivedSheafExtendScalarsMonoidal` of `Ψ = L(S ⊗_R -)` and the
+Koszul braidings `DerivedCategory.braidedCategory'`, the trace over `S` of `Ψ v` is the image of the
+trace over `R` of `v`: `tr(Ψ v) = ε ≫ Ψ(tr v) ≫ η`, for an endomorphism `v` of a dualizable `P` such
+that `Ψ P` is dualizable. -/
 theorem trace_leftDerivedSheafExtendScalars_map
     {P : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
     [HasRightDual P] [HasRightDual (L(sheafExtendScalars (algebraMap R S) X).obj P)]
@@ -129,7 +130,7 @@ theorem trace_leftDerivedSheafExtendScalars_map
 
 /-- On the endomorphisms of the unit, derived scalar extension `Ψ = L(S ⊗_R -)` is the ring map
 `algebraMap R S`: `ε ≫ Ψ (a • 𝟙) ≫ η = algebraMap R S a • 𝟙` (blueprint
-`thm-trf-finite-coefficient-map`). Together with
+`theorem-grothendieck-lefschetz-trace-formula--7`). Together with
 `AlgebraicGeometry.ProEtale.trace_leftDerivedSheafExtendScalars_map`, this says that `ρ(tr_R) =
 tr_S` for traces which are scalars. -/
 lemma ε_comp_leftDerivedSheafExtendScalars_map_smul_id_comp_η (a : R) :

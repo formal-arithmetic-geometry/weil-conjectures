@@ -147,24 +147,7 @@ private theorem stable_page_comparison
   simp only [j, cokernel.mapIso_hom, cokernel.map, cokernel.π_desc, eqToIso.hom]
 
 /-- Stable finite pages are canonical graded quotients of incoming-alpha images.
-Source: Stacks Tags 011R, 011T and 012F, blueprint steps 5--6.
-(blueprint: lem-sp-abutment-finite-page-comparison)
-
-Proof: For p>=0 put R=max(p+3,q-a+2),
-u=p-R+2 and v=q+R-2. The alpha iterate from (0,p+q) to (u,v) is invertible:
-all intervening negative-first-index E terms vanish. Iterating the derived-D
-image construction identifies D_(R-2)(u,v) with the incoming p-fold alpha image
-under this isomorphism. The induced lift is invertible, and its equation follows
-by induction from the given recursive inclusions. The incoming derived alpha
-image corresponds to the next filtration step. The target of the derived f map
-is zero by the D lower bound. Derived-couple exactness consequently makes g a
-cokernel of the next step, inducing psi with the stated quotient equation.
-Transport the two adjacent steps along c, giving cStep and the induced graded
-isomorphism grc. Stabilization at R identifies cycles and boundaries with L;
-the quotient universal property gives stable with its projection equation.
-Finally set Theta=grc.symm followed by psi and stable. These arguments also
-apply when q<a: both quotient objects vanish, and the same universal properties
-supply all maps and equations. -/
+Source: Stacks Tags 011R, 011T and 012F. -/
 theorem abutment_finite_page_comparison
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
     (X : BigradedExactCouple B 0) (a : ℤ)

@@ -14,8 +14,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityS
 # The total left derived functor on the unbounded derived category
 
 Let `C` be an abelian monoidal category which admits functorial flat
-resolutions (`Abelian.HasFunctorialFlatResolution C`). By the K-flat
-machinery migrated from mathlib PR #25848, the inclusion of the K-flat
+resolutions (`Abelian.HasFunctorialFlatResolution C`). The inclusion of the K-flat
 complexes into the homotopy category is a left derivability structure
 `(HomotopyCategory.quasiIso C (.up ℤ)).localizerMorphismKFlat` with
 respect to quasi-isomorphisms.
@@ -39,11 +38,6 @@ on K-flat complexes.
 This is the left analogue, via K-flat resolutions, of
 `CategoryTheory.Functor.rightDerivedFunctor` in
 `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs`.
-It is designed so that the left derivation `Lf^*` of the inverse image
-functor `f^*` on (étale) sheaves of modules can be obtained by
-instantiating `C` and `D` with the relevant sheaf categories and proving
-the single `PreservesKFlatQuasiIso` statement for `f^*`.
-
 -/
 
 @[expose] public section
@@ -65,13 +59,8 @@ variable (F : C ⥤ D) [F.Additive]
 
 /-- An additive functor `F : C ⥤ D` between abelian categories, where `C` is
 monoidal, preserves K-flat quasi-isomorphisms if it sends quasi-isomorphisms
-between K-flat cochain complexes to quasi-isomorphisms.
-
-This is exactly the functor-specific hypothesis needed to left derive `F`
-on the unbounded derived category using the K-flat left derivability
-structure: see `Functor.leftDerivedFunctor`. For the inverse image functor
-on sheaves of modules, this should be proved using the tensor/base-change
-description of the pullback on K-flat complexes. -/
+between K-flat cochain complexes to quasi-isomorphisms. This is the hypothesis needed to left
+derive `F` on the unbounded derived category (see `Functor.leftDerivedFunctor`). -/
 class PreservesKFlatQuasiIso : Prop where
   quasiIso_map {K L : CochainComplex C ℤ}
     (hK : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat K)

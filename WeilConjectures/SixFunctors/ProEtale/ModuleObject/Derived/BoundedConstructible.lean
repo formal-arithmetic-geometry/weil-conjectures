@@ -329,8 +329,8 @@ omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 -- the statement keeps the hypothesis `ℓ ≠ char k` of the setting, unused by the proof
 set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
-/-- Blueprint `lem-sfb-dc-tensor-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
-form a monoidal subcategory of
+/-- Blueprint `proposition-six-operations-dctf--14`: the bounded constructible complexes of
+`ℚ̄_ℓ`-sheaves form a monoidal subcategory of
 `D(Mod_{ℚ̄_ℓ,X})` for the derived tensor product: they contain the unit
 `ℚ̄_ℓ,X` and are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Section 6.8). It
 is false for a general condensed ring: for `Λ = ℤ/4` on a geometric point of characteristic `3`,
