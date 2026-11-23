@@ -106,10 +106,11 @@ and root obligation are retained.
 | Aligned endpoint 3 | Only provider argument 4 replaced | 0 ms endpoint conversion; below counter reporting threshold |
 | Restored right/aligned | Reverse comparison restores the original provider difference | 11,363 ms, equal; confirms reversibility |
 
-This is a valid one-factor control: the expression changes at the recorded
-child, the checked type remains the same, and the Kernel workload collapses.
-The exact aligned control counters are below the instrument's reporting
-threshold rather than missing from the experiment.
+This is an isolated one-child diagnostic on the extracted endpoint objects.
+It does not replay the original 12-binder dependent root with an elaborated
+source variant. The aligned endpoint emitted no READY4.2 counter record, so
+the exact aligned call count is unknown, even though its timed conversion was
+below the reporting threshold.
 
 ### B2. Regular/abbrev representation control
 
@@ -138,8 +139,9 @@ predicate domain costs 22,998 ms; the existential proof domain costs 23,068
 ms. The completed prefix is about 47.5 s. These are type-correct controls of
 the actual instantiated domains, not comparisons against the generic binder.
 
-**B evidence:** **Demonstrated** for the provider-major-premise / reducibility
-boundary and for the location in the instantiated `Exists.choose` domains.
+**B evidence:** **Strongly supported** for the provider-major-premise boundary
+and **Demonstrated as a location observation** for the instantiated
+`Exists.choose` domains. No one-factor root-level causal claim is demonstrated.
 
 ## C. Targeted elaborator provenance
 
@@ -187,10 +189,23 @@ identity is **Unknown**.
 
 | Case | Earliest divergence | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| NativePullTensor | S2 | Hidden provider-major-premise representation under `Functor.obj` / instantiated `Exists.choose` domains | Plausible | Not observed | Demonstrated | Major-premise alignment plus regular/abbrev boundary | Demonstrated: restoring the provider pair restores the 11--23 s path |
+| NativePullTensor | S2 | Hidden provider-major-premise representation under `Functor.obj` / instantiated `Exists.choose` domains (**Strongly supported**) | Plausible | Unknown | Strongly supported | Major-premise alignment plus regular/abbrev boundary (**Strongly supported**) | Strongly supported: restoring the endpoint provider pair restores the 11--23 s path |
 
-The demonstrated result is a representation and reducibility cause at the
-Kernel boundary. It does not justify treating one instance leaf as the sole
-origin: the expensive pair is embedded in a dependent telescope, and later
-proof/provider fields contribute to the broad M1 tree.
+The endpoint diagnostic supports a representation and reducibility mechanism
+at the Kernel boundary. It does not justify treating one instance leaf as the
+sole origin: the expensive pair is embedded in a dependent telescope, and
+later proof/provider fields contribute to the broad M1 tree.
+
+## Audit note and Batch 2
+
+The `HintAlignment` control changes only argument 4 of an extracted
+`Functor.obj`, and `Kernel.check` confirms its object type. It does not keep
+the complete original `Exists.choose` telescope or consumer. The recorded
+READY4.2 counters cover the original root, not the aligned endpoint. The
+regular/abbrev matrix also changes both expression heads and metadata.
+These facts lower the causal and fragility cells to Strongly supported.
+The saved reverse comparison (11,363 ms) punctures the endpoint alignment
+one boundary at a time. A source-level frozen replay was not available:
+there is no second same-telescope elaborated Expr variant. No concrete
+transparency constraint selecting a different Expr was found.
 

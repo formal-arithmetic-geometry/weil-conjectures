@@ -57,7 +57,7 @@ captured.
 
 | Boundary | Current behavior | Puncture | Status |
 | --- | --- | --- | --- |
-| Exists.casesOn motive/witness/final branch interface | The motive and witness are independently checkable only after all theorem binders and lets are instantiated; the final branch type depends on both. | Standalone extraction or branch replacement changes the root obligation and fails validity. | Fragile but effective as a validity boundary; not a cheap conversion boundary |
+| Exists.casesOn motive/witness/final branch interface | The motive and witness are independently checkable only after all theorem binders and lets are instantiated; the final branch type depends on both. | Standalone extraction or branch replacement changes the root obligation and fails validity. | Validity constraint; cheap-boundary status untested |
 | Concrete category/functor/ring data inside the recursor | Historical source identifies DiagonalAb versus sheaf categories, functor composition forms, and ring instance forms, but no exact inner pair is stored. | No type-preserving puncture is available without the original replay closure. | Untested |
 | MatchedGeneric Exists.casesOn/id diagnostic | The surrogate is below timer resolution (0.038 ms) because it has a tiny non-dependent body. | Restoring the original motive/witness context removes the surrogate shortcut; no paired original replay is available in this closure. | Not actually responsible for the historical cost |
 
@@ -65,7 +65,17 @@ captured.
 
 | Case | Earliest divergence | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| PR2122 | Unknown | Plausible source/API representation bundle exposed in a dependent Kernel check | Unknown | Unknown | Plausible | Exists.casesOn dependent telescope | Fragile but effective |
+| PR2122 | Unknown | Unknown; source/API bundle is a hypothesis | Unknown | Unknown | Unknown | No effective cheap boundary established | Untested |
+
+## Audit note and Batch 2
+
+The first divergent Expr path is unavailable, so even Plausible causal level
+is unsupported by section 4. The dependent `Exists.casesOn` telescope is a
+validity constraint, not a measured cheap boundary. The attempted standalone
+branch changes the
+obligation and cannot be used as a puncture or control. No valid second
+elaborated Expr, concrete transparency constraint, or S2/S4 comparison is
+available, so the conditional replays and finalization test remain Unknown.
 
 The Kernel phase and M1 dominance are demonstrated. The source-level
 representation candidates and the connection to the measured inner pair remain

@@ -47,3 +47,13 @@ The three generated theorem constants and their opaque hints are observed after 
 | PR1627 | S4 exact pair; S0 direct API choice (**Plausible** timing) | Direct generated-field API (**Strongly supported**) | **Not observed** | **Unknown** | **Strongly supported** M1/M2 descendants | Generic `liftOfStr` (**Strongly supported**) | **Strongly supported** fragile |
 
 The `Demonstrated` level is withheld: the generic helper changes the generated root, and no valid one-field control changes the exact divergence and READY4.2 workload while preserving that root.
+
+## Audit note and Batch 2
+
+The generated proof fields trigger the conditional finalization audit, but
+`ccmoa/PreFinalizationAttempt.lean` yielded no S2 law Expr before its bounded
+stop. The stored nine/eight-binder asymmetry is an S4 fact, not evidence that
+finalization created the `homMk`/`id` split. The direct/generic restoration
+punctures the construction boundary, while changing the whole generated law
+root; no one-field puncture is available. No selected transparency constraint
+with a changed final Expr was identified.
