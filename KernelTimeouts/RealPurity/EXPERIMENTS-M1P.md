@@ -13,9 +13,10 @@ missing-import problem in the READY4.1 `n5` setup. READY4.2 revision is
 | M1 time share | 62.315% [62.170--64.097%] |
 | M2 / Matched median time shares | 36.409% / 1.273% |
 
-The root count is 30,068 below the READY4.1 `n5` run because this required
-`m1p` import closure is a different, fully built revision; no old count is
-substituted. All aggregate labels and transitions cover the analyzed root.
+The root count is 30,068 below the RealPushforward READY4.1 `n5` run;
+RealPurity did not run under READY4.1. This required `m1p` import closure
+is a different, fully built revision; no other root's count is substituted.
+All aggregate labels and transitions cover the analyzed root.
 
 ## A2/A3
 
