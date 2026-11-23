@@ -75,10 +75,8 @@ theorem cohomology_affineLine_unit [Finite Λ] (p : ℕ) [CharP Ω p] [Invertibl
         IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj
           ((DerivedCategory.singleFunctor _ 0).obj (𝟙_ _))) := by
   -- `H^0` is `Λ` as `𝔸¹_Ω` is connected; `H^q = 0` for `q ≥ 2` by the cohomological dimension
-  -- of an affine curve; and
-  -- `H^1 = 0` by the Kummer sequence, the units
-  -- of `Ω[x]` being divisible and `Pic(𝔸¹_Ω) = 0`
-  --. Here these facts enter through the
+  -- of an affine curve; and `H^1 = 0` by the Kummer sequence, the units of `Ω[x]` being
+  -- divisible and `Pic(𝔸¹_Ω) = 0`. Here these facts enter through the
   -- acyclicity `Rp_* Λ ≅ Λ` of the affine line of the purity chapter
   -- (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_affineLine`).
   have := HasInvertibleExponent.spec_of_charP Λ (Ω := Ω) p

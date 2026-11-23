@@ -122,9 +122,8 @@ private theorem finiteSquare (n : ℕ)
 
 /-- The finite scalar comparison can be chosen with the prescribed quotient normalization.
 
-STATEMENT-DISPUTED (old version): the raw record permits independently changing
-`Q.finite`, so it cannot assert this equality for every such choice.  The corrected
-statement chooses that field and retains all the other fields of Q. -/
+The `finite` field of `Q` is replaced by a chosen comparison `φ`; all other fields of `Q` are
+kept. -/
 theorem podReindexingDerivedCoreData_finiteModel
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

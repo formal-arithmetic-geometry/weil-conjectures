@@ -119,8 +119,8 @@ private theorem reduction_square_transport
 
 /--
 The strict pure-tensor calculation descends through the two K-flat localizations: if the
-canonical normalized system comparison satisfies the sectionwise pure-tensor formula, then the
-whole-system square after the reduction and system tensor maps commutes.
+tensor chain of the supplied ordinary comparison `c` satisfies the sectionwise pure-tensor
+formula, then the whole-system square after the reduction and system tensor maps commutes.
 Source: Stacks 07A4 and 0941.
 -/
 theorem podReindexing_reduction_tensor_square_descent

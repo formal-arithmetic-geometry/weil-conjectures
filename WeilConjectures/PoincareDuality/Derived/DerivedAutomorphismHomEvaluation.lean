@@ -215,8 +215,8 @@ attribute [-instance] isoReductionAbSheafify isoReductionAbBijective isoReductio
 isomorphism of schemes `g : X ⟶ Y`, at each of the four coefficient stages (finite, integral,
 rational and the common stage over `Ω`) there is a natural isomorphism between internal Hom
 followed by inverse image and inverse image of both arguments followed by internal Hom, whose
-components are the evaluation-defined comparisons. These comparisons are compatible with
-evaluation, transposition, shifts and composition, the system-level comparisons are
+components are the evaluation-defined comparisons. The integral, rational and common-stage
+comparisons are compatible with evaluation and transposition, the system-level comparisons are
 isomorphisms, and they are compatible with coefficient evaluation.
 Source: Stacks 0GMX.
 -/

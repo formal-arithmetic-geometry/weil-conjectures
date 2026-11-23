@@ -19,7 +19,7 @@ the constant sheaf on `U₀`. The underlying sheaf of the direct image `j_*M` is
 the constant sheaf extending uniquely across the boundary, so `j_*M` is a constant twist of the
 constant sheaf of the line. Hence `H_c^1(𝔸¹, j_*M) = 0`, since `R Γ_c(𝔸¹, ℚ̄_ℓ) = ℚ̄_ℓ(-1)[-2]`.
 This is the geometrically constant case of the weight bound on the affine line
-(`â¦LisseOnDenseOpen.hasWeightsAtMost_compactlySupportedCohomology_directImage`).
+(`WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_compactlySupportedCohomology_directImage`).
 
 ## Main statements
 

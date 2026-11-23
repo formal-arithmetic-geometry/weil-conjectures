@@ -90,7 +90,7 @@ import all WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTower
 
 /-! # Resolving models for finite reduction and strict tower pullback
 
-Source: Stacks Project, derived.tex Tag 06XN, , left-derived assertion; sites-cohomology.tex Tags
+Source: Stacks Project, derived.tex Tag 06XN (left derived functors); sites-cohomology.tex Tags
 06YS, 06YT, 06YP and 07A2.
 
 The natural index n represents the positive exponent n+1. All localizations below

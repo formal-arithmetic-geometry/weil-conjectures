@@ -12,10 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 /-!
 # Complexes with finite `ℓ`-group monodromy
 
-The local calculation of the trace formula
-
-is carried out for "a bounded complex `E` of `A`-modules with finite locally constant cohomology
-whose monodromy factors through a finite `ℓ`-group".
+The local calculation of the trace formula is carried out for "a bounded complex `E` of
+`A`-modules with finite locally constant cohomology whose monodromy factors
+through a finite `ℓ`-group".
 
 ## Main definitions
 

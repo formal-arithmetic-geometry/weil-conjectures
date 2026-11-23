@@ -114,7 +114,7 @@ private theorem scalar_cocycle_identity (K : Type u) [Field K]
 
 /-- A prescribed continuous two-cocycle factors through a finite group quotient: there are a
 finite group structure on `Fin n`, a locally constant homomorphism `q` from the absolute Galois
-group onto it and a function `d` on pairs with `z(g, h) = d(q g, q h)`, satisfying the cocycle
+group to it and a function `d` on pairs with `z(g, h) = d(q g, q h)`, satisfying the cocycle
 identity `d(q g, q h * j) · g(d(q h, j)) = d(q g, q h) · d(q (g h), j)`.
 Source: Stacks Project, Theorem 03R7 (surjectivity) and Section 0DVG. -/
 theorem exists_finite_galois_cocycle_data (K : Type u) [Field K]

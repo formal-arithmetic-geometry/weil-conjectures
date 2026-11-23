@@ -52,9 +52,7 @@ namespace Representation
 variable {k G V V' : Type*} [Field k] [Monoid G]
   [AddCommGroup V] [Module k V] [AddCommGroup V'] [Module k V']
 
-/-- Operations, constituents and coinvariants.
-
-`σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
+/-- `σ.IsConstituent ρ` says that `σ` is a *constituent* of `ρ`: it is irreducible and isomorphic
 to a subquotient of `ρ`. By Jordan-Hölder these are exactly the irreducible successive
 quotients of a composition series of `ρ`. -/
 def IsConstituent (σ : Representation k G V') (ρ : Representation k G V) : Prop :=
