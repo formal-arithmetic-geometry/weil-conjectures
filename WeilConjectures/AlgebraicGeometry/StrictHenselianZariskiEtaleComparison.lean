@@ -18,8 +18,22 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCanonicalLeray
 /-!
 # Étale and Zariski cohomology over strictly henselian schemes
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma 09AX
-(blueprint: lem-weil-pbc-gabber-strict-henselian-zariski-comparison)
+The comparison from Zariski to étale cohomology is an isomorphism when all local rings of the
+scheme are strictly henselian.
+
+## Implementation details
+
+The functor `i` is the inclusion of the small Zariski site into the small étale site. Its
+continuous direct image is `ε_* F`; `c` is the pullback followed by its counit, and is the
+identity in degree zero. `hi_inclusion` identifies the underlying open subschemes. The three
+clauses of `hfstar` are the defining characterization of cohomology pullback in
+`CategoryTheory.siteCohomology_pullback`: naturality, compatibility with the connecting
+homomorphisms of short exact sequences, and evaluation of the adjunction unit in degree zero.
+Thus `fstar` is the canonical pullback, and `hc` fixes the comparison itself.
+
+## References
+
+* [Stacks, Tag 09AX]
 -/
 
 @[expose] public section
@@ -30,30 +44,7 @@ open AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
 /-- The comparison from Zariski to étale cohomology is an isomorphism when all
-local rings of the scheme are strictly henselian.
-Source: literature/stacks-project/etale-cohomology.tex, Lemma 09AX
-(blueprint: lem-weil-pbc-gabber-strict-henselian-zariski-comparison).
-The functor `i` is the inclusion of the small Zariski site into the small étale
-site. Its continuous direct image is `ε_* F`; `c` is the pullback followed by
-its counit, and is the identity in degree zero.
-`hi_inclusion` identifies the underlying open subschemes. The three clauses of `hfstar`
-are the defining characterization of cohomology pullback in
-`CategoryTheory.siteCohomology_pullback`: naturality, compatibility with the connecting
-homomorphisms of short exact sequences, and evaluation of the adjunction unit in degree
-zero. Thus `fstar` is the canonical pullback, and `hc` fixes the comparison itself.
-
-Proof:
-1. The inclusion defines the Zariski-to-étale morphism of sites. The defining
-   characterization of pullback and `hc` identify `c` with its Leray edge map.
-2. Higher direct images are the sheafifications of the presheaves
-   `U ↦ H^q(U, F)` by the higher-direct-image sheafification theorem.
-3. The colimit over Zariski neighborhoods of a point is cohomology over the spectrum
-   of its local ring. Strict henselian étale acyclicity makes it zero in positive
-   degree, so each positive-degree class restricts to zero on some neighborhood.
-4. Hence the morphism from the cohomology presheaf to zero is locally bijective.
-   Sheafification makes it an isomorphism, and all positive higher direct images vanish.
-5. Degenerate Leray makes the canonical edge map invertible in every degree.
-   Substitute the defining equality `hc` to obtain invertibility of `c`. -/
+local rings of the scheme are strictly henselian. -/
 theorem strictHenselian_zariski_etale_comparison
     {X : Scheme.{u + 1}}
     (hX : ∀ x : X, IsStrictlyHenselianLocalRing (X.presheaf.stalk x))

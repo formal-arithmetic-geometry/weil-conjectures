@@ -28,9 +28,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Tensor formula for the right adjoint of a perfect proper immersion
 
-Source: literature/stacks-project/duality.tex, Tag 0A9U
-(projection formula for a perfect proper morphism and its right adjoint)
-(blueprint: lem-sc-smooth-proper-diagonal-tensor-formula).
+## References
+
+* [Stacks, Tag 0A9U]
 -/
 
 @[expose] public section
@@ -47,26 +47,6 @@ open CategoryTheory.ShiftSaturated
 /-- For a proper perfect closed immersion, the right adjoint of derived direct image
 satisfies the projection formula.  The displayed morphism is the mate, under the
 specified adjunction, of the projection-formula morphism.
-Source: Stacks Project, Tag 0A9U.
-(blueprint: lem-sc-smooth-proper-diagonal-tensor-formula).
-
-Proof (Tag 0A9U, following the five node steps):
-1. The closed immersion is proper, finite type and perfect: the stalks of i_*O_Z have
-   finite free resolutions by local perfection. By lem-sc-smooth-proper-tensor-direct-sums
-   (Tag 0A9R), c commutes with arbitrary set-indexed direct sums.
-2. Direct sums exist by lem-pc-derived-qcoh-direct-sums. Use the predicate that the
-   natural comparison is invertible at every integer translate. This predicate
-   is closed under isomorphisms, shifts, retracts, coproducts and cones. For cones,
-   the five-term argument uses independently the components at A, B, A[1] and
-   B[1], transported by the two functors' exact shift structures.
-3. Perfect objects generate this localizing subcategory by
-   lem-pc-derived-qcoh-perfect-generation. The adjoint exists by
-   lem-pc-noetherian-derived-direct-image-right-adjoint.
-4. The comparison is invertible on perfect K by lem-sc-smooth-proper-tensor-perfect-case
-   (Tag 0A9T), with the same counit-pinned projection comparison.
-5. The localizing-subcategory argument of Tag 0A9U gives invertibility on every
-   translate of every K. Shift zero gives the original counit-pinned conclusion,
-   with the same supplied monoidal structure and both specified adjunctions.
 -/
 theorem smooth_proper_diagonal_tensor_formula
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (i : Z ⟶ Y)

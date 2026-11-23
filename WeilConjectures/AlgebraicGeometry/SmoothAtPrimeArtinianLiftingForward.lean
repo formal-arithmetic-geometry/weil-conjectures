@@ -12,6 +12,15 @@ public import Mathlib.RingTheory.Length
 public import Mathlib.RingTheory.LocalRing.Basic
 import Mathlib.RingTheory.Artinian.Ring
 
+/-!
+# Forward Artinian lifting criterion
+
+## References
+
+* [Stacks, Tag 02HT]
+* [Stacks, Tag 02HS]
+-/
+
 @[expose] public section
 
 universe u v
@@ -20,27 +29,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Algebra, Lemma 02HT, (1) implies (3); Definition 02HS.
-(blueprint: lem-weil-pbc-smooth-at-prime-artinian-lifting-forward).
-
-Proof in words, with step numbers inherited from the parent plan:
-1. Principal opens form a basis of Spec A (def-weil-affine-spectrum). The localization
-   map identifies Spec A_g with D(g) (lem-weil-pbc-principal-localization-open-immersion,
-   def-weil-open-immersion). Smoothness is unchanged by that isomorphism and by restriction
-   (lem-weil-pbc-smooth-restrict-open-subschemes,
-   lem-weil-pbc-morphism-factors-through-open-subscheme). Thus an open smooth neighbourhood
-   exists iff some g outside q makes R -> A_g smooth
-   (lem-weil-pbc-smooth-ring-map-iff-smooth-affine, def-weil-pbc-smooth-ring-map).
-2. The kernel I of the surjection B' -> B is proper because B is nonzero. It lies
-   in the maximal ideal of B'. The Jacobson radical of an Artinian ring is nilpotent;
-   in a local ring it is the maximal ideal, so I is nilpotent. This argument works for
-   every such surjection, without needing the length-one assumption.
-3. Given the smooth A_g and a diagram, a(g) is a unit because its preimage maximal
-   ideal is q. Factor a through A_g. Regard the resulting map and B' -> B as maps
-   of R-algebras using the compatibility in the diagram. Smoothness implies formal
-   smoothness, so Mathlib's `Algebra.FormallySmooth.liftOfSurjective` lifts the map
-   A_g -> B through the nilpotent kernel. Compose with A -> A_g to obtain a'; the
-   lifting identity and the algebra-homomorphism identity give both required equations.
+/-- If a finite type ring map over a Noetherian ring is smooth on an open neighbourhood of `q`,
+then every compatible diagram at `q` lifts along every surjection of Artinian local rings
+whose kernel has length one.
 -/
 theorem smooth_on_open_artinian_lifting_forward
     {R A : Type u} [CommRing R] [CommRing A] [IsNoetherianRing R]

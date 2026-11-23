@@ -13,8 +13,10 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 /-!
 # Sections over a strictly henselian local open and geometric stalks
 
-Source: Stacks Project, Lemma 59.55.1 (Tag 03QO), applied inside an open subscheme
-(blueprint: lem-weil-pbc-sets-strictly-henselian-open-sections-stalk).
+## References
+
+* [Stacks, Tag 03QO]
+* [Stacks, Tag 092Z]
 -/
 
 @[expose] public section
@@ -27,10 +29,8 @@ namespace AlgebraicGeometry.Scheme
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The pointed form of the section construction in Stacks Tag 03QO. Shrink the
-marked point to an affine Spec B, localize B at its marked prime q, and use Olivier's
-theorem (Tag 092Z) to identify B_q with R. The geometric point's ring map extends
-uniquely to B_q, so the resulting section passes through that geometric point. -/
+/-- The pointed form of the section construction: an étale scheme over a strictly henselian
+local ring, with a geometric point over the closed point, has a section through that point. -/
 private theorem exists_pointed_section_spec
     {R : Type u} [CommRing R] [IsStrictlyHenselianLocalRing R]
     {Ω : Type u} [Field Ω] {X : Scheme.{u}}
@@ -114,7 +114,7 @@ private theorem exists_pointed_section_spec
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A pointed section over the open U, obtained by pulling back to U and applying
-`exists_pointed_section_spec`. This is the geometric step of Stacks Tag 03QO. -/
+`exists_pointed_section_spec`. -/
 private theorem strictlyHenselianOpen_pointedSection
     {T : Scheme.{u}} (U : T.Opens) {R : Type u} [CommRing R] [IsLocalRing R]
     (hR : IsStrictlyHenselianLocalRing R) (e : U.toScheme ≅ Spec (.of R))
@@ -154,29 +154,7 @@ private theorem strictlyHenselianOpen_pointedSection
 
 
 /-- For a sheaf of sets on `T`, the germ map from sections over a strictly henselian
-local open `U` to the geometric stalk at its closed point is bijective.
-Source: Stacks Project, Lemma 59.55.1 (Tag 03QO)
-(blueprint: lem-weil-pbc-sets-strictly-henselian-open-sections-stalk).
-
-Proof:
-1. Represent a germ over a pointed etale neighbourhood `V`. Shrink around its marked
-point to an affine open contained in the inverse image of `U`, using
-`lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`. This gives an etale algebra
-`R → A` and a prime above the maximal ideal of `R`.
-2. The residue extension is finite separable by
-`lem-weil-pbc-etale-algebra-residue-field-separable`, and is trivial by
-`lem-pc-sepclosed-finite-sep-trivial`. The root-lifting criterion
-`lem-weil-pbc-henselian-local-root-lifting` and the retraction lemma
-`lem-weil-pbc-root-lifting-etale-retraction` give an algebra retraction `A → R`.
-Its spectrum yields a section `U → V` over `T` through the marked geometric point:
-the residue-field maps agree because the retraction inverts the residue isomorphism.
-3. Pointed etale neighbourhoods are cofiltered by
-`definition-torsion-sheaves--3`. The full subcategory consisting
-of `(U, t)` has only its identity endomorphism, since `U.ι` is a monomorphism, and
-maps to every neighbourhood by step 2. Apply
-`lem-weil-pbc-colimit-initial-full-subcategory` and
-`definition-torsion-sheaves--3` to compute the stalk as `G(U)`.
-The colimit coprojection is precisely the germ map written below. -/
+local open `U` to the geometric stalk at its closed point is bijective. -/
 theorem strictlyHenselianOpen_toPresheafFiber_bijective
     {T : Scheme.{u}} (U : T.Opens) {R : Type u} [CommRing R] [IsLocalRing R]
     (hR : IsStrictlyHenselianLocalRing R) (e : U.toScheme ≅ Spec (.of R))

@@ -17,8 +17,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Supported affine overlap data
 
-Source: Stacks Project, Tag 09IM, the construction on the affine member before gluing.
-(blueprint: lem-sc-supported-affine-overlap-map).
+## References
+
+* [Stacks, Tag 09IM]
+* [Stacks, Tag 08EK]
+* [Stacks, Tag 08EH]
 -/
 
 @[expose] public section
@@ -55,26 +58,7 @@ private theorem map_lift_transport
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Construct the affine member and its compatible overlap map; no object on the union
-is asserted. Source: Stacks Project, Tag 09IM, first two-open paragraph, Tags 08EK and 08EH.
-(blueprint: lem-sc-supported-affine-overlap-map).
-
-Proof: Restrict R to W and transport its strictly perfect neighbourhood models through
-Modules.overEquiv, intersecting each neighbourhood with W. The stabilized restriction A
-is perfect, since biproducts and shifts preserve bounded finite-free retract models.
-Exact restriction and its stalk comparison show that A is supported on T intersect W.
-The overlap W intersect V is compact by quasi-separatedness. On V the pullback of T is
-closed, and its complement is compact: intersect the compact open V with the compact
-open complement of T and transport through the open embedding. Apply the affine supported
-extension theorem to R restricted to this overlap. Identify its restriction with A on the
-overlap using the exact functors' biproduct and shift comparisons. Compose the inverse of
-this identification with the restricted first-projection map a. Restriction of E to V
-has quasi-coherent cohomology by the open restriction criterion. Apply affine perfect map
-lifting to the overlap map: its augmented source B is perfect and supported on T intersect
-V, and its augmentation is invertible on the overlap. Compose this inverse augmentation
-with the previous identification to get c:A|overlap ≅ B|overlap. The lifting identity gives
-the stated compatibility of a and b, with the canonical iterated restriction comparisons.
-Empty W, V, the overlap, or T require no separate choices; the same zero restrictions and
-supported affine extension and lifting theorems apply. -/
+is asserted. -/
 theorem exists_supported_affine_overlap_map
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V)

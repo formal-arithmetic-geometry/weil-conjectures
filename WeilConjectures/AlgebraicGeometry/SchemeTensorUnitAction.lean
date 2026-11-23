@@ -9,8 +9,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
 
 /-! # Tensor action on a complex through the single unit
-Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: def-pc-scheme-tensor-unit-action).
+
+## Implementation details
+
+The associator, tensor map and right unitor used here are the standard constructed complex
+maps. Keeping the composite `schemeTensorUnitAction` behind a definition avoids re-elaborating
+its large coproduct instance terms in every evaluation statement.
+
+## References
+
+* [Stacks, Tags 08DJ, 08DM, 08DQ]
 -/
 
 @[expose] public section
@@ -25,12 +33,7 @@ namespace AlgebraicGeometry
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- Tensor an actual chain evaluation into the single unit with F, then act on F.
-Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ.
-(blueprint: def-pc-scheme-tensor-unit-action).
-The associator, tensor map and right unitor are the standard constructed complex
-maps. Keeping this composite behind a definition avoids re-elaborating its large
-coproduct instance terms in every evaluation statement. -/
+/-- Tensor an actual chain evaluation into the single unit with F, then act on F. -/
 @[irreducible]
 def schemeTensorUnitAction (Y : Scheme.{u})
     (F V P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)

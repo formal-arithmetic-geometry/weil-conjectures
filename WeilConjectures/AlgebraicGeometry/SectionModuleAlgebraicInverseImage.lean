@@ -16,6 +16,10 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Algebraic presentation of pro-étale internal inverse image
+
+## References
+
+* [Stacks, Tags 00YV, 03D2]
 -/
 
 @[expose] public section
@@ -922,36 +926,7 @@ private theorem sectionRingPullback_nat_graph {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 
 /-- The internal inverse image has the algebraic operations transported by the
-inverse image of set sheaves. Source: Stacks Project, Tags 00YV and 03D2.
-Proof: express both set and abelian inverse image as sheafification of the
-left Kan extension along base change. The comma categories are filtered, and
-the abelian forgetful functor preserves their colimits and sheafification.
-Compose the resulting comparison with the inverse of rho and the equal-universe
-ULift isomorphisms to obtain the ring comparison. Use the section-equivalence
-counit to obtain the natural module comparison. These constructions and their
-compatibility with the adjunction unit are proved by the private helpers above.
-The helpers pullback_add_graph and pullback_zero_graph also prove preservation
-of addition and zero before coefficient and module-equivalence transport.
-The helpers pushforward_section_mul, pushforward_section_one and
-pushforward_section_smul identify the pointwise algebraic operations under
-pushforward. The concrete ring homomorphism inverseImageSectionRingUnit
-combines the monoidal adjunction unit with the inverse coefficient map.
-The lemma sectionRingPullbackIso_unit identifies it with the transpose of the
-underlying ring comparison. The helpers sectionRingPullback_add_graph,
-sectionRingPullback_mul_graph and sectionRingPullback_nat_graph prove the ring
-operation graph equations, with zero and one as the natural-constant cases.
-For each operation graph, form its two maps from the inverse image of the test
-sheaf to the underlying target sheaf. Transpose through the set-sheaf adjunction.
-Unit compatibility identifies the transposed maps with the source maps followed
-by the abelian unit and the inverse coefficient isomorphism. The additive unit
-preserves addition and zero. Its monoid-homomorphism property preserves
-multiplication and one, using the pointwise tensor and unit formulas for
-pushforward. The lifted module-adjunction unit preserves scalar multiplication;
-compose with the linear section-equivalence counit. Thus the source graph
-identity implies equality of the transposes and hence of the target maps.
-Evaluating those maps gives all seven graph fields. Choose the constructed
-module functor itself, with the identity comparison isomorphism.
-(auxiliary; not a blueprint node) -/
+inverse image of set sheaves. -/
 theorem exists_sectionModuleAlgebraicInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]

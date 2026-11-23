@@ -15,8 +15,6 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Componentwise conjugation identifies system arrows with families compatible with `d`.
-Source: Stacks Project, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-hom-transport-core).
 -/
 theorem thickeningSystem_hom_transport_d
     {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}

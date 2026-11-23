@@ -202,11 +202,9 @@ theorem _root_.FrobeniusModule.exists_linearEquiv_of_equiv_tateTwist_neg_one {k 
   rw [map_smul, FrobeniusModule.frobeniusEnd_apply, hf, neg_neg, zpow_one]
   rfl
 
-variable [IsAffine C]
+/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on a smooth curve.
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on an affine curve.
-
-Let `C₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `C₀` with
+Let `C₀` be a smooth geometrically connected curve and `ℱ` a lisse Weil sheaf on `C₀` with
 Weil fundamental representation `(V, ρ)` (the lisse sheaf–representation equivalence
 `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`). Then
 `H_c² (C, ℱ) ≅ V_{π₁(C)} (-1)` Frobenius-equivariantly: the geometric Frobenius on `H_c²`

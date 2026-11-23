@@ -32,8 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The spectrum of the residue field of a point with finite residue field, over a finite base
-field `k`, is finite and étale over `k`: `κ(x)` is a finite, hence separable, extension of the
-perfect field `k`. -/
+field `k`, is finite and étale over `k`. -/
 theorem isFinite_and_etale_specMap_residueFieldAlgebraMap {k : Type u} [Field k] [Finite k]
     {X : Scheme.{u}} (f : X.Hom (Spec (.of k))) {x : X} (hx : x ∈ X.finitePoints) :
     IsFinite (Spec.map (CommRingCat.ofHom (f.residueFieldAlgebraMap x))) ∧
@@ -49,8 +48,7 @@ theorem isFinite_and_etale_specMap_residueFieldAlgebraMap {k : Type u} [Field k]
     Algebra.FinitePresentation.of_finiteType.1 inferInstance
   exact ⟨inferInstance, inferInstance⟩
 
-/-- The closed point of the spectrum of a finite field has finite residue field: the residue
-field embeds into the field. -/
+/-- The closed point of the spectrum of a finite field has finite residue field. -/
 theorem closedPoint_mem_finitePoints {K : Type u} [Field K] [Finite K] :
     IsLocalRing.closedPoint K ∈ (Spec (CommRingCat.of K)).finitePoints := by
   obtain ⟨ι, -⟩ := Scheme.exists_eq_spec_map_comp_fromSpecResidueField (𝟙 (Spec (.of K))) _ rfl

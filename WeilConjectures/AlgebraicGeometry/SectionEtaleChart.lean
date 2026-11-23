@@ -33,9 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Blueprint `prose-09-12` (2), the coordinates.
-
-**Étale charts along a closed section.** Let `g : V ⟶ B` be smooth of relative dimension `c`
+/-- **Étale charts along a closed section.** Let `g : V ⟶ B` be smooth of relative dimension `c`
 with a closed section `s`. Every point `b` of `B` has an affine open neighbourhood `W`, and
 `s(b)` an affine open neighbourhood `U ⊆ g⁻¹ W` with `s⁻¹ U = W`, together with functions
 `f₁, …, f_c` on `U` generating the ideal of `s(B) ∩ U` and forming a weakly regular sequence,

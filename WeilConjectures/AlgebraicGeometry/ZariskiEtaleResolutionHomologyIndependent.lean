@@ -13,7 +13,14 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
-/-! # Resolution comparison bridge -/
+/-! # Resolution comparison bridge
+
+## References
+
+* [Stacks, Tag 01FB]
+* [Stacks, Tag 013P]
+* [Stacks, Tag 015B]
+-/
 
 @[expose] public section
 
@@ -22,16 +29,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open CategoryTheory.Functor.sheafPullbackConstruction
 
-/-- Comparisons with equal augmentations induce equal maps of section homology.
-
-Proof: exactness of inverse image makes its right adjoint preserve injectives.
-The difference of a and b vanishes on the augmentation of R. Inductively factor
-this difference through successive differentials of R and extend to the injective
-terms of the pushed complex. This constructs a null homotopy. Evaluation is additive,
-so preserves this homotopy, and homotopic maps induce equal homology maps.
-
-Source: Stacks Project, Tags 01FB, 013P and 015B.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-homology-independent) -/
+/-- Comparisons with equal augmentations induce equal maps of section homology. -/
 theorem zariski_etale_resolution_homology_independent
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

@@ -25,14 +25,10 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-!
 # Canonical localization comparisons for the projection mate
 
-Source: Stacks Project, Cohomology on Sites, Tags 08FI, 0FN5, 07A4 and 0B56;
-Modules on Sites, Tag 04J0 (auxiliary; not a blueprint node).
-
 All model functors below carry natural representative comparisons. Ordinary operations
 are Mathlib's module pullback and pushforward for the specified ring map. Tensor
 comparisons are normalized on pure tensors and signed total complexes; derived
-adjunctions are normalized by the ordinary counit on K-injectives. No operation or
-projection arrow is selected from an unconstrained existence statement.
+adjunctions are normalized by the ordinary counit on K-injectives.
 
 ## Main definitions
 
@@ -40,9 +36,23 @@ projection arrow is selected from an unconstrained existence statement.
 * `ProjectionRestriction.TensorModel`: derived tensor normalized on resolving pairs.
 * `ProjectionRestriction.Local`: canonical slice comparisons and their normalizations.
 
+## Implementation details
+
 The assembly theorem `ringedProjectionRestriction` is in
-`Sheaf.Paper.RingedProjectionRestriction`. This module contains its unchanged data
+`Sheaf.Paper.RingedProjectionRestriction`. This module contains its data
 interfaces so the construction lemmas can be imported without a cycle.
+
+## References
+
+* [Stacks, Tag 08FI]
+* [Stacks, Tag 0FN5]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0B56]
+* [Stacks, Tag 04J0]
+* [Stacks, Tag 04IX]
+* [Stacks, Tag 05RU]
+* [Stacks, Tag 0735]
+* [Stacks, Tag 07A5]
 -/
 
 @[expose] public noncomputable section
@@ -64,30 +74,25 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
-/-- Modules with the original coefficient universe.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+/-- Modules with the original coefficient universe. -/
 abbrev Mod (R : Sheaf J CommRingCat.{u + 1}) :=
   SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
-/-- The standard localization size for these module categories.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+/-- The standard localization size for these module categories. -/
 instance derived (R : Sheaf J CommRingCat.{u + 1}) : HasDerivedCategory (Mod R) :=
   HasDerivedCategory.standard _
 
-/-- Standard localization on the slice site.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+/-- Standard localization on the slice site. -/
 instance derivedOver (R : Sheaf J CommRingCat.{u + 1}) (V : C) :
     HasDerivedCategory (Mod (R.over V)) := HasDerivedCategory.standard _
 
-/-- The same standard localization for the raw slice-ring presentation.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+/-- The same standard localization for the raw slice-ring presentation. -/
 instance derivedOverModules (R : Sheaf J RingCat.{u + 1}) (V : C) :
     HasDerivedCategory (SheafOfModules.{u + 1} (R.over V)) := HasDerivedCategory.standard _
 
 /-- Proof data for the actual module operations associated to a continuous ringed site map.
 The only ring map is the displayed coefficient map. The adjunction, exact pullback and
-K-injective direct image are then fixed constructions.
-Source: Stacks 04J0, 0735, 07A5 (auxiliary; not a blueprint node). -/
+K-injective direct image are then fixed constructions. -/
 structure Operation (F : C ⥤ D) (R : Sheaf J CommRingCat.{u + 1})
     (S : Sheaf K CommRingCat.{u + 1}) where
   [continuous : F.IsContinuous J K]
