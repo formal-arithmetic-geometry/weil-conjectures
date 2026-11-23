@@ -34,8 +34,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Derived Hom from a locally finite free module on a ringed site
 
-Source: Stacks Project, Tag 08JJ, lemma-dual-perfect-complex, specialized to P[0]
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom).
+Source: Stacks Project, Tag 08JJ, specialized to P[0].
 
 The degree-zero formulation below is applied to every shifted bounded-below complex.
 Thus H⁰ RΓ(P∨ ⊗ K[n]) is Hⁿ RΓ(P∨ ⊗ K), including negative n. The cycle normalization
@@ -56,8 +55,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace CategoryTheory
 
-/-- Evaluation associated to a monoidal pairing. Source: Stacks, Tag 08JJ
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom).
+/-- Evaluation associated to a monoidal pairing. Source: Stacks, Tag 08JJ.
 Factoring this formula through the ambient monoidal category keeps specialization to
 sheaves from repeatedly expanding the localized associators and unitors. -/
 noncomputable def locallyFreePairingEvaluate
@@ -127,49 +125,40 @@ private def genericGood (P : A) : Prop :=
     PreservesFiniteLimits (tensorLeft P) ∧ PreservesFiniteColimits (tensorLeft P)
 
 /-- The abstract categorical model of this construction, specialized to sheaves below.
-Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA. -/
 noncomputable def genericDualTensor (P : A) : A ⥤ A :=
   tensorLeft ((ihom P).obj (𝟙_ A))
 
-/-- Additivity of the abstract model functor.
-Source: Mathlib additive tensor functors and preadditive coyoneda
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+/-- Additivity of the abstract model functor. -/
 instance genericDualTensor_additive (P : A) : (genericDualTensor P).Additive := by
   dsimp [genericDualTensor]
   infer_instance
 
 /-- The abstract categorical model of this construction, specialized to sheaves below.
-Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA. -/
 noncomputable def genericDualTensorMap (P P' M N : A) (p : P' ⟶ P) (f : M ⟶ N) :
     (genericDualTensor P).obj M ⟶ (genericDualTensor P').obj N :=
   tensorHom ((MonoidalClosed.pre p).app (𝟙_ A)) f
 
 /-- The abstract categorical model of this construction, specialized to sheaves below.
-Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA. -/
 noncomputable def genericSections : A ⥤ AddCommGrpCat.{u} :=
   preadditiveCoyoneda.obj (op (𝟙_ A))
 
-/-- Additivity of the abstract model functor.
-Source: Mathlib additive tensor functors and preadditive coyoneda
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+/-- Additivity of the abstract model functor. -/
 instance genericSections_additive : (genericSections (A := A)).Additive := by
   dsimp [genericSections]
   infer_instance
 
 /-- The abstract categorical model of this construction, specialized to sheaves below.
-Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA. -/
 noncomputable abbrev genericTensorSections (P : A) :
     CochainComplex A ℤ ⥤ CochainComplex AddCommGrpCat.{u} ℤ :=
   (genericDualTensor P).mapHomologicalComplex (.up ℤ) ⋙
     genericSections.mapHomologicalComplex (.up ℤ)
 
 /-- The abstract categorical model of this construction, specialized to sheaves below.
-Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA
-(blueprint: lem-weil-pbc-ringed-site-locally-free-derived-hom). -/
+Source: Stacks Project, Tags 08JJ, 0A8Z and 08JA. -/
 noncomputable def genericEvaluate (P N : A)
     (z : 𝟙_ A ⟶ (genericDualTensor P).obj N) : P ⟶ N :=
   locallyFreePairingEvaluate ((ihom.ev P).app (𝟙_ A)) z

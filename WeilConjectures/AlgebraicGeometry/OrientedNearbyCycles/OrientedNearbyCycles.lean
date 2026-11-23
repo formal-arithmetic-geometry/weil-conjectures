@@ -40,13 +40,13 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Limits.Preserves.Creates.Finite
 
 /-!
-# Oriented nearby cycles and their canonical comparison maps
+# The vanishing site of a morphism of schemes
 
 ## Main definitions
 
-* `VanishingTopos`, `p₁`, `p₂`, `orientation`, `psi`: the concrete oriented construction.
-* `nearbyCycles`, `baseChange`, `IsPsiGood`: unbounded nearby cycles and base change.
-* `laxTensor`, `externalEtale`, `externalVanishing`, `kunneth`: the specified tensor maps.
+* `EtaleSite`, `etaleMorphism`: the transported small étale sites and their base-change morphisms.
+* `VanishingSite`, `vanishingTopology`, `VanishingTopos`: the oriented-product vanishing site.
+* `etaleDatum`, `vanishingDatum`, `moduleMorphism`: the constant-coefficient module data.
 
 The étale sites are transported through `AsSmall.equiv`. This changes neither
 coverings nor the associated topoi and accommodates independent scheme/coefficient sizes.
@@ -182,117 +182,14 @@ abbrev first {T B : Scheme.{u}} (f : T ⟶ B) :=
 abbrev second {T B : Scheme.{u}} (f : T ⟶ B) :=
   OrientedProduct.second (etaleBaseChange.{u, v} f) (𝟭 (EtaleSite.{u, v} B))
 
-/-- The projection site functors are continuous and preserve finite limits. -/
-theorem projection_properties {T B : Scheme.{u}} (f : T ⟶ B) :
-    (first.{u, v} f).IsContinuous (etaleTopology T) (vanishingTopology f) ∧
-    PreservesFiniteLimits (first.{u, v} f) ∧
-    (second.{u, v} f).IsContinuous (etaleTopology B) (vanishingTopology f) ∧
-    PreservesFiniteLimits (second.{u, v} f) := by
-  sorry
-
-/-- Continuity of the first projection's site functor. -/
-instance first_continuous {T B : Scheme.{u}} (f : T ⟶ B) :
-    (first.{u, v} f).IsContinuous (etaleTopology T) (vanishingTopology f) :=
-  (projection_properties f).1
-
-/-- Finite-limit preservation of the first projection's site functor. -/
-instance first_finiteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
-    PreservesFiniteLimits (first.{u, v} f) := (projection_properties f).2.1
-
-/-- Continuity of the second projection's site functor. -/
-instance second_continuous {T B : Scheme.{u}} (f : T ⟶ B) :
-    (second.{u, v} f).IsContinuous (etaleTopology B) (vanishingTopology f) :=
-  (projection_properties f).2.2.1
-
-/-- Finite-limit preservation of the second projection's site functor. -/
-instance second_finiteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
-    PreservesFiniteLimits (second.{u, v} f) := (projection_properties f).2.2.2
-
-/-- The first projection from the actual vanishing topos. -/
-def p₁ {T B : Scheme.{u}} (f : T ⟶ B) :=
-  siteMorphism (etaleTopology.{u, v} T) (vanishingTopology f) (first f)
-
-/-- The second projection from the actual vanishing topos. -/
-def p₂ {T B : Scheme.{u}} (f : T ⟶ B) :=
-  siteMorphism (etaleTopology.{u, v} B) (vanishingTopology f) (second f)
-
 /-- The identity geometric morphism, with the identity adjunction. -/
 def identity (E : Type (s + 1)) [Category.{s} E] : GeometricMorphism E E :=
   ⟨𝟭 E, 𝟭 E, Adjunction.id, inferInstance⟩
 
-/-- A type-(c) covering becomes invertible in every sheaf. -/
-theorem map_toFirst_isIso {T B : Scheme.{u}} (f : T ⟶ B)
-    (H : VanishingTopos.{u, v} f) (V : EtaleSite.{u, v} B) :
-    IsIso (H.obj.map (OrientedProduct.toFirst (etaleBaseChange f) (𝟭 _)
-      (OrientedProduct.middle (etaleBaseChange f) (𝟭 _) V)).op) := by
-  sorry
-
-attribute [instance] map_toFirst_isIso
-
-/-- The orientation is uniquely fixed by the two restriction maps of ILO XI §1.3.
-It has the universal property of the recorded oriented-product theorem. -/
-theorem orientation_existsUnique {T B : Scheme.{u}} (f : T ⟶ B) :
-    ∃! τ : ((p₂.{u, v} f).comp (identity (Sheaf (etaleTopology B)
-        (Type (max (u + 1) v))))).direct ⟶ ((p₁ f).comp (etaleMorphism f)).direct,
-      (∀ (H : VanishingTopos.{u, v} f) (V : EtaleSite.{u, v} B),
-        (τ.app H).hom.app (op V) =
-          H.obj.map (OrientedProduct.toSecond (etaleBaseChange f) (𝟭 _)
-            (OrientedProduct.middle (etaleBaseChange f) (𝟭 _) V)).op ≫
-          inv (H.obj.map (OrientedProduct.toFirst (etaleBaseChange f) (𝟭 _)
-            (OrientedProduct.middle (etaleBaseChange f) (𝟭 _) V)).op)) ∧
-      OrientedProduct.IsUniversal.{max (u + 1) v, max (u + 1) v + 1, max (u + 1) v}
-        (etaleMorphism f) (identity _) (p₁ f) (p₂ f) τ := by
-  sorry
-
-/-- The specified orientation, rather than an unspecified 2-morphism. -/
-def orientation {T B : Scheme.{u}} (f : T ⟶ B) :=
-  (orientation_existsUnique.{u, v} f).choose
-
-/-- Universal property for the explicitly normalized oriented projections. -/
-theorem orientation_universal {T B : Scheme.{u}} (f : T ⟶ B) :
-    OrientedProduct.IsUniversal.{max (u + 1) v, max (u + 1) v + 1, max (u + 1) v}
-      (etaleMorphism f) (identity _) (p₁ f) (p₂ f) (orientation f) := by
-  sorry
-
-/-- The coherent lift of a cone to the oriented product, including its identifying maps. -/
-structure Lift {T B : Scheme.{u}} (f : T ⟶ B)
-    (E : Type (max (u + 1) v + 1)) [Category.{max (u + 1) v} E]
-    (a : GeometricMorphism E (Sheaf (etaleTopology.{u, v} T) (Type (max (u + 1) v))))
-    (b : GeometricMorphism E (Sheaf (etaleTopology.{u, v} B) (Type (max (u + 1) v))))
-    (t : (b.comp (identity _)).direct ⟶ (a.comp (etaleMorphism f)).direct) where
-  morphism : GeometricMorphism E (VanishingTopos.{u, v} f)
-  first : (morphism.comp (p₁ f)).direct ≅ a.direct
-  second : (morphism.comp (p₂ f)).direct ≅ b.direct
-  compatible : OrientedProduct.paste (etaleMorphism f) (identity _)
-    (p₁ f) (p₂ f) (orientation f) morphism a b first second = t
-
-/-- The universal-property lift, not a choice of an unconstrained geometric morphism. -/
-def lift {T B : Scheme.{u}} (f : T ⟶ B)
-    (E : Type (max (u + 1) v + 1)) [Category.{max (u + 1) v} E]
-    (hE : IsGrothendieckTopos.{max (u + 1) v} E)
-    (a : GeometricMorphism E (Sheaf (etaleTopology.{u, v} T) (Type (max (u + 1) v))))
-    (b : GeometricMorphism E (Sheaf (etaleTopology.{u, v} B) (Type (max (u + 1) v))))
-    (t : (b.comp (identity _)).direct ⟶ (a.comp (etaleMorphism f)).direct) :
-    Lift f E a b t :=
-  ⟨((orientation_universal f) E hE a b t).choose,
-    ((orientation_universal f) E hE a b t).choose_spec.choose,
-    ((orientation_universal f) E hE a b t).choose_spec.choose_spec.choose,
-    ((orientation_universal f) E hE a b t).choose_spec.choose_spec.choose_spec.1⟩
-
 /-- A sheaf category is a topos, using its actual small-site presentation. -/
 theorem sheaf_isTopos {C : Type s} [SmallCategory C] (J : GrothendieckTopology C) :
-    IsGrothendieckTopos.{s} (Sheaf J (Type s)) := by
-  sorry
-
-/-- The cone `(1_T,f,1_f)` defining the nearby-cycle morphism. -/
-def psiLift {T B : Scheme.{u}} (f : T ⟶ B) :
-    Lift.{u, v} f _ (identity _) (etaleMorphism f)
-      ((Functor.rightUnitor (etaleMorphism.{u, v} f).direct).hom ≫
-        (Functor.leftUnitor (etaleMorphism.{u, v} f).direct).inv) :=
-  lift f _ (sheaf_isTopos _) (identity _) (etaleMorphism f) _
-
-/-- The canonical nearby-cycle geometric morphism `ψ_f`. -/
-def psi {T B : Scheme.{u}} (f : T ⟶ B) := (psiLift.{u, v} f).morphism
+    IsGrothendieckTopos.{s} (Sheaf J (Type s)) :=
+  ⟨C, inferInstance, J, ⟨CategoryTheory.Equivalence.refl⟩⟩
 
 /-- Base-change associativity transported through the two `AsSmall` equivalences. -/
 def etaleBaseChangeComp {T' T B : Scheme.{u}} (h : T' ⟶ T) (f : T ⟶ B) :
@@ -320,84 +217,6 @@ def squareDirect {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
   etaleComposition h f ≪≫ eqToIso (congrArg
     (fun k : T' ⟶ B ↦ (etaleMorphism.{u, v} k).direct) comm) ≪≫
       (etaleComposition f' g).symm
-
-/-- Whisker the orientation by `g`, using precisely the commutation isomorphism of the square. -/
-def squareOrientation {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :
-    (((p₂.{u, v} f').comp (etaleMorphism g)).comp (identity _)).direct ⟶
-      (((p₁ f').comp (etaleMorphism h)).comp (etaleMorphism f)).direct :=
-  (Functor.rightUnitor _).hom ≫
-    (Functor.isoWhiskerRight (Functor.rightUnitor (p₂ f').direct).symm
-      (etaleMorphism g).direct).hom ≫
-    Functor.whiskerRight (orientation f') (etaleMorphism g).direct ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft (p₁ f').direct (squareDirect f f' h g comm).inv ≫
-    (Functor.associator _ _ _).inv
-
-/-- The lift inducing `v: V_f' → V_f`, together with its projection identifications. -/
-def squareLift {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :=
-  lift.{u, v} f (VanishingTopos f') (sheaf_isTopos _)
-    ((p₁ f').comp (etaleMorphism h)) ((p₂ f').comp (etaleMorphism g))
-    (squareOrientation f f' h g comm)
-
-/-- The induced morphism of vanishing topoi, for an arbitrary commutative square. -/
-def squareMorphism {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :=
-  (squareLift.{u, v} f f' h g comm).morphism
-
-/-- The first projection of the composite `v ψ_f'`, identified with `h`. -/
-def squarePsiFirst {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :
-    (((psi.{u, v} f').comp (squareMorphism f f' h g comm)).comp (p₁ f)).direct ≅
-      (etaleMorphism h).direct :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (psi f').direct (squareLift f f' h g comm).first ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (psiLift f').first (etaleMorphism h).direct ≪≫
-    Functor.leftUnitor _
-
-/-- The first projection of `ψ_f h`, identified with `h`. -/
-def psiHFirst {T' T B : Scheme.{u}} (f : T ⟶ B) (h : T' ⟶ T) :
-    (((etaleMorphism.{u, v} h).comp (psi f)).comp (p₁ f)).direct ≅
-      (etaleMorphism h).direct :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (etaleMorphism h).direct (psiLift f).first ≪≫
-    Functor.rightUnitor _
-
-/-- The second projection of `v ψ_f'`, identified with `f h`. -/
-def squarePsiSecond {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :
-    (((psi.{u, v} f').comp (squareMorphism f f' h g comm)).comp (p₂ f)).direct ≅
-      ((etaleMorphism h).comp (etaleMorphism f)).direct :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (psi f').direct (squareLift f f' h g comm).second ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (psiLift f').second (etaleMorphism g).direct ≪≫
-    (squareDirect f f' h g comm).symm
-
-/-- The second projection of `ψ_f h`, identified with `f h`. -/
-def psiHSecond {T' T B : Scheme.{u}} (f : T ⟶ B) (h : T' ⟶ T) :
-    (((etaleMorphism.{u, v} h).comp (psi f)).comp (p₂ f)).direct ≅
-      ((etaleMorphism h).comp (etaleMorphism f)).direct :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft (etaleMorphism h).direct (psiLift f).second
-
-/-- Universal-property uniqueness gives the projection-compatible square at `ψ`. -/
-theorem squarePsi_existsUnique {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :
-    ∃! e : ((psi.{u, v} f').comp (squareMorphism f f' h g comm)).direct ≅
-        ((etaleMorphism h).comp (psi f)).direct,
-      Functor.isoWhiskerRight e (p₁ f).direct ≪≫ psiHFirst f h =
-          squarePsiFirst f f' h g comm ∧
-        Functor.isoWhiskerRight e (p₂ f).direct ≪≫ psiHSecond f h =
-          squarePsiSecond f f' h g comm := by
-  sorry
-
-/-- The canonical square at the nearby-cycle morphisms, with both projections fixed. -/
-def squarePsi {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :=
-  (squarePsi_existsUnique.{u, v} f f' h g comm).choose
 
 open CategoryTheory.AdicSites CategoryTheory.ConstantCompletion
 
@@ -431,46 +250,9 @@ abbrev EtaleDerived (X : Scheme.{u}) (Λ : Type v) [CommRing Λ] :=
 abbrev VanishingDerived {T B : Scheme.{u}} (f : T ⟶ B) (Λ : Type v) [CommRing Λ] :=
   (vanishingDatum.{u, v} f).derived (Coeff.{u, v} Λ)
 
-/-- The nearby-cycle ringed-topos morphism with its exact constant-module inverse image. -/
-def psiModules {T B : Scheme.{u}} (f : T ⟶ B) :=
-  moduleMorphism (vanishingDatum.{u, v} f) (etaleDatum T) (psi f)
-
 /-- The exact module inverse image attached to a scheme morphism. -/
 def etaleModules {T B : Scheme.{u}} (f : T ⟶ B) :=
   moduleMorphism (etaleDatum.{u, v} B) (etaleDatum T) (etaleMorphism f)
-
-/-- The exact module inverse image on the induced square of vanishing topoi. -/
-def squareModules {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g) :=
-  moduleMorphism (vanishingDatum.{u, v} f) (vanishingDatum f')
-    (squareMorphism f f' h g comm)
-
-/-- Unbounded nearby cycles, the existing K-injective right derived direct image. -/
-def nearbyCycles {T B : Scheme.{u}} (f : T ⟶ B) (Λ : Type v) [CommRing Λ] :
-    EtaleDerived T Λ ⥤ VanishingDerived f Λ :=
-  (psiModules f).push (Coeff.{u, v} Λ)
-
-/-- The specified derived identification `ψ_f'^* v^* ≅ h^* ψ_f^*`: the generator-normalized
-derived square applied to the inverse-image mate of `squarePsi`. -/
-def nearbySquare {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g)
-    (Λ : Type v) [CommRing Λ] :
-    (squareModules f f' h g comm).pull (Coeff.{u, v} Λ) ⋙
-        (psiModules f').pull (Coeff Λ) ≅
-      (psiModules f).pull (Coeff Λ) ⋙ (etaleModules h).pull (Coeff Λ) :=
-  CategoryTheory.AdicSites.derivedSquare (f := psiModules f) (g := squareModules f f' h g comm)
-    (h := etaleModules h) (k := psiModules f')
-    (GeometricMorphism.inverseIso (squarePsi f f' h g comm)).symm (Coeff Λ)
-
-/-- Ordinary base change is the transpose of the square identification followed by the counit. -/
-def baseChange {T' B' T B : Scheme.{u}} (f : T ⟶ B) (f' : T' ⟶ B')
-    (h : T' ⟶ T) (g : B' ⟶ B) (comm : h ≫ f = f' ≫ g)
-    (Λ : Type v) [CommRing Λ] (L : EtaleDerived T Λ) :
-    ((squareModules f f' h g comm).pull (Coeff.{u, v} Λ)).obj ((nearbyCycles f Λ).obj L) ⟶
-      (nearbyCycles f' Λ).obj (((etaleModules h).pull (Coeff Λ)).obj L) :=
-  ((psiModules f').adj (Coeff Λ)).homEquiv _ _
-    ((nearbySquare f f' h g comm Λ).hom.app ((nearbyCycles f Λ).obj L) ≫
-      ((etaleModules h).pull (Coeff Λ)).map (((psiModules f).adj (Coeff Λ)).counit.app L))
 
 /-- The already localized K-flat tensor on a constant-coefficient ringed site. -/
 abbrev derivedTensor (S : Site.{s}) (A : Type s) [CommRing A] :
@@ -495,70 +277,5 @@ def flatRepresentatives (S : Site.{s}) (A : Type s) [CommRing A] :
 def tensorInput (S : Site.{s}) (A : Type s) [CommRing A] :=
   ((flatRepresentatives S A).ι ⋙ DerivedCategory.Q).prod
     ((flatRepresentatives S A).ι ⋙ DerivedCategory.Q)
-
-/-- The representative comparison, with its localization universal property.
-Its data determine the tensor presentation up to the unique compatible isomorphism. -/
-theorem tensorModel_exists (S : Site.{s}) (A : Type s) [CommRing A] :
-    ∃ i : SheafOfModules.RingedTensorModel (tensorCorner S A),
-      ∀ (F : S.derived A × S.derived A ⥤ S.derived A)
-        (j : SheafOfModules.RingedTensorModel { tensorCorner S A with tensor := F }),
-        ∃! e : derivedTensor S A ≅ F,
-          i.representative.hom ≫ Functor.whiskerLeft (tensorInput S A) e.hom =
-            j.representative.hom := by
-  sorry
-
-/-- The universal K-flat representative identification, retaining its normalization. -/
-def tensorModel (S : Site.{s}) (A : Type s) [CommRing A] :
-    SheafOfModules.RingedTensorModel (tensorCorner S A) :=
-  (tensorModel_exists S A).choose
-
-/-- The actual scalar-extension functor has the recorded formula on module maps. -/
-theorem modulePull_map {V U : Site.{s}} (f : Morphism V U)
-    (A : Type s) [CommRing A] {M N : V.modules A} (a : M ⟶ N) :
-    (f.modulePull A).map a =
-      eqToHom (rfl : (f.modulePull A).obj M =
-        SheafOfModules.changeOfRings (constantMap f.algebra A)
-          ((f.algebra.algebra (V.ring A)).modules.obj M)) ≫
-      SheafOfModules.changeOfRingsHom (constantMap f.algebra A)
-        ((f.algebra.algebra (V.ring A)).modules.obj M)
-        ((f.algebra.algebra (V.ring A)).modules.map a) ≫
-      eqToHom (rfl : SheafOfModules.changeOfRings (constantMap f.algebra A)
-        ((f.algebra.algebra (V.ring A)).modules.obj N) = (f.modulePull A).obj N) := by
-  sorry
-
-/-- The specified inverse image as the existing ringed tensor edge. Its ordinary tensor
-comparison is the unique one with the generalized pure-tensor and tensor-unit formulas. -/
-def tensorEdge {V U : Site.{s}} (f : Morphism V U) (A : Type s) [CommRing A] :
-    SheafOfModules.RingedTensorEdge (tensorCorner V A) (tensorCorner U A) :=
-  letI := f.finiteLimits
-  { inverse := f.inverse
-    direct := f.direct
-    adjunction := f.adjunction
-    finiteLimits := f.finiteLimits
-    inverseRing := f.algebra.rings.obj (V.ring A)
-    algebraic := f.algebra.algebra (V.ring A)
-    ringMap := constantMap f.algebra A
-    pullback := f.modulePull A
-    object_eq := fun _ ↦ rfl
-    map_eq := modulePull_map f A
-    ordinaryTensor :=
-      (SheafOfModules.canonicalRingedTensorComparison_existsUnique (V.ring A) (U.ring A)
-        (f.algebra.rings.obj (V.ring A)) f.inverse (f.algebra.algebra (V.ring A))
-        (constantMap f.algebra A) (f.modulePull A) (fun _ ↦ rfl) f.direct f.adjunction
-        (modulePull_map f A)).1.some
-    pushforward := f.modulePush A
-    moduleAdjunction := f.moduleAdjunction A
-    left := f.pull A
-    epsilon := (f.modulePull A).mapDerivedCategoryFactorsh.hom
-    isLeftDerived := Functor.isLeftDerivedFunctor_of_inverts
-      (HomotopyCategory.quasiIso (V.modules A) (ComplexShape.up ℤ))
-        (f.pull A) (f.modulePull A).mapDerivedCategoryFactorsh
-    right := f.push A
-    derivedAdjunction := f.adj A }
-
-/-- Canonical preservation of derived tensor, characterized on K-flat representatives. -/
-def pullTensor {V U : Site.{s}} (f : Morphism V U) (A : Type s) [CommRing A] :
-    derivedTensor V A ⋙ f.pull A ≅ ((f.pull A).prod (f.pull A)) ⋙ derivedTensor U A :=
-  (tensorEdge f A).tensorComparison (tensorModel V A) (tensorModel U A)
 
 end AlgebraicGeometry.OrientedNearbyCycles

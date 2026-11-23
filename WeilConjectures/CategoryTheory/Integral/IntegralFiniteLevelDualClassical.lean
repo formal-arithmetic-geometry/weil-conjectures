@@ -33,10 +33,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalShe
 
 /-!
 # Classicality of the finite-level integral dual tensor
-
-Source: `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/`
-`sk-lem-int-ext-bound.proof.md`, second and third finite-reduction bullets
-(blueprint: lem-sfb-integral-finite-level-dual-classical).
 -/
 
 @[expose] public noncomputable section
@@ -250,32 +246,7 @@ private theorem quotient_action_zero
       rw [Preadditive.comp_nsmul, Category.comp_id]
     _ = 0 := by rw [hkill, comp_zero]
 
-/-- Finite-level classicality and annihilation of the ordinary integral dual tensor.
-
-Source: latest blueprint, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-second and third finite-reduction bullets
-(blueprint: lem-sfb-integral-finite-level-dual-classical).
-
-Proof:
-1. A finite constant integral model has a local two-term resolution by dualizable
-   modules. Its degree-zero derived object is dualizable on every chart, hence globally
-   by pro-etale descent. Its ordinary internal dual is therefore dualizable as well.
-2. DVR factorization supplies a positive uniformizer power divisible by l^r. The actual
-   continuous finite quotient by this power is a coefficient cokernel. Its kernel acts
-   trivially on F, so the action descends to the quotient by the cokernel universal property.
-3. Derived extension of scalars is strong monoidal and preserves dualizable objects.
-   Under the normalized finite discrete coefficient equivalence, the reduced dual is
-   dualizable over a finite ring. The published perfect local-model theorem makes it
-   bounded constructible and of etale origin. The module comparison also descends F
-   with its given quotient action, since its underlying sheaf is classical.
-4. The monoidal derived comparison identifies their tensor with inverse image of the
-   tensor on the etale site. Exact inverse image commutes with cohomology, giving
-   classical underlying abelian cohomology sheaves in every degree.
-5. The projection formula at the dualizable integral dual identifies the original tensor
-   with exact scalar restriction of this finite tensor. Restriction leaves underlying
-   abelian sheaves unchanged. Finally apply the additive composite of degree-zero
-   inclusion, tensor by the dual, cohomology and forgetting scalars to l^r id_F = 0.
--/
+/-- Finite-level classicality and annihilation of the ordinary integral dual tensor. -/
 theorem integral_finite_level_dual_classical
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -7,8 +7,10 @@ module
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 public import Mathlib.CategoryTheory.Sites.Pullback
 /-! # Testing maps on inverse-image units
-Source: Stacks Project, Tags 00YV, 03D2 and 03D3.
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 00YV, 03D2 and 03D3.
 -/
 @[expose] public section
 universe u
@@ -22,8 +24,7 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   {F : C ⥤ D} [F.IsContinuous J K]
 /-- A specified unit presents a sheaf as the set inverse image.
-Source: Stacks Project, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 00YV and 03D2. -/
 structure SheafPullbackUnitPresentation (S : Sheaf J (Type u)) (T : Sheaf K (Type u)) where
   unit : S ⟶ (F.sheafPushforwardContinuous (Type u) J K).obj T
   iso : T ≅ (sheafPullback F (Type u) J K).obj S
@@ -33,8 +34,7 @@ structure SheafPullbackUnitPresentation (S : Sheaf J (Type u)) (T : Sheaf K (Typ
 namespace SheafPullbackUnitPresentation
 variable {S S' S'' : Sheaf J (Type u)} {T T' T'' : Sheaf K (Type u)}
 /-- Test equality after the unit, using the adjunction hom equivalence.
-Source: Stacks Project, Tag 03D3.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03D3. -/
 theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)
     {Z : Sheaf K (Type u)} (a b : T ⟶ Z)
     (h : ∀ U x, a.hom.app (F.op.obj U) (p.unit.hom.app U x) =
@@ -53,11 +53,8 @@ theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)
   exact (congrArg (fun y ↦ a.hom.app (F.op.obj U) y) (hi x)).trans
     ((h U x).trans (congrArg (fun y ↦ b.hom.app (F.op.obj U) y) (hi x).symm))
 /-- Product presentations use the inverse binary-product comparison.
-Source: Stacks Project, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node).
-Proof: finite-limit preservation makes the product comparison an isomorphism.
-The two projections of its unit equation are exactly naturality of the unit at
-both source projections, followed by the two given unit equations. -/
+
+Stacks Project, Tags 00YV and 03D2. -/
 noncomputable def tensor [PreservesFiniteLimits (sheafPullback F (Type u) J K)]
     (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') :
@@ -100,14 +97,12 @@ noncomputable def tensor [PreservesFiniteLimits (sheafPullback F (Type u) J K)]
         q.iso.hom.hom.app (F.op.obj U) (q.unit.hom.app U x.2)))
     exact hei.trans ((congrArg₂ Prod.mk (p.equation U x.1) (q.equation U x.2)).trans he.symm)
 /-- Transport an operation through presentations.
-Source: Stacks Project, Tag 03D2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03D2. -/
 noncomputable def map (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') (a : S ⟶ S') : T ⟶ T' :=
   p.iso.hom ≫ (sheafPullback F (Type u) J K).map a ≫ q.iso.inv
 /-- Transported operations agree with their source on unit sections.
-Source: Stacks Project, Tag 03D2.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03D2. -/
 theorem map_unit (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') (a : S ⟶ S')
     (U : Cᵒᵖ) (x : S.obj.obj U) :

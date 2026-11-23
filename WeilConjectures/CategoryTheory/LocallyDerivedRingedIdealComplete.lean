@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedSectionLocalization
 /-!
 # Local derived completeness for an ideal sheaf
 
-Source: Stacks Project, algebraization.tex, Tags 0999 and 099F
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0999 and 099F.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace CategoryTheory
 
 /-- Local derived completeness means vanishing of derived internal Hom from localization
 at every section of the ideal, on every slice, with no boundedness hypothesis.
-Source: Stacks Project, algebraization.tex, Tags 0999 and 099F
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0999 and 099F. -/
 def IsLocallyDerivedRingedIdealComplete
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

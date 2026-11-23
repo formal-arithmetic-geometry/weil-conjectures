@@ -123,16 +123,7 @@ private theorem morphism_transition_with_inclusions
   erw [Category.comp_id, Category.id_comp]
   exact morphism_transition F hij K
 
-/-- Assemble a target comparison from the two inclusion cones and the finite scalar square.
-Source: the common-stage coefficient-descent step of the exceptional-adjunction argument
-(blueprint: lem-sf-stage-system-target-comparison).
-
-Proof: compose the inverse first cone, inclusion of the finite comparison, the pullback
-inclusion comparison, and the second cone whiskered by the descended functor. The
-stage-morphism coherence equation computes the image of each transition. Paste this
-square with the two cone squares and the finite scalar square. Naturality moves the
-whiskered factors, and inverse cancellation gives the required compatibility. No
-faithfulness, unit normalization, exactness or additional coherence is assumed. -/
+/-- Assemble a target comparison from the two inclusion cones and the finite scalar square. -/
 theorem assembleTargetComparison
     {I : Type*} [Preorder I] [IsDirectedOrder I]
     {A : I → Type*} [∀ i, Category (A i)]

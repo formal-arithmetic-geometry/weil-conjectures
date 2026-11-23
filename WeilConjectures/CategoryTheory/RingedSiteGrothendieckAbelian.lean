@@ -19,8 +19,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoid
 /-!
 # Sheaves of modules on a small ringed site
 
-Source: Stacks Project, Cohomology on Sites, Section 07A5; Modules on Sites,
-Lemmas 03DA, 03DB and 03EW (blueprint: lem-pur-ringed-site-grothendieck-abelian).
+Source: Stacks Project, Cohomology on Sites, Section 07A5.
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Sectionwise the free Yoneda module and the localized-unit extension are
 `(V ⟶ U) →₀ R(V)` and `⨁ (V ⟶ U), R(V)`. The standard linear equivalence
 commutes with restrictions because both compose the index and restrict coefficients.
-Source: Stacks Project, Modules on Sites, Tag 03DI, explicit direct-sum construction.
-(blueprint: lem-pur-ringed-site-grothendieck-abelian). -/
+Source: Stacks Project, Modules on Sites, Tag 03DI, explicit construction. -/
 private noncomputable def freeYonedaExtensionIso (U : C) :
     (PresheafOfModules.free (R).obj).obj (yoneda.obj U) ≅
       (extensionByZeroPresheaf R U).obj (unit ((R).over U)) := by
@@ -84,21 +82,7 @@ Grothendieck abelian category. A specific generator is the coproduct, over all
 objects `U`, of the sheafifications of the extension-by-zero presheaves of
 the rank-one module on the localized ringed site.
 
-Source: Stacks Project, Section 07A5 and Lemmas 03DA, 03DB, 03EW
-(blueprint: lem-pur-ringed-site-grothendieck-abelian).
-
-Proof:
-1. Apply the source library's `SheafOfModules.isGrothendieckAbelian`, which
-   proves existence of colimits, exact filtered colimits and a separator.
-2. Identify the free Yoneda presheaf at each object with the extension-by-zero
-   presheaf of the localized unit using `finsuppLEquivDirectSum`. On basis
-   vectors, naturality is precomposition of the index and preservation of `1`
-   by the ring restriction. Apply sheafification to this isomorphism.
-3. Transport `SheafOfModules.isSeparating_sheafification_freeYoneda` along
-   these isomorphisms. A map from a free Yoneda sheaf is precomposed with the
-   inverse isomorphism; cancellation of that inverse gives the required
-   separating-family equality. Its coproduct is a separator by
-   `ObjectProperty.IsSeparating.isSeparator_coproduct`. -/
+Source: Stacks Project, Section 07A5 and Lemmas 03DA, 03DB, 03EW. -/
 theorem grothendieckAbelian_with_localized_generator :
     IsGrothendieckAbelian.{u} (SheafOfModules.{u} R) ∧
       IsSeparator (∐ fun U : C ↦

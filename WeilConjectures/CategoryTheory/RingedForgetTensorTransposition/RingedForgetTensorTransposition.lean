@@ -34,10 +34,7 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 
 /-! # Normalized tensor and transposition under ringed forgetting
 
-Source: the internal-Hom/evaluation/transposition paragraph of
-blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md;
-Stacks Project, Tags 015F, 06YS, 06YU, 0G7D, 0A90, 0A96, 070I, 08J9 and 0FPT
-(blueprint: lem-sf-ringed-forget-tensor-transposition).
+Source: Stacks Project, Tags 015F, 06YS, 06YU, 0G7D, 0A90, 0A96, 070I, 08J9 and 0FPT.
 
 The auxiliary data below specify the comparisons on actual total-tensor summands.
 The double-dual arrow is the transpose of symmetric evaluation, with no invertibility claim.

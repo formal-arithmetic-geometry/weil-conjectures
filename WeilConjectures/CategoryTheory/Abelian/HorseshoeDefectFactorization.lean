@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 # Factorization of horseshoe comparison defects
 
 Source: the classical horseshoe naturality argument of Weibel, Theorem 2.4.6,
-using Stacks Project, Tags 0136, 013R, 013P and 013T
-(blueprint: lem-weil-pbc-horseshoe-defect-factorization).
+using Stacks Project, Tags 0136, 013R, 013P and 013T.
 -/
 
 @[expose] public section
@@ -38,23 +37,7 @@ private theorem factor_through_rows
   exact ⟨hT.exact.lift y hy', by rw [hT.exact.lift_f, hy]⟩
 
 /-- The differential and augmentation defects factor through the outer rows.
-Source: classical horseshoe naturality, Weibel Theorem 2.4.6, Step 2; the row
-factorizations use the abelian-category kernel/cokernel argument of Stacks Tag 013T.
-(blueprint: lem-weil-pbc-horseshoe-defect-factorization).
-
-Proof: Put D_n = t_n d'_n - d_n t_{n+1}. The two outer squares for t and the
-chain-map identities for α, β, α', β', φA and φC give α_n D_n = 0 and
-D_n β'_{n+1} = 0. Descend D_n along the epic β_n, then lift through the monic
-α'_{n+1}; exactness gives the unique E_n in the first equation. Distributing
-compositions and using d² = 0 gives d_n D_{n+1} = -D_n d'_{n+1}.
-Cancel the epic β_n and monic α'_{n+2}, using their chain-map identities,
-to get the displayed signed cocycle identity.
-Put w = ιB_0 t_0 - b ιB'_0. The augmentation identities and the two squares
-for F give f w = 0 and w β'_0 = 0. Descend along the epic g and lift through
-the monic α'_0, obtaining e with w = g e α'_0. Compute ιB_0 D_0 in two ways:
-its factorization gives g ιC_0 E_0 α'_1, whereas ιB_0 d_0 = 0 and
-ιB'_0 d'_0 = 0 give w d'_0 = g e dA'_0 α'_1. Cancel g and α'_1.
-The resulting equality is precisely ιC_0 E_0 = e dA'_0. -/
+Source: Weibel, Theorem 2.4.6; Stacks Project, Tag 013T. -/
 theorem horseshoe_defect_factorization
     {C : Type u} [Category.{v} C] [Abelian C]
     (S T : ShortComplex C) (hS : S.ShortExact) (_hT : T.ShortExact) (F : S ⟶ T)

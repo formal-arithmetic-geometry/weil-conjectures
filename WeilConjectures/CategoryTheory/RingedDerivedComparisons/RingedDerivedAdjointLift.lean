@@ -123,7 +123,6 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Cohomology on Sites,
 Tags 06YY and 07A6.
-(blueprint: lem-sfb-ringed-derived-adjoint-lift).
 -/
 
 @[expose] public noncomputable section

@@ -19,8 +19,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Power torsion of Hom from a bounded finite-projective complex
 
-Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
+## References
+
+* Stacks Project, Tag 08EJ, affine paragraph.
 -/
 
 @[expose] public section
@@ -69,18 +70,7 @@ private theorem projective_single_homology_injective
 set_option backward.isDefEq.respectTransparency false in
 /-- Derived Hom from a projective module in degree t embeds linearly into module
 Hom to cohomology in degree t. No finiteness or torsion assumption is used.
-Source: Stacks Project, Tag 08EJ, affine single-term case.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
-
-Proof: Maps from F[t] to objects concentrated below t vanish by projectivity.
-Apply this to the first term of the canonical truncation triangle of M at t.
-Exactness makes postcomposition with M -> truncGE(t,M) injective on maps from F[t].
-Homology is injective on maps from F[t] to truncGE(t,M), by the shifted-heart
-comparison. Consequently H^t is injective on maps from F[t] to M. Precompose
-with H^t(F[t]) ≅ F to obtain the asserted map. It is additive; its A-linearity
-follows from naturality of this comparison applied to scalar endomorphisms of F
-and the A-linearity of the single functor. No linearity instance for the entire
-homology functor is required. Zero F and the zero ring are included. -/
+Source: Stacks Project, Tag 08EJ, affine single-term case. -/
 private theorem exists_projective_single_homology_embedding
     (A : Type u) [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     (F : ModuleCat.{u} A) (hp : Module.Projective A F) (t : ℤ)
@@ -115,18 +105,7 @@ private theorem exists_projective_single_homology_embedding
 set_option backward.isDefEq.respectTransparency false in
 /-- A complex supported in [a,b] is an extension of its stupid truncation below b
 by its top term. The shorter complex's terms are old terms or zero objects.
-Source: Stacks Project, Tag 08EJ, affine stupid-truncation triangle.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
-
-Proof: The complex S consisting of P^b in degree b maps into P because P is
-zero above b. Its map is an isomorphism in degree b and has zero source in other
-degrees, so it is mono. Construct L as its cokernel complex. Evaluation preserves
-cokernels, so L is zero in degree b and its terms are canonically isomorphic to
-P's terms in every other degree. Thus L is supported in [a,b-1] and is the stupid
-truncation below b. The sequence S -> P -> L is short exact; its derived triangle
-is distinguished and supplies the three arrows.
-This construction also works when b<a or the endpoint is zero; all the relevant
-terms are then zero. No projectivity, finiteness, or torsion assumption is used. -/
+Source: Stacks Project, Tag 08EJ, affine stupid-truncation triangle. -/
 private theorem exists_bounded_complex_top_triangle
     (A : Type u) [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     (P : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ)
@@ -258,22 +237,7 @@ private theorem interval_projective_power_torsion
 
 /-- Elementwise power torsion of all cohomology modules implies power torsion of
 morphisms from a bounded complex of finite projective modules.
-Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
-
-Proof: Induct on the length of a finite interval supporting P, simultaneously for
-all targets with the displayed cohomological torsion property. The zero complex
-has no nonzero morphisms. For a single projective term in degree t, projectivity
-identifies derived Hom with module Hom into H^t(M). Choose a finite generating
-set of that term. Each generator's image is killed by a power of r; the maximum
-of these finitely many exponents kills the map by linearity. For more than one
-term, the highest-degree term and the shorter stupid truncation give a distinguished
-triangle. Restrict the given morphism to the highest-degree single term and kill it
-by r^a using the single-term case. Exactness of contravariant Hom into M lifts
-r^a times the morphism to the shorter truncation. Induction kills the lift by r^b.
-Linearity of composition and r^(a+b) = r^b * r^a then kill the original morphism.
-The argument uses no boundedness or finiteness hypothesis on M. Empty generating
-sets, the zero ring and the zero complex all give zero Hom and exponent zero. -/
+Source: Stacks Project, Tag 08EJ, affine paragraph. -/
 theorem bounded_projective_hom_power_torsion
     (A : Type u) [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     (r : A) (P : CochainComplex (ModuleCat.{u} A) ℤ)

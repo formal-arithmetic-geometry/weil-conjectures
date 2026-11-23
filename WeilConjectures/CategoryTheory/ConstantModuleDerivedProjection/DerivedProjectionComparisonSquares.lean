@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 /-! # Normalized derived tensor and projection comparison squares
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6
-(blueprint: def-sfb-derived-projection-comparison-squares).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6.
 
 These predicates expand the tensor, localization and adjunction-transpose squares.
 They impose equations on the specified comparisons, without choosing maps.
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory.ConstantModuleDerivedProjection
 
 /-- The square for four specified tensor comparisons.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-derived-projection-comparison-squares). -/
+Source: Stacks Tag 07A4. -/
 def TensorSquare
     {B : Type a} {E : Type b} {F : Type c} {H : Type e}
     [Category.{ha} B] [Category.{hb} E] [Category.{hc} F] [Category.{he} H]
@@ -48,8 +46,7 @@ def TensorSquare
       Functor.OplaxMonoidal.δ L' (S.obj X) (S.obj Y)
 
 /-- A full adjunction comparison under two functors, including unit and counit.
-Source: Stacks Tag 07A6
-(blueprint: def-sfb-derived-projection-comparison-squares). -/
+Source: Stacks Tag 07A6. -/
 def AdjunctionSquare
     {B : Type a} {E : Type b} {F : Type c} {H : Type e}
     [Category.{ha} B] [Category.{hb} E] [Category.{hc} F] [Category.{he} H]
@@ -65,8 +62,7 @@ def AdjunctionSquare
     L'.map (j.hom.app N) ≫ adj'.counit.app (T.obj N))
 
 /-- Equality of the two specified adjunction transposes after scalar restriction.
-Source: Stacks Tag 07A6
-(blueprint: def-sfb-derived-projection-comparison-squares). -/
+Source: Stacks Tag 07A6. -/
 def ProjectionSquare
     {B : Type a} {E : Type b} {F : Type c} {H : Type e}
     [Category.{ha} B] [Category.{hb} E] [Category.{hc} F] [Category.{he} H]
@@ -88,8 +84,7 @@ def ProjectionSquare
         (T.obj X)).app (S.obj Y)
 
 /-- Normalized tensor and adjunction comparisons, retaining their projection mate square.
-Source: Stacks Tags 07A4 and 07A6
-(blueprint: def-sfb-derived-projection-comparison-squares). -/
+Source: Stacks Tags 07A4 and 07A6. -/
 structure NormalizedComparison
     {B : Type a} {E : Type b} {F : Type c} {H : Type e}
     [Category.{ha} B] [Category.{hb} E] [Category.{hc} F] [Category.{he} H]
@@ -116,8 +111,7 @@ structure NormalizedComparison
 set_option maxHeartbeats 40000 in
 -- Bound elaboration of the representative equation.
 /-- The flat-total normalization of a localized exact tensor functor.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-derived-projection-comparison-squares). -/
+Source: Stacks Tag 07A4. -/
 def TensorNormalization
     (B : Type a) (E : Type b) [Category.{ha} B] [Category.{hb} E]
     [Abelian B] [Abelian E] [IsGrothendieckAbelian.{ha} B]

@@ -628,24 +628,7 @@ end RingedSliceTensor
 /--
 The Hom-equivalence family underlying the ringed-slice projection formula.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8I, lemma-j-shriek-and-tensor.
-(auxiliary; not a blueprint node)
-
-Proof: Construct the extension adjunction by evaluating a map out of the direct sum
-on each summand; its inverse sums the components of a map to the restricted sheaf.
-Compose this with module sheafification. For slice modules F and base modules G,H,
-a map from the sectionwise tensor F tensor G|U to H|U extends bilinearly on each
-direct-sum summand to a map from the extension presheaf of F tensor G to H.
-Conversely, evaluate such a map on a summand injection tensored with the identity.
-The direct-sum and tensor generator formulas prove the inverse laws and naturality
-in all three modules. These constructions work with an independent object universe.
-Finally the sheafification unit of the extension presheaf is locally bijective.
-Tensor descent makes its tensor with G an isomorphism after sheafification.
-Compose the extension adjunction, slice sheafification adjunction, direct-sum tensor
-Hom equivalence, inverse base sheafification adjunction, and this last isomorphism.
-Each factor commutes with precomposition in the parameter pair and postcomposition
-in the test module, so their composite has both displayed naturality laws.
--/
+Source: Stacks Project, Modules on Sites, Tag 0E8I. -/
 theorem ringedSlice_extension_tensor_hom_data
     {C : Type uC} [Category.{v} C] (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]

@@ -6,8 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.CategoryTheory.Sites.Torsor
 /-! # The universal property of binary contracted products of torsors
-Source: Stacks Project, Tag 03AJ.
-(blueprint: lem-pur-binary-torsor-quotient-universal). -/
+Source: Stacks Project, Tag 03AJ. -/
 
 @[expose] public section
 set_option autoImplicit false

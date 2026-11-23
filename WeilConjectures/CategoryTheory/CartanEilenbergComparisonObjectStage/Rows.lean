@@ -52,7 +52,7 @@ structure CartanEilenbergAugmentedRow
   quasiIso₃ : QuasiIso augmentation.τ₃
 
 /-- The cycle/object/image row is short exact for any complex shape.
-Source: Stacks Project, Tag 015I; the kernel/image factorization in an abelian category. -/
+Source: Stacks Project, Tag 015I. -/
 private theorem row_shortExact
     {A : Type*} [Category A] [Abelian A] {ι : Type*} {c : ComplexShape ι}
     (I : HomologicalComplex A c) (p q : ι) (hq : c.next p = q) :
@@ -146,31 +146,7 @@ private theorem row_single_concentrated
 
 /-- Present the cycle/object/outgoing-image rows as augmented short exact rows,
 with the degree-zero identifications needed to transport a base complex map.
-This statement constructs rows and identifies augmentations; it constructs no
-comparison map between the resolution columns and assumes no injectivity.
-
-Source: Stacks Project, Tags 015I and 015K, alternating short exact rows and their
-naturality (blueprint: lem-weil-pbc-ce-comparison-augmented-rows).
-
-Proof: In the abelian category of resolution complexes the cycle inclusion is the
-kernel of the outgoing differential, and its factorization through its image is an
-epimorphism. Thus the cycle/object/image row is short exact. Evaluation is exact,
-and the exact additive functor F preserves these short exact rows. Apply the same
-construction to the single-degree-zero bicomplexes on K and L. Their rows are the
-single complexes on cycles, objects, and outgoing images of K and L: the single
-functor is exact, so its kernel and image comparison maps are isomorphisms. The
-isomorphism between applying F to a single complex and the single complex on F
-identifies the source base row with F of the row for K. Transport eI and eJ along
-these isomorphisms to obtain the two augmentation morphisms. Their components
-are quasi-isomorphisms by the six assumed quasi-isomorphisms, exactness of F,
-and invariance under isomorphisms. The map on the base rows is induced by u on
-cycles, objects and outgoing images. Its two squares follow respectively from
-cyclesMap_i and naturality of factorThruImage. Evaluating the transported cycle
-augmentation in degree zero gives the first equation. Evaluating the cycle
-naturality square gives the second. Evaluating the middle augmentation and its
-naturality square gives the last two equations. These identifications are valid
-also for zero objects and zero differentials; no epimorphism or monomorphism of
-u, and no injectivity or comparison choices, are used. -/
+Stacks Project, Tags 015I and 015K. -/
 theorem exists_cartanEilenberg_comparison_augmented_rows
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]

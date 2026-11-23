@@ -16,7 +16,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.ProdComparison
 # Transporting a sheaf of rings through a geometric inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -110,19 +109,7 @@ private theorem binaryOperation_sections
   rw [hi, hi]
 
 /-- Inverse image transports the ring operations through product comparisons.
-Source: Stacks Project, Tag 03D2, `lemma-pullback-module`.
-(auxiliary; not a blueprint node).
-
-Proof: put U equal to the set sheaf underlying R. Define addition and multiplication
-on L(U) by applying L to the corresponding operations on U and precomposing by
-the inverses of its product comparisons. Define zero and one using its terminal
-comparison, and negation by L of negation. Each ring identity is an equality of
-maps out of a finite power of U. Product preservation and functoriality send it
-to the same identity on L(U). Evaluate on each object of the target site to obtain
-a commutative ring; naturality makes each restriction a ring homomorphism. The
-underlying set presheaf is L(U), hence is a sheaf, giving A. The identity on the
-underlying sheaf gives eR. The componentwise descriptions of addR, mulR, addA,
-and mulA and the two transport equations follow from the construction. -/
+Source: Stacks Project, Tag 03D2. -/
 theorem geometric_ring_transport
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

@@ -575,22 +575,7 @@ attribute [local irreducible] sectionModuleEquivalence Mod.extendScalars Mod.com
 /-- Transport a normalized scalar derived pair through the exact section equivalences.
 The input squares are ordinary adjunction squares; this result concerns localization only.
 Source: Stacks Project, Derived Categories, Tag 09T5; Cohomology on Sites, Tags 06YY,
-07A6 (auxiliary; not a blueprint node).
-Proof:
-1. Localize the two exact section equivalences and the restriction square. Define the
-internal derived extension by conjugating the given universal derived extension with
-these equivalences. Define its comparison by the termwise extension square and the
-localization factorization isomorphisms.
-2. Right Kan extensions are invariant under equivalences of source, localization target,
-and value category. Thus the transported comparison is universal. Its component is an
-isomorphism whenever the original component is, in particular on sectionwise K-flat
-complexes.
-3. Conjugate the given derived adjunction. Its extension square is the inverse mate of
-the localized restriction square. The ordinary transpose identity identifies the
-ordinary mate. The normalized representative formula for the scalar pair identifies
-these mates on flat-term K-flat resolutions. Naturality along their quasi-isomorphisms
-then gives the unit identity on every complex. The same unit identity determines the
-Hom transpose on arbitrary derived objects. -/
+07A6. -/
 theorem derived_section_scalar_transport
     (φ : sectionRingSheaf J R ⟶ sectionRingSheaf J S)
     (sectionPair : SheafOfModules.ScalarDerivedPair φ)

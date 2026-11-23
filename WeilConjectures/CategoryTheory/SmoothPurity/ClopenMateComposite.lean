@@ -10,8 +10,7 @@ public import Mathlib.Tactic.IrreducibleDef
 
 /-! # A component API for the clopen comparison composite
 
-Source: the functorial composite in Stacks Tag 0F7B, first proof paragraph
-(blueprint: def-cbc-clopen-mate-composite).
+Source: Stacks Tag 0F7B.
 -/
 
 @[expose] public section
@@ -22,7 +21,7 @@ namespace CategoryTheory
 /-- Compose the base-change map, clopen projection, and two compositors.
 This is the component form of their whiskered composite; naturality follows by
 naturality of those maps and functoriality.
-Source: Stacks Tag 0F7B (blueprint: def-cbc-clopen-mate-composite). -/
+Source: Stacks Tag 0F7B. -/
 noncomputable irreducible_def clopenMateComposite.{v₁, u₁, v₂, u₂, v₃, u₃, v₄, u₄, v₅, u₅}
     {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Category.{v₄} D] [Category.{v₅} E]
@@ -41,7 +40,7 @@ variable {A B C D E : Type*} [Category* A] [Category* B] [Category* C]
 
 /-- Evaluation of the clopen comparison composite.
 Expand composition and whiskering of natural transformations.
-Source: Stacks Tag 0F7B (blueprint: def-cbc-clopen-mate-composite). -/
+Source: Stacks Tag 0F7B. -/
 theorem clopenMateComposite_app
     (U : A ⥤ E) (P : E ⥤ D) (Q : A ⥤ B) (S : B ⥤ C)
     (J : C ⥤ B) (B₀ : B ⥤ D) (K : C ⥤ D) (R : A ⥤ C)

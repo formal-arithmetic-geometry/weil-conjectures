@@ -15,9 +15,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Lifting compatible derived maps of sequential towers
 
-Source: Stacks Project, Injectives, Tag 079P, and Derived Categories, Tag 070I;
-sequential homotopy correction as written in the DAG proof
-(blueprint: lem-weil-pbc-sequential-tower-evaluation-full).
+Source: Stacks Project, Injectives, Tag 079P, and Derived Categories, Tag 070I.
 
 The natural-number index `n` denotes the positive level `n + 1` of the source.
 -/

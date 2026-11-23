@@ -254,23 +254,8 @@ private theorem supported_isIso {C : Type u} [Category.{v} C]
 
 set_option linter.unusedVariables false in
 /-- The ordinary open-extension mate of the underlying restriction square is invertible.
-Source: Stacks 03DI, 03DJ and 03CZ; finite-coefficient transport Step 1
-(blueprint: lem-pur-algebraic-open-scalar-restriction).
-Proof: form the subsheaf of module sections which are locally zero or lie over P.
-The raw supported sections form a submodule on each object; their local closure is
-again a submodule and a sheaf. Its inclusion becomes invertible after restriction
-to P, since every section over an object with a P-section is already supported.
-The adjunction therefore lifts the identity of every extended module through this
-inclusion. Every section of an extended module is consequently locally supported.
-Scalar restriction retains the sections, zero and restriction maps, so it retains
-this support condition. Between supported modules a map invertible over P is
-locally injective and locally surjective: work on the covering sieves where the
-sections are zero or P has a section. It is therefore an isomorphism of sheaves.
-Finally the inverse-mate unit equation shows that applying LA to the mate gives
-an isomorphism, since both adjunction units and d are invertible. The displayed
-slice equivalence identifies this test with invertibility over P, completing the
-proof. Empty opens give locally zero modules. This argument uses neither
-finite-free coefficients nor any derived categories. -/
+Source: Stacks 03DI, 03DJ and 03CZ.
+-/
 theorem open_restriction_mate_isIso
     {C D : Type u} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

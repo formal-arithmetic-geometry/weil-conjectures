@@ -6,8 +6,10 @@ Authors: Bin Wu
 module
 public import Mathlib.CategoryTheory.Sites.Pullback
 /-! # Forgetting algebraic structure in the constructed inverse image
-Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-pur-signed-line-sheaf-pullback-forget).
+
+## References
+
+* Stacks Project, Tags 00YV and 03D2.
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -29,8 +31,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   [K.PreservesSheafification U] [U.PreservesLeftKanExtensions F.op]
 /-- The comparison obtained by commuting forgetting past sheafification and left Kan
 extension. Both comparisons are the canonical ones, so they respect the units.
-Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-pur-signed-line-sheaf-pullback-forget). -/
+Source: Stacks Project, Tags 00YV and 03D2. -/
 noncomputable def sheafPullbackForgetIso :
     sheafPullback F E J K ⋙ sheafCompose K U ≅
       sheafCompose J U ⋙ sheafPullback F (Type (max u v w)) J K :=
@@ -53,11 +54,7 @@ noncomputable def sheafPullbackForgetIso :
       congr 2
       exact (U.lanCompIsoOfPreserves F.op).hom.naturality g.hom)
 /-- The underlying comparison sends the algebraic inverse-image unit to the set unit.
-Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-pur-signed-line-sheaf-pullback-forget).
-Proof: expand the composite adjunction unit. The sheafification comparison satisfies
-its defining unit equation. Naturality of the set sheafification unit then moves the
-Kan-extension comparison to the left, where its defining unit equation applies. -/
+Source: Stacks Project, Tags 00YV and 03D2. -/
 theorem sheafPullbackForgetIso_unit (S : Sheaf J E) :
     (sheafCompose J U).map ((sheafAdjunctionContinuous F E J K).unit.app S) ≫
       (F.sheafPushforwardContinuous (Type (max u v w)) J K).map

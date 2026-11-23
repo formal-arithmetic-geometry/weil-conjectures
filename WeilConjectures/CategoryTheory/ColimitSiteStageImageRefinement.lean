@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 /-! # ColimitSiteStageImageRefinement
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-stage-image-refinement).
 -/
 
 @[expose] public section
@@ -161,22 +160,8 @@ private theorem restrict_heq {C : Type u} [SmallCategory C] (H : Cᵒᵖ ⥤ Typ
   cases hy
   rfl
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-stage-image-refinement).
-
-Proof: Unpack membership as a stage t, an object W, a presenting arrow
-f : V i U to V t W, and a section z at W. Lift this finite diagram to a
-common stage above i and t using the object and arrow colimit hypotheses.
-Eventual object equality identifies its endpoints with the images of U and W;
-eventual arrow equality makes the lifted arrow represent f. Transport z by
-the adjunction transpose of the later unit, then restrict along this lifted
-arrow. This gives a section at the later image of U. The two composites to
-the limit restriction sheaf have equal transposes by the unit equations hα
-and the cocone equation for V. Injectivity of the adjunction hom equivalence
-therefore identifies them. Naturality applied to the lifted arrow says that
-the resulting section has image the given restriction of alpha t z.
-This concerns an already presented section, not an arbitrary limit section.
--/
+/-- Every element of the stage-image presheaf at the image of `U` comes from a section of a
+stage inverse image at some `t : Under i`. Stacks Project, Sites, Tag 0A35. -/
 theorem colimit_site_stage_image_refinement
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

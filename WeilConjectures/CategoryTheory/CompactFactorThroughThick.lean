@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.CompactTriangleConnectingApproximation
 # Compact maps into generator stages factor through finite thick closure
 
 Source: Stacks Project, Derived Categories, Tag 09SP, with the stage notation of
-Tag 09SN (blueprint: lem-sc-supported-factor-through-thick).
+Tag 09SN.
 -/
 
 @[expose] public section
@@ -28,24 +28,8 @@ namespace CategoryTheory
 
 /-- A map from a compact object into any finite generator stage factors through the
 thick closure of a finite direct sum of the compact objects. No generation assumption
-is imposed. Source: Stacks Project, Tag 09SP
-(blueprint: lem-sc-supported-factor-through-thick).
-
-Induct on the stage. Initially compactness (def-pc-compact-object) factors the map
-through finitely many shifted summands. These lie in the thick closure of the sum
-of the finitely many unshifted generators that occur. For the induction step factor
-the connecting map through a finite shifted sum `E'[1]`. Complete it to a triangle
-`E' → C' → C₀ → E'[1]`. The triangulated axioms (def-weil-triangulated-category)
-produce a map of this triangle to the stage triangle. The object `C'` is compact:
-compact objects are closed under shifts, finite sums and distinguished triangles.
-Induction factors `C' → Xₙ` through an object `E''` in a finite thick closure.
-Complete `E' → E''` to a triangle with cone `E`. Triangle morphisms give maps
-`C₀ → E → Xₙ₊₁` with the correct connecting composite. Exactness of Hom into a
-triangle (lem-weil-pbc-hom-into-triangle-exact) lifts the difference from the original
-map to `Xₙ`; induction factors this lift through `E'''`. The desired factorization
-is through `E ⊕ E'''`. The union of the three finite index sets is finite; the thick
-closure of its generator sum contains `E'`, `E''`, `E'''`, their cone `E`, and this
-final finite sum. -/
+is imposed. Source: Stacks Project, Tag 09SP.
+-/
 theorem compact_factorThrough_thickClosure
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

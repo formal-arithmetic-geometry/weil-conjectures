@@ -17,9 +17,8 @@ a bounded object concentrated in degrees `≤ b` into degrees `≤ b + N`. Both 
 dévissage along the truncation triangles `τ_{< b} E ⟶ E ⟶ Hᵇ(E)[-b] ⟶`.
 
 For the derived direct image `Rf_*` the first hypothesis always holds, and the second one is the
-uniform vanishing `UDV(f, Λ; N)` of the higher direct images above `N`
-(`definition-cohomological-dimension--2`); this is the bound
-`Rf_* D^{≤ t} ⊆ D^{≤ t + N}` used in `proposition-open-direct-image-preserves-finite--1`.
+uniform vanishing `UDV(f, Λ; N)` of the higher direct images above `N`; this gives the bound
+`Rf_* D^{≤ t} ⊆ D^{≤ t + N}`.
 
 ## Main results
 

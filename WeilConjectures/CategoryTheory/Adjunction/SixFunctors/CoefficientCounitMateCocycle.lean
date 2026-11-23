@@ -8,10 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Objectwise coefficient counit mates
-
-Source: blueprint main-20261015, lem-coef-finite-dualizing.proof.md,
-paragraph 3, the sentence beginning “The same adjoint calculation”.
-(blueprint: lem-coef-dualizing-quotient-mates)
 -/
 
 @[expose] public section
@@ -24,28 +20,7 @@ namespace CategoryTheory.Adjunction
 
 /-- Counit mates satisfy the coefficient cocycle using only the four specified
 invertible comparison components. The associators and the identifications of the
-three target objects are displayed explicitly. No mate is assumed invertible.
-
-Source: blueprint main-20261015, lem-coef-finite-dualizing.proof.md,
-paragraph 3, the sentence beginning “The same adjoint calculation”.
-(blueprint: lem-coef-dualizing-quotient-mates)
-
-Proof: (1) By lem-weil-pbc-adjunction-of-natural-bijection, the inverse Hom
-bijection for aC sends w to FC(w) followed by its counit; it detects equality in
-the whole Hom set. Each displayed Hom transpose is defined by the specified
-inverse comparison, the transported counit, and the specified object identification.
-(2) Put X = GA(NA), Y = GB(NB), and a = vAB. Naturality of cBC at a says
-TD_BC(FB(a)) followed by cBC at Y equals cBC at TC_AB(X) followed by
-FC(TC_BC(a)). Multiply by the two assumed inverse components to move them
-across this square. No inverse natural transformation is needed.
-(3) Transpose TC_BC(vAB) followed by vBC. Substitute the defining counit
-equation for vBC, the square from (2), and then the defining counit equation for
-vAB. Functoriality preserves inverses. The component cocycle hc identifies the
-resulting composite inverse with the inverse cAC, after the associators. Naturality
-of assocD at the A counit and the object-identification equation hN identify the
-remaining factors with TD_AC of that counit followed by nAC. This is the transpose
-of vAC, so injectivity from (1) proves the equality. This is steps 1--3 of the node.
--/
+three target objects are displayed explicitly. No mate is assumed invertible. -/
 theorem coefficientCounitMate_cocycle
     {CA : Type u₁} {DA : Type u₂} {CB : Type u₃} {DB : Type u₄}
     {CC : Type u₅} {DC : Type u₆}
@@ -111,21 +86,7 @@ theorem coefficientCounitMate_cocycle
 
 /-- The identity coefficient mate is the unit identification on the right-adjoint
 object, hence is the identity after that identification. The invertibility needed
-to take the comparison inverse is transported from its prescribed unit value.
-
-Source: blueprint main-20261015, lem-coef-finite-dualizing.proof.md,
-paragraph 3, the sentence beginning “The same adjoint calculation”.
-(blueprint: lem-coef-dualizing-quotient-mates)
-
-Proof: Step 4 of the node. Transpose the unit identification uC at G(N) under a.
-The inverse Hom bijection is F of that map followed by the counit, by
-lem-weil-pbc-adjunction-of-natural-bijection. The equality hc identifies the
-comparison with uD at F(G(N)) followed by F of the inverse uC. Its inverse is
-therefore F of uC followed by the inverse uD. Naturality of uD at the counit and
-hN reduce the defining adjunct to F of uC followed by the counit. Injectivity of
-the inverse Hom bijection gives the asserted equality. With identity coefficient
-functors and identity unit identifications this reads vRR = 1, for arbitrary a.
--/
+to take the comparison inverse is transported from its prescribed unit value. -/
 theorem coefficientCounitMate_identity
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)

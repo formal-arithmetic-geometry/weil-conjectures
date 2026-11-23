@@ -188,16 +188,7 @@ attribute [local instance] comp_preservesFiniteLimits
 
 /-- Extension of scalars of internal modules preserves flat objects.
 
-Source: Stacks, sites-modules.tex, lemma-flat-change-of-rings; Tag 07A4.
-(blueprint: lem-sfb-internal-extension-preserves-flat).
-
-Proof: the bimodule associator and right unitor identify the underlying object of
-`N ⊗_S (S ⊗_R M)` with that of `Res N ⊗_R M`, naturally in N. Restriction and the
-forgetful functors are exact; forgetful functors reflect limits and colimits. Thus,
-if M is flat, tensoring on the right with its extension is exact. Braiding identifies
-tensoring on the left with tensoring on the right, proving both flatness conditions.
-This also covers the zero algebra and the identity scalar map.
--/
+Source: Stacks, sites-modules.tex; Tag 07A4. -/
 theorem extendScalars_preservesFlat : (extendScalars φ).PreservesFlat where
   flat_obj {M} hM := by
     have := hM.tensorRight.preservesFiniteLimits

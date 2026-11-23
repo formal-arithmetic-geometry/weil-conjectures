@@ -48,7 +48,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 Source: Stacks 07A4, 0G7E and 03EL. These are explicit identifications of the
 ordinary comparison, its single-complex unit and the recorded K-flat tensor model.
-(blueprint: lem-pur-finite-derived-tensor-model-bridge).
 -/
 
 @[expose] public noncomputable section
@@ -78,8 +77,7 @@ attribute [local irreducible] CommRingCat.hasForgetToRingCat sheafCompose
 namespace CategoryTheory.FiniteDerivedTensorModels
 
 /-- The ordinary comparison with its identical insertion and tensor maps.
-Source: Stacks 07A4, 0G7E and 03EL.
-(blueprint: lem-pur-finite-derived-tensor-model-bridge). -/
+Source: Stacks 07A4, 0G7E and 03EL. -/
 def legacyComparison {X Y : Site.{u, w}}
     (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : Comparison f) :
     SheafOfModules.CanonicalRingedTensorComparison Y.A X.A f.RI f.uInv f.I
@@ -94,8 +92,7 @@ section LegacyUnit
 attribute [local semireducible] SheafOfModules.monoidalCategory
 
 /-- The ordinary normalized unit has the specified single-complex comparison.
-Source: Stacks 07A4, 0G7E and 03EL.
-(blueprint: lem-pur-finite-derived-tensor-model-bridge). -/
+Source: Stacks 07A4, 0G7E and 03EL. -/
 theorem unit_presentation {X Y : Site.{u, w}}
     (f : RingedPullback.{u, u, u, u, u} Y.A X.A) (k : Comparison f) :
     ∃ j : f.L.obj (SheafOfModules.unit Y.ring) ≅ SheafOfModules.unit X.ring,

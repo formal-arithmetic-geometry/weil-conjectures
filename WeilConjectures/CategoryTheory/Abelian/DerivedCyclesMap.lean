@@ -10,7 +10,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # The map from canonical cycles to a complex
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-cycles-map-homology).
 -/
 
 @[expose] public section
@@ -23,32 +22,19 @@ namespace DerivedCategory
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
 /-- The chain map whose only nonzero component is the canonical cycle inclusion.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-cycles-map-homology). -/
+Source: Stacks Project, Tag 05TC (2). -/
 noncomputable def cyclesChainMap (n : ℤ) (K : CochainComplex C ℤ) :
     (CochainComplex.singleFunctor C n).obj ((K.sc n).cycles) ⟶ K :=
   HomologicalComplex.mkHomFromSingle (K.sc n).iCycles (fun j _ ↦ K.iCycles_d n j)
 
 /-- The localized cycle map, with source the specified derived single functor.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-cycles-map-homology). -/
+Source: Stacks Project, Tag 05TC (2). -/
 noncomputable def cyclesDerivedMap (n : ℤ) (K : CochainComplex C ℤ) :
     (singleFunctor C n).obj ((K.sc n).cycles) ⟶ Q.obj K :=
   (singleFunctorIsoCompQ C n).hom.app ((K.sc n).cycles) ≫ Q.map (cyclesChainMap n K)
 
 /-- The cycle map induces precisely the canonical quotient on homology.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-cycles-map-homology).
-
-Proof: Apply naturality of the localization/homology factor isomorphism to
-cyclesChainMap. At degree n its component is the cycle inclusion, preceded
-by the identification of the single complex's term with the cycles object.
-The induced map on cycles is therefore the inverse single/cycles
-identification. Naturality of homologyπ makes its induced homology map the
-canonical quotient of K, preceded by the inverse single/homology
-identification. The derived single/homology isomorphism is defined using
-these same localization and single comparisons; cancel them to obtain the
-formula. -/
+Source: Stacks Project, Tag 05TC (2). -/
 theorem cyclesDerivedMap_homology (n : ℤ) (K : CochainComplex C ℤ) :
     (singleFunctorCompHomologyFunctorIso C n).inv.app ((K.sc n).cycles) ≫
       (homologyFunctor C n).map (cyclesDerivedMap n K) =

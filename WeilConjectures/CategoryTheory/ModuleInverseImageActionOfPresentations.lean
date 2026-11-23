@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.ModuleInverseImageAction
 public import WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
 /-! # Constructing scalar actions from set inverse-image presentations
 Source: Stacks Project, Modules on Sites, Tag 03D2.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public section
 universe u
@@ -27,14 +26,7 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   (φ : A ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj B)
   (M : SheafOfModules.{u} A)
 /-- Transport the scalar operation, and test each module law on products of unit sections.
-Source: Stacks Project, Tag 03D2.
-(auxiliary; not a blueprint node).
-Proof: transport the source scalar-action morphism using the product of the two
-presentations. Naturality gives semilinear restrictions. Its defining equation on
-units gives unit linearity. Each module axiom is an equality of sheaf maps out of a
-product of one, two or three of the given presentations. Test on source-unit tuples;
-the ring unit preserves addition, multiplication, zero and one, and the abelian unit
-preserves addition and zero. The equations reduce to the source module axioms. -/
+Source: Stacks Project, Tag 03D2. -/
 theorem inverseImageAction_of_presentations
     (pr : SheafPullbackUnitPresentation (F := F)
       ((sheafCompose J (CategoryTheory.forget RingCat.{u})).obj A)

@@ -11,9 +11,7 @@ public import WeilConjectures.Algebra.Homology.CountableTensorStructures
 
 /-! # Tensor structures from countable coproducts
 
-Source: Stacks Project, derived.tex, Tag 0G6E, signed direct-sum totalization;
-Mathlib's graded-object and homological-complex monoidal constructions.
-(blueprint: def-sfb-countable-tensor-structures)
+Source: Stacks Project, derived.tex, Tag 0G6E, signed totalization.
 -/
 
 @[expose] public section
@@ -35,8 +33,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   [TensorPreservesCountableCoproducts C]
 
 /-- The standard Koszul braiding, with summand map `(-1)^(pq)` times the base braiding.
-Source: `CochainComplex.Monoidal.braidedCategory`, Stacks Tag 0G6E
-(blueprint: def-sfb-countable-tensor-structures). -/
+Source: `CochainComplex.Monoidal.braidedCategory`, Stacks Tag 0G6E. -/
 noncomputable instance braided [BraidedCategory C] : BraidedCategory (CochainComplex C ℤ) :=
   CochainComplex.Monoidal.braidedCategory
 

@@ -198,13 +198,7 @@ lemma homologyConcentratedIn_tensor_singleFunctor_of_ideal (I : Ideal R) {κ F :
 a finite family `r`, let `κ` be killed by `I` with `κ ⊗ F ≅ F` for every `F` killed by `I`, and
 assume that tensoring with an object killed by `I` preserves monomorphisms between objects killed
 by `I`. Then `K ∈ D(C)` has Tor amplitude in `[a, b]` if and only if `K ⊗ᴸ κ` has homology
-concentrated in `[a, b]`.
-
-One direction is the definition of Tor amplitude. Conversely, for `F` killed by `I` this is
-`DerivedCategory.homologyConcentratedIn_tensor_singleFunctor_of_ideal`; a general `F` is killed
-by `Iⁿ = 0`, and the short exact sequences `0 ⟶ I F ⟶ F ⟶ F / I F ⟶ 0`
-(`CategoryTheory.exists_shortExact_of_smul_eq_zero_of_mem_pow_succ`) give distinguished triangles
-whose outer terms, after tensoring with `K`, have homology in `[a, b]` by induction. -/
+concentrated in `[a, b]`. -/
 theorem torAmplitudeIn_iff_tensorSingleConcentratedIn_of_ideal {ι : Type*}
     [Finite ι] (r : ι → R) {n : ℕ} (hn : Ideal.span (Set.range r) ^ n = ⊥) {κ : C}
     (hκ : ∀ x ∈ Ideal.span (Set.range r), x • 𝟙 κ = 0)

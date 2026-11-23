@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # Reflection of exactness by ringed-slice extension
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8G.
 -/
 
 @[expose] public section
@@ -68,11 +67,7 @@ private theorem sheafification_single_injective
 
 /-- The sheafified direct-sum extension from a ringed slice is faithful.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G.
-Proof: include each section in its indexed summand and use naturality of the
-module sheafification unit. Equality of the extended maps gives equality of
-the sheafified sections in that summand. The preceding local-injectivity
-argument and separatedness of the original slice sheaf recover their equality. -/
+Source: Stacks Project, Modules on Sites, Tag 0E8G. -/
 private theorem ringedSliceExtension_faithful
     {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) (R : Sheaf J RingCat.{max u v}) (U : C) :
@@ -113,24 +108,7 @@ private theorem ringedSliceExtension_faithful
 
 /-- Exactness after the sheafified direct-sum extension detects exactness on the slice.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
-
-Proof: At (V, φ), inject a section of G into the φ summand of its direct-sum
-extension and then sheafify. These maps commute with restrictions. If the
-image is zero, the module and underlying-set sheafification comparisons and
-local injectivity of the sheafification unit give a covering sieve on V
-where the restricted direct-sum section is zero. Projecting to the φ-coordinate
-after restriction shows that the original section vanishes on the corresponding
-cover in the slice. Sheaf separatedness makes it zero. An empty covering sieve
-also works: a sheaf has just one section there. Thus this natural unit is monic,
-and L(G) = 0 implies G = 0.
-The preservation theorem makes L exact. Factor S.f through ker S.g and let H
-be the cokernel of this factorization. Exactness of L identifies L(H) with
-the analogous quotient for the extended complex. The hypothesis makes that
-quotient zero, so H = 0 by the monic unit. The factorization is therefore epic,
-which is precisely S.Exact. Equivalently the monic natural unit makes L faithful,
-and Mathlib's Functor.reflects_exact_of_faithful supplies the last step. -/
+Source: Stacks Project, Modules on Sites, Tag 0E8G. -/
 theorem ringedSliceExtension_reflects_exact
     {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C)

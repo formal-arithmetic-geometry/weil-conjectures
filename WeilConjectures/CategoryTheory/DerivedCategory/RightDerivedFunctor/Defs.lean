@@ -26,10 +26,6 @@ isomorphisms. As a consequence, any functor from
 `HomotopyCategory C (ComplexShape.up ℤ)` has a (pointwise) right derived
 functor with respect to quasi-isomorphisms, and the unit of such a derived
 functor is an isomorphism on K-injective complexes.
-
-In mathlib, this file would be
-`Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctor.lean`.
-
 -/
 
 @[expose] public section

@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarInvaria
 /-!
 # Scalar restriction sends K-injective actions to invariant-acyclic complexes
 
-Source: paragraph (3) of the direct-image stability proof (blueprint:
-def-sfb-condensed-derived-invariants); Stacks, Cohomology on Sites, Tag 0D6E.
+Source: Stacks, Cohomology on Sites, Tag 0D6E.
 
 Let `a : A ⟶ A'` be a map of condensed rings. For a K-injective complex `I` of internal
 `A'`-actions and a quasi-isomorphism `j : σ(I) ⟶ J` from its scalar restriction to a

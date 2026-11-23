@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.LocalCoefficientLocalization
 /-! # The countable multiplication difference
 
 Source: Stacks Project, algebraization.tex, Tag 0997.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -21,7 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- The functor taking a countable power.
-Source: Stacks Tag 0997 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0997. -/
 def countablePower (B : Type u) [Category.{v} B] [HasCountableProducts B] : B ⥤ B where
   obj M := ∏ᶜ fun _ : ℕ ↦ M
   map g := Limits.Pi.map (fun _ : ℕ ↦ g)
@@ -39,13 +38,13 @@ private def countablePowerIsoLim (B : Type u) [Category.{v} B]
       simp [countablePower])
 
 /-- Powers act additively on morphisms.
-Source: Stacks Tag 0997 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0997. -/
 instance countablePower_additive (B : Type u) [Category.{v} B] [Preadditive B]
     [HasCountableProducts B] : (countablePower B).Additive where
   map_add := by intros; apply Pi.hom_ext; intro n; simp [countablePower]
 
 /-- Countable powers commute with limits.
-Source: Stacks Tag 0997 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0997. -/
 instance countablePower_preservesLimitsOfShape (B : Type u) [Category.{v} B]
     [HasCountableProducts B] (D : Type*) [Category* D] [HasLimitsOfShape D B] :
     PreservesLimitsOfShape D (countablePower B) := by
@@ -54,7 +53,7 @@ instance countablePower_preservesLimitsOfShape (B : Type u) [Category.{v} B]
   exact preservesLimitsOfShape_of_natIso (countablePowerIsoLim B).symm
 
 /-- Identity minus the multiplication shift on a countable power.
-Source: Stacks Tag 0997 (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 0997. -/
 def multiplicationDifference {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (U : C) (f : O.obj.obj (op U)) :
     countablePower (SheafOfModules.{u} ((localCoefficientRings O).over U)) ⟶

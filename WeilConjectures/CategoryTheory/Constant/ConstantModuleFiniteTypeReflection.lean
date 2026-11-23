@@ -25,8 +25,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Constant module sheaves reflect finite generation
 
-Source: Stacks Project, Modules on Sites, Tag 093N, assertion (1)
-(blueprint: lem-sfb-constant-module-finite-type-reflection).
+Source: Stacks Project, Modules on Sites, Tag 093N, assertion (1).
 -/
 
 -- After pruning, this module only keeps private declarations.

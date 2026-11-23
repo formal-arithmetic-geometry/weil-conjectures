@@ -97,14 +97,6 @@ For the two squares
 with `α : F ⋙ E₁ ≅ E₀ ⋙ P` and `β : G ⋙ E₂ ≅ E₁ ⋙ Q`, the derived comparison of the outer
 square `F ⋙ G`, `P ⋙ Q` is the paste of `D(α)` and `D(β)`, conjugated by the composition
 isomorphisms `D(F ⋙ G) ≅ D(F) ⋙ D(G)` and `D(P ⋙ Q) ≅ D(P) ⋙ D(Q)`.
-Source: WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate,
-composition associativity and whiskering naturality.
-
-Proof. Expand the derived square comparisons. Derivation preserves composition of
-natural isomorphisms. Its two whiskering laws express the two derived whiskered maps
-using the composition isomorphisms. Apply composition associativity at the three
-successive triples to cancel the intermediate composition comparisons. The remaining
-factors are precisely the two derived squares and the endpoint composition comparisons.
 -/
 theorem mapDerivedCategorySquareIso_paste (α : F ⋙ E₁ ≅ E₀ ⋙ P) (β : G ⋙ E₂ ≅ E₁ ⋙ Q) :
     (mapDerivedCategorySquareIso (F₁ := F ⋙ G) (F₂ := E₂)

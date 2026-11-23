@@ -15,9 +15,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.PrecoverageToGrothend
 /-!
 # The small profinite site for internal condensed actions
 
-Source: paragraph (3) of the direct-image stability proof, action-site presentation
-(blueprint: def-sfb-condensed-derived-invariants).
-
 We replace `Profinite.{u}` by its small model `AsSmall.{u + 1} Profinite.{u}`, carrying the
 transported coherent topology, presented by the precoverage of all covering presieves. On
 this small site we record the group presheaf `S ↦ C(S, G)` of a topological group, which is

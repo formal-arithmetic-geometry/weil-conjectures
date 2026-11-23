@@ -13,9 +13,9 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Effective gluing of augmented complexes of module sheaves
 
-Source: Stacks Project, Sites, Tag 04TR, applied degreewise, and algebraization,
-Tag 099E, the gluing of the complexes K_U.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Sites, Tag 04TR, and algebraization, Tag 099E.
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +33,7 @@ namespace SheafOfModules
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable {R : Sheaf J RingCat.{u}} {A : Type u} {U : A → C}
 
-/-- Restricting module sheaves to each slice preserves zero morphisms.
-Source: the sectionwise definition of slice restriction.
-(auxiliary; not a blueprint node). -/
+/-- Restricting module sheaves to each slice preserves zero morphisms. -/
 instance augmentedComplexGlueData_over_preservesZeroMorphisms
     (R : Sheaf J RingCat.{u}) {A : Type u} (U : A → C) :
     ∀ i, (overFunctor.{u} R (U i)).PreservesZeroMorphisms :=
@@ -44,8 +42,7 @@ instance augmentedComplexGlueData_over_preservesZeroMorphisms
 /-- Strict descent data for augmented complexes on slices of a ringed site.
 All transitions are specified on sections over test spans, avoiding any choice of
 fibre products. Their equations express chain compatibility and the augmentation square.
-Source: Stacks Project, Tag 04TR and algebraization, Tag 099E.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 04TR and algebraization, Tag 099E. -/
 structure AugmentedComplexGlueData (R : Sheaf J RingCat.{u}) {A : Type u} (U : A → C)
     [∀ i, (overFunctor R (U i)).PreservesZeroMorphisms]
     (B : CochainComplex (SheafOfModules.{u} R) ℤ)
@@ -348,17 +345,7 @@ private def gluedComplexOverIso (D : AugmentedComplexGlueData R U B L a) (i : A)
 
 /-- Strict descent data of augmented module complexes are effective on any covering
 family of objects. No boundedness or existence of fibre products is required.
-Source: Stacks Project, Sites, Tag 04TR; algebraization, Tag 099E.
-(auxiliary; not a blueprint node).
-
-Proof: in degree n form the sheaf of compatible tuples supplied by ModuleGlueData.
-Apply the local differentials coordinatewise. Their chain equations and their square-zero
-relations hold coordinatewise, giving a global complex. The diagonal from a global module
-to the tuples of its restrictions is invertible: on each covering slice, evaluation at the
-graph is its inverse, and isomorphisms of sheaves are local. Descend each augmentation
-component by this diagonal. Its chain equation holds after restriction to each covering
-slice, hence globally. Graph evaluation gives the asserted chain isomorphisms and the
-augmentation equation. The construction also applies to the empty site and empty covers. -/
+Stacks Project, Sites, Tag 04TR; algebraization, Tag 099E. -/
 theorem exists_augmentedComplex_of_glueData (hU : J.CoversTop U)
     (D : AugmentedComplexGlueData R U B L a) :
     ∃ (K : CochainComplex (SheafOfModules.{u} R) ℤ) (ε : K ⟶ B),

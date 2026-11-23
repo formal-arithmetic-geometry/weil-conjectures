@@ -10,9 +10,6 @@ public import WeilConjectures.CategoryTheory.RightDerivedSingleZeroUnit
 import all Mathlib.Algebra.Homology.Localization
 
 /-! # Degree zero of the derived adjunction unit on a single object
-
-Source: the formal support-triangle step of native smooth-divisor bottom descent.
-(blueprint: lem-pur-derived-unit-single-bottom).
 -/
 
 @[expose] public noncomputable section
@@ -71,16 +68,7 @@ private theorem rightDerivedUnitQ_zero_of_single_iso
 
 /-- The canonical derived adjunction unit on a single object is invertible in degree zero
 whenever the ordinary adjunction unit is invertible.
-Source: Stacks Project, Tags 0DVC and 0156; Step 1 of native smooth-divisor bottom descent.
-Proof: degree zero of the right-derived comparison on a single object is invertible,
-by its normalization to the zeroth classical derived functor. Naturality transports
-this to the image of a single complex under the exact left adjoint. The cochain
-normalization of the derived adjunction unit writes it as the ordinary cochain unit
-followed by this comparison. The ordinary unit is an isomorphism termwise on the
-single complex: in degree zero by hypothesis, and elsewhere because both objects
-are zero. Apply degree-zero homology and cancel the exact-functor comparison. Finally
-transport from the quotient of the single complex to the canonical single object.
-(blueprint: lem-pur-derived-unit-single-bottom). -/
+Stacks Project, Tags 0DVC and 0156. -/
 private theorem derived_unit_single_zero_of_unit
     {C E : Type*} [Category C] [Category E] [Abelian C] [Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory E]
@@ -138,15 +126,7 @@ private theorem derived_unit_single_zero_of_unit
 
 /-- Invertibility of the ordinary adjunction unit is equivalent to invertibility
 of degree zero of the canonical derived unit on a single object.
-Source: Stacks Project, Tags 0DVC and 0156; native bottom descent Step 1.
-Proof: the cochain normalization factors the derived unit through the ordinary
-cochain unit and the right-derived comparison. The latter is invertible in degree
-zero on a single object. Exactness of the left adjoint identifies its image with
-a single complex. The additive right adjoint also commutes with single complexes.
-Under these comparisons the ordinary cochain unit is the single complex of the
-ordinary unit, by naturality. Degree-zero homology of the single functor is the
-identity, so all the comparison factors can be cancelled in both directions.
-(blueprint: lem-pur-derived-unit-single-bottom). -/
+Stacks Project, Tags 0DVC and 0156. -/
 theorem derived_unit_single_zero_isIso_iff
     {C E : Type*} [Category C] [Category E] [Abelian C] [Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory E]

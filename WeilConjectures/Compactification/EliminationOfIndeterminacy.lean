@@ -34,48 +34,26 @@ This is the root of the modification layer: the transport of scheme-theoretic im
 (`WeilConjectures.Compactification.CommonModification`), graph extensions
 (`WeilConjectures.Compactification.GraphExtension`) and isomorphism near a boundary
 closure (`WeilConjectures.Compactification.IsomorphismNearClosure`) are all consumers of
-it, and the two-open compactification theorem (proof order items 43–48) consumes those.
+it, and the two-open compactification theorem consumes those.
 
-## The route taken
+## Implementation details
 
-The Stacks Project proves Tag 081S by Raynaud–Gruson flattening (Stacks Tags 0815 and
-081R, together with 081P and 081L), but that chain — proof order items 25–29 — is *not*
-the route taken here: it bottoms out in the dévissage sections of Stacks §§38.4–38.10,
-which do not exist in Mathlib.
+Tag 081S is not proved here by Raynaud–Gruson flattening (Stacks Tags 0815, 081R, 081P and
+081L), which bottoms out in dévissage sections of the Stacks Project that are not in Mathlib.
+It is formalized instead via Conrad's Theorem 2.4 and Zariski's Main Theorem. The statement of
+Conrad's Theorem 2.4 that this file consumes is
+`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` of
+`WeilConjectures.Blowup.PartialSectionExtension`, used through its `U = V` corollary
+`AlgebraicGeometry.exists_admissibleBlowup_extend_section` (Conrad's Remark 2.5).
 
-Tag 081S is formalized instead via **Conrad's Theorem 2.4 and Zariski's Main Theorem**.
-The statement of Conrad's Theorem 2.4 that this file
-consumes is `AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` of
-`WeilConjectures.Blowup.PartialSectionExtension`, used here through its `U = V` corollary
-`AlgebraicGeometry.exists_admissibleBlowup_extend_section` (Conrad's Remark 2.5). Both are
-formalized: `exists_admissibleBlowup_extend_partialSection` is proved in
-`WeilConjectures/Blowup/PartialSectionExtension.lean`, with the `U = V` corollary
-`exists_admissibleBlowup_extend_section` in the same file. The external inputs of that
-proof are ZMT, which is Mathlib's `Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean`,
-and Stacks Tag 04II, formalized here as `exists_immersion_affineSpace_of_quasiAffine`
-(`WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean`).
+Properness over a separated target is Mathlib's `AlgebraicGeometry.IsProper.of_comp`, and finite
+type over a separated target (hence also quasi-compactness of an open immersion over a separated
+target) is Mathlib's `AlgebraicGeometry.locallyOfFiniteType_of_comp` and
+`AlgebraicGeometry.QuasiCompact.of_comp`.
 
-The deduction of Tag 081S carried out here is: prepare a Cartier boundary
-(`exists_admissibleBlowup_cartierBoundary`, Tag 080Y), so that `U` becomes
-scheme-theoretically dense; extend the inverse of `q` over `U` to a section over an open
-`W` of a second admissible blow-up, by Conrad's Remark 2.5; compose the two blow-ups
-(`Scheme.IdealSheafData.exists_blowup_comp`, Tag 080B); and observe that the graph of the
-extension, being closed and containing the scheme-theoretically dense `U`-graph, cuts out
-the strict transform, which is therefore isomorphic to the open `W`.
+## References
 
-Note that the two-open compactification theorem itself does not go through flattening
-either way — it uses the boundary-separation route of
-`WeilConjectures.Blowup.AdmissibleBlowup`.
-
-The finite-type helper lemmas are already in Mathlib and are not restated in this
-development: properness over a separated target is Mathlib's
-`AlgebraicGeometry.IsProper.of_comp`, and the two halves of
-finite type over a separated target (hence also quasi-compactness of an open immersion
-over a separated target) are Mathlib's
-`AlgebraicGeometry.locallyOfFiniteType_of_comp` and
-`AlgebraicGeometry.QuasiCompact.of_comp` (the latter only needs the second leg
-quasi-separated, which separatedness supplies).
-
+Stacks Project, Tag 081S; B. Conrad, *Deligne's notes on Nagata compactifications*.
 -/
 
 @[expose] public section
@@ -102,7 +80,7 @@ variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
 finite-type ideal sheaf on `X` whose support is exactly the complement of the quasi-compact
 open `U` (`Scheme.exists_finiteType_ideal_coe_support_eq_compl`, Stacks Project Tag 01PH).
 Its blow-up `X₁ = Bl_{𝓘₀}(X)` is a `U`-admissible blow-up in which `U` is
-scheme-theoretically dense (step 1 of the construction). -/
+scheme-theoretically dense. -/
 noncomputable def eliminationBoundaryIdeal : X.IdealSheafData :=
   (X.exists_finiteType_ideal_coe_support_eq_compl U hU).choose
 
@@ -170,7 +148,7 @@ variable {Z : Scheme.{u}} (q : Z ⟶ X) (hq : IsIso (q ∣_ U))
 
 /-- **Step 2 of the elimination construction, the quasi-domination**: over the preimage of `U`
 in `X₁ = Bl_{𝓘₀}(X)`, the section of the base change `Z ×_X X₁ ⟶ X₁` induced by the inverse of
-the isomorphism `q⁻¹(U) ≅ U` (step 2 of the construction). -/
+the isomorphism `q⁻¹(U) ≅ U`. -/
 noncomputable def eliminationGraphSection :
     ((eliminationBoundaryIdeal hU).blowupMap ⁻¹ᵁ U :
       (eliminationBoundaryIdeal hU).blowup.Opens).toScheme ⟶
@@ -222,7 +200,7 @@ theorem exists_eliminationExtension :
 /-- **Step 2 of the elimination construction: the Conrad extension centre** on
 `X₁ = Bl_{𝓘₀}(X)`, the admissible blow-up centre selected from `exists_eliminationExtension`
 (Conrad's elimination theorem over the base `X₁`, applied to the quasi-domination
-`eliminationGraphSection`; step 2 of the construction). -/
+`eliminationGraphSection`). -/
 noncomputable def eliminationExtensionCentre :
     IsAdmissible (eliminationBoundaryIdeal hU).blowup
       ((eliminationBoundaryIdeal hU).blowupMap ⁻¹ᵁ U) :=
@@ -247,7 +225,7 @@ theorem eliminationExtensionCentre_spec :
 the composition theorem for blow-ups (`Scheme.IdealSheafData.exists_blowup_comp`, Stacks
 Project Tag 080B) applied to the boundary ideal `𝓘₀` and the Conrad extension centre on
 `X₁ = Bl_{𝓘₀}(X)`; thus `Bl_K(X)` is identified over `X` with the composite of the two
-blow-ups (step 3 of the construction). -/
+blow-ups. -/
 noncomputable def eliminationCentre : X.IdealSheafData :=
   (Scheme.IdealSheafData.exists_blowup_comp (eliminationBoundaryIdeal hU)
     (eliminationBoundaryIdeal_ofFiniteType hU) (eliminationExtensionCentre hU q hq).I
@@ -296,9 +274,8 @@ open `U`, the `U`-admissible blow-up of `X` assembled from three steps:
 3. the composite centre `K` on `X` (`eliminationCentre`) with `Bl_K(X) ≅ Bl_𝓘(X₁)` over `X`,
    whose support is exactly `Uᶜ` (`coe_support_eliminationCentre`).
 
-The support formula of Tag 080B gives the support `Uᶜ`, and the scheme-theoretic density of
-`U` in `Bl_K(X)` follows from that alone
-(`isSchemeTheoreticallyDominant_eliminationBlowup_preimage`). -/
+The scheme-theoretic density of `U` in `Bl_K(X)` is
+`isSchemeTheoreticallyDominant_eliminationBlowup_preimage`. -/
 noncomputable def eliminationBlowup : IsAdmissible X U where
   I := eliminationCentre hU q hq
   finiteType := (eliminationCentre_spec hU q hq).1
@@ -314,9 +291,7 @@ by the three steps of the construction: a modification `π₁ : Y₁ ⟶ X` with
 base change of `q` over the preimage of `U`, a second modification `π₂ : Y₂ ⟶ Y₁` with an
 extension `g` of `f₁` over an open `W ⊇ π₂⁻¹(π₁⁻¹(U))` with closed graph, and a finite-type
 ideal `K` with support `Uᶜ` whose blow-up is identified with `Y₂` over `X`. Then the strict
-transform of `q` along `Bl_K(X) ⟶ X` is an open immersion: the graph of the extension is
-closed and contains the scheme-theoretically dense `U`-graph, so it cuts out the strict
-transform, which is therefore isomorphic to the open `W`. -/
+transform of `q` along `Bl_K(X) ⟶ X` is an open immersion. -/
 theorem isOpenImmersion_strictTransformMap_of_extension {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) {Z : Scheme.{u}}
     (q : Z ⟶ X) [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q] (hq : IsIso (q ∣_ U))
@@ -515,13 +490,7 @@ theorem isOpenImmersion_strictTransformMap_of_extension {X : Scheme.{u}} [Compac
 
 /-- **Elimination of indeterminacy for the constructed blow-up** (Stacks Project Tag 081S):
 the strict transform
-of `q` along `AlgebraicGeometry.eliminationBlowup` is an open immersion.
-
-The proof follows the Conrad/Zariski's-Main-Theorem route along the three steps of the
-construction: in `X₁ = Bl_{𝓘₀}(X)` the open `U` is scheme-theoretically dense; the graph
-section extends over an open `W` of the Conrad blow-up `Bl_𝓘(X₁)`; and, transporting along
-`Bl_K(X) ≅ Bl_𝓘(X₁)`, the graph of the extension cuts out the strict transform
-(`isOpenImmersion_strictTransformMap_of_extension`). -/
+of `q` along `AlgebraicGeometry.eliminationBlowup` is an open immersion. -/
 theorem isOpenImmersion_strictTransformMap_eliminationBlowup {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {U : X.Opens} (hU : IsCompact (U : Set X)) {Z : Scheme.{u}}
     (q : Z ⟶ X) [IsSeparated q] [LocallyOfFiniteType q] [QuasiCompact q] (hq : IsIso (q ∣_ U)) :

@@ -29,10 +29,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
       (t X Y).hom ≫ (F.map f ⊗ₘ F.map g))
 
 /-- The total inverse comparison is natural in both complex variables.
-Source: Stacks Project, sites-modules.tex, Tag 03EL.
-Proof: check each totalization summand, use coefficient naturality for the inverse
-comparison, and then use naturality of the summand inclusions.
-(blueprint: lem-weil-pbc-cech-pullback-total-tensor-comparison) -/
+Source: Stacks Project, sites-modules.tex, Tag 03EL. -/
 theorem inverse_naturality
     {P P' Q Q' : CochainComplex A ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
     HomologicalComplex.tensorHom ((F.mapHomologicalComplex (.up ℤ)).map f)
@@ -71,10 +68,7 @@ theorem inverse_naturality
 
 omit [HasCoproducts.{0} B] in
 /-- The left unitor on the summand with first degree zero.
-Source: Stacks Project, sites-modules.tex, Tag 03EL.
-Proof: multiply the inverse-unitor formula by the unitor and cancel the ordinary unit
-identification and inverse ordinary unitor.
-(blueprint: lem-weil-pbc-cech-pullback-total-tensor-comparison) -/
+Source: Stacks Project, sites-modules.tex, Tag 03EL. -/
 theorem inclusion_leftUnitor (K : CochainComplex B ℤ) (n : ℤ) :
     HomologicalComplex.ιTensorObj (HomologicalComplex.tensorUnit B (.up ℤ)) K
         0 n n (zero_add n) ≫ (HomologicalComplex.leftUnitor K).hom.f n =
@@ -95,12 +89,7 @@ theorem inclusion_leftUnitor (K : CochainComplex B ℤ) (n : ℤ) :
   simp [← Category.assoc]
 
 /-- The normalized comparison preserves the multiplication of degree-zero units.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E; sites-modules.tex, Tag 03EL.
-Proof: use extensionality into the degree-zero single complex and test on every source
-summand. A nonzero first degree makes the tensor summand zero; otherwise both degrees
-are zero. The summand formula for the unitor, naturality of the ordinary left unitor,
-and the coefficient comparison unit equation give the remaining equality.
-(blueprint: lem-weil-pbc-cech-pullback-total-tensor-comparison) -/
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E; sites-modules.tex, Tag 03EL. -/
 theorem inverse_unit (e : F.obj (𝟙_ A) ≅ 𝟙_ B)
     (hu : (t (𝟙_ A) (𝟙_ A)).hom ≫ (e.hom ⊗ₘ e.hom) ≫ (λ_ (𝟙_ B)).hom =
       F.map (λ_ (𝟙_ A)).hom ≫ e.hom) :

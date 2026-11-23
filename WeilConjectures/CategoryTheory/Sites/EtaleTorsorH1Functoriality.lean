@@ -19,7 +19,7 @@ import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductExists
 # Functoriality of the étale torsor classification of H¹
 
 Source: Stacks Project, Cohomology on Sites, Lemma 03AJ and functoriality of its torsor
-extension (blueprint: lem-sc-etale-torsor-h1-functoriality).
+extension.
 -/
 
 @[expose] public section
@@ -35,26 +35,7 @@ The inverse-image torsor is identified with the sheafified set inverse image, wi
 specified by equivariance on the sections pulled back by the adjunction units. The contracted
 product is specified by its sheaf-quotient presentation, including the antidiagonal relation
 and translation by the new group on the second factor.
-Source: Stacks Project, Cohomology on Sites, Lemma 03AJ.
-(blueprint: lem-sc-etale-torsor-h1-functoriality)
-
-Proof:
-1. Represent the class of T by the connecting image of 1 in the canonical extension
-0 → G → E_T → ℤ → 0 (`lemma-cohomology-multiplicative-group--3`). Pullback identifies this extension
-with the extension of the set inverse image, whose fibre over 1 is the inverse-image torsor
-(`lem-sc-etale-torsor-inverse-image-extension`).
-2. Pullback commutes with the connecting maps
-(`lem-weil-pbc-pullback-cohomology-long-exact-ladder`, clause 3) and in degree zero pulls back
-sections (`lem-weil-pbc-cohomology-pullback-degree-zero`), hence sends 1 to 1. The boundary
-representative description gives the asserted equality of classes under scheme pullback.
-3. Push E_T out along φ. Its fibre over 1 is the contracted product, with relation
-(g +ᵥ t, h - φ(g)) ∼ (t,h) and G' translating h
-(`lem-sc-etale-torsor-pushout-extension`).
-4. The maps (φ, E_T → pushout, id_ℤ) form a morphism of short exact sequences. Connecting
-maps are natural (`lem-weil-pbc-right-derived-universal-delta-functor`), so H¹(φ) sends the
-boundary of 1 to the boundary of 1 for the pushout. The canonical classification identifies
-these boundaries with the two torsor classes (`lemma-cohomology-multiplicative-group--3`), and the
-coefficient map is that of `proposition-cohomology-p-1-over-henselian--1`. -/
+Source: Stacks Project, Cohomology on Sites, Lemma 03AJ. -/
 theorem etale_torsor_h1_functoriality :
     (∀ (X Y : Scheme.{u}) (f : Y ⟶ X)
       (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (T : Torsor G),
