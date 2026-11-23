@@ -134,7 +134,7 @@ variable [Finite k]
 Let `X` be an affine scheme of finite type and of dimension at most one over a finite field `k`
 with `q` elements. Then there is a constant `d` such that `#X(𝔽_(q ^ n)) ≤ d q ^ n` for every
 `n ≥ 1`.
- -/
+-/
 theorem Hom.exists_pointCount_le_mul_pow [IsAffine X] (f : X ⟶ Spec (.of k))
     [LocallyOfFiniteType f] (hX : topologicalKrullDim X ≤ 1) :
     ∃ d : ℕ, ∀ n : ℕ, n ≠ 0 → f.pointCount n ≤ d * Nat.card k ^ n := by
