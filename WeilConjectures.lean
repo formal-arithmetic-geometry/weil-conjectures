@@ -14261,6 +14261,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
 public import WeilConjectures.CategoryTheory.Adjunction.TowerTransitionTransport
 public import WeilConjectures.CategoryTheory.Adjunction.UniqueAdjointComparison
 public import WeilConjectures.CategoryTheory.Adjunction.UnitBiproductDesc
+public import WeilConjectures.CategoryTheory.Adjunction.UnitDualizable
 public import WeilConjectures.CategoryTheory.Adjunction.UnitIsIsoTransfer
 public import WeilConjectures.CategoryTheory.Adjunction.UnitOfCounitSquare
 public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection

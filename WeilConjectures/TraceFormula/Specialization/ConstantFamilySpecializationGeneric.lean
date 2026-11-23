@@ -23,7 +23,8 @@ Let `Y` be a smooth, irreducible and reduced separated `k`-scheme of finite type
 (`ProEtale.CondensedRing.constantFamilySpecialization`). For every bounded constructible
 `ℚ̄_ℓ`-complex `L` on `Y`, `σ_Y(L)` is an isomorphism over the inverse image in `Y ⊗ k'` of a
 dense open subset of `Y` (`ProEtale.CondensedRing.exists_dense_isIso_constantFamilySpecialization`).
-This is the generic part of the proof of blueprint `lemma-nearby-cycles-constant-family`.
+This is the generic part of the proof that `σ_Y(L)` is an isomorphism
+(`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app`).
 
 ## Proof
 

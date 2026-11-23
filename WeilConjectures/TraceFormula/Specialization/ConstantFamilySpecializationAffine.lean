@@ -21,12 +21,11 @@ public import WeilConjectures.TraceFormula.Specialization.ZeroSectionAffine
 
 For `Y` separated of finite type over `k` and `L` bounded constructible on `Y` with
 `ℚ̄_ℓ`-coefficients, the specialization map `σ_Y(L) : Lπ_Y^* L ⟶ Ψ_{Y × S}(L)` of the constant
-family `Y × S` is an isomorphism (`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app`,
-blueprint `lemma-nearby-cycles-constant-family`).
+family `Y × S` is an isomorphism (`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app`).
 
 ## Proof
 
-Following the blueprint, we first treat affine spaces `𝔸ᴺ_k`, by induction on `N`
+We first treat affine spaces `𝔸ᴺ_k`, by induction on `N`
 (`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app_polyAffine`).
 * `σ_{𝔸ᴺ}(L)` is an isomorphism over a dense open `U ⊆ 𝔸ᴺ_k`
   (`ProEtale.CondensedRing.exists_dense_isIso_constantFamilySpecialization`). For `N = 0` the affine
@@ -41,9 +40,11 @@ Following the blueprint, we first treat affine spaces `𝔸ᴺ_k`, by induction 
   finite over `𝔸ᴺ_k`, and it vanishes because direct image is conservative on finite support
   (`ProEtale.CondensedRing.isIso_of_isIso_rightDerivedLowerStar_of_isFinite`).
 
-An affine `Y` embeds into some `𝔸ᴺ_k` by a closed immersion `i`, along which `Ri_{s*}` reflects
-isomorphisms (proper compatibility), and the question is local for a finite affine open cover
-(smooth compatibility).
+An affine `Y` embeds into some `𝔸ᴺ_k` by a closed immersion `i`
+(`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app_of_isAffine`). The proper
+compatibility identifies `Ri_{s*} σ_Y(L)` with `σ_{𝔸ᴺ}(Ri_* L)`, and `Ri_{s*}` reflects
+isomorphisms. For a general `Y` the question is local for a finite affine open cover, by the smooth
+compatibility.
 
 -/
 
@@ -68,7 +69,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 separated `k`-schemes of finite type and `T ⊆ Y` a closed subset finite over `B`, the image of
 `t : T' ⟶ Y` with `T' ⟶ B` finite. A morphism `φ` of bounded constructible complexes on `Y` which
 is an isomorphism near every point outside `T` and such that `Rq_* φ` is an isomorphism is an
-isomorphism: its cone is supported on `T` and has vanishing direct image. -/
+isomorphism. -/
 theorem isIso_of_isIso_rightDerivedLowerStar_of_isFinite {Y B : Over (Spec (.of k))}
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
     [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (q : Y ⟶ B)
@@ -192,9 +193,7 @@ theorem isIso_map_constantFamilySpecialization_app_of_smooth {A B : Over (Spec (
     exact h₂.1 h₁
   exact (NatIso.isIso_map_iff (leftDerivedUpperStarComp _ W.ι _) _).2 key
 
-/-- The inductive step of
-`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app_polyAffine`, after the generic
-invertibility and the Noether normalisation: let `ψ` be an automorphism of `𝔸^{N+1}_k` and
+/-- **Inductive step for affine spaces**: let `ψ` be an automorphism of `𝔸^{N+1}_k` and
 `v : 𝔸^{N+1}_k ⟶ ℙ¹_{𝔸ᴺ_k}` the composite of `ψ` and the compactification of `X₀`.
 If `σ_{𝔸ᴺ}` is invertible, `σ_{𝔸^{N+1}}(L)` is invertible over an open `U ⊆ 𝔸^{N+1}_k`, and the
 complement of `U` lies in the image of some `a : V ⟶ 𝔸^{N+1}_k` with `V ⟶ 𝔸ᴺ_k` finite, then
@@ -299,9 +298,8 @@ theorem isIso_constantFamilySpecialization_app_of_isFinite (N : ℕ)
     exact ⟨z, by rw [hc, Scheme.Hom.comp_apply, hz]⟩
 
 /-- The base case `N = 0` of
-`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app_polyAffine`:
-`𝔸⁰_k` is a point, so the generic invertibility
-(`ProEtale.CondensedRing.exists_dense_isIso_constantFamilySpecialization`) is invertibility. -/
+`ProEtale.CondensedRing.isIso_constantFamilySpecialization_app_polyAffine`: for `L` bounded
+constructible on the point `𝔸⁰_k`, `σ_{𝔸⁰}(L)` is an isomorphism. -/
 theorem isIso_constantFamilySpecialization_app_polyAffine_zero
     (L : Dᵇc((polyAffine k 0).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((constantFamilySpecialization k' (Profinite.padicAlgClRingObj ℓ)
@@ -325,8 +323,7 @@ theorem isIso_constantFamilySpecialization_app_polyAffine_zero
   have (_ : Unit) := hU
   exact hP.isIso _
 
-/-- **The constant family of affine space** (the case `Y = 𝔸ᴺ_k` of blueprint
-`lemma-nearby-cycles-constant-family`): for `L` bounded constructible on `𝔸ᴺ_k`, the
+/-- **The constant family of affine space** : for `L` bounded constructible on `𝔸ᴺ_k`, the
 specialization map `σ_{𝔸ᴺ}(L) : Lπ^* L ⟶ Ψ_{𝔸ᴺ × S}(L)` is an isomorphism. -/
 theorem isIso_constantFamilySpecialization_app_polyAffine (N : ℕ)
     (L : Dᵇc((polyAffine k N).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -349,9 +346,7 @@ variable {A : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCompact A.h
   [IsSeparated A.hom]
 
 /-- **The constant family of an affine scheme**: for `Y` affine of finite type over `k` and `L`
-bounded constructible on `Y`, `σ_Y(L)` is an isomorphism. Embed `Y` into some `𝔸ᴺ_k` by a closed
-immersion `i`; the proper compatibility identifies `Ri_{s*} σ_Y(L)` with `σ_{𝔸ᴺ}(Ri_* L)`, and
-`Ri_{s*}` reflects isomorphisms. -/
+bounded constructible on `Y`, `σ_Y(L)` is an isomorphism. -/
 theorem isIso_constantFamilySpecialization_app_of_isAffine [IsAffine A.left]
     (L : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((constantFamilySpecialization k' (Profinite.padicAlgClRingObj ℓ) A).app L.obj) := by
@@ -368,10 +363,9 @@ theorem isIso_constantFamilySpecialization_app_of_isAffine [IsAffine A.left]
   exact ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
     (deformationSpecialFibreMap i hg k').left).fullyFaithfulROfIsIsoCounit).isIso_of_isIso_map _
 
-/-- **Nearby cycles of a constant family** (blueprint `lemma-nearby-cycles-constant-family`): for
+/-- **Nearby cycles of a constant family**: for
 `Y` separated of finite type over `k` and `L` bounded constructible on `Y`, the specialization map
-`σ_Y(L) : Lπ_Y^* L ⟶ Ψ_{Y × S}(L)` is an isomorphism. The question is local for a finite affine
-open cover, by the smooth compatibility. -/
+`σ_Y(L) : Lπ_Y^* L ⟶ Ψ_{Y × S}(L)` is an isomorphism. -/
 theorem isIso_constantFamilySpecialization_app (L : Dᵇc(A.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((constantFamilySpecialization k' (Profinite.padicAlgClRingObj ℓ) A).app L.obj) := by
   have : CompactSpace A.left := QuasiCompact.compactSpace_of_compactSpace A.hom
