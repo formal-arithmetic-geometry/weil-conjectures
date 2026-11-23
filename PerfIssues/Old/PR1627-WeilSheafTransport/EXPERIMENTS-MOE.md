@@ -27,8 +27,11 @@ generated-field source uses ordinary applications and structure notation.
 
 ### S2 elaborated
 
-The source-local replay found the first structural difference in `_proof_2`'s
-dependent proof argument:
+The source-local declaration writes `ObjectProperty.homMk` in `map`, but the
+saved S2 command elaborates only `(fun (x : Nat) => x)`. It does not snapshot
+the `powFunctor` value before finalization. The later stored-value replay
+found this first structural difference in `_proof_2`'s dependent proof
+argument:
 
 ```text
 path = root/body/arg/fn/fn/fn
@@ -40,18 +43,18 @@ right = @CategoryStruct.id
 ```
 
 The left head is the generated-field hom wrapper; the right head is the
-dependent `id` domain. This is visible while checking the elaborated value
-argument, before reduction of the stored declaration. `_proof_3` is a negative
+dependent `id` domain. It is visible while checking the stored generated
+value argument. `_proof_3` is a negative
 control: the corresponding checked argument reported no first structural
 difference.
 
 ### S3 finalized
 
-Finalization generates opaque theorem constants `_proof_1`, `_proof_2`, and
-`_proof_3`. `_proof_2` has nine type binders but eight value binders, so the
-finalized value telescope differs from its type. The relevant `homMk`/`id`
-pair is already present in the source-local value check; finalization is not
-the earliest origin.
+Declaration processing generates opaque theorem constants `_proof_1`,
+`_proof_2`, and `_proof_3`. `_proof_2` has nine type binders but eight value
+binders in the stored ConstantInfo. This type/value asymmetry alone does not
+show when the `homMk`/`id` pair appeared. No pre-finalization Expr for the
+generated law was saved.
 
 ### S4 stored ConstantInfo
 
@@ -92,8 +95,10 @@ Exact path: `_proof_2`, `root/body/arg/fn/fn/fn`,
 `@ObjectProperty.homMk (Endofunctor.Algebra (frobeniusPowPullback ...)) ...`
 versus `@CategoryStruct.id`.
 
-Earliest stage: S2 during direct declaration construction; the relevant shape
-survives S3/S4. Status: active at the dependent application boundary, not
+Earliest *verified* stage for the exact pair: S4, in the stored generated
+`_proof_2` value. The direct `homMk` construction is source-authored at S0;
+whether the paired `id` domain first differed at S2 or during finalization is
+unresolved. Status: active at the dependent application boundary, not
 merely latent in a definition body. It later propagates through M1/M2. The
 corresponding `_proof_3` argument is structurally aligned.
 
@@ -109,8 +114,10 @@ category, algebra, and `Algebra.IsIsoStr` arguments to `ObjectProperty.homMk`
 and resolves the dependent `id` expected type. The first head difference is
 the source/API choice, not a demonstrated alternate instance route.
 
-Declaration-finalization-generated: finalization creates opaque `_proof_*`
-theorems and changes `_proof_2`'s value binder count, but not the earliest pair.
+Declaration-finalization-generated: generated opaque `_proof_*` theorems are
+observed at S4. The nine-versus-eight binder asymmetry is in stored type and
+value; without an S2 law Expr, it does not demonstrate a finalization-induced
+change to the first pair.
 
 Environment/import-frozen: yes for `frobeniusPowPullback`, `liftOfStr`,
 `CategoryStruct.id`, and stored `_proof_*` metadata.
@@ -180,7 +187,7 @@ Perturbed elaboration: no valid provider or transparency ablation preserved the
 root while changing only one inferred argument. The generic-helper control is
 a construction-boundary diagnostic, not an Elaborator isolation.
 
-Frozen replay: the source-local `_proof_2` value argument checks and replays
+Frozen replay: the stored `_proof_2` value argument checks and replays
 the stored pair with `Kernel.isDefEq = true`; the first difference is the exact
 `homMk`/`id` path. The generic whole-root `#moe_root` attempt was stopped
 because full structural hashing exceeded the raw snapshot budget; the bounded
@@ -193,9 +200,10 @@ the generated telescope.
 
 ## 8. CONCLUSION
 
-Earliest divergence: S2, `_proof_2` path `root/body/arg/fn/fn/fn`.
+Earliest verified exact divergence: S4, `_proof_2` path
+`root/body/arg/fn/fn/fn`; the direct `homMk` API is source-authored at S0.
 Most likely origin: source-authored direct generated-field API, refined by
-Elaborator-selected implicit algebra/category arguments; finalization is later.
+implicit algebra/category arguments; S2 versus finalization timing is unknown.
 Elaborator contribution: plausible refinement, not demonstrated as an
 independent cause. Kernel contribution: demonstrated broad M1 propagation and
 M2 fallback after reduction. Cheap-but-fragile boundaries: `liftOfStr`, named
@@ -206,3 +214,16 @@ instance-search candidate trace for `ObjectProperty.homMk`, and whether a
 targeted transparency change can select a different type-preserving provider.
 No claim is made that `_proof_3` has the same mismatch; its checked argument
 is structurally aligned even though the surrounding field can still be costly.
+
+## Audit note and Batch 2 boundary test
+
+The earlier S2 label used a `run_meta` walk of the *stored* `_proof_2` value
+as though it were a pre-finalization snapshot. `source-generated.snapshot`
+contains only an unrelated lambda at S2 and `MOE_META`/`MOE_DIFF` records for
+the generated S4 declarations. The exact pair is therefore first verified at
+S4; a finalization contribution remains unresolved. E3 puncture: use the
+type-correct direct `IsoAlgebra.mk`/`ObjectProperty.homMk` source in place of
+the fast `IsoAlgebra.liftOfStr` helper. The saved direct construction restores
+the 10,904,899-call generated-law root; the helper control has no law-field
+root above 100 ms. This tests the construction boundary, not an isolated
+unfold of `liftOfStr` or a provider selection.
