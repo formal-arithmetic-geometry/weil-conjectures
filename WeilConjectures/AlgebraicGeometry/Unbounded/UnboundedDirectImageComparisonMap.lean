@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.UnboundedDirectImageComparisonMa
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalDirectImagePreservation
 
 /-! # Naturality of the canonical unbounded direct-image mate
-
-Source: blueprint `sk-prop-pe-unbounded-classical-direct-image.md`.
 -/
 
 @[expose] public section
@@ -19,9 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
-/-- Naturality of the canonical unbounded mate.
-Source: naturality of adjunction transposition; blueprint direct-image proof, Step 10
-(blueprint: lem-sfb-unbounded-direct-image-comparison). -/
+/-- Naturality of the canonical unbounded mate. -/
 @[reassoc]
 theorem unboundedDirectImageComparisonMap_naturality
     (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} (g : X ⟶ Y)

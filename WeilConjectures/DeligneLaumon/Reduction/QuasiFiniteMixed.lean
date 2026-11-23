@@ -62,14 +62,6 @@ theorem isPunctuallyPureOfWeight_adicConstant :
     simp
   · exact absurd h1 hv.2
 
-/-- A Weil sheaf punctually `ι`-pure of weight `w` is mixed of weights at most `w`, by the
-filtration `0 ⊆ F`. -/
-theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l X} {w : ℝ}
-    (h : F.IsPunctuallyPureOfWeight ι w) : F.IsMixedOfWeightsAtMost ι w := by
-  rw [isMixedOfWeightsAtMost_iff_filtrationClosure]
-  exact ObjectProperty.le_filtrationClosure _ ⟨w, le_rfl, h⟩
-
 /-- For a monomorphism `i : G ⟶ F` of Weil sheaves, the dimension of a stalk of `F` is the sum of
 those of `G` and of the cokernel of `i`: the stalk functors are exact. -/
 theorem finrank_stalk_cokernel_add_finrank_stalk

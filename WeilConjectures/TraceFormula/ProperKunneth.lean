@@ -41,9 +41,9 @@ an isomorphism as soon as
   transposes of the transported counits being the base change morphisms
   (`ProEtale.CondensedRing.homEquiv_prodUpperStarCounit`);
 * the projection morphism of `r` and the left projection morphism of `s` are isomorphisms: this
-  is the projection formula for the proper morphisms `r` and `s`
-  (`isIso_projectionMorphism_boundedConstructible_padicAlgCl`), together with the compatibility of
-  the derived pullback with the Koszul braidings for the left one
+  is the projection formula for the proper morphisms `r` and `s` on `Dᵇc`
+  (`isIso_projectionMorphism_boundedConstructible_padicAlgCl_restrict`), together with the
+  compatibility of the derived pullback with the Koszul braidings for the left one
   (`boundedConstructibleUpperStar_map_braiding_hom_δ`).
 
 The transported counits are compatible with the composition isomorphisms of the pullbacks

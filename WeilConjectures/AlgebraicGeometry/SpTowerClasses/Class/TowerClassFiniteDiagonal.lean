@@ -14,9 +14,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 
 /-! # Finite supported diagonal normalization
-
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-prop-sp-tower-geometric-classes` (blueprint: def-sp-tower-class-finite-diagonal).
 -/
 
 @[expose] public noncomputable section
@@ -40,15 +37,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Direct image along the actual diagonal is exact on system sheaves.
-Source: classes (3); finite direct image exactness
-(blueprint: def-sp-tower-class-finite-diagonal).
-Proof: a closed immersion has finite geometric fibres and its small pro-etale
-direct image is exact, including the empty closed immersion. The coefficient
-system maps are formed with the same identity structural maps at every level;
-kernels and sheafified cokernels are levelwise, so the ordinary system direct
-image preserves both. Transport through the section-normalized realization
-retains those kernels and cokernels. -/
+/-- Direct image along the actual diagonal is exact on system sheaves. -/
 theorem diagonalPush_exact {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) :
     PreservesFiniteLimits g.push ∧ PreservesFiniteColimits g.push := by
@@ -59,14 +48,12 @@ theorem diagonalPush_exact {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     infer_instance
   exact closedTowerPush_exact l E (diagonalImmersion S) g
 
-/-- Exact diagonal direct image preserves finite limits.
-Source: classes (3) (blueprint: def-sp-tower-class-finite-diagonal). -/
+/-- Exact diagonal direct image preserves finite limits. -/
 instance diagonalPushLimits {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) :
     PreservesFiniteLimits g.push := (diagonalPush_exact l E g).1
 
-/-- Exact diagonal direct image preserves finite colimits.
-Source: classes (3) (blueprint: def-sp-tower-class-finite-diagonal). -/
+/-- Exact diagonal direct image preserves finite colimits. -/
 instance diagonalPushColimits {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) :
     PreservesFiniteColimits g.push := (diagonalPush_exact l E g).2
@@ -138,14 +125,7 @@ private theorem pushEvaluationUnderlying_apply
     ((SpTowerShriek.ev l E X n).obj N) ((g.ordinaryPushEvaluation n).app N) U x
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The supported finite quotient is induced by the same integral quotient on P.
-Source: classes (3), supported quotient normalization
-(blueprint: def-sp-tower-class-finite-diagonal).
-Proof: over a chart U of W its source consists of locally constant integers on
-P times_W U. Send each such integer to its residue multiple of one. The ordinary
-pushforward evaluation identifies the target with these actual coefficient
-sections on P times_W U. Constant generators locally generate the source and
-sheaf gluing gives existence and uniqueness. -/
+/-- The supported finite quotient is induced by the same integral quotient on P. -/
 theorem finiteSupportedQuotient_existsUnique {b : SpTowerShriek.Base l E}
     {S : Scheme.{u}} (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) (n : ℕ) :
     ∃! q : diagonalIntegralSource S ⟶
@@ -200,16 +180,14 @@ theorem finiteSupportedQuotient_existsUnique {b : SpTowerShriek.Base l E}
   exact eq_of_heq ((pushEvaluationUnderlying_apply l E g M n U _).trans
     ((hq' U k).trans (hq U k).symm))
 
-/-- The canonical supported finite coefficient quotient, fixed on integral generators.
-Source: classes (3) (blueprint: def-sp-tower-class-finite-diagonal). -/
+/-- The canonical supported finite coefficient quotient, fixed on integral generators. -/
 def finiteSupportedQuotient {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     (g : SpTowerShriek.Geometry l E b (diagonalImmersion S)) (n : ℕ) :=
   (finiteSupportedQuotient_existsUnique l E g n).exists.choose
 
 attribute [local irreducible] finiteSupportedQuotient coefficient
 
-/-- The diagonal class evaluated in its actual finite coefficient module categories.
-Source: classes (3) (blueprint: def-sp-tower-class-finite-diagonal). -/
+/-- The diagonal class evaluated in its actual finite coefficient module categories. -/
 def evaluatedDiagonal {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {c : Chern l E (diagonalSurface S)} (d : Diagonal l E b S c) (n : ℕ) :=
   mapSingleArrow (SpTowerShriek.ev l E (diagonalSurface S) n) (2 : ℤ)
@@ -219,8 +197,7 @@ def evaluatedDiagonal {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
 
 /-- Concrete finite diagonal normalization, expressed by the coefficient-linear
 realization of the signed Cartier boundary. The supported integer quotient and
-the map z -> 1 tensor z fix the source and target, respectively.
-Source: classes (3), proof steps 9--13 (blueprint: def-sp-tower-class-finite-diagonal). -/
+the map z -> 1 tensor z fix the source and target, respectively. -/
 def FiniteDiagonalNormalization {b : SpTowerShriek.Base l E} {S : Scheme.{u}}
     {c : Chern l E (diagonalSurface S)} (d : Diagonal l E b S c) : Prop :=
   ∀ n : ℕ,

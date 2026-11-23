@@ -37,7 +37,9 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # Integral generators of the supported diagonal source
 
-Source: blueprint classes clause (3), supported quotient normalization.
+## References
+
+* J. S. Milne, *Lectures on étale cohomology*, Section 9
 -/
 
 @[expose] public noncomputable section
@@ -175,18 +177,7 @@ private theorem integerComparison_restriction {Z X : Scheme.{u}} (f : Z ⟶ X) :
   rw [← Functor.whiskerLeft_comp, toSheafify_constantSheafToContinuousSheaf]
   rfl
 
-/-- The constant integers generate the integral direct image of a closed subscheme.
-Source: blueprint classes clause (3), supported quotient normalization; the
-open--closed sequence for integral sheaves (Milne, Section 9).
-(blueprint: lem-sp-diagonal-integral-unit-epi).
-
-Proof: a locally constant integer section on
-its inverse image in a pro-etale chart extends locally to the ambient chart:
-near a point of the closed subspace, choose an open neighbourhood on which its
-restriction has the chosen constant value, and use zero on the complementary
-open. These neighbourhoods cover the ambient chart. Thus restriction from the
-constant integer sheaf is locally surjective, hence epic. This argument also
-covers the empty chart and the empty scheme. -/
+/-- The constant integers generate the integral direct image of a closed subscheme. -/
 theorem closedIntegralUnit_epi {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] :
     Epi (Scheme.proEtaleConstantDirectImageMap i
       AddCommGrpCat.{u + 1} (AddCommGrpCat.of (ULift.{u + 1} ℤ))) := by

@@ -19,14 +19,15 @@ public import Mathlib.CategoryTheory.MorphismProperty.Composition
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 /-! # Strict completion comparison interface
 
-Source: blueprint main-20261015, localizing-closure finite-model proof, Locality;
-Stacks Tags 09AA, 03EK, 014E and 08TC
-(blueprint: def-sfb-strict-completion-restriction-data).
-
-The presentation structures below only package the assertions of this node. Cone
+The presentation structures below package the comparison assertions. Cone
 objects, coordinates, tower arrows, Roos functor, augmentations and localized units
 are all fixed by equations. No comparison or completion is selected from existence.
 Positive exponent n+1 is indexed by n : ℕ, as in the recorded completion interface.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AA, 03EK, 014E, 08TC, 00W1, 03DA, 03DB,
+  03D7, 06YS
 -/
 
 @[expose] public noncomputable section
@@ -53,16 +54,12 @@ attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCat
 
 
 /-- The existing small-site local-equivalence instance with its unused larger
-coefficient universe fixed to zero, so inference keeps the prescribed universe.
-Source: Stacks 00W1, 03DA; strict Roos comparison
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+coefficient universe fixed to zero, so inference keeps the prescribed universe. -/
 instance smallSiteLocalEquivalences (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   surjectiveTower_wEqualsLocallyBijective.{u, 0} X
 
-/-- The concrete strict scalar-cone tower and its normalized completion descent.
-Source: blueprint Locality and first-reduction Cones paragraphs; Stacks 014E, 08TC
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+/-- The concrete strict scalar-cone tower and its normalized completion descent. -/
 structure Presentation (A : Type a) [Category.{b} A] [Abelian A]
     [HasCountableProducts A] [HasDerivedCategory.{w} A] where
   scalar : End (𝟭 A)
@@ -114,9 +111,7 @@ structure Presentation (A : Type a) [Category.{b} A] [Abelian A]
       DerivedCategory.Q.map (augmentation.app M)
 
 /-- One simultaneous comparison, fixed on principal cones, product projections,
-Roos coordinates, augmentations, and derived representatives.
-Source: blueprint Locality, expanded strict completion calculation
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+Roos coordinates, augmentations, and derived representatives. -/
 structure Comparison
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     [HasDerivedCategory.{w} A]
@@ -194,9 +189,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Agreement with the specified internal completion, including every K-flat
-realization of its canonical map. The strict tower is the dependency's actual tower.
-Source: blueprint first-reduction Cones paragraph and completion triangle comparison
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+realization of its canonical map. The strict tower is the dependency's actual tower. -/
 def IsIntegral (X : Scheme.{u})
     (S : Presentation.{u + 2, u + 1, u + 1} (AdicCompletion.Modules l E X)) : Prop :=
   ∃ data : PrincipalReduction.PrincipalReductionConeData l E X,
@@ -216,9 +209,7 @@ def IsIntegral (X : Scheme.{u})
         S.unit.app K ≫ ψ.hom = AdicCompletion.completionMap l E X K P e
 
 /-- A constant scalar, evaluated in the actual section ring after pullback.
-Endomorphisms of the regular point-module are exactly its constant scalars.
-Source: blueprint Locality, finite scalar presentations; Stacks 03EK
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+Endomorphisms of the regular point-module are exactly its constant scalars. -/
 def sectionScalarValue (X : Scheme.{u})
     (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (U : X.ProEtᵒᵖ) :
     (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U :=
@@ -227,8 +218,7 @@ def sectionScalarValue (X : Scheme.{u})
     (DerivedNakayama.regularPullbackIso l E X).hom).hom.hom.app U)
       (1 : (ModuleObjectRingedComparison.ring (DerivedNakayama.integerRing l E) X).obj.obj U)
 
-/-- Finite biproducts from the existing finite products of section-module sheaves.
-Source: Stacks 03DB (blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+/-- Finite biproducts from the existing finite products of section-module sheaves. -/
 instance sectionFiniteBiproducts (X : Scheme.{u}) :
     HasFiniteBiproducts
       (ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X) :=
@@ -236,9 +226,7 @@ instance sectionFiniteBiproducts (X : Scheme.{u}) :
 
 /-- Section-module local models use the actual ringed inverse image and cokernels
 of finite matrices whose entries are scalars on the point. Neither local object
-is obtained by applying the section equivalence to an internal local-model isomorphism.
-Source: blueprint Local models and Locality; Stacks 03D7, 03EK
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+is obtained by applying the section equivalence to an internal local-model isomorphism. -/
 def HasSectionFiniteConstantLocalModel (X : Scheme.{u})
     (M : ModuleObjectRingedComparison.Modules (DerivedNakayama.integerRing l E) X) : Prop :=
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
@@ -272,9 +260,7 @@ attribute [local irreducible] SheafOfModules.KFlatRoos.tensorUnit
 by restriction. Their tensor identifications are fixed on K-flat representatives:
 resolving the quotient in the second slot gives the section TensorComparison model.
 The singleton total comparison is fixed on every local pure tensor, so the unit
-and transition equations cannot be changed by a scalar twist.
-Source: blueprint Locality, steps 4--7; Stacks 03EK, 06YS, 08TC
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+and transition equations cannot be changed by a scalar twist. -/
 structure SectionReductionModelsFor
     (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})
@@ -365,8 +351,6 @@ structure SectionReductionModelsFor
           (𝟙 _, DerivedCategory.Q.map q))
 
 /-- The normalized section reduction models at the integral coefficient ring.
-Source: blueprint Locality, steps 4--7; Stacks 03EK, 06YS, 08TC
-(blueprint: def-sfb-strict-completion-restriction-data).
 This is the generic interface specialized to the fixed coefficient ring. -/
 abbrev SectionReductionModels (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1} (Modules (DerivedNakayama.integerRing l E) X))
@@ -382,9 +366,7 @@ of a Presentation by an equivalence. The scalar is the pulled-back uniformizer;
 the coefficient tower, its structure maps and steps are the actual section rings
 and quotient homomorphisms. The reduction models use the existing section derived
 tensor comparison, normalized on K-flats. Completion and its unit are the actual
-augmented tensor Roos construction on every section K-flat representative.
-Source: blueprint Locality and completion Cones paragraph; Stacks 03EK, 06YS, 08TC
-(blueprint: lem-sfb-strict-completion-restriction-comparison). -/
+augmented tensor Roos construction on every section K-flat representative. -/
 def IsSectionIntegral (X : Scheme.{u})
     (T : Presentation.{u + 2, u + 1, u + 1} (Modules (DerivedNakayama.integerRing l E) X)) :
     Prop :=

@@ -12,9 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleIsomorphicStage
 /-!
 # Projection squares for restriction to isomorphic coefficient stages
 
-Source: Zheng, Construction 4.1, Construction 5.15 and Lemma 5.22.
 The records contain only compact-support geometry. They contain no exceptional
 right adjoints, their evaluations, or their coefficient comparisons.
+
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Construction 5.15, Lemma 5.22
 -/
 
 @[expose] public noncomputable section

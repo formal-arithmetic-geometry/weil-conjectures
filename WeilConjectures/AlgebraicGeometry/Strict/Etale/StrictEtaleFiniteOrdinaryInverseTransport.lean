@@ -32,7 +32,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 
 /-! # Finite ordinary inverse-image comparison for coefficient change
 
-Source: Zheng, Construction 4.1 and Construction 5.15; Stacks Tag 03EL.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Construction 5.15
 -/
 
 @[expose] public noncomputable section

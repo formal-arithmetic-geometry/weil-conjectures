@@ -13,8 +13,10 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
 
 The module is constructed as a multiequalizer of pushforwards. Its construction
 uses arbitrary transitions; their cocycle is needed only for local invertibility.
-Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN; Constructions, Tag 01LI.
-(blueprint: def-trf-directed-tensor-matching-module)
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 00AL, 00AM, 04TN, 01LI
 -/
 
 @[expose] public section

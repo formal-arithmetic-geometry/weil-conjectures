@@ -35,12 +35,14 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-!
 # Strict étale transport at isomorphic coefficient stages
 
-Source: Zheng, Construction 4.1 and Proposition 2.29(2)
-(blueprint: lem-pur-strict-etale-isomorphic-stage-projection).
-
 This is the coefficient-system part of the projection theorem.  It isolates the
 construction of the exact transport and its finite-level equivalences from the
 compact-support projection assembly.
+
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Proposition 2.29(2)
 -/
 
 -- After pruning, this module only keeps private declarations.

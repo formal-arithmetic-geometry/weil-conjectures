@@ -13,8 +13,9 @@ import WeilConjectures.ConstructibleSheaf.Defs
 /-!
 # Pulling back module sheaves from an algebraically closed point
 
-Source: Stacks Project, Tags 03P5, 0A3H and 03Q1.
-(blueprint: lem-sbc-geometric-point-module-constant)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03P5, 0A3H, 03Q1
 -/
 
 @[expose] public section
@@ -26,16 +27,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse image of a module sheaf from an algebraically closed geometric point is
-constant, with a module as its value.
-
-Source: Stacks Project, Tags 03P5, 0A3H and 03Q1.
-(blueprint: lem-sbc-geometric-point-module-constant)
-
-Proof: apply the existing constancy theorem to the underlying set sheaf. The constant
-sheaf comparison for forgetting coefficients identifies its counit with the image of
-the module-valued counit. Forgetting modules reflects isomorphisms, so this latter
-counit is invertible as well. Take its value to be the module of global sections.
-Inverse image preserves constant sheaves by the constant-sheaf pullback isomorphism. -/
+constant, with a module as its value. -/
 theorem exists_constant_module_upperStar_geometricPoint
     (Λ : Type (u + 1)) [CommRing Λ] {K : Type u} [Field K] [IsAlgClosed K]
     {Y : Scheme.{u}} (e : Y ⟶ Spec (.of K))

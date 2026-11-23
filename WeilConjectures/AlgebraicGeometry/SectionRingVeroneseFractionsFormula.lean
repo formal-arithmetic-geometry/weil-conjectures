@@ -11,6 +11,20 @@ public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractionKernel
 
+/-! # The Veronese fraction equivalence and its formula on generators
+
+## Implementation details
+
+`sectionRingVeroneseFractionEquiv` is the inverse of the quotient equivalence given by the
+first isomorphism theorem for the explicit direct-sum map, whose surjectivity and kernel are
+`sectionRingVeroneseFractionMap_surjective` and `sectionRingVeroneseFractionMap_kernel`. No
+data are chosen from a bare existence theorem.
+
+## References
+
+* [Stacks, Tags 01PW, 01Q1, 0B5L]
+-/
+
 @[expose] public section
 
 universe u
@@ -18,18 +32,8 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical Veronese fraction equivalence, constructed by the quotient map.
-Source: Stacks Project, Properties, equation module-invert-s (Tag 0B5L),
-Lemma 01PW(2), and the proof of Lemma 01Q1.
-(blueprint: lem-sc-section-ring-veronese-fractions-formula)
-
-The explicit direct-sum map sends `t` in numerator degree `n` to
-`of_(nd)(T_n⁻¹(t))/s^n`. Its surjectivity is proved in
-`sectionRingVeroneseFractionMap_surjective`; its kernel is the relation submodule by
-`sectionRingVeroneseFractionMap_kernel`. The first isomorphism theorem therefore
-constructs a quotient equivalence from section fractions to homogeneous localization.
-We take its inverse. The only inverse chosen is the unique inverse of this fixed
-bijective quotient map. No data are chosen from a bare existence theorem.
+/-- The canonical Veronese fraction equivalence, inverse to the quotient map sending `t` in
+numerator degree `n` to `of_(nd)(T_n⁻¹(t))/s^n`.
 -/
 noncomputable def sectionRingVeroneseFractionEquiv
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
@@ -42,15 +46,6 @@ noncomputable def sectionRingVeroneseFractionEquiv
     (sectionRingVeroneseFractionMap_kernel X L d s)).symm
 
 /-- Formula for the Veronese fraction equivalence on homogeneous generators.
-Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
-(blueprint: lem-sc-section-ring-veronese-fractions-formula)
-Proof: apply the inverse of the constructed equivalence to both sides. The quotient
-map sends the displayed section-fraction generator to the fraction whose numerator
-is obtained by first applying `T_n` and then `T_n⁻¹`. These cancel. Membership of `ξ`
-in the image of the degree `n*d` injection gives `of_(nd)(ξ_(nd)) = ξ`. Hence the
-quotient map sends the generator to exactly `ξ/s^n`. Applying its inverse gives
-the formula. The quotient map is the actual additive extension of the explicit
-summand maps, so this computation does not use any generator formula as an assumption.
 -/
 theorem sectionRing_veronese_fraction_formula
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]

@@ -54,7 +54,11 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Coordinates for the specified finite-free scalar functor
 
-Source: Zheng, Construction 4.1; Stacks, Tags 03CZ and 07A6.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CZ, 07A6
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section

@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 
 /-! # Restriction of the intrinsic proper/open arrow
 
-Source: Stacks, Tags 09BN and 0F7B; restriction calculation in steps 2--3 of
-`lem-cbc-proper-open-alpha-horizontal-modules`.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BN, 0F7B
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale.StrictTower
 variable (B : Type (u + 1)) [CommRing B]
 
 /-- The inverse of the specified open adjunction unit. It identifies restriction
-of extension by zero with the original module. Source: Stacks, Tag 09BN. -/
+of extension by zero with the original module. -/
 def moduleOpenUnitInv {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     moduleJ B j ⋙ modulePullback B j ⟶ 𝟭 (Modules B U) :=
   @inv _ _ _ _ (moduleJAdj B j).unit (clopenModule_openUnit_isIso B j)
@@ -408,23 +409,7 @@ private theorem factor_restriction
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Restriction of intrinsic alpha is the canonical square comparison followed
-by the inverse open unit.
-Source: Stacks, Tags 09BN and 0F7B; the underived restriction calculation in
-`lem-cbc-proper-open-alpha-horizontal-modules`, proof steps 2--3.
-(blueprint: lem-cbc-single-alpha-restriction)
-
-Proof: write b for the first projection of W ×_T S, q for its second projection,
-and s for the proper/open lift V → W ×_T S. Expand singleAlpha as cartesian beta,
-then the clopen projector for s, then the open and inverse-image compositors.
-The inverse-transpose equation defining beta identifies its restriction along b
-with the inverse-image square comparison followed by q* of the inverse unit for i.
-Restrict this equation along s. The clopen projector satisfies s*(pi_s)=unit_s,
-so it cancels with the inverse unit introduced by restriction of the open compositor.
-The compositor for the successive open adjunctions preserves their units; using
-bs=k and qs=r leaves precisely the displayed square comparison. All comparisons
-are the specified ones, so their associativity and equality transport identify the
-result with moduleSquareG. This uses only one square and arbitrary coefficients;
-for an empty open the same unit and projector equations hold. -/
+by the inverse open unit. -/
 theorem singleAlpha_restriction {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
