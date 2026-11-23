@@ -1,103 +1,65 @@
-# PR1624: M1 propagation (READY4.1)
+# PR1624: M1 propagation (READY4.2)
 
-## Original root and validity
+## Validation
 
-The original `OriginalDependentEndpoint.lean` probe ran under READY4.1
-Lean 4.35.0 with the source's transparency and synthesis options and a
-3600 s limit. The selected process-wide root is 22078, the dependent
-`CategoryTheory.Iso`/`CategoryTheory.Iso` endpoint. Its two `Functor.comp`
-arguments are the first source-level divergent endpoint components.
-The trace root completed with 6,598,545 calls, 43,944.883 ms
-comparison-exclusive time, and 75,156.302 ms root wall. A separate fresh
-counters run measured 6,598,545 calls, 55,517.435 ms root wall, and
-28,306.603 ms comparison-exclusive time. The call count equals the accepted READY3.2 count;
-the M1 share differs from its 99.804% by 0.022 percentage points.
+The fresh original `OriginalDependentEndpoint.lean` probe ran with the
+READY4.2 Lean 4.35.0 flags and root 22078. The analyzed root and counters
+run each have 6,598,545 calls, equal to READY3.2. M1 is 5,215,138 calls
+(79.035% of calls) and 99.848% of comparison-exclusive time, within 0.5
+percentage points of READY4.1 (99.782%).
 
 | Label | Calls | Exclusive ms | Share |
 |---|---:|---:|---:|
-| M0 | 1 | 0.039 | <0.001% |
-| M1 | 5,215,138 | 43,849.070 | 99.782% |
-| M2 | 287 | 3.223 | 0.007% |
-| Matched | 1,383,111 | 92.282 | 0.210% |
-| Unclassified | 8 | 0.268 | 0.001% |
+| M0 | 1 | 0.054 | 0.000% |
+| M1 | 5,215,138 | 63,577.648 | 99.848% |
+| M2 | 287 | 3.355 | 0.005% |
+| Matched | 1,383,111 | 93.371 | 0.147% |
+| Unclassified | 8 | 0.296 | 0.000% |
 
-Analyzer revision: READY4.1 `mprwe_analyze.py`, kernel dataset commit
-`5ae674db0c7`. Aggregate coverage is 6,598,545/6,598,545 calls. Raw
-capture is 1,483 entered and 1,406 exited calls (0.0225% by entered
-calls). Kernel aggregates classify every call and reconcile to the
-43,944.883 ms root total: 6,598,544 child edges plus the 0.039 ms root
-direct time. Each label's depth calls and exclusive/reduction time match
-its label aggregate; no depth was clamped.
+Analyzer: READY4.2 `mprwe_analyze.py`, kernel dataset commit
+`0311a15b5f4`. Aggregate coverage is 6,598,545/6,598,545 calls; raw
+capture is 1,483 entered and 1,406 exited calls (0.0225%). The complete
+matrix reconciles to 6,598,544 child edges plus 0.054 ms root-direct time.
+No depth was clamped.
 
 ## A2: topology
 
-M1 depth: mean 59.312, median 60, p90 70, p99 77, max 88. The narrowest
-bands holding 50% and 90% of M1 exclusive time are depths 52-64 and
-46-74. M1 depth histogram in ten-depth bins (start: calls/exclusive ms):
-0:496/7.8; 10:1,291/14.4; 20:5,218/57.5; 30:85,677/683.4;
-40:622,837/4,838.8; 50:1,811,233/14,761.2;
-60:2,059,387/17,455.5; 70:614,732/5,894.3; 80:14,267/136.2.
+M1 depth mean/median/p90/p99/max is 59.312/60/70/77/88. The narrowest
+bands containing 50% and 90% of M1 exclusive time are 57-68 and 46-74.
+M1-parent fan-out mean/median/p90/max is 1.265/1/3/21. M1 -> M1,
+M1 -> Matched, and M1 -> M2 edge counts are 5,214,946, 1,382,892, and
+193. The analyzer verdict is **mixed** under the common rule.
 
-M1-parent fan-out over all child labels: mean 1.265, median 1, p90 3,
-max 21. Exact histogram (children:nodes): 0:1,848,124; 1:1,969,023;
-2:531,073; 3:506,801; 4:254,200; 5:8,075; 6:32,891;
-7:24,672; 8:113; 9:6,672; 10:782; 11:11; 13:5;
-14:19,476; 21:13,220. Bounded raw capture observes 880 M1-to-M1,
-471 M1-to-Matched, and 29 M1-to-M2 edges. The unchanged READY4.1 patch
-does not aggregate complete parent-label by child-label edge counts;
-these are sample counts only.
+## A3: M1-parent transition matrix
 
-This is **mixed** propagation. There is substantial time at depths 50-70,
-and repeated projection and application branching generates the bulk of
-work. It is shallower than PR1556/PR1625, but neither a single chain nor
-a shallow flat fan-out.
+The first seven rows cover 99.0% of M1 exclusive time.
 
-## A3: branch transition matrix
+| Initiating branch | Child kind | Child label | Calls | Child exclusive ms | Mean fan-out |
+|---|---|---|---:|---:|---:|
+| projection | projection | M1 | 1,296,250 | 30,977.028 | 1.000 |
+| application | argument | M1 | 1,592,155 | 14,707.319 | 3.928 |
+| second_whnf | whnf-iota-exposure | M1 | 533,566 | 6,891.160 | 1.000 |
+| application | function-head | M1 | 933,636 | 5,343.196 | 2.506 |
+| quick | dependent-body | M1 | 152,816 | 2,813.970 | 2.798 |
+| proof_irrelevance | proposition-type | M1 | 125,770 | 1,515.639 | 1.000 |
+| lazy_delta | argument | M1 | 305,946 | 1,253.618 | 10.180 |
 
-Rows cover all child labels. The top four hold 39,766.773 ms (90.49% of
-root exclusive time); even subtracting all 95.813 ms of non-M1 time,
-these rows include more than 90% of M1 exclusive time. Mean fan-out by
-branch is not emitted; the full M1-parent mean is above.
+Projection descent is still dominant after provenance splitting. The largest
+non-M1 rows are application-argument M1 -> Matched (1,048,631 calls,
+71.768 ms) and lazy-delta argument M1 -> Matched (43,595 calls, 2.890 ms).
 
-| Parent branch | Child kind | Calls | Exclusive ms |
-|---|---|---:|---:|
-| projection | projection | 1,296,272 | 17,618.951 |
-| application | argument | 2,640,249 | 12,710.696 |
-| second_whnf | fallback | 533,577 | 5,740.946 |
-| application | function-head | 1,223,984 | 3,696.180 |
-| quick | dependent-body | 150,818 | 2,094.288 |
-| proof_irrelevance | proposition-type | 125,785 | 1,084.550 |
-| lazy_delta | argument | 318,055 | 783.489 |
-| remaining rows | mixed | 309,804 | 215.744 |
+## A4: first transitions
 
-The largest aggregate M1 bucket is `__other__` (1,712,301 calls;
-12,731.140 ms). The highest *named* paths are
-`root/argument[3]/argument[5]/binder_body[3]/argument[5]/argument[8]/*`
-(670,667 calls; 6,633.444 ms),
-`root/argument[2]/argument[7]/proposition_type/binder_body[5]/argument[2]/*`
-(670,811; 5,799.375 ms), and its `argument[0]` sibling
-(447,020; 4,210.092 ms). `__other__` and `*` are bounded path groups,
-not individual inclusive subtrees.
+The READY4.2 matrix does not change the prior reconstruction. The `Iso`/`Iso`
+root has Matched function heads; application argument 2 enters the first
+M1 `Functor.comp` pair. Successive application arguments expose
+`Functor.comp`, then `DerivedCategory.Plus`/`DerivedCategory`, and a
+`Functor` structure field. Projection and application congruence continue
+the pair while retaining the parent's divergence hashes. The audited source
+branches are `is_def_eq_app`, `is_def_eq_proof_irrel`, `is_def_eq_binding`,
+and `lazy_delta_proj_reduction` in `M1P-KERNEL.md`.
 
-## A4: first transitions of named costly paths
+## C
 
-The M0 pair is `Iso`/`Iso`. Its function head is Matched; call 14 enters
-`Functor.comp`/`Functor.comp` as application argument 2 (M1). Calls 15-16
-descend through argument 7 of successive `Functor.comp` pairs (M2 after
-exposure); call 18 compares `DerivedCategory.Plus`/`DerivedCategory`
-as application argument 0 (M1), and call 20 compares
-`Functor`/`Functor` through a structure field (M1). The raw M1 children
-retain their parent's divergence hashes. This is the observed first
-projection/application continuation toward the named argument-2 paths.
-
-The argument-2 path then traverses a proposition-type comparison and
-dependent binder body before its `argument[2]` and `argument[0]` siblings.
-`is_def_eq_proof_irrel` creates the proposition-type child at
-`type_checker.cpp:1652-1668`; `is_def_eq_binding` instantiates and compares
-the body at `:1479-1535`; application congruence compares later arguments
-at `:1628-1645` (`M1P-KERNEL.md`). The highest named argument-3 path starts
-from the other `Functor.comp` endpoint and uses the same application and
-dependent-body branches. Its first exact pair is beyond the 1,483-call
-raw window, and the globally largest `__other__` bucket has no recoverable
-single path. READY4.1 therefore cannot support a hand reconstruction of
-the true highest-cost individual paths or their inclusive subtree times.
+No C intervention was assigned to PR1624 in step 2. The READY4.2 matrix
+does not identify a different cut point, so no new C run is claimed.
