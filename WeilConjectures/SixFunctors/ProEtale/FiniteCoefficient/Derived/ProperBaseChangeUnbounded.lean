@@ -29,7 +29,7 @@ The étale statement is
 statement is transported from the étale one
 (`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_comparisonUpperStar`) using the
 comparison of unbounded direct images
-(`AlgebraicGeometry.ProEtale.isIso_unboundedDirectImageComparisonMap`, still `sorry`): a
+(`AlgebraicGeometry.ProEtale.isIso_unboundedDirectImageComparisonMap`): a
 classical complex is `K ≅ ν_X^* L` with `L = Rν_* K`
 (`AlgebraicGeometry.ProEtale.comparisonUpperStar_isClassicalComplexFor`), and the pro-étale
 exchange map at `ν_X^* L` is the étale one conjugated by the comparison maps for `f` and `f'`.
