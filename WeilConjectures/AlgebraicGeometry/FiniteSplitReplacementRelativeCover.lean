@@ -10,15 +10,15 @@ import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.AlgebraicGeometry.LimitsOver
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
-/-! Finite affine covers of relative boundary schemes. -/
+/-! Finite covers of relative boundary schemes. -/
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- For an étale hypercover `K` and a finite stage `A` with boundary `Q`, there is a finite
-disjoint union `N` of affine étale pieces with a surjection `b : N ⟶ Q.M` and a map to
-`K_(n+1)` compatible with all lower faces (Stacks, Tags 01GJ, 094K). -/
+disjoint union `N` of qcqs, finitely presented étale pieces with a surjection `b : N ⟶ Q.M`
+and a map to `K_(n+1)` compatible with all lower faces (Stacks, Tags 01GJ, 094K). -/
 theorem exists_finite_relative_boundary_cover
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)
