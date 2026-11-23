@@ -56,9 +56,21 @@ generated proof field is implicated at the first divergent path.
 
 | Case | Earliest divergence | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 |---|---|---|---|---|---|---|---|
-| RealPushforward | S0/S1 | Source/API polynomial representation (**Demonstrated**) | No relevant first-stage choice observed (**Not observed**) | No generated change observed (**Not observed**) | Regular-head reduction into the concrete polynomial/stalk path (**Demonstrated**) | `charpolyRev`/polynomial-head alignment (**Demonstrated**) | Fragile but effective; direct concrete rewrites can puncture it (**Demonstrated**) |
+| RealPushforward | S0/S1 | Source/API polynomial representation (**Demonstrated**) | No relevant first-stage choice observed (**Not observed**) | Pre-finalization comparison unavailable (**Unknown**) | Regular-head reduction into the concrete polynomial/stalk path (**Demonstrated**) | `charpolyRev`/polynomial-head alignment (**Demonstrated**) | Fragile but effective; direct concrete rewrites can puncture it (**Demonstrated**) |
 
 The representation trigger is demonstrated by the exact S2 snapshot and the
 same-consumer aligned control. The exact downstream `ContinuousMap` and
 `DFunLike.coe` comparison amplifier remains **Plausible**, because the
 available trace is path-level and not a semantic exclusive attribution.
+
+## Audit note and Batch 2
+
+The original and aligned proofs keep the same final `exact this` consumer and
+change the declared polynomial head on the two equality sides. Unlike a
+`type_of%` goal, the aligned goal still has a distinct semiring-instance
+child. The saved S2 head audits and READY4.2 counters therefore support the
+one-representation control; the remaining instance leaf is a negative
+control. The frozen local replay uses the same source prefixes and records
+the original/aligned Expr hashes and timings in `ccmoa/frozen-results.txt`.
+Restoring the original local-polynomial goal punctures this cheap boundary.
+The imported pre-finalization term is unavailable, so finalization is Unknown.

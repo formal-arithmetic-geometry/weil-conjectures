@@ -154,10 +154,20 @@ pre-finalization identity is **Unknown**.
 
 | Case | Earliest divergence | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| OrderedSpectralRawLattices | S2 | Source-authored R/H/D availability selecting different provider terms | Plausible | Not observed | Strongly supported | All-route provider alignment | Strongly supported: route restoration reopens the expensive path |
+| OrderedSpectralRawLattices | S2 | Source-authored R/H/D availability selecting different provider terms (**Strongly supported**) | Plausible | Unknown | Strongly supported | All-route provider alignment (**Strongly supported**) | Strongly supported: route restoration reopens the expensive path |
 
 Overall, the expensive root is a mixed source/API and elaborator-selected
 provider mismatch. The dependent M1/M2 tree is Kernel-exposed, while the
 available evidence does not justify assigning sole causality to one R/H/D
 instance leaf or to declaration finalization.
+
+## Audit note and Batch 2
+
+The all-route control changes several available providers and therefore
+cannot demonstrate the effect of one instance leaf. Each saved one-route
+restoration punctures the alignment and reopens the timeout-scale path;
+the remaining let-spine and predicate boundaries have no isolated puncture.
+The exact imported pre-finalization term is unavailable, so finalization is
+Unknown even though no generated-field cause was observed. No concrete
+transparency constraint produced an alternate selected Expr.
 

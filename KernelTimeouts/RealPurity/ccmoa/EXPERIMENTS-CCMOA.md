@@ -78,8 +78,14 @@ imported pre-finalization term is unavailable.
 
 | Case | Earliest divergence stage | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| RealPurity | S0/S1 API choice; exact ring leaf S2 (**Demonstrated**) | Instance representation under the two polynomial APIs (**Plausible**) | Not observed | Not observed | Strongly supported | Whole-polynomial transport / named polynomial boundary (**Strongly supported**) | Fragile but effective (**Plausible**) |
+| RealPurity | S0/S1 API choice; exact ring leaf S2 (**Strongly supported**) | Instance representation under the two polynomial APIs (**Plausible**) | Not observed | Unknown | Strongly supported | Whole-polynomial transport / named polynomial boundary (**Strongly supported**) | Fragile but effective (**Plausible**) |
 
-Evidence levels use the CCMOA definitions. The exact site and the changed
-ring Expr are **Demonstrated** as observations; ring-leaf causality is only
-**Plausible** and is weakened by the valid same-obligation negative control.
+## Audit note and Batch 2
+
+The earlier "Demonstrated as observations" wording was incompatible with
+the strict causal definition. The same-obligation one-leaf controls change
+the Expr but leave the 17.31M-call workload unchanged, so the ring leaf is a
+negative causal control. The existing left, right, and both-leaf replays are
+the triggered frozen comparisons; they already test distinct Exprs under the
+same root. Restoring direct `exact h` punctures the whole-polynomial transport
+boundary; no additional provider or transparency perturbation is justified.

@@ -1,0 +1,53 @@
+-- Measures only the final inferred-type-to-goal conversion of the rewritten proof.
+module
+
+public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
+open Lean Meta
+
+set_option maxHeartbeats 10000000
+@[expose] public section
+universe u
+open CategoryTheory Limits
+namespace AlgebraicGeometry.WeilSheaf
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+variable {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
+  [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+
+example {ι : PadicAlgCl l →+* ℂ} {K : WeilSheaf k₀ l X}
+    (hK : K.IsReal ι) (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l f ν).obj K)) :
+    ∀ ξ : Y.finitePoints, ∀ n : ℕ,
+      (starRingEnd ℂ)
+        (ι (((((higherLowerShriek k₀ l f 1).obj K).stalk ξ).frobeniusEnd.charpolyRev).coeff n)) =
+      ι (((((higherLowerShriek k₀ l f 1).obj K).stalk ξ).frobeniusEnd.charpolyRev).coeff n) := by
+  intro ξ n
+  obtain ⟨X', _, g, _, _, _, _, hfib⟩ :=
+    exists_fiber_expand_charpolyRev_stalk_higherLowerShriek (k₀ := k₀) (f := f) (l := l) ξ
+  have h₁ := (hK.upperStar g).isReal_compactlySupportedCohomology_of_subsingleton 1 fun i hi ↦ by
+    rcases lt_or_ge i 0 with h | h
+    · exact subsingleton_globalSections_of_isZero
+        (isZero_homologySheaf_derivedLowerShriek_of_neg ((upperStar g).obj K) h)
+    · obtain ⟨ν, rfl⟩ := Int.eq_ofNat_of_zero_le h
+      exact (hfib K ν).1 (hvan ν (by exact_mod_cast hi))
+  have hd := Scheme.Hom.degreeOver_ne_zero (Y ↘ Spec (CommRingCat.of k₀)) ξ.2
+  have := h₁ (n * (Y ↘ Spec (CommRingCat.of k₀)).degreeOver ξ.1)
+  have hc := (hfib K 1).2
+  rw [Nat.cast_one] at hc
+  rw [FrobeniusModule.localPolynomial, ← hc,
+    Polynomial.coeff_expand_mul (Nat.pos_of_ne_zero hd)] at this
+  run_tac do Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Meta.getFVarFromUserName `this
+    let actual ← instantiateMVars (← Lean.Meta.inferType h)
+    let expected ← instantiateMVars (← (← Lean.Elab.Tactic.getMainGoal).getType)
+    let env ← Lean.getEnv
+    let lctx ← Lean.MonadLCtx.getLCtx
+    let start ← IO.monoMsNow
+    let result := Lean.Kernel.isDefEq env lctx actual expected
+    let stop ← IO.monoMsNow
+    Lean.logInfo m!"CCMOA RP aligned: actual={actual.hash} expected={expected.hash} structural={actual == expected} result={match result with | .ok true => "equal" | .ok false => "unequal" | .error _ => "error"} wall_ms={stop - start}"
+  sorry
+
+end AlgebraicGeometry.WeilSheaf

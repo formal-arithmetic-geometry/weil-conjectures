@@ -1,0 +1,19 @@
+Batch 2 local-pair replay (Lean 4.35.0, current measurement build)
+Command shape: lake env lean -j 1 <scratch variant> -DElab.async=false
+The archived variants are RPOriginalFrozen.lean and RPAlignedFrozen.lean.
+Both variants import the same built module and use the same final exact-this
+consumer. Each instantiates metavariables in inferType this and the local
+goal, then calls Kernel.isDefEq in that local context. The scratch
+declarations end with sorry after the probe; the existing full-proof
+READY4.2 counters establish proof-checking workload.
+
+Original localPolynomial goal:
+  actual hash 3405233928; expected hash 763830474
+  structurally equal false; Kernel.isDefEq equal; wall 73666 ms
+Aligned charpolyRev goal:
+  actual hash 114462539; expected hash 1268519851
+  structurally equal false; Kernel.isDefEq equal; wall 1 ms
+
+The aligned pair remains structurally unequal at the smaller semiring
+instance leaf. The goal representation changed while the proof prefix and
+consumer were held fixed.

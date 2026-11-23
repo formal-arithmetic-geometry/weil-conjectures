@@ -46,6 +46,18 @@ Stored `derivedCompletionDiagram` has `regular:33`; the local `abbrev` control's
 
 | Case | Earliest divergence stage | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Derived-completion cone | S0/S1 naming choice; original proof path S4 (**Strongly supported**) | Inline concrete composition and instance representation (**Strongly supported**) | **Plausible** | **Unknown** | **Strongly supported** | Named `derivedCompletionDiagram` (**Strongly supported**) | **Strongly supported** fragile |
+| Derived-completion cone | S0/S1 naming choice; original proof path S4 (**Plausible** for timing) | Inline concrete composition and instance representation (**Plausible** for original root) | **Plausible** | **Unknown** | **Strongly supported** | Named `derivedCompletionDiagram` (**Plausible** as original-root cause) | **Strongly supported** fragile |
 
 No `Demonstrated` causal level is assigned: the named and shared controls change the root Expr or telescope, and the original first proof-position path has no matched one-factor intervention.
+
+## Audit note and Batch 2
+
+The exact S2 `root/arg/arg` difference is between the inline and named
+variants, not the original inferred/declared M0 pair. That original pair has
+36 stored proof-position differences but no stable first unequal Expr path.
+Consequently the original-root origin and named-boundary causal levels are
+Plausible under section 4, despite the reversible timing contrast. The
+historical pre-finalization value is unavailable; generated proof constants
+alone do not establish finalization causality. The inline/named restoration
+is the one-at-a-time puncture. Provider sharing adds a binder and remains a
+confounded control; no targeted transparency perturbation was indicated.

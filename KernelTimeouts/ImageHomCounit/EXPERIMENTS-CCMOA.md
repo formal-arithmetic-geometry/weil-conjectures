@@ -31,15 +31,15 @@ morphism type. The exact structural nodes and hashes are retained in
 | Variant | Expr change | Obligation and result | READY4.2 counters |
 |---|---|---|---|
 | Original `FinalExact` | Raw `DerivedCategory` inferred pair versus wrapper `DerivedCategoryModule` target. | Same final consumer; succeeds after the expensive conversion. | 6,359,958 calls; 42,138.453 ms comparison; 44,315.360 ms reduction; max depth 204. Release probe was about 55 s and 7.46 GB RSS. |
-| Full endpoint alignment `aligned-UniformInferred` | Changes only the declared endpoint representation to `type_of%` of the unchanged `conjugateEquiv_counit` term. The elaborated equality sides and type argument become structurally equal; `UniformInferredHead` verifies this. | Same `h`, same final consumer, same proposition up to definitional equality. | Largest recorded root 16.251 ms / 2,881 calls (comparison 11.410 ms, reduction 4.841 ms, depth 37). |
+| Full inferred-type alignment `aligned-UniformInferred` | Replaces the entire declared equality with `type_of%` of the unchanged `conjugateEquiv_counit` term. The raw/wrapper divergence is removed, along with other dependent arguments; this is a broad control. | Same `h` and final consumer, with a definitionally equal goal. | Largest recorded root 16.251 ms / 2,881 calls (comparison 11.410 ms, reduction 4.841 ms, depth 37). |
 | Wrapper-only expansion `restored-UnfoldWrapper` | Expands only the outer `DerivedCategoryModule` wrapper; the nested raw/wrapper endpoint mismatch remains. | Type-correct restoration; original inner obligation is retained. | 9,539,325 calls; 57.738 s comparison; 58.509 s reduction; max depth 201. |
 | Source spelling controls `UniformRaw`, `RegularWrapper` | Changes variable spelling or a same-body local wrapper only. | Type-correct, but the elaborated pair is unchanged, so neither is a valid B control. | Both remain on the approximately 55 s path. |
 
-The full endpoint alignment is a one-boundary control: it changes the targeted
-raw/wrapper representation while retaining the consumer, local context, and
-proof term. It changes the S2 pair and the Kernel workload by orders of
-magnitude. Wrapper-only expansion is a negative isolation control, not a
-claim that the outer abbrev alone causes the whole cost.
+The full inferred-type alignment changes the S2 goal and the Kernel workload,
+but copies the complete inferred equality. It does not isolate the
+raw/wrapper child while preserving every other dependent argument. Wrapper-only
+expansion is a negative isolation control, not a claim that the outer abbrev
+alone causes the whole cost.
 
 ## C and D
 
@@ -64,8 +64,20 @@ divergent child.
 
 | Case | Earliest divergence | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 |---|---|---|---|---|---|---|---|
-| ImageHomCounit | S0/S1 | Source/API raw versus wrapper endpoint representation (**Demonstrated**) | No relevant first-stage choice observed (**Not observed**) | No generated change observed (**Not observed**) | Wrapper/raw dependent path and M1 propagation (**Demonstrated**) | Full endpoint representation alignment (**Demonstrated**) | Fragile but effective; wrapper-only exposure is insufficient (**Demonstrated**) |
+| ImageHomCounit | S0/S1 | Source/API raw versus wrapper endpoint representation (**Strongly supported**) | No relevant first-stage choice observed (**Not observed**) | Pre-finalization comparison unavailable (**Unknown**) | Wrapper/raw dependent path and M1 propagation (**Strongly supported**) | Full inferred-type alignment (**Strongly supported**) | Fragile but effective; wrapper-only exposure is insufficient (**Strongly supported**) |
 
-The source-level representation mismatch is the demonstrated origin of the
-measured root. The exact downstream instance leaf that amplifies the cost is
-not isolated; that narrower claim remains **Plausible**, not demonstrated.
+The source-level representation mismatch is the first observed unequal child.
+The exact downstream instance leaf that amplifies the cost is not isolated.
+
+## Audit note and Batch 2
+
+`UniformInferred` changes the whole expected equality, while `UniformRaw` and
+`RegularWrapper` leave the expensive elaborated pair unchanged. Thus no saved
+control meets the strict one-factor rule for the raw/wrapper child. A scratch
+frozen replay of the original and aligned local pairs, with metavariables
+instantiated, returned equality in about 51.6 s and under 1 ms respectively;
+both pairs remain structurally unequal. The replay confirms a broad alignment
+effect, not isolated raw/wrapper causality. The targeted one-at-a-time wrapper
+puncture is the saved `restored-UnfoldWrapper` run (9,539,325 calls); provider
+reconstruction remains untested. No concrete transparency-selected Expr was
+identified, so no transparency perturbation was run.

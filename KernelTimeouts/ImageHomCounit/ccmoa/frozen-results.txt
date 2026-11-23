@@ -1,0 +1,18 @@
+Batch 2 local-pair replay (Lean 4.35.0, current measurement build)
+Command shape: lake env lean -j 1 <scratch variant> -DElab.async=false
+The archived variants are OriginalFrozen.lean and AlignedFrozen.lean.
+Each variant imports the same built module, constructs the same h, instantiates
+metavariables in inferType h and the local goal, then calls Kernel.isDefEq in
+that local context. The scratch declarations end with sorry after the probe;
+the existing full-proof counters are the proof-checking evidence.
+
+Original explicit equality:
+  actual hash 3491437759; expected hash 1740185371
+  structurally equal false; Kernel.isDefEq equal; wall 51609 ms
+Aligned type_of% equality:
+  actual hash 1989345664; expected hash 1562553300
+  structurally equal false; Kernel.isDefEq equal; wall <1 ms
+
+The aligned goal copies the entire inferred equality. This replay shows a
+fast broad alignment, not a one-child raw/wrapper intervention. The raw Exprs
+remain structurally distinct in the aligned local context.

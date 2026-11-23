@@ -69,7 +69,7 @@ record.
 | Boundary | Current behavior | Puncture and risk | Status |
 | --- | --- | --- | --- |
 | Localized endpoint wrapper | The localization wrapper keeps the pre-`change` endpoint compact and cheap (about the 7--8 s import/type floor). | Writing the explicit `DerivedCategory.Q` target forces the dependent object conversion. | Fragile but effective |
-| Shared `HasDerivedCategory` provider | Aligning the provider moves the first path without reducing the root. | Independently reconstructing the provider or changing category wrappers exposes the next `Functor.obj` and module structure. | Fragile but effective |
+| Shared `HasDerivedCategory` provider | Aligning the provider moves the first path without reducing the root. | The existing alignment is a negative control for this leaf; reconstruction as a separate puncture is untested. | Not actually responsible for the measured cost |
 | Named module heads | `integralTowerModules` is abbrev while `scalarReductionSource` is regular height 28. | Unfolding or changing declaration kind can expose module/additive proof data. | Untested |
 | Whole dependent equation | The full equation is currently accepted after recursive comparison. | Mixing raw and wrapper vocabulary, or inlining `NatTrans.app` composites, can re-enter the deep path. | Untested |
 
@@ -77,9 +77,13 @@ record.
 
 | Case | Earliest divergence stage | Primary origin | Elaborator causal? | Finalization causal? | Kernel-exposed latent difference? | Effective boundary | Boundary fragility |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| IntegralComparison | S0 target choice; exact provider leaf S2 (**Demonstrated**) | Dependent wrapper/API plus `HasDerivedCategory` instance path (**Plausible**) | Not observed | Not observed | Strongly supported | Localized endpoint wrapper and shared provider alignment (**Strongly supported**) | Fragile but effective (**Plausible**) |
+| IntegralComparison | S0 target choice; exact provider leaf S2 (**Strongly supported**) | Dependent wrapper/API and downstream object path (**Plausible**) | Not observed | Unknown | Strongly supported | Localized endpoint wrapper (**Strongly supported**); provider alignment ineffective | Fragile but effective (**Plausible**) |
 
-The exact first leaf and changed Expr are **Demonstrated** observations. The
-instance leaf's causal sufficiency is only **Plausible** and is contradicted by
-the same-root negative control; the downstream `Functor.obj`/module path is
-**Strongly supported** as the effective Kernel boundary.
+## Audit note and Batch 2
+
+The exact first leaf is an observation, not Demonstrated causality under
+section 4. The same-root frozen instance alignment retains 9,426,253 calls,
+so the provider leaf and provider-sharing boundary are not effective causes
+of this workload. The localized endpoint wrapper remains a broader,
+Strongly supported boundary. Reversing the alignment restores the leaf but
+does not change cost; no transparency-selected alternate Expr was identified.
