@@ -20070,6 +20070,7 @@ public import WeilConjectures.RingTheory.ProEtale.StalkIso
 public import WeilConjectures.RingTheory.ProEtale.StrictlyHenselianRetraction
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import WeilConjectures.RingTheory.ProEtale.WLocal
+public import WeilConjectures.RingTheory.ProEtale.WLocalComponents
 public import WeilConjectures.RingTheory.ProEtale.WLocalization.Basic
 public import WeilConjectures.RingTheory.ProEtale.WLocalization.Ideal
 public import WeilConjectures.RingTheory.ProEtale.WStrictLocalization
@@ -25214,6 +25215,7 @@ public import WeilConjectures.Topology.SpectralSpace.ShrinkCover
 public import WeilConjectures.Topology.SpectralSpace.WLocal.Basic
 public import WeilConjectures.Topology.SpectralSpace.WLocal.ClosedPoints
 public import WeilConjectures.Topology.SpectralSpace.WLocal.ConnectedComponents
+public import WeilConjectures.Topology.SpectralSpace.WLocal.Generalization
 public import WeilConjectures.Topology.SpectralSpace.WLocal.Pullback
 public import WeilConjectures.Topology.StalkDirectSums
 public import WeilConjectures.Topology.Stratification
