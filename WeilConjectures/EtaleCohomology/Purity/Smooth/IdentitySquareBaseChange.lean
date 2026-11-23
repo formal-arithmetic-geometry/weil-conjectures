@@ -259,8 +259,9 @@ theorem rightDerivedUpperShriekAdjunction_id_counit_app (Y : Scheme.{u})
     (rightDerivedLowerShriekIdIso (ModuleCat.{u + 1} Λ) Y) Z
 
 /-- **The exceptional base change of the identity square is the identity**, through
-`R(𝟙)^! ≅ 𝟭` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIdIso`): the hypothesis `H2` of
-`AlgebraicGeometry.Etale.IsoSquare.compEqId_baseChange`. -/
+`R(𝟙)^! ≅ 𝟭` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekIdIso`), used in
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId_diagonal_baseChange`.
+-/
 theorem rightDerivedUpperShriekBaseChangeMap_id_app_comp
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (rightDerivedUpperShriekBaseChangeMap Λ sq).app K ≫
