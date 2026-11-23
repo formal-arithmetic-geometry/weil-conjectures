@@ -137,8 +137,7 @@ noncomputable abbrev rightDerivedLowerShriekLocalizingRestrict :
 
 /-- The exceptional inverse image `f^! : Dctf(Y, Λ) ⥤ Dctf(X, Λ)`, the restriction of the
 exceptional inverse image `AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizing` on the
-localizing closures, which preserves `Dctf`
-(`AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedUpperShriekLocalizing_obj`). -/
+localizing closures. -/
 noncomputable abbrev rightDerivedUpperShriekLocalizingRestrict :
     (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y).FullSubcategory ⥤
       (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).FullSubcategory :=
@@ -151,11 +150,7 @@ noncomputable abbrev rightDerivedUpperShriekLocalizingRestrict :
 /-- The adjunction `Rf_! ⊣ f^!` on `Dctf`, the
 restriction of the ambient adjunction `Rf_! ⊣ f^!` on the localizing closures `Loc(Dctf)`
 (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekLocalizingAdjunction`) to the full
-subcategories `Dctf`, which both functors preserve. Its units and counits are the ambient ones
-(`map_rightDerivedLowerShriekLocalizingAdjunction_unit_app`,
-`map_rightDerivedLowerShriekLocalizingAdjunction_counit_app`), and its right adjoint is the
-constructible exceptional inverse image `Rf^!`
-(`AlgebraicGeometry.ProEtale.DerivedCategoryFiniteTor.rightDerivedUpperShriekLocalizingIso`). -/
+subcategories `Dctf`. -/
 noncomputable def rightDerivedLowerShriekLocalizingAdjunction :
     rightDerivedLowerShriekLocalizingRestrict Λ aY c ⊣
       rightDerivedUpperShriekLocalizingRestrict Λ hk aX aY c :=

@@ -43,7 +43,7 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   {ιG : G ⋙ T' ≅ T ⋙ G'} {α : F ⟶ G} {α' : F' ⟶ G'}
 
 /-- For compatible transformations, `T' (α_K)` is an isomorphism if and only if `α'_{T K}` is
-one: the two differ by the isomorphisms `ιF_K` and `ιG_K`. -/
+one. -/
 lemma isIso_map_app_iff (h : SquareCompatible ιF ιG α α') (K : A) :
     IsIso (T'.map (α.app K)) ↔ IsIso (α'.app (T.obj K)) := by
   have e : α'.app (T.obj K) = ιF.inv.app K ≫ T'.map (α.app K) ≫ ιG.hom.app K := by

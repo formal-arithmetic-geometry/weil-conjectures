@@ -118,7 +118,7 @@ theorem derivedUpperStarExtendScalarsPushHom_app_of_coefficient_comp (hc : a ≫
 /-- **Composite coefficient maps**: for a composite `c = a ≫ b` of coefficient changes (no flatness
 assumed), the comparison `(Rf_* K)_{Λ''} ⟶ Rf_*(K_{Λ''})` is an isomorphism as soon as the
 comparison `(Rf_* K)_{Λ'} ⟶ Rf_*(K_{Λ'})` for `a` at `K` and the comparison for `b` at `K_{Λ'}` are
-isomorphisms. By induction this covers finite composites. -/
+isomorphisms. -/
 theorem isIso_derivedUpperStarExtendScalarsPushHom_app_of_coefficient_comp (hc : a ≫ b = c)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
     [IsIso ((derivedUpperStarExtendScalarsPushHom a f).app K)]

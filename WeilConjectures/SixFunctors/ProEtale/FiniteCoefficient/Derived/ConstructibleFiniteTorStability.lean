@@ -61,10 +61,7 @@ lemma exists_constructibleFiniteTor_iso_mapDerivedCategory {X : Scheme.{u}}
 
 /-- For a finite ring `Λ` whose exponent is
 invertible on `Y` and a separated morphism `f : X ⟶ Y` of finite-type `k`-schemes, the pro-étale
-derived direct image `Rf_*` carries `Dctf(X_proét, Λ)` into `Dctf(Y_proét, Λ)`. On `ν^* G` it is
-`ν^* Rf_*^{ét} G` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`),
-and the étale `Rf_*` preserves `Dctf`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`). -/
+derived direct image `Rf_*` carries `Dctf(X_proét, Λ)` into `Dctf(Y_proét, Λ)`. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar {k : Type u} [Field k]
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -88,9 +85,7 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {k : Type u} [Field k]
 
 /-- Finite coefficients: for a finite ring
 `Λ` and `K, L ∈ Dctf(X_proét, Λ)`, the derived tensor product `K ⊗ᴸ L` lies in
-`Dctf(X_proét, Λ)`. Writing `K ≅ ν^* G` and `L ≅ ν^* G'`, it is `ν^*(G ⊗ᴸ G')` (`ν^*` is
-monoidal), and the étale `⊗ᴸ` preserves `Dctf`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_tensor`). -/
+`Dctf(X_proét, Λ)`. -/
 theorem constructibleFiniteTor_tensor {X : Scheme.{u}}
     {K L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
@@ -110,9 +105,7 @@ theorem constructibleFiniteTor_tensor {X : Scheme.{u}}
 `Λ` whose exponent is invertible on `Y` and a separated morphism `f : X ⟶ Y` of finite-type
 `k`-schemes, the adjunction `Lf^* ⊣ Rf_*` on `Dctf(-_proét, Λ)`, the restriction of the ambient
 adjunction `AlgebraicGeometry.ProEtale.derivedUpperStarLowerStarAdjunction` on the pro-étale
-derived categories: both functors preserve `Dctf`
-(`AlgebraicGeometry.ProEtale.constructibleFiniteTor_leftDerivedFunctor_upperStar_obj`,
-`AlgebraicGeometry.ProEtale.constructibleFiniteTor_rightDerivedLowerStar`). -/
+derived categories. -/
 noncomputable def DerivedCategoryFiniteTor.upperStarLowerStarAdjunction {k : Type u} [Field k]
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

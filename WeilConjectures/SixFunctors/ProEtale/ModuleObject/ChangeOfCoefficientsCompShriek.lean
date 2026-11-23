@@ -227,8 +227,7 @@ and `c = a ≫ b` are isomorphisms (as they are on bounded constructible complex
 comparisons `f^! ⋙ T ⟶ T ⋙ f^!`, defined as the mates of the inverses of the (Shriek)
 comparisons, compose: the one for `c` is the composite of those for `a` and `b`, up to the
 transitivity isomorphisms `T_c ≅ T_a ⋙ T_b` of the derived extensions of scalars on `X` and on
-`Y`. This is the formal consequence of `derivedLowerShriekHom_comp_app` given by
-`mateEquiv_inv_app_comp_of_hom_app_comp`. -/
+`Y`. -/
 theorem mateEquiv_inv_derivedLowerShriekHom_comp_app (hc : a ≫ b = c)
     {UΛ : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ⥤
       DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))}

@@ -60,7 +60,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 transformation of functors `Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(Y)⟦𝒪_E⟧` compatible, along the reductions modulo `ℓⁿ`,
 `n ≠ 0`, with a transformation `θ' : F' ⟶ G'` of functors `Dᵇc(X)⟦𝒪_E ⧸ ℓⁿ⟧ ⥤ Dᵇc(Y)⟦𝒪_E ⧸ ℓⁿ⟧`. If
 `θ'` is an isomorphism at the reductions of bounded constructible `𝒪_E`-complexes, then `θ` is an
-isomorphism (derived Nakayama). -/
+isomorphism. -/
 theorem isIso_app_of_squareCompatible_integersModPowReduction (hn : n ≠ 0)
     {F G : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(Y)⟦Profinite.padicIntegersRingObj ℓ E⟧}
     {F' G' : Dᵇc(X)⟦Profinite.integersModPowRingObj ℓ E n⟧ ⥤
@@ -94,8 +94,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (E : Type) [Field E
 `Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(Y)⟦𝒪_E⟧` compatible, along the reductions modulo `ℓⁿ` read on the small étale
 site (`etaleReduction`), `n ≠ 0`, with a transformation `θ' : F' ⟶ G'` of functors
 `D(X_ét, 𝒪_E ⧸ ℓⁿ) ⥤ D(Y_ét, 𝒪_E ⧸ ℓⁿ)` for the finite ring `𝒪_E ⧸ ℓⁿ`. If `θ'` is an isomorphism at
-the reductions of bounded constructible `𝒪_E`-complexes, then `θ` is an isomorphism (derived
-Nakayama, `isIso_of_isIso_etaleReduction_map`). -/
+the reductions of bounded constructible `𝒪_E`-complexes, then `θ` is an isomorphism. -/
 theorem isIso_app_of_squareCompatible_etaleReduction (hn : n ≠ 0)
     {F G : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤
       Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧}
@@ -125,8 +124,7 @@ variable {X Y : Scheme.{u}} (ℓ : ℕ) [Fact ℓ.Prime] [TopologicalSpace.Noeth
 /-- Finite extensions of `ℚ_ℓ`: let `θ : F ⟶ G` be a transformation of functors
 `Dᵇc(X)⟦E⟧ ⥤ Dᵇc(Y)⟦E⟧` compatible, along the extensions of scalars `E ⊗ᴸ_{𝒪_E} -`, with a
 transformation `θ₀ : F₀ ⟶ G₀` of functors `Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(Y)⟦𝒪_E⟧`. If `θ₀` is an isomorphism, so
-is `θ`: every bounded constructible `E`-complex has an integral model
-(`exists_boundedConstructibleExtendScalars_obj_iso`). -/
+is `θ`. -/
 theorem isIso_app_of_squareCompatible_extendScalars (E : FiniteIntermediateField ℓ)
     {F₀ G₀ : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E.1⟧ ⥤
       Dᵇc(Y)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
@@ -143,8 +141,7 @@ theorem isIso_app_of_squareCompatible_extendScalars (E : FiniteIntermediateField
 /-- Coefficients `ℚ̄_ℓ`: let `θ : F ⟶ G` be a transformation of functors
 `Dᵇc(X)⟦ℚ̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̄_ℓ⟧` compatible, along the extensions of scalars `ℚ̄_ℓ ⊗ᴸ_E -` for the
 finite subextensions `E`, with transformations `θ_E : F_E ⟶ G_E` of functors
-`Dᵇc(X)⟦E⟧ ⥤ Dᵇc(Y)⟦E⟧`. If every `θ_E` is an isomorphism, so is `θ`: every bounded constructible
-`ℚ̄_ℓ`-complex descends to some finite subextension `E` (`constructibleCocone_essSurjObj`). -/
+`Dᵇc(X)⟦E⟧ ⥤ Dᵇc(Y)⟦E⟧`. If every `θ_E` is an isomorphism, so is `θ`. -/
 theorem isIso_app_of_squareCompatible_constructibleToPadicAlgCl
     {F_ G_ : ∀ E : FiniteIntermediateField ℓ,
       PadicSubfieldConstructible X ℓ E ⥤ PadicSubfieldConstructible Y ℓ E}

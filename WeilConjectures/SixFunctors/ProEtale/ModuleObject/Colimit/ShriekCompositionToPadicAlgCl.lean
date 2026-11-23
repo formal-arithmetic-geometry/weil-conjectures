@@ -80,10 +80,7 @@ theorem squareCompatible_boundedConstructibleLowerShriekComp_toPadicAlgCl :
 compatible with the composition of morphisms.** For the extension of scalars `T` along
 `E ⟶ ℚ̄_ℓ`, the comparison `R(f ≫ g)^! ⋙ T ⟶ T ⋙ R(f ≫ g)^!` followed by the composition
 isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` over `ℚ̄_ℓ` equals the composition isomorphism over `E`
-followed by the comparisons for `g` and for `f`. It is the formal consequence of
-`squareCompatible_boundedConstructibleLowerShriekComp_toPadicAlgCl`, the comparisons for `f^!`
-being the mates of the inverses of those for `Rf_!` and the composition isomorphisms for `f^!`
-the conjugates of those for `Rf_!`. -/
+followed by the comparisons for `g` and for `f`. -/
 theorem boundedConstructibleUpperShriekComp_toPadicAlgCl
     (K : Dᵇc(S.left)⟦Profinite.continuousMapRingObj E⟧) :
     (boundedConstructibleToPadicAlgCl X.left ℓ E).map

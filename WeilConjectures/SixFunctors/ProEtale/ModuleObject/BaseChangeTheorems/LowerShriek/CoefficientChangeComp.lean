@@ -154,8 +154,7 @@ variable {X Y V : Over (Spec (.of k))}
   [IsOpenImmersion j'.left] [IsOpenImmersion (j ≫ j').left]
 
 /-- The composition isomorphisms `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero are
-compatible with the coefficient comparisons (Shriek): they are the conjugates of the composition
-isomorphisms of the pullbacks, with which (Pull) is compatible. -/
+compatible with the coefficient comparisons (Shriek). -/
 lemma squareCompatible_openImmersionLowerShriekComp :
     NatTrans.SquareCompatible (C.shriek (j ≫ j'))
       (Functor.pasteSquareIso (C.shriek j) (C.shriek j'))

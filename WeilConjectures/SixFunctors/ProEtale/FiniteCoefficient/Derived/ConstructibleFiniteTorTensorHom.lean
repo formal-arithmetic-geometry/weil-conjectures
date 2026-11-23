@@ -49,9 +49,7 @@ include p aX
 
 /-- Finite coefficients over `k = 𝔽̄_p`:
 for `K, M ∈ Dctf(X_proét, Λ)`, the derived internal Hom `RHom(K, M)` lies in
-`Dctf(X_proét, Λ)`. Writing `K ≅ ν^* G` and `M ≅ ν^* G'` with `G, G' ∈ Dctf(X_ét, Λ)`, this is
-`AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor_derivedHom_mapDerivedCategory`.
--/
+`Dctf(X_proét, Λ)`. -/
 theorem constructibleFiniteTor_derivedHom
     {K M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)

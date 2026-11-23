@@ -55,9 +55,7 @@ section Unit
 variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
 
 /-- The sheaf `S_X` of `R`-modules underlying the unit sheaf of `S`-modules on `X_ét`
-(`AlgebraicGeometry.Etale.sheafRestrictScalarsUnit`) is the constant sheaf with value `S`:
-the unit sheaf is the sheafification of the constant presheaf, and restriction of scalars
-commutes with sheafification. -/
+(`AlgebraicGeometry.Etale.sheafRestrictScalarsUnit`) is the constant sheaf with value `S`. -/
 noncomputable def constantSheafIsoSheafRestrictScalarsUnit :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj
         ((ModuleCat.restrictScalars.{u + 1} (algebraMap R S)).obj (𝟙_ (ModuleCat.{u + 1} S))) ≅
@@ -95,9 +93,7 @@ include hd in
 dimension.** For a finite ring `R`, an `R`-algebra `S` and a quasi-compact quasi-separated
 `g : Z ⟶ Y` whose higher direct images vanish above `d`, the base change map
 `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)`, the mate of
-`AlgebraicGeometry.Etale.leftDerivedUpperStarEtaleSheafExtendScalarsIso`, is an isomorphism.
-Restricted to `R`, it is the projection map `Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ S_Z)` for the constant
-sheaf `S_Y`. -/
+`AlgebraicGeometry.Etale.leftDerivedUpperStarEtaleSheafExtendScalarsIso`, is an isomorphism. -/
 theorem
     isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app_of_cohomologicalDimension
     [Finite R] (M : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R))) :
@@ -144,8 +140,7 @@ theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_cohomologicalDimensio
 /-- **Finite ring maps**, on the étale site: for a homomorphism `ρ : Λ →+* Λ'` with `Λ` finite and a
 morphism `f : X ⟶ Y` of schemes of finite type over a field `k` (here: locally of finite type and
 quasi-compact over `k`), the comparison `(Rf_* K)_{Λ'} ⟶ Rf_*(K_{Λ'})` is an isomorphism for every
-`K ∈ D(X_ét, Λ)`. The higher direct images of `f` vanish in large degrees (Stacks 0F10), so this is
-the projection formula for constant coefficients (Stacks 0F12). -/
+`K ∈ D(X_ét, Λ)`. -/
 theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_finiteType [Finite Λ]
     {k : Type u} [Field k] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

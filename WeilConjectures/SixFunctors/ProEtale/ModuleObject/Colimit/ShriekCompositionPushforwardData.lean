@@ -98,10 +98,7 @@ lemma boundedConstructibleLowerShriekComp_padicAlgCl_eq_lowerShriekComp :
   rfl
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on bounded constructible `E`-sheaves is
-the one of the pushforward datum of `E̲`: both are the same construction. The proof is the
-unfolding of `boundedConstructibleLowerShriekComp` and
-`boundedConstructibleLowerShriekOfCompactificationIso`, whose bodies are not exposed outside
-their defining modules. -/
+the one of the pushforward datum of `E̲`. -/
 lemma boundedConstructibleLowerShriekComp_eq_lowerShriekComp :
     boundedConstructibleLowerShriekComp ℓ E f g =
       BoundedConstructiblePushforwardData.lowerShriekComp

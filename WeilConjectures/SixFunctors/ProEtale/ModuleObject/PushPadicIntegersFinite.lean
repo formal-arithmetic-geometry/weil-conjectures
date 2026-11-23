@@ -131,7 +131,7 @@ lemma exists_isIso_biproductDesc_finiteCoefficientIntegersPointMap_globalSmul :
   simpa only [Profinite.globalSmul_continuousMapConstRingHom] using hb
 
 /-- For finite subextensions `E ≤ F`, the extension of scalars along `𝒪_{E,X} ⟶ 𝒪_{F,X}` is
-exact: `𝒪_{F,X}` is finite free over `𝒪_{E,X}`. -/
+exact. -/
 instance preservesFiniteLimits_extendScalars_finiteCoefficientIntegersPointMap
     (Z : Scheme.{u}) : PreservesFiniteLimits
       (Mod.extendScalars (coefficientMap (finiteCoefficientIntegersPointMap ℓ h) Z)) :=
@@ -139,8 +139,7 @@ instance preservesFiniteLimits_extendScalars_finiteCoefficientIntegersPointMap
 
 /-- Integral coefficients `(𝒪_E, 𝒪_F)` of a finite extension `F/E`: the comparison
 `(Rf_* K)_{𝒪_F} ⟶ Rf_*(K_{𝒪_F})` for the coefficient change `𝒪̲_E ⟶ 𝒪̲_F` is an isomorphism, for
-every morphism of schemes `f` and on all unbounded objects. Indeed `𝒪̲_F` is finite free over
-`𝒪̲_E`, so both sides are finite direct sums of copies of `Rf_*^{𝒪_E}`. -/
+every morphism of schemes `f` and on all unbounded objects. -/
 instance isIso_derivedPushHom_finiteCoefficientIntegersPointMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (CondensedRing.derivedPushHom (finiteCoefficientIntegersPointMap ℓ h) f) :=
   (exists_isIso_biproductDesc_finiteCoefficientIntegersPointMap_globalSmul.{u} ℓ h).elim
