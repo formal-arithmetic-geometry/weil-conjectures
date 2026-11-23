@@ -27,10 +27,11 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/-- On a reduced scheme covered by its finitely many reduced irreducible components, the
-ideal `I` of the reduced union of the components other than `Z₁` meets the ideal `J₁` of
-`Z₁` in zero on every open, and for every invertible module `M` and every `m ≥ 0` the
-restriction `Γ(U, I M^{⊗m}) → Γ(U ∩ Z₁, I₁ (M|_{Z₁})^{⊗m})` is bijective on every open `U`
+/-- Let a reduced scheme be covered by its finitely many reduced irreducible components, let
+`Z₁` be one of them with ideal `J₁`, and let `I` be the ideal of the reduced union of the
+others. Then `I` meets `J₁` in zero on every open, and for every invertible module `M` and
+every `m ≥ 0`, writing `I₁` for the image of `I` in `𝒪_{Z₁}`, the restriction
+`Γ(U, I M^{⊗m}) → Γ(U ∩ Z₁, I₁ (M|_{Z₁})^{⊗m})` is bijective on every open `U`
 (Stacks, Tags 09NW, 09NX). -/
 theorem conductorIdealZeroIntersection
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]

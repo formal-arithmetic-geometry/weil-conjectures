@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 /-!
 # The normalized Cartier pole-extension class
 
-proof.md, (G1) and the local lifts
-paragraph.
-
 The relative extension model records the frame torsor of O(D), its canonical section
 on the complement, and the lift of supported one. Locally a frame is t⁻¹; its image
 in the extension generates the powers u t⁻ᵃ. Thus the quotient sends t⁻¹ to +1.

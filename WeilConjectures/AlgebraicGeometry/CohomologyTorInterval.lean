@@ -10,8 +10,8 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 /-!
 # A Tor interval from the Tor intervals of cohomology modules
 
-proof.md,
-Complexes paragraph, generalized to a common cohomology Tor interval `[c,d]`.
+A complex with cohomology in `[a,b]` whose cohomology modules all have Tor amplitude in a
+common interval `[c,d]` has Tor amplitude in `[a+c,b+d]`.
 -/
 
 @[expose] public section

@@ -68,11 +68,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Fla
 
 /-! # Coherence of normalized etale sum right adjoints
 
-proof.md, Step 1; Stacks Tags 03S6, 0F7J, 0F7K.
-
 The comparisons below use the actual proper/open compositor and exchange. The map to sum
 extension is the constructed graph comparison, rather than a choice of a bare isomorphism.
 Right adjoints and their adjunctions are quantified, so no choice of Brown adjoint is imposed.
+
+## References
+
+* Stacks Project, Tags 03S6, 0F7J and 0F7K
 -/
 
 @[expose] public section

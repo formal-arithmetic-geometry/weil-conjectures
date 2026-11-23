@@ -57,8 +57,8 @@ theorem annihilated_of_scalar_composites
 
 end LinearMap
 
-/-- The scalar reverse maps on the affine inverse limit.
-(Stacks, Tag 0888). -/
+/-- The `Γ(X, U)`-module `lim_n F_n(U)` of sections of the inverse limit of `F` over the
+affine open `U` (Stacks, Tag 0888). -/
 abbrev affineLimitModule (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F : CoherentFormalModule X I)
     (U : X.affineOpens) := ↥(limit (F.obj ⋙

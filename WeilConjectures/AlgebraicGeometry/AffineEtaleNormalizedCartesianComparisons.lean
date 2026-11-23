@@ -112,8 +112,9 @@ private theorem comparison_refl {C : Type*} [Category C] {S T : Scheme.{u}}
       (𝟙 _) ≫ (F.obj A).obj.hom
     simp
 
-/-- The normalized cartesian base change functors come with canonical comparison isomorphisms
-satisfying the coherence conditions (Stacks, Tag 0EYL). -/
+/-- For normalized cartesian base change functors there exist comparison isomorphisms
+`gamma : U i j ⋙ U j k ≅ U i k` and `delta : U i j ⋙ v j ≅ v i` that are the identity at
+identity indices and are compatible with the projections `p` and `q` (Stacks, Tag 0EYL). -/
 theorem exists_affineEtale_normalized_cartesian_comparisons
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)
     (U : ∀ (i j : I), i ≤ j → (D.obj (op i)).FullAffineEtale ⥤

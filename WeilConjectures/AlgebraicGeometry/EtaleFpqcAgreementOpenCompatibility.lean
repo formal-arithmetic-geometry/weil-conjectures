@@ -23,8 +23,9 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- The agreement opens of the pulled-back sections along an fpqc family are compatible with the
-pullbacks to the overlaps (Stacks, Tags 09XN, 09XM, 03CB and 03CC). -/
+/-- The agreement opens of the pulled-back sections along a family of morphisms are compatible
+with the pullbacks to the overlaps. No fpqc hypothesis on the family is needed
+(Stacks, Tags 09XN, 09XM, 03CB and 03CC). -/
 theorem etaleFpqcAgreementOpens_compatible
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))
