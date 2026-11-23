@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSpace
+public import WeilConjectures.AlgebraicGeometry.PolynomialAffineSmooth
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Exceptional.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
@@ -45,15 +45,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 
 open Scheme
-
-instance smoothOfRelativeDimension_polyAffine_hom (k : Type u) [Field k] (n : ℕ) :
-    SmoothOfRelativeDimension n (polyAffine k n).hom := by
-  change SmoothOfRelativeDimension n
-    (Spec.map (CommRingCat.ofHom (algebraMap k (MvPolynomial (Fin n) k))))
-  rw [HasRingHomProperty.Spec_iff (P := @SmoothOfRelativeDimension n), CommRingCat.hom_ofHom]
-  exact RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _
-    ((RingHom.isStandardSmoothOfRelativeDimension_algebraMap n).2
-      (isStandardSmoothOfRelativeDimension_mvPolynomial k n))
 
 namespace Etale
 
