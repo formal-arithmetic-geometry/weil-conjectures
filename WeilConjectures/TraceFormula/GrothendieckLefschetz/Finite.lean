@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFiberFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondence
 public import WeilConjectures.SixFunctors.Etale.Derived.FrobeniusCorrespondenceOperator
+public import WeilConjectures.SixFunctors.Etale.Derived.StalkFrobeniusIterate
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 
 /-!
@@ -43,7 +44,7 @@ tr_Λ(F_{c,m} ∣ RΓ_c(X, K)) = ∑_{x̄} tr_Λ(F_{x̄,m} ∣ K_x̄).
   Frobenius correspondences (stated with `sorry`).
 - `AlgebraicGeometry.Etale.correspondenceOperator_iterateHom_geometricFiberFrobenius`,
   `AlgebraicGeometry.Etale.frobeniusStalkMap_iterateHom_geometricFiberFrobenius`: the operators
-  of `κ_{m,K} ≫ v` are the Frobenius operators of `v` (stated with `sorry`).
+  of `κ_{m,K} ≫ v` are the Frobenius operators of `v` (the first one stated with `sorry`).
 - `AlgebraicGeometry.Etale.geometricFixedPointEquiv`: the points fixed by `(g_X^m, σ^m)` are the
   points fixed by `Φ_X^m`.
 - `AlgebraicGeometry.Etale.finite_geometricFixedPoint`: `X₀(𝔽_{q^m})` is finite for `m ≥ 1`.
@@ -95,7 +96,8 @@ open ProEtale (iterateHom)
 
 section Iterate
 
-/-- The iterate `endIterate g m` is the iterate `ProEtale.iterateHom g m`. -/
+/-- The iterate `endIterate g m` is the iterate `ProEtale.iterateHom g m`. This is
+`endIterate_eq_pow` with the right-hand side folded back into `iterateHom`, for rewriting. -/
 lemma endIterate_eq_iterateHom {X : Scheme.{u}} (g : X ⟶ X) (m : ℕ) :
     endIterate g m = iterateHom g m :=
   endIterate_eq_pow g m
@@ -292,6 +294,9 @@ theorem correspondenceOperator_iterateHom_geometricFiberFrobenius
       globalOperator Λ (isPullback_endIterate f.isPullback_geometricGaloisFrobenius m) v := by
   sorry
 
+omit [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
+  [HasCompactification f.geometricFiberToAlgebraicClosure] [Finite Λ]
+  [HasInvertibleExponent Λ (Spec (.of (AlgebraicClosure k)))] in
 /-- At a point `x̄` fixed both by `Φ_X^m` and by `(g_X^m, σ^m)`, the stalk of the Frobenius
 correspondence `κ_{m,K} ≫ v` along `Φ_X^m` is the local Frobenius operator of
 `v : L(g_X^m)^* K ⟶ K`, `(κ_{m,K} ≫ v)_x̄ = F_x̄(v)` on `K_x̄`. -/
@@ -306,7 +311,91 @@ theorem frobeniusStalkMap_iterateHom_geometricFiberFrobenius
         ((leftDerivedUpperStarGeometricFiberFrobeniusIterateIso _ f m).hom.app K ≫
           eqToHom (by rw [endIterate_eq_iterateHom]) ≫ v) =
       localOperator Λ hx v := by
-  sorry
+  have hp := FiniteField.ringChar_prime (k := k)
+  have hK : (ringChar k : Γ(Spec (.of (AlgebraicClosure k)), ⊤)) = 0 :=
+    isOfCharacteristic_Spec ringChar_cast_algebraicClosure
+  have hhF : endIterate (specGeometricFrobenius k).asIso.hom m ≫
+      (Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+        (FiniteField.frobeniusExponent k * m) = 𝟙 _ := by
+    rw [endIterate_hom_eq_pow_hom, ← specGeometricFrobenius_pow_inv_eq_iterateFrobenius hp hK,
+      Iso.hom_inv_id]
+  have hFh : (Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+        (FiniteField.frobeniusExponent k * m) ≫ endIterate (specGeometricFrobenius k).asIso.hom m =
+      𝟙 _ := by
+    rw [← cancel_epi (endIterate (specGeometricFrobenius k).asIso.hom m), reassoc_of% hhF,
+      Category.comp_id]
+  have hz : x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m =
+      x ≫ iterateHom f.geometricGaloisFrobenius.asIso.hom m := by
+    rw [endIterate_eq_iterateHom]
+  have hyz : x = (Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+      (FiniteField.frobeniusExponent k * m) ≫ x ≫
+        endIterate f.geometricGaloisFrobenius.asIso.hom m := by
+    rw [← hx, ← Category.assoc, hFh, Category.id_comp]
+  have hA := leftDerivedUpperStarComp_hom_app_map_leftDerivedUpperStarIterateHomIso_hom_app
+    (ModuleCat.{u + 1} Λ) hp f.isOfCharacteristic_geometricFiber hK
+    (FiniteField.frobeniusExponent k)
+    (iterateFrobenius_geometricFiber_comp_geometricGaloisFrobenius_hom f) m x hx'.symm hz hyz K
+  have hA' := (Iso.comp_inv_eq ((leftDerivedUpperStarComp _ x
+    (iterateHom f.geometricGaloisFrobenius.asIso.hom m) _ hz).app K)).mp
+    ((Category.assoc _ _ _).trans hA)
+  have hQ := globalSectionsTransport_hom_app_leftDerivedUpperStarComp_inv_app Λ hp hK
+    (FiniteField.frobeniusExponent k * m) (endIterate (specGeometricFrobenius k).asIso.hom m) hhF
+    (L((x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m)^*[ModuleCat.{u + 1} Λ]).obj K)
+  have hcoh := map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app
+    (ModuleCat.{u + 1} Λ) (endIterate (specGeometricFrobenius k).asIso.hom m)
+    ((Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+      (FiniteField.frobeniusExponent k * m))
+    (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m) (𝟙 _) x
+    (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m) hhF.symm hyz
+    (Category.id_comp _).symm K
+  have hn := (globalSectionsTransport Λ
+    (endIterate (specGeometricFrobenius k).asIso.hom m)).hom.naturality
+    ((leftDerivedUpperStarComp _ ((Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+      (FiniteField.frobeniusExponent k * m)) (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m)
+      x hyz).hom.app K)
+  simp only [Functor.comp_map] at hn
+  have he := eqToHom_comp_leftDerivedUpperStarComp_hom_app x
+    (endIterate_eq_iterateHom f.geometricGaloisFrobenius.asIso.hom m).symm rfl hz rfl K
+  rw [eqToHom_refl, Category.id_comp] at he
+  have step₂ : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).map
+      ((leftDerivedUpperStarComp _ ((Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+        (FiniteField.frobeniusExponent k * m))
+        (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m) x hyz).hom.app K ≫
+      (leftDerivedUpperStarIterateFrobeniusIso _ hp hK (FiniteField.frobeniusExponent k * m) ≪≫
+        leftDerivedUpperStarId _ _).hom.app
+          (L((x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m)^*[ModuleCat.{u + 1} Λ]).obj
+            K)) =
+      (globalSectionsTransport Λ (endIterate (specGeometricFrobenius k).asIso.hom m)).hom.app
+          (L((x)^*[ModuleCat.{u + 1} Λ]).obj K) ≫
+        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) _).map
+          ((leftDerivedUpperStarComp _ (endIterate (specGeometricFrobenius k).asIso.hom m) x
+            (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m) hx.symm).inv.app K) := by
+    rw [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Functor.map_comp, ← hQ]
+    simp only [Category.assoc]
+    rw [reassoc_of% hn, ← Functor.map_comp, ← Functor.map_comp, reassoc_of% hcoh,
+      leftDerivedUpperStarComp_id_left_hom_app, Category.comp_id]
+  have step₁ : (leftDerivedUpperStarComp _ x (iterateHom f.geometricFiberFrobenius m) x
+      hx'.symm).hom.app K ≫ L((x)^*[ModuleCat.{u + 1} Λ]).map
+        ((leftDerivedUpperStarGeometricFiberFrobeniusIterateIso _ f m).hom.app K ≫
+          eqToHom (by rw [endIterate_eq_iterateHom]) ≫ v) =
+      ((leftDerivedUpperStarComp _ ((Spec (.of (AlgebraicClosure k))).iterateFrobenius hp hK
+        (FiniteField.frobeniusExponent k * m))
+        (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m) x hyz).hom.app K ≫
+      (leftDerivedUpperStarIterateFrobeniusIso _ hp hK (FiniteField.frobeniusExponent k * m) ≪≫
+        leftDerivedUpperStarId _ _).hom.app
+          (L((x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m)^*[ModuleCat.{u + 1} Λ]).obj
+            K)) ≫
+        (leftDerivedUpperStarComp _ x (endIterate f.geometricGaloisFrobenius.asIso.hom m)
+          (x ≫ endIterate f.geometricGaloisFrobenius.asIso.hom m) rfl).hom.app K ≫
+        L((x)^*[ModuleCat.{u + 1} Λ]).map v := by
+    rw [Functor.map_comp, Functor.map_comp]
+    erw [reassoc_of% hA', reassoc_of% he]
+    simp only [Category.assoc]
+  simp only [frobeniusStalkMap, localOperator, stalkPullback, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Functor.comp_map, Category.assoc]
+  rw [step₁, Functor.map_comp, step₂]
+  simp only [Functor.map_comp, Category.assoc]
 
 /-- **The trace formula for Frobenius correspondences with finite coefficients**, in terms of
 the geometric Galois Frobenius `g_X`: for `K ∈ Dᵇctf(X, Λ)`, an arbitrary Weil datum

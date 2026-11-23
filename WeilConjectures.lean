@@ -20894,6 +20894,7 @@ public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExtPullback
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyRingChange
 public import WeilConjectures.SixFunctors.Etale.ConstantRingEndomorphisms
 public import WeilConjectures.SixFunctors.Etale.Derived.AbsoluteFrobenius
+public import WeilConjectures.SixFunctors.Etale.Derived.AbsoluteFrobeniusIterate
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
@@ -21406,6 +21407,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDualBou
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDualLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDualStrata
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierExchangeCtf
+public import WeilConjectures.SixFunctors.Etale.Derived.StalkFrobeniusIterate
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.SepClosedPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.StrictLocalizationVanishing
