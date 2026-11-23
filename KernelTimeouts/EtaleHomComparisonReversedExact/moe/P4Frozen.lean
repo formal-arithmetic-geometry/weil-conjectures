@@ -1,0 +1,173 @@
+-- Prints a compact view of the concrete tensor-Hom result and goal.
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonModels
+import HeadAuditTools
+import MOEStage
+import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarTensorShiftCancellation
+import WeilConjectures.AlgebraicGeometry.Tensor.TensorHomShiftComparisonComponent
+import WeilConjectures.Tactic.TransportExact
+
+/-! # Fixed-degree étale Hom shift component
+
+Source: Stacks Project, Tags 08JC and 08J9; blueprint
+`lem-coef-etale-hom-transpose-exact-comm-shift-core`, proof steps 3--4.
+This is the fixed-degree component equation, strictly simpler than the assembled
+`NatTrans.CommShiftCore` because it has no extensional wrapper or composite shift
+structures. The proof is the tensor--Hom diagram chase from the parent module.
+(blueprint: lem-coef-etale-hom-transpose-exact-comm-shift-component) -/
+
+@[expose] public section
+set_option linter.unusedTactic false
+set_option autoImplicit false
+set_option maxHeartbeats 10000000
+universe u
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
+open CategoryTheory.Pretriangulated.Opposite Opposite
+open Lean Lean.Meta Lean.Elab.Tactic
+
+partial def dumpP4 (stage side path : String) (e : Expr) (depth : Nat) : List String :=
+  let head := [s!"MOE_NODE stage={stage} side={side} path={path} hash={toString (hash e)} kind={MOE.exprKind e} payload={MOE.escape (MOE.exprPayload e)}"]
+  if depth < 8 then
+    head ++ (MOE.exprChildren e).flatMap fun (label, child) =>
+      dumpP4 stage side (path ++ "/" ++ label) child (depth + 1)
+  else
+    head
+namespace AlgebraicGeometry.Etale
+
+set_option backward.defeqAttrib.useBackward true
+attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
+  Functor.leftDerivedFunctor Functor.leftDerivedFunctorCounit
+  _root_.DerivedCategory.instMonoidalCategory
+  _root_.DerivedCategory.commShift₂CurriedTensor
+
+private theorem comparison_natural_second
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (X : Scheme.{u}) (φ : A →+* B) (K : DerivedCategoryModule A X)
+    {L L' : DerivedCategoryModule A X} (g : L ⟶ L') :
+    ((derivedTensor (ModuleCat.{u + 1} B) X).obj ((scalarExtension φ X).obj K)).map
+        ((scalarExtension φ X).map g) ≫ (etaleHomTensorComparison X φ K L').hom =
+      (etaleHomTensorComparison X φ K L).hom ≫ (scalarExtension φ X).map
+        (((derivedTensor (ModuleCat.{u + 1} A) X).obj K).map g) := by
+  exact (etaleHomTensorComparison_existsUnique X φ).choose_spec.1.2.1 K g
+
+/-- The evaluation transpose commutes, in a fixed degree `n` and at a fixed object `K`, with
+the normalized shifts: those of `EtaleHomLeft` (`F(sA)` followed by the scalar shift) and of
+`EtaleHomRight` (Hom of the inverse scalar shift followed by `sB`).
+Source: Stacks Project, Tags 08JC and 08J9; blueprint `thm-coef-finite-hom`, proof
+paragraph 2.
+
+Proof. Postcompose both sides with the inverse of the `sB` shift and transpose through the
+tensor--Hom adjunction; the evaluation normalization `hB` turns the transposed right side
+into signed tensor evaluation, i.e. tensor cancellation followed by evaluation. Tensor
+cancellation is natural in its second variable (the `CommShift` compatibility of the
+tensor bifunctor maps and naturality of `shiftFunctorCompIsoId`), so the shifted map can be
+moved through it. Precompose with the tensor image of the scalar shift, an isomorphism;
+replace the unshifted evaluation by the transpose equation `hv`; apply
+`etaleHomTensorComparison_shiftCancellation` and the naturality of the binary tensor
+comparison in its second variable. The composite obtained is the image under scalar
+extension of the `sA` evaluation normalization `hA`, which is the transposed left side.
+Cancelling the tensor image of the scalar shift and using injectivity of the adjunction's
+`homEquiv` gives the equation.
+(blueprint: lem-coef-etale-hom-transpose-exact-comm-shift-component) -/
+theorem etaleHomComparison_reversedExact_commShift_component
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)
+    (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M)
+    (hv : IsEtaleHomTranspose X φ M v)
+    (sA : ((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).CommShift ℤ)
+    (sB : ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
+      ((scalarExtension φ X).obj M)).CommShift ℤ)
+    (hA : EtaleHomShiftNormalization (ModuleCat.{u + 1} A) X M sA)
+    (hB : EtaleHomShiftNormalization (ModuleCat.{u + 1} B) X
+      ((scalarExtension φ X).obj M) sB)
+    (K : DerivedCategoryModule A X) (n : ℤ) :
+    letI := etaleHomScalarCommShift X φ
+    ((scalarExtension φ X).map ((sA.commShiftIso n).hom.app (op K)) ≫
+      ((scalarExtension φ X).commShiftIso n).hom.app
+        (((derivedHom (ModuleCat.{u + 1} A) X).flip.obj M).obj (op K))) ≫
+      (v.app (op K))⟦n⟧' =
+    v.app (op (K⟦-n⟧)) ≫
+      ((derivedHom (ModuleCat.{u + 1} B) X).flip.obj
+        ((scalarExtension φ X).obj M)).map
+          ((((scalarExtension φ X).commShiftIso (-n)).inv.app K).op) ≫
+      (sB.commShiftIso n).hom.app (op ((scalarExtension φ X).obj K)) := by
+  let : (scalarExtension φ X).Additive := (Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)).left_adjoint_additive
+  have h0 := @derivedTensorHomShiftComparison_component (ModuleCat.{u + 1} A)
+    _ _ _ _
+    _ _ _ _
+    (ModuleCat.{u + 1} B)
+    _ _ _ _
+    _ _ _ _ X
+    (scalarExtension φ X) inferInstance (etaleHomScalarCommShift X φ)
+    (etaleHomTensorComparison X φ) M v hv sA sB hA hB
+    (fun K L L' g ↦ comparison_natural_second X φ K g)
+    (fun K L n ↦ etaleHomTensorComparison_shiftCancellation X φ K L n) K n
+  have h := @derivedTensorHomShiftComparison_component (ModuleCat.{u + 1} A)
+    _ _ _ _
+    _ _ _ _
+    (ModuleCat.{u + 1} B)
+    _ _ _ _
+    _ _ _ _ X
+    (scalarExtension φ X) inferInstance (etaleHomScalarCommShift X φ)
+    (etaleHomTensorComparison X φ) M v (fun K ↦ by transport_exact hv K) sA sB hA hB
+    (fun K L L' g ↦ comparison_natural_second X φ K g)
+    (fun K L n ↦ etaleHomTensorComparison_shiftCancellation X φ K L n) K n
+  run_tac do Lean.Elab.Tactic.withMainContext do
+    let h ← Lean.Meta.getLocalDeclFromUserName `h
+    match h.value? true with
+    | some value =>
+      let hv ← Lean.Meta.getFVarFromUserName `hv
+      let args := value.getAppArgs
+      for i in [:args.size] do
+        if i == 25 then
+          logInfo m!"hv is application argument {i+1}"
+          HeadAuditTools.applicationArguments value (some i)
+          let actual := args[i]!
+          let actualType ← Lean.Meta.inferType actual
+          let mut fnType ← Lean.Meta.inferType value.getAppFn
+          for j in [:i] do
+            fnType := (← Lean.Meta.whnf fnType)
+            match fnType with
+            | .forallE _ _ body _ => fnType := body.instantiate1 args[j]!
+            | _ => logInfo m!"unexpected non-forall before argument {j+1}"
+          fnType := (← Lean.Meta.whnf fnType)
+          let expected := match fnType with
+            | .forallE _ domain _ _ => domain
+            | _ => fnType
+          let actualType ← instantiateMVars actualType
+          let expected ← instantiateMVars expected
+          let env ← getEnv
+          let kernelResult := Lean.Kernel.isDefEq env (← getLCtx) actualType expected
+          logInfo m!"MOE_STAGE stage=S2 status=local-application argument=26"
+          logInfo m!"MOE_KERNEL stage=S5 pair=hv-domain result={kernelResult.isOk}"
+          for line in dumpP4 "S2" "L" "hv/term" actual 0 do logInfo m!"{line}"
+          for line in dumpP4 "S2" "L" "hv/type" actualType 0 do logInfo m!"{line}"
+          for line in dumpP4 "S2" "R" "hv/expected-domain" expected 0 do logInfo m!"{line}"
+          for line in dumpP4 "S2" "P" "application" value 0 do logInfo m!"{line}"
+    | none => logInfo "h has no stored value"
+    for name in [`h0, `h] do
+      let decl ← Lean.Meta.getLocalDeclFromUserName name
+      match decl.value? true with
+      | none => logInfo m!"MOE_FROZEN name={name} no-value"
+      | some value =>
+        let args := value.getAppArgs
+        let actualType ← instantiateMVars (← Lean.Meta.inferType args[25]!)
+        let mut fnType ← Lean.Meta.inferType value.getAppFn
+        for j in [:25] do
+          fnType := (← Lean.Meta.whnf fnType)
+          match fnType with
+          | .forallE _ _ body _ => fnType := body.instantiate1 args[j]!
+          | _ => throwError "non-forall before argument {j+1}"
+        let expected ← match (← Lean.Meta.whnf fnType) with
+          | .forallE _ domain _ _ => instantiateMVars domain
+          | _ => throwError "missing argument-26 domain"
+        let result := Lean.Kernel.isDefEq (← getEnv) (← getLCtx) actualType expected
+        logInfo m!"MOE_FROZEN name={name} actualHash={hash actualType} expectedHash={hash expected} syntactic={actualType == expected} result={result.isOk}"
+  sorry
+
+end AlgebraicGeometry.Etale

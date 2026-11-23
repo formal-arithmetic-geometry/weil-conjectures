@@ -53,7 +53,8 @@ constants. Their S3 type/value roots are also recorded in
 ### S4 stored ConstantInfo
 
 The baseline declaration has the same type hash `1338557591` and value hash
-`2540733603` at S4. Thus no relevant S3-to-S4 change was observed. The fixed
+`2540733603` at S4. These two imported-environment views do not establish
+that no S2-to-S4 finalization change occurred. The fixed
 current declaration has the same type hash but value hash `3419966969`; this
 is a source-variant value change, not evidence that finalization introduced
 the hR mismatch. Both snapshots report theorem kind, `opaque` hints, one
@@ -97,7 +98,9 @@ large M1 propagation below dependent derived-category/functor data.
 - Source-authored: **yes**. `Over.mk f.left` is written in the original hR application.
 - Macro-generated: **not observed**.
 - Elaborator-selected: **not demonstrated** for the relevant split. The elaborator assigns ordinary implicit instances and preserves the explicit Over term.
-- Declaration-finalization-generated: **not observed**. Baseline S3 and S4 roots match.
+- Declaration-finalization-generated: **not established as the origin**. The
+  source and S2 proposition already contain the scheme split; an independent
+  pre-finalization versus S4 comparison was not captured.
 - Environment/import-frozen: **yes** for the imported opaque counit theorem constants and their stored proposition types.
 - Kernel-exposed: **only for descendants**. The first mismatch is already present at S2; later `Comma.left`/functor/projection structure is exposed by Kernel reduction.
 - Unknown / mixed: exact internal Kernel reduction order and isolated `Over.left` share remain unknown.
@@ -124,7 +127,8 @@ transparency sweep would not identify an elaborator contribution.
 ## 5. KERNEL INPUT AND COST
 
 The stored root declaration is an opaque theorem with `hasValue=true`; the
-baseline S3/S4 type root is unchanged by finalization. The hR proposition is
+observed S3/S4 type root is equal in the imported-environment snapshots.
+This does not measure pre-finalization change. The hR proposition is
 under `Eq`, `Quiver.Hom`, `DerivedCategoryModule`, and seven-fold composition.
 The slow root has 3,897,905 calls in the READY replay, with comparison and
 WHNF work both material. The fresh application-only rerun measured:
@@ -186,8 +190,9 @@ Earliest divergence stage: **S0/S1, confirmed at S2**.
 Most likely origin: **source-authored explicit over-object specialization**,
 then stored in imported opaque theorem/proof data. Elaborator contribution:
 **not demonstrated**; traces show standard assignments but no choice that
-changes the relevant representation. Declaration finalization: **no change
-observed**. Kernel contribution: **M1 propagation** dominates the measured
+changes the relevant representation. Declaration finalization: **not the
+earliest origin; S2/S4 transformation unmeasured**. Kernel contribution:
+**M1 propagation** dominates the measured
 root after the M0 dependent proposition mismatch. Current cheap boundaries
 are the direct restriction proposition, abstract helper/functor vocabulary,
 and the `Over.left` data accessor; all are fragile under concrete proof or raw
@@ -196,3 +201,14 @@ over-object expansion.
 Remaining uncertainty: the exact reduction predecessor and exclusive cost of
 the `Over.left`/`Comma.left` exposure, and a strict transparency perturbation
 that preserves the original argument-39 obligation.
+
+## Audit note and Batch 2 boundary test
+
+The prior "no finalization change" inference compared two views of imported
+ConstantInfo; the saved S3 field is finalization-observable-only. The exact
+`Over.left (Over.mk f.left)` versus `X` split is supported by the source and
+S2 proposition audit. E3 puncture: replace the type-correct direct
+`restriction_counit A f.left` proof at argument 39 with the original
+`imageRestriction_counit ... (Over.mk f.left)`. The saved application replay
+changes from 3.30 s to 34.42 s; the `τq`-only negative control remains 34.62 s.
+This tests the proposition interface, not an isolated `Over.left` unfold.

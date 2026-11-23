@@ -46,3 +46,21 @@ the contract.
 This is an origin record, not a claim that the structural hash itself is a
 semantic identity. Paths, node kinds, payloads, and constant hints are the
 authoritative fields.
+
+## Audit note and Batch 2 boundary test
+
+The imported consumer has no captured pre-finalization S2 value. Its exact
+provider split is supported at S4/S5 (the shared `tensorObj` head, argument 2),
+not at an earlier snapshot. The `abbrev` versus `@[reducible] def` change is
+source-authored declaration metadata: the fresh A0/A2 controls report the
+same 46--52 s tensor argument conversion, while the full consumer conversion
+changes from 119,953/127,832 ms to 2/2 ms. This does not demonstrate an
+Elaborator-selected difference or a same-Expr metadata-only F2 replay.
+
+E3 puncture: the type-correct A0 `abbrev` spelling re-exposes the body of the
+fast A2 regular-definition boundary in the same consumer. Both variants
+compile; the fresh round-two measurements above show the expensive full
+consumer conversion returns. The separate A3 body-exposure row is a historical
+note and was not re-measured. Boundary status: fragile under changing the
+declaration kind. No S2/S4 finalization comparison is available for the
+imported consumer.

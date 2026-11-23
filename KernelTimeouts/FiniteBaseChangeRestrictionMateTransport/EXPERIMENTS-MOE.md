@@ -152,3 +152,16 @@ Kernel contribution: **confirmed as exposure and amplification**. The M0 depende
 Current cheap-but-fragile boundaries: `Site` regular definition, whole-`hb` transport, and explicit abstract helper functor/equivalence parameters.
 
 What remains uncertain: the exclusive contribution of the Site delta versus the category-instance path, whether any hidden elaborator assignment occurs in the full theorem application, and a valid same-root frozen replay or metadata-only control.
+
+## Audit note and Batch 2 boundary test
+
+The S0 claim is supported by the written `Scheme.ProEt`/mode-indexed `Site`
+interface and confirmed by the isolated S2 `root/fn` pair. The imported S3
+snapshot is observational, so finalization is only excluded as the *earliest*
+origin; it was not compared against a captured pre-finalization value. No
+Elaborator-selected divergence is demonstrated by the unchanged unification
+hint replay. E3 puncture: replace the type-correct transported whole-`hb`
+premise with the original concrete `h` in the same helper application. The
+saved restoration reproduces 239,340,712 calls; the transported version has
+19,783 threshold-zero calls. This tests the whole-proposition boundary, not
+the isolated `Site` definition's cost.

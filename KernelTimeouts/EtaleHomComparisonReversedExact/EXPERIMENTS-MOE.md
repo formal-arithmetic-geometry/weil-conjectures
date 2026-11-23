@@ -39,7 +39,7 @@ Source-authored: **demonstrated**. The source explicitly writes the named predic
 
 Macro-generated: **not observed**. S0 and S1 are identical.
 
-Elaborator-selected: **demonstrated for concrete hidden arguments, not demonstrated as the root origin**. Trace records show instance synthesis selecting `ModuleCat.instMonoidalPreadditive` for both module categories and assigning scalar extension, comm-shift, category, and derived-category terms. These choices occur in current-file elaboration, but the compact-vs-expanded predicate choice is already source-authored. The transparency replay requires Meta `default` or `all` for the actual/expected domain (`none`, `reducible`, and `instances` fail), but no successful perturbation produced a different final Expr.
+Elaborator-selected: **assignments observed, causal contribution not demonstrated**. Trace records show synthesis selecting `ModuleCat.instMonoidalPreadditive` for both module categories and assigning scalar extension, comm-shift, category, and derived-category terms. These are concrete S2 arguments, but no alternative provider selection was shown to change the root Expr or frozen cost. The compact-vs-expanded predicate choice is source-authored. Meta `default` or `all` is required for the actual/expected domain (`none`, `reducible`, and `instances` fail); no successful perturbation produced a different final Expr.
 
 Declaration-finalization-generated: **not observed**. The divergence is present in S0/S1 and S2. The imported target is opaque at S4; no evidence attributes the trigger to proof abstraction or generated declarations.
 
@@ -127,7 +127,15 @@ Original: Direct `hv`; S2 outer `app` versus expected `forall`; S5 true. READY4.
 
 Perturbed elaboration: `(fun K => by transport_exact hv K)` at exactly argument 26. S2 type becomes `forall/forall`, `moe_compare` reports no divergence, S5 true. READY4.2: 7,039 calls, 31.957 ms root.
 
-Frozen replay: The Batch 0 structural snapshots preserve original and transported S2 pairs. A separate frozen Kernel replay with independent environments was not constructed because the dependent local context and helper application are required to type the exact root.
+Frozen replay: `moe/P4Frozen.lean` elaborates both source variants in one
+scratch declaration, freezes their argument-26 actual/expected Exprs, then
+calls `Kernel.isDefEq` for each with the same Environment and local context.
+F0 (`h0`, direct `hv`) has actual/expected hashes
+`1172892286`/`2832094282`, is structurally unequal, and succeeds in READY4.2
+root 2749 with 3,180,439 calls / 26,052.431 ms. F1 (`h`, transported
+premise) has equal hashes `2832094282`/`2832094282` and succeeds in root
+2750 with one call / 0.013 ms. These are the exact frozen local pairs; the
+source premise changed, so this is not an Elaborator-only perturbation.
 
 Kernel-metadata control: No valid F2 metadata-only control was constructed. The S4 hint inventory records relevant metadata, but expanded-predicate restoration changes expression exposure as well as reduction and is not metadata-only evidence.
 
@@ -148,3 +156,18 @@ Kernel contribution: **confirmed**. Whole-proposition transport removes the deep
 Current cheap-but-fragile boundaries: whole-proposition transport; the named `IsEtaleHomTranspose`/raw-domain interface; hidden provider sharing and consistent derived-category vocabulary.
 
 What remains uncertain: exact reduction order after predicate unfolding; whether one hidden provider leaf materially amplifies the M1 tree; and a metadata-only F2 replay. The report does not attribute the root to declaration finalization or proof abstraction.
+
+## Audit note and Batch 2 boundary test
+
+The earlier phrase "provider assignments demonstrated, selection not" was
+ambiguous: the trace does name selected instances, but no *alternate* provider
+selection was observed to cause the root divergence. The earliest compact
+predicate versus expanded-domain split is at S0/S1. The imported S3 snapshot
+cannot establish S2/S4 identity. The targeted fresh transparency trials are
+negative for a changed final Expr: lower modes fail, `default`/`all` succeed.
+E3 puncture: replace the type-correct whole-proposition transport with direct
+`hv`, or expand the predicate at the same argument-26 obligation. The saved
+restoration has 3,180,470 calls (expanded: 3,179,834), versus 7,039 for the
+transport. This is an expression-level boundary test, not provider isolation.
+The same-context F0/F1 replay above further confirms 3,180,439 versus one
+Kernel call for the frozen domain pairs; see `moe/P4Frozen-results.md`.

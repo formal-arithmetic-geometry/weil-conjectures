@@ -68,7 +68,7 @@ Source-authored: the two `continuousMapRingObj` constructions, the named wrapper
 
 Macro-generated: not observed.
 
-Elaborator-selected: confirmed for the local source re-elaboration. With all routes available, the inferred and goal sides select different concrete provider paths. Removing all three routes changes the final S2 expressions and aligns both ring-object values.
+Elaborator-selected: concrete inferred provider arguments are visible at S2, but a causal elaborator contribution to the divergence is not demonstrated under MOE section 11. Removing all three routes changes source-level instance availability before re-elaboration; it is not a transparency perturbation with independently identified changed metavariable assignments and frozen replay.
 
 Declaration-finalization-generated: not observed. No proof-only auxiliary or post-elaboration transformation is needed for the first data-bearing mismatch.
 
@@ -96,7 +96,7 @@ Transparency modes: no concrete Meta transparency constraint was isolated. The t
 
 Expected types / local context: the provider is expected as the `CommSemiring` component of a concrete ring/topology structure under `spectralNorm.nontriviallyNormedField` and `IsLocalRing.toNontrivial`; the local context also contains `ℓ`, `p`, `k`, `K`, `S`, and the three let bindings.
 
-Evidence that a choice changed the final Expr: demonstrated by the all-route source control: both first and second ring-object values become syntactically equal and the checked conversion succeeds, while all six one- or two-route controls retain a mismatch and time out.
+Evidence that a choice changed the final Expr: the all-route *source availability* control makes both first and second ring-object values syntactically equal and the checked conversion succeeds, while all six one- or two-route controls retain a mismatch and time out. This establishes the importance of the available routes, not an isolated elaborator decision under section 11.
 
 ## 5. KERNEL INPUT AND COST
 
@@ -214,10 +214,24 @@ Earliest divergence stage: S2, after local elaboration selects concrete R/H/D pr
 
 Most likely origin: mixed source-authored plus elaborator-selected instance bundle, with the helper side subsequently environment/import-frozen.
 
-Elaborator contribution: demonstrated for source re-elaboration and final Expr change; not demonstrated as a transparency perturbation or same-Expr frozen replay.
+Elaborator contribution: **plausible, not demonstrated as causal**. S2 contains inferred provider terms, but the all-route control changes source instance availability and has no frozen F0/F1 replay of independently captured assignments.
 
 Kernel contribution: the M0 provider mismatch exposes a wide dependent comparison, producing the measured M1/M2 propagation under `Exists`/`Quiver.Hom`/`Functor.obj`.
 
 Current cheap-but-fragile boundaries: `continuousMapRingObj` abbrev, named `RawStratifiedLattices`, the three-let spine, and the whole-side helper theorem.
 
 What remains uncertain: exact Kernel reduction order, separate cost of the two repeated ring values versus the third map/predicate, pre-finalization terms for the imported helper, and an explicit provider-preserving F0/F1/F2 replay. The full target dump was intentionally not retained because an unrestricted expression dump exceeded the useful bounded snapshot; existing READY4.2 root records provide the authoritative S5/S6 cost data.
+
+## Audit note and Batch 2 boundary test
+
+The previous "demonstrated" label used the all-route alignment source rewrite
+as if it were an elaborator-only perturbation. Section 11 requires aligned
+S0/S1 with divergent S2, or a targeted perturbation that records changed
+assignments/final Expr and frozen cost. Neither is saved here. The imported
+helper's S3 record is finalization-observable-only, so it cannot prove S2/S4
+identity. E3 puncture: restore any one of the three scoped R/H/D instance
+routes in the type-correct all-disabled control. The first/second
+`continuousMapRingObj` provider mismatch returns and the checked conversion
+times out in the saved route matrix. The changed source instance scope is
+explicit; the separate effect of each provider and an F0/F1 replay remain
+unisolated.
