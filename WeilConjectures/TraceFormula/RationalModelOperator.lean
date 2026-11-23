@@ -5,14 +5,16 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChangeIntegralLowerShriekComp
+public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatiblePaste
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriek
+public import WeilConjectures.TraceFormula.IntegersToPadicAlgClLowerShriek
+public import WeilConjectures.TraceFormula.IntegralCompactPullback
+public import WeilConjectures.TraceFormula.RationalCompactPullback
 public import WeilConjectures.TraceFormula.RationalModel
-import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriek
 
 /-!
 # The operators of rational Frobenius correspondences and of their integral models
@@ -71,92 +73,47 @@ local notation "𝔼" => Profinite.continuousMapRingObj E.1
 variable {K : BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E.1) X.left)}
   {K₀ : BoundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)}
 
-namespace ContinuousMapRingObj
-
-/-- The isomorphism `Rh_! ≅ Rh_*` on bounded constructible `E`-sheaves for a proper `h`. -/
-noncomputable def boundedConstructibleLowerShriekIsoLowerStar (h : Y ⟶ X) [IsProper h.left] :
-    boundedConstructibleLowerShriek ℓ E h ≅ boundedConstructibleLowerStar ℓ E h :=
-  boundedConstructibleLowerShriekOfCompactificationIso ℓ E (compactificationOverField h)
-      (.ofIsProper h.left) ≪≫
-    (Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso 𝔼 ℓ h) _ ≪≫
-      Functor.leftUnitor _)
-
-/-- The *pullback on compactly supported cohomology* `h^♯ : RΓ_c(X, -) ⟶ RΓ_c(Y, Lh^* -)`
-along a proper morphism `h : Y ⟶ X`, for `E`-coefficients: the composite
-```
-Ra_{X!} K ⟶ Ra_{X!} Rh_* Lh^* K ≅ Ra_{X!} Rh_! Lh^* K ≅ R(h ≫ a_X)_! Lh^* K = Ra_{Y!} Lh^* K.
-```
--/
-noncomputable def compactPullback (h : Y ⟶ X) [IsProper h.left] :
-    boundedConstructibleLowerShriek ℓ E (toPoint X) ⟶
-      boundedConstructibleUpperStar 𝔼 ℓ h ⋙ boundedConstructibleLowerShriek ℓ E (toPoint Y) :=
-  (Functor.leftUnitor _).inv ≫
-    Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction ℓ E h).unit _ ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft _ (Functor.whiskerRight
-      (boundedConstructibleLowerShriekIsoLowerStar ℓ E h).inv _) ≫
-    Functor.whiskerLeft _ ((boundedConstructibleLowerShriekComp ℓ E h (toPoint X)).inv ≫
-      eqToHom (by rw [comp_toPoint]))
-
-variable {ℓ E}
-
-/-- The global operator `T_{c_m}(ψ_m) = RΓ_c(X, ψ_m) ∘ Φ_m^♯` on `RΓ_c(X, K)` of a Frobenius
-correspondence `ψ : LΦ^* K ⟶ K` with `E`-coefficients. -/
-noncomputable def frobeniusCompactOperator {Φ : X ⟶ X} [IsProper Φ.left]
-    (ψ : (boundedConstructibleUpperStar 𝔼 ℓ Φ).obj K ⟶ K) (m : ℕ) :
-    (boundedConstructibleLowerShriek ℓ E (toPoint X)).obj K ⟶
-      (boundedConstructibleLowerShriek ℓ E (toPoint X)).obj K :=
-  (compactPullback ℓ E (frobeniusIterate Φ m)).app K ≫
-    (boundedConstructibleLowerShriek ℓ E (toPoint X)).map (frobeniusCoefficientIterate ψ m)
-
-end ContinuousMapRingObj
-
-namespace PadicIntegersRingObj
-
-/-- The *pullback on compactly supported cohomology* `h^♯ : RΓ_c(X, -) ⟶ RΓ_c(Y, Lh^* -)`
-along a proper morphism `h : Y ⟶ X`, for `𝒪_E`-coefficients. -/
-noncomputable def compactPullback (h : Y ⟶ X) [IsProper h.left] :
-    boundedConstructibleLowerShriek ℓ E.1 (toPoint X) ⟶
-      boundedConstructibleUpperStar 𝒪 ℓ h ⋙ boundedConstructibleLowerShriek ℓ E.1 (toPoint Y) :=
-  (Functor.leftUnitor _).inv ≫
-    Functor.whiskerRight (boundedConstructibleUpperStarLowerStarAdjunction ℓ E.1 h).unit _ ≫
-    (Functor.associator _ _ _).hom ≫
-    Functor.whiskerLeft _ (Functor.whiskerRight
-      (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E.1 h).inv _) ≫
-    Functor.whiskerLeft _ ((boundedConstructibleLowerShriekComp_padicIntegers ℓ E.1 h
-      (toPoint X)).inv ≫ eqToHom (by rw [comp_toPoint]))
-
-variable {ℓ E}
-
-/-- The global operator `T_{c_m}(θ_m) = RΓ_c(X, θ_m) ∘ Φ_m^♯` on `RΓ_c(X, K₀)` of a Frobenius
-correspondence `θ : LΦ^* K₀ ⟶ K₀` with `𝒪_E`-coefficients. -/
-noncomputable def frobeniusCompactOperator {Φ : X ⟶ X} [IsProper Φ.left]
-    (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K₀ ⟶ K₀) (m : ℕ) :
-    (boundedConstructibleLowerShriek ℓ E.1 (toPoint X)).obj K₀ ⟶
-      (boundedConstructibleLowerShriek ℓ E.1 (toPoint X)).obj K₀ :=
-  (compactPullback ℓ E (frobeniusIterate Φ m)).app K₀ ≫
-    (boundedConstructibleLowerShriek ℓ E.1 (toPoint X)).map (frobeniusCoefficientIterate θ m)
-
-end PadicIntegersRingObj
-
 /-! ### Compatibility with the extension of scalars `𝒪_E ⟶ E` -/
 
-/-- The isomorphisms `Rh_! ≅ Rh_*` of `𝒪̲_E` and `E̲` for a proper `h` are compatible with the
-extension of scalars. -/
-lemma squareCompatible_boundedConstructibleLowerShriekIsoLowerStar (h : Y ⟶ X) [IsProper h.left] :
+/-- `Rh_! ≅ Rh_*` for a proper `h` is compatible with the extension of scalars `𝒪_E ⟶ E`, read
+on the comparisons of the coefficient change
+(`squareCompatible_lowerShriekIsoLowerStar_extendScalars` in the form used by
+`squareCompatible_compactPullback`). -/
+private lemma squareCompatible_lowerShriekIsoLowerStar_shriekOfCompactification (h : Y ⟶ X)
+    [IsProper h.left] :
     NatTrans.SquareCompatible
       ((extendScalarsCoefficientChange ℓ E k).shriekOfCompactification
         (compactificationOverField h))
       ((extendScalarsCoefficientChange ℓ E k).push h)
       (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E.1 h).hom
       (ContinuousMapRingObj.boundedConstructibleLowerShriekIsoLowerStar ℓ E h).hom := by
-  unfold boundedConstructibleLowerShriekIsoLowerStar_padicIntegers
-    ContinuousMapRingObj.boundedConstructibleLowerShriekIsoLowerStar
-  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom]
-  exact (squareCompatible_lowerShriekOfCompactificationIso_extendScalars ℓ E _ _).comp
-    ((NatTrans.SquareCompatible.whiskerRight _
-      (squareCompatible_openImmersionLowerShriekOfIsProperIso_extendScalars ℓ E h)).comp
-      (NatTrans.SquareCompatible.leftUnitor_hom _))
+  rw [ContinuousMapRingObj.boundedConstructibleLowerShriekIsoLowerStar_eq_pushforwardData ℓ k E]
+  exact (squareCompatible_lowerShriekIsoLowerStar_extendScalars ℓ E k h).of_eq
+    (boundedConstructibleLowerShriekExtendScalarsIso_eq_shriekOfCompactification ℓ E k h) rfl
+
+/-- The composition isomorphisms of `Rf_!` are compatible with the extension of scalars
+`𝒪_E ⟶ E`, read on the comparisons of the coefficient change
+(`squareCompatible_lowerShriekComp_extendScalars` in the form used by
+`squareCompatible_compactPullback`). -/
+private lemma squareCompatible_lowerShriekComp_shriekOfCompactification {S : Over (Spec (.of k))}
+    [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] (f : X ⟶ Y)
+    (g : Y ⟶ S) :
+    NatTrans.SquareCompatible
+      ((extendScalarsCoefficientChange ℓ E k).shriekOfCompactification
+        (compactificationOverField (f ≫ g)))
+      (Functor.pasteSquareIso
+        ((extendScalarsCoefficientChange ℓ E k).shriekOfCompactification
+          (compactificationOverField f))
+        ((extendScalarsCoefficientChange ℓ E k).shriekOfCompactification
+          (compactificationOverField g)))
+      (boundedConstructibleLowerShriekComp_padicIntegers ℓ E.1 f g).hom
+      (boundedConstructibleLowerShriekComp ℓ E f g).hom := by
+  have hc := (squareCompatible_lowerShriekComp_extendScalars ℓ E k f g).of_eq
+    (boundedConstructibleLowerShriekExtendScalarsIso_eq_shriekOfCompactification ℓ E k _)
+    (congrArg₂ Functor.pasteSquareIso
+      (boundedConstructibleLowerShriekExtendScalarsIso_eq_shriekOfCompactification ℓ E k f)
+      (boundedConstructibleLowerShriekExtendScalarsIso_eq_shriekOfCompactification ℓ E k g))
+  rwa [← boundedConstructibleLowerShriekComp_eq_pushforwardData] at hc
 
 /-- The pullbacks `h^♯ : RΓ_c(X, -) ⟶ RΓ_c(Y, Lh^* -)` on compactly supported cohomology of
 `𝒪̲_E` and `E̲` for a proper `h` are compatible with the extension of scalars. -/
@@ -167,17 +124,21 @@ theorem squareCompatible_compactPullback (h : Y ⟶ X) [IsProper h.left] :
       (Functor.pasteSquareIso (boundedConstructibleUpperStarExtendScalarsIso ℓ E h)
         ((extendScalarsCoefficientChange ℓ E k).shriekOfCompactification
           (compactificationOverField (toPoint Y))))
-      (PadicIntegersRingObj.compactPullback ℓ E h)
+      (PadicIntegersRingObj.compactPullback ℓ E.1 h)
       (ContinuousMapRingObj.compactPullback ℓ E h) := by
+  have hι := squareCompatible_lowerShriekIsoLowerStar_shriekOfCompactification ℓ E (k := k) h
+  have hc := squareCompatible_lowerShriekComp_shriekOfCompactification ℓ E (k := k) h (toPoint X)
   unfold PadicIntegersRingObj.compactPullback ContinuousMapRingObj.compactPullback
+  simp only [PadicIntegersRingObj.boundedConstructibleLowerShriekCompToPoint, Iso.trans_hom,
+    Iso.symm_hom, eqToIso.hom]
   exact (NatTrans.SquareCompatible.leftUnitor_inv _).comp
     ((NatTrans.SquareCompatible.whiskerRight _ (NatTrans.SquareCompatible.unit
       ((extendScalarsCoefficientChange ℓ E k).isMateSquare_pull_push h))).comp
     ((NatTrans.SquareCompatible.associator_hom _ _ _).comp
     ((NatTrans.SquareCompatible.whiskerLeft _ (NatTrans.SquareCompatible.whiskerRight _
-      (squareCompatible_boundedConstructibleLowerShriekIsoLowerStar ℓ E h).inv)).comp
+      hι.inv)).comp
     (NatTrans.SquareCompatible.whiskerLeft _
-      ((squareCompatible_lowerShriekComp_extendScalars ℓ E h (toPoint X)).inv.comp
+      (hc.inv.comp
         ((extendScalarsCoefficientChange ℓ E k).squareCompatible_shriekOfCompactification_eqToHom
           (comp_toPoint h) _ _))))))
 
@@ -241,7 +202,7 @@ theorem pow_smul_frobeniusCompactOperator_eq {Φ : X ⟶ X} [IsProper Φ.left]
       (ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E (toPoint X)).map e.inv ≫
         (boundedConstructibleLowerShriekExtendScalarsIso ℓ E (toPoint X)).inv.app K₀ ≫
         (boundedConstructibleExtendScalars _ ℓ E).map
-          (PadicIntegersRingObj.frobeniusCompactOperator (E := E) θ m) ≫
+          (PadicIntegersRingObj.frobeniusCompactOperator ℓ E.1 θ m) ≫
         (boundedConstructibleLowerShriekExtendScalarsIso ℓ E (toPoint X)).hom.app K₀ ≫
         (ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E (toPoint X)).map e.hom := by
   have hi := pow_smul_frobeniusCoefficientIterate_eq ℓ E Φ
