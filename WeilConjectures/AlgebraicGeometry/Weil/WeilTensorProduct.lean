@@ -1143,7 +1143,7 @@ theorem wfRationalTensorPullback_exists (p : A) :
   funext MN
   exact hnu MN.1.obj MN.2.obj
 
-/-- The typed pullback/tensor comparison in the displayed direction of the source. -/
+/-- The rational tensor/pullback comparison: the unique isomorphism localizing the integral one. -/
 def wfRationalTensorPullback (p : A) :=
   (wfRationalTensorPullback_exists X d r a ha e p).exists.choose
 

@@ -23,7 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The canonical single-module base change comparison for `p` agrees, up to the canonical
+/-- The canonical single-module base change comparison for `p` agrees, up to some
 isomorphisms `e` and `t`, with the comparison for the top-open inclusion followed by `p`. -/
 theorem standardSingleBaseChange_topRestriction_comparison
     {Y B A : Scheme.{u}} (p : Y ⟶ B) (M : Y.Modules) (g : A ⟶ B) :

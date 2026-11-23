@@ -94,7 +94,7 @@ abbrev strictEtaleSetAdjunction {T S : Scheme.{u}} (g : T ⟶ S) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
     (MorphismProperty.Over.pullback @Etale ⊤ g) (Type (u + 1))
     (S.smallGrothendieckTopology @Etale) (T.smallGrothendieckTopology @Etale)
-/-- The canonical geometric lift already specified by the system-comparison node. -/
+/-- The canonical geometric lift `CoefficientSystemOrdinaryImage` along `g`. -/
 abbrev StrictEtaleOrdinaryImage (O : Type (u + 1)) [CommRing O] (ell : O)
     {T S : Scheme.{u}} (g : T ⟶ S) :=
   CoefficientSystemOrdinaryImage (J := S.smallEtaleTopology) (K := T.smallEtaleTopology)

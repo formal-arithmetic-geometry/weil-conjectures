@@ -14,7 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleProperProjectio
 # Compact-support projection from strict étale transports
 
 This is the geometric mate assembly after exact coefficient transports have been
-constructed.  It leaves coefficient transport construction to a separate node.
+constructed. The coefficient transports themselves are constructed elsewhere.
 
 ## References
 

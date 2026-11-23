@@ -177,8 +177,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.SemilinearSections
 
 -- Elementary mate identities, proved locally to avoid depending on the geometric
--- normalization node. These proofs are the existing private mate calculations
--- from SectionDerivedPushpullNormalization (SHEAF group N9).
+-- normalization. They repeat the private mate calculations from
+-- `SectionDerivedPushpullNormalization`.
 section DerivedComparison
 
 variable {X : Type u₁} {Y : Type u₂} {Xd : Type u₃} {Yd : Type u₄}
