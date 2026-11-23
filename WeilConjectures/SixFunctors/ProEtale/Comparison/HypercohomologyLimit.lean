@@ -19,11 +19,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 # Hypercohomology of pro-étale affines
 
 Let `K ∈ D⁺(X_ét, Λ)` and let `U = lim Uᵢ` be a cofiltered limit of affine étale `X`-schemes.
-Then `RΓ(U_proét, (ν_X^* K)|_U) ≅ colimᵢ RΓ((Uᵢ)_ét, K|_{Uᵢ})`. Since colimits are not intrinsic
-in a derived category, we state this degreewise: for every `q`, the canonical maps
-`Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ⟶ Hᵠ(U_proét, (ν_X^* K)|_U)` are compatible with the transition maps and
-induce a bijection from the filtered colimit
-(`AlgebraicGeometry.ProEtale.proEtaleAffineHypercohomologyMap_isColimit`).
+Then `RΓ(U_proét, (ν_X^* K)|_U) ≅ colimᵢ RΓ((Uᵢ)_ét, K|_{Uᵢ})`. This file proves the degreewise
+form: for every `q`, the canonical maps `Hᵠ((Uᵢ)_ét, K|_{Uᵢ}) ⟶ Hᵠ(U_proét, (ν_X^* K)|_U)` are
+compatible with the transition maps and induce a bijection from the filtered colimit
+(`AlgebraicGeometry.ProEtale.proEtaleAffineHypercohomologyMap_isColimit`). The isomorphism in
+the derived category, with the colimit taken on an injective model of `K`, is deduced from it in
+`WeilConjectures.SixFunctors.ProEtale.Comparison.HypercohomologyLimitDerived`.
 
 ## Main definitions
 
@@ -31,9 +32,9 @@ induce a bijection from the filtered colimit
   `Hᵠ(Z_ét, M) ⟶ Hᵠ(Y_ét, g^* M)` along a morphism of schemes `g : Y ⟶ Z`, for any complex `M`.
 - `AlgebraicGeometry.Etale.hypercohomologyRestrictOver`: for a morphism `f : Y ⟶ Z` of schemes
   over `S` and `K ∈ D(S_ét)`, the restriction `Hᵠ(Z_ét, K|_Z) ⟶ Hᵠ(Y_ét, K|_Y)`.
-- `AlgebraicGeometry.ProEtale.comparisonHypercohomologyIso`: for `M ∈ D⁺(Y_ét)`, the comparison
-  isomorphism `Hᵠ(Y_ét, M) ≅ Hᵠ(Y_proét, ν^* M)`, induced by the (invertible) unit of the
-  bounded below derived comparison adjunction.
+- `AlgebraicGeometry.ProEtale.comparisonRightDerivedGlobalSectionsIso`: for `M ∈ D⁺(Y_ét)`, the
+  comparison isomorphism `RΓ(Y_ét, M) ≅ RΓ(Y_proét, ν^* M)`, induced by the (invertible) unit of
+  the bounded below derived comparison adjunction.
 - `AlgebraicGeometry.ProEtale.proEtaleAffineHypercohomologyMap`: the canonical map
   `Hᵠ(V_ét, K|_V) ⟶ Hᵠ(U_proét, (ν_X^* K)|_U)` for a morphism `U ⟶ V` of schemes over `X`.
 
@@ -125,29 +126,37 @@ namespace ProEtale
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/-- The comparison isomorphism `Hᵠ(Y_ét, M) ≅ Hᵠ(Y_proét, ν^* M)` for a bounded below complex
+/-- The comparison isomorphism `RΓ(Y_ét, M) ≅ RΓ(Y_proét, ν^* M)` for a bounded below complex
 `M` of étale sheaves: the derived global sections of the (invertible) unit `M ⟶ Rν_* ν^* M` of
 the bounded below derived comparison adjunction, followed by
 `RΓ(Y_ét, Rν_* -) ≅ RΓ(Y_proét, -)`. -/
-noncomputable def comparisonHypercohomologyIso (Y : Scheme.{u})
-    (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) (q : ℤ) :
-    (Etale.cohomology A Y q).obj M.obj ≅
-      (DerivedCategory.homologyFunctor A q).obj
-        ((rightDerivedGlobalSections A Y).obj
-          ((comparisonUpperStar A Y).mapDerivedCategory.obj M.obj)) := by
+noncomputable def comparisonRightDerivedGlobalSectionsIso (Y : Scheme.{u})
+    (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) :
+    (Etale.rightDerivedGlobalSections A Y).obj M.obj ≅
+      (rightDerivedGlobalSections A Y).obj
+        ((comparisonUpperStar A Y).mapDerivedCategory.obj M.obj) := by
   let L := comparisonUpperStar A Y
   let R := comparisonLowerStar A Y
   let adj := comparisonAdjunction A Y
   have := isIso_comparisonAdjunction_unit A Y
   have := adj.isIso_derivedPlus_unit_app_of_rightAcyclic (fun _ _ ↦ inferInstance)
     (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective A Y I) M
-  exact (DerivedCategory.homologyFunctor A q).mapIso
-    ((Etale.rightDerivedGlobalSections A Y).mapIso
+  exact (Etale.rightDerivedGlobalSections A Y).mapIso
         ((DerivedCategory.Plus.ι.mapIso (asIso (adj.derivedPlus.unit.app M))) ≪≫
           R.rightDerivedFunctorPlusCompatibility.app (L.mapDerivedCategoryPlus.obj M)) ≪≫
       (comparisonLowerStarCompRightDerivedGlobalSectionsIso A Y).app
         (L.mapDerivedCategoryPlus.obj M).obj ≪≫
-      (rightDerivedGlobalSections A Y).mapIso (L.mapDerivedCategoryPlusCompatibility.app M))
+      (rightDerivedGlobalSections A Y).mapIso (L.mapDerivedCategoryPlusCompatibility.app M)
+
+/-- The comparison isomorphism `Hᵠ(Y_ét, M) ≅ Hᵠ(Y_proét, ν^* M)` for a bounded below complex
+`M` of étale sheaves, induced by `comparisonRightDerivedGlobalSectionsIso`. -/
+noncomputable def comparisonHypercohomologyIso (Y : Scheme.{u})
+    (M : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) (q : ℤ) :
+    (Etale.cohomology A Y q).obj M.obj ≅
+      (DerivedCategory.homologyFunctor A q).obj
+        ((rightDerivedGlobalSections A Y).obj
+          ((comparisonUpperStar A Y).mapDerivedCategory.obj M.obj)) :=
+  (DerivedCategory.homologyFunctor A q).mapIso (comparisonRightDerivedGlobalSectionsIso A Y M)
 
 /-- The isomorphism `ν_U^* (K|_U) ≅ (ν_X^* K)|_U` on derived categories, for a morphism of
 schemes `p : U ⟶ X`, induced by `comparisonUpperStarCompUpperStarIso`. -/
@@ -158,6 +167,30 @@ noncomputable def mapDerivedComparisonUpperStarCompUpperStarIso {U X : Scheme.{u
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso A p) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
+
+/-- The isomorphism `RΓ(U_ét, K|_U) ≅ RΓ(U_proét, (ν_X^* K)|_U)` for a morphism `pU : U ⟶ X` and
+`K ∈ D⁺(X_ét)`: the comparison isomorphism on `U` followed by the identification
+`ν_U^* (K|_U) ≅ (ν_X^* K)|_U`. -/
+noncomputable def proEtaleAffineRightDerivedGlobalSectionsIso {X U : Scheme.{u}} (pU : U ⟶ X)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) :
+    (Etale.rightDerivedGlobalSections A U).obj
+        ((Etale.upperStar A pU).mapDerivedCategory.obj K.obj) ≅
+      (rightDerivedGlobalSections A U).obj ((ProEtale.upperStar A pU).mapDerivedCategory.obj
+        ((comparisonUpperStar A X).mapDerivedCategory.obj K.obj)) :=
+  comparisonRightDerivedGlobalSectionsIso A U
+      ((Etale.upperStar A pU).mapDerivedCategoryPlus.obj K) ≪≫
+    (rightDerivedGlobalSections A U).mapIso
+      ((mapDerivedComparisonUpperStarCompUpperStarIso A pU).symm.app K.obj)
+
+/-- The isomorphism `Hᵠ(U_ét, K|_U) ≅ Hᵠ(U_proét, (ν_X^* K)|_U)` induced by
+`proEtaleAffineRightDerivedGlobalSectionsIso`. -/
+noncomputable def proEtaleAffineHypercohomologyIso {X U : Scheme.{u}} (pU : U ⟶ X)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (q : ℤ) :
+    (Etale.cohomology A U q).obj ((Etale.upperStar A pU).mapDerivedCategory.obj K.obj) ≅
+      (DerivedCategory.homologyFunctor A q).obj ((rightDerivedGlobalSections A U).obj
+        ((ProEtale.upperStar A pU).mapDerivedCategory.obj
+          ((comparisonUpperStar A X).mapDerivedCategory.obj K.obj))) :=
+  (DerivedCategory.homologyFunctor A q).mapIso (proEtaleAffineRightDerivedGlobalSectionsIso A pU K)
 
 /-- For a morphism `f : U ⟶ V` of schemes over `X` and `K ∈ D⁺(X_ét)`, the canonical map
 `Hᵠ(V_ét, K|_V) ⟶ Hᵠ(U_proét, (ν_X^* K)|_U)`: étale restriction to `U`, followed by the
@@ -170,31 +203,7 @@ noncomputable def proEtaleAffineHypercohomologyMap {X U V : Scheme.{u}} (pU : U 
         ((ProEtale.upperStar A pU).mapDerivedCategory.obj
           ((comparisonUpperStar A X).mapDerivedCategory.obj K.obj))) :=
   Etale.hypercohomologyRestrictOver A pU pV f hf K.obj q ≫
-    (comparisonHypercohomologyIso A U
-      ((Etale.upperStar A pU).mapDerivedCategoryPlus.obj K) q).hom ≫
-    (DerivedCategory.homologyFunctor A q).map ((rightDerivedGlobalSections A U).map
-      ((mapDerivedComparisonUpperStarCompUpperStarIso A pU).inv.app K.obj))
-
-/-- The isomorphism `Hᵠ(U_ét, K|_U) ≅ Hᵠ(U_proét, (ν_X^* K)|_U)` through which
-`proEtaleAffineHypercohomologyMap` factors. -/
-noncomputable def proEtaleAffineHypercohomologyIso {X U : Scheme.{u}} (pU : U ⟶ X)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (q : ℤ) :
-    (Etale.cohomology A U q).obj ((Etale.upperStar A pU).mapDerivedCategory.obj K.obj) ≅
-      (DerivedCategory.homologyFunctor A q).obj ((rightDerivedGlobalSections A U).obj
-        ((ProEtale.upperStar A pU).mapDerivedCategory.obj
-          ((comparisonUpperStar A X).mapDerivedCategory.obj K.obj))) :=
-  comparisonHypercohomologyIso A U ((Etale.upperStar A pU).mapDerivedCategoryPlus.obj K) q ≪≫
-    (DerivedCategory.homologyFunctor A q).mapIso ((rightDerivedGlobalSections A U).mapIso
-      ((mapDerivedComparisonUpperStarCompUpperStarIso A pU).symm.app K.obj))
-
-/-- The canonical map is the étale restriction followed by `proEtaleAffineHypercohomologyIso`. -/
-lemma proEtaleAffineHypercohomologyMap_eq {X U V : Scheme.{u}} (pU : U ⟶ X)
-    (pV : V ⟶ X) (f : U ⟶ V) (hf : f ≫ pV = pU)
-    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)) (q : ℤ) :
-    proEtaleAffineHypercohomologyMap A pU pV f hf K q =
-      Etale.hypercohomologyRestrictOver A pU pV f hf K.obj q ≫
-        (proEtaleAffineHypercohomologyIso A pU K q).hom :=
-  rfl
+    (proEtaleAffineHypercohomologyIso A pU K q).hom
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
@@ -239,15 +248,15 @@ theorem proEtaleAffineHypercohomologyMap_isColimit {X : Scheme.{u}}
   obtain ⟨h₁, h₂, h₃⟩ := Etale.hypercohomologyRestrictOver_isColimit_of_isLimit K D c hc q
   set T := proEtaleAffineHypercohomologyIso (ModuleCat.{u + 1} Λ) c.pt.hom K q
   refine ⟨fun g y ↦ ?_, fun x ↦ ?_, fun i y hy ↦ ?_⟩
-  · simp only [proEtaleAffineHypercohomologyMap_eq, ModuleCat.hom_comp, LinearMap.comp_apply]
+  · simp only [proEtaleAffineHypercohomologyMap, ModuleCat.hom_comp, LinearMap.comp_apply]
     rw [h₁ g y]
   · obtain ⟨i, y, hy⟩ := h₂ (T.inv.hom x)
     refine ⟨i, y, ?_⟩
-    simp only [proEtaleAffineHypercohomologyMap_eq, ModuleCat.hom_comp, LinearMap.comp_apply]
+    simp only [proEtaleAffineHypercohomologyMap, ModuleCat.hom_comp, LinearMap.comp_apply]
     rw [hy]
     exact T.inv_hom_id_apply x
   · refine h₃ i y ?_
-    simp only [proEtaleAffineHypercohomologyMap_eq, ModuleCat.hom_comp,
+    simp only [proEtaleAffineHypercohomologyMap, ModuleCat.hom_comp,
       LinearMap.comp_apply] at hy
     have h := congrArg T.inv.hom hy
     rwa [Iso.hom_inv_id_apply, map_zero] at h
