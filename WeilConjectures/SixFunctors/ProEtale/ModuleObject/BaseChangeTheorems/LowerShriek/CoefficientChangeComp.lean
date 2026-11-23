@@ -12,28 +12,19 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 Let `P` be a pushforward datum for the bounded constructible derived categories `Dᵇc(-)⟦Λ⟧`
 (`ProEtale.CondensedRing.BoundedConstructiblePushforwardData`). For composable `f : X ⟶ Y` and
-`g : Y ⟶ S`, with chosen compactifications `c = (X ⟶[i] Z ⟶[p] Y)` of `f` and
-`c' = (Y ⟶[j] Z' ⟶[q] S)` of `g` and a compactification `d = (Z ⟶[i'] W ⟶[p'] Z')` of `p ≫ j`
-with cartesian square, the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
-(`ProEtale.CondensedRing.BoundedConstructiblePushforwardData.lowerShriekComp`) is the composite
-of the independence of the compactification for the composite compactification
-`X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of the extensions by zero and of
-the pushforwards, and of the inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`
-(`BoundedConstructiblePushforwardData.lowerStarOpenImmersionLowerShriekExchange`).
+`g : Y ⟶ S`, the composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the chosen
+compactifications (`ProEtale.CondensedRing.BoundedConstructiblePushforwardData.lowerShriekComp`)
+is `BoundedConstructiblePushforwardData.lowerShriekCompOfCompactifications` for the chosen
+compactifications of `f` and `g` and a chosen compactification of their composite with cartesian
+square. It is defined whenever the exchange morphisms `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` are
+isomorphisms (`BoundedConstructiblePushforwardData.IsIsoExchange`).
 This is the construction of `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp` and
 `ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl`, for a general pushforward
 datum.
 
 For a coefficient change `C` (`ProEtale.CondensedRing.BoundedConstructibleCoefficientChange`),
-every map in this construction is compatible with the coefficient comparisons:
-
-* the composition isomorphisms `(j ≫ j')_! ≅ j_! ⋙ j'_!` of the extensions by zero
-  (`...squareCompatible_openImmersionLowerShriekComp`), as conjugates of the composition
-  isomorphisms of the pullbacks;
-* the exchange `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` (`...squareCompatible_exchange`), the exchange
-  morphism of the base change isomorphism of the extension by zero;
-
-hence so is the composition isomorphism (`...squareCompatible_lowerShriekComp`).
+the composition isomorphism is compatible with the coefficient comparisons
+(`...squareCompatible_lowerShriekComp`).
 -/
 
 @[expose] public section
@@ -74,42 +65,17 @@ variable {P} (hP : P.IsIsoRefinementPushforward) (hE : P.IsIsoExchange)
   [IsSeparated S.hom]
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` for the lower shrieks of the chosen
-compactifications: for the chosen compactifications `c = (X ⟶[i] Z ⟶[p] Y)` of `f` and
-`c' = (Y ⟶[j] Z' ⟶[q] S)` of `g`, and a compactification `d = (Z ⟶[i'] W ⟶[p'] Z')` of `p ≫ j`
-with cartesian square (`Compactification.exists_isPullback_overG_overI`), the composite of the
-independence of the compactification for the composite compactification
-`X ⟶[i ≫ i'] W ⟶[p' ≫ q] S`, of the composition isomorphisms of `j_!` and `Rf_*`, and of the
-inverse of the exchange isomorphism `Rp_* ⋙ j_! ≅ i'_! ⋙ Rp'_*`. -/
+compactifications: `lowerShriekCompOfCompactifications` for the chosen compactifications of `f`
+and `g` and a chosen compactification of their composite with cartesian square
+(`Compactification.exists_isPullback_overG_overI`). -/
 noncomputable def lowerShriekComp (f : X ⟶ Y) (g : Y ⟶ S) :
     P.lowerShriekOfCompactification (compactificationOverField (f ≫ g)) ≅
       P.lowerShriekOfCompactification (compactificationOverField f) ⋙
         P.lowerShriekOfCompactification (compactificationOverField g) :=
-  let c := compactificationOverField f
-  let c' := compactificationOverField g
-  have hd := Compactification.exists_isPullback_overG_overI c c'
-  let d := hd.choose
-  let e := Compactification.overCompObjIso c c' d
-  have : IsOpenImmersion (c.overI ≫ d.overI).left := by
-    rw [Over.comp_left]
-    infer_instance
-  have : IsProper e.hom.left := by
-    simp only [e, Compactification.overCompObjIso, Over.isoMk_hom_left, Iso.refl_hom]
-    infer_instance
-  have sqe : IsPullback (𝟙 X) (c.overComp c' d).overI (c.overI ≫ d.overI) e.hom :=
-    IsPullback.of_horiz_isIso ⟨by simp [e]⟩
-  have := hP sqe
+  have hd := Compactification.exists_isPullback_overG_overI (compactificationOverField f)
+    (compactificationOverField g)
   have := hE hd.choose_spec
-  lowerShriekOfCompactificationIso hP _ (c.overComp c' d) ≪≫
-    (P.lowerShriekRefinementIso sqe (Compactification.overCompObjIso_hom_overG c c' d)).symm ≪≫
-    Functor.isoWhiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekComp _ ℓ c.overI d.overI) _ ≪≫
-    Functor.isoWhiskerLeft _ (P.lowerStarComp d.overG c'.overG).symm ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ ((Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight
-        (asIso (P.lowerStarOpenImmersionLowerShriekExchange hd.choose_spec)).symm _ ≪≫
-      Functor.associator _ _ _) ≪≫
-    (Functor.associator _ _ _).symm
+  lowerShriekCompOfCompactifications hP _ _ hd.choose hd.choose_spec
 
 end BoundedConstructiblePushforwardData
 
@@ -124,27 +90,6 @@ variable {Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ'] 
     (f : X ⟶ Y),
     boundedConstructibleUpperStar Λ ℓ f ⋙ T X ≅ T Y ⋙ boundedConstructibleUpperStar Λ' ℓ f}
   (C : BoundedConstructibleCoefficientChange Λ Λ' ℓ P P' T pull)
-
-section Exchange
-
-variable {X Z X' Z' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
-  [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  [IsSeparated X'.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]
-  {p : X' ⟶ X} {i' : X' ⟶ Z'} {j : X ⟶ Z} {p' : Z' ⟶ Z}
-  [IsOpenImmersion j.left] [IsOpenImmersion i'.left] [IsProper p.left] [IsProper p'.left]
-
-/-- The exchange morphism `Rp_* ⋙ j_! ⟶ i'_! ⋙ Rp'_*` is compatible with the coefficient
-comparisons. -/
-lemma squareCompatible_exchange (sq : IsPullback p i' j p') :
-    NatTrans.SquareCompatible (Functor.pasteSquareIso (C.push p) (C.shriek j))
-      (Functor.pasteSquareIso (C.shriek i') (C.push p'))
-      (P.lowerStarOpenImmersionLowerShriekExchange sq)
-      (P'.lowerStarOpenImmersionLowerShriekExchange sq) :=
-  NatTrans.SquareCompatible.exchangeRight (C.isMateSquare_pull_push p)
-    (C.isMateSquare_pull_push p') (C.squareCompatible_openImmersionLowerShriekBaseChangeIso sq)
-
-end Exchange
 
 variable (hP : P.IsIsoRefinementPushforward) (hE : P.IsIsoExchange)
   (hP' : P'.IsIsoRefinementPushforward) (hE' : P'.IsIsoExchange)
@@ -165,47 +110,11 @@ theorem squareCompatible_lowerShriekComp :
         (C.shriekOfCompactification (compactificationOverField g)))
       (BoundedConstructiblePushforwardData.lowerShriekComp hP hE f g).hom
       (BoundedConstructiblePushforwardData.lowerShriekComp hP' hE' f g).hom := by
-  let c := compactificationOverField f
-  let c' := compactificationOverField g
-  have hd := Compactification.exists_isPullback_overG_overI c c'
-  let d := hd.choose
-  let e := Compactification.overCompObjIso c c' d
-  have : IsOpenImmersion (c.overI ≫ d.overI).left := by
-    rw [Over.comp_left]
-    infer_instance
-  have : IsProper e.hom.left := by
-    simp only [e, Compactification.overCompObjIso, Over.isoMk_hom_left, Iso.refl_hom]
-    infer_instance
-  have : IsProper (d.overG ≫ c'.overG).left := by
-    rw [Over.comp_left]
-    infer_instance
-  have sqe : IsPullback (𝟙 X) (c.overComp c' d).overI (c.overI ≫ d.overI) e.hom :=
-    IsPullback.of_horiz_isIso ⟨by simp [e]⟩
-  have := hP sqe
-  have := hP' sqe
+  have hd := Compactification.exists_isPullback_overG_overI (compactificationOverField f)
+    (compactificationOverField g)
   have := hE hd.choose_spec
   have := hE' hd.choose_spec
-  have h₁ := C.squareCompatible_lowerShriekOfCompactificationIso hP hP'
-    (compactificationOverField (f ≫ g)) (c.overComp c' d)
-  have h₂ := (C.squareCompatible_lowerShriekRefinementIso sqe
-    (Compactification.overCompObjIso_hom_overG c c' d)).inv
-  have h₃ := NatTrans.SquareCompatible.whiskerRight (C.push (d.overG ≫ c'.overG))
-    (C.squareCompatible_openImmersionLowerShriekComp c.overI d.overI)
-  have h₄ := NatTrans.SquareCompatible.whiskerLeft
-    (Functor.pasteSquareIso (C.shriek c.overI) (C.shriek d.overI))
-    (C.squareCompatible_lowerStarComp (h := d.overG) (p := c'.overG)).inv
-  have h₅ := NatTrans.SquareCompatible.associator_hom (C.shriek c.overI) (C.shriek d.overI)
-    (Functor.pasteSquareIso (C.push d.overG) (C.push c'.overG))
-  have h₆ := NatTrans.SquareCompatible.whiskerLeft (C.shriek c.overI)
-    ((NatTrans.SquareCompatible.associator_inv (C.shriek d.overI) (C.push d.overG)
-      (C.push c'.overG)).comp
-    ((NatTrans.SquareCompatible.whiskerRight (C.push c'.overG)
-      (C.squareCompatible_exchange hd.choose_spec).isIso_inv).comp
-    (NatTrans.SquareCompatible.associator_hom (C.push c.overG) (C.shriek c'.overI)
-      (C.push c'.overG))))
-  have h₇ := NatTrans.SquareCompatible.associator_inv (C.shriek c.overI) (C.push c.overG)
-    (Functor.pasteSquareIso (C.shriek c'.overI) (C.push c'.overG))
-  exact h₁.comp (h₂.comp (h₃.comp (h₄.comp (h₅.comp (h₆.comp h₇)))))
+  exact C.squareCompatible_lowerShriekCompOfCompactifications hP hP' _ _ hd.choose hd.choose_spec
 
 end BoundedConstructibleCoefficientChange
 
