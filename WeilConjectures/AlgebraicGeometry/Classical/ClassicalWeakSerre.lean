@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Classical.ClassicalDerivedDefini
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import Mathlib.CategoryTheory.Limits.FullSubcategory
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKernels
 import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalSheaves
 import WeilConjectures.AlgebraicGeometry.Bounded.BoundedBelowProEtaleComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -39,26 +40,6 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 
-namespace CategoryTheory.ObjectProperty
-
-variable {C : Type*} [Category* C] [HasZeroMorphisms C] (P : ObjectProperty C)
-
-/-- A property closed under limits of parallel pairs is closed under kernels. -/
-lemma isClosedUnderKernels_of_isClosedUnderLimitsOfShape
-    [P.IsClosedUnderLimitsOfShape WalkingParallelPair] : P.IsClosedUnderKernels where
-  kernels_le := by
-    rintro _ ⟨f, k, hk, hX, hY⟩
-    exact P.prop_of_isLimit hk (by rintro (_ | _) <;> assumption)
-
-/-- A property closed under colimits of parallel pairs is closed under cokernels. -/
-lemma isClosedUnderCokernels_of_isClosedUnderColimitsOfShape
-    [P.IsClosedUnderColimitsOfShape WalkingParallelPair] : P.IsClosedUnderCokernels where
-  cokernels_le := by
-    rintro _ ⟨f, k, hk, hX, hY⟩
-    exact P.prop_of_isColimit hk (by rintro (_ | _) <;> assumption)
-
-end CategoryTheory.ObjectProperty
-
 namespace AlgebraicGeometry.ProEtale
 
 /-- Classicality of module sheaves is invariant under isomorphism. -/
@@ -70,8 +51,9 @@ theorem isClassicalModuleFor_of_iso (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRi
   have : IsIso e.hom.hom := inferInstanceAs (IsIso ((sheafToPresheaf _ _).map e.hom))
   apply (isIso_comp_left_iff
     (colimMap (Functor.whiskerLeft P.diagram.op e.hom.hom)) _).mp
-  rw [continuityMap_natural P e.hom.hom]
-  infer_instance
+  have : IsIso (e.hom.hom.app (Opposite.op P.cone.pt)) := NatIso.isIso_app_of_isIso _ _
+  erw [continuityMap_natural P e.hom.hom]
+  exact IsIso.comp_isIso' (hF P) inferInstance
 
 instance (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ObjectProperty.IsClosedUnderIsomorphisms (IsClassicalModuleFor X Λ) :=
@@ -96,13 +78,13 @@ theorem isClassicalModuleFor_eq_essImage (X : Scheme.{u}) (Λ : Type (u + 1)) [C
 instance isClosedUnderKernels_isClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] : ObjectProperty.IsClosedUnderKernels (IsClassicalModuleFor X Λ) := by
   rw [isClassicalModuleFor_eq_essImage]
-  exact ObjectProperty.isClosedUnderKernels_of_isClosedUnderLimitsOfShape _
+  infer_instance
 
 /-- Classical module sheaves are closed under cokernels. -/
 instance isClosedUnderCokernels_isClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] : ObjectProperty.IsClosedUnderCokernels (IsClassicalModuleFor X Λ) := by
   rw [isClassicalModuleFor_eq_essImage]
-  exact ObjectProperty.isClosedUnderCokernels_of_isClosedUnderColimitsOfShape _
+  infer_instance
 
 /-- Classical module sheaves are closed under extensions. -/
 instance isClosedUnderExtensions_isClassicalModuleFor (X : Scheme.{u}) (Λ : Type (u + 1))
