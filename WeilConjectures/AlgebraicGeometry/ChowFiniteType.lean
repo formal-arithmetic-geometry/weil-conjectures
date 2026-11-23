@@ -36,7 +36,7 @@ universe u
 namespace AlgebraicGeometry
 
 /-- Chow's lemma for a separated morphism of finite type over a quasi-compact
-quasi-separated base (Stacks Project, Tag 0202;):
+quasi-separated base (Stacks Project, Tag 0202):
 there are `n`, a proper surjective `π : X' ⟶ X` and an immersion `j : X' ⟶ ℙⁿ_S` over `S`. -/
 theorem exists_chow_finite_type {S X : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace S] [QuasiSeparatedSpace S] [IsSeparated f]

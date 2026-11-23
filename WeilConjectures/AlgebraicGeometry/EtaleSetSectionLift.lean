@@ -65,7 +65,8 @@ private theorem sectionComparison_naturality
   exact congrArg (fun z ↦ H.obj.map z.op) hr.symm
 
 
-/-- Sections of the limit sheaf lift to a stage sheaf after a finite affine cover
+/-- A section `t` over `W₀` of the pullback of `G` to the limit comes from a single stage: there
+are a stage `j` and a section `s` over all of `W₀` of the pullback of `G` to `j` that maps to `t`
 (Stacks, Tags 09YQ, 0EYL, 04HR, 09YN). -/
 theorem etaleSetSectionLift
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

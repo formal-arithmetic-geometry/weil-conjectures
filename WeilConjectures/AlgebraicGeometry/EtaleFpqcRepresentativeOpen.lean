@@ -29,8 +29,10 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Compatible sections along an fpqc family descend to a representative open, the largest open
-on which they agree (Stacks, Tags 09XN and 09XM). -/
+/-- Let `s` be a compatible family of sections along an fpqc family `g`, and let `t` be a section
+over `V` whose pullback along `a` agrees with the restriction of `s i` to `Z`. Then there is an
+open `U ⊆ V` containing the image of `a` on which the restriction of `t` pulls back to `s j` for
+every `j` (Stacks, Tags 09XN and 09XM). -/
 theorem etaleFpqcSections_descend_representative_open
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)
