@@ -13,11 +13,13 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-!
 # The spectrum of a stalk as a limit of affine neighbourhoods
 
-Source: Stacks Project, Limits of Schemes, proof of Tag 0GWT and Tag 01YW
-(blueprint: lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods).
-
 The inverse system is written with its objects and inclusion maps. Its limit property
 is the unique-factorization property for every compatible family, in the category of schemes.
+
+## References
+
+* [Stacks, Tag 0GWT]
+* [Stacks, Tag 01YW]
 -/
 
 @[expose] public section
@@ -32,36 +34,7 @@ set_option autoImplicit false
 
 set_option linter.unusedVariables false in
 /-- Affine neighbourhoods are cofinal and directed, their inclusion maps form an inverse
-system with affine transitions and qcqs objects, and `Spec O_{X,x}` is its limit.
-Source: Stacks Project, proof of Tag 0GWT and Tag 01YW
-(blueprint: lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods).
-
-Proof, following the seven steps of the node:
-1. The affine-open basis (`lem-weil-pbc-affine-opens-basis`) gives an affine neighbourhood
-inside any open containing `x`. Apply it to the whole space and to intersections for
-nonemptiness and directedness. The inclusion maps are open immersions and preserve
-identities and compositions (`def-weil-open-immersion`).
-2. Affine schemes are qcqs (`lem-weil-pbc-affine-scheme-qcqs`); morphisms between affine
-schemes are affine (`lem-weil-pbc-morphism-affine-schemes-affine`).
-3. The canonical map has image the generalizations of `x`
-(`lem-weil-pbc-spec-local-ring-canonical-morphism`), so it factors uniquely through every
-neighbourhood (`lem-weil-pbc-morphism-factors-through-open-subscheme`). Uniqueness gives
-compatibility of these factorizations with inclusions.
-4. The stalk is the colimit of sections over affine neighbourhoods: every stalk element
-is a germ on one of these opens, and equality of germs is equality on a smaller affine
-neighbourhood (`lem-weil-pbc-stalk-germs-on-basis`, `lem-weil-pbc-affine-opens-basis`).
-Define a map from the stalk to any ring cocone on germs; equality on smaller opens makes
-it well-defined. Common smaller opens show it preserves ring operations, and germs
-exhaust the stalk, giving uniqueness (`def-weil-pbc-category-colimit`).
-5. Taking spectra gives a scheme limit (`lem-weil-pbc-spec-colimit-limit`, Tag 01YW).
-6. Identify each affine open with the spectrum of its sections
-(`lem-weil-pbc-affine-open-spec-points`). These identifications commute with inclusions
-(`lem-weil-pbc-affine-open-inclusion-spec-map`); cancel the open immersions, which are
-monomorphisms (`lem-weil-pbc-open-immersion-monomorphism`). Transport the limit property.
-7. The germ map is the localization map under the affine stalk identification
-(`lem-weil-pbc-affine-open-stalk-localization`). The canonical map's affine description
-(`lem-weil-pbc-spec-local-ring-canonical-morphism`) identifies the resulting projections
-with the unique factorizations from step 3. This gives exactly the stated universal property. -/
+system with affine transitions and qcqs objects, and `Spec O_{X,x}` is its limit. -/
 theorem fromSpecStalk_limit_affine_neighbourhoods (X : Scheme.{u}) (x : X) :
     (∀ (U : X.Opens), x ∈ U →
       ∃ W : X.Opens, IsAffineOpen W ∧ x ∈ W ∧ W ≤ U) ∧

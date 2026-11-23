@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 # Ordinary global Hom-complex cohomology with independent site universes
 
 Source: Stacks Project, Equation 0A8Z and Lemma 08JA.
-(blueprint: lem-pur-hom-complex-global-homotopy)
 -/
 
 @[expose] public section
@@ -112,8 +111,7 @@ private theorem rhomNormalizedHomProjection_isLimit (A B : CochainComplex Mod �
   exact ⟨homComplexIsLimit.{c, v, max c v r, max c v r} (R := R) A B n⟩
 
 /-- The explicit product-projection comparison with ordinary cochains.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z. -/
 private noncomputable def rhomNormalizedHomGlobalCochains
     (R : Sheaf J CommRingCat.{max c v r}) (A B : CochainComplex Mod ℤ) (n : ℤ) :
     (SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X n) ≃+
@@ -123,8 +121,7 @@ private noncomputable def rhomNormalizedHomGlobalCochains
     (rhomNormalizedHomProjection_isLimit.{c, v, r} A B n).some
 
 /-- The component formula retained by the explicit comparison.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z. -/
 private theorem rhomNormalizedHomGlobalCochains_v
     (R : Sheaf J CommRingCat.{max c v r}) (A B : CochainComplex Mod ℤ) (n : ℤ)
     (s : SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X n)
@@ -179,12 +176,7 @@ private lemma rhomNormalizedHomGlobalCochainsOfFan_comm (A B : CochainComplex Mo
     neg_smul, sub_eq_add_neg]
 
 /-- The explicit normalized comparison commutes with the cochain differential.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains).
-Proof: project onto each Hom factor, apply the differential projection formula,
-and identify internal-Hom sections with morphisms. The resulting formula is
-exactly the ordinary cochain differential. For nonconsecutive degrees both
-sides vanish by the complex shape. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z. -/
 private theorem rhomNormalizedHomGlobalCochains_comm
     (R : Sheaf J CommRingCat.{max c v r}) (A B : CochainComplex Mod ℤ)
     (i j : ℤ) (s : SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X i) :
@@ -415,23 +407,7 @@ private lemma externalHomologyIso_naturality
 -- The natural-isomorphism assembly checks several large chosen-functor interfaces.
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary zeroth cohomology of global cochains is naturally the group of homotopy classes.
-Source: Stacks Project, Tag 0A8Z and Tag 08JA, first global-cochain computation.
-(blueprint: lem-pur-hom-complex-global-homotopy)
-
-Proof: take the projections furnished by `homComplex_projections_exists` once for the
-whole bifunctor. Their product universal property identifies maps from the unit to
-Hom(L,M)^n with families L^p → M^(p+n), additively. The differential formula identifies
-this with the external Hom differential, as in `homComplex_global_cochains`. The map
-formula for these same projections proves naturality under both precomposition and
-postcomposition. Pass to degree-zero homology. The external Hom-complex homology
-comparison identifies its elements with cocycles modulo coboundaries. Degree-zero
-cocycles are chain maps, and coboundaries are precisely maps homotopic to zero.
-`CohomologyClass.homAddEquiv` at zero, followed by the shift-zero isomorphism,
-therefore identifies this group with morphisms in the homotopy category. On chain-map
-representatives all three comparisons send pre- and postcomposition to composition;
-surjectivity of the cocycle quotient proves naturality on homology. Assemble these
-additive isomorphisms with `NatIso.ofComponents`. This calculation uses no K-flatness,
-K-injectivity or boundedness, and applies to zero complexes as well. -/
+Source: Stacks Project, Tag 0A8Z and Tag 08JA, first global-cochain computation. -/
 theorem homComplex_global_homotopyOfUniverses
     {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{max c v r}) :

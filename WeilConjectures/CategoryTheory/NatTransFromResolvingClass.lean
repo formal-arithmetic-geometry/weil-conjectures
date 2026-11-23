@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 /-! # Extending a natural comparison from a resolving class
 
 Source: Stacks Project, Tag 06YJ, resolving-class argument, and Tag 04VC,
-right fractions. (blueprint: lem-sc-nattrans-from-resolving-class).
+right fractions.
 -/
 
 @[expose] public section
@@ -23,16 +23,7 @@ namespace CategoryTheory
 /-- A comparison out of a functor inverting weak equivalences extends from a full
 resolving class. The target functor need not invert weak equivalences.
 
-Source: Stacks Project, Tags 06YJ and 04VC, resolving-class and right-fraction arguments.
-Proof. Choose a resolution s_X : P_X → X. Set β_X = A(s_X)⁻¹ α_P_X B(s_X).
-For any arrow t : P → X from a resolving object, the right Ore condition supplies
-a common source for t and s_X. Resolve that source once more. Naturality of α
-on the resulting two arrows and cancellation of A of the weak equivalence show
-A(t) β_X = α_P B(t). Applying this formula to a resolution of the source of an
-arbitrary arrow proves naturality of β. Applying it to an identity proves β_P = α_P.
-The argument uses only invertibility of A(s), and therefore also works for zero
-objects and for a resolving class containing all objects.
-(blueprint: lem-sc-nattrans-from-resolving-class). -/
+Source: Stacks Project, Tags 06YJ and 04VC. -/
 theorem exists_natTrans_from_resolvingClass
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
     (W : MorphismProperty C) [W.HasRightCalculusOfFractions]

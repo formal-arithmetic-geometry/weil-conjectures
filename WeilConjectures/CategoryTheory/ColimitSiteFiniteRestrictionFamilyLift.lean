@@ -16,9 +16,8 @@ import all WeilConjectures.CategoryTheory.ColimitSiteRawSectionGenerators
 
 /-! # Lifting a finite family of restrictions and its triangles
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-independence of the section presentation; Tag 09YL, finite-diagram observation.
-(blueprint: lem-weil-pbc-colimit-site-finite-restriction-family-lift).
+Source: Stacks Project, Sites, Tag 0A35,
+independence of the section presentation; Tag 09YL observation.
 -/
 
 @[expose] public section
@@ -56,21 +55,12 @@ private theorem lift_same_stage_arrow
   exact (congrArg (fun H : F.obj k ⟶ V.pt ↦ H.toFunctor.mapArrow.obj (Arrow.mk g))
     (V.w c)).trans hg
 
-/-- Source: Stacks Project, Sites, Tags 0A35 and 09YL, finite diagram lifting
-in the section presentation.
-(blueprint: lem-weil-pbc-colimit-site-finite-restriction-family-lift).
+/-- A finite family of maps `f` from the image of `U` to the images of `W q` in the colimit
+category, compatible with finitely many stage arrows `a` and equal to the identity at `q₀`,
+lifts to a family `g` at some later stage `r` with the same compatibilities.
 
-Proof: Lift each restriction arrow and align its endpoints with the prescribed
-stage objects by eventual equality in the object colimit. Equalize the two
-arrows out of t.right, then put the finitely many resulting refinements at one
-common object of Under i using wideSpan. These give arrows g with a single
-transition b. The images of the proposed triangles and identity equation agree
-in the arrow colimit. Eventual arrow equality, synchronized by wideSpan for the
-finite set of edges together with the base identity, makes all of them hold
-at one further refinement. Compose b with that refinement and transport along
-functoriality of F. Empty edge families are allowed; the base object ensures
-that the identity equation is included.
--/
+Source: Stacks Project, Sites, Tags 0A35 and 09YL, finite diagram lifting in the section
+presentation. -/
 theorem colimit_site_finite_restriction_family_lift
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))

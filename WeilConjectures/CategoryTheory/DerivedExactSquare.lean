@@ -10,7 +10,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 Source: the universal property of localization and the canonical exact-functor
 composition comparisons (Stacks Project, Tags 05S7 and 014F).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
-/-- The bounded-below derived square associated to an exact ordinary square.
-(auxiliary; not a blueprint node). -/
+/-- The bounded-below derived square associated to an exact ordinary square. -/
 noncomputable def mapDerivedCategoryPlusSquareIso (e : R ⋙ G ≅ L ⋙ S) :
     R.mapDerivedCategoryPlus ⋙ G.mapDerivedCategoryPlus ≅
       L.mapDerivedCategoryPlus ⋙ S.mapDerivedCategoryPlus := by

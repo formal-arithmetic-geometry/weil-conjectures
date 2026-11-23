@@ -15,37 +15,33 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Typing
 /-!
 # Preservation on the proved finite-Tor domains
 
-This file states blueprint `proposition-six-operations-dctf` (`proposition-six-operations-dctf`) at
+This file states the six-operations preservation matrix on `Dctf` at
 a finite coefficient ring `Λ` whose exponent is invertible on the base field `k`:
 `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` bundles clauses (i)–(vi) and the
-finite-reduction part of clause (vii), with the Tor intervals of the blueprint. The integral
+finite-reduction part of clause (vii), with the Tor intervals. The integral
 part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.constructibleFiniteTor_stability` (`proposition-six-operations-dctf`).
+- `AlgebraicGeometry.Etale.constructibleFiniteTor_stability`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar`
-  (`proposition-six-operations-dctf`, clause (v)): `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))` on `Dctf(Y, Λ)`.
+  (clause (v)): `Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))` on `Dctf(Y, Λ)`.
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`
-(`proposition-six-operations-dctf`,
-  clause (vii), integral coefficients).
+(clause (vii), integral coefficients).
 
 ## Implementation notes
 
 * The six operations are those of the ambient derived categories `D(-_ét, Λ)`; their restrictions
   to `Dctf` are `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`, …, and
-  the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`
-  (`proposition-six-operations-dctf`).
+  the typing rule relating the two is `AlgebraicGeometry.Etale.typingRule`.
 * The dimension-free internal-Hom interval `[c - b, d - a]` needs a site-perfect (dualizable)
   first variable; that it fails in general (the origin of `𝔸¹`) is
   `AlgebraicGeometry.Etale.not_forall_torAmplitudeIn_derivedHom`, which needs a normalized Tate
   twist and is therefore not part of the bundled statement.
 * Of the finite-reduction comparisons of clause (vii), the ones for `Lf^*`, `⊗ᴸ` and `Rf_!` are
-  stated; the comparisons for `Rf_*`, internal Hom, `𝔻_X` and `Rf^!` at a finite stage
-  (blueprint `lemma-change-coefficients-direct-image--1`,
-  `lemma-change-coefficients-internal-hom--1`, `theorem-verdier-biduality--2`,
-  `lemma-change-coefficients-exceptional-inverse-image--1`) and the passage to the field stages `E`,
-  `ℚ̄_ℓ` are not formalised: the field stages need coefficient categories the library does not have.
+  stated; the comparisons for `Rf_*`, internal Hom, `𝔻_X` and `Rf^!` at a finite stage and the
+  passage to the field stages `E`, `ℚ̄_ℓ` are not formalised: the field stages need coefficient
+  categories the library does not have.
 -/
 
 @[expose] public section
@@ -71,7 +67,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
-/-- Blueprint `proposition-six-operations-dctf`, clause (v): the exceptional inverse image is
+/-- Clause (v) of the preservation matrix: the exceptional inverse image is
 `Rf^! = 𝔻_X f^* 𝔻_Y` on `Dctf(Y, Λ)`.
 
 For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y`
@@ -94,7 +90,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
     ((verdierDual Λ aY).obj (op K))
   exact ⟨(R(f)^![Λ]).mapIso b ≪≫ e⟩
 
-/-- Blueprint `proposition-six-operations-dctf`: Preservation on the proved finite-Tor domains.
+/-- Preservation on the proved finite-Tor domains.
 
 Let `Λ` be a finite ring whose exponent is invertible on the algebraically closed field `k`, and
 `f : X ⟶ Y` a morphism over `k` of separated finite-type `k`-schemes (it is then separated of
@@ -240,8 +236,7 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
     have : IsNoetherian Y := {}
     have : QuasiCompact (f ≫ aY) := hf ▸ inferInstance
     exact QuasiCompact.of_comp f aY
-  obtain ⟨hi, hii, hiii, hiv, hdhom, hv, -⟩ :=
-    constructibleFiniteTor_preservation Λ aX aY f hf
+  obtain ⟨hi, hii, hiii, hiv, hdhom, hv⟩ := constructibleFiniteTor_preservation Λ aX aY f hf
   obtain ⟨hti, htii, -, hthom, hthomd, -, htvi, hbid⟩ := torAmplitudeIn_preservation Λ aX aY f hf
   refine ⟨⟨hi, hti⟩, ⟨hii, htii, hdhom, hthom, hthomd,
       fun K M hK ↦ ⟨(nonempty_iso_coefficientDual_tensor hK M).some.symm⟩⟩,
@@ -254,7 +249,7 @@ theorem constructibleFiniteTor_stability [IsSeparated aX] [HasCompactification a
       ⟨nonempty_iso_reductionModIdeal_leftDerivedUpperStar Λ f J,
         fun K M ↦ ⟨α_ K M _⟩, nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_finite Λ
           f J⟩⟩
-  · -- (iii): the direct image bound of `sk-thm-sf-direct-image-tor-amplitude`
+  · -- (iii): the Tor-amplitude bound of the direct image
     obtain ⟨N, hN0, hNΛ, hNY⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := Y)
     have : NeZero N := ⟨hN0.ne'⟩
     have : IsNoetherianRing Λ := inferInstance
@@ -281,7 +276,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Blueprint `proposition-six-operations-dctf`, clause (vii), integral coefficients.
+/-- Clause (vii) of the preservation matrix, integral coefficients.
 
 Let `Λ` be a Noetherian domain complete for `I = (ϖ)` with `Λ ⧸ I` finite of exponent invertible
 on the algebraically closed field `k` (the stage `𝒪_E`), and `f : X ⟶ Y` a separated
@@ -291,8 +286,7 @@ finite-type morphism of separated finite-type `k`-schemes. Then:
   bounded constructible of Tor amplitude in one common interval, i.e. `Dᵇc(X, 𝒪_E) =
   Dᵇctf(X, 𝒪_E)` (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`);
 * the internal Hom preserves `Dᵇc(X, Λ)` and has the canonical finite reductions
-  `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)` (`proposition-six-operations-dctf--15`,
-  `proposition-six-operations-change-coefficients--7`);
+  `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)`;
 * the derived limit `G_f L` of the finite exceptional inverse images of the reductions of
   `L ∈ Dᵇc(Y, Λ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L` compatibly with the maps to the
   `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions.

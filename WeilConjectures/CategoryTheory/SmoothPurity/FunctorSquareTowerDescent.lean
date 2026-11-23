@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Tower coherence descends from normalized representative squares
 
-Source: Stacks 04VK; coefficient-comparison coherence in the blueprint.
-(blueprint: lem-pur-functor-square-tower-descent). -/
+Source: Stacks 04VK. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,15 +17,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Coherence of three normalized squares descends along a faithful restriction.
-Source: Stacks 04VK, the localization universal property
-(blueprint: lem-pur-functor-square-tower-descent).
-Proof: restrict both routes to representatives. Precompose with the image of the
-inverse first representative isomorphism and postcompose with the last two. Naturality
-moves the first scalar representative map through the second square; its
-normalization and the first normalization leave the representative tower square.
-Use that square and naturality of the scalar associator, then the direct
-normalization. Cancel the isomorphisms. Faithful restriction proves the equality
-of transformations on the localized categories. -/
+Source: Stacks 04VK, the localization universal property. -/
 theorem functorSquareTowerDescent
     {R₀ R₁ R₂ D₀ D₁ D₂ C₀ C₁ C₂ : Type*}
     [Category R₀] [Category R₁] [Category R₂]

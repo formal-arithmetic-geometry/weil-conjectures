@@ -17,8 +17,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Internal Hom under an isomorphism of coefficient rings
 
-Source: Stacks Project, Tags 03D7 and 08J7
-(blueprint: lem-weil-pbc-scalar-iso-internal-hom).
+Source: Stacks Project, Tags 03D7 and 08J7.
 -/
 
 @[expose] public noncomputable section
@@ -76,16 +75,7 @@ private def scalarHomMap {C : Type c} [Category.{v} C] {J : GrothendieckTopology
 -- The scalar comparison checks linearity and two-variable naturality on every slice.
 /-- Scalar restriction along a coefficient isomorphism preserves ordinary internal
 Hom, naturally in both module arguments.
-Source: Stacks Project, Tags 03D7 and 08J7
-(blueprint: lem-weil-pbc-scalar-iso-internal-hom).
-
-Proof: on a slice, restrict the scalars of a local module homomorphism. Since the
-coefficient map is invertible this operation is bijective: a homomorphism linear
-for the restricted action is linear for every scalar, by surjectivity of the
-coefficient isomorphism. The map is linear for the scalar action on Hom and
-commutes with restriction to smaller slices. It is therefore an isomorphism of
-module sheaves. Both precomposition and postcomposition retain the same local
-maps under scalar restriction, proving two-variable naturality. -/
+Source: Stacks Project, Tags 03D7 and 08J7. -/
 theorem scalarIso_internalHom {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} (R S : Sheaf J CommRingCat.{max c v r}) (c : S ≅ R) :
     let a := (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).mapIso c

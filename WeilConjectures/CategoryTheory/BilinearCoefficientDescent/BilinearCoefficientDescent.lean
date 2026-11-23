@@ -22,10 +22,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Bilinear comparisons under coefficient descent
 
-Source: main-20261015, `def-weil-rationalization-karoubi` (raw Hom tensor formula)
-and `def-weil-algebraically-closed-coefficients` (common-stage Hom formula).
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-
 The algebraic and common-stage assertions are parametrized separately: the latter applies
 both before and after the former, and does not assume additive objects or triangulations.
 Scalar-first tensors use the recorded ScalarLocalization convention.
@@ -54,8 +50,7 @@ variable {R : Type r} [CommRing R]
   {C : Type u} [Category.{v} C] [Preadditive C] [Linear R C]
   {D : Type u'} [Category.{v'} D] [Preadditive D] [Linear R D]
 
-/-- Separate linearity includes additivity in each variable. Source: raw Hom tensor formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- Separate linearity includes additivity in each variable. -/
 structure IsSeparatelyLinear (R : Type r) [CommRing R]
     {C : Type u} [Category.{v} C] [Preadditive C] [Linear R C]
     {D : Type u'} [Category.{v'} D] [Preadditive D] [Linear R D]
@@ -65,8 +60,7 @@ structure IsSeparatelyLinear (R : Type r) [CommRing R]
   left :
     ∀ Y : C, (Prod.sectL C Y ⋙ U).Additive ∧ (Prod.sectL C Y ⋙ U).Linear R
 
-/-- The exact object and pure-tensor prescriptions for an extension. Source: raw Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The exact object and pure-tensor prescriptions for an extension. -/
 structure IsRawExtension (p : R) (U : C × C ⥤ D)
     (F : ScalarLocalization R C p × ScalarLocalization R C p ⥤
       ScalarLocalization R D p) : Prop where
@@ -300,13 +294,7 @@ private theorem rawFunctor_linear (p : R) (U : C × C ⥤ D)
       intro X X' f a
       exact rawHom_smul_left p U hU _ _ _ _ a f (𝟙 Y)
 
-/-- Unique raw bilinear extension, including torsion Hom modules.
-Source: raw Hom tensor formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Proof, steps 1--2: factor U(f,g) as U(f,1) followed by U(1,g). Separate linearity and
-bilinear composition make this bilinear on the two Hom modules. Apply module base change
-(def-weil-module-base-change). On pure tensors identity and composition are the integral
-functor laws times the product of scalars. Tensor induction gives the laws and uniqueness;
-no injectivity into the tensor product is used. -/
+/-- Unique raw bilinear extension, including torsion Hom modules. -/
 theorem raw_extension_existsUnique (p : R) (U : C × C ⥤ D)
     (hU : IsSeparatelyLinear R U) :
     ∃! F : ScalarLocalization R C p × ScalarLocalization R C p ⥤
@@ -338,9 +326,7 @@ theorem raw_extension_existsUnique (p : R) (U : C × C ⥤ D)
     rcases f with ⟨f, g⟩
     simpa only [integralHom_apply, X, Y, rawFunctor] using hh f g
 
-/-- Give a functor its prescribed object function, transporting its morphisms.
-Source: transport along object equalities
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- Give a functor its prescribed object function, transporting its morphisms. -/
 @[no_expose] def withObjects
     {C₀ : Type u₃} [Category.{v₃} C₀] {D₀ : Type u₂} [Category.{v₂} D₀]
     (F : C₀ ⥤ D₀) (obj : C₀ → D₀) (h : ∀ X, F.obj X = obj X) : C₀ ⥤ D₀ where
@@ -352,9 +338,7 @@ Source: transport along object equalities
     simp only [F.map_comp, Category.assoc, eqToHom_trans_assoc,
       eqToHom_refl, Category.id_comp]
 
-/-- Object normalization preserves the functor itself.
-Source: equality of functors by object equality and heterogeneous map equality
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- Object normalization preserves the functor itself. -/
 theorem withObjects_eq
     {C₀ : Type u₃} [Category.{v₃} C₀] {D₀ : Type u₂} [Category.{v₂} D₀]
     (F : C₀ ⥤ D₀) (obj : C₀ → D₀) (h : ∀ X, F.obj X = obj X) :
@@ -364,17 +348,13 @@ theorem withObjects_eq
   intro X Y f
   exact (eqToHom_comp_heq _ _).trans (comp_eqToHom_heq _ _)
 
-/-- The unique raw extension; all its data are determined by the preceding prescription.
-Source: raw Hom tensor formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The unique raw extension; all its data are determined by the preceding prescription. -/
 @[no_expose] def raw (p : R) (U : C × C ⥤ D) (hU : IsSeparatelyLinear R U) :=
   withObjects (raw_extension_existsUnique p U hU).exists.choose
     (fun X ↦ ⟨U.obj (X.1.obj, X.2.obj)⟩)
     (raw_extension_existsUnique p U hU).exists.choose_spec.2.1
 
-/-- The raw extension retains the stipulated object.
-Source: the uniquely prescribed construction
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The raw extension retains the stipulated object. -/
 theorem raw_obj (p : R) (U : C × C ⥤ D)
     (hU : IsSeparatelyLinear R U) (X : ScalarLocalization R C p × ScalarLocalization R C p) :
     (raw p U hU).obj X = ⟨U.obj (X.1.obj, X.2.obj)⟩ := by
@@ -430,14 +410,10 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
   {B : I → Type u'} [∀ i, Category.{v'} (B i)]
   (S : StageSystem A) (S₂ : StageSystem A₂) (T : StageSystem B)
 
-/-- The family of identity comparisons, with its unchanged component type.
-Source: supplied common-stage units
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The family of identity comparisons, with its unchanged component type. -/
 @[no_expose] def UnitComparisons (S : StageSystem A) := ∀ i, S.T (le_refl i) ≅ 𝟭 (A i)
 
-/-- The two cocycles stored with specified identity comparisons.
-Source: common-stage unit equations
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The two cocycles stored with specified identity comparisons. -/
 @[no_expose] def UnitLaws (S : StageSystem A) (unit : ∀ i, S.T (le_refl i) ≅ 𝟭 (A i)) :
     Prop :=
   (∀ {i j : I} (h : i ≤ j) (X : A i),
@@ -445,9 +421,7 @@ Source: common-stage unit equations
     (∀ {i j : I} (h : i ≤ j) (X : A i),
       (S.assoc h (le_refl j)).hom.app X = (unit j).hom.app ((S.T h).obj X))
 
-/-- Specified identity comparisons and their two unit cocycles.
-Source: common-stage formula, supplied identity and tower isomorphisms
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- Specified identity comparisons and their two unit cocycles. -/
 @[no_expose] def Units (S : StageSystem A) :=
   {unit : UnitComparisons S // UnitLaws S unit}
 
@@ -475,9 +449,7 @@ theorem right {S : StageSystem A} (uS : Units S) {i j : I} (h : i ≤ j) (X : A 
 
 end Units
 
-/-- The tower law stored in a bilinear family.
-Source: common-stage comparison cocycle
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The tower law stored in a bilinear family. -/
 @[no_expose] def FamilyTower (U : ∀ i, A i × A₂ i ⥤ B i)
     (comparison : ∀ {i j : I} (h : i ≤ j),
       U i ⋙ T.T h ≅ (S.T h).prod (S₂.T h) ⋙ U j) : Prop :=
@@ -492,8 +464,6 @@ Source: common-stage comparison cocycle
       (comparison (h.trans h')).hom.app (X, Y)
 
 /-- A bilinear family with the specified scalar comparison and its tower equation.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent).
 Linearity is imposed separately at integral stages, not on this purely categorical interface. -/
 structure Family where
   mkData ::
@@ -541,9 +511,7 @@ end Family
 
 variable {S S₂ T}
 
-/-- The identity cocycle for the supplied bilinear scalar comparison.
-Source: common-stage formula, supplied λ identity cocycle
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The identity cocycle for the supplied bilinear scalar comparison. -/
 def HasUnitComparison (U : Family S S₂ T) (uS : Units S) (uS₂ : Units S₂)
     (uT : Units T) : Prop :=
   ∀ (i : I) (X : A i) (Y : A₂ i),
@@ -552,9 +520,7 @@ def HasUnitComparison (U : Family S S₂ T) (uS : Units S) (uS₂ : Units S₂)
         (Y := (X, Y)) ((uS.unit i).hom.app X, (uS₂.unit i).hom.app Y) =
         (uT.unit i).hom.app ((U.U i).obj (X, Y))
 
-/-- The scalar square stored in a compatible transformation.
-Source: common-stage transformation formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The scalar square stored in a compatible transformation. -/
 @[no_expose] def TransformationSquare (U V : Family S S₂ T)
     (app : ∀ i, U.U i ⟶ V.U i) : Prop :=
   ∀ {i j : I} (h : i ≤ j) (X : A i) (Y : A₂ i),
@@ -562,9 +528,7 @@ Source: common-stage transformation formula
       (U.comparison h).hom.app (X, Y) ≫
         (app j).app ((S.T h).obj X, (S₂.T h).obj Y)
 
-/-- Compatible transformations, including the scalar square of the statement.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- Compatible transformations, including the scalar square of the statement. -/
 structure Transformation (U V : Family S S₂ T) where
   mkData ::
   components : ∀ i, U.U i ⟶ V.U i
@@ -593,17 +557,14 @@ theorem square (η : Transformation U V) :
 
 end Transformation
 
-/-- The specified common-field output object. Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The specified common-field output object. -/
 def output (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
     (X : S.PairCategory × S₂.PairCategory) : T.PairCategory :=
   ⟨join X.1.stage X.2.stage,
     (U.U _).obj (X.1.toStage (left _ _), X.2.toStage (right _ _))⟩
 
-/-- The endpoint identification d from the node's proof, using both input associators.
-Source: common-stage Hom formula, proof step 7
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The endpoint identification `d`, using both input associators. -/
 def endpoint (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
     (X : S.PairCategory × S₂.PairCategory) {L : I}
@@ -615,9 +576,7 @@ def endpoint (U : Family S S₂ T) (join : I → I → I)
     (Iso.prod ((S.assoc (left _ _) h).app X.1.obj)
       ((S₂.assoc (right _ _) h).app X.2.obj))
 
-/-- The explicit object and common-stage arrow formulas, with equality of transported endpoints.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The explicit object and common-stage arrow formulas, with equality of transported endpoints. -/
 structure IsDescent (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
     (F : S.PairCategory × S₂.PairCategory ⥤ T.PairCategory) : Prop where
@@ -635,9 +594,7 @@ structure IsDescent (U : Family S S₂ T) (join : I → I → I)
           ((endpoint U join left right X hX).hom ≫ (U.U L).map (f, g) ≫
             (endpoint U join left right Y hY).inv))
 
-/-- The specification record is equivalent to its original two clauses.
-Source: the unchanged specification in this module
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The specification record is equivalent to its original two clauses. -/
 theorem isDescent_iff (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
     (F : S.PairCategory × S₂.PairCategory ⥤ T.PairCategory) :
@@ -885,14 +842,7 @@ private theorem explicitDescent_spec (U : Family S S₂ T) (join : I → I → I
   rfl
 
 /-- Existence and uniqueness of the descended bifunctor with its explicit representatives.
-Source: common-stage Hom formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Proof, steps 5--9: choose a common upper stage for two arrow representatives and the output
-fields. Conjugate U_L(f,g) by the endpoint identifications. The comparison tower equation,
-the two input associator cocycles and comparison naturality show that this commutes with
-transport. Equality of representatives is equality after a further common stage, so the
-formula factors through the actual quotient Hom. Identity and composition follow by
-cancelling adjacent endpoint isomorphisms. Every arrow has a representative, giving uniqueness.
-This is the pair-category model of def-weil-algebraically-closed-coefficients, used without
+This is the pair-category model of algebraically closed coefficients, used without
 any geometric, additive-object or triangulated hypotheses. -/
 theorem descent_existsUnique (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
@@ -907,18 +857,14 @@ theorem descent_existsUnique (U : Family S S₂ T) (join : I → I → I)
   exact (hF.2 X Y L hX hY u v).trans
     ((explicitDescent_spec U join left right).2 X Y L hX hY u v).symm
 
-/-- The unique representative-normalized descended bifunctor.
-Source: common-stage Hom formula
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The unique representative-normalized descended bifunctor. -/
 @[no_expose] def descend (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :=
   withObjects (descent_existsUnique U join left right).exists.choose
     (output U join left right)
     (descent_existsUnique U join left right).exists.choose_spec.1
 
-/-- The chosen common-stage functor satisfies the complete representative prescription.
-Source: the proved unique descent
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The chosen common-stage functor satisfies the complete representative prescription. -/
 theorem descend_spec (U : Family S S₂ T) (join : I → I → I)
     (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j) :
     IsDescent U join left right (descend U join left right) := by
@@ -1098,42 +1044,31 @@ section PadicCoefficients
 variable (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω]
   [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The recorded valuation rings, indexed by the genuine finite intermediate extensions.
-Source: blueprint coefficient definitions
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The recorded valuation rings, indexed by the genuine finite intermediate extensions. -/
 @[no_expose] def Integers (E : Padic.FiniteCoefficientFields l Ω) : Subring E.val :=
   Padic.coefficientExtensionIntegers l E.val
 
-/-- The named integer ring is exactly the recorded coefficient-extension subring.
-Source: coefficient ring definition
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The named integer ring is exactly the recorded coefficient-extension subring. -/
 theorem Integers_eq (E : Padic.FiniteCoefficientFields l Ω) :
     Integers l Ω E = Padic.coefficientExtensionIntegers l E.val := by
   exact Eq.trans rfl rfl
 
 
 
-/-- The recorded uniformizer belongs to the named integer subring.
-Source: the coefficient uniformizer definition and `Integers_eq`
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The recorded uniformizer belongs to the named integer subring. -/
 theorem uniformizer_mem (E : Padic.FiniteCoefficientFields l Ω) :
     (Padic.coefficientExtensionUniformizer l E.val : E.val) ∈ Integers l Ω E := by
   rw [Integers_eq]
   exact (Padic.coefficientExtensionUniformizer l E.val).property
 
-/-- The recorded uniformizer; no extra torsion-free or characteristic hypotheses.
-Source: blueprint coefficient definitions
-(blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- The recorded uniformizer; no extra torsion-free or characteristic hypotheses. -/
 @[no_expose] def uniformizer (E : Padic.FiniteCoefficientFields l Ω) : Integers l Ω E :=
   ⟨(Padic.coefficientExtensionUniformizer l E.val : E.val), uniformizer_mem l Ω E⟩
 
 set_option linter.unusedSectionVars false in
 attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer
 
-/-- The chosen output field is exactly the compositum, including the base-field case.
-Source: common-stage formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).
-Proof, step 5: finiteCoefficientFields_properties supplies both upper-bound proofs;
-finiteCoefficientCompositum is the supremum of intermediate fields, hence is finite. -/
+/-- The chosen output field is exactly the compositum, including the base-field case. -/
 theorem compositum_upper :
     (∀ E F : Padic.FiniteCoefficientFields l Ω,
       E ≤ Padic.finiteCoefficientCompositum l Ω E F) ∧
@@ -1142,8 +1077,7 @@ theorem compositum_upper :
   exact ⟨fun E F ↦ (Padic.finiteCoefficientFields_properties l Ω).1 E F |>.1,
     fun E F ↦ (Padic.finiteCoefficientFields_properties l Ω).1 E F |>.2⟩
 
-/-- Directedness uses the actual finite compositum, not finiteness of the field as a set.
-Source: common-stage formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent). -/
+/-- Directedness uses the actual finite compositum, not finiteness of the field as a set. -/
 instance coefficientDirected : IsDirectedOrder (Padic.FiniteCoefficientFields l Ω) where
   directed E F := ⟨Padic.finiteCoefficientCompositum l Ω E F,
     (compositum_upper l Ω).1 E F, (compositum_upper l Ω).2 E F⟩

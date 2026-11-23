@@ -24,12 +24,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Naturality and cancellation convert a forward tensor counit square into its mixed
-inverse square. No tensorator or counit is assumed invertible.
-
-Proof. Postcompose both sides with `c.hom`, use naturality of `κ` on `m`, and replace
-`L.map m ≫ κ_T ≫ aT ≫ c.hom` by the forward square. Cancel `φ.inv ≫ φ.hom`, then use
-functoriality of tensor to cancel `κ_P.inv ≫ κ_P.hom` in its first factor.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-inverse-transport) -/
+inverse square. No tensorator or counit is assumed invertible. -/
 theorem mixedTensor_inverse_transport
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
     (L R : C ⥤ D) (κ : L ≅ R) {P Q T : C} {EP EQ ET V : D}

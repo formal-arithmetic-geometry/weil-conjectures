@@ -11,9 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.Exact
 /-!
 # Trivial actions, restriction of actions, and underlying exactness
 
-Source: paragraph (3) of the direct-image stability proof, internal-action input.
 The following declarations are extracted unchanged from the two action theorem modules.
-(blueprint: def-sfb-internal-action-inflation).
 -/
 
 @[expose] public section
@@ -31,9 +29,7 @@ variable {C : Type u} [SmallCategory C]
 
 variable {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
 
-/-- Give an existing module sheaf the trivial sectionwise action.
-Source: trivial action in paragraph (3)
-(blueprint: def-sfb-internal-action-inflation). -/
+/-- Give an existing module sheaf the trivial sectionwise action. -/
 def trivialSheafAction (P : Cᵒᵖ ⥤ GrpCat.{u}) :
     ringedSiteModules.{u} R ⥤ EquivariantSheaf (K := P) J R where
   obj M := ⟨⟨M.val, ⟨fun _ ↦ 1, fun _ _ _ ↦ rfl⟩⟩, M.isSheaf⟩

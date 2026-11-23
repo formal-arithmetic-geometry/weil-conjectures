@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTen
 /-!
 # Operator and base-change naturality of the projection formula
 
-Source: blueprint, proper base change, order 1274; Stacks Tags 0B56, 0944 and 0E48
-(blueprint: lemma-weil-pbc-projection-formula-base-change-naturality).
+Source: Stacks Tags 0B56, 0944 and 0E48.
 -/
 
 @[expose] public section
@@ -35,12 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Naturality in the first variable of the specified counit mate for an arbitrary coefficient.
-Source: Stacks 0B56 and blueprint order 1274, paragraph 1
-(blueprint: lemma-weil-pbc-projection-formula-base-change-naturality).
-Proof: transpose both composites under adj. Naturality of alpha identifies the second
-transpose with counit tensor identity followed by u tensor identity. Naturality of the
-counit identifies it with the first transpose. Injectivity of the Hom equivalence
-proves equality. This applies to every u and in particular to endomorphisms. -/
+Stacks Project, Tag 0B56. -/
 theorem derivedProjectionFormulaMate_naturality
     {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
     (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)
@@ -66,7 +60,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The projection arrow for arbitrary coefficients on the small ringed pro-etale sites.
 It is exactly the existing counit mate using the uniquely normalized tensor comparison.
-Source: Stacks 0B56 (blueprint: lemma-weil-pbc-projection-formula-base-change-naturality). -/
+Source: Stacks 0B56. -/
 noncomputable def proEtaleProjectionFormulaMate
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})

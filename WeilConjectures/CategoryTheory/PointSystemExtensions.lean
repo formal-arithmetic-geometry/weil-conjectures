@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Pointed systems and their directed unions
 
-Source: Stacks Project, Sites, Tag 00YP (auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP.
 -/
 
 @[expose] public section
@@ -184,8 +184,7 @@ def Good : ObjectProperty (Extension X) := fun Y ↦
   Nonempty Y.right.index ∧ IsDirectedOrder Y.right.index ∧ Y.map P s ≠ Y.map P s'
 
 /-- Directed unions of good systems are good.
-Source: Stacks Project, Sites, Tag 00YP, conditions (1) and (2) for unions
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YP, conditions (1) and (2) for unions. -/
 theorem good_of_isColimit (hc : IsColimit c) (hF : ∀ a, Good P s s' (F.obj a)) :
     Good P s s' c.pt := by
   let hj := index_jointly_surjective F c hc

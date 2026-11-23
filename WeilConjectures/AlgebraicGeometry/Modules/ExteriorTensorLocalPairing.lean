@@ -12,9 +12,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.LocalBilinearSheafificationTens
 
 /-!
 # Exterior pairing induced by a linear map on an open
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph,
-exterior and tensor universal properties (blueprint: lem-sc-exterior-tensor-local-pairing).
 -/
 
 @[expose] public section
@@ -90,40 +87,7 @@ private theorem exterior_pairing_naturality_of_generators
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- A natural family of linear maps on subopens induces a natural exterior tensor pairing.
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph, construction
-before independence of lifts (blueprint: lem-sc-exterior-tensor-local-pairing).
-
-Proof: Write j for the inclusion of U, V(W)=j(image)(j(preimage)(W))=U ∩ W,
-and H=j_*(exteriorPower B (r+s)|U). Its sections on W are the exterior-sheaf
-sections on V(W), with scalars restricted from W. The equality
-j.app W followed by (j.appIso (j(preimage)(W))).inv = O_X(W → V(W))
-identifies this scalar action with ordinary restriction.
-
-On V contained in U, multiply exterior-algebra elements after applying
-exteriorPower.map to f in the first factor and to t in the second factor.
-Products of degree r and degree s lie in degree r+s by pow_add and
-Submodule.mul_mem_mul. Compose with the target exterior sheafification unit.
-This gives an O_X(V)-bilinear map beta_V from the two exterior presheaf sections.
-On pure wedges the formula follows from exteriorPower.map_apply_ιMulti and
-ExteriorAlgebra.ιMulti_mul_ιMulti. Check naturality on two pure wedges using
-naturality of f, t, and the unit, then extend to both exterior presheaf factors
-by span induction using exteriorPower.ιMulti_span.
-
-For any W, first restrict both exterior presheaf inputs to V(W) and apply
-beta_V(W). The scalar identity above makes this an O_X(W)-bilinear map into H(W).
-It is natural: for Z contained in W, V(Z) is contained in V(W), and the two
-composites from V(Z) to W are equal; beta's naturality gives the required equation.
-Apply the bilinear sheafification extension theorem and then the sheaf tensor
-universal property to obtain phi: exteriorPower A r tensor exteriorPower C s → H.
-For W contained in U the open-restriction adjunction unit from exteriorPower B n
-has bijective component, since V(W)=W and its component is restriction along
-that equality. Compose phi_W with the inverse of this linear equivalence to
-get d_W. Naturality of phi and the unit gives naturality of d. Their equations
-on the exterior and tensor sheafification units give the displayed formula.
-No splitting, exactness, rank, or local freeness is used. Empty blocks give
-scalar multiplication in degree zero; empty opens and zero rings obey the
-same universal properties. -/
+/-- A natural family of linear maps on subopens induces a natural exterior tensor pairing. -/
 theorem exteriorTensor_local_pairing {X : Scheme.{v}} {A B C : X.Modules}
     (f : A ⟶ B) (r n s : ℕ) (hr : n = r + s) (U : X.Opens)
     (t : ∀ W : X.Opens, W ≤ U →

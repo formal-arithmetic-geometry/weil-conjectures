@@ -11,8 +11,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFl
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Common bounds and top epimorphisms for integral reductions
-
-Source: blueprint latest, lemma-bounds-finite-reductions, first and third proof paragraphs.
 -/
 
 @[expose] public noncomputable section
@@ -60,19 +58,7 @@ private theorem tensorComparison :
   exact ⟨e, hs⟩
 
 /-- Every canonical finite reduction has the residue cohomological interval, and its top
-cohomology transition is epic.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, coefficient filtration and Milnor
-paragraphs (blueprint: lem-pe-integral-finite-reduction-range).
-
-Proof: identify tensor with the finite coefficient module with restricted derived scalar
-extension, using the natural comparison that preserves transitions. The Nakayama coefficient
-triangles for m=1 identify the next level as an extension of the previous level by the first
-level. The long exact sequence gives the common bounds by induction. The quotient maps in
-those triangles equal the canonical quotient maps: cancel the epimorphic map from the regular
-module, since both composites are the lower quotient map. In degree b+1 the residue term is
-zero, so the same long exact sequence makes each canonical top cohomology transition epic.
-No completeness or constructibility is required. -/
+cohomology transition is epic. -/
 theorem integral_finite_reduction_range
     (K : DerivedCategory (AdicCompletion.Modules l E X)) (a b : ℤ)
     (hbound : ∀ q : ℤ, q < a ∨ b < q →

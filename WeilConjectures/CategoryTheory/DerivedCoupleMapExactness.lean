@@ -144,31 +144,7 @@ private theorem exact_corrected_lift {A B E V K Q H I : C}
   simpa only [Category.assoc] using π₃ ≫= π₂ ≫= (hy =≫ i)
 
 /-- The induced maps are exact, provided they satisfy the defining descent equations.
-Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ
-(blueprint: lem-sp-derived-map-exactness).
-
-Proof. Use generalized elements with epimorphic refinements, which detect images
-and kernels in an abelian category. At the image of `a`, an element annihilated
-by the restricted `a` lifts through `f`, by `ha`. The lift is a cycle, because
-its `f`-image lies in the incoming image of `a`, annihilated by `g`. Its cycle
-class maps to the original element by `f_comm`; the converse follows from `haf`.
-At the cycle quotient, lift an element through the epi cycle projection. If its
-`forward`-image is zero, `f_comm` and mono image cancellation imply that its
-cycle lift is killed by `f`. Lift it through `g` using `hf`, then apply the
-incoming image epimorphism of `a`. The equation `g_comm` identifies the resulting
-`backward`-image with the original class. Conversely, that image is killed by
-`forward`, by `hg` and the equations.
-At the next image of `a`, lift an element killed by `backward` through the epi
-image factorization of the incoming `a`. Its `g`-image is a boundary, by `g_comm`
-and the kernel description of the cycle quotient. Lift that boundary through
-its defining incoming differential; subtract the resulting `f`-image from the
-chosen lift. This does not change its image under `a`, by `haf`, and kills its
-`g`-image by the boundary equality `hβeq`. By `hgg` the corrected lift comes
-from the preceding `a`. The equation `alpha_comm` gives an `alpha`-preimage
-of the element. Conversely an `alpha`-image is killed by `backward` by `hga`.
-These image and kernel inclusions descend along epimorphisms: every subobject
-of an abelian category is the kernel of its cokernel. They prove all three
-subobject equalities, with the indices transported as in the stated equations. -/
+Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ. -/
 theorem derivedCoupleMapData_exact (D E : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
     (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))

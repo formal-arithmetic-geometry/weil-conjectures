@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 # Exactness of derived bigraded couples
 
 Source: Stacks Project, Homological Algebra, Lemma 12.21.2 (Tag 011R),
-Definition 12.21.3 (Tag 011S), and Remark 12.21.5 (Tag 0AMJ)
-(blueprint: lem-sp-derived-couple-exact).
+Definition 12.21.3 (Tag 011S), and Remark 12.21.5 (Tag 0AMJ).
 -/
 
 @[expose] public section
@@ -29,33 +28,7 @@ open CategoryTheory.Limits
 namespace CategoryTheory.BigradedExactCouple
 
 /-- Kernel and image identities, and unique induced exact maps, for a type-`s` couple.
-Source: Stacks Project, Tags 011R and 0AMJ (blueprint: lem-sp-derived-couple-exact).
-
-Proof (steps 0--10 of the node). Work with generalized elements `T ⟶ Y`, allowing
-precomposition with epimorphic refinements, as in `lem-sp-abelian-refinements`.
-Membership in kernels means annihilation; membership in images means lifting after
-an epimorphic refinement. Membership descends along epimorphisms because a subobject
-in an abelian category is the kernel of its cokernel. These tests determine subobjects.
-The three complex relations give `d d = g f g f = 0`. Consequently boundaries are cycles,
-and the projection from cycles to their quotient is the cokernel of the lifted incoming
-boundary. The kernel test gives `ker d = f⁻¹(ker g) = f⁻¹(im alpha)`.
-The refined image test gives `im d = g(im f) = g(ker alpha)`.
-Restrict `alpha` to its image; the inclusion is mono, so this restriction is unique.
-The cycle restriction of `f` lands in `im alpha` by the kernel identity and kills
-boundaries by `f g = 0`, so it descends uniquely through the cycle quotient.
-The map `g` lands in cycles by `g f g = 0`. Composing with the quotient kills
-`ker alpha = im f`, so it descends uniquely through the image epimorphism of `alpha`.
-For exactness between `f'` and `alpha'`, lift an element killed by `alpha'` along `f`
-after refinement; its lift is a cycle because the image of `alpha` is killed by `g`.
-For exactness between `g'` and `f'`, lift to cycles along the quotient, then lift along
-`g` using `ker f = im g`; the image under the image epimorphism of `alpha` is a `g'`-lift.
-For exactness between `alpha'` and `g'`, lift along the image epimorphism of `alpha`.
-If its `g`-image is a boundary, subtract an `f`-lift of that boundary after refinement.
-The difference is killed by `g`, hence lifts along `alpha`; projecting this lift to
-`im alpha` gives the required `alpha'`-preimage. The three complex identities follow
-from the defining commutative equations, cancellation of mono inclusions and epi
-projections, and the original complex identities. These chases use only the abelian
-category axioms and `lem-sp-abelian-refinements`, not an embedding theorem. -/
+Source: Stacks Project, Tags 011R and 0AMJ. -/
 theorem derived_couple_exact {C : Type u} [Category.{v} C] [Abelian C]
     {s : ℕ} (X : BigradedExactCouple C s) :
     (∀ p q : ℤ,
@@ -228,21 +201,8 @@ private theorem iterInclusion_image {C : Type u} [Category.{v} C] [Abelian C]
         exact imageSubobject_iso_comp (eqToHom _) _
 
 /-- The recursive image and inclusion properties of iterated derived couples.
-(blueprint: lem-sp-derived-couple-image-prefix)
 
-Source: Stacks Project, Definition 12.21.3 (Tag 011S) and Remark 12.21.5 (Tag 0AMJ).
-
-Construct `I` by composing image inclusions and `A` by appending incoming `alpha` maps.
-Associativity and induction also give the prescribed recurrence prepending `alpha`.
-The inclusions are mono by induction. The `DerivedMaps.alpha_comm` equation gives
-compatibility with the original `alpha`, again by induction. For the image induction,
-precompose the next inclusion with the epimorphic factorization of the incoming
-page-`alpha`. Compatibility identifies this composite with the previous inclusion
-followed by the original `alpha`. Factoring maps through their image subobjects shows
-that equal image subobjects remain equal after postcomposition. Apply the induction
-hypothesis and the appended-alpha recurrence. Index transports are isomorphisms and
-do not change images. The base case consists of identity maps with image the top
-subobject; it includes all integer bidegrees without a positivity assumption. -/
+Source: Stacks Project, Definition 12.21.3 (Tag 011S) and Remark 12.21.5 (Tag 0AMJ). -/
 theorem pageCouple_image_prefix {C : Type u} [Category.{v} C] [Abelian C]
     (X : BigradedExactCouple C 0) :
     ∃ (A : ∀ (n : ℕ) (p q : ℤ), X.D (p + n) (q - n) ⟶ X.D p q)
@@ -273,16 +233,7 @@ theorem pageCouple_image_prefix {C : Type u} [Category.{v} C] [Abelian C]
 Here `n` is `r - 2`: the actual page number is `n + 2`. The quantified families
 `A` and `I` are uniquely prescribed by their recurrences: `A` is the incoming
 `alpha` power and `I` is the composite of all the canonical image inclusions.
-Source: Stacks Project, Tags 011S and 0AMJ (blueprint: lem-sp-derived-couple-exact).
-
-Proof (step 11 of the node). Use `pageCouple_image_prefix` for the recursive powers,
-monomorphic inclusions, image formula, and compatibility with the original `alpha`.
-Its proof inducts on `n` using `DerivedMaps.alpha_comm` and image factorizations.
-The `E` recurrence is precisely the
-cokernel of the incoming differential lifted into the outgoing kernel, hence cycles
-modulo boundaries. The types of `pageCouple`, its `alpha`, `f`, `g`, and `d` give
-respectively type `n = r-2` and bidegrees `(-1,1)`, `(2,-1)`, `(n,-n)` and
-`(n+2,-n-1) = (r,1-r)`. This proves every asserted recurrence and image formula. -/
+Source: Stacks Project, Tags 011S and 0AMJ. -/
 theorem pageCouple_image {C : Type u} [Category.{v} C] [Abelian C]
     (X : BigradedExactCouple C 0) :
     ∃ (A : ∀ (n : ℕ) (p q : ℤ), X.D (p + n) (q - n) ⟶ X.D p q)

@@ -14,9 +14,7 @@ import Mathlib.CategoryTheory.Linear.Basic
 
 /-! # Product-total Hom complexes under an additive functor
 
-Source: Stacks Project, Section 0A8X; the component calculation in steps 4–5 of
-lem-sf-ringed-forget-two-injective-hom.
-(blueprint: lem-sf-ringed-hom-complex-comparison).
+Source: Stacks Project, Section 0A8X.
 
 The complex functors and their projection equations are parameters, so the argument never
 unfolds a chosen construction of a Hom complex.
@@ -129,13 +127,7 @@ private def termIso (K I : CochainComplex B ℤ) (n : ℤ) :
 
 include limitB limitA dB dA mB mA in
 /-- The projection-normalized natural comparison of product-total Hom complexes.
-Source: Stacks Project, Section 0A8X; steps 4–5 of the ringed-forgetting comparison
-(blueprint: lem-sf-ringed-hom-complex-comparison).
-Proof: apply U to each product cone and transport the factors through h. Product-cone
-uniqueness gives term isomorphisms with the required projection equation. On every projection,
-the two differential formulas agree by naturality of h, additivity, and preservation of the
-integer signs. The map-projection formulas give the naturality square in the same way.
-Assemble the term isomorphisms into chain isomorphisms and then a natural isomorphism. -/
+Source: Stacks Project, Section 0A8X. -/
 theorem ringedHomComplexComparison :
     ∃ chain : FB ⋙ U.mapHomologicalComplex (.up ℤ) ≅
       ((U.mapHomologicalComplex (.up ℤ)).op.prod (U.mapHomologicalComplex (.up ℤ))) ⋙ FA,

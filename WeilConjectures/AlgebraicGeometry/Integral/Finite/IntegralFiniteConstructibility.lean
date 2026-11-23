@@ -103,28 +103,7 @@ private theorem propagateFinite
       (hs S i hS (ih.2 S i hS)))
   exact ⟨h.1, fun S i hS n ↦ h.2 n S i hS⟩
 
-/-- Constructibility and a fixed stratum propagate from the residue reduction.
-
-Source: blueprint latest, lemma-bounds-finite-reductions, first paragraph
-(blueprint: lemma-bounds-finite-reductions--1).
-
-Proof: write B for the pulled-back continuous integer ring and A_n for the finite
-quotient of exponent n+1. Resolve K by a K-flat complex with flat terms. The regular
-uniformizer coefficient sequences, tensored termwise with that representative, give
-short exact sequences of complexes. Their maps are linear over A_(n+1): restriction
-from this quotient to B is full, since B -> A_(n+1) is an epimorphism and tensoring
-preserves epimorphisms. Lift the complexes and maps through this exact faithful
-restriction and pass to their distinguished triangles. Their outer terms are the
-previous reduction and the first reduction, restricted along the finite coefficient
-maps. The finite internal/ordinary comparison respects these coefficient maps and
-identifies bounded constructibility with the ordinary bounded constructible class.
-Finite scalar restriction preserves that class and its distinguished-triangle closure
-therefore gives bounded constructibility by induction. For the last assertion apply
-exact inverse image along the given immersion to these same triangles; it commutes
-with cohomology. Over each finite coefficient ring, sheaves with finite constant
-local models form a weak Serre class, so the long exact sequence and induction give
-finite constant local models on this very stratum, without changing its immersion.
-Return through the finite-model comparison. No completeness or Tor bound is used. -/
+/-- Constructibility and a fixed stratum propagate from the residue reduction. -/
 theorem integral_finite_constructibility
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

@@ -47,36 +47,7 @@ private theorem valueCone_isLimit
         _ = v.π.app j₀ ≫ r := by rw [← Category.assoc, hm j₀] }⟩
 
 /-- A compatible third derived map can be chosen together with distinguishedness.
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause (dual argument).
-
-Proof: Complete lf by TR1 to (LX, LY, K, lf, b, c). Keep a retracting
-stage sY of the supplied second cone. MS2 gives a lift f₁ of T.mor₁ into sY.
-The common-stage clause of the first cone gives maps a and t with
-F(t) = F(a) alpha₀ uX(s₁). Put f' = t f₁ and alpha = F(a) alpha₀.
-Naturality proves uX(s) alpha = identity, and hf with the second retraction proves
-F(f') beta = alpha lf. Complete f' by TR1, extend the denominators using MS6,
-and extend alpha and beta using TR3, retaining both remaining squares of q.
-Apply leftDerived_triangle_retraction_homColimit to this concrete comparison.
-The pro criterion 05PY constructs the cone uK with the third component gamma
-as a retraction. Its identity-class equations, interpreted at a common stage
-of the filtered Hom-colimit, give the factorization certificate for this same uK.
-Use 05SA to obtain the derived second map into K. Its equation at the concrete
-stage, composed with gamma, identifies it with b by the retained second square.
-For the third map, 05SU gives a value V at T.obj₁[1] and the canonical comparison
-LX[1] to V for its supplied cone. Apply 05SA to T.mor₃ and transport the result
-back to LX[1]. This gives all shifted denominator-square equations. At the
-concrete comparison stage, compose with commShiftIso.hom and shift(alpha).
-The retraction uX(s) alpha = identity and q's third square identify this map
-with c. Thus c satisfies every required shifted cone equation.
-The private helper proves directly that a retraction-certified cone is a limit:
-its lift of another cone v is v(s₀) r; common-stage factorization proves the leg
-equations and u(s₀) r = identity proves uniqueness. Apply limit uniqueness to
-uK and the supplied uZ to get e : K to LZ preserving all legs. A fraction square
-for T.mor₂ with a retracting target leg then proves b e.hom = lg.
-Set lh = e.inv c. Transport the distinguished completion along identities at
-LX and LY and e at K. Compose the established third cone equation with e.inv
-to obtain the required equation for every supplied h'.
-(blueprint: lem-pur-derived-functor-triangles-05sc-value-triangle-compatibility) -/
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause (dual argument). -/
 theorem leftDerived_value_triangle_extension_compat
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

@@ -11,9 +11,11 @@ import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportRootPullStep
 
 /-! # The finite root tower under inverse image
 
-Source: Bhatt--Scholze, Section 6.8; the roots-of-unity and integral-twist
-paragraphs of `sk-prop-sfb-cartesian-coefficients-twists` in the current blueprint.
-(blueprint: lem-pur-transport-normalized-root-tower).
+## References
+
+* Bhatt--Scholze, Section 6.8
+* Bhatt--Scholze, Section 6.8, finite roots and their power transition maps
+* Stacks 03PK, pullback of roots of unity
 -/
 
 @[expose] public section
@@ -237,7 +239,7 @@ private theorem normalizedFreeRootTower
 
 
 
-/- The published definitions abstract class proofs into auxiliary constants.
+/- The definitions abstract class proofs into auxiliary constants.
 Transport those proofs explicitly before comparing their induced category data;
 a single conversion through all the six-functor definitions is prohibitively large.
 The routines below only prepare congruences from Subsingleton.elim. -/
@@ -271,23 +273,7 @@ private def firstProofDifference (a b : Lean.Expr) (fuel : Nat) :
       firstProofDifference v w k
     | _, _ => return none
 
-/-- The finite root pullbacks form an isomorphism of the actual integral root diagrams.
-
-Source: Bhatt--Scholze, Section 6.8, finite roots and their power transition maps;
-Stacks 03PK, pullback of roots of unity.
-(blueprint: lem-pur-transport-normalized-root-tower).
-
-Proof: when ell is invertible the finite root sheaf is represented by the finite
-etale group scheme of ell-power roots. Its base change is the same group scheme
-over X, and the inverse-image map is its canonical base-change isomorphism.
-Conjugate by the generator-normalized root comparisons. The coefficient map is
-an isomorphism, and strong monoidal inverse image carries a free module to the
-free module on the inverse image. Thus tensoring the coefficient map with the
-root map gives the finite module isomorphism. Its underlying map, after the
-specified scalar comparison, is exactly rootTensorPull. Pullback of a root
-commutes with taking its ell-th power, so these maps commute with every
-transition and assemble into a natural isomorphism. Level zero is the zero
-module, and on an empty scheme all assertions are the unique maps. -/
+/-- The finite root pullbacks form an isomorphism of the actual integral root diagrams. -/
 theorem normalizedRootTower (ell : ℕ) [Fact ell.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (ell : X.residueField x)]

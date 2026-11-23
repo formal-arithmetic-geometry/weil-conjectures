@@ -10,9 +10,6 @@ public import WeilConjectures.CategoryTheory.InternalActionSite.Condensed.Profin
 /-!
 # Internal condensed actions as equivariant sheaves on the small profinite site
 
-Source: paragraph (3) of the direct-image stability proof, action-site presentation
-(blueprint: def-sfb-condensed-derived-invariants).
-
 An internal action of a topological group `G` on an internal module over a condensed ring
 `A` is the same as an equivariant sheaf of modules, for the group sheaf `S ↦ C(S, G)`, over
 the section ring sheaf on the small model of `Profinite`. The functor `toSite` keeps the

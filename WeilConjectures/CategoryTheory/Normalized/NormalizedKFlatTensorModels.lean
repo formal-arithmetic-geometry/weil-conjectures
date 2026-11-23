@@ -12,7 +12,6 @@ import all WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 /-! # Evaluation-normalized models of K-flat total tensor
 
 Source: Stacks 0A96, 08J9 and 06YN.
-(blueprint: lem-sf-normalized-kflat-tensor-models).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (F : A ⥤ A ⥤ A) [F.flip.Additive] [∀ P, (F.flip.obj P).Additive]
   (KFlat : CochainComplex A ℤ → Prop)
 
 /-- The signed componentwise evaluation fixes the model, rather than just its naturality.
-Source: Stacks 0A96 and 08J9, tensor--Hom on complexes and K-injective localization.
-(blueprint: lem-sf-normalized-kflat-tensor-models). -/
+Source: Stacks 0A96 and 08J9, tensor--Hom on complexes and K-injective localization. -/
 def KFlatTensorModelNormalization
     (model : ∀ P T : CochainComplex A ℤ, KFlat P → KFlat T →
       (S.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
@@ -52,28 +50,7 @@ def KFlatTensorModelNormalization
             (DerivedCategory.Q.map φ ≫ (R.model T I hI).inv)
 
 /-- Normalized total tensor models, including their evaluation and naturality equations.
-Source: Stacks 0A96, 08J9, 06YN and the representative tensor--Hom construction.
-(blueprint: lem-sf-normalized-kflat-tensor-models).
-
-Proof: the parametrized adjunction gives the isomorphism of Hom complexes. Its
-unflipped degree-zero uncurry is unsigned. Exchange the two total directions to
-put the left degree first; on bidegree (p,q) the exchange has coefficient
-(-1)^(pq), giving precisely the displayed formula. For K-flat T and K-injective I,
-Hom(T,I) is K-injective, by transposing maps from an acyclic complex and using
-acyclicity of its tensor with T. Hence localization identifies both Hom sets
-with the corresponding homotopy Hom sets. Compose with R.model. Represent an
-arbitrary derived target by a K-injective complex and transport this bijection
-through its representing isomorphism. Its naturality follows by representing
-maps between K-injectives by actual complex maps and using R.naturality.
-Yoneda and the fixed closed adjunction S determine a unique representing
-isomorphism. The identity and inverse identity maps prove its inverse laws.
-The same Hom bijection gives naturality in P,T by injectivity of transposition.
-For a given φ its componentwise uncurry is a genuine complex map ψ; the total
-coproduct universal property gives its displayed summand formula. The definition
-of the Hom bijection then gives the displayed localized equality. This fixes
-all scalar and Weil-action ambiguities: for any other normalized model, every
-map to a K-injective target has the same composite, and the Yoneda test forces
-equality. Zero complexes, empty sites and unbounded totals use the same proof. -/
+Source: Stacks 0A96, 08J9 and 06YN. -/
 theorem normalizedKFlatTensorModels [Abelian.HasKInjectiveResolutions A]
     (adj : F ⊣₂ H₀)
     (hflat : ∀ T, KFlat T →

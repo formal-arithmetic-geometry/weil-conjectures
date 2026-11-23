@@ -9,34 +9,34 @@ public import WeilConjectures.EulerProduct
 public import WeilConjectures.ZetaFunction.BettiSymmetry
 public import WeilConjectures.ZetaFunction.DualityReciprocity
 public import WeilConjectures.ZetaFunction.Rationality
+public import WeilConjectures.ZetaFunction.RealizationIndependence
+public import WeilConjectures.ZetaFunction.TraceFormulaCorollaries
 public import WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
 public import WeilConjectures.ZetaLinearAlgebra.WeilNumbers
 
 /-!
 # The Weil conjectures for a smooth proper variety: the five assembled theorems
 
-This file states the five Weil conjectures for a variety over the finite field `k₀ = 𝔽_q` in the
-form of the blueprint (subsections `corollary-point-counting-zeta-function--7` to
-`theorem-weil-conjectures-smooth-proper-schemes`, nodes `corollary-point-counting-zeta-function--7`,
-`theorem-weil-conjectures-smooth-proper-schemes`, `theorem-weil-conjectures-smooth-proper-schemes`),
-and the Riemann hypothesis in its arithmetic form
-(`theorem-weil-conjectures-smooth-proper-schemes`).
+This file states the five Weil conjectures for a variety over the finite field `k₀ = 𝔽_q`
+(rationality of the zeta function, the integral Frobenius factors, the Riemann hypothesis, the
+Betti numbers and the functional equation), the Riemann hypothesis in its arithmetic form.
 
 The inputs are the trace formula, Poincaré duality and the weight estimate; their output is
-`AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`. The coefficients of the
+`AlgebraicGeometry.Scheme.exists_isWeilFactorization_of_smoothProper`. The Riemann hypothesis is
+read off from the reciprocal roots of the normalized presentation `Z(X₀, T) = A / B`
+(`AlgebraicGeometry.Scheme.exists_isWeilNumber_of_mem_roots_reverse`), and the symmetry of the Betti
+numbers and the parity of `d χ` come from the cohomological functional equation
+(`AlgebraicGeometry.Scheme.functional_equation_frobeniusCharpolyRev`). The coefficients of the
 zeta series are integral by the Euler product (`AlgebraicGeometry.Scheme.Hom.zetaSeries_eq_tprod`,
 `AlgebraicGeometry.Scheme.Hom.exists_int_zetaSeries`) while the factorization is `ℓ`-adic by
 construction; the two meet in the rationality descent and in the realization independence of the
-integral factors (blueprint remarks `sk-the-five-assembled-theorems--remark-1`,
-`rationality-the-criterion-and-the-descent--remark-1` and
-`sk-rationality-the-criterion-and-the-descent--remark-1`: the trace-to-determinant identity is
-produced by one chosen `ℓ` and only exhibits `Z ∈ ℚ_ℓ(T)`; rationality over `ℚ` uses only that the
-coefficients are integers, while the independence of `ℓ` of the factors is the separate
-statement `lemma-reciprocal-roots-zeta`).
+integral factors: the trace-to-determinant identity is produced by one chosen `ℓ` and only
+exhibits `Z ∈ ℚ_ℓ(T)`; rationality over `ℚ` uses only that the coefficients are integers, while
+the independence of `ℓ` of the factors is the separate statement
+`AlgebraicGeometry.Scheme.realization_independence`.
 
-As the blueprint remarks `audit-what-is-elementary-in-this-layer-and-what-is-not--remark-1` and
-`sk-audit-what-is-elementary-in-this-layer-and-what-is-not--remark-1` record, this layer is
-elementary apart from four points, which are the geometric inputs used here: the alternating
+This layer is elementary apart from four points, which are the geometric inputs used here: the
+alternating
 middle pairing (`AlgebraicGeometry.Scheme.even_finrank_cohomology_middle`), the two endpoint
 computations (`AlgebraicGeometry.Scheme.exists_linearEquiv_cohomology_endpoints`), the embedding
 extension (`PadicAlgCl.exists_ringHom_complex_apply_eq`) and the intrinsic weights and
@@ -44,16 +44,15 @@ integrality of the factors (`AlgebraicGeometry.Scheme.realization_independence`)
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`:
-`corollary-point-counting-zeta-function--3`.
-- `AlgebraicGeometry.Scheme.Hom.euler_product`: `corollary-point-counting-zeta-function--4`.
-- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: `corollary-point-counting-zeta-function--7`.
-- `AlgebraicGeometry.Scheme.weil_integral_factors`:
-`theorem-weil-conjectures-smooth-proper-schemes`.
-- `AlgebraicGeometry.Scheme.riemann_hypothesis`: `theorem-weil-conjectures-smooth-proper-schemes`.
-- `AlgebraicGeometry.Scheme.weil_betti`: `theorem-weil-conjectures-smooth-proper-schemes`.
-- `AlgebraicGeometry.Scheme.weil_functional_equation`:
-`theorem-weil-conjectures-smooth-proper-schemes`.
+- `AlgebraicGeometry.Scheme.Hom.constantCoeff_zetaSeries_and_X_mul_derivative`: `Z(X₀, 0) = 1`
+  and the logarithmic derivative of `Z(X₀, T)` in terms of the point counts.
+- `AlgebraicGeometry.Scheme.Hom.euler_product`: the Euler product over the closed points.
+- `AlgebraicGeometry.Scheme.Hom.weil_rationality`: rationality of the zeta function.
+- `AlgebraicGeometry.Scheme.weil_integral_factors`: the integral Frobenius factors and the
+  factorization `Z(X₀, T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`.
+- `AlgebraicGeometry.Scheme.riemann_hypothesis`: the Riemann hypothesis.
+- `AlgebraicGeometry.Scheme.weil_betti`: the Betti numbers and their symmetry.
+- `AlgebraicGeometry.Scheme.weil_functional_equation`: the functional equation.
 -/
 
 @[expose] public section
@@ -66,8 +65,8 @@ namespace AlgebraicGeometry
 
 namespace Scheme
 
-/-- Blueprint `corollary-point-counting-zeta-function--3` (the point-count zeta series): for a
-scheme `X₀` over a field `k`, the zeta series `Z(X₀, T) = exp(∑_{n ≥ 1} Nₙ Tⁿ / n)`
+/-- For a scheme `X₀` over a field `k`, the zeta series
+`Z(X₀, T) = exp(∑_{n ≥ 1} Nₙ Tⁿ / n)`
 (`AlgebraicGeometry.Scheme.Hom.zetaSeries`, with `Nₙ = #X₀(𝔽_{qⁿ})` the point counts
 `AlgebraicGeometry.Scheme.Hom.pointCount`) lies in `1 + T ℚ⟦T⟧`, and the point counts are recovered
 from it by the logarithmic derivative `T Z' = (∑_{n ≥ 1} Nₙ Tⁿ) Z`. -/
@@ -79,9 +78,8 @@ theorem Hom.constantCoeff_zetaSeries_and_X_mul_derivative {k : Type u} [Field k]
   ⟨f.constantCoeff_zetaSeries, f.X_mul_derivative_zetaSeries⟩
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `corollary-point-counting-zeta-function--4` and
-`corollary-point-counting-zeta-function--4` (closed-point Euler product and integrality): for a
-scheme `Y₀` of finite type over a finite field `k`, with `c_r` the number of closed points of degree
+/-- For a scheme `Y₀` of finite type over a finite field `k`, with `c_r` the number of closed
+points of degree
 `r`,
 
 * only finitely many closed points have degree at most `m`, for every `m`; in particular every
@@ -126,9 +124,7 @@ theorem Hom.euler_product {k : Type u} [Field k] [Finite k] {X : Scheme.{u}}
     smul_eq_mul, mul_comm]
 
 open scoped PowerSeries.WithPiTopology in
-/-- Blueprint `corollary-point-counting-zeta-function--7` and
-`corollary-point-counting-zeta-function--7` (Weil conjectures I: rationality and Euler product): for
-a scheme `X₀` of finite type over a finite field `k`,
+/-- For a scheme `X₀` of finite type over a finite field `k`,
 
 * there are `A, B ∈ ℤ[T]` with `B(0) = 1` and `B(T) Z(X₀, T) = A(T)` in `ℚ⟦T⟧`;
 * `Z(X₀, T) ∈ 1 + T ℤ⟦T⟧`;
@@ -152,8 +148,7 @@ variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] (d : ℕ)
   [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))]
   [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Weil conjectures II: integral
-Frobenius factors): for `X₀` smooth, proper and geometrically connected of pure dimension `d`,
+/-- For `X₀` smooth, proper and geometrically connected of pure dimension `d`,
 for every `0 ≤ i ≤ 2d` there is a unique `Pᵢ ∈ ℤ[T]` with `Pᵢ(0) = 1` and
 `Pᵢ^{(ℓ)} = det(1 - T F | Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ))` for every prime `ℓ ≠ p`, and these satisfy
 `Z(X₀, T) = ∏ᵢ Pᵢ(T)^{(-1)^{i+1}}`, independently of `ℓ`. -/
@@ -167,8 +162,7 @@ theorem weil_integral_factors :
   exact ⟨P, fun i ↦ ⟨hfact.coeff_zero_eq_one i, hP i⟩, fun i Q _ hQ ↦ hQ.unique k₀ X (hP i),
     hfact⟩
 
-/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes`
-(the Riemann hypothesis): for `X₀` smooth, proper and geometrically connected of pure
+/-- The Riemann hypothesis: for `X₀` smooth, proper and geometrically connected of pure
 dimension `d` and an integral Frobenius factor `P` in degree `i ≤ 2d`:
 
 * every reciprocal root `α ∈ ℂ` of `P` (a root of `P^#(U) = U^{deg P} P(U⁻¹)`) is an algebraic
@@ -185,42 +179,11 @@ theorem riemann_hypothesis {i : ℕ} (hi : i ≤ 2 * d) {P : Polynomial ℤ}
     ∀ (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)],
       ∀ α ∈ (P.reverse.map (Int.castRingHom (PadicAlgCl l))).roots,
         ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd.HasEigenvalue α := by
-  obtain ⟨P', hfact, -, hrh, hP'⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
-  have hPi : P = P' ⟨i, by omega⟩ := hP.unique k₀ X (hP' ⟨i, by omega⟩)
-  have h0 : P.coeff 0 = 1 := hPi ▸ hfact.coeff_zero_eq_one _
-  have hP0 : P ≠ 0 := fun h ↦ by simp [h] at h0
-  have hroot : ∀ z ∈ (P.map (Int.castRingHom ℂ)).roots,
-      ‖z‖ = (Nat.card k₀ : ℝ) ^ (-(i : ℝ) / 2) := hPi ▸ hrh ⟨i, by omega⟩
-  have hmon : P.reverse.Monic := by
-    rw [Monic, reverse_leadingCoeff, trailingCoeff_eq_coeff_zero (by rw [h0]; exact one_ne_zero),
-      h0]
-  have hrev : P.reverse.map (Int.castRingHom ℂ) = (P.map (Int.castRingHom ℂ)).reverse :=
-    (Polynomial.reverse_map (RingHom.injective_int _) P).symm
-  have hPℂ : P.map (Int.castRingHom ℂ) ≠ 0 :=
-    (Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hP0
-  have hq : (0 : ℝ) < Nat.card k₀ := by exact_mod_cast Nat.card_pos
-  -- the reciprocal roots have absolute value `q^{i/2}`
-  have hrroot : ∀ y ∈ (P.reverse.map (Int.castRingHom ℂ)).roots,
-      ‖y‖ = (Nat.card k₀ : ℝ) ^ ((i : ℝ) / 2) := fun y hy ↦ by
-    rw [hrev, Polynomial.mem_roots_reverse_iff hPℂ] at hy
-    have := hroot _ ((Polynomial.mem_roots hPℂ).2 hy.2)
-    rw [norm_inv, neg_div, Real.rpow_neg hq.le, inv_inj] at this
-    exact this
-  refine ⟨fun α hα ↦ ⟨⟨_, hmon, ?_⟩, isWeilNumber_of_mem_roots (hmon.ne_zero) hrroot hα⟩,
-    fun β hβ ↦ isWeilNumber_of_mem_roots hP0 (fun y hy ↦ by rw [hroot y hy, neg_div]) hβ,
-    fun l _ _ α hα ↦ ?_⟩
-  · rw [show algebraMap ℤ ℂ = Int.castRingHom ℂ from RingHom.ext_int _ _, ← Polynomial.eval_map]
-    exact (Polynomial.mem_roots
-      ((Polynomial.map_ne_zero_iff (RingHom.injective_int _)).2 hmon.ne_zero)).1 hα
-  · rw [← Polynomial.reverse_map (RingHom.injective_int _), hP l, frobeniusCharpolyRev_def,
-      FrobeniusModule.localPolynomial,
-      (LinearMap.reciprocal_roots_eigenvalues
-        ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobeniusEnd
-        (LinearEquiv.isUnit_det' ((WeilSheaf.adicConstant k₀ l X).cohomology i).frobenius)).1] at hα
-    exact (Module.End.hasEigenvalue_iff_isRoot_charpoly _ _).2 (Polynomial.isRoot_of_mem_roots hα)
+  -- the connectedness hypothesis is part of the statement; the proof does not use it
+  have _ := ‹GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))›
+  exact riemann_hypothesis_of_isIntegralFrobeniusFactor k₀ X d hi hP
 
-/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Weil conjectures IV: Betti
-symmetry): the integral Frobenius factors `Pᵢ` of `X₀` have degrees
+/-- The integral Frobenius factors `Pᵢ` of `X₀` have degrees
 `bᵢ = dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` for every `ℓ ≠ p`, `bᵢ = b_{2d-i}`, `b₀ = b_{2d} = 1`,
 `P₀ = 1 - T`, `P_{2d} = 1 - qᵈ T`, and the rational function
 `Z(X₀, T) = ∏_{i odd} Pᵢ / ∏_{i even} Pᵢ` has a pole of order exactly one at `T = 1` and, if
@@ -247,11 +210,18 @@ theorem weil_betti :
         ¬ (∏ i ∈ Finset.univ.filter (fun i : Fin (2 * d + 1) ↦ Odd i.1),
           (P i).map (Int.castRingHom ℚ)).IsRoot ((Nat.card k₀ : ℚ) ^ d)⁻¹) := by
   obtain ⟨P, hfact, -, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
-  obtain ⟨h1, h2, h3, h4, h5, h6, h7, h8⟩ := betti_symmetry k₀ X d hP
+  obtain ⟨h1, -, h3, h4, h5, h6, h7, h8⟩ := betti_symmetry k₀ X d hP
+  obtain ⟨l, hl, hne⟩ := exists_prime_ne_ringChar k₀
+  have : Fact l.Prime := ⟨hl⟩
+  have : Fact (ringChar k₀ ≠ l) := ⟨hne⟩
+  -- `b_{2d-i} = bᵢ`: the Betti numbers are the dimensions `dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)`, which are
+  -- symmetric by the functional equation
+  have h2 : ∀ i : Fin (2 * d + 1), (P i.rev).natDegree = (P i).natDegree := fun i ↦ by
+    rw [h1 l i.rev, h1 l i]
+    exact (functional_equation_frobeniusCharpolyRev k₀ l X d).1 i
   exact ⟨P, hP, hfact, h1, h2, h3, h4, h5, h6, h7, h8⟩
 
-/-- Blueprint `theorem-weil-conjectures-smooth-proper-schemes` (Weil conjectures V:
-functional equation): for the integral Frobenius factors `Pᵢ` of `X₀`, with
+/-- For the integral Frobenius factors `Pᵢ` of `X₀`, with
 `χ = ∑ᵢ (-1)ⁱ deg Pᵢ` and the determinant constants `Dᵢ = (-1)^{bᵢ} [T^{bᵢ}] Pᵢ`, the factors
 satisfy the degreewise reciprocity `P_{2d-i}(q^{-d} t⁻¹) = (-1)^{bᵢ} t^{-bᵢ} Dᵢ⁻¹ Pᵢ(t)` at every
 nonzero `t ∈ ℂ`, the number `d χ` is even, `d χ = 2 m`, the sign `ε`
@@ -278,7 +248,22 @@ theorem weil_functional_equation :
               Polynomial.alternatingProdEval (fun i ↦ (P i).map (Int.castRingHom ℂ)) t := by
   obtain ⟨P, hfact, hfe, -, hP⟩ := exists_isWeilFactorization_of_smoothProper k₀ X d
   have hq : 1 < Nat.card k₀ := Finite.one_lt_card
-  obtain ⟨hL, -, m, hm⟩ := reciprocity k₀ X d hP
+  obtain ⟨hL, -, -⟩ := reciprocity k₀ X d hP
+  obtain ⟨l, hl, hlne⟩ := exists_prime_ne_ringChar k₀
+  have : Fact l.Prime := ⟨hl⟩
+  have : Fact (ringChar k₀ ≠ l) := ⟨hlne⟩
+  -- `d χ` is even: `χ = ∑ᵢ (-1)ⁱ deg Pᵢ` is the Euler characteristic
+  -- `∑ᵢ (-1)ⁱ dim Hⁱ(X₀ ⊗ k̄, ℚ̄_ℓ)` of the functional equation
+  have hdeg : ∀ i : Fin (2 * d + 1), (P i).natDegree = Module.finrank (PadicAlgCl l)
+      ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier :=
+    fun i ↦ natDegree_eq_finrank_of_isIntegralFrobeniusFactor k₀ X (hP i) l
+  have hchi : Polynomial.alternatingNatDegreeSum P = ∑ i : Fin (2 * d + 1), (-1) ^ (i : ℕ) *
+      (Module.finrank (PadicAlgCl l)
+        ((WeilSheaf.adicConstant k₀ l X).cohomology (i : ℕ)).carrier : ℤ) := by
+    simp only [Polynomial.alternatingNatDegreeSum, hdeg]
+  obtain ⟨m, hm⟩ : Even ((d : ℤ) * Polynomial.alternatingNatDegreeSum P) := by
+    rw [hchi]
+    exact (functional_equation_frobeniusCharpolyRev k₀ l X d).2.1
   have hm' : (d : ℤ) * Polynomial.alternatingNatDegreeSum P = 2 * m := by rw [hm]; ring
   exact ⟨P, hP, hL, m, hm', weilSign_eq_one_or_eq_neg_one hq hfact.coeff_zero_eq_one hfe hm',
     fun t ht hne ↦ hfe.alternatingProdEval_eq hq hfact.coeff_zero_eq_one hm' t ht hne⟩

@@ -19,15 +19,13 @@ public import WeilConjectures.WeilSheaf.DirectImageStalk
 
 Let `C₀` be a smooth geometrically connected affine curve over `k₀ = 𝔽_q`, `j : U₀ ⟶ C₀` a
 dense open immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most `β`. Then
-the direct image `j_* ℱ` has punctual weights at most `β` on all of `C₀`
-(`proposition-weights-j-boundary-points--1`, and the first assertion of
-`proposition-weights-j-boundary-points`).
+the direct image `j_* ℱ` has punctual weights at most `β` on all of `C₀` (the first
+assertion of the semicontinuity proposition for the weights of `j_* ℱ` at the boundary points).
 
 This is the sheaf-level form of the argument of
 `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_of_isAffine`. Put `J = j_* ℱ` and let `T` be the
 set of closed points of `C₀` lying in `U₀`, whose complement is finite. The Euler product of `J`
-(`proposition-weights-j-boundary-points`,
-`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`), split into the
+(`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_directImage`), split into the
 product over `T` and the finitely many local factors outside `T`, gives
 
 `L (T, J, T) · ι det (1 - F T ∣ H_c² (J)) =`
@@ -37,9 +35,10 @@ On `T` the stalks of `J` are those of `ℱ`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_directImage`), of bounded rank
 (`AlgebraicGeometry.WeilSheaf.IsLisse.exists_finrank_stalk_le`), and the closed points of degree
 `n` number `O(qⁿ)`; so the inverse of `L (T, J, T)` converges on the disc of radius
-`R = q ^ (-(β / 2 + 1))`. The group `H_c² (J)` is the geometric coinvariants of `ℱ` twisted by
-`(-1)`, whose eigenvalues have absolute value at most `q ^ (β / 2 + 1)`
-(`AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`). Hence the boundary
+`R = q ^ (-(β / 2 + 1))`. The group `H_c² (J)` is `H_c² (U, ℱ)`, the geometric coinvariants
+of `ℱ` twisted by `(-1)`, whose eigenvalues have absolute value at most `q ^ (β / 2 + 1)`
+(`AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.compactlySupportedCohomology_two`). Hence the
+boundary
 local polynomials have no zero in that disc (`PowerSeries.one_le_mul_norm_of_tprod_mul_eq_mul`),
 which bounds the boundary weights by `β + 2`
 (`AlgebraicGeometry.WeilSheaf.norm_le_of_hasEigenvalue_stalk_directImage`). Applied to the tensor
@@ -53,12 +52,14 @@ powers `ℱ^{⊗ k}`, whose boundary eigenvalues include the `k`-th powers of th
   quasi-compact scheme has stalks of bounded dimension.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`: the geometric
   coinvariants of a lisse sheaf with weights at most `w` have weights at most `w`.
+- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.compactlySupportedCohomology_two`: on a smooth
+  curve, `H_c²` of a lisse sheaf with weights at most `w` has weights at most `w + 2`.
 - `AlgebraicGeometry.WeilSheaf.norm_le_of_hasEigenvalue_stalk_directImage`: the preliminary
   bound `β + 2` at the boundary points.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: boundary semicontinuity of
   weights on a smooth geometrically connected affine curve.
 
-The case of a general, not necessarily affine, curve (Step 0 of the blueprint proof) is
+The case of a general, not necessarily affine, curve (the reduction to the affine case) is
 `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`
 (`WeilConjectures.WeilSheaf.RealPurity`).
 -/
@@ -94,6 +95,34 @@ theorem hasEigenvalue_inv_of_hasEigenvalue_dual {M : FrobeniusModule K} {α : K}
   change M.frobenius x = α⁻¹ • x
   conv_rhs => rw [hx', inv_smul_smul₀ hα0]
 
+/-- The Tate twist by `n` lowers the weight bound by `2 n`: the twist `(-1)` raises it by two.
+This is the upper-bound analogue of `FrobeniusModule.IsPureOfWeight.tateTwist`. -/
+theorem HasWeightsAtMost.tateTwist {ι : K →+* ℂ} {q : ℕ} (hq : 0 < q)
+    {M : FrobeniusModule K} {w : ℝ} (h : M.HasWeightsAtMost ι q w) (n : ℤ) :
+    (M.tateTwist q n).HasWeightsAtMost ι q (w - 2 * n) := by
+  have hq0 : (0 : ℝ) < q := by exact_mod_cast hq
+  have hqK : (q : K) ≠ 0 := by
+    intro hK
+    have hnorm : ‖ι (q : K)‖ = 0 := by rw [hK, map_zero, norm_zero]
+    rw [map_natCast] at hnorm
+    simp only [norm_natCast] at hnorm
+    exact hq0.ne' (by exact_mod_cast hnorm)
+  have hc : ((q : K) ^ (-n)) ≠ 0 := zpow_ne_zero _ hqK
+  intro β hβ
+  obtain ⟨α, rfl⟩ : ∃ α, β = (q : K) ^ (-n) * α := ⟨((q : K) ^ (-n))⁻¹ * β, by field_simp⟩
+  have hα := h α ((hasEigenvalue_frobeniusEnd_rescale_iff hc α).1 hβ)
+  have hcnorm : ‖ι ((q : K) ^ (-n))‖ = (q : ℝ) ^ (-n) := by
+    rw [map_zpow₀, map_natCast]
+    simp
+  rw [map_mul, norm_mul, hcnorm]
+  calc (q : ℝ) ^ (-n) * ‖ι α‖ ≤ (q : ℝ) ^ (-n) * (q : ℝ) ^ (w / 2) :=
+        mul_le_mul_of_nonneg_left hα (zpow_nonneg hq0.le _)
+    _ = (q : ℝ) ^ ((w - 2 * n) / 2) := by
+        rw [← Real.rpow_intCast (q : ℝ) (-n), ← Real.rpow_add hq0]
+        congr 1
+        push_cast
+        ring
+
 end FrobeniusModule
 
 namespace AlgebraicGeometry.WeilSheaf
@@ -116,6 +145,32 @@ theorem IsLisse.exists_finrank_stalk_le [QuasiCompact (X ↘ Spec (CommRingCat.o
     (AlgebraicClosure k₀)
   exact ⟨d, fun x ↦ hd _⟩
 
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- If `|ι (β ^ deg x)| ≤ q_x ^ (w / 2)` at a closed point `x`, then `|ι β| ≤ q ^ (w / 2)`. -/
+theorem norm_le_rpow_of_norm_pow_degreeOver_le {ι : PadicAlgCl l →+* ℂ} {x : X.finitePoints}
+    {β : PadicAlgCl l} {w : ℝ}
+    (h : ‖ι (β ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)‖ ≤
+      ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) ^ (w / 2)) :
+    ‖ι β‖ ≤ (Nat.card k₀ : ℝ) ^ (w / 2) := by
+  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
+    mul_comm, Real.rpow_mul_natCast hq] at h
+  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- If `|ι (β ^ deg x)| = q_x ^ (w / 2)` at a closed point `x`, then `|ι β| = q ^ (w / 2)`. -/
+theorem norm_eq_rpow_of_norm_pow_degreeOver_eq {ι : PadicAlgCl l →+* ℂ} {x : X.finitePoints}
+    {β : PadicAlgCl l} {w : ℝ}
+    (h : ‖ι (β ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)‖ =
+      ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) ^ (w / 2)) :
+    ‖ι β‖ = (Nat.card k₀ : ℝ) ^ (w / 2) := by
+  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
+    mul_comm, Real.rpow_mul_natCast hq] at h
+  exact (pow_left_inj₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
+
 /-- *Weights of the geometric coinvariants.* If the lisse Weil sheaf `F` has weights at most `w`,
 then its geometric coinvariants `V_{π₁(X̄)}` have weights at most `w` over `k₀`. Every
 eigenvalue of the Frobenius on the global sections of `F^∨` is, up to the power `deg x`, an
@@ -135,12 +190,28 @@ theorem hasWeightsAtMostOver_geometricCoinvariants
   obtain ⟨e⟩ := nonempty_equiv_stalk_dual hF x
   have h := FrobeniusModule.hasEigenvalue_inv_of_hasEigenvalue_dual (e.hasEigenvalue hx)
   rw [inv_pow, inv_inv] at h
-  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
-  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
-  have hb := hw x _ h
-  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
-    mul_comm, Real.rpow_mul_natCast hq] at hb
-  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 hb
+  exact norm_le_rpow_of_norm_pow_degreeOver_le (hw x _ h)
+
+/-- *Weights of `H_c²` on a smooth curve.* Let `U₀` be a smooth separated curve of finite type
+over `k₀ = 𝔽_q`, not necessarily affine or geometrically connected, and `F` a lisse Weil sheaf
+on `U₀` with punctual weights at most `w`. Then `H_c²(U, F)` has weights at most `w + 2` over
+`k₀`: it is the Tate twist `(-1)` of the geometric coinvariants
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`), which have
+weights at most `w` (`AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`),
+and the twist `(-1)` raises weights by two. This is the upper-bound analogue of
+`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`. -/
+theorem HasWeightsAtMost.compactlySupportedCohomology_two
+    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+    {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ} (hw : F.HasWeightsAtMost ι w) :
+    (F.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
+  obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_two F hF
+  have h := (hasWeightsAtMostOver_geometricCoinvariants ι hF hw).tateTwist Nat.card_pos (-1)
+  have hw2 : w - 2 * ((-1 : ℤ) : ℝ) = w + 2 := by push_cast; ring
+  rw [hw2] at h
+  exact FrobeniusModule.HasWeightsAtMost.of_equiv e h
 
 end Lisse
 
@@ -159,7 +230,7 @@ local instance locallyOfFiniteType_semicontinuity :
   haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
-/-- Steps 1–3 of `proposition-weights-j-boundary-points--1`: the preliminary bound at the boundary.
+/-- Steps 1–3 of the boundary semicontinuity of weights: the preliminary bound at the boundary.
 
 Let `C₀` be a smooth geometrically connected affine curve, `j : U₀ ⟶ C₀` a dense open
 immersion and `ℱ` a lisse Weil sheaf on `U₀` with weights at most `β`. At a closed point `s` of
@@ -235,30 +306,31 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
     rwa [Scheme.Hom.residueCard, hdeg, hy, Nat.cast_pow, ← Real.rpow_natCast_mul hq0.le,
       mul_comm, Real.rpow_mul_natCast hq0.le] at h
   obtain ⟨A, hA⟩ := p.exists_card_filter_degreeOver_le (IsCurve.krullDim_le_one p)
-  -- Step 2: the eigenvalues on `H_c²`
+  -- Step 2: the eigenvalues on `H_c²`: `H_c²(C, j_* ℱ) ≅ H_c²(U, ℱ)` has weights at most `β + 2`
   set S := ((J.compactlySupportedCohomology 2).frobeniusEnd.charpoly.roots).map ι with hSdef
   have hS : ∀ b ∈ S, ‖b‖ ≤ q * c := by
     intro b hb
     obtain ⟨μ, hμ, rfl⟩ := Multiset.mem_map.1 hb
     rw [Polynomial.mem_roots (LinearMap.charpoly_monic _).ne_zero,
       ← Module.End.hasEigenvalue_iff_isRoot_charpoly] at hμ
-    obtain ⟨E⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_two j F hF
-    have hμ' := E.hasEigenvalue hμ
-    set cK : PadicAlgCl l := (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) with hcK
-    have hcK' : cK = (Nat.card k₀ : PadicAlgCl l) := by rw [hcK, neg_neg, zpow_one]
-    have hιc : ι cK = (Nat.card k₀ : ℂ) := by rw [hcK', map_natCast]
-    have hcK0 : cK ≠ 0 := fun h ↦ by
-      have := congrArg ι h
-      rw [hιc, map_zero, Nat.cast_eq_zero] at this
-      exact Nat.card_pos.ne' this
-    have hγ : (F.geometricCoinvariants hF).frobeniusEnd.HasEigenvalue (cK⁻¹ * μ) := by
-      refine (FrobeniusModule.hasEigenvalue_frobeniusEnd_rescale_iff hcK0 _).1 ?_
-      rw [mul_inv_cancel_left₀ hcK0]
-      exact hμ'
-    have hγb := hasWeightsAtMostOver_geometricCoinvariants ι hF hw _ hγ
-    have hμe : μ = cK * (cK⁻¹ * μ) := by rw [mul_inv_cancel_left₀ hcK0]
-    rw [hμe, map_mul, norm_mul, hιc, Complex.norm_natCast]
-    exact mul_le_mul_of_nonneg_left hγb hq0.le
+    have := isSeparated_over_of_isOpenImmersion (k₀ := k₀) j
+    have := isAffine_of_isDominant (k₀ := k₀) j
+    have : SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← hjp]
+      exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) _)
+    have : GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← hjp]
+      have : GeometricallyIrreducible p := .of_smooth_of_geometricallyConnected _
+      have : Surjective (j ≫ p) :=
+        ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
+      infer_instance
+    obtain ⟨E⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le j F le_rfl
+    have h := hw.compactlySupportedCohomology_two hF μ
+      (E.symm.hasEigenvalue hμ)
+    have hβ : (β + 2) / 2 = β / 2 + 1 := by ring
+    rw [hβ] at h
+    rw [hqc]
+    exact h
   -- the Euler product identity, transported to `ℂ` along `ι`
   set P : Polynomial ℂ := (J.compactlySupportedCohomology 1).localPolynomial.map ι with hPdef
   set D2 : Polynomial ℂ := (J.compactlySupportedCohomology 2).localPolynomial.map ι with hD2def
@@ -347,9 +419,7 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
   rw [← hqc]
   simpa using (le_mul_inv_iff₀ (norm_pos_iff.2 hα0)).1 h1
 
-/-- Blueprint `proposition-weights-j-boundary-points--1` (first assertion of
-`proposition-weights-j-boundary-points`):
-*boundary semicontinuity of weights* on a smooth geometrically connected affine curve.
+/-- *Boundary semicontinuity of weights* on a smooth geometrically connected affine curve.
 
 Let `C₀` be a smooth geometrically connected affine curve over `k₀`, `j : U₀ ⟶ C₀` a dense
 quasi-compact open immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most

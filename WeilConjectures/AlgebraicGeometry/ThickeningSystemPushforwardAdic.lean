@@ -22,8 +22,17 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Adic conditions for the explicit pushforward system
 
-Source: Stacks Project, Cohomology of Schemes, Remark 088F, Lemma 087T, equation 0880.
-(blueprint: lem-weil-pbc-thickening-system-pushforward-adic).
+## References
+
+* [Stacks, Tag 088F]
+* [Stacks, Tag 087T]
+* [Stacks, Tag 01I8]
+* [Stacks, Tag 01IC]
+* [Stacks, Tag 01CE]
+* [Stacks, Tag 01AH]
+* [Stacks, Tag 01CD]
+* [Stacks, Tag 04CJ]
+* [Stacks, Tag 08KS]
 -/
 
 @[expose] public section
@@ -35,8 +44,7 @@ set_option autoImplicit false
 
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
-/-- The recursively constructed power is a submodule: each product inclusion is monic,
-and composition preserves monomorphisms. -/
+/-- The recursively constructed power is a submodule: its inclusion is a monomorphism. -/
 private theorem power_inclusion_mono {X : Scheme.{v}} (J : X.IdealSheafData) (n : ℕ) :
     Mono (Scheme.idealSheafPower J.toModulesι n).2 := by
   induction n using Nat.twoStepInduction with
@@ -54,9 +62,8 @@ private theorem power_inclusion_mono {X : Scheme.{v}} (J : X.IdealSheafData) (n 
 
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
-/-- Compare the two ideal-power realizations using their equal affine ranges, then
-factor through each other's inclusions by the cokernel universal property.
-Source: Stacks, Schemes, Tags 01I8 and 01IC; Modules, Tags 01CE and 01AH. -/
+/-- The recursively constructed ideal-sheaf power is isomorphic to `J ^ n`, compatibly with
+their inclusions. -/
 private theorem power_inclusion_iso {X : Scheme.{v}} (J : X.IdealSheafData)
     (n : ℕ) (hn : 0 < n) :
     ∃ e : (Scheme.idealSheafPower J.toModulesι n).1 ≅ (J ^ n).toModules,
@@ -81,8 +88,7 @@ private theorem power_inclusion_iso {X : Scheme.{v}} (J : X.IdealSheafData)
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
 /-- Multiplication has zero image exactly when every ideal section kills every module
-section. Check pure tensors using the sheafification adjunction.
-Source: Stacks, Modules, Tag 01CD; adapted from `ClosedImmersionCoherentEquivalence`. -/
+section. -/
 private theorem product_zero_iff {X : Scheme.{v}} (J : X.IdealSheafData)
     (F : X.Modules) :
     IsZero (Scheme.idealModuleProduct J.toModulesι F) ↔
@@ -134,8 +140,8 @@ private theorem product_zero_iff {X : Scheme.{v}} (J : X.IdealSheafData)
 
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
-/-- An isomorphism of ideal inclusions induces equality of the multiplication-image
-subobjects and thus an isomorphism of the products respecting their inclusions. -/
+/-- An isomorphism of ideal inclusions induces an isomorphism of the products respecting
+their inclusions. -/
 private theorem product_inclusion_iso {X : Scheme.{v}} {A B : X.Modules}
     (a : A ⟶ SheafOfModules.unit X.ringCatSheaf)
     (b : B ⟶ SheafOfModules.unit X.ringCatSheaf)
@@ -167,9 +173,8 @@ private theorem ideal_inclusion_eq {X : Scheme.{v}} {J K : X.IdealSheafData}
 
 open CategoryTheory.Limits MonoidalCategory Opposite Scheme.Modules in
 set_option backward.isDefEq.respectTransparency false in
-/-- Identify the power quotient with the closed pullback unit, then compare adjunctions.
-The quotient projection equation specifies the isomorphism uniquely.
-Source: Stacks, Morphisms of Spaces, Tag 04CJ (1), and Modules, Tag 08KS. -/
+/-- The power quotient is identified with the closed pullback unit, by an isomorphism
+uniquely specified by the quotient projection equation. -/
 private theorem quotient_unit_power {Y Z : Scheme.{v}} (f : Z ⟶ Y)
     [IsClosedImmersion f] (J : Y.IdealSheafData) (n : ℕ) (hn : 0 < n)
     (hk : f.ker = J ^ n)
@@ -205,28 +210,7 @@ private theorem quotient_unit_power {Y Z : Scheme.{v}} (f : Z ⟶ Y)
   exact Adjunction.unit_leftAdjointUniq_hom_app adj₀ adj F
 
 /-- The explicit pushed system satisfies coherence, annihilation, and the quotient
-transition condition. This is an object assertion, without full faithfulness or lifting.
-
-Source: Stacks, Remark 088F, Lemma 087T, equation 0880
-(blueprint: lem-weil-pbc-thickening-system-pushforward-adic).
-Proof: Each `j n` is a closed immersion into a Noetherian scheme, so its source is
-locally Noetherian. Finite pushforward preserves coherence; closed pushforward is
-annihilated by its kernel `J^(n+1)`. On the affine basis the ideal-sheaf power and the
-multiplication-image power have the same range. Factoring their monic inclusions through
-each other gives an isomorphism respecting the inclusions. Tensoring with a module then
-gives the same multiplication image, proving the annihilation conjunct. Since
-`i n ≫ j (n+1) = j n` and both
-projections are closed immersions, `i n` is a closed immersion with kernel
-`(J^(n+1)).comap (j (n+1))`. The closed-immersion unit-quotient theorem, transported to
-the supplied adjunction `ai n` by uniqueness of left adjoints, identifies the adjoint
-of `M.comparison n` with the quotient projection followed by an isomorphism.
-Push this identity along `j (n+1)`. Closed pushforward of ideal powers identifies its
-source quotient with the quotient of the pushed term by `J^(n+1)`. Compose the quotient
-comparison with the pushforward of `M.comparison n`, the pushforward-composition
-comparison, and the comparison induced by `hi n`. This gives the required quotient
-isomorphism. Its composite with the quotient projection is the explicit adjacent
-transition. `Functor.ofOpSequence_map_homOfLE_succ` identifies this with the inverse
-system's adjacent map. These are precisely the three defining conjuncts. -/
+transition condition. This is an object assertion, without full faithfulness or lifting. -/
 theorem thickeningSystemPushforward_isAdic
     {X : Scheme.{v}} [IsNoetherian X] {T : ℕ → Scheme.{v}}
     {i : ∀ n, T n ⟶ T (n + 1)}

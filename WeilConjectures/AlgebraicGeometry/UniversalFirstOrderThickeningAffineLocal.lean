@@ -17,9 +17,12 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenPieces
 /-!
 # Affine-local construction of universal first order thickenings
 
-The affine-open construction in Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3),
-first produces a thickening with the lifting property for affine test schemes.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-affine-local)
+The affine-open construction first produces a thickening with the lifting property for
+affine test schemes.
+
+## References
+
+* [Stacks, Tag 04F3]
 -/
 
 @[expose] public section
@@ -30,8 +33,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Enlarge an open base using the existing open-pieces theorem, after identifying
-an open immersion's source with its open image. -/
+/-- Enlarge an open base of a universal first order thickening, identifying an open
+immersion's source with its open image. -/
 private theorem universal_over_openImmersion
     {Z Z' U X : Scheme.{u}} (g : Z ⟶ U) (i : Z ⟶ Z') (g' : Z' ⟶ U)
     (s : U ⟶ X) [IsOpenImmersion s]
@@ -102,12 +105,7 @@ private theorem exists_affine_thickening {Z X : Scheme.{u}}
       · simpa only [i, Category.assoc] using hc'.2
 
 /-- The affine pieces of the square-zero construction and their gluing produce a
-first-order thickening which has the universal lifting property for affine tests.
-Source: Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3), affine construction.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-affine-local)
-Proof: choose an affine open cover, apply the affine square-zero construction, glue
-the pieces using uniqueness on overlaps, and verify the lifting property whenever
-both the test schemes are affine. -/
+first-order thickening which has the universal lifting property for affine tests. -/
 theorem FormallyUnramified.exists_affine_local_universalFirstOrderThickening
     {Z X : Scheme.{u}} (h : Z ⟶ X) [FormallyUnramified h] :
     ∃ (Z' : Scheme.{u}) (i : Z ⟶ Z') (h' : Z' ⟶ X),

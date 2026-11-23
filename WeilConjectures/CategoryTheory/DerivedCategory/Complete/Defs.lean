@@ -97,7 +97,7 @@ not assume `IsAdicComplete I R`.
   `R lim_n (K ⊗ᴸ R/Iⁿ)` of the tower, `K` is derived complete exactly when it is isomorphic
   to it compatibly with the reduction maps.
 
-## Implementation notes
+## Implementation details
 
 Mathlib's `IsAdicComplete` API is phrased in terms of the quotients `M ⧸ (Iⁿ • ⊤)` of a
 module `M`, whereas the tower here is phrased in terms of the ideal quotients `R ⧸ Iⁿ`,
@@ -150,7 +150,6 @@ that every comparison is between applications of the same constant.
 The constant is the specialization of `DerivedCategory.tensorStructure`, which is built for an
 arbitrary category `A`: building the structure directly for sheaves would check its fields
 against types containing the concrete monoidal instance, with the same cost.
-
 -/
 
 @[expose] public section
@@ -260,8 +259,7 @@ in each variable, which commutes with the shifts in both variables
 (`Functor.CommShift₂Int`, with the usual sign) and is triangulated in each variable, together
 with an isomorphism `ε` from its unit to the unit of `A` placed in degree `0`.
 
-Bundling these instances is an implementation device; see the implementation notes. The
-structure for sheaves of modules is `DerivedCategory.sheafTensorStructure`, made of the
+The structure for sheaves of modules is `DerivedCategory.sheafTensorStructure`, made of the
 derived tensor product and of `DerivedCategory.εSingleFunctorZero`. -/
 structure DerivedCategory.TensorStructure (A : Type u') [Category.{v'} A] [Abelian A]
     [HasDerivedCategory.{w} A] [MonoidalCategory A] (R : Type*) [Ring R] [Linear R A] where
@@ -363,12 +361,7 @@ lemma DerivedCategory.quotPowCone_pt :
   rfl
 
 /-- The tower `n ↦ K ⊗ᴸ R/Iⁿ` of reductions of an object `K` of the derived category, the
-image of `DerivedCategory.quotPowFunctor` under `K ⊗ᴸ -`.
-
-This is a definition of its own, rather than `DerivedCategory.quotPowFunctor J I ⋙
-tensorLeft K` spelled out at each use site, so that the monoidal structure of the derived
-category stays out of the *types* of the declarations below; see the implementation notes.
-Downstream statements should be phrased in terms of the diagram. -/
+image of `DerivedCategory.quotPowFunctor` under `K ⊗ᴸ -`. -/
 noncomputable def DerivedCategory.derivedCompletionDiagram
     (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))) :
     ℕᵒᵖ ⥤ DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
@@ -392,7 +385,7 @@ lemma DerivedCategory.derivedCompletionCone_pt
 
 /-- Derived complete objects (Stacks 091S), for sheaves of modules over the constant ring `R` on a
 site; the repository realises the integral stage `D(Y, 𝒪_E)` on the small étale site with `R = 𝒪_E`,
-`I = 𝔪_E` (`DerivedCategory.derivedCompleteIntegral`). The blueprint's tower `(K ⊗ᴸ A_{E,n})_n` and
+`I = 𝔪_E` (`DerivedCategory.derivedCompleteIntegral`). The tower `(K ⊗ᴸ A_{E,n})_n` and
 its derived limit (Roos/Milnor triangle) are `DerivedCategory.derivedCompletionCone` and
 `CategoryTheory.Pretriangulated.IsHomotopyLimit`.
 

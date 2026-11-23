@@ -9,29 +9,16 @@ public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNaturali
 public import WeilConjectures.CategoryTheory.Triangulated.BinaryBiproductCone
 
 /-!
-# Unique existence of the supported exterior product from support-acyclic resolutions
+# K-flat support-acyclic resolutions
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
-
-Suppose that every K-flat complex with bounded below cohomology admits a quasi-isomorphism to
-a K-flat complex on which the support unit is invertible. Then the resolution normalization
-`IsResolutionSupportedExteriorProduct` determines a unique morphism. Uniqueness: on such
-representatives of both inputs the tensor product of the two units is invertible.
-Existence: define the morphism on one such pair of representatives. Two such representatives
-are connected by a K-flat homotopy pushout of a K-flat roof, followed by a further
-resolution, and the normalization transfers along quasi-isomorphisms of K-flat complexes
-(`resolutionSupportedExteriorPairing_transfer`). An arbitrary K-flat representative maps to
-such a representative.
+Two K-flat representatives of a bounded below complex are connected by a K-flat homotopy pushout
+of a K-flat roof, followed by a further K-flat resolution on which the support unit is invertible.
 
 ## Main statements
 
 - `exists_kFlat_quasiIso_pushout`: K-flat homotopy pushouts of quasi-isomorphisms.
 - `exists_common_kFlat_supportResolution`: two K-flat representatives map to a common
   K-flat representative on which the support unit is invertible.
-- `existsUnique_isResolutionSupportedExteriorProduct_of_resolutions`: unique existence of
-  the supported exterior product.
 -/
 
 @[expose] public section
@@ -193,94 +180,5 @@ theorem exists_common_kFlat_supportResolution
   · rw [Functor.map_comp, Functor.map_comp, hbc, Category.assoc]
 
 end Resolution
-
-variable {B X Y Z W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
-  [IsClosedImmersion i] [IsClosedImmersion j]
-
-/-- The supported exterior product exists uniquely, provided K-flat complexes with bounded
-below cohomology on both factors admit quasi-isomorphisms to K-flat complexes on which the
-support units are invertible. -/
-theorem existsUnique_isResolutionSupportedExteriorProduct_of_resolutions
-    (hresi : ∀ (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ),
-      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P → ∀ n : ℤ,
-        (DerivedCategory.Q.obj P).IsGE n →
-      ∃ (I : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ) (φ : P ⟶ I), QuasiIso φ ∧
-        (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat I ∧
-        IsIso (exteriorSupportResolutionUnit C i I))
-    (hresj : ∀ (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ),
-      (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q → ∀ n : ℤ,
-        (DerivedCategory.Q.obj Q).IsGE n →
-      ∃ (J : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ) (ψ : Q ⟶ J), QuasiIso ψ ∧
-        (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat J ∧
-        IsIso (exteriorSupportResolutionUnit C j J))
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology C))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology C))
-    (hK : ∃ n : ℤ, K.IsGE n) (hL : ∃ n : ℤ, L.IsGE n) :
-    ∃! κ : (rightDerivedSectionsWithSupport C i).obj K ⊗
-        (rightDerivedSectionsWithSupport C j).obj L ⟶
-      (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).obj
-        (externalProduct C f g K L),
-      IsResolutionSupportedExteriorProduct C f g i j K L κ := by
-  obtain ⟨n, hn⟩ := hK
-  obtain ⟨m, hm⟩ := hL
-  obtain ⟨I₀, eI₀, hI₀, huI₀⟩ := exists_kFlat_supportResolution_iso C i hresi K n hn
-  obtain ⟨J₀, eJ₀, hJ₀, huJ₀⟩ := exists_kFlat_supportResolution_iso C j hresj L m hm
-  let A₀ := tensorHom
-    (exteriorSupportResolutionUnit C i I₀ ≫ (rightDerivedSectionsWithSupport C i).map eI₀.hom)
-    (exteriorSupportResolutionUnit C j J₀ ≫ (rightDerivedSectionsWithSupport C j).map eJ₀.hom)
-  let Ψ₀ := resolutionSupportedExteriorPairing C f g i j I₀ J₀ hI₀ hJ₀ ≫
-    (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-      (derivedTensorHom C ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map eI₀.hom)
-        ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map eJ₀.hom))
-  have hA₀ : A₀ ≫ inv A₀ ≫ Ψ₀ = Ψ₀ := IsIso.hom_inv_id_assoc _ _
-  refine ⟨inv A₀ ≫ Ψ₀, (isResolutionSupportedExteriorProduct_iff C f g i j K L _).2 ?_,
-    fun κ hκ ↦ ?_⟩
-  · intro P Q hP hQ eP eQ
-    -- resolve `P` and `Q` by complexes with invertible support units
-    have : (DerivedCategory.Q.obj P).IsGE n := DerivedCategory.TStructure.t.isGE_of_iso eP.symm n
-    obtain ⟨I, φ, hφ, hI, -⟩ := hresi P hP n this
-    have : (DerivedCategory.Q.obj Q).IsGE m := DerivedCategory.TStructure.t.isGE_of_iso eQ.symm m
-    obtain ⟨J, ψ, hψ, hJ, -⟩ := hresj Q hQ m this
-    have : IsIso (DerivedCategory.Q.map φ) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso (φ := φ)).2 hφ
-    have : IsIso (DerivedCategory.Q.map ψ) :=
-      (DerivedCategory.isIso_Q_map_iff_quasiIso (φ := ψ)).2 hψ
-    let eI := (asIso (DerivedCategory.Q.map φ)).symm ≪≫ eP
-    let eJ := (asIso (DerivedCategory.Q.map ψ)).symm ≪≫ eQ
-    -- common resolutions of `I, I₀` and of `J, J₀`
-    have : (DerivedCategory.Q.obj I).IsGE n := DerivedCategory.TStructure.t.isGE_of_iso eI.symm n
-    obtain ⟨G, b, c, hb, hc, hG, huG, hbc⟩ :=
-      exists_common_kFlat_supportResolution C i hresi hI hI₀ (eI ≪≫ eI₀.symm) n this
-    have : (DerivedCategory.Q.obj J).IsGE m := DerivedCategory.TStructure.t.isGE_of_iso eJ.symm m
-    obtain ⟨G', b', c', hb', hc', hG', huG', hbc'⟩ :=
-      exists_common_kFlat_supportResolution C j hresj hJ hJ₀ (eJ ≪≫ eJ₀.symm) m this
-    let eG := (asIso (DerivedCategory.Q.map c)).symm ≪≫ eI₀
-    let eG' := (asIso (DerivedCategory.Q.map c')).symm ≪≫ eJ₀
-    let A := tensorHom
-      (exteriorSupportResolutionUnit C i G ≫ (rightDerivedSectionsWithSupport C i).map eG.hom)
-      (exteriorSupportResolutionUnit C j G' ≫ (rightDerivedSectionsWithSupport C j).map eG'.hom)
-    let κ := inv A ≫ resolutionSupportedExteriorPairing C f g i j G G' hG hG' ≫
-      (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-        (derivedTensorHom C ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map eG.hom)
-          ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map eG'.hom))
-    have hκG : A ≫ κ = _ := IsIso.hom_inv_id_assoc _ _
-    have hcG : DerivedCategory.Q.map c ≫ eG.hom = eI₀.hom := by simp [eG]
-    have hcG' : DerivedCategory.Q.map c' ≫ eG'.hom = eJ₀.hom := by simp [eG']
-    have hbG : DerivedCategory.Q.map b ≫ eG.hom = eI.hom := by simp [eG, hbc]
-    have hbG' : DerivedCategory.Q.map b' ≫ eG'.hom = eJ.hom := by simp [eG', hbc']
-    have hφI : DerivedCategory.Q.map φ ≫ eI.hom = eP.hom := by simp [eI]
-    have hψJ : DerivedCategory.Q.map ψ ≫ eJ.hom = eQ.hom := by simp [eJ]
-    have h₀ := resolutionSupportedExteriorPairing_transfer C f g i j c c' hI₀ hG hJ₀ hG'
-      _ _ _ _ hcG hcG' κ hκG
-    have hκ : inv A₀ ≫ Ψ₀ = κ := by
-      rw [← cancel_epi A₀, hA₀]
-      exact h₀.symm
-    rw [hκ]
-    exact resolutionSupportedExteriorPairing_transfer C f g i j φ ψ hP hI hQ hJ _ _ _ _ hφI hψJ κ
-      (resolutionSupportedExteriorPairing_transfer C f g i j b b' hI hG hJ hG'
-        _ _ _ _ hbG hbG' κ hκG)
-  · have h := (isResolutionSupportedExteriorProduct_iff C f g i j K L κ).1 hκ I₀ J₀ hI₀ hJ₀ eI₀ eJ₀
-    rw [← cancel_epi A₀, hA₀]
-    exact h
 
 end AlgebraicGeometry.Etale

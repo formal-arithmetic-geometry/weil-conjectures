@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 /-!
 # Ambient derived restriction comparisons for the bounded-below interface
 
-Source: Stacks Project, Tags 03FD, 0D6J and 07A4
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons).
+Source: Stacks Project, Tags 03FD, 0D6J and 07A4.
 The original bounded-below isomorphisms are reexported. These definitions give
 canonical ambient maps whose restrictions to D+ are those comparisons.
 -/
@@ -27,7 +26,7 @@ open scoped CategoryTheory.Functor
 namespace CategoryTheory.Functor
 
 /-- The restriction square transported through two specified geometric comparisons.
-Source: Stacks 07A4 (blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons). -/
+Source: Stacks 07A4. -/
 def exactDerivedComparisonSquare
     {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
     [Abelian A] [Abelian B] [Abelian D] [Abelian E]
@@ -49,7 +48,7 @@ def exactDerivedComparisonSquare
     Functor.isoWhiskerRight δ.symm G₂.mapDerivedCategory
 
 /-- An exact geometric representative in the specified derived comparison.
-Source: Stacks 07A4 (blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons). -/
+Source: Stacks 07A4. -/
 def exactDerivedRepresentative
     {A E : Type*} [Category A] [Category E] [Abelian A] [Abelian E]
     [HasDerivedCategory A] [HasDerivedCategory E]
@@ -65,8 +64,7 @@ end CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- Exact inverse-image/restriction comparison on the ambient derived categories.
-Source: Stacks 07A4 and 0D6J
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons). -/
+Source: Stacks 07A4 and 0D6J. -/
 def scalarRestrictionPullbackIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W) :
@@ -82,8 +80,7 @@ def scalarRestrictionPullbackIso
 
 /-- The ambient direct-image comparison, as the mate of the exact inverse-image square.
 On D+ its counit normalization is the recorded canonical bounded-below comparison.
-Source: Stacks 0D6J and 07A4
-(blueprint: lem-sbc-canonical-restrict-scalars-functor-comparisons). -/
+Source: Stacks 0D6J and 07A4. -/
 def scalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z W : Scheme.{u}} (f : Z ⟶ W) :

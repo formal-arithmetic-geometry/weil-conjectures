@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.RingedScalarTensorSections
 /-! # The ordinary scalar tensor comparison preserves insertion of one
 
 Source: Stacks Project, Tags 03EK and 03CZ.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -93,22 +92,7 @@ private theorem single_second {N N' : Mod R} (g : N ⟶ N') (P : Cx R) (q : ℤ)
 /-- The explicit ordinary comparison identifies the two insertion-of-one maps.
 There is no derived functor, K-flatness hypothesis, inverse limit or tower here.
 
-Source: Stacks Project, Modules on Sites, Tag 03EK, tensor cancellation identity;
-Modules on Sites, Tag 03CZ, lemma-adjointness-tensor-restrict.
-(auxiliary; not a blueprint node).
-
-Proof: evaluate the maps of complexes in degree q. The right unitor includes the
-(q,0) summand, and the single-complex contraction in scalarTensorComplexIso
-projects back to that summand; all other summands are zero. On that summand the
-coefficient unit takes x to x tensor 1. Symmetry takes it to 1 tensor x. The inverse
-of the normalized cancellation isomorphism takes this to 1 tensor (1 tensor x),
-and the left unitor takes it to 1 tensor x in scalar extension. This is precisely
-adicFiniteOrdinaryUnit, by its insertion normalization. The section formula of
-exists_changeOfRings_tensorCancellation_sections proves the cancellation equation.
-Equality after the presheaf tensor sheafification unit suffices by the sheafification
-adjunction; pure tensors suffice there by tensor induction. Thus equality holds
-in each degree and hence for the chain maps. The proof also covers zero modules,
-zero rings, and unbounded complexes, since each degree uses only the (q,0) summand. -/
+Source: Stacks Project, Modules on Sites, Tags 03EK and 03CZ. -/
 theorem scalarTensorComplexIso_unit (f : R ⟶ S) (P : Cx R) :
     scalarTensorUnit f P ≫ (scalarTensorComplexIso f P).hom =
       adicFiniteOrdinaryUnitComplex f P := by

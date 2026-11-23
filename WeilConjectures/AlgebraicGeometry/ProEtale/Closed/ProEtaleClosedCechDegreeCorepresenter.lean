@@ -15,9 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedLiftGener
 import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Corepresentability of closed Čech cochains
-
-Source: the free retained-generator construction in Step 3 of
-`lem-sp-proetale-closed-injective-affine-cech`.
 -/
 
 @[expose] public section
@@ -211,26 +208,7 @@ private theorem closedSection_corepresentable
   exact ((loc N).apply_symm_apply _).trans (hx.trans hnx.symm)
 
 /-- Each degree of the closed Čech coefficient functor is corepresentable in
-ambient fixed-coefficient module sheaves.
-
-Source: the free-module construction in Step 3 of
-`lem-sp-proetale-closed-injective-affine-cech`.
-(blueprint: lem-sp-proetale-closed-cech-degree-corepresenter).
-
-Proof: write z = b.closedComplement, a closed immersion with quasi-compact
-open complement, and let ℓ_z ⊣ z^* be the extra left adjoint of
-`lem-sp-proetale-closed-module-extra-adjoint` (Stacks 09BL (4), module version).
-For an object W over V, viewed over B by composition with V → P → B, sections
-of P^* G at W are sections of G at W, since pro-étale localization is
-restriction to the slice. By the free-module universal property and Yoneda,
-sections of z_* z^* M at W are Hom(A[h_W], z_* z^* M), which the z^* ⊣ z_*
-adjunction identifies with Hom(z^* A[h_W], z^* M) and ℓ_z ⊣ z^* with
-Hom(ℓ_z z^* A[h_W], M). All these bijections are additive and natural in M.
-Degree k of the Čech complex is the finite product of the sections at the
-intersections indexed by y : Fin (k+1) → Fin n, so it is corepresented by the
-finite coproduct of the corresponding objects ℓ_z z^* A[h_W_y]. No cover,
-affineness, or injectivity is required. The zero ring and empty family give
-zero corepresenters. -/
+ambient fixed-coefficient module sheaves. -/
 theorem exists_closedCech_degreeCorepresenter
     (A : Type u) [CommRing A] {B O : Scheme.{u}}
     (b : O ⟶ B) [IsOpenImmersion b] [QuasiCompact b]

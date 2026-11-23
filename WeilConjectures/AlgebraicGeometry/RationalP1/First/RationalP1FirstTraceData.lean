@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1DiagonalTen
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedAmbientExchange
 
 /-! # The opposite exchange for the first projective-line trace
-
-Source: the First identity in the current rational projective-line triangle proof.
-(blueprint: def-sfb-rational-p1-first-trace-data).
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +31,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})
 
 /-- The opposite mate of the fixed self-square comparison, followed by the specified
-line comparison. It transports the q direct image of T to the first direct image of N.
-Source: First identity, trace base change
-(blueprint: def-sfb-rational-p1-first-trace-data). -/
+line comparison. It transports the q direct image of T to the first direct image of N. -/
 @[irreducible]
 def firstTraceExchange
     (T : DerivedCategory (Modules Λ (ProjectiveLine Y)))

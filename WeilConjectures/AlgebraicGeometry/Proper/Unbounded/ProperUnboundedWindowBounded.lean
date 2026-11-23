@@ -24,10 +24,6 @@ public import WeilConjectures.Compactification.Defs
 /-!
 # Proper pushforward and uniformly bounded coproducts
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-lem-proper-unbounded-window-ii/sk-lem-proper-unbounded-window-ii-bounded.md
-(blueprint: lemma-proper-direct-image-unbounded-complexes--3).
-
 Both coproducts are ambient unbounded derived coproducts. They are exhibited by colimit
 cofans, so their existence is part of the conclusion, rather than an extra hypothesis.
 The displayed `desc` is the canonical comparison: its composite with the i-th injection
@@ -51,50 +47,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- Proper derived module pushforward commutes with sums of ind-constructible complexes
 in a common integer interval, for the finite subextension E of the fixed algebraic closure.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii-bounded, statement
-(blueprint: lemma-proper-direct-image-unbounded-complexes--3).
-
-Proof for stage 3:
-1. The module categories are Grothendieck abelian and have K-injective resolutions
-   (prop-pur-kinjective-resolutions-exist) and enough injectives
-   (lem-sp-grothendieck-enough-injectives). The additive left exact module pushforward
-   is the recorded full composite (sk-def-sfb-module-pushforward-pullback), and its
-   total right derivation is additive, triangulated and shift-compatible
-   (lem-pc-right-derived-functor-triangulated). Coproduct universality defines the
-   comparison and makes it natural in componentwise maps.
-2. Ambient derived sums are termwise (lem-kun-grothendieck-derived-coproducts).
-   The cone formula (def-weil-abstract-derived-category) identifies the sum of the
-   cones of chain maps with the cone of their sum, including its boundary and shift.
-   Thus sums of distinguished triangles are distinguished. Cohomology commutes with
-   these sums and truncations retain ind-constructibility (corollary-ambient-ind-derived).
-3. Properness gives quasi-compactness and quasi-separatedness
-   (def-weil-proper-morphism, def-weil-finite-type-morphism,
-   lem-pc-separated-quasi-separated). Higher direct images commute with sums on the
-   heart by det-proper-heart-continuity-direct-image. No global fibre dimension bound
-   is needed here. Its ring-sheaf formulation is applied to the actual pulled-back
-   condensed coefficients, with the equivalent internal-module encoding and the
-   restriction of scalars in the full module pushforward.
-4. If b<a, every cohomology object of every input vanishes, so all inputs and their
-   images are zero (lem-weil-pbc-unbounded-derived-iso-cohomology). This includes the
-   empty family. If a=b, identify M_i with H^a(M_i)[-a]
-   (lem-sf-derived-concentrated-single). By lem-sp-derived-functor-single-identification
-   and src-right-derived-functor-plus-compatibility, H^n of the comparison is the
-   sum comparison for R^(n-a)p_* on these sheaves. For n-a>=0 use step 3; for n-a<0
-   both sides vanish by an injective resolution starting in degree zero. Naturality
-   and the coprojection equation identify this map with the canonical comparison.
-   Cohomology detects isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology).
-5. For a<b, use the truncation triangle tau_le_(b-1) M_i -> M_i -> H^b(M_i)[-b]
-   (proposition-open-direct-image-preserves-finite, theorem-pbc-injective-acyclicity), identifying
-   tau_le_b M_i with M_i by cohomology. Its outer terms are ind-constructible, in intervals
-   [a,b-1] and [b,b] (corollary-ambient-ind-derived). Induction on b-a gives the
-   comparison isomorphism for the first terms; step 4 gives it for the third terms.
-6. Sum the pushed-forward triangles for the upper row and push forward the summed
-   source triangles for the lower row. Both are distinguished by steps 1 and 2.
-   The comparison maps form a morphism of triangles: check the first two squares
-   on every coprojection using functoriality. For the boundary square do the same
-   with the shifted coprojections and naturality of the functor's shift isomorphism;
-   this gives exactly the shifted first component. The first and third comparisons
-   are isomorphisms, so the middle one is too (lem-sf-triangle-morphism-iso).
 -/
 theorem properUnboundedWindowBounded
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -145,50 +97,6 @@ theorem properUnboundedWindowBounded
 
 /-- Proper derived module pushforward commutes with sums of ind-constructible complexes
 in a common integer interval, for the finite-subextension-valued condensed algebraic closure.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window-ii-bounded, statement
-(blueprint: lemma-proper-direct-image-unbounded-complexes--3).
-
-Proof for stage 3:
-1. The module categories are Grothendieck abelian and have K-injective resolutions
-   (prop-pur-kinjective-resolutions-exist) and enough injectives
-   (lem-sp-grothendieck-enough-injectives). The additive left exact module pushforward
-   is the recorded full composite (sk-def-sfb-module-pushforward-pullback), and its
-   total right derivation is additive, triangulated and shift-compatible
-   (lem-pc-right-derived-functor-triangulated). Coproduct universality defines the
-   comparison and makes it natural in componentwise maps.
-2. Ambient derived sums are termwise (lem-kun-grothendieck-derived-coproducts).
-   The cone formula (def-weil-abstract-derived-category) identifies the sum of the
-   cones of chain maps with the cone of their sum, including its boundary and shift.
-   Thus sums of distinguished triangles are distinguished. Cohomology commutes with
-   these sums and truncations retain ind-constructibility (corollary-ambient-ind-derived).
-3. Properness gives quasi-compactness and quasi-separatedness
-   (def-weil-proper-morphism, def-weil-finite-type-morphism,
-   lem-pc-separated-quasi-separated). Higher direct images commute with sums on the
-   heart by det-proper-heart-continuity-direct-image. No global fibre dimension bound
-   is needed here. Its ring-sheaf formulation is applied to the actual pulled-back
-   condensed coefficients, with the equivalent internal-module encoding and the
-   restriction of scalars in the full module pushforward.
-4. If b<a, every cohomology object of every input vanishes, so all inputs and their
-   images are zero (lem-weil-pbc-unbounded-derived-iso-cohomology). This includes the
-   empty family. If a=b, identify M_i with H^a(M_i)[-a]
-   (lem-sf-derived-concentrated-single). By lem-sp-derived-functor-single-identification
-   and src-right-derived-functor-plus-compatibility, H^n of the comparison is the
-   sum comparison for R^(n-a)p_* on these sheaves. For n-a>=0 use step 3; for n-a<0
-   both sides vanish by an injective resolution starting in degree zero. Naturality
-   and the coprojection equation identify this map with the canonical comparison.
-   Cohomology detects isomorphisms (lem-weil-pbc-unbounded-derived-iso-cohomology).
-5. For a<b, use the truncation triangle tau_le_(b-1) M_i -> M_i -> H^b(M_i)[-b]
-   (proposition-open-direct-image-preserves-finite, theorem-pbc-injective-acyclicity), identifying
-   tau_le_b M_i with M_i by cohomology. Its outer terms are ind-constructible, in intervals
-   [a,b-1] and [b,b] (corollary-ambient-ind-derived). Induction on b-a gives the
-   comparison isomorphism for the first terms; step 4 gives it for the third terms.
-6. Sum the pushed-forward triangles for the upper row and push forward the summed
-   source triangles for the lower row. Both are distinguished by steps 1 and 2.
-   The comparison maps form a morphism of triangles: check the first two squares
-   on every coprojection using functoriality. For the boundary square do the same
-   with the shifted coprojections and naturality of the functor's shift isomorphism;
-   this gives exactly the shifted first component. The first and third comparisons
-   are isomorphisms, so the middle one is too (lem-sf-triangle-morphism-iso).
 -/
 theorem properUnboundedWindowBounded_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]

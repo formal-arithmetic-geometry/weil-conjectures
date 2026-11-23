@@ -50,31 +50,7 @@ private theorem shortExact_cycles_image
 /-- Extend a prescribed augmented boundary comparison through one complex degree.
 The conclusion concerns just the column in degree `p` and its outgoing boundary;
 no maps in other original-object columns are chosen.
-
-Source: Stacks Project, Tags 015H, 015I and 015K, comparison construction;
-(blueprint: lem-weil-pbc-ce-comparison-column-step).
-
-Proof: Write the two short exact sequences of resolution complexes
-0 → Bᵖ → Zᵖ → Hᵖ → 0 and 0 → Zᵖ → Iᵖ → Bᵠ → 0, where q = p + 1,
-and the corresponding sequences for J. Evaluation in the resolution degree is
-exact, so these sequences are degreewise short exact. The exact additive functor
-F preserves their exactness and their augmented quasi-isomorphisms. Identify the
-boundary of the single-degree augmentation with the single complex on Bᵖ(K).
-The displayed equation on Kᵖ⁻¹ is the boundary augmentation equation: cancel the
-epimorphism Kᵖ⁻¹ → Bᵖ(K), whose image under F is still an epimorphism.
-Lift the cohomology augmentation into the injective homology column of J along
-the monomorphic quasi-isomorphism from F(Hᵖ(K))[0] to the source homology column,
-using the bounded-below injective lifting property of Tag 013P(2). Apply
-exists_horseshoe_morphism_lift_exact_source to the boundary/cycle/homology sequence,
-with the prescribed incoming boundary map and this homology map, to obtain a cycle
-map. Independently lift the outgoing boundary augmentation by Tag 013P(2). Apply
-the same horseshoe theorem to the cycle/object/outgoing-boundary sequence. Its
-middle map is x and its chosen outgoing endpoint is c. Its augmentation equation
-is the first conclusion and its outgoing endpoint equation is the fourth.
-The incoming endpoint equation composed with the boundary-to-cycle inclusion is
-the third conclusion. The chosen outgoing endpoint has the second augmentation
-equation by its construction. Thus each endpoint is chosen once, and all squares
-in the conclusion involve those same chosen maps. -/
+Stacks Project, Tags 015H, 015I and 015K. -/
 theorem exists_cartanEilenberg_comparison_column_step
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]

@@ -166,6 +166,12 @@ theorem isMixedOfWeightsAtMost_iff_filtrationClosure :
   rw [ObjectProperty.filtrationClosure_iff]
   rfl
 
+/-- A Weil sheaf punctually `ι`-pure of weight `w` is mixed of weights at most `w`. -/
+theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost (h : F.IsPunctuallyPureOfWeight ι w) :
+    F.IsMixedOfWeightsAtMost ι w := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure]
+  exact ObjectProperty.le_filtrationClosure _ ⟨w, le_rfl, h⟩
+
 /-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: intersect
 the filtration (blueprint: `definition-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_mono (i : G ⟶ F) [Mono i] (h : F.IsMixedOfWeightsAtMost ι w) :
@@ -197,9 +203,7 @@ theorem IsMixedOfWeightsAtMost.of_iso (e : F ≅ G) (h : F.IsMixedOfWeightsAtMos
   exact ⟨n, H, φ, h0, ⟨e' ≪≫ e⟩, hmono, hpure⟩
 
 /-- In an exact sequence `A ⟶ B ⟶ C` of Weil sheaves whose outer terms are mixed of weights at
-most `w`, the middle term is mixed of weights at most `w`: the kernel of `B ⟶ C` is a quotient
-of `A`, and the cokernel of its inclusion is a subobject of `C`
-(blueprint: `lemma-weight-bounds-partitions`, step 0). -/
+most `w`, the middle term is mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} (hS : S.Exact)
     (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w) (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) :
     S.X₂.IsMixedOfWeightsAtMost ι w :=
@@ -209,9 +213,7 @@ theorem IsMixedOfWeightsAtMost.of_exact {S : ShortComplex (WeilSheaf k₀ l X)} 
 
 
 /-- The middle term of a short exact sequence `0 ⟶ G' ⟶ G ⟶ G'' ⟶ 0` of Weil sheaves whose outer
-terms are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtration of
-`G'` with the inverse image of that of `G''` (blueprint:
-`proposition-weights-under-usual-operations--2`, part 2). -/
+terms are mixed of weights at most `w` is mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_shortExact {S : ShortComplex (WeilSheaf k₀ l X)}
     (hS : S.ShortExact) (h₁ : S.X₁.IsMixedOfWeightsAtMost ι w)
     (h₃ : S.X₃.IsMixedOfWeightsAtMost ι w) : S.X₂.IsMixedOfWeightsAtMost ι w :=

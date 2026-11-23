@@ -43,19 +43,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 open CochainComplex HomComplex in
 /-- The resolution-local Ext comparison takes a represented cocycle to its homology class.
-Source: Stacks Project, Tag 06XR, Lemma 13.27.2 (injective resolution computation).
-
-Proof: Identify Ext with cohomology classes in the Hom complex from single(A,0) to
-I.cochainComplex by InjectiveResolution.extAddEquivCohomologyClass. The from-single
-additive equivalence identifies this Hom complex with Hom(A,I.cochainComplex),
-commuting with differentials by Cochain.δ_fromSingleMk. Apply e degreewise and
-then take homology. Restriction from integer degrees to nonnegative degrees
-identifies this homology with that of H(I.cocomplex), including degree zero
-because the negative terms are zero. The formula extEquivCohomologyClass_extMk
-identifies the Ext class with its from-single cocycle class. The image of its
-cycle inclusion is e(s); monicity of iCycles identifies that cycle with c, so
-its image is homologyπ(c). This is an objectwise statement about a supplied
-resolution; it asserts neither naturality nor a comparison with rightDerived. -/
+Source: Stacks Project, Tag 06XR, Lemma 13.27.2 (injective resolution computation). -/
 private theorem exists_ext_resolution_cocycle_iso
     {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{v} C]
     (A : C) (H : C ⥤ AddCommGrpCat.{v}) [H.Additive]
@@ -202,27 +190,7 @@ private lemma resolution_comparison_naturality
 set_option linter.unusedVariables false in
 /-- A represented additive functor has an Ext comparison normalized on every resolution.
 
-Source: Stacks Project, Derived Categories, Tag 06XR, Lemma 13.27.2;
-Tag 013P, comparison maps between injective resolutions.
-(blueprint: lem-sc-ext-right-derived-cocycle-comparison)
-
-Proof: For the chosen injective resolution of Y, identify Ext from A with cohomology
-classes of Hom(single(A,0),I) using extAddEquivCohomologyClass. The from-single
-additive equivalence identifies that Hom complex with Hom(A,I) degreewise, commuting
-with differentials. Apply the given natural isomorphism e degreewise and take homology;
-compose with the inverse of isoRightDerivedObj. This defines the inverse component
-of x. For a coefficient map, lift it between injective resolutions. Postcomposition
-commutes with the from-single equivalence and e; extMk_comp_mk₀ identifies the map
-on Ext classes, and isoRightDerivedObj_naturality identifies the derived map.
-Thus these components assemble into a natural isomorphism. For another resolution,
-use a comparison lifting the identity: the same naturality calculation, together
-with homotopy independence, identifies its computation with the chosen one.
-The identity extEquivCohomologyClass_extMk says that the class of s is the class of
-its from-single cocycle. Its image under the complex isomorphism has underlying
-cycle e(s). Since iCycles is monic, it is precisely c when hc holds, and the homology
-class is homologyπ(c). This proves the displayed normalization for every I.
-The argument includes degree zero, the zero object, and arbitrary zero cocycles;
-no projectivity of A or exactness of H is used. -/
+Source: Stacks Project, Derived Categories, Tag 06XR, Lemma 13.27.2; Tag 013P. -/
 theorem exists_ext_rightDerived_cocycle_comparison
     {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{v} C]
     [HasInjectiveResolutions C] (A : C) (H : C ⥤ AddCommGrpCat.{v}) [H.Additive]

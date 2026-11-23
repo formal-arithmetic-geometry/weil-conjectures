@@ -91,8 +91,7 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ElementModulePresheafExte
 # Ringed presentation comparison data
 
 Source: Stacks Project, Modules on Sites, Tag 03CR (equivalence case), and
-Algebraization, Tag 099J (opening presentation reduction)
-(blueprint: lem-weil-pbc-ringed-presentation-transport).
+Algebraization, Tag 099J (opening presentation reduction).
 
 ## Main definitions
 
@@ -117,20 +116,20 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- The existing module category, with commutativity forgotten.
-Source: Stacks 03CR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 03CR. -/
 abbrev PresentationModules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :=
   ringedSiteModules.{u} (localCoefficientRings R)
 
 /-- The standard unbounded derived category of the recorded module category.
-Source: Stacks 05RR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 05RR. -/
 abbrev PresentationDerived {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :=
   letI := HasDerivedCategory.standard (PresentationModules R)
   DerivedCategory (PresentationModules R)
 
 /-- The localization functor for the standard derived-category model.
-Source: Stacks 05RR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 05RR. -/
 def presentationQ {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :
     CochainComplex (PresentationModules R) ℤ ⥤ PresentationDerived R :=
@@ -138,7 +137,7 @@ def presentationQ {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   DerivedCategory.Q
 
 /-- The existing derived internal Hom in the standard localization model.
-Source: Stacks 08J7 (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 08J7. -/
 def presentationRHom {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :
     (PresentationDerived R)ᵒᵖ × PresentationDerived R ⥤ PresentationDerived R :=
@@ -146,14 +145,14 @@ def presentationRHom {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   derivedInternalHomOfUniverses.{u, u, u, u + 1} J R
 
 /-- The underlying sheaf of sets of a module sheaf.
-Source: Stacks 03CR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 03CR. -/
 abbrev presentationForget {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) :=
   SheafOfModules.toSheaf (localCoefficientRings R) ⋙
     sheafCompose J (forget AddCommGrpCat.{u})
 
 /-- Multiplication by an actual global ring section on the rank-one module.
-Source: Stacks 0997 (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 0997. -/
 def presentationScalar {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (s : (R.obj ⋙ forget CommRingCat).sections) :
     SheafOfModules.unit (localCoefficientRings R) ⟶
@@ -161,7 +160,7 @@ def presentationScalar {C : Type u} [SmallCategory C] {J : GrothendieckTopology 
   val := PresheafOfModules.sectionsSMul _ s
 
 /-- Termwise application of an additive functor, with its instance made explicit.
-Source: Stacks 05RR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 05RR. -/
 def presentationComplexMap {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
@@ -171,7 +170,7 @@ def presentationComplexMap {C D : Type u} [SmallCategory C] [SmallCategory D]
   F.mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The exact termwise functor localized at quasi-isomorphisms; no resolution is chosen.
-Source: Stacks 05RR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 05RR. -/
 def presentationDerivedMap {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
@@ -189,8 +188,7 @@ def presentationDerivedMap {C D : Type u} [SmallCategory C] [SmallCategory D]
 specified functor. The localization equation includes its canonical map from the ring.
 The scalar comparison is an equality of multiplication maps, so imposes precisely the
 transport of the chosen section, rather than an arbitrary choice of an inverted scalar.
-Source: Stacks 03CR, 08JB and 0997
-(blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 03CR, 08JB and 0997. -/
 structure RingedPresentationFunctor
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -219,7 +217,7 @@ structure RingedPresentationFunctor
         unit.hom ≫ ringedSectionLocalizationUnitOfUniverses S t
 
 /-- The functor on derived categories attached to the recorded exact functor.
-Source: Stacks 05RR (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 05RR. -/
 abbrev RingedPresentationFunctor.derived
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -229,7 +227,7 @@ abbrev RingedPresentationFunctor.derived
 
 /-- The commutative restricted ring on the existing element site: `(U,s) ↦ R(U)`.
 This retains exactly the underlying ring of `elementRing`, with no new site construction.
-Source: Stacks 0791 and 04IE (blueprint: lem-weil-pbc-ringed-presentation-transport). -/
+Source: Stacks 0791 and 04IE. -/
 def presentationElementRing {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (A : Sheaf J (Type u)) :
     Sheaf (elementTopology A) CommRingCat.{u} :=
@@ -237,8 +235,7 @@ def presentationElementRing {C : Type u} [SmallCategory C] {J : GrothendieckTopo
     (elementProjection A).op_comp_isSheaf_of_isSheaf _ _ _ R.property⟩
 
 /-- Every map of element sites induced by a sheaf arrow is continuous.
-Source: Stacks 04J4; continuity is the last assertion of element-site descent.
-(blueprint: def-weil-pbc-ringed-presentation-comparison-data). -/
+Source: Stacks 04J4. -/
 theorem presentationElementRestriction_continuous
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {A B : Sheaf J (Type u)} (b : B ⟶ A) :
@@ -257,9 +254,7 @@ private theorem elementRestrictionRelocalization
   rfl
 
 /-- Successive element restriction evaluates a module at the same underlying site object.
-Source: Stacks 04J4; both composites are sectionwise restriction, so the comparison is
-identity on every section and commutes with every module restriction map.
-(blueprint: def-weil-pbc-ringed-presentation-comparison-data). -/
+Source: Stacks 04J4. -/
 theorem presentationElementRestriction_relocalization
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) {A B : Sheaf J (Type u)} (b : B ⟶ A)
@@ -270,8 +265,7 @@ theorem presentationElementRestriction_relocalization
   elementRestrictionRelocalization (localCoefficientRings R) b h
 
 /-- A module equivalence with the comparisons which are not formal consequences
-of exact equivalence. Source: Stacks 03CR and 08J7.
-(blueprint: def-weil-pbc-ringed-presentation-comparison-data). -/
+of exact equivalence. Source: Stacks 03CR and 08J7. -/
 structure RingedPresentationEquivalenceCore
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

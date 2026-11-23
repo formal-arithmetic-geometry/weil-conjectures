@@ -23,14 +23,7 @@ private theorem nativeTensorRaw
   rfl
 
 /-- The derived étale tensor is definitionally the tensor induced by localization.
-This is the concrete specialization needed to instantiate the generic Koszul symmetry.
-Source: the tensor construction in `WeilConjectures.SixFunctors.Etale.Derived.Tensor`;
-proof step 2 of `definition-verdier-dual-evaluation--4` (blueprint:
-lem-weil-duality-pairing-etale-tensor-raw).
-
-Proof: unfold `derivedTensor`, which is the curried tensor of the derived monoidal
-instance associated with the quasi-isomorphism localization. The resulting expression
-is exactly the displayed raw curried tensor. -/
+This is the concrete specialization needed to instantiate the generic Koszul symmetry. -/
 theorem etaleTensorRaw
     (B : Type c) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]

@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickening
 # Globalization of affine lifting for universal first order thickenings
 
 The affine-test lifting property globalizes by affine covers and morphism gluing.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-globalization)
+
+## References
+
+* [Stacks, Tag 04F3]
 -/
 
 @[expose] public section
@@ -23,8 +26,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Open base change preserves a first order thickening: its kernel ideals are
-transported by the isomorphism on sections of the open immersion. -/
+/-- Open base change preserves a first order thickening. -/
 private theorem firstOrderThickening_pullback_open
     {T T' U' : Scheme.{u}} (j : T ⟶ T') (g : U' ⟶ T')
     [IsOpenImmersion g] (hj : IsFirstOrderThickening j) :
@@ -50,8 +52,7 @@ private theorem firstOrderThickening_pullback_open
   exact (Ideal.comap_bot_of_injective _
     (ConcreteCategory.bijective_of_isIso (g.appIso V).inv).1).le
 
-/-- Uniqueness on affine test schemes gives uniqueness on any test scheme, by
-restricting both solutions to an affine cover of the thickened test scheme. -/
+/-- Uniqueness of lifts for affine test schemes gives uniqueness for any test scheme. -/
 private theorem unique_lifts_of_affine_tests
     {Z Z' X : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : ∀ {T T' : Scheme.{u}} [IsAffine T] [IsAffine T'] (j : T ⟶ T')
@@ -81,8 +82,7 @@ private theorem unique_lifts_of_affine_tests
     · rw [Category.assoc, hd.1]
     · rw [← Category.assoc, C.pullbackHom_map, Category.assoc, hd.2, Category.assoc]
 
-/-- Unique solutions on affine tests glue. First establish uniqueness on arbitrary
-schemes; use it on overlaps, glue the local lifts, and check both triangles locally. -/
+/-- Unique solutions on affine tests glue to unique solutions on arbitrary test schemes. -/
 private theorem lifts_of_affine_tests
     {Z Z' X : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : ∀ {T T' : Scheme.{u}} [IsAffine T] [IsAffine T'] (j : T ⟶ T')
@@ -160,10 +160,7 @@ private theorem lifts_of_affine_tests
   exact ⟨c', hc', fun d hd => unique_lifts_of_affine_tests h i h' H j b a hj hab hd hc'⟩
 
 /-- Affine-test universality of a first-order thickening implies universality for all
-test schemes. Source: Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3), gluing step.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-globalization)
-Proof: cover the test target by affine opens, apply affine-test uniqueness and existence,
-then glue the local lifts; equality on overlaps follows from affine-test uniqueness. -/
+test schemes. -/
 theorem isUniversalFirstOrderThickening_of_affine_local
     {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (hi : IsFirstOrderThickening i) (hcomp : i ≫ h' = h)

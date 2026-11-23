@@ -17,9 +17,6 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.CompletedCoefficientRingComparison
 
 /-! # Local integer approximations of reconstructed completed coefficients
-
-Source: the integer-modulo-powers step of the local generator argument.
-(blueprint: lem-sfb-completed-coefficient-local-integers).
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +25,7 @@ universe u v w
 open CategoryTheory Opposite
 namespace CategoryTheory
 
-/-- The sieve where a ring section is an integer modulo a specified natural multiple.
-Source: integer-modulo-powers linearity criterion
-(blueprint: lem-sfb-completed-coefficient-local-integers). -/
+/-- The sieve where a ring section is an integer modulo a specified natural multiple. -/
 def integerApproximationSieve {C : Type u} [Category.{v} C]
     {J : GrothendieckTopology C} (R : Sheaf J RingCat.{w}) (k : ℕ)
     {V : Cᵒᵖ} (r : R.obj.obj V) : Sieve V.unop where
@@ -138,20 +133,7 @@ private theorem reductionCokernelPositive (l : ℕ) [Fact l.Prime]
       (by simp) (by simpa using hd.symm)⟩⟩
 
 /-- Reconstructed completed coefficients are locally integers modulo every positive
-ell-power. This involves only the coefficient ring, with no modules or additive maps.
-
-Source: the first step of lem-sfb-diagonal-completed-free-generator;
-lem-pur-condensed-zl-reduction-mod-ell-power and the normalized coefficient comparison.
-(blueprint: lem-sfb-completed-coefficient-local-integers).
-
-Proof: reduce the section by purZlReduction at exponent n+1. The residue sheaf is the
-constant cyclic ring Z/l^(n+1), so locally its section is the image of an integer a.
-The difference from a is in the kernel of reduction. The cokernel calculation in
-pur_condensed_zl_reduction_mod_ell_power says this kernel is the sheaf image of
-multiplication by l^(n+1). Refine the cover to lift the difference to a section b.
-Reconstruction of section rings preserves the underlying abelian sheaves and their
-integer multiples, so the resulting equality is precisely r=a+l^(n+1)b. The local
-lifts define the displayed covering sieve. This also handles the empty object. -/
+ell-power. This involves only the coefficient ring, with no modules or additive maps. -/
 theorem completedCoefficient_localIntegers (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (n : ℕ) :
     let S := (sheafCompose (Scheme.ProEt.topology X)

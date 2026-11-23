@@ -10,9 +10,6 @@ public import Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 import all Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 
 /-! # Page homology compatibility with the finite interval
-
-Source: Mathlib spectral-object homology data, Page.lean and Cycles.lean.
-(blueprint: lem-sc-spectral-object-bottom-page-interval-compatibility)
 -/
 
 @[expose] public section
@@ -23,25 +20,7 @@ namespace CategoryTheory.Abelian.SpectralObject
 
 /-- Compatibility of the page homology comparison with the canonical maps to
 `H^p(0,r-1)`. This only concerns finite intervals; it uses no inverse map from
-`H^p(0,r-1)` to `H^p(bottom,r-1)` and no map to the abutment.
-Source: Mathlib SpectralObject/SpectralSequence.lean (`spectralSequence_iso`,
-`spectralSequenceHomologyData_left_i`, `spectralSequenceHomologyData_left_π`),
-Page.lean (`map_ιE`) and Cycles.lean (`opcyclesMap_fromOpcycles`).
-(blueprint: lem-sc-spectral-object-bottom-page-interval-compatibility)
-
-Proof: Put a=2-r and c=r-1. The page homology data have kernel object
-E^p(a-1,0,1,c), with inclusion changing a-1 to a and quotient changing
-c to c+1. Rewrite the page homology comparison by `spectralSequence_iso`.
-The cycles isomorphism of these left homology data identifies the cycles
-inclusion with that kernel inclusion and the homology projection with
-that quotient. Cancel the page comparison isomorphisms. Apply `map_ιE`
-to the two maps: changing a leaves the opcycles object unchanged, while
-changing c induces its opcycles map. Thus both sides start with ιE from
-E^p(a-1,0,1,c). Apply `opcyclesMap_fromOpcycles` to the right side:
-its opcycles map followed by fromOpcycles at c+1 equals fromOpcycles at
-c followed by H^p(0,c) to H^p(0,c+1), which is the left side. All interval
-inequalities follow from r≥2, including the identity intervals at r=2;
-p=0 uses the degree -1 in exactly the same homology data. -/
+`H^p(0,r-1)` to `H^p(bottom,r-1)` and no map to the abutment. -/
 theorem bottomPage_interval_compatibility
     {C : Type u} [Category.{v} C] [Abelian C]
     (Y : SpectralObject C EInt) [Y.IsFirstQuadrant]

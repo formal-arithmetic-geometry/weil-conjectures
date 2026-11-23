@@ -11,11 +11,6 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Tensor compatibility for representative-normalized adjunction insertions
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), the degree-zero scalar calculation.
-(blueprint: lem-pur-normalized-tensor-adjunction-insertion)
 -/
 
 @[expose] public noncomputable section
@@ -239,20 +234,7 @@ private def cochainRepresentative : DerivedCategory.Q ⋙ E ⟶
 
 open AlgebraicGeometry.Etale in
 /-- The tensor of exact-single adjunction transposes is the transpose of the ordinary
-lax tensor product, for any derived tensor comparison normalized on representatives.
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
-sec-sp-grp-setup/sec-the-purity-statement/sk-thm-purity-transport/sk-thm-purity-transport.proof.md,
-Step 1 (compatibility with the finite reductions), the finite scalar/tensor calculation.
-(blueprint: lem-pur-normalized-tensor-adjunction-insertion)
-
-Proof: factor each transpose through the localized ordinary adjunction unit.
-Apply the representative tensor square to the two single complexes. Naturality
-of localization's lax tensorator reduces the result to the ordinary tensor of
-the two adjuncts. On the unique degree-zero summand the complex comparison is
-the ordinary oplax tensorator. The monoidal adjunction identity identifies its
-composite with the adjunct of the lax tensor of the original maps. Naturality
-of the representative finishes the comparison. -/
+lax tensor product, for any derived tensor comparison normalized on representatives. -/
 theorem normalizedTensor_adjointInsertion
     (rep : ∀ P : CochainComplex C ℤ,
       E.obj (DerivedCategory.Q.obj P) ⟶

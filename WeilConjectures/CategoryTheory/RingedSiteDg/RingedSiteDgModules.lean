@@ -20,8 +20,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-! # Sheaf dg algebras and modules on a ringed site
 
-Source: Stacks Project, sdga.tex, Tags 0FRF, 0FRI, 0FS5 and 0FT5
-(blueprint: def-sfb-ringed-site-dg-modules).
+Source: Stacks Project, sdga.tex, Tags 0FRF, 0FRI, 0FS5 and 0FT5.
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +42,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
   (O : Sheaf J CommRingCat.{u})
 
-/-- The coefficient module sheaves. Source: Stacks 0FRF
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+/-- The coefficient module sheaves. Source: Stacks 0FRF. -/
 abbrev Coeff := SheafOfModules.{u}
   ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj O)
 
@@ -55,59 +53,54 @@ instance coeffHasCountableCoproducts : HasCountableCoproducts (Coeff O) :=
   ⟨fun _ _ ↦ HasColimitsOfSize.has_colimits_of_shape _⟩
 
 /-- Unbounded integer cochain complexes with their signed direct-sum tensor.
-Source: Stacks 0FRF (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks 0FRF. -/
 abbrev Complex := CochainComplex (Coeff O) ℤ
 
 /-- Monoid objects are associative unital sheaf dg O-algebras. The differential
 of the total tensor enforces the Leibniz sign; no commutativity is imposed.
-Source: Stacks 0FRF (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks 0FRF. -/
 abbrev Algebra := Mon (Complex O)
 
 variable {O}
 
 /-- Right dg modules are left module objects in the reversed tensor category.
-Source: Stacks 0FRI (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks 0FRI. -/
 abbrev Module (A : Algebra O) := Mod (Complex O)ᴹᵒᵖ (mop A.X)
 
-/-- Forget only the right action. Source: Stacks 0FRI
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+/-- Forget only the right action. Source: Stacks 0FRI. -/
 def underlying (A : Algebra O) : Module A ⥤ Complex O :=
   Mod.forget (mop A.X) ⋙ unmopFunctor _
 
-/-- The chain-level action M tensor A to M. Source: Stacks 0FRI
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+/-- The chain-level action M tensor A to M. Source: Stacks 0FRI. -/
 abbrev action {A : Algebra O} (M : Module A) :
     (underlying A).obj M ⊗ A.X ⟶ (underlying A).obj M :=
   (ModObj.smul (M := mop A.X) (X := M.X)).unmop
 
-/-- Degreewise action. Source: Stacks 0FRI
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+/-- Degreewise action. Source: Stacks 0FRI. -/
 def actionDegree {A : Algebra O} (M : Module A) (p q n : ℤ) (h : p + q = n) :
     ((underlying A).obj M).X p ⊗ A.X.X q ⟶ ((underlying A).obj M).X n :=
   HomologicalComplex.ιTensorObj _ _ p q n h ≫ (action M).f n
 
 /-- Restriction changes the action by phi and keeps the whole complex.
-Source: Stacks sdga, section-dg-bimodules
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks sdga, section-dg-bimodules. -/
 def restriction {A B : Algebra O} (φ : A ⟶ B) : Module B ⥤ Module A :=
   Mod.comap φ.hom.mop
 
 /-- Quasi-isomorphisms detected on underlying cohomology sheaves.
-Source: Stacks 0FT4 (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks 0FT4. -/
 def quasiIsomorphisms (A : Algebra O) : MorphismProperty (Module A) :=
   fun _ _ f ↦ QuasiIso ((underlying A).map f)
 
 /-- Formal-inverse localization of dg modules. Localizing directly also identifies
 homotopic maps via the cylinder quasi-isomorphism, hence gives the homotopy localization.
-Source: Stacks 0FT5 (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks 0FT5. -/
 abbrev Derived (A : Algebra O) := (quasiIsomorphisms A).Localization
 
-/-- The canonical localization functor. Source: Stacks 0FT5
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+/-- The canonical localization functor. Source: Stacks 0FT5. -/
 abbrev Q (A : Algebra O) : Module A ⥤ Derived A := (quasiIsomorphisms A).Q
 
 /-- Standard shift comparison, including the unchanged right action.
-Source: Stacks sdga, section-shift (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks sdga, section-shift. -/
 structure ShiftComparison (A : Algebra O) (n : ℤ) (M S : Module A) where
   iso : (underlying A).obj S ≅ ((underlying A).obj M)⟦n⟧
   action_eq : action S ≫ iso.hom = (iso.hom ▷ A.X) ≫
@@ -115,8 +108,7 @@ structure ShiftComparison (A : Algebra O) (n : ℤ) (M S : Module A) where
       (curriedTensor (Coeff O)) n).hom ≫ (action M)⟦n⟧'
 
 /-- Cone comparison fixes both actions by their projections and fixes the signed
-connecting map. Source: Stacks 0FS5
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+connecting map. Source: Stacks 0FS5. -/
 structure ConeComparison (A : Algebra O) {M N : Module A} (f : M ⟶ N)
     (K S : Module A) (s : ShiftComparison A 1 M S) (g : N ⟶ K) (h : K ⟶ S) where
   iso : (underlying A).obj K ≅ CochainComplex.mappingCone ((underlying A).map f)
@@ -139,7 +131,7 @@ structure ConeComparison (A : Algebra O) {M N : Module A} (f : M ⟶ N)
 
 /-- A standard triangulation of the fixed localization, characterized by all actual
 shifts and cone triangles, without an adjunction or existence assumption.
-Source: Stacks 0FT5 (blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks 0FT5. -/
 class DerivedStructure (A : Algebra O) where
   [preadditive : Preadditive (Derived A)]
   [zero : HasZeroObject (Derived A)]
@@ -173,8 +165,7 @@ attribute [instance] DerivedStructure.preadditive DerivedStructure.zero DerivedS
   DerivedStructure.shiftAdditive DerivedStructure.pretriangulated DerivedStructure.triangulated
 
 /-- The balanced and right-linear chain maps out of the ordinary total tensor.
-Source: Stacks sdga, section-dg-bimodules
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks sdga, section-dg-bimodules. -/
 def IsBalanced {A B : Algebra O} (φ : A ⟶ B) (M : Module A) (N : Module B)
     (t : (underlying A).obj M ⊗ B.X ⟶ (underlying B).obj N) : Prop :=
   (action M ▷ B.X) ≫ t =
@@ -186,8 +177,7 @@ def IsBalanced {A B : Algebra O} (φ : A ⟶ B) (M : Module A) (N : Module B)
 
 /-- The ordinary balanced tensor, specified by its representing universal property.
 The universal map is part of the data and determines its object uniquely up to unique iso.
-Source: Stacks sdga, section-dg-bimodules
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+Source: Stacks sdga, section-dg-bimodules. -/
 structure TensorPresentation {A B : Algebra O} (φ : A ⟶ B) (M : Module A)
     (T : Module B) where
   tensor : (underlying A).obj M ⊗ B.X ⟶ (underlying B).obj T
@@ -198,8 +188,7 @@ structure TensorPresentation {A B : Algebra O} (φ : A ⟶ B) (M : Module A)
     ∃! f : T ⟶ N, tensor ≫ (underlying B).map f = t
 
 /-- Ordinary extension and its action-normalized adjunction. This defines a presentation,
-not an assertion of its existence. Source: Stacks sdga, section-dg-bimodules
-(blueprint: def-sfb-ringed-site-dg-modules). -/
+not an assertion of its existence. Source: Stacks sdga, section-dg-bimodules. -/
 structure OrdinaryExtension {A B : Algebra O} (φ : A ⟶ B) where
   functor : Module A ⥤ Module B
   tensor (M : Module A) : TensorPresentation φ M (functor.obj M)

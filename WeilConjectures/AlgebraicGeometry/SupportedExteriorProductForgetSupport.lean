@@ -8,24 +8,17 @@ module
 public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNaturality
 
 /-!
-# Forgetting supports in the resolution pairing
-
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
+# Forgetting supports in the pairing of supported sections
 
 We totalize the ordinary pullback and tensor of global sections to a chain map
-`exteriorSectionsComplex`, and show that the resolution pairing of supported sections
-followed by the map forgetting the support of the product is the ordinary pairing of the
-included sections followed by the unit of the derived global sections.
+`exteriorSectionsComplex`, and show that the totalized pairing of supported sections followed
+by the inclusion of supported sections is the ordinary pairing of the included sections.
 
 ## Main definitions and statements
 
 - `exteriorSectionsComplex`: the totalized ordinary pairing of global sections.
 - `exteriorSupportedSectionsComplex_comp_ΓSupportι`: the supported pairing followed by the
   inclusion of supported sections.
-- `resolutionSupportedExteriorPairing_comp_forgetSupport`: the resolution pairing followed by
-  forgetting the support.
 -/
 
 @[expose] public section
@@ -215,47 +208,6 @@ theorem exteriorSupportedSectionsComplex_comp_ΓSupportι
   erw [(Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
     (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι))).naturality]
   rw [exteriorSupportedSections_ΓSupportι_assoc]
-
-/-- The resolution pairing followed by forgetting the support of the product is the ordinary
-pairing of the included sections followed by the unit of the global sections. -/
-@[reassoc]
-theorem resolutionSupportedExteriorPairing_comp_forgetSupport
-    (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
-    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)
-    {M : DerivedCategory (Sheaf (pullback f g).smallEtaleTopology C)}
-    (x : externalProduct C f g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ⟶ M) :
-    resolutionSupportedExteriorPairing C f g i j P Q hP hQ ≫
-        (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map x ≫
-        (Functor.rightDerivedFunctorNatTrans
-          (Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
-            (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι)))).app M =
-      tensorHom
-          (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-            (Sheaf.ΓSupportι X.smallEtaleTopology C (op (Scheme.Etale.mk i.openComplement.ι)))
-            (.up ℤ)).app P))
-          (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-            (Sheaf.ΓSupportι Y.smallEtaleTopology C (op (Scheme.Etale.mk j.openComplement.ι)))
-            (.up ℤ)).app Q)) ≫
-        Functor.LaxMonoidal.μ DerivedCategory.Q _ _ ≫
-        DerivedCategory.Q.map (exteriorSectionsComplex C f g P Q) ≫
-        (Sheaf.Γ (pullback f g).smallEtaleTopology C).rightDerivedFunctorUnitQ
-          (exteriorSectionsComplexTarget C f g P Q) ≫
-        (Sheaf.Γ (pullback f g).smallEtaleTopology C).rightDerivedFunctor.map
-          ((exteriorProductResolutionIso C f g P Q hP hQ).inv ≫ x) := by
-  have hnat := (Functor.rightDerivedFunctorNatTrans
-    (Sheaf.ΓSupportι (pullback f g).smallEtaleTopology C
-      (op (Scheme.Etale.mk (supportedProductImmersion f g i j).openComplement.ι)))).naturality
-    ((exteriorProductResolutionIso C f g P Q hP hQ).inv ≫ x)
-  rw [resolutionSupportedExteriorPairing]
-  simp only [Category.assoc]
-  rw [← Functor.map_comp_assoc]
-  erw [hnat]
-  erw [rightDerivedFunctorUnit_comp_rightDerivedFunctorNatTrans_assoc]
-  rw [← Functor.map_comp_assoc, exteriorSupportedSectionsComplex_comp_ΓSupportι, Functor.map_comp,
-    Category.assoc]
-  erw [← Functor.LaxMonoidal.μ_natural_assoc]
 
 end Ordinary
 

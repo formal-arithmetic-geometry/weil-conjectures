@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBri
 
 /-! # Descent of a termwise coefficient map
 Source: Stacks Project, Tags 06XN, 05SU and 06YY.
-(blueprint: lem-sbc-derived-coefficient-map-descent)
 -/
 
 -- After pruning, this module only keeps private declarations.

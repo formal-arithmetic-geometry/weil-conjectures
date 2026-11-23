@@ -95,18 +95,15 @@ Source: current blueprint, theorem-poincare-duality-frobenius--2, proof Step 5;
 Stacks Project, Tags 08J9 and 0GMX
 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
 
-The ambient comparison uses the prescribed evaluation transpose. The integral,
-rational and common-stage comparisons below retain that same map and its inverse.
+The ambient comparison uses the prescribed evaluation transpose. The integral
+and rational comparisons below retain that same map and its inverse.
 The coefficient scalars have degree zero, including in ramified extensions.
 
 ## Main statements
 
-* `ambient_scalar`, `ambient_coordinates`, `ambient_scalar_chain`: unrestricted
-  finite-free base change, normalized coordinates and representative evaluation.
-* `integralComparison`, `rationalComparison`, `commonComparison`: the same
-  evaluation-normalized reindexing comparison at the three coefficient stages.
-* `rational_scalar`, `rational_signed_shifts`, `rational_composition`: the fixed
-  scalar, signed-shift and composition equations before common-stage descent.
+* `integralComparison`, `rationalComparison`: the same evaluation-normalized
+  reindexing comparison at the integral and rational coefficient stages.
+* `common_compositor_existsUnique`: the scheme compositor in common-stage coordinates.
 -/
 
 @[expose] public noncomputable section
@@ -853,37 +850,6 @@ theorem rational_naturality
   exact (rationalComparison l E g).hom.naturality
     (ObjectProperty.homMk (X := P) (Y := Q) (Prod.mkHom a.op b))
 
-/-- The specified comparisons commute with the specified completed scalar comparisons.
-The two input scalar/pullback comparisons occur with their required variances.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 4--9): transpose the ambient scalar square in the S_X category,
-then use the specified Hom evaluation pin, the tensor completion-unit square and
-the alpha/kappa scalar square. Cancel completion units by reflector injectivity.
-Fullness gives the displayed equation in the constructible integral category. -/
-theorem integral_scalar
-    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
-    (ι : E →ₐ[ℚ_[l]] L)
-    (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
-    HEq
-      ((sfConstructibleIntegralScalarExtension 0 l
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X).map
-          ((integralComparison l E g).hom.app P) ≫
-        (integralHomScalarComparison l E L ι X ((integralPair l E g).obj P)).hom)
-      ((integralPullbackScalarComparison l E L ι g
-          ((constructibleIntegralHom l E Y).obj P)).hom ≫
-        (constructibleIntegralPullback l L g).map
-          (integralHomScalarComparison l E L ι Y P).hom ≫
-        (integralComparison l L g).hom.app (integralHomScalarPair l E L ι Y P) ≫
-        ObjectProperty.homMk
-          (X := (constructibleIntegralHom l L X).obj
-            ((integralPair l L g).obj (integralHomScalarPair l E L ι Y P)))
-          (Y := (constructibleIntegralHom l L X).obj
-            (integralHomScalarPair l E L ι X ((integralPair l E g).obj P)))
-          ((integralDerivedInternalHom l L X).map (Prod.mkHom
-            ((integralPullbackScalarComparison l E L ι g P.obj.1.unop).hom.hom).op
-            ((integralPullbackScalarComparison l E L ι g P.obj.2).inv.hom)))) := by
-  sorry
-
 section RationalScalarProof
 variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
@@ -938,266 +904,12 @@ private theorem rationalHom_map_heq (K : Type u) [Field K] [Algebra ℚ_[l] K]
         (Y := integralPairOfRationalHomPair l K W P') (Prod.mkHom a₀.op b₀)))) (one_mul 1)
   exact ((heq_of_eq (hβ _ _)).trans (hβ' a₀ b₀ 1 1)).trans (heq_of_eq e)
 
-/-- The localized form of integral_scalar: the specified rational comparisons commute
-with the specified rational scalar comparisons.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof: every arrow is the localization of its integral counterpart; apply the
-localization functor to integral_scalar. -/
-theorem rational_scalar (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
-    (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map
-        ((rationalComparison l E g).hom.app P) ≫
-      (rationalHomScalarComparison l E L ι X ((rationalPair l E g).obj P)).hom =
-    (rationalPullbackScalarComparison l E L ι g).hom.app
-        ((rationalDerivedInternalHom l E Y).obj P) ≫
-      (rationalDerivedPullback l L g).map (rationalHomScalarComparison l E L ι Y P).hom ≫
-      (rationalComparison l L g).hom.app (rationalHomScalarPair l E L ι Y P) ≫
-      (rationalDerivedInternalHom l L X).map (ObjectProperty.homMk
-        (X := (rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P))
-        (Y := rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P))
-        (Prod.mkHom ((rationalPullbackScalarComparison l E L ι g).hom.app P.obj.1.unop).op
-          ((rationalPullbackScalarComparison l E L ι g).inv.app P.obj.2))) := by
-  let IP := integralPairOfRationalHomPair l E Y P
-  let QL (W : Scheme.{u}) := sfRationalConstructibleLocalization l L W
-  let S (W : Scheme.{u}) := sfConstructibleIntegralScalarExtension 0 l
-    (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W
-  have hr (K : Type u) [Field K] [Algebra ℚ_[l] K] [FiniteDimensional ℚ_[l] K]
-      (A : sfRationalConstructibleCategory l K Y) :
-      (rationalDerivedPullback l K g).obj A =
-        ⟨(constructibleIntegralPullback l K g).obj A.obj⟩ :=
-    (rationalDerivedPullback_existsUnique l K g).exists.choose_spec.2.1 A
-  have hH (K : Type u) [Field K] [Algebra ℚ_[l] K] [FiniteDimensional ℚ_[l] K]
-      (W : Scheme.{u}) (A : (constructibleRationalHomPairs l K W).FullSubcategory) :
-      (rationalDerivedInternalHom l K W).obj A =
-        ⟨(constructibleIntegralHom l K W).obj (integralPairOfRationalHomPair l K W A)⟩ :=
-    (rationalDerivedInternalHom_existsUnique l K W).exists.choose_spec.1 A
-  have hs (W : Scheme.{u}) (A : sfRationalConstructibleCategory l E W) :
-      (sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj A =
-        ⟨(S W).obj A.obj⟩ :=
-    sfRationalScalarExtension_obj l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι A
-  have mr {A B : sfIntegralConstructibleCategory l L Y} (a : A ⟶ B) :
-      HEq ((rationalDerivedPullback l L g).map
-          ((sfRationalConstructibleLocalization l L Y).map a))
-        ((QL X).map ((constructibleIntegralPullback l L g).map a)) :=
-    (rationalDerivedPullback_existsUnique l L g).exists.choose_spec.2.2 A B a 1
-  have ms (W : Scheme.{u}) {A B : sfIntegralConstructibleCategory l E W} (a : A ⟶ B) :
-      HEq ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map
-          ((sfRationalConstructibleLocalization l E W).map a))
-        ((QL W).map ((S W).map a)) := by
-    have h := sfRationalScalarExtension_map_tmul l E W 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι A B a 1
-    simp only [map_one] at h
-    exact h
-  have hβ (K : Type u) [Field K] [Algebra ℚ_[l] K] [FiniteDimensional ℚ_[l] K]
-      (A : (constructibleRationalHomPairs l K Y).FullSubcategory) :
-      HEq ((rationalComparison l K g).hom.app A)
-        ((sfRationalConstructibleLocalization l K X).map
-          ((integralComparison l K g).hom.app (integralPairOfRationalHomPair l K Y A))) :=
-    ((rational_comparison_existsUnique l K g
-      (integralComparison l K g)).exists.choose_spec A).1
-  have hρ (A : sfRationalConstructibleCategory l E Y) :
-      HEq ((rationalPullbackScalarComparison l E L ι g).hom.app A)
-        ((QL X).map (integralPullbackScalarComparison l E L ι g A.obj).hom) :=
-    (rationalPullbackScalarComparison_existsUnique l E L ι g).exists.choose_spec A
-  have hh (W : Scheme.{u}) (A : (constructibleRationalHomPairs l E W).FullSubcategory) :
-      HEq (rationalHomScalarComparison l E L ι W A).hom
-        ((QL W).map (integralHomScalarComparison l E L ι W
-          (integralPairOfRationalHomPair l E W A)).hom) :=
-    (rationalHomScalarComparison_existsUnique l E L ι W A).exists.choose_spec
-  -- The integral pairs underlying the four rational pairs.
-  have pe1 : integralPairOfRationalHomPair l E X ((rationalPair l E g).obj P) =
-      (integralPair l E g).obj IP := by
-    apply ObjectProperty.FullSubcategory.ext
-    change (op ((rationalDerivedPullback l E g).obj P.obj.1.unop).obj,
-      ((rationalDerivedPullback l E g).obj P.obj.2).obj) = _
-    rw [hr, hr]
-    rfl
-  have pe2 : integralPairOfRationalHomPair l L Y (rationalHomScalarPair l E L ι Y P) =
-      integralHomScalarPair l E L ι Y IP := by
-    apply ObjectProperty.FullSubcategory.ext
-    change (op ((sfRationalScalarExtension l E Y 0
-      (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.1.unop).obj,
-      ((sfRationalScalarExtension l E Y 0
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.2).obj) = _
-    rw [hs, hs]
-    rfl
-  have pe3 : integralPairOfRationalHomPair l L X
-      ((rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P)) =
-      (integralPair l L g).obj (integralHomScalarPair l E L ι Y IP) := by
-    apply ObjectProperty.FullSubcategory.ext
-    change (op ((rationalDerivedPullback l L g).obj
-        ((sfRationalScalarExtension l E Y 0
-          (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.1.unop)).obj,
-      ((rationalDerivedPullback l L g).obj ((sfRationalScalarExtension l E Y 0
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P.obj.2)).obj) = _
-    rw [hr, hr, hs, hs]
-    rfl
-  have pe4 : integralPairOfRationalHomPair l L X
-      (rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P)) =
-      integralHomScalarPair l E L ι X ((integralPair l E g).obj IP) := by
-    apply ObjectProperty.FullSubcategory.ext
-    change (op ((sfRationalScalarExtension l E X 0
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-          ((rationalDerivedPullback l E g).obj P.obj.1.unop)).obj,
-      ((sfRationalScalarExtension l E X 0
-        (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-          ((rationalDerivedPullback l E g).obj P.obj.2)).obj) = _
-    rw [hs, hs, hr, hr]
-    rfl
-  -- The six vertices.
-  have o1 : (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-      ((rationalDerivedPullback l E g).obj ((rationalDerivedInternalHom l E Y).obj P)) =
-      (QL X).obj ((S X).obj ((constructibleIntegralPullback l E g).obj
-        ((constructibleIntegralHom l E Y).obj IP))) := by
-    rw [hs, hr, hH]
-    rfl
-  have o2 : (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-      ((rationalDerivedInternalHom l E X).obj ((rationalPair l E g).obj P)) =
-      (QL X).obj ((S X).obj ((constructibleIntegralHom l E X).obj
-        ((integralPair l E g).obj IP))) := by
-    rw [hs, hH, pe1]
-    rfl
-  have o3 : (rationalDerivedInternalHom l L X).obj
-      (rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P)) =
-      (QL X).obj ((constructibleIntegralHom l L X).obj
-        (integralHomScalarPair l E L ι X ((integralPair l E g).obj IP))) := by
-    rw [hH, pe4]
-    rfl
-  have o4 : (rationalDerivedPullback l L g).obj
-      ((sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-        ((rationalDerivedInternalHom l E Y).obj P)) =
-      (QL X).obj ((constructibleIntegralPullback l L g).obj
-        ((S Y).obj ((constructibleIntegralHom l E Y).obj IP))) := by
-    rw [hr, hs, hH]
-    rfl
-  have o5 : (rationalDerivedPullback l L g).obj
-      ((rationalDerivedInternalHom l L Y).obj (rationalHomScalarPair l E L ι Y P)) =
-      (QL X).obj ((constructibleIntegralPullback l L g).obj
-        ((constructibleIntegralHom l L Y).obj (integralHomScalarPair l E L ι Y IP))) := by
-    rw [hr, hH, pe2]
-    rfl
-  have o6 : (rationalDerivedInternalHom l L X).obj
-      ((rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P)) =
-      (QL X).obj ((constructibleIntegralHom l L X).obj
-        ((integralPair l L g).obj (integralHomScalarPair l E L ι Y IP))) := by
-    rw [hH, pe3]
-    rfl
-  -- The six arrows are localizations of the integral arrows.
-  have oa : (rationalDerivedPullback l E g).obj ((rationalDerivedInternalHom l E Y).obj P) =
-      (sfRationalConstructibleLocalization l E X).obj ((constructibleIntegralPullback l E g).obj
-        ((constructibleIntegralHom l E Y).obj IP)) := by
-    rw [hr, hH]
-    rfl
-  have ob : (rationalDerivedInternalHom l E X).obj ((rationalPair l E g).obj P) =
-      (sfRationalConstructibleLocalization l E X).obj ((constructibleIntegralHom l E X).obj
-        ((integralPair l E g).obj IP)) := by
-    rw [hH, pe1]
-    rfl
-  have h1 := (functor_map_heq
-    (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι)
-    oa ob (hβ E P)).trans (ms X ((integralComparison l E g).hom.app IP))
-  have h2 := (hh X ((rationalPair l E g).obj P)).trans
-    (functor_map_heq (QL X) (by rw [pe1]) (by rw [pe1])
-      (dep_heq (fun A ↦ (integralHomScalarComparison l E L ι X A).hom) pe1))
-  have hHobj : ((rationalDerivedInternalHom l E Y).obj P).obj =
-      (constructibleIntegralHom l E Y).obj IP := by
-    rw [hH]
-  have h3 := (hρ ((rationalDerivedInternalHom l E Y).obj P)).trans
-    (functor_map_heq (QL X) (by rw [hHobj]) (by rw [hHobj])
-      (dep_heq (fun A ↦ (integralPullbackScalarComparison l E L ι g A).hom) hHobj))
-  have oc : (sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-      ((rationalDerivedInternalHom l E Y).obj P) =
-      (sfRationalConstructibleLocalization l L Y).obj ((S Y).obj
-        ((constructibleIntegralHom l E Y).obj IP)) := by
-    rw [hs, hH]
-    rfl
-  have od : (rationalDerivedInternalHom l L Y).obj (rationalHomScalarPair l E L ι Y P) =
-      (sfRationalConstructibleLocalization l L Y).obj ((constructibleIntegralHom l L Y).obj
-        (integralHomScalarPair l E L ι Y IP)) := by
-    rw [hH, pe2]
-    rfl
-  have h4 := (functor_map_heq (rationalDerivedPullback l L g) oc od (hh Y P)).trans
-    (mr (integralHomScalarComparison l E L ι Y IP).hom)
-  have h5 := (hβ L (rationalHomScalarPair l E L ι Y P)).trans
-    (functor_map_heq (QL X) (by rw [pe2]) (by rw [pe2])
-      (dep_heq (fun A ↦ (integralComparison l L g).hom.app A) pe2))
-  have ha := (hρ P.obj.1.unop).trans (HEq.rfl :
-    HEq ((QL X).map (integralPullbackScalarComparison l E L ι g P.obj.1.unop.obj).hom)
-      (TensorProduct.tmul (Padic.coefficientExtensionIntegers l L)
-        (1 : Localization.Away (Padic.coefficientExtensionUniformizer l L))
-          (integralPullbackScalarComparison l E L ι g P.obj.1.unop.obj).hom))
-  have oe : (sfRationalScalarExtension l E X 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-      ((rationalDerivedPullback l E g).obj P.obj.2) =
-      (QL X).obj ((S X).obj ((constructibleIntegralPullback l E g).obj P.obj.2.obj)) := by
-    rw [hs, hr]
-    rfl
-  have of : (rationalDerivedPullback l L g).obj
-      ((sfRationalScalarExtension l E Y 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
-        P.obj.2) =
-      (QL X).obj ((constructibleIntegralPullback l L g).obj ((S Y).obj P.obj.2.obj)) := by
-    rw [hr, hs]
-    rfl
-  have hb := (iso_inv_heq ((rationalPullbackScalarComparison l E L ι g).app P.obj.2)
-    ((QL X).mapIso (integralPullbackScalarComparison l E L ι g P.obj.2.obj))
-    oe of (hρ P.obj.2)).trans (HEq.rfl :
-    HEq ((QL X).map (integralPullbackScalarComparison l E L ι g P.obj.2.obj).inv)
-      (TensorProduct.tmul (Padic.coefficientExtensionIntegers l L)
-        (1 : Localization.Away (Padic.coefficientExtensionUniformizer l L))
-          (integralPullbackScalarComparison l E L ι g P.obj.2.obj).inv))
-  have h6 := rationalHom_map_heq l L X
-    ((rationalPair l L g).obj (rationalHomScalarPair l E L ι Y P))
-    (rationalHomScalarPair l E L ι X ((rationalPair l E g).obj P))
-    ((integralPair l L g).obj (integralHomScalarPair l E L ι Y IP))
-    (integralHomScalarPair l E L ι X ((integralPair l E g).obj IP)) pe3 pe4
-    ((rationalPullbackScalarComparison l E L ι g).hom.app P.obj.1.unop)
-    ((rationalPullbackScalarComparison l E L ι g).inv.app P.obj.2)
-    (integralPullbackScalarComparison l E L ι g P.obj.1.unop.obj).hom
-    (integralPullbackScalarComparison l E L ι g P.obj.2.obj).inv ha hb
-  have hI := congrArg (QL X).map (eq_of_heq (integral_scalar l E g L ι IP))
-  simp only [Functor.map_comp] at hI
-  apply eq_of_heq
-  refine (heq_comp o1 o2 o3 h1 h2).trans ((heq_of_eq hI).trans ?_)
-  exact (heq_comp o1 o4 o3 h3 (heq_comp o4 o5 o3 h4 (heq_comp o5 o6 o3 h5 h6))).symm
-
 end RationalScalarProof
-
-/-- The rational pullback shift is the localization of the termwise reindexing shift,
-conjugated only by the specified ordinary-to-completed pullback maps.
-Source: blueprint Step 5; Stacks 011G, 099B
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 9--12): exact reindexing shifts termwise with identity degree maps.
-The normalized Roos comparison carries the second product coordinate with its
-specified sign. The completed reflection comparison intertwines these shifts.
-Restrict by fullness, then localize. Every component is prescribed by the
-invertible kappa and localization, so the full shift structure is unique. -/
-theorem rational_pullbackShift_existsUnique :
-    ∃! s : (rationalDerivedPullback l E g).CommShift ℤ,
-      ∃ (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)
-        (d : (constructibleIntegralPullback l E g).CommShift ℤ),
-        PodCompletionReindex.Laws l E g A ∧
-        PodCompletedTensorReindex.Laws l E g A T ∧
-        (∀ (K : sfIntegralConstructibleCategory l E Y) (r : ℤ),
-          HEq ((podOrdinaryToCompleted l E g A).app (K⟦r⟧).obj ≫
-            (((constructibleIntegralPullback l E g).commShiftIso
-              (self := d) r).hom.app K).hom)
-            (((podOrdinaryReindex l E g).commShiftIso r).hom.app K.obj ≫
-              ((podOrdinaryToCompleted l E g A).app K.obj)⟦r⟧')) ∧
-        ∀ (K : sfRationalConstructibleCategory l E Y) (r : ℤ),
-          HEq (((rationalDerivedPullback l E g).commShiftIso
-              (self := s) r).hom.app K)
-            ((sfRationalConstructibleLocalization l E X).map
-              (((constructibleIntegralPullback l E g).commShiftIso
-                (self := d) r).hom.app K.obj)) := by
-  sorry
-
-/-- The uniquely specified rational pullback shift, with its original Roos sign.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
-@[instance_reducible]
-def rationalPullbackShift := (rational_pullbackShift_existsUnique l E g).exists.choose
 
 end Reindex
 
 attribute [local irreducible] rationalComparison integralComparison rationalTranspose
-  rationalEvaluation rationalPullbackShift integralSignedShift
+  rationalEvaluation integralSignedShift
 
 attribute [local irreducible] commonStageDerivedPullback commonStageDerivedTensor
   commonStageDerivedInternalHom
@@ -1241,39 +953,6 @@ attribute [local irreducible]
 private theorem commonPullback_eq : commonPullback l Ω g = commonStageDerivedPullback l Ω g :=
   copyObj_eq _ _
     ((podCommonStageObjectNormalizations l Ω).1 g)
-
-/-- Evaluation at every common field, with the fixed Hom and tensor comparisons.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 13--14): at a common coefficient stage evaluate after the two
-specified scalar comparisons. rational_scalar and the tensor tower square identify
-this representative at any larger field. The common-stage equality criterion gives
-a class independent of representatives. Every arrow has a representative, hence
-this prescription fixes the evaluation class uniquely. -/
-theorem common_evaluation_existsUnique (W : Scheme.{u})
-    [∀ w : W, Invertible (l : W.residueField w)]
-    (P : (commonStageHomPairs l Ω W).FullSubcategory) :
-    ∃! e : (commonTensor l Ω W).obj (P.obj.1.unop, (commonHom l Ω W).obj P) ⟶ P.obj.2,
-      ∀ (L : Index l Ω)
-        (h : (commonStageTensorObject l Ω W P.obj.1.unop
-          (commonStageHomObject l Ω W P)).stage ≤ L)
-        (hH : (commonStageHomObject l Ω W P).stage ≤ L)
-        (hN : P.obj.2.stage ≤ L),
-        HEq e (ofHom
-          (commonStageTensorObject l Ω W P.obj.1.unop (commonStageHomObject l Ω W P))
-          P.obj.2 L h hN
-          ((commonStageTensorComparison l Ω W P.obj.1.unop
-              (commonStageHomObject l Ω W P) L h).hom ≫
-            (rationalDerivedTensor l (Coefficient.{u} l Ω L) W).map
-              (Prod.mkHom (𝟙 _) (commonStageHomComparison l Ω W P L hH).hom) ≫
-            rationalEvaluation l (Coefficient.{u} l Ω L) W
-              (commonStageHomPairAtStage l Ω W P L hH))) := by
-  sorry
-
-/-- The class of the specified rational evaluation at any common coefficient field.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
-def commonEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
-    (P : (commonStageHomPairs l Ω W).FullSubcategory) :=
-  (common_evaluation_existsUnique l Ω W P).exists.choose
 
 section CommonPairProof
 
@@ -1470,32 +1149,7 @@ private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCatego
 
 end CommonComparisonProof
 
-/-- The same evaluation-normalized comparison descends uniquely to actual common-stage classes.
-Source: blueprint Step 5; Stacks 08J9
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof (node Steps 13--14): every finite list of objects and arrows is represented
-at a common finite coefficient compositum. Conjugate the rational comparison
-there by the recorded pullback and Hom scalar comparisons. rational_scalar and
-the coefficient tower and unit identities identify these maps at every further
-field. The representative equality criterion therefore gives a well-defined
-class, independent of representatives. The inverse descends in exactly the same
-way. Naturality is rational naturality at a common field. The fixed component
-representatives give uniqueness. Evaluate every finite evaluation, transposition,
-inverse, signed-shift or scheme-composition diagram at such a field: its integral
-equation localizes there, and equality of classes gives its common-stage equation. -/
-theorem common_comparison_existsUnique :
-    ∃! α : commonHom l Ω Y ⋙ commonPullback l Ω g ≅
-      commonPair l Ω g ⋙ commonHom l Ω X,
-      IsCommonNormalized l Ω g α := by
-  sorry
-/-- The normalized natural comparison as an actual common-stage isomorphism.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
-def commonComparison := (common_comparison_existsUnique l Ω g).exists.choose
-
--- Keep the original signature, including the scheme-isomorphism instance.
-set_option linter.unusedSectionVars false in
 attribute [local irreducible] commonPullback commonTensor commonHom
-  commonComparison commonEvaluation
 
 private theorem transportNatIso {C D : Type*} [Category* C] [Category* D]
     {F G F' G' : C ⥤ D} (hF : F = F') (hG : G = G') (e : F ≅ G) :

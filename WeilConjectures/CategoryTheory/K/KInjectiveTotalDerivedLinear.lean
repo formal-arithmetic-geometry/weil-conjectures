@@ -12,9 +12,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 /-!
 # Scalar linearity of total right derived functors computed by K-injectives
 
-Source: Stacks Project, Derived Categories, Tag 070I (lemma-K-injective), (1) and (3),
+Source: Stacks Project, Derived Categories, Tag 070I, (1) and (3),
 with the naturality argument using Tags 070K and 070Y; Differential Graded Algebra,
-Tags 09MJ and 09MK (blueprint: lem-weil-kinjective-total-derived-linear).
+Tags 09MJ and 09MK.
 
 ## Main definitions and statements
 

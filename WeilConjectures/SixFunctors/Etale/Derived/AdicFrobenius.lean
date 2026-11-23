@@ -517,7 +517,6 @@ Item (iii), rationalization and coefficient-field extension, is
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRationalHomEquiv`,
 `AlgebraicGeometry.Etale.DerivedCategory.exists_iso_of_boundedConstructibleRational`,
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational_exists_eq_inv_pow_smul`,
-`AlgebraicGeometry.Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational`,
 `AlgebraicGeometry.Etale.DerivedCategory.rationalization_transport` and, for the stage `ℚ̄_ℓ`,
 `CategoryTheory.StageSystem.exists_stage_representation`. -/
 theorem adicRealization (hϖ : ϖ ∈ nonZeroDivisors R) (hϖm : ϖ ∈ IsLocalRing.maximalIdeal R)

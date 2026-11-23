@@ -84,9 +84,11 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 /-!
 # Ordinary derived operations with identified pro-etale coefficients
 
-Source: Weil conjectures blueprint, proper base change, definition of derived operations;
-Stacks Project, Modules on Sites, lemma-adjoint-push-pull-modules, and Cohomology on Sites,
-Sections 07A5 and 0735 (blueprint: prose-03-02).
+## References
+
+* Stacks Project, Modules on Sites, and Cohomology on Sites, Sections 07A5 and 0735
+* Stacks, Section 07A5
+* Stacks, Lemma 0DVC and Section 0735
 -/
 
 @[expose] public section
@@ -437,20 +439,13 @@ private theorem proEtaleModuleInverseImage_preservesFiniteLimits :
 set_option backward.isDefEq.respectTransparency false in
 attribute [instance] proEtaleRingModules_hasKInjectiveResolutions
 
-/-- Ordinary uncompleted unbounded derived direct image via K-injectives in all modules.
-Source: Stacks, Section 07A5 (blueprint: prose-03-02). -/
+/-- Ordinary uncompleted unbounded derived direct image via K-injectives in all modules. -/
 noncomputable abbrev proEtaleRingDerivedDirectImage :
     DerivedCategory (proEtaleRingModules X S) ⥤ DerivedCategory (proEtaleRingModules Y R) :=
   (proEtaleRingModuleDirectImage f R S c).rightDerivedFunctor
 
 /-- Direct image is computed on every K-injective representative, naturally in that
-representative. Source: Stacks, Section 07A5
-(blueprint: prose-03-02).
-Proof: the K-injective right derivability structure gives an invertible component of the
-right-derived unit at each K-injective complex. Its naturality gives the formula for maps.
-A quasi-isomorphism between K-injectives is a homotopy equivalence by
-CochainComplex.IsKInjective.quasiIso_iff; additive termwise direct image preserves its
-homotopy inverse. Thus the resolution calculation descends through localization. -/
+representative. -/
 theorem proEtaleRingDerivedDirectImage_kInjective
     (I : CochainComplex (proEtaleRingModules X S) ℤ) [I.IsKInjective] :
     IsIso ((proEtaleRingModuleDirectImage f R S c).rightDerivedFunctorUnit.app
@@ -458,14 +453,7 @@ theorem proEtaleRingDerivedDirectImage_kInjective
   infer_instance
 
 
-/-- The ordinary derived adjunction on the full unbounded derived categories.
-Source: Stacks, Lemma 0DVC and Section 0735
-(blueprint: prose-03-02).
-Proof: apply the source exact-left-adjoint/right-derived adjunction to the proved module
-adjunction. Exactness identifies the left derived functor with the specified termwise
-localization. K-injective resolutions provide the total right derived functor. The source
-construction applies the derived Hom adjunction to the homotopy-category adjunction;
-its derivability comparisons give the required unbounded adjunction. -/
+/-- The ordinary derived adjunction on the full unbounded derived categories. -/
 theorem proEtaleRingDerivedOperations_adjunction :
     Nonempty (proEtaleRingDerivedPullback f R S c ⊣ proEtaleRingDerivedDirectImage f R S c) := by
   obtain ⟨adj⟩ := (proEtaleRingModuleOperations_properties f R S c).2.2.2.2

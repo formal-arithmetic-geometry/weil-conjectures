@@ -83,10 +83,7 @@ D(IsoAlgebra F) --R(mapOfNatIso e)--> D(IsoAlgebra G)
      For                                  For
       v                                    v
      D(C) ---------------RL-------------> D(D)
-```
-
-Both sides are the total right derived functor of `For ⋙ L`, the forgetful functors being
-exact and preserving K-injective complexes. -/
+``` -/
 noncomputable def rightDerivedFunctorMapOfNatIsoCompForgetIso :
     (mapOfNatIso e).rightDerivedFunctor ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.rightDerivedFunctor :=

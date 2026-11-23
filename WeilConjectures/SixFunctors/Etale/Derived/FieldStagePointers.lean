@@ -14,11 +14,8 @@ public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 /-!
 # Properties of the field coefficient stages
 
-Three remarks of blueprint `theorem-f-shriek-ell-adic-coefficients--4` point to properties of the
-field coefficient stages proved elsewhere in the blueprint:
+This file records two properties of the field coefficient stages:
 
-* the rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` is idempotent complete, so that the
-  canonical functor into its Karoubi envelope is an equivalence;
 * the common-stage category `Dᵇc(X, ℚ̄_ℓ)` is idempotent complete, so that the canonical functor
   into its Karoubi envelope is an equivalence;
 * at a field coefficient, every bounded constructible complex has finite Tor amplitude, so that
@@ -90,35 +87,6 @@ lemma prop_of_isGE_of_isLE_of_forall_singleFunctor (P : ObjectProperty (DerivedC
 end DerivedCategory
 
 namespace AlgebraicGeometry
-
-section Rational
-
-variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl l)]
-  [Small.{u + 1} E] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
-  [FiniteDimensional ℚ_[l] E]
-
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
-  have : LocallySmall.{u + 1} X.Etale :=
-    @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
-  essentiallySmall_of_small_of_locallySmall _
-
-/-- Pointer to the properties of the rationalization.
-
-The rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ_E]`, in which no idempotent is adjoined, is
-nevertheless idempotent complete, so that the canonical functor into its Karoubi envelope is an
-equivalence. -/
-theorem Etale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_rational
-    (X : Scheme.{u}) :
-    IsIdempotentComplete
-        (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory ∧
-      (Idempotents.toKaroubi
-        (Etale.DerivedCategory.boundedConstructibleRational l E X).FullSubcategory).IsEquivalence :=
-  ⟨Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational l E X,
-    Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational l E X⟩
-
-end Rational
 
 section AlgebraicClosure
 

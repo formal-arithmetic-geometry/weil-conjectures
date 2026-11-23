@@ -13,9 +13,9 @@ public import Mathlib.CategoryTheory.Localization.Adjunction
 
 /-! # Exact localization and inverse mates
 
-Source: Stacks Project, Tag 07A7 (remark-base-change), and the inverse-mate
-compatibility sentence of `fix-prop-coherence`.
-(blueprint: lem-sf-exact-localization-inverse-mate).
+## References
+
+* Stacks Project, Tag 07A7.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +30,7 @@ namespace CategoryTheory
 /-- The exact adjunction obtained by localizing a specified termwise adjunction,
 with independent universes on its two abelian categories. This item helper uses
 the same construction as `SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction`;
-when the universes agree, the two definitions are definitionally equal. Source: Stacks Tag 015F
-(blueprint: lem-sf-exact-localization-inverse-mate). -/
+when the universes agree, the two definitions are definitionally equal. -/
 def exactLocalizationDerivedAdjunction
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
@@ -275,20 +274,8 @@ private lemma mate_unit_Q
   exact hc
 
 /-- Exact localization preserves the inverse mate and its normalized Hom bijections.
-Source: Stacks Project, Tag 07A7 (remark-base-change), and the inverse-mate
-compatibility sentence of `fix-prop-coherence`.
-(blueprint: lem-sf-exact-localization-inverse-mate).
 
-Proof: localize the cochain unit with the specified exact-functor factorizations.
-Expanding the localized Hom bijection and using naturality proves both Hom
-normalizations. Characterize the inverse mate β by the unit equation
-`η₂ ≫ R₂(β) = G(η₁) ≫ d`. The standard composition and transformation
-factorizations show that its derived square satisfies the same equation on QK:
-cancel the factorization isomorphisms and check the resulting cochain equality
-degreewise. Injectivity of the second adjunction's Hom bijection identifies it
-with the localized inverse mate on QK. Localization's natural-transformation
-extensionality extends this equality to all objects. The derived square of β
-is an isomorphism, giving the required invertibility. No faithfulness of Q is used. -/
+Stacks Project, Tag 07A7. -/
 theorem exact_localization_inverse_mate
     {A : Type u₁} {B : Type u₂} {D : Type u₃} {F : Type u₄}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} D] [Category.{v₄} F]

@@ -17,15 +17,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
 /-- Tensor-Hom comparison is invertible when its line factors are invertible.
-Source: the closed symmetric monoidal argument underlying Bhatt--Scholze 6.8.14.
-Proof: write H=Hom(K,L), G=Hom(P,Q). Evaluation for invertible P identifies
-P tensor (H tensor G) with H tensor Q. The canonical map H tensor Q to
-Hom(K,L tensor Q) is invertible because Q is invertible. Curry in P; the
-unit of this adjunction is invertible because tensoring with P is an equivalence.
-Double uncurrying and monoidal coherence identify this composite with the given
-two-evaluation transpose followed by the internal currying isomorphism. Cancel
-the latter. No dualizability of K or L is needed.
-(blueprint: lem-per-invertible-factor-tensor-hom). -/
+Source: the closed symmetric monoidal argument underlying Bhatt--Scholze 6.8.14. -/
 theorem tensorHom_isIso_of_isInvertible
     {C : Type*} [Category* C] [MonoidalCategory C] [SymmetricCategory C]
     [MonoidalClosed C] (K L P Q : C) (hP : IsInvertible P) (hQ : IsInvertible Q) :

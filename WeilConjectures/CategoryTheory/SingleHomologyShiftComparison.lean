@@ -112,25 +112,7 @@ private theorem derived_comparison (Y : C) (n : ℤ) :
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.auxLemma false in
-/-- Single-object homology comparisons commute with shift transport to degree zero.
-
-Source: the single-functor shift and homology shift constructions in Mathlib,
-`Algebra/Homology/HomotopyCategory/SingleFunctors.lean` and
-`Algebra/Homology/HomotopyCategory/ShiftSequence.lean`.
-(blueprint: lem-pc-single-homology-shift-comparison)
-
-Proof: Lift the single-functor shift to the bounded-below derived category through
-its fully faithful inclusion. The induced homology shift sequence transports the
-result back to the homotopy category and then to cochain complexes, by the quotient
-homology comparisons. Naturality cancels these quotient comparisons. In cochain
-complexes, homology of the inverse single shift followed by the homology shift is
-induced by a morphism of short complexes whose middle component is the identity
-on Y. Compose with the epimorphic cycles-to-homology projection: naturality of
-homologyπ and cyclesMap_i identifies both sides with iCycles followed by
-singleObjXSelf.hom. The outer terms of the short complexes are zero, so the signs
-in the shift act only on zero morphisms. Cancelling the homology projection proves
-the identity. At n=0, the shift unit comparisons cancel; the same argument also
-applies to a zero object. -/
+/-- Single-object homology comparisons commute with shift transport to degree zero. -/
 theorem singleFunctor_homology_shift_comparison (Y : C) (n : ℤ) :
     let H₀ := DerivedCategory.Plus.homologyFunctor C 0
     let d := Functor.isoWhiskerRight

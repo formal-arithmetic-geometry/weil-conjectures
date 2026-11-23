@@ -108,10 +108,10 @@ theorem exists_pullback_map_eq (ha : a ≫ pullback.snd v f = pullback.snd t f) 
   let P : Scheme.{u} := pullback t v
   let pT : P ⟶ T := pullback.fst t v
   let pV : P ⟶ V := pullback.snd t v
-  -- `πT : T ×_Y X ⟶ T` is a universal homeomorphism.
+  -- `πT: T ×_Y X ⟶ T` is a universal homeomorphism.
   let πT : pullback t f ⟶ T := pullback.fst t f
-  -- `PX = P ×_T (T ×_Y X)`, with `πP : PX ⟶ P` a universal homeomorphism and
-  -- `ρ : PX ⟶ T ×_Y X` étale.
+  -- `PX = P ×_T (T ×_Y X)`, with `πP: PX ⟶ P` a universal homeomorphism and
+  -- `ρ: PX ⟶ T ×_Y X` étale.
   let PX : Scheme.{u} := pullback pT πT
   let πP : PX ⟶ P := pullback.fst pT πT
   let ρ : PX ⟶ pullback t f := pullback.snd pT πT

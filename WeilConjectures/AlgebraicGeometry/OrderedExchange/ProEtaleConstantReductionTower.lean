@@ -11,9 +11,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Perfect projection for strict constant-coefficient reduction towers
 
-Source: Stacks Tags 0944 and 099M; smooth-purity blueprint,
-proposition-composition-base-change-rf-shriek, Step 4 (blueprint:
-lem-sp-completion-mate-comparison).
+## References
+
+* Stacks 0A07, 099N
+* Stacks Project, Tags 099M, 099N, 0E48, 0941, 0B56 and 0944
 -/
 
 @[expose] public noncomputable section
@@ -74,12 +75,7 @@ private theorem projection_evaluation (K : D (A := A) U) (n : ℕᵒᵖ) :
   rw [hp, he] at h
   exact h.symm
 
-/-- Perfect quotients make the strict projection invertible, on all ambient inputs.
-Source: Stacks 0944, 099M (blueprint: lem-sp-completion-mate-comparison).
-Proof: evaluate its counit-tensor adjunct at every finite quotient. The canonical
-finite pullback/tensor balancing identifies it with the perfect projection formula.
-Every evaluated cone is acyclic. Levelwise cohomology makes the strict cone acyclic,
-so the strict projection is invertible. No faithfulness of derived evaluations is used. -/
+/-- Perfect quotients make the strict projection invertible, on all ambient inputs. -/
 @[instance]
 theorem projection_isIso (K : D (A := A) U) : IsIso (projection d f K) := by
   apply isIso_of_evaluations
@@ -94,8 +90,7 @@ theorem projection_isIso (K : D (A := A) U) : IsIso (projection d f K) := by
     exact hf
   exact (isIso_comp_right_iff _ _).mp hc
 
-/-- The identity comparison of ordinary constant diagrams and termwise pullback.
-Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
+/-- The identity comparison of ordinary constant diagrams and termwise pullback. -/
 def ordinaryDiagonalPullIso :
     (Functor.const ℕᵒᵖ) ⋙ exchangeTowerModulePull f
         (exchangeConstantRing V A) (exchangeConstantRing U A) (exchangeConstantIso f A) ≅
@@ -105,8 +100,7 @@ def ordinaryDiagonalPullIso :
     (fun M ↦ NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by simp))
     (fun _ ↦ by ext n; simp)
 
-/-- Exact descent of the identity comparison, retaining the derived units and counits.
-Source: Stacks 0941 (blueprint: lem-sp-completion-mate-comparison). -/
+/-- Exact descent of the identity comparison, retaining the derived units and counits. -/
 def diagonalPullIso :
     diagonal (A := A) V ⋙ exchangeConstantPull (A := A) f ≅
       pull (A := A) f ⋙ diagonal (A := A) U :=
@@ -117,8 +111,7 @@ def diagonalPullIso :
 attribute [local irreducible] diagonalPullIso
 
 /-- The direct-image/limit comparison is the adjunction conjugate of the identity square.
-It is the same K-injective comparison used by comparisonT in the generic interface.
-Source: Stacks 0A07 (blueprint: lem-sp-completion-mate-comparison). -/
+It is the same K-injective comparison used by comparisonT in the generic interface. -/
 def directLimitIso :
     rlim (A := A) U ⋙ push (A := A) f ≅
       exchangeConstantPush (A := A) f ⋙ rlim (A := A) V :=
@@ -131,8 +124,7 @@ def directLimitIso :
 
 attribute [local irreducible] directLimitIso
 
-/-- The prescribed reconstruction of constant-coefficient completed pullback.
-Source: Stacks 099M, 099N (blueprint: lem-sp-completion-mate-comparison). -/
+/-- The prescribed reconstruction of constant-coefficient completed pullback. -/
 def reconstruction (K : D (A := A) V) :
     (completePull d f).obj K ≅
       (rlim (A := A) U).obj ((exchangeConstantPull (A := A) f).obj ((reduction d V).obj K)) :=
@@ -143,8 +135,7 @@ attribute [local irreducible] reconstruction
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- The constant-coefficient H is pullback of the counit-tensor projection.
-Source: Stacks 0B56, 099M (blueprint: lem-sp-completion-mate-comparison). -/
+/-- The constant-coefficient H is pullback of the counit-tensor projection. -/
 def H (K : D (A := A) X) :
     (reduction d Y').obj ((pull (A := A) g).obj ((push (A := A) f).obj K)) ≅
       (exchangeConstantPull (A := A) g).obj
@@ -154,13 +145,11 @@ def H (K : D (A := A) X) :
 
 attribute [local irreducible] H
 
-/-- Exactly the prescribed s: derived strict inverse limit of H after reconstruction.
-Source: Stacks 099M, 0E48 (blueprint: lem-sp-completion-mate-comparison). -/
+/-- Exactly the prescribed s: derived strict inverse limit of H after reconstruction. -/
 def S (K : D (A := A) X) :=
   (rlim (A := A) Y').mapIso (H (f := f) (g := g) d K)
 
-/-- Exactly the prescribed t: reconstruction followed by direct-image/limit comparison.
-Source: Stacks 0A07, 099N (blueprint: lem-sp-completion-mate-comparison). -/
+/-- Exactly the prescribed t: reconstruction followed by direct-image/limit comparison. -/
 def T (K : D (A := A) X) :=
   (push (A := A) f').mapIso (reconstruction d g' K) ≪≫
     (directLimitIso (A := A) f').app
@@ -170,52 +159,8 @@ end AlgebraicGeometry.Scheme.OrderedExchange
 
 namespace CategoryTheory.AdicSites.OrderedExchangeInterface
 
-/-- Reexport the existing whole-diagram mate comparison, including invertibility and
-the two finite coefficient normalization clauses. No second postponed proof is introduced.
-
-Source: smooth-purity blueprint, proposition-composition-base-change-rf-shriek Proof Step 4;
-ingredient sources Stacks 099M, 099N, 0E48, 0941, 0B56, 0944
-(blueprint: lem-sp-completion-mate-comparison).
-
-Proof, following the ten steps of the DAG node:
-1. Realize the strict sequence category on the diagram site. Use one flat-term
-K-flat model for K and tensor it with the whole strict quotient diagram; its diagonal
-is K-flat by levelwise acyclicity. This identifies the reduction/pullback comparisons.
-2. The constant-tower functor preserves K-injectives, since evaluation at its terminal
-index is exact and left adjoint to it. Its derived units and counits are the ordinary
-ones termwise. The derived quotient augmentation therefore gives exactly the fixed
-completion unit.
-3. Evaluation of the strict projection adjunct gives finiteProjection. Each quotient
-is perfect, hence has a bounded finite-projective model. Constant sheafification and
-inverse image preserve its finite-free retracts. The finite total projection formula
-makes every evaluated projection invertible; levelwise cohomology detects its cone.
-Thus H is invertible and has the stated finite evaluation.
-4. The identity-component constant/pullback square gives directLimitIso by adjunction
-conjugation. On a K-injective strict tower it is the ordinary direct-image/limit map;
-its projections are the direct images of the tower projections. This is t.
-5. Apply ringedExchangeTensorCoherence on the diagram sites with the diagonal of K
-and the whole quotient diagram. The diagram exchange on the diagonal is the diagonal
-of the ordinary mate. The resulting equality holds before any evaluation or limit.
-6. Naturality of the projection adjunct in the coefficient, and its tensor-unit
-normalization, identify its composition with the quotient augmentation with direct
-image of that augmentation. Apply total derived limit to obtain the corresponding
-completion-unit equation.
-7. The strict expression t inverse followed by limit(v) followed by s extends the
-ordinary mate followed by the completed target unit. Completeness of that target
-and direct-image preservation give uniqueness of this extension.
-8. For each pair of edges, transpose under the ordinary and completion adjunctions.
-The comparison C(v^* unit) is invertible by reflection and preservation of complete
-objects under direct image. This calculation identifies the completed pullback square
-with the conjugate of the prescribed right-adjoint square, including units and counits.
-9. Transpose the completed mate and precompose with the completion unit. The triangle
-identities give the same extension as in step 7. Uniqueness proves the displayed
-natural-transformation equality, not merely equality of evaluated tower maps.
-10. Evaluate the strict derived adjunction on a K-injective tower and use its exact
-left adjoint. Finite scalar restriction commutes with direct image by adjunction
-conjugation and with inverse image on generalized sections. These comparisons turn
-the evaluated tower mate into ordinaryExchange over the original quotient ring.
-No properness, smoothness, constructibility, boundedness or etale-origin condition
-is used. Empty sites, the zero ideal and the unit ideal are included. -/
+/-- The whole-diagram mate comparison is invertible on complete objects and satisfies the two
+finite coefficient normalization clauses. -/
 abbrev completionMateComparison
     {Y X Y' X' : Site.{u}}
     {f : Morphism Y X} {g : Morphism Y Y'} {h : Morphism X X'} {k : Morphism Y' X'}

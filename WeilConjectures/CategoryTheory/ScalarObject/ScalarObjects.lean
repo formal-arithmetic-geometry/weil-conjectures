@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Ring.Equiv
 /-! # Scalar actions in preadditive categories
 
 Source: Stacks Project, Tag 04JQ, transport of scalar operations across an additive
-fully faithful equivalence. (blueprint: lem-exc-scalar-objects-equivalence)
+fully faithful equivalence.
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- An object equipped with a ring action by endomorphisms.
-Source: Stacks Project, Tag 04JQ, scalar enhancement of abelian objects.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ, scalar enhancement of abelian objects. -/
 structure ScalarObject (R : Type r) [Ring R] (C : Type u) [Category.{v} C]
     [Preadditive C] where
   X : C
@@ -40,8 +39,7 @@ namespace ScalarObject
 variable {R : Type r} [Ring R] {C : Type u} [Category.{v} C] [Preadditive C]
   {D : Type u'} [Category.{v'} D] [Preadditive D]
 
-/-- Scalar-compatible maps. Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+/-- Scalar-compatible maps. Source: Stacks Project, Tag 04JQ. -/
 structure Hom (M N : ScalarObject R C) where
   hom : M.X ⟶ N.X
   comm : ∀ a : R, (M.ρ a).asHom ≫ hom = hom ≫ (N.ρ a).asHom
@@ -58,8 +56,7 @@ instance : Category (ScalarObject R C) where
   comp_id f := hom_ext (Category.comp_id _)
   assoc f g h := hom_ext (Category.assoc _ _ _)
 
-/-- Forget scalar operations. Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+/-- Forget scalar operations. Source: Stacks Project, Tag 04JQ. -/
 def forget (R : Type r) [Ring R] (C : Type u) [Category.{v} C] [Preadditive C] :
     ScalarObject R C ⥤ C where
   obj M := M.X
@@ -69,8 +66,7 @@ instance : (forget R C).Faithful where
   map_injective h := hom_ext h
 
 /-- An additive functor acts on endomorphism rings.
-Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ. -/
 def mapEndRing (F : C ⥤ D) [F.Additive] (X : C) : End X →+* End (F.obj X) where
   toFun a := .of (F.map a.asHom)
   map_one' := End.ext (F.map_id X)
@@ -79,8 +75,7 @@ def mapEndRing (F : C ⥤ D) [F.Additive] (X : C) : End X →+* End (F.obj X) wh
   map_add' _a _b := End.ext F.map_add
 
 /-- Transport scalar operations by an additive functor.
-Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ. -/
 def map (F : C ⥤ D) [F.Additive] : ScalarObject R C ⥤ ScalarObject R D where
   obj M := ⟨F.obj M.X, (mapEndRing F M.X).comp M.ρ⟩
   map f := ⟨F.map f.hom, fun a ↦ by
@@ -90,8 +85,7 @@ def map (F : C ⥤ D) [F.Additive] : ScalarObject R C ⥤ ScalarObject R D where
   map_comp f g := hom_ext (F.map_comp f.hom g.hom)
 
 /-- Full faithfulness transports scalar-compatible maps.
-Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ. -/
 noncomputable def mapFullyFaithful (F : C ⥤ D) [F.Additive]
     (hF : F.FullyFaithful) : (map (R := R) F).FullyFaithful where
   preimage {M N} f := ⟨hF.preimage f.hom, fun a ↦ hF.map_injective (by
@@ -101,8 +95,7 @@ noncomputable def mapFullyFaithful (F : C ⥤ D) [F.Additive]
   preimage_map f := hom_ext (hF.preimage_map f.hom)
 
 /-- Conjugate a ring action along an isomorphism.
-Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ. -/
 def conjugate (X Y : D) (i : X ≅ Y) : End Y →+* End X where
   toFun a := .of (i.hom ≫ a.asHom ≫ i.inv)
   map_one' := by
@@ -123,8 +116,7 @@ def conjugate (X Y : D) (i : X ≅ Y) : End Y →+* End X where
     simp only [Preadditive.comp_add, Preadditive.add_comp]
 
 /-- Scalar operations lift uniquely through a fully faithful additive functor.
-Source: Stacks Project, Tag 04JQ.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ. -/
 noncomputable def endRingEquiv (F : C ⥤ D) [F.Additive]
     (hF : F.FullyFaithful) (X : C) : End X ≃+* End (F.obj X) :=
   RingEquiv.ofBijective (mapEndRing F X) (hF.mulEquivEnd X).bijective
@@ -133,8 +125,7 @@ noncomputable def endRingEquiv (F : C ⥤ D) [F.Additive]
 its original underlying functor. Full faithfulness lifts compatible maps. For essential
 surjectivity, conjugate an action by the counit and pull it back through the isomorphism
 of endomorphism rings; the counit then becomes a scalar-compatible isomorphism.
-Source: Stacks Project, Tag 04JQ, scalar enhancement.
-(blueprint: lem-exc-scalar-objects-equivalence) -/
+Source: Stacks Project, Tag 04JQ, scalar enhancement. -/
 noncomputable def equivalence (e : C ≌ D) [e.functor.Additive] :
     ScalarObject R C ≌ ScalarObject R D := by
   let F := map (R := R) e.functor

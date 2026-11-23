@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedIdealGenerators
 /-!
 # The augmented local extended Cech description
 
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099E.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace CategoryTheory
 /-- An augmented complex has the local extended Cech description when each finite
 slice-generating list gives a derived isomorphism from its actual extended localization
 complex, and the isomorphism commutes with the given augmentations.
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 099E. -/
 def HasLocalExtendedCechDescription
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

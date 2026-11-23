@@ -77,12 +77,7 @@ noncomputable def sfTransportRight
         ((proEtaleConstantDerivedDirectImage f A).obj N)) ≫
     eZ.functor.map q)
 
-/-- The first normalization identifies the pasted comparison with the intermediate.
-
-The source is the ambient mate-pasting calculation and its equivalence-unit normalization;
-the direct-image comparison uniqueness equations identify the displayed morphisms.
-(blueprint: lem-sf-intrinsic-direct-compositor-coordinates-k-injective-mate-pasting).
--/
+/-- The first normalization identifies the pasted comparison with the intermediate. -/
 theorem sfIntrinsicDirectCompositorCoordinates_ambient_normalization
     (A : Type u) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -110,12 +105,7 @@ theorem sfIntrinsicDirectCompositorCoordinates_ambient_normalization
       (leftDerivedUpperStarComp
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f g))
 
-/-- The intermediate is the composite-adjunction coordinate.
-
-The source is the composite-adjunction conjugate calculation after transporting the fixed-scalar
-right comparison through the intrinsic equivalence and cancelling the equivalence unit and counit.
-(blueprint: lem-sf-intrinsic-direct-compositor-coordinates-k-injective-mate-pasting).
--/
+/-- The intermediate is the composite-adjunction coordinate. -/
 theorem sfIntrinsicDirectCompositorCoordinates_ambient_to_intrinsic
     (A : Type u) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

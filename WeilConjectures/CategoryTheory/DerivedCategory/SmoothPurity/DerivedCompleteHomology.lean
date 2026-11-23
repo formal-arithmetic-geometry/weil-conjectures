@@ -17,8 +17,7 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Homology.ShortComplex.Linear
 
 /-! # Derived completeness passes to cohomology
-Source: Stacks Project, Tag 091P, the Roos product criterion.
-(blueprint: lem-weil-derived-complete-homology). -/
+Source: Stacks Project, Tag 091P, the Roos product criterion. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -83,13 +82,7 @@ private lemma map_tower_isIso
   infer_instance
 
 /-- Cohomology modules of a derived-complete complex are derived complete.
-Source: Stacks Project, Tag 091P, the equivalent Roos product criterion.
-(blueprint: lem-weil-derived-complete-homology).
-Proof: completeness says that one minus the multiplication shift is invertible on
-countable products. Exact products of modules commute with homology. Therefore the
-same operator is invertible on the product of each cohomology module. The degree-zero
-single functor preserves those products and scalar multiplication, so the Roos
-criterion gives derived completeness of that module. -/
+Source: Stacks Project, Tag 091P. -/
 theorem isDerivedComplete_homology {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{v} A)]
     (I : Ideal A) (K : DerivedCategory (ModuleCat.{v} A))

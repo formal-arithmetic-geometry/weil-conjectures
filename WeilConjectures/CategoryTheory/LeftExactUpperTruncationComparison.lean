@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-! # Left exact upper truncation comparisons
 
 Source: Stacks Project, Tag 05TC (2), and the canonical cycle calculation of Tag 0AVW.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison).
 -/
 
 @[expose] public section
@@ -98,16 +97,7 @@ omit [Abelian.HasKInjectiveResolutions C] [EnoughInjectives C]
   [HasDerivedCategory C] [HasDerivedCategory D] in
 set_option backward.isDefEq.respectTransparency false in
 /-- A left exact functor commutes with cohomology in the top degree of upper truncation.
-Source: Stacks Project, Tag 0AVW, canonical cycle calculation.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison).
-
-Proof: In degrees n-1 and n the upper smart truncation has respectively I^(n - 1)
-and ker(d^n), and its differential is the differential into that kernel. A left exact
-functor preserves this kernel. Thus applying F to the truncation inclusion identifies
-the two cycle objects and the two boundary maps (using the isomorphism in degree n-1).
-Their cokernels are canonically isomorphic, and the induced map is precisely degree-n
-homology of the mapped truncation inclusion. No boundedness, geometric hypothesis,
-or K-injectivity of I is needed. Zero complexes and all integer degrees are included. -/
+Source: Stacks Project, Tag 0AVW, canonical cycle calculation. -/
 theorem upperTruncation_raw_comparison (I : CochainComplex C ℤ) (n : ℤ) :
     IsIso (HomologicalComplex.homologyMap
       ((F.mapHomologicalComplex (.up ℤ)).map (I.ιTruncLE n)) n) := by
@@ -130,11 +120,7 @@ theorem upperTruncation_raw_comparison (I : CochainComplex C ℤ) (n : ℤ) :
 
 omit [PreservesFiniteLimits F] in
 /-- The derived functor does not change top-degree cohomology under upper truncation.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: lem-sc-left-exact-upper-truncation-comparison).
-Proof: The quotient of the upper truncation inclusion is quasi-isomorphic to the lower
-truncation in degree n+1. Negative vanishing for its bounded-below derived image and the
-homology sequence of the truncation triangle give invertibility in degree n. -/
+Source: Stacks Project, Tag 05TC (2). -/
 theorem upperTruncation_derived_comparison (I : CochainComplex C ℤ) (n : ℤ) :
     IsIso ((DerivedCategory.homologyFunctor D n).map
       (F.rightDerivedFunctor.map (DerivedCategory.Q.map (I.ιTruncLE n)))) := by
@@ -162,8 +148,7 @@ theorem upperTruncation_derived_comparison (I : CochainComplex C ℤ) (n : ℤ) 
     (hz (n - 1) (by omega)) (hz n (by omega))
 
 /-- Raw and derived upper-truncation comparisons, packaged for the naturality square.
-Source: Stacks Project, Tags 05TC (2) and 0AVW.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison). -/
+Source: Stacks Project, Tags 05TC (2) and 0AVW. -/
 theorem upperTruncation_comparisons (I : CochainComplex C ℤ) (n : ℤ) :
     IsIso (HomologicalComplex.homologyMap
       ((F.mapHomologicalComplex (.up ℤ)).map (I.ιTruncLE n)) n) ∧
@@ -173,8 +158,7 @@ theorem upperTruncation_comparisons (I : CochainComplex C ℤ) (n : ℤ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Left homology data after preserving cycles, with an actual cokernel of the mapped
-boundary. Source: Stacks Project, Tag 0AVW, canonical cycle calculation.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison). -/
+boundary. Source: Stacks Project, Tag 0AVW, canonical cycle calculation. -/
 noncomputable def mappedCyclesHomologyData (I : CochainComplex C ℤ) (n : ℤ) :
     ((I.sc n).map F).LeftHomologyData := by
   let h := (I.sc n).homologyData.left
@@ -210,8 +194,7 @@ noncomputable def mappedCyclesHomologyData (I : CochainComplex C ℤ) (n : ℤ) 
           rw [Category.id_comp]) }
 
 /-- The comparison from termwise application to derived application, transported to
-complexes. Source: Stacks Project, Tag 079V, definition of right derived functor.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison). -/
+complexes. Source: Stacks Project, Tag 079V, definition of right derived functor. -/
 noncomputable def complexDerivedUnit :
     F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
@@ -222,8 +205,7 @@ noncomputable def complexDerivedUnit :
 
 /-- The actual map from the cokernel of mapped boundaries to derived cohomology of
 upper truncation. All inverses are inverses of specified isomorphisms.
-Source: Stacks Project, Tag 0AVW, canonical cycle calculation.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison). -/
+Source: Stacks Project, Tag 0AVW, canonical cycle calculation. -/
 noncomputable def upperTruncationBoundaryComparison (I : CochainComplex C ℤ) (n : ℤ) :
     cokernel (F.map (I.sc n).homologyData.left.f') ⟶
       (DerivedCategory.homologyFunctor D n).obj
@@ -240,11 +222,7 @@ noncomputable def upperTruncationBoundaryComparison (I : CochainComplex C ℤ) (
       (F.complexDerivedUnit.app (I.truncLE n))
 
 /-- The upper-truncation unit is invertible in the top degree of a K-injective complex.
-Source: Stacks Project, Tag 05TC (2), and Tag 079V, derived comparison naturality.
-(blueprint: lem-sc-left-exact-upper-truncation-comparison).
-Proof: Apply degree-n homology to the naturality square for the truncation inclusion.
-Its two vertical arrows are invertible by upperTruncation_comparisons. The bottom
-unit is invertible because I is K-injective. Cancel the right vertical arrow. -/
+Source: Stacks Project, Tag 05TC (2), and Tag 079V, derived comparison naturality. -/
 theorem isIso_complexDerivedUnit_upperTruncation
     (I : CochainComplex C ℤ) [I.IsKInjective] (n : ℤ) :
     IsIso ((DerivedCategory.homologyFunctor D n).map

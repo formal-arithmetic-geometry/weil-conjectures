@@ -19,7 +19,14 @@ import WeilConjectures.RingTheory.RegularRingNormal
 import WeilConjectures.RingTheory.FiniteProductNormal
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
-/-! Normality of full root algebras along a regular divisor. -/
+/-! # Normality of full root algebras along a regular divisor
+
+## References
+
+* Stacks Project, Tag 0EYH, local ring verification in its proof
+* Stacks Project, Tag 0EYG, the full root algebra in the strictly henselian calculation
+* Stacks Project, Tag 07PF (Jacobian criterion)
+-/
 
 @[expose] public section
 
@@ -27,8 +34,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- The local Jacobian argument of Stacks Tag 07PF: a unit derivative prevents
-an equation from lying in the square of the maximal ideal. -/
+/-- If `R` is regular and the derivative of `P` is not in the prime `q` of `R[X] / (P)`, then
+the localization at `q` is a regular local ring. -/
 private theorem regular_root_localization_of_derivative_not_mem
     (R : Type u) [CommRing R] [IsRegularRing R] (P : Polynomial R)
     (q : Ideal (Polynomial R ⧸ Ideal.span {P})) [q.IsPrime]
@@ -81,24 +88,7 @@ private theorem regular_root_localization_of_derivative_not_mem
     (IsLocalization.algEquiv q.primeCompl (L ⧸ I.map a)
       (Localization.AtPrime q)).toRingEquiv
 
-/-- Full root models of a regular divisor have normal domain stalks.
-
-Source: Stacks Project, Tag 0EYH, local ring verification in its proof;
-Tag 0EYG, the full root algebra in the strictly henselian calculation.
-(blueprint: lem-sbc-regular-divisor-root-model-normal)
-
-Proof: Each monic root algebra B=R[T]/(T^e-f) is finite free over the
-Noetherian R, hence Noetherian. Multiplication by f on B is injective by
-freeness. Since t^e=f, multiplication by t is injective too. At a prime
-containing t, the quotient of the localized B by t is a localization of
-R/(f), hence regular. A Noetherian local ring whose quotient by a
-nonzerodivisor is regular is regular itself. At a prime not containing t,
-f and the derivative e*t^(e-1) are units. The localized root algebra is
-therefore etale over the regular base and is regular. Regular local rings
-are integrally closed domains. Every prime of a finite product comes from
-one factor, with the same local ring. Identify the scheme stalk with this
-localization to obtain the assertion. For m=0 there are no spectrum points,
-so the conclusion is vacuous; the argument also allows zero R and unit f. -/
+/-- Full root models of a regular divisor have normal domain stalks. -/
 theorem regular_divisor_root_model_normal
     (R : CommRingCat.{u}) [IsRegularRing R] (m : ℕ) (f : R)
     (hf : IsSMulRegular R f) [IsRegularRing (R ⧸ Ideal.span {f})]

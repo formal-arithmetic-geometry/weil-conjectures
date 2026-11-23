@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 public import WeilConjectures.AlgebraicGeometry.MilnorTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-!
 # Explicit maps and exactness for the strict Roos cohomology sequence
@@ -24,45 +25,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 section Helpers
 
-variable {A : Type a} [Category.{b} A] [Abelian A]
-
-theorem extract_shortExact {P Q H U V : A}
-    (f : P ⟶ Q) (g : Q ⟶ H) (i : H ⟶ U) (j : U ⟶ V)
-    (hfg : f ≫ g = 0) (hgi : g ≫ i = 0) (hij : i ≫ j = 0)
-    (h₁ : (ShortComplex.mk f g hfg).Exact)
-    (h₂ : (ShortComplex.mk g i hgi).Exact)
-    (h₃ : (ShortComplex.mk i j hij).Exact) :
-    ∃ h : cokernel.desc f g hfg ≫ kernel.lift j i hij = 0,
-      (ShortComplex.mk (cokernel.desc f g hfg) (kernel.lift j i hij) h).ShortExact := by
-  have hz : cokernel.desc f g hfg ≫ kernel.lift j i hij = 0 := by
-    apply (cancel_epi (cokernel.π f)).1
-    apply (cancel_mono (kernel.ι j)).1
-    simp [Category.assoc, hgi]
-  refine ⟨hz, ?_⟩
-  have : Mono (cokernel.desc f g hfg) := h₁.mono_cokernelDesc
-  have : Epi (kernel.lift j i hij) := h₃.epi_kernelLift
-  refine ⟨?_⟩
-  let S := ShortComplex.mk g i hgi
-  let T := ShortComplex.mk (cokernel.desc f g hfg) (kernel.lift j i hij) hz
-  let S' := ShortComplex.mk (cokernel.desc f g hfg) i (by
-    apply (cancel_epi (cokernel.π f)).1
-    simp [hgi])
-  let φ : S ⟶ S' :=
-    { τ₁ := cokernel.π f
-      τ₂ := 𝟙 H
-      τ₃ := 𝟙 U
-      comm₁₂ := by simp [S, S']
-      comm₂₃ := by simp [S, S'] }
-  have h' : S'.Exact := (ShortComplex.exact_iff_of_epi_of_isIso_of_mono φ).1 h₂
-  let ψ : T ⟶ S' :=
-    { τ₁ := 𝟙 _
-      τ₂ := 𝟙 H
-      τ₃ := kernel.ι j
-      comm₁₂ := by simp [T, S']
-      comm₂₃ := by simp [T, S'] }
-  exact (ShortComplex.exact_iff_of_epi_of_isIso_of_mono ψ).2 h'
-
-variable [HasCountableLimits A]
+variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableLimits A]
 
 def towerKernelIso (M : ℕᵒᵖ ⥤ A) :
     kernel (towerTransitionEndomorphism (K := fun n : ℕ ↦ M.obj (op n))
@@ -162,26 +125,15 @@ def milnorProjection [HasExactLimitsOfShape (Discrete ℕ) A]
       (roosBoundary_exact K q).choose_spec.choose_spec.choose ≫ (roosKernelIso K q).hom
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit Roos boundary and projection form a short exact sequence.
-
-proof.md, first paragraph
-(auxiliary; not a blueprint node).
-
-Proof: The mapping-cocone triangle gives three adjacent exact pairs. Factoring
-its boundary through the preceding cokernel gives a monomorphism; factoring its
-projection through the following kernel gives an epimorphism. The middle pair
-remains exact by cancellation of the cokernel epimorphism and kernel monomorphism.
-Exact products identify product homology with the product of homologies, and the
-projection formulas identify the induced transition with one minus shift. Finally,
-the kernel of one minus shift represents compatible families and hence the tower
-limit. Transporting the factored sequence along these endpoint isomorphisms gives
-the stated explicit short exact sequence. -/
+/-- The explicit Roos boundary and projection form a short exact sequence. -/
 theorem milnor_shortExact [HasExactLimitsOfShape (Discrete ℕ) A]
     (K : ℕᵒᵖ ⥤ CochainComplex A ℤ) (q : ℤ) :
     ∃ h : milnorInclusion K q ≫ milnorProjection K q = 0,
       (ShortComplex.mk (milnorInclusion K q) (milnorProjection K q) h).ShortExact := by
   obtain ⟨h₁, h₂, h₃, he₁, he₂, he₃⟩ := roosBoundary_exact K q
-  obtain ⟨hz, he⟩ := extract_shortExact _ _ _ _ h₁ h₂ h₃ he₁ he₂ he₃
+  obtain ⟨hz, he⟩ :=
+    ShortComplex.shortExact_cokernelDesc_of_exact h₁ h₂ h₃ he₁ he₂ he₃
+      (hjw := kernel.condition _) (kernelIsKernel _) _ (kernel.lift_ι _ _ _)
   have hw : milnorInclusion K q ≫ milnorProjection K q = 0 := by
     dsimp only [milnorInclusion, milnorProjection]
     calc

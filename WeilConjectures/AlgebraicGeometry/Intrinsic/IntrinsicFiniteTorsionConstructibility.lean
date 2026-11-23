@@ -10,9 +10,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 
 /-!
 # Intrinsic finite-torsion constructibility without a global base datum
-
-Source: Weil blueprint, finite-torsion constructibility, order 1454
-(blueprint: definition-constructible-sheaves).
 -/
 
 @[expose] public section
@@ -26,9 +23,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The intrinsic bounded constructibility condition, independent of a chosen global
 finite-field datum. This is exactly the cohomological predicate in
 `finiteTorsionConstructible`, with its unused global parameters removed.
-The quotient coefficient ring and its chosen uniformizer remain the recorded ones.
-Source: Weil blueprint, finite-torsion constructibility, order 1454
-(blueprint: definition-constructible-sheaves). -/
+The quotient coefficient ring and its chosen uniformizer remain the recorded ones. -/
 noncomputable def intrinsicFiniteTorsionConstructible
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (Y : Scheme.{u}) :

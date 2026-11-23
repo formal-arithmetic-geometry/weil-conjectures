@@ -11,9 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.Koszul.KoszulQuotientLimit
 import all WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicKoszulCompletion
 
 /-! # The graded nilpotent Koszul tower
-
-Source: proper base change blueprint, order 1328, proof sentences three through five.
-(blueprint: lem-weil-pbc-nilpotent-koszul-graded-tower).
 -/
 
 -- After pruning, this module only keeps private declarations.

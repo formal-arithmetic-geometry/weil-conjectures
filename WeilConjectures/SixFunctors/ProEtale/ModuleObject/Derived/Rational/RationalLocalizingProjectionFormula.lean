@@ -600,21 +600,23 @@ private theorem projection_localizing_of_interfaces
     change (boundedConstructible (condensedRingObj Λ X)).localizingClosure = _
     rw [← hbcX]
     apply le_antisymm
-    · let := localizing_small _
+    · let := (isLocalizingSubcategory_iff_isLocalizing _).1
         (localizingClosure_exists Λ X (constantModelBoundedConstructible Λ X)).2.2.2.1
       exact ObjectProperty.localizingClosure_le (fun K hK P _ hSP ↦ hSP K hK)
     · intro K hK
-      exact hK _ (localizing_large _) (ObjectProperty.le_localizingClosure _)
+      exact hK _ ((isLocalizingSubcategory_iff_isLocalizing _).2 inferInstance)
+        (ObjectProperty.le_localizingClosure _)
   have heqY : localizingBoundedConstructible Λ Y =
       localizingClosure (constantModelBoundedConstructible Λ Y) := by
     change (boundedConstructible (condensedRingObj Λ Y)).localizingClosure = _
     rw [← hbcY]
     apply le_antisymm
-    · let := localizing_small _
+    · let := (isLocalizingSubcategory_iff_isLocalizing _).1
         (localizingClosure_exists Λ Y (constantModelBoundedConstructible Λ Y)).2.2.2.1
       exact ObjectProperty.localizingClosure_le (fun K hK P _ hSP ↦ hSP K hK)
     · intro K hK
-      exact hK _ (localizing_large _) (ObjectProperty.le_localizingClosure _)
+      exact hK _ ((isLocalizingSubcategory_iff_isLocalizing _).2 inferInstance)
+        (ObjectProperty.le_localizingClosure _)
   have hpush : ∀ K, localizingBoundedConstructible Λ X K →
       localizingBoundedConstructible Λ Y ((lowerStar Λ p).rightDerivedFunctor.obj K) := by
     intro K hK
@@ -623,7 +625,8 @@ private theorem projection_localizing_of_interfaces
     have h := localizingClosure_map
       (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
       (constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
-      (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩) hp.2
+      (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩)
+      (preservesColimit_of_properLocalizingHypotheses Λ p hp)
     rw [hctfX, hctfY] at h
     exact h K hK
   have hsum : (lowerStar Λ p).rightDerivedFunctor.PreservesCoproductsOn.{u + 1}

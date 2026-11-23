@@ -25,15 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace SheafOfModules
 
 /-- Module sheaves are Grothendieck abelian whenever the site is essentially small in
-the coefficient universe. Source: Stacks 03DA, 03DB and 079Q
-(auxiliary; not a blueprint node).
-Proof: restrict underlying presheaves to a small model of the site to obtain small Hom
-sets. Free sheaves on the shrink-Yoneda presheaves of the chosen representative objects
-form a small separating family: the free/sheafification adjunction identifies a map
-from one of these sheaves with a section, and sections distinguish morphisms on the
-small model. Their coproduct is a separator. Filtered colimits are exact because the
-faithful exact forgetful functor to abelian sheaves preserves and reflects colimits.
-No inequality between the raw site universes and the coefficient universe is needed. -/
+the coefficient universe. Source: Stacks 03DA, 03DB and 079Q. -/
 theorem isGrothendieckAbelian_coefficientUniverse
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{w}]

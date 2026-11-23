@@ -139,14 +139,7 @@ omit [EnoughInjectives C] in
 `τ : G ≅ G₁ ⋙ G₂`. Pushing a class of `Extⁿ(A, B)` forward along `G` agrees, up to `τ`, with
 pushing it forward along `G₁` and then along `G₂`.
 
-Source: Stacks Project, derived.tex, Tag 015F
-(blueprint: lem-weil-pbc-ext-exact-functor-composition-comparison).
-
-Proof: identify `Ext` with shifted morphisms between single complexes in the derived category.
-The functor induced by `G` agrees with that induced by `G₁` followed by `G₂` through
-`Functor.mapDerivedCategoryNatIso τ` and `Functor.mapDerivedCategoryCompIso G₁ G₂`, which
-commute with the shifts. Naturality of this comparison for the shifted morphism representing
-`x` gives the equality, once the comparisons with single complexes are cancelled. -/
+Source: Stacks Project, derived.tex, Tag 015F. -/
 lemma mapExactFunctor_comp_mk₀_eq (G₁ : C ⥤ D) [G₁.Additive]
     [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁] (G₂ : D ⥤ E) [G₂.Additive]
     [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂] (G : C ⥤ E) [G.Additive]

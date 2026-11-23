@@ -28,7 +28,6 @@ namespace CategoryTheory.DecreasingFiltration
 
 /-- The image filtration graded piece is represented by the normalized cycle quotient.
 Source: Stacks Project, Tag 012Q, final quotient calculation.
-(blueprint: lem-sp-filtered-cohomology-image-normalized-quotient).
 -/
 theorem cohomologyImage_graded_normalized
     {C : Type u} [Category.{v} C] [Abelian C]

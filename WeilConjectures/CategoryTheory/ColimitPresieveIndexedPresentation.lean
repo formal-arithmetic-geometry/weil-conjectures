@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Reindexing a finite presieve in a filtered colimit
 
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation.
-(blueprint: lem-weil-pbc-colimit-presieve-indexed-presentation)
+Source: Stacks Project, Sites, Tag 09YL observation.
 -/
 
 @[expose] public section
@@ -96,19 +95,7 @@ private theorem ofArrows_transport
   simp
 
 /-- A finite stage presieve can eventually be presented by any finite indexing of its image.
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation and axiom (2).
-(blueprint: lem-weil-pbc-colimit-presieve-indexed-presentation)
-
-Proof: For each requested index choose a member of the original presieve with that image.
-Conversely, choose an index for every original member. Each member and the representative
-chosen for its index have equal cocone images. Eventual equality in the arrow colimit and
-a finite wide span identify all these pairs at one successor. The chosen arrows therefore
-generate exactly the image of the original presieve. Next align its target with the fixed
-stage target by eventual equality in the object colimit. Move all arrows to this common
-successor and postcompose with the equality morphism of targets. Their presieve is the
-transported transition image; cocone naturality preserves the requested arrow images.
-An empty indexing forces the presieve to be empty, and only target alignment is needed.
-Repeated indices impose finite comparisons, not injectivity. -/
+Source: Stacks Project, Sites, Tag 09YL observation and axiom (2). -/
 theorem colimit_presieve_indexed_presentation
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (V : Cocone F) (hobjects : IsColimit (Cat.objects.mapCocone V))

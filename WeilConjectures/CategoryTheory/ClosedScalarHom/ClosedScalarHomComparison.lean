@@ -29,7 +29,7 @@ variable {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]
   (μ : S.tensor ⋙ F ≅ (F.prod F) ⋙ T.tensor)
 
 /-- The five scalar and closed adjunction bijections.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 def bijection (X K : A) (N : B) :
     (X ⟶ U.obj (I.obj (op (F.obj K), N))) ≃ (X ⟶ H.obj (op K, U.obj N)) :=
   (adj.homEquiv X _).symm.trans
@@ -38,7 +38,7 @@ def bijection (X K : A) (N : B) :
         ((adj.homEquiv _ N).trans (S.transpose _ _ _))))
 
 /-- The five-bijection composite commutes with precomposition.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 theorem bijection_precomp {X Y : A} (f : X ⟶ Y) (K : A) (N : B)
     (g : Y ⟶ U.obj (I.obj (op (F.obj K), N))) :
     bijection S T adj μ X K N (f ≫ g) = f ≫ bijection S T adj μ Y K N g := by
@@ -119,7 +119,7 @@ private theorem uncurry_naturality (X K K' N N' : A)
   simp only [Category.assoc]
 
 /-- The five-bijection composite is natural in its two remaining inputs.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 theorem bijection_naturality (X K K' : A) (N N' : B)
     (g : X ⟶ U.obj (I.obj (op (F.obj K), N))) (f : K' ⟶ K) (n : N ⟶ N') :
     bijection S T adj μ X K' N'
@@ -143,7 +143,7 @@ theorem bijection_naturality (X K K' : A) (N N' : B)
   rfl
 
 /-- The representing isomorphism obtained by applying the bijection to identities.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 def component (K : A) (N : B) :
     U.obj (I.obj (op (F.obj K), N)) ≅ H.obj (op K, U.obj N) := by
   let E := U.obj (I.obj (op (F.obj K), N))
@@ -159,7 +159,7 @@ def component (K : A) (N : B) :
   · rw [← hrep, hβ]
 
 /-- Postcomposition with the representing map is the five-bijection composite.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 theorem component_rep (X K : A) (N : B)
     (t : X ⟶ U.obj (I.obj (op (F.obj K), N))) :
     bijection S T adj μ X K N t = t ≫ (component S T adj μ K N).hom := by
@@ -168,13 +168,7 @@ theorem component_rep (X K : A) (N : B)
 
 /-- A tensor-preserving left adjoint carries the closed-Hom adjunction to its
 restriction-of-scalars comparison, naturally in both inputs.
-Source: Stacks 07A6 and 08J9; the five representing Hom bijections.
-(blueprint: lem-sfb-closed-scalar-hom-comparison).
-Proof: compose the two scalar transposes, the two closed transposes, and the
-strong tensor comparison. Naturality in a testing object identifies this
-bijection with postcomposition by its value at the identity. Apply the inverse
-bijection to the target identity to obtain the inverse map. Naturality in the
-two remaining objects gives naturality of these component isomorphisms. -/
+Source: Stacks 07A6 and 08J9. -/
 def iso : ((F.op.prod (𝟭 B)) ⋙ I ⋙ U) ≅ ((𝟭 Aᵒᵖ).prod U ⋙ H) :=
   NatIso.ofComponents (fun p ↦ component S T adj μ p.1.unop p.2) (by
     rintro ⟨K, N⟩ ⟨K', N'⟩ ⟨f, n⟩
@@ -184,21 +178,21 @@ def iso : ((F.op.prod (𝟭 B)) ⋙ I ⋙ U) ≅ ((𝟭 Aᵒᵖ).prod U ⋙ H) :
     simpa using h)
 
 /-- The comparison induces precisely the five defining Hom bijections.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 theorem representing (X K : A) (N : B)
     (t : X ⟶ U.obj (I.obj (op (F.obj K), N))) :
     bijection S T adj μ X K N t = t ≫ (iso S T adj μ).hom.app (op K, N) := by
   exact component_rep S T adj μ X K N t
 
 /-- The lax tensor map on the right adjoint is the mate of the strong tensor map.
-Source: Stacks 07A4 and 07A6 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A4 and 07A6. -/
 def restrictionTensor (P Q : B) :
     S.tensor.obj (U.obj P, U.obj Q) ⟶ U.obj (T.tensor.obj (P, Q)) :=
   adj.unit.app _ ≫ U.map (μ.hom.app _ ≫
     T.tensor.map (Prod.mkHom (adj.counit.app P) (adj.counit.app Q)))
 
 /-- Restricted evaluation preceded by the extension unit in the second tensor factor.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison). -/
+Source: Stacks 07A6 and 08J9. -/
 def restrictedEvaluation (K : A) (N : B) :
     S.tensor.obj (U.obj (I.obj (op (F.obj K), N)), K) ⟶ U.obj N :=
   S.tensor.map (Prod.mkHom (𝟙 _) (adj.unit.app K)) ≫
@@ -220,10 +214,7 @@ private theorem restrictionTensor_unit (P : B) (K : A) :
   simp
 
 /-- Evaluation uniquely normalizes the comparison, using the scalar triangle identity.
-Source: Stacks 07A6 and 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison).
-Proof: unroll the five Hom bijections at the source identity. Naturality of the
-scalar unit and of the strong tensor map moves the extra scalar unit to the
-second factor, where the scalar counit cancels it by the triangle identity. -/
+Source: Stacks 07A6 and 08J9. -/
 theorem evaluation (K : A) (N : B) :
     (S.transpose _ K (U.obj N)).symm ((iso S T adj μ).hom.app (op K, N)) =
       restrictedEvaluation S T adj μ K N := by
@@ -241,9 +232,7 @@ theorem evaluation (K : A) (N : B) :
   rfl
 
 /-- Equality of restricted evaluations determines the natural isomorphism uniquely.
-Source: Stacks 08J9 (blueprint: lem-sfb-closed-scalar-hom-comparison).
-Proof: the closed transpose is bijective, so its prescribed value determines
-each component. Natural transformations and natural isomorphisms are extensional. -/
+Source: Stacks 08J9. -/
 theorem unique (β : ((F.op.prod (𝟭 B)) ⋙ I ⋙ U) ≅ ((𝟭 Aᵒᵖ).prod U ⋙ H))
     (hβ : ∀ (K : A) (N : B), (S.transpose _ K (U.obj N)).symm
       (β.hom.app (op K, N)) = restrictedEvaluation S T adj μ K N) :

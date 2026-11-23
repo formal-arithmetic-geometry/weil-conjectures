@@ -12,9 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Derived transport of represented functors
 
-Source: Stacks Project, derived.tex, Tags 05TH, 05TI, 070I and 015F;
-representability and coherence calculation in the DAG
-(blueprint: lem-pur-derived-representable-transport).
+Source: Stacks Project, derived.tex, Tags 05TH, 05TI, 070I and 015F.
 
 The comparisons below use the left Kan extension unit, the exact termwise derived
 functor, and the roof-normalized comparison of `exists_rhom_hom_derived_roof`.
@@ -37,8 +35,7 @@ variable {A : Type u₁} {B : Type u₂} [Category.{v} A] [Category.{v} B]
   [HasDerivedCategory.{wAb} AddCommGrpCat.{v}]
 
 /-- The termwise transformation followed by the target derived unit and exact
-localization comparison. Source: Stacks Tags 05TI and 015F
-(blueprint: lem-pur-derived-representable-transport). -/
+localization comparison. Source: Stacks Tags 05TI and 015F. -/
 noncomputable def representableTransportUnit
     (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (S : A ⥤ AddCommGrpCat.{v}) (S' : B ⥤ AddCommGrpCat.{v})
@@ -55,7 +52,7 @@ noncomputable def representableTransportUnit
     (associator _ _ _).hom
 
 /-- The canonical comparison is the Kan factorization of `representableTransportUnit`.
-Source: Stacks Tag 05TI (blueprint: lem-pur-derived-representable-transport). -/
+Source: Stacks Tag 05TI. -/
 noncomputable def representableTransportComparison
     (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (S : A ⥤ AddCommGrpCat.{v}) (S' : B ⥤ AddCommGrpCat.{v})
@@ -66,7 +63,7 @@ noncomputable def representableTransportComparison
 
 /-- Apply the exact derived functor to a shifted morphism and precompose with `d⁻¹`.
 The displayed single and shift isomorphisms are the termwise ones.
-Source: Stacks Tag 015F (blueprint: lem-pur-derived-representable-transport). -/
+Source: Stacks Tag 015F. -/
 noncomputable def representableTransportHom
     (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     {P : A} {P' : B} (d : L.obj P ≅ P') (X : DerivedCategory.Plus A) (a : ℤ)

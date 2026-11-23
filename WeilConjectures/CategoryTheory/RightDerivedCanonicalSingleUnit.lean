@@ -22,21 +22,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
   (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]
 
 /-- The canonical derived unit on a literal single complex in degree n.
-Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1).
-(blueprint: lem-pc-right-derived-canonical-single-unit)
-
-Proof: Shift the literal degree-n single complex by n to degree zero. The
-single-functor shift isomorphism identifies the result with X[0]. Naturality of
-rightDerivedFunctorPlusUnith under shifts (NatTrans.CommShift), together with the
-homology shift comparison, expresses the left side as the canonical degree-zero
-unit followed by singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso 0
-and rightDerivedZeroIsoSelf. Apply the proved
-rightDerivedPlusSingleUnitHomology_comp_comparison. The resulting augmentation
-is rightDerivedZeroIsoSelf.inv, so it cancels with rightDerivedZeroIsoSelf.hom.
-The cycles-to-coefficient map on the right is the corresponding single-complex
-homology identification: all differentials are zero. Transporting back through
-the shift and quotient homology comparisons gives the equation, including n=0
-and a zero coefficient. No arbitrary supported complex or normalized map occurs. -/
+Source: Stacks Project, Tag 015J. -/
 theorem rightDerivedFunctorPlusUnit_canonical_single (X : B) (n : ℕ) :
     let S : CochainComplex.Plus B :=
       ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩

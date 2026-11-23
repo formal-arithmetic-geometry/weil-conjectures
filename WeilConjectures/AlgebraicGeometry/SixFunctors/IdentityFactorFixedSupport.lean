@@ -25,9 +25,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
-/-- The actual open/proper pair, without introducing a chosen compactification.
-Source: compactification formula, def-sf-operation-stages
-(blueprint: lem-sf-identity-factor-fixed-support). -/
+/-- The actual open/proper pair, without introducing a chosen compactification. -/
 def identityFactorPair {X Z Y : Scheme.{u}} (i : X ⟶ Z) (p : Z ⟶ Y)
     [IsOpenImmersion i] [IsProper p] : Compactification (i ≫ p) where
   Z := Z
@@ -37,9 +35,7 @@ def identityFactorPair {X Z Y : Scheme.{u}} (i : X ⟶ Z) (p : Z ⟶ Y)
   isOpenImmersion := inferInstance
   isProper := inferInstance
 
-/-- Remove the identity open extension in the proper compactification.
-Source: adjunction identity law, def-sf-operation-stages
-(blueprint: lem-sf-identity-factor-fixed-support). -/
+/-- Remove the identity open extension in the proper compactification. -/
 def identityFactorFixedProper (Λ : Type (u + 1)) [CommRing Λ]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p] :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ)
@@ -49,9 +45,7 @@ def identityFactorFixedProper (Λ : Type (u + 1)) [CommRing Λ]
     (Functor.mapDerivedCategoryNatIso (openImmersionLowerShriekIdIso _ Z) ≪≫
       Functor.mapDerivedCategoryIdIso _) _ ≪≫ Functor.leftUnitor _
 
-/-- Remove the identity direct image in the open compactification.
-Source: adjunction identity law, def-sf-operation-stages
-(blueprint: lem-sf-identity-factor-fixed-support). -/
+/-- Remove the identity direct image in the open compactification. -/
 def identityFactorFixedOpen (Λ : Type (u + 1)) [CommRing Λ]
     {X Z : Scheme.{u}} (i : X ⟶ Z) [IsOpenImmersion i] :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ)
@@ -60,9 +54,7 @@ def identityFactorFixedOpen (Λ : Type (u + 1)) [CommRing Λ]
   Functor.isoWhiskerLeft _ (rightDerivedLowerStarId (ModuleCat.{u + 1} Λ) Z) ≪≫
     Functor.rightUnitor _
 
-/-- The two identity-factor unit maps, in their order of application.
-Source: identity open extension followed by identity direct image
-(blueprint: lem-sf-identity-factor-fixed-support). -/
+/-- The two identity-factor unit maps, in their order of application. -/
 def identityFactorFixedIso (Λ : Type (u + 1)) [CommRing Λ]
     {X Z Y : Scheme.{u}} (i : X ⟶ Z) (p : Z ⟶ Y)
     [IsOpenImmersion i] [IsProper p] :
@@ -295,21 +287,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor
   Functor.mapDerivedCategory
 
 /-- The geometric compositor on an etale-origin input is the pair of identity unit maps.
-This statement involves no intrinsic coefficient presentation or retained finite witness.
-
-Source: proposition-construction-independence-rf-shriek--7, the arbitrary-triangle formula; and
-lem-pur-compact-support-site-coherence, its composition square.
-(blueprint: lem-sf-identity-factor-fixed-support).
-
-Proof: take the triangle with open compactification of i, proper compactification of p,
-and actual pair (i,p). Its middle square has four identity edges. The arbitrary-triangle
-formula expresses the etale compositor by this triangle. Apply the identity exchange law,
-the right unit for open composition and the left unit for proper composition. In the
-normalized site-comparison square, the open and proper comparison maps respect these same
-identity unit maps: this is the identity law of the extension comparison and the identity
-law of the direct-image counit mate. Naturality moves the open comparison through proper
-image. Cancel the invertible source boundary to obtain the equation. No nonzero or
-nonempty hypothesis enters this calculation. -/
+This statement involves no intrinsic coefficient presentation or retained finite witness. -/
 theorem identityFactorFixedCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Z Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Z] [IsNoetherian Y]
     (i : X ⟶ Z) (p : Z ⟶ Y) [IsOpenImmersion i] [IsProper p] [QuasiCompact i]

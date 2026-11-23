@@ -10,12 +10,17 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsCanon
 
 /-! # Closed support over the intrinsic constant coefficient sheaf
 
-Source: Weil blueprint, smooth purity, order 1858; Stacks Project, Tag 09AH
-(blueprint: definition-local-cohomology--1).
-
 The canonical coefficient map, obtained by applying inverse image to constant sections,
 identifies the pulled-back constant ring with the constant ring on the source. All module
 operations below use that map. No replacement of the small pro-etale site is made.
+
+## References
+
+* Stacks 09A5
+* Stacks 03D2
+* Stacks 03D6
+* Stacks 03D7
+* Stacks 09AH
 -/
 
 @[expose] public section
@@ -28,8 +33,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical constant-ring identification; its data is the recorded structure map.
-Source: Stacks 09A5 (blueprint: definition-local-cohomology--1). -/
+/-- The canonical constant-ring identification; its data is the recorded structure map. -/
 noncomputable def sfConstantCoefficientIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A] :
     (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (proEtaleConstantRing Y A) ≅
@@ -40,29 +44,26 @@ noncomputable def sfConstantCoefficientIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     f (ULift.{u + 1, u} A)
   asIso (proEtaleCoefficientInverseImageMap f A)
 
-/-- Module inverse image along the canonical constant-ring identification.
-Source: Stacks 03D2 (blueprint: definition-local-cohomology--1). -/
+/-- Module inverse image along the canonical constant-ring identification. -/
 noncomputable abbrev sfConstantModulePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A] :=
   proEtaleRingModulePullback f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
     (sfConstantCoefficientIso f A)
 
 /-- Direct image with its constant-section scalar map, adjoint to the canonical coefficient
-identification. Source: Stacks 03D6 (blueprint: definition-local-cohomology--1). -/
+identification. -/
 noncomputable abbrev sfConstantModuleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A] :=
   proEtaleRingModuleDirectImage f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
     (sfConstantCoefficientIso f A)
 
-/-- The canonical inverse/direct-image adjunction over constant coefficients.
-Source: Stacks 03D7 (blueprint: definition-local-cohomology--1). -/
+/-- The canonical inverse/direct-image adjunction over constant coefficients. -/
 noncomputable abbrev sfConstantModuleAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] [Finite A] :=
   proEtaleRingModuleAdjunction f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
     (sfConstantCoefficientIso f A)
 
-/-- The kernel of the open adjunction unit, with morphisms induced by its naturality.
-Source: Stacks 09AH (blueprint: definition-local-cohomology--1). -/
+/-- The kernel of the open adjunction unit, with morphisms induced by its naturality. -/
 noncomputable def sfIntrinsicSectionsWithSupport {U T : Scheme.{u}} (j : U ⟶ T)
     (A : Type u) [CommRing A] [Finite A] :
     proEtaleRingModules T (proEtaleConstantRing T A) ⥤

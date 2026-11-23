@@ -14,9 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 # Transport of scheme-theoretic images through admissible blow-ups
 
 This file records the transport of scheme-theoretic images through an admissible blow-up
-(Stacks Project Tag 0F3Y; blueprint `thm:0F3Y`,
-`lemma:nagata-scheme-image-strict-transform`,
-`lemma:nagata-scheme-image-transport-strict-transform`; proof order item 31):
+(Stacks Project Tag 0F3Y):
 
 - `AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup`: the scheme-theoretic image of
   a lift along a `U`-admissible blow-up is the strict transform of the scheme-theoretic
@@ -24,7 +22,6 @@ This file records the transport of scheme-theoretic images through an admissible
 
 It is consumed by the graph extension of
 `WeilConjectures.Compactification.GraphExtension`.
-
 -/
 
 @[expose] public section
@@ -41,13 +38,11 @@ section ImageTransport
 
 variable {S X Y V : Scheme.{u}} {x : X ⟶ S} {y : Y ⟶ S}
 
-/-- **Scheme-theoretic images and admissible blow-ups** (Stacks Project Tag 0F3Y;
-blueprint: `lemma:nagata-scheme-image-strict-transform`,
-`lemma:nagata-scheme-image-transport-strict-transform`; proof order item 31).
+/-- **Scheme-theoretic images and admissible blow-ups** (Stacks Project Tag 0F3Y).
 
 Differences from the informal statement. The two closed subschemes of `X' ×_S Y` are
 recorded by the kernels of the corresponding closed immersions, so the statement is in
-kernel ideal sheaf form. The Stacks Project and the blueprint also assume `h`
+kernel ideal sheaf form. The Stacks Project also assumes `h`
 quasi-separated; Mathlib's kernel ideal sheaf theory only needs quasi-compactness, so that
 hypothesis is dropped here.
 
