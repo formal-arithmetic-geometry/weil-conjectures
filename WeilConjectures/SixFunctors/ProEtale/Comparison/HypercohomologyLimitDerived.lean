@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.HypercohomologyLim
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullback
 public import WeilConjectures.SixFunctors.BaseChange.Pasting
 public import WeilConjectures.TraceFormula.CurveLocal.SectionsRestrictionGlobal
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+public import WeilConjectures.CategoryTheory.Abelian.HomologyFilteredColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.FreeComparisonMapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
