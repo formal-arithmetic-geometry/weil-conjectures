@@ -39,7 +39,7 @@ an isomorphism if those of the factors are
 * for `e`, by the proper projection formula, `e` being an isomorphism; moreover the unit of
   `Le^* ⊣ Re_*` is an isomorphism;
 * for `g`, by the proper projection formula
-  (`isIso_projectionMorphism_boundedConstructible_padicAlgCl`);
+  (`isIso_projectionMorphism_boundedConstructible_padicAlgCl_restrict`);
 * for `m`, at `(Lp_X^* A, Lg^* W)`, by the ordinary Künneth formula along the open immersion `j`
   (`ProEtale.CondensedRing.isIso_openKunnethMap`), through the left projection morphism
   (`ProEtale.CondensedRing.isIso_projectionMorphism_prodMap_id_of_isOpenImmersion`).
