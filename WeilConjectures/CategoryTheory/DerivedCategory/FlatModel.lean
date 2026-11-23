@@ -50,7 +50,6 @@ concentrated in degrees `[a, b]`.
   `[a, b]` exactly when it is represented by a complex of flat objects in degrees `[a, b]`.
 - `DerivedCategory.torAmplitudeIn_tensor`: Tor amplitudes add under the derived tensor
   product.
-
 -/
 
 @[expose] public section

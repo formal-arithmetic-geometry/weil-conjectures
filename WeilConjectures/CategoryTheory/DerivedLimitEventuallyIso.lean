@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 /-!
 # Vanishing of the first derived limit of an eventually constant tower
 
-Source: Stacks Project, More on Algebra, Tag 07KW, and Tag 08D4, proof of (2)
-(blueprint: lem-pc-derived-limit-eventually-iso).
+Source: Stacks Project, More on Algebra, Tag 07KW, and Tag 08D4, proof of (2).
 -/
 
 @[expose] public section
@@ -28,21 +27,8 @@ attribute [local instance] roosTowerEnoughInjectives roosLimitAdditive
 /-- A tower of abelian groups with eventually invertible successor transitions has
 zero first right derived inverse limit.
 
-Source: Stacks Project, Tag 07KW (lemma-Rlim), part (3), specialized to eventually
-constant systems; Tag 08D4 (lemma-application-nice-K-injective), proof of (2)
-(blueprint: lem-pc-derived-limit-eventually-iso).
-
-Proof:
-1. The Roos computation `lem-pc-derived-limit-roos-abelian-groups` identifies the
-first right derived inverse limit with the cokernel of `1 - s` on the product.
-2. Choose `m` after which all transitions `f n` are invertible. Given any tuple
-`y`, set `x m = 0`. For `n ≥ m`, recursively put
-`x (n + 1) = (f n)⁻¹ (x n - y n)`. For the finitely many indices below `m`,
-recursively downwards put `x n = y n + f n (x (n + 1))`.
-3. These equations give `x n - f n (x (n + 1)) = y n` at every index, including
-`m = 0`, when the downward recursion is empty. Thus `1 - s` is surjective,
-hence epic in abelian groups, and its cokernel is zero. Transport this zero
-object along the Roos isomorphism. -/
+Source: Stacks Project, Tag 07KW, part (3), specialized to eventually
+constant systems; Tag 08D4, part (2). -/
 theorem isZero_firstDerivedLimit_of_eventually_isIso
     (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (hA : ∃ m : ℕ, ∀ n : ℕ, m ≤ n →

@@ -35,6 +35,10 @@ with `p` smooth and `g` quasi-compact and quasi-separated.
 - `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth_of_torsion`: the
   pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` is an isomorphism at `K ≅ ν^* L` for a bounded
   below étale complex `L` whose cohomology sheaves are torsion of orders invertible on `S`.
+- `AlgebraicGeometry.ProEtale.isIso_homologyFunctor_map_derivedBaseChangeMap_app_of_smooth`: the
+  degree-`q` base change map `p^* R^q g_* F ⟶ R^q h_* e^* F` is an isomorphism for a classical
+  pro-étale sheaf `F ≅ ν^* G` with `G` torsion of orders invertible on `S` (blueprint
+  `theorem-smooth-base-change-classical-torsion`).
 - `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth_of_nsmul_eq_zero`: it is an
   isomorphism at every bounded constructible pro-étale complex (one of étale origin) killed by an
   integer invertible on `S`.
@@ -72,6 +76,32 @@ namespace ProEtale
 
 variable {S T Y X : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
+variable (Λ) in
+/-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` of a Cartesian square with `g`
+quasi-compact and quasi-separated is an isomorphism at `K ≅ ν^* L`, for a bounded below étale
+complex `L` at which the étale exchange map `p⁻¹ Rg_* L ⟶ Rh_* e⁻¹ L` is an isomorphism: the
+two exchange maps correspond under the site comparison
+(`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`). -/
+theorem isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app [QuasiCompact g]
+    [QuasiSeparated g] (sq : IsPullback e h g p)
+    (L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hBC : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L))
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))
+    (eK : (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory.obj
+      (DerivedCategory.Plus.ι.obj L) ≅ K) :
+    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
+  rw [← NatTrans.isIso_app_iff_of_iso _ eK]
+  have : QuasiCompact h := MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
+  have : QuasiSeparated h :=
+    MorphismProperty.of_isPullback (P := @QuasiSeparated) sq inferInstance
+  have hαβ := ProEtale.comparison_derivedBaseChangeMap Λ sq L
+  have : IsIso ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+      (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L))) :=
+    inferInstance
+  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff
+    (Arrow.isoMk ((ProEtale.baseChangeSourceComparisonIso g p Λ).app L)
+      ((ProEtale.baseChangeTargetComparisonIso e h Λ).app L) hαβ.symm)).1 this
+
 variable (Λ p) in
 /-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` of a Cartesian square with `p` smooth
 and `g` quasi-compact and quasi-separated is an isomorphism at `K ≅ ν^* L`, for a bounded below
@@ -88,20 +118,49 @@ theorem isIso_derivedBaseChangeMap_app_of_smooth_of_torsion [Smooth p] [QuasiCom
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))
     (eK : (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory.obj
       (DerivedCategory.Plus.ι.obj L) ≅ K) :
-    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
-  rw [← NatTrans.isIso_app_iff_of_iso _ eK]
-  have hBC : IsIso ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L) :=
-    Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ p sq L hL
-  have : QuasiCompact h := MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance
-  have : QuasiSeparated h :=
-    MorphismProperty.of_isPullback (P := @QuasiSeparated) sq inferInstance
-  have hαβ := ProEtale.comparison_derivedBaseChangeMap Λ sq L
-  have : IsIso ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
-      (DerivedCategory.Plus.ι.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app L))) :=
-    inferInstance
-  exact ((MorphismProperty.isomorphisms _).arrow_mk_iso_iff
-    (Arrow.isoMk ((ProEtale.baseChangeSourceComparisonIso g p Λ).app L)
-      ((ProEtale.baseChangeTargetComparisonIso e h Λ).app L) hαβ.symm)).1 this
+    IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) :=
+  isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app Λ sq L
+    (Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ p sq L hL) K eK
+
+variable (Λ p) in
+/-- Blueprint `theorem-smooth-base-change-classical-torsion`: smooth base change for classical
+torsion sheaves. For a Cartesian square
+
+```
+Y --e--> T
+|        |
+h        g
+v        v
+X --p--> S
+```
+
+with `p` smooth and `g` quasi-compact and quasi-separated, let `F` be a classical pro-étale sheaf
+of `Λ`-modules on `T`, that is `F ≅ ν^* G` for a sheaf `G` on `T_ét`, with `G` torsion of orders
+invertible on `S` (equivalently, `G` is the filtered union of its subsheaves `G[n]` for the
+positive integers `n` invertible on `S`). Then for every `q` the degree-`q` base change map
+`p^* R^q g_* F ⟶ R^q h_* e^* F`, the degree-`q` cohomology of the pro-étale exchange map (4.5) at
+`F` placed in degree `0`, is an isomorphism. Abelian sheaves are the case `Λ = ℤ`.
+
+The pro-étale map is the étale one transported along the site comparison
+(`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app`), and the
+étale map is an isomorphism by the étale smooth base change theorem
+`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`. -/
+theorem isIso_homologyFunctor_map_derivedBaseChangeMap_app_of_smooth [Smooth p]
+    [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheafOfInvertibleOrder S G]
+    (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ))
+    (eF : (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).obj G ≅ F) (q : ℤ) :
+    IsIso ((DerivedCategory.homologyFunctor _ q).map
+      ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+        ((DerivedCategory.singleFunctor _ 0).obj F))) := by
+  let ν := comparisonUpperStar (ModuleCat.{u + 1} Λ) T
+  have := isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app Λ sq
+    ((DerivedCategory.Plus.singleFunctor _ 0).obj G)
+    (Etale.isIso_baseChange_app_singleFunctor_obj_of_smooth Λ p sq G)
+    ((DerivedCategory.singleFunctor _ 0).obj F)
+    (ν.mapDerivedCategory.mapIso ((DerivedCategory.Plus.singleFunctorιIso _ 0).app G) ≪≫
+      (ν.mapDerivedCategorySingleFunctor 0).app G ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso eF)
+  infer_instance
 
 variable (Λ p) in
 /-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` of a Cartesian square with `p` smooth

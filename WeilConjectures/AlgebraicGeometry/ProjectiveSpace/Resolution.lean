@@ -18,8 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 Let `k` be a field. Every coherent module `𝒢` on `ℙ¹_k` has a resolution
 `0 → ⨁ 𝒪(-N - 1) → ⨁ 𝒪(-N) → 𝒢 → 0` by finite direct sums of twists.
 
-This replaces the graded Hilbert syzygy theorem of the blueprint by the Castelnuovo–Mumford
-regularity argument on `ℙ¹`. Call `ℱ` *`0`-regular* if `H¹(ℱ(-1)) = 0`.
+Instead of the graded Hilbert syzygy theorem, this uses the Castelnuovo–Mumford regularity
+argument on `ℙ¹`. Call `ℱ` *`0`-regular* if `H¹(ℱ(-1)) = 0`.
 
 - If `ℱ` is `0`-regular, then a morphism `φ : ℰ ⟶ ℱ` which is surjective on `H⁰` is an
   epimorphism: tensoring the Koszul sequences `0 → 𝒪(a) → 𝒪(a + 1)² → 𝒪(a + 2) → 0` with `ℱ`
@@ -579,9 +579,7 @@ lemma shortExact_of_isos {X : Scheme.{u}} {S : ShortComplex X.Modules} (hS : S.S
 resolution `0 → 𝒪(-N - 1)^{J₁} → 𝒪(-N)^{J₀} → 𝒢 → 0`. Choose `N` with `H¹(𝒢(N - 1)) = 0` (Serre
 vanishing), let `F = 𝒢(N)` and `K` the kernel of the evaluation `H⁰(F) ⊗ 𝒪 ⟶ F`, an
 epimorphism by `epi_of_surjective_H_zero`. Then `H⁰(K) = H¹(K) = 0`, so `K(1)` is trivial by
-`exists_iso_sigma_twist_zero`; twist back by `𝒪(-N)`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`exists_iso_sigma_twist_zero`; twist back by `𝒪(-N)`. -/
 theorem exists_shortExact_sigma_twist (G : (ProjectiveLine (Spec (.of k))).Modules)
     [G.IsQuasicoherent] [G.IsFinitePresentation] :
     ∃ (J₁ J₀ : Type u) (_ : Finite J₁) (_ : Finite J₀) (d₁ d₀ : ℤ)

@@ -56,9 +56,7 @@ import all WeilConjectures.Algebra.Homology.SmoothPurity.PullbackDualFreeChart
 
 /-! # Ordinary Hom calculations for a bounded finite-free retract complex
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ,
-lemma-Rhom-strictly-perfect and lemma-dual-perfect-complex.
-(blueprint: lem-sfb-ringed-site-strict-perfect-hom).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ and.
 -/
 
 @[expose] public section
@@ -762,25 +760,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
 
 /-- Ordinary duality for a bounded complex of finite-free retracts.
-Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ,
-lemma-Rhom-strictly-perfect and the strictly perfect case of lemma-dual-perfect-complex.
-(blueprint: lem-sfb-ringed-site-strict-perfect-hom).
-
-Proof: split each term into a finite power of the coefficient sheaf. Dualizing
-its inclusion and projection gives a splitting for its dual. The dual basis
-identity gives mutually inverse termwise bidual and tensor-Hom evaluations.
-The Hom functor of a term is a retract of a finite-power functor, hence exact.
-The bounded-exact-term Hom lemma applied to the resolution augmentation gives
-both ordinary-to-derived quasi-isomorphisms. The dual complex has term
-(E^(-q))^dual in degree q, differential (-1)^(q+1) times the dual differential,
-and bounds [-b,-a]. Its terms remain finite-free retracts. Under the Hom-product
-projections, signed ordinary biduality is
-(-1)^i times termwise biduality, hence invertible. For an arbitrary F the
-ordinary evaluation in degree n is the finite direct sum over p+q=n of
-F^p tensor (E^(-q))^dual to Hom(E^(-q),F^p). Each summand is invertible by
-the dual basis identity. The two differentials are d_F f-(-1)^n f d_E,
-so these degreewise inverses give an inverse chain map. The argument includes
-zero ranks, the zero ring, odd shifts, and unbounded F. -/
+Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ. -/
 theorem ringedSiteStrictPerfectHom
     [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
       ((sheafCompose J

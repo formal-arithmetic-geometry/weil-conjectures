@@ -30,8 +30,7 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSup
 
 /-! # Detection of the complex tensor associator on local pure triples
 
-Source: Stacks Project, Tags 03EK and 06YN
-(blueprint: lem-sf-ringed-tensor-associator-detection).
+Source: Stacks Project, Tags 03EK and 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -148,17 +147,7 @@ private theorem pure_ext₃ (M N T H : RingedTensorModules.{c, v, r} J R)
   rfl
 
 /-- Local pure triples determine the total-complex associator.
-Source: Stacks Project, Tags 03EK and 06YN.
-(blueprint: lem-sf-ringed-tensor-associator-detection)
-
-Proof: maps out of the iterated sheaf tensor are detected on local pure triples.
-Indeed, tensor the inner sheafification unit with the third factor and sheafify;
-this is invertible because tensor preserves local equivalences. Cancel it and the
-two tensor/sheafification isomorphisms. The sheafification adjunction and sectionwise
-threefold tensor extensionality now give the detection criterion. Restrict a map
-of total complexes to each triple coproduct summand and use that criterion. The
-given generator formula and the native associator formula agree, so coproduct and
-degreewise extensionality identify the maps. -/
+Source: Stacks Project, Tags 03EK and 06YN. -/
 theorem coefficientAssociator_eq_native
     (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (a : (coefficientTotalTensor.{r, c, v} J R).obj

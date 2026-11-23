@@ -17,8 +17,8 @@ modules over a ring, the sequences `0 ⟶ I ⟶ R ⟶ R/I ⟶ 0` for the ideals 
 `K` of `D(C)` concentrated in `[a, b]` has Tor amplitude in `[a, b]` as soon as every
 `K ⊗ᴸ S_i.X₃[0]` lies in degrees `≥ a` (`DerivedCategory.torAmplitudeIn_of_forall_isGE`).
 
-This is the form of the residue-field test (`theorem-f-shriek-finite-coefficients--1`) used for the
-direct image (`proposition-six-operations-dctf--2`): only finitely many test objects, all of them
+This is the form of the residue-field test used for the
+direct image: only finitely many test objects, all of them
 constant, need to be controlled.
 
 ## Main results
@@ -42,12 +42,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [Braided
 /-- **Tor criterion for one short exact sequence.** Let `P` be a cochain complex whose terms
 `P^{a-1}` and `P^a` are flat, and let `S : X₁ ⟶ X₂ ⟶ X₃` be a short exact sequence such that
 `P ⊗ X₃` is exact in degree `a - 1`. Then tensoring the cokernel `P^a / d(P^{a-1})` with
-`S.f` gives a monomorphism.
-
-The obstruction to injectivity is a cycle of `P ⊗ X₃` in degree `a - 1`, which is a boundary by
-hypothesis. This is the diagram chase of
-`CategoryTheory.ObjectProperty.flat_opcycles_of_exactAt`, which applies it to every short exact
-sequence. -/
+`S.f` gives a monomorphism. -/
 lemma mono_opcycles_whiskerLeft_of_exactAt (P : CochainComplex C ℤ) (a : ℤ)
     (h₁ : flat (P.X (a - 1))) (h₂ : flat (P.X a)) (S : ShortComplex C) (hS : S.ShortExact)
     (hP : (((tensorRight S.X₃).mapHomologicalComplex (.up ℤ)).obj P).ExactAt (a - 1)) :
@@ -128,14 +123,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
 /-- **Testing Tor amplitude on a family of short exact sequences.** Let `S_i` be a family of
 short exact sequences of `C` which detects flatness: an object `F` is flat as soon as every
 `F ◁ S_i.f` is a monomorphism. Let `K` be an object of `D(C)` concentrated in degrees `[a, b]`
-such that every `K ⊗ᴸ S_i.X₃[0]` lies in degrees `≥ a`. Then `K` has Tor amplitude in `[a, b]`.
-
-Represent `K` by a complex `P` of flat objects vanishing above `b`. Its truncation `τ^{≥ a} P`
-still represents `K`, and its term in degree `a`, the cokernel of `P^{a-1} ⟶ P^a`, is flat:
-tensoring it with `S_i.f` is a monomorphism by
-`CategoryTheory.ObjectProperty.mono_opcycles_whiskerLeft_of_exactAt`, as
-`H^{a-1}(P ⊗ S_i.X₃) = H^{a-1}(K ⊗ᴸ S_i.X₃[0]) = 0`. So `K` has a flat model in degrees
-`[a, b]`. -/
+such that every `K ⊗ᴸ S_i.X₃[0]` lies in degrees `≥ a`. Then `K` has Tor amplitude in `[a, b]`. -/
 lemma torAmplitudeIn_of_forall_isGE {a b : ℤ} {K : DerivedCategory C} [K.IsGE a] [K.IsLE b]
     {ι : Type*} (S : ι → ShortComplex C) (hS : ∀ i, (S i).ShortExact)
     (hflat : ∀ F : C, (∀ i, Mono (F ◁ (S i).f)) → ObjectProperty.flat F)

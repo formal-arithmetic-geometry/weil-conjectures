@@ -13,10 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomological
 Let `F : C ⥤ D` be a left exact additive functor of finite cohomological dimension `d`
 (`R^q F = 0` for `q > d`). Then the unbounded right derived functor `RF` sends `D^{≤ n}` into
 `D^{≤ n + d}` (`CategoryTheory.Functor.isLE_rightDerivedFunctor_obj`), with no boundedness
-assumption on the objects. The proof is the dimension shifting argument of
-`HomologicalComplex.Acyclic.map_of_rightAcyclic_of_forall_isZero`, run only in the
-degrees where the complex is exact
-(`HomologicalComplex.exactAt_map_of_rightAcyclic_of_isZero_rightDerived`).
+assumption on the objects.
 
 A left adjoint `F` between triangulated categories with t-structures sending `D^{≤ n}` into
 `D^{≤ n + N}` has a right adjoint sending `D^{≥ n}` into `D^{≥ n - N}`

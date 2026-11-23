@@ -47,7 +47,6 @@ The monoidal structure on sheaves is the global instance
   at a point is flat.
 - `CategoryTheory.GrothendieckTopology.flat_iff_forall_flat_sheafFiber_obj`: a sheaf is flat
   if and only if its fibres at a conservative family of points are flat.
-
 -/
 
 @[expose] public section

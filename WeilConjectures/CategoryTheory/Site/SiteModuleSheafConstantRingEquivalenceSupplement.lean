@@ -26,9 +26,10 @@ public import WeilConjectures.CategoryTheory.SiteModuleSheafConstantRingEquivale
 
 /-! # Constant-coefficient module sheaves on an arbitrary small site
 
-Source: Stacks Project, Modules on Sites, Tag 093I, and Cohomology on Sites,
-Tag 03FD; encoding construction used by Tag 094G
-(blueprint: lem-weil-pbc-site-module-sheaf-constant-ring-equivalence).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093I, and Cohomology on Sites,
+  Tag 03FD; encoding construction used by Tag 094G.
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -418,31 +419,8 @@ private noncomputable def moduleRestrictionConstantIso
 retains the additive sheaf and naturally identifies both constant-module realizations.
 The locally bijective constant-ring unit may be the restriction of a global unit to a slice.
 
-Source: Stacks Project, Modules on Sites, Tag 093I (constant algebraic structures),
-and Cohomology on Sites, Tag 03FD; the encoding used by Tag 094G.
-(blueprint: lem-weil-pbc-site-module-sheaf-constant-ring-equivalence).
-
-Proof: Encode a ModuleCat-valued presheaf as modules over the constant ring presheaf,
-then sheafify along the given ring unit. Local bijectivity is supplied as an explicit
-instance. This includes
-the usual constant commutative-ring sheafification unit after forgetting commutativity,
-and its restrictions to slice sites.
-On a module-valued sheaf the module-sheafification unit is invertible: its underlying
-additive map is the sheafification unit of an already sheafy presheaf. Thus the encoded
-embedding followed by sheafification is fully faithful. Conversely restrict any module
-sheaf's scalar action along the ring unit. Its additive sheaf is unchanged, so this is
-a ModuleCat-valued sheaf. The sheafification counit identifies its extension with the
-original module sheaf, proving essential surjectivity. The counit on additive sheaves
-gives the first natural isomorphism. For the second, start with the sheafification
-unit of a constant ModuleCat-valued presheaf, encode it, and module-sheafify. Its
-underlying additive map is locally bijective, so its module sheafification is invertible.
-Naturality is inherited from the original unit and both functors. These arguments
-include the empty site and the zero ring and require neither points nor Noetherianity.
-Finally restrict the module-sheafification unit to a slice. The resulting presheaf map
-has locally bijective underlying additive map. Its adjoint is invertible: after forgetting
-modules it is the sheafification of that locally bijective map followed by the counit
-on an additive sheaf. Naturality follows from naturality of the original module unit,
-so these isomorphisms give a natural comparison of constant realizations on slices. -/
+Stacks Project, Modules on Sites, Tag 093I (constant algebraic structures), and
+Cohomology on Sites, Tag 03FD; the encoding used by Tag 094G. -/
 theorem site_moduleSheaf_constantRing_equivalence
     (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})

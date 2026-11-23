@@ -29,9 +29,9 @@ pulled back along `g'` and followed by the exceptional base change map
 (`AlgebraicGeometry.ProEtale.CondensedRing.upperShriekBaseChange`), it is the orientation of
 `f'`, up to an isomorphism `Lg'^* ℚ̄_ℓ,X(d)[2d] ≅ ℚ̄_ℓ,X'(d)[2d]` of the Tate twists.
 
-This is a property of the sorried definition `smoothOrientation` of
+This is a property of the definition `smoothOrientation` of
 `WeilConjectures.SmoothPurity.Defs`: the compatibility of smooth purity with base change
-(blueprint `proposition-compatibility-purity-base-change`, `u^*γ_f(K) = γ_{f'}(v^*K)`) at the unit
+(`u^*γ_f(K) = γ_{f'}(v^*K)`) at the unit
 `K = ℚ̄_ℓ,Y`, owed by the smooth purity section. It is proved here as
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation_baseChange`, from smooth base
 change for `Rf^!` and the compatibility of the reduction modulo `ℓ` with proper base change; the

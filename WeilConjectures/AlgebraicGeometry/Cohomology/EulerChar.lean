@@ -212,6 +212,16 @@ theorem Modules.finrankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
   obtain ⟨e⟩ := Modules.nonempty_H_pullback_linearEquiv (k := k) K M q
   exact e.finrank_eq.trans Module.finrank_baseChange
 
+/-- Flat base change on cohomology, on ranks: `rank_K H^q(X_K, M_K) = rank_k H^q(X, M)` with no
+finiteness assumed, so that both sides may be infinite. -/
+theorem Modules.rankH_pullback [QuasiCompact (X ↘ Spec (.of k))]
+    [QuasiSeparated (X ↘ Spec (.of k))] (M : X.Modules) [M.IsQuasicoherent] (q : ℕ) :
+    Module.rank K (((Modules.pullback (Limits.pullback.fst (X ↘ Spec (.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k K))))).obj M).H q) =
+      Module.rank k (M.H q) := by
+  obtain ⟨e⟩ := Modules.nonempty_H_pullback_linearEquiv (k := k) K M q
+  exact e.rank_eq.trans (Module.rank_baseChange.trans (Cardinal.lift_id _))
+
 /-- **Flat base change of `χ`.** For a quasi-coherent module `M` on a quasi-compact
 quasi-separated scheme `X` over `k` and a field extension `K/k`, `χ(X_K, M_K) = χ(X, M)`. -/
 theorem Modules.eulerChar_pullback [QuasiCompact (X ↘ Spec (.of k))]
@@ -234,6 +244,28 @@ theorem arithmeticGenus_pullback [QuasiCompact (X ↘ Spec (.of k))]
   have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
   (Modules.finrankH_congr K (Modules.pullbackObjUnitIso _).symm 1).trans
     (Modules.finrankH_pullback K (SheafOfModules.unit X.ringCatSheaf) 1)
+
+/-- `rank_K H^q(Y, M)` only depends on the isomorphism class of `M`. -/
+theorem Modules.rankH_congr {Y : Scheme.{u}} [Y.Over (Spec (.of K))] {M N : Y.Modules}
+    (e : M ≅ N) (q : ℕ) : Module.rank K (M.H q) = Module.rank K (N.H q) :=
+  LinearEquiv.rank_eq
+    { Modules.H.mapLinearEquiv e q with
+      map_smul' := fun c x ↦ (Modules.H.mapLinearEquiv e q).map_smul (globalSectionsRingHom K c) x }
+
+/-- **The genus is invariant under base change, on ranks.** For a quasi-compact quasi-separated
+scheme `X` over `k` and a field extension `K/k`, `rank_K H¹(X_K, 𝒪_{X_K}) = rank_k H¹(X, 𝒪_X)`
+as cardinals, so that both sides may be infinite; `arithmeticGenus_pullback` is the `finrank`
+form. -/
+theorem rank_H_one_pullback [QuasiCompact (X ↘ Spec (.of k))]
+    [QuasiSeparated (X ↘ Spec (.of k))] :
+    Module.rank K (Modules.H (X := Limits.pullback (X ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k K))))
+      (SheafOfModules.unit (Limits.pullback (X ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k K)))).ringCatSheaf) 1) =
+      Module.rank k (Modules.H (X := X) (SheafOfModules.unit X.ringCatSheaf) 1) :=
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  (Modules.rankH_congr K (Modules.pullbackObjUnitIso _).symm 1).trans
+    (Modules.rankH_pullback K (SheafOfModules.unit X.ringCatSheaf) 1)
 
 end BaseChange
 
@@ -259,7 +291,7 @@ lemma Modules.degree_unit :
     Modules.degree (X := X) k (SheafOfModules.unit X.ringCatSheaf) = 0 :=
   sub_self _
 
-/-- **The degree is invariant under base change** (part (1)). For a quasi-coherent module `M` on a
+/-- **The degree is invariant under base change.** For a quasi-coherent module `M` on a
 quasi-compact quasi-separated scheme `X` over `k` and a field extension `K/k`,
 `deg_{X_K}(M_K) = deg_X(M)`: both Euler characteristics in `deg M = χ(M) - χ(𝒪_X)` are invariant
 under flat base change.

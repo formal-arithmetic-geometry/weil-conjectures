@@ -17,13 +17,7 @@ namespace CategoryTheory.RingedSiteGlobalRHom
 
 /-- A natural isomorphism descends along a full essentially surjective functor.
 
-Source: the representative-to-derived-object descent in Stacks Project, Tag 08JA.
-(blueprint: lem-sfb-global-rhom-full-essentially-surjective-descent).
-
-Proof: choose an object preimage and its comparison isomorphism for each target
-object. Conjugate the given comparison by those isomorphisms. Lift the conjugate
-of an arbitrary target morphism using fullness; naturality of the original
-comparison gives naturality after conjugation. -/
+Source: the representative-to-derived-object descent in Stacks Project, Tag 08JA. -/
 def descendIso
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     (P : C ⥤ D) [P.Full] [P.EssSurj] {F G : D ⥤ E}

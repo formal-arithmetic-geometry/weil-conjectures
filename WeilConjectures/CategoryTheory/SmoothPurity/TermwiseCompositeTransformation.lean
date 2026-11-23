@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Termwise lifting of a transformation between composite functors
 
-Source: Mathlib CategoryTheory/Whiskering; the termwise refinement of Stacks Tag 0F7B.
-(blueprint: def-cbc-termwise-composite-transformation)
+Source: the termwise refinement of Stacks Tag 0F7B.
 -/
 
 @[expose] public section
@@ -20,8 +19,7 @@ set_option autoImplicit false
 namespace CategoryTheory.Functor
 
 /-- Lift a transformation between two composites to diagrams, retaining the four factors.
-Source: Mathlib `Functor.whiskeringRightObjCompIso`; Stacks Tag 0F7B refinement.
-(blueprint: def-cbc-termwise-composite-transformation). -/
+Source: Stacks Tag 0F7B refinement. -/
 @[irreducible] def termwiseCompositeTransformation
     (I A B C D : Type*) [Category I] [Category A] [Category B] [Category C] [Category D]
     (f : A ⥤ B) (g : B ⥤ D) (h : A ⥤ C) (k : C ⥤ D) (t : f ⋙ g ⟶ h ⋙ k) :

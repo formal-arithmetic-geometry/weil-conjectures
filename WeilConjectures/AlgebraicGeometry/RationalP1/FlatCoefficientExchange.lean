@@ -183,7 +183,7 @@ private meta def coefficientCongrGoal : TacticM Unit := do
     return []
 
 open Lean Elab Tactic in
-/-- Prove structural instance equalities without unfolding sheafification data. -/
+/-- Close structural instance equalities without unfolding sheafification data. -/
 scoped elab "coefficient_congr" : tactic => coefficientCongrGoal
 
 open Lean Meta Elab Tactic in
@@ -220,9 +220,7 @@ scoped elab "coefficient_finish " h:ident : tactic => withMainContext do
     goal.assign (← mkAppM ``eq_of_heq #[h])
     return []
 
-/-- The coefficient/exchange rectangle, with its category and functor instances fixed.
-Source: coefficient changes (2)--(3), the counit mate rectangle.
-(blueprint: lem-sfb-flat-coefficient-exchange). -/
+/-- The coefficient/exchange rectangle, with its category and functor instances fixed. -/
 def CoefficientExchangeSquare
     {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type w}
     [Category.{v} C₁] [Category.{v} C₂] [Category.{v} C₃] [Category.{v} C₄]
@@ -236,9 +234,7 @@ def CoefficientExchangeSquare
     αG.app (R.obj K) ≫ Ge.map (δ.app K) ≫ Be.app (T₂.obj K) =
       T₃.map (B.app K) ≫ δ'.app (H.obj K) ≫ Se.map (αH.app K)
 
-/-- A naturality square for an arrow, with its functors fixed before taking components.
-Source: coefficient changes (2)--(3), naturality of pullback comparisons.
-(blueprint: lem-sfb-flat-coefficient-exchange). -/
+/-- A naturality square for an arrow, with its functors fixed before taking components. -/
 def PullArrowSquare
     {C D C' D' : Type w} [Category.{v} C] [Category.{v} D]
     [Category.{v} C'] [Category.{v} D']
@@ -248,9 +244,7 @@ def PullArrowSquare
     (n : U.obj W ⟶ W') : Prop :=
   α.hom.app V ≫ F'.map m ≫ β' = U.map β ≫ n
 
-/-- A scalar endpoint square, keeping the pullback and scalar functors fixed.
-Source: coefficient changes (2)--(3), Cartesian endpoint comparisons.
-(blueprint: lem-sfb-flat-coefficient-exchange). -/
+/-- A scalar endpoint square, keeping the pullback and scalar functors fixed. -/
 def PullEndpointSquare
     {C D C' D' : Type w} [Category.{v} C] [Category.{v} D]
     [Category.{v} C'] [Category.{v} D']
@@ -260,13 +254,7 @@ def PullEndpointSquare
     (cW : U.obj W ⟶ W') : Prop :=
   α.app K ≫ He.map cK ≫ e' = U.map e ≫ cW
 
-/-- Postcompose the native exchange rectangle with compatible line endpoints.
-Source: coefficient changes (2)--(3), pasting and naturality.
-(blueprint: lem-sfb-flat-coefficient-exchange).
-
-Proof: move the target scalar endpoint through exchange by naturality, apply the
-exchange rectangle, combine the target direct-image maps, substitute the endpoint
-square, and finally apply scalar/direct-image naturality to the source line map. -/
+/-- Postcompose the native exchange rectangle with compatible line endpoints. -/
 theorem coefficient_exchange_line
     {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type w}
     [Category.{v} C₁] [Category.{v} C₂] [Category.{v} C₃] [Category.{v} C₄]
@@ -292,13 +280,7 @@ theorem coefficient_exchange_line
   rw [he, Se.map_comp]
   rw [← reassoc_of% (δ'.naturality e)]
 
-/-- Paste the unit and exchange squares through arbitrary right-derived model isomorphisms.
-Source: coefficient changes (2)--(3), naturality on the input adjunct.
-(blueprint: lem-sfb-flat-coefficient-exchange).
-
-Proof: substitute the two model equations and cancel the second finite model
-isomorphism. Cancel the invertible source comparison, use the unit square, move
-the input arrow through the natural comparison, and use the exchange square. -/
+/-- Paste the unit and exchange squares through arbitrary right-derived model isomorphisms. -/
 theorem transport_scalar_models
     {C D C' D' : Type w} [Category.{v} C] [Category.{v} D]
     [Category.{v} C'] [Category.{v} D']
@@ -436,16 +418,7 @@ scoped elab "nativeScalarAdj% " t:term:max n:num : term => do
     throwError "Expected the four defining adjunctions"
   return adjs[i]!
 
-/-- Flat scalar extension commutes with the canonical ambient exchange mate.
-Source: blueprint coefficient changes (2)--(3), and adjunction mate calculus.
-(blueprint: lem-sfb-flat-coefficient-exchange).
-
-Proof: Composition coherence of the scalar/pullback comparison, applied to the
-square's two equal composites, gives the pullback cube. The two exchange maps
-satisfy their counit mate equations. The scalar/direct-image maps satisfy the
-counit equations of their conjugate pullback comparisons. Applying the generic
-coefficient-exchange mate theorem proves the rectangle, without inverting any
-exchange map or assuming proper base change. -/
+/-- Flat scalar extension commutes with the canonical ambient exchange mate. -/
 theorem flat_coefficient_exchange
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']

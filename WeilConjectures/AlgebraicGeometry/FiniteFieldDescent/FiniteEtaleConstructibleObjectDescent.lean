@@ -54,15 +54,4 @@ abbrev ctf (Λ : Type (u + 1)) [CommRing Λ] {A : Type u} [Field A] [Algebra K A
     (P : DerivedCategoryModule Λ (scheme f A)) : Prop :=
   DerivedCategory.boundedConstructibleFiniteTor Λ (scheme f A) P
 
-/-- Object descent for bounded constructible finite-Tor complexes. -/
-theorem finiteEtaleConstructibleObjectDescent
-    {L : Type u} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
-    [Algebra.IsSeparable K L] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    (P : DerivedCategoryModule Λ (scheme f L)) (hP : ctf f Λ P) :
-    ∃ (E : IntermediateField K L), FiniteDimensional K E ∧
-      ∃ (P_E : DerivedCategoryModule Λ (scheme f E)), ctf f Λ P_E ∧
-        Nonempty ((pull f Λ (IntermediateField.val E)).obj P_E ≅ P) := by
-  sorry
-
 end AlgebraicGeometry.Etale.FiniteFieldDescent

@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedForgetTwoInjective.RingedForg
 
 /-! # Standard-sign projections on the native Hom complex
 
-Source: Stacks, Sites Cohomology, section-hom-complexes; BifunctorHomComplex.lean.
-(blueprint: def-sf-standard-bifunctor-hom-model)
+Source: Stacks, Sites Cohomology, section-hom-complexes.
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +22,7 @@ namespace CategoryTheory.RingedForgetTwoInjective
 variable {B : Type b} [Category.{vb} B] [Preadditive B] [HasCountableProducts B]
   (H : Bᵒᵖ ⥤ B ⥤ B) [H.Additive] [∀ P, (H.obj P).Additive]
 
-/-- The native complex-Hom, made simultaneous in both variables.
-Source: BifunctorHomComplex.lean (blueprint: def-sf-standard-bifunctor-hom-model). -/
+/-- The native complex-Hom, made simultaneous in both variables. -/
 def nativeHomComplex :
     (CochainComplex B ℤ)ᵒᵖ × CochainComplex B ℤ ⥤ CochainComplex B ℤ where
   obj P := CochainComplex.bifunctorHomObj H P.1.unop P.2
@@ -51,8 +49,7 @@ def nativeHomComplex :
 /-- Rescaling the projections, rather than choosing another product, converts the native
 row-sign differential to the standard differential. Thus the native-to-standard map is the
 identity on the underlying complex and has exactly the required signed product components.
-Source: Stacks, section-hom-complexes, and BifunctorHomComplex.lean
-(blueprint: def-sf-standard-bifunctor-hom-model). -/
+Source: Stacks, section-hom-complexes, and BifunctorHomComplex.lean. -/
 def standardHomModel : StandardModel H where
   complex := nativeHomComplex H
   π K I n p q hpq :=

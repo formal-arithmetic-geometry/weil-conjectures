@@ -23,16 +23,13 @@ hold as soon as `X` has a `k`-rational point `σ`.  Consequently the `σ`-normal
 ## Main statements
 
 - `AlgebraicGeometry.isIso_pushforwardUnitMap_of_globalSectionsBijective`: `f_* 𝒪_X = 𝒪_k` for a
-  quasi-compact quasi-separated `k`-scheme `X` with `H⁰(X, 𝒪_X) = k` (blueprint
-  `prose-C-04`, part (1)).
+  quasi-compact quasi-separated `k`-scheme `X` with `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd`: `f_{T,*} 𝒪_{X_T} = 𝒪_T` for a proper
-  `k`-scheme `X` with `H⁰(X, 𝒪_X) = k` (blueprint `prose-C-04`).
+  `k`-scheme `X` with `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral`: smooth
-  projective curves satisfy the hypotheses of the split exact sequence (blueprint
-  `prose-C-04`).
+  projective curves satisfy the hypotheses of the split exact sequence.
 - `AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor`: for a smooth projective
-  curve with a rational point `σ`, `Pic_{X/k,σ} ≅ Pic_{X/k}` (blueprint
-  `lemma-rigidification-along-section--1`).
+  curve with a rational point `σ`, `Pic_{X/k,σ} ≅ Pic_{X/k}`.
 - `AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor_of_geometricallyIntegral`
   and `AlgebraicGeometry.isRepresentable_picardFunctorNormalized_iff_of_geometricallyIntegral`:
   the comparison map `Pic_{X/k,σ} ⟶ Pic_{X/k}` is an isomorphism, and one functor is
@@ -41,17 +38,22 @@ hold as soon as `X` has a `k`-rational point `σ`.  Consequently the `σ`-normal
   with a `k`-rational point has `H⁰(X, 𝒪_X) = k`.
 - `AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_section` and
   `AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor_of_isIntegral`: the two
-  results above for an integral proper `X` with a rational point, as in the blueprint.
+  results above for an integral proper `X` with a rational point.
 - `AlgebraicGeometry.isSheaf_fpqc_picardFunctor`: for such a curve `Pic_{X/k}` is an fpqc sheaf.
 
-## Implementation notes
+## Implementation details
 
 As elsewhere in the Picard chapter, a smooth projective curve over `k` is a `k`-scheme `X` with
 `X ⟶ Spec k` smooth of relative dimension `1`, proper and geometrically integral.  Geometric
 integrality gives `H⁰(X, 𝒪_X) = k` directly
 (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_geometricallyIntegral`), so the rational
-point is only needed as the section `σ`; the blueprint instead deduces `H⁰(X, 𝒪_X) = k` from the
-rational point for an integral `X`.
+point is only needed as the section `σ`.  The base-change statement
+`isIso_pushforwardUnitMap_pullback_snd` uses flat base change along `k ⟶ A` on affine opens
+`Spec A` of `T`.
+
+## References
+
+* [Stacks, Tag 0B9U]
 -/
 
 @[expose] public section
@@ -98,12 +100,7 @@ theorem isIso_pushforwardUnitMap_of_bijective_app {Z B : Scheme.{u}} (g : Z ⟶ 
 variable {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
 
 /-- **A rational point forces `H⁰(X, 𝒪_X) = k`.** Let `X` be an integral proper scheme over a
-field `k` with a `k`-rational point `σ`.  Then `k → H⁰(X, 𝒪_X)` is bijective: `H⁰(X, 𝒪_X)` is a
-domain integral over `k`, hence a field, and evaluation at `σ` is a ring homomorphism
-`H⁰(X, 𝒪_X) → k` retracting `k → H⁰(X, 𝒪_X)`; being a homomorphism out of a field it is
-injective, so both maps are bijective.
-
-(blueprint: `prose-C-04`) -/
+field `k` with a `k`-rational point `σ`.  Then `k → H⁰(X, 𝒪_X)` is bijective. -/
 theorem Scheme.GlobalSectionsBijective.of_section [IsIntegral X]
     [UniversallyClosed (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
     (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) : GlobalSectionsBijective k X := by
@@ -131,9 +128,7 @@ theorem Scheme.GlobalSectionsBijective.of_section [IsIntegral X]
 /-- **`f_* 𝒪_X = 𝒪_k`.** For a quasi-compact quasi-separated `k`-scheme `X` with
 `H⁰(X, 𝒪_X) = k`, e.g. a smooth proper connected scheme over a separably closed field
 (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isSepClosed`), the canonical map
-`𝒪_{Spec k} ⟶ f_* 𝒪_X` along the structure map `f : X ⟶ Spec k` is an isomorphism.
-
-(blueprint: `prose-C-04`, part (1)) -/
+`𝒪_{Spec k} ⟶ f_* 𝒪_X` along the structure map `f: X ⟶ Spec k` is an isomorphism. -/
 theorem isIso_pushforwardUnitMap_of_globalSectionsBijective [CompactSpace X]
     [QuasiSeparatedSpace X] [GlobalSectionsBijective k X] :
     IsIso (pushforwardUnitMap (X ↘ Spec (.of k))) :=
@@ -144,13 +139,8 @@ theorem isIso_pushforwardUnitMap_of_globalSectionsBijective [CompactSpace X]
 
 /-- **The structure sheaf pushes forward to the structure sheaf.** Let `X` be a proper scheme over
 a field `k` with `H⁰(X, 𝒪_X) = k`, and let `T` be a `k`-scheme.  Then the canonical map
-`𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism, where `f_T : X_T ⟶ T` is the base change of
-`X ⟶ Spec k`.
-
-On an affine open `V = Spec A` of `T`, flat base change along the flat map `k ⟶ A` gives
-`Γ(X_V, 𝒪_{X_V}) = H⁰(X, 𝒪_X) ⊗_k A = A`, compatibly with localization.
-
-(blueprint: `prose-C-04`) -/
+`𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism, where `f_T: X_T ⟶ T` is the base change of
+`X ⟶ Spec k`. -/
 theorem isIso_pushforwardUnitMap_pullback_snd [IsProper (X ↘ Spec (.of k))]
     [GlobalSectionsBijective k X] (T : Over (Spec (.of k))) :
     IsIso (pushforwardUnitMap (pullback.snd (X ↘ Spec (.of k)) T.hom)) := by
@@ -194,11 +184,8 @@ theorem isIso_pushforwardUnitMap_pullback_snd [IsProper (X ↘ Spec (.of k))]
 
 /-- **Smooth projective curves satisfy the hypotheses of the split exact sequence.** Let `X` be
 a smooth projective curve over a field `k`.  Then `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for
-every `k`-scheme `T`: `X` is geometrically integral, so `H⁰(X, 𝒪_X) = k`, and this is
-`AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd`.  Together with a `k`-rational point
-`σ`, these are the hypotheses of `AlgebraicGeometry.bijective_pic_split` (Stacks 0B9U).
-
-(blueprint: `prose-C-04`) -/
+every `k`-scheme `T`; together with a `k`-rational point these are the hypotheses of
+`AlgebraicGeometry.bijective_pic_split`. -/
 theorem isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (T : Over (Spec (.of k))) :
@@ -209,13 +196,7 @@ theorem isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral
 /-- **`Pic_{X/k,σ}` is isomorphic to `Pic_{X/k}`.** Let `X` be a smooth projective curve over a
 field `k` with a `k`-rational point `σ`.  Then the inclusion of the `σ`-normalized Picard functor
 followed by the sheafification map, `Pic_{X/k,σ} ⟶ Pic_{X/k}`, is an isomorphism of functors on
-`(Sch/k)_fppf`: by
-`AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral` and
-`AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized` it is bijective on the
-sections over every `T`.  In particular `Pic_{X/k,σ}` is an fppf sheaf, representable if and only
-if `Pic_{X/k}` is.
-
-(blueprint: `lemma-rigidification-along-section--1`) -/
+`(Sch/k)_fppf`. -/
 theorem nonempty_picardFunctorNormalized_iso_picardFunctor
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
@@ -235,9 +216,7 @@ theorem nonempty_picardFunctorNormalized_iso_picardFunctor
 /-- **`Pic_{X/k,σ} ⟶ Pic_{X/k}` is an isomorphism.** For a smooth projective curve `X` over `k`
 with a `k`-rational point `σ`, the inclusion of the `σ`-normalized Picard functor followed by
 the sheafification map is an isomorphism of functors on `(Sch/k)_fppf`
-(`AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor`).
-
-(blueprint: `lemma-rigidification-along-section--1`) -/
+(`AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor`). -/
 theorem isIso_picardFunctorNormalized_ι_comp_toPicardFunctor_of_geometricallyIntegral
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
@@ -248,9 +227,7 @@ theorem isIso_picardFunctorNormalized_ι_comp_toPicardFunctor_of_geometricallyIn
     isIso_pushforwardUnitMap_pullback_snd_of_geometricallyIntegral
 
 /-- **`Pic_{X/k,σ}` is representable if and only if `Pic_{X/k}` is**, for a smooth projective
-curve `X` over `k` with a `k`-rational point `σ`.
-
-(blueprint: `lemma-rigidification-along-section--1`) -/
+curve `X` over `k` with a `k`-rational point `σ`. -/
 theorem isRepresentable_picardFunctorNormalized_iff_of_geometricallyIntegral
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
@@ -262,13 +239,8 @@ theorem isRepresentable_picardFunctorNormalized_iff_of_geometricallyIntegral
 
 /-- **Curves with a rational point satisfy the hypotheses of the split exact sequence.** Let `X`
 be an integral proper scheme over a field `k` (e.g. a smooth projective curve) with a `k`-rational
-point `σ`.  Then `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `k`-scheme `T`: the rational
-point forces `H⁰(X, 𝒪_X) = k`
-(`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_section`), and this is
-`AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd`.  Together with the section `σ`, these
-are the hypotheses of `AlgebraicGeometry.bijective_pic_split` (Stacks 0B9U).
-
-(blueprint: `prose-C-04`) -/
+point `σ`.  Then `𝒪_T ⟶ f_{T,*} 𝒪_{X_T}` is an isomorphism for every `k`-scheme `T`; together
+with `σ` these are the hypotheses of `AlgebraicGeometry.bijective_pic_split`. -/
 theorem isIso_pushforwardUnitMap_pullback_snd_of_section [IsIntegral X]
     [IsProper (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
     (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) (T : Over (Spec (.of k))) :
@@ -279,11 +251,7 @@ theorem isIso_pushforwardUnitMap_pullback_snd_of_section [IsIntegral X]
 /-- **`Pic_{X/k,σ}` is isomorphic to `Pic_{X/k}`.** Let `X` be an integral proper scheme over a
 field `k` (e.g. a smooth projective curve) with a `k`-rational point `σ`.  Then the inclusion of
 the `σ`-normalized Picard functor followed by the sheafification map, `Pic_{X/k,σ} ⟶ Pic_{X/k}`,
-is an isomorphism of functors on `(Sch/k)_fppf`, by
-`AlgebraicGeometry.isIso_pushforwardUnitMap_pullback_snd_of_section` and
-`AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized`.
-
-(blueprint: `lemma-rigidification-along-section--1`) -/
+is an isomorphism of functors on `(Sch/k)_fppf`. -/
 theorem nonempty_picardFunctorNormalized_iso_picardFunctor_of_isIntegral [IsIntegral X]
     [IsProper (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)
     (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 (Spec (.of k))) :
@@ -300,9 +268,7 @@ theorem nonempty_picardFunctorNormalized_iso_picardFunctor_of_isIntegral [IsInte
     toPicardFunctor (X ↘ Spec (.of k)))⟩
 /-- **`Pic_{X/k}` is an fpqc sheaf when `X` has a rational point.** Let `X` be a smooth projective
 curve over a field `k` with a `k`-rational point `σ`. Then the relative Picard functor `Pic_{X/k}`
-is a sheaf for the fpqc topology on `k`-schemes, since it is isomorphic to `Pic_{X/k,σ}`
-(`AlgebraicGeometry.nonempty_picardFunctorNormalized_iso_picardFunctor`), which is an fpqc sheaf
-(`AlgebraicGeometry.isSheaf_fpqc_picardFunctorNormalized`). -/
+is a sheaf for the fpqc topology on `k`-schemes. -/
 theorem isSheaf_fpqc_picardFunctor
     [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))]
     [GeometricallyIntegral (X ↘ Spec (.of k))] (σ : Spec (.of k) ⟶ X)

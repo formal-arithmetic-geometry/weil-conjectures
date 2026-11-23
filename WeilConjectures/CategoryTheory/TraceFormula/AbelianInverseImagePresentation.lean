@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 /-!
 # Presentations of abelian inverse image
 
-Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2)
-(blueprint: def-trf-abelian-inverse-image-presentation).
+Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ universe w uC vC uD vD
 namespace CategoryTheory
 
 /-- An abelian lift of a set-sheaf functor, normalized on every generalized section.
-Source: Stacks Project, Sites, 00YR and 00YV (2)
-(blueprint: def-trf-abelian-inverse-image-presentation).
+Source: Stacks Project, Sites, 00YR and 00YV (2).
 
 The natural underlying-sheaf isomorphism fixes the maps as well as the objects.
 The graph equations for addition and zero specify transport of those operations.

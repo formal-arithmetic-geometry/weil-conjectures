@@ -32,23 +32,7 @@ objects form a triangulated subcategory.
 - `DerivedCategory.isTriangulated_derivedComplete`: the derived complete objects form a
   triangulated subcategory.
 
-## Proof
-
-If `K` is derived complete, the terms `K ⊗ᴸ R/ϖⁿ` of the tower are killed by `ϖⁿ`, so they
-receive no nonzero maps from objects on which `ϖ` acts invertibly, and neither does their
-homotopy limit `K`.
-
-Conversely, let `K` be right orthogonal to `smulInvertible J ϖ`, let `F` be a homotopy limit of
-the tower `K ⊗ᴸ R/ϖⁿ`, and let `φ : K ⟶ F` be a map extending the reductions, obtained by
-comparing `F` with the Milnor triangle of the constant tower `K`. Its cone `X` is right
-orthogonal to `smulInvertible J ϖ`. Tensoring with `M = R/ϖ` turns the reduction tower into a
-tower which is pro-isomorphic to the constant tower `K ⊗ᴸ M`, because `ϖ` acts by zero on
-`K ⊗ᴸ M`; since `- ⊗ᴸ M` is triangulated and commutes with products, `φ ⊗ᴸ M` is then an
-isomorphism (`CategoryTheory.Pretriangulated.isIso_of_proIso`), so `X ⊗ᴸ M = 0`, that is `ϖ`
-acts invertibly on `X`. Hence `X = 0` and `φ` is an isomorphism, which says that `K` is the
-homotopy limit of its reductions.
-
-## Implementation notes
+## Implementation details
 
 The preliminary constructions are in
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.SmulInvertible`,
@@ -61,7 +45,6 @@ of `DerivedCategory.sheafTensorStructure J R`, declared below as local instances
 priority, as explained in the implementation notes of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs`. The statements of the main
 results do not involve the monoidal structure.
-
 -/
 
 @[expose] public section

@@ -38,7 +38,6 @@ only if `𝟙 - n • s` is an isomorphism. We take this as a purely categorical
 - `CategoryTheory.IsDerivedAdicComplete.of_distTriang₁₂` (and variants): two out of three for
   distinguished triangles in a pretriangulated category.
 - `CategoryTheory.IsDerivedAdicComplete.shift`: stability under shifts.
-
 -/
 
 @[expose] public section

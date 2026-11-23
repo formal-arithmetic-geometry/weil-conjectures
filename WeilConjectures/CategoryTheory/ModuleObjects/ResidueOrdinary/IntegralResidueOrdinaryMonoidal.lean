@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryMonoidal
 
 Balanced tensor coequalizers give the tensorator, with coherence checked on their
 presentation epimorphisms. Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-ordinary-monoidal)
 -/
 
 @[expose] public section
@@ -190,12 +189,7 @@ local instance instEssentiallySmallProfinite_integralResidueOrdinaryMonoidal
       braided := h.braided }
 /-- Canonical ordinary module pullback commutes with the braiding.
 
-The relative tensor coequalizer epimorphism reduces this to braiding compatibility
-of ambient sheaf pullback. Transport along the coefficient pullback isomorphism
-preserves that equation; invert the monoidal tensorator to obtain the oplax form.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(5); ordinary symmetric monoidal pullback.
-(blueprint: new-integral-residue-ordinary-braiding) -/
+Source: Bhatt--Scholze, Lemma 6.5.9(5). -/
 theorem residueOrdinaryUpperStar_braiding
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)

@@ -12,10 +12,6 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-!
 # The left derived functor of an exact functor
 
-Source: blueprint main-20261015, `chap-The-pro-etale-site`,
-`sk-def-sfb-derived-categories`, `def-sfb-left-derived-exact`
-(blueprint: def-sfb-left-derived-exact).
-
 The canonical comparison uses the recorded total-tensor left derived functor and
 Mathlib's uniqueness isomorphism, with no additional graded-tensor hypotheses.
 

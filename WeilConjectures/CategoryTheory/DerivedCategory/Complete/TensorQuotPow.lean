@@ -17,12 +17,11 @@ generating the ideal `I`. This file tensors the triangles `DerivedCategory.quotP
 with an object `Y` of `D(J, R)` and shows that `- ⊗ᴸ R/I` commutes with countable products
 (`DerivedCategory.isLimit_fan_whiskerRight_quot`).
 
-## Implementation notes
+## Implementation details
 
 The monoidal structure of `D(J, R)` is taken from the fields of
 `DerivedCategory.sheafTensorStructure J R`, as explained in the implementation notes of
 `WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs`.
-
 -/
 
 @[expose] public section

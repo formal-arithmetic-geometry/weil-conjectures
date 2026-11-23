@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-!
 # Alternating wedges of germs before sheafification
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
-(blueprint: lem-sc-exterior-presheaf-stalk-wedge).
 -/
 
 @[expose] public section
@@ -90,24 +87,7 @@ private theorem commonEquality {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (x : X
   exact ⟨W, hxW, f, g, fun i ↦ hW i (Finset.mem_univ i)⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Sectionwise wedge germs descend to an alternating map on module stalks.
-
-Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph; step 1 of
-`lem-sc-exterior-sheaf-stalk-comparison`.
-(blueprint: lem-sc-exterior-presheaf-stalk-wedge).
-
-Proof: Represent the finitely many entries of a tuple of germs on a common
-neighborhood and take the germ of their sectionwise wedge. For two choices,
-equality of each entry germ holds after restriction; intersect these finitely
-many neighborhoods. Restrictions preserve wedges by their defining universal
-property, so the wedge germs agree. To check additivity in a coordinate,
-represent the other entries and both summands on one neighborhood and use
-sectionwise additivity. For scalar multiplication also represent the scalar
-there, then use sectionwise multilinearity and the stalk scalar germ formula.
-If two entries agree, refine until their representatives agree and use the
-alternating relation. These identities give the asserted alternating map.
-For n=0 use the germ of the empty wedge; its restrictions agree, and there
-are no coordinate relations to check. A zero stalk ring needs no exclusion. -/
+/-- Sectionwise wedge germs descend to an alternating map on module stalks. -/
 theorem exteriorPresheaf_stalk_wedge {X : Scheme.{v}} (M : X.Modules)
     (n : ℕ) (x : X) :
     ∃ b : (M.presheaf.stalk x) [⋀^Fin n]→ₗ[X.presheaf.stalk x]

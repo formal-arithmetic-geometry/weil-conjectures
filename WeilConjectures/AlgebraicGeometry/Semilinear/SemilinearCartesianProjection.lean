@@ -13,8 +13,11 @@ import WeilConjectures.Algebra.Homology.System.SystemEvaluationTopos
 
 /-! # Projection formula for cartesian semilinear systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YS, 07A4 and 08J9
-(blueprint: lem-coef-semilinear-cartesian-projection).
+## References
+
+* Zheng Construction 4.1 and Lemma 4.10
+* Stacks 06YS, 07A4 and 08J9
+* Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed pp.25-26
 -/
 
 @[expose] public noncomputable section
@@ -108,26 +111,7 @@ private theorem singleton_above
   exact (SheafOfModules.systemSingleDerivedAbove S T R q n hq P).of_iso i
 
 /-- The unit-defined projection for derived extension from one coefficient level is
-invertible for a cartesian system. No internal-Hom comparison is assumed.
-Source: Zheng Construction 4.1, printed p.21, and Proposition 4.17(a), printed
-pp.25-26; Stacks 07A4 and 08J9, using the projection argument of
-lem-coef-semilinear-cartesian-hom-evaluation, step 2
-(blueprint: lem-coef-semilinear-cartesian-projection).
-Proof: identify any left adjoint L with the derived singleton extension by the
-unique unit-compatible left-adjoint isomorphism. Choose a flat-term K-flat
-representative of P and a flat-term K-flat system representative of M. The ordinary
-extension has value B_q tensor over B_n with P below n and zero above n. Derive this
-description using K-flat scalar extension. The unit-defined map displayed below
-is, at q at most n, the reassociation of P extended to B_q tensored with the
-reduction from M_n to M_q. This identification follows on local pure tensors from
-the singleton adjunction unit, the representative tensor comparisons and their
-specified ordinaryEvaluationTensor normalization. Local tensor generators give
-the equality before localization, hence also after localization. The reduction
-is invertible by hM. Above n source and target are zero, since derived tensor
-preserves zero. Exact evaluations jointly detect isomorphisms by componentwise
-cohomology, so the displayed projection is invertible. Transport along the
-unit-compatible left-adjoint isomorphism gives the assertion for any L and adj.
-The argument includes n = 0, zero rings, zero P or M, and an empty site. -/
+invertible for a cartesian system. No internal-Hom comparison is assumed. -/
 theorem semilinearCartesianProjection
     (scalar : ∀ {m n : ℕ} (h : n ≤ m),
       ScalarData.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h))

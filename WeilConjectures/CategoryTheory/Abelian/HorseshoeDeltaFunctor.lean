@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeMorphismLift
 # Horseshoe connecting morphisms for right derived functors
 
 Source: Weibel, *An Introduction to Homological Algebra*, Theorem 2.4.6 and
-Lemma 2.2.8; Stacks Project, Derived Categories, Tags 013T and 0117
-(blueprint: lem-weil-pbc-horseshoe-delta-functor).
+Lemma 2.2.8; Stacks Project, Derived Categories, Tags 013T and 0117.
 -/
 
 @[expose] public section
@@ -179,39 +178,10 @@ private theorem horseshoe_mono_zero (v : A ⥤ B) [v.Additive]
 /-- The connecting morphisms obtained from every compatible (horseshoe) injective
 resolution make the right derived functors into a cohomological delta-functor.
 The comparison equation identifies `G.delta` with the snake-lemma boundary for every
-horseshoe, transported by `isoRightDerivedObj`. The `eqToHom` maps only identify the
-objects of `G.F` with the objects of `v.rightDerived` using `hF`. Thus `G.naturality`
-gives naturality for any two horseshoes, and the identity ladder gives independence.
+horseshoe, transported by `isoRightDerivedObj`.
 
 Source: Weibel, Theorem 2.4.6 with Lemma 2.2.8; Stacks Project, Derived Categories,
-Tag 013T and Homology, Tags 0117 and 010Q.
-(blueprint: lem-weil-pbc-horseshoe-delta-functor)
-
-Proof:
-1. Choose injective resolutions and lifts of two maps. Their sum lifts the sum of the
-maps. Additivity of `v` and homology, with the comparison rule of
-lem-weil-pbc-derived-functor-map-via-lift, gives additivity of each right derived functor
-(lem-weil-pbc-left-exact-injective-resolution-degree-zero,
-lem-weil-pbc-injective-resolution-lift-exists).
-2. Each horseshoe row splits since its first object is injective: extend its identity
-across the first map and factor the complementary projection through the cokernel.
-Additivity preserves the splitting identities, so applying `v` gives short exact rows.
-The snake lemma defines the cohomology boundary; transport it by `isoRightDerivedObj`
-(lem-weil-pbc-complex-ses-homology-long-exact, def-sp-injective-resolutions).
-3. Lift a morphism of short exact sequences to the endpoint resolutions and use
-lem-weil-pbc-horseshoe-morphism-lift for the middle map. Apply `v` and naturality of the
-homology boundary (lem-weil-pbc-complex-ses-long-exact-naturality). The comparison rule
-of lem-weil-pbc-derived-functor-map-via-lift yields naturality of the transported maps.
-4. Apply Step 3 to the identity morphism between two horseshoes of the same sequence.
-The right derived functors preserve identities, so the transported maps are equal.
-5. Choose a horseshoe (lem-weil-pbc-injective-resolution-ses) and transport its long
-exact cohomology sequence using lem-weil-pbc-derived-functor-map-via-lift. The zeroth
-cohomology is a kernel, since the complexes vanish in negative degrees; its first map
-is monic because the degree-zero horseshoe map is split monic. Thus the sequence is
-exact including the initial zero (lem-weil-pbc-complex-ses-homology-long-exact).
-6. Package additivity, exactness, and naturality as the delta-functor of
-def-weil-pbc-delta-functor. Step 4 identifies its boundary with that of every horseshoe.
--/
+Tag 013T and Homology, Tags 0117 and 010Q. -/
 theorem exists_horseshoe_rightDerived_deltaFunctor
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [EnoughInjectives A] [Category.{v₂} B] [Abelian B]

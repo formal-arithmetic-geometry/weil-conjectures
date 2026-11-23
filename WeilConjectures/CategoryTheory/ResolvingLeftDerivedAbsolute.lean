@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBri
 /-!
 # Absolute left derived functors from a resolving class
 
-Source: Stacks Project, Tags 05Q9, 06XN and 05SE
-(blueprint: lem-sf-localized-derived-adjunction).
+Source: Stacks Project, Tags 05Q9, 06XN and 05SE.
 
 Let `W` be a class of morphisms with a right calculus of fractions and the
 two-out-of-three property, `L` a localization functor for `W`, and `P` a class

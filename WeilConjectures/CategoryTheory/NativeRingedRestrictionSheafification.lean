@@ -11,7 +11,6 @@ import all WeilConjectures.CategoryTheory.RingedSectionLocalizationOfUniverses
 /-! # Sheafification under restriction of sites
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG and 0996.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -23,13 +22,7 @@ namespace CategoryTheory.NativeRestriction
 
 /-- Continuous and cocontinuous restriction commutes with module sheafification.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 0996.
-(auxiliary; not a blueprint node).
-
-Proof: the sheafification unit is locally bijective. Cocontinuity preserves this
-property after restriction, and continuity makes its target a sheaf. The universal
-property of module sheafification therefore identifies the restricted target with
-the sheafification of the restricted presheaf. -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 0996. -/
 theorem sheafificationRestriction
     {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
     {K : GrothendieckTopology C} {J : GrothendieckTopology D}

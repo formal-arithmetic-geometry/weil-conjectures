@@ -6,8 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.CategoryTheory.SectionProjectionUnit
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Naturality of a conjugate section comparison -/
 @[expose] public section

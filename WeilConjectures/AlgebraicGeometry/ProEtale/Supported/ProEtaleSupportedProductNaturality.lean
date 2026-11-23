@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Supported.ProEtaleSupportedExteriorProduct
 
 /-! # Naturality of the actual pro-etale supported exterior product
-
-Source: blueprint `proposition-purity-vector-bundles`, witness-transport paragraph.
-(blueprint: lem-pur-proetale-supported-product-naturality).
 -/
 
 -- After pruning, this module only keeps private declarations.

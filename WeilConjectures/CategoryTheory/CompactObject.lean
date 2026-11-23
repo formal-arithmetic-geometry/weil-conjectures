@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 /-!
 # Compact objects of an additive category with coproducts
 
-Source: the blueprint of the Weil conjectures, chapter `chap-The-Picard-scheme-of-a-curve`, unit
-`theorem-riemann-roch-coherent-serre-duality--2` (blueprint: def-pc-compact-object); Stacks Project,
+Source: Stacks Project,
 Derived Categories, Definition 13.37.1 (Tag 09SM).
 
 ## Main statements
@@ -34,7 +33,7 @@ open CategoryTheory CategoryTheory.Limits DirectSum
 namespace CategoryTheory
 
 open Classical in
-/-- (blueprint: def-pc-compact-object) Let `C` be an additive category with arbitrary coproducts.
+/-- Let `C` be an additive category with arbitrary coproducts.
 An object `K` of `C` is *compact* if, for every set `I` and family `E : I → C`, the canonical map
 `⨁ᵢ Hom(K, E i) → Hom(K, ⨁ᵢ E i)`, sending `f` in the `i`-th summand to `f ≫ Sigma.ι E i`, is
 bijective (Stacks, Tag 09SM). The direct sum is taken with the classical decidable equality

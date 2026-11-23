@@ -20,9 +20,8 @@ A relative gluing datum over `β` consists of opens `V a b` of the base changed 
 
 The point of this formulation is that all overlap maps take values in the fixed schemes `Y_b`,
 so that the datum can be transported along any morphism `γ : B' ⟶ B` over `T`
-(`AlgebraicGeometry.RelativeGluingDatum.transport`); this is how the data of the blueprint
-nodes `theorem-nagata-s-compactification-theorem--1` and
-`theorem-nagata-s-compactification-theorem--1` are moved between the stages of a cofiltered system.
+(`AlgebraicGeometry.RelativeGluingDatum.transport`), e.g. between the stages of a cofiltered
+system.
 
 ## Main definitions
 

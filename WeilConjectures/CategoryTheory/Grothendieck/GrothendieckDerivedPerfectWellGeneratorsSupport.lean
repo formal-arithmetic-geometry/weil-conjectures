@@ -692,26 +692,7 @@ private theorem bounded_family_cardinal
       (isSeparator_separator A) (hb (some (.inr (j, ⟨n⟩))))
 
 /-- Supporting small-class construction for the exact compact localization.
-Source: Neeman, Theorem 0.2 and Krause, Sections 6.2--6.3.
-(blueprint: new-sfb-derived-perfect-well-generators-support-b4)
-
-Proof in words: choose the exact compact localization model and a complex representative
-of each image generator. Choose a regular cardinal dominating the subobject lattices of
-all their components, the finite copowers of a separator, and the natural numbers. Let P
-be the class of complexes generated degreewise by fewer than this many separator copies,
-and take its essential image under Q. Quotients of a fixed disk copower give essential
-smallness; reindexing degrees gives shift stability.
-
-Every map from such an object has a roof with middle complex in P: replace the denominator
-by an epimorphic quasi-isomorphism, cover its target by a bounded subcomplex, and enlarge
-the resulting kernel inside the acyclic denominator kernel before pushing out. A chain map
-from that middle complex to a coproduct factors through the coproduct of its component
-images, which are again in P. Applying Q gives the factorization condition. Finally bound
-the subobject lattices of representatives of P by a common regular cardinal. Maps from
-these representatives into coproducts factor through partial coproducts of that size, and
-the bounded-roof argument transfers this support bound to the derived category. The chosen
-image generators belong by the initial cardinal bound. The importing theorem separately
-uses the compact-generator telescope to prove localizing generation. -/
+Source: Neeman, Theorem 0.2 and Krause, Sections 6.2--6.3. -/
 theorem exists_small_factorization_class_of_compact_localization
     {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{v} A] :

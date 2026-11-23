@@ -18,7 +18,7 @@ image of `i`. Let `FC`, `FZ`, `FU` be endofunctors of `C`, `Z`, `U` (a "Frobeniu
 triangulated, together with commutation isomorphisms `αi : i ⋙ FC ≅ FZ ⋙ i`,
 `αj : j^* ⋙ FU ≅ FC ⋙ j^*` and `αjLow : j_* ⋙ FC ≅ FU ⋙ j_*`.
 
-We show the formal part of the Weil clause of blueprint `lemma-local-cohomology-right-adjoint--2`:
+We show:
 
 1. the mate `G ⋙ FZ ⟶ FC ⋙ G` of `αi⁻¹` is an isomorphism
    (`CategoryTheory.Pretriangulated.Recollement.rightAdjointIso`), because `FC` carries the
@@ -59,7 +59,7 @@ include adj αjLow hi h₀ hess in
 an isomorphism: `FC` carries the supported localization triangle of `K` to a distinguished
 triangle with vertices in the essential images of `i` and `j_*`, which is therefore the supported
 localization triangle of `FC K` (`CategoryTheory.Pretriangulated.Recollement.exists_iso_triangle`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause). -/
+-/
 lemma isIso_mateEquiv : IsIso (mateEquiv adj' adj' αi.inv) := by
   have (K : C) : IsIso ((mateEquiv adj' adj' αi.inv).app K) := by
     obtain ⟨w, hw⟩ := exists_distTriang_counit_unit adj adj' hi h₀ hess K
@@ -74,7 +74,7 @@ lemma isIso_mateEquiv : IsIso (mateEquiv adj' adj' αi.inv) := by
 
 /-- In a recollement, the isomorphism `i^! ⋙ FZ ≅ FC ⋙ i^!`, the mate of `αi⁻¹` along `i ⊣ i^!`
 (`CategoryTheory.Pretriangulated.Recollement.isIso_mateEquiv`). It is the Frobenius structure of
-`i^!` of blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause). -/
+`i^!`. -/
 noncomputable def rightAdjointIso : G ⋙ FZ ≅ FC ⋙ G :=
   have := isIso_mateEquiv adj adj' αi αjLow hi h₀ hess
   asIso (mateEquiv adj' adj' αi.inv)
@@ -83,11 +83,10 @@ lemma mateEquiv_inv_eq_rightAdjointIso_hom :
     mateEquiv adj' adj' αi.inv = (rightAdjointIso adj adj' αi αjLow hi h₀ hess).hom :=
   rfl
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): in a recollement, `i ⊣ i^!`
-lifts to an adjunction between objects with Frobenius structure (`IsoAlgebra FZ ⇄ IsoAlgebra FC`),
-`i^!` carrying the Frobenius structure `CategoryTheory.Pretriangulated.Recollement.rightAdjointIso`;
-its unit and counit have the unit and counit of `i ⊣ i^!` as underlying morphisms, i.e. they are
-equivariant. -/
+/-- In a recollement, `i ⊣ i^!` lifts to an adjunction between objects with Frobenius structure
+(`IsoAlgebra FZ ⇄ IsoAlgebra FC`), `i^!` carrying the Frobenius structure
+`CategoryTheory.Pretriangulated.Recollement.rightAdjointIso`; its unit and counit have the unit
+and counit of `i ⊣ i^!` as underlying morphisms, i.e. they are equivariant. -/
 noncomputable def isoAlgebraAdjunction :
     IsoAlgebra.mapOfNatIso αi ⊣
       IsoAlgebra.mapOfNatIso (rightAdjointIso adj adj' αi αjLow hi h₀ hess) :=
@@ -98,8 +97,7 @@ include αi h₀ hess in
 /-- In a recollement, the mate `FC ⋙ j^* ⟶ j^* ⋙ FU` of `αjLow : j_* ⋙ FC ≅ FU ⋙ j_*` along
 `j^* ⊣ j_*` is an isomorphism: at `K` it is `j^*` of `FC` of the unit `K ⟶ j_* j^* K`, followed
 by isomorphisms, and the fibre of the unit lies in the essential image of `i`, which `FC` carries
-into the essential image of `i` (by `αi`) and `j^*` kills.
-Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause). -/
+into the essential image of `i` (by `αi`) and `j^*` kills. -/
 lemma isIso_mateEquiv_symm : IsIso ((mateEquiv adj adj).symm αjLow.hom) := by
   have (K : C) : IsIso (((mateEquiv adj adj).symm αjLow.hom).app K) := by
     obtain ⟨F, a, δ, hT, M, ⟨e⟩⟩ := exists_distTriang_unit adj hess K
@@ -116,8 +114,7 @@ lemma isIso_mateEquiv_symm : IsIso ((mateEquiv adj adj).symm αjLow.hom) := by
 
 /-- In a recollement, the isomorphism `j^* ⋙ FU ≅ FC ⋙ j^*` whose inverse is the mate of
 `αjLow : j_* ⋙ FC ≅ FU ⋙ j_*` along `j^* ⊣ j_*`
-(`CategoryTheory.Pretriangulated.Recollement.isIso_mateEquiv_symm`).
-Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause). -/
+(`CategoryTheory.Pretriangulated.Recollement.isIso_mateEquiv_symm`). -/
 noncomputable def leftAdjointIso : jUp ⋙ FU ≅ FC ⋙ jUp :=
   have := isIso_mateEquiv_symm adj αi αjLow h₀ hess
   (asIso ((mateEquiv adj adj).symm αjLow.hom)).symm
@@ -165,13 +162,8 @@ lemma map_unit_comp_str (K : IsoAlgebra FC) :
   ((IsoAlgebra.mapOfNatIsoAdjunction adj _ _ hj).unit.app K).hom.h
 
 include hj in
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): the third arrow
-`w : j_* j^* K ⟶ (i i^! K)⟦1⟧` of the supported localization triangle of an object `K` with
-Frobenius structure is Frobenius-equivariant. Indeed, transporting the image under `FC` of the
-triangle along the Frobenius structures of its vertices gives a distinguished triangle whose
-first two arrows are the counit and the unit (`map_counit_comp_str`, `map_unit_comp_str`), so
-its third arrow is `w` by uniqueness
-(`CategoryTheory.Pretriangulated.Recollement.existsUnique_distTriang_counit_unit`). -/
+/-- The third arrow `w : j_* j^* K ⟶ (i i^! K)⟦1⟧` of the supported localization triangle of an
+object `K` with Frobenius structure is Frobenius-equivariant. -/
 theorem map_mor₃_comp_str (K : IsoAlgebra FC) {w : jLow.obj (jUp.obj K.carrier) ⟶ _}
     (hw : triangle adj adj' K.carrier w ∈ distTriang C) :
     FC.map w ≫ (FC.commShiftIso (1 : ℤ)).hom.app _ ≫
@@ -187,10 +179,9 @@ theorem map_mor₃_comp_str (K : IsoAlgebra FC) {w : jLow.obj (jUp.obj K.carrier
   have := (existsUnique_distTriang_counit_unit adj adj' hi h₀ hess K.carrier).unique hw' hw
   exact (Iso.inv_comp_eq s₃).1 this
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2` (Weil clause): the supported localization
-triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶ (i i^! K)⟦1⟧` of an object `K` with Frobenius structure is
-Frobenius-equivariant: the Frobenius structures of its vertices form an isomorphism of triangles
-from its image under `FC`. -/
+/-- The supported localization triangle `i i^! K ⟶ K ⟶ j_* j^* K ⟶ (i i^! K)⟦1⟧` of an object
+`K` with Frobenius structure is Frobenius-equivariant: the Frobenius structures of its vertices
+form an isomorphism of triangles from its image under `FC`. -/
 noncomputable def mapTriangleIso (K : IsoAlgebra FC) {w : jLow.obj (jUp.obj K.carrier) ⟶ _}
     (hw : triangle adj adj' K.carrier w ∈ distTriang C) :
     FC.mapTriangle.obj (triangle adj adj' K.carrier w) ≅ triangle adj adj' K.carrier w :=

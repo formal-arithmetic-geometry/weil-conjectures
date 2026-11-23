@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 Source: Stacks Project, Cohomology, Tag 0B54 (projection formula for perfect objects),
 and Duality for Schemes, Tag 0A9T (the tensor-Hom argument).
-(blueprint: lem-sc-monoidal-projection-conjugate).
 -/
 
 @[expose] public section
@@ -27,19 +26,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The conjugate of the tensorator at the dual is the canonical projection map.
-Source: Stacks Project, Cohomology, Tag 0B54, and Duality for Schemes, Tag 0A9T.
-(blueprint: lem-sc-monoidal-projection-conjugate).
-Proof: expand conjugation under the two composite adjunctions. Their Hom equivalences
-are the composites of the tensor-Hom equivalences with `a.homEquiv`. Transpose the
-claimed equality under `a`. The remaining expression inserts coevaluation, applies
-F to evaluation, and then applies the counit of a. Naturality of the counit removes
-its intervening unit. The evaluation and coevaluation of the mapped pairing are
-F of those of the original pairing, conjugated by the tensorator and unit comparison.
-Naturality, associativity and unit laws of the monoidal functor move these comparisons
-past evaluation and coevaluation. The evaluation-coevaluation triangle identity then
-cancels the inserted dual pair. What remains is the inverse tensorator followed by
-F(K) tensor the counit, which is the claimed canonical transpose. This calculation
-uses neither geometric hypotheses nor any invertibility of the counit. -/
+Source: Stacks Project, Cohomology, Tag 0B54, and Duality for Schemes, Tag 0A9T. -/
 theorem monoidal_projection_conjugate
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [MonoidalCategory C] [MonoidalCategory D]

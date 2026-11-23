@@ -23,7 +23,6 @@ isomorphism. Then:
 
 In both cases the proof applies `F`, and uses that the mate of the lax monoidal structure of `G`
 is the inverse of the strong monoidal structure of `F`.
-Source: blueprint lem-kernel-condensed-projector-descent.
 -/
 
 @[expose] public section
@@ -63,8 +62,7 @@ image e₁ ⊗ image e₂ ──────────────────
             ╲──────────────────────▶ image e₃ ────────────────╯
 ```
 The hypothesis `h` is `m ≫ e₃.asHom = m`, so `m` factors through `image e₃`; the theorem says that
-the factor is an isomorphism.
-Source: blueprint lem-kernel-condensed-projector-descent. -/
+the factor is an isomorphism. -/
 theorem image_tensor_regular_isIso (e₁ e₂ e₃ : End (G.obj (Mod.regular S)))
     [IsIso (F.map (image.ι e₁.asHom) ≫ adj.counit.app (Mod.regular S))]
     [IsIso (F.map (image.ι e₂.asHom) ≫ adj.counit.app (Mod.regular S))]
@@ -97,9 +95,7 @@ then the unit of `G` corestricts to an isomorphism from the monoidal unit onto `
    ╲ ≅           ▼
     ╲─────▶ image e ──ι──▶ G (regular S)
 ```
-The composite `ε ≫ e` equals `ε` by `h`, so `ε` factors through `image e`, and the factor
-`ε ≫ factorThruImage e` is an isomorphism.
-Source: blueprint lem-kernel-condensed-projector-descent. -/
+The factor `ε ≫ factorThruImage e` is an isomorphism. -/
 theorem unit_image_regular_isIso (e : End (G.obj (Mod.regular S)))
     [IsIso (F.map (image.ι e.asHom) ≫ adj.counit.app (Mod.regular S))]
     (h : ε G ≫ (e).asHom = ε G) :

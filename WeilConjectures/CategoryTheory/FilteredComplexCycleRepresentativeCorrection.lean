@@ -23,19 +23,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 /-- A representative of a zero page class is locally an incoming boundary plus a
 term of one higher filtration. This assertion only concerns target boundaries;
 it neither corrects a source representative nor constructs successor cycles.
-Source: Stacks Project, Homology, Tag 012K, displayed boundary formula.
-(blueprint: lem-sp-filtered-complex-cycle-representative-correction).
-
-Proof. The kernel of the page cokernel is the boundary inclusion, so y factors
-through graded boundaries. Pull back the epimorphism defining their image to
-lift y to the pullback of (F^p intersect d(F^(p-r+1))) plus F^(p+1).
-The difference from the given t has zero graded projection. The kernel of that
-projection is F^(p+1), so this difference also lifts to F^(p+1). Pull back the
-sum epimorphism to split the first lift into an incoming boundary and a higher
-filtration term. Finally pull back the image epimorphism defining d(F^(p-r+1))
-to obtain b. Combine the two higher filtration terms to obtain c. Thus
-et = db + c in K. All pullbacks of epimorphisms are epic in an abelian category,
-and their composite is epic. No projectivity or arbitrary global lifting is used. -/
+Source: Stacks Project, Homology, Tag 012K, displayed boundary formula. -/
 private theorem filteredComplex_boundary_representative_lift
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (_hr : 1 ≤ r)
     (j : ℤ × ℤ) (p n : ℤ)
@@ -165,25 +153,7 @@ private theorem filteredComplex_boundary_representative_lift
 
 /-- A representative whose differential is a page boundary can be corrected to a
 successor-cycle representative without changing its source graded class.
-Source: Stacks Project, Homology, Tag 012K, displayed cycle and boundary formulas.
-(blueprint: lem-sp-filtered-complex-cycle-representative-correction).
-
-Proof. Write p = i.1 and n = i.1 + i.2. The relation gives j.1 = p+r and
-j.1+j.2 = n+1. Since the target page is the cokernel of its boundary inclusion,
-hy0 factors y through the target graded boundary subobject. Pull back the image
-epimorphism defining this subobject, and the epimorphism onto the sum of the
-unquotiented boundary subobject with F^(p+r+1). The equality of target graded
-classes then says, after pulling back the graded quotient epimorphism's kernel,
-that dt is a sum of an incoming boundary and a term in F^(p+r+1). Pull back the
-image epimorphism from F^((p+r)-r+1) = F^(p+1) defining that incoming boundary.
-On the resulting epic cover e of A, obtain a morphism b into F^(p+1) with
-d(e t - b) in F^(p+r+1). Include b into F^p; this is possible since F is
-antitone. Thus e t - b factors through the unquotiented (r+1)-cycle intersection.
-Its graded projection factors through the image defining successor graded cycles,
-giving z. The graded projection kills b, so z has exactly the same graded class
-as e x, by hx. Each cover is a pullback of an image or cokernel epimorphism and
-is epic in an abelian category; their finite composite e is epic. This proves
-the displayed equality without projectivity or elementwise lifting. -/
+Source: Stacks Project, Homology, Tag 012K, displayed cycle and boundary formulas. -/
 theorem filteredComplex_cycle_representative_correction
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r)
     (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j)

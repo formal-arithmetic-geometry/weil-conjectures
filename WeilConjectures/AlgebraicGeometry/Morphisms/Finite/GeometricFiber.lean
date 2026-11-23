@@ -19,12 +19,6 @@ points `x : Spec Ω ⟶ X` lifting `y` (`AlgebraicGeometry.Scheme.Hom.GeometricF
 finite, and every point of the scheme-theoretic fibre `f ⁻¹ {y}` is the image of a geometric
 point over `y`.
 
-Both statements are proved in an affine chart: for an affine open `Y₀ ∋ y` with preimage
-`X₀ = f ⁻¹ᵁ Y₀`, the geometric points of `X` over `y` are the points of the finite
-`Γ(Y₀)`-algebra `Γ(X₀)` over the point `Γ(Y₀) →+* Ω` given by `y`
-(`AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOver`), and the ring-theoretic
-results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.GeometricFiber`: the geometric points of `X` over `y`.
@@ -41,6 +35,13 @@ results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
 - `AlgebraicGeometry.Scheme.Hom.GeometricFiber.finite_of_isPullback`: the geometric fibre of a
   base change of a finite morphism is finite.
 
+## Implementation details
+
+Both statements are proved in an affine chart: for an affine open `Y₀ ∋ y` with preimage
+`X₀ = f ⁻¹ᵁ Y₀`, the geometric points of `X` over `y` are the points of the finite
+`Γ(Y₀)`-algebra `Γ(X₀)` over the point `Γ(Y₀) →+* Ω` given by `y`
+(`AlgebraicGeometry.Scheme.Hom.geometricFiberEquivPointsOver`), and the ring-theoretic
+results of `WeilConjectures.Mathlib.RingTheory.Etale.GeometricPoint` apply.
 -/
 
 @[expose] public section
@@ -53,9 +54,9 @@ namespace AlgebraicGeometry.Scheme.Hom
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] (y : Spec (.of Ω) ⟶ Y)
 
-/-- The geometric fibre of `f : X ⟶ Y` over the geometric point `y : Spec Ω ⟶ Y`: the geometric
-points `x : Spec Ω ⟶ X` with `x ≫ f = y`. This is a reducible definition so that the
-coercion `t.1` is transparent to tactics (blueprint `lemma-finite-direct-images--1`). -/
+/-- The geometric fibre of `f: X ⟶ Y` over the geometric point `y: Spec Ω ⟶ Y`: the geometric
+points `x: Spec Ω ⟶ X` with `x ≫ f = y`. This is a reducible definition so that the
+coercion `t.1` is transparent to tactics. -/
 abbrev GeometricFiber : Type u :=
   {x : Spec (.of Ω) ⟶ X // x ≫ f = y}
 
@@ -193,8 +194,7 @@ section Finite
 
 variable [IsFinite f]
 
-/-- **The geometric fibre of a finite morphism is finite**
-(blueprint `lemma-finite-direct-images--1`). -/
+/-- **The geometric fibre of a finite morphism is finite**. -/
 instance GeometricFiber.finite : Finite (GeometricFiber f y) := by
   obtain ⟨Y₀, hY₀, hy, -⟩ :=
     exists_isAffineOpen_mem_and_subset (X := Y) (x := y default) (U := ⊤) trivial
@@ -203,8 +203,7 @@ instance GeometricFiber.finite : Finite (GeometricFiber f y) := by
   exact Finite.of_equiv _ (geometricFiberEquivPointsOver f y hY₀ hy).symm
 
 /-- **Every point of the fibre of a finite morphism over a geometric point `y` with values in
-an algebraically closed field is the image of a geometric point over `y`.**
-(blueprint: `lem-weil-pbc-finite-geometric-point-lift`) -/
+an algebraically closed field is the image of a geometric point over `y`.** -/
 lemma GeometricFiber.exists_apply_default_eq [IsAlgClosed Ω] (x : X) (hx : f x = y default) :
     ∃ t : GeometricFiber f y, t.1 default = x := by
   obtain ⟨Y₀, hY₀, hy, -⟩ :=
@@ -288,8 +287,7 @@ lemma finite_of_isPullback [IsFinite f] (h : IsPullback g' f' f g) (y' : Spec (.
 variable (f g)
 
 /-- The geometric fibre of the second projection of `Limits.pullback f g` over `y'` is the
-geometric fibre of `f` over `y' ≫ g`. This is `baseChangeEquiv` for the square given by
-`Limits.pullback f g`. -/
+geometric fibre of `f` over `y' ≫ g`. -/
 noncomputable def pullbackEquiv (y' : Spec (.of Ω) ⟶ Y') :
     (pullback.snd f g).GeometricFiber y' ≃ f.GeometricFiber (y' ≫ g) :=
   baseChangeEquiv (IsPullback.of_hasPullback f g) y'

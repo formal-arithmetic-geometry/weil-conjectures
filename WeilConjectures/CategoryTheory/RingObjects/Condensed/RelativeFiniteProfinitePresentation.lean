@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
 /-!
 # Relative finite presentations of profinite spaces
 
-Source: Bhatt--Scholze, proof of Lemma 2.2.8, relative finite clopen partitions.
+Source: Bhatt--Scholze, Lemma 2.2.8.
 -/
 
 @[expose] public section
@@ -176,16 +176,7 @@ private noncomputable def partitionConeIsLimit {S : Profinite.{u}} (E : Over S) 
 /-- Every profinite space over a profinite base has a small cofiltered presentation by
 pullbacks of maps of finite sets along surjective finite quotients of the base.
 
-Source: Bhatt--Scholze, proof of Lemma 2.2.8
-(blueprint: new-lem-zl-relative-finite-profinite-presentation).
-
-Proof: index by compatible finite clopen partitions of source and base. Common
-intersection refines two such pairs, and trivial partitions give an object. A stage
-is the base times the finite source quotient over the finite base quotient. The
-canonical cone is limiting: its source coordinates for trivial base partition give
-the original source by its finite-quotient limit. The other base partitions force
-that point to lie over the specified base point. Refinement determines all stage
-coordinates, proving uniqueness. The argument includes empty source and base. -/
+Source: Bhatt--Scholze, Lemma 2.2.8. -/
 theorem exists_relative_finite_presentation {S : Profinite.{u}} (E : Over S) :
     ∃ (I : Type u) (_ : SmallCategory I) (_ : IsCofiltered I)
       (D : I ⥤ Over S) (c : Cone D),

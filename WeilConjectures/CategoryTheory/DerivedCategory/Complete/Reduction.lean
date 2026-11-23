@@ -19,7 +19,7 @@ endofunctor of `D(J, R)`. For a nonzerodivisor `ϖ`:
 * a morphism whose reduction modulo `ϖ` is an isomorphism becomes an isomorphism after derived
   `ϖ`-completion (`DerivedCategory.isIso_derivedCompletion_map_of_isIso_reductionModIdeal`).
 
-## Implementation notes
+## Implementation details
 
 The monoidal structure of `D(J, R)` is taken from the fields of
 `DerivedCategory.sheafTensorStructure J R`, as explained in the implementation notes of

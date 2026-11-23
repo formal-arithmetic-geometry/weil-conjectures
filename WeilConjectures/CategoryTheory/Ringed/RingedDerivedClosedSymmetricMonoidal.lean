@@ -152,8 +152,7 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSup
 
 /-! # Closed symmetric monoidal derived categories of ringed sites
 
-Source: Stacks Project, Cohomology on Sites, Tags 0FPT and 08J9
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal).
+Source: Stacks Project, Cohomology on Sites, Tags 0FPT and 08J9.
 
 The representative equations below specify the actual associator, unitors and Koszul
 symmetry, in addition to the closed adjunction for the recorded derived internal Hom.
@@ -178,20 +177,20 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v u})
 
 /-- A transparent spelling of the recorded ringed-site module category.
-Source: Stacks 0FPT (blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT. -/
 abbrev RingedTensorModules :=
   ringedSiteModules.{max c v u} ((sheafCompose J
     (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)
 
 /-- The coefficient ring placed in degree zero, using the actual single-complex functor.
-Source: Stacks 0FPT (blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT. -/
 def ringedTensorUnitComplex : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ :=
   (HomologicalComplex.single _ (ComplexShape.up ℤ) (0 : ℤ)).obj
     (SheafOfModules.unit ((sheafCompose J
       (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R))
 
 /-- The actual degree-zero section of the coefficient-ring complex.
-Source: Stacks 0FPT (blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT. -/
 def ringedTensorUnitSection (U : Cᵒᵖ) (a : R.obj.obj U) :
     ((ringedTensorUnitComplex.{c, v, u} J R).X 0).val.obj U :=
   ((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
@@ -201,8 +200,7 @@ def ringedTensorUnitSection (U : Cᵒᵖ) (a : R.obj.obj U) :
 variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 
 /-- Total-tensor comparison data for all pairs with at least one K-flat factor.
-Source: Stacks 06YT and 0FPT
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 06YT and 0FPT. -/
 def RingedDerivedTensorComparison
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R)) :=
   ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ),
@@ -212,8 +210,7 @@ def RingedDerivedTensorComparison
       S.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q))
 
 /-- Agreement with the already recorded simultaneous K-flat comparison.
-Source: Stacks 0FPT and the signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT and the signed total tensor of 06YN. -/
 def RingedDerivedTensorBothModel
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
@@ -222,8 +219,7 @@ def RingedDerivedTensorBothModel
     tensorIso P Q (Or.inl hP) = T.iso J R S P Q hP hQ
 
 /-- Naturality on all allowed representatives, including quasi-isomorphisms.
-Source: Stacks 0FPT and the signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT and the signed total tensor of 06YN. -/
 def RingedDerivedTensorNaturality
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (tensorIso : RingedDerivedTensorComparison.{c, v, u, w} J R S) : Prop :=
@@ -233,8 +229,7 @@ def RingedDerivedTensorNaturality
     (tensorIso P Q h).hom ≫ S.tensor.map (DerivedCategory.Q.map f, DerivedCategory.Q.map g)
 
 /-- The symmetry is induced by the signed swap on every K-flat tensor model.
-Source: Stacks 0FPT and the signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT and the signed total tensor of 06YN. -/
 def RingedDerivedTensorSymmetryModel
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
@@ -253,8 +248,7 @@ def RingedDerivedTensorSymmetryModel
       DerivedCategory.Q.map s.hom ≫ (T.iso J R S Q P hQ hP).hom
 
 /-- Reassociation is induced by reassociation of pure-tensor summands, without a sign.
-Source: Stacks 0FPT and the signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT and the signed total tensor of 06YN. -/
 def RingedDerivedTensorAssociatorModel
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
@@ -293,8 +287,7 @@ def RingedDerivedTensorAssociatorModel
           (𝟙 _, (T.iso J R S Q N hQ hN).hom)
 
 /-- The left unitor is multiplication by the degree-zero coefficient.
-Source: Stacks 0FPT and the signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT and the signed total tensor of 06YN. -/
 def RingedDerivedTensorLeftUnitorModel
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (tensorIso : RingedDerivedTensorComparison.{c, v, u, w} J R S)
@@ -317,8 +310,7 @@ def RingedDerivedTensorLeftUnitorModel
       DerivedCategory.Q.map l.hom
 
 /-- The right unitor is the corresponding coefficient multiplication.
-Source: Stacks 0FPT and the signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT and the signed total tensor of 06YN. -/
 def RingedDerivedTensorRightUnitorModel
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (tensorIso : RingedDerivedTensorComparison.{c, v, u, w} J R S)
@@ -345,8 +337,7 @@ All maps below are the specified structural maps, rather than unrelated object i
 `tensorIso` includes the one-K-flat representative description; its naturality and agreement
 with the simultaneous K-flat model make it the extension of that fixed comparison.
 
-Source: Stacks 0FPT, 08J9 and the usual signed total tensor of 06YN
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal). -/
+Source: Stacks 0FPT, 08J9 and the usual signed total tensor of 06YN. -/
 structure RingedDerivedTensorCoherence
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)
@@ -440,40 +431,7 @@ private theorem ringedDerived_closed_symmetric_monoidal_native :
 /-- The unbounded derived category of modules on a small ringed site is closed symmetric
 monoidal, with its total-tensor constraints, Koszul symmetry and evaluation adjunction.
 
-Source: Stacks 0FPT and 08J9
-(blueprint: lem-sf-ringed-derived-closed-symmetric-monoidal).
-
-Proof plan (the node's eleven steps):
-1. Sheaf tensor is additive, closed and symmetric (`lem-pc-sheaf-modules-tensor-closed`);
-   module sheaves have all colimits (`prop-pur-kinjective-resolutions-exist`). Apply
-   `lem-sfb-total-tensor-homotopy` to totalize and descend through homotopies.
-2. On bidegree (p,q), the signed swap has coefficient (-1)^(pq). Its differential commutes,
-   its square is one and it is natural on chain maps and their homotopy classes.
-3. K-flat complexes with flat terms contain the unit and are closed under total tensor:
-   associate an acyclic test tensor and apply K-flatness twice; flat terms and their
-   countable sums stay flat (`lem-pc-kflat-closure`).
-4. Descend constraints and their inverses through the K-flat localization equivalence
-   and unique extension of natural transformations (`lem-weil-pbc-site-derived-tensor-descent`).
-5. Check pentagon, triangle and involutivity on representatives. Both hexagon paths have
-   sign (-1)^(p(q+r)) = (-1)^(pq+pr), so the signed symmetry is symmetric monoidal.
-6. Tensor commutes with cones; the cone criterion (`lem-pur-quasi-iso-cone-acyclic`), K-flat
-   closure and `lem-pur-acyclic-kflat-tensor-arbitrary` give the one-K-flat comparison.
-7. Choose K-flat sources (`lem-pc-kflat-resolution`) and a K-injective target
-   (`prop-pur-kinjective-resolutions-exist`). Their Hom is K-injective
-   (`lem-pur-hom-kflat-into-kinjective`); use `lem-weil-pbc-kinjective-hom-derived`.
-8. Apply `lem-sc-derived-hom-tensor-total`, then global sections and ordinary H^0;
-   `lem-pur-hom-complex-global-homotopy` identifies the tensor-Hom bijection.
-9. Its inverse sends a curried map to x tensor y ↦ φ(x)(y), with no additional sign.
-   The Hom differential gives exactly the chain-map and homotopy equations.
-10. This formula is natural in all three complex variables; the localization and
-    K-injective comparisons extend naturality to all derived morphisms.
-11. Inverse transpose of the identity is resolved evaluation. Naturality in K gives
-    uncurry(u) = (u tensor 1) followed by evaluation, the adjunction counit formula.
-
-`CoefficientClosedStructure` retains all-variable naturality and the counit; its adjunction
-Hom equivalence is the displayed bijection. `CoefficientTensorModels.uncurry_model` fixes
-its evaluation normalization. `SymmetricCategory` retains naturality, involution and both
-hexagons, and `MonoidalCategory` retains pentagon and triangle. No boundedness is assumed. -/
+Source: Stacks 0FPT and 08J9. -/
 theorem ringedDerived_closed_symmetric_monoidal :
     ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R),
       ∃ T : CoefficientTensorModels.{u, c, v, w} J R S,

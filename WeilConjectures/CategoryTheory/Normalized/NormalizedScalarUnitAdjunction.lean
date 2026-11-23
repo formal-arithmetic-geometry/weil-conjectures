@@ -139,14 +139,7 @@ private theorem single_unit_hom
   exact (Category.comp_id _).symm.trans h
 
 /-- The representative-normalized unit is the transpose of the ordinary restriction unit,
-after the canonical single/unit identifications.
-Source: blueprint finite-dualizing normalization, paragraphs 1--3; the exact-single
-adjunction formula and multiplication normalization.
-Proof: the localization unit and single/unit comparisons are identities in the chosen
-derived model. The representative normalization identifies the unit with localization of
-the ordinary oplax unit. The cochain adjunction unit, the exact-single comparison, and
-naturality identify its transpose with the single of the ordinary lax unit.
-(blueprint: lem-coef-normalized-scalar-unit-single) -/
+after the canonical single/unit identifications. -/
 theorem normalizedUnit_singleAdjunction
     {C : Type v} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]

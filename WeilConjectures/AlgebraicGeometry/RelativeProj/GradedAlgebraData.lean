@@ -33,7 +33,7 @@ restriction map identifies `A(U)` with the coefficientwise localization `A(V)[1/
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.GradedAlgebraData` — quasi-coherent graded algebras on `X`, described
-  on affine opens (the input of `definition-admissible-blow-up--1`).
+  on affine opens (the input of the admissible blow-up construction).
 - `AlgebraicGeometry.Scheme.GradedAlgebraData.Hom` — degree-preserving morphisms, and the
   category structure.
 -/
@@ -48,13 +48,12 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A **quasi-coherent graded `𝒪_X`-algebra**, described by its values on the affine opens of `X`.
 
-For every affine open `U` we are given a graded `Γ(X, U)`-algebra `A.grading U` on the ring
+It consists of, for every affine open `U`, a graded `Γ(X, U)`-algebra `A.grading U` on the ring
 `A.obj U` (the sections over `U`), and for every inclusion `U ≤ V` of affine opens a graded
-restriction homomorphism `A.res : A.grading V →+*ᵍ A.grading U`, functorial in `U ≤ V`.
+restriction homomorphism `A.res: A.grading V →+*ᵍ A.grading U`, functorial in `U ≤ V`.
 **Quasi-coherence** is encoded by `isGradedBaseChangeAlong`: every restriction map is, in each
 degree `n`, the base change `A(U)ₙ = Γ(X, U) ⊗_{Γ(X, V)} A(V)ₙ` along the restriction map
-`Γ(X, V) → Γ(X, U)` of the structure sheaf. (blueprint: input of
-`definition-admissible-blow-up--1`) -/
+`Γ(X, V) → Γ(X, U)` of the structure sheaf. -/
 structure GradedAlgebraData (X : Scheme.{u}) where
   /-- The sections over an affine open. -/
   obj : X.affineOpens → Type u

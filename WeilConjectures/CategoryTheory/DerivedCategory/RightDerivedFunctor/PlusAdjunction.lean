@@ -30,10 +30,7 @@ We also prove the identity and composition laws for the derived unit. For the id
 adjunction the derived unit is the identity, modulo
 `Functor.mapDerivedCategoryPlusIdIso` and `Functor.rightDerivedFunctorPlusIdIso`; for a
 composite of adjunctions the derived unit is the composite of the two derived units, modulo
-`Functor.mapDerivedCategoryPlusCompIso` and `Functor.rightDerivedFunctorPlusCompIso`. Both
-reduce, through `CategoryTheory.Adjunction.derivedPlus_unit_eq`, to the corresponding laws
-for `CategoryTheory.Adjunction.mapHomotopyCategoryPlus` together with the characterizations
-of the four comparison isomorphisms.
+`Functor.mapDerivedCategoryPlusCompIso` and `Functor.rightDerivedFunctorPlusCompIso`.
 
 ## Main definitions
 
@@ -58,32 +55,12 @@ of the four comparison isomorphisms.
   functors with respect to the bounded below derived adjunctions is computed on complexes by the
   mate of the underived square.
 
-## The proof
-
-The construction is Mathlib's `CategoryTheory.Adjunction.derived`, which produces an
-adjunction between a left derived functor and a right derived functor as soon as the two
-composites are again derived functors ("absoluteness"), applied to the adjunction
-`L.mapHomotopyCategoryPlus ⊣ R.mapHomotopyCategoryPlus` on the bounded below homotopy
-categories. There are two absoluteness statements to check, and they are of a different
-nature:
-
-* `L.mapDerivedCategoryPlus ⋙ R.rightDerivedFunctorPlus` is the left derived functor of
-  `L.mapHomotopyCategoryPlus ⋙ Qh ⋙ R.rightDerivedFunctorPlus` because the comparison map
-  is an isomorphism, `L` being exact: no resolutions are involved.
-* `R.rightDerivedFunctorPlus ⋙ L.mapDerivedCategoryPlus` is the right derived functor of
-  `R.mapHomotopyCategoryPlus ⋙ Qh ⋙ L.mapDerivedCategoryPlus` by the injective right
-  derivability structure: the comparison map is `L.mapDerivedCategoryPlus` applied to the
-  unit of `R.rightDerivedFunctorPlus`, which is an isomorphism on bounded below complexes
-  of injectives.
+## Implementation details
 
 Like `WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp`, this
-file deliberately avoids the unbounded machinery indexed by K-injective complexes. That
-machinery is proved, not assumed — `HasKInjectiveResolutions` holds in every Grothendieck
-abelian category (`CategoryTheory.Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian`)
-— but it is not implied by enough injectives, which is all the bounded below statement needs,
-so this file does not import
+file deliberately avoids the unbounded machinery indexed by K-injective complexes: the bounded
+below statement only needs enough injectives, so this file does not import
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
-
 -/
 
 @[expose] public section
@@ -304,11 +281,7 @@ variable {E : Type u₃} [Category.{v₃} E] [Abelian E] [HasDerivedCategory E]
 /-- **The composition law for the bounded below derived unit**: the unit of the bounded
 below derived adjunction of a composite `adj₁.comp adj₂` is the composite of the two derived
 units, modulo the composition isomorphisms `Functor.mapDerivedCategoryPlusCompIso` and
-`Functor.rightDerivedFunctorPlusCompIso`.
-
-The hypothesis `R₂.PreservesInjectiveObjects`, which is what
-`Functor.rightDerivedFunctorPlusCompIso` needs, follows from the exactness of `L₂` by
-`Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj₂`. -/
+`Functor.rightDerivedFunctorPlusCompIso`. -/
 theorem derivedPlus_comp_unit :
     (adj₁.comp adj₂).derivedPlus.unit =
       adj₁.derivedPlus.unit ≫

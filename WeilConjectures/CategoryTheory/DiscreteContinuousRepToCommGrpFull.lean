@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DiscreteContinuousRepToCommGrp
 /-!
 # Fullness of the internal group object functor
 
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -47,17 +47,9 @@ private lemma discreteRepCommGrp_mul_apply
   rw [hf, hs]
 
 
-/-- Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-discrete-continuous-rep-to-commgrp-full)
-
-Proof: An internal group morphism gives an equivariant function between the carriers.
-The represented group law is pointwise addition. Apply preservation of multiplication
-to the two projections from the product representation, then evaluate at any pair (x,y).
-This says the underlying function preserves addition. Every additive map of integer
-modules is integer-linear, so it gives an equivariant linear map. Its image is the
-original internal group morphism because the forgetful functor is faithful.
-The zero representation and trivial actions are included; the argument uses no
-separation or finiteness assumption on the topological group. -/
+/-- The functor from discrete continuous integer representations to commutative group objects
+in discrete continuous `G`-sets is full.
+Source: Stacks Project, Tag 04JQ. -/
 theorem discreteContinuousRepToCommGrp_full
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CartesianMonoidalCategory (DiscreteContAction (Type w) G)]

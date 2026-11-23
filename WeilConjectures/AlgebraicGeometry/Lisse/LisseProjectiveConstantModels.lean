@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Flat.FlatModelGeneration
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-! # Constant finite-projective models of a lisse sheaf
-Source: blueprint lemma-flat-models-generators--2, proof of the generator assertion.
 -/
 
 @[expose] public section
@@ -18,20 +17,7 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry
 
-/-- Finite projective geometric stalks give finite projective constant trivializations.
-Source: blueprint lemma-flat-models-generators--2, clause (3), the generators
-"L locally constant with finite projective stalks".
-
-Proof: take an etale trivializing cover from local constancy. Discard empty members,
-which do not affect joint surjectivity. Each remaining member has a geometric point.
-Apply that point's exact sheaf fiber to the chosen constant trivialization. The fiber
-of the constant A-module sheaf is its given module, and the fiber of the restriction
-of L is the geometric stalk of L at the composed point. The resulting A-linear
-isomorphism identifies the constant module with that stalk. The hypotheses give
-finiteness and projectivity of the stalk; a finite underlying set gives a finitely
-generated A-module, and projectivity is invariant under A-linear isomorphism. Keep
-the same constant trivializations on this refined cover. If the scheme is empty,
-take the empty cover, for which every asserted model condition is vacuous. -/
+/-- Finite projective geometric stalks give finite projective constant trivializations. -/
 theorem lisseProjective_constantModels
     {S : Scheme.{u}} (A : Type (u + 1)) [CommRing A] [Finite A]
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))

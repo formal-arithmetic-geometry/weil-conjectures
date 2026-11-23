@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-! # Finite power functors and complexes
 
 Source: Stacks Project, Modules on Sites, Tag 03DB.
-(blueprint: lem-pur-finite-power-complex).
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +38,7 @@ def finitePowerFunctor (d : ℕ) : A ⥤ A where
   map_comp f g := by apply Pi.hom_ext; intro i; simp
 
 /-- Finite power is the diagonal functor followed by the categorical limit.
-Source: Stacks Project, Tag 03DB.
-(blueprint: lem-pur-finite-power-complex). -/
+Source: Stacks Project, Tag 03DB. -/
 def finitePowerFunctorIso (d : ℕ) :
     Functor.const (Discrete (Fin d)) ⋙ lim ≅ finitePowerFunctor (A := A) d :=
   NatIso.ofComponents (fun M ↦ (Pi.isoLimit
@@ -93,13 +91,7 @@ def finitePowerComplexMap (d : ℕ) (P : CochainComplex A ℤ) :
 
 /-- Mapping a complex by the finite power functor is the finite power of the complex.
 
-Source: Stacks Project, Tag 03DB, finite-product interchange.
-(blueprint: lem-pur-finite-power-complex).
-
-Proof: the coordinate projections define a chain map. In every degree its composite
-with the product comparison for evaluation is the identity, by product extensionality.
-Evaluation preserves products, hence that comparison and the chain map in every degree
-are isomorphisms. A chain map whose components are isomorphisms is an isomorphism. -/
+Source: Stacks Project, Tag 03DB interchange. -/
 def finitePowerComplexIso (d : ℕ) (P : CochainComplex A ℤ) :
     ((finitePowerFunctor d).mapHomologicalComplex (.up ℤ)).obj P ≅
       ∏ᶜ fun _ : Fin d ↦ P := by

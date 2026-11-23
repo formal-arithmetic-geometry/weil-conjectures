@@ -10,8 +10,6 @@ import Mathlib.Logic.Function.Basic
 import Mathlib.Lean.Meta.CongrTheorems
 
 /-! # Adjuncts of a local projective-line square
-
-Source: the second rational projective-line triangle, and Mathlib's unit mate equation.
 -/
 
 @[expose] public noncomputable section
@@ -226,18 +224,7 @@ private theorem condensed_local_square_adjuncts
     run_tac coefficientCongrGoal
 
 /-- A commuting square of local arrows gives the corresponding square of adjuncts
-under the fixed projective-line exchange map.
-
-Source: the second rational projective-line triangle; Mathlib's `unit_mateEquiv`.
-(blueprint: lem-sfb-rational-p1-local-square-adjuncts).
-
-Proof: write the first adjunct as its adjunction unit followed by the mapped local
-arrow. Naturality moves that arrow past the exchange. The unit mate equation
-replaces the remaining unit/exchange paste by the second unit and the pullback
-comparison. Apply the assumed local square, functoriality, and naturality of the
-second unit. Specialize the resulting categorical identity to the actual derived
-module adjunctions. Explicit congruence proofs identify their fixed wrappers,
-without reducing the large sheafification or tensor constructions. -/
+under the fixed projective-line exchange map. -/
 theorem p1_local_square_adjuncts
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u})

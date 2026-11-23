@@ -23,8 +23,7 @@ namespace CategoryTheory.Functor
 
 /-- Additive cocycle comparisons on injective complexes, with their normalization
 and compatibility with chain maps.
-Source: Stacks Tags 06XR (1) and 070I; the two parts of the natural-map construction.
-(blueprint: def-sc-p1-rhom-injective-cocycle-family). -/
+Source: Stacks Tags 06XR (1) and 070I. -/
 structure RhomInjectiveCocycleFamily
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}]

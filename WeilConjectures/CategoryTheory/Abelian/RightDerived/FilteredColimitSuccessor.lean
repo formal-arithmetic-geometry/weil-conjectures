@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 # The successor step for filtered colimits of right derived functors
 
 Source: Stacks Project, Cohomology on Sites, Tag 0739, the induction diagram.
-(blueprint: lem-weil-pbc-right-derived-filtered-colimit-successor).
 -/
 
 @[expose] public section
@@ -29,26 +28,7 @@ namespace CategoryTheory.Functor
 
 /-- Preservation in degree `n` implies preservation in degree `n + 1` when filtered
 colimits of injective diagrams are acyclic in that next degree.
-Source: Stacks Project, Tag 0739, second paragraph and the comparison diagram.
-(blueprint: lem-weil-pbc-right-derived-filtered-colimit-successor).
-
-Proof:
-1. Choose functorial injective embeddings in the Grothendieck abelian category `A`.
-For a diagram `F`, form its injective diagram `J`, its cokernel diagram `Q`, and the
-pointwise short exact sequence `0 → F → J → Q → 0`. Exactness of `I`-colimits gives
-`0 → colim F → colim J → colim Q → 0`.
-2. The natural connecting maps of the right derived delta-functor give exact rows
-`colim Rⁿv(J) → colim Rⁿv(Q) → colim Rⁿ⁺¹v(F) → 0` and
-`Rⁿv(colim J) → Rⁿv(colim Q) → Rⁿ⁺¹v(colim F) → 0`.
-The first row is exact because colimits in `B` are exact and injectives have zero
-positive derived functors. The second ends in zero by `hacyclic`.
-3. The canonical comparison maps form a commuting ladder: the first square is
-functoriality, and the second follows from naturality of the connecting maps for
-each coprojection of the short exact sequences. The first two vertical maps are
-isomorphisms by preservation in degree `n`.
-4. The third vertical map is an isomorphism by the cokernel universal property,
-or the four lemma with zero on the right. Thus the image of every colimit cocone
-under `v.rightDerived (n + 1)` is a colimit cocone. -/
+Source: Stacks Project, Tag 0739, second paragraph and the comparison diagram. -/
 theorem preservesColimitsOfShape_rightDerived_succ
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [IsGrothendieckAbelian.{w} A] [Abelian B]

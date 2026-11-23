@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
 /-! # Finite coverings on the pair categories
 
 Source: Stacks Project, Categories 004A and Sites 00VH, 0A34.
-(blueprint: lem-weil-pbc-site-system-finite-coverings)
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Finite presieves whose image under evaluation covers.
-Source: Stacks 00VH, the finite-family site transported across the evaluation equivalence.
-(blueprint: lem-weil-pbc-site-system-finite-coverings) -/
+Source: Stacks 00VH site transported across the evaluation equivalence. -/
 def finiteEquivalencePrecoverage {A B : Type u} [Category.{v} A] [Category.{v} B]
     (p : A ⥤ B) (P : Precoverage B) : Precoverage A := Precoverage.finite A ⊓ P.comap p
 

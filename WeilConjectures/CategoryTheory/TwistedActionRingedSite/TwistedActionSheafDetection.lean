@@ -9,7 +9,12 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Detecting sheaves on the twisted action category
 
-Source: original twisted-site step 3, motivated by Stacks Tag 00W0.
+A presheaf on the twisted action category is a sheaf for the twisted topology as soon as its
+restriction along the degree-zero inclusion is a sheaf.
+
+## References
+
+Motivated by Stacks Project, Tag 00W0.
 -/
 
 @[expose] public section
@@ -154,26 +159,7 @@ private theorem image_cover_pullback (S : Site J s R a) :
     (hL.trans ((heq_of_eq (by simpa only [Category.comp_id] using he)).trans
       (hR.symm.trans (heq_of_eq (Category.assoc _ _ _)))))
 
-/-- Sheaf descent along the degree-zero inclusion of a specified twisted site.
-
-Source: the covering-basis part of original step 3 of the agent twisted variant
-of Stacks Tag 00W0, `sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-sheaf-detection).
-
-Proof: a degree-n arrow is a degree-zero arrow followed by an isomorphism of
-copied objects. Pulling a generating J-cover back along it is therefore the same,
-up to that isomorphism, as translating the cover by s to the appropriate integer
-power and then pulling back inside C. Both directions of s are continuous and C
-has pullbacks; hence these translated pullbacks are J-covers. For the image of
-such a cover, restrict a matching family to its degree-zero arrows and use the
-assumed J-sheaf property for the unique amalgamation. Factor each other arrow
-through its power isomorphism: naturality of G and compatibility of the family
-show that the same amalgamation has the prescribed value there. Uniqueness
-already follows on the degree-zero covering family. Thus G satisfies descent on
-every pullback of every generating sieve. These are covers for the finest topology
-of G; S.topology_eq and its infimum property put S.topology below that topology.
-Consequently G is an S.topology-sheaf. This argument also treats empty covers and
-an empty category; no coefficient-ring property is used. -/
+/-- Sheaf descent along the degree-zero inclusion of a specified twisted site. -/
 theorem twistedSheafOfRestriction [HasPullbacks C] (S : Site J s R a) :
     letI := S.category
     ∀ (G : (Object C)ᵒᵖ ⥤ Type u),

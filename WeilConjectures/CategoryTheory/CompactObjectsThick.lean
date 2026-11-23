@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.CompactCone
 /-!
 # Compact objects form a thick subcategory
 
-Source: Stacks Project, Derived Categories, Lemma 13.37.2 (Tag 09QH)
-(blueprint: lem-sc-compact-objects-thick).
+Source: Stacks Project, Derived Categories, Lemma 13.37.2 (Tag 09QH).
 -/
 
 @[expose] public section
@@ -71,22 +70,7 @@ private theorem compact_zero
 
 /-- Compact objects are closed under thick operations.
 Source: Stacks Project, Derived Categories, Lemma 13.37.2, Tag 09QH.
-(blueprint: lem-sc-compact-objects-thick).
-
-Proof: the zero object is compact since all its Hom groups are zero. The adjunction
-between a shift and its inverse, and preservation of coproducts by both equivalences,
-identify the shifted compact-Hom comparison with the original one. Thus compactness
-is stable under shifts. For a distinguished triangle with two compact terms, the
-comparison maps fit into a morphism of five-term exact Hom sequences. The row of
-direct sums is exact, since direct sums of abelian groups preserve exactness; the
-other row is exact by the homological property of representable functors. The four
-outer comparisons are bijective by compactness of the two known terms and their
-shifts. The five lemma proves bijectivity for the remaining term. Rotate triangles
-to obtain closure for every pair of terms. Finally, an isomorphism of sources
-identifies the comparison maps by precomposition. For a retract of a compact object,
-precomposition with its retraction and inclusion expresses the comparison map as a
-retract of a bijection, so it is bijective too. These facts give exactly the two
-asserted object-property classes. -/
+-/
 theorem compactObjects_isThick
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

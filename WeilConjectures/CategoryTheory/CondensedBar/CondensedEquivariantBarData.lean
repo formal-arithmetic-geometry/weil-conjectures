@@ -37,8 +37,6 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-! # Internal profinite actions and compatible bar models
 
-Source: the formal internal-bar expansion of paragraph (3) of the main-20261015
-six-functors direct-image proof (blueprint: def-sfb-condensed-equivariant-bar-data).
 The action is on all continuous generalized elements and is compatible with restriction.
 -/
 
@@ -50,93 +48,85 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.CondensedBar
 
-/-- Commutative ring objects on the profinite site, with the recorded coefficient size.
-Source: blueprint condensed rings (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Commutative ring objects on the profinite site, with the recorded coefficient size. -/
 abbrev Ring := CommMon (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
 
-/-- The recorded internal module category, without a copied module structure.
-Source: blueprint module objects (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The recorded internal module category, without a copied module structure. -/
 abbrev Modules (A : Ring.{u}) :=
   Profinite.CondensedAction.Modules A.toMon
 
 /-- The existing section-module equivalence, used to express generalized-element formulas.
-Source: Stacks 00YV (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+Source: Stacks 00YV.
+-/
 abbrev sectionsFunctor (A : Ring.{u}) :=
   InternalAbelianSheafModule.sectionModuleFunctor (coherentTopology Profinite.{u}) A.X
 
 /-- The section ring of an internal condensed ring.
-Source: Stacks 00YV (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+Source: Stacks 00YV.
+-/
 abbrev sectionRing (A : Ring.{u}) (S : Profinite.{u}) :=
   (InternalAbelianSheafModule.sectionRingSheaf
     (coherentTopology Profinite.{u}) A.X).obj.obj (op S)
 
 /-- Sections of the actual module sheaf associated to an internal module.
-Source: Stacks 00YV (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+Source: Stacks 00YV.
+-/
 abbrev sections (A : Ring.{u}) (M : Modules A) (S : Profinite.{u}) :=
   M.X.obj.obj (op S)
 
 /-- The section-module structure transported by the recorded equivalence.
-Source: Stacks 00YV (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+Source: Stacks 00YV.
+-/
 instance sectionModule (A : Ring.{u}) (M : Modules A) (S : Profinite.{u}) :
     Module (sectionRing A S) (sections A M S) :=
   (((sectionsFunctor A).obj M).val.obj (op S)).isModule
 
 variable (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 
-/-- The bundled commutativity proof on the underlying condensed ring.
-Source: commutative monoid objects (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The bundled commutativity proof on the underlying condensed ring. -/
 instance ringComm (A : Ring.{u}) : IsCommMonObj A.toMon.X := A.comm
 
-/-- The landed internal-action category, specialized to the bundled commutative ring.
-Source: internal-action definitions (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The internal-action category, specialized to the bundled commutative ring. -/
 abbrev Equivariant (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] := Profinite.CondensedAction.ActionModule A.toMon G
 
 variable {A G}
 
-/-- The existing internal-action forgetful functor.
-Source: internal-action definitions (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The existing internal-action forgetful functor. -/
 abbrev forgetAction {A : Ring.{u}} {G : Type u} [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] : Equivariant A G ⥤ Modules A :=
   Profinite.CondensedAction.forgetAction (R := A.toMon) (P := G)
 
-/-- Forgetting an action retains addition of the underlying maps.
-Source: internal-action definitions (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Forgetting an action retains addition of the underlying maps. -/
 instance forgetAction_additive : (forgetAction (A := A) (G := G)).Additive where
   map_add := by intros; rfl
 
-/-- Generalized functions on a profinite parameter, over every base change of S.
-Source: the free/internal-Hom adjunction (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Generalized functions on a profinite parameter, over every base change of S. -/
 abbrev FunctionFamily (M : Modules A) (P S : Profinite.{u}) :=
   ∀ (T : Profinite.{u}), (T ⟶ S) → C(T, P) → sections A M T
 
-/-- A generalized function commutes with every profinite base change.
-Source: the free/internal-Hom adjunction (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- A generalized function commutes with every profinite base change. -/
 def FunctionFamily.IsNatural {M : Modules A} {P S : Profinite.{u}}
     (c : FunctionFamily M P S) : Prop :=
   ∀ (T V : Profinite.{u}) (f : T ⟶ S) (k : V ⟶ T) (g : C(T, P)),
     M.X.obj.map k.op (c T f g) = c V (k ≫ f) (g.comp k.hom.hom)
 
-/-- A profinite power, including the terminal power in degree zero.
-Source: the internal bar formula (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- A profinite power, including the terminal power in degree zero. -/
 abbrev power (G : Type u) [TopologicalSpace G] [CompactSpace G] [T2Space G]
     [TotallyDisconnectedSpace G] (n : ℕ) : Profinite.{u} := Profinite.of (Fin n → G)
 
-/-- A tuple of continuous maps is the corresponding continuous map to a profinite power.
-Source: the internal bar formula (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- A tuple of continuous maps is the corresponding continuous map to a profinite power. -/
 def tupleMap [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     {n : ℕ} {T : Profinite.{u}} (g : Fin n → C(T, G)) : C(T, power G n) :=
   ⟨fun t i ↦ g i t, continuous_pi fun i ↦ (g i).continuous⟩
 
-/-- The tuple entering an interior inhomogeneous face, with adjacent entries multiplied.
-Source: the internal bar formula (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The tuple entering an interior inhomogeneous face, with adjacent entries multiplied. -/
 def mergeTuple {n : ℕ} {T : Profinite.{u}} (i : Fin (n + 2))
     (g : Fin (n + 1) → C(T, G)) : Fin n → C(T, G) :=
   fun j ↦ if j.val + 1 < i.val then g j.castSucc
     else if j.val + 1 = i.val then g j.castSucc * g j.succ else g j.succ
 
-/-- The landed invariant-submodule functor and its normalized inclusion adjunction.
-Source: internal-action definitions (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The invariant-submodule functor and its normalized inclusion adjunction. -/
 abbrev Invariants (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] := Profinite.CondensedAction.Invariants A.toMon G
 
@@ -146,8 +136,7 @@ attribute [instance] Profinite.CondensedAction.Invariants.additive
 abelian sheaf functor (sheafified free abelian group, left adjoint of forgetting to
 condensed sets) and then the free internal A-module functor `A ⊗ -`. This is the same
 composite as the free functor of the internal bar resolution module, written out here so
-that the definition rests on definitions only.
-Source: the composed free adjunction (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+that the definition rests on definitions only. -/
 def freeParameter (A : Ring.{u}) (P : Profinite.{u}) : Modules A :=
   (Sheaf.composeAndSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.free.{u + 1} ⋙
     Mod.free A.toMon.X).obj
@@ -155,8 +144,7 @@ def freeParameter (A : Ring.{u}) (P : Profinite.{u}) : Modules A :=
 
 /-- Internal functions from a profinite parameter, characterized on every generalized section.
 By the free-module adjunction this is precisely internal Hom from A[P]. Linearity and
-restriction formulas uniquely specify the functor, and include empty profinite parameters.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+restriction formulas uniquely specify the functor, and include empty profinite parameters. -/
 structure InternalFunctions (A : Ring.{u}) where
   functor : Profinite.{u} → (Modules A ⥤ Modules A)
   additive : ∀ P, (functor P).Additive
@@ -186,8 +174,7 @@ structure InternalFunctions (A : Ring.{u}) where
 attribute [instance] InternalFunctions.additive
 
 /-- The equivariant bar diagram, specified by the inhomogeneous face and degeneracy
-formulas on every generalized element. A model is unique up to its displayed evaluations.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+formulas on every generalized element. A model is unique up to its displayed evaluations. -/
 structure BarDiagram (F : InternalFunctions A) [CompactSpace G] [T2Space G]
     [TotallyDisconnectedSpace G] where
   diagram : Equivariant A G ⥤ CosimplicialObject (Modules A)
@@ -220,15 +207,13 @@ structure BarDiagram (F : InternalFunctions A) [CompactSpace G] [T2Space G]
     (diagram.map h).app (SimplexCategory.mk n) ≫ (term P n).hom =
       (term N n).hom ≫ (F.functor (power G n)).map h.val
 
-/-- The alternating inhomogeneous cochains, constructed from the specified nerve diagram.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The alternating inhomogeneous cochains, constructed from the specified nerve diagram. -/
 def cochains [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     {F : InternalFunctions A} (B : BarDiagram (G := G) F) :
     Equivariant A G ⥤ CochainComplex (Modules A) ℕ :=
   B.diagram ⋙ AlgebraicTopology.alternatingCofaceMapComplex (Modules A)
 
-/-- Alternating cochains inherit the additive structure from their termwise formula.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Alternating cochains inherit the additive structure from their termwise formula. -/
 instance cochains_additive [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     {F : InternalFunctions A} (B : BarDiagram (G := G) F) : (cochains B).Additive where
   map_add := by
@@ -237,8 +222,7 @@ instance cochains_additive [CompactSpace G] [T2Space G] [TotallyDisconnectedSpac
     intro n
     exact B.maps_additive f h n
 
-/-- The invariant inclusion as an actual cochain augmentation, normalized by constant functions.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The invariant inclusion as an actual cochain augmentation, normalized by constant functions. -/
 structure Augmentation [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (V : Invariants A G) {F : InternalFunctions A} (B : BarDiagram (G := G) F) where
   map : V.functor ⋙ CochainComplex.single₀ (Modules A) ⟶ cochains B
@@ -249,8 +233,7 @@ structure Augmentation [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
       (((map.app N).f 0 ≫ (B.term N 0).hom).hom.hom.app (op S) x)).val T f g =
       N.module.X.obj.map f.op ((V.inclusion.app N).hom.hom.app (op S) x)
 
-/-- The compatible first-quadrant bar double complex on a single resolution.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The compatible first-quadrant bar double complex on a single resolution. -/
 def doubleComplex [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     {F : InternalFunctions A} (B : BarDiagram (G := G) F)
     (I : CochainComplex (Equivariant A G) ℕ) :
@@ -258,8 +241,7 @@ def doubleComplex [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
   HomologicalComplex₂.flip (((cochains B).mapHomologicalComplex (.up ℕ)).obj I)
 
 /-- Finite-diagonal totalization of the compatible bar double complex.
-The outer degree is the bar degree; the differential is d_bar + (-1)^p d_resolution.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+The outer degree is the bar degree; the differential is d_bar + (-1)^p d_resolution. -/
 def totalCochains [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     {F : InternalFunctions A} (B : BarDiagram (G := G) F) :
     CochainComplex (Equivariant A G) ℕ ⥤ CochainComplex (Modules A) ℕ :=
@@ -268,8 +250,7 @@ def totalCochains [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
       HomologicalComplex₂.totalFunctor (Modules A) (.up ℕ) (.up ℕ) (.up ℕ)
 
 /-- The total invariant augmentation is fixed on every degree by the bar-zero coprojection.
-Its naturality is for actual chain maps, so includes comparison maps of resolutions.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+Its naturality is for actual chain maps, so includes comparison maps of resolutions. -/
 structure TotalAugmentation [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (V : Invariants A G) {F : InternalFunctions A} (B : BarDiagram (G := G) F)
     (a : Augmentation V B) where
@@ -278,14 +259,12 @@ structure TotalAugmentation [CompactSpace G] [T2Space G] [TotallyDisconnectedSpa
     (map.app I).f n = (a.map.app (I.X n)).f 0 ≫
       (doubleComplex B I).ιTotal (.up ℕ) 0 n n (by simp)
 
-/-- Extension of a nonnegative complex by zero to the ordinary integer-indexed category.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Extension of a nonnegative complex by zero to the ordinary integer-indexed category. -/
 abbrev extend (K : CochainComplex (Modules A) ℕ) : CochainComplex (Modules A) ℤ :=
   K.extend ComplexShape.embeddingUpNat
 
 /-- Abelian-category properties for the fixed additive action category; only the existence
-of limits and normality is supplied, while addition remains the actual addition of maps.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+of limits and normality is supplied, while addition remains the actual addition of maps. -/
 class ActionAbelian (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] where
   normalMono : IsNormalMonoCategory (Equivariant A G)
@@ -294,8 +273,7 @@ class ActionAbelian (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
   kernels : HasKernels (Equivariant A G)
   cokernels : HasCokernels (Equivariant A G)
 
-/-- The abelian structure uses the fixed addition of equivariant internal module maps.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The abelian structure uses the fixed addition of equivariant internal module maps. -/
 instance actionAbelian [h : ActionAbelian A G] : Abelian (Equivariant A G) where
   toPreadditive := Profinite.CondensedAction.actionPreadditive
   toIsNormalMonoCategory := h.normalMono
@@ -304,14 +282,12 @@ instance actionAbelian [h : ActionAbelian A G] : Abelian (Equivariant A G) where
   has_kernels := h.kernels
   has_cokernels := h.cokernels
 
-/-- Expose the multiplicative law of a bundled condensed-ring map to scalar restriction.
-Source: bundled monoid morphisms (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Expose the multiplicative law of a bundled condensed-ring map to scalar restriction. -/
 instance scalarMap_isMonHom {A A' : Ring.{u}} (a : A ⟶ A') : IsMonHom a.hom.hom :=
   a.hom.isMonHom_hom
 
 /-- Restriction of an internal action along the specified ring morphism. The displayed
-underlying isomorphism intertwines every generalized group element, fixing the functor.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+underlying isomorphism intertwines every generalized group element, fixing the functor. -/
 structure ScalarAction {A A' : Ring.{u}} (a : A ⟶ A') (G : Type u) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] where
   functor : Equivariant A' G ⥤ Equivariant A G
@@ -331,8 +307,7 @@ variable [ActionAbelian A G] [IsGrothendieckAbelian.{u + 1} (Equivariant A G)]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The normalized ordinary right-derived-invariant comparison on a specified injective
-resolution: map its augmentation and then invert the right-derived unit on injectives.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+resolution: map its augmentation and then invert the right-derived unit on injectives. -/
 def resolutionComparison (V : Invariants A G) {N : Equivariant A G}
     (I : InjectiveResolution N) :
     V.functor.rightDerivedFunctor.{u + 2, u + 2,
@@ -352,8 +327,7 @@ def resolutionComparison (V : Invariants A G) {N : Equivariant A G}
 
 /-- An actual derived-object comparison for every compatible nonnegative resolution.
 The normalization makes it the localization of the invariant inclusion, not an arbitrary
-isomorphism. All chain lifts obey naturality through the total augmentation.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+isomorphism. All chain lifts obey naturality through the total augmentation. -/
 structure Computation [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     (V : Invariants A G) {F : InternalFunctions A} (B : BarDiagram (G := G) F)
     (a : Augmentation V B) (t : TotalAugmentation V B a) where
@@ -386,8 +360,7 @@ structure Computation [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 end Derived
 
 /-- All ordinary and derived bar data for one coefficient ring. No existence assertion
-is hidden in this definition: the theorem supplies this data with its computation laws.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+is hidden in this definition: the theorem supplies this data with its computation laws. -/
 structure Model (A : Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     [ActionAbelian A G] [IsGrothendieckAbelian.{u + 1} (Equivariant A G)]
@@ -411,8 +384,7 @@ variable {A A' : Ring.{u}} (a : A ⟶ A')
   [HasDerivedCategory.{u + 2} (Modules A)] [HasDerivedCategory.{u + 2} (Modules A')]
 
 /-- Scalar compatibility before resolving, including the formulas fixing the maps on each
-internal-Hom term and each total summand. These formulas exclude an arbitrary comparison.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+internal-Hom term and each total summand. These formulas exclude an arbitrary comparison. -/
 structure ScalarModel (M : Model A G) (M' : Model A' G) where
   restriction : ScalarAction a G
   invariants : restriction.functor ⋙ M.invariants.functor ≅
@@ -443,8 +415,7 @@ structure ScalarModel (M : Model A G) (M' : Model A' G) where
       ((doubleComplex M'.bar J).ιTotal (.up ℕ) p q n h)
 
 /-- The normalized map on invariant-resolution complexes, directed from restricted
-A'-resolutions to A-resolutions. Its inverse in the derived category is scalar restriction.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+A'-resolutions to A-resolutions. Its inverse in the derived category is scalar restriction. -/
 def scalarInvariantChain {M : Model A G} {M' : Model A' G} (s : ScalarModel a M M')
     (J : CochainComplex (Equivariant A' G) ℕ)
     (I : CochainComplex (Equivariant A G) ℕ)
@@ -455,8 +426,7 @@ def scalarInvariantChain {M : Model A G} {M' : Model A' G} (s : ScalarModel a M 
   (NatIso.mapHomologicalComplex s.invariants (.up ℕ)).inv.app J ≫
     (M.invariants.functor.mapHomologicalComplex (.up ℕ)).map β
 
-/-- The corresponding total-bar map, built from the same comparison β in every term.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- The corresponding total-bar map, built from the same comparison β in every term. -/
 def scalarTotalChain {M : Model A G} {M' : Model A' G} (s : ScalarModel a M M')
     (J : CochainComplex (Equivariant A' G) ℕ)
     (I : CochainComplex (Equivariant A G) ℕ)
@@ -465,8 +435,7 @@ def scalarTotalChain {M : Model A G} {M' : Model A' G} (s : ScalarModel a M M')
         ((totalCochains M'.bar).obj J) ⟶ (totalCochains M.bar).obj I :=
   s.total.inv.app J ≫ (totalCochains M.bar).map β
 
-/-- Localizing a specified nonnegative quasi-isomorphism, with no choice of its inverse.
-Source: derived localization (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+/-- Localizing a specified nonnegative quasi-isomorphism, with no choice of its inverse. -/
 def localizedIso {K L : CochainComplex (Modules A) ℕ} (f : K ⟶ L) (hf : QuasiIso f) :
     DerivedCategory.Q.{u + 2}.obj (extend K) ≅ DerivedCategory.Q.{u + 2}.obj (extend L) := by
   letI := hf
@@ -475,8 +444,7 @@ def localizedIso {K L : CochainComplex (Modules A) ℕ} (f : K ⟶ L) (hf : Quas
 
 /-- Scalar restriction on the derived bar calculation. All lifts β are quantified, and
 all columns and both sides of the augmentation square are normalized by actual chain maps.
-Inverting these vertical quasi-isomorphisms gives the canonical scalar maps in the theorem.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+Inverting these vertical quasi-isomorphisms gives the canonical scalar maps in the theorem. -/
 structure ScalarComputation {M : Model A G} {M' : Model A' G} (s : ScalarModel a M M') where
   lifts : ∀ (N : Equivariant A' G)
     (I : InjectiveResolution (s.restriction.functor.obj N)) (J : InjectiveResolution N),
@@ -517,8 +485,7 @@ end Scalar
 
 /-- The whole bar assertion, including the existence of the action-category structures,
 so no Grothendieck or existence hypotheses have been added to the theorem. Standard
-localizations are used uniformly; each model includes the ordinary total right derived functor.
-Source: formal internal-bar expansion (blueprint: def-sfb-condensed-equivariant-bar-data). -/
+localizations are used uniformly; each model includes the ordinary total right derived functor. -/
 def Assertion (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : Prop := by
   refine ∃ h : ∀ A : Ring.{u}, ActionAbelian A G, ?_

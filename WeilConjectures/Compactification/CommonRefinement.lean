@@ -26,8 +26,7 @@ morphism is an open immersion is the graph-extension package of
 ## Main definitions
 
 - `AlgebraicGeometry.Compactification.inf`: the common refinement of two compactifications
-  `c` and `d`, the closure of the graph of `X` in `c.Z ×_Y d.Z` (blueprint:
-  `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`);
+  `c` and `d`, the closure of the graph of `X` in `c.Z ×_Y d.Z`;
 - `AlgebraicGeometry.Compactification.infFst` and `AlgebraicGeometry.Compactification.infSnd`:
   the two projections, exhibiting `inf c d` as a refinement of `c` and of `d`.
 
@@ -38,8 +37,7 @@ morphism is an open immersion is the graph-extension package of
   (resp. `d.Z`) the common refinement is `X` itself, i.e. the squares formed by the two
   refinements and the open immersions of `X` are cartesian.
 - `AlgebraicGeometry.Compactification.exists_common_refinement`: two compactifications of a
-  quasi-compact morphism admit a common refinement (blueprint:
-  `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`). This is what makes the `κ`-system
+  quasi-compact morphism admit a common refinement. This is what makes the `κ`-system
   `κ_{c,d} = ρ_{e → d} ρ_{e → c}⁻¹` of the proper base change chapter well-posed.
 - `AlgebraicGeometry.Compactification.exists_common_refinement_isSchemeTheoreticallyDominant`:
   the refinement `inf c d` is moreover scheme-theoretically dense, since its ambient
@@ -47,7 +45,6 @@ morphism is an open immersion is the graph-extension package of
 
 Finite presentation of the structure morphism of the common refinement, the remaining part
 of `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`, is not treated here.
-
 -/
 
 @[expose] public section
@@ -89,8 +86,7 @@ lemma isIso_restrict_imageι_graph_fst (c d : Compactification f) :
 /-- **The common refinement of two compactifications**: for compactifications `c` and `d` of
 a quasi-compact morphism `f : X ⟶ Y`, the closure of the graph of `X` in `c.Z ×_Y d.Z`, i.e.
 the scheme-theoretic image of `graph c d`, is a compactification of `f`. It refines both `c`
-and `d` (`Compactification.infFst`, `Compactification.infSnd`).
-(Blueprint: `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`.) -/
+and `d` (`Compactification.infFst`, `Compactification.infSnd`). -/
 noncomputable def inf (c d : Compactification f) : Compactification f where
   Z := (graph c d).image
   g := ((graph c d).imageι ≫ pullback.fst c.g d.g) ≫ c.g
@@ -166,8 +162,7 @@ theorem exists_common_refinement_isSchemeTheoreticallyDominant (c d : Compactifi
   ⟨inf c d, isSchemeTheoreticallyDominant_inf_i c d, ⟨infFst c d⟩, ⟨infSnd c d⟩⟩
 
 /-- **Two compactifications admit a common refinement**: for compactifications `c` and `d`
-of a quasi-compact morphism `f`, there is a compactification `e` of `f` refining both.
-(Blueprint: `GEO-BA43-PAIRWISE-COMMON-REFINEMENT`.) -/
+of a quasi-compact morphism `f`, there is a compactification `e` of `f` refining both. -/
 theorem exists_common_refinement (c d : Compactification f) :
     ∃ e : Compactification f, Nonempty (e.Refinement c) ∧ Nonempty (e.Refinement d) :=
   ⟨inf c d, ⟨infFst c d⟩, ⟨infSnd c d⟩⟩

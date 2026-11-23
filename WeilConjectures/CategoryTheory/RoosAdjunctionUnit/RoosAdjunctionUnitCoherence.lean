@@ -75,9 +75,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 
 /-! # Adjunction units and normalized signed Roos comparisons
 
-Source: Stacks Project, Tag 0941, lemma-derived-limit-is-ok; Tags 09BN and 09BP;
-blueprint prop-sf-pf-coherence, open-factor base-change paragraph
-(blueprint: lem-sf-roos-adjunction-unit-coherence).
+Source: Stacks Project, Tag 0941; Tags 09BN and 09BP.
 
 The record below bundles the specified comparisons together with their equations.
 Its fields are conclusions, not extra assumptions of the theorem. The underlying Roos
@@ -100,7 +98,7 @@ namespace CategoryTheory.RoosAdjunctionUnit
 
 /-- Localize the specified degreewise adjunction using the standard exact-functor
 factorizations. Both units and counits are the localized original maps.
-Source: Stacks Project, Tag 015F (blueprint: lem-sf-roos-adjunction-unit-coherence).
+Source: Stacks Project, Tag 015F.
 This helper extends the recorded construction to independent universes; its common-universe
 specialization is identified by `exactDerivedAdjunctionUniverses_commonUniverses`. -/
 def exactDerivedAdjunctionUniverses
@@ -124,12 +122,12 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   [Abelian A] [Abelian B]
 
 /-- Transparent termwise application on strict tower complexes.
-Source: Stacks 0941 (blueprint: lem-sf-roos-adjunction-unit-coherence). -/
+Source: Stacks 0941. -/
 abbrev towerComplex (F : A ⥤ B) [F.Additive] :=
   ((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex (.up ℤ)
 
 /-- The standard exact localization of termwise application on strict towers.
-Source: Stacks 0941 (blueprint: lem-sf-roos-adjunction-unit-coherence). -/
+Source: Stacks 0941. -/
 abbrev towerDerived [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
     [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :=
@@ -138,7 +136,7 @@ abbrev towerDerived [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
     (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦ inferInstance⟩)
 
 /-- The standard localization factorization for termwise tower application.
-Source: Stacks 0941 (blueprint: lem-sf-roos-adjunction-unit-coherence). -/
+Source: Stacks 0941. -/
 abbrev towerFactors [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
     [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] :=
@@ -147,7 +145,7 @@ abbrev towerFactors [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
     (⟨fun _ _ _ ↦ inferInstance⟩) (⟨fun _ _ _ ↦ inferInstance⟩)
 
 /-- The specified exact derived adjunction on strict towers.
-Source: Stacks 015F, 0941 (blueprint: lem-sf-roos-adjunction-unit-coherence). -/
+Source: Stacks 015F, 0941. -/
 def towerAdjunction [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
     [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
     {F : A ⥤ B} {G : B ⥤ A} [F.Additive] [G.Additive]
@@ -165,8 +163,7 @@ def towerAdjunction [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
   exactDerivedAdjunctionUniverses (a.whiskerRight ℕᵒᵖ)
 
 /-- Signed coordinates (x,y)=(u,-v) on the existing shifted Roos cone.
-Source: Stacks 0941; the signed normalization of exactProductFunctorStrictLimit
-(blueprint: lem-sf-roos-adjunction-unit-coherence). -/
+Source: Stacks 0941. -/
 def coordinates [HasCountableProducts A] (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     (roosF.obj X).X (p + 1) ≅ (roosP X).X (p + 1) ⊞ (roosP X).X p :=
   roosχ X p ≪≫ biprod.braiding _ _ ≪≫
@@ -197,8 +194,7 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
 record. In particular, kappa is specified on both signed product coordinates; theta
 is natural and has the ordinary-limit inclusion normalization on K-injectives; lambda
 is exactly its conjugate of kappa. No cone filler or arbitrary comparison is an input.
-Source: Stacks 0941, 09BN, 09BP and the open-factor calculation in prop-sf-pf-coherence
-(blueprint: lem-sf-roos-adjunction-unit-coherence). -/
+Source: Stacks 0941, 09BN, 09BP and the open-factor calculation in. -/
 structure Coherence where
   thetaA : DerivedCategory.Q ⋙ LA ≅ roosF ⋙ DerivedCategory.Q
   thetaB : DerivedCategory.Q ⋙ LB ≅ roosF ⋙ DerivedCategory.Q

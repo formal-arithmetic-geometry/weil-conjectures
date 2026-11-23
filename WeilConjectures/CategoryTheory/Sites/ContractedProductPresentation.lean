@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 /-!
 # The contracted product of a torsor under change of coefficients
 
-Source: Stacks Project, Cohomology on Sites, Tag 03AH (torsors);
-blueprint pushout-fibre argument (blueprint: def-sc-contracted-product-presentation).
+Source: Stacks Project, Cohomology on Sites, Tag 03AH (torsors).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory.Sheaf.Torsor
 `g • (t, h) = (g +ᵥ t, h - φ(g))`. The natural quotient map is invariant under that action
 and equivariant for translation on the second factor. Its universal property against every
 sheaf of sets is exactly the universal property of the sheafification of the orbit presheaf.
-Source: Stacks, Tag 03AH (torsors); the blueprint's pushout-fibre quotient argument.
-(blueprint: def-sc-contracted-product-presentation) -/
+Source: Stacks, Tag 03AH (torsors). -/
 structure ContractedProductPresentation (S : AlgebraicGeometry.Scheme.{uQ})
     {G G' : Sheaf S.smallEtaleTopology AddCommGrpCat.{max uQ wQ + 1}} (φ : G ⟶ G')
     (T : Torsor G) (T' : Torsor G') where

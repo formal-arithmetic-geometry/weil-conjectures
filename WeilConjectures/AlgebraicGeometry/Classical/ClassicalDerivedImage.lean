@@ -12,6 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Classical cohomology of comparison inverse image
+
+The derived comparison inverse image of a bounded-below étale complex of `Λ`-modules has
+classical cohomology sheaves in every degree.
 -/
 
 @[expose] public section
@@ -48,7 +51,9 @@ private noncomputable def classicalHomologyIso (X : Scheme.{u}) (Λ : Type (u + 
           (HasDerivedCategory.standard B) q).symm ≪≫
         Functor.isoWhiskerRight eQ.symm H ≪≫ Functor.associator _ _ _)
 
-private theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
+/-- Classicality of a module sheaf is invariant under isomorphism: the continuity maps of
+isomorphic sheaves differ by the induced isomorphisms on sections and on the colimits. -/
+theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ]
     {F G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)}
     (e : F ≅ G) (hF : IsClassicalModuleFor X Λ F) : IsClassicalModuleFor X Λ G := by

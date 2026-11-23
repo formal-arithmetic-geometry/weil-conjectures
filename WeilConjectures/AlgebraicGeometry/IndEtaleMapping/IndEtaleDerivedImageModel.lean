@@ -109,46 +109,6 @@ theorem isGE_imageValue (T : Over X) (a : ℤ) [M.IsGE a] : (imageValue A M T).I
     ((DerivedCategory.homologyFunctor _ q).mapIso
       (F.rightDerivedFunctorPlusCompatibility.app K')).symm
 
-/-- **Strict models of the derived direct images of pullbacks** (missing input).
-For any small diagram `E : J ⥤ Over X` of `X`-schemes and any bounded-below `M`, the
-derived diagram `j ↦ R(g_j)_* L(g_j)^* M` with transition maps `imagePullback` admits a
-strict model: a functor `Jᵒᵖ ⥤ CochainComplex` whose image in the derived category is
-identified with it, compatibly with all transition maps. -/
-theorem exists_imageValue_strictModel (hM : ∃ a : ℤ, M.IsGE a)
-    {J : Type (u + 1)} [SmallCategory J] (E : J ⥤ Over X) :
-    ∃ (F : Jᵒᵖ ⥤ CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
-      (e : ∀ j : J, DerivedCategory.Q.obj (F.obj (op j)) ≅ imageValue A M (E.obj j)),
-      ∀ {j k : J} (f : j ⟶ k),
-        DerivedCategory.Q.map (F.map f.op) ≫ (e j).hom =
-          (e k).hom ≫ imagePullback A M (E.map f) := by
-  sorry
-
-/-- **Continuity of the higher direct images of pullbacks along affine limits**
-(missing input). Let `T = lim T_i` be a cofiltered limit of affine `X`-schemes with
-affine transition maps, `X` affine, and `M` bounded below. Then for every `n` the
-canonical maps `Hⁿ(imageValue T_i) ⟶ Hⁿ(imageValue T)` (the cohomology of
-`imagePullback`) exhibit `Hⁿ(R g_* g^* M)` as the filtered colimit of the
-`Hⁿ(R (g_i)_* g_i^* M)`. The colimit diagram is presented by any strict diagram `G`
-identified with these cohomology sheaves compatibly with the transition maps. -/
-theorem isColimit_homology_imageValue [IsAffine X]
-    {I : Type (u + 1)} [SmallCategory I] [IsCofiltered I] (D : I ⥤ Over X) (c : Cone D)
-    (hc : IsLimit ((Over.forget X).mapCone c))
-    (haffine : ∀ i : I, IsAffine (D.obj i).left)
-    (htransition : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left)
-    (hM : ∃ a : ℤ, M.IsGE a) (n : ℤ)
-    (G : Iᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
-    (e : ∀ i : I, G.obj (op i) ≅
-      (DerivedCategory.homologyFunctor _ n).obj (imageValue A M (D.obj i)))
-    (he : ∀ {i j : I} (f : i ⟶ j), G.map f.op ≫ (e i).hom =
-      (e j).hom ≫ (DerivedCategory.homologyFunctor _ n).map (imagePullback A M (D.map f)))
-    (t : Cocone G)
-    (et : t.pt ≅ (DerivedCategory.homologyFunctor _ n).obj (imageValue A M c.pt))
-    (ht : ∀ i : I, t.ι.app (op i) ≫ et.hom =
-      (e i).hom ≫ (DerivedCategory.homologyFunctor _ n).map
-        (imagePullback A M (c.π.app i))) :
-    Nonempty (IsColimit t) := by
-  sorry
-
 variable {I : Type (u + 1)} [SmallCategory I]
 variable (D : I ⥤ Over X) (c : Cone D)
 
@@ -165,81 +125,5 @@ structure DerivedImageModel where
   leg : ∀ i : I,
     DerivedCategory.Q.map (cocone.ι.app (op i)) ≫ apex.hom =
       (stage i).hom ≫ imagePullback A M (c.π.app i)
-
--- The hypotheses `hetale` and `hfp` are part of the source statement but are not needed
--- for the direct-image part: Stacks 0GIU holds for affine transition maps.
-set_option linter.unusedVariables false in
-/-- The direct-image diagram has uniformly bounded-below strict representatives,
-and its actual cocone comparison is a derived isomorphism. This concerns only M;
-it makes no assertion about constructible global Hom.
--/
-theorem derivedImageModel_exists_continuous [Finite A] [IsAffine X]
-    [IsNoetherian X] [IsCofiltered I]
-    (hc : IsLimit ((Over.forget X).mapCone c))
-    (haffine : ∀ i : I, IsAffine (D.obj i).left)
-    (hetale : ∀ i : I, Etale (D.obj i).hom)
-    (hfp : ∀ i : I, LocallyOfFinitePresentation (D.obj i).hom)
-    (htransition : ∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left)
-    (hM : ∃ a : ℤ, M.IsGE a) :
-    ∃ (N : DerivedImageModel A M D c) (a : ℤ),
-      (∀ i : I, (DerivedCategory.Q.obj (N.diagram.obj (op i))).IsGE a) ∧
-      IsIso (DerivedCategory.Q.map (colimit.desc N.diagram N.cocone)) := by
-  classical
-  obtain ⟨a, ha⟩ := hM
-  let E : WithInitial I ⥤ Over X :=
-    WithInitial.lift D (fun i ↦ c.π.app i) (fun _ _ f ↦ c.w f)
-  obtain ⟨F, e, he⟩ := exists_imageValue_strictModel A M ⟨a, ha⟩ E
-  let N : DerivedImageModel A M D c :=
-    { diagram := WithInitial.incl.op ⋙ F
-      cocone :=
-        { pt := F.obj (op WithInitial.star)
-          ι :=
-            { app := fun i ↦ F.map (WithInitial.starInitial.to (WithInitial.of i.unop)).op
-              naturality := fun i j f ↦ by
-                dsimp
-                rw [Category.comp_id, ← F.map_comp, ← op_comp]
-                congr 2 } }
-      stage := fun i ↦ e (WithInitial.of i)
-      apex := e WithInitial.star
-      transition := fun f ↦ he (WithInitial.incl.map f)
-      leg := fun i ↦ he (WithInitial.starInitial.to (WithInitial.of i)) }
-  refine ⟨N, a, fun i ↦ ?_, ?_⟩
-  · have := isGE_imageValue A M (D.obj i) a
-    exact DerivedCategory.TStructure.t.isGE_of_iso (N.stage i).symm a
-  · let S := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)
-    let H := HomologicalComplex.homologyFunctor S (ComplexShape.up ℤ)
-    let Hd := DerivedCategory.homologyFunctor S
-    let φ := DerivedCategory.homologyFunctorFactors S
-    rw [DerivedCategory.isIso_Q_map_iff_quasiIso, quasiIso_iff]
-    intro n
-    rw [quasiIsoAt_iff_isIso_homologyMap]
-    have hP : IsColimit ((H n).mapCocone (colimit.cocone N.diagram)) :=
-      isColimitOfPreserves (H n) (colimit.isColimit _)
-    have he {i j : I} (f : i ⟶ j) : (N.diagram ⋙ H n).map f.op ≫
-        (((φ n).app _).symm ≪≫ (Hd n).mapIso (N.stage i)).hom =
-        (((φ n).app _).symm ≪≫ (Hd n).mapIso (N.stage j)).hom ≫
-          (Hd n).map (imagePullback A M (D.map f)) := by
-      simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.comp_map]
-      rw [Category.assoc, ← Functor.map_comp, ← N.transition f, Functor.map_comp,
-        ← Category.assoc, ← Category.assoc]
-      exact congrArg (· ≫ _) ((φ n).inv.naturality _)
-    have ht (i : I) : ((H n).mapCocone N.cocone).ι.app (op i) ≫
-        (((φ n).app _).symm ≪≫ (Hd n).mapIso N.apex).hom =
-        (((φ n).app _).symm ≪≫ (Hd n).mapIso (N.stage i)).hom ≫
-          (Hd n).map (imagePullback A M (c.π.app i)) := by
-      simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Functor.mapCocone_ι_app]
-      rw [Category.assoc, ← Functor.map_comp, ← N.leg i, Functor.map_comp,
-        ← Category.assoc, ← Category.assoc]
-      exact congrArg (· ≫ _) ((φ n).inv.naturality _)
-    obtain ⟨hT⟩ := isColimit_homology_imageValue A M D c hc haffine htransition ⟨a, ha⟩ n
-      (N.diagram ⋙ H n) (fun i ↦ ((φ n).app _).symm ≪≫ (Hd n).mapIso (N.stage i)) he
-      ((H n).mapCocone N.cocone) (((φ n).app _).symm ≪≫ (Hd n).mapIso N.apex) ht
-    have : HomologicalComplex.homologyMap (colimit.desc N.diagram N.cocone) n =
-        (hP.coconePointUniqueUpToIso hT).hom := hP.hom_ext fun j ↦ by
-      rw [IsColimit.comp_coconePointUniqueUpToIso_hom]
-      simp only [Functor.mapCocone_ι_app, colimit.cocone_ι]
-      rw [← HomologicalComplex.homologyFunctor_map, ← Functor.map_comp, colimit.ι_desc]
-    rw [this]
-    infer_instance
 
 end AlgebraicGeometry.Etale.IndEtaleMapping

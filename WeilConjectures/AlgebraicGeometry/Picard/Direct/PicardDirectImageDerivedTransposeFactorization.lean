@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Derived.PicardDerivedUnit
 
 /-! # Factorization of the normalized transpose
 
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-factorization)
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -77,17 +78,7 @@ private theorem coefficientMate_tensor_evaluation
   exact coefficientMate_evaluation p p' r a ha K _ _
 
 -- Keep the explicitly constructed coefficient comparison folded.
-/-- The normalized transpose factors through the coefficient transpose.
-Source: Stacks Project, Tag 08HY.
-(blueprint: lem-sc-picard-direct-image-derived-transpose-factorization)
-
-Proof: Expand the definition of the normalized transpose. Its argument under
-Hom equivalence is e.inv followed by the test section and the coefficient
-base-change map B. Naturality of the inverse Hom equivalence in its source
-identifies this with derived pullback of e.inv followed by the test section,
-then the transpose of B. Reassociate the three maps. This is valid for any
-coefficient module, including zero, and any scheme map, including identities
-and maps from the empty scheme; no base-change map is inverted. -/
+/-- The normalized transpose factors through the coefficient transpose. -/
 theorem picardDirectImageDerivedTranspose_factorization
     {X S : Scheme.{v}} (f : X ⟶ S)
     (L : X.Modules) (W : Scheme.{v}) (k : W ⟶ S)

@@ -286,7 +286,41 @@ theorem projectiveLineDecompositionMapAux_baseChange :
   simp only [Preadditive.comp_add, biprod.lift_fst_assoc, biprod.lift_snd_assoc, Category.assoc]
 
 variable (Λ) in
-/-- **Base change of the trace** (blueprint `lemma-cohomology-projective-line-trace` (2)). For
+/-- **Base change of the decomposition map.** Let `g' : ℙ¹_{S'} ⟶ ℙ¹_S` be the base change of
+`g : S' ⟶ S`. The pullback along `g` of the decomposition map
+`(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`, with the hyperplane class `h = c₁(𝒪(1))`
+of the notes), followed by the proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*` and
+`Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, is the decomposition map of `ℙ¹_{S'}`, preceded by the identification
+`Lg^*(Λ_S(1)[2] ⊕ Λ_S) ≅ Λ_{S'}(1)[2] ⊕ Λ_{S'}`. From the auxiliary statement
+`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux_baseChange`, since the decomposition map
+is the auxiliary one precomposed with `1 ⊕ (-1)`, which commutes with the identification. -/
+theorem projectiveLineDecompositionMap_baseChange :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (projectiveLineDecompositionMap Λ S) ≫
+        (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+          (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g).toCommSq).app
+          ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ≫
+        (R(((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_*[ModuleCat.{u + 1} Λ])).map
+          (leftDerivedUpperStarTateTwoIso Λ
+            (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g)).hom =
+      biprod.lift
+          ((L((g)^*[ModuleCat.{u + 1} Λ])).map biprod.fst ≫
+            (leftDerivedUpperStarTateTwoIso Λ g).hom)
+          ((L((g)^*[ModuleCat.{u + 1} Λ])).map biprod.snd ≫
+            (leftDerivedUpperStarConstantComplexIso Λ g).hom) ≫
+        projectiveLineDecompositionMap Λ S' := by
+  have h := projectiveLineDecompositionMapAux_baseChange Λ g
+  simp only [projectiveLineDecompositionMap, Functor.map_comp, Category.assoc]
+  rw [h, ← Category.assoc, ← Category.assoc]
+  congr 1
+  ext
+  · simp only [Category.assoc, biprod.lift_fst, ← Functor.map_comp_assoc, biprod.map_fst,
+      Category.comp_id]
+  · simp only [Category.assoc, biprod.lift_snd, ← Functor.map_comp_assoc, biprod.map_snd,
+      Preadditive.comp_neg, Category.comp_id, Functor.map_neg, Preadditive.neg_comp]
+
+variable (Λ) in
+/-- **Base change of the auxiliary trace.** For
 `g : S' ⟶ S` with base change `g' : ℙ¹_{S'} ⟶ ℙ¹_S`, the pullback along `g` of the trace
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineTraceAux`) is the
 proper base change map `Lg^* Rq_* ⟶ Rq'_* Lg'^*`, followed by `Lg'^*(Λ(1)[2]) ≅ Λ(1)[2]`, the

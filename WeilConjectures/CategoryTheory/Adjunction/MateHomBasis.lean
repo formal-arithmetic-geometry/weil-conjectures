@@ -20,10 +20,6 @@ Given left adjoints `U_Y ⊣ T_Y`, `U_X ⊣ T_X`, additive functors `G_E : C_Y �
 `G_F : D_Y ⥤ D_X` with `G_F` commuting with the scalars `b i`, and an isomorphism
 `β : T_Y ⋙ G_F ⟶ G_E ⋙ T_X`, the mate `G_F ⋙ U_X ⟶ U_Y ⋙ G_E` of `β` is an isomorphism
 at every object of the form `T_Y N`.
-
-The proof is a Yoneda computation: the unit `T_Y N ⟶ T_Y U_Y T_Y N` has basis coordinates
-`s_i : N ⟶ U_Y T_Y N` exhibiting `U_Y T_Y N` as the copower `N ^ d`, this copower structure is
-equational and hence preserved by `G_E`, and in these coordinates the mate is the identity.
 -/
 
 @[expose] public section

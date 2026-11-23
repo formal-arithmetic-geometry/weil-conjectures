@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 Source: Mathlib, HomologicalComplex.HomologySequence.δ_naturality and
 InjectiveResolution.isoRightDerivedObj_hom_naturality, following Stacks 01EB.
-(blueprint: lem-sc-injectively-exact-square-boundary-naturality).
 -/
 
 @[expose] public section
@@ -31,25 +30,7 @@ morphisms of the underived square.
 
 Source: Mathlib, Algebra/Homology/HomologySequenceLemmas.lean,
 `HomologicalComplex.HomologySequence.δ_naturality`; CategoryTheory/Abelian/RightDerived.lean,
-`InjectiveResolution.isoRightDerivedObj_hom_naturality` and `NatTrans.rightDerived_app_eq`.
-(blueprint: lem-sc-injectively-exact-square-boundary-naturality).
-
-Proof: For a morphism F -> G lift it to a cochain map between the chosen injective
-resolutions, extending the morphism on their augmentations. Applying the four additive
-functors and their natural edge transformations gives a morphism of `resolutionSequence F`
-to `resolutionSequence G`: the middle component applies the two middle functors to the
-lift and takes their product. The two commutation conditions are the naturality of the
-four edges. Apply complex connecting-map naturality to these short exact sequences.
-Transport the resulting equality through the four resolution comparisons. The comparison
-naturality theorem identifies the maps induced by the lift with the canonical derived
-functor maps, and cancellation of the comparison isomorphisms gives the first assertion.
-For a morphism of squares S -> T use the same chosen resolution of F for both squares.
-Apply its four vertex transformations termwise; their edge commutation relations give a
-morphism of the two resolution short exact sequences. Complex connecting-map naturality
-again applies. Now NatTrans.rightDerived_app_eq identifies the two outer maps after
-transport with the components of the derived outer vertex transformations. Cancellation
-of the comparisons gives the second assertion. Both assertions concern the same explicit
-`boundary` definition, so there is no independent choice of connecting maps to reconcile. -/
+`InjectiveResolution.isoRightDerivedObj_hom_naturality` and `NatTrans.rightDerived_app_eq`. -/
 private noncomputable def resolutionSequenceMap (S : InjectivelyExactSquare.{u, v, w} C)
     {F G : C} (lift : (injectiveResolution F).cocomplex ⟶ (injectiveResolution G).cocomplex) :
     S.resolutionSequence F ⟶ S.resolutionSequence G where
@@ -59,8 +40,7 @@ private noncomputable def resolutionSequenceMap (S : InjectivelyExactSquare.{u, 
   comm₁₂ := NatTrans.mapHomologicalComplex_naturality S.diagonal lift
   comm₂₃ := NatTrans.mapHomologicalComplex_naturality S.difference lift
 
-/-- The explicit transported boundary is natural in the object being resolved.
-(blueprint: lem-sc-injectively-exact-square-boundary-naturality) -/
+/-- The explicit transported boundary is natural in the object being resolved. -/
 theorem boundary_naturality (S : InjectivelyExactSquare.{u, v, w} C) (n : ℕ) {F G : C}
     (f : F ⟶ G) :
     (S.X₄.rightDerived n).map f ≫ S.boundary G n =
@@ -89,8 +69,7 @@ theorem boundary_naturality (S : InjectivelyExactSquare.{u, v, w} C) (n : ℕ) {
 
 Source: Mathlib `HomologicalComplex.HomologySequence.δ_naturality` and
 `InjectiveResolution.rightDerived_app_eq`; apply these to the morphism of short exact
-resolution sequences induced termwise by the four components of `φ`.
-(blueprint: lem-sc-injectively-exact-square-boundary-square-naturality). -/
+resolution sequences induced termwise by the four components of `φ`. -/
 theorem boundary_square_naturality (S : InjectivelyExactSquare.{u, v, w} C) (n : ℕ)
     (T : InjectivelyExactSquare.{u, v, w} C) (φ : S.toSquare ⟶ T.toSquare) (F : C) :
     S.boundary F n ≫ (NatTrans.rightDerived φ.τ₁ (n + 1)).app F =

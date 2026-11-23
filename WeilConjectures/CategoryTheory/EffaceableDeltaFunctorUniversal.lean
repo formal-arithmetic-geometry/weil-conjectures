@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorSuccessor
 /-!
 # Effaceable delta-functors are universal
 
-Source: Stacks Project, Homology, Lemma 010T (lemma-efface-implies-universal)
-(blueprint: lem-weil-pbc-effaceable-delta-functor-universal).
+## References
+
+* Stacks Project, Homology, Lemma 010T.
 -/
 
 @[expose] public section
@@ -35,12 +36,7 @@ private theorem deltaHom_ext
 
 /-- An effaceable cohomological delta-functor is universal.
 
-This is Grothendieck's effacement criterion, Stacks Project, Homology, Lemma 010T.
-The proof constructs the extension inductively using the cokernel description supplied
-by an effacing short exact sequence; independence of choices, naturality, and
-compatibility with connecting morphisms follow from comparison via biproducts and
-pushouts, and uniqueness follows by cancellation of the resulting epimorphisms.
-(blueprint: lem-weil-pbc-effaceable-delta-functor-universal) -/
+This is Grothendieck's effacement criterion, Stacks Project, Tag 010T. -/
 theorem effaceable_deltaFunctor_isUniversal
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B]

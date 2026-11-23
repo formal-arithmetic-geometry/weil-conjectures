@@ -14,10 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityNormalizedTow
 The compact-support and scalar-extension restrictions retain their existing names and
 bodies. Separating these two constructions from the exceptional realization and its
 chart data lets the mixed base-change statement use just the restriction interface.
-
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-`sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md`, constructible adjunctions.
-(blueprint: def-sp-reduction-ctf-functors).
 -/
 
 @[expose] public noncomputable section
@@ -32,9 +28,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
 
 /-- The actual compact-support functor restricted to its full Dctf subcategories.
-The witness only certifies membership and changes neither objects nor morphisms.
-Source: blueprint, constructible adjunction convention
-(blueprint: lemma-sp-reduction--2). -/
+The witness only certifies membership and changes neither objects nor morphisms. -/
 def reductionCtfCompactSupport (A : Type u) [CommRing A] [Finite A]
     {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y)
     (hF : ∀ M : spFiniteConstructibleTorCategory X A,
@@ -42,9 +36,7 @@ def reductionCtfCompactSupport (A : Type u) [CommRing A] [Finite A]
   (spFiniteConstructibleTor Y A).lift
     ((spFiniteConstructibleTor X A).ι ⋙ reductionCompactSupport A j p) hF
 
-/-- Restrict the recorded scalar extension to full Dctf subcategories.
-Source: blueprint, coefficient-extension convention
-(blueprint: lemma-sp-reduction--2). -/
+/-- Restrict the recorded scalar extension to full Dctf subcategories. -/
 def reductionCtfScalar {A B : Type u} [CommRing A] [CommRing B]
     [Finite A] [Finite B] (φ : A →+* B) (T : Scheme.{u})
     (hT : ∀ K : spFiniteConstructibleTorCategory T A,

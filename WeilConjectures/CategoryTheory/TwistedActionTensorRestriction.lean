@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushfo
 The comparison is constructed by transposing the restricted sheafification unit.
 For a continuous cocontinuous functor and an isomorphism of coefficient rings,
 it is invertible and carries sheafified pure tensors to pure tensors.
-Source: Stacks 03CY and 03EK; the module-sheafification adjunction.
+Source: Stacks 03CY and 03EK.
 -/
 
 @[expose] public section

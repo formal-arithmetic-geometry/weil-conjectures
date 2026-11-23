@@ -19,13 +19,6 @@ object of `Over V` and `A` an abelian category. We show that the Čech complex
 `CategoryTheory.Presheaf.overCechComplex U₀` of an injective presheaf (or of an injective sheaf)
 with values in `A` is exact in positive degrees.
 
-The proof reduces to the case of abelian groups: a complex in `A` is exact as soon as all the
-complexes of abelian groups obtained by applying the functors `Hom(a, -)` are exact, and
-`Hom(a, -)` sends the Čech complex of `P` to the Čech complex of the abelian presheaf
-`Hom(a, P(-))`. An injective presheaf `P` is a retract of the presheaf
-`Y ↦ ∏_{Z, g : Z ⟶ Y} P(Z)` (`CategoryTheory.Presheaf.piCofree`), which `Hom(a, -)` sends to the
-cofree abelian presheaf `CategoryTheory.Presheaf.cofree`, whose Čech complex is exact.
-
 ## Main definitions
 
 - `CategoryTheory.Presheaf.overCechComplexMapPreadditiveCoyonedaIso`: the isomorphism between

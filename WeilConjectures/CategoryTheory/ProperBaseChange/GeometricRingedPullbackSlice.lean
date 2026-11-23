@@ -36,7 +36,7 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 /-! # Ordinary ringed pullback and localization at a sheaf
 
 Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tags 04IF, 04IE,
-03D6 (2), 03EL and 03EK (blueprint: lem-weil-pbc-geometric-ringed-pullback-slice).
+03D6 (2), 03EL and 03EK.
 
 ## Main definitions
 
@@ -69,8 +69,7 @@ open scoped ChangeOfRings
 namespace CategoryTheory
 
 /-- The product over a sheaf used in the slice inverse-image comparison.
-Source: Stacks Project, Sites, Tag 04H1
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 04H1. -/
 def geometricSliceProductOver {E : Type uE} [Category.{vE} E] [CartesianMonoidalCategory E]
     (A : E) : E ⥤ Over A where
   obj H := Over.mk (CartesianMonoidalCategory.fst A H)
@@ -79,8 +78,7 @@ def geometricSliceProductOver {E : Type uE} [Category.{vE} E] [CartesianMonoidal
   map_comp h k := by apply Over.OverMorphism.ext; simp
 
 /-- The fibre of `A × H -> A` is canonically the sectionwise restriction of H.
-Source: Stacks Project, Sites, Tag 0791; Modules on Sites, Tag 04IE
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 0791; Modules on Sites, Tag 04IE. -/
 noncomputable def geometricSliceProductFibreIso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}} (A : Sheaf J (Type u))
@@ -103,8 +101,7 @@ noncomputable def geometricSliceProductFibreIso
 
 /-- Finite-product preservation gives the slice product comparison.
 Its two components are the images of the two projections.
-Source: Stacks Project, Sites, Tag 04H1
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 04H1. -/
 noncomputable def geometricSliceProductPostIso
     {E : Type uE} {E' : Type uE'} [Category.{vE} E] [Category.{vE'} E']
     [CartesianMonoidalCategory E] [CartesianMonoidalCategory E']
@@ -124,8 +121,7 @@ noncomputable def geometricSliceProductPostIso
 
 /-- The canonical comparison between inverse image and restriction, constructed from
 finite-product comparisons and the fibre equivalences, with no existence choice.
-Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF. -/
 noncomputable def geometricSliceSetComparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -161,7 +157,7 @@ namespace SheafOfModules
 /-- Localization at an arbitrary sheaf commutes with ordinary ringed-topos pullback.
 
 Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tags 04IF, 04IE,
-03D6 (2), 03EL and 03EK (blueprint: lem-weil-pbc-geometric-ringed-pullback-slice).
+03D6 (2), 03EL and 03EK.
 
 `y` and `x` are presentations of the two localizations, supplied by
 `ringed_sheaf_slice_adjunction`. The slice inverse image, under these equivalences,
@@ -170,34 +166,9 @@ of restriction to restriction of inverse image. The structural-map equation spec
 exactly the restriction of `f.ringMap` under `a`.
 
 For every algebraic presentation `I,c` of the ordinary pullback, the conclusion supplies
-a compatible presentation `IA,ca` on the slices. The isomorphisms `e` lie in the category
-of modules over the restricted source ring. Their naturality uses the existing tensor
-map on module morphisms. The last equation uses the module-sheafification unit on both
-sides: its input is `r tensor m`, and its output is `r tensor` the image of `m` through
-`IA.moduleUnderlying`, `a`, and `I.moduleUnderlying`. Thus it is a local-pure-tensor
-normalization, without asserting that global sections are pure tensors.
-
-Proof, following the four DAG steps:
-1. Apply `Over.postAdjunctionLeft` to `f.adj`. Its right adjoint sends `K -> f⁻¹A`
-   to the pullback of `f_*K -> f_*f⁻¹A` along the unit `A -> f_*f⁻¹A`.
-   Transport through the fibre equivalences of the element-site localizations.
-   Terminal objects and pullbacks in the slice are preserved because `f.inverse`
-   preserves finite limits. This gives the sliced geometric adjunction.
-2. The product comparison `f⁻¹(H × A) ≅ f⁻¹H × f⁻¹A` gives `a`, naturally in H.
-   Every ring or module operation is a map from a finite product, so this comparison
-   respects those operations. Compose its ring component with the restriction of
-   `f.ringMap` to obtain the structural map, as in 04IF. By 04IE module localization
-   is the recorded sectionwise `elementModulePullback`.
-3. Apply `module_pullback_tensor_iso` to localization with coefficient ring f⁻¹R_Y,
-   identity structural map, and modules R_X and f⁻¹M. Invert its tensor comparison.
-   Its balanced pairing sends each local pure tensor to the same tensor and is
-   linear for the restricted R_X-action. The tensor sheaves are sheafifications,
-   so the pairing identities give identities of sheaf morphisms.
-4. First change coefficients through the ring component of `a`, then compose with
-   the inverse tensor comparison of step 3. The balancing relation follows from
-   the structural-map equation. Naturality of `a` and tensor functoriality prove
-   naturality in M. Evaluating the balanced pairing gives the final equation.
-   No flatness, points, or functor between the presented sites is used. -/
+a compatible presentation `IA,ca` on the slices, with isomorphisms `e` in the category
+of modules over the restricted source ring, compatible with the module-sheafification unit
+on pure tensors `r tensor m`. -/
 theorem geometric_ringed_pullback_slice
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

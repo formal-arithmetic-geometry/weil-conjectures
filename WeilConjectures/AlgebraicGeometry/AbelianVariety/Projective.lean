@@ -113,4 +113,20 @@ theorem IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation
   exact ⟨e ≪≫ (Iso.refl _ ⊗ᵢ ((pullbackComp ι[A].left ι[A].left).app L ≪≫
     (pullbackCongr h).app L ≪≫ (pullbackId A.left).app L)) ≪≫ β_ _ _⟩
 
+/-- An abelian variety has a symmetric ample invertible
+module: the symmetrisation `N = L ⊗ [-1]^* L` of an ample invertible module `L`
+(`IsAbelianVariety.exists_isAmple`) is invertible, ample
+(`IsAbelianVariety.isAmple_symmetrisation`) and symmetric, `[-1]^* N ≅ N`
+(`IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation`). -/
+theorem IsAbelianVariety.exists_isInvertible_isAmple_nonempty_iso_overPullback_inv
+    (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A] :
+    ∃ N : A.left.Modules, N.IsInvertible ∧ IsAmple A.hom N ∧
+      Nonempty (overPullback ι[A] N ≅ N) := by
+  obtain ⟨L, hL⟩ := IsAbelianVariety.exists_isAmple A
+  have hLinv := hL.isInvertible
+  have : L.symmetrisation.IsInvertible :=
+    inferInstanceAs (Scheme.Modules.tensorObj L (overPullback ι[A] L)).IsInvertible
+  exact ⟨L.symmetrisation, this, IsAbelianVariety.isAmple_symmetrisation A L hL,
+    IsAbelianVariety.nonempty_iso_overPullback_inv_symmetrisation A L⟩
+
 end AlgebraicGeometry

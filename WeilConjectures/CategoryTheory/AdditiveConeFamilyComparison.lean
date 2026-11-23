@@ -11,8 +11,7 @@ import all WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Additive realization of a family of strict augmentation cones
 
-Source: Stacks Project, derived.tex, definition-cone and lemma-functorial-cone.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, derived.tex and.
 -/
 
 @[expose] public noncomputable section
@@ -140,13 +139,7 @@ private theorem coneIso_natural
 /-- Natural comparisons of the sources of epimorphic augmentations force the
 quotient comparisons and induce natural comparisons of the strict cone families.
 
-Source: Stacks Project, derived.tex, definition-cone and lemma-functorial-cone.
-(auxiliary; not a blueprint node).
-Proof: cancel each epimorphic augmentation in its strict transition square to
-obtain naturality on targets. Apply the additive cone comparison, the cone map
-of the source/target isomorphisms, and evaluation of the tower cone. Cone-map
-composition proves naturality. This is a generic finite categorical calculation;
-no Koszul or coefficient hypotheses enter. -/
+Source: Stacks Project, derived.tex and. -/
 theorem additiveConeFamilyComparison
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     (E : C ⥤ D) [E.Additive]

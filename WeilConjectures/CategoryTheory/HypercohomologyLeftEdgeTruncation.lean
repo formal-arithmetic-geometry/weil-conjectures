@@ -28,15 +28,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 set_option backward.isDefEq.respectTransparency false in
 /-- The left edge followed by its coefficient comparison is the image of the canonical
 map to the single-degree truncation, followed by the shifted degree-zero comparison.
-Source: Stacks Project, derived.tex, Tag 015J.
-(blueprint: lem-pc-hypercohomology-left-edge-truncation)
-
-Proof: The left edge is the image of the projection to truncation GE n followed by
-the inverse of the image of GE n applied to the inclusion LT(n+1). Since K is LE n,
-that inclusion is an isomorphism. Naturality of the GE projection rewrites this composite
-as the image of the inverse inclusion followed by the GE projection on LT(n+1) K.
-The target comparison factors by definition through the canonical single-degree truncation
-isomorphism and the shifted degree-zero comparison. Combine these factorizations. -/
+Source: Stacks Project, derived.tex, Tag 015J. -/
 theorem hypercohomologyLeftEdge_truncation (K : DerivedCategory.Plus B) (n : ℕ)
     [DerivedCategory.Plus.TStructure.t.IsGE K 0]
     [DerivedCategory.Plus.TStructure.t.IsLE K n] :

@@ -42,7 +42,7 @@ bound holds for every irreducible, non-geometrically-constant `M` unramified at 
 
 ## Implementation notes
 
-The degree-one bound is derived along the blueprint argument from the boundary semicontinuity
+The degree-one bound is derived from the boundary semicontinuity
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_directImage` and the stationary
 phase
 `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_origin_of_isFourierPartner`.
@@ -82,8 +82,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 /-- **Stalk of the transform at the origin of the dual line.** At the origin `0'` the Fourier
 kernel `ℒ_{ψ(x · 0)}` is constant, so the stalk formula identifies the fibre of `FT_ψ(K)` at
 `0'` with `RΓ_c(𝔸¹, K)[1]`: in each degree `r`, the stalk of `𝓗^r FT_ψ(K)` at `0'` is
-`H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. (blueprint:
-`proposition-base-change-fourier-inversion--3`) -/
+`H_c^{r+1}(𝔸¹ ⊗ k̄, K)`, Frobenius-equivariantly. -/
 theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
     (K : WeilComplex k₀ l (affineLine k₀)) (r : ℤ) :
     Nonempty ((((WeilComplex.homologySheaf r).obj ((fourierTransform ψ).obj K)).stalk
@@ -100,8 +99,7 @@ theorem nonempty_equiv_stalk_homologySheaf_fourierTransform_origin
 
 /-- **Stalk of the transform at the origin of the dual line**, for a middle extension: the
 fibre of `FT_ψ((j_*M)[1])` at the origin has cohomology only in degrees `-1` and `0`, namely
-`H_c^1(𝔸¹ ⊗ k̄, j_*M)` and `H_c^2(𝔸¹ ⊗ k̄, j_*M)`; the group `H_c^0` vanishes.
-(blueprint: `proposition-base-change-fourier-inversion--3`) -/
+`H_c^1(𝔸¹ ⊗ k̄, j_*M)` and `H_c^2(𝔸¹ ⊗ k̄, j_*M)`; the group `H_c^0` vanishes. -/
 theorem WeilSheaf.LisseOnDenseOpen.nonempty_equiv_stalk_fourierTransform_middleExtension_origin
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) :
     Nonempty ((((WeilComplex.homologySheaf (-1)).obj
@@ -144,8 +142,7 @@ namespace WeilSheaf.LisseOnDenseOpen
 dense open `U₀` has punctual weights at most `β`, then so has its direct image `j_*M` at every
 closed point of the line, including the finitely many points outside `U₀`, where it may be
 singular. This is the case of the affine line of
-`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`.
-(blueprint: `proposition-weights-j-boundary-points--1`) -/
+`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`. -/
 theorem hasWeightsAtMost_directImage (D : LisseOnDenseOpen k₀ l) {ι : PadicAlgCl l →+* ℂ}
     {β : ℝ} (hβ : D.sheaf.HasWeightsAtMost ι β) : D.directImage.HasWeightsAtMost ι β := by
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
@@ -163,8 +160,7 @@ Moreover `H_c^2(𝔸¹, j_*M) = 0`.
 
 Indeed the fibre of `FT_ψ(K)` at `0'` is `RΓ_c(𝔸¹, K)[1]`, the kernel being trivial there, so
 the fibre of `FT_ψ((j_*M)[1])` has `H_c^1` in degree `-1` and `H_c^2` in degree `0`, while the
-fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`.
-(blueprint: `corollary-h-1-c-stalk-fourier`) -/
+fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`. -/
 theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (PadicAlgCl l))
     (D D' : LisseOnDenseOpen k₀ l) (hFT : D.IsFourierPartner ψ D') :
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv
@@ -189,7 +185,8 @@ end WeilSheaf.LisseOnDenseOpen
 
 /-- If `M` is irreducible, nonexceptional for a nontrivial `ψ` and punctually `ι`-pure of
 weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights at most
-`w + 1`. (blueprint: `corollary-h-1-c-stalk-fourier--3`) -/
+`w + 1`: the Fourier transform `(j'_*M')[1]` of `(j_*M)[1]` is punctually pure of weight `w + 1`,
+and the stalk of `j'_*M'` at the origin of the dual line is `H_c^1(A, j_*M)`. -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse)
@@ -198,12 +195,11 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →
     (D.directImage.compactlySupportedCohomology 1).HasWeightsAtMostOver k₀ ι (w + 1) := by
   -- Step 1: the transform of `(j_*M)[1]` is a middle extension `(j'_*M')[1]`
   obtain ⟨D', _, hFT⟩ := exists_middleExtension_fourierTransform ψ hψ D hD hne
-  -- Step 2: `M'` is pure of a weight `v ≤ w + 1`
-  obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT
-  have hvw : v ≤ w + 1 := le_add_one_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT hv
+  -- Step 2: `M'` is punctually pure of weight `w + 1` (the weight theorem for the transform)
+  have hv := isPunctuallyPureOfWeight_add_one_of_isFourierPartner ψ ι hψ D D' hD hne hw hFT
   -- Step 3: `j'_*M'` has weights at most `w + 1` on the whole dual line
   have hM' : D'.directImage.HasWeightsAtMost ι (w + 1) :=
-    D'.hasWeightsAtMost_directImage (hv.hasWeightsAtMost.mono hvw)
+    D'.hasWeightsAtMost_directImage hv.hasWeightsAtMost
   -- Step 4: the stationary-phase identification at the rational origin `0'`
   obtain ⟨⟨e⟩, -⟩ := D.nonempty_equiv_stalk_origin_of_isFourierPartner ψ D' hFT
   have h0 := hM' (affineLine.origin k₀)
@@ -213,8 +209,7 @@ theorem hasWeightsAtMost_compactlySupportedCohomology_one (ι : PadicAlgCl l →
 /-- If `M` is irreducible, unramified at infinity, not geometrically constant and punctually
 `ι`-pure of weight `w` on a dense open `U₀` of the affine line, then `H_c^1(A, j_*M)` has weights
 at most `w + 1`: such an `M` is nonexceptional for every nontrivial `ψ`
-(`AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`). (blueprint:
-`corollary-h-1-c-stalk-fourier--3`) -/
+(`AlgebraicGeometry.isNonexceptional_of_isUnramifiedAtInfinity`). -/
 theorem hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity
     (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1) (D : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)

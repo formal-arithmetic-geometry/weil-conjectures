@@ -22,19 +22,21 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperCoefficient
 
 /-! # Proper finite coefficient extension core
 
-Source: Stacks Project, `literature/stacks-project/more-etale.tex`, Tag 0GL6.
-(blueprint: lem-asd-proper-finite-coefficient-extension).
+The isomorphism and restriction/projection clauses of proper finite coefficient extension
+(the mate normalization clause is added separately).
 
-This intermediate theorem packages the isomorphism and restriction/projection clauses of
-proper finite coefficient extension; the parent adds the independently verified mate
-normalization clause. The proof chooses K-flat resolutions with flat terms,
-identifies scalar, tensor, pullback and direct-image comparisons termwise, and
-applies the proper projection formula after exact conservative restriction of
-scalars. The resulting restricted morphism is invertible, so conservativity gives
-invertibility of the scalar mate; the same calculation gives the ordered projection
-identity. The construction descends through quasi-isomorphisms to the entire
+## Implementation details
+
+The proof chooses K-flat resolutions with flat terms, identifies scalar, tensor, pullback and
+direct-image comparisons termwise, and applies the proper projection formula after exact
+conservative restriction of scalars. The resulting restricted morphism is invertible, so
+conservativity gives invertibility of the scalar mate; the same calculation gives the ordered
+projection identity. The construction descends through quasi-isomorphisms to the entire
 derived category.
-(blueprint: lem-asd-proper-finite-coefficient-extension-core).
+
+## References
+
+* Stacks Project, Tag 0GL6
 -/
 
 @[expose] public section
@@ -60,18 +62,9 @@ private theorem cancel_scalar_comparisons
   rw [reassoc_of% h]
   simp [← Functor.map_comp]
 
-/-- The unbounded isomorphism and restricted projection clauses used by the parent theorem.
-
-Source: Stacks Project, Tag 0GL6.
-(blueprint: lem-asd-proper-finite-coefficient-extension).
-
-The proof is the proper projection formula after exact conservative restriction of scalars,
-with the canonical scalar/tensor and pullback comparisons and the derived direct-image mate.
-Choose a K-flat resolution with flat terms, calculate every comparison termwise, apply the
-proper projection formula after restriction, and descend the resulting equality through
-quasi-isomorphisms. Exact conservativity of restriction then proves the mate is invertible.
-(blueprint: lem-asd-proper-finite-coefficient-extension-core).
--/
+/-- For proper `f` between Noetherian schemes, the scalar mate is an isomorphism on the unbounded
+derived category, and after restriction of scalars it agrees with the projection formula
+comparison. -/
 theorem properFiniteCoefficientExtensionCore
     {R A : Type (u + 1)} [CommRing R] [CommRing A] [Finite R] [Finite A]
     (φ : R →+* A) {X Y : Scheme.{u}} (f : X ⟶ Y)

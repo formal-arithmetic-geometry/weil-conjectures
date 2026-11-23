@@ -15,9 +15,7 @@ set_option linter.privateModule false
 
 /-! # Transport of strict augmented towers through the Roos construction
 
-Source: Stacks Tag 08TC and the scalar-restriction paragraph of
-`det-lem-int-tensor-pullback.proof.md`.
-(blueprint: lem-sfb-augmented-tower-roos-transport).
+Source: Stacks Tag 08TC and paragraph of.
 -/
 
 @[expose] public noncomputable section

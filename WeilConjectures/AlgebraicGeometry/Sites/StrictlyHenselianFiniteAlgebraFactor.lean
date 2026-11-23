@@ -18,8 +18,6 @@ field finite over the separably closed residue field of `A`, hence strictly hens
 every prime `q` of `B` there is an idempotent `e` of `B` with `e ∉ q` such that
 `B ⧸ (1 - e) ≅ B[1/e]` is a strictly henselian local ring: the local factor of `B` through `q`.
 
-(blueprint: `lemma-tangent-cones-on-cover`)
-
 ## References
 
 - Stacks Project, Lemma 10.153.4, <https://stacks.math.columbia.edu/tag/04GH>
@@ -34,9 +32,7 @@ namespace IsStrictlyHenselianLocalRing
 
 /-- **The local factor through a prime.** Let `A` be a strictly henselian local ring and `B` a
 finite `A`-algebra. For every prime `q` of `B` there is an idempotent `e` of `B` with
-`1 - e ∈ q` such that `B ⧸ (1 - e)` is a strictly henselian local ring.
-
-(blueprint: `lemma-tangent-cones-on-cover`) -/
+`1 - e ∈ q` such that `B ⧸ (1 - e)` is a strictly henselian local ring. -/
 theorem exists_isIdempotentElem_quotient (A : Type u) (B : Type v) [CommRing A] [CommRing B]
     [IsStrictlyHenselianLocalRing A] [Algebra A B] [Module.Finite A B] (q : Ideal B)
     [q.IsPrime] :

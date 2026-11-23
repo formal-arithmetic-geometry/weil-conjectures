@@ -14,9 +14,6 @@ public import Mathlib.Algebra.Homology.HomologicalBicomplex
 
 /-!
 # The Čech double complex of an injective resolution
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 1 (blueprint:
-def-sc-cech-resolution-double-complex).
 -/
 
 @[expose] public section
@@ -53,9 +50,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Apply the Čech functor termwise to an injective resolution, then exchange the
 resolution and Čech indices. Thus the outer index is the Čech degree and the inner
-index is the resolution degree. Functoriality gives commuting differentials.
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 1.
-(blueprint: def-sc-cech-resolution-double-complex) -/
+index is the resolution degree. Functoriality gives commuting differentials. -/
 noncomputable def Sheaf.cechResolutionDoubleComplex
     {F : Sheaf J AddCommGrpCat.{v}} (I : InjectiveResolution F) (X : C)
     {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) :

@@ -14,9 +14,6 @@ Given two squares of adjunctions and comparison functors between them, compatibl
 left adjoints, a natural transformation compatible with the comparisons has a mate that is
 compatible with the comparisons, the right adjoints being compared by the mates of the
 left-adjoint comparisons.
-
-Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
-step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public section

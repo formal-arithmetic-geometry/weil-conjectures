@@ -191,7 +191,7 @@ identity on restriction without choosing an unnormalized isomorphism.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
-universe u v w
+universe u v w v₁
 
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
 open scoped CategoryTheory.Obj ZeroObject
@@ -455,14 +455,14 @@ private theorem kernelTriangulated
   exact {}
 
 private theorem extend_zero
-    {C : Type v} {D : Type w} [Category C] [Category D]
+    {C : Type v} {D : Type w} [Category.{v₁} C] [Category D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
     [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
     (S : ObjectProperty C) (hloc : IsLocalizingSubcategory (localizingClosure S))
     (F : C ⥤ D) [F.Additive] [F.CommShift ℤ] [F.IsTriangulated]
-    (hsums : ∀ (I : Type v) (J : Discrete I ⥤ C),
+    (hsums : ∀ (I : Type v₁) (J : Discrete I ⥤ C),
       (∀ i, localizingClosure S (J.obj (Discrete.mk i))) → PreservesColimit J F)
     (hS : ∀ K, S K → IsZero (F.obj K)) :
     ∀ K, localizingClosure S K → IsZero (F.obj K) := by
@@ -644,7 +644,12 @@ private theorem properOpenInterchange_localizing
   have hz : IsZero (F.obj A) := by
     apply extend_zero S hloc F _ hgen A hA
     intro I K hK
-    have : PreservesColimit K (J ⋙ R) := hsums I K hK
+    -- the sum is indexed by the morphism universe: lift its index to the universe of `hsums`
+    have : PreservesColimit K (J ⋙ R) := by
+      let e := Discrete.equivalence (Equiv.ulift : ULift.{u + 2} I ≃ I)
+      have h' : PreservesColimit (e.functor ⋙ K) (J ⋙ R) :=
+        hsums (ULift.{u + 2} I) (e.functor ⋙ K) (fun i ↦ hK (Equiv.ulift i))
+      exact Functor.Final.preservesColimit_of_comp (F := e.functor)
     change PreservesColimit K ((J ⋙ R) ⋙ V)
     have : PreservesColimit (K ⋙ J ⋙ R) V :=
       adj.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit

@@ -11,11 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProp
 
 /-! # Components for finite exact-derived pasting
 
-Source: Stacks, Tags 015F and 04VG.
-(blueprint: lem-cbc-exact-derived-pasting-components)
-
 The public congruence theorem and the private component calculations let applications
 use finite expression trees without unfolding sheaf inverse-image constructions.
+
+## References
+
+* Stacks, Tags 015F and 04VG.
 -/
 
 @[expose] public noncomputable section
@@ -102,14 +103,7 @@ private theorem genericSquareIsoSymm {X Y Z T : I}
     Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Category.assoc]
 
 /-- Ordinary equality of finite pasting expressions implies equality after exact localization.
-Source: Stacks, Tags 015F and 04VG
-(blueprint: lem-cbc-exact-derived-pasting-components).
-Proof: Precompose both derived transformations with the localization functor Q.
-The word-factorization equations identify their components with Q applied to the
-ordinary complex components, followed by the same invertible target comparison.
-The assumed ordinary equality identifies these components. Cancel the target
-comparison and use the fully faithful natural-transformation restriction along Q.
-Each expression is finite by construction; the indexing type need not be finite. -/
+Source: Stacks, Tags 015F and 04VG. -/
 theorem exactPasting_congr {X Y : I}
     {P R : Word (C) X Y}
     (e f : Expression (C) P R) (h : e.ordinary = f.ordinary) :

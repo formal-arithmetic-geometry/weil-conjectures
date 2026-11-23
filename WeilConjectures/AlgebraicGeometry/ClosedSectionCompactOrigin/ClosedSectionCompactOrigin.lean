@@ -39,18 +39,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.ClosedSectionCompactOrigin.ClosedSectionCompactOriginData
-import WeilConjectures.AlgebraicGeometry.ClosedSectionCompactOrigin.ClosedSectionSourceNormalization
 import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportExchangeTransport
 
-/-! # Identity-normalized compact origin of a closed-section map
+/-! # Naturality of the compact-support site comparison
 
-This gives the induced global morphism used in the rank-one Thom isomorphism.
-The source identifications are assembled from the published proper, composition and
-identity comparisons. The given compactification is retained throughout.
-
-## References
-
-* Stacks Project, Tags 0F7B, 0F7J
+The comparison between the étale and pro-étale compactly supported direct images along a
+compactification is natural in the bounded-below étale complex.
 -/
 
 @[expose] public noncomputable section
@@ -87,7 +81,9 @@ attribute [local irreducible] constantComparison supportedComparison etaleClosed
   towerCandidateComparison proSigma etaleSigma etaleTau proTau targetComparison
   originComposition
 
-private lemma compact_comparison_naturality {X Y : Scheme.{u}} {v : X ⟶ Y}
+/-- The compact-support site comparison `compactComparison P c` is natural in the bounded-below
+étale complex. -/
+lemma compactComparison_naturality {X Y : Scheme.{u}} {v : X ⟶ Y}
     (c : Compactification v)
     {L M : DerivedCategory.Plus
       (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))} (t : L ⟶ M) :
@@ -107,77 +103,5 @@ private lemma compact_comparison_naturality {X Y : Scheme.{u}} {v : X ⟶ Y}
     Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, Functor.comp_map,
     Category.id_comp, Category.comp_id, Category.assoc] using
     (compactExchangeTransportComparison P.Coefficient c).hom.naturality t
-
-/-- The identity-normalized source equation and transport of the given closed-section map. -/
-theorem closed_section_compact_origin {B X : Scheme.{u}}
-    (b : B ⟶ Spec (.of P.field.k))
-    [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b]
-    (f : X ⟶ B) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    (c : Compactification f) (s : B ⟶ X) [IsClosedImmersion s]
-    [QuasiCompact s.openComplement.ι] (hs : s ≫ f = 𝟙 B) :
-    (compactComparison P c (etaleSource P s)).hom ≫
-        (ProEtale.rightDerivedLowerShriekOfCompactification
-          (ModuleCat.{u + 1} P.Coefficient) c).map (supportedComparison P s).hom ≫
-        (proSigma P f c s hs).hom =
-      (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map
-          (DerivedCategory.Plus.ι.map (etaleSigma P f c s hs).hom) ≫
-        (constantComparison P B).hom ∧
-    ∀ (M : DerivedCategory.Plus
-        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)))
-      (K : DerivedCategory.Plus
-        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)))
-      (theta : (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient)
-        X).mapDerivedCategory.obj M.obj ≅ K.obj)
-      (ce : etaleSource P s ⟶ M) (cp : (proSource P s).obj ⟶ K.obj),
-      (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map
-          (DerivedCategory.Plus.ι.map ce) ≫ theta.hom =
-        (supportedComparison P s).hom ≫ cp →
-      DerivedCategory.TStructure.t.plus
-        ((Etale.rightDerivedLowerShriekOfCompactification
-          (ModuleCat.{u + 1} P.Coefficient) c).obj M.obj) ∧
-      (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map
-          (DerivedCategory.Plus.ι.map (etaleTau P f c s hs ce)) ≫
-          (targetComparison P c M K theta).hom =
-        (constantComparison P B).hom ≫ proTau P f c s hs cp := by
-  let CB := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory
-  let CX := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory
-  let Fe := Etale.rightDerivedLowerShriekOfCompactificationPlus
-    (ModuleCat.{u + 1} P.Coefficient) c
-  let Fp := ProEtale.rightDerivedLowerShriekOfCompactification
-    (ModuleCat.{u + 1} P.Coefficient) c
-  have hsource := closedSectionSourceNormalization P b f c s hs
-  refine ⟨hsource, ?_⟩
-  intro M K theta ce cp hclass
-  constructor
-  · exact DerivedCategory.TStructure.t.plus.prop_of_iso
-      ((Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
-        (ModuleCat.{u + 1} P.Coefficient) c).app M)
-      (Fe.obj M).property
-  · have hn :
-        CB.map (DerivedCategory.Plus.ι.map (Fe.map ce)) ≫
-            (compactComparison P c M).hom =
-          (compactComparison P c (etaleSource P s)).hom ≫
-            Fp.map (CX.map (DerivedCategory.Plus.ι.map ce)) := by
-      exact compact_comparison_naturality P c ce
-    have hc :
-        CB.map (DerivedCategory.Plus.ι.map (Fe.map ce)) ≫
-            (targetComparison P c M K theta).hom =
-          (compactComparison P c (etaleSource P s)).hom ≫
-            Fp.map (supportedComparison P s).hom ≫ Fp.map cp := by
-      simp only [targetComparison, Iso.trans_hom, Functor.mapIso_hom]
-      rw [← Category.assoc, hn, Category.assoc, ← Fp.map_comp, hclass,
-        Fp.map_comp]
-    have hi :
-        CB.map (DerivedCategory.Plus.ι.map (etaleSigma P f c s hs).inv) ≫
-            (compactComparison P c (etaleSource P s)).hom ≫
-            Fp.map (supportedComparison P s).hom =
-          (constantComparison P B).hom ≫ (proSigma P f c s hs).inv := by
-      apply (cancel_mono (proSigma P f c s hs).hom).mp
-      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
-      rw [hsource, ← CB.map_comp_assoc, ← DerivedCategory.Plus.ι.map_comp,
-        Iso.inv_hom_id, CategoryTheory.Functor.map_id, CB.map_id, Category.id_comp]
-    simp only [etaleTau, proTau]
-    rw [Functor.map_comp, CB.map_comp, Category.assoc, hc]
-    simpa only [Category.assoc] using congrArg (fun t ↦ t ≫ Fp.map cp) hi
 
 end AlgebraicGeometry.ClosedSectionCompactOrigin

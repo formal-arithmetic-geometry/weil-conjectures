@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.CartanEilenbergComparisonColumnStep
 
 /-! # Augmented comparison of Cartan–Eilenberg resolutions
 
-Source: Stacks Project, Tags 015H, 015I and 015K
-(blueprint: lem-weil-pbc-ce-augmented-comparison).
+Source: Stacks Project, Tags 015H, 015I and 015K.
 -/
 
 @[expose] public section
@@ -28,33 +27,7 @@ namespace CategoryTheory
 
 /-- An exact additive functor admits an augmented bicomplex comparison.
 This statement concerns the comparison itself; it does not form total complexes.
-Source: Stacks Project, Tags 015H, 015I and 015K
-(blueprint: lem-weil-pbc-ce-augmented-comparison).
-
-Proof: in every complex degree p use the exact sequences
-0 → Bᵖ → Zᵖ → Hᵖ → 0 and 0 → Zᵖ → Kᵖ → Bᵖ⁺¹ → 0, and their
-resolution-column analogues. Exactness of F preserves these sequences and the
-augmented column exactness. For the target, the stated injectivity conditions
-make the boundary, cycle, cohomology and original columns injective resolutions;
-the sequences are degreewise short exact by abelian homology theory.
-Choose a common lower bound for I and J. Below that bound all boundary columns
-are zero. Induct on p starting with the zero map on the lowest boundary column.
-Given its comparison map, lift the cohomology augmentation map through the source
-augmentation into the target injective cohomology column by the lifting property
-of monomorphic quasi-isomorphisms against bounded-below injective complexes
-(lem-weil-pbc-lift-along-injective-quasi-iso, Stacks Tag 013P(2)). Apply
-exists_horseshoe_morphism_lift_exact_source to the boundary/cycle/cohomology
-sequence to get a cycle comparison compatible with both endpoint maps.
-Lift the next boundary augmentation map by the same lifting property. Apply
-the exact-source horseshoe lift to the cycle/original/next-boundary sequence
-with these chosen endpoint maps to obtain the original column comparison.
-Retain the next-boundary map for the next induction step, choosing each map
-only once. The horizontal differential factors through the next-boundary and
-next-cycle columns. The endpoint equations from the two horseshoe lifts make
-the original column comparisons commute with this factorization. Each is already
-a chain map in the resolution degree. They therefore assemble into a bicomplex
-map. Their degree-zero augmentation equations are exactly the displayed identity,
-using singleObjXSelf to identify the source single-degree components. -/
+Stacks Project, Tags 015H, 015I and 015K. -/
 theorem exists_cartanEilenberg_augmented_comparison
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive]

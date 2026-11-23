@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficien
 import all WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientMate
 
 /-! # Unbounded scalar compatibility of proper/open exchange
-
-Source: blueprint smooth-purity reduction, Charts.
-(blueprint: lem-pur-ordinary-chart-proper-open-scalar).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,15 +21,7 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   upperStar lowerStar
-/-- Unbounded scalar compatibility of proper/open exchange.
-Source: blueprint smooth-purity reduction, Charts.
-(blueprint: lem-pur-ordinary-chart-proper-open-scalar).
-
-Proof: Use the normalized unbounded interchange to identify its restriction to the target open as
-inverse base change followed by the inverse open unit.
-The coefficient exchange cube and the two open-unit coefficient identities make the restricted
-composites equal. Base change on an open extension is invertible; cancel it and use injectivity of
-the open adjunction Hom equivalence. -/
+/-- Unbounded scalar compatibility of proper/open exchange. -/
 theorem ordinaryChartProperOpenScalar
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {U V W Z : Scheme.{u}}

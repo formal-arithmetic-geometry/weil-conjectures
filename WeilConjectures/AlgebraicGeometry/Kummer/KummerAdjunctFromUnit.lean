@@ -10,9 +10,7 @@ import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! # Scalar adjuncts from naturality of normalized evaluated units
-Source: diagonal tower system proof, step (4).
-(blueprint: lem-sfb-kummer-adjunct-from-unit). -/
+/-! # Scalar adjuncts from naturality of normalized evaluated units. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -85,18 +83,7 @@ private theorem ext_map_comp
   simpa only [Iso.refl_hom, NatTrans.id_app, Ext.comp_mk₀_id, Ext.mk₀_id_comp] using h.symm
 
 /-- A supplied residue lift has the scalar adjunct prescribed by the two unit
-normalizations. This is formal naturality and exact-functoriality of Ext.
-
-Source: diagonal tower system proof, step (4)
-(blueprint: lem-sfb-kummer-adjunct-from-unit).
-
-Proof: apply naturality of the unit to the shifted morphism representing f.
-The source normalization cancels the inverse source isomorphism; the target
-normalization inserts the negative shifted Kummer morphism. Translate this
-identity through Ext.homEquiv. Apply exact forgetting to the supplied equation
-for e, use exact-functor composition and its comparison sigma, and precompose
-with g. The equation for g cancels sigma with its inverse and then cancels s
-with its inverse. Associativity combines the target comparison with t. -/
+normalizations. This is formal naturality and exact-functoriality of Ext. -/
 theorem kummer_adjunct_from_unit
     {A B C J : Type*}
     [Category A] [Abelian A] [HasExt.{w} A]
