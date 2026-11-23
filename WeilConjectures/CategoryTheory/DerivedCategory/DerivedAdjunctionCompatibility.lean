@@ -348,7 +348,6 @@ private theorem ind_absolute
 provided the two systems are essentially constant and the supplied comparison maps
 are derived-functor comparisons.
 Source: Stacks Project, Derived Categories, Lemma 09T5 from Lemma 0DVC.
-(auxiliary; not a blueprint node)
 
 Apply the pre-derived adjunction theorem at every pair of complexes and use its
 bifunctoriality to obtain the natural Hom equivalence. The essential-constancy

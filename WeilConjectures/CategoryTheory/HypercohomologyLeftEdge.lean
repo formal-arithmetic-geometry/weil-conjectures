@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Spe
 /-! # The left edge for a single bounded below complex
 
 Source: Stacks Project, derived.tex, Tags 015J and 015N.
-(blueprint: def-pc-hypercohomology-left-edge).
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
   (G : B ⥤ C) [G.Additive] [PreservesFiniteLimits G]
 
 /-- The truncation spectral object functor for `RG`, without an initial functor `F`.
-Source: Stacks Project, Tag 015J (blueprint: def-pc-hypercohomology-left-edge). -/
+Source: Stacks Project, Tag 015J. -/
 noncomputable def hypercohomologySpectralObjectFunctor :
     DerivedCategory.Plus B ⥤ Abelian.SpectralObject C EInt :=
   DerivedCategory.Plus.TStructure.t.spectralObjectFunctor ⋙
@@ -40,7 +39,7 @@ noncomputable def hypercohomologySpectralObjectFunctor :
     (DerivedCategory.Plus.homologyFunctor C 0).mapHomologicalSpectralObject EInt
 
 /-- Nonnegative complexes give first-quadrant truncation spectral objects.
-Source: Stacks Project, Tag 015J (blueprint: def-pc-hypercohomology-left-edge). -/
+Source: Stacks Project, Tag 015J. -/
 instance (K : DerivedCategory.Plus B) [DerivedCategory.Plus.TStructure.t.IsGE K 0] :
     (G.hypercohomologySpectralObjectFunctor.obj K).IsFirstQuadrant where
   isZero₁ i j hij hj n := by
@@ -61,7 +60,7 @@ instance (K : DerivedCategory.Plus B) [DerivedCategory.Plus.TStructure.t.IsGE K 
 
 /-- The canonical identification of the left-edge target with `G Hⁿ`.
 All factors are the natural truncation, shift and degree-zero comparisons.
-Source: Stacks Project, Tag 015J (blueprint: def-pc-hypercohomology-left-edge). -/
+Source: Stacks Project, Tag 015J. -/
 noncomputable def hypercohomologyLeftEdgeTargetIso (n : ℕ) :
     G.hypercohomologySpectralObjectFunctor ⋙ Abelian.SpectralObject.hFunctor n
         (ComposableArrows.mk₁ (homOfLE
@@ -85,8 +84,7 @@ noncomputable def hypercohomologyLeftEdgeTargetIso (n : ℕ) :
 
 /-- The unit followed by the truncation left edge, on a complex indexed by naturals.
 The extension and quotient comparisons are explicit; no resolution is chosen here.
-Source: Stacks Project, Tags 015J and 015N
-(blueprint: def-pc-hypercohomology-left-edge). -/
+Source: Stacks Project, Tags 015J and 015N. -/
 noncomputable def cochainHypercohomologyLeftEdge (K : CochainComplex B ℕ) (n : ℕ) :
     ((G.mapHomologicalComplex (ComplexShape.up ℕ)).obj K).homology n ⟶
       G.obj (K.homology n) := by

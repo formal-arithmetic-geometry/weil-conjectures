@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # Constant modules over the constant ring sheaf on a small site
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093T
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03CY and 093T.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constant presheaf of modules, with constant ring scalars and identity restrictions.
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093T
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tags 03CY and 093T. -/
 def siteConstantModulePresheaf :
     ModuleCat.{u} Λ ⥤
       PresheafOfModules.{u} ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) where
@@ -51,8 +49,7 @@ def siteConstantModulePresheaf :
 
 /-- Sheafify the constant module presheaf and extend its scalars along the constant-ring
 sheafification unit. Its underlying abelian sheaf is the usual constant abelian sheaf.
-Source: Stacks Project, Modules on Sites, Tags 03CY and 093T
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tags 03CY and 093T. -/
 def siteConstantModuleFunctor :
     ModuleCat.{u} Λ ⥤ SheafOfModules.{u}
       ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)) :=

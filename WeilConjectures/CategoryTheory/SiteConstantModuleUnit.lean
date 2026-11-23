@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.SiteConstantModuleFunctor
 /-! # The constant-module sheafification unit
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 093T.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

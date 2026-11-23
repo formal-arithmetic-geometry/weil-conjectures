@@ -26,21 +26,7 @@ open CategoryTheory.Pretriangulated.Opposite
 namespace CategoryTheory
 
 /-- The universe-transport construction produces a representing object and additive
-natural isomorphism in the original category. The proof transports all structures
-along `ULiftHom.equiv`, applies the common-universe Brown principle, and descends
-along the equivalence and the universe-lift equivalences on additive groups.
-Source: Stacks Project, Tag 0A8F, with explicit universe bookkeeping
-(blueprint: lem-pc-brown-representability-universe-transfer-aux).
-
-Proof: Construct the category `ULiftHom.{max w v vH} C` and transport zero objects,
-shifts, preadditivity, distinguished triangles, coproducts, compact generators, and
-weak generation across `ULiftHom.equiv`. Compose `H` with the inverse equivalence and
-`AddCommGrpCat.uliftFunctor`; transport homologicality and preservation of all products
-using the equivalence and the lift/down additive equivalences. Apply Brown
-representability (`brownCohomologicalRepresentability`) in the common universe. Descend the
-representing object and its natural bijections along the same equivalences to obtain a
-representing-by structure for `H ⋙ forget` in `C`.
--/
+natural isomorphism in the original category. Stacks Project, Tag 0A8F. -/
 theorem brownCohomologicalRepresentabilityUniverseTransfer_aux
     (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

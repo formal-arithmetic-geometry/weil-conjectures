@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyCompa
 /-! # The derived unit and an augmented resolution comparison
 
 Source: Stacks Project, Derived Categories, Tag 015M.
-(blueprint: lem-sc-resolution-derived-single-unit-augmentation)
 -/
 
 @[expose] public section
@@ -26,16 +25,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived unit, transported to a prescribed resolution, is the augmented comparison.
-Source: Stacks Project, Derived Categories, Tag 015M, resolution computation and naturality.
-(blueprint: lem-sc-resolution-derived-single-unit-augmentation).
-
-Proof: Naturality of the derived unit along the augmentation of I cancels its inverse
-on I in resolutionDerivedIso. The remaining map is F applied to the augmentation,
-followed by the map/extension comparison. The hypothesis on phi identifies this with
-the augmentation of J followed by the extension of phi: check degree zero, and use
-that the source is zero in every other degree. Apply localization to this equality.
-The single-complex and quotient comparisons identify its source with F(X)[0].
--/
+Source: Stacks Project, Derived Categories, Tag 015M, resolution computation and naturality. -/
 theorem resolutionDerivedSingleUnit_augmentation
     {A : Type uA} [Category.{vA} A] [Abelian A] [EnoughInjectives A]
     {B : Type uB} [Category.{vB} B] [Abelian B]

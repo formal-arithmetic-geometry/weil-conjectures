@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-!
 # The tensor comparison of the derived functor of an exact monoidal functor
@@ -32,6 +33,13 @@ The tensor comparison `LF(K ⊗ᴸ M) ⟶ LF K ⊗ᴸ LF M`
   (`CategoryTheory.Functor.isIso_mapDerivedCategoryOplaxMonoidal_η`).
 - `CategoryTheory.Functor.commShift_mapDerivedCategoryTensorComparison_app`: for a fixed `K`, the
   comparison `D(F)(K ⊗ᴸ -) ⟶ D(F) K ⊗ᴸ D(F)(-)` commutes with the shifts.
+- `CategoryTheory.Functor.eq_zero_of_leftDerivedFunctor_map_eq_zero`: an endomorphism of the unit
+  of `D(C)` killed by `L(F)` vanishes if `F` kills no nonzero endomorphism of the unit of `C`.
+
+## Implementation details
+
+In `CategoryTheory.Functor.eq_zero_of_leftDerivedFunctor_map_eq_zero` the instance arguments are
+implicit, so that they are determined by unification with the morphisms rather than by a search.
 -/
 
 @[expose] public section
@@ -235,5 +243,43 @@ instance commShift_mapDerivedCategoryTensorComparisonApp (K : DerivedCategory C)
       (asIso (DerivedCategory.Q.map (Λ.resolutionNatTrans.app K₀))).symm ≪≫
       (DerivedCategory.quotientCompQhIso _).symm.app R
   exact F.commShift_mapDerivedCategoryTensorComparisonApp_of_iso e
+
+
+/-- Let `F : C ⥤ D` be an exact functor between abelian categories, `C` being monoidal. An
+endomorphism of the unit of `D(C)` (the unit of `C` placed in degree `0`) which is killed by the
+left derived functor `L(F)` vanishes, provided `F` kills no nonzero endomorphism of the unit of
+`C`. -/
+lemma eq_zero_of_leftDerivedFunctor_map_eq_zero.{wC, wD}
+    {C D : Type*} {_ : Category C} {_ : Category D} {_ : Abelian C} {_ : Abelian D}
+    {_ : HasDerivedCategory.{wC} C} {_ : HasDerivedCategory.{wD} D}
+    {_ : MonoidalCategory C} {_ : MonoidalPreadditive C} {_ : HasCountableCoproducts C}
+    {_ : HasColimitsOfShape ℤ C} {_ : HasExactColimitsOfShape ℤ C}
+    {_ : ∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂}
+    {_ : ∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄}
+    {_ : ∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃}
+    {_ : ∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃}
+    {_ : ∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)}
+    {_ : ∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)}
+    {_ : Abelian.HasFunctorialFlatResolution C}
+    {_ : DerivedCategory.Qh.HasDerivedMonoidalCategory
+      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))}
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (f : 𝟙_ (DerivedCategory C) ⟶ 𝟙_ (DerivedCategory C))
+    (hF : ∀ u : 𝟙_ C ⟶ 𝟙_ C, F.map u = 0 → u = 0) (h : F.leftDerivedFunctor.map f = 0) :
+    f = 0 := by
+  let G := HomologicalComplex.single C (ComplexShape.up ℤ) 0 ⋙
+    HomotopyCategory.quotient C (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
+  let e : DerivedCategory.singleFunctor C 0 ≅ G :=
+    (DerivedCategory.singleFunctorIsoCompQ C 0).trans
+      (Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso C).symm)
+  have : G.Full := Functor.Full.of_iso e
+  obtain ⟨u, rfl⟩ := G.map_surjective (X := 𝟙_ C) (Y := 𝟙_ C) f
+  have h₁ := NatIso.map_eq_zero_of_map_eq_zero
+    (Functor.isoWhiskerRight e.symm F.leftDerivedFunctor ≪≫
+      Functor.isoWhiskerLeft _ F.leftDerivedFunctorIsoMapDerivedCategory ≪≫
+        F.mapDerivedCategorySingleFunctor 0) (f := u) h
+  have h₂ : F.map u = 0 := (DerivedCategory.singleFunctor D 0).map_injective (by
+    rw [← Functor.comp_map, h₁, Functor.map_zero])
+  rw [hF u h₂, Functor.map_zero]
 
 end CategoryTheory.Functor

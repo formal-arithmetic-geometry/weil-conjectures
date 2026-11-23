@@ -19,7 +19,6 @@ then `F` exhibits `Q` as the rationalization of `P` at the powers of `ℓ`
 (`CategoryTheory.Rationalization.isLocalization_of_models`): it is a localization functor for
 the class `CategoryTheory.Rationalization.W (Submonoid.powers ℓ) P` of morphisms whose mapping
 cone is killed by a power of `ℓ`.
-
 -/
 
 @[expose] public section
@@ -163,11 +162,7 @@ that every object of `Q` is isomorphic to `L M` for some `M` in `P`, that every 
 that two morphisms with the same image under `L` agree after multiplication by a power of `ℓ`.
 Then `F` is a localization functor for the morphisms of `P` whose mapping cone is killed by a
 power of `ℓ`.
-
-Proof: `L` kills the `ℓ`-power torsion objects, so `F` inverts these morphisms. The functor
-induced on the rationalization is essentially surjective by the first hypothesis, and fully
-faithful because its maps on morphisms are the localizations at the powers of `ℓ` of the maps
-of `L`, which the last two hypotheses make bijective. -/
+-/
 theorem Rationalization.isLocalization_of_models
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]

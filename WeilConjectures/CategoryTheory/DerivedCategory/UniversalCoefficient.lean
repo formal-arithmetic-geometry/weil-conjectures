@@ -324,7 +324,7 @@ lemma universalCoefficientSequence_hg :
   rw [← homologyFunctor_map_smul_id]
   exact HomologySequence.δ_comp _ hT n₀ n₁ hn
 
-/-- Blueprint `prop-pod-integral-degreewise-form` (the universal coefficient sequence): for a
+/-- The universal coefficient sequence: for a
 distinguished triangle `C ⟶[x] C ⟶ D ⟶ C⟦1⟧` of `D(R)` whose first map is the multiplication
 by `x`, the short complex
 
@@ -337,8 +337,8 @@ noncomputable def universalCoefficientSequence : ShortComplex (ModuleCat.{u} R) 
     (universalCoefficientSequence_hf hT n₀) (HomologySequence.comp_δ _ hT n₀ n₁ hn)
     (universalCoefficientSequence_hg hT n₀ n₁ hn)
 
-/-- Blueprint `prop-pod-integral-degreewise-form` (the universal coefficient sequence): the
-universal coefficient sequence `0 ⟶ Hⁿ(C) ⊗_R R/(x) ⟶ Hⁿ(D) ⟶ Hⁿ⁺¹(C)[x] ⟶ 0` of a
+/-- The universal coefficient sequence
+`0 ⟶ Hⁿ(C) ⊗_R R/(x) ⟶ Hⁿ(D) ⟶ Hⁿ⁺¹(C)[x] ⟶ 0` of a
 distinguished triangle `C ⟶[x] C ⟶ D ⟶ C⟦1⟧` is short exact. -/
 theorem universalCoefficientSequence_shortExact :
     (universalCoefficientSequence hT n₀ n₁ hn).ShortExact :=

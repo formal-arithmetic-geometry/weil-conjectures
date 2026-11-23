@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Functor.Currying
 /-! # Hom-comparison algebra for abstract functors and equivalences
 
 Source: equivalence unit/counit identities and Stacks 03EO.
-(blueprint: lem-sf-hom-comparison-equivalence)
 -/
 
 @[expose] public section
@@ -20,7 +19,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory.HomComparison
 
 /-- Reverse a two-variable Hom comparison along an equivalence.
-Source: Stacks 03EO (blueprint: lem-sf-hom-comparison-equivalence).
+Source: Stacks 03EO.
 Whisker by the inverse in both variables, use the counit to cancel the forward
 functor, and then use the unit in the value category. -/
 def inverseHomComparison {A B : Type*} [Category A] [Category B] (E : B ≌ A)
@@ -37,8 +36,7 @@ def inverseHomComparison {A B : Type*} [Category A] [Category B] (E : B ≌ A)
     Functor.rightUnitor _
 
 /-- Compose two componentwise naturality squares after applying a functor.
-Source: Stacks 03EO and functoriality
-(blueprint: lem-sf-hom-comparison-equivalence). -/
+Source: Stacks 03EO and functoriality. -/
 theorem mapIso_comp_naturality {B D : Type*} [Category B] [Category D] (F : B ⥤ D)
     {X X' Y Y' : B} {Z Z' : D} (e : X ≅ Y) (e' : X' ≅ Y')
     (i : F.obj Y ≅ Z) (i' : F.obj Y' ≅ Z')

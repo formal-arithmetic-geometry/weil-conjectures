@@ -10,8 +10,6 @@ public import WeilConjectures.CategoryTheory.InternalActionSite.InternalActionSi
 /-!
 # Sections of the twisted module attached to an equivariant sheaf
 
-Source: action-site construction (auxiliary; not a blueprint node).
-
 For a presentation of equivariant sheaves as modules on the twisted site, we record the
 sectionwise identification of the twisted module of an equivariant sheaf `M` at an object `X`
 with the sections of `M` at `X`, its compatibility with twisted restrictions and with

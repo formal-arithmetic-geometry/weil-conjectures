@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-!
 # The projection of the internal action site as a morphism of ringed topoi
 
-Source: Stacks, Cohomology on Sites, Tag 0D6E (auxiliary; not a blueprint node).
+Source: Stacks, Cohomology on Sites, Tag 0D6E.
 
 The projection `Object K ⥤ C` from the twisted action site to the base site is continuous and
 cocontinuous. Pulling back along it gives modules with trivial action, and its right adjoint

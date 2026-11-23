@@ -11,7 +11,6 @@ import Mathlib.CategoryTheory.Abelian.Refinements
 /-! # Regular scalar quotient towers
 
 Source: Stacks 099M and 0941, the strict principal quotient construction.
-(blueprint: lem-sfb-regular-scalar-quotient-tower).
 -/
 
 @[expose] public noncomputable section
@@ -25,35 +24,35 @@ variable {R : Type r} [Ring R] {C : Type u} [Category.{v} C] [Abelian C] [Linear
   (s : R) (V : C)
 
 /-- The ordinary quotient by the nth scalar power, including exponent zero.
-Source: Stacks 099M (blueprint: lem-sfb-regular-scalar-quotient-tower). -/
+Source: Stacks 099M. -/
 abbrev obj (n : ℕ) : C := cokernel (s ^ n • 𝟙 V)
 
 /-- Higher powers vanish under smaller quotient projections.
-Source: Stacks 099M (blueprint: lem-sfb-regular-scalar-quotient-tower). -/
+Source: Stacks 099M. -/
 theorem power_zero {n m : ℕ} (h : n ≤ m) :
     (s ^ m • 𝟙 V) ≫ cokernel.π (s ^ n • 𝟙 V) = 0 := by
   rw [show s ^ m = s ^ (m - n) * s ^ n by rw [← pow_add, Nat.sub_add_cancel h],
     ← smul_smul, Linear.smul_comp, cokernel.condition, smul_zero]
 
 /-- The canonical quotient transition.
-Source: Stacks 099M (blueprint: lem-sfb-regular-scalar-quotient-tower). -/
+Source: Stacks 099M. -/
 def map {n m : ℕ} (h : n ≤ m) : obj s V m ⟶ obj s V n :=
   cokernel.desc _ (cokernel.π _) (power_zero s V h)
 
 /-- The quotient transitions preserve the quotient projections.
-Source: Stacks 099M (blueprint: lem-sfb-regular-scalar-quotient-tower). -/
+Source: Stacks 099M. -/
 @[reassoc (attr := simp)]
 theorem π_map {n m : ℕ} (h : n ≤ m) :
     cokernel.π (s ^ m • 𝟙 V) ≫ map s V h = cokernel.π (s ^ n • 𝟙 V) :=
   cokernel.π_desc _ _ _
 
 /-- Quotient transitions are epimorphisms.
-Source: Stacks 099M (blueprint: lem-sfb-regular-scalar-quotient-tower). -/
+Source: Stacks 099M. -/
 instance map_epi {n m : ℕ} (h : n ≤ m) : Epi (map s V h) :=
   epi_of_epi_fac (π_map s V h)
 
 /-- All principal quotients with their canonical transitions.
-Source: Stacks 099M (blueprint: lem-sfb-regular-scalar-quotient-tower). -/
+Source: Stacks 099M. -/
 def tower : ℕᵒᵖ ⥤ C where
   obj n := obj s V n.unop
   map f := map s V (leOfHom f.unop)
@@ -111,16 +110,7 @@ private theorem exact_scalar (a b : ℕ) (hreg : Mono (s ^ b • 𝟙 V)) :
   simp only [Linear.smul_comp, Linear.comp_smul, Category.comp_id]
 
 /-- A regular scalar gives a normalized adic tower of ordinary quotient complexes.
-Source: Stacks 099M and 0941
-(blueprint: lem-sfb-regular-scalar-quotient-tower).
-Proof: cancellation of the quotient epimorphism proves scalar annihilation. The
-universal property of the two successive cokernels identifies reduction to a
-smaller exponent with its ordinary quotient. For exactness, lift an element of
-the kernel through the quotient epimorphism after an epimorphic refinement.
-Its scalar multiple lifts through the defining scalar map after a second
-refinement. Cancel the regular scalar power on the original complex. The lift
-is then a multiple of the complementary scalar power, as required. This includes
-exponent zero, where the scalar is the identity and the quotient is zero. -/
+Source: Stacks 099M and 0941. -/
 theorem normalized {B : Type u} [Category.{v} B] [Abelian B] [Linear R B]
     (P : CochainComplex B ℤ) (hP : ∀ n : ℕ, Mono (s ^ n • 𝟙 P)) :
     CochainComplex.IsNormalizedAdicTower s (tower s P) where

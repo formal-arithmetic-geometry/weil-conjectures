@@ -224,26 +224,7 @@ private theorem coface_injective {a b : SimplexCategoryGenRel} {f g : a ⟶ b}
 
 /-- The canonical presentation functor is faithful.
 Source: Stacks Project, Tag 0168, Lemma 14.2.4(c); Kerodon, Propositions
-1.1.1.9 and 1.1.2.13 (Tags 04FQ and 04FT) for the two pure normal forms.
-(blueprint: lem-sc-module-cup-godement-simplex-presentation-faithful)
-Proof: factor each word as a pure sigma block followed by a pure delta block,
-using Mathlib's factorization theorem. Equal monotone maps have the same image,
-so the middle ordinals agree. Uniqueness of epi-mono factorizations then shows
-that both blocks have equal monotone maps. For sigma blocks use the existing
-normal form: its increasing admissible list is determined by the adjacent
-indices where evaluation agrees, hence equal maps give equal sorted lists.
-For delta blocks use order duality: on the presentation it sends delta_i to
-sigma_i and sigma_i to delta_(i+1), in the opposite category and one degree
-higher. Check its six relations directly and lift it through the quotient.
-It commutes with Mathlib's order-duality functor II. Duals of pure coface
-words are pure sigma words, hence equal maps have equal duals by sigma
-injectivity. The double dual shifts degree by two and inserts both endpoints;
-the resulting embedding is natural on pure coface words and is a split mono.
-Apply the dual again and cancel this embedding to recover equality of the
-coface words. Both blocks, and therefore their composites, are equal. Empty
-blocks, identities and [0] are covered by these same inductions. The duality
-argument is written by H1 using Mathlib's II construction, rather than leaving
-the missing pure-delta normal forms as an assumption. -/
+1.1.1.9 and 1.1.2.13 (Tags 04FQ and 04FT) for the two pure normal forms. -/
 theorem simplexPresentation_faithful :
     SimplexCategoryGenRel.toSimplexCategory.Faithful := by
   constructor

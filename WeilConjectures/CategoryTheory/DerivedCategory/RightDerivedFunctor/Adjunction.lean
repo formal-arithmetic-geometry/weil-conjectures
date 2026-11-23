@@ -29,20 +29,6 @@ exact, no K-flat resolutions and hence no monoidal structure on the source are i
 
 - `CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction`: the adjunction
   `L.mapDerivedCategory ⊣ R.rightDerivedFunctor`.
-
-## The proof
-
-As for `CategoryTheory.Adjunction.derivedPlus`, the construction is Mathlib's
-`CategoryTheory.Adjunction.derived` applied to the adjunction
-`L.mapHomotopyCategory (.up ℤ) ⊣ R.mapHomotopyCategory (.up ℤ)`, and there are two
-absoluteness statements to check:
-
-* `L.mapDerivedCategory ⋙ R.rightDerivedFunctor` is a left derived functor because the
-  comparison map is an isomorphism, `L` being exact;
-* `R.rightDerivedFunctor ⋙ L.mapDerivedCategory` is a right derived functor by the
-  K-injective right derivability structure, since the unit of `R.rightDerivedFunctor` is an
-  isomorphism on K-injective complexes.
-
 -/
 
 @[expose] public section

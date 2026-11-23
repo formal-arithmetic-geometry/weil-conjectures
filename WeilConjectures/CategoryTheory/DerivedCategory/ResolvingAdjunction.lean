@@ -131,15 +131,7 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
 
 /-- Resolve the left source, derive the adjunction against an exact right adjoint,
 and retain the cochain representative-transpose equation.
-Source: Stacks 06XN, 0FND, 09T5
-(auxiliary; not a blueprint node).
-Proof: use the resolving class to form the everywhere-defined left derived functor
-on homotopy categories. Exactness of the right adjoint makes its denominator systems
-constant. The canonical derived-adjunction theorem gives the Hom bijection and its
-strict transpose. Precompose the universal comparison with the full essentially
-surjective homotopy quotient; its structured-arrow functor is initial, so the
-pointwise right Kan property and the comparison on resolutions are preserved.
-The quotient-to-derived isomorphisms convert the Hom formula to cochain complexes. -/
+Source: Stacks 06XN, 0FND, 09T5. -/
 theorem exists_leftDerived_adjunction
     (E : A ⥤ B) (R : B ⥤ A) [E.Additive] [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R] (a : E ⊣ R)

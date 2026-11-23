@@ -46,8 +46,7 @@ variable (A : C)
 
 /-- A *decreasing filtration* `F` of an object `A` of an abelian category: subobjects
 `Fⁿ A ⊆ A` for `n ∈ ℤ` with `Fⁿ⁺¹ A ⊆ Fⁿ A`. A *filtered object* is a pair `(A, F)`.
-
-(blueprint: `def-sp-filtration`) -/
+-/
 structure DecreasingFiltration where
   /-- The subobject `Fⁿ A`. -/
   F : ℤ → Subobject A
@@ -62,22 +61,19 @@ lemma antitone : Antitone F.F :=
   antitone_int_of_succ_le F.F_succ_le
 
 /-- The graded piece `grⁿ A = Fⁿ A / Fⁿ⁺¹ A` of a filtered object.
-
-(blueprint: `def-sp-filtration`) -/
+-/
 noncomputable def gr (n : ℤ) : C :=
   cokernel (Subobject.ofLE _ _ (F.F_succ_le n))
 
 /-- A filtration is *finite and separated* if `F⁰ A = A`, `Fᴺ A = 0` for some `N`, and the
 intersection of all `Fⁿ A` is `0`.
-
-(blueprint: `def-sp-filtration`) -/
+-/
 def IsFiniteSeparated : Prop :=
   F.F 0 = ⊤ ∧ (∃ N, F.F N = ⊥) ∧ ∀ P : Subobject A, (∀ n, P ≤ F.F n) → P = ⊥
 
 /-- The *image filtration* on `B` of a filtration `F` of `A` along a morphism `φ : A ⟶ B`:
 `Fⁿ B = im (Fⁿ A ⟶ B)`.
-
-(blueprint: `def-sp-image-filtration`) -/
+-/
 noncomputable def image {B : C} (φ : A ⟶ B) : DecreasingFiltration B where
   F n := imageSubobject ((F.F n).arrow ≫ φ)
   F_succ_le n := by

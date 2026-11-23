@@ -11,7 +11,11 @@ public import WeilConjectures.CategoryTheory.R.RHomInjectiveCocycleFamily
 # Construction on bounded-below complexes of injectives
 
 The cocycle construction and its compatibility with maps of injective complexes
-are isolated here.  The proof follows Stacks Tags 06XR (1) and 070I.
+are isolated here.
+
+## References
+
+* Stacks Project, Tags 06XR (1) and 070I.
 -/
 
 @[expose] public section
@@ -180,21 +184,7 @@ end
 
 /-- The normalized cocycle comparison exists on all bounded-below complexes of
 injectives, and is compatible with maps between such complexes.
-Source: Stacks Tags 06XR (1) and 070I.
-Proof: send a concrete cycle `f` in the complex `Hom(M,I)` to the localized
-shifted morphism of `Cocycle.fromSingleMk f`. This is additive. A boundary gives
-a zero cohomology class, hence a null-homotopic morphism and a zero derived
-morphism. Descend through the quotient of cycles by boundaries using
-`QuotientAddGroup.lift`, and identify that quotient with abstract homology via
-`ShortComplex.abHomologyIso`. Naturality of the homology projection and the
-single-source cocycle constructor prove compatibility with chain maps, since
-every homology class has a cycle representative. For injective complexes,
-precompose with the homology comparison induced by the invertible derived unit.
-The two inverse comparisons cancel in the normalization formula. Naturality of
-the unit and of the homology-to-Q comparison gives compatibility after this
-transport. No restriction on the integer degree is used.
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map-injective-family)
--/
+Source: Stacks Tags 06XR (1) and 070I. -/
 theorem exists_rhom_injective_cocycle_family
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]
     [HasDerivedCategory.{w} C] [HasDerivedCategory.{w₂} AddCommGrpCat.{v}]

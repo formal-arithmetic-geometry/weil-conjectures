@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.CompactObjectsThick
 # Finite thick approximation of a connecting component
 
 Source: Stacks Project, Derived Categories, Tag 09SP, with the stage notation of
-Tag 09SN (blueprint: lem-sc-compact-triangle-connecting-approximation).
+Tag 09SN.
 -/
 
 @[expose] public section
@@ -27,27 +27,8 @@ open CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
 /-- Approximate the connecting component across one distinguished triangle by a finite
-thick object. Source: Stacks Project, Derived Categories, Tag 09SP, induction step
-up to (but excluding) the exactness correction.
-(blueprint: lem-sc-compact-triangle-connecting-approximation).
-
-Proof: factor the connecting map from K into Z[1] through F[1], with F a finite
-sum of shifts of generators, using compactness and preservation of coproducts by
-shift. Complete K → F[1] to a distinguished triangle F → K' → K → F[1].
-The triangle axiom supplies a morphism to Z → Y → W → Z[1]. The object K'
-is compact because F and K are compact, and compact objects are closed under
-shifts, finite sums and distinguished triangles (Stacks, Tag 09QH):
-shifts preserve coproducts, finite sums interchange with the compact-Hom comparison,
-and for a distinguished triangle the comparison maps form a morphism of exact
-five-term Hom sequences. Direct sums of abelian groups preserve exactness; the
-four comparisons for the two compact terms and their shifts are bijective, so the
-five lemma makes the comparison for the third term bijective. Apply the factorization
-property of Y to K' → Y. Complete F → K' → Q' to a triangle F → Q' → Q → F[1].
-The triangle axiom gives maps K → Q → W whose composite has the same connecting
-component as f. Taking the union of the finite generator sets puts F and Q' in
-one finite thick envelope; closure under cones puts Q there as well.
-This only identifies connecting components: the difference from f can be nonzero
-and must still be lifted to Y and factored separately. -/
+thick object. Source: Stacks Project, Derived Categories, Tag 09SP.
+-/
 theorem compact_triangle_connecting_approximation
     {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]

@@ -20,9 +20,9 @@ import all WeilConjectures.CategoryTheory.ColimitStageKanCocone
 
 /-! # A stagewise Kan comparison cocone is colimiting
 
-Source: Stacks Project, Sites, Tag 0A35, arbitrary-object section formula;
-Modules on Sites, Tag 03CO, for abelian colimits.
-(blueprint: lem-weil-pbc-colimit-stage-abelian-kan-cocone).
+## References
+
+* Stacks Project, Sites, Tag 0A35 and Modules on Sites, Tag 03CO.
 -/
 
 @[expose] public section
@@ -455,39 +455,7 @@ The supplied stage transitions satisfy identity and composition componentwise
 as objects of Arrow(Ab), which includes their endpoint transports.
 This is a presheaf result: it uses neither a topology nor sheaf adjunctions.
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-arbitrary-object section formula and independence of choices; Modules on Sites,
-Tag 03CO, for abelian colimits.
-(blueprint: lem-weil-pbc-colimit-stage-abelian-kan-cocone).
-
-Proof: Evaluate at U of F(j). By the pointwise Kan presentation, every element of
-B(t)(V(j)U) is a finite sum of generators, each a stage section x paired with an
-arrow from V(j)U to V(t.right)X. The arrow colimit lifts these finitely many arrows
-to a common later stage. The object
-colimit makes its endpoints agree with the images of U and X after a further
-refinement. Refine once more to receive k and equalize the two maps from i; this
-makes the resulting stage an object of Under k and its image under Under.map a the
-chosen refinement in Under i. Restriction of the transported section along the
-lifted arrow, followed by e.inv, is a representative in D. The compatibility of
-beta with theta and the prescribed formula hnu identify its image with the given
-generator. Additivity puts the finite sum into one D section at a common stage.
-This proves surjectivity of the comparison from colimit D.
-
-For injectivity, equality in colimit B is eventual equality at one stage because
-Under i is filtered. At that stage, a pointwise Kan colimit equality is a finite
-additive combination of generating linearity and restriction relations. Lift all objects and
-arrows of this chain into a
-common stage using the object and arrow colimits, and make every asserted equation
-hold by the filtered-set eventual-equality criterion. Equalize the maps out of k.
-At the resulting object of Under k, Kan relations are the naturality equations for
-beta, while outer transition relations become the D transitions by hD. Linearity relations hold
-because all section maps are group homomorphisms.
-Thus the
-two representatives agree in colimit D. Identity and composition of theta
-allow all refinements in the finite chain to be compared at this single stage.
-These bijections are additive components of the map induced by nu, so naturality is
-already known. It is an isomorphism of
-presheaves, and nu is colimiting by transport from the colimit cocone of D.
+Stacks Project, Sites, Tag 0A35 and Modules on Sites, Tag 03CO.
 -/
 theorem colimit_stage_abelian_kan_cocone
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})

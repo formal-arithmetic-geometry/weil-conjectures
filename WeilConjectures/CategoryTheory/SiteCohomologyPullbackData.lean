@@ -16,7 +16,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 /-! # Families and normalization for pullback on object cohomology
 
 Source: Stacks Project, Cohomology, Tags 01F7, 01F8 and 01FB.
-(blueprint: lem-weil-pbc-site-cohomology-pullback-data)
 -/
 
 @[expose] public section

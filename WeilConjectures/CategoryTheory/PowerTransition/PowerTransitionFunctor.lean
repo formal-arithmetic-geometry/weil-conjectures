@@ -26,16 +26,12 @@ variable {C : Type u} [Category.{v} C]
 section
 variable [Preadditive C]
 
-/-- Multiply every successive transition by l.
-Source: simultaneous coefficient resolution in the diagonal-tower proof.
-(blueprint: def-sfb-power-transition-functor). -/
+/-- Multiply every successive transition by l. -/
 def obj (l : ℕ) (X : ℕᵒᵖ ⥤ C) : ℕᵒᵖ ⥤ C :=
   Functor.ofOpSequence (X := fun n ↦ X.obj (op n))
     (fun n ↦ l • X.map (homOfLE (Nat.le_succ n)).op)
 
-/-- Twisting keeps the components of every morphism.
-Source: the same simultaneous coefficient resolution.
-(blueprint: def-sfb-power-transition-functor). -/
+/-- Twisting keeps the components of every morphism. -/
 def functor (l : ℕ) : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ C) where
   obj := obj l
   map f := NatTrans.ofOpSequence (fun n ↦ f.app (op n)) (fun n ↦ by
@@ -49,9 +45,7 @@ def functor (l : ℕ) : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ C) where
 instance additive (l : ℕ) : (functor (C := C) l).Additive where
   map_add := by intros; ext n; rfl
 
-/-- Multiplication by l^(n+1) is a natural map from the twisted tower to the original.
-Source: simultaneous coefficient resolution in the diagonal-tower proof.
-(blueprint: def-sfb-power-transition-functor). -/
+/-- Multiplication by l^(n+1) is a natural map from the twisted tower to the original. -/
 def multiplication (l : ℕ) : functor (C := C) l ⟶ 𝟭 _ where
   app X := NatTrans.ofOpSequence (fun n ↦ l ^ (n + 1) • 𝟙 (X.obj (op n)))
     (fun n ↦ by
@@ -73,9 +67,7 @@ def multiplication (l : ℕ) : functor (C := C) l ⟶ 𝟭 _ where
 
 end
 
-/-- Twisting does not change the evaluated cochain map, hence preserves quasi-isomorphisms.
-Source: exactness of evaluation of towers; Mathlib's quasiIso_iff_evaluation.
-(blueprint: def-sfb-power-transition-functor). -/
+/-- Twisting does not change the evaluated cochain map, hence preserves quasi-isomorphisms. -/
 theorem quasiIso_map [Abelian C] (l : ℕ) {P K : CochainComplex (ℕᵒᵖ ⥤ C) ℤ}
     (q : P ⟶ K) [QuasiIso q] :
     QuasiIso (((functor l).mapHomologicalComplex (.up ℤ)).map q) := by

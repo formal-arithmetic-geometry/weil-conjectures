@@ -105,8 +105,7 @@ categories with triangulated transition functors, the pair category is an idempo
 triangulated category, the canonical functor to its Karoubi envelope is an equivalence and is
 triangulated, and the stage inclusions `ι i` are triangulated functors.
 
-The linearity statement of the blueprint (`ℚ̄_ℓ`-linearity of the pair category and
-`E`-linearity of the inclusions) involves coefficient fields varying with the stage and is not
+Linearity (`ℚ̄_ℓ`-linearity of the pair category and `E`-linearity of the inclusions) is not
 part of this abstract statement. -/
 theorem idempotentComplete_triangulation [∀ i, IsTriangulated (C i)]
     [∀ i, IsIdempotentComplete (C i)] :

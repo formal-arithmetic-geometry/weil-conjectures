@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 
 Let `C` be a pretriangulated category and `P : ObjectProperty C`, with localizing closure
 `Loc(P) = P.localizingClosure` (`WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure`).
-The arguments of the blueprint which extend a statement from `P` to `Loc(P)` ("the objects
+The arguments which extend a statement from `P` to `Loc(P)` ("the objects
 satisfying it form a localizing subcategory containing `P`") are collected here. They only need
 the functors involved to be triangulated and to preserve the coproducts of objects of `Loc(P)`
 (`CategoryTheory.Functor.PreservesCoproductsOn`), not all coproducts: for instance the proper
@@ -21,8 +21,7 @@ direct image preserves direct sums on `Loc(Dctf)` but not on the whole derived c
 
 ## Main results
 
-- `CategoryTheory.NatTrans.isIso_app_of_localizingClosure` (blueprint
-  `lemma-checking-isomorphisms-constructible-complexes--1`): a natural transformation of
+- `CategoryTheory.NatTrans.isIso_app_of_localizingClosure`: a natural transformation of
   triangulated functors, compatible with the shifts, between functors preserving the coproducts of
   objects of `Loc(P)`, which is an isomorphism on the objects of `P`, is an isomorphism on `Loc(P)`.
 - `CategoryTheory.NatTrans.isIso_app_app_of_localizingClosure`: the same in two variables, for
@@ -140,7 +139,7 @@ namespace NatTrans
 variable {F₁ F₂ : C ⥤ D} [F₁.CommShift ℤ] [F₂.CommShift ℤ] [F₁.IsTriangulated]
   [F₂.IsTriangulated] (τ : F₁ ⟶ F₂) [NatTrans.CommShift τ ℤ]
 
-/-- Blueprint `lemma-checking-isomorphisms-constructible-complexes--1`, for the localizing closure:
+/-- for the localizing closure:
 let `τ : F₁ ⟶ F₂` be a natural transformation of triangulated functors, compatible with the shifts,
 where `F₁` and `F₂` preserve the coproducts of objects of `Loc(P)`. If `τ` is an isomorphism on the
 objects of `P`, it is an isomorphism on the objects of `Loc(P)`: the objects of `Loc(P)` on which

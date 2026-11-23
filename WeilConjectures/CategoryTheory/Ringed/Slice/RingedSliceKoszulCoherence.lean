@@ -28,8 +28,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.MonoidalCompa
 
 /-! # Slice Koszul compatibility
 
-Source: Stacks Project, Tags 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-koszul-coherence).
+Source: Stacks Project, Tags 07A4, 08J9 and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -164,12 +163,7 @@ attribute [local irreducible] coefficientTotalTensor ringedSliceDerivedRestricti
 -- The representative squares compare long dependent tensor endpoints at independent universes.
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction preserves the normalized Koszul exchange.
-Source: Stacks Project, Tags 06YN and 07A4
-(blueprint: lem-weil-pbc-ringed-slice-koszul-coherence).
-Proof: compare the two chain maps on sheafified pure-tensor summands. Both send
-x tensor y in bidegree (p,q) to (-1)^(pq) y tensor x. The representative squares
-for rho and both symmetries identify their localizations. Naturality transports
-this equality along flat-term K-flat resolutions to arbitrary derived objects. -/
+Source: Stacks Project, Tags 06YN and 07A4. -/
 theorem ringedSlice_koszul_coherence
     (U : C) [HasDerivedCategory.{w'} (SheafOfModules.{max c v u} ((sheafCompose (J.over U) (forget₂
       CommRingCat.{max c v u} RingCat.{max c v u})).obj (A.over U)))]

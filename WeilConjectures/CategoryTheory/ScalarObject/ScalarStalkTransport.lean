@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.Grp.AB
 /-! # Scalar enhancement of a geometric stalk equivalence
 
 Source: Stacks Project, Tag 04JQ, transport of scalars across the abelian equivalence.
-(blueprint: lem-exc-scalar-stalk-transport)
 -/
 
 @[expose] public section

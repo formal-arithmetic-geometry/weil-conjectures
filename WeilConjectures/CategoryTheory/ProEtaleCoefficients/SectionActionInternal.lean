@@ -32,10 +32,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.CategoryTheory.SectionActionInternal
 
 /-! # Normalized lifting of sectionwise actions
-
-Source: blueprint main-20261015, `lem-sfb-subfield-flat.proof.md`, first two sentences;
-the expanded proof of `lem-sfb-section-action-internal`.
-(blueprint: lem-sfb-section-action-internal).
 -/
 
 @[expose] public noncomputable section
@@ -53,30 +49,22 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   (J : GrothendieckTopology C)
 
 /-- Sectionwise module sheaves, using existing presheaf module objects and the
-full subcategory of objects whose underlying abelian presheaf is a sheaf.
-Source: the category specified in lem-sfb-section-action-internal
-(blueprint: lem-sfb-section-action-internal). -/
+full subcategory of objects whose underlying abelian presheaf is a sheaf. -/
 abbrev sfbSectionModules (B : Cᵒᵖ ⥤ AddCommGrpCat.{w}) [MonObj B] :=
   ObjectProperty.FullSubcategory
     (fun M : Mod (Cᵒᵖ ⥤ AddCommGrpCat.{w}) B => Presheaf.IsSheaf J M.X)
 
-/-- The unchanged underlying abelian sheaf of a sectionwise module.
-Source: lem-sfb-section-action-internal, underlying-sheaf clause
-(blueprint: lem-sfb-section-action-internal). -/
+/-- The unchanged underlying abelian sheaf of a sectionwise module. -/
 def sfbSectionUnderlying {B : Cᵒᵖ ⥤ AddCommGrpCat.{w}} [MonObj B]
     (M : sfbSectionModules J B) : Sheaf J AddCommGrpCat.{w} :=
   ⟨M.obj.X, M.property⟩
 
-/-- The coefficient abelian sheaf with its existing canonical internal ring structure.
-Source: det-def-sfb-ring-object-sheaf, applied to a commutative ring sheaf
-(blueprint: lem-sfb-section-action-internal). -/
+/-- The coefficient abelian sheaf with its existing canonical internal ring structure. -/
 abbrev sfbSectionCoefficient (B : Sheaf J CommRingCat.{w}) : Sheaf J AddCommGrpCat.{w} :=
   (sheafCompose J (forget₂ RingCat.{w} AddCommGrpCat.{w})).obj
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B)
 
-/-- The existing pointwise ring object on the coefficient presheaf.
-Source: det-def-sfb-ring-object-sheaf and the sectionwise multiplication in the node
-(blueprint: lem-sfb-section-action-internal). -/
+/-- The existing pointwise ring object on the coefficient presheaf. -/
 instance sfbSectionCoefficient_presheafMonObj (B : Sheaf J CommRingCat.{w}) :
     MonObj (sfbSectionCoefficient J B).obj :=
   Functor.monObjCompForget₂

@@ -17,7 +17,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Tensor normalization of a unit-normalized Roos comparison
 
 Source: Stacks Tag 0941, product-cone comparison and ordinary-limit inclusion.
-(blueprint: lem-pur-roos-tensor-normalization).
 -/
 
 -- After pruning, this module only keeps private declarations.

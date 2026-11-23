@@ -16,7 +16,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 /-!
 
 # Shortcut instances for monoidal derived category
-
 -/
 
 @[expose] public section

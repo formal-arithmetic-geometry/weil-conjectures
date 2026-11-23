@@ -18,8 +18,7 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 /-!
 # Quasi-isomorphisms from a filtered resolution union
 
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, union and part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso).
+Source: Stacks Project, More on Algebra, Tag 0H7X.
 -/
 
 @[expose] public section
@@ -32,9 +31,7 @@ namespace CategoryTheory
 
 /-- A basic filtered complex is degreewise free, with free filtered steps and free graded
 pieces, and with zero differential.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, definition of a basic filtered complex
-(blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 def IsBasicFilteredComplex {R : Type u} [CommRing R]
     (B : WeilFilteredObject
       (CochainComplex (ModuleCat.{v} R) ℤ)) : Prop :=
@@ -122,8 +119,7 @@ private theorem union_quasiIso {R : Type u} [CommRing R]
           congrArg (fun a ↦ HomologicalComplex.homologyMap a n) (hf 0))
 
 /-- The restriction of a filtered morphism to the `p`-th step commutes with the step arrows.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem WeilFilteredObject.restriction_arrow {C : Type*} [Category* C] [Abelian C]
     {A B : WeilFilteredObject C} (φ : A ⟶ B) (p : ℤ) :
     WeilFilteredObject.restriction φ p ≫ (B.filtration.F p).arrow =
@@ -132,8 +128,7 @@ theorem WeilFilteredObject.restriction_arrow {C : Type*} [Category* C] [Abelian 
 
 /-- The filtration-step restriction of a composite filtered morphism is the composite of the
 restrictions, since the step arrows are monomorphisms.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem WeilFilteredObject.restriction_comp {C : Type*} [Category* C] [Abelian C]
     {A B D : WeilFilteredObject C} (φ : A ⟶ B) (ψ : B ⟶ D) (p : ℤ) :
     WeilFilteredObject.restriction (φ ≫ ψ) p =
@@ -144,16 +139,14 @@ theorem WeilFilteredObject.restriction_comp {C : Type*} [Category* C] [Abelian C
   rfl
 
 /-- The short exact sequence `0 → F^{p+1} → F^p → gr^p → 0` of a filtered object.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable def WeilFilteredObject.grShortComplex {C : Type*} [Category* C] [Abelian C]
     (A : WeilFilteredObject C) (p : ℤ) : ShortComplex C :=
   ShortComplex.mk (Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p)
     (A.filtration.F_succ_le p)) (cokernel.π _) (cokernel.condition _)
 
 /-- The sequence `0 → F^{p+1} → F^p → gr^p → 0` is short exact.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem WeilFilteredObject.grShortComplex_shortExact {C : Type*} [Category* C] [Abelian C]
     (A : WeilFilteredObject C) (p : ℤ) : (A.grShortComplex p).ShortExact :=
   ShortComplex.ShortExact.mk'
@@ -164,8 +157,7 @@ theorem WeilFilteredObject.grShortComplex_shortExact {C : Type*} [Category* C] [
       infer_instance)
 
 /-- Step restriction of filtered morphisms commutes with the inclusions of steps.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem WeilFilteredObject.ofLE_comp_restriction {C : Type*} [Category* C] [Abelian C]
     {A B : WeilFilteredObject C} (φ : A ⟶ B) (p : ℤ) :
     Subobject.ofLE (A.filtration.F (p + 1)) (A.filtration.F p) (A.filtration.F_succ_le p) ≫
@@ -179,8 +171,7 @@ theorem WeilFilteredObject.ofLE_comp_restriction {C : Type*} [Category* C] [Abel
 
 /-- A map of graded pieces compatible with a filtered morphism gives a morphism of the short
 exact sequences `0 → F^{p+1} → F^p → gr^p → 0`.
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 noncomputable def WeilFilteredObject.grShortComplexMap {C : Type*} [Category* C] [Abelian C]
     {A B : WeilFilteredObject C} (φ : A ⟶ B) (p : ℤ) (g : A.filtration.gr p ⟶ B.filtration.gr p)
     (hg : cokernel.π _ ≫ g = WeilFilteredObject.restriction φ p ≫ cokernel.π _) :
@@ -196,8 +187,7 @@ compatibly to a filtered complex `K` maps quasi-isomorphically to `K`, on the to
 on every filtration step and on every graded piece, provided `f₀` is surjective on cohomology
 (totally and on each step) and each inclusion kills the kernel of `H(f_m)` (totally and on
 each step).
-Source: Stacks Project, More on Algebra, Tag 0H7X, lemma-resolution-filtered-complex,
-proof, union and part (3) (blueprint: lem-pur-kunneth-filtered-union-quasiiso). -/
+Source: Stacks Project, More on Algebra, Tag 0H7X. -/
 theorem filteredUnion_quasiIso {R : Type u} [CommRing R]
     (P : ℕ → WeilFilteredObject (CochainComplex (ModuleCat.{v} R) ℤ))
     (inc : ∀ m, P m ⟶ P (m + 1))

@@ -35,24 +35,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Shift transport of the derived unit on a single object.
 
-Source: Stacks Project, derived.tex, Tag 015J, proof remark (1), and the
-canonical single-functor, quotient and homology shift comparisons.
-(blueprint: lem-pc-right-derived-single-unit-shift-transport)
-
-Proof: Use the canonical shift isomorphism from single_n X to single_0 X[-n]
-in the bounded-below homotopy category. Naturality of rightDerivedFunctorPlusUnith
-along this isomorphism, followed by its NatTrans.CommShift equation at -n, moves
-the unit to degree zero. The canonical single/quotient identification e converts
-the target to the derived single object; its naturality identifies this with the
-first factor of c. The right-derived commShift comparison gives the second
-factor of c. Apply H^n and use naturality of H₀.shiftIso to move the unit through
-the homology shift comparison, giving the third factor of c. On the source,
-mapHomotopyCategoryPlusSingleFunctorQhObjIso identifies the mapped single object
-with the single object on G(X); compatibility of singleMapHomologicalComplex
-with shifts gives d. The degree-zero unit, with its single/quotient identifications,
-is precisely rightDerivedPlusSingleUnit. Thus the two paths in this naturality
-square are the displayed composites. This uses no cycles projection and no
-classical derived-functor comparison. -/
+Source: Stacks Project, Tag 015J, and the
+canonical single-functor, quotient and homology shift comparisons. -/
 theorem rightDerivedPlusSingleUnit_shift_transport (X : B) (n : ℕ) :
     let S : CochainComplex.Plus B :=
       ⟨(CochainComplex.singleFunctor B (n : ℤ)).obj X, n, inferInstance⟩

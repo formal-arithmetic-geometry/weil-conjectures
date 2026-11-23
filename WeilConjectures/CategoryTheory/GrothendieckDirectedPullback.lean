@@ -70,8 +70,7 @@ private lemma iSup_pullback_eq_top_epi (f : X ⟶ Y) [Epi f]
     (Subobject.epi_iff_mk_eq_top U.arrow).1 inferInstance
 
 /-- Pulling back a directed union along a map that factors through that union gives
-a family with union the whole source. Source: Stacks Project, Tag 079A, AB5.
-(auxiliary; not a blueprint node). -/
+a family with union the whole source. Source: Stacks Project, Tag 079A, AB5. -/
 theorem iSup_pullback_eq_top_of_factors (f : X ⟶ Y)
     (S : ι → Subobject Y) (hS : Directed (· ≤ ·) S)
     (h : (⨆ i, S i).Factors f) :

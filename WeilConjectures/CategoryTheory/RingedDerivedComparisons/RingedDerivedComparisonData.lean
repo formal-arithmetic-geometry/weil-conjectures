@@ -178,9 +178,8 @@ public import Mathlib.CategoryTheory.Sites.EpiMono
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 /-! # Data for normalized derived monoidal comparisons on ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D, 07A6, 0D6E, 0FPI;
-Modules on Sites, Tags 03D7, 03D8, 03EL
-(blueprint: def-sfb-ringed-derived-comparison-data).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D, 07A6, 0D6E, 0FPI; Modules on Sites,
+Tags 03D7, 03D8, 03EL.
 
 The structures below only package the simultaneous witnesses of the statement. In
 particular an ordinary pullback is tied to the geometric morphism by scalar extension
@@ -208,7 +207,7 @@ namespace CategoryTheory.RingedDerivedComparisons
 
 set_option linter.checkUnivs false in
 /-- A presentation of the ordinary derived category with its recorded signed tensor model.
-Source: Stacks 0FPT, 06YN (blueprint: def-sfb-ringed-derived-comparison-data).
+Source: Stacks 0FPT, 06YN.
 These are the witnesses of `ringedDerived_closed_symmetric_monoidal`, not new tensor data. -/
 structure Site where
   C : Type u
@@ -225,38 +224,37 @@ structure Site where
 attribute [instance] Site.category Site.derived
 
 /-- The recorded ring sheaf, with commutativity forgotten.
-Source: Stacks 03D7 (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 03D7. -/
 abbrev Site.ring (X : Site.{u, w}) :=
   (sheafCompose X.J (forget₂ CommRingCat.{u} RingCat.{u})).obj X.A
 
 /-- The existing module category of a corner.
-Source: Stacks 03D7 (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 03D7. -/
 abbrev Site.modules (X : Site.{u, w}) := ringedSiteModules.{u, u, u, u} X.ring
 
 /-- The ordinary unbounded derived category of that module category.
-Source: Stacks 05RR (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 05RR. -/
 abbrev Site.D (X : Site.{u, w}) := DerivedCategory.{w} X.modules
 
 /-- The underlying sheaf functor used to specify ordinary scalar-extension insertion.
-Source: Stacks 03D7 (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 03D7. -/
 abbrev Site.sets (X : Site.{u, w}) :=
   toSheaf X.ring ⋙ sheafCompose X.J (CategoryTheory.forget AddCommGrpCat.{u})
 
 /-- The tensor corner of the existing projection-mate interface, with this very tensor.
-Source: Stacks 07A4 (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 07A4. -/
 def Site.corner (X : Site.{u, w}) : RingedTensorCorner.{u, w} where
   site := X.C
   topology := X.J
   ring := X.A
   tensor := X.closed.tensor
 
-/-- Morphisms are exactly the DAG's geometric ringed-topos morphisms.
-Source: Stacks 03D7 (blueprint: def-sfb-ringed-derived-comparison-data). -/
+/-- Morphisms are the geometric morphisms of ringed topoi.
+Source: Stacks 03D7. -/
 abbrev Morphism (X Y : Site.{u, w}) := RingedToposMorphism X.ring Y.ring
 
 /-- All normalization data for one of the statement's pullback/direct-image pairs.
-Source: Stacks 07A4, 07A6, 0FPI, 03D7
-(blueprint: def-sfb-ringed-derived-comparison-data).
+Source: Stacks 07A4, 07A6, 0FPI, 03D7.
 The `CoreMonoidal` maps are inverse to the displayed tensor/unit comparisons. -/
 structure Lift {X Y : Site.{u, w}} (f : Morphism X Y) where
   edge : RingedTensorEdge Y.corner X.corner
@@ -338,33 +336,32 @@ attribute [instance] Lift.right_additive
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
 /-- Scalar-extension insertion referred to the given geometric inverse image.
-Source: Stacks 03D7, 03EL (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 03D7, 03EL. -/
 def Lift.insertion {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift f) (M : Y.modules) :
     f.inverse.obj (Y.sets.obj M) ⟶ X.sets.obj (l.edge.pullback.obj M) :=
   eqToHom (congrArg (fun F ↦ F.obj (Y.sets.obj M)) l.inverse_eq.symm) ≫ l.edge.insertion M
 
 /-- The canonical K-flat representative map, without a new choice of isomorphism.
-Source: Stacks 06YY, 0FPI (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 06YY, 0FPI. -/
 abbrev Lift.alpha {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift f)
     (P : CochainComplex Y.modules ℤ) :=
   derivedPullbackComplexComparison l.edge.pullback l.edge.left l.edge.epsilon P
 
 /-- The inverse tensorator, equal to the uniquely characterized canonical tensor comparison.
-Source: Stacks 07A4 (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 07A4. -/
 abbrev Lift.tensor {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift f) (U V : Y.D) :=
   (@Functor.CoreMonoidal.μIso Y.D _ Y.closed.monoidal X.D _ X.closed.monoidal
     l.edge.left l.monoidal U V).symm
 
 /-- The inverse unit comparison; its degree-zero normalization is `unit_canonical`.
-Source: Stacks 07A4, 03EL (blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 07A4, 03EL. -/
 abbrev Lift.unit {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift f) :=
   (@Functor.CoreMonoidal.εIso Y.D _ Y.closed.monoidal X.D _ X.closed.monoidal
     l.edge.left l.monoidal).symm
 
 /-- Normalization for a composite represented by the specified geometric path isomorphism.
 The ordinary comparison is fixed by insertion, and kappa by its right-derived units.
-Source: Stacks 0D6D, 0D6E, 07A6, 03D8
-(blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 0D6D, 0D6E, 07A6, 03D8. -/
 structure Composition {X Y Z : Site.{u, w}}
     {f : Morphism X Y} {g : Morphism Y Z} {k : Morphism X Z}
     (lf : Lift f) (lg : Lift g) (lk : Lift k)
@@ -414,8 +411,7 @@ structure Composition {X Y Z : Site.{u, w}}
       lf.edge.derivedAdjunction.counit.app E = lk.edge.derivedAdjunction.counit.app E
 
 /-- Identity normalization, including the specified tensor and the entire adjunction.
-Source: Stacks 07A4, 07A6, 03D7
-(blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 07A4, 07A6, 03D7. -/
 structure Identity {X : Site.{u, w}} {f : Morphism X X} (l : Lift f)
     (θ : f.inverse ≅ 𝟭 (Sheaf X.J (Type u))) where
   ordinary : l.edge.pullback ≅ 𝟭 X.modules
@@ -446,8 +442,7 @@ structure Identity {X : Site.{u, w}} {f : Morphism X X} (l : Lift f)
 
 /-- Transport along the given, ring-compatible geometric 2-isomorphism.
 The insertion equation fixes its value on every generalized scalar-extension generator.
-Source: Stacks 03D7, 03EL, 07A4, 07A6
-(blueprint: def-sfb-ringed-derived-comparison-data). -/
+Source: Stacks 03D7, 03EL, 07A4, 07A6. -/
 structure TwoIso {X Y : Site.{u, w}} {h k : Morphism X Y}
     (lh : Lift h) (lk : Lift k) (θ : h.inverse ≅ k.inverse) where
   ordinary : lh.edge.pullback ≅ lk.edge.pullback
@@ -481,8 +476,7 @@ structure TwoIso {X Y : Site.{u, w}} {h k : Morphism X Y}
 
 set_option linter.checkUnivs false in
 /-- All clauses of the normalization statement, universally over the presented sites.
-Source: Stacks 07A4, 0D6D, 07A6, 0D6E, 0FPI
-(blueprint: def-sfb-ringed-derived-comparison-data).
+Source: Stacks 07A4, 0D6D, 07A6, 0D6E, 0FPI.
 The auxiliary morphism k is the composite represented by theta; allowing any such
 presentation also retains arbitrary ring-compatible path isomorphisms. -/
 structure System where

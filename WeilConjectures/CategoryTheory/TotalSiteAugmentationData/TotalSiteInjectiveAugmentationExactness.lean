@@ -19,8 +19,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Exact injective augmentation on a total simplicial site
 
-Source: Stacks Project, `spaces-simplicial.tex`, Tag 0D79, lemma-augmentation-cech-complex
-(blueprint: lem-trf-total-site-injective-augmentation-exactness).
+Source: Stacks Project, `spaces-simplicial.tex`, Tag 0D79.
 
 The component categories and their coherent inverse-image geometric morphisms are
 represented by `TotalSiteSystemData`; `a` gives the component augmentations and their
@@ -43,8 +42,7 @@ open scoped BigOperators
 namespace CategoryTheory
 
 /-- A compatible family of component objects, with the identity and composition laws.
-Source: Stacks Project, Tag 09WF and the preceding system description
-(blueprint: lem-trf-total-site-component-restriction). -/
+Source: Stacks Project, Tag 09WF and the preceding system description. -/
 structure TotalSiteCompatibleSystem
     (A : SimplexCategoryᵒᵖ → Type v) [∀ i, Category.{w} (A i)]
     (pull : ∀ {i j : SimplexCategoryᵒᵖ}, (j ⟶ i) → A i ⥤ A j)
@@ -59,7 +57,7 @@ structure TotalSiteCompatibleSystem
       (pull g).map (transition f) ≫ transition g
 
 /-- Morphisms of the actual compatible families are compatible component maps.
-Source: Stacks Project, Tag 09WF (blueprint: lem-trf-total-site-component-restriction). -/
+Source: Stacks Project, Tag 09WF. -/
 structure TotalSiteCompatibleMorphism
     {A : SimplexCategoryᵒᵖ → Type v} [∀ i, Category.{w} (A i)]
     {pull : ∀ {i j : SimplexCategoryᵒᵖ}, (j ⟶ i) → A i ⥤ A j}
@@ -77,8 +75,7 @@ structure TotalSiteCompatibleMorphism
 isomorphisms. Together these are the equivalence criterion, with evaluation given by
 `component`. No arbitrary category with transitions qualifies. `pull_id_left`,
 `pull_id_right`, and `pull_assoc` are the two unit laws and the full cocycle identity.
-Source: Stacks Project, Tags 09WF and 09WG
-(blueprint: lem-trf-total-site-component-restriction). -/
+Source: Stacks Project, Tags 09WF and 09WG. -/
 structure TotalSiteSystemData
     (A : SimplexCategoryᵒᵖ → Type v)
     [∀ i, Category.{w} (A i)]
@@ -132,8 +129,7 @@ attribute [instance] TotalSiteSystemData.component_additive
 
 /-- The direct-image comparison corresponding by adjunction to an identity
 inverse-image comparison.  Source: Stacks Project, `spaces-simplicial.tex`,
-the identity coherence in the simplicial augmentation (blueprint:
-`lem-trf-total-site-injective-augmentation-exactness`). -/
+the identity coherence in the simplicial augmentation. -/
 noncomputable def augmentationDirectIdIso {E : Type u₁}
     [Category.{v₁} E] (m : GeometricMorphism E E)
     (h : m.inverse ≅ 𝟭 E) : m.direct ≅ 𝟭 E :=
@@ -141,8 +137,7 @@ noncomputable def augmentationDirectIdIso {E : Type u₁}
 
 /-- The direct-image comparison corresponding by adjunction to a composition
 inverse-image comparison.  Source: Stacks Project, `spaces-simplicial.tex`,
-the composition coherence in the simplicial augmentation (blueprint:
-`lem-trf-total-site-injective-augmentation-exactness`). -/
+the composition coherence in the simplicial augmentation. -/
 noncomputable def augmentationDirectCompIso {E : Type u₁} {F : Type u₂} {G : Type u₃}
     [Category.{v₁} E] [Category.{v₂} F] [Category.{v₃} G]
     (m : GeometricMorphism E G) (f : GeometricMorphism F G)
@@ -155,8 +150,7 @@ noncomputable def augmentationDirectCompIso {E : Type u₁} {F : Type u₂} {G :
 common abelian sheaf category.  The fields are the site morphisms, their identity and
 composition coherences, the compatible-system presentation of the total site, the
 component augmentation morphisms and their coherences, and the induced total
-augmentation.  Source: Stacks Project, Tags 09WF, 09WG and 0D79
-(blueprint: lem-trf-total-site-injective-augmentation-exactness). -/
+augmentation.  Source: Stacks Project, Tags 09WF, 09WG and 0D79. -/
 structure TotalSiteAugmentationData
     (A : SimplexCategoryᵒᵖ → Type v)
     [∀ i, Category.{w} (A i)] [∀ i, Abelian (A i)]
@@ -202,9 +196,7 @@ variable {A : SimplexCategoryᵒᵖ → Type v}
 
 /-- The coface map induced by the transition along the `i`-th face, using the
 adjunction `(u face).inverse ⊣ (u face).direct` and the coherence `aComp`.
-Source: Stacks Project, `spaces-simplicial.tex`, Tag 0D79,
-lemma-augmentation-cech-complex, Hom-adjunction construction
-(blueprint: lem-trf-total-site-injective-augmentation-exactness). -/
+Source: Stacks Project, `spaces-simplicial.tex`, Tag 0D79, Hom-adjunction construction. -/
 noncomputable def faceMap (I : T) (p : ℕ) (i : Fin (p + 2)) :
     (S.a (Opposite.op (SimplexCategory.mk p))).direct.obj
         ((S.system.component (Opposite.op (SimplexCategory.mk p))).obj I) ⟶
@@ -217,9 +209,7 @@ noncomputable def faceMap (I : T) (p : ℕ) (i : Fin (p + 2)) :
       (S.aComp (SimplexCategory.δ i).op).inv.app _
 
 /-- The alternating face differential in degree `p`.
-Source: Stacks Project, `spaces-simplicial.tex`, Tags 0D78 and 0D79,
-lemma-simplicial-resolution-augmentation and lemma-augmentation-cech-complex
-(blueprint: lem-trf-total-site-injective-augmentation-exactness). -/
+Source: Stacks Project, `spaces-simplicial.tex`, Tags 0D78 and 0D79 and. -/
 noncomputable def differential (I : T) (p : ℕ) :
     (S.a (Opposite.op (SimplexCategory.mk p))).direct.obj
         ((S.system.component (Opposite.op (SimplexCategory.mk p))).obj I) ⟶
@@ -229,9 +219,7 @@ noncomputable def differential (I : T) (p : ℕ) :
 
 /-- The augmentation map, mate to the degree-zero component of the counit of the
 induced total geometric morphism.
-Source: Stacks Project, `spaces-simplicial.tex`, Tag 0D79,
-lemma-augmentation-cech-complex, augmentation under the Hom adjunction
-(blueprint: lem-trf-total-site-injective-augmentation-exactness). -/
+Source: Stacks Project, `spaces-simplicial.tex`, Tag 0D79, augmentation under the Hom adjunction. -/
 noncomputable def augmentation (I : T) :
     S.total.direct.obj I ⟶
       (S.a (Opposite.op (SimplexCategory.mk 0))).direct.obj

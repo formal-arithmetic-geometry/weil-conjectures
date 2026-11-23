@@ -11,10 +11,6 @@ public import Mathlib.Algebra.Group.Int.Defs
 import Mathlib.Data.Int.Basic
 
 /-! # Extending a degree-one shift comparison
-
-Source: iteration and inverse iteration in the proof of
-lem-sc-derived-pullback-tensor-unit-shift, using the shift addition isomorphisms.
-(blueprint: lem-sc-integer-shift-from-one).
 -/
 
 @[expose] public section
@@ -114,26 +110,7 @@ private lemma iterated_add' (a : I(1 : ℤ)) (n m k : ℤ) (h : n + m = k) :
 
 
 /-- A natural isomorphism commuting with translation by one extends to an integer
-shift structure.
-
-Source: the iteration step of lem-sc-derived-pullback-tensor-unit-shift.
-(blueprint: lem-sc-integer-shift-from-one).
-
-Proof. Postcomposition with shift by one is fully faithful. Given a comparison
-at n+1, compose its hom with the inverse of a and with the source and target
-shift addition maps, then take its unique preimage under that postcomposition.
-This gives the comparison at n. Functor.map_preimage and cancellation show that
-adding a to it recovers the given comparison at n+1. Addition on the right by
-any comparison is injective, by faithfulness of its shift and cancellation of
-its isomorphisms. Start at the canonical zero comparison and use integer
-recursion, adding a upwards and taking the preimage downwards. The successor
-identity holds on both sides of zero by the inverse-step calculation. Prove the
-addition identity by integer induction on the second summand: the zero case is
-the zero identity; the successor case is CommShift.isoAdd'_assoc; the predecessor
-case follows by adding a on the right, using associativity and the successor
-identity, then cancelling. The comparison at one is a by the left zero identity.
-This proves both CommShift equations and works also for zero functors and zero
-categories. -/
+shift structure. -/
 theorem exists_commShift_of_one
     {C D : Type*} [Category C] [Category D] [HasShift C ℤ] [HasShift D ℤ]
     (F : C ⥤ D) (a : shiftFunctor C (1 : ℤ) ⋙ F ≅ F ⋙ shiftFunctor D (1 : ℤ)) :

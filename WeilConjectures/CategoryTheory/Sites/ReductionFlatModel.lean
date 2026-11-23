@@ -19,8 +19,6 @@ The termwise reduction `P / I P` (`CategoryTheory.Sheaf.quotSMulTop`) is a compl
 sheaves of `R ⧸ I`-modules in degrees `[a, b]`; hence it has Tor amplitude in `[a, b]` over
 `R ⧸ I`, and with scalars restricted back to `R` it is
 `P ⊗ (R ⧸ I)`, which computes `K ⊗ᴸ (R ⧸ I)` (`CategoryTheory.Sheaf.flatModel_quotSMulTop`).
-
-This is the site-general content of blueprint `lem-sf-reduction-flat-model`.
 -/
 
 @[expose] public section
@@ -43,10 +41,7 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
 Noetherian ring `R`, concentrated in degrees `[a, b]`. Its termwise reduction `P' = P / I P` is a
 complex of flat sheaves of `R ⧸ I`-modules concentrated in degrees `[a, b]`, so `Q(P')` has Tor
 amplitude in `[a, b]` over `R ⧸ I`; and restricting the scalars of `Q(P')` back to `R` gives
-`Q(P ⊗ (R ⧸ I))`, which is the derived reduction `Q(P) ⊗ᴸ (R ⧸ I)` since `P` is K-flat.
-
-The terms of `P'` are flat by `CategoryTheory.Sheaf.flat_quotSMulTop_obj`; restricting scalars
-termwise gives `P ⊗ (R ⧸ I)` (`CategoryTheory.Sheaf.quotSMulTopCompRestrictScalarsIso`). -/
+`Q(P ⊗ (R ⧸ I))`, which is the derived reduction `Q(P) ⊗ᴸ (R ⧸ I)` since `P` is K-flat. -/
 theorem Sheaf.flatModel_quotSMulTop {a b : ℤ}
     (P : CochainComplex (Sheaf J (ModuleCat.{u + 1} R)) ℤ)
     [P.IsStrictlyGE a] [P.IsStrictlyLE b] (hP : ∀ n, ObjectProperty.flat (P.X n)) :

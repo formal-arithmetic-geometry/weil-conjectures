@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Descent of a compatible finite-stage adjunction
 
-Source: blueprint `thm-coef-qbar-verdier`, proof steps 6--8. Compatible units and
+Compatible units and
 counits descend as natural transformations. Their triangle identities are checked
 on the object at its own stage, so no separate Hom-colimit construction is needed.
 -/
@@ -33,16 +33,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
   (unit_eq : ∀ i, unit.τ i = (a i).unit)
   (counit_eq : ∀ i, counit.τ i = (a i).counit)
 
-/-- A stage-compatible adjunction descends with its actual finite unit and counit.
-Source: blueprint `thm-coef-qbar-verdier`, proof steps 6--8
-(blueprint: lem-coef-qbar-stage-adjunction-descent).
-
-Proof: descend the two compatible families using `descNatTrans`, and conjugate by
-the canonical identity and composition comparisons. These comparisons have identity
-components. At a pair `(i,x)` the left triangle is the inclusion of the left triangle
-of `a i`; the right triangle is its right triangle. Functoriality of inclusion proves
-both equations. This includes repeated stages and requires neither full faithfulness
-of the inclusions nor faithfulness of a scalar transition. -/
+/-- A stage-compatible adjunction descends with its actual finite unit and counit. -/
 def adjunction : F.functor ⊣ G.functor where
   unit := (functorIdIso (S := S)).inv ≫ descNatTrans unit ≫ (functorCompIso F G).hom
   counit := (functorCompIso G F).inv ≫ descNatTrans counit ≫
@@ -78,9 +69,7 @@ def adjunction : F.functor ⊣ G.functor where
         congrArg (fun q ↦ (S.ι X.stage).map q) ((a X.stage).right_triangle_components X.obj)
       _ = 𝟙 _ := (S.ι X.stage).map_id _
 
-/-- The descended unit retains its specified finite component.
-Source: blueprint thm-coef-qbar-verdier, proof step 8
-(blueprint: lem-coef-qbar-stage-adjunction-descent). -/
+/-- The descended unit retains its specified finite component. -/
 theorem adjunction_unit_app (X : S.PairCategory) :
     (adjunction F G a unit counit unit_eq counit_eq).unit.app X =
       (S.ι X.stage).map ((a X.stage).unit.app X.obj) := by
@@ -89,9 +78,7 @@ theorem adjunction_unit_app (X : S.PairCategory) :
   simp only [functorIdIso_inv_app, functorCompIso_hom_app, Category.id_comp,
     Category.comp_id, descNatTrans_app, unit_eq]
 
-/-- The descended counit retains its specified finite component.
-Source: blueprint thm-coef-qbar-verdier, proof step 8
-(blueprint: lem-coef-qbar-stage-adjunction-descent). -/
+/-- The descended counit retains its specified finite component. -/
 theorem adjunction_counit_app (X : T.PairCategory) :
     (adjunction F G a unit counit unit_eq counit_eq).counit.app X =
       (T.ι X.stage).map ((a X.stage).counit.app X.obj) := by

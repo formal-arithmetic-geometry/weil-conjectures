@@ -33,7 +33,7 @@ A M ----------> A (R (L M)) ------------> R' (B (L M)) ------------> R' (L' (A M
 In applications the counit compatibility is the base change or coefficient change of a counit,
 and the theorem gives the same statement for the unit.
 
-## Main statements
+## Main results
 
 - `CategoryTheory.Adjunction.unit_comp_of_counit_comp`
 

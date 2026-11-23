@@ -36,9 +36,7 @@ import WeilConjectures.Algebra.Homology.TensorHomologyPairing
 
 /-! # Bounded Künneth spectral sequence
 
-Source: Stacks Project, `more-algebra.tex`, Tag 0H7Z, lemma-kunneth-spectral-sequence;
-the p=0 product calculation is the Products and Tor equation `simple-tor-product`
-(blueprint: lem-pur-kunneth-flat-spectral-sequence).
+Source: Stacks Project, `more-algebra.tex`, Tag 0H7Z.
 
 This file provides the terms of the bounded Künneth spectral sequence: the cohomology
 modules, the Tor modules of the `E₂` page, the direct-sum `E₂` term `kunnethE₂Term`, the
@@ -57,7 +55,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory
 
 /-- The cohomology module of a derived object.
-Source: Stacks Project, Tag 0H7Z (blueprint: lem-pur-kunneth-flat-spectral-sequence). -/
+Source: Stacks Project, Tag 0H7Z. -/
 abbrev derivedModuleHomology (R : Type u) [CommRing R]
     [IsGrothendieckAbelian.{u} (ModuleCat.{u} R)]
     [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
@@ -66,7 +64,7 @@ abbrev derivedModuleHomology (R : Type u) [CommRing R]
   (DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K
 
 /-- The Tor module used on the E₂ page, with negative degrees interpreted as zero.
-Source: Stacks Project, Tag 0H7Z (blueprint: lem-pur-kunneth-flat-spectral-sequence). -/
+Source: Stacks Project, Tag 0H7Z. -/
 noncomputable def derivedModuleTor (R : Type u) [CommRing R]
     [IsGrothendieckAbelian.{u} (ModuleCat.{u} R)]
     [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
@@ -81,8 +79,7 @@ noncomputable def derivedModuleTor (R : Type u) [CommRing R]
     ModuleCat.of R (⊥ : Submodule R R)
 
 /-- The concrete lax-monoidal comparison on two complex representatives.
-Source: Stacks Project, Tags 064L and 06Y0 (blueprint:
-lem-pur-kunneth-flat-spectral-sequence). -/
+Source: Stacks Project, Tags 064L and 06Y0. -/
 noncomputable abbrev laxDerivedTensorMap (R : Type u) [CommRing R]
     [IsGrothendieckAbelian.{u} (ModuleCat.{u} R)]
     [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
@@ -95,8 +92,7 @@ noncomputable abbrev laxDerivedTensorMap (R : Type u) [CommRing R]
   Functor.LaxMonoidal.μ (DerivedCategory.Q (C := ModuleCat.{u} R)) P Q
 
 /-- The direct-sum E₂ term indexed by pairs of cohomological degrees.
-Source: Stacks Project, `more-algebra.tex`, Tag 0H7Z (blueprint:
-lem-pur-kunneth-flat-spectral-sequence). -/
+Source: Stacks Project, `more-algebra.tex`, Tag 0H7Z. -/
 abbrev kunnethE₂Term (R : Type u) [CommRing R]
     [IsGrothendieckAbelian.{u} (ModuleCat.{u} R)]
     [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
@@ -108,7 +104,7 @@ abbrev kunnethE₂Term (R : Type u) [CommRing R]
       (derivedModuleHomology R L ij.1.2) (-p) : Type u)))
 
 /-- The abutment cohomology object used by the edge map.
-Source: Stacks Project, Tag 0H7Z (blueprint: lem-pur-kunneth-flat-spectral-sequence). -/
+Source: Stacks Project, Tag 0H7Z. -/
 abbrev derivedTensorHomology (R : Type u) [CommRing R]
     [IsGrothendieckAbelian.{u} (ModuleCat.{u} R)]
     [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]
@@ -118,7 +114,7 @@ abbrev derivedTensorHomology (R : Type u) [CommRing R]
     ((curriedTensor (DerivedCategory (ModuleCat.{u} R))).obj K |>.obj L)
 
 /-- The homology identifications induced by the specified representative roofs.
-Source: Stacks Project, Tags 064L and 06Y0 (blueprint: lem-pur-kunneth-flat-spectral-sequence). -/
+Source: Stacks Project, Tags 064L and 06Y0. -/
 noncomputable def representativeHomologyIso (R : Type u) [CommRing R]
     [IsGrothendieckAbelian.{u} (ModuleCat.{u} R)]
     [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} R)]

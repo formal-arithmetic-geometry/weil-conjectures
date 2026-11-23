@@ -143,10 +143,7 @@ public import WeilConjectures.RingTheory.PseudoCoherentNormalizedAlgebraTower
 /-!
 # Effectivity of a normalized algebra tower
 
-Source: Stacks Project, More on Algebra, Tags 09AV and 066E,
-lemma-Rlim-pseudo-coherent-gives-complete-pseudo-coherent and
-lemma-Noetherian-pseudo-coherent
-(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
+Source: Stacks Project, More on Algebra, Tags 09AV and 066E and.
 -/
 
 @[expose] public section
@@ -249,38 +246,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A normalized tower over an adically complete Noetherian ring is effective without a
 perfectness assumption. Index `n` represents the positive level `n + 1`.
 
-Normalization is written as the universal property of derived scalar extension: composing
-with the supplied transition gives a bijection against every object over the quotient.
-Likewise, `L n` is any left adjoint to exact derived restriction of scalars, hence is derived
-scalar extension to `C / J^(n+1)`. The isomorphism `e n` is the adjunct of the given projection,
-not an independently chosen isomorphism. The all-level equation gives compatibility with
-transitions and their quotient cocycles. The last clause exhibits `E` itself as a derived
-limit of its reductions, with transitions transported along these specified isomorphisms.
-
-Source: Stacks Project, More on Algebra, Tags 09AV, 0CQF and 066E
-(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
-
-Proof:
-1. Quotients of the Noetherian ring C are Noetherian. The Noetherian cohomology criterion
-   makes K 0 pseudo-coherent.
-2. Adic completeness gives the compatible-tuple universal property of C as the limit of
-   C/J^(n+1). Successive quotient maps are surjective with square-zero kernel: its square
-   is the image of J^(2n+2), which lies in J^(n+2).
-3. Derived scalar restriction has a left adjoint by the module scalar adjunction theorem.
-   Normalization makes the transpose of t n an isomorphism, by Yoneda and the adjunction
-   Hom equivalence. The canonical derived restriction-composition isomorphism satisfies
-   the required normalization on complexes by the two factorization identities.
-4. Apply isPseudoCoherent_inverse_ring_reconstruction, with these quotient rings and
-   their limit C. It gives pseudo-coherence of E and invertibility of every projection's
-   transpose, for any supplied choice of left adjoints.
-5. The triangle identity identifies each unit followed by the restriction of that
-   transpose with the original projection. A Roos triangle's consecutive arrows compose
-   to zero, so its projections commute with consecutive transitions. The resulting
-   natural transformation of inverse sequences proves compatibility at every level.
-6. Transport the given product and Roos triangle along the isomorphisms of reductions.
-   The induced product isomorphism conjugates the two shift operators; the identity on E
-   and this product isomorphism identify the triangles. Thus E is a derived limit of its
-   reductions, proving derived completeness. -/
+Source: Stacks Project, More on Algebra, Tags 09AV, 0CQF and 066E.
+-/
 theorem pseudoCoherent_normalizedAlgebraTower
     {C : Type u} [CommRing C] [IsNoetherianRing C]
     (J : Ideal C) [IsAdicComplete J C]

@@ -546,51 +546,6 @@ noncomputable def exteriorProductResolutionComparison
       (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
       (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)
 
-/-- Inverse image of étale sheaves preserves K-flat complexes. -/
-theorem kFlat_upperStar_mapHomologicalComplex_obj_of_kFlat {S T : Scheme.{u}} (h : T ⟶ S)
-    (K : CochainComplex (Sheaf S.smallEtaleTopology C) ℤ)
-    (hK : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat K) :
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
-      (((upperStar C h).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
-
-/-- K-flat representatives compute the derived exterior product. -/
-theorem isIso_exteriorProductResolutionComparison
-    (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
-    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
-    (_hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (_hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) :
-    IsIso (exteriorProductResolutionComparison C f g P Q) := by
-  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P))
-      ((HomotopyCategory.quotient _ (.up ℤ)).obj
-        (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q))) :=
-    DerivedMonoidal.isIso_counit_app_app_of_kFlat_right DerivedCategory.Qh
-      (HomotopyCategory.quasiIso _ (.up ℤ)) _ _
-      ((HomotopyCategory.kFlat_quotient_obj_iff _).2
-        (kFlat_upperStar_mapHomologicalComplex_obj_of_kFlat C (pullback.snd f g) Q _hQ))
-  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
-      (((upperStar C (pullback.fst f g)).mapHomologicalComplex (.up ℤ)).obj P)
-      (((upperStar C (pullback.snd f g)).mapHomologicalComplex (.up ℤ)).obj Q)) := by
-    -- `Q` is lax monoidal as `quotient ⋙ Qh`, transported along an isomorphism.
-    change IsIso ((_ ⊗ₘ _) ≫
-      (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
-    infer_instance
-  unfold exteriorProductResolutionComparison derivedTensorHom
-  infer_instance
-
-/-- The canonical exterior-product comparison, inverted on K-flat representatives. -/
-noncomputable def exteriorProductResolutionIso
-    (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
-    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q) :
-    externalProduct C f g (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≅
-      DerivedCategory.Q.obj (exteriorSectionsComplexTarget C f g P Q) :=
-  letI := isIso_exteriorProductResolutionComparison C f g P Q hP hQ
-  asIso (exteriorProductResolutionComparison C f g P Q)
-
 /-- The comparison from termwise supported sections to their injective right derivation.
 It is the actual unit of the recorded support functor, and is invertible on injective
 support resolutions. -/
@@ -600,39 +555,6 @@ noncomputable def exteriorSupportResolutionUnit
         (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P) ⟶
       (rightDerivedSectionsWithSupport C i).obj (DerivedCategory.Q.obj P) :=
   (globalSectionsWithSupport C i).rightDerivedFunctorUnitQ P
-
-
-/-- Resolution normalization of the supported exterior product. On every pair of
-K-flat representatives, compare termwise support sections to injective support
-resolutions, and totalize the explicit pullback-and-tensor pairing above. -/
-def IsResolutionSupportedExteriorProduct
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology C))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology C))
-    (κ : (rightDerivedSectionsWithSupport C i).obj K ⊗
-        (rightDerivedSectionsWithSupport C j).obj L ⟶
-      (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).obj
-        (externalProduct C f g K L)) : Prop :=
-  ∀ (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
-    (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
-    (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P)
-    (hQ : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q)
-    (eP : DerivedCategory.Q.obj P ≅ K) (eQ : DerivedCategory.Q.obj Q ≅ L),
-    tensorHom
-        (exteriorSupportResolutionUnit C i P ≫
-          (rightDerivedSectionsWithSupport C i).map eP.hom)
-        (exteriorSupportResolutionUnit C j Q ≫
-          (rightDerivedSectionsWithSupport C j).map eQ.hom) ≫ κ =
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-          (((globalSectionsWithSupport C i).mapHomologicalComplex (.up ℤ)).obj P)
-          (((globalSectionsWithSupport C j).mapHomologicalComplex (.up ℤ)).obj Q) ≫
-        DerivedCategory.Q.map (exteriorSupportedSectionsComplex C f g i j P Q) ≫
-        exteriorSupportResolutionUnit C (supportedProductImmersion f g i j)
-          (exteriorSectionsComplexTarget C f g P Q) ≫
-        (rightDerivedSectionsWithSupport C (supportedProductImmersion f g i j)).map
-          ((exteriorProductResolutionIso C f g P Q hP hQ).inv ≫
-            derivedTensorHom C
-              ((upperStar C (pullback.fst f g)).leftDerivedFunctor.map eP.hom)
-              ((upperStar C (pullback.snd f g)).leftDerivedFunctor.map eQ.hom))
 
 end Ordinary
 

@@ -25,16 +25,11 @@ locally on `Spec A`:
   modules becomes a complex of finite free modules after inverting some `s ∉ p`.
 * `DerivedCategory.exists_quasiIso_projective_finite_of_isPerfect`: there is a quasi-isomorphism
   `P ⟶ K` from a complex `P` of finitely generated projective modules in degrees `[a, b]`
-  (Stacks 0658, 066N): truncate a projective model above at `b` (the cycles are projective since
-  the complex is exact above `b`) and below at `a` (the cokernel in degree `a` is finitely
-  presented, and flat because `K` is a complex of flat modules in degrees `[a, b]`).
+  (Stacks 0658, 066N).
 * `DerivedCategory.exists_quasiIso_free_away_of_isPerfect`: for every prime `p` there are
   `s ∉ p`, a complex `P` of finite free `A_s`-modules in degrees `[a, b]` and a
   quasi-isomorphism `P ⟶ A_s ⊗[A] K`. Over a Noetherian ring it suffices that `K` has finitely
   generated cohomology (`DerivedCategory.exists_quasiIso_free_away_of_finite_homology`).
-
-This is the chain-level input for blueprint `lemma-coherent-base-change-invertible-sheaves` (a)
-(Mumford's complex).
 -/
 
 @[expose] public section
@@ -266,15 +261,7 @@ variable {A : Type u} [CommRing A] [HasDerivedCategory.{u} (ModuleCat.{u} A)]
 /-- **A perfect complex of flat modules in degrees `[a, b]` has a finite projective model in
 degrees `[a, b]`.** Let `K` be a complex of flat `A`-modules concentrated in degrees `[a, b]`
 which is perfect in `D(A)`. Then there is a quasi-isomorphism `P ⟶ K` from a complex `P` of
-finitely generated projective `A`-modules, also concentrated in degrees `[a, b]`.
-
-Represent `K` by a bounded complex `P₀` of finitely generated projective modules; the isomorphism
-lifts to a quasi-isomorphism `P₀ ⟶ K`. The cycles of `P₀` in degree `b` are finitely generated
-projective, as `P₀` is exact above `b`, so the truncation `P₁ = τ^{≤ b} P₀` is a complex of
-finitely generated projective modules. Its truncation `P = τ^{≥ a} P₁` has
-`Pᵃ = P₁ᵃ / d(P₁ᵃ⁻¹)`, which is finitely presented, and flat because `P ⟶ K` is a
-quasi-isomorphism into a complex of flat modules in degrees `[a, b]` (Stacks 0658, 066N); hence
-`Pᵃ` is projective. -/
+finitely generated projective `A`-modules, also concentrated in degrees `[a, b]`. -/
 theorem exists_quasiIso_projective_finite_of_isPerfect (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b] (hK : ∀ n, Module.Flat A (K.X n))
     (hKP : (Q.obj K).IsPerfect) :
@@ -336,9 +323,7 @@ theorem exists_quasiIso_projective_finite_of_isPerfect (K : CochainComplex (Modu
 `A`-modules concentrated in degrees `[a, b]` which is perfect in `D(A)`, and `p` a prime of `A`.
 Then there are `s ∉ p` and a complex `P` of free `A_s`-modules of finite rank, concentrated in
 degrees `[a, b]`, with a quasi-isomorphism `P ⟶ A_s ⊗[A] K`.
-
-This is the chain-level input for the perfectness of higher direct images, towards blueprint
-`lemma-coherent-base-change-invertible-sheaves` (a) (Mumford's complex). -/
+-/
 theorem exists_quasiIso_free_away_of_isPerfect (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b] (hK : ∀ n, Module.Flat A (K.X n))
     (hKP : (Q.obj K).IsPerfect) (p : Ideal A) [p.IsPrime] :

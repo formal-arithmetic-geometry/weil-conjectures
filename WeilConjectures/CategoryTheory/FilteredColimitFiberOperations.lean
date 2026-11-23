@@ -47,21 +47,9 @@ private theorem eventually_equal₂
   · simpa using congrArg (fun a ↦ G.map w a) hu
   · simpa using hw
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph,
-and Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-fiber-operations).
-
-Proof: Represent an object in the object colimit by a stage object and send its
-identity to the arrow colimit. Represent two composable fiber elements by stage
-arrows. Move the representatives to a common stage. Their middle endpoints agree
-in the object colimit, so the filtered-colimit equality criterion makes them equal
-at a further stage. Transport along this equality and compose at that stage.
-Independence of all choices follows by moving two choices to a common stage and
-using eventual equality for their arrows and endpoints; transition functors preserve
-identities and composition. The resulting arrow has the required endpoints, so lies
-in the required fiber. The formulas for stage identities and composites follow by
-choosing the stage itself for the representatives. Empty stage categories give no
-objects requiring identities; otherwise each object has a representative. -/
+/-- Composition of fiber elements in the filtered colimit of categories, and its compatibility
+with stage identities and composites.
+Source: Stacks Project, Sites, Tag 09YL, and Categories, Tag 04AX. -/
 theorem filteredColimit_fiber_operations
     (J : Type z) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{z, z}) :
     let O := colimit (F ⋙ Cat.objects)

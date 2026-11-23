@@ -13,9 +13,6 @@ public import WeilConjectures.CategoryTheory.CondensedBar.CondensedScalarAction
 /-!
 # Internal condensed actions as modules on the twisted ringed site
 
-Source: paragraph (3) of the direct-image stability proof, action-site presentation
-(blueprint: def-sfb-condensed-derived-invariants).
-
 Composing `siteEquivalence` with an action-site presentation identifies internal actions
 of `G` on internal `A`-modules with modules over the twisted ring on the twisted small
 profinite site. Under this identification, scalar restriction of actions along `a : A ⟶ A'`

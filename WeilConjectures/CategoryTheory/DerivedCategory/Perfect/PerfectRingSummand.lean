@@ -19,8 +19,7 @@ import Mathlib.RingTheory.Flat.Basic
 /-!
 # Direct summands of perfect complexes over a ring
 
-Source: Stacks Project, More on Algebra, Tag 066S, `lemma-summands-perfect`
-(blueprint: lem-sf-perfect-ring-summand).
+Source: Stacks Project, More on Algebra, Tag 066S.
 -/
 
 @[expose] public section
@@ -32,25 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- If the binary direct sum of two objects of `D(A)` is perfect, both objects are perfect.
-Source: Stacks Project, More on Algebra, Tag 066S, `lemma-summands-perfect`
-(blueprint: lem-sf-perfect-ring-summand).
-
-Proof:
-1. Choose a bounded finite-projective model P for K ⊞ L. Replace P by a bounded-above
-   finite-free model using `exists_finiteFree_model_of_finite_projective`. Its derived
-   isomorphism exhibits pseudo-coherence of K ⊞ L. Apply `pseudoCoherent_summand` to
-   obtain pseudo-coherence of K and L.
-2. The terms of P are flat because they are projective. Apply the proved generic
-   `torAmplitudeIn_Q_obj_of_flat` to P and transport the resulting Tor bound across
-   the model isomorphism. Enlarge [a, b] to [min a b, b], whose endpoints are ordered
-   even if the original witness has a > b (and hence represents the zero complex).
-3. The inclusion and projection of each biproduct summand give a retract. The existing
-   stability of `torAmplitudeIn` under retracts transfers this common Tor interval to
-   K and L. This is the tensor/cohomology retract argument of Stacks Tag 066G.
-4. Apply `isPerfect_of_pseudoCoherent_finiteTorAmplitude` to each summand. Its bounded
-   finite-projective model satisfies the strict lower and upper support predicates
-   by `isStrictlyGE_iff` and `isStrictlyLE_iff`, giving exactly the required perfectness.
-No Noetherian hypothesis is used. -/
+Source: Stacks Project, More on Algebra, Tag 066S. -/
 theorem isPerfectRingComplex_summand {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     (K L : DerivedCategory (ModuleCat.{u} A)) (h : IsPerfectRingComplex (K ⊞ L)) :

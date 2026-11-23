@@ -10,9 +10,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 
 /-!
 # Single-object quotient comparisons and shifts
-
-Source: Mathlib single functors and their canonical quotient comparisons.
-(blueprint: lem-pc-single-quotient-inverse-shift).
 -/
 
 @[expose] public section
@@ -39,20 +36,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The single/quotient comparison intertwines inverse single shifts.
-
-Source: Mathlib `SingleFunctors.lift`, `SingleFunctors.postcomp`, and
-`DerivedCategory.singleFunctorsPostcompQIso`.
-(blueprint: lem-pc-single-quotient-inverse-shift)
-
-Proof: First apply the faithful inclusion to the comparison e_i. Unfolding
-preimageIso and the quotient comparisons shows that its inverse is the identity.
-After removing these identities, apply the faithful inclusion again. Expand
-both lifted inverse single shifts and the ambient single functors as
-postcomposition by Qh. Compute the inclusion image of Qh.commShiftIso using
-Functor.CommShift.OfComp.map_iso_hom_app. The inclusion shift comparison and
-its inverse cancel under Qh; the remaining composites agree. This holds also
-at n = 0, where both sides are the inverse shift-zero comparison. -/
+/-- The single/quotient comparison intertwines inverse single shifts. -/
 theorem single_quotient_inverse_shift (X : B) (n : ℕ) :
     let e (i : ℤ) : (DerivedCategory.Plus.singleFunctor B i).obj X ≅
         DerivedCategory.Plus.Qh.obj ((HomotopyCategory.Plus.singleFunctor B i).obj X) :=

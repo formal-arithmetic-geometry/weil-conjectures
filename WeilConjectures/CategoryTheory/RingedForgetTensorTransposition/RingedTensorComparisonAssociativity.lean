@@ -45,7 +45,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   (R : Sheaf J CommRingCat.{max c v r})
 /-- The canonical summand inclusion for the signed total tensor of module sheaves.
-Source: Stacks 06YN (blueprint: lem-pur-ringed-tensor-comparison-associativity).
+Source: Stacks 06YN.
 This is the actual cochain bifunctor summand, with the canonical sheaf tensor instances. -/
 def coefficientTensorSummand (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (p q n : ℤ) (hpq : p + q = n) :
@@ -65,8 +65,7 @@ variable {D : Type d} [Category.{vd} D] (J' : GrothendieckTopology D)
   [U.Additive]
 
 /-- Coherence on pure-triple model associators, with the total comparison kept abstract.
-Source: Stacks 03EL, 06YU and 0FPT
-(blueprint: lem-pur-ringed-tensor-comparison-associativity). -/
+Source: Stacks 03EL, 06YU and 0FPT. -/
 structure RingedTensorComparisonCoherence
     (chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
       ((U.mapHomologicalComplex (.up ℤ)).prod (U.mapHomologicalComplex (.up ℤ))) ⋙
@@ -129,14 +128,7 @@ structure RingedTensorComparisonCoherence
           (chain.hom.app (P, Q), 𝟙 (V.obj N)) ≫ aA.hom
 
 /-- A summand-normalized natural tensor comparison respects pure-triple model associators.
-Source: Stacks 03EL, 06YU and 0FPT
-(blueprint: lem-pur-ringed-tensor-comparison-associativity).
-Proof: the local pure-triple formulas identify both supplied model associators
-with the native complex associators. Install the canonical sheaf monoidal
-structures and unfold only the total-tensor and summand aliases. The abstract
-model-chain associativity theorem applies to the ordinary inverse associativity
-formula and the total-summand formula. No derived localization, preservation of
-internal Hom, or flatness assertion is used. -/
+Source: Stacks 03EL, 06YU and 0FPT. -/
 theorem ringed_tensorComparison_associativity
     (ν : @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R) ⋙ U ≅
       (U.prod U) ⋙ @MonoidalCategory.tensor _ _ (SheafOfModules.monoidalCategory R'))

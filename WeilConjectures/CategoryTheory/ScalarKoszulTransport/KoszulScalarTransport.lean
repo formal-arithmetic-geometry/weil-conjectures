@@ -11,7 +11,6 @@ import all WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.Ring
 /-! # KoszulScalarTransport for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-transport).
 -/
 
 @[expose] public noncomputable section
@@ -66,8 +65,7 @@ structure TensorPullbackComparison
     (T'.obj (P.obj N)).map j.hom = (ρ' (P.obj N)).inv
 
 /-- Cancel two comparison isomorphisms from the inverse composite identity.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem normalizedComposite
     {E : Type u} [Category.{w} E] {X U V W : E}
     (a : X ⟶ U) (b : U ≅ V) (c : V ≅ W) (d : X ⟶ W)
@@ -76,8 +74,7 @@ theorem normalizedComposite
   simp only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem tensorUnitInverse
     {E : Type u} [Category.{w} E] [MonoidalCategory E]
     {E' : Type u'} [Category.{w'} E'] [MonoidalCategory E']
@@ -99,8 +96,7 @@ theorem tensorUnitInverse
     MonoidalCategory.curriedTensor_obj_map, Category.assoc] using congrArg Iso.inv hq
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem inverseNaturality
     {E : Type u} [Category.{w} E] {A B C D : E}
     (i : A ≅ B) (j : C ≅ D) (f : A ⟶ C) (g : B ⟶ D)
@@ -257,8 +253,7 @@ variable (P : E ⥤ E') [P.Additive] {X : E} {Y : E'}
 
 omit [Preadditive E] [HasZeroObject E] [Preadditive E'] [HasZeroObject E'] [P.Additive] in
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem map_power_intertwines (f : End X) (g : End Y) (e : P.obj X ≅ Y)
     (h : P.map f.asHom ≫ e.hom = e.hom ≫ g.asHom) (n : ℕ) :
     P.map (f ^ n).asHom ≫ e.hom = e.hom ≫ (g ^ n).asHom := by
@@ -326,8 +321,7 @@ noncomputable def factorIso
   doubleComparison P _ _ e (map_power_intertwines P _ _ e h (m + 1))
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem factorIso_step
     (e : P.obj (SheafOfModules.unit (siteModuleRings R)) ≅
       SheafOfModules.unit (siteModuleRings S))
@@ -379,8 +373,7 @@ noncomputable def rankOneIso
       HomologicalComplex.singleObjXSelf (.up ℤ) 0 _
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem factorIso_projection
     (u : (P.mapHomologicalComplex (.up ℤ)).obj (ringedSiteRingComplex R) ≅
       ringedSiteRingComplex S)
@@ -410,8 +403,7 @@ variable {R : E} {S : E'} {ρ : ∀ N : E, (T.obj N).obj R ≅ N}
 variable {ρ' : ∀ N : E', (T'.obj N).obj S ≅ N}
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def tensorNatIso
     (H : TensorPullbackComparison.{u₁, u₂, w₁, w₂} P T T' R S ρ ρ') :
     Functor.uncurry.obj T ⋙ P ≅ P.prod P ⋙ Functor.uncurry.obj T' :=
@@ -423,8 +415,7 @@ def tensorNatIso
     rfl)
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem tensor_naturality
     (H : TensorPullbackComparison.{u₁, u₂, w₁, w₂} P T T' R S ρ ρ') {X X' Y Y' : E}
     (f : X ⟶ X') (g : Y ⟶ Y') :
@@ -433,23 +424,7 @@ theorem tensor_naturality
   (tensorNatIso H).hom.naturality (f ×ₘ g)
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-Proof step 1: Lift the binary comparison to total complexes using the existing coproduct-
-preserving tensor pullback map and its invertibility. Check inverse right-unit coherence after
-every total-tensor inclusion: only the zero-degree unit summand survives, where the asserted
-formula reduces to module right-unit coherence. Convert forward naturality to inverse naturality
-by cancelling isomorphisms. Package these maps in TensorPullbackComparison.
-Proof step 2: Intertwining endomorphisms also intertwine their powers, by induction. Compare each
-degree of the two-term complex using singleMapHomologicalComplex and the specified unit
-isomorphism; commutation with its differential is the intertwining identity. Its two transition
-components are an identity and the scalar power, so the same calculations prove factor
-naturality. The projection comparison is checked in the two nonzero degrees.
-Proof step 3: Induct on the length of the ordered tensor list. The empty list is the unit
-comparison. For a successor, compose the binary tensor comparison with the factor and tail
-isomorphisms. Naturality follows by tensor bifunctoriality and the induction hypothesis. For
-projection compatibility, use right-naturality, the factor projection identity, the tail
-projection identity and right-unit coherence.
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def tensorDiagramIso
     (H : TensorPullbackComparison.{u₁, u₂, w₁, w₂} P T T' R S ρ ρ') {X Y : ℕ ⥤ E} {X' Y' : ℕ ⥤ E'}
     (e : X ⋙ P ≅ X') (d : Y ⋙ P ≅ Y') :
@@ -472,8 +447,7 @@ def tensorDiagramIso
     · exact d.hom.naturality f)
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem tensor_augmented
     (H : TensorPullbackComparison.{u₁, u₂, w₁, w₂} P T T' R S ρ ρ') {X Y : E} {X' Y' : E'}
     (f : X ⟶ R) (g : Y ⟶ R) (f' : X' ⟶ S) (g' : Y' ⟶ S)
@@ -521,8 +495,7 @@ variable {C D : Type v} [SmallCategory C] [SmallCategory D]
 variable {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem koszulUnit_right (R : Sheaf J CommRingCat.{v}) :
     (ringedKoszulUnitTensorIso R).hom =
       (ringedKoszulRightUnitIso R (ringedSiteRingComplex R)).hom := by
@@ -537,8 +510,7 @@ theorem koszulUnit_right (R : Sheaf J CommRingCat.{v}) :
   exact MonoidalCategory.unitors_equal
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem koszulRight_natural (S : Sheaf K CommRingCat.{v})
     {M N : ringedSiteComplex S} (f : M ⟶ N) :
     ((ringedKoszulTensor S).map f).app (ringedSiteRingComplex S) ≫
@@ -555,8 +527,7 @@ theorem koszulRight_natural (S : Sheaf K CommRingCat.{v})
 end KoszulInduction
 
 /-- Transport of ordered two-term tensor diagrams.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-transport). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem scalar_eq_smul {C : Type v} [SmallCategory C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{v}}
     (a : (R.obj ⋙ forget CommRingCat).sections) :

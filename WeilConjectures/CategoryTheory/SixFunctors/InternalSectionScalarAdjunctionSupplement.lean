@@ -72,9 +72,7 @@ public import WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 /-! # Scalar adjunctions under section reconstruction
 
 Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW; Cohomology on Sites,
-Tags 06YS, 06YY and 07A6; Derived Categories, Tag 09T5; blueprint main-20261015,
-det-prop-scalar-six-pullback.proof.md, (1), first paragraph
-(blueprint: lem-sfb-internal-section-scalar-adjunction).
+Tags 06YS, 06YY and 07A6; Derived Categories, Tag 09T5.
 -/
 
 -- After pruning, this module only keeps private declarations.

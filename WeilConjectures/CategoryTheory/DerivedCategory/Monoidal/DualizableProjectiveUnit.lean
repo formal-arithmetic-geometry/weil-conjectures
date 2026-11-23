@@ -30,21 +30,6 @@ scheme. Then every dualizable object of `D(C)` is isomorphic to a bounded comple
 projective objects, that is, of retracts of finite direct sums `𝟙ʳ`
 (`DerivedCategory.exists_iso_Q_obj_of_isDualizable`, the forward direction of Stacks 0FPV
 in this setting).
-
-## Strategy
-
-1. (`DerivedCategory.exists_retract_of_exactPairing_of_projective_unit`) As over a ring, the
-   coevaluation `𝟙 ⟶ K ⊗ N` is a cocycle of degree `0` of `M ⊗ F` for complexes `M`, `F`
-   representing `K` and its dual `N` (`F` K-flat with flat terms), since `𝟙` is K-projective.
-   By finiteness it is a finite sum of `sᵢ ⊗ tᵢ`, so it comes from the image `L` of a finite sum
-   of disk complexes on `𝟙` mapping to `M`; hence `K` is a retract of `Q(L)`, a bounded complex
-   whose terms are quotients of `𝟙ʳ`.
-2. Consequently `K` is bounded, it has finite Tor amplitude, and if `M` vanishes above `b` the
-   top cohomology `Hᵇ(K)` is a quotient of some `𝟙ʳ`.
-3. Dualizable objects are closed under cones; one kills the top cohomology by a map
-   `𝟙ʳ[-b] ⟶ K` and argues by induction on the length of the Tor amplitude. When the Tor
-   amplitude is a single degree, `K = H[-b]` where `H` is a quotient of `𝟙ʳ` with
-   `Hom(H, -)` exact, hence a retract of `𝟙ʳ`.
 -/
 
 @[expose] public section
@@ -189,14 +174,7 @@ lemma mono_whiskerRight_f {L M : CochainComplex C ℤ} (f : L ⟶ M) [Mono f]
 projective, with finite morphisms to coproducts and tensor products. Let `K` be an object of
 `D(C)` with a right dual `N`, represented by a complex `M`. Then the isomorphism `K ≅ Q(M)`
 factors through `Q(L)` for a subcomplex `L` of `M` which is bounded and whose terms are
-quotients of finite direct sums `𝟙ʳ`.
-
-The coevaluation `𝟙 ⟶ K ⊗ N ≅ Q(M ⊗ F)`, where `F` is a K-flat complex of flat objects
-representing `N`, is a cocycle `x` of degree `0` of `M ⊗ F`, as `𝟙[0]` is K-projective. It is a
-finite sum of `sᵢ ⊗ tᵢ` with `sᵢ : 𝟙 ⟶ M^{pᵢ}`, so it comes from `L ⊗ F` where `L` is the image of
-the sum of the disk complexes `𝟙 ⟶ 𝟙` in degrees `pᵢ, pᵢ + 1` mapping to `M` by `sᵢ`; it is a
-cocycle there since `L ⊗ F ⟶ M ⊗ F` is a monomorphism. So the coevaluation factors through
-`Q(L) ⊗ N`, and the zigzag identity factors `K ≅ Q(M)` through `Q(L)`. -/
+quotients of finite direct sums `𝟙ʳ`. -/
 theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
     (hC : UnitFactorsThroughFiniteCoproducts C) (hT : UnitTensorFinite C)
     (K N : DerivedCategory C) [ExactPairing K N] (M : CochainComplex C ℤ) (e : K ≅ Q.obj M) :
@@ -405,7 +383,7 @@ variable [MonoidalCategory C]
 
 variable (C) in
 /-- The objects of `C` which are retracts of a finite direct sum `𝟙ʳ` of copies of the unit, the
-*finite projective* objects of the blueprint. -/
+*finite projective* objects. -/
 def finProj : ObjectProperty C :=
   fun P ↦ ∃ r : ℕ, Nonempty (Retract P (⨁ fun _ : Fin r ↦ 𝟙_ C))
 

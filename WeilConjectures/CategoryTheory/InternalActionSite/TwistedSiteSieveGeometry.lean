@@ -10,9 +10,8 @@ public import WeilConjectures.CategoryTheory.InternalActionSite.InternalActionSi
 /-!
 # Labeled pullbacks and sieves of the internal action category
 
-Source: the agent-formulated categorical foundation motivated by main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3); Stacks Sites, Tags 00VH, 00Z4,
-00ZD for the site and topology axioms (blueprint: lem-sfb-twisted-site-sieve-geometry).
+Source: Stacks Sites, Tags 00VH, 00Z4,
+00ZD for the site and topology axioms.
 
 The existing `InternalActionSite.Object`, `Arrow`, `categoryStruct`, `category`,
 `projection`, `precoverage`, and `topology` give the actual construction. In particular,
@@ -245,45 +244,7 @@ private theorem generated_topology (J : Precoverage C) (X : Object K) (S : Sieve
 set_option linter.unusedVariables false in
 /-- Labeled pullbacks, normalization, sieve correspondence and generated covering topology.
 
-Source: agent-formulated categorical foundation for main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3); Stacks Sites 00VH, 00Z4, 00ZD
-for the background axioms (blueprint: lem-sfb-twisted-site-sieve-geometry).
-The twisted construction itself is an agent lemma; no external theorem asserting this
-whole construction is claimed.
-
-Proof: (1) The existing object and arrow types are small dependent products/sums in `u`.
-(2) For three arrows both compositions have label `c * h^*(b * g^*a)`, equal to
-`(c * h^*b) * (gh)^*a` by the homomorphism and functor laws. Identity restrictions and
-the group unit laws give the category identities. The projection forgets the label.
-(3) The vertical arrows with labels `a` and `a⁻¹` are inverse, and `(f,a)` is the
-composite of the vertical arrow `(1,a)` with `(f,1)`, giving source normalization.
-(4) Given a base pullback with legs `p,q`, put `k = p^*a * (q^*b)⁻¹`. The lifted legs
-`(p,1),(q,k)` have equal composites because `k * q^*b = p^*a`.
-(5) A cone `(r,c),(s,d)` satisfies `c * r^*a = d * s^*b`. Its unique base lift `t`
-with label `c` has second composite label `c * t^*k = d`. The first leg forces the
-label, and base universality forces `t`, proving the full pullback property.
-(6) Apply the existing `hasIsos K J hJ` theorem for singleton isomorphism covers.
-Apply `hJ.2.2` to an underlying covering family, and lift its chosen pullbacks as
-in (4)-(5). Their underlying arrows form that chosen base cover. No bind-composition
-closure of the lifted precoverage is used or asserted.
-(7) Precomposition by `(1,a)` and its inverse shows that sieve membership is independent
-of the label. Thus taking label-one arrows and taking all labels over a base sieve
-are mutually inverse, inclusion-preserving operations. They preserve the maximal sieve.
-(8) The composite of `(h,1)` with `(g,b)` has base `h ≫ g`; label independence shows
-that the sieve correspondence commutes with pullback along `(g,b)` and `g`.
-(9) A factorization of a base arrow through `f_i` lifts with prescribed final label `a`
-by giving the preceding arrow the label `a * (h^*a_i)⁻¹`. Hence generated sieves
-correspond, including for an empty family.
-(10) Transport any base topology by this sieve correspondence. Maximality and pullback
-stability follow from (7)-(8). For local character, test the twisted hypothesis on
-label-one lifts and apply base local character. (11) Conversely transport a twisted
-topology to the base; all labels have the same pullback sieve under the correspondence,
-so its local character gives the base local-character axiom. These transports are inverse.
-(12) The least topology containing prescribed generating sieves is their intersection
-over all containing topologies, as expressed by `Precoverage.toGrothendieck`.
-(13) By (9) the transported base generated topology contains all twisted generators;
-conversely every base generator has a label-one lift among the twisted generators.
-The least properties give both inclusions and the final covering-sieve criterion. -/
+Source: Stacks Sites 00VH, 00Z4, 00ZD for the background axioms. -/
 theorem sieve_geometry [HasFiniteLimits C] (J : Precoverage C)
     (hJ : J.IsSiteForCoverings)
     (hK : Presheaf.IsSheaf J.toGrothendieck (K ⋙ forget GrpCat.{u})) :

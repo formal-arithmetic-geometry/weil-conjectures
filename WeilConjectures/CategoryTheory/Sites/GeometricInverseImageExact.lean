@@ -23,9 +23,7 @@ set_option linter.privateModule false
 /-!
 # Exactness of geometric inverse image on abelian sheaves and modules
 
-Source: Stacks Project, Modules on Sites, Tags 04JC, 03D2, 03DA and 03DB;
-Sites, Proposition 00YV (2)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 04JC, 03D2, 03DA and 03DB.
 -/
 
 @[expose] public section

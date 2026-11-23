@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.NativeRingedRestrictionHom
 /-! # Module equivalence under the canonical induced topology
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +24,7 @@ variable {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
   (R : Sheaf J CommRingCat.{max c d vc vd r})
 
 /-- The module equivalence induced by an equivalence of sites, with its actual
-structural ring maps. Source: Stacks 03A0, 03CH, 03DA, 03DG.
-(auxiliary; not a blueprint node). -/
+structural ring maps. Source: Stacks 03A0, 03CH, 03DA, 03DG. -/
 def standardModulesEquivalence :
     NativeModules.{max c d vc vd r, c, vc} R ≌
       NativeModules.{max c d vc vd r, d, vd}
@@ -50,10 +48,7 @@ def standardModulesEquivalence :
       exact S.obj.map_id _))).symm
 
 /-- Direct restriction is an equivalence, by comparison with the structural
-pushforward equivalence. Source: Stacks 03A0, 03CH, 03DA, 03DG.
-(auxiliary; not a blueprint node).
-Proof: the two functors differ only by identity restriction of scalars, whose
-canonical natural isomorphism transports the equivalence. -/
+pushforward equivalence. Source: Stacks 03A0, 03CH, 03DA, 03DG. -/
 theorem restrictModules_isEquivalence :
     (restrictModules.{d, c, vd, vc, r}
       (K := K) e.inverse R).IsEquivalence := by

@@ -186,15 +186,6 @@ abbrev second {T B : Scheme.{u}} (f : T ⟶ B) :=
 def identity (E : Type (s + 1)) [Category.{s} E] : GeometricMorphism E E :=
   ⟨𝟭 E, 𝟭 E, Adjunction.id, inferInstance⟩
 
-/-- A type-(c) covering becomes invertible in every sheaf. -/
-theorem map_toFirst_isIso {T B : Scheme.{u}} (f : T ⟶ B)
-    (H : VanishingTopos.{u, v} f) (V : EtaleSite.{u, v} B) :
-    IsIso (H.obj.map (OrientedProduct.toFirst (etaleBaseChange f) (𝟭 _)
-      (OrientedProduct.middle (etaleBaseChange f) (𝟭 _) V)).op) := by
-  sorry
-
-attribute [instance] map_toFirst_isIso
-
 /-- A sheaf category is a topos, using its actual small-site presentation. -/
 theorem sheaf_isTopos {C : Type s} [SmallCategory C] (J : GrothendieckTopology C) :
     IsGrothendieckTopos.{s} (Sheaf J (Type s)) :=
