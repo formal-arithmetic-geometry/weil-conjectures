@@ -63,3 +63,38 @@ changed. A fresh no-instrumentation 4.35 binary run of the same probe
 completed successfully in 262.87 s process wall, but it emits no recursive
 call counter and its root span cannot be matched to the READY4 root. It is
 recorded as a baseline observation, not divided into an overhead percentage.
+
+## P: fresh original and C cut-point assessment
+
+This section uses a new READY4.1 Lean 4.35.0 run of the original
+`OriginalRoot.lean` probe with a 3600 s limit; the A2-A4 measurements above
+are K's earlier independent run. The new selected process-wide root is
+18506: 2,685,580 aggregate calls, 24,978.860 ms comparison-exclusive
+time, and 38,189.966 ms root wall. M1 has 1,120,689 calls and
+24,553.873 ms (98.299%); M2 has 12,041 and 73.550 ms; Matched has
+1,552,849 and 351.389 ms; M0 has one call and 0.047 ms.
+The new M1 share is 0.173 percentage points above the accepted READY3.2
+share, within the 0.5-point consistency bound. Aggregate coverage is
+2,685,580/2,685,580 calls; raw capture is 1,723 entered and 1,665 exited
+calls. Analyzer revision: READY4.1 `mprwe_analyze.py` at kernel dataset
+commit `5ae674db0c7`. A separate fresh counters run measured 2,685,580
+calls, 23,330.541 ms root wall, and 16,177.468 ms comparison-exclusive
+time. Its count agrees with the new analyzed root.
+
+The candidate cut points are the two expensive `Exists.choose` domain
+continuations in the original root, notably the M1 aggregate buckets at
+`root/binder_domain[0]/argument[2]/argument[6]/argument[7]/binder_body[5]/*`
+(305,588 calls; 7,481.056 ms) and
+`root/binder_domain[0]/argument[3]/argument[7]/argument[7]/binder_body[5]/*`
+(305,588 calls; 6,449.416 ms). In the original source,
+`nativePullTotalTensor` is `(exists_nativePullTotalTensor ...).choose`
+and is passed to `nativeRestrictionDerivedTensor` when forming
+`nativePullTensor`. Changing that provider changes the dependent argument
+and hence the root's inferred/expected type pair. The existing aligned
+diagnostic replaces that provider/root rather than one child at the same
+required type. A child proof under the aligned provider inhabits its new
+dependent domain, not the original domain. No type-correct source-level
+replacement of either selected child preserving M0 and the same telescope
+was constructed. O-cut has no valid run, and an O/O-cut/O-restore cost
+comparison would be misleading. The restored source snapshot is freshly
+verified byte-identical to O, but is not a selective restoration control.
