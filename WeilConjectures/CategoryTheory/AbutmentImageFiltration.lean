@@ -144,31 +144,7 @@ private theorem finite_inverse_limit
 
 /-- A normalized invertible diagonal cocone transports the finite image filtration
 and its convergence to the prescribed abutment.
-Source: Stacks Tags 011T, 012F and 012U (3), blueprint steps 5 and 7.
-(blueprint: lem-sp-abutment-image-filtration)
-
-Proof: Take the normalized diagonal colimits A supplied by negative-E vanishing.
-Factor the prescribed cocone through A using its universal property. Its component
-at zero and the normalization identify the factor with eqToHom(hA) followed by c,
-so this factor is invertible. Transport A along this isomorphism to obtain AH,
-and along eqToHom(hA) to obtain AA with object D(0,n). Define FA and FH to be
-the image filtrations of AA and AH. The positive normalization gives the
-incoming-alpha image formula for FA; image pushforward gives FH=FA.image(c).
-The transported cocone gives the j-image formula. Negative-index cocone maps
-are invertible, giving top for p<=0; when p>=n-a+1 the source D(p,n-p) is zero,
-giving bottom. These bounds prove finiteness, exhaustiveness and separatedness.
-Beyond the bottom bound the cokernel projections are invertible; factor a
-compatible quotient cone through one such projection and use integer induction
-to prove all its equations. Cancellation there proves uniqueness.
-Construct the isomorphism between the transported and original graded pieces
-by cokernel.mapIso on the two imageSubobjectCompIso maps. Cancellation of the
-image arrows proves the square commutes and that the canonical graded maps
-commute with this isomorphism. Half-plane weak convergence for A then gives
-weak convergence for AH by invariance of kernels under postcomposition by an
-isomorphism. Sharp bounds give regularity, and the preceding filtration and
-inverse-limit properties complete convergence. For p<0 both adjacent steps
-are top, making their inclusion invertible and its cokernel zero. The canonical
-weak-convergence comparison transports this zero-object assertion to E_infinity. -/
+Source: Stacks Tags 011T, 012F and 012U (3). -/
 theorem abutment_image_filtration
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
     (X : BigradedExactCouple B 0) (a : ℤ)

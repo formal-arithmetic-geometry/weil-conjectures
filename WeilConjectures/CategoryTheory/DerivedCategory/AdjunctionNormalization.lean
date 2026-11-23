@@ -11,8 +11,9 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
 /-! # Uniqueness of normalized derived adjunctions
 
-Source: Stacks Project, Derived Categories, Tag 09T5.
-(blueprint: lem-pc-derived-adjunction-normalization-unique).
+## References
+
+* Stacks Project, Derived Categories, Tag 09T5.
 -/
 
 @[expose] public section
@@ -41,15 +42,7 @@ private theorem normalized_counit
 
 /-- The representative Hom formula determines an adjunction on fixed derived functors.
 The only absoluteness needed here is the right-derived property of `R ⋙ L`.
-
-Proof: apply each representative formula to the underived counit. The underived
-triangle identity gives the right-derived unit, and inverse transposition gives
-`L(β) ≫ counit = ε ≫ P(underived counit)`. Thus both counits have the same composite
-with the unit of the right-derived functor `R ⋙ L`. Its universal property makes
-the two natural transformations equal. An adjunction is determined by its counit.
-The argument works for zero objects, empty categories, and identity functors.
-Source: Stacks Project, Derived Categories, Tag 09T5
-(blueprint: lem-pc-derived-adjunction-normalization-unique). -/
+Source: Stacks Project, Derived Categories, Tag 09T5. -/
 theorem eq_of_normalization
     (b : T ⊣ U) (a a' : L ⊣ R) (Q : C ⥤ H) (P : D ⥤ J)
     (ε : Q ⋙ L ⟶ T ⋙ P) (β : U ⋙ Q ⟶ P ⋙ R) (W : MorphismProperty D)

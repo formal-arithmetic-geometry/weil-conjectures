@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.CategoryTheory.StrictRoosModel
 
 /-! Normalization of the universal derived Roos model.
-Source: Stacks Project, Tag 0941 and the strict comparison refinement
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0941 and the strict comparison refinement. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,22 +22,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- The right-derived universal property fixes the normalized comparison and its evaluations.
-Source: Stacks Project, Cohomology on Sites, Tag 0941, proof, with steps 5--8 of the
-strict-cone comparison (auxiliary; not a blueprint node).
-
-Proof: Use uniqueness of right derived functors to obtain ρ. The unit equality is
-Q(roosι X) κ_X ρ_X = η_X. Define e_X,n by the inverse of κ_X ρ_X followed by
-Q(roosEval X n). On a resolution q:X→I the inclusion is a quasi-isomorphism by hι;
-its localization is εI. The unit on I is invertible, so define dI as that unit
-followed by the inverse of RF(Qq). Naturality of κρ and the unit equality give the
-normalization formula. Compose with evaluation and use roosι_eval and
-roosEval_natural to get the projection formula. A strict augmentation has the
-explicit lift roosAugment and its ordinary-limit lift is roosAugmentLimit followed
-by lim(q); roosAugment_eq and roosι_natural imply the augmentation equality.
-For a comparison v with qv homotopic to q', their localized maps coincide. Compose
-the desired transport equality with the isomorphism RF(Qq'), then use naturality
-of η and the defining equations for dI and dJ. Cancellation proves transport.
-The argument includes zero complexes and q equal to the identity. -/
+Source: Stacks Project, Cohomology on Sites, Tag 0941. -/
 theorem strictRoosNormalization
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

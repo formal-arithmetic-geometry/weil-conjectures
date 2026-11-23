@@ -26,7 +26,6 @@ then the left action), which makes `M` an `R`-`R`-bimodule. We call bimodules of
 Moreover, the tensor product (over `R`) of two symmetric bimodules is symmetric
 (`Bimod.IsSymmetric.tensorBimod`). This is used to construct the relative tensor product
 `M ⊗_R N` of module objects, see `WeilConjectures.CategoryTheory.ModuleObjects.Monoidal`.
-
 -/
 
 @[expose] public section

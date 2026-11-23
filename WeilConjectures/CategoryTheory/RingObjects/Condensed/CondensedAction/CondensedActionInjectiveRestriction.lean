@@ -95,9 +95,7 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.Prod
 
 /-! # Exact induction and injective restriction for internal condensed actions
 
-Source: the latest blueprint, direct-image stability proof, paragraph (3), internal-bar
-categorical input; Stacks 04BL, 03EV, 03EO, 015Z, 013K and 070I
-(blueprint: lem-sfb-condensed-action-injective-restriction).
+Source: Stacks 04BL, 03EV, 03EO, 015Z, 013K and 070I.
 
 All constructions use arbitrary commutative condensed rings. Induction is specified by
 its actual relative tensor, translation action and adjunction on generalized generators.

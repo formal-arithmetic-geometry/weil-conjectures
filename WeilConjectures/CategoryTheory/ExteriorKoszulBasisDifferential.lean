@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 
 /-! # Ordered exterior coordinates for the Koszul complex
 
-Source: Stacks Project, More on Algebra, Tag 0622 and Tag 0664.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, More on Algebra, Tag 0622 and Tag 0664.
 -/
 
 @[expose] public noncomputable section
@@ -22,20 +23,20 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Subsets supported in an integer cochain degree.
-Source: Stacks Project, Tag 0622
-(auxiliary; not a blueprint node). -/
+
+Stacks Project, Tag 0622. -/
 abbrev exteriorKoszulIndex (r : ℕ) (q : ℤ) :=
   {I : Finset (Fin r) // q = -(I.card : ℤ)}
 
 /-- The exterior Koszul complex placed in nonpositive cochain degrees.
-Source: Stacks Project, Tag 0622
-(auxiliary; not a blueprint node). -/
+
+Stacks Project, Tag 0622. -/
 abbrev exteriorKoszulExtended {A : Type w} [CommRing A] (r : ℕ) (f : Fin r → A) :=
   (ExteriorAlgebra.koszulComplex A r f).extend ComplexShape.embeddingDownNat
 
 /-- The ordered wedge basis, inserted into its supported cochain degree.
-Source: Stacks Project, Tags 0622 and 0664
-(auxiliary; not a blueprint node). -/
+
+Stacks Project, Tags 0622 and 0664. -/
 def exteriorKoszulBasis {A : Type w} [CommRing A] (r : ℕ) (f : Fin r → A)
     (q : ℤ) (I : exteriorKoszulIndex r q) :
     ModuleCat.of A A ⟶ (exteriorKoszulExtended r f).X q :=
@@ -52,8 +53,8 @@ def exteriorKoszulBasis {A : Type w} [CommRing A] (r : ℕ) (f : Fin r → A)
         omega)).inv
 
 /-- The coordinate projection dual to an ordered exterior wedge.
-Source: Stacks Project, Tags 0622 and 0664
-(auxiliary; not a blueprint node). -/
+
+Stacks Project, Tags 0622 and 0664. -/
 def exteriorKoszulCoordinate {A : Type w} [CommRing A] (r : ℕ) (f : Fin r → A)
     (q : ℤ) (I : exteriorKoszulIndex r q) :
     (exteriorKoszulExtended r f).X q ⟶ ModuleCat.of A A :=
@@ -71,8 +72,8 @@ def exteriorKoszulCoordinate {A : Type w} [CommRing A] (r : ℕ) (f : Fin r → 
 
 /-- The actual matrix coefficient of the exterior contraction differential.
 This uses the constructed boundary map and the ordinary dual-basis projection.
-Source: Stacks Project, Tag 0622
-(auxiliary; not a blueprint node). -/
+
+Stacks Project, Tag 0622. -/
 def exteriorKoszulCoefficient {A : Type w} [CommRing A] (r : ℕ) (f : Fin r → A)
     (q : ℤ) (I : exteriorKoszulIndex r q) (L : exteriorKoszulIndex r (q + 1)) : A :=
   (exteriorKoszulBasis r f q I ≫ (exteriorKoszulExtended r f).d q (q + 1) ≫
@@ -131,17 +132,7 @@ private theorem basis_decomposition {A : Type w} [CommRing A]
 
 /-- Expansion of the actual contraction differential in its finite wedge basis.
 
-Source: Stacks Project, Tags 0622 and 0664, finite free exterior coordinates.
-(auxiliary; not a blueprint node).
-
-Proof: in supported degrees the exterior basis and its coordinate projections
-satisfy the usual finite identity sum of inclusion after projection equals
-identity. Transport that identity through extendXIso. In positive degrees the
-complex term is zero, so the same identity holds. Postcompose the differential
-with the identity expansion of its target. Every resulting map A to A is
-multiplication by its value at 1, which by definition is the displayed actual
-matrix coefficient. This is a coordinate expansion of the constructed boundary,
-not an assumption about its entries. No nontriviality or division is used. -/
+Stacks Project, Tags 0622 and 0664. -/
 theorem exteriorKoszulBasis_d {A : Type w} [CommRing A]
     (r : ℕ) (f : Fin r → A) (q : ℤ) (I : exteriorKoszulIndex r q) :
     exteriorKoszulBasis r f q I ≫ (exteriorKoszulExtended r f).d q (q + 1) =

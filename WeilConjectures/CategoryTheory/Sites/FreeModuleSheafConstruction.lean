@@ -19,8 +19,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Free modules on arbitrary sheaves of generators
 
-Source: Stacks Project, Modules on Sites, Tags 04BL, 03CY, 03D3 and 08TQ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 04BL, 03CY, 03D3 and 08TQ.
 
 The free module is module sheafification of the sectionwise free module, on an arbitrary
 sheaf of generators. Algebraic inverse-image presentations record precisely the transported
@@ -42,12 +41,12 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C}
 
 /-- Forget commutativity of the coefficient sheaf, using Mathlib's sheaf composition.
-Source: Stacks 04BL (auxiliary; not a blueprint node). -/
+Source: Stacks 04BL. -/
 abbrev ring (B : Sheaf J CommRingCat.{w}) : Sheaf J RingCat.{w} :=
   (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B
 
 /-- Underlying set sheaves of modules, with the lift used by algebraic inverse image.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+Source: Stacks 03D2. -/
 noncomputable abbrev moduleSets (B : Sheaf J CommRingCat.{w}) :
     SheafOfModules.{w} (ring B) ⥤ Sheaf J (Type w) :=
   SheafOfModules.toSheaf (ring B) ⋙
@@ -55,8 +54,7 @@ noncomputable abbrev moduleSets (B : Sheaf J CommRingCat.{w}) :
 
 /-- Module sheafification of `U ↦ B(U)[E(U)]`. Mathlib's presheaf free functor sends
 restrictions to the semilinear extension of `[s] ↦ [s|V]`, and its map on generator
-sheaves is the sectionwise linear extension. Source: Stacks 04BL and 03CY
-(auxiliary; not a blueprint node). -/
+sheaves is the sectionwise linear extension. Source: Stacks 04BL and 03CY. -/
 noncomputable def free (B : Sheaf J CommRingCat.{w}) :
     Sheaf J (Type w) ⥤ SheafOfModules.{w} (ring B) :=
   letI := hasSheafifyEssentiallySmallSite.{vC, w, uC, w + 1, w} J AddCommGrpCat.{w}
@@ -70,8 +68,7 @@ noncomputable def free (B : Sheaf J CommRingCat.{w}) :
     PresheafOfModules.sheafification (𝟙 (ring B).obj)
 
 /-- The presheaf generator map followed by the abelian sheafification unit, before
-lifting the underlying sets. Source: Stacks 04BL
-(auxiliary; not a blueprint node). -/
+lifting the underlying sets. Source: Stacks 04BL. -/
 noncomputable def generatorRaw (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w)) :
     E ⟶ (SheafOfModules.toSheaf (ring B) ⋙
       sheafCompose J (forget AddCommGrpCat.{w})).obj ((free B).obj E) :=
@@ -89,7 +86,7 @@ noncomputable def generatorRaw (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type 
 
 /-- The map `s ↦ [s]` into the underlying sheaf of the free module, with the harmless
 `ULift` identification required by the recorded algebraic inverse-image interface.
-Source: Stacks 04BL (auxiliary; not a blueprint node). -/
+Source: Stacks 04BL. -/
 noncomputable def generator (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w)) :
     E ⟶ (moduleSets B).obj ((free B).obj E) where
   hom := (generatorRaw B E).hom ≫ Functor.whiskerLeft
@@ -97,8 +94,7 @@ noncomputable def generator (B : Sheaf J CommRingCat.{w}) (E : Sheaf J (Type w))
 
 /-- Simultaneous coefficient and generator change: the sheafified linear extension of
 `[s] ↦ [e(s)]`, semilinear along `b`. It is constructed by the two recorded adjunctions,
-with target scalars restricted along `b`. Source: Stacks 04BL and 03CY
-(auxiliary; not a blueprint node). -/
+with target scalars restricted along `b`. Source: Stacks 04BL and 03CY. -/
 noncomputable def change {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
     {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
     (free B).obj E ⟶ (SheafOfModules.restrictScalars
@@ -115,7 +111,7 @@ noncomputable def change {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
     (PresheafOfModules.freeObjDesc (e.hom ≫ (generatorRaw B' E').hom))
 
 /-- The simultaneous change map on underlying lifted set sheaves.
-Source: Stacks 04BL (auxiliary; not a blueprint node). -/
+Source: Stacks 04BL. -/
 noncomputable def changeSets {B B' : Sheaf J CommRingCat.{w}} (b : B ⟶ B')
     {E E' : Sheaf J (Type w)} (e : E ⟶ E') :
     (moduleSets B).obj ((free B).obj E) ⟶ (moduleSets B').obj ((free B').obj E') :=

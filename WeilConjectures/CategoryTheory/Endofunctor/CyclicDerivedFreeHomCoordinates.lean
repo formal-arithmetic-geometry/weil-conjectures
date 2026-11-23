@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.HomCongr
 /-! # Additive Hom coordinates of the free cyclic triangle
 
 Source: Stacks 0149 and 015F and the free/forgetful adjunction.
-(blueprint: lem-sf-cyclic-free-hom-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -31,7 +30,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   [HasDerivedCategory.{w} C] [HasDerivedCategory.{wF} (IsoAlgebra F)]
 
 /-- The free adjunction in degree zero, with the specified zero-shift identification.
-Source: Stacks 015F (blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+Source: Stacks 015F. -/
 def cyclicDerivedFreeHomEquiv (M N : DerivedCategory (IsoAlgebra F)) :
     ((cyclicDerivedFreeFunctor F).obj M ⟶ N) ≃+ CyclicDerivedHom F M N 0 :=
   (cyclicDerivedFreeAdjunction F).homAddEquiv _ N |>.trans
@@ -39,14 +38,14 @@ def cyclicDerivedFreeHomEquiv (M N : DerivedCategory (IsoAlgebra F)) :
       map_add' := fun f g ↦ by simp [Iso.homCongr, Preadditive.add_comp] }
 
 /-- The usual shift equivalence as an adjunction with explicit shift-functor types.
-Source: Stacks 0149 (blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+Source: Stacks 0149. -/
 def cyclicDerivedFreeShiftAdjunction :
     shiftFunctor (DerivedCategory (IsoAlgebra F)) (1 : ℤ) ⊣
       shiftFunctor (DerivedCategory (IsoAlgebra F)) (-1 : ℤ) :=
   (shiftEquiv _ (1 : ℤ)).toAdjunction
 
 /-- The free adjunction after moving the source shift to the target.
-Source: Stacks 015F (blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+Source: Stacks 015F. -/
 def cyclicDerivedFreeShiftedHomEquiv (M N : DerivedCategory (IsoAlgebra F)) :
     (((cyclicDerivedFreeFunctor F).obj M)⟦(1 : ℤ)⟧ ⟶ N) ≃+
       CyclicDerivedHom F M N (-1) :=
@@ -57,8 +56,7 @@ def cyclicDerivedFreeShiftedHomEquiv (M N : DerivedCategory (IsoAlgebra F)) :
         map_add' := fun f g ↦ by simp [Iso.homCongr, Preadditive.add_comp] })
 
 /-- Evaluation of the shifted Hom coordinates without unfolding the shift adjunction.
-Source: the two adjunctions, Stacks 015F
-(blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+Source: the two adjunctions, Stacks 015F. -/
 theorem cyclicDerivedFreeShiftedHomEquiv_apply
     (M N : DerivedCategory (IsoAlgebra F))
     (f : ((cyclicDerivedFreeFunctor F).obj M)⟦(1 : ℤ)⟧ ⟶ N) :
@@ -71,8 +69,7 @@ theorem cyclicDerivedFreeShiftedHomEquiv_apply
   rfl
 
 /-- The counit induces the actual forgetting map in these coordinates.
-Source: adjunction triangle identity, Stacks 015F
-(blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+Source: adjunction triangle identity, Stacks 015F. -/
 theorem cyclicDerivedFreeHomEquiv_counit (M N : DerivedCategory (IsoAlgebra F))
     (f : M ⟶ N) :
     cyclicDerivedFreeHomEquiv F M N ((cyclicDerivedFreeAdjunction F).counit.app M ≫ f) =
@@ -83,8 +80,7 @@ theorem cyclicDerivedFreeHomEquiv_counit (M N : DerivedCategory (IsoAlgebra F))
   simp [Preadditive.rightComp]
 
 /-- Naturality of the shifted Hom coordinates in both variables.
-Source: naturality of the two adjunctions and the shift comparison, Stacks 015F
-(blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+Source: naturality of the two adjunctions and the shift comparison, Stacks 015F. -/
 theorem cyclicDerivedFreeShiftedHomEquiv_naturality
     (M N M' N' : DerivedCategory (IsoAlgebra F)) (a : M' ⟶ M) (c : N ⟶ N')
     (f : (((cyclicDerivedFreeFunctor F).obj M)⟦(1 : ℤ)⟧) ⟶ N) :
@@ -104,9 +100,7 @@ theorem cyclicDerivedFreeShiftedHomEquiv_naturality
 
 omit [IsGrothendieckAbelian.{v} C] in
 /-- The cyclic action is a bijection in every degree: it is the map of an equivalence,
-conjugated by the structure and shift isomorphisms.
-Source: the invertible action in the free-resolution calculation
-(blueprint: lem-sf-cyclic-free-hom-coordinates). -/
+conjugated by the structure and shift isomorphisms. -/
 theorem cyclicDerivedHomAction_bijective (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ) :
     Function.Bijective (cyclicDerivedHomAction F M N r) := by
   let e : (F.mapDerivedCategory.obj ((forget F).mapDerivedCategory.obj N))⟦r⟧ ≅

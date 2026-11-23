@@ -20,16 +20,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.GrothendieckTopology
 
 /-- The final object of the site localized at a weakly contractible object is weakly
-contractible. Source: Stacks Tag 090M and the slice-topos equivalence, Tag 00Y1.
-(blueprint: lem-pe-weakly-contractible-over).
-
-Proof: identify localized sheaves with sheaves over the sheafified representable.
-An epimorphism in the latter category is an epimorphism on underlying sheaves.
-Lift a section in the fibre of the identity using weak contractibility. Its image
-in the representable is the identity because the morphism is over that sheaf.
-The fibre formulas identify this lift with a section of the localized source.
-Naturality of the equivalence's unit transports surjectivity to every localized
-sheaf epimorphism. -/
+contractible. Source: Stacks Tag 090M and the slice-topos equivalence, Tag 00Y1. -/
 theorem isWeaklyContractible_over {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) [HasWeakSheafify J (Type u)] (U : C)
     (hU : J.IsWeaklyContractible.{u} U) :

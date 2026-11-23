@@ -39,16 +39,7 @@ private theorem pullback_kernelSubobject
 
 /-- Kernel and image identities for the differential of an exact couple.
 Source: Stacks Project, Lemma 12.21.2, clauses (1)--(2), and Remark 12.21.5
-(Tags 011R and 0AMJ) (blueprint: lem-sp-derived-couple-kernel-identities).
-
-Proof. The kernel of a composite is the pullback of the second map's kernel:
-both inclusions follow from the kernel and pullback universal properties.
-Reindex `exact_g` to identify that kernel with the incoming alpha image.
-Factor `f` through its image; its first factor is epi, so precomposing by it
-does not change the image after postcomposition with `g`. Substitute
-`exact_alpha` for the other image formula. Finally, the kernel condition for
-`d = f ≫ g` makes the cycle restriction of `f` factor through `ker g`, giving
-the last image inequality. -/
+(Tags 011R and 0AMJ). -/
 theorem derived_couple_kernel_identities {C : Type u} [Category.{v} C] [Abelian C]
     {s : ℕ} (X : BigradedExactCouple C s) :
     ∀ p q : ℤ,

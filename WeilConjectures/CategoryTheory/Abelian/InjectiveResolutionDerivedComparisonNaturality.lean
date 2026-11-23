@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 # Naturality of the explicit derived resolution comparison
 
 Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison-naturality).
 -/
 
 @[expose] public section
@@ -31,14 +30,7 @@ variable {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit comparison is natural for any compatible map of resolutions.
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison-naturality).
-
-Proof: Use naturality of the chosen-resolution comparison. The two composites
-from the chosen source resolution to the specified target resolution lift the
-same morphism, hence are homotopic. Apply the additive functor, extend the
-homotopy by zero, and localize. Naturality of mapExtendIso and of the quotient
-factorization identifies the resulting equation with the asserted square. -/
+Source: Stacks Project, Derived Categories, Tags 05TE and 015B. -/
 theorem injectiveResolutionDerivedComparison_naturality
     (v : A ⥤ B) [v.Additive] {X Y : A} (f : X ⟶ Y)
     (I : InjectiveResolution X) (J : InjectiveResolution Y)

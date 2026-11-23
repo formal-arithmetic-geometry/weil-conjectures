@@ -13,8 +13,7 @@ import Mathlib.Tactic
 # Intersections of faces in the ordered path simplex
 
 Source: Stacks, Tags 017J and 01GN: compatible maps on the finite union of the two
-endpoints and doubled proper faces glue before finite-simplex lifting is applied.
-(auxiliary; not a blueprint node)
+endpoints and doubled proper faces glue before lifting is applied.
 -/
 
 @[expose] public section

@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLoc
 /-! # Natural isomorphisms descend through raw scalar localization
 
 Source: the universal property of localization, Stacks 04VB and 05R2.
-(blueprint: lem-real-raw-localization-natural-iso).
 -/
 
 @[expose] public noncomputable section
@@ -23,14 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.ScalarLocalization
 
 /-- Integral natural isomorphisms of functors on raw rational objects extend uniquely.
-Source: Stacks 04VB, the universal property of localization
-(blueprint: lem-real-raw-localization-natural-iso).
-
-Proof: the scalar localization is a categorical localization, by the already proved
-comparison with Rationalization. Precomposition with a localization is fully faithful.
-Take the preimage of the given natural isomorphism and evaluate its image equation
-on each original object. Faithfulness gives uniqueness. No linearity or additivity
-of the target functors is needed. -/
+Source: Stacks 04VB, the universal property of localization. -/
 theorem naturalIso_of_integral
     (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]

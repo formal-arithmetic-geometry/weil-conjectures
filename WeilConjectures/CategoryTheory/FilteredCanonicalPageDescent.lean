@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
 
 /-! # Descent between normalized quotient-page sequences
 
-Source: Stacks Project, Homology, Tag 012K, lemma-functorial.
-(blueprint: lem-weil-pbc-filtered-canonical-page-descent).
+## References
+
+* Stacks Project, Homology, Tag 012K.
 -/
 
 @[expose] public section
@@ -89,19 +90,8 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A filtered map descends between spectral sequences whose page complexes and successor
 comparisons are identified with the normalized concrete quotient construction.
 No finiteness assumption on the filtration is made.
-Source: Stacks Project, Tag 012K, lemma-functorial.
-(blueprint: lem-weil-pbc-filtered-canonical-page-descent).
 
-Proof. Restrict the map to each step, descend to graded pieces, restrict to graded
-cycles, and descend modulo boundaries. The representative differential commutes with
-these maps by the chain-map equation, checked on an epic representative cover.
-The normalized successor comparison is natural: restrict the graded map also to
-successor cycles, cancel the monic graded cycle inclusions, and then cancel the epic
-successor-cycle cover followed by the homology projection. Conjugate these page maps
-by the supplied complex isomorphisms. Naturality of homology and the normalization
-square give the spectral-sequence compatibility. Finally cancel the target graded
-cycle inclusion to compare any two representatives, and use the cokernel square.
-All operations are finite limits and cokernels in a single degree. -/
+Stacks Project, Tag 012K. -/
 theorem exists_filteredCanonical_page_descent
     (K K' : CochainComplex C ℤ) (F : DecreasingFiltration K) (F' : DecreasingFiltration K')
     (E E' : CohomologicalSpectralSequence C 1)

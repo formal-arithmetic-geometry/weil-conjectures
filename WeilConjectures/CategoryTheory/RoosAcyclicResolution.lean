@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.RoosPrefixAcyclic
 # The functorial acyclic resolution of a tower
 
 The finite-prefix construction of Stacks Project, Tag 07KW, Lemma 15.88.1.
-(blueprint: lem-pc-roos-functorial-acyclic-resolution).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace CategoryTheory
 
 open Limits
 
-/-- The product of all levels of a tower, with componentwise maps. 
-(blueprint: lem-pc-roos-functorial-acyclic-resolution)
+/-- The product of all levels of a tower, with componentwise maps.
 -/
 noncomputable def roosProductFunctor :
     (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u} where
@@ -45,8 +43,7 @@ noncomputable def roosProductFunctor :
     intro n
     simp
 
-/-- The natural endomorphism `1 - shift` of the levelwise product functor. 
-(blueprint: lem-pc-roos-functorial-acyclic-resolution)
+/-- The natural endomorphism `1 - shift` of the levelwise product functor.
 -/
 noncomputable def roosProductDifferential :
     roosProductFunctor.{u} ⟶ roosProductFunctor.{u} where
@@ -110,23 +107,7 @@ private theorem prefixLimitDifferential (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
 
 /-- Finite-prefix towers give a functorial length-one limit-acyclic resolution.
 
-Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1, proof.
-(blueprint: lem-pc-roos-functorial-acyclic-resolution).
-
-Proof: for a tower A indexed starting at zero, put U(A)_n = product of A_i for
-0 <= i <= n, and V(A)_n = product of A_i for 0 <= i < n. Transitions forget
-the last coordinate. Send a in A_n to its successive transitions in every A_i.
-Send (x_i) in U(A)_n to (x_i - f_i(x_(i+1))) for i < n. These maps commute
-with transitions. The first is injective by coordinate n. The kernel of the
-second consists of successive-transition tuples. The second is surjective:
-set x_n = 0 and solve downwards x_i = y_i + f_i(x_(i+1)). Thus the sequence
-is levelwise short exact, hence short exact in the abelian functor category.
-Apply tower morphisms coordinatewise to obtain functors U,V and natural maps.
-Compatible finite prefixes identify each of lim U(A), lim V(A) with the full
-product, naturally in A; the induced map is exactly 1 - shift. Both towers
-have surjective transitions, so their positive derived limits vanish by
-lem-pc-tower-surjective-lim-acyclic (Tag 07KW (3)). The empty prefix at n=0
-is the zero group, so the construction also works at the initial index. -/
+Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1. -/
 theorem exists_roos_acyclic_resolution
     [EnoughInjectives (ℕᵒᵖ ⥤ AddCommGrpCat.{u})]
     [(lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u}).Additive] :

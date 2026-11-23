@@ -29,20 +29,25 @@ over `f₂`, because `f₁` and `f₂` define the same object of `Over Y`.
 
 ## Main definitions
 
-- `CategoryTheory.Over.DescentDatum`: a descent datum on `V : Over X` relative to `p : X ⟶ Y`
-  (blueprint `proposition-jacobian-over-ground-field--1`).
-- `CategoryTheory.Over.DescentDatum.IsEffective`: the datum comes from an object over `Y`
-  (blueprint `proposition-jacobian-over-ground-field--1`).
+- `CategoryTheory.Over.DescentDatum`: a descent datum on `V : Over X` relative to `p : X ⟶ Y`.
+- `CategoryTheory.Over.DescentDatum.IsEffective`: the datum comes from an object over `Y`.
 - `CategoryTheory.Over.DescentDatum.IsBaseChange`: a descent datum is the base change of
   another one.
 - `CategoryTheory.Functor.RepresentableBy.overDescentDatum`: the canonical descent datum on an
-  object representing the restriction of a presheaf to `Over X` (blueprint
-  `proposition-jacobian-over-ground-field--1`).
+  object representing the restriction of a presheaf to `Over X`.
 
 ## Main statements
 
 - `CategoryTheory.Functor.RepresentableBy.overTransport_overTransport`: the cocycle condition for
-  the canonical descent datum (blueprint `proposition-jacobian-over-ground-field--1`).
+  the canonical descent datum.
+
+## Implementation details
+
+Mathlib's `CategoryTheory.Pseudofunctor.DescentData` is the same transport-style notion for a
+pseudofunctor `F` on `C`: its `hom` compares the pullbacks of the object along any two morphisms
+`T ⟶ X` with the same composite to `Y`. It is not used here because there is no pullback
+pseudofunctor `X ↦ Over X` available, and the points of `V` are what the descent arguments
+manipulate.
 -/
 
 @[expose] public section
@@ -65,14 +70,7 @@ of `V` lying over `f₁` to `T`-points of `V` lying over `f₂`. It is natural i
 By the Yoneda lemma this is the same as an isomorphism `φ : pr₀^* V ≅ pr₁^* V` over `X ×_Y X`
 satisfying `pr₀₂^* φ = pr₁₂^* φ ∘ pr₀₁^* φ` over `X ×_Y X ×_Y X` (Stacks 023V): `φ` is the
 transport for the universal pair `pr₀, pr₁`.
-
-Mathlib's `CategoryTheory.Pseudofunctor.DescentData` is the same transport-style notion for a
-pseudofunctor `F` on `C`: its `hom` compares the pullbacks of the object along any two morphisms
-`T ⟶ X` with the same composite to `Y`. It is not used here because there is no pullback
-pseudofunctor `X ↦ Over X` available, and the points of `V` are what the descent arguments
-below manipulate.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+-/
 structure DescentDatum (V : Over X) where
   /-- The transport of points of `V` over `f₁` to points of `V` over `f₂`. -/
   transport {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) : (Over.mk f₁ ⟶ V) → (Over.mk f₂ ⟶ V)
@@ -96,8 +94,7 @@ variable {p} {V : Over X}
 /-- A descent datum on `V` relative to `p : X ⟶ Y` is **effective** if `V` is the pullback along
 `p` of an object `V₀` over `Y`, through a morphism `q : V ⟶ V₀` which is invariant under the
 transport. Equivalently, `V ≅ V₀ ×_Y X` over `X` and the datum is the one induced by `V₀`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+-/
 def IsEffective (D : DescentDatum p V) : Prop :=
   ∃ (V₀ : Over Y) (q : V.left ⟶ V₀.left), IsPullback q V.hom V₀.hom p ∧
     ∀ {T : C} (f₁ f₂ : T ⟶ X) (h : f₁ ≫ p = f₂ ≫ p) (a : Over.mk f₁ ⟶ V),
@@ -244,8 +241,7 @@ triangle
            ----------> V(f₃)
 ```
 commutes, where `V(f)` denotes the points of `V` over `f`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+-/
 theorem overTransport_overTransport {T : C} (f₁ f₂ f₃ : T ⟶ X) (h₁₂ : f₁ ≫ p = f₂ ≫ p)
     (h₂₃ : f₂ ≫ p = f₃ ≫ p) (a : Over.mk f₁ ⟶ V) :
     r.overTransport f₂ f₃ h₂₃ (r.overTransport f₁ f₂ h₁₂ a) =
@@ -265,8 +261,7 @@ presheaf `F` on `Over Y` to `Over X`, then `V` carries a canonical descent datum
 `p : X ⟶ Y`: the two pullbacks of `V` to `X ×_Y X` represent the same restriction of `F`, and the
 datum is the unique isomorphism between them compatible with the representations. No choice is
 involved, which is what makes the datum canonical.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+-/
 def overDescentDatum : Over.DescentDatum p V where
   transport := r.overTransport
   transport_homMk_comp := r.overTransport_homMk_comp

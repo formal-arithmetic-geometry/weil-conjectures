@@ -22,15 +22,7 @@ namespace CategoryTheory.ClosedScalarHom
 
 /-- The five-bijection comparison respects the unit-adjusted inverse closed transpose.
 Only the displayed unit square is needed; no associativity or symmetry is assumed.
-Source: Stacks 07A6 and 08J9, evaluation-transpose calculation at the unit.
-(blueprint: lem-coef-closed-scalar-hom-unit-calculation).
-
-Proof: postcompose the defining five-bijection formula with the inverse comparison.
-The two comparison maps cancel, leaving the closed transpose of q. Apply the inverse
-closed transpose and the inverse scalar transpose. Naturality of the inverse closed
-transpose moves the unit map to the first tensor factor. The unit
-square identifies that tensor map followed by the inverse target unitor with the
-image of the inverse source unitor. Scalar-adjunction naturality finishes. -/
+Source: Stacks 07A6 and 08J9, evaluation-transpose calculation at the unit. -/
 theorem unit_calculation
     {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
     {H : Aᵒᵖ × A ⥤ A} {I : Bᵒᵖ × B ⥤ B}

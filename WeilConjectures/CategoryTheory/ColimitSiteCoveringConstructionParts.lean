@@ -85,8 +85,7 @@ private theorem continuous_of_finite_pullbacks
   exact hG.isSheafFor_of_mem_precoverage (hcover _ T hT)
 
 /-- The finite covering axioms for the transported precoverage.
-Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms) -/
+Source: Stacks Project, Sites, Tag 09YL. -/
 theorem colimit_site_covering_axioms
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))
@@ -118,8 +117,7 @@ theorem colimit_site_covering_axioms
       hpullback V hobjects harrows Q hQ, trivial⟩
 
 /-- Preservation of covering pullbacks and continuity for the transported precoverage.
-Source: Stacks Project, Sites, Tags 09YL and 0A35.
-(blueprint: lem-weil-pbc-colimit-site-covering-continuity) -/
+Source: Stacks Project, Sites, Tags 09YL and 0A35. -/
 theorem colimit_site_covering_continuity
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

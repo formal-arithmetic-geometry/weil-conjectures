@@ -10,9 +10,6 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Normalized colimits of half-plane exact-couple diagonals
-
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 1, the stable diagonal.
-(blueprint: lem-sp-half-plane-diagonal-colimits)
 -/
 
 @[expose] public section
@@ -136,23 +133,7 @@ private theorem chainMaps_factors (Y : ℤ → C)
 
 /-- The diagonal colimits have the prescribed zeroth term and identity map there.
 Their maps at nonpositive first index are isomorphisms.
-
-Proof: for `p ≤ 0`, exactness gives `ker alpha = im f = 0`, since the source
-of the relevant `f` has first index `p - 2 < 0`. It also gives
-`im alpha = ker g = D`, since the target of the relevant `g` has first index
-`p - 1 < 0`. Thus these diagonal transitions are isomorphisms. Set the colimit
-object to `D 0 n` and its map at zero to the transported identity. For positive
-first index compose the finitely many transitions down to zero. For negative
-first index use the inverse of the finite composite from zero to that index.
-The cocone equations follow by cancelling one transition in these composites.
-A cocone to `T` factors through its map at zero: at positive indices iterate its
-cocone equations, and at negative indices cancel the invertible transitions.
-Uniqueness follows from the map at zero being the identity. The negative-index
-maps are inverse composites of isomorphisms, proving the last assertion.
-This construction is degreewise and needs no infinite colimits in `C`.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 1, stable diagonal;
-Stacks Project, Tags 011Q and 011T.
-(blueprint: lem-sp-half-plane-diagonal-colimits) -/
+Source: Stacks Project, Tags 011Q and 011T. -/
 theorem halfPlane_diagonal_colimits (X : BigradedExactCouple C 0)
     (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q)) :
     ∃ A : ∀ n : ℤ, AlphaColimit X n,

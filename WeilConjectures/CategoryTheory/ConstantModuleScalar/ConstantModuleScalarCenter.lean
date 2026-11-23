@@ -20,8 +20,7 @@ open CategoryTheory.RingedCoefficientCounit
 namespace CategoryTheory.ConstantModuleScalar
 
 /-- Multiplication by a constant section, as an element of the module category's center.
-Source: Stacks 03CZ, finite-basis calculation
-(blueprint: def-pur-constant-module-scalar-center). -/
+Source: Stacks 03CZ calculation. -/
 def ordinary {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasWeakSheafify J CommRingCat.{r}]
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -47,7 +46,7 @@ def ordinary {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 }
 
 /-- The termwise scalar endomorphism on unbounded cochain complexes.
-Source: Stacks 07A6 (blueprint: def-pur-constant-module-scalar-center). -/
+Source: Stacks 07A6. -/
 def cochain {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasWeakSheafify J CommRingCat.{r}]
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -63,7 +62,7 @@ def cochain {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- Scalar multiplication on the ordinary unbounded derived category, obtained by
 localizing its termwise endomorphism. No representatives are chosen.
-Source: Stacks 07A6 (blueprint: def-pur-constant-module-scalar-center). -/
+Source: Stacks 07A6. -/
 def derived {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasWeakSheafify J CommRingCat.{r}]
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]

@@ -21,8 +21,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedNormalizationArrows
 
 /-! # Universal arrows for derived coefficient normalization
 
-Source: Stacks Project, Tags 06YY, 07A6 and 06Y5, derived extension and its adjunction
-(blueprint: def-weil-pbc-derived-normalization-arrows).
+Source: Stacks Project, Tags 06YY, 07A6 and 06Y5, derived extension and its adjunction.
 
 A normalization isomorphism can equivalently be supplied by its universal arrow to
 restriction of scalars. This encoding retains its specific arrow, and avoids choosing
@@ -43,26 +42,24 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C) {R S : Type (u + 1)} [CommRing R] [CommRing S]
 
 /-- The canonical derived constant sheaf functor, using the existing exact-functor
-localization. Source: Stacks Tag 05RU
-(blueprint: def-weil-pbc-derived-normalization-arrows). -/
+localization. Source: Stacks Tag 05RU.
+-/
 noncomputable abbrev normalizationConstant :
     DerivedCategory (ModuleCat.{u + 1} R) ⥤
       DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
   (constantSheaf J (ModuleCat.{u + 1} R)).mapDerivedCategory
 
 /-- Derived restriction of coefficient scalars is the exact restriction functor applied
-termwise. Source: Stacks Tag 06YY
-(blueprint: def-weil-pbc-derived-normalization-arrows). -/
+termwise. Source: Stacks Tag 06YY.
+-/
 noncomputable abbrev normalizationRestrict (q : R →+* S) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} S)) ⥤
       DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)) :=
   (sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)).mapDerivedCategory
 
 /-- Ordinary module restriction is additive and exact in the fixed module universe.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows).
-Proof: restriction leaves additive groups and maps unchanged. Kernels, cokernels, finite
-products and finite coproducts have the restricted action, so their universal properties
-remain valid. This proves additivity and preservation of finite limits and colimits. -/
+Source: Stacks Tag 06YY.
+-/
 theorem normalizationModuleRestrictExactness (q : R →+* S) :
     (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).Additive ∧
       PreservesFiniteLimits (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ∧
@@ -74,33 +71,37 @@ theorem normalizationModuleRestrictExactness (q : R →+* S) :
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 /-- Additivity in the fixed coefficient universe.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tag 06YY.
+-/
 noncomputable instance (priority := 2000) normalizationModuleAdditive (q : R →+* S) :
     (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).Additive :=
   (normalizationModuleRestrictExactness q).1
 
 /-- Left exactness in the fixed coefficient universe.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tag 06YY.
+-/
 noncomputable instance (priority := 2000) normalizationModuleLimits (q : R →+* S) :
     PreservesFiniteLimits (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) :=
   (normalizationModuleRestrictExactness q).2.1
 
 /-- Right exactness in the fixed coefficient universe.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tag 06YY.
+-/
 noncomputable instance (priority := 2000) normalizationModuleColimits (q : R →+* S) :
     PreservesFiniteColimits (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) :=
   (normalizationModuleRestrictExactness q).2.2
 
 /-- Exact derived restriction of ordinary module coefficients.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tag 06YY.
+-/
 noncomputable abbrev normalizationModuleRestrict (q : R →+* S) :
     DerivedCategory (ModuleCat.{u + 1} S) ⥤ DerivedCategory (ModuleCat.{u + 1} R) :=
   (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q).mapDerivedCategory
 
 /-- Constants commute canonically with derived restriction of scalars. This is the
 localization of `constantCommuteCompose`, whose components respect constant sections.
-Source: Stacks Tags 03DA and 06YY
-(blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tags 03DA and 06YY.
+-/
 noncomputable def normalizationConstantRestrict (q : R →+* S) :
     normalizationConstant (R := S) J ⋙ normalizationRestrict J q ≅
       normalizationModuleRestrict q ⋙
@@ -115,7 +116,8 @@ noncomputable def normalizationConstantRestrict (q : R →+* S) :
 
 /-- The constant normalization arrow is the image of the specified module normalization
 arrow, transported by the canonical constant/restriction comparison.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tag 06YY.
+-/
 noncomputable def normalizationConstantArrow (q : R →+* S)
     {M : DerivedCategory (ModuleCat.{u + 1} R)}
     {N : DerivedCategory (ModuleCat.{u + 1} S)}
@@ -131,8 +133,8 @@ variable {D : Type (u + 1)} [Category.{u} D] [EssentiallySmall.{u + 1} D]
 
 /-- The canonical coefficient-restriction comparison for inverse image. It is the mate
 of the identity square for sectionwise direct image and restriction of scalars.
-Source: Stacks Tags 00WX and 03DA
-(blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tags 00WX and 03DA.
+-/
 noncomputable def normalizationPullbackMate (q : R →+* S) :
     sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ⋙
         Functor.sheafPullbackConstruction.sheafPullback F (ModuleCat.{u + 1} R) J K ⟶
@@ -146,12 +148,8 @@ noncomputable def normalizationPullbackMate (q : R →+* S) :
 -- Keep the existing essentially-small instance binders in the public signature.
 set_option linter.unusedSectionVars false in
 /-- The canonical mate is invertible: coefficient restriction commutes with inverse image.
-Source: Stacks Tags 00WX and 03DA
-(blueprint: def-weil-pbc-derived-normalization-arrows).
-Proof: restriction of module scalars preserves all colimits and all finite limits. Thus
-it commutes with the comma-category colimits defining presheaf inverse image and with
-sheafification. The resulting comparison is the displayed mate, by the adjunction unit
-identity on each presheaf section. The two colimit comparisons are isomorphisms. -/
+Source: Stacks Tags 00WX and 03DA.
+-/
 theorem normalizationPullbackMate_isIso (q : R →+* S) :
     IsIso (normalizationPullbackMate J F K q) := by
   let adjU := ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} q
@@ -186,7 +184,8 @@ theorem normalizationPullbackMate_isIso (q : R →+* S) :
   exact conjugateEquiv_symm_iso (adjS.comp adjK) (adjJ.comp adjR) γ
 
 /-- The canonical inverse-image comparison with coefficient restriction.
-Source: Stacks Tag 00WX (blueprint: def-weil-pbc-derived-normalization-arrows). -/
+Source: Stacks Tag 00WX.
+-/
 noncomputable def normalizationPullbackIso (q : R →+* S) :
     sheafCompose J (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q) ⋙
         Functor.sheafPullbackConstruction.sheafPullback F (ModuleCat.{u + 1} R) J K ≅

@@ -32,7 +32,6 @@ which is therefore dense.
 - `AlgebraicGeometry.Compactification.exists_isProjective_of_isQuasiAffine` — a quasi-affine
   scheme of finite type over `S` has a compactification whose structure morphism is projective
   (the second assertion of the lemma on affine covers with dense intersection).
-
 -/
 
 @[expose] public section

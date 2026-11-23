@@ -19,7 +19,6 @@ public import WeilConjectures.CategoryTheory.SiteConstantModuleUnit
 /-! # The constant-module sheafification unit
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 093T.
-(blueprint: lem-sf-constant-module-unit-locally-bijective).
 -/
 
 @[expose] public noncomputable section

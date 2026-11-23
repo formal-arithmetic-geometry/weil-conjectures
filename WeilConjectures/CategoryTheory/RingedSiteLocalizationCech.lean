@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-! # The binary localization Cech sequence
 
 Source: Stacks Project, Tags 00EJ and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -456,24 +455,7 @@ private theorem localization_presheaf_cech
     exact hz.eq_of_src _ _
   exact ⟨i, p, hp, ⟨hex⟩⟩
 
-/-- The binary Cech row for localization at f+g is short exact.
-
-Proof: Evaluate the fraction presheaves at V→U and set A=O(V)[1/(f+g)].
-The elements f and g generate the unit ideal of A. Standard-covering gluing
-(Tag 00EJ) gives injectivity of the diagonal A→A[1/f]⊕A[1/g] and identifies
-its image with the kernel of the difference map to A[1/(fg)]. For surjectivity,
-write z/(fg)^n, with n positive. The equality (f/(f+g)+g/(f+g))^(2*n-1)=1
-provides u*f^n+v*g^n=1. The pair (v*z/f^n,-u*z/g^n) maps to the given
-fraction. All maps commute with restriction. Exact module sheafification
-preserves the row. The sequential colimit defining section localization is
-canonically the sheafified fraction presheaf: send the nth copy of O to
-x↦x/f^n and use the localization universal property for its inverse.
-Iterated localizations identify with localization at the product. The maps
-transported along these comparisons give i and p. No nonzero hypothesis
-is used, so the argument includes f=0, g=0 and f+g=0.
-
-Source: Stacks Project, algebra.tex, Tag 00EJ; algebraization.tex, Tag 0998.
-(auxiliary; not a blueprint node). -/
+/-- The binary Cech row for localization at f+g is short exact. -/
 theorem ringedSite_localization_cech
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (U : C) (f g : R.obj.obj (op U)) :

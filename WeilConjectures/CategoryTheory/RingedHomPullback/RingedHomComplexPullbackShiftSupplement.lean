@@ -80,9 +80,8 @@ set_option linter.privateModule false
 
 /-! # Pullback of Hom complexes and signed source shifts
 
-Source: Stacks Project, sites-modules.tex, Tag 0GMX (remark-pullback-internal-hom),
-with sites-cohomology.tex, Tags 0A8X and 08JC; the signed calculation is the
-agent formulation in the DAG (blueprint: lem-sf-ringed-hom-complex-pullback-shift).
+Source: Stacks Project, sites-modules.tex, Tag 0GMX,
+with sites-cohomology.tex, Tags 0A8X and 08JC.
 -/
 
 @[expose] public noncomputable section

@@ -16,7 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 import Mathlib.LinearAlgebra.TensorProduct.Quotient
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import all WeilConjectures.AlgebraicGeometry.AmpleIso
-import WeilConjectures.AlgebraicGeometry.RelativeGradedLineMap.RelativeGradedMapAffineChart
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic

@@ -20,8 +20,7 @@ open CategoryTheory.MonoidalClosed
 namespace CategoryTheory
 namespace Functor
 /-- The canonical internal-Hom comparison component, shared without unfolding the closed
-adjunction. Source: the tensor-Hom evaluation transpose
-(blueprint: lem-sf-exact-closed-derived-hom). -/
+adjunction. -/
 @[irreducible]
 def closedComparison {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D] [MonoidalClosed C] [MonoidalClosed D]
@@ -111,8 +110,7 @@ private theorem mapHomotopyFactors_monoidal :
 attribute [local instance] CochainComplex.monoidalClosed
 omit [Abelian.HasFunctorialFlatResolution C] in
 /-- The canonical strong tensor structure on an exact derived functor, transported from
-its K-flat left derived functor. Source: Stacks 07A4
-(blueprint: lem-sf-exact-closed-derived-hom). -/
+its K-flat left derived functor. Source: Stacks 07A4. -/
 @[irreducible]
 noncomputable def exactClosedDerivedMonoidal : F.mapDerivedCategory.Monoidal :=
   letI := F.residueDerivedMonoidal

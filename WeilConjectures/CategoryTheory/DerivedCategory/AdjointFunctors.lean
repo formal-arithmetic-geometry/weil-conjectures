@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFu
 /-!
 # Everywhere defined derived functors of an adjoint pair
 
-Source: Stacks Project, Derived Categories, Lemma 09T5, Lemma 0DVC and Definition 05S9
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Derived Categories, Lemma 09T5, Lemma 0DVC and Definition 05S9.
 -/
 
 @[expose] public section
@@ -30,12 +31,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Adjunction
 
-/-- Stacks Project, Lemma 09T5, with "defined at" in the sense of Definition 05S9
-(auxiliary; not a blueprint node).
+/-- Stacks Project, Lemma 09T5, with "defined at" in the sense of Definition 05S9.
 
 The hypotheses state that the quasi-isomorphism denominator ind-diagram and pro-diagram
-are essentially constant with some value (def-pc-essentially-constant-ind-diagram,
-def-pc-essentially-constant-pro-diagram; Categories Tag 05PU); that value is RF(K), resp.
+are essentially constant with some value (Categories Tag 05PU); that value is RF(K), resp.
 LG(M). The denominator morphisms are all commuting triangles
 (`⊤`), not just quasi-isomorphisms. No injectives, projectives, boundedness or absoluteness
 hypothesis is imposed.
@@ -43,16 +42,7 @@ hypothesis is imposed.
 The conclusion supplies the total derived functors and their comparison transformations.
 The derived adjunction's `homEquiv` is the natural bijection in the statement. The final
 identity specifies its canonical compatibility with the original adjunction on homotopy
-categories, rather than allowing an unrelated adjunction.
-
-Proof:
-1. Apply `lem-pc-pre-derived-adjoint-functors-general` (Stacks Lemma 0DVC) at each pair of
-complexes. Essential constancy gives its hypotheses and hence the canonical Hom bijection;
-invert the bijection there to obtain Hom(LG(M), K) ≃ Hom(M, RF(K)).
-2. By Definition 05S9 and Lemma 05SA, everywhere defined values assemble into total derived
-functors with the universal comparison transformations. The bifunctoriality in
-`lem-pc-pre-derived-adjoint-functors-general` makes the bijections an adjunction. The
-construction from the underived adjunction yields the displayed compatibility identity. -/
+categories. -/
 theorem exists_derived_adjunction_of_essentially_constant
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]

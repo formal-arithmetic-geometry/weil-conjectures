@@ -12,9 +12,10 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplex
 /-!
 # Exactness of the chosen Čech complex of a cofree presheaf
 
-Source: Stacks Project, Cohomology on Sites, Tag 03AT, and the cofree-presheaf
-contraction in `WeilConjectures.CategoryTheory.Sites.CechComplex`.
-(blueprint: lem-weil-pbc-site-cech-cofree-exact)
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 03AT, and the cofree-presheaf
+  contraction in `WeilConjectures.CategoryTheory.Sites.CechComplex`.
 -/
 
 @[expose] public section
@@ -56,18 +57,7 @@ private theorem cofree_d_apply (P : Cᵒᵖ ⥤ AddCommGrpCat.{max u v}) (k : �
 set_option backward.isDefEq.respectTransparency false in
 /-- The cofree presheaf has an exact positive-degree Čech complex.
 Source: Stacks 03AT (insertion contraction), as implemented for categorical products
-by `CategoryTheory.Presheaf.exactAt_cechComplex_cofree`.
-(blueprint: lem-weil-pbc-site-cech-cofree-exact)
-
-Proof: evaluate a cochain at an object Z and a map to a chosen fibre product.
-Group these evaluations by their common composite Z -> U. For each composite admitting
-lifts to the family, choose one lift once, and prepend it to every tuple. The universal
-property supplies the map to the enlarged fibre product. Evaluate the cocycle equation
-on this enlarged tuple: its zeroth face is the original cochain, and its other faces
-are the negative of the differential of the cochain obtained by insertion. Thus the
-latter is a primitive. A tuple always supplies a lift by its zeroth projection; if
-there are no tuples there are no components to check. No covering or injectivity
-hypothesis is involved. -/
+by `CategoryTheory.Presheaf.exactAt_cechComplex_cofree`. -/
 theorem exactAt_cofree
     {C : Type u} [Category.{v} C] {T : Type (max u v)} {U : C}
     {f : T → C} {hom : ∀ t, f t ⟶ U} (S : SiteCechComplex f hom)

@@ -22,8 +22,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import WeilConjectures.CategoryTheory.Native.NativeRingedRestrictionSlicesSupplement
 
 /-! # Local divisibility under restriction to an equivalent site
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.
-(blueprint: lem-pur-native-ringed-restriction-divisibility). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -41,8 +40,7 @@ sieve along the dense equivalence for one direction. For the converse push it fo
 resulting arrow factors through an image arrow, and naturality transports its chosen quotient
 along that factor. This works also for the zero generator and empty covers.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.
-(blueprint: lem-pur-native-ringed-restriction-divisibility). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999. -/
 theorem localDivisibilityRestriction
     (a : (R.obj ⋙ forget CommRingCat).sections) (U : C)
     (s : ((R.over (F.obj U)).obj ⋙ forget CommRingCat).sections) :

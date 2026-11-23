@@ -100,14 +100,7 @@ private theorem pairingTranspose_zero {M N : Mod C R} (b : M ⊗ N ≅ Mod.regul
 
 /-- A tensor-inverse pairing identifies its second factor with the specified equalizer
 internal dual. The identification uses evaluation, and at a trivialized pair it evaluates
-functionals on the inverse image of the coefficient unit.
-Source: blueprint lemma-artin-schreier-character-sheaf--1, proof steps 7–8.
-(blueprint: lem-wft-tensor-inverse-equalizer-dual).
-Proof: identify the monoidal internal hom with its equalizer by their universal properties.
-The curry of a tensor-inverse pairing is invertible because tensoring with its first factor
-is an equivalence. The equation for the equalizer inclusion identifies its underlying
-uncurry with the given pairing. Insert the unit followed by the first trivialization's
-inverse to obtain the last equation, using the module action's unit law. -/
+functionals on the inverse image of the coefficient unit. -/
 theorem tensorInverse_equalizerDual {M N : Mod C R} (b : M ⊗ N ≅ Mod.regular R) :
     ∃ δ : (ihom' R M).obj (Mod.regular R) ≅ N,
       (tensorObjπ M N ≫ b.hom.hom =

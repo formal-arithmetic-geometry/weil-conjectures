@@ -46,7 +46,6 @@ repeated for `Ab.{u}` with `ℤ`-linear maps.
   commutative monoid object when it is a commutative ring
   (`AddCommGrpCat.isCommMonObj_of_commRing`). These are the counterparts for `Ab` of
   mathlib's `ModuleCat.monModuleEquivalenceAlgebra` (`Mon (ModuleCat R) ≌ AlgCat R`).
-
 -/
 
 @[expose] public section

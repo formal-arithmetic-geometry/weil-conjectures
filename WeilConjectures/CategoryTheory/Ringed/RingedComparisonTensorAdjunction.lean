@@ -16,8 +16,7 @@ import WeilConjectures.Algebra.Homology.Site.SiteDerivedTensorDescent
 /-!
 # Tensor and adjunction compatibility of canonical ringed-topos path comparisons
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 07A4, 07A6 and 0D6E
-(blueprint: lem-sfb-ringed-comparison-tensor-adjunction).
+Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 07A4, 07A6 and 0D6E.
 
 ## Main definitions
 

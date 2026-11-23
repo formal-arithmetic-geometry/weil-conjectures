@@ -18,9 +18,8 @@ public import WeilConjectures.Algebra.Homology.RingHomExtensionDefs
 
 /-! # Shared definitions for scalar extension of ring-site Hom complexes
 
-Source: Stacks Project, more-algebra.tex, equation-base-change-RHom, and
+Source: Stacks Project, more-algebra.tex, base change for RHom, and
 sites-cohomology.tex, section-hom-complexes (Tag 0A8X).
-(blueprint: def-pc-ring-hom-extension-shared-definitions)
 
 This is a chain-level construction. It requires neither derived categories nor
 perfectness, and supplies only the normalized Hom map, not derived extension data.
@@ -40,7 +39,7 @@ namespace CategoryTheory
 
 /-- The projections of the shared Hom complex, taken from exactly the witness used in
 `homComplexFunctor`, rather than from another product. Source: Stacks, sites-cohomology.tex,
-0A8X (blueprint: def-pc-perfect-rhom-base-change-map). -/
+0A8X. -/
 noncomputable def ringHomComplexProjection {A : Type u} [CommRing A]
     (P Q : CochainComplex (RingSiteModules A) ℤ) (n p : ℤ) :
     (homComplex (R := CochainComplex.onePointRingSheaf A) P Q).X n ⟶
@@ -51,8 +50,7 @@ noncomputable def ringHomComplexProjection {A : Type u} [CommRing A]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The pure tensor, followed by the shared sheafification unit and the specified object
-identification for extension. Source: Stacks, 03EK
-(blueprint: def-pc-perfect-rhom-base-change-map). -/
+identification for extension. Source: Stacks, 03EK. -/
 noncomputable def ringExtensionPure {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (F : RingSiteModules A ⥤ RingSiteModules B)
     (h : ∀ M, F.obj M = SheafOfModules.changeOfRings (ringSiteMap φ) M)

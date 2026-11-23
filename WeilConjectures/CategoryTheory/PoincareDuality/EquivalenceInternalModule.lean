@@ -13,8 +13,7 @@ set_option linter.privateModule false
 /-!
 # Equivalences of module objects and finite continuous linear actions
 
-Source: Stacks Project, Tag 0DV5, proof of (2)-(3)
-(blueprint: lem-pod-equivalence-induces-module-objects).
+Source: Stacks Project, Tag 0DV5, proof of (2)-(3).
 -/
 
 @[expose] public section

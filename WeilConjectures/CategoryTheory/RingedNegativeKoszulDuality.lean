@@ -9,9 +9,7 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulFactorHomTensor
 
 /-! # Duality between positive and negative two-term Koszul tensors
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the identification of finite free dual complexes.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E.
 -/
 
 @[expose] public noncomputable section
@@ -159,35 +157,9 @@ private theorem duality (O : Sheaf J CommRingCat.{u}) (r : ℕ)
       exact hv m (P.obj m) (ringedKoszulProjection O r (fun i ↦ b i.succ) m)
 
 /-- For a nonempty list, the ordered negative two-term tensors are the internal duals
-of the positive
-ones, compatibly with their explicit transitions and empty-subset units.
-This assertion is entirely on one ringed site: it has no exterior algebra,
-coefficient ring, scheme, sheafification or scalar transport.
+of the positive ones, compatibly with their explicit transitions and empty-subset units.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the displayed finite free dual identification.
-(auxiliary; not a blueprint node).
-
-Proof: the positive factor is O --b^(m+1)--> O in degrees 0 and 1. In its
-internal Hom into O[0], project the degree n product to p=-n: every other
-factor has zero target. Evaluation at 1 identifies the two surviving internal
-Hom sheaves with O. The degree -1 differential has coefficient -(-1)^(-1)=1,
-so it is multiplication by b^(m+1). Precomposition with the positive step
-(1,b) gives (b,1) on the negative factor. On finite tensors, evaluate a tensor
-of functionals on a tensor of vectors with the sign from moving each
-functional past the earlier vectors. On a basis indexed by subsets this sign
-is (-1) to the number of pairs of selected indices. It compensates for the
-Hom differential sign, so this is a chain map. The dual-basis map is its
-inverse: in each degree the finite sum and product are identified by the
-finite basis. Induct on the ordered factors to obtain the isomorphism.
-Evaluation is natural in both factors; apply it to (1,b) in every positive
-factor to get precisely ringedNegativeKoszulTransition. At the empty subset
-there is no interchange sign. Its tensor of sections 1 is the functional
-given by the positive projection to O[0], normalized by evaluation at 1;
-this is exactly ringedKoszulDualUnit with the displayed single-complex
-identification. The empty tensor is handled separately by ringedNegativeKoszulZeroDuality.
-No scalar is inverted and all finite free identities hold over the zero ring
-and on the empty site. -/
+Source: Stacks Project, algebraization.tex, Tag 0A0E. -/
 theorem ringedNegativeKoszulSuccDuality
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u}) (r : ℕ)

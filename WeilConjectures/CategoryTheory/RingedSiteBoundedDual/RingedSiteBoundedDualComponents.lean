@@ -15,8 +15,7 @@ public import WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 
 /-! # Components of the bounded ordinary sheaf dual
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JJ and 0A8X
-(blueprint: lem-sfb-ringed-site-bounded-dual-components).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JJ and 0A8X.
 
 The abbreviations below only expand the recorded Hom constructions and the
 coefficient sheaf in degree zero. The component is the actual product projection.
@@ -203,30 +202,8 @@ The last two equations specify ordinary evaluation delta and beta^i = (-1)^i del
 Thus, for homogeneous phi of degree -i, beta(x)(phi) = (-1)^(i*(-i)) phi(x);
 all remaining Hom factors have zero coefficient target.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, second proof paragraph,
-and Section 0A8X (blueprint: lem-sfb-ringed-site-bounded-dual-components).
-
-Proof:
-1. By def-pur-hom-complex and def-pur-sheaf-hom, project the degree-q
-   Hom product to p=-q. Insert a local map into this factor and zero into all
-   other factors, whose coefficient targets vanish. These operations are linear,
-   restriction compatible and inverse, giving alpha.
-2. Outside [-b,-a], E^(-q) is zero by the bound. Its sheaf dual is zero,
-   so alpha gives the claimed support, also when a>b.
-3. The coefficient complex has zero differential. The Hom differential of
-   def-pur-hom-complex therefore becomes (-1)^(q+1) precomposition by d_E.
-4. Repeat the projection for D, and dualize alpha in degree -i, to obtain gamma.
-   The two consecutive Hom signs multiply to -1. Linearity then gives the
-   negative double transpose of d_E, with no exactness assumption.
-5. By def-pur-sheaf-hom, evaluate every local functional on the restriction
-   of x to each slice object. This is linear in both arguments and commutes
-   with restriction, hence defines delta. The homogeneous Koszul sign is
-   (-1)^(i*(-i)) = (-1)^i, since i*i and i have the same parity.
-6. Define beta degreewise using gamma inverse and (-1)^i delta. Evaluate the
-   chain-map equation on every slice functional: the negative bidual differential
-   changes (-1)^i to (-1)^(i+1), while naturality of evaluation moves d_E to x.
-   Extensionality gives the chain-map equation. No finite-free retract,
-   reflexivity, or exactness of the terms was used. -/
+Source: Stacks Project, sites-cohomology.tex, Tag 08JJ,
+and Section 0A8X. -/
 theorem boundedDualComponents
     (E : CochainComplex (Modules.{c, v, r} R) ℤ) (a b : ℤ)
     (hE : ∀ i : ℤ, i < a ∨ b < i → IsZero (E.X i)) :

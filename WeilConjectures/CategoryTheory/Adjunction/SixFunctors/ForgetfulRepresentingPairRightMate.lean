@@ -8,11 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Representing lifts and the right mate under forgetting
-
-Source: blueprint, sec-six-functors/sk-thm-sf-package,
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence;
-the DAG's native-derived expansion, Old proof Steps 7–8.
-(blueprint: lem-sf-forgetful-representing-pair-right-mate)
 -/
 
 @[expose] public section
@@ -30,45 +25,15 @@ variable {WX : Type uWX} {WY : Type uWY} {CX : Type uCX} {CY : Type uCY}
   {F : CX ⥤ CY} {G : CY ⥤ CX}
 
 /-- The fixed right mate of the inverse left-adjoint comparison, using Mathlib's
-`mateEquiv` from def-weil-pbc-adjunction-mate. Its data depend only on the two
-specified adjunctions and `c`, not on representing triples.
-Source: cor-coef-verdier-weil-equivariance.proof.md, final sentence, expanded
-as Step 2 of the node (Old proof Steps 7–8).
-(blueprint: lem-sf-forgetful-representing-pair-right-mate) -/
+`mateEquiv`. Its data depend only on the two
+specified adjunctions and `c`, not on representing triples. -/
 def forgetfulRightMate (adjW : FW ⊣ GW) (adj : F ⊣ G)
     (c : FW ⋙ UY ≅ UX ⋙ F) : GW ⋙ UX ⟶ UY ⋙ G :=
   (mateEquiv adjW adj (TwoSquare.mk UX FW F UY c.inv))
 
 /-- Objectwise representing lifts identify the fixed right mate with the forgotten
 representing isomorphisms; it is invertible, independent of the lifts, and identifies
-both adjunctions' units and counits. No functor structure on `H` is assumed.
-
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction
-sentence; the DAG's native-derived expansion of Old proof Steps 7–8.
-(blueprint: lem-sf-forgetful-representing-pair-right-mate)
-
-Proof plan from the node:
-1. For fixed `L`, put `A = GW.obj L`. The adjunction bijections `P` and the
-representing bijections `Q` send a morphism to its composite with the corresponding
-counit. Take `h = Q_A⁻¹(counitW)` and `k = P_H⁻¹(d)`. Functoriality gives
-`Q_H(k ≫ h) = Q_H(1)` and `P_A(h ≫ k) = P_A(1)`; injectivity gives both inverse
-identities. The same `Q_A`-injectivity gives uniqueness of `h`.
-2. Apply def-weil-pbc-adjunction-mate (`mateEquiv`) to `c.inv`. Its component
-is the ordinary adjunct of `c.inv.app A ≫ UY.map (adjW.counit.app L)`.
-3. Naturality of `c` at `h`, the assumed formula for `UY.map d`, and the defining
-counit equation for `h` show that `UX.map h ≫ e.hom` has that same transpose.
-Injectivity of the ordinary adjunction bijection gives the factorization.
-4. Each component has inverse `e.inv ≫ UX.map h.inv`. Cancelling components in
-the naturality of the mate proves naturality of these inverses, so the mate is
-an isomorphism without any functor structure on the chosen representing objects.
-5. The transpose identity, composed with `c.hom`, gives the counit equation.
-The inverse mate formula from def-weil-pbc-adjunction-mate, transposed under the
-ordinary adjunction and composed with `G.map c.hom`, gives the unit equation.
-6. Repeat the factorization for any second representing triple. Both expressions
-are the same fixed mate component, since its definition never used a triple.
-Equivalently, `h.inv ≫ h'` is the unique counit-preserving comparison of the
-representing objects and its forgotten map identifies `e` and `e'`. No step uses
-fullness or faithfulness of either forgetful functor. -/
+both adjunctions' units and counits. No functor structure on `H` is assumed. -/
 theorem forgetful_representingPair_rightMate (adjW : FW ⊣ GW) (adj : F ⊣ G)
     (c : FW ⋙ UY ≅ UX ⋙ F) (H : WY → WX)
     (e : ∀ L : WY, UX.obj (H L) ≅ G.obj (UY.obj L))

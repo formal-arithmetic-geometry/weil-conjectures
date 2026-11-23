@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Total and classical right-derived comparisons on a supplied resolution
 
-Source: Stacks Project, Derived Categories, Tags 015E and 070K; the total/plus
-compatibility and the injective-resolution construction of classical derived functors.
-(blueprint: lem-weil-pbc-total-classical-resolution-comparison).
+Source: Stacks Project, Derived Categories, Tags 015E and 070K.
 -/
 
 @[expose] public section
@@ -214,23 +212,7 @@ private theorem total_model_naturality
 
 /-- The canonical total/classical cohomology comparison computed on any supplied
 injective resolution, retaining the actual augmentation and both localization factors.
-Source: Stacks Project, Derived Categories, Tags 015E and 070K; total/plus compatibility.
-(blueprint: lem-weil-pbc-total-classical-resolution-comparison).
-
-Proof: For the chosen injective resolution, expand the total/classical comparison into
-its total/plus compatibility and the bounded-below single-object comparison. The
-uniqueness equation for rightDerivedFunctorPlusCompatibility identifies its composite
-with the total derived unit with the image of the plus derived unit. Naturality moves
-this comparison past the localized augmentation. On the resolution both units are
-invertible, so their inverses give rightDerivedFunctorObjQIso. The homotopy and derived
-homology factorizations compose to homologyFunctorFactors. This proves the formula for
-the chosen resolution. For any other resolution I, choose an augmentation-preserving
-comparison from the chosen one to I. Naturality of the total derived unit and the
-localization/homology comparison identifies the two total computations. Naturality of
-isoRightDerivedObjCochainComplex identifies the two classical computations. The
-comparison induces the identity on the resolved coefficient, so the right-derived
-identity cancels and gives the displayed formula for I. No exactness of F is needed;
-the same construction applies to n = 0, zero objects and the zero functor. -/
+Source: Stacks Project, Derived Categories, Tags 015E and 070K. -/
 theorem CategoryTheory.Functor.totalClassicalResolutionComparison
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]

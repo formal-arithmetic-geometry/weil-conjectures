@@ -10,7 +10,7 @@ import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRetractData
 
 /-! # The localization step in Grothendieck Brown representability
 
-Source: Stacks Project, Tag 0F5X, `injectives-lemma-brown`, before the final
+Source: Stacks Project, Tag 0F5X, `injectives-, before the final
 Karoubianity argument.
 -/
 
@@ -70,21 +70,7 @@ private theorem localization_retract
 
 /-- The localization construction makes a cohomological functor a natural retract
 of a representable functor, before splitting any idempotent in the derived category.
-Source: Stacks Project, Tag 0F5X, `injectives-lemma-brown`, first two paragraphs.
-(auxiliary; not a blueprint node)
-
-Proof in words: obtain the localization adjunction L left adjoint to R, its invertible
-counit, and the representation of the pulled-back lifted underlying functor F from
-`grothendieckDerived_localization_brown_data`. Write t for the unit at its representing
-object E. The left triangle identity says L(t) is the inverse counit, so F(L(t)) is
-invertible. The representing isomorphism therefore makes precomposition by t an
-invertible map Hom(R(L(E)),E) -> Hom(E,E). Apply its inverse to the identity to obtain
-s with t followed by s equal to the identity. Apply lifted Yoneda to this retract and
-precompose with R.op. The opposite counit and the representing isomorphism identify
-the first endpoint with F; full faithfulness of R identifies the second endpoint with
-lifted Yoneda of L(E). Compose these natural retracts. Unlike the source's triangle
-argument, this splitting uses only the adjunction and representation. This step does
-not split an idempotent or assert that the retract itself is representable. -/
+Source: Stacks Project, Tag 0F5X, `injectives-, first two paragraphs. -/
 theorem grothendieckDerived_brown_retract
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [IsGrothendieckAbelian.{w} A] [HasDerivedCategory.{w} A]

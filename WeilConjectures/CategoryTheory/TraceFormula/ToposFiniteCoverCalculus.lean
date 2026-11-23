@@ -16,12 +16,10 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Epimorphic families and finite quasi-compact cover calculus
 
-Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ;
-the agent expansion of the local-lifting and finite-cover arguments
-(blueprint: lem-trf-topos-finite-cover-calculus).
+Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ.
 
 The site and all section and index sets lie in the common containing universe
-`max u v w`, following `prose-01-10`. Covering sieves express local
+`max u v w`. Covering sieves express local
 lifting independently of the choice of a precoverage presenting the topology.
 -/
 
@@ -38,9 +36,7 @@ namespace CategoryTheory
 /-- Coproducts in the containing universe, using Mathlib's sheafification construction
 with the discrete diagram shape specified explicitly. This packages the existing
 colimit structure so typeclass search need not rediscover its diagram universes.
-Source: Stacks Project, Sites, Tag 00WB, the sheafification universal property;
-the coproduct construction in step 1 of the node
-(blueprint: lem-trf-topos-finite-cover-calculus). -/
+Source: Stacks Project, Sites, Tag 00WB, the sheafification universal property. -/
 instance (priority := 2000) toposFiniteCoverCoproducts
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     HasCoproducts.{max u v w} (Sheaf J (Type (max u v w))) :=
@@ -259,43 +255,7 @@ and is stable under pullback and fibre products of families. Epimorphic images a
 finite coproducts preserve quasi-compactness, including the empty coproduct. Hence a
 finite jointly epimorphic family of quasi-compact objects has quasi-compact target.
 
-Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ,
-with the agent expansion recorded in the node
-(blueprint: lem-trf-topos-finite-cover-calculus).
-
-Proof:
-1. Form the objectwise disjoint union presheaf of a family. Its sheafification is
-   the coproduct of sheaves by the adjunction in `def-weil-pbc-sheafification`:
-   maps from that presheaf to a sheaf are exactly families of maps from its summands.
-   This also constructs the coproduct of an empty family.
-2. By `lem-weil-pbc-site-sheaf-sets-epi-locally-surjective`, the coproduct map is
-   epic exactly when sections locally lift to this sheafification. By
-   `lem-weil-pbc-site-sheafification-sections-local`, refine so each lift belongs to
-   one actual presheaf summand. Compose covers using `def-weil-pbc-sites-and-cohomology`.
-   Conversely, summand lifts give coproduct lifts, so the same epimorphism criterion
-   applies. The member index may vary on the covering.
-3. For a map Z to Y, lift the image of a section of Z locally to some X_i. By
-   `lem-weil-pbc-site-sheaf-sets-limits-sectionwise`, the pair is a section of the
-   pullback and lifts the original section of Z. Step 2 gives joint epimorphy of
-   the pullback family, including singleton families. For two families over A,
-   first lift the B component locally and then the C component on a further cover.
-   The images in A agree, so the pair is a section of X_i ×_A Y_j. Compose covers
-   and apply step 2 to obtain the fibre-product-family assertion.
-4. Pull a jointly epic family over Y back along an epimorphism X to Y. If X is
-   quasi-compact, choose finitely many members covering X by `def-trf-coherent-topos`.
-   Any two maps out of Y agreeing on the selected original members agree after the
-   selected pullbacks, hence after X, hence on Y: cancel the selected coproduct map
-   and then X to Y. The selected original family is thus jointly epic.
-5. Given a finite family of quasi-compact X_i, pull any jointly epic family over
-   their coproduct back to each X_i and choose a finite subfamily there. The union
-   of these finitely many finite sets is finite. Agreement on its members implies
-   agreement on each X_i by cancellation and thus on the coproduct by its universal
-   property. For the empty family take the empty selection: maps from the initial
-   object agree uniquely. No pointwise emptiness of the initial sheaf is assumed.
-6. A finite jointly epic family of quasi-compact objects gives an epimorphism from
-   a quasi-compact coproduct by step 5. Step 4 makes its target quasi-compact. This
-   argument also includes the empty family.
--/
+Source: Stacks Project, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ. -/
 theorem topos_finite_cover_calculus
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     (∀ (I : Type (max u v w)) (X : I → Sheaf J (Type (max u v w)))

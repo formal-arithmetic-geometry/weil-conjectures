@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 /-! # Independence of a right-derived mate from exact left-adjoint choices
 
 The canonical right-derived unit identifies a derived mate from its ordinary mate.
-(blueprint: lem-weil-right-derived-mate-independence).
 -/
 
 @[expose] public noncomputable section
@@ -38,15 +37,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
 /-- Invertibility of a canonical derived right mate is independent of the exact
 left-adjoint models, provided both ordinary right mates are invertible.
-Source: Stacks, Tags 070I, 070K and 07A7
-(blueprint: lem-weil-right-derived-mate-independence).
-
-On a K-injective source complex the source derived unit is invertible. Apply the
-cochain normalization to the reference mate: its derived invertibility and the
-ordinary mate's invertibility show that the target derived unit is invertible.
-The same normalization for the desired mate then expresses it using isomorphisms.
-Every derived object is isomorphic to a K-injective representative, so naturality
-transfers this conclusion to all objects. -/
+Stacks Project, Tags 070I, 070K and 07A7. -/
 theorem rightDerivedMate_isIso_of_ordinaryMate_isIso
     (a : L ⊣ R) (b : L' ⊣ R') (c : Q ⊣ R) (d : Q' ⊣ R')
     (θ : G ⋙ L' ≅ L ⋙ H) (ψ : G ⋙ Q' ≅ Q ⋙ H)

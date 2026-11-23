@@ -11,8 +11,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 /-! # Karoubi extension of systems, morphisms and compatible transformations
 
 The extension is defined by the supported projector formulas of Mathlib.
-Source: sketch32, lines 1208--1228 and 1313--1321.
-(blueprint: lem-sbc-stage-system-karoubi-extension)
 -/
 
 @[expose] public noncomputable section

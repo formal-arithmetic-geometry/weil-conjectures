@@ -58,31 +58,6 @@ lemma exists_fg_forall_mem_range_lTensor (S : Type*) [CommRing S] [Algebra R S]
   obtain ⟨y, hy⟩ := (LinearMap.range_eq_top.mp hg) x
   exact ⟨y, hy⟩
 
-/-- If `M_f` is a finite `R_f`-module, then there is a finitely generated submodule `N` of `M`
-such that every element of `M` is mapped into `N` by some power of `f`. -/
-lemma exists_fg_forall_exists_pow_smul_mem (f : R)
-    [Module.Finite (Localization.Away f) (LocalizedModule (Submonoid.powers f) M)] :
-    ∃ N : Submodule R M, N.FG ∧ ∀ m : M, ∃ k : ℕ, f ^ k • m ∈ N := by
-  classical
-  obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := Localization.Away f)
-    (M := LocalizedModule (Submonoid.powers f) M)
-  let g := LocalizedModule.mkLinearMap (Submonoid.powers f) M
-  choose a ha using fun x : s ↦ IsLocalizedModule.mk'_surjective (Submonoid.powers f) g x
-  let N := Submodule.span R (Set.range fun x : s ↦ (a x).1)
-  refine ⟨N, Submodule.fg_span (Set.finite_range _), fun m ↦ ?_⟩
-  have hle : (⊤ : Submodule (Localization.Away f) _) ≤
-      N.localized' (Localization.Away f) (Submonoid.powers f) g := by
-    rw [← hs, Submodule.span_le]
-    intro x hx
-    rw [SetLike.mem_coe, Submodule.mem_localized']
-    exact ⟨(a ⟨x, hx⟩).1, Submodule.subset_span ⟨⟨x, hx⟩, rfl⟩, (a ⟨x, hx⟩).2, ha ⟨x, hx⟩⟩
-  obtain ⟨n, hn, u, hu⟩ := (Submodule.mem_localized' _ _ _ _ _).mp (hle (Submodule.mem_top
-    (x := g m)))
-  rw [← IsLocalizedModule.mk'_one (Submonoid.powers f), IsLocalizedModule.mk'_eq_mk'_iff] at hu
-  obtain ⟨c, hc⟩ := hu
-  obtain ⟨⟨_, i, rfl⟩, ⟨_, j, rfl⟩⟩ := (c, u)
-  sorry
-
 end Generators
 
 end Module

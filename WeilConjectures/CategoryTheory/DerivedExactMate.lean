@@ -72,14 +72,7 @@ private lemma homotopyMate (adj : L ⊣ R) (adj' : L' ⊣ R')
   exact congrArg (fun t => _ ≫ _ ≫ t) (Category.comp_id _)
 
 /-- The mate of an exact derived square is normalized by the ordinary mate on complexes.
-Source: the mate calculation in Tag 0F1E; unbounded version of the argument in
-`Adjunction.derivedPlus_mateEquiv_app_fac`.
-(auxiliary; not a blueprint node).
-Proof: expand the mate into a unit, the square, and a counit. Move the derived-functor
-unit through these three factors using naturality. The defining unit and counit
-factorizations of the unbounded derived adjunction reduce the expression to the
-ordinary homotopy adjunction. On complexes that adjunction and its mates are computed
-degree by degree, so it gives the mapped ordinary mate. -/
+Source: Stacks Project, Tag 0F1E. -/
 theorem derivedExact_mateEquiv_app_fac (adj : L ⊣ R) (adj' : L' ⊣ R')
     (σ : TwoSquare G L L' G')
     (θ : TwoSquare G.mapDerivedCategory L.mapDerivedCategory L'.mapDerivedCategory

@@ -28,8 +28,7 @@ import WeilConjectures.CategoryTheory.ConstantRingSectionRigidity
 
 /-! # Constant scalars in an algebraic inverse-image lift
 
-Source: Stacks Project, Tags 00YV and 03D2; the constant-coefficient calculation
-in Step 2 of lem-sf-constant-open-restriction-model-comparison.
+Source: Stacks Project, Tags 00YV and 03D2.
 -/
 
 @[expose] public section
@@ -209,28 +208,8 @@ private theorem constantAdjunctRingHom_naturality
 transpose of the constant-section map. This concerns only the coefficient ring,
 not modules, site equivalences, open immersions or extension by zero.
 
-Source: Stacks Project, Tags 00YV and 03D2; Step 2 of
-lem-sf-constant-open-restriction-model-comparison.
-(auxiliary; not a blueprint node).
-
-Proof: the finite-product graph equations identify the algebraic ring lift with
-transport of ring objects through L. A left exact left adjoint preserves the
-terminal sheaf and its coproducts, so its canonical comparison on constant sets
-preserves every constant section. The induced comparison of constant ring
-objects is natural in the coefficient ring. The composite of any other natural
-constant-ring comparison with the inverse canonical comparison is the identity:
-locally on the target, its value at the universal element of Z[X] is a
-polynomial p. Its component at Z is the identity because the constant Z ring
-sheaf is initial. If p differs from X, choose an integer n with p(n) different
-from n. Naturality under evaluation at n equates these distinct constant
-integer sections. Local injectivity of sheafification forces this piece to
-have an empty covering sieve, where all sections already agree. Hence p is X
-on every relevant piece. Naturality under Z[X] to A, X to a, fixes every a.
-Thus F.constants is this canonical
-comparison, including when the topos is empty. Precompose the asserted
-transpose equality with the constant-presheaf sheafification unit. Both sides
-send a to that constant section in the target. The sheafification adjunction
-and the geometric adjunction give the displayed equality. -/
+Source: Stacks Project, Tags 00YV and 03D2.
+-/
 theorem constantInverseImageScalarNormalization
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

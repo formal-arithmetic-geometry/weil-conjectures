@@ -16,7 +16,6 @@ namespace CategoryTheory
 /-- Exact derived Gabriel--Popescu localization for an exact module-category presentation.
 
 Source: Stacks Project, Tags 0F5V and 0F5X.
-(auxiliary; not a blueprint node)
 
 The abelian Gabriel--Popescu adjunction is fixed as the source of the construction. Its
 invertible counit makes the right adjoint fully faithful; exactness of the left adjoint

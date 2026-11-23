@@ -18,7 +18,6 @@ import Mathlib.Algebra.FiveLemma
 /-! # Third Hom comparison for a cofiltered diagram of distinguished triangles
 
 Source: Stacks Project, Derived Categories, Lemma 05SC, five-term Hom diagram, dualized.
-(blueprint: lem-pur-triangulated-hom-colimit-comparison).
 -/
 
 @[expose] public section
@@ -240,22 +239,8 @@ private lemma triangle_hom_exact
 
 /-- A triangle morphism at one stage induces bijective third Hom comparisons if it
 induces bijective first and second Hom comparisons for every test object.
-
-Source: Stacks Project, Derived Categories, Lemma 05SC, displayed five-term Hom diagram,
-with contravariant Hom and cofiltered indexing.
-(blueprint: lem-pur-triangulated-hom-colimit-comparison).
-
-Proof: For a test object W apply Hom(-,W) to the distinguished triangles H(j) and U.
-The five terms are Hom(second[1],W), Hom(first[1],W), Hom(third,W), Hom(second,W),
-and Hom(first,W). Triangle morphisms give a diagram of exact sequences over J opposite.
-Its filtered colimit is exact (filtered colimits of abelian groups preserve exactness).
-Precomposition with m gives a map from the exact sequence of U to this colimit sequence;
-the triangle-morphism equations ensure all four squares commute. The last two vertical
-maps are bijective by h₂ and h₁. The first two are bijective by the same hypotheses with
-W shifted by -1, using the shift equivalence and its natural Hom bijections. The five
-lemma makes the middle vertical map bijective. Forgetting the abelian group structures
-identifies the filtered colimit with ColimitType, and its middle vertical map sends phi
-to the class of m.hom₃ followed by phi at j₀, exactly the map below. -/
+Source: Stacks Project, Derived Categories, Lemma 05SC, with contravariant Hom and cofiltered
+indexing. -/
 theorem triangulated_hom_colimit_comparison
     {J : Type uJ} {D : Type uD} [Category.{vJ} J] [Category.{vD} D]
     [IsCofiltered J] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]

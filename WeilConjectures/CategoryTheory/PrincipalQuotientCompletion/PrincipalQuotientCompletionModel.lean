@@ -58,7 +58,6 @@ public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 /-! # Universal principal quotient completion with its strict unit
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941.
-(blueprint: def-pur-principal-quotient-completion-model).
 
 The ordinary functor uses the existing sheaf cokernel quotients and total tensor,
 followed by the actual signed Roos cone. Its derived universal pair, computed on
@@ -75,7 +74,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace CategoryTheory.PrincipalQuotientCompletion
 
 /-- Transpose a tower of complexes, using the existing degreewise construction.
-Source: Stacks 0941 (blueprint: def-pur-principal-quotient-completion-model). -/
+Source: Stacks 0941. -/
 def transpose {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -99,8 +98,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (R : Sheaf J CommRingCat.{r})
 
 /-- The functor `P ↦ (R/t^(n+1)[0] ⊗ P)_n`, with the recorded strict quotient maps.
-Source: Stacks 06YT and 0941
-(blueprint: def-pur-principal-quotient-completion-model). -/
+Source: Stacks 06YT and 0941. -/
 noncomputable def quotientTower
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections) :
@@ -120,15 +118,14 @@ noncomputable def quotientTower
     (Functor.whiskeringLeft ℕᵒᵖ _ _).obj (principalReductionTower R t) ⋙ transpose R
 
 /-- The actual signed Roos cone of the strict quotient tensor tower, functorially in `P`.
-Source: Stacks 0941 (blueprint: def-pur-principal-quotient-completion-model). -/
+Source: Stacks 0941. -/
 noncomputable def quotientRoos
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections) :=
   quotientTower R t ⋙ roosF
 
 /-- The existing quotient map with its codomain expressed in the functorial tower.
-Source: Stacks 06YT and 0941
-(blueprint: def-pur-principal-quotient-completion-model). -/
+Source: Stacks 06YT and 0941. -/
 noncomputable def quotientMap
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)
@@ -139,8 +136,7 @@ noncomputable def quotientMap
 
 /-- The product of the canonical quotient maps into the functorial quotient tower.
 Naming the map checks the concrete total-tensor identification once, before the model.
-Source: Stacks 06YT and 0941
-(blueprint: def-pur-principal-quotient-completion-model). -/
+Source: Stacks 06YT and 0941. -/
 noncomputable def quotientProduct
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections)
@@ -156,8 +152,7 @@ variable [HasDerivedCategory.{w}
 The counit and its K-flat computation fix the representative comparisons. The last two
 fields specify the quotient augmentation on both product coordinates, on every complex.
 Thus the data describe the canonical construction up to its unique compatible isomorphism.
-Source: Stacks 06YS, 06YT and 0941
-(blueprint: def-pur-principal-quotient-completion-model). -/
+Source: Stacks 06YS, 06YT and 0941. -/
 structure Model
     (t : (SheafOfModules.unit
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R)).sections) where

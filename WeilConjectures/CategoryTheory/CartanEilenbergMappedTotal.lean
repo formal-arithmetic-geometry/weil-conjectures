@@ -12,9 +12,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Additive functors commute with the finite Cartan--Eilenberg diagonals
-
-Source: blueprint thm-sp-if-e1, proof paragraph 2, finite diagonal sums.
-(blueprint: lem-sp-cartan-eilenberg-mapped-total).
 -/
 
 @[expose] public section
@@ -27,23 +24,7 @@ namespace CategoryTheory.Functor
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An additive functor commutes with this totalization because each diagonal has
-only finitely many nonzero terms. The comparison is fixed on the diagonal inclusions.
-Source: blueprint thm-sp-if-e1, proof paragraph 2, finite diagonal sums.
-(blueprint: lem-sp-cartan-eilenberg-mapped-total).
-
-Proof.
-1. Choose b below which I vanishes. In total degree n, extension by zero leaves only
-indices (m,s) with 0 <= m and b <= s and m+s=n. This is a finite set, empty when n<b.
-The full diagonal coproduct is canonically the finite coproduct on these indices;
-the omitted summands are zero and have unique maps to every object.
-2. An additive functor between abelian categories preserves finite biproducts and
-zero objects. Hence the diagonal coproduct comparison is an isomorphism. Compose
-it with the canonical extension-by-zero comparison in each summand. The resulting
-maps satisfy precisely the displayed formula, including all zero summands.
-3. On every diagonal summand the total differential is the sum of the two signed
-bicomplex differentials. Additivity preserves sums and integer signs. Naturality
-of extension and of the diagonal comparison proves commutation with this differential.
-The degreewise isomorphisms therefore assemble into the asserted complex isomorphism. -/
+only finitely many nonzero terms. The comparison is fixed on the diagonal inclusions. -/
 theorem cartanEilenberg_mapped_total_iso
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]

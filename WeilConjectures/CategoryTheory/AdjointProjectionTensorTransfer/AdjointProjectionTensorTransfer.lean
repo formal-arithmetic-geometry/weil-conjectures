@@ -10,10 +10,6 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 
 /-! # Conjugate adjunction transfer of the projection tensor transpose
 
-Source: blueprint, `lem-pur-co-smooth-etale-locality`, proof Step 1, serving
-`proposition-compatibility-purity-composition--1`, proof Step 1, remaining co-projection factors
-(blueprint: lem-pur-adjoint-projection-tensor-transfer).
-
 The component formulas are definitions; the theorem includes their naturality so that
 its componentwise equalities also identify the corresponding natural transformations.
 -/
@@ -38,9 +34,7 @@ variable {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [SymmetricCategory
   {F S : C ⥤ D} {G T : D ⥤ C}
 
 /-- The map `q_K`, with `W = G(1)`, formed from the symmetry, inverse projection,
-and the counit at the unit. Source: blueprint, etale normalization in
-`lem-pur-co-smooth-etale-locality`, Step 1
-(blueprint: lem-pur-adjoint-projection-tensor-transfer). -/
+and the counit at the unit. -/
 def q (aF : F ⊣ G) (T : D ⥤ C)
     (P : ∀ (M : C) (K : D), F.obj M ⊗ K ≅ F.obj (M ⊗ T.obj K)) (K : D) :
     F.obj (T.obj K ⊗ G.obj (𝟙_ D)) ⟶ K :=
@@ -48,18 +42,14 @@ def q (aF : F ⊣ G) (T : D ⥤ C)
     (aF.counit.app (𝟙_ D) ⊗ₘ 𝟙 K) ≫ (λ_ K).hom
 
 /-- The same projection expression after transfer to `S`, using
-`e = ε_1 ∘ d_W⁻¹` in mathematical composition order, i.e. `d_W.inv ≫ ε_1` in Lean.
-Source: blueprint, etale normalization in `lem-pur-co-smooth-etale-locality`, Step 1
-(blueprint: lem-pur-adjoint-projection-tensor-transfer). -/
+`e = ε_1 ∘ d_W⁻¹` in mathematical composition order, i.e. `d_W.inv ≫ ε_1` in Lean. -/
 def transferredQ (aF : F ⊣ G) (T : D ⥤ C) (d : F ≅ S)
     (p : ∀ (M : C) (K : D), S.obj M ⊗ K ≅ S.obj (M ⊗ T.obj K)) (K : D) :
     S.obj (T.obj K ⊗ G.obj (𝟙_ D)) ⟶ K :=
   S.map (β_ (T.obj K) (G.obj (𝟙_ D))).hom ≫ (p (G.obj (𝟙_ D)) K).inv ≫
     ((d.inv.app (G.obj (𝟙_ D)) ≫ aF.counit.app (𝟙_ D)) ⊗ₘ 𝟙 K) ≫ (λ_ K).hom
 
-/-- The map `h_K = r_TK ∘ (1_TK ⊗ η)`, where `η = u ∘ (d⁻¹)^c_1`.
-Source: blueprint, etale normalization in `lem-pur-co-smooth-etale-locality`, Step 1
-(blueprint: lem-pur-adjoint-projection-tensor-transfer). -/
+/-- The map `h_K = r_TK ∘ (1_TK ⊗ η)`, where `η = u ∘ (d⁻¹)^c_1`. -/
 def h (aF : F ⊣ G) (aS : S ⊣ T) (d : F ≅ S)
     (u : T.obj (𝟙_ D) ≅ 𝟙_ C) (K : D) : T.obj K ⊗ G.obj (𝟙_ D) ⟶ T.obj K :=
   (𝟙 (T.obj K) ⊗ₘ ((conjugateEquiv aF aS d.inv).app (𝟙_ D) ≫ u.hom)) ≫
@@ -70,28 +60,7 @@ end AdjointProjectionTensorTransfer
 open AdjointProjectionTensorTransfer
 
 /-- Conjugating `d⁻¹` transports the projection/counit transpose to tensoring with
-`η`, naturally in `K`. Source: blueprint, `lem-pur-co-smooth-etale-locality`, proof
-Step 1, serving `proposition-compatibility-purity-composition--1`, proof Step 1, co-projection
-factors (blueprint: lem-pur-adjoint-projection-tensor-transfer).
-
-Proof: (1) Apply `def-weil-pbc-adjunction-conjugate` to `d⁻¹`; its counit equation
-and injectivity of the inverse `S ⊣ T` Hom bijection give the characterization and
-uniqueness. (2) Expand the Hom transposes using the units; `unit_conjugateEquiv` and
-naturality of the conjugate give the Hom-transpose identity.
-(3) Naturality of `d` at the symmetry and the inverted projection square identify
-`q_K ∘ d_N⁻¹` in mathematical order with `transferredQ` (Lean reverses that order).
-(4) The counit characterization at the unit identifies the transferred counit with
-`S(ρ_1)` followed by evaluation. Naturality of `p` in `M` moves `ρ_1` through its
-inverse; the assumed evaluation equation at `T(1)` reduces the expression to
-`S(a_K ∘ (ρ_1 ⊗ 1) ∘ σ)` followed by evaluation.
-(5) Naturality of symmetry at `(1,η)` and `σ_TK,1 ≫ λ_TK = r_TK` identify this
-inside map with `h_K`. These tensor manipulations use `def-sfb-monoidal-category`.
-(6) Apply the Hom bijection of `def-weil-pbc-adjunction-mate` and the identity
-from (2), yielding `τ_K ≫ ρ_K = h_K` in Lean's composition order.
-(7) Naturality of symmetry, inverse projection and unitors proves naturality of
-`q` and `h`; naturality of the Hom bijection gives that of `τ`. Naturality of
-`d⁻¹` then gives that of the transferred expression. Thus all component equations
-are equations of the natural transformations they define. -/
+`η`, naturally in `K`. -/
 theorem adjointProjectionTensorTransfer
     {C : Type uC} [Category.{vC} C] [MonoidalCategory C] [SymmetricCategory C]
     {D : Type uD} [Category.{vD} D] [MonoidalCategory D] [SymmetricCategory D]

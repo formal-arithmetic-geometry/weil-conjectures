@@ -34,15 +34,12 @@ variable {V W X : Type*} [Category V] [Category W] [Category X]
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- The named interface has the same objects as the usual single functor.
-(blueprint: def-geo-exact-degree-zero-interface) -/
+/-- The named interface has the same objects as the usual single functor. -/
 theorem obj_eq (M : V) : obj V M = (DerivedCategory.singleFunctor V 0).obj M := by
   unfold obj
   rfl
 
-/-- Compatibility with the canonical composition and isomorphism comparisons.
-Source: Mathlib exact-functor single comparison and the source library's single coherence.
-(blueprint: def-geo-exact-degree-zero-interface) -/
+/-- Compatibility with the canonical composition and isomorphism comparisons. -/
 theorem comparison_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
     [F.Additive] [G.Additive] [H.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -70,8 +67,7 @@ theorem comparison_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     Iso.inv_hom_id_app_assoc, Category.comp_id]
 
-/-- Units of exact functors respect a specified composition isomorphism.
-(blueprint: def-geo-exact-degree-zero-interface) -/
+/-- Units of exact functors respect a specified composition isomorphism. -/
 theorem unit_comp (F : V ⥤ W) (G : W ⥤ X) (H : V ⥤ X)
     [F.Additive] [G.Additive] [H.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -128,8 +124,7 @@ private theorem raw_unit_id
     𝟙 ((DerivedCategory.singleFunctor V 0).obj M)
   exact (DerivedCategory.singleFunctor V 0).map_id M
 
-/-- The named exact unit is normalized by the canonical derived identity comparison.
-(blueprint: def-geo-exact-degree-zero-interface) -/
+/-- The named exact unit is normalized by the canonical derived identity comparison. -/
 theorem unit_id (F : V ⥤ V) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (e : F ≅ 𝟭 V) (M : V) (f : M ⟶ F.obj M) (hf : f = e.inv.app M) :

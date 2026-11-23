@@ -23,9 +23,7 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
 
-/-- An ordinary transformation of exact functors, descended to unbounded derived categories.
-Source: localization of the degreewise transformation
-(blueprint: lem-pur-exact-derived-mate). -/
+/-- An ordinary transformation of exact functors, descended to unbounded derived categories. -/
 noncomputable def exactDerivedMap (α : F ⟶ G) :
     F.mapDerivedCategory ⟶ G.mapDerivedCategory :=
   Localization.liftNatTrans DerivedCategory.Qh (HomotopyCategory.quasiIso C (.up ℤ))

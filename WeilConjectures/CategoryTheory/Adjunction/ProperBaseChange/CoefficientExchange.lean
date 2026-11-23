@@ -9,9 +9,9 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Coefficient transport of adjunction exchange maps
 
-Source: the calculus of adjunction mates, expanded for the coefficient comparison in
-Bhatt--Scholze, Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates)
+## References
+
+* Bhatt--Scholze, Lemma 6.5.9(3).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -34,8 +34,7 @@ variable {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type w}
 /-- The coefficient pullback square, over fixed category and functor instances.
 Keeping this equation as one predicate gives concrete derived applications the same
 implicit instance arguments as the abstract mate theorem.
-Source: adjunction mate calculus, Bhatt--Scholze Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates). -/
+Source: adjunction mate calculus, Bhatt--Scholze Lemma 6.5.9(3). -/
 def coefficientPullbackSquare
     (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)
     (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
@@ -46,20 +45,7 @@ def coefficientPullbackSquare
 
 /-- Pointwise coefficient transport requires the pull-comparison cube only at `R.obj K`.
 The exchange maps and push comparisons satisfy their two counit mate equations.
-
-Source: Mathlib's adjunction mates and Bhatt--Scholze, Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates)
-
-Proof. Apply injectivity of the second target adjunction's inverse Hom equivalence.
-Replace both exchange maps by their adjuncts. Naturality of the target square moves
-its first push comparison past the square map; its mate equation replaces the result.
-Naturality of the target counit and the second mate equation rewrite the other side.
-Move the mapped source exchange past the inverse pull comparison by naturality and
-replace its adjunct. Naturality of the remaining horizontal comparison leaves the
-pull-comparison cube precomposed and postcomposed with inverse vertical comparisons.
-Cancel these isomorphisms. The resulting equality is the desired Hom-equivalence
-image equality, hence the original coefficient/exchange equality. No map B or Be is
-assumed invertible. -/
+No map `B` or `Be` is assumed invertible. See Bhatt--Scholze, Lemma 6.5.9(3). -/
 theorem coefficient_exchange_of_counit_at
     (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)
     (K : C₂)
@@ -103,21 +89,7 @@ theorem coefficient_exchange_of_counit_at
     (fun z ↦ z ≫ He.map (T₂.map (a.counit.app K))) hc.symm
 
 /-- Coefficient transport of an exchange map follows from the pull-comparison cube and
-its two counit mate equations.
-
-Source: Mathlib's adjunction mates and Bhatt--Scholze, Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates)
-
-Proof. Apply injectivity of the second target adjunction's inverse Hom equivalence.
-Replace both exchange maps by their adjuncts. Naturality of the target square moves
-its first push comparison past the square map; its mate equation replaces the result.
-Naturality of the target counit and the second mate equation rewrite the other side.
-Move the mapped source exchange past the inverse pull comparison by naturality and
-replace its adjunct. Naturality of the remaining horizontal comparison leaves the
-pull-comparison cube precomposed and postcomposed with inverse vertical comparisons.
-Cancel these isomorphisms. The resulting equality is the desired Hom-equivalence
-image equality, hence the original coefficient/exchange equality. No map B or Be is
-assumed invertible. -/
+its two counit mate equations. See Bhatt--Scholze, Lemma 6.5.9(3). -/
 theorem coefficient_exchange_of_counit
     (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)
     (B : R ⋙ G ⟶ H ⋙ S) (Be : Re ⋙ Ge ⟶ He ⋙ Se)
@@ -142,11 +114,7 @@ theorem coefficient_exchange_of_counit
     (hB K) (hBe (T₂.obj K)) αU αV αG αH (δ.app K) (δ'.app (H.obj K))
     (hδ K) (hδ' (H.obj K)) (hcube (R.obj K))
 
-/-- Composition compatibility implies compatibility with a transported square.
-Source: cancellation of composition isomorphisms in the calculus of mates.
-(blueprint: lem-weil-pbc-composition-square-cancellation)
-Proof. Cancel r₁, use the two composition equations and the transport equation,
-and cancel s₁ with its inverse. -/
+/-- Composition compatibility implies compatibility with a transported square. -/
 theorem composition_square_aux {D : Type*} [Category D]
     {A B C D₀ A' B' C' D' : D}
     (r₁ : A ≅ B) (r₂ : C ≅ D₀) (e : A ≅ C)

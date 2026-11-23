@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Abelian.Refinements
 # Representative covers of successor filtered boundaries
 
 Source: Stacks Project, Homology, Tag 012K, displayed boundary and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-boundary-representatives).
 -/
 
 @[expose] public section
@@ -80,24 +79,7 @@ private theorem graded_boundary_image (K : CochainComplex C ℤ)
     ← Category.assoc, imageSubobject_arrow_comp, hq, imageSubobject_zero, sup_bot_eq]
 
 /-- Successor boundaries admit an epimorphic cover by actual incoming cycle representatives.
-Source: Stacks Project, Homology, Tag 012K, displayed boundary and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-boundary-representatives).
-
-Proof. Write j = (p,q), n = p+q. The relation gives i = (p-r,q+r-1), of total
-degree n-1. Put U = F^p K^n intersect d(F^(p-r) K^(n-1)). Pull U back to F^p K^n.
-Its graded image is B_(r+1): the added F^(p+1) has zero graded image, and pullback
-along the mono F^p K^n -> K^n preserves sums of subobjects lying in F^p K^n.
-Thus the map from this pullback to B_(r+1) is epic. Pull back the epimorphism
-F^(p-r) K^(n-1) -> d(F^(p-r) K^(n-1)) along U's inclusion into that image.
-This gives an epic cover of U, hence an epic composite e onto B_(r+1), together
-with maps t and tprime with dt = tprime. Since tprime lies in F^p, t lies in the
-incoming r-cycle representative subobject. Its graded projection therefore factors
-through the incoming graded cycles, giving x. The graded projection of tprime is
-e followed by the successor-boundary inclusion. Boundaries lie in successor cycles by
-d squared = zero. Factoring the latter projection through that mono gives the
-last displayed equation. The construction uses finite pullbacks and image
-factorizations only; covers compose because epimorphisms are stable under pullback
-in an abelian category. -/
+Source: Stacks Project, Homology, Tag 012K, displayed boundary and differential formulas. -/
 theorem filteredComplex_successor_boundary_representatives
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (_hr : 1 ≤ r)
     (i j : ℤ × ℤ) (hij : (ComplexShape.up' (r, 1 - r)).Rel i j) :

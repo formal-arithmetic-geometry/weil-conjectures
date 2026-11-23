@@ -13,7 +13,7 @@ public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 /-!
 # Internal group objects associated to discrete continuous integer representations
 
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -155,8 +155,7 @@ noncomputable def discreteRepCommGrpMap
     exact map_add f.hom.hom _ _
 
 /-- The reverse functor keeps the underlying action and uses its pointwise group law.
-Source: Stacks Project, Tag 04JQ.
-(blueprint: def-exc-discrete-continuous-rep-to-commgrp) -/
+Source: Stacks Project, Tag 04JQ. -/
 noncomputable def discreteContinuousRepToCommGrp :
     DiscreteContinuousRep.{0, u, w} ℤ G ⥤ CommGrp (DiscreteContAction (Type w) G) where
   obj := discreteRepCommGrpObject

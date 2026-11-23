@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 /-! # ColimitSiteRawSectionDiagram
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-diagram).
 -/
 
 @[expose] public section
@@ -300,20 +299,13 @@ private theorem colimit_site_raw_comparison_unit_compatibility
   exact NatTrans.congr_app (congrArg (fun k ↦ k.hom) hc) (op X)
 
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-presentation construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-diagram).
+/-- The left Kan extensions `B t` of the stage inverse images of a sheaf of types `G` along the
+colimit functors form a diagram over `Under i`, with transition maps compatible with `θ` and a
+cocone `γ` to the underlying presheaf of the colimit inverse image whose composites with the Kan
+units are `α`.
 
-Proof: Construct B(t) as the left Kan extension of the underlying stage inverse-image
-sheaf along V(t.right).op, and β(t) as its universal unit. For b : t to t',
-compose θ(b) with β(t') and transport along V.w; the Kan universal property
-constructs B.map b. Adjunction uniqueness under hθ proves identities and
-composition. Extend α(t) by the same Kan property to γ(t); hα and hθ prove
-naturality. This constructs the raw diagram and its comparison maps only;
-no sheaf condition or isomorphism after sheafification is asserted here.
-The universal units determine B, its maps and γ up to the unique compatible
-isomorphism; no arbitrary existence witness is used to define an object.
--/
+Source: Stacks Project, Sites, Tag 0A35, presentation construction and adjunction
+paragraphs. -/
 theorem colimit_site_raw_section_diagram
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

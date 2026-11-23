@@ -43,13 +43,11 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-! # Simultaneous exact-adjoint tower models
 
-Source: Stacks Project, Cohomology on Sites, Tag 0A07, first proof; Tags 0941,
-079P, 08BJ, 0BK6, 070K and 070Y
-(blueprint: lem-weil-pbc-exact-adjoint-tower-models).
-
-The structures package the choices and assertions of the statement. In particular,
-they do not choose any replacement or any derived functor from a bare existence axiom.
 The positive tower level n+1 is indexed by n : ℕ.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0A07; Tags 0941, 079P, 08BJ, 0BK6, 070K and 070Y.
 -/
 
 @[expose] public noncomputable section
@@ -70,8 +68,8 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A]
   {B : Type uB} [Category.{vB} B] [Abelian B]
 
 /-- Applying a functor levelwise to a strict tower complex.
-Source: Stacks Tag 0A07, tower-topos square
-(blueprint: lem-weil-pbc-exact-adjoint-tower-models). -/
+
+Stacks Project, Tag 0A07. -/
 abbrev tower (G : A ⥤ B) [G.Additive] :
     CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex (ℕᵒᵖ ⥤ B) ℤ :=
   ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).mapHomologicalComplex (.up ℤ)
@@ -80,8 +78,8 @@ variable [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
 
 /-- A total right derived functor with its universal unit, computed on K-injectives.
 This only bundles the conclusion of the recorded K-injective total-derivation lemma.
-Source: Stacks Tags 070K and 070Y
-(blueprint: lem-weil-pbc-exact-adjoint-tower-models). -/
+
+Stacks Project, Tags 070K and 070Y. -/
 structure DerivedModel (H : CochainComplex A ℤ ⥤ CochainComplex B ℤ) where
   functor : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B
   unit : H ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ functor
@@ -92,8 +90,8 @@ variable [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
   [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
 
 /-- The negative-difference fibre coordinates, ordered as (y,x).
-Source: Stacks Tag 0941 and the explicit sign calculation in the node
-(blueprint: lem-weil-pbc-exact-adjoint-tower-models). -/
+
+Stacks Project, Tag 0941. -/
 def negativeCoordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     (ExactProductsRoos.fibre.obj X).X (p + 1) ≅
       (roosP X).X p ⊞ (roosP X).X (p + 1) :=
@@ -105,8 +103,8 @@ def negativeCoordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
 /-- The signed, unit-normalized Roos conclusions for one of the two categories.
 The sign isomorphism and both comparisons are natural on all strict tower complexes.
 The final fields transport the rotated cone triangle along the actual map j.
-Source: Stacks Tag 0941, including the sign convention of the strict Roos model
-(blueprint: lem-weil-pbc-exact-adjoint-tower-models). -/
+
+Stacks Project, Tag 0941. -/
 structure NormalizedRoos (L : DerivedModel (roosLimitFunctor (A := A))) where
   sign : ExactProductsRoos.fibre (B := A) ≅ roosF
   sign_coordinates : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ),
@@ -155,8 +153,8 @@ variable [HasLimitsOfShape ℕᵒᵖ B] [HasCountableProducts B]
 /-- All simultaneous models and their canonical normalizations. The derived models
 are choices with universal units; c and beta are fixed by their projection equations.
 No exact-product assumption is used except in the last field.
-Source: Stacks Tag 0A07, first proof, and Tags 0BK6 and 0941
-(blueprint: lem-weil-pbc-exact-adjoint-tower-models). -/
+
+Stacks Project, Tags 0A07, 0BK6 and 0941. -/
 structure Models (G : A ⥤ B) [G.Additive] where
   direct : DerivedModel (G.mapHomologicalComplex (.up ℤ))
   towerDirect : DerivedModel (tower G)

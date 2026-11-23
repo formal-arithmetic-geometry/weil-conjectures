@@ -171,8 +171,7 @@ public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 /-! # Constant scalar restriction and tensor products
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 0GMW, and Cohomology on Sites,
-Tags 06YN, 06YP, 06YS, 0G7D, 06YT and 06YU
-(blueprint: lem-sfb-constant-scalar-restriction-tensor).
+Tags 06YN, 06YP, 06YS, 0G7D, 06YT and 06YU.
 
 The coefficient-sized small site implements the size convention. The restriction is the
 existing literal restriction along the constant commutative-ring sheafification unit.
@@ -241,7 +240,7 @@ private theorem flatResolutionTransport
 attribute [local instance] complexTensorMemo derivedTensorMemo
 
 /-- The canonical localization tensor square on every pair of K-flat representatives.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
+Source: Stacks 06YU. -/
 def derivedTensorCompatibility
     (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
     [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
@@ -268,7 +267,7 @@ def derivedTensorCompatibility
       DerivedCategory.Q.map (Functor.mapCochainComplexμIso G P Q).inv
 
 /-- Compatibility of the derived tensor comparison with the canonical Koszul braiding.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
+Source: Stacks 06YU. -/
 def derivedSymmetryCompatibility
     (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
     [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
@@ -295,7 +294,7 @@ def derivedSymmetryCompatibility
           (G.mapDerivedCategory.obj X) (G.mapDerivedCategory.obj Y)).hom
 
 /-- The degree-zero regular-unit normalization of the derived tensor comparison.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
+Source: Stacks 06YU. -/
 def derivedUnitCompatibility
     (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
     [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
@@ -318,7 +317,7 @@ def derivedUnitCompatibility
 
 /-- The monoidal structure and its specified tensor, symmetry and unit laws.
 The subtype stores the same comparison data using the existing logical constructors.
-Source: Stacks 06YU (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
+Source: Stacks 06YU. -/
 def DerivedComparisonData
     (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
     [Abelian D] [Abelian E] [IsGrothendieckAbelian.{dV} D]
@@ -962,14 +961,13 @@ end OrdinaryProof
 variable [HasDerivedCategory.{wR} (Modules J B)] [HasDerivedCategory.{wB} (Fixed J B)]
 
 /-- The induced equivalence of ordinary unbounded derived categories.
-Source: Stacks 015F and 05RT (blueprint: lem-sfb-constant-scalar-restriction-tensor). -/
+Source: Stacks 015F and 05RT. -/
 def onDerived : DerivedCategory (Modules J B) ⥤ DerivedCategory (Fixed J B) :=
   (restriction J B).mapDerivedCategory
 
 /-- The normalized coherent comparison on ordinary unbounded K-flat derived tensors.
 The monoidal structures here are the existing K-flat derived localization structures.
-Source: Stacks 06YS, 0G7D, 06YT and 06YU
-(blueprint: lem-sfb-constant-scalar-restriction-tensor).
+Source: Stacks 06YS, 0G7D, 06YT and 06YU.
 The tensor square specifies the comparison on every pair of K-flat representatives,
 using precisely `Functor.mapCochainComplexμIso` and the canonical localization maps.
 The unit square fixes its normalization at the regular unit complex. -/

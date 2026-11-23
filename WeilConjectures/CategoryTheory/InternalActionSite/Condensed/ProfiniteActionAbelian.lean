@@ -17,9 +17,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-!
 # Internal condensed actions form a Grothendieck abelian category
 
-Source: paragraph (3) of the direct-image stability proof, action-site presentation
-(blueprint: def-sfb-condensed-derived-invariants).
-
 Through `siteEquivalence`, internal actions of a topological group `G` on internal modules
 over a condensed ring `A` are equivariant sheaves on the small profinite site, which the
 action-site presentation identifies with modules over the twisted ringed site. We deduce
