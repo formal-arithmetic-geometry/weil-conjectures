@@ -65,8 +65,7 @@ variable {A : Type u'} [Category.{v'} A] {FA : A → A → Type*} {CA : A → Ty
 
 /-- **Finitely many sections of a constant sheaf are locally constant**: for finitely many
 sections `x i` of the constant sheaf at `N` over `U`, there is a covering sieve of `U` on
-whose members every `x i` is the image of an element of `N`.
-(blueprint: `lem-weil-pbc-finite-constant-set-sections-cover`) -/
+whose members every `x i` is the image of an element of `N`. -/
 lemma GrothendieckTopology.exists_mem_forall_exists_toSheafify_const_app_eq (N : A) {U : C}
     {ι : Type*} [Finite ι]
     (x : ι → ToType ((CategoryTheory.sheafify J ((Functor.const Cᵒᵖ).obj N)).obj (op U))) :
@@ -112,9 +111,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 in the form of sections: for `φ : M_C ⟶ N_C` with `M` finitely generated and any object `T`,
 there is a covering sieve `S` of `T` such that over every member `U` of `S` not covered by the
 empty sieve, `φ` sends the constant section `m` over `U` to the constant section `f m`, for a
-`Λ`-linear map `f : M ⟶ N`. The sections `φ♭(x)` for `x` in a finite generating set of `M` are
-lifted to elements of `N` on a common cover; since `N ⟶ N_C(U)` is injective and its range is a
-submodule, every `φ♭(m)` then comes from a unique element `f m` of `N`, and `f` is linear. -/
+`Λ`-linear map `f : M ⟶ N`. -/
 theorem exists_mem_forall_exists_linearMap (M N : ModuleCat.{v'} Λ) [Module.Finite Λ M]
     (φ : (constantSheaf J (ModuleCat.{v'} Λ)).obj M ⟶ (constantSheaf J (ModuleCat.{v'} Λ)).obj N) :
     ∃ S ∈ J T, ∀ ⦃U : C⦄ (g : U ⟶ T), S g → (⊥ : Sieve U) ∉ J U → ∃ f : M ⟶ N, ∀ m : M,

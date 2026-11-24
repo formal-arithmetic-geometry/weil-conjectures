@@ -33,6 +33,8 @@ abelian category (`CategoryTheory.GrothendieckTopology.preservesFiniteLimits_plu
 * `CategoryTheory.GrothendieckTopology.preservesFiniteLimits_sheafification'`: consequently
   `J.sheafification D = J.plusFunctor D ⋙ J.plusFunctor D` is left exact.
 
+## Implementation details
+
 The proofs of the first result are those of `Mathlib.CategoryTheory.Sites.LeftExact`, with
 the concreteness hypotheses removed; they should replace the ones there once the Mathlib
 statements are generalized.
@@ -144,9 +146,7 @@ instance preservesLimitsOfShape_plusFunctor'
     rfl
 
 /-- The plus construction is left exact as soon as the colimits over the covers are exact,
-i.e. for any target satisfying axiom AB5. This generalizes
-`CategoryTheory.GrothendieckTopology.preserveFiniteLimits_plusFunctor`, which assumes the
-target concrete. -/
+i.e. for any target satisfying axiom AB5. -/
 instance preservesFiniteLimits_plusFunctor' [HasFiniteLimits D]
     [∀ X : C, HasExactColimitsOfShape (J.Cover X)ᵒᵖ D] :
     PreservesFiniteLimits (J.plusFunctor D) := by
@@ -156,8 +156,7 @@ instance preservesFiniteLimits_plusFunctor' [HasFiniteLimits D]
   intro K _ _
   apply preservesLimitsOfShape_plusFunctor'
 
-/-- Sheafification is the plus construction applied twice, so it too is left exact over a
-target satisfying axiom AB5. -/
+/-- Sheafification is left exact over a target satisfying axiom AB5. -/
 instance preservesFiniteLimits_sheafification' [HasFiniteLimits D]
     [∀ X : C, HasExactColimitsOfShape (J.Cover X)ᵒᵖ D] :
     PreservesFiniteLimits (J.sheafification D) :=
@@ -166,8 +165,7 @@ instance preservesFiniteLimits_sheafification' [HasFiniteLimits D]
 section IsGrothendieckAbelian
 
 /-- Over a Grothendieck abelian category whose filtered colimits have the size of the
-sieves of the site, the plus construction is left exact: axiom AB5 for `A` is exactness of
-the colimits over `(J.Cover X)ᵒᵖ`. -/
+sieves of the site, the plus construction is left exact. -/
 instance preservesFiniteLimits_plusFunctor_of_isGrothendieckAbelian (A : Type w)
     [Category.{t} A] [Abelian A] [IsGrothendieckAbelian.{max u v} A] :
     PreservesFiniteLimits (J.plusFunctor A) :=
@@ -193,7 +191,7 @@ namespace CategoryTheory
 /-- **Sheafification of presheaves of sets commutes with finite limits.** For a site `C`, the
 sheafification functor from presheaves of sets to sheaves of sets preserves finite limits; in
 particular it sends the terminal presheaf to the terminal sheaf and binary products (computed
-sectionwise) to binary products. (blueprint: `situation-conventions`) -/
+sectionwise) to binary products. -/
 theorem preservesFiniteLimits_presheafToSheaf_type {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C) :
     Limits.PreservesFiniteLimits (presheafToSheaf J (Type (max u v))) :=

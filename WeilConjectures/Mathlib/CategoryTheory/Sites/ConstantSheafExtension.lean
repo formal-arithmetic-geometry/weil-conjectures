@@ -24,10 +24,11 @@ and is, after a further localisation, induced by a linear map `f : K ⟶ M`
 constant sheaf at the pushout of `M ← K ⟶ Λ^b`, by the five lemma
 (`CategoryTheory.exists_mem_forall_isConstant_over_of_shortExact`).
 
-This is the extension clause of blueprint `lemma-constructible-flc-serre`. The argument of the
-blueprint (the sheaf of splittings is a torsor) only applies when the extension is locally
-split, which fails for instance for `0 ⟶ ℤ/2 ⟶ ℤ/4 ⟶ ℤ/2 ⟶ 0` over `Λ = ℤ/4`; the presentation
-argument above works for any noetherian `Λ`.
+## Implementation details
+
+The argument via the sheaf of splittings being a torsor only applies when the extension is
+locally split, which fails for instance for `0 ⟶ ℤ/2 ⟶ ℤ/4 ⟶ ℤ/2 ⟶ 0` over `Λ = ℤ/4`; the
+presentation argument above works for any noetherian `Λ`.
 -/
 
 @[expose] public section

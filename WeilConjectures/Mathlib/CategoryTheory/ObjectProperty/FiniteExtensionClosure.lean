@@ -10,8 +10,20 @@ public import Mathlib.CategoryTheory.Triangulated.Generators
 
 /-! # Finite extension presentations of thick envelopes
 
-Source: Stacks, Tags 0FX1 and 0FX2, and blueprint scalar-six-ctf (1).
-(blueprint: lem-sfb-thick-envelope-finite-extensions).
+Every object of the thick envelope of a nonempty property `P` of a triangulated category is a
+retract of an iterated extension product of shifts of objects satisfying `P`.
+
+## Implementation details
+
+The proof shows that the union `Q` of the retract closures of the iterated extension products of
+the shift closure of `P` is thick: it is stable under retracts and shifts; for an extension of
+objects in iterations `p` and `q`, both splittings can be moved outside the triangle, giving
+iteration `(p + 1) + q`; and the rotated identity triangle of an object of `Q` shows that `Q`
+contains zero.
+
+## References
+
+* Stacks Project, Tags 0FX1 and 0FX2
 -/
 
 @[expose] public section
@@ -25,19 +37,9 @@ namespace CategoryTheory.ObjectProperty
 variable {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
 
-/-- Finite sums and intermediate retracts in a thick envelope can be collected into
-finite extension products followed by one final retract.
-
-Source: Stacks, Tags 0FX1 and 0FX2; blueprint scalar-six-ctf (1), finite generators.
-(blueprint: lem-sfb-thick-envelope-finite-extensions).
-
-Proof: Let Q be the union of the retract closures of the iterated extension products
-of the shift closure of P. Retracts compose, and shifts preserve the same iteration.
-For an extension of objects in iterations p and q, the retract-extension lemma moves
-both splittings outside the triangle, and associativity gives iteration (p+1)+q.
-Thus Q is extension closed. A nonempty generator gives an object in Q; the rotation
-of its identity triangle gives zero in Q. Consequently Q is thick, and the universal
-property of the thick envelope gives the claimed inclusion. -/
+/-- Every object of the thick envelope of a nonempty property `P` is a retract of an object of
+`(P.shiftClosure ℤ).extensionProductIter n` for some `n : ℕ`: finite sums and intermediate
+retracts can be collected into finite extension products followed by one final retract. -/
 theorem triangEnvelope_le_finiteExtensions (P : ObjectProperty C) [P.Nonempty] :
     P.triangEnvelope ≤ fun K ↦ ∃ n : ℕ,
       ((P.shiftClosure ℤ).extensionProductIter n).retractClosure K := by

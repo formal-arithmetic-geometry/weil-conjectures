@@ -31,6 +31,15 @@ needs, so that `HasLimitsOfSize.{u, u} A`, `HasColimitsOfSize.{u, u} A` and
 `HasColimitsOfSize.{u, u + 1} A` need not be carried as hypotheses alongside
 `IsGrothendieckAbelian.{u + 1} A`.
 
+## Implementation details
+
+Instance search does not climb the universes through these instances: discharging the hypothesis
+`HasLimitsOfSize.{u + 1, u + 1} A` (resp. `HasColimitsOfSize.{u + 1, u + 1} A`) through the
+instance itself would require `Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules
+out. The priority is `low` so that this attempt is made only after the instances which do provide
+(co)limits of size `u + 1`; tried first it aborts elaboration with a universe constraint error
+instead of failing silently.
+
 -/
 
 @[expose] public section
@@ -40,40 +49,20 @@ universe u' u
 namespace CategoryTheory.Limits
 
 /-- A category with `Hom`-types in `u + 1` and limits of size `u + 1` has limits of size
-`u`, by `hasLimitsOfSizeShrink`.
-
-Instance search does not climb the universes here: discharging the hypothesis
-`HasLimitsOfSize.{u + 1, u + 1} A` through this very instance would require
-`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. The priority is `low`
-so that this attempt is made only after the instances which do provide limits of size
-`u + 1`; tried first it aborts elaboration with a universe constraint error instead of
-failing silently. -/
+`u`. -/
 instance (priority := low) hasLimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
     [HasLimitsOfSize.{u + 1, u + 1} A] : HasLimitsOfSize.{u, u} A :=
   hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} A
 
 /-- A category with `Hom`-types in `u + 1` and colimits of size `u + 1` has colimits of
-size `u`, by `hasColimitsOfSizeShrink`.
-
-Instance search does not climb the universes here: discharging the hypothesis
-`HasColimitsOfSize.{u + 1, u + 1} A` through this very instance would require
-`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. As for
-`hasLimitsOfSize_of_succ` the priority is `low`, so that the attempt is made only after the
-instances which do provide colimits of size `u + 1`. -/
+size `u`. -/
 instance (priority := low) hasColimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u} A :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
 
 /-- A category with `Hom`-types in `u + 1` and colimits of size `u + 1` has colimits
-indexed by categories with objects in `Type (u + 1)` and `Hom`-types in `Type u`, by
-`hasColimitsOfSizeShrink`. Such are the comma categories indexing the pointwise left Kan
-extensions along a functor between small sites.
-
-Instance search does not climb the universes here: discharging the hypothesis
-`HasColimitsOfSize.{u + 1, u + 1} A` through this very instance would require
-`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. As for
-`hasColimitsOfSize_of_succ` the priority is `low`, so that the attempt is made only after
-the instances which do provide colimits of size `u + 1`. -/
+indexed by categories with objects in `Type (u + 1)` and `Hom`-types in `Type u`, such as the
+comma categories indexing pointwise left Kan extensions along a functor between small sites. -/
 instance (priority := low) hasColimitsOfSize_succ_of_succ (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u + 1} A :=
   hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A
@@ -84,8 +73,7 @@ namespace CategoryTheory.Limits
 
 /-- **Universal property of the chosen colimit.** For a diagram `F : J ⥤ C` having a colimit,
 with coprojections `colimit.ι F j`, every cocone `s` on `F` receives exactly one morphism
-`colimit F ⟶ s.pt` compatible with the coprojections, namely `colimit.desc F s`.
-(blueprint: `def-weil-pbc-category-colimit`) -/
+`colimit F ⟶ s.pt` compatible with the coprojections, namely `colimit.desc F s`. -/
 theorem colimit.existsUnique_desc {J : Type*} [Category* J] {C : Type*} [Category* C]
     (F : J ⥤ C) [HasColimit F] (s : Cocone F) :
     ∃! u : colimit F ⟶ s.pt, ∀ j, colimit.ι F j ≫ u = s.ι.app j :=

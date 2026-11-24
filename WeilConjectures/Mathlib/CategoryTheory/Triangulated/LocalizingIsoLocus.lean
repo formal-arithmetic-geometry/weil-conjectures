@@ -12,14 +12,17 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Invertibility propagates to the localizing closure
 
-Source: blueprint `sec-six-functors-basics/sk-lem-sf-determination/`,
-`det-sf-determination-localizing.md`, statement and proof
-(blueprint: lemma-checking-isomorphisms-constructible-complexes--1).
+If a shift-compatible natural transformation between exact, coproduct-preserving functors of
+triangulated categories is invertible on a set `S` of objects, then it is invertible on the
+localizing closure of `S`.
+
+## Implementation details
 
 The localizing closure is written as its defining intersection in the statement.
 Coproduct closure uses arbitrary colimit cocones, including singleton coproducts,
 so it includes closure under isomorphisms. The source category can itself be a
-localizing subcategory, as allowed in the source's parenthetical alternative.
+localizing subcategory; its triangles and coproducts are then inherited from the ambient
+category.
 -/
 
 @[expose] public section
@@ -35,33 +38,7 @@ namespace CategoryTheory.NatTrans
 /-- The isomorphism locus of a shift-compatible natural transformation between exact,
 coproduct-preserving functors is triangulated and closed under coproducts and retracts.
 If it contains `S`, it contains the intersection of all triangulated subcategories
-containing `S` and closed under arbitrary coproducts, namely the localizing closure.
-
-Source: blueprint `sec-six-functors-basics/sk-lem-sf-determination/`,
-`det-sf-determination-localizing.md` (blueprint:
-lemma-checking-isomorphisms-constructible-complexes--1).
-
-Proof: write the common source as `C`, whether it is the ambient category or the
-localizing category. Naturality conjugates components along object isomorphisms,
-so the locus is replete. The component at zero is invertible, since exact functors
-send zero to zero. Shift compatibility conjugates the component on a shifted object
-to the shifted original component, giving closure under every integer shift.
-Exactness and compatibility form a morphism of image distinguished triangles;
-`lemma-checking-isomorphisms-constructible-complexes--1` gives invertibility at the third vertex
-from any two, proving triangulated closure in Mathlib's full-subcategory convention.
-For a coproduct with inclusions `i`, both functors give colimit cocones. The
-universal property constructs an inverse whose precomposition with `F₂.map i` is
-`inv (η.app _) ≫ F₁.map i`. Naturality and coproduct
-uniqueness give both inverse identities, also for the empty family.
-For a retraction `i : K ⟶ L`, `p : L ⟶ K` with `i ≫ p = 𝟙 K`, the inverse
-at `K` is `F₂.map i ≫ inv (η.app L) ≫ F₁.map p`; naturality and the retraction
-identity verify both composites. This proves direct-summand closure.
-Finally, if the locus contains `S`, it is a member of the defining intersection,
-so it contains the localizing closure. If the functors are defined only on that
-closure, the domain inherits its triangles and coproducts from the ambient
-category. Its isomorphism locus is consequently also an ambient replete,
-triangulated, coproduct-closed subcategory containing `S`. Ambient minimality
-then makes the locus the whole domain, just as internal generation does. -/
+containing `S` and closed under arbitrary coproducts, namely the localizing closure. -/
 theorem isoLocus_localizing
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

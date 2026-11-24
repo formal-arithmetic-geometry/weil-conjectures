@@ -44,6 +44,11 @@ The étale topology is coarser than the fppf topology, hence subcanonical. For e
 subcanonical topology on `Scheme`, for instance the fpqc, fppf and étale topologies, the global
 sections functor `Γ` is a sheaf (`AlgebraicGeometry.Scheme.isSheaf_Γ`): for a ring `R`, the
 presheaf `U ↦ (R ⟶ Γ(U, 𝒪_U))` is represented by `Spec R`.
+
+## References
+
+* Stacks Project, Topologies, Lemma 34.7.4 (Tag 021P), for
+  `AlgebraicGeometry.Scheme.exists_finite_fppf_affine_open_refinement`.
 -/
 
 @[expose] public section
@@ -133,8 +138,7 @@ lemma of_isPullback_of_mem_fpqcTopology {T Z : Scheme.{u}} {S : Sieve T}
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Descent of properties of morphisms along fpqc coverings**, for a covering family
 `{g i : T' i ⟶ T}`: if `P` is moreover stable under base change and the base changes `b i` of
-`f` along the `g i` have `P`, then `f` has `P`.
-(blueprint: `lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent`) -/
+`f` along the `g i` have `P`, then `f` has `P`. -/
 lemma of_isPullback_of_ofArrows_mem_fpqcTopology [P.IsStableUnderBaseChange] {T Z : Scheme.{u}}
     {ι : Type*} {T' : ι → Scheme.{u}} {g : ∀ i, T' i ⟶ T}
     (hg : Sieve.ofArrows T' g ∈ fpqcTopology T) (f : Z ⟶ T) {Z' : ι → Scheme.{u}}
@@ -181,12 +185,7 @@ lemma exists_finite_affine_flat_of_mem_fpqcTopology {V : Scheme.{u}} [IsAffine V
   exact S.downward_closed (hle _ _ (h𝒰 _)) _
 
 /-- An fppf covering family of an affine scheme `U` is refined by a finite fppf covering family
-consisting of affine opens of its members. Source: Stacks Project, Topologies, Lemma 34.7.4
-(Tag 021P).
-
-Every point of `U` lies in the image of an affine open of some member. The composite of the
-inclusion of such an affine open with the original morphism is flat and locally of finite
-presentation, so its image is open; quasi-compactness of `U` selects finitely many of them. -/
+consisting of affine opens of its members. -/
 theorem exists_finite_fppf_affine_open_refinement {U : Scheme.{u}} [IsAffine U]
     {I : Type v} (T : I → Scheme.{u}) (f : ∀ i, T i ⟶ U)
     (hf : Presieve.ofArrows T f ∈ fppfPrecoverage U) :
@@ -312,11 +311,7 @@ lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
     (precoverage_mono fun _ _ _ _ ↦ ⟨inferInstance, inferInstance⟩)
 
 /-- **Zariski coverings are fppf coverings.** A family of open immersions covering a scheme `T` is
-an fppf covering of `T`: open immersions are flat and locally of finite presentation (on the level
-of covering families this is Mathlib's `zariskiPrecoverage_le_fppfPrecoverage`), so every Zariski
-covering sieve is an fppf covering sieve.
-
-(blueprint: `lem-pc-zariski-coverings-are-fppf`) -/
+an fppf covering of `T`: every Zariski covering sieve is an fppf covering sieve. -/
 lemma zariskiTopology_le_fppfTopology : zariskiTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage
 

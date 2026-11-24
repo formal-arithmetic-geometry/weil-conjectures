@@ -57,7 +57,15 @@ restriction of `P` to `Over X`.
   essentially small site, a covering indexed by a type in an arbitrary universe `w` and
   cohomology computed in `AddCommGrpCat.{w}`, after lifting everything to `AddCommGrpCat.{max v w}`.
 
-## Implementation notes
+## Implementation details
+
+The Čech double complex is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`: the
+cohomology of the complex `I^•(V)` is `H^•(V, F)` (`Sheaf.cohomologyPresheafIso`) and cohomology
+commutes with the products defining the Čech complex, so the columns compute `C^p(𝔘, ℋ^q(F))`;
+the augmented Čech complex of the injective sheaf `I^q` is exact (Stacks `03F6`, `03AW`), so
+`I^•(X) ⟶ Tot D` is a quasi-isomorphism and the total complex computes `H^n(X, F)`. In
+`Sheaf.exists_cechDoubleComplex` the groups `I^q(V)` are only `v`-small, so `D` lives in
+`AddCommGrpCat.{v}` and the covering is indexed by `ι : Type v`.
 
 The statement `exists_cechToDerivedSpectralSequence` assumes that the site is essentially small
 (`EssentiallySmall.{v} C`). The sites of the Stacks project are small, and the proof needs an
@@ -75,6 +83,11 @@ universes `v` and `w` with `Ext.chgUniv`, and finally bring the spectral sequenc
 terms are `w`-small. The special case where all universes agree and only enough injectives are
 assumed is `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence_of_enoughInjectives`, in
 `WeilConjectures.CategoryTheory.Sites.CechSpectralSequence`.
+
+## References
+
+* [Stacks Project, Tag 03F6](https://stacks.math.columbia.edu/tag/03F6)
+* [Stacks Project, Tag 03AW](https://stacks.math.columbia.edu/tag/03AW)
 -/
 
 @[expose] public section
@@ -115,18 +128,8 @@ injectives. There is a first quadrant double complex `D` of abelian groups such 
   presheaf `ℋ^q(F) : V ↦ H^q(V, F)`;
 * the total complex of `D` computes the cohomology `H^n(X, F)`.
 
-It is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`: the cohomology of the
-complex `I^•(V)` is `H^•(V, F)` (`Sheaf.cohomologyPresheafIso`) and cohomology commutes with the
-products defining the Čech complex, so the columns compute `C^p(𝔘, ℋ^q(F))` (Step 2); the
-augmented Čech complex of the injective sheaf `I^q` is exact (Stacks `03F6`, `03AW`), so
-`I^•(X) ⟶ Tot D` is a quasi-isomorphism and the total complex computes
-`H^n(I^•(X)) = H^n(X, F)` (Step 3).
-
-The groups `I^q(V)` are only `v`-small, so `D` lives in `AddCommGrpCat.{v}`; this is why the
-covering is indexed by `ι : Type v` and the cohomology is computed in `AddCommGrpCat.{v}`. See
-`Sheaf.exists_cechDoubleComplex_uliftFunctor` for other universes.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, Steps 1 to 3 of the proof) -/
+Here the covering is indexed by `ι : Type v` and cohomology is computed in
+`AddCommGrpCat.{v}`. -/
 theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
     [EnoughInjectives (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -199,12 +202,7 @@ quadrant double complex `D` in `AddCommGrpCat.{max v w}` such that
 
 * for every `q`, the complex `p ↦ H^q(D^{p, •})` is the universe lift of the Čech complex
   `C^•(𝔘, ℋ^q(F))`;
-* the total complex of `D` computes the universe lift of `H^n(X, F)`.
-
-As in `Sheaf.exists_cechDoubleComplex`, it is `D^{p, q} = C^p(𝔘, I^q)` for an injective
-resolution `F → I^•`, where `I^q` is lifted to `AddCommGrpCat.{max v w}`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, Steps 1 to 3 of the proof) -/
+* the total complex of `D` computes the universe lift of `H^n(X, F)`. -/
 theorem Sheaf.exists_cechDoubleComplex_uliftFunctor [EssentiallySmall.{v} C]
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -285,12 +283,7 @@ with `E₂^{p, q} ≅ Ȟ^p(𝔘, ℋ^q(F))` abutting to `H^{p + q}(X, F)`, where
 `V ↦ H^q(V, F)`.
 
 The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun i ↦ Over.mk (π i)`
-of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`.
-
-The site is assumed essentially small, as are the sites of the Stacks project: this provides
-injective resolutions of abelian sheaves, which need not exist on a large site.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-sc-cech-spectral`) -/
+of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`. -/
 theorem Sheaf.exists_cechToDerivedSpectralSequence [EssentiallySmall.{v} C]
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :

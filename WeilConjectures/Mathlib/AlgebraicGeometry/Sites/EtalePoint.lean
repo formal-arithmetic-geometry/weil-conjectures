@@ -38,22 +38,8 @@ preserves covers, so `CategoryTheory.GrothendieckTopology.Point.comap` turns the
 point `AlgebraicGeometry.Scheme.pointSmallEtale s` of `X` into a point of the small étale
 site of `Y`. That point is the geometric point `s ≫ f` of `Y`.
 
-On an object `V` of `Y.Etale` the identification is the universal property of the pullback:
-a morphism `Spec Ω ⟶ V ×_Y X` over `X` is the same thing as a morphism `Spec Ω ⟶ V` over
-`Y`. It is therefore an instance of the adjunction `CategoryTheory.Over.mapPullbackAdj`
-between post-composition with `f` and base change along `f` on the slice categories, read
-through `CategoryTheory.Adjunction.compCoyonedaIso`.
-
 Finally, when `f = i` is a *closed immersion* the base change functor on pointed étale
-neighbourhoods is **initial**. Initiality is obtained from
-`CategoryTheory.Functor.initial_of_exists_of_isCofiltered`, so no connectedness argument is
-written by hand: the categories of elements of the fibre functors of points are cofiltered,
-and only the two hypotheses of that criterion are proved here. The first is
-`AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`, the local lifting of
-étale morphisms along a closed immersion. The second combines the open agreement locus of
-`AlgebraicGeometry.FormallyUnramified.eqLocus` with the fact that `V ×_X Z ⟶ V` is a closed
-immersion, hence inducing on the underlying spaces, so that the agreement locus is the trace
-of an open of `V`.
+neighbourhoods is **initial**.
 
 ## Main definitions
 
@@ -89,6 +75,27 @@ of an open of `V`.
 - `AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange`: for a closed
   immersion `i`, base change is initial on pointed étale neighbourhoods.
 
+## Implementation details
+
+`AlgebraicGeometry.Scheme.uliftPointSmallEtale` uses the algebraic closure of the residue field
+rather than its separable closure, so that the results which need an algebraically closed
+residue field, such as the stalk formula for a finite direct image, apply to this family too.
+
+On an object `V` of `Y.Etale` the identification of the base-changed point is the universal
+property of the pullback: a morphism `Spec Ω ⟶ V ×_Y X` over `X` is the same thing as a
+morphism `Spec Ω ⟶ V` over `Y`. It is therefore an instance of the adjunction
+`CategoryTheory.Over.mapPullbackAdj` between post-composition with `f` and base change along
+`f` on the slice categories, read through `CategoryTheory.Adjunction.compCoyonedaIso`.
+
+Initiality for a closed immersion is obtained from
+`CategoryTheory.Functor.initial_of_exists_of_isCofiltered`, so no connectedness argument is
+written by hand: the categories of elements of the fibre functors of points are cofiltered,
+and only the two hypotheses of that criterion are proved here. The first is
+`AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`, the local lifting of
+étale morphisms along a closed immersion. The second combines the open agreement locus of
+`AlgebraicGeometry.FormallyUnramified.eqLocus` with the fact that `V ×_X Z ⟶ V` is a closed
+immersion, hence inducing on the underlying spaces, so that the agreement locus is the trace
+of an open of `V`.
 -/
 
 @[expose] public section
@@ -125,18 +132,13 @@ lemma iUnion_range_algClosurePoint : ⋃ s : S, Set.range (S.algClosurePoint s) 
   exact ⟨s, default, by simp⟩
 
 /-- The geometric point of the small étale site of `S` at `s`, given by the algebraic closure
-of the residue field of `s`, with its fibre functor taking values in `Type (u + 1)`.
-
-The residue field is replaced by its algebraic closure rather than by its separable closure,
-so that the results which need an algebraically closed residue field, such as the stalk
-formula for a finite direct image, apply to this family as well. -/
+of the residue field of `s`, with its fibre functor taking values in `Type (u + 1)`. -/
 noncomputable def uliftPointSmallEtale (s : S) : S.smallEtaleTopology.Point.{u + 1} :=
   (pointSmallEtale (S.algClosurePoint s)).ulift.{u + 1}
 
 /-- **The universe-lifted geometric points of a jointly surjective family of geometric points
-of `S` form a conservative family.** This is Mathlib's
-`AlgebraicGeometry.Scheme.isConservative_pointSmallEtale` moved up one universe, so that it
-can be used with coefficients concrete over `Type (u + 1)`. -/
+of `S` form a conservative family.** This is
+`AlgebraicGeometry.Scheme.isConservative_pointSmallEtale` moved up one universe. -/
 lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ
     {ι : Type u} {Ω : ι → Type u} [∀ i, Field (Ω i)] [∀ i, IsSepClosed (Ω i)]
     (s : ∀ i, Spec (.of (Ω i)) ⟶ S) (hs : ⋃ i, Set.range (s i) = Set.univ) :
@@ -146,8 +148,7 @@ lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ
   -- `pointSmallEtale`, and those of the morphisms, the objects and the index type of `S.Etale`
   (isConservative_pointSmallEtale s hs).ulift.{u + 1, u, u, u + 1, u} _
 
-/-- **The universe-lifted geometric points of `S` form a conservative family**
-(blueprint `lemma-openclosed-point-ulift`). -/
+/-- **The universe-lifted geometric points of `S` form a conservative family.** -/
 lemma isConservativeFamilyOfPoints_ulift_pointSmallEtale :
     (ObjectProperty.ofObj S.uliftPointSmallEtale).IsConservativeFamilyOfPoints :=
   isConservativeFamilyOfPoints_ulift_pointSmallEtale_of_iUnion_range_eq_univ S
@@ -174,8 +175,7 @@ variable {S A}
 
 include hJ in
 /-- A morphism of `A`-valued sheaves on the small étale site of `S` whose fibre at every
-geometric point of `S` is invertible is invertible
-(blueprint `lemma-weil-pbc-geometric-stalk-conservative`). -/
+geometric point of `S` is invertible is invertible. -/
 lemma isIso_of_isIso_sheafFiber_map {F G : Sheaf S.smallEtaleTopology A} (φ : F ⟶ G)
     (h : ∀ s : S, IsIso ((S.uliftPointSmallEtale s).sheafFiber.map φ)) :
     IsIso φ :=
@@ -210,9 +210,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed 
 
 /-- For a geometric point `s : Spec Ω ⟶ X` and a morphism `f : X ⟶ Y`, the fibre functor of
 `s` composed with base change along `f` is the fibre functor of the geometric point `s ≫ f`
-of `Y`: on `V : Y.Etale` the left hand side is the set of morphisms `Spec Ω ⟶ V ×_Y X` over
-`X` and the right hand side is the set of morphisms `Spec Ω ⟶ V` over `Y`, and these agree
-by the universal property of the pullback. -/
+of `Y`. -/
 noncomputable def pointSmallEtaleFiberEtaleIso :
     f.Etale ⋙ (pointSmallEtale s).fiber ≅ (pointSmallEtale (s ≫ f)).fiber :=
   Functor.isoWhiskerLeft (Etale.forget Y)
@@ -220,10 +218,7 @@ noncomputable def pointSmallEtaleFiberEtaleIso :
       (op (CategoryTheory.Over.mk s))).symm
 
 /-- The category of elements of the fibre functor of `pointSmallEtale s` composed with base
-change is initially small, being equivalent by
-`AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso` to the category of elements of the
-fibre functor of `pointSmallEtale (s ≫ f)`. This is the remaining hypothesis of
-`CategoryTheory.GrothendieckTopology.Point.comap`. -/
+change is initially small. -/
 instance initiallySmall_elements_etale_comp_pointSmallEtaleFiber :
     InitiallySmall.{u} (f.Etale ⋙ (pointSmallEtale s).fiber).Elements :=
   initiallySmall_of_initial_of_initiallySmall
@@ -316,9 +311,7 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Z)
 
 /-- Every pointed étale neighbourhood of a geometric point `s` of `Z` is dominated by the
-base change of a pointed étale neighbourhood of `s ≫ i` in `X`. This is the first hypothesis
-of `CategoryTheory.Functor.initial_of_exists_of_isCofiltered`, and its content is
-`AlgebraicGeometry.Etale.exists_pullback_hom_of_isClosedImmersion`. -/
+base change of a pointed étale neighbourhood of `s ≫ i` in `X`. -/
 private theorem exists_hom_pointSmallEtaleElementsBaseChange
     (d : (pointSmallEtale s).fiber.Elements) :
     ∃ c, Nonempty ((pointSmallEtaleElementsBaseChange i s).obj c ⟶ d) := by
@@ -350,14 +343,7 @@ private theorem exists_hom_pointSmallEtaleElementsBaseChange
   rw [hp, ht]
 
 /-- Two morphisms out of the base change `V ×_X Z` of a pointed étale neighbourhood of
-`s ≫ i` into an étale `Z`-scheme which agree over `Z` are equalised after shrinking `V`.
-This is the second hypothesis of
-`CategoryTheory.Functor.initial_of_exists_of_isCofiltered`.
-
-The two morphisms agree on the open `AlgebraicGeometry.FormallyUnramified.eqLocus` of
-`V ×_X Z`, which contains the marked point. Since `V ×_X Z ⟶ V` is a closed immersion it is
-inducing on the underlying spaces, so that agreement locus is the trace of an open `V₀` of
-`V`; and `V₀` is the required shrinking of `V`. -/
+`s ≫ i` into an étale `Z`-scheme which agree over `Z` are equalised after shrinking `V`. -/
 private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
     {d : (pointSmallEtale s).fiber.Elements}
     {c : (pointSmallEtale (s ≫ i)).fiber.Elements}
@@ -426,13 +412,9 @@ private theorem exists_map_comp_eq_pointSmallEtaleElementsBaseChange
       (FormallyUnramified.eqLocus W.hom σ.hom.left σ'.hom.left hab).ι _ hmr,
       Category.assoc, Category.assoc, FormallyUnramified.eqLocus_ι_comp_eq]
 
-/-- Blueprint `lemma-finite-direct-images--1`, first assertion: **Base change along a closed
-immersion is initial on pointed étale neighbourhoods.** For
-a closed immersion `i : Z ⟶ X` and a geometric point `s` of `Z`, every pointed étale
-neighbourhood of `s` in `Z` is dominated by one of the form `V ×_X Z`, and two maps out of
-such a `V ×_X Z` are equalised after shrinking `V`; the categories of pointed étale
-neighbourhoods being cofiltered, this is initiality by
-`CategoryTheory.Functor.initial_of_exists_of_isCofiltered`. -/
+/-- **Base change along a closed immersion is initial on pointed étale neighbourhoods.** For
+a closed immersion `i : Z ⟶ X` and a geometric point `s` of `Z`, the functor sending a pointed
+étale neighbourhood `V` of `s ≫ i` in `X` to `V ×_X Z` is initial. -/
 theorem initial_pointSmallEtaleElementsBaseChange :
     (pointSmallEtaleElementsBaseChange i s).Initial :=
   Functor.initial_of_exists_of_isCofiltered _
@@ -463,8 +445,7 @@ noncomputable def pointSmallEtaleFiberCongr :
     (coyoneda.mapIso (Over.isoMk e.symm).op)
 
 /-- Reparametrising a geometric point `s : Spec Ω ⟶ S` by an isomorphism
-`e : Spec Ω' ≅ Spec Ω` gives an isomorphic point of the small étale site: `e ≫ s ≅ s`, by
-`AlgebraicGeometry.Scheme.pointSmallEtaleFiberCongr` on fibre functors. -/
+`e : Spec Ω' ≅ Spec Ω` gives an isomorphic point of the small étale site: `e ≫ s ≅ s`. -/
 noncomputable def pointSmallEtaleCongr : pointSmallEtale (e.hom ≫ s) ≅ pointSmallEtale s :=
   GrothendieckTopology.Point.isoMk (pointSmallEtaleFiberCongr e s)
 

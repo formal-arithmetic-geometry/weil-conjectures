@@ -35,6 +35,15 @@ with an isomorphism in the first variable
 
 The isomorphism `X ≅ [𝟙_ C, X]` of `CategoryTheory.MonoidalClosed.unitNatIso` is the transpose
 of the left unitor (`CategoryTheory.MonoidalClosed.unitNatIso_hom_app`).
+
+## Implementation details
+
+`CategoryTheory.MonoidalClosed.IsPerfectPairing` needs no braiding: the adjoint is taken in the
+second variable. It is weaker than an exact pairing (`CategoryTheory.ExactPairing`), which also
+asks for a coevaluation `𝟙_ C ⟶ Y ⊗ X` satisfying the zigzag identities: the evaluation of an
+exact pairing `ExactPairing X Y` is a perfect pairing `Y ⊗ X ⟶ 𝟙_ C`, but a perfect pairing of
+an object that is not dualizable is not part of an exact pairing. It is not to be confused with
+`LinearMap.IsPerfPair`, perfectness of a bilinear form on modules.
 -/
 
 @[expose] public section
@@ -201,19 +210,7 @@ variable {C : Type*} [Category* C] [MonoidalCategory C] [MonoidalClosed C]
 ```
  X ⊗ Y ──b──▶ 𝟙_ C        Y ──curry b──▶ [X, 𝟙_ C]   (iso)
 ```
-i.e. if `b` identifies `Y` with the dual `[X, 𝟙_ C]` of `X`. No braiding is needed: the adjoint
-is taken in the second variable.
-
-This is weaker than an exact pairing (`CategoryTheory.ExactPairing`), which also asks for a
-coevaluation `𝟙_ C ⟶ Y ⊗ X` satisfying the zigzag identities: the evaluation of an exact
-pairing `ExactPairing X Y` is a perfect pairing `Y ⊗ X ⟶ 𝟙_ C`, but a perfect pairing of an
-object that is not dualizable is not part of an exact pairing. It is not to be confused with
-`LinearMap.IsPerfPair`, perfectness of a bilinear form on modules.
-
-This is the perfectness of a pairing of blueprint `definition-perfect-pairing` and
-`definition-perfect-pairing--1`; its symmetry in the two variables (blueprint
-`definition-perfect-pairing--1`) is
-`CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`. -/
+i.e. if `b` identifies `Y` with the dual `[X, 𝟙_ C]` of `X`. -/
 structure IsPerfectPairing {X Y : C} (b : X ⊗ Y ⟶ 𝟙_ C) : Prop where
   /-- The adjoint `Y ⟶ [X, 𝟙_ C]` of the pairing is an isomorphism. -/
   isIso : IsIso (curry b)

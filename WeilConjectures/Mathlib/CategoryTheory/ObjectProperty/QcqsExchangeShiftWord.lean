@@ -8,8 +8,22 @@ module
 public import Mathlib.CategoryTheory.ObjectProperty.Shift
 public import Mathlib.Algebra.Group.Int.Defs
 
-/-! The canonical four-factor exchange on full subcategories and its shift compatibility.
-(blueprint: new-h3-qcqs-exchange-shift-word). -/
+/-!
+# The four-factor exchange on full subcategories
+
+Given functors `F G : C₀ ⥤ D₀` and endofunctors `A`, `B` restricting to full subcategories
+`P`, `Q`, a transformation `σ : F ⋙ Pb ⟶ Pa ⋙ G` together with comparison isomorphisms
+`Pa ≅ A`, `Pb ≅ B` and `P.ι ⋙ G ≅ P.ι ⋙ F` induces a transformation between the two composites
+of the restrictions of `F`, `A` and `B` to `P` and `Q`.
+
+## Main declarations
+
+- `CategoryTheory.ObjectProperty.exchangeWord`: the transported four-factor exchange.
+- `CategoryTheory.ObjectProperty.exchangeWord_app`: its components.
+- `CategoryTheory.ObjectProperty.exchangeWord_isIso`: it is invertible if `σ` is.
+- `CategoryTheory.ObjectProperty.exchangeWord_commShift`: it commutes with shifts if all its
+  factors do.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -26,10 +40,7 @@ private theorem comp_commShift
   have := hβ
   infer_instance
 
--- This is a real transformation built from the canonical inclusion isomorphisms.
-/-- The four-factor exchange, transported through full-subcategory inclusions.
-Source: normalized compact-support exchange, Step 5
-(blueprint: new-h3-qcqs-exchange-shift-word). -/
+/-- The four-factor exchange, transported through full-subcategory inclusions. -/
 def exchangeWord
     {C₀ D₀ : Type*} [catC₀ : Category C₀] [catD₀ : Category D₀]
     (P : ObjectProperty C₀) (Q : ObjectProperty D₀)
@@ -65,12 +76,8 @@ def exchangeWord
       Functor.whiskerLeft a ec.inv ≫
       (Functor.associator a T J).inv
 
-/-- The transported exchange has exactly the specified four-factor component.
-Proof: all full-subcategory comparison maps and associators are identities on objects;
-simplifying these identity factors leaves the inverse pullback comparison, the square
-exchange, the mapped source comparison and the refinement comparison, in that order.
-Source: normalized compact-support exchange, Step 5
-(blueprint: new-h3-qcqs-exchange-shift-word). -/
+/-- The component of the transported exchange at `K` is the composite of `xb⁻¹`, `σ`, `G(xa)`
+and `ρ` at `K`. -/
 theorem exchangeWord_app
     {C₀ D₀ : Type*} [catC₀ : Category C₀] [catD₀ : Category D₀]
     (P : ObjectProperty C₀) (Q : ObjectProperty D₀)
@@ -88,11 +95,7 @@ theorem exchangeWord_app
   intro a K
   simp [exchangeWord, ObjectProperty.liftCompιIso, a, Category.assoc]
 
-/-- An invertible square factor makes the transported exchange invertible.
-Proof: each canonical comparison and associator is an isomorphism; whiskering and
-composition preserve invertibility, so all fourteen factors are invertible.
-Source: normalized compact-support exchange, Step 5
-(blueprint: new-h3-qcqs-exchange-shift-word). -/
+/-- If the square `σ` is invertible, so is the transported exchange. -/
 instance exchangeWord_isIso
     {C₀ D₀ : Type*} [catC₀ : Category C₀] [catD₀ : Category D₀]
     (P : ObjectProperty C₀) (Q : ObjectProperty D₀)
@@ -106,11 +109,7 @@ instance exchangeWord_isIso
   dsimp only [exchangeWord]
   infer_instance
 
-/-- Compatibility of each factor implies compatibility of the transported exchange.
-Proof: the inclusion comparison maps and associators commute with shifts. Whisker the
-four given compatible factors and compose these fourteen compatible transformations.
-Source: Mathlib shift calculus and normalized exchange, Step 5
-(blueprint: new-h3-qcqs-exchange-shift-word). -/
+/-- If all factors commute with shifts by `ℤ`, so does the transported exchange. -/
 theorem exchangeWord_commShift
     {C₀ D₀ : Type*} [catC₀ : Category C₀] [catD₀ : Category D₀]
     (P : ObjectProperty C₀) (Q : ObjectProperty D₀)

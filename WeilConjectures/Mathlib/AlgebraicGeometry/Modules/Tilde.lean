@@ -400,9 +400,7 @@ theorem isFinitePresentation_of_iSup_opensRange_eq_top {X : Scheme.{u}} (M : X.M
     (fun i ↦ presentationRestrictOpensRange (f i) (P i))
 
 /-- **The pullback of a quasi-coherent module is quasi-coherent.** For `g : X ⟶ Y` and a
-quasi-coherent `𝒪_Y`-module `M`, take presentations of `M` over the members `U i` of an open cover
-of `Y`. Pulling them back along the restrictions `g ∣_ U i`, which preserve colimits and the
-structure sheaf, gives presentations of `g^* M` over the open cover `g ⁻¹ᵁ U i` of `X`. -/
+quasi-coherent `𝒪_Y`-module `M`, the pullback `g^* M` is quasi-coherent. -/
 instance isQuasicoherent_pullback {X Y : Scheme.{u}} (g : X ⟶ Y) (M : Y.Modules)
     [M.IsQuasicoherent] : ((Modules.pullback g).obj M).IsQuasicoherent := by
   obtain ⟨ι, U, pres, hU, -⟩ := M.exists_isOpenCover_presentation
@@ -435,8 +433,7 @@ theorem finite_sections_top_of_finite {R : CommRingCat.{u}} (M : (Spec R).Module
   exact Module.Finite.trans Γ(Spec R, ⊤) Γ(M, ⊤)
 
 /-- A quasi-coherent module on the spectrum of a Noetherian ring `R` whose global sections are a
-finite `R`-module has a finite global presentation: it is `M^~` for the finitely presented
-`R`-module `M` of its global sections. -/
+finite `R`-module has a finite global presentation. -/
 theorem exists_presentation_isFinite {R : CommRingCat.{u}} [IsNoetherianRing R]
     (M : (Spec R).Modules) [M.IsQuasicoherent] [Module.Finite R Γ(M, ⊤)] :
     ∃ P : M.Presentation, P.IsFinite := by
@@ -461,8 +458,7 @@ open Opposite in
 /-- **A quasi-coherent module which is free after inverting `r` is free on `D(r)`.** Let `M` be a
 quasi-coherent module on `Spec R` and `r ∈ R` such that the localization `Γ(M, ⊤)_r` is a free
 `R_r`-module with basis indexed by `ι`. Then the restriction of `M` to the basic open
-`D(r) = Spec R_r` is the free module on `ι`: it is `Γ(M, D(r))^~`, and `Γ(M, D(r)) = Γ(M, ⊤)_r`
-since `M` is quasi-coherent. -/
+`D(r) = Spec R_r` is the free module on `ι`. -/
 theorem nonempty_restrict_iso_free_of_localizedModule {R : CommRingCat.{u}} (M : (Spec R).Modules)
     [M.IsQuasicoherent] (r : R) {ι : Type u}
     (e : LocalizedModule.Away r Γ(M, ⊤) ≃ₗ[Localization.Away r] (ι →₀ Localization.Away r)) :
@@ -514,7 +510,7 @@ variable {R : CommRingCat.{u}}
 open CategoryTheory Limits Opposite
 
 /-- Over a field `R`, every sheaf of `R`-modules on `Spec R` coming from an `𝒪_{Spec R}`-module is
-localizing: a basic open `D(f)` is empty for `f = 0` and everything for `f ≠ 0`. -/
+localizing. -/
 theorem isLocalizing_of_isField (hR : IsField R) (M : (Spec R).Modules) :
     IsLocalizing (modulesSpecToSheaf.obj M) := by
   let := hR.toField
@@ -597,10 +593,7 @@ variable {A B : CommRingCat.{u}} [Algebra A B] (M : Type u) [AddCommGroup M] [Mo
 /-- **Sections of an associated sheaf over a localization.** Let `A → B` be a ring map, `M` a
 `B`-module and `a ∈ A`. The open subscheme `Spec (B ⊗_A A_a)` of `Spec B` is the basic open
 `D(a)`, and the sections of the associated quasi-coherent sheaf `M~` over it are canonically
-`A`-linearly isomorphic to `A_a ⊗_A M`, compatibly with `m ↦ 1 ⊗ m`
-(`tildeSectionsBasicOpenTensorEquiv_apply`).
-
-(blueprint: `pqf-lem-associated-sections-localize`) -/
+`A`-linearly isomorphic to `A_a ⊗_A M`, compatibly with `m ↦ 1 ⊗ m`. -/
 noncomputable def tildeSectionsBasicOpenTensorEquiv (a : A) :
     (ModuleCat.restrictScalars (algebraMap A B)).obj
         ((modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj

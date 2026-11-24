@@ -47,8 +47,7 @@ namespace Presheaf
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A morphism of sheaves which is invertible at every object of some covering sieve of `X`
-is invertible at `X`: both sides are the limit of their restrictions to the sieve, and the
-induced morphism of the two limit diagrams is an isomorphism by assumption. -/
+is invertible at `X`. -/
 lemma isIso_app_of_isIso_app_of_mem (hG : IsSheaf J G) (hG' : IsSheaf J G') (φ : G ⟶ G')
     {X : C} (S : Sieve X) (hS : S ∈ J X)
     (h : ∀ ⦃Y : C⦄ (f : Y ⟶ X), S f → IsIso (φ.app (op Y))) :
@@ -110,9 +109,7 @@ noncomputable def isTerminalOfIsTerminalObj (F : Sheaf J A) (h : ∀ U, IsTermin
     IsTerminal F :=
   IsTerminal.isTerminalOfObj (sheafToPresheaf J A) _ (Functor.isTerminal h)
 
-/-- A sheaf whose sections are all zero objects is a zero object. Morphisms of sheaves are
-morphisms of the underlying presheaves, so this is `CategoryTheory.Functor.isZero` transported
-along `CategoryTheory.Sheaf.homEquiv`. -/
+/-- A sheaf whose sections are all zero objects is a zero object. -/
 lemma isZero_of_isZero_obj (F : Sheaf J A) (h : ∀ U, IsZero (F.obj.obj U)) : IsZero F := by
   have h1 : IsZero F.obj := Functor.isZero _ h
   refine ⟨fun G => ?_, fun G => ?_⟩
@@ -133,8 +130,7 @@ namespace CategoryTheory.Presheaf
 /-- A presheaf `P` with values in a concrete category `A` whose forgetful functor preserves
 limits and reflects isomorphisms — for instance abelian groups or commutative rings — is a
 sheaf if and only if its underlying presheaf of sets `P ⋙ forget A` is a sheaf of sets. This
-is `CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget` for `s = forget A`.
-(blueprint: `situation-conventions`) -/
+is `CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget` for `s = forget A`. -/
 theorem isSheaf_iff_isSheaf_comp_forget {C : Type u₁} [Category.{v₁} C]
     (J : GrothendieckTopology C) {A : Type u₂} [Category.{max v₁ u₁} A] {FA : A → A → Type*}
     {CA : A → Type (max v₁ u₁)} [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]

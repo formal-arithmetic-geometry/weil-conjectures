@@ -26,6 +26,13 @@ all its fibres are smooth over the residue fields.
 ## References
 
 - Stacks Project, Lemma 29.35.3, <https://stacks.math.columbia.edu/tag/01V8>
+
+## Implementation details
+
+The converse direction of the fibrewise criterion is Mathlib's
+`AlgebraicGeometry.Smooth.of_smooth_fiberToSpecResidueField`. The pointwise criterion shrinks to
+affine opens `V ⊆ f ⁻¹ U` whose fibre over `y` lies in the smooth locus of the fibre and applies
+`AlgebraicGeometry.mem_smoothLocus_SpecMap_of_smooth_fiberToSpecResidueField`.
 -/
 
 @[expose] public section
@@ -36,23 +43,14 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **A smooth morphism is flat and locally of finite presentation.** Both are Mathlib instances
-for `Smooth f`.
-
-(blueprint: `lem-pc-smooth-flat`) -/
+/-- **A smooth morphism is flat and locally of finite presentation.** -/
 theorem Smooth.flat_and_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f] :
     Flat f ∧ LocallyOfFinitePresentation f :=
   ⟨inferInstance, inferInstance⟩
 
 
-/-- **Smoothness by flatness and smooth fibres** (blueprint `lem-pc-smooth-characterization`). A
-morphism `f : X ⟶ Y` is smooth if and only if it is flat, locally of finite presentation, and
-every fibre `X_y ⟶ Spec κ(y)` is smooth. A smooth morphism is flat and locally of finite
-presentation, and its fibres are smooth by base change; the converse is
-`AlgebraicGeometry.Smooth.of_smooth_fiberToSpecResidueField`.
-
-This is also blueprint `lem-pc-smooth-characterization`, stated there for `f` locally of finite
-presentation. -/
+/-- **Smoothness by flatness and smooth fibres**. A morphism `f : X ⟶ Y` is smooth if and only
+if it is flat, locally of finite presentation, and every fibre `X_y ⟶ Spec κ(y)` is smooth. -/
 @[stacks 01V8]
 theorem smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -63,9 +61,7 @@ theorem smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueFie
     fun ⟨_, _, h⟩ ↦ .of_smooth_fiberToSpecResidueField f h⟩
 
 /-- **Smoothness versus flatness.** A morphism `f : X ⟶ Y` locally of finite presentation is
-smooth if and only if it is flat and every fibre `X_y ⟶ Spec κ(y)` is smooth.
-
-(blueprint: `lem-pc-smooth-characterization`) -/
+smooth if and only if it is flat and every fibre `X_y ⟶ Spec κ(y)` is smooth. -/
 @[stacks 01V8]
 theorem smooth_iff_flat_and_smooth_fiber {X Y : Scheme.{u}} (f : X ⟶ Y)
     [LocallyOfFinitePresentation f] :
@@ -149,9 +145,7 @@ lemma mem_smoothLocus_SpecMap_of_smooth_fiberToSpecResidueField {R S : CommRingC
 set_option backward.isDefEq.respectTransparency false in
 /-- **Pointwise fibrewise criterion for smoothness**. Let `f : X ⟶ Y` be flat and locally of
 finite presentation. If the fibre `X_y ⟶ Spec κ(y)` is smooth at `w`, then `f` is smooth at the
-image of `w` in `X`. We shrink to affine opens `V ⊆ f ⁻¹ U` whose fibre over `y` lies in the
-smooth locus of the fibre and apply
-`AlgebraicGeometry.mem_smoothLocus_SpecMap_of_smooth_fiberToSpecResidueField`. -/
+image of `w` in `X`. -/
 theorem Scheme.Hom.fiberι_mem_smoothLocus {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f]
     [LocallyOfFinitePresentation f] {y : Y} {w : f.fiber y}
     (hw : w ∈ (f.fiberToSpecResidueField y).smoothLocus) : f.fiberι y w ∈ f.smoothLocus := by
