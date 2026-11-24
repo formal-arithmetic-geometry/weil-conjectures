@@ -12,9 +12,13 @@ import Mathlib.Topology.Algebra.MulAction
 /-!
 # Bijectivity of homogeneous cochain evaluation
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG; homogeneous change of variables
-in the parent comparison proof, steps 1 and 2.
-(blueprint: lem-sc-homogeneous-cochain-evaluation-bijective).
+If every element of `N` has an open stabilizer, then `Rep.homogeneousCochainEvaluation` is
+bijective, so invariant homogeneous continuous cochains correspond to locally constant
+inhomogeneous cochains.
+
+## References
+
+* [Stacks Project, Tag 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -64,22 +68,8 @@ private theorem resolutionEval_injective (N : TopRep.{max u s} ℤ G) (n : ℕ) 
     funext g
     simpa [resolutionEval] using congrFun h (Fin.cons a g)
 
-/-- Evaluation at cumulative products is bijective.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG; homogeneous conversion in the
-parent proof, steps 1 and 2.
-(blueprint: lem-sc-homogeneous-cochain-evaluation-bijective).
-
-Proof: Uncurry iterated maps on the compact Hausdorff group. Their invariant elements
-are precisely equivariant functions. An equivariant function is determined by its values
-at (1,g₀,g₀g₁,...), since any tuple h is h₀ times the partial products of the successive
-ratios hᵢ⁻¹hᵢ₊₁. This proves injectivity. Given a locally constant c, form the homogeneous
-function h ↦ ρ(h₀)c(h₀⁻¹h₁,...,hₙ₋₁⁻¹hₙ). Open stabilizers make the action jointly
-continuous on the discrete coefficients. Products and inverses make this function
-continuous; compact-open currying produces an iterated map. Its equivariance follows
-from cancellation of the common left factor in the successive ratios, and therefore it
-is invariant. The successive ratios of partial products recover the original tuple,
-so its coordinate map is c. This proves surjectivity, including degree zero. -/
+/-- If every element of `N` has an open stabilizer, then evaluation of homogeneous continuous
+`n`-cochains at cumulative products is bijective. -/
 theorem homogeneousCochainEvaluation_bijective [CompactSpace G] [T2Space G]
     (N : TopRep.{max u s} ℤ G) [DiscreteTopology N.V]
     (hN : ∀ x : N.V, IsOpen {g : G | N.ρ g x = x}) (n : ℕ) :

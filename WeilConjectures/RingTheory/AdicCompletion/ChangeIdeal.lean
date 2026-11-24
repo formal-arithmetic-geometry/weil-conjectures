@@ -84,8 +84,7 @@ lemma changeIdealMap_comp_changeIdealMap (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (
 /-- **Completions along two ideals each containing a power of the other agree.**
 Let `I, J ⊆ A` be ideals and `c, d ≥ 1` with `I ^ c ≤ J` and `J ^ d ≤ I`. Then
 `θ : M^∧_J → M^∧_I`, `(xₙ)ₙ ↦ (x_{dk} mod I^k M)ₖ`, is an isomorphism of `A`-modules with
-inverse `(yₖ)ₖ ↦ (y_{cn} mod J^n M)ₙ`; it satisfies `θ ∘ ι_J = ι_I` (`changeIdealMap_of`).
-(blueprint: `lem-weil-pbc-change-ideal-completion`) -/
+inverse `(yₖ)ₖ ↦ (y_{cn} mod J^n M)ₙ`; it satisfies `θ ∘ ι_J = ι_I` (`changeIdealMap_of`). -/
 noncomputable def changeIdealCompletion (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 : 1 ≤ c)
     (hd1 : 1 ≤ d) : AdicCompletion J M ≃ₗ[A] AdicCompletion I M :=
   LinearEquiv.ofLinearMap (changeIdealMap I J M hd) (changeIdealMap J I M hc)
@@ -104,14 +103,13 @@ lemma changeIdealCompletion_symm_apply (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc
     (changeIdealCompletion hc hd hc1 hd1).symm y = changeIdealMap J I M hc y :=
   rfl
 
-/-- The isomorphism `θ` is compatible with the canonical maps from `M`: `θ ∘ ι_J = ι_I`.
-(blueprint: `lem-weil-pbc-change-ideal-completion`) -/
+/-- The isomorphism `θ` is compatible with the canonical maps from `M`: `θ ∘ ι_J = ι_I`. -/
 lemma changeIdealCompletion_of (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 : 1 ≤ c) (hd1 : 1 ≤ d)
     (x : M) : changeIdealCompletion hc hd hc1 hd1 (of J M x) = of I M x :=
   changeIdealMap_of hd x
 
 /-- If `I ^ c ≤ J` and `J ^ d ≤ I`, then `M` is `I`-adically complete if and only if it is
-`J`-adically complete. (blueprint: `lem-weil-pbc-change-ideal-completion`) -/
+`J`-adically complete. -/
 theorem isAdicComplete_iff_of_pow_le (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 : 1 ≤ c)
     (hd1 : 1 ≤ d) : IsAdicComplete I M ↔ IsAdicComplete J M := by
   have heq : (of I M : M → AdicCompletion I M) =
@@ -121,7 +119,7 @@ theorem isAdicComplete_iff_of_pow_le (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 
   exact (changeIdealCompletion hc hd hc1 hd1).bijective.of_comp_iff' _
 
 /-- For `M = A`, the isomorphism `θ : A^∧_J ≃ A^∧_I` of `changeIdealCompletion` is a ring
-isomorphism. (blueprint: `lem-weil-pbc-change-ideal-completion`) -/
+isomorphism. -/
 noncomputable def changeIdealCompletionRingEquiv (hc : I ^ c ≤ J) (hd : J ^ d ≤ I) (hc1 : 1 ≤ c)
     (hd1 : 1 ≤ d) : AdicCompletion J A ≃+* AdicCompletion I A where
   __ := changeIdealCompletion (M := A) hc hd hc1 hd1
