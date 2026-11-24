@@ -35,9 +35,7 @@ abbrev ordinaryRestriction :=
   Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (inclusion l E T)
 
 /-- Both scalar functors are additive and exact, and their adjunction has the
-unit obtained by inserting the ring unit and projecting to the balanced tensor.
-Source: the internal extension-restriction adjunction.
-(blueprint: lem-weil-pbc-normalized-realization-clauses). -/
+unit obtained by inserting the ring unit and projecting to the balanced tensor. -/
 def ScalarAdjunctionData : Prop :=
   (ordinaryExtension l E T).Additive ∧ (ordinaryRestriction l E T).Additive ∧
   PreservesFiniteLimits (ordinaryExtension l E T) ∧
@@ -50,12 +48,8 @@ def ScalarAdjunctionData : Prop :=
         CategoryTheory.MonoidalCategory.whiskerRight (η[fieldRing l E T]) M.X ≫
           Mod.extendπ (inclusion l E T) M
 
-/-- The exact adjunction and its normalized ordinary tensor unit.
-Source: internal scalar extension and its explicit adjunction unit.
-(blueprint: lem-weil-pbc-normalized-realization-clauses).
-Proof: exactness of extension is normalized coefficient exactness; restriction
-preserves finite limits and colimits on underlying objects. The canonical
-adjunction's unit is precisely unit insertion followed by the tensor projection. -/
+/-- The scalar functors satisfy `ScalarAdjunctionData`: they are exact, and their adjunction
+unit is unit insertion followed by the tensor projection. -/
 theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
   refine ⟨inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, Mod.extendRestrictAdjunction (inclusion l E T), ?_⟩
@@ -65,9 +59,7 @@ theorem scalar_adjunction_data : ScalarAdjunctionData l E T := by
 set_option maxHeartbeats 1000000 in
 -- The derived scalar square unfolds the exact derived extension and restriction.
 /-- The derived functors have coherent integer shifts, preserve triangles, compute
-termwise on every complex, and their adjunction unit is the localized termwise unit.
-Source: exact derived factorization and localization of adjunctions.
-(blueprint: lem-weil-pbc-normalized-realization-clauses). -/
+termwise on every complex, and their adjunction unit is the localized termwise unit. -/
 def DerivedScalarData : Prop :=
   Nonempty ((ordinaryExtension l E T).leftDerivedFunctor ≅
     (ordinaryExtension l E T).mapDerivedCategory) ∧
@@ -91,13 +83,8 @@ def DerivedScalarData : Prop :=
         ((NatTrans.mapHomologicalComplex
           (Mod.extendRestrictAdjunction (inclusion l E T)).unit (.up ℤ)).app P)
 
-/-- All-complex derived computation and the normalized derived unit.
-Source: exact derived functor comparisons and the exact derived adjunction unit.
-(blueprint: lem-weil-pbc-normalized-realization-clauses).
-Proof: exactness supplies both total-derived comparisons with the termwise
-localization. The latter has its canonical shifts and preserves triangles.
-Its comparison components are isomorphisms on every complex. The unit formula
-is the component formula for the localization of the ordinary adjunction. -/
+/-- The derived scalar functors satisfy `DerivedScalarData`: they compute termwise on every
+complex, and their adjunction unit is the localized ordinary unit. -/
 theorem derived_scalar_data : DerivedScalarData l E T := by
   let F := ordinaryExtension l E T
   let G := ordinaryRestriction l E T
@@ -117,10 +104,7 @@ theorem derived_scalar_data : DerivedScalarData l E T := by
   exact CategoryTheory.Adjunction.mapExactDerivedCategory_unit (F := F) (G := G)
     (Mod.extendRestrictAdjunction (inclusion l E T)) P
 
-/-- The exact ordinary and derived scalar clauses together.
-Source: the canonical scalar adjunction and exact-derived factorization.
-(blueprint: lem-weil-pbc-normalized-realization-clauses).
-Proof: combine the explicit ordinary unit with the all-complex derived-unit formula. -/
+/-- The exact ordinary and derived scalar clauses together. -/
 theorem realization_clauses : ScalarAdjunctionData l E T ∧ DerivedScalarData l E T :=
   ⟨scalar_adjunction_data l E T, derived_scalar_data l E T⟩
 

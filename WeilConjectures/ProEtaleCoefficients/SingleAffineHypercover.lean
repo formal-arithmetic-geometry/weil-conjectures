@@ -63,8 +63,25 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCov
 import all WeilConjectures.AlgebraicGeometry.ProEtaleAffineContractibleExtension
 import all WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 
-/-! Hypercover existence after the finite-family construction.
-(blueprint: det-pe-hypercover-single-affine) -/
+/-! # Single-affine w-contractible hypercovers
+
+Every quasi-compact quasi-separated object of the pro-étale site admits a hypercover whose terms
+are spectra of w-contractible rings, obtained from the finite-family construction.
+
+## Main results
+
+* `exists_single_affine_wContractible_hypercover`
+
+## Implementation details
+
+The finite-basis hypercover theorem is applied to the qcqs subsite; each finite family is
+realized by its scheme coproduct, which is a spectrum `Spec` of a finite product of
+w-contractible rings, hence itself w-contractible. Empty families and the zero ring are allowed.
+
+## References
+
+* [Stacks Project, Tags 09A1, 094K, 0DAV, 0DB2]
+-/
 
 @[expose] public section
 
@@ -78,33 +95,10 @@ open AlgebraicGeometry.Scheme.ProEt
 open scoped Simplicial
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 09A1; Hypercoverings Tags 094K, 0DAV and 0DB2.
-(blueprint: det-pe-hypercover-single-affine)
-
-Proof:
-1. Apply the finite-basis hypercover theorem to the qcqs subsite, with the basis of
-   literal spectra of w-contractible rings. The singleton covering theorem and finite
-   adjoining property give its hypotheses. The formal hypercover theorem retains all
-   proper-face limiting cones, projection equations and component covering presieves.
-2. Realize each finite family by its scheme coproduct, supplied by the qcqs finite-family
-   geometry theorem. Its representable-sheaf coproduct mapping property gives the
-   augmentation. Define every simplicial operator by the coproduct mapping property;
-   verify identities and compositions on the coprojections.
-3. Reuse the proved sheaf-realization functor and its finite-limit preservation from
-   `ProEtaleAffineAcyclicHypercoverGeometry`. Its comparison lemmas identify the realized
-   proper-face maps with the formal matching maps. Componentwise covers become epimorphisms
-   after sheaf realization. The degree-zero target is the terminal object over U.
-4. Construct the positive-degree proper-face limits in the qcqs slice, and preserve them
-   under inclusion into the full slice. Thus the targets are quasi-separated; all sources
-   are quasi-compact finite coproducts. Lower the represented epimorphisms from the lifted
-   value universe and apply the represented-epi singleton covering criterion. This gives
-   actual singleton covers, including in degree zero.
-5. Reindex each finite family into the scheme universe and use Mathlib's finite `sigmaSpec`
-   isomorphism. The finite-product theorem proves the product ring w-contractible. Replace
-   each term by that spectrum using the spectrum replacement theorem. Conjugation preserves
-   the simplicial laws, and transport of the cones preserves all matching equations and
-   covering assertions. Empty families and the zero ring are included throughout.
--/
+/-- A quasi-compact quasi-separated object `U` of the pro-étale site of `X` has a hypercover
+`W` in `Over U` whose every term is `Spec D` for a w-contractible ring `D`, whose augmentation
+`W₀ → U` is a singleton cover, and whose matching maps from `W_{r+1}` to the limits of the
+proper-face diagrams are singleton covers. -/
 theorem exists_single_affine_wContractible_hypercover
     (X : Scheme.{u}) (U : X.ProEt) (hUqc : CompactSpace U.left)
     (hUqs : QuasiSeparatedSpace U.left) :

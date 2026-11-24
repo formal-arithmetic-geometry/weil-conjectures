@@ -11,8 +11,23 @@ public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 /-!
 # Continuous cohomology under coefficient equivalences across universes
 
-Source: Stacks Project, Etale Cohomology, Section 0DVG, cochain construction.
-(blueprint: lem-sc-continuous-cohomology-coefficient-equiv).
+An equivariant linear equivalence of discrete coefficient modules, possibly living in different
+universes, induces additive equivalences of continuous group cohomology.
+
+## Main definitions
+
+* `Rep.continuousCohomologyAddEquivOfCoefficients`
+
+## Implementation details
+
+The equivalence is built on homogeneous cochains by postcomposition, which commutes with the
+differentials. The construction works on types and their subquotients, so the coefficients may
+live in different universes. Homology in `TopModuleCat` is identified with the algebraic
+quotient of cocycles by coboundaries.
+
+## References
+
+* [Stacks Project, Tag 0DVG]
 -/
 
 @[expose] public section
@@ -148,24 +163,7 @@ private noncomputable def shortComplexEquiv {R : Type*} [CommRing R] [Topologica
     ((forget₂ _ (ModuleCat R)).mapIso DT.homologyIso).toLinearEquiv.symm
 
 /-- Equivariant linear equivalences of discrete coefficients induce additive equivalences
-of continuous cohomology, including between different coefficient universes.
-
-Source: Stacks Project, Etale Cohomology, Section 0DVG, cochain construction.
-(blueprint: lem-sc-continuous-cohomology-coefficient-equiv).
-
-Proof: The equivalence e and its inverse are continuous because the coefficient spaces
-are discrete. Postcompose each homogeneous cochain with e, recursively through its
-iterated continuous maps; the compact-open topology makes these postcomposition maps
-continuous. Equivariance of e preserves the invariant submodules. Its inverse is
-equivariant as well, by applying e to the required equality and using injectivity.
-The recursive differential is constant insertion minus postcomposition with the preceding
-differential. Postcomposition commutes with constants and subtraction, so these degreewise
-linear equivalences commute with every differential. Thus they restrict to inverse
-bijections on cocycles and carry coboundaries onto coboundaries. On the quotient of
-cocycles by coboundaries they give inverse equivalences. Underlying TopModuleCat homology
-is precisely this algebraic quotient, as its kernels and cokernels are module kernels
-and quotients endowed with subspace and quotient topologies. This construction is
-performed on types and their subquotients and therefore allows different universes. -/
+of continuous cohomology, including between different coefficient universes. -/
 @[no_expose]
 noncomputable def continuousCohomologyAddEquivOfCoefficients
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
