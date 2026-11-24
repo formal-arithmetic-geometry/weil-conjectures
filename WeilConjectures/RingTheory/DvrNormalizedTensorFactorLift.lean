@@ -180,7 +180,6 @@ assumed finite over `A`, with a prime `Q` over `𝔪_A`. For every finite faithf
 `A ⟶ A₁` of discrete valuation rings, there is a field factor `F₁ = (E ⊗_B A₁)/P₁` into which `A₁`
 injects, whose normalization `S₁` of `A₁` is finite over `A₁`, together with an `A`-algebra map
 `S ⟶ S₁`, making `S₁` flat over `S`, and a prime `Q₁` of `S₁` over `Q` and over `𝔪_{A₁}`. -/
-
 theorem dvr_normalized_tensor_factor_lift
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]

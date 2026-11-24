@@ -42,7 +42,6 @@ namespace RingTheory
 Noetherian integrally closed domain, finite and faithful over the domain `B`, and `E` is a finite
 separable extension of `Frac B`, then for every maximal ideal `P` of `E ⊗_B A` the integral
 closure of `A` in `(E ⊗_B A)/P` is finite over `A`. -/
-
 theorem dvr_root_tensor_factor_integralClosure_finite
     (B : Type u) [CommRing B] [IsDomain B]
     (A : Type u) [CommRing A] [IsDomain A] [IsIntegrallyClosed A]

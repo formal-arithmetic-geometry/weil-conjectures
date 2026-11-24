@@ -48,7 +48,6 @@ field map `E ⟶ F`, with `S` the normalization of `A` in `F` finite over `A`. T
 valuation rings with fraction fields `E` and `F`, with a compatible local map `U ⟶ T`, and
 `B ⟶ U` is local with `𝔪_B U = 𝔪_U^e`, where `e = e(R/B)` is a unit in `B` dividing `n`, and with
 separable residue extension. -/
-
 theorem dvr_normalized_compositum_local_diagram
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ)

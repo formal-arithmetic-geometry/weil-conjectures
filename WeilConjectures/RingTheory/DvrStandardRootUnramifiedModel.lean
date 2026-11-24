@@ -65,7 +65,6 @@ discrete valuation ring and `ρ : R ⟶ T` is a local map compatible with `B` se
 for a unit `y` of `T`. Then there is a discrete valuation ring `V`, local, faithful, essentially
 of finite type and formally unramified over `R`, with a local map `k : V ⟶ T` extending `ρ` and
 field maps `E ⟶ Frac V ⟶ F` compatible with `k` and with `E ⟶ F`. -/
-
 theorem dvr_standard_root_unramified_model
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi)

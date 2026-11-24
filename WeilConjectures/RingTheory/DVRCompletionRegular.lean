@@ -40,7 +40,6 @@ namespace AdicCompletion
 
 /-- The completion map `A ⟶ Â` of a discrete valuation ring `A` at its maximal ideal is regular
 if the fraction field of `A` has characteristic zero. -/
-
 theorem isRegular_algebraMap_of_isDiscreteValuationRing_of_charZero
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] [CharZero K] :

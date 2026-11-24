@@ -47,7 +47,6 @@ extension of `Frac B` such that every prime of the normalization `C` of `B` in `
 ramification index and residue degree dividing `n`. If `F = (E ⊗_B A)/P` is a field factor and the
 normalization `S` of `A` in `F` is finite over `A`, then for every prime `Q` of `S` over `𝔪_A` the
 maximal ideal of `A` generates the maximal ideal of `S_Q`. -/
-
 theorem dvr_tame_tensor_factor_map_maximalIdeal
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (hn : IsUnit (n : B))

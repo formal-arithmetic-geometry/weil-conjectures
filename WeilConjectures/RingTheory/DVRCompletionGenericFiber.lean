@@ -38,7 +38,6 @@ namespace AdicCompletion
 
 /-- If `A` is a discrete valuation ring whose fraction field has characteristic zero, the generic
 fibre of the `𝔪_A`-adic completion of `A` is geometrically regular over `Frac A`. -/
-
 theorem isGeometricallyRegular_genericFiber_of_isDiscreteValuationRing_of_charZero
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] [CharZero K] :

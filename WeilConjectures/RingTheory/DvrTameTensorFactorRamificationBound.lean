@@ -48,7 +48,6 @@ of `Frac B` whose normalization `C` of `B` is finite over `B`, with every prime 
 of ramification index and residue degree dividing `r`, a unit in `B`. If `F = (E ⊗_B A)/P` is a
 field factor into which `A` injects and the normalization `S` of `A` in `F` is finite over `A`,
 then every prime `Q` of `S` over `𝔪_A` has ramification index at most `r / gcd(r, n)`. -/
-
 theorem dvr_tame_tensor_factor_ramificationIdx_le
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (r : ℕ) (hrpos : 0 < r) (hr : IsUnit (r : B))

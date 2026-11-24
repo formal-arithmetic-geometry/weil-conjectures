@@ -39,7 +39,6 @@ namespace RingTheory
 /-- A local DVR in a finite separable extension of the base fraction field is
 essentially of finite type over the base: if `B ⟶ U` is a local map of discrete valuation rings
 and `Frac U` is finite separable over `Frac B`, then `U` is essentially of finite type over `B`. -/
-
 theorem dvr_finite_separable_fraction_essFiniteType
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]

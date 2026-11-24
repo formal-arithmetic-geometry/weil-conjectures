@@ -36,7 +36,6 @@ namespace RingTheory
 any multiple of the Galois extension degree: if `E` is a finite Galois extension of `Frac B` with
 `[E : Frac B] ∣ n` and `C` is the integral closure of `B` in `E`, then every prime of `C` over
 `𝔪_B` has ramification index and residue degree dividing `n`. -/
-
 theorem dvr_galois_normalization_ramification_dvd
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (E : Type u) [Field E] [Algebra (FractionRing B) E]

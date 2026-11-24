@@ -41,7 +41,6 @@ rings with `𝔪_B A = 𝔪_A^n`, and let `B ⟶ U` be a local extension of disc
 by the image of `E`, and `T` a discrete valuation ring with fraction field `F`, dominating `A`
 and, through a local map `U ⟶ T` compatible with all the data, `U`. Then the residue field
 extension of `A ⟶ T` is separable. -/
-
 theorem dvr_abhyankar_local_residue_isSeparable
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n)

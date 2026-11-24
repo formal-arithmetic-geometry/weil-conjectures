@@ -42,7 +42,6 @@ unit of `A`. Then there are local extensions of discrete valuation rings `A ⟶ 
 residue extension) and `T ⟶ T'`, a local map `A' ⟶ T'` making the square commute, an element
 `r ∈ A'` with `r^e = v`, and a field map `F ⟶ F' = Frac T'` compatible with all the maps, such that
 `F'` is generated as an `A'`-algebra by the image of `F`. -/
-
 theorem dvr_etale_unit_root_diagram
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : A)) (v : Aˣ)

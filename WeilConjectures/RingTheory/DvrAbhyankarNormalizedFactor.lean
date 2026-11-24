@@ -76,7 +76,6 @@ extension of `Frac B` whose normalization `C` of `B` is finite over `B`, and sup
 unit in `B`. If `F = (E ⊗_B A) / P` is a field factor into which `A` injects and the
 normalization `S` of `A` in `F` is finite over `A`, then every prime of `S` over `𝔪_A` has
 ramification index one over `A`. -/
-
 theorem dvr_abhyankar_normalized_factor_ramificationIdx_eq_one
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (r : ℕ) (hrpos : 0 < r) (hr : IsUnit (r : B))

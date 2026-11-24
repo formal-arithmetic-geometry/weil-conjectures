@@ -41,7 +41,6 @@ namespace RingTheory
 /-- The generic tensor algebra of a positive-degree uniformizer root is reduced: if `π` is a
 uniformizer of the discrete valuation ring `B`, `n ≥ 1`, and `E` is a finite Galois extension of
 `Frac B`, then `E ⊗_B B[t]/(t^n - π)` is reduced. -/
-
 theorem dvr_galois_root_tensor_reduced
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)

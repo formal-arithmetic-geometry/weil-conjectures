@@ -59,7 +59,6 @@ uniformizer of the discrete valuation ring `B`, `n ≥ 1` a unit in `B`, `A = B[
 `E` a finite Galois extension of `Frac B` with `[E : Frac B] ∣ n`. For a maximal ideal `P` of
 `E ⊗_B A`, let `S` be the integral closure of `A` in `F = (E ⊗_B A)/P`. Then for every prime `Q`
 of `S` lying over `(t)`, the image of `t` generates the maximal ideal of `S_Q`. -/
-
 theorem dvr_galois_root_factor_uniformizer
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)
