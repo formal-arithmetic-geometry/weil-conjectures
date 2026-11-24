@@ -14,8 +14,18 @@ import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.Basic
 /-!
 # Geometric regularity of the generic fibre of a DVR completion
 
-Source: Stacks Project, More on Algebra, Proposition Tag 07PX
-(blueprint: lem-weil-pbc-dvr-completion-generic-fiber).
+For a discrete valuation ring `A` whose fraction field has characteristic zero, the generic fibre
+of the `𝔪_A`-adic completion `Â` is geometrically regular.
+
+## Implementation details
+
+Inverting a uniformizer inverts every nonzero element of the discrete valuation ring `Â`, so the
+generic fibre is the field `Frac Â`; purely inseparable extensions of a characteristic-zero field
+are trivial, so its base changes along them are again fields.
+
+## References
+
+* Stacks Project, More on Algebra, Proposition Tag 07PX.
 -/
 
 @[expose] public section
@@ -26,20 +36,9 @@ open scoped TensorProduct
 
 namespace AdicCompletion
 
-/-- The generic fibre of a characteristic-zero DVR completion is geometrically regular.
+/-- If `A` is a discrete valuation ring whose fraction field has characteristic zero, the generic
+fibre of the `𝔪_A`-adic completion of `A` is geometrically regular over `Frac A`. -/
 
-Proof: Choose a uniformizer π of A. Its image generates the maximal ideal of the
-completion by the local-completion theorem. The completion is a DVR by Tag 0AP1, so
-this image is nonzero and irreducible. Every nonzero element of the completion is a
-unit times a power of this image. Base-changing to the fraction field inverts π and
-therefore all nonzero elements of the completion; the generic fibre is its fraction
-field. The residue field at the zero prime is the fraction field of A, hence has
-characteristic zero. Every purely inseparable extension of a characteristic-zero
-field is trivial. Tensoring the generic fibre with such an extension therefore gives
-a field again. Fields are Noetherian and regular, proving both conjuncts.
-
-Source: Stacks Project, More on Algebra, Proposition Tag 07PX
-(blueprint: lem-weil-pbc-dvr-completion-generic-fiber). -/
 theorem isGeometricallyRegular_genericFiber_of_isDiscreteValuationRing_of_charZero
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] [CharZero K] :

@@ -19,28 +19,27 @@ import Mathlib.Algebra.GCDMonoid.IntegrallyClosed
 
 /-! # Essential finite type for a DVR in a finite separable fraction extension
 
-Source: Stacks Project, Tags 09E8 and 032L.
-(blueprint: lem-sbc-dvr-finite-separable-fraction-ess-finite-type) -/
+If `B ⟶ U` is a local map of discrete valuation rings with `Frac U` finite separable over
+`Frac B`, then `U` is essentially of finite type over `B`.
+
+## Implementation details
+
+`U` is identified with the localization of the integral closure of `B` in `Frac U`, which is
+finite over `B`, at the prime below the maximal ideal of `U`.
+
+## References
+
+* Stacks Project, Tags 09E8 and 032L.
+-/
 
 @[expose] public section
 universe u
 namespace RingTheory
 
 /-- A local DVR in a finite separable extension of the base fraction field is
-essentially of finite type over the base.
+essentially of finite type over the base: if `B ⟶ U` is a local map of discrete valuation rings
+and `Frac U` is finite separable over `Frac B`, then `U` is essentially of finite type over `B`. -/
 
-Source: Stacks Project, Tag 09E8 (the normalized local DVRs), using Tag 032L.
-(blueprint: lem-sbc-dvr-finite-separable-fraction-ess-finite-type)
-
-Proof: Let C be the integral closure of B in E. The trace-pairing theorem 032L
-makes C finite over B; it is Dedekind and has fraction field E. Since U is
-integrally closed in E and contains B, every B-integral element of E belongs
-to U, so C maps injectively into U. Contract the maximal ideal of U to P in C.
-A base uniformizer lies in P and is nonzero, so P is nonzero and C_P is a DVR.
-Its local map to U induces the identity on the common fraction field E.
-Maximality of a valuation ring among local subrings of its fraction field
-makes C_P -> U an isomorphism. Since C is finite over B and C_P is its
-localization, C_P is essentially of finite type over B; transfer this to U. -/
 theorem dvr_finite_separable_fraction_essFiniteType
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (U : Type u) [CommRing U] [IsDomain U] [IsDiscreteValuationRing U]

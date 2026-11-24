@@ -14,7 +14,9 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Descending an essentially smooth local factorization to a quotient
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ, quotient steps.
+## References
+
+* Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ, quotient steps
 -/
 
 @[expose] public section
@@ -48,28 +50,12 @@ private theorem essentiallySmooth_baseChange
   exact ⟨P ⊗[R] S, inferInstance, inferInstance, inferInstance, V, ⟨e'⟩⟩
 
 /-- Base change an auxiliary local factorization to the localization of a larger quotient.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ, items
-item-sixth-resolve and item-eighth-resolve; the tensor and quotient universal properties.
-(blueprint: lem-weil-pbc-essentially-smooth-localized-quotient-factorization).
-
-Proof: Write Q=R_(q∩R), L=T_q, P=(R/J)_(q₀∩(R/J)), and L₀=(T/JT)_q₀.
-The equality lifting q₀ gives local ring maps ρ:Q→P and τ:L→L₀. Their formulas on
-localized base elements show that I⊆JQ is killed by ρ and K⊆JL is killed by τ.
-They also show that Q→L→L₀ equals Q→P→L₀, by localization extensionality.
-Thus ρ factors through Q/I, and the composite D→L/K→L₀ is a Q/I-algebra map.
-Set E=P⊗_(Q/I)D. The tensor universal property gives G:E→L₀. The composite
-C→Q⊗_R C→D→E maps each base element x to its image under R→R/J→P→E, so
-it kills JC. Descend it to C/JC and apply tensor universality to obtain
-F:P⊗_(R/J)(C/JC)→E. On pure tensors, GF is the desired map by the given
-equality gf and the quotient compatibility equation for γ₀. Tensor induction and
-quotient surjectivity extend this equality to every element.
-For essential smoothness, present D as a localization of a smooth Q/I-algebra S.
-Transport the S-algebra structure and localization instance to D along that presentation.
-The smooth algebra P⊗_(Q/I)S has a localization isomorphic over P to E, by
-IsLocalization.tensorProductEquivOfMapIncludeRight. This gives the required presentation
-of E. Since Q/I and P live in Type u and D in Type(max u v), both E and its smooth
-localization model live in Type(max u v). All witnesses are explicit constructions;
-no choice from an unproved existence theorem is used. -/
+Let `γ : C → T` be an `R`-algebra map, `J` an ideal of `R`, `γ₀` the induced map
+`C ⧸ JC → T ⧸ JT`, and `q₀` a prime of `T ⧸ JT` lying over the prime `q` of `T`. Write
+`Q = R_{q ∩ R}` and `L = T_q`. Suppose that, for ideals `I ≤ JQ` and `K ≤ JL` with `IL ≤ K`, the
+map `Q ⊗[R] C → L ⧸ K` factors through an essentially smooth `Q ⧸ I`-algebra `D`. Then, with
+`P` and `L₀` the corresponding localizations of `R ⧸ J` and `T ⧸ JT`, the map
+`P ⊗[R ⧸ J] (C ⧸ JC) → L₀` factors through an essentially smooth `P`-algebra `E`. -/
 theorem essentiallySmooth_localized_quotient_factorization
     {R : Type u} {C : Type v} {T : Type w}
     [CommRing R] [CommRing C] [CommRing T] [Algebra R C] [Algebra R T]

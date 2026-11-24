@@ -6,23 +6,27 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.RingTheory.JacobianPresentationLift
+
+/-!
+# Reduction of the coefficient lift of an étale algebra
+
+The lifted Jacobian quotient of a coefficient lift reduces modulo `I` to the original algebra.
+
+## Implementation details
+
+Modulo the extended ideal the lifted relations become the original ones, whose quotient is `B`;
+the extra relation `t * P.jacobian - 1` forces `t` to be the inverse of the unit `P.jacobian`.
+
+## References
+
+* [Stacks: Tag 04D1](https://stacks.math.columbia.edu/tag/04D1)
+-/
+
 @[expose] public section
 universe u v
 namespace Algebra
-/-- The coefficient lift has the specified reduction isomorphism.
-Source: Stacks Project, Tag 04D1.
-(blueprint: lem-exc-etale-algebra-lift-reduction)
-
-Proof: quotienting the lifted polynomial ring by the constants from I reduces its coefficients
-to A/I. The old equations then become P.relation by L.map_relation, and partial derivatives
-and determinants commute with this coefficient map. Quotienting further by the old equations
-identifies their quotient with B by P's presentation property. The remaining equation is
-therefore t * P.jacobian - 1. Since P.jacobian is a unit, evaluation at its inverse gives an
-isomorphism B[t]/(t * P.jacobian - 1) to B: its inverse includes B as constants, and their
-composites fix B and t, the latter because t * P.jacobian = 1 forces t to be that inverse.
-Composing these identifications gives e. On coefficients, old variables, and t its composite
-with the quotient map agrees with L.polynomialReduction; polynomial and quotient induction
-therefore give e (mk x) = L.reduction x for every x. -/
+/-- The reduction `L.reduction` of a coefficient lift induces a ring isomorphism from the
+lifted quotient modulo the extended ideal `I` onto `B`. -/
 theorem coefficientLift_reduction_equiv
     {A : Type u} [CommRing A] (I : Ideal A)
     {B : Type v} [CommRing B] [Algebra (A ⧸ I) B] {m : ℕ}

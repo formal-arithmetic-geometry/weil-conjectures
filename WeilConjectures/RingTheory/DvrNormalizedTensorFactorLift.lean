@@ -20,8 +20,20 @@ import WeilConjectures.RingTheory.DvrRootTensorFactorIntegralClosureFinite
 
 /-! # Lifting a normalized tensor factor through a finite DVR extension
 
-Source: Stacks Project, Tags 09EM and 032L, and lying over.
-(blueprint: lem-sbc-dvr-normalized-tensor-factor-lift) -/
+A closed prime of the normalization of a field factor of `E ⊗_B A` lifts to a closed prime of a
+field factor of `E ⊗_B A₁` after a finite extension `A ⟶ A₁` of discrete valuation rings
+(`RingTheory.dvr_normalized_tensor_factor_lift`).
+
+## Implementation details
+
+The field factor `F` is tensored with `Frac A₁` over `Frac A`; the factors of this product are
+field factors of `E ⊗_B A₁`, and lying over lifts `Q` to the normalization of one of them. No
+tameness or ramification bound is used.
+
+## References
+
+* Stacks Project, Tags 09EM and 032L.
+-/
 
 @[expose] public section
 universe u
@@ -161,28 +173,14 @@ private theorem tensor_factor_baseChange_embedding
 
 -- Preserve the existing, internally unused `hQ` binder in the public statement.
 set_option linter.unusedVariables false in
-/-- A closed prime of a normalized tensor factor lifts after finite DVR base change.
+/-- A closed prime of a normalized tensor factor lifts after finite DVR base change. Let `B ⟶ A`
+be a finite extension of discrete valuation rings, `E` a finite separable extension of `Frac B`,
+`F = (E ⊗_B A)/P` a field factor into which `A` injects, and `S` the normalization of `A` in `F`,
+assumed finite over `A`, with a prime `Q` over `𝔪_A`. For every finite faithful extension
+`A ⟶ A₁` of discrete valuation rings, there is a field factor `F₁ = (E ⊗_B A₁)/P₁` into which `A₁`
+injects, whose normalization `S₁` of `A₁` is finite over `A₁`, together with an `A`-algebra map
+`S ⟶ S₁`, making `S₁` flat over `S`, and a prime `Q₁` of `S₁` over `Q` and over `𝔪_{A₁}`. -/
 
-Source: Stacks Project, Tag 09EM (remark-setup), Tag 032L and lying over.
-(blueprint: lem-sbc-dvr-normalized-tensor-factor-lift)
-
-Proof: Invert B minus zero to regard F as a finite separable field factor of
-E tensor Frac(A) over Frac(B). The finite faithful extension A₁/A embeds
-Frac(A) in Frac(A₁). Take the finite product of fields obtained by tensoring
-F with Frac(A₁) over Frac(A). Its factors are also factors of
-E tensor Frac(A₁) over Frac(B), hence quotients by maximal ideals P₁ of
-E tensor A₁ over B. Their right maps alpha₁ are injective. Normalize S in
-this product. Since E/Frac(B) is separable the factors are finite separable
-over Frac(A₁), and 032L makes their normalizations S₁ finite over A₁.
-Integrality over A, A₁ and S agrees, by transitivity and normality, so these
-are exactly the factors of that product normalization. The integral map
-S -> product S₁ is injective. Lying over lifts Q to a prime in one factor,
-giving Q₁ and the induced A-algebra map i. Its contraction to A₁ lies over
-the maximal ideal of A. Since A₁/A is finite and A₁ is local, this
-contraction is the maximal ideal of A₁. The ring S is a finite normal
-one-dimensional domain, hence Dedekind. The inclusion into the chosen
-factor is injective, so S₁ is torsion free over S and therefore flat.
-This construction uses no tameness or ramification bound. -/
 theorem dvr_normalized_tensor_factor_lift
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]

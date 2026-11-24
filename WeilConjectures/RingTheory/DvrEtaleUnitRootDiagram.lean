@@ -17,34 +17,32 @@ import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! # A local unit-root cover of a DVR diagram
 
-Source: Stacks Project, Tag 0BRM, the first claim in its proof.
-(blueprint: lem-sbc-dvr-etale-unit-root-diagram) -/
+Given a local map `A ⟶ T` of discrete valuation rings and a unit `v` of `A`, an `e`-th root of
+`v` (with `e` invertible in `A`) is adjoined compatibly above `A` and `T`
+(`RingTheory.dvr_etale_unit_root_diagram`).
+
+## Implementation details
+
+The extensions are local factors of `C = A[X]/(X^e - v)`, finite étale over `A`, and of
+`T ⊗_A C`. No ramification or residue-separability assumption on `T/A` is used.
+
+## References
+
+* Stacks Project, Tag 0BRM, the first claim in its proof.
+-/
 
 @[expose] public section
 
 universe u
 namespace RingTheory
 
-/-- Adjoining a root of a unit simultaneously above the two DVRs of a local diagram.
+/-- Adjoining a root of a unit simultaneously above the two DVRs of a local diagram. Let
+`A ⟶ T` be a local map of discrete valuation rings, `F = Frac T`, `e ≥ 1` a unit in `A` and `v` a
+unit of `A`. Then there are local extensions of discrete valuation rings `A ⟶ A'` (with separable
+residue extension) and `T ⟶ T'`, a local map `A' ⟶ T'` making the square commute, an element
+`r ∈ A'` with `r^e = v`, and a field map `F ⟶ F' = Frac T'` compatible with all the maps, such that
+`F'` is generated as an `A'`-algebra by the image of `F`. -/
 
-Source: Stacks Project, Tag 0BRM, the paragraph beginning with the claim that the
-unit can be assumed to be an e-th power.
-(blueprint: lem-sbc-dvr-etale-unit-root-diagram)
-
-Proof: Form C = A[X]/(X^e-v). Its root is a unit, and e is a unit, so its derivative
-is a unit. Thus C is finite etale over A. Form D = T tensor_A C, which is finite
-etale over T. Choose a maximal ideal of D above the maximal ideal of T and contract
-it to a prime of C. Localize D and C at these primes, obtaining T' and A'. These
-are DVR domains: an etale local extension of a DVR is regular of dimension one.
-Both maps are local and their square commutes. The residue extension k(A')/k(A)
-is finite separable. The image r of X satisfies r^e = v. Take F' = Frac(T'). The
-injection T -> T' extends uniquely to a field map iF from F = Frac(T), and the
-localization map A' -> T' -> F' is compatible with A. The field F' is the selected
-field factor of F[X]/(X^e-v). Hence it is generated as an F-algebra by the root:
-the root is algebraic, so this algebra is already a field. Since r belongs to A',
-F' is generated as an A'-algebra by iF(F). This construction does not use any
-ramification or residue-separability assumption on T/A. For e = 1 use A, T and F
-itself, with r = v. -/
 theorem dvr_etale_unit_root_diagram
     (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
     (e : ℕ) (hepos : 0 < e) (he : IsUnit (e : A)) (v : Aˣ)

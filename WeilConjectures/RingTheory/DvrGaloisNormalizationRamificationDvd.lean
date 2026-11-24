@@ -19,27 +19,24 @@ import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-! # Divisibility of the ramification and residue degrees in a Galois normalization
 
-Source: Stacks Project, Tag 09EB.
-(blueprint: lem-sbc-dvr-galois-normalization-ramification-dvd) -/
+For a discrete valuation ring `B` and a finite Galois extension `E` of `Frac B`, the
+ramification index and residue degree of every prime of the integral closure of `B` in `E` over
+`𝔪_B` divide `[E : Frac B]`, by the fundamental identity `r e f = [E : Frac B]`.
+
+## References
+
+* Stacks Project, Tag 09EB.
+-/
 
 @[expose] public section
 universe u
 namespace RingTheory
 
 /-- The ramification and residue degrees at every closed normalization prime divide
-any multiple of the Galois extension degree.
+any multiple of the Galois extension degree: if `E` is a finite Galois extension of `Frac B` with
+`[E : Frac B] ∣ n` and `C` is the integral closure of `B` in `E`, then every prime of `C` over
+`𝔪_B` has ramification index and residue degree dividing `n`. -/
 
-Source: Stacks Project, Tag 09EB.
-(blueprint: lem-sbc-dvr-galois-normalization-ramification-dvd)
-
-Proof: The integral closure C is finite over B by the separable trace-pairing
-argument. It is a Dedekind domain, and its fraction field is E. The group
-Gal(E/Frac(B)) acts on C, transitively on the primes over the maximal ideal
-of B. Hence the ramification index e and residue degree f are constant there.
-The Galois fundamental identity is r*(e*f)=[E:Frac(B)], where r is the number
-of primes above the maximal ideal. Both e and f divide this product and thus
-any multiple n of the extension degree. This includes the trivial extension;
-no invertibility assumption on n is used. -/
 theorem dvr_galois_normalization_ramification_dvd
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (E : Type u) [Field E] [Algebra (FractionRing B) E]

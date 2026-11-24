@@ -21,42 +21,33 @@ import WeilConjectures.RingTheory.DvrTameTensorFactorRamificationBound
 
 /-! # A local consequence of tame DVR base change
 
-Source: Stacks Project, Tags 032L, 0BRM and 09E7.
-(blueprint: lem-sbc-dvr-tame-tensor-factor-maximal-ideal) -/
+After base change of a tame finite separable extension along a finite extension `B ⟶ A` of
+discrete valuation rings whose ramification index is divisible by the tame degrees, the local
+rings of the normalized field factors over `𝔪_A` are unramified over `A`
+(`RingTheory.dvr_tame_tensor_factor_map_maximalIdeal`).
+
+## Implementation details
+
+The proof applies Abhyankar's lemma to the localizations of the normalization of `B` in `E` and
+uses only the index-one part of the conclusion.
+
+## References
+
+* Stacks Project, Tags 032L, 0BRM and 09E7.
+-/
 
 @[expose] public section
 universe u
 open scoped TensorProduct
 namespace RingTheory
 
-/-- Maximal ideal equality after tame DVR base change.
+/-- Maximal ideal equality after tame DVR base change. Let `B ⟶ A` be a finite faithful extension
+of discrete valuation rings with `𝔪_B A = 𝔪_A^n`, `n` a unit in `B`, and `E` a finite separable
+extension of `Frac B` such that every prime of the normalization `C` of `B` in `E` over `𝔪_B` has
+ramification index and residue degree dividing `n`. If `F = (E ⊗_B A)/P` is a field factor and the
+normalization `S` of `A` in `F` is finite over `A`, then for every prime `Q` of `S` over `𝔪_A` the
+maximal ideal of `A` generates the maximal ideal of `S_Q`. -/
 
-Source: Stacks Project, Tags 032L, 0BRM and 09E7.
-(blueprint: lem-sbc-dvr-tame-tensor-factor-maximal-ideal)
-
-Proof: Finite faithfulness gives an injection B -> A and a finite extension
-Frac(A)/Frac(B); normality of A identifies A with the normalization of B in
-Frac(A). The maximal-ideal identity gives ramification index n. The kernel of
-A -> F is prime and contracts to zero in B, since B embeds in E and the map
-from the field E to the nonzero tensor quotient F is injective. Incomparability
-for the integral extension B -> A then makes that kernel zero. Inverting the
-nonzero elements identifies F with a field factor of E tensor_Frac(B) Frac(A).
-The normalization C of B in E is finite by Stacks 032L (the separable trace
-argument); it is a Dedekind domain, so C localized at a prime over m_B is a DVR.
-At each such prime, the two divisibility bounds and the unit n imply that the
-ramification index and the residue degree are prime to the residue characteristic.
-The inseparable residue degree is a power of that characteristic and divides
-the residue degree, hence is one; in characteristic zero separability is automatic.
-Apply Abhyankar's lemma 0BRM to these tame DVRs and Frac(A)/Frac(B): their
-ramification indices divide n, the base-change index. Integrality over A and B
-in F agrees by transitivity and the integral extension A/B. Localization of
-normalization therefore identifies S_Q with the normalized field factor of
-0BRM. Finiteness of S over A, its normality, and the fact that Q lies over m_A
-ensure that S_Q is a DVR. Abhyankar gives adic formal smoothness of A -> S_Q;
-Stacks 09E7 identifies its two consequences as index one and residue separability.
-Index one means that a uniformizer of A generates the maximal ideal of S_Q.
-Thus extension of m_A is precisely m_(S_Q). This uses only the index-one part
-of the criterion; no formal unramifiedness conclusion is assumed. -/
 theorem dvr_tame_tensor_factor_map_maximalIdeal
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (hn : IsUnit (n : B))

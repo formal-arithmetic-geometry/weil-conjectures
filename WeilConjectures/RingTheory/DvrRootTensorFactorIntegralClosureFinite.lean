@@ -19,31 +19,30 @@ import Mathlib.RingTheory.Ideal.GoingUp
 
 /-! # Finiteness of the integral closure in a generic tensor factor
 
-Source: Stacks Project, Tag 032L.
-(blueprint: lem-sbc-dvr-root-tensor-factor-integral-closure-finite) -/
+For a Noetherian integrally closed domain `A` finite over `B` and a finite separable extension `E`
+of `Frac B`, the integral closure of `A` in each field factor of `E ⊗_B A` is finite over `A`
+(`RingTheory.dvr_root_tensor_factor_integralClosure_finite`).
+
+## Implementation details
+
+Each field factor `F` is a quotient of `Frac A ⊗_{Frac B} E`, hence finite separable over
+`Frac A`, so the trace-pairing finiteness theorem `IsIntegralClosure.finite` applies.
+
+## References
+
+* Stacks Project, Tag 032L.
+-/
 
 @[expose] public section
 universe u
 open scoped TensorProduct
 namespace RingTheory
 
-/-- The normalization of a generic field factor of a tame root algebra is finite.
+/-- The normalization of a generic field factor of a tame root algebra is finite: if `A` is a
+Noetherian integrally closed domain, finite and faithful over the domain `B`, and `E` is a finite
+separable extension of `Frac B`, then for every maximal ideal `P` of `E ⊗_B A` the integral
+closure of `A` in `(E ⊗_B A)/P` is finite over `A`. -/
 
-Source: Stacks Project, Tag 032L.
-(blueprint: lem-sbc-dvr-root-tensor-factor-integral-closure-finite)
-
-Proof: Put K = Frac(B). F is finite-dimensional over K because A is finite over B
-and E is finite-dimensional over K. The map A -> F is injective: its kernel
-contracts to zero in B, because the field K maps injectively into F, and
-integrality of A over B forces this kernel to be zero. Thus F has a compatible
-Frac(A)-algebra structure and is finite-dimensional over Frac(A). There is a
-surjection Frac(A) tensor_K E -> F: on pure tensors it multiplies the two
-structural images, and every class of e tensor_B a is in its image. Finite
-separability of E/K makes this tensor product formally unramified over
-Frac(A); its field quotient F is consequently separable over Frac(A).
-Apply the trace-pairing lattice theorem IsIntegralClosure.finite (Tag 032L)
-to the Noetherian normal domain A. No DVR or degree-divisibility hypothesis
-and no choice of a prime of the integral closure are needed. -/
 theorem dvr_root_tensor_factor_integralClosure_finite
     (B : Type u) [CommRing B] [IsDomain B]
     (A : Type u) [CommRing A] [IsDomain A] [IsIntegrallyClosed A]

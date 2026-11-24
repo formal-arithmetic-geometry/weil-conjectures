@@ -21,8 +21,17 @@ import Mathlib.RingTheory.Algebraic.Integral
 
 /-! # Local DVR diagram of a normalized compositum
 
-Source: Stacks Project, Tags 032L, 00PD, and Remark 09EM.
-(blueprint: lem-sbc-dvr-normalized-compositum-local-diagram) -/
+Given a finite extension `B ⟶ A` of discrete valuation rings, a finite separable extension `E` of
+`Frac B` and a field `F` generated over `A` by the image of `E`, a prime of the normalization of
+`A` in `F` over `𝔪_A` selects local discrete valuation rings of `E` and `F` forming the
+commutative diagram used in Abhyankar's lemma
+(`RingTheory.dvr_normalized_compositum_local_diagram`).
+
+## References
+
+* Stacks Project, Tags 032L and 00PD, and the normalization diagram in Remark 09EM preceding
+  Abhyankar's lemma (Tag 0BRM).
+-/
 
 @[expose] public section
 
@@ -30,34 +39,16 @@ universe u
 
 namespace RingTheory
 
-/-- A prime of a finite normalization selects compatible local DVRs in the two fields.
+/-- A prime of a finite normalization selects compatible local DVRs in the two fields. Let
+`B ⟶ A` be a finite extension of discrete valuation rings, `E` a finite separable extension of
+`Frac B` whose normalization `C` of `B` is finite and tame over `𝔪_B` (index a unit dividing `n`,
+separable residue extension), and `F` a field generated over `A` by the image of a compatible
+field map `E ⟶ F`, with `S` the normalization of `A` in `F` finite over `A`. Then for every prime
+`Q` of `S` over `𝔪_A` there is a prime `R` of `C` such that `U = C_R` and `T = S_Q` are discrete
+valuation rings with fraction fields `E` and `F`, with a compatible local map `U ⟶ T`, and
+`B ⟶ U` is local with `𝔪_B U = 𝔪_U^e`, where `e = e(R/B)` is a unit in `B` dividing `n`, and with
+separable residue extension. -/
 
-Source: Stacks Project, Tag 032L, Tag 00PD, and the normalization diagram in
-Remark 09EM preceding Abhyankar's lemma 0BRM.
-(blueprint: lem-sbc-dvr-normalized-compositum-local-diagram)
-
-Proof: The field map iE is injective. The kernel of A -> F contracts to zero
-in B by compatibility; integrality and the domain A imply that this kernel
-is zero. Algebraicity of E over B follows by clearing fraction-field
-denominators; it transfers through iE and extends from B to A. Generation
-therefore makes F algebraic over A. The integral closure S has fraction
-field F by the algebraic integral-closure theorem. The finite integral closure S
-of A in F is a normal one-dimensional Noetherian domain; Q is nonzero since
-it contracts to the nonzero maximal ideal of A. Thus S_Q is a DVR and has
-fraction field F. Restrict iE to C = integralClosure B E: its image lies in
-S, since a monic equation over B is also a monic equation over A. Contract
-Q along this restriction to obtain R. Compatibility shows R lies above the
-maximal ideal of B. Since C is finite over B, it too is a normal
-one-dimensional Noetherian domain; consequently C_R is a DVR with fraction
-field E. Localizing the restriction C -> S at these primes produces the
-local homomorphism j and its two compatibility identities. The canonical
-map B -> C_R is local. The ramification length formula in a DVR identifies
-R.ramificationIdx B with the exponent in the displayed ideal equality.
-Finally identify the prime residue fields at R and its contraction with
-those of C_R and B; transport the separability in htame along these canonical
-field isomorphisms. Its unit and divisibility assertions give the other two
-returned properties. This construction uses no ramification cancellation
-or assertion about the residue field of S_Q. -/
 theorem dvr_normalized_compositum_local_diagram
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ)

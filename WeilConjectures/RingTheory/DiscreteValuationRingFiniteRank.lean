@@ -16,9 +16,6 @@ residue map of `R` is surjective onto a field `K` and factors through `S`) in wh
 free) `R`-module of rank `e` (`IsDiscreteValuationRing.flat_and_finrank_eq_of_algebraMap_eq`): the
 sum of ramification indices times inertia degrees over the maximal ideal of `R` has the single
 term `e · 1`.
-
-This is used for the degree of the punctured diagonal in blueprint
-`lemma-tangent-cones-on-cover` (ii).
 -/
 
 @[expose] public section

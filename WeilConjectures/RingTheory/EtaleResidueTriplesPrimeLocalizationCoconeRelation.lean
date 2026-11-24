@@ -9,16 +9,25 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-/-! # Compatible cocone legs across prime localization -/
+/-! # Compatible cocone legs across prime localization
+
+The compatibility relation between cocones on the pointed étale ring diagrams over `(R, p)`
+and over the localization `R_p`.
+
+## References
+
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+-/
 
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- A global and local cocone have compatible legs on every pointed R-algebra map.
-Source: Stacks Project, Tags 04GW and 00CR.
-(blueprint: new-def-sbc-etale-triples-prime-localization-cocone-relation) -/
+/-- A cocone `η` over `(R, p)` and a cocone `θ` over `R_p` with the same vertex are compatible
+if `β ≫ θ.app t = η.app s` for every pointed `R`-algebra map `β` from a triple `s` over
+`(R, p)` to a triple `t` over `R_p`. -/
 def etaleResidueTriples_primeLocalization_coconeRelation
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)
