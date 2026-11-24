@@ -15,9 +15,9 @@ Let `Ψ : D(X_ét, Λ) ⥤ D(X_ét, Λ')` be a change of coefficients with its c
 `Ri_!` and `Ri^!` (`AlgebraicGeometry.Etale.SupportedCoefficientChange`). The compatibility of
 the fundamental class, of the purity isomorphism of a section and of the canonical orientation
 with `Ψ` (`SupportedCoefficientChange.mapSupportedClass_thomFundamentalClass` and its
-consequences, blueprint `proposition-compatibility-purity-change-coefficients`) assume the
-hypothesis `hframe`: `Ψ` carries the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ`
-(`AlgebraicGeometry.Etale.frameClass`) of every frame to the frame class over `Λ'`.
+consequences) assume the hypothesis `hframe`: `Ψ` carries the frame class
+`∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` (`AlgebraicGeometry.Etale.frameClass`) of every frame to the
+frame class over `Λ'`.
 
 This file reduces `hframe` to compatibilities of `Ψ` with the three operations out of which the
 frame classes are built (`AlgebraicGeometry.Etale.kummerBoundaryProduct`):
@@ -260,10 +260,7 @@ section FrameClass
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasKummerClass Λ] [HasKummerClass Λ'] (Φ : SupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-A change of coefficients *preserves Kummer boundaries* if it is compatible with the three
+/-- A change of coefficients *preserves Kummer boundaries* if it is compatible with the three
 constituents of the iterated cup products of Kummer boundaries
 `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n)` (`AlgebraicGeometry.Etale.kummerBoundaryProduct`), out of which the
 frame classes are built:
@@ -305,7 +302,7 @@ namespace PreservesKummerBoundaries
 variable {Φ}
 
 /-- **The change of coefficients of `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n)` is `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_n)`**, for a
-change of coefficients preserving Kummer boundaries, by induction on `n`. -/
+change of coefficients preserving Kummer boundaries. -/
 theorem mapSupportedClass_kummerBoundaryProduct (hΦ : Φ.PreservesKummerBoundaries)
     {U : Scheme.{u}} [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] {n : ℕ}
     (f : Fin n → Γ(U, ⊤)) :
@@ -321,15 +318,9 @@ theorem mapSupportedClass_kummerBoundaryProduct (hΦ : Φ.PreservesKummerBoundar
       (by rw [Nat.cast_succ, add_comm (1 : ℤ)]), hΦ.mapSupportedClass_cupWithSupportsTateObject,
       hΦ.mapSupportedClass_kummerBoundary, ih]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**A change of coefficients preserving Kummer boundaries carries frame classes to frame
+/-- **A change of coefficients preserving Kummer boundaries carries frame classes to frame
 classes**: for every frame `(e : U ⟶ X, f₁, …, f_c)` of a closed immersion, the change of
-coefficients of `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` is `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ'`. This is
-the hypothesis `hframe` of
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.mapSupportedClass_thomFundamentalClass` and
-its consequences. -/
+coefficients of `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` is `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ'`. -/
 theorem mapSupportedClass_frameClass (hΦ : Φ.PreservesKummerBoundaries) {X Z : Scheme.{u}}
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {c : ℕ} {i : Z ⟶ X}
     (F : i.EtaleFrame c) :
@@ -357,8 +348,7 @@ lemma map_app_comp_map_eq_derivedTensorHom (Λ : Type (u + 1)) [CommRing Λ] {X 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Let `i₁ : Z₁ ⟶ U`, `i₂ : Z₂ ⟶ U` and `i : Z ⟶ U` be closed immersions with `Z = Z₁ ∩ Z₂`
-and `j` the open complement of `Z`. Then `Lj^*(Ri₁_! P ⊗ᴸ Ri₂_! Q) = 0`: it restricts to zero on
-the complements of `Z₁` and of `Z₂`, which cover the source of `j`. -/
+and `j` the open complement of `Z`. Then `Lj^*(Ri₁_! P ⊗ᴸ Ri₂_! Q) = 0`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_derivedTensor_rightDerivedLowerShriek_of_inter
     {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U) [IsClosedImmersion i₁]
     [IsClosedImmersion i₂] [IsClosedImmersion i]
@@ -447,9 +437,7 @@ variable {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i
               │                                         │
               ▼                                         ▼
 Ri₁_! Ri₁^! M' ⊗ᴸ Ri₂_! Ri₂^! N' ───product───▶ Ri_! Ri^!(M' ⊗ᴸ N')
-```
-Both composites are maps out of an object supported on `Z`, so they are determined by their
-composites with the counit, which are both the tensor product of the counits. -/
+``` -/
 lemma map_supportedProduct_comp_supportsMap {M N : 𝐃(U, Λ)} {M' N' : 𝐃(U, Λ')}
     (vM : (Φ.functor U).obj M ≅ M') (vN : (Φ.functor U).obj N ≅ N') :
     (Φ.functor U).map (supportedProduct Λ i₁ i₂ i h M N) ≫
@@ -482,10 +470,7 @@ variable {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i
   [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
   (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**A monoidal change of coefficients commutes with the cup product with supports**
+/-- **A monoidal change of coefficients commutes with the cup product with supports**
 (`AlgebraicGeometry.Etale.cupWithSupportsTateObject`), provided it is compatible with
 * `hΔ`: the diagonal `Λ_U ⟶ Λ_U ⊗ᴸ Λ_U` (`AlgebraicGeometry.Etale.constantComplexDiagonal`),
   through `Ψ Λ_U ≅ Λ'_U`, and
@@ -522,10 +507,7 @@ theorem mapSupportedClass_cupWithSupportsTateObject [HasInvertibleExponent Λ U]
     ← SupportedCoefficientChange.constantComplexIso_hom_comp_mapSupportedClass,
     ← tensorMap_comp_derivedTensorHom_assoc, reassoc_of% hΔ]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**A monoidal change of coefficients preserves Kummer boundaries**
+/-- **A monoidal change of coefficients preserves Kummer boundaries**
 (`AlgebraicGeometry.Etale.SupportedCoefficientChange.PreservesKummerBoundaries`), hence carries
 frame classes to frame classes, provided it is compatible with
 * `hunit`: the unit class `Λ_U ≅ Λ_U(0)[0]`;
@@ -576,15 +558,10 @@ section Orientation
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : MonoidalSupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
-
-**The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
+/-- **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
 coefficients preserving Kummer boundaries**, as soon as the smooth base change identifications
 `𝒞(p₁, Δ) ≅ ω_f` (`hC`) and the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`)
-correspond: `MonoidalSupportedCoefficientChange.map_dualizingComplexTwistShiftIso` with
-`hframe` supplied by
-`SupportedCoefficientChange.PreservesKummerBoundaries.mapSupportedClass_frameClass`. -/
+correspond. -/
 theorem map_dualizingComplexTwistShiftIso_of_preservesKummerBoundaries {X Y : Scheme.{u}}
     (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f] [HasCompactification f] [IsSeparated f]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {k : Type u} [Field k]

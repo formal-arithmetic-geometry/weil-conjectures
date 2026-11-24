@@ -94,10 +94,7 @@ noncomputable def rightDerivedLowerShriekConstantComplexIso :
     ((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.mapIso (constantComplexIsoSingleFunctor Λ Z) ≪≫
     (((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _
 
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section (the identification of cohomology with supports with morphisms into `Ri^!`).
-
-For a closed immersion `i : Z ⟶ X`, the cohomology with supports is
+/-- For a closed immersion `i : Z ⟶ X`, the cohomology with supports is
 `H^a_Z(X, K) ≅ Hom(Λ_Z, Ri^!(K[a]))`. -/
 noncomputable def supportCohomologyAddEquiv
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) :
@@ -114,9 +111,7 @@ section Linear
 
 variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
-/-- The derived sections with support `RΓ_Z(X, -)` are `Λ`-linear: they are `RΓ(Z, Ri^! -)`
-(`AlgebraicGeometry.Etale.rightDerivedClosedUpperShriekCompIso`), and both factors are right
-adjoints of `Λ`-linear functors. -/
+/-- The derived sections with support `RΓ_Z(X, -)` are `Λ`-linear. -/
 instance linear_rightDerivedSectionsWithSupport :
     (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) i).Linear Λ := by
   have := (lowerStarClosedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i i.openComplement.ι
@@ -155,11 +150,7 @@ lemma derivedSupportCohomologyAddEquiv_smul
   rw [hx, derivedSupportCohomologyAddEquiv_map, Functor.map_smul,
     CategoryTheory.Functor.map_id, Linear.comp_smul, Category.comp_id]
 
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section (the identification of cohomology with supports with morphisms into `Ri^!`,
-`Λ`-linearly).
-
-For a closed immersion `i : Z ⟶ X`, the `Λ`-linear isomorphism
+/-- For a closed immersion `i : Z ⟶ X`, the `Λ`-linear isomorphism
 `H^a_Z(X, K) ≅ Hom(Λ_Z, Ri^!(K[a]))` underlying
 `AlgebraicGeometry.Etale.supportCohomologyAddEquiv`. -/
 noncomputable def supportCohomologyLinearEquiv [Finite Λ]
