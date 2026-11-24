@@ -14,8 +14,17 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
 
 This isolates the target tensor presentation and its derived comparison from the
 normalization field of `ReductionPresentation`.
-(blueprint: lem-sf-integral-hom-reduction-target).
-(blueprint: lem-sf-integral-hom-models-exist-reduction-components).
+
+## Implementation details
+
+The target presentation is built from the generic closed symmetric monoidal structure on the
+derived category of ringed modules and the braided left-tensor adjunction, whose counit is the
+braiding followed by the native counit.
+
+## References
+
+* [Stacks: Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks: Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
 -/
 
 @[expose] public section
@@ -35,16 +44,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-/-- The finite-level target tensor presentation exists.
-
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
-Proof: obtain the generic closed symmetric monoidal structure, its tensor
-comparison, and its representative Koszul symmetry. The braided left-tensor
-adjunction is natural in its tensor parameter; its counit is the braiding followed
-by the native counit. The finite evaluation argument for exactly that counit gives
-the required sectionwise and derived evaluation equations. These are exactly the
-fields of `TensorPresentation`.
--/
+/-- The finite-level target tensor presentation exists: the level-`n` integral coefficient ring
+sheaf on the pro-étale site admits a `TensorPresentation`. -/
 theorem reduction_target_exists
     (n : ℕ) :
     Nonempty (TensorPresentation.{t, u} Y

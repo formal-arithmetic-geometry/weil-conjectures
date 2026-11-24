@@ -13,7 +13,10 @@ public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReduc
 The map from the presentation tensor in order `(K,A)` to the tensor model in
 order `(A,K)` is constructed by transposing the unit. No choice of a tensor
 comparison is made here.
-(blueprint: def-sfb-integral-hom-tensor-adjunction-exchange)
+
+## References
+
+* Stacks Project, Tags 06YU, 08J7.
 -/
 
 @[expose] public section
@@ -28,17 +31,13 @@ variable {X : AlgebraicGeometry.Scheme.{u}}
   (a : TensorPresentation.{u, u} X R) (b : HomReductionTensorModel R)
 
 /-- Exchange tensor order by the canonical comparison of left adjoints to the
-same internal Hom. It is the inverse `a` adjunction applied to the unit of `b`.
-Source: Stacks 06YU, 08J7, tensor symmetry and the tensor-Hom adjunction.
-(blueprint: def-sfb-integral-hom-tensor-adjunction-exchange). -/
+same internal Hom. It is the inverse `a` adjunction applied to the unit of `b`. -/
 noncomputable def tensorAdjunctionExchange (K A : Derived.{u, u} X R) :
     a.tensor.obj (K, A) ⟶ b.tensor.obj (A, K) :=
   ((a.adjunction K).homEquiv A (b.tensor.obj (A, K))).symm
     ((b.curry A K (b.tensor.obj (A, K))).symm (𝟙 _))
 
-/-- Transposition through the exchange is the original presentation transposition.
-Source: naturality of the two adjunction equivalences, Stacks 08J7.
-(blueprint: def-sfb-integral-hom-tensor-adjunction-exchange). -/
+/-- Transposition through the exchange is the original presentation transposition. -/
 theorem tensorAdjunctionExchange_uncurry (K A L : Derived.{u, u} X R)
     (f : A ⟶ (homReductionHom R).obj (op K, L)) :
     ((a.adjunction K).homEquiv A L).symm f =
@@ -55,9 +54,7 @@ theorem tensorAdjunctionExchange_uncurry (K A L : Derived.{u, u} X R)
   simpa only [Category.id_comp, Equiv.apply_symm_apply, hid,
     Category.comp_id, Functor.curry_obj_obj_map, op_id] using h.symm
 
-/-- Naturality in the argument represented by the left adjoints is formal.
-Source: naturality of adjunction equivalences, Stacks 08J7.
-(blueprint: def-sfb-integral-hom-tensor-adjunction-exchange). -/
+/-- The exchange is natural in the second tensor factor `A`. -/
 theorem tensorAdjunctionExchange_naturality_second
     (K A A' : Derived.{u, u} X R) (g : A ⟶ A') :
     a.tensor.map (Prod.mkHom (𝟙 K) (g)) ≫ tensorAdjunctionExchange R a b K A' =
@@ -79,9 +76,7 @@ theorem tensorAdjunctionExchange_naturality_second
       tensorAdjunctionExchange_uncurry R a b K A T (g ≫ eta)
     _ = _ := by rw [hc]
 
-/-- In particular the exchange carries evaluation to the presentation counit.
-Source: Stacks 08J7, evaluation as the transpose of the identity.
-(blueprint: def-sfb-integral-hom-tensor-adjunction-exchange). -/
+/-- The exchange followed by the model evaluation is the presentation counit. -/
 theorem tensorAdjunctionExchange_evaluation (K L : Derived.{u, u} X R) :
     tensorAdjunctionExchange R a b K ((homReductionHom R).obj (op K, L)) ≫
       b.curry ((homReductionHom R).obj (op K, L)) K L (𝟙 _) =

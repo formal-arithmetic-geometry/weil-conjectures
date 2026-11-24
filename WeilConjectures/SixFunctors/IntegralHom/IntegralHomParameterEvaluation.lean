@@ -13,9 +13,23 @@ import WeilConjectures.SixFunctors.IntegralHom.HomComplexTensorPureEquivalence
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRepresentativeUncurry
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
-/-! Coherent evaluation for the integral tensor presentation.
-Source: the representative evaluation step in the blueprint proof.
-(blueprint: lem-sf-integral-hom-parameter-evaluation) -/
+/-! # Coherent evaluation for the integral tensor presentation
+
+We construct a tensor-Hom adjunction, natural in the tensor parameter, whose counit is computed
+on K-flat and K-injective representatives by signed sectionwise evaluation.
+
+## Implementation details
+
+The adjunction is obtained by transporting the native adjunction through the natural Koszul
+exchange of tensor factors; its counits are coherent by naturality of the exchange and the
+native evaluation law. On representatives, the evaluation map is the uncurried representative
+map precomposed with the signed chain exchange.
+
+## References
+
+* [Stacks: Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
+* [Stacks: Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
+-/
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -190,14 +204,9 @@ variable [EssentiallySmall.{t + 1} Y.ProEt]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 -- The representative square elaborates independent site and coefficient universes.
-/-- The signed representative evaluation uses an adjunction natural in its tensor parameter.
-
-Source: Stacks Tags 08J9 and 06YU; the normalized Koszul exchange construction.
-Proof: transport the native adjunction through the natural Koszul exchange. Its
-counits are coherent by exchange naturality and the native evaluation law.
-Uncurry the representative map and precompose with the signed chain exchange.
-Its pure-section formula and localization square give the stated normalization.
-(blueprint: lem-sf-integral-hom-parameter-evaluation) -/
+/-- There is a tensor-Hom adjunction, natural in the tensor parameter, such that for K-flat
+`P`, `S'`, K-injective `I` and `q : S' ⟶ Hom(P, I)`, some chain map `P ⊗ S' ⟶ I` sends
+`x ⊗ s` to `(-1)^(ij) q(s)(x)` and represents the derived counit applied to `q`. -/
 theorem tensor_presentation_parameter_evaluation
     (S : CoefficientClosedStructure
       (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y)
