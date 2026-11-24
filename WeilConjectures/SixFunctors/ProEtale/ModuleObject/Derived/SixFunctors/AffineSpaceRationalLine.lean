@@ -366,8 +366,9 @@ end
 attribute [local semireducible] RationalP1.coefficient RationalP1.line
 
 /-- Rational affine-line compact-support adjunction, for every finite coefficient
-subextension and for the finite-subextension-valued algebraic closure.  The three assertions
-are respectively the three clauses of the affine-line statement. -/
+subextension and for the finite-subextension-valued algebraic closure.  The first conjunct is
+`affineLineRationalAssertion` for every finite subextension `E`, the second is the same
+assertion for `ℚ̄_ℓ`. -/
 theorem det_cor_affine_space_rational_line
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

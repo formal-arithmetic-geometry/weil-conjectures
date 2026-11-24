@@ -142,7 +142,8 @@ def formalSupportKernelInclusion {V X : Scheme.{u}} (j : V ⟶ X) :
   app M := kernel.ι ((formalSupportPullbackAdjunction Λ j).unit.app M)
   naturality _ _ f := by simp [formalSupportKernel]
 
-/-- The canonical closed unit on the support kernel; clause (1) says it is invertible. -/
+/-- The canonical closed unit on the support kernel, from the support kernel to the
+closed-support functor followed by pushforward along `i`. -/
 def formalSupportKernelComparison {Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) :
     formalSupportKernel Λ j ⟶ formalClosedSupport Λ i j ⋙ lowerStar Λ i :=
   Functor.whiskerLeft (formalSupportKernel Λ j)

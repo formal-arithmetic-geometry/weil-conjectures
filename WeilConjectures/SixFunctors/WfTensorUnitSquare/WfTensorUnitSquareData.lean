@@ -145,7 +145,8 @@ def completed (hp : Ideal.span (Set.range (fun _ : Fin 1 ↦ p)) = d.ideal)
     (ObjectProperty.ι (WfIsComplete X d 1 (fun _ ↦ p) hp)).mapIso
       ((wfCompletion X d 1 (fun _ ↦ p) hp).mapIso (ordinary X d e M N))
 
-/-- The node's derived equation with its actual units and specified comparisons. -/
+/-- The derived tensor-unit square: the pullback of the completion unit, followed by the
+completed comparison, equals the ordinary comparison followed by the completion unit. -/
 def DerivedSquare (hp : Ideal.span (Set.range (fun _ : Fin 1 ↦ p)) = d.ideal)
     (M N : PbcBoundedConstructibleComplete X d) : Prop :=
   (pbcIsoAmbientPullback e.asIso.hom d).map

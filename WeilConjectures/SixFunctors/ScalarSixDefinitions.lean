@@ -239,7 +239,9 @@ def scalarSixPullSection (G : ScalarSixGeometry.{u}) (Λ : ScalarSixRing.{u})
     Functor.mapDerivedCategoryNatIso (G.pull Λ f) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Clause (1), with its canonical normalization, and the inverse-image square of (3).
+/-- Pullback data for change of coefficients: the base-change comparison `theta` between
+pullback and change of coefficients, with its canonical normalization, compatible with composition
+of pullbacks and with composition of coefficient maps.
 All coefficient maps are allowed, including non-flat maps. -/
 structure ScalarSixPullbackData where
   theta : ∀ {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
