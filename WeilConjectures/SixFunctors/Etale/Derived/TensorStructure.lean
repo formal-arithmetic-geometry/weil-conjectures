@@ -17,7 +17,7 @@ the monoidal structure on `D(X_ét)`. This file restates the associator, the lef
 symmetry, invertibility and perfectness of pairings in terms of `derivedTensor`, for a general
 coefficient category `A`.
 
-## Implementation notes
+## Implementation details
 
 Statements about a concrete coefficient category such as `ModuleCat Λ` should use these
 declarations rather than `α_`, `λ_`, `ρ_`, `CategoryTheory.IsInvertible` or
@@ -26,7 +26,15 @@ declarations rather than `α_`, `λ_`, `ρ_`, `CategoryTheory.IsInvertible` or
 The two are equal, but the kernel does not decide this in reasonable time: already
 `𝟙 (K ⊗ M)`, or `rfl : (K ⊗ᴸ M) = K ⊗ M`, hits a deterministic timeout. Over a general `A`
 the comparison is immediate, and specialising the declarations below to `A = ModuleCat Λ`
-involves no comparison at all.
+involves no comparison at all. For instance, `AlgebraicGeometry.Etale.IsPerfectPairing` is
+`CategoryTheory.MonoidalClosed.IsPerfectPairing` with the source of the pairing written with
+`derivedTensor`, so that it can be applied at `A = ModuleCat Λ` to pairings built from
+`derivedTensor`.
+
+The names `AlgebraicGeometry.Etale.IsPerfectPairing` and
+`AlgebraicGeometry.Etale.isPerfectPairing_iff` repeat those of
+`CategoryTheory.MonoidalClosed.IsPerfectPairing` on purpose, since they express the same
+property. When both namespaces are open, write the namespace explicitly.
 
 ## Main definitions
 
@@ -100,11 +108,7 @@ lemma derivedTensorRightUnitor_eq (K : _root_.DerivedCategory (Sheaf X.smallEtal
   rfl
 
 /-- The symmetry `K ⊗ᴸ M ≅ M ⊗ᴸ K` of the derived tensor product, natural in both variables:
-an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. The derived
-tensor product is symmetric monoidal (blueprint `theorem-f-shriek-ell-adic-coefficients--4`, remark
-`rem-sf-summary`); this is the existence of its symmetry.
-
-It is the braiding of `D(X_ét)` given by `DerivedCategory.nonempty_braidedCategory`. -/
+an isomorphism between `- ⊗ᴸ -` and the flipped bifunctor `(K, M) ↦ M ⊗ᴸ K`. -/
 theorem nonempty_iso_derivedTensor_flip :
     Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) := by
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
@@ -115,22 +119,8 @@ theorem nonempty_iso_derivedTensor_flip :
 
 variable {A X}
 
-/-- Blueprint `definition-perfect-pairing--1`: Perfect derived pairing.
-
-A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
-`D ⟶ RHom(C, Λ_X)` is an isomorphism.
-
-This is `CategoryTheory.MonoidalClosed.IsPerfectPairing` (see
-`AlgebraicGeometry.Etale.isPerfectPairing_iff`), stated for a pairing whose source is written
-with `AlgebraicGeometry.Etale.derivedTensor`. The only difference is the term used to
-elaborate `C ⊗ D`: here it is `derivedTensor`, so that the definition can be applied at
-`A = ModuleCat Λ` to pairings built from `derivedTensor`, without the kernel having to
-compare the two tensor products there (see the implementation notes).
-
-The names `AlgebraicGeometry.Etale.IsPerfectPairing` and
-`AlgebraicGeometry.Etale.isPerfectPairing_iff` repeat those of
-`CategoryTheory.MonoidalClosed.IsPerfectPairing` on purpose, since they express the same
-property. When both namespaces are open, write the namespace explicitly. -/
+/-- A pairing `b : C ⊗ᴸ D ⟶ Λ_X` in `D(X_ét)` is *perfect* if its tensor–internal-hom adjoint
+`D ⟶ RHom(C, Λ_X)` is an isomorphism. -/
 def IsPerfectPairing {C D : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (b : ((derivedTensor A X).obj C).obj D ⟶ 𝟙_ _) : Prop :=
   MonoidalClosed.IsPerfectPairing (C := _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) b

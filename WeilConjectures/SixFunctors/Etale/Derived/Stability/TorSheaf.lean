@@ -25,8 +25,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 For a commutative ring `Λ` and sheaves `F`, `G` of `Λ`-modules on `X_ét`, the *Tor sheaves*
 are the homology sheaves `Hʳ(F ⊗ᴸ G)` of the derived tensor product of `F` and `G` placed in
 degree `0` (`AlgebraicGeometry.Etale.torSheaf`). This file shows that for a noetherian ring `Λ`
-the Tor sheaves of two constructible sheaves are constructible
-(blueprint: `proposition-six-operations-dctf--14`), following the blueprint proof.
+the Tor sheaves of two constructible sheaves are constructible.
+
+## Proof outline
 
 * On the strata of a common refinement of stratifications witnessing the constructibility of `F`
   and `G`, both pullbacks are finite locally constant; the pullback along any morphism commutes
@@ -57,7 +58,7 @@ open Scheme
 
 /-- **Finite local constancy is étale local**: if the pullbacks of `G` to the members of an
 étale cover are finite locally constant, so is `G`. A geometric point of `X` lifts to a member
-of the cover, where the stalk is that of the pullback. -/
+of the cover. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.of_cover {A : Type u'} [Category.{u + 1} A]
     [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
     {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
@@ -89,9 +90,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 attribute [local instance] Sheaf.monoidalCategory Abelian.hasFiniteBiproducts
 
 omit [Abelian.HasFunctorialFlatResolution A] in
-/-- The constant sheaf at a retract of a finite direct sum of copies of the unit is flat: it is
-a retract of a finite direct sum of copies of the unit sheaf, the constant sheaf functor being
-additive and monoidal. -/
+/-- The constant sheaf at a retract of a finite direct sum of copies of the unit is flat. -/
 lemma flat_constantSheaf_obj_of_retract {Y : Scheme.{u}} {J : Type} [Finite J] {X : A}
     (h : Retract X (⨁ fun _ : J ↦ 𝟙_ A)) :
     ObjectProperty.flat ((constantSheaf Y.smallEtaleTopology A).obj X) := by
@@ -106,13 +105,9 @@ lemma flat_constantSheaf_obj_of_retract {Y : Scheme.{u}} {J : Type} [Finite J] {
     (biproduct.isoCoproduct _).symm ≪≫
     biproduct.mapIso (fun _ ↦ Functor.Monoidal.εIso c) ≪≫ (c.mapBiproduct _).symm) hs
 
-/-- The constant case of the constructibility of Tor sheaves: the Tor sheaves of constant
-sheaves are constant. Let `π : P ⟶ M[0]` be a quasi-isomorphism from a complex `P`
-concentrated in degrees `≤ 0` whose terms have flat constant sheaves (for instance a
-projective resolution by finitely generated modules). Then `P_Y` is K-flat and resolves
-`M_Y`, so `M_Y ⊗ᴸ N_Y` is computed by the complex `P_Y ⊗ N_Y = (P ⊗ N)_Y`, and
-`Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`.
-(blueprint: `proposition-six-operations-dctf--14`) -/
+/-- The Tor sheaves of constant sheaves are constant: for a quasi-isomorphism `π : P ⟶ M[0]`
+from a complex `P` concentrated in degrees `≤ 0` whose terms have flat constant sheaves, the Tor
+sheaf `Hʳ(M_Y ⊗ᴸ N_Y)` is isomorphic to the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`. -/
 noncomputable def homologyDerivedTensorConstantSheafIso {Y : Scheme.{u}}
     (P : CochainComplex A ℤ) [P.IsStrictlyLE 0]
     (hP : ∀ n, ObjectProperty.flat ((constantSheaf Y.smallEtaleTopology A).obj (P.X n)))
@@ -176,8 +171,7 @@ noncomputable def torSheafMapIso {X : Scheme.{u}} (r : ℤ)
         ((_root_.DerivedCategory.singleFunctor _ 0).mapIso e'))
 
 /-- The pullback of a Tor sheaf is the Tor sheaf of the pullbacks,
-`g^* Hʳ(F ⊗ᴸ G) ≅ Hʳ(g^*F ⊗ᴸ g^*G)`: the pullback `g^*` is exact, so it commutes with homology
-and `Lg^* ≅ D(g^*)`, and `Lg^*` is monoidal. -/
+`g^* Hʳ(F ⊗ᴸ G) ≅ Hʳ(g^*F ⊗ᴸ g^*G)`. -/
 noncomputable def upperStarTorSheafIso {X Y : Scheme.{u}} (g : Y ⟶ X) (r : ℤ)
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (g)^*[ModuleCat.{u + 1} Λ].obj (torSheaf Λ r F G) ≅
@@ -201,7 +195,7 @@ section Noetherian
 variable {Λ}
 
 /-- A finitely generated projective `Λ`-module is a retract of a finite direct sum of copies of
-`Λ`: a surjection from a finite free module splits. -/
+`Λ`. -/
 lemma exists_retract_biproduct_unit_of_projective (X : ModuleCat.{u + 1} Λ) [Projective X]
     [Module.Finite Λ X] :
     ∃ (J : Type) (_ : Finite J),
@@ -219,11 +213,7 @@ variable (Λ) [IsNoetherianRing Λ]
 
 /-- The constant case of the constructibility of Tor sheaves: for finitely generated
 `Λ`-modules `M` and `N`, the Tor sheaves of the constant sheaves `M_Y` and `N_Y` are finite
-locally constant. With a projective resolution `P` of `M` by finitely generated modules,
-`Hʳ(M_Y ⊗ᴸ N_Y)` is the constant sheaf at `Hʳ(P ⊗ N) = Tor_{-r}(M, N)`
-(`AlgebraicGeometry.Etale.homologyDerivedTensorConstantSheafIso`), a subquotient of the
-finitely generated module `P^r ⊗ N`, hence finitely generated, `Λ` being noetherian.
-(blueprint: `proposition-six-operations-dctf--14`) -/
+locally constant. -/
 theorem isFiniteLocallyConstantSheaf_torSheaf_constantSheaf {Y : Scheme.{u}}
     (M N : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] [Module.Finite Λ N] (r : ℤ) :
     IsFiniteLocallyConstantSheaf (torSheaf Λ r
@@ -259,12 +249,7 @@ theorem isFiniteLocallyConstantSheaf_torSheaf_constantSheaf {Y : Scheme.{u}}
 
 /-- The locally constant case of the constructibility of Tor sheaves: the Tor sheaves of
 two finite locally constant sheaves of modules over a noetherian ring are finite locally
-constant. On a common étale cover both sheaves are constant, with finitely generated values `M`
-and `N`; the pullback to a member of the cover commutes with Tor sheaves
-(`AlgebraicGeometry.Etale.upperStarTorSheafIso`), and the Tor sheaves of `M` and `N` are
-finite locally constant
-(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf_constantSheaf`). Finite local
-constancy is étale local. (blueprint: `proposition-six-operations-dctf--14`) -/
+constant. -/
 theorem isFiniteLocallyConstantSheaf_torSheaf {Z : Scheme.{u}}
     (F G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
     [IsFiniteLocallyConstantSheaf G] (r : ℤ) :
@@ -298,12 +283,7 @@ theorem isFiniteLocallyConstantSheaf_torSheaf {Z : Scheme.{u}}
 
 /-- **Tor sheaves of constructible sheaves are constructible.** For a
 noetherian ring `Λ` and constructible sheaves `F` and `G` of `Λ`-modules on `X_ét`, every Tor
-sheaf `Hʳ(F ⊗ᴸ G)` is constructible. On the strata of a common refinement of witnessing
-stratifications both pullbacks are finite locally constant, the pullback commutes with Tor
-sheaves (`AlgebraicGeometry.Etale.upperStarTorSheafIso`), and the Tor sheaves of finite
-locally constant sheaves are finite locally constant
-(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_torSheaf`).
-(blueprint: `proposition-six-operations-dctf--14`) -/
+sheaf `Hʳ(F ⊗ᴸ G)` is constructible. -/
 theorem isConstructibleSheaf_torSheaf {X : Scheme.{u}}
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
     [IsConstructibleSheaf G] (r : ℤ) :
