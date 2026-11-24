@@ -20,9 +20,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 /-!
 # Tensoring K-injectives with bounded split-projective complexes
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A96, 06YQ, 0FPR;
-Modules on Sites, Tag 0FNY; More on Algebra, Tag 0FNK
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0A96, 06YQ, 0FPR, 0FNY, 0FNK
 -/
 
 @[expose] public section
@@ -67,25 +67,7 @@ private lemma isDualizable_finite_power
 
 set_option synthInstance.maxSize 2048 in
 /-- Tensoring a K-injective complex with a bounded complex of finite-free retracts
-preserves K-injectivity. Neither boundedness of `I` nor a zero differential on `P` is required.
-Source: Stacks Project, Tags 0A96, 06YQ, 0FPR, 0FNY, 0FNK
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Finite powers of the tensor unit are dualizable, by induction using the zero object
-   and binary biproducts. Dualizability passes to the given retracts, so every term of
-   `P` has a right dual.
-2. Use the source library's `P.rightDual` and `exactPairingRightDual` to construct a
-   dual complex `D` and its evaluation and coevaluation. The boundedness of `P` gives
-   bounds `[-b,-a]` for `D`. This construction includes the differential signs.
-3. Every term of `D` is dualizable, hence flat. The bounded-above flat criterion
-   (`lem-pc-bounded-above-flat-kflat-site`) therefore makes `D` K-flat.
-4. The monoidal quotient to the homotopy category preserves the dual pair. Thus
-   tensoring on the right with `D` is left adjoint to tensoring on the right with `P`.
-   For acyclic `A`, a map `A → I ⊗ P` corresponds to a map `A ⊗ D → I` there.
-   The latter is zero because `A ⊗ D` is acyclic and `I` is K-injective. The adjunction
-   preserves zero, so the original map is zero in the homotopy category and hence
-   admits a null homotopy. -/
+preserves K-injectivity. Neither boundedness of `I` nor a zero differential on `P` is required. -/
 theorem isKInjective_mapBifunctor_of_bounded_splitFree
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]

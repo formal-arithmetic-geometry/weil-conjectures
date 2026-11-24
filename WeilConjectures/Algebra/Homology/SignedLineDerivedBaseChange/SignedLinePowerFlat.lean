@@ -10,7 +10,13 @@ import all WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInverse
 import WeilConjectures.Algebra.Homology.SixFunctors.LocalizedSiteTensorRestrictionSupplement
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 
-/-! # Flatness of signed powers of locally trivial lines -/
+/-! # Flatness of signed powers of locally trivial lines
+
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 0B8Q
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -68,15 +74,7 @@ private theorem chart_sieve (M : KFlatFixedTensor.Modules A)
   rintro W f ⟨i, ⟨g⟩⟩
   exact ⟨chart_restrict A M (hM i).some g⟩
 
-/-- Every signed power of a locally trivial line is flat.
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0B8Q.
-(blueprint: lem-pur-signed-line-power-flat)
-Proof: on each given line chart, induction identifies every positive tensor power with
-the unit. Restriction commutes with the specified site tensor. Tensor isomorphisms and
-the right unitor identify the induction step with the unit. These charts give a covering
-sieve over every object. The evaluation-inverse-pair theorem then proves flatness both
-of the positive power and its internal dual. These are exactly the two constructors of
-the signed power. The argument also covers degree zero, zero rings and empty covers. -/
+/-- Every signed power of a locally trivial line is flat. -/
 theorem signed_line_power_flat
     [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
     (P : KFlatFixedTensor.Modules A)

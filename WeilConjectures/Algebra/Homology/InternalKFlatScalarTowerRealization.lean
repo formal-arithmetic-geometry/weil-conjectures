@@ -10,11 +10,16 @@ import WeilConjectures.Algebra.Homology.BifunctorSingleNaturality
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import WeilConjectures.CategoryTheory.DerivedCategory.ExactRestrictionComposition
 
-/-! # Realizing a scalar tower on native K-flat internal modules
+/-!
+# Realizing a scalar tower on native K-flat internal modules
 
-This is the internal-module counterpart of the scalar realization in
-`lem-pe-kflat-scalar-tower-realization`. It concerns individual scalar extensions,
-their transitions and units; it involves neither products nor inverse limits.
+This is the internal-module counterpart of the scalar realization of a tower of derived scalar
+extensions. It concerns individual scalar extensions, their transitions and units; it involves
+neither products nor inverse limits.
+
+## References
+
+* Stacks Project, Tags 064K and 06XY
 -/
 
 @[expose] public noncomputable section
@@ -707,16 +712,7 @@ def tensorUnit (P : CochainComplex (Mod C R) ℤ) (n : ℕ) :
 
 /-- The scalar computation is natural already on complexes, before choosing a
 K-flat representative. Its components are invertible on K-flat complexes, and
-its unit and transition equations use the specified adjunctions.
-
-Source: the natural balanced comparison and computation-counit argument in
-`lem-pe-internal-kflat-scalar-tower-realization`.
-(auxiliary; not a blueprint node).
-
-Proof: use the natural derived computation counit, the exact restriction
-comparison and the balanced tensor comparison. Transport the coefficient by eB.
-The component computations in the proof of realization give both equations;
-naturality is the composition of these three natural comparisons. -/
+its unit and transition equations use the specified adjunctions. -/
 theorem natural_computation
     (eB : ∀ n, B n ≅ (Mod.comap (q n)).obj (Mod.regular (S n)))
     (hι : ∀ n, (ι n).hom ≫ (eB n).hom.hom = q n)
@@ -1048,14 +1044,7 @@ end PrincipalTensorAux
 end
 
 /-- Derived tensor with the degree-zero coefficient modules is naturally the
-restricted derived scalar extension, preserving the canonical transitions and units.
-Source: the balanced tensor computation and localization argument of
-`lem-pe-internal-kflat-scalar-tower-realization`.
-(auxiliary; not a blueprint node).
-Proof: compare both functors with termwise tensor on K-flat complexes, using the
-lax tensorator and natural_computation. Their component isomorphisms intertwine
-transitions and units. Fully faithful precomposition with the localization of
-K-flat complexes descends the isomorphism and the two equations. -/
+restricted derived scalar extension, preserving the canonical transitions and units. -/
 theorem derived_realization
     (eB : ∀ n, B n ≅ (Mod.comap (q n)).obj (Mod.regular (S n)))
     (hι : ∀ n, (ι n).hom ≫ (eB n).hom.hom = q n)
@@ -1142,29 +1131,7 @@ variable (B : ℕ → Mod C R) (ι : ∀ n, 𝟙_ (Mod C R) ⟶ B n)
   (τ : ∀ n, B (n + 1) ⟶ B n)
 
 /-- Native K-flat complexes realize a coherent tower of derived scalar extensions,
-including its canonical units.
-
-Source: Stacks Project, Tags 064K and 06XY; the scalar-realization argument of
-`lem-pe-kflat-scalar-tower-realization`, in internal module objects
-(blueprint: lem-pe-internal-kflat-scalar-tower-realization).
-
-Proof: the coequalizers defining extension of scalars and tensor with the restricted
-regular module are the same coequalizer. Its comparison is linear for the common
-ring; the action equations follow after precomposition with the epimorphic tensor
-projection. Compose this comparison with the braiding and with `eB`.
-The counit computing derived extension on a native K-flat complex is invertible.
-Exact restriction commutes with localization, so this counit gives the claimed
-level isomorphisms. The ordinary extension-restriction unit becomes the right
-unitor inverse followed by tensoring `ι`, by `hι`. Naturality of derived adjunctions
-therefore gives the second displayed identity. For transitions, `hτ` identifies
-the ordinary scalar-change morphism with tensoring `τ`. Take its adjunction mate.
-The quotient-factor equality `h` identifies the composite restriction, and
-uniqueness of left adjoints identifies its mate with `association`. Thus the first
-identity uses exactly `step`, including its specified associator. Finally transport
-all level isomorphisms along `eP`; naturality preserves both identities.
-
-The argument applies also to the zero complex and to a zero coefficient ring;
-neither flat terms nor a nonzero coefficient object is required. -/
+including its canonical units. -/
 theorem realization
     (eB : ∀ n, B n ≅ (Mod.comap (q n)).obj (Mod.regular (S n)))
     (hι : ∀ n, (ι n).hom ≫ (eB n).hom.hom = q n)

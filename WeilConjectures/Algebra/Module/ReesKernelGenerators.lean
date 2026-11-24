@@ -11,7 +11,9 @@ public import Mathlib.Algebra.DirectSum.Module
 
 /-! # Bounded-degree generators of a graded Rees submodule
 
-Source: Stacks Project, Lemma 02OA, the graded-kernel paragraph in the proof of (3).
+## References
+
+* Stacks Project, Tag 02OA, the graded-kernel paragraph in the proof of (3).
 -/
 
 @[expose] public section
@@ -23,24 +25,7 @@ open DirectSum
 namespace ReesAlgebra
 
 open Classical in
-/-- A graded submodule of a finite Rees module is generated in bounded degree.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (3), the paragraph
-choosing homogeneous generators of the graded kernel.
-(blueprint: lem-weil-pbc-rees-kernel-bounded-generators).
-
-Proof: Form the submodule K of the direct sum consisting of elements whose n-th
-component lies in K_n. The convolution formula and hK show that K is closed under
-Rees multiplication: every summand of its degree-n component lies in K_n. The Rees
-algebra is Noetherian, and its ambient module is finite, so K is finitely generated.
-Replace each of finitely many generators by all its homogeneous components. These
-components still lie in K; they generate K since each original generator is their sum.
-Let c0 be the maximum of their degrees, or zero if the family is empty. Express a
-homogeneous element of K_n in these generators and project to degree n. The convolution
-formula discards every coefficient except the one of degree n-d for a generator of
-degree d. That coefficient belongs to I^(n-d). Thus the degree-n component is in the
-A-span of the displayed products. Zero modules, I=0, I=A and degree zero require no
-exceptions: the same projection argument applies, with empty spans interpreted as zero.
--/
+/-- A graded submodule of a finite Rees module is generated in bounded degree. -/
 theorem bounded_generators
     (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (M : ℕ → Type v) [∀ n, AddCommGroup (M n)] [∀ n, Module A (M n)]

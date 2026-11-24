@@ -91,8 +91,7 @@ import WeilConjectures.SecSmoothPurity.CochainComparisonMonoidalEquationsSupplem
 
 set_option linter.privateModule false
 
-/-! Field-level coherence law for normalized ringed projection tensor comparisons.
-(blueprint: lem-sfb-ringed-projection-tensor-laws-associativity-law) -/
+/-! Field-level coherence law for normalized ringed projection tensor comparisons. -/
 
 @[expose] public section
 set_option autoImplicit false

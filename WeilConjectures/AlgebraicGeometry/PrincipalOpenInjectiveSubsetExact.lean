@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenSubsetCechComparison
 
 /-! # Subset Čech exactness for a single injective coefficient module
 
-Source: Stacks Project, Cohomology, Tags 01EP and 01FM.
+## References
+
+* Stacks Project, Cohomology, Tags 01EP and 01FM.
 -/
 
 @[expose] public section
@@ -24,27 +26,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Positive-degree exactness with one fixed coefficient module.
-
-Source: Stacks Project, Cohomology, Tags 01EP and 01FM; Tag 08C1, first paragraph.
-(blueprint: lem-sc-principal-open-injective-subset-exact).
-
-Proof: Construct the full Čech complex with the actual finite intersections
-inside X and apply injective module open-cover Čech acyclicity to the cover of
-the union of the D(f_i). Changing the target from that union to the top open
-leaves all intersections, restriction maps and hence the complex unchanged.
-Forgetting global scalars and then restricting them to A has the same underlying
-abelian presheaf. Use the subset-coordinate comparison, valid for any presheaf
-and any family of opens without a covering hypothesis, to transport zero full
-homology to zero subset homology in degree k>0. Its explicit differential formula
-identifies the assumed signed sum with a cocycle. The elementwise exactness
-criterion for abelian groups supplies a primitive in degree k-1. Evaluate its
-subset-coordinate isomorphism on subsets of size k and extend by zero at other
-cardinalities. On size k+1 every deletion is nonempty and has size k, so the
-coordinate differential equation is exactly the claimed primitive equation.
-If k+1 exceeds r there are no such subsets; if k+1=r the outgoing equation is
-vacuous but positive exactness still applies. Empty or repeated principal opens
-and the empty cover are permitted by both cited results. -/
+/-- Positive-degree exactness with one fixed coefficient module
+(Stacks, Tags 01EP, 01FM and 08C1). -/
 theorem principalOpen_injective_subset_exact
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (M : SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) :

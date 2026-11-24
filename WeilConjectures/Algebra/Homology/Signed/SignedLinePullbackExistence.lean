@@ -19,8 +19,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Existence of normalized signed line pullbacks
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
-(blueprint: lem-pur-normalized-signed-line-pullback-exists)
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 04J0
+* Stacks Project, Tag 0FNY
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public section
@@ -712,21 +716,7 @@ private theorem tensorPullback_line_isIso
 
 end TensorPullback
 
-/-- Normalized pullback comparisons for the signed powers of one line.
-Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX, 0FNY and 04J0;
-steps 1, 3 and 4 of the signed-line pullback argument.
-(blueprint: lem-pur-normalized-signed-line-pullback-exists)
-
-Proof: In degree zero use the coefficient-unit comparison, and in degree one use p.
-For n at least one, apply the tensor pullback comparison to the nth power tensor L,
-then tensor the preceding comparison with p. The unit and pure-tensor formulas give
-exactly the positive recursion. Restricting to a trivializing cover of L shows that
-all its positive tensor powers are locally free of rank one. For a negative degree,
-apply finite_free_dual_pullback to the corresponding positive power, and compose its
-evaluation comparison with precomposition by the inverse positive comparison. Both
-factors are invertible. Evaluating against the positive comparison cancels its inverse
-and gives the coefficient image of the original evaluation, after every restriction.
-Thus the four normalization clauses hold. No scalar square is involved in this result. -/
+/-- Normalized pullback comparisons for the signed powers of one line. -/
 theorem exists_signedLinePullbackNormalized
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (hcover : CoverPreserving J K U)

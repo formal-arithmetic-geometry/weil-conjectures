@@ -17,8 +17,10 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 /-!
 # Bounded-above flat complexes on a ringed site are K-flat
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), also used in the
-proof of Lemma 06YS (blueprint: lem-pc-bounded-above-flat-kflat-site).
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), also used in the proof of
+  Lemma 06YS
 -/
 
 @[expose] public section
@@ -52,21 +54,8 @@ private lemma acyclic_of_isColimit
     (c.pt.d _ i) (c.pt.d i _)
     (fun j ↦ (c.ι.app j).comm _ _) (fun j ↦ (c.ι.app j).comm _ _)
 
-/-- (blueprint: lem-pc-bounded-above-flat-kflat-site) A bounded-above cochain complex of
-flat sheaves of modules over a sheaf of commutative rings on a site is K-flat.
-Source: Stacks Project, Cohomology on Sites, Lemma 21.17.8 (Tag 06YQ), used in Tag 06YS.
-
-Proof:
-1. Given an acyclic complex `A`, its good truncations `τ≤m A` are acyclic and bounded above:
-   the cohomology agrees with that of `A` below and at `m`, and vanishes above `m`
-   (`def-pc-acyclic-complex-modules`). Their filtered termwise colimit is `A`.
-   Tensor products and totalization commute with these colimits
-   (`lem-pc-module-filtered-colimits-tensor`, `def-pc-tensor-complex-sheaves`). Exactness of
-   filtered colimits implies that a filtered colimit of acyclic complexes is acyclic.
-2. For each bounded-above acyclic truncation, its total tensor complex with `P` is acyclic
-   by `lem-pc-bounded-above-flat-tensor-acyclic`, since every term of `P` is flat
-   (`def-pc-flat-sheaf-modules`). Thus the total tensor complex with the original `A` is acyclic.
-3. Since `A` was arbitrary, `def-pc-kflat-complex` gives K-flatness of `P`. -/
+/-- A bounded-above cochain complex of
+flat sheaves of modules over a sheaf of commutative rings on a site is K-flat. -/
 theorem isKFlat_of_boundedAbove_flat
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]

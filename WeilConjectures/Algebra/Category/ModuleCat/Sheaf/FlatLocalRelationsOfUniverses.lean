@@ -17,8 +17,13 @@ import Mathlib.RingTheory.TensorProduct.DirectLimitFG
 /-!
 # Local relations of a flat module sheaf in independent universes
 
-Source: Stacks Project, Modules on Sites, Tag 08FC, and Algebra, Tag 04VX.
+## Implementation details
+
 The proof uses free presheaves on coefficient tuples instead of site hom-sets.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 08FC, and Algebra, Tag 04VX
 -/
 
 @[expose] public section
@@ -38,17 +43,7 @@ variable {R : Type*} [CommRing R] {M : Type*} [AddCommGroup M] [Module R M]
   {N : Type*} [AddCommGroup N] [Module R N]
 
 /-- A finite tensor relation has coefficient identities that remain valid after
-arbitrary scalar restriction. Source: the proof of the finite tensor vanishing
-criterion, Stacks Project, Algebra, Tag 04VX
-(auxiliary; not a blueprint node).
-
-Proof: Commute the vanishing tensor sum and place its second factors in their
-finitely generated span. Tensor vanishing holds in a larger finitely generated
-submodule. Generate that submodule by the original factors together with a finite
-extra family. Apply the finite spanning-family tensor criterion, giving zero
-coefficients for the extra entries on the first side. The original entries give
-the factorization of `m`, the extra entries give the auxiliary zero relations,
-and projection of the coefficient equations gives the final identities. -/
+arbitrary scalar restriction. -/
 theorem exists_relations_with_coefficients {n : ℕ} (m : Fin n → M) (g : Fin n → N)
     (h : ∑ k, m k ⊗ₜ[R] g k = 0) :
     ∃ (s q : ℕ) (y : Fin s → M) (a : Fin n → Fin s → R)
@@ -389,27 +384,7 @@ end SheafOfModules
 
 namespace SheafOfModules
 
-/-- Every finite relation between sections of a flat module sheaf is locally trivial.
-Source: Stacks Project, Modules on Sites, Tag 08FC, implication (1) to (2), and
-Tag 04VX for the finite tensor-vanishing criterion
-(auxiliary; not a blueprint node).
-
-Proof: For each V let T(V) be the coefficient n-tuples over V, lifted to the
-module universe, and let Q(V) be the free module on T(V). Its restriction sends
-a labelled coefficient to the correspondingly restricted labelled coefficient.
-Let P be the submodule presheaf spanned by all a_i e_a. Sheafification preserves
-the inclusion P → Q. Flatness and the natural isomorphism between associated
-presheaf tensor and tensor of associated sheaves imply that P tensor M → Q tensor M
-is locally injective. The given relation defines x = Σ (a_i e_a) tensor s_i,
-whose image is e_a tensor Σ a_i s_i = 0, so x is locally zero.
-
-A finite tensor-vanishing witness gives s_i = Σ_j c_ij y_j, auxiliary relations
-Σ_j e_kj y_j = 0, and identities Σ_i c_ij g_i + Σ_k e_kj z_k = 0 in P(V).
-Projection to the a-label writes z_k(a) = Σ_i d_ki a_i, by the defining span of P.
-Set b_ij = c_ij + Σ_k d_ki e_kj. The auxiliary relations preserve the factorization
-of the s_i, and projection of the identities yields Σ_i a_i b_ij = 0.
-All objects are small in max(r,m), including the empty coefficient tuple; no
-hom-set of the site is used as an index. -/
+/-- Every finite relation between sections of a flat module sheaf is locally trivial. -/
 theorem local_equationalCriterion_of_isFlatOnSite
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]

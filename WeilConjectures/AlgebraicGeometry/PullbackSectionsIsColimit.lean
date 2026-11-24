@@ -24,29 +24,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Continuity for a cocone whose arrows and legs are the canonical pullback section maps.
-The diagram and its coherence are supplied as hypotheses; the conclusion is solely its
-universal property, rather than the elementwise clauses of the parent statement.
-
-Source: Stacks Project, Etale Cohomology, Theorem 09YQ (theorem-colimit), degree zero,
-as applied in Lemma 09YU (lemma-category-is-colimit), proof, Fully faithful.
-(blueprint: lem-weil-pbc-pullback-sections-is-colimit)
-
-Proof: Restrict the scheme diagram to the directed tail i >= i0, which is nonempty
-and cofinal, with the same limit. Base change every stage along V0 -> X_i0. The resulting
-V_i and V are affine, since the transitions and limit projections are affine and V0 is
-affine; base change of the scheme limit identifies V with their inverse limit. Put
-w_i : V_i -> X_i0 and F_i = w_i inverse image of G. Their composition comparisons give
-transition isomorphisms. On V these sheaves all identify with w inverse image of G;
-associativity identifies the transitions with identities. The constant connected diagram
-has that sheaf as its colimit. Forget to abelian sheaves, compatibly with inverse-image
-units and composition, and apply Theorem 09YQ in degree zero. The natural degree-zero
-cohomology/global-section comparison gives a colimit of the section groups. The etale
-restriction isomorphisms identify these groups with S_i, and the cartesian-square
-restriction/unit equation identifies their arrows and legs with mu and tau. The displayed
-e_i and eB therefore transport this colimit cocone to B. Finally module filtered colimits
-are created on underlying abelian groups (scalar multiplication is induced stagewise),
-so B is a colimit also in ModuleCat. None of the elementwise colimit criterion is used. -/
+/-- The cocone whose arrows and legs are the canonical pullback section maps is a colimit
+cocone. The diagram and its coherence are supplied as hypotheses
+(Stacks, Tags 09YQ and 09YU). -/
 theorem nonempty_isColimit_pullbackSections
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)]

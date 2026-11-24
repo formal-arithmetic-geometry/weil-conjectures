@@ -124,13 +124,13 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # Cofinal finite reductions and constructibility
 
-Source: blueprint main-20261015, proposition-sp-integral-towers, final integral-constructibility
-sentence; Stacks Tags 0D6D and 0G7E; scalar-extension proof paragraphs (2) and (4)
-(blueprint: lem-sp-cofinal-finite-reduction-constructibility).
-
 Index n means positive exponent n+1. The ordinary and derived tensors below are the
 published universal presentations. Their normalization records the pure-tensor formula,
 K-flat counit calculation, and naturality under commuting coefficient squares.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D6D, 0G7E
 -/
 
 @[expose] public noncomputable section

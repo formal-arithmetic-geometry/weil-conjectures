@@ -12,8 +12,9 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-! # Symmetric algebras commute with taking stalks
 
-Source: Stacks Project, Modules, Lemma 01CH; Sheaves, Lemma 007K.
-(blueprint: lem-pur-symmetric-algebra-sheaf-stalk).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01CH
 -/
 
 @[expose] public section
@@ -211,17 +212,7 @@ private theorem stalkInverse_sectionToStalk (U : X.Opens) (hx : x ∈ U)
   | add a b ha hb => simp only [map_add, ha, hb]
 
 /-- The canonical stalk isomorphism for the symmetric algebra sheaf fixes scalar germs
-and sends every germ of a degree-one generator to the generator of the module germ.
-Source: Stacks Project, Modules, Lemma 01CH; Sheaves, Lemma 007K.
-(blueprint: lem-pur-symmetric-algebra-sheaf-stalk).
-
-Proof: On each neighbourhood send section scalars and module sections to their germs,
-and extend to symmetric algebras. Compatibility with restriction gives a map from the
-presheaf stalk. Ring sheafification has the same stalk. In the other direction the germs
-of the sheaf's inclusion give a linear map from the module stalk into the algebra stalk;
-the symmetric-algebra universal property extends it. The composites fix scalar germs
-and generator germs. Symmetric-algebra induction and representation of stalk elements
-by germs prove both inverse identities. No quasi-coherence or finiteness is needed. -/
+and sends every germ of a degree-one generator to the generator of the module germ. -/
 theorem stalk_iso :
     ∃ e : TopCat.Presheaf.stalk (C := CommRingCat) (algebra F).right.obj x ≅
         CommRingCat.of (SymmetricAlgebra (X.presheaf.stalk x)

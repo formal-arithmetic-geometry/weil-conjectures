@@ -14,10 +14,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-ordinary-push-coordinates).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -42,20 +38,17 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
-/-- The recorded fixed-module direct image, with a short name for coordinate equations.
-Source: Levels (blueprint: def-sp-p1-ordinary-push-coordinates). -/
+/-- The recorded fixed-module direct image, with a short name for coordinate equations. -/
 abbrev fixedPush {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f
 
-/-- The recorded fixed-module adjunction, with its original unit and counit.
-Source: Levels (blueprint: def-sp-p1-ordinary-push-coordinates). -/
+/-- The recorded fixed-module adjunction, with its original unit and counit. -/
 abbrev fixedAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
     (ProEtale.upperStarLowerStarAdjunction
       (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f)
 
-/-- Scalar-section-normalized ordinary direct-image coordinates.
-Source: Levels (blueprint: def-sp-p1-ordinary-push-coordinates). -/
+/-- Scalar-section-normalized ordinary direct-image coordinates. -/
 structure OrdinaryPushCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) where
   ordinary : realization l E n X ⋙
       proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f ≅
@@ -70,8 +63,7 @@ structure OrdinaryPushCoordinates {X Y : Scheme.{u}} (f : X ⟶ Y) where
       ((ProEtale.lowerStar
         (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f).obj M) U m
 
-/-- The exact ordinary coordinate comparison applied termwise, before localization.
-Source: Levels (blueprint: def-sp-p1-ordinary-push-coordinates). -/
+/-- The exact ordinary coordinate comparison applied termwise, before localization. -/
 def OrdinaryPushCoordinates.chain {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : OrdinaryPushCoordinates l E n f) (J : CochainComplex (FixedSheaves l E n X) ℤ) :=
   letI : (realization l E n X).Additive := realizationAdditive l E n X
@@ -89,8 +81,7 @@ def OrdinaryPushCoordinates.chain {X Y : Scheme.{u}} {f : X ⟶ Y}
       (ModuleCat.{u + 1} (ULift.{u + 1} (SpTowerShriek.R l E n))) f ⋙
         realization l E n Y) c.ordinary.hom (.up ℤ)).app J
 
-/-- The canonical K-injective source model for the actual constant-ring direct image.
-Source: Levels (blueprint: def-sp-p1-ordinary-push-coordinates). -/
+/-- The canonical K-injective source model for the actual constant-ring direct image. -/
 def realizedPushModel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (J : CochainComplex (FixedSheaves l E n X) ℤ) [J.IsKInjective] :=
   letI : (realization l E n X).Additive := realizationAdditive l E n X

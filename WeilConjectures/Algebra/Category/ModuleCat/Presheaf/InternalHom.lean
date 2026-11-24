@@ -88,15 +88,7 @@ noncomputable def sectionsSMulHom : RingCat.sectionsSubring (S ⋙ forget₂ _ R
   map_add' _ _ := End.ext (hom_ext fun _ ↦ by ext; exact add_smul _ _ _)
 
 variable {N} in
-/-- Multiplication by a compatible family `s` of sections commutes with morphisms `g : N ⟶ N'`:
-```
-  N  --g-->  N'
-  |          |
-s • ·      s • ·
-  v          v
-  N  --g-->  N'
-```
--/
+/-- Multiplication by a compatible family `s` of sections commutes with morphisms `g : N ⟶ N'`. -/
 @[reassoc]
 lemma sectionsSMul_naturality {N' : PresheafOfModules.{v} (S ⋙ forget₂ _ _)} (g : N ⟶ N')
     (s : RingCat.sectionsSubring (S ⋙ forget₂ _ RingCat)) :
@@ -209,13 +201,7 @@ lemma overSections_coe_map_obj {V : C} (g : V ⟶ U) (r : R.obj (op U)) (W : (Ov
 variable (N) in
 /-- Multiplication by `r` on the restriction of `N` to `Over U` is compatible with `Over.map g`
 for `g : V ⟶ U`: at `W ∈ Over V`, it agrees with multiplication by `R.map g.op r` on the
-restriction of `N` to `Over V`.
-```
-  N(W) --r • ·------------> N(W)
-   ‖                          ‖
-  N(W) --R.map g.op r • ·--> N(W)
-```
--/
+restriction of `N` to `Over V`. -/
 lemma sectionsSMul_overSections_app_map_obj {V : C} (g : V ⟶ U) (r : R.obj (op U))
     (W : (Over V)ᵒᵖ) :
     (sectionsSMul ((restrictOver R U).obj N) (overSections U r)).app

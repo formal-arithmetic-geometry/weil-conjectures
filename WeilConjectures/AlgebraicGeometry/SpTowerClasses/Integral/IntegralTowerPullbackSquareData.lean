@@ -22,9 +22,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local irreducible] Functor.mapDerivedCategory mapSingleArrow
   DerivedCategory.singleFunctors
 
-/-- An exact inverse-image square with ordinary endpoints and normalized derived boundary maps.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-integral-tower-pullback-square-data). -/
+/-- An exact inverse-image square with ordinary endpoints and normalized derived boundary maps. -/
 structure NormalizedIntegralTowerSquare (X Y : Scheme.{u})
     [hDiagY : HasDerivedCategory.{u + 1} (DiagonalAb Y)]
     [hDiagX : HasDerivedCategory.{u + 1} (DiagonalAb X)]

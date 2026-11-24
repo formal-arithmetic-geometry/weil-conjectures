@@ -23,9 +23,6 @@ set_option linter.privateModule false
 /-!
 # Levels of the smooth-purity tower direct image
 
-Source: blueprint main-20261015, chap-Smooth-purity, prose-09-23,
-statement and its three proof paragraphs (blueprint: prose-09-23).
-
 All indices n denote the positive level n+1. The module category is the recorded
 varying-coefficient tower category, with its original small pro-etale site and
 coefficient universe max u (t+1). Direct image is precomposition with base change,

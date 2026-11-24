@@ -16,7 +16,10 @@ import WeilConjectures.Algebra.IndSmoothRingEquiv
 /-!
 # Ind-smoothness and successive quotients
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Proposition Tag 07CM.
+## References
+
+* [Stacks Project, Tag 07CM](https://stacks.math.columbia.edu/tag/07CM), proof of the
+  proposition, induction on the nilpotence exponent
 -/
 
 @[expose] public section
@@ -28,27 +31,7 @@ open CategoryTheory
 namespace Algebra
 
 /-- Taking a quotient by `K ≤ I` before reducing by `I` preserves the ind-smoothness
-hypothesis on that reduction.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Proposition Tag 07CM,
-the induction on the nilpotence exponent
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof: Put `R' = R / K`, `Λ' = Λ / KΛ`, and `I' = I / K`. The third isomorphism
-theorem identifies `R' / I'` with `R / I`. Since `KΛ ≤ IΛ`, it also identifies
-`Λ' / I'Λ'` with `Λ / IΛ`. Both identifications send the class of an element to its
-class, so they commute with the structure homomorphisms. Restriction along the base ring
-isomorphism and its inverse gives inverse
-equivalences of categories of commutative algebras. This preserves smoothness:
-a finite polynomial presentation is transported by applying the base isomorphism
-to its coefficients, and the lifting property for square-zero quotients is unchanged
-when the scalar action is transported. The compatible vertex ring isomorphism is
-then an algebra isomorphism over the transported base. Transport the filtered colimit presentation
-in the hypothesis
-through this equivalence and then through the compatible isomorphism of its vertex.
-An equivalence preserves colimits, the indexing category is unchanged and remains
-filtered, and the transported terms are smooth. This is the asserted presentation.
-No nilpotence or flatness hypothesis is needed. -/
+hypothesis on that reduction. -/
 theorem ind_smooth_quotient_compatibility
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I K : Ideal R) (hKI : K ≤ I)

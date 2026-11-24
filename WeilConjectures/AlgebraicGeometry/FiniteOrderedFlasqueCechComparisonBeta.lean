@@ -9,8 +9,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteOrderedCechTotalMap
 
 /-! # The ordered Čech coefficient map is a quasi-isomorphism
 
-Source: Stacks Project, Cohomology, Tag 01ET.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Tag 01ET
 -/
 
 @[expose] public section
@@ -20,14 +21,8 @@ namespace AlgebraicGeometry
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 
-/-- Sectionwise quasi-isomorphisms on all intersections suffice for beta.
-Source: Stacks Project, Tag 01ET.
-(auxiliary; not a blueprint node)
-Proof: Restrict each section augmentation to the global ring. The finite-column
-Čech comparison makes the map on totals a quasi-isomorphism. The total of the
-single coefficient sheaf is canonically its ordered Čech complex, by the sole
-nonzero resolution-degree-zero summands. Naturality identifies the composite
-with the specified coefficient map. -/
+/-- Sectionwise quasi-isomorphisms on all intersections imply that the ordered Čech
+coefficient map is a quasi-isomorphism. (Stacks, Tag 01ET) -/
 theorem orderedCechCoefficientMap_quasiIso
     (X : Scheme.{u}) (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (G : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)

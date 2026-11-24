@@ -89,17 +89,24 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.LeftDerivedEquival
 
 /-! # The counit-compatible shift of derived scalar extension
 
-Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (left derived functor part),
-and sites-cohomology.tex, Tag 06YY
-(blueprint: lem-sbc-derived-scalar-extension-counit-shift).
-
 The ordinary functor is identified on both objects and maps with the existing
 change of rings. Its induced homotopy functor has the canonical shift comparison
 induced by identity maps in each degree, not a freely chosen shift structure.
 The conclusion specifies a natural degree-one isomorphism, uniqueness among all
 natural isomorphisms satisfying the counit equation, and preservation of every
 distinguished triangle with precisely that isomorphism on the last arrow.
-This statement is re-recorded by group NM on 2026-10-17.
+
+## Implementation details
+
+Here `E` is ordinary change of rings on module sheaves; its homotopy functor is the termwise
+functor. The objects and maps of `E` are fixed by `h` and `hmap`. The `commShiftIso` of
+`E.mapHomotopyCategory` is induced by `E.mapCochainComplexShiftIso`, whose degree components are
+identities. No coherent shift structure on `F`, flatness of `S`, or bound on complexes is assumed.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 05SU (2) and 05SE (left derived functor part)
+* Stacks Project, Cohomology on Sites, Tag 06YY
 -/
 
 @[expose] public section
@@ -113,54 +120,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace SheafOfModules
 
 /-- The derived scalar-extension counit determines a unique natural shift comparison,
-and this comparison makes derived scalar extension triangulated.
-Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (LF part), and
-sites-cohomology.tex, Tag 06YY
-(blueprint: lem-sbc-derived-scalar-extension-counit-shift).
-
-Here `E` is ordinary change of rings on module sheaves; its homotopy functor is the
-statement's termwise functor. The objects and maps of `E` are fixed by `h` and `hmap`.
-The `commShiftIso` of `E.mapHomotopyCategory` is induced by
-`E.mapCochainComplexShiftIso`, whose degree components are identities. Thus the
-right side of the equation is exactly the composite of the derived counit,
-`Q_S(theta_P)` and the localization shift isomorphism, in that order.
-No coherent shift structure on `F`, flatness of `S`, or bound on complexes is assumed.
-
-Proof:
-1. Termwise change of rings is additive. It preserves the cone biproduct and its
-matrix differential, and carries a homotopy dh+hd to the corresponding homotopy.
-Consequently it descends to the homotopy category and preserves cone triangles,
-including the negative projection (def-pur-sheaf-tensor-product,
-def-weil-abstract-derived-category, lem-pur-homotopy-category-triangulated).
-2. Use the class of K-flat complexes with flat terms. Every complex has such a
-resolution (lem-pc-kflat-resolution), and tensor inverts quasi-isomorphisms between
-these resolutions (lem-pur-derived-change-of-rings). The resolving-class theorem
-(lem-pur-left-derived-from-kflat-class) gives the everywhere-defined universal
-pair, with invertible counit on that class. The given pair is such a left derived pair.
-3. For every integer n, termwise tensor of the shifted complex and the shift of
-its tensor have the same terms and signed differentials. Identity maps in every
-degree give the coherent shift isomorphism. Composing with localization gives
-the comparison of B = E.mapHomotopyCategory followed by Q_S.
-4. Apply lem-pur-right-kan-extension-coherent-shift to Q_R, B and the given
-universal pair F, epsilon. Its degree-one counit square is the displayed equation.
-5. For uniqueness, postcomposition by shift preserves the right Kan property.
-For two competing natural isomorphisms, cancel F(s_P) in their counit equations.
-Injectivity of the Kan universal correspondence for the shifted target functor
-identifies their natural transformations, hence their isomorphisms. Equivalently,
-shift back and use the universal correspondence of
-lem-pur-left-derived-from-kflat-class. No coherence or triangle preservation is
-required of the competing degree-one isomorphism.
-6. Quasi-isomorphisms are a saturated triangulated multiplicative system
-(lem-pur-quasi-isos-saturated-triangulated). The same resolving class gives
-essential constancy of the denominator diagrams
-(lem-pur-resolving-class-essential-constancy). Apply
-lem-pur-left-derived-kan-source-triangles with the counit-compatible coherent
-shift from step 4: images of distinguished homotopy triangles are distinguished.
-Every distinguished derived triangle is isomorphic to such an image
-(lem-pur-localization-triangles-05r6). Applying F to the three isomorphisms gives
-an isomorphism of image triangles; its last square uses naturality of sigma.
-Closure under isomorphism proves the final clause for the very same sigma
-(def-weil-triangulated-category). Exactness also gives additivity of F. -/
+and this comparison makes derived scalar extension triangulated. -/
 theorem derivedScalarExtension_counitShift
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

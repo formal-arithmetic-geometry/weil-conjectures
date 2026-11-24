@@ -56,7 +56,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 
 /-! # Constant ring inverse images in an independent coefficient universe
 
-Source: Stacks Project, Tags 00YV and 03D2.
+## References
+
+* Stacks Project, Tags 00YV, 03D2, 0H7J
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +110,7 @@ private abbrev CoeffSet {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     ((constantSheaf J CommRingCat.{w}).obj (CommRingCat.of Λ))
 
 /-- Characterization of the addition map of the constant ring sheaf by its values
-on sections. Source: Stacks, ring paragraph of the proof of 00YV
-(blueprint: lem-pur-coefficient-constant-ring-images). -/
+on sections. -/
 private def IsRingAdd {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
     (Λ : Type w) [CommRing Λ] [HasWeakSheafify J CommRingCat.{w}]
@@ -122,8 +123,7 @@ private def IsRingAdd {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
         ((prod.snd : CoeffSet J Λ ⨯ CoeffSet J Λ ⟶ CoeffSet J Λ).hom.app T x)
 
 /-- Characterization of the multiplication map of the constant ring sheaf by its
-values on sections, in the given order (no commutativity). Source: Stacks, ring
-paragraph of the proof of 00YV (blueprint: lem-pur-coefficient-constant-ring-images). -/
+values on sections, in the given order (no commutativity). -/
 private def IsRingMul {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
     (Λ : Type w) [CommRing Λ] [HasWeakSheafify J CommRingCat.{w}]
@@ -563,9 +563,7 @@ private theorem section_constantMap_unit
   exact (congrArg (fun g ↦ g.app U x)
     (toSheafify_naturality J ((Functor.const Cᵒᵖ).map (TypeCat.ofHom f)))).symm
 
-/-- The canonical comparison fixes sheafified constant sections.
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(blueprint: lem-pur-coefficient-constant-ring-images). -/
+/-- The canonical comparison fixes sheafified constant sections. -/
 private theorem canonicalConstantSectionComparison
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]
@@ -805,17 +803,7 @@ private theorem constantRingLift (A : CommRingCat.{w}) :
 
 include V adj in
 /-- Constant rings have algebraic inverse images normalized by one natural comparison
-on all constant sets. Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-pur-coefficient-constant-ring-images).
-
-Proof: identify global sections with maps from the constant singleton, and use the
-set adjunction and preservation of the terminal object to compare global sections.
-Uniqueness of left adjoints gives the natural comparison on constant sets. After
-conjugating by the constant-sheaf forgetful comparisons, addition and multiplication
-are preserved: precompose by the isomorphism from the constant sheaf on pairs, where
-this is naturality for the two operations on the coefficient ring. Zero and one are
-constant sections. Transport module operations with the finite-product comparisons;
-the operation identities give an algebraic inverse-image presentation. -/
+on all constant sets. -/
 theorem coefficientConstantRingImages :
     ∃ kappa : constantSheaf J (Type w) ⋙ L ≅ constantSheaf K (Type w),
       ∀ A : CommRingCat.{w},

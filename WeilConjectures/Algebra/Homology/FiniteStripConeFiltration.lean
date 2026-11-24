@@ -16,7 +16,12 @@ import WeilConjectures.CategoryTheory.DegreewiseFiltration
 
 /-! # Vertical filtration of a finite-strip augmentation cone
 
-Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133).
+The cone of the augmentation of a finite strip carries a finite decreasing filtration whose
+graded pieces are the translated row cones.
+
+## References
+
+* Stacks Project, Homology, Lemma 12.25.4 (Tag 0133)
 -/
 
 @[expose] public section
@@ -286,10 +291,8 @@ private theorem stripStep_stable
   apply (pullback_factors_iff d Q _).1
   exact Subobject.factors_of_le _ hle (Subobject.factors_self _)
 
-/-- (blueprint: lem-sc-finite-strip-cone-filtration-steps)
-Proof: construct the finite joins of source and target image subobjects, verify
-stability under the cone differential, and use the support bounds to obtain the
-two endpoint identities. -/
+/-- The cone of the augmentation carries a decreasing filtration with the displayed degreewise
+steps, which is exhausted and separated at the stated bounds. -/
 theorem finite_strip_cone_filtration_steps
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
@@ -322,10 +325,8 @@ theorem finite_strip_cone_filtration_steps
   rw [hF, hF]
   exact ⟨stripStep_top K r hsupport A b n, stripStep_bot K r A b n⟩
 
-/-- (blueprint: lem-sc-finite-strip-cone-filtration-graded)
-Proof: quotient successive filtration steps, identify the surviving diagonal
-with the translated row cone, and transport the resulting short-complex
-homology isomorphism. -/
+/-- The homology of each graded piece of the filtration is isomorphic to the homology of the
+translated row cone. -/
 theorem finite_strip_cone_filtration_graded
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
@@ -354,7 +355,8 @@ theorem finite_strip_cone_filtration_graded
   obtain ⟨e⟩ := finite_strip_cone_filtration_graded_point K r hsupport A a b hb f hf F hsteps p n
   exact ⟨ShortComplex.homologyMapIso e⟩
 
-/-- (blueprint: lem-sc-finite-strip-cone-filtration) -/
+/-- The cone of the augmentation has a decreasing filtration with the displayed steps, whose
+graded pieces have the homology of the translated row cones. -/
 theorem finite_strip_cone_filtration
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))

@@ -18,8 +18,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Perfect complexes are pseudo-coherent and locally of finite Tor dimension
-Source: literature/stacks-project/cohomology.tex, Lemma 08CQ, implication (1) => (2)
-(blueprint: lem-pc-perfect-pseudo-coherent-locally-finite-tor).
+
+## References
+
+* Stacks Project, Cohomology of Sheaves, Lemma 20.49.5, Tag 08CQ.
 -/
 
 @[expose] public section
@@ -116,18 +118,8 @@ private theorem tensor_homology_isZero_of_term_isZero (Y : Scheme.{uP})
       ((HomologicalComplex.eval _ (.up ℤ) n).mapIso e)
   exact (T.sc n).isZero_homology_of_isZero_X₂ hz
 
-/-- A perfect complex is pseudo-coherent and locally has finite Tor dimension.
-Source: literature/stacks-project/cohomology.tex, Lemma 08CQ, implication (1) => (2)
-(blueprint: lem-pc-perfect-pseudo-coherent-locally-finite-tor).
-
-Proof: refine a strictly perfect local model by affine opens and finite-free principal
-opens (`lem-weil-pbc-finite-projective-standard-free-cover`); this gives the
-bounded-above finite-free models required for pseudo-coherence.
-This uses `lemma-coherent-base-change-invertible-sheaves--1` and `def-pur-pseudo-coherent-complex`.
-The same bounded model is termwise flat and K-flat by the bounded-above-flat K-flat
-lemma (`lem-pc-bounded-above-flat-kflat`), and its tensor with any module is bounded
-in one common finite interval.
--/
+/-- A perfect complex is pseudo-coherent and locally has finite Tor dimension
+(Stacks, Tag 08CQ). -/
 theorem perfect_isPseudoCoherent_and_hasLocallyFiniteTorDimension (X : Scheme.{uP})
     [HasDerivedCategory.{wP} (SheafOfModules.{uP} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

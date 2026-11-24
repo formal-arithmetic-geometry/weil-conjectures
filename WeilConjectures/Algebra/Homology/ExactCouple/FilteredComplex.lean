@@ -159,9 +159,7 @@ lemma couplef_coupleα (i j k : ℤ × ℤ) : F.couplef i j ≫ F.coupleα j k =
 filtration `F` by subcomplexes, the long exact cohomology sequences of
 `0 ⟶ Fᵖ⁺¹ K ⟶ Fᵖ K ⟶ grᵖ K ⟶ 0` form an exact couple with `D^{p, n} = Hⁿ(Fᵖ K)`,
 `E^{p, n} = Hⁿ(grᵖ K)`, `α` induced by the inclusions (of degree `(-1, 0)`), `g` induced by the
-projections (of degree `0`) and `f` the connecting homomorphisms (of degree `(1, 1)`).
-
-(blueprint: `thm-sp-spectral-object-yields`) -/
+projections (of degree `0`) and `f` the connecting homomorphisms (of degree `(1, 1)`). -/
 noncomputable def exactCouple : ExactCouple C ((-1, 0) : ℤ × ℤ) (1, 1) 0 where
   D i := (F.piece i.1).homology i.2
   E i := (F.gr i.1).homology i.2
@@ -200,9 +198,7 @@ noncomputable def exactCouple : ExactCouple C ((-1, 0) : ℤ × ℤ) (1, 1) 0 wh
 
 /-- The `E₁`-page differential `d₁ : Hⁿ(grᵖ K) ⟶ Hⁿ⁺¹(grᵖ⁺¹ K)` of the spectral sequence of a
 filtered complex is the composite of the connecting homomorphism
-`Hⁿ(grᵖ K) ⟶ Hⁿ⁺¹(Fᵖ⁺¹ K)` and of the projection `Hⁿ⁺¹(Fᵖ⁺¹ K) ⟶ Hⁿ⁺¹(grᵖ⁺¹ K)`.
-
-(blueprint: `thm-sp-spectral-object-yields`) -/
+`Hⁿ(grᵖ K) ⟶ Hⁿ⁺¹(Fᵖ⁺¹ K)` and of the projection `Hⁿ⁺¹(Fᵖ⁺¹ K) ⟶ Hⁿ⁺¹(grᵖ⁺¹ K)`. -/
 lemma exactCouple_d (p n : ℤ) :
     F.exactCouple.d (p, n) (p + 1, n + 1) =
       (F.ses_shortExact p).δ n (n + 1) rfl ≫
@@ -221,9 +217,7 @@ lemma α_toHomology (p n : ℤ) :
     Subobject.ofLE_arrow]
 
 /-- The filtration `Fᵖ Hⁿ(K) = im (Hⁿ(Fᵖ K) ⟶ Hⁿ(K))` induced on the cohomology of a filtered
-complex: the image filtration of the filtration of `K`.
-
-(blueprint: `thm-sp-spectral-object-yields`, `def-sp-image-filtration`) -/
+complex: the image filtration of the filtration of `K`. -/
 noncomputable def homologyFiltration (n : ℤ) : DecreasingFiltration (K.homology n) :=
   F.exactCouple.abutmentFiltration F.toHomology F.α_toHomology n
 
@@ -241,9 +235,7 @@ lemma isIso_homologyMap_of_isIso_f {L L' : CochainComplex C ℤ} (φ : L ⟶ L')
 /-- **Convergence of the spectral sequence of a filtered complex.** If the filtration of `K` is
 bounded in each degree (`Fᵖ Kⁿ = Kⁿ` for `p ≪ 0` and `Fᵖ Kⁿ = 0` for `p ≫ 0`), the spectral
 sequence of the filtered complex converges to `H(K)` with the image filtration
-`Fᵖ Hⁿ(K) = im (Hⁿ(Fᵖ K) ⟶ Hⁿ(K))`.
-
-(blueprint: `thm-sp-spectral-object-yields`) -/
+`Fᵖ Hⁿ(K) = im (Hⁿ(Fᵖ K) ⟶ Hⁿ(K))`. -/
 theorem convergesTo_exactCouple
     (hiso : ∀ n : ℤ, ∃ m : ℤ, ∀ p ≤ m, IsIso ((F.F p).arrow.f n))
     (hzero : ∀ n : ℤ, ∃ M : ℤ, ∀ p ≥ M, IsZero ((F.piece p).X n)) :

@@ -11,6 +11,14 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.RingHom.Smooth
 
+/-!
+# Ind-smoothness and ring isomorphisms
+
+## References
+
+* [Stacks Project, Tag 07CM](https://stacks.math.columbia.edu/tag/07CM), scalar transport
+-/
+
 @[expose] public section
 
 universe u v w
@@ -48,14 +56,7 @@ private def scalarEquivalence {R S : Type u} [CommRing R] [CommRing S] (e : R â‰
         change algebraMap R A (e.symm (e r)) = algebraMap R A r
         simp
 
-/-- Ind-smoothness transports across compatible ring isomorphisms.
-
-Source: the scalar transport argument in Stacks Project, Smoothing Ring Maps, Tag 07CM.
-Restrict scalars along the base isomorphism; its inverse supplies an inverse functor.
-Map the filtered colimit presentation through this equivalence. Each term stays smooth
-because its structure homomorphism is composed with a ring isomorphism. Finally use the
-compatible algebra isomorphism to change the vertex.
-(blueprint: lem-weil-pbc-ind-smooth-ring-equiv) -/
+/-- Ind-smoothness transports across compatible ring isomorphisms. -/
 theorem ind_smooth_of_ringEquiv
     {R S : Type u} [CommRing R] [CommRing S]
     {A B : Type v} [CommRing A] [CommRing B] [Algebra S A] [Algebra R B]

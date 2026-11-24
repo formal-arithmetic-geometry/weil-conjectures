@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOrdinaryClopenPr
 /-!
 # Ordinary realization of the clopen section factor
 
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DI and 09AE.
-(blueprint: lem-sp-varying-ring-ordinary-section-evaluation).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03DI, 09AE, 0F7B
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -304,20 +307,7 @@ private theorem pull_comp_compatible (n : ℕ) (gIso : OrdinaryPullComparison R 
     (congrArg (pull R φ) hr) (congrArg (StrictTower.G (R n)) hr)
     (hn s q) (pullComparison_congr R φ n gIso hr)
 
-/-- Realization preserves the section factor, after the cartesian comparison.
-Source: Stacks 0F7B, open-immersion case; Zheng, Construction 4.1
-(blueprint: lem-sp-varying-ring-ordinary-section-evaluation).
-Proof: put q = pullback.snd p i, b = pullback.fst p i and
-s = squareLift k r p i h. The map s is clopen. The intrinsic projector restricts
-to the open-adjunction unit, by the triangle identity for the adjoint triple.
-Unit preservation and naturality identify the two projectors after restriction;
-the restriction/direct-image adjunction detects their equality because the
-clopen extension-to-direct-image comparison is invertible. Apply b_! to that
-equation. The open compositor normalization identifies b_! s_! with k_!, and the
-pullback compositor normalization identifies s^* q^* with r^*. Naturality moves
-the comparisons through the compositors. Equality elimination handles bs=k and
-qs=r, giving the displayed equation. The cartesian beta factor is absent from
-this calculation. -/
+/-- Realization preserves the section factor, after the cartesian comparison. -/
 theorem ordinarySectionEvaluation (n : ℕ) {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

@@ -57,11 +57,7 @@ lemma isLocallyConstant_sum_smul {m : ℕ} {M : Type*} [AddCommGroup M] [Module 
 
 /-- **Finite generation from finite reduction.** Let `A` be a `ℤ_p`-module with maps
 `ρₘ : A ⟶ Eₘ` to modules killed by `pᵐ`, such that `ker ρₘ ⊆ pᵐ A`, `⋂ₘ ker ρₘ = 0` and `E₁`
-is finite. Then `A` is finitely generated.
-
-Indeed `A / pA ↪ E₁` is finite, so finitely many elements `s` generate `A` modulo `pA`, hence
-modulo every `pᵐ A`; the coefficients of an approximation of `a` modulo `pᵐ A` form a closed
-nonempty subset `Cₘ` of the compact space `ℤ_pˢ`, and a point of `⋂ Cₘ` expresses `a`. -/
+is finite. Then `A` is finitely generated. -/
 theorem module_finite_of_finite_quotient (ρ : ∀ m, A →ₗ[ℤ_[p]] E m)
     (hE : ∀ m (y : E m), (p : ℤ_[p]) ^ m • y = 0)
     (hker : ∀ m a, ρ m a = 0 → ∃ a', a = (p : ℤ_[p]) ^ m • a')

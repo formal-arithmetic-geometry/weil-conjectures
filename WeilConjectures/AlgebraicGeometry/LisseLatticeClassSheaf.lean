@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.LisseLatticePresentationTransport
 /-!
 # Locally inhabited lattice-class sheaves
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -29,22 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 set_option backward.isDefEq.respectTransparency false
 
 /-- Lattice classes form a locally constant, locally inhabited sheaf, and every
-section has a representative lattice on the localized pro-etale site.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), construction of the lattice sheaf.
-(auxiliary; not a blueprint node)
-
-Proof: identify the spectral-norm coefficient field with its `WithAbs` presentation
-and transport the module along the continuous coefficient-ring isomorphism. Apply
-`integralLatticeSheaf_locallyConstant`. Its quotient presentation gives representatives.
-For a trivialization of rank n the resulting sheaf is the constant coset sheaf
-GL_n(E)/GL_n(A). The identity matrix supplies a section on each trivializing member,
-including rank zero. Localization identifies these slice constant sheaves with
-constant sheaves on the members' small sites. The sets of classes are small: send a
-class to its embedded integral submodule, recorded as a subset on each object of the
-slice. The presentation's restriction criterion at the identity shows this assignment
-is injective. Shrink each set along this injection and transport all restriction maps
-and the sheaf axiom through the bijections. This yields the stated universe for F.
-On the empty scheme the empty trivializing cover suffices. -/
+section has a representative lattice on the localized pro-etale site. -/
 theorem exists_lisse_lattice_class_sheaf (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
     (L : ringedSiteModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)

@@ -14,8 +14,10 @@ import Mathlib.LinearAlgebra.Finsupp.VectorSpace
 /-!
 # Degreewise split free resolutions of a short exact sequence
 
-Source: Stacks Project, Algebra, proof of Tag 065P
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+## References
+
+* Stacks Project, Algebra, proof of Tag 065P
+* Stacks Project, Derived Categories, Tag 064C
 -/
 
 @[expose] public section
@@ -274,33 +276,7 @@ private lemma ResolutionSES.chainC {R : Type u} [CommRing R]
   exact congrArg Subtype.val ((E.stage (n + 1)).p_μ z).symm
 
 /-- A short exact sequence of modules admits compatible free resolutions with split rows in
-every degree. Source: Stacks Project, Algebra, proof of Tag 065P; Derived Categories,
-Tag 064C (blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof plan:
-1. For a short exact sequence A → A' → A'', choose generating families of A and A'' and
-   lifts in A' of the latter. Take free modules P and P'' on these families and P' = P ⊕ P''.
-   The generator maps give compatible surjections onto A, A', A''. Inclusion, projection,
-   retraction and section satisfy the four splitting identities. Apply the snake lemma
-   (lem-weil-pbc-snake-lemma-modules) to obtain a short exact sequence of kernels;
-   surjectivity makes the cokernels zero (def-weil-pbc-exact-sequence).
-2. Starting from the given sequence, repeat Step 1 on these kernels. At degree n take
-   the resulting free modules (def-weil-pbc-free-module); define the next differential
-   as the surjection onto the kernel followed by its inclusion. The initial surjections
-   are the augmentations.
-3. Each augmentation is surjective. Each differential has image equal to the preceding
-   kernel, so the augmented complexes are exact. Compatibility of the kernel inclusions
-   and surjections makes α and β chain maps and gives both augmentation squares. The four
-   splitting identities hold by construction in every degree, hence all rows are split
-   exact (def-weil-pbc-exact-sequence).
-
-As in `Module.exists_finite_free_resolution`, the terms are a family `F : ℕ → Type _` and
-`d i : F (i + 1) →ₗ[R] F i` is the node's `d_{i+1}`; exactness of the augmented complex is
-surjectivity of `ε` and the kernel-image equalities (which imply `d ∘ d = 0`). Short
-exactness of the given sequence is injectivity, `Function.Exact` and surjectivity, the
-module form of def-weil-pbc-exact-sequence. The maps `π n` and `s n` are families of linear
-maps, not chain maps. The free terms live in `Type (max u v₁ v₂ v₃)`, which holds free
-modules on generating sets of all three modules. -/
+every degree. The maps `π n` and `s n` are families of linear maps, not chain maps. -/
 theorem exists_free_resolution_ses_split
     (R : Type u) [CommRing R]
     {Q : Type v₁} [AddCommGroup Q] [Module R Q]

@@ -126,7 +126,9 @@ import all WeilConjectures.Algebra.Homology.Signed.SignedLineScalarTensorTower
 
 /-! # Evaluation compatibility of the scalar and line comparison
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0G7E and 06YY.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4, 0G7E, 06YY, 06YU and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -373,25 +375,7 @@ private theorem ordinary_evaluation
   dsimp only [tensor, LineUnbounded.tensor] at ht
   erw [ht, ho, hn, cancellation_pure, k.evaluation_basis m (op W) F hF, one_smul]
 
-/-- Evaluation is preserved by any representative-normalized scalar comparison.
-Source: blueprint Tate-twist local freeness proof (3); Stacks 07A4 and 06YU.
-(blueprint: lem-pur-ordinary-line-scalar-evaluation).
-Proof: choose a flat-term K-flat representative P of the derived input. Both line
-tensors and scalar extension preserve this class. Substitute the representative
-squares for m and -m and the two epsilon_computed equations. The remaining equality
-is the ordinary chain evaluation square. On generators its two paths send
-((x tensor y) tensor z) tensor s to x tensor s alpha(ev(y,z)).
-To check the ordinary square, work on a covering slice trivializing L. Transport
-its basis through b to the scalar-extended basis of K, and take the recorded signed
-basis powers e_n and f_n. The hypothesis hB sends 1 tensor e_n to f_n; the two
-evaluation_basis equations send e_m tensor e_-m and f_m tensor f_-m to 1.
-For multiples a e_m and c e_-m, bilinearity gives a*c and alpha(a)*alpha(c),
-respectively, so the displayed generator formulas agree. This includes n=0 and
-negative n with the actual dual basis. Restriction naturality, sheaf separatedness
-and the balanced tensor universal property prove equality without asserting global
-pure-tensor generation of sheaf sections. Localization transports the square to Q(P);
-naturality along
-the resolution isomorphism extends it to every derived object. -/
+/-- Evaluation is preserved by any representative-normalized scalar comparison. -/
 theorem ordinary_scalar_line_evaluation
     (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
       (J := Scheme.ProEt.topology X) α)

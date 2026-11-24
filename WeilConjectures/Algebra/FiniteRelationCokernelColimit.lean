@@ -14,8 +14,12 @@ import WeilConjectures.Algebra.FiniteRelationQuotientComparison
 /-!
 # Descent of a finite relation cokernel
 
-Source: Stacks Project, Algebra, Tag 05N7, proof of (1).
-(blueprint: lem-pc-finite-relation-cokernel-colimit).
+A finite relation matrix over a directed ring colimit descends to a stage, with the same cokernel
+after extension of scalars.
+
+## References
+
+* Stacks Project, Algebra, Tag 05N7 (proof of (1))
 -/
 
 @[expose] public section
@@ -28,18 +32,7 @@ open scoped ChangeOfRings
 namespace ModuleCat
 
 /-- A finite relation matrix over a ring colimit has a stage cokernel whose
-extension is the original cokernel.
-
-Source: Stacks Project, Algebra, Tag 05N7, proof of (1),
-label algebra-lemma-colimit-category-fp-modules.
-(blueprint: lem-pc-finite-relation-cokernel-colimit).
-
-Proof: express q in the standard bases of the two finite free modules. Represent
-its finitely many coefficients at stages and take a common upper bound. The
-represented coefficients define qi. Right exactness of tensor product identifies
-the extension of the quotient by range qi with the quotient by the range of the
-extended matrix. Tensoring the standard bases identifies that matrix with q,
-so the two quotients are isomorphic. This also covers zero rows or columns. -/
+extension is the original cokernel. -/
 theorem exists_stage_finite_relation_cokernel
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat) (n m : ℕ)

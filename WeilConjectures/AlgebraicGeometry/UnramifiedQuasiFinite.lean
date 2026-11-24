@@ -14,8 +14,10 @@ import Mathlib.RingTheory.Unramified.LocalStructure
 /-!
 # Unramified morphisms are locally quasi-finite
 
-Source: Stacks Project, Morphisms, Lemma 02V5 and Algebra, Lemma 02UR
-(blueprint: lem-weil-pbc-unramified-quasi-finite-at-points).
+## References
+
+* [Stacks, Tag 02V5]
+* [Stacks, Tag 02UR]
 -/
 
 @[expose] public section
@@ -28,14 +30,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme.Hom
 
-/-- An unramified morphism is quasi-finite at every point.
-
-Source: Stacks Project, Morphisms, Lemma 02V5 and Algebra, Lemma 02UR
-(blueprint: lem-weil-pbc-unramified-quasi-finite-at-points).
-The proof chooses affine neighbourhoods, obtains finite type and formal unramifiedness
-for the induced section-ring map, and applies Mathlib's finite-type formally-unramified
-algebra instance to make the fibre spectrum discrete.
--/
+/-- An unramified morphism is quasi-finite at every point. -/
 theorem isLocallyQuasiFinite_of_unramified
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hf : LocallyOfFiniteType f ∧ IsOpenImmersion (pullback.diagonal f)) :

@@ -15,8 +15,11 @@ set_option linter.privateModule false
 
 /-! # Kernels of constructible internal modules with finite discrete coefficients
 
-Source: Bhatt--Scholze, Section 5.1 and Lemma 5.4.1, and the noetherian constructible
-Serre theorem. Finite presentations are compared before passing to derived categories.
+Finite presentations are compared before passing to derived categories.
+
+## References
+
+* Bhatt--Scholze, Section 5.1 and Lemma 5.4.1
 -/
 
 @[expose] public section

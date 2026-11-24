@@ -16,22 +16,22 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersio
 Let `φ : A →+* B` be a ring homomorphism, `I ⊆ A` an ideal and `J = I·B` its extension.
 The blow-up of `J` maps to the fibre product `Spec B ×_{Spec A} Bl_I(Spec A)` via its
 structure morphism and the functoriality morphism `AlgebraicGeometry.AffineBlowup.hom`.
-We show that this canonical morphism is a **closed immersion** (the affine core of
-Stacks Project Tag 080E).
+We show that this canonical morphism is a **closed immersion**.
+
+## Main results
+
+- `AlgebraicGeometry.AffineBlowup.isClosedImmersion_pullbackLift`
+
+## Implementation details
 
 The proof is chart-local on the fibre product: over the standard chart of `Bl_I` at a
 degree-one element `x`, the morphism restricts to the `Spec` of the canonical ring map
 `B ⊗_A A[I/x] →+* B[J/φ(x)]`, which is surjective by
 `AlgebraicGeometry.AffineBlowup.closure_range_awayAlgebraMap_union_range_awayMap`.
 
-## Main results
+## References
 
-- `AlgebraicGeometry.AffineBlowup.isClosedImmersion_pullbackLift`
-
-## Blueprint
-
-Part of `thm:nagata-strict-transform-is-blowup` (Stacks Project Tag 080E), affine case.
-
+* Stacks Project, Tag 080E (affine case)
 -/
 
 @[expose] public section
@@ -100,8 +100,7 @@ private lemma isClosedImmersion_pullbackLift_restrict (φ : A →+* B) (h : I.ma
     (closure_range_awayAlgebraMap_union_range_awayMap φ h x hx)
 
 /-- **The blow-up of an extended ideal is a closed subscheme of the base-changed
-blow-up**, affine case (Stacks Project Tag 080E; blueprint:
-`thm:nagata-strict-transform-is-blowup`): for a ring homomorphism `φ : A →+* B` with
+blow-up**, affine case: for a ring homomorphism `φ : A →+* B` with
 `I.map φ = J`, the canonical morphism
 `Bl_J(Spec B) ⟶ Spec B ×_{Spec A} Bl_I(Spec A)`, whose components are the structure
 morphism of the blow-up of `J` and the functoriality morphism

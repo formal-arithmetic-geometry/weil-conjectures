@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 
 /-! # First residue under the normalized integral coefficient comparison
 
-Source: Stacks Tags 099C, 099M and 09C1, and the projection-normalized integral comparison.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks, Tags 099C, 099M and 09C1.
 -/
 
 @[expose] public noncomputable section
@@ -51,30 +52,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- The two integral presentations have the same constructible finite-Tor first residue
 in constant-ring coordinates. This is solely coefficient transport; no etale descent,
-completeness or etale-origin witness is asserted.
-Source: Stacks Tags 099C, 099M and 09C1; blueprint integral-models proof (1)--(2)
-(auxiliary; not a blueprint node).
-
-Proof: Let A be the lifted integer ring, I its lifted uniformizer ideal, and k=A/I.
-The scalar quotient map identifies k with the lift of the specified first quotient:
-Ideal.map_span and the ring equivalence ULift.ringEquiv identify the defining ideals,
-and the induced quotient isomorphism commutes with the quotient homomorphisms.
-The section-action equivalence and small-site precomposition identify the internal
-constant scalar map with the canonical constant-to-completed scalar map. The integral
-comparison commutes with all finite projections, in particular exponent one.
-On a flat-term K-flat representative, apply the normalized common-quotient comparison
-in integral_constant_completion, at index zero. Its ordinary map sends s tensor m to
-s tensor m. The internal-section tensor comparison and exact constant-scalar
-restriction identify its localization with fixedScalarDerivedModel of the literal
-sfbResidueComplex of the canonical integral realization. These comparisons do not
-use completeness of K.
-Exactness identifies homology. Constant models are transported on the same strata
-and covers, with the same finitely presented scalar module after quotient transport.
-Noetherian global constructibility identifies this with the affine-local predicate.
-The exact tensor equivalences preserve K-flatness and carry every degree-zero test
-module to the corresponding test module, essentially surjectively. Hence they
-preserve and reflect finite relative Tor amplitude with its single uniform interval.
-This gives the two conjuncts independently, including zero residues and empty X. -/
+completeness or etale-origin witness is asserted. -/
 theorem integral_residue_coefficient_transport (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]

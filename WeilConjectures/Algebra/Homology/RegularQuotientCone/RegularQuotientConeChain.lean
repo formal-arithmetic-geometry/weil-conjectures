@@ -9,8 +9,11 @@ public import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotie
 
 /-! # Strict scalar cone augmentations
 
-Source: Stacks Project, sites-cohomology.tex, principal quotient formulas, Tag 06YP.
-(blueprint: lem-cbc-regular-quotient-cone-chain).
+## References
+
+* Stacks Project, Tag 014A
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 06YP
 -/
 
 @[expose] public section
@@ -31,8 +34,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (ρ : 𝟭 (CochainComplex (Modules R) ℤ) ⟶ T)
   (hz : ∀ P, (complexScalar R t).app P ≫ ρ.app P = 0)
 
-/-- Extend a chain map annihilating the scalar to its cone, with zero shifted component.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- Extend a chain map annihilating the scalar to its cone, with zero shifted component. -/
 noncomputable def chainAugmentation : cone R t ⟶ T where
   app P := CochainComplex.mappingCone.desc ((complexScalar R t).app P) 0 (ρ.app P)
     (by simp [hz P])
@@ -43,8 +45,7 @@ noncomputable def chainAugmentation : cone R t ⟶ T where
     · simpa [cone, CochainComplex.mappingCone.map, Category.assoc] using
         congrArg (fun f ↦ f.f n) (ρ.naturality h)
 
-/-- The augmentation is the second projection followed by the coefficient map.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- The augmentation is the second projection followed by the coefficient map. -/
 theorem chainAugmentation_components (P : CochainComplex (Modules R) ℤ) (n : ℤ) :
     ((chainAugmentation t T ρ hz).app P).f n =
       (CochainComplex.mappingCone.snd ((complexScalar R t).app P)).v n n (add_zero n) ≫
@@ -52,8 +53,7 @@ theorem chainAugmentation_components (P : CochainComplex (Modules R) ℤ) (n : �
   rw [chainAugmentation, CochainComplex.mappingCone.desc_f _ _ _ _ n (n + 1) rfl]
   simp
 
-/-- The augmentation composed with the unshifted inclusion is the coefficient map.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- The augmentation composed with the unshifted inclusion is the coefficient map. -/
 theorem inclusion_chainAugmentation :
     inclusion R t ≫ chainAugmentation t T ρ hz = ρ := by
   apply NatTrans.ext
@@ -64,8 +64,7 @@ theorem inclusion_chainAugmentation :
 variable {S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
   (E : Modules R ⥤ Modules S) [E.Additive] (adj : E ⊣ restriction φ)
 
-/-- The ordinary adjunction unit applied termwise.
-Source: Stacks 03D7 (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- The ordinary adjunction unit applied termwise. -/
 noncomputable def coefficientUnit : 𝟭 (CochainComplex (Modules R) ℤ) ⟶
     E.mapHomologicalComplex (.up ℤ) ⋙ (restriction φ).mapHomologicalComplex (.up ℤ) where
   app P := {
@@ -76,8 +75,7 @@ noncomputable def coefficientUnit : 𝟭 (CochainComplex (Modules R) ℤ) ⟶
     exact adj.unit.naturality (h.f n)
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
-/-- The vanishing composite with the coefficient-ring map says the section maps to zero.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- The vanishing composite with the coefficient-ring map says the section maps to zero. -/
 theorem section_image_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0) (U : Cᵒᵖ) : (φ.hom.app U).hom (t.val U) = 0 := by
@@ -86,8 +84,7 @@ theorem section_image_zero
   simpa only [mul_one] using h
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
-/-- The scalar acts trivially on any module restricted from the quotient.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- The scalar acts trivially on any module restricted from the quotient. -/
 theorem scalar_restriction_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0) (M : Modules S) :
@@ -97,8 +94,7 @@ theorem scalar_restriction_zero
   rw [section_image_zero t φ ht U, zero_smul]
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasSheafify J AddCommGrpCat] in
-/-- The coefficient unit kills the scalar whenever the coefficient-ring map does.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- The coefficient unit kills the scalar whenever the coefficient-ring map does. -/
 theorem coefficientUnit_zero
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0) (P : CochainComplex (Modules R) ℤ) :
@@ -112,9 +108,7 @@ theorem coefficientUnit_zero
       (scalar R t).naturality (adj.unit.app (P.X n))
   rw [← hn, scalar_restriction_zero t φ ht, comp_zero]
 
-/-- Scalar cone formation preserves every quasi-isomorphism, without a flatness condition.
-Source: Stacks, derived.tex, Tag 014A
-(blueprint: lem-cbc-regular-quotient-cone-chain). -/
+/-- Scalar cone formation preserves every quasi-isomorphism, without a flatness condition. -/
 theorem cone_quasiIso {P Q : CochainComplex (Modules R) ℤ} (h : P ⟶ Q)
     (hh : QuasiIso h) : QuasiIso ((cone R t).map h) := by
   let := HasDerivedCategory.standard (Modules R)

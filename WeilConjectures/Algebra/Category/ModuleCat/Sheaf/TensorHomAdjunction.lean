@@ -18,8 +18,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Tensor-Hom adjunction on a ringed space
 
-Source: Stacks Project, Modules, Lemma 01CN, the morphism correspondence
-(blueprint: lem-weil-pbc-module-tensor-hom-adjunction).
+## References
+
+* Stacks Project, Modules, Lemma 01CN
 -/
 
 @[expose] public section
@@ -180,32 +181,8 @@ private lemma correspondence_natural (A A' G F : SheafOfModules.{u} 𝓡)
 end Helpers
 
 /-- Tensor-Hom correspondence, linear over global sections, characterized on local pure
-tensors and natural in the first factor. The tensor product `A ⊗ G` is the source's
-`SheafOfModules.monoidalCategory R` [def-pur-sheaf-tensor-product]; `t_W` is the
-sheafification unit followed by `SheafOfModules.tensorObjIsoSheafification`.
-Source: Stacks Project, Modules, Lemma 01CN
-(blueprint: lem-weil-pbc-module-tensor-hom-adjunction).
-
-Proof: (1) On opens, internal Hom consists of module maps on the slice; restriction
-restricts these maps, and scalars act sectionwise [def-pur-sheaf-hom].
-(2) Apply Algebra 00DE [lem-weil-pbc-module-tensor-hom-currying] on every open to the
-bilinear map `(a,g) ↦ (φ_W(a))_W(g)`, obtaining a linear map from the section tensor product.
-(3) These maps commute with restrictions: check on pure tensors using naturality of `φ`
-and of the local maps it gives. Pure tensors generate, so they define a presheaf morphism
-[def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification].
-(4) Conversely, a presheaf tensor morphism `ψ` gives at `a ∈ A(W)` the local map with
-component on `W' ⊆ W` given by `g ↦ ψ_W'(a|_W' ⊗ g)`. Naturality of `ψ` makes this a local
-module morphism; linearity and restriction compatibility give a map into internal Hom.
-(5) The constructions are inverse by evaluation on local sections and generation by pure
- tensors [lem-weil-pbc-module-tensor-hom-currying, def-pur-sheaf-hom].
-(6) The universal property of module sheafification transports the presheaf morphism to
- a unique sheaf morphism with the displayed evaluation formula
-[def-weil-presheaf-modules-sheafification, def-pur-sheaf-tensor-product].
-(7) Sectionwise evaluation commutes with addition and multiplication by a global section;
- uniqueness makes the correspondence linear [def-pur-sheaf-modules-hom-module].
-(8) Precomposing by `α` gives the same evaluation formula as precomposing the tensor
- morphism by the sheafification of `α ⊗ id`; uniqueness gives naturality.
--/
+tensors and natural in the first factor. Here `t_W` is the sheafification unit followed by
+`SheafOfModules.tensorObjIsoSheafification`. -/
 theorem exists_tensorHom_linearEquiv (X : Type u) [TopologicalSpace X]
     (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (G F : SheafOfModules.{u} ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)) :

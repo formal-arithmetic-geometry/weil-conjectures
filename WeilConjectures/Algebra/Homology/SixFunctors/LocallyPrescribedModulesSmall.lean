@@ -20,9 +20,10 @@ import Mathlib.CategoryTheory.Limits.Constructions.EpiMono
 /-!
 # Smallness of module sheaves with prescribed local models
 
-Source: Stacks Project, Sites, Tag 04TQ and Modules on Sites, Tag 03EM; the
-Essentially small paragraph of the current blueprint's Brown hypotheses proof
-(blueprint: lem-sfb-locally-prescribed-modules-small).
+## References
+
+* Stacks Project, Sites, Tag 04TQ
+* Stacks Project, Modules on Sites, Tag 03EM
 -/
 
 -- After pruning, this module only keeps private declarations.

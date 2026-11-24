@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCupNaiveMap
 import WeilConjectures.AlgebraicGeometry.GlobalTensorPullbackMatesIsIso
 /-! # Tensor-counit normalization of the global pullback
 
-Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
+## References
+
+* Stacks Project, Tags 008A, 008Y, 0B6A and 0FKU.
+-/
 
 @[expose] public section
 universe u
@@ -39,12 +42,7 @@ local instance globalPullbackOplaxClosed :
     MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
 /-- The mate isomorphisms coincide with the explicit oplax structure transported
-from the adjunction.
-Source: Mathlib.CategoryTheory.Monoidal.Functor, Adjunction.leftAdjointOplaxMonoidal.
-(blueprint: lem-sc-global-tensor-pullback-oplax-isiso)
-Proof: unfold the transported oplax unit and tensor maps, rewrite them using
-the prescribed concrete lax unit and tensor maps, and apply the isomorphism
-assertions for the corresponding adjunction mates. -/
+from the adjunction. -/
 theorem globalTensorPullback_oplax_isIso
     (P : ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)) ⥤
       SheafOfModules.{u} (moduleRings X.toRingedSpace))

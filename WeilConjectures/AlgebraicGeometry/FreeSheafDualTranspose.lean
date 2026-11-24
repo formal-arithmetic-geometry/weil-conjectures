@@ -11,8 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Matrix entries of the dual of a free sheaf
 
-Source: Stacks Project, duality.tex, Tag 0BQZ, finite free Hom calculation.
-(blueprint: lem-sc-free-sheaf-dual-transpose).
+## References
+
+* Stacks Project, Tag 0BQZ.
 -/
 
 @[expose] public section
@@ -53,20 +54,7 @@ private lemma unit_dual_conjugation {X : Scheme.{u}}
   exact mul_one _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical finite free dual comparison transposes matrix components.
-Source: Stacks Project, duality.tex, Tag 0BQZ, the finite free Hom calculation.
-(blueprint: lem-sc-free-sheaf-dual-transpose).
-
-Proof: The free sheaf is the finite coproduct of copies of the unit. Its internal
-Hom is the product of the internal Homs of those copies. The canonical
-homObjFreeUnitIso uses precisely this product decomposition and evaluation at
-1 on each unit summand. Consequently the inverse comparison sends the i-th
-free generator to the i-th coordinate functional. Precomposing that functional
-with phi and evaluating on the j-th generator gives the (i,j) component of phi.
-This is the asserted equality of endomorphisms of the unit: on every open,
-both endomorphisms multiply by that same component. Equality of the values at
-1 implies equality since the maps are linear. Empty index sets give no
-components to check, and the calculation also holds over the zero ring. -/
+/-- The canonical finite free dual comparison transposes matrix components. (Stacks, Tag 0BQZ) -/
 theorem freeSheafDualTranspose_component {X : Scheme.{u}} {I J : Type u}
     [Fintype I] [Fintype J] [DecidableEq I] [DecidableEq J]
     (phi : SheafOfModules.free (R := X.ringCatSheaf) J ⟶ SheafOfModules.free I)

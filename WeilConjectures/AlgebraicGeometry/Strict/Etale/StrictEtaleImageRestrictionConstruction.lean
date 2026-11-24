@@ -32,9 +32,14 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Derived geometric images with their restriction representative equations
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 09T5 and 0FND.
 The assembly retains the representative equation already proved while constructing
 its coefficient restriction square.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09T5, 0FND
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -349,18 +354,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Construct the derived image while retaining its ordinary restriction square formula.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks 09T5 and 0FND
-(blueprint: lem-pur-strict-etale-image-restriction-construction).
-Proof: repeat coefficientSystemUnboundedComparison's assembly, retaining the
-representative equation of the localized ordinary restriction square. The exact
-inverse images and K-injective right images give normalized adjunctions. The derived
-evaluation comparison is obtained from the ordinary one by localization; its mate
-is invertible by the level extension/evaluation adjunction. Flat-term K-flat
-resolutions give the tensor comparison and its mate restrictedDirect. The chosen
-restrictedInverse is the localized ordinary square itself, so its factorization
-formula is retained as the final conclusion. The existing exact-adjunction bound,
-conservativity and scalar-transpose lemmas supply the descent fields. -/
+/-- A derived geometric image exists whose restricted inverse isomorphism satisfies the
+ordinary restriction square formula on single representatives. -/
 public theorem strictEtaleImageWithRestriction_exists
     (O : Type (u + 1)) [CommRing O] (t : O)
     {X Z : Scheme.{u}} (j : X ⟶ Z)

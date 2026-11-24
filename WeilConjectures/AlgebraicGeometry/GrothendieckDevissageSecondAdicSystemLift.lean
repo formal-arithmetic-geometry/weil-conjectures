@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemLi
 
 /-! # Compatible algebraization before the torsion estimate
 
-Source: Stacks Project, Tag 088A, construction of G_e and its comparison maps.
+## References
+
+* [Stacks Project, Tag 088A]
 -/
 
 @[expose] public section

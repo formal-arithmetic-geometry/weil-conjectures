@@ -12,8 +12,11 @@ import Mathlib.RingTheory.Ideal.Maps
 /-!
 # Descending a module action through coefficient reduction
 
-Source: Bhatt--Scholze, Proposition 6.8.4(1), the finite coefficient reduction construction.
 The action is constructed by lifting scalars, independently of the chosen lifts.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4(1)
 -/
 
 @[expose] public noncomputable section

@@ -16,15 +16,15 @@ import WeilConjectures.AlgebraicGeometry.ProjStandardOpenProperties
 /-!
 # Exactness of associated sheaves on the projective line
 
-Source: Stacks Project, Constructions, Lemma 01M7, final paragraph; the sheafifying
-clause of blueprint `theorem-riemann-roch-coherent-serre-duality`.
-(blueprint: lem-sc-p1-proj-sheafification-exact)
-
 `P = Proj k[x₀,x₁]` is `Proj (homogeneousSubmodule (Fin 2) k)` with the standard
-total-degree grading `MvPolynomial.gradedAlgebra`, as in the landed sibling
+total-degree grading `MvPolynomial.gradedAlgebra`, as in the sibling
 `coherent_exists_graded_representation`.
 The associated sheaves and induced maps are specified using the chart identifications
 of `gradedModuleSheaf_exists` and the fraction formula of `tilde_functorial`.
+
+## References
+
+* [Stacks, Tag 01M7](https://stacks.math.columbia.edu/tag/01M7)
 -/
 
 @[expose] public section
@@ -39,25 +39,7 @@ namespace AlgebraicGeometry.Proj
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- Sheafifying a short exact graded sequence over `k[x₀,x₁]` gives a short exact
-sequence of modules on its Proj.
-Source: Stacks, Constructions, Lemma 01M7, final paragraph.
-(blueprint: lem-sc-p1-proj-sheafification-exact)
-
-Proof:
-1. By `lem-sc-p1-proj-tilde-functorial`, the given chart fraction formulas are those
-   of the induced sheaf maps; composition is preserved, so the composite is zero.
-   The stalk identifications of `lem-weil-pbc-proj-graded-module-sheaf-exists` identify
-   these maps with the degree-zero localized linear maps at each homogeneous prime.
-2. Apply `lem-sc-p1-proj-degreezero-localization-exact` to the given graded sequence
-   at every such prime. The sequence of stalks is short exact.
-3. Apply `lem-weil-pbc-ringed-space-module-exactness-local-lifting` and the germ
-   representation and equality criteria of `def-weil-pbc-module-stalk`: every stalk
-   lift is represented on a neighbourhood, which can be shrunk until the image is
-   the required section. This gives the epimorphism and exactness at the middle.
-   If the first map kills a section, stalkwise injectivity makes all its germs zero;
-   shrink around each point and use the sheaf axiom to conclude that the section
-   is zero. Thus the first map is a monomorphism, completing short exactness.
--/
+sequence of modules on its Proj (Stacks, Tag 01M7). -/
 theorem proj_sheafification_shortExact
     (k : Type u) [Field k]
     (M : Fin 3 → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (MvPolynomial (Fin 2) k) (M i)]

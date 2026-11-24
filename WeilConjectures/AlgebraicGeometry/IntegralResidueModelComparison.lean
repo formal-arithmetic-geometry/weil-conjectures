@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # The normalized common first residue in constant-ring coordinates
 
-Source: Stacks Tags 099L, 099M and 06YY, integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks, Tags 099L, 099M and 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -350,11 +351,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
-/-- Tensoring internal modules preserves the small colimits used in totalization.
-Source: closedness of internal modules, Stacks Tag 03EK
-(auxiliary; not a blueprint node).
-Proof: closedness makes left tensor a left adjoint; symmetry identifies right tensor with it.
--/
+/-- Tensoring internal modules preserves the small colimits used in totalization. -/
 theorem residueTensorColimits (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     (∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R,
@@ -381,11 +378,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
-/-- Internal modules admit functorial flat resolutions with the specified scalar structure.
-Source: the free-module flat resolution, Stacks Tag 06YS
-(auxiliary; not a blueprint node).
-Proof: apply the existing internal-module construction to flat resolutions of abelian sheaves.
--/
+/-- Internal modules admit functorial flat resolutions with the specified scalar structure. -/
 theorem residueFlatResolution (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] :
     Abelian.HasFunctorialFlatResolution (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) := by
@@ -397,11 +390,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
-/-- Scalar extension preserves quasi-isomorphisms between K-flat internal complexes.
-Source: derived scalar extension, Stacks Tag 06YY
-(auxiliary; not a blueprint node).
-Proof: apply the existing internal-module scalar-extension theorem with these scalar objects.
--/
+/-- Scalar extension preserves quasi-isomorphisms between K-flat internal complexes. -/
 theorem residueExtensionKFlat (X : Scheme.{u})
     (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
@@ -419,9 +408,7 @@ theorem residueExtensionKFlat (X : Scheme.{u})
   rw [hb]
   exact ‹IsCommMonObj S›
 
-/-- The normalized quotient equivalence, oriented from the lifted original residue ring.
-Source: the existing integralCoefficientULift, normalized on quotient representatives
-(auxiliary; not a blueprint node). -/
+/-- The normalized quotient equivalence, oriented from the lifted original residue ring. -/
 def integralResidueScalarEquiv (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     ULift.{u + 1} (Padic.coefficientExtensionRing l E 1) ≃+*
@@ -444,29 +431,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralReductionSiteEssentiallySmall
   WeilConjectures.integralOperationsSiteSmall in
 /-- The two derived first residues are isomorphic after the normalized discrete scalar
-model. No constructibility, Tor condition, completeness, or etale-origin hypothesis occurs.
-
-Source: Stacks Tags 099L, 099M and 06YY; integral-models proof (1)--(2).
-(auxiliary; not a blueprint node).
-
-Proof: the quotient ring equivalence integralResidueScalarEquiv sends the lifted class
-of x to the class of its lift. Its representative formula makes the first quotient square
-commute. The normalized discrete coefficient map identifies the internal scalar quotient
-with the constant quotient ring on the small site: both maps agree on every constant
-section, and sheafification detects equality there. The integral realization is the
-section-action functor followed by the two coefficient restrictions whose isomorphisms
-commute with every finite projection. Apply integral_constant_completion at index zero.
-On a flat-term K-flat representative of K its normalized common-quotient comparison
-is the identity on balanced pure tensors. Internal-section tensor comparison and site
-precomposition carry this to the displayed discreteCoefficientModel. On the other side,
-constant scalar restriction followed by its inverse and site precomposition identify the
-localized complex with fixedScalarDerivedModel of the literal sfbResidueComplex.
-The localization comparison is used for the chosen Q.objPreimage in sfbResidueComplex;
-its Q.objObjPreimageIso removes this choice. All factors preserve quasi-isomorphisms,
-so the representative comparison descends to the displayed isomorphism. Completeness is
-not used: the finite common quotient comparison applies to every input K. The equations
-also hold for the zero residue and on the empty scheme.
--/
+model. No constructibility, Tor condition, completeness, or etale-origin hypothesis occurs. -/
 theorem integral_residue_model_comparison (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u})

@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDerivedRightUnitPullback
 
 /-! # Pullback of the normalized shifted finite-line evaluation
 
-Source: Stacks Tags 03PK and 03Q1, and the evaluation identification in
-thm-amb-p1-decomposition.proof.md
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03PK and 03Q1.
 -/
 
 @[expose] public noncomputable section
@@ -54,27 +54,7 @@ private theorem evaluation_def
 
 /-- The canonical shifted evaluation and right unit commute with inverse image.
 The first equation is the evaluation-pairing square; the second is its tensor-unit
-normalization. These concern any scheme morphism and do not involve a projective-line
-splitting, direct image, properness, or finite coefficients.
-Source: etaleFiniteTwistPullback, negative evaluation and derived tensor clauses;
-main-20261015, thm-amb-p1-decomposition.proof.md, evaluation identifications
-(auxiliary; not a blueprint node).
-
-Proof: in degree zero use the negative-normalization equation of the normalized
-finite-twist transport, with n=0. Its degree-zero comparison is compatible with the
-flat single-object tensor comparison because both are induced by the same tensor
-of complexes before localization. Move the symmetry past inverse image using
-its braided tensor comparison. Normalized positive transport agrees with t by
-ordinaryFiniteTwistTransport_unique. Apply the shift comparison to the two factors,
-with shifts -2 and 2, and use compatibility of the inverse-image tensor comparison
-with derivedTensorShiftIso. Their sum is zero; shift-zero coherence removes the
-remaining shift, giving the first equation. The even shifts give sign +1. For the
-second equation identify the constant object with the monoidal unit via
-singleFunctorObjUnitIso, identify its pullback comparison with the canonical
-monoidal unit comparison, and apply right unitality of the oplax monoidal inverse
-image. Naturality of singleFunctorObjUnitIso converts this back to the displayed
-right-unit maps. All identifications are canonical, including for N=1, zero
-coefficients, and empty schemes. -/
+normalization. -/
 theorem finiteTwistDerivedEvaluation_pullback
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficie
 
 /-! # Finite scalar counits of exact strict coefficient transports
 
-Source: Zheng, Construction 4.1 and Construction 5.15.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Construction 5.15
 -/
 
 @[expose] public noncomputable section

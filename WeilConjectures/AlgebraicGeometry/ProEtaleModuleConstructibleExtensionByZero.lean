@@ -15,8 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 /-!
 # Extension by zero of constructible module objects
 
-Source: the open–closed stratification argument for constructible sheaves.
-(auxiliary; not a blueprint node)
+## References
+
+* The open–closed stratification argument for constructible sheaves.
 -/
 
 @[expose] public section
@@ -140,22 +141,7 @@ private lemma isIso_linear_unit
   exact isIso_of_reflects_iso _ (Mod.forget _)
 
 /-- Extension by zero along a quasi-compact open immersion preserves constructible module
-objects.
-
-Source: `ConstructibleSheaf/OpenClosed.lean`, the open–closed stratification construction,
-and the pro-étale open-immersion adjunction triple.
-Restrict to the open subscheme and its closed complement. The unit of the linearized
-extension-by-zero adjunction is an isomorphism, because its underlying map is the unit of
-extension by zero for abelian sheaves. Thus the open restriction is the original module
-with scalars transported along the coefficient isomorphism. On the closed complement the
-underlying sheaf is zero: the two adjunctions identify maps out of its inverse image with
-maps into the restriction of a pushforward from the complement, whose sections are sections
-over empty fibre products. Faithfulness of the module forgetful functor reflects this
-vanishing. The zero module has a rank-zero finite presentation. Concatenate the open
-stratification with the trivial stratification on the complement, transporting the
-presentations through pullback composition. Quasi-compactness makes the resulting strata
-constructible in the ambient scheme. Empty schemes and rank zero are included.
-(auxiliary; not a blueprint node) -/
+objects. -/
 theorem isConstructibleModuleObject_openImmersionLowerShriek
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]

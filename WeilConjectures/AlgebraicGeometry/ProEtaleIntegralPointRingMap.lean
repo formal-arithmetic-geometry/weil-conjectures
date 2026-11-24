@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientData
 
 /-!
 # The integral comparison on profinite test objects
-
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -403,32 +401,7 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local semireducible] profiniteToProEtOf finiteRingSection
 
 /-- The completed representation on continuous functions defines a morphism of the
-actual ring objects on the profinite point.
-
-proof.md`, Step 4
-(auxiliary; not a blueprint node).
-
-Proof: send a continuous function f:S→O_E to d.inv(X[f]). Naturality follows from
-naturality of d.inv and functoriality of X[-]. After the nth finite projection, hd
-identifies its value with the section of the finite constant ring labelled by the
-locally constant reduction q_n∘f; hq identifies q_n with the actual quotient ring map.
-For two functions refine their labelled clopen partitions by their intersections.
-On a piece labelled (x,y), addition, multiplication and negation have labels x+y, xy
-and -x, and the constant functions have labels 0 and 1. The natural finite-label
-comparison a preserves these labels: its product comparison is determined by the two
-projections, and naturality for the addition, multiplication, negation and singleton
-label maps gives the identities. Thus the proposed map preserves every operation
-after each finite projection. The projections of the ring-sheaf limit jointly
-distinguish sections, so the map is additive and preserves multiplication and one.
-Bundle its additive section maps as an abelian-sheaf morphism. The ring objects of
-continuous functions and of the completion use the sheafification of sectionwise
-multiplication. The tensor-comparison formula for continuous pushforward identifies
-their restricted multiplication with sectionwise multiplication; the corresponding
-formula for the unit identifies one. Tensor and unit hom extensionality therefore
-make this abelian-sheaf morphism a monoid-object morphism. This gives t, and its
-section formula is its definition. This step takes place on the profinite point;
-no inverse-image or uniqueness assertion is used.
--/
+actual ring objects on the profinite point. -/
 theorem sfb_integral_point_ring_map_exists (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) (a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X)

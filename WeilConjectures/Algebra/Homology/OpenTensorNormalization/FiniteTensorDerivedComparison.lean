@@ -33,7 +33,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Pinned tensor transport for finite realizations
 
-Source: Stacks 03EK, 06YN and 06YU.
+## References
+
+* Stacks Project, Tags 03EK, 06YN and 06YU
 -/
 
 @[expose] public noncomputable section

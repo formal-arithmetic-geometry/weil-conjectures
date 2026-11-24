@@ -25,7 +25,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
-/-- The representative square. (blueprint: lem-sf-finite-restriction-representative-square) -/
+/-- The representative square. -/
 structure SquareEq (P Q : CochainComplex (FiniteModules A X) ℤ) : Prop where
   /-- The equation. -/
   eq :

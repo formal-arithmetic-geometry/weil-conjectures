@@ -9,8 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Normalization of derived direct-image composition units
-Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: lem-pc-normalized-direct-image-square-unit-comp-normalization).
+
+## References
+
+* [Stacks, Tag 0D5T]
 -/
 @[expose] public section
 noncomputable section
@@ -65,10 +67,8 @@ private theorem schemeNormalizedDirectImageCompIso_eq
       Classical.choose (RingedSpace.exists_derivedModuleDirectImageComposition
         s.toLRSHom.toShHom t.toLRSHom.toShHom) := rfl
 
-/-- The fixed composition comparison converts the ringed-space unit to the scheme unit.
-Source: Stacks Project, Cohomology, Tag 0D5T.
-(blueprint: lem-pc-normalized-direct-image-square-unit-comp-normalization).
--/
+/-- The fixed composition comparison converts the ringed-space unit to the scheme unit
+(Stacks, Tag 0D5T). -/
 theorem normalizedDirectImageCompUnit {A B C : Scheme.{u}} (s : A ⟶ B) (t : B ⟶ C)
     (K : HomotopyCategory (SheafOfModules.{u} (moduleRings A.toRingedSpace)) (.up ℤ)) :
     (RingedSpace.moduleDirectImage (s ≫ t).toLRSHom.toShHom).rightDerivedFunctorUnit.app K ≫

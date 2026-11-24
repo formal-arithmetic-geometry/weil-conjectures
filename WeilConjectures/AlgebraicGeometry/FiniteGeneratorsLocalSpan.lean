@@ -12,10 +12,12 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 import WeilConjectures.CategoryTheory.FiniteSectionsEpiLift
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
-/-! # Local linear expressions in finite generating sections
+/-!
+# Local linear expressions in finite generating sections
 
-Source: Stacks Project, Modules on Sites, finite type modules, and algebraization Tag 099E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Modules on Sites, finite type modules, and Tag 099E
 -/
 
 @[expose] public noncomputable section
@@ -29,13 +31,7 @@ open scoped BigOperators
 namespace SheafOfModules
 
 /-- A finite family of local sections is locally a linear combination of any finite family
-of global generating sections, on one common covering sieve.
-Source: Stacks Project, Tag 099E, equality of the section ideals after refinement.
-(auxiliary; not a blueprint node).
-
-Proof: lift the chosen sections simultaneously through the epimorphism from the finite
-free module sheaf. Express each lifted free section in its finite coordinate basis and
-apply the epimorphism. The image of the i-th basis section is the i-th generator. -/
+of global generating sections, on one common covering sieve (Stacks, Tag 099E). -/
 theorem exists_cover_linearCombination_generators
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}} (M : SheafOfModules.{u} R)

@@ -11,8 +11,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionNormalization
 
 /-! # Transport of the adjunction to the original derived-pullback counit
 
-Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5.
-(blueprint: lem-pc-original-counit-adjunction-transport).
+## References
+
+* [Stacks, Tag 06YJ]
+* [Stacks, Tag 09T5]
 -/
 
 @[expose] public section
@@ -32,15 +34,7 @@ variable [∀ Z : Scheme.{u},
 -- Comparing normalized adjunctions compares the shared localization instances.
 /-- The legacy pullback adjunction is the original-counit adjunction transported
 back along the unique change of universal counit. This equation records the
-necessary transport; the two adjunctions need not be literally equal.
-
-Proof: both adjunctions satisfy the representative Hom equation for the legacy
-counit. For the transported original adjunction, the inverse counit-comparison
-isomorphism replaces that counit by the original one. Apply uniqueness of normalized
-derived adjunctions: their counits coincide after the right-derived unit, and the
-absolute right-derived universal property makes the counits equal.
-Source: Stacks Project, Cohomology, Tag 06YJ; Derived Categories, Tag 09T5
-(blueprint: lem-pc-original-counit-adjunction-transport). -/
+necessary transport; the two adjunctions need not be literally equal. -/
 theorem schemeHomPullbackAdjunction_eq_original_transport {T S : Scheme.{u}} (g : T ⟶ S) :
     schemeHomPullbackAdjunction g =
       (schemeHomOriginalPullbackAdjunction g).ofNatIsoLeft

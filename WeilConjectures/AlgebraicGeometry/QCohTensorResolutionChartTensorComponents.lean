@@ -51,16 +51,7 @@ theorem tensorResolutionMapExtendIso_inv_f
   rfl
 
 -- Tensor-resolution comparisons require substantial definitional reduction.
-/-- The chart tensor comparison on an original degree of the projective resolution.
-
-After moving the extension isomorphism through the tilde/tensor comparison, use
-the flip isomorphism and the `ιMapBifunctor` naturality square.  The degree-zero
-component of the single-object comparison is the chart model followed by the
-inverse single-object identification; the tensor sign is one because the second
-degree is zero.  The final two morphisms coincide because
-`(F.mapHomologicalComplex c).obj K |>.X i` is `F.obj (K.X i)` and
-`CochainComplex.singleFunctor C 0` is `HomologicalComplex.single C (.up ℤ) 0`.
--/
+/-- The chart tensor comparison on an original degree of the projective resolution. -/
 theorem tensorResolutionChartTensorIso_f {Y : Scheme.{u}}
     (N : Y.Modules) [N.IsQuasicoherent]
     (U : Y.affineOpens) (MA NA : ModuleCat.{u} (Γ(Y, U.1) : Type u))

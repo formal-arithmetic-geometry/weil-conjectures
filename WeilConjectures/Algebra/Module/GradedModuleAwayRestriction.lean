@@ -14,9 +14,17 @@ import WeilConjectures.Algebra.Module.GradedModuleAwayComparison
 /-!
 # Restriction maps between degree-zero graded module localizations
 
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open),
-parts (1)(a),(c),(d),(e),(g),(h); Algebra, Section 00JM
-(blueprint: lem-weil-pbc-graded-module-away-restriction).
+## Implementation details
+
+The positive homogeneous elements are indexed by `F`; `Rel f g` records a homogeneous
+relation `g ^ e = a * f`. The submodules `Z f` have exactly the equal-degree fractions
+as carriers; the scalar action is restricted from the ordinary localized module.
+
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), parts
+  (1)(a), (c), (d), (e), (g), (h)
+* [Stacks Project, Tag 00JM](https://stacks.math.columbia.edu/tag/00JM)
 -/
 
 @[expose] public section
@@ -26,33 +34,7 @@ universe u v
 namespace LocalizedModule
 
 set_option linter.unusedVariables false in
-/-- Restriction maps, their principal localization comparisons, and compatibility.
-The positive homogeneous elements are indexed by `F`; `Rel f g` records a homogeneous
-relation `g ^ e = a * f`. The submodules `Z f` have exactly the equal-degree fractions
-as carriers; the scalar action is restricted from the ordinary localized module.
-
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open).
-(blueprint: lem-weil-pbc-graded-module-away-restriction)
-
-Proof:
-1. If the target denominator is nilpotent, its localizations are zero; otherwise the
-   grading determines the degree of the homogeneous multiplier in the relation.
-2. Apply the ordinary module localization universal property: `f` is a unit after
-   localizing at `g`, with inverse `a / g ^ e`. This gives the unique map `lambda`.
-3. Its fraction formula gives the ring map `lambdaS` and semilinearity.
-4. Degree bookkeeping restricts these maps to `rho` and `rhoS` on equal-degree fractions.
-5. Uniqueness gives identity and composition, independently of the relation witnesses.
-6. The image of `u = g ^ deg f / f ^ deg g` is a unit, with inverse
-   `f ^ deg g / g ^ deg f` in the target degree-zero ring.
-7. The module localization universal property gives `theta`, and the ring version gives
-   `thetaS`, with their fraction formula and semilinearity.
-8. For surjectivity, rewrite `y / g ^ n` as `g ^ (n * (deg f - 1)) y / g ^ (n * deg f)`.
-9. For injectivity, a target-zero fraction is killed by a power of `g`, hence by a power
-   of `u` before the second localization. Thus both comparison maps are isomorphisms.
-10. For a third denominator `h`, transitivity and the ring isomorphism make `u` a unit
-    after localizing at `u'`; the fraction formulas give the canonical map `kappa` and
-    the commuting square. These use the three localization definition dependencies.
--/
+/-- Restriction maps, their principal localization comparisons, and compatibility. -/
 theorem gradedModuleAwayRestriction
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

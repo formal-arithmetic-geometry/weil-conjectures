@@ -31,8 +31,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Derived projection formula for a complex with proper support
 
-Source: Stacks Project, Tags 08EV (support reduction) and 08EU (projection formula).
-(blueprint: lem-pc-proper-support-derived-projection-formula)
+## References
+
+* [Stacks, Tag 08EV] (support reduction), [Stacks, Tag 08EU] (projection formula)
 -/
 
 @[expose] public section
@@ -123,26 +124,8 @@ private theorem qc_single (S : Scheme.{u})
     · exact DerivedCategory.isZero_of_isGE _ 0 n hn
     · exact DerivedCategory.isZero_of_isLE _ 0 n hn
 
-/-- Proper support permits the derived projection formula without assuming f quasi-compact.
-Source: Stacks Project, Tag 08EV, proof, support reduction and first displayed equality;
-Tag 08EU.
-(blueprint: lem-pc-proper-support-derived-projection-formula)
-
-Proof: Boundedness gives finitely many nonzero cohomology sheaves. Their supports
-have proper union T over S, hence T is quasi-compact. Choose a quasi-compact open
-j:U -> X containing T. Since S is Noetherian and f is locally of finite type,
-X is locally Noetherian and f|U is quasi-compact and quasi-separated. Restriction
-is exact; the supported-open comparison and composition of derived direct images
-identify Rf*E with R(f|U)*(E|U). Coherence implies quasi-coherence here. For a
-quasi-coherent F, apply Tag 08EU on U to obtain the projection isomorphism.
-Derived tensor and pullback commute with open restriction. The cohomological
-support of E tensor^L Lf*(F[0]) is contained in T: its restriction outside T is
-zero because E restricts to zero and tensor preserves zero. Thus the same
-supported-open comparison identifies its direct image from U with that from X.
-Compose these comparisons with the projection isomorphism on U. The result is
-an isomorphism of the two displayed objects for the fixed derived localizations
-on X and S; auxiliary localizations on U are transported by their equivalences.
-No Tor bound is used in this argument. -/
+/-- Proper support permits the derived projection formula without assuming `f` quasi-compact.
+(Stacks, Tags 08EV, 08EU) -/
 theorem nonempty_properSupport_derivedProjection_iso
     (S : Scheme.{u}) [IsNoetherian S]
     (X : Scheme.{u}) (f : X ⟶ S) [LocallyOfFiniteType f]

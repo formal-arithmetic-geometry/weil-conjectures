@@ -19,9 +19,11 @@ set_option linter.privateModule false
 
 /-! # Transport of a module Hom comparison to the one-point ring site
 
-Source: Stacks Project, more-algebra.tex, equation-base-change-RHom and
-Lemma 0A6A; the one-point-site realization used in the parent statement.
-(auxiliary; not a blueprint node)
+The base-change comparison for `RHom` of modules, realized on the one-point ring site.
+
+## References
+
+* Stacks Project, Tag 0A6A
 -/
 
 @[expose] public section

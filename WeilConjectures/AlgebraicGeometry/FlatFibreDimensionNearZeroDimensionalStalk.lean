@@ -18,8 +18,9 @@ import WeilConjectures.RingTheory.DepthLeSupportDimension
 
 /-! # Constant fibre dimension near a zero-dimensional fibre stalk
 
-Source: Stacks Project, Tags 045U, 02NM and 02NJ.
-(blueprint: lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk)
+## References
+
+* Stacks Project, Tags 045U, 02NM and 02NJ
 -/
 
 @[expose] public section
@@ -32,28 +33,7 @@ namespace AlgebraicGeometry
 
 The local ring dimension at x is zero, whereas the local *topological* dimension of
 the fibre near x is n. These numbers need not agree: at the generic point of an
-affine line they are zero and one, respectively.
-
-Source: Stacks Project, Tags 045U (openness), 02NM (relative dimension decomposition),
-and 02NJ (equidimensional fibres).
-Proof: Restrict f over U. Identify its fibre at f(x) with the original fibre, using
-the pullback square for restriction and the residue-field isomorphism at a point
-of an open subscheme. This identifies the fibre stalk at x with the given stalk.
-The fibre is locally of finite type over a field, hence locally Noetherian. Its
-local ring at x has depth at most its Krull dimension by the depth-support bound.
-Its dimension is zero and depth is nonnegative, so its depth equals its dimension;
-thus this Noetherian local ring is Cohen-Macaulay. By Tag 045U the Cohen-Macaulay locus is
-open. Restrict to that locus; the resulting morphism is flat, locally finitely
-presented and has Cohen-Macaulay fibres. Tag 02NM decomposes this locus into open
-and closed pieces of relative dimension n. Take the piece containing x, and map
-it into X by the two open restriction inclusions, giving V. Its image lies over U.
-The fibres of this piece are equidimensional of dimension n by Tag 02NJ. Every
-nonempty open neighbourhood in such a fibre has dimension n, so its local
-topological dimension at each point is n. The fibre of the piece is an open
-subscheme of the original fibre, and local topological dimension is unchanged by
-an open embedding. These identifications give the equality for every y in V.
-Empty schemes and the empty base open have no x satisfying the hypotheses.
-(blueprint: lem-sbc-flat-fibre-dimension-near-zero-dimensional-stalk) -/
+affine line they are zero and one, respectively. -/
 theorem exists_constant_fibre_dimension_neighbourhood_of_stalk_dimension_zero
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)]

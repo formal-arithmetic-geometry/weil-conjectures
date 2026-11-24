@@ -31,7 +31,11 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Derived extension from one coefficient level
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 06XN, 06YS, 06YT, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -50,10 +54,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)
 
-/-- Flat-term K-flat complexes resolve every level complex.
-Source: Stacks 06YS (blueprint: lem-pur-system-single-derived-extension).
-Proof: use the coefficient-universe K-flat resolution and convert its tensor-exact
-terms to the site-flat predicate using the tensor identification. -/
+/-- Flat-term K-flat complexes resolve every level complex. -/
 theorem systemLevel_kFlatResolution (K : CochainComplex (systemLevel B n) ℤ) :
     ∃ (L : CochainComplex (systemLevel B n) ℤ) (f : L ⟶ K),
       systemLevelKFlat B n L ∧ QuasiIso f := by
@@ -62,12 +63,7 @@ theorem systemLevel_kFlatResolution (K : CochainComplex (systemLevel B n) ℤ) :
   exact ⟨P, q, ⟨hP, fun i ↦ (exactFunctor _ _).prop_of_iso
     (siteSheafTensorRightIso (B.obj (op n)) (P.X i)).symm (hflat i)⟩, hq⟩
 
-/-- The singleton extension preserves quasi-isomorphisms between its resolving objects.
-Source: Zheng 4.1; Stacks 06YT
-(blueprint: lem-pur-system-single-derived-extension).
-Proof: below n its evaluated complex is ordinary scalar extension, which preserves
-quasi-isomorphisms between K-flat objects. Above n both evaluated complexes vanish.
-Joint detection by exact evaluations then gives the strict quasi-isomorphism. -/
+/-- The singleton extension preserves quasi-isomorphisms between its resolving objects. -/
 theorem systemSingle_preserves {K L : CochainComplex (systemLevel B n) ℤ} (f : K ⟶ L)
     (hK : systemLevelKFlat B n K) (hL : systemLevelKFlat B n L) (hf : QuasiIso f) :
     QuasiIso (((systemSingleFunctor S T B n).mapHomologicalComplex (.up ℤ)).map f) := by
@@ -96,8 +92,7 @@ theorem systemSingle_preserves {K L : CochainComplex (systemLevel B n) ℤ} (f :
 
 /-- The determined normalized derivation of the fixed ordinary singleton adjunction.
 Keeping the selected derivation named prevents repeated reduction of its resolving-class
-construction when comparing fields. Source: Zheng 4.1; Stacks 06XN and 0FND
-(blueprint: lem-pur-system-single-derived-extension). -/
+construction when comparing fields. -/
 @[irreducible]
 def systemSingleDerivation (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
@@ -109,10 +104,7 @@ def systemSingleDerivation (S : SystemScalarAssignment (J := J))
       (systemLevel_kFlatResolution B n) (fun f ↦ systemSingle_preserves S T B n f)
 
 /-- The ordinary singleton adjunction has its everywhere-defined normalized derived
-adjunction. Source: Zheng 4.1; Stacks 06XN and 0FND
-(blueprint: lem-pur-system-single-derived-extension).
-Proof: apply normalized derivation to the flat-term K-flat resolving class, using
-the preceding resolution and invariance lemmas. -/
+adjunction. -/
 def systemSingleDerivedExtension (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
     SystemDerivedLeftExtension (systemEvaluation B n) (systemLevelKFlat B n) :=

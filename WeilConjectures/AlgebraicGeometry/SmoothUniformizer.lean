@@ -20,14 +20,6 @@ Let `X` be locally of finite type over a perfect field `k` and `x : X` a point w
 smooth morphism `W₀ ⟶ 𝔸¹_k` such that the pullback of the coordinate is a uniformizer of
 `𝒪_{X,x}` (`AlgebraicGeometry.exists_smooth_polyAffine_irreducible_germ`).
 
-The proof is local algebra at `x`. The ring `B = 𝒪_{X,x}` is formally smooth over `k` (regular
-points are smooth over a perfect field) and so is its residue field. For `π ∈ 𝔪 \ 𝔪²` the map
-`𝔪/𝔪² → κ ⊗ Ω[B⁄k]` is injective, so `dπ ∉ 𝔪 Ω[B⁄k]` and some linear form on the projective
-module `Ω[B⁄k]` sends `dπ` to `1`. This splits `B ⊗ Ω[k[T]⁄k] → Ω[B⁄k]`, and the Jacobi–Zariski
-sequence shows that `B` is formally smooth over `k[T]` via `T ↦ π`
-(`Algebra.FormallySmooth.mvPolynomial_fin_one_of_notMem_sq`). Hence any section with germ `π`
-defines a morphism to `𝔸¹_k` smooth at `x`, and one restricts to its (open) smooth locus.
-
 ## Main results
 
 - `Algebra.FormallySmooth.of_comp_of_mapBaseChange_retraction`: for `R → S → T` with `T` formally
@@ -60,9 +52,7 @@ theorem Module.Projective.exists_linearMap_apply_eq_one {R M : Type*} [CommRing 
       Submodule.smul_mem_smul ((mem_maximalIdeal _).mpr (h i)) trivial
 
 /-- Let `R → S → T` be ring maps with `T` formally smooth over `R`. If the map
-`T ⊗[S] Ω[S⁄R] → Ω[T⁄R]` has a retraction, then `T` is formally smooth over `S`: the
-Jacobi–Zariski sequence `H¹(L_{T/R}) → H¹(L_{T/S}) → T ⊗[S] Ω[S⁄R] → Ω[T⁄R] → Ω[T⁄S] → 0`
-shows that `H¹(L_{T/S}) = 0` and that `Ω[T⁄S]` is a direct summand of `Ω[T⁄R]`. -/
+`T ⊗[S] Ω[S⁄R] → Ω[T⁄R]` has a retraction, then `T` is formally smooth over `S`. -/
 theorem Algebra.FormallySmooth.of_comp_of_mapBaseChange_retraction {R S T : Type*} [CommRing R]
     [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra S T] [IsScalarTower R S T]
     [Algebra.FormallySmooth R T] (l : Ω[T⁄R] →ₗ[T] T ⊗[S] Ω[S⁄R])
@@ -311,11 +301,7 @@ theorem formallySmooth_eval₂Hom_stalk_of_irreducible [PerfectField k] (X : Ove
 /-- **Smooth uniformizers.** Let `X` be locally of finite type over a perfect field `k` and
 `x : X` a point whose local ring is a discrete valuation ring. Then there are an open
 neighbourhood `W₀` of `x` and a smooth morphism `f₀ : W₀ ⟶ 𝔸¹_k` over `k` such that the pullback
-of the coordinate is a uniformizer of `𝒪_{X,x}`.
-
-Any `s` with irreducible germ `sₓ` works: `k[X₀] → 𝒪_{X,x}`, `X₀ ↦ sₓ`, is formally smooth
-(`formallySmooth_eval₂Hom_stalk_of_irreducible`), so `s : V ⟶ 𝔸¹_k` is smooth at `x`, and one
-restricts to its smooth locus. -/
+of the coordinate is a uniformizer of `𝒪_{X,x}`. -/
 theorem exists_smooth_polyAffine_irreducible_germ [PerfectField k] (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] (x : X.left) [IsDomain (X.left.presheaf.stalk x)]
     [IsDiscreteValuationRing (X.left.presheaf.stalk x)] :

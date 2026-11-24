@@ -390,19 +390,9 @@ theorem nonempty_equiv_compactlySupportedCohomology_directImage_two
     Nonempty ((((WeilSheaf.directImage j).obj F).compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
   have := isSeparated_over_of_isOpenImmersion (k₀ := k₀) j
-  have := isAffine_of_isDominant (k₀ := k₀) j
-  have := nonempty_of_isDominant (k₀ := k₀) j
   have : SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀)) := by
     rw [over_eq_comp j]
     exact inferInstanceAs (SmoothOfRelativeDimension (0 + 1) _)
-  have : GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀)) := by
-    rw [over_eq_comp j]
-    have := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
-    have : GeometricallyIrreducible (C ↘ Spec (CommRingCat.of k₀)) :=
-      .of_smooth_of_geometricallyConnected _
-    have : Surjective (j ≫ C ↘ Spec (CommRingCat.of k₀)) :=
-      ⟨fun _ ↦ ⟨Nonempty.some inferInstance, Subsingleton.elim _ _⟩⟩
-    infer_instance
   obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_directImage_of_two_le j F le_rfl
   obtain ⟨e'⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two F hF
   exact ⟨e.symm.trans e'⟩

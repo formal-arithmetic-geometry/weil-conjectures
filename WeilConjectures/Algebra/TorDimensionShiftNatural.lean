@@ -14,8 +14,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
 /-! # Dimension shifting for Tor
 
-Source: literature/stacks-project/algebra.tex, Tags 00LY, 00LZ, 00M0, 00S2
-(blueprint: lem-sc-p1-tor-dimension-shift-natural).
+## References
+
+* Stacks Project, Tags 00LY, 00LZ, 00M0, 00S2
 -/
 
 @[expose] public section
@@ -173,29 +174,7 @@ private def spliceHomologyIso {R : Type u} [CommRing R]
 
 end Helpers
 
-/-- Dimension shifting for Tor along a free presentation, natural in the second variable.
-Source: literature/stacks-project/algebra.tex, Tags 00LY, 00LZ, 00M0, 00S2
-(blueprint: lem-sc-p1-tor-dimension-shift-natural).
-
-Step 1. Fix Mathlib's projective resolution `G` of `K = S.X₁`, independently
-of the second module `N`. Projective resolutions suffice to compute Tor.
-Step 2. Splice it to the given short exact sequence: put `P₀ = F = S.X₂`,
-`Pₙ₊₁ = Gₙ`, with first differential `jη` and augmentation `p` to `M = S.X₃`.
-All terms are projective: `F` is free and the other terms come from `G`.
-Exactness follows from
-`image j = kernel p` and injectivity of `j` (def-weil-pbc-exact-sequence):
-`image (jη) = kernel p` and `kernel (jη) = kernel η = image e₁`;
-all higher degrees inherit exactness from `G`.
-Step 3. Compute Tor using these resolutions (def-weil-pbc-tor-modules).
-For `i ≥ 1`, the three terms around degree `i+1` of `P ⊗ N` are
-`Gᵢ₊₁ ⊗ N → Gᵢ ⊗ N → Gᵢ₋₁ ⊗ N`, with the same differentials as in `G ⊗ N`.
-The identity on `Gᵢ ⊗ N` induces the desired quotient-of-cycles isomorphism.
-Compose with the canonical resolution identifications to obtain `θ N`.
-Step 4. For a map `g : N → N'`, the maps `1 ⊗ g` at these three terms coincide
-in both complexes. They preserve cycles and boundaries, so the quotient isomorphism
-commutes with the induced homology maps. The canonical identifications are functorial
-(def-weil-pbc-tor-modules), giving the displayed naturality equation.
--/
+/-- Dimension shifting for Tor along a free presentation, natural in the second variable. -/
 theorem tor_dimension_shift_natural
     {R : Type u} [CommRing R]
     (S : ShortComplex (ModuleCat.{u} R)) (hS : S.ShortExact)

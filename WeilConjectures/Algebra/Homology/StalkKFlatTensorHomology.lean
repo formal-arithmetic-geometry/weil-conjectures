@@ -25,7 +25,9 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 
 /-! # K-flat tensor homology at a stalk, with transported scalars
 
-(blueprint: lem-pc-stalk-kflat-tensor-homology).
+## References
+
+* Stacks Project, Tags 06YB, 08CG, 09U9, 01AG
 -/
 
 @[expose] public section
@@ -111,20 +113,7 @@ private theorem ringIso_kFlat
   let t := (((curriedTensor _).map₂CochainComplex).mapIso d).app (T.obj P)
   exact fun i ↦ (h i).of_iso (c ≪≫ t)
 
-/-- A K-flat sheaf complex computes tensor homology after transporting its stalk ring.
-Source: Stacks Project, Cohomology of Sheaves, Tags 06YB, 08CG and 09U9;
-Modules Tag 01AG.
-Proof: the stalk criterion makes the stalk of P K-flat. Restriction along the ring
-isomorphism e is an exact tensor equivalence, so it preserves K-flatness. Stalks
-commute with the direct sums and tensor differentials in the total complex and
-with the degree-zero single complex. Exactness of stalks and scalar restriction
-identifies homology with homology of this transported total tensor. The K-flat
-comparison for derived tensor identifies Q of that tensor with Q of the transported
-stalk of P tensor Q of the single transported stalk of F. The latter Q-single is
-the derived single functor. Apply degree-i homology and forget scalars. No replacement
-of P or choice of a module is made: the module is the image of F under S.
-The argument applies to zero rings, zero modules and unbounded complexes.
-(blueprint: lem-pc-stalk-kflat-tensor-homology). -/
+/-- A K-flat sheaf complex computes tensor homology after transporting its stalk ring. -/
 theorem stalk_kFlat_tensor_homology_iso
     (Z : RingedSpace.{u}) (x : Z) (A : CommRingCat.{u})
     (e : A ≅ Z.presheaf.stalk x)

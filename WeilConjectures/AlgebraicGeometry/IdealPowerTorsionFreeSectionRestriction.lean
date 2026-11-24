@@ -15,8 +15,9 @@ import Mathlib.RingTheory.Finiteness.Ideal
 
 /-! # Restriction of ideal-power-torsion-free sections
 
-Source: Stacks Project, Properties, Tag 01PM, localization and injectivity argument.
-(blueprint: lem-pc-ideal-power-torsion-free-section-restriction)
+## References
+
+* Stacks Project, Tag 01PM
 -/
 
 @[expose] public section
@@ -69,29 +70,7 @@ private theorem basicOpen_le_surjective_stalk {X : Scheme.{u}} {I : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to the ideal complement is injective for an ideal-power-torsion-free module.
-
-Source: Stacks Project, Properties, Tag 01PM, localization and injectivity argument.
-(blueprint: lem-pc-ideal-power-torsion-free-section-restriction)
-
-Proof: Subtract two sections with equal restriction to W intersect U. Cover W by
-all its affine subopens A. Let z be the restricted difference on A and J the
-finite ideal which is the section image of I. Every f in J has D(f) inside U:
-its germ lies in the ideal stalk and is invertible, so that stalk inclusion is
-surjective. Thus z vanishes on D(f); affine module localization gives a power
-of f killing z. Let L be the kernel of the linear map a ↦ a • z. Then J is
-contained in the radical of L. Finite generation of J gives d with J^d contained
-in L. The proved affine-power section formula identifies the image of the
-recursive power inclusion with J^d, so every power section on A kills z.
-For a section b of the power on D(g), clear a denominator to write g^k b as
-the restriction of a section on A. Naturality of the inclusion and scalar action
-shows g^k kills the product of the image of b with z restricted to D(g).
-Since g is invertible on D(g), that product is zero. Cover every subopen V of A
-by such D(g) and use sheaf separation to get the local annihilation condition
-required by htf. It gives z=0 on A. Separation on the affine cover of W gives
-the original difference zero. If J=0 its first power is contained in L; if J is
-the unit ideal restriction is the identity. Empty opens and the zero scheme are
-handled by the same sheaf separation arguments on empty covers. No compactness
-is needed: each affine open has its own exponent d. -/
+(Stacks, Tag 01PM) -/
 theorem ideal_power_torsionFree_section_restriction
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 
 /-! # Bounded direct image and arbitrary ring coefficients
 
-Source: Stacks Project, Tags 03FD and 072W.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
+## References
+
+* Stacks Project, Tags 03FD and 072W.
 -/
 
 @[expose] public section
@@ -33,20 +34,17 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- Forget the scalar action on an etale sheaf.
-Source: Stacks 03FD (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+/-- Forget the scalar action on an étale sheaf. -/
 abbrev ringAbelianForget (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :=
   sheafCompose X.smallEtaleTopology
     (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
 
-/-- Scalar forgetting preserves addition on morphisms, sectionwise.
-Source: Stacks 03FD (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+/-- Scalar forgetting preserves addition on morphisms, sectionwise. -/
 instance ringAbelianForget_additive (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :
     (ringAbelianForget Λ X).Additive where
   map_add := by intro F G α β; ext W; rfl
 
-/-- Scalar forgetting preserves finite limits, since presheaf inclusion reflects them.
-Source: Stacks 03DA (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+/-- Scalar forgetting preserves finite limits (Stacks, Tag 03DA). -/
 instance ringAbelianForget_preservesFiniteLimits
     (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :
     PreservesFiniteLimits (ringAbelianForget Λ X) := by
@@ -59,8 +57,7 @@ instance ringAbelianForget_preservesFiniteLimits
   exact ⟨fun J _ ↦ preservesLimitsOfShape_of_reflects_of_preserves _
     (sheafToPresheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})⟩
 
-/-- Scalar forgetting preserves colimits via its coefficient coextension right adjoint.
-Source: Stacks 03DB (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+/-- Scalar forgetting preserves colimits (Stacks, Tag 03DB). -/
 instance ringAbelianForget_preservesColimits
     (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u}) :
     PreservesColimitsOfSize.{u + 1, u + 1} (ringAbelianForget Λ X) := by
@@ -84,25 +81,22 @@ instance ringAbelianForget_preservesColimits
 
 set_option backward.defeqAttrib.useBackward true
 
-/-- Direct image commutes definitionally with forgetting coefficients.
-Source: Stacks 072W (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+/-- Direct image commutes definitionally with forgetting coefficients (Stacks, Tag 072W). -/
 noncomputable def ringAbelianLowerStarIso
     (Λ : Type (u + 1)) [Ring Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (f)_*[ModuleCat.{u + 1} Λ] ⋙ ringAbelianForget Λ Y ≅
       ringAbelianForget Λ X ⋙ (f)_*[AddCommGrpCat.{u + 1}] := Iso.refl _
 
-/-- The canonical comparison determined by the units of right derived direct image.
-Source: Stacks 03FD (blueprint: lem-sfb-ring-bounded-derived-forget-comparison). -/
+/-- The canonical comparison determined by the units of right derived direct image
+(Stacks, Tag 03FD). -/
 noncomputable def ringAbelianDerivedLowerStarComparison
     (Λ : Type (u + 1)) [Ring Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R+((f)_*[ModuleCat.{u + 1} Λ]) ⋙ D+(ringAbelianForget Λ Y) ⟶
       D+(ringAbelianForget Λ X) ⋙ R+((f)_*[AddCommGrpCat.{u + 1}]) :=
   Functor.rightDerivedFunctorPlusBaseChange (ringAbelianLowerStarIso Λ f).hom
 
-/-- The Cech criterion on all etale objects gives abelian evaluation acyclicity.
-Source: Stacks 03FD, second proof paragraph, via 03FC and 03F9.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
--/
+/-- Evaluation at any étale object is acyclic, as abelian sheaves, on the underlying abelian
+sheaf of an injective module sheaf (Stacks, Tag 03FD). -/
 private theorem ringAbelianForget_injective_evaluation_acyclic
     (Λ : Type (u + 1)) [Ring Λ] (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective G]
@@ -165,22 +159,8 @@ private theorem ringAbelianForget_injective_evaluation_acyclic
       (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (Opposite.op W)).rightDerived
         (n + 1)).mapIso (eAb.app G).symm)
 
-/-- The canonical derived direct-image coefficient comparison is invertible.
-
-Source: Stacks Project, Tag 03FD, second paragraph of its proof, and Tag 072W.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
-
-Proof: Identify a ModuleCat-valued sheaf with a module over the constant ring
-sheaf, preserving its underlying abelian sheaf and injectivity. Tag 03FD gives
-vanishing of positive abelian derived evaluation on every etale object for an
-injective module sheaf I. By Tag 072W, the higher direct images of I_ab are the
-sheafifications of V ↦ H^n(X ×_Y V, I_ab). Each value vanishes for n > 0, so
-I_ab is acyclic for f_* on abelian sheaves. The coefficient forgetful sheaf
-functors are exact, and f_* commutes with them by evaluation. Apply
-Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic to this square.
-Its hypothesis is precisely the preceding acyclicity. This proves invertibility
-of the canonical unit-compatible comparison on all bounded below complexes,
-without asserting that the underlying abelian sheaf of I is injective. -/
+/-- The canonical derived direct-image coefficient comparison is invertible
+(Stacks, Tags 03FD, 072W). -/
 theorem isIso_ringAbelianDerivedLowerStarComparison
     (Λ : Type (u + 1)) [Ring Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (ringAbelianDerivedLowerStarComparison Λ f) := by
@@ -215,12 +195,8 @@ theorem isIso_ringAbelianDerivedLowerStarComparison
 
 attribute [instance] isIso_ringAbelianDerivedLowerStarComparison
 
-/-- Classical higher direct images commute with forgetting the scalar action.
-Source: Stacks 03FD and 072W.
-(blueprint: lem-sfb-ring-bounded-derived-forget-comparison)
-
-Proof: apply homology to the proved bounded derived comparison, using exactness of
-forgetting and its compatibility with single complexes. -/
+/-- Classical higher direct images commute with forgetting the scalar action
+(Stacks, Tags 03FD, 072W). -/
 noncomputable def ringAbelianHigherDirectImageIso
     (Λ : Type (u + 1)) [Ring Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℕ) :
     (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerived q ⋙ ringAbelianForget Λ Y ≅

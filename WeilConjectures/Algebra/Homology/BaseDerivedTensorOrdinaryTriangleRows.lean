@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorOrdinaryBoundarySquare
 
 /-! # The ordinary universal derived tensor triangle row
 
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1.
+## References
+
+* Stacks Project, Tag 06Y6, Lemma 15.61.1.
 -/
 
 @[expose] public section
@@ -129,30 +131,7 @@ private theorem ordinary_arrow_square
   rw [ho, HomologicalComplex.homologyMap_comp]
 
 /-- The exact row before the final extension of coefficients, together with its
-ordinary universal-counit squares. There is no flatness hypothesis and no localized map.
-
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1 (exactness and choice independence).
-Proof: restriction of scalars A to R is exact, so it sends the distinguished
-localized triangle to a distinguished triangle in D(R). Apply the exact total
-left derived extension R to B supplied by exists_baseDerivedExtension_resolution.
-Universal uniqueness identifies each model's derived functor with this common
-functor, compatibly with its counit. Conjugate its long exact cohomology sequence
-by the cohomologyIso identifications of the three models in degrees i and i+1.
-The three same-degree maps commute with multiplication by A by functoriality.
-The boundary also commutes with it: multiplication gives an endomorphism of the
-input triangle and the homology boundary is natural in that endomorphism.
-The cohomologyIso_smul equations identify these endomorphisms with a tensor 1.
-B-linearity and induction on pure tensors give A tensor_R B-linear maps.
-Faithful exact restriction to B reflects the exactness of the resulting row.
-For the counit squares, compute on K-flat resolutions: the augmentation is a
-morphism of triangles commuting with the shift. Universal uniqueness transports
-these identities to the prescribed model counits. Apply homology; ordinaryIso
-is natural and compatible with shifts since its pure-tensor formula fixes it.
-Substitution of comparison_eq proves the three arrow squares and boundary square.
-Only the image of T in D(A) need be distinguished: neither T nor its ordinary
-extension must be termwise exact. The construction applies unchanged to zero
-rings, zero complexes, arbitrary degrees and unbounded complexes.
-(blueprint: lem-pc-base-derived-tensor-ordinary-triangle-rows). -/
+ordinary universal-counit squares. There is no flatness hypothesis and no localized map. -/
 theorem exists_baseDerivedTensorCohomologyModel_ordinary_triangle_rows
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
-/-! # Tensor interchange for the inverse pullback-square comparison
-
-(blueprint: lem-route-standard-section-pasting-base-change-tensor-interchange).
+/-! # Tensor interchange for the inverse pullback-square comparison.
 -/
 
 @[expose] public section
@@ -21,12 +19,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 /-- The inverse pullback-square comparison respects inverse tensor constraints.
-Source: composition coherence Step 1, tensor-compositor calculation in Step 6
-(blueprint: lem-route-standard-section-pasting-base-change-tensor-interchange).
-Proof: the forward pullback-square comparison respects the forward tensor constraints
-by the two pullback-composition tensor equations. Express that equality as an equality
-of isomorphisms and invert it. Precompose with the tensor constraint for v; its inverse
-cancels. This works for every commuting square, including empty schemes.
 -/
 theorem sectionPullbackTensorInterchange
     (A : Type v) [Category.{u + 1} A] [Abelian A]

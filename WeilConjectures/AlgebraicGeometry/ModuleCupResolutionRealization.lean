@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCupResolutionAugmentation
 
 /-! # Realizing a resolution pairing in the derived category
 
-Source: Stacks Project, Section 20.31, Tags 0FKU and 0FKV.
-(blueprint: lem-sc-module-cup-resolution-realization)
+## References
+
+* Stacks Project, Section 20.31, Tags 0FKU and 0FKV.
 -/
 
 @[expose] public section
@@ -39,25 +40,8 @@ attribute [local instance] cupRealizationMonoidalCategory cupRealizationSymmetri
   cupRealizationDerivedMonoidal cupRealizationQLax
 
 /-- Every resolution pairing has a cochain realization, and its derived morphism
-has the same H-zero map as the canonical derived-to-ordinary tensor comparison.
-Source: Stacks Project, Section 20.31 (0FKU), construction preceding Lemma 20.31.3,
-and Tag 06YH, the degree-zero calculation for derived tensor.
-(blueprint: lem-sc-module-cup-resolution-realization)
-Proof: the tensor universal property sheafifies the restriction-compatible
-sectionwise bilinear maps in each bidegree. On the direct-sum total tensor,
-assemble these maps using the coproduct universal property. The signed Leibniz
-condition is precisely the cochain-map equation, including degree zero and the
-zero terms in negative degrees. This constructs t with the displayed section
-formula. Transport through the localized augmentations and precompose with the
-lax tensor comparison of Q, giving D.derivedMap t. To compute H-zero, use a
-nonpositive flat model for F[0]. The tensor augmentation identifies its H-zero
-with the ordinary tensor by right exactness, as in
-moduleCup_hzero_identification. The transport formula in
-moduleCup_canonical_hzero_identification identifies this calculation with the
-canonical comparison. Naturality of the lax comparison and D.augmentation_pair
-say that the H-zero map is the identity on F tensor G under this identification.
-This gives the displayed equality; no statement comparing two resolutions or
-positive-degree cohomology products is used. -/
+has the same H-zero map as the canonical derived-to-ordinary tensor comparison
+(Stacks, Tags 0FKU and 06YH). -/
 theorem moduleCup_resolution_realization {F G : X.Modules} (D : CupResolutionPairing F G) :
     let F₀ := (CochainComplex.singleFunctor
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F

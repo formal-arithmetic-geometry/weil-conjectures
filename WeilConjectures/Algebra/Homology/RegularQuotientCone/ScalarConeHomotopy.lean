@@ -18,9 +18,10 @@ a natural endomorphism `s` of the identity of the abelian category, and let
 cone boundary of `τ` followed by the comparison `P ⟶ X`. Consequently this strict map is a
 quasi-isomorphism.
 
-Source: Stacks Tags 014I, 014K and 06YP; the octahedral comparison of the principal cone with
-the short exact sequence of a surjective scalar.
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms). -/
+## References
+
+* Stacks Project, Tags 014I, 014K, 05SS and 06YP
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,9 +36,7 @@ variable {𝒞 : Type u} [Category.{v} 𝒞] [Abelian 𝒞]
   (τ : 𝟭 (CochainComplex 𝒞 ℤ) ⟶ 𝟭 (CochainComplex 𝒞 ℤ))
   {A X : CochainComplex 𝒞 ℤ} (ε : A ⟶ X)
 
-/-- If the scalar vanishes on `A⟦1⟧`, it is killed by the cone boundary of `ε : A ⟶ X`.
-Source: Stacks Tag 014I; naturality of the scalar
-(auxiliary; not a blueprint node). -/
+/-- If the scalar vanishes on `A⟦1⟧`, it is killed by the cone boundary of `ε : A ⟶ X`. -/
 theorem scalar_triangle_mor₃_zero (hA : τ.app (A⟦(1 : ℤ)⟧) = 0) :
     τ.app (mappingCone ε) ≫ (triangle ε).mor₃ = 0 := by
   have h : (triangle ε).mor₃ ≫ τ.app (A⟦(1 : ℤ)⟧) =
@@ -46,9 +45,7 @@ theorem scalar_triangle_mor₃_zero (hA : τ.app (A⟦(1 : ℤ)⟧) = 0) :
 
 /-- The strict scalar-cone augmentation of the fiber model, followed by `ε⟦1⟧`, is homotopic to
 minus the scalar-cone boundary followed by the shifted comparison to `X`. The homotopy has
-components the negated shifted second projection of `mappingCone ε`.
-Source: Stacks Tags 014I and 014K; explicit homotopies between maps out of a mapping cone
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms). -/
+components the negated shifted second projection of `mappingCone ε`. -/
 def scalarConeHomotopy (s : 𝟭 𝒞 ⟶ 𝟭 𝒞)
     (hτ : ∀ (K : CochainComplex 𝒞 ℤ) (n : ℤ), (τ.app K).f n = s.app (K.X n))
     (hε : ε ≫ τ.app X = 0) (hA : τ.app (A⟦(1 : ℤ)⟧) = 0) :
@@ -78,14 +75,7 @@ def scalarConeHomotopy (s : 𝟭 𝒞 ⟶ 𝟭 𝒞)
 open DerivedCategory Pretriangulated in
 /-- For a short exact sequence `0 ⟶ A ⟶ X ⟶ X ⟶ 0` with second map the scalar, the strict
 scalar-cone augmentation `Cone(τ_P) ⟶ A⟦1⟧` of the fiber model `P = mappingCone ε` is a
-quasi-isomorphism.
-Source: Stacks Tags 014I, 014K and 05SS; a morphism from the scalar-cone triangle to the
-rotated short-exact-sequence triangle which is invertible on the first two objects
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms).
-
-Proof: the comparison `p : P ⟶ X` is a quasi-isomorphism and commutes with the scalar. The
-connecting morphism of the short exact sequence is the cone boundary of `ε` precomposed with
-the inverse of `p`, and the third square commutes by the homotopy `scalarConeHomotopy`. -/
+quasi-isomorphism. -/
 theorem isIso_Q_map_scalarConeDesc [HasDerivedCategory 𝒞] (s : 𝟭 𝒞 ⟶ 𝟭 𝒞)
     (hτ : ∀ (K : CochainComplex 𝒞 ℤ) (n : ℤ), (τ.app K).f n = s.app (K.X n))
     (hε : ε ≫ τ.app X = 0) (hA : τ.app (A⟦(1 : ℤ)⟧) = 0)

@@ -57,7 +57,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 
 /-! # Deriving a normalized finite inverse-image comparison
 
-Source: Zheng, Construction 5.15; Stacks Tags 0D6D and 0G7E.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0D6D, 0G7E
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15
 -/
 
 @[expose] public noncomputable section

@@ -59,8 +59,11 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWh
 
 Construct the site square and tensor models explicitly. Open-support results make
 the adjunction transposes invertible; their adjunct equations then determine both
-restriction formulas. Source: Stacks 03DI, 0F6Z, 0E8I and 0GL1
-(blueprint: lem-sf-open-tensor-normalization).
+restriction formulas.
+
+## References
+
+* Stacks Project, Tags 03DI, 0F6Z, 0E8I and 0GL1
 -/
 
 -- After pruning, this module only keeps private declarations.

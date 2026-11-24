@@ -88,10 +88,8 @@ lemma limit_π_adicCompletionToTowerLimit
 `ϖ`-adically complete ring and `(Mₙ)` a tower of `Λ`-modules with `ϖⁿ⁺¹ Mₙ = 0`, together with
 exact sequences `A ⧸ ϖⁿ⁺¹ ↪ Mₙ ⟶ B` (given by `αₙ : A ⟶ Mₙ` with kernel `ϖⁿ⁺¹ A` and
 `βₙ : Mₙ ⟶ B`) compatible with the transitions, `βₙ` intertwining the transition of `M` with
-the multiplication by `ϖ`. If `A ⧸ ϖ A` is finite and the `ϖ`-torsion `B[ϖ]` is finitely
-generated, then `lim Mₙ` is a finite `Λ`-module.
-
-This applies to `Mₙ = Hⁱ(L ⊗ᴸ Λ ⧸ ϖⁿ⁺¹)`, `A = Hⁱ(L)` and `B = Hⁱ⁺¹(L)` for a complex `L`. -/
+the multiplication by `ϖ`. If `A ⧸ ϖ A` is finite and `B[ϖ]` is finitely generated, then
+`lim Mₙ` is a finite `Λ`-module. -/
 theorem finite_limit_of_exact_tateSubmodule [IsNoetherianRing Λ]
     [IsAdicComplete (Ideal.span {ϖ}) Λ]
     (hα : ∀ (n : ℕ) (a : A), M.map (homOfLE (Nat.le_add_right n 1)).op (α (n + 1) a) = α n a)

@@ -11,8 +11,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Natural tensor comparison for continuous cocontinuous restriction
 
-Source: Stacks Project, Tags 01CD and 03DH.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 01CD and 03DH.
+* Stacks Project, Tag 04IX
 -/
 
 @[expose] public section
@@ -76,8 +78,7 @@ theorem tensor_square {D : Type*} [Category* D] [MonoidalCategory D]
     (f ⊗ₘ g) ≫ (a' ⊗ᵢ b').hom = (a ⊗ᵢ b).hom ≫ (f' ⊗ₘ g') := by
   simp only [tensorIso_hom, tensorHom_comp_tensorHom, ha, hb]
 
-/-- Presheaf tensor restriction is the inverse monoidal structure map.
-Source: Stacks 01CD (auxiliary; not a blueprint node). -/
+/-- Presheaf tensor restriction is the inverse monoidal structure map. -/
 noncomputable def slicePresheafTensorIso
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (F : C ⥤ D) (R : Dᵒᵖ ⥤ CommRingCat.{u})
@@ -113,15 +114,13 @@ set_option quotPrecheck false in
 local notation "R'" => (F.sheafPushforwardContinuous CommRingCat.{u} J K).obj R
 
 /-- The restriction functor with its commutative coefficient sheaf written explicitly.
-This fixes the codomain presentation before installing the monoidal structure.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+This fixes the codomain presentation before installing the monoidal structure. -/
 noncomputable abbrev sliceCommModuleRestriction :
     SheafOfModules.{u} A ⥤ SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj (R')) :=
   sliceModuleRestriction (J := J) F A
 
-/-- The underlying module presheaf of continuous restriction.
-Source: Stacks 04IX (auxiliary; not a blueprint node). -/
+/-- The underlying module presheaf of continuous restriction. -/
 noncomputable def sliceRestrictionUnderlyingIso (M : SheafOfModules.{u} A) :
     (PresheafOfModules.pushforward₀.{u} F (A).obj).obj M.val ≅
       ((sliceCommModuleRestriction (J := J) F R).obj M).val :=
@@ -141,8 +140,7 @@ private theorem sliceRestrictionUnderlyingIso_natural
   ext W x
   rfl
 
-/-- Canonical tensor comparison induced by presheaf restriction and sheafification.
-Source: Stacks 01CD and 03DH (auxiliary; not a blueprint node). -/
+/-- Canonical tensor comparison induced by presheaf restriction and sheafification. -/
 @[irreducible] noncomputable def sliceTensorIso (M N : SheafOfModules.{u} A) :
     letI := monoidalCategory R
     letI := monoidalCategory (R')
@@ -166,11 +164,7 @@ Source: Stacks 01CD and 03DH (auxiliary; not a blueprint node). -/
     T.mapIso (j M ⊗ᵢ j N) ≪≫
     (tensorObjIsoSheafification (R := R') (V.obj M) (V.obj N)).symm
 
-/-- Tensor restriction is natural in both module arguments.
-Source: Stacks 01CD and 03DH (auxiliary; not a blueprint node).
-Proof: Compose the naturality squares for tensor sheafification, continuous
-sheafification restriction, presheaf tensor restriction, and the underlying
-restriction comparison, then invert the final tensor-sheafification square. -/
+/-- Tensor restriction is natural in both module arguments. -/
 theorem sliceTensorIso_natural
     {M M' N N' : SheafOfModules.{u} A} (f : M ⟶ M') (g : N ⟶ N') :
     letI := monoidalCategory R

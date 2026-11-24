@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedStalkCoordinates
 import WeilConjectures.AlgebraicGeometry.OpenRestrictedTensorHomologyTransport
 /-! # Open stalk ring and tensor coordinates
 
-Source: Stacks Project, Tag 0098, stalks of pullback and restriction.
+## References
+
+* Stacks Project, Tag 0098.
 -/
 
 
@@ -121,32 +123,7 @@ variable [∀ Y : Scheme.{u},
 
 
 /-- Compatible ring and chain coordinates for restriction to an arbitrary source open.
-
-Proof: take the open stalk maps of U.ι and pullback.fst for eA and eD.
-The pullback condition identifies U.ι(qz) with g'(pz). Use stalkMap_comp and
-stalkMap_congr_hom to identify the base rings, and the same point of S' for eB.
-These identities give hA and hB. On each tensor inclusion the two tensorMap maps
-agree after transport, which gives hD by tensor induction. The same-germ restriction
-stalk isomorphism is semilinear for eA: represent a scalar and a module germ on a
-common open, use germ_smul and germ_restrictStalkNatIso_hom_app, and identify the
-ring germs using the inverse open stalk map. Invert this natural linear isomorphism
-in every degree to get q; naturality makes it commute with differentials. Define
-t by d tensor x ↦ eD(d) tensor q(x). The compatibility hD makes this balanced;
-use the inverse ring and chain maps to construct its inverse. Its pure tensor
-formula is the penultimate assertion. For the final equation apply the stalk
-pullback germ formula to the adjunction mates defining openTensorRestrictionSquareIso.
-Both resulting chain maps send d tensor a section germ to the same restricted germ
-with coefficient eD(d); tensor induction proves equality. Apply homology and use
-comparisonStalkHomologyIso_naturality. Exact restriction homology and exact stalk
-homology identify the additive restriction map with openDerivedStalkIso followed
-by the image of openRestrictionRepresentativeIso. Its inverse cancels the first
-factor of openRestrictedTensorDerivedIso, leaving precisely the chain map just
-identified. This proves the final equation. No localizedComparison or source
-base-derived tensor cohomology is involved in this statement.
-For the empty open there is no z; top opens, zero rings and zero complexes use
-exactly the same germ and tensor identities.
-Source: Stacks Project, Tag 0098; Mathlib restrictStalkNatIso and its germ formulas.
-(blueprint: lem-pc-open-restricted-tensor-coordinate-data). -/
+No `localizedComparison` or source base-derived tensor cohomology is involved. -/
 theorem exists_openRestricted_tensor_coordinate_data
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

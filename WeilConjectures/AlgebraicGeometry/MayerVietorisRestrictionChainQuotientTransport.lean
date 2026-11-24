@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisRestrictionLocaliza
 
 /-! # Complex localization of the open restriction square
 
-Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: lem-pc-mayer-vietoris-image-restriction-localization).
+## References
+
+* Stacks Project, Tags 08FE, 08BV and 079V.
 -/
 
 @[expose] public section
@@ -85,17 +86,8 @@ private lemma schemeMV_quotient_restriction_app
       (HomotopyCategory.quotient _ _).map (𝟙 _) = _
   rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- Transport of the explicit four-map restriction chain to the homotopy quotient.
-Source: Stacks Project, Tags 08FE and 079V.
-Proof: Expand the chain and the transported direct-image unit. Substitute
-mapDerivedCategoryFactorsh_hom_app for exact restriction on the quotient.
-Use naturality of the quotient comparison on the termwise restriction isomorphism,
-and naturality of the restricted direct-image unit on the restriction quotient
-factor. The quotient factors cancel in adjacent hom/inverse pairs. The inverse
-X-restriction factor is transported by functoriality. This identifies the four-map
-complex chain with the homotopy chain; no normalization of the derived restriction
-comparison is used. The identity holds also for empty and full opens.
-(blueprint: lem-pc-mayer-vietoris-restriction-chain-quotient-transport). -/
+/-- Transport of the explicit four-map restriction chain to the homotopy quotient
+(Stacks, Tags 08FE and 079V). -/
 theorem schemeMV_restriction_chain_quotient_transport
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

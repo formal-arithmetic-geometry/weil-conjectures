@@ -10,10 +10,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePresentationSectionColimit
 import WeilConjectures.AlgebraicGeometry.ProEtaleComparisonSections
 
 /-! # The essential image of the comparison inverse image
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-image.md`
-(blueprint: det-pe-classical-sheaves-image).
 -/
 
 @[expose] public section
@@ -60,29 +56,8 @@ private theorem relativeContinuity_of_classical (X : Scheme.{u})
   exact ⟨by exact h.whiskerEquivalence e.op⟩
 
 /-- A pro-étale sheaf of sets is classical exactly when it comes from the étale site,
-and exactly when the comparison counit is invertible.
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-`sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-image.md`,
-following Bhatt--Scholze, Lemma 5.1.2 (blueprint: theorem-classical-sheaves-essential-image--1).
-
-Proof:
-1. For (1) implies (2), choose an isomorphism from G to the inverse image of F.
-   On every affine presentation, the scheme-general continuity theorem
-   `theorem-classical-sheaves-essential-image--1` makes the canonical restriction
-   cocone for the inverse image a colimit. Naturality of the chosen isomorphism
-   identifies its continuity map with that of G, through the bijections on the
-   limit object and on the colimit of stage sections. The inverse isomorphism
-   induces the inverse colimit map. Thus every continuity map for G is bijective.
-2. For (2) implies (3), `IsClassical` says that the specified restriction cocone
-   on each affine etale presentation is a colimit. Apply
-   `theorem-classical-sheaves-essential-image--1`: the section formula identifies
-   the counit on such a limit object with exactly this restriction map, and
-   affine ind-etale basis coverings detect isomorphisms of sheaves. This gives
-   invertibility of the counit on the arbitrary scheme X.
-3. For (3) implies (1), take F to be the direct image of G under the recorded
-   comparison adjunction. The inverse of its invertible counit supplies the
-   isomorphism from G to the inverse image of F. These three implications give
-   the two displayed equivalences. -/
+and exactly when the comparison counit is invertible
+(Bhatt--Scholze, Lemma 5.1.2). -/
 theorem proEtaleClassicalSheavesImage (X : Scheme.{u})
     (G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) :
     ((∃ F : Sheaf X.smallEtaleTopology (Type (u + 1)),

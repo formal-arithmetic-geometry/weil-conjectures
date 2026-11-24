@@ -17,17 +17,15 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.BifunctorHomHomotop
 /-!
 # Exactness of the signed bifunctor Hom complex on the homotopy category
 
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, termwise-split Hom argument,
-generalized to a separately additive bifunctor; the signed model is
-`CochainComplex.bifunctorHomObj` in
-`WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
-(blueprint: lem-sf-bifunctor-homotopy-exact)
-
 The existing `bifunctorHomHomotopyFunctor H I` takes values in the opposite derived
 category. Its `leftOp` is the functor from the opposite homotopy category to the derived
-category in the node. The source uses the usual opposite triangulation: its shift by
-`m` is the underlying shift by `-m`. The shift structure is existential data, and the
-triangulated assertion uses that same structure.
+category. The opposite triangulation is the usual one: its shift by `m` is the underlying
+shift by `-m`. The shift structure is existential data, and the triangulated assertion
+uses that same structure.
+
+## References
+
+* Stacks Project, Tag 08JC
 -/
 
 @[expose] public section
@@ -500,13 +498,7 @@ private theorem homotopyExact : (bifunctorHomHomotopyFunctor H I).IsTriangulated
 
 end ShiftConstruction
 
-/-- The exact Hom-complex structure with its degree-one inverse recorded on products.
-Source: Stacks Project, Tag 08JC, signed reindexing in the Hom-complex cone calculation.
-(blueprint: lem-sf-bifunctor-homotopy-exact).
-
-The witness is the explicit shift structure used in the proof above. Its inverse at the
-opposite shift one reindexes the source by minus one and multiplies the p-factor by
-`(-1)^p`. Localization contributes its own ordinary shift comparison. -/
+/-- The exact Hom-complex structure with its degree-one inverse recorded on products. -/
 theorem bifunctorHomHomotopyFunctor_leftOp_exact_coordinates
     {A : Type u₁} {B : Type u₂} {C : Type u₃}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C]

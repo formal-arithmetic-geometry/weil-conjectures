@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.StalkInternalHomFinitePresentation
 
 /-! # Spreading two inverse homotopies
 
-Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2).
-(blueprint: lem-sc-perfect-open-stalk-inverse-homotopies-spread).
+## References
+
+* Stacks Project, Tags 09RE, 0BC7 and 00CR.
 -/
 
 @[expose] public section
@@ -66,27 +67,8 @@ private theorem inverse_homotopies_of_natIso
 
 set_option backward.isDefEq.respectTransparency false in
 -- Explicit comparisons avoid unfolding large iterated restriction complex objects.
-/-- Two given inverse homotopies at a stalk spread after shrinking a lifted map.
-Source: Stacks Project, Tag 09RE, affine proof's equality in the homotopy category;
-Tag 0BC7 (2), finite-component homotopy calculation, and Tag 00CR.
-(blueprint: lem-sc-perfect-open-stalk-inverse-homotopies-spread).
-
-Proof: Work on V. Restriction preserves the finite-free retractions
-and the support bounds. For each of the two stalk homotopies only finitely many
-reverse-degree components can be nonzero. Sandwich each component between the
-restricted finite-free retractions, represent its finitely many matrix entries
-by sections on principal opens containing x inside V, and intersect these opens.
-Sandwich the resulting maps back to the complex terms. The two homotopy equations
-in each of the finitely many relevant degrees hold at the stalk. Sandwich their
-errors into the finite free terms and use the germ equality criterion to shrink
-once more until every error entry vanishes. Outside the support intervals the
-terms are zero and the equations hold uniquely. The reverse-degree support gives
-Homotopy.zero. Restrict g to W and identify iterated restriction with restriction
-from U to W through the canonical slice-site comparison; its naturality identifies
-both composites with the stated maps. The same construction handles zero terms,
-disjoint support intervals and arbitrary non-Noetherian rings. No quasi-isomorphism
-hypothesis is used; the two specified homotopies are the input. Affineness of U and V is
-not needed. -/
+/-- Two given inverse homotopies at a stalk spread after shrinking a lifted map
+(Stacks, Tags 09RE, 0BC7 and 00CR). -/
 theorem exists_affine_perfect_open_stalk_inverse_homotopies_spread
     (X : Scheme.{u}) (U : X.Opens) (x : X)
     (P Q : CochainComplex

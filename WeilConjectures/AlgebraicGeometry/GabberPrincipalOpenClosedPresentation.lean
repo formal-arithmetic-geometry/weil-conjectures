@@ -16,7 +16,9 @@ import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-! # A closed presentation of a principal open in a quotient spectrum
 
-Source: Stacks Project, Etale Cohomology, Lemma 09ZC, principal-open step.
+## References
+
+* [Stacks Project, Tag 09ZC](https://stacks.math.columbia.edu/tag/09ZC)
 -/
 
 @[expose] public section
@@ -28,21 +30,8 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- A principal open in the spectrum of a quotient of a normal domain with separably
-closed fraction field is itself a closed subscheme of the spectrum of such a domain.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09ZC, third and fourth sentences.
-
-Proof: Lift `h` to `f` in `R`. If `f = 0`, then `h = 0`; its principal open is the
-empty scheme, whose unique map to `Spec R` is a closed immersion, so take `S = R`.
-If `f` is nonzero, take `S = R_f`. This localization is a domain and integrally closed,
-and its fraction field is isomorphic to that of `R`, hence separably closed. The
-surjection `R_f` onto `(R/I)_h` follows from localization commuting with quotients.
-Its spectrum map is a closed immersion. The spectrum of `(R/I)_h` is isomorphic to
-the open subscheme `D(h)` of `Spec (R/I)`, and composing with this isomorphism gives
-the required closed immersion. For the unit ideal, all the opens are empty; the same
-argument applies without imposing a nontriviality assumption on the quotient.
-(blueprint: lem-weil-pbc-gabber-principal-open-closed-presentation)
--/
+closed fraction field is itself a closed subscheme of the spectrum of such a domain
+(Stacks, Tag 09ZC). -/
 theorem gabber_principal_open_closed_presentation
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     (hsep : IsSepClosed (FractionRing R)) (I : Ideal R) (h : R ⧸ I) :

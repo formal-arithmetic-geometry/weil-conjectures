@@ -15,8 +15,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # Explicit horizontal steps in a total-map cone
 
-Source: Stacks Project, Homology, Tag 012X, first filtration; the columnwise
-mapping-cone refinement in lem-sp-first-quadrant-vertical-cone-filtration.
+## References
+
+* Stacks Project, Homology, Tag 012X (the first filtration)
 -/
 
 @[expose] public section
@@ -30,8 +31,7 @@ variable [∀ L : HomologicalComplex₂ C (ComplexShape.up ℕ)
   (ComplexShape.up ℕ), L.HasTotal (ComplexShape.up ℕ)]
 
 /-- Inclusion of a horizontal summand in the integer extension of a total complex.
-It is zero if the total degree is negative. Source: Stacks 012X, first filtration.
-(blueprint: lem-sp-cone-horizontal-step-stable) -/
+It is zero if the total degree is negative. -/
 noncomputable def coneHorizontalSummand
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))
     (h : ℕ) (n : ℤ) :
@@ -44,8 +44,7 @@ noncomputable def coneHorizontalSummand
   else 0
 
 /-- Source and target summands with horizontal index `h` generate this subobject
-of the cone in degree `n`. Source: Stacks 012X, columnwise cone refinement.
-(blueprint: lem-sp-cone-horizontal-step-stable) -/
+of the cone in degree `n`. -/
 noncomputable def coneHorizontalImage
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : A ⟶ B) (h : ℕ) (n : ℤ) :
@@ -63,8 +62,7 @@ noncomputable def coneHorizontalImage
 
 /-- The horizontal tail is the finite sum of the source and target cone summands
 whose horizontal index is at least `p`. The source total degree is `n+1`, so
-indices below `n+2` suffice, also at `n=-1`. Source: Stacks 012X, first filtration.
-(blueprint: lem-sp-cone-horizontal-step-stable) -/
+indices below `n+2` suffice, also at `n=-1`. -/
 noncomputable def coneHorizontalStep
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : A ⟶ B) (p n : ℤ) :
@@ -199,24 +197,7 @@ private theorem coneHorizontalSummand_map_factors
       Subobject.factors_of_factors_right ((f.f h).f (n.toNat - h)) hs
   · simp [coneHorizontalSummand, hn, Subobject.factors_zero]
 
-/-- The cone differential preserves the explicit finite horizontal tails.
-Source: Stacks Project, Homology, Tag 012X, first filtration, and the source/target
-cone decomposition of the parent node, proof step 1.
-(blueprint: lem-sp-cone-horizontal-step-stable)
-
-Proof: the differential on each source summand is minus its total differential,
-plus the map to the target summand in the same horizontal index. The target
-summand has its total differential. Each total differential is the sum of a map
-raising the horizontal index and a signed map preserving it. Every resulting
-summand therefore has horizontal index at least p, so its image lies in the
-next degree's tail. If an index exceeds the finite range in that degree, its
-summand is zero by the first-quadrant condition. Scalar multiples and sums
-of maps factoring through a subobject still factor through it. Finally the
-source and target summands generate the finite supremum defining the tail:
-its image under the differential is contained in the target tail, equivalently
-the differential composed with its inclusion factors through that tail.
-This argument also applies at n=-1 (only source degree zero survives) and
-below n=-1 (the tail is zero). -/
+/-- The cone differential preserves the explicit finite horizontal tails. -/
 theorem coneHorizontal_step_stable
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : A ⟶ B) (p n : ℤ) :

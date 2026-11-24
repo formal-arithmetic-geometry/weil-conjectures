@@ -16,8 +16,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Perfection of closed-immersion pushforward in the standard localization
 
-Source: Stacks Project, Tags 05RU, 08CM and 0A9U.
-(blueprint: lem-sc-perfect-immersion-standard-perfection).
+## References
+
+* Stacks Project, Tags 05RU, 08CM and 0A9U.
 -/
 
 @[expose] public section
@@ -79,24 +80,8 @@ private theorem closedDirectImageColimits {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     exact Scheme.Modules.closedImmersion_pushforward_preservesCokernel i f
   exact Functor.preservesFiniteColimits_of_preservesCokernels F
 
-/-- A perfect single pushforward of O_Z gives a perfect standard Ri_* of the unit.
-Source: Stacks Project, Tags 05RU, 08CM and 0A9U.
-(blueprint: lem-sc-perfect-immersion-standard-perfection).
-
-Proof: on every open of Y compare the given derived localization with the standard
-one by the Qh comparison. Restriction is an exact functor of module categories;
-its derived functor commutes with these comparisons by localization uniqueness.
-Thus the strictly perfect complexes witnessing the hypothesis, with the same open
-cover and the same terms, also witness perfection of the standard single i_*O_Z.
-Module pushforward for a closed immersion is exact: it is restriction of scalars
-on the closed subset and extension by zero, and exactness can be checked on stalks.
-Consequently its right derived functor carries a single module to the single of
-its pushforward. The standard derived tensor unit is the single O_Z. These two
-isomorphisms identify the standard Ri_* of its unit with the perfect standard
-single i_*O_Z just obtained. Perfection is invariant under isomorphism by its
-local definition. Properness and Noetherianity are unnecessary for this comparison.
-The identity immersion gives the usual structure unit; for the empty closed
-subscheme its pushforward is zero, a strictly perfect complex. -/
+/-- A perfect single pushforward of O_Z gives a perfect standard Ri_* of the unit
+(Stacks, Tags 05RU, 08CM and 0A9U). -/
 theorem perfectImmersion_standardPerfection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

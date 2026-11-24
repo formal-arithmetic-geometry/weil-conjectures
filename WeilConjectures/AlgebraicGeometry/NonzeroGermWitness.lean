@@ -8,31 +8,14 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-/-! # NonzeroGermWitness
-
-Source: blueprint `lem-weil-pbc-lisse-generic-kernel`, first proof step.
-(blueprint: lem-weil-pbc-nonzero-germ-witness) -/
+/-! # NonzeroGermWitness -/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
-/-- The first, stalkwise part of the locally constant nonzero-germ argument.
-Source: blueprint `lem-weil-pbc-locally-constant-nonzero-germs`, proof step 1.
-The geometric stalks are jointly faithful, so a nonzero map has a nonzero value
-on some pointed etale neighbourhood.
-(blueprint: lem-weil-pbc-nonzero-germ-witness)
-
-Proof:
-1. Suppose every image of every section has zero germ. For the algebraic closure
-   point at each point of X, precompose the stalk map with all germ maps.
-2. Naturality identifies these composites with the germs of the image sections,
-   which vanish by assumption. The germ maps jointly detect equality of maps
-   out of the stalk, so the stalk map equals zero.
-3. Apply the existing joint faithfulness theorem
-   `sheafHom_ext_of_sheafFiber_map_algClosurePoint` to conclude that the original
-   morphism is zero, a contradiction. A lift from Spec of a field supplies an
-   underlying point of its neighbourhood, proving nonemptiness. -/
+/-- If `ψ : N ⟶ F` is a nonzero map of étale sheaves, then some section of `N` over an étale
+`X`-scheme has image with nonzero germ at some geometric point. -/
 theorem exists_section_nonzero_at_some_germ (X : Scheme.{u})
     (N F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (ψ : N ⟶ F) (hψ : ψ ≠ 0) :

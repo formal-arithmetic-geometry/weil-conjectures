@@ -10,8 +10,10 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Homology of exact restriction after localization
-Source: Stacks Project, Tag 05RR.
-(blueprint: lem-pc-derived-restriction-homology-factors). -/
+## References
+
+* Stacks Project, Tag 05RR
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,19 +25,7 @@ open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
 
 /-- A localization factorization of exact restriction induces its homology
-comparison, including compatibility with the homotopy factorization.
-Source: Stacks Project, Tag 05RR (localization universal property).
-(blueprint: lem-pc-derived-restriction-homology-factors).
-
-Proof: combine q with the degree-i derived/homotopy homology factorization
-isomorphisms and the exact-restriction short-complex homology isomorphism.
-This gives an isomorphism between the two homology functors after
-precomposition with complex localization. Complex localization is fully
-faithful on functor categories, so the isomorphism lifts uniquely to z.
-Its factorization equation is the displayed compatibility. Naturality of
-short-complex homology and of the two factorization isomorphisms verifies
-naturality before descent. Exactness of restriction holds for every ring
-homomorphism, including maps involving zero rings. -/
+comparison, including compatibility with the homotopy factorization. -/
 theorem exists_derivedRestriction_homology_factors
     {B₀ B : Type u} [CommRing B₀] [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]

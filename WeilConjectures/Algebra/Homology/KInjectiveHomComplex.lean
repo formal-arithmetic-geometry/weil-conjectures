@@ -15,9 +15,9 @@ import WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
 /-!
 # K-injectivity of the sheaf Hom complex
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.8 (Tag 0A96),
-`sites-cohomology-lemma-RHom-from-K-flat-into-K-injective`
-(blueprint: lem-pur-hom-kflat-into-kinjective).
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.34.8 (Tag 0A96)
 -/
 
 @[expose] public section
@@ -30,20 +30,7 @@ namespace CochainComplex
 
 set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 256 in
-/-- The sheaf Hom complex from a K-flat complex into a K-injective complex is K-injective.
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.8 (Tag 0A96)
-(blueprint: lem-pur-hom-kflat-into-kinjective).
-
-Proof: let `K` be any acyclic complex of sheaves of modules. K-flatness of `L`
-(`def-pc-kflat-complex`) makes `Tot(K ⊗ L)` acyclic. The tensor-Hom isomorphism
-`lem-sc-derived-hom-tensor-total` identifies `Hom(K, Hom(L, I))` with
-`Hom(Tot(K ⊗ L), I)` as sheaf complexes. The proved global-cochain
-comparison `lem-pur-hom-complex-global-cochains` turns a chain map into a
-closed degree-zero global section. Transport it through the tensor-Hom
-isomorphism. K-injectivity of `I` (`def-pur-kinjective-complex`) expresses the
-resulting cocycle as the differential of a degree-minus-one cochain. Transport
-that cochain back and use the comparison's differential compatibility to obtain
-a homotopy to zero. Since `K` was arbitrary, the Hom complex is K-injective. -/
+/-- The sheaf Hom complex from a K-flat complex into a K-injective complex is K-injective. -/
 theorem isKInjective_homComplex_of_isKFlat
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{max u v}}

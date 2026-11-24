@@ -12,9 +12,12 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Change of rings preserves every K-flat complex
 
-Source: Stacks Project, Cohomology on Sites, Tag 0G7E. This extracts the K-flat
-part of the independent-coefficient tensor-cancellation argument, which uses no
-termwise-flatness hypothesis.
+This extracts the K-flat part of the independent-coefficient tensor-cancellation argument,
+which uses no termwise-flatness hypothesis.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0G7E
 -/
 
 @[expose] public section
@@ -82,20 +85,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : Grothendiec
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)
 
 /-- Ordinary scalar extension sends every K-flat cochain complex to a K-flat
-complex, with independent site and coefficient universes.
-
-Source: Stacks Project, Tag 0G7E; the first half of the tensor-cancellation proof in
-lem-pur-kflat-change-of-rings-independent
-(auxiliary; not a blueprint node).
-
-Proof: Restriction of scalars is faithful and exact, and preserves the direct sums
-forming total complexes. The balanced cancellation isomorphism identifies the
-restriction of Tot(L tensor_S E(K)) with Tot(U(L) tensor_R K), naturally in both
-arguments and compatibly with both signed differential terms. For acyclic L,
-U(L) is acyclic. K-flatness of K makes the latter total complex acyclic, and
-faithful exact restriction detects acyclicity of the former. This uses no
-flatness of the terms of K. The zero ring and the zero complex satisfy the same
-argument. -/
+complex, with independent site and coefficient universes. -/
 theorem changeOfRings_isKFlat_independentCoefficients
     (E : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⥤
       SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S))

@@ -15,9 +15,12 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.CategoryTheory.Adjunction.Additive
 
-/-! # Split cycles in a finite projective tail
+/-!
+# Split cycles in a finite projective tail
 
-Source: Stacks Project, Tag 0BC9, proof, first paragraph.
+## References
+
+* Stacks Project, Tag 0BC9 (proof, first paragraph)
 -/
 
 @[expose] public section
@@ -29,27 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The leftmost cycle module of a finite projective exact tail belongs to the term class,
-and its kernel sequence stays exact and monic after reduction.
-
-Source: Stacks Project, Tag 0BC9, proof, first paragraph
-(blueprint: lem-sc-acyclic-lift-split-cycles).
-
-Proof. Obtain a zero member of P by applying the summand condition to any term
-and its decomposition as itself plus zero. The same condition, using this zero
-member, gives invariance under module isomorphisms. Above the upper bound the
-cycle module is zero. Descend through the finite interval to n. Exactness at i+1
-makes the differential onto the cycle module in degree i+1 surjective.
-That cycle module is projective by the induction hypothesis, so split this
-surjection. The degree-i term becomes the product of the next cycle module and
-its own cycle module. Since the term and the next cycle module belong to P, the
-summand condition puts the degree-i cycle module in P, hence makes it projective.
-Take Z to be the cycle module in degree n, with its kernel inclusion. The
-splittings in degrees n and n+1 identify the outgoing differential with the
-projection onto the next cycle module followed by its split inclusion.
-Consequently the sequence Z -> C^n -> C^(n+1) is exact and its first arrow is
-monic. Extension of scalars preserves those splitting equations and the product
-isomorphisms, giving the same assertions after reduction. If n exceeds b, all
-these modules are zero and the same reasoning applies with an empty interval. -/
+and its kernel sequence stays exact and monic after reduction. -/
 theorem exists_acyclicLift_splitCycles
     (R : Type u) [CommRing R] (I : Ideal R)
     (P : ModuleCat.{max u v} R → Prop)

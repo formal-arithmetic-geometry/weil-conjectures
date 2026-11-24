@@ -18,8 +18,9 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 /-!
 # Row cokernel of the tensor of two resolutions
 
-Source: Stacks Project, Algebra, Tag 00M3, cokernel computation and functoriality.
-(blueprint: lem-weil-pbc-tensor-resolution-row-cokernel-iso)
+## References
+
+* Stacks Project, Tag 00M3
 -/
 
 @[expose] public section
@@ -106,22 +107,7 @@ private theorem rowDesc_isIso {R : Type u} [CommRing R]
 
 
 /-- The row cokernel complex is the singly tensored resolution, naturally
-with respect to augmentation-compatible maps of both resolutions.
-
-Source: Stacks Project, Algebra, Tag 00M3, proof, cokernel computation and
-functoriality paragraph.
-(blueprint: lem-weil-pbc-tensor-resolution-row-cokernel-iso)
-
-Proof: Tensor the cokernel cofork P₁ → P₀ → M with Q_q. Right exactness
-of tensor makes the augmentation P₀ ⊗ Q_q → M ⊗ Q_q a cokernel of
-P₁ ⊗ Q_q → P₀ ⊗ Q_q. Its comparison with the evaluated row cokernel
-is an isomorphism. Compose it with the tensor braiding M ⊗ Q_q ≅ Q_q ⊗ M.
-The differential square follows after precomposition with the cokernel
-projection from tensor bifunctoriality and naturality of braiding, so these
-maps assemble to a chain isomorphism. For compatible a and b, the square
-before braiding follows from a₀ ≫ P'.π₀ = P.π₀ ≫ f after precomposing
-with the row cokernel projection. Cancel that epimorphism and then apply
-naturality of braiding to identify the resulting map with b ⊗ f. -/
+with respect to augmentation-compatible maps of both resolutions. -/
 theorem tensorResolutionRowCokernelIso (R : Type u) [CommRing R] :
     ∃ e : ∀ (M N : ModuleCat.{u} R) (P : ProjectiveResolution M)
         (Q : ProjectiveResolution N),

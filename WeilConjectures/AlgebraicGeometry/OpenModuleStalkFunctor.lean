@@ -16,8 +16,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Stalks of module sheaves on the site over an open
 
-Source: Stacks Project, Modules, Tag 01AG, and Cohomology of Sheaves, Tag 08C4.
-(blueprint: def-sc-open-module-stalk-functor).
+## References
+
+* Stacks Project, Modules, Tag 01AG, and Cohomology of Sheaves, Tag 08C4.
 -/
 
 @[expose] public section
@@ -27,14 +28,9 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 noncomputable section
 
-/-- The stalk on the site over `U`, transported to the original stalk ring.
-Source: Stacks Project, Modules, Tag 01AG; the open-subspace interpretation in
-Cohomology of Sheaves, Tag 08C4.
-(blueprint: def-sc-open-module-stalk-functor).
-
-Convert sheaves on the slice site to sheaves on the open subscheme, take their
-module stalk at the specified point, and restrict scalars along the open immersion's
-stalk ring map. This is an explicit composite, with no choice of a model. -/
+/-- The stalk on the site over `U`, transported to the original stalk ring: convert sheaves on
+the slice site to sheaves on the open subscheme, take the module stalk at the specified point,
+and restrict scalars along the open immersion's stalk ring map. (Stacks, Tags 01AG and 08C4) -/
 def openModuleStalkFunctor (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :
     SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U) ⥤
       ModuleCat.{u} (Y.presheaf.stalk (U.ι y)) :=
@@ -43,11 +39,7 @@ def openModuleStalkFunctor (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :
       ModuleCat.restrictScalars (U.ι.stalkMap y).hom
 
 set_option backward.isDefEq.respectTransparency false in
-/-- This stalk construction preserves zero maps, so it can be applied to complexes.
-Source: Stacks Project, Modules, Tag 01AG.
-(blueprint: def-sc-open-module-stalk-functor).
-Proof: the site equivalence is additive because it preserves binary products;
-the module stalk and restriction of scalars preserve zero maps. Compose these facts. -/
+/-- This stalk construction preserves zero maps, so it can be applied to complexes. -/
 instance openModuleStalkFunctor_preservesZeroMorphisms
     (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :
     (openModuleStalkFunctor Y U y).PreservesZeroMorphisms := by
@@ -91,11 +83,7 @@ private theorem stalk_exact (X : RingedSpace.{u}) (x : X) :
     preservesFiniteColimits_of_reflects_of_preserves _ A⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The localized module stalk functor preserves finite limits.
-Source: Stacks Project, Modules, Tag 01AG.
-(blueprint: def-sc-open-module-stalk-functor).
-Proof: reflect finite limits through forgetting the stalk module structure;
-then compose with the site equivalence and restriction of scalars. -/
+/-- The localized module stalk functor preserves finite limits. -/
 instance openModuleStalkFunctor_preservesFiniteLimits
     (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :
     PreservesFiniteLimits (openModuleStalkFunctor Y U y) := by
@@ -104,11 +92,7 @@ instance openModuleStalkFunctor_preservesFiniteLimits
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The localized module stalk functor preserves finite colimits.
-Source: Stacks Project, Modules, Tag 01AG.
-(blueprint: def-sc-open-module-stalk-functor).
-Proof: reflect finite colimits through forgetting the stalk module structure;
-then compose with the site equivalence and restriction of scalars. -/
+/-- The localized module stalk functor preserves finite colimits. -/
 instance openModuleStalkFunctor_preservesFiniteColimits
     (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :
     PreservesFiniteColimits (openModuleStalkFunctor Y U y) := by
@@ -116,11 +100,7 @@ instance openModuleStalkFunctor_preservesFiniteColimits
   dsimp [openModuleStalkFunctor]
   infer_instance
 
-/-- The localized module stalk functor is additive.
-Source: Stacks Project, Modules, Tag 01AG.
-(blueprint: def-sc-open-module-stalk-functor).
-Proof: preservation of finite limits gives preservation of binary products,
-which implies additivity for functors between additive categories. -/
+/-- The localized module stalk functor is additive. -/
 instance openModuleStalkFunctor_additive
     (Y : Scheme.{u}) (U : Y.Opens) (y : U.toScheme) :
     (openModuleStalkFunctor Y U y).Additive :=

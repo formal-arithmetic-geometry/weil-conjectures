@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-! # Finite kernel generators from a comparison of finite free presentations
 
-Source: Stacks Project, Modules, Lemma 01BP(1), the displayed generator map.
+## References
+
+* Stacks Project, Tag 01BP
 -/
 
 @[expose] public section
@@ -24,16 +26,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace AlgebraicGeometry.RingedSpace
 
 /-- A finite presentation and two comparison maps generate the kernel of a second
-finite free map. Source: Stacks Project, Modules, Lemma 01BP(1), displayed map.
-(blueprint: lem-weil-pbc-finite-presentation-kernel-comparison)
-
-Proof: Put phi = P.generators.pi. The map beta sends kernel(phi) to kernel(psi).
-The map 1 - beta composed with alpha also lands in kernel(psi). Their coproduct map is split
-surjective: on kernel(psi) a right inverse is given by alpha into kernel(phi)
-and the kernel inclusion into the second summand. Composing its first summand
-with the finite relation generators of P and its second with the free basis
-produces finite generating sections. This is exactly the map
-(beta chi, 1 - beta alpha) in Stacks' notation. -/
+finite free map. (Stacks, Tag 01BP) -/
 theorem finitePresentation_kernel_comparison_generators
     (X : RingedSpace.{u}) (U : Opens X)
     (F : SheafOfModules.{u} ((moduleRings X).over U))

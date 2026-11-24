@@ -8,6 +8,16 @@ module
 
 public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
 
+/-!
+# The equal-endpoint case of the nested-cutoff comparison
+
+For equal endpoints both the cokernel and the window are zero.
+
+## References
+
+* Stacks Project, Homology, Section 12.15, Tag 0118 (canonical cochain truncations)
+-/
+
 @[expose] public section
 
 universe v u
@@ -15,17 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace HomologicalComplex₂
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- The equal-endpoint case of the nested-cutoff comparison; both sides are zero.
-Source: Stacks Project, Homology, Section 12.15, tag 0118, canonical cochain
-truncations (https://stacks.math.columbia.edu/tag/0118).
-(blueprint: lem-sp-vertical-cutoff-column-quasiiso-equal)
-
-Proof: the cutoff inclusion is degreewise monic, so its compatibility with g forces
-g to be the identity. Its cokernel is therefore zero. The lower smart truncation
-at a is strictly supported in degrees at least a, and upper truncation preserves
-this support while making degrees above a-1 zero. Hence every component of the
-window vanishes, including after restriction to the naturals. Every map between
-these two zero objects is an isomorphism, and thus a quasi-isomorphism. -/
+/-- The equal-endpoint case of the nested-cutoff comparison; both sides are zero. -/
 theorem verticalCutoff_column_quasiIso_equal
     (L : CochainComplex C ℕ) (a : ℤ)
     (g : (verticalCutoff a).obj L ⟶ (verticalCutoff a).obj L)

@@ -14,7 +14,9 @@ For `γ = α ≫ β`, the transition `M ⊗_{R₁} R₂ ⟶ M ⊗_{R₁} R₃` s
 for scalar-extension adjunctions whose units are `m ↦ 1 ⊗ m`, the unit along `α` followed by
 the transition is the unit along `γ`, up to the identification of the composite restriction.
 
-Source: Stacks Project, Tag 03EK.
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public section
@@ -49,8 +51,7 @@ variable {R₁ R₂ R₃ : Sheaf J CommRingCat.{u}} (α : R₁ ⟶ R₂) (β : R
 
 /-- If the units of `E₂ ⊣ res_α` and `E₃ ⊣ res_γ` are `m ↦ 1 ⊗ m` and
 `e : res_β ⋙ res_α ≅ res_γ` is the identity on sections, then the unit along `α` followed by
-the transition is the unit along `γ` followed by `e⁻¹`.
-Proof: evaluate on a section `m`; the transition sends `1 ⊗ m` to `β 1 ⊗ m = 1 ⊗ m`. -/
+the transition is the unit along `γ` followed by `e⁻¹`. -/
 theorem changeOfRingsTransitionOfEq_unit (adj₂ : E₂ ⊣ restrictScalars (𝓕 α))
     (adj₃ : E₃ ⊣ restrictScalars (𝓕 γ))
     (hu₂ : ∀ (M : SheafOfModules.{u} (𝓡 R₁)) (U : Cᵒᵖ) (x : M.val.obj U),

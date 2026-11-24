@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.OpenCohomologyZeroSections
 
 /-! # Comparing degree-zero cohomology fractions with section fractions
 
-Source: Stacks Project, Tag 09MR, degree-zero fraction presentation.
-(blueprint: lem-sc-open-cohomology-fraction-zero-comparison).
+## References
+
+* [Stacks, Tag 09MR]
 -/
 
 @[expose] public section
@@ -22,16 +23,8 @@ universe u
 open CategoryTheory MonoidalCategory DirectSum
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The canonical degree-zero comparison descends to fraction presentations on any open.
-Source: Stacks Project, Tag 09MR, degree-zero case.
-(blueprint: lem-sc-open-cohomology-fraction-zero-comparison).
-
-Proof: Take the direct sum of the canonical additive equivalences on numerator groups.
-Naturality in the coefficient module takes every fraction relation to its section
-relation. Conversely every section numerator is the image of a cohomology numerator,
-so the sets of relation generators correspond exactly. An additive equivalence takes
-the additive closure of a set to the closure of its image. Hence it descends to an
-additive equivalence of quotients, with the asserted formula on each generator. -/
+/-- The canonical degree-zero comparison descends to fraction presentations on any open
+(Stacks, Tag 09MR). -/
 theorem openCohomologyFraction_zero_comparison (X : Scheme.{u})
     (L F : X.Modules) (s : Γ(L, ⊤)) (U : X.Opens) :
     ∃ q : CohomologyFractionPresentation L F s 0 U ≃+

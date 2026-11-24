@@ -49,8 +49,9 @@ public import WeilConjectures.Algebra.Homology.RingedDerivedTensorNative
 
 /-! # The native localization tensor at independent ringed-site universes
 
-Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
-(blueprint: lem-sf-ringed-derived-native-tensor).
+## References
+
+* Stacks Project, Tags 06YN, 06YS, 06YT and 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -208,8 +209,7 @@ local instance : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   monoidal.{c, v, u, w} J R
 
 omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
-/-- The native complex tensor is precisely the recorded total tensor.
-Source: Stacks Project, Tag 06YN. -/
+/-- The native complex tensor is precisely the recorded total tensor. -/
 theorem totalTensor_eq (P L : CochainComplex (Modules.{c, v, u} J R) ℤ) :
     (coefficientTotalTensor.{u, c, v} J R).obj (P, L) = P ⊗ L := by
   rfl
@@ -237,8 +237,7 @@ theorem comparison_app
 local instance : SymmetricCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   symmetric.{c, v, u, w} J R
 
-/-- Localization preserves the Koszul braiding with its fixed lax tensorator.
-Source: Stacks Project, Tag 0FPT. -/
+/-- Localization preserves the Koszul braiding with its fixed lax tensorator. -/
 @[instance_reducible]
 def laxBraided : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤
     DerivedCategory (Modules.{c, v, u} J R)).LaxBraided := by
@@ -265,8 +264,7 @@ theorem isIso_ε : IsIso (Functor.LaxMonoidal.ε
     (DerivedCategory.Q.{w} (C := Modules.{c, v, u} J R))) := by
   exact localization_isIso_ε (A := Modules.{c, v, u} J R)
 
-/-- The localization identifies the derived unit with the ring in degree zero.
-Source: Stacks Project, Tag 0FPT. -/
+/-- The localization identifies the derived unit with the ring in degree zero. -/
 def unitIso : 𝟙_ (DerivedCategory (Modules.{c, v, u} J R)) ≅
     DerivedCategory.Q.{w}.obj (𝟙_ (CochainComplex (Modules.{c, v, u} J R) ℤ)) := by
   have := isIso_ε.{c, v, u, w} J R

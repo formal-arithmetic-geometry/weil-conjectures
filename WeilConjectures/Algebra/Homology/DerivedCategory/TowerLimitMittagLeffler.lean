@@ -19,11 +19,7 @@ For a tower `F` and a product `∏ Fₙ` with its transition endomorphism `t` (c
 epimorphism.
 
 For towers of modules satisfying the Mittag-Leffler condition (the images of the transition
-maps `Fₖ ⟶ Fₙ` stabilise), `1 - t` is surjective (Stacks 0598, 07KW). The proof first corrects a
-family `a ∈ ∏ Fₙ`, modulo the image of `1 - t`, into the product of the stable images `Iₙ`,
-using finite partial sums `yₙ = ∑_{n ≤ k < Mₙ} t_{k,n}(aₖ)`; the tower of the stable images has
-surjective transitions, on which `1 - t` is surjective by the inductive construction of
-`ModuleCat.epi_one_sub_of_epi`.
+maps `Fₖ ⟶ Fₙ` stabilise), `1 - t` is surjective.
 
 For towers in a preadditive category with a product `∏ Gₙ`:
 
@@ -48,6 +44,10 @@ For towers in a preadditive category with a product `∏ Gₙ`:
 - `CategoryTheory.Limits.epi_one_sub_of_shortExact` and
   `DerivedCategory.isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfMittagLeffler`: the
   replete abelian case.
+
+## References
+
+* Stacks Project, Tags 0596, 0598 and 07KW
 -/
 
 @[expose] public section
@@ -60,7 +60,7 @@ universe u
 
 variable {R : Type u} [Ring R]
 
-/-- **Mittag-Leffler towers of modules have `R¹lim = 0`** (Stacks 0598, 07KW). Let `F` be a
+/-- **Mittag-Leffler towers of modules have `R¹lim = 0`**. Let `F` be a
 tower of modules satisfying the Mittag-Leffler condition: for every `n` there is `N ≥ n` such
 that the image of `F_N ⟶ Fₙ` is contained in the image of `Fₖ ⟶ Fₙ` for every `k ≥ n`. Then the
 map `1 - t` on a product `∏ Fₙ` is surjective, where `t` has components `∏ Fₘ ⟶ Fₙ₊₁ ⟶ Fₙ`. -/
@@ -153,7 +153,7 @@ lemma mittagLeffler_of_isMittagLeffler {F : ℕᵒᵖ ⥤ ModuleCat.{u} R}
   exact ⟨z, hz⟩
 
 /-- **Towers of finite modules are Mittag-Leffler**, in the explicit form used by
-`ModuleCat.epi_one_sub_of_mittagLeffler` (Stacks 0596). -/
+`ModuleCat.epi_one_sub_of_mittagLeffler`. -/
 lemma mittagLeffler_of_finite {F : ℕᵒᵖ ⥤ ModuleCat.{u} R} (h : ∀ n : ℕ, Finite (F.obj (op n)))
     (n : ℕ) :
     ∃ N : ℕ, ∃ hN : n ≤ N, ∀ (k : ℕ) (hk : n ≤ k),
@@ -162,7 +162,7 @@ lemma mittagLeffler_of_finite {F : ℕᵒᵖ ⥤ ModuleCat.{u} R} (h : ∀ n : �
   mittagLeffler_of_isMittagLeffler (Functor.isMittagLeffler_of_exists_finite_range (F ⋙ forget _)
     fun j ↦ ⟨j, 𝟙 j, @Set.finite_range _ _ _ (h j.unop)⟩) n
 
-/-- **Towers of finite modules have `R¹lim = 0`** (Stacks 0596, 0598): for a tower `F` of
+/-- **Towers of finite modules have `R¹lim = 0`**: for a tower `F` of
 finite modules, the map `1 - t` on a product `∏ Fₙ` is surjective, where `t` has components
 `∏ Fₘ ⟶ Fₙ₊₁ ⟶ Fₙ`. -/
 lemma epi_one_sub_of_finite {F : ℕᵒᵖ ⥤ ModuleCat.{u} R}

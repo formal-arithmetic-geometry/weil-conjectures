@@ -39,32 +39,7 @@ open Scheme Etale
 
 /-- The stalk exchange and the residue-field pullback admit a common strict-local model.
 No equivalence between local stalks and closed-fibre cohomology is asserted here, and
-no strict-local exchange hypothesis is assumed.
-
-Source: Stacks Project, proof of Theorem Tag 095T, paragraphs 3--4, together with
-Tag 03Q9 (strict-henselization stalk formula) and topological invariance Tag 04DY.
-(blueprint: lem-weil-pbc-p1-strict-local-model-comparison).
-
-Proof: choose compatible algebraic closures for the two geometric points. Take A
-and B to be their strict henselization rings. Functoriality supplies the local map
-phi and commuting residue-field embeddings. Restrict F to the projective line over A
-to obtain F₀; inverse image preserves torsion, by the inverse-image stalk formula.
-The pointed-neighbourhood stalk formula and that same inverse-image formula supply
-a₁ and a₂: original and restricted higher-direct-image stalks are the same filtered
-colimits of neighbourhood cohomology. Properness gives the qcqs hypotheses. Compare
-module cohomology with underlying abelian cohomology using acyclicity after forgetting
-coefficients at universe u+1, not preservation of injectives by the forgetful functor.
-The underived exchange pulls sections back along the base-changed neighbourhood.
-The functorial limit projections commute with phi, so these section maps agree on
-every neighbourhood representative. Passing to the filtered colimit and homology
-proves the first displayed equation, independently of any closed-fibre theorem.
-The integral residue-field factorizations imply that k and k' are purely inseparable
-extensions of the respective relative separable closures. Topological invariance
-identifies the etale cohomology of these residue projective lines with the chosen
-geometric fibres, giving b₁ and b₂. The commuting residue-field square and functoriality
-of cohomology pullback prove the second equation; use the composite inverse-image
-isomorphism for the target sheaf. Uniqueness of pullbacks handles the arbitrary X'.
-These constructions include degree zero, zero sheaves, and nonperfect fields. -/
+no strict-local exchange hypothesis is assumed (Stacks, Tags 095T, 03Q9, 04DY). -/
 theorem Etale.projectiveLine_strictLocal_modelComparison
     (Λ : Type (u + 1)) [CommRing Λ]
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}

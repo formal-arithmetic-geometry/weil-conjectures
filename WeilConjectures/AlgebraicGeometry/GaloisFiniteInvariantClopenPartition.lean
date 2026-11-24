@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.GaloisBaseChangeQCOpenDescends
 /-!
 # A nontrivial partition invariant over a finite intermediate field
 
-Source: Stacks Project, Varieties, Tag 0389, proof, paragraphs 2--5, and the
-pullback identification in its last paragraph.
-(blueprint: lem-weil-pbc-galois-finite-invariant-clopen-partition).
+## References
+
+* [Stacks, Tag 0389]
 -/
 
 @[expose] public section
@@ -109,34 +109,8 @@ private theorem orbit_intersection
 
 /-- A nontrivial clopen partition after a Galois extension can be replaced by a
 nontrivial partition invariant under the automorphisms over a finite intermediate field.
-The partition is expressed on the iterated base change over that intermediate field.
-
-Source: Stacks Project, Varieties, Lemma Tag 0389
-(blueprint: lem-weil-pbc-galois-finite-invariant-clopen-partition).
-
-Proof: Write p : X_L → X and let U and its complement be the given partition.
-For every quasi-compact open W of X, p⁻¹(W) is quasi-compact because p is the base
-change of a morphism of affine schemes. Its intersections with U and Uᶜ are
-quasi-compact opens, since they are closed in p⁻¹(W). Apply Tag 04KU to descend
-p⁻¹(W) ∩ U to a finite intermediate field K_W; the automorphisms fixing K_W
-also preserve its complement inside p⁻¹(W). Choose u ∈ U and an affine open W₀
-containing p(u), and set K = K_W₀ and H = Aut(L/K).
-For every W, the H-translates of p⁻¹(W) ∩ U form a finite family: two
-translates agree when the inverses of their automorphisms have the same
-restriction to K_W, and a finite extension has finitely many embeddings into L.
-Set U_W to their intersection and V_W to the union of the corresponding
-translates of p⁻¹(W) ∩ Uᶜ. These are complementary clopen subsets of p⁻¹(W),
-and reindexing H proves their invariance. Restriction from W' to W ⊆ W'
-commutes with these intersections and unions because every automorphism fixes
-p⁻¹(W). Applying this to W ∪ W' proves compatibility for arbitrary W, W'.
-Their unions over all quasi-compact W therefore form a complementary open,
-hence clopen, partition of X_L. The first part contains u because the
-partition on W₀ is already H-invariant; the second contains Uᶜ because the
-identity automorphism is among the translates. Thus both parts are nonempty.
-Finally use pullback pasting to identify X_L with (X_K)_L. Its universal
-property identifies the H-action with the base-change action over K, so the
-transported first part has all the asserted properties. No compactness or
-quasi-separatedness assumption on X is needed: only the opens W are compact. -/
+The partition is expressed on the iterated base change over that intermediate field
+(Stacks, Tag 0389). -/
 theorem exists_finite_invariant_clopen_partition
     (k L : Type u) [Field k] [Field L] [Algebra k L] [IsGalois k L]
     (X : Scheme.{u}) (f : X ⟶ Spec (.of k))

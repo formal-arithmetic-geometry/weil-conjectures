@@ -9,15 +9,17 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientRingedTensorHomModel
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Internal Hom and arbitrary changes of ring-sheaf coefficients
 
-Source: Bhatt--Scholze, Remark 6.8.15 (ambient derived operations);
-Stacks Project, sites-cohomology.tex, Tags 07A6, 07A4, 08J9, 08JA and 0D6D,
-and derived.tex, Tag 05RT
-(auxiliary; not a blueprint node).
-This is the auxiliary scalar-adjunction comparison extracted from the final
-paragraph of proposition-six-operations-dctf--15 in the current blueprint.
-Every comparison is normalized on actual K-flat tensors. In particular these
+This is the auxiliary scalar-adjunction comparison for arbitrary changes of coefficient ring
+sheaves. Every comparison is normalized on actual K-flat tensors. In particular these
 are ordinary unbounded module derived categories, with no flatness or
 perfectness assumption on a coefficient map or a derived input.
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15 (ambient derived operations)
+* Stacks Project, Cohomology on Sites, Tags 07A6, 07A4, 08J9, 08JA and 0D6D
+* Stacks Project, Derived Categories, Tag 05RT
+* Stacks Project, Tags 03DA, 06YY, 0FND and 09T5
 -/
 
 @[expose] public section
@@ -36,16 +38,14 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C] (J : Grothendiec
   [HasSheafify J AddCommGrpCat.{r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
 
-/-- The recorded module category, with its ring-sheaf commutativity forgotten.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- The recorded module category, with its ring-sheaf commutativity forgotten. -/
 abbrev scalarModules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} ((sheafCompose J
     (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 variable {J} {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S)
 
-/-- Actual ordinary restriction along the given map of commutative ring sheaves.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+/-- Actual ordinary restriction along the given map of commutative ring sheaves. -/
 noncomputable abbrev scalarRestriction : scalarModules J S ⥤ scalarModules J R :=
   restrictScalars ((sheafCompose J
     (forget₂ CommRingCat.{r} RingCat.{r})).map a)
@@ -53,28 +53,24 @@ noncomputable abbrev scalarRestriction : scalarModules J S ⥤ scalarModules J R
 variable [HasDerivedCategory.{w} (scalarModules J R)]
   [HasDerivedCategory.{w} (scalarModules J S)]
 
-/-- Exact scalar restriction preserves finite limits, by the recorded adjunction theorem.
-Source: Stacks 03DA and 07A6 (auxiliary; not a blueprint node). -/
+/-- Exact scalar restriction preserves finite limits, by the recorded adjunction theorem. -/
 noncomputable instance scalarRestriction_limits :
     PreservesFiniteLimits (scalarRestriction a) :=
   (sheafRingDerivedCoefficientAdjunction a).choose
 
-/-- Exact scalar restriction preserves finite colimits, by the recorded adjunction theorem.
-Source: Stacks 03DA and 07A6 (auxiliary; not a blueprint node). -/
+/-- Exact scalar restriction preserves finite colimits, by the recorded adjunction theorem. -/
 noncomputable instance scalarRestriction_colimits :
     PreservesFiniteColimits (scalarRestriction a) :=
   (sheafRingDerivedCoefficientAdjunction a).choose_spec.choose
 
-/-- Actual termwise application of an additive functor.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- Actual termwise application of an additive functor. -/
 noncomputable def scalarComplex (E : scalarModules J R ⥤ scalarModules J S)
     (hE : E.Additive) :
     CochainComplex (scalarModules J R) ℤ ⥤ CochainComplex (scalarModules J S) ℤ :=
   letI := hE
   E.mapHomologicalComplex (.up ℤ)
 
-/-- Actual homotopy application of an additive functor.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- Actual homotopy application of an additive functor. -/
 noncomputable def scalarHomotopy (E : scalarModules J R ⥤ scalarModules J S)
     (hE : E.Additive) :
     HomotopyCategory (scalarModules J R) (.up ℤ) ⥤
@@ -82,21 +78,18 @@ noncomputable def scalarHomotopy (E : scalarModules J R ⥤ scalarModules J S)
   letI := hE
   E.mapHomotopyCategory (.up ℤ)
 
-/-- Derived restriction is localization of the exact termwise restriction functor.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- Derived restriction is localization of the exact termwise restriction functor. -/
 noncomputable def scalarDerivedRestriction :
     DerivedCategory (scalarModules J S) ⥤ DerivedCategory (scalarModules J R) :=
   (scalarRestriction a).mapHomologicalComplexUpToQuasiIso (.up ℤ)
 
-/-- The canonical termwise restriction comparison.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- The canonical termwise restriction comparison. -/
 noncomputable def scalarRestrictionComparison :
     DerivedCategory.Q ⋙ scalarDerivedRestriction a ≅
       (scalarRestriction a).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   (scalarRestriction a).mapHomologicalComplexUpToQuasiIsoFactors (.up ℤ)
 
-/-- The representative comparison determined by a left-derived pair.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+/-- The representative comparison determined by a left-derived pair. -/
 noncomputable def scalarPairComplexComparison
     (E : scalarModules J R ⥤ scalarModules J S) (hE : E.Additive)
     (F : DerivedCategory (scalarModules J R) ⥤ DerivedCategory (scalarModules J S))
@@ -107,8 +100,7 @@ noncomputable def scalarPairComplexComparison
     ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
       (DerivedCategory.quotientCompQhIso _).hom.app _
 
-/-- The actual chain transpose induced by an ordinary scalar adjunction.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- The actual chain transpose induced by an ordinary scalar adjunction. -/
 noncomputable def scalarChainTranspose
     (E : scalarModules J R ⥤ scalarModules J S) (hE : E.Additive)
     (am : E ⊣ scalarRestriction a)
@@ -122,8 +114,7 @@ noncomputable def scalarChainTranspose
 /-- A presentation of the canonical scalar adjunction, retaining every normalization.
 The functors are fixed by their object/map formulas and left-derived universal property;
 the adjunction is fixed by the sheafified scalar-unit equation and chain-transpose equation.
-Source: Stacks 07A6; derived.tex 0FND and 09T5
-(auxiliary; not a blueprint node). -/
+-/
 structure ScalarDerivedPair where
   /-- The ordinary scalar tensor functor. -/
   extension : scalarModules J R ⥤ scalarModules J S
@@ -184,8 +175,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 Each closed structure has the recorded representative evaluation normalization;
 each scalar pair has actual sheafified tensor objects/maps and the universal
 left-derived comparison, with its ordinary and derived unit normalizations.
-Source: Stacks 06YY, 07A6, 08J9
-(auxiliary; not a blueprint node). -/
+-/
 structure ScalarHomModels where
   /-- The already recorded closed tensor-Hom structure for each coefficient sheaf. -/
   closed : ∀ R : Sheaf J CommRingCat.{max c v r},

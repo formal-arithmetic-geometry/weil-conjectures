@@ -11,9 +11,11 @@ public import WeilConjectures.Algebra.Homology.RingHomExtensionDefs
 
 /-! # Interfaces for augmented ring complexes and their ordered Čech models
 
-Source: Stacks Project, algebraization.tex, Tag 099D, clauses (a)-(d).
 The predicates below specify data and equations; they select no witnesses.
-(auxiliary; not a blueprint node).
+
+## References
+
+* [Stacks, Tag 099D], clauses (a)-(d)
 -/
 
 @[expose] public section
@@ -89,9 +91,7 @@ def RingComplexFunctorial (K : RingComplexFamily.{u}) (ε : RingComplexAugmentat
 
 /-- The ordered localization complex for every finite generating list, with its
 augmentation-compatible comparison in the derived category. This predicate includes
-all coordinates and differentials, including the empty generating list.
-Source: Stacks Project, Tag 099D(d).
-(auxiliary; not a blueprint node). -/
+all coordinates and differentials, including the empty generating list. -/
 def RingComplexHasCechModel (A : CommRingCat.{u})
     [HasDerivedCategory.{w} (RingSiteModules A)] (I : Ideal A)
     (K : CochainComplex (RingSiteModules A) ℤ) (ε : K ⟶ ringComplexSingle A) : Prop :=

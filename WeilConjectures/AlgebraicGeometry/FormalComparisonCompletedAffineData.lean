@@ -19,7 +19,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Transport of comparison data before taking sections
 
-Source: Stacks Project, Tag 088B, completed-base change paragraph.
+## References
+
+* Stacks Project, Tag 088B
 -/
 
 @[expose] public section
@@ -45,28 +47,8 @@ private theorem transport_comparison_comp
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The algebraic part of completed affine transport, with its completion comparison.
-This statement makes no assertion about section diagrams or their limits.
-
-Source: Stacks Project, Tag 088B, completed-base change paragraph; Tags 02KH and 0887.
-(blueprint: lem-weil-pbc-formal-comparison-completed-affine-data)
-
-Proof: Restrict to the affine chart and base change along B to its adic completion R.
-The extended ideal on Spec R is J₀. Apply formal-system pullback to construct G₀
-termwise and coherent pullback to construct F₀ along the first projection. The
-composition comparison and completion-pullback comparison give β₀. The completion
-map is flat over the Noetherian B. Degree-zero flat base change gives an isomorphism
-from p_*F₀ to g*f_*F, and proper coherent direct image proves coherence of p_*F₀.
-Complete this isomorphism and compose with completion-pullback to get δ. Define α₀
-by pulling back α and composing with δ inverse (and the equality comparison for G₀).
-Transport κ using the same base-change isomorphisms for the quotient pushforwards.
-Naturality at the quotient projections gives the first displayed equation. The
-adjunction-unit compatibility of base change gives the second. For a supplied
-adjunction, compare it with the chosen one by uniqueness of left adjoints and
-adjust β₀ by that invertible pullback automorphism. This changes neither α₀ nor δ
-and makes the equation use the supplied unit. The construction uses no algebraization
-or faithfulness of completion. If J is the unit ideal, all formal terms are zero;
-if J is zero, the completion map is the identity. The same construction includes
-zero rings and empty spectra. -/
+This statement makes no assertion about section diagrams or their limits
+(Stacks, Tag 088B; Tags 02KH and 0887). -/
 theorem formalComparison_completed_affine_data
     {X Y : Scheme.{u}} [IsNoetherian Y]
     (J : Y.IdealSheafData) (f : X ⟶ Y) [IsProper f]

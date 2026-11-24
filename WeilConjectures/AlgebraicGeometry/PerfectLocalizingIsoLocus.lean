@@ -9,24 +9,21 @@ public import WeilConjectures.CategoryTheory.ShiftSaturatedIsoLocus
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.AlgebraicGeometry.PerfectLocalizingClosure
 
-/-! Application of shift-saturated invertibility to the existing definition of
-perfectLocalizingClosure. The proofs of perfect_iso and perfect_shift are
-extracted from the private helpers of PerfectTwoOutOfThree.
-All other clauses are naturality, coproduct preservation, and the five-term
-cone argument from Sheaf.CategoryTheory.ShiftSaturatedIsoLocus.
-Source: the defining infimum of perfectLocalizingClosure (Stacks Tag 09IS)
-and the bounded strictly-perfect models defining Scheme.IsPerfect.
-(blueprint: lem-sc-perfect-localizing-iso-locus). -/
+/-! # The locus of invertibility and `perfectLocalizingClosure`
+
+Application of shift-saturated invertibility to the definition of `perfectLocalizingClosure`.
+
+## References
+
+* Stacks Project, Tag 09IS.
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open CategoryTheory.Pretriangulated AlgebraicGeometry
 namespace CategoryTheory.ShiftSaturated
-/-- Perfection is preserved by isomorphisms.
-Proof: compose each local strictly-perfect presentation with the restricted inverse iso.
-Source: the definition of Scheme.IsPerfect, Stacks Tag 08C3.
-(blueprint: lem-sc-perfect-localizing-iso-locus). -/
+/-- Perfection is preserved by isomorphisms (Stacks, Tag 08C3). -/
 theorem perfect_iso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,
@@ -38,11 +35,7 @@ theorem perfect_iso (X : Scheme.{u})
   exact ⟨U, hx, K, hK, ⟨((SheafOfModules.overFunctor.{u}
     (moduleRings X.toRingedSpace) U).mapDerivedCategory.mapIso e.symm) ≪≫ eK⟩⟩
 
-/-- Perfection is preserved by integer shifts.
-Proof: translate each local bounded strictly-perfect model; subtract the shift from
-both bounds and transport its quotient comparison through the two shift isomorphisms.
-Source: the definition of Scheme.IsPerfect, Stacks Tag 08C3.
-(blueprint: lem-sc-perfect-localizing-iso-locus). -/
+/-- Perfection is preserved by integer shifts (Stacks, Tag 08C3). -/
 theorem perfect_shift (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,
@@ -60,13 +53,8 @@ theorem perfect_shift (X : Scheme.{u})
       ((DerivedCategory.Q.commShiftIso n).app K).symm⟩
 
 
-/-- The perfect localizing closure lies in the locus of invertibility on all shifts.
-Source: perfectLocalizingClosure, Stacks Tag 09IS; five-term triangle exactness.
-Proof: use sInf_le with the supplied perfect case. Isomorphisms, shifts and retracts
-use naturality. Transport an ambient distinguished triangle into the full D_QCoh
-subcategory, then apply the all-shifts five-term cone lemma. Lift the ambient coproduct
-cofan and its universal property into D_QCoh, and use the coproduct comparison lemma.
-(blueprint: lem-sc-perfect-localizing-iso-locus). -/
+/-- The perfect localizing closure lies in the locus of invertibility on all shifts
+(Stacks, Tag 09IS). -/
 theorem perfectClosure_le_isoOnAllShifts
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

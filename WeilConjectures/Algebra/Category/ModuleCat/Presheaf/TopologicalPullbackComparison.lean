@@ -17,7 +17,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRe
 /-!
 # Comparison of abstract and concrete topological module pullback
 
-Source: Stacks Project, Sheaves, Tags 008T and 008U.
+## References
+
+* Stacks Project, Sheaves, Tags 008T and 008U
 -/
 
 @[expose] public section
@@ -30,28 +32,7 @@ namespace PresheafOfModules
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- The canonical abelian comparison to the abstract module pullback is an isomorphism.
-
-Source: Stacks Project, Sheaves, Tags 008T and 008U.
-Proof: For each open U, its neighbourhood diagram is filtered: top gives an object,
-and intersections give common later objects. Apply Mathlib's `IsColimit.module` to
-its ring and abelian diagrams, and `IsColimit.ι_smul` to obtain the coprojection
-formula. The pointwise ring colimit remains a colimit after forgetting commutativity.
-Represent a scalar and a section at one common neighbourhood. The coprojection
-formula and naturality show that restrictions are semilinear, so these sectionwise
-modules form a concrete module presheaf M with underlying abelian pullback.
-
-The abelian unit gives a module map G → f_*M: its linearity is the coprojection
-formula at f⁻¹(V). Let c be the abelian adjunct of the abstract module unit. On a
-coprojection, c is restriction of that unit, by naturality and the adjunction formula.
-Thus c is linear, using common representatives, linearity of the module unit and
-semilinearity of restriction. Bundle it as cM : M → P(G). The module adjunct of
-the concrete unit gives dM : P(G) → M. Apply the module adjunction bijection to show
-dM ≫ cM = id, and the abelian adjunction bijection to show c ≫ forget(dM) = id.
-Forgetting the first identity supplies the other inverse identity for c. All these
-identities use the units, so this is the canonical comparison, not an arbitrary
-isomorphism. Empty opens and trivial rings are covered by the same filtered diagrams.
-(blueprint: lem-pc-topological-module-pullback-comparison) -/
+/-- The canonical abelian comparison to the abstract module pullback is an isomorphism. -/
 theorem topologicalModulePullbackComparison {X Y : TopCat.{u}} (f : X ⟶ Y)
     (O : Y.Presheaf CommRingCat.{u}) :
     let R := O ⋙ forget₂ CommRingCat RingCat

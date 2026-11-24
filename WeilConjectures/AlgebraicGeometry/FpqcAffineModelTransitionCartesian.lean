@@ -13,12 +13,14 @@ import Mathlib.CategoryTheory.Sites.Hypercover.Subcanonical
 /-!
 # Cartesian transitions between fpqc local models
 
-Source: Stacks Project, Descent, Tags 02W3 and 023Q
-(blueprint: lem-galois-fpqc-affine-model-transition-cartesian).
-
 The canonical restriction square is pasted with the model over the larger open.
 Mathlib's pullback criterion for covers in a subcanonical topology then applies to the
 fpqc singleton over the smaller open, using its given Cartesian model square.
+
+## References
+
+* [Stacks Project, Tag 02W3](https://stacks.math.columbia.edu/tag/02W3)
+* [Stacks Project, Tag 023Q](https://stacks.math.columbia.edu/tag/023Q)
 -/
 
 @[expose] public section
@@ -29,22 +31,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- A reconstructed transition between Cartesian local models is Cartesian.
-Source: Stacks Project, Descent, Tag 02W3 (nested affine models), using Tag 02W0.
-(blueprint: lem-galois-fpqc-affine-model-transition-cartesian)
-
-Proof: Put P = W_B times_B U and let k : W_U -> P be induced by t and the
-structural map to U. The Cartesian squares hp B and the two canonical
-restriction squares X_U -> X_B and V_U -> V_B identify the pullback of P along
-X_U -> U with V_U. The square hp U makes the same identification for W_U.
-The reconstruction equation identifies the base change of k with the identity
-under these identifications. Hence that base change is an isomorphism.
-The map X_U -> U is fpqc by base change of hf. Full faithfulness of fpqc descent
-of morphisms (Tag 02W0) descends the inverse of the base-changed k: its descent
-compatibility follows by taking inverses in the compatibility equation for k.
-Faithfulness makes both inverse composites identities. Thus k is an isomorphism,
-and composing the defining pullback square for P with k gives the asserted
-Cartesian square. This argument includes empty opens and objects. -/
+/-- A reconstructed transition between Cartesian local models is Cartesian
+(Stacks, Descent, Tags 02W3 and 02W0). -/
 theorem fpqc_affine_model_transition_cartesian
     {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

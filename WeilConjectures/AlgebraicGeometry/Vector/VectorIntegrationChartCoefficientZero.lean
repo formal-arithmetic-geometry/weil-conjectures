@@ -12,8 +12,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 set_option linter.privateModule false
 
 /-! # Rank-zero chart coefficient normalization
-
-Source: blueprint vector-bundle purity, paragraph 2, prescribed counit on a frame.
 -/
 
 @[expose] public noncomputable section

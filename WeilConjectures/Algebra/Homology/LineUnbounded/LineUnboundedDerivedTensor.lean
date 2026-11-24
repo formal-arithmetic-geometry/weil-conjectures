@@ -23,14 +23,14 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Unbounded derived tensor with a locally free line
 
-Source: Stacks Project, Tags 0B8N, 0B8Q, 06YN, 06YT, 06YU and 015F;
-blueprint main-20261015, Tate-twist local freeness, proof (3).
-(blueprint: lem-pur-line-unbounded-derived-tensor)
-
 The tensor bifunctor is the published K-flat derived tensor. The representative
 normalizations below specify the actual evaluation transformations, including their
 triangle identities. The ring of global sections acts canonically; restriction along
 any B-algebra structure B → Γ(R) gives every asserted B-linearity statement.
+
+## References
+
+* Stacks Project, Tags 0B8N, 0B8Q, 06YN, 06YT, 06YU, 015F, 010N, 03DA, 03EK and 04TT
 -/
 
 @[expose] public noncomputable section
@@ -50,9 +50,7 @@ namespace SheafOfModules.LineUnbounded
 of the line-tensor assertion, written over an abstract abelian category to avoid
 repeated expansion of the concrete sheaf category. `nP` and `nD` specify the
 representative normalization, and `evP`, `evD` are the specified ordinary evaluations.
-This is a transparent proposition, with no chosen functor, map or proof.
-Source: Stacks, 0B8N, 06YU, 015F and 010N
-(blueprint: lem-pur-line-unbounded-derived-tensor). -/
+This is a transparent proposition, with no chosen functor, map or proof. -/
 def comparisonData {A : Type u} [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] (B : Type b) [CommRing B] [Linear B A]
     (T S : A ⥤ A) [T.Additive] [S.Additive]
@@ -271,44 +269,36 @@ variable (X : Scheme.{t})
   [EssentiallySmall.{max a (t + 1)} X.ProEt]
   (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)})
 
-/-- The existing module category on the small pro-etale site.
-Source: Stacks, 03DA (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- The existing module category on the small pro-etale site. -/
 abbrev Modules := KFlatFixedTensor.Modules.{t + 1, t, max a (t + 1)} R
 
-/-- Global sections of the given commutative ring sheaf, with the coefficient size fixed.
-Source: Stacks, 04TT (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- Global sections of the given commutative ring sheaf, with the coefficient size fixed. -/
 abbrev scalars := RingCat.sectionsSubring
   (R.obj ⋙ forget₂ CommRingCat.{max a (t + 1)} RingCat.{max a (t + 1)})
 
-/-- The existing global-section action on module morphisms, componentwise on sections.
-Source: Stacks, 04TT (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- The existing global-section action on module morphisms, componentwise on sections. -/
 instance coefficientLinear : Linear (scalars.{t, a} X R) (Modules.{t, a} X R) :=
   SheafOfModules.homLinear.{max a (t + 1), t, t + 1, max a (t + 1)} R.obj
     ((sheafCompose (Scheme.ProEt.topology X)
       (forget₂ CommRingCat.{max a (t + 1)} RingCat.{max a (t + 1)})).obj R).property
 
-/-- The existing internal sheaf dual, without a change of site or module universe.
-Source: Stacks, 0B8Q (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- The existing internal sheaf dual, without a change of site or module universe. -/
 abbrev dual (P : Modules.{t, a} X R) : Modules.{t, a} X R :=
   homObj.{max a (t + 1), t, t + 1, max a (t + 1)} (R := R) P
     (𝟙_ (Modules.{t, a} X R))
 
-/-- Ordinary tensor with a fixed right factor.
-Source: Stacks, 03EK (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- Ordinary tensor with a fixed right factor. -/
 def tensor (P : Modules.{t, a} X R) : Modules.{t, a} X R ⥤ Modules.{t, a} X R := tensorRight P
 
-/-- Additivity of the existing ordinary tensor functor.
-Source: Stacks, 03EK (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- Additivity of the existing ordinary tensor functor. -/
 instance tensorAdditive (P : Modules.{t, a} X R) : (tensor.{t, a} X R P).Additive :=
   inferInstanceAs (tensorRight P).Additive
 
-/-- A module in degree zero in the unbounded cochain category.
-Source: Stacks, 06YN (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- A module in degree zero in the unbounded cochain category. -/
 abbrev single (P : Modules.{t, a} X R) : CochainComplex (Modules.{t, a} X R) ℤ :=
   (CochainComplex.singleFunctor (Modules.{t, a} X R) 0).obj P
 
-/-- The canonical pure tensor in the localization tensor, via the sheafification unit.
-Source: Stacks, 03EK (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- The canonical pure tensor in the localization tensor, via the sheafification unit. -/
 def pureTensor (P Q : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)
     (p : P.val.obj U) (q : Q.val.obj U) : (P ⊗ Q).val.obj U :=
   (tensorObjIsoSheafification P Q).inv.val.app U
@@ -317,8 +307,7 @@ def pureTensor (P Q : Modules.{t, a} X R) (U : X.ProEtᵒᵖ)
         (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app (P.val ⊗ Q.val)).app U
           (p ⊗ₜ[R.obj.obj U] q))
 
-/-- Associate, evaluate the last two factors, then apply the right unitor.
-Source: Stacks, 0B8N (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- Associate, evaluate the last two factors, then apply the right unitor. -/
 def cancellation (P Q : Modules.{t, a} X R) (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X R)) :
     tensor.{t, a} X R P ⋙ tensor.{t, a} X R Q ≅ 𝟭 (Modules.{t, a} X R) :=
   (tensorRightTensor P Q).symm ≪≫ (tensoringRight (Modules.{t, a} X R)).mapIso e ≪≫
@@ -328,8 +317,7 @@ private theorem cancellation_eq (P Q : Modules.{t, a} X R)
     (e : P ⊗ Q ≅ 𝟙_ (Modules.{t, a} X R)) :
     cancellation X R P Q e = LineEvaluation.cancellation R P Q e := rfl
 
-/-- Collapse the total tensor with a degree-zero right factor to termwise tensor.
-Source: Stacks, 06YU (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- Collapse the total tensor with a degree-zero right factor to termwise tensor. -/
 def collapse (P : Modules.{t, a} X R) :
     (KFlatFixedTensor.totalTensor.{t + 1, t, max a (t + 1)} R).flip.obj (single.{t, a} X R P) ≅
       (tensor.{t, a} X R P).mapHomologicalComplex (.up ℤ) :=
@@ -338,16 +326,14 @@ def collapse (P : Modules.{t, a} X R) :
 
 variable [HasDerivedCategory.{w} (Modules.{t, a} X R)]
 
-/-- Tensor with the degree-zero object using exactly the published derived tensor.
-Source: Stacks, 06YU (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+/-- Tensor with the degree-zero object using exactly the published derived tensor. -/
 def derived (P : Modules.{t, a} X R) :
     DerivedCategory (Modules.{t, a} X R) ⥤ DerivedCategory (Modules.{t, a} X R) :=
   (KFlatFixedTensor.derivedTensor.{t + 1, t, max a (t + 1), w} R).flip.obj
     (DerivedCategory.Q.obj (single.{t, a} X R P))
 
 /-- The canonical normalization of a termwise comparison on resolving complexes.
-It uses the actual K-flat representative comparison and the degree-zero total collapse.
-Source: Stacks, 06YU and 015F (blueprint: lem-pur-line-unbounded-derived-tensor). -/
+It uses the actual K-flat representative comparison and the degree-zero total collapse. -/
 def normalization (P : Modules.{t, a} X R)
     (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max a (t + 1)}
       (J := Scheme.ProEt.topology X) (R := R) (single.{t, a} X R P))
@@ -371,37 +357,7 @@ with its inverse given by the internal dual and the specified evaluation. Global
 linearity is equivalent to the universal B-linearity clause: every sheaf B-algebra
 structure is a ring map B → Γ(R), and B = Γ(R) is itself allowed. Every component of
 an ordinary evaluation is R-linear; the derived evaluations are their images under Q,
-as required by the two representative equations.
-
-Source: Stacks, Tags 0B8Q, 0B8N, 06YN, 06YU, 015F and 010N;
-blueprint Tate-twist local freeness, proof (3)
-(blueprint: lem-pur-line-unbounded-derived-tensor).
-
-Proof plan (all eight steps of the node):
-1. On a trivializing slice write P = Rp and its internal dual = Rp*. Evaluation
-   sends ap tensor bp* to ab; its inverse sends a to ap tensor p*. Under p' = up,
-   p'* = u⁻¹p*, so the inverses agree on overlaps and glue (0B8Q).
-2. Associate, evaluate and apply the unitor, in both orders. On pure tensors the
-   resulting inverse-pair triangle identities are the identities cx tensor p = x tensor cp
-   and dx tensor p* = x tensor dp*. These local identities glue (0B8N).
-3. The ordinary inverse tensor equivalence is additive and preserves finite limits
-   and colimits by their universal properties. Thus both factors are flat.
-4. Tot(C tensor L[0]) is degreewise C^i tensor L with differential d tensor 1.
-   Exactness identifies its cohomology with H^i(C) tensor L. It sends acyclics to
-   acyclics, proving K-flatness of L[0], with flat terms including the zero terms.
-5. Use lem-weil-pbc-kflat-fixed-tensor-triangulated for both lines and the exact
-   functor factorization (015F). The localization universal property identifies the
-   derived tensor with the termwise induced functor. The comparisons commute with
-   integer shifts and preserve distinguished triangles, including connecting arrows.
-6. Localize the degreewise cancellation isomorphisms. Uniqueness of localization
-   of natural transformations descends their compositions, inverses and triangle
-   identities. Their components satisfy exactly the representative equations below.
-7. Exact-functor cohomology (010N) and the termwise comparisons give the natural
-   H^i isomorphisms, independent of representatives by localization. No bound enters.
-8. Balanced tensor is linear over Γ(R); linear localization and the exact-linear
-   derived-functor lemma give linearity of both derived functors. The evaluations
-   are images of R-linear sheaf maps. Restrict scalars along B → Γ(R).
--/
+as required by the two representative equations. -/
 theorem line_unbounded_derived_tensor (P : Modules.{t, a} X R)
     [P.IsFiniteLocallyFreeOfRank 1] :
     IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)}

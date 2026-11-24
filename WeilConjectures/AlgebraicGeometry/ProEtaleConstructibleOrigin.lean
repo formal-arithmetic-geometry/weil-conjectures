@@ -24,12 +24,13 @@ set_option linter.privateModule false
 /-!
 # Constructible pro-etale coefficients are of etale origin
 
-Source: Weil blueprint, smooth purity, `theorem-comparison-constructible-sheaves`;
-Stacks Project, Tags 09AK and 09AL (blueprint: theorem-comparison-constructible-sheaves).
-
 The scalar conversion below is induced by constant scalar sections and sheafification.
 It retains the recorded intrinsic constructibility predicate and the recorded category
 of finite coefficient modules. Discrete topology is fixed canonically on lifted coefficients.
+
+## References
+
+* Stacks Project, Tags 09AK and 09AL.
 -/
 
 @[expose] public section
@@ -42,8 +43,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (T : Scheme.{u}) (B : Type u) [CommRing B] [Finite B]
 
-/-- The recorded canonical inverse image on module sheaves.
-Source: blueprint, site comparison (blueprint: theorem-comparison-constructible-sheaves). -/
+/-- The recorded canonical inverse image on module sheaves. -/
 private theorem fixedDerivedOrigin (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ)))
     (hc : ∀ q : ℤ, IsConstructible Λ

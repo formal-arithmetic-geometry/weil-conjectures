@@ -12,7 +12,13 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardResolutionQuasiIso
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
-/-! # Normalized affine cohomology edge maps -/
+/-! # Normalized affine cohomology edge maps
+
+## References
+
+* Stacks Project, Tag 0AVW
+* Stacks Project, Tag 08D4
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,24 +31,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Every component of a normalized affine edge morphism is invertible.
-Source: Stacks Project, perfect.tex, lemma-affine-morphism-equivalence (Tag 0AVW),
-and perfect.tex, lemma-application-nice-K-injective (Tag 08D4).
-(blueprint: lem-pc-affine-pushforward-cohomology-edge-isIso).
-
-Proof: For a complex C of A-modules, associated sheaves and their kernels, images
-and cohomology are quasi-coherent. Affine higher-direct-image vanishing, with
-bound one in the unbounded truncation comparison of Tag 08D4, shows that the
-right-derived pushforward unit on T_A C induces an isomorphism in each degree.
-Every other factor of q is an isomorphism (exact tilde and scalar restriction,
-the Q/homology comparison, and σ), so q is invertible. The normalization equation
-for the identity representative says q = (T_B res_phi)(b) followed by α at Q(T_A C).
-Since b is an isomorphism, this component of α is invertible. Every object of
-D_QCoh(Spec A) is isomorphic to Q(T_A C), by the affine derived equivalence of
-Tag 06Z0. Naturality of α along this isomorphism expresses its remaining component
-as a composite of invertible maps. Thus every component is invertible. This works
-for unbounded C and for the zero ring; it does not require an arbitrary α to agree
-with the normalized edge map without the displayed normalization hypothesis. -/
+/-- Every component of a normalized affine edge morphism is invertible. -/
 theorem affinePushforwardCohomologyEdge_isIso
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
     (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅

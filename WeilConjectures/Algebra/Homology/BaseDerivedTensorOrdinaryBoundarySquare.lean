@@ -11,7 +11,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 /-! # The ordinary derived counit boundary square
 
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1.
+## References
+
+* Stacks Project, Tag 06Y6, Lemma 15.61.1.
+* Stacks Project, Tag 05SU.
 -/
 
 @[expose] public section
@@ -276,25 +279,7 @@ private theorem counit_shifted_map_square
   simp only [Category.assoc]
   erw [hordinary]
 
-/-- The canonical derived connecting map commutes with the ordinary counit.
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1 (universal counit), and Tag 05SU
-(shift compatibility); step 2 of the ordinary triangle-row argument.
-
-Proof: the universal transformation δ from m₃.derived to m₁.derived is fixed
-by its counit identity. Whisker that identity by restriction A to R and the
-homotopy quotient. Naturality of the resulting counit at T.mor₃ and its
-CommShift equation identify the shifted homology square. The homology
-factorization isomorphisms for Qh and the homotopy quotient respect shifts.
-The ordinary associativity maps also respect T.mor₃ and shift, since both
-composites send b tensor x to (1 tensor b) tensor T.mor₃(x), and shifting gives
-the same differential sign on each side. Exact restriction E to B has a
-natural homology comparison compatible with shifts. Compose these squares,
-substitute both comparison_eq identities and the displayed formula for s₂,
-and cancel the restriction homology isomorphism. Faithfulness of restriction
-E to B yields the asserted E-linear square. This argument uses only the
-third arrow of T, not distinguishedness or exactness of any ordinary triangle.
-Zero rings, zero complexes and nonflat scalar extensions cause no exception.
-(blueprint: lem-pc-base-derived-tensor-ordinary-boundary-square). -/
+/-- The canonical derived connecting map commutes with the ordinary counit. -/
 theorem baseDerivedTensor_ordinary_boundary_square
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

@@ -11,7 +11,13 @@ import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
 import Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! # Normalized derived lift of the geometric singleton comparison -/
+/-! # Normalized derived lift of the geometric singleton comparison
+
+## References
+
+* Stacks Project, Tag 0FND
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
+-/
 
 set_option Elab.async false
 
@@ -42,24 +48,7 @@ variable {BY BX u I}
 variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
   (SX : SystemScalarAssignment (J := K)) (TX : SystemTensorCoherence SX)
 
-/-- Lift an already specified ordinary singleton comparison to derived categories.
-Source: Zheng, base-change sentence before Lemma 4.10, printed p. 23; Stacks 0FND.
-(blueprint: lem-pur-system-geometric-derived-lift).
-
-Proof: Localize the exact evaluation square using the exact-functor compositor.
-Flat-term K-flat resolutions exist at each coefficient level, and geometric inverse
-image preserves them by ringed-topos K-flat pullback followed by the identity scalar
-unit. The normalized extension-evaluation comparison applied to the ordinary singleton
-mate gives the derived isomorphism and its cochain representative. Apply the same
-comparison to scalar restriction, with the good class restricted to flat-term K-flat
-complexes, to obtain the scalar representative. The strict transition equation of F
-localizes as an equation of whole-system natural transformations. Transpose through
-the scalar and singleton derived adjunctions: their normalized below-level comparisons
-give the lower-singleton square. At the selected level the ordinary multiplication
-identity, the normalized derived tensor unit, and a resolving representative identify
-the singleton adjunction unit with inverse multiplication. The mate unit identity
-then gives derived multiplication. No detection of equality of derived maps by
-evaluation is used. -/
+/-- Lift an already specified ordinary singleton comparison to derived categories. -/
 theorem geometricSystemDerivedLift
     (F : GeometricSystemOrdinaryData BY BX u I)
     (ordinary : ∀ n : ℕ,

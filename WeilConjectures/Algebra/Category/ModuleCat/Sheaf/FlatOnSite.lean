@@ -15,15 +15,16 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 /-!
 # Flat sheaves of modules with independent universes
 
-Source: Stacks Project, Modules on Sites, Definition 03ER, item (3)
-(auxiliary; not a blueprint node).
-
-The blueprint node `def-pc-flat-sheaf-modules` is `SheafOfModules.IsFlat`, which needs the
-site and the coefficients in one universe. `SheafOfModules.IsFlatOnSite` is the same notion
-for independent site-object, site-morphism, coefficient and module universes. Its tensor
-functor is `siteSheafTensorRight`, the sheafification of the sectionwise balanced tensor
-product. When the universes agree, the two predicates are equivalent
+The notion `SheafOfModules.IsFlat` needs the site and the coefficients in one universe.
+`SheafOfModules.IsFlatOnSite` is the same notion for independent site-object, site-morphism,
+coefficient and module universes. Its tensor functor is `siteSheafTensorRight`, the
+sheafification of the sectionwise balanced tensor product. When the universes agree, the two
+predicates are equivalent
 (`SheafOfModules.isFlatOnSite_iff_isFlat`).
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03ER, item (3)
 -/
 
 @[expose] public section
@@ -44,8 +45,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 `siteSheafTensorRight`) is exact: it preserves finite limits and finite colimits. The
 sheafification instance arguments on the site provide the sheafification of presheaves of
 modules, hence the abelian category `Mod(R)`. This is `SheafOfModules.IsFlat` with independent
-universes, see `SheafOfModules.isFlatOnSite_iff_isFlat`.
-Source: Stacks Project, Tag 03ER, item (3) (auxiliary; not a blueprint node). -/
+universes, see `SheafOfModules.isFlatOnSite_iff_isFlat`. -/
 def IsFlatOnSite
     (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :
     Prop :=
@@ -56,12 +56,7 @@ end SheafOfModules
 namespace SheafOfModules
 
 /-- When the site and the coefficients live in one universe, `IsFlatOnSite` agrees with
-`SheafOfModules.IsFlat`, the formalisation of `def-pc-flat-sheaf-modules`
-(auxiliary; not a blueprint node).
-
-Proof: `siteSheafTensorRightIso` identifies `siteSheafTensorRight F` with `tensorRight F` for
-the monoidal structure `SheafOfModules.monoidalCategory R`, and exactness is invariant under
-natural isomorphisms. -/
+`SheafOfModules.IsFlat`. -/
 theorem isFlatOnSite_iff_isFlat {C : Type uC} [Category.{uC} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{uC}] [HasWeakSheafify J AddCommGrpCat.{uC}]
     {R : Sheaf J CommRingCat.{uC}}

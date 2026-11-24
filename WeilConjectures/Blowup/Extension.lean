@@ -52,6 +52,10 @@ Fourth, the product of two `U`-admissible centers is `U`-admissible
   `AlgebraicGeometry.IsAdmissible.exists_hom_blowup_of_finite` — finitely many admissible
   blow-ups admit a common admissible blow-up.
 
+## References
+
+* Stacks Project, Tags 0F3X, 0F3W (the theorems this file supports)
+* Stacks Project, Tags 01PF, 01PH, 080M, 0806
 -/
 
 @[expose] public section
@@ -113,13 +117,8 @@ theorem Scheme.IdealSheafData.exists_blowup_comap_iso {X Y : Scheme.{u}}
   have : IsIso h := hpb.isIso_snd_of_isIso
   exact ⟨asIso h, hh⟩
 
-/-- **The canonical lift of a blow-up localizes on the base** (the local form of Stacks
-Project Tag 0806).
-
-Both horizontal legs come from the restriction theorem for blow-ups along open
-immersions (`Scheme.IdealSheafData.exists_isPullback_blowup_comap`), and the square
-commutes by uniqueness of lifts
-(`Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`). -/
+/-- **The canonical lift of a blow-up localizes on the base**: over an open `O` of the base,
+the canonical lift is compatible with the restriction of the blow-up to `O`. -/
 theorem Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens {X Y : Scheme.{u}}
     (I : X.IdealSheafData) (f : Y ⟶ X) (O : X.Opens)
     {JO : O.toScheme.IdealSheafData} (hJO : I.comap O.ι = JO)
@@ -179,20 +178,11 @@ theorem Scheme.IdealSheafData.exists_comm_lift_blowup_comap_opens {X Y : Scheme.
       Scheme.Hom.comp_base, TopCat.coe_comp, Set.preimage_comp]
     rfl
 
-/-- **Gluing a finite-type centre across two overlapping quasi-compact opens** (Stacks
-Project Tag 080M): let `A`, `B` be quasi-compact opens of a quasi-compact
-quasi-separated scheme `X` and let `J` be a finite-type ideal sheaf on `A` whose
-support avoids `B`. Then `J` extends to a finite-type ideal sheaf on `X` whose support
-still avoids `B`.
-
-Unlike `AlgebraicGeometry.IsAdmissible.exists_extend`, no containment between `A` and
-`B` is assumed; this is what makes the extension usable when the open to be avoided is
-not contained in the open carrying the centre. The extension is built in two steps:
-the naive extension `J.map A.ι` already avoids `B`, because `B` is open and misses the
-image of the support of `J`, and it is of finite type on `A ⊔ B` (equal to `J` on `A`
-and to the unit ideal on `B`); the finite-type extension theorem (Stacks Project
-Tag 01PF) then produces a finite-type ideal sheaf on all of `X` with the same
-restriction to `A ⊔ B`. -/
+/-- **Gluing a finite-type centre across two overlapping quasi-compact opens**: let `A`, `B`
+be quasi-compact opens of a quasi-compact quasi-separated scheme `X` and let `J` be a
+finite-type ideal sheaf on `A` whose support avoids `B`. Then `J` extends to a finite-type
+ideal sheaf on `X` whose support still avoids `B`. No containment between `A` and `B` is
+assumed, unlike in `AlgebraicGeometry.IsAdmissible.exists_extend`. -/
 theorem Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {A B : X.Opens} (hA : IsCompact (A : Set X))
     (hB : IsCompact (B : Set X)) (J : A.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
@@ -256,12 +246,7 @@ theorem Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint {X : Scheme
     rw [hKcomap, Scheme.IdealSheafData.coe_support_comap] at hy
     exact Set.disjoint_left.mp hGB hxB hy
 
-/-- **Extension of admissible blow-up centers across a quasi-compact open** (in the
-style of Stacks Project Tag 080M).
-
-The extended center is the product of a finite-type extension of `J` (Stacks Project
-Tag 01PF) with a finite-type ideal cutting out the boundary of `W` (Stacks Project
-Tag 01PH). -/
+/-- **Extension of admissible blow-up centers across a quasi-compact open**. -/
 theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {W : X.Opens} (hW : IsCompact (W : Set X)) {U : X.Opens}
     (hUW : U ≤ W) (J : W.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
@@ -312,15 +297,12 @@ theorem IsAdmissible.exists_extend {X : Scheme.{u}} [CompactSpace X]
   obtain ⟨h, hh, hpb⟩ := (I₁ * I₀).exists_isPullback_blowup_comap W.ι
   exact ⟨⟨I₁ * I₀, hI₁ft.mul hI₀ft, hdisjK⟩, h, hh, hpb⟩
 
-/-- **Extension of an admissible blow-up center across a second quasi-compact open**
-(Stacks Project Tag 080M): a
+/-- **Extension of an admissible blow-up center across a second quasi-compact open**: a
 finite-type center `J` on a quasi-compact open `A` of a quasi-compact quasi-separated
 scheme `X`, whose support avoids the overlap `A ⊓ B` with a quasi-compact open `B`,
 extends to a `B`-admissible center on `X` whose blow-up restricts over `A` to the
-blow-up of `J`. This is `AlgebraicGeometry.IsAdmissible.exists_extend` with the
-inclusion `B ≤ A` of the preserved open in the ambient open dropped; the center is
-produced by
-`AlgebraicGeometry.Scheme.IdealSheafData.exists_finiteType_comap_eq_of_disjoint`. -/
+blow-up of `J`. This is `AlgebraicGeometry.IsAdmissible.exists_extend` without the
+inclusion `B ≤ A`. -/
 theorem IsAdmissible.exists_extend_of_disjoint {X : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] {A B : X.Opens} (hA : IsCompact (A : Set X))
     (hB : IsCompact (B : Set X)) (J : A.toScheme.IdealSheafData) (hJ : J.ofFiniteType)
@@ -335,18 +317,10 @@ theorem IsAdmissible.exists_extend_of_disjoint {X : Scheme.{u}} [CompactSpace X]
   obtain ⟨h, hh, hpb⟩ := K.exists_isPullback_blowup_comap A.ι
   exact ⟨⟨K, hKft, hKdisj⟩, h, hh, hpb⟩
 
-/-- **The canonical lift of a blow-up localizes on the base**, arrow form.
-
-Difference from the informal statement: the ideals `E` and `F`, the restrictions of `D`
-to `O` and of `D.comap f` to `f ⁻¹ᵁ O`, are taken as parameters, so that two centers
-agreeing over `O` can be compared through the *same* restricted lift `m` (see
-`Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup_of_comap_eq`).
-
-Both cartesian squares come from `Scheme.IdealSheafData.exists_isPullback_blowup_comap`
-(for `O.ι` on `X` and for `(f ⁻¹ᵁ O).ι` on `Y`); pasting them with the cartesian square
-of `f ∣_ O` exhibits `m` as a base change of `l` along `O.ι`, and the identification of
-the two squares is uniqueness of lifts
-(`Scheme.IdealSheafData.hom_ext_comap_blowup`, Stacks Project Tag 0806). -/
+/-- **The canonical lift of a blow-up localizes on the base**, arrow form: the restricted
+lift `m` is isomorphic, as an arrow, to the restriction of the canonical lift `l` over `O`.
+The ideals `E` and `F`, the restrictions of `D` to `O` and of `D.comap f` to `f ⁻¹ᵁ O`,
+are parameters. -/
 theorem Scheme.IdealSheafData.nonempty_arrowIso_morphismRestrict_lift_blowup
     {X Y : Scheme.{u}} {D : X.IdealSheafData} {f : Y ⟶ X} {O : X.Opens}
     {E : O.toScheme.IdealSheafData} (hE : D.comap O.ι = E)
@@ -445,9 +419,7 @@ theorem Scheme.IdealSheafData.isOpenImmersion_morphismRestrict_lift_blowup_congr
       hD hl₁ hl₂
   exact MorphismProperty.arrow_mk_iso_iff (P := @IsOpenImmersion) e
 
-/-- **The product of two `U`-admissible centers is `U`-admissible** (bookkeeping for
-the common blow-up): finite-typeness is stable under
-products, and the support of a product is the union of the supports. -/
+/-- **The product of two `U`-admissible centers is `U`-admissible**. -/
 def IsAdmissible.mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissible X U) :
     IsAdmissible X U where
   I := B₁.I * B₂.I
@@ -464,10 +436,8 @@ lemma IsAdmissible.I_mul {X : Scheme.{u}} {U : X.Opens} (B₁ B₂ : IsAdmissibl
   rfl
 
 /-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**: for a
-finite nonempty family of
-`U`-admissible centres `B i`, the product of the centres is `U`-admissible
-(`AlgebraicGeometry.IsAdmissible.mul`) and its blow-up dominates every `Bl_{B i}(X)` over `X`
-(`Scheme.IdealSheafData.exists_blowup_mul_hom_left`, `_right`), by induction on the family. -/
+finite nonempty family of `U`-admissible centres `B i`, the product of the centres is
+`U`-admissible and its blow-up dominates every `Bl_{B i}(X)` over `X`. -/
 theorem IsAdmissible.exists_hom_blowup_of_finite {X : Scheme.{u}} {U : X.Opens} {ι : Type*}
     [Finite ι] [Nonempty ι] (B : ι → IsAdmissible X U) :
     ∃ C : IsAdmissible X U, ∀ i, ∃ g : C.I.blowup ⟶ (B i).I.blowup,

@@ -35,9 +35,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # Finite Koszul tensor vanishing after residue vanishing
 
-Source: Stacks Project, more-algebra.tex, Tags 0G1T and 0G1U;
-algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, more-algebra.tex, Tags 0G1T and 0G1U
+* Stacks Project, algebraization.tex, Tag 0A0E
 -/
 
 @[expose] public section
@@ -50,30 +51,7 @@ namespace CategoryTheory
 
 /-- Each finite negative Koszul tensor stage vanishes when residue extension vanishes.
 There is no completeness, boundedness or Noetherian hypothesis on the input complex.
-
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, lemma-derived-vanishing-mod-I,
-and the finite-stage calculation in Tag 0G1U, lemma-derived-complete-zero-bis;
-algebraization.tex, Tag 0A0E, identifies the dual positive complex with the negative model.
-(auxiliary; not a blueprint node).
-
-Proof: replace P by a termwise-flat K-flat complex. The specified derived extension
-comparison makes its scalar extension along q acyclic; scalar extension preserves
-K-flatness. A module annihilated by ker(q) has a unique S-module structure, since q
-is surjective on sections. Balanced tensor cancellation identifies its tensor with
-P with restriction of its tensor over S with the acyclic K-flat extension of P.
-It is therefore acyclic. For a module annihilated by ker(q)^e, filter by the finite
-sequence of powers of ker(q). The successive quotients are annihilated by ker(q),
-and termwise flatness of P preserves the short exact sequences, so induction and
-exact homology give the same vanishing for that module. Each generator power acts
-nullhomotopically on its Koszul factor; tensor the contractions with the remaining
-factors. The pigeonhole argument makes ker(q)^(r*(n+1)+1) annihilate the homology
-of the finite Koszul complex. Finite Koszul self-duality and shift give the same
-statement for its dual negative model. Its finite Postnikov tower, tensored with
-P, has zero successive factors by the module calculation, so its total tensor is
-acyclic. Finally the finite free dual Koszul complex is K-flat, so tensoring it
-preserves the quasi-isomorphism from the chosen replacement back to P. For r=0,
-ker(q)=0 and sectionwise surjectivity makes q an isomorphism, giving the assertion
-directly. The argument also includes the unit ideal and zero coefficient ring. -/
+-/
 theorem finiteKoszulTensor_acyclic_of_residue
     {C : Type u} [SmallCategory C] {T : GrothendieckTopology C}
     {R S : Sheaf T CommRingCat.{u}} (q : R ⟶ S) (r : ℕ)

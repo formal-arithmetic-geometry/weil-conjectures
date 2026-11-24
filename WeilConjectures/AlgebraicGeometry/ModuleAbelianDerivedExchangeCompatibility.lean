@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 
 /-! # Compatibility of canonical coefficient comparisons with derived exchange
 
-Source: Stacks Project, Tag 0736 and Remark 07A7, together with Tag 03FD.
-(blueprint: lem-weil-pbc-module-abelian-derived-exchange-compatibility)
+## References
+
+* Stacks Project, Tags 0736, 07A7 and 03FD.
 -/
 
 @[expose] public section
@@ -69,30 +70,8 @@ noncomputable def moduleAbelianDerivedExchangeTargetIso
       ((moduleAbelianDerivedUpperStarIso Λ g').symm.app K)
 
 /-- Canonical coefficient comparisons intertwine the derived exchange transformations.
-The maps in this equation are fixed by their units; no isomorphisms are chosen here.
-
-Source: Stacks Project, Tag 0736 (construction and homotopy uniqueness),
-Remark 07A7 (adjunction mate), and Tag 03FD (acyclic comparison).
-(blueprint: lem-weil-pbc-module-abelian-derived-exchange-compatibility)
-
-Proof: On a bounded below module complex P, precompose both sides with the
-forgotten g^* image of the unit f_*P → Rf_*P. The defining factorization of the
-coefficient direct-image comparison replaces the forgotten derived unit by the
-abelian unit after the termwise direct-image identification. The inverse-image
-comparison is the mate of the forgotten module unit; its defining adjunction
-identity identifies the inverse-image units and counits. Direct-image
-composition is given by evaluation on base changes, so its coefficient
-identification also respects the square's commutation isomorphism. Expand the
-underived exchange as unit, square isomorphism and counit. These identities show
-that its forgotten version is the abelian exchange under the edge comparisons.
-The two precomposed derived transformations consequently agree by the
-factorization formula for derived exchange. Uniqueness of the right derived
-transformation gives equality before precomposition. Equivalently, compute on
-module injective resolutions: the forgotten terms are abelian f_*-acyclic by
-03FD and 072W, and the comparisons to abelian injective resolutions are unique
-up to homotopy; the same underived mate therefore induces both morphisms in the
-localized category. This argument works for a commutative square and for any
-bounded below K, and needs neither properness nor a geometric point. -/
+The maps in this equation are fixed by their units; no isomorphisms are chosen here
+(Stacks, Tags 0736, 07A7 and 03FD). -/
 theorem moduleAbelianDerivedExchange_compatibility
     (Λ : Type (u + 1)) [CommRing Λ]
     {X X' Y Y' : Scheme.{u}}

@@ -32,8 +32,10 @@ Let `R` be a sheaf of commutative rings on a site, with the tensor product
   `SheafOfModules.IsFlat` (`G ↦ G ⊗ F` is exact) if and only if it satisfies
   `ObjectProperty.flat` (`F ⊗ -` and `- ⊗ F` are exact).
 
-Source: Stacks Project, Cohomology on Sites, Definition `sites-cohomology-definition-K-flat`
-(Tag 06YN) and Lemma 06YD; Modules on Sites, Definition 03ER, item (3).
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YN and 06YD
+* Stacks Project, Modules on Sites, Definition 03ER, item (3)
 -/
 
 @[expose] public section
@@ -62,7 +64,7 @@ set_option synthInstance.maxSize 256 in
 `CochainComplex.IsKFlatTensor` (`Tot(F ⊗ K)` is acyclic for every acyclic `F`) if and only if it
 is K-flat with respect to quasi-isomorphisms: tensoring with `K` on either side preserves
 quasi-isomorphisms. By the symmetry of the tensor product, the two one-sided conditions on
-acyclic complexes agree (Stacks, Tags 06YN and 06YD). -/
+acyclic complexes agree. -/
 theorem isKFlatTensor_iff_kFlat (K : CochainComplex 𝒜 ℤ) :
     K.IsKFlatTensor ↔ (HomologicalComplex.quasiIso 𝒜 (.up ℤ)).kFlat K := by
   rw [← HomotopyCategory.kFlat_quotient_obj_iff, HomotopyCategory.kFlat_iff_preserves_acyclic]

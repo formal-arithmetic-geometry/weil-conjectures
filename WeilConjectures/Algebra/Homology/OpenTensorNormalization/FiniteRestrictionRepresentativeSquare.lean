@@ -9,7 +9,12 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.Restricti
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Left
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Right
 
-/-! # Representative cancellation for the finite restriction square -/
+/-! # Representative cancellation for the finite restriction square
+
+## References
+
+* Stacks Project, Tags 07A4 and 0GL1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,24 +24,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization
 
-/-- Cancellation of the cochain model equations on resolving finite pairs.
-Source: Stacks 07A4 and 0GL1; steps 1, 3 and 4 of
-lem-sf-finite-tensor-restriction-coherence.
-
-Proof: transport resolving through the ordinary open pin; restriction preserves
-resolving by the supplied TensorComparison.preserves. Apply the two tensor pins'
-model equations to these pairs and the restriction part of the exact open pin.
-The published mixed representative equation writes delta followed by the native
-localization tensorator as the total comparison followed by that tensorator.
-Each native tensorator on these resolving pairs is invertible: its realized
-image is a composite of the isomorphisms in FiniteTensorModel, and realization
-reflects isomorphisms. Postcompose the proposed square with the realization and
-restriction factor isomorphisms. Substitute the ringed tensor comparison's stored
-representative equation, and use its naturality to move the ordinary open pin
-across the representative isomorphisms. Cancel those isomorphisms and the native
-tensorators. The remaining equality is Q applied to h_total at P,Q. Reverse the
-cancellations to obtain the displayed representative square.
-(blueprint: lem-sf-finite-restriction-representative-square) -/
+/-- Cancellation of the cochain model equations on resolving finite pairs. -/
 theorem finite_restriction_representative_square
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

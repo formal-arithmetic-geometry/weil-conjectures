@@ -16,8 +16,11 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 /-!
 # Localized Hom-complex cycles
 
-Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
 This module states the lifting of localized chain maps to cycles.
+
+## References
+
+* Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y
 -/
 
 @[expose] public section
@@ -29,19 +32,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true in
-/-- A localized chain map lifts to a sectionwise degree-zero cycle.
-Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
-(blueprint: lem-pur-localized-hom-complex-cycle-lift)
-
-Proof: evaluation at U preserves the degree-zero product cone in homComplex_exists.
-Each component of g is an internal-Hom section over U, so this product cone supplies
-an element x of the evaluated degree-zero term with those projections. Compose the
-differential of x with each degree-one projection. The differential formula at n = 0
-is postcomposition by d_I minus precomposition by d_L. The chain-map identity of g
-makes this difference zero on every slice object. Evaluation also preserves the
-degree-one product, whose projections jointly detect zero, so d x = 0. The kernel
-universal property of the cycle inclusion supplies z mapping to x. Its projections
-are the prescribed components. This uses all integer degrees without boundedness. -/
+/-- A localized chain map lifts to a sectionwise degree-zero cycle. -/
 theorem localizedHomComplex_cycle_lift
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

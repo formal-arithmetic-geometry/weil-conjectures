@@ -28,9 +28,7 @@ attribute [local instance 100000] abDerived
 
 /-- The normalized square for a line bundle and its geometric pullback.
 Construct the functors and endpoints explicitly. Picard cohomology naturality gives the
-ordinary class square; all comparison equalities are the defining formulas.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-line-bundle-tower-pullback-square). -/
+ordinary class square; all comparison equalities are the defining formulas. -/
 def towerIntegral_normalizedSquare {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : Y.Modules) [Scheme.Modules.IsInvertible L] :
     NormalizedIntegralTowerSquare X Y where

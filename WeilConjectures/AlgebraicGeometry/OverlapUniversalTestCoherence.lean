@@ -11,8 +11,9 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 
 /-! # Coherence from universal overlap tests
 
-Source: Stacks Project, Tag 01ZR, first proof.
-(blueprint: lem-pc-overlap-universal-test-coherence). -/
+## References
+
+* Stacks Project, Tag 01ZR (first proof). -/
 
 @[expose] public section
 
@@ -20,16 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Raw transition coherence follows from diagonal and universal triple tests.
-Source: Stacks Project, Tag 01ZR, first proof, Zariski gluing.
-(blueprint: lem-pc-overlap-universal-test-coherence).
-
-Proof: Pull each tested diagonal identity along an arbitrary chart map. For an
-arbitrary triple of chart maps with common image in the base, the universal
-property of the chosen threefold pullback supplies their common lift. Pull the
-tested triple equation along that lift. Naturality identifies all three pulled
-maps with the supplied transition maps. The pseudofunctor comparison isomorphisms
-cancel and its pullback functor preserves identity and composition. -/
+/-- Raw transition coherence follows from diagonal and universal triple tests
+(Stacks, Tag 01ZR). -/
 theorem coherent_of_universal_tests {C : Type*} [Category C]
     {F : Pseudofunctor (LocallyDiscrete Cᵒᵖ) Cat}
     {ι : Type*} {S : C} {X : ι → C} {f : ∀ a, X a ⟶ S}

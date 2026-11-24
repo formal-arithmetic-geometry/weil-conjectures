@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionModuleImagePullbackCore
 
 /-! # Sheaf gluing over an arbitrary open union
 
-Source: Stacks Project, Tags 01EB and 08BV.
-(blueprint: lem-pc-open-union-module-image-pullback).
+## References
+
+* [Stacks, Tags 01EB and 08BV]
 -/
 
 @[expose] public section
@@ -23,23 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 set_option autoImplicit false
 namespace AlgebraicGeometry
 
-/-- The direct-image restriction square for a union is a pullback, for any module sheaf.
-
-Source: Stacks Project, Tag 01EB, lemma-mayer-vietoris, first sentence of its proof;
-Tag 08BV, lemma-exact-sequence-j-star, displayed sequence.
-(blueprint: lem-pc-open-union-module-image-pullback).
-
-Proof: Fix a test open T. Conjugate each open image by the direct image of
-`overFunctorEquiv`, identifying its sections with M(A ∩ T). The comparison
-`schemeOpenModuleImage_section_restriction` identifies all four arrows with
-ordinary restriction. The opens U ∩ T and V ∩ T have union (U ∪ V) ∩ T.
-Sheaf gluing and separatedness give a unique section on that union for any
-compatible pair. Uniqueness proves that amalgamation commutes with restriction
-in T, addition, and multiplication by sections of the structure sheaf on T.
-Thus amalgamation defines a morphism of module sheaves with the prescribed
-composites. Separatedness proves uniqueness of this morphism. This is exactly
-the pullback universal property. The same sheaf axiom covers empty and repeated
-opens. No injectivity or complex is needed. -/
+/-- The direct-image restriction square for a union is a pullback, for any module sheaf
+(Stacks, Tags 01EB and 08BV). -/
 theorem schemeOpenUnionModuleImage_isPullback
     (X : Scheme.{u}) (U V : X.Opens)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :
