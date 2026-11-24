@@ -76,7 +76,7 @@ private theorem counit_of_unit
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-private theorem upper_unit (A : Type (u + 1)) [CommRing A] [Finite A]
+private theorem upper_unit (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (comparisonUpperStar (ModuleCat.{u + 1} A) U).map
@@ -114,7 +114,7 @@ private theorem upper_unit (A : Type (u + 1)) [CommRing A] [Finite A]
   erw [hn]
   exact h
 set_option backward.isDefEq.respectTransparency false in
-private theorem derived_unit (A : Type (u + 1)) [CommRing A] [Finite A]
+private theorem derived_unit (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (K : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     let B := ModuleCat.{u + 1} A
@@ -185,7 +185,7 @@ private theorem inclusion_comp_inv {C D E : Type*}
   exact Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app F G K
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem plus_unit (A : Type (u + 1)) [CommRing A] [Finite A]
+private theorem plus_unit (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (K : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     let B := ModuleCat.{u + 1} A
@@ -215,7 +215,7 @@ private theorem plus_unit (A : Type (u + 1)) [CommRing A] [Finite A]
     Functor.id_obj] using h
 set_option backward.isDefEq.respectTransparency false in
 /-- Site comparison preserves the evaluation counit of extension by zero. -/
-theorem openSiteEvaluationCounit (A : Type (u + 1)) [CommRing A] [Finite A]
+theorem openSiteEvaluationCounit (A : Type (u + 1)) [CommRing A]
     {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :
     ∀ B : DerivedCategory.Plus (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)),
       (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus.map
