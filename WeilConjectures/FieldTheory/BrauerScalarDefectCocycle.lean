@@ -12,8 +12,28 @@ import WeilConjectures.FieldTheory.BrauerScalarDefectCocycleRealization
 /-!
 # The continuous scalar-defect cocycle
 
-Source: Stacks Project, Lemma 03R6, construction before Theorem 03R7, and Section 0DVG.
-(blueprint: lem-sc-brauer-scalar-defect-cocycle).
+Given a splitting `e` of `K^sep ⊗[K] A` as a matrix algebra and locally constant matrix lifts
+`b` of the associated projective descent datum, the scalar defect `b_g g(b_h) b_(gh)⁻¹` is a
+scalar matrix whose entries form a continuous homogeneous two-cocycle with values in the units
+of the separable closure.
+
+## Main results
+
+- `Field.exists_brauerScalarDefect_cocycle`
+
+## Implementation details
+
+The quotient `b_g g(b_h) b_(gh)⁻¹` commutes with every matrix and is therefore scalar, say
+`c(g,h)`. Associativity gives the cocycle identity, and local constancy of `b` gives local
+constancy of `c`. The homogeneous cochain is `f(g₀,g₁,g₂) = g₀(c(g₀⁻¹g₁, g₁⁻¹g₂))`, curried via
+the compact-open exponential law into Mathlib's continuous cochains; evaluation at `(1,g,gh)`
+recovers `c(g,h)`. No normalization of `b` or `c` is needed.
+
+## References
+
+* [Stacks Project, Lemma 03R6](https://stacks.math.columbia.edu/tag/03R6) and the construction
+  before Theorem 03R7
+* [Stacks Project, Section 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -21,34 +41,9 @@ universe u
 namespace Field
 
 open scoped TensorProduct
-/-- The scalar defect of locally constant lifts is represented by a homogeneous cocycle.
-Proof: write X_a = e(1 ⊗ a). Applying g to the identity for h and then the identity
-for g shows that b_g g(b_h) and b_(gh) induce the same conjugation on every X_a.
-The X_a span the matrix algebra over the separable closure, since every tensor is a
-sum of scalar multiples of 1 ⊗ a and e is surjective. Thus their quotient
-D(g,h) = b_g g(b_h) b_(gh)⁻¹ commutes with every matrix. A matrix commuting with all
-matrix units is scalar: commutation with the diagonal units kills its off-diagonal
-entries, and commutation with the other units makes its diagonal entries equal.
-Since n is positive and D is invertible, that scalar is a unique unit c(g,h).
-Expand b_g g(b_h) gh(b_k) in the two associative orders and cancel b_(ghk).
-This gives c(g,h)c(gh,k) = g(c(h,k))c(g,hk).
-The function c is jointly locally constant. Near any (g,h), b_g, b_h and b_(gh) are
-constant by local constancy of b and continuity of group multiplication; the action
-of g on the finitely many entries of the fixed b_h is locally constant by openness
-of their Galois stabilizers. Extracting a diagonal entry of D preserves local
-constancy. The action on any fixed unit is similarly locally constant.
-Set f(g₀,g₁,g₂) = g₀(c(g₀⁻¹g₁,g₁⁻¹g₂)), and use Additive.ofMul on its values.
-This is jointly continuous into the discrete coefficient module and equivariant for
-simultaneous left translation. The displayed multiplicative cocycle identity says
-that its alternating homogeneous differential vanishes. The absolute Galois group
-is compact Hausdorff; the compact-open exponential law curries this jointly
-continuous map into Mathlib's iterated continuous cochains. Equivariance puts it
-in the invariant cochains, and vanishing differential gives an element z of the
-cycles object. Evaluation at (1,g,gh) recovers c(g,h). Its defining scalar matrix
-identity is exactly the conclusion. Neither normalization of b nor of c is needed.
-
-Source: Stacks Project, scalar-defect construction preceding Theorem 03R7 and Section 0DVG.
-(blueprint: lem-sc-brauer-scalar-defect-cocycle). -/
+/-- If the locally constant lifts `b` satisfy `g(e(1 ⊗ a)) = b_g⁻¹ e(1 ⊗ a) b_g`, then there is
+a continuous two-cocycle `z` with values in the units of the separable closure such that
+`b_g g(b_h) = c_z(g,h) b_(gh)` for all `g, h`, where `c_z(g,h)` is the value of `z`. -/
 theorem exists_brauerScalarDefect_cocycle (K : Type u) [Field K] (A : CSA.{u, u} K)
     (n : ℕ) (hn : n ≠ 0)
     (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]

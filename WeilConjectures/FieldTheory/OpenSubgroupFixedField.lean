@@ -16,25 +16,30 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # Open subgroups and finite separable fixed fields
 
-Source: Stacks Project, Tags 03QR and 03SF, with the Galois correspondence in Tag 0BML
-(blueprint: lem-exc-etale-open-subgroup-fixed-field).
+## Main results
+
+- `openSubgroup_fixedField_finite_separable`: open subgroups of the absolute Galois group have
+  finite separable fixed fields and finite discrete coset spaces, and point stabilizers of finite
+  transitive discrete continuous Galois sets are open with finite separable fixed fields.
+
+## Implementation details
+
+Both parts use the infinite Galois correspondence for the open (hence closed) subgroup;
+compactness of the Krull topology makes the coset space finite and openness makes it discrete.
+
+## References
+
+* Stacks Project, Tags 03QR and 03SF, with the Galois correspondence in Tag 0BML.
 -/
 
 @[expose] public section
 
 universe u v w
 
-/-- (blueprint: lem-exc-etale-open-subgroup-fixed-field) Stacks, Tags 03QR and 0BML.
-For an open subgroup of the absolute Galois group, the fixed field is finite and separable,
+/-- For an open subgroup of the absolute Galois group, the fixed field is finite and separable,
 and its fixing subgroup is the original subgroup. The quotient is finite and discrete;
 its left translation action is continuous. Conversely, a point in a finite transitive
-discrete continuous G-set has open stabilizer, whose fixed field is finite separable.
-
-For the first clause, apply the fixed-field Galois correspondence to the open (hence closed)
-subgroup, as in `lem-exc-etale-open-subgroup-fixed-field-galois`. Compactness of the Krull
-topology makes its coset space finite, while openness makes that space discrete, as in
-`lem-exc-etale-open-subgroup-quotient-finite-discrete`. For the converse, continuity on a
-discrete set makes the point stabilizer open; apply the fixed-field correspondence again. -/
+discrete continuous G-set has open stabilizer, whose fixed field is finite separable. -/
 theorem openSubgroup_fixedField_finite_separable
     (K : Type u) (Ks : Type v) [Field K] [Field Ks] [Algebra K Ks]
     [IsSepClosure K Ks] :

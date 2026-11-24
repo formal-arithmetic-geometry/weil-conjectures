@@ -12,8 +12,21 @@ import Mathlib.Topology.Algebra.MulAction
 /-!
 # Scalar extraction from matrix descent defects
 
-Source: Stacks Project, Tag 03R6 and the two-cocycle construction before Tag 03R7.
-(blueprint: lem-sc-brauer-scalar-defect-scalar-data).
+Locally constant matrix lifts `b` of a Galois descent datum of a central simple algebra differ
+from a cocycle by scalars: `b_g g(b_h) = c(g, h) b_{gh}` for a jointly locally constant
+two-cocycle `c` with values in the units of the separable closure.
+
+## Implementation details
+
+The defect `D = b_g g(b_h) b_{gh}⁻¹` induces the trivial conjugation on the image of `1 ⊗ A`,
+which spans the matrix algebra after scalar extension, so `D` is central, hence a scalar.
+Local constancy uses that each entry of `b_h` is algebraic over `K`, so its stabilizer is
+Krull-open. The cocycle identity follows by expanding `b_g g(b_h) gh(b_k)` in both associative
+orders and using injectivity of scalar matrices for `n > 0`.
+
+## References
+
+* Stacks Project, Tag 03R6 and the two-cocycle construction before Tag 03R7.
 -/
 
 @[expose] public section
@@ -37,23 +50,10 @@ private theorem conjugation_defect_commutes {R : Type*} [Monoid R]
     rw [← mul_assoc, Units.mul_inv, one_mul]
   simpa only [Units.val_mul, mul_assoc, Units.mul_inv, mul_one, hp] using hh.symm
 
-/-- Scalar extraction from locally constant matrix descent lifts.
-Proof: put X_a = e(1 ⊗ a). Apply g to the descent equation for h and substitute
-that for g. Then P = b_g g(b_h) and b_(gh) induce the same conjugation on X_a,
-so D = P b_(gh)⁻¹ commutes with X_a. The tensors 1 ⊗ a span after scalar
-extension, and e is surjective, so D commutes with every matrix. Commutation
-with the diagonal matrix units kills off-diagonal entries; commutation with
-the remaining units makes all diagonal entries equal. Since n > 0 and D is
-invertible, its common diagonal entry is a unique unit c(g,h).
-Near (g,h), local constancy of b and continuity of multiplication fix b_g,
-b_h and b_(gh). Each entry of the fixed b_h is algebraic over K, and its
-stabilizer is Krull-open. Intersecting these finitely many stabilizers fixes
-g(b_h), hence D and its diagonal unit. Thus c is jointly locally constant.
-Expand b_g g(b_h) gh(b_k) in both associative orders, substitute the scalar
-relations, and cancel b_(ghk). Injectivity of scalar matrices for n > 0 gives
-the displayed cocycle identity. No normalization at the identity is required.
-Source: Stacks Project, Tag 03R6 and the two-cocycle construction before Tag 03R7.
-(blueprint: lem-sc-brauer-scalar-defect-scalar-data). -/
+/-- Scalar extraction from locally constant matrix descent lifts: if `b` is a locally constant
+family of matrix lifts of the Galois descent datum of `A` along `e`, there is a jointly locally
+constant `c` with `b_g g(b_h) = c(g, h) b_{gh}` satisfying the two-cocycle identity
+`c(g, h) c(gh, k) = g(c(h, k)) c(g, hk)`. -/
 theorem exists_brauerScalarDefect_scalar_data (K : Type u) [Field K] (A : CSA.{u, u} K)
     (n : ℕ) (hn : n ≠ 0)
     (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]

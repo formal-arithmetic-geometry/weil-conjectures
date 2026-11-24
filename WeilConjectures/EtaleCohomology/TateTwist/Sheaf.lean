@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInv
 Let `Λ` be a commutative ring of characteristic `n`. The *Tate sheaf* of `Λ` on a scheme `X` is
 the étale sheaf of `Λ`-modules `Λ_X(1) = μₙ ⊗_ℤ Λ` (`AlgebraicGeometry.Etale.tateSheaf`), where
 `μₙ = ker(n : 𝔾ₘ ⟶ 𝔾ₘ)` is the sheaf of `n`-th roots of unity. When `ℓ^N` is the exponent of `Λ`
-this is `μ_{ℓ^N} ⊗_{ℤ/ℓ^N} Λ`, the finite-level twist of the blueprint.
+this is the finite-level twist `μ_{ℓ^N} ⊗_{ℤ/ℓ^N} Λ`.
 
 The pullback of `μₙ` maps to `μₙ`
 (`AlgebraicGeometry.Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf`), isomorphically along
@@ -93,9 +93,7 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u}) {Y : Scheme.{u}}
 
-/-- Blueprint `definition-tate-twists`: Coefficient Tate twists.
-
-The *Tate sheaf* `Λ_X(1) = μₙ ⊗_ℤ Λ` on `X`, for `n` the characteristic of `Λ`: the extension of
+/-- The *Tate sheaf* `Λ_X(1) = μₙ ⊗_ℤ Λ` on `X`, for `n` the characteristic of `Λ`: the extension of
 scalars to `Λ` of the étale sheaf `μₙ` of `n`-th roots of unity. When `ℓ^N` is the exponent of
 `Λ`, this is the finite-level twist `μ_{ℓ^N} ⊗_{ℤ/ℓ^N} Λ`. -/
 noncomputable def tateSheaf : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=

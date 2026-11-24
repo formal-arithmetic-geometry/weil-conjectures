@@ -12,8 +12,12 @@ import WeilConjectures.FieldTheory.CrossedProductForCocycle
 /-!
 # Crossed-product realization data for continuous degree-two classes
 
-Source: Stacks Project, Etale Cohomology, the surjectivity argument following Lemma 03R6.
-(blueprint: lem-sc-brauer-scalar-defect-surjective-crossed-product-realization).
+Every class in `H²(Gal(Kˢᵉᵖ/K), (Kˢᵉᵖ)ˣ)` is the scalar defect of a crossed-product central
+simple algebra.
+
+## References
+
+* [Stacks Project, Tags 03R6 and 03R7](https://stacks.math.columbia.edu/tag/03R7)
 -/
 
 @[expose] public section
@@ -26,13 +30,9 @@ open scoped TensorProduct
 
 set_option linter.unusedVariables false
 
-/-- The crossed-product construction supplies all data needed for a scalar-defect realization.
-
-This is the finite crossed-product construction: a continuous units class is represented by
-finite Galois descent data, whose regular splitting representation has locally constant matrix
-lifts with the prescribed scalar defect. The proof is the crossed-product argument of Stacks
-Project, Theorem 03R7 and Section 0DVG.
-(blueprint: lem-sc-brauer-scalar-defect-surjective-crossed-product-realization). -/
+/-- For every class `x`, there is a central simple algebra `A` with a splitting over the
+separable closure and locally constant matrix lifts of its Galois descent datum whose scalar
+defect is a homogeneous cocycle representing `x`. -/
 theorem exists_crossedProduct_realization_data (K : Type u) [Field K]
     (x : GaloisUnitsH2 K) :
     ∃ (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0)
