@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTorAmplitud
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 
 /-! Cohomological support transport for the normalized smooth-purity reduction tower.
-Source: blueprint latest, normalized-towers, uniform Tor and cohomological bounds.
-(blueprint: lem-sp-reduction-tower-tor-intervals).
 -/
 
 @[expose] public noncomputable section

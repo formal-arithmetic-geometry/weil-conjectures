@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrobeniusOrientation
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalBaseChangeFinal
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationBaseChange
 
 /-! # Relative finite-coefficient equivariance of the smooth orientation
 
@@ -57,6 +57,6 @@ theorem isWeilMorphism_dualizingComplexTwistShiftIso_inv_of_isIso_of_isNoetheria
     _ (by
       simpa only [upperShriekMateWeilDatum, constantComplex, dualizingComplex,
         Functor.comp_obj, Category.assoc] using
-        dualizingComplexTwistShiftIso_baseChange_of_isIso_of_isNoetherian Λ sq d aY aY)
+        dualizingComplexTwistShiftIso_baseChange Λ d sq aY aY)
 
 end AlgebraicGeometry.Etale

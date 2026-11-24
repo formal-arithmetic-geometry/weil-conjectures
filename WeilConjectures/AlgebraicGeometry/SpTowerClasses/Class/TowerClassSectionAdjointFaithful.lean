@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSectionAdjoint
 
 /-! # Faithfulness of sectionwise tower adjunction
-
-Source: the ordinary evaluation comparison for strict coefficient systems.
 -/
 
 @[expose] public noncomputable section
@@ -31,9 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Section adjunction detects equality of ordinary arrows.
 
-Source: the ordinary adjunction and invertibility of ordinaryPushEvaluation.
-Transpose, test maps of sheaves sectionwise, and cancel the evaluation comparison.
-(blueprint: lem-sfb-tower-class-section-adjoint-faithful). -/
+Transpose, test maps of sheaves sectionwise, and cancel the evaluation comparison. -/
 theorem sectionAdjoint_ext
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)

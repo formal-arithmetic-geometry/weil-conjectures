@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 
 /-! # Evaluation of inverse-image coefficient transport
 
-Source: Zheng, Construction 5.15, Lemma 5.16 and Proposition 2.29(2).
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Lemma 5.16, Proposition 2.29(2)
 -/
 
 -- After pruning, this module only keeps private declarations.

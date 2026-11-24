@@ -49,9 +49,7 @@ from the structure morphism `Spec R ⟶ S ⟶ Spec k`. -/
 noncomputable def strictHenselizationAlgebra : Algebra k (strictHenselization t) :=
   (Spec.preimage (strictLocalizationToBase t ≫ S.hom)).hom.toAlgebra
 
-/-- The residue field of the strict henselization of a `k`-scheme at a `k`-point is `k`: the
-evaluation `R ⟶ k` at the geometric point retracts `k ⟶ R` (as `t` is a section of `S ⟶ Spec k`)
-and factors through the residue field `R/𝔪`, which it embeds into `k`. -/
+/-- The residue field of the strict henselization of a `k`-scheme at a `k`-point is `k`. -/
 theorem bijective_residue_algebraMap_strictHenselization (ht : t ≫ S.hom = 𝟙 _) :
     letI := strictHenselizationAlgebra S t
     Function.Bijective (IsLocalRing.residue (strictHenselization t) ∘
@@ -75,10 +73,7 @@ theorem bijective_residue_algebraMap_strictHenselization (ht : t ≫ S.hom = �
 variable [SmoothOfRelativeDimension 2 S.hom]
 
 /-- The strict henselization of a smooth surface at a `k`-point is a regular local ring of
-dimension `2`. In an affine chart `Spec A` around the image `x` of `t`, it is an algebraic strict
-henselization of `A_x ≅ 𝒪_{S,x}` (`strictHenselization_chart_isStrictHenselization`), which is a
-regular local ring (`S` is smooth over `k`) of dimension `2` (`x` is a closed point of the
-smooth surface `S`); both properties pass to strict henselizations. -/
+dimension `2`. -/
 theorem isRegularLocalRing_and_ringKrullDim_strictHenselization_of_smooth
     (ht : t ≫ S.hom = 𝟙 _) :
     IsRegularLocalRing (strictHenselization t) ∧ ringKrullDim (strictHenselization t) = 2 := by

@@ -11,10 +11,6 @@ public import WeilConjectures.CategoryTheory.Triangulated.BinaryBiproductCone
 /-!
 # K-flat support-acyclic resolutions
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
-
 Two K-flat representatives of a bounded below complex are connected by a K-flat homotopy pushout
 of a K-flat roof, followed by a further K-flat resolution on which the support unit is invertible.
 

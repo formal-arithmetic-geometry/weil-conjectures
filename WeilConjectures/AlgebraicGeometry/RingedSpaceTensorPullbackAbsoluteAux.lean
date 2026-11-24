@@ -19,6 +19,20 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
+/-!
+# Auxiliary results for the absolute derived tensor pullback
+
+The concrete tensor pullback along a morphism of ringed spaces has a left derived functor
+computed on K-flat complexes, and this derived functor is absolute.
+
+## References
+
+* [Stacks, Tag 06YJ]
+* [Stacks, Tag 079W]
+* [Stacks, Tag 06XN]
+* [Stacks, Tag 05SE]
+-/
+
 @[expose] public section
 
 universe u wX wY
@@ -150,15 +164,8 @@ private theorem leftDerived_absolute_of_resolving
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The K-flat resolving-class construction supplies the derived comparison for the
-concrete tensor pullback.  The proof follows Tags 06YJ, 079W and 06XN: resolve by
-K-flat complexes, use preservation of quasi-isomorphisms under inverse image and
-change of rings, and apply `leftDerived_from_resolvingClass` to the resulting
-functor. (blueprint: q3-ringed-space-tensor-pullback-left-derived)
-
-Proof: choose a K-flat resolution of every complex. Inverse image preserves these
-resolutions, and derived change of rings preserves quasi-isomorphisms between the
-resulting K-flat complexes. Applying the resolving-class construction to the concrete
-tensor pullback gives the displayed derived functor and its K-flat comparison. -/
+concrete tensor pullback: it has a left derived functor whose comparison is invertible
+on K-flat complexes. -/
 theorem exists_tensorPullback_leftDerived
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]
@@ -280,15 +287,9 @@ theorem exists_tensorPullback_leftDerived
       DerivedCategory.Qh F S hres hinvS
   exact ⟨LF, ε, hLF, fun K hK ↦ hε _ ⟨K, hK, rfl⟩⟩
 
-/-- Absoluteness of a K-flat derived comparison: the right Kan extension over the
-cofinal K-flat resolution category is essentially constant, hence every postcomposition
-functor preserves its comparison.  This is the absolute-resolution argument of
-Stacks Tags 06XN and 05SE. (blueprint: q3-ringed-space-tensor-pullback-absolute-postcomposition)
-
-Proof: the K-flat resolution category is cofinal and all transition maps are sent to
-isomorphisms by the comparison. Its right Kan extension is therefore essentially
-constant, so the limiting cone is absolute and remains a left derived comparison after
-postcomposition by any functor. -/
+/-- Absoluteness of a K-flat derived comparison: a left derived tensor pullback whose
+comparison is invertible on K-flat complexes remains left derived after postcomposition
+with any functor. -/
 theorem leftDerived_tensorPullback_absolute
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X))]

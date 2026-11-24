@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficie
 
 /-! # Normalized coefficient transport composition
 
-Source: Zheng, Construction 4.1, Construction 5.15 and Proposition 2.29(2).
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Construction 5.15, Proposition 2.29(2)
 -/
 
 @[expose] public noncomputable section

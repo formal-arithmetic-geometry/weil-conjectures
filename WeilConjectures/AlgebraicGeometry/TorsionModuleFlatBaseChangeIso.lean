@@ -18,18 +18,16 @@ set_option autoImplicit false
 
 /-! # I-power torsion modules and flat base change
 
-Source: Stacks Project, More on Algebra, Lemma 05E9 (implication (2) => (1))
-(blueprint: lem-weil-pbc-torsion-module-flat-base-change-iso).
+## References
+
+* [Stacks, Tag 05E9]
 -/
 
 open scoped TensorProduct
 
 namespace RingTheory
 
-/-- If `J` annihilates `M`, an isomorphism modulo `J` suffices for base change.
-The inverse quotient equivalence and the tensor-quotient equivalence give a left inverse.
-Every pure tensor lifts because its coefficient agrees modulo `JS` with an element of `R`;
-ideal-span induction kills the difference, and tensor induction handles sums. -/
+/-- If `J` annihilates `M`, an isomorphism modulo `J` suffices for base change. -/
 private theorem killedModule_baseChange_bijective
     {R S M : Type*} [CommRing R] [CommRing S] [Algebra R S]
     [AddCommGroup M] [Module R M] (J : Ideal R)
@@ -98,11 +96,6 @@ private theorem killedModule_baseChange_bijective
 
 /-- For a flat ring map inducing an isomorphism modulo an ideal, base change
 preserves every module whose elements are killed by powers of that ideal.
-The proof follows Lemma 05E9: the case killed by `I`, induction through
-`I ^ n M`, and passage to the directed union of the bounded torsion parts.
-- (blueprint: lem-weil-pbc-torsion-module-flat-base-change-iso)
-- Proof source: Stacks Project, More on Algebra, Lemma 05E9, lines 24277--24298;
-  it uses only flatness, tensor right exactness and colimit compatibility.
 -/
 theorem torsionModule_flat_baseChange_bijective
     {R S T : Type*} [CommRing R] [CommRing S] [AddCommGroup T] [Module R T]

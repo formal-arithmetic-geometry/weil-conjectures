@@ -6,20 +6,20 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangePaste
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalCompIsoBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMap
 
 /-!
-# Vertical pasting of `Ex_!` along `Δ ≫ p₁ = 𝟙` (the law `H1`)
+# The composition isomorphism of `R_!` and the vertical pasting of `Ex_!`
 
-The law `H1` of `AlgebraicGeometry.Etale.IsoSquare.compEqId_baseChange` is the compatibility of
-the compactly supported base change maps of the squares of `Δ`, `p₁` and `𝟙 = Δ ≫ p₁` with the
-composition isomorphisms `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIsoOfEq`
-(`CategoryTheory.Adjunction.ExchangeCompCompatible`). It is the vertical pasting law
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_vert`, once the composition
-isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` (built from the chosen
-compactifications) is identified with the inverse of
-`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso` (by definition), and the equality
-`Δ ≫ p₁ = 𝟙` is transported (`AlgebraicGeometry.Etale.exchangeCompCompatible_of_eq`).
+The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` built from the chosen compactifications
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`) is the inverse of
+`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso_eq_symm`). Hence the compactly supported
+base change maps of two stacked cartesian squares and of their pasting are compatible with these
+composition isomorphisms (`AlgebraicGeometry.Etale.exchangeCompCompatible_of_paste_vert`), also
+after transport along equalities `f ≫ g = h`
+(`AlgebraicGeometry.Etale.exchangeCompCompatible_of_eq`).
 -/
 
 @[expose] public section
@@ -114,45 +114,5 @@ theorem exchangeCompCompatible_of_eq {h : X ⟶ Z} {h' : X' ⟶ Z'}
   exact hM
 
 end Paste
-
-namespace IsoSquare
-
-variable {X Y X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
-  (sq : IsPullback g' f' f g) [IsIso g'] [IsIso g]
-
-/-- The square of `Δ ≫ p₁` for an isomorphism of squares. -/
-lemma isPullback_diagonal_fst :
-    IsPullback g' (pullback.diagonal f' ≫ pullback.fst f' f')
-      (pullback.diagonal f ≫ pullback.fst f f) g' :=
-  IsPullback.of_horiz_isIso ⟨by simp⟩
-
-variable (Λ) [IsSeparated f] [IsSeparated f'] [HasCompactification f] [HasCompactification f']
-  [QuasiCompact f']
-
-/-- **The law `H1`** of `AlgebraicGeometry.Etale.IsoSquare.compEqId_baseChange`: for an
-isomorphism of squares, the compactly supported base change maps of the squares of `Δ`, `p₁` and
-`𝟙 = Δ ≫ p₁` are compatible with the composition isomorphisms. -/
-theorem exchangeCompCompatible_diagonal :
-    Adjunction.ExchangeCompCompatible
-      (rightDerivedLowerShriekBaseChangeMap Λ (isPullback_diagonal sq))
-      (rightDerivedLowerShriekBaseChangeMap Λ (isPullback_fst sq))
-      (rightDerivedLowerShriekBaseChangeMap Λ (isPullback_id g'))
-      (rightDerivedLowerShriekCompIsoOfEq Λ (pullback.diagonal f) (pullback.fst f f) (𝟙 X)
-        (pullback.diagonal_fst f))
-      (rightDerivedLowerShriekCompIsoOfEq Λ (pullback.diagonal f') (pullback.fst f' f') (𝟙 X')
-        (pullback.diagonal_fst f')) := by
-  refine exchangeCompCompatible_of_eq (pullback.diagonal_fst f) (pullback.diagonal_fst f') _ _
-    (isPullback_id g') isPullback_diagonal_fst ?_
-  let _ : HasCompactification (pullback.diagonal f ≫ pullback.fst f f) :=
-    HasCompactification.of_eq (pullback.diagonal_fst f).symm
-  let _ : HasCompactification (pullback.diagonal f' ≫ pullback.fst f' f') :=
-    HasCompactification.of_eq (pullback.diagonal_fst f').symm
-  have : QuasiCompact (pullback.diagonal f ≫ pullback.fst f f) := by
-    rw [pullback.diagonal_fst]; infer_instance
-  have : QuasiCompact (pullback.diagonal f' ≫ pullback.fst f' f') := by
-    rw [pullback.diagonal_fst]; infer_instance
-  exact exchangeCompCompatible_of_paste_vert _ _ _
-
-end IsoSquare
 
 end AlgebraicGeometry.Etale

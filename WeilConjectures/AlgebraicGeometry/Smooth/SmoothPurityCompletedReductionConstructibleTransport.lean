@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsStacksBlu
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Constructibility transport for completed reduction
-
-Source: latest blueprint, integral criterion and the Restriction paragraph of the
-normalized tower equivalence (blueprint: lem-sp-completed-reduction-constant-model).
 -/
 @[expose] public section
 set_option autoImplicit false

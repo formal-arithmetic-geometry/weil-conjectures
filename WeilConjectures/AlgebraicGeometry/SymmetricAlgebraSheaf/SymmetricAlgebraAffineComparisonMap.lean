@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 
 /-! # The tilde comparison for the symmetric algebra on an affine open
 
-Source: Stacks Project, Schemes, Lemma 01I7 and Modules, Lemma 01CG.
-(blueprint: def-weil-pbc-symmetric-algebra-affine-comparison-map).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01I7, 01CG
 -/
 
 @[expose] public section
@@ -36,10 +37,7 @@ noncomputable def sectionLinearMap (F : X.Modules) (U : X.Opensᵒᵖ) :
     rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The comparison obtained from the affine tilde-Gamma adjunction.
-Source: Stacks Project, Schemes, Lemma 01I7, applied to the sectionwise symmetric algebra
-of Modules, Lemma 01CG.
-(blueprint: def-weil-pbc-symmetric-algebra-affine-comparison-map). -/
+/-- The comparison obtained from the affine tilde-Gamma adjunction. -/
 noncomputable def affineComparison (F : X.Modules) {W : X.Opens} (hU : IsAffineOpen W) :
     tilde (R := Γ(X, W))
       (ModuleCat.of Γ(X, W) (sections F (op W))) ⟶

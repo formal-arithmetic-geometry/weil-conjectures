@@ -10,10 +10,6 @@ import all WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearEvaluationDerivedAdjunction
 
 /-! # Evaluation of the tower open adjunction unit
-
-Source: blueprint latest, integral direct-image proof, paragraph (3), and the
-ordinary open-unit evaluation and termwise localization in SpTowerShriek.Open.
-(blueprint: lem-sp-tower-open-adjunction-unit-evaluation)
 -/
 
 @[expose] public noncomputable section

@@ -125,10 +125,6 @@ import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 
 /-! # Integral reduction bounds from ell-power scalar extensions
-
-Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower,
-final integral-constructibility sentence.
-(blueprint: lem-sp-cofinal-integral-reduction-bounds)
 -/
 
 @[expose] public noncomputable section

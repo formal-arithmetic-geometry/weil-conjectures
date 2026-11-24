@@ -16,8 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Scalar restriction and the geometric adjunctions
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03DI
-(blueprint: lem-sf-semilinear-scalar-adjunctions). -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CZ, 03D7, 03DI, 03D8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,9 +36,7 @@ namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
   (B : Type (u + 1)) [CommRing B] (ψ : ∀ n : ℕ, CommRingCat.of B ⟶ R n)
 
-/-- The inverse/direct-image and open-extension comparisons, with their units.
-Source: Stacks 03D7, 03D8 and 03DI
-(blueprint: lem-sf-semilinear-scalar-adjunctions). -/
+/-- The inverse/direct-image and open-extension comparisons, with their units. -/
 structure OrdinaryScalarAdjunctions (C : OrdinaryScalarRestriction R φ B ψ) where
   /-- The inverse-image coefficient comparison b. -/
   b : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
@@ -124,10 +124,7 @@ private theorem scalarInverseMate_isIso (adj : L ⊣ P) (adj' : L' ⊣ P')
 
 end MateEquations
 
-/-- The direct-image mate equation implies preservation of the specified unit.
-Source: Stacks 03D7; the ordinary adjunction mate identity
-(blueprint: lem-sf-semilinear-scalar-adjunctions).
-Proof: use the unit equation for mates and cancel b inverse against b. -/
+/-- The direct-image mate equation implies preservation of the specified unit. -/
 theorem OrdinaryScalarAdjunctions.unit (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules R φ Y) :
@@ -137,10 +134,7 @@ theorem OrdinaryScalarAdjunctions.unit (C : OrdinaryScalarRestriction R φ B ψ)
       (scalarTowerAdj B f).unit.app ((C.rho Y).obj M) :=
   scalarMateUnit (moduleAdj R φ f) (scalarTowerAdj B f) (G.b f) (G.d f) (G.mate f) M
 
-/-- The direct-image mate equation implies preservation of the specified counit.
-Source: Stacks 03D7; the ordinary adjunction mate identity
-(blueprint: lem-sf-semilinear-scalar-adjunctions).
-Proof: apply the counit equation for mates to b inverse and substitute the mate equation. -/
+/-- The direct-image mate equation implies preservation of the specified counit. -/
 theorem OrdinaryScalarAdjunctions.counit (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : Modules R φ X) :
@@ -570,19 +564,7 @@ private theorem scalarOpenInverse_isIso (C : OrdinaryScalarRestriction R φ B ψ
 
 attribute [local irreducible] scalarOpenInverse
 
-/-- Scalar restriction commutes with inverse/direct images and open extension.
-Source: Stacks 03D7 (lemma-adjoint-pullback-pushforward-modules), 03D8 and 03DI
-(blueprint: lem-sf-semilinear-scalar-adjunctions).
-Proof: compose the prescribed level identifications, normalized evaluation and
-single-ring direct-image comparisons to construct d at each level. The restriction
-transition equations assemble these components, and their normalizations give the
-pointwise section identity. Define b inverse as the inverse adjunction mate of d.
-Pasting the evaluation mate with the existing invertible single-ring pullback mate
-identifies every component with a composite of isomorphisms, so b is invertible.
-The mate correspondence gives the unit and counit equations. The single-sheaf
-open-support lemma makes the constant-coefficient open counit invertible at every
-level of the restricted varying-ring extension. The inverse open mate of b is
-therefore invertible; its inverse defines a, with the required open unit. -/
+/-- Scalar restriction commutes with inverse/direct images and open extension. -/
 theorem ordinaryScalarAdjunctions (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
     (C : OrdinaryScalarRestriction R φ B ψ) :
     Nonempty (OrdinaryScalarAdjunctions R φ B ψ C) := by

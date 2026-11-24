@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScalarUnitAb
 
 /-! # The abelian transpose of the coefficient-unit comparison
 
-Source: blueprint classes proof (2), ordinary coefficient-unit normalization.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
 -/
 
 @[expose] public noncomputable section
@@ -31,21 +33,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 This module isolates the section calculation used by the abelian transpose theorem.
 -/
 
-/-- Sectionwise form of the coefficient-unit transpose.
-
-Source: blueprint classes proof (2), ordinary coefficient-unit normalization;
-Stacks 03EL.  This is the sectionwise calculation underlying
-`scalarUnit_abelianTranspose` (blueprint: lem-sp-tower-scalar-unit-abelian-transpose).
-The remaining theorem only assembles these equalities by extensionality.
-
-Proof: evaluate the two ordinary adjuncts on a fixed level and chart. The equations
-heY and heX replace both scalar adjuncts by scalarGenerator. Adjunction naturality
-moves eY through the geometric transpose, while hχ identifies the section comparison
-with the identity. CoefficientPullback.normalization and d.unit_normalization then
-identify both resulting maps on constant integer generators with integerPull. The
-constant integer sheaf is locally surjective, so additivity and separatedness extend
-the equality to every section. This works on empty charts and zero rings as well.
--/
+/-- Sectionwise form of the coefficient-unit transpose: the identity of
+`scalarUnit_abelianTranspose` evaluated on a section at a fixed level and chart. -/
 theorem scalarUnit_abelianTranspose_section
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)

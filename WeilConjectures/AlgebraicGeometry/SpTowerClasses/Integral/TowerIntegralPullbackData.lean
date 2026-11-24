@@ -35,10 +35,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Integral line-bundle classes and geometric pullback
-
-Source: blueprint, sec-smooth-purity/sk-prop-sp-tower-geometric,
-classes proof (2), and the integral extension argument in steps 1--3 of
-lem-sp-tower-chern-pullback (blueprint: def-sp-tower-integral-pullback-data).
 -/
 
 @[expose] public noncomputable section
@@ -57,37 +53,29 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- Exact inverse image of entire abelian towers, by componentwise sheaf inverse image.
-Source: the system-topos construction (blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Exact inverse image of entire abelian towers, by componentwise sheaf inverse image. -/
 def abPull {X Y : Scheme.{u}} (f : X ⟶ Y) : Ab Y ⥤ Ab X :=
   (Functor.whiskeringRight ℕᵒᵖ (DiagonalAb Y) (DiagonalAb X)).obj
     (upperStar AddCommGrpCat.{u + 1} f)
 
-/-- Componentwise inverse image preserves addition.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Componentwise inverse image preserves addition. -/
 instance abPull_additive {X Y : Scheme.{u}} (f : X ⟶ Y) : (abPull f).Additive := by
   unfold abPull
   infer_instance
 
-/-- Componentwise inverse image preserves finite limits.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Componentwise inverse image preserves finite limits. -/
 instance abPull_limits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteLimits (abPull f) := by
   unfold abPull
   exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Componentwise inverse image preserves finite colimits.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Componentwise inverse image preserves finite colimits. -/
 instance abPull_colimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
     PreservesFiniteColimits (abPull f) := by
   unfold abPull
   exact ⟨fun _ _ _ ↦ inferInstance⟩
 
-/-- Pullback of full units along the projection of a base-changed chart.
-Source: integral extension gluing (blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Pullback of full units along the projection of a base-changed chart. -/
 def unitsDirect {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Scheme.proEtaleUnitsSheaf Y ⟶
       (lowerStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf X) :=
@@ -117,8 +105,7 @@ def unitsDirect {X Y : Scheme.{u}} (f : X ⟶ Y) :
         pullback.lift_fst _ _ _
       exact congrArg (fun k ↦ k.appTop.hom x.down.toMul.val) h.symm }⟩
 
-/-- Constant-integer comparison on towers, normalized by constant sections.
-Source: inverse image of constants (blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Constant-integer comparison on towers, normalized by constant sections. -/
 def integerPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abPull f).obj (integers Y) ⟶ integers X :=
   { app := fun _ ↦ ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv
@@ -133,8 +120,7 @@ def integerPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       dsimp only [integers, units, constant, Functor.const_obj_obj]
       rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] }
 
-/-- Full-units comparison on constant towers, with no invertibility assertion.
-Source: integral extension gluing (blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Full-units comparison on constant towers, with no invertibility assertion. -/
 def unitsPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abPull f).obj (units Y) ⟶ units X :=
   { app := fun _ ↦ ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv
@@ -144,8 +130,7 @@ def unitsPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
       dsimp only [integers, units, constant, Functor.const_obj_obj]
       rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id] }
 
-/-- Derived constant-integer comparison, including the canonical single comparison.
-Source: exact localization (blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Derived constant-integer comparison, including the canonical single comparison. -/
 def integerDerivedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abPull f).mapDerivedCategory.obj
         ((DerivedCategory.singleFunctor (Ab Y) 0).obj (integers Y)) ⟶
@@ -153,8 +138,7 @@ def integerDerivedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
   ((abPull f).mapDerivedCategorySingleFunctor 0).hom.app (integers Y) ≫
     (DerivedCategory.singleFunctor (Ab X) 0).map (integerPull f)
 
-/-- Derived units comparison, including the canonical shift by one.
-Source: exact localization (blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Derived units comparison, including the canonical shift by one. -/
 def unitsDerivedPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (abPull f).mapDerivedCategory.obj
         (((DerivedCategory.singleFunctor (Ab Y) 0).obj (units Y))⟦(1 : ℤ)⟧) ⟶
@@ -171,16 +155,12 @@ attribute [local instance 100000] abDerived
 
 attribute [local irreducible] Functor.mapDerivedCategory mapSingleArrow lineBundleEtaleClass
 
-/-- The canonical comparison between constant towers and pointwise inverse image.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The canonical comparison between constant towers and pointwise inverse image. -/
 def towerIntegral_constantPullIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     upperStar AddCommGrpCat.{u + 1} f ⋙ constant X ≅ constant Y ⋙ abPull f :=
   Functor.compConstIso ℕᵒᵖ (upperStar AddCommGrpCat.{u + 1} f)
 
-/-- The inverse-image map of integer sheaves, adjoint to constant sections.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The inverse-image map of integer sheaves, adjoint to constant sections. -/
 def towerIntegral_integerSheafPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (upperStar AddCommGrpCat.{u + 1} f).obj
         ((constantSheaf (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1}).obj
@@ -191,18 +171,14 @@ def towerIntegral_integerSheafPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (Scheme.proEtaleConstantDirectImageMap f AddCommGrpCat.{u + 1}
       (AddCommGrpCat.of (ULift.{u + 1} ℤ)))
 
-/-- The inverse-image map of full units, adjoint to chartwise unit pullback.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The inverse-image map of full units, adjoint to chartwise unit pullback. -/
 def towerIntegral_unitsSheafPull {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (upperStar AddCommGrpCat.{u + 1} f).obj (Scheme.proEtaleUnitsSheaf Y) ⟶
       Scheme.proEtaleUnitsSheaf X :=
   ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm
     (unitsDirect f)
 
-/-- The integer tower endpoint is the constant image of its ordinary sheaf endpoint.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The integer tower endpoint is the constant image of its ordinary sheaf endpoint. -/
 theorem towerIntegral_integerPull_iso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     integerPull f = (towerIntegral_constantPullIso f).inv.app
         ((constantSheaf (Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1}).obj
@@ -213,9 +189,7 @@ theorem towerIntegral_integerPull_iso {X Y : Scheme.{u}} (f : X ⟶ Y) :
   change towerIntegral_integerSheafPull f = 𝟙 _ ≫ towerIntegral_integerSheafPull f
   rw [Category.id_comp]
 
-/-- The units tower endpoint is the constant image of its ordinary sheaf endpoint.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The units tower endpoint is the constant image of its ordinary sheaf endpoint. -/
 theorem towerIntegral_unitsPull_iso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (towerIntegral_constantPullIso f).hom.app (Scheme.proEtaleUnitsSheaf Y) ≫ unitsPull f =
       (constant X).map (towerIntegral_unitsSheafPull f) := by
@@ -224,18 +198,14 @@ theorem towerIntegral_unitsPull_iso {X Y : Scheme.{u}} (f : X ⟶ Y) :
   change 𝟙 _ ≫ towerIntegral_unitsSheafPull f = towerIntegral_unitsSheafPull f
   rw [Category.id_comp]
 
-/-- Transposing the chosen units inverse image recovers the chartwise units map.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- Transposing the chosen units inverse image recovers the chartwise units map. -/
 theorem towerIntegral_unitsSheafPull_transpose {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv
       (Scheme.proEtaleUnitsSheaf Y) (Scheme.proEtaleUnitsSheaf X))
         (towerIntegral_unitsSheafPull f) = unitsDirect f := by
   exact Equiv.apply_symm_apply _ (unitsDirect f)
 
-/-- The direct units map pulls back along the fibre-product projection.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The direct units map pulls back along the fibre-product projection. -/
 theorem towerIntegral_unitsDirect_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.ProEtᵒᵖ) (x : (Scheme.proEtaleUnitsSheaf Y).obj.obj U) :
     (unitsDirect f).hom.app U x =
@@ -243,9 +213,7 @@ theorem towerIntegral_unitsDirect_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
         (Units.map (pullback.fst U.unop.hom f).appTop.hom.toMonoidHom x.down.toMul)) := by
   rfl
 
-/-- The ordinary units endpoint has the required normalized adjoint on each chart.
-Source: blueprint classes proof (2)
-(blueprint: def-sp-tower-integral-pullback-data). -/
+/-- The ordinary units endpoint has the required normalized adjoint on each chart. -/
 theorem towerIntegral_unitsPull_adjoint {X Y : Scheme.{u}} (f : X ⟶ Y)
     (U : Y.ProEtᵒᵖ) (x : (Scheme.proEtaleUnitsSheaf Y).obj.obj U) :
     (((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _)
