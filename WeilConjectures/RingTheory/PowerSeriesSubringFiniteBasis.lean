@@ -19,8 +19,13 @@ import Mathlib.Data.Fintype.EquivFin
 /-!
 # A finite basis containing one for the p-basis coefficient subring
 
-Source: Stacks Project, More on Algebra, Tag 07P5, finiteness paragraph,
-with the explicit-basis argument of the parent node, steps 3(b) and 4.
+For a finite set `J` of elements of a `p`-basis of `k`, the polynomial ring
+`k⟦x₁, …, xₙ⟧[y₁, …, yₘ]` has a finite basis containing `1` over the subring of polynomials
+with coefficients in the corresponding subfield `kJ`, supported on `p`-divisible exponents.
+
+## References
+
+* [Stacks Project, Tag 07P5](https://stacks.math.columbia.edu/tag/07P5), finiteness paragraph
 -/
 
 @[expose] public section
@@ -33,25 +38,8 @@ attribute [local instance] ZMod.algebra
 
 namespace RingTheory
 
-/-- The bounded p-basis and variable monomials give a finite basis containing one.
-Source: Stacks Project, Tag 07P5 (lemma-power-series-ring-subfields), first proof
-paragraph; parent node steps 3(b) and 4 give the explicit basis.
-(blueprint: lem-weil-pbc-power-series-subring-finite-basis).
-
-Proof: First the span over k^p of bounded monomials supported outside J equals kJ.
-It is closed under products by reducing exponents modulo p. Every nonzero element
-belongs to a finite-dimensional subring on finitely many p-basis generators, so
-injectivity of multiplication gives an inverse there. Split the original p-basis
-monomials into their J and complementary factors. Grouping their unique coordinates
-shows that the bounded J-monomials are a kJ-basis of k. Divide every power-series
-and polynomial exponent by p with remainder. Group coefficients using that field
-basis: the resulting coefficients, at p-divisible exponents, belong to S by hS.
-Only finitely many polynomial exponents occur, so each grouped coefficient defines
-an element of the polynomial ring. Comparing coefficients and using independence
-of the field basis proves independence and spanning of t^E x^e y^g, with E
-supported on J and all exponents below p. The index set is finite and includes
-the all-zero triple, whose monomial is one. Enumerate it by Fin d to obtain b and i.
-This also works when J is empty or n or m is zero, using the empty monomial. -/
+/-- The polynomial ring `k⟦x⟧[y]` has a finite basis over the subring `S` of polynomials with
+coefficients in `kJ` supported on `p`-divisible exponents, and one basis vector is `1`. -/
 theorem powerSeriesSubringFiniteBasis
     (p : ℕ) [Fact p.Prime]
     (k : Type u) [Field k] [CharP k p]

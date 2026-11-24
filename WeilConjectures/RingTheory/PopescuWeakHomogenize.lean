@@ -15,10 +15,20 @@ import Mathlib.Tactic.Ring
 /-!
 # Homogenizing equations evaluated in a prime localization
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07F9,
-`lemma-delocalize-weak`, the homogenization and target-denominator paragraphs.
-(blueprint: lem-weil-pbc-popescu-weak-homogenize)
+Given polynomial equations over `R` satisfied by a point of `Λ_q` whose first `n`
+coordinates come from `Λ`, we homogenize the remaining variables with respect to a new
+variable and clear denominators, obtaining equations satisfied by a point of `Λ` up to a
+multiplier outside `q`.
+
+## Implementation details
+
+No smoothness, presentation of the source, or Popescu resolution is needed here.
+
+## References
+
+* [Stacks Project, Tag 07F9](https://stacks.math.columbia.edu/tag/07F9)
 -/
+
 
 @[expose] public section
 
@@ -73,26 +83,13 @@ private theorem partial_homogenization_eval
           w ^ (d - ∑ i : Fin (n + m), if n ≤ i.val then e i else 0)) := by ring
     _ = _ := by rw [hp]; ring
 
-/-- Homogenize only the last `m` variables and clear their values' denominators.
-The first `n` values already belong to the unlocalized ring. No smoothness,
-presentation of the source, or Popescu resolution is required here.
-Source: Stacks Project, proof of Tag 07F9 (`lemma-delocalize-weak`), lines 2189–2211.
-(blueprint: lem-weil-pbc-popescu-weak-homogenize)
+/-- Let `fⱼ` be polynomials over `R` in `n + m` variables vanishing at `y ∈ Λ_q^(n+m)`, where
+the first `n` coordinates of `y` are the images of `a ∈ Λⁿ`. With `dⱼ` bounding the degree
+of `fⱼ` in the last `m` variables, let `Fⱼ` be the partial homogenization of `fⱼ` in those
+variables with respect to a new last variable. Then there is a point `l ∈ Λ^(n+m+2)` whose
+middle coordinates start with `a`, whose first and last coordinates lie outside `q`, and at
+which every `X₀ Fⱼ` vanishes. -/
 
-Proof: Clear the denominators of the finite family `y` using Mathlib, obtaining
-`w` outside `q` and numerators whose images are `w * y i`. Keep the first `n`
-coordinates equal to `a`, and use the numerators for the extra coordinates. Choose
-`dⱼ` to be the maximum extra-variable degree among the monomials of `fⱼ`, with maximum
-of the empty support zero. Define `Fⱼ` by the displayed monomial formula, shifting
-all old variables by one and multiplying by `X_last^(dⱼ-extra_degree)`. Assign the
-first `n` coordinates their given values, the next `m` coordinates the
-numerators, and the last coordinate `w`. In the localization, evaluating `Fⱼ`
-equals `w^dⱼ` times the evaluation of `fⱼ`, hence is zero. For each `j`, the
-localization equality criterion supplies an annihilator outside `q` for this
-unlocalized evaluation. Let coordinate zero be their product. It remains outside
-`q` and annihilates every evaluated `Fⱼ`. Thus evaluation kills `X₀*Fⱼ`.
-Empty families use the finite-product conventions of Mathlib, and zero polynomials
-use degree zero. The same construction works when `n=0`, `m=0`, or `c=0`. -/
 theorem exists_homogenized_local_equations
     {R : Type u} {Λ : Type v} [CommRing R] [CommRing Λ] [Algebra R Λ]
     (q : PrimeSpectrum Λ) (n m c : ℕ)

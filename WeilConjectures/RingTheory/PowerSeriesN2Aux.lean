@@ -14,11 +14,18 @@ import WeilConjectures.RingTheory.IsN2OfFiniteExtension
 import WeilConjectures.RingTheory.N2AscendsFiniteDomainExtension
 import Mathlib.RingTheory.AdicCompletion.Completeness
 
-/-! Auxiliary N-2 assertion for power series.
+/-!
+# Power series over a Noetherian N-2 domain are N-2
 
-Source: Stacks Project, Algebra, Lemma Tag 032Q.
-(blueprint: lem-weil-pbc-power-series-n2-aux).
+If `R` is a Noetherian N-2 domain, then so is `R⟦X⟧`. The proof passes to the power series ring
+over the integral closure of `R`, which is finite over `R⟦X⟧` and normal, and applies Tate's
+criterion to the element `X`.
+
+## References
+
+* Stacks Project, Algebra, Lemma Tag 032Q
 -/
+
 
 @[expose] public section
 
@@ -66,10 +73,8 @@ private theorem isN2_quotient_X (A : Type u) [CommRing A] [IsDomain A]
   exact isN2_of_finite_domain_extension A (PowerSeries A ⧸ I)
     (FractionRing A) (FractionRing (PowerSeries A ⧸ I)) e.symm.injective hA
 
-/-- The N-2 part of the power-series lemma.  This is the normalization and Tate
-argument of Tag 032Q, isolated so that the Noetherian and domain conclusions can
-be discharged directly from Mathlib instances.
-(blueprint: lem-weil-pbc-power-series-n2-aux). -/
+/-- If `R` is a Noetherian N-2 domain, then the power series ring `R⟦X⟧` is N-2. -/
+
 theorem isN2_power_series (R : Type u) [CommRing R] [IsDomain R]
     [IsNoetherianRing R] (hR : IsN2 R (FractionRing R)) :
     IsN2 (PowerSeries R) (FractionRing (PowerSeries R)) := by

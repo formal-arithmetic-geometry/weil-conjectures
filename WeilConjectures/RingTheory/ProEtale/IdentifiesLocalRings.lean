@@ -35,7 +35,7 @@ identifying local rings to topological spaces over `Spec A`.
   hom-sets.
 * `Algebra.BijectiveOnStalks.algHom_of_continuousMap`: the inverse direction.
 
-## Proof sketch for the inverse direction
+## Implementation details
 
 Given a continuous map `φ : Spec C → Spec B` over `Spec A`, we construct a ring map
 `B →+* C` as follows. For each prime `p` of `C`, both localized maps
@@ -47,6 +47,10 @@ The resulting family `p ↦ (image of b)` is a section of the structure sheaf of
 `a, t ∈ A`, where `b = a/t` in `B_{φ(p)}`; continuity of `φ` provides the
 neighbourhood. Since `Γ(Spec C, 𝒪) = C`, this glues to an element of `C`,
 giving a ring map `B →+* C` which is `A`-linear and induces `φ` on spectra.
+
+## References
+
+* [Stacks Project, Tag 096L](https://stacks.math.columbia.edu/tag/096L)
 -/
 
 @[expose] public section
@@ -102,7 +106,7 @@ variable {A B C}
 
 /-- The continuous map `Spec C → Spec B` over `Spec A` induced by an
 `A`-algebra homomorphism `f : B →ₐ[A] C`. This is the forward direction of
-the hom-set bijection from Stacks 096L. -/
+the hom-set bijection. -/
 @[stacks 096L "The forward map on hom sets."]
 def continuousMap_of_algHom (f : B →ₐ[A] C) : HomOver A B C where
   toContinuousMap :=
@@ -150,8 +154,7 @@ noncomputable def stalkEquivAt (φ : HomOver A B C) (p : PrimeSpectrum C) :
 
 /-- (Implementation) The per-prime ring homomorphism `B →+* C_p` obtained as the
 composite `B → B_{φ(p)} ≃ A_{p ∩ A} → C_p`, where the middle map is the inverse
-of `stalkEquivAt` and the last map is the localized map of `A → C` (which is
-bijective, but we do not need this here). -/
+of `stalkEquivAt` and the last map is the localized map of `A → C`. -/
 noncomputable def localRingHomAt (φ : HomOver A B C) (p : PrimeSpectrum C) :
     B →+* Localization.AtPrime p.asIdeal :=
   haveI : ((φ p).asIdeal.comap (algebraMap A B)).IsPrime := Ideal.IsPrime.comap _
@@ -189,7 +192,7 @@ theorem localRingHomAt_algebraMap (φ : HomOver A B C) (p : PrimeSpectrum C)
 
 /-- (Implementation) The family `p ↦ localRingHomAt φ p b` is a section of the
 structure sheaf of `Spec C`: it is locally a fraction (with numerator and
-denominator in the image of `A`). This is where continuity of `φ` is used. -/
+denominator in the image of `A`). -/
 theorem isLocallyFraction_localRingHomAt (φ : HomOver A B C) (b : B) :
     (StructureSheaf.isLocallyFraction C C).pred
       (fun p : (⊤ : Opens (PrimeSpectrum.Top C)) ↦
@@ -334,9 +337,9 @@ end Inverse
 
 variable (A B C)
 
-/-- **Stacks 096L, fully faithfulness.** When both `A → B` and `A → C` identify
-local rings, the map sending an `A`-algebra homomorphism `B →ₐ[A] C` to the induced
-continuous map `Spec C → Spec B` over `Spec A` is a bijection. -/
+/-- When both `A → B` and `A → C` identify local rings, the map sending an `A`-algebra
+homomorphism `B →ₐ[A] C` to the induced continuous map `Spec C → Spec B` over `Spec A` is a
+bijection. -/
 @[stacks 096L]
 theorem continuousMap_of_algHom_bijective
     [Algebra.BijectiveOnStalks A B] [Algebra.BijectiveOnStalks A C] :
@@ -382,9 +385,7 @@ theorem continuousMap_of_algHom_bijective
     exact HomOver.ext fun p ↦ comap_ringHomOfHomOver φ p
 
 /-- The hom-set bijection `(B →ₐ[A] C) ≃ HomOver A B C` when both `A → B` and
-`A → C` identify local rings. This formalizes Stacks 096L
-(`thm:identifies-local-ring-to-top-fully-faithful` and
-`def:identifies-local-ring-hom-set-bijection` in the blueprint). -/
+`A → C` identify local rings. -/
 @[stacks 096L]
 noncomputable def algHomEquivContinuousMap
     [Algebra.BijectiveOnStalks A B] [Algebra.BijectiveOnStalks A C] :
@@ -393,7 +394,7 @@ noncomputable def algHomEquivContinuousMap
 
 /-- The `A`-algebra homomorphism `B →ₐ[A] C` induced by a continuous map
 `Spec C → Spec B` over `Spec A`, when both `A → B` and `A → C` identify local
-rings. This is the inverse direction of the hom-set bijection from Stacks 096L. -/
+rings. This is the inverse direction of the hom-set bijection. -/
 noncomputable def algHom_of_continuousMap
     [Algebra.BijectiveOnStalks A B] [Algebra.BijectiveOnStalks A C]
     (φ : HomOver A B C) : B →ₐ[A] C :=

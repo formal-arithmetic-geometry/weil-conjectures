@@ -12,9 +12,15 @@ import Mathlib.RingTheory.TensorProduct.MvPolynomial
 
 /-! # The unlocalized zero-base single-chart presentation
 
-Source: Stacks Project, Tag 07CP, the coefficient reduction in the calculation modulo pi.
-(blueprint: lem-weil-pbc-popescu-zero-base-single-chart-unlocalized).
+After a scalar extension killing `π`, and before inverting the chart element, the
+single-chart quotient of a Popescu lift presentation is presented by the linear chart
+relations over the scalar extension of the reduced quotient.
+
+## References
+
+* [Stacks Project, Tag 07CP](https://stacks.math.columbia.edu/tag/07CP)
 -/
+
 
 @[expose] public section
 
@@ -95,27 +101,12 @@ private theorem iteratedQuotient
   exact (Ideal.quotientKerAlgEquivOfSurjective_mk (f := φ) hφ p).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Before localization, scalar extension removes precisely the pi terms.
+/-- Let `B` be an `R/(π²)`-algebra in which `π` vanishes, and let `Dₖ` be the quotient of the
+polynomial ring by the equations `fₗ - π zₗ` and the `k`-th chart relations. Then `B ⊗[R] Dₖ`
+is isomorphic, as a `B`-algebra, to the quotient of the polynomial ring in the `zₗ` over
+`L = B ⊗[R/(π²)]` the reduced quotient by the linear relations
+`aₖ zₗ - ∑_{j ∈ Eₖ} hₖₗⱼ zⱼ`, compatibly with the coefficient maps from `R[x]`. -/
 
-Source: Stacks Project, Tag 07CP (lemma-lifting), the first line of the calculation
-modulo pi, before inverting the chart element.
-(blueprint: lem-weil-pbc-popescu-zero-base-single-chart-unlocalized).
-
-Proof: Tensor the original polynomial quotient with B. The tensor-quotient equivalence
-identifies this with the quotient of B[x,z] by the coefficient images of the original
-equations; the canonical ULift equivalence removes ULift. Since pi maps to zero,
-the equations become f_l(x) and a_k(x)z_l minus the sum h_klj(x)z_j. Split the x and
-z variables, and first quotient the coefficient polynomial ring B[x] by all f_l.
-This yields the polynomial ring in z over B[x]/(f_l), modulo the displayed linear
-relations. The map R to B factors through R/(pi squared), so the tensor-quotient and
-polynomial base-change equivalences identify B[x]/(f_l) with
-B tensor over R/(pi squared) with reducedQuotient. These maps send every polynomial
-p(x) to its reduced coefficient class and each auxiliary variable to its own class.
-The reverse maps are polynomial evaluation followed by the tensor and quotient
-universal properties. Check the two composites on B, each x, and each z; polynomial,
-tensor, and quotient extensionality gives identities and the stated coefficient
-compatibility. This argument neither inverts a_k nor eliminates any variable and
-requires no normalization or smoothness hypotheses. -/
 theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

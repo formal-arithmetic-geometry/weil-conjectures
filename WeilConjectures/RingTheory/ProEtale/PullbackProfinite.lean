@@ -23,9 +23,8 @@ The ring `LocallyConstant T R` is the filtered colimit of the finite products
 `LocallyConstant S R ≃ (S → R)` over the discrete quotients `S` of `T`, and the
 homeomorphism is the topological incarnation of
 `Spec (colim_S (S → R)) = lim_S (S × Spec R) = T × Spec R`; both facts are however
-proved directly. This is the input for the construction of Stacks Tag 097D
-(`def:modify-pi0-profinite` in the blueprint): modifying the connected components of
-`Spec R` along a continuous map `T → π₀(Spec R)`, see
+proved directly. This is the input for the construction of Stacks Tag 097D:
+modifying the connected components of `Spec R` along a continuous map `T → π₀(Spec R)`, see
 `WContractification.PullbackProfinite` in `Proetale.Algebra.WContractible`.
 
 ## Main declarations
@@ -37,6 +36,10 @@ proved directly. This is the input for the construction of Stacks Tag 097D
 * `LocallyConstant.instIndZariski`: `LocallyConstant T R` is ind-Zariski over `R`, being
   the filtered colimit of the finite products `LocallyConstant S R ≃ (S → R)` over the
   discrete quotients `S` of `T`.
+
+## References
+
+* [Stacks Project, Tag 097D](https://stacks.math.columbia.edu/tag/097D)
 -/
 
 @[expose] public section
@@ -152,9 +155,7 @@ noncomputable def discreteQuotientCocone : Cocone (discreteQuotientDiag R T) whe
         intro t
         exact congrArg (fun x ↦ f x) (DiscreteQuotient.ofLE_proj h.unop.le t) }
 
-/-- The cocone `discreteQuotientCocone` is colimiting: every locally constant function
-factors through a discrete quotient, and two functions on quotients agreeing on `T`
-agree on a common refinement. -/
+/-- The cocone `discreteQuotientCocone` is colimiting. -/
 noncomputable def isColimitDiscreteQuotientCocone :
     IsColimit (discreteQuotientCocone R T) := by
   haveI : ReflectsColimitsOfShape (DiscreteQuotient T)ᵒᵖ (forget (CommAlgCat R)) :=
@@ -185,8 +186,7 @@ instance (S : DiscreteQuotient T) : Algebra.IndZariski R (LocallyConstant S R) :
   Algebra.IndZariski.of_equiv (R := R) (S := (S → R)) (T := LocallyConstant S R)
     (algEquivPi R S).symm
 
-/-- The ring of locally constant functions on a compact space is ind-Zariski. This is
-the algebra `A^S` of Stacks 097D (for `S = T` profinite), obtained as the filtered
+/-- The ring of locally constant functions on a compact space is ind-Zariski, being the filtered
 colimit of the finite products `S → R` over the discrete quotients `S` of `T`. -/
 instance instIndZariski : Algebra.IndZariski R (LocallyConstant T R) :=
   Algebra.IndZariski.of_colimitPresentation (R := R) (S := LocallyConstant T R)

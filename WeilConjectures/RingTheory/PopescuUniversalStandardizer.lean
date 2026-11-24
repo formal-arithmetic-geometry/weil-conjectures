@@ -20,9 +20,22 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # The universal standardizer before choosing parameters
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ,
-items item-generators through item-strictly-standard and item-first-solve.
+For a finitely presented algebra `A` over a field `k` we construct the universal algebra `B`
+over `A` with relations `xᵢ^(2N) = ∑ⱼ zᵢⱼ aⱼ`, where the `aⱼ` generate the singular ideal of
+`A`, together with an improved presentation `C₀` retracting onto `B` whose standard powers
+and singular-ideal inclusion survive every base change along `k[x] → R`.
+
+## Implementation details
+
+No parameters in the target ring and no Artinian solution are chosen here. The carriers
+`B` and `C₀` live in `Type (max u v)`.
+
+## References
+
+* [Stacks Project, Tag 07FJ](https://stacks.math.columbia.edu/tag/07FJ)
+* Stacks Project, Tags 07CE, 07EZ and 07CC
 -/
+
 
 @[expose] public section
 
@@ -61,34 +74,14 @@ private theorem strictlyStandard_power_of_free
     (LinearEquiv.prodUnique (R := T) (M := M) (M₂ := Fin 0 →₀ T)).trans b'.repr
   exact smooth_free_differentials_strictly_standard_power R D x 0 n ⟨e⟩
 
-/-- The universal algebra with relations `x_i^(2N) = sum_j z_ij a_j` has an
-improved presentation whose standard powers and singular-ideal inclusion survive
-every polynomial base change. This lemma chooses no parameters in the target ring
-and no Artinian solution.
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07FJ,
-items item-generators, item-standardizer, item-elkik, item-strictly-standard,
-and the justification of item-first-solve.
-(blueprint: lem-weil-pbc-popescu-universal-standardizer).
+/-- Let `A` be finitely presented over a field `k` and `S = k[x₁, …, x_d]`. There are
+generators `a` of the singular ideal of `A`, an `A`-algebra `B` presented by the relations
+`xᵢ^(2N) = ∑ⱼ zᵢⱼ aⱼ`, and a finitely presented `S`-algebra `C₀` with `β₀ : A → C₀`, a
+retraction `ρ : C₀ → B` with `ρ ∘ β₀ = (A → B)`, and `c > 0`, such that for every `S`-algebra
+`R` and every `h : B → Λ`, the induced map `γ : R ⊗[S] C₀ → Λ` satisfies
+`popescuIdeal (h ∘ (A → B)) ≤ popescuIdeal γ`, and `0` and the images of `xᵢ^c` are strictly
+standard in `R ⊗[S] C₀`. -/
 
-Proof: Since A is finitely presented over the field k, it is Noetherian. Choose
-finite generators a_j of its singular ideal. Construct B as the quotient of the
-polynomial algebra over A on x_i,z_ij by the displayed d relations; its presentation
-P is the quotient presentation. Give B the k[x]-structure sending X_i to x_i.
-On each a_j-open, eliminate z_ij to identify the localization with a polynomial
-algebra over A localized at a_j, after extending scalars to k[x]. This is smooth.
-The relations show that the a_j generate the unit ideal on each x_i-open, so these
-opens are smooth too. Apply 07CE to obtain C₀ and its retraction ρ. The improved
-differentials are finite free on each x_i-open. Over the Noetherian base k[x], C₀
-is finitely presented; 07EZ(e) supplies a common positive c for which every x_i^c
-is strictly standard. Define β₀ by A → B → C₀. The retraction gives ρβ₀ = A → B.
-For any base change, smoothness on the a_j-opens persists, so the extended singular
-ideal of A lies in the singular ideal of the base-changed C₀. Extend along hρ and
-take radicals to get the Popescu-ideal inclusion. Strict standardness persists by
-07CC. Zero is strictly standard using any finite presentation, c = 0 in the
-definition and zero coefficients of the minors: the lift of zero differs from
-zero by an element of the relation ideal, so its product with a relation is in
-the square of that ideal. All carriers can be the finite polynomial quotients
-and the explicit symmetric algebra used by 07CE, in Type(max u v). -/
 theorem exists_popescu_universal_standardizer
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

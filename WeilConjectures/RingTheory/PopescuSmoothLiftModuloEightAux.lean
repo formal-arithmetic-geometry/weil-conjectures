@@ -13,6 +13,26 @@ import WeilConjectures.RingTheory.PopescuLifting
 public import WeilConjectures.RingTheory.SingularIdeal
 import WeilConjectures.RingTheory.PopescuSmoothQuotientFactor
 
+/-!
+# Data for lifting a smooth factorization modulo `π⁸`
+
+Given a nonzerodivisor `π` of a Noetherian ring `R` such that `Λ / π⁸Λ` is ind-smooth over
+`R / π⁸`, we construct a finitely presented `R`-algebra `D` with a map to `Λ` that is smooth at
+every prime and receives a compatible map from `A / π⁴A`.
+
+## Implementation details
+
+The reduction of `A → Λ` modulo `π⁸` factors through a smooth `R / π⁸`-algebra `C`
+(`exists_popescu_smooth_quotient_factor`), and `popescu_lifting` is applied with `π⁴` and `C`.
+Injectivity of multiplication by `π` makes the required annihilator ideals vanish. Primes not
+containing `π` are handled by clause (b) of the lifting lemma, primes containing `π` by
+clause (c) together with smoothness of `C`.
+
+## References
+
+* Stacks Project, Smoothing Ring Maps, proof of Lemma 07F5
+-/
+
 @[expose] public section
 
 universe u v
@@ -36,21 +56,11 @@ private theorem smoothAtPrime_of_smooth
     Algebra.Smooth.of_isLocalization_Away 1
   exact Algebra.Smooth.comp S C _
 
-/-- Auxiliary output of the Popescu lifting construction, including pointwise smoothness.
-
-(blueprint: lem-weil-pbc-popescu-smooth-lift-data)
-
-Proof: Construct a finite polynomial presentation and apply `popescu_lifting` as in
-Stacks Project Lemma 07F5. Injectivity of multiplication by `π` gives the required
-annihilator equalities. The quotient maps give the compatible map modulo `π⁴`.
-Clause (b) of the lifting lemma handles primes away from `π`; clause (c), together
-with smoothness of the chosen smooth quotient algebra, handles primes over `π`.
-Thus the resulting finitely presented algebra is smooth at every prime.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07F5, proof (blueprint:
-lem-weil-pbc-popescu-smooth-lift-modulo-eight).
-The construction produces a finitely presented algebra, a compatible map modulo π⁴,
-and smoothness at every prime; the detailed polynomial construction is the content of
-this intermediate assertion. -/
+/-- Auxiliary output of the Popescu lifting construction, including pointwise smoothness:
+if `π` is a nonzerodivisor in `R` and in `Λ` and `Λ / π⁸Λ` is ind-smooth over `R / π⁸`, then
+there are a finitely presented `R`-algebra `D`, smooth over `R` at every prime, an `R`-algebra
+map `δ : D → Λ`, and an `R`-algebra map `A / π⁴A → D / π⁴D` compatible with `α` and `δ`
+modulo `π⁴`. -/
 theorem exists_popescu_smooth_lift_data
     (R : Type u) (Λ : Type (max u v)) [CommRing R] [CommRing Λ] [Algebra R Λ]
     [IsNoetherianRing R]

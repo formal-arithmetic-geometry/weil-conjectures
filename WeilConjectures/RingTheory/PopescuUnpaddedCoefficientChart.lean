@@ -18,8 +18,21 @@ import WeilConjectures.RingTheory.EssentiallySmoothBaseChange
 /-!
 # Simultaneous rescaling of an existing Artinian coefficient chart
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07FJ, steps 10--13, 15, 23 and 25.
+Starting from an Artinian coefficient chart for `α : A → Λ` at a prime `q`, we construct a
+rescaled chart: parameters `ρᵢ` in a polynomial ring `R = k[t₁, …, t_m]` and an essentially
+smooth `R/H^n`-algebra `E = D'[t₁, …, t_d]` over an Artinian local ring `D'`, mapping flatly
+to `Λ_q/m^n`, before the parameter list is padded.
+
+## Implementation details
+
+No positivity assumption on `d` is needed: the polynomial tensor identification used to
+transport essential smoothness also applies when `d = 0`.
+
+## References
+
+* [Stacks Project, Tag 07FJ](https://stacks.math.columbia.edu/tag/07FJ)
 -/
+
 
 @[expose] public section
 
@@ -77,35 +90,14 @@ private theorem essentiallySmooth_polynomial
         simp }
   exact essentiallySmooth_equiv_target eQ (essentiallySmooth_baseChange h)
 
-/-- Construct the rescaled coefficient algebra before padding the parameter list and
-comparing powers of its parameter ideals. Source: Stacks Project, Smoothing Ring Maps,
-Lemma 07FJ, steps 10--13, 15 and 25.
-(blueprint: lem-weil-pbc-popescu-unpadded-coefficient-chart).
+/-- Given an Artinian coefficient chart `D₀` for `α : A → Λ` at `q`, there are a polynomial
+ring `R = k[t₁, …, t_m]` mapping to `Λ`, elements `ρᵢ ∈ R` lying over `q`, equal to the
+images of the variables of `S = k[x₁, …, x_d]`, satisfying `ρᵢ^(2N) = ∑ⱼ ℓᵢⱼ α(aⱼ)` and the
+kernel stabilization conditions, an ideal `H` of `R` generating the parameter ideal locally,
+and an Artinian local `k`-algebra `D'` such that `E = D'[t₁, …, t_d]` is essentially smooth
+over `R/H^n`, with `n = N + d(8c)`, together with a flat local map `g : D' → Λ_q/m^n` and
+lifts of `α` and of the coefficients `ℓᵢⱼ` that are compatible with `g`. -/
 
-Proof: The rescaling-data theorem gives the parameters, kernel equalities, ideal H,
-coefficient ring D', its flat local map and coefficient lifts. It also retains a
-coefficient quotient B, essential smoothness of D' over B, and the k-algebra
-identification e : R/H^n ≃ B[t_i], with n = N+d(8c). It supplies polynomial
-coefficient-map and evaluation identities, without algebra structures on D'[t_i].
-
-Set E=D'[t_i]. The coefficient homomorphism B[t_i]→E composed with e defines
-θ:R/H^n→E as a k-algebra homomorphism. Its composite χ with the quotient map gives
-the R-algebra structure. Composition with S→R gives the S-algebra structure.
-These explicit maps prove the R→R/H^n→E and S→R→E scalar towers; k-linearity
-proves the k→S→E tower. The canonical polynomial structure supplies k→D'→E.
-
-Base change of the essentially smooth B-algebra D' gives an essentially smooth
-B[t_i]-algebra B[t_i]⊗_B D'. Tensor commutativity followed by the polynomial tensor
-identification is a B[t_i]-algebra equivalence from this tensor product to E, with
-structure map given by coefficient mapping. Transport the smooth localization
-presentation to E. Restrict it along e: the equivalence R/H^n→B[t_i] is smooth,
-and smooth composition gives a smooth R/H^n-algebra presentation of the same
-localization. This proves essential smoothness of E over R/H^n.
-
-The supplied polynomial identities are now exactly the required S-generator and
-R-evaluation identities by the definitions of θ, χ and the S-map. Retain the
-A-map, coefficient lifts, localness and flatness unchanged. No positive-d assumption
-is used: the zero-variable polynomial tensor equivalence also applies when d=0. -/
 theorem exists_popescu_unpadded_coefficient_chart
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

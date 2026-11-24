@@ -10,9 +10,15 @@ public import WeilConjectures.RingTheory.StrictlyStandardElement
 
 /-! # Translation preserving a strictly standard witness
 
-Source: Stacks Project, Tag 07CR, the change of generators in the opening paragraph.
-(blueprint: lem-weil-pbc-popescu-translated-presentation-data).
+Given a strictly standard element `π` of a finitely presented `R`-algebra `A` and an
+`R`-algebra map `A/(π⁴) → R/(π⁴)`, we translate the generators of a strictly standard
+presentation so that they vanish under this map, keeping the strictly standard witness.
+
+## References
+
+* [Stacks Project, Tag 07CR](https://stacks.math.columbia.edu/tag/07CR)
 -/
+
 
 @[expose] public section
 
@@ -22,27 +28,11 @@ namespace Algebra
 
 open MvPolynomial
 
-/-- Choose a strictly standard presentation whose generators vanish under the given section.
+/-- If `π` is strictly standard in `A` and `ρ : A/(π⁴) → R/(π⁴)` is an `R`-algebra map, then
+there is a presentation of `A` whose generators are killed by `ρ`, together with a Jacobian
+minor identity for `π` and the ideal-square containment witnessing that `π` is strictly
+standard. -/
 
-Source: Stacks Project, Tag 07CR, opening paragraph.
-(blueprint: lem-weil-pbc-popescu-translated-presentation-data).
-
-Proof: unpack strict standardness to obtain a presentation `P`, an integer `c`, minor
-coefficients, and the ideal-square containment. For each generator choose a lift `bᵢ`
-in `R` of its image under `ρ`. Let `τ` substitute `Xᵢ + C bᵢ` for `Xᵢ`; its inverse
-substitutes `Xᵢ - C bᵢ`, since both composites fix constants and variables. The new
-presentation has generator values `P.val i - algebraMap R A (b i)`, relations
-`τ (P.relation j)`, and polynomial lift `τ ∘ P.σ`. Evaluation of a translated
-polynomial at the new values equals the original evaluation, by equality on constants
-and variables. Thus the new relations span the new evaluation kernel and the lift is
-still a right inverse. The new generator values have zero image under `ρ`.
-Polynomial induction, using additivity and the Leibniz rule, gives
-`pderiv i (τ f) = τ (pderiv i f)`; hence evaluating each new Jacobian minor gives
-exactly the old minor. Keep the old minor coefficients. Finally apply `τ` to the
-ideal-square containment: an algebra automorphism preserves ideal spans, sums and
-products, and the transported lift makes the left-hand side its image under `τ`.
-This proves both strictly standard witness conditions for the same new presentation.
-No constant-minor lifting or conclusion about an auxiliary algebra is used. -/
 theorem exists_popescu_translated_presentation_data
     (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] [FinitePresentation R A] (π : R)

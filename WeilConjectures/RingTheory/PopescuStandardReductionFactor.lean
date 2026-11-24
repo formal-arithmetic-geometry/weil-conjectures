@@ -16,9 +16,24 @@ import WeilConjectures.RingTheory.PopescuCorrectionReduction
 import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 import Mathlib.RingTheory.Ideal.Operations
 
-/-! # A factor algebra with standard smooth reduction
+/-!
+# A factor algebra with standard smooth reduction
 
-Source: Stacks Project, Tag 07CK, the construction of `A'` before lifting the equations.
+If `Λ / IΛ` is ind-standard-smooth over `R / I`, every map from a finitely presented
+`R`-algebra into `Λ` factors through a finitely presented `R`-algebra whose reduction modulo `I`
+is standard smooth.
+
+## Implementation details
+
+The reduction `A / IA` factors through a standard smooth stage `C = (A / IA)[t] / (ḡ)`; lifting
+the relations to `g` over `A`, each evaluation `φ(g)(λ)` lies in `IΛ` and is written as
+`∑ ε μ` with `ε ∈ I`. Adjoining one variable `δ` per product and imposing `g - ∑ ε δ` gives the
+factor algebra, whose reduction is `C[δ]`, still standard smooth. The construction covers empty
+lists, the zero ring and `I = ⊤`, and uses no nilpotence hypothesis.
+
+## References
+
+* Stacks Project, Tags 00QO, 00F4 and 07CK
 -/
 
 @[expose] public section
@@ -50,29 +65,7 @@ private theorem exists_sum_of_mem_map
     (e.sum_comp (fun a : c.support ↦ c a.val * algebraMap R Λ a.val)).symm
 
 /-- A map into an algebra with ind standard smooth reduction factors through a finitely
-presented algebra whose reduction is itself standard smooth.
-
-Source: Stacks Project, Smoothing Ring Maps, Tag 07CK (lemma-lift-once), construction
-of `A'` (blueprint: lem-weil-pbc-popescu-standard-reduction-factor).
-
-Proof: Reducing a finite presentation of `A` shows that `A/IA` is finitely presented
-over `R/I`. The map induced by `φ` therefore factors through a standard smooth stage
-`C` of the given filtered colimit (Tag 00QO). Since `C` is finitely presented over
-`R/I` and `A/IA` is finite type over it, `C` is finitely presented over `A/IA`
-(Tag 00F4). Write `C = (A/IA)[t]/(gbar)` with finite lists of variables and relations.
-Lift the images of the variables to elements `λ` of `Λ`, and lift the coefficients of
-`gbar` to polynomials `g` over `A`. Each evaluation `φ(g)(λ)` lies in `IΛ`, because
-its image in the quotient is zero by the factorization through `C`. Write it as a
-finite sum of products `ε * μ`, with `ε` in `I`. Adjoin one variable `δ` for each
-such product and impose the relations `g - sum ε * δ`. Evaluation at `λ` and `μ`
-defines the map to `Λ`; its restriction to `A` is `φ`. This quotient is finitely
-presented over `A` and therefore over `R`. Modulo `I` the correction terms vanish,
-so the reduction is `C[δ]`. Adjoining finitely many variables preserves a standard
-smooth presentation: retain the original equations and original invertible Jacobian
-minor, with the new variables outside that minor. The finite polynomial quotient
-has carrier universe at most `max u v w`; use `ULift` to reach that universe exactly.
-This argument also covers empty lists, the zero ring, and `I = top`; it uses no
-nilpotence hypothesis. -/
+presented algebra whose reduction is itself standard smooth. -/
 theorem exists_standardSmooth_reduction_factorization
     (R : Type u) [CommRing R] (Λ : Type (max u v)) [CommRing Λ] [Algebra R Λ]
     (I : Ideal R)

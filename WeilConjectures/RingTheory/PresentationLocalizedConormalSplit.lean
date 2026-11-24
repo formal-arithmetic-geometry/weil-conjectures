@@ -13,8 +13,12 @@ import WeilConjectures.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent
 
 /-! # Localized conormal complement of a finite polynomial presentation
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, lines 381–392 and
-438–439 (blueprint: lem-weil-pbc-presentation-localized-conormal-split).
+For a finite presentation of `A` over `R` with `n` variables and `A_a` smooth over `R`, the
+localized conormal module and `Ω[A_a/R]` together are isomorphic to `A_a^n`.
+
+## References
+
+* [Stacks Project, Tag 07CE](https://stacks.math.columbia.edu/tag/07CE), proof
 -/
 
 @[expose] public section
@@ -25,22 +29,8 @@ open scoped TensorProduct
 namespace Algebra.Presentation
 
 /-- The localized conormal module complements the differentials to the free module on
-its polynomial variables.
-
-Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CE, lines 381–392 and
-438–439 (blueprint: lem-weil-pbc-presentation-localized-conormal-split).
-
-Proof: lift `a` to a polynomial `h` using the surjection of `P`. Present `A_a` by adjoining
-one variable `x₀` and the relation `hx₀ - 1`. The principal-localization naive-cotangent
-lemma identifies the new two-term complex with the localized original complex plus the
-invertible map `a : A_a → A_a`. Smoothness of `A_a` makes the conormal differential
-injective and its cokernel is its projective module of Kähler differentials, by Mathlib's
-formally smooth cotangent criterion and conormal cokernel equivalence. Removing the
-invertible summand gives the exact sequence
-`0 → A_a ⊗[A] P.Cotangent → A_a^n → Ω[A_a/R] → 0`. The polynomial differential basis
-identifies its middle term with `Fin n → A_a`. Projectivity of the right term splits the
-surjection, giving the asserted equivalence. This argument works for `n = 0`, for a zero
-localization, and independently of the number of chosen relations. -/
+its polynomial variables: if `A_a` is smooth over `R`, then
+`(A_a ⊗[A] P.Cotangent) × Ω[A_a/R]` is linearly equivalent to `Fin n → A_a`. -/
 theorem localized_conormal_equiv
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     {n m : ℕ} (P : Algebra.Presentation R A (Fin n) (Fin m))

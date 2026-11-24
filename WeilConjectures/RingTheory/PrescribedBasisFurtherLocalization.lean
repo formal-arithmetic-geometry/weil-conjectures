@@ -16,7 +16,13 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Prescribed bases persist under a further principal localization
 
-Source: Stacks Project, Algebra, Section 10.9 (localization of modules), and Tag 07C6.
+If `M[1/a]` has a basis consisting of images of elements `m i` of `M`, then the images of the
+same elements form a basis of `M[1/(a*t)]`.
+
+## References
+
+* Stacks Project, Algebra, Section 10.9 (localization of modules)
+* [Stacks Project, Tag 07C6](https://stacks.math.columbia.edu/tag/07C6)
 -/
 
 @[expose] public section
@@ -27,17 +33,8 @@ open scoped TensorProduct
 
 namespace Module.Basis
 
-/-- A basis represented by specified original module elements persists on D(a*t).
-Source: Stacks Project, Algebra, Section 10.9 (localization of modules), and Tag 07C6.
-(blueprint: lem-weil-pbc-prescribed-basis-further-localization)
-
-Proof: Give A[1/(a*t)] its A[1/a]-algebra structure, since a is a unit after
-inverting a*t. Base change the given basis. Associativity of tensor products and
-the localization-tensor equivalence identify this base change with
-LocalizedModule.Away (a*t) M. The resulting basis vectors are m i divided by one,
-as follows on elementary tensors. No finiteness, projectivity, smoothness or prime
-hypothesis is needed. If a or t is nilpotent, the resulting zero ring and zero
-module still admit the base changed basis. The empty index type is also covered. -/
+/-- A basis represented by specified original module elements persists on D(a*t): if the
+images of `m i` form a basis of `M[1/a]`, then they also form a basis of `M[1/(a*t)]`. -/
 theorem exists_prescribed_basis_away_mul
     {A : Type u} [CommRing A] {M : Type v} [AddCommGroup M] [Module A M]
     {ι : Type*} (a t : A) (m : ι → M)

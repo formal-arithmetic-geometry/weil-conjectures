@@ -15,9 +15,14 @@ import Mathlib.RingTheory.MvPowerSeries.Derivative
 /-!
 # Constant and linear coordinates on truncated power series
 
-Source: Stacks Project, More on Algebra, Tag 07EI, construction of f₁.
-(blueprint: lem-weil-pbc-power-series-first-order-coordinates).
+Power series over a field modulo the square of the ideal of the variables are identified, via
+their constant and linear coefficients, with a trivial square-zero extension.
+
+## References
+
+* [Stacks Project, Tag 07EI](https://stacks.math.columbia.edu/tag/07EI), construction of `f₁`
 -/
+
 
 @[expose] public section
 
@@ -27,25 +32,8 @@ namespace MvPowerSeries
 
 /-- Constant and linear coefficients identify power series modulo the square of the
 variables' ideal with a trivial square-zero extension. The variables' ideal is precisely
-the subspace with zero first coordinate.
-Source: Stacks Project, More on Algebra, Tag 07EI, construction of f₁.
-(blueprint: lem-weil-pbc-power-series-first-order-coordinates)
+the subspace with zero first coordinate. -/
 
-Proof: Send a series f to (constantCoeff f, fun i ↦ coeff (Finsupp.single i 1) f).
-The Cauchy product gives multiplication (c,v)(c',v') = (cc',cv' + c'v), so this
-is a ring homomorphism to the trivial square-zero extension. It is surjective:
-(c,v) is the image of C(c) + sum_i C(v_i) X_i. Its kernel is N². Indeed products
-of two variables have zero constant and linear coefficients, so N² lies in the
-kernel. Conversely order the finite variable set. For every monomial of total
-degree at least two, choose its first two variable factors, allowing repetition.
-Group the coefficients according to this pair and remove those two factors.
-This gives finitely many well-defined series f_ij and the equality
-f = sum_ij X_i X_j f_ij whenever the constant and linear terms of f vanish.
-Thus f belongs to N². The first isomorphism theorem supplies e. Every element
-of N has zero constant coefficient; conversely a class with zero first coordinate
-has representative sum_i C(v_i) X_i, which belongs to N. This proves the stated
-ideal membership criterion. For an empty variable set N = 0 and the constant
-coefficient map itself is an isomorphism. -/
 theorem exists_firstOrder_coordinates (σ : Type u) [Finite σ] (K : Type v) [Field K] :
     let T := MvPowerSeries σ K
     let N : Ideal T := Ideal.span (Set.range (fun i ↦ (X i : T)))

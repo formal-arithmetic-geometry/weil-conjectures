@@ -17,9 +17,24 @@ import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # Ring lifts with prescribed parameter values
 
-Source: Stacks Project, Tags 07NQ, 07NM and 07NL.
-(blueprint: lem-weil-pbc-power-series-parameter-preserving-ring-lift)
+For a local map `i : R → T` of power series rings over characteristic-zero fields or Cohen rings
+carrying parameters `t` of `R` into a regular system of parameters `i(t), y` of `T`, every
+continuous square-zero lifting problem for `T` over `R` has a ring-map solution that agrees with
+the base map on the parameters `t`.
+
+## Implementation details
+
+Using `i(t), y` as power-series coordinates on `T` (omitting `p` in the Cohen case), we start
+from an arbitrary ring lift supplied by formal smoothness over the prime ring, keep its
+coefficient map, and replace the values on the coordinates from `i(t)` by the prescribed images
+of `t`. These values are nilpotent, so evaluation of power series is well defined.
+
+## References
+
+* [Stacks Project, Tag 07NQ](https://stacks.math.columbia.edu/tag/07NQ)
+* Stacks Project, Tags 07NM and 07NL
 -/
+
 
 @[expose] public section
 
@@ -125,24 +140,11 @@ private theorem adjust_coordinates
     dsimp [z, j']
     rw [dite_eq_left j.isLt]
 
-/-- An unrestricted ring lift can be chosen to agree with the base map on parameters.
-No assertion of linearity over the whole base ring is made.
-Source: Stacks Project, Tag 07NQ, construction of psi before the defect derivation.
-(blueprint: lem-weil-pbc-power-series-parameter-preserving-ring-lift)
+/-- An unrestricted ring lift can be chosen to agree with the base map on parameters: if
+`g : T →ₐ[R] D ⧸ J` kills a power of the maximal ideal of `T` and `J ^ 2 = 0`, then there is a
+ring map `f : T →+* D` lifting `g` with `f (i r) = algebraMap R D r` for every `r ∈ t`. The lift
+`f` need not be `R`-linear. -/
 
-Proof: Use the full parameter system i(t),y as power-series coordinates, omitting
-p as a variable in the Cohen case (Tag 07NM). Tag 07NL first supplies a ring lift
-of g over the prime ring. In the field case D is a rational algebra: every nonzero
-integer is invertible modulo J, and invertibility lifts through a square-zero ideal.
-Retain the lifted coefficient map; replace the coordinate values belonging to i(t)
-by their prescribed images under R -> D, and retain the other lifted values.
-The coordinate values are nilpotent, since their k-th powers lie in J and their
-2k-th powers vanish. Their finitely generated ideal is nilpotent. Evaluation of
-series therefore uses finite truncations and gives a ring map. In D/J its values
-on coefficients and coordinates are unchanged, so uniqueness of evaluation makes
-its composite equal to g. The p-coordinate already agrees, since ring maps preserve
-integers. Empty lists require no replacement. No closed-fibre assumption is used.
--/
 theorem exists_parameterPreserving_ringLift
     (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]

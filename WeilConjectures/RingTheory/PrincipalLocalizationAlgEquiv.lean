@@ -11,18 +11,25 @@ public import Mathlib.Data.Fin.Tuple.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Algebra.MvPolynomial.Rename
 
+/-!
+# Presentations of principal localizations
+
+We show that adjoining an inverse of `h` to a quotient presentation
+`R[X_1, …, X_n] ⧸ (f_1, …, f_c)` gives a presentation of its localization away from `h`.
+
+## References
+
+* [Stacks Project, Tag 00SS](https://stacks.math.columbia.edu/tag/00SS), part (2)
+-/
+
 @[expose] public section
 universe u
 namespace Algebra
 
-/-- The quotient presentation obtained by adjoining an inverse is isomorphic to the
-principal localization. The isomorphism sends each old variable to its localization
-image and the new variable to `Away.invSelf`; the relation `h * Away.invSelf = 1`
-makes this map factor through the quotient, and the universal property of localization
-gives the inverse map. These maps are inverse by the quotient and localization
-induction principles, and the formulas follow on polynomial generators. Source:
-Stacks Project, Algebra, Lemma Tag 00SS, part (2).
-(blueprint: new-principal-localization-alg-equiv) -/
+/-- Adjoining a variable `X` and the relation `h * X - 1` to the presentation
+`R[X_1, …, X_n] ⧸ (f_1, …, f_c)` gives an algebra isomorphic to the localization of
+`R[X_1, …, X_n] ⧸ (f_1, …, f_c)` away from `h`, via an isomorphism sending each old variable
+to its image and the new variable `X` to `IsLocalization.Away.invSelf`. -/
 theorem principalLocalization_algEquiv
     (R : Type u) [CommRing R] (n c : ℕ)
     (f : Fin c → MvPolynomial (Fin n) R)

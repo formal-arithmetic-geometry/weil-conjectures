@@ -18,9 +18,13 @@ import Mathlib.RingTheory.Localization.BaseChange
 /-!
 # Principal localization preserves the specified complete intersection presentation
 
-Source: Stacks Project, Algebra, Lemma Tag 00SS (2), with the dimension argument
-from Tag 00SA and the paragraph after Definition 00S9.
-(blueprint: new-principal-localization-ci).
+If `f_1, …, f_c` is a relative global complete intersection presentation over `R`, then so is
+the presentation obtained by adjoining a variable `X` and the relation `h * X - 1`.
+
+## References
+
+* [Stacks Project, Tag 00SS](https://stacks.math.columbia.edu/tag/00SS), part (2)
+* Stacks Project, Tag 00SA and the paragraph after Definition 00S9
 -/
 
 @[expose] public section
@@ -57,15 +61,9 @@ private theorem principalOpen_dim
     exact iInf₂_le (TopologicalSpace.Opens.mk (Set.range j) hj.isOpen_range)
       (Set.mem_range_self x)
 
-/-- Adjoining an inverse preserves the relative global complete intersection condition.
-After tensoring with every residue field of the base, the original presentation has
-equidimensional fibres of dimension `n - c` by `hrel`. The enlarged fibre is the
-principal open where the image of `h` is invertible, presented with one extra
-variable and one extra equation. Principal opens preserve the local dimensions on
-this equidimensional fibre, so its dimension is still `n - c`, equal to
-`(n + 1) - (c + 1)`. This is exactly the defining fibre condition. Source: Stacks
-Project, Algebra, Lemma Tag 00SS, part (2).
-(blueprint: new-principal-localization-ci) -/
+/-- Adjoining a variable `X` and the relation `h * X - 1` to a relative global complete
+intersection presentation `f` gives again a relative global complete intersection
+presentation. -/
 theorem principalLocalization_ci
     (R : Type u) [CommRing R] (n c : ℕ)
     (f : Fin c → MvPolynomial (Fin n) R)

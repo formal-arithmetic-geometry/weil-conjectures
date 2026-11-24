@@ -23,8 +23,21 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-!
 # Artinian and flat structure of the localized transcendental image
 
-Source: Stacks Project, Tags 07FH and 07FI, transcendental case.
-(blueprint: lem-weil-pbc-popescu-transcendental-image-structure).
+Let `A₀` be a Popescu-admissible subalgebra of an Artinian local `k`-algebra `B` and `x ∈ B` an
+element whose residue is transcendental over the residue field of `A₀`. Let `𝔫` be the preimage
+of the maximal ideal of `B` under `A₀[T] → B`, `T ↦ x`. We show that the image of `A₀[T]_𝔫` in
+`B` is Artinian, flatly included in `B`, and that its maximal ideal generates the maximal ideal
+of `B`.
+
+## Implementation details
+
+The prime `𝔫` is `m₀[T]`, so `A₀[T]_𝔫` is Artinian local. Flatness of `A₀[T]_𝔫 → B` follows
+from the fibre criterion of flatness applied to `A₀ → A₀[T]_𝔫 → B`; being local, this map is
+faithfully flat, hence injective.
+
+## References
+
+* Stacks Project, Tags 07FH and 07FI (transcendental case)
 -/
 
 @[expose] public section
@@ -103,20 +116,10 @@ private theorem localHom_of_artinian
       Ring.KrullDimLE.isNilpotent_iff_mem_maximalIdeal.mpr hn
     exact (hnil.map f).not_isUnit hb⟩
 
-/-- The explicit localized polynomial image has the Artinian and flat parts of admissibility.
-Source: Stacks Project, Tag 07FI, transcendental case, and Tag 07FH.
-
-Proof: Put θ = evaluation at x and n = θ⁻¹(m_B). On residues θ is evaluation
-F₀[T] → K at the transcendental residue of x; it is injective. Thus n = m₀[T].
-The localization D = A₀[T]_n is Noetherian, its maximal ideal is m₀D, and this
-ideal is nilpotent since A₀ is Artinian. Therefore D is Artinian local.
-The map D → B is local. Apply the Noetherian fibre flatness criterion to
-A₀ → D → B and M = B. The module B is flat over A₀ by admissibility, and
-B/m₀B is a vector space over D/m₀D = F₀(T), hence flat. Thus D → B is flat.
-It is faithfully flat because it is local, hence injective. Its image is
-isomorphic to D, so is Artinian and flatly included in B. The maximal ideal
-of that image is the image of m₀D; extending it to B gives m₀B = m_B.
-(blueprint: lem-weil-pbc-popescu-transcendental-image-structure). -/
+/-- The explicit localized polynomial image has the Artinian and flat parts of admissibility:
+if the residue of `x` is transcendental over the residue field of `A₀`, then the image of
+`A₀[T]_𝔫` (with `𝔫` the preimage of the maximal ideal of `B` under `T ↦ x`) is Artinian, its
+inclusion into `B` is flat, and its maximal ideal generates the maximal ideal of `B`. -/
 theorem popescu_transcendental_image_structure
     (k : Type u) (B : Type v) [Field k] [CommRing B] [Algebra k B]
     [IsArtinianRing B] [IsLocalRing B]

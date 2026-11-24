@@ -9,9 +9,8 @@ public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
 
 /-! # Units of the ind-etale closed lift
 
-Source: blueprint, smooth purity, `proposition-extension-zero-restriction-closed-subscheme`,
-`proposition-extension-zero-restriction-closed-subscheme` (blueprint:
-proposition-extension-zero-restriction-closed-subscheme).
+An element of the ind-étale closed lift `Algebra.ClosedLift A C` is a unit as soon as its image
+in `C` is a unit.
 -/
 
 @[expose] public section
@@ -20,12 +19,7 @@ universe u
 
 namespace Algebra.ClosedLift
 
-/-- An element of the closed lift is a unit if its image in the input algebra is a unit.
-Source: blueprint `proposition-extension-zero-restriction-closed-subscheme`, statement and proof
-(blueprint: proposition-extension-zero-restriction-closed-subscheme).
-
-Proof: `isUnit_of_isUnit_image`, which lifts the inverse along a localization of a representing
-étale stage of the colimit. -/
+/-- An element of the closed lift is a unit if its image in the input algebra is a unit. -/
 theorem isUnit_of_isUnit_toAlgHom
     {A C : Type u} [CommRing A] [CommRing C] [Algebra A C]
     (I : Ideal A) [Algebra (A ⧸ I) C] [IsScalarTower A (A ⧸ I) C]

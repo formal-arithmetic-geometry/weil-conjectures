@@ -18,8 +18,12 @@ import WeilConjectures.RingTheory.PowerSeriesFullCoordinatesCohen
 /-!
 # Quotients of power series rings by partial parameter systems
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07NM, clauses (2) and (4)
-(blueprint: lem-weil-pbc-power-series-parameter-quotient).
+Quotienting a power series ring over a field or a Cohen ring by the first part of a regular
+system of parameters leaves a power series ring in the remaining parameters.
+
+## References
+
+* [Stacks Project, Tag 07NM](https://stacks.math.columbia.edu/tag/07NM), clauses (2) and (4)
 -/
 
 @[expose] public section
@@ -91,17 +95,8 @@ private theorem quotient_parameters_of_coordinates
 
 
 /-- Quotienting field power series by the first part of a chosen regular parameter system
-leaves power series with the remaining parameters as variables.
-Source: Stacks Project, Lemma Tag 07NM (2)
-(blueprint: lem-weil-pbc-power-series-parameter-quotient).
-
-Proof: Extend the partial system to the displayed full system. Its linear part is invertible
-on the cotangent space. Substitution therefore induces isomorphisms on every quotient by a
-power of the maximal ideal, degree by degree; completeness makes substitution an isomorphism
-(lem-weil-pbc-power-series-field-cohen-regular-complete). In these coordinates quotienting by
-z sets the first variables to zero, leaving precisely the variables y
-(def-weil-pbc-multivariate-power-series). Dimension gives the parameter count. The resulting
-algebra equivalence is local. This is steps 1 and 2 of the node's proof. -/
+leaves power series with the remaining parameters as variables, via a local algebra
+equivalence. -/
 theorem exists_algEquiv_quotient_parameters_field
     (K : Type u) [Field K] (n : ℕ)
     (z y : List (MvPowerSeries (Fin n) K))
@@ -128,18 +123,8 @@ theorem exists_algEquiv_quotient_parameters_field
   exact quotient_parameters_of_coordinates K n z y e he
 
 /-- In the Cohen case the coefficient uniformizer is retained, while quotienting by z
-leaves power series in the remaining chosen parameters over the same Cohen ring.
-Source: Stacks Project, Lemma Tag 07NM (4)
-(blueprint: lem-weil-pbc-power-series-parameter-quotient).
-
-Proof: The full system consists of p, then z, then y. Substitution fixes the coefficient ring
-and p. Its invertible cotangent map induces isomorphisms modulo every maximal-ideal power;
-completeness gives an algebra isomorphism
-(lem-weil-pbc-power-series-field-cohen-regular-complete and def-weil-pbc-cohen-ring).
-Quotienting in these coordinates kills just z, leaving power series in y
-(def-weil-pbc-multivariate-power-series). Dimension counts the surviving variables. The
-algebra equivalence fixes the coefficient uniformizer and is local. These are steps 3 and 4
-of the node's proof. -/
+leaves power series in the remaining chosen parameters over the same Cohen ring, via a
+local algebra equivalence. -/
 theorem exists_algEquiv_quotient_parameters_cohen
     (Λ : Type u) [CommRing Λ] [IsLocalRing Λ] [IsNoetherianRing Λ]
     (p n : ℕ) (hΛ : IsCohenRing p Λ)

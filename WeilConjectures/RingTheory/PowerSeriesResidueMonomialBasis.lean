@@ -16,9 +16,18 @@ import Mathlib.LinearAlgebra.Basis.Basic
 /-!
 # Lifting a finite coefficient basis through exponent residues
 
-Source: Stacks Project, Tag 07P5, first proof paragraph, with the explicit basis
-construction in lem-weil-pbc-power-series-subring-finite-basis, step 2.
-(blueprint: lem-weil-pbc-power-series-residue-monomial-basis).
+Let `S` be the subring of `k⟦x₁, …, xₙ⟧[y₁, …, yₘ]` of polynomials whose coefficients lie in a
+subfield `K` and are supported on exponents divisible by `p`. A finite `K`-basis `b` of `k`
+gives an `S`-basis consisting of the products of `b q` with monomials whose exponents are
+coordinatewise less than `p`.
+
+## Implementation details
+
+Only positivity of `p` is used, not that `k` has characteristic `p`.
+
+## References
+
+* [Stacks Project, Tag 07P5](https://stacks.math.columbia.edu/tag/07P5), first proof paragraph
 -/
 
 @[expose] public section
@@ -349,29 +358,10 @@ private theorem powerSeriesResidueCoefficientRecovery
 
 
 
-/-- A finite coefficient-field basis lifts to the explicit residue-monomial basis.
-Source: Stacks Project, Tag 07P5, finiteness paragraph, expanded by the explicit
-coefficient-grouping argument in the parent node, step 2.
-(blueprint: lem-weil-pbc-power-series-residue-monomial-basis).
-
-Proof: For each polynomial exponent g and series exponent a write a = p*A + e
-and g = p*G + h coordinatewise, with all entries of e and h less than p. Expand
-each coefficient uniquely in b. For a fixed triple (q,e,h), put the q-coordinate
-of the coefficient at (p*A+e,p*G+h) into a new column at (p*A,p*G), and put zero
-at the other exponents. Each column lies in S by hS. There are only finitely many
-triples, since the coefficient basis and both residue sets are finite. Moreover,
-only finitely many polynomial exponents G occur: they are coordinatewise quotients
-of the finitely many polynomial exponents of the original polynomial. Thus each
-column really is a polynomial with power-series coefficients. Summing the columns
-times the indicated monomials recovers every coefficient, proving spanning.
-For uniqueness, take a relation among these monomials with coefficients in S.
-At exponent (p*A+e,p*G+h), support divisibility means only the terms with residues
-(e,h) contribute. Their coefficient is the sum of b(q) times the corresponding
-K coordinates of the columns. Independence of b makes every such coordinate
-zero. Varying A,G,e,h and using the support condition proves that all columns
-are zero. This gives the claimed basis, with exactly the displayed values.
-The proof uses only positivity of p, not characteristic p. For p=1 the residue
-sets are singletons; zero variables give empty products and the same argument. -/
+/-- A finite basis `b` of `k` over a subfield `K` lifts to a basis of polynomials with power
+series coefficients over the subring `S` of those whose coefficients lie in `K` and are
+supported on exponents divisible by `p`. The basis vector at `(q, e, h)` is
+`b q * x^e * y^h`, where the exponents `e` and `h` have entries less than `p`. -/
 theorem powerSeriesResidueMonomialBasis
     (p : ℕ) (hp : 0 < p)
     (k : Type u) [Field k] (K : Subfield k)
