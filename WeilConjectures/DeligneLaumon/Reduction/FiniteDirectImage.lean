@@ -60,9 +60,7 @@ noncomputable def lowerStarIsoHigherLowerShriekZero (F : WeilSheaf k₀ l X) :
 
 end Proper
 
-/-- For a finite morphism `π` of `k₀`-schemes, the direct image `π₀*` preserves `ι`-reality: it
-is the quasi-finite direct image `R⁰π₀!`, whose local polynomials are products of expansions of
-those of `F` (`AlgebraicGeometry.WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite`). -/
+/-- For a finite morphism `π` of `k₀`-schemes, the direct image `π₀*` preserves `ι`-reality. -/
 theorem IsReal.lowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ} {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [Y.Over (Spec (CommRingCat.of k₀))] (π : X ⟶ Y) [π.IsOver (Spec (CommRingCat.of k₀))]
@@ -73,13 +71,7 @@ theorem IsReal.lowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ} {X Y : Scheme
     (lowerStarIsoHigherLowerShriekZero π F).symm
 
 /-- **Purity under a finite direct image.** If `π : X ⟶ Y` is a finite morphism of `k₀`-schemes
-and `F` is punctually `ι`-pure of weight `w`, then so is `π₀*F`: it is the quasi-finite direct
-image `R⁰π₀!F`, at a closed point `y` every eigenvalue `β` of `F_y` has a power `β ^ e`, with
-`e = [κ(x) : κ(y)]`, which is an eigenvalue of `F_x` for a closed point `x` above `y`, and
-`q_x = q_y ^ e`
-(`AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite`).
-The blueprint states this for `π` finite étale; étaleness is not needed
-(blueprint: `lemma-finite-quasi-finite-direct-images--3`). -/
+and `F` is punctually `ι`-pure of weight `w`, then so is `π₀*F`. -/
 theorem IsPunctuallyPureOfWeight.lowerStar_of_isFinite {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     (π : X ⟶ Y) [π.IsOver (Spec (CommRingCat.of k₀))] [IsFinite π]

@@ -15,10 +15,11 @@ import all WeilConjectures.AlgebraicGeometry.ImmersionCompletedPullback.SfImmers
 
 set_option linter.privateModule false
 
-/-! # Coefficient transport of the published completed pullback tower
+/-! # Coefficient transport of the completed pullback tower
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
-(blueprint: lem-a1-completed-integral-finite-tower-transport).
+## References
+
+* Stacks Project, Tags 03EK, 03EL and 099N(5)
 -/
 
 @[expose] public noncomputable section

@@ -16,8 +16,14 @@ import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 
 /-! # Framework open exchange in its own coefficient presentation
-Source: thm-cbc-qbar.proof.md, integral strict quotient construction
-(blueprint: def-zl-framework-open-exchange).
+
+This file constructs the quotient-unit comparison from the ordinary pullback with the framework
+completed coefficient sheaf into the Roos realization of the integral pullback, and the
+resulting open pullback realization on completed constructible complexes.
+
+## References
+
+* Stacks Project, Tags 099N(5), 08TC, 09BQ
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,15 +40,13 @@ open PurCompactSupport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Ordinary pullback with the framework completed coefficient sheaf.
-Source: Stacks 099N(5) (blueprint: def-zl-framework-open-exchange). -/
+/-- Ordinary pullback with the framework completed coefficient sheaf. -/
 abbrev frameworkModulePull {U T : Scheme.{u}} (h : U ⟶ T) :=
   proEtaleRingModulePullback h ((completed l E).ring T)
     ((completed l E).ring U) ((completed l E).pull h)
 
 /-- The canonical quotient-unit/Roos normalization. It specifies every first-coordinate
-projection on inverse-image generators and the entire shifted coordinate as zero.
-Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange). -/
+projection on inverse-image generators and the entire shifted coordinate as zero. -/
 def FrameworkPullChainSpec {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ)
     (ξ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -108,13 +112,8 @@ private theorem frameworkPullChain_ext {U T : Scheme.{u}} (h : U ⟶ T)
   have hs := (hξ.2 i (i - 1) (by omega)).trans (hη.2 i (i - 1) (by omega)).symm
   exact coconeDegree_ext _ ξ η i hfi hs
 
-/-- The quotient-unit comparison is uniquely determined before localization.
-Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange).
-Proof: apply inverse image to the quotient augmentation x maps to 1 tensor x at
-all levels simultaneously. These maps commute with quotient transitions, so the
-first-coordinate product map and zero shifted coordinate form a chain map to Roos.
-The inverse-image generators generate after sheafification. Product projections
-and the two cocone coordinates therefore determine the chain map uniquely. -/
+/-- There is a unique chain map from the framework pullback of `P` to the Roos realization of
+the integral pullback satisfying the quotient-unit normalization `FrameworkPullChainSpec`. -/
 theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :
     ∃! ξ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -148,21 +147,16 @@ theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
         (by simp [hα]) i j hij
   exact ⟨ξ, hξ, fun η hη ↦ frameworkPullChain_ext l E h P η ξ hη hξ⟩
 
-/-- The specified whole quotient-diagram augmentation into its Roos realization.
-Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange). -/
+/-- The quotient-diagram augmentation into the Roos realization, i.e. the unique chain map
+satisfying `FrameworkPullChainSpec`. -/
 def frameworkPullChain {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :=
   (frameworkPullChain_existsUnique l E h P).exists.choose
 
 /-- Open inverse image preserves the completed constructible realization, with the
-whole quotient-unit normalization. No PBC presentation or comparison enters this type.
-Source: Stacks 099N(5), 09BQ (blueprint: def-zl-framework-open-exchange).
-Proof: open inverse image is exact and preserves products. Apply it to the strict
-quotient diagram of a flat K-flat representative. The quotient-unit map just
-constructed becomes its canonical completion augmentation. Complete constructible
-inputs have invertible augmentation; the Roos product and shifted coordinates
-identify it with the defining integral pullback realization. Descent from good
-representatives supplies naturality and uniqueness with this equation. -/
+quotient-unit normalization: there is a unique natural isomorphism between the two pullbacks of
+completed constructible complexes along `h` compatible with `frameworkPullChain` on good
+representatives. -/
 theorem frameworkOpenPullRealization_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     [IsOpenImmersion h] [QuasiCompact h]
     [∀ x : U, Invertible (l : U.residueField x)]
@@ -177,8 +171,7 @@ theorem frameworkOpenPullRealization_existsUnique {U T : Scheme.{u}} (h : U ⟶ 
           DerivedCategory.Q.map (frameworkPullChain l E h P.obj) := by
   sorry
 
-/-- The framework pullback realization fixed by quotient and shifted Roos coordinates.
-Source: Stacks 099N(5) (blueprint: def-zl-framework-open-exchange). -/
+/-- The framework pullback realization fixed by quotient and shifted Roos coordinates. -/
 def frameworkOpenPullRealization {U T : Scheme.{u}} (h : U ⟶ T)
     [IsOpenImmersion h] [QuasiCompact h]
     [∀ x : U, Invertible (l : U.residueField x)]

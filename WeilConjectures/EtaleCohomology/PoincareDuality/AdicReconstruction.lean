@@ -17,8 +17,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 
 Let `k` be a separably closed field, `a : X ⟶ Spec k` a morphism admitting a compactification
 for which `Ra_!` has a right adjoint, `γ : T[2d] ≅ Ra^! Λ` a purity isomorphism (`T = Λ_X(d)`)
-and `K ∈ D(X_ét, Λ)` perfect over `Λ_X`. This file proves blueprint
-`theorem-poincare-duality--6` in the form the repository can express.
+and `K ∈ D(X_ét, Λ)` perfect over `Λ_X`. This file proves adic reconstruction and scalar
+extension for Poincaré duality, in the form the repository can express.
 
 * The adjoint `β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the derived Poincaré pairing
   (`AlgebraicGeometry.Etale.poincareAdjoint`) is an isomorphism over every coefficient ring
@@ -137,7 +137,7 @@ variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ
 noncomputable abbrev poincareSecondVariable : DerivedCategoryModule Λ X :=
   ((derivedTensor _ X).obj ((DerivedCategory.coefficientDual _ X).obj (op K))).obj T
 
-/-- Blueprint `theorem-poincare-duality--6`: the adjoint
+/-- The adjoint
 
 `β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨ = RHom(RΓ_c(X, K), Λ)`
 
@@ -148,23 +148,16 @@ noncomputable def poincareAdjoint :=
 
 variable {K}
 
-/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
-scalar extension (perfectness over every coefficient ring).
-
-For `K` perfect over `Λ_X`, the adjoint `β_K^♯` of the derived Poincaré pairing is an
-isomorphism, over every coefficient ring `Λ`, in particular over `𝒪_E`; its inverse is the
-duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`
-(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable`). -/
+/-- For `K` perfect over `Λ_X`, the adjoint `β_K^♯` of the derived Poincaré pairing is an
+isomorphism, over every coefficient ring `Λ`; its inverse is the duality isomorphism
+`RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`. -/
 theorem isIso_poincareAdjoint (hKd : IsDualizable K) : IsIso (poincareAdjoint a adj γ K) :=
   (isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a adj γ hKd).isIso_pairingAdjoint
 
 include adj γ in
-/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
-scalar extension (the duality isomorphism in `D(Λ)`).
-
-For `K` perfect over `Λ_X`, there is an isomorphism of complexes of `Λ`-modules
+/-- For `K` perfect over `Λ_X`, there is an isomorphism of complexes of `Λ`-modules
 `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`, obtained from the inverse of `β_K^♯` by evaluation at the
-point, which commutes with duals. -/
+point. -/
 theorem nonempty_iso_ihom_compactlySupportedGlobalSections (hKd : IsDualizable K) :
     Nonempty ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj
         (𝟙_ _) ≅
@@ -182,25 +175,17 @@ theorem nonempty_iso_ihom_compactlySupportedGlobalSections (hKd : IsDualizable K
 
 variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 
-/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
-scalar extension (the finite-level dualities are the reductions of `β_K^♯`).
-
-Let `ϖ` be a nonzerodivisor of `Λ` (a uniformizer of `𝒪_E`) and `A_n = Λ/(ϖ)ⁿ`, read through
-`K ↦ K_n = K ⊗ᴸ (A_n)_X`. For `K` perfect over `Λ_X` and every `n`, the reduction
-`β_K^♯ ⊗ᴸ A_n` is an isomorphism. By
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_source` and
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_target` its source is
-`RΓ(X, K^∨(d)_n)[2d]` and its target `RHom(RΓ_c(X, K), A_n)`, the `A_n`-dual of
-`RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`: the reduction is the finite-level duality, and these form
-a morphism of towers (`AlgebraicGeometry.Etale.poincareAdjoint_reduction_naturality`). -/
+/-- For `K` perfect over `Λ_X` and every ideal `J` of `Λ`, the reduction `β_K^♯ ⊗ᴸ Λ/J` of the
+adjoint of the derived Poincaré pairing is an isomorphism. For `J = (ϖ)ⁿ` this is the
+finite-level duality `RΓ(X, K^∨(d)_n)[2d] ≅ RHom(RΓ_c(X, K), A_n)`. -/
 theorem isIso_reductionModIdeal_map_poincareAdjoint (hKd : IsDualizable K) (J : Ideal Λ) :
     IsIso ((reductionModIdeal Λ (Spec (.of k)) J).map (poincareAdjoint a adj γ K)) := by
   have := isIso_poincareAdjoint a adj γ hKd
   infer_instance
 
 omit [IsSepClosed k] in
-/-- Blueprint `theorem-poincare-duality--6`: the reductions of `β_K^♯`
-along the finite stages form a morphism of towers: for `J ≤ J'` (for example
+/-- The reductions of `β_K^♯` along the finite stages form a morphism of towers: for `J ≤ J'`
+(for example
 `(ϖ)ᵐ ≤ (ϖ)ⁿ` for `n ≤ m`) they commute with the transitions `Λ/J ⟶ Λ/J'`. -/
 theorem poincareAdjoint_reduction_naturality {J J' : Ideal Λ} (h : J ≤ J') :
     (reductionModIdeal Λ (Spec (.of k)) J).map (poincareAdjoint a adj γ K) ≫
@@ -211,8 +196,7 @@ theorem poincareAdjoint_reduction_naturality {J J' : Ideal Λ} (h : J ≤ J') :
 
 include hϖ in
 omit [IsSepClosed k] [HasCompactification a] in
-/-- Blueprint `theorem-poincare-duality--6`: the source of the reduction
-of `β_K^♯` is `RΓ(X, K^∨(d)_n)[2d]`. -/
+/-- The source of the reduction of `β_K^♯` is `RΓ(X, K^∨(d)_n)[2d]`. -/
 theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
     Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (poincareSecondVariable (T := T) K))⟦(2 * d : ℤ)⟧) ≅
@@ -225,8 +209,8 @@ theorem nonempty_iso_reductionModIdeal_poincareAdjoint_source (n : ℕ) :
 
 include hϖ in
 omit [IsSepClosed k] in
-/-- Blueprint `theorem-poincare-duality--6`: the target of the reduction
-of `β_K^♯` is `RHom(RΓ_c(X, K), A_n)`, and `RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`. -/
+/-- The target of the reduction of `β_K^♯` is `RHom(RΓ_c(X, K), A_n)`, and
+`RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`. -/
 theorem nonempty_iso_reductionModIdeal_poincareAdjoint_target (n : ℕ) :
     Nonempty ((reductionModIdeal Λ (Spec (.of k)) (Ideal.span {ϖ} ^ n)).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) _).obj (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K))).obj
@@ -262,10 +246,7 @@ variable {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (a : X ⟶ Spec
   {G : DerivedCategoryModule Λ (Spec (.of k)) ⥤ DerivedCategoryModule Λ X}
   (adj : R(a)_![ModuleCat.{u + 1} Λ] ⊣ G) {d : ℕ}
 
-/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and scalar
-extension (perfectness of the integral pairing and of its finite levels).
-
-Let `k` be separably closed, `Λ = 𝒪_E` (any commutative ring), `ϖ` a nonzerodivisor of `Λ`,
+/-- Let `k` be separably closed, `Λ = 𝒪_E` (any commutative ring), `ϖ` a nonzerodivisor of `Λ`,
 `a : X ⟶ Spec k` admitting a compactification with a right adjoint `Ra^!` of `Ra_!`, and
 `γ : V[2d] ≅ Ra^! Λ` a purity isomorphism (`V = Λ_X(d)`). For `K` perfect over `Λ_X`, the
 `𝒪_E`-valued derived Poincaré pairing
@@ -333,23 +314,12 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
   (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
   {K : DerivedCategoryModule (Shrink.{u + 1} (PadicAlgCl.integers l E)) X}
 
-/-- Blueprint `theorem-poincare-duality--6`: Adic reconstruction and
-scalar extension (the integral stage and the scalar extension).
-
-Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, `𝒪_E` its ring of integers, `L ⊇ E` a
-further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. The constant complex `𝒪_E`
-of the point is derived complete (`AlgebraicGeometry.Etale.derivedComplete_unit_of_isSepClosed`),
-hence so is `RΓ_c(X, K)^∨`, and the adjoint
-`β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the `𝒪_E`-valued derived Poincaré pairing is an
-isomorphism between derived complete objects: it is an isomorphism `e` of the adic category
-`D_comp(Spec k, 𝒪_E)`, so `β_K^♯` is the realization of its tower of reductions, the
-finite-level dualities (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_poincareAdjoint`).
-Its inverse is the duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]` over `𝒪_E`.
-Localization `𝒪_E ⟶ E` (`DerivedCategoryDerivedCompleteRational.fromIntegral`) and the finite
-coefficient-field extension `E ⊆ L`, both integrally
-(`AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`) and rationally
-(`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`), carry `e` to
-isomorphisms: the duality isomorphism over `E` and over `L`. -/
+/-- Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, `𝒪_E` its ring of integers, `L ⊇ E` a
+further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. The adjoint
+`β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the `𝒪_E`-valued derived Poincaré pairing is the
+image of an isomorphism `e` of the adic category `D_comp(Spec k, 𝒪_E)`, and localization
+`𝒪_E ⟶ E` and the finite coefficient-field extension `E ⊆ L`, both integrally and rationally,
+carry `e` to isomorphisms. -/
 theorem adicReconstruction_scalarExtension (hKd : IsDualizable K) :
     ∃ (P Q : DerivedCategoryDerivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E)
       (e : P ≅ Q),

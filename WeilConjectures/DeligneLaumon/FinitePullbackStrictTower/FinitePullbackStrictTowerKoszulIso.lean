@@ -9,8 +9,12 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTower.FinitePull
 
 /-! # Localization of the pulled Koszul isomorphism
 
-Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH.
-(blueprint: def-a1-finite-pullback-localized-koszul-iso).
+This file restates the pulled Koszul isomorphism of the finite pullback comparison data with
+the original strict-tower endpoints.
+
+## References
+
+* Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -47,9 +51,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
-/-- The given Koszul isomorphism with the original strict-tower endpoints.
-Source: Stacks 0G7E. This is the same diagram isomorphism with explicit endpoints.
-(blueprint: def-a1-finite-pullback-localized-koszul-iso). -/
+/-- The given Koszul isomorphism with the original strict-tower endpoints. -/
 def comparisonKoszulDiagramIso
     (θ : FinitePullbackStrictTowerData.koszuls l E Y ⋙
       FinitePullbackStrictTowerData.diagramPull l E g ≅

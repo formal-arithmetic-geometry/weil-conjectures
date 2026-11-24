@@ -90,13 +90,17 @@ import all WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTower
 
 /-! # Resolving models for finite reduction and strict tower pullback
 
-Source: Stacks Project, derived.tex Tag 06XN, lemma-find-existence-computes,
-left-derived assertion; sites-cohomology.tex Tags 06YS, 06YT, 06YP and 07A2
-(blueprint: lem-a1-finite-reduction-tower-resolving-model).
+This file sets up the context for resolving models of finite reduction and strict tower pullback.
 
-The natural index n represents the positive exponent n+1. All localizations below
+## Implementation details
+
+The natural index n represents the positive exponent n+1. All localizations
 are localizations of complexes in the entire strict tower category. The explicit
 normalization identifies total tensor with the recorded scalar-extension model.
+
+## References
+
+* Stacks Project, Tags 06XN, 06YS, 06YT, 06YP and 07A2
 -/
 
 @[expose] public noncomputable section
