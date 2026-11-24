@@ -10,6 +10,16 @@ public import Mathlib.Algebra.Homology.Homotopy
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 
+/-! # Homotopies between the Roos comparison maps
+
+A homotopy retraction of towers induces homotopy retractions of the termwise kernels and of the
+signed cones of the Roos complexes.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 070M
+-/
+
 @[expose] public section
 
 universe u v
@@ -187,33 +197,9 @@ private theorem signed_cone_homotopy
 
 -- The supplied component equations suffice without the target presentation's extra hypotheses.
 set_option linter.unusedVariables false in
-/-- The maps induced by a homotopy retraction of towers form homotopy
-retractions of the termwise kernels and signed cones. The four component
-hypotheses specify induced maps, rather than arbitrary maps of these complexes.
-
-Proof: For hr.hom p q form H_pq = eP_p.hom ≫ Pi.map((hr.hom p q).app) ≫
-eP_q.inv; put zero in the degrees where q+1 ≠ p. Product projections and
-the homotopy equation for hr yield U_p R_p - id = d H + H d. Each component
-of hr is a natural transformation of towers, so s_p H_pq = H_pq s_q.
-Consequently iota_p H_pq kills s_q and factors uniquely through iota_q by
-hL_q; use this lift as the kernel homotopy component. Compose its homotopy
-equation with iota_p. The factorization formulas, hlU and hlR reduce it to
-the product homotopy equation; monicity of iota_p proves the equation in L.
-On C in degree p+1 define the degree-minus-one component, under eC_p and
-eC_(p-1), to be the diagonal map (-H_(p,p-1), H_(p+1,p)). Set all other
-components zero. By hcU, hcR and Pi.map composition the composite cU cR
-is the diagonal product of U R in these presentations. Multiplying the two
-signed differential matrices gives the homotopy equation: the diagonal
-entries are precisely U R - id, and the off-diagonal entry is
--s_(p+1) H_(p+1,p) + H_(p+1,p) s_p, which vanishes by naturality. All nonadjacent
-components vanish by the cochain shape. Thus the two constructed families
-satisfy the required Homotopy equations. No exactness of products, split
-transition maps, or K-injectivity is used.
-
-Source: the explicit homotopy-invariance extension in the docstring of
-roos_comparison_homotopy_retract (lem-weil-derived-limit-roos-complex);
-Stacks Project, Derived Categories, Tag 070M provides the underlying Roos setup.
-(blueprint: lem-weil-roos-comparison-homotopies). -/
+/-- The maps induced by a homotopy retraction of towers form homotopy retractions of the
+termwise kernels and signed cones. The four component hypotheses specify induced maps,
+rather than arbitrary maps of these complexes. -/
 theorem roos_comparison_homotopies
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

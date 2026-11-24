@@ -16,8 +16,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Stalk of a tensor product of modules on a ringed space
 
-Source: Stacks Project, Modules, Lemma 17.16.1 (Tag 01CB,
-label lemma-stalk-tensor-product) (blueprint: lem-pc-ringed-space-module-stalk-tensor).
+## References
+
+* Stacks Project, Modules, Lemma 17.16.1 (Tag 01CB)
 -/
 
 @[expose] public section
@@ -138,26 +139,7 @@ private theorem stalkMap_germ {M N : PresheafOfModules.{u} (𝓡).obj}
 end Helpers
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical tensor comparison on stalks is linear and natural in both sheaves.
-Source: Stacks Project, Modules, Lemma 17.16.1 (Tag 01CB)
-(blueprint: lem-pc-ringed-space-module-stalk-tensor).
-
-Proof:
-1. Neighbourhoods of `x` are directed. Module stalks are colimits, with scalar action
-   on germs as in `def-weil-pbc-module-stalk`; the presheaf tensor is sectionwise
-   (`def-pur-sheaf-tensor-product`).
-2. The sheafification unit induces an additive isomorphism on stalks
-   (`def-weil-presheaf-modules-sheafification`, `lem-weil-pbc-stalk-sheafification-space`).
-   Represent a scalar and a vector on a common neighbourhood to see it is linear.
-3. Apply `lem-weil-pbc-filtered-colimit-tensor-varying-rings` to the rings and modules
-   on neighbourhoods. This identifies the presheaf tensor stalk with the tensor of
-   the stalks, sending the germ of a pure tensor to the tensor of its germs.
-4. Compose this identification with the inverse of the sheafification stalk map.
-   Pure tensor germs generate, so the displayed germ formula characterizes the map.
-5. Both sides of the naturality equation send each pure tensor germ to the tensor
-   of its image germs (`def-weil-pbc-module-stalk`). Generation gives equality. 
-(blueprint: lem-weil-pbc-module-stalk-tensor)
--/
+/-- The canonical tensor comparison on stalks is linear and natural in both sheaves. -/
 theorem stalkTensorIso (X : AlgebraicGeometry.RingedSpace.{u}) (x : X) :
     let R := (sheafCompose (Opens.grothendieckTopology X)
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf

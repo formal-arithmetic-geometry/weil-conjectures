@@ -23,7 +23,10 @@ public import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorCancellationIn
 
 /-! # Cancellation of extension of scalars in sheaf tensor products
 
-Source: Stacks Project, Modules on Sites, Tag 05V4, displayed tensor identity.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4, displayed tensor identity.
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public section
@@ -226,9 +229,7 @@ private theorem cancellationTensorIso_naturality
   simp only [← Category.assoc, tensorHom_comp_tensorHom, hf, hg]
 
 /-- Naturality of the tensor/sheafification comparison at independent site universes.
-This exposes the comparison used in the constructed cancellation map.
-Source: Stacks, Tag 03EK
-(blueprint: lem-pur-change-of-rings-tensor-cancellation-independent). -/
+This exposes the comparison used in the constructed cancellation map. -/
 theorem changeOfRingsTensorIso_naturality_independentCoefficients
     (A : Sheaf J CommRingCat.{r})
     {M M' N N' : SheafOfModules.{r} (𝓡 A)} (f : M ⟶ M') (g : N ⟶ N') :

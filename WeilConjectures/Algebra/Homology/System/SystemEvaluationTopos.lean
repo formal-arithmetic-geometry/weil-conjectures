@@ -18,7 +18,10 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 
 /-! # Evaluation as a morphism of ringed topoi
 
-Source: Zheng, Construction 4.1; Stacks 00XO and 03D2.
+## References
+
+* Stacks Project, Tags 00XO, 03D2
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -32,22 +35,19 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)
 namespace SheafOfModules
-/-- Vertical evaluation lifts sequence-site covering sieves.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Vertical evaluation lifts sequence-site covering sieves. -/
 instance systemSequenceEvaluationCocontinuous :
     (Prod.sectR n C).IsCocontinuous J (coefficientSequenceTopology J) where
   cover_lift h := h
 private local instance (X : (ℕ × C)ᵒᵖ) :
     HasLimitsOfShape (StructuredArrow X (Prod.sectR n C).op) (Type w) :=
   hasLimitsOfShape_of_essentiallySmall _ _
-/-- Right Kan extension along a slice exists in the coefficient universe.
-Source: Stacks 00XO (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Right Kan extension along a slice exists in the coefficient universe. -/
 instance systemSequenceEvaluationRightKan (F : Cᵒᵖ ⥤ Type w) :
     (Prod.sectR n C).op.HasPointwiseRightKanExtension F := by
   infer_instance
 
-/-- Vertical restriction is additive on module sheaves.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Vertical restriction is additive on module sheaves. -/
 instance systemSequenceEvaluationAdditive : (systemSequenceEvaluation B n).Additive where
   map_add := by
     intro X Y f g
@@ -57,8 +57,7 @@ instance systemSequenceEvaluationAdditive : (systemSequenceEvaluation B n).Addit
     ext x
     rfl
 
-/-- Reassembly is additive because its maps are the original component maps.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Reassembly is additive because its maps are the original component maps. -/
 instance strictSystemToSequenceAdditive : (strictSystemToSequenceFunctor B).Additive where
   map_add := by
     intro M N f g
@@ -68,8 +67,7 @@ instance strictSystemToSequenceAdditive : (strictSystemToSequenceFunctor B).Addi
     exact congrArg (fun t ↦ t.val.app (op X.unop.2))
       ((systemEvaluation B X.unop.1).map_add (f := f) (g := g))
 
-/-- Restriction to slices is additive componentwise.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Restriction to slices is additive componentwise. -/
 instance sequenceToStrictSystemAdditive : (sequenceToStrictSystemFunctor B).Additive where
   map_add := by
     intro M N f g
@@ -80,15 +78,13 @@ instance sequenceToStrictSystemAdditive : (sequenceToStrictSystemFunctor B).Addi
         (f := (sequenceToStrictSystemFunctor B).map f)
         (g := (sequenceToStrictSystemFunctor B).map g)).symm
 
-/-- Vertical module evaluation is exact.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Vertical module evaluation is exact. -/
 instance systemSequenceEvaluationLimits : PreservesFiniteLimits (systemSequenceEvaluation B n) := by
   change PreservesFiniteLimits
     ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n)
   infer_instance
 
-/-- Vertical module evaluation preserves finite colimits.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Vertical module evaluation preserves finite colimits. -/
 instance systemSequenceEvaluationColimits :
     PreservesFiniteColimits (systemSequenceEvaluation B n) := by
   change PreservesFiniteColimits
@@ -96,8 +92,6 @@ instance systemSequenceEvaluationColimits :
   infer_instance
 
 /-- Vertical restriction is the algebraic inverse image of the evaluation morphism of topoi.
-Source: Zheng 4.1; Stacks 00XO and 03D2
-(blueprint: lem-pur-system-evaluation-topos).
 All operations are unchanged on sections; the ring identification removes the identity
 coefficient transition using functoriality. -/
 def systemSequenceEvaluationInverseImage : AlgebraicInverseImage
@@ -119,8 +113,7 @@ def systemSequenceEvaluationInverseImage : AlgebraicInverseImage
   moduleAdd := by intro M T a b t h V x; exact h (op (n, V.unop)) x
   moduleZero := by intro M T a h V x; exact h (op (n, V.unop)) x
   moduleSMul := by intro M T a b t h V x; exact h (op (n, V.unop)) x
-/-- Evaluation is the inverse image of a geometric morphism.
-Source: Zheng 4.1 (blueprint: lem-pur-system-evaluation-topos). -/
+/-- Evaluation is the inverse image of a geometric morphism. -/
 def systemSequenceEvaluationToposAdjunction :
     (Prod.sectR n C).sheafPushforwardContinuous (Type w) J (coefficientSequenceTopology J) ⊣
       (Prod.sectR n C).sheafPushforwardCocontinuous (Type w) J

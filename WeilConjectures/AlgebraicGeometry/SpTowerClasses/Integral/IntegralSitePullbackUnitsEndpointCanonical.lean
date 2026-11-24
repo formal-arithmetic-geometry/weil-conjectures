@@ -11,15 +11,17 @@ import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
 
 /-! # Canonical units endpoint mate calculation
 
-Source: Stacks Project, Tag 00WX; the units endpoint of the change-of-site
-pullback square. This is the canonical special case used to reduce the
+This is the canonical special case used to reduce the
 arbitrary units-map endpoint to the chartwise normalized map.
-(blueprint: lem-sp-integral-site-pullback-units-endpoint-canonical)
 
 The proof transposes both sides through the comparison and inverse-image
 adjunctions. For the canonical units map, its transpose is `unitsDirect`,
 whose value on every pro-etale chart is pullback along the first projection.
 The defining conjugate adjunction comparison then identifies both mates.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
 -/
 
 @[expose] public noncomputable section

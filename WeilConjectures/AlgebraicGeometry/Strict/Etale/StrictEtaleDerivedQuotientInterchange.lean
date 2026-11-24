@@ -11,8 +11,11 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Normalized derived quotient interchange
 
-Source: Zheng, Construction 4.1 and Construction 5.15; Stacks Tags 03D7 and 06YT.
-(blueprint: lem-pur-strict-etale-derived-quotient-interchange).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03D7, 06YT
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Construction 5.15
 -/
 
 -- After pruning, this module only keeps private declarations.

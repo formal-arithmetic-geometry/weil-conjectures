@@ -16,8 +16,14 @@ import WeilConjectures.Algebra.Homology.AffineTildePushforwardHomologyFactorizat
 
 /-! # Homology coordinates of the raw affine tensor comparison
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates). -/
+## References
+
+* Stacks Project, Tag 06Z0
+* Stacks Project, Tag 0AVW
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,18 +49,7 @@ attribute [local irreducible] Functor.rightDerivedFunctor Functor.rightDerivedFu
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Ordinary coefficient maps followed by the pushforward homology comparison.
-Source: Stacks Project, Tags 06Z0 and 0AVW; parent proof step 2.
-(blueprint: lem-pc-affine-tilde-coefficient-pushforward-homology-coordinates).
-
-Proof: Put v = s followed by restriction of z₀. Apply the factorization of the
-pushforward homology map into the inverse restriction homology comparison,
-inverse exact tilde comparison, inverse quotient comparison, termwise ordinary
-comparison and derived unit. Expand cE and s, use functoriality of restriction
-and tilde, and reassociate. The result uses only ordinary module comparison
-maps: neither the derived tensor counit nor its cohomology identification occurs.
-No invertibility of the module comparison is needed. Zero complexes and zero
-rings satisfy the same functoriality and exactness identities. -/
+/-- Ordinary coefficient maps followed by the pushforward homology comparison. -/
 theorem affineTildeCoefficientPushforwardHomologyCoordinates
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

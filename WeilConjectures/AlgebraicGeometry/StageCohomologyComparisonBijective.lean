@@ -11,7 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyStageContinuity
 
 /-! # Continuity applied to certified stage comparisons
 
-Source: Stacks Project, Tag 09YQ, and colimit universal properties.
+Stage continuity makes every certified stage comparison bijective.
+
+## References
+
+* [Stacks, Tag 09YQ]
 -/
 
 @[expose] public section
@@ -22,15 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Stage continuity makes every certified comparison bijective.
-
-Source: Stacks Project, Tag 09YQ, universal property of its comparison.
-(blueprint: lem-weil-pbc-stage-cohomology-comparison-bijective).
-
-Proof: For the system constructor apply continuity at its specified stage.
-The colimit universal property identifies the comparison with an isomorphism.
-Isomorphisms are bijective; composition and products preserve bijectivity.
-No Mayer--Vietoris exactness or middle comparison is used here. -/
+/-- Stage continuity makes every certified comparison bijective. -/
 theorem StageCohomologyComparison.bijective
     {allowed : Scheme.{u} → Prop}
     (hC : ∀ S, allowed S → EtaleCohomologyStageContinuity S)

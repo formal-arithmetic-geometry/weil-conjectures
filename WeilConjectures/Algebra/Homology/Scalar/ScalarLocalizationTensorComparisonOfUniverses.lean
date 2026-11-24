@@ -28,7 +28,9 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # Normalized tensor comparison with independent site universes
 
-Source: Stacks Project, Modules on Sites, Tag 03EK.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -49,9 +51,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 /-- The section formula for the scalar-extension unit, using the existing tensor
-sheafification. The equality identifies the supplied presentation of the extension object.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-weil-pbc-scalar-localization-tensor-comparison-of-universes). -/
+sheafification. The equality identifies the supplied presentation of the extension object. -/
 def scalarLocalizationUnitSectionsOfUniverses
     {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (M : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -161,9 +161,7 @@ end
 
 attribute [local irreducible] restrictionSheafificationComparisonAux
 
-/-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-tensor-comparison-of-universes). -/
+/-- The canonical map from the presheaf tensor to the underlying sheaf tensor. -/
 def scalarTelescopeTensorUnitOfUniverses
     (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((cochainModulesMonoidal R).tensorObj M N).val :=
@@ -173,18 +171,7 @@ def scalarTelescopeTensorUnitOfUniverses
 
 set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
-/-- Restricted extension of scalars is tensoring with the restricted target ring.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-tensor-comparison-of-universes).
-
-Proof: the presheaf tensor of the restricted target ring with M has exactly the
-same section modules as restricted sectionwise scalar extension. Both restriction
-maps send s tensor m to the tensor of the two restrictions, so the identity maps
-form an isomorphism. Sheafify it over R. Restriction commutes with sheafification:
-after forgetting to abelian sheaves the comparison is the identity of the same
-sheafification, and forgetting reflects isomorphisms. Compose with the canonical
-tensor-sheafification comparison. Naturality of the sheafification unit gives the
-pure-tensor formula. No flatness or localization assumption is used. -/
+/-- Restricted extension of scalars is tensoring with the restricted target ring. -/
 theorem exists_scalarTelescopeTensorComparisonOfUniverses (φ : R ⟶ S)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     ∃ e : (cochainModulesMonoidal R).tensorObj
@@ -251,9 +238,7 @@ theorem exists_scalarTelescopeTensorComparisonOfUniverses (φ : R ⟶ S)
   exact (congrArg ((restrictionSheafificationComparisonAux
       ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ) P).val.app V) hn'.symm).trans hr'
 
-/-- A concrete tensor-unit isomorphism, normalized on every local pure tensor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-weil-pbc-scalar-localization-tensor-comparison-of-universes). -/
+/-- A concrete tensor-unit isomorphism, normalized on every local pure tensor. -/
 def scalarTelescopeRegularTensorIsoOfUniverses
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     (cochainModulesMonoidal R).tensorObj
@@ -284,9 +269,7 @@ private lemma whiskerRight_tensorObjIsoSheafification_homAux {A A' : SheafOfModu
   rw [← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rfl
 
-/-- Pure tensor sections commute with maps of the first factor.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-weil-pbc-scalar-localization-tensor-comparison-of-universes). -/
+/-- Pure tensor sections commute with maps of the first factor. -/
 theorem scalarTelescopeTensorUnit_naturalityOfUniverses
     {L L' : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
     (f : L ⟶ L')
@@ -308,9 +291,7 @@ theorem scalarTelescopeTensorUnit_naturalityOfUniverses
 
 set_option maxHeartbeats 50000 in
 -- Elaborating the tensor unitor requires additional coefficient comparisons.
-/-- The inverse regular tensor unitor sends a section to the local tensor of one with it.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-weil-pbc-scalar-localization-tensor-comparison-of-universes). -/
+/-- The inverse regular tensor unitor sends a section to the local tensor of one with it. -/
 theorem scalarTelescopeRegularTensorIso_inv_applyOfUniverses
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (V : Cᵒᵖ) (x : M.val.obj V) :

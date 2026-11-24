@@ -41,13 +41,7 @@ private theorem epi_of_joint_images {X Y Z W Q : C} (e : W ⟶ Y) [Mono e]
     q ≫ z = (l ≫ kernel.ι (q ≫ z)) ≫ (q ≫ z) := by rw [hl, Category.id_comp]
     _ = 0 := by simp
 
-/-- The row and the next tail jointly generate the current tail.
-Source: Stacks Project, Homology, Tag 0133, diagonal quotient argument.
-(blueprint: lem-sc-finite-strip-cone-graded-map-split-epi)
-Proof: each current-tail generator either has vertical index exactly p and is
-in the row image, or has larger vertical index and belongs to the next tail.
-The source generator is in the row when n+1=p, and in the next tail otherwise.
-The reverse inclusion follows from the row factorization and monotonicity. -/
+/-- The row and the next tail jointly generate the current tail. -/
 private theorem row_joint_images
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)
@@ -139,24 +133,7 @@ private theorem filtrationLift_arrow
     _ = t := by rw [IsIso.inv_hom_id_assoc, Subobject.factorThru_arrow]
 
 
-/-- The canonical finite-strip graded map is epic.
-Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), diagonal quotient argument;
-explicit cone refinement of lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-graded-map-epi)
-
-Proof: write the ambient cone in degree n as the biproduct of A.X (n+1)
-and the total diagonal coproduct. The given hsteps identifies the current tail
-with the sum of its supported generators. Suppose two arrows out of its graded
-quotient agree after the displayed map. Precompose their difference with the
-quotient projection, which is epic. On target generators with vertical index p,
-the difference vanishes by the assumed equality after the row inclusion. Target
-generators with vertical index strictly greater than p lie in the next tail and
-are killed by the quotient; these are all remaining target generators. The source
-generator survives only when n+1=p and is then the source summand of the row cone;
-when n+1>p it lies in the next tail. The source single object is zero in all other
-degrees. Thus the difference vanishes on every generator of the current tail,
-so the two arrows agree. Unsupported horizontal summands are zero by hsupport.
-This proves epimorphy also for r=0 and when n-p lies outside the strip. -/
+/-- The canonical finite-strip graded map is epic. -/
 theorem finiteStripGradedMap_epi
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)

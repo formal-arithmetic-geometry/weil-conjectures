@@ -115,8 +115,10 @@ public import WeilConjectures.AlgebraicGeometry.PullbackTensorResolvingComputati
 
 /-! # Derived pullback computation with independent universes
 
-Source: Stacks 06YY and 0G7E. The resolving class consists of K-flat complexes
-with flat terms, and the prescribed counit computes ordinary pullback there.
+## References
+
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 0G7E
 -/
 
 @[expose] public section
@@ -364,17 +366,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
 
 /-- The prescribed complex-level derived-pullback counit is invertible on every
 flat-term K-flat complex, with independent site and coefficient universes.
-Source: Stacks 06YY and 0G7E
-(blueprint: lem-weil-pbc-pullback-resolving-computation).
-
-Proof: inverse image preserves finite limits and epimorphisms, hence homology.
-Use identity scalar extension to see that it preserves the resolving K-flat class.
-Derived scalar extension then inverts the quasi-isomorphisms between these images.
-Every homotopy object has a flat-term K-flat resolution. Apply the resolving-class
-left-derived-functor theorem, whose counit is invertible on that class. The
-universal property identifies this pair with the prescribed pair. Descend the
-prescribed comparison through the homotopy quotient, and use its unchanged
-components to transport invertibility back to complexes. -/
+-/
 theorem pullback_resolving_computation
     (f : RingedPullback.{r, uC, vC, uD, vD} R S)
     (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S))

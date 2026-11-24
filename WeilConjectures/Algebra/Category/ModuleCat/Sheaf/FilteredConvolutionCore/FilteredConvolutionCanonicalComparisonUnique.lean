@@ -44,9 +44,7 @@ theorem exists_lift_level {P Q : Complex R} (F : DecreasingFiltration P)
 
 /-- The quotient projections of the convolution summands induce a unique map to the
 associated graded of the image filtration.  The proof is the two cokernel universal
-properties, using preservation of coproducts and cokernels by the sheaf tensor product.
-Source: the second step of the proof of `lem-trf-filtered-convolution-graded-quotient`.
-(blueprint: lem-trf-filtered-convolution-graded-quotient). -/
+properties, using preservation of coproducts and cokernels by the sheaf tensor product. -/
 theorem canonical_comparison_unique
     {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (H : DecreasingFiltration (P ⊗ Q)) (hH : ∀ r : ℤ, H.F r = level F G r) (r : ℤ) :

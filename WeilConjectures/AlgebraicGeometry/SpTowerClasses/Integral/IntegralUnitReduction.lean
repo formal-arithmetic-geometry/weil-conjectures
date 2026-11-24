@@ -219,27 +219,7 @@ private theorem derivedExtension_of_equivalence
     exact hcomp X ⟨K, hK, he⟩
 
 /-- Any ring system admits derived extension from abelian towers, with its unit comparison
-normalized by the actual integer generator.
-
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2),
-and NormalizedKummerReduction proof steps 1--2.
-(blueprint: lem-sfb-integral-unit-reduction).
-
-Proof: regard abelian towers as sheaves of modules over the constant integer ring on
-`coefficientSequenceTopology`. Forgetting the action of the system ring is restriction
-along its unique integer-ring map, and retains exactly the sections, restrictions,
-transitions and morphisms required by Forget. Sheafified extension of scalars is left
-adjoint to this functor. The K-flat change-of-rings construction gives its universal
-cochain derived pair; derive the adjunction against exact restriction. The ordinary
-unit on a representative is the tensor generator x mapped to 1 tensor x. Therefore the
-derived adjunction has the representative transpose formula required by Reduction.
-The integer unit concentrated in degree zero is K-flat. Its comparison counit is
-invertible, and multiplication identifies its ordinary scalar extension with the system
-ring's unit module. Composing these two comparisons gives a. The representative
-transpose formula identifies its adjunct with the ordinary integer-ring map. On every
-constant integer section this map is integer multiplication of one, so uniqueness in
-integerGenerator_existsUnique identifies it with integerGenerator. These constructions
-also apply to the empty scheme and to ring systems with zero rings. -/
+normalized by the actual integer generator. -/
 theorem exists_integralUnitReduction (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}) :
     ∃ (r : Reduction T B)

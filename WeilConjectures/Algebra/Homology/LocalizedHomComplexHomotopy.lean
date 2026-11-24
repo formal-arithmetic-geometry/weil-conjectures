@@ -16,8 +16,9 @@ import WeilConjectures.Algebra.Homology.LocalizedHomComplexHomology
 /-!
 # Sections of the sheaf Hom complex and homotopy classes
 
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), used in Tag 0A94
-(blueprint: lem-pur-localized-hom-complex-homotopy).
+## References
+
+* Stacks Project, Tag 0A8Y, Equation (21.34.0.1), used in Tag 0A94
 -/
 
 @[expose] public section
@@ -30,24 +31,7 @@ namespace CategoryTheory
 
 /-- The degree-zero cycles of the section Hom complex identify with localized chain
 maps, and its degree-zero homology identifies with their homotopy classes. No
-K-injectivity or derived category is needed.
-
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1)
-(blueprint: lem-pur-localized-hom-complex-homotopy).
-
-Proof: evaluation of the product projections in `homComplex_exists` identifies a
-section of degree n with a family of maps L^p|U to I^(p+n)|U. Evaluation preserves
-these products, and the section internal-Hom identification is natural in objects
-of C/U. In degree zero the differential formula is d_I f - f d_L, so its kernel
-consists exactly of chain maps. This gives the equivalence e and its component
-formula. In degree minus one the sign is minus one, so the differential is
-d_I h + h d_L, exactly the formula for a null-homotopy. Thus two cocycles have
-the same class if and only if their chain maps are homotopic. Every homology class
-has a cocycle representative (the homology projection is an epimorphism of abelian
-groups) and every homotopy-category arrow has a chain-map representative. The
-cocycle equivalence therefore induces the equivalence a on the two quotients,
-with the asserted equality on representatives. This works also for zero complexes
-and unbounded complexes: the products, rather than finite sums, admit all families. -/
+K-injectivity or derived category is needed. -/
 theorem localizedHomComplex_homotopy
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

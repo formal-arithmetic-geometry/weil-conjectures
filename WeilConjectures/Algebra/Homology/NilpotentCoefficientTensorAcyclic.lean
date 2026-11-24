@@ -36,9 +36,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Tensor vanishing for nilpotent quotient coefficients
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, proof of
-lemma-derived-vanishing-mod-I, finite ideal-power filtration.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0G1T (finite ideal-power filtration); Modules on Sites, Tags 03DD and 05V4
 -/
 
 @[expose] public noncomputable section
@@ -176,25 +176,7 @@ private theorem tensor_restricted_acyclic
 end NilpotentCoefficientProof
 
 /-- If ordinary extension of a flat-term K-flat complex is acyclic, its tensor with
-any module killed by a power of the sectionwise quotient kernel is acyclic.
-
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, proof of
-lemma-derived-vanishing-mod-I; Modules on Sites, Tags 03DD and 05V4.
-(auxiliary; not a blueprint node).
-
-Proof: global sections act on all morphisms of module sheaves. The finitely generated
-ideal of these global scalars has a finite image/cokernel filtration on a module killed
-by its m-th power. Each factor is killed by every generator, hence by the sectionwise
-kernel. Such a factor has the unique quotient-ring action: lift a scalar along q;
-annihilation of the kernel makes this independent of the lift. These actions commute
-with restrictions and give an S-module sheaf with the original underlying sheaf.
-Scalar extension of P is K-flat and acyclic. Its tensor with any S-module is acyclic;
-restriction of scalars and balanced tensor cancellation give vanishing for each factor.
-Fixed tensor with P descends to an exact functor on the derived category. Apply it to
-the short-exact single-module triangles of the filtration and induct. At exponent zero,
-the module itself is zero. Evaluation of global scalars carries their ideal powers into
-the corresponding sectionwise ideal powers, so the stated annihilation implies the
-annihilation used in the induction. No noetherian or boundedness assumption is used. -/
+any module killed by a power of the sectionwise quotient kernel is acyclic. -/
 theorem tensor_acyclic_of_nilpotent_coefficient
     {C : Type u} [SmallCategory C] {T : GrothendieckTopology C}
     {R S : Sheaf T CommRingCat.{u}} (q : R ⟶ S) (r : ℕ)

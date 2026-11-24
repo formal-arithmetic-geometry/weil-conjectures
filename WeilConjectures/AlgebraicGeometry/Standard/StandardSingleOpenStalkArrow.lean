@@ -12,9 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local comparison factors
 
-Source: Stacks Project, perfect.tex, Tags 0DJ7 and 0DJ9;
-cohomology.tex, Tags 06YB and 0D5S.
-(blueprint: lem-pc-standard-single-open-stalk-arrow).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0DJ7, 0DJ9, 06YB, 0D5S
 -/
 
 @[expose] public section
@@ -153,30 +153,8 @@ private theorem transportArrow
   simp only [G.map_comp, Category.assoc, ← G.map_comp_assoc, Iso.hom_inv_id,
     G.map_id, Category.id_comp]
 
-/-- Restriction of the canonical single-module base-change arrow to target opens,
-then transport of its stalk back to the original local ring.
-
-Proof: restrict the base direct image to S and the base-changed direct image to V.
-Direct image commutes with restriction to a full inverse-image open: identify the
-underived section functors, and derive that identification using exact restriction.
-The pullback square over V identifies the restricted source with the pullback over
-S. The tensor-pullback composition isomorphism identifies the restricted coefficient
-module with the pullback of MS. Derived pullback commutes with these restrictions,
-by the exact open pullback and its composition comparison. The base-change arrow
-is the unit followed by direct image of the coefficient map followed by the counit.
-The existing restricted_base_change_compatibility theorem applies to the pinned
-single-module comparisons: the adjunction comparison and its inverse cancel,
-identifying these comparisons with picardTermwiseSingleMap. It gives conjugacy
-of the two derived arrows, before applying homology. Apply degree-n homology and
-use exactness of open restriction to pass to restricted cohomology sheaves. Taking
-the stalk at xV, the open-immersion stalk isomorphism and restriction of scalars
-along its inverse identify these stalks with the original stalk at a. Composing
-these identifications gives s, t and the displayed equality. This does not use
-flatness, quasi-coherence, affineness, or a representative complex. Empty V admits
-no a with hV; for top opens the same comparisons reduce to the identity.
-Source: Stacks Project, perfect.tex, equation-bc (Tag 0DJ7), and
-Lemma lemma-single-complex-base-change (Tag 0DJ9), locality paragraph.
-(blueprint: lem-pc-standard-single-open-stalk-arrow). -/
+/-- Restriction of the canonical single-module base-change arrow to target opens, then
+transport of its degree-`n` homology stalk back to the original local ring at `a`. -/
 theorem standardSingle_open_stalk_arrow
     {Y B A : Scheme.{u}} (p : Y ⟶ B) [QuasiCompact p] [QuasiSeparated p]
     (M : Y.Modules) (g : A ⟶ B) (a : A)

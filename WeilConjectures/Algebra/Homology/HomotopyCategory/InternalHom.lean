@@ -105,20 +105,10 @@ lemma catCommSq_iso_internalHom :
     CatCommSq.iso (CochainComplex.internalHom P.as) (quotient _ _) (quotient _ _)
       (internalHom P) = (quotientCompInternalHomIso P).symm := rfl
 
-/-- The tensor-hom adjunction on `K(C) = HomotopyCategory C (ComplexShape.up ℤ)`:
-```
-                tensorLeft P.as
-      C(C) ─────────────────────────▶ C(C)
-       │    ◀─────────────────────────  │
-       │  CochainComplex.internalHom P.as │
-       │ quotient                        │ quotient
-       ▼        tensorLeft P             ▼
-      K(C) ─────────────────────────▶ K(C)
-            ◀─────────────────────────
-                 internalHom P
-```
-It is obtained from `CochainComplex.tensorHomAdjunction P.as` by localization, since
-`quotient` is a localization functor for the homotopy equivalences. -/
+/-- The tensor-hom adjunction `tensorLeft P ⊣ internalHom P` on
+`K(C) = HomotopyCategory C (ComplexShape.up ℤ)`, obtained from
+`CochainComplex.tensorHomAdjunction P.as` by localization, since `quotient` is a localization
+functor for the homotopy equivalences. -/
 noncomputable def tensorHomAdjunction : tensorLeft P ⊣ internalHom P :=
   haveI := HasBinaryBiproducts.of_hasBinaryProducts (C := C)
   (CochainComplex.tensorHomAdjunction P.as).localization (quotient _ _)

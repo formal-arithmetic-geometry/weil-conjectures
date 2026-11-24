@@ -11,8 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-! # Signed module dual of a chain complex
 
-Source: Stacks Project, duality.tex, Tag 0BQZ, displayed finite free Hom computation.
-(blueprint: def-sc-signed-module-dual-complex).
+## References
+
+* Stacks Project, Tag 0BQZ
 -/
 
 @[expose] public section
@@ -21,11 +22,7 @@ universe u
 open CategoryTheory
 namespace ModuleCat
 
-/-- Signed precomposition has square zero.
-Source: Stacks Project, duality.tex, Tag 0BQZ.
-(blueprint: def-sc-signed-module-dual-complex).
-Proof: the signs multiply and the remaining composite is precomposition by
-K.d(n+2,n+1) followed by K.d(n+1,n), which is zero. -/
+/-- Signed precomposition has square zero. -/
 theorem signedDualBoundary_comp {A : Type u} [CommRing A]
     (K : ChainComplex (ModuleCat.{u} A) ℕ) (n : ℕ) :
     ModuleCat.ofHom ((-1 : A) ^ (n + 1) •
@@ -39,9 +36,7 @@ theorem signedDualBoundary_comp {A : Type u} [CommRing A]
 
 /-- The signed module dual of a natural-indexed chain complex, extended to ℤ.
 In degree n≥0 its term is Hom_A(K_n,A), and the differential is
-(-1)^(n+1) times precomposition by the chain boundary. Negative terms vanish.
-Source: Stacks Project, duality.tex, Tag 0BQZ.
-(blueprint: def-sc-signed-module-dual-complex). -/
+(-1)^(n+1) times precomposition by the chain boundary. Negative terms vanish. -/
 noncomputable def signedDualCochainComplex {A : Type u} [CommRing A]
     (K : ChainComplex (ModuleCat.{u} A) ℕ) : CochainComplex (ModuleCat.{u} A) ℤ :=
   (CochainComplex.of (fun n ↦ ModuleCat.of A (K.X n ⟶ ModuleCat.of A A))

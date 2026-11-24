@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 /-!
 # Degreewise sections of the sheaf Hom complex
 
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-cochains)
+## References
+
+* Stacks Project, Tag 0A8Y, Equation (21.34.0.1)
 -/
 
 @[expose] public section
@@ -50,22 +51,7 @@ private noncomputable def localizedSectionAddEquiv
   map_add' _ _ := rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Product projections identify degreewise sections with all localized cochains.
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-(blueprint: lem-pur-hom-complex-sections-cochains)
-
-Proof: the product cone specified by homComplex_exists remains a product after
-forgetting module sheaves, evaluating at U, and forgetting to abelian groups.
-Its factors are localized presheaf-module morphisms by the construction of
-internal Hom. The fully faithful forgetful functor from localized module sheaves
-to presheaf modules identifies each factor with localized sheaf-module morphisms.
-A degree-n external cochain is exactly a family of these morphisms indexed by p,
-with target degree p+n. The product universal property supplies the forward map
-and inverse; the projection formulas prove both inverse laws. Each projection and
-the inverse preserve addition, so this is an additive equivalence. Reindexing q
-along p+n=q gives the displayed formula. No finite support or boundedness is
-required. If either complex is zero every factor and the product are zero, and
-for n=0 the same construction gives arbitrary degree-preserving families. -/
+/-- Product projections identify degreewise sections with all localized cochains. -/
 theorem homComplex_sections_cochains
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

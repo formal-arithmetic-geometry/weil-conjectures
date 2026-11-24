@@ -17,9 +17,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [local implicit_reducible] spCoefficientCommRings
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Scalar evaluation is exact transport followed by its finite target map.
-Source: the exact transport laws (blueprint: lem-sfb-finite-boundary-arrow-formulas).
-Proof: apply forgetEvaluatedArrow_eq to the two exact functors in the definition. -/
+/-- Scalar evaluation is exact transport followed by its finite target map. -/
 theorem scalarFiniteBoundary_eval_eq (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)
@@ -34,9 +32,7 @@ theorem scalarFiniteBoundary_eval_eq (l : ℕ) [Fact l.Prime]
   exact forgetEvaluatedArrow_eq (SpTowerShriek.ev l E T n) (finiteForget l E T n)
     (lineEvaluation l E c n) (scalarChernArrow l E c f)
 
-/-- Integral evaluation is exact transport with the evaluated ordinary endpoints.
-Source: the exact transport laws (blueprint: lem-sfb-finite-boundary-arrow-formulas).
-Proof: apply map_underlyingSingleArrow to the definition of underlyingChernArrow. -/
+/-- Integral evaluation is exact transport with the evaluated ordinary endpoints. -/
 theorem scalarFiniteBoundary_integral_eq (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {T : Scheme.{u}} (c : Chern l E T)

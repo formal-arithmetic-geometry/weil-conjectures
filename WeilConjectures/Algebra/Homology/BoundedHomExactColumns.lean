@@ -16,8 +16,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Finite-diagonal Hom totalization of exact columns is acyclic
 
-Source: Stacks Project, Tag 0GM8 via Tag 0GM7; the explicit proof is the
-explicit calculation described below (blueprint: lem-sc-bounded-hom-exact-columns). -/
+## References
+
+* Stacks Project, Tag 0GM8 via Tag 0GM7 (cohomology.tex, case (2), descending Hom calculation)
+-/
 
 @[expose] public section
 
@@ -109,21 +111,7 @@ end Helpers
 
 /-- Exact internal-Hom columns imply exactness of the total Hom when its diagonals
 are finite. The hypothesis concerns only the differentials of the second complex;
-no freeness or acyclicity hypothesis is imposed on either input.
-Source: Stacks Project, cohomology.tex, Tag 0GM8, case (2), descending Hom calculation.
-(blueprint: lem-sc-bounded-hom-exact-columns)
-
-Proof: form the commuting bicomplex in opposite module sheaves with term
-op Hom(E^p,A^(-q)). Its horizontal differential is opposite precomposition by d_E,
-and its vertical differential is opposite postcomposition by d_A. The two bounds
-become upper bounds N and -M. Internal Hom with a zero source or target is zero,
-so the finite-diagonal total exists. Each column short complex is the opposite
-of the assumed exact Hom column, hence each column is acyclic. Compare the zero
-bicomplex with this bicomplex using the already proved bounded-above columnwise
-total quasi-isomorphism theorem: its total is acyclic. Finally the signed product
-comparison identifies the Hom short complex at n with the unop total short
-complex at -n. Exactness transports through unop and this isomorphism. This
-argument includes empty diagonals and preserves the original universes. -/
+no freeness or acyclicity hypothesis is imposed on either input. -/
 theorem acyclic_homComplex_of_bounded_exact_columns
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]

@@ -15,12 +15,17 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialCon
 /-!
 # Derived coefficient Hom comparison on a ringed site
 
-Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites,
-Tags 06YY and 07A6 (auxiliary; not a blueprint node).
 
 K-flat resolutions and exact restriction provide the essentially constant denominator
 diagrams needed by the derived-adjunction compatibility theorem. Its representative
 formula applies to the prescribed universal left derived pair.
+
+## References
+
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
+* Stacks Project, Tag 09T5
+* Stacks Project, Tag 0FND
 -/
 
 @[expose] public section
@@ -100,17 +105,7 @@ private theorem inverted_indDiagram
     simp
 
 /-- The derived adjunction is compatible with the original Hom equivalence on all homotopy
-representatives.
-Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites,
-Tags 06YY and 07A6.
-(auxiliary; not a blueprint node)
-Proof: Flat-term K-flat resolutions make the incoming denominator diagrams of extension
-of scalars essentially constant. Quasi-isomorphisms between K-flat complexes are inverted
-by extension followed by localization. Exactness of restriction makes its outgoing
-denominator diagrams essentially constant, with value the termwise restriction. Apply
-the derived-adjunction compatibility theorem to these diagrams and the given universal
-left derived pair. The right comparison is the inverse of mapDerivedCategoryFactorsh.
-Its representative formula is the asserted equality. -/
+representatives. -/
 theorem sheafRingDerivedHomComparison (φ : O ⟶ O')
     [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O))]
     [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))]

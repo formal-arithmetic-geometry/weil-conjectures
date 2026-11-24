@@ -10,7 +10,10 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Coefficient extension and the ordinary triangle boundary
 
-Source: Stacks Project, Tags 05G3 and 06Y6; naturality of the homology shift.
+## References
+
+* Stacks Project, Tag 05G3, Lemma 10.14.3 (scalar adjunction)
+* Stacks Project, Tag 06Y6, Lemma 15.61.1 (the scalar functor on triangles)
 -/
 
 @[expose] public section
@@ -98,24 +101,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical coefficient maps commute with the ordinary triangle boundary after
-exact restriction on homology. There is no derived model or exactness assumption.
-
-Source: Stacks Project, Tag 05G3, Lemma 10.14.3 (scalar adjunction), and
-Tag 06Y6, Lemma 15.61.1 (the scalar functor on triangles).
-Proof: transpose the extension-associativity isomorphism along scalar adjunction.
-Its component sends e tensor q to g(e) tensor q. Equality on 1 tensor q
-and tensor induction show that the prescribed phi maps are these components.
-The associativity isomorphism and the adjunction unit commute with shifts:
-their degreewise formulas are independent of the degree, and additive scalar
-extension preserves the sign in the shifted differential. They therefore give
-a morphism from the E-extension of T to the restriction of its C-extension.
-Apply ordinary homology-boundary naturality to that triangle morphism.
-Exact restriction has a homology isomorphism compatible with the homology
-shift isomorphisms, as follows by its cycle and boundary universal properties.
-Composing the naturality equation with these restriction isomorphisms gives
-the formula below. No distinguishedness, flatness, boundedness, or invertibility
-of the boundary is needed; in particular it holds for zero rings and zero maps.
-(blueprint: lem-pc-scalar-coefficient-triangle-boundary). -/
+exact restriction on homology. There is no derived model or exactness assumption. -/
 theorem scalarCoefficient_triangle_boundary
     {A E C : Type u} [CommRing A] [CommRing E] [CommRing C]
     (f : A →+* E) (g : E →+* C)

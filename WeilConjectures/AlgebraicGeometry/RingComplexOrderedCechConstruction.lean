@@ -9,8 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexGodementConstruction
 
 /-! # The ordered Čech fibre on the ideal complement
 
-Source: Stacks Project, Tag 099D(d), and Cohomology, ordered Čech complexes.
-(auxiliary; not a blueprint node)
+## References
+
+* [Stacks, Tag 099D], part (d)
+* [Stacks, Cohomology of Sheaves, ordered Čech complexes]
 -/
 
 @[expose] public section

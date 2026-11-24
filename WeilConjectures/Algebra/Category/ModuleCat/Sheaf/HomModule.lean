@@ -14,8 +14,9 @@ public import Mathlib.CategoryTheory.Linear.Basic
 /-!
 # Global sections acting on morphisms of sheaves of modules
 
-Source: Stacks Project, Modules on Sites, Sections 03DD and 04TT
-(blueprint: def-pur-sheaf-modules-hom-module).
+## References
+
+* Stacks Project, Modules on Sites, Sections 03DD and 04TT
 -/
 
 @[expose] public section
@@ -31,11 +32,11 @@ variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
   (hR : Presheaf.IsSheaf J (R ⋙ forget₂ CommRingCat RingCat.{u}))
   (M N : SheafOfModules.{v} ⟨R ⋙ forget₂ CommRingCat RingCat.{u}, hR⟩)
 
-/-- (blueprint: def-pur-sheaf-modules-hom-module) For a sheaf `R` of commutative rings,
+/-- For a sheaf `R` of commutative rings,
 global sections act on morphisms of sheaves of `R`-modules. At each object `U`, the
 component of `s • φ` sends `x` to `s_U • φ_U x`. This equals both precomposition with
 multiplication by `s` on `M` and postcomposition with multiplication by `s` on `N`;
-composition is bilinear. Stacks Project, Modules on Sites, Sections 03DD and 04TT. -/
+composition is bilinear. -/
 noncomputable instance homModule :
     Module (RingCat.sectionsSubring (R ⋙ forget₂ CommRingCat RingCat.{u})) (M ⟶ N) := by
   letI : Module (RingCat.sectionsSubring (R ⋙ forget₂ CommRingCat RingCat.{u}))
@@ -49,8 +50,8 @@ noncomputable instance homModule :
       map_add' := fun _ _ => rfl }
   exact e.module _
 
-/-- (blueprint: def-pur-sheaf-modules-hom-module) Composition of sheaf-module morphisms is
-bilinear over the ring of global sections. Stacks Project, Modules on Sites, Section 04TT. -/
+/-- Composition of sheaf-module morphisms is
+bilinear over the ring of global sections. -/
 noncomputable instance homLinear :
     Linear (RingCat.sectionsSubring (R ⋙ forget₂ CommRingCat RingCat.{u}))
       (SheafOfModules.{v} ⟨R ⋙ forget₂ CommRingCat RingCat.{u}, hR⟩) where

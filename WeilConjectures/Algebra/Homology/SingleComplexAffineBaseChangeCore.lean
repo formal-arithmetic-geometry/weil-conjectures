@@ -13,8 +13,6 @@ import Mathlib.RingTheory.LocalProperties.Exactness
 
 /-! # The affine single-complex base-change criterion
 
-Source: Stacks Project, Tag 0DJ8, affine proof, and Tag 0DJ9
-(blueprint: lem-pc-rf-single-complex-affine-base-change).
 
 The affine case of the single-complex criterion, stated with the objects of the
 qcqs statement `singleComplexBaseChangeQcqsInduction`: a cartesian square of the
@@ -23,6 +21,11 @@ quasi-coherent derived categories (which correspond to complexes M, N of A- and
 A'-modules under the affine equivalence), a derived morphism L(g')^*K -> K', the
 stalkwise condition `SingleComplexBaseChange.StalkCondition`, and the derived
 base-change comparison map followed by Rf'_* of the given morphism.
+
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 0DJ9
 -/
 
 @[expose] public section
@@ -35,34 +38,11 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Stacks, Tag 0DJ8, affine proof (and the affine case of Tag 0DJ9).
-(blueprint: lem-pc-rf-single-complex-affine-base-change)
-
-For a cartesian square of affine schemes X = Spec A, S = Spec R, S' = Spec R',
+/-- For a cartesian square of affine schemes X = Spec A, S = Spec R, S' = Spec R',
 X' = Spec A', objects K, K' of the quasi-coherent derived categories and a morphism
 φ : L(g')^*K -> K', if the stalk maps
 H^i(K_x ⊗^L_{O_{S,s}} O_{S',s'}) ⊗ O_{X',x'} -> H^i(K'_{x'}) are isomorphisms for all
-x' and i, then the comparison Lg^*Rf_*K -> Rf'_*L(g')^*K -> Rf'_*K' is an isomorphism.
-
-Proof, following the four steps of the node:
-1. Write A' = A ⊗_R R'. Under the affine quasi-coherent derived equivalence
-   (lem-pc-affine-qcoh-derived-equivalence, lem-pc-derived-direct-image-preserves-qcoh)
-   K and K' correspond to complexes M of A-modules and N of A'-modules, and by
-   lem-pc-affine-derived-pullback-tensor-tilde the comparison is represented by
-   M ⊗^L_R R' -> M ⊗^L_A A' -> N in D(R'), whose first arrow is the comparison of
-   lem-pc-affine-derived-base-change-comparison-map.
-2. φ corresponds to M ⊗^L_A A' -> N in D(A'); composing with the comparison c, whose
-   cohomology maps are A'-linear, gives A'-linear maps H^i(M ⊗^L_R R') -> H^i(N).
-3. Localize at a prime x' of A'. The localization identities of
-   lem-pc-affine-derived-base-change-comparison-map identify the localized first arrow;
-   exact localization (lem-weil-pbc-localization-module-exact) and affine tilde stalks
-   (lem-weil-pbc-spec-tilde-stalk-localization) identify the localized second arrow;
-   the localized composite is the stalk map of the hypothesis.
-4. Every maximal ideal is prime, so each H^i of the composite is bijective at every
-   maximal localization, hence bijective
-   (lem-weil-pbc-linear-map-bijective-at-maximal-localizations); the composite is a
-   quasi-isomorphism, i.e. an isomorphism in D(R')
-   (lemma-coherent-base-change-invertible-sheaves). -/
+x' and i, then the comparison Lg^*Rf_*K -> Rf'_*L(g')^*K -> Rf'_*K' is an isomorphism. -/
 theorem singleComplexAffineBaseChangeCore
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

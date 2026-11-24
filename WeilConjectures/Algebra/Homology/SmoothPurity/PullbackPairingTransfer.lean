@@ -16,8 +16,10 @@ public import WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocali
 /-!
 # Transfer of pairings along a morphism of ringed sites
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03EO and 0GMX.
-(blueprint: lem-pur-ringed-site-pullback-pairing-transfer)
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL, 03EO and 0GMX.
+* Stacks Project, Modules on Sites, Tag 04J0
 -/
 
 @[expose] public section
@@ -260,20 +262,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
     (U.sheafPushforwardContinuous RingCat J K).obj
       ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))
 
-/-- A pairing extends uniquely to module pullback, with the adjunction-unit formula.
-Source: Stacks Project, Modules on Sites, Tags 03EO, 0GMX and 04J0.
-(blueprint: lem-pur-ringed-site-pullback-pairing-transfer).
-
-Proof: Over each V, apply the localized module adjunction to the functional b(p)
-followed by the coefficient map. The localization comparison identifies its source
-with the restriction of the global pullback. Injectivity of that adjunction proves
-additivity, compatibility with scalars, and compatibility with restriction in V.
-The resulting linear natural transformation P → U_* Hom(F L,S) transposes under
-the global adjunction to the required map. Its evaluation is the local adjunction
-identity. For uniqueness, transpose any candidate globally and test its sections
-on each slice. The given formula on all T → V, together with naturality, makes
-its restriction along the local adjunction unit equal to the same functional.
-Injectivity of the local adjunction, and then the global one, identifies the maps. -/
+/-- A pairing extends uniquely to module pullback, with the adjunction-unit formula. -/
 theorem exists_pullback_pairing_transfer
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

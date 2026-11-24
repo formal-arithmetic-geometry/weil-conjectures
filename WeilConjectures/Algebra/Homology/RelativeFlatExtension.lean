@@ -18,9 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # A relative flat replacement before imposing termwise epimorphy
 
-Source: Stacks Project, Derived Categories, Lemma 06XX, triangle and homotopy
-correction part of the induction step.
-(blueprint: lem-pc-relative-flat-extension).
+## References
+
+* Stacks Project, Derived Categories, Tag 06XX (triangle and homotopy correction)
 -/
 
 @[expose] public section
@@ -231,25 +231,7 @@ private theorem relative_extension_of_flat_biprod
 
 /-- A flat replacement of a mapping cone gives a relative flat replacement,
 strictly as chain maps.
-Termwise epimorphy of the new resolution is not asserted here.
-
-Source: Stacks Project, Derived Categories, Lemma 06XX, triangle construction
-and homotopy correction (https://stacks.math.columbia.edu/tag/06XX).
-(blueprint: lem-pc-relative-flat-extension).
-
-Proof: The prescribed quasi-isomorphism r : Q -> Cone(f), followed by the
-cone projection to E[1], determines a triangle
-E -> F -> Q -> E[1]. Realize it by the shifted cone of this composite; the
-sequence E -> F -> Q is degreewise split and F^i is E^i plus Q^i. Thus F is
-bounded above and flat by finite coproduct flatness. The cone triangle and this
-triangle give a morphism of triangles with identity on E and Q -> C on the
-third term. The middle map g : F -> H is a quasi-isomorphism by the long exact
-cohomology sequences. The square with E commutes up to homotopy. Extend the
-homotopy degreewise from E to F using the split retractions and subtract its
-homotopy differential from g. This changes neither its cohomology maps nor its
-chain-map property and gives t >> g = f strictly. Neither f nor its components
-need be quasi-isomorphisms or epimorphisms. For E = 0 the given Q resolves H;
-for H = 0 the cone construction still applies. Bounds on E and Q may differ. -/
+Termwise epimorphy of the new resolution is not asserted here. -/
 theorem exists_relative_boundedAbove_flat_extension
     (E H : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ) (f : E ⟶ H)

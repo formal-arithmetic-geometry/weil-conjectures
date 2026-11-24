@@ -16,7 +16,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Normalized geometric projection faces
 
-Source: Zheng, Construction 5.15 and Lemma 5.22.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Lemma 5.22
 -/
 
 -- After pruning, this module only keeps private declarations.

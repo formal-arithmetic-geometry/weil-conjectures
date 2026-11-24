@@ -20,8 +20,9 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Tor bounds for restricted free modules
 
-Source: Stacks Project, Tags 066H, 066K and 0655.
-(blueprint: lem-pc-free-restriction-tor-bound).
+## References
+
+* Stacks Project, Tags 066H, 066K and 0655
 -/
 
 @[expose] public section
@@ -153,19 +154,7 @@ private theorem tor'_preserves_coproducts (A : Type u) [CommRing A]
   obtain ⟨σ⟩ := nonempty_tor'_flip_iso A j
   exact preservesColimitsOfShape_of_natIso (σ.app M)
 
-/-- A free B-module inherits the Tor bound of the restricted regular B-module.
-
-Source: Stacks Project, Tags 066H, 066K and 0655.
-(blueprint: lem-pc-free-restriction-tor-bound).
-
-Proof: restricted finitely supported B-valued functions on I are the direct sum,
-indexed by I, of restricted copies of B. Use the natural symmetry of Tor to
-resolve the test module M instead of the first argument. Tensoring that resolution
-with the direct sum commutes with the sum in each degree. Direct sums of modules
-are exact, so homology commutes with this sum. Its degree-j homology is therefore
-the direct sum of Tor_j(B,M), zero by hypothesis. Transport back through
-Tor symmetry. Empty and infinite index sets are both allowed; no finite generation
-is needed. For the zero ring all terms are zero, including j=0. -/
+/-- A free B-module inherits the Tor bound of the restricted regular B-module. -/
 theorem free_restriction_tor_isZero
     {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
     (I : Type u) (M : ModuleCat.{u} A) (j : ℕ)

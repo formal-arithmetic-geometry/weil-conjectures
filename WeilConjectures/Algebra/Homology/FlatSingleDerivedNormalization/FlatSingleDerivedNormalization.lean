@@ -34,12 +34,18 @@ public import Mathlib.Combinatorics.SetFamily.FourFunctions
 
 /-! # Normalized derived tensor with a flat degree-zero sheaf
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YN and 06YU;
-derived.tex, Tag 015F; homology.tex, Tag 010N; more-algebra.tex, Tag 0FNH.
-(blueprint: lem-pur-flat-single-derived-normalization)
 
 The derived tensor and its resolving comparisons are the published site descent data.
 The normalization is imposed on every unbounded input complex.
+
+## References
+
+* Stacks Project, Tag 06YN
+* Stacks Project, Tag 06YU
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 010N
+* Stacks Project, Tag 0FNH
+* Stacks Project, Tag 012Z
 -/
 
 @[expose] public noncomputable section
@@ -59,9 +65,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 attribute [local instance 2000] KFlatFixedTensor.tensorHasMapBifunctor
 
 /-- The existing single-summand totalization isomorphism, with no flatness needed.
-Its component is the projection onto bidegree (i,0), using the identity of L.
-Source: Stacks 06YU and the direct-sum totalization convention 012Z
-(blueprint: lem-pur-flat-single-derived-normalization). -/
+Its component is the projection onto bidegree (i,0), using the identity of L. -/
 abbrev collapse (L : KFlatFixedTensor.Modules R) :=
   CochainComplex.map₂HomologicalComplexFlipObjSingleIso
     (KFlatFixedTensor.ordinaryTensor R) L
@@ -230,45 +234,13 @@ private def termwiseHomologyIso
 
 variable [HasDerivedCategory.{w} (KFlatFixedTensor.Modules R)]
 
-/-- Tensor with Q(L[0]) using the specified site-derived tensor, with no new choice.
-Source: Stacks 06YU (blueprint: lem-pur-flat-single-derived-normalization). -/
+/-- Tensor with Q(L[0]) using the specified site-derived tensor, with no new choice. -/
 abbrev derived (L : KFlatFixedTensor.Modules R) :=
   (KFlatFixedTensor.derivedTensor R).flip.obj
     (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj L))
 
 /-- Flat degree-zero tensor is termwise on every unbounded complex, normalized by
-fixed-factor descent, and compatible with integer shifts, triangles and cohomology.
-Source: Stacks 06YN, 06YU, 015F, 010N and 0FNH
-(blueprint: lem-pur-flat-single-derived-normalization).
-
-Proof plan:
-1. By def-pc-flat-sheaf-modules, tensorRight L is exact; the canonical
-   siteSheafTensorRightIso identifies it with the defining site tensor. Additivity
-   comes from lem-pc-sheaf-modules-tensor-closed. Tensor with zero is zero.
-2. In the direct-sum total tensor with L[0] only (i,0) survives. Its projection
-   and inclusion are inverse, natural on all complexes, and its differential is
-   d tensor 1. This is collapse, the existing BifunctorSingle construction.
-3. Apply lem-weil-pbc-exact-functor-complex-cohomology. Exact tensor preserves
-   acyclicity, so the single complex is K-flat by def-pc-kflat-complex. Its terms
-   are L and zero, hence flat.
-4. Apply situation-conventions to tensorRight L.
-   Its mapDerivedCategoryFactors is phi; its termwise shift is degreewise identity.
-5. Apply lem-weil-pbc-kflat-fixed-tensor-triangulated to L[0]. Invert its right
-   comparison to obtain chi on every complex, normalized by representativeIso on
-   resolving inputs. Compose chi with Q(collapse), then phi inverse. Extend this
-   natural isomorphism uniquely along Q by lem-weil-pbc-localization-universal-property.
-   This defines eta and gives the displayed normalization for every input.
-6. By lem-weil-pbc-total-tensor-integer-shifts, shifting the first total factor
-   is unsigned. Both routes through collapse are identity on the surviving summand;
-   the shifted differential is (-1)^n times d tensor 1 for every integer n.
-   The shift square for eta follows on representatives and hence by localization.
-7. Naturality at the third arrow of a distinguished triangle, together with this
-   shift square, gives compatibility with its connecting morphism. Both functors
-   are triangulated by the two factorization theorems.
-8. Apply H^i to eta followed by phi, then the canonical cycle-and-boundary
-   isomorphism ShortComplex.mapHomologyIso. The homologyFunctorFactors isomorphisms
-   identify H^i(QE) with H^i(E). Localization extends this natural family and its
-   inverse to D(R), with exactly the stated representative value. No bound is used. -/
+fixed-factor descent, and compatible with integer shifts, triangles and cohomology. -/
 theorem flat_single_derived_normalization (L : KFlatFixedTensor.Modules R)
     (hL : IsFlatOnSite (J := J) (R := R) L) :
     ∃ hK : CochainComplex.IsKFlatIndependentCoefficients

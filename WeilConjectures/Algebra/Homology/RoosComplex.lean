@@ -18,9 +18,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Roos complexes for inverse limits
 
-Source: Stacks Project, derived.tex, Tag 070M (lemma-difficulty-K-injectives),
-extended to arbitrary K-injective towers by the node's split-envelope argument
-(blueprint: lem-weil-derived-limit-roos-complex).
+The canonical Roos comparison from the kernel complex to the signed cone is a quasi-isomorphism
+for K-injective towers.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 070M
 -/
 
 @[expose] public section
@@ -55,23 +58,7 @@ private theorem homotopy_retraction_of_quasiIso
 
 /-- The canonical Roos comparison is a quasi-isomorphism. The isomorphisms `eP` and `eC`
 identify the product and shifted cone terms; their differential equations specify the
-complexes, and the kernel and comparison equations specify the canonical map.
-Source: Stacks Project, derived.tex, Tag 070M (lemma-difficulty-K-injectives)
-(blueprint: lem-weil-derived-limit-roos-complex).
-
-Proof: (1) The kernel of the transition endomorphism is the inverse limit, naturally in
-families (tower-transition-endomorphism and inverse-system definitions). (2) Applying
-products and limits termwise preserves homotopies; on the cone use the homotopy
-`(-P(h)y, P(h)x)`. (3) On split towers recursively choose a section of `1-s`
-(lem-weil-tower-split-envelope), so it is split epi. (4) For complexes with split terms,
-the degreewise-epi kernel/cone comparison is a quasi-isomorphism
-(lem-weil-degreewise-epi-kernel-cocone-qis). (5) Embed the tower complex in its additive
-split envelope and use the cokernel's shifted cone to replace it by a quasi-isomorphic
-complex with split terms (lem-weil-tower-category-levelwise-abelian and
-lem-weil-tower-split-envelope). (6) K-injectivity gives a homotopy retraction of this
-replacement (lem-weil-pbc-kinjective-hom-derived). (7) Naturality and homotopy invariance
-make the comparison a retract of the split-term comparison on every cohomology object;
-thus it is a quasi-isomorphism and its derived-category image is an isomorphism. -/
+complexes, and the kernel and comparison equations specify the canonical map. -/
 theorem roosComplex_quasiIso
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A] [HasExactLimitsOfShape (Discrete ℕ) A]

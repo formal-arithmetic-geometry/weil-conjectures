@@ -68,9 +68,17 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 /-! # Signed line comparisons on unbounded derived categories
 
-Source: Stacks Project, Tags 03EL, 0GMX, 0FNY and 07A4; the current blueprint,
-Powers and duals in lemma-inverse-image-coefficient-sheaves--2.
-(blueprint: def-pur-signed-line-derived-action-data)
+## References
+
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 04TT
+* Stacks Project, Tag 06YU
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FNY
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public noncomputable section
@@ -121,8 +129,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {R : Sheaf J CommRingCat.{max u v w}}
   {S : Sheaf K CommRingCat.{max u v w}}
 
-/-- The existing module pullback; its unit is insertion into the sheafified relative tensor.
-Source: Stacks 03D7 and 03EL (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- The existing module pullback; its unit is insertion into the sheafified relative tensor. -/
 abbrev pull
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
       (U.sheafPushforwardContinuous RingCat J K).obj
@@ -132,16 +139,14 @@ abbrev pull
 attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
 
 /-- Signed functoriality in a line isomorphism, using the recorded powers and internal Hom.
-The negative map is precomposition with the inverse positive map.
-Source: Stacks 03EL, 0GMX (blueprint: def-pur-signed-line-derived-action-data). -/
+The negative map is precomposition with the inverse positive map. -/
 def signedIsoHom {A : Sheaf J CommRingCat.{max u v w}}
     {P Q : KFlatFixedTensor.Modules A} (b : P ≅ Q) :
     ∀ d : ℤ, signedLinePower.{u, v, w} P d ⟶ signedLinePower.{u, v, w} Q d
   | .ofNat n => scalarTensorPowerMap A b.hom n
   | .negSucc n => homObjMap (scalarTensorPowerMap A b.inv (n + 1)) (𝟙 (unit _))
 
-/-- The published derived tensor with the line in degree zero.
-Source: Stacks 06YU (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- The published derived tensor with the line in degree zero. -/
 def derivedLine (A : Sheaf J CommRingCat.{max u v w})
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules A)]
     (L : KFlatFixedTensor.Modules A) :
@@ -152,17 +157,14 @@ def derivedLine (A : Sheaf J CommRingCat.{max u v w})
 
 attribute [local irreducible] derivedLine Functor.mapDerivedCategory
 
-/-- Termwise tensor with a fixed sheaf, with its zero-preservation instance fixed once.
-Source: Stacks 03EK and 06YU
-(blueprint: def-pur-signed-line-derived-action-data). -/
+/-- Termwise tensor with a fixed sheaf, with its zero-preservation instance fixed once. -/
 def complexLine (A : Sheaf J CommRingCat.{max u v w})
     (L : KFlatFixedTensor.Modules A) :
     CochainComplex (KFlatFixedTensor.Modules A) ℤ ⥤
       CochainComplex (KFlatFixedTensor.Modules A) ℤ :=
   (siteSheafTensorRight L).mapHomologicalComplex (.up ℤ)
 
-/-- The actual total-complex collapse, followed by the existing comparison with site tensor.
-Source: Stacks 06YU (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- The actual total-complex collapse, followed by the existing comparison with site tensor. -/
 def collapse (A : Sheaf J CommRingCat.{max u v w})
     (L : KFlatFixedTensor.Modules A) :
     (KFlatFixedTensor.totalTensor A).flip.obj
@@ -174,8 +176,7 @@ def collapse (A : Sheaf J CommRingCat.{max u v w})
 
 attribute [local irreducible] collapse
 
-/-- Agreement with the actual K-flat total-tensor comparison on resolving complexes.
-Source: Stacks 06YU (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- Agreement with the actual K-flat total-tensor comparison on resolving complexes. -/
 def ResolvingNormalization (A : Sheaf J CommRingCat.{max u v w})
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules A)]
     (L : KFlatFixedTensor.Modules A)
@@ -196,8 +197,7 @@ def ResolvingNormalization (A : Sheaf J CommRingCat.{max u v w})
 attribute [local irreducible] ResolvingNormalization
 
 /-- The two localization comparisons and the derived action isomorphism, as ordinary
-product data. Their canonicity is specified by DerivedAction, never chosen from existence.
-Source: Stacks 06YU, 07A4 (blueprint: def-pur-signed-line-derived-action-data). -/
+product data. Their canonicity is specified by DerivedAction, never chosen from existence. -/
 structure DerivedActionData
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]
@@ -211,8 +211,7 @@ structure DerivedActionData
     (derivedLine.{u, v, w, z} R L ⋙ F.mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ derivedLine.{u, v, w, z} S M)
 
-/-- The termwise square required of a derived action.
-Source: Stacks 07A4 (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- The termwise square required of a derived action. -/
 def DerivedActionSquare
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]
@@ -230,8 +229,7 @@ def DerivedActionSquare
           (((siteSheafTensorRight L).mapHomologicalComplex (.up ℤ)).obj E) ≫
         DerivedCategory.Q.map ((NatIso.mapHomologicalComplex γ (.up ℤ)).hom.app E))
 
-/-- The uniqueness clause for a derived action, with the same displayed type.
-Source: Stacks 07A4 (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- The uniqueness clause for a derived action, with the same displayed type. -/
 def DerivedActionUnique
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]
@@ -254,8 +252,7 @@ def DerivedActionUnique
 
 /-- A derived action pinned on every complex by the ordinary tensor comparison.
 The resolving comparisons are the published ones, including their collapse to one-term
-line factors. Source: Stacks 06YU, 07A4 and 015F
-(blueprint: def-pur-signed-line-derived-action-data). -/
+line factors. -/
 def DerivedAction
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]
@@ -279,9 +276,7 @@ def DerivedAction
 
 attribute [local irreducible] DerivedAction
 
-/-- Canonical ordinary unit, positive associators and evaluations of signed powers.
-Source: Stacks 03EL and 0FNY.
-(blueprint: def-pur-signed-line-ordinary-constraint-data). -/
+/-- Canonical ordinary unit, positive associators and evaluations of signed powers. -/
 def OrdinaryLineConstraints (A : Sheaf J CommRingCat.{max u v w})
     (P : KFlatFixedTensor.Modules A)
     (ordinaryUnit : siteSheafTensorRight (signedLinePower.{u, v, w} P 0) ≅ 𝟭 _)
@@ -320,8 +315,7 @@ universe ga gha gd ghd ge ghe
 variable {A₀ : Type ga} [Category.{gha} A₀] [HasZeroMorphisms A₀]
   {D₀ : Type gd} [Category.{ghd} D₀]
 
-/-- Localization-normalized constraints, with the ordinary predicate as a parameter.
-Source: Stacks 07A4 (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- Localization-normalized constraints, with the ordinary predicate as a parameter. -/
 inductive LocalizedLineConstraints
     (Q : CochainComplex A₀ ℤ ⥤ D₀)
     (r : ℤ → A₀ ⥤ A₀) [∀ i, (r i).PreservesZeroMorphisms]
@@ -353,8 +347,7 @@ inductive LocalizedLineConstraints
 
 variable {E₀ : Type ge} [Category.{ghe} E₀]
 
-/-- The three comparison equations, with the two constraint predicates as parameters.
-Source: Stacks 07A4 (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- The three comparison equations, with the two constraint predicates as parameters. -/
 inductive LocalizedLineFamily
     (d : ℤ → D₀ ⥤ D₀) (e : ℤ → E₀ ⥤ E₀) (F : D₀ ⥤ E₀)
     (eta : ∀ i, d i ⋙ F ≅ F ⋙ e i)
@@ -384,12 +377,9 @@ end GenericLineConstraints
 
 /-- Right unit, positive-power associator and negative-positive evaluation constraints.
 The ordinary constraints are specified on all local pure tensors. The derived constraints
-are specified after localization using c; c itself is fixed by representativeIso and
-collapse in DerivedAction. Thus these are the canonical constraints, with no arbitrary
-monoidal structure or map selected. The positive constraint is the associator followed
-by the one-term identification of the next power, and evaluation contracts the last two
-factors. Source: Stacks 03EK, 04TT, 06YU and 07A4
-(blueprint: def-pur-signed-line-derived-action-data). -/
+are specified after localization using `c`; `c` itself is fixed by `representativeIso` and
+collapse in `DerivedAction`. The positive constraint is the associator followed by the
+one-term identification of the next power, and evaluation contracts the last two factors. -/
 def DerivedLineConstraints (A : Sheaf J CommRingCat.{max u v w})
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules A)]
     (P : KFlatFixedTensor.Modules A)
@@ -410,8 +400,7 @@ def DerivedLineConstraints (A : Sheaf J CommRingCat.{max u v w})
     (OrdinaryLineConstraints A P) c rightUnitor product evaluation
 
 /-- The simultaneous unit, positive-power and evaluation equations for the same eta family
-whose components are fixed in DerivedAction. Source: Stacks 07A4; blueprint Powers and duals
-(blueprint: def-pur-signed-line-derived-action-data). -/
+whose components are fixed in DerivedAction. -/
 def DerivedFamilyCoherence
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]
@@ -434,8 +423,7 @@ variable
   (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
   (t : (pull a).obj P ≅ Q)
 
-/-- Naturality in isomorphisms of the two line data. Negative powers use inverse dual maps.
-Source: Stacks 03EL, 0GMX (blueprint: def-pur-signed-line-derived-action-data). -/
+/-- Naturality in isomorphisms of the two line data. Negative powers use inverse dual maps. -/
 def IsoNaturality
     (T : ∀ d : ℤ, (pull a).obj (signedLinePower.{u, v, w} P d) ≅
       signedLinePower.{u, v, w} Q d) : Prop :=
@@ -453,9 +441,7 @@ attribute [local irreducible] IsoNaturality
 /-- Naturality in arbitrary coefficient extensions compatible with the structural isomorphism.
 The existing scalar-power identifications and scalar/pullback square specify the canonical
 balanced-tensor comparison; no arbitrary comparison is assumed. Degree-one compatibility
-is exactly the assertion that t' is induced from t. No flatness of either ring map occurs.
-Source: Stacks 03EL, 0GMX, 0FNY
-(blueprint: def-pur-signed-line-derived-action-data). -/
+is exactly the assertion that t' is induced from t. No flatness of either ring map occurs. -/
 def ScalarNaturality
     [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
     [∀ V : D, (K.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]

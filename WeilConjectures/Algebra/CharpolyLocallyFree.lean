@@ -14,8 +14,16 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.Charpoly.BaseChange
 import Mathlib.Algebra.Ring.ULift
 
-/-! # Characteristic polynomial of a locally free module
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 09XI
+/-!
+# Characteristic polynomial of a locally free module
+
+Existence and uniqueness of the characteristic polynomial of an endomorphism of a finite locally
+free module, defined by gluing local characteristic polynomials on a standard localization cover.
+
+## References
+
+* Stacks Project, Tag 09XI (proof of (3)⇒(1), last paragraph)
+* Stacks Project, Tag 00EJ
 -/
 
 @[expose] public section
@@ -44,17 +52,7 @@ private theorem charpoly_tower
   change (L.symm.conj (φ.baseChange T)).charpoly = _
   exact LinearEquiv.charpoly_conj _ _
 
-/-- Local characteristic polynomials agree on overlaps of the standard cover.
-Source: Stacks Tag 09XI, proof of (3)⇒(1), last paragraph.
-Proof: in A[1/(ab)], both a and b are units. Factor the map from A through
-A[1/a] and A[1/b]. Base change the given bases along these factorizations.
-Tensor-product cancellation identifies both resulting free modules with
-A[1/(ab)] ⊗ M and both endomorphisms with the scalar extension of φ.
-Scalar-extension compatibility of the free characteristic polynomial identifies
-each mapped local polynomial with the characteristic polynomial in the
-corresponding transported basis. Basis independence makes these equal.
-This proof also holds for zero rings, a = b, and rank zero.
--/
+/-- Local characteristic polynomials agree on overlaps of the standard cover. -/
 private theorem charpoly_standardCover_overlap
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
     {n r : ℕ} (f : Fin r → A)
@@ -98,18 +96,7 @@ private theorem charpoly_standardCover_overlap
           (S := Localization.Away c.val) (P := T) c.val a.val x).symm
       exact (charpoly_tower (b c) e φ).symm
 
-/-- Glue the characteristic polynomials on a standard localization cover.
-Source: Stacks Tag 09XI, proof of (3)⇒(1), last paragraph; Tag 00EJ.
-Proof: compare the two local matrices after scalar extension to A[1/(fᵢfⱼ)].
-The tensor-product cancellation equivalence identifies both endomorphisms;
-basis invariance and scalar-extension compatibility of the free characteristic
-polynomial show that the polynomials agree on overlaps. For each k < n, glue
-their k-th coefficients uniquely by Tag 00EJ. The coefficients at n are all 1
-and those above n all vanish, by the matrix characteristic-polynomial formula.
-Thus X^n plus the sum of the glued lower coefficients has exactly the required
-images, by coefficientwise equality. This also works for n = 0 and for the
-empty cover, which forces the base ring to be zero.
--/
+/-- Glue the characteristic polynomials on a standard localization cover. -/
 private theorem charpoly_standardCover_glue
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
     {n r : ℕ} (f : Fin r → A)
@@ -155,20 +142,7 @@ private theorem charpoly_standardCover_glue
   simp only [Polynomial.map_add, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_sum,
     Polynomial.map_mul, Polynomial.map_C, hc]
 
-/-- The scalar-extension property is equivalent to its identities on a standard cover.
-Source: Stacks Tag 09XI, proof of (3)⇒(1), last paragraph, and Tag 00EJ.
-Proof: in the forward direction apply the scalar-extension property to the
-localization at each fᵢ, lifted to Type (max u w) by ULift. Transport the given
-basis along scalar lifting and descend the polynomial equality along the
-injective ULift ring equivalence. In the reverse direction fix A → A′ and a
-basis of A′ ⊗ M. The images of fᵢ still span the unit ideal. Localize A′ at each
-image of fᵢ. Factor A → A′[1/fᵢ] through A[1/fᵢ]. Tensor-product cancellation
-identifies the scalar extensions of both endomorphisms. Basis independence
-and scalar-extension compatibility of matrix characteristic polynomials give
-the desired equality in each such localization. Injectivity of the standard
-cover, applied to every coefficient, gives equality over A′. Neither argument
-requires a nonzero ring or a positive rank.
--/
+/-- The scalar-extension property is equivalent to its identities on a standard cover. -/
 private theorem charpoly_standardCover_comparison
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
     {n r : ℕ} (f : Fin r → A)
@@ -249,30 +223,7 @@ private theorem charpoly_standardCover_comparison
 
 
 set_option linter.unusedVariables false in
-/-- Existence and uniqueness of the characteristic polynomial on a finite locally free module.
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 09XI, proof of (3)⇒(1).
-1. Use `lem-weil-pbc-localization-module-tensor` to identify each localized endomorphism
-with scalar extension. In a local basis take its matrix characteristic polynomial
-(`def-weil-pbc-charpoly-free-module`); basis independence and the monic expansion follow
-from `lem-weil-pbc-charpoly-free-module-properties` (a), (c).
-2. For any ring map inverting a cover element, factor through its localization and use
-`lem-weil-pbc-module-base-change-transitive` and the localization-tensor comparison.
-Naturality and free characteristic-polynomial properties (b), (d) identify the resulting
-characteristic polynomial with the image of the local one.
-3. Apply this comparison twice over the localization at the product of two cover elements.
-The two local polynomials agree there, hence so do all their coefficients.
-4. Glue each coefficient uniquely by `lem-weil-pbc-standard-covering-glue` (ii).
-Uniqueness forces coefficients above n to vanish and the coefficient at n to be one.
-These coefficients define the displayed polynomial, restricting to every local polynomial.
-5. After any base change where the module is free, the images of the cover elements still
-generate the unit ideal. Over their localizations, transitive base change and free
-characteristic-polynomial properties compare both polynomials with the local ones.
-Coefficientwise injectivity in `lem-weil-pbc-standard-covering-glue` (i) gives equality.
-6. Any other polynomial with the base-change property restricts to the same local
-polynomials. Apply the same coefficientwise injectivity to obtain uniqueness.
-7. In the free case take the identity ring map, identify scalar extension with the original
-module, and use free characteristic-polynomial properties (b) to obtain the usual polynomial.
--/
+/-- Existence and uniqueness of the characteristic polynomial on a finite locally free module. -/
 theorem charpoly_locallyFree_exists_unique
     {A : Type u} {M : Type v} [CommRing A] [AddCommGroup M] [Module A M]
     {n r : ℕ} (f : Fin r → A)

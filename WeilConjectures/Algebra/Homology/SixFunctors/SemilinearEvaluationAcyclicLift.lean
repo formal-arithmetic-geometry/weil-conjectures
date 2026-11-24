@@ -114,6 +114,10 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 Evaluation at one level admits acyclic lifts, obtained by restriction of scalars above
 that level and zero below it. This tests K-flatness without requiring flat terms.
+
+## References
+
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -384,17 +388,7 @@ private def semilinearEvaluationIso :
     rw [ObjectProperty.eqToHom_hom, eqToHom_app]
     rfl)
 
-/-- Every acyclic complex at one coefficient level lifts to an acyclic sequence complex.
-Source: Zheng, Construction 4.1, with the elementary right extension at a vertex
-(blueprint: lem-coef-semilinear-evaluation-acyclic-lift).
-Proof: at level k at least n use restriction of scalars from B_n to B_k; below n use
-zero. Above n the transitions are the identity on sections, and all other transitions
-are zero. Restriction of scalars is exact, so each level complex is acyclic. Exactness
-of strict systems is componentwise, hence the whole complex is acyclic. Transport it
-through the equivalence with modules on the sequence site. Evaluation at n recovers
-the original complex by restriction along the identity ring map. The unit of the
-sequence equivalence and the sectionwise identity of the two evaluation functors give
-the displayed isomorphism. This includes n = 0 and the zero complex. -/
+/-- Every acyclic complex at one coefficient level lifts to an acyclic sequence complex. -/
 theorem semilinearEvaluation_acyclicLift
     (Z : CochainComplex (WeilConjectures.SemilinearSections.Mod J (A n)) ℤ)
     (hZ : Z.Acyclic) :

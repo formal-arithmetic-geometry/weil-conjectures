@@ -16,8 +16,9 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # Subquotients and cycle notation for filtered cochain complexes
 
-Source: Stacks Project, Homology, Section 12.24 (Tag 012K), displayed cycle and boundary
-formulas (blueprint: def-sp-filtered-complex-subquotients).
+## References
+
+* Stacks Project, Homology, Section 12.24 (Tag 012K), displayed cycle and boundary formulas
 -/
 
 @[expose] public section
@@ -31,24 +32,20 @@ namespace CategoryTheory.DecreasingFiltration
 variable {C : Type u} [Category.{v} C] [Abelian C]
 variable {K : CochainComplex C ℤ} (F : DecreasingFiltration K)
 
-/-- The degreewise filtration step is the image of the subcomplex inclusion in degree `n`.
-Source: Stacks, Tag 012K (blueprint: def-sp-filtered-complex-subquotients). -/
+/-- The degreewise filtration step is the image of the subcomplex inclusion in degree `n`. -/
 noncomputable def complexStep (p n : ℤ) : Subobject (K.X n) :=
   imageSubobject ((F.step p).arrow.f n)
 
-/-- The quotient complex `FᵃK / FᵇK`, for `a ≤ b`, is the cokernel of the inclusion.
-Source: Stacks, Tag 012K (blueprint: def-sp-filtered-complex-subquotients). -/
+/-- The quotient complex `FᵃK / FᵇK`, for `a ≤ b`, is the cokernel of the inclusion. -/
 noncomputable def complexQuotient (a b : ℤ) (h : a ≤ b) : CochainComplex C ℤ :=
   cokernel (Subobject.ofLE (F.step b) (F.step a) (F.antitone_step h))
 
-/-- The canonical projection to the quotient complex.
-Source: Stacks, Tag 012K (blueprint: def-sp-filtered-complex-subquotients). -/
+/-- The canonical projection to the quotient complex. -/
 noncomputable def complexQuotientπ (a b : ℤ) (h : a ≤ b) :
     (F.step a : CochainComplex C ℤ) ⟶ F.complexQuotient a b h :=
   cokernel.π (Subobject.ofLE (F.step b) (F.step a) (F.antitone_step h))
 
-/-- The unquotiented cycles inside `FᵖKⁿ`: intersection with the inverse image of `Fᵖ⁺ʳ`.
-Source: Stacks, Tag 012K (blueprint: def-sp-filtered-complex-subquotients). -/
+/-- The unquotiented cycles inside `FᵖKⁿ`: intersection with the inverse image of `Fᵖ⁺ʳ`. -/
 noncomputable def complexCycleRepresentatives (p n r : ℤ) :
     Subobject ((F.step p : CochainComplex C ℤ).X n) :=
   (Subobject.pullback ((F.step p).arrow.f n)).obj
@@ -56,8 +53,8 @@ noncomputable def complexCycleRepresentatives (p n r : ℤ) :
       (F.complexStep (p + r) (n + 1)))
 
 /-- Cycles as a subobject of `grᵖKⁿ`: add `Fᵖ⁺¹`, restrict to `Fᵖ`, and take its image
-under the graded projection. Source: Stacks, Tag 012K
-(blueprint: def-sp-filtered-complex-subquotients). -/
+under the graded projection.
+-/
 noncomputable def complexCycles (p n r : ℤ) :
     Subobject ((F.gradedPiece p).X n) :=
   (Subobject.«exists»
@@ -67,8 +64,8 @@ noncomputable def complexCycles (p n r : ℤ) :
         (F.complexStep (p + r) (n + 1))) ⊔ F.complexStep (p + 1) n))
 
 /-- Boundaries as a subobject of `grᵖKⁿ`: intersect `Fᵖ` with the image of `d(Fᵖ⁻ʳ⁺¹)`,
-add `Fᵖ⁺¹`, restrict to `Fᵖ`, and project. Source: Stacks, Tag 012K
-(blueprint: def-sp-filtered-complex-subquotients). -/
+add `Fᵖ⁺¹`, restrict to `Fᵖ`, and project.
+-/
 noncomputable def complexBoundaries (p n r : ℤ) :
     Subobject ((F.gradedPiece p).X n) :=
   (Subobject.«exists»

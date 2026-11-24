@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoOrdinaryCo
 
 /-! # Transport of base-derived tensor models along quasi-isomorphisms
 
-Source: Stacks Project, More on Algebra, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-comparison).
+## References
+
+* Stacks Project, More on Algebra, Tags 06Y6 and 08IB.
 -/
 
 @[expose] public section
@@ -32,28 +33,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- Transport the tensor-algebra cohomology and its localized counit comparison.
-
-Proof: restriction of scalars preserves homology, so the restricted quasi-isomorphism
-is invertible in D(R). The universal left-derived property identifies the derived
-functors of the two models by a unique natural isomorphism compatible with their
-counits. Apply cohomology to the restricted map and this isomorphism, and conjugate
-by the two cohomologyIso maps. This is a B-linear isomorphism. Naturality for the
-endomorphism a times the identity, together with cohomologyIso_smul, says that it
-commutes with multiplication by a tensor 1. B-linearity says the same for 1 tensor b.
-Tensor induction then makes it A-tensor-R-B-linear; its inverse is linear too.
-Call the resulting isomorphism e. Naturality of the universal counits and the
-homology comparison isomorphisms gives the ordinary comparison square using
-comparison_eq. The ordinaryIso generator equations identify their conjugated
-termwise maps: both send b tensor q to (1 tensor b) tensor s(q).
-The ordinaryToLocalized generator equations similarly give a commuting chain-map
-square: both routes send t tensor q to the image of t tensor s(q). Apply homology
-and compose with the ordinary comparison square. Finally transpose along the
-extension/restriction adjunction. Naturality of its unit and localized_eq identify
-the two transposes, hence give the asserted localized square. This does not claim
-that ordinary extension of the quasi-isomorphism is invertible.
-Source: Stacks Project, Tags 06Y6 and 08IB, and perfect.tex, equation-bc before Tag 0DJ8.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-comparison). -/
+/-- Transport the tensor-algebra cohomology and its localized counit comparison. -/
 theorem exists_baseDerivedTensorModel_quasiIso_comparison
     {P G : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ G) (hs : QuasiIso s)
     (MP : BaseDerivedTensorCohomologyModel R A B P D)

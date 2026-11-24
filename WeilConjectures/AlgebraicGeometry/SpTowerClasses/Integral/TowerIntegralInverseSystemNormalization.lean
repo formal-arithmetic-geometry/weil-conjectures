@@ -13,7 +13,10 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Integral.TowerIntegralUn
 
 /-! # Normalization of integral ordinary inverse systems
 
-Source: blueprint classes proof (2), integral reduction.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -23,25 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
-/-- The ordinary inverse-system construction has its underlying abelian and unit comparisons.
-Source: blueprint latest, classes proof (2), integral reduction, and Zheng Construction 4.1.
-(blueprint: lem-sp-tower-integral-inverse-system-normalization).
-
-Proof: at each level, the moduleUnderlying comparison of I identifies the underlying set
-sheaf with inverse image. Its moduleAdd and moduleZero graph equations lift this to the
-abelian inverse image. Compose with the component comparison of P and the evaluation
-identifications supplied by each Forget. Naturality in module morphisms gives naturality
-in the system. The transition equation of P and restriction_underlying identify the two
-horizontal arrows, so these level comparisons assemble into a whole-tower isomorphism e.
-The coefficient module is the ring with its multiplication action. The ringUnderlying
-comparison, with ringAdd, ringMul, ringZero and ringOne, identifies its inverse image with
-the coefficient module on X; moduleSMul makes this identification linear. The same
-transition equation assembles it into i. On constant integer sections the composite of
-e and i sends z to z: ringOne handles 1, ringAdd and ringZero handle all integers. The
-adjunction defining integerPull and the section formula defining integerGenerator then
-give the displayed normalization. Sheafification extends these identities from constant
-sections, which locally generate the constant integral quotient sheaves. No geometric
-invertibility assumption or Chern datum is needed for these comparisons. -/
+/-- The ordinary inverse-system construction has its underlying abelian and unit comparisons. -/
 theorem integralInverseSystem_normalization (l : ℕ) [Fact l.Prime]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (I : ∀ n : ℕ, SheafOfModules.AlgebraicInverseImage

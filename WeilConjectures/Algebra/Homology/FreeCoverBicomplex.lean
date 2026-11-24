@@ -17,8 +17,10 @@ import WeilConjectures.Algebra.Homology.FreeCoverColumns
 /-!
 # An exact bicomplex of free two-step covers
 
-Source: Stacks Project, Tag 09KP, construction of the resolution and total augmentation.
-(blueprint: lem-pc-derived-free-cover-bicomplex)
+## References
+
+* Stacks Project, Tag 09KP
+* Stacks Project, Tag 09KN
 -/
 
 @[expose] public section
@@ -93,31 +95,7 @@ private theorem totalAugmentation {A : Type u} [CommRing A]
     exact (K.ι_totalDesc _ _ _ _).trans (hcn p q n (by omega) h)
 
 set_option linter.unusedVariables false in
-/-- Iteration of the free-complex cover, followed by direct-sum totalization.
-Source: Stacks Project, Differential Graded Algebra, Tag 09KP, proof, construction
-of the resolution and its augmentation (using Tag 09KN).
-(blueprint: lem-pc-derived-free-cover-bicomplex)
-
-Proof. Starting at `N₀ = M`, choose the cover `Pᵢ → Nᵢ` of Tag 09KN and set
-`Nᵢ₊₁` equal to its kernel. Define `Pᵢ₊₁ → Pᵢ` as the cover of `Nᵢ₊₁` followed
-by the kernel inclusion. These maps compose to zero. They are exact in each
-module degree since the covers are surjective and their kernels are the chosen
-`Nᵢ₊₁`. They are also exact on cycles: a cycle mapping to zero factors uniquely
-through the kernel complex, is a cycle there since its inclusion is injective,
-and lifts to a cycle of the next cover by the cocycle-surjectivity clause of 09KN.
-The same argument proves exactness at `P₀`, and 09KN gives surjectivity of both
-augmented rows at `M`.
-
-Put `Pᵢ` in column `-i`, and zero in positive columns. The horizontal maps are
-the maps just constructed; they commute with the vertical differentials because
-they are maps of complexes. This gives `K`. Module categories have the direct
-sums defining its total complex. On each diagonal define the augmentation by
-the cover `P₀ → M` on column zero and zero on negative columns. The horizontal
-boundary from column `-1` is killed by this cover; in column zero the vertical
-sign is one. Thus these component maps commute with differentials and give `ε`.
-Finally retain the split short exact sequence and the two free graded pieces
-provided by 09KN for each `Pᵢ`; their middle objects identify with `K.X (-i)`.
--/
+/-- Iteration of the free-complex cover, followed by direct-sum totalization. -/
 theorem exists_freeCoverBicomplex {A : Type u} [CommRing A]
     (M : CochainComplex (ModuleCat.{u} A) ℤ) :
     ∃ K : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ),

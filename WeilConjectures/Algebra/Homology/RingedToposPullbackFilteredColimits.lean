@@ -15,13 +15,14 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-! # Filtered colimits of the specified ringed-topos module pullback
 
-Source: Stacks Project, Modules on Sites, Tag 03D7,
-lemma-adjoint-pullback-pushforward-modules.
-(auxiliary; not a blueprint node).
-
 The scalar-extension Hom equivalence generalizes the private construction in
-ModulePullbackPushforwardAdjunction to independent site and coefficient universes.
-The inverse-image argument uses only the supplied natural underlying-sheaf isomorphism. -/
+`ModulePullbackPushforwardAdjunction` to independent site and coefficient universes.
+The inverse-image argument uses only the supplied natural underlying-sheaf isomorphism.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D7 and 03EP
+-/
 
 @[expose] public section
 universe u v w uD vD uC vC
@@ -262,11 +263,7 @@ private noncomputable def tensorAdjunction
           Equiv.apply_symm_apply]
       homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
 
-/-- Extension of scalars, specified on both objects and maps, preserves colimits.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03EP.
-The tensor/restriction adjunction gives preservation for its tensor functor;
-the two specifications give a natural isomorphism to E.
-(auxiliary; not a blueprint node). -/
+/-- Extension of scalars, specified on both objects and maps, preserves colimits. -/
 theorem preservesColimits_specifiedChangeOfRings
     {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]
     {K : GrothendieckTopology D} {A S : Sheaf K CommRingCat.{w}} (c : A ⟶ S)
@@ -289,26 +286,7 @@ theorem preservesColimits_specifiedChangeOfRings
       simp)
   exact preservesColimits_of_natIso e
 
-/-- The specified algebraic module pullback preserves coefficient-sized filtered colimits.
-Source: Stacks Project, Modules on Sites, Tag 03D7,
-lemma-adjoint-pullback-pushforward-modules, and Tag 03EP.
-(auxiliary; not a blueprint node).
-
-Proof: forgetting module sheaves to sheaves of abelian groups preserves colimits, by
-module sheafification. Forgetting abelian sheaves to sheaves of sets preserves filtered
-colimits: the analogous presheaf functor does, and it commutes with sheafification.
-Transport sheafification compatibility from the small model of the site in universe w.
-The composite forgetful functor reflects isomorphisms and thus reflects these colimits.
-The natural isomorphism I.moduleUnderlying and the adjunction uInv ⊣ uPush now show
-that I.modules preserves filtered colimits.
-
-Scalar extension is left adjoint to restriction of scalars. Sectionwise the Hom
-bijection sends f to (m ↦ f (1 tensor m)), with inverse (s tensor m ↦ s times g(m)).
-Naturality of module maps and the formula for tensor restrictions make these maps
-presheaf morphisms. Sheafification extends this bijection to sheaves. The two naturality
-identities give the adjunction, so scalar extension preserves all colimits. Finally,
-hobj and hmap give a natural isomorphism between uStar and its presentation as the
-composite of I.modules with scalar extension. Transfer preservation along that isomorphism. -/
+/-- The specified algebraic module pullback preserves coefficient-sized filtered colimits. -/
 theorem preservesFilteredColimits_ringedToposPullback
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]

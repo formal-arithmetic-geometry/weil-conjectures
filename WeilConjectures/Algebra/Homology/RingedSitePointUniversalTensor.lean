@@ -15,7 +15,13 @@ import WeilConjectures.Algebra.Homology.RingedSitePointExact
 import WeilConjectures.Algebra.Homology.RingedSitePointFinitePresentationRetract
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
-/-! # Finite module tests for a universally tensor-acyclic complex at a point -/
+/-!
+# Finite module tests for a universally tensor-acyclic complex at a point
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0DEN, proof of (1)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,20 +29,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.RingedSitePoint
 
-/-- Universal tensor acyclicity descends to finite module tests at a topos point.
-Source: Stacks Project, Cohomology on Sites, Tag 0DEN, proof of (1), the argument
-with a finitely presented module; here replaced by a universal matrix retract.
-(auxiliary; not a blueprint node)
-
-Proof: realize the finitely presented module M as a retract of s.modules(F)
-for a global module sheaf F, by the universal finite matrix construction.
-The hypothesis applied to F[0] gives an acyclic source tensor. Exact stalks
-and their signed total tensor comparison identify its stalk with F_p[0]
-tensor E_p. The single-degree comparison and signed symmetry identify this
-with E_p tensor F_p[0]. Applying the tensor functor to the module retract
-and then applying homology exhibits each homology of E_p tensor M[0] as a
-retract of zero. Such a retract has zero identity and is zero. No condition
-on a site's chosen precoverage, boundedness, or flatness of terms is used. -/
+/-- Universal tensor acyclicity descends to finite module tests at a topos point. -/
 theorem acyclic_tensor_finitePresentation
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C}

@@ -150,9 +150,7 @@ lemma total_map_columnsGEMap_comp (p : ℤ) :
 
 /-- The **first filtration** of the total complex of a double complex `K`: `Fᵖ Tot K` is the
 total complex of the double complex `K^{≥ p, •}` of the columns of index `≥ p`, that is
-`Fᵖ (Tot K)ⁿ = ⨁_{i ≥ p} K^{i, n - i}`. It is a filtration by subcomplexes.
-
-(blueprint: `def-sp-double-complex-total`, `det-def-groth-ss`) -/
+`Fᵖ (Tot K)ⁿ = ⨁_{i ≥ p} K^{i, n - i}`. It is a filtration by subcomplexes. -/
 noncomputable def columnFiltration : DecreasingFiltration (K.total (up ℤ)) where
   F p := Subobject.mk (K.totalιColumnsGE p)
   F_succ_le p := Subobject.mk_le_mk_of_comm (total.map (K.columnsGEMap p) (up ℤ))
@@ -534,9 +532,7 @@ noncomputable def columnFiltrationE₁Iso (p q n : ℤ) (hn : p + q = n) :
 /-- **The differential `d₁` of the first spectral sequence of a double complex.** Under the
 identifications `E₁^{p, p + q} ≅ H^q(K^{p, •})`, the differential
 `d₁ : E₁^{p, p + q} ⟶ E₁^{p + 1, p + q + 1}` of the spectral sequence of the column filtration
-is the morphism `H^q(K^{p, •}) ⟶ H^q(K^{p + 1, •})` induced by the horizontal differential `d_I`.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+is the morphism `H^q(K^{p, •}) ⟶ H^q(K^{p + 1, •})` induced by the horizontal differential `d_I`. -/
 theorem columnFiltrationE₁Iso_d (p q n n' : ℤ) (hn : p + q = n) (hn' : p + 1 + q = n') :
     (K.columnFiltrationE₁Iso p q n hn).inv ≫ K.columnFiltration.exactCouple.d (p, n) (p + 1, n') ≫
       (K.columnFiltrationE₁Iso (p + 1) q n' hn').hom =
@@ -632,9 +628,7 @@ lemma isZero_columnFiltration_piece_X (p n : ℤ) (hp : n < p) :
 /-- **Convergence of the first spectral sequence of a first quadrant double complex.** The
 spectral sequence of the column filtration of the total complex of a double complex `K`
 concentrated in the first quadrant converges to the cohomology of `Tot K`, with the filtration
-`Fᵖ Hⁿ(Tot K) = im (Hⁿ(Fᵖ Tot K) ⟶ Hⁿ(Tot K))`.
-
-(blueprint: `thm-sp-double-complex-spectral-sequences`) -/
+`Fᵖ Hⁿ(Tot K) = im (Hⁿ(Fᵖ Tot K) ⟶ Hⁿ(Tot K))`. -/
 theorem columnFiltration_convergesTo :
     K.columnFiltration.exactCouple.ConvergesTo K.columnFiltration.toHomology
       K.columnFiltration.homologyFiltration :=

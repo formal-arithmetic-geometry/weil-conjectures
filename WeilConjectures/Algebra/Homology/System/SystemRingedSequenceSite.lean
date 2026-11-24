@@ -11,7 +11,11 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # The ringed sequence site of an arbitrary coefficient system
 
-Source: Zheng, Construction 4.1; Stacks 03DA, 03DB and 06YS.
+## References
+
+* Stacks Project, Tags 03CZ, 03DA, 03DB, 06YS
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +33,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- The sequence site is essentially small in the coefficient universe.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The sequence site is essentially small in the coefficient universe. -/
 instance systemSequenceEssentiallySmall : EssentiallySmall.{w} (ℕ × C) :=
   EssentiallySmall.mk'
     ((AsSmall.equiv : ℕ ≌ AsSmall.{w} ℕ).prod (equivSmallModel.{w} C))
@@ -83,16 +86,12 @@ private theorem sequence_uncurry_slice {D : Type z} [Category.{zv} D]
   rw [F.map_id]
   simp
 
-/-- The coefficient ring on the product category, with the actual iterated maps of B.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The coefficient ring on the product category, with the actual iterated maps of B. -/
 def systemSequenceRingPresheaf : (ℕ × C)ᵒᵖ ⥤ CommRingCat.{w} :=
   (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
     Functor.uncurry.obj (B ⋙ sheafToPresheaf J CommRingCat.{w})
 
-/-- Vertical covers glue in each ring sheaf B_n.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site).
-Proof: restrict a covering to its vertical slice and glue in B_n. Separatedness
-on the pulled-back covering verifies compatibility with the horizontal maps. -/
+/-- Vertical covers glue in each ring sheaf B_n. -/
 theorem systemSequenceRingPresheaf_isSheaf :
     Presheaf.IsSheaf (coefficientSequenceTopology J) (systemSequenceRingPresheaf B) := by
   intro A
@@ -102,15 +101,11 @@ theorem systemSequenceRingPresheaf_isSheaf :
   rw [← Functor.assoc, sequence_uncurry_slice]
   exact (B.obj (op n)).property A
 
-/-- The sheaf of rings whose restriction to level n is B_n.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The sheaf of rings whose restriction to level n is B_n. -/
 def systemSequenceRing : Sheaf (coefficientSequenceTopology J) CommRingCat.{w} :=
   ⟨systemSequenceRingPresheaf B, systemSequenceRingPresheaf_isSheaf B⟩
 
-/-- Forgetting commutativity preserves sheaves on the essentially small sequence site.
-Source: Stacks 03CZ (blueprint: lem-pur-system-ringed-sequence-site).
-Proof: transport the limit-preserving forgetful functor from a small model of the site
-in the coefficient universe. -/
+/-- Forgetting commutativity preserves sheaves on the essentially small sequence site. -/
 instance systemSequenceCommRingCompose :
     (coefficientSequenceTopology J).HasSheafCompose
       (forget₂ CommRingCat.{w} RingCat.{w}) :=
@@ -118,14 +113,12 @@ instance systemSequenceCommRingCompose :
     ((equivSmallModel.{w} (ℕ × C)).inverse.inducedTopology (coefficientSequenceTopology J))
     (forget₂ CommRingCat.{w} RingCat.{w})
 
-/-- Module sheaves on the actual ringed sequence site.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- Module sheaves on the actual ringed sequence site. -/
 abbrev systemSequenceModules := ringedSiteModules.{w}
   (derivedChangeRingIndependentCoefficients.{w}
     (coefficientSequenceTopology J) (systemSequenceRing B))
 
-/-- Forgetting scalar structures turns a strict system into a sequence of abelian presheaves.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- Forgetting scalar structures turns a strict system into a sequence of abelian presheaves. -/
 def systemAbelianPresheafSequence (M : StrictRingSystem B) :
     ℕᵒᵖ ⥤ Cᵒᵖ ⥤ AddCommGrpCat.{w} where
   obj n := (M.level n.unop).val.presheaf
@@ -143,15 +136,13 @@ def systemAbelianPresheafSequence (M : StrictRingSystem B) :
     ext U x
     exact M.compose (leOfHom g.unop) (leOfHom f.unop) U x
 
-/-- The abelian presheaf underlying the associated sheaf on the sequence site.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The abelian presheaf underlying the associated sheaf on the sequence site. -/
 def systemSequenceAbelianPresheaf (M : StrictRingSystem B) :
     (ℕ × C)ᵒᵖ ⥤ AddCommGrpCat.{w} :=
   (prodOpEquiv (C := ℕ) (D := C)).functor ⋙
     Functor.uncurry.obj (systemAbelianPresheafSequence B M)
 
-/-- The associated module presheaf, using the strict transition and vertical restriction.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The associated module presheaf, using the strict transition and vertical restriction. -/
 def systemSequenceModulePresheaf (M : StrictRingSystem B) :
     PresheafOfModules.{w} (derivedChangeRingIndependentCoefficients.{w}
       (coefficientSequenceTopology J) (systemSequenceRing B)).obj where
@@ -201,10 +192,7 @@ private theorem systemSequenceModulePresheaf_underlying (M : StrictRingSystem B)
   ext x
   rfl
 
-/-- The associated module presheaf satisfies descent.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site).
-Proof: its underlying abelian presheaf is the uncurrying of the component presheaves;
-each vertical slice is a sheaf, so the vertical-slice criterion applies. -/
+/-- The associated module presheaf satisfies descent. -/
 theorem systemSequenceModulePresheaf_isSheaf (M : StrictRingSystem B) :
     Presheaf.IsSheaf (coefficientSequenceTopology J)
       (systemSequenceModulePresheaf B M).presheaf := by
@@ -216,13 +204,11 @@ theorem systemSequenceModulePresheaf_isSheaf (M : StrictRingSystem B) :
   rw [← Functor.assoc, sequence_uncurry_slice]
   exact (M.level n).isSheaf A
 
-/-- Associate a sheaf of modules on the sequence site to a strict semilinear system.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- Associate a sheaf of modules on the sequence site to a strict semilinear system. -/
 def strictSystemToSequence (M : StrictRingSystem B) : systemSequenceModules B :=
   ⟨systemSequenceModulePresheaf B M, systemSequenceModulePresheaf_isSheaf B M⟩
 
-/-- The passage to sequence-site sheaves is functorial, with unchanged component maps.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The passage to sequence-site sheaves is functorial, with unchanged component maps. -/
 def strictSystemToSequenceFunctor : StrictRingSystem B ⥤ systemSequenceModules B where
   obj := strictSystemToSequence B
   map {M N} f := ⟨{
@@ -241,11 +227,7 @@ def strictSystemToSequenceFunctor : StrictRingSystem B ⥤ systemSequenceModules
         (congrArg (fun t ↦ t.val.app (op X.unop.2) x)
           (f.comm (leOfHom g.unop.1))).symm }⟩
 
-/-- The vertical inclusion is continuous for the sequence topology.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site).
-Proof: covering is defined on a vertical slice. For cover preservation, the pullback
-of a pushed-forward sieve contains the original sieve. The cover-lifting compatibility
-condition follows by factoring any two arrows through their vertical components. -/
+/-- The vertical inclusion is continuous for the sequence topology. -/
 instance systemSequenceEvaluationContinuous (n : ℕ) :
     (Prod.sectR n C).IsContinuous J (coefficientSequenceTopology J) := by
   apply Functor.isContinuous_of_coverPreserving
@@ -267,8 +249,7 @@ instance systemSequenceEvaluationContinuous (n : ℕ) :
     change (S.functorPushforward (Prod.sectR n C)).functorPullback (Prod.sectR n C) ∈ J U
     exact J.superset_covering (Sieve.le_functorPushforward_pullback _ S) hS
 
-/-- The structural coefficient map of a vertical slice is the identity on sections.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The structural coefficient map of a vertical slice is the identity on sections. -/
 def systemSequenceVerticalRingMap (n : ℕ) :
     derivedChangeRingIndependentCoefficients J (B.obj (op n)) ⟶
       ((Prod.sectR n C).sheafPushforwardContinuous RingCat.{w}
@@ -285,17 +266,14 @@ def systemSequenceVerticalRingMap (n : ℕ) :
         rw [B.map_id]
         rfl }
 
-/-- Actual restriction of a module sheaf to a vertical slice.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- Actual restriction of a module sheaf to a vertical slice. -/
 def systemSequenceEvaluation (n : ℕ) : systemSequenceModules B ⥤ systemLevel B n :=
   SheafOfModules.pushforward (F := Prod.sectR n C) (systemSequenceVerticalRingMap B n)
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Horizontal restriction of the sequence ring is the specified coefficient map.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site).
-Proof: the vertical component is an identity, so functoriality removes it. -/
+/-- Horizontal restriction of the sequence ring is the specified coefficient map. -/
 theorem systemSequenceRing_horizontal {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) :
     (derivedChangeRingIndependentCoefficients.{w}
       (coefficientSequenceTopology J) (systemSequenceRing B)).obj.map
@@ -307,8 +285,7 @@ theorem systemSequenceRing_horizontal {m n : ℕ} (h : m ≤ n) (U : Cᵒᵖ) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- A horizontal section map, viewed as a linear map after restriction of scalars.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- A horizontal section map, viewed as a linear map after restriction of scalars. -/
 def sequenceSystemTransitionApp (N : systemSequenceModules B) {m n : ℕ} (h : m ≤ n)
     (U : Cᵒᵖ) :
     ((systemSequenceEvaluation B n).obj N).val.obj U ⟶
@@ -324,8 +301,7 @@ def sequenceSystemTransitionApp (N : systemSequenceModules B) {m n : ℕ} (h : m
         rw [hc] at hh
         exact hh }
 
-/-- The horizontal section maps of a sequence-site sheaf form its strict transitions.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The horizontal section maps of a sequence-site sheaf form its strict transitions. -/
 def sequenceSystemTransition (N : systemSequenceModules B) {m n : ℕ} (h : m ≤ n) :
     (systemSequenceEvaluation B n).obj N ⟶
       (systemRestriction B h).obj ((systemSequenceEvaluation B m).obj N) where
@@ -352,8 +328,7 @@ def sequenceSystemTransition (N : systemSequenceModules B) {m n : ℕ} (h : m �
             (N.val.map_comp_apply (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op
               (Prod.mkHom (𝟙 m) f.unop).op x)) }
 
-/-- The vertical evaluations and horizontal maps of a sequence sheaf form a strict system.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The vertical evaluations and horizontal maps of a sequence sheaf form a strict system. -/
 def sequenceToStrictSystem (N : systemSequenceModules B) : StrictRingSystem B where
   level n := (systemSequenceEvaluation B n).obj N
   transition h := sequenceSystemTransition B N h
@@ -377,8 +352,7 @@ def sequenceToStrictSystem (N : systemSequenceModules B) : StrictRingSystem B wh
       (N.val.map_comp_apply (Prod.mkHom (homOfLE k) (𝟙 U.unop)).op
         (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x)
 
-/-- Restrict sequence-site sheaves and their maps to all vertical slices.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- Restrict sequence-site sheaves and their maps to all vertical slices. -/
 def sequenceToStrictSystemFunctor : systemSequenceModules B ⥤ StrictRingSystem B where
   obj := sequenceToStrictSystem B
   map {M N} f :=
@@ -398,8 +372,7 @@ def sequenceToStrictSystemFunctor : systemSequenceModules B ⥤ StrictRingSystem
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- On a vertical slice the round trip has the identity section isomorphism.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- On a vertical slice the round trip has the identity section isomorphism. -/
 def strictSystemSequenceUnitLevel (M : StrictRingSystem B) (n : ℕ) :
     M.level n ≅ (sequenceToStrictSystem B (strictSystemToSequence B M)).level n :=
   (fullyFaithfulForget _).preimageIso (PresheafOfModules.isoMk
@@ -411,8 +384,7 @@ def strictSystemSequenceUnitLevel (M : StrictRingSystem B) (n : ℕ) :
       exact congrArg (fun y : (M.level n).val.obj U ↦ (M.level n).val.map f y)
         (M.identity n U x).symm))
 
-/-- The round trip from strict systems is naturally the identity on every section.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- The round trip from strict systems is naturally the identity on every section. -/
 def strictSystemSequenceUnit :
     𝟭 (StrictRingSystem B) ≅ strictSystemToSequenceFunctor B ⋙ sequenceToStrictSystemFunctor B :=
   NatIso.ofComponents (fun M ↦
@@ -458,8 +430,7 @@ def strictSystemSequenceUnit :
       ext x
       rfl)
 
-/-- Reassembling the vertical slices preserves every section of a sequence sheaf.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site). -/
+/-- Reassembling the vertical slices preserves every section of a sequence sheaf. -/
 def strictSystemSequenceCounit :
     sequenceToStrictSystemFunctor B ⋙ strictSystemToSequenceFunctor B ≅
       𝟭 (systemSequenceModules B) :=
@@ -486,10 +457,7 @@ def strictSystemSequenceCounit :
     ext x
     rfl)
 
-/-- Strict semilinear systems are exactly module sheaves on the ringed sequence site.
-Source: Zheng 4.1 (blueprint: lem-pur-system-ringed-sequence-site).
-Proof: restrict to vertical slices and recover transitions from horizontal arrows;
-reassembly is the identity on sections, maps and scalar multiplication. -/
+/-- Strict semilinear systems are exactly module sheaves on the ringed sequence site. -/
 def strictSystemSequenceEquivalence : StrictRingSystem B ≌ systemSequenceModules B where
   functor := strictSystemToSequenceFunctor B
   inverse := sequenceToStrictSystemFunctor B

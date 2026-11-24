@@ -166,6 +166,12 @@ theorem isMixedOfWeightsAtMost_iff_filtrationClosure :
   rw [ObjectProperty.filtrationClosure_iff]
   rfl
 
+/-- A Weil sheaf punctually `ι`-pure of weight `w` is mixed of weights at most `w`. -/
+theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost (h : F.IsPunctuallyPureOfWeight ι w) :
+    F.IsMixedOfWeightsAtMost ι w := by
+  rw [isMixedOfWeightsAtMost_iff_filtrationClosure]
+  exact ObjectProperty.le_filtrationClosure _ ⟨w, le_rfl, h⟩
+
 /-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: intersect
 the filtration (blueprint: `definition-weights`). -/
 theorem IsMixedOfWeightsAtMost.of_mono (i : G ⟶ F) [Mono i] (h : F.IsMixedOfWeightsAtMost ι w) :

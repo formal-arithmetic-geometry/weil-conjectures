@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 
 /-! # The counit square of a binary covering is a pushout
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03EM and the sheaf gluing condition.
-(blueprint: lem-dla1-site-binary-cover-module-pushout)
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03EM
 -/
 
 @[expose] public noncomputable section
@@ -156,27 +157,7 @@ private theorem binary_hom_gluing
   ext T x
   exact congrArg (fun k ↦ k.val.app (op (Over.mk (hX.from T.unop))) x) he
 
-/-- The overlap and the two counits give the pushout associated to a binary covering.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03EM; Sites, the sheaf gluing condition
-(blueprint: lem-dla1-site-binary-cover-module-pushout).
-
-Proof: the two paths around the square agree by transposing with the overlap
-adjunction and using its triangle identities and the restriction comparison.
-Fix any target module G. By the normalized extension/restriction adjunction,
-maps from the U and V terms to G are respectively maps F|U → G|U and
-F|V → G|V. Transpose once more on the overlap. The definition of nested as
-the transpose of the restriction of the unit, and naturality of the slice
-comparison, identify agreement after the two nested maps with agreement of
-these two module maps on the intersection slice. Such compatible maps glue
-uniquely to F → G. Explicitly, over an arbitrary T, pull the covering of X
-back along the terminal map T → X. Apply the two maps to restrictions of a
-section of F on the two covering members. On their fibre products the images
-agree by the overlap condition, so the sheaf condition for G glues them
-uniquely. Separatedness shows that this assignment commutes with restriction
-and is additive and O-linear, by checking these equations on that cover.
-The same separatedness proves uniqueness of the resulting module map.
-The adjunction identifies its two composites with the original maps.
-This is exactly the universal property of the displayed pushout. -/
+/-- The overlap and the two counits give the pushout associated to a binary covering. -/
 theorem siteBinaryCoverModulePushout
     {C : Type c} [Category.{v} C] (K : Precoverage C)
     (_hsite : K.IsSiteForCoverings) [HasPullbacks C]

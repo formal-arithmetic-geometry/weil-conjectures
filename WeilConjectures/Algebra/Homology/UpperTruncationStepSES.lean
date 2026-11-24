@@ -15,8 +15,10 @@ import WeilConjectures.Algebra.Homology.TwoTermCoimageQuasiIso
 /-!
 # Successive canonical upper truncations
 
-Source: Stacks Project, Homology, Section 12.15 (Tag 0118), and Derived Categories,
-Remark 13.12.4 (Tag 08J5) (blueprint: theorem-pbc-injective-acyclicity).
+## References
+
+* Stacks Project, Homology, Section 12.15 (Tag 0118), and Derived Categories,
+  Remark 13.12.4 (Tag 08J5).
 -/
 
 @[expose] public section
@@ -162,31 +164,7 @@ private lemma stepInclusion_naturality {C : Type u} [Category.{v} C] [Abelian C]
   simp only [Category.assoc, stepInclusion_comp, ιTruncLE_naturality]
   rw [← Category.assoc, stepInclusion_comp]
 
-/-- Successive canonical upper truncations and their cohomology quotient.
-Source: Stacks, Homology Tag 0118 and Derived Categories Remark 08J5
-(blueprint: theorem-pbc-injective-acyclicity).
-
-Proof, following the node's seven steps:
-1. Define the inclusion by the identity below `q - 1`, the cycles inclusion at
-`q - 1`, and zero above. Its composite into `K` is the earlier truncation inclusion.
-2. Form the two-term quotient: the cokernel of the kernel inclusion at `q - 1`
-and cycles at `q`. The differential induced by `d` is mono by
-`lem-weil-pbc-coimage-mono`, and its image is the boundaries.
-3. The quotient map is the cokernel projection at `q - 1`, identity on cycles at
-`q`, and zero elsewhere. It commutes with the differential and kills the inclusion.
-4. These sequences are short exact in each degree, hence short exact as complexes
-by `lem-weil-pbc-cochain-complexes-degreewise-exact`; their quotient is `cokernel i`.
-5. Projection from cycles to homology defines the map to the single complex. It
-kills boundaries, factors through the quotient, and the factor is unique since
-its projection is epi.
-6. The quotient has zero homology at `q - 1` because its differential is mono.
-At `q` its homology is cycles modulo boundaries, and the induced map is the identity
-under this identification. In other degrees both homologies vanish. Thus the
-factor is a quasi-isomorphism.
-7. A chain map preserves cycles and boundaries. It restricts to both truncations
-and descends to the quotient, commuting with the cohomology projection; uniqueness
-of descent gives naturality.
--/
+/-- Successive canonical upper truncations and their cohomology quotient. -/
 theorem exists_upperTruncationStepSES {C : Type u} [Category.{v} C] [Abelian C] :
     ∃ (i : ∀ (K : CochainComplex C ℤ) (q : ℤ),
           K.truncLE (q - 1) ⟶ K.truncLE q)

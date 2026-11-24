@@ -132,14 +132,15 @@ public import WeilConjectures.AlgebraicGeometry.RingedCoefficientProjectionData
 /-!
 # Interfaces for coefficient projection cocycles
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A7 and 0E47; Tags 0D6D,
-0D6E and 07A6 for the canonical comparisons and adjunctions
-(blueprint: def-pur-ringed-coefficient-projection-data).
-
 The auxiliary records present the specified geometric operations, comparison and
 unit maps. Ordinary insertion and K-flat computation fix all comparisons; the
 cocycle is a conclusion, never part of the input. The same assertion is stated
 on the actual vertical sequence sites, before evaluation or derived inverse limit.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A7 and 0E47
+* Stacks Project, Tags 0D6D, 0D6E and 07A6 (canonical comparisons and adjunctions)
 -/
 
 @[expose] public noncomputable section
@@ -164,21 +165,15 @@ variable {C X : Type c} [Category.{v} C] [Category.{v} X]
   [EssentiallySmall.{r} C] [EssentiallySmall.{r} X]
   {J : GrothendieckTopology C} {K : GrothendieckTopology X}
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(blueprint: def-pur-ringed-coefficient-projection-data). -/
+/-- Cache an already inferred sheaf instance on an essentially small site. -/
 instance (priority := 100000) cachedSheafifyModules (J : GrothendieckTopology C) :
     HasSheafify J AddCommGrpCat.{r} := inferInstance
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(blueprint: def-pur-ringed-coefficient-projection-data). -/
+/-- Cache an already inferred sheaf instance on an essentially small site. -/
 instance (priority := 100000) cachedWeakSheafifyModules (J : GrothendieckTopology C) :
     HasWeakSheafify J AddCommGrpCat.{r} := inferInstance
 
-/-- Cache an already inferred sheaf instance on an essentially small site.
-Source: Mathlib site transport and sheafification instances. The proof is typeclass inference.
-(blueprint: def-pur-ringed-coefficient-projection-data). -/
+/-- Cache an already inferred sheaf instance on an essentially small site. -/
 instance (priority := 100000) cachedLocalEquivalences (J : GrothendieckTopology C) :
     J.WEqualsLocallyBijective AddCommGrpCat.{r} := inferInstance
 
@@ -189,12 +184,10 @@ variable {uInv : Sheaf J (Type r) ⥤ Sheaf K (Type r)}
   {uPush : Sheaf K (Type r) ⥤ Sheaf J (Type r)} {adj : uInv ⊣ uPush}
   (g : Geometry uInv uPush adj)
 
-/-- The actual K-injective derived module direct image.
-Source: Stacks 0D6E (blueprint: def-pur-ringed-coefficient-projection-data). -/
+/-- The actual K-injective derived module direct image. -/
 abbrev Geometry.right (R : Sheaf J CommRingCat.{r}) := (g.push R).rightDerivedFunctor
 
-/-- The canonical derived adjunction, with no independently chosen unit or counit.
-Source: Stacks 07A6 (blueprint: def-pur-ringed-coefficient-projection-data). -/
+/-- The canonical derived adjunction, with no independently chosen unit or counit. -/
 abbrev Geometry.adjunction (R : Sheaf J CommRingCat.{r}) :=
   (g.ordinaryAdjunction R).mapDerivedCategoryRightDerivedAdjunction
 
@@ -206,10 +199,8 @@ variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
 
 variable (e : Comparisons g nY nX)
 
-/-- The specified coefficient projection is exactly the mate under the B-adjunction.
-It is not assumed invertible. The mate formula gives the unit--comparison--counit
-word, whose transpose is S_a applied to the A-counit after the comparison.
-Source: Stacks 07A7 (blueprint: def-pur-ringed-coefficient-projection-data). -/
+/-- The specified coefficient projection, the mate of the comparison under the derived
+adjunctions. It is not assumed invertible. -/
 def comparison {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     g.right R ⋙ (pY a).derived ⟶ (pX (g.rings.map a)).derived ⋙ g.right S :=
   (mateEquiv (g.adjunction R) (g.adjunction S)

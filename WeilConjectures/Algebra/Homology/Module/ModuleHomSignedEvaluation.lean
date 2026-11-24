@@ -14,7 +14,9 @@ import Mathlib.Tactic.Ring
 
 /-! # Signed evaluation for the ordinary module Hom complex
 
-Source: Stacks Project, Tags 0A8H and 0A8X.
+## References
+
+* Stacks Project, Tags 0A8H and 0A8X
 -/
 
 @[expose] public noncomputable section

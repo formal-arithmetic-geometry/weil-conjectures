@@ -11,8 +11,9 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 /-!
 # Kernel of a successive lower truncation transition
 
-Source: Stacks Project, Homology Tag 0118 (homology-section-truncations).
-(blueprint: lem-pc-lower-truncation-transition-kernel)
+## References
+
+* Stacks Project, Homology, Tag 0118
 -/
 
 @[expose] public section
@@ -53,20 +54,9 @@ private lemma pi_f_self {C : Type u} [Category.{v} C]
     HomologicalComplex.restrictionToTruncGE'_f_eq_iso_hom_pOpcycles_iso_inv _ _ h hb]
   simp
 
-/-- Source: Stacks Project, Tag 0118 (homology-section-truncations).
-
-Evaluate the kernel fork in each degree; evaluation preserves kernels. The projection
-identity determines the transition since each projection component is epi. At `m`
-the target is zero, hence the kernel inclusion is an isomorphism and its source
-identifies with opcycles. At `m+1` transport the kernel fork along the invertible
-first projection: the transition is the opcycles quotient, whose kernel is the
-image of the preceding differential. Below `m` the source is zero; above `m+1`
-the transition is invertible, so its kernel is zero. These identifications give
-the two inclusion formulas. Apply the chain map identity of the kernel inclusion
-and the truncation differential formula to obtain the differential formula.
-The argument does not require boundedness; for a zero differential the image
-object is zero and the same kernel computation still applies.
--/
+/-- The kernel of the transition between successive lower truncations is concentrated in
+degrees `m` and `m + 1`, where it is identified with the opcycles and with the image of the
+differential, together with the corresponding inclusion and differential formulas. -/
 private theorem lowerTruncationKernelTerms
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (m : ℤ)
@@ -208,24 +198,8 @@ private theorem quasiIso_single_of_kernel
       exact inferInstanceAs (Epi (B.d m (m + 1)))
     · exact HomologicalComplex.ExactAt.of_isZero (hz r hr hr')
 
-/-- Source: Stacks Tag 0118 (homology-section-truncations).
-(blueprint: lem-pc-lower-truncation-transition-kernel)
-
-Since the projections are epimorphisms, the factorization determines `q` uniquely.
-In degree `m` its target is zero, and its kernel is the source, identified with
-opcycles. In degree `m+1`, cancel the invertible degree component of the first
-projection: `q` is the opcycles quotient, whose kernel is the image of `d m (m+1)`.
-In higher degrees both projections are invertible, so the kernel is zero; below
-`m` the source is zero. The chain map identity identifies the remaining kernel
-differential with the epimorphism from opcycles onto the image of the differential.
-The inclusion of homology into opcycles therefore defines the map `φ`, using the
-kernel universal property and the constructor for maps from a single complex.
-This component and the kernel inclusion determine `φ` uniquely. Its degree `m`
-homology map is the identity of cycles modulo boundaries; degree `m+1` homology
-vanishes because the kernel differential is epi; all other degrees are zero.
-Thus `φ` is a quasi-isomorphism. These arguments apply also to the zero complex,
-zero differentials, and acyclic complexes; no boundedness assumption is needed.
--/
+/-- The kernel of the transition between successive lower truncations receives a
+quasi-isomorphism from the homology object in degree `m`, with explicit degree components. -/
 theorem exists_lowerTruncationTransitionKernel
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (m : ℤ)

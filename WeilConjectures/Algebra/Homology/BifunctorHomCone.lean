@@ -10,16 +10,20 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-! # Signed product Hom and a source mapping cone
 
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, omitted termwise-split
-calculation, generalized to separately additive bifunctors using the signed differential
-of `WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
-(used for `proposition-six-operations-dctf--15`)
+Signed product Hom takes a source mapping cone to the shifted cone of precomposition, for
+separately additive bifunctors, using the signed differential of
+`WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
 
-The two coordinate maps below use the actual shifted mapping cone, rather than a
-replacement complex. Mathlib orders the source-shifted summand first in a mapping cone;
-thus its `snd` becomes the `y` coordinate and its `fst` becomes the `x` coordinate.
-The main statement supplies a family of chain isomorphisms with both coordinate
-formulas, inverse formulas, the differential, restriction, and naturality.
+The two coordinate maps below use the actual shifted mapping cone. Mathlib orders the
+source-shifted summand first in a mapping cone; thus its `snd` becomes the `y` coordinate and
+its `fst` becomes the `x` coordinate. The main statement supplies a family of chain
+isomorphisms with both coordinate formulas, inverse formulas, the differential, restriction,
+and naturality.
+
+## References
+
+* Stacks Project, Tag 08JC (omitted termwise-split calculation of triangulated `RHom`)
+* Stacks Project, Tag 014P (mapping cone and shift)
 -/
 
 @[expose] public section
@@ -38,9 +42,7 @@ variable {A : Type u₁} {B : Type u₂} {C : Type u₃}
   (H : Aᵒᵖ ⥤ B ⥤ C) [H.Additive] [∀ M : Aᵒᵖ, (H.obj M).Additive]
   (I : CochainComplex B ℤ)
 
-/-- The `y : U(K)^(n-1)` projection from the actual `Cone(U(f))[-1]`.
-Source: Stacks Project, Tag 08JC, omitted split Hom calculation, with the cone and shift
-of Tag 014P (used for `proposition-six-operations-dctf--15`). -/
+/-- The `y : U(K)^(n-1)` projection from the actual `Cone(U(f))[-1]`. -/
 noncomputable def bifunctorHomConeY {K L : CochainComplex A ℤ} (f : K ⟶ L) (n : ℤ) :
     ((mappingCone (bifunctorHomMapLeft (H := H) (Y := I) f))⟦(-1 : ℤ)⟧).X n ⟶
       (bifunctorHomObj H K I).X (n - 1) :=
@@ -49,9 +51,7 @@ noncomputable def bifunctorHomConeY {K L : CochainComplex A ℤ} (f : K ⟶ L) (
     (mappingCone.snd (bifunctorHomMapLeft (H := H) (Y := I) f)).v
       (n - 1) (n - 1) (add_zero (n - 1))
 
-/-- The `x : U(L)^n` projection from the actual `Cone(U(f))[-1]`.
-Source: Stacks Project, Tag 08JC, omitted split Hom calculation, with the cone and shift
-of Tag 014P (used for `proposition-six-operations-dctf--15`). -/
+/-- The `x : U(L)^n` projection from the actual `Cone(U(f))[-1]`. -/
 noncomputable def bifunctorHomConeX {K L : CochainComplex A ℤ} (f : K ⟶ L) (n : ℤ) :
     ((mappingCone (bifunctorHomMapLeft (H := H) (Y := I) f))⟦(-1 : ℤ)⟧).X n ⟶
       (bifunctorHomObj H L I).X n :=
@@ -319,38 +319,7 @@ private lemma signedConeHom_natural {K L K' L' : CochainComplex A ℤ}
 
 /-- Signed product Hom takes a source cone to the shifted cone of precomposition,
 with its specified coordinates, inverse, differential, restriction and naturality.
-There are no boundedness, injectivity or product-exactness hypotheses.
-
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, omitted termwise-split
-calculation, generalized to the upstream signed bifunctor Hom complex.
-(used for `proposition-six-operations-dctf--15`)
-
-Proof plan, the eight steps of the node:
-1. On each product projection the differential is s_p(D b_p - A b_(p+1)),
-   s_p = (-1)^p. Its square has zero pure terms and cancelling mixed terms, by
-   d_I squared = d_V squared = 0 and bifunctoriality (def-sp-abelian).
-2. Precomposition by a chain map commutes with this differential, by naturality
-   and the chain-map identity; it preserves identities and reverses composition.
-3. Restrict along the two cone inclusions. Reconstruct a component from (x,a)
-   as H(r_L,I)x + H(r_K,I)a. The biproduct identities and additivity show these
-   operations are inverse (def-sp-abelian). These are morphism identities.
-4. Use product uniqueness to set y_(p+1) = s_p a_p and retain x_p. The inverse
-   sets a_p = s_p y_(p+1). Reindexing integers and s_p squared = 1 give inverse
-   graded maps, with no exactness assumption on countable products.
-5. The cone followed by shift by -1 has coordinates (y,x) and differential
-   (-d_Y y - t x, d_X x), by def-weil-abstract-derived-category.
-6. Restrict the source Hom differential to both cone summands. It gives
-   x'_p = s_p(D x_p - H(d_L,I)x_(p+1)) and
-   a'_p = s_p(D a_p - H(f,I)x_(p+1) + H(d_K,I)a_(p+1)).
-7. Substitute a_p = s_p y_(p+1), using s_(p+1) = -s_p. The equations become
-   y' = -d_Y y - t x and x' = d_X x. Thus the graded comparison and its inverse
-   are chain maps, giving a chain isomorphism with the asserted differential.
-8. Restriction along L -> Cone(f) retains x. For a commuting square (u,v),
-   the cone map is diag(v,u); precomposition carries (x',a') to
-   (H(v,I)x',H(u,I)a'). The same signs give (U(u)y',U(v)x'), proving naturality
-   in the displayed contravariant direction. All equalities can be checked
-   after projection from morphisms out of an arbitrary test object.
--/
+There are no boundedness, injectivity or product-exactness hypotheses. -/
 theorem exists_signedBifunctorConeIso :
     ∃ θ : ∀ (K L : CochainComplex A ℤ) (f : K ⟶ L),
       bifunctorHomObj H (mappingCone f) I ≅

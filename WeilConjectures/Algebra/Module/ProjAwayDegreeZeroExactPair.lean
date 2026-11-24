@@ -17,8 +17,10 @@ import WeilConjectures.Algebra.Module.AwayDegreeZeroLift
 /-!
 # Exact pairs on equal-degree fractions
 
-Source: Stacks Project, Tag 01M7; Algebra, Tag 00JM.
-(blueprint: lem-sc-p1-away-degreezero-exact-pair)
+## References
+
+* [Stacks Project, Tag 01M7](https://stacks.math.columbia.edu/tag/01M7), final paragraph
+* [Stacks Project, Tag 00JM](https://stacks.math.columbia.edu/tag/00JM)
 -/
 
 @[expose] public section
@@ -31,26 +33,7 @@ namespace LocalizedModule
 
 attribute [local instance] MvPolynomial.gradedAlgebra
 
-/-- Localization and degree zero preserve exact pairs, with either endpoint property when given.
-Source: Stacks Project, Tag 01M7, final paragraph; Algebra, Tag 00JM.
-(blueprint: lem-sc-p1-away-degreezero-exact-pair).
-
-Proof: If f is zero, all three localized modules vanish and injective chart maps
-make all three chart groups zero. Otherwise localize the exact pair at powers of f.
-Give the localization degree e part consisting of fractions y/f^m with y in degree
-e+m*d. Common denominators prove closure under addition. Homogeneous decomposition
-of numerators proves spanning. For independence, clear denominators in a finite
-relation; after multiplication by a further power of f, the numerators have distinct
-degrees, and internality makes every numerator zero. The localized grading is
-therefore internal. The maps preserve degrees. To lift a degree-zero kernel element,
-use ordinary localized exactness and take the degree-zero component of a preimage;
-internality in the middle module makes its image the desired element. Injectivity
-is inherited from ordinary localization when phi is injective. If psi is surjective,
-the same homogeneous-component argument gives a degree-zero preimage of every target.
-A nonzero f^m has degree m*d, so the degree-zero parts are exactly the stipulated
-degreeZeroFractions. Transport these assertions along alpha using its injectivity,
-range equality, and the two fraction formulas. The exactness argument does not need
-either endpoint property. -/
+/-- Localization and degree zero preserve exact pairs, with either endpoint property when given. -/
 theorem proj_away_degreeZero_exact_pair
     (k : Type u) [Field k]
     (M : Fin 3 → Type u) [∀ j, AddCommGroup (M j)]

@@ -125,7 +125,15 @@ import all WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySuppleme
 import all WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import all WeilConjectures.AlgebraicGeometry.RingedTopoiTensorSections
 
-/-! Pullback of modules from a represented object slice. -/
+/-! Pullback of modules from a represented object slice.
+
+## References
+
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 03DF
+* Stacks Project, Tag 04IF
+* Stacks Project, Tag 0791
+-/
 
 @[expose] public section
 
@@ -140,25 +148,7 @@ namespace SheafOfModules
 
 -- The module comparisons involve several nested element sites.
 set_option maxRecDepth 4000 in
-/-- Pullback from the represented source slice, with its colimit and unit comparisons.
-
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03DF and 04IF;
-Sites, Tag 0791.
-(blueprint: lem-weil-pbc-representable-slice-module-pullback).
-
-Proof: Write H for the sheafified representable of U. Transport modules from D/U
-through the fibre equivalence Sh(D/U) = Sh(D)/H. The ring becomes the restriction
-of B and the transported module M.over U becomes elementModulePullback B H M.
-This equivalence preserves colimits and sends the rank-one module to the rank-one
-module. Localize f at H using the geometric ringed slice morphism. Pullback of
-modules there is left adjoint to its module direct image: the inverse-image
-adjunction restricts to linear maps and scalar extension is tensor-adjoint to
-restriction of scalars. Thus the composite preserves colimits. Its value on the
-rank-one module is the rank-one module by S tensor_R R = S, with inverse s to
-s tensor 1. The geometric module slice comparison identifies its value on
-M.over U with the localization of ordinaryRingedToposPullback I c M. This
-comparison uses hc to identify the structural coefficient map. No finite-type
-hypothesis, site functor representing f, or subcanonicity is used. -/
+/-- Pullback from the represented source slice, with its colimit and unit comparisons. -/
 theorem representableSliceModulePullback_exists
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

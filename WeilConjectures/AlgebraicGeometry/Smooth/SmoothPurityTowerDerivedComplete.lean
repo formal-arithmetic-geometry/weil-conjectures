@@ -83,9 +83,6 @@ import WeilConjectures.CategoryTheory.UnitPowerCompleteness
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarInternalHomComplete
 
 /-! # Derived completeness of a coefficient tower limit
-
-Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower, completeness sentence.
-(blueprint: lem-sp-tower-limit-derived-complete)
 -/
 
 @[expose] public noncomputable section

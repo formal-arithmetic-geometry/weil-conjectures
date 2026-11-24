@@ -145,10 +145,7 @@ lemma d_eq_zero_of_isZero (hb : 0 < b.1) (N₀ : ℕ)
 variable {X} {A : ℤ → C} {ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n} {F : ∀ n, DecreasingFiltration (A n)}
 
 /-- The *edge map* `Aⁿ ⟶ E_{N₀}^{0, n}` of a convergent couple, when `F⁰ Aⁿ = Aⁿ` and the
-differentials vanish from the page `N₀` on: the projection `Aⁿ = F⁰ Aⁿ ⟶ gr⁰ Aⁿ`, followed by
-the identification `gr⁰ Aⁿ ≅ E_∞^{0, n}` of the convergence data and `E_∞^{0, n} = E_{N₀}^{0, n}`.
-
-(blueprint: `lem-sp-edge-collapse`) -/
+differentials vanish from the page `N₀` on. -/
 noncomputable def ConvergenceData.edge (c : X.ConvergenceData ι F) (n : ℤ) (h₀ : (F n).F 0 = ⊤)
     (N₀ : ℕ) (hd : ∀ N, N₀ ≤ N → ∀ i j, (X.derivedIter N).d i j = 0) :
     A n ⟶ (X.derivedIter N₀).E (0, n) :=
@@ -156,15 +153,9 @@ noncomputable def ConvergenceData.edge (c : X.ConvergenceData ι F) (n : ℤ) (h
     (c.iso 0 n (N₀ + (c.stage 0 n - N₀)) (by omega)).inv ≫
     (X.derivedIterAddEIso N₀ (0, n) (fun N hN ↦ hd N hN _ _) (fun N hN ↦ hd N hN _ _) _).hom
 
-/-- **Edge collapse.** Let `X` be an exact couple (with `α` of degree `(-1, 0)`, `g` of degree
-`0` and `f` of degree `b` with `b.1 > 0`) whose spectral sequence converges to finite
-filtrations of objects `Aⁿ`, and suppose that on the page `N₀` all the entries `E^{p, n}` with
-`p ≠ 0` vanish. Then all later differentials vanish (so that the later pages agree with that
-page, see `CategoryTheory.ExactCouple.derivedIterAddEIso`), and the filtration of `Aⁿ` is
-concentrated in degree `0`: `F⁰ Aⁿ = Aⁿ` and `F¹ Aⁿ = 0`. The edge map `Aⁿ ⟶ E_{N₀}^{0, n}` is
-then an isomorphism (`CategoryTheory.ExactCouple.isIso_edge`).
-
-(blueprint: `lem-sp-edge-collapse`) -/
+/-- **Edge collapse.** If the spectral sequence of `X` converges to finite filtrations and on
+the page `N₀` all entries `E^{p, n}` with `p ≠ 0` vanish, then all later differentials vanish and
+`F⁰ Aⁿ = Aⁿ` and `F¹ Aⁿ = 0` for every `n`. -/
 theorem edge_collapse (hb : 0 < b.1) (c : X.ConvergenceData ι F)
     (hF : ∀ n, ∃ m M : ℤ, (F n).F m = ⊤ ∧ (F n).F M = ⊥) (N₀ : ℕ)
     (h : ∀ p n : ℤ, p ≠ 0 → IsZero ((X.derivedIter N₀).E (p, n))) :
@@ -180,9 +171,7 @@ theorem edge_collapse (hb : 0 < b.1) (c : X.ConvergenceData ι F)
 
 /-- **The edge map is an isomorphism.** In the situation of
 `CategoryTheory.ExactCouple.edge_collapse`, the edge map `Aⁿ ⟶ E_{N₀}^{0, n}` is an
-isomorphism.
-
-(blueprint: `lem-sp-edge-collapse`) -/
+isomorphism. -/
 theorem isIso_edge (hb : 0 < b.1) (c : X.ConvergenceData ι F)
     (hF : ∀ n, ∃ m M : ℤ, (F n).F m = ⊤ ∧ (F n).F M = ⊥) (N₀ : ℕ)
     (h : ∀ p n : ℤ, p ≠ 0 → IsZero ((X.derivedIter N₀).E (p, n))) (n : ℤ) :

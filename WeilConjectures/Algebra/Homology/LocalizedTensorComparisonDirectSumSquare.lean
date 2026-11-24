@@ -16,10 +16,12 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 import all WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSumsHomology
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 
-/-! # Direct-sum square for localized tensor comparisons
+/-!
+# Direct-sum square for localized tensor comparisons
 
-Source: Stacks Project, Tags 0DJA(1) and 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-direct-sum-square).
+## References
+
+* Stacks Project, Tags 0DJA(1) and 0BYJ
 -/
 
 @[expose] public section
@@ -42,28 +44,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The localized comparison on a direct sum is conjugate to the sum of the comparisons.
-Source: Stacks Project, Tag 0DJA(1), the tensor-inheritance argument, and Tag 0BYJ.
-
-Proof: put E = A tensor_R B. Tensoring with Q commutes with termwise direct sums.
-Restriction from A to R commutes with sums, and derived extension from R to B
-commutes with sums: resolve the summands R-K-flatly and sum the resolutions;
-the sum is K-flat and its augmentation is a quasi-isomorphism because module
-sums are exact. The universal counit identifies each supplied model with this
-calculation. Naturality for multiplication by A makes the source comparison
-E-linear, not merely B-linear. Exactness of sums identifies cohomology of the
-sum with the sum of cohomologies. Extension from E to C preserves this sum as
-it is a left adjoint. These identifications give e.
-Likewise extension from A to C and tensor with N commute with sums, and exact
-module sums commute with cohomology, giving d. On each coprojection the
-universal counit, ordinary tensor associator, scalar-extension adjunction,
-and tensorator are natural. The equations comparison_eq and localized_eq
-therefore identify the restriction of the comparison for the sum with the
-comparison for that summand. Coproduct extensionality gives the displayed
-square. No K-flatness of Q or of the summands, no flatness of C over A tensor_R B,
-no flatness of N and no flatness of A to C is used. For an empty family
-all sources and targets are zero and the same coproduct argument applies.
-(blueprint: lem-pc-localized-tensor-comparison-direct-sum-square). -/
+/-- The localized comparison on a direct sum is conjugate to the sum of the comparisons. -/
 theorem exists_localizedTensorComparison_direct_sum_square
     {I : Type u} (U : I → CochainComplex (ModuleCat.{u} A) ℤ)
     (m : ∀ j, BaseDerivedTensorCohomologyModel R A B (U j ⊗ Q) C)

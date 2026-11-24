@@ -18,17 +18,22 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 /-!
 # Internal Hom and a finite free presentation
 
-Source: Stacks Project, Modules, Lemma 01CO (1), and the proofs of Lemmas 01CQ and 0GMV
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
+Internal Hom of sheaves of modules turns a finite free presentation into a kernel sequence.
 
 ## Main statements
 
 * `SheafOfModules.homObj_precomposition_exact`: internal Hom is left exact in its first argument.
 * `SheafOfModules.homObj_finitePresentation_kernel`: the coordinate form for a finite presentation.
 
+## Implementation details
+
 Finite sums are represented by finite products, whose evaluations are the componentwise
 modules of tuples. Their projections specify both coordinate formulas without choosing
 an additional model of the internal Hom or the finite sum.
+
+## References
+
+* Stacks Project, Modules, Lemma 01CO (1), and the proofs of Lemmas 01CQ and 0GMV
 -/
 
 @[expose] public section
@@ -71,20 +76,7 @@ private theorem leftExact {C : Type (u + 1)} [Category.{u} C] [Abelian C]
   · exact hm.exact_toComposableArrows
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Precomposition with a right exact sequence gives a left exact internal Hom sequence.
-Source: Stacks Project, Modules, Lemma 01CO (1)
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
-
-Proof: Install the existing symmetric monoidal closed structure on module sheaves.
-The contravariant internal Hom functor preserves limits by Mathlib's parametrized
-adjunction theorem. Its comparison with `homFunctor R` is componentwise the identity;
-`SheafOfModules.pre_app` verifies naturality. The last short complex of the hypothesis
-makes `b` epi, and the first short complex is exact. Take the opposite of the latter
-complex, whose first map is now mono, and apply the kernel-preserving internal Hom
-functor. This gives the exact pair of precomposition maps. Its first map is mono
-because it remains a kernel inclusion. Adjoin the initial zero and combine the two
-short exactness assertions using `ComposableArrows.exact_of_δ₀`.
--/
+/-- Precomposition with a right exact sequence gives a left exact internal Hom sequence. -/
 theorem homObj_precomposition_exact
     {E₂ E₁ E : SheafOfModules.{u}
       ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R)}
@@ -187,26 +179,10 @@ private theorem coefficients_apply (m n : ℕ)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The coordinate kernel sequence attached to a finite free presentation.
-Source: Stacks Project, Modules, proofs of Lemmas 01CQ and 0GMV, using Lemma 01CO (1)
-(blueprint: lem-weil-pbc-sheaf-hom-finite-presentation-kernel).
 
 The coefficient `c i k` is the coefficient of the `i`-th basis section in `a(e_k)`.
 The projection of `β` is evaluation at `b(e_i)` on every open, and the `k`-th projection
-of `α` is the sum of the restricted coefficients times the input coordinates.
-
-Proof (steps 5--7 of the node, following steps 1--4 above):
-5. By def-weil-pbc-module-finite-type-presentation, maps from the finite free module
-   are uniquely determined by the images of its basis sections. On each open this gives
-   a linear bijection `Hom(O^n,M) ≃ M^n`. These bijections commute with restriction,
-   hence give isomorphisms of module sheaves (def-pur-sheaf-hom).
-6. In these coordinates precomposition with `a` sends `(x_i)` to
-   `(∑ i, c i k |_U • x_i)_k`, by linearity and the coefficient identity. Precomposition
-   with `b` sends `ψ` to `(ψ_U(b_U(e_i|_U)))_i`. Thus both formulas define module maps.
-7. Apply `homObj_precomposition_exact` to the presentation and transport its
-   categorical exactness along the coordinate isomorphisms of step 5, using
-   `ComposableArrows.exact_of_iso`. This includes the initial zero and requires
-   no further local-lifting argument.
--/
+of `α` is the sum of the restricted coefficients times the input coordinates. -/
 theorem homObj_finitePresentation_kernel (m n : ℕ)
     (H : SheafOfModules.{u}
       ((sheafCompose _ (forget₂ CommRingCat RingCat.{u})).obj R))

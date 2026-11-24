@@ -9,7 +9,10 @@ module
 public import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMap
 
 /-! # Differentials on the surviving diagonal
-Source: Stacks Project, Homology, Tag 0133; finite-strip cone refinement, step 3.
+
+## References
+
+* Stacks Project, Tag 0133
 -/
 
 @[expose] public section
@@ -313,24 +316,7 @@ private theorem rowSource_defect_factors
     exact Subobject.factors_zero
 
 
-/-- The surviving diagonal maps commute with the adjacent differentials.
-Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable variant;
-explicit diagonal quotient argument of lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-graded-map-differential)
-
-Proof: use the biproduct decomposition of the row cone and check on its source
-and target inclusions. For the target `(n-p,p)` summand, the horizontal total
-term is the row differential with coefficient one. The vertical term has index
-`p+1`, hence factors through the next tail and is killed by the quotient
-projection. For the source summand, which is nonzero only at `n=p-1`, the cone
-formula has the negative source differential and the augmentation block. The
-source differential raises the vertical index and vanishes modulo the next tail.
-The augmentation block equals `a p` followed by the `(0,p)` total inclusion by
-`hb`; its row-cone counterpart equals the same map under the single-object
-identification by `hf`. Away from this source degree its domain is zero. Finally
-use the filtration inclusion and quotient projection being chain maps to identify
-the resulting ambient-cone calculation with the graded differential. This proves
-commutation without assuming the diagonal maps are invertible. -/
+/-- The surviving diagonal maps commute with the adjacent differentials. -/
 theorem finiteStripGradedMap_differential
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)

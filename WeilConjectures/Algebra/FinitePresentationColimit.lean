@@ -16,9 +16,18 @@ import WeilConjectures.Algebra.FiniteTensorVanishingColimit
 /-!
 # Finitely presented modules over a directed ring colimit
 
-Source: Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7), used in Limits,
-Lemma 32.10.2 (Tag 01ZR), affine case
-(blueprint: lem-pc-fp-module-map-descent-affine).
+Finitely presented modules, maps between their fixed base changes, and equalities of maps over a
+directed colimit of commutative rings descend to a stage.
+
+## Implementation details
+
+The module universes are chosen to contain the ring universe, so that stage modules and their
+scalar extensions lie in the same module category.
+
+## References
+
+* Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7)
+* Stacks Project, Limits, Lemma 32.10.2 (Tag 01ZR), affine case
 -/
 
 @[expose] public section
@@ -42,22 +51,7 @@ private theorem exists_comparison
     extendScalarsComp_hom_app_one_tmul rij rj M⟩
 
 /-- Over a directed colimit of commutative rings, finitely presented modules,
-maps between their fixed base changes, and equalities of maps descend to a stage.
-
-For objects, choose a finite free presentation and descend its relation cokernel.
-Construct the stage module as the lifted quotient by the relation-map range; its
-finite presentation follows from finite generation of that range. For a map,
-uncurry it by the scalar extension-restriction adjunction, lift the resulting map
-into a stage tensor module, and curry it there. Mathlib's composition comparison
-provides the two canonical isomorphisms and their pure-tensor equations, which
-prove the commuting square. For equality, take finitely many generators, apply
-eventual tensor vanishing to the differences of their images, and use linear
-extensionality on their span. The elementwise ring-colimit criterion remains
-needed in the three lower lemmas.
-The module universes are explicitly chosen to contain the ring universe, so that
-stage modules and their scalar extensions lie in the same module category.
-Source: Stacks Project, Algebra, Lemma 10.127.6 (Tag 05N7)
-(blueprint: lem-pc-fp-module-map-descent-affine). -/
+maps between their fixed base changes, and equalities of maps descend to a stage. -/
 theorem finitePresentation_descent_directedColimit
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat) :

@@ -14,8 +14,9 @@ import all WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 /-!
 # Epimorphy of a truncated lower projection
 
-Source: Stacks Project, Homology Tag 0118 (homology-section-truncations),
-canonical truncations and the two-term kernel argument.
+## References
+
+* [Stacks Project, Tag 0118](https://stacks.math.columbia.edu/tag/0118)
 -/
 
 @[expose] public section
@@ -75,18 +76,7 @@ private lemma cycles_projection_epi (K : CochainComplex C ℤ) (a t : ℤ) (hat 
     exact inferInstanceAs (Epi (ShortComplex.cyclesMap φ))
 
 /-- The lower truncation projection remains degreewise epic after an upper
-truncation whose endpoint is at least the lower endpoint.
-Source: Stacks Project, Homology Tag 0118 (homology-section-truncations).
-(blueprint: lem-sp-vertical-cutoff-comparison-epi)
-
-Proof: above t the target is zero. Below t the upper truncation inclusions
-are invertible, and naturality identifies the map with the epic lower
-truncation projection. At t the upper truncations identify with cycles.
-If a < t, the projection in degrees t and t + 1 is invertible, hence so is
-the cycles map. If a = t, homology of the lower truncation has no incoming
-boundaries; its cycles-to-homology map is invertible. Naturality of homology
-and the quasi-isomorphism at a then imply that the cycles map is epic.
-The conjugating upper-boundary identifications preserve epimorphy. -/
+truncation whose endpoint is at least the lower endpoint. -/
 theorem verticalCutoff_comparison_epi
     (K : CochainComplex C ℤ) (a t : ℤ) (hat : a ≤ t) (n : ℤ) :
     Epi ((CochainComplex.truncLEMap (K.πTruncGE a) t).f n) := by

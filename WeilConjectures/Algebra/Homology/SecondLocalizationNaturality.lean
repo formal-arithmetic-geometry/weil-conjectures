@@ -8,8 +8,11 @@ module
 
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 /-! # Naturality for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-naturality). -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -37,22 +40,8 @@ variable (R A B Bp D : Type u)
 -- Preserve the existing scalar-tower parameters even though the proof needs fewer.
 set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
-/-- Naturality of the characterized coefficient map on arbitrary models.
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-naturality).
-
-Proof: leftDerived_ext applied to the target model K' proves that the derived
-lift for L followed by epsilon equals delta extended to Bp followed by the
-lift for L'. Their composites with K'.counit agree by the two given counit
-compatibilities and naturality of the ordinary associator. Naturality of each
-derived lift with respect to the image of f gives the full commuting derived
-square. Apply homology and naturality of flatDerivedHomologyIso, then conjugate
-by cohomologyIso. The characterizations of g and h give equality of the
-underlying B-linear maps. On a generator 1 tensor x the two formulas he and he'
-and ExtendScalars.map_tmul identify the D-linear composites with this equality.
-ExtendScalars.hom_ext proves equality of the maps. This works for arbitrary
-flat B to Bp and uses no localization or flatness of D. Zero maps, identity
-maps and zero rings obey the same equations. -/
+/-- Naturality of the characterized coefficient map on arbitrary models, for an arbitrary flat
+`B → Bp`. -/
 theorem secondLocalization_naturality (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')
           (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

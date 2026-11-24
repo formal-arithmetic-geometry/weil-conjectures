@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorData
 
 /-! # Normalized section comparisons on cochain complexes
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.
+## References
+
+* [Stacks, Tags 06YU, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -65,16 +67,7 @@ private theorem ordinaryTotalUnit (T : Scheme.{u})
     Iso.trans_hom, Functor.mapIso_hom] using
     (Functor.mapCochainComplex_η (equivalence Λ T).functor)
 
-/-- The induced cochain monoidal structure has the fixed normalized tensor and unit maps.
-Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.
-
-Proof: the ordinary oplax tensor natural transformation equals sectionOrdinaryTensorMap
-because all its components equal the normalized ordinary tensor comparison. Apply
-mapBifunctorComparison to this equality and use sectionTotalComparison_eq to identify
-its totalization with cochainTensorComparison. The cochain oplax unit is the inverse
-of mapCochainComplexεIso. Its explicit single-complex formula, with the normalized
-ordinary unit substituted, is exactly totalUnitComparison. No flatness is needed.
-(auxiliary; not a blueprint node). -/
+/-- The induced cochain monoidal structure has the fixed normalized tensor and unit maps. -/
 theorem section_cochain_monoidal_constraints (T : Scheme.{u})
     [(equivalence Λ T).functor.Monoidal]
     (hd : ∀ M N : internalModules Λ T,

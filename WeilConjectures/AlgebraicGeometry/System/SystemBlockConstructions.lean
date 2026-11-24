@@ -9,13 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSect
 
 /-! # Finite block constructions and ordinary coherence
 
-Source: Zheng, Construction 4.1 and its finite-block reindexing generalization.
-(blueprint: lem-pur-system-block-constructions).
+Block maps of the index set, the induced reindexings of the sequence site, their ring
+identifications and ordinary composition, identity and coefficient coherence.
 
-The existing block constructions, their ring identifications and ordinary
-composition, identity and coefficient coherence are extracted from
-SystemBlockRepetition to keep each file within the single-file compilation limit.
-Their public signatures, definition bodies and global attributes are retained.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 08BJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +31,7 @@ universe c v r u₁ u₂ u₃ u₄ v₁ v₂ v₃ v₄ w₁ w₂ w₃ w₄ u h w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.SemilinearSections
 
-/-- A nondecreasing surjection with finite nonempty interval fibers.
-Source: finite-block generalization of Zheng 4.1
-(blueprint: lem-pur-system-block-constructions). -/
+/-- A nondecreasing surjection with finite nonempty interval fibers. -/
 structure SystemBlockMap where
   /-- The map on zero-based sequence indices. -/
   index : ℕ →o ℕ
@@ -41,34 +40,22 @@ structure SystemBlockMap where
   /-- Every block is finite; monotonicity makes it an interval. -/
   finite : ∀ i : ℕ, Set.Finite {m : ℕ | index m = i}
 
-/-- The first index of a block, not an arbitrary point in its fiber.
-Source: finite-block endpoint construction following Zheng 4.1
-(blueprint: lem-pur-system-block-constructions). -/
+/-- The first index of a block, not an arbitrary point in its fiber. -/
 def SystemBlockMap.first (t : SystemBlockMap) (i : ℕ) : ℕ := Nat.find (t.onto i)
 
-/-- The repeated coefficient objects.
-Source: Zheng 4.1, finite-block reindexing
-(blueprint: lem-pur-system-block-constructions). -/
+/-- The repeated coefficient objects. -/
 def blockCoefficients {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     (B : ℕ → Sheaf J CommRingCat.{r}) (t : SystemBlockMap) :
     ℕ → Sheaf J CommRingCat.{r} := fun m ↦ B (t.index m)
 
-/-- The repeated transition is the specified composite; within a block it is the identity.
-Source: Zheng 4.1, finite-block reindexing
-(blueprint: lem-pur-system-block-constructions). -/
+/-- The repeated transition is the specified composite; within a block it is the identity. -/
 def blockTransitions {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (B : ℕ → Sheaf J CommRingCat.{r})
     (τ : ∀ n : ℕ, B (n + 1) ⟶ B n) (t : SystemBlockMap) (m : ℕ) :
     blockCoefficients B t (m + 1) ⟶ blockCoefficients B t m :=
   coefficientMap J B τ (t.index.monotone (Nat.le_succ m))
 
-/-- Endpoint and interval properties, and the no-skipped-level assertion at a boundary.
-Source: finite-block generalization of Zheng 4.1
-(blueprint: lem-pur-system-block-constructions).
-Proof: Nat.find_spec gives t(a_i)=i and Nat.find_min' gives minimality. Monotonicity
-then gives a_i≤m<a_(i+1) for t(m)=i and monotonicity of a. If t(m+1)>t(m)+1,
-surjectivity at the missing integer contradicts monotonicity on either side of m.
-Thus blockTransitions is identity within blocks and the original adjacent map at a boundary. -/
+/-- Endpoint and interval properties, and the no-skipped-level assertion at a boundary. -/
 theorem systemBlockMap_endpoints (t : SystemBlockMap) :
     (∀ i : ℕ, t.index (t.first i) = i) ∧ Monotone t.first ∧
     (∀ m : ℕ, t.first (t.index m) ≤ m ∧ m < t.first (t.index m + 1)) ∧
@@ -105,23 +92,15 @@ theorem systemBlockMap_endpoints (t : SystemBlockMap) :
         rw [hk] at h
         exact Nat.le_antisymm h (Nat.succ_le_of_lt (lt_of_le_of_ne hlo (Ne.symm he)))
 
-/-- First-endpoint monotonicity, needed by the real endpoint functor.
-Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-constructions).
-Proof: the endpoint and interval assertions of systemBlockMap_endpoints give this
-projection; equivalently minimality and monotonicity of t prohibit reversed endpoints. -/
+/-- First-endpoint monotonicity, needed by the real endpoint functor. -/
 theorem SystemBlockMap.firstMonotone (t : SystemBlockMap) : Monotone t.first := by
   exact (systemBlockMap_endpoints t).2.1
 
-/-- Reindexing of the sequence site by a monotone map.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions). -/
+/-- Reindexing of the sequence site by a monotone map. -/
 def blockSite {C : Type c} [Category.{v} C] (k : ℕ →o ℕ) : ℕ × C ⥤ ℕ × C :=
   k.toFunctor.prod (𝟭 C)
 
-/-- Reindexing preserves the vertical sheaf condition.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions).
-Proof: at (m,U) restriction along a vertical cover is exactly restriction of the
-original sheaf along that same cover of U at level k(m); glue there. Thus
-precomposition carries every sheaf to a sheaf, which is the continuity criterion. -/
+/-- Reindexing preserves the vertical sheaf condition. -/
 theorem blockSite_continuous {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
     (blockSite (C := C) k).IsContinuous
@@ -162,23 +141,18 @@ theorem blockSite_continuous {C : Type c} [Category.{v} C]
     exact ⟨(X.1, V), Prod.mkHom (𝟙 _) f, 𝟙 _, hf, by
       ext <;> simp [blockSite]⟩
 
-/-- Continuity for the canonical sequence-site reindexing.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions). -/
+/-- Continuity for the canonical sequence-site reindexing. -/
 instance blockSiteContinuous {C : Type c} [Category.{v} C]
     (J : GrothendieckTopology C) (k : ℕ →o ℕ) :
     (blockSite (C := C) k).IsContinuous
       (coefficientSequenceTopology J) (coefficientSequenceTopology J) :=
   blockSite_continuous J k
 
-/-- First endpoints as a bundled monotone map, with actual least-index data.
-Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-constructions). -/
+/-- First endpoints as a bundled monotone map, with actual least-index data. -/
 def SystemBlockMap.endpoints (t : SystemBlockMap) : ℕ →o ℕ :=
   ⟨t.first, t.firstMonotone⟩
 
-/-- Fibers of a composite block map are finite unions of finite fibers.
-Source: Zheng 4.1 finite-block composition (blueprint: lem-pur-system-block-constructions).
-Proof: the fiber at i is the union, over the finite fiber t⁻¹(i), of the finite
-fibers s⁻¹(j). Finite unions preserve finiteness. -/
+/-- Fibers of a composite block map are finite unions of finite fibers. -/
 theorem SystemBlockMap.comp_finite (t s : SystemBlockMap) (i : ℕ) :
     Set.Finite {m : ℕ | t.index (s.index m) = i} := by
   have h := (t.finite i).biUnion (fun j _ ↦ s.finite j)
@@ -186,15 +160,13 @@ theorem SystemBlockMap.comp_finite (t s : SystemBlockMap) (i : ℕ) :
   intro m hm
   exact Set.mem_iUnion₂.mpr ⟨s.index m, hm, rfl⟩
 
-/-- Composite block map with its actual composed index function.
-Source: Zheng 4.1 finite-block composition (blueprint: lem-pur-system-block-constructions). -/
+/-- Composite block map with its actual composed index function. -/
 def SystemBlockMap.comp (t s : SystemBlockMap) : SystemBlockMap where
   index := t.index.comp s.index
   onto := t.onto.comp s.onto
   finite := t.comp_finite s
 
-/-- The identity block map, including singleton fibers.
-Source: Zheng 4.1 identity reindexing (blueprint: lem-pur-system-block-constructions). -/
+/-- The identity block map, including singleton fibers. -/
 def SystemBlockMap.id : SystemBlockMap where
   index := OrderHom.id
   onto := Function.surjective_id
@@ -236,11 +208,7 @@ private theorem blockRingPresheaf (k : ℕ →o ℕ)
   intro X Y f
   rfl
 
-/-- The identity coefficient identification for repetition on the sequence site.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions).
-Proof: both ring sheaves have B_(t(m))(U) at (m,U). The horizontal maps are the
-same composites of tau by functoriality of rings, including identity maps within
-a block. Vertical maps are B_(t(m))'s restrictions. Extensionality proves equality. -/
+/-- The identity coefficient identification for repetition on the sequence site. -/
 theorem blockRepeatRing :
     ((blockSite (C := C) t.index).sheafPushforwardContinuous RingCat.{r}
       (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj
@@ -269,18 +237,13 @@ theorem blockRepeatRing :
   congr 1
   exact congrArg (fun α ↦ α.hom.app (op X.unop.2)) hh
 
-/-- Actual repetition, as restriction on the ringed sequence site.
-Source: Zheng 4.1 (blueprint: lem-pur-system-block-constructions). -/
+/-- Actual repetition, as restriction on the ringed sequence site. -/
 def blockRepeat : Systems J B τ ⥤
     Systems J (blockCoefficients B t) (blockTransitions J B τ t) :=
   SheafOfModules.pushforward (F := blockSite (C := C) t.index)
     (eqToHom (blockRepeatRing J B τ t).symm)
 
-/-- The identity coefficient identification at first endpoints.
-Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-constructions).
-Proof: t(a_i)=i identifies every section ring with B_i. The composite transition
-from a_(i+1) to a_i reindexes to the original B_(i+1)→B_i by functoriality of the
-coefficient sequence. Vertical restrictions are unchanged. Use sheaf extensionality. -/
+/-- The identity coefficient identification at first endpoints. -/
 theorem blockEndpointRing :
     ((blockSite (C := C) t.endpoints).sheafPushforwardContinuous RingCat.{r}
       (coefficientSequenceTopology J) (coefficientSequenceTopology J)).obj
@@ -306,16 +269,13 @@ theorem blockEndpointRing :
   rw [blockRingPresheaf, hr]
   rfl
 
-/-- Actual first-endpoint evaluation, as restriction on the ringed sequence site.
-Source: Zheng 4.1 finite-block generalization (blueprint: lem-pur-system-block-constructions). -/
+/-- Actual first-endpoint evaluation, as restriction on the ringed sequence site. -/
 def blockEndpoint : Systems J (blockCoefficients B t) (blockTransitions J B τ t) ⥤
     Systems J B τ :=
   SheafOfModules.pushforward (F := blockSite (C := C) t.endpoints)
     (eqToHom (blockEndpointRing J B τ t).symm)
 
-/-- The actual endpoint/repetition pair, with all section and arrow formulas.
-Source: Zheng 4.1, finite-block generalization; Stacks 08BJ
-(blueprint: lem-pur-system-block-constructions). -/
+/-- The actual endpoint/repetition pair, with all section and arrow formulas. -/
 structure SystemBlockRepetition where
   /-- Repetition of strict systems. -/
   repetition : Systems J B τ ⥤ Systems J (blockCoefficients B t) (blockTransitions J B τ t)
@@ -389,8 +349,7 @@ attribute [instance] SystemBlockRepetition.repeat_additive SystemBlockRepetition
   SystemBlockRepetition.repeat_colimits SystemBlockRepetition.endpoint_additive
   SystemBlockRepetition.endpoint_limits SystemBlockRepetition.endpoint_colimits
 
-/-- K-injective preservation from the actual endpoint adjunction package.
-Source: Stacks 08BJ (blueprint: lem-pur-system-block-constructions). -/
+/-- K-injective preservation from the actual endpoint adjunction package. -/
 instance SystemBlockRepetition.preservesKInjective
     (R : SystemBlockRepetition J B τ t) : R.repetition.PreservesKInjectiveComplexes where
   isKInjective_map I := R.kinjective I inferInstance

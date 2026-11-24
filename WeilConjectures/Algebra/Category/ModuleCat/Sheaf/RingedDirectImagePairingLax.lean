@@ -14,12 +14,14 @@ import all WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
 
 /-! # Normalized lax tensor pairing for ringed direct image
 
-Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK; lax coherence and
-regular-unit uniqueness extracted from their sectionwise constructions.
-(auxiliary; not a blueprint node)
-
 The tensor, associators and unitors are the existing localization construction.
 The pushforward is Mathlib's precomposition with restriction of scalars.
+
+Lax coherence and regular-unit uniqueness are extracted from the sectionwise constructions.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D6 and 03EK
 -/
 
 @[expose] public section
@@ -416,9 +418,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
       ((sheafCompose K (forget₂ CommRingCat.{w} RingCat.{w})).obj S))
 
 /-- The local pure-tensor normalization for a lax structure on ringed direct image.
-This is only a predicate on the existing tensor and pushforward, with no additional data.
-Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK
-(auxiliary; not a blueprint node). -/
+This is only a predicate on the existing tensor and pushforward, with no additional data. -/
 def RingedPushforwardPureTensor
     (L : (pushforward.{w} c).LaxMonoidal) : Prop :=
   ∀ (M N : CategoryTheory.ringedSiteModules.{w}
@@ -555,34 +555,7 @@ private theorem tensorator_exists :
 end PrivateAssembly
 
 /-- The direct image has exactly one lax structure with the prescribed local pure tensors;
-its unit is the given coefficient map. Uniqueness assumes only the tensor normalization.
-Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK; agent extraction of
-coherence and regular-unit uniqueness
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Restrict scalars along `c` in the precomposition functor. Naturality and the ring-map
-   equations give the module axioms and linear restrictions. The map `e_U(r) = c_U(r)`
-   is a module-sheaf morphism [situation-conventions].
-2. The lax structure on inclusion induced by the monoidal sheafification adjunction
-   gives the canonical pure-tensor pairing and its naturality, associator and unitor
-   formulas. Apply [lem-pd-ringed-pushforward-bilinear-transfer] to this pairing to
-   obtain the uniquely normalized tensorator [def-pur-sheaf-tensor-product].
-3. Binary tensor equality follows by the sheafification adjunction and sectionwise
-   tensor induction. Both naturality composites agree on pure tensors, proving
-   naturality in both variables.
-4. The left and right unit composites send `r ⊗ x` and `x ⊗ r` to `c_U(r) x`.
-   The canonical unitors [lem-pc-sheaf-modules-tensor-closed] have the same values,
-   so binary tensor equality gives both unit identities.
-5. The presheaf pairing into the sheaf tensor is a local equivalence, and remains
-   one after tensoring by the third presheaf. Cancel its sheafification and use the
-   sheafification adjunction and two tensor inductions to test equality on pure
-   triples. Both associativity composites send `(x ⊗ y) ⊗ z` to `x ⊗ (y ⊗ z)`,
-   hence agree.
-6. Any other normalized tensorator is equal by binary tensor equality.
-   Its left unit identity at the regular S-module on `1_R ⊗ 1_S` forces `e'_U(1)=1`.
-   R-linearity then forces `e'_U(r)=c_U(r)`, so the units and whole lax structures agree.
--/
+its unit is the given coefficient map. Uniqueness assumes only the tensor normalization. -/
 theorem exists_unique_ringedPushforward_laxMonoidal :
     ∃ L : (pushforward.{w} c).LaxMonoidal,
       RingedPushforwardPureTensor v R S c L ∧

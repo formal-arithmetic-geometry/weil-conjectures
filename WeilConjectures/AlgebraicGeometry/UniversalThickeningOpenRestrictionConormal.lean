@@ -9,20 +9,24 @@ module
 public import WeilConjectures.AlgebraicGeometry.FormallyUnramifiedConormal
 import WeilConjectures.AlgebraicGeometry.OpenRestrictionKernelModule
 
+/-!
+# Conormal sheaves of universal thickenings restricted to opens
+
+## References
+
+* [Stacks, Tag 04FA]
+* [Stacks, Tag 01R2]
+-/
+
 @[expose] public section
 
 universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The conormal comparison for the open restriction data.
-Source: Stacks Project, More on Morphisms, Lemma 04FA and Definition 01R2
-(blueprint: lem-weil-pbc-universal-thickening-open-restriction-conormal).
-The restriction of the kernel ideal along an open immersion identifies with the
-kernel ideal of the restricted thickening; tensor pullback composition and the
-open-immersion pullback/restriction comparison then give the displayed module
-isomorphism. Independence of the chosen universal thickening supplies the
-formally unramified witness and the displayed `HV`. -/
+/-- The conormal comparison for the open restriction data: the restricted morphism is
+formally unramified and the restriction of the conormal sheaf is isomorphic to the conormal
+sheaf of the restricted universal thickening. -/
 theorem universalFirstOrderThickening_open_restriction_conormal
     {Z X Z' : Scheme.{u}} (h : Z ⟶ X) (i : Z ⟶ Z') (h' : Z' ⟶ X)
     (H : IsUniversalFirstOrderThickening h i h')

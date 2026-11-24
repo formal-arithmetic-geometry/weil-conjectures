@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 /-!
 # The canonical degree maps into the odd column quotient
 
-Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-map)
+## References
+
+* Stacks Project, Tag 09KP, alternating column filtration.
 -/
 
 @[expose] public section
@@ -33,8 +34,7 @@ variable (S : ℕ → ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ))
 variable (e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)))
 variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
-/-- The full column, transported along e, enters at stage 2j+2.
-Source: Stacks Project, Tag 09KP, alternating column filtration. -/
+/-- The full column, transported along e, enters at stage 2j+2. -/
 lemma full_mem_next (j : ℕ) (k : ℤ) (x : (S j).X₂.X (k + j)) :
     ((e j).hom.f (k + j) ≫ full K j k) x ∈ term K S e (2 * j + 2) k := by
   apply (le_iSup (fun a : ℕ ↦
@@ -44,16 +44,14 @@ lemma full_mem_next (j : ℕ) (k : ℤ) (x : (S j).X₂.X (k + j)) :
   simp only [le_refl, ite_true]
   exact ⟨(e j).hom.f (k + j) x, rfl⟩
 
-/-- The full-column map, restricted to the next filtration term.
-Source: Stacks Project, Tag 09KP, alternating column filtration. -/
+/-- The full-column map, restricted to the next filtration term. -/
 noncomputable def fullToNext (j : ℕ) (k : ℤ) :
     (S j).X₂.X (k + j) ⟶ (complex K S e h_positive (2 * j + 2)).X k :=
   ModuleCat.ofHom ((((e j).hom.f (k + j) ≫ full K j k)).hom.codRestrict
     (term K S e (2 * j + 2) k) (full_mem_next K S e j k))
 
 /-- The canonical degree map from the shifted middle endpoint to the odd quotient.
-It is a specified composite, with no choice of representatives or inverse.
-Source: Stacks Project, Tag 09KP, successive quotients of the column filtration. -/
+It is a specified composite, with no choice of representatives or inverse. -/
 noncomputable def oddFullQuotientComponent (j : ℕ) (k : ℤ) :
     ((CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)).obj
       (S j).X₂).X k ⟶ (cokernel (step K S e h_positive (2 * j + 1))).X k :=
@@ -112,18 +110,7 @@ private lemma vertical_eq (j : ℕ) (k l : ℤ)
     Int.negOnePow_neg, Linear.comp_units_smul]
   rw [(e j).hom.comm_assoc]
 
-/-- The full-column projection to the odd quotient is a chain map.
-Source: Stacks Project, Tag 09KP, proof of lemma-resolve, alternating filtration.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-map)
-
-Proof. Restrict the full-column inclusion to stage 2j+2. Its horizontal
-differential lands in an earlier full column in stage 2j+1 when j>0;
-when j=0 it vanishes because the positive column is zero. The vertical
-term is the differential of the middle endpoint, with sign (-1)^j.
-The inclusions of submodules are injective, so this identity restricts
-to the filtration stages. Composing with the cokernel projection kills
-the horizontal term and gives the chain-map equation for the shift by j.
--/
+/-- The full-column projection to the odd quotient is a chain map. -/
 theorem oddFullQuotientComponent_comm (j : ℕ) (k l : ℤ)
     (hkl : (ComplexShape.up ℤ).Rel k l) :
     oddFullQuotientComponent K S e h_positive j k ≫
@@ -158,16 +145,14 @@ theorem oddFullQuotientComponent_comm (j : ℕ) (k l : ℤ)
     congrArg (fun f ↦ f.f l) (cokernel.condition (step K S e h_positive (2 * j + 1)))
   rw [Category.assoc H, hz, comp_zero, add_zero]
 
-/-- The chain map from the shifted middle endpoint to the odd quotient.
-Source: Stacks Project, Tag 09KP, alternating column filtration. -/
+/-- The chain map from the shifted middle endpoint to the odd quotient. -/
 noncomputable def oddFullQuotientMap (j : ℕ) :
     ((CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)).obj
       (S j).X₂) ⟶ cokernel (step K S e h_positive (2 * j + 1)) where
   f := oddFullQuotientComponent K S e h_positive j
   comm' := oddFullQuotientComponent_comm K S e h_positive j
 
-/-- The lower piece is killed by the odd quotient projection.
-Source: Stacks Project, Tag 09KP, definition of the alternating filtration. -/
+/-- The lower piece is killed by the odd quotient projection. -/
 lemma oddFullQuotientMap_zero (j : ℕ) :
     (CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)).map
       (S j).f ≫ oddFullQuotientMap K S e h_positive j = 0 := by
@@ -199,8 +184,7 @@ lemma oddFullQuotientMap_zero (j : ℕ) :
 
 /-- The canonical odd quotient map from the shifted third endpoint.
 Its data is specified by descent through the cokernel of the shifted first
-arrow; exactness determines this descent uniquely since the second arrow is epi.
-Source: Stacks Project, Tag 09KP, alternating column filtration. -/
+arrow; exactness determines this descent uniquely since the second arrow is epi. -/
 noncomputable def oddQuotientMap (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) :
     ((CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)).obj
       (S j).X₃) ⟶ cokernel (step K S e h_positive (2 * j + 1)) := by

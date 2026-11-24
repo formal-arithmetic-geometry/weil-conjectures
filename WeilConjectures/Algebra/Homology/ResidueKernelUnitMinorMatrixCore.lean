@@ -10,6 +10,14 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.LocalRing.ResidueField.Defs
 public import Mathlib.RingTheory.Finiteness.Defs
 import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorPivot
+
+/-! # Matrix unit-minor normalization over a local ring
+
+## References
+
+* Stacks Project, Tags 00O0 and 00NX (matrix unit-minor argument)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe v
@@ -58,11 +66,8 @@ private theorem normalize_pivot
     abel
 
 /--
-(blueprint: new-residue-kernel-unit-minor-matrix-core)
 Matrix unit-minor normalization over a local ring, assuming the localized modules are free.
-Source: Stacks Project, Tags 00O0 and 00NX, matrix unit-minor argument.
-The proof chooses a maximal nonzero residue minor and performs elementary row
-and column operations. -/
+-/
 theorem residue_kernel_unit_minor_matrix_core
     (R : Type v) [CommRing R] (A : Type v) [CommRing A] [Algebra R A]
     [IsLocalRing A] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)

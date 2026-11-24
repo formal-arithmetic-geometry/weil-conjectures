@@ -62,13 +62,15 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 
 /-! # Derived left extension of arbitrary semilinear systems
 
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
-Stacks Project, Tags 03DA, 03DB, 06YS, 06YT, 06XN and 09T5
-(blueprint: def-pur-system-level-left-extension-basic).
-
 Index `n : ℕ` denotes the positive level `n+1`. Strict systems have all iterated
 transitions, with their identity and composition laws; this is equivalent to specifying
 successive transitions. No normalization, coefficient flatness or bound is imposed.
+
+## References
+
+* Stacks Project, Tags 03CZ, 03DA, 03DB, 05RU, 015F, 06XN, 0FND, 09T5, 06YN, 06YS, 0G7E, 06YY,
+  03EK, 03D7, 07A6, 06YT
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -90,22 +92,17 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- Modules at the positive level `n+1`. Source: Zheng, Construction 4.1, p. 21
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Modules at the positive level `n+1`. -/
 abbrev systemLevel (n : ℕ) :=
   ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J (B.obj (op n)))
 
-/-- The actual coefficient restriction, not a chosen functor.
-Source: Stacks 03CZ; Zheng, Construction 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The actual coefficient restriction, not a chosen functor. -/
 abbrev systemRestriction {m n : ℕ} (h : m ≤ n) : systemLevel B m ⥤ systemLevel B n :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map
     (B.map (homOfLE h).op))
 
 /-- Strict semilinear systems with their iterated transitions. Identity and composition
-are written on sections, avoiding any arbitrary scalar-restriction identifications.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: def-pur-system-level-left-extension-basic). -/
+are written on sections, avoiding any arbitrary scalar-restriction identifications. -/
 structure StrictRingSystem where
   level : ∀ n : ℕ, systemLevel B n
   transition : ∀ {m n : ℕ} (h : m ≤ n), level n ⟶ (systemRestriction B h).obj (level m)
@@ -118,18 +115,13 @@ structure StrictRingSystem where
 
 variable {B}
 
-/-- Componentwise linear maps commuting with the specified semilinear transitions.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Componentwise linear maps commuting with the specified semilinear transitions. -/
 structure StrictRingSystem.Hom (M N : StrictRingSystem B) where
   app : ∀ n : ℕ, M.level n ⟶ N.level n
   comm : ∀ {m n : ℕ} (h : m ≤ n),
     app n ≫ N.transition h = M.transition h ≫ (systemRestriction B h).map (app m)
 
-/-- Componentwise identities commute with transitions.
-Source: Zheng, Construction 4.1 (blueprint: def-pur-system-level-left-extension-basic).
-Proof: functoriality of scalar restriction and the two identity laws give both sides
-as the same transition. -/
+/-- Componentwise identities commute with transitions. -/
 theorem strictRingSystem_id_comm (M : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) :
     𝟙 (M.level n) ≫ M.transition h =
       M.transition h ≫ (systemRestriction B h).map (𝟙 (M.level m)) := by
@@ -137,10 +129,7 @@ theorem strictRingSystem_id_comm (M : StrictRingSystem B) {m n : ℕ} (h : m ≤
   let _ := ‹HasSheafify J AddCommGrpCat.{w}›
   simp
 
-/-- Compatible families compose componentwise.
-Source: Zheng, Construction 4.1 (blueprint: def-pur-system-level-left-extension-basic).
-Proof: substitute the two compatibility squares and use associativity and preservation
-of composition by scalar restriction. -/
+/-- Compatible families compose componentwise. -/
 theorem strictRingSystem_comp_comm {M N P : StrictRingSystem B}
     (f : M.Hom N) (g : N.Hom P) {m n : ℕ} (h : m ≤ n) :
     (f.app n ≫ g.app n) ≫ P.transition h =
@@ -150,21 +139,16 @@ theorem strictRingSystem_comp_comm {M N P : StrictRingSystem B}
   rw [Functor.map_comp, Category.assoc, g.comm h, ← Category.assoc, f.comm h,
     Category.assoc]
 
-/-- Identity system map. Source: Zheng, Construction 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Identity system map. -/
 def StrictRingSystem.id (M : StrictRingSystem B) : M.Hom M :=
   ⟨fun _ ↦ 𝟙 _, strictRingSystem_id_comm M⟩
 
-/-- Composition of system maps. Source: Zheng, Construction 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Composition of system maps. -/
 def StrictRingSystem.Hom.comp {M N P : StrictRingSystem B} (f : M.Hom N) (g : N.Hom P) :
     M.Hom P :=
   ⟨fun n ↦ f.app n ≫ g.app n, strictRingSystem_comp_comm f g⟩
 
-/-- Category laws for the componentwise operations.
-Source: Zheng, Construction 4.1 (blueprint: def-pur-system-level-left-extension-basic).
-Proof: extensionality reduces all three laws to the corresponding laws at every level;
-compatibility proofs are irrelevant. -/
+/-- Category laws for the componentwise operations. -/
 theorem strictRingSystem_category_laws :
     (∀ (M N : StrictRingSystem B) (f : M.Hom N),
       M.id.comp f = f ∧ f.comp N.id = f) ∧
@@ -189,8 +173,7 @@ theorem strictRingSystem_category_laws :
     funext n
     exact Category.assoc _ _ _
 
-/-- The category of the displayed strict systems. Source: Zheng, Construction 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The category of the displayed strict systems. -/
 instance strictRingSystemCategory : Category (StrictRingSystem B) where
   Hom := StrictRingSystem.Hom
   id := StrictRingSystem.id (B := B)
@@ -201,15 +184,12 @@ instance strictRingSystemCategory : Category (StrictRingSystem B) where
 
 variable (B)
 
-/-- Evaluation of the actual strict system. Source: Zheng, Construction 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Evaluation of the actual strict system. -/
 def systemEvaluation (n : ℕ) : StrictRingSystem B ⥤ systemLevel B n where
   obj M := M.level n
   map f := f.app n
 
-/-- The additive structure is fixed by componentwise evaluation.
-Source: Stacks 03DA; Zheng, Construction 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The additive structure is fixed by componentwise evaluation. -/
 def StrictRingSystem.AbelianNormalized (a : Abelian (StrictRingSystem B)) : Prop :=
   @_root_.id Prop (by
     letI := a
@@ -467,11 +447,7 @@ private def system_colimit_cocone {K : Type k} [Category.{kv} K]
 variable (B)
 
 /-- Colimits of strict systems are constructed componentwise, for every shape whose
-abelian-group and coefficient-module colimits exist. Source: Stacks 03DA and 03DB
-(blueprint: def-pur-system-level-left-extension-basic).
-Proof: the transitions are induced from the component cocones. Their identities and
-composition follow after forgetting to abelian sheaves and testing on the coprojections.
-Component descents commute with these transitions by the same universal property. -/
+abelian-group and coefficient-module colimits exist. -/
 theorem strictRingSystem_hasColimitsOfShape (K : Type k) [Category.{kv} K]
     [HasColimitsOfShape K AddCommGrpCat.{w}]
     [∀ n : ℕ, HasColimitsOfShape K (systemLevel B n)] :
@@ -479,10 +455,7 @@ theorem strictRingSystem_hasColimitsOfShape (K : Type k) [Category.{kv} K]
   ⟨fun F ↦ ⟨⟨system_colimit_cocone F,
     system_isColimit _ (fun n ↦ colimit.isColimit (F ⋙ systemEvaluation B n))⟩⟩⟩
 
-/-- Evaluation preserves componentwise colimits of any supported shape.
-Source: Stacks 03DA and 03DB (blueprint: def-pur-system-level-left-extension-basic).
-Proof: the image of the constructed colimit cocone is exactly the coefficient-level
-colimit cocone. Apply the criterion for preservation using a chosen colimit cocone. -/
+/-- Evaluation preserves componentwise colimits of any supported shape. -/
 theorem systemEvaluation_colimitsOfShape (K : Type k) [Category.{kv} K]
     [HasColimitsOfShape K AddCommGrpCat.{w}]
     [∀ n : ℕ, HasColimitsOfShape K (systemLevel B n)] (n : ℕ) :
@@ -494,8 +467,7 @@ theorem systemEvaluation_colimitsOfShape (K : Type k) [Category.{kv} K]
       (fun i ↦ colimit.isColimit (F ⋙ systemEvaluation B i)))
     (colimit.isColimit (F ⋙ systemEvaluation B n))
 
-/-- Strict systems admit all small colimits in the coefficient universe.
-Source: Stacks 03DA (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Strict systems admit all small colimits in the coefficient universe. -/
 instance strictRingSystemColimits : HasColimitsOfSize.{w, w} (StrictRingSystem B) :=
   ⟨fun K _ ↦ strictRingSystem_hasColimitsOfShape B K⟩
 
@@ -743,15 +715,7 @@ private theorem system_abelian_ext (a b : Abelian (StrictRingSystem B))
 
 variable (B)
 
-/-- The unique componentwise abelian structure.
-Source: Stacks 03DA and 03DB (blueprint: def-pur-system-level-left-extension-basic).
-Proof: add linear maps componentwise. Restriction is additive, so the compatibility
-condition is closed under addition. Componentwise finite cones and cocones give finite
-limits and colimits preserved by evaluations. Evaluations jointly reflect isomorphisms,
-so every coimage-image comparison is invertible by its component comparisons. Mathlib's
-criterion gives the abelian structure. Normalized additive evaluations fix addition;
-`AddCommGroup.ext` and `Preadditive.ext` give uniqueness of the preadditive structure.
-All other abelian fields are Prop. -/
+/-- The unique componentwise abelian structure. -/
 theorem strictRingSystem_abelian_exists :
     ∃! a : Abelian (StrictRingSystem B), StrictRingSystem.AbelianNormalized B a := by
   obtain ⟨a, ha, _⟩ := system_foundation_exists (B := B)
@@ -759,18 +723,14 @@ theorem strictRingSystem_abelian_exists :
   intro b hb
   exact system_abelian_ext b a (system_preadditive_ext b a hb ha)
 
-/-- The abelian structure determined uniquely by componentwise addition.
-Source: Stacks 03DA (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The abelian structure determined uniquely by componentwise addition. -/
 instance strictRingSystemAbelian : Abelian (StrictRingSystem B) :=
   (strictRingSystem_abelian_exists B).exists.choose
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Evaluation is additive and exact.
-Source: Stacks 03DA and 03DB (blueprint: def-pur-system-level-left-extension-basic).
-Proof: use componentwise addition, kernels, finite biproducts and sheafified cokernels
-from the preceding construction. Coverings do not change the level. -/
+/-- Evaluation is additive and exact. -/
 theorem systemEvaluation_exact (n : ℕ) :
     (systemEvaluation B n).Additive ∧ PreservesFiniteLimits (systemEvaluation B n) ∧
       PreservesFiniteColimits (systemEvaluation B n) := by
@@ -778,31 +738,21 @@ theorem systemEvaluation_exact (n : ℕ) :
     ((system_foundation_exists (B := B)).choose_spec.2 n).1,
     ((system_foundation_exists (B := B)).choose_spec.2 n).2⟩
 
-/-- Additivity witness. Source: Stacks 03DA
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Additivity witness. -/
 instance systemEvaluationAdditive (n : ℕ) : (systemEvaluation B n).Additive :=
   (systemEvaluation_exact B n).1
-/-- Finite-limit witness. Source: Stacks 03DA
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Finite-limit witness. -/
 instance systemEvaluationLimits (n : ℕ) : PreservesFiniteLimits (systemEvaluation B n) :=
   (systemEvaluation_exact B n).2.1
-/-- Finite-colimit witness. Source: Stacks 03DA
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Finite-colimit witness. -/
 instance systemEvaluationColimits (n : ℕ) : PreservesFiniteColimits (systemEvaluation B n) :=
   (systemEvaluation_exact B n).2.2
 
-/-- Strict morphisms are determined by their component maps.
-Source: Zheng 4.1 (blueprint: def-pur-system-level-left-extension-basic).
-Proof: the only data in a strict morphism is its family of components; the remaining
-compatibility field is a proposition. -/
+/-- Strict morphisms are determined by their component maps. -/
 theorem strictRingSystem_hom_ext {M N : StrictRingSystem B} (f g : M ⟶ N)
     (h : ∀ n, f.app n = g.app n) : f = g := system_hom_ext f g h
 
-/-- A strict system morphism is invertible exactly when every component is invertible.
-Source: Zheng 4.1 (blueprint: def-pur-system-level-left-extension-basic).
-Proof: invert the component maps. Cancelling the original maps in each transition
-square proves compatibility of these inverses. The two composites are identities
-componentwise. The converse follows from functoriality of evaluation. -/
+/-- A strict system morphism is invertible exactly when every component is invertible. -/
 theorem strictRingSystem_isIso_iff {M N : StrictRingSystem B} (f : M ⟶ N) :
     IsIso f ↔ ∀ n, IsIso ((systemEvaluation B n).map f) := by
   constructor
@@ -810,10 +760,7 @@ theorem strictRingSystem_isIso_iff {M N : StrictRingSystem B} (f : M ⟶ N) :
     infer_instance
   · exact system_isIso f
 
-/-- Evaluations jointly detect zero strict systems.
-Source: Zheng 4.1 (blueprint: def-pur-system-level-left-extension-basic).
-Proof: evaluation preserves zero objects. Conversely, if all components vanish, the
-identity morphism is zero at each component, hence zero as a system morphism. -/
+/-- Evaluations jointly detect zero strict systems. -/
 theorem strictRingSystem_isZero_iff (M : StrictRingSystem B) :
     IsZero M ↔ ∀ n, IsZero ((systemEvaluation B n).obj M) := by
   constructor
@@ -827,24 +774,18 @@ theorem strictRingSystem_isZero_iff (M : StrictRingSystem B) :
     rw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_zero]
     exact (IsZero.iff_id_eq_zero _).1 (h n)
 
-/-- Standard localization of the strict abelian category.
-Source: Stacks 05RU (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Standard localization of the strict abelian category. -/
 instance strictRingSystemHasDerived : HasDerivedCategory (StrictRingSystem B) :=
   HasDerivedCategory.standard _
 
-/-- Exact derived evaluation, using the recorded ordinary derived category.
-Source: Zheng, Construction 4.1 (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Exact derived evaluation, using the recorded ordinary derived category. -/
 abbrev derivedSystemEvaluation (n : ℕ) := (systemEvaluation B n).mapDerivedCategory
 
-/-- The actual selected coefficient sequence, including its composite ring maps.
-Source: the subsequence construction extending Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The actual selected coefficient sequence, including its composite ring maps. -/
 def selectedSystemRings (r : ℕ ↪o ℕ) : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w} :=
   r.toOrderHom.monotone.functor.op ⋙ B
 
-/-- Restriction of strict systems to selected levels, on objects and maps.
-Source: the subsequence construction extending Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Restriction of strict systems to selected levels, on objects and maps. -/
 def systemSubsequence (r : ℕ ↪o ℕ) : StrictRingSystem B ⥤
     StrictRingSystem (selectedSystemRings B r) where
   obj M :=
@@ -854,10 +795,7 @@ def systemSubsequence (r : ℕ ↪o ℕ) : StrictRingSystem B ⥤
       compose := fun h k ↦ M.compose (r.monotone h) (r.monotone k) }
   map f := { app := fun n ↦ f.app (r n), comm := fun h ↦ f.comm (r.monotone h) }
 
-/-- Exactness of the actual restriction to a subsequence.
-Source: Stacks 03DA and 03DB (blueprint: def-pur-system-level-left-extension-basic).
-Proof: restriction just selects components; addition, kernels and cokernels are computed
-at those components. -/
+/-- Exactness of the actual restriction to a subsequence. -/
 theorem systemSubsequence_exact (r : ℕ ↪o ℕ) :
     (systemSubsequence B r).Additive ∧ PreservesFiniteLimits (systemSubsequence B r) ∧
       PreservesFiniteColimits (systemSubsequence B r) := by
@@ -887,33 +825,25 @@ theorem systemSubsequence_exact (r : ℕ ↪o ℕ) :
     intro n
     exact isColimitOfPreserves (systemEvaluation B (r n)) (colimit.isColimit F)
 
-/-- Additivity of restriction. Source: Stacks 03DA
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Additivity of restriction. -/
 instance systemSubsequenceAdditive (r : ℕ ↪o ℕ) : (systemSubsequence B r).Additive :=
   (systemSubsequence_exact B r).1
-/-- Finite-limit preservation. Source: Stacks 03DA
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Finite-limit preservation. -/
 instance systemSubsequenceLimits (r : ℕ ↪o ℕ) : PreservesFiniteLimits (systemSubsequence B r) :=
   (systemSubsequence_exact B r).2.1
-/-- Finite-colimit preservation. Source: Stacks 03DA
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Finite-colimit preservation. -/
 instance systemSubsequenceColimits (r : ℕ ↪o ℕ) : PreservesFiniteColimits (systemSubsequence B r) :=
   (systemSubsequence_exact B r).2.2
 
-/-- Derived restriction to selected levels is the exact termwise restriction.
-Source: Stacks 015F (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Derived restriction to selected levels is the exact termwise restriction. -/
 abbrev derivedSystemSubsequence (r : ℕ ↪o ℕ) := (systemSubsequence B r).mapDerivedCategory
 
 /-- The first selected level above `m`. Every strictly increasing sequence of naturals
-is unbounded, since `m ≤ r m`. Source: the subsequence construction extending Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic). -/
+is unbounded, since `m ≤ r m`. -/
 def systemNextSelected (r : ℕ ↪o ℕ) (m : ℕ) : ℕ :=
   Nat.find (⟨m, r.strictMono.id_le m⟩ : ∃ i, m ≤ r i)
 
-/-- The selected index exists and is minimal.
-Source: the subsequence extension of Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic).
-Proof: apply the specification and minimality of Nat.find to m ≤ r m. -/
+/-- The selected index exists and is minimal. -/
 theorem systemNextSelected_spec (r : ℕ ↪o ℕ) (m : ℕ) :
     m ≤ r (systemNextSelected r m) ∧
       ∀ i : ℕ, m ≤ r i → systemNextSelected r m ≤ i := by
@@ -921,21 +851,14 @@ theorem systemNextSelected_spec (r : ℕ ↪o ℕ) (m : ℕ) :
   exact ⟨Nat.find_spec (⟨m, r.strictMono.id_le m⟩ : ∃ i, m ≤ r i),
     fun i hi ↦ Nat.find_min' (⟨m, r.strictMono.id_le m⟩ : ∃ i, m ≤ r i) hi⟩
 
-/-- The first selected index is monotone, including its constant intervals.
-Source: the subsequence extension of Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic).
-Proof: r(t(m+1)) ≥ m+1 ≥ m, so the minimality of t(m) gives the result. -/
+/-- The first selected index is monotone, including its constant intervals. -/
 theorem systemNextSelected_mono (r : ℕ ↪o ℕ) (m : ℕ) :
     systemNextSelected r m ≤ systemNextSelected r (m + 1) := by
   exact (systemNextSelected_spec r m).2 _
     ((Nat.le_succ m).trans (systemNextSelected_spec r (m + 1)).1)
 
 /-- The first selected index of a composite selection is computed in two steps:
-`t_{r∘s}(m) = t_s(t_r(m))`. Source: the subsequence extension of Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic), node proof step 12.
-Proof: since `r` is strictly increasing, `m ≤ r j` iff `t_r(m) ≤ j` by the specification and
-minimality of `t_r(m)`. Hence `m ≤ r (s i)` iff `t_r(m) ≤ s i` iff `t_s(t_r(m)) ≤ i`, so both
-sides are the least such `i`. -/
+`t_{r∘s}(m) = t_s(t_r(m))`. -/
 theorem systemNextSelected_trans (r s : ℕ ↪o ℕ) (m : ℕ) :
     systemNextSelected (s.trans r) m = systemNextSelected s (systemNextSelected r m) := by
   apply Nat.le_antisymm
@@ -946,8 +869,7 @@ theorem systemNextSelected_trans (r s : ℕ ↪o ℕ) (m : ℕ) :
     exact (systemNextSelected_spec r m).2 _
       (systemNextSelected_spec (s.trans r) m).1
 
-/-- The actual iterated transition, as a natural transformation of evaluations.
-Source: Zheng, Construction 4.1 (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The actual iterated transition, as a natural transformation of evaluations. -/
 def strictSystemTransition {m n : ℕ} (h : m ≤ n) :
     systemEvaluation B n ⟶ systemEvaluation B m ⋙ systemRestriction B h where
   app M := M.transition h
@@ -967,9 +889,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{dA} A]
 
 /-- An ordinary left extension and its total left derived pair, with the adjunction
 normalized by the strict transpose. This packages the left-extension notion already
-stated in the node; the right functor is always the actual evaluation or restriction.
-Source: Zheng 4.1; Stacks 06XN, 0FND and 09T5
-(blueprint: def-pur-system-level-left-extension-basic). -/
+stated elsewhere; the right functor is always the actual evaluation or restriction. -/
 structure SystemDerivedLeftExtension where
   ordinary : A ⥤ D
   [additive : ordinary.Additive]
@@ -997,46 +917,39 @@ end GeneralDerivedExtension
 
 variable [EssentiallySmall.{w} C]
 
-/-- The K-flat resolving predicate at one coefficient level.
-Source: Stacks 06YN and 06YS (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The K-flat resolving predicate at one coefficient level. -/
 abbrev systemLevelKFlat (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ)
     (P : CochainComplex (systemLevel B n) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients (R := B.obj (op n)) P ∧
     ∀ i : ℤ, IsFlatOnSite (R := B.obj (op n)) (P.X i)
 
-/-- A single strict representative that is flat-term K-flat at every level.
-Source: Stacks 06YS and 0G7E (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- A single strict representative that is flat-term K-flat at every level. -/
 def systemComponentwiseKFlat (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
     (P : CochainComplex (StrictRingSystem B) ℤ) : Prop :=
   ∀ n : ℕ, systemLevelKFlat B n
     (((systemEvaluation B n).mapHomologicalComplex (.up ℤ)).obj P)
 
 /-- A scalar model for every actual coefficient map; these are universal derived pairs,
-not unrelated evaluated objects. Source: Stacks 06YY
-(blueprint: def-pur-system-level-left-extension-basic). -/
+not unrelated evaluated objects. -/
 abbrev SystemScalarAssignment :=
   ∀ {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S), SystemScalarModel φ
 
-/-- Ordinary tensor along an actual transition. Source: Stacks 03EK
-(blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Ordinary tensor along an actual transition. -/
 abbrev systemTensor (S : SystemScalarAssignment (J := J))
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) :=
   (S (B.map (homOfLE h).op)).model.E
 
-/-- Derived tensor along an actual transition, using the dependency's universal pair.
-Source: Stacks 06YY (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- Derived tensor along an actual transition, using the dependency's universal pair. -/
 abbrev systemDerivedTensor (S : SystemScalarAssignment (J := J))
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) :=
   (S (B.map (homOfLE h).op)).model.T
 
-/-- The scalar Hom correspondence, normalized on local tensor generators.
-Source: Stacks 03D7 (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The scalar Hom correspondence, normalized on local tensor generators. -/
 abbrev systemTensorAdj (S : SystemScalarAssignment (J := J))
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) :=
   (S (B.map (homOfLE h).op)).ordinaryAdj
 
-/-- The normalized derived scalar Hom correspondence.
-Source: Stacks 07A6 and 0FND (blueprint: def-pur-system-level-left-extension-basic). -/
+/-- The normalized derived scalar Hom correspondence. -/
 abbrev systemDerivedTensorAdj (S : SystemScalarAssignment (J := J))
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n) :=
   (S (B.map (homOfLE h).op)).adjunction
@@ -1044,9 +957,7 @@ abbrev systemDerivedTensorAdj (S : SystemScalarAssignment (J := J))
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Canonical tensor units and associators, fixed by their balanced formulas before
-sheafification and by the universal counits on flat-term K-flat representatives.
-Source: Stacks 03EK, 06YT and 0G7E
-(blueprint: def-pur-system-level-left-extension-basic). -/
+sheafification and by the universal counits on flat-term K-flat representatives. -/
 structure SystemTensorCoherence (S : SystemScalarAssignment (J := J)) where
   ordinaryUnit : ∀ (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ),
     systemTensor S B (Nat.le_refl n) ≅ 𝟭 (systemLevel B n)
@@ -1082,12 +993,7 @@ structure SystemTensorCoherence (S : SystemScalarAssignment (J := J)) where
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (ordinaryAssoc B h k) (.up ℤ)).hom.app P)
 
 /-- The normalized scalar models give coherent tensor units and associators for every
-coefficient system. Source: Stacks 03EK, 06YT and 0FND
-(blueprint: lem-pur-system-tensor-coherence).
-Proof: apply ordinary and derived adjoint uniqueness to each identity and composable
-pair of coefficient maps. The normalized pure-tensor and cochain formulas of the scalar
-coherence theorem give all four required normalizations. Functoriality of B supplies
-the equalities of the actual coefficient maps. -/
+coefficient system. -/
 def systemTensorCoherence (S : SystemScalarAssignment (J := J)) :
     SystemTensorCoherence S := by
   let hu (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (n : ℕ) :
@@ -1114,10 +1020,7 @@ def systemTensorCoherence (S : SystemScalarAssignment (J := J)) :
 
 /-- The two descriptions of the first selected level of a composite selection give the
 same evaluated derived tensor; it transports the composite evaluation formula along
-`systemNextSelected_trans`. Source: the subsequence extension of Zheng 4.1
-(blueprint: def-pur-system-level-left-extension-basic), node proof step 12.
-Proof: rewrite the index by `systemNextSelected_trans`; the two inequality proofs then
-agree by proof irrelevance. -/
+`systemNextSelected_trans`. -/
 theorem systemSelectedTensor_trans (S : SystemScalarAssignment (J := J))
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r s : ℕ ↪o ℕ) (m : ℕ)
     (P : DerivedCategory (StrictRingSystem (selectedSystemRings B (s.trans r)))) :
@@ -1143,9 +1046,7 @@ theorem systemSelectedTensor_trans (S : SystemScalarAssignment (J := J))
 /-- All ordinary and derived left extensions of strict semilinear systems, including
 componentwise coproducts and cohomology, exact evaluation, the normalized transition
 formula, and composition of subsequences. Every functor is a functor on the ordinary
-unbounded localization of the actual strict abelian category.
-Source: Zheng, Construction 4.1, p. 21, and its subsequence extension; Stacks 06XN and 09T5
-(blueprint: def-pur-system-level-left-extension-basic). -/
+unbounded localization of the actual strict abelian category. -/
 structure SystemLevelLeftExtensionTheory where
   scalar : SystemScalarAssignment (J := J)
   tensor : SystemTensorCoherence scalar

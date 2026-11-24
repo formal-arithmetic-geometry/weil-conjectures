@@ -18,8 +18,9 @@ import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Affine descent of bounded finite projective complexes
 
-Source: Stacks Project, More on Algebra, Lemma 15.76.18 (Tag 0BC7), affine complex case
-(blueprint: lem-pc-affine-perfect-colimit-descent).
+## References
+
+* Stacks Project, Tag 0BC7
 -/
 
 @[expose] public section
@@ -31,20 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- A bounded complex of finite projective modules over a directed colimit of commutative
-rings descends, as a complex, to one stage.
-Source: Stacks Project, More on Algebra, Lemma 15.76.18 (Tag 0BC7), affine complex case
-(blueprint: lem-pc-affine-perfect-colimit-descent).
-
-Proof: Choose bounds outside which the complex is zero. Its finitely many terms are finite
-projective, hence finitely presented. Descend them by
-`lem-pc-fp-module-map-descent-affine`, and use directedness to choose one stage. Descend each
-splitting as a summand of a finite free module, and use the equality clause of that lemma to
-make the splitting identities hold after enlarging the stage; the descended terms are then
-finite projective. Descend the finitely many differentials by the maps clause of the same
-lemma. Use its equality clause to impose the finitely many relations that successive
-differentials compose to zero, again at a common later stage. The termwise base-change
-isomorphisms commute with the differentials and assemble to the asserted complex isomorphism.
--/
+rings descends, as a complex, to one stage. -/
 theorem exists_finite_projective_model_of_directed_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

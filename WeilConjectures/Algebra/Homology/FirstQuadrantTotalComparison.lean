@@ -13,7 +13,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Columnwise comparison of first-quadrant total complexes
 
-Source: Stacks Project, Homology, Section 12.25, finite filtration and diagonal arguments.
+## References
+
+* Stacks Project, Homology, Section 12.25, finite filtration and diagonal arguments
 -/
 
 @[expose] public section
@@ -92,21 +94,7 @@ private lemma rowCutMap_total_quasiIsoAt {C : Type u} [Category.{v} C] [Abelian 
   exact ShortComplex.quasiIso_of_isIso _
 
 /-- A columnwise quasi-isomorphism of first-quadrant bicomplexes induces a
-quasi-isomorphism on their total complexes.
-Source: Stacks Project, Section 12.25 (Tags 012X and 0133), finite filtration argument.
-(blueprint: lem-sc-first-quadrant-total-column-comparison).
-
-Proof: in each homology degree n truncate the vertical complexes above N=n+1
-by restricting to the finite shape 0,...,N and extending by zero. The canonical
-projections commute with f. At every retained row they are isomorphisms of
-horizontal complexes; at every omitted row the truncated objects are zero.
-Thus the truncated map satisfies finite-row comparison. In total degree m≤N,
-every diagonal summand has vertical degree q≤m≤N, so each total projection is
-an isomorphism. In particular it is invertible on the three terms computing
-homology in degree n (including prev(0)=0), hence a quasi-isomorphism at n.
-Totalizing the naturality square and applying two-out-of-three transfers the
-finite-row result to the original map in degree n. Repeat for all n.
-No choice of an unproved existence witness enters any definition. -/
+quasi-isomorphism on their total complexes. -/
 theorem quasiIso_totalMap_of_columns {C : Type u} [Category.{v} C] [Abelian C]
     {K L : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : K ⟶ L)

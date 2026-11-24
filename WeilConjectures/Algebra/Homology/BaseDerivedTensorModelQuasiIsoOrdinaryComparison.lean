@@ -10,8 +10,9 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Ordinary counit transport of base-derived tensor models
 
-Source: Stacks Project, More on Algebra, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison).
+## References
+
+* Stacks Project, More on Algebra, Tags 06Y6 and 08IB.
 -/
 
 @[expose] public section
@@ -66,26 +67,7 @@ private theorem tensorLinearLift
     rfl
 
 
-/-- The tensor-algebra cohomology isomorphism commutes with the ordinary counit.
-
-Proof: restrict the quasi-isomorphism to R-modules; exactness of restriction
-makes it invertible in D(R). The unique isomorphism between the two universal
-left-derived functors, compatible with the counits, and the image of this
-invertible map give an isomorphism of their derived values. Apply B-cohomology
-and conjugate by cohomologyIso. Naturality for multiplication by a in A and
-cohomologyIso_smul show that this B-linear map commutes with a tensor 1.
-B-linearity gives compatibility with 1 tensor b. Products and sums of these
-operators generate A tensor_R B, so tensor induction makes the map linear
-for that algebra. Its inverse is linear by the same commuting identities.
-This gives e. The generator equations ordinaryIso_tmul show that the ordinary
-isomorphisms are natural for s: both composites send b tensor q to
-(1 tensor b) tensor s(q). Naturality of the counits, of the derived and homotopy
-homology factorization maps, and of restriction-of-scalars homology
-isomorphisms now gives the comparison square after substituting comparison_eq.
-Faithfulness of restriction of scalars identifies it as the claimed square
-of A-tensor-R-B-linear maps. No localization or extension to D is used here.
-Source: Stacks Project, Tags 06Y6 and 08IB, perfect.tex equation-bc before Tag 0DJ8.
-(blueprint: lem-pc-base-derived-tensor-model-quasiiso-ordinary-comparison). -/
+/-- The tensor-algebra cohomology isomorphism commutes with the ordinary counit. -/
 theorem exists_baseDerivedTensorModel_quasiIso_ordinary_comparison
     {P G : CochainComplex (ModuleCat.{u} A) ℤ} (s : P ⟶ G) (hs : QuasiIso s)
     (MP : BaseDerivedTensorCohomologyModel R A B P D)

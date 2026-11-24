@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedTowerRoos
 
 /-! # Projection-normalized completed reduction adjunction
-
-Source: latest blueprint, chap-Smooth-purity, sk-lem-sp-tower-equivalence.proof.md.
-(blueprint: lem-sp-completed-projection-adjunction).
 -/
 
 @[expose] public section

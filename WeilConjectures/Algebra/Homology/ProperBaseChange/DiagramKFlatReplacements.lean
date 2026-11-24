@@ -132,14 +132,18 @@ import Mathlib.Algebra.Homology.Functor
 /-!
 # K-flat replacements of strict diagrams
 
-Source: Stacks Project, Cohomology on Sites, Tags 077J, 0G7E and 06YY,
-via functorial flat resolutions (blueprint: lem-weil-pbc-diagram-kflat-replacements).
-
 A strict diagram of complexes is a functor into cochain complexes. Applying a single
 functorial flat resolution preserves all its transition maps. Adding contractible flat
 disks in the diagram category makes its augmentation degreewise epimorphic. Module pullback
 is specified by its adjunction to the induced module direct image: this characterizes the
 usual inverse image followed by extension of scalars.
+
+## References
+
+* Stacks Project, Tag 06YS
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 077J
+* Stacks Project, Tag 0G7E
 -/
 
 @[expose] public section
@@ -173,7 +177,7 @@ private def diagramComplexMap
 /-- Add the contractible complex with terms `P i ⊞ P (i - 1)`, where `P i` covers
 `H.X i`. Its map to `H` is epimorphic in each degree and adding it preserves the
 homotopy type and the resolving class of the terms.
-Source: Stacks Project, Derived Categories, proof of `lemma-special-direct-system`. -/
+-/
 private theorem epicification
     {A : Type*} [Category A] [Abelian A]
     (W : ObjectProperty A) [W.IsClosedUnderIsomorphisms]
@@ -259,23 +263,7 @@ private theorem epicification
   · simp [e, s, g]
 
 set_option synthInstance.maxSize 1024 in
-/-- Strict diagrams admit objectwise K-flat resolutions with flat terms.
-Source: Stacks Project, Tags 077J and 06YS, functorial resolution construction
-(blueprint: lem-weil-pbc-diagram-kflat-replacements).
-
-Proof:
-1. Use the functorial flat cover constructed in the proof of Tag 06YS. Its reduced
-   left resolution gives a functor on all cochain complexes, with a natural
-   quasi-isomorphism to the identity. Compose the given diagram with this functor.
-2. Its values are filtered colimits of bounded-above flat complexes, hence K-flat
-   with flat terms. Functoriality retains the transition maps and all equations.
-3. Transpose the diagrams to complexes of diagrams. The flat cover also acts on
-   diagrams by composition. In each degree take such a cover of the target term;
-   adjacent covers form a contractible disk complex mapping degreewise epimorphically
-   to the target. Add this disk complex to the resolution and its augmentation.
-4. Evaluation preserves the resulting homotopy equivalence, flat terms and
-   epimorphisms. The original augmentation factors through the new one and the
-   homotopy equivalence, proving that the new augmentation is a quasi-isomorphism. -/
+/-- Strict diagrams admit objectwise K-flat resolutions with flat terms. -/
 theorem exists_diagram_isKFlatResolution
     {C : Type u} [SmallCategory C] (T : GrothendieckTopology C)
     (R : Sheaf T CommRingCat.{u}) {J : Type u} [SmallCategory J]

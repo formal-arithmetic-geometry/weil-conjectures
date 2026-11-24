@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 /-!
 # Internal Hom turns coproducts into products
 
-Source: Stacks Project, Modules on Sites, Section 03EK and Lemma 03EO.
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK and Lemma 03EO
 -/
 
 @[expose] public section
@@ -177,25 +179,7 @@ private lemma transpose_pre {A M M' N : Mod} (f : A ⟶ homObj (R := R) M N)
     transpose R (f ≫ homObjMap (R := R) g (𝟙 N)) = g ≫ transpose R f :=
   hom_ext (PresheafOfModules.transpose_pre f.val g.val)
 
-/-- Internal Hom into a fixed sheaf takes any coproduct cofan to a product fan.
-Source: Stacks Project, Modules on Sites, Section 03EK and Lemma 03EO
-(blueprint: lem-sc-internal-hom-coproduct-fan).
-
-Proof: A map A → homObj M N defines a restriction-compatible bilinear pairing:
-evaluate its component at U and a section a at the identity object of the slice over U.
-Swapping the pairing's inputs gives a map M → homObj A N. Naturality identifies the
-double transpose with the original map and makes precomposition in M correspond to
-postcomposition of the transpose. These constructions are made on the underlying
-presheaves and lift directly to sheaf morphisms.
-For a test fan with vertex A, transpose its projections M i → homObj A N, descend
-through the given coproduct, and transpose back to obtain A → homObj c.pt N.
-The precomposition law and involutivity reduce factorization to the coproduct's
-factorization law. Transposing a candidate lift reduces uniqueness to the coproduct's
-uniqueness law. This is the local bilinear correspondence underlying Stacks 03EO;
-no tensor object or sheafification is needed. The argument keeps separate object and
-morphism universes. For an empty family the same universal property makes the internal
-Hom terminal, and zero summands require no exception. Every constructed lift is
-specified by the coproduct universal property. -/
+/-- Internal Hom into a fixed sheaf takes any coproduct cofan to a product fan. -/
 theorem internalHomCoproductFanIsLimit {I : Type w} (M : I → Mod)
     (c : Cofan M) (hc : IsColimit c) (N : Mod) :
     Nonempty (IsLimit (Fan.mk (homObj (R := R) c.pt N)

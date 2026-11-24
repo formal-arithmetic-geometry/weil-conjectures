@@ -17,7 +17,11 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Finite-stage representatives for zeroth cohomology
-Source: Stacks Project, Tag 00DB. -/
+
+## References
+
+* Stacks Project, Tag 00DB
+-/
 
 @[expose] public section
 
@@ -69,16 +73,7 @@ private theorem shortComplexHomologyPreserves
   simp [a, e]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Every zeroth cohomology class of a sequential colimit is represented at a finite stage.
-Source: Stacks Project, Tag 00DB.
-(blueprint: lem-sc-sequential-colimit-derived-homology-representative)
-
-Proof: exactness of filtered colimits of modules makes short-complex homology preserve
-filtered colimits. The functor taking the three adjacent terms of a complex preserves
-colimits because each evaluation does. Thus complex homology preserves this colimit.
-Transport the resulting colimit cocone along the canonical comparison between derived
-and complex homology, then use the concrete colimit representative theorem. No boundedness
-is needed, since only the three terms adjacent to degree zero enter the argument. -/
+/-- Every zeroth cohomology class of a sequential colimit is represented at a finite stage. -/
 theorem sequentialColimit_derivedHomology_representative
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     (D : ℕ ⥤ CochainComplex (ModuleCat.{u} A) ℤ) :

@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-!
 # Degreewise currying for the Hom-total-tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
+## References
+
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -33,24 +35,7 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 set_option synthInstance.maxSize 256 in
-/-- The degreewise currying maps commute with simultaneous maps of all three complexes.
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
-functoriality (blueprint: lem-sc-hom-tensor-naturality).
-
-Proof: Apply the product projections of the target Hom term and restrict to
-each total-tensor summand, before sheafification. Evaluate on pure tensors
-`x ⊗ y` over an arbitrary object of each localized site. The left side
-first replaces the outer argument by `f(x)`, the inner one by `g(y)`, and
-the value by `h` of that value, then uncurries. The right side first
-uncurries and then precomposes with `f ⊗ g` and postcomposes with `h`.
-Both therefore evaluate to `h(φ(f(x))(g(y)))`. The action of the Hom
-bifunctor on product projections is exactly the pre- and post-composition
-formula in `homComplex_exists`; the tensor-total map restricts to the
-termwise tensor map. The defining pure-tensor equation for the chosen
-currying maps identifies the two evaluations. The tensor, sheafification,
-coproduct and product universal properties then imply equality. There
-are no differential computations in this assertion, and no claim of
-invertibility is included. -/
+/-- The degreewise currying maps commute with simultaneous maps of all three complexes. -/
 theorem homTensorDegreewiseMap_natural
     (K K' L L' M M' : CochainComplex Mod ℤ)
     (f : K' ⟶ K) (g : L' ⟶ L) (h : M ⟶ M') (n : ℤ) :

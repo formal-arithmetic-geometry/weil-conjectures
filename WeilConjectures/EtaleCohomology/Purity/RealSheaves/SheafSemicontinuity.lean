@@ -53,8 +53,7 @@ powers `ℱ^{⊗ k}`, whose boundary eigenvalues include the `k`-th powers of th
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`: the geometric
   coinvariants of a lisse sheaf with weights at most `w` have weights at most `w`.
 - `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.compactlySupportedCohomology_two`: on a smooth
-  geometrically connected affine curve, `H_c²` of a lisse sheaf with weights at most `w` has
-  weights at most `w + 2`.
+  curve, `H_c²` of a lisse sheaf with weights at most `w` has weights at most `w + 2`.
 - `AlgebraicGeometry.WeilSheaf.norm_le_of_hasEigenvalue_stalk_directImage`: the preliminary
   bound `β + 2` at the boundary points.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: boundary semicontinuity of
@@ -146,6 +145,32 @@ theorem IsLisse.exists_finrank_stalk_le [QuasiCompact (X ↘ Spec (CommRingCat.o
     (AlgebraicClosure k₀)
   exact ⟨d, fun x ↦ hd _⟩
 
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- If `|ι (β ^ deg x)| ≤ q_x ^ (w / 2)` at a closed point `x`, then `|ι β| ≤ q ^ (w / 2)`. -/
+theorem norm_le_rpow_of_norm_pow_degreeOver_le {ι : PadicAlgCl l →+* ℂ} {x : X.finitePoints}
+    {β : PadicAlgCl l} {w : ℝ}
+    (h : ‖ι (β ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)‖ ≤
+      ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) ^ (w / 2)) :
+    ‖ι β‖ ≤ (Nat.card k₀ : ℝ) ^ (w / 2) := by
+  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
+    mul_comm, Real.rpow_mul_natCast hq] at h
+  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- If `|ι (β ^ deg x)| = q_x ^ (w / 2)` at a closed point `x`, then `|ι β| = q ^ (w / 2)`. -/
+theorem norm_eq_rpow_of_norm_pow_degreeOver_eq {ι : PadicAlgCl l →+* ℂ} {x : X.finitePoints}
+    {β : PadicAlgCl l} {w : ℝ}
+    (h : ‖ι (β ^ (X ↘ Spec (CommRingCat.of k₀)).degreeOver x.1)‖ =
+      ((X ↘ Spec (CommRingCat.of k₀)).residueCard x.1 : ℝ) ^ (w / 2)) :
+    ‖ι β‖ = (Nat.card k₀ : ℝ) ^ (w / 2) := by
+  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
+  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
+  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
+    mul_comm, Real.rpow_mul_natCast hq] at h
+  exact (pow_left_inj₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
+
 /-- *Weights of the geometric coinvariants.* If the lisse Weil sheaf `F` has weights at most `w`,
 then its geometric coinvariants `V_{π₁(X̄)}` have weights at most `w` over `k₀`. Every
 eigenvalue of the Frobenius on the global sections of `F^∨` is, up to the power `deg x`, an
@@ -165,25 +190,21 @@ theorem hasWeightsAtMostOver_geometricCoinvariants
   obtain ⟨e⟩ := nonempty_equiv_stalk_dual hF x
   have h := FrobeniusModule.hasEigenvalue_inv_of_hasEigenvalue_dual (e.hasEigenvalue hx)
   rw [inv_pow, inv_inv] at h
-  have hm := (X ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
-  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
-  have hb := hw x _ h
-  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
-    mul_comm, Real.rpow_mul_natCast hq] at hb
-  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 hb
+  exact norm_le_rpow_of_norm_pow_degreeOver_le (hw x _ h)
 
-/-- *Weights of `H_c²` on an affine curve.* Let `U₀` be a smooth geometrically connected affine
-curve over `k₀ = 𝔽_q` and `F` a lisse Weil sheaf on `U₀` with punctual weights at most `w`.
-Then `H_c²(U, F)` has weights at most `w + 2` over `k₀`. This is the upper-bound analogue of
-`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`; for a
-punctually pure sheaf on a smooth affine curve that need not be geometrically connected see
-`AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`. -/
-theorem HasWeightsAtMost.compactlySupportedCohomology_two [IsAffine X]
+/-- *Weights of `H_c²` on a smooth curve.* Let `U₀` be a smooth separated curve of finite type
+over `k₀ = 𝔽_q`, not necessarily affine or geometrically connected, and `F` a lisse Weil sheaf
+on `U₀` with punctual weights at most `w`. Then `H_c²(U, F)` has weights at most `w + 2` over
+`k₀`: it is the Tate twist `(-1)` of the geometric coinvariants
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`), which have
+weights at most `w` (`AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`),
+and the twist `(-1)` raises weights by two. This is the upper-bound analogue of
+`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`. -/
+theorem HasWeightsAtMost.compactlySupportedCohomology_two
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))]
-    [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
+    [SmoothOfRelativeDimension 1 (X ↘ Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
     {F : WeilSheaf k₀ l X} (hF : F.IsLisse) {w : ℝ} (hw : F.HasWeightsAtMost ι w) :
     (F.compactlySupportedCohomology 2).HasWeightsAtMostOver k₀ ι (w + 2) := by
   obtain ⟨e⟩ := nonempty_equiv_compactlySupportedCohomology_two F hF

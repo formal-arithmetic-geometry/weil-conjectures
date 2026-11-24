@@ -10,14 +10,12 @@ public import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 
 /-! # Canonical maps between extensions of localized restrictions
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 04IY, together with the
-open-cover triangle in the current tower-geometric blueprint's Gluing paragraph
-(blueprint: def-dla1-site-nested-extension-map).
-
-These construction declarations are relocated from `SubterminalModuleLocalCalculus`.
-Their names, signatures and data are preserved. No local-calculus theorem is imported.
 `nested` is the adjunction transpose of the restriction of the extension unit,
 using the canonical `overFunctorMap` comparison for relocalization.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DH, 03DI, 03DJ and 04IY
 -/
 
 @[expose] public noncomputable section
@@ -31,20 +29,17 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace SheafOfModules.SubterminalLocal
 
-/-- The coefficient ring sheaf used by the recorded module-sheaf category.
-Source: Stacks 03DI (blueprint: def-dla1-site-nested-extension-map). -/
+/-- The coefficient ring sheaf used by the recorded module-sheaf category. -/
 abbrev coefficients {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max c v r}) : Sheaf J RingCat.{max c v r} :=
   (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R
 
-/-- Modules on the ambient ringed site.
-Source: Stacks 03DI (blueprint: def-dla1-site-nested-extension-map). -/
+/-- Modules on the ambient ringed site. -/
 abbrev Modules {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max c v r}) :=
   ringedSiteModules.{max c v r} (coefficients.{c, v, r} R)
 
-/-- Modules on a slice ringed site.
-Source: Stacks 03DI (blueprint: def-dla1-site-nested-extension-map). -/
+/-- Modules on a slice ringed site. -/
 abbrev SliceModules {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max c v r}) (Z : C) :=
   ringedSiteModules.{max c v r} ((coefficients.{c, v, r} R).over Z)
@@ -52,23 +47,19 @@ abbrev SliceModules {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max c v r})
 
-/-- The exact extension-by-zero functor supplied by the localized-site framework.
-Source: Stacks 03DI--03DJ (blueprint: def-dla1-site-nested-extension-map). -/
+/-- The exact extension-by-zero functor supplied by the localized-site framework. -/
 abbrev jbang (Z : C) : SliceModules.{c, v, r} R Z ⥤ Modules.{c, v, r} R :=
   localizedSystemExtension.{c, v, r} R Z
 
-/-- Restriction to a slice, supplied by the localized-site framework.
-Source: Stacks 03DH (blueprint: def-dla1-site-nested-extension-map). -/
+/-- Restriction to a slice, supplied by the localized-site framework. -/
 abbrev jstar (Z : C) : Modules.{c, v, r} R ⥤ SliceModules.{c, v, r} R Z :=
   localizedSystemRestriction.{c, v, r} R Z
 
-/-- The recorded extension/restriction adjunction.
-Source: Stacks 03DI (blueprint: def-dla1-site-nested-extension-map). -/
+/-- The recorded extension/restriction adjunction. -/
 abbrev adj (Z : C) : jbang.{c, v, r} R Z ⊣ jstar.{c, v, r} R Z :=
   localizedSystemAdjunction.{c, v, r} R Z
 
-/-- The canonical nested-open map, obtained by transposing restriction of the unit.
-Source: Stacks 03DI and 04IY (blueprint: def-dla1-site-nested-extension-map). -/
+/-- The canonical nested-open map, obtained by transposing restriction of the unit. -/
 def nested {A B : C} (f : A ⟶ B) (M : Modules.{c, v, r} R) :
     (jbang.{c, v, r} R A).obj ((jstar.{c, v, r} R A).obj M) ⟶
       (jbang.{c, v, r} R B).obj ((jstar.{c, v, r} R B).obj M) :=

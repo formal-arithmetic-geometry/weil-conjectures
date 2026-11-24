@@ -438,8 +438,8 @@ private lemma isIso_homMk_of_isIso {C : Type*} [Category* C] {P : ObjectProperty
 -- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
 constructible `ℚ̄_ℓ`-complexes: the proper projection formula on `Dᵇc`
-(`ProEtale.CondensedRing.isIso_projectionMorphism_boundedConstructible_padicAlgCl`), read in the
-ambient derived category through the fully faithful inclusion. -/
+(`ProEtale.CondensedRing.isIso_projectionMorphism_boundedConstructible_padicAlgCl_restrict`),
+read in the ambient derived category through the fully faithful inclusion. -/
 lemma isIso_properProjectionMorphism_padicAlgCl {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
     [IsProper p.left]

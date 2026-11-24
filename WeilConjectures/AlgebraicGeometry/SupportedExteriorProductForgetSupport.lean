@@ -10,10 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SupportedExteriorProductNaturali
 /-!
 # Forgetting supports in the pairing of supported sections
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
-
 We totalize the ordinary pullback and tensor of global sections to a chain map
 `exteriorSectionsComplex`, and show that the totalized pairing of supported sections followed
 by the inclusion of supported sections is the ordinary pairing of the included sections.
