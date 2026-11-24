@@ -15,15 +15,20 @@ public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
 
 /-! # Definition interface for simultaneous strict coefficient comparisons
 
-Source: Stacks 03EL and 07A4; the agent calculations in the eight proof steps of
-lem-pur-strict-coefficient-comparison-calculus
-(auxiliary; not a blueprint node).
+The data of a diagram of coefficient rings indexed by three coefficient rows and an inverse
+sequence, together with the scalar-extension functors along a common geometric morphism.
+
+## Implementation details
 
 The product index records coefficient changes and all inverse-sequence arrows.
 Semilinear arrows are written in their scalar-extension adjoint form. Thus they
 are arbitrary chain maps out of scalar extension, including zero maps, rather
 than only the scalar-extension units. All tensors are the existing sheafified
 module tensor and its signed direct-sum total complex.
+
+## References
+
+* Stacks 03EL, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +45,7 @@ universe w uC vC uD vD
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace CategoryTheory.CochainPullback.StrictCoefficient
 
-/-- Three coefficient rows and an inverse sequence, with all iterated arrows.
-Source: the item's statement (auxiliary; not a blueprint node). -/
+/-- Three coefficient rows and an inverse sequence, with all iterated arrows. -/
 abbrev Index := Fin 3 × ℕᵒᵖ
 
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -50,8 +54,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [K.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
 
-/-- The existing signed direct-sum total tensor, with its instances fixed once.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The signed direct-sum total tensor product of two complexes. -/
 noncomputable def total {R : Sheaf J CommRingCat.{w}} (P Q : Complex R) : Complex R := by
   let : ∀ (I₁ I₂ : Type w), HasColimitsOfShape (Discrete I₂)
       (PresheafOfModules.{w}
@@ -67,8 +70,7 @@ noncomputable def total {R : Sheaf J CommRingCat.{w}} (P Q : Complex R) : Comple
     hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
   exact P ⊗ Q
 
-/-- The existing tensor map on total complexes, with its instances fixed once.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The tensor product of two maps of complexes, as a map of total complexes. -/
 abbrev totalMap {R : Sheaf J CommRingCat.{w}} {P Q P' Q' : Complex R}
     (f : P ⟶ P') (g : Q ⟶ Q') : total P Q ⟶ total P' Q' := by
   let : ∀ (I₁ I₂ : Type w), HasColimitsOfShape (Discrete I₂)
@@ -85,12 +87,10 @@ abbrev totalMap {R : Sheaf J CommRingCat.{w}} {P Q P' Q' : Complex R}
     hasFiniteCoproducts_of_hasCoproducts (C := Modules R)
   exact f ⊗ₘ g
 
-/-- Presentation of precisely the ring diagrams in the statement. The fields L,
-hobj and hmap present actual scalar extension after the algebraic inverse image;
-they are not extra operations or flatness assumptions. The common set adjunction
-and the graph equation say that every arrow uses the same geometric morphism.
-Source: Stacks 03EL and 07A4
-(auxiliary; not a blueprint node). -/
+/-- A diagram of coefficient rings on two sites indexed by `Index`, related by algebraic
+inverse images along one geometric morphism, together with the scalar-extension functors `L`
+(identified with change of rings after inverse image by `hobj` and `hmap`) and their right
+adjoints `V`. -/
 structure Diagram where
   R : Index ⥤ Sheaf J CommRingCat.{w}
   S : Index ⥤ Sheaf K CommRingCat.{w}

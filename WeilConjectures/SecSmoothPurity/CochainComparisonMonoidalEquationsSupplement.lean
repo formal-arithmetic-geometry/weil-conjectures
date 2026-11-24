@@ -13,9 +13,9 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 /-! # Monoidal equations for the canonical cochain comparison
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(blueprint: lem-pur-cochain-comparison-monoidal-equations)
+## References
+
+* Stacks Project, sites-modules.tex, Tag 03EL, and sites-cohomology.tex, Tag 07A4.
 -/
 
 -- After pruning, this module only keeps private declarations.
