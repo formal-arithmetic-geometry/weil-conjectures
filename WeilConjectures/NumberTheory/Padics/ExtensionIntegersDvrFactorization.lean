@@ -6,10 +6,19 @@ Authors: Bin Wu
 module
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
-/-! Uniformizer association and existence of fraction-field factorizations in a DVR.
+/-! # Uniformizer factorizations in a DVR
 
-Source: Stacks Project, Algebra, Definition 00IE and Lemma 00PD.
-(auxiliary; not a blueprint node)
+We show that generators of the maximal ideal of a DVR are associated, and that every nonzero
+element of the fraction field is a unit times an integer power of a fixed generator.
+
+## Implementation details
+
+The standard DVR API expresses every nonzero element as a unit times a power of an
+irreducible generator, and its fraction-field version gives the integer-power expression.
+
+## References
+
+* Stacks Project, Algebra, Definition 00IE and Lemma 00PD.
 -/
 
 @[expose] public section
@@ -19,16 +28,7 @@ set_option linter.style.haveILetI false
 namespace Padic
 
 /-- In a domain DVR, generators of a fixed nonzero maximal ideal are associated and every
-nonzero fraction has a unit-times-integer-power expression.  Uniqueness is supplied by the
-separate uniqueness lemma used by `extension_integers_dvr`.
-
-Source: Stacks Project, Algebra, Definition 00IE and Lemma 00PD.
-Proof: install the supplied DVR structure as a local instance.  The standard DVR API
-expresses every nonzero element as a unit times a power of an irreducible generator, and
-its fraction-field version gives the integer-power expression.  Two generators of the
-same maximal ideal are associated because both are irreducible.
-(auxiliary; not a blueprint node)
--/
+nonzero fraction has a unit-times-integer-power expression. -/
 theorem extension_integers_dvr_factorization (E : Type*) [Field E] (O : Subring E)
     (m : Ideal O) (hDVR : IsDiscreteValuationRing O) (_hm0 : m ≠ ⊥)
     (hmax : m.IsMaximal) (hfrac : IsFractionRing O E)

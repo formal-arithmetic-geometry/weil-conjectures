@@ -72,8 +72,7 @@ theorem natCast_mem_integers : (l : E) ∈ integers l E := by
   rw [mem_integers_iff, map_natCast]
   exact le_of_lt nnnorm_natCast_lt_one
 
-/-- If `a - 1 ∈ ℓ² 𝒪_E`, then `a` is a unit of `𝒪_E`: it is congruent to `1` modulo the
-maximal ideal, so its norm is `1`. -/
+/-- If `a - 1 ∈ ℓ² 𝒪_E`, then `a⁻¹ ∈ 𝒪_E`. -/
 theorem inv_mem_integers_of_sub_one_div {a : E}
     (ha : (a - 1) / ((l : E) ^ 2) ∈ integers l E) : a⁻¹ ∈ integers l E := by
   have hl0 : (l : E) ≠ 0 := natCast_ne_zero_of_algebra
@@ -135,7 +134,7 @@ theorem norm_le_of_div_mem_integers {x : E} (hx : x / ((l : E) ^ 2) ∈ integers
   rwa [norm_div, norm_pow, hlE, div_le_one (pow_pos hr0 2)] at h
 
 /-- On `ℓ² 𝒪_E` the `n`-th term `(-1)^n x ^ (n + 1) / (n + 1)` of the logarithm series has norm
-at most `‖x‖ ℓ⁻ⁿ`, as `v_ℓ(n + 1) ≤ n`. -/
+at most `‖x‖ ℓ⁻ⁿ`. -/
 theorem norm_logSeries_term_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) (n : ℕ) :
     letI := normedFieldOfAlgebra l E
     ‖(-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ)‖ ≤ ‖x‖ * (l : ℝ)⁻¹ ^ n := by
@@ -157,8 +156,7 @@ theorem norm_logSeries_term_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E)
       mul_le_mul_of_nonneg_left (pow_le_pow_of_le_one hr0.le hr1 hv) (by positivity)
 
 /-- For `‖x‖ ≤ ℓ⁻¹` the difference quotient `((1 + x) ^ q - 1) / q` agrees with the `q`-th
-partial sum of the logarithm series up to an error of norm at most `‖q‖`: the coefficient of
-`x ^ (j + 1)` in it is `C(q - 1, j) / (j + 1)`, and `j! C(q - 1, j) ≡ (-1)^j j!` modulo `q`. -/
+partial sum of the logarithm series up to an error of norm at most `‖q‖`. -/
 theorem norm_pow_sub_one_div_sub_sum_le {x : E}
     (hx : letI := normedFieldOfAlgebra l E; ‖x‖ ≤ (l : ℝ)⁻¹) (q : ℕ) :
     letI := normedFieldOfAlgebra l E
@@ -219,9 +217,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
 
 include instQ instT instF
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
-
-The subgroup `U_E = 1 + ℓ² 𝒪_E` of `Eˣ`, where `𝒪_E = PadicAlgCl.integers l E` is the ring of
+/-- The subgroup `U_E = 1 + ℓ² 𝒪_E` of `Eˣ`, where `𝒪_E = PadicAlgCl.integers l E` is the ring of
 integers of `E`. -/
 def smallUnits : Subgroup Eˣ where
   carrier := {u | ((u : E) - 1) / ((l : E) ^ 2) ∈ integers l E}
@@ -252,9 +248,7 @@ def smallUnits : Subgroup Eˣ where
     rw [key]
     exact neg_mem (mul_mem ha (inv_mem_integers_of_sub_one_div ha))
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
-
-`smallLog l E x` is the sum of the series `log (1 + x) = ∑_{n ≥ 1} (-1)^(n+1) x ^ n / n`,
+/-- `smallLog l E x` is the sum of the series `log (1 + x) = ∑_{n ≥ 1} (-1)^(n+1) x ^ n / n`,
 formed in the topology restricted from `ℚ̄_ℓ`. It converges for `x ∈ ℓ² 𝒪_E`
 (`PadicAlgCl.summable_logSeries`), and `u ↦ smallLog l E (u - 1)` is then an injective
 homomorphism from `PadicAlgCl.smallUnits` to the additive group of `E`. -/
@@ -262,10 +256,7 @@ noncomputable def smallLog (x : E) : E :=
   letI := normedFieldOfAlgebra l E
   ∑' n : ℕ, (-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
-
-The logarithm series converges on `ℓ² 𝒪_E`: the `n`-th term has valuation at least
-`2 (n + 1) - v_ℓ(n + 1)`, which tends to infinity, and `E` is complete. -/
+/-- The logarithm series converges on `ℓ² 𝒪_E`. -/
 theorem summable_logSeries {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     letI := normedFieldOfAlgebra l E
     Summable fun n : ℕ ↦ (-1) ^ n * x ^ (n + 1) / (n + 1 : ℕ) := by
@@ -277,12 +268,7 @@ theorem summable_logSeries {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     (norm_logSeries_term_le hx)
 
 omit instQ instT instF in
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
-
-On `ℓ² 𝒪_E` the logarithm does not increase the norm, `‖log (1 + x)‖ ≤ ‖x‖`: the term
-`x ^ (n + 1) / (n + 1)` has norm `‖x‖ ^ (n + 1) / ‖n + 1‖ ≤ ‖x‖`, as
-`‖x‖ ^ n ≤ ‖ℓ‖ ^ (2 n) ≤ ‖ℓ‖ ^ v_ℓ(n + 1) = ‖n + 1‖`, and the norm is nonarchimedean. In
-particular `u ↦ log u` is continuous at `1`. -/
+/-- On `ℓ² 𝒪_E` the logarithm does not increase the norm: `‖log (1 + x)‖ ≤ ‖x‖`. -/
 theorem norm_smallLog_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     ‖algebraMap E (PadicAlgCl l) (smallLog l E x)‖ ≤ ‖algebraMap E (PadicAlgCl l) x‖ := by
   let := normedFieldOfAlgebra l E
@@ -295,8 +281,7 @@ theorem norm_smallLog_le {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
   exact pow_le_one₀ (inv_nonneg.mpr (zero_le_one.trans hl.le)) (inv_le_one_of_one_le₀ hl.le)
 
 /-- On `ℓ² 𝒪_E` the logarithm is the limit of the difference quotients
-`((1 + x) ^ ℓⁿ - 1) / ℓⁿ`: these are within `‖ℓⁿ‖` of the `ℓⁿ`-th partial sum of the
-logarithm series (`PadicAlgCl.norm_pow_sub_one_div_sub_sum_le`). -/
+`((1 + x) ^ ℓⁿ - 1) / ℓⁿ`. -/
 theorem tendsto_pow_sub_one_div_smallLog {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E) :
     letI := normedFieldOfAlgebra l E
     Tendsto (fun n : ℕ ↦ ((1 + x) ^ (l ^ n) - 1) / (l ^ n : ℕ)) atTop (𝓝 (smallLog l E x)) := by
@@ -318,8 +303,7 @@ theorem tendsto_pow_sub_one_div_smallLog {x : E} (hx : x / ((l : E) ^ 2) ∈ int
   simp only [Function.comp_apply, sub_add_cancel, zero_add] at h
   exact h
 
-/-- On `ℓ² 𝒪_E` the norm of `log (1 + x) - x` is at most `ℓ⁻¹ ‖x‖`, so the logarithm vanishes
-only at `x = 0`. -/
+/-- On `ℓ² 𝒪_E` the logarithm vanishes only at `x = 0`. -/
 theorem eq_zero_of_smallLog_eq_zero {x : E} (hx : x / ((l : E) ^ 2) ∈ integers l E)
     (h0 : smallLog l E x = 0) : x = 0 := by
   let := normedFieldOfAlgebra l E
@@ -343,11 +327,8 @@ theorem eq_zero_of_smallLog_eq_zero {x : E} (hx : x / ((l : E) ^ 2) ∈ integers
   have hpos : 0 < ‖x‖ := norm_pos_iff.mpr hne
   nlinarith
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
-
-The logarithm turns the multiplication of `U_E` into the addition of `E`: writing
-`a_n(u) = (u ^ ℓⁿ - 1) / ℓⁿ`, one has `a_n(uv) = ℓⁿ a_n(u) a_n(v) + a_n(u) + a_n(v)`, and
-`a_n(u) → log u` (`PadicAlgCl.tendsto_pow_sub_one_div_smallLog`). -/
+/-- The logarithm turns the multiplication of `U_E` into the addition of `E`:
+`log (u v) = log u + log v`. -/
 theorem smallLog_mul (u v : smallUnits l E) :
     smallLog l E (((u * v : smallUnits l E) : Eˣ) - 1)
       = smallLog l E (((u : Eˣ) : E) - 1) + smallLog l E (((v : Eˣ) : E) - 1) := by
@@ -378,12 +359,7 @@ theorem smallLog_mul (u v : smallUnits l E) :
   rw [zero_mul, zero_mul, zero_add] at hlim
   exact tendsto_nhds_unique huv (hlim.congr key)
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: Small logarithm.
-
-The logarithm is injective on `U_E = 1 + ℓ² 𝒪_E`: it is a homomorphism there, and its kernel
-is trivial since `‖log (1 + x) - x‖ ≤ ℓ⁻¹ ‖x‖` (`PadicAlgCl.eq_zero_of_smallLog_eq_zero`).
-This is what `theorem-rank-one-sheaves-have-finite` uses to turn a character of `π₁` with values in
-`U_E` into a continuous additive character. -/
+/-- The logarithm `u ↦ log u` is injective on `U_E = 1 + ℓ² 𝒪_E`. -/
 theorem injOn_smallLog :
     Set.InjOn (fun u : Eˣ ↦ smallLog l E ((u : E) - 1)) (smallUnits l E) := by
   intro u hu v hv huv

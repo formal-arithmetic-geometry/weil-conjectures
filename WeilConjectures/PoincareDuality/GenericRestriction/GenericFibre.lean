@@ -17,11 +17,9 @@ Let `X` be a separated `k`-scheme of finite type with a morphism `b : X ⟶ 𝔸
 (`AlgebraicGeometry.affineLineGenericPoint`); for instance the geometric generic point
 `Spec \overline{k(x)} ⟶ 𝔸¹_k`. For the base change `g : X ×_{𝔸¹_k} Spec L ⟶ X` of `t` along `b`,
 the derived pullback `Lg^*` commutes with internal homs of bounded constructible
-`ℚ̄_ℓ`-complexes (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isPullback`): this is
-blueprint `lemma-restriction-geometric-generic-fibre` (2) for `B = 𝔸¹_k`
-(`lemma-restriction-geometric-generic-fibre`).
+`ℚ̄_ℓ`-complexes (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isPullback`).
 
-## Proof
+## Implementation details
 
 The base change `g` is the composite of the base change `X_L ⟶ X_{k(x)}` of the field extension
 `k(x) ⟶ L`, along which internal homs commute with pullback
@@ -53,12 +51,11 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
-/-- **Restriction to a generic fibre over the affine line commutes with internal homs**
-(blueprint `lemma-restriction-geometric-generic-fibre` (2), for `B = 𝔸¹_k`): let `X` be a separated
-`k`-scheme of finite type with a morphism `b : X ⟶ 𝔸¹_k`, `φ : k(x) ⟶ L` a field extension and
-`g : X' ⟶ X` the base change of `Spec L ⟶ Spec k(x) ⟶ 𝔸¹_k` along `b`. For bounded
-constructible `ℚ̄_ℓ`-complexes `K` and `M` on `X`, the comparison
-`Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` is an isomorphism. -/
+/-- **Restriction to a generic fibre over the affine line commutes with internal homs**:
+let `X` be a separated `k`-scheme of finite type with a morphism `b : X ⟶ 𝔸¹_k`,
+`φ : k(x) ⟶ L` a field extension and `g : X' ⟶ X` the base change of
+`Spec L ⟶ Spec k(x) ⟶ 𝔸¹_k` along `b`. For bounded constructible `ℚ̄_ℓ`-complexes `K` and `M`
+on `X`, the comparison `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` is an isomorphism. -/
 theorem isIso_ihomUpperStarComparison_of_isPullback (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (b : X.left ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k)))
@@ -118,7 +115,8 @@ theorem isIso_ihomUpperStarComparison_of_isPullback (X : Over (Spec (.of k)))
 section BoundedConstructible
 
 -- `Dᵇc` is monoidal through `ObjectProperty.fullMonoidalSubcategory` everywhere, so that the
--- monoidal structures of concrete statements and of instantiated abstract ones agree syntactically.
+-- monoidal structures of concrete statements and of instantiated abstract ones agree
+-- syntactically.
 attribute [-instance] monoidalCategory_boundedConstructible
   ObjectProperty.instMonoidalCategoryStructFullSubcategory
 
@@ -128,7 +126,7 @@ variable {k₁ k₂ : Type u} [Field k₁] [Field k₂] [Fact (ringChar k₁).Pr
 /-- The duality map `g^* RHom(A, N) ⟶ RHom(g^* A, g^* N)` of the pullback on bounded constructible
 complexes, with the identity as dualizing map, is an isomorphism as soon as the comparison
 `ProEtale.CondensedRing.ihomUpperStarComparison` of the ambient derived pullback is one at
-`(A, N)` (`ProEtale.CondensedRing.ι_map_ihomComparison_upperStarOfMap_app`). -/
+`(A, N)`. -/
 theorem isIso_nearbyDualityMap_upperStarOfMap_id_of_isIso {P : Over (Spec (.of k₁))}
     [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
     {P' : Over (Spec (.of k₂))} [LocallyOfFiniteType P'.hom] [QuasiCompact P'.hom]

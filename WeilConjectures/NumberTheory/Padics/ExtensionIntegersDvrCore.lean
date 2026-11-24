@@ -12,14 +12,21 @@ import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.NumberTheory.Padics.ProperSpace
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
 
-/-! Core valuation-ring existence for a finite extension of a p-adic field.
+/-! # Core valuation-ring existence for a finite extension of a p-adic field
 
-This is the ring-theoretic and finite-residue-field portion of
+We prove the ring-theoretic and finite-residue-field portion of
 `Padic.extension_integers_dvr`; the uniformizer association and factorization clauses
 are supplied separately.
 
-Source: Serre, Local Fields, Chapter II, §2, Proposition 3.
-(auxiliary; not a blueprint node)
+## Implementation details
+
+Equip the finite extension with the extending nonarchimedean norm, apply the properness
+criterion for valued fields, and identify the resulting integer ring and maximal ideal with
+the absolute-value inequalities.
+
+## References
+
+* Serre, *Local Fields*, Chapter II, §2, Proposition 3.
 -/
 
 @[expose] public section
@@ -28,18 +35,9 @@ universe u
 
 namespace Padic
 
-/-- The valuation ring and maximal ideal with all ring-theoretic properties needed before
-uniformizer factorization.  This theorem is a strict substatement of
-`extension_integers_dvr` and is intended as its ring-theoretic core.
-
-Source: Serre, Local Fields, Chapter II, §2, Proposition 3.
-Proof: Equip the finite extension with the extending nonarchimedean norm, apply the
-properness criterion for valued fields, and identify the resulting integer ring and
-maximal ideal with the absolute-value inequalities.  The DVR and finite-residue-field
-properties, together with the elementary unit and fraction-field arguments, give exactly
-the displayed conjunction.
-(auxiliary; not a blueprint node)
--/
+/-- The closed unit ball `{x | abv x ≤ 1}` of a finite extension of `ℚ_[l]` is a DVR with
+maximal ideal `{x | abv x < 1}`, units `{x | abv x = 1}`, fraction field `E` and finite
+residue field: the ring-theoretic core of `extension_integers_dvr`. -/
 theorem extension_integers_dvr_core (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (abv : AbsoluteValue E ℝ)
     (h_ext : ∀ a : ℚ_[l], abv (algebraMap ℚ_[l] E a) = ‖a‖) :

@@ -129,29 +129,28 @@ public import WeilConjectures.SixFunctors.Supporting.DerivedAutomorphismHomEvalu
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
-Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
-normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation).
-
-Finite inputs are unbounded. Integral inputs have exactly the recorded
-Hom-constructibility condition. Completed inverse image is constructed from
-all coefficient projections; its comparison with tower pullback uses the
-actual completion unit and a resolution-normalized total-limit comparison.
-System maps and their identities are stated before evaluation or realization.
-Rational maps are localized; algebraically closed maps use every common stage.
+This file records the composition comparison for completed inverse image along isomorphisms
+of schemes: for isomorphisms `h : Z ⟶ X` and `g : X ⟶ Y`, completed inverse image along
+`h ≫ g` agrees with the composite of the completed inverse images, both on modules and on
+derived categories.
 
 ## Main definitions
 
-* `podFiniteHomComparison`: transpose of pullback of finite evaluation.
-* `podPartialHomComparison`: the same construction on permitted Hom pairs.
-* `podCompletedRingMap`: completed coefficient transport from all projections.
+* `podCompletedModuleComp`: the identity-on-sections composition comparison for modules.
+* `podCompletedDerivedComp`: the induced comparison on derived categories.
 
 ## Main statements
 
-* `derivedAutomorphismHomEvaluation`: the four evaluation-defined natural isomorphisms.
-* The `*_laws`, `*_shift`, `*_comp` declarations give all coherent identities.
-* `podHomReductionSquare`: the actual system-level reduction square.
+* `podCompletedModuleComp_existsUnique`: the composition comparison exists and is unique.
+
+## Implementation details
+
+Completed inverse image is constructed from all coefficient projections, so two completed
+coefficient transports agree as soon as their finite projections agree.
+
+## References
+
+* [Stacks Project, Tag 0GMX], [Stacks Project, Tag 00WX]
 -/
 
 @[expose] public noncomputable section
@@ -228,14 +227,9 @@ private theorem podCompletedRingMap_eq_inverseImage {V W : Scheme.{u}} (k : V �
     limit.lift_π]
   rfl
 
-/-- Composition of exact completed inverse image is fixed on all local sections.
-Source: node proof steps 1 and 7, Stacks 00WX.
-Proof: composition of the two postcomposition functors agrees with postcomposition
-by the composite, using associativity of scheme arrows. The identity on the
-unchanged local sections is linear because both coefficient transports have
-identical finite projections. It is a natural isomorphism; pointwise equality
-on all local sections proves uniqueness.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- There is a unique isomorphism between completed inverse image along `h ≫ g` and the
+composite of completed inverse images along `g` and `h` which is the identity on all local
+sections. -/
 theorem podCompletedModuleComp_existsUnique :
     ∃! e : podCompletedModuleInverseImage l E (h ≫ g) ≅
         podCompletedModuleInverseImage l E g ⋙ podCompletedModuleInverseImage l E h,
@@ -286,13 +280,11 @@ theorem podCompletedModuleComp_existsUnique :
     exact eq_of_heq ((he' M U.unop x).trans
       (presheafOfModules_map_heq_of_eq M.val (d.inv.app U.unop).op (hd U.unop) x).symm)
 
-/-- The unique identity-on-sections completed composition comparison.
-Source: Stacks 00WX (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The unique identity-on-sections completed composition comparison. -/
 def podCompletedModuleComp := (podCompletedModuleComp_existsUnique l E g h).exists.choose
 
-/-- Derive that same ordinary comparison, using the fixed exact factorizations.
-Source: node proof steps 2 and 7
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The composition comparison for derived completed inverse image, obtained by deriving
+`podCompletedModuleComp`. -/
 def podCompletedDerivedComp : podCompletedDerivedInverseImage l E (h ≫ g) ≅
     podCompletedDerivedInverseImage l E g ⋙ podCompletedDerivedInverseImage l E h :=
   letI := podCompletedModuleAdditive l E g
