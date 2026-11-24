@@ -1,0 +1,239 @@
+--- ready42/type_checker.cpp
++++ icd/type_checker.cpp
+@@ -37,6 +37,7 @@
+ #include "kernel/inductive.h"
+ 
+ namespace lean {
++static bool to_proj_idx(nat const & idx, unsigned & result);
+ namespace anatomy {
+ using clock = std::chrono::steady_clock;
+ using ns = std::chrono::nanoseconds;
+@@ -137,6 +138,11 @@
+     uint64_t mprwe_root_exclusive = 0;
+     struct provenance_cost { uint64_t calls = 0, exclusive = 0, reduction = 0, traced_calls = 0, traced_exclusive = 0; };
+     std::map<std::pair<std::string, std::string>, provenance_cost> mprwe_cost;
++    struct icd_cost { uint64_t calls = 0, comparison = 0, reduction = 0; };
++    std::map<std::string, icd_cost> icd_layers;
++    std::map<std::string, icd_cost> icd_fields;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> icd_unfolds;
++    uint64_t icd_raw_events = 0;
+ };
+ struct comparison;
+ static thread_local comparison * current = nullptr;
+@@ -231,6 +237,51 @@
+     }();
+     return n;
+ }
++static std::string icd_root_layer() {
++    char const * p = std::getenv("LEAN_DEFEQ_ICD_ROOT_LAYER");
++    return p && *p ? p : "other";
++}
++using icd_field_spec = std::pair<unsigned, std::vector<char const *>>;
++static icd_field_spec const * icd_structure(std::string const & structure) {
++    static std::map<std::string, icd_field_spec> const specs = {
++        {"Add", {1, {"add"}}},
++        {"AddCommGroup", {1, {"toAddGroup", "add_comm"}}},
++        {"AddGroup", {1, {"toSubNegMonoid", "neg_add_cancel"}}},
++        {"AddMonoid", {1, {"toAddSemigroup", "toZero", "zero_add", "add_zero", "toNSMul", "nsmul_zero", "nsmul_succ"}}},
++        {"AddSemigroup", {1, {"toAdd", "add_assoc"}}},
++        {"AddZero", {1, {"toZero", "toAdd"}}},
++        {"AddZeroClass", {1, {"toAddZero", "zero_add", "add_zero"}}},
++        {"CategoryTheory.CategoryStruct", {1, {"toQuiver", "id", "comp"}}},
++        {"CategoryTheory.Functor", {4, {"obj", "map", "map_id", "map_comp"}}},
++        {"CategoryTheory.Localization.Construction.LocQuiver", {3, {"obj"}}},
++        {"CategoryTheory.NatTrans", {6, {"app", "naturality"}}},
++        {"CategoryTheory.ObjectProperty.FullSubcategory", {3, {"obj", "property"}}},
++        {"CategoryTheory.Preadditive", {2, {"homGroup", "add_comp", "comp_add"}}},
++        {"CategoryTheory.Quotient", {3, {"as"}}},
++        {"HomologicalComplex", {5, {"X", "d", "shape", "d_comp_d'"}}},
++        {"NSMul", {1, {"nsmul"}}},
++        {"Neg", {1, {"neg"}}},
++        {"Quiver", {1, {"Hom"}}},
++        {"Sub", {1, {"sub"}}},
++        {"SubNegMonoid", {1, {"toAddMonoid", "toNeg", "toSub", "toZSMul", "sub_eq_add_neg", "zsmul_zero'", "zsmul_succ'", "zsmul_neg'"}}},
++        {"SubNegZeroMonoid", {1, {"toSubNegMonoid", "neg_zero"}}},
++        {"ZSMul", {1, {"zsmul"}}},
++        {"Zero", {1, {"zero"}}},
++        {"CategoryTheory.CostructuredArrow", {0, {"left", "hom"}}}
++    };
++    auto it = specs.find(structure);
++    return it == specs.end() ? nullptr : &it->second;
++}
++static char const * icd_field(std::string const & structure, unsigned index) {
++    auto spec = icd_structure(structure);
++    if (!spec) return "unresolved";
++    return index < spec->second.size() ? spec->second[index] : "out_of_range";
++}
++static uint64_t icd_size(expr const & e) {
++    uint64_t n = 0;
++    for_each(e, [&](expr const &) { ++n; return true; });
++    return n;
++}
+ static std::string mprwe_tag(expr const & e, unsigned category) {
+     unsigned tags = 0;
+     if (category == 1) tags |= 1; // dependent type/body
+@@ -331,6 +382,23 @@
+             static_cast<unsigned long long>(cost.traced_exclusive), static_cast<unsigned long long>(data.calls),
+             static_cast<unsigned long long>(data.comparison_exclusive));
+     }
++    for (auto const & item : data.icd_layers)
++        std::fprintf(f, "{\"event\":\"icd_layer\",\"root\":%llu,\"layer\":\"%s\",\"calls\":%llu,\"comparison_ns\":%llu,\"reduction_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.c_str(),
++            static_cast<unsigned long long>(item.second.calls),
++            static_cast<unsigned long long>(item.second.comparison),
++            static_cast<unsigned long long>(item.second.reduction));
++    for (auto const & item : data.icd_fields)
++        std::fprintf(f, "{\"event\":\"icd_field\",\"root\":%llu,\"field\":\"%s\",\"calls\":%llu,\"comparison_ns\":%llu,\"reduction_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.c_str(),
++            static_cast<unsigned long long>(item.second.calls),
++            static_cast<unsigned long long>(item.second.comparison),
++            static_cast<unsigned long long>(item.second.reduction));
++    for (auto const & item : data.icd_unfolds)
++        std::fprintf(f, "{\"event\":\"icd_unfold\",\"root\":%llu,\"constant_hint\":\"%s\",\"calls\":%llu,\"time_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.c_str(),
++            static_cast<unsigned long long>(item.second.first),
++            static_cast<unsigned long long>(item.second.second));
+     for (auto const & item : data.transitions) {
+         auto const & cost = item.second;
+         std::string outcome = "mixed";
+@@ -488,6 +556,11 @@
+     unsigned depth = 0, children = 0;
+     unsigned category = 0;
+     std::string path;
++    std::string semantic_layer = "other", field_context, structure_name, constructor_name, semantic_field_name;
++    std::string projection_structure_name, projection_field_name;
++    unsigned constructor_argument_index = 0, projection_index = 0;
++    bool constructor_argument_valid = false, projection_index_valid = false, constructor_head = false;
++    std::string reduction_kind, unfolded_constant, reducibility_hint;
+     uint64_t left_hash = 0, right_hash = 0, parent_div_left_hash = 0, parent_div_right_hash = 0;
+     divergence_info divergence;
+     std::string provenance = "Unclassified";
+@@ -527,6 +600,51 @@
+             child_index_valid = next_index_valid;
+             initiating_branch = next_branch;
+         }
++        semantic_layer = parent ? parent->semantic_layer : icd_root_layer();
++        field_context = parent ? parent->field_context : "";
++        std::string own_head = head(t);
++        if (own_head == "CategoryTheory.Functor.HasLeftDerivedFunctor₂")
++            semantic_layer = "HasLeftDerivedFunctor2_type";
++        else if (own_head == "CategoryTheory.Functor.HasLeftDerivedFunctor")
++            semantic_layer = "HasLeftDerivedFunctor_type";
++        else if (own_head.find("HasRightKanExtension") != std::string::npos)
++            semantic_layer = "HasRightKanExtension_type";
++        else if (own_head.find("RightExtension") != std::string::npos)
++            semantic_layer = "RightExtension_category";
++        else if (own_head.find("HasTerminal") != std::string::npos)
++            semantic_layer = "HasTerminal_type";
++        else if (own_head == "CategoryTheory.Functor.mk" && parent &&
++                 (parent->semantic_layer == "HasLeftDerivedFunctor2_type" ||
++                  parent->semantic_layer == "HasLeftDerivedFunctor_type"))
++            semantic_layer = "uncurried_bifunctor";
++        if (own_head.size() >= 3 && own_head.substr(own_head.size() - 3) == ".mk") {
++            constructor_head = true;
++            constructor_name = own_head;
++            structure_name = own_head.substr(0, own_head.size() - 3);
++        }
++        if (is_proj(get_app_fn(t))) {
++            structure_name = proj_sname(get_app_fn(t)).to_string();
++            projection_structure_name = structure_name;
++            unsigned idx;
++            if (to_proj_idx(proj_idx(get_app_fn(t)), idx)) {
++                projection_index = idx;
++                projection_index_valid = true;
++                semantic_field_name = icd_field(structure_name, idx);
++                projection_field_name = semantic_field_name;
++            }
++        }
++        if (parent && child_kind == "argument" && parent->constructor_head) {
++            structure_name = parent->structure_name;
++            constructor_name = parent->constructor_name;
++            constructor_argument_index = child_index;
++            constructor_argument_valid = true;
++            auto spec = icd_structure(structure_name);
++            semantic_field_name = spec && child_index >= spec->first ?
++                icd_field(structure_name, child_index - spec->first) : "parameter_or_unresolved";
++            if (field_context.empty() && semantic_layer == "uncurried_bifunctor" &&
++                structure_name == "CategoryTheory.Functor" && child_index >= 4)
++                field_context = semantic_field_name;
++        }
+         left_hash = mprwe_hash(t);
+         right_hash = mprwe_hash(s);
+         if (mprwe_stream()) {
+@@ -603,6 +721,16 @@
+         ++data.label_fanout[{provenance, children}];
+         data.comparison_exclusive += exclusive;
+         data.reduction_exclusive += reduce_ns;
++        auto & icd_cost = data.icd_layers[semantic_layer];
++        ++icd_cost.calls;
++        icd_cost.comparison += exclusive;
++        icd_cost.reduction += reduce_ns;
++        if (!field_context.empty()) {
++            auto & field_cost = data.icd_fields[field_context];
++            ++field_cost.calls;
++            field_cost.comparison += exclusive;
++            field_cost.reduction += reduce_ns;
++        }
+         if (category == 1) {
+             data.dependent_comparison_exclusive += exclusive;
+             data.dependent_reduction_exclusive += reduce_ns;
+@@ -654,6 +782,28 @@
+                         divergence.left, divergence.right, parent_div_left_hash, parent_div_right_hash,
+                         divergence.path.c_str(), sampled, branch_names[initiating_branch], child_kind.c_str(), child_index, child_index_valid,
+                         reduced_since_parent, reduced_side.c_str(), exposed_definition.c_str(), failure_followup);
++        bool selected_functor_field = constructor_name == "CategoryTheory.Functor.mk" &&
++            constructor_argument_valid && constructor_argument_index >= 4 && constructor_argument_index <= 7;
++        bool selected_functor_constructor = constructor_head && constructor_name == "CategoryTheory.Functor.mk";
++        if (mprwe_stream() && (data.icd_raw_events < 8000 || selected_functor_field || selected_functor_constructor) &&
++            (!structure_name.empty() || !constructor_name.empty()) &&
++            (!mprwe_root_filter() || root_id() == mprwe_root_filter())) {
++            ++data.icd_raw_events;
++            uint64_t left_size = icd_size(left);
++            uint64_t right_size = icd_size(right);
++            std::fprintf(mprwe_stream(), "{\"event\":\"icd_call\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"layer\":\"%s\",\"structure\":\"%s\",\"constructor\":\"%s\",\"argument_index\":%u,\"argument_valid\":%s,\"projection_structure\":\"%s\",\"projection_index\":%u,\"projection_index_valid\":%s,\"projection_field\":\"%s\",\"field\":\"%s\",\"parent_head\":\"%s\",\"left_head\":\"%s\",\"right_head\":\"%s\",\"left_hash\":%u,\"right_hash\":%u,\"left_size_dag\":%llu,\"right_size_dag\":%llu,\"pointer_equal\":%s,\"comparison_ns\":%llu,\"reduction_ns\":%llu,\"inclusive_ns\":%llu,\"reduction_kind\":\"%s\",\"unfolded_constant\":\"%s\",\"hint\":\"%s\"}\n",
++                static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(id),
++                static_cast<unsigned long long>(parent ? parent->id : 0), depth, semantic_layer.c_str(),
++                structure_name.c_str(), constructor_name.c_str(), constructor_argument_index,
++                constructor_argument_valid ? "true" : "false", projection_structure_name.c_str(), projection_index,
++                projection_index_valid ? "true" : "false", projection_field_name.c_str(), semantic_field_name.c_str(),
++                parent ? head(parent->left).c_str() : "",
++                head(left).c_str(), head(right).c_str(), hash(left), hash(right),
++                static_cast<unsigned long long>(left_size), static_cast<unsigned long long>(right_size),
++                is_eqp(left, right) ? "true" : "false", static_cast<unsigned long long>(exclusive),
++                static_cast<unsigned long long>(reduce_ns), static_cast<unsigned long long>(inclusive),
++                reduction_kind.c_str(), unfolded_constant.c_str(), reducibility_hint.c_str());
++        }
+         std::set<totals::transition_key> seen_parents;
+         for (auto const & edge : edges) {
+             totals::transition_key key{provenance, edge.child_label, static_cast<unsigned>(edge.initiating_branch), edge.kind};
+@@ -681,6 +831,7 @@
+                             expr const & after_l, expr const & before_r, expr const & after_r) {
+     if (!owner) return;
+     owner->reduction_exposed = true;
++    owner->reduction_kind = phase;
+     bool left_changed = mprwe_hash(before_l) != mprwe_hash(after_l);
+     bool right_changed = mprwe_hash(before_r) != mprwe_hash(after_r);
+     owner->pending_reduction = true;
+@@ -1323,10 +1474,22 @@
+         if (auto d = is_delta(e)) {
+             auto anatomy_start = anatomy::clock::now();
+             if (anatomy::current) ++anatomy::data.delta_calls;
++            std::string icd_hint = d->get_hints().is_abbrev() ? "abbrev" :
++                d->get_hints().is_regular() ? "regular:" + std::to_string(d->get_hints().get_height()) : "opaque";
++            std::string icd_key = (anatomy::current ? anatomy::current->semantic_layer : "other") +
++                "|" + d->get_name().to_string() + "|" + icd_hint;
++            if (anatomy::current) {
++                anatomy::current->reduction_kind = "delta";
++                anatomy::current->unfolded_constant = d->get_name().to_string();
++                anatomy::current->reducibility_hint = icd_hint;
++            }
+             auto anatomy_record = [&] {
+                 if (!anatomy::current) return;
+                 auto elapsed = std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
+                 anatomy::data.delta_ns += elapsed;
++                auto & icd = anatomy::data.icd_unfolds[icd_key];
++                ++icd.first;
++                icd.second += elapsed;
+                 if (anatomy::mode() == 2) {
+                     auto & p = anatomy::data.delta_heads[d->get_name().to_string()];
+                     ++p.first;
