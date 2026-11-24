@@ -139,7 +139,6 @@ lemma squareCompatible_openImmersionLowerShriekComp {U V W : Over (Spec (.of k))
         (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ' ℓ j'))).symm
           (boundedConstructibleUpperStarComp Λ' ℓ j j')) h
 
-
 /-- **The composition isomorphisms of `Rf_!` are compatible with the coefficient comparisons**:
 under (Shriek) along the compactifications, the composition isomorphism
 `R(f ≫ g)_! ≅ Rf_!^c ⋙ Rg_!^{c'}`
@@ -211,6 +210,21 @@ lemma squareCompatible_lowerShriekCompOfCompactifications (hP : P.IsIsoRefinemen
       BoundedConstructiblePushforwardData.lowerStarOpenImmersionLowerShriekExchange,
       Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
       asIso_inv, Functor.whiskerLeft_comp, Category.assoc]
+
+/-- The identifications `Rf_!^c = Rf'_!^{c'}` of the lower shrieks along the chosen
+compactifications of equal morphisms are compatible with the coefficient comparisons. -/
+lemma squareCompatible_shriekOfCompactification_eqToHom {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    {f f' : X ⟶ Y} (hf : f = f')
+    (h₁ : P.lowerShriekOfCompactification (compactificationOverField f) =
+      P.lowerShriekOfCompactification (compactificationOverField f'))
+    (h₂ : P'.lowerShriekOfCompactification (compactificationOverField f) =
+      P'.lowerShriekOfCompactification (compactificationOverField f')) :
+    NatTrans.SquareCompatible (C.shriekOfCompactification (compactificationOverField f))
+      (C.shriekOfCompactification (compactificationOverField f')) (eqToHom h₁) (eqToHom h₂) := by
+  subst hf
+  simpa only [eqToHom_refl] using NatTrans.SquareCompatible.id _
 
 end BoundedConstructibleCoefficientChange
 

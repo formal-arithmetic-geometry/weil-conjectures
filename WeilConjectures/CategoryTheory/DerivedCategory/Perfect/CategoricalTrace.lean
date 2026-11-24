@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-!
 # The categorical trace of an endomorphism of a perfect complex
@@ -83,6 +84,19 @@ noncomputable def unitEndScalar (φ : 𝟙_ (DerivedCategory (ModuleCat.{u} R)) 
 @[simp]
 lemma unitEndScalar_id : unitEndScalar R (𝟙 _) = 1 := by
   simp [unitEndScalar]
+
+/-- The degree-`0` scalar of the image of `r ∈ A` in `End (𝟙_ D(A))` is `r`. -/
+@[simp]
+lemma unitEndScalar_algebraMap (r : R) :
+    unitEndScalar R (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R)))) r).asHom = r := by
+  rw [unitEndScalar, Algebra.algebraMap_eq_smul_one, End.smul_asHom, End.one_asHom,
+    Functor.map_smul, CategoryTheory.Functor.map_id]
+  simp
+
+/-- The image of `A` in `End (𝟙_ D(A))` is a copy of `A`. -/
+lemma algebraMap_injective :
+    Function.Injective (algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))) :=
+  fun a b h ↦ by rw [← unitEndScalar_algebraMap R a, h, unitEndScalar_algebraMap]
 
 variable {R}
 
