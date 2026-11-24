@@ -87,7 +87,8 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{sw}] [HasSheafify J AddCommGrpCat.{sw}]
   [EssentiallySmall.{sw} C]
 
-/-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems. -/
+/-- Every derived change-of-rings cochain model `D` for `φ` extends to a scalar package: there is
+a `SystemScalarModel φ` whose cochain model is `D`. -/
 theorem scalarPackageExists
     {R S : Sheaf J CommRingCat.{sw}} (φ : R ⟶ S)
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel φ) :

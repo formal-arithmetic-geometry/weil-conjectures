@@ -393,8 +393,12 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
         (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
       hLt') hPF'
 
-/-- The projection formula at the rational stage `E`: the projection map over `E` for objects
-obtained by rationalization from the integral stage is an isomorphism, being the image of the
+/-- The projection formula at the rational stage `E`. Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be as in
+`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`: `K₀`, `L₀` are
+bounded constructible, derived complete and of finite Tor amplitude, and both sides
+`Rf_! K₀ ⊗ᴸ L₀` and `Rf_!(K₀ ⊗ᴸ Lf^* L₀)` of the étale projection map are derived complete. Then
+the rationalization of the projection map `(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism,
+being the image of the
 integral projection map
 (`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`) under the
 localization functor. -/

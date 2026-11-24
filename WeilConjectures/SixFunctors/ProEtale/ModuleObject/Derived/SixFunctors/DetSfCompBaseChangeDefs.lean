@@ -98,10 +98,12 @@ noncomputable abbrev detSfProperBaseChangeMap
       (detSfDerivedPullback Λ (pullback.fst p v) ⋙ R((pullback.snd p v)_*⟦Λ⟧)) :=
   condensedAmbientExchange Λ (detSfProperBaseChangeSquare p v)
 
-/-- The canonical open exchange arrow, in the inverse direction to clause (1).
-It is built by inserting the open unit, transporting the pullback square, and contracting
-the base-changed open counit. Thus an isomorphism whose inverse equals this arrow has a
-specified normalization. -/
+/-- The canonical open exchange arrow `Lv^* ⋙ (i')_! ⟶ i_! ⋙ Lv'^*`, where `i` is the open
+immersion of the compactification `c` of `f`, `i'` is its base change along `v`, and `Lv^*`,
+`Lv'^*` are the derived pullbacks along the base changes of `v` to `X` and to the compactifying
+scheme. It points in the inverse direction of the open base-change isomorphism. It is built by
+inserting the open unit, transporting the pullback square, and contracting the base-changed open
+counit. Thus an isomorphism whose inverse equals this arrow has a specified normalization. -/
 def detSfOpenBaseChangeMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
