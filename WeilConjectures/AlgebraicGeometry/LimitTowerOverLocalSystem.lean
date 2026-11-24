@@ -22,8 +22,10 @@ import WeilConjectures.RingTheory.LimitModuleSmallOverSystem
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Tower descent over a prescribed local-ring system
-Source: Stacks Project, Algebra, proof of Tag 00R7, using Tags 00QV and 00QX.
-(blueprint: lem-weil-pbc-limit-tower-over-local-system)
+
+## References
+
+* Stacks Project, Algebra, Tag 00R7, using Tags 00QV and 00QX.
 -/
 
 @[expose] public section
@@ -57,38 +59,7 @@ private theorem tail_final {I : Type u} [Preorder I] [Nonempty I]
 /-- Descend the two upper rings and a module over a supplied base-ring system and a supplied
 presentation of the top ring over the middle ring. The base diagram and its cocone are
 restricted along a final functor, rather than constructed afresh. Finite generation is
-omitted because it follows from the displayed cokernel presentation.
-
-Source: Stacks Project, Algebra, proof of Tag 00R7, first paragraph, using the constructions
-of Tags 00QV and 00QX (blueprint: lem-weil-pbc-limit-tower-over-local-system).
-
-Proof: Apply `RingHom.exists_limit_module_essentially_finite_presentation_over_system` to
-`F`, its supplied colimit cocone, the presentation of `S` over `R`, and the zero module
-(with the empty matrix). This yields a tail of `I`, a local middle-ring diagram, its
-colimit cocone to `S`, and compatible local structure maps. Make the latter into a natural
-transformation using their transition compatibility. Apply the same theorem to this
-middle-ring diagram, the supplied presentation of `S'` over `S`, and the given matrix
-presentation of `M`. It yields a further tail with the top-ring and module diagrams,
-their colimit cocones, compatible local structure maps, semilinearity, the descended
-matrix presentations, and the transition and limit tensor comparison maps. Restrict the
-base and middle diagrams to this final tail. The composite of the two tail inclusions is
-final: directedness gives a common upper bound above any index and either cutoff, and
-above any two such bounds. Finality preserves the base and middle colimit cocones. The
-remaining ring and module assertions are exactly the clauses of the two applications,
-restricted to the final tail; the formula for the restricted base cocone is explicit below.
-
-For the independent module universe `v`, first apply the module descent theorem to
-`ULift M` in universe `max u v`, transporting its module structure and matrix presentation.
-Every stage ring is essentially of finite type over the integers, by composition of the
-three essential finite type structure maps. Such a ring is countable: a finite polynomial
-algebra over the integers is countable, and quotients and localizations of countable rings
-are countable. Each descended module is a quotient of a finite power of a countable stage
-ring, hence countable. Replace it by its `Shrink` in universe `v` and transport its group
-and module structures and all maps along the resulting equivalences. Compose the maps at
-the limit with `ULift.down`. Objectwise equivalences preserve the colimit universal
-property, semilinearity, cokernel equivalences and tensor comparison equivalences. This
-produces the asserted module diagram in universe `v`, including when `s` or `t` is zero.
--/
+omitted because it follows from the displayed cokernel presentation. (Stacks, Tag 00R7) -/
 theorem limit_tower_over_local_system
     {R S S' : Type u} [CommRing R] [CommRing S] [CommRing S']
     [IsLocalRing R] [IsLocalRing S] [IsLocalRing S']

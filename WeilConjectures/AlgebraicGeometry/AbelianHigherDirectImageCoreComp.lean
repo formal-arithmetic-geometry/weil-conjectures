@@ -12,8 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
 /-! # Canonical-coefficient composition for abelian higher direct images
 
-Source: Stacks Project, Tag 09Z1, canonical comparison maps.
-(blueprint: lem-sbc-abelian-higher-direct-image-core-comp).
+## References
+
+* Stacks Project, Tag 09Z1
 -/
 
 @[expose] public section
@@ -162,9 +163,8 @@ private lemma plus_single_natIso {C D : Type*} [Category C] [Category D]
   exact derived_single_natIso e n X
 
 
-/-- The single-complex comparisons commute with the derived pullback composition.
-Source: Stacks Tags 0D6D and 09Z1. Proof: the degreewise single-complex equality,
-transported through the derived localization and its fully faithful plus inclusion. -/
+/-- The single-complex comparisons commute with the derived pullback composition
+(Stacks, Tags 0D6D and 09Z1). -/
 private theorem abelianUpperStarPlusComp_single
     {T T₁ T₂ : Scheme.{v}} (b : T₁ ⟶ T₂) (a : T₂ ⟶ T)
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{v + 1}) :
@@ -182,8 +182,7 @@ private theorem abelianUpperStarPlusComp_single
     (a)^*[AddCommGrpCat.{v + 1}] (b)^*[AddCommGrpCat.{v + 1}] 0 F,
     plus_single_natIso (upperStarComp AddCommGrpCat.{v + 1} b a) 0 F]
 
-/-- The derived comparison before inserting the single-complex identification.
-Source: Stacks Tag 09Z1; the adjunct of pullback of the counit. -/
+/-- The derived comparison before inserting the single-complex identification (Stacks, Tag 09Z1). -/
 private noncomputable def abelianDerivedTransition {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})) :
@@ -200,7 +199,7 @@ private noncomputable def abelianDerivedTransition {S Y Y' : Scheme.{v}}
           ((upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} h).derivedPlus.counit.app K))
 
 /-- Naturality of the derived comparison in its complex, by naturality of the
-unit, composition comparison and counit. Source: Stacks Tag 09Z1. -/
+unit, composition comparison and counit (Stacks, Tag 09Z1). -/
 private lemma abelianDerivedTransition_naturality {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     {K L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})}
@@ -314,8 +313,8 @@ private theorem abelianDerivedTransition_comp
   rw [Category.comp_id]
 
 
-/-- Expand the comparison as a derived transition followed by the coefficient map.
-Source: Stacks Tag 09Z1; associativity and functoriality of direct image. -/
+/-- Expand the comparison as a derived transition followed by the coefficient map
+(Stacks, Tag 09Z1). -/
 private lemma abelianHigherDirectImageMap_eq {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (p : ℕ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -344,21 +343,7 @@ private lemma abelianHigherDirectImageMap_eq {S Y Y' : Scheme.{v}}
     ((DerivedCategory.Plus.singleFunctor _ 0).map φ)
 
 /-- Composition with canonical pullback coefficients, before inserting arbitrary
-coefficient morphisms. Source: Stacks Project, Tag 09Z1, canonical comparison maps.
-(blueprint: lem-sbc-abelian-higher-direct-image-core-comp).
-
-Proof: Expand the two maps as the derived adjunction units followed by direct
-images of pullback comparisons and counits, and the single-complex comparisons.
-Transpose along the h'' derived adjunction. Naturality moves the intermediate
-unit past the first pulled-back counit. The h' triangle identity cancels the
-intermediate counit and unit. Associativity of the inverse-image comparison
-identifies the remaining counit composite with that for b followed by a.
-The composition comparison for exact functors commutes with single complexes:
-on their degree-zero representatives this is the ordinary pullback composition
-comparison, and localization preserves this equality. Apply degree-p homology,
-which preserves composition. The proofs of the structure-map equalities agree
-by proof irrelevance. This works for identity scheme maps, zero sheaves, and
-p = 0, with no geometric hypotheses. -/
+coefficient morphisms (Stacks, Tag 09Z1). -/
 theorem abelianHigherDirectImage_core_comp {S Y Y' Y'' : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)
     (wa : a ≫ h = h') (wb : b ≫ h' = h'') (p : ℕ)

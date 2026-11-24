@@ -11,7 +11,11 @@ import WeilConjectures.AlgebraicGeometry.PinnedBaseChangeMateShifts
 import WeilConjectures.AlgebraicGeometry.PinnedDerivedAdjunctionShifts
 
 /-! Canonical compatibility for relative Mayer--Vietoris.
-Source: Stacks Project, Tags 08BV, 08HY and 0DJ9. -/
+
+## References
+
+* Stacks Project, Tags 08BV, 08HY and 0DJ9
+-/
 
 @[expose] public section
 universe u w
@@ -26,25 +30,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The pinned base-change comparison is natural and shift-compatible, with the
 right-derived direct-image shifts and their unique adjoint pullback shifts.
-This assertion has no cover, SES or connecting morphism.
-Source: Stacks Tag 08HY, counit construction; Mathlib Shift.Adjunction.
-(blueprint: lem-pc-rf-mv-canonical-base-change-shift).
-
-Proof: derive the termwise tensor-pullback composition comparison using K-flat
-resolutions. On such resolutions it is the associative tensor comparison, which
-commutes with translation, including the differential sign. The left-derived
-universal property extends this identity to all objects. Its right-adjoint mate
-is compatible with the existing right-derived direct-image shift: use the
-right-derived unit computation on K-injectives and uniqueness of the shift mate.
-In the definition of schemeDerivedBaseChangeMap the composition comparisons and
-pinned counits are exactly these comparisons and counits. Their naturality
-identifies the comparison at a morphism a with the shifted comparison at K.
-The units and counits commute with shifts by mvCanonicalPullbackShift_compatible;
-transposition commutes with shifts by mvCanonicalHomEquiv_shift. Compose these
-identities to obtain the boundary-shaped naturality equation with a, and finally
-postcompose by Rf'(ψ)[n]. Naturality of the right-derived shift moves this last
-factor across its commutation isomorphism, giving the stated formula.
-The proof does not use cartesianness, quasi-coherence or a cover. -/
+This assertion has no cover, SES or connecting morphism (Stacks, Tag 08HY). -/
 theorem mvCanonicalBaseChange_shift
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

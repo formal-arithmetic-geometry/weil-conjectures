@@ -12,11 +12,13 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Locally constant perfect complexes on the ordinary etale site
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Definition 6.3.1;
-Stacks Project, Tag 09BI (blueprint: def-per-etale-locally-constant-perfect-complex).
-
 The perfect coefficient object is realized by the exact constant-sheaf functor.
 Its derived functor is termwise constant sheaf on any representing complex.
+
+## References
+
+* Bhatt–Scholze, Definition 6.3.1
+* Stacks Project, Tag 09BI
 -/
 
 @[expose] public section
@@ -29,12 +31,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- Etale locally, the complex is the constant realization of a perfect coefficient
-complex. The coefficient complex may depend on the member of the etale cover.
-Perfectness is the recorded bounded finite-projective model predicate, with its
-independent localization universe.
-Source: Bhatt--Scholze, Definition 6.3.1; Stacks Project, Tag 09BI
-(blueprint: def-per-etale-locally-constant-perfect-complex). -/
+/-- Etale locally, the complex is the constant realization of a perfect coefficient complex,
+which may depend on the member of the etale cover. Perfectness is the bounded finite-projective
+model predicate with its own localization universe (Bhatt--Scholze, Definition 6.3.1; Stacks,
+Tag 09BI). -/
 def IsLocallyConstantPerfectEtaleComplex (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) (P : DerivedCategoryModule A S) : Prop :=
   ∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : 𝒰.I₀,

@@ -13,8 +13,9 @@ import WeilConjectures.CategoryTheory.TwistedActionTensorRestriction
 
 /-! # The normalized ordinary scalar tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tag 03EK and Tag 099M.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03EK and 099M
 -/
 
 @[expose] public noncomputable section
@@ -26,20 +27,18 @@ namespace CategoryTheory.ConstantCompletion.ScalarTensorComparison
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- The scalar target ring, viewed as an R-module.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The scalar target ring, viewed as an R-module (Stacks, Tag 03EK). -/
 abbrev scalarUnit {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :=
   (res φ).obj (SheafOfModules.unit (siteModuleRings S))
 
 /-- The existing normalized scalar tensor isomorphism. Its pure-tensor equation
-uniquely determines its hom, so this choice introduces no unspecified data.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+uniquely determines its hom, so this choice introduces no unspecified data (Stacks, Tag 03EK). -/
 @[irreducible] def scalarTensorIso {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (M : Mod R) : scalarUnit J φ ⊗ M ≅ (res φ).obj ((change φ).obj M) :=
   (SheafOfModules.exists_extensionTensorComparison φ M).choose
 
-/-- The scalar comparison sends the pure tensor to its scalar-extension section.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The scalar comparison sends the pure tensor to its scalar-extension section (Stacks, Tag 03EK).
+-/
 theorem scalarTensorIso_pure {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (M : Mod R) (V : Cᵒᵖ) (s : S.obj.obj V) (m : M.val.obj V) :
     (scalarTensorIso J φ M).hom.val.app V
@@ -49,22 +48,19 @@ theorem scalarTensorIso_pure {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     unfold scalarTensorIso
     exact (SheafOfModules.exists_extensionTensorComparison φ M).choose_spec V s m
 
-/-- Reduction of the coefficient unit is the restricted target ring.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Reduction of the coefficient unit is the restricted target ring (Stacks, Tag 03EK). -/
 @[irreducible] def scalarUnitIso {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     scalarUnit J φ ≅ (res φ).obj ((change φ).obj (𝟙_ (Mod R))) :=
   (ρ_ (scalarUnit J φ)).symm ≪≫ scalarTensorIso J φ (𝟙_ (Mod R))
 
-/-- The right unitor multiplies the two pure-tensor factors.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The right unitor multiplies the two pure-tensor factors (Stacks, Tag 03EK). -/
 theorem rightUnitor_pure (R : Sheaf J CommRingCat.{u})
     (M : Mod R) (V : Cᵒᵖ) (m : M.val.obj V) (x : R.obj.obj V) :
     (ρ_ M).hom.val.app V
         (SheafOfModules.RingedTensor.pure R M (𝟙_ (Mod R)) V m x) = x • m := by
   exact RingedDerivedNative.pureTensor_rightUnitor.{u, u, u} J R M V x m
 
-/-- The inverse right unitor adjoins the coefficient section one.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The inverse right unitor adjoins the coefficient section one (Stacks, Tag 03EK). -/
 theorem rightUnitor_inv_pure (R : Sheaf J CommRingCat.{u})
     (M : Mod R) (V : Cᵒᵖ) (m : M.val.obj V) :
     (ρ_ M).inv.val.app V m =
@@ -77,8 +73,7 @@ theorem rightUnitor_inv_pure (R : Sheaf J CommRingCat.{u})
   simp only [one_smul] at h'
   exact h'.symm.trans hi
 
-/-- The coefficient-unit comparison sends s to s tensor one.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The coefficient-unit comparison sends s to s tensor one (Stacks, Tag 03EK). -/
 theorem scalarUnitIso_pure {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (V : Cᵒᵖ) (s : S.obj.obj V) :
     (scalarUnitIso J φ).hom.val.app V s =
@@ -90,8 +85,8 @@ theorem scalarUnitIso_pure {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
 
 /-- Tensor with the reduced coefficient unit is restricted scalar extension.
 Construct it from the normalized unit comparison, tensor symmetry, and the
-existing extension-tensor comparison; no quotient or derived limit is involved.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+existing extension-tensor comparison; no quotient or derived limit is involved (Stacks, Tag 03EK).
+-/
 @[irreducible] def reductionTensorIso {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (M : Mod R) :
     M ⊗ (res φ).obj ((change φ).obj (𝟙_ (Mod R))) ≅
@@ -99,8 +94,7 @@ Source: Stacks 03EK (auxiliary; not a blueprint node). -/
   (tensorLeft M).mapIso (scalarUnitIso J φ).symm ≪≫
     β_ M (scalarUnit J φ) ≪≫ scalarTensorIso J φ M
 
-/-- The reduction comparison sends m tensor (s tensor one) to s tensor m.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The reduction comparison sends m tensor (s tensor one) to s tensor m (Stacks, Tag 03EK). -/
 theorem reductionTensorIso_pure {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (M : Mod R) (V : Cᵒᵖ) (s : S.obj.obj V) (m : M.val.obj V) :
     (reductionTensorIso J φ M).hom.val.app V
@@ -121,8 +115,7 @@ theorem reductionTensorIso_pure {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
   erw [TwistedActionRingedSite.TensorRestriction.pure_braiding]
   exact scalarTensorIso_pure J φ M V s m
 
-/-- Pure tensors with scalar sections detect maps out of the reduction tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Pure tensors with scalar sections detect maps out of the reduction tensor (Stacks, Tag 03EK). -/
 theorem reductionTensor_hom_ext {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     (M H : Mod R)
     {f g : M ⊗ (res φ).obj ((change φ).obj (𝟙_ (Mod R))) ⟶ H}
@@ -144,8 +137,7 @@ theorem reductionTensor_hom_ext {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
     scalarUnitIso_pure] using h V s m
 
 /-- The reduction tensor comparison is natural in the module.
-Both composites send m tensor (s tensor one) to s tensor f(m).
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Both composites send m tensor (s tensor one) to s tensor f(m) (Stacks, Tag 03EK). -/
 theorem reductionTensorIso_naturality {R S : Sheaf J CommRingCat.{u}}
     (φ : R ⟶ S) {M N : Mod R} (f : M ⟶ N) :
     f ▷ (res φ).obj ((change φ).obj (𝟙_ (Mod R))) ≫

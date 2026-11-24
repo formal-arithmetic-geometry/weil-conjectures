@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCompositionUni
 
 /-! # A single derived unit across a commutative direct-image square
 
-Source: Stacks Project, Cohomology, Tags 08FE and 0D5T.
-(blueprint: lem-pc-direct-image-square-single-unit-normalization).
+## References
+
+* Stacks Project, Tags 08FE and 0D5T
 -/
 
 @[expose] public section
@@ -111,21 +112,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 -- Source identifications expand the successive direct-image functors.
-/-- Equality transport of one derived unit, before factoring it into two units.
-Source: Stacks Project, Cohomology, Tags 08FE and 0D5T.
-Proof: the pushforward composition isomorphisms are identities on sections.
-The intervening pushforwardCongr is equality transport along the commutative-square
-identity. Pass to complexes degreewise and then to the homotopy quotient, obtaining
-that the displayed homotopy comparison is the equality map of the homotopy direct
-image objects. The right-derived unit is a family of natural transformations in
-the scheme morphism. Equality induction on the square identity gives that its
-component followed by equality transport of the derived functors equals equality
-transport of its source followed by the other component. Functoriality of Qh on
-equality maps identifies that source transport with the displayed Qh.map.
-This uses arbitrary homotopy objects; zero complexes and empty schemes are included.
-The displayed derived-category structures are independent; no global choice of
-a derived category for every scheme is required.
-(blueprint: lem-pc-direct-image-square-single-unit-normalization). -/
+/-- Equality transport of one derived unit, before factoring it into two units
+(Stacks, Tags 08FE and 0D5T). -/
 theorem schemeDirectImageSquare_single_unit_normalization
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

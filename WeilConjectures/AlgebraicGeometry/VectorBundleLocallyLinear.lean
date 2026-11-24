@@ -144,11 +144,9 @@ lemma isLocallyLinear_overlapCoordSnd (A : VectorBundleAtlas c p z) (i j : A.ι)
       (A.overlapCoordFst i j) (A.overlapCoordSnd i j k) :=
   fun y ↦ A.linear i j k y
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-**The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, every function in
-the span of the coordinates of the chart `j` is locally a linear combination of the coordinates
-of the chart `i`. -/
+/-- **The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, every
+function in the span of the coordinates of the chart `j` is locally a linear combination of the
+coordinates of the chart `i`. -/
 theorem span_chart_coord_le_locallyLinear (A : VectorBundleAtlas c p z) (i j : A.ι) :
     letI := (pullback.snd p (pullback.fst (A.v i) (A.v j) ≫ A.v i)).appTop.hom.toAlgebra
     Submodule.span Γ(pullback (A.v i) (A.v j), ⊤) (Set.range (A.overlapCoordSnd i j)) ≤

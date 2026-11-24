@@ -24,13 +24,14 @@ import all WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 /-! # Tensor transport along an isomorphism of ring sheaves
 
-Source: Stacks Project, Modules on Sites, Section 03EK, and Cohomology on Sites,
-Tags 06YN, 06YP, 06YS and 06YT
-(auxiliary; not a blueprint node).
-
 The derived clause supplies symmetric derived tensors whose
 monoidal localization maps are invertible on K-flat pairs. The normalization square
 uses the same total-complex comparison as the ordinary transport.
+
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK
+* Stacks Project, Cohomology on Sites, Tags 03CY, 04VG, 06YN, 06YP, 06YS and 06YT
 -/
 
 @[expose] public section
@@ -271,25 +272,19 @@ local instance scalarSheafSmallCoproducts (A : Sheaf J CommRingCat.{r})
     PresheafOfModules.hasColimitsOfShape _ _
   exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
-/-- The existing monoidal structure on module cochain complexes, cached for elaboration.
-Source: Stacks 03EK and 06YT
-(auxiliary; not a blueprint node). -/
+/-- The existing monoidal structure on module cochain complexes, cached for elaboration. -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidal
     (A : Sheaf J CommRingCat.{r}) :
     MonoidalCategory (CochainComplex (scalarModules J A) ℤ) :=
   HomologicalComplex.monoidalCategory (C := scalarModules J A) (c := .up ℤ)
 
-/-- The underlying structure of the existing total tensor, cached for elaboration.
-Source: Stacks 03EK and 06YT
-(auxiliary; not a blueprint node). -/
+/-- The underlying structure of the existing total tensor, cached for elaboration. -/
 noncomputable instance (priority := 2000) ringIsoCochainMonoidalStruct
     (A : Sheaf J CommRingCat.{r}) :
     MonoidalCategoryStruct (CochainComplex (scalarModules J A) ℤ) :=
   HomologicalComplex.monoidalCategoryStruct (C := scalarModules J A) (c := .up ℤ)
 
-/-- Localization of termwise restriction, allowing independent localization universes.
-Source: Stacks 04VG and 06YP
-(auxiliary; not a blueprint node). -/
+/-- Localization of termwise restriction, allowing independent localization universes. -/
 noncomputable def ringIsoDerivedRestriction (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)]
@@ -299,9 +294,7 @@ noncomputable def ringIsoDerivedRestriction (c : R ≅ S)
   letI : PreservesFiniteColimits (scalarRestriction c.hom) := h.2
   (scalarRestriction c.hom).mapDerivedCategory
 
-/-- The canonical localization comparison for termwise scalar restriction.
-Source: Stacks 04VG and 06YP
-(auxiliary; not a blueprint node). -/
+/-- The canonical localization comparison for termwise scalar restriction. -/
 noncomputable def ringIsoRestrictionComparison (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)]
@@ -315,9 +308,7 @@ noncomputable def ringIsoRestrictionComparison (c : R ≅ S)
 /-- The derived symmetric tensors and the representative normalization of their comparison.
 The existential presentations include their localization maps, invertible on K-flat pairs
 and at the unit. Thus they present the actual derived tensor, rather than impose
-additional tensor hypotheses on the input categories or derived objects.
-Source: Stacks 06YS, 06YT and 06YP
-(auxiliary; not a blueprint node). -/
+additional tensor hypotheses on the input categories or derived objects. -/
 def RingIsoDerivedTensorCompatible
     (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
@@ -363,9 +354,7 @@ def RingIsoDerivedTensorCompatible
               DerivedCategory.Q.map (t P Q).hom
 
 /-- All clauses of scalar-coordinate tensor transport, with the tensor and unit maps
-normalized on sections and the total-complex map normalized on every summand.
-Source: Stacks 03EK, 06YN and 06YP
-(auxiliary; not a blueprint node). -/
+normalized on sections and the total-complex map normalized on every summand. -/
 structure RingIsoTensorTransport (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)] where
@@ -858,35 +847,7 @@ private theorem scalarRestriction_derived (c : R ≅ S)
     exact hd P Q
 
 /-- Restriction along a ring-sheaf isomorphism transports tensor, flatness and K-flatness,
-and its unbounded derived extension has the coherent normalized tensor comparison.
-Source: Stacks 03EK, 03CY, 06YN, 06YP, 06YS and 06YT
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Restrict back along the inverse. Both composites are identity on abelian sheaves;
-   the scalar actions agree by c inverse c = id. This gives the additive exact equivalence.
-2. On section tensors send x tensor y to x tensor y in both directions. Surjectivity
-   of c makes the S-balanced relation R-balanced. Sheafification extends these maps
-   uniquely. The unit is c inverse. On pure tensors the associator, unitor and symmetry
-   diagrams commute, hence they commute on the sheafified tensor.
-3. Sum the comparisons in each degree over p+q=n. Naturality commutes with both
-   differential terms; additivity preserves the sign (-1)^p. This yields totalIso.
-4. Exactness identifies cohomology; the inverse equivalence reflects zero objects.
-   Tensor the inverse image of a short exact sequence to transport flatness.
-5. For any acyclic R-complex A, its inverse image is acyclic. Tensor it with the
-   S-K-flat P and transport the total tensor back. Interchange c and its inverse
-   to obtain reflection and the corresponding assertion for the inverse functor.
-6. Tensor commutes with mapping cones. The acyclic-cone criterion proves that the
-   acyclic-tensor test preserves quasi-isomorphisms on either side (06YP), using
-   signed symmetry for the other order. Conversely apply tensor to zero -> A.
-7. Localize the exact termwise equivalence. K-flat resolutions correspond by steps
-   4-5, and step 3 gives the derived comparison on them. The resolving-subcategory
-   descent theorem extends it uniquely and naturally to all derived pairs.
-8. Check derived coherence on three K-flat resolutions, whose pairwise tensors are
-   K-flat. The diagrams are those of step 2 summed over triple degrees; symmetry
-   includes (-1)^(pq). Faithfulness of restriction to resolutions proves coherence
-   for all derived objects. The displayed derived square records the computation
-   on every corresponding pair of K-flat resolutions, independently of choices. -/
+and its unbounded derived extension has the coherent normalized tensor comparison. -/
 theorem ringIso_tensor_transport (c : R ≅ S)
     [HasDerivedCategory.{wR} (scalarModules J R)]
     [HasDerivedCategory.{wS} (scalarModules J S)] :

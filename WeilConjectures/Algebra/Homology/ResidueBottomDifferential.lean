@@ -19,8 +19,10 @@ import WeilConjectures.RingTheory.PrincipalCokernelProjectiveDescent
 
 /-! # A single bottom differential tested on residue fields
 
-Source: Stacks Project, Tag 00O0 and Tag 00NX.
-(blueprint: lem-sc-residue-bottom-differential).
+## References
+
+* Stacks Project, Tag 00O0 (Lemma `cokernel-flat`)
+* Stacks Project, Tag 00NX
 -/
 
 @[expose] public section
@@ -32,24 +34,7 @@ namespace CochainComplex
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A differential with zero incoming term and vanishing residue homology is a split
-injection with projective cokernel.
-
-Source: Stacks Project, Tag 00O0, Lemma `cokernel-flat`, and Tag 00NX.
-(blueprint: lem-sc-residue-bottom-differential).
-
-Proof: Extension of scalars sends the zero incoming term to zero. Thus zero homology
-at a says exactly that the residue extension of d(a,a+1) is injective. Apply
-Module.finiteProjectiveCokernel_residue_localization at every prime to obtain a cover
-by principal opens on which the differential is injective and its cokernel finite
-projective. Injectivity descends from this cover: an element of the kernel vanishes
-in each localization, and a module element vanishing at every prime is zero. Both
-terms are finitely presented because they are finite projective. The cokernel is
-finitely presented, being the quotient of a finitely presented module by the image
-of a finite module. The localized cokernels are flat, so the cokernel is globally
-flat; finitely presented flat modules are projective. Finally the abstract opcycles
-are canonically isomorphic to the range quotient of d(a,a+1). Transfer projectivity
-along this isomorphism and identify module injectivity with categorical monicity.
-No boundedness and no vanishing in other homological degrees is used. -/
+injection with projective cokernel. -/
 theorem residue_bottom_differential
     (R : Type v) [CommRing R]
     (P : CochainComplex (ModuleCat.{v} R) ℤ) (a : ℤ)

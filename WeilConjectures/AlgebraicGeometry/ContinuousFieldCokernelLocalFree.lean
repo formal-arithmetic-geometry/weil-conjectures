@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousFieldPresentationNormalForm
 /-!
 # Local freeness of cokernels of continuous matrices of locally constant rank
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the Gaussian elimination step
-of the accompanying rank/descent argument.
+## References
+
+* Hemo–Richarz–Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -26,22 +27,8 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A finite presentation matrix of locally constant pointwise rank has locally free
-cokernel over continuous field-valued coefficients, with no noetherian hypothesis.
-Source: the rank/descent argument, steps 6--7, accompanying Hemo--Richarz--Scholbach,
-Example 3.1 (auxiliary; not a blueprint node).
-Proof: the fibres of the rank function form an open cover. On a rank-r fibre,
-nonvanishing r by r minors cover; this includes the empty minor when r is zero.
-On each such open the chosen minor is invertible as a continuous matrix: its inverse
-is its adjugate divided by its nowhere-zero determinant. Permute rows and columns,
-then perform the two invertible block operations. The Schur complement vanishes at
-every point by the pointwise rank bound, so its entries are zero continuous functions.
-The matrix is equivalent to a block identity and zero. Identify regular-module
-endomorphisms with global continuous functions by their value on one, and finite-free
-maps with matrices by biproduct inclusions and projections. These identifications
-respect restriction and composition. Thus the invertible matrix operations give
-isomorphisms of module sheaves, and the cokernel is the remaining finite biproduct of
-regular modules. Inverse image preserves cokernels and finite biproducts; transport
-through the given ring-object isomorphism and compose the open covers. -/
+cokernel over continuous field-valued coefficients, with no noetherian hypothesis
+(Hemo–Richarz–Scholbach, Example 3.1). -/
 theorem exists_finiteFree_cover_cokernel_of_locallyConstant_rank
     (E : Type u) [NormedField E] (V : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology V) AddCommGrpCat.{u + 1}) [MonObj R]

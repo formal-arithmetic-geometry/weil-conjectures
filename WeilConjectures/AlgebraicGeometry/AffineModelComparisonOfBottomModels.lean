@@ -13,8 +13,11 @@ import WeilConjectures.AlgebraicGeometry.AffineModelStageHomEquationOfCoherentOb
 import WeilConjectures.AlgebraicGeometry.AffineModelLimitHomEquationOfCoherentObjects
 
 /-! # Propagation of bottom-stage affine models
-Source: Stacks Project, Tags 09RE and 0D5S.
-(blueprint: lem-pc-affine-model-comparison-of-bottom-models). -/
+
+## References
+
+* Stacks Project, Tags 09RE and 0D5S
+-/
 
 @[expose] public section
 universe u w
@@ -23,30 +26,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Propagate two bottom-stage models through compatible affine coordinates.
-Source: Stacks Project, Tag 09RE, affine calculation, and Tags 0D5S and 06Y1.
-(blueprint: lem-pc-affine-model-comparison-of-bottom-models).
-
-Proof: hE and hK are the acyclic-tensor K-flat criterion. For each stage j
-pull aE and aK back along the bottom-to-j
-base-change arrow, and compose with perfectHomComparison. Compute this
-pullback on E and K by the K-flat affine pullback comparison, conjugated by
-the localized pushforwards hd at the bottom and at j. The transition equation
-for σ identifies the affine map with that base-change arrow. At the limit use
-the same construction with hdlim and the limit transition equation. Extension
-of scalars preserves K-flatness, so this calculation applies again to every
-stage model. For a chain map at j, use naturality of the affine comparison for
-the map j→k, respectively j→C.pt. Reassociation of scalar extension is exactly
-the two associativity components in scalarExtensionHom. The counit
-characterization of the derived composition comparisons, and its associativity
-law, identify these reassociations with perfectHomComparison. Expand the
-conjugations and cancel each adjacent inverse pair; this gives both Hom
-equations in affineModelComparisonData. Package the supplied d and dlim and
-the four constructed isomorphisms. The bottom isomorphisms are arbitrary:
-their pullbacks appear on both sides of every naturality square and cancel.
-No chain map is required to descend to the bottom, and no directedness or
-colimit hypothesis is used. Identity arrows, zero rings, empty spectra and
-zero models are covered by the same naturality and composition calculations. -/
+/-- Propagate two bottom-stage models through compatible affine coordinates
+(Stacks, Tags 09RE, 0D5S and 06Y1). -/
 theorem affineModelComparisonData_of_bottom_models
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

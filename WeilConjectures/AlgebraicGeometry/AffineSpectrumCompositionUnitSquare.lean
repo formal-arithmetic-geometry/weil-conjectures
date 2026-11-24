@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDirectImageCoordin
 
 /-! # Affine spectrum composition unit square
 
-Source: Stacks Project, Tag 0D5S, composition coherence used in the affine reduction.
-(blueprint: lem-pc-affine-spectrum-composition-unit-square).
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section
@@ -248,22 +249,7 @@ private theorem concrete_square
 
 /-- The comparison square commutes for the unadjointified composition units.
 It involves only composition comparisons and identity comparisons, not the
-unit chosen by Equivalence.mk.
-
-Proof: write h,h' for the two spectrum maps, v,v' for their inverses, and q
-for Spec.map g'.appTop. Transport each composition comparison to a common
-composite morphism. Apply associativity to (h',v',g'), (h',q,v), and (g',h,v),
-using h;v=id, h';v'=id, g';h=h';q, and q;v=v';g'. The two unit laws identify
-the identity-comparison components with the transported comparisons for
-(id,g') and (g',id). Substitute the first associativity equation and cancel
-the mapped inverse comparison for (v',g'). Substitute the second equation
-and cancel the inverse comparison for (h',q). The third equation is exactly
-the remaining equality. Equality transport proofs agree by proof irrelevance.
-The calculation is first proved for abstract functors and coherent comparison
-data, then specialized to the selected derived-pullback comparisons.
-Source: Stacks Project, Tag 0D5S, composition coherence; the second step of
-the original cancellation node's proof. Tag 08HY explains its base-change use.
-(blueprint: lem-pc-affine-spectrum-composition-unit-square). -/
+unit chosen by Equivalence.mk. -/
 theorem affineSpectrum_composition_unit_square
     {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']
     (g' : X' ⟶ X) (K : schemeDerivedCategory X) :

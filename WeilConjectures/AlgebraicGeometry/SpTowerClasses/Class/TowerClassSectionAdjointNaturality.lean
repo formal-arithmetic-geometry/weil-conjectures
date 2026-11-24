@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassSectionAdjoint
 
 /-! # Naturality of sectionwise tower adjunction
-
-Source: the ordinary evaluation comparison for strict coefficient systems.
 -/
 
 @[expose] public noncomputable section
@@ -53,9 +51,7 @@ private theorem evaluatedAdjoint_postcomp
     (fun k ↦ (SpTowerShriek.ev l E Y n).map (ordinaryAdjoint l E g h) ≫ k)
     ((g.ordinaryPushEvaluation n).hom.naturality a)
 
-/-- Naturality of section adjunction in the source.
-Source: ordinary adjunction naturality and evaluation.
-(blueprint: lem-sfb-tower-class-section-adjoint-naturality). -/
+/-- Naturality of section adjunction in the source. -/
 theorem sectionAdjoint_precomp
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)
@@ -66,9 +62,7 @@ theorem sectionAdjoint_precomp
       sectionAdjoint l E g h n U (a.val.app (op (n, U.unop)) x) := by
   exact congrArg (fun k ↦ k.val.app U x) (evaluatedAdjoint_precomp l E g a h n)
 
-/-- Naturality of section adjunction in the target.
-Source: ordinary adjunction and the ordinary push-evaluation comparison.
-(blueprint: lem-sfb-tower-class-section-adjoint-naturality). -/
+/-- Naturality of section adjunction in the target. -/
 theorem sectionAdjoint_postcomp
     {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f)

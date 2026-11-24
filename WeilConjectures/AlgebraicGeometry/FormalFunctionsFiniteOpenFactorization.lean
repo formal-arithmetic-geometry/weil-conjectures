@@ -15,9 +15,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-! # Finite pullback on the inverse-image opens
 
-Source: Stacks Project, Tag 02OD, factorization through the local spectrum;
-Tags 01F7 and 01FB, composition and restriction of cohomology maps.
-(blueprint: lem-weil-pbc-formal-functions-finite-open-factorization)
+## References
+
+* Stacks Project, Tags 02OD, 01F7 and 01FB
 -/
 
 @[expose] public section
@@ -96,31 +96,7 @@ private theorem restriction_data {A B : Scheme.{u}} (h : A ⟶ B)
 
 /-- A single additive map on open cohomology intertwines global finite pullback
 with restriction and the two restricted pullbacks. No germ or stalk comparison
-occurs in this statement.
-Source: Stacks Project, Tag 02OD, the finite maps factor through the local spectrum;
-Tags 01F7 and 01FB, functoriality of cohomology.
-(blueprint: lem-weil-pbc-formal-functions-finite-open-factorization)
-
-Proof: write g' for the projection from the local base change to X and i' for
-formalFunctionsFiniteι. Put U=f inverse V, U'=g' inverse U and W=i_n inverse U.
-The projection identity i' followed by g'=i_n gives W=i' inverse U'. Restrict the
-h-map formalFunctionsFiniteFMap to U' using moduleCohomologyFMap_restriction.
-Transport its target along the equality of opens, using the canonical restricted
-module identification, and take its cohomology map as t. The restriction square
-in that theorem gives the first equality for every global class z.
-For the second equality, transpose the defining formalFunctionsFiniteFMap across
-its tensor-pullback adjunction. Its image is the i_n unit with the pushforward
-composition and equality identifications. Restrict this equation to W. Substitute
-E.unit_square and D.unit_square. Naturality of pushforwardComp and pushforwardCongr
-identifies the composite of E.psi with the restricted finite h-map with D.psi:
-both transpose under restriction to the same restricted i_n unit. Applying
-moduleCohomologyFMap_comp and its congruence for the projection identity yields
-the second equality. Arbitrary resolution choices affect neither equality, since
-these h-maps are fixed by their unit squares. The construction applies to every
-open V, even one not containing y, and to arbitrary F: no flatness, properness,
-coherence, Noetherianity, surjectivity, or completion comparison is required.
-At p=0 these are ordinary section pullbacks; for zero coefficients or empty opens
-all maps are zero. The intermediate map is used only to prove a proposition. -/
+occurs in this statement. (Stacks, Tags 02OD, 01F7 and 01FB.) -/
 theorem formalFunctions_finite_open_factorization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (y : Y) (F : X.Modules) (p n : ℕ) (I : InjectiveResolution F)
     (K : InjectiveResolution

@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
 public import WeilConjectures.CategoryTheory.AdjunctionUnitTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
-
 # The supported diagonal unit -/
 @[expose] public noncomputable section
 set_option autoImplicit false

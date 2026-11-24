@@ -18,8 +18,16 @@ import Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # Finite-cover sites with finite limits have enough points
 
-Source: Stacks Project, Sites, Tag 00YQ, Proposition `proposition-criterion-points`
-(auxiliary; not a blueprint node).
+## Implementation details
+
+The sheaves take values in `Type (max u w)`, a universe containing the site's universe `u`:
+in the source the site is a set and its sheaves are valued in all sets. With values in a
+universe below `u` the conclusion fails, e.g. for presheaves on a meet-semilattice with an
+antichain of size larger than the value universe.
+
+## References
+
+* Stacks Project, Sites, Tag 00YQ.
 -/
 
 @[expose] public section
@@ -209,30 +217,7 @@ private lemma systemHomIso_naturality
   rfl
 
 /-- A small site with finite limits and finite covering refinements has a
-set-indexed conservative family of points. Source: Stacks Project, Sites, Tag 00YQ
-(auxiliary; not a blueprint node).
-
-The sheaves take values in `Type (max u w)`, a universe containing the site's
-universe `u`: in the source the site is a set and its sheaves are valued in all sets
-(size convention, prose-01-10). With values in a universe below `u` the
-conclusion fails, e.g. for presheaves on a meet-semilattice with an antichain of
-size larger than the value universe.
-
-The proof follows the node. Step 1: fix a sheaf `F`, an object `U` and distinct
-sections `s ≠ s'` of `F(U)`; starting from the one-element system at `U`, apply the
-all-at-once refinement (Stacks 00YP) countably often and take the union of the
-chain; the images of `s, s'` stay distinct (equality in a directed colimit is
-witnessed at one index), and every element of the final `u(W)` lifts along every
-finite covering `{W_k → W}`. Step 2: by the finite-refinement hypothesis the
-lifting holds for every covering, and finite limits in `C` make `u` left exact, so
-the system defines a point (Stacks 00YC, 00YA) in whose stalk `s, s'` stay
-distinct. Step 3: the point depends only on the inverse system in `C`, and the
-systems produced have index posets bounded in size in terms of `C`, so up to
-isomorphism they form a set in universe `u`; one point for each of them gives the
-index type `ι`, and since every distinct pair of sections is separated by one of
-these points, the point-family criterion (Stacks 00YM) gives joint reflection of
-isomorphisms.
--/
+set-indexed conservative family of points (Stacks, Tag 00YQ). -/
 theorem finitarySite_enoughPoints
     {C : Type u} [SmallCategory C] [HasFiniteLimits C]
     (J : Precoverage C) (hJ : J.IsSiteForCoverings)

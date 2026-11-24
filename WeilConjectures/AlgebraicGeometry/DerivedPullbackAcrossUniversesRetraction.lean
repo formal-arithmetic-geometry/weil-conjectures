@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Retraction for derived pullback across localization universes
 
-Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-derived-pullback-across-universes-retraction).
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section
@@ -25,15 +26,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Pullback along a retraction cancels, also between different localization universes.
-Source: Stacks Project, Tag 0D5S (composition and identity of derived pullback).
-(blueprint: lem-pc-derived-pullback-across-universes-retraction).
-
-Proof: cancel the middle localization equivalence with its counit, mapping this
-isomorphism through the standard pullback of i and the inverse equivalence on X.
-The composition comparison identifies the successive standard pullbacks with that
-of i followed by p. Rewrite this composite as the identity using h. Apply the
-identity-pullback comparison, then cancel the remaining equivalence with its unit. -/
+/-- Pullback along a retraction cancels, also between different localization universes
+(Stacks, Tag 0D5S). -/
 theorem derivedPullbackAcrossUniverses_retraction {X Y : Scheme.{u}}
     [hx : HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [hy : HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

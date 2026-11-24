@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-! # Canonical cohomology cocone on inverse-image opens
 
-Source: Stacks Project, Tags 09YQ and 01F7.
+## References
+
+* Stacks Project, Tags 09YQ and 01F7
 -/
 
 @[expose] public section
@@ -25,9 +27,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Restrict a coefficient map across a commuting square.
-Source: Stacks Project, Tag 01F7, composition and coefficient naturality.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- Restrict a coefficient map across a commuting square (Stacks, Tag 01F7). -/
 noncomputable def openSquareCoefficient
     {X Y X' Y' : Scheme.{u}} (f : Y ⟶ X) (a : X' ⟶ X) (b : Y' ⟶ Y)
     (g : Y' ⟶ X') (h : b ≫ f = g ≫ a)
@@ -51,9 +51,8 @@ private theorem pullback_comp_transport {A B C : Scheme.{u}}
   exact ((cohomologyPullbackFunctorial a b F n).2.1 x).symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Pullback on cohomology commutes with restriction across a commuting square.
-Source: Stacks Project, Tag 01F7.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- Pullback on cohomology commutes with restriction across a commuting square (Stacks, Tag 01F7).
+-/
 theorem openSquareCoefficient_cohomology
     {X Y X' Y' : Scheme.{u}} (f : Y ⟶ X) (a : X' ⟶ X) (b : Y' ⟶ Y)
     (g : Y' ⟶ X') (h : b ≫ f = g ≫ a)
@@ -92,17 +91,13 @@ theorem openSquareCoefficient_cohomology
         ((cohomologyPullbackFunctorial b f F n).2.1 x).symm).trans
           (cohomologyMap_map b n φ (cohomologyMap f F n x)).symm)
 
-/-- The open at a tail stage, pulled back from a morphism at the least index.
-Source: Stacks Project, Tag 09YQ, inverse-image open system.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- The open at a tail stage, pulled back from a morphism at the least index (Stacks, Tag 09YQ). -/
 abbrev tailStageOpen {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     {X : Scheme.{u}} {i₀ : I} (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
     (j : Set.Ici i₀) : (D.obj (op j.val)).Opens :=
   (D.map (homOfLE j.property).op ≫ g₀) ⁻¹ᵁ W
 
-/-- Transition between the inverse-image opens.
-Source: Stacks Project, Tag 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- Transition between the inverse-image opens (Stacks, Tag 09YQ). -/
 noncomputable def tailStageOpenMap {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -113,9 +108,7 @@ noncomputable def tailStageOpenMap {I : Type u} [Preorder I]
     rw [← Scheme.Hom.comp_preimage, ← Category.assoc, ← D.map_comp]
     rfl)
 
-/-- Projection of the limit open to a tail-stage open.
-Source: Stacks Project, Tag 09YQ.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- Projection of the limit open to a tail-stage open (Stacks, Tag 09YQ). -/
 noncomputable def tailLimitOpenMap {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens) (j : Set.Ici i₀) :
@@ -125,9 +118,7 @@ noncomputable def tailLimitOpenMap {I : Type u} [Preorder I]
     dsimp only [tailStageOpen]
     rw [← Scheme.Hom.comp_preimage, ← Category.assoc, c.w])
 
-/-- Canonical cohomology transition on the restricted stage opens.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- Canonical cohomology transition on the restricted stage opens (Stacks, Tags 09YQ and 01F7). -/
 noncomputable def tailOpenCohomologyMap {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -148,9 +139,7 @@ noncomputable def tailOpenCohomologyMap {I : Type u} [Preorder I]
         (F j.val) (F k.val)
         (φ (homOfLE (show j.val ≤ k.val from f.le)))) 0)
 
-/-- Canonical cohomology leg from a stage open to the limit open.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone). -/
+/-- Canonical cohomology leg from a stage open to the limit open (Stacks, Tags 09YQ and 01F7). -/
 noncomputable def tailOpenCohomologyLeg {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -222,26 +211,8 @@ private theorem square_identity_heq {X Y : Scheme.{u}}
   exact heq_of_eq
     (openSquareCoefficient_identity_normalized a (a ≫ 𝟙 X) (Category.comp_id a) h rfl F)
 
-/-- Restricting an identity coefficient across the identity square gives the canonical unit.
-Source: Stacks Project, Tag 09YQ (coherent coefficient systems), and sites.tex,
-Tag 03CB (composition of inverse images), with the unit coherence of the chosen adjoints.
-(blueprint: lem-weil-pbc-open-square-diagram-identity).
-
-Proof: Fix j. Use hF' to identify the given restricted sheaf with a_j^*F_sigma(j)
-and hψ to identify its coefficient map with the explicit square coefficient.
-Substitute the original identity equation for the coefficient map.
-The equality D.map_id identifies the underlying transition with the scheme identity;
-E.map_id similarly identifies the restricted transition with its scheme identity.
-Transport along these two equalities, retaining the eqToIso factors in the statement.
-The square coefficient is now the inverse of the composition isomorphism for the
-identity on E_j and a_j, followed by the composition isomorphism for a_j and the
-identity on D_sigma(j), followed by a_j^* of the original unit. Apply the left unit
-law upperStarComp_id_left and the right unit law upperStarComp_id_right. Their
-components express the first factor as the restricted unit and the second as the
-inverse of a_j^* of the original unit. Functoriality cancels the latter with the
-last factor. The remaining map is the restricted unit, with the E.map_id transport
-restored. No injectivity, directedness, scheme limit, or nonempty open is used;
-the argument also covers zero coefficients and empty schemes. -/
+/-- Restricting an identity coefficient across the identity square gives the canonical unit
+(Stacks, Tags 09YQ and 03CB). -/
 private theorem openSquareCoefficient_diagram_identity
     {I J : Type u} [Preorder I] [Preorder J]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (E : Jᵒᵖ ⥤ Scheme.{u}) (σ : J → I)
@@ -464,20 +435,8 @@ private theorem tailOpenCohomologyMap_laws
       (E.map (f ≫ g).op) (E.map_comp g.op f.op) (F' j) (F' k) (F' l) (ψ f) (ψ g) 0 x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The restricted cohomology legs commute with the restricted transitions.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-tail-open-cohomology-leg-naturality).
-
-Proof: Precompose the cocone equation G.map f; L_k = L_j by eG_j.inv and substitute hG.
-Cancel the inverse isomorphisms to obtain the original coefficient leg equation.
-Restrict it along the limit-open inclusion. The projection square and transition square
-paste to the projection square at j. Vertical pasting of inverse-image square comparisons
-and naturality in the coefficient transition identify the restricted coefficient equation
-with the composite of the restricted transition and restricted leg at k. The scheme
-projections compose because both agree after the stage-open inclusion, by c.w.
-Apply cohomology pullback composition, coefficient naturality and Sheaf.H.map composition
-to this coefficient equation. The displayed naturality equality follows. The argument
-uses arbitrary cocones, and includes empty opens and zero coefficients. -/
+/-- The restricted cohomology legs commute with the restricted transitions
+(Stacks, Tags 09YQ and 01F7). -/
 private theorem tailOpenCohomologyLeg_naturality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)
@@ -540,33 +499,8 @@ private theorem tailOpenCohomologyLeg_naturality
   rw [← hp]
   rfl
 
-/-- The canonical restricted cohomology arrows and legs form a diagram and cocone.
-
-Source: Stacks Project, Tag 09YQ (coherent systems) and Tag 01F7 (functoriality).
-(blueprint: lem-weil-pbc-etale-limit-open-cohomology-cocone).
-
-Proof: Use the displayed restricted cohomology groups as the objects of K and
-`tailOpenCohomologyMap` as its arrows. The restricted scheme maps preserve
-identities and reverse composition: cancel the monomorphic open inclusions and
-use the functor laws of D. For coefficient identities, transport the original
-identity equation along D.map_id and the restricted scheme identity. The left
-and right unit laws of upperStarComp cancel the original unit comparison and
-leave the restricted unit. Cohomology pullback along identity then gives map_id.
-For composition, substitute hcomposition in the coefficient map. Vertical
-pasting of squareUpperStarIso and naturality in the coefficient transition give
-the restricted coefficient composition law. Pullback composition and coefficient
-naturality convert it into map_comp for K.
-For each j use `tailOpenCohomologyLeg` as the leg to the displayed limit-open
-cohomology group. Precompose L.w by eG_j.inv and substitute hG; cancel eG_j to
-obtain the original coefficient leg equation. The restricted projections compose
-by c.w after cancellation of the open inclusion. Paste the transition square
-with the projection square at k. The coefficient leg equation and square pasting
-identify the resulting coefficient with the projection coefficient at j.
-Cohomology composition and coefficient naturality give leg naturality. Assemble
-these laws into the explicit functor K and natural transformation, and take all
-eK to be identity isomorphisms. No choice of data from an existence theorem,
-colimithood, geometric limit, compactness, affine transition, or continuity is
-used. Empty opens, identity diagrams and zero coefficients obey the same laws. -/
+/-- The canonical restricted cohomology arrows and legs form a diagram and cocone
+(Stacks, Tags 09YQ and 01F7). -/
 theorem etale_limit_open_cohomology_cocone
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -15,10 +15,13 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyTriangleRows
 import WeilConjectures.Algebra.Homology.TensorCoefficientConeBoundary
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorTriangulated
 
-/-! # Exact tensor-comparison rows for a chain-level mapping cone
+/-!
+# Exact tensor-comparison rows for a chain-level mapping cone
 
-Source: Stacks Project, Tags 06Y6, 0BYJ and 0DJA(1).
-(blueprint: lem-pc-localized-tensor-comparison-cone-rows).
+## References
+
+* Stacks Project, Tags 06Y6 (exact derived tensor), 0BYJ (associativity) and 0DJA(1)
+  (canonical tensor comparison)
 -/
 
 @[expose] public section
@@ -41,36 +44,10 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The two cohomology rows for a chain map and its actual mapping cone
-have an exact source row, and the coefficient comparison commutes with all
-four row arrows.
-The first, second and fourth target arrows are the homology maps of the chain
-map and the cone inclusion; its connecting arrow is the homology boundary of the
-concrete extended and tensored triangle.
-
-Source: Stacks Project, Tags 06Y6 (exact derived tensor), 0BYJ (associativity)
-and 0DJA(1) (canonical tensor comparison); the parent diagram proof, steps 2--4.
-
-Proof: tensor the cone triangle of f with Q, restrict to R, and apply derived
-extension to B. The fixed-second-factor derived tensor functor is exact. The
-commuting A-action makes its cohomology sequence E=A tensor_R B-linear. Identify
-these objects with the cohomology of the three prescribed universal models:
-uniqueness of the derived counit fixes these identifications, including their
-A-actions and comparison maps. Extend to C. Flatness of C over E preserves
-exactness, giving s0,s1,s2,s3 and the first displayed exact row.
-Extend the original cone triangle from A to C. Additive scalar extension
-commutes with the mapping cone, and tensoring with arbitrary N gives another
-cone triangle. The homology boundary of this concrete triangle gives d2; the other target
-maps are precisely the displayed homology maps. Target exactness is proved
-separately in `tensorConeTriangle_five_term_exact`. The scalar-extension unit,
-derived counit, monoidal tensorator and t
-commute with f and the cone inclusion by naturality. On the cone's P2 and
-shifted P1 summands they commute with projection as well: the same Koszul sign
-occurs on both sides. Thus taking homology gives the four displayed squares,
-including the connecting square. This argument concerns an actual chain map
-and its cone, not unrelated exact rows or arbitrary derived representatives.
-Zero rings, zero maps, split cones and unbounded complexes require no changes.
-(blueprint: lem-pc-localized-tensor-comparison-cone-rows). -/
+/-- The two cohomology rows for a chain map and its actual mapping cone have an exact source
+row, and the coefficient comparison commutes with all four row arrows. The first, second and
+fourth target arrows are the homology maps of the chain map and the cone inclusion; the
+connecting arrow is the homology boundary of the concrete extended and tensored triangle. -/
 theorem exists_localizedTensorComparison_cone_rows
     (hC : Module.Flat (A ⊗[R] B) C)
     (P₁ P₂ : CochainComplex (ModuleCat.{u} A) ℤ) (f : P₁ ⟶ P₂)

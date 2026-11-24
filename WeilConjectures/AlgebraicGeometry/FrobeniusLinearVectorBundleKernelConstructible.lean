@@ -27,12 +27,14 @@ import WeilConjectures.ConstructibleSheaf.OpenCover
 /-!
 # Constructibility of Frobenius-fixed points of a vector bundle
 
-Source: Stacks Project, Tag 0GKU, lemma-frobenius-linear-on-vb.
-
 Let `S` be a Noetherian scheme on which the prime `p` vanishes, `E` a finite locally free
 `𝒪_S`-module and `F` a Frobenius-linear endomorphism of the étale sheaf of `E`. The kernel of
 `F - 1` is a constructible étale sheaf. We state this for a sheaf of `𝔽_p`-modules whose
-underlying abelian sheaf is the (universe lifted) kernel, which is the form in which it is used.
+underlying abelian sheaf is the (universe lifted) kernel.
+
+## References
+
+* Stacks Project, Tag 0GKU.
 -/
 
 @[expose] public section
@@ -87,17 +89,7 @@ private noncomputable def sheafComposeForgetIso {X : Scheme.{u}} (Λ : Type (u +
 scheme on which the prime `p` vanishes, `E` a finite locally free `𝒪_S`-module and `F` an
 endomorphism of the étale sheaf of `E` which is Frobenius-linear: `F (a e) = aᵖ F e`. A sheaf of
 `𝔽_p`-modules whose underlying abelian sheaf is the universe lift of `ker (F - 1)` is
-constructible.
-
-Source: Stacks Project, Tag 0GKU, lemma-frobenius-linear-on-vb.
-
-Proof: cover `S` by affine opens on which `E` is free. Restriction to such an open transports
-`F` and its kernel (`frobenius_linear_kernel_etale_pullback`), and over an affine base with a
-free frame the kernel has a finite stratification with finite locally constant underlying set
-sheaves (`frobenius_linear_free_kernel_stratification`). Inverse image commutes with
-forgetting the module structure, and a sheaf of modules over a finite ring with finite locally
-constant underlying set sheaf is finite locally constant. Constructibility glues along finite
-open covers of a Noetherian scheme. -/
+constructible. (Stacks, Tag 0GKU) -/
 theorem isConstructibleSheaf_of_forget₂_iso_frobeniusLinear_kernel
     (p : ℕ) [Fact p.Prime] (S : Scheme.{u}) [IsNoetherian S] (hp : (p : Γ(S, ⊤)) = 0)
     (E : S.Modules) [E.IsQuasicoherent] [E.IsFiniteLocallyFree]

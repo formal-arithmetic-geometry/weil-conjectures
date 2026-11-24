@@ -26,8 +26,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The induced module direct image of a supplied tensor edge
 
-Source: Stacks Project, Modules on Sites, Tag 03D7
-(blueprint: lem-sbc-ringed-tensor-edge-induced-adjunction).
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D7
 -/
 
 @[expose] public section
@@ -36,8 +37,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
-/-- The structural ring map of a tensor edge, retaining the given geometric adjunction.
-Source: Stacks 03D7 (blueprint: lem-sbc-ringed-tensor-edge-induced-adjunction). -/
+/-- The structural ring map of a tensor edge, retaining the given geometric adjunction. -/
 def RingedTensorEdge.ringData {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) :
     RingedToposMorphism.RingData
       ((sheafCompose X.topology (forget₂ CommRingCat RingCat)).obj X.ring)
@@ -87,16 +87,7 @@ def RingedTensorEdge.ringData {Y X : RingedTensorCorner.{u, w}} (e : RingedTenso
 
 /-- The specified scalar-extension pullback is adjoint to the induced module direct image.
 The comparison with the edge's supplied right adjoint preserves both unit and counit,
-and the induced adjunction is normalized on underlying sheaves by scalar insertion.
-
-Source: Stacks Project, Modules on Sites, Tag 03D7
-(blueprint: lem-sbc-ringed-tensor-edge-induced-adjunction).
-
-Proof: compose the algebraic inverse image's ring identification with the structural
-ring homomorphism. Apply the induced-module construction to this ring datum. The
-normalized supplied-tensor adjunction applies because cancellation of the ring
-identification gives its required structural-map equation. Finally uniqueness of right
-adjoints gives the comparison and its unit and counit equations. -/
+and the induced adjunction is normalized on underlying sheaves by scalar insertion. -/
 theorem RingedTensorEdge.inducedModuleAdjunction
     {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) :
     ∃ m : e.ringData.Modules,

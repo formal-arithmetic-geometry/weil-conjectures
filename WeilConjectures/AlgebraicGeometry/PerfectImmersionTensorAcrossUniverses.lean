@@ -22,8 +22,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # The perfect immersion tensor formula in independent derived universes
 
-Source: Stacks Project, Tag 0A9U, and uniqueness of localization, Tag 05RU.
-(blueprint: lem-sc-perfect-immersion-tensor-across-universes).
+## References
+
+* Stacks Project, Tags 0A9U and 05RU.
 -/
 
 @[expose] public section
@@ -49,26 +50,8 @@ private noncomputable def standardUnitComparison (X : Scheme.{u})
     (HomotopyCategory.quasiIso A (.up ℤ))).app
       ((HomotopyCategory.singleFunctor A 0).obj (SheafOfModules.unit X.ringCatSheaf))
 
-/-- The tensor formula for a specified right adjoint of a perfect proper closed immersion.
-Source: Stacks Project, Tag 0A9U, the second equality of Tag 0BRT, and Tag 05RU.
-(blueprint: lem-sc-perfect-immersion-tensor-across-universes).
-
-Proof: `perfectImmersion_standardPerfection` transfers the perfection hypothesis
-and identifies the standard derived pushforward of the tensor unit. The proved
-`derivedQCoh_standardAdjunction` conjugates the given adjunction to a standard
-one, with natural comparisons of the quasi-coherent objects and right adjoints.
-Apply `smooth_proper_diagonal_tensor_formula` to the standard immersion and the
-image of K. Its invertible mate gives an isomorphism in the full quasi-coherent
-category; apply inclusion and invert it. The Qh comparison identifies the image
-of the supplied single structure module with the standard tensor unit. Compose
-this with hOP and the quasi-coherent inclusion comparison and map through the
-standard right adjoint. Apply the inverse standard comparison to the tensor
-formula, then `derivedLocalization_tensorComparison`. The pullback comparison
-follows from the definition of `derivedPullbackAcrossUniverses` and the inclusion
-comparison for K. The right factor comparison follows from the right-adjoint
-comparison for OP and the unit isomorphism of the ambient equivalence. Compose
-these isomorphisms to obtain the displayed orientation. No extra hypotheses or
-changes of definitions are used. Identity and empty immersions are covered. -/
+/-- The tensor formula for a specified right adjoint of a perfect proper closed immersion
+(Stacks, Tags 0A9U, 0BRT and 05RU). -/
 theorem perfectImmersion_tensor_acrossUniverses
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y]
     (i : Z ⟶ Y) [IsClosedImmersion i] [IsProper i]

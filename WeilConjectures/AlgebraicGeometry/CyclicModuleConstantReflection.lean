@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Reflection of constancy for cyclic module coefficients
 
-Source: Stacks Project, Tags 03RU and 03RW(2),(3), with cyclic coefficients.
-(blueprint: theorem-cohomology-curves).
+## References
+
+* Stacks Project, Tags 03RU and 03RW
 -/
 
 @[expose] public section
@@ -25,21 +26,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
-/-- Forgetting cyclic coefficients reflects constancy on a localized small etale site.
-Source: Stacks Project, Definitions 03RU and 03RW(2),(3), and the cyclic coefficient
-identification used in Theorem 03SC.
-(blueprint: theorem-cohomology-curves)
-
-Proof: Let E be a constant abelian value of the underlying sheaf. The quotient
-E/nE is canonically a Z/n-module; lift its scalar action to ULift (ZMod n).
-The underlying sheaf is annihilated by n. Since constant sheaves preserve cokernels,
-the constant sheaf of E/nE is isomorphic to that of E: the cokernel of multiplication
-by n on this latter sheaf is the sheaf itself. Constants commute with forgetting.
-Every additive map between cyclic modules is linear, so the resulting abelian
-isomorphism and its inverse lift sectionwise to a module-sheaf isomorphism.
-This proves constancy, without choosing a point or assuming the scheme nonempty.
-For n=1 the quotient is zero. On the empty site the same cokernel argument applies.
--/
+/-- Forgetting cyclic coefficients reflects constancy on a localized small etale site
+(Stacks, Tags 03RU, 03RW and 03SC). -/
 theorem cyclic_module_isConstant_of_forget {Y : Scheme.{u}}
     (n : ℕ) [NeZero n] (U : Y.Etale)
     (F : Sheaf (Y.smallEtaleTopology.over U)

@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalTransfer
 /-!
 # Naturality of normalized resolution section comparisons
 
-Source: Stacks Project, Tags 0A50, 03F3, and 01F8.
+## References
+
+* Stacks Project, Tags 0A50, 03F3 and 01F8
 -/
 
 @[expose] public section
@@ -23,18 +25,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
-/-- Normalized section-homology equivalences satisfy the six compatibility families.
-Source: Stacks Project, Tag 0A50 (resolution sections), Tag 03F3 (localization),
-and Tag 01F8 (functoriality through resolutions).
-(blueprint: lem-weil-pbc-etale-resolution-section-homology-naturality)
-
-Arbitrary equivalences need not satisfy this compatibility:
-independently negating one equivalence need not preserve a nonzero restriction map.
-The corrected assertion requires the comparisons to have their canonical cocycle values.
-
-Proof: Restriction naturality for cX supplies the first two identities on X and,
-applied to cY, the next two on Y. Transfer naturality for these two normalized families
-supplies the global and open transfer identities. Package the six identities. -/
+/-- Normalized section-homology equivalences satisfy the six compatibility families
+(Stacks, Tags 0A50, 03F3, 01F8). -/
 theorem resolutionSection_homology_naturality
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

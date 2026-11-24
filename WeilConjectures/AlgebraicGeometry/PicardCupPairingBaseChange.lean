@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.PicardCanonicalBaseChange
 import WeilConjectures.AlgebraicGeometry.PicardPairingPullbackCoherence
 
 /-! # Compatibility of the cup pairing with arbitrary base change
-Source: Stacks Project, Tag 0BDP, final two paragraphs.
+
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -67,26 +70,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The degree-zero cup pairing commutes with the canonical direct-image maps.
 This statement does not assume the direct-image maps are invertible and does not
-assert any dual-pullback comparison is invertible.
-
-Source: Stacks Project, Tag 0BDP, compatibility with arbitrary change of base
-and the evaluation formula for the cup product in the final two paragraphs.
-(blueprint: lem-sc-picard-cup-pairing-base-change)
-
-Proof: Expand picardCupProductMap and uncurry its defining transpose, obtaining
-the pushed-forward evaluation pairing. Apply the tensor comparison for h. Take
-the adjoint along p_T of the two proposed pairings. Expand each canonical
-base-change map as the mate of the top pullback unit. Naturality of the units
-and counits, together with the two triangle identities, replaces the two
-base-change maps followed by the p_T counits with the pullbacks of the p_W
-counits. Tensor-composition comparisons transport their evaluations to X_T.
-Both adjoints are then the pullback of E tensor dual E to X_T, followed by the
-pulled evaluation and the inverse structure-sheaf unit. The structure units
-commute with base change because their section formula is m mapped to 1 tensor m.
-The tensor comparisons commute by naturality and tensor associativity. Thus the
-adjoints agree; injectivity of the adjunction Hom equivalence proves the formula.
-This calculation uses neither local freeness nor any flatness of h. Zero pairings
-and empty bases satisfy the same identities. -/
+assert any dual-pullback comparison is invertible. (Stacks, Tag 0BDP) -/
 theorem picardCupPairing_baseChange
     {X S W T : Scheme.{u}} (f : X ⟶ S) (E : X.Modules)
     (j : W ⟶ S) (h : T ⟶ W)

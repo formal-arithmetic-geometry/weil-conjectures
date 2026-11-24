@@ -9,7 +9,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Extension by zero on coefficient-sized sites
 
-Source: Stacks Project, Tags 03DI and 09AF.
+## References
+
+* Stacks Project, Tags 03DI and 09AF
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +28,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Composition with an open immersion on the coefficient-sized pro-etale sites.
-Source: Stacks Tags 03DI and 09AF (auxiliary; not a blueprint node). -/
+/-- Composition with an open immersion on the coefficient-sized pro-etale sites
+(Stacks, Tags 03DI and 09AF). -/
 abbrev coefficientOpenProEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Scheme.coefficientProEtaleSiteModel.{u, v} U ⥤
@@ -35,8 +37,8 @@ abbrev coefficientOpenProEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
   AsSmall.down ⋙ MorphismProperty.Over.map ⊤
     (inferInstance : @WeaklyEtale _ _ j) ⋙ AsSmall.up
 
-/-- Composition with an open immersion on the coefficient-sized etale sites.
-Source: Stacks Tags 03DI and 09AF (auxiliary; not a blueprint node). -/
+/-- Composition with an open immersion on the coefficient-sized etale sites
+(Stacks, Tags 03DI and 09AF). -/
 abbrev coefficientOpenEtaleMap {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Scheme.smallModelComparisonEtaleSite.{u, v} U ⥤
@@ -92,8 +94,8 @@ instance coefficientOpenEtaleMap_isContinuous {U X : Scheme.{u}} (j : U ⟶ X)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} U) U.smallEtaleTopology
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
 
-/-- Pro-etale open extension by zero: left Kan extension followed by sheafification.
-Source: Stacks Tag 03DI (auxiliary; not a blueprint node). -/
+/-- Pro-etale open extension by zero: left Kan extension followed by sheafification
+(Stacks, Tag 03DI). -/
 def coefficientOpenProEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -101,8 +103,8 @@ def coefficientOpenProEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     (Scheme.coefficientProEtaleModelTopology.{u, v} U)
     (Scheme.coefficientProEtaleModelTopology.{u, v} X)
 
-/-- Etale open extension by zero: left Kan extension followed by sheafification.
-Source: Stacks Tag 03DI (auxiliary; not a blueprint node). -/
+/-- Etale open extension by zero: left Kan extension followed by sheafification (Stacks, Tag 03DI).
+-/
 def coefficientOpenEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -110,12 +112,8 @@ def coefficientOpenEtaleExtension (A : Type (max v (u + 1))) [CommRing A]
     (Scheme.smallModelComparisonEtaleTopology.{u, v} U)
     (Scheme.smallModelComparisonEtaleTopology.{u, v} X)
 
-/-- Comparison commutes with open extension by zero in the coefficient universe.
-Source: Stacks Project, Tag 09AF (auxiliary; not a blueprint node).
-
-The two right adjoints are restriction along equal composites of site functors.
-Their identity natural isomorphism has a conjugate between the composite left
-adjoints. All functors are constructed by Kan extension and sheafification. -/
+/-- Comparison commutes with open extension by zero in the coefficient universe
+(Stacks, Tag 09AF). -/
 def coefficientOpenExtensionComparisonIso (A : Type (max v (u + 1))) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     coefficientOpenEtaleExtension.{u, v} A j ⋙

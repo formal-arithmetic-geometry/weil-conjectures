@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenUnionRestrictionComparisonCoherence
 
 /-! # Canonical comparison diagram on inverse image opens of an open union
 
-Source: Stacks Project, Tag 08BW, restriction to the union before applying exactness.
-(blueprint: lem-sc-open-union-restriction-comparison-diagram).
+## References
+
+* [Stacks, Tag 08BW]
 -/
 
 @[expose] public section
@@ -27,27 +28,8 @@ set_option linter.style.haveILetI false in
 -- Specializing the two comparisons over dependent localizations needs this limit.
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Canonical comparison diagram for restriction through an open union.
-Source: Stacks Project Tag 08BW, canonical restriction diagram; Mathlib
-`Modules.overMapCompOverEquiv`, `overFunctorEquiv`, `restrictFunctorComp`, and
-`restrictFunctorCongr`.
-(blueprint: lem-sc-open-union-restriction-comparison-diagram).
-
-Proof: Identify the inverse images U, T, and their intersection under the union
-inclusion with W, V, and their intersection by the canonical image isomorphisms.
-Transport the given derived localizations in Hom universe w along the exact
-module equivalences of these scheme isomorphisms. Use their induced derived
-equivalences for eW, eV, and eI. Compare restriction along each chain of open
-inclusions using overMapCompOverEquiv and the counit of overEquiv, followed by
-restrictFunctorComp and restrictFunctorCongr. Derive these natural isomorphisms
-to obtain qW, qV, cW, cV, and qI. The two pasting identities hold underived by
-componentwise cancellation of the image isomorphisms and the overEquiv units
-and counits. On complexes use mapDerivedCategoryCompIso_fac and
-mapDerivedCategoryNatIso_fac, then Localization.natTrans_ext to extend the
-identities to the derived categories. No local morphisms or compatibility
-hypothesis occur here. The construction also works for empty and disjoint
-opens: all identifications are isomorphisms of the corresponding empty schemes.
--/
+/-- Canonical comparison diagram for restriction through an open union
+(Stacks, Tag 08BW). -/
 theorem open_union_restriction_comparison_diagram
     (X : Scheme.{u}) (W V : X.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -19,23 +19,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Pullback-pasting comparisons for the explicitly constructed upper-tail chart cone.
-Source: Stacks Project, Limits Tags 01ZR, 0095 and 0097.
-(blueprint: new-affine-chart-upper-tail-limit-comparisons).
-
-Proof: Write A = V.X a and g = V.f a followed by f. The diagram object at j is
-Spec(R_j) times A over Spec(R_i), and the cone vertex is c.pt times A over
-Spec(R_i). The chart U.X a is the pullback of V.f a along the first projection
-Xi times Spec(R_j) -> Xi. Pullback pasting and symmetry identify this chart with
-the diagram object, giving e. The same construction at c.pt gives z. The square
-between the ambient stage and limit base changes is cartesian by the cone equation
-c.π_j followed by Spec(R_i -> R_j) = c.π_i. Pulling it back along V.f a and pasting
-identifies the iterated chart Y with Z, giving h. The first equation follows by
-comparing projections to the ambient limit base change. For the second, compose
-both sides with the two projections of U.X a: their projections to A agree, and
-their projections to the ambient stage base change both use c.π_j. Uniqueness of
-pullback lifts proves equality. This construction works for empty charts and for
-equivalent preorder indices. No limiting property of the cone is used here. -/
+/-- Pullback-pasting comparisons for the explicitly constructed upper-tail chart cone
+(Stacks, Tags 01ZR, 0095 and 0097). -/
 theorem affine_chart_upper_tail_limit_comparisons
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u})

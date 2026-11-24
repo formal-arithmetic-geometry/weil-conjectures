@@ -26,11 +26,12 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerPullbackSquarePa
 /-!
 # Normalized proper/open calculus on strict pro-etale towers
 
-Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7 and 09AE, and the explicit
-strict-tower refinement in the blueprint (blueprint: lem-cbc-strict-tower-proper-open-calculus).
-
 The index `n : ℕ` denotes positive level `n+1`. All derived categories below localize
 complexes of strict towers, rather than forming towers in separate derived categories.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 0F7C, 0F7D, 0F7F, 07A7, 09AE
 -/
 
 @[expose] public section
@@ -151,14 +152,7 @@ private theorem derived_disjoint_extension {U X C : Scheme.{u}}
   exact hz.of_iso ((Functor.mapDerivedCategoryCompIso (towerJ B s)
     (towerPullback B c)).app N)
 
-/-- The clopen projection is identity on the image and zero on the complementary open.
-Source: Stacks, Tag 09AE and blueprint, fourth proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: split each test object into the inverse image of the two open components.
-The sheaf condition is the product decomposition. The direct-image adjunction unit
-is projection to the image component, and the inverse open-to-direct comparison
-identifies that component with extension by zero. This is natural in modules,
-transitions and differentials; exact localization preserves both equations. -/
+/-- The clopen projection is identity on the image and zero on the complementary open. -/
 theorem pi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] [IsOpenImmersion c]
     (hc : Set.range c = (Set.range s)ᶜ) (M : Derived B X) :
@@ -170,12 +164,7 @@ theorem pi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     exact disjoint_compl_right
   exact (derived_disjoint_extension B s c hc' ((G B s).obj M)).eq_of_tgt _ _
 
-/-- Cartesian squares recover beta from the intrinsic clopen construction.
-Source: Stacks, Tag 0F7B and blueprint, fourth proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: the fibre-product lift is the canonical isomorphism of the cartesian square.
-Its complementary open is empty, so its component projection is identity. The
-normalized compositors and the open-unit transpose identify the remaining map with beta. -/
+/-- Cartesian squares recover beta from the intrinsic clopen construction. -/
 theorem alpha_cartesian {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -827,11 +816,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible] gComp gId adj jAdj G R J alpha
 
-/-- Beta is normalized to identity on an identity base change.
-Source: Stacks, Tag 09AE and blueprint, second proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: transpose the two maps under the open adjunction. The unit equation of the
-identity inverse-image compositor makes both transposes the open unit. -/
+/-- Beta is normalized to identity on an identity base change. -/
 theorem beta_id {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (h : (𝟙 U) ≫ j = j ≫ (𝟙 X)) (hsq : IsPullback (𝟙 U) j j (𝟙 X))
     (M : Derived B U) :
@@ -876,12 +861,7 @@ private theorem betaInv_unit {A A' Y Y' : Scheme.{u}}
   exact ((jAdj B j').homEquiv _ _).apply_symm_apply _
 
 end NormalizedIdentities
-/-- Beta commutes with composition of open immersions, before evaluation.
-Source: Stacks, Tag 09AE and blueprint, second proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: transpose under the composite open adjunction. Its unit is the composite of
-the two open units, so naturality and the normalized pullback compositors identify
-the two transposes. Injectivity of the Hom equivalence gives the stated equality. -/
+/-- Beta commutes with composition of open immersions, before evaluation. -/
 theorem beta_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
     (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
     (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
@@ -898,13 +878,7 @@ theorem beta_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
       (beta B b (k₁ ≫ j₁) (k ≫ j) g w s).hom.app M := by
   exact beta_open_comp_aux B k j k₁ j₁ a b g wk wj w sk sj s M
 
-/-- Intrinsic alpha agrees with vertical pasting on every input.
-Source: Stacks, Tag 0F7C and blueprint, fifth proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: after beta, the two clopen projections select nested open components.
-On every test object's intersections of the two clopen decompositions the two
-composites are both identity or both zero. Sheaf uniqueness proves equality,
-termwise extension preserves it, and exact localization descends it. -/
+/-- Intrinsic alpha agrees with vertical pasting on every input. -/
 theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
     (r₁ : A ⟶ C) (r₂ : C ⟶ E) (p₁ : B₀ ⟶ D) (p₂ : D ⟶ F)
@@ -920,12 +894,7 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
         (J B k).map ((gComp B r₁ r₂).hom.app N) := by
   exact (alpha_vertical_beforeDerivation B k i j r₁ r₂ p₁ p₂ h₁ h₂ h).2.2.2.2 N
 
-/-- Intrinsic alpha agrees with horizontal pasting on every input.
-Source: Stacks, Tag 0F7D and blueprint, fifth proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: the first clopen projection selects l(W), and the second selects lk(V)
-inside it. Their composite selects lk(V) and vanishes on its complement. Use the
-open-composition beta equation and exact localization to identify the displayed maps. -/
+/-- Intrinsic alpha agrees with horizontal pasting on every input. -/
 theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
     (k : A ⟶ B₀) (l : B₀ ⟶ E) (i : C ⟶ D) (j : D ⟶ F)
     (r : A ⟶ C) (p : B₀ ⟶ D) (q : E ⟶ F)
@@ -941,13 +910,7 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
         (jComp B k l).hom.app ((G B r).obj N) := by
   exact (alpha_horizontal_beforeDerivation B k l i j r p q h₁ h₂ h).2.2.2.2 N
 
-/-- Intrinsic alpha commutes with the canonical pullback cube.
-Source: Stacks, Tag 0F7F and blueprint, fifth proof step
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: base change takes the selected clopen image and its complementary open to
-the corresponding two components. Exact inverse image preserves the split
-identity/zero projection. The beta comparison identifies open extension on these
-components. Sheaf uniqueness and localization give equality before evaluation. -/
+/-- Intrinsic alpha commutes with the canonical pullback cube. -/
 theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
     (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
     (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
@@ -972,17 +935,13 @@ theorem alpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
 
 /-- Select the second witness without repeatedly expanding a large normalization
 predicate in the kernel. This is precisely the nested choice used by the finite
-proper/open coherence theorem, not a new choice of unnormalized comparison.
-Source: Stacks, Tag 0F7B and the finite coherence interface
-(blueprint: lem-cbc-strict-tower-proper-open-calculus). -/
+proper/open coherence theorem, not a new choice of unnormalized comparison. -/
 noncomputable def secondWitness {A : Sort v} {C : Sort w} {P : A → C → Prop}
     (h : ∃ a c, P a c) : C :=
   h.choose_spec.choose
 
-/-- The finite etale comparison furnished by the dependency's section and derived-unit
-normalizations; these determine its arrow, including the refinement case.
-Source: Stacks, Tag 0F7B
-(blueprint: lem-cbc-strict-tower-proper-open-calculus). -/
+/-- The finite etale comparison determined by its section and derived-unit
+normalizations, including the refinement case. -/
 @[no_expose] noncomputable def finiteGamma (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
@@ -994,9 +953,7 @@ Source: Stacks, Tag 0F7B
   secondWitness (Etale.properOpenInterchangeCoherence Λ) k i r p h
 
 /-- The canonical identification of the evaluated source with the finite etale
-source, retaining the evaluation mates and the specified origin isomorphism.
-Source: blueprint, seventh and eighth proof steps
-(blueprint: lem-cbc-strict-tower-proper-open-calculus). -/
+source, retaining the evaluation mates and the specified origin isomorphism. -/
 noncomputable def finiteSource {V S T : Scheme.{u}} (r : V ⟶ S) (i : S ⟶ T)
     [IsProper r] [IsOpenImmersion i] (M : Derived B V) (n : ℕ)
     (w : ScalarEtaleOrigin B V ((ev B V n).obj M)) :
@@ -1014,8 +971,7 @@ noncomputable def finiteSource {V S T : Scheme.{u}} (r : V ⟶ S) (i : S ⟶ T)
   (evalJ B i n).symm.app ((R B r).obj M)
 
 /-- The canonical identification of the evaluated target with the finite etale
-target, using the same comparisons and origin. Source: blueprint, steps 7--8
-(blueprint: lem-cbc-strict-tower-proper-open-calculus). -/
+target, using the same comparisons and origin. -/
 noncomputable def finiteTarget {V W T : Scheme.{u}} (k : V ⟶ W) (p : W ⟶ T)
     [IsOpenImmersion k] [IsProper p] (M : Derived B V) (n : ℕ)
     (w : ScalarEtaleOrigin B V ((ev B V n).obj M)) :
@@ -1032,17 +988,7 @@ noncomputable def finiteTarget {V W T : Scheme.{u}} (k : V ⟶ W) (p : W ⟶ T)
   ((@asIso _ _ _ _ (evalR B p n) (evalR_isIso B p n)).app ((J B k).obj M)).symm
 
 /-- The n-th evaluation is this particular normalized finite comparison, including
-refinements, and not just some isomorphism between the same objects.
-Source: Stacks, Tag 0F7B and blueprint, seventh and eighth proof steps
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: evaluation preserves the exact functors, and its R comparison is the mate
-preserving their units and counits. Scalar restriction preserves the identity/zero
-clopen projector. The site comparison carries the two clopen components to the
-same components. Transpose under the proper adjunction: the direct-image unit
-normalization cancels its counit, leaving the same compared clopen alpha on both
-sides. The finite etale node has precisely this transpose, by its section and
-K-injective unit normalization. Injectivity of the adjunction Hom equivalence
-proves the equation, including when r is identity and the lift is a clopen section. -/
+refinements, and not just some isomorphism between the same objects. -/
 theorem gamma_evaluation {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
@@ -1106,19 +1052,7 @@ private theorem isIso_of_evaluations
         (((evaluation ℕᵒᵖ C).obj n).mapDerivedCategory.map f))
       infer_instance)
 /-- Proper/open interchange is invertible for independently bounded finite etale
-origins at every positive level, with no uniform bound on those origins.
-Source: Stacks, Tag 0F7B and blueprint, steps 7--9
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: evaluation of a K-injective strict tower is K-injective, so evaluation
-commutes with R and its adjunction units and counits. Scalar restriction commutes
-with G, J and R by the normalized change-of-ring adjunction, not by any claim that
-it preserves K-injectives. The identity/zero clopen projector is unchanged by
-scalar restriction. At an etale origin the canonical direct-image comparisons for
-proper (hence qcqs) maps and open comparisons identify this mate with the normalized
-finite etale comparison of properOpenInterchangeCoherence. It is an isomorphism.
-Thus every evaluated map is invertible. Tower cohomology is levelwise, so the map
-induces an isomorphism in every degree, and the unbounded-derived cohomology
-criterion proves invertibility. This detects isomorphisms, not equality of maps. -/
+origins at every positive level, with no uniform bound on those origins. -/
 theorem gamma_isIso {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -1140,17 +1074,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Vertical, horizontal and base-change coherence for every commutative proper/open
 square, as equalities in derived strict-tower categories, without assuming evaluation
-faithful. Source: Stacks, Tags 0F7C, 0F7D and 0F7F, and blueprint, steps 5, 6, 10, 11
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: for alpha, pull the clopen decompositions to each test object. In a vertical
-or horizontal pasting the selected opens are nested, so successive component
-projections equal the outer component projection. Base change pulls both clopen
-components and the identity/zero projector to the corresponding components. Verify
-these equations on their intersections using sheaf uniqueness. Apply the exact
-functors termwise to towers and complexes, then use localization uniqueness to
-descend the equations. Take proper-adjunction mates with composition adjunctions.
-Mate pasting gives the two composition laws; the pullback cube gives the base-change
-law. Associativity of normalized compositors makes all parenthesizations agree. -/
+faithful. -/
 theorem normalizedProperOpenCalculus :
     (∀ {A C E B₀ D F : Scheme.{u}}
       (k : A ⟶ B₀) (i : C ⟶ D) (j : E ⟶ F)
@@ -1369,12 +1293,7 @@ private theorem mate_identity_horizontal
   simpa only [← Category.assoc, Iso.hom_inv_id_app,
     Category.id_comp, Category.comp_id] using hh'
 
-/-- Identity normalizations of gamma in both directions.
-Source: Stacks, Tags 0F7B and 07A7, blueprint, steps 6 and 10
-(blueprint: lem-cbc-strict-tower-proper-open-calculus).
-Proof: the clopen projection is identity for either identity square. Its alpha is the
-canonical inverse-image/open-extension identity; taking the mate and using the
-triangle identities gives the corresponding identity on direct image or extension. -/
+/-- Identity normalizations of gamma in both directions. -/
 theorem gamma_identities :
     (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
       (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived B U),

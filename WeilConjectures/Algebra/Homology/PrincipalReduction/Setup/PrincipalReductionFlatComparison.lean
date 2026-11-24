@@ -17,7 +17,12 @@ import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplex
 
 The ordinary principal-quotient counit is invertible on complexes with regular terms,
 and exact sections of flat sheaves have regular terms.
-(blueprint: lem-pod-principal-reduction-flat-comparison) -/
+
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -104,15 +109,7 @@ private theorem c_isIso_on_regular [IsDomain R] (ht : D.t ≠ 0)
 
 /-- For a flat-term K-flat sheaf complex, the comparison constructed from the canonical
 quotient-section map and the ordinary derived tensor counit is invertible.
-
-Proof: tensoring the coefficient exact sequence with a flat term preserves exactness.
-Exact sections make multiplication by t injective. Resolve its section complex by a
-flat-term ordinary K-flat complex; principal quotient preserves the augmentation's
-quasi-isomorphism because t is injective on both complexes. Naturality transfers the
-invertible tensor counit from that resolution to the section complex. All remaining
-factors of alpha are the quotient-section isomorphism and localization isomorphisms.
-Source: Stacks Tags 06Y6 and 06YY, blueprint steps 3--9.
-(blueprint: lem-pod-principal-reduction-flat-comparison) -/
+-/
 theorem alpha_isIso [IsDomain R] (ht : D.t ≠ 0)
     (P : CochainComplex
       (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J D.O)) ℤ)

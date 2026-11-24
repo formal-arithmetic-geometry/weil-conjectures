@@ -43,8 +43,9 @@ set_option linter.privateModule false
 
 /-! # Invertibility of the specified reduction adjuncts
 
-Source: blueprint latest, normalized-towers-reduction, normalization paragraph;
-Stacks Tags 06YY, 0G7E.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 06YY, 0G7E
 -/
 
 @[expose] public noncomputable section

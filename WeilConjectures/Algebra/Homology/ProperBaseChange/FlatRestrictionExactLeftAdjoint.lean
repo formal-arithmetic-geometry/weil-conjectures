@@ -17,8 +17,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Exact left adjoints to flat coefficient restriction
 
-Source: Stacks Project, Modules on Sites, Tag 03CZ; Definition 03ER(3).
-(blueprint: lem-weil-pbc-flat-restriction-exact-left-adjoint).
+## References
+
+* Stacks Project, Tag 03CZ
+* Stacks Project, Tag 03ER
 -/
 
 -- After pruning, this module only keeps private declarations.

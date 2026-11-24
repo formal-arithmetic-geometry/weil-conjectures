@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SignedCechExtension
 
 /-! # Split ordered restriction for module sheaves
 
-Source: Stacks Project, Tags 01FJ, 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FJ, 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -24,27 +26,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Ordered restriction and signed extension give a split retraction of complexes.
-This statement supplies no homotopy on the usual complex.
-Source: Stacks Project, Tags 01FJ and 01FK.
-(blueprint: lem-pc-ordered-cech-module-retraction).
-
-Proof: Evaluate e on the inverse image of B and use the canonical product maps
-in orderedCechTupleOpenMap to identify the chosen products with intersections.
-Define r in degree p by applying the inverse of a to the increasing coordinates.
-Naturality hn and the naturality of e give the restriction equation. The scalar
-identities hl and hlinear give linearity over the local ring on B. The face
-formulas ha and hd show that these degree maps commute with the differential.
-For the section i, extend the a-coordinates by the sign of the permutation that
-sorts a tuple with distinct entries and put zero on tuples with repetitions.
-Transport by the inverse of e and the canonical intersection isomorphisms.
-The same restriction and scalar equations give module-sheaf morphisms. For a
-distinct tuple, deletion of an entry gives the corresponding sorted face with
-its signed deletion coefficient. For a repeated tuple, all possibly nonzero
-faces form a pair with opposite coefficients; hence extension is a cochain map.
-On increasing tuples extension followed by restriction is identity. This proves
-i followed by r is identity using injectivity of a. Set negative components to
-zero; hK and extension by zero make all negative and boundary equations automatic.
-For r=0 all coordinate products are trivial and the construction still applies. -/
+This statement supplies no homotopy on the usual complex (Stacks, Tags 01FJ and 01FK). -/
 theorem orderedCech_module_retraction {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (K : CochainComplex T'.Modules ℤ) (hK : K.IsStrictlyGE 0)

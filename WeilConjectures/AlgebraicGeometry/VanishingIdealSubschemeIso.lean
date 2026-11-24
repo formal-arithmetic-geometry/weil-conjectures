@@ -16,7 +16,6 @@ An isomorphism of schemes `φ : X ≅ Y` mapping a closed subset `Z` of `X` onto
 (`AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdealSubschemeIso`), compatible with the
 closed immersions into `X` and `Y`. In particular an automorphism of `X` stabilizing `Z` induces
 an automorphism of the reduced closed subscheme on `Z`.
-
 -/
 
 @[expose] public section

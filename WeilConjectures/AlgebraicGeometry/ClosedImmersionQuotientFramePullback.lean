@@ -36,24 +36,8 @@ private noncomputable def tensorPullbackRestrictIso {X Y : Scheme.{u}}
     (Scheme.Modules.pullbackComp _ _).symm ≪≫
     Functor.isoWhiskerRight (Scheme.Modules.restrictFunctorIsoPullback W.ι).symm _
 
-/-- Tensor pullback carries a local quotient-module frame to a structure-module frame.
-Source: Stacks Project, Tags 08KS and 0095; closed-immersion counit and tensor pullback.
-(blueprint: lem-u1-closed-immersion-quotient-frame-pullback).
-
-Proof: The tensor formula and canonical scheme pullback are left adjoints to
-pushforward, so the uniqueness of left adjoints identifies them. Compose the
-canonical pullback composition and open-restriction isomorphisms to compare
-restriction after tensor pullback with pullback after restriction. The counit
-for the closed immersion is invertible by
-closedImmersion_pushforward_fullyFaithful, so tensor pullback carries B to the
-structure module. The tensor functor is a left adjoint and preserves coproducts:
-apply PreservesCoproduct.iso and the coproduct of these counit isomorphisms to
-identify its value on the J-indexed coproduct with the free sheaf on J.
-Transport the supplied over-site isomorphism to the restricted scheme by
-overEquiv, pull it back, and use the preceding restriction comparison in both
-directions. Restrict the global free frame, then transport back through
-overIsoFreeEquiv. Empty indexing types and empty opens satisfy the same
-categorical identities; no finiteness, affineness, or derived object is used. -/
+/-- Tensor pullback carries a local quotient-module frame to a structure-module frame
+(Stacks, Tags 08KS and 0095). -/
 theorem closedImmersion_quotient_frame_pullback
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.Opens) (J : Type u) (G : Y.Modules)

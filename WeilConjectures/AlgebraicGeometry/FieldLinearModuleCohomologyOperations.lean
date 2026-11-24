@@ -33,13 +33,13 @@ import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
 
 /-! # Field-linear cohomology, pullback and cup product of scheme modules
 
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED,
-the maps preceding equation `equation-kunneth-on-cech`
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-
 Cohomology is the recorded right derived functor on O-modules, with scalars restricted
 along the structure map. Its canonical comparison with Ext transports exact inverse-image
 and tensor operations on sheaves of k-vector spaces back to these cohomology modules.
+
+## References
+
+* Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED.
 -/
 
 @[expose] public section
@@ -140,28 +140,17 @@ private theorem extComparison_bijective
         (Ext.eq_zero_of_injective (I := R.obj I.J) _) rfl
 
 
-/-- scalar Map.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The restriction of scalars map `k →+* Γ(X, U)` coming from the structure morphism. -/
 def scalarMap (U : X.Opens) : k →+* Γ(X, U) :=
   (X.presheaf.map (homOfLE (le_top (a := U))).op).hom.comp
     ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫ f.appTop).hom
-/-- KSheaf.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- Sheaves of `k`-vector spaces on `X`. -/
 abbrev KSheaf (X : Scheme.{u}) (k : Type u) [Field k] :=
   Sheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)
-/-- scalar Obj.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The sections of an `O_X`-module sheaf over `U`, viewed as a `k`-module. -/
 def scalarObj (F : (SheafOfModules.{u} X.ringCatSheaf)) (U : (Opens X)ᵒᵖ) : ModuleCat.{u} k :=
   (ModuleCat.restrictScalars (scalarMap f U.unop)).obj (F.val.obj U)
-/-- scalar Restriction linear.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- The restriction maps of an `O_X`-module sheaf are `k`-linear for the restricted scalars. -/
 theorem scalarRestriction_linear (F : SheafOfModules.{u} X.ringCatSheaf)
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
     ∀ (r : k) (x : scalarObj f F U),
@@ -181,9 +170,7 @@ theorem scalarRestriction_linear (F : SheafOfModules.{u} X.ringCatSheaf)
     X.presheaf.map i) _ = _
   rw [← X.presheaf.map_comp]
   rfl
-/-- scalar Restriction.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The restriction map of an `O_X`-module sheaf as a `k`-linear map. -/
 def scalarRestriction (F : (SheafOfModules.{u} X.ringCatSheaf)) {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
     scalarObj f F U ⟶ scalarObj f F V :=
   letI : Module k (F.val.obj U) := Module.compHom _ (scalarMap f U.unop)
@@ -192,58 +179,35 @@ def scalarRestriction (F : (SheafOfModules.{u} X.ringCatSheaf)) {U V : (Opens X)
     { toFun := fun x : scalarObj f F U ↦ ((F.val.map i).hom.toAddMonoidHom x : scalarObj f F V)
       map_add' := fun a b ↦ (F.val.map i).hom.map_add a b
       map_smul' := scalarRestriction_linear f F i }
-/-- scalar Restriction id.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- The `k`-linear restriction map along an identity is the identity. -/
 theorem scalarRestriction_id (F : (SheafOfModules.{u} X.ringCatSheaf)) (U : (Opens X)ᵒᵖ) :
     scalarRestriction f F (𝟙 U) = 𝟙 (scalarObj f F U) := by
   ext x
   change (F.val.map (𝟙 U)).hom x = x
   simp
-/-- scalar Restriction comp.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- The `k`-linear restriction maps are compatible with composition. -/
 theorem scalarRestriction_comp (F : (SheafOfModules.{u} X.ringCatSheaf)) {U V W : (Opens X)ᵒᵖ}
     (i : U ⟶ V) (j : V ⟶ W) :
     scalarRestriction f F (i ≫ j) = scalarRestriction f F i ≫ scalarRestriction f F j := by
   ext x
   change (F.val.map (i ≫ j)).hom x = (F.val.map j).hom ((F.val.map i).hom x)
   simp
-/-- scalar Presheaf.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The presheaf of `k`-modules underlying an `O_X`-module sheaf. -/
 def scalarPresheaf (F : (SheafOfModules.{u} X.ringCatSheaf)) : (Opens X)ᵒᵖ ⥤ ModuleCat.{u} k where
   obj := scalarObj f F
   map := scalarRestriction f F
   map_id := scalarRestriction_id f F
   map_comp := scalarRestriction_comp f F
-/-- scalar Presheaf is Sheaf.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Restriction of scalars leaves the underlying sections and restriction maps unchanged.
-The gluing and uniqueness axioms for F therefore give the sheaf axiom for this presheaf. -/
+/-- The presheaf `scalarPresheaf F` is a sheaf. -/
 theorem scalarPresheaf_isSheaf (F : (SheafOfModules.{u} X.ringCatSheaf)) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X) (scalarPresheaf f F) := by
   apply Presheaf.isSheaf_of_isSheaf_comp _ _
     (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u})
   exact F.isSheaf
-/-- scalar Sheaf.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The sheaf of `k`-vector spaces underlying an `O_X`-module sheaf. -/
 def scalarSheaf (F : (SheafOfModules.{u} X.ringCatSheaf)) : KSheaf X k :=
   ⟨scalarPresheaf f F, scalarPresheaf_isSheaf f F⟩
-/-- scalar Hom linear.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- A morphism of `O_X`-modules is `k`-linear on sections. -/
 theorem scalarHom_linear {F G : SheafOfModules.{u} X.ringCatSheaf}
     (a : F ⟶ G) (U : (Opens X)ᵒᵖ) :
     ∀ (r : k) (x : scalarObj f F U),
@@ -254,9 +218,7 @@ theorem scalarHom_linear {F G : SheafOfModules.{u} X.ringCatSheaf}
         ((a.val.app U).hom.toAddMonoidHom x) := by
   intro r x
   exact (a.val.app U).hom.map_smul (scalarMap f U.unop r) x
-/-- scalar Hom App.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The component over `U` of the `k`-linear map induced by a morphism of `O_X`-modules. -/
 def scalarHomApp {F G : (SheafOfModules.{u} X.ringCatSheaf)} (a : F ⟶ G) (U : (Opens X)ᵒᵖ) :
     scalarObj f F U ⟶ scalarObj f G U :=
   letI : Module k (F.val.obj U) := Module.compHom _ (scalarMap f U.unop)
@@ -265,70 +227,40 @@ def scalarHomApp {F G : (SheafOfModules.{u} X.ringCatSheaf)} (a : F ⟶ G) (U : 
     { toFun := fun x : scalarObj f F U ↦ ((a.val.app U).hom.toAddMonoidHom x : scalarObj f G U)
       map_add' := fun x y ↦ (a.val.app U).hom.map_add x y
       map_smul' := scalarHom_linear f a U }
-/-- scalar Hom naturality.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- The components `scalarHomApp` are natural in `U`. -/
 theorem scalarHom_naturality {F G : (SheafOfModules.{u} X.ringCatSheaf)} (a : F ⟶ G)
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
     scalarRestriction f F i ≫ scalarHomApp f a V =
       scalarHomApp f a U ≫ scalarRestriction f G i := by
   ext x
   exact PresheafOfModules.naturality_apply a.val i x
-/-- scalar Hom.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The morphism of sheaves of `k`-vector spaces induced by a morphism of `O_X`-modules. -/
 def scalarHom {F G : SheafOfModules.{u} X.ringCatSheaf} (a : F ⟶ G) :
     scalarSheaf f F ⟶ scalarSheaf f G :=
   ⟨{ app := scalarHomApp f a, naturality := fun _ _ i ↦ scalarHom_naturality f a i }⟩
-/-- scalar Hom id.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- `scalarHom` sends identities to identities. -/
 theorem scalarHom_id (F : SheafOfModules.{u} X.ringCatSheaf) :
     scalarHom f (𝟙 F) = 𝟙 (scalarSheaf f F) := by
   ext U x
   rfl
-/-- scalar Hom comp.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- `scalarHom` is compatible with composition. -/
 theorem scalarHom_comp {F G H : (SheafOfModules.{u} X.ringCatSheaf)} (a : F ⟶ G) (b : G ⟶ H) :
     scalarHom f (a ≫ b) = scalarHom f a ≫ scalarHom f b := by
   ext U x
   rfl
-/-- scalar Functor.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- Restriction of scalars from `O_X`-module sheaves to sheaves of `k`-vector spaces. -/
 def scalarFunctor : (SheafOfModules.{u} X.ringCatSheaf) ⥤ KSheaf X k where
   obj := scalarSheaf f
   map := scalarHom f
   map_id := scalarHom_id f
   map_comp := scalarHom_comp f
-/-- scalar Functor additive.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the corresponding sectionwise module-map law and naturality of the structure
-ring map. Restriction of scalars changes neither the functions nor their compositions;
-the same equalities give this compatibility. -/
+/-- `scalarFunctor` is additive. -/
 @[instance] theorem scalarFunctor_additive : (scalarFunctor f).Additive := by
   constructor
   intro X Y f g
   ext U x
   rfl
-/-- scalar Functor preserves Finite Limits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Finite limits of module sheaves and of k-vector-space sheaves are computed
-sectionwise. Restriction of scalars preserves module limits and retains every underlying
-section and restriction map. Hence the canonical comparison with each finite limit is
-a sectionwise isomorphism and therefore a sheaf isomorphism. -/
+/-- `scalarFunctor` preserves finite limits. -/
 @[instance] theorem scalarFunctor_preservesFiniteLimits :
     PreservesFiniteLimits (scalarFunctor f) := by
   have : PreservesFiniteLimits (scalarFunctor f ⋙
@@ -339,8 +271,8 @@ a sectionwise isomorphism and therefore a sheaf isomorphism. -/
       exact comp_preservesFiniteLimits _ _)
   exact preservesFiniteLimits_of_reflects_of_preserves (scalarFunctor f)
     (sheafToPresheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k))
-/-- Forgetting scalar sheaves commutes with sheafification and reflects finite colimits.
-Source: Stacks Project, Modules on Sites, Tag 03DB. -/
+/-- Forgetting scalar sheaves commutes with sheafification and reflects finite colimits
+(Stacks, Tag 03DB). -/
 private theorem scalarForget_preservesFiniteColimits :
     PreservesFiniteColimits (sheafCompose (Opens.grothendieckTopology X)
       (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u})) := by
@@ -361,15 +293,7 @@ private theorem scalarForget_preservesFiniteColimits :
   have : (sheafCompose J G).IsLeftAdjoint := Functor.isLeftAdjoint_of_iso e
   infer_instance
 
-/-- scalar Functor preserves Finite Colimits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Forgetting from k-module sheaves to abelian sheaves preserves sheafification:
-local injectivity and local surjectivity depend only on the unchanged underlying functions.
-Thus this forgetful functor preserves finite colimits, using the sheafification adjunction.
-Its composite with scalarFunctor is the underlying-abelian-sheaf functor of O-module
-sheaves, which preserves colimits. The forgetful functor reflects isomorphisms and hence
-finite colimits. Reflection therefore proves the assertion. -/
+/-- `scalarFunctor` preserves finite colimits. -/
 @[instance] theorem scalarFunctor_preservesFiniteColimits :
     PreservesFiniteColimits (scalarFunctor f) := by
   let Q := sheafCompose (Opens.grothendieckTopology X)
@@ -384,34 +308,25 @@ local instance : HasExt.{u} (SheafOfModules.{u} X.ringCatSheaf) :=
 local instance : HasExt.{u + 1} (KSheaf X k) := HasExt.standard (KSheaf X k)
 local instance : MonoidalCategory (KSheaf X k) := Sheaf.monoidalCategory _ _
 
-/-- The carrier of the recorded O-module cohomology before restricting scalars.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The carrier of the recorded O-module cohomology before restricting scalars. -/
 abbrev scalarCohomologyCarrier (_f : X ⟶ Spec (CommRingCat.of k))
     (F : (SheafOfModules.{u} X.ringCatSheaf)) (n : ℕ) :=
   (RingedSpace.moduleCohomology X.toRingedSpace n).obj F
 
-/-- Restrict the cohomology module action along the structure map k → Γ(X, O_X).
-Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- Restrict the cohomology module action along the structure map k → Γ(X, O_X). -/
 instance scalarCohomologyModule (f : X ⟶ Spec (CommRingCat.of k))
     (F : (SheafOfModules.{u} X.ringCatSheaf)) (n : ℕ) :
     Module k (scalarCohomologyCarrier f F n) :=
   Module.compHom _ (scalarMap f ⊤)
 
-/-- The recorded O-module cohomology with its restricted k-vector-space structure.
-Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The recorded O-module cohomology with its restricted k-vector-space structure. -/
 def scalarCohomology (F : (SheafOfModules.{u} X.ringCatSheaf)) (n : ℕ) : ModuleCat.{u} k :=
   ModuleCat.of k (scalarCohomologyCarrier f F n)
 
 -- Comparing resolution homology with derived functors requires universe-level conversion.
-/-- exists module Ext Equiv.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Evaluate module morphisms from the structure sheaf at 1. This identifies the Hom complex
-with the global-sections complex. Compare degree-n homology via the injective-resolution
-comparison isomorphism, giving precisely the displayed cocycle formula. -/
+/-- The module `Ext` group from the structure sheaf is identified with the recorded cohomology
+of an `O_X`-module sheaf, compatibly with the cocycle description given by an injective
+resolution. -/
 theorem exists_moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     ∃ e : ((RingedSpace.moduleCohomology X.toRingedSpace n).obj F) ≃+
         Abelian.Ext.{u} (SheafOfModules.unit X.ringCatSheaf) F n,
@@ -461,9 +376,8 @@ theorem exists_moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) 
   exact (InjectiveResolution.extMk_comp_mk₀ φ (n + 1) rfl hφ ψ).symm.trans
     (Abelian.Ext.comp_mk₀_id _)
 
-/-- module Ext Equiv.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The chosen identification of the recorded cohomology of an `O_X`-module sheaf with the
+module `Ext` group from the structure sheaf. -/
 def moduleExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     ((RingedSpace.moduleCohomology X.toRingedSpace n).obj F) ≃+
       Abelian.Ext.{u} (SheafOfModules.unit X.ringCatSheaf) F n :=
@@ -473,24 +387,18 @@ section
 
 attribute [local irreducible] moduleExtEquiv
 
-/-- constant Scalar Unit.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The constant sheaf of `k`-vector spaces on `X` with value `k`. -/
 def constantScalarUnit : KSheaf X k :=
   (constantSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)).obj (ModuleCat.of k k)
 
-/-- constant Scalar Unit Iso.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The constant sheaf with value `k` is the monoidal unit of sheaves of `k`-vector spaces. -/
 def constantScalarUnitIso : constantScalarUnit (X := X) (k := k) ≅ 𝟙_ (KSheaf X k) :=
   (Functor.Monoidal.εIso
     (presheafToSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k))).symm
 
 attribute [local irreducible] constantScalarUnitIso
 
-/-- scalar Unit Linear.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The `k`-linear map `k → Γ(X, O_X)` given by the structure morphism. -/
 def scalarUnitLinear : ModuleCat.of k k ⟶
     (scalarSheaf f (SheafOfModules.unit X.ringCatSheaf)).obj.obj (op ⊤) :=
   letI : Module k ((SheafOfModules.unit X.ringCatSheaf).val.obj (op ⊤)) :=
@@ -503,16 +411,12 @@ def scalarUnitLinear : ModuleCat.of k k ⟶
         change scalarMap f ⊤ (r * s) = scalarMap f ⊤ r * scalarMap f ⊤ s
         exact (scalarMap f ⊤).map_mul r s }
 
-/-- The scalar-unit map sends r to its scalar section.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: This is the defining formula of the explicit linear map. -/
+/-- The map `scalarUnitLinear` sends `r` to its scalar section. -/
 theorem exists_scalarUnitLinear (r : k) : scalarUnitLinear f r = scalarMap f ⊤ r := by
   rfl
 
-/-- scalar Unit Morphism.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The morphism from the monoidal unit of `KSheaf X k` to the scalar sheaf of the structure
+sheaf. -/
 def scalarUnitMorphism : 𝟙_ (KSheaf X k) ⟶
     scalarSheaf f (SheafOfModules.unit X.ringCatSheaf) :=
   constantScalarUnitIso.inv ≫
@@ -523,9 +427,8 @@ attribute [local irreducible] scalarUnitMorphism
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- scalar Ext Map.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The map on `Ext` groups induced by restriction of scalars, precomposed with the scalar-unit
+morphism. -/
 def scalarExtMap (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (a : Abelian.Ext.{u} (SheafOfModules.unit X.ringCatSheaf) F n) :
     Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n :=
@@ -536,9 +439,8 @@ attribute [local irreducible] scalarExtMap
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- scalar Cohomology Ext Map.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The comparison map from the `k`-linear cohomology of an `O_X`-module sheaf to the `Ext`
+group of sheaves of `k`-vector spaces. -/
 def scalarCohomologyExtMap (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (a : scalarCohomology f F n) :
     Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n :=
@@ -546,13 +448,7 @@ def scalarCohomologyExtMap (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
 
 attribute [local irreducible] scalarCohomologyExtMap
 
-/-- scalar Cohomology Ext Map add.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: The chosen moduleExtEquiv is an additive equivalence, so it sends a sum to the
-sum of its images. Exact-functor transport on Ext preserves addition by
-Ext.mapExactFunctor_add. Precomposition by the degree-zero scalar-unit Ext class preserves
-addition by Ext.comp_add. Compose these three equalities. -/
+/-- `scalarCohomologyExtMap` is additive. -/
 theorem scalarCohomologyExtMap_add (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (a b : scalarCohomology f F n) :
     scalarCohomologyExtMap f F n (a+b) =
@@ -670,11 +566,7 @@ private theorem moduleExtEquiv_scalar (F : SheafOfModules.{u} X.ringCatSheaf)
 
 attribute [local irreducible] scalarSheaf
 
-/-- scalar Cohomology Ext Map smul.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: The injective-resolution comparison is additive and k-linear, as are exact-functor
-transport on Ext and precomposition by the scalar-unit morphism. Compose these maps. -/
+/-- `scalarCohomologyExtMap` is `k`-linear. -/
 theorem scalarCohomologyExtMap_smul (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ)
     (r : k) (a : scalarCohomology f F n) :
     scalarCohomologyExtMap f F n (r • a) = r • scalarCohomologyExtMap f F n a := by
@@ -776,12 +668,7 @@ private theorem scalarUnitHom_bijective (G : SheafOfModules.{u} X.ringCatSheaf) 
   rw [he]
   exact e.bijective.comp ht
 
-/-- scalar Cohomology Ext Map bijective.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Restriction of scalars preserves injective acyclicity for global sections: its left
-adjoint tensors with the structure sheaf, which is exact over the field k. Compare the
-two derived global-sections functors using evaluation at 1 and the constant-sheaf adjunction. -/
+/-- `scalarCohomologyExtMap` is bijective. -/
 theorem scalarCohomologyExtMap_bijective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     Function.Bijective (scalarCohomologyExtMap f F n) := by
   have hI : (scalarFunctor f).PreservesInjectiveObjects := by
@@ -814,16 +701,12 @@ theorem scalarCohomologyExtMap_bijective (F : SheafOfModules.{u} X.ringCatSheaf)
       ((scalarFunctor f).mapExtAddHom _ F n)).comp (moduleExtEquiv F n).toAddMonoidHom)
   exact hExt.comp (moduleExtEquiv F n).bijective
 
-/-- Injectivity follows by taking the first component of scalarCohomologyExtMap_bijective.
-Source: Stacks Project, Cohomology, Tag 01F7.
-(blueprint: lem-sc-field-linear-ext-map-injective) -/
+/-- `scalarCohomologyExtMap` is injective. -/
 theorem scalarCohomologyExtMap_injective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     Function.Injective (scalarCohomologyExtMap f F n) :=
   (scalarCohomologyExtMap_bijective f F n).1
 
-/-- Surjectivity follows by taking the second component of scalarCohomologyExtMap_bijective.
-Source: Stacks Project, Cohomology, Tag 01F7.
-(blueprint: lem-sc-field-linear-ext-map-surjective) -/
+/-- `scalarCohomologyExtMap` is surjective. -/
 theorem scalarCohomologyExtMap_surjective (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     Function.Surjective (scalarCohomologyExtMap f F n) :=
   (scalarCohomologyExtMap_bijective f F n).2
@@ -832,10 +715,8 @@ end
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- scalar Cohomology Ext Equiv: the comparison `scalarCohomologyExtMap` as an additive
-equivalence; it is k-linear by `scalarCohomologyExtMap_smul`.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The comparison `scalarCohomologyExtMap` as an additive equivalence; it is `k`-linear by
+`scalarCohomologyExtMap_smul`. -/
 def scalarCohomologyExtEquiv (F : SheafOfModules.{u} X.ringCatSheaf) (n : ℕ) :
     scalarCohomology f F n ≃+
       Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) (scalarSheaf f F) n :=
@@ -850,18 +731,12 @@ attribute [irreducible] scalarCohomologyExtEquiv
 
 variable {Y : Scheme.{u}}
 
-/-- scalar Inverse Image.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The inverse image functor on sheaves of `k`-vector spaces along `a : Y ⟶ X`. -/
 def scalarInverseImage (a : Y ⟶ X) : KSheaf X k ⥤ KSheaf Y k :=
   (Opens.map a.base).sheafPullback (ModuleCat.{u} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
 
-/-- scalar Inverse Image additive.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Inverse image on sheaves is exact and additive. This follows from the stalk
-formula and filtered-colimit exactness for vector spaces, and from its left adjunction. -/
+/-- `scalarInverseImage` is additive. -/
 @[instance] theorem scalarInverseImage_additive (a : Y ⟶ X) :
     (scalarInverseImage (k := k) a).Additive := by
   have hp : ((Opens.map a.base).sheafPushforwardContinuous
@@ -874,22 +749,14 @@ formula and filtered-colimit exactness for vector spaces, and from its left adju
   exact ((Opens.map a.base).sheafAdjunctionContinuous
     (ModuleCat.{u} k) (Opens.grothendieckTopology X)
     (Opens.grothendieckTopology Y)).left_adjoint_additive
-/-- scalar Inverse Image preserves Finite Limits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Inverse image on sheaves is exact and additive. This follows from the stalk
-formula and filtered-colimit exactness for vector spaces, and from its left adjunction. -/
+/-- `scalarInverseImage` preserves finite limits. -/
 @[instance] theorem scalarInverseImage_preservesFiniteLimits (a : Y ⟶ X) :
     PreservesFiniteLimits (scalarInverseImage (k := k) a) := by
   have := lan_preservesFiniteLimits_of_flat (E := ModuleCat.{u} k) (Opens.map a.base)
   exact Functor.sheafPullbackConstruction.preservesFiniteLimits
     (Opens.map a.base) (ModuleCat.{u} k)
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
-/-- scalar Inverse Image preserves Finite Colimits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Inverse image on sheaves is exact and additive. This follows from the stalk
-formula and filtered-colimit exactness for vector spaces, and from its left adjunction. -/
+/-- `scalarInverseImage` preserves finite colimits. -/
 @[instance] theorem scalarInverseImage_preservesFiniteColimits (a : Y ⟶ X) :
     PreservesFiniteColimits (scalarInverseImage (k := k) a) := by
   dsimp [scalarInverseImage, Functor.sheafPullback]
@@ -897,17 +764,14 @@ formula and filtered-colimit exactness for vector spaces, and from its left adju
 
 local instance : MonoidalCategory (KSheaf Y k) := Sheaf.monoidalCategory _ _
 
-/-- scalar Inverse Unit Iso.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The inverse image of the constant sheaf `k` is the constant sheaf `k`. -/
 def scalarInverseUnitIso (a : Y ⟶ X) :
     (scalarInverseImage (k := k) a).obj (𝟙_ (KSheaf X k)) ≅ 𝟙_ (KSheaf Y k) :=
   (scalarInverseImage a).mapIso constantScalarUnitIso.symm ≪≫
     ((Opens.map a.base).constantSheafsheafPullbackIso (ModuleCat.{u} k) _ _
       isTerminalTop isTerminalTop).app (ModuleCat.of k k) ≪≫ constantScalarUnitIso
 
-/-- Naturality of the restricted field action along a morphism over Spec k.
-Source: Stacks Project, Modules, Tag 0096. -/
+/-- Naturality of the restricted field action along a morphism over Spec k. -/
 private theorem scalarMap_pullback (g : Y ⟶ Spec (CommRingCat.of k))
     (a : Y ⟶ X) (h : a ≫ f = g) (U : X.Opens) (r : k) :
     (a.app U).hom (scalarMap f U r) = scalarMap g (a ⁻¹ᵁ U) r := by
@@ -925,12 +789,8 @@ private theorem scalarMap_pullback (g : Y ⟶ Spec (CommRingCat.of k))
   rw [← Category.assoc f.appTop, ht]
   rfl
 
-/-- exists scalar Pullback Coefficient.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Use the inverse-image/direct-image adjunction on sheaves of k-vector spaces.
-The canonical unit of tensor pullback is k-linear because a is over Spec k. Its adjoint
-is the coefficient map, and the adjunction formula is exactly the displayed equality. -/
+/-- The adjunction formula for the coefficient comparison between the inverse image of a scalar
+sheaf and the scalar sheaf of the tensor pullback. -/
 theorem exists_scalarPullbackCoefficient (g : Y ⟶ Spec (CommRingCat.of k))
     (a : Y ⟶ X) (h : a ≫ f = g) (F : SheafOfModules.{u} X.ringCatSheaf) :
     ∃ j : (scalarInverseImage a).obj (scalarSheaf f F) ⟶
@@ -977,18 +837,15 @@ theorem exists_scalarPullbackCoefficient (g : Y ⟶ Spec (CommRingCat.of k))
     (NatTrans.congr_app (congrArg (fun t ↦ t.hom)
       ((adj.homEquiv _ _).apply_symm_apply β)) (op U)) s
 
-/-- scalar Pullback Coefficient.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The coefficient comparison from the inverse image of a scalar sheaf to the scalar sheaf of
+the tensor pullback. -/
 def scalarPullbackCoefficient (g : Y ⟶ Spec (CommRingCat.of k))
     (a : Y ⟶ X) (h : a ≫ f = g) (F : SheafOfModules.{u} X.ringCatSheaf) :
     (scalarInverseImage a).obj (scalarSheaf f F) ⟶
       scalarSheaf g ((tensorPullback a).obj F) :=
   Classical.choose (exists_scalarPullbackCoefficient f g a h F)
 
-/-- scalar Cohomology Pullback.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The pullback map on `k`-linear cohomology along a morphism `a : Y ⟶ X` over `Spec k`. -/
 def scalarCohomologyPullback (g : Y ⟶ Spec (CommRingCat.of k))
     (a : Y ⟶ X) (h : a ≫ f = g) (F : SheafOfModules.{u} X.ringCatSheaf)
     (n : ℕ) (x : scalarCohomology f F n) :
@@ -1006,11 +863,7 @@ local instance : MonoidalCategory (SheafOfModules.{u} X.ringCatSheaf) :=
 local instance : SymmetricCategory (KSheaf X k) := Sheaf.symmetricCategory _ _
 local instance : MonoidalPreadditive (KSheaf X k) := Sheaf.monoidalPreadditive
 
-/-- scalar Tensor Left Limits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensoring
-over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
+/-- Tensoring on the left with a sheaf of `k`-vector spaces preserves finite limits. -/
 @[instance] theorem scalarTensorLeftLimits (M : KSheaf X k) :
     PreservesFiniteLimits (tensorLeft M) := by
   have : PreservesFiniteLimits (tensorLeft M.obj) :=
@@ -1027,11 +880,7 @@ over the field k is exact. Exactness gives preservation of finite limits and col
       presheafToSheaf (Opens.grothendieckTopology X) (ModuleCat.{u} k)) :=
     comp_preservesFiniteLimits _ _
   exact preservesFiniteLimits_of_natIso (Sheaf.tensorLeftIso M).symm
-/-- scalar Tensor Left Colimits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensoring
-over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
+/-- Tensoring on the left with a sheaf of `k`-vector spaces preserves finite colimits. -/
 @[instance] theorem scalarTensorLeftColimits (M : KSheaf X k) :
     PreservesFiniteColimits (tensorLeft M) := by
   let : SymmetricCategory (KSheaf X k) := Sheaf.symmetricCategory _ _
@@ -1041,26 +890,16 @@ over the field k is exact. Exactness gives preservation of finite limits and col
     Monoidal.Reflective.monoidalClosed
       (CategoryTheory.sheafificationAdjunction (Opens.grothendieckTopology X) (ModuleCat.{u} k))
   infer_instance
-/-- scalar Tensor Right Limits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensoring
-over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
+/-- Tensoring on the right with a sheaf of `k`-vector spaces preserves finite limits. -/
 @[instance] theorem scalarTensorRightLimits (M : KSheaf X k) :
     PreservesFiniteLimits (tensorRight M) := by
   exact preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
-/-- scalar Tensor Right Colimits.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Tensoring sheaves of k-vector spaces is exact: check stalks, where tensoring
-over the field k is exact. Exactness gives preservation of finite limits and colimits. -/
+/-- Tensoring on the right with a sheaf of `k`-vector spaces preserves finite colimits. -/
 @[instance] theorem scalarTensorRightColimits (M : KSheaf X k) :
     PreservesFiniteColimits (tensorRight M) := by
   exact preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
 
-/-- scalar Ext Cup.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The cup product on `Ext` groups of sheaves of `k`-vector spaces. -/
 def scalarExtCup {A B : KSheaf X k} {p q : ℕ}
     (a : Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) A p)
     (b : Abelian.Ext.{u + 1} (𝟙_ (KSheaf X k)) B q) :
@@ -1069,9 +908,7 @@ def scalarExtCup {A B : KSheaf X k} {p q : ℕ}
     (a.mapExactFunctor (tensorRight (𝟙_ (KSheaf X k)))) (zero_add p)).comp
       (b.mapExactFunctor (tensorLeft A)) rfl
 
-/-- The sectionwise k-linear tensor coefficient, sending pure tensors to tensor sections.
-Source: Stacks Project, Cohomology, Tag 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The sectionwise k-linear tensor coefficient, sending pure tensors to tensor sections. -/
 def scalarTensorCoefficientApp (F G : SheafOfModules.{u} X.ringCatSheaf)
     (U : (Opens X)ᵒᵖ) :
     scalarObj f F U ⊗ scalarObj f G U ⟶ scalarObj f (F ⊗ G) U :=
@@ -1084,11 +921,7 @@ def scalarTensorCoefficientApp (F G : SheafOfModules.{u} X.ringCatSheaf)
     (fun s t t' ↦ tmulSection_add s t t')
     (fun r s t ↦ tmulSection_smul (scalarMap f U.unop r) s t)
 
-/-- The tensor-section maps commute with restriction.
-Source: Stacks Project, Cohomology, Tag 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: Both composites send a pure tensor to the tensor of the restricted sections,
-by the restriction formula for tensor sections. Pure tensors generate the tensor product. -/
+/-- The tensor-section maps commute with restriction. -/
 theorem scalarTensorCoefficientApp_naturality (F G : SheafOfModules.{u} X.ringCatSheaf)
     {U V : (Opens X)ᵒᵖ} (i : U ⟶ V) :
     (scalarPresheaf f F ⊗ scalarPresheaf f G).map i ≫
@@ -1100,17 +933,13 @@ theorem scalarTensorCoefficientApp_naturality (F G : SheafOfModules.{u} X.ringCa
     ((F ⊗ G).val.map i).hom (tmulSection s t)
   exact (tmulSection_map (leOfHom i.unop) s t).symm
 
-/-- The sectionwise coefficient as a morphism of presheaves of k-vector spaces.
-Source: Stacks Project, Cohomology, Tag 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The sectionwise coefficient as a morphism of presheaves of k-vector spaces. -/
 def scalarTensorPresheafCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :
     scalarPresheaf f F ⊗ scalarPresheaf f G ⟶ scalarPresheaf f (F ⊗ G) where
   app := scalarTensorCoefficientApp f F G
   naturality := fun _ _ i ↦ scalarTensorCoefficientApp_naturality f F G i
 
-/-- scalar Tensor Coefficient.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The tensor coefficient comparison `scalarSheaf F ⊗ scalarSheaf G ⟶ scalarSheaf (F ⊗ G)`. -/
 def scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :
     scalarSheaf f F ⊗ scalarSheaf f G ⟶ scalarSheaf f (F ⊗ G) :=
   (Sheaf.tensorLeftIso (scalarSheaf f F)).hom.app (scalarSheaf f G) ≫
@@ -1142,13 +971,7 @@ private theorem scalarTensorInclusionComparison (M N : KSheaf X k) :
   erw [hc]
   simp
 
-/-- The sheafified tensor coefficient sends pure tensors to tensor sections.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations).
-Proof: The sheafification adjunction extends the sectionwise map. Its defining
-adjunction identity, composed with the monoidal sheafification comparison, says that
-its composite with the tensorator of the inclusion is the sectionwise tensor map.
-Evaluating on a pure tensor gives tmulSection s t. -/
+/-- The sheafified tensor coefficient sends pure tensors to tensor sections. -/
 theorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf) :
     ∀ (U : X.Opens) (s : scalarObj f F (op U)) (t : scalarObj f G (op U)),
       (scalarTensorCoefficient f F G).hom.app (op U)
@@ -1168,9 +991,7 @@ theorem exists_scalarTensorCoefficient (F G : SheafOfModules.{u} X.ringCatSheaf)
   intro U s t
   exact ConcreteCategory.congr_hom (NatTrans.congr_app hc (op U)) (s ⊗ₜ[k] t)
 
-/-- scalar Cohomology Cup.
-Source: Stacks Project, Cohomology, Tags 01DZ and 01F7; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The cup product on `k`-linear cohomology of `O_X`-module sheaves. -/
 def scalarCohomologyCup (F G : SheafOfModules.{u} X.ringCatSheaf) (p q : ℕ)
     (a : scalarCohomology f F p) (b : scalarCohomology f G q) :
     scalarCohomology f (F ⊗ G) (p+q) :=
@@ -1179,18 +1000,14 @@ def scalarCohomologyCup (F G : SheafOfModules.{u} X.ringCatSheaf) (p q : ℕ)
       (scalarCohomologyExtEquiv f G q b)).comp
         (Abelian.Ext.mk₀ (scalarTensorCoefficient f F G)) (add_zero _))
 
-/-- The normalized tensor-pullback adjunction, with its sectionwise unit.
-Source: Stacks Project, Tag 0096
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The normalized tensor-pullback adjunction, with its sectionwise unit. -/
 def scalarPullbackAdjunction {A B : Scheme.{u}} (a : A ⟶ B) :
     tensorPullback a ⊣ pushforward a :=
   Classical.choose (exists_tensorPullbackAdjunction a)
 
 attribute [irreducible] scalarPullbackAdjunction scalarCohomologyCup
 
-/-- The canonical composition comparison for tensor pullback, using its normalized adjunction.
-Source: Stacks Project, Tag 0097; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The canonical composition comparison for tensor pullback, using its normalized adjunction. -/
 def scalarPullbackCompIso {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) :
     tensorPullback (a ≫ b) ≅ tensorPullback b ⋙ tensorPullback a :=
   (scalarPullbackAdjunction (a ≫ b)).leftAdjointUniq
@@ -1200,9 +1017,7 @@ def scalarPullbackCompIso {A B C : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) :
 
 attribute [irreducible] scalarPullbackCompIso
 
-/-- The canonical comparison associated to a commutative square of scheme morphisms.
-Source: Stacks Project, Tag 0097; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The canonical comparison associated to a commutative square of scheme morphisms. -/
 def scalarPullbackSquareIso {A B C D : Scheme.{u}}
     (a : A ⟶ B) (b : B ⟶ D) (c : A ⟶ C) (d : C ⟶ D)
     (h : a ≫ b = c ≫ d) (M : D.Modules) :
@@ -1212,26 +1027,20 @@ def scalarPullbackSquareIso {A B C D : Scheme.{u}}
     eqToIso (congrArg (fun t ↦ (tensorPullback t).obj M) h) ≪≫
       (scalarPullbackCompIso c d).app M
 
-/-- Coefficient functoriality on the recorded derived-functor cohomology.
-Source: Stacks Project, Tag 01DZ
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- Coefficient functoriality on the recorded derived-functor cohomology. -/
 def scalarCohomologyMap {M N : SheafOfModules.{u} X.ringCatSheaf}
     (a : M ⟶ N) (n : ℕ) (x : scalarCohomology f M n) : scalarCohomology f N n :=
   ((ModuleCat.restrictScalars (scalarMap f ⊤)).map
     ((RingedSpace.moduleCohomology X.toRingedSpace n).map a)).hom x
 
-/-- Coefficients of the external cup product on a fibre product.
-Source: Stacks Project, Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- Coefficients of the external cup product on a fibre product. -/
 abbrev externalCupCoefficients {A B : Scheme.{u}} (a : A ⟶ Spec (CommRingCat.of k))
     (b : B ⟶ Spec (CommRingCat.of k)) (M : A.Modules) (N : B.Modules) :
     (Limits.pullback a b).Modules :=
   (tensorPullback (Limits.pullback.fst a b)).obj M ⊗
     (tensorPullback (Limits.pullback.snd a b)).obj N
 
-/-- Pull back both classes and take their cup product.
-Source: Stacks Project, Varieties, Tag 0BED, maps preceding equation-kunneth-on-cech
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- Pull back both classes and take their cup product. -/
 def externalCup {A B : Scheme.{u}} (a : A ⟶ Spec (CommRingCat.of k))
     (b : B ⟶ Spec (CommRingCat.of k)) (M : A.Modules) (N : B.Modules) (p q : ℕ)
     (x : scalarCohomology a M p) (y : scalarCohomology b N q) :
@@ -1243,9 +1052,7 @@ def externalCup {A B : Scheme.{u}} (a : A ⟶ Spec (CommRingCat.of k))
 
 attribute [local irreducible] scalarPullbackSquareIso
 
-/-- The canonical coefficient comparison for pullback of the external tensor product.
-Source: Stacks Project, Tags 0097 and 01CD; Varieties, Tag 0BED
-(blueprint: def-sc-field-linear-module-cohomology-operations). -/
+/-- The canonical coefficient comparison for pullback of the external tensor product. -/
 def externalCupPullbackIso {A B A' B' : Scheme.{u}}
     (a : A ⟶ Spec (CommRingCat.of k)) (b : B ⟶ Spec (CommRingCat.of k))
     (a' : A' ⟶ Spec (CommRingCat.of k)) (b' : B' ⟶ Spec (CommRingCat.of k))

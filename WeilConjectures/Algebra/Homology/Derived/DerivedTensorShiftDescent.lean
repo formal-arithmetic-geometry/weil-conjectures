@@ -95,13 +95,15 @@ import Mathlib.CategoryTheory.ObjectProperty.Shift
 /-!
 # Signed shifts on the published site derived tensor
 
-Source: Stacks Project, more-algebra.tex, Tag 0FNH, item-shift-tensor;
-sites-cohomology.tex, Tags 06YS and 06YU; Categories, Tag 04VK.
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent)
-
 The representative comparison is the published resolving comparison exposed by
 `tensorDescentPair`. The predicates below spell out its normalization and the
 universal fixed-comparison conclusion; they do not choose another tensor.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0FNH
+* Stacks Project, Cohomology on Sites, Tags 06YM, 06YS and 06YU
+* Stacks Project, Categories, Tag 04VK
 -/
 
 @[expose] public noncomputable section
@@ -139,9 +141,7 @@ local instance (I : Type) :
   exact SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesObjFunctorOppositeRingCatIsSheaf _ _
 
 /-- A transparent abbreviation of Mathlib's existing total tensor functor, exposing its
-canonical signed shift instances. This is definitionally `SiteTensorComplexFunctor R`.
-Source: Stacks, Tags 06YM and 0FNH
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+canonical signed shift instances. This is definitionally `SiteTensorComplexFunctor R`. -/
 abbrev tensorShiftTotal :=
   (MonoidalCategory.curriedTensor (ringedSiteModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).map₂CochainComplex
@@ -149,9 +149,7 @@ abbrev tensorShiftTotal :=
 /-- The prescribed restriction of both shift comparisons to flat-term K-flat pairs.
 This is the conjugation by the published representative comparison and the canonical
 localization shift comparison, written without inverse arrows by clearing the two
-invertible initial factors.
-Source: Stacks, Tags 0FNH and 06YU
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+invertible initial factors. -/
 def tensorResolvingShiftCompatible
     (stable : ∀ (P : CochainComplex (ringedSiteModules.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ),
@@ -195,13 +193,7 @@ def tensorResolvingShiftCompatible
         (tensorDescentPair (J := J) (R := R) P S hP hS).hom⟦n⟧')
 
 /-- Every fixed-factor comparison normalized on resolving objects respects the signed shifts.
-The natural isomorphisms are pulled back to complexes along the full homotopy quotient.
-Thus their naturality is exactly naturality on the homotopy category; the quotient's
-canonical shift comparison identifies these squares with the homotopy-level squares.
-`NatTrans.CommShift` says that the given shifts coincide with the shifts descended in
-one variable under this factorization.
-Source: Stacks, Tags 06YS, 06YU and 04VK
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+The natural isomorphisms are pulled back to complexes along the homotopy quotient. -/
 def tensorFixedComparisonsShiftCompatible
     (s : (siteRestrictionDerivedTensor (J := J) (R := R)).CommShift₂Int) : Prop :=
   letI := s
@@ -229,9 +221,7 @@ def tensorFixedComparisonsShiftCompatible
 
 /-- Uniqueness of the normalized natural isomorphisms themselves, without assuming
 coherence laws on a competing isomorphism. Once the restriction of a candidate agrees
-with the prescribed shifts on resolving pairs, all of its components agree.
-Source: Stacks, Tag 04VK, and the arbitrary-transformation clause of tensor descent
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent). -/
+with the prescribed shifts on resolving pairs, all of its components agree. -/
 def tensorShiftComparisonsUnique
     (s : (siteRestrictionDerivedTensor (J := J) (R := R)).CommShift₂Int) : Prop :=
   letI := s
@@ -1080,24 +1070,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The published derived tensor has unique normalized coherent signed integer shifts,
 and every normalized fixed-factor comparison respects them.
-Source: Stacks, Tag 0FNH (item-shift-tensor), Tags 06YS, 06YU and 04VK
-(blueprint: lem-weil-pbc-derived-tensor-shift-descent).
-
-Proof:
-1. Localize the signed total tensor along the homotopy quotient in both variables,
-   using the recorded complex comparison. The general bifunctor localization theorem
-   preserves the zero, addition and mixed-sign identities.
-2. Restrict this structure to the shift-stable resolving subcategory and postcompose
-   with Qh. The recorded localization equivalence and derived comparison allow a second
-   application of the same theorem, on the specified published derived tensor.
-3. Paste the shift squares of the two comparison isomorphisms. Naturality of Qh's
-   shift comparison identifies their composite with tensorDescentPair, including its
-   canonical quotient-to-derived identifications. Every derived object has a resolving
-   representative, so naturality along representative isomorphisms proves uniqueness.
-4. A normalized fixed-factor comparison has the required square on resolving complexes.
-   For an arbitrary complex choose a flat-term K-flat resolution, use naturality of
-   that square, and cancel the invertible image of the shifted resolution map.
-   The same argument in the other variable gives the other fixed-factor comparison.
 -/
 theorem derived_tensor_shift_descent
     (stable : ∀ (P : CochainComplex (ringedSiteModules.{r}

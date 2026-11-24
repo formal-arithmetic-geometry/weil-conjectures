@@ -12,8 +12,10 @@ public import WeilConjectures.Algebra.Homology.KFlat
 /-!
 # Degreewise currying equation interface
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: def-sc-hom-tensor-degreewise-equation)
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90
+* Stacks, Modules on Sites, Section 03EK
 -/
 
 @[expose] public section
@@ -33,17 +35,14 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 /-- The product projections of the chosen Hom complex. These are the projections
-specified together with its bifunctor in `homComplex_exists` (Stacks, Section 0A8X).
-(blueprint: def-sc-hom-tensor-degreewise-equation) -/
+specified together with its bifunctor in `homComplex_exists` (Stacks, Section 0A8X). -/
 noncomputable def homTensorCurryProjection (L M : CochainComplex Mod ℤ)
     (n p q : ℤ) (h : p + n = q) :
     (homComplex (R := R) L M).X n ⟶ SheafOfModules.homObj (R := R) (L.X p) (M.X q) :=
   (Classical.choose (Classical.choose_spec (homComplex_exists (R := R)))) L M n p q h
 
 /-- Map from the sectionwise presheaf tensor to the underlying sheaf tensor.
-It is the sheafification unit followed by the inverse of the tensor comparison.
-Source: Stacks, Modules on Sites, Section 03EK.
-(blueprint: def-sc-hom-tensor-degreewise-equation) -/
+It is the sheafification unit followed by the inverse of the tensor comparison. -/
 noncomputable def homTensorCurrySectionMap (A B : Mod) :
     letI := SheafOfModules.monoidalCategory R
     A.val ⊗ B.val ⟶ (A ⊗ B).val := by
@@ -56,9 +55,7 @@ noncomputable def homTensorCurrySectionMap (A B : Mod) :
 set_option synthInstance.maxSize 256 in
 /-- The degreewise comparison sends `x ⊗ y` to `f(x)(y)` on every localized site.
 The equation uses pure tensors before sheafification; it therefore does not assert
-that every section of a sheaf tensor is a sum of global pure tensors.
-Source: Stacks, Tag 0A90, degreewise construction.
-(blueprint: def-sc-hom-tensor-degreewise-equation) -/
+that every section of a sheaf tensor is a sum of global pure tensors. -/
 def HomTensorDegreewiseEquation (K L M : CochainComplex Mod ℤ) (n : ℤ) :
     letI := SheafOfModules.monoidalCategory R
     ((homComplex (R := R) K (homComplex (R := R) L M)).X n ⟶

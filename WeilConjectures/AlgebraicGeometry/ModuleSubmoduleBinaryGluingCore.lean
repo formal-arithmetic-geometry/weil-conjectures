@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # A concrete pullback for extending an open submodule
 
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
+## References
+
+* Stacks Project, Properties, Lemma 01PF.
 -/
 
 @[expose] public section
@@ -42,10 +44,7 @@ noncomputable def binarySubmoduleMap (X : Scheme.{u}) (W V : X.Opens)
       (homOfLE (show V ≤ W ⊔ V from le_sup_right))).map
     (ι ≫ (binarySubmoduleRestrictionIso X W V H).inv)
 
-/-- Pull back the direct image of Q along the restriction unit of H on the union.
-This constructs the submodule without choosing any witness of an existence theorem.
-Source: Stacks Project, Properties, Lemma 01PF, binary gluing step.
-(blueprint: def-weil-pbc-module-binary-submodule-pullback) -/
+/-- The pullback of the direct image of `Q` along the restriction unit of `H` on the union. -/
 noncomputable def binarySubmodule (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))
@@ -61,10 +60,7 @@ noncomputable def binarySubmoduleInclusion (X : Scheme.{u}) (W V : X.Opens)
   pullback.fst ((binarySubmoduleAdjunction X W V).unit.app (H.over (W ⊔ V)))
     (binarySubmoduleMap X W V H Q ι)
 
-/-- The pullback inclusion is monic: direct image, a right adjoint, preserves the
-monomorphism Q to H on V, and pullback preserves monomorphisms.
-Source: Stacks Project, Properties, Lemma 01PF, submodule gluing.
-(blueprint: lem-weil-pbc-module-binary-submodule-mono) -/
+/-- The pullback inclusion is monic. -/
 instance binarySubmoduleInclusion_mono (X : Scheme.{u}) (W V : X.Opens)
     (H : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (Q : SheafOfModules.{u} ((moduleRings X.toRingedSpace).over V))

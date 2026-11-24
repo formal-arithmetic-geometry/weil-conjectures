@@ -221,7 +221,6 @@ set_option linter.privateModule false
 
 This is the constructibility assertion of proper finiteness, separated from the
 uniform cohomological-dimension estimate.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section

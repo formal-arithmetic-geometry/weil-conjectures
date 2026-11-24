@@ -15,9 +15,6 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 /-!
 # Normal schemes, Galois covers and deck groups
 
-Source: the smooth base change blueprint, node `def-sbc-normal-dominant-galois`, order 1379
-(blueprint: def-sbc-normal-dominant-galois).
-
 The other notions in this node already exist as `AlgebraicGeometry.IsIntegral`,
 `AlgebraicGeometry.IsDominant`, `AlgebraicGeometry.GeometricallyConnected`, and
 `AlgebraicGeometry.GeometricallyReduced`. The existing `Scheme.GaloisCover` requires a finite
@@ -32,9 +29,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- An integral scheme is normal when every local ring is an integrally closed domain.
-Source: smooth base change blueprint, node `def-sbc-normal-dominant-galois`, order 1379
-(blueprint: def-sbc-normal-dominant-galois). -/
+/-- An integral scheme is normal when every local ring is an integrally closed domain. -/
 def IsNormalScheme (S : Scheme.{u}) : Prop :=
   IsIntegral S ∧ ∀ s : S,
     IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)
@@ -43,9 +38,7 @@ def IsNormalScheme (S : Scheme.{u}) : Prop :=
 simply transitive on each geometric fibre; `quotient` expresses the scheme quotient.
 Unlike `Scheme.GaloisCover`, this permits infinite groups over the empty base. On a
 nonempty base simple transitivity and finiteness of the morphism force the group to be finite.
-The group laws make each action map an automorphism, hence a finite etale morphism.
-Source: smooth base change blueprint, node `def-sbc-normal-dominant-galois`, order 1379
-(blueprint: def-sbc-normal-dominant-galois). -/
+The group laws make each action map an automorphism, hence a finite etale morphism. -/
 structure Scheme.GaloisCoverAction (G : Type v) [Group G] (C : Scheme.{u}) where
   /-- The total space. -/
   Z : Scheme.{u}
@@ -74,9 +67,7 @@ structure Scheme.GaloisCoverAction (G : Type v) [Group G] (C : Scheme.{u}) where
 
 /-- The deck group is the group of all automorphisms over the base, without requiring
 compatibility with a chosen action, with the group structure of `Aut`. This applies also to
-covers with an infinite group and empty base.
-Source: smooth base change blueprint, node `def-sbc-normal-dominant-galois`, order 1379
-(blueprint: def-sbc-normal-dominant-galois). -/
+covers with an infinite group and empty base. -/
 abbrev Scheme.Hom.deckGroup {Z C : Scheme.{u}} (π : Z ⟶ C) : Type _ :=
   Aut (Over.mk π)
 

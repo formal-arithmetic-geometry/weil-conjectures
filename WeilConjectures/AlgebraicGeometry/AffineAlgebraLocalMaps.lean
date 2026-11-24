@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 
 /-! # Local maps determined by a morphism of structure algebras
 
-Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemma 01LT.
-(blueprint: lem-weil-pbc-affine-algebra-local-maps).
+## References
+
+* Stacks Project, Tags 01SA and 01LT
 -/
 
 @[expose] public section
@@ -37,28 +38,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An algebra morphism gives compatible scheme maps on inverse images of affine opens.
-Source: Stacks Project, Morphisms, Lemma 01SA; Constructions, Lemma 01LT;
-parts (i) and (iii) of the local proof of the affine structure-algebra correspondence.
-(blueprint: lem-weil-pbc-affine-algebra-local-maps).
-
-Proof: For each affine open U of S, the inverse image of U under g is affine.
-The Gamma--Spec adjunction applied to the component of α on U, conjugated by the
-canonical top-section isomorphisms of both open subschemes, gives a map from the
-inverse image under f to the inverse image under g. The commutativity condition
-of the algebra morphism says that its composite to U agrees with the restricted
-map f: this follows by injectivity of the Gamma--Spec correspondence for the affine U.
-Compose with the open immersion into Y to obtain k_U. Its section map is the prescribed
-component by construction, including the stated top-section transport.
-
-For an affine V contained in U, compare k_V with the restriction of k_U. Both factor
-through the affine inverse image of U under g. Naturality of α gives equality of
-their global section maps, and injectivity of the adjunction gives equality of maps.
-For arbitrary affine U and V, their intersection need not be affine. Cover it by
-affine W contained in both. On the inverse image of each W both maps agree with k_W,
-by the preceding comparison. Scheme-morphism uniqueness on this open cover gives
-the displayed equality on the pullback of the two open immersions. No affineness
-of X is required, and the empty inverse images and empty base are covered by the
-same adjunction and the uniqueness assertion for the empty cover. -/
+(Stacks, Tags 01SA and 01LT). -/
 theorem affine_algebra_local_maps {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     [IsAffineHom g] (α : (𝒪⁎g : S.CommAlgebraSheaf) ⟶ 𝒪⁎f) :
     ∃ k : ∀ U : S.affineOpens, (f ⁻¹ᵁ U.1).toScheme ⟶ Y,

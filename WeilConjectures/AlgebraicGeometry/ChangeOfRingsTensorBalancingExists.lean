@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
 /-! # Universal property of the change-of-rings balancing map
 
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-change-of-rings-tensor-balancing-universal).
+## References
+
+* Stacks Project, Tags 01SB and 0089
 -/
 
 @[expose] public section
@@ -32,11 +33,7 @@ local notation "𝓻" a => (sheafCompose _ (forget₂ CommRingCat.{u} RingCat.{u
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Existence clause for the balancing factorization.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB.
-(blueprint: aux-lem-weil-pbc-change-of-rings-tensor-balancing-universal-exists)
-The sectionwise balanced map factors through the change-of-rings sheafification by
-the tensor universal property and sheafification universal property. -/
+/-- Existence clause for the balancing factorization (Stacks, Tag 01SB). -/
 theorem changeOfRings_tensor_balancing_universal_exists (Y : Scheme.{u})
     (B C : Y.CommAlgebraSheaf) (φ : B ⟶ C)
     (P : SheafOfModules.{u} (𝓡 B.right)) :

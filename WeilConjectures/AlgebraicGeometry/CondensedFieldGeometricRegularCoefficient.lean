@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.IntegralRegularCoefficientPullback
 
 /-! # Compatibility of regular coefficients with geometric pullback
 
-Source: Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11
 -/
 
 @[expose] public section
@@ -362,24 +364,8 @@ private lemma geometric_scalar_value
     (regular_conjugate (condensedFieldCoefficientRingObj E) p a f)
   exact h.trans (pullbackScalar_eq E p (a z) f.hom).symm
 
-/-- Compatibility of a regular endomorphism's coefficient with one geometric pullback.
-
-Source: Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-
-Proof in words. The extension-of-scalars regular-module comparison and naturality
-of restriction of scalars identify the underlying conjugate by the canonical regular
-isomorphism as the coefficient pullback comparison conjugating inverse image of f.
-The adjoint-test equation of continuous realization gives its naturality square for a:
-transpose both sides through the scheme and point adjunctions, then use the canonical
-pullback projections. Conjugate the square by the realization isomorphisms and apply
-it to the constant section 1 on the terminal pro-etale object. Pullback of the terminal
-object has a canonical section above Spec Ω. Naturality along its terminal projection
-identifies evaluation at z with evaluation at a(z). Finally expand the scalar evaluation
-and the composite realization for p. The private lemmas above prove these conjugation,
-naturality, and evaluation identities with folded scalar values; the final expansion
-must be checked without unfolding the inverse-image constructions. No algebraic closure
-assumption is needed for this coefficient identity. -/
+/-- Compatibility of a regular endomorphism's coefficient with one geometric pullback
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem condensedField_geometric_regular_coefficient
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (Ω : Type u) [Field Ω] {X V : Scheme.{u}}

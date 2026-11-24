@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.AffineKoszulHomCoefficientHomologySquar
 
 /-! # Underived affine coordinates for the Koszul coefficient square
 
-Source: Stacks Project, Tag 0BQZ, the map between the two Hom complexes. -/
+## References
+
+* Stacks Project, Tag 0BQZ
+-/
 
 @[expose] public section
 
@@ -92,32 +95,7 @@ private theorem affine_coefficient_coordinates_for_H
 
 
 /-- The underived Hom complexes of the explicit sheafified Koszul complex give
-precisely the coefficient reduction on dual Koszul homology.
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5, the displayed map of
-Hom complexes; Tag 01HV, exactness of associated sheafification.
-(blueprint: lem-sc-affine-koszul-coefficient-hom-coordinates).
-
-Proof: Identify the restriction of i_*O_Z with the associated sheaf of A/I,
-where A = Gamma(Y,U) and I = ker(i)(U), using the affine quotient presentation.
-Identify the restricted structure sheaf with the associated sheaf of A. On each
-basic open, the adjunction unit is the localized quotient map A_g -> (A/I)_g;
-the hypothesis ha therefore identifies the coefficient map under these two
-identifications. In Hom degree k the coefficient single complex has only its
-zero term. Projection to source degree -k identifies the Hom term with internal
-Hom from the sheafification of wedge^k(A^n) to the coefficient sheaf. The finite
-wedge basis identifies this with the associated sheaf of the corresponding
-module Hom, by localization of the functional's values. The identifications
-commute with the coefficient quotient map, since both maps reduce these values.
-The source differential acts by precomposition multiplied by -(-1)^k, which is
-(-1)^(k+1); the coefficient differentials are zero. Thus the identifications
-form a commuting square of integer-indexed complexes. Tilde and chart transport
-are exact, so their homology comparison is natural in this square. Finally the
-extension from natural to integer cochain degrees has its canonical natural
-homology comparison at m. Compose these comparisons to obtain the two stated
-isomorphisms and their square. This argument does not use Koszul regularity,
-ideal generation by f, or any derived category. For n=0 the complexes have only
-degree zero; for m>n their homology vanishes; zero rings and empty charts give
-the unique maps of zero objects. -/
+precisely the coefficient reduction on dual Koszul homology (Stacks, Tags 0BQZ, 01HV). -/
 theorem affine_koszul_coefficient_hom_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (U : Y.affineOpens) (n m : ℕ) (f : Fin n → Γ(Y, U.1))

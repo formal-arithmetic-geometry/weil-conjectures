@@ -31,9 +31,7 @@ variable (k₀ : Type u) [Field k₀] (X : Scheme.{u}) [X.Over (Spec (CommRingCa
   (k₀' : Type u) [Field k₀'] [Algebra k₀ k₀']
 
 /-- The base change `X ×_{k₀} k₀'` of a `k₀`-scheme `X` along a field extension `k₀ → k₀'`, a
-scheme over `k₀'` through the second projection.
-
-(blueprint: `def-pc-base-change`) -/
+scheme over `k₀'` through the second projection. -/
 noncomputable abbrev Scheme.baseChangeField : Scheme.{u} :=
   pullback (X ↘ Spec (CommRingCat.of k₀)) (Spec.map (CommRingCat.ofHom (algebraMap k₀ k₀')))
 

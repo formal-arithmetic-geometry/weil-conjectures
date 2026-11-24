@@ -29,15 +29,15 @@ set_option linter.privateModule false
 
 /-! # Exact principal completion and its canonical triangle map
 
-proof.md`,
-Cones paragraph and shifts sentence; Stacks Tag 05RU
-(auxiliary; not a blueprint node).
-
 ## Main definitions and statement
 
 * `CompletionTriangle.tower` assembles the specified strict principal reductions.
 * `CompletionTriangle.complexCompletion` applies the existing Roos functor.
 * `CompletionTriangle.completion_triangle_comparison` gives the augmented exact descent.
+
+## References
+
+* Stacks Project, Tag 05RU
 -/
 
 @[expose] public noncomputable section

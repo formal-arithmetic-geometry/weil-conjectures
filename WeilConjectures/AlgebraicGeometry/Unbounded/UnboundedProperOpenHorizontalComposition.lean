@@ -353,7 +353,12 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! Horizontal composition of unbounded proper/open interchange, Stacks Tag 0F7D. -/
+/-! Horizontal composition of unbounded proper/open interchange.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0F7D
+-/
 
 @[expose] public section
 
@@ -364,23 +369,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Horizontal pasting for normalized unbounded proper/open comparison families.
-Source: Stacks Project, Tag 0F7D.
-(blueprint: lem-amb-unbounded-proper-open-horizontal-composition).
-
-Proof:
-Take a K-injective representative J and resolutions rho:k!J→I and sigma:l!I→H.
-Exactness of l! makes sigma after l!rho a resolution of l!k!J. The two consecutive
-interchanges are represented by j!(p*rho after theta1), followed by q*sigma after theta2.
-Naturality of theta2 moves rho through this expression. Include the remaining sheaf
-maps into the common composite direct image using the given support normalizations.
-Associativity of support composition identifies their product with the outer theta,
-with the open-extension compositors inserted. Their termwise derived descents identify
-the chosen composite resolution with the outer one. Equivalently, precompose with the
-right-derived unit, use both assumed unit equations, and apply the universal property
-of right derivation to the equality of the sheaf maps. This proves the equation for
-every derived object without a boundedness assumption.
--/
+/-- Horizontal pasting for normalized unbounded proper/open comparison families. -/
 theorem unboundedProperOpenHorizontalComposition_of_normalization
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (θ : ∀ {U V W Z : Scheme.{u}}

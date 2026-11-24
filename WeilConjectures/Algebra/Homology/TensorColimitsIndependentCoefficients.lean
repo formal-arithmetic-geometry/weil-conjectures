@@ -12,8 +12,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # TensorColimitsIndependentCoefficients
 
-Source: Stacks Project, Tag 03EP (lemma-tensor-commute-colimits), item (2).
-(auxiliary; not a blueprint node). -/
+## References
+
+* Stacks Project, Tags 03EK, 03EP
+-/
 
 @[expose] public section
 
@@ -24,18 +26,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Tensoring on the left preserves coefficient-sized colimits of module sheaves.
-Source: Stacks Project, Modules on Sites, Tag 03EP, lemma-tensor-commute-colimits,
-item (2), with tensor product constructed by sheafification
-(auxiliary; not a blueprint node).
-
-Proof: write a for module sheafification. Its counit is an isomorphism on a sheaf M.
-The monoidal comparison of a identifies a followed by tensorLeft M with presheaf
-sectionwise tensorLeft M.val followed by a. The presheaf tensor functor preserves
-colimits sectionwise, and a preserves colimits as a left adjoint. A functor out of
-a reflective category preserves colimits if its precomposition with the reflector
-does, by Adjunction.preservesColimitsOfSize_iff. Apply this to the sheafification
-adjunction, whose right adjoint is fully faithful. -/
+/-- Tensoring on the left preserves coefficient-sized colimits of module sheaves. -/
 theorem tensorLeft_preservesColimits_independentCoefficients
     (M : SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
@@ -63,13 +54,7 @@ theorem tensorLeft_preservesColimits_independentCoefficients
   exact (adj.preservesColimitsOfSize_iff (tensorLeft M)).mpr inferInstance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Tensoring module sheaves is additive at independent coefficient universes.
-Source: Stacks Project, Modules on Sites, Tag 03EP, item (2).
-(auxiliary; not a blueprint node).
-
-Proof: tensor preserves coefficient-sized colimits and zero morphisms. Shrink its
-colimit preservation to finite diagrams, so it preserves binary coproducts and hence
-binary biproducts. A zero-preserving functor preserving binary biproducts is additive. -/
+/-- Tensoring module sheaves is additive at independent coefficient universes. -/
 theorem tensorLeft_additive_independent
     (M : SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
@@ -86,9 +71,7 @@ theorem tensorLeft_additive_independent
   exact Functor.additive_of_preservesBinaryBiproducts _
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit sectionwise tensor functor agrees with the presheaf monoidal tensor.
-Source: Stacks Project, Tag 03EK (auxiliary; not a blueprint node).
-The identity on each section commutes with restrictions and tensor maps. -/
+/-- The explicit sectionwise tensor functor agrees with the presheaf monoidal tensor. -/
 noncomputable def siteTensorRightIso
     (M : PresheafOfModules.{w}
       (((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R).obj)) :
@@ -106,9 +89,7 @@ noncomputable def siteTensorRightIso
     intro x y
     rfl
 set_option backward.isDefEq.respectTransparency false in
-/-- The monoidal sheaf tensor is sheafification of the tensor of underlying presheaves.
-Source: Stacks Project, Tag 03EK (auxiliary; not a blueprint node).
-Apply the monoidal sheafification comparison and its invertible counit on sheaves. -/
+/-- The monoidal sheaf tensor is sheafification of the tensor of underlying presheaves. -/
 noncomputable def tensorRightPresentation
     (M : SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
@@ -130,9 +111,7 @@ noncomputable def tensorRightPresentation
     isoWhiskerLeft i (Functor.Monoidal.commTensorRight a M.val)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit site tensor functor agrees with the monoidal tensor of module sheaves.
-Source: Stacks Project, Tag 03EK (auxiliary; not a blueprint node).
-Sheafify the sectionwise comparison and compose with the monoidal presentation. -/
+/-- The explicit site tensor functor agrees with the monoidal tensor of module sheaves. -/
 noncomputable def siteSheafTensorRightIso
     (M : SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :

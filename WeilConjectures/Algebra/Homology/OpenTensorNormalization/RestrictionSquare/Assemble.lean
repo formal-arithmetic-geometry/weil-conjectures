@@ -27,8 +27,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
-/-- The representative square from its two halves and the chain-level equation.
-(blueprint: lem-sf-finite-restriction-representative-square) -/
+/-- The representative square from its two halves and the chain-level equation. -/
 theorem squareEq_of_halves (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj P))

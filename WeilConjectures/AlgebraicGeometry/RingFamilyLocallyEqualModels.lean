@@ -9,8 +9,9 @@ import WeilConjectures.CategoryTheory.ModuleSheafificationLocalIso
 
 /-! # Augmented ring-family models for locally equal section ideals
 
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 099E]
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +27,7 @@ variable (K : RingComplexFamily.{u}) (ε : RingComplexAugmentations K)
 variable (m : RingComplexMaps K) (hm : RingComplexFunctorial K ε m)
 variable (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections)
 
-/-- Transport a component of the ring-complex family along equality of ideals.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node). -/
+/-- Transport a component of the ring-complex family along equality of ideals. -/
 def ringFamilyComponentEquiv (A : CommRingCat.{u})
     (I I' : {I : Ideal A // I.FG}) (h : I = I') (n : ℤ) :
     ((K A I).X n).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]
@@ -64,10 +63,7 @@ private theorem ringFamilyComponentEquiv_augmentation
   rfl
 
 /-- The augmented sheafification evaluates on presheaf-unit sections as its original
-presheaf augmentation.
-Source: Stacks Project, Tag 099E.
-(auxiliary; not a blueprint node).
-Proof: evaluate the inverse equation for the sheafification adjunction on complexes. -/
+presheaf augmentation. -/
 theorem ringFamilySheafModel_augmentation_unit
     (n : ℤ) (X : Cᵒᵖ)
     (x : ((ringFamilyPresheafComplex O K ε m hm r f).X n).obj X) :
@@ -86,15 +82,7 @@ theorem ringFamilySheafModel_augmentation_unit
       (ringFamilyPresheafAugmentation O K ε m hm r f)
   exact congrArg (fun z ↦ (z.f n).app X x) h
 
-/-- Locally equal generated section ideals give canonically isomorphic augmented models.
-Source: Stacks Project, Tag 099E, independence of the choice of finite generating ideal.
-(auxiliary; not a blueprint node).
-
-Proof: equality of the two section ideals is stable under restriction, since both ideal
-families commute with extension of scalars. On that locus the ring-family components,
-differentials and augmentations agree by transport along equality of ideals. The assumed
-coverings make the locus locally exhaustive. Apply the augmented module-sheafification
-local-isomorphism theorem. -/
+/-- Locally equal generated section ideals give canonically isomorphic augmented models. -/
 theorem ringFamilySheafModel_iso_of_locally_equal_ideals_with_unit (s : ℕ)
     (g : Fin s → (O.obj ⋙ forget CommRingCat).sections)
     (h : ∀ X : C, ∃ S ∈ J X, ∀ (Y : C) (a : Y ⟶ X), S a →

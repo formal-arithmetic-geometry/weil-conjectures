@@ -16,8 +16,9 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 /-!
 # Independence of the corank of a local presentation
 
-Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -134,22 +135,8 @@ private lemma matrix_of_regular_endomorphisms
     f ≫ biproduct.π (fun _ : Fin n ↦ Mod.regular R) i)
 
 /-- Two finite presentations of the same pulled-back module have equal coranks over
-points with the same image. No noetherian hypothesis is needed here.
-Source: the rank/descent argument, step 3, accompanying Hemo--Richarz--Scholbach,
-Example 3.1; Bhatt--Scholze, Example 4.2.11
-(auxiliary; not a blueprint node).
-Proof: choose an algebraic closure of a common overfield of the two residue fields
-at v and w over the residue field of their common image. The resulting geometric
-point factors through both cover members. Pull back both cokernel presentations to
-that geometric point. Inverse image is additive and preserves finite colimits, and
-the monoidal coefficient comparison sends the regular module to the regular module.
-Evaluation at the final object on the algebraically closed field is exact, because
-pro-etale covers there split, and sends the coefficient ring to E. Compatibility of
-the canonical continuous-function realization with inverse image identifies the two
-maps with their evaluated matrices. Both cokernels therefore compute the same finite
-dimensional E-vector space. Rank-nullity gives n minus matrix rank for both of its
-dimensions. This includes zero rows, zero columns, and zero-dimensional cokernels.
-An empty cover member contributes no points. -/
+points with the same image (Hemo--Richarz--Scholbach, Example 3.1;
+Bhatt--Scholze, Example 4.2.11). -/
 theorem condensedField_presentation_corank_eq
     (E : Type u) [NormedField E] [TotallyDisconnectedSpace E]
     (X : Scheme.{u})

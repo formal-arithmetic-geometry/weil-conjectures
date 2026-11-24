@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-! # Derived stalk of a supplied constant etale chart
 
-Source: Stacks Project, Tags 03PT, 04EQ and 094G.
+## References
+
+* Stacks Project, Tags 03PT, 04EQ and 094G
 -/
 
 @[expose] public noncomputable section
@@ -45,21 +47,8 @@ private def overStalkIso
       (Functor.whiskeringLeft _ _ A).obj (Functor.Elements.π p.fiber).op)
     (Functor.Final.colimIso F.op)
 
-/-- Taking a geometric stalk of one supplied constant chart recovers its algebraic model.
-Source: Stacks Project, Etale Cohomology, 03PT and 04EQ; Cohomology on Sites, 094G.
-(auxiliary; not a blueprint node).
-
-Proof: The lift t defines a point of the localized etale site over W. The forgetful
-functor from pointed neighborhoods in the slice to pointed neighborhoods in X is initial:
-given any pointed neighborhood, take its fibre product with W, using the fixed lift t.
-The fibre product also gives common refinements of any two such choices. Thus restriction
-to this slice does not change the stalk. Undoing AsSmall similarly does not change this
-filtered colimit. The stalk of a constant module sheaf is the original module: the constant
-presheaf has that colimit and sheafification preserves the stalk. This is natural in the
-module and hence in each differential of M. Apply the exact slice stalk to the given
-isomorphism and the termwise constant-stalk isomorphism, then descend at quasi-isomorphisms.
-Composition of exact-functor localizations identifies the result with the specified
-coefficientEtaleDerivedStalk. No boundedness, finiteness or Noetherianity is used. -/
+/-- Taking a geometric stalk of one supplied constant chart recovers its algebraic model
+(Stacks, Tags 03PT, 04EQ and 094G). -/
 theorem coefficient_etale_chart_stalk
     (X : Scheme.{u}) (B : Type (max v (u + 1))) [CommRing B]
     (K : ConstantCompletion.D

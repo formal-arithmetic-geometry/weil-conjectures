@@ -25,12 +25,13 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedProperOpenPasting
 
 /-! # Normalized unbounded proper/open interchange and its base-change cube
 
-Source: Stacks Project, more-etale.tex, Tags 0F7B(b), 0F7C, 0F7D, 0F7E and 0F7F.
-(auxiliary; not a blueprint node).
-
 The comparison families below use the ordinary unbounded module derived categories.
 The sheaf comparison is fixed by equality inside the common ordinary direct image;
 the derived comparison is fixed on every K-injective representative and resolution.
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7E and 0F7F
 -/
 
 @[expose] public section
@@ -55,8 +56,7 @@ attribute [local irreducible] Functor.mapDerivedCategoryFactors
   Functor.rightDerivedFunctorObjQIso Functor.mapDerivedCategoryNatIso
 
 /-- The type of sheaf comparisons for proper vertical and open horizontal edges.
-Source: Stacks Project, Tag 0F7B, first proof paragraph
-(auxiliary; not a blueprint node). -/
+(Stacks, Tag 0F7B) -/
 abbrev ProperOpenSheafComparisonFamily (A : Type (u + 1)) [CommRing A] :=
   ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k],
@@ -64,9 +64,7 @@ abbrev ProperOpenSheafComparisonFamily (A : Type (u + 1)) [CommRing A] :=
       ((r)_*[ModuleCat.{u + 1} A] ⋙ (i)_!open[ModuleCat.{u + 1} A] ≅
         (k)_!open[ModuleCat.{u + 1} A] ⋙ (p)_*[ModuleCat.{u + 1} A])
 
-/-- The type of unbounded derived proper/open comparison families.
-Source: Stacks Project, Tag 0F7B(b)
-(auxiliary; not a blueprint node). -/
+/-- The type of unbounded derived proper/open comparison families (Stacks, Tag 0F7B). -/
 abbrev ProperOpenDerivedComparisonFamily (A : Type (u + 1)) [CommRing A] :=
   ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     [IsProper p] [IsProper r] [IsOpenImmersion i] [IsOpenImmersion k],
@@ -338,61 +336,8 @@ private theorem exists_normalized_families
   exact ⟨@θ, @Γ, hθ, hΓh⟩
 
 /-- Canonical proper/open interchange, with its support, representative, Cartesian,
-pasting, identity and arbitrary-base-change normalizations.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7B(b), 0F7C, 0F7D, 0F7E and 0F7F;
-the Cartesian mate normalization is the map in lem-sf-etale-proper-open-tensor-square.
-(auxiliary; not a blueprint node).
-
-Proof:
-1. Apply lem-cbc-proper-support-sheaf-composition to identify both sheaf functors
-   with the same proper-support subsheaf of (ir)_* = (pk)_*. The identification
-   is the identity on sections. It is natural and satisfies ordinary vertical,
-   horizontal and identity pasting, since all these words are that same identity.
-2. Choose a K-injective representative with injective terms, using
-   lem-pur-kinjective-degreewise-existence and the Grothendieck module-sheaf theorem.
-   Locally on an affine open of Z, proper fibres have bounded dimension by
-   lem-fin-finite-type-fibre-dimension-bound. The torsion proper-CD theorem and
-   module/abelian comparison give finite CD for p_*. The non-Cartesian theorem
-   lem-cbc-open-extended-injective-proper-acyclic gives acyclicity of every k_!I^n.
-   Open restriction preserves K-injectives and injectives, since extension by zero
-   is exact and left adjoint to restriction. No global quasi-compactness is needed.
-3. Apply lem-kun-finite-cd-acyclic-complex locally. It says p_*rho is a quasi-isomorphism;
-   the geometric stalk cohomology test glues this conclusion. For any K-injective I,
-   replace it by one with injective terms. The replacement is a homotopy equivalence;
-   k_! and p_* preserve homotopies, so the same conclusion holds for every I and rho.
-4. Localize theta followed by p_*rho, using the exact-functor factorizations and
-   lem-weil-pbc-kinjective-total-derived. The K-injective Hom bijection lifts arrows
-   and comparisons of resolutions uniquely up to homotopy. Naturality of theta
-   proves independence, naturality and the displayed representative normalization.
-5. For a Cartesian square transpose under P_p adjoint R_p. The sheaf transpose
-   is open base change followed by k_! of the ordinary r-counit: on the open it
-   evaluates the same section and outside it is zero. The K-injective counit
-   theorem identifies its localization with the derived counit. The mate bijection
-   gives exactly openImmersionLowerShriekLowerStarExchange, with no automorphism.
-6. For vertical pasting use a resolution rho:k_!I -> H. Both r1_*I and p1_*H are
-   K-injective by exact inverse image and right-adjoint preservation. The first
-   normalized comparison is therefore an allowed resolution for the second square.
-   Composing gives p2_*p1_*rho times the ordinary pasted theta; step 1 identifies
-   it with the outer theta. The K-injective direct-image compositors give the equation.
-7. For horizontal pasting resolve k_!I -> H and l_!H -> L. Exactness of l_! makes
-   their composite a resolution of l_!k_!I. Naturality and the ordinary horizontal
-   identity of step 1 identify the two localized paths. Identity resolutions and
-   the ordinary unit comparisons give the two displayed identity laws.
-8. At sheaf level the two cube paths agree after inclusion in the common direct
-   image: each pulls back the same section. These inclusions are monic and inverse
-   image is exact. The open base-change compatibility and open-unit-mate theorem
-   identify these sheaf beta maps with the inverses of the specified derived mates.
-9. Choose I, rho:k_!I -> H, a K-injective resolution u:d^*I -> I1 and a resolution
-   sigma:k1_!I1 -> H1. The K-injective Hom bijection gives h:a^*H -> H1 with
-   h a^*rho beta_k^{-1} homotopic to sigma k1_!u. No inverse image of a K-injective
-   is asserted to be K-injective. The termwise derived-exchange theorem identifies
-   p1_*h times the ordinary exchange, and r1_*u times the ordinary exchange, with
-   the fixed unbounded mates in the cube.
-10. Insert the sheaf cube degreewise, use naturality to move rho through exchange
-    and open base change, and use the homotopy in step 9. Localization makes both
-    words equal. The Hom bijection gives independence of all representatives.
-    Neither exchange is cancelled and the original square need not be Cartesian. -/
+pasting, identity and arbitrary-base-change normalizations
+(Stacks, Tags 0F7B, 0F7C, 0F7D, 0F7E and 0F7F). -/
 theorem etaleProperOpenExchangeCube
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     ∃ (θ : ProperOpenSheafComparisonFamily A)

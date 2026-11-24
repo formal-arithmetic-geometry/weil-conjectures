@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueCoefficientTransport
 
 /-! # Residue origin under the canonical integral realization
 
-Source: Stacks Tags 09C1, 09C2 and 09AL.
+## References
+
+* Stacks, Tags 09C1, 09C2 and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -27,26 +29,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
 /-- Constructible finite-Tor residue complexes are precisely the bounded constructible
 etale residue complexes in the fixed completed coefficient presentation. The given
-completeness witness only supplies the first conjunct of the adic predicate.
-Source: Stacks Tags 09C2 (2),(4) and 09AL
-(auxiliary; not a blueprint node).
-
-Proof: the normalized coefficient comparisons identify both derived first reductions
-with the same complex over the constant residue field. Compute on a flat-term K-flat
-representative; the ordinary comparison sends a pure tensor to the identical pure tensor.
-Exact section-action and small-site equivalences preserve homology and the relative tensor,
-so they preserve and reflect the residue Tor condition and finite constant local models.
-The lifted quotient of the lifted integer ring is canonically the lift of its first
-quotient, by the scalar quotient map. The residue field is discrete and Noetherian.
-On the Noetherian scheme, local finite Tor dimension is equivalent to one global Tor
-interval. Apply `constructible_localTor_iff_etaleOrigin`; the unit tensor test supplies
-boundedness. Pass from constant-ring module sheaves to fixed-scalar sheaves and from
-the equivalent small sites to the original sites. On a Noetherian scheme the global
-and affine-local constructibility conventions coincide; over a field finite presentation
-means finite dimension. These exact equivalences preserve the origin isomorphism and
-the same interval for every degree-zero etale module test, yielding both implications.
-Pair the etale-origin witness with hcomplete to package
-the adic predicate; in the reverse implication retain its residue witness. -/
+completeness witness only supplies the first conjunct of the adic predicate. -/
 theorem residue_transport (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X]

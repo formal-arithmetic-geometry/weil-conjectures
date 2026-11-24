@@ -26,8 +26,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
 
 /-! # Canonical derived direct image comparison for module coefficients
 
-Source: Stacks Project, Tags 03FD and 072W.
-(blueprint: lem-weil-pbc-module-abelian-derived-direct-image-comparison)
+## References
+
+* Stacks Project, Tags 03FD and 072W.
 -/
 
 @[expose] public section
@@ -64,10 +65,8 @@ noncomputable def moduleAbelianDerivedLowerStarComparison
       D+(moduleAbelianForget Λ X) ⋙ R+((f)_*[AddCommGrpCat.{u + 1}]) :=
   Functor.rightDerivedFunctorPlusBaseChange (moduleAbelianLowerStarIso Λ f).hom
 
-/-- The Cech criterion on all etale objects gives abelian evaluation acyclicity.
-Source: Stacks 03FD, second proof paragraph, via 03FC and 03F9. 
-(blueprint: lem-sbc-injective-module-forget-evaluation-acyclic)
--/
+/-- The Cech criterion on all etale objects gives abelian evaluation acyclicity
+(Stacks, Tag 03FD, via 03FC and 03F9). -/
 private theorem moduleAbelianForget_injective_evaluation_acyclic
     (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective G]
@@ -131,22 +130,8 @@ private theorem moduleAbelianForget_injective_evaluation_acyclic
       (evaluation X.Etaleᵒᵖ AddCommGrpCat.{u + 1}).obj (Opposite.op W)).rightDerived
         (n + 1)).mapIso (eAb.app G).symm)
 
-/-- The canonical derived direct-image coefficient comparison is invertible.
-
-Source: Stacks Project, Tag 03FD, second paragraph of its proof, and Tag 072W.
-(blueprint: lem-weil-pbc-module-abelian-derived-direct-image-comparison)
-
-Proof: Identify a ModuleCat-valued sheaf with a module over the constant ring
-sheaf, preserving its underlying abelian sheaf and injectivity. Tag 03FD gives
-vanishing of positive abelian derived evaluation on every etale object for an
-injective module sheaf I. By Tag 072W, the higher direct images of I_ab are the
-sheafifications of V ↦ H^n(X ×_Y V, I_ab). Each value vanishes for n > 0, so
-I_ab is acyclic for f_* on abelian sheaves. The coefficient forgetful sheaf
-functors are exact, and f_* commutes with them by evaluation. Apply
-Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic to this square.
-Its hypothesis is precisely the preceding acyclicity. This proves invertibility
-of the canonical unit-compatible comparison on all bounded below complexes,
-without asserting that the underlying abelian sheaf of I is injective. -/
+/-- The canonical derived direct-image coefficient comparison is invertible
+(Stacks, Tags 03FD and 072W). -/
 theorem isIso_moduleAbelianDerivedLowerStarComparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsIso (moduleAbelianDerivedLowerStarComparison Λ f) := by

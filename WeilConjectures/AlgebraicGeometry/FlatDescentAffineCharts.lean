@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FlatDescentChartComparison
 /-!
 # Affine charts for flatness descent
 
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph.
+## References
+
+* Stacks Project, Tag 04AI
 -/
 
 @[expose] public section
@@ -57,27 +59,8 @@ private theorem finite_affine_triples {S X Y : Scheme.{u}}
 
 /-- A finite family of affine triples translates flatness over the limit to flatness of
 colimit tensor-product maps, and translates flatness of all stage maps back to scheme
-flatness. This is only the affine reduction, with no eventual flatness assertion.
-
-Source: Stacks Project, Limits, proof of Tag 04AI, first paragraph, and the affine
-identification in Situation 081D.
-(blueprint: lem-weil-pbc-flat-descent-affine-charts).
-
-Proof: At each point of X₀ choose nested affine opens U ⊆ X₀, V ⊆ Y₀, W ⊆ S₀
-with f₀(U) ⊆ V and Y₀.hom(V) ⊆ W. Quasi-compactness of X₀ supplies finitely many
-such U covering X₀. Put B₀ = Γ(V) and C₀ = Γ(U); local finite presentation gives
-finite presentation of B₀ → C₀. On the upper tail the inverse images of W are affine,
-so their sections define a directed diagram Aᵢ. The inverse image of W in the limit
-is the spectrum of colim Aᵢ, compatibly with the projection to W, by the limit theorem
-for affine transitions and the spectrum-colimit comparison. Open base change and the
-spectrum tensor-product pullback identify the inverse images of U and V with spectra
-of Aᵢ ⊗ C₀ and Aᵢ ⊗ B₀, and similarly at the limit. The induced morphism is Spec
-of id ⊗ (B₀ → C₀), by the pullback universal property. Restricting a flat limit morphism
-to these opens and using the affine flatness criterion gives limitFlat for every chart.
-Conversely, stageFlat for every chart gives flatness on a covering of the stage source;
-the local rings of open subschemes are the ambient local rings, hence the stage map is
-flat. If X₀ is empty the family has size zero, and all base-changed sources are empty,
-so the last assertion is vacuous stalkwise. No flatness descent is used here. -/
+flatness. This is only the affine reduction, with no eventual flatness assertion
+(Stacks, Tag 04AI and Situation 081D). -/
 theorem exists_flat_descent_affine_charts
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

@@ -22,8 +22,6 @@ support of `I`.
   isomorphism over any open disjoint from the support of the ideal.
 - `AlgebraicGeometry.Scheme.IdealSheafData.isIso_blowupMap_restrict_support_compl` — the
   blow-up map is an isomorphism over the complement of the support
-  (blueprint: `thm:nagata-global-blowup-complement`).
-
 -/
 
 @[expose] public section
@@ -37,7 +35,7 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
 /-- The blow-up map is an isomorphism over any affine open on which the ideal is the unit
-ideal. (blueprint: `lemma:nagata-affine-blowup-complement`) -/
+ideal. -/
 lemma isIso_blowupMap_restrict_of_ideal_eq_top {U : X.affineOpens}
     (h : I.ideal U = ⊤) : IsIso (I.blowupMap ∣_ U.1) := by
   have hiso : IsIso (I.blowupNatTrans.app U) := by
@@ -55,8 +53,7 @@ lemma isIso_blowupMap_restrict_of_ideal_eq_top {U : X.affineOpens}
   rwa [Scheme.Opens.opensRange_ι] at H
 
 /-- **The blow-up is an isomorphism away from the center**, general form: the blow-up map
-is an isomorphism over any open disjoint from the support of the ideal.
-(blueprint: `thm:nagata-global-blowup-complement`) -/
+is an isomorphism over any open disjoint from the support of the ideal. -/
 theorem isIso_blowupMap_restrict {U : X.Opens}
     (hU : Disjoint (U : Set X) (I.support : Set X)) :
     IsIso (I.blowupMap ∣_ U) := by
@@ -80,8 +77,7 @@ theorem isIso_blowupMap_restrict {U : X.Opens}
       (I.ideal_eq_top_of_disjoint_support (hU.mono_left W.2))
 
 /-- **The blow-up is an isomorphism away from the center**: the blow-up map is an
-isomorphism over the complement of the support of the ideal.
-(blueprint: `thm:nagata-global-blowup-complement`) -/
+isomorphism over the complement of the support of the ideal. -/
 theorem isIso_blowupMap_restrict_support_compl :
     IsIso (I.blowupMap ∣_ I.support.compl) :=
   isIso_blowupMap_restrict I (by simpa using disjoint_compl_left)

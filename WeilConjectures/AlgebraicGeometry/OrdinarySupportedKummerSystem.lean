@@ -10,16 +10,16 @@ public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerScalar
 /-!
 # Normalized systems of ordinary supported Cartier Kummer maps
 
-Source: Stacks Project, Tags 03PL and 0A45; blueprint
-sec-smooth-purity/sk-prop-sf-cbc/lem-amb-cartier-kummer-map.md
-(auxiliary; not a blueprint node).
-
 ## Main definitions
 
 * `supportedDerivedUnit`: the canonical derived unit.
 * `supportedExactDerivedMap`: the existing exact-functor/Ext comparison in general form.
 * `OrdinarySupportedKummerSystem`: relative, Chern, pullback and scalar normalizations.
 * The class families and compatibility predicates keep the dependent fields compact.
+
+## References
+
+* [Stacks, Tags 03PL and 0A45]
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +37,7 @@ namespace AlgebraicGeometry.Etale
 set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
-/-- The inverse-image/direct-image unit on the derived constant object.
-Source: Stacks 0A45 (auxiliary; not a blueprint node). -/
+/-- The inverse-image/direct-image unit on the derived constant object. (Stacks, Tag 0A45) -/
 @[irreducible]
 def supportedDerivedUnit (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :
@@ -49,7 +48,7 @@ def supportedDerivedUnit (A : Type (u + 1)) [CommRing A]
 
 /-- Realize an Ext class after the canonical exact-direct-image comparison.
 This is the existing single-object comparison followed by the existing Ext realization.
-Source: Stacks 0A45 (auxiliary; not a blueprint node). -/
+(Stacks, Tag 0A45) -/
 @[irreducible]
 def supportedExactDerivedMap {C : Type uC} {E : Type uD}
     [Category.{vC} C] [Category.{vD} E] [Abelian C] [Abelian E]

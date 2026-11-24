@@ -10,9 +10,6 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 
 /-! # Constant-object pullback comparisons
-
-Source: blueprint vector integration, compatibility with restriction.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -94,10 +91,7 @@ private theorem unit_comp_rfl (A : Type (u + 1)) [CommRing A]
     (single_comp A p v (p ≫ v) rfl (ordinaryFiniteConstant A S))
     (Scheme.upperStarConstantSheafIso_comp (ModuleCat.{u + 1} A) p v (ModuleCat.of A A))
 
-/-- The actual constant-object comparisons respect derived pullback composition.
-Source: blueprint vector integration, restriction compatibility; composition of
-upperStarConstantSheafIso and derived pullback on degree-zero sheaves.
-(auxiliary; not a blueprint node). -/
+/-- The actual constant-object comparisons respect derived pullback composition. -/
 theorem ordinaryFiniteUnitPullback_comp (A : Type (u + 1)) [CommRing A]
     {T U S : Scheme.{u}} (p : T ⟶ U) (v : U ⟶ S) (w : T ⟶ S)
     (hw : w = p ≫ v) :

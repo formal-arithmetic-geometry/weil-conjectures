@@ -15,8 +15,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Perfect generation over an affine base
 
-Source: literature/stacks-project/perfect.tex, Tags 06Z0 and 09IS
-(blueprint: lem-pc-perfect-generation-affine-base).
+## References
+
+* Stacks Project, Tags 06Z0 and 09IS.
 -/
 
 @[expose] public section
@@ -52,15 +53,7 @@ private theorem freeModule_detects_zero (A : Type u) [Ring A]
     (((DerivedCategory.homologyFunctor C 0).shiftIso n 0 n (by omega)).app M).symm
 
 /-- If `X` is affine (`X ≅ Spec(A)`, `A = Γ(X, 𝒪_X)`), the structure sheaf is perfect
-and generates the quasi-coherent derived category.
-Source: Stacks Project, perfect.tex, Tags 06Z0 and 09IS
-(blueprint: lem-pc-perfect-generation-affine-base).
-
-Proof. Use the affine equivalence between the derived category of modules over `A`
-and the quasi-coherent derived category of `X`; it sends `A[n]` to `𝒪_X[n]` and
-preserves zero objects and Hom groups. The free rank-one module is strictly perfect,
-and maps from its shifts detect all cohomology groups, hence detect zero objects.
-Transport this criterion across the equivalence. -/
+and generates the quasi-coherent derived category (Stacks, Tags 06Z0 and 09IS). -/
 theorem perfectGeneration_affine_base (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

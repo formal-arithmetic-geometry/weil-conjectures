@@ -15,11 +15,8 @@ universe u
 open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 
-/-- A map on finite skeleta extends after a refinement that retains the source skeleton.
-Source: Stacks 0DAV, relative replacement. Map the source skeleton to the product
-of the two full hypercovers, using the identity in its first factor and the given
-finite map in its second. Extend this replacement stage and project to the factors.
-(auxiliary; not a blueprint node) -/
+/-- A map on finite skeleta extends after a refinement that retains the source skeleton
+(Stacks, Tag 0DAV). -/
 theorem exists_refinement_extending_finite_map
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (U V : FiniteSplitEtaleHypercover X) (r : ℕ)

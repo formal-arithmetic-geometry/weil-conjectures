@@ -30,12 +30,6 @@ projective space `ℙ^σ_A`.
 - `AlgebraicGeometry.reesPresentation_mem_reesGrading` — a form of degree `n` is mapped into
   the degree-`n` piece of the Rees algebra;
 - `AlgebraicGeometry.reesPresentation_surjective` — if `f` generates `I`, the map is surjective.
-
-## Blueprint
-
-This file implements `def:nagata-rees-polynomial-map` and
-`lemma:nagata-rees-polynomial-surjection` of the Nagata compactification blueprint.
-
 -/
 
 @[expose] public section
@@ -49,8 +43,7 @@ namespace AlgebraicGeometry
 variable {A : Type u} [CommRing A] {σ : Type v} {I : Ideal A} (f : σ → A) (hf : ∀ i, f i ∈ I)
 
 /-- The `A`-algebra map `A[T] → 𝓡_A(I)` sending the variable `Tᵢ` to the degree-one element
-`fᵢ·X` of the Rees algebra, for a family `f : σ → A` of elements of `I`.
-(blueprint: `def:nagata-rees-polynomial-map`) -/
+`fᵢ·X` of the Rees algebra, for a family `f : σ → A` of elements of `I`. -/
 noncomputable def reesPresentation : MvPolynomial σ A →ₐ[A] reesAlgebra I :=
   MvPolynomial.aeval fun i ↦ reesX I (f i) (hf i)
 
@@ -77,8 +70,7 @@ lemma reesPresentation_monomial_mem (d : σ →₀ ℕ) (c : A) :
   simpa using SetLike.mul_mem_graded (algebraMap_mem_reesGrading_zero I c) hprod
 
 /-- The polynomial presentation of the Rees algebra is graded: a form of degree `n` is mapped
-into the degree-`n` piece of the Rees algebra.
-(blueprint: `lemma:nagata-rees-polynomial-surjection`, gradedness part) -/
+into the degree-`n` piece of the Rees algebra. -/
 lemma reesPresentation_mem_reesGrading {n : ℕ} {p : MvPolynomial σ A}
     (hp : p ∈ MvPolynomial.homogeneousSubmodule σ A n) :
     reesPresentation f hf p ∈ reesGrading I n := by
@@ -97,8 +89,7 @@ lemma reesPresentation_mem_reesGrading {n : ℕ} {p : MvPolynomial σ A}
   exact reesPresentation_monomial_mem f hf d _
 
 /-- The polynomial presentation of the Rees algebra as a homomorphism of graded rings, from
-`A[T]` with its total-degree grading to `𝓡_A(I)` with its Rees grading.
-(blueprint: `def:nagata-rees-polynomial-map`, graded form) -/
+`A[T]` with its total-degree grading to `𝓡_A(I)` with its Rees grading. -/
 noncomputable def reesGradedPresentation :
     MvPolynomial.homogeneousSubmodule σ A →+*ᵍ reesGrading I where
   __ := (reesPresentation f hf).toRingHom
@@ -132,8 +123,7 @@ lemma reesPresentation_eq_reesMonomial {n : ℕ} {p : MvPolynomial σ A}
   exact Subtype.ext (by simp [hval])
 
 /-- The polynomial presentation of the Rees algebra is surjective if the family `f` generates
-the ideal `I`.
-(blueprint: `lemma:nagata-rees-polynomial-surjection`, surjectivity part) -/
+the ideal `I`. -/
 theorem reesPresentation_surjective (hspan : Ideal.span (Set.range f) = I) :
     Function.Surjective (reesPresentation f hf) := by
   classical
@@ -155,8 +145,7 @@ theorem reesPresentation_surjective (hspan : Ideal.span (Set.range f) = I) :
   exact (reesPresentation f hf).mem_range.mp (sum_mem fun n _ ↦ key n _ _)
 
 /-- The polynomial presentation of the Rees algebra, as a homomorphism of graded rings, is
-surjective if the family `f` generates the ideal `I`.
-(blueprint: `lemma:nagata-rees-polynomial-surjection`) -/
+surjective if the family `f` generates the ideal `I`. -/
 theorem reesGradedPresentation_surjective (hspan : Ideal.span (Set.range f) = I) :
     Function.Surjective (reesGradedPresentation f hf) :=
   reesPresentation_surjective f hf hspan

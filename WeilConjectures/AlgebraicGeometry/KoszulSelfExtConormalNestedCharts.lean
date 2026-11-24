@@ -21,8 +21,10 @@ import WeilConjectures.AlgebraicGeometry.SelfExtTorDualChart
 
 /-! # Naturality of the regular affine Koszul comparisons
 
-Source: Stacks Project, Tags 0BQY and 062I.
-(blueprint: new-s3-koszul-conormal-nested-charts). -/
+## References
+
+* Stacks Project, Tags 0BQY and 062I.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -63,29 +65,8 @@ private theorem compatible_inverse_family
     gj = gj ≫ (f ≫ gk) := by rw [hfk, Category.comp_id]
     _ = gk := by rw [← Category.assoc, hjf, Category.id_comp]
 
-/-- The normalized chart comparisons respect inclusions of regular affine charts.
-
-Source: Stacks Project, Tag 0BQY, the zero-differential Hom calculation,
-and Tag 062I, the conormal basis.
-(blueprint: new-s3-koszul-conormal-nested-charts).
-
-Proof: Factor the comparison through the actual self-Tor sheaf
-Q = i*H^{-n}(B[0] tensor^L B[0]), using the fixed derived tensor on Y.
-The canonical exterior-to-Tor map τ has invertible dual on each regular affine
-chart, by the Koszul wedge calculation (09PQ and 062I). The Ext--Tor cap pairing
-likewise gives a global map ε: i*G -> dual(Q), invertible there by finite free
-Koszul evaluation (0BQY). Restrict ε followed by dualMap(τ) to V to obtain one
-morphism φ: T -> F whose restriction to every such chart is an isomorphism.
-For each chart choose its inverse as the desired comparison F -> T.
-On a common subopen the forward components are the same component f of φ.
-If g₀ and g₁ are the two inverse components, their inverse identities give
-g₀ = g₀ ≫ (f ≫ g₁) = (g₀ ≫ f) ≫ g₁ = g₁. This proves the stated nested
-compatibility, and actually works for any common subopen without nesting.
-All choices occur in the theorem proof. No chart object or definition is chosen
-from an unproved existence theorem. Degree zero, degree above the generator
-length, generator length zero, zero quotients and empty charts are covered by
-the two comparison lemmas. No regularity on V or additional derived-category
-instance is assumed. -/
+/-- The normalized chart comparisons respect inclusions of regular affine charts
+(Stacks, Tags 0BQY, 062I). -/
 theorem koszulRegularImmersion_self_ext_conormal_nested_charts
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

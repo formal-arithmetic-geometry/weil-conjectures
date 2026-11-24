@@ -21,11 +21,7 @@ The generic fibre of `Y₁ ⟶ X` is a single finite separable field extension o
 function field of `X`; the resulting normalization is finite over `X`, and `Y₁`
 embeds in it as an open subscheme.
 
-Source: blueprint lemma `lemma-geometric-coverings-normal-scheme--1`
-(literature/blueprint/latest/blueprint/part-six-operations/
-sec-reduction-finite-coefficients/sec-lattices/sk-lem-wrp-normal-geometric-cover/
-det-wrp-cover-open-immersion.md and its `.proof.md`), with Stacks Project Tags
-035B, 0AVK, 05K0 and 0AB1 (blueprint: lemma-geometric-coverings-normal-scheme--1).
+Stacks Project Tags 035B, 0AVK, 05K0 and 0AB1.
 -/
 
 @[expose] public section
@@ -41,39 +37,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 /-- An étale connected component over a connected normal finite-type scheme is open in its
-finite generic normalization.
-
-Source: blueprint lemma `lemma-geometric-coverings-normal-scheme--1`
-(literature/blueprint/latest/blueprint/part-six-operations/
-sec-reduction-finite-coefficients/sec-lattices/sk-lem-wrp-normal-geometric-cover/
-det-wrp-cover-open-immersion.proof.md, both paragraphs, and
-sk-lem-wrp-normal-geometric-cover.proof.md, second and third paragraphs);
-Stacks Project Tags 035B, 0AVK, 05K0 and 0AB1
-(blueprint: lemma-geometric-coverings-normal-scheme--1).
-
-Proof (the six steps of the node):
-1. `X` is finite type over a field, hence Noetherian
-   (`lem-weil-pbc-finite-type-over-noetherian`); by `rem-pc-regular-normal` (2) the
-   Noetherian normal `X` is a finite disjoint union of normal integral clopen pieces, and
-   nonempty connectedness leaves one, so `X` is integral.
-2. Affine étale charts `Spec B ⟶ Spec A ⊆ X` of `Y₁` are Noetherian
-   (`pqf-lem-affine-open-locnoeth`, `lem-weil-pbc-finite-type-algebra-noetherian`,
-   `lem-weil-pbc-finite-type-over-noetherian`);
-   `proposition-proper-direct-image-finite-coefficients` gives every point of `Y₁` a normal integral
-   open neighbourhood (no quasi-compactness of `Y₁`).
-3. Hence `Y₁` is normal and reduced, its irreducible components are disjoint and open,
-   and connectedness leaves one: `Y₁` is integral.
-4. The image of `p` is nonempty open (`lem-weil-pbc-etale-morphism-open-map`), so the
-   generic point of `Y₁` lies over that of `X`; the generic fibre has charts
-   `(A ∖ 0)⁻¹ B`, nonzero domains with one common generic point
-   (`lem-sc-integral-function-field-affine-fraction`,
-   `lem-weil-pbc-fibre-product-affine-spectra`), and is a disjoint union of spectra of
-   finite separable extensions (`lem-weil-pbc-etale-fibre-discrete-separable-points`);
-   irreducibility leaves one, `Spec L`.
-5. `lem-fin-normalization-extension-finite` makes `X.normalizationIn L ⟶ X` finite.
-6. `lem-sf-integral-etale-normalization-open` (`integral_etale_normalization_open`)
-   applied to `p`, the generic-fibre isomorphism of step 4 and the finite normalization
-   of step 5 gives the open immersion `f : Y₁ ⟶ X.normalizationIn L` over `X`. -/
+finite generic normalization (Stacks, Tags 035B, 0AVK, 05K0 and 0AB1). -/
 theorem det_wrp_cover_open_immersion
     {k : Type u} [Field k] {X Y₁ : Scheme.{u}}
     [ConnectedSpace X]

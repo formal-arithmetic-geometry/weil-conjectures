@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 
 /-! # Ordinary quotient complexes of constant perfect models
 
-Source: Stacks Project, Tags 09C6, 06YY and 064B.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 09C6, 06YY and 064B
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +24,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] adicResidueLocalReductionStep
   adicResidueConstantPerfect adicResidueRestriction
 
-/-- The actual termwise completed constant complex restricted to the slice.
-Source: Stacks Tag 09C6.
-(auxiliary; not a blueprint node). -/
+/-- The actual termwise completed constant complex restricted to the slice (Stacks, Tag 09C6). -/
 def adicPerfectLocalComplex (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -41,9 +40,7 @@ def adicPerfectLocalComplex (X : Scheme.{u})
 
 attribute [local irreducible] adicPerfectLocalComplex
 
-/-- Ordinary termwise reduction, before derived localization.
-Source: Stacks Tags 09C6 and 06YY.
-(auxiliary; not a blueprint node). -/
+/-- Ordinary termwise reduction, before derived localization (Stacks, Tags 09C6 and 06YY). -/
 def adicPerfectQuotientComplex (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -52,9 +49,8 @@ def adicPerfectQuotientComplex (X : Scheme.{u})
   ((change (adicResidueLocalProjection.{u, v} X J U n)).mapHomologicalComplex (.up ℤ)).obj
     (adicPerfectLocalComplex.{u, v} X J U P)
 
-/-- The ring map used for the ordinary successor reduction on the slice.
-Source: Stacks Tags 09C6 and 099M.
-(auxiliary; not a blueprint node). -/
+/-- The ring map used for the ordinary successor reduction on the slice
+(Stacks, Tags 09C6 and 099M). -/
 def adicPerfectQuotientScalarStep (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :
@@ -63,10 +59,7 @@ def adicPerfectQuotientScalarStep (X : Scheme.{u})
   ((coefficientProEtaleModelTopology.{u, v} X).overPullback CommRingCat U).map
     (transition (coefficientProEtaleModelTopology.{u, v} X) A J n)
 
-/-- The actual cone equation after restriction to the slice.
-Source: Stacks Tag 099M.
-(auxiliary; not a blueprint node).
-Proof: restrict the limit cone equation at the successor arrow. -/
+/-- The actual cone equation after restriction to the slice (Stacks, Tag 099M). -/
 theorem adicPerfectQuotientScalarStep_comp (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :
@@ -82,9 +75,8 @@ theorem adicPerfectQuotientScalarStep_comp (X : Scheme.{u})
 
 attribute [local irreducible] derivedExtension extend change
 
-/-- Ordinary successor reassociation, fixed by scalar balancing on pure tensors.
-Source: Stacks Tags 06YY and 09C6.
-(auxiliary; not a blueprint node). -/
+/-- Ordinary successor reassociation, fixed by scalar balancing on pure tensors
+(Stacks, Tags 06YY and 09C6). -/
 def adicPerfectQuotientStep (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)
@@ -102,9 +94,8 @@ attribute [local irreducible] adicPerfectQuotientComplex adicPerfectQuotientStep
 
 /-- The existing derived balancing isomorphism, with its functors explicitly typed.
 The explicit type prevents elaboration from expanding the full construction of
-successive derived scalar extensions when using a component of this isomorphism.
-Source: Stacks Tags 06YY and 09C6.
-(auxiliary; not a blueprint node). -/
+successive derived scalar extensions when using a component of this isomorphism
+(Stacks, Tags 06YY and 09C6). -/
 abbrev adicPerfectDerivedQuotientStep (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) (n : ℕ) :

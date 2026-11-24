@@ -8,8 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
 import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 /-! # The model ring unit presents the inverse-image ring
-Source: Stacks Project, Tags 09A5, 00YV and 03D2.
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 09A5, 00YV and 03D2.
 -/
 @[expose] public section
 universe u
@@ -46,14 +48,8 @@ private theorem modelRingAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
   rw [modelRingAdjunction, Adjunction.map_restrictFullyFaithful_unit_app]
   simp only [Iso.refl_hom, NatTrans.id_app]
   rfl
-/-- The actual transported ring unit is a set inverse-image unit.
-Source: Stacks Project, Tags 09A5, 00YV and 03D2.
-(auxiliary; not a blueprint node).
-Proof: transport the original commutative-ring adjunction through the strict
-AsSmall equivalences. Its unit is the stated ring unit on sections. Compare this
-left adjoint with the model commutative-ring pullback, respecting units. Forgetting
-rings commutes with filtered Kan extension and sheafification, and its canonical
-comparison respects units too. Compose the two comparisons. -/
+/-- The actual transported ring unit is a set inverse-image unit
+(Stacks, Tags 09A5, 00YV and 03D2). -/
 theorem proEtaleModelRingPresentation {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
     let A := ((AsSmall.down : proEtaleSiteModel Y ⥤ Y.ProEt).sheafPushforwardContinuous

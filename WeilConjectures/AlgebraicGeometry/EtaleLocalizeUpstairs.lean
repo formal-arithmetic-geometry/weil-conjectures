@@ -13,8 +13,9 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Étale localization upstairs
 
-Source: literature/stacks-project/more-algebra.tex, Lemma Tag 07M0
-(blueprint: lem-weil-pbc-etale-localize-upstairs).
+## References
+
+* Stacks Project, Tag 07M0
 -/
 
 @[expose] public section

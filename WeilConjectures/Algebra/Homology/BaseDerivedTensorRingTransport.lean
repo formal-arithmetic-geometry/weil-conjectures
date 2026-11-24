@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySquare
 
 /-! # Change of all coefficient rings in the localized tensor comparison
 
-Source: Stacks Project, Tags 06Y6 and 08IB, derived tensor functoriality.
-(blueprint: lem-pc-base-derived-tensor-ring-transport).
+## References
+
+* Stacks Project, Tags 06Y6 and 08IB, derived tensor functoriality.
 -/
 
 @[expose] public section
@@ -76,31 +77,7 @@ private theorem forgetHomologyIso_restrict
   rfl
 
 /-- The localized comparison is natural under compatible coefficient-ring
-isomorphisms and a semilinear isomorphism of its input complex.
-
-Proof: restriction along eR and eB gives exact inverse equivalences on module
-categories and on their homotopy and derived categories. The two equations on
-R identify extension R0 to B0 with extension R to B under these equivalences:
-on generators the comparison sends b0 tensor q to eB(b0) tensor alpha(q).
-Transport the universal left-derived functor and its counit through these
-exact equivalences. Uniqueness of left-derived functors identifies this functor
-with N.derived, compatibly with the counits. Applying homology and the two
-cohomologyIso maps gives a semilinear isomorphism on base-tensor cohomology.
-For a0 in A0, naturality of alpha for multiplication and cohomologyIso_smul
-show that it intertwines a0 tensor 1 and eA(a0) tensor 1. Its B0-linearity
-intertwines 1 tensor b0 and 1 tensor eB(b0). Tensor induction gives semilinearity
-for the tensor of eA and eB over eR. The equations on C identify the two
-extensions of these cohomology modules to C0 and C; extending the semilinear
-isomorphism yields the additive isomorphism l. The equations comparison_eq
-identify the unlocalized comparison with the transported counit. Use localized_eq
-and the scalar-extension adjunction to identify the localized maps. The specified
-generator formula for tau identifies the resulting ordinary-complex map with
-its given tau, by tensor induction. Finally the exact forgetful homology
-isomorphisms yield the displayed equality. The comparisons need not be
-invertible, the inputs need not be K-flat, and all rings may be zero rings.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, and Tag 08IB,
-lemma-compare-base-change; the coefficient equivalences are exact.
-(blueprint: lem-pc-base-derived-tensor-ring-transport). -/
+isomorphisms and a semilinear isomorphism of its input complex. -/
 theorem exists_baseDerivedTensor_ring_transport
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

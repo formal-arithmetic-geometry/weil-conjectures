@@ -12,8 +12,10 @@ import WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationStrictS
 /-!
 # Strict tensor and truncation coherence on complexes
 
-Source: Zheng, Construction 4.1, p. 21; Stacks Tag 03EK.
-(blueprint: lem-pur-coefficient-evaluation-ordinary-coherence).
+## References
+
+* Stacks Project, Tag 03EK
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +38,7 @@ local notation "ev" => coefficientEvaluation (J := J) (O := O) (ell := ell)
 local notation "tensor" => coefficientTensor (J := J) (O := O) (ell := ell)
 
 /-- The normalized ordinary tensor comparisons, strict truncation inclusions and their
-termwise complex lifts. Source: Zheng, Construction 4.1; Stacks Tag 03EK
-(blueprint: lem-pur-coefficient-evaluation-ordinary-coherence). -/
+termwise complex lifts. -/
 structure CoefficientEvaluationOrdinaryCoherenceData
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive] where
@@ -79,15 +80,7 @@ structure CoefficientEvaluationOrdinaryCoherenceData
   tensorAssocComplex_f : ∀ {l m n} (h₁ : m ≤ l) (h₂ : n ≤ m) P i,
     ((tensorAssocComplex h₁ h₂ P).hom).f i = (tensorAssoc h₁ h₂).hom.app (P.X i)
 
-/-- The normalized tensor comparisons and truncation inclusions lift termwise to complexes.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tag 03EK
-(blueprint: lem-pur-coefficient-evaluation-ordinary-coherence).
-Proof: choose the normalized ordinary tensor unit and associator. Transpose the inverse
-below-level comparison to obtain each strict truncation inclusion; its components below
-the smaller index are the associator, and above that index its source is zero. Apply the
-functor on homological complexes to these transformations and isomorphisms. Naturality
-makes them chain maps, and their degree components are the original maps. Compose the
-unit lift with the canonical identity-complex comparison. -/
+/-- The normalized tensor comparisons and truncation inclusions lift termwise to complexes. -/
 theorem coefficientEvaluationOrdinaryCoherence
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive] :

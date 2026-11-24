@@ -19,8 +19,9 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # Perfect source models on affine opens
 
-Source: Stacks Project, Tags 06Z0, 08EB and 08EJ.
-(blueprint: lem-sc-affine-open-perfect-source-model).
+## References
+
+* Stacks Project, Tags 06Z0, 08EB and 08EJ
 -/
 
 @[expose] public section
@@ -85,25 +86,7 @@ private theorem localization_on_source {C D : Type (u + 1)}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The perfect source has a bounded finite-projective model under any realization
-of the explicit affine sheafification functor.
-Source: Stacks Project, Tag 08EB and Tag 06Z0.
-(blueprint: lem-sc-affine-open-perfect-source-model).
-
-Proof: Construct the exact module equivalence from the spectrum to the localized
-open site using isoSpec and overEquiv. Its derived equivalence transports local
-smallness, yielding a localization on the spectrum in universe w; choose the
-localizations on its opens by nonempty_derivedOpenLocalization. Restriction followed
-by the inverse equivalence is ordinary pullback along Spec Gamma(U,O_X) → U → X.
-Uniqueness of left derived functors identifies its exact derived functor with
-derivedPullback, so derivedPullback_preserve_perfect proves perfectness of the
-transported source. Perfectness supplies quasi-coherent cohomology. Apply
-perfect_iff_affine_bounded_projective to this object to obtain P with the required
-bounds and finite projective terms. The factorization of the exact equivalence
-through Q and mapHomologicalComplexCompIso identify its transported tilde complex
-with affinePerfectSheafification(P). Compose this comparison, the given comparison
-at P, the model isomorphism, and the derived counit to recover the restricted E.
-All constructions also apply to the empty open; no point or nonzero ring is chosen.
-No support or scalar compatibility is asserted here. -/
+of the explicit affine sheafification functor (Stacks, Tags 08EB and 06Z0). -/
 theorem affine_open_perfect_source_model
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

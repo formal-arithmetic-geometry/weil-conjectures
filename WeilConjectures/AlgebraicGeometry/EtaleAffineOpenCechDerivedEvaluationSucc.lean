@@ -19,9 +19,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleOpenCechResolutionTotal
 
 /-! # The positive-degree affine-open Čech edge comparison for étale sheaves
 
-Source: Stacks Project, Tag 03AZ, specialized to an acyclic affine-open covering,
-and Tag 03P2, separated-case proof.
-(blueprint: lem-sc-etale-affine-open-cech-derived-evaluation-succ).
+## References
+
+* Stacks Project, Tags 03AZ and 03P2
 -/
 
 @[expose] public section
@@ -34,26 +34,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An étale sheaf acyclic on affine objects is computed on a separated scheme by
 its sections on a finite affine open covering, in positive degree.
-Source: Stacks Project, Tag 03AZ (the Čech-to-cohomology spectral sequence), and
-Tag 03P2, separated-case proof.
-(blueprint: lem-sc-etale-affine-open-cech-derived-evaluation-succ).
-
-Proof: The functor i sends each open to its open subscheme over X, by hi. Cover
-preservation sends the open cover U to an étale cover of i(top). Finite-limit
-preservation identifies each nonempty product of the i(U_j), over this terminal
-object, with i of the corresponding intersection. Separatedness makes each such
-finite intersection affine. The hypothesis hvan therefore kills every positive
-cohomology group on these products. Apply the Čech-to-derived spectral sequence
-03AZ. Its positive rows are zero, while its zero row is the sections complex:
-right-derived evaluation in degree zero agrees naturally with evaluation since
-evaluation is left exact. From page E2 onward every differential entering or
-leaving the zero row is zero. The finite abutment filtration in degree q has just
-one possibly nonzero successive quotient, at (q,0), giving an isomorphism from derived
-evaluation at i(top) to degree-q homology of that row. The product comparisons commute with
-projections and hence with all face maps, so the row identifies with the Čech
-complex on opens of i.op followed by G.obj. This proves the displayed isomorphism.
-The empty cover of an empty scheme gives zero on both sides and is included
-in the same argument. -/
+(Stacks, Tags 03AZ and 03P2) -/
 theorem nonempty_rightDerived_etale_affineOpenCech_succ
     (X : Scheme.{u}) [X.IsSeparated]
     (i : X.Opens ⥤ X.Etale)

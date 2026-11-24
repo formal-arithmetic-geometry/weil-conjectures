@@ -18,8 +18,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Support of a constructible etale module sheaf
 
-Source: Stacks Project, Etale Cohomology, Tags 09YS(3), 04FS and 04FN
-(blueprint: new-constructible-module-support-general).
+## References
+
+* Stacks Project, Tags 09YS (3), 04FS and 04FN
 -/
 
 @[expose] public section
@@ -55,8 +56,7 @@ private theorem constructible_image_clopen {Y : Type u} [TopologicalSpace Y]
   exact hE.inter (hWc.isConstructible hWo)
 
 /-- Constant values on a trivializing cover detect the underlying abelian support.
-Compare the stalk with its cover value, then forget coefficients. Independence of
-zero stalks over one point proves both implications. Source: Stacks 09YS(3), 03Q1, 04FN. -/
+(Stacks, Tags 09YS (3), 03Q1 and 04FN) -/
 private theorem etaleModuleSupport_on_trivializing_cover
     {X Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (f : Y ⟶ X)
@@ -128,18 +128,7 @@ private theorem etaleModuleSupport_on_trivializing_cover
 
 
 /-- The underlying abelian support of a constructible module sheaf is constructible.
-
-Source: Stacks Project, Tag 09YS(3), proof using Tags 03Q1 and 04FN.
-(blueprint: new-constructible-module-support-general).
-
-Proof: zero stalks are independent of the chosen geometric point. On each constructible
-stratum, choose the constant values of a trivializing etale cover. The support and its
-complement are unions of the open images of the cover members with respectively nonzero
-and zero value. Hence the support is clopen on each stratum. An embedded constructible
-stratum is compact, and a clopen subset of it is constructible in the spectral base:
-choose finitely many compact open basis members between that subset and an ambient open.
-Take the finite union over the strata. Empty strata and the zero sheaf are included.
-No finiteness of the coefficient ring is used. -/
+(Stacks, Tags 09YS (3), 03Q1 and 04FN) -/
 theorem constructibleModuleSupport_general {X : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] {Λ : Type (u + 1)}
     [CommRing Λ] (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

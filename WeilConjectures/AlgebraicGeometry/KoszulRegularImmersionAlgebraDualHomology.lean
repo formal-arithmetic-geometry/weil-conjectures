@@ -27,7 +27,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Cohomology of the algebra-valued Koszul dual
 
-Source: Stacks Project, Tags 0BQZ, 0AX3 and 0AVW.
+## References
+
+* Stacks Project, Tags 0BQZ, 0AX3 and 0AVW.
 -/
 
 @[expose] public section
@@ -66,19 +68,8 @@ private noncomputable def scalarRestriction_fullyFaithful
     exact (PresheafOfModules.restrictHomEquivOfIsLocallySurjective
       α.hom N.isSheaf).symm_apply_apply f.val
 
-/-- The scalar cohomology calculation, without an algebra action or a choice of right adjoint.
-
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5
-(blueprint: lem-sc-koszul-regular-immersion-algebra-dual-homology).
-
-Proof: Compute derived internal Hom using the same K-injective resolution in both
-the given derived universe and the standard derived universe. In the standard universe,
-`koszulRegularImmersion_derivedInternalHom` gives the Koszul identification. Apply homology:
-the pushed-forward locally-ranked exterior complex has zero differentials, so its
-cohomology is its degree term. The comparison with the common Hom complex then transports
-this calculation to the given derived universe. No derived category on Z is required in
-that given universe. Empty schemes, negative degrees and rank zero are included because
-the computation of zero-differential homology works in every degree. -/
+/-- The scalar cohomology calculation, without an algebra action or a choice of right
+adjoint (Stacks, Tag 0BQZ). -/
 private theorem koszulRegularImmersion_scalar_homology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -158,38 +149,7 @@ private theorem koszulRegularImmersion_scalar_homology
 
 /-- The intrinsic Koszul Ext identifications glue as direct-image-algebra module maps.
 This computes cohomology only; it does not identify the derived objects or split
-extensions between different cohomological degrees.
-
-Source: Stacks Project, Tag 0BQZ, proof of Lemma 48.15.5; Tag 0AX3 and Tag 0AVW
-(blueprint: lem-sc-koszul-regular-immersion-algebra-dual-homology).
-
-Proof:
-1. Use `exists_affine_derivedHom_evaluation_counit` for the closed immersion, which
-   is affine. Uniqueness of right adjoints transports its cohomology calculation
-   to H. Restriction of derived internal Hom to opens gives the local calculation.
-   Its algebra action on Hom(i_* OZ,J), for a K-injective resolution J of
-   OY, is precomposition by multiplication on i_* OZ.
-2. Near a point of Z use a finite free Koszul resolution of the quotient A/I.
-   Koszul-regularity makes its augmentation a quasi-isomorphism; bounded finite
-   free Hom computes derived sheaf Hom. The dual Koszul cohomology theorem kills
-   all degrees except the length n and identifies degree n with the determinant
-   of the dual conormal, as an A/I-module. Its intrinsic Ext comparison identifies
-   precomposition by multiplication with the ordinary A/I scalar action.
-3. The conormal of this quotient is I/I², and the regular generators form a basis
-   there. After passing to a stalk on Z its finrank is n. Thus hr gives r(z)=n.
-   Restrict to the clopen rank-n locus. Affine module correspondence identifies
-   the determinant module with the exterior sheaf of the dual of the recorded
-   tensor pullback of the ideal sheaf.
-4. The intrinsic Ext comparison is independent of regular generators and commutes
-   with localization, by the change-of-generators and localization statements of
-   the dual-Koszul theorem. Hence the algebra-linear cohomology identifications
-   agree on chart intersections and glue. On the rank-n locus only degree n
-   survives, so the result in degree k is precisely the direct image of the
-   locallyRankedExteriorTerm in degree k. Negative degrees are zero.
-5. Off the closed image of Z the algebra sheaf is zero, and so are all its modules.
-   This proves the comparison on all of Y. If Z is empty both sides are zero;
-   if the length is zero the calculation is Hom(A,A)=A in degree zero.
-No lifting of a cohomology map to a derived morphism is asserted here. -/
+extensions between different cohomological degrees. -/
 theorem koszulRegularImmersion_algebraDual_homology {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsNoetherian Y] [IsClosedImmersion i]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

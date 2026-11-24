@@ -10,9 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.ProfiniteTestObjectFunctor
 
 /-!
 # Pullback from the pro-étale point
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-def-sfb-pullback-from-point/_section.md (blueprint: sk-def-sfb-pullback-from-point).
 -/
 
 @[expose] public section
@@ -25,10 +22,6 @@ open Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The inverse image from the pro-étale point to a scheme.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-def-sfb-pullback-from-point/_section.md, parts 2--4
-  (blueprint: sk-def-sfb-pullback-from-point).
 -/
 noncomputable abbrev sfbPullbackFromPoint (X : Scheme.{u}) :
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⥤
@@ -36,10 +29,6 @@ noncomputable abbrev sfbPullbackFromPoint (X : Scheme.{u}) :
   upperStarFromPoint X
 
 /-- The direct image corresponding to the inverse image from the point.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-def-sfb-pullback-from-point/_section.md, parts 3--4
-  (blueprint: sk-def-sfb-pullback-from-point).
 -/
 noncomputable abbrev sfbPullbackFromPointRightAdjoint (X : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology X) Ab.{u + 1} ⥤

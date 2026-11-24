@@ -9,10 +9,11 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryPullCompa
 import WeilConjectures.AlgebraicGeometry.SemilinearModuleAdjunction
 
 /-! A decomposition of the ordinary finite pullback comparison.
-Source: Stacks Project, Tags 06YY and 099L.
-(auxiliary; not a blueprint node).
-The existence and insertion-normalization part is isolated so that it can be
-proved independently from the uniqueness argument. -/
+
+## References
+
+* Stacks Project, Tags 06YY and 099L
+-/
 @[expose] public noncomputable section
 universe u
 set_option synthInstance.maxSize 2048
@@ -221,11 +222,7 @@ private theorem finiteInverseScalar_exists {R S : Sheaf J CommRingCat.{u}} (a : 
   exact h.symm.trans (finiteInsertion_iso_cancel
     ((F.algebra R).moduleUnderlying.app ((res a).obj ((change a).obj M))) hn)
 
-/-- Existence of the normalized ordinary finite pullback comparison.
-Source: Stacks Project, Tags 06YY and 099L.
-(auxiliary; not a blueprint node).
-The map is obtained by transporting the finite quotient tensor comparison through
-inverse image; pure tensors with coefficient one give the displayed normalization. -/
+/-- Existence of the normalized ordinary finite pullback comparison (Stacks, Tags 06YY and 099L). -/
 theorem ordinaryFinitePull_exists
     (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃ e : pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅

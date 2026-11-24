@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedFunctorComparisons
 
 /-! # Projection mate transport along scheme isomorphisms
 
-Source: Stacks Project, Tag 08EU, affine-local reduction, expanded along scheme isomorphisms.
-(blueprint: lem-pc-projection-mate-scheme-iso-transport).
+## References
+
+* Stacks Project, Tag 08EU.
 -/
 
 @[expose] public section
@@ -308,46 +309,7 @@ end ProjectionMateTransport
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A supplied projection mate transports across a commuting square of scheme
-isomorphisms, without any invertibility assumption on that mate.
-Source: Stacks Project, perfect.tex, Tag 08EU, first sentence of its proof;
-the scheme-isomorphism comparison part of the parent transport argument.
-(blueprint: lem-pc-projection-mate-scheme-iso-transport).
-
-Proof: Use exists_scheme_iso_derived_equivalence for eY and eX to obtain
-exact isomorphism pushforward equivalences a and b with their localization
-comparisons. The separate geometric theorem schemeIso_derived_functor_comparisons
-supplies binary tensor comparisons τa and τb and natural isomorphisms
-α : a followed by Lf* = Lg* followed by b and
-β : Rg* followed by a = b followed by Rf*.
-
-Construct q by transporting p's Hom equivalence through the fully faithful
-functors a and b: the image under a of q.homEquiv(k) is
-p.homEquiv(α.hom followed by b(k)) followed by β.inv.
-Naturality of α and β proves both naturality laws of this Hom equivalence,
-so Adjunction.mkOfHomEquiv gives q and its triangle identities. Its counit
-satisfies α.hom followed by b(q.counit) = Lf*(β.hom) followed by p.counit.
-Construct s after composing with b as the five natural isomorphisms
-α.inv, Lf*(τa), t, α tensor α, and τb.inv. Full faithfulness of b lifts
-this composite and its inverse to the required natural isomorphism s.
-
-For arbitrary N and E on the primed categories, construct the source comparison
-c = τa followed by identity tensor β, and the target comparison
-d = β followed by Rf*(τb) followed by Rf*(α.inv tensor identity).
-Expand q.homEquiv using its constructed formula and expand b(s) using its
-five factors. Cancel α.hom with α.inv and β.inv with β.hom. Naturality of τb
-moves b(identity tensor q.counit) past τb. The transported counit formula
-then replaces α.hom followed by b(q.counit). Tensor composition and naturality
-of t give c.hom followed by the p,t mate = a(the q,s mate) followed by d.hom.
-Arrow.isoMk packages this square into an arrow isomorphism.
-
-Take N = a.inverse(M) and E = b.inverse(L), with quasi-coherent cohomology
-proved by scheme_iso_derived_inverse_preserves_qcoh. The counits of a and b
-identify a(N) with M and b(E) with L. The p,t mate is natural in both
-coefficients, by naturality of t, p.counit and p.homEquiv. Applying this
-naturality to the two equivalence counits gives a second arrow isomorphism.
-Compose the two arrow isomorphisms. The categorical calculation uses only
-binary tensor naturality, not coherence of units, boundedness, nonemptiness,
-or invertibility of either projection mate. -/
+isomorphisms, without any invertibility assumption on that mate (Stacks, Tag 08EU). -/
 theorem projectionMate_schemeIso_transport
     (X Y X' Y' : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

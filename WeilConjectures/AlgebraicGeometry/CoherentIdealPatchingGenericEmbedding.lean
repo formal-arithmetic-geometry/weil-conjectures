@@ -20,9 +20,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 /-!
 # A generic embedding of an ideal multiple into an ideal sum
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL, third proof paragraph
-and final ideal intersection argument.
-(blueprint: lem-weil-pbc-coherent-ideal-patching-generic-embedding).
+Stacks Project, Tag 01YL.
 -/
 
 @[expose] public section
@@ -36,32 +34,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The geometric preparation for ideal patching, independent of any property of modules.
 The positive sum of an ideal pushforward is either zero, or contains an ideal multiple
 of the given coherent module, with a bijective generic stalk map.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 01YL
-(`coherent.tex`, `lemma-property-irreducible-higher-rank-cohomological`), third proof
-paragraph and the final ideal intersection argument.
-(blueprint: lem-weil-pbc-coherent-ideal-patching-generic-embedding).
-
-Proof: The source of a finite closed immersion into a Noetherian scheme is Noetherian.
-Every quasi-coherent ideal on it is coherent, and its finite pushforward is coherent.
-Finite sums preserve coherence and vanish outside the closed image. For the zero ideal
-choose rank one; its pushforward sum is zero.
-For a nonzero ideal I, identify the image of the generic point of Z with ξ using sobriety
-and the equality of closures. Apply the generic-point ideal inclusion to G to get a
-nonzero ideal A and a mono β from a finite sum of its pushforward into G, bijective near ξ.
-The generic stalk of G is nonzero because its support is the closed image, so the rank r
-is positive. Put B = I ∩ A. On an integral scheme B is nonzero: on a nonempty affine open,
-the product of nonzero local ideal sections is nonzero and lies in their intersection.
-The two inclusions of B into A and I are bijective at the generic stalk. Thus the sum K
-of its pushforward embeds both into G and into the sum M of the pushforward of I;
-both maps are generically bijective. The coherent cokernel Q of K → G has zero ξ-stalk.
-Its annihilator J is a quasi-coherent ideal and has unit ξ-stalk: Q vanishes on a
-neighborhood of ξ since its support is closed. As J kills Q, multiplication JG → G
-factors uniquely through K. Compose this factorization with K → M to obtain τ.
-The product inclusion JG → G is mono, hence the factorization and τ are mono.
-At ξ, J has unit stalk, so JG → G is bijective; both maps out of K are bijective too.
-Consequently τ is bijective at ξ. This constructs only the geometric embedding;
-it neither selects a subobject with an arbitrary property nor constructs its cokernel. -/
+(Stacks, Tag 01YL). -/
 theorem coherent_ideal_patching_generic_embedding
     (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X]
     (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]

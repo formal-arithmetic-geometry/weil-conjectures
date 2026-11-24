@@ -16,7 +16,9 @@ import all WeilConjectures.CategoryTheory.Sites.GeometricInverseImageExact
 
 /-! # Module-level normalization of immersion and slice restriction
 
-Source: Stacks Tags 00YY, 03D2, 03DJ and 099L.
+## References
+
+* Stacks Project, Tags 00YY, 03D2, 03DJ and 099L
 -/
 
 @[expose] public noncomputable section
@@ -300,9 +302,8 @@ private def modelEquivalence (X : Scheme.{u})
 
 end SfbImmersionNormalization
 
-/-- Transport modules to the small model and normalize their completed scalars.
-Source: Stacks Tags 00YY and 099L
-(auxiliary; not a blueprint node). -/
+/-- Transport modules to the small model and normalize their completed scalars
+(Stacks, Tags 00YY and 099L). -/
 def sfbImmersionNormalizeModules (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     proEtaleRingModules X (adicLisseCompletedRing X I) ⥤
@@ -310,17 +311,14 @@ def sfbImmersionNormalizeModules (X : Scheme.{u})
   proEtaleModuleToModel ((adicLisseForget X).obj (adicLisseCompletedRing X I)) ⋙
     ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv
 
-/-- The specified algebraic pullback of modules with completed coefficients.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- The specified algebraic pullback of modules with completed coefficients
+(Stacks, Tags 03D2 and 099L). -/
 def sfbImmersionCompletedPullModules {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :=
   ConstantCompletion.pull (sfbImmersionAlgebra i)
     (ConstantCompletion.completedMap (sfbImmersionAlgebra i) A I)
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionNormalizeModules_additive (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionNormalizeModules X I).Additive := by
@@ -329,9 +327,8 @@ instance sfbImmersionNormalizeModules_additive (X : Scheme.{u})
   exact inferInstanceAs
     (F ⋙ ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv).Additive
 
-/-- Finite-limit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Finite-limit preservation of the specified ordinary module functor (Stacks, Tags 03D2 and 099L).
+-/
 instance sfbImmersionNormalizeModules_limits (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteLimits (sfbImmersionNormalizeModules X I) := by
@@ -344,9 +341,8 @@ instance sfbImmersionNormalizeModules_limits (X : Scheme.{u})
   exact inferInstanceAs (PreservesFiniteLimits
     (F ⋙ ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv))
 
-/-- Finite-colimit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Finite-colimit preservation of the specified ordinary module functor
+(Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionNormalizeModules_colimits (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteColimits (sfbImmersionNormalizeModules X I) := by
@@ -359,18 +355,15 @@ instance sfbImmersionNormalizeModules_colimits (X : Scheme.{u})
   exact inferInstanceAs (PreservesFiniteColimits
     (F ⋙ ConstantCompletion.res (SfbCompletionNormalization.coefficients X I).inv))
 
-/-- Additivity of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Additivity of the specified ordinary module functor (Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionCompletedPullModules_additive {X S : Scheme.{u}}
     (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     (sfbImmersionCompletedPullModules i I).Additive := by
   unfold sfbImmersionCompletedPullModules
   infer_instance
 
-/-- Finite-limit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Finite-limit preservation of the specified ordinary module functor (Stacks, Tags 03D2 and 099L).
+-/
 instance sfbImmersionCompletedPullModules_limits {X S : Scheme.{u}}
     (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteLimits (sfbImmersionCompletedPullModules i I) := by
@@ -378,9 +371,8 @@ instance sfbImmersionCompletedPullModules_limits {X S : Scheme.{u}}
   have := SfbAdicRestriction.completedMap_isIso (sfbImmersionAlgebra i) A I
   exact ConstantCompletion.pull_finiteLimits_of_isIso (sfbImmersionAlgebra i) _
 
-/-- Finite-colimit preservation of the specified ordinary module functor.
-Source: Stacks Tags 03D2 and 099L
-(auxiliary; not a blueprint node). -/
+/-- Finite-colimit preservation of the specified ordinary module functor
+(Stacks, Tags 03D2 and 099L). -/
 instance sfbImmersionCompletedPullModules_colimits {X S : Scheme.{u}}
     (i : S ⟶ X) [IsImmersion i] {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
     PreservesFiniteColimits (sfbImmersionCompletedPullModules i I) := by
@@ -394,26 +386,8 @@ instance sfbImmersionCompletedPullModules_colimits {X S : Scheme.{u}}
 
 attribute [local instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-/-- The comparison of the two module inverse images, before passing to complexes.
-
-Source: Stacks Tags 00YY, 03D2, 03DJ and 099L; Bhatt--Scholze Lemma 6.5.8
-(auxiliary; not a blueprint node).
-
-Proof: transport the actual slice to the AsSmall slice using Over.postEquiv.
-The underlying-set identifications of the algebraic inverse image transport all
-ring operations and module actions, so they identify its module inverse image
-with the transported actual inverse image. Equivalently, both are left adjoint
-to the same sectionwise direct image with restricted scalars. Compare their
-units on generalized sections; uniqueness of left adjoints gives the natural
-module comparison. The completed ring comparison is the limit of the constant
-finite quotient comparisons: immersion inverse image preserves countable limits.
-It is invertible and commutes with every finite projection. Restrict that ring
-isomorphism to the slice and compose its scalar equivalence with the slice-site
-module equivalence to obtain e. The scalar balancing maps then give the stated
-natural isomorphism. All maps preserve addition, so e.functor is additive.
-This is an assertion only about modules and their linear maps; no derived
-category, complex, boundedness or perfection appears. Empty slices and the
-zero ring use the same site equivalence and tensor unit identities. -/
+/-- The comparison of the two module inverse images, before passing to complexes
+(Stacks, Tags 00YY, 03D2, 03DJ and 099L; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_moduleNormalization
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] (I : Ideal A) (U : S.ProEt) :

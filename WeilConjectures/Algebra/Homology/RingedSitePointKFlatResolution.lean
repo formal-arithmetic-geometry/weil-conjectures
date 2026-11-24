@@ -17,7 +17,13 @@ import WeilConjectures.Algebra.Homology.RingedSitePointFlat
 import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
-/-! # K-flat resolutions with K-flat stalks -/
+/-! # K-flat resolutions with K-flat stalks
+
+## References
+
+* [Stacks Project, Cohomology on Sites, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
+  (first paragraph, using Tags 077J, 06YQ and 06YR)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,18 +33,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory.RingedSitePoint
 
-/-- There is a K-flat resolution whose stalk at a specified point is K-flat.
-Source: Stacks Project, Cohomology on Sites, Tag 0G7E, first paragraph, using
-Tags 077J, 06YQ and 06YR.
-(auxiliary; not a blueprint node)
-
-Proof: use the reduced flat-resolution functor to present a resolution as a
-countable filtered colimit of bounded-above flat complexes. The module stalk
-functor preserves colimits by its module adjunction. It preserves flat terms by
-geometric inverse-image flatness. The image of each bounded-above complex is
-therefore K-flat; exactness of filtered colimits of modules gives K-flatness of
-the image of their colimit. The augmentation of the reduced resolution is a
-quasi-isomorphism, and its source is K-flat already on the original site. -/
+/-- There is a K-flat resolution whose stalk at a specified point is K-flat. -/
 theorem exists_kFlat_resolution
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}

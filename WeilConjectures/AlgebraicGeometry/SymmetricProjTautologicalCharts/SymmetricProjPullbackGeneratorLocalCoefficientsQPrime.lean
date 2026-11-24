@@ -13,10 +13,12 @@ import all WeilConjectures.AlgebraicGeometry.ProjectiveBundleQuotientGeometry.Li
 
 /-! Local `q'` coefficient frames for the normalized pullback generator relation.
 
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
 The statement isolates the second (normalized) quotient formula after a local
 frame and coefficient formula for `q` have been chosen.
-(blueprint: lem-trf-symmetric-proj-pullback-generator-local-coefficients-qprime)
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01N2, 01NQ, 01NR, 01OB
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -196,28 +198,9 @@ private theorem coefficients_for_definitions {S : Scheme.{u}} (E : S.Modules)
 
 -- Keep the existing public binders, including the point-membership witness.
 set_option linter.unusedVariables false in
-/-- The matching local frame for the normalized second quotient map.
-
-The open, the first frame, and its coefficient map are fixed as input. The
-conclusion is only the existence of the second frame and its formula, hence is
-strictly smaller than the common-coefficient theorem.
-
-Source: Stacks Project, Constructions, Tags 01N2, 01NQ, 01NR and 01OB.
-Proof: on standard degree-one charts the normalization of both quotients identifies
-images of generators with their homogeneous fractions. The map `b` sends these
-fractions to the fractions for the pulled generators, by `hb`. Hence the two
-normalized quotients have the same kernel on the pulled generators. Such generators
-span the pullback of `E` locally, because `U` is affine and `E` is quasi-coherent.
-The first quotient is surjective, so the equation `q(t) = c(t) • a` implies that
-`a` generates its invertible target at every stalk. Thus `a` is a frame on `Z`.
-Expressing the second normalized quotient in that frame yields a section `b'`;
-the common-kernel equation proves `q'(t) = c(t) • b'` on a standard-open cover.
-The local sections `b'` agree on intersections by the generating property of the
-coefficients `c(t)`, and glue to the required section on `Z`. The zero-ring and
-empty-open cases satisfy the same formulas. This argument requires the specified
-normalized `q'`; it does not apply to an arbitrary morphism.
-(blueprint: lem-trf-symmetric-proj-pullback-generator-local-coefficients-qprime)
--/
+/-- The matching local frame for the normalized second quotient map: given an open `Z`, a
+section `a` and coefficients `c` with `q(t) = c(t) • a`, there is a section `b'` with
+`q'(t) = c(t) • b'`. -/
 theorem normalized_pullback_generator_local_coefficients_qprime
     {X S : Scheme.{u}} (g : X ⟶ S) (E : S.Modules) [E.IsQuasicoherent]
     [((Scheme.Modules.tensorPullback g).obj E).IsQuasicoherent]

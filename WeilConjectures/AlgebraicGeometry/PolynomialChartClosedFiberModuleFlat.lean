@@ -13,8 +13,9 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-! # The closed-fibre module of a polynomial chart
 
-Source: Stacks Project, Tag 00RH, the displayed map of localized closed-fibre rings.
-(blueprint: lem-sbc-polynomial-chart-closed-fiber-module-flat)
+## References
+
+* Stacks Project, Tags 00RH and 00R7.
 -/
 
 @[expose] public section
@@ -255,23 +256,7 @@ private theorem maximalIdeal_map_stalkMap_congr {E T : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Flatness of the canonical polynomial fibre-stalk map gives exactly the closed-fibre
-module flatness required by the local ring criterion.
-
-Proof: let y = f(U.ι x) = p(e x), where p is the affine-space projection. The stalk of the
-fibre of p at the image of x is canonically S / m_R S, where R = O_T,y and
-S = O_(A^n_T),e(x). The stalk of the fibre of U over y is B / m_R B, with B = O_U,x.
-To identify the kernel, the fibre projection factors through Spec kappa(y), so it kills
-m_R. Conversely Spec(B / m_R B) maps into the fibre by the pullback universal property;
-the induced map on stalks is a left inverse to the quotient map. Fibre inclusions are
-immersions, so their stalk maps are surjective and these kernel computations give
-isomorphisms with the quotients.
-The maps commute with the quotient maps because both are induced by the chart e.
-The open-fibre inclusion identifies the latter stalk with the fibre stalk used by
-PolynomialChart.stalkMap. Transport its assumed flatness across these two ring isomorphisms.
-Finally the canonical (S / m_R S)-linear isomorphism
-(S / m_R S) tensor_S B = B / m_R B identifies this flat module with the one displayed here.
-Source: Stacks Project, Tag 00RH, displayed closed-fibre map and application of Tag 00R7.
-(blueprint: lem-sbc-polynomial-chart-closed-fiber-module-flat) -/
+module flatness required by the local ring criterion (Stacks, Tags 00RH and 00R7). -/
 theorem polynomial_chart_closedFiber_module_flat
     {X T : Scheme.{u}} (f : X ⟶ T) (U : X.Opens) (n : ℕ)
     (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin n)) T)

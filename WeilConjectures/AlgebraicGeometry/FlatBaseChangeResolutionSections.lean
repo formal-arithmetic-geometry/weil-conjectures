@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.FlatBaseChangeRestrictedLiftHomology
 
 /-! # FlatBaseChangeResolutionSections
 
-Source: Stacks Project, Cohomology, Tags 02N7, 01FB and 01E4.
+## References
+
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 01FB](https://stacks.math.columbia.edu/tag/01FB)
+* [Stacks Project, Tag 01E4](https://stacks.math.columbia.edu/tag/01E4)
 -/
 
 @[expose] public section
@@ -27,25 +31,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] AlgebraicGeometry.Scheme.Modules.enoughInjectives
 
 /-- The section formula for one augmented resolution lift.
-Source: Stacks, Cohomology, Tags 02N7, 01FB, 01E4, 01EZ.
-(blueprint: lem-weil-pbc-flat-base-change-resolution-sections).
-
-Proof: Restrict t to U = f⁻¹V and use the augmentation-preserving comparisons
- in D to obtain a map of the source resolution into the direct image of the
- target resolution on W = g'⁻¹U. D.unit_square gives its augmentation equation
- with D.psi. Resolve that pushed complex by lambda into injectives. In the
- recorded construction of moduleCohomologyFMap choose lambda times the restricted
- lift as the horizontal map. Sections of lambda induce invertible homology maps
- (01EZ), so H(lambda) inverse times H(lambda t) equals H(t). Independence of the
- cohomology-map choices (`moduleCohomologyFMap_independent`) identifies this
- with the recorded map. Naturality of
- theta with respect to maps of section complexes transports this equation to
- the two resolutionSectionClass maps. Finally q is the adjoint of c, namely
- unit followed by g_*c. Exactness of g^* identifies its homology with pullback
- of homology; on each locally represented cocycle the adjoint of H(c) therefore
- sends its class to the class of q(s). Sheafification gives the same equality
- of sections. The isoRightDerivedObj maps in sourceClass, targetClass and beta
- transport that equality to precisely the displayed formula. -/
+(Stacks, Tags 02N7, 01FB, 01E4 and 01EZ.) -/
 theorem flatBaseChangeResolutionBeta_sections {X S S' : Scheme.{uBC}} (f : X ⟶ S) (g : S' ⟶ S)
     [Flat g] [Flat (pullback.snd g f)] {F : X.Modules}
     (I : InjectiveResolution F)

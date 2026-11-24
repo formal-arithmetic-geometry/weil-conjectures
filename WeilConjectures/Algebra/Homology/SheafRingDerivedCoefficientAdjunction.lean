@@ -15,15 +15,20 @@ import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
 /-!
 # The normalized derived coefficient adjunction on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A6; Derived Categories,
-Tags 0FND and 09T5; Modules on Sites, Tags 03D7 and 03DA
-(auxiliary; not a blueprint node).
 
 The left derived pair is the pair supplied by derived change of rings. We quantify over
 its presentation rather than choosing a second derived functor. The localization used below
 is `Qh`, so the comparison is literally its universal counit. A complex is inserted by the
 homotopy quotient. The ordinary adjunction is fixed by its sectionwise tensor formula;
 its termwise adjunction therefore names exactly the maps in the normalization clauses.
+
+## References
+
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 03DA
+* Stacks Project, Tag 07A6
+* Stacks Project, Tag 09T5
+* Stacks Project, Tag 0FND
 -/
 
 @[expose] public section
@@ -106,35 +111,8 @@ private theorem coefficientDerived_computes
 `x ↦ x ⊗ 1` and `x ⊗ a ↦ a g(x)`. The tensor convention in the existing change-of-rings
 construction writes the scalar first, so these are `1 ⊗ x` and `a ⊗ x` in Lean.
 
-`E`, `h`, and the map equation specify precisely the ordinary change-of-rings functor
-of `derivedChangeOfRingsIndependentCoefficients`; they impose no flatness assumption.
-`LF` and `ε` specify its universal left derived pair, with the same homotopy localization.
-The isomorphism assertion supplies `c_P`; the unit equation is written after applying
-restriction to `c_P`. The inverse Hom equivalence is the transpose clause. The last
-identity is the counit formula whenever the localized `g` is invertible, equivalently
-when `g` is a quasi-isomorphism. Quantifying over homotopy maps includes every chain map.
-
-Source: Stacks Project, Tags 07A6, 0FND, 09T5, 03D7 and 03DA
-(auxiliary; not a blueprint node).
-
-Proof:
-1. The ringed-topos module adjunction on the identity topos gives the ordinary adjunction.
-Its balanced sectionwise formulas descend through module sheafification; its unit sends
-`x` to `1 ⊗ x`, and its inverse Hom map sends `a ⊗ x` to `a g(x)`.
-2. Restriction preserves underlying abelian sheaves. Kernels are sectionwise and cokernels
-are sheafified sectionwise cokernels, so it preserves finite limits and finite colimits.
-3. Exact-functor derived factorization identifies its derived functor with termwise
-restriction. Derived change of rings and flat-term K-flat resolutions supply the universal
-left derived pair and its invertible comparison on K-flat representatives.
-4. Apply the derived-adjoint-functors theorem to the ordinary pair, obtaining the natural
-Hom bijections for these derived functors.
-5. In the pre-derived fraction formula use identity denominators and the ordinary unit at
-`P`. The right comparison is the exact-functor factorization and the left comparison is
-`ε_P`. The termwise adjunct is the identity, giving the displayed unit normalization.
-6. Use the same fraction formula with `g` to get the transpose identity. Naturality gives
-`LF(q)` followed by the derived counit equal to `ε_P` followed by the localized termwise
-transpose. If `g` is a quasi-isomorphism, invert `LF(q)` to obtain the counit formula.
-No boundedness or flatness of the ring map occurs in these steps. -/
+`E`, `h`, and the map equation specify the ordinary change-of-rings functor, with no flatness
+assumption; `LF` and `ε` specify its universal left derived pair. -/
 theorem sheafRingDerivedCoefficientAdjunction (φ : O ⟶ O')
     [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O))]
     [HasDerivedCategory.{w} (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J O'))] :

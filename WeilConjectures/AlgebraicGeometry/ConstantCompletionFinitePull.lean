@@ -34,8 +34,10 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 The derived finite pullback comparison, pointwise tower pullback and composition predicates.
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section
@@ -72,17 +74,16 @@ variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 attribute [local irreducible] derivedPull pull change
 
-/-- The canonical ordinary finite pullback comparison, not an arbitrary isomorphism.
-Source: Stacks 06YY, 099L (auxiliary; not a blueprint node). -/
+/-- The canonical ordinary finite pullback comparison, not an arbitrary isomorphism
+(Stacks, Tags 06YY and 099L). -/
 def ordinaryFinitePull (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     pull F (constantMap F A) ⋙ change (quotient J' A I n) ≅
       change (quotient J A I n) ⋙ pull F (constantMap F (A ⧸ I ^ (n + 1))) :=
   (ordinaryFinitePull_existsUnique F V adj A I n).exists.choose
 
 /-- The representative square for the derived finite-reduction comparison.
-The ordinary tensor comparison is lifted with abstract functors before specialization.
-Source: Stacks 06YY, 099L
-(auxiliary; not a blueprint node). -/
+The ordinary tensor comparison is lifted with abstract functors before specialization
+(Stacks, Tags 06YY and 099L). -/
 def FinitePullComparisonFormula
     {M₀ M₁ M₂ M₃ D₀ D₁ D₂ D₃ : Type*}
     [Category M₀] [Category M₁] [Category M₂] [Category M₃]
@@ -145,12 +146,7 @@ attribute [local irreducible] dres
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived constant pullback and finite reduction commute by the prescribed ordinary
-comparison on every flat-term K-flat representative. Source: Stacks 06YY, 099L
-(auxiliary; not a blueprint node).
-Proof: ringed pullback and scalar extension preserve K-flat complexes with flat terms.
-Consequently the two iterated derived functors are computed on the same representative.
-Use ordinaryFinitePull there and descend through their universal computation counits.
-The displayed square determines the resulting natural isomorphism uniquely. -/
+comparison on every flat-term K-flat representative (Stacks, Tags 06YY and 099L). -/
 theorem finitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : (derivedPull F V adj (constantMap F A)).functor ⋙ extend (quotient J' A I n) ≅
         extend (quotient J A I n) ⋙
@@ -200,8 +196,7 @@ theorem finitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ
 
 end
 
-/-- The specified derived finite constant pullback comparison.
-Source: Stacks 06YY, 099L (auxiliary; not a blueprint node). -/
+/-- The specified derived finite constant pullback comparison (Stacks, Tags 06YY and 099L). -/
 def finitePull (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ) :
     (derivedPull F V adj (constantMap F A)).functor ⋙ extend (quotient J' A I n) ≅
       extend (quotient J A I n) ⋙

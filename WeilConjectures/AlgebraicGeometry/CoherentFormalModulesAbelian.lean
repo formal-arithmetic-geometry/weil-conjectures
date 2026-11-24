@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesCoimageImage
 
 /-! # Coherent formal modules form an abelian category
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087X, part (1), and the description
-of cokernels in its proof (blueprint: lem-weil-pbc-coherent-formal-modules-abelian).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -30,23 +29,7 @@ namespace AlgebraicGeometry
 
 /-- The category Coh(X,I) is abelian, and every morphism has a cokernel cofork whose
 image under evaluation at each positive level is a cokernel cofork of that component.
-Thus its cokernel is the inverse system of termwise cokernels, with transitions induced
-by the universal property. Here `op n` denotes positive level `n + 1`.
-
-Source: Stacks, Lemma 087X, part (1), and its proof
-(blueprint: lem-weil-pbc-coherent-formal-modules-abelian).
-
-Proof: Closure under ambient finite products supplies finite products in the full
-subcategory. Extract the stabilized kernel and its unique-factorization property
-from `coherentFormalModule_kernel`, and build its limiting fork. Closure under
-ambient cokernels supplies cokernels and makes the inclusion preserve them.
-The comparison lemma and Mathlib's coimage-image criterion give abelianness.
-For the second clause take the canonical cokernel cofork. The inclusion followed
-by any evaluation functor preserves its colimit, so each evaluated cofork is
-colimiting. The three closure/comparison lemmas record the geometric work of
-Steps 2, 3, and 8--9 of the original plan; the existing kernel theorem supplies
-Steps 4--7. No termwise-kernel assertion is used.
--/
+Here `op n` denotes positive level `n + 1` (Stacks, Tag 087X). -/
 theorem coherentFormalModule_abelian (X : Scheme.{u}) [IsNoetherian X]
     (I : X.IdealSheafData) :
     Nonempty (Abelian (CoherentFormalModule X I)) ∧

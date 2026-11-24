@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarTensorD
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 
 /-! The constant coefficient model respects canonical pullback.
-Source: Zheng Construction 2.26; Stacks 07A4 and 07A6
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+
+## References
+
+* Zheng, Construction 2.26; Stacks Project, Tags 07A4 and 07A6.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,9 +31,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 /-- A square of exact functors `c₁ ⋙ P ≅ c₂`, together with a square of objects relating
 `P X₁ ≅ X₂` to `c₁ N` and `c₂ N`, gives the corresponding square of degree-zero objects in
-the derived categories, for any derived functor `L ≅ D(P)`.
-Source: Stacks Project, Tag 05QI (exact functors on derived categories)
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+the derived categories, for any derived functor `L ≅ D(P)` (Stacks, Tag 05QI). -/
 theorem mapDerivedCategorySingleFunctor_constant_pullback_square
     (c₁ : C ⥤ D₁) (c₂ : C ⥤ D₂) (P : D₁ ⥤ D₂)
     [c₁.Additive] [PreservesFiniteLimits c₁] [PreservesFiniteColimits c₁]
@@ -83,9 +84,8 @@ variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
   [J.PreservesSheafification U] [J.HasSheafCompose U]
 
 /-- The unit of the constant sheaf adjunction is compatible with the comparison
-`constantCommuteCompose` between constant sheaves and postcomposition with `U`.
-Source: Stacks Project, Tag 093W (constant sheaves)
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+`constantCommuteCompose` between constant sheaves and postcomposition with `U`
+(Stacks, Tag 093W). -/
 theorem map_constantSheafAdj_unit_comp_constantCommuteCompose {T : C} (hT : IsTerminal T)
     (X : D) :
     U.map ((constantSheafAdj J D hT).unit.app X) ≫
@@ -114,9 +114,7 @@ theorem map_constantSheafAdj_unit_comp_constantCommuteCompose {T : C} (hT : IsTe
 
 open MonoidalCategory Functor.LaxMonoidal in
 /-- The unit of the lax monoidal functor `sheafToPresheaf`, evaluated at a terminal object,
-is the unit of the constant sheaf adjunction at the monoidal unit.
-Source: Stacks Project, Tag 093W (constant sheaves)
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+is the unit of the constant sheaf adjunction at the monoidal unit (Stacks, Tag 093W). -/
 theorem Sheaf.ε_sheafToPresheaf_app_eq_constantSheafAdj_unit {C : Type*} [Category* C]
     {J : GrothendieckTopology C} {A' : Type*} [Category* A'] [MonoidalCategory A']
     [(J.W (A := A')).IsMonoidal] [HasWeakSheafify J A'] {T : C} (hT : IsTerminal T) :
@@ -137,9 +135,7 @@ end CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- The pullback/restriction-of-scalars comparison, transposed along `p^* ⊣ p_*`, is
-restriction of scalars of the unit of `p^* ⊣ p_*`.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+restriction of scalars of the unit of `p^* ⊣ p_*` (Stacks, Tag 03EK). -/
 theorem upperStarRestrictScalarsIsoSheaf_hom_app_transpose
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)
     (X : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) :
@@ -175,9 +171,7 @@ theorem upperStarRestrictScalarsIsoSheaf_hom_app_transpose
 
 /-- The unit of the lax monoidal direct image `p_*`, on global sections, sends the unit
 section to the unit section: in terms of the constant sheaf adjunctions at the terminal
-objects of the two small étale sites.
-Source: Stacks Project, Tag 03PW
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+objects of the two small étale sites (Stacks, Tag 03PW). -/
 theorem constantSheafAdj_unit_comp_lowerStar_ε {B : Type (u + 1)} [CommRing B]
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
     (constantSheafAdj Y.smallEtaleTopology (ModuleCat.{u + 1} B)
@@ -200,9 +194,8 @@ theorem constantSheafAdj_unit_comp_lowerStar_ε {B : Type (u + 1)} [CommRing B]
 
 
 open MonoidalCategory in
-/-- The adjoint transpose of the restricted-coefficient pullback square along `p^* ⊣ p_*`.
-Source: Zheng Construction 2.26; Stacks 07A4
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+/-- The adjoint transpose of the restricted-coefficient pullback square along `p^* ⊣ p_*`
+(Zheng, Construction 2.26; Stacks, Tag 07A4). -/
 theorem upperStarLowerStarAdjunction_unit_comp_restrictScalars
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
@@ -248,10 +241,8 @@ theorem upperStarLowerStarAdjunction_unit_comp_restrictScalars
 
 /-- The constant-sheaf pullback comparison on the restricted coefficient module `B` is the
 composite of the constant-sheaf/restriction comparisons, the pullback/restriction comparison,
-and the monoidal unit comparison of `p^*`. Both sides have the sectionwise identity as their
-transpose along the constant sheaf and pullback adjunctions.
-Source: Zheng Construction 2.26; Stacks 07A4 and 07A6
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback). -/
+and the monoidal unit comparison of `p^*`
+(Zheng, Construction 2.26; Stacks, Tags 07A4 and 07A6). -/
 theorem constantSheafCompUpperStarIso_hom_app_restrictScalars
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {Z Y : Scheme.{u}} (p : Z ⟶ Y) :
@@ -297,21 +288,8 @@ theorem constantSheafCompUpperStarIso_hom_app_restrictScalars
   rfl
 
 
-/-- The two canonical ways to pull back the restricted coefficient module agree.
-Source: Zheng Construction 2.26; Stacks 07A4 and 07A6
-(blueprint: lem-sfb-ordinary-exceptional-scalar-coefficient-pullback).
-
-Proof: first work with sheaves. The restriction/pullback isomorphism is the unique
-comparison of the two composites left adjoint to direct image followed by coextension.
-The constant-sheaf comparison with restriction preserves the constant adjunction counit.
-Apply the two composite adjunction Hom equivalences to the claimed square on the free
-rank-one B-module. Both transposes are the sectionwise identity, so injectivity gives
-the square. The monoidal unit comparison is its value on the free rank-one module:
-its transpose is the lax direct-image unit, hence the same sectionwise identity.
-Now apply the degree-zero single functor. Naturality of the exact derived/single
-comparison and the composition comparison identifies the resulting square with the
-one displayed here. Cancel the exact derived/single isomorphisms; this gives the
-claimed equality with the actual chosen comparisons, including their units. -/
+/-- The two canonical ways to pull back the restricted coefficient module agree
+(Zheng, Construction 2.26; Stacks, Tags 07A4 and 07A6). -/
 theorem ordinaryExceptional_scalarCoefficient_pullback
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) :

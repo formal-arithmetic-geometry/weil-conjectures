@@ -79,16 +79,7 @@ private lemma coefficient_transition_naturality_raw
     Category.id_comp, Functor.comp_obj, Functor.comp_map, Category.assoc] using
     coefficient_transition_naturality (S ⋙ L) A B R R' H t ht c f
 
-/-- Coefficient naturality of the canonical target transition.
-Source: Stacks Project, Tag 0F07, naturality in the closed–open argument.
-(blueprint: lem-sbc-target-transition-coefficient-naturality).
-
-Proof: The derived transition is formed from the adjunction unit, pullback comparison,
-and adjunction counit, each natural in its coefficient complex. The pullback comparisons
-and the comparison with a single complex are natural transformations. Compose their
-naturality squares and apply derived pushforward followed by degree-q homology. This
-argument applies to arbitrary coefficient maps and every integer degree.
--/
+/-- Coefficient naturality of the canonical target transition (Stacks, Tag 0F07). -/
 lemma target_transition_naturality
     {Y Y' : Scheme.{u}} (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     {T' : Scheme.{u}} (π : T' ⟶ T) (a : Y' ⟶ Y) (e' : Y' ⟶ T') (h' : Y' ⟶ X)

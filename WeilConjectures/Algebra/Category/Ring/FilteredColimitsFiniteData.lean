@@ -71,14 +71,10 @@ lemma aeval_comp_hom {R S : CommRingCat.{u}} (f : R ⟶ S) {σ : Type*} (y : σ 
     (P : MvPolynomial σ ℤ) : MvPolynomial.aeval (fun a ↦ f (y a)) P = f (MvPolynomial.aeval y P) :=
   (MvPolynomial.comp_aeval_apply (f := y) f.hom.toIntAlgHom P).symm
 
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Finite data and finite relations
-descend in a filtered colimit.
-
-Let `c` be a colimit of a filtered diagram `F` of commutative rings. Given finitely many
-elements `x : σ → c.pt` and finitely many equalities `P l (x) = Q l (x)` between ring
-expressions `P l, Q l : MvPolynomial σ ℤ` in them, there is a stage `j` and lifts
-`y : σ → F.obj j` of the `x` such that all the equalities hold for `y`, and after every
-transition `F.obj j ⟶ F.obj k`. -/
+/-- Finite data and finite relations descend in a filtered colimit of commutative rings: finitely
+many elements `x : σ → c.pt` satisfying finitely many equalities `P l (x) = Q l (x)` lift to
+`y : σ → F.obj j` at some stage `j` satisfying them, also after every transition
+`F.obj j ⟶ F.obj k`. -/
 theorem exists_lift_forall_aeval_eq (hc : IsColimit c) {σ ι : Type*} [Finite σ] [Finite ι]
     (x : σ → c.pt) (P Q : ι → MvPolynomial σ ℤ)
     (h : ∀ l, MvPolynomial.aeval x (P l) = MvPolynomial.aeval x (Q l)) :

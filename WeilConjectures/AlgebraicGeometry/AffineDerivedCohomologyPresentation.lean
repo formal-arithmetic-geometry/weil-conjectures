@@ -13,8 +13,9 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 
 /-! # Natural module presentations of affine derived cohomology
 
-Source: Stacks Project, Tags 06Z0 and 0DJ8.
-(blueprint: lem-pc-affine-derived-cohomology-presentation).
+## References
+
+* Stacks Project, Tags 06Z0 and 0DJ8
 -/
 
 @[expose] public section
@@ -31,8 +32,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Actual global sections of a quasi-coherent cohomology sheaf, with the canonical
-module action. Source: Stacks, Tag 06Z0.
-(blueprint: lem-pc-affine-derived-cohomology-presentation). -/
+module action (Stacks, Tag 06Z0). -/
 def affineDerivedCohomologyModules (A : Type u) [CommRing A] (i : ℤ) :
     schemeDerivedQCohCategory (Spec (.of A)) ⥤ ModuleCat.{u} A :=
   (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙
@@ -40,9 +40,8 @@ def affineDerivedCohomologyModules (A : Type u) [CommRing A] (i : ℤ) :
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) i ⋙
     moduleSpecΓFunctor (R := .of A)
 
-/-- Canonical localization of global sections to derived stalk cohomology.
-Source: Stacks, Tags 01HV and 06Z0; exactness of stalks.
-(blueprint: lem-pc-affine-derived-cohomology-presentation). -/
+/-- Canonical localization of global sections to derived stalk cohomology
+(Stacks, Tags 01HV and 06Z0). -/
 def affineDerivedCohomologyStalkIso (A : Type u) [CommRing A] (i : ℤ)
     (p : PrimeSpectrum A) (L : schemeDerivedQCohCategory (Spec (.of A))) :
     LocalizedModule p.asIdeal.primeCompl
@@ -63,7 +62,7 @@ def affineDerivedCohomologyStalkIso (A : Type u) [CommRing A] (i : ℤ)
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
-/-- (blueprint: lem-pc-affine-derived-cohomology-presentation) -/
+/-- The stalk comparison for `tilde` is natural in the module. -/
 private theorem affineTildeStalk_naturality (A : Type u) [CommRing A]
     (p : PrimeSpectrum A) {U V : ModuleCat.{u} A} (a : U ⟶ V) (x : U) :
     (RingedSpace.moduleStalkFunctor (Spec (.of A)).toRingedSpace p).map
@@ -83,8 +82,7 @@ private theorem affineTildeStalk_naturality (A : Type u) [CommRing A]
   congr 1
 
 /-- Localization of global sections is natural for morphisms in the affine derived
-quasi-coherent category. Source: Stacks, Tag 01HV.
-(blueprint: lem-pc-affine-derived-cohomology-presentation). -/
+quasi-coherent category (Stacks, Tag 01HV). -/
 theorem affineDerivedCohomologyStalkIso_naturality
     (A : Type u) [CommRing A] (i : ℤ) (p : PrimeSpectrum A)
     {L N : schemeDerivedQCohCategory (Spec (.of A))} (a : L ⟶ N)
@@ -140,9 +138,8 @@ theorem affineDerivedCohomologyStalkIso_naturality
   rw [← hloc']
   exact hv
 
-/-- Exact stalks identify the cohomology of a representative with stalk cohomology.
-Source: Stacks, Tag 01AG.
-(blueprint: lem-pc-affine-derived-cohomology-presentation). -/
+/-- Exact stalks identify the cohomology of a representative with stalk cohomology
+(Stacks, Tag 01AG). -/
 def affineRepresentativeStalkIso (Y : Scheme.{u}) (p : Y)
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) (i : ℤ) :
     (RingedSpace.moduleStalkFunctor Y.toRingedSpace p).obj
@@ -160,9 +157,7 @@ def affineRepresentativeStalkIso (Y : Scheme.{u}) (p : Y)
   exact s.mapIso ((DerivedCategory.homologyFunctorFactors _ i).app P) ≪≫
     ((P.sc i).mapHomologyIso s).symm
 
-/-- Naturality of the exact stalk/representative comparison.
-Source: Stacks, Tag 01AG.
-(blueprint: lem-pc-affine-derived-cohomology-presentation). -/
+/-- Naturality of the exact stalk/representative comparison (Stacks, Tag 01AG). -/
 @[reassoc]
 theorem affineRepresentativeStalkIso_naturality (Y : Scheme.{u}) (p : Y)
     {P N : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ}

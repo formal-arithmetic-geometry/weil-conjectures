@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Compatibility of descended finite Čech coefficient legs
 
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, canonical Čech comparison.
+## References
+
+* Stacks Project, Tag 09YP
 -/
 
 @[expose] public section
@@ -26,23 +28,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 set_option linter.unusedVariables false in
 /-- The leg law for prescribed descended Cech coefficient maps.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
-Cech comparison. This is the leg part of the agent's explicit etale realization.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-leg).
-
-Proof: Apply cochain-map extensionality in each degree and product extensionality
-at each tuple. Postcompose with the invertible presheaf image of eNlim. Substitute
-the prescribed equation for l k and then the equation for m a, yielding the tuple
-projection followed by F_j(eNj) and the composite of the scalar transition and
-scalar leg maps. Apply etale_limit_scalar_section_map_laws to the descended object
-W₀ n t, with the supplied gamma and delta comparisons and their first-projection
-equations. Its cocone law identifies that scalar composite with the scalar leg
-at j. Precompose this equality with the tuple projection and F_j(eNj). The
-prescribed equation for l j now gives the desired component equality. Cancel the
-invertible image of eNlim and use extensionality to finish. Empty K makes every
-tuple check vacuous. The supplied nerve projection equations are not needed for
-this compatibility assertion once the cochain maps and their formulas are given.
--/
+(Stacks, Tag 09YP) -/
 theorem etale_limit_finite_cech_coefficient_leg
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

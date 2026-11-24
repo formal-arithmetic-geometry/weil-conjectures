@@ -10,7 +10,13 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.Algebra.Homology.SingleHomology
 public import Mathlib.CategoryTheory.Abelian.Exact
 
-/-! # Functorial objectwise injective resolutions -/
+/-!
+# Functorial objectwise injective resolutions
+
+## References
+
+* Stacks Project, Tag 0141, construction preceding assertion (1)
+-/
 
 @[expose] public section
 
@@ -211,17 +217,7 @@ private lemma objectAugmentation_quasiIso (K : C ⥤ C) (ι : 𝟭 C ⟶ K)
     · exact objectResolution_exact_succ K ι hι A n
     · exact CochainComplex.exactAt_succ_single_obj _ _
 
-/-- A functorial injective resolution of objects, indexed in nonnegative degrees.
-
-Source: Stacks Project, Derived Categories, Tag 0141, construction preceding assertion (1).
-(auxiliary; not a blueprint node).
-
-The construction first replaces the given embedding by its kernel over the zero object,
-so that the resulting functor preserves the zero object and zero morphisms.  It then iterates
-cokernels of the successive monomorphic embeddings.  Kernel and cokernel universal
-properties make all maps functorial, while the retract argument preserves injectivity.
-The augmented nonnegative complexes are exact by the kernel--cokernel identities.
--/
+/-- A functorial injective resolution of objects, indexed in nonnegative degrees. -/
 theorem exists_functorial_object_injective_resolution
     {C : Type u} [Category.{v} C] [Abelian C]
     (J : C ⥤ C) (η : 𝟭 C ⟶ J)

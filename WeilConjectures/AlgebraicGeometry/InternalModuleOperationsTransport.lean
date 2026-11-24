@@ -27,13 +27,14 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Def
 /-!
 # Transport of internal module operations to sectionwise modules
 
-Stacks Project, Modules on Sites, Tags 03D6 and 03D7; Categories, Tag 0B65.
-(auxiliary; not a blueprint node).
-
-The sectionwise pushforward uses the actual section-ring homomorphism induced by eta_f.
+The sectionwise pushforward uses the actual section-ring homomorphism induced by `eta_f`.
 Pullback is its canonical left adjoint, hence the sheafified tensor-formula pullback.
 Open extension is the canonical left adjoint of restriction. Unique characterizations fix
 all comparisons; in particular no arbitrary natural isomorphism is used for base change.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D6 and 03D7; Categories, Tag 0B65.
 -/
 
 @[expose] public section
@@ -176,38 +177,29 @@ private instance pullback_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The reconstructed section-ring sheaf B_T, using the recorded reconstruction.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+/-- The reconstructed section-ring sheaf `B_T` (Stacks, Tag 00YV). -/
 noncomputable abbrev ring (T : Scheme.{u}) :
     Sheaf (Scheme.ProEt.topology T) RingCat.{u + 1} :=
   (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
     (sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (condensedRingObj Λ T))
 
-/-- The fixed internal/sectionwise equivalence E_T, not a new equivalence.
-Source: Stacks 00YV (auxiliary; not a blueprint node). -/
+/-- The fixed internal/sectionwise equivalence `E_T` (Stacks, Tag 00YV). -/
 noncomputable abbrev equivalence (T : Scheme.{u}) :
     Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T) ≌
       SheafOfModules.{u + 1} (ring Λ T) :=
   sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (condensedRingObj Λ T)
 
-/-- The base-change functor on the small pro-etale sites.
-Source: Stacks 03D6 (auxiliary; not a blueprint node). -/
+/-- The base-change functor on the small pro-etale sites (Stacks, Tag 03D6). -/
 noncomputable abbrev siteMap {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   MorphismProperty.Over.pullback @WeaklyEtale ⊤ f
 
-/-- Continuity of the existing base-change functor, exposed at this abbreviation.
-Source: Stacks 03D6 (auxiliary; not a blueprint node). -/
+/-- Continuity of the base-change functor, exposed at this abbreviation. -/
 instance siteMap_continuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (siteMap f).IsContinuous (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) :=
   Scheme.ProEt.isContinuous_overPullback f
 
-/-- The adjunct of alpha_f induces the unique section-ring homomorphism with its given
-underlying additive map.
-Source: Stacks 03D6 (auxiliary; not a blueprint node).
-Proof: Step 2. Reconstruct multiplication and unit by evaluating the tensor action on pure
-section tensors. Monoidality of eta_f gives preservation of multiplication and unit;
-its naturality gives restriction compatibility. Faithfulness of the forgetful ring functor
-makes this lift unique. The underlying pushforward is evaluation at V times_Y X. -/
+/-- The adjunct of `alpha_f` induces the unique section-ring homomorphism with its given
+underlying additive map. -/
 theorem coefficientMap_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! φ : ring Λ Y ⟶ ((siteMap f).sheafPushforwardContinuous RingCat.{u + 1}
         (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).obj (ring Λ X),
@@ -218,8 +210,7 @@ theorem coefficientMap_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (siteMap f) (condensedRingObj Λ X) (condensedRingObj Λ Y)
     (condensedPushforwardHom Λ f)
 
-/-- The canonical section-ring map B_Y -> f_* B_X, fixed by eta_f on every section.
-Source: Stacks 03D6 (auxiliary; not a blueprint node). -/
+/-- The canonical section-ring map `B_Y → f_* B_X`, fixed by `eta_f` on every section. -/
 noncomputable def coefficientMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ring Λ Y ⟶ ((siteMap f).sheafPushforwardContinuous RingCat.{u + 1}
       (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).obj (ring Λ X) :=
@@ -232,17 +223,11 @@ private theorem coefficientMap_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold coefficientMap
   exact (coefficientMap_existsUnique Λ f).exists.choose_spec V r
 
-/-- Ordinary direct image with scalar restriction along the adjunct of alpha_f.
-Source: Stacks 03D6 (auxiliary; not a blueprint node). -/
+/-- Ordinary direct image with scalar restriction along the adjunct of `alpha_f`. -/
 noncomputable abbrev lowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   SheafOfModules.pushforward.{u + 1} (F := siteMap f) (coefficientMap Λ f)
 
-/-- The canonical direct-image comparison is uniquely the identity on underlying sheaves.
-Source: Stacks 03D6 (auxiliary; not a blueprint node).
-Proof: Steps 1--2. E preserves underlying sections and maps. The internal lax action is
-eta_f(r) times n, precisely scalar restriction in the sectionwise direct image. Thus the
-identity sheaf map and its inverse are linear and natural. Their underlying maps determine
-them uniquely by faithfulness. -/
+/-- The canonical direct-image comparison is uniquely the identity on underlying sheaves. -/
 theorem lowerComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! r : CondensedRing.lowerStar Λ f ⋙ (equivalence Λ Y).functor ≅
         (equivalence Λ X).functor ⋙ lowerStar Λ f,
@@ -300,8 +285,7 @@ theorem lowerComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ext M V m
     exact hd M V m
 
-/-- The identity-on-sections direct-image comparison.
-Source: Stacks 03D6 (auxiliary; not a blueprint node). -/
+/-- The identity-on-sections direct-image comparison. -/
 noncomputable def lowerComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CondensedRing.lowerStar Λ f ⋙ (equivalence Λ Y).functor ≅
       (equivalence Λ X).functor ⋙ lowerStar Λ f :=
@@ -644,13 +628,7 @@ private theorem presheafPushforward_isRightAdjoint
   exact this
 
 /-- Presheaf pullback exists in the coefficient universe even though the small pro-etale
-site has object universe u+1 and morphism universe u.
-Source: the tensor-formula construction in Stacks 03D7
-(blueprint: lem-sfb-internal-module-operations-transport).
-Proof: transport both sites and their presheaves to coefficient-sized small models.
-On these models the presheaf pullback is the left Kan extension and sectionwise scalar
-extension; its Hom bijection sends m to 1 tensor m. Transport that adjunction back.
-No equality between the original site object and morphism universes is imposed. -/
+site has object universe `u + 1` and morphism universe `u` (Stacks, Tag 03D7). -/
 @[instance]
 theorem presheafLowerStar_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (PresheafOfModules.pushforward.{u + 1}
@@ -659,29 +637,21 @@ theorem presheafLowerStar_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (coefficientMap Λ f).hom
 
 /-- The canonical sectionwise ringed-topos pullback, constructed by presheaf pullback
-and sheafification: inverse image followed by B_X tensor_{f^{-1}B_Y} (-).
-Source: Stacks 03D7 (blueprint: lem-sfb-internal-module-operations-transport). -/
+and sheafification: inverse image followed by `B_X ⊗_{f⁻¹ B_Y} (-)` (Stacks, Tag 03D7). -/
 noncomputable abbrev upperStar {X Y : Scheme.{u}} (f : X ⟶ Y) :
     SheafOfModules.{u + 1} (ring Λ Y) ⥤ SheafOfModules.{u + 1} (ring Λ X) :=
   SheafOfModules.forget (ring Λ Y) ⋙
     PresheafOfModules.pullback.{u + 1} (F := siteMap f) (coefficientMap Λ f).hom ⋙
       PresheafOfModules.sheafification (R₀ := (ring Λ X).obj) (𝟙 (ring Λ X).obj)
 
-/-- The tensor-formula sectionwise adjunction, with its sheafification Hom bijection.
-Source: Stacks 03D7 (blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The tensor-formula sectionwise adjunction, with its sheafification Hom bijection. -/
 noncomputable abbrev adjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     upperStar Λ f ⊣ lowerStar Λ f :=
   SheafOfModules.PullbackConstruction.adjunction.{u + 1}
     (F := siteMap f) (coefficientMap Λ f)
 
-/-- The mate of the direct-image comparison is invertible and uniquely fixes pullback.
-Source: Stacks 03D7, Categories 0B65
-(blueprint: lem-sfb-internal-module-operations-transport).
-Proof: Steps 3--4. Conjugate the specified internal adjunction by E. The two left
-adjoints of the identified direct image are uniquely isomorphic by the unit equation
-situation-conventions. Undo the conjugation. The mate equation below
-is exactly the Hom-transposition identity; evaluating it on identities gives both unit
-and counit equations, by lem-weil-pbc-adjunction-of-natural-bijection. -/
+/-- The mate of the direct-image comparison is invertible and uniquely fixes pullback
+(Stacks, Tag 03D7; Categories, Tag 0B65). -/
 theorem upperComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! c : CondensedRing.upperStar Λ f ⋙ (equivalence Λ X).functor ≅
         (equivalence Λ Y).functor ⋙ upperStar Λ f,
@@ -692,20 +662,13 @@ theorem upperComparison_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f)
     (lowerComparison Λ f)
 
-/-- The pullback comparison normalized by the actual specified adjunctions.
-Source: Stacks 03D7 (blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The pullback comparison normalized by the specified adjunctions. -/
 noncomputable def upperComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     CondensedRing.upperStar Λ f ⋙ (equivalence Λ X).functor ≅
       (equivalence Λ Y).functor ⋙ upperStar Λ f :=
   (upperComparison_existsUnique Λ f).exists.choose
 
-/-- For an open immersion, sectionwise restriction admits extension by zero.
-Source: blueprint module-lower-shriek, Extension by zero clause
-(blueprint: lem-sfb-internal-module-operations-transport).
-Proof: Step 5. Conjugate the given internal open-extension adjunction by the fixed
-E equivalences, and identify its right adjoint using upperComparison. This supplies
-the sectionwise left adjoint, characterized uniquely by its extension-by-zero universal
-property. The same underlying abelian extension by zero carries the transported action. -/
+/-- For an open immersion, sectionwise restriction admits extension by zero. -/
 @[instance]
 theorem upperStar_isRightAdjoint {U T : Scheme.{u}} (j : U ⟶ T)
     [IsOpenImmersion j] : (upperStar Λ j).IsRightAdjoint := by
@@ -718,24 +681,15 @@ theorem upperStar_isRightAdjoint {U T : Scheme.{u}} (j : U ⟶ T)
   exact (Functor.isRightAdjoint_comp_iff_right
     (equivalence Λ T).functor (upperStar Λ j)).mp inferInstance
 
-/-- Sectionwise extension by zero, the canonical left adjoint of restriction.
-Source: blueprint module-lower-shriek, Extension by zero clause
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- Sectionwise extension by zero, the canonical left adjoint of restriction. -/
 noncomputable abbrev extension {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :=
   (upperStar Λ j).leftAdjoint
 
-/-- The sectionwise open-extension adjunction to restriction.
-Source: blueprint module-lower-shriek, Extension by zero clause
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The sectionwise open-extension adjunction to restriction. -/
 noncomputable abbrev openAdjunction {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :=
   Adjunction.ofIsRightAdjoint (upperStar Λ j)
 
-/-- The canonical open-extension comparison, normalized by the specified adjunctions.
-Source: blueprint module-lower-shriek, Extension by zero clause; Categories 0B65
-(blueprint: lem-sfb-internal-module-operations-transport).
-Proof: Step 5. Apply unit-normalized uniqueness of left adjoints again to the internal
-open adjunction and the sectionwise one, with upperComparison identifying the right
-adjoints. The mate equation identifies the Hom bijections, units and counits. -/
+/-- The canonical open-extension comparison, normalized by the specified adjunctions. -/
 theorem openComparison_existsUnique {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :
     ∃! o : CondensedRing.openImmersionLowerShriek Λ j ⋙ (equivalence Λ T).functor ≅
         (equivalence Λ U).functor ⋙ extension Λ j,
@@ -745,20 +699,14 @@ theorem openComparison_existsUnique {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImme
     (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j) (openAdjunction Λ j)
     (upperComparison Λ j)
 
-/-- The uniquely adjunction-normalized comparison for extension by zero.
-Source: blueprint module-lower-shriek, Extension by zero clause
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The uniquely adjunction-normalized comparison for extension by zero. -/
 noncomputable def openComparison {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :
     CondensedRing.openImmersionLowerShriek Λ j ⋙ (equivalence Λ T).functor ≅
       (equivalence Λ U).functor ⋙ extension Λ j :=
   (openComparison_existsUnique Λ j).exists.choose
 
-/-- The sectionwise direct-image composition comparison is the ordinary sheaf comparison.
-Source: blueprint module-upper-star-comp; Stacks 03D6
-(blueprint: lem-sfb-internal-module-operations-transport).
-Proof: Step 6. Evaluation rebrackets the iterated fibre product. The two scalar actions
-agree by compatibility of eta_f with composition, so the underlying abelian comparison
-is linear, natural and invertible. Faithfulness gives uniqueness. -/
+/-- The sectionwise direct-image composition comparison is the ordinary sheaf
+comparison. -/
 theorem lowerComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     ∃! c : lowerStar Λ f ⋙ lowerStar Λ g ≅ lowerStar Λ (f ≫ g),
       ∀ (M : SheafOfModules.{u + 1} (ring Λ X)) (V : Z.ProEtᵒᵖ)
@@ -774,8 +722,7 @@ theorem lowerComp_existsUnique {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) 
     (coefficientMap_apply Λ f) (coefficientMap_apply Λ g)
     (coefficientMap_apply Λ (f ≫ g))
 
-/-- The canonical sectionwise direct-image composition comparison.
-Source: Stacks 03D6 (blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The canonical sectionwise direct-image composition comparison. -/
 noncomputable def lowerComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     lowerStar Λ f ⋙ lowerStar Λ g ≅ lowerStar Λ (f ≫ g) :=
   (lowerComp_existsUnique Λ f g).exists.choose
@@ -816,9 +763,7 @@ private theorem lowerComp_compatible {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
   rw [CondensedRing.lowerStarComp_hom_app_hom]
   rfl
 
-/-- The sectionwise pullback-composition comparison, conjugate to direct-image composition.
-Source: blueprint module-upper-star-comp
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The sectionwise pullback-composition comparison, conjugate to direct-image composition. -/
 noncomputable def upperComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     upperStar Λ (f ≫ g) ≅ upperStar Λ g ⋙ upperStar Λ f :=
   (Adjunction.leftAdjointCompIso (adjunction Λ g) (adjunction Λ f)
@@ -835,12 +780,7 @@ private theorem upperComparison_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
   unfold upperComparison
   exact (upperComparison_existsUnique Λ f).exists.choose_spec
 
-/-- The fixed pullback compositors commute with the normalized equivalence comparison.
-Source: node Step 6 and normalized adjunction-comparison clause (2).
-Proof: the direct-image compatibility holds on sections. Apply compositor compatibility
-of mates; the conjugates of both chosen pullback compositors are the direct-image
-compositors by their definitions.
-(blueprint: lem-sfb-internal-module-operations-transport) -/
+/-- The fixed pullback compositors commute with the normalized equivalence comparison. -/
 theorem upperComp_compatible {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
     (equivalence Λ X).functor.map ((CondensedRing.upperStarComp Λ f g).inv.app M) ≫
@@ -874,10 +814,7 @@ theorem upperComp_compatible {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     change conjugateEquiv _ _ ((conjugateEquiv _ _).symm _) = _
     exact Equiv.apply_symm_apply _ _
 
-/-- The actual square isomorphisms paired with their transport equation.
-Source: the node proof Step 6. Both data fields are the original compositor, equality
-isomorphism, and compositor composite. The proof field records their compatibility.
-(blueprint: lem-sfb-internal-module-operations-transport) -/
+/-- The square isomorphisms paired with their transport equation. -/
 noncomputable def squareData {U' U T' T : Scheme.{u}}
     {g' : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {g : T' ⟶ T}
     (sq : ChosenCartesianSquare g' j' j g) :=
@@ -896,9 +833,7 @@ noncomputable def squareData {U' U T' T : Scheme.{u}}
     (by intro M; exact upperComp_compatible Λ g' j M)
     (by intro M; exact upperComp_compatible Λ j' g M)
 
-/-- The actual internal pullback-composition comparison around a scheme square.
-Source: blueprint module-upper-star-comp
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The actual internal pullback-composition comparison around a scheme square. -/
 noncomputable def internalSquare {U' U T' T : Scheme.{u}}
     {g' : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {g : T' ⟶ T}
     (sq : ChosenCartesianSquare g' j' j g) :
@@ -906,9 +841,7 @@ noncomputable def internalSquare {U' U T' T : Scheme.{u}}
       CondensedRing.upperStar Λ g ⋙ CondensedRing.upperStar Λ j' :=
   (squareData Λ sq).internal
 
-/-- The sectionwise pullback-composition comparison around the same square.
-Source: blueprint module-upper-star-comp
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The sectionwise pullback-composition comparison around the same square. -/
 noncomputable def sectionSquare {U' U T' T : Scheme.{u}}
     {g' : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {g : T' ⟶ T}
     (sq : ChosenCartesianSquare g' j' j g) :
@@ -927,9 +860,8 @@ private theorem square_compatible {U' U T' T : Scheme.{u}}
         (upperStar Λ j').map ((upperComparison Λ g).hom.app M) := by
   exact (squareData Λ sq).compatible M
 
-/-- The internal open-extension base-change map, with the specified unit and counit.
-Source: Stacks 07A7 and the node proof Step 7
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The internal open-extension base-change map, with the specified unit and counit
+(Stacks, Tag 07A7). -/
 noncomputable def internalBaseChange {U' U T' T : Scheme.{u}}
     {g' : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {g : T' ⟶ T}
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : ChosenCartesianSquare g' j' j g) :
@@ -939,9 +871,8 @@ noncomputable def internalBaseChange {U' U T' T : Scheme.{u}}
     (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j')).symm
       (.mk _ _ _ _ (internalSquare Λ sq).hom))
 
-/-- The sectionwise map is the same adjunction mate of pullback composition.
-Source: Stacks 07A7 and the node proof Step 7
-(blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- The sectionwise map is the same adjunction mate of pullback composition
+(Stacks, Tag 07A7). -/
 noncomputable def sectionBaseChange {U' U T' T : Scheme.{u}}
     {g' : U' ⟶ U} {j' : U' ⟶ T'} {j : U ⟶ T} {g : T' ⟶ T}
     [IsOpenImmersion j] [IsOpenImmersion j'] (sq : ChosenCartesianSquare g' j' j g) :
@@ -949,8 +880,7 @@ noncomputable def sectionBaseChange {U' U T' T : Scheme.{u}}
   ((mateEquiv (openAdjunction Λ j) (openAdjunction Λ j')).symm
     (.mk _ _ _ _ (sectionSquare Λ sq).hom))
 
-/-- Comparison of the source of the open-extension base-change transformation.
-Source: node proof Step 7 (blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- Comparison of the source of the open-extension base-change transformation. -/
 noncomputable def baseChangeSourceComparison {U' U T' : Scheme.{u}}
     (g' : U' ⟶ U) (j' : U' ⟶ T') [IsOpenImmersion j'] :
     (CondensedRing.upperStar Λ g' ⋙ CondensedRing.openImmersionLowerShriek Λ j') ⋙
@@ -960,8 +890,7 @@ noncomputable def baseChangeSourceComparison {U' U T' : Scheme.{u}}
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight (upperComparison Λ g') _ ≪≫
       Functor.associator _ _ _
 
-/-- Comparison of the target of the open-extension base-change transformation.
-Source: node proof Step 7 (blueprint: lem-sfb-internal-module-operations-transport). -/
+/-- Comparison of the target of the open-extension base-change transformation. -/
 noncomputable def baseChangeTargetComparison {U T T' : Scheme.{u}}
     (j : U ⟶ T) (g : T' ⟶ T) [IsOpenImmersion j] :
     (CondensedRing.openImmersionLowerShriek Λ j ⋙ CondensedRing.upperStar Λ g) ⋙
@@ -980,42 +909,8 @@ private theorem openComparison_mate {U T : Scheme.{u}} (j : U ⟶ T)
   exact (openComparison_existsUnique Λ j).exists.choose_spec
 
 /-- Internal module operations agree canonically with sectionwise operations, including
-specified adjunctions, open-extension mates and exactness.
-Source: blueprint main-20261015, Nagata density normalization sheaves proof, Steps 1--2;
-Stacks 03D6, 03D7, 0B65 and 07A7
-(blueprint: lem-sfb-internal-module-operations-transport).
-
-Proof (the eight steps of the DAG node):
-1. E_T preserves underlying section groups and maps. Its action formula is
-   a(r tensor m), so it and its inverse preserve addition and zero of morphisms
-   (def-weil-pbc-internal-abelian-sheaf-module-equivalence,
-   det-def-sfb-sheaf-tensor-structure).
-2. Both direct images evaluate N on V times_T T'. The lax tensor map sends pure
-   tensors to the same tensors there. Their actions are eta_f(r) times n, where
-   eta_f is f_* alpha_f after the abelian unit (proposition-topos-functoriality--2,
-   def-sfb-finite-lower-star-lax-monoidal, prose-03-02,
-   sk-def-sfb-coefficient-morphisms). Thus lowerComparison is the identity on sections.
-3. Conjugate the specified internal adjunction by E, and use the unique unit-normalized
-   left-adjoint comparison (situation-conventions), with the sectionwise
-   adjunction of lem-weil-pbc-ringed-topoi-module-adjunction.
-4. Naturality of the Hom bijections gives the mate equation, hence the displayed unit
-   and counit equations (lem-weil-pbc-adjunction-of-natural-bijection).
-5. Repeat for the given internal open-extension adjunction
-   (sk-def-sfb-module-lower-shriek) and the sectionwise extension-by-zero adjunction.
-6. The direct-image comparisons commute with composition because their section maps
-   are identities, and both compositions rebracket the same fibre product. Conjugation
-   is injective, so the pullback comparisons commute with composition too
-   (def-sfb-module-lower-star-comp, def-sfb-module-upper-star-comp,
-   def-weil-pbc-adjunction-conjugate).
-7. The open-extension map is the inverse mate of pullback composition: insert eta_j,
-   apply the square comparison, then contract epsilon_j'. Steps 4--6 identify each
-   factor, yielding the displayed transformation equation (def-weil-pbc-adjunction-mate).
-8. The additive equivalences and their inverses preserve finite limits and colimits
-   (lem-galois-equivalence-preserves-limits, situation-conventions).
-   They therefore preserve and reflect exact sequences and exactness of operations.
-   The transformation equation conjugates base change by isomorphisms; equivalences
-   reflect isomorphisms, so sectionwise invertibility implies internal invertibility.
--/
+specified adjunctions, open-extension mates and exactness
+(Stacks, Tags 03D6, 03D7, 0B65 and 07A7). -/
 theorem internal_module_operations_transport :
     (∀ (T : Scheme.{u}),
       (equivalence Λ T).functor.Additive ∧ (equivalence Λ T).inverse.Additive ∧

@@ -11,6 +11,13 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Algebra.Homology.MixedTotalTensorScalarExtension
 import WeilConjectures.Algebra.Homology.BalancedTensorUnitModelComparison
 
+/-! # Coefficient-unit map computed by a balanced complex
+
+## References
+
+* Stacks Project, Tags 064L and 06Y6 (balanced computation of the derived tensor product)
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -28,23 +35,10 @@ variable (R A Aq B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- Compute the coefficient-unit map using a balanced complex, before any localization.
-Source: Stacks Project, Tags 064L and 06Y6, balanced computation of derived tensor.
-(blueprint: new-lem-pc-base-tensor-unit-cohomology-model).
-
-Proof: take a K-flat R-resolution F of the complex B concentrated in degree zero,
-and put C = Tot(Q tensor_R F), with its termwise A-action. Tensor associativity
-identifies Aq tensor_A C with Tot((Aq tensor_A Q) tensor_R F), and identifies the
-extension unit with the map induced by Q -> Aq tensor_A Q. This does not require
-Aq to be flat. The balanced derived tensor computation identifies their
-cohomology with the two universal derived-functor models. The universal counits
-fix these identifications, so their naturality identifies the map with
-localizationModelMap. Multiplication by a on Q induces multiplication by a on C;
-cohomologyIso_smul therefore makes the first identification A-linear. The same
-argument on Aq tensor_A Q makes the second identification A-linear after
-restriction along A -> Aq -> Aq tensor_R B. Forgetting the B-action gives the
-displayed A-module isomorphisms and the commuting equation. No assertion about
-the kernel or exactness of scalar extension is used here. -/
+/-- The coefficient-unit map is computed by a balanced complex, before any localization:
+there are a complex `C` of `A`-modules and `A`-linear isomorphisms identifying the two derived
+tensor cohomology models with the homology of `C` and of its extension to `Aq`, compatibly with
+the unit map. No flatness of `Aq` is required. -/
 theorem exists_baseTensorUnitCohomologyModel (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

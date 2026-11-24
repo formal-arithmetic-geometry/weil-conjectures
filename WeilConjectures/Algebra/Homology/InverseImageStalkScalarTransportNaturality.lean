@@ -14,8 +14,9 @@ import Mathlib.Topology.Sheaves.Sheafify
 /-!
 # Natural semilinear inverse-image stalk comparison
 
-Source: Stacks Project, Sheaves, Tags 008H and 0098.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality).
+## References
+
+* Stacks Project, Sheaves, Tags 008H and 0098
 -/
 
 @[expose] public section
@@ -89,24 +90,7 @@ private theorem explicitStalkMap_naturality
         (Opens.grothendieckTopology T)).unit_naturality a).symm
 
 set_option backward.defeqAttrib.useBackward true in
-/-- Natural semilinear comparison for the explicitly constructed inverse image.
-Source: Stacks Project, Sheaves, Tag 0098, proof using Tag 008H.
-
-Proof: use the explicit sheaf pullback construction, namely presheaf pullback
-followed by sheafification. Apply the ring and abelian stalk comparisons of Tag
-008H directly to this construction.
-The ring map is stalkPullbackHom followed by stalk of toSheafify; both are
-isomorphisms. The analogous abelian map defines c. To verify
-semilinearity, represent the scalar and vector on neighborhoods of f(x), restrict
-both to their intersection, and apply the germ formulas for the two comparisons.
-The semilinearity clause of exists_inverseImageModuleInstances identifies the
-unit of r times m with the product of the two units. The stalk germ scalar law
-then gives the asserted equation. For naturality, represent m by a germ, use
-naturality of the abelian inverse-image unit, and use stalkFunctor_map_germ_apply.
-The map on the right is exactly stalkAddMap of inverseImageModuleMap by definition.
-The construction applies to zero modules and zero rings; with empty X there is
-no x. No flatness or nonvanishing hypothesis is used.
-(blueprint: lem-pc-ringed-inverse-image-stalk-scalar-transport-naturality). -/
+/-- Natural semilinear comparison for the explicitly constructed inverse image. -/
 theorem exists_inverseImage_stalk_comparison_natural
     (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier) (x : X) :
     let k : Y.presheaf.stalk (f x) ⟶

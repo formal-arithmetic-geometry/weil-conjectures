@@ -25,19 +25,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
 /-- A perfect complex has a quasi-coherent perfect internal dual.
-Source: Stacks Project, Cohomology, Tag 08DQ.
-Proof: at each point take a strictly perfect representative supplied by IsPerfect.
-Refine it to an affine bounded finite free representative. The finite free dual-model
-lemma constructs its ordinary Hom complex with O[0], proves that it is bounded finite
-free, and compares it with local RHom into the restriction of the actual tensor unit.
-Compose this comparison with the first-variable image of the representative isomorphism
-and the RHom open-restriction isomorphism. The resulting local models show that the
-actual object RHom(K,O) is perfect: each finite free identification gives a retraction
-by its inverse. The same models are bounded above finite free, so the actual dual is
-pseudo-coherent. Apply schemeDerivedQCohProperty_of_isPseudoCoherent to obtain its
-quasi-coherent cohomology. Equip this actual object with that proof in the full
-subcategory; the required equality of underlying objects is reflexivity.
-(blueprint: lem-pc-perfect-rhom-tensor-comparison-dual) -/
+(Stacks, Cohomology, Tag 08DQ) -/
 theorem exists_perfect_rhom_dual
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

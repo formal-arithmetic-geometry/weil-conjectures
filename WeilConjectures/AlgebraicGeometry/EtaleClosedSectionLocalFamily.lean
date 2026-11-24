@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageSectionDescription
 
 /-! # Local representatives around a closed subscheme
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, local shrinking argument.
-(blueprint: lem-weil-pbc-etale-closed-section-local-family).
+## References
+
+* Stacks Project, Tag 09ZF
 -/
 
 @[expose] public section
@@ -30,24 +31,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Local sections whose unit equations hold on the entire closed base changes.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph, through the equation
-`t|_{U_j times_X Z} = i⁻¹s_j`.
-(blueprint: lem-weil-pbc-etale-closed-section-local-family).
-
-Proof: Identify the pullback of the identity X-object with the identity Z-object,
-using the canonical pullback isomorphism. Apply the local inverse-image section
-description to t transported along this isomorphism. This produces an étale cover
-V_j of Z and maps a_j to the closed base changes of étale X-objects U_j, together
-with sections s_j and equality after restriction to V_j. Each a_j is étale by
-cancellation and has open image. The closed embedding of the base change into U_j
-identifies this image with the intersection of an ambient open W_j with the closed
-base change. Replace U_j by W_j and restrict s_j. Then V_j maps surjectively to
-its whole closed base change. Separatedness for this singleton étale cover promotes
-the equality to the whole base change. Unit naturality preserves the equation under
-restriction. Since the V_j cover Z, the images of the shrunk U_j contain i(Z).
-All operations preserve the original universe-u index set. If Z is empty, choose
-the empty index set; both clauses are vacuous. No compactness or restriction-unit
-injectivity is used. -/
+(Stacks, Tag 09ZF) -/
 theorem etale_closed_section_local_family
     {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

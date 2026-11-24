@@ -17,8 +17,10 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # The ideal-sheaf conormal and its rank for a smooth closed diagonal
 
-Source: Stacks Project, Tags 08S2 and 02G1
-(blueprint: lem-sc-smooth-diagonal-ideal-conormal-rank).
+## References
+
+* [Stacks, Tag 08S2]
+* [Stacks, Tag 02G1]
 -/
 
 @[expose] public section
@@ -32,9 +34,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ideal module of a closed immersion is its actual structure-map kernel.
-The factorization through the scheme-theoretic image gives a kernel lift; its sections
-are bijective on the affine basis because both inclusions have the same ideal range. -/
+/-- The ideal module of a closed immersion is its actual structure-map kernel. -/
 private theorem ideal_kernel_iso {Y Z : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] :
     Nonempty (i.ker.toModules ≅
@@ -94,20 +94,7 @@ private theorem ideal_kernel_iso {Y Z : Scheme.{u}} (i : Z ⟶ Y)
 
 /-- The conormal used by Koszul duality agrees with relative differentials and has
 stalk rank equal to the pure relative dimension. This concerns only module sheaves,
-without derived categories or a duality adjunction.
-Source: Stacks Project, Tags 08S2 and 02G1
-(blueprint: lem-sc-smooth-diagonal-ideal-conormal-rank).
-
-Proof: write i for the closed diagonal. The canonical isomorphism from X to the
-closed subscheme defined by i.ker commutes with the maps to the fibre product.
-Its pushforward identifies the two maps from the structure sheaf, hence their
-kernels: i.ker.toModules is isomorphic to the module-sheaf kernel defining
- diagonalConormal. Tensor pullback carries this isomorphism to X. Compose with
- diagonalConormal_iso_relativeDifferentials. The theorem
- isFiniteLocallyFreeOfRank_relativeDifferentials gives local trivializations by
-O_X^d. Taking stalks gives free modules O_{X,x}^d, whose finrank is d because
-these local rings are nontrivial. Transport finrank along the stalk isomorphism.
-For empty X the stalk assertion is vacuous; for d = 0 the free module is zero. -/
+without derived categories or a duality adjunction. -/
 theorem smoothDiagonal_idealConormal_iso_and_rank {X S : Scheme.{u}}
     (f : X ⟶ S) (d : ℕ) [SmoothOfRelativeDimension d f]
     [IsClosedImmersion (pullback.diagonal f)] :

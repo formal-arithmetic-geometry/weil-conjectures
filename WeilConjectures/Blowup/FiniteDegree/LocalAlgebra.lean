@@ -12,6 +12,10 @@ public import WeilConjectures.Blowup.FiniteDegree.Algebra
 
 Algebraic lemmas on chart fractions, and the combinators over `Finset`s used by the
 finite-degree approximation.
+
+## References
+
+* Stacks Project, Tag 0803
 -/
 
 @[expose] public section
@@ -79,8 +83,8 @@ lemma AffineBlowup.chartFrac_self_pow_mul {a : A} (ha : a ∈ I₀)
   simp only [Polynomial.monomial_pow, Polynomial.monomial_mul_monomial, one_mul]
   exact monomial_congr (by ring) (by ring)
 
-/-- **The denominator-clearing lemma on two charts of the same Rees algebra**
-(the algebraic core of Stacks Tag 0803), ring-level form: let `Ja`, `Jb` be ideals of
+/-- **The denominator-clearing lemma on two charts of the same Rees algebra**,
+ring-level form: let `Ja`, `Jb` be ideals of
 the `a`- and `b`-charts which agree in the common localization `B_{b·a}`. If the chart
 fraction `g/aᵉ` lies in `Ja`, then multiplying `g/bᵉ` by any large enough power of the
 localization element `a/b` lands in `Jb`. -/

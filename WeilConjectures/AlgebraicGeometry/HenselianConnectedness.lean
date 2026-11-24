@@ -64,10 +64,7 @@ namespace AlgebraicGeometry
 /-- **Finiteness of the Stein factorization** (input (i) of the two classical inputs of
 Stein connectedness): for a proper morphism `p : Y ⟶ Spec A` with `A` noetherian, the ring
 `Γ(Y, 𝒪_Y)` is a finite `A`-algebra, i.e. the second map `Spec Γ(Y, 𝒪_Y) ⟶ Spec A` of the Stein
-factorization is finite. For a general affine base this is not proved in the blueprint.
-(blueprint: `theorem-comparison-over-henselian-pair-degree`) 
-(blueprint: theorem-comparison-over-henselian-pair-degree)
--/
+factorization is finite. -/
 @[stacks 02O5]
 theorem Scheme.Hom.isFinite_steinFactorizationBase {A : Type u} [CommRing A]
     [IsNoetherianRing A] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
@@ -116,18 +113,7 @@ theorem Scheme.Hom.nonempty_inter_preimage_zeroLocus {A : Type u} [CommRing A]
 /-- **Connectedness of the closed fibre** (input (ii) of the two classical inputs of Stein
 connectedness): let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper. Every
 irreducible closed subset `C ⊆ Y` meets the closed fibre `Y₀ = p⁻¹(V(I))` in a nonempty
-connected subset. This is the Stein-factorization step of the henselian-pair comparison
-[Stacks 0A0B].
-
-It is deduced from the idempotent lifting for proper schemes over a henselian pair
-(`AlgebraicGeometry.Scheme.bijective_appTop_idempotent_of_henselianRing`, blueprint
-`theorem-finite-etale-covers-proper-henselian--2`), applied to `C` with its reduced induced
-structure `Z`: the space `Z ≅ C` is irreducible, hence connected, so `Γ(Z, 𝒪_Z)` has no
-idempotents but `0` and `1`; hence neither has `Γ(Z₀, 𝒪_{Z₀})`, and the nonempty closed fibre
-`Z₀`, whose image in `Y` is `C ∩ Y₀`, is connected.
-(blueprint: `theorem-comparison-over-henselian-pair-degree`) 
-(blueprint: theorem-comparison-over-henselian-pair-degree)
--/
+connected subset (Stacks, Tag 0A0B). -/
 @[stacks 0A0B]
 theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
@@ -223,14 +209,8 @@ theorem Scheme.Hom.isConnected_inter_preimage_zeroLocus {A : Type u} [CommRing A
 /-- **Stein connectedness.** Let `(A, I)` be a henselian pair and `p : Y ⟶ Spec A` proper, with
 closed fibre `Y₀ = p⁻¹(V(I))`. Then `Y` is a spectral space, `Y₀` is closed in `Y`, and every
 irreducible closed subset of `Y` meets `Y₀` in a nonempty connected subset. These are the
-hypotheses of the Zariski restriction criterion
-`TopCat.Sheaf.bijective_unit_app_top` for the pair `(Y, Y₀)`. The
-spectrality holds because `Y` is quasi-compact and quasi-separated, the closedness because
-`V(I)` is closed, and the connectedness is the classical input
-`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`.
-(blueprint: `theorem-comparison-over-henselian-pair-degree`) 
-(blueprint: theorem-comparison-over-henselian-pair-degree)
--/
+hypotheses of the Zariski restriction criterion `TopCat.Sheaf.bijective_unit_app_top` for the
+pair `(Y, Y₀)`. -/
 theorem Scheme.Hom.spectralSpace_and_isClosed_and_isConnected_inter {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p] :
     SpectralSpace Y ∧ IsClosed (p ⁻¹' PrimeSpectrum.zeroLocus (I : Set A)) ∧

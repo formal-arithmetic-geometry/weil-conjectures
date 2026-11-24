@@ -16,8 +16,9 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-! # Filtered free resolutions in a larger carrier universe
 
-Source: Stacks Project, Remark 15.60.11 (Tag 09PB) and Lemma 22.20.4 (Tag 09KP).
-(blueprint: lem-pc-large-filtered-free-resolution).
+## References
+
+* Stacks Project, Remark 15.60.11 (Tag 09PB) and Lemma 22.20.4 (Tag 09KP)
 -/
 
 @[expose] public section
@@ -28,19 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- The filtered free resolution construction with carriers in `Type (max u v)`.
-Source: Stacks Project, Remark 15.60.11 (Tag 09PB), Lemma 22.20.4 (Tag 09KP).
-(blueprint: lem-pc-large-filtered-free-resolution).
-
-Proof: let `B = ULift.{v} A`, a ring in the carrier universe. Restrict the scalar
-structure of `M` along `B ≃+* A`. Apply `exists_filtered_free_resolution` over `B`.
-Transport its complex, augmentation, filtration, inclusions and steps through the
-inverse equivalence of module categories, degree by degree. An equivalence of abelian
-categories preserves quasi-isomorphisms, zero objects, monomorphisms, cokernels and
-coproducts. Transport the splitting maps through this functor as well. Its underlying
-module carriers are unchanged, so elementwise exhaustion is preserved. The transported
-rank-one `B`-module is `ULift.{v} A` with its usual `A`-action. The transported quotient
-isomorphisms give the final clause. Empty bases and the zero complex cause no exception. -/
+/-- The filtered free resolution construction with carriers in `Type (max u v)`. -/
 theorem exists_large_filtered_free_resolution {A : Type u} [CommRing A]
     (M : CochainComplex (ModuleCat.{max u v} A) ℤ) :
     ∃ (P : CochainComplex (ModuleCat.{max u v} A) ℤ) (q : P ⟶ M),

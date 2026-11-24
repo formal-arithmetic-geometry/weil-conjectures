@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafifyBilinearExtUn
 /-!
 # Extension of bilinear maps through module sheafification
 
-Source: Stacks Project, Modules on Sites, Lemma 18.26.1 (Tag 0GMW), proof hint
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension).
+## References
+
+* Stacks Project, Modules on Sites, Lemma 18.26.1 (Tag 0GMW)
 -/
 
 @[expose] public section
@@ -29,23 +30,7 @@ namespace PresheafOfModules
 /-- A restriction-compatible bilinear map into a sheaf extends uniquely through the two
 module sheafification units. The locally bijective ring map `α` presents `R` as the
 sheafification of `O`. Curried linear maps encode sectionwise bilinearity; the naturality
-identities encode morphisms of (pre)sheaves of sets.
-Source: Stacks Project, Tag 0GMW, proof hint
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension).
-
-Proof:
-1. Forget to sets and factor the map from the product presheaf through its sheafification
-by the universal property [def-weil-pbc-sheafification]. Underlying abelian and ring
-sheafifications agree with set sheafification [lem-pc-sites-sheafification-underlying-sets].
-2. Sheafification preserves binary products [situation-conventions];
-transport the resulting map to the product of the two module sheafifications.
-3. Check additivity and scalar compatibility after precomposition with the units on the
-products of the ring and module presheaves. These identities hold by bilinearity of the
-original map and descend by uniqueness. The scalar actions are the compatible actions
-of [lem-pc-sites-module-sheafification-interface].
-4. Any other extension gives the same map from the sheafification of the product, since
-its composite with the unit is the original map. The uniqueness clause of
-[def-weil-pbc-sheafification] therefore proves equality of the extensions. -/
+identities encode morphisms of (pre)sheaves of sets. -/
 theorem existsUnique_bilinear_sheafification_extension
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasWeakSheafify J AddCommGrpCat.{max u v w}]

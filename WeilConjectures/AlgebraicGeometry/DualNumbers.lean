@@ -48,7 +48,7 @@ values in the ring `k[ε]`.
   `S` (`dualNumbersιOver`, `dualNumbersScaleOver`, `dualNumbersMulOver`, ...).
 - `AlgebraicGeometry.Scheme.dualNumbersToSpec`: the isomorphism `(Spec R)[ε] ⟶ Spec R[ε]`.
 
-## Implementation notes
+## Implementation details
 
 The thickening is first built as a locally ringed space,
 `AlgebraicGeometry.LocallyRingedSpace.dualNumbers`: the stalks of `𝒪_X[ε]` are the dual numbers
@@ -58,10 +58,6 @@ dual numbers commute with localization, so the stalks of `Z[ε]` are the localiz
 `Γ(Z)[ε]`. The morphisms between thickenings are built by hand from their action on sections;
 they are local since a germ of `𝒪_X[ε]` is a unit as soon as its constant part is
 (`TopCat.Presheaf.isUnit_germ_dualNumber_iff`).
-
-## Blueprint
-
-- `def-wf-lie-algebra-derivation`: points with values in the dual numbers as tangent vectors.
 -/
 
 @[expose] public section
@@ -455,8 +451,7 @@ namespace Scheme
 variable (X : Scheme.{u})
 
 /-- The dual-number thickening `X[ε]` of a scheme `X`: the same underlying space with structure
-sheaf `𝒪_X[ε] = 𝒪_X ⊕ ε𝒪_X`, the relative spectrum of the sheaf of algebras `𝒪_X[ε]`.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+sheaf `𝒪_X[ε] = 𝒪_X ⊕ ε𝒪_X`, the relative spectrum of the sheaf of algebras `𝒪_X[ε]`. -/
 noncomputable def dualNumbers : Scheme.{u} where
   __ := X.toLocallyRingedSpace.dualNumbers
   local_affine x := by

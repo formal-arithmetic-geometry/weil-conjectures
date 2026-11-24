@@ -28,8 +28,9 @@ import all WeilConjectures.CategoryTheory.HalfPlaneWeakConvergence
 
 /-! # Bounded coherent direct image in the Noetherian proper case
 
-Source: Stacks Project, Tag 08E2, specialized to a proper morphism; Tag 02O5.
-(blueprint: lem-pc-noetherian-proper-bounded-coherent-image).
+## References
+
+* Stacks Project, Tags 08E2 and 02O5.
 -/
 
 @[expose] public section
@@ -136,8 +137,7 @@ private theorem finite_sections_proper {X T : Scheme.{u}} (f : X ⟶ T) [IsPrope
 
 
 /-- Higher direct images of a finitely presented quasi-coherent module have finite
-global sections over a Noetherian affine base under a proper morphism.
-Source: Stacks Project, Tag 02O6, by integral-ideal devissage. -/
+global sections over a Noetherian affine base under a proper morphism (Stacks, Tag 02O6). -/
 theorem finite_sections_proper_on_affine {X T : Scheme.{u}} (f : X ⟶ T) [IsProper f]
     [HasInjectiveResolutions X.Modules] (F : X.Modules) [F.IsFinitePresentation]
     [IsAffine T] [IsNoetherianRing Γ(T, ⊤)] [F.IsQuasicoherent] (q : ℕ) :
@@ -190,26 +190,7 @@ end Modules
 
 /-- A proper morphism over a Noetherian base preserves bounded coherent cohomology.
 This asserts neither a finite-free representative nor pseudo-coherence or a base-change
-comparison. Source: Stacks Project, Tag 08E2, Lemma 36.11.3; Tag 02O5.
-
-Proof: Coherence makes every cohomology sheaf quasi-coherent and finite type on the
-locally Noetherian source. Its nonzero-stalk locus is closed. Because p is proper, the
-closed support is proper over T. Apply the hypercohomology spectral sequence for derived
-pushforward. Its E2 terms are the higher direct images of these coherent sheaves, hence
-coherent by proper coherence over a Noetherian base (Tag 02O5). In each total degree its
-finite filtration has coherent subquotients, so the abutment is coherent. The lower
-bound is the lower bound of A, since pushforward is left exact. For the upper bound,
-p is quasi-compact and separated and T is quasi-compact. A finite affine cover yields a
-uniform bound on the higher direct images of quasi-coherent modules; equivalently use
-the derived uniform truncation bound of Tag 08D5. Shift A by its upper cohomology bound
-and apply this bound, then shift back. This gives a finite interval containing all image
-cohomology. The zero object gives zero image. For an empty source the image is zero.
-No relative flatness, finite Tor dimension or finite-free image is used.
-
-The existing proper-support direct-image module cannot be imported here: its current
-proof dependencies reach the arbitrary-base pseudo-coherence item. This strictly
-Noetherian proper case isolates the calculation needed before approximation pullback.
-(blueprint: lem-pc-noetherian-proper-bounded-coherent-image). -/
+comparison (Stacks, Tags 08E2 and 02O5). -/
 theorem noetherian_proper_directImage_bounded_coherent
     {Y T : Scheme.{u}} [IsNoetherian T] (p : Y ⟶ T)
     [IsProper p]

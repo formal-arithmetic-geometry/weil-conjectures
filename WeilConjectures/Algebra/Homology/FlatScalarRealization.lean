@@ -8,7 +8,13 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 import Mathlib.CategoryTheory.Adjunction.Additive
 
-/-! # The canonical scalar-realization functor -/
+/-! # The canonical scalar-realization functor
+
+## References
+
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 093J
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,9 +30,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max u v}]
   (α : realizationRing J A ⟶ R)
 
-/-- The recorded sheafified scalar extension, on both objects and maps.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(auxiliary; not a blueprint node). -/
+/-- The recorded sheafified scalar extension, on both objects and maps. -/
 def flatScalarExtension (α : realizationRing J A ⟶ R) :
     realizationModules J A ⥤ SheafOfModules.{max u v}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) where
@@ -60,8 +64,7 @@ def flatScalarExtension (α : realizationRing J A ⟶ R) :
     change L.map (t (f ≫ g)) = L.map (t f) ≫ L.map (t g)
     rw [ht, L.map_comp]
 
-/-- Additivity is inherited from sectionwise tensor and additive sheafification.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Additivity is inherited from sectionwise tensor and additive sheafification. -/
 instance flatScalarExtension_additive : (flatScalarExtension J α).Additive where
   map_add {M N} f g := by
     let L := PresheafOfModules.sheafification
@@ -89,15 +92,13 @@ instance flatScalarExtension_additive : (flatScalarExtension J α).Additive wher
     change L.map (t (f + g)) = L.map (t f) + L.map (t g)
     rw [ht, L.map_add]
 
-/-- Constant module realization followed by the specified sheafified change of rings.
-Source: Stacks 093J and 03EK (auxiliary; not a blueprint node). -/
+/-- Constant module realization followed by the specified sheafified change of rings. -/
 def flatScalarRealization (α : realizationRing J A ⟶ R) :
     ModuleCat.{max u v} A ⥤ SheafOfModules.{max u v}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) :=
   commutativeSiteConstantModuleFunctor J A ⋙ flatScalarExtension J α
 
-/-- Both factors of scalar realization are additive.
-Source: Stacks 093J and 03EK (auxiliary; not a blueprint node). -/
+/-- Both factors of scalar realization are additive. -/
 instance flatScalarRealization_additive : (flatScalarRealization J α).Additive :=
   inferInstanceAs ((commutativeSiteConstantModuleFunctor J A ⋙
     flatScalarExtension J α).Additive)

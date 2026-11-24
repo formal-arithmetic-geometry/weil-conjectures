@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ExternalSectionsOpenComparison
 
 /-! # Restriction compatibility of external global sections
 
-Source: Stacks Project, Tag 0BED, the degree-zero cup product and its restriction maps.
-(blueprint: lem-sc-external-global-sections-restriction-comparison).
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -25,16 +26,15 @@ noncomputable section
 
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The presheaf of sections of the external coefficient above opens of the second factor.
-Source: Stacks Project, Tag 0BED. -/
+/-- The presheaf of sections of the external coefficient above opens of the second factor
+(Stacks, Tag 0BED). -/
 abbrev externalSectionsPushforward
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) : Y.Opensᵒᵖ ⥤ ModuleCat.{w} k :=
   (TopologicalSpace.Opens.map (pullback.snd f g).base).op ⋙
     scalarPresheaf (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)
 
-/-- Sections above the top open are global sections on the fibre product.
-Source: Stacks Project, Tag 0BED. -/
+/-- Sections above the top open are global sections on the fibre product (Stacks, Tag 0BED). -/
 def externalSectionsTopIso
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :
@@ -45,31 +45,8 @@ def externalSectionsTopIso
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The external section comparison is a morphism of presheaves on the second factor.
-Its components identify with the canonical comparisons on the open subschemes.
-Source: Stacks Project, Tag 0BED, degree-zero cup product; Tags 0096 and 0097,
-restriction and composition of pullback adjunctions.
-(blueprint: lem-sc-external-global-sections-restriction-comparison).
-
-Proof: Above V, restrict a global section of F to pr_2 inverse-image V using the
-pullback-adjunction unit for pr_1, and pull a section of G(V) back using the unit for
-pr_2. Their tensor section is bilinear over k, so it induces the component c_V.
-Naturality of both units and the restriction formula for tensor sections prove
-naturality of c, first on pure tensors and then by tensor induction. At the top open
-these units, followed by the restriction along preimage_top, are precisely the two
-maps tensorPullbackTopSection in the definition of externalGlobalSectionsTensor.
-This proves the normalization equation. For V, the standard cartesian square of
-open subschemes identifies X times V with pr_2 inverse-image V. Restriction of G
-to V has sections G(V), with the same k-action; this gives eS after tensoring with
-Gamma(X,F). Restriction along the open immersion is naturally isomorphic to tensor
-pullback by uniqueness of left adjoints to pushforward. Compose this comparison
-with the pullback-composition comparisons on each factor and the tensor-pullback
-comparison to identify the restricted external coefficient with the external
-coefficient on X times V. Its global sections give eT. The unit equations for these
-comparisons carry the two pulled-back sections to the two local pulled-back
-sections. Thus the square commutes on pure tensors, hence on every tensor.
-All comparisons are isomorphisms for arbitrary opens, including the empty open;
-no affineness, quasi-coherence, finiteness, or cover assumption is used.
--/
+Its components identify with the canonical comparisons on the open subschemes
+(Stacks, Tags 0BED, 0096 and 0097). -/
 theorem exists_externalSectionsRestrictionComparison
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :

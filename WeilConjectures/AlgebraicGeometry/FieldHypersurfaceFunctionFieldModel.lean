@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FieldFractionRingGeometricIntegrality
 
 /-! # Hypersurface function-field presentation over a field
 
-Source: Stacks Project, Tag 0559, first proof, separating generators and minimal polynomial.
-(blueprint: lem-sbc-field-hypersurface-function-field-model)
+## References
+
+* [Stacks Project, Tag 0559](https://stacks.math.columbia.edu/tag/0559)
 -/
 
 @[expose] public section
@@ -28,24 +29,7 @@ open CategoryTheory Topology
 namespace AlgebraicGeometry
 
 /-- A geometrically integral affine scheme of finite type over a field has the function
-field of a geometrically integral hypersurface over that field.
-
-Source: Stacks Project, Tag 0559, first proof, paragraphs beginning with the generic
-point and the separating generators.
-Proof: The affine section algebra is a finitely generated geometrically integral
-K-algebra, so its fraction field L is finitely generated and separably generated over K.
-Choose a separating transcendence basis and a primitive element for the remaining finite
-separable extension. Take the primitive numerator Q of its minimal polynomial. Gauss's
-lemma identifies the quotient with a subalgebra of L having fraction field L. After any
-field extension, the same injection into the localization of the geometrically integral
-section algebra shows that the quotient is still a domain. Its spectrum is therefore
-geometrically irreducible and reduced, and both schemes are integral. A finite polynomial
-algebra and its principal quotient are finitely presented, giving local finite type.
-The two inclusions in L induce the fraction-ring equivalence, and both fix K; composing
-with the canonical global-section identification of Spec K gives the displayed equality.
-When L is purely transcendental use one extra variable with equation T; this includes L=K.
-
-(blueprint: lem-sbc-field-hypersurface-function-field-model) -/
+field of a geometrically integral hypersurface over that field (Stacks, Tag 0559). -/
 theorem exists_field_hypersurface_function_field_model
     {K : Type u} [Field K] {Y : Scheme.{u}} [IsAffine Y]
     (p : Y ⟶ Spec (.of K)) [LocallyOfFiniteType p]

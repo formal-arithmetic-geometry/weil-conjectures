@@ -149,10 +149,9 @@ import Mathlib.CategoryTheory.Whiskering
 /-!
 # Stratum pullback and scalar-extension comparison
 
-Source: literature/blueprint/main-20261015/blueprint/sec-smooth-purity/
-  sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md,
-  proof paragraph (2), expanded constant-module pullback and stratum tensor comparison
-(blueprint: lem-sp-stratum-scalar-extension).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 0H7J
 -/
 
 @[expose] public section
@@ -167,17 +166,14 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The map of constant coefficient rings induced by a unital map of rings.
-Source: the coefficient comparison in the scalar-extension proof (blueprint:
-`lem-sp-stratum-scalar-extension`). -/
+/-- The map of constant coefficient rings induced by a unital map of rings. -/
 noncomputable def proEtaleConstantRingMap {T : Scheme.{u}} {A B : Type u}
     [CommRing A] [CommRing B] (α : A →+* B) :
     proEtaleConstantRing T A ⟶ proEtaleConstantRing T B :=
   (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (RingHom.ulift α))
 
-/-- A constant module presheaf is left adjoint to evaluation at a terminal object.
-Source: the constant-sheaf universal property, Stacks Tag 0H7J. -/
+/-- A constant module presheaf is left adjoint to evaluation at a terminal object. -/
 private noncomputable def constantPresheafHomEquiv (Y : Scheme.{u}) (A : Type u) [CommRing A]
     (T : Y.ProEt) (hT : IsTerminal T)
     (M : ModuleCat.{u + 1} (ULift.{u + 1} A))

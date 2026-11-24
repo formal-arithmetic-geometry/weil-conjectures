@@ -11,7 +11,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import WeilConjectures.Algebra.Homology.InternalHomOverNaturality
 import WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
 
-/-! # Composite open restriction comparison -/
+/-! # Composite open restriction comparison
+
+## References
+
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL), restriction of internal Hom
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -37,17 +42,7 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.overFuncto
 attribute [local irreducible] Scheme.Modules.restrictFunctor SheafOfModules.overFunctor
 
 
-/-- Composite restriction commutes naturally with internal Hom.
-Source: Stacks Project, Tag 08DL, restriction of internal Hom.
-(blueprint: new-t4-open-over-internal-hom-comparison).
-
-Proof: First use overHomObjIso for V. Transport it through the open-site
-module equivalence using internalHom_overEquiv, then transport along the
-natural isomorphism overFunctorEquiv from localized modules to restriction.
-Finally apply overHomObjIso for W. Pre- and postcomposition commute with
-all four comparisons; composing their naturality squares proves the formula.
-All maps are reindexing maps on local linear morphisms, so the construction
-also works for the empty open and for zero modules. -/
+/-- Composite restriction commutes naturally with internal Hom. -/
 theorem openOver_internalHom_comparison (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens) :
     let F : X.Modules ⥤

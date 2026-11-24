@@ -20,27 +20,8 @@ namespace AlgebraicGeometry.Scheme
 
 noncomputable section
 
-/-- Every normalized affine degree comparison has a two-sided inverse.
-Source: Stacks Project, Tag 03P2, affine calculation; Tags 01I9 and 01IA.
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-inverse)
-
-Compare tensor pullback with Mathlib pullback by uniqueness of the left
-adjoint to the same pushforward, respecting their units. This transports
-quasi-coherence of U*F from the Mathlib pullback theorem.
-
-Proof: apply the affine pullback sections formula to P → U and U*F;
-quasi-coherence of U*F follows from that of F. The affine ring comparison
-and the unit-normalized composition isomorphism turn it into a bijective
-additive comparison c. Lift it and invert singleton product evaluation.
-Its pure-tensor formula agrees with the assumed formula of f. To prove
-f = c, evaluate at the unique product index and use ordinary tensor
-induction followed by indexed tensor induction. Scalar multiples of pure
-indexed tensors move to the coefficient factor by the balanced relation,
-so the assumed equations determine the maps on additive generators.
-Thus f is bijective; its inverse additive homomorphism gives inv. The two
-inverse equations hold on elements and hence as categorical morphisms.
-For n=0 this is the affine sections formula; for empty W both groups vanish.
--/
+/-- Every normalized affine degree comparison has a two-sided inverse (Stacks, Tags 03P2, 01I9
+and 01IA). -/
 theorem exists_singletonTensorDegreeComparison_inverse
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U W : X.Etale) (g : W ⟶ U) (hU : IsAffine U.left) (hW : IsAffine W.left)

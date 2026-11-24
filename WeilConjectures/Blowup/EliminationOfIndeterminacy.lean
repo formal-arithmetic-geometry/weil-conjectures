@@ -49,15 +49,12 @@ to the base, blowing up the product of the extensions and gluing.
   blow-up `B`, an open `W` of the blow-up containing the preimage of `U`, and an
   `X`-morphism `g : W ⟶ 𝔸(σ; X)` agreeing with `f` over `U` whose graph
   `W ⟶ Bl ×_X 𝔸(σ; X)` has closed range.
-  (Blueprint: `lemma:nagata-conrad-affine-space-extension`.)
 - `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine`: the same statement for
   a quasi-affine target `Y` of finite type over the affine base `X`, with the additional
   conclusion that the preimage of `U` is scheme-theoretically dense in the blow-up.
-  (Blueprint: `lemma:nagata-conrad-quasi-affine-affine-base`.)
 - `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`: Conrad's Theorem 2.4,
   Case 2 — the same statement for a qcqs base `X` and a separated, quasi-affine morphism
   `p : Y ⟶ X` locally of finite type.
-  (Blueprint: `lemma:nagata-conrad-quasi-affine-equal-opens`.)
 
 Two auxiliary statements feed Case 2:
 `AlgebraicGeometry.exists_isAdmissible_extend_of_isAffineOpen` runs Case 1 over an affine
@@ -99,5 +96,4 @@ The affine-space coordinate type is any `σ : Type u` with `[Finite σ]` rather 
 `Fin n`: finiteness is what the common-denominator argument needs, and this matches the
 index types produced by `exists_immersion_affineSpace_of_quasiAffine'` (Stacks 04II)
 with which this theorem is composed on the route to Stacks Tag 081S.
-
 -/

@@ -19,7 +19,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true
 
-/-- (blueprint: lem-sc-cartesian-chart-raw-adjunction-pullback) -/
+/-- Naturality of the chart adjunction class under pullback along a morphism of charts. -/
 lemma chartRawAdj_classPullback {S X B T T' : Scheme.{u}}
     (f : X ⟶ S) (g : B ⟶ S) (a : T ⟶ B) (g' : T ⟶ S) (wg' : g' = a ≫ g)
     (b : T' ⟶ T) (a' : T' ⟶ B) (ha : a' = b ≫ a)

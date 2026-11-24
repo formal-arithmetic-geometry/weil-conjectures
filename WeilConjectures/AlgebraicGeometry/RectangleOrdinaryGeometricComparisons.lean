@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.RectangleOrdinaryGeometricDirect
 
 /-! # Ordinary pasting comparisons for the iterated pullback
 
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
+## References
+
+* [Stacks, Tag 0ATR]
+* [Stacks, Tag 08HY]
+* [Stacks, Tag 0ATM]
+* [Stacks, Tag 0D5S]
 -/
 
 @[expose] public section
@@ -24,23 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.TwoSquare
 namespace AlgebraicGeometry
 
-/-- Geometric comparisons for the ordinary rectangle, before introducing right adjoints.
-Source: Stacks Project, Tags 0ATR, 08HY, 0ATM and 0D5S.
-(blueprint: lem-sc-rectangle-ordinary-geometric-comparisons)
-
-Proof: The pullback universal property identifies k with the canonical iterated
-pullback isomorphism. Derived pullback along this isomorphism is an equivalence,
-and restriction to the full quasi-coherent subcategories remains an equivalence.
-Restrict the fixed derived pullback composition comparisons, using hk₁, to obtain
-s, with exactly the displayed ambient component; the base comparison gives b.
-The derived direct image composition comparison, the adjunction equivalence for k,
-and hk₂ give p. Transpose the ordinary rectangle and the paste under the fixed
-pullback/direct image adjunctions. The counit definition of ordinary base change
-and associativity of the canonical pullback comparisons identify their transposes.
-Injectivity of the adjunction Hom equivalence proves ordinary pasting. Invert the
-three base change isomorphisms and use naturality to move p and b, giving the
-stated inverse-square equality. This proof is valid for empty schemes and zero
-complexes, since all steps are functorial identities or universal properties. -/
+/-- Geometric comparisons for the ordinary rectangle, before introducing right adjoints. -/
 theorem rectangle_ordinary_geometric_comparisons
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
     {X Y S T : Scheme.{u}}

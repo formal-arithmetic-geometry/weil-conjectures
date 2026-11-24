@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 
 /-! # Factorization of ordinary evaluation components
 
-Source: Stacks Project, Tag 08DQ, and Section 20.41.
-(blueprint: lem-pc-ordinary-evaluation-component-factorization).
+## References
+
+* Stacks Project, Tag 08DQ, and Section 20.41.
 -/
 
 @[expose] public section
@@ -65,22 +66,8 @@ private theorem evaluation_factorization {C : Type u} [Category.{u} C]
     associator_naturality_middle_assoc, ← whiskerLeft_comp_assoc,
     BraidedCategory.braiding_naturality_left_assoc, uncurry_projection R]
 
-/-- Factorization of a nonzero ordinary evaluation component through module evaluation.
-Source: Stacks Project, Tag 08DQ, ordinary evaluation map; Tag 03EO, tensor-Hom
-adjunction naturality.
-(blueprint: lem-pc-ordinary-evaluation-component-factorization).
-Proof: Since r+q=0, the positive branch of localEvaluationComponent applies. Write b
-for its dual projection followed by the degree-zero unit identification, and g for
-its output degree transport. Naturality of tensorHomEquiv in the tensor argument
-moves F^p tensor b inside currying; naturality in the output moves g inside currying.
-Expand moduleDualEvaluation. Braiding naturality moves b from the outer tensor input
-past the first braiding, associator naturality moves it through the associator, and
-braiding naturality moves it past the inner braiding. The remaining equality is
-uncurry(b)= (P^r tensor b) followed by uncurry(id), proved by applying the injective
-currying equivalence and using its tensor-input naturality and inverse laws.
-Reassociate compositions to recover exactly the positive component formula.
-The index-equality proofs are irrelevant; zero objects and arbitrary unbounded
-complexes satisfy the same identities. -/
+/-- Factorization of a nonzero ordinary evaluation component through module evaluation
+(Stacks, Tags 08DQ and 03EO). -/
 theorem ordinaryEvaluation_component_factorization (X : Scheme.{u}) (U : X.Opens)
     (P F : CochainComplex (localEvaluationModules X U) ℤ)
     (p q n r : ℤ) (hpq : p + q = n) (hr : r + q = 0) :

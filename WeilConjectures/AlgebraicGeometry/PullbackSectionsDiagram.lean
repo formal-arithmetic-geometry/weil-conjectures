@@ -126,24 +126,8 @@ private theorem sectionComparison_comp_named {R X Y Z : Scheme.{u}}
   exact sectionComparison_comp Λ f h k G
 
 /-- The adjunction units, corrected by direct- and inverse-image composition, form a
-section diagram and a cocone on any tail of an inverse system. No affineness or
-continuity assertion is needed for this coherence statement.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09YU (lemma-category-is-colimit),
-proof, Fully faithful; the coherence argument is steps 2, 5 and 6 of the parent node.
-(blueprint: lem-weil-pbc-pullback-sections-diagram)
-
-Proof: Take the section module S_i at each stage and the displayed map mu_f on arrows.
-The unit equation characterizing the inverse-image composition isomorphism identifies
-mu_f with the unit for the composite morphism, transported through direct image.
-Naturality of the unit and associativity of the direct-image composition then give
-mu_g mu_f = mu_(fg). The identity composition comparison cancels the identity unit,
-so mu_id = id. The same unit equation with the limit projection, and the cone equation,
-gives tau_j mu_f = tau_i. Thus these objects and arrows define a functor F, the tau_i
-define a cocone B, and the object comparisons e_i and eB can all be chosen as identities.
-For module coefficients the units and composition maps are already module morphisms;
-uniqueness of the adjoint comparison gives these same equations without forgetting the
-module structure. This is only the coherence part, and asserts no colimit property. -/
+section diagram and a cocone on any tail of an inverse system
+(Stacks, Tag 09YU). -/
 theorem exists_pullbackSections_diagram {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (Λ : Type (u + 1)) [CommRing Λ] (i₀ : I)
     (G : Sheaf (D.obj (op i₀)).smallEtaleTopology (ModuleCat.{u + 1} Λ))

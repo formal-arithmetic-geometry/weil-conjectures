@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 
 /-! # Naturality of tensor sections in the module
 
-Source: Stacks Project, Descent, Tag 03DR, equation (35.8.0.1).
-(blueprint: lem-sc-etale-tensor-sections-map-naturality)
+## References
+
+* Stacks Project, Tag 03DR
 -/
 
 @[expose] public section
@@ -59,17 +60,8 @@ private theorem restriction_naturality {A B C : Scheme.{u}}
         ((tensorPullback (a ≫ b)).map φ).app ⊤ at hc
   rw [Category.assoc, ← hc, ← Category.assoc, unit_naturality, Category.assoc]
 
-/-- Applying a module morphism commutes with the normalized tensor restrictions.
-Source: Stacks Project, Descent, Tag 03DR, equation (35.8.0.1).
-(blueprint: lem-sc-etale-tensor-sections-map-naturality)
-
-Proof: Write the restriction as the section pullback unit followed by the
-normalized comparison c and the equality transport g composed with u equals v.
-Naturality of the adjunction unit moves the pulled-back module morphism past
-the first map. Naturality of c moves it past the second. Equality elimination
-moves it past the last transport. Evaluating these three commuting squares on
-global sections and composing gives the assertion. Identity, empty objects,
-and zero modules require no separate assumptions. -/
+/-- Applying a module morphism commutes with the normalized tensor restrictions (Stacks, Tag 03DR).
+-/
 theorem etaleTensorSectionsMap_naturality {X : Scheme.{u}} {F G : X.Modules}
     (φ : F ⟶ G) {U V : X.Etale} (g : V ⟶ U) :
     etaleTensorSectionsRestriction F g ≫ ((tensorPullback V.hom).map φ).app ⊤ =

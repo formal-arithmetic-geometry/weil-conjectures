@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # Finitely many ranks on an affine part of the universal rank locus
 
-Source: Stacks Project, Tag 0BDP, first proof paragraph.
-(blueprint: lem-sc-picard-universal-rank-match-finite-ranks).
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -36,14 +37,7 @@ private theorem finiteLocallyFreeOfRank_of_isEmpty {T : Scheme.{u}} [IsEmpty T]
   intro V x hx
   exact isEmptyElim x
 
-/-- A finite rank bound for all fibre restrictions over an affine open.
-Source: Stacks Project, Tag 0BDP, rank decomposition paragraph.
-Properness makes the inverse image of an affine open quasi-compact. A finite
-trivializing subcover of the finite locally free sheaf then has finitely many
-ranks; every rank on a nonempty fibre is one of these ranks: choose a fibre point,
-choose a covering open containing its image, and compare both trivializations
-over the residue field of that point. Adjoin zero to the finite set. Empty
-fibres are excluded from the rank comparison because all ranks coincide there. -/
+/-- A finite rank bound for all fibre restrictions over an affine open. -/
 private theorem picardUniversalRankMatch_finiteRankBound {X S : Scheme.{u}}
     (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (U : S.Opens) (hU : IsAffineOpen U) :
@@ -103,11 +97,7 @@ private theorem picardUniversalRankMatch_finiteRankBound {X S : Scheme.{u}}
   rw [hn]
   exact Finset.mem_insert_of_mem (Finset.mem_image.mpr ⟨x, hxA, rfl⟩)
 
-/-- Local rank extraction from the universal rank condition.
-Source: Stacks Project, Tag 0BDP, specialization to the identity of the residue field.
-The identity test scheme has one point, so the neighbourhood supplied by
-`PicardUniversalRankMatch` is the whole scheme; pulling back along its inclusion
-therefore gives a finite locally free fibre module of one constant rank. -/
+/-- Local rank extraction from the universal rank condition. -/
 private theorem picardUniversalRankMatch_localRank {X S : Scheme.{u}}
     (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (s : S)
@@ -147,24 +137,8 @@ private theorem picardUniversalRankMatch_localRank {X S : Scheme.{u}}
       eqToIso (congrArg (fun k ↦ (Modules.tensorPullback k).obj E) he)
   exact ⟨r, SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso e⟩
 
-/-- On an affine base open, finitely many fibre ranks cover the universal rank locus.
-Source: Stacks Project, Tag 0BDP, rank decomposition paragraph; finite local freeness
-and properness give the finite bound even without connected fibres.
-(blueprint: lem-sc-picard-universal-rank-match-finite-ranks).
-
-Proof:
-1. The inverse image of the affine open is quasi-compact, since f is proper.
-   Trivialize E on an open cover of that inverse image, and take a finite subcover.
-   Let R be the finite set of ranks of these trivializations, with zero adjoined.
-2. At a point s satisfying the universal rank condition, apply that condition to the
-   identity of Spec kappa(s) and its unique point. Its nonempty neighbourhood is the
-   whole one-point scheme. The third clause gives a constant rank r for E on the fibre;
-   pullback along this open inclusion and the identity changes no rank.
-3. If the fibre is nonempty, choose a point of it and a member of the finite
-   trivializing cover containing its image in X. Pulling both trivializations to its
-   residue field and comparing dimensions shows that r is that member's rank, hence
-   belongs to R. If the fibre is empty, E on it has rank zero, so choose zero in R.
-   This proves the bound without assuming f is surjective or the fibres connected. -/
+/-- On an affine base open, finitely many fibre ranks cover the universal rank locus
+(Stacks, Tag 0BDP). -/
 theorem picardUniversalRankMatch_finiteRanks {X S : Scheme.{u}}
     (f : X ⟶ S) [Flat f] [IsProper f] [LocallyOfFinitePresentation f]
     (E : X.Modules) [E.IsFiniteLocallyFree] (U : S.Opens) (hU : IsAffineOpen U) :

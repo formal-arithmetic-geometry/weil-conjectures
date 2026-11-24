@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Composition of varying-coefficient raw pullbacks
 
-Source: Stacks Project, Tags 09Z1 and 03CB.
-(blueprint: lem-sbc-abelian-raw-pullback-composition).
+## References
+
+* Stacks Project, Tags 09Z1 and 03CB
 -/
 
 @[expose] public section
@@ -164,30 +165,8 @@ private lemma rawGeneralComp (A : Type (v + 2)) [Category.{v + 1} A]
   rw [ht]
 
 /-- Two varying-coefficient raw pullbacks compose on each derived-Hom group.
-The composite scheme map and coefficient map may be given with canonical transports.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps; Tag 03CB, composition of
-inverse images. (blueprint: lem-sbc-abelian-raw-pullback-composition).
-
-Proof: Substitute hd so d is b ≫ a, and convert hφ to equality of morphisms. Expand the
-five factors of each raw pullback. Functor.map_comp distributes D(b^*) over the inner
-five factors. Naturality of the single-functor comparison for b^* at the source comparison
-moves that comparison to the left of the inverse single comparison. The adjacent direct
-and inverse single comparisons at the intermediate source then cancel. Use naturality of
-the derived composition isomorphism D((b ≫ a)^*) ≅ D(a^*) ⋙ D(b^*) at z to replace the
-twice pulled-back class by the class pulled back along b ≫ a. The source factors agree
-with the source factor for d by upperStarComp associativity applied to b, a, h. On single
-complexes the derived composition agrees with the underived comparison by the proved
-exact-functor helpers plus_single_comp and plus_single_natIso in EtalePullbackSingleComp.
-The private lemma singleComp combines these identities. Its shift compatibility follows
-from the proved plusNatIso_commShift and plusCompIso_commShift helpers in
-AbelianDerivedDirectImageTransitionShift. It moves the target component through the two
-commShiftIso factors. Naturality of the single comparison at φa moves φa past the intermediate
-comparison; functoriality of single and shift combines the coefficient factors as
-single(upperStarComp.hom ≫ b^*.map φa ≫ φb). This is single(φd) by hφ. Use wa, wb, wd
-and associativity to identify the structure-map equalities (their proof transports are
-proof-irrelevant). The five remaining factors are exactly the raw formula for d.
-No invertibility of any coefficient morphism is used; zero coefficients, empty schemes,
-identity maps and p = 0 obey the same calculation. -/
+The composite scheme map and coefficient map may be given with canonical transports
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianHigherDirectImageRawPullback_composition {S Y Y' Y'' : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (d : Y'' ⟶ Y) (hd : d = b ≫ a)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)

@@ -11,7 +11,17 @@ public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibility
 
-/-! # Core affine derived tensor source comparison -/
+/-! # Core affine derived tensor source comparison
+
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08DW
+* Stacks Project, Tag 06Z0
+* Stacks Project, Tag 08D4
+* Stacks Project, Tag 08HY
+* Stacks Project, Tag 0AVW
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -70,27 +80,7 @@ attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
   affineTildeTensorOrdinarySourceIso affineTildeTensorDerivedCounit
 
 -- Comparing affine tensor units and counits requires substantial reduction.
-/-- The affine source comparison is normalized by its derived counit.
-Source: Stacks Project, Tags 06Y6, 08DW, 06Z0, 08D4, 08HY and 0AVW.
-(blueprint: lem-pc-affine-tilde-tensor-source-comparison).
-
-Proof: first transport along the supplied defining equality of F0.
-Resolve the R-restriction of M by a termwise flat K-flat complex P.
-The universal counit of m identifies its value on this restriction with the
-B-extension of P. Exact tilde sends the augmentation to a quasi-isomorphism.
-Its K-flat image computes g-pullback, with the unit-normalized tensor/tilde
-identification. Naturality of the two universal counits gives the displayed
-normalization equation; comparison on P determines it after localization.
-Compose the tensor comparison with pullback of the concrete ordinary affine
-pushforward iso. The actual affine pushforward right-derived unit is invertible:
-choose a K-injective resolution, apply affinePushforward_resolution_quasiIso,
-and use naturality of the unit. Pullback of this unit gives chi with the stated
-source. For every commutative affine square, apply the pinned derived-unit
-compatibility theorem. Precompose its equality with the source comparison;
-the counit normalization proved above gives the displayed universal equation.
-This equation involves ordinary exchange, and does not identify the coefficient
-map or assert the final mate equality. No boundedness is imposed. For the zero complex and zero
-rings the same counit equations hold on the unique zero objects. -/
+/-- The affine source comparison is normalized by its derived counit. -/
 theorem exists_affineTildeTensorSourceComparisonCore
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

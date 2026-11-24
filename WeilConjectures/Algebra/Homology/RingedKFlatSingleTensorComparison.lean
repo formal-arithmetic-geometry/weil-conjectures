@@ -16,12 +16,13 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # K-flat tensor with a module in degree zero on a ringed site
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YU, definition-derived-tor and
-its preceding construction, specialized to a degree-zero second factor.
-(auxiliary; not a blueprint node)
-
 The tensor and its representative comparison are the published site-descent construction.
 The termwise tensor is the existing tensor functor applied to a cochain complex.
+
+## References
+
+* [Stacks Project, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU), specialized to a
+  degree-zero second factor
 -/
 
 @[expose] public noncomputable section
@@ -268,37 +269,7 @@ normalized by every pair of flat-term K-flat resolutions. In the termwise functo
 objects, differentials and map components are respectively `P.X q tensor M`,
 `P.d q q' tensor id`, and `u.f q tensor f`. The single-complex total identification is
 `CochainComplex.mapBifunctorSingle₂Iso`, whose sole nonzero summand is `(q,0)`.
-No boundedness, termwise flatness of P, or flatness of M is assumed.
-
-Source: Stacks Project, Tag 06YU, definition-derived-tor and preceding construction
-(auxiliary; not a blueprint node).
-
-Proof plan (the node's seven steps):
-1. Work on a coefficient-universe small model of the site (prose-01-10).
-   Module sheaves are Grothendieck abelian (prop-pur-kinjective-resolutions-exist),
-   their tensor is closed symmetric and additive (lem-pc-sheaf-modules-tensor-closed),
-   and they have functorial flat resolutions (lem-trf-site-functorial-flat-resolution).
-2. The acyclic-tensor K-flat predicate implies preservation of quasi-isomorphisms
-   (lem-pur-kflat-tensor-quasiiso-independent). The signed swap on bidegree (i,j)
-   has sign (-1)^(ij); its two differential coefficients are (-1)^(ij) and
-   (-1)^(ij+j). It gives preservation in the other variable. Conversely test 0 to X
-   for acyclic X. Thus it agrees with def-sfb-preserves-kflat-quasi-iso.
-3. Apply prose-03-02. Its natural localization multiplication is invertible
-   whenever one argument is K-flat, including the identity resolution of P.
-4. Identify that tensor with the specified site-descent tensor by extending the
-   comparison on flat-term K-flat pairs, and its inverse, uniquely
-   (lem-weil-pbc-site-derived-tensor-descent). The resulting multiplication m has
-   normalization m = representativeIso.inv on those pairs.
-5. In total tensor with M[0], all summands except (q,0) vanish. Projection and
-   inclusion give delta = mapBifunctorSingle₂Iso; the second differential vanishes,
-   so the first is d_P tensor id. Compose m with Q(delta) to obtain c.
-6. Naturality of m and delta gives precisely the displayed square, whose right edge
-   is Q of the termwise tensor map. In degree q this map is u.f q tensor f.
-7. For any flat-term K-flat resolutions p and b (lem-pc-kflat-resolution), naturality
-   gives beta followed by tensor(Qp,Qb) followed by c = Q(total(p,b) followed by delta).
-   The first two arrows are invertible. Thus this equation uniquely determines c,
-   proves independence of both resolutions, and gives uniqueness of the whole family.
--/
+No boundedness, termwise flatness of P, or flatness of M is assumed. -/
 theorem ringed_kFlat_single_tensor_comparison :
     ∃! c : ∀ (P : CochainComplex (Modules R) ℤ)
         (_ : CochainComplex.IsKFlatIndependentCoefficients P) (M : Modules R),

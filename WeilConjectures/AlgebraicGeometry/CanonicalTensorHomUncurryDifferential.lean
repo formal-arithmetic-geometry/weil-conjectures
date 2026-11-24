@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 
 /-! # Differential compatibility of componentwise uncurrying
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, and cohomology.tex, Tag 08DJ.
-(blueprint: lem-pc-tensor-hom-uncurry-differential).
+## References
+
+* Stacks Project, Tags 0A90 and 08DJ
 -/
 
 @[expose] public section
@@ -166,9 +167,8 @@ private theorem hom_uncurry_comm {C : Type u} [Category.{u} C]
       (homComplex_projections_exists.{u, u, u, u} (R := R))).2.1
         L I p (p + 1) q (n + 1) n (q + 1) rfl (by omega) (by omega) (by omega)) φ n m
 
-/-- The actual coproduct extension of the uncurried components in total degree `n`.
-Source: Stacks Project, Tag 0A90 (degreewise evaluation).
-(blueprint: lem-pc-tensor-hom-uncurry-differential). -/
+/-- The actual coproduct extension of the uncurried components in total degree `n`
+(Stacks, Tag 0A90). -/
 def schemeTensorHomUncurryGraded (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -181,22 +181,8 @@ def schemeTensorHomUncurryGraded (X : Scheme.{u})
       change p + q = n at h
       omega))
 
-/-- The coproduct evaluation commutes with the total tensor differential.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A90, differential calculation,
-and cohomology.tex, Tag 08DJ.
-(blueprint: lem-pc-tensor-hom-uncurry-differential).
-
-Proof: Test equality on every coproduct summand P^p tensor L^q, p+q=n.
-For m=n+1 the total differential is d_P tensor 1 plus (-1)^p times 1 tensor d_L.
-Project the chain-map equation for φ to Hom(L^q,I(M)^m). The Hom differential
-projection formula gives d_I φ_p minus (-1)^p φ_p d_L, while the other side is
-φ_(p+1) d_P. Apply the sheaf tensor-Hom adjunction and its symmetry to this
-identity. Naturality and additivity of the adjunction identify its three terms
-with evaluation followed by d_I and the two total differential summands.
-Move the signed L term to the other side. The coproduct universal property
-then gives the displayed equality. For m different from n+1 both complex
-differentials vanish by the shape axiom. This argument applies in all integer
-degrees, to unbounded complexes, and also to zero complexes and zero φ. -/
+/-- The coproduct evaluation commutes with the total tensor differential
+(Stacks, Tags 0A90 and 08DJ). -/
 theorem schemeTensorHomUncurryGraded_comm (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -208,9 +194,8 @@ theorem schemeTensorHomUncurryGraded_comm (X : Scheme.{u})
   exact hom_uncurry_comm X.sheaf P L ((schemeHomKInjectiveResolution X).obj M) φ n m
 
 /-- The chain map obtained by extending evaluation over the tensor coproducts.
-Its data are explicit; only differential compatibility uses the preceding theorem.
-Source: Stacks Project, Tag 0A90.
-(blueprint: lem-pc-tensor-hom-uncurry-differential). -/
+Its data are explicit; only differential compatibility uses the preceding theorem
+(Stacks, Tag 0A90). -/
 def schemeTensorHomUncurry (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L
@@ -219,9 +204,8 @@ def schemeTensorHomUncurry (X : Scheme.{u})
   f := schemeTensorHomUncurryGraded X P L M φ
   comm' n m _ := schemeTensorHomUncurryGraded_comm X P L M φ n m
 
-/-- Restricting coproduct evaluation to a summand recovers exactly the specified component.
-Source: Stacks Project, Tag 0A90, coproduct universal property.
-(blueprint: lem-pc-tensor-hom-uncurry-differential). -/
+/-- Restricting coproduct evaluation to a summand recovers exactly the specified component
+(Stacks, Tag 0A90). -/
 theorem schemeTensorHomUncurry_component (X : Scheme.{u})
     (P L M : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)
     (φ : P ⟶ homComplex (R := X.sheaf) L

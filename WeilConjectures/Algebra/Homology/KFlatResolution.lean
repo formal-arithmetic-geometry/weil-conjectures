@@ -16,8 +16,13 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 /-!
 # K-flat resolutions on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Lemma 06YS
-(`sites-cohomology-lemma-K-flat-resolution`) (blueprint: lem-pc-kflat-resolution).
+Every complex of modules over a sheaf of commutative rings on a site admits a K-flat resolution
+with flat terms and a degreewise surjective augmentation
+(`CochainComplex.exists_isKFlatResolution`).
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YS
 -/
 
 @[expose] public section
@@ -73,24 +78,7 @@ private theorem flat_terms_mappingCone
 
 /-- Every complex of modules over a sheaf of commutative rings on a site admits a K-flat
 resolution with flat terms and a degreewise surjective augmentation. Surjectivity is in the
-category of sheaves of modules, i.e. an epimorphism, rather than surjectivity on all sections.
-Source: Stacks Project, Lemma 06YS (blueprint: lem-pc-kflat-resolution).
-
-Proof outline recorded in the blueprint:
-1. Replace each good truncation of `G` by a bounded-above flat complex with a termwise
-   surjective quasi-isomorphism, compatibly with the transition maps
-   (`lem-pc-kflat-bounded-flat-replacement`).
-2. Form the telescope, the cone of one minus the shift on the countable direct sum of these
-   replacements. Bounded-above flat complexes, their sums and their cones are K-flat;
-   their terms are flat (`lem-pc-kflat-closure`). The induced map to the telescope of the
-   truncations is degreewise surjective. Its composite with the augmentation to `G` is
-   degreewise surjective, since the truncations agree with `G` in each fixed degree eventually.
-3. Direct sums of the replacement quasi-isomorphisms are quasi-isomorphisms, by exactness of
-   filtered colimits of finite sums (`lem-pc-kflat-hocolim-truncations`). The long exact
-   cohomology sequences of the cones and the five lemma give a quasi-isomorphism on
-   telescopes. The telescope of truncations maps quasi-isomorphically to `G` by the same node.
-4. The composite is the desired degreewise surjective quasi-isomorphism from a K-flat
-   complex with flat terms. -/
+category of sheaves of modules, i.e. an epimorphism, rather than surjectivity on all sections. -/
 theorem exists_isKFlatResolution
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}

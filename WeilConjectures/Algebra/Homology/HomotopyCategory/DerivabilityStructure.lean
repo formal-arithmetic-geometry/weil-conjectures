@@ -41,7 +41,6 @@ case where `P` is the property of being K-flat.
   for the image of a complex `K` holds for the image of its cylinder.
 - `HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism`: it is a left
   derivability structure as soon as `P` contains functorial resolutions.
-
 -/
 
 @[expose] public section
@@ -106,15 +105,9 @@ def quotientRestrictLocalizerMorphism : LocalizerMorphism
     rintro ⟨K, hK⟩ ⟨L, hL⟩ ⟨f : K ⟶ L⟩ hf
     simpa [quotient_map_mem_quasiIso_iff] using hf
 
-/-- The auxiliary square of localizer morphisms commutes (definitionally):
-```
- Q.FullSubcategory --(cochainComplexLocalizerMorphism P)--> CochainComplex A ℤ
-        |                                                           |
- (quotientRestrictLocalizerMorphism P)             (quotientLocalizerMorphism A (.up ℤ))
-        v                                                           v
- P.FullSubcategory ------(quasiIsoLocalizerMorphism P)-----------> K(A)
-```
-where `Q = P.inverseImage (quotient A (.up ℤ))`. -/
+/-- The square of localizer morphisms formed by `cochainComplexLocalizerMorphism P`,
+`quotientRestrictLocalizerMorphism P`, `quotientLocalizerMorphism A (.up ℤ)` and
+`quasiIsoLocalizerMorphism P` commutes definitionally. -/
 def quotientSquareIso :
     (cochainComplexLocalizerMorphism P).functor ⋙ (quotientLocalizerMorphism A (.up ℤ)).functor ≅
       (quotientRestrictLocalizerMorphism P).functor ⋙ (quasiIsoLocalizerMorphism P).functor :=
@@ -198,16 +191,10 @@ instance : TwoSquare.GuitartExact (quotientSquareIso P).inv :=
 end quasiIsoLocalizerMorphism
 
 open quasiIsoLocalizerMorphism in
-/-- Let `P` be a triangulated property of objects of `K(A)`, closed under isomorphisms. Given
-a functorial resolution of cochain complexes by quasi-isomorphisms whose resolutions lie in `P`
-```
- ρ K --(p.app K, a quasi-isomorphism)--> K        P ((quotient A (.up ℤ)).obj (ρ K))
-```
-the inclusion of the full subcategory of `K(A)` defined by `P`
-```
- P.FullSubcategory --(quasiIsoLocalizerMorphism P = P.ι)--> K(A)
-```
-with the quasi-isomorphisms on both sides, is a left derivability structure. -/
+/-- Let `P` be a triangulated property of objects of `K(A)`, closed under isomorphisms. If every
+cochain complex has a functorial quasi-isomorphic resolution whose image in `K(A)` satisfies `P`,
+then the inclusion of the full subcategory defined by `P` into `K(A)`, with the
+quasi-isomorphisms on both sides, is a left derivability structure. -/
 lemma isLeftDerivabilityStructure_quasiIsoLocalizerMorphism
     {ρ : CochainComplex A ℤ ⥤ CochainComplex A ℤ} (p : ρ ⟶ 𝟭 _)
     (hp : ∀ K, QuasiIso (p.app K)) (hρ : ∀ K, P ((quotient A (.up ℤ)).obj (ρ.obj K))) :

@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceTensorPullbackUnderived
 
 /-! # Transport of the ordinary global pullback
 
-Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
+## References
+
+* Stacks Project, Tags 008A, 008Y, 0B6A and 0FKU.
+-/
 
 @[expose] public section
 universe u
@@ -37,10 +40,8 @@ local instance : MonoidalPreadditive (SheafOfModules.{u} (moduleRings X.toRinged
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).1
 local instance : MonoidalClosed (SheafOfModules.{u} (moduleRings X.toRingedSpace)) :=
   Classical.choice (SheafOfModules.tensorClosed X.toRingedSpace.sheaf).2.1
-/-- Underived global pullback data and its tensor-counit normalization.
-Source: Stacks Tags 008A, 008Y, 0FKU (blueprint: lem-sc-global-tensor-pullback-underived-data).
-The proof transports the concrete ringed-space pullback adjunction along point evaluation,
-then applies the separate monoidal normalization theorem for the tensor-counit identity. -/
+/-- Underived global pullback data and its tensor-counit normalization
+(Stacks, Tags 008A, 008Y and 0FKU). -/
 theorem exists_globalTensorPullback_underived_data :
     ∃ (e : SheafOfModules.{u} (moduleRings (globalSectionsPoint X)) ≌
         ModuleCat.{u} ((moduleRings X.toRingedSpace).obj.obj (op ⊤)))

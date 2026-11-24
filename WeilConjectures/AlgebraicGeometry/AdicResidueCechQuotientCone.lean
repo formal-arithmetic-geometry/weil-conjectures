@@ -15,10 +15,9 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-! # The quotient Roos cone of an augmented Cech completion
 
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul;
-sites-cohomology.tex, Tags 0940 and 0941.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M, 0A0E, 0940 and 0941
 -/
 
 @[expose] public noncomputable section
@@ -197,26 +196,8 @@ private theorem milnor_surjective
 
 /-- The Cech completion of any input has a quotient Roos cone with the actual scalar
 units. Completeness of the input is not required. The augmented local description
-allows any genuine Cech model for the residue kernel, rather than a chosen reflector.
-
-Source: Stacks Project, proetale.tex, Tag 099M, proof of lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul;
-sites-cohomology.tex, Tags 0940 and 0941.
-(auxiliary; not a blueprint node).
-
-Proof: the residue kernel is finite type, so the given Cech model is a reflector
-onto locally complete objects. Every finite quotient restriction is complete: its
-coefficient generators act nilpotently, and the complete sections form an ideal.
-The reflector mapping property shows that products of complete objects are complete.
-Applying exact internal Hom after slice restriction to a Roos triangle therefore
-shows that its fibre is complete as well. Countable products give a Roos cone for
-the specified quotient tower; Milnor exactness lifts the compatible scalar units
-to a map a from M into its point. The quotient-unit mapping-property theorem makes
-this map universal into complete objects. Apply each of the two mapping bijections
-to the other unit. Injectivity makes the resulting comparison maps inverse.
-Transport the Roos cone along their isomorphism. Associativity and the factorization
-equation identify every leg with the actual scalar unit. No boundedness or
-finiteness of M is used; nilpotence also covers J=0 and J=A. -/
+allows any genuine Cech model for the residue kernel, rather than a chosen reflector
+(Stacks, Tags 099M, 0A0E, 0940 and 0941). -/
 theorem adicResidue_cech_quotient_cone
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

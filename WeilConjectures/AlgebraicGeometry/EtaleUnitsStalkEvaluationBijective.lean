@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleUnitsStalkEvaluationInjective
 /-!
 # Bijectivity of evaluation on the geometric stalk of units
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation-bijective).
+## References
+
+* Stacks Project, Tags 03QU and 03QV
 -/
 
 @[expose] public section
@@ -28,23 +29,8 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A stalk homomorphism satisfying the evaluation formula is bijective.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation-bijective).
-
-Proof: For surjectivity, a separable-closure unit and its inverse belong to a finite
-separable extension of the base field. Its spectrum is an etale neighbourhood,
-and its embedding in the algebraic closure supplies the lift. The corresponding
-unit germ has the prescribed value by the evaluation formula and injectivity of
-the separable-closure embedding. For injectivity, represent both stalk elements
-by germs and refine each to the spectrum of a finite separable field extension.
-The two embeddings into the algebraic closure identify their images with finite
-separable subextensions. Their compositum is a common pointed etale refinement.
-Equality of evaluated values says the two pulled-back units are equal in this
-compositum, so their germs agree in the colimit. This works for imperfect base
-fields because every extension used here is separable. No Galois equivariance is
-assumed or concluded. -/
+/-- A stalk homomorphism satisfying the evaluation formula is bijective
+(Stacks, Tags 03QU and 03QV). -/
 theorem etale_units_stalk_evaluation_bijective (K : Type u) [Field K] :
     let Ω := AlgebraicClosure K
     let S := Spec (.of K)

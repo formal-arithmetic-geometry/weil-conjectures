@@ -18,9 +18,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 /-!
 # Continuity of sections of étale sheaves of sets
 
-Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero argument via Tags 0EYL,
-04HR and 09YN; restriction along an étale morphism, Tag 03S2
-(blueprint: lem-weil-pbc-sets-etale-section-continuity).
+## References
+
+* Stacks Project, Tags 09YQ, 0EYL, 04HR, 09YN and 03S2
 -/
 
 @[expose] public section
@@ -33,10 +33,7 @@ namespace AlgebraicGeometry
 
 /-- For an étale object `V → X`, the unit followed by restriction along its diagonal
 maps `F(V)` to the global sections of the inverse image on `V`. Its inverse is the
-restriction identification in the last clause of continuity.
-
-Source: Stacks Project, Étale Cohomology, Tag 03S2, inverse image along an étale morphism
-is restriction (blueprint: lem-weil-pbc-sets-etale-section-continuity). -/
+restriction identification in the last clause of continuity (Stacks, Tag 03S2). -/
 noncomputable def etaleSetRestrictionUnit
     {X : Scheme.{u}} (V : X.Etale) (F : Sheaf X.smallEtaleTopology (Type (u + 1))) :
     F.obj.obj (op V) ⟶
@@ -100,44 +97,10 @@ private theorem etaleSetRestrictionUnit_bijective {X : Scheme.{u}} (V : X.Etale)
   exact (asIso (etaleSetRestrictionUnit V F)).toEquiv.bijective
 
 /-- Continuity for a sheaf of sets pulled back from a chosen stage `i₀`. The category
-`Over (op i₀)` indexes the inverse system on the upper tail `i ≥ i₀`, so its opposite
-indexes the directed system of sections. The isomorphisms `e` identify the objects of
-`E` with the stated section sets; its maps are exactly the unit/composition comparisons.
-Thus the functor laws give both the identity and composition laws for these maps.
-The natural transformation `ν` is the canonical cocone, whose induced colimit map is
-bijective. The final assertion says that the canonical unit/diagonal section map for
-each étale projection is bijective, equivalently that restriction is its inverse.
-
-Source: Stacks Project, Étale Cohomology, Theorem Tag 09YQ, degree zero for sets via
-Tags 0EYL, 04HR and 09YN, and restriction along étale morphisms, Tag 03S2
-(blueprint: lem-weil-pbc-sets-etale-section-continuity).
-
-Proof:
-1. First take `W₀` affine. Transitions and projections are affine by hypothesis and
-   lem-weil-pbc-limit-affine-transition. Use lem-weil-pbc-affine-etale-site-colimit
-   and lem-weil-pbc-affine-etale-site-topos to describe the limit affine étale site.
-   Transport the inverse images and units using
-   lem-weil-pbc-site-equivalence-sheaf-transport and
-   lem-weil-pbc-sets-affine-etale-inverse-image-comparison. Their transition maps are
-   isomorphisms with the cocycle law, so definition-torsion-sheaves--3
-   identifies their inverse-image colimit with the inverse image at the limit.
-2. Apply lem-weil-pbc-colimit-of-sites-sections to each affine descended object.
-   The unit compatibility of lem-weil-pbc-sets-affine-etale-inverse-image-comparison
-   and clauses (0) and (1) of lem-weil-pbc-sets-etale-inverse-image-composition-units
-   identify its components with `etaleSetSectionComparison`.
-3. For general `W₀`, use lem-weil-pbc-etale-qcqs-cofinal-finite-coverings to choose
-   a finite affine cover and finite affine refinements of all pairwise overlaps.
-   Their base changes remain affine and covering. Apply the affine result to all
-   these objects. By lem-weil-pbc-pretopology-sheaf-condition, sections are the finite
-   equalizer of the corresponding products of sections. Unit naturality makes all
-   comparisons commute with restriction. Then
-   lem-weil-pbc-filtered-colimits-commute-finite-limits gives the required bijection.
-4. The unit, composition and associativity clauses of
-   lem-weil-pbc-sets-etale-inverse-image-composition-units, together with fibre-product
-   pasting, give the identity and composition laws, hence `E` and the cocone `ν`.
-   Finally lem-weil-pbc-sets-etale-inverse-image-restriction identifies inverse image
-   along each étale projection with restriction, inverse to `etaleSetRestrictionUnit`.
--/
+`Over (op i₀)` indexes the inverse system on the upper tail `i ≥ i₀`, and the isomorphisms
+`e` identify the objects of `E` with the stated section sets. The natural transformation `ν`
+is the canonical cocone, whose induced colimit map is bijective
+(Stacks, Tags 09YQ, 0EYL, 04HR, 09YN, 03S2). -/
 theorem etaleSetSectionContinuity
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

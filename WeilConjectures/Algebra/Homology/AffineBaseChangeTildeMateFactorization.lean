@@ -13,8 +13,12 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeMateIdentityFactori
 
 /-! # AffineBaseChangeTildeMateFactorization
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-mate-factorization). -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -93,30 +97,7 @@ private theorem affineMate_naturality
 -- Explicit cohomology coordinates require additional definitional-equality work.
 /-- The source tensor model transports the affine derived mate to the ordinary
 coefficient map followed by the actual right-derived pushforward unit. This
-contains no natural presentation of target cohomology and no global sections.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof and equation-bc;
-more-algebra.tex, Tag 06Y6; cohomology.tex, Tag 08HY, derived mate construction.
-(blueprint: lem-pc-affine-base-change-tilde-mate-factorization).
-
-Proof: Resolve the restriction of M to R by a flat K-flat complex P. The universal
-left-derived scalar extension and the counit in m identify its value with scalar
-extension of P to R'. Exact tilde and the affine pullback tensor formula identify
-this derived object with Lg* of the affine pushforward of Q(tilde M). The affine
-acyclic pushforward calculation identifies the latter with Rf*K, using e. Take
-cohomology and compose with m.cohomologyIso to obtain eC. Apply the pinned derived
-base-change unit compatibility on the common K-flat span. The unit-normalized
-tensor-pullback comparison identifies its ordinary exchange with the augmentation
-followed termwise by the coefficient map from A tensor R' to A'. Apply homology:
-m.comparison_eq supplies the augmentation factor, and exact restriction of scalars
-supplies the mapHomologyIso factor in cE. The natural comparison for consecutive
-restriction of scalars is rho; it is identity on carriers, so transporting through
-hphi_f introduces exactly rho.inv. Transport the extended complex through hphi_g.
-The remaining arrow is the termwise tilde/pushforward comparison followed by the
-right-derived unit, which is the explicitly constructed cohomology map. Finally,
-the inverse pullback counit and e identify its target with Lg'*K. Naturality and
-cancellation of this counit yield the displayed factorization. The coefficient
-map need not be invertible, and the square need only commute. P may be unbounded;
-zero rings and zero complexes are included. -/
+contains no natural presentation of target cohomology and no global sections. -/
 theorem exists_affineBaseChangeTildeMateFactorization
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

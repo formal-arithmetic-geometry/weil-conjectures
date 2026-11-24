@@ -15,8 +15,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Stalks of change of rings
 
-Source: Stacks Project, Sheaves, Lemma 008B, from Lemmas 007K and 007Z
-(blueprint: lem-weil-pbc-stalk-change-of-rings-tensor).
+## References
+
+* Stacks Project, Sheaves, Lemma 008B, from Lemmas 007K and 007Z
 -/
 
 @[expose] public section
@@ -80,24 +81,7 @@ private theorem stalkSheafification_unit_app_naturality {X : TopCat.{u}}
 
 /-- Change of rings commutes with stalks, naturally in the module and compatibly with germs.
 Mathlib writes extension of scalars with the coefficient factor first: `a ⊗ s`
-represents the paper's `s ⊗ a` under the canonical tensor commutation.
-Source: Stacks Project, Sheaves, Lemma 008B
-(blueprint: lem-weil-pbc-stalk-change-of-rings-tensor).
-
-Proof:
-1. On neighborhoods of `x`, take the section rings and module sections with their
-   semilinear restrictions (`def-weil-pbc-module-stalk`). The ring morphism induces
-   the stalk ring morphism and hence the scalar action on the changed stalk module.
-2. The sheafification unit induces an additive stalk isomorphism
-   (`def-weil-presheaf-modules-sheafification`, `lem-weil-pbc-stalk-sheafification-space`).
-   Represent a scalar and a vector on a common neighborhood to check linearity.
-3. Apply `lem-weil-pbc-filtered-colimit-tensor-varying-rings` to these neighborhood
-   systems. It identifies the presheaf change-of-rings stalk with the tensor of stalks.
-   Check linearity over the target stalk ring on pure tensor germs, which generate.
-4. Compose the inverse of that identification with the sheafification stalk map.
-   This gives the displayed isomorphism and pure-tensor germ formula.
-5. Both naturality composites send `a_x ⊗ s_x` to the germ of `a ⊗ f(s)`.
-   Generation by pure tensor germs gives equality. -/
+represents `s ⊗ a` under the canonical tensor commutation. -/
 theorem stalkChangeOfRingsIso (X : TopCat.{u})
     (R₁ R₂ : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (α : R₁ ⟶ R₂) (x : X) :

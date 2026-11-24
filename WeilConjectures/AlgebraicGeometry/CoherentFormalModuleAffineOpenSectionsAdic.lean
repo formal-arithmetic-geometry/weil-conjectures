@@ -14,8 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffi
 
 /-! # Finite adic sections on affine opens
 
-Source: Stacks Project, Lemma 087W, first paragraph, and Lemma 087X (2).
-(blueprint: lem-weil-pbc-formal-module-affine-open-sections-adic).
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section
@@ -27,22 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Sections on an affine open form a finite adic tower. This concerns only individual
-levels and successor transitions, and asserts nothing about an inverse limit.
-
-Source: Stacks Project, Lemma 087W, first paragraph, and Lemma 087X (2);
-Schemes, Tags 01I7 and 01IB.
-(blueprint: lem-weil-pbc-formal-module-affine-open-sections-adic).
-
-Proof: On the locally Noetherian scheme X, coherence implies quasi-coherence and
-finite type. The affine finite-type section criterion makes each level finite on V.
-The affine ideal-product theorem identifies the sections of the positive ideal power
-with I(V)^(n+1). Its multiplication-range formula then identifies the range of the
-power-product inclusion into each level with I(V)^(n+1) times that level's sections.
-For level n the product is a zero object, so this range is zero. For level n+1,
-the affine cokernel theorem makes the quotient projection surjective with kernel
-equal to that range. The defining quotient isomorphism identifies the successor
-transition with this projection followed by an invertible section map. Surjectivity
-and the kernel formula follow; no restriction of the tower or inverse limit is needed. -/
+levels and successor transitions, and asserts nothing about an inverse limit
+(Stacks, Tags 087W, 087X, 01I7 and 01IB). -/
 theorem coherentFormalModule_affine_open_sections_adic
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (F : CoherentFormalModule X I) (V : X.affineOpens) :

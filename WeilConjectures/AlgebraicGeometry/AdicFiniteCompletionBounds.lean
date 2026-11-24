@@ -88,25 +88,7 @@ private theorem underlying_cohomology_bounds
 
 /-- A complete complex with uniformly bounded quotient Tor tests is the derived
 limit of its normalized reduction tower and has the same cohomology bounds.
-Source: Stacks Project, proetale.tex, Tag 09C2 (1), using lemma-naive-completion.
-(auxiliary; not a blueprint node).
-
-Proof: Choose a flat-term K-flat representative P of N. The completion
-reflector on constant coefficients computes completion as the derived limit of
-P tensor A/J^(n+1). Its unit is invertible on a complete object. The normalized
-derived tensor unit, restriction composition and balancing comparisons identify
-the quotient transitions with adicFiniteTransition, so this gives the stated
-IsDerivedLimit, including existence of the product. Testing the nth Tor bound
-against its coefficient ring bounds each reduction in [a,b]. Tensor the exact
-sequence 0 -> J^(n+1)/J^(n+2) -> A/J^(n+2) -> A/J^(n+1) -> 0 with P.
-The first tensor is the residue reduction tested against the displayed
-A/J-module. Its cohomology vanishes above b, so H^b of each tower transition
-is epic. Exact countable pro-etale products and the strict Roos comparison
-identify the derived limit with the shifted cone of 1 minus transition.
-The Milnor sequence has zero outer terms outside [a,b], except possibly its
-R^1 limit term at b+1. That term vanishes by the epimorphic-tower theorem.
-Transport along the completion isomorphism gives the stated cohomology bound.
-This also covers J=0, J=A, the zero complex and an empty scheme. -/
+(Stacks, Tag 09C2 (1)). -/
 theorem adicFiniteCompletion_bounds
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

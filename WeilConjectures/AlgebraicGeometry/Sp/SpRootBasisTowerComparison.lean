@@ -22,33 +22,7 @@ open scoped CategoryTheory.Obj CategoryTheory.MonObj TensorProduct
 namespace AlgebraicGeometry.ProEtale
 
 /-- The prescribed compatible root generators identify the finite-level integral
-Tate tower with the coefficient quotient tower on the same slice.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), finite-level bases and
-compatibility with transition maps.
-(blueprint: lem-sp-root-basis-tower-comparison)
-
-Proof: put N = ell^(n+1) and B = O_E/(N). Finite discrete condensed coefficients
-pull back to the constant B sheaf, naturally under reduction. Since N annihilates
-B and mu_N, tensoring over the integers agrees with tensoring over Z/N: locally
-lift a residue scalar to an integer to verify balancing. Changing the lift adds
-a multiple of N, which acts by zero, so the local maps glue. Tensor e_n with B
-on the slice. The resulting map sends b to b tensor zeta_n. Its inverse sends
-b tensor z to b times the image of e_n^{-1}(z) under Z/N -> B. The balancing
-relations make both maps well defined, and the two composites are identities. They are
-O_E-linear through reduction.
-Restriction to the slice commutes with sheafification because the slice has the
-same covering families at each object; hence these are maps of the actual finite
-levels, not replacements of their underlying sheaves. Construct the comparisons
-on these tensors, using the finite-discrete maps normalized on constant sections;
-no arbitrary underlying-sheaf isomorphism is lifted to a module isomorphism.
-Naturality restricts hζ from W to every V -> W. Together with the normalization
-he, this shows that reduction followed by the basis is the basis
-followed by the specified root power transition. Thus these level isomorphisms
-and their inverses assemble into a natural isomorphism of the whole towers.
-This is purely a finite-level assertion: it takes no inverse limit and asserts
-neither integral completeness nor any rational scalar-extension comparison. -/
+Tate tower with the coefficient quotient tower on the same slice. -/
 theorem spRootBasisTowerComparison
     (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)

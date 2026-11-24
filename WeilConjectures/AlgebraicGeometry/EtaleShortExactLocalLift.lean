@@ -16,9 +16,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.NormalMono.Equalizers
 /-!
 # Local lifts in a short exact sequence of etale module sheaves
 
-Source: the Weil conjectures blueprint, `sec-proper-base-change/sk-thm-properbasechange`,
-`lemma-constructible-flc-serre`, extension paragraph, the assertion that a surjection of
-sheaves is locally surjective on sections (blueprint: lem-constructible-shortexact-local-lift).
+A surjection of sheaves is locally surjective on sections.
 -/
 
 @[expose] public section
@@ -31,20 +29,9 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Every section of the quotient in a short exact sequence of etale sheaves of modules
 lifts over an etale covering. The coefficients are the constant ring sheaf of the
-commutative ring `Λ` ("ring" in the Stacks sense, as in `def-weil-pbc-etale-sheaves`);
-`ULift` only places the ring in the universe of the sheaf values. A covering is encoded by
-its generated sieve, equivalently a jointly surjective family by
-`ofArrows_mem_smallEtaleTopology_iff`.
-
-Source: blueprint `lemma-constructible-flc-serre`, extension paragraph
-(blueprint: lem-constructible-shortexact-local-lift).
-
-Proof: `def-weil-pbc-exact-sequence` makes the quotient map an epimorphism. By
-`situation-conventions` (1), forgetting module structure preserves
-cokernels, so this is also an epimorphism of abelian sheaves. Apply
-`lem-weil-pbc-abelian-sheaf-epi-locally-surjective` to the given section to obtain a covering
-and a lift on each member. This only lifts individual sections and requires no splitting
-of the sequence. -/
+commutative ring `Λ`; `ULift` only places the ring in the universe of the sheaf values.
+A covering is encoded by its generated sieve, equivalently a jointly surjective family
+by `ofArrows_mem_smallEtaleTopology_iff`. -/
 theorem exists_etale_local_lift_of_shortExact (X : Scheme.{u}) (Λ : Type u) [CommRing Λ]
     (S : ShortComplex (SheafOfModules.{u + 1}
       ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj

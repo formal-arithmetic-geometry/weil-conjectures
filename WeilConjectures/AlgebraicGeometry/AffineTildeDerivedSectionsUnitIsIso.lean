@@ -26,7 +26,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Derived sections comparison on complexes of associated sheaves
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section
@@ -57,36 +59,7 @@ private theorem preservesKernel_of_iso_image
     ((c.isLimitMapConeEquiv T).symm hc)
 
 /-- The comparison from termwise sections to derived sections is invertible on
-an arbitrary complex of associated sheaves.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, module calculation.
-(blueprint: new-affine-tilde-derived-sections-unit-isIso).
-
-Proof: Write T for associated sheaf and S for affine sections with scalar transport.
-Full faithfulness of T lifts the kernel of a map between associated sheaves back to
-modules: the kernel is quasi-coherent, so its ordinary counit is invertible. Reflect
-this limit fork through T. Thus T preserves kernels, and as an additive left adjoint
-it is exact. Affine vanishing shows that quasi-coherent sheaves are S-acyclic: forget
-to abelian groups, apply affine vanishing, and use the exact-functor derived comparison
-to reflect vanishing back to modules. In particular T sends injective modules to
-S-acyclic sheaves. The bounded-below acyclic-complex theorem therefore makes the unit
-of the bounded-below derived adjunction invertible. Restrict the unbounded adjunction
-along the full inclusions of the bounded-below categories. Compatibility of the two
-derived functors and uniqueness of right adjoints transport this invertibility to
-the unbounded adjunction on bounded-below objects.
-For an arbitrary derived module P and degree n, use P -> truncGE n P. Exact T
-commutes with this truncation, and T(P) has quasi-coherent cohomology. The affine
-sections truncation theorem makes H^n(RS(T(P -> truncGE n P))) invertible. H^n of the
-module truncation projection is also invertible, and the unit on truncGE n P is
-invertible by the bounded-below calculation. Naturality of the unit and two-out-of-
-three now make H^n of the unit on P invertible. The derived homology criterion gives
-invertibility of this unit in every degree. Finally, the derived-adjunction unit
-formula on Qh(K) factors this invertible map, followed by the image of the exact
-functor comparison, as the ordinary homotopy unit followed by the displayed
-right-derived-functor comparison. The ordinary unit is invertible because T is fully
-faithful, so cancellation proves the claim. No boundedness is imposed on K. For the
-zero ring or zero complex the relevant maps are between zero objects, and all these
-arguments still apply. The additive instance is only needed to spell the homotopy
-functor and is available because T preserves biproducts. -/
+an arbitrary complex of associated sheaves (Stacks, Tag 06Z0). -/
 theorem affineTildeDerivedSectionsUnit_isIso (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

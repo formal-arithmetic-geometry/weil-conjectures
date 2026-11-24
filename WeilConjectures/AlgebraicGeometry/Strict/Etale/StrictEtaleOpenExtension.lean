@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleSystemOpenAssem
 
 /-! # Ordinary extension by zero for strict coefficient systems
 
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03S2, 03DI, 03DJ
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -29,9 +33,7 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   (PX : StrictEtaleEvaluation X O t) (PZ : StrictEtaleEvaluation Z O t)
 
 /-- Ordinary open extension, its evaluation adjunctions and scalar transition equations.
-All functors here act on abelian categories, before passing to complexes or localization.
-Source: Stacks 03S2, 03DI and 03DJ; Zheng, Construction 4.1
-(blueprint: lem-pur-strict-etale-ordinary-open-extension). -/
+All functors here act on abelian categories, before passing to complexes or localization. -/
 structure StrictEtaleOrdinaryOpen where
   extension : strictEtaleCoefficientSystem X O t ⥤ strictEtaleCoefficientSystem Z O t
   [additive : extension.Additive]
@@ -61,39 +63,8 @@ structure StrictEtaleOrdinaryOpen where
 
 attribute [instance] StrictEtaleOrdinaryOpen.additive StrictEtaleOrdinaryOpen.levelAdditive
 
-/-- Construct ordinary extension by zero with its actual scalar-restriction mates.
-Source: Stacks 03S2 (the presheaf formula), 03DI (the adjunction), 03DJ (exactness);
-Zheng, Construction 4.1
-(blueprint: lem-pur-strict-etale-ordinary-open-extension).
-
-Proof: at level n identify modules over the constant quotient-ring sheaf with
-fixed-quotient-ring module sheaves using constant_ring_module_sheaves. Transport
-openImmersionLowerShriek and its adjunction to the given algebraic inverse image;
-the underlying geometric adjunction and constant sections identify that inverse
-image with the fixed-ring inverse image. For a quotient-ring homomorphism,
-restriction of scalars leaves the underlying additive sheaf and its section maps
-unchanged. In the presheaf formula for open extension, both orders of restriction
-and extension therefore have the same summands, additive groups and restriction maps;
-the scalar action on each summand is multiplication by the image of the scalar.
-Sheafification gives a canonical isomorphism, inverse to the same sectionwise
-identification. Its transpose is restriction of the open unit on each summand.
-Transport this comparison along the constant-ring equivalences. Its mate is the
-inverse of I.restrictInverse because the latter is fixed on underlying sheaves by
-I.restrictInverseUnderlying and the unit has just been checked on the same sections.
-For a strict system M define its n-th
-extended level by this level extension and its successor transition by extension
-of M.transition followed by this scalar comparison. Define maps levelwise.
-Naturality proves the transition condition and the functor laws. Transpose maps
-levelwise using the level open adjunctions and I.inverseEvaluation. Their mate
-identities say precisely that compatible families transpose to compatible families,
-so the resulting Hom equivalence defines the system adjunction and evaluationMate.
-Exactness follows levelwise from 03DJ, since kernels and cokernels of strict systems
-are levelwise and evaluation jointly reflects exactness. The successor transition
-identity is the definition. The normalized strict transitions are the iterated
-successor transitions; identity and composition therefore prove the displayed
-transition formula for all n ≤ m, including n = m. These constructions work for
-the zero coefficient ring and the empty open, where the same zero maps and Hom
-bijections apply. No regularity or completeness is used in this ordinary step. -/
+/-- Ordinary extension by zero for strict coefficient systems exists, with its
+scalar-restriction mates. -/
 theorem strictEtaleOrdinaryOpen_exists : Nonempty (StrictEtaleOrdinaryOpen O t j I PX PZ) := by
   obtain ⟨L⟩ := strictEtaleLevelOpenData_exists O t j I
   obtain ⟨A⟩ := strictEtaleSystemOpenAssembly_exists O t j I PX PZ L

@@ -13,9 +13,17 @@ import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningGluedAtlas
 /-!
 # Gluing universal first order thickenings on an open cover
 
-Source: Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3),
-last two paragraphs. This gluing assertion does not assume formal unramifiedness.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-cover-gluing)
+Universal first order thickenings given on an open cover glue to a universal first order
+thickening of the whole source.
+
+## Implementation details
+
+The gluing statement does not assume that the morphism is formally unramified; the local
+thickenings are explicit input data.
+
+## References
+
+* [Stacks, Tag 04F3]
 -/
 
 @[expose] public section
@@ -26,8 +34,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- The open-pieces theorem gives an injective preimage map on opens; for a
-closed immersion this forces its image to be the whole target. -/
+/-- A first order thickening is a homeomorphism on underlying spaces. -/
 private theorem firstOrder_homeomorph {T T' : Scheme.{u}} (i : T ⟶ T')
     (hi : IsFirstOrderThickening i) : IsHomeomorph i := by
   have : IsClosedImmersion i := hi.1
@@ -50,7 +57,7 @@ private theorem firstOrder_homeomorph {T T' : Scheme.{u}} (i : T ⟶ T')
   exact hyV
 
 /-- A lifting problem whose source lands in one universal chart has a unique lift
-into the whole thickening. Every competing lift also lands in that chart on points. -/
+into the whole thickening. -/
 private theorem lift_in_chart
     {Z W X : Scheme.{u}} (h : Z ⟶ X) (j : Z ⟶ W) (p : W ⟶ X)
     (D : W.OpenCover.{u})
@@ -153,8 +160,7 @@ private theorem firstOrder_pullback_open
   exact (Ideal.comap_bot_of_injective _
     (ConcreteCategory.bijective_of_isIso (g.appIso V).inv).1).le
 
-/-- Local solutions on the transferred test cover agree by chartwise uniqueness,
-and therefore glue to the unique global solution. -/
+/-- Local solutions on the transferred test cover glue to the unique global solution. -/
 private theorem lifts_on_charts
     {Z W X : Scheme.{u}} (h : Z ⟶ X) (j : Z ⟶ W) (p : W ⟶ X)
     (D : W.OpenCover.{u})
@@ -247,38 +253,7 @@ private theorem lifts_on_charts
   exact ⟨c', hc', fun d hd ↦ unique_lifts_on_charts h j p D H t b a ht hab hd hc'⟩
 
 /-- Universal first order thickenings given on an open cover glue to a universal
-first order thickening of the whole source. The local thickenings are explicit
-input data; no existence or formal unramifiedness assumption on `h` is used.
-
-Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
-paragraphs beginning "Choose an affine open covering" and "It turns out".
-(blueprint: lem-weil-pbc-universal-first-order-thickening-cover-gluing)
-
-Proof:
-1. For each pair of charts of `C`, their fibre product is their open intersection.
-   The first clause of `universalFirstOrderThickening_open_pieces` transfers this
-   open to each local thickening. Its second clause says the restricted thickenings
-   are universal over `X` (take the whole base as the base open).
-2. Apply `IsUniversalFirstOrderThickening.unique` to identify the two thickenings
-   of each intersection by their unique isomorphism over `X` fixing the intersection.
-   On triple intersections both composites have these properties, so uniqueness
-   proves the cocycle identity, including the identity on repeated indices.
-3. Glue these schemes along the resulting open isomorphisms using scheme gluing.
-   The local maps from `C.X k` and to `X` commute on intersections, hence glue to
-   `i : Z ⟶ W` and `p : W ⟶ X` with `i ≫ p = h`. The local immersions are the
-   restrictions of `i` along the glued open cover. Closed immersion is local on
-   the target, and its kernel ideals restrict to those of the given immersions.
-   Consequently `i` is a closed immersion and its ideal has square zero.
-4. For a test thickening `j : T ⟶ T'` with a map `a : T ⟶ Z`, pull `C` back along
-   `a` to cover `T`. The underlying homeomorphism of `j` gives the corresponding
-   open cover of `T'`. Restricting `j` to these opens preserves square zero by
-   the first clause of the open-pieces theorem. On each chart local universality
-   produces a lift into the corresponding open of `W`.
-5. On overlaps both lifts land in the thickening of the intersection: this follows
-   on points from surjectivity of `j`. Universality on the intersection identifies
-   them. Glue these morphisms into `W`, and verify both triangle identities locally.
-   Any other lift has the same restrictions by local uniqueness, hence equals it.
-   Together with step 3 these are precisely the three defining clauses. -/
+first order thickening of the whole source. -/
 theorem universalFirstOrderThickening_glue
     {Z X : Scheme.{u}} (h : Z ⟶ X) (C : Z.OpenCover.{u})
     (Z' : C.I₀ → Scheme.{u}) (i : ∀ k, C.X k ⟶ Z' k)

@@ -51,7 +51,7 @@ theorem IsAffineOpen.isDomain_and_isIntegrallyClosed_localization {X : Scheme.{u
 
 /-- **Normality ascends along étale morphisms** (Stacks `033C`, étale case). If the local rings
 of `Y` are integrally closed domains, then so are the local rings of a scheme `X` étale over
-`Y`. (blueprint: `theorem-purity-real-sheaves-curves`, Step 0) -/
+`Y`. -/
 theorem Scheme.isDomain_and_isIntegrallyClosed_stalk_of_etale_of_isDomain {X Y : Scheme.{u}}
     (f : X ⟶ Y) [Etale f]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))

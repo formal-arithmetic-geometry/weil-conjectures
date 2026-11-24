@@ -19,8 +19,9 @@ import all WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 
 /-! # Residue recovery from the quotient homotopy limit
 
-Source: Stacks Project, proetale.tex, Tag 099M; algebraization.tex, Tag 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -582,33 +583,8 @@ private theorem koszul_finite_unit_isIso
     exact hx
 
 /-- The scalar transpose of the residue leg of a quotient homotopy limit is invertible.
-This computes one finite reduction of the limit; it does not specify a map into it.
-
-Source: Stacks Project, proetale.tex, Tag 099M, lemma-naive-completion;
-algebraization.tex, Tag 0A0E, lemma-derived-completion-koszul.
-(auxiliary; not a blueprint node).
-
-Proof: choose a finite generating list for J and one flat-term K-flat representative
-of M. The negative Koszul tensor tower and the strict quotient tensor tower have
-pro-isomorphic augmentations: Noetherian Artin--Rees kills the negative Koszul
-homology pro-systems. Exact constant realization and tensoring by this fixed K-flat
-representative preserve the pro-isomorphism. Apply total derived strict inverse limit.
-The coefficient map from constant to completed sheaves is flat and identifies all
-finite quotients. Its exact restriction commutes with the total derived limit and
-reflects isomorphisms, giving the same unit-compatible Koszul comparison over the
-completed ring and on the slice. The Koszul completion unit becomes an isomorphism
-under residue extension: every restricted residue complex is complete by nilpotence,
-so the reflector Hom bijection and the scalar adjunction give this by coyoneda.
-Its normalized quotient projection is the adjoint transpose of the identity finite
-reduction after that unit. Hence its transpose is the inverse of the reduced unit.
-On K-flat representatives insertion of one identifies the evaluations and units;
-scalar balancing identifies the quotient successor with the counit transpose in
-adicResidueAdjointTower. This gives the assertion for the strict-limit cone.
-The isomorphism between any two Roos cones preserves their legs, and transposition
-carries it to scalar extension of this isomorphism followed by the computed finite
-projection. Thus the assertion holds for c. Empty generators give the identity
-projection; J=A gives zero residue objects. No boundedness or perfectness of M or
-of the quotient is used, and tensor is not commuted with arbitrary products. -/
+This computes one finite reduction of the limit; it does not specify a map into it
+(Stacks, Tags 099M and 0A0E). -/
 theorem adicResidue_quotient_residue_projection_isIso
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

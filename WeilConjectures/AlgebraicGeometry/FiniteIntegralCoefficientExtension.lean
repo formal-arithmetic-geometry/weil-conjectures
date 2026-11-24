@@ -22,10 +22,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 /-!
 # Exactness and countable products for integral coefficient extension
 
-Source: current blueprint, det-sp-field-extension-towers.proof.md,
-theorem-sp-qbar,
-proof (1), first two sentences (blueprint: lem-coef-semilinear-tensor-base).
-
 The coefficient rings are the native pulled-back condensed rings of integers.
 The map in the product clause is the canonical map induced by the projections.
 -/
@@ -42,26 +38,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- Integral coefficient extension is additive, preserves short exact sequences,
-and its canonical countable-product comparison is invertible.
-
-Source: current blueprint, theorem-sp-qbar, proof (1), first two
-sentences (blueprint: lem-coef-semilinear-tensor-base).
-
-Proof:
-1. Choose an integral basis of O_F over O_E. The coefficient-sheaf basis theorem
-   transports it to a finite-free basis of the pulled-back coefficient sheaf on T,
-   including when F/E is ramified.
-2. The balancing relations of the relative tensor coequalizer identify the
-   restriction of extension of scalars on M with the finite direct power of M.
-   Explicitly, s tensor m maps to (a_i(s)m)_i, and (m_i)_i maps to the sum of
-   b_i tensor m_i. The basis identities give inverse maps, natural in M.
-3. Underlying abelian sheaves create module limits and finite colimits, so
-   restriction detects short exactness and isomorphisms. Finite direct powers
-   preserve short exactness, and the tensor formulas commute with addition.
-4. Under the same coordinates the specified product comparison interchanges
-   the finite basis index with the countable product index. Interchanging them
-   back is its inverse. Its components are extension of the projections, so this
-   is precisely the canonical comparison. -/
+and its canonical countable-product comparison is invertible. -/
 theorem finiteIntegralCoefficientExtension_exact_products
     (ℓ : ℕ) [Fact ℓ.Prime] (E F : PadicAlgCl.FiniteIntermediateField ℓ)
     (h : E ≤ F) (T : Scheme.{u}) :

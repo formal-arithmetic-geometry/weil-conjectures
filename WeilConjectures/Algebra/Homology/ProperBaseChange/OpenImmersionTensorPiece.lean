@@ -66,9 +66,13 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # The open-immersion piece of the projection formula
 
-Source: Weil conjectures blueprint, proper base change, lemma 1269;
-Stacks Project, Tags 03DI, 03DJ, 03EL, 06YQ and 07A4
-(blueprint: lemma-internal-adjunction-two-exchange-formulas).
+## References
+
+* Stacks Project, Tag 03DI
+* Stacks Project, Tag 03DJ
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 06YQ
+* Stacks Project, Tag 07A4
 -/
 
 -- After pruning, this module only keeps private declarations.

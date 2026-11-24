@@ -11,8 +11,9 @@ public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 
 /-! # Canonical section transport to an open subscheme
 
-Source: Stacks Project, Tag 01FM; Mathlib's restriction equivalence.
-(blueprint: lem-sc-principal-open-cech-section-transport).
+## References
+
+* Stacks Project, Tag 01FM; Mathlib's restriction equivalence.
 -/
 
 @[expose] public section
@@ -25,12 +26,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
 
-/-- The canonical additive section identification for restriction to an open subscheme.
-Source: Mathlib's `overFunctorEquiv` and `restrictAppIso`; Stacks Project, Tag 01FM.
-The map transports the open equality, then applies the inverse of the restriction
-comparison. All data are explicit. 
-(blueprint: lem-sc-principal-open-cech-section-transport)
--/
+/-- The canonical additive section identification for restriction to an open subscheme,
+built from Mathlib's `overFunctorEquiv` and `restrictAppIso` (Stacks, Tag 01FM). -/
 noncomputable def principalOpenSectionTransport (A : Type u) [CommRing A]
     (V : (Spec (.of A)).Opens) (M : (Spec (.of A)).Modules) :
     AddCommGrpCat.of ((modulesSpecToSheaf.obj M).obj.obj (op V)) ≅
@@ -45,11 +42,7 @@ noncomputable def principalOpenSectionTransport (A : Type u) [CommRing A]
       (evaluation _ _).obj (op ⊤)).mapIso
         ((Scheme.Modules.overFunctorEquiv V).app M).symm)
 
-/-- Canonical section transport is natural in the coefficient module.
-Source: Stacks Project, Tag 01FM; naturality of Mathlib's restriction equivalence.
-(blueprint: lem-sc-principal-open-cech-section-transport).
-Proof: Naturality of the coefficient presheaf transports the open equality. Naturality
-of the inverse of overFunctorEquiv then identifies the two composites. -/
+/-- Canonical section transport is natural in the coefficient module (Stacks, Tag 01FM). -/
 theorem principalOpenSectionTransport_natural (A : Type u) [CommRing A]
     (V : (Spec (.of A)).Opens) {M N : (Spec (.of A)).Modules} (g : M ⟶ N)
     (s : (modulesSpecToSheaf.obj M).obj.obj (op V)) :

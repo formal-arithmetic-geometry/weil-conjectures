@@ -16,7 +16,11 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 /-!
 # Filtered-colimit preservation by tensor totalization
 
-The tensor-totalization clause of `lem-pc-module-filtered-colimits-tensor`.
+Tensor totalization with a fixed complex preserves filtered colimits.
+
+## References
+
+* Stacks Project, Modules on Sites, Lemma 03EP
 -/
 
 @[expose] public section
@@ -31,24 +35,7 @@ set_option hygiene false in
 local notation "Mod" R => SheafOfModules.{u}
   ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
 
-/-- Tensor totalization with a fixed complex preserves filtered colimits.
-Source: Stacks Project, Modules on Sites, Lemma 03EP, together with the direct-sum
-construction of total complexes (blueprint: lem-pc-module-filtered-colimits-tensor-preserves).
-
-Proof: Tensoring with a fixed module is a left adjoint by
-`lem-pc-sheaf-modules-tensor-closed`, using symmetry for the right tensor factor.
-Colimits of complexes are computed degreewise. Thus, for each pair of degrees
-(a,b), tensoring the degree-a colimit with P in degree b is canonically the
-colimit of the corresponding tensors. In total degree n, take the coproduct
-of these identifications over all pairs (a,b) with a+b=n. Interchanging the
-filtered colimit and this coproduct gives a colimit cocone in degree n.
-The identifications are natural in both degrees and commute with each tensor
-differential; hence they commute with the signed sum defining the total
-differential. Degreewise colimit cocones therefore assemble to a colimit
-cocone of total complexes. It is the image of the original colimit cocone
-under the displayed functor, so this proves preservation of the canonical
-colimit, rather than just existence of an isomorphism of objects. No
-boundedness or flatness is needed, since the totalization uses coproducts. -/
+/-- Tensor totalization with a fixed complex preserves filtered colimits. -/
 theorem preservesFilteredColimitsTensorTotal
     (C : Type u) [Category.{u} C] (J : GrothendieckTopology C)
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}]

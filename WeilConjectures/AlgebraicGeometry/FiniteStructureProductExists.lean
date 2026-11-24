@@ -16,8 +16,9 @@ public import WeilConjectures.AlgebraicGeometry.FiniteStructureProductCompatibil
 
 /-! # Existence of a lifted finite-structure product
 
-Source: Stacks Project, Tag 09ZT
-(blueprint: lem-weil-pbc-finite-structure-product-exists).
+## References
+
+* Stacks Project, Tag 09ZT.
 -/
 
 @[expose] public section

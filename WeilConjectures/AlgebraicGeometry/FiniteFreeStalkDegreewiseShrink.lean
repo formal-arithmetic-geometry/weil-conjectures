@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.StalkRestrictionSubopenCompatibility
 import Mathlib.Data.Int.Interval
 
 /-! # Shrinking differential-commutativity defects
-
-Source: lem-pc-finite-free-stalk-chain-map-lift-local, the zero-germ shrinking step.
-(blueprint: lem-pc-finite-free-stalk-degreewise-shrink)
 -/
 
 @[expose] public section
@@ -25,31 +22,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- An already defined degreewise family whose stalk commutes with differentials
-can be restricted to a smaller neighbourhood where it commutes.
-
-Source: lem-pc-finite-free-stalk-chain-map-lift-local, step 2 (vanishing of the
-commutativity defects) and step 3 (compatibility of stalk restriction), expanding
-lemma-coherent-base-change-invertible-sheaves--3's extension of the finite calculation.
-
-Proof: In the restricted finite bases form, for every adjacent degree, the matrix
-of g n followed by d_Q minus d_P followed by g (n+1). Its pullback to the stalk
-scheme is zero by hcomm. Thus its entries have zero germ at y. Only degrees for
-which both P.X n and Q.X (n+1) are nonzero need checking; boundedness makes this
-list finite. For every entry the germ equality criterion gives a neighbourhood
-inside U on which the entry vanishes. Intersect this finite collection to obtain
-V containing y, with V <= U. Restrict every g n to V and transport along the
-canonical comparison between direct restriction to V and restriction through U;
-call the resulting family k. All adjacent chain equations now hold. Outside the
-finite list either the source or target is zero, and the equation is automatic.
-Restriction transitivity and pullback composition identify the stalk of k n with
-the stalk of g n conjugated by the comparisons through Y. This is the displayed
-component formula, with the inverse comparison at U followed by the one at V.
-The compatibility follows by the associativity of pullback composition and the
-identity of the composite maps from Spec O_{Y,y}. For an empty support interval,
-rank-zero terms, or an already commuting family, the same construction works
-with no equations or no further shrinking. The lemma extends no prescribed map:
-it starts with the family g already defined on U.
-(blueprint: lem-pc-finite-free-stalk-degreewise-shrink) -/
+can be restricted to a smaller neighbourhood where it commutes. -/
 theorem exists_shrink_degreewise_comm_of_stalk
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (a b c e : ℤ)

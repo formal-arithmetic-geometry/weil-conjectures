@@ -26,8 +26,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Algebraization of the structure algebras of a finite formal system
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09ZT, proof via 088F and 088E
-(blueprint: lem-weil-pbc-algebraize-finite-structure-algebra).
+## References
+
+* Stacks Project, Tags 09ZT, 088F and 088E
 -/
 
 @[expose] public section
@@ -85,25 +86,8 @@ private theorem quotient_formula {R S : Type u} [CommRing R] [CommRing S]
     rw [← he x, ← e.map_zero, e.injective.eq_iff]
     exact Ideal.Quotient.eq_zero_iff_mem
 
-/-- Algebraize the structure algebras, retaining the ring maps to each reduction.
-Source: Stacks Project, Lemma 09ZT, proof through the construction of the algebra F;
-Theorem 088E and Remark 088F.
-
-Proof: The finite direct images of O_Yn are coherent on the locally Noetherian Xn.
-Affine base change gives compatible algebra transition isomorphisms. Their first support
-is closed and contained in the proper image of Y0, hence proper. Apply Grothendieck
-existence to obtain a coherent module F with proper support and compatible reductions.
-Choose a proper closed subscheme Z annihilating F. Tensor squares and cubes of F and
-O_X/I_Z are coherent with proper support. Full faithfulness algebraizes multiplication
-from F tensor F and the unit from O_X/I_Z. Faithfulness checks associativity, symmetry
-and the unit identity on every reduction. This gives the commutative algebra B with
-underlying module F. The adjoints of the reduction algebra isomorphisms give b_n.
-On an affine open U, Xn is defined by ker(j_n.app U), and tensor reduction identifies
-B(U)/ker(j_n.app U)B(U) with O_Yn(r_n inverse U). Hence b_n is surjective with the
-stated kernel. Compatibility of the module comparisons, multiplication and units gives
-the displayed equality with g_n sharp on sections. Empty affine opens and zero algebras
-have zero section rings; the same quotient formulas apply.
-(blueprint: lem-weil-pbc-algebraize-finite-structure-algebra). -/
+/-- Algebraize the structure algebras, retaining the ring maps to each reduction
+(Stacks, Tag 09ZT). -/
 theorem algebraize_finite_structure_algebra
     (A : Type u) [CommRing A] (I : Ideal A)
     [IsNoetherianRing A] [IsAdicComplete I A]

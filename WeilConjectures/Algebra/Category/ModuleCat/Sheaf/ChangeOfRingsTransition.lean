@@ -16,7 +16,9 @@ For morphisms of sheaves of commutative rings `α : R₁ ⟶ R₂`, `β : R₂ �
 `M ⊗_{R₁} R₂ ⟶ M ⊗_{R₁} R₃` (with `R₃` regarded as an `R₂`-algebra through `β`) sending
 `s ⊗ m` to `β s ⊗ m`.
 
-Source: Stacks Project, Tag 03EK.
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public section

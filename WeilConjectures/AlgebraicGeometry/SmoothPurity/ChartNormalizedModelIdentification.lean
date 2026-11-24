@@ -13,13 +13,12 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportC
 
 /-! # Graph-normalized chart models
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-reduction/
-sk-lem-sp-reduction-exceptional.proof.md, Charts, specified left identification;
-Stacks Project Tags 0F7I, 0F7J, 0F7K
-(blueprint: lem-sp-chart-normalized-model-identification).
-
 The helper isomorphisms assemble existing comparison maps. The theorem identifies these
 actual maps on bounded-below inputs and supplies the simultaneous graph-normalized datum.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7I, 0F7J, 0F7K, 0F7B
 -/
 
 @[expose] public section
@@ -33,9 +32,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- Canonical composition on three independently specified compactifications: compare the
-first model with the restricted closure, apply the proper/open tower, and compare the result.
-Source: Stacks Project Tags 0F7J and 0F7B; blueprint Charts, specified left identification
-(blueprint: lem-sp-chart-normalized-model-identification). -/
+first model with the restricted closure, apply the proper/open tower, and compare the result. -/
 noncomputable def chartModelComposition
     (R : Type (u + 1)) [CommRing R] [Finite R]
     {U V Y : Scheme.{u}} (e : U ⟶ V) (f : V ⟶ Y) [QuasiCompact e]
@@ -50,9 +47,7 @@ noncomputable def chartModelComposition
     rightDerivedLowerShriekOfCompactificationIso R (cf.comp (cg.ofComp cf)) cg
 
 /-- The displayed map lambda: the inverse graph-normalized etale comparison, followed by
-canonical compact-support composition on the three chosen models.
-Source: blueprint Charts, specified left identification; Stacks Project Tag 0F7J
-(blueprint: lem-sp-chart-normalized-model-identification). -/
+canonical compact-support composition on the three chosen models. -/
 noncomputable def chartNormalizedModelComparison
     (R : Type (u + 1)) [CommRing R] [Finite R]
     (N : EtaleCompactSupportNormalization R)

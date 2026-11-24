@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphAmbientSquarePasting
 
 /-! # Proper ambient projection pasting
 
-Source: Stacks Tag 0F7J, the final comparison of diagrams A--F.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -138,27 +139,8 @@ private theorem middle_factor_Second
   rfl
 
 /-- Changing the three proper ambient schemes commutes with the supplied square exchange.
-This is the proper-projection part of the product grid, before shrinking any supporting open.
-Source: Stacks Tag 0F7J, final A--F calculation, with vertical exchange pasting as in
-Tag 0F7C (auxiliary; not a blueprint node).
-
-Proof: write the selected side as n and the other as m. The intermediate ambient
-neighborhood N is V_n times_Z P_m, its source open is W_n times_Z P_m, and its
-middle open is Y times_Z T_m. The maps BV and BW from products over Y are proper:
-their composites with the projections to V_n and W_n are proper and those projections
-are separated. Their square with the two e opens commutes by the projection equations.
-The square with k_n and the product of p is Q, and the square comparing it with the
-original supplied square commutes by the same equations. Expand the three ambientLambda
-words: each consists only of the proper compositor and a Cartesian side exchange.
-Vertical pasting in the proper projection squares identifies the two ways to traverse
-the rectangle containing the original square and Q. Paste the B square on the source
-side and invert its exchange, moving it past the proper compositor by naturality.
-The graph equations z_f BW = z_h and BV R = F.p z_g identify the remaining proper
-compositors. Their associativity gives exactly liftInterchange then squareInterchange.
-No graph shrinking triangle, product intersection inclusion, or comparison between the
-two selected sides enters this calculation. The argument also works for empty opens
-and identity maps. All exchanges are the fixed normalized family, rather than chosen
-isomorphisms of functors with the same endpoints. -/
+This is the proper-projection part of the product grid, before shrinking any supporting open
+(Stacks, Tags 0F7J and 0F7C). -/
 theorem etaleGraphProductAmbientPasting
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}

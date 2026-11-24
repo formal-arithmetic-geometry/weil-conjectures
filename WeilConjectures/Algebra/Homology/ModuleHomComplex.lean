@@ -11,9 +11,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 
 /-! # The module-valued total Hom complex
 
-Source: Stacks Project, More on Algebra, Section 15.73, Tag 0A8H
-(blueprint: def-sc-module-total-hom-complex).
-The terms and differential are Mathlib's existing linear cochains and `δ_hom`.
+The terms and differential are those of Mathlib's linear cochains and `δ_hom`.
+
+## References
+
+* Stacks Project, More on Algebra, Section 15.73, Tag 0A8H
 -/
 
 @[expose] public section
@@ -26,9 +28,7 @@ namespace CochainComplex
 
 variable {A : Type uH} [CommRing A]
 
-/-- The linear Hom differential has the prescribed shape.
-Source: Stacks, Tag 0A8H (blueprint: def-sc-module-total-hom-complex).
-Proof: Mathlib `HomComplex.δ_shape` says the differential vanishes off adjacent degrees. -/
+/-- The linear Hom differential has the prescribed shape. -/
 theorem moduleHom_shape (L M : CochainComplex (ModuleCat.{uH} A) ℤ)
     (n m : ℤ) (h : ¬ (ComplexShape.up ℤ).Rel n m) :
     ModuleCat.ofHom (HomComplex.δ_hom A L M n m) = 0 := by
@@ -37,10 +37,7 @@ theorem moduleHom_shape (L M : CochainComplex (ModuleCat.{uH} A) ℤ)
   intro z
   exact HomComplex.δ_shape n m h z
 
-/-- Consecutive linear Hom differentials compose to zero.
-Source: Stacks, Tag 0A8H (blueprint: def-sc-module-total-hom-complex).
-Proof: Mathlib `HomComplex.δ_δ` proves this on every cochain; it is the cancellation of
-mixed terms in `d_M f - (-1)^n f d_L`, with the remaining terms killed by `d² = 0`. -/
+/-- Consecutive linear Hom differentials compose to zero. -/
 theorem moduleHom_square (L M : CochainComplex (ModuleCat.{uH} A) ℤ) (n m k : ℤ) :
     ModuleCat.ofHom (HomComplex.δ_hom A L M n m) ≫
       ModuleCat.ofHom (HomComplex.δ_hom A L M m k) = 0 := by
@@ -49,8 +46,7 @@ theorem moduleHom_square (L M : CochainComplex (ModuleCat.{uH} A) ℤ) (n m k : 
   intro z
   exact HomComplex.δ_δ n m k z
 
-/-- The A-module-valued Hom complex, using Mathlib's cochains and signed linear differential.
-Source: Stacks, Tag 0A8H (blueprint: def-sc-module-total-hom-complex). -/
+/-- The A-module-valued Hom complex, using Mathlib's cochains and signed linear differential. -/
 noncomputable def moduleHomComplex (L M : CochainComplex (ModuleCat.{uH} A) ℤ) :
     CochainComplex (ModuleCat.{uH} A) ℤ where
   X n := ModuleCat.of A (HomComplex.Cochain L M n)

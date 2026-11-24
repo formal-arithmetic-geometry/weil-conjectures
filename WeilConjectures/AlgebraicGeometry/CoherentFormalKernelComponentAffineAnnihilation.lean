@@ -21,13 +21,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Affine sections of a component kernel are annihilated by the doubled ideal power.
-Source: Stacks Project, Remark 0888
-(blueprint: lem-weil-pbc-formal-systems-annihilated-kernel-affine-component).
-The scalar quasi-inverses of the limit map preserve ideal multiples. Lift a section
-of the component kernel to the limit, apply a scalar quasi-inverse to its image,
-and project back. Products of two elements of K^t kill the section; these products
-generate K^(2*t). Evaluation preserves kernels, so the kernel inclusion is injective. -/
+/-- Affine sections of a component kernel are annihilated by the doubled ideal power
+(Stacks, Tag 0888). -/
 theorem coherentFormalModule_kernel_component_affine_annihilation
     (X : Scheme.{u}) [IsNoetherian X]
     (I K : X.IdealSheafData) (F G : CoherentFormalModule X I) (α : F ⟶ G)

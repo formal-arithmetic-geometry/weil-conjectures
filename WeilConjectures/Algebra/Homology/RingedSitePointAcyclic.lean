@@ -12,7 +12,13 @@ import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
-/-! # Detection of acyclicity by a conservative family of module stalks -/
+/-! # Detection of acyclicity by a conservative family of module stalks
+
+## References
+
+* [Stacks Project, Cohomology on Sites, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks Project, Cohomology on Sites, Tag 0DEN](https://stacks.math.columbia.edu/tag/0DEN)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -47,16 +53,7 @@ private theorem jointlyReflectModules
   exact isIso_of_reflects_iso f U
 
 /-- A conservative family of topos points detects acyclicity of module complexes,
-including when the family is empty.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0DEN.
-(auxiliary; not a blueprint node)
-
-Proof: exactness of each module inverse image preserves the homology of every
-consecutive triple. Conversely, vanishing of these images of homology makes the map
-from homology to zero an isomorphism at each point. The prescribed underlying-set
-comparisons transfer this to the given conservative family on set sheaves. Forgetting
-module structure reflects isomorphisms. Thus the original homology is zero. The proof
-uses no selected member of the family. -/
+including when the family is empty. -/
 theorem acyclic_iff
     {I : Type t} (p : I → GeometricMorphism (Type w) (Sheaf J (Type w)))
     (s : ∀ i : I, RingedSitePoint R (p i))

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeSubKernel
 
 /-! # Coherent ExtensionRelations
 
-Source: Stacks Project, Modules, Lemma 01BY
-(blueprint: lem-weil-pbc-coherent-extension-relations).
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section
@@ -77,20 +78,8 @@ private theorem extension_kernel_iso {C : Type*} [Category C] [Abelian C]
         simp [a, b, b₀, k, Category.assoc] }
   exact ⟨φ, ⟨e⟩⟩
 
-/-- Relations in the middle term of an extension of coherent modules are of finite type.
-Source: Stacks Project, Modules, Lemma 01BY (lemma-coherent-abelian), proof of (4),
-the relation-kernel diagram (blueprint: lem-weil-pbc-coherent-extension-relations).
-
-Proof: Restrict the short exact sequence to U and compose g with the quotient map.
-The kernel K3 of this composite is finite type by coherence of the last term,
-which remains coherent on restriction to U. The composite of K3 into the middle
-term lands in the first term because its image in the last term is zero. Exactness
-identifies the kernel K of g with the kernel of this induced map K3 to the first
-term on U. The open-slice version of part (2) of Lemma 01BY makes this induced kernel finite
-type. The two kernel lifts are inverse by cancellation of their monic inclusions;
-transport finite local generating families along the resulting isomorphism.
-This assertion concerns only the relation kernels; finite type
-of the middle term is supplied separately by Lemma 01B7. -/
+/-- Relations in the middle term of an extension of coherent modules are of finite type
+(Stacks, Tag 01BY). -/
 theorem coherent_extension_relations (X : RingedSpace.{u})
     (S : ShortComplex (SheafOfModules.{u} (moduleRings X))) (hS : S.ShortExact)
     (h₁ : IsCoherent X S.X₁) (h₃ : IsCoherent X S.X₃)

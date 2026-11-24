@@ -14,8 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Slice comparisons for the fixed completed immersion model
 
-Source: Bhatt--Scholze, Proposition 6.6.11, forward implication;
-Lemma 6.5.8 and Remark 6.5.10. Stacks Project, Tags 03A0, 03CY, 099L and 099R.
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.8 and Remark 6.5.10
+* Stacks Project, Tags 03A0, 03CY, 099L and 099R
 -/
 
 @[expose] public noncomputable section
@@ -133,30 +135,8 @@ private theorem completedConstantIso {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersi
 
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
-/-- Slice normalization for the specified completed inverse image, uniformly in the complex.
-The same equivalence compares all completed constant models; neither completeness nor a
-residue presentation is assumed.
-
-Source: Stacks Tags 03A0, 03CY, 03DJ, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8
-(auxiliary; not a blueprint node).
-Proof: the AsSmall equivalence induces the equivalence of categories over U and up(U).
-The projection-normalized constant-ring comparison identifies inverse image of the
-completed ring on X with the completed ring on S: the immersion inverse image preserves
-limits, and each finite quotient comparison is invertible. Restrict that ring
-isomorphism to the slice. Compose the slice-site module equivalence with scalar
-restriction along it, and derive this exact equivalence to obtain eU.
-For the first comparison, the same exact module inverse image is used in
-sfbImmersionCompletedModel and in proEtaleRingDerivedPullback. Their tensor insertions
-agree on generalized sections, so the universal derived comparisons identify their
-values. Exact restriction to the slice commutes with both localizations. The unit and
-counit comparisons with the selected localization representatives give the displayed
-isomorphism, uniformly for every K. For the second comparison, constant inverse image
-and AsSmall transport identify the constant A-module functors. The completed coefficient
-map is identified by all finite projections. Associativity of scalar extension therefore
-identifies its two completed module realizations. Apply this termwise to every A-complex
-P, then exact slice restriction and localization. The construction uses the same eU as
-in the first comparison. Nothing requires P to be perfect or bounded. Empty U and
-zero coefficient rings satisfy the same equivalence and scalar-insertion identities. -/
+/-- Slice normalization for the specified completed inverse image, uniformly in the complex
+(Stacks, Tags 03A0, 03CY, 03DJ, 099L and 099R; Bhatt--Scholze, Lemma 6.5.8). -/
 theorem sfbImmersion_sliceComparisons
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A) :

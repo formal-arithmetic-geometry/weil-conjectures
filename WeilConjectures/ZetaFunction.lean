@@ -88,11 +88,7 @@ noncomputable def eulerFactor (x : X) (s : ℂ) : ℂ :=
 
 /-- The (Hasse-Weil) zeta function of an arbitrary scheme `X`: the Euler product
 `ζ_X(s) = ∏ (1 - #κ(x) ^ (-s))⁻¹` over all points `x` of `X` with finite residue field.
-
-The product is an unconditional infinite product (`tprod`) and takes the junk value `1`
-if the family of Euler factors is not multipliable. For `X` of finite type over `ℤ` it
-converges for `re s` sufficiently large (see `multipliable_eulerFactor_of_finiteType`),
-and this definition recovers the classical arithmetic zeta function of `X`. -/
+The product is a `tprod`, with junk value `1` if the Euler factors are not multipliable. -/
 noncomputable def zeta (s : ℂ) : ℂ :=
   ∏' x : X.finitePoints, X.eulerFactor x.1 s
 

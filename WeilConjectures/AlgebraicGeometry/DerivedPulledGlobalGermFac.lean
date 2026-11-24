@@ -11,7 +11,9 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-! # DerivedPulledGlobalGermFac
 
-Source: Stacks Project, Tags 095T, 01F8 and 08J6.
+## References
+
+* Stacks Project, Tags 095T, 01F8 and 08J6
 -/
 
 @[expose] public section
@@ -30,23 +32,8 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 -- Canonical homotopy comparison endpoints require repeated definitional equality checks.
 /-- The source-side derived germ and exchange, precomposed with the global-sections
-unit, are the localized underived source-side composite followed by the target units.
-Source: Stacks Project, sites-cohomology.tex, Remark 08J6 and Lemma 0736;
-cohomology.tex, Tag 01EZ.
-(blueprint: lem-weil-pbc-derived-pulled-global-germ-fac)
-
-Proof: Expand `derivedPulledGlobalGerm`. The Leray unit compatibility moves the
-Γ_X unit across the inverse Leray comparison, giving the localized inverse terminal
-section isomorphism followed by the composite Γ_Y and f_* units. Naturality moves the
-f_* unit through the derived pulled germ. The defining compatibility of the right-derived
-natural transformation with its units replaces the Γ_Y unit followed by the derived
-pulled germ by its termwise map. The exact-functor comparison and composition comparison
-replace the remaining derived unit by the two stalk/pullback factorization inverses.
-Use `derivedBaseChangeMapPlus_fac_app` to replace the pullback of the f_* unit followed
-by exchange by the termwise exchange, the f'_* unit and the g'^* comparison inverse.
-Naturality of the stalk factorization collects the three target comparisons into c.
-Functoriality of the homotopy quotient and localization combines the preceding maps
-into the localization of `NatTrans.mapHomotopyCategoryPlus a`. -/
+unit, are the localized underived source-side composite followed by the target units
+(Stacks, Tags 08J6, 0736 and 01EZ). -/
 theorem derivedPulledGlobalGerm_fac
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)

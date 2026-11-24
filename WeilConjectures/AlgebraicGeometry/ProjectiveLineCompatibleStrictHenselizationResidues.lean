@@ -16,7 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenseliza
 
 /-! # Compatible strict henselizations and geometric residue maps
 
-Source: Stacks Project, Tags 04HX, 03PS, 04GU and 095T.
+## References
+
+* Stacks Project, Tags 04HX, 03PS, 04GU and 095T.
 -/
 
 @[expose] public section
@@ -32,28 +34,8 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- Compatible strict henselizations have compatible residue-field maps to the
-original integral geometric points. The residue maps are universal homeomorphisms.
-
-Source: Stacks Project, Tags 04HX and 03PS, functoriality Tag 04GU, and the last two
-paragraphs of the proof of Tag 095T; topological invariance Tag 04DY.
-(blueprint: lem-weil-pbc-p1-compatible-strict-henselization-residues).
-
-Proof: take the coordinate-ring colimits of the affine pointed neighbourhoods at
-s and t, and use their spectra for eA and eB. Tag 04HX identifies each as a strictly
-henselian local ring and identifies
-its residue field with the relative separable closure of the base residue field
-inside Ω. Since k and k' are separably closed, these relative separable closures
-already lie in k and k', respectively: a separable polynomial splits there, so
-all of its roots in Ω lie in the image of that field. This gives ρA and ρB.
-The integral factorizations hσ and hτ make k and k' algebraic over their base
-residue fields. Their extensions of the relative separable closures are thus
-purely inseparable, and their spectra are universal homeomorphisms. The pointed
-factorization in Tag 04HX proves the two displayed geometric-point equalities.
-The equality hι identifies the base-residue embeddings into Ω. Functoriality of
-strict henselization (Tags 03PS and 04GU) gives the local ring map φ, the structural
-square, and the commuting residue square. Equality can be checked after embedding
-both residue fields into Ω; those embeddings are injective. No sheaf, cohomology,
-or closed-fibre comparison is used. -/
+original integral geometric points. The residue maps are universal homeomorphisms
+(Stacks, Tags 04HX, 03PS, 04GU, 095T). -/
 theorem Etale.projectiveLine_compatibleStrictHenselizationResidues
     {S T : Scheme.{u}} {g : T ⟶ S}
     {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']

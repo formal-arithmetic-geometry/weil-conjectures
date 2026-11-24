@@ -15,8 +15,12 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeMateFactorization
 
 /-! # AffineBaseChangeTildeOrdinaryComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-ordinary-comparison). -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08IB
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,28 +36,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 set_option linter.unusedVariables false in
-/-- Ordinary affine mate calculation before extension of the source cohomology.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, equation-bc and its affine proof;
-more-algebra.tex, Tag 06Y6; perfect.tex, Tag 08IB.
-(blueprint: lem-pc-affine-base-change-tilde-ordinary-comparison).
-
-Proof: Resolve the restriction of M to R by an R-K-flat complex P. The universal
-counit of m.derived identifies its value with scalar extension of P to R'.
-Exact tilde and the affine derived-pullback formula identify the associated
-cohomology sheaf with H^i(Lg^*Rf_*K), giving eC. For all quasi-coherent derived
-objects on Spec A', affine higher-direct-image vanishing with bound one gives
-H^i(Rf'_*(-)) = f'_*H^i(-) naturally. Compose with the tilde/Gamma counit and
-the pushforward/restriction-of-scalars comparison to obtain d. On P the derived
-mate is scalar extension of the augmentation to the restriction of M. The
-unit-normalized tensor-pullback formula identifies this with the ordinary
-tensor map followed by the coefficient map to A'. Apply homology, using
-m.comparison_eq, to obtain cE. Transport restriction of scalars using hφf',
-and use the inverse pullback counit and e to identify the target via b.
-This gives the displayed square. The square need only commute, and need not
-be cartesian. This statement does not use the source scalar extension U or
-m.localizedComparison: their adjoint relation is proved
-separately using m.localized_eq. All constructions allow zero rings, zero
-complexes and unbounded resolutions. -/
+/-- Ordinary affine mate calculation before extension of the source cohomology. -/
 theorem exists_affineBaseChangeTildeOrdinaryComparison
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

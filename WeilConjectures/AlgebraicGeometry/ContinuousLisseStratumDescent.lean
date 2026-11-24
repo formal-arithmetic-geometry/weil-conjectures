@@ -21,9 +21,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A lattice of `p^* P` over `U` descends to a lattice of `j^* P` over a stratum `W`, given a
 commutative square `r ≫ p = q ≫ j` with `q` finite étale surjective and descent of lattices
-along `q`.
-Source: Bhatt--Scholze, proof of Lemma 6.8.13.
-(auxiliary; not a blueprint node) -/
+along `q`. (Bhatt--Scholze, Lemma 6.8.13) -/
 theorem continuousLisse_lattice_on_stratum
     (Λ₀ Λ₁ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ₀] [IsCommMonObj Λ₀] [MonObj Λ₁] [IsCommMonObj Λ₁]

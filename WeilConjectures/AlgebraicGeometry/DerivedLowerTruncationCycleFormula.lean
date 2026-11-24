@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationUnitBridge
 
 /-! # The cycle formula for the bottom derived comparison
 
-Source: Stacks Project, Tags 05TC (2), 0AVW and 08D4 (1).
-(blueprint: lem-sc-derived-lower-truncation-cycle-formula).
+## References
+
+* Stacks Project, Tags 05TC, 0AVW and 08D4
 -/
 
 @[expose] public section
@@ -27,29 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Bottom derived cohomology identifies the derived edge map on each cycle
-with its image under the original functor. The complex need not be K-injective,
-and no invertibility of the derived truncation map is assumed.
-
-Source: Stacks Project, Tag 05TC (2), lemma-negative-vanishing; Tag 0AVW,
-canonical cohomology calculation; Tag 08D4 (1).
-(blueprint: lem-sc-derived-lower-truncation-cycle-formula).
-
-Proof: Put A = truncLE n I and B = truncGE n A. The maps A to I and A to B
-induce the usual maps on degree-n homology. Preservation of kernels identifies
-the cycles of F(A) with F of the cycles of I. The boundary map into these
-cycles is F of the induced boundary map. B is quasi-isomorphic to H^n(I)
-placed in degree n. For a left exact functor, negative derived cohomology
-vanishes; hence the upper-truncation inclusion into truncGE n I induces an
-isomorphism in bottom derived degree n. Shift the single complex to degree
-zero, where the derived unit identifies R^0 F with F. This constructs the
-bottom comparison b. Naturality of the derived unit for A to I and A to B
-identifies the map on a cycle with F of its homology class. Kernel uniqueness
-identifies the lift in the displayed formula with F of the cycle inclusion;
-the cokernel universal property identifies its class with F(h.pi). The
-quotient and homotopy homology factor isomorphisms account for localization.
-All steps use canonical comparisons, not an arbitrary bottom isomorphism.
-Zero complexes and negative cutoff degrees obey the same kernel and shift
-calculations. No boundedness of I and no exactness of F beyond kernels is used. -/
+with its image under the original functor
+(Stacks, Tags 05TC, 0AVW and 08D4). -/
 theorem derived_lower_truncation_cycle_formula
     {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w'} D]

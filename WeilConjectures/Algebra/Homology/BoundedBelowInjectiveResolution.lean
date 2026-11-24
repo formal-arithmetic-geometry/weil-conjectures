@@ -17,9 +17,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Bounded-below injective resolutions on a small ringed site
 
-Source: Stacks Project, Cohomology on Sites, Section 21.19 (Tag 07A5), using
-Injectives, Theorem 19.12.6 (Tag 079P)
-(blueprint: lem-sc-bounded-below-injective-resolution).
+## References
+
+* Stacks Project, Cohomology on Sites, Section 21.19 (Tag 07A5)
+* Stacks Project, Injectives, Theorem 19.12.6 (Tag 079P)
 -/
 
 @[expose] public section
@@ -31,24 +32,7 @@ open CategoryTheory
 namespace SheafOfModules
 
 /-- Every bounded-below complex of modules on a small ringed site admits a quasi-isomorphism
-into a bounded-below complex with injective terms which is also K-injective.
-
-Source: Stacks Project, Tags 07A5 and 079P, with the bounded-below replacement furnished by
-`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`
-(blueprint: lem-sc-bounded-below-injective-resolution).
-
-Proof:
-1. The category of module sheaves on a small ringed site is Grothendieck abelian by the
-Grothendieck assertion of `lem-pur-ringed-site-grothendieck-abelian`, supplied directly
-by the proved upstream `SheafOfModules.isGrothendieckAbelian`. Mathlib's
-`CategoryTheory.IsGrothendieckAbelian.enoughInjectives` then supplies enough injectives.
-2. Choose a lower bound for `G`. Apply the unbundled Mathlib theorem
-`CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective`, the construction
-underlying `lem-sc-bounded-below-injective-resolution-existence`. This gives a complex
-`I`, strictly supported above the same lower bound, with injective terms and a
-quasi-isomorphism `G ⟶ I`, without packaging it in the category of injective objects.
-3. Apply `lem-weil-pbc-bounded-below-injectives-kinjective`
-(`CochainComplex.isKInjective_of_injective`) to conclude that `I` is K-injective. -/
+into a bounded-below complex with injective terms which is also K-injective. -/
 theorem exists_boundedBelow_injective_resolution
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

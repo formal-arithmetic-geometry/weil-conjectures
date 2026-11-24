@@ -13,9 +13,12 @@ import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 import WeilConjectures.Topology.GlueSheavesOfModules
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
-/-! # IdealPowerEvaluationEventuallyZero
+/-!
+# Eventual vanishing of ideal-power evaluation
 
-Source: Stacks Project, Properties, Lemma 01PQ.
+## References
+
+* Stacks Project, Tag 01PQ
 -/
 
 @[expose] public section
@@ -28,22 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A homomorphism from an ideal power that evaluates to zero on the complement
 vanishes after restriction to a sufficiently high power.
-
-Proof: Choose a finite affine cover of the quasi-compact scheme. On one affine member
-write the ideal as a finitely generated ideal J = (f_1,...,f_t) and F as the sheaf of M.
-The affine tilde/Gamma adjunction identifies the homomorphism with a linear map
-J^n -> M. On D(f_i), evaluation at one is phi(f_i^n)/f_i^n, by linearity and naturality.
-Its vanishing means f_i^k phi(f_i^n) = 0 for some k. Take one k for all generators.
-Then phi kills every f_i^(n+k). Any monomial of degree t*(n+k-1)+1 contains one of
-these powers, so phi vanishes on a sufficiently high power of J. For J = 0 use a
-positive power directly, and enlarge all exponents to be at least n. Take the maximum
-of the exponents from the finite affine cover. The specified r is the power inclusion
-by its equality over the structure sheaf and monicity of the power inclusions.
-The resulting restricted homomorphism vanishes on the cover, hence vanishes globally
-by sheaf uniqueness. The case n = 0 uses the same calculation with f_i^0 = 1.
-
-Source: Stacks Project, Properties, Lemma 01PQ and its reduction to Lemma 01PM.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-eventually-zero). -/
+(Stacks, Tags 01PQ and 01PM) -/
 theorem ideal_power_evaluation_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

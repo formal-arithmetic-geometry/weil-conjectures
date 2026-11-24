@@ -15,10 +15,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Normalized tensor coordinates for projective-line level comparison
 
-Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
-sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md, Levels
-(blueprint: def-sp-p1-level-words).
-
 The coordinates retain the canonical associated-module-sheaf functor. Its tensor
 comparison is fixed on scalar-unit pure tensors, on total-complex summands, and
 on K-flat representatives. Thus the final level equations cannot be satisfied
@@ -45,32 +41,27 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (n : ℕ) [Finite (SpTowerShriek.R l E n)]
 
-/-- The actual finite coefficient ring in fixed-module coordinates.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+/-- The actual finite coefficient ring in fixed-module coordinates. -/
 abbrev levelRing := ULift.{u + 1} (SpTowerShriek.R l E n)
 
-/-- The exact comparison inverse image followed by associated-module realization.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+/-- The exact comparison inverse image followed by associated-module realization. -/
 abbrev nu (T : Scheme.{u}) :=
   (comparisonUpperStar (ModuleCat.{u + 1} (levelRing l E n)) T).mapDerivedCategory ⋙
     (realization l E n T).mapDerivedCategory
 
-/-- The annihilating exponent in the lifted ring is the recorded quotient equation.
-Source: coefficient convention (blueprint: def-sp-p1-level-words). -/
+/-- The annihilating exponent in the lifted ring is the recorded quotient equation. -/
 abbrev levelAnnihilates : ((l ^ (n + 1) : ℕ) : levelRing l E n) = 0 :=
   ULift.ext (SpTowerClasses.coefficient_annihilates l E n)
 
 /-- An etale expression, its tower expression, and their specified comparison arrow.
 The arrow is built recursively from site mates and evaluation; it is not freely chosen
-at the endpoints of any asserted equation.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+at the endpoints of any asserted equation. -/
 structure LevelWord (T : Scheme.{u}) where
   tower : SpTowerShriek.D l E T
   etale : Etale.DerivedCategoryModule (levelRing l E n) T
   comparison : (nu l E n T).obj etale ⟶ (SpTowerShriek.Ev l E T n).obj tower
 
-/-- The word supplied by any retained origin, using precisely its specified witness.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+/-- The word supplied by any retained origin, using precisely its specified witness. -/
 def originWord (b : SpTowerShriek.Base l E) {T : Scheme.{u}}
     {K : SpTowerShriek.D l E T} (o : SpTowerShriek.Origin l E b T n K) :
     LevelWord l E n T where
@@ -79,8 +70,7 @@ def originWord (b : SpTowerShriek.Base l E) {T : Scheme.{u}}
   comparison := ((realization l E n T).mapDerivedCategory.mapIso o.witness.iso ≪≫
     o.realization).hom
 
-/-- Inverse-image word, through the canonical site pullback and pullEvaluation.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+/-- Inverse-image word, through the canonical site pullback and pullEvaluation. -/
 def pullWord (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f) (c : GeometricCoordinates l E n f)
     (K : LevelWord l E n Y) : LevelWord l E n X where
@@ -93,8 +83,7 @@ def pullWord (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g.pullEvaluation n).inv.app K.tower
 
 /-- Direct-image word, through the fixed canonical site mate and pushEvaluation.
-Its comparison is defined even before its bounded-domain invertibility is proved.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+Its comparison is defined even before its bounded-domain invertibility is proved. -/
 def pushWord (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (g : SpTowerShriek.Geometry l E b f) (c : GeometricCoordinates l E n f)
     (K : LevelWord l E n X) : LevelWord l E n Y where
@@ -107,8 +96,7 @@ def pushWord (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
       K.comparison ≫ (g.pushEvaluation n).inv.app K.tower
 
 /-- Tensor word, using the fixed site's monoidal comparison, normalized realization,
-and the section-model tensorEvaluation in that order.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+and the section-model tensorEvaluation in that order. -/
 def tensorWord (b : SpTowerShriek.Base l E) {T : Scheme.{u}}
     (c : TensorCoordinates l E n b T) (K L : LevelWord l E n T) : LevelWord l E n T where
   tower := (SpTowerShriek.tensor l E b T).obj (K.tower, L.tower)
@@ -126,8 +114,7 @@ def tensorWord (b : SpTowerShriek.Base l E) {T : Scheme.{u}}
 
 /-- Equality of the actual evaluated map with nu-star of its etale word, with the
 canonical endpoint comparisons invertible. This is a commuting square of arrows,
-not a repetition of an input geometry field.
-Source: Levels (blueprint: def-sp-p1-level-words). -/
+not a repetition of an input geometry field. -/
 def WordComparison {T : Scheme.{u}} (K L : LevelWord l E n T)
     (f : K.tower ⟶ L.tower) (g : K.etale ⟶ L.etale) : Prop :=
   IsIso K.comparison ∧ IsIso L.comparison ∧

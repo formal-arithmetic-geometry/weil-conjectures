@@ -13,9 +13,10 @@ import WeilConjectures.Algebra.Homology.FirstLocalizationComparison
 import WeilConjectures.Algebra.Homology.FirstLocalizationNaturality
 /-! # First-factor localization of base-derived tensor cohomology
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, first localization identity;
-More on Algebra, Tags 064K and 06Y6.
-(blueprint: lem-pc-derived-tensor-first-localization-models).
+## References
+
+* Stacks Project, Tag 0DJ8 (first localization identity)
+* Stacks Project, Tags 064K and 06Y6 (More on Algebra)
 -/
 
 @[expose] public section
@@ -46,27 +47,7 @@ variable (R A B Aq D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
 include tRA tAD tBD tAqD tBqD tAAqD in
-/-- Exact localization in the first algebra, with R and B unchanged.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, first displayed localization identity.
-(blueprint: lem-pc-derived-tensor-first-localization-models).
-
-Proof: choose a K-flat A-resolution P -> Q and a K-flat R-resolution F -> B[0].
-The balanced complex Tot(P tensor_R F) computes Q tensor-derived_R B. The
-localized P resolves the localization of Q and stays K-flat over Aq.
-Termwise localization at S in the A-variable
-commutes with the direct sums and differentials of the total complex, identifying
-its localization with Tot((Aq tensor_A P) tensor_R F). Exactness of localization
-identifies their cohomologies. Multiplication on Q and multiplication by B in
-D(R) commute with this identification, giving linearity over Aq tensor_R B.
-Extend to D using tensor associativity. The augmentation F -> B[0] gives the
-comparison square: both routes send d tensor x to d tensor (1 tensor x).
-This also shows the square for every tau with the indicated pure-tensor formula,
-since pure tensors generate each term. Chain maps give naturality. For arbitrary
-models, use the unique counit-compatible derived-functor isomorphism, transport
-cohomology through cohomologyIso, and use cohomologyIso_smul to retain the first
-scalar action. Faithfulness of restriction of scalars makes the equations for
-any g and h with the specified characterization identical to these equations.
-No K-flatness of Q over R, and no flatness of A over R, is assumed. -/
+/-- Exact localization in the first algebra, with R and B unchanged. -/
 theorem derivedTensor_first_localization_models
     (S : Submonoid A) [IsLocalization S Aq] (i : ℤ) :
     ∃ e : ∀ (Q : CochainComplex (ModuleCat.{u} A) ℤ)

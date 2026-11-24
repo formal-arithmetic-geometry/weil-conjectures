@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClassCore
 /-!
 # Constructible representatives of restricted cohomology classes
 
-Source: Stacks Project, Tags 03SA(3) and 03Q5.
+## References
+
+* Stacks Project, Tags 03SA and 03Q5
 -/
 
 @[expose] public section
@@ -26,21 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Etale
 
 /-- A cohomology class in the restriction of a module sheaf comes from a constructible
-module sheaf mapping to it. No injectivity or properness is needed.
-
-Source: Stacks Project, Tags 03SA(3) and 03Q5.
-(blueprint: lem-weil-pbc-constructible-restriction-class)
-
-Proof: Express F as a small filtered colimit of constructible module sheaves Gₐ by
-03SA(3), with cocone maps aₐ : Gₐ → F. Forgetting modules preserves colimits; inverse
-image also preserves colimits, and naturally commutes with forgetting modules.
-Thus the underlying abelian restriction of F is the filtered colimit of the underlying
-abelian restrictions of Gₐ. On the quasi-compact quasi-separated scheme X₀, 03Q5
-identifies the cohomology of this colimit with the filtered colimit of their cohomology
-groups. Every element of a filtered colimit of abelian groups comes from one stage.
-Choose that stage Gₐ and its class z, and take a = aₐ. The canonical cohomology map
-from that stage is precisely H^q of the underlying restricted a, giving the equality.
-This includes q = 0, zero classes, empty schemes, and the zero coefficient ring. -/
+module sheaf mapping to it. No injectivity or properness is needed (Stacks, Tags 03SA and 03Q5). -/
 theorem exists_constructible_restriction_class
     {X X₀ : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X₀] [QuasiSeparatedSpace X₀] (i : X₀ ⟶ X)

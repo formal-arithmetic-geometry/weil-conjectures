@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentAffineFreeResolution
 
 /-! # Coherent modules are pseudo-coherent on Noetherian schemes
 
-Source: Stacks Project, Derived Categories of Schemes, Tag 08E8,
-`lemma-identify-pseudo-coherent-noetherian` (blueprint: lem-sc-coherent-pseudo-coherent).
+Stacks Project, Tag 08E8.
 -/
 
 @[expose] public section
@@ -26,14 +25,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- A coherent module on a Noetherian scheme, regarded as a complex concentrated in degree
-zero, is pseudo-coherent. Source: Stacks Project, Tag 08E8,
-`lemma-identify-pseudo-coherent-noetherian` (blueprint: lem-sc-coherent-pseudo-coherent).
-
-Proof: At each point of `Y`, `lem-sc-coherent-affine-free-resolution` gives an affine
-neighbourhood and a bounded-above complex of finite-rank free modules quasi-isomorphic to
-`F` restricted to that neighbourhood, concentrated in degree zero. Its image in the derived
-category is therefore isomorphic to the restriction of `F[0]`. These local resolutions give
-exactly the condition of `def-pur-pseudo-coherent-complex` at every point, hence the result. -/
+zero, is pseudo-coherent (Stacks, Tag 08E8). -/
 theorem isPseudoCoherent_singleFunctor_obj_of_isCoherent (Y : Scheme.{u}) [IsNoetherian Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ U : Y.Opens,

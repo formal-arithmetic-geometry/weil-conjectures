@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Localization of cohomology on an ambient affine open
 
-Source: Stacks Project, Tags 09MR (affine-open paragraph) and 01E1 (locality).
-(blueprint: lem-sc-invert-s-cohomology-affine-open).
+## References
+
+* Stacks Project, Tags 09MR and 01E1
 -/
 
 @[expose] public section
@@ -28,19 +29,8 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The affine localization comparison, expressed on an open of the ambient scheme.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR, affine-open paragraph;
-Cohomology of Sheaves, Lemma 01E1 (2).
-(blueprint: lem-sc-invert-s-cohomology-affine-open).
-
-Proof: In degree zero use affineOpen_cohomology_localization_zero. In positive
-degrees all twisted numerator groups vanish by affine cohomology vanishing, since
-tensor products of quasi-coherent modules are quasi-coherent. Their direct sum and
-fraction quotient are therefore subsingletons. The open U ⊓ S is affine by
-lem-sc-affine-cap-section-open, so its cohomology also vanishes. The unique additive
-equivalence between these zero groups satisfies the fraction formula. For empty U
-or zero s the same argument applies. -/
+/-- The affine localization comparison, expressed on an open of the ambient scheme
+(Stacks, Tags 09MR and 01E1). -/
 theorem affineOpen_cohomology_localization
     (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible] (s : Γ(L, ⊤))
     (F : X.Modules) [F.IsQuasicoherent]

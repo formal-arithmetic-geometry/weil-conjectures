@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionIsoDescent
 
 /-! # Core object comparison data (without the final Hom pin).
 
-Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data).
+## References
+
+* Stacks Project, Tags 09RE, 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -76,11 +77,8 @@ theorem perfectOverlapCoreBaseComparison_eq
     perfectOverlapCoreBaseComparison R c i Y s k =
       perfectHomComparison s (overlapLimitArrow R c k) := rfl
 
-/-- Natural derived-pullback comparison for two cartesian identifications.
-Source: Stacks Project, Tag 0D5S. The two sides are pullbacks along the same
-scheme map after `h`. Compose the fixed pullback-composition isomorphism for
-`e.inv` and `r`, transport across `h`, and invert the fixed comparison for
-`m` and `d.inv`. Naturality follows from that of each factor. -/
+/-- Natural derived-pullback comparison for two cartesian identifications
+(Stacks, Tag 0D5S). -/
 noncomputable def perfectOverlapDerivedPullbackTransport
     {Y Z A B : Scheme.{u}}
     [∀ T : Scheme.{u},
@@ -312,11 +310,8 @@ noncomputable def perfectOverlapPsiFromDiagram
   | false => d.γU.symm.app A' ≪≫ SP.mapIso θU ≪≫ τU.app E
   | true => d.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E
 
-/-- The first component of the canonical overlap object comparison.
-Source: Stacks Project, Tags 08DW and 0D5S. On the first open, invert the
-intersection comparison `γU`, map the transported local identification through
-the smaller-open restriction, then use `τU` to identify the two site restrictions.
-This is exactly the false branch of the defining comparison. -/
+/-- The first component of the canonical overlap object comparison, on the first open
+(Stacks, Tags 08DW and 0D5S). -/
 @[simp] theorem perfectOverlapPsiFromDiagram_false
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -336,11 +331,8 @@ This is exactly the false branch of the defining comparison. -/
       d.γU.symm.app A' ≪≫ SP.mapIso θU ≪≫ τU.app E := by
   rfl
 
-/-- The second component of the canonical overlap object comparison.
-Source: Stacks Project, Tags 08DW and 0D5S. On the second open, invert the
-intersection comparison `γV`, map the transported local identification through
-the smaller-open restriction, then use `τV` to identify the two site restrictions.
-This is exactly the true branch of the defining comparison. -/
+/-- The second component of the canonical overlap object comparison, on the second open
+(Stacks, Tags 08DW and 0D5S). -/
 @[simp] theorem perfectOverlapPsiFromDiagram_true
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -360,11 +352,7 @@ This is exactly the true branch of the defining comparison. -/
       d.γV.symm.app B' ≪≫ SQ.mapIso θV ≪≫ τV.app E := by
   rfl
 
-/-- Invert the first-open coherence square at a global object.
-Source: Stacks Project, Tag 08DW. The defining square says that the path through
-`τU⁻¹`, `βU`, and `γU` equals the path through `βW` and `αU⁻¹`.
-Compose on the left with `αU` and `βW⁻¹`, then cancel `γU` on the right.
-Functoriality and the inverse laws for the natural isomorphisms give the formula. -/
+/-- Inverse form of the first-open coherence square at a global object (Stacks, Tag 08DW). -/
 theorem overlapDiagram_gammaU_inv_on_image
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -391,10 +379,7 @@ theorem overlapDiagram_gammaU_inv_on_image
       simp only [Category.assoc]
       rw [d.coherenceU F]
 
-/-- Invert the second-open coherence square at a global object.
-Source: Stacks Project, Tag 08DW. Compose the defining second-open square
-with the inverses of `αV`, `βW`, and `γV`. The inverse laws cancel these
-isomorphisms and leave the displayed expression for the inverse component. -/
+/-- Inverse form of the second-open coherence square at a global object (Stacks, Tag 08DW). -/
 theorem overlapDiagram_gammaV_inv_on_image
     {C D A B W P Q T : Type*}
     [Category* C] [Category* D] [Category* A] [Category* B]
@@ -423,11 +408,8 @@ theorem overlapDiagram_gammaV_inv_on_image
 
 
 
-/-- Geometric object comparisons and their natural compatibility with apex pullback.
-The transition functors and their fixed conjugation formula are recorded explicitly;
-the Hom pin will be derived from naturality, rather than included as a field.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data). -/
+/-- Geometric object comparisons and their natural compatibility with apex pullback
+(Stacks, Tags 08DW and 0D5S). -/
 structure PerfectHomObjectRealizationCore
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (i : I)
@@ -473,9 +455,8 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
   schemeOpenOverlapRestriction_preservesFiniteLimits
   schemeOpenOverlapRestriction_preservesFiniteColimits
 
-/-- The object-comparison proposition for the fixed overlap scheme and pullback objects.
-Source: Stacks Project, Tags 09RE, 08DW and 0D5S.
-(blueprint: lem-pc-perfect-overlap-object-realization-core-data). -/
+/-- The object-comparison proposition for the fixed overlap scheme and pullback objects
+(Stacks, Tags 09RE, 08DW and 0D5S). -/
 @[irreducible] noncomputable def perfectOverlapObjectRealizationCoreStatement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.System.SystemTensorReductionFormula
 
 /-! # Composition of representative-normalized tensor comparisons
 
-Source: Stacks 07A4, 06YS, 0G7E and 0G7D.
-(blueprint: lem-coef-semilinear-tensor-comparison-composition).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 07A4, 06YS, 0G7E, 0G7D
 -/
 
 @[expose] public noncomputable section
@@ -322,18 +323,7 @@ private theorem derived_composition
     (KG.mu.hom.app (F.mapDerivedCategory.obj M, F.mapDerivedCategory.obj N))
     (S₂.tensor.map (Prod.mkHom (δ.hom.app M) (δ.hom.app N)))).symm.trans hf
 
-/-- Ordinary tensor compatibility implies chain and derived compatibility for exact functors.
-Source: Stacks 07A4, 06YS, 0G7E and 0G7D.
-(blueprint: lem-coef-semilinear-tensor-comparison-composition).
-
-Proof: test the total-complex equality on each tensor summand. The model summand
-formulas and naturality of the compositor reduce it to the inverse ordinary
-square. On flat-term K-flat representatives, use the two successive model
-comparison equations and the composite comparison equation. The derived
-compositor factorization and naturality of the target representative comparison
-identify both routes by the chain equality. Cancel the source representative
-isomorphism. Cochain tensor model rigidity extends equality from representative
-pairs to the whole derived product. Finally invert the comparison square. -/
+/-- Ordinary tensor compatibility implies chain and derived compatibility for exact functors. -/
 theorem tensorComparisonComposition
     {C₀ C₁ C₂ : Type c} [Category.{v} C₀] [Category.{v} C₁] [Category.{v} C₂]
     [EssentiallySmall.{max c v r} C₀] [EssentiallySmall.{max c v r} C₁]

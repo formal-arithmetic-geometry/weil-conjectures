@@ -11,9 +11,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 
 /-! Ind-constructible Ext vanishing from an unrestricted continuity theorem.
-
-Source: blueprint `corollary-ind-heart-b`, vanishing clause.
-(blueprint: lem-finite-window-ind-ext-bound-continuity-vanishing)
 -/
 
 @[expose] public section
@@ -28,13 +25,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- A continuity theorem for constructible sources extends any uniform constructible
-Ext bound to ind-constructible targets.
-
-Source: blueprint `corollary-ind-heart-b`, vanishing clause.
-(blueprint: lem-finite-window-ind-ext-bound-continuity-vanishing).
-Proof: use the filtered presentation supplied by `ObjectProperty.ind`, apply the
-factorization property to each derived morphism, and transport the stagewise zero
-bound through `Abelian.Ext.homEquiv`. -/
+Ext bound to ind-constructible targets. -/
 theorem constructibleInd_extBound_of_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

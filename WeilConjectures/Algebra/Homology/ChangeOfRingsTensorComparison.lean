@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-!
 # Comparing restricted scalar extension with the sheaf tensor product
 
-Source: Stacks Project, Modules on Sites, Tag 03EK; Tag 06YY.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK and Tag 06YY (degree-zero tensor comparison)
 -/
 
 @[expose] public section
@@ -253,21 +255,8 @@ private lemma tensorComparison_naturality
     (congrArg (fun f ↦ f ≫ Functor.LaxMonoidal.μ A S.val N.val) h) |>.trans
       (Category.assoc _ _ _)
 
-/-- Source: Stacks Project, Tag 03EK and Tag 06YY, degree-zero tensor comparison.
-
-Proof: Put U = restriction along φ and S = U(O'). Before sheafification the
-identity on pure tensors identifies the restricted sectionwise scalar extension
-O'(V) tensor over O(V) M(V) with the sectionwise tensor of S and M. It respects
-restrictions because both constructions restrict each tensor factor, and respects
-module morphisms because both apply id tensor a. Restriction of scalars commutes
-with sheafification: the underlying abelian presheaf and its associated sheaf are
-unchanged, and the induced O action is restriction of the induced O' action.
-Thus these presheaf identifications sheafify to the asserted isomorphisms.
-The counit at the already-sheaf module S and the monoidal localization comparison
-identify the resulting sheafification with S tensor M. Naturality survives each
-comparison and sheafification, giving the displayed equation for every a.
-This uses no flatness; the identity on tensors also covers zero rings and modules.
-(blueprint: lem-pur-change-of-rings-tensor-comparison) -/
+/-- The restriction of the extension of scalars `changeOfRings φ M` is naturally isomorphic
+to `S ⊗ M`, where `S` is the restriction of the unit of `O'`. -/
 theorem exists_changeOfRings_tensor_comparison
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

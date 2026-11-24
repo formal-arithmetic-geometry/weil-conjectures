@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 
 /-! # Transfer of bilinear pairings along ringed precomposition
 
-Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK, Hom/Bilin display.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D6 and 03EK
 -/
 
 @[expose] public section
@@ -30,9 +31,8 @@ attribute [local irreducible] monoidalCategory tensorObjIsoSheafification
   PresheafOfModules.sheafificationAdjunction
 
 /-- Existence part of the sheaf tensor universal property.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
 The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
-through module sheafification; this is the source construction at independent universes. -/
+through module sheafification at independent universes. -/
 private theorem transfer_exists {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
     [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
@@ -86,7 +86,6 @@ private theorem transfer_exists {C : Type uC} [Category.{vC} C] [EssentiallySmal
   exact hh
 
 /-- Uniqueness part of the sheaf tensor universal property.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
 A morphism out of the sheafified presheaf tensor is determined by its values on pure tensors,
 by the generating property of the sectionwise module tensor and sheafification. -/
 private theorem transfer_unique {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -125,8 +124,7 @@ private theorem transfer_unique {C : Type uC} [Category.{vC} C] [EssentiallySmal
   | tmul x y => exact (hφ U x y).trans (hψ U x y).symm
   | add t s ht hs => simp only [map_add, ht, hs]
 
-/-- Naturality of the canonical sheafification comparison, in both factors.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Naturality of the canonical sheafification comparison, in both factors. -/
 private theorem transfer_tensor_naturality
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
@@ -157,8 +155,7 @@ private theorem transfer_tensor_naturality
   simp only [asIso_inv] at hf hg
   exact congrArg (fun z ↦ z ≫ _) (congrArg₂ (fun a b ↦ a ⊗ₘ b) hf hg)
 
-/-- Tensor maps carry the canonical pure tensors to the tensors of the images.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Tensor maps carry the canonical pure tensors to the tensors of the images. -/
 private theorem transfer_tensor_pure
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{w})
@@ -213,31 +210,7 @@ private noncomputable def transfer_restrict {A B : Type w} [CommRing A] [CommRin
 map out of the sheaf tensor, naturally in compatible triples of module-sheaf maps.
 The pure tensors below are their canonical images under the sheafification unit, followed
 by the canonical identification with the localization tensor. The functor `pushforward c`
-is precomposition on sections and morphisms, with scalars restricted along `c`.
-Source: Stacks Project, Modules on Sites, Tags 03D6 and 03EK, Hom/Bilin display.
-(auxiliary; not a blueprint node)
-
-Proof:
-1. On precomposed sections define `r • x = c_U(r) • x`. The unital ring-map laws give
-   the module axioms. Naturality of `c` and semilinearity of restrictions give compatible
-   restrictions. Precomposition preserves sheaves by hypothesis. Precomposed linear maps
-   remain linear and preserve identities and compositions
-   [situation-conventions]. This is Mathlib's `pushforward c`.
-2. The pairing at U is `b (v.op.obj U)`. Its additivity and R(U)-bilinearity follow from
-   S(vU)-bilinearity by substituting `c_U(r)`. Its restriction compatibility follows from
-   that of b, so it is a bilinear morphism of underlying sheaves.
-3. Lift the sectionwise bilinear maps to tensor maps, and assemble these using tensor
-   induction [def-pur-presheaf-tensor-product]. The module-sheafification adjunction
-   [def-weil-presheaf-modules-sheafification] gives the desired map from the sheaf tensor
-   [def-pur-sheaf-tensor-product] and its formula. Injectivity of this adjunction's Hom
-   equivalence and tensor induction give uniqueness, at independent site universes.
-4. The canonical tensor of the two precomposed maps sends each local pure tensor to
-   the pure tensor of the two images. On these sections the two naturality composites
-   are `h(b(x,y))` and `b'(f(x),g(y))`, equal by compatibility. Injectivity of the same
-   sheafification correspondence proves equality of the morphisms. This uses equality on the
-   canonical bilinear pairing, without assuming global generation of sheaf sections
-   by pure tensors.
--/
+is precomposition on sections and morphisms, with scalars restricted along `c`. -/
 theorem ringedPushforward_bilinear_transfer
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     {D : Type uD} [Category.{vD} D] [EssentiallySmall.{w} D]

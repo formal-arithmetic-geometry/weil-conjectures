@@ -12,8 +12,9 @@ import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 /-!
 # Normalization of the ordinary supported coefficient restriction mate
 
-Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in
-lem-pur-supported-product-localization, step 11.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09XP, 0F1E
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ namespace AlgebraicGeometry.Etale
 open Scheme
 
 /-- The left mate of a right-adjoint restriction. This fixes the coefficient comparison
-by the actual support restriction, including its normalization.
-Source: Stacks Tag 09XP (blueprint: lem-pur-supported-coefficient-open-mate-quotient). -/
+by the actual support restriction, including its normalization. -/
 noncomputable def supportCoefficientMate
     {B : Type u₁} {C : Type u₂} {D : Type u₃}
     [Category.{v₁} B] [Category.{v₂} C] [Category.{v₃} D]

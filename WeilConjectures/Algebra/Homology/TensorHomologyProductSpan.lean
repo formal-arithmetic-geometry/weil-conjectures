@@ -21,8 +21,9 @@ import WeilConjectures.CategoryTheory.SplitCategoryNullHomotopy
 /-!
 # Generation of total homology by product classes
 
-Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-product-span)
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -70,26 +71,7 @@ private theorem cycle_projector {k : Type u} [Field k]
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Product classes span the homology of the total tensor complex over a field.
-Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`,
-and the complement and contraction argument of
-`lem-sc-qcoh-cech-total-tensor-iso`, steps 1 and 2.
-(blueprint: lem-sc-tensor-homology-product-span)
-
-Proof: Choose complements H to boundaries inside cycles and C to cycles inside
-each term, for both complexes. The differential identifies C in degree p with
-the boundaries in degree p+1. Thus A splits into the zero-differential complex H_A
-and a contractible complex E_A, and likewise B. Distribute these decompositions
-through tensor products and the finite-support total direct sums. Every summand
-with E_A as first factor is contracted by h_A tensor 1; mixed differential terms
-cancel because their coefficients are (-1)^(p-1) and (-1)^p. The summand H_A tensor E_B
-is contracted by (-1)^p times 1 tensor h_B. Consequently every total cycle is
-homologous to an element of the total H_A tensor H_B summand. Such an element
-has finite direct-sum support, and each tensor component is a finite sum of pure
-tensors. The chosen H_A and H_B elements are cycles, so these pure tensors give
-the product classes displayed in the generating set. Thus their linear span
-contains every homology class. This also covers zero complexes, negative degrees,
-infinite-dimensional terms, and characteristic two. -/
+/-- Product classes span the homology of the total tensor complex over a field. -/
 theorem tensor_homology_product_span {k : Type u} [Field k]
     (A B : CochainComplex (ModuleCat.{u} k) ℤ)
     (hA : ∃ m : ℤ, ∀ p : ℤ, p < m → IsZero (A.X p))

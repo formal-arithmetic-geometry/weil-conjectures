@@ -12,8 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineEtaleSiteBaseChange
 /-!
 # Comparison of arrows on canonical affine étale pullbacks
 
-Source: Stacks Project, Étale Cohomology 0EYL and Limits 01ZM.
-(blueprint: lem-pbc-affine-etale-pullback-arrow-comparison).
+## References
+
+* Stacks Project, Tags 0EYL and 01ZM
 -/
 
 @[expose] public section
@@ -24,19 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL; Limits 01ZM(2).
-Proof: form the canonical affine étale pullbacks of A and B along f, and define
-fi by the pullback lift of ψj and the second projection. Pasting their pullback
-squares with the qT-squares, and using hr, gives pullback squares over r.
-Compare these with the qS-squares by uniqueness of pullbacks. The resulting
-scheme isomorphisms commute with the structure maps to L, hence lift to the
-full affine étale category. To check the arrow equation, apply the faithful
-forgetful functor to schemes and use the qS-square's hom_ext: the first
-projection equality is hdesc, and the second is the structure-map equation.
-For an empty family the object comparison alone remains; f=id gives the
-usual identity base-change comparison. No finiteness or limit descent is
-asserted here: ψj and its limit compatibility are hypotheses.
-(blueprint: lem-pbc-affine-etale-pullback-arrow-comparison). -/
+/-- Comparison of arrows between pullbacks of affine étale objects along an affine morphism
+and arrows at a finite stage (Stacks, Tags 0EYL and 01ZM). -/
 theorem affineEtale_pullback_arrow_comparison
     {S T L : Scheme.{u}} (f : T ⟶ S) [IsAffineHom f]
     (p : L ⟶ T) (r : L ⟶ S) (hr : p ≫ f = r)

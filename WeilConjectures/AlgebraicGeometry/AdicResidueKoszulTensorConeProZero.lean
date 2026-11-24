@@ -11,9 +11,9 @@ import WeilConjectures.RingTheory.NoetherianKoszulAugmentationProZero
 
 /-! # The Noetherian cone calculation for the tensor of the coefficient augmentation
 
-Source: Stacks Project, more-algebra.tex, lemma-sequence-Koszul-complexes,
-and proetale.tex, lemma-naive-completion (099M).
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 099M
 -/
 
 @[expose] public noncomputable section
@@ -78,31 +78,7 @@ private def coneIsoOfSource
 
 -- Comparing the normalized finite complexes and their exact realizations is instance-heavy.
 /-- The cone calculation for a specified coefficient augmentation. There is no
-existence or scalar-adjoint-tower assertion in this statement.
-
-Source: Stacks Project, more-algebra.tex, lemma-sequence-Koszul-complexes,
-and proetale.tex, lemma-naive-completion (099M).
-(auxiliary; not a blueprint node).
-
-Proof: the negative exterior model of the dual finite Koszul complex is supported
-in degrees [-r,0], and its degree-zero dual unit is an isomorphism onto the
-term R. A map from this complex to B_n[0] is therefore uniquely determined by
-its composite with that unit. The normalization of epsilon identifies it with
-the degree-zero quotient augmentation in the exterior model, and identifies
-all its strict squares with the canonical diagonal/quotient squares.
-Apply noetherian_koszul_augmentation_pro_zero over A. Exact constant realization
-and flat extension along the completed coefficient map carry its zero derived
-cone maps to zero derived maps on the slice. The quotient identification in
-flat_and_quotients identifies the targets with the actual B_n. Exact restriction
-to the slice preserves those comparisons. Tensoring by the fixed K-flat P
-descends to an additive functor on the derived category and thus preserves zero
-maps. The natural tensor-cone comparison multiplies the shifted source summand
-in tensor degree p by (-1)^p, and identifies the resulting maps with the actual
-strict cone transitions of adicResidueKoszulTensorAugmentation. Its degreewise
-transpose does not change these maps. This proves the assertion. For r=0 the
-augmentation is an isomorphism since J=0; for J=A the quotients are zero and the
-same algebraic pro-zero theorem applies. The zero ring and zero P require no
-exception. No tensor product is interchanged with an infinite product. -/
+existence or scalar-adjoint-tower assertion in this statement (Stacks, Tag 099M). -/
 theorem adicResidue_koszul_tensor_cone_proZero
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X)

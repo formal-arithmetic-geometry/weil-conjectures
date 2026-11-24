@@ -18,15 +18,14 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization
 /-!
 # Exact descent of tensoring with a fixed K-flat complex
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YM, 06YP and 06YU;
-derived.tex, definition-cone and definition-distinguished-triangle;
-more-algebra.tex, Tag 0FNH, item-shift-tensor.
-(auxiliary; not a blueprint node)
-
 The derived bifunctor and its resolving comparison are the ones already supplied
 by site-derived-tensor descent. The presentation packages the existing choices once,
 so its dependent comparisons share the same checked data. `derivedTensor_eq_published`
 records their equality. All site and coefficient universes remain independent.
+
+## References
+
+* Stacks Project, Tags 06YM, 06YP, 06YS, 06YU, 03EK, 0FNH and Modules on Sites, Section 03DA
 -/
 
 @[expose] public noncomputable section
@@ -621,9 +620,7 @@ private theorem homotopyBifunctor_inverts
         ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).1 hf)).2
 
 /-- A tensor descent presentation: homotopy tensor, derived tensor, and their comparisons.
-Packing the selected data keeps the dependent types of the comparisons shared.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+Packing the selected data keeps the dependent types of the comparisons shared. -/
 structure TensorPresentation
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (F : CC × CC ⥤ CC) (P : ObjectProperty H) where
@@ -634,9 +631,7 @@ structure TensorPresentation
     ((P.ι ⋙ Q).prod (P.ι ⋙ Q)) ⋙ derivedTensor
 
 /-- Pack precisely the witnesses and comparisons specified by a descent theorem.
-The projections reduce to the original choices, without selecting any additional object.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+The projections reduce to the original choices, without selecting any additional object. -/
 def TensorPresentation.ofExists
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (F : CC × CC ⥤ CC) (P : ObjectProperty H)
@@ -649,9 +644,7 @@ def TensorPresentation.ofExists
   resolvingComparison := h.choose_spec.2.choose_spec.some
 
 /-- Compose the selected homotopy and resolving comparisons on a resolving pair.
-This is the representative comparison in site tensor descent, expressed generically.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+This is the representative comparison in site tensor descent, expressed generically. -/
 def TensorPresentation.representativeIso
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     {q : CC ⥤ H} {Q : H ⥤ D} {F : CC × CC ⥤ CC} {P : ObjectProperty H}
@@ -699,9 +692,7 @@ private theorem tensorPresentation_comparison_app
 
 /-- The resolving subcategory, its localization, and its existing tensor presentation.
 The membership and localization fields prevent repeated expansion of the site descent
-statement when using the dependent tensor comparisons.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+statement when using the dependent tensor comparisons. -/
 structure ResolvingTensorPresentation
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (W : MorphismProperty H)
@@ -712,9 +703,7 @@ structure ResolvingTensorPresentation
   tensor : TensorPresentation q Q F property
 
 /-- Package all selected site descent data without changing any selected witness.
-The localization field follows from the stated equivalence and its comparison to Q.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+The localization field follows from the stated equivalence and its comparison to Q. -/
 def ResolvingTensorPresentation.ofExists
     {CC H D : Type*} [Category* CC] [Category* H] [Category* D]
     (q : CC ⥤ H) (Q : H ⥤ D) (W : MorphismProperty H)
@@ -825,31 +814,24 @@ end Generic
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
-/-- The dependency's module-sheaf category on the given ringed site.
-Source: Stacks, Modules on Sites, Section 03DA
-(auxiliary; not a blueprint node). -/
+/-- The dependency's module-sheaf category on the given ringed site. -/
 abbrev Modules := CategoryTheory.ringedSiteModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 section LocalTensorDefinitions
 
-/-- The existing canonical tensor of module sheaves.
-Source: Stacks, Tag 03EK (auxiliary; not a blueprint node). -/
+/-- The existing canonical tensor of module sheaves. -/
 def ordinaryTensor : Modules R ⥤ Modules R ⥤ Modules R :=
   @curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)
 
-/-- The canonical sheaf tensor is additive in its first argument.
-Source: Stacks, Tag 03EK
-(auxiliary; not a blueprint node). -/
+/-- The canonical sheaf tensor is additive in its first argument. -/
 theorem tensorAdditive : (ordinaryTensor R).Additive := by
   unfold ordinaryTensor
   infer_instance
 
 attribute [local instance 2000] tensorAdditive
 
-/-- The canonical sheaf tensor is additive in its second argument.
-Source: Stacks, Tag 03EK
-(auxiliary; not a blueprint node). -/
+/-- The canonical sheaf tensor is additive in its second argument. -/
 theorem tensorObjAdditive (M : Modules R) :
     ((ordinaryTensor R).obj M).Additive := by
   unfold ordinaryTensor
@@ -858,9 +840,7 @@ theorem tensorObjAdditive (M : Modules R) :
 attribute [local instance 2000] tensorObjAdditive
 
 /-- The canonical direct-sum total tensor exists for every pair of complexes.
-These named instances provide the interface of the unexpanded ordinary tensor.
-Source: Stacks, Tag 06YM
-(auxiliary; not a blueprint node). -/
+These named instances provide the interface of the unexpanded ordinary tensor. -/
 theorem tensorHasMapBifunctor (A B : CochainComplex (Modules R) ℤ) :
     CochainComplex.HasMapBifunctor A B (ordinaryTensor R) := by
   unfold ordinaryTensor
@@ -869,8 +849,7 @@ theorem tensorHasMapBifunctor (A B : CochainComplex (Modules R) ℤ) :
 attribute [local instance 2000] tensorHasMapBifunctor
 attribute [local irreducible] ordinaryTensor
 
-/-- The existing direct-sum total tensor, as a curried bifunctor on complexes.
-Source: Stacks, Tag 06YM (auxiliary; not a blueprint node). -/
+/-- The existing direct-sum total tensor, as a curried bifunctor on complexes. -/
 abbrev totalTensor : CochainComplex (Modules R) ℤ ⥤
     CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ :=
   (ordinaryTensor R).map₂CochainComplex
@@ -878,9 +857,7 @@ abbrev totalTensor : CochainComplex (Modules R) ℤ ⥤
 variable [HasDerivedCategory.{w} (Modules R)]
 
 /-- All the witnesses and proof fields of the published site tensor descent theorem.
-This is a typed package of the original nested choices, rather than a new descent.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+This is a typed package of the original nested choices, rather than a new descent. -/
 def selectedResolvingTensorPresentation : ResolvingTensorPresentation
     (HomotopyCategory.quotient (Modules R) (.up ℤ))
     (DerivedCategory.Qh : HomotopyCategory (Modules R) (.up ℤ) ⥤ DerivedCategory (Modules R))
@@ -905,15 +882,11 @@ def selectedResolvingTensorPresentation : ResolvingTensorPresentation
 
 attribute [local irreducible] selectedResolvingTensorPresentation
 
-/-- The resolving property already selected by site tensor descent.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+/-- The resolving property already selected by site tensor descent. -/
 abbrev resolvingProperty : ObjectProperty (HomotopyCategory (Modules R) (.up ℤ)) :=
   (selectedResolvingTensorPresentation R).property
 
-/-- The published membership equivalence for the resolving subcategory.
-Source: Stacks, Tags 06YS and 06YU
-(auxiliary; not a blueprint node). -/
+/-- The published membership equivalence for the resolving subcategory. -/
 theorem resolvingProperty_spec (X : HomotopyCategory (Modules R) (.up ℤ)) :
     resolvingProperty R X ↔ CochainComplex.IsKFlatIndependentCoefficients X.as ∧
       ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (X.as.X n) :=
@@ -922,9 +895,7 @@ theorem resolvingProperty_spec (X : HomotopyCategory (Modules R) (.up ℤ)) :
 /-- The original homotopy and derived tensors with their selected comparisons.
 The derived tensor field is literally the published `siteDerivedTensorIndependentCoefficients`,
 so the exported `derivedTensor` unfolds reducibly to the original abbreviation; the other
-fields are the selected choices, unchanged.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+fields are the selected choices, unchanged. -/
 def selectedTensorPresentation : TensorPresentation
     (HomotopyCategory.quotient (Modules R) (.up ℤ))
     (DerivedCategory.Qh : HomotopyCategory (Modules R) (.up ℤ) ⥤ DerivedCategory (Modules R))
@@ -939,9 +910,7 @@ attribute [local irreducible] selectedTensorPresentation
 
 /-- The published derived tensor, curried directly from the published bifunctor.
 The shared presentation has this same field. Naming the bifunctor directly avoids
-unfolding that large record when consumers compare the tensor with its published form.
-Source: Stacks, Tag 06YU
-(auxiliary; not a blueprint node). -/
+unfolding that large record when consumers compare the tensor with its published form. -/
 def derivedTensor : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules R) ⥤
     DerivedCategory (Modules R) := Functor.curry.obj
       (SheafOfModules.siteDerivedTensorIndependentCoefficients.{u, v, r, w} J R)
@@ -953,8 +922,7 @@ attribute [local semireducible] selectedTensorPresentation
 /-- The actual resolving comparison selected by the published descent theorem.
 It is oriented from the localized total tensor to the derived tensor. Its arguments
 are exactly flat-term K-flat complexes; the homotopy comparison is composed with the
-resolving comparison, using the dependency's membership equivalence.
-Source: Stacks, Tag 06YU (auxiliary; not a blueprint node). -/
+resolving comparison, using the dependency's membership equivalence. -/
 def representativeIso
     (A B : CochainComplex (Modules R) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients A)
@@ -1031,53 +999,11 @@ private theorem resolvingProperty_shift : (resolvingProperty R).IsStableUnderShi
     exact h.2 (i + n)
 
 set_option linter.unusedVariables false in
-/-- Tensoring by a flat-term K-flat complex preserves all quasi-isomorphisms and
-has exact descent to the published derived tensor. The natural representative
-comparisons agree with the published comparisons on every resolving complex, and
-commute with the canonical signed chain shifts. `CommShift₂Int` includes the zero
-and addition laws, naturality in every derived fixed argument, and the mixed sign
-`(-1)^(ab)`. `mapTriangle` includes the connecting arrow with its shift comparison.
-
-Source: Stacks, Tags 06YM, 06YP and 06YU; derived.tex, definition-cone and
- definition-distinguished-triangle; more-algebra.tex, Tag 0FNH, item-shift-tensor
-(auxiliary; not a blueprint node).
-
-Proof (the node's nine steps):
-1. Use the existing additive total tensor and its induced homotopy bifunctor.
-   The chain-to-homotopy comparison comes from the generic bifunctor quotient API.
-2. Use the generic total-tensor cone comparisons and the homotopy tensor's
-   triangulated instances, which include compatibility of the connecting arrow.
-3. The cone of an arbitrary quasi-isomorphism is acyclic. K-flatness gives
-   acyclicity after tensoring on the right. Apply the braiding to the double
-   complex and transpose the total complex to obtain the other order. The cone
-   comparisons and cone criterion then prove both quasi-isomorphism assertions.
-4. The signed second-variable shift comparison and shift stability of acyclic
-   complexes prove K-flatness of every shift. Flat terms are reindexed by i+n.
-5. Localize the coherent chain-level bifunctor shifts along the homotopy quotient.
-   Localization uniqueness identifies the fixed-argument shifts with the canonical
-   homotopy shifts. Replace those fields by the equal canonical structures, so
-   the existing triangulated instances and comparison compatibility apply.
-6. Fullness of the homotopy quotient transfers inversion of quasi-isomorphisms.
-   The published equivalence for the resolving subcategory makes its inclusion
-   followed by derived localization a localization itself.
-7. Define the homotopy comparison by the inverse published chain comparison on
-   underlying representatives; fullness of the quotient proves naturality. Restrict
-   it to resolving pairs and compose with the published resolving comparison.
-   The inverse currying counit matches the curried derived tensor and has identity
-   components. Thus this comparison is normalized to representativeIso.
-8. Localize the restricted homotopy bifunctor's shifts in both variables. Extend
-   each fixed resolving comparison to all homotopy objects by localization.
-   Uniqueness identifies its induced shift structure with the full bifunctor's
-   shift structure. The normalized comparisons commute with shifts, and exactness
-   follows by descent of triangulatedness along derived localization.
-9. Compose with the canonical chain-to-homotopy and quotient-to-derived
-   comparisons. Their identity components and the defining formula for the
-   homotopy comparison give the exact representative normalization in both orders.
-   CommShift₂Int supplies
-   all derived fixed-argument naturality and the mixed sign. Exactness sends
-   localized cone triangles, including their connecting arrows, to distinguished
-   triangles. All totals are direct sums; no boundedness is used.
--/
+/-- Tensoring by a flat-term K-flat complex preserves all quasi-isomorphisms and has exact descent
+to the published derived tensor. The natural representative comparisons agree with the published
+comparisons on every resolving complex, and commute with the canonical signed chain shifts
+(`CommShift₂Int`). The induced `mapTriangle` includes the connecting arrow with its shift
+comparison. -/
 theorem kFlat_fixed_tensor_triangulated :
     ∃ s : (derivedTensor R).CommShift₂Int,
       ∀ (A : CochainComplex (Modules R) ℤ)

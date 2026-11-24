@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.AlternatingCechSheafDegreeZeroFactoriza
 
 /-! # The singleton signed insertion contraction
 
-Source: Stacks Project, Tags 02FU and 01FM.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-singleton-contraction).
+## References
+
+* Stacks Project, Tags 02FU and 01FM
 -/
 
 @[expose] public section
@@ -22,32 +23,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- The singleton projection admits the signed insertion contraction.
-Source: Stacks Project, Tag 02FU, insertion cancellation, with the increasing
-convention of Tag 01FM.
-(blueprint: lem-pc-s3-alternating-cech-sheaf-singleton-contraction).
-
-Proof: On a test open V contained in U i, project degree zero onto the singleton i.
-Since V intersect U i equals V, this gives a map to G on V. In all other degrees
-use zero. For an increasing tuple not containing i, insert i in its unique
-increasing position b and take the corresponding
-coordinate with sign (-1)^b; for a tuple already containing i, use zero. Intersection
-with U i does not change the test-open intersection, giving a canonical linear map.
-These maps commute with restrictions. In the differential-insertion sum, deletion
-of the inserted i contributes the identity, while every other deletion pairs with
-insertion after deletion, with identical restriction and opposite sign. For tuples
-containing i, only deleting that i contributes. In degree zero the remaining term
-is singleton projection followed by augmentation. Restriction and module
-sheafification commute by the canonical local
-sheafification identification: the same compatible germs and their local gluing
-compute both sides. Thus sheafify these natural linear maps on the restricted
-site; additivity retains the equations. The sheafification
-unit on G is inverse to the counit, so the augmented degree-zero term agrees with
-the specified augmentation. Transport the nonnegative-degree maps across extendXIso. The degree-zero
-equation includes the singleton projection and augmentation. In positive degrees
-the two insertion terms sum to the identity; no equation in negative degree and
-no adjustment to an arbitrary retraction is asserted here. Empty test opens have
-zero modules; r=0 admits no i. -/
+/-- The singleton projection admits the signed insertion contraction (Stacks, Tags 02FU and 01FM).
+-/
 theorem alternatingCechSheafAugmentation_restrict_singleton_contraction
     {X : Scheme.{u}} {r : ℕ} (U : Fin r → X.Opens) (G : X.Modules) (i : Fin r) :
     let F := Scheme.Modules.restrictFunctor (U i).ι

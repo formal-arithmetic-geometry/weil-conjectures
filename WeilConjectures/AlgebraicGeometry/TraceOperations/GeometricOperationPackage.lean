@@ -18,12 +18,28 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 /-!
 # Geometric operation packages with specified exceptional adjunction domains
 
-Source: literature/blueprint/latest/blueprint/sec-trace-formula/sk-d-six/_section.md,
-all five data bullets and coherence/invertibility clauses (blueprint: sk-d-six).
+This file defines geometric operation packages on the ordinary derived categories: specified
+comparisons, their coherence equations, biduality and the Künneth--Verdier isomorphism.
 
-The operations are supplied inputs. Exceptional adjunctions have explicitly supplied
-full subcategory domains; no ambient right-adjoint existence is asserted. All tensor,
-Hom, evaluation and biduality constructions use the recorded relative derived structure.
+## Implementation details
+
+The operations are supplied inputs; the recorded derived pullback is an input, not a new
+pullback construction. Exceptional adjunctions have explicitly supplied full subcategory
+domains; the type `exceptional f` indexes them and may be empty. No ambient right-adjoint
+existence or preservation theorem is asserted, and the domain memberships used by `alpha`
+are supplied rather than deduced from a constructibility-preservation statement.
+
+The dualizing object `omega` is ambient, not assumed constructible; tensor and internal Hom
+are the existing derived ones, not freely chosen operations. The two braidings in
+`biduality` exhibit which tensor slot the closed adjunction uses. Compatibility of the traces
+`dualizingTrace` is compatibility of the dualizing isomorphisms with the adjoint composition
+comparison, so the dualizing composition equation in `Coherence` is stated after the given
+adjunction bijections.
+
+In `GeometricOperations`, the Künneth--Verdier arrow is required on the fibre product
+`product X Y = X ×_s Y` with its projections `first`, `second`; the square datum `sq` for this
+product is unique, since its identification with the pullback is fixed by the two projection
+equations.
 -/
 
 @[expose] public noncomputable section
@@ -39,26 +55,20 @@ namespace AlgebraicGeometry.ProEtale.TraceOperations
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The ordinary uncompleted derived category of modules over `ρ_X^*Λ`.
-Source: sk-d-six, opening (blueprint: sk-d-six). -/
+/-- The ordinary uncompleted derived category of modules over `ρ_X^*Λ`. -/
 abbrev D (X : Scheme.{u}) := DerivedCategory
   (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
-/-- The recorded derived pullback; it is an input to the operation package, not a new
-pullback construction. Source: sk-d-six, opening (blueprint: sk-d-six). -/
+/-- The recorded derived pullback. -/
 abbrev star {X Y : Scheme.{u}} (f : X ⟶ Y) : D Λ Y ⥤ D Λ X :=
   (CondensedRing.upperStar Λ f).leftDerivedFunctor
 
-/-- The recorded derived ordinary pushforward.
-Source: sk-d-six, opening (blueprint: sk-d-six). -/
+/-- The recorded derived ordinary pushforward. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) : D Λ X ⥤ D Λ Y :=
   (CondensedRing.lowerStar Λ f).rightDerivedFunctor
 
-/-- The specified domain of an exceptional adjunction. The Hom equivalence is required
-only for the supplied source and target full subcategories. Naturality in each variable
-is the adjunction condition; the output functor is valued in the ordinary derived category.
-Source: sk-d-six, opening and its explicit adjunction-domain convention
-(blueprint: sk-d-six). -/
+/-- The specified domain of an exceptional adjunction: a Hom equivalence, natural in each
+variable, between supplied source and target full subcategories. -/
 structure ExceptionalDomain {X Y : Scheme.{u}} (F : D Λ X ⥤ D Λ Y) where
   source : ObjectProperty (D Λ X)
   target : ObjectProperty (D Λ Y)
@@ -74,10 +84,7 @@ structure ExceptionalDomain {X Y : Scheme.{u}} (F : D Λ X ⥤ D Λ Y) where
     (a : F.obj K.obj ⟶ L.obj) (b : L ⟶ L'),
     homEquiv K L' (a ≫ b.hom) = homEquiv K L a ≫ right.map b
 
-/-- Given compact-support operations and their given exceptional adjunction domains.
-The type `exceptional f` indexes the supplied domains, and may be empty when no exceptional
-adjunction is supplied. No existence statement is part of this input record.
-Source: sk-d-six, opening (blueprint: sk-d-six). -/
+/-- Given compact-support operations and their given exceptional adjunction domains. -/
 structure Given (s : Scheme.{u}) where
   shriek : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left],
     D Λ X.left ⥤ D Λ Y.left
@@ -85,27 +92,23 @@ structure Given (s : Scheme.{u}) where
   domain : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left],
     exceptional f → ExceptionalDomain Λ (shriek f)
 
-/-- The canonical derived Koszul braiding, descended from complexes.
-Source: sk-d-six, sign convention (blueprint: sk-d-six). -/
+/-- The canonical derived Koszul braiding, descended from complexes. -/
 local instance derivedBraiding (X : Scheme.{u}) : BraidedCategory (D Λ X) :=
   DerivedCategory.braidedCategory'
     (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
-/-- The canonical pullback identity, obtained from the exact underived identity.
-Source: sk-d-six, identity comparison (blueprint: sk-d-six). -/
+/-- The canonical pullback identity, obtained from the exact underived identity. -/
 def starIdentity (X : Scheme.{u}) : star Λ (𝟙 X) ≅ 𝟭 (D Λ X) :=
   CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (𝟙 X) ≪≫
     Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarId Λ X) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
-/-- The canonical direct-image identity, the mate of inverse pullback identity.
-Source: sk-d-six, identity comparison (blueprint: sk-d-six). -/
+/-- The canonical direct-image identity, the mate of inverse pullback identity. -/
 def pushIdentity (X : Scheme.{u}) : push Λ (𝟙 X) ≅ 𝟭 (D Λ X) :=
   conjugateIsoEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (𝟙 X))
     Adjunction.id (starIdentity Λ X).symm
 
-/-- The ordinary derived direct-image compositor, the mate of pullback composition.
-Source: sk-d-six, composition comparison (blueprint: sk-d-six). -/
+/-- The ordinary derived direct-image compositor, the mate of pullback composition. -/
 def pushComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     push Λ f ⋙ push Λ g ≅ push Λ (f ≫ g) :=
   (conjugateIsoEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction Λ (f ≫ g))
@@ -115,67 +118,57 @@ def pushComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
 
 variable {Λ}
 
-/-- The base object in the over category. Source: sk-d-six (blueprint: sk-d-six). -/
+/-- The base object in the over category. -/
 abbrev base (s : Scheme.{u}) : Over s := Over.mk (𝟙 s)
 
-/-- A structure map as a morphism over the base.
-Source: sk-d-six (blueprint: sk-d-six). -/
+/-- A structure map as a morphism over the base. -/
 abbrev structureMap {s : Scheme.{u}} (X : Over s) : X ⟶ base s := Over.homMk X.hom
 
-/-- The structure map has exactly its given compactifiability instance.
-Source: sk-d-six, structure-map convention (blueprint: sk-d-six). -/
+/-- The structure map has exactly its given compactifiability instance. -/
 instance structureMapCompactifiable {s : Scheme.{u}} (X : Over s)
     [HasCompactification X.hom] : HasCompactification (structureMap X).left :=
   inferInstanceAs (HasCompactification X.hom)
 
-/-- The base structure morphism is the proper identity.
-Source: sk-d-six, normalization at s (blueprint: sk-d-six). -/
+/-- The base structure morphism is the proper identity. -/
 instance baseCompactifiable (s : Scheme.{u}) : HasCompactification (base s).hom :=
   inferInstanceAs (HasCompactification (𝟙 s))
 
-/-- Proper composition in the bundled over category is ordinary proper composition.
-Source: sk-d-six, proper composition coherence (blueprint: sk-d-six). -/
+/-- Proper composition in the bundled over category is ordinary proper composition. -/
 local instance overCompProper {s : Scheme.{u}} {X Y Z : Over s}
     (f : X ⟶ Y) (g : Y ⟶ Z) [IsProper f.left] [IsProper g.left] :
     IsProper (f ≫ g).left := inferInstanceAs (IsProper (f.left ≫ g.left))
 
-/-- The product over the specified base, with the actual chosen scheme pullback.
-Source: sk-d-six, external product (blueprint: sk-d-six). -/
+/-- The product over the specified base, with the actual chosen scheme pullback. -/
 abbrev product {s : Scheme.{u}} (X Y : Over s) : Over s :=
   Over.mk (pullback.fst X.hom Y.hom ≫ X.hom)
 
-/-- First product projection. Source: sk-d-six (blueprint: sk-d-six). -/
+/-- First product projection. -/
 abbrev first {s : Scheme.{u}} (X Y : Over s) : product X Y ⟶ X :=
   Over.homMk (pullback.fst X.hom Y.hom)
 
-/-- Second product projection. Source: sk-d-six (blueprint: sk-d-six). -/
+/-- Second product projection. -/
 abbrev second {s : Scheme.{u}} (X Y : Over s) : product X Y ⟶ Y :=
   Over.homMk (pullback.snd X.hom Y.hom) (pullback.condition (f := X.hom) (g := Y.hom)).symm
 
-/-- Verdier duality on objects, using the existing relative internal Hom.
-Source: sk-d-six, displayed definitions (blueprint: sk-d-six). -/
+/-- Verdier duality on objects, using the existing relative internal Hom. -/
 def dual {X : Scheme.{u}} (ω K : D Λ X) : D Λ X := (ihom K).obj ω
 
 /-- Evaluation is the tensor--Hom adjunct of the identity, with the braiding for the
-specified tensor slot. Source: sk-d-six, evaluation paragraph (blueprint: sk-d-six). -/
+specified tensor slot. -/
 def evaluation {X : Scheme.{u}} (ω K : D Λ X) : dual ω K ⊗ K ⟶ ω :=
   (β_ (dual ω K) K).hom ≫ (ihom.ev K).app ω
 
-/-- The specified evaluation-adjoint biduality map; the two braidings exhibit precisely
-which tensor slot the given closed adjunction uses.
-Source: sk-d-six, biduality paragraph (blueprint: sk-d-six). -/
+/-- The specified evaluation-adjoint biduality map. -/
 def biduality {X : Scheme.{u}} (ω K : D Λ X) : K ⟶ dual ω (dual ω K) :=
   (ihom.adjunction (dual ω K)).homEquiv K ω
     ((β_ (dual ω K) K).hom ≫ (β_ K (dual ω K)).hom ≫ evaluation ω K)
 
-/-- External product using actual product projections and the relative derived tensor.
-Source: sk-d-six, displayed definitions (blueprint: sk-d-six). -/
+/-- External product using actual product projections and the relative derived tensor. -/
 def externalProduct {s : Scheme.{u}} {X Y : Over s}
     (M : D Λ X.left) (N : D Λ Y.left) : D Λ (product X Y).left :=
   (star Λ (first X Y).left).obj M ⊗ (star Λ (second X Y).left).obj N
 
-/-- The counit on the supplied exceptional domain, obtained from its Hom equivalence.
-Source: sk-d-six, trace construction (blueprint: sk-d-six). -/
+/-- The counit on the supplied exceptional domain, obtained from its Hom equivalence. -/
 def ExceptionalDomain.counit {X Y : Scheme.{u}} {F : D Λ X ⥤ D Λ Y}
     (e : ExceptionalDomain Λ F) (L : e.target.FullSubcategory) :
     F.obj (e.right.obj L) ⟶ L.obj :=
@@ -183,10 +176,7 @@ def ExceptionalDomain.counit {X Y : Scheme.{u}} {F : D Λ X ⥤ D Λ Y}
 
 variable {s : Scheme.{u}} (O : Given Λ s)
 
-/-- The five specified kinds of package data, on the supplied operation domains.
-Here `omega` is ambient, not assumed constructible; tensor and internal Hom are the
-existing derived ones, not freely chosen operations.
-Source: sk-d-six, five data bullets (blueprint: sk-d-six). -/
+/-- The five specified kinds of package data, on the supplied operation domains. -/
 structure Comparisons where
   omega : ∀ X : Over s, D Λ X.left
   normalization : omega (base s) ≅ 𝟙_ (D Λ s)
@@ -225,14 +215,12 @@ namespace Comparisons
 
 variable (P : Comparisons O)
 
-/-- The compact-support functor of the structure morphism.
-Source: sk-d-six, displayed definitions (blueprint: sk-d-six). -/
+/-- The compact-support functor of the structure morphism. -/
 def compactlySupported (X : Over s) [HasCompactification X.hom] :
     D Λ X.left ⥤ D Λ s := O.shriek (structureMap X)
 
 /-- The canonical product trace: inverse base change, the dualizing identification,
-the exceptional counit at the coefficient unit, and inverse monoidal unit.
-Source: sk-d-six, displayed formula for `t` (blueprint: sk-d-six). -/
+the exceptional counit at the coefficient unit, and inverse monoidal unit. -/
 def trace (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     [HasCompactification Y.hom] [HasCompactification px.left]
     (sq : ChosenCartesianSquare py.left px.left Y.hom X.hom)
@@ -244,9 +232,7 @@ def trace (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     (star Λ X.hom).map ((O.domain (structureMap Y) eY).counit ⟨_, hY⟩) ≫
     (P.monoidal (structureMap X)).εIso.inv
 
-/-- The exceptional adjunct `alpha_M`. Its two domain proofs are supplied, rather
-than deduced from a general-base constructibility-preservation assertion.
-Source: sk-d-six, displayed formula for `alpha_M` (blueprint: sk-d-six). -/
+/-- The exceptional adjunct `alpha_M`, on supplied domain memberships. -/
 def alpha (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     [HasCompactification Y.hom] [HasCompactification px.left]
     (sq : ChosenCartesianSquare py.left px.left Y.hom X.hom)
@@ -264,10 +250,7 @@ def alpha (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     (P.projection px ((star Λ py.left).obj (P.omega Y)) M).inv ≫
     (P.trace O X Y Z px py sq eY hY ⊗ₘ 𝟙 M) ≫ (λ_ M).hom)
 
-/-- The specified Künneth--Verdier arrow, constructed from the supplied comparisons.
-It is not an arbitrary morphism or a bare existence of an isomorphism.
-Source: sk-d-six, final displayed composite and tensor--Hom adjunct
-(blueprint: sk-d-six). -/
+/-- The specified Künneth--Verdier arrow, constructed from the supplied comparisons. -/
 def kunnethVerdier (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     [HasCompactification Y.hom] [HasCompactification px.left]
     (sq : ChosenCartesianSquare py.left px.left Y.hom X.hom)
@@ -289,19 +272,14 @@ def kunnethVerdier (X Y Z : Over s) (px : Z ⟶ X) (py : Z ⟶ Y)
     ((star Λ px.left).obj M ◁ (star Λ py.left).map (evaluation (P.omega Y) N)) ≫
     P.alpha O X Y Z px py sq eY hY eP M hM hJ)
 
-/-- The trace mate of the dualizing composition isomorphism. Compatibility of these
-traces is precisely compatibility of the dualizing isomorphisms with the adjoint
-composition comparison. Source: sk-d-six, coherence paragraph (blueprint: sk-d-six). -/
+/-- The trace mate of the dualizing composition isomorphism. -/
 def dualizingTrace {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
     (e : O.exceptional f) (hX : (O.domain f e).source (P.omega X))
     (hY : (O.domain f e).target (P.omega Y)) :
     (O.shriek f).obj (P.omega X) ⟶ P.omega Y :=
   ((O.domain f e).homEquiv ⟨_, hX⟩ ⟨_, hY⟩).symm (P.dualizingComp f e hY).inv
 
-/-- Componentwise identity, normalization, composition, and vertical-pasting equations.
-The dualizing composition equation is stated after the given adjunction bijections;
-it therefore uses exactly the adjoint composition comparison.
-Source: sk-d-six, coherence paragraph (blueprint: sk-d-six). -/
+/-- Componentwise identity, normalization, composition, and vertical-pasting equations. -/
 structure Coherence : Prop where
   leftUnit : ∀ {X Y : Over s} (f : X ⟶ Y) [HasCompactification f.left]
     (K : D Λ X.left),
@@ -378,16 +356,10 @@ structure Coherence : Prop where
 
 end Comparisons
 
-/-- A geometric operation package on the actual ordinary derived categories.
-The specified comparisons satisfy the component equations, biduality is required for
-all bounded constructible finite-Tor inputs, and the canonical Künneth--Verdier arrow is
-invertible over a field for quasi-compact compactifiable schemes, in the supplied
-adjunction domains. The Künneth--Verdier arrow is required on the fibre product
-`product X Y = X ×_s Y` with its projections `first`, `second`, whose source is
-`externalProduct M (dual ω_Y N)`; the square datum `sq` for this product is unique,
-since its identification with the pullback is fixed by the two projection equations.
-No preservation or right-adjoint existence theorem is asserted.
-Source: sk-d-six, entire definition (blueprint: sk-d-six). -/
+/-- A geometric operation package on the actual ordinary derived categories: specified
+comparisons satisfying the component equations, biduality for all bounded constructible
+finite-Tor inputs, and invertibility of the canonical Künneth--Verdier arrow over a field
+for quasi-compact compactifiable schemes, in the supplied adjunction domains. -/
 structure GeometricOperations where
   comparisons : Comparisons O
   coherence : comparisons.Coherence O
@@ -410,10 +382,8 @@ structure GeometricOperations where
     IsIso (comparisons.kunnethVerdier O X Y (product X Y) (first X Y) (second X Y) sq
       eY hY eP M.obj N.obj hM hJ)
 
-/-- The finite commutative primary-coefficient specialization, with no restriction on
-base scheme, coefficient characteristic, or finite ring beyond those in the source.
-The discrete topology is unique and the resulting coefficient is exactly C(-,A).
-Source: sk-d-six, opening (blueprint: sk-d-six). -/
+/-- The geometric operation packages for the finite commutative coefficient ring `A` of
+`ell`-power torsion, with coefficient `C(-, A)` for the discrete topology on `A`. -/
 def finiteGeometricOperationPackage (ell : ℕ) [Fact ell.Prime]
     (A : Type u) [CommRing A] [Finite A]
     (_hA : ∃ n : ℕ, ∀ a : A, (ell ^ n) • a = 0) (s : Scheme.{u})

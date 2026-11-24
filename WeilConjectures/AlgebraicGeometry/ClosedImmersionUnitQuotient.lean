@@ -17,8 +17,9 @@ import Mathlib.CategoryTheory.Abelian.Basic
 /-!
 # Closed immersion unit and quotient
 
-Source: Stacks Project, Morphisms of Spaces, Lemma 04CJ (part (1)), with the
-stalkwise proof in Modules, Lemma 08KS (blueprint: lem-weil-pbc-closed-immersion-unit-quotient).
+## References
+
+* Stacks Project, Tags 04CJ and 08KS
 -/
 
 @[expose] public section
@@ -36,33 +37,7 @@ noncomputable section
 `𝒪_Y`-module `F`, the unit `η_F : F ⟶ i_* i^* F` of `i^* ⊣ i_*` is an epimorphism
 with kernel `JF`, and it induces an isomorphism `η̄_F : F/JF ≅ i_* i^* F`, natural in `F`.
 
-Here, as in `conductorIdealZeroIntersection`, `JF` is `image μ_F` for the multiplication map
-`μ_F = J.toModulesι ▷ F ≫ λ_F : J ⊗ F ⟶ F`, `F/JF` is `cokernel (image.ι μ_F)`, and
-`η̄_F` is the map with `cokernel.π ≫ η̄_F = η_F`. The last clause gives, for every
-`a : F ⟶ G`, the induced map `q` on quotients and the naturality square of `η̄`.
-
-Source: Stacks Project, Morphisms of Spaces, Lemma 04CJ (1), and Modules,
-Lemma 08KS (blueprint: lem-weil-pbc-closed-immersion-unit-quotient).
-Proof, following the node's six steps:
-1. The adjunction of `def-pc-module-pullback` gives the unit. Compute its stalks,
-using `lem-weil-pbc-module-iso-on-stalks` and
-`lem-weil-pbc-locally-surjective-iff-stalks` to test isomorphisms and surjectivity.
-2. Outside the closed image, `lem-weil-pbc-closed-pushforward-stalks` gives a zero
-target stalk. On a neighbourhood disjoint from the image the ideal is the unit
-ideal (`def-sbc-closed-immersion-ideal-sheaf`), so `JF` is the entire module.
-3. At `x = i(z)`, the closed immersion makes the local ring map `R → S`
-surjective, with kernel `K = J_x`, by the same ideal definition and pushforward
-stalk calculation.
-4. By `lem-weil-pbc-module-stalk-pullback` and the closed pushforward stalk lemma,
-the unit is `M → M ⊗_R S`, sending `m` to `m ⊗ 1`.
-5. Identify `S` with `R/K`. The inverse of the induced quotient map sends
-`m ⊗ r̄` to `rm + KM`; the tensor relations show it is well-defined. Thus the
-unit is surjective with kernel `KM`. The image of sheaf multiplication has
-stalk `J_x F_x`, using `def-pur-sheaf-tensor-product`.
-6. The stalk criteria give global sheaf surjectivity and kernel `JF`. The sheaf
-first-isomorphism theorem gives the induced isomorphism `F/JF ≅ i_* i^* F`;
-equivalently its stalks are the isomorphisms just computed. Naturality of the unit
-and the universal property of cokernels give the final quotient squares. -/
+Here `JF` is the image of the multiplication map `J ⊗ F ⟶ F`, and `F/JF` is its cokernel. -/
 theorem closedImmersion_unit_quotient {Y Z : Scheme.{w}} (i : Z ⟶ Y)
     [IsClosedImmersion i] :
     let adj : tensorPullback i ⊣ pushforward i :=

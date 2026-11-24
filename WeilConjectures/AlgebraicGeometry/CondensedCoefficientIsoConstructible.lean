@@ -12,10 +12,6 @@ set_option linter.privateModule false
 
 /-!
 # Constructible finite-Tor complexes under a condensed coefficient isomorphism
-
-proof.md,
-coefficient identifications in Compactness
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section

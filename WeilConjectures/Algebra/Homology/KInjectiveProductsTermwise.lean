@@ -13,6 +13,18 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 The degreewise product hypotheses suffice for both K-injectivity and the derived-category
 product universal property.
+
+## Implementation details
+
+The degreewise product assumption is expressed as existence of the limits of the discrete
+family after evaluation in each integer degree. Mathlib's `coneOfHasLimitEval` constructs
+exactly the termwise product complex, with its induced differentials and projections.
+K-injectivity is Mathlib's `IsKInjective` convention, and the chosen localization universe
+is that of `HasDerivedCategory`.
+
+## References
+
+* Stacks Project, Tag 0BK6 (Lemma 13.31.5)
 -/
 
 @[expose] public section
@@ -24,29 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The termwise product of a family of K-injective complexes is K-injective and, with the
-images of its projections, is a product in the derived category.
-Source: Stacks Project, Tag 0BK6, Lemma 13.31.5
-(auxiliary; not a blueprint node).
-
-The degreewise product assumption is expressed as existence of the limits of the discrete
-family after evaluation in each integer degree. Mathlib's `coneOfHasLimitEval` constructs
-exactly the termwise product complex, with its induced differentials and projections.
-K-injectivity is Mathlib's `IsKInjective` convention, and the chosen localization universe
-is that of `HasDerivedCategory`.
-
-Proof (Tag 0BK6):
-1. `HomotopyCategory.isLimitFanQuotient` gives a product fan in the homotopy category.
-   Its degreewise preservation hypothesis follows from the assumed degreewise limits.
-   The lemma assembles chain maps and homotopies using those products.
-2. K-injective complexes are the right orthogonal of acyclic complexes in the homotopy
-   category. Right orthogonals are closed under limits, so the product is K-injective.
-3. For any derived-category fan, essential surjectivity of `DerivedCategory.Qh` gives a
-   representative of its point in the homotopy category. `IsKInjective.Qh_map_bijective`
-   lifts each leg uniquely, and the homotopy product supplies a lift. The same bijection
-   for the product, together with injectivity for each factor, proves uniqueness.
-   Finally `DerivedCategory.quotientCompQhIso` identifies the resulting fan with the
-   actual image of the termwise product cone under `DerivedCategory.Q`.
--/
+images of its projections, is a product in the derived category. -/
 theorem termwise_product_isKInjective_and_isLimit
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     {T : Type t} (I : T → CochainComplex C ℤ) [∀ s : T, (I s).IsKInjective]

@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.SectionCohomologyPrincipalLocalization
 
 /-! # Principal localization of the higher-image cohomology presheaf
 
-Source: Stacks Project, Tag 09MR, tensor-unit specialization, and Tag 01E4.
-(blueprint: lem-pc-higher-image-cohomology-presheaf-localization).
+## References
+
+* Stacks Project, Tags 09MR and 01E4
 -/
 
 @[expose] public section
@@ -27,24 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The restriction on resolution cohomology over inverse images of affine opens is
 module localization at the defining function. This concerns presheaf cohomology,
-not sections of the higher direct image sheaf.
-Source: Stacks Project, Tags 09MR and 01E4.
-(blueprint: lem-pc-higher-image-cohomology-presheaf-localization).
-
-Proof: Let Y = f⁻¹W and b = f^♯a. The qcqs hypotheses and affineness of W imply
-that Y is qcqs. Restriction of F to Y remains quasi-coherent. Apply 09MR on Y
-with L = O_Y and s = b. Identify every tensor power of O_Y with O_Y by the
-unitors; the transition morphisms are multiplication by b. The fraction
-presentation is therefore ordinary localization at b. Its comparison sends
-x/b^n to b^(-n) res(x), which is linear over Γ(T,W), acting through f^♯.
-The equality f⁻¹D(a) = D(b) identifies its target with cohomology over
-f⁻¹D(a). Compute both cohomology groups from I: restriction of an injective
-resolution to an open is injective, and exact evaluation identifies the
-presheaf homology with these section-complex homology groups. The restriction
-identification in 01E4 identifies the map with P.map, not an arbitrary
-localization map. Transport the localization property through these linear
-identifications. This includes q = 0 and a = 0; localization at zero is zero,
-as is cohomology on the empty open. -/
+not sections of the higher direct image sheaf. (Stacks, Tags 09MR and 01E4) -/
 theorem higherImageCohomologyPresheaf_isLocalized
     {X T : Scheme.{u}} (f : X ⟶ T) [QuasiCompact f] [QuasiSeparated f]
     (F : X.Modules) [F.IsQuasicoherent] (I : InjectiveResolution F) (q : ℕ)

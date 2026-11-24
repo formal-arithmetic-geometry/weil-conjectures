@@ -16,12 +16,13 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Continuity of etale cohomology for systems of complexes
 
-Source: Stacks Project, Etale Cohomology, Lemma 59.52.1, Tag 0EZM
-(blueprint: lem-weil-pbc-etale-cohomology-limit-complex-systems).
-
 The diagrams and their object isomorphisms below present the varying-site system on the
 limit site and its cohomology diagram. The parameter `P` is fixed by an explicit equation
 with the derived adjunction unit, so the conclusion concerns the canonical map.
+
+## References
+
+* Stacks Project, Tag 0EZM
 -/
 
 @[expose] public section
@@ -32,28 +33,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- Uniformly bounded-below systems of abelian etale complexes satisfy cohomology continuity.
-Source: Stacks Project, Tag 0EZM
-(blueprint: lem-weil-pbc-etale-cohomology-limit-complex-systems).
-
-Proof:
-1. Apply lem-weil-pbc-etale-cohomology-limit-of-schemes (Tag 09YQ) to every degree
-   of the complex system. The termwise colimit has the prescribed cohomology in each
-   sheaf degree.
-2. Apply thm-sp-if-e1 to global sections, using def-sp-etale-dictionary and
-   def-sp-kinjective-bridge. The first-page entries are H^r(X_i,F_i^s).
-   Their colimits are H^r(X,F^s) by step 1. The entries vanish for r < 0 or s < a.
-   In total degree n only a <= s <= n occurs, uniformly in the stage. This gives
-   uniform stabilization and finite filtrations by thm-sp-spectral-object-yields.
-   The four hypotheses of lem-weil-pbc-complex-spectral-sequence-comparison therefore
-   hold: first-page continuity, the common vanishing region, uniform stabilization,
-   and the finite abutment filtration with its associated-graded identification.
-3. The maps supplied by lem-weil-pbc-hypercohomology-e1-pullback-functorial are
-   compatible by the cocycle law and lem-weil-pbc-inverse-image-composition. Their
-   abutments are the canonical derived pullback maps, namely `P` followed by the
-   maps of complexes, by def-weil-pbc-etale-cohomology. Thus the comparison gives
-   exactly the cocone `B`, proving its colimit universal property.
--/
+/-- Uniformly bounded-below systems of abelian etale complexes satisfy cohomology continuity
+(Stacks, Tag 0EZM). -/
 theorem nonempty_isColimit_etale_complex_cohomology
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

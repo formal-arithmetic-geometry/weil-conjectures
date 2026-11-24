@@ -12,9 +12,12 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Cover-local detection of derived module isomorphisms
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0944, first locality sentence;
-categories.tex, localization and cohomology criteria.
-(blueprint: lem-weil-pbc-ringed-restriction-local-iso).
+This file shows that a morphism in the derived category of module sheaves is an isomorphism
+as soon as it is so after restriction to the objects of a covering family.
+
+## References
+
+* Stacks Project, Tag 0944 (first locality sentence)
 -/
 
 @[expose] public noncomputable section
@@ -25,16 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace SheafOfModules
 
-/-- Exact slice restriction detects derived isomorphisms on covering sieves.
-Source: Stacks Project, sites-cohomology.tex, Tag 0944, first locality sentence.
-(blueprint: lem-weil-pbc-ringed-restriction-local-iso).
-
-Proof: choose a covering sieve on each object as in the hypothesis. The domains of
-all arrows in these sieves form a family covering every object. Exact restriction
-commutes with each cohomology functor, so every cohomology map is invertible after
-restriction to this family. Forget to abelian sheaves, use the sheaf axiom to glue
-local inverses, and reflect invertibility to modules. The unbounded derived
-cohomology criterion concludes, degree by degree without a uniform bound. -/
+/-- Exact slice restriction detects derived isomorphisms on covering sieves. -/
 theorem ringedRestrictionLocalIso
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r})

@@ -10,10 +10,12 @@ public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 import WeilConjectures.Algebra.Homology.HomComplexProjections
 
-/-! # Signed source shift for the sheaf Hom complex
+/-!
+# Signed source shift for the sheaf Hom complex
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8X, section-hom-complexes.
-(blueprint: lem-pur-hom-complex-shift-left).
+## References
+
+* Stacks Project, Tag 0A8X
 -/
 
 @[expose] public section
@@ -54,26 +56,7 @@ private lemma homObjMap_units_smul_left
 
 -- The dependent product projection formulas require repeated complex-index transport.
 set_option backward.isDefEq.respectTransparency false in
-/-- The signed reindexing for a source shift is natural in the target complex.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8X, section-hom-complexes;
-the signed calculation is step 2 of the source-shift comparison.
-(blueprint: lem-pur-hom-complex-shift-left).
-
-Proof: In degree k the p-th component of the forward map is (-1)^(m*k)
-times the input component p+m, with the index identifications
-(L[m])^p = L^(p+m) and M^(p+k) = M^((p+m)+(k-m)).
-Use the universal property of the product of internal Hom sheaves to define
-this map. The inverse reindexes p to p-m and multiplies by the same scalar;
-their composites are identities since the scalar squares to one. To check
-the chain identity, project to each factor. The shifted source differential
-has postcomposition coefficient (-1)^m and precomposition coefficient -(-1)^k.
-The target has postcomposition coefficient 1 and precomposition coefficient
--(-1)^(k+m). The ratio of scalars in adjacent degrees is (-1)^m, giving
-both identities. For degrees not adjacent both differentials vanish.
-Postcomposition with any chain map commutes with the reindexing and scalars,
-so these chain isomorphisms form a natural isomorphism. No boundedness or
-injectivity is used. For m=0 the construction is the identity, for negative
-m it uses the same integer identities, and zero complexes give zero products. -/
+/-- The signed reindexing for a source shift is natural in the target complex. -/
 theorem homComplex_shift_left
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

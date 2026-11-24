@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 /-! # DegreeZero property of module cohomology maps
 
-Source: Stacks Project, Cohomology of Sheaves, Section 01F7, Remark 01FB.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-degree-zero).
+## References
+
+* Stacks Project, Tags 01F7 and 01FB
 -/
 
 @[expose] public section
@@ -23,26 +24,10 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 open AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
-/-- DegreeZero property of the cohomology map induced by an h-map.
-Source: Stacks Project, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB;
-Derived Categories, Tags 013P, 013S, 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-basic-degree-zero).
-
-Proof (argument specialized from the parent node):
-1. Global sections preserves kernels, computed sectionwise in module sheaves. For an
-   injective resolution J of G, the augmentation therefore identifies G(Y) with the
-   degree-zero cycles of its sections complex. Since the complex has natural indices,
-   there are no degree-zero boundaries. The comparison with the right derived functor
-   gives eG : H^0(Y,G) ≅ G(Y); construct eF in the same way on X.
-2. Evaluate the equation J.ι.f 0 followed by beta.f 0 = phi followed by
-   pushforward of I.ι.f 0 followed by lambda.f 0 at the whole space Y. Under the
-   canonical restriction along h^{-1}(Y) = X this says that mu sends the augmented
-   section I.ι(phi(s)) to beta(J.ι(s)), for every section s of G.
-3. Passing to cycles and degree-zero homology preserves this equality. Since homology
-   of mu is invertible, its inverse sends beta(J.ι(s)) to I.ι(phi(s)). Transport by the
-   resolution comparisons and forgetful homology comparisons in the definition of
-   moduleCohomologyFMap. This gives the asserted equality after eG and eF.
--/
+/-- Degree-zero property of the cohomology map induced by an h-map: in degree zero it
+corresponds to the map on global sections under the identifications `H^0 ≅ Γ`
+(Stacks, Cohomology of Sheaves, Tags 01F9, 01FA, 01FB; Derived Categories, Tags 013P, 013S,
+05TG). -/
 theorem moduleCohomologyFMap_basic_degree_zero {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : SheafOfModules.{u} Y.ringCatSheaf} {F : SheafOfModules.{u} X.ringCatSheaf}
     (φ : G ⟶ (pushforward h).obj F) :

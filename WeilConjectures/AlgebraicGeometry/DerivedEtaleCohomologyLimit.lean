@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Filtered.Connected
 
 /-! # Derived étale cohomology over an inverse limit
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 0GIT
-(blueprint: lem-weil-pbc-derived-etale-cohomology-limit).
+## References
+
+* Stacks Project, Tag 0GIT
 -/
 
 @[expose] public section
@@ -28,26 +29,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The projection pullbacks exhibit the derived étale cohomology of the limit as the
-filtered colimit of the stage cohomology groups, with arbitrary abelian coefficients.
-Source: Stacks Project, Étale Cohomology, Tag 0GIT
-(blueprint: lem-weil-pbc-derived-etale-cohomology-limit).
-
-The diagram and cocone are presented up to object isomorphisms `e` and `eY`.
-Their maps are specified explicitly: apply derived global sections to the derived
-adjunction unit, use the Leray isomorphism, then identify the iterated inverse image
-with the inverse image along the composite. Thus these are the canonical pullback maps.
-
-Proof: represent the bounded-below object by a complex zero below some integer `a`,
-using good truncation (def-weil-abstract-derived-category and
- situation-conventions). Pull it back termwise at each stage and
-at the limit (situation-conventions). The composition identifications
-(lem-weil-pbc-inverse-image-composition) make the pulled-back diagram on the limit
-constant, so its termwise filtered colimit is the limit pullback
-(definition-torsion-sheaves--3). Apply continuity for uniformly
-bounded-below complex systems (lem-weil-pbc-etale-cohomology-limit-complex-systems,
-Stacks 0EZM). Its maps are the projection pullbacks. Identify their cohomology with
-cohomology of derived global sections (def-weil-pbc-etale-cohomology); the resulting
-canonical cocone is a colimit in every integer degree. -/
+filtered colimit of the stage cohomology groups, with arbitrary abelian coefficients
+(Stacks, Tag 0GIT). The diagram and cocone are presented up to object isomorphisms
+`e` and `eY`, with the canonical pullback maps. -/
 theorem derivedEtaleCohomology_limit
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (T : Scheme.{u}) (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

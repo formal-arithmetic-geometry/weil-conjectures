@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageOpenRestriction
 
 /-! # Leray comparison on affine opens of the target
 
-Source: Stacks Project, Tag 01XK, with open restriction Tag 01E1.
-(blueprint: lem-pc-affine-open-higher-direct-image-sections-iso).
+## References
+
+* Stacks Project, Tags 01XK and 01E1
 -/
 
 @[expose] public section
@@ -33,20 +34,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Cohomology over the inverse image of an affine open is the group of sections of
-the corresponding higher direct image. Both sides use resolutions on the original X.
-Source: Stacks Project, Tag 01XK; Tags 01XJ (1), 01E1 and 01F4 (2).
-(blueprint: lem-pc-affine-open-higher-direct-image-sections-iso).
-
-Proof: Restrict f to V = f^{-1}U -> U. Restriction of M is quasi-coherent. Both
-quasi-compactness and quasi-separatedness are preserved by this base change. By
-Tag 01XJ (1) the higher direct images of the restriction are quasi-coherent. Since U
-is affine, their positive cohomology vanishes. The Leray edge of Tag 01F4 (2) is
-therefore an isomorphism in every degree, as in Tag 01XK. Restriction of an injective
-resolution on X to V is injective (Tag 01E1); its section complex is the original
-resolution evaluated on V. Direct image and its higher derived functors commute
-with restriction to U, computed by the same restricted resolution (Tag 01E4).
-These two comparisons identify the edge's source and target with the displayed
-objects. Degree zero gives the ordinary section equality, including empty opens. -/
+the corresponding higher direct image. Both sides use resolutions on the original X
+(Stacks, Tags 01XK, 01XJ, 01E1 and 01F4). -/
 theorem nonempty_affineOpen_higherDirectImage_sections_iso
     {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (U : S.Opens) (hU : IsAffineOpen U)

@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpen
 
 /-! # EtaleSectionsFpqcSeparated
 
-Source: Stacks Project, Tag 09XN
-(blueprint: lem-weil-pbc-etale-sections-fpqc-separated). -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 
@@ -50,18 +52,8 @@ private theorem sectionPullback_eq_iff {S T : Scheme.{u}}
   subst e
   rfl
 
-/-- Source: Stacks Project, Tag 09XN, uniqueness, and Tag 03S2, identity restriction.
-(blueprint: lem-weil-pbc-etale-sections-fpqc-separated).
-
-Proof:
-Apply the largest agreement open theorem to the identity etale object and the
-two global sections. Equality of their pullbacks factors every g_i through the
-agreement open. An fpqc covering is jointly surjective, so every point of S lies in
-this open, which is therefore all of S. Test its universal property on the identity
-of S. Inverse image along the identity is canonically restriction along the identity;
-the unit followed by restriction along the diagonal is the identity section map.
-Thus equality after this identity pullback gives equality of the original sections.
-This also handles an empty base or an empty indexing type whenever it is a cover. -/
+/-- Two sections of an étale sheaf over the base with equal pullbacks along an fpqc covering are
+equal (Stacks, Tags 09XN and 03S2). -/
 theorem etaleSections_eq_of_fpqc_pullbacks
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

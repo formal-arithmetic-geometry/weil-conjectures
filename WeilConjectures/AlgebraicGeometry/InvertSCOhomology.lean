@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.QuasiCompactOpenInduction
 
 /-! # Localization of graded cohomology at a section
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR
-(blueprint: lem-sc-invert-s-cohomology).
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 09MR.
 -/
 
 @[expose] public section
@@ -28,22 +29,8 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The canonical degree-zero localization comparison is an isomorphism.
-The displayed equation specifies the canonical map: multiplying the image of ξ/s^n
-by the trivializing section s^n gives the restriction of ξ. Since s trivializes L
-on U, this equation determines the map uniquely; an arbitrary isomorphism does not suffice.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MR
-(blueprint: lem-sc-invert-s-cohomology).
-
-1. On an affine open, positive cohomology vanishes on both sides and degree zero is
-   localization of sections (lem-sc-invert-s-cohomology-affine-case).
-2. The restriction-and-division maps form a map of Mayer--Vietoris exact sequences.
-   Principal opens commute with intersections and unions; localization and passage to
-   degree zero are exact. The five-lemma proves gluing from U, V and U ∩ V
-   (lem-sc-invert-s-cohomology-gluing).
-3. Apply induction over quasi-compact opens to the property that all these comparisons
-   are isomorphisms (lem-sc-invert-s-cohomology-induction), and take the whole space.
--/
+The canonical map is specified by the equation: multiplying the image of ξ/s^n
+by the trivializing section s^n gives the restriction of ξ. (Stacks, Lemma 09MR) -/
 theorem invertS_cohomology
     (X : Scheme.{u}) (L F : X.Modules) [L.IsInvertible]
     [F.IsQuasicoherent] [CompactSpace X] [QuasiSeparatedSpace X]

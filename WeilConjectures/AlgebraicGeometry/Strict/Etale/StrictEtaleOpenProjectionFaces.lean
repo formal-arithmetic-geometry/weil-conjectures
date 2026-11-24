@@ -17,7 +17,10 @@ import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 
 /-! # Normalized geometric projection faces
 
-Source: Zheng, Construction 5.15 and Lemma 5.22.
+## References
+
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 5.15, Lemma 5.22
 -/
 
 @[expose] public noncomputable section

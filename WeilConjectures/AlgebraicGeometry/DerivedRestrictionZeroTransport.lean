@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyCompariso
 
 /-! # Degree-zero restriction and coefficient transport
 
-Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-derived-restriction-zero-transport).
+## References
+
+* Stacks Project, Tags 07A6 and 0D6F
 -/
 
 @[expose] public section
@@ -24,10 +25,7 @@ namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Exact derived composition agrees with the two single comparisons.
-Source: Mathlib `mapDerivedCategoryCompIso_fac` and naturality of
-`mapDerivedCategoryFactors`; the final complex equality is checked in degree zero.
-(blueprint: lem-sbc-derived-restriction-zero-transport). -/
+/-- Exact derived composition agrees with the two single comparisons. -/
 private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category E]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
@@ -44,10 +42,7 @@ private theorem single_comp {C D E : Type*} [Category C] [Category D] [Category 
   exact (F.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app
     H X 0).symm
 
-/-- A derived natural isomorphism agrees with its coefficient map on a single object.
-Source: `mapDerivedCategoryNatIso_fac` and the definition of
-`mapDerivedCategorySingleFunctor`; check the resulting complex map in degree zero.
-(blueprint: lem-sbc-derived-restriction-zero-transport). -/
+/-- A derived natural isomorphism agrees with its coefficient map on a single object. -/
 private theorem single_nat {C D : Type*} [Category C] [Category D]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C]
     [HasDerivedCategory D]
@@ -89,9 +84,8 @@ private theorem single_nat {C D : Type*} [Category C] [Category D]
   simp only [CategoryTheory.Functor.map_id, Category.id_comp]
   erw [Category.id_comp]
 
-/-- Combine the composition and natural-isomorphism calculations for an exact square.
-Source: Stacks Project, Tag 0D6F, functoriality of localization.
-(blueprint: lem-sbc-derived-restriction-zero-transport). -/
+/-- Combine the composition and natural-isomorphism calculations for an exact square
+(Stacks, Tag 0D6F). -/
 private theorem single_square {C D D' E : Type*}
     [Category C] [Category D] [Category D'] [Category E]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.Abelian D']
@@ -119,10 +113,7 @@ private theorem single_square {C D D' E : Type*}
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The single-object degree-zero right-derived comparison is natural.
-Source: naturality of `rightDerivedFunctorPlusCompatibility`,
-`homologyRightDerivedFunctorPlusObjSingleFunctorIso`, and `rightDerivedZeroIsoSelf`.
-(blueprint: lem-sbc-derived-restriction-zero-transport). -/
+/-- The single-object degree-zero right-derived comparison is natural. -/
 private theorem zero_single_naturality {C D : Type*} [Category C] [Category D]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [HasDerivedCategory C]
     [HasDerivedCategory D]
@@ -153,12 +144,8 @@ private theorem zero_single_naturality {C D : Type*} [Category C] [Category D]
   erw [R.rightDerivedZeroIsoSelf.hom.naturality]
   rfl
 
-/-- Degree-zero coefficient transport for an arbitrary square of exact functors.
-Source: Stacks Project, Tag 0D6F, restriction, and functoriality of localization.
-First apply the single-square calculation and naturality of the target single comparison.
-Then apply derived sections and zeroth homology. Finally use the naturality of the
-single-object degree-zero right-derived comparison. No coefficient isomorphism is assumed.
-(blueprint: lem-sbc-derived-restriction-zero-transport). -/
+/-- Degree-zero coefficient transport for an arbitrary square of exact functors (Stacks, Tag 0D6F).
+-/
 private theorem square_zero_transport {C D D' E : Type*}
     [Category C] [Category D] [Category D'] [Category E]
     [CategoryTheory.Abelian C] [CategoryTheory.Abelian D] [CategoryTheory.Abelian D']
@@ -228,23 +215,8 @@ private theorem square_zero_transport {C D D' E : Type*}
   simp only [z, Iso.trans_hom, Category.assoc]
   rfl
 
-/-- The restriction triangle and a coefficient morphism respect the zero comparison.
-Source: Stacks Project, Tag 0D6F, restriction, and functoriality of localization.
-(blueprint: lem-sbc-derived-restriction-zero-transport).
-
-Proof: Expand the derived restriction isomorphism into its three factors.
-The localization factorization of mapDerivedCategoryCompIso identifies each
-composition factor on a single complex with its underived composition factor.
-The factorization of mapDerivedCategoryNatIso identifies the middle factor with
-the single of the upperStarComp comparison. The singleFunctorιIso and exact
-single comparisons cancel between adjacent factors. After these cancellations
-the resulting map of single complexes is the single of
-rawAffineRestrictedCoefficient. Apply derived sections and zeroth homology.
-Naturality of the right-derived single homology comparison, followed by
-naturality of rightDerivedZeroIsoSelf, gives the section map of that coefficient
-morphism. The remaining outer single comparisons are exactly those displayed
-in zeroIso. This uses no invertibility of the coefficient map and also applies
-to the empty scheme. -/
+/-- The restriction triangle and a coefficient morphism respect the zero comparison
+(Stacks, Tag 0D6F). -/
 theorem derivedRestriction_zero_transport {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})

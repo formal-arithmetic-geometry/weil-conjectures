@@ -88,7 +88,10 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # Simultaneous K-flat representatives for strict systems
 
-Source: Stacks 06YS and 0G7E; Zheng, Construction 4.1.
+## References
+
+* Stacks Project, Tags 0G7E, 06YS
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -105,12 +108,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- Sequence-site flat-term K-flat complexes remain flat-term K-flat at every level.
-Source: Stacks 0G7E (blueprint: lem-pur-system-evaluation-kflat).
-Proof: vertical evaluation is the algebraic inverse image of a geometric morphism.
-Apply K-flat pullback along its identity structural ring map. The normalized scalar
-unit identifies extension along that identity with the original evaluation. Transport
-K-flatness and flatness along this natural isomorphism. -/
+/-- Sequence-site flat-term K-flat complexes remain flat-term K-flat at every level. -/
 theorem systemSequenceEvaluation_preservesKFlat (n : ℕ)
     (P : CochainComplex (systemSequenceModules B) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (R := systemSequenceRing B) P)
@@ -136,13 +134,7 @@ theorem systemSequenceEvaluation_preservesKFlat (n : ℕ)
       ((HomologicalComplex.eval _ (.up ℤ) i).mapIso ec) (ht.2 i)⟩
 
 /-- Every complex of strict systems has one strict representative which is flat-term
-K-flat at every level. Source: Stacks 06YS and 0G7E; Zheng 4.1
-(blueprint: lem-pur-system-evaluation-kflat).
-Proof: transport the complex to the ringed sequence site and resolve it there by a
-flat-term K-flat complex. Pull the resolution back through the sequence-site equivalence.
-The unit identifies its augmentation target with the original strict complex. Exactness
-of the equivalence preserves its quasi-isomorphism. Every slice is flat-term K-flat by
-the evaluation pullback theorem, so the construction resolves all levels simultaneously. -/
+K-flat at every level. -/
 theorem strictRingSystem_kFlatResolution (K : CochainComplex (StrictRingSystem B) ℤ) :
     ∃ (L : CochainComplex (StrictRingSystem B) ℤ) (f : L ⟶ K),
       systemComponentwiseKFlat B L ∧ QuasiIso f := by

@@ -13,7 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 For morphisms of sheaves of rings with `α ≫ β = γ ≫ δ`, restricting scalars along `β` and then
 `α` agrees with restricting along `δ` and then `γ`; the comparison is the identity on sections.
 
-Source: Stacks Project, Tag 03DA.
+## References
+
+* Stacks Project, Tag 03DA
 -/
 
 @[expose] public noncomputable section

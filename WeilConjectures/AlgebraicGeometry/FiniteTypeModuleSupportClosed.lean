@@ -18,9 +18,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 /-!
 # Closed support of a finite type module
 
-Source: Stacks Project, Morphisms, Lemma 056J (part (1)), via Lemma 056I,
-Properties Lemma 01PB and Algebra Lemma 00L2 (blueprint:
-lem-weil-pbc-finite-type-module-support-closed).
+## References
+
+* [Stacks Project, Tag 056J](https://stacks.math.columbia.edu/tag/056J)
+* [Stacks Project, Tag 056I](https://stacks.math.columbia.edu/tag/056I)
+* [Stacks Project, Tag 01PB](https://stacks.math.columbia.edu/tag/01PB)
+* [Stacks Project, Tag 00L2](https://stacks.math.columbia.edu/tag/00L2)
 -/
 
 @[expose] public section
@@ -36,11 +39,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 set_option linter.style.haveILetI false in
-/-- Restriction preserves finite type: pull the local generating cover back along
-`Over.forget U`; its local maps preserve colimits and the unit, hence carry each finite
-family of generators to a finite family. Source: Stacks Project, Modules, Tag 01B5,
-the locality of finite type used in the finite-pushforward argument
-(blueprint: lem-weil-pbc-finite-type-module-support-closed). -/
+/-- Restriction of a finite type module to an open is finite type. (Stacks, Tag 01B5.) -/
 private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
     (hF : F.IsFiniteType) (U : X.Opens) : (F.over U).IsFiniteType := by
   classical
@@ -80,18 +79,7 @@ private theorem isFiniteType_over (X : Scheme.{u}) (F : X.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- On an affine open, the stalk of a quasi-coherent module is the localization of its
-sections, compatibly with germs.
-
-Proof: use the germ map as a linear map over `Γ(X,U)`. Elements outside the prime have
-unit germs and hence act invertibly on the stalk. Represent any germ over an open `V`,
-shrink to a basic open `D(g)` inside `V`, and extend its section after multiplying by a
-power of `g`. This gives the fraction representation. If two sections have equal germs,
-shrink their equality to a basic open; the basic-open torsion lemma kills their difference
-by a power of `g`. These are the three axioms of `IsLocalizedModule`. Its canonical
-isomorphism sends `m/1` to the germ of `m`, so linearity gives the denominator identity.
-No finite generation is needed, and for the zero module both sides are zero.
-Source: Stacks Project, Morphisms, Lemma 056I, proof; Schemes, Lemma 01HV (7).
-(blueprint: lem-weil-pbc-finite-type-module-support-closed) -/
+sections, compatibly with germs. (Stacks, Tag 056I; Schemes, Tag 01HV (7).) -/
 private theorem quasicoherent_affine_stalk_germ_localization (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] :
     (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1),
@@ -164,20 +152,9 @@ private theorem quasicoherent_affine_stalk_germ_localization (X : Scheme.{u}) (F
 
 /-- Let `F` be a quasi-coherent `𝒪_X`-module of finite type and `U` an affine open with
 `A = Γ(X, U)`, `M = Γ(F, U)`, the point `x ∈ U` corresponding to the prime `p_x` of `A`.
-Then (1) `F_x ≅ M_{p_x}`, the isomorphism sending `m / s` to `s_x⁻¹ • m_x`
-(stated as `s_x • e (m / s) = m_x`, which determines `e` since `s_x` is a unit);
+Then (1) `F_x ≅ M_{p_x}`, the isomorphism sending `m / s` to `s_x⁻¹ • m_x`;
 (2) `x ∈ Supp F` iff `Ann_A(M) ⊆ p_x`; (3) `Supp F ∩ U = V(Ann_A(M))`;
-(4) `Supp F = {x | F_x ≠ 0}` is closed in `X`.
-
-Proof: on the affine chart `U ≅ Spec A` the restriction `F|_U` is quasi-coherent of finite
-type, hence `F|_U ≅ M~` with `M` finitely generated (Properties 01PB and the tilde/Γ
-adjunction). The stalk of `F` at `x` is the stalk of `F|_U` (cofinal neighbourhoods), and the
-stalk of `M~` at `p_x` is `M_{p_x}` (Schemes 01HV (7)), giving (1). By Algebra 00L2 a finite
-module has `M_p ≠ 0` iff `Ann_A(M) ⊆ p`, giving (2) and (3). The sets `V(Ann_A(M))` are closed
-in each affine chart and the affine opens cover `X`, giving (4).
-Source: Stacks Project, Morphisms, Lemma 056J (1), via Lemma 056I, Properties Lemma 01PB and
-Algebra Lemma 00L2.
-(blueprint: lem-weil-pbc-finite-type-module-support-closed) -/
+(4) `Supp F = {x | F_x ≠ 0}` is closed in `X`. (Stacks, Tag 056J.) -/
 theorem finite_type_module_support_closed (X : Scheme.{u}) (F : X.Modules)
     [F.IsQuasicoherent] [F.IsFiniteType] :
     (∀ (U : X.affineOpens) (x : X) (hx : x ∈ U.1),

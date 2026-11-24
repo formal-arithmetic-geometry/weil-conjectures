@@ -17,10 +17,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonInheritanceFixedDegree
 
-/-! # Tensor inheritance for localized cohomology comparisons
+/-!
+# Tensor inheritance for localized cohomology comparisons
 
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-inheritance).
+## References
+
+* Stacks Project, Tag 0DJA(1), local computation using Tag 0BYJ (perfect.tex)
 -/
 
 @[expose] public section
@@ -35,23 +37,7 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
 /-- Local ring form of tensor inheritance, for actual chain maps and the canonical
-scalar-extension tensorator.
-
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), using More on Algebra, Tag 0BYJ.
-Proof: write T = A tensor-over-R B. Resolve the R-tensor factor by a K-flat
-resolution. The mixed-ring associator identifies the comparison for U tensor Q
-with U tensor the comparison for Q, naturally in U and Q and compatibly with the
-T-action. Flatness of C over T makes extension to C exact, so its cohomology is
-cohomology followed by extension. For fixed Q and t, the complexes U for which
-all these cohomology comparisons are invertible form a localizing subcategory
-of D(A): shifts reindex the comparisons, sums commute with cohomology and
-extension, and triangles give the five lemma in the long exact sequences.
-It contains A and all its shifts by the hypothesis. The shifts of A generate
-D(A), so it contains every U. K-flatness of U and Q makes the displayed total
-complexes compute these derived tensors, and naturality identifies the map
-with the inverse scalar-extension tensorator followed by tensoring t.
-This applies to arbitrary unbounded complexes and to the zero ring.
-(blueprint: lem-pc-localized-tensor-comparison-inheritance). -/
+scalar-extension tensorator. -/
 theorem localizedTensorComparison_inheritance
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

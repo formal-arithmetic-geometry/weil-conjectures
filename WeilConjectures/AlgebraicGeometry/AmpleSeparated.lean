@@ -14,8 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-! # Separatedness from an ample invertible module
 
-Source: Stacks Project, Properties, Lemma 09MP (label lemma-ample-separated)
-(blueprint: lem-weil-pbc-ample-scheme-separated).
+## References
+
+* Stacks Project, Tag 09MP
 -/
 
 @[expose] public section
@@ -69,32 +70,8 @@ private theorem separatingPair_of_basicOpen {X : Scheme.{u}} {U V : X.Opens}
     exact Subring.subset_closure (Set.mem_union_right _ ⟨V.topIso.inv g, by simp⟩)
 
 /-- The affine nonvanishing loci of positive tensor-power sections covering a scheme
-already imply separatedness; no quasi-compactness assumption is required.
-
-Source: Stacks Project, Properties, Lemma 01PY (label
-lemma-affine-s-opens-cover-quasi-separated), used in Lemma 09MP
-(blueprint: lem-weil-pbc-ample-scheme-separated).
-Proof (the node's affine-cover argument, rather than the source's valuative argument):
-1. The affine nonvanishing loci of positive-degree sections cover `X` by `hcover`
-   (nonvanishing loci: def-weil-pbc-ample-invertible-module); quasi-compactness is unused.
-2. For sections of degrees `p` and `q`, replace them by their `q`-th and `p`-th powers.
-   Both now belong to `L.tensorPow (p * q)` and their nonvanishing loci are unchanged
-   (lem-weil-pbc-invertible-pullback-tensor).
-3. The sections trivialize this invertible module on their respective opens `U` and `V`
-   (lem-weil-pbc-nonvanishing-section-trivializes). Write `t = f * s` on `U` and
-   `s = g * t` on `V`; then `U ∩ V` is `D(f)` in `U` and `D(g)` in `V`
-   (lem-weil-pbc-affine-open-section-vanishing-prime).
-4. The intersection is affine, and its ring of sections is the localization `A_f` of
-   `A = Γ(U, 𝒪_X)` (lem-weil-pbc-affine-open-section-vanishing-prime).
-5. On the intersection, `f * g = 1` by uniqueness of the trivializing coefficients
-   (lem-weil-pbc-nonvanishing-section-trivializes). Each element of `A_f` is the image
-   of `a ⊗ g^k` from `A ⊗[ℤ] Γ(V, 𝒪_X)`, so the restriction-product map is surjective
-   (lem-weil-pbc-affine-open-section-vanishing-prime).
-6. The localization calculation shows that the two restriction images generate the
-   overlap ring, so each pair is separating. Apply
-   `Scheme.isSeparated_of_isSeparatingPair` to the affine cover and affine overlaps
-   (lem-weil-pbc-separated-separating-pair-cover). Hence `X` is separated.
--/
+already imply separatedness; no quasi-compactness assumption is required
+(Stacks, Tags 01PY and 09MP). -/
 theorem isSeparated_of_affine_nonvanishing_cover (X : Scheme.{u}) (L : X.Modules)
     [L.IsInvertible]
     (hcover : ∀ x : X, ∃ n : ℕ, 0 < n ∧
@@ -119,31 +96,7 @@ theorem isSeparated_of_affine_nonvanishing_cover (X : Scheme.{u}) (L : X.Modules
   exact Scheme.isSeparated_of_isSeparatingPair U hcov hU
     (fun x y ↦ (hpairs x y).1) (fun x y ↦ (hpairs x y).2)
 
-/-- A scheme carrying an ample invertible module is separated.
-
-Source: Stacks Project, Properties, Lemma 09MP, proved using Lemma 01PY and
-Definition 01PS (blueprint: lem-weil-pbc-ample-scheme-separated).
-Proof (the node's affine-cover argument, rather than the source's valuative argument):
-1. The affine nonvanishing loci of positive-degree sections cover `X` by ampleness
-   (def-weil-pbc-ample-invertible-module); quasi-compactness is unused.
-2. For sections of degrees `p` and `q`, replace them by their `q`-th and `p`-th powers.
-   Both now belong to `L.tensorPow (p * q)` and their nonvanishing loci are unchanged
-   (lem-weil-pbc-invertible-pullback-tensor).
-3. The sections trivialize this invertible module on their respective opens `U` and `V`
-   (lem-weil-pbc-nonvanishing-section-trivializes). Write `t = f * s` on `U` and
-   `s = g * t` on `V`; then `U ∩ V` is `D(f)` in `U` and `D(g)` in `V`
-   (lem-weil-pbc-affine-open-section-vanishing-prime).
-4. The intersection is affine, and its ring of sections is the localization `A_f` of
-   `A = Γ(U, 𝒪_X)` (lem-weil-pbc-affine-open-section-vanishing-prime).
-5. On the intersection, `f * g = 1` by uniqueness of the trivializing coefficients
-   (lem-weil-pbc-nonvanishing-section-trivializes). Each element of `A_f` is the image
-   of `a ⊗ g^k` from `A ⊗[ℤ] Γ(V, 𝒪_X)`, so the restriction-product map is surjective
-   (lem-weil-pbc-affine-open-section-vanishing-prime).
-6. The localization calculation shows that the two restriction images generate the
-   overlap ring, so each pair is separating. Apply
-   `Scheme.isSeparated_of_isSeparatingPair` to the affine cover and affine overlaps
-   (lem-weil-pbc-separated-separating-pair-cover). Hence `X` is separated.
--/
+/-- A scheme carrying an ample invertible module is separated (Stacks, Tag 09MP). -/
 theorem isSeparated_of_isAmple (X : Scheme.{u}) (L : X.Modules) [L.IsInvertible]
     (hL : L.IsAmple) : X.IsSeparated := by
   apply isSeparated_of_affine_nonvanishing_cover X L

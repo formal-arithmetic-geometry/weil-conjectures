@@ -23,8 +23,12 @@ set_option linter.privateModule false
 
 /-! # Derived pullback computation with independent universes
 
-Source: Stacks 06YY and 0G7E. The resolving class consists of K-flat complexes
-with flat terms, and the prescribed counit computes ordinary pullback there.
+The resolving class consists of K-flat complexes with flat terms, and the prescribed counit
+computes ordinary pullback there.
+
+## References
+
+* Stacks Project, Tags 06YY and 0G7E.
 -/
 
 @[expose] public section

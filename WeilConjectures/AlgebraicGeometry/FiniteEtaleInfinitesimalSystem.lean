@@ -16,9 +16,9 @@ import WeilConjectures.AlgebraicGeometry.InfinitesimalTransitionThickening
 /-!
 # Compatible finite étale covers of the infinitesimal fibres
 
-Source: Stacks Project, Fundamental Groups, Tag 0GS2, complete Noetherian
-essential-surjectivity paragraph, construction before algebraization
-(blueprint: lem-weil-pbc-finite-etale-infinitesimal-system).
+## References
+
+* Stacks Project, Tag 0GS2
 -/
 
 @[expose] public section
@@ -31,27 +31,7 @@ namespace AlgebraicGeometry
 
 /-- A finite étale cover of the closed fibre extends to a compatible system of
 finite étale covers of all finite infinitesimal fibres. No completeness,
-Noetherianity, or properness is needed for this construction.
-Source: Stacks Project, Tag 0GS2, complete Noetherian essential-surjectivity
-paragraph, using Tags 039R and 09ZW(8).
-(blueprint: lem-weil-pbc-finite-etale-infinitesimal-system).
-
-Proof:
-1. Write X_n = X ×_A Spec(A/I^(n+1)). The transition X_n → X_(n+1)
-   is a closed immersion defined by a nilpotent ideal. Likewise X_0 → X_n
-   is a finite order thickening: the ideal I/I^(n+1) has zero (n+1)st power.
-   These facts persist under base change. The transition maps are therefore
-   surjective closed immersions and universal homeomorphisms.
-2. Set the initial cover to the given V, transporting along I^1 = I.
-   Inductively use the essential surjectivity of the étale base-change
-   equivalence along X_n → X_(n+1) to choose an étale cover of X_(n+1)
-   whose pullback is isomorphic to the previously chosen cover.
-3. Compose the inverse of that pullback isomorphism with the projection
-   to obtain g_n. The square is cartesian by the pullback isomorphism.
-   Iterating these squares identifies every cover's restriction to X_0
-   with V. Finiteness follows from isFinite_iff_of_finiteOrderThickening
-   applied to X_0 → X_n. Choose the system by recursion on n; retain the
-   initial isomorphism over X_0 in the conclusion. -/
+Noetherianity, or properness is needed for this construction (Stacks, Tag 0GS2). -/
 theorem exists_finiteEtale_infinitesimal_system
     {A : Type u} [CommRing A] (I : Ideal A)
     {X : Scheme.{u}} (f : X ⟶ Spec (.of A))

@@ -12,9 +12,9 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 
 /-! # Unit comparison for derived pullback
 
-Source: Stacks Project, Cohomology, Tag 079U, lemma-pullback-tensor-product,
-and section-derived-pullback; the parent descent proof, step 3.
-(blueprint: lem-pc-derived-pullback-tensor-unit-counit).
+## References
+
+* Stacks Project, Tag 079U
 -/
 
 @[expose] public section
@@ -40,17 +40,7 @@ attribute [local instance]
   tensorDescentPullbackDescentQLax
 
 /-- The supplied left-derived counit is invertible at the tensor-unit complex.
-Source: Stacks Project, Cohomology, Tag 06YJ, lemma-derived-pullback,
-and Tag 079U; parent unit proof, step 1.
-(blueprint: lem-pc-derived-pullback-tensor-unit-counit).
-Proof: the unit complex is the structure sheaf in degree zero. Tensoring with the
-structure sheaf is the identity, so it is flat; its single complex is K-flat.
-The recorded derived pullback is computed on K-flat complexes. The equalities hF
-and hmap identify the supplied F with the recorded tensor pullback as a functor.
-Whisker this identification with the homotopy quotient and localization. Uniqueness
-of the left-derived counit identifies the supplied counit with the recorded one,
-up to the invertible comparison of left-derived functors. Its component at this
-K-flat complex is thus invertible. This includes the zero-ring and empty-scheme cases. -/
+(Stacks, Tags 06YJ and 079U) -/
 theorem derivedPullback_tensor_unit_counit_isIso {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]
@@ -112,8 +102,7 @@ theorem derivedPullback_tensor_unit_counit_isIso {T X : Scheme.{uModel}} (g : T 
   infer_instance
 
 /-- Termwise pullback of the unit complex, using the specified underived monoidal unit.
-Source: Stacks Project, Tag 079U, parent unit proof, step 1.
-(blueprint: lem-pc-derived-pullback-tensor-unit-counit). -/
+(Stacks, Tag 079U) -/
 noncomputable def tensorPullback_unitHomotopyIso {T X : Scheme.{uModel}}
     (F : SheafOfModules.{uModel} (moduleRings X.toRingedSpace) ⥤
       SheafOfModules.{uModel} (moduleRings T.toRingedSpace)) [F.Additive]
@@ -129,9 +118,7 @@ noncomputable def tensorPullback_unitHomotopyIso {T X : Scheme.{uModel}}
     ((F.mapHomotopyCategoryFactors (ComplexShape.up ℤ)).app _).symm
 
 /-- Explicit derived unit comparison, obtained by inverting the counit at the unit.
-Source: Stacks Project, Tags 06YJ and 079U, parent unit proof, step 1.
-(blueprint: lem-pc-derived-pullback-tensor-unit-counit).
-All data are the supplied unit maps and counit; no arbitrary existence witness is chosen. -/
+(Stacks, Tags 06YJ and 079U) -/
 noncomputable def derivedPullback_tensorUnitIso {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

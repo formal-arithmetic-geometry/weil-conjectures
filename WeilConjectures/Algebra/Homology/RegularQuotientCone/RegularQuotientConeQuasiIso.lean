@@ -37,8 +37,11 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The strict quotient augmentation is a quasi-isomorphism on K-flat complexes
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YP, 06YS and 06YY.
-(blueprint: lem-cbc-regular-quotient-cone-quasi-iso).
+## References
+
+* Stacks Project, Tag 06YP
+* Stacks Project, Tag 06YS
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public section
@@ -74,19 +77,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 attribute [local instance] isMonoidal_W_independentCoefficients monoidalCategory
 
 include hexact hsections in
-/-- The normalized zero-shifted-component augmentation computes the quotient on all K-flats.
-
-Source: Stacks Project, Tags 06YP, 06YS and 06YY
-(blueprint: lem-cbc-regular-quotient-cone-quasi-iso).
-
-Proof: For a complex with flat terms, tensor the coefficient-ring short exact sequence
-in each degree. The normalized tensor comparisons identify it with multiplication by t
-followed by the termwise coefficient unit. Thus its cone augmentation is the standard
-quasi-isomorphism associated to a short exact sequence of complexes. For arbitrary
-K-flat P choose a flat-term K-flat resolution F → P. Scalar cones preserve every
-quasi-isomorphism; ordinary extension preserves those between K-flat complexes, and
-restriction is exact. Naturality of the strict augmentation makes its two composites
-with these maps equal. Three of the maps are quasi-isomorphisms, so the fourth is too. -/
+/-- The normalized zero-shifted-component augmentation computes the quotient on all K-flats. -/
 theorem chainAugmentation_quasiIso
     [PreservesFiniteLimits (restriction φ)] [PreservesFiniteColimits (restriction φ)]
     (P : CochainComplex (Modules R) ℤ)

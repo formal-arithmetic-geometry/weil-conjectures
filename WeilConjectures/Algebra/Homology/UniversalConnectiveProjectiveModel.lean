@@ -19,8 +19,9 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Cancelling the negative tail of a residue-connective projective complex
 
-Source: Stacks Project, Tag 00O0, finite-projective cancellation argument.
-(blueprint: lem-sc-universal-connective-projective-model).
+## References
+
+* Stacks Project, Tag 00O0, finite-projective cancellation argument.
 -/
 
 @[expose] public section
@@ -31,26 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Universal vanishing in negative degrees gives a connective bounded projective model,
-without any condition on degree-zero homology.
-
-Source: Stacks Project, Tag 00O0, fixed-affine negative-tail argument in
-lem-sc-universal-h0-projective-normalization; Mathlib good truncation and K-projectivity.
-(blueprint: lem-sc-universal-connective-projective-model).
-
-Proof: Define Q to be the good truncation P.truncGE 0. Its negative terms are
-zero, its zeroth term is canonically isomorphic to P.opcycles 0, and its positive
-terms are canonically isomorphic to the original terms. Apply
-residueConnective_projective_opcycles to the residue-field tests of hnegative;
-this makes the only new term finite projective. Transfer finiteness and
-projectivity along the displayed isomorphisms; zero terms are finite projective.
-If b is an upper support bound for P, max(b,0) is one for Q. Testing hnegative
-on the identity map and transporting through extendScalarsId shows that P has
-zero negative homology. Thus the canonical projection P -> Q is a
-quasi-isomorphism. Both P and Q are bounded above with projective terms, hence
-K-projective. Mathlib's IsKProjective.quasiIso_iff upgrades the projection to
-a homotopy equivalence. This supplies a real good-truncation construction rather
-than choosing a complex from an existence theorem. It is valid over the zero ring
-and with empty support intervals. No degree-zero homology condition is used. -/
+without any condition on degree-zero homology. -/
 theorem universalConnective_projective_model
     (R : Type v) [CommRing R]
     (P : CochainComplex (ModuleCat.{v} R) ℤ)

@@ -13,8 +13,10 @@ import Mathlib.Algebra.Category.ModuleCat.Kernels
 
 /-! # Detecting invertibility on the rank-one free module
 
-Source: the free-module presentation argument, as in
-`WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator`.
+## References
+
+* The free-module presentation argument, as in
+  `WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator`
 -/
 
 @[expose] public section
@@ -30,18 +32,7 @@ variable {R : Type u} [CommRing R] {D : Type v} [Category.{w} D]
   [PreservesColimitsOfSize.{u, u} F] [PreservesColimitsOfSize.{u, u} G]
 
 /-- A natural transformation of cocontinuous functors on modules is invertible
-if it is invertible on the free rank-one module.
-Source: the free-module presentation argument in
-WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator,
-`PresheafOfModules.isIso_app_of_freeYoneda`, specialized to a point.
-(blueprint: lem-sc-modulecat-cocontinuous-generator)
-Proof: each free module is a coproduct of copies of R, so preservation of coproducts
-and naturality extend invertibility from R to every free module. Present any module
-M by the surjection R^(M) → M sending the basis vector [m] to m. Map the free module
-on the kernel into R^(M); its image is precisely that kernel, hence M is the
-coequalizer of this map and zero. Both functors preserve this coequalizer, and the
-transformation is invertible on its two free vertices, so it is invertible on M.
-This also applies to the zero ring, zero module and empty free basis. -/
+if it is invertible on the free rank-one module. -/
 theorem isIso_app_of_rankOne (α : F ⟶ G)
     (h : IsIso (α.app (ModuleCat.of R R))) (M : ModuleCat.{u} R) :
     IsIso (α.app M) := by

@@ -44,30 +44,8 @@ private theorem stable_restrict {I : Type v} [LinearOrder I] {n : ℕ}
     apply hs.2 _ _ ((Fin.strictMono_succAbove r) hkl)
     simpa only [hr, Function.comp_apply] using he
 
-/-- Restriction identities for a prefix-deletion equivalence satisfying its base facts.
-Source: Stacks Project, Tag 01FM, prefix-deletion correspondence.
-Proof: Fix an outgoing x=(σ,a,τ,r) and put e(x)=(j,ρ,b,η).
-The hypothesis gives a=b+1, r<n=p+2 and τ(r)=j. Since r<a,
-prefix agreement also gives σ(r)=j. Delete position r and label j from σ and τ,
-renumbering through the increasing bijections r.succAbove and j.succAbove.
-Call the resulting permutations ρ₀ and η₀. Restriction gives genuine
-permutations because σ and τ send the deleted position to the deleted label.
-Stable sorting of σ restricts to stable sorting of ρ₀ for t∘j.succAbove:
-monotonicity is preserved by increasing position renumbering, and equal values
-are ordered by increasing label renumbering. Any stable permutation of a finite
-tuple is unique: it enumerates its distinct pairs (value,original label) in
-strict lexicographic order. Since ρ is also stable for this tuple, ρ₀=ρ.
-For k<b, r.succAbove(k)<a, so η₀(k)=ρ₀(k). For b≤k<l,
-a≤r.succAbove(k)<r.succAbove(l); increasing tails of τ and j.succAbove
-then give η₀(k)<η₀(l). Thus η₀ is partial sorted with prefix b and stable
-permutation ρ. Such a partial sorting is unique: the prefix prescribes its
-labels, and the tail must enumerate the remaining labels in increasing order.
-The incoming property gives the same constraints on η, hence η₀=η.
-The defining restriction equations now give the two asserted identities.
-This proof is pointwise and needs no particular construction of e, nor its
-bijectivity or the before condition. It includes p=0, b=0, b=p and repeated
-values. For an empty I there are no tuples to check.
-(blueprint: new-prefix-deletion-restrictions) -/
+/-- Restriction identities for a prefix-deletion equivalence satisfying its base facts
+(Stacks, Tag 01FM). -/
 theorem prefixDeletionRestrictions {I : Type v} [LinearOrder I] (p : ℕ)
     (t : Fin (p + 2) → I)
     (e : ({x : Equiv.Perm (Fin (p + 2)) × Fin (p + 2) ×

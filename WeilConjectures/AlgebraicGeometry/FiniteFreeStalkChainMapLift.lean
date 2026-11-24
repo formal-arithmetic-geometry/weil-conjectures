@@ -12,10 +12,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLiftLocal
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkChainMapLiftRestrict
 
 /-! # Local extension of one map between bounded finite free complexes
-
-Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension argument, expanded
-in lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3.
-(blueprint: lem-pc-finite-free-stalk-chain-map-lift)
 -/
 
 @[expose] public section
@@ -26,29 +22,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- One prescribed stalk chain map extends, using the canonical comparison, to every
-sufficiently small neighbourhood.
-
-Source: lemma-coherent-base-change-invertible-sheaves--3, finite matrix extension argument, as
-expanded in lem-pc-finite-free-stalk-chain-map-pair-lift, proof steps 1--3.
-(blueprint: lem-pc-finite-free-stalk-chain-map-lift)
-
-Proof: Choose finite bases of the nonzero terms of P and Q. Their bounded supports
-leave finitely many possibly nonzero components of f. Under pullback of a finite
-free module, each component is a matrix over the local ring. Represent its entries
-by sections near y and intersect the finitely many neighbourhoods. The differences
-of the two sides of every chain equation are finite matrices with zero germs.
-Shrink again by the germ equality criterion to make all these entries zero.
-The resulting matrices, together with the unique maps involving zero terms, define
-one chain map on an open U containing y. Its stalk image is the conjugate of f
-by the canonical comparison `stalkRestrictionComplexIso` on P and Q.
-For each V contained in U restrict this chain map along the inclusion V -> U.
-Conjugate by the restriction-composition isomorphism to obtain a map between
-P restricted to V and Q restricted to V. The comparison isomorphisms for U and V
-commute with this restriction: replace restriction by pullback, use associativity
-of pullback composition and the equality of both composite maps with the map
-from the stalk. Thus its stalk image is the same conjugate of f for V.
-Zero ranks, zero complexes, and empty support intervals need no matrix entries;
-their maps and equations are the unique ones involving zero objects. -/
+sufficiently small neighbourhood. -/
 theorem exists_restrict_chainMap_of_stalk_eventually
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (a b c e : ℤ)

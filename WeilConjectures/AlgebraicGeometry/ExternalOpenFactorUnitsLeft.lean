@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # The two pullback units under first-factor open base change
 
-Source: Stacks Project, Tags 0096, 0097 and 0BED.
+## References
+
+* Stacks Project, Tags 0096, 0097 and 0BED
 -/
 
 @[expose] public section
@@ -27,17 +29,13 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 variable {k : Type w} [Field k] {X Y : Scheme.{w}}
 
-/-- The open base change in the first factor, constructed by the pullback map.
-Source: Stacks Project, Tag 0BED.
-(blueprint: lem-sc-external-open-factor-units-left). -/
+/-- The open base change in the first factor, constructed by the pullback map (Stacks, Tag 0BED). -/
 def externalOpenBaseChangeLeft (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) (V : X.Opens) :
     Limits.pullback (V.ι ≫ f) g ⟶ Limits.pullback f g :=
   pullback.map (V.ι ≫ f) g f g V.ι (𝟙 Y) (𝟙 _) (by simp) (by simp)
 
-/-- The cartesian open base change is an open immersion.
-Source: Stacks Project, Tag 0BED.
-(blueprint: lem-sc-external-open-factor-units-left). -/
+/-- The cartesian open base change is an open immersion (Stacks, Tag 0BED). -/
 instance externalOpenBaseChangeLeft_isOpenImmersion
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) (V : X.Opens) :
     IsOpenImmersion (externalOpenBaseChangeLeft f g V) := by
@@ -100,23 +98,8 @@ private theorem sectionUnitLinear_bijective {A B : Scheme.{w}}
 
 -- The two mate computations and their sectionwise transports elaborate large module functors.
 /-- The factor comparisons carry the two unit sections to the local unit sections.
-This statement contains no tensor product of coefficients or sections.
-Source: Stacks Project, Tags 0096 and 0097; Tag 0BED, degree-zero restriction.
-(blueprint: lem-sc-external-open-factor-units-left).
-
-Proof: The pullback map b is the base change of the open immersion V into X.
-Its image is p inverse-image V and the inverse image of this open is the
-whole source. The restriction section isomorphism gives eF, with k-linearity
-from the structure morphism V into X into Spec k. For the first factor,
-compare b-star p-star with pV-star V-star by composition of adjunctions,
-then compare V-star F with F restricted to V by uniqueness of left adjoints
-to pushforward. For the second factor compare b-star q-star with qV-star
-using b followed by q equals qV. These construct eM and eN. The unit equation
-for each comparison identifies the composite units with the unit of the
-composite morphism. For the first factor the open restriction unit is eF;
-for the second factor the initial section is unchanged. Naturality of the
-units commutes with the restrictions to the top open, giving the two
-asserted formulas. This uses no nonemptiness or coherence hypotheses. -/
+This statement contains no tensor product of coefficients or sections
+(Stacks, Tags 0096, 0097 and 0BED). -/
 theorem exists_externalOpenFactorUnitsLeft
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) (V : X.Opens) :
