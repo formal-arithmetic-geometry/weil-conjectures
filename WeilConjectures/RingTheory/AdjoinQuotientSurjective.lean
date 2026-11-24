@@ -12,25 +12,20 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Surjectivity of a quotient killing the generators of an adjoin
 
-Source: Stacks Project, Algebra, Tag 0334, Step 5.
-(blueprint: lem-weil-pbc-adjoin-quotient-surjective).
+We show that if an ideal of `Algebra.adjoin R s` contains every generator in `s`, then the
+quotient by it is a quotient of `R`.
+
+## References
+
+* Stacks Project, Tag 0334, Step 5.
 -/
 
 @[expose] public section
 
 universe u v
 
-/-- Killing every generator of an adjoin leaves a quotient of the base ring.
-
-Source: Stacks Project, Algebra, Tag 0334, Step 5, the surjectivity in the
-presentation `R[x]/xR[x] = R/J`, generalized to a set of generators.
-(blueprint: lem-weil-pbc-adjoin-quotient-surjective).
-
-Proof: Lift a quotient class to the adjoin. Induct on its membership in the
-adjoin: a generator maps to zero by hypothesis; a constant lifts to itself;
-sums and products lift by taking sums and products of the chosen constants.
-The empty generating set gives the same constant case, and the zero quotient
-is covered by the same induction. -/
+/-- If an ideal `q` of `Algebra.adjoin R s` contains every element of `s`, then the algebra map
+`R → Algebra.adjoin R s ⧸ q` is surjective. -/
 theorem adjoin_quotient_surjective (R : Type u) (K : Type v)
     [CommRing R] [CommRing K] [Algebra R K] (s : Set K)
     (q : Ideal (Algebra.adjoin R s))

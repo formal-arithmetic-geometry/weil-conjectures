@@ -14,8 +14,20 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # The open-stabilizer right adjoint
 
-Source: Stacks Project, Injectives, Tag 04JF, proof of Lemma 19.3.1
-(blueprint: lem-exc-rg-open-stabilizer-adjoint).
+The inclusion of discrete `R`-linear `G`-modules into all `R[G]`-modules has a right adjoint,
+sending a module to its submodule of elements with open stabilizer.
+
+## Implementation details
+
+The open-stabilizer elements form a submodule: the stabilizer of a sum contains the
+intersection of the two stabilizers, and the stabilizer of a scalar multiple contains the
+original one. Conjugation carries the stabilizer of `x` to that of `g • x`, so this submodule
+is `G`-stable. Monomorphisms are preserved because the kernel of a morphism of discrete modules
+is again discrete.
+
+## References
+
+* [Stacks Project, Tag 04JF](https://stacks.math.columbia.edu/tag/04JF)
 -/
 
 @[expose] public section
@@ -26,8 +38,7 @@ open CategoryTheory
 
 namespace ModuleCat
 
-/-- (blueprint: lem-exc-rg-open-stabilizer-adjoint) Stacks, Tag 04JF.
-The functor forgetting the open-stabilizer condition. -/
+/-- The functor forgetting the open-stabilizer condition. -/
 noncomputable abbrev forgetDiscreteGModule (R : Type u) (G : Type v) [Ring R] [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] :
     Rep.DiscreteContinuousRep.{u, v, w} R G ⥤ Rep.{w} R G :=
@@ -175,26 +186,9 @@ private def openAdjunction (R : Type u) (G : Type v) [Ring R] [Group G]
       ext x
       rfl }
 
-/-- (blueprint: lem-exc-rg-open-stabilizer-adjoint) Stacks, Tag 04JF.
-The full inclusion of discrete `R`-linear `G`-modules in all `R[G]`-modules is fully faithful
-and preserves monomorphisms. The right adjoint sends a module to its open-stabilizer submodule:
-the counit is injective and its image consists exactly of the elements with open stabilizer.
-
-For the proof, morphisms in the full subcategory are precisely the equivariant linear maps.
-For a monomorphism, the kernel of its underlying linear map is a `G`-stable submodule of its
-source, and its elements still have open stabilizers. Its inclusion is therefore a morphism
-in the full subcategory. Monicity makes this inclusion zero, so the underlying map is
-injective and hence monic in the ambient representation category.
-
-The open-stabilizer elements form a submodule: the stabilizer of a sum contains the
-intersection of the two stabilizers, and the stabilizer of a scalar multiple contains the
-original stabilizer. Conjugation carries the stabilizer of `x` to that of `g • x`, so this
-submodule is `G`-stable and inherits the action. Every equivariant map from a discrete
-module lands in this submodule, because it carries stabilizers into stabilizers.
-Restriction and inclusion give inverse natural Hom-set bijections, yielding the adjunction.
-The counit identifies the right adjoint with that submodule and its induced action.
-Injectivity of objects has the meaning of `CategoryTheory.Injective` from
-`def-sp-injective-resolutions`. -/
+/-- The full inclusion of discrete `R`-linear `G`-modules in all `R[G]`-modules is fully faithful
+and preserves monomorphisms. It has a right adjoint whose counit at `M` is injective, with image
+the elements of `M` with open stabilizer. -/
 theorem openStabilizerAdjunction (R : Type u) (G : Type v) [Ring R] [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] :
     (forgetDiscreteGModule.{u, v, w} R G).Full ∧

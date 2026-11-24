@@ -40,6 +40,10 @@ reduced fibres (Stacks `0EY5`) is `AlgebraicGeometry.exists_etaleCover_factoriza
   morphism with geometrically reduced fibres has geometrically reduced fibres.
 - `AlgebraicGeometry.GeometricallyReduced.of_perfectField`: over a perfect field, every reduced
   scheme is geometrically reduced.
+
+## References
+
+* Stacks Project, Tags `01VB` and `056T` (smooth base change, smooth schemes are reduced).
 -/
 
 @[expose] public section
@@ -50,8 +54,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A scheme `X` smooth over a field `K` is reduced: on an affine open cover, the rings of
-sections are smooth `K`-algebras, which are reduced by `Algebra.Smooth.isReduced_of_field`. -/
+/-- A scheme `X` smooth over a field `K` is reduced. -/
 theorem isReduced_of_smooth {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ Spec (.of K))
     [Smooth f] : IsReduced X := by
   have (i : X.affineCover.I₀) : IsReduced (X.affineCover.X i) := by
@@ -63,10 +66,8 @@ theorem isReduced_of_smooth {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ S
     exact (affine_isReduced_iff _).mpr (Algebra.Smooth.isReduced_of_field K _)
   exact IsReduced.of_openCover X X.affineCover
 
-/-- **Smooth morphisms have geometrically reduced fibres** (blueprint
-`sbc-lem-smooth-geometrically-reduced`). For a field `K` and `Spec K ⟶ S`, the base change
-`X ×_S Spec K` is smooth over `Spec K` (Stacks `01VB`), hence reduced (Stacks `056T`, here
-`AlgebraicGeometry.isReduced_of_smooth`). -/
+/-- **Smooth morphisms have geometrically reduced fibres**: for a field `K` and `Spec K ⟶ S`,
+the base change `X ×_S Spec K` is reduced. -/
 instance Smooth.geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     GeometricallyReduced f := by
   rw [geometricallyReduced_iff, geometrically_iff_of_isClosedUnderIsomorphisms]
@@ -74,9 +75,7 @@ instance Smooth.geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f]
   exact isReduced_of_smooth (Limits.pullback.snd f y)
 
 /-- An étale morphism followed by a morphism with geometrically reduced fibres has
-geometrically reduced fibres: for a field `K` and `Spec K ⟶ Z`, the scheme `X ×_Z Spec K` is
-étale over the reduced scheme `Y ×_Z Spec K`, being its base change along `f`, and a scheme
-étale over a reduced scheme is reduced (`AlgebraicGeometry.isReduced_of_etale`). -/
+geometrically reduced fibres. -/
 theorem GeometricallyReduced.comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [Etale f] [GeometricallyReduced g] : GeometricallyReduced (f ≫ g) := by
   rw [geometricallyReduced_iff, geometrically_iff_of_isClosedUnderIsomorphisms]
@@ -93,8 +92,7 @@ theorem GeometricallyReduced.comp_of_etale {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g
   exact isReduced_of_etale l
 
 /-- Over a perfect field `k`, the fibre product of the spectra of two reduced `k`-algebras is
-reduced: it is the spectrum of their tensor product, which is reduced by
-`isReduced_tensorProduct_of_perfectField`. -/
+reduced. -/
 theorem isReduced_pullback_spec_map_of_perfectField {k : Type u} [Field k] [PerfectField k]
     {R S : CommRingCat.{u}} (φ : .of k ⟶ R) (ψ : .of k ⟶ S) [IsReduced (Spec R)]
     [IsReduced (Spec S)] : IsReduced (Limits.pullback (Spec.map φ) (Spec.map ψ)) := by
@@ -104,10 +102,7 @@ theorem isReduced_pullback_spec_map_of_perfectField {k : Type u} [Field k] [Perf
   have := isReduced_tensorProduct_of_perfectField k R S
   exact isReduced_of_isOpenImmersion (pullbackSpecIso k R S).hom
 
-/-- **Over a perfect field every reduced scheme is geometrically reduced.** For a field
-extension `L / k`, the base change `X ×_k L` is covered by the spectra of the tensor products
-`A ⊗[k] L` for affine opens `Spec A` of `X`, which are reduced as `k` is perfect
-(`isReduced_tensorProduct_of_perfectField`). -/
+/-- **Over a perfect field every reduced scheme is geometrically reduced.** -/
 theorem GeometricallyReduced.of_perfectField {k : Type u} [Field k] [PerfectField k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsReduced X] : GeometricallyReduced f := by
   refine ⟨(geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms).2 fun L _ _ ↦ ?_⟩
