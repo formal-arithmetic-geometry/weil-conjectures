@@ -16,8 +16,24 @@ import Mathlib.RingTheory.LocalRing.Module
 /-!
 # Residue-field criteria for finite-projective maps
 
-Source: Stacks Project, Algebra, Tag 00O0, Lemma `cokernel-flat`, parts (1) and (3)
-(blueprint: lem-pc-finite-projective-cokernel-localization).
+A map of finite projective modules that is injective (resp. bijective) on the fiber at a prime
+is, after inverting an element outside the prime, injective with finite projective cokernel
+(resp. bijective).
+
+## Main results
+
+- `Module.finiteProjectiveCokernel_residue_localization`
+
+## Implementation details
+
+The residue-field criterion gives a left inverse over the local ring at the prime. Finite
+presentation of the target clears its denominators, and finiteness of the source clears the
+error in the left-inverse identity, giving a split injection over a principal open. For the
+bijective case, Nakayama makes the local cokernel zero.
+
+## References
+
+- Stacks Project, Algebra, Tag 00O0, parts (1) and (3).
 -/
 
 universe u v w
@@ -99,17 +115,10 @@ private theorem spread_split
   refine ⟨f, (p.primeCompl.mul_mem s.2 t.2), (↑(hs.unit⁻¹) : A) • ψ.baseChange A, ?_⟩
   rw [LinearMap.smul_comp, heq, smul_smul, IsUnit.val_inv_mul, one_smul]
 
-/-- Source: Stacks Project, Algebra, Tag 00O0, Lemma `cokernel-flat`, parts (1) and (3)
-(blueprint: lem-pc-finite-projective-cokernel-localization).
-
-Proof: At the prime, the projective target is finite free. The residue-field
-injectivity criterion gives a left inverse over the local ring. Finite presentation
-of the target clears the denominators of this inverse; finiteness of the source clears
-the error in its identity. Inverting the product gives a split injection. Its cokernel
-is a direct summand of the finite projective target, hence finite projective.
-For the bijective clause, right exactness makes the residue of the local cokernel zero.
-Nakayama makes the local cokernel zero, so the map at the prime is bijective. Finite
-presentation spreads this isomorphism to a principal neighborhood. -/
+/-- Let `φ : P₁ → P₂` be a map of finite projective `R`-modules and `p` a prime of `R`. If `φ`
+is injective after base change to the residue field at `p`, then there is `f ∉ p` such that
+`φ` is injective after inverting `f`, with finite projective cokernel. If `φ` is bijective
+after base change to the residue field, then it is bijective after inverting some `f ∉ p`. -/
 theorem finiteProjectiveCokernel_residue_localization
     {R : Type u} [CommRing R]
     {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁]

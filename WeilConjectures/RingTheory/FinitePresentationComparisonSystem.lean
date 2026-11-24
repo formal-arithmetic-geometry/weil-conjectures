@@ -15,7 +15,25 @@ import Mathlib.RingTheory.FiniteStability
 import WeilConjectures.RingTheory.ComparisonMapFiniteStage
 import WeilConjectures.RingTheory.ComparisonMapBaseChangeSystem
 
-/-! # Descending a comparison map and its filtered pushout system -/
+/-! # Descending a comparison map and its filtered pushout system
+
+A comparison isomorphism over the colimit of a filtered system of rings descends to a filtered
+system of finitely presented comparison maps whose transition squares are pushouts.
+
+## Main results
+
+- `RingHom.exists_finitePresentation_comparison_system`
+
+## Implementation details
+
+The stage maps are not asserted to be bijective: only the comparison maps, not their
+inverses, are descended. The rings of the system are lifted to a common universe, and the
+equivalences `d j`, `c j` record the identification with the tensor products.
+
+## References
+
+- Stacks Project, Algebra, Tag 02JO (3), Tags 00QO and 05N9 (2).
+-/
 
 @[expose] public section
 
@@ -56,39 +74,12 @@ private theorem finitePresentation_tensorMap {R B C T : Type*}
   rw [he]
   exact (RingHom.FinitePresentation.of_bijective e.bijective).comp hincl
 
-/-- The comparison descends as a finitely presented ring map, in a filtered system
-of pushout squares. No stage map is asserted to be bijective.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of the comparison map;
-Tags 00QO and 05N9 (2); tensor base change and cancellation.
-(blueprint: lem-weil-pbc-finite-presentation-comparison-system)
-
-Proof: work in the cofinal upper set of i₀. The systems Aⱼ tensor B₀ and Aⱼ tensor
-C₀ have the indicated tensor colimits: representatives and eventual equality are
-provided by the elementwise base-change lemma. Define the universal ring map
-on representatives; eventual equality makes it well defined, and ring operations
-are checked at common upper bounds. Finite presentation of P over Z
-factors P into one B stage. After restricting to the upper set of that stage,
-transport this structure by transition maps. Composing e with the inclusion of Q
-makes Q a P-algebra map into the limit C ring. Finite presentation of Q over P
-factors this map into a later C stage as a P-algebra map, so compatibility with P
-holds already at that stage. Restrict again
-and denote the starting index by i. For j above i, give Cⱼ its P-structure through
-Bⱼ and the base change of φ₀, and extend the Q map by transition maps.
-The tensor universal property gives ψⱼ : Bⱼ tensor_P Q → Cⱼ, sending b tensor q
-to φⱼ(b) times the chosen image of q. This proves its left-inclusion compatibility.
-These maps commute with transitions by checking pure tensors. Tensor cancellation
-shows each transition square of ψ is a pushout: both sides at a later index are
-base changes along Bⱼ → Bₖ. The target Cⱼ is finitely presented over Bⱼ by base
-change of φ₀; the source is finitely presented over Bⱼ by base change of P → Q.
-The finite-type cancellation theorem therefore makes ψⱼ finitely presented.
-Tensor products commute with the filtered colimit, so the source has colimit
-B tensor_P Q and the target has colimit C. Their colimit comparison is e,
-hence bijective. Lift rings to the common universe if necessary and record the
-canonical ring equivalences dⱼ and cⱼ; these change none of the identities.
-Only the comparison maps, not their inverses, have been descended in this step.
-The construction works for zero rings and empty presentations.
--/
+/-- Given a finitely presented `F.obj i₀`-algebra map `φ₀ : B₀ → C₀`, finitely presented rings
+`ℤ → P → Q`, and an identification `e` of `(colim F ⊗ B₀) ⊗_P Q` with `colim F ⊗ C₀`
+compatible with the base change of `φ₀`, there is an index `i ≥ i₀` and a filtered system of
+finitely presented ring maps `α_j : (F_j ⊗ B₀) ⊗_P Q → F_j ⊗ C₀` over `j ≥ i`, whose
+transition squares are pushouts, which are compatible with the base change of `φ₀`, and whose
+colimit comparison map is bijective. -/
 theorem exists_finitePresentation_comparison_system
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

@@ -14,8 +14,16 @@ import WeilConjectures.RingTheory.CompletionMapBijective
 /-!
 # Flat local maps induce isomorphisms on adic completions
 
-Source: literature/stacks-project/more-algebra.tex, More on Algebra, Lemma Tag 0AGX
-(blueprint: lem-weil-pbc-flat-local-completion-iso)
+A flat local homomorphism `A → B` of Noetherian local rings with `mA B = mB` that induces an
+isomorphism on residue fields induces an isomorphism of adic completions.
+
+## Main results
+
+* `RingHom.flat_local_completion_iso`
+
+## References
+
+* [Stacks Project, Tag 0AGX](https://stacks.math.columbia.edu/tag/0AGX)
 -/
 
 @[expose] public section
@@ -25,25 +33,9 @@ universe u v
 namespace RingHom
 
 /--
-A flat local homomorphism of Noetherian local rings inducing an isomorphism on
-residue fields induces an isomorphism on the corresponding adic completions.
-Source: More on Algebra, Lemma Tag 0AGX (blueprint: lem-weil-pbc-flat-local-completion-iso).
-Proof:
-1. The completions are local with the same residue fields, by
-   `lem-weil-pbc-local-completion-local-ring`.
-2. Since the extended maximal ideal equals that of B, their powers agree after
-   extension. Thus B's completion is also its completion as an A-module.
-3. The residue field has dimension one over A's residue field, so
-   `lem-weil-pbc-finite-after-completion` makes B's completion finite over A's.
-4. Flatness gives vanishing of Tor with the residue field;
-   `lem-weil-pbc-flat-module-completion-flat` makes the completed module flat.
-5. `lem-weil-pbc-finite-flat-local-free` makes this finite flat module free.
-6. By `lem-weil-pbc-adic-completion-mod-ideal` and the local structure from step 1,
-   reduction modulo the maximal ideal identifies its fibre with the residue field.
-   The residue-field isomorphism therefore forces the free rank to be one.
-7. Write 1 = u e in a one-element basis. If u were in the maximal ideal, 1 would
-   reduce to zero in the residue field. Thus u is a unit; 1 is itself a basis,
-   and the induced ring homomorphism is bijective.
+A flat local homomorphism `φ : A → B` of Noetherian local rings with `mA B = mB` that induces
+an isomorphism on residue fields induces an isomorphism of the adic completions, compatible
+with `φ` levelwise and with the canonical maps to the completions.
 -/
 theorem flat_local_completion_iso
     {A : Type u} {B : Type v} [CommRing A] [CommRing B]

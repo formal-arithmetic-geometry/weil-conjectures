@@ -15,8 +15,12 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Completion comparison from fixed quotient bases
 
-Source: Stacks Project, Tag 06LJ(c), using the fixed lifts of Tag 07QM(4).
-(blueprint: lem-sc-fixed-quotient-bases-completion).
+Fixed lifts giving quotient bases modulo each power of an ideal induce an equivalence of
+adic completions.
+
+## References
+
+* Stacks Project, Tag 06LJ(c), using the fixed lifts of Tag 07QM(4).
 -/
 
 @[expose] public section
@@ -74,20 +78,8 @@ private theorem ringCoordinates_mk
     ringCoordinates (A := A) J n (Submodule.Quotient.mk c) =
       Ideal.Quotient.mk (J ^ n) c := rfl
 
-/-- Fixed lifts giving quotient bases induce an equivalence of completions.
-Source: Stacks Project, Tag 06LJ(c), completion identification from Tag 07QM(4).
-(blueprint: lem-sc-fixed-quotient-bases-completion).
-
-Proof: The quotient of the free module by I^n is the finitely supported module
-of coefficients in A/I^n, by the kernel and surjectivity of coefficient reduction.
-Compose this equivalence with the given bases. On representatives these maps all
-send f to the class of the same sum of f i times x i; hence they commute with
-transition maps. The zero-th quotients are zero modules. Apply the equivalences
-coordinatewise to compatible families, and their inverses coordinatewise for the
-inverse map. Compatibility for the inverses follows by injectivity of each forward
-map. The inverse identities and linearity are coordinatewise identities. Evaluation
-at n then gives the asserted formula for every representative f of that coordinate.
--/
+/-- Fixed lifts giving quotient bases induce an equivalence of completions, compatible
+with the given quotient equivalences on each coordinate. -/
 theorem equiv_of_fixed_quotient_bases
     {A : Type u} {C : Type w} [CommRing A] [CommRing C] [Algebra A C]
     (I : Ideal A) (X : Type v) (x : X → C)

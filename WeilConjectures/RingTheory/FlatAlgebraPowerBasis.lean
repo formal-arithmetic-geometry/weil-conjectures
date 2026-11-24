@@ -18,7 +18,12 @@ import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 /-!
 # Lifting a residue basis to a power quotient of a flat algebra
 
-Source: Stacks Project, Tag 07QM(4), using Tags 00HI and 051F.
+Every fixed lift of a residue basis of a flat algebra over a local ring gives a basis modulo
+each positive power of the maximal ideal.
+
+## References
+
+* Stacks Project, Tag 07QM(4), using Tags 00HI and 051F.
 -/
 
 @[expose] public section
@@ -27,20 +32,8 @@ universe u v w
 
 namespace Algebra
 
-/-- Every fixed lift of a residue basis gives a basis modulo each positive power.
-No Noetherianity or finiteness of the basis is required.
-Source: Stacks Project, Tag 07QM(4), proof, using flat base change Tag 00HI and Tag 051F.
-(blueprint: lem-sc-flat-algebra-power-basis).
-
-Proof: Set n = maximalIdeal A, R = A/n^r and M = C/(n^r C).
-For r positive, n^r is contained in n, so R is local with maximal ideal n/n^r,
-whose r-th power is zero. The tensor-quotient equivalence identifies M with
-R tensor_A C. Flat base change therefore makes M flat over R. Its quotient by
-(n/n^r)M is C/nC, and R/(n/n^r) is A/n. Both identifications commute with the
-quotient maps and scalar action. Transport b through these identifications: its
-vectors are the reductions of the specified x. Apply the nilpotent local basis
-criterion to the family of classes of x in M. It returns the requested basis,
-with exactly these values. The argument includes arbitrary index sets and r = 1. -/
+/-- Every fixed lift of a residue basis gives a basis modulo each positive power of the
+maximal ideal. No Noetherianity or finiteness of the basis is required. -/
 theorem flatAlgebra_power_basis
     (A : Type u) (C : Type v) [CommRing A] [IsLocalRing A]
     [CommRing C] [Algebra A C] [Module.Flat A C]

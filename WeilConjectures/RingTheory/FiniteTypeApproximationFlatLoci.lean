@@ -21,8 +21,17 @@ import WeilConjectures.RingTheory.OpenFlatLocus
 
 /-! # Flat loci in a finite-type approximation
 
-Source: Stacks Project, Tag 02JO (1), proof first paragraph and start of second paragraph.
-(blueprint: lem-pc-finite-type-approximation-flat-loci)
+For a flat module over a filtered colimit of finite-type approximations, the flat loci of
+the stages are open, are preserved along transition maps, and cover the limit spectrum.
+
+## Implementation details
+
+The flat locus at a stage is open by Tag 00RC; pointwise covering uses the local flatness
+criterion for colimits (Tag 00R6). No compactness or descent is performed here.
+
+## References
+
+* Stacks Project, Tag 02JO (1), proof first paragraph and start of second paragraph.
 -/
 
 @[expose] public section
@@ -53,31 +62,7 @@ private theorem localized_restrict_eq {R S M : Type*} [CommRing R] [CommRing S]
     rw [LocalizedModule.smul'_mk, LocalizedModule.smul'_mk]
     rfl
 
-/-- Flat loci in a supplied approximation are open, persistent, and cover the limit.
-
-Source: Stacks Project, Tag 02JO (1), proof first paragraph and start of second paragraph.
-(blueprint: lem-pc-finite-type-approximation-flat-loci)
-
-Proof:
-The finite-type integer base rings and their finite-type top rings are Noetherian.
-The top algebras and their finite stage modules are therefore finitely presented.
-For each prime q of S, contract q along the compatible
-maps to B_i and A_i and localize all three diagrams. Localization commutes with
-the ring colimits; fraction representatives and eventual vanishing give the
-module colimit. The canonical transition tensor isomorphisms localize to the
-base-change/localization maps in Tag 00R6. The localized limit module is flat
-over the contracted local base since M is R-flat. Tag 00R6 therefore gives a
-stage flat at the contraction of q over the corresponding localized base. Flatness
-of a module over a localization is equivalent to flatness over the base, so this
-is a point of the flat locus over A_i. Define U_i to be that full flat locus;
-Tag 00RC makes it open. For i <= j and a prime q_j contracting to q_i in U_i,
-the canonical ring and module tensor comparisons identify the later localized
-module with a further localization of A_j tensor_(A_i) (D_i localized at q_i).
-Base change preserves flatness over A_j, and localization of the top-module factor
-preserves it. Thus the inverse image of U_i is contained in U_j. The contracted
-primes found above give the required pointwise cover of the limit spectrum.
-No compactness or unit-relation descent is performed in this theorem.
--/
+/-- Flat loci in a supplied approximation are open, persistent, and cover the limit. -/
 theorem exists_flat_finiteType_approximation_loci
     (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [AddCommGroup M] [Module S M]

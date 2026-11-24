@@ -10,17 +10,29 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.TensorProduct.Finite
 
+/-!
+# Finite suprema of finite normal subalgebras
+
+The supremum of a finite family of finite subalgebras of `K` lying in the integral closure of
+`A` is finite over `A` and lies in the integral closure.
+
+## Main results
+
+- `finite_normal_sup`
+
+## References
+
+- Stacks Project, Algebra, Tag 0333.
+-/
+
 @[expose] public section
 
 universe u v
 
-/-- Finite supremum patching for a finite family of locally normal intermediate algebras.
-Source: Stacks Project, Algebra, Tag 0333, the finite-generation and final localization
-paragraphs. (blueprint: lem-weil-pbc-finite-normal-sup)
-For a finite family of intermediate algebras, their supremum in `Subalgebra A K` is finite
-over `A`, remains inside the integral closure, and its prime localizations are the normal
-localizations supplied by the family.  The algebraic finite-generation and localization
-glue is isolated here so the compactness extraction is independent. -/
+/-- The supremum `S` of a finite family of subalgebras of `K`, each contained in the integral
+closure of `A` and finite over `A`, is again contained in the integral closure and finite over
+`A`; if all prime localizations of `S` are integrally closed, it witnesses the existence of
+such a subalgebra with integrally closed prime localizations. -/
 theorem finite_normal_sup (A : Type u) (K : Type v)
     [CommRing A] [IsDomain A] [IsNoetherianRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

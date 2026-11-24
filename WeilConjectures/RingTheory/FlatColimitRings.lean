@@ -15,8 +15,19 @@ import Mathlib.RingTheory.Flat.EquationalCriterion
 /-!
 # Flatness over a filtered colimit of commutative rings
 
-Source: Stacks Project, Algebra, Tag 05UU (1), with the module equal to the target ring;
-Categories, Tag 0032, for filtered reindexing (blueprint: lem-weil-pbc-colimit-rings-flat).
+A ring map out of a filtered colimit of commutative rings is flat if its composite with every
+coprojection is flat.
+
+## Main results
+
+* `RingHom.flat_of_flat_comp_colimit_ι`
+
+## References
+
+* [Stacks Project, Tag 05UU](https://stacks.math.columbia.edu/tag/05UU) (1), with the module
+  equal to the target ring.
+* [Stacks Project, Tag 0032](https://stacks.math.columbia.edu/tag/0032), for filtered
+  reindexing.
 -/
 
 @[expose] public section
@@ -27,21 +38,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace RingHom
 
-/-- A ring map out of a filtered colimit is flat if its composite with every coprojection
-is flat. Source: Stacks Project, Algebra, Tag 05UU (1), specialized to the target ring,
-and Categories, Tag 0032 (blueprint: lem-weil-pbc-colimit-rings-flat).
-
-Proof:
-1. Apply the equational criterion for flatness (Stacks Tag 00HK): it suffices to
-   trivialize every finite relation in the target module.
-2. Represent its finitely many coefficients at stages of the colimit. Filteredness
-   supplies one common stage; transport the representatives there. Naturality of
-   the coprojections identifies their images with the original coefficients.
-3. The same relation holds in the target viewed as a module over this common stage.
-   Flatness of the composite map trivializes this relation over the stage ring.
-4. Map the resulting coefficient matrix into the colimit. The equations expressing
-   the target elements are unchanged, and the zero coefficient equations map to zero.
-   This trivializes the original relation and proves flatness. -/
+/-- A ring map out of a filtered colimit of commutative rings is flat if its composite with
+every coprojection is flat. -/
 theorem flat_of_flat_comp_colimit_ι {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F] {S : Type v} [CommRing S]
     (ψ : ↥(colimit F) →+* S)

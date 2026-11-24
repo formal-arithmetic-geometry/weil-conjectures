@@ -19,7 +19,20 @@ import WeilConjectures.RingTheory.FiniteModuleSurjectiveModIdeal
 /-!
 # Freeness of a finite projective module detected modulo an ideal
 
-Source: Stacks Project, More on Algebra, Tag 0BC6.
+If `I` is contained in the Jacobson radical of `R` and `P` is a finite projective `R`-module
+whose reduction modulo `I` is free, then `P` is free.
+
+## Implementation details
+
+A basis of the reduction is lifted to a map `f : A → P` from a free module, which is
+surjective by Nakayama. A section `g` of `f` exists by projectivity, `g ∘ f` is surjective
+by Nakayama, hence injective (Orzech property), so `f` is an isomorphism. This is the
+isomorphism-lifting argument of Tag 0BC6, using the splitting instead of a separately
+lifted inverse.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0BC6.
 -/
 
 @[expose] public section
@@ -31,20 +44,7 @@ open scoped TensorProduct
 
 namespace ModuleCat
 
-/-- A finite projective module with free reduction over a Jacobson quotient is free.
-Source: Stacks Project, More on Algebra, Tag 0BC6 (lemma-lift-isomorphism)
-(blueprint: lem-sc-finite-projective-free-mod-ideal).
-
-Proof: Choose a finite basis of the reduction and the free R-module A with the same
-basis index. Lift the resulting map A → P/IP through P → P/IP by projectivity of A.
-The reduced map is the basis isomorphism, so Nakayama makes the lift f : A → P
-surjective. Since P is projective, choose a section g : P → A. Reduction gives
-f̄ ḡ = id, and injectivity of f̄ gives ḡ f̄ = id. Nakayama therefore makes gf
-surjective. A surjective endomorphism of a finite module over a commutative ring is
-injective (the Orzech property). Consequently f is injective, hence bijective, and
-its linear equivalence transfers freeness from A to P. This is the isomorphism-lifting
-argument of Tag 0BC6, using the splitting instead of a separately lifted inverse.
-The zero ring and empty basis cases are included by the same construction. -/
+/-- A finite projective module with free reduction over a Jacobson quotient is free. -/
 theorem free_of_free_extendScalars_mod_ideal
     {R : Type u} [CommRing R] (I : Ideal R)
     (hunits : ∀ x : I, IsUnit (1 + (x : R)))

@@ -15,7 +15,9 @@ import Mathlib.Data.DFinsupp.WellFounded
 /-!
 # Finite length from finitely many nonzero maximal localizations
 
-Source: Stacks Project, Algebra, Tag 00PF, the final local-to-global argument.
+## References
+
+* Stacks Project, Algebra, Tag 00PF.
 -/
 
 @[expose] public section
@@ -24,17 +26,8 @@ universe u v
 
 namespace Module
 
-/-- Finite local lengths and finite maximal support imply finite length.
-Source: Stacks Project, Algebra, Tag 00PF, final paragraph.
-(blueprint: lem-sc-finite-length-finite-maximal-support)
-
-Proof: Send a submodule to the family of its localizations at the finitely many
-maximal ideals in `S`. This map preserves and reflects inclusion: localization
-detects inclusion at all maximal ideals, and the localizations outside `S` are
-zero. Thus the submodule lattice embeds in the finite product of the local
-submodule lattices. Each factor is both Noetherian and Artinian by its finite
-length. The finite product, and hence the embedded lattice, have both ascending
-and descending chain conditions. These two conditions imply finite length. -/
+/-- A module whose localizations at the maximal ideals in a finite set `S` have finite
+length, and whose localizations at all other maximal ideals vanish, has finite length. -/
 theorem length_lt_top_of_finite_maximal_support
     {R : Type u} [CommRing R] {Q : Type v} [AddCommGroup Q] [Module R Q]
     (S : Set (MaximalSpectrum R)) (hS : S.Finite)

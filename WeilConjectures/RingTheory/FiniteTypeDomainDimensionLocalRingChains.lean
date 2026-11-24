@@ -14,15 +14,14 @@ import Mathlib.RingTheory.Spectrum.Prime.RingHom
 import WeilConjectures.RingTheory.PolynomialRingMaximalChainHeightDifference
 import WeilConjectures.RingTheory.PolynomialRingMaximalLocalizationDimension
 
-/-! Common maximal-chain length part of the finite type domain dimension theorem.
+/-! # Maximal prime chains in finite type domains over fields
 
-Source: Stacks Project, Algebra, Lemma Tag 00OS, proof steps 1--6
-(blueprint: lem-weil-pbc-finite-type-domain-dimension-local-ring-chains)
+The Krull dimension of a finite type domain over a field is finite, and every maximal prime
+chain has length equal to it.
 
-Proof: present the domain as a quotient of a polynomial ring over the field.
-Prime correspondence transfers maximal saturated chains to chains between the
-kernel prime and maximal ideals. The polynomial height-difference theorem gives
-their common length, and the same bound identifies it with the Krull dimension.
+## References
+
+* Stacks Project, Algebra, Lemma 00OS.
 -/
 
 @[expose] public section
@@ -136,21 +135,7 @@ private theorem longest_isMaxChain {α : Type*} [PartialOrder α]
     omega
 
 /-- The Krull dimension of a finite type domain over a field is a natural
-number, and every maximal prime chain has that common length.  The proof uses
-the polynomial presentation and the height-difference theorem for maximal
-chains (Steps 1--6 of Tag 00OS).
-
-Proof: choose a finite-variable polynomial presentation. Comap preserves strict
-prime chains, whose lengths are bounded by the height bound in the polynomial
-ring, so the spectrum has finite dimension. A longest chain is maximal: a
-nonminimal head, nonmaximal last, or missing intermediate prime would extend it.
-For any maximal chain, maximality forces its head to be the zero prime, its
-last to be maximal, and its consecutive pairs to be covers. Under prime
-correspondence these become a saturated chain from the presentation kernel to
-a maximal polynomial ideal. The endpoint has height equal to the number of
-variables, so the height-difference theorem gives the same length for every
-maximal chain. Compare with the longest chain, whose length is Krull dimension.
-(blueprint: lem-weil-pbc-finite-type-domain-dimension-local-ring-chains) -/
+number, and every maximal prime chain has that common length. -/
 theorem finiteTypeDomain_ringKrullDim_localizationAtMaximal_chains
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] [IsDomain S] :

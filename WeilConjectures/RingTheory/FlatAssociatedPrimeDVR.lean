@@ -17,8 +17,18 @@ import Mathlib.RingTheory.Flat.TorsionFree
 /-!
 # Associated-prime localizations of a flat algebra with reduced quotient
 
-Source: Stacks Project, Algebra, Tag 032Z, the algebraic argument after reducedness.
-(blueprint: lem-weil-pbc-flat-associated-prime-dvr)
+Let `A` be a flat Noetherian algebra over a Noetherian ring `R` and `p` a prime of `R` with
+`R_p` a discrete valuation ring and `A/pA` reduced. Then `A_q` is a discrete valuation ring
+for every associated prime `q` of `A/pA`.
+
+## Main results
+
+* `AdicCompletion.isDiscreteValuationRing_atPrime_of_flat_reduced_quotient`
+
+## References
+
+* [Stacks Project, Tag 032Z](https://stacks.math.columbia.edu/tag/032Z), the algebraic
+  argument after reducedness.
 -/
 
 @[expose] public section
@@ -164,34 +174,10 @@ private theorem dvr_of_regular_maximal_generator {C : Type*} [CommRing C]
   obtain ⟨v, hv⟩ := hu
   exact ⟨n, v, by simpa [hv, mul_comm] using hbu.symm⟩
 
-/-- The algebraic part of Stacks Project, Algebra, Tag 032Z, after establishing
-Noetherianity, flatness, and reducedness of the quotient. No completion or analytic
-unramifiedness is used in this part.
-(blueprint: lem-weil-pbc-flat-associated-prime-dvr)
-
-Proof: Put B = A/pA and C = A_q. Write q = Ann(z). Properness forces z nonzero.
-Lift z to a in A. Reducedness implies a is outside q, since a in q would give z^2 = 0.
-The ideal pA annihilates B, so pA <= q. For b in q, ba is in pA. The image of a is
-invertible in C; cancelling it gives qC = pC.
-
-For r outside p, its image in the domain R/p is nonzero and hence regular. Flat base
-change makes (R/p) tensor_R A flat over R/p, so multiplication by r on this tensor
-product is injective. The canonical tensor-quotient equivalence identifies it with B.
-Thus r cannot kill z, and q contracts to p.
-
-The induced algebra R_p -> C is flat, by localization and composition of flat maps.
-Transporting the equality qC = pC along the scalar towers identifies the maximal
-ideal of C with the extension of the maximal ideal of R_p. Choose a uniformizer x
-of the DVR R_p. Its image y in C generates the maximal ideal, and flatness preserves
-its regularity.
-
-The ring C is Noetherian and local. Krull intersection says its maximal-ideal powers
-have zero intersection. For a nonzero b, choose N with b outside the Nth power. By
-induction on N, either b is a unit, or b = y*c and c is outside the preceding power.
-This gives b = y^n*u with u a unit. Regularity of y then shows that a product of two
-nonzero elements is nonzero, giving IsDomain C. The element y is nonzero by
-regularity and nontriviality. Since it generates the maximal ideal, it is irreducible.
-The unit-times-power factorization criterion supplies the DVR structure. -/
+/-- Let `R` be a Noetherian ring, `A` a flat Noetherian `R`-algebra and `p` a prime of `R`
+with `R_p` a discrete valuation ring and `A/pA` reduced. If `q` is an associated prime of
+`A/pA`, then `A_q` is a discrete valuation ring (the algebraic part of Stacks Project,
+Tag 032Z). -/
 theorem isDiscreteValuationRing_atPrime_of_flat_reduced_quotient
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     [IsNoetherianRing R] [IsNoetherianRing A] [Module.Flat R A]

@@ -18,8 +18,11 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # A flat stage from a persistent open cover
 
-Source: Stacks Project, Tag 02JO (1), proof paragraphs 2--3.
-(blueprint: lem-pc-finite-type-approximation-flat-stage)
+A persistent open flat cover at a ring colimit yields a stage whose module is globally flat.
+
+## References
+
+* Stacks Project, Tag 02JO (1), paragraphs 2--3 of the proof.
 -/
 
 @[expose] public section
@@ -106,28 +109,7 @@ private theorem ideal_unit_descends
   simpa only [Ideal.map_map, ← CommRingCat.hom_comp, ← F.map_comp,
     Subsingleton.elim (homOfLE hij ≫ f) (homOfLE (hij.trans (leOfHom f)))] using h
 
-/-- A persistent open flat cover at a ring colimit yields a globally flat stage.
-
-Source: Stacks Project, Tag 02JO (1), proof paragraphs 2--3.
-(blueprint: lem-pc-finite-type-approximation-flat-stage)
-
-Proof:
-Pull the supplied open sets U_i back to Spec(S). Cocone naturality and persistence
-make these inverse images a directed open family; the supplied pointwise covering
-and compactness select i whose inverse image is all Spec(S). Write the closed
-complement of U_i as V(J). Its extension to S has empty zero locus, hence equals
-the unit ideal. Induction on ideal-span membership lifts an element of the extended
-ideal to the image ideal at a later stage: generators already come from stage i,
-addition uses a common upper bound, and scalar multiplication lifts the coefficient
-using ring-colimit representatives. Apply this to 1, then descend its equality to 1
-using the eventual-equality criterion for the ring colimit. At this stage J is the
-unit ideal. A prime outside its open set would contract into V(J) and therefore
-contain this unit ideal, a contradiction. Thus every stage prime is in its open
-set and its module localization is flat over its stage base. The maximal-prime
-localization criterion gives the whole module flat. The restricted base action on
-the localization agrees with the localization of the restricted action, checked
-on fractions. This proof also handles empty limit spectra and zero stage rings.
--/
+/-- A persistent open flat cover at a ring colimit yields a globally flat stage. -/
 theorem exists_flat_finiteType_approximation_stage
     {Λ : Type u} [Preorder Λ] [Nonempty Λ] [IsDirected Λ (· ≤ ·)]
     (S : Type u) [CommRing S]

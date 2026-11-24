@@ -15,8 +15,13 @@ import WeilConjectures.Algebra.FlatTorIdealCriterion
 import WeilConjectures.Algebra.TorDimensionShiftFree
 
 /-! # Projective dimension from a Tor bound for finite modules
-Source: Stacks Project, Tags 00M5 and 058R, dimension shifting in Tag 00S2.
-(blueprint: lem-pc-finite-projective-dimension-of-tor-bound)
+
+A finite module over a Noetherian ring whose Tor groups vanish above some bound has
+projective dimension at most that bound.
+
+## References
+
+* Stacks Project, Tags 00M5 and 058R, dimension shifting in Tag 00S2.
 -/
 
 @[expose] public section
@@ -27,15 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- A finite module over a Noetherian ring has projective dimension bounded by its Tor bound.
-Source: Stacks Project, Tags 00M5 and 058R, with dimension shifting as in Tag 00S2.
-Proof: induct on the bound. At zero, Tor with all ideal quotients vanishes, hence the module
-is flat. It is finitely presented by Noetherianity, so it is projective. At a successor bound,
-take a finite free presentation. Its kernel is finite by Noetherianity. Dimension shifting
-reduces its Tor bound by one, and induction bounds its projective dimension. The short exact
-sequence then bounds the projective dimension of the original module by one more.
-(blueprint: lem-pc-finite-projective-dimension-of-tor-bound)
--/
+/-- A finite module over a Noetherian ring has projective dimension bounded by its Tor bound. -/
 theorem finite_hasProjectiveDimensionLE_of_tor_bound
     {R : Type u} [CommRing R] [IsNoetherianRing R]
     (M : ModuleCat.{u} R) [Module.Finite R M] (d : ℕ)

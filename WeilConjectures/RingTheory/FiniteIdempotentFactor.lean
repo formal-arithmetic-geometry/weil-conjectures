@@ -16,8 +16,9 @@ import Mathlib.Tactic.Ring
 /-!
 # Transfer an integral idempotent factor through a localization isomorphism
 
-Source: Stacks Project, Tag 09XI, proof of (5) implies (2), the passage from
-B'₁ to A'₁, and compatibility of the closed-fibre decompositions.
+## References
+
+* Stacks Project, Tag 09XI, proof of (5) implies (2).
 -/
 
 @[expose] public section
@@ -27,12 +28,8 @@ universe u v w
 open Algebra
 
 /-- A finite subalgebra controls the idempotent factor on which the localization
-parameter becomes a unit. The product description specifies the closed fibre.
-
-Source: Stacks Project, Tag 09XI (lemma-characterize-henselian-pair), proof of
-(5) implies (2), the sentence identifying B'₁ with A'₁ and the final compatible
-splitting; the same argument applies to the finite subalgebra B''.
-(blueprint: `lem-weil-pbc-finite-idempotent-factor-transfer`) -/
+parameter becomes a unit: localizing at the idempotent `d` gives an integral algebra whose
+reduction modulo `I` is the factor `A ⧸ I` of the closed fibre. -/
 theorem Subalgebra.isIntegral_and_bijective_quotientMap_away_of_idempotent
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (I : Ideal A) (D : Subalgebra A B) [Module.Finite A D]

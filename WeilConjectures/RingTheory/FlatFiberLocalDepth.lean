@@ -14,8 +14,19 @@ import WeilConjectures.RingTheory.FlatLocalDepthFormula
 /-!
 # Depth formula at a prime of a fibre ring
 
-Source: Stacks Project, Algebra, Tags 0339, 0337, 00ON and Remark 0H9M.
-(blueprint: lem-weil-pbc-flat-fiber-local-depth).
+For a flat map `R → S` of Noetherian rings, a prime `p` of `R` and a prime `Q` of the fibre
+ring over `p` lying over `q` in `S`, we have `depth S_q = depth R_p + depth (p.Fiber S)_Q`.
+
+## Main results
+
+* `RingHom.depth_eq_add_of_flat_fiber`
+
+## References
+
+* [Stacks Project, Tag 0339](https://stacks.math.columbia.edu/tag/0339),
+  [Tag 0337](https://stacks.math.columbia.edu/tag/0337),
+  [Tag 00ON](https://stacks.math.columbia.edu/tag/00ON) and
+  [Remark 0H9M](https://stacks.math.columbia.edu/tag/0H9M).
 -/
 
 @[expose] public section
@@ -54,18 +65,9 @@ private theorem depth_eq_of_ringEquiv {A : Type*} {B : Type*}
   le_antisymm (depth_le_of_ringEquiv e) (depth_le_of_ringEquiv e.symm)
 
 
-/-- Depth splits into a base term and a fibre term for a flat map.
-Source: Stacks Project, Algebra, proof of Tag 0339, Tag 0337 and Remark 0H9M.
-(blueprint: lem-weil-pbc-flat-fiber-local-depth).
-
-Proof: Localize the flat map at p and q = Q.comap includeRight. This is a flat local
-map of Noetherian local rings. Its closed fibre is S_q / p S_q: the image of
-the maximal ideal of R_p equals the image of p, since denominators outside p
-are units. Apply the flat local depth formula (Tag 0337). The fibre local-ring
-isomorphism of Remark 0H9M identifies this quotient with (p.Fiber S)_Q.
-A ring isomorphism carries maximal ideals and regular sequences bijectively,
-preserves their lengths, and therefore preserves the supremum defining depth.
-Substitution in the depth formula gives the assertion. -/
+/-- For a flat map `R → S` of Noetherian rings, a prime `p` of `R` and a prime `Q` of the
+fibre ring `p.Fiber S` lying over `q` in `S`, the depth of `S_q` is the depth of `R_p` plus
+the depth of `(p.Fiber S)_Q`. -/
 theorem depth_eq_add_of_flat_fiber {R : Type u} {S : Type v}
     [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S]
     [Algebra R S] (hflat : (algebraMap R S).Flat)

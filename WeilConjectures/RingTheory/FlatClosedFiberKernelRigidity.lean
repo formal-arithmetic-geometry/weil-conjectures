@@ -14,8 +14,25 @@ import Mathlib.RingTheory.Nakayama
 
 /-! # Kernel rigidity for a flat closed-fibre presentation
 
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), the Nakayama argument
-for the map from the base change of the presentation to the target.
+Given compatible surjections `R → A` and `T → B` of local rings with `T` Noetherian and
+`B` flat over `A`, if the kernel of `T → B` lies in `m_R T`, then it equals `(ker(R → A)) T`,
+so that `B ≅ T ⊗_R A`.
+
+## Main results
+
+* `RingHom.ker_eq_map_of_flat_of_ker_le_maximal`
+
+## Implementation details
+
+The proof passes to `D = T/(ker(R → A))T`, uses flatness of `B` to show that the kernel of
+`D → B` equals its product with `m_A D`, and concludes by Nakayama. It does not require
+flatness of `R → T` or completeness of any ring.
+
+## References
+
+* [Stacks Project, Tag 07NQ](https://stacks.math.columbia.edu/tag/07NQ), proof of (2)
+  implies (3), the Nakayama argument for the map from the base change of the presentation
+  to the target.
 -/
 
 @[expose] public section
@@ -55,21 +72,9 @@ private theorem injective_of_flat_target_of_ker_le
     _ K (IsNoetherian.noetherian K) hK hm
   exact (RingHom.injective_iff_ker_eq_bot g.toRingHom).mpr hzero
 
-/-- A surjective presentation with no extra closed-fibre kernel has only the equations
-coming from the base, provided the target is flat over the base.
-
-Source: Stacks Project, Tag 07NQ, proof of (2) implies (3), the isomorphism
-`T tensor_R A -> B` and its Nakayama proof.
-(blueprint: lem-weil-pbc-flat-closed-fibre-kernel-rigidity)
-
-Proof: Commutativity gives `(ker q)T ≤ ker v`. Put `D = T/(ker q)T` and use the
-surjection q to identify `R/ker q` with A, giving D its A-algebra structure.
-The descended map D -> B is surjective and its kernel is contained in m_A D.
-Flatness of B gives `ker(D -> B) intersect m_A D = m_A ker(D -> B)`.
-Thus the kernel equals its product with m_A D. It is finitely generated over D,
-and m_A D lies in the maximal ideal of the Noetherian local ring D. Nakayama
-kills it. Pulling back along T -> D gives the required kernel equality.
-This does not require flatness of R -> T or completeness of any ring. -/
+/-- Let `q : R → A` and `v : T → B` be surjections and `j : R → T`, `f : A → B` local maps
+with `v ∘ j = f ∘ q`, where `T` is Noetherian local and `B` is flat over `A`. If
+`ker v ⊆ m_R T`, then `ker v = (ker q) T`; that is, `B ≅ T ⊗_R A`. -/
 theorem ker_eq_map_of_flat_of_ker_le_maximal
     {R : Type u} {A : Type v} {T : Type w} {B : Type x}
     [CommRing R] [CommRing A] [CommRing T] [CommRing B]

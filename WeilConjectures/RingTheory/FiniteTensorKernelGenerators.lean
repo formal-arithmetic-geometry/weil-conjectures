@@ -15,8 +15,13 @@ import Mathlib.RingTheory.Noetherian.Basic
 /-!
 # Finite generators of an ideal multiplication kernel
 
-Source: Stacks Project, Algebra, Tag 00R6, finite-generation paragraph.
-(blueprint: lem-weil-pbc-finite-tensor-kernel-generators)
+For a finite module `M` over a Noetherian ring `S` with a map `R → S` from a Noetherian ring
+and an ideal `I` of `R`, the kernel of the multiplication map `M ⊗[R] I → M` is finitely
+generated over `S`.
+
+## References
+
+* Stacks Project, Algebra, Tag 00R6, finite-generation paragraph.
 -/
 
 @[expose] public section
@@ -25,17 +30,7 @@ universe u v w
 open scoped TensorProduct
 namespace RingTheory
 
-/-- The ideal multiplication kernel has finitely many generators over the larger ring.
-Source: Stacks Project, Algebra, Tag 00R6, choosing the generators xi.
-(blueprint: lem-weil-pbc-finite-tensor-kernel-generators)
-
-Proof: Choose finitely many R-generators of I and S-generators of M. Their pure
-products generate M tensor I over S: expand both factors and move R-scalars to
-M through phi. Multiplication is S-linear since S is commutative. Its kernel is
-an S-submodule of this finite module, hence is finite since S is Noetherian.
-Choose a finite generating set of that kernel. Its elements multiply to zero,
-and its S-span is precisely the multiplication kernel. The zero ideal and zero
-module give the empty generating set; no nontriviality assumption is needed. -/
+/-- The ideal multiplication kernel has finitely many generators over the larger ring. -/
 theorem exists_finite_tensor_kernel_generators
     {R : Type u} {S : Type v} {M : Type w}
     [CommRing R] [CommRing S] [AddCommGroup M]

@@ -15,8 +15,18 @@ import WeilConjectures.RingTheory.FiniteKernelScalarExtension
 /-!
 # Finite-rank correction of a square-zero-valued field derivation
 
-Source: Stacks Project, Tag 07FG, differential-basis and Jacobi--Zariski paragraphs.
-(blueprint: lem-weil-pbc-finite-rank-defect-derivation)
+A derivation from `k` into an ideal `I` with `(ker r) * I = 0` agrees, up to an error in the
+`k`-span of finitely many elements of `I`, with the restriction of a derivation `K → I`.
+
+## Implementation details
+
+`I` is a `K`-module via the section `σ0`. Differentials are taken over `ℤ`; middle
+Jacobi–Zariski exactness bounds the kernel of `K ⊗[k] Ω[k/ℤ] → Ω[K/ℤ]` by the image of
+`H1Cotangent k K`, and `LinearMap.exists_extension_finite_error` produces the extension.
+
+## References
+
+* Stacks Project, Tag 07FG, differential-basis and Jacobi–Zariski paragraphs.
 -/
 
 @[expose] public section
@@ -29,29 +39,7 @@ namespace Algebra
 
 set_option linter.unusedVariables false in
 /-- A derivation of `k` into an ideal annihilated by the residue kernel extends to `K`
-up to an error contained in the `k`-span of finitely many elements of the ideal.
-No coefficient subfield or generated subring is involved in this assertion.
-
-Source: Stacks Project, Tag 07FG, from the choice of the differential basis to the
-finite family of values of the corrected derivation.
-(blueprint: lem-weil-pbc-finite-rank-defect-derivation)
-
-Proof:
-1. Use the section to act on `I` by `K`. Since `(ker r) * I = 0`, multiplication
-   by any lift of a residue scalar gives the same action. Compatibility of `r`
-   with `k` identifies its restricted action with the given `k`-action. Package
-   `theta` as an integer-linear derivation into `I` using its product rule.
-2. Work with differentials over `ℤ`. Middle Jacobi--Zariski exactness identifies
-   the kernel of `K ⊗[k] Omega(k/ℤ) → Omega(K/ℤ)` with the image of
-   `H1Cotangent k K`, so this kernel is finite dimensional over `K`.
-3. Apply `LinearMap.exists_extension_finite_error` to the map representing
-   `theta` on `Omega(k/ℤ)`. The helper chooses an arbitrary basis, bounds the
-   kernel's support by a finite set, and extends the prescribed values on the
-   independent complementary images. Compose the resulting `K`-linear map
-   with the universal derivation of `K` to obtain `D` with values in `I`.
-   Naturality and the universal lifting identity identify its finite error with
-   `theta - D|k`. Map the finite family and its `k`-span through the `k`-linear
-   inclusion of `I` into `Λ`. The zero ideal is allowed. -/
+up to an error contained in the `k`-span of finitely many elements of the ideal. -/
 theorem exists_finite_rank_defect_derivation
     (k : Type u) [Field k] (K : Type w) [Field K] [Algebra k K]
     (Λ : Type v) [CommRing Λ] [Algebra k Λ]

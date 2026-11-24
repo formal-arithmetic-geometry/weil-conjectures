@@ -12,17 +12,21 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.RingTheory.FiniteNormalCoverFamily
 import WeilConjectures.RingTheory.FiniteNormalCoverSupNormal
 
+/-!
+# A finite normal cover
+
+## References
+
+* Stacks Project, Algebra, Tag 0333.
+-/
+
 @[expose] public section
 
 universe u v
 
-/-- Finite normal cover extracted from the local normal approximation hypotheses.
-Source: Stacks Project, Algebra, Tag 0333, the compactness patching paragraph.
-(blueprint: lem-weil-pbc-finite-normal-cover)
-The closed non-normal loci attached to the finite intermediate algebras supplied at
-maximal ideals have open complements covering `Spec A`.  Quasi-compactness of `Spec A`
-therefore gives finitely many such algebras.  The resulting finite family is recorded here;
-the topological and localization arguments are postponed to the theorem using this family. -/
+/-- A Noetherian domain that is generically normal and admits, at every maximal ideal, a finite
+integral intermediate algebra normal over it, has a finite family of finite integral
+intermediate algebras whose join is normal. -/
 theorem exists_finite_normal_cover (A : Type u) (K : Type v)
     [CommRing A] [IsDomain A] [IsNoetherianRing A]
     [Field K] [Algebra A K] [IsFractionRing A K]

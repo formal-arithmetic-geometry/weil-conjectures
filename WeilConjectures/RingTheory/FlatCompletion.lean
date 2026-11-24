@@ -19,41 +19,25 @@ import WeilConjectures.RingTheory.Flat.FlatModulePowers
 /-!
 # Flatness of completion along a flat local map
 
-Source: Stacks Project, More on Algebra, Lemma 0C4G (more-algebra-lemma-flat-completion),
-line 10731, the implication from flatness of a local map to flatness of its completions
-(blueprint: lem-weil-pbc-flat-completion).
+A flat local homomorphism of Noetherian local rings induces a flat homomorphism of their
+adic completions.
+
+## Main results
+
+* `flat_adicCompletion_of_flat_local`
+
+## References
+
+* [Stacks Project, Tag 0C4G](https://stacks.math.columbia.edu/tag/0C4G)
 -/
 
 @[expose] public section
 
 universe u v
 
-/-- A flat local homomorphism of Noetherian local rings induces a flat homomorphism
-on adic completions.
-
-The map is characterized levelwise by the maps on quotients, and by compatibility
-with the canonical maps.  Source: Stacks Project, More on Algebra, Lemma 0C4G,
-line 10731 (blueprint: lem-weil-pbc-flat-completion).
-
-Proof:
-1. The canonical map from B to its completion is flat by
-   `lem-weil-pbc-noetherian-completion-flat`. Compose it with the flat map φ using
-   `lem-weil-pbc-flat-ring-map-comp` to make Bhat a flat A-module.
-2. For every positive n, `lem-weil-pbc-flat-module-quotient-flat` makes
-   Bhat / mA ^ n Bhat flat over A / mA ^ n.
-3. By `lem-weil-pbc-local-completion-local-ring`, Ahat has maximal ideal mA Ahat,
-   whose nth power is mA ^ n Ahat. By `lem-weil-pbc-adic-completion-mod-power`,
-   the canonical map identifies A / mA ^ n with Ahat / (mA Ahat) ^ n;
-   finite generation follows from `def-weil-pbc-noetherian-ring`.
-4. The identity φhat.comp ιA = ιB.comp φ identifies (mA Ahat) ^ n Bhat with
-   mA ^ n Bhat and their quotient module structures. Transport the flatness
-   from step 2 along the ring isomorphism of step 3.
-5. Both completions are Noetherian by `lem-weil-pbc-adic-completion-noetherian`.
-   By `lem-weil-pbc-local-completion-local-ring`, Bhat is local with maximal
-   ideal mB Bhat; locality of φ puts mA Bhat inside it. Bhat is finite over
-   itself. Apply `theorem-finite-etale-covers-proper-henselian--2` with R = Ahat, I = mA Ahat,
-   S = Bhat and M = S to conclude φhat.Flat (`def-weil-pbc-flat-ring-map`).
--/
+/-- A flat local homomorphism `φ : A → B` of Noetherian local rings induces a flat
+homomorphism `φhat` of adic completions, characterized levelwise by the induced maps
+`A / mA ^ n → B / mB ^ n` and compatible with the canonical maps to the completions. -/
 theorem flat_adicCompletion_of_flat_local
     (A : Type u) (B : Type v) [CommRing A] [CommRing B]
     [IsLocalRing A] [IsLocalRing B]

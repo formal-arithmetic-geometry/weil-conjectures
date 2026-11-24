@@ -16,9 +16,9 @@ import Mathlib.RingTheory.Finiteness.Basic
 /-!
 # Linear extension with finite error over the smaller field
 
-Source: Stacks Project, Tag 07FG, finite support of the differential kernel and
-extension of the remaining differential images to a basis.
-(blueprint: lem-weil-pbc-finite-kernel-scalar-extension)
+## References
+
+* Stacks Project, Tag 07FG.
 -/
 
 @[expose] public section
@@ -29,25 +29,7 @@ universe u v w x y
 namespace LinearMap
 
 /-- A linear map from the original vector space can be extended through a map on its
-scalar extension, up to an error of finite rank over the original field.
-
-Source: Stacks Project, Tag 07FG, the paragraphs choosing the finite set J0 and
-extending the independent differential images to a basis.
-(blueprint: lem-weil-pbc-finite-kernel-scalar-extension)
-
-Proof: Choose a k-basis b of V. Its scalar extension is a K-basis of K tensor V.
-Choose finitely many generators of the kernel of phi, and let J0 be the union of
-their finite supports in that basis. The kernel is contained in the span of the
-basis elements with indices in J0. The images under phi of the basis elements
-outside J0 are linearly independent: any relation is in the kernel and also in
-the span of the complementary basis elements, so its coefficients vanish.
-Prescribe on these images the values ell(b_j), and extend this linear map to W
-by extending the independent family to a basis and assigning zero on the extra
-vectors. Call the resulting K-linear map g. The k-linear difference on V
-vanishes on b_j outside J0. For each vector, its finite basis expansion therefore
-expresses this difference as a k-linear combination of the finitely many values
-ell(b_j) - g(phi(1 tensor b_j)), j in J0. Take f to be this finite image.
-This works also when V or M is zero or J0 is empty. -/
+scalar extension, up to an error of finite rank over the original field. -/
 theorem exists_extension_finite_error
     (k : Type u) [Field k] (K : Type v) [Field K] [Algebra k K]
     (V : Type w) [AddCommGroup V] [Module k V]

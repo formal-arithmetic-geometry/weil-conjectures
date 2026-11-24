@@ -14,9 +14,18 @@ import Mathlib.RingTheory.Finiteness.Lattice
 
 /-! # Simultaneous finite free surjections after scalar extension
 
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent,
-the finite family of generators before cone-cycle attachment.
-(blueprint: lem-sc-finite-scalar-surjections).
+Finitely many finite scalar extensions of a module are covered by one finite free source.
+
+## Implementation details
+
+For each scalar extension, the second tensor factors of finitely many generators span a
+finite submodule `S_j` of `N`; a finite free surjection onto the sum of the `S_j` works.
+No faithful flatness, unit-ideal hypothesis or global finite generation of `N` is needed.
+
+## References
+
+* Stacks Project, Tag 08EE, proof of Lemma `lift-pseudo-coherent`, the finite family of
+  generators before cone-cycle attachment.
 -/
 
 @[expose] public section
@@ -53,24 +62,9 @@ private theorem finite_submodule_scalar_surjective {A B : Type u}
   obtain ⟨y, hy⟩ := hinc hx
   exact ⟨y, hy⟩
 
-/-- Finitely many finite scalar extensions are covered by one finite free source.
-
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent, choosing the
-finite family before attachment. The same generator argument works for any finite
-family of ring maps, not just localizations.
-(blueprint: lem-sc-finite-scalar-surjections).
-
-Proof: For each scalar extension choose finitely many module generators and expand
-each generator as a finite sum of pure tensors. Collect their second tensor factors
-in a finite submodule S_j of N. The scalar extension of S_j surjects onto that of N,
-since its image contains all the chosen generators. The sum S of the finitely many
-S_j is finite. Choose a finite free surjection onto S and compose it with S → N.
-Extension of scalars preserves epimorphisms, and the scalar-extended inclusion of
-S surjects since it factors the already surjective inclusion of S_j for each j.
-For an empty family S is zero and a rank-zero source suffices. Zero rings and zero
-scalar extensions allow empty generating sets. No faithful flatness or unit-ideal
-hypothesis, and no global finite generation of N, are asserted.
--/
+/-- Given finitely many ring maps `A → B j` and an `A`-module `N` whose scalar extensions are
+all finite, there is a single map from a finite free `A`-module to `N` that becomes surjective
+after each scalar extension. -/
 theorem exists_finiteFree_scalar_surjections (A : Type u) [CommRing A]
     (r : ℕ) (B : Fin r → Type u) [∀ j, CommRing (B j)]
     (f : ∀ j, A →+* B j) (N : ModuleCat.{u} A)

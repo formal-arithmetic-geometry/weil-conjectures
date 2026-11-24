@@ -14,14 +14,14 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-! # Algebras as unions of finite type subalgebras, and fraction fields as colimits
 
-* `Algebra.directed_adjoin_finset_and_iSup_eq_top` (blueprint `lem-kun-algebra-union`): an
+* `Algebra.directed_adjoin_finset_and_iSup_eq_top`: an
   `R`-algebra is the directed union of its finitely generated subalgebras.
 * `Subalgebra.isColimitCocone`: a directed family of subalgebras covering the whole algebra
   is a filtered colimit in `CommRingCat`.
 * `Subalgebra.localizationSubalgebra`: for a subalgebra `S` of a domain `B` and a nonzero
   `g ∈ S`, the copy of `S_g` inside `Frac B`.
-* `Subalgebra.isFiltered_and_isColimit_localizationSubalgebras` (blueprint
-  `lemma-kunneth-finite-direct-image--1`): `Frac B` is the filtered colimit of the `(B_i)_g`.
+* `Subalgebra.isFiltered_and_isColimit_localizationSubalgebras`: `Frac B` is the filtered
+  colimit of the `(B_i)_g`.
 -/
 
 @[expose] public section
@@ -34,11 +34,9 @@ namespace Algebra
 
 variable (R B : Type*) [CommRing R] [CommRing B] [Algebra R B]
 
-/-- Blueprint `lem-kun-algebra-union`: every `R`-algebra `B` is the filtered union of its
-finitely generated `R`-subalgebras `R[s]`, `s` a finite subset of `B`: these are of finite
-type, they form a directed family, and their union is `B`.
-
-Proof: `R[s] ∪ R[t] ⊆ R[s ∪ t]`, and each `b ∈ B` lies in `R[{b}]`. -/
+/-- Every `R`-algebra `B` is the filtered union of its finitely generated `R`-subalgebras
+`R[s]`, `s` a finite subset of `B`: these are of finite type, they form a directed family, and
+their union is `B`. -/
 theorem directed_adjoin_finset_and_iSup_eq_top :
     (∀ s : Finset B, FiniteType R (adjoin R (s : Set B))) ∧
       Directed (· ≤ ·) (fun s : Finset B ↦ adjoin R (s : Set B)) ∧
@@ -199,15 +197,11 @@ theorem exists_mem_localizationSubalgebras {F : Set (Subalgebra K B)}
   refine ⟨_, ⟨S, hS, _, hg, rfl⟩, (mem_localizationSubalgebra S hg _).2 ⟨⟨a, hSaS ha⟩, 1, ?_⟩⟩
   simp
 
-/-- Blueprint `lemma-kunneth-finite-direct-image--1`: let `B` be a domain which is the directed
-union of a set `F` of (finite type) `K`-subalgebras `B_i`. Then `Frac B` is the filtered
-colimit in `CommRingCat` of the subrings `(B_i)_g ⊆ Frac B` (`g ∈ B_i` nonzero), ordered by
-inclusion; each of them is isomorphic to the localization `(B_i)_g`
-(`localizationSubalgebraEquiv`). The index category is small, in the universe of `B`.
-
-Proof: given `(B_i)_g` and `(B_j)_h`, choose `B_k ⊇ B_i, B_j`; then both are contained in
-`(B_k)_{gh}`. Each `(B_i)_g` injects into `Frac B`, and every `a / b ∈ Frac B` lies in
-`(B_i)_b` for `B_i ∋ a, b`. -/
+/-- Let `B` be a domain which is the directed union of a set `F` of (finite type)
+`K`-subalgebras `B_i`. Then `Frac B` is the filtered colimit in `CommRingCat` of the subrings
+`(B_i)_g ⊆ Frac B` (`g ∈ B_i` nonzero), ordered by inclusion; each of them is isomorphic to
+the localization `(B_i)_g` (`localizationSubalgebraEquiv`). The index category is small, in
+the universe of `B`. -/
 theorem isFiltered_and_isColimit_localizationSubalgebras {F : Set (Subalgebra K B)}
     (hF : DirectedOn (· ≤ ·) F) (hcov : ∀ b : B, ∃ S ∈ F, b ∈ S) :
     IsFiltered (localizationSubalgebras F) ∧

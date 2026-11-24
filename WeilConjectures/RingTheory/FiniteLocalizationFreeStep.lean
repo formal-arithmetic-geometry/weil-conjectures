@@ -23,7 +23,9 @@ public import Mathlib.RingTheory.Flat.Localization
 
 /-! # One descending step in a simultaneous finite free approximation
 
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent.
+## References
+
+* Stacks Project, Tag 08EE, proof of the lemma on lifting pseudo-coherent complexes.
 -/
 
 @[expose] public section
@@ -117,29 +119,7 @@ private theorem finite_cone {R : Type u} [CommRing R]
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Adjoin one finite free term to improve a simultaneous approximation by one degree.
-The transition retains the old terms in degrees at least the old cutoff.
-
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent, the descending
-construction (blueprint: lem-sc-finite-localization-free-step).
-
-Proof: Form the cone of alpha. At every specified localization its cohomology vanishes
-in degrees at least n, by the cone exact sequence and the two approximation hypotheses.
-The localized source is a bounded finite free complex. Truncate the bounded above
-finite free model of the localized target to obtain (n-1)-pseudo-coherence. The cone
-pseudo-coherence theorem (Tag 064R) gives (n-1)-pseudo-coherence of the localized cone;
-finite top cohomology (Tag 064S) makes its degree-(n-1) cohomology finite. Exactness
-of localization identifies this cohomology with the scalar extension of global cone
-homology. Finitely many generators in finitely many tensor products involve only
-finitely many global homology elements. Their finite free map to global homology is
-epic after each localization. Lift it to cone cycles by projectivity of its finite
-free source. Define G by retaining F in degrees at least n, adjoining P in n-1,
-and setting all lower terms to zero. The cone coordinates define the new map
-component and the negative of the new differential. The cycle equation proves the
-chain-map and square-zero identities. Inclusion of the old terms defines tau and
-commutes with the maps to M. The cone exact sequence gives the improved approximation.
-Since n-1 <= b, the upper bound is unchanged. For an empty family choose P=0; a zero
-localization contributes no generators. No unit ideal hypothesis is used.
--/
+The transition retains the old terms in degrees at least the old cutoff. -/
 theorem exists_finite_localization_free_step (A : Type u) [CommRing A]
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (r : ℕ) (f : Fin r → A)
     [∀ j : Fin r, HasDerivedCategory.{w} (ModuleCat.{u} (Localization.Away (f j)))]

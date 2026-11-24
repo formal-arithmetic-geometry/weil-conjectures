@@ -26,8 +26,13 @@ import WeilConjectures.RingTheory.FlatModuleAtPrime
 
 /-! # A flat point in a supplied finite-type approximation
 
-Source: Stacks Project, Tag 02JO (1), proof first paragraph and start of second paragraph.
-(blueprint: lem-pc-finite-type-approximation-flat-point)
+At every prime of the limit of a supplied finite-type approximation, a contracted stage module
+is flat over its base.
+
+## References
+
+* Stacks Project, Tag 02JO (1), first paragraph of the proof and start of the second;
+  Tag 00R6.
 -/
 
 @[expose] public section
@@ -42,29 +47,7 @@ set_option autoImplicit false
 namespace Algebra
 
 set_option backward.isDefEq.respectTransparency false in
-/-- At every prime of the limit, a contracted stage module is flat over its base.
-
-Source: Stacks Project, Algebra, Tag 02JO (1), first paragraph, and Tag 00R6.
-(blueprint: lem-pc-finite-type-approximation-flat-point)
-
-Proof:
-1. Construct the contracted ring diagrams and the localized module diagram using
-   the explicit fraction maps in LocalizedApproximationColimits. Their functor laws
-   and semilinearity are proved there; the localized stage squares commute.
-2. Finite type over the integers makes A_i Noetherian, and finite type over A_i
-   makes B_i Noetherian. Localization preserves Noetherianness and finite modules.
-   All localized ring maps are local homomorphisms by localRingHom.
-3. localized_approximation_colimits identifies the canonical localized colimits
-   and their scalar actions, including flatness over the localized limit base.
-   localizedModule_atPrime_of_flat supplies this flatness from the given R-flatness.
-4. localized_approximation_baseChange supplies the localized ring localization
-   and module tensor equivalence hypotheses. Apply RingTheory.exists_flat_stage
-   with these data to obtain flatness over a contracted localized stage base.
-5. The fraction formula for localRingHom proves that restriction along A_i to
-   its localization agrees with the specified A_i to B_i action on the localized
-   stage module. Module.flat_iff_of_isLocalization returns flatness over A_i.
-   The two tensor hypotheses for base change to the limit are not needed.
--/
+/-- At every prime of the limit, a contracted stage module is flat over its base. -/
 theorem exists_flat_finiteType_approximation_point
     (R S : Type u) (M : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [AddCommGroup M] [Module S M]
