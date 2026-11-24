@@ -10,8 +10,10 @@ public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexi
 /-! # Isomorphisms identifying the source-shift Hom models
 
 These are composites of the recorded localization and Hom model isomorphisms.
-Source: Stacks 0A8X, 08JA; blueprint dual-Tate compatibility, Step 4.
-(blueprint: def-pod-reindexing-source-model-factors)
+
+## References
+
+* Stacks Project, Tags 0A8X, 08JA
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +29,7 @@ namespace WeilConjectures.PodReindexingCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The source model and the localization source-shift comparison.
-Source: Stacks 0A8X and 08JA.
-(blueprint: def-pod-reindexing-source-model-factors) -/
+/-- The source model and the localization source-shift comparison. -/
 def sourceModelInput
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
@@ -46,9 +46,7 @@ def sourceModelInput
         (((DerivedCategory.Q.commShiftIso a).app P).symm.op.prod
           (Iso.refl ((podReindexingQ l E Y s).obj I))))
 
-/-- The target model isomorphism, shifted by the negative source degree.
-Source: Stacks 0A8X and 08JA.
-(blueprint: def-pod-reindexing-source-model-factors) -/
+/-- The target model isomorphism, shifted by the negative source degree. -/
 def sourceModelOutput
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)

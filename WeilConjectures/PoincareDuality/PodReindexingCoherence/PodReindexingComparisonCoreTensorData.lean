@@ -12,8 +12,19 @@ import all WeilConjectures.AlgebraicGeometry.Iso.IsoSectionwiseInverseImage
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 
-/-! Tensor-side component data for the core reindexing comparison.
-(blueprint: lem-pod-reindexing-comparison-core-tensor-data).
+/-! # Tensor-side data for the core reindexing comparison
+
+We construct the tensor-side component data for the core reindexing comparison along an
+isomorphism of schemes.
+
+## Main statements
+
+* `comparison_core_tensor_data_exists`: the tensor-side fields can be chosen simultaneously.
+
+## References
+
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -187,10 +198,8 @@ structure ComparisonCoreTensorData {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     ((podReindexingDerivedFunctor l E g s).prod (podReindexingDerivedFunctor l E g s)) ⋙
       SX.tensor
 
-/-- The tensor-side fields can be chosen simultaneously.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 03EL and 07A4
-(blueprint: lem-pod-reindexing-comparison-core-tensor-data).
--/
+/-- The tensor-side fields of the core reindexing comparison can be chosen simultaneously:
+`ComparisonCoreTensorData` is nonempty. -/
 theorem comparison_core_tensor_data_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

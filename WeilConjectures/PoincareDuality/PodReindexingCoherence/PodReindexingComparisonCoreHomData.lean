@@ -8,8 +8,11 @@ module
 public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 import WeilConjectures.CategoryTheory.Ringed.Sheaf.RingedSheafHomComplexComparison
 
-/-! Hom-side component data for the core reindexing comparison.
-(blueprint: lem-pod-reindexing-comparison-core-hom-data).
+/-! # Hom-side component data for the core reindexing comparison
+
+## References
+
+* Stacks Project, Tags 0A8X, 0GMX
 -/
 
 @[expose] public noncomputable section
@@ -63,10 +66,7 @@ structure ComparisonCoreHomData {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (((podReindexingDerivedFactors l E g s).app P).op.prod
           ((podReindexingDerivedFactors l E g s).app I).symm)).hom
 
-/-- The Hom-side fields can be chosen simultaneously.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 0GMX and 0A8X
-(blueprint: lem-pod-reindexing-comparison-core-hom-data).
--/
+/-- The Hom-side fields can be chosen simultaneously. -/
 theorem comparison_core_hom_data_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
