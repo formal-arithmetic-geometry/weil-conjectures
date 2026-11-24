@@ -80,7 +80,6 @@ operation models whose calculi, completion augmentations, Roos models and pullba
 are those of `D`, whose tensor realizations match the integral tensor models, whose pullback
 comparison recovers `D.limit`, and which satisfies the expression laws together with
 `T.Model` and `T.Canonical`. -/
-
 def PodReindexSubstitution {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

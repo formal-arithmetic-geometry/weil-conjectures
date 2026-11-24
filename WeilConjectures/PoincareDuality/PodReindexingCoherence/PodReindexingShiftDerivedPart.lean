@@ -54,7 +54,6 @@ def DerivedShiftPart {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         (c.derived.hom.app (op M, N))⟦b-a⟧'
 
 /-- Every reindexing comparison `c` satisfies the derived shift square `DerivedShiftPart`. -/
-
 theorem derived_shift_part {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

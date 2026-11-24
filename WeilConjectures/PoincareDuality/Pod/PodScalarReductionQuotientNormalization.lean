@@ -150,7 +150,6 @@ private theorem scalar_quotient_unit_ext (W : Scheme.{u})
 /-- On a good complex `P`, the scalar reduction counit `podScalarReduction` is the ordinary
 balanced quotient comparison: it agrees with `DL.reductionComparison` followed by the inverse of
 the scalar-normalized comparison `α`, up to the reduction comparison of `DE`. -/
-
 theorem podScalarReduction_quotient_normalization (W : Scheme.{u})
     (ρ : IntegralComparisonRoosModel l L W)
     (S : IntegralComparisonScalarModel l E L ι W (podReindexCalculus l E W) ρ)

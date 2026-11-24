@@ -35,7 +35,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 The normalized tensor and Hom comparison data `Comparison` exists for reindexing along a scheme
 isomorphism `g`, before the evaluation equation is imposed.
 -/
-
 theorem comparison_core_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

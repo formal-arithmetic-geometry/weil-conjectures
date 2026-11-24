@@ -373,7 +373,6 @@ attribute [local irreducible] siteId
 
 /-- The canonical identity comparison for reindexing along `𝟙 X`, specified by restriction and
 localization. -/
-
 structure Identity (X : Scheme.{u}) (s : Option ℕ) where
   /-- Ordinary identity pullback comparison. -/
   ordinary : podReindexingFunctor l E (𝟙 X) s ≅ 𝟭 (podReindexingModules l E X s)
