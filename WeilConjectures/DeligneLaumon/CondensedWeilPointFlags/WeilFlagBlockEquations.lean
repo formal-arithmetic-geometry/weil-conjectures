@@ -9,9 +9,9 @@ public import Mathlib.LinearAlgebra.Matrix.Block
 
 /-! # The coordinate equations of a triangular Weil flag
 
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-block-equations).
+For an upper triangular matrix, the coordinate inclusion and last-coordinate projection
+intertwine successive leading blocks. This is used in the dimension-zero Jordan filtration
+step of the proof that real mixed sheaves are detected by curves.
 -/
 
 @[expose] public section
@@ -20,16 +20,7 @@ universe u
 namespace WeilConjectures.CondensedWeilPointFlags
 
 /-- Coordinate inclusion intertwines successive leading blocks, and last-coordinate
-projection intertwines the larger block with its final diagonal scalar.
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-block-equations).
-
-Proof: multiplying by the inclusion selects the first columns. On a nonfinal row the
-result agrees with the smaller block; on the final row its entries vanish by upper
-triangularity. Multiplying by the projection selects the last row, all of whose entries
-except the last vanish. The remaining entry is the specified diagonal scalar.
-The argument includes the rank-zero smaller block. -/
+projection intertwines the larger block with its final diagonal scalar. -/
 theorem leading_block_equations {K : Type u} [Field K] {d : ℕ}
     (C : Matrix (Fin d) (Fin d) K) (hC : C.IsUpperTriangular) (j : Fin d) :
     let Cj := C.submatrix (Fin.castLE (Nat.le_of_lt j.isLt))

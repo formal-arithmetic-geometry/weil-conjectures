@@ -14,8 +14,22 @@ import Mathlib.Algebra.Module.ZMod
 
 /-! # Ordinary locally constant evaluation on a torsor
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Example
-constant-sheaf and Tags 04TR and 04TS. Fixed-cover adaptation to arbitrary modules.
+For a sheaf trivialized by a connected torsor, sections over `W` can be read as locally
+constant functions on `W ×_V c.P` with values in the sections over the torsor, naturally in `W`
+and normalized on the diagonal.
+
+## Implementation details
+
+Inverse image along the étale map `c.P → V` is identified with restriction to the small étale
+site of `c.P`, where the trivialized sheaf becomes the sheaf of continuous (locally constant)
+`A`-valued functions. Connectedness of `c.P` identifies `A` with `F(c.P)`. The evaluation of a
+section over `W` is its restriction to `W ×_V c.P` read through these identifications. Additive
+maps between `ULift (ZMod ℓ)`-modules are automatically linear. No equivariance is imposed.
+
+## References
+
+* [Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS], adapted to a fixed cover and
+  arbitrary modules.
 -/
 
 @[expose] public section
@@ -34,27 +48,9 @@ private def uliftZModLinear {ℓ : ℕ} {M N : Type*} [AddCommGroup M] [AddCommG
     let : Module (ZMod ℓ) N := Module.compHom N ULift.ringEquiv.symm.toRingHom
     exact ZMod.map_smul f r.down x
 
-/-- Ordinary evaluation exists without imposing deck equivariance.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R; sites.tex, Example
-constant-sheaf and Tags 04TR and 04TS. Fixed-cover adaptation to arbitrary modules.
-(blueprint: lem-weil-pbc-torsor-ordinary-evaluation)
-
-Proof: For the etale map Y to V, inverse image identifies with restriction to
-Y's small etale site. Under the supplied trivialization, a section over an etale
-Y-object U is a locally constant A-valued function on U: constant presheaf sections
-are locally constant sections, and sheafification glues these on etale covers.
-Etale maps are open, so the glued constant labels give locally constant functions
-on the underlying space. Conversely their open fibres give the required gluing.
-These identifications preserve addition, scalars, and restriction. Since Y is
-nonempty and connected, evaluation identifies the global sections of this constant
-sheaf with A. Invert this isomorphism to identify A with F(Y); under this identification
-a global section x restricts to the constant function with value x. For each W,
-restrict s to U=W times_V Y, considered over Y, and read it as a locally constant
-F(Y)-valued function. This defines the linear map beta_W. Restriction along W' to W
-commutes with this construction, giving the naturality equation. For W=Y, restriction
-along the diagonal is the original section s, giving the diagonal equation. The
-empty object has the unique zero function; the construction also covers zero
-coefficients and the identity torsor. No equivariance is imposed at this step. -/
+/-- There is a linear evaluation `β` of sections of `F` as locally constant functions on the
+pulled-back torsor with values in `F(c.P)`, natural in the étale object and such that a
+section `s` over `c.P` takes the value `s` on the diagonal. No deck equivariance is imposed. -/
 theorem Scheme.GaloisCover.exists_ordinarySectionEvaluation
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]
