@@ -57,10 +57,8 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   [PreservesFiniteColimits (isoReductionIntegralInverse l E g)]
 
 -- Keep sharing in the dependent coefficient-category expressions.
-/-- The right-slot target path formula, proved from its model law.
-Use the arbitrary-presentation path calculation and shift-presentation naturality.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-shift-right-target-path-t5). -/
+/-- The right-slot target path formula for the tensor-shift comparison, for a lawful
+completed tensor reindexing and signed tensor shifts whose target shift has a model. -/
 theorem podTensorShift_rightTargetPath
     (D : PodCompletionReindex l E g) (_hD : PodCompletionReindex.Laws l E g D)
     (T : PodCompletedTensorReindex l E g D) (hT : PodCompletedTensorReindex.Laws l E g D T)

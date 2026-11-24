@@ -9,7 +9,19 @@ public import WeilConjectures.PoincareDuality.Pod.PodCompletionReindexShifts
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLevelReduction
 import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorShiftStrictTowerRightGenerator
 
-/-! # Right strict tensor-shift square -/
+/-! # Right strict tensor-shift square
+
+## Implementation details
+
+The square is precomposed with the inverse normalized tensor comparison and evaluated at a
+quotient and a degree; finite tensor extensionality reduces it to unit reduction generators,
+where `podTensorShift_strictTowerRightGenerator` applies. Integer degree transport identifies
+the outputs, and in the right slot additivity transports the Koszul sign `(-1)^(pr)`.
+
+## References
+
+* [Stacks, Tags 011G, 07A4]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -55,18 +67,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 -- Keep the original tower interface while reducing to the generator calculation.
-/-- The right tensor-shift square commutes on the entire strict quotient tower.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-shift-strict-tower-right-square-t6).
-
-Precompose with the inverse normalized tensor comparison and evaluate at a quotient
-and a degree. Finite tensor extensionality tests unit reduction generators. The
-quotient normalization computes their images, then the inverse tensor normalization,
-the signed shift laws, and the forward tensor normalization compute the left path.
-The finite tensor map law and the identity components of termwise reindexing with
-shift compute the right path. Integer degree transport identifies the outputs.
-For the right slot, additivity transports the common Koszul sign (-1)^(pr).
-These identities apply for every integer shift, including zero and negative shifts. -/
+/-- The right tensor-shift square commutes on the entire strict quotient tower, for every
+integer shift. -/
 theorem podTensorShift_strictTowerRightSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

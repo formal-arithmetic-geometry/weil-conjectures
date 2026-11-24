@@ -10,8 +10,12 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRoosRepresentativeSqu
 
 /-! # One strict tensor tower and its canonical completed representative square
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-tensor-roos-representative-square).
+The canonical completed pullback/tensor comparison is realized by a single normalized strict
+finite tensor tower arrow.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -43,30 +47,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The canonical completed comparison is the realization of one normalized strict
-finite tensor tower arrow, before comparison with any chosen derived tensor family.
-
-Source: blueprint theorem-poincare-duality-frobenius--2 Steps 1 and 5; Stacks 07A4
-and 0941 (blueprint: lem-pod-tensor-roos-representative-square).
-
-Proof: on each quotient, the generator formula identifies τ with the balanced
-pullback/tensor comparison conjugated by D.quotient for P and Q. Sheafified pure
-tensor extensionality and coproduct extensionality give equality of the chain maps.
-Because τ is a morphism of entire towers, these equalities respect every transition.
-D.RoosFst and D.RoosSnd then identify the two coordinates of its realization.
-Localize this equality and apply D.FiniteModel and D.LimitModel to the coherent
-reduction system. Use pullbackTensorIntegralTensorNormalization to replace each
-completed-tensor representative by its specified coherent tensor/Roos model.
-In these coordinates pullbackTensorReferenceComparison is the limit of pullback
-of the tensor counit, followed by the system tensor comparison, followed by the
-tensor of the two inverse input counits. D.Unit and D.Counit transport these actual
-whole-system maps; their adjunction identities cancel the input counits. This gives
-the canonical completed tensor arrow. D.PullbackNormalization
-fixes its ordinary-to-completed comparison. Transport the two input representatives
-back along mapDerivedCategoryFactors; the resulting equality is the displayed
-square. This calculation uses only one pair of representatives and one tower map,
-and makes no assertion about an independently chosen derived tensor family.
-Zero representatives and the empty scheme give the same zero-map identities.
--/
+finite tensor tower arrow, before comparison with any chosen derived tensor family. -/
 theorem podTensorRoosRepresentativeSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

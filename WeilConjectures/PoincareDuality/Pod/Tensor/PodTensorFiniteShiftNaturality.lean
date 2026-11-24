@@ -9,6 +9,17 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorFiniteSignedSh
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorShift
 
 /-! # Naturality of the finite signed tensor shift comparisons
+
+## Implementation details
+
+The native tensor shift in each variable (Mathlib's `mapBifunctorShift₁Iso` and
+`mapBifunctorShift₂Iso`) is packaged as a natural isomorphism on pairs and whiskered with
+ordinary coefficient reduction and scalar restriction. The resulting components are
+definitionally the specified finite shifts, so their naturality equations are the desired ones.
+
+## References
+
+* [Stacks, Tags 011G, 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -171,15 +182,7 @@ private theorem finiteTensorShift_right (W : Scheme.{u}) (n : ℕ)
 attribute [local irreducible] finiteTensorShift podTensorFiniteShiftLeft podTensorFiniteShiftRight
   integralOperationsTensorLevel
 
-/-- The fixed finite tensor shift maps are natural in both input complexes.
-Source: Mathlib's `mapBifunctorShift₁Iso` and `mapBifunctorShift₂Iso`, their
-naturality lemmas, and Stacks 011G and 07A4.
-(blueprint: lem-pod-tensor-finite-shift-naturality).
-
-Proof: package the native tensor shift in each variable as a natural isomorphism
-on pairs. Whisker with ordinary coefficient reduction and scalar restriction,
-using their shift comparisons. The resulting components are definitionally the
-specified finite shifts, so their naturality equations are the desired ones. -/
+/-- The fixed finite tensor shift maps are natural in both input complexes. -/
 theorem podTensorFiniteShift_naturality (W : Scheme.{u}) (n : ℕ)
     {P Q : CochainComplex (integralTowerModules l E W) ℤ ×
       CochainComplex (integralTowerModules l E W) ℤ} (f : P ⟶ Q) (r : ℤ) :

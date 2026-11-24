@@ -8,7 +8,21 @@ module
 public import WeilConjectures.PoincareDuality.Pod.PodCompletionReindexShifts
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLevelTower
 
-/-! # Right tensor-shift calculation on generators -/
+/-! # Right tensor-shift calculation on generators
+
+## Implementation details
+
+The inverse tensor normalization reduces the input to a tensor on `Y`. Quotient normalization
+sends `1 ⊗ x` to `1 ⊗ x` because the coefficient ring map preserves `1`. The `Y` shift
+normalization and forward tensor normalization compute one image; the finite tensor map law,
+identity components of the termwise shift comparison, and the `X` shift normalization compute
+the other. Integer degree transport identifies the total degrees; in the right slot,
+additivity transports the sign `(-1)^(pr)`.
+
+## References
+
+* [Stacks, Tags 011G, 07A4]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -96,17 +110,8 @@ private theorem tensor_map_unit_section (W : Scheme.{u}) (n : ℕ)
     (finite_reduction_map_section l E W n (b.f q) U y)
 
 -- The tensor and restricted-scalar section types require substantial elaboration.
-/-- The right square agrees on every unit reduction tensor generator.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-shift-strict-tower-right-generator-t6).
-
-The inverse tensor normalization reduces the input to a tensor on Y. Quotient
-normalization sends 1 tensor x to 1 tensor x because the coefficient ring map
-preserves 1. The Y shift normalization and forward tensor normalization compute
-one image. The finite tensor map law, identity components of the termwise shift
-comparison, and X shift normalization compute the other. Integer degree transport
-identifies the total degrees; in the right slot, additivity transports (-1)^(pr).
-Thus the two images agree for every integer shift and every pair of sections. -/
+/-- The right square agrees on every unit reduction tensor generator, for every integer
+shift and every pair of sections. -/
 theorem podTensorShift_strictTowerRightGenerator
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
