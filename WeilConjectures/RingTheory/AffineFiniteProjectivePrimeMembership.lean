@@ -15,8 +15,9 @@ import Mathlib.RingTheory.Localization.Module
 
 /-! # Prime membership in a finite projective module is detected at the prime localization
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00NX
-(blueprint: lem-sc-affine-finite-projective-prime-membership)
+## References
+
+* Stacks Project, Algebra, Lemma 00NX.
 -/
 
 @[expose] public section
@@ -24,23 +25,10 @@ Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00NX
 universe u v
 namespace Module
 
-/-- Prime membership in a finite projective module is detected at the prime localization.
-
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00NX
-(blueprint: lem-sc-affine-finite-projective-prime-membership)
-Here `R_p = Localization.AtPrime p` [def-weil-pbc-localization-at-prime] and
-`N_p = LocalizedModule p.primeCompl N` [def-weil-pbc-module-localization]; `pN_p` is the
-extension of `p` to `R_p` acting on `N_p`, and `pN` is `p • ⊤`.
-Proof. Step 1: since `N` is finite, choose a surjection `π : R^n → N`; the lifting clause
-of [def-weil-pbc-projective-module] lifts `id_N` along `π`, giving `i : N → R^n` with
-`π ∘ i = id_N`. Mathlib's `Finite.exists_comp_eq_id_of_projective` supplies these maps.
-Localizing `i` at `p` [def-weil-pbc-module-localization] and extending scalars gives
-an `R_p`-linear map `i_p` sending `s/1` to `i(s)/1`.
-Step 2: if `s/1 ∈ pN_p`, applying `i_p` gives
-`i(s)/1 ∈ p(R^n)_p`; by [lem-sc-free-prime-membership] `i(s) ∈ pR^n`, and applying `π`
-gives `s = π(i(s)) ∈ pN`. Conversely, if `s ∈ pN`, the canonical localization map sends
-this relation to `s/1 ∈ pN_p`.
--/
+/-- Let `N` be a finite projective `R`-module and `p` a prime ideal of `R`. An element
+`s : N` lies in `pN = p • ⊤` if and only if its image `s/1` in `N_p` lies in `pN_p`, where
+`N_p = LocalizedModule p.primeCompl N` and `pN_p` is the extension of `p` to
+`Localization.AtPrime p` acting on `N_p`. -/
 theorem prime_mem_localized_iff
     {R : Type u} [CommRing R] {N : Type v} [AddCommGroup N] [Module R N]
     [Module.Finite R N] [Module.Projective R N] (s : N) (p : Ideal R) [p.IsPrime] :

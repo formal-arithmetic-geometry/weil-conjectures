@@ -21,8 +21,6 @@ For the symmetric braiding of `ModuleCat R`, the categorical trace
 `CategoryTheory.MonoidalCategory.trace` of an endomorphism `f` of a finite free module `M` is the
 usual trace `LinearMap.trace R M f`, as an element of `End (𝟙_ (ModuleCat R))`
 (`ModuleCat.trace_eq_algebraMap_linearMapTrace`). This holds for any right dual of `M`.
-
-This is used for blueprint `proposition-properties-trace` and `proposition-properties-trace--4`.
 -/
 
 @[expose] public section

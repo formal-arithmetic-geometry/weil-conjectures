@@ -14,9 +14,11 @@ public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 
 /-!
-# Blueprint statements
+# Primary filtrations of finite discrete modules
 
-theorem-cohomology-curves.
+For a profinite group `G` and a finite discrete `G`-module `M` which is an `ℓ`-group, we find an
+open subgroup of index prime to `ℓ` and a filtration of `M` stable under it, with successive
+quotients killed by `ℓ` and with trivial action.
 -/
 
 @[expose] public section
@@ -25,7 +27,9 @@ universe u v
 
 namespace Rep
 
-/-- Blueprint: theorem-cohomology-curves. -/
+/-- If `M` is a finite discrete `G`-module which is an `ℓ`-group, there is an open subgroup
+`H ≤ G` of index prime to `ℓ` and an `H`-stable filtration `0 = F 0 ≤ ⋯ ≤ F n = M` whose
+successive quotients are killed by `ℓ` and have trivial `H`-action. -/
 theorem exists_openSubgroup_primary_module_filtration
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

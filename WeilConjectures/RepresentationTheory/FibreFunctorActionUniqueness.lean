@@ -11,8 +11,14 @@ public import Mathlib.Algebra.Group.TypeTags.Basic
 
 /-! # Comparing representation functors on a common additive fibre
 
-Source: the ordinary intertwiner and scalar-linearity argument for a fibre functor.
-(blueprint: lem-dl-a1-fibre-action-comparison).
+Two functors to representations of a group `W` whose underlying additive fibre functors are
+identified with a common functor `H` are isomorphic, provided the identifications are compatible
+with scalars and with the actions of `W`. When `W` has a degree map to `ℤ`, compatibility of the
+actions can be checked on the geometric kernel and on elements of positive degree.
+
+## References
+
+* [P. Deligne, *La conjecture de Weil. II*, (1.1.10)]
 -/
 
 @[expose] public noncomputable section
@@ -21,13 +27,9 @@ universe uC vC uR uV uW
 open CategoryTheory
 namespace Representation
 
-/-- Agreement of two transported actions in nonnegative degree implies agreement everywhere.
-Source: the inverse identity for a group representation.
-(blueprint: lem-dl-a1-fibre-action-comparison).
-
-Proof: negative-degree elements have positive-degree inverses. Apply the given
-identity to the inverse, the moved first vector, and its unique matching second
-vector. Cancel the inverse actions using their group law. -/
+/-- Let `β : V → B` and `γ : U → B` with `γ` bijective, and `d : W → ℤ` a degree homomorphism.
+If `β v = γ u` implies `β (ρ w v) = γ (σ w u)` for all `w` of nonnegative degree, then the same
+holds for all `w ∈ W`. -/
 theorem fibre_action_of_nonnegative
     {R : Type uR} [Semiring R] {W : Type uW} [Group W]
     {V U : Type uV} [AddCommMonoid V] [AddCommMonoid U] [Module R V] [Module R U]
@@ -52,13 +54,9 @@ theorem fibre_action_of_nonnegative
     rw [hu, ← Module.End.mul_apply, ← map_mul, mul_inv_cancel, map_one]
     exact hz.symm
 
-/-- Geometric-kernel and positive-return formulas determine the transported action.
-Source: Weil II (1.1.10), generation by the degree kernel and positive elements.
-(blueprint: lem-dl-a1-fibre-action-comparison).
-
-Proof: degree zero means membership in the geometric image. A strictly positive
-integer is uniquely n+1 for a natural n. Apply these two formulas in nonnegative
-degree, then use inversion for negative degree. No degree-one lift is assumed. -/
+/-- Let `β : V → B` and `γ : U → B` with `γ` bijective, `d : W → ℤ` a degree homomorphism, and
+`j : P → W` with image the kernel of `d`. If `β v = γ u` implies `β (ρ w v) = γ (σ w u)` for all
+`w` in the image of `j` and for all `w` of positive degree, then it holds for all `w ∈ W`. -/
 theorem fibre_action_of_geometric_positive
     {R : Type uR} [Semiring R] {W : Type uW} [Group W]
     {V U : Type uV} [AddCommMonoid V] [AddCommMonoid U] [Module R V] [Module R U]
@@ -85,16 +83,10 @@ theorem fibre_action_of_geometric_positive
       omega
     exact hpos w n hd v u hvu
 
-/-- Linearity and equality of transported actions lift a natural additive fibre comparison.
-Source: fibre-functor uniqueness by linear intertwining maps.
-(blueprint: lem-dl-a1-fibre-action-comparison).
-
-Proof: compose the first fibre isomorphism with the inverse of the second. The
-common scalar formula makes each component linear, and its bijectivity makes it
-a linear equivalence. The action identity says it is a representation equivalence.
-The original additive naturality squares give naturality of these intertwiners;
-faithfulness of the inclusions and the underlying-vector-space functor detects
-the required equations. -/
+/-- Let `F, G : C ⥤ P` be functors to a full subcategory of `Rep R W`, with natural
+isomorphisms `β` and `γ` from their underlying additive functors to a common functor `H`. If `β`
+and `γ` are compatible with a common scalar action on `H` and identify the actions of `W`, then
+`F ≅ G`. -/
 theorem functor_iso_of_fibre_action
     {C : Type uC} [Category.{vC} C]
     {R : Type uR} [CommRing R] {W : Type uW} [Group W]

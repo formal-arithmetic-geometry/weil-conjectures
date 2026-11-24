@@ -92,12 +92,7 @@ noncomputable def singleFunctorCompHomologyFunctorIso (n : ℤ) :
 
 /-- The truncation `τ_{≥ q} τ_{< q + 1}` on `DerivedCategory.Plus C`, written with the
 `EInt`-indexed truncations as in `t.spectralObject`, is isomorphic to `X ↦ H^q(X)[-q]`,
-naturally in `X`.
-
-Since the single functor in degree `q` is fully faithful and `τ_{≥ q} τ_{< q + 1}` lands in its
-essential image (`DerivedCategory.Plus.nonempty_eTruncGE_eTruncLT_iso_singleFunctor`), this
-truncation factors through the single functor, and the factorization is identified with `H^q`
-using that the truncation maps induce isomorphisms on `H^q`. -/
+naturally in `X`. -/
 noncomputable def eTruncLTCompETruncGEIso (q : ℤ) :
     (t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ (t (C := C)).eTruncGE.obj (q : EInt) ≅
       homologyFunctor C q ⋙ singleFunctor C q :=
@@ -184,7 +179,7 @@ open CategoryTheory
 K-injective complex `I`, the localization functor `Qh : K(C) ⥤ D(C)` induces bijections
 `Hom_K(N, I) ≃ Hom_D(N, I)` for every complex `N`; the same holds in the bounded below derived
 category for bounded below `N` and `I`; and a quasi-isomorphism between K-injective complexes is
-a homotopy equivalence. (blueprint: `lem-weil-pbc-kinjective-hom-derived`) -/
+a homotopy equivalence. -/
 theorem Qh_map_bijective_and_plus {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] :
     (∀ (N : HomotopyCategory C (ComplexShape.up ℤ)) (I : CochainComplex C ℤ) [I.IsKInjective],
       Function.Bijective (DerivedCategory.Qh.map :
