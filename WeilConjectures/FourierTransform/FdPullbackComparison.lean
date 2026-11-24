@@ -11,9 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcQbarCompletedPullback
 
 /-! # Finite whole-tower pullback comparison data
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence
-(blueprint: def-fd-finite-pullback-comparison-datum).
+Finite-stage whole-tower pullback comparison data, used in the definition of the trace
+function.
 
 The data use the recorded raw categories and operations. No completion of their
 object sets and no arbitrary replacement comparison is introduced.
@@ -47,18 +46,14 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- Stalk invertibility supplies the existing residue-field inverse required by the
-framework operations. No extra scheme hypothesis is imposed.
-Source: the coefficient convention in the trace definition
-(blueprint: def-fd-finite-pullback-comparison-datum). -/
+framework operations. No extra scheme hypothesis is imposed. -/
 instance fdResidueInvertible (T : Scheme.{u})
     [iT : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))] (x : T) :
     Invertible (l : T.residueField x) :=
   (Eq.mp (congrArg IsUnit (map_natCast (T.residue x).hom l))
     ((iT.out x).map (T.residue x).hom)).invertible
 
-/-- The actual strict pullback tower endomorphism, before realization.
-Source: trace-definition final sentence, proof step 7
-(blueprint: def-fd-finite-pullback-comparison-datum). -/
+/-- The actual strict pullback tower endomorphism, before realization. -/
 def fdPullbackEndomorphism (E : Padic.FiniteCoefficientFields l Ω)
     {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l (pbcFiniteField.{u} l Ω E) T) ℤ) :=
@@ -68,9 +63,7 @@ def fdPullbackEndomorphism (E : Padic.FiniteCoefficientFields l Ω)
     (integralOperationsTowerStep
       ((integralOperationsPullbackTowerFunctor l (pbcFiniteField.{u} l Ω E) h).obj P))
 
-/-- The canonical quotient projection from the whole strict pullback cone, in one degree.
-Source: trace-definition final sentence, proof step 7
-(blueprint: def-fd-finite-pullback-comparison-datum). -/
+/-- The canonical quotient projection from the whole strict pullback cone, in one degree. -/
 def fdPullbackProjection (E : Padic.FiniteCoefficientFields l Ω)
     {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l (pbcFiniteField.{u} l Ω E) T) ℤ)
@@ -80,9 +73,7 @@ def fdPullbackProjection (E : Padic.FiniteCoefficientFields l Ω)
       (pbcFiniteField.{u} l Ω E) h).obj P).obj (op n)) n).f i
 
 /-- A whole-tower pullback comparison fixed by every quotient-unit component and zero
-shifted component. In particular it cannot be inferred from equality of isolated reductions.
-Source: trace-definition final sentence, proof steps 7--8
-(blueprint: def-fd-finite-pullback-comparison-datum). -/
+shifted component. In particular it cannot be inferred from equality of isolated reductions. -/
 structure FdPullbackChain (E : Padic.FiniteCoefficientFields l Ω)
     {U T : Scheme.{u}} (h : U ⟶ T) where
   map :
@@ -111,9 +102,7 @@ structure FdPullbackChain (E : Padic.FiniteCoefficientFields l Ω)
       ((CochainComplex.mappingCocone.snd (fdPullbackEndomorphism l Ω E h P)).v
         i (i - 1) (by omega)) = 0
 
-/-- The actual integral restriction of the completed pullback in the dependency.
-Source: trace-definition final sentence, proof step 7
-(blueprint: def-fd-finite-pullback-comparison-datum). -/
+/-- The actual integral restriction of the completed pullback in the dependency. -/
 def fdPbcIntegralPull {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]
     [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]
@@ -126,9 +115,7 @@ def fdPbcIntegralPull {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
     (pbcQbarIntegralPull_mem l Ω h E)
 
 /-- Pullback comparison on every integral and rational representative, before common-stage
-passage. The ambient equation fixes its value by the whole quotient tower and its unit.
-Source: trace-definition final sentence, proof steps 7--9
-(blueprint: def-fd-finite-pullback-comparison-datum). -/
+passage. The ambient equation fixes its value by the whole quotient tower and its unit. -/
 structure FdPullbackComparison {U T : Scheme.{u}} [IsNoetherian U] [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim U ≤ n)]
     [Fact (∀ t : U, IsUnit (l : U.presheaf.stalk t))]

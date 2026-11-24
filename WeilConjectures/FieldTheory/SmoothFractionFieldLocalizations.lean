@@ -9,9 +9,23 @@ module
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Smooth.Basic
 
-/-! The localization family associated to a smooth fraction-field subalgebra.
-Source: Stacks Project, Algebra, Tag 07BV (lemma-colimit-syntomic), separable case.
-(blueprint: new-smooth-fraction-field-localizations) -/
+/-!
+# Localizations of a smooth subalgebra with fraction field `L`
+
+A smooth subalgebra `B` of a field `L` with fraction field `L` gives a directed family of
+smooth finitely generated subalgebras covering `L`, namely the principal localizations
+`B[1/f]` for nonzero `f ∈ B`.
+
+## Implementation details
+
+Smoothness and finite generation of `B[1/f]` are transported along its canonical embedding
+into `L`. Multiplying denominators gives directedness, and the fraction-ring property gives
+the covering statement.
+
+## References
+
+* Stacks Project, Algebra, Tag 07BV, separable case.
+-/
 
 @[expose] public section
 
@@ -20,12 +34,7 @@ universe u v
 namespace FieldTheory
 
 /-- A smooth subalgebra whose fraction field is `L` gives a directed
-family of smooth finitely generated subalgebras covering `L`. For each nonzero `f` in `B`,
-use the principal localization `B[1/f]`; transport smoothness and finite generation across
-its canonical embedding into `L`. Multiplication of denominators supplies directedness,
-and the fraction-ring property supplies the covering statement.
-Source: Stacks Project, Algebra, Tag 07BV (lemma-colimit-syntomic), separable case.
-(blueprint: new-smooth-fraction-field-localizations) -/
+family of smooth finitely generated subalgebras covering `L`. -/
 theorem exists_smooth_fg_localization_family
     {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L]
     (B : Subalgebra K L) (hBsm : Algebra.Smooth K B)

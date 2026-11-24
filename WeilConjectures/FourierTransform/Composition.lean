@@ -22,10 +22,10 @@ the computation of the convolution of the Fourier kernels.
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_comp`: `FT_{ψ'} ∘ FT_ψ` is the kernel
   transform of `𝒦_{ψ'} ∗ 𝒦_ψ` with shift `r + r'`.
 
-## Blueprint
+## Implementation details
 
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
+The comparison relies on compact-support base change and the projection formula for `Rf_!`,
+which need `[Finite Λ]`.
 -/
 
 @[expose] public section
@@ -48,11 +48,7 @@ variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' �
 
 the kernel transform of the convolution
 `𝒦_{ψ'} ∗ 𝒦_ψ = r₁₃,!(r₁₂^* 𝒦_ψ ⊗ᴸ r₂₃^* 𝒦_{ψ'})` on `V ×_S V''`. In particular
-`FT_{ψ⁻¹} FT_ψ` is the kernel transform with kernel `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` and shift `2r`.
-
-Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`), which need `[Finite Λ]`.
-(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
+`FT_{ψ⁻¹} FT_ψ` is the kernel transform with kernel `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` and shift `2r`. -/
 theorem nonempty_iso_fourierTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [CharP Γ(pullback π π', ⊤) p] [CharP Γ(pullback π' π'', ⊤) p]

@@ -29,9 +29,7 @@ open TensorProduct Module
 /-- **A finite purely inseparable extension descends along a field extension.** Let `L / K` be
 a field extension and `B` a commutative `K`-algebra. If `L ⊗[K] B` is a field which, as an
 `L`-algebra via `l ↦ l ⊗ 1`, is finite and purely inseparable over `L`, then `B` is a field,
-finite and purely inseparable over `K`, and `dim_K B = dim_L (L ⊗[K] B)`.
-
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+finite and purely inseparable over `K`, and `dim_K B = dim_L (L ⊗[K] B)`. -/
 theorem Algebra.TensorProduct.isField_finite_isPurelyInseparable_of_tensorProduct
     {K L B : Type*} [Field K] [Field L] [Algebra K L] [CommRing B] [Algebra K B]
     (hfield : IsField (L ⊗[K] B)) [Module.Finite L (L ⊗[K] B)]
