@@ -12,9 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibilit
 
 Let `Λ` be a commutative condensed ring and `X` a scheme. A `Λ_X`-module is lisse if it has
 a finite constant local model on a pro-étale cover of `X` itself
-(`ProEtale.HasFiniteConstantLocalModel`, blueprint `definition-lisse-sheaves--1`). A complex
-`K ∈ D(X_proét, Λ)` is lisse if all its cohomology sheaves are lisse
-(`ProEtale.IsLisseComplex`, blueprint `definition-lisse-sheaves--2`).
+(`ProEtale.HasFiniteConstantLocalModel`). A complex `K ∈ D(X_proét, Λ)` is lisse if all its
+cohomology sheaves are lisse (`ProEtale.IsLisseComplex`).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- A complex `K ∈ D(X_proét, Λ)` is *lisse* if its cohomology sheaves `Hⁿ(K)` are lisse
 `Λ_X`-modules, i.e. each has a finite constant local model on a pro-étale cover of `X`.
-No boundedness is imposed.
-(blueprint: definition-lisse-sheaves--2) -/
+No boundedness is imposed. -/
 def IsLisseComplex (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) : Prop :=
