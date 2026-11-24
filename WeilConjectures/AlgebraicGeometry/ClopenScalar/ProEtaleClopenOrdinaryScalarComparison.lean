@@ -11,7 +11,9 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Ordinary clopen scalar comparison
 
-Source: Stacks Project, sites-modules.tex, Tags 03EL, 03CY and 03DH.
+## References
+
+* Stacks Project, Tags 03EL, 03CY, 03DH
 -/
 
 -- After pruning, this module only keeps private declarations.

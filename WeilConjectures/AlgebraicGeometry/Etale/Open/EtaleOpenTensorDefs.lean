@@ -29,9 +29,6 @@ import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 /-!
 # Canonical étale open tensor and coefficient comparison data
 
-Source: Stacks Tags 0GL1, 0E8I, 06YY, 03EL, 03DI and 0E8J
-(blueprint: lem-coef-etale-open-comparison-data).
-
 The ordinary comparisons are adjunction mates, not arbitrary isomorphisms. The
 coefficient comparisons descend their degreewise maps on K-flat representatives.
 All derived objects are in the ordinary unbounded constant-coefficient categories.
@@ -46,6 +43,10 @@ All derived objects are in the ordinary unbounded constant-coefficient categorie
 
 * `openScalarRestrictionMap_isIso`: invertibility of the fixed scalar/restriction mate.
 * `OpenScalarExtensionNormalization`, `OpenScalarRestrictionNormalization`: fixed model laws.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 03EK, 03EL, 03ER, 06YN, 06YY, 08FJ, 0E8I, 0E8J, 0GL1
 -/
 
 @[expose] public noncomputable section
@@ -55,45 +56,39 @@ open CategoryTheory Limits AlgebraicGeometry MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
-/-- Exact derived restriction. Source: Stacks 03DJ, 08FJ
-(blueprint: lem-coef-etale-open-comparison-data). -/
+/-- Exact derived restriction. -/
 abbrev derivedRestriction {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] :
     DerivedCategoryModule A X ⥤ DerivedCategoryModule A U :=
   D((j)^*[ModuleCat.{u + 1} A])
 
-/-- Exact derived extension by zero. Source: Stacks 03DJ, 08FJ
-(blueprint: lem-coef-etale-open-comparison-data). -/
+/-- Exact derived extension by zero. -/
 abbrev derivedExtension {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] :
     DerivedCategoryModule A U ⥤ DerivedCategoryModule A X :=
   D((j)_!open[ModuleCat.{u + 1} A])
 
-/-- The published canonical open projection map. Source: Stacks 0GL1
-(blueprint: lem-coef-etale-open-comparison-data). -/
+/-- The published canonical open projection map. -/
 def canonicalGamma {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j]
     (P : DerivedCategoryModule A U) (T : DerivedCategoryModule A X) :=
   ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} A) j).app P).app T
 
 /-- Site flatness in the recorded constant-ring module coordinates. The realization
-is the existing constant-module equivalence, not a newly chosen action.
-Source: Stacks 03ER (blueprint: lem-coef-etale-open-comparison-data). -/
+is the existing constant-module equivalence, not a newly chosen action. -/
 abbrev etaleFlat (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (P : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) : Prop :=
   SheafOfModules.IsFlatOnSite
     ((Scheme.etaleSumFlatModuleRealization T A).obj P)
 
-/-- The recorded K-flat predicate after the same exact constant-module realization.
-Source: Stacks 06YN (blueprint: lem-coef-etale-open-comparison-data). -/
+/-- The recorded K-flat predicate after the same exact constant-module realization. -/
 abbrev etaleKFlat (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients
     ((Scheme.etaleSumFlatComplexRealization T A).obj P)
 
 /-- Ordinary restriction commutes with restriction of coefficients. The middle
-identification is literally the same sectionwise functor. Source: Stacks 03EL, 03EK
-(blueprint: lem-coef-etale-open-comparison-data). -/
+identification is literally the same sectionwise functor. -/
 def openRestrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (j)^*[ModuleCat.{u + 1} B] ⋙ Sheaf.restrictScalars U.smallEtaleTopology φ ≅
@@ -108,8 +103,7 @@ def openRestrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j).symm
 
 /-- Canonical ordinary scalar/restriction comparison `r⁰`, the identification of
-left adjoints to sectionwise direct image and restriction of scalars.
-Source: Stacks 03EL, 03EK (blueprint: lem-coef-etale-open-comparison-data). -/
+left adjoints to sectionwise direct image and restriction of scalars. -/
 def openScalarRestrictionZero {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (j)^*[ModuleCat.{u + 1} A] ⋙ ProEtale.etaleSheafExtendScalars φ U ≅
@@ -120,8 +114,7 @@ def openScalarRestrictionZero {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (ProEtale.etaleSheafExtendScalarsAdjunction φ U)).ofNatIsoRight (Iso.refl _))).symm
 
 /-- Canonical ordinary coefficient/open comparison `q⁰`: uniqueness of left
-adjoints to the actual restriction/scalar functors fixes the isomorphism.
-Source: Stacks 0E8I, 03DI (blueprint: lem-coef-etale-open-comparison-data). -/
+adjoints to the actual restriction/scalar functors fixes the isomorphism. -/
 def openScalarExtensionZero {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (j)_!open[ModuleCat.{u + 1} A] ⋙ ProEtale.etaleSheafExtendScalars φ X ≅
@@ -132,8 +125,7 @@ def openScalarExtensionZero {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)).ofNatIsoRight
       (openRestrictScalarsIso φ j))
 
-/-- Exact descent of the canonical restriction/scalar identification.
-Source: Stacks 06YY, 08FJ (blueprint: lem-coef-etale-open-comparison-data). -/
+/-- Exact descent of the canonical restriction/scalar identification. -/
 def openDerivedRestrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     derivedRestriction (A := B) j ⋙ Sheaf.derivedRestrictScalars U.smallEtaleTopology φ ≅
@@ -141,8 +133,7 @@ def openDerivedRestrictScalarsIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
   Functor.mapDerivedCategorySquareIso (openRestrictScalarsIso φ j)
 
 /-- Canonical derived `q`, using the degreewise derived open adjunction and the
-published scalar adjunction. Source: Stacks 0E8I, 06YY, 08FJ
-(blueprint: lem-coef-etale-open-comparison-data). -/
+published scalar adjunction. -/
 def openScalarExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     derivedExtension (A := A) j ⋙ scalarExtension φ X ≅
@@ -154,8 +145,7 @@ def openScalarExtension {A B : Type (u + 1)} [CommRing A] [CommRing B]
       (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)).ofNatIsoRight
         (openDerivedRestrictScalarsIso φ j))
 
-/-- The canonical scalar/restriction mate, prior to asserting invertibility.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-comparison-data). -/
+/-- The canonical scalar/restriction mate, prior to asserting invertibility. -/
 def openScalarRestrictionMap {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     derivedRestriction (A := A) j ⋙ scalarExtension φ U ⟶
@@ -313,16 +303,7 @@ private theorem exact_scalar_mate_etale
   rw [← heq] at ht
   exact ht
 
-/-- The canonical mate is invertible for arbitrary coefficient maps.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-comparison-data).
-Proof: ordinary restriction is restriction along the slice-site localization.
-Its sectionwise coefficient square is the identity. The two composite adjunctions
-with coextension of scalars have the same unit by naturality of the coefficient
-unit. Uniqueness of left adjoints therefore identifies that square with the
-published scalar/pullback square. Exact descent preserves its inverse. Transport
-the published invertible scalar inverse mate along the exact/left-derived
-restriction isomorphisms; the mate transport identity identifies the result
-with precisely the map in the statement. -/
+/-- The canonical mate is invertible for arbitrary coefficient maps. -/
 @[instance] theorem openScalarRestrictionMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
@@ -334,8 +315,7 @@ with precisely the map in the statement. -/
   rw [hd]
   exact exact_scalar_mate_etale φ j
 
-/-- The canonical natural isomorphism `r`, with its hom fixed as the specified mate.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-comparison-data). -/
+/-- The canonical natural isomorphism `r`, with its hom fixed as the specified mate. -/
 def openScalarRestriction {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     derivedRestriction (A := A) j ⋙ scalarExtension φ U ≅
@@ -343,8 +323,7 @@ def openScalarRestriction {A B : Type (u + 1)} [CommRing A] [CommRing B]
   asIso (openScalarRestrictionMap φ j)
 
 /-- The ordinary projection map `γ⁰`, defined as the open-adjunction adjunct
-of the unit followed by the canonical restriction/tensor comparison.
-Source: Stacks 0E8I, 03EL (blueprint: lem-coef-etale-open-comparison-data). -/
+of the unit followed by the canonical restriction/tensor comparison. -/
 def canonicalGammaZero
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
@@ -356,8 +335,7 @@ def canonicalGammaZero
 
 /-- K-flat model normalization of `q`, expressed by the published scalar derived
 counits and the exact open localization factors. The bottom chain map is the
-ordinary canonical `q⁰` applied degreewise.
-Source: Stacks 0E8I, 06YY (blueprint: lem-coef-etale-open-comparison-data). -/
+ordinary canonical `q⁰` applied degreewise. -/
 def OpenScalarExtensionNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
@@ -378,8 +356,7 @@ def OpenScalarExtensionNormalization
           ((Functor.mapHomologicalComplexCompIso (openScalarExtensionZero φ j) (.up ℤ)).hom.app P)
 
 /-- K-flat model normalization of `r`. The bottom map is the canonical ordinary
-restriction/balancing map `r⁰`, applied degreewise, not a free iso parameter.
-Source: Stacks 03EL, 06YY (blueprint: lem-coef-etale-open-comparison-data). -/
+restriction/balancing map `r⁰`, applied degreewise, not a free iso parameter. -/
 def OpenScalarRestrictionNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
@@ -407,8 +384,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u
 
 /-- Restriction/tensor comparison with exact restriction in both arguments.
 Its tensorator is the published K-flat pullback tensor comparison, transported
-by the published exact/left-derived restriction identification.
-Source: Stacks 03EL, 0GL1 (blueprint: lem-coef-etale-open-comparison-data). -/
+by the published exact/left-derived restriction identification. -/
 def openExactRestrictionTensor
     (T₁ T₂ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :
     ((derivedTensor C U).obj (D((j)^*[C]).obj T₁)).obj (D((j)^*[C]).obj T₂) ≅
@@ -418,8 +394,7 @@ def openExactRestrictionTensor
     ((mapDerivedCategoryUpperStarDerivedTensorIso C j).app T₁).app T₂
 
 /-- The canonical projection map written with exact `j^*`. The change from
-`Lj^*` is the existing exact/left-derived comparison, not a new derived functor.
-Source: Stacks 0GL1 (blueprint: lem-coef-etale-open-comparison-data). -/
+`Lj^*` is the existing exact/left-derived comparison, not a new derived functor. -/
 def canonicalGammaExact
     (P : _root_.DerivedCategory (Sheaf U.smallEtaleTopology C))
     (T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :

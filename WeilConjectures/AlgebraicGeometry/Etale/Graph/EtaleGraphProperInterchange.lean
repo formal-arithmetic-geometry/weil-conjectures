@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Etale.Graph.EtaleGraphProperSupportUnit
 
 /-! # The proper square without an open source leg
 
-Source: Stacks Project, Tags 0F7I and 0F7J.
+## References
+
+* Stacks Project, Tags 0F7B, 0F7F, 0F7I, 0F7J
 -/
 
 @[expose] public section
@@ -30,22 +32,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
 
 /-- The compact-support interchange for a proper Cartesian square with etale horizontal
-maps is the mate of inverse sum exchange. This statement has no open source leg.
-Source: Stacks Project, more-etale.tex Tags 0F7B and 0F7F
-(blueprint: lem-pur-graph-proper-interchange).
-
-Proof in words: represent an input by a K-injective complex. The proper-support sheaf
-composition identifies the two functors before deriving, as subsheaves of the common
-ordinary direct image. Its transpose under proper inverse image/direct image is inverse
-sum exchange: on each lifted sheet it pulls the same section back, and off that sheet
-both maps vanish. Sheafification and gluing prove this equality of sheaf maps. Resolve
-the extension by zero to a K-injective complex; direct image of the resolution map is
-exactly the proper/quasi-finite interchange of Tag 0F7B. Apply the sheaf transpose equation
-degreewise and the derived unit equations to identify its mate with the displayed gam.
-The every-tower equation and normalized graph refinements identify the compact-support
-expression on the left. Localization extends the equation to every unbounded object.
-For identity proper maps this is the unit equation; empty fibres and zero coefficients
-produce zero maps without a nonemptiness assumption. -/
+maps is the mate of inverse sum exchange. -/
 theorem graph_proper_interchange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W Y' Z Y : Scheme.{u}}

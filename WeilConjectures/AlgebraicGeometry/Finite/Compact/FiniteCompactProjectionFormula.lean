@@ -36,13 +36,6 @@ set_option linter.privateModule false
 
 /-!
 # Finite-coefficient compact-support projection formula
-Source: Weil blueprint, main-20261015, sec-six-functors-basics/sk-thm-sf-pf-finite,
-`lem-weil-finite-compact-projection-formula.md`
-(blueprint: lem-weil-finite-compact-projection-formula).
-Both maps are the published natural transformations of bifunctors, so naturality in
-both arguments is retained. The compactification is arbitrary. The pro-etale clause
-retains the recorded origin witnesses and evaluates the published fixed-ring map on
-their objects through the canonical inverse coefficient-realization equivalence.
 -/
 
 @[expose] public section

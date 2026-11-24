@@ -107,14 +107,15 @@ import all WeilConjectures.CategoryTheory.RingedSiteBoundedEvaluation.RingedSite
 
 /-! # Internal Hom from a finite local system over a finite field
 
-Source: Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.13,
-finite-coefficient local-system case; Stacks Project, Tag 0FNY, example-dual
-(blueprint: lem-sfb-finite-field-lisse-internal-hom).
-
 The two functors below spell out the two sides of the cohomology formula, including
 all maps. The theorem asserts bounded constructibility in the original interval and
 an isomorphism natural contravariantly in the local system and covariantly in the complex.
 All derived categories are the ordinary, uncompleted localizations.
+
+## References
+
+* Bhatt--Scholze, The pro-etale topology for schemes, Lemma 6.7.13
+* Stacks Project, Tag 0FNY; Cohomology on Sites, Section 08J7
 -/
 
 @[expose] public noncomputable section
@@ -169,9 +170,7 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] WeilConjectures.sfAbBijective
 
 /-- The bifunctor `(L,N) ↦ H^r RHom(L[0],N)` on the ordinary constant-ring module
-category. The first variable is contravariant. Source: the K-injective construction
-in Stacks, Cohomology on Sites, Section 08J7
-(blueprint: lem-sfb-finite-field-lisse-internal-hom). -/
+category. The first variable is contravariant. -/
 def finiteFieldInternalHomCohomology (S : Scheme.{u}) (A : Type u) [Field A] (r : ℤ) :
     (proEtaleRingModules S (proEtaleConstantRing S A))ᵒᵖ ×
       DerivedCategory.{u + 2} (proEtaleRingModules S (proEtaleConstantRing S A)) ⥤

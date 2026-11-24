@@ -14,8 +14,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalRealizedTr
 import all WeilConjectures.AlgebraicGeometry.RationalP1.DiagonalCompletedChernSplitting
 
 /-! # Geometric inverse image of a normalized completed projective-line trace
-
-Source: the latest blueprint, diagonal coefficient changes, proof paragraph (3).
 -/
 
 @[expose] public noncomputable section
@@ -159,10 +157,7 @@ private theorem trace_of_mapped_diagonal_components_factor
   refine ⟨IsIso.of_isIso_comp_right e q, ?_⟩
   simpa only [Category.assoc] using htrace.2
 
-/-- The canonical realization of the shifted positive line is an isomorphism.
-Source: the exact realization's single and shift comparisons
-(blueprint: lem-diagonal-completed-trace-pullback).
-Proof: each of the three factors in shiftedLine is the image of an isomorphism. -/
+/-- The canonical realization of the shifted positive line is an isomorphism. -/
 theorem completedRealization_shiftedLine_isIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] (e : CompletedRealization l X) :
     IsIso (e.shiftedLine l X) := by
@@ -224,31 +219,7 @@ private theorem completedTrace_lowCoordinate (l : ℕ) [Fact l.Prime]
 -- Compare the independently normalized derived functor endpoints.
 /-- Pullback of one completed projective-line trace, expressed in its normalized
 condensed realization. This is a trace-only assertion for a Cartesian square of
-arbitrary projective-line models; no diagonal class or coefficient family occurs.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md, paragraph (3),
-the base-changed unit/Chern decomposition and passage to its trace.
-(blueprint: lem-diagonal-completed-trace-pullback).
-
-Proof: form the unit/Chern decomposition for the two projective-line models as a
-single morphism of strict Kummer systems. On the Cartesian square, the unit is
-natural and the section class pulls back to the positive section class. If the
-chosen models differ by a projective-line automorphism, the hyperplane classes
-differ by a class from the base; this changes only the first summand and is killed
-by the trace projection. Thus the twisted splitting square commutes after its
-canonical coefficient identifications. Apply the normalized inverse-image/derived-
-limit comparison to the entire splitting. Cartesian coefficients identify its
-endpoints, so this comparison and the splitting are invertible. Consequently the
-derived direct-image mate is invertible on the shifted positive line. Invert the
-commuting splitting square and project to its constant summand to get the trace
-square. The construction equations in t and t' identify these as the completed
-traces. Transport by the four completed realizations and the two normalized
-push squares. Their full universal-unit equations hcanonical and hcanonical'
-identify the transported direct-image mate with modelExchange, rather than an
-arbitrarily rescaled comparison. The displayed inverse factors just solve each
-CompletedTraceCompatibility equation for its condensed trace. This argument
-applies to q and to either projective model of a product projection. -/
+arbitrary projective-line models; no diagonal class or coefficient family occurs. -/
 theorem diagonalCompletedTrace_pullback (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S] [IsNoetherian X'] [IsNoetherian S']

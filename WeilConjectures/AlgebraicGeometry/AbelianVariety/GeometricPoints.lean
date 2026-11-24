@@ -147,17 +147,10 @@ section BaseChange
 
 variable {K' : Type u} [Field K'] [Algebra K K']
 
-/-- **Multiplication by `n` prime to the characteristic is étale** (the geometric fibre of `A[n]`).
-
-Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
-prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base change
-`A[n]_{K'}` is, as a scheme over `K'`, the disjoint union of `n ^ (2 * g)` copies of `Spec K'`:
-it is the constant scheme on a set with `n ^ (2 * g)` elements.
-
-`A[n]` is finite étale of order `n ^ (2 * g)` (`AlgebraicGeometry.etale_torsionSubgroupScheme`,
-`AlgebraicGeometry.finrankΓ_torsionSubgroupScheme`), the order is invariant under base change,
-and a finite étale scheme over a separably closed field is a disjoint union of copies of the
-base (`AlgebraicGeometry.Scheme.Hom.exists_overIso_sigma_of_isSepClosed`). -/
+/-- Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let
+`n` be prime to `p` and let `K'` be a separably closed field extension of `K`. Then the base
+change `A[n]_{K'}` is, as a scheme over `K'`, the disjoint union of `n ^ (2 * g)` copies of
+`Spec K'`: it is the constant scheme on a set with `n ^ (2 * g)` elements. -/
 theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
     (hn : 0 < n) (hnp : ¬ p ∣ n) :
     ∃ (S : Type u) (_ : Finite S), Nat.card S = n ^ (2 * IsAbelianVariety.dim A) ∧
@@ -172,9 +165,7 @@ theorem exists_overIso_sigma_torsionSubgroupScheme [IsSepClosed K'] (p : ℕ) [C
   rw [hcard, Scheme.Hom.finrankΓ_pullback_snd, finrankΓ_torsionSubgroupScheme n hn]
 
 /-- The `ℓ`-torsion of the group `A(K')` of `K'`-points, for a prime `ℓ` prime to the
-characteristic and `K'` algebraically closed, has `ℓ ^ (2 * g)` elements: it is the set of
-`K'`-points of the finite étale `A[ℓ]_{K'}` (`AlgebraicGeometry.torsionByPointsEquiv`,
-`AlgebraicGeometry.card_points_eq_finrankΓ`). -/
+characteristic and `K'` algebraically closed, has `ℓ ^ (2 * g)` elements. -/
 theorem natCard_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (ℓ : ℕ) (hℓ : ℓ.Prime)
     (hℓp : ¬ p ∣ ℓ) :
     Nat.card (AddSubgroup.torsionBy
@@ -196,10 +187,8 @@ theorem natCard_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (ℓ : �
     _ = ℓ ^ (2 * IsAbelianVariety.dim A) :=
       (Scheme.Hom.finrankΓ_pullback_snd _ y).trans (finrankΓ_torsionSubgroupScheme ℓ hℓ.pos)
 
-/-- **The dimension of an abelian variety is invariant under base change** to a larger
-algebraically closed field: for a prime `ℓ` prime to the characteristic, the `ℓ`-torsion of
-`A(K') = A_{K'}(K')` has `ℓ ^ (2 * dim A)` elements (`natCard_torsionBy_points`) and
-`ℓ ^ (2 * dim A_{K'})` elements (`nonempty_addEquiv_torsionBy` for `A_{K'}`). -/
+/-- The dimension of an abelian variety is invariant under base change to a larger algebraically
+closed field. -/
 theorem dim_pullback [IsAlgClosed K'] (p : ℕ) [CharP K p] :
     IsAbelianVariety.dim
         ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap K K')))).obj A) =
@@ -220,18 +209,10 @@ theorem dim_pullback [IsAlgClosed K'] (p : ℕ) [CharP K p] :
   have h₂ := Nat.pow_right_injective hℓ.two_le h₁
   omega
 
-/-- **Multiplication by `n` prime to the characteristic is étale** (the geometric points of `A[n]`).
-
-Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let `n` be
-prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
+/-- Let `A` be an abelian variety of dimension `g` over a field `K` of characteristic `p`, let
+`n` be prime to `p` and let `K'` be an algebraically closed field extension of `K`. Then the
 `n`-torsion of the group `A(K')` of `K'`-valued points of `A` (the morphisms `Spec K' ⟶ A` over
-`K`) is `(ℤ/nℤ) ^ (2 * g)`.
-
-`A(K')` is the group of `K'`-points of the abelian variety `A_{K'}` over `K'`
-(`AlgebraicGeometry.Scheme.pointsAddEquivBaseChangePoints`), whose `n`-torsion is
-`(ℤ/nℤ) ^ (2 * dim A_{K'})` by the integral Tate module statement
-`AlgebraicGeometry.nonempty_addEquiv_torsionBy`, and `dim A_{K'} = dim A`
-(`AlgebraicGeometry.IsAbelianVariety.dim_pullback`). -/
+`K`) is `(ℤ/nℤ) ^ (2 * g)`. -/
 theorem nonempty_addEquiv_torsionBy_points [IsAlgClosed K'] (p : ℕ) [CharP K p] (n : ℕ)
     (hn : 0 < n) (hnp : ¬ p ∣ n) :
     Nonempty (AddSubgroup.torsionBy

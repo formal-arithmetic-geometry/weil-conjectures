@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 /-!
 # Finite actions in the essential image of the Galois stalk functor
 
-Source: Stacks Project, Tags 03QT and 03QR.
+## References
+
+* Stacks Project, Tags 03QT, 03QR
 -/
 
 @[expose] public section

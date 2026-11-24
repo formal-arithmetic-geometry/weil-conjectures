@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceCoefficientComparison
 import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceTensorCompatibility
 import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceClosedCompatibility
 
-/-! # Restriction compatibility of the normalized adic module comparison -/
+/-! # Restriction compatibility of the normalized adic module comparison
+
+## References
+
+* Stacks Project, Tags 03CE, 03EL, 03EO and 0E8H
+-/
 
 @[expose] public section
 
@@ -28,9 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The complete native/slice comparison, including its normalization under the actual native
 pullback and compatibility on every further slice. All fields are conclusions, not hypotheses
-on a scheme or on its modules.
-Source: Stacks 03EO, 0E8H, 03EL, and native adic pullback and evaluation
-(blueprint: lem-sf-adic-module-slice-compatibility). -/
+on a scheme or on its modules. -/
 structure AdicModuleSliceCompatibility (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) where
   /-- Coefficients on the localized site are the restriction of the base coefficients. -/
@@ -174,29 +177,7 @@ private theorem tensorSlice_square (l : ℕ) [Fact l.Prime]
       rw [Iso.hom_inv_id_assoc]
       rfl
 
-/-- A normalized comparison commutes with the actual site-object inverse image.
-Source: Stacks Project, Tags 03CE, 03EL and 0E8H
-(blueprint: lem-sf-adic-module-slice-compatibility).
-
-Proof: identify the pro-etale site of a site object with the slice site. On each
-further object the coefficient functions and their restriction maps coincide.
-The initial indexing object for inverse image makes the actual coefficient map
-identity on these functions. The monoidal inverse-image comparison preserves pure
-tensors, so it carries the action to the restricted action. Extension of scalars
-along this coefficient isomorphism has inverse m ↦ 1 ⊗ m; the balanced relation
-r ⊗ m = 1 ⊗ rm proves the two inverse identities. This gives the normalized natural
-module restriction comparison. The universal property of the balanced tensor gives
-its native pullback comparison; the localized sheaf tensor comparison preserves
-pure tensors. Testing on pure tensors proves their commutative square. On a further
-slice, both internal-Hom comparisons identify the very same module morphisms on
-that slice. Currying restricted evaluation therefore gives exactly the recorded
-native Hom pullback map; uniqueness of transposes proves the Hom equation on every
-further object. At the identity slice this Hom equation, combined with the base
-evaluation formulas and injectivity of the additive section identification, proves
-the evaluation restriction formula. Applying the same uniqueness to braided evaluation proves the
-bidual restriction equation. The normalization of a supplied base comparison pins
-all its maps by their sections, pure tensors and counits, so this argument applies
-to every such base family. -/
+/-- A normalized comparison commutes with the actual site-object inverse image. -/
 theorem adicModuleSliceCompatibility (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) :
     Nonempty (AdicModuleSliceCompatibility l base) := by

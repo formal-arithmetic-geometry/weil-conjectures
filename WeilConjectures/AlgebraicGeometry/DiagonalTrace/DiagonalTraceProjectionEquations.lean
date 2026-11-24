@@ -14,9 +14,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- A finite projection equation with its category structures shared explicitly.
-Source: diagonal trace proof (1), normalized root projection.
-(blueprint: def-sfb-diagonal-trace-root-projection-equation). -/
+/-- A finite projection equation with its category structures shared explicitly. -/
 @[irreducible]
 def rootProjectionEquation
     {C D : Type*} [Category C] [Category D]
@@ -24,9 +22,7 @@ def rootProjectionEquation
     (a : M ⟶ R.obj I) (b : I ⟶ J) (d : M ⟶ E.obj J) : Prop :=
   a ≫ pi.app I ≫ E.map b = d
 
-/-- The finite boundary equation with each categorical interface shared by name.
-Source: diagonal trace proof (2), projecting the supported Cartier class.
-(blueprint: def-sfb-diagonal-trace-supported-boundary-equation). -/
+/-- The finite boundary equation with each categorical interface shared by name. -/
 @[irreducible]
 def supportedBoundaryEquation
     {A C D : Type*} [Category A] [Category C] [Category D]
@@ -37,9 +33,7 @@ def supportedBoundaryEquation
   U.map g ≫ s ≫ pi.app K ≫ E.map f ≫ E.map b = v
 
 /-- The completed supported input followed by its target comparison equals the
-specified finite Chern arrow. This is an actual composite equation.
-Source: diagonal trace proof, precomposing the whole-system equation.
-(blueprint: def-sfb-diagonal-trace-completed-boundary-equation). -/
+specified finite Chern arrow. This is an actual composite equation. -/
 @[irreducible]
 def completedBoundaryEquation
     {C D : Type*} [Category C] [Category D]

@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleInverseTensorCo
 import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Canonical Brown coefficient projection coherence
-Source: Zheng, Construction 5.15 and (5.16.2), printed pp. 34--35.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15 and (5.16.2), pp. 34--35
 -/
 
 @[expose] public noncomputable section
@@ -174,17 +176,7 @@ private theorem projection_hom {m n : ℕ} (h : m ≤ n)
     Functor.whiskerLeft_app, Category.id_comp, Category.comp_id]
   exact Category.id_comp _
 
-/-- The inverse coefficient projection respects the canonical tensor unit and associator.
-Source: Zheng, Construction 5.15 and (5.16.2), printed pp. 34--35
-(blueprint: lem-pur-etale-brown-coefficient-coherence).
-
-Proof: apply normalized inverse-image tensor coherence to the proper and open
-inverse-image factors. Mates preserve the unit and composition squares: this is
-proved below from mate pasting, whiskering and cancellation of the scalar
-comparison isomorphisms. The recorded proper and open mate equations identify
-these mates with the respective coefficient projections. Expand projection_def,
-substitute the two factor equations and use naturality of the proper projection
-to paste the factors. No boundedness or quotient-flatness assumption is used. -/
+/-- The inverse coefficient projection respects the canonical tensor unit and associator. -/
 theorem etaleBrownCoefficientCoherence :
     (∀ (n : ℕ) P,
       (B.projection (Nat.le_refl n)).hom.app P ≫

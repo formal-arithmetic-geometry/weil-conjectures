@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechTotalMap
 
 /-! # Naturality of the restriction augmentation
 
-Source: Stacks Project, Tags 01EQ and 01FD.
-(blueprint: lem-pc-abelian-cech-alpha-square)
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
 -/
 
 @[expose] public section
@@ -22,13 +23,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- The restriction augmentation commutes with every resolution cochain map.
-Source: Stacks Project, Tags 01EQ and 01FD, alpha square.
-(blueprint: lem-pc-abelian-cech-alpha-square)
-
-Proof: Compare each degree after the total-complex summand inclusion.
-Naturality of the resolution morphism as a presheaf morphism commutes with
-restriction from the whole space to each finite intersection. -/
+/-- The restriction augmentation commutes with every resolution cochain map. -/
 theorem abelianCechAlpha_square
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens)
     {F G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}

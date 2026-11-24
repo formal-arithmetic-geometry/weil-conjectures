@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicModuleSectionComparison
 import WeilConjectures.AlgebraicGeometry.Adic.AdicSliceRestrictionSections
 
-/-! # Normalized module restriction on a site object -/
+/-! # Normalized module restriction on a site object
+
+## References
+
+* Stacks Project, Tags 03CE, 03EK, 03EL, 03EO and 0E8H
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,8 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The conclusions of the restriction step for AdicSliceRestrictionData.
-Source: Stacks 03CE, 03EL, 03EO and 0E8H (blueprint: lem-sf-adic-slice-restriction). -/
+/-- The conclusions of the normalized module restriction step on a site object. -/
 structure AdicSliceRestrictionData (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),
@@ -141,18 +145,7 @@ private noncomputable def restrictionNatIso :
 
 end
 
-/-- The normalized native pullback is the literal sectionwise restriction.
-Source: Stacks 03CE, 03EK and 0E8H, and step 1 of the parent comparison.
-(blueprint: lem-sf-adic-slice-restriction).
-
-Proof: conjugate the actual inverse-image/localization section isomorphism
-by the two supplied additive section equivalences. The scalar-linearity
-lemma makes these additive equivalences linear. Naturality on site objects
-follows from the two section_restriction formulas and naturality of the actual
-inverse-image comparison. This gives an objectwise sheaf-module iso. The
-section_map formulas and naturality of that comparison in the native module
-make these isomorphisms natural in modules. Their displayed section formula
-follows from cancellation of the inverse additive section equivalence. -/
+/-- The normalized native pullback is the literal sectionwise restriction. -/
 theorem adicSliceRestrictionComparison (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X)
     (c : ∀ (X : Scheme.{u}) (U : X.ProEt),

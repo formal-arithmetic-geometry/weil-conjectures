@@ -160,7 +160,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestr
 
 /-! # Scalar restriction and the recorded direct-image presentation
 
-Source: Stacks Tags 00YV, 03D3, 0D6E, 0D6J and 07A6.
+## References
+
+* Stacks Project, Tags 00YV, 03D3, 07A6, 0D6E, 0D6J
 -/
 
 -- After pruning, this module only keeps private declarations.

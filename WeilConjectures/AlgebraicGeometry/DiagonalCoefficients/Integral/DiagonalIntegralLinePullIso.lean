@@ -65,17 +65,7 @@ private theorem restricted_ordinary_iso
   obtain ⟨e, _⟩ := ordinaryLift_iso f Λ _ _ d
   exact ⟨e⟩
 
-/-- The specified bottom integral Tate line is preserved by ordinary inverse image.
-
-Source: Cartesian coefficient twists, integral comparison and scalar naturality
-(blueprint: lem-diagonal-integral-line-pull-iso).
-
-Proof: the integral root comparison is semilinear over the pulled-back coefficient
-ring. Restrict it along the bottom-field coefficient inclusion, using naturality
-of the coefficient comparison. Scalar extension along the invertible pullback
-coefficient comparison lifts this semilinear map to a linear map. The underlying
-whole root comparison is an isomorphism, so the linear lift is an isomorphism.
-The construction uses the whole inverse-limit comparison, not finite detection. -/
+/-- The specified bottom integral Tate line is preserved by ordinary inverse image. -/
 theorem diagonalIntegralLine_pullIso (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     [∀ x : X, Invertible (l : X.residueField x)]

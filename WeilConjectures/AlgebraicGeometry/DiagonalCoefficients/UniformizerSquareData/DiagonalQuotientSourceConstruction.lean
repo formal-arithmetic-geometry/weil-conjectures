@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalQuotientTransposeMap
 
 /-! # Constructor comparison for the successive supported endpoint
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-quotient-source-construction).
 -/
 
 @[expose] public noncomputable section
@@ -72,12 +69,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
 
 attribute [local semireducible] quotientAdjunction quotientTranspose quotientExplicitTranspose
 
-/-- The bundled quotient transpose is its explicit finite source construction.
-Source: coefficient changes (1). (blueprint: lem-diagonal-quotient-source-construction).
-Proof: project the supported field of finiteRouteData in quotientEndpoints. This
-field is finiteSourceIso of the supplied composite scalar endpoint and finite
-source comparison. The named collected adjunction unfolds to the same explicit
-adjunction. Reflexivity on the named transpose proves the constructor equality. -/
+/-- The bundled quotient transpose is its explicit finite source construction. -/
 theorem quotient_source_constructor : q.quotientTranspose = q.quotientExplicitTranspose := by
   constructed_exact Eq.refl q.quotientTranspose
 

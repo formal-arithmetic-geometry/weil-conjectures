@@ -61,13 +61,6 @@ proper once the `Uᵢ` cover `X`.
 ## References
 
 * [Stacks, Tag 0200](https://stacks.math.columbia.edu/tag/0200), step 5 of the proof.
-
-## Blueprint
-
-`AlgebraicGeometry.ChowGraph.modificationMap` and the lemmas around it implement
-`lem:chow-glue`, `AlgebraicGeometry.ChowGraph.preimage_modificationMap` and
-`AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap` implement
-`lem:chow-preimage`.
 -/
 
 @[expose] public section
@@ -159,12 +152,7 @@ variable [IsSeparated f]
 
 /-- **The modification `π : X' ⟶ X`** obtained by gluing the restrictions
 `pᵢ|_{Vᵢ} : Vᵢ ⟶ Uᵢ ⊆ X` of the projections of the graph over the open
-`X' = ⋃ i, Vᵢ` of the graph.
-
-The morphisms being glued agree on the scheme-theoretically dense open `U∞`, where they are
-all the inclusion of `U∞` in `X`, and `X` is separated over `S`; this is enough by rigidity
-of morphisms into a separated scheme.
-(blueprint: `lem:chow-glue`) -/
+`X' = ⋃ i, Vᵢ` of the graph. -/
 @[stacks 0200 "step 5 of the proof"]
 noncomputable def modificationMap : (⨆ i, projPreimage M i).toScheme ⟶ X :=
   Scheme.Opens.glueMorphismsOfDominant (projPreimage M) (toGraph M).opensRange
@@ -236,12 +224,7 @@ instance isProper_homOfLE_morphismRestrict (i : ι) :
   rw [projPreimageIsoOfLE_hom_homOfLE_morphismRestrict]
   infer_instance
 
-/-- **The fibre of the modification over `Uᵢ` is `Vᵢ`.**
-
-The inclusion `Vᵢ ⊆ π⁻¹(Uᵢ)` is proper over `Uᵢ`, hence universally closed since `π⁻¹(Uᵢ)`
-is separated over `Uᵢ`; and `Vᵢ` contains `U∞`, which is dense in `X'`. So `Vᵢ` is a closed
-dense open subscheme of `π⁻¹(Uᵢ)`, hence all of it.
-(blueprint: `lem:chow-preimage`) -/
+/-- **The fibre of the modification over `Uᵢ` is `Vᵢ`.** -/
 @[stacks 0200 "step 5 of the proof"]
 theorem preimage_modificationMap (i : ι) :
     modificationMap M ⁻¹ᵁ U i = (⨆ i, projPreimage M i).ι ⁻¹ᵁ projPreimage M i := by

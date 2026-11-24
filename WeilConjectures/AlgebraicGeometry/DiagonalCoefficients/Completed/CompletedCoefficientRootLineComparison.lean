@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.BottomFiniteRootUnitIsIso
 
 /-! # Linearity and invertibility of the normalized root-limit map
-
-Source: diagonal coefficient changes, integral root-limit identification.
-(blueprint: lem-diagonal-completed-coefficient-root-line-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -45,26 +42,7 @@ private theorem freeUnit_tensorMap
   rw [Category.assoc]
 
 /-- After identifying the coefficient rings by their reductions, the root-limit
-map is an isomorphism of sectionwise modules.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower,
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), and the integral
-root-limit normalization in lem-diagonal-integral-root-map.
-(blueprint: lem-diagonal-completed-coefficient-root-line-comparison).
-
-Proof: the normalized maps to the positive finite integral twist levels are
-linear. Their underlying maps are the root projections followed by free-module
-units, so the projection equations of roots make them a compatible cone.
-Restriction of internal scalars and the section-module equivalence preserve
-limits, giving a linear lift to the integral line. The forgetful limit's
-projections identify its underlying map with roots.hom. At each finite level
-the bottom-field coefficient is the usual residue ring, so the free-module
-unit on the torsion root sheaf is invertible. Tensor naturality of these units
-gives an isomorphism of towers. Passing to limits and the forgetful limit
-comparison identifies its isomorphism with roots.hom. The sectionwise forgetful
-functor reflects isomorphisms, proving the assertion. This includes the empty
-scheme. The remaining finite scalar and torsion tensor calculations are the
-separate declarations completedRootProjection_linear and bottomFiniteRootUnit_isIso. -/
+map is an isomorphism of sectionwise modules. -/
 theorem completedCoefficientRootLineComparison_exists (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (l : Γ(X, ⊤)))
     (e : (sheafCompose (Scheme.ProEt.topology X)

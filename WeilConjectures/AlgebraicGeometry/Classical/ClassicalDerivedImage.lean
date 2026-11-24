@@ -69,13 +69,7 @@ theorem classicalModule_of_iso (X : Scheme.{u}) (Λ : Type (u + 1))
   rw [hmap]
   infer_instance
 
-/-- The comparison inverse image has classical bounded-below cohomology.
-Proof: inverse image commutes with cohomology because it is exact
-(`Functor.mapDerivedCategoryPlusHomologyFunctorIso`). Each underived inverse image is
-classical by the module equivalence of `proEtaleClassicalSheaves`. Classicality is invariant
-under an isomorphism (`classicalModule_of_iso`), by naturality of the continuity map.
-Finally compare homology in the small and standard derived models (`classicalHomologyIso`)
-using the localization universal property and the equivalence shrinking the Hom types. -/
+/-- The comparison inverse image has classical bounded-below cohomology. -/
 theorem classicalDerivedImage (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (_hunit : ∀ L : DerivedCategory.Plus

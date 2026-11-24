@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearTraceA
 import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-! # Exchange pasting for the linear compact-support action
-
-Source: linear trace invariance, proof paragraph 1, functoriality of the action.
-(blueprint: lem-amb-affine-linear-exchange-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +19,7 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pasting of ordinary derived compact-support exchange maps, in the left-derived
-inverse-image model. Source: linear trace proof, paragraph 1; transport of the existing
-unbounded exchange pasting equation through the exact/derived comparison.
-(blueprint: lem-amb-affine-linear-exchange-coherence). -/
+inverse-image model. -/
 theorem affineLinearExchange_paste (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' X'' Y Y' Y'' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian X'] [IsNoetherian X'']
@@ -157,9 +152,7 @@ private theorem square_inv_eq
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pasting the automorphism square before and after a base-change square gives
-compatible action maps. Source: linear trace proof, paragraph 1; apply exchange pasting
-in the two orders and cancel the identity pullback comparisons.
-(blueprint: lem-amb-affine-linear-exchange-coherence). -/
+compatible action maps. -/
 theorem affineLinearExchange_action
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}
@@ -208,10 +201,7 @@ theorem affineLinearExchange_action
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- An equivariant coefficient map induces an equivariant compact-support exchange.
-Source: linear trace proof, paragraph 1; combine action pasting with naturality in the
-coefficient and the identity inverse-image comparison.
-(blueprint: lem-amb-affine-linear-exchange-coherence). -/
+/-- An equivariant coefficient map induces an equivariant compact-support exchange. -/
 theorem affineLinearExchange_action_naturality
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X X' Y Y' : Scheme.{u}}

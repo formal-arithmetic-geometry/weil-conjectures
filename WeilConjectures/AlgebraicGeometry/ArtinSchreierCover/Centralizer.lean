@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 The automorphisms of the Artin–Schreier cover `Y ⟶ S` commuting with all translations are the
 locally constant functions `S → 𝔽_p`, acting by translation on the fibres; on a connected cover
 every automorphism is a translation.
-Source: blueprint, lemma-artin-schreier-character-sheaf, steps (6)-(8).
 -/
 
 @[expose] public section

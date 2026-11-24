@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.FiniteKummerBoundaryEquation
 
 /-! # Arbitrary ordinary arrows in the finite coefficient coordinates
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-integral-boundary-packaging).
 -/
 
 @[expose] public noncomputable section
@@ -33,9 +30,7 @@ private theorem boundary_of_eq {D : Type*} [Category D]
     (a : X' ⟶ Y') (b : X ⟶ Y) (h : q ≫ a = b ≫ r) :
     finiteBoundaryEquality q r a b := ⟨a, b, HEq.rfl, HEq.rfl, h⟩
 
-/-- A concrete integral boundary equation supplies its fixed endpoint witnesses.
-Source: the definition of finiteBoundaryEquality
-(blueprint: lem-sfb-finite-integral-boundary-packaging). -/
+/-- A concrete integral boundary equation supplies its fixed endpoint witnesses. -/
 theorem finiteKummerBoundary_of_integral_eq (T : Scheme.{u}) (n : ℕ)
     (k : Kummer l T) (L : T.Pic)
     (a : finiteKummerUnit l E T n ⟶ finiteKummerLine l E T n)

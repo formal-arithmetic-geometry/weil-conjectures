@@ -12,6 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.Exceptional
 /-! # The native derived scalar functor and the fixed scalar adjoint
 
 The counit comparison is isolated from monoidal coherence to keep kernel checking small.
+
+## References
+
+* Stacks Project, Tags 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -27,15 +31,7 @@ namespace AlgebraicGeometry.Etale.ExceptionalCoefficients
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.leftDerivedFunctorCounit
 
 /-- Uniqueness of scalar left adjoints identifies the fixed representative with the
-transported native left-derived cochain counit.
-Source: Stacks 06YY and 07A4
-(blueprint: lem-coef-etale-scalar-derived-comparison).
-
-Proof: ordinary sheaf scalar extension is left adjoint to exact restriction. Derive
-that adjunction and compare it to the fixed derived scalar adjunction by
-leftAdjointUniq. The native leftDerivedCochainCounit equation computes the counit
-of the fixed adjunction. Its cochain unit is the published mapComplex unit formula,
-so the result is exactly scalarExtensionRepresentative. -/
+transported native left-derived cochain counit. -/
 theorem scalarExtension_derivedComparison
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u})
     [(ProEtale.etaleSheafExtendScalars φ T).PreservesKFlatQuasiIso] :

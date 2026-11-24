@@ -49,27 +49,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The bounded-below comparison has classical essential image and is an equivalence
 onto that image, with the comparison functors as its forward and inverse functors.
-The explicit counit clause is the essential-surjectivity assertion.
-
-Proof:
-1. The derived unit of the bounded-below comparison adjunction
-   `(comparisonAdjunction (ModuleCat Λ) X).derivedPlus` is invertible on every bounded-below
-   étale complex, by `AlgebraicGeometry.ProEtale.boundedBelowComparison`.
-2. The derived inverse image `(comparisonUpperStar (ModuleCat Λ) X).mapDerivedCategoryPlus`
-   has classical cohomology, by `classicalDerivedImage`: inverse image is exact, so it
-   commutes with cohomology, and every inverse image of an étale module is classical.
-3. The derived counit is invertible on every bounded-below classical object, by
-   `classicalDerivedCounit`: the counit is a transformation of triangulated functors; it is
-   invertible on shifted classical sheaves by the triangle identity and step 1, on bounded
-   classical objects by induction on truncation triangles and the five lemma, and on
-   bounded-below classical objects degree by degree through a large upper truncation.
-4. Restrict the derived adjunction along the full subcategory of classical objects
-   (`ObjectProperty.lift`, `Adjunction.restrictFullyFaithful`). Its unit and counit are
-   invertible by steps 1 and 3, since the inclusion reflects isomorphisms, so
-   `Adjunction.toEquivalence` gives the equivalence. `ObjectProperty.liftCompιIso` identifies
-   its forward functor with the derived inverse image, and its inverse is by construction the
-   right derived direct image `(comparisonLowerStar (ModuleCat Λ) X).rightDerivedFunctorPlus`
-   restricted to classical objects. -/
+The explicit counit clause is the essential-surjectivity assertion. -/
 theorem classicalDerivedEquivalence (X : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] :
     (∀ L : DerivedCategory.Plus

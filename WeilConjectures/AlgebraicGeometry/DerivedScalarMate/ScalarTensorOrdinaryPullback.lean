@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackD
 
 /-! # Ordinary scalar tensor coordinates and total pullback
 
-Source: Stacks Project, Tags 03EK, 06YY, 07A4 and 07A6.
-(blueprint: lem-sfb-scalar-tensor-ordinary-pullback).
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 06YY, 07A4, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +24,7 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.DerivedScalarMate
 
-/-- The restricted universal scalar counit on cochain representatives.
-Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
+/-- The restricted universal scalar counit on cochain representatives. -/
 @[irreducible] def tensorScalarCounit {W : Scheme.{u}}
     {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : A ⟶ B)
     (P : CochainComplex (proEtaleRingModules W A) ℤ) :
@@ -40,8 +40,7 @@ Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
       (((proEtaleRingExtension a).mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
 
-/-- The one-sided tensor comparison in the specified scalar coordinates.
-Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
+/-- The one-sided tensor comparison in the specified scalar coordinates. -/
 @[irreducible] def tensorScalarCoordinates {W : Scheme.{u}}
     {A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : A ⟶ B)
     (t : ProEtaleTensorModel W A) (P : CochainComplex (proEtaleRingModules W A) ℤ) :
@@ -51,8 +50,7 @@ Source: Stacks 06YY (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
   (derivedTensorIso a t).inv.app (DerivedCategory.Q.obj P) ≫
     tensorScalarCounit a P ≫ DerivedCategory.Q.map (ordinaryComplexIso a P).hom
 
-/-- The coefficient identification before localization, including the single-complex map.
-Source: Stacks 03EL (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
+/-- The coefficient identification before localization, including the single-complex map. -/
 @[irreducible] def tensorCoefficientComplexPullback {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B) :
     (((proEtaleRingModulePullback f A (inverseRing f A)
@@ -64,8 +62,7 @@ Source: Stacks 03EL (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
     (CochainComplex.singleFunctor (proEtaleRingModules Z (inverseRing f A))
       (0 : ℤ)).mapIso (coefficientPullback f a)
 
-/-- Ordinary total tensor pullback, followed by the fixed coefficient identification.
-Source: Stacks 03EL, 07A4 (blueprint: lem-sfb-scalar-tensor-ordinary-pullback). -/
+/-- Ordinary total tensor pullback, followed by the fixed coefficient identification. -/
 @[irreducible] def tensorScalarOrdinaryPullback {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)
     (P : CochainComplex (proEtaleRingModules T A) ℤ) :
@@ -96,12 +93,7 @@ private theorem uncurry_map_id_left {C D E : Type*}
   change (F.map (𝟙 X)).app Y ≫ (F.obj X).map v = _
   rw [F.map_id, NatTrans.id_app, Category.id_comp]
 
-/-- Naturality of ordinary total pullback with the fixed coefficient augmentation.
-Source: Stacks 07A4 (blueprint: lem-sfb-scalar-tensor-ordinary-pullback).
-Proof: use naturality of the total comparison from the tensor descent data at
-(1,q), then compose its second factor with the coefficient complex comparison.
-Functoriality of the total bifunctor identifies that composite with (1,Fq ≫ k).
-The degree-zero coefficient introduces no additional interchange sign. -/
+/-- Naturality of ordinary total pullback with the fixed coefficient augmentation. -/
 theorem tensorScalarOrdinaryPullback_naturality
     {Z T : Scheme.{u}} (f : Z ⟶ T)
     {A B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : A ⟶ B)

@@ -37,10 +37,6 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # The sequential derived-limit property for a derived strict tower
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange,
-def-weil-pbc-derived-inverse-limit; Stacks Tags 08TC and 07KC
-(blueprint: def-weil-pbc-derived-inverse-limit).
-
 Evaluation retains the transitions of a strict tower. Localization transports this
 entire inverse system. The derived-limit predicate makes no selection of a cone or functor.
 
@@ -48,6 +44,10 @@ entire inverse system. The derived-limit predicate makes no selection of a cone 
 
 * `adicDerivedTowerEvaluation`: evaluation of the full derived inverse system.
 * `IsAdicSequentialDerivedLimit`: existence of its distinguished Roos triangle.
+
+## References
+
+* Stacks Project, Tags 08TC, 07KC
 -/
 
 @[expose] public section

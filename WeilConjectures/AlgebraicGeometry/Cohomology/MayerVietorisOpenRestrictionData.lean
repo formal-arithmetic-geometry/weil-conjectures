@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.InverseImageOpenFreeSheaf
 import WeilConjectures.AlgebraicGeometry.Cohomology.OpenImmersionCoefficientUnit
 /-! # Restriction data for the cartesian open-subscheme square
 
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 04J0 and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -22,9 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
 
-/-- The base change of the inclusion of an open subscheme.
-Source: Stacks Project, Tag 04J0; the cartesian open-subscheme square.
-(blueprint: lem-pc-open-restriction-data) -/
+/-- The base change of the inclusion of an open subscheme. -/
 noncomputable def H.openBaseChangeInclusion (f : X ⟶ Spec (.of R)) (W : X.Opens) :
     baseChangedScheme (S := S) (W.ι ≫ f) ⟶ baseChangedScheme (S := S) f :=
   Limits.pullback.lift (baseChangeFst (S := S) (W.ι ≫ f) ≫ W.ι)
@@ -61,30 +61,7 @@ private lemma scalarRep_naturality {Y : Scheme.{u}} {M N : Y.Modules}
   simp [invImageCongr, pullbackCongr]
 
 
-/-- Degree-zero data for restriction, including the cartesian coefficient square.
-Source: Stacks Project, Tags 03DI, 03DJ, 04J0, and Section 01F7.
-(blueprint: lem-pc-open-restriction-data)
-
-Proof: Restriction along j = W.ι sends the free sheaf represented by W to the
-free sheaf represented by the top open of W. This gives e by the Yoneda,
-free/forgetful, and sheafification adjunctions. The underlying abelian sheaf of
-j^*M is the restriction of the underlying abelian sheaf of M, because j is an
-open immersion and its map of structure sheaves is an isomorphism. The
-isomorphism d has as hom the abelian adjoint of the module pullback unit.
-Its naturality for multiplication by a section gives the R-scalar square.
-The base-changed inclusion k is an open immersion. The cartesian identity
-k followed by p equals p_W followed by j gives c, the comparison between
-the two composite inverse-image functors, by uniqueness of left adjoints to
-the same composite direct-image functor. Composition of module pullbacks in
-this square, followed by forgetting to abelian sheaves, gives d'. Naturality
-for multiplication by sections from Spec S gives its S-scalar square. The
-pullback units compose under these pullback comparisons. Taking abelian
-adjoints proves the displayed coefficient square; this uses the unit and
-counit identities, so the chosen c and d' are coherent. All data here are
-sheaf morphisms in degree zero. No Ext equivalence or bijectivity is asserted.
-For an empty open these are isomorphisms of zero sheaves; for the top open
-they are the usual restriction identities. No flatness is used.
--/
+/-- Degree-zero data for restriction, including the cartesian coefficient square. -/
 theorem H.openRestrictionData (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :
     let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
     let G := invImage (baseChangeFst (S := S) f)

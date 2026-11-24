@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalLimitInputFinit
 /-! # Named strict-system specifications for the diagonal limit
 
 These are the existing strict witnesses with either form of the finite equation.
-(blueprint: def-sfb-diagonal-strict-limit-specification).
 -/
 
 @[expose] public noncomputable section

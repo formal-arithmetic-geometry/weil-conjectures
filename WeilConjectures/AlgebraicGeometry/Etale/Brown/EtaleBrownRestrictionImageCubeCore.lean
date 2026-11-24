@@ -21,7 +21,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Exact restriction and normalized Brown direct image
 
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 07A4 and 0D6J.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 and Lemma 5.16
+* Stacks Project, Tags 07A4, 0D6J
 -/
 
 @[expose] public noncomputable section
@@ -243,9 +245,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
   {E : Type e} [Category.{ev} E] [Abelian E] [HasDerivedCategory.{de} E]
   {F : Type f} [Category.{fv} F] [Abelian F] [HasDerivedCategory.{df} F]
 
-/-- A square agrees with ordinary cochain maps after the supplied derived units.
-Source: Stacks 07A4; Zheng Lemma 5.16.
-(blueprint: lem-pur-brown-unit-normalized-naturality). -/
+/-- A square agrees with ordinary cochain maps after the supplied derived units. -/
 def EtaleBrownUnitNorm
     (F₀ : A ⥤ B) (G₀ : C ⥤ D) [F₀.Additive] [G₀.Additive]
     (FD : DerivedCategory A ⥤ DerivedCategory B)
@@ -309,15 +309,7 @@ private theorem normalized_composition
   simp only [← DerivedCategory.Q.map_comp_assoc]
   rfl
 
-/-- Naturality of squares specified by their cochain derived-unit equations.
-Source: Stacks 07A4; Zheng Lemma 5.16.
-(blueprint: lem-pur-brown-unit-normalized-naturality).
-Proof: precompose both routes with the source derived unit and postcompose with
-the exact comparison factor. Substitute both unit normalizations, naturality of
-the edge transformations, and the ordinary cube. On a K-injective complex the
-source unit is invertible, so cancellation gives equality. Every derived object
-has such a representative; naturality transports the equality along its
-representative isomorphism. This includes zero objects and identity edges. -/
+/-- Naturality of squares specified by their cochain derived-unit equations. -/
 theorem etaleBrownNormalizedNaturality
     [Abelian.HasKInjectiveResolutions A]
     (F₀ : A ⥤ B) (G₀ : C ⥤ D) [F₀.Additive] [G₀.Additive]

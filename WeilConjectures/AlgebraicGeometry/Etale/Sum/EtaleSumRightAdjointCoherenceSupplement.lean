@@ -30,13 +30,13 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSumRightAdjointCoherence
 
 /-! # Coherence of normalized etale sum right adjoints
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-cohsm,
-lem-pur-co-smooth-etale-locality.proof.md, Step 1; Stacks Tags 03S6, 0F7J, 0F7K
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence).
-
 The comparisons below use the actual proper/open compositor and exchange. The map to sum
 extension is the constructed graph comparison, rather than a choice of a bare isomorphism.
 Right adjoints and their adjunctions are quantified, so no choice of Brown adjoint is imposed.
+
+## References
+
+* Stacks Project, Tags 03S6, 0F7J, 0F7K
 -/
 
 @[expose] public section
@@ -55,9 +55,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso
   unboundedEtaleCompactSupportBaseChange exactEtaleSumExchange
 
-/-- The normalization eta of the dualizing coefficient object.
-Source: blueprint Step 1, definition of eta from rho at the coefficient unit
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence). -/
+/-- The normalization eta of the dualizing coefficient object. -/
 noncomputable def etaleSumRightAdjointUnitIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -68,9 +66,7 @@ noncomputable def etaleSumRightAdjointUnitIso
   (etaleSumRightAdjointIso A e G adj).app (constantComplex A X) ≪≫
     etaleSumPullbackUnitIso A e
 
-/-- The right-adjoint compositor is the conjugate of the specified compact-support compositor.
-Source: Stacks Tags 0F7J, 0F7K; blueprint Step 1
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence). -/
+/-- The right-adjoint compositor is the conjugate of the specified compact-support compositor. -/
 noncomputable def etaleSumRightAdjointCompIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} (e : U ⟶ X) (v : X ⟶ T)
@@ -86,9 +82,7 @@ noncomputable def etaleSumRightAdjointCompIso
   conjugateIsoEquiv adj_ve (adj_e.comp adj_v) (unboundedEtaleLowerShriekCompIso A e v)
 
 /-- The exceptional exchange at the coefficient unit is the adjunct of the inverse
-specified compact-support exchange followed by the pulled-back counit and unit identification.
-Source: blueprint Step 1, definition of b; Stacks Tag 03S6
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence). -/
+specified compact-support exchange followed by the pulled-back counit and unit identification. -/
 noncomputable def etaleSumRightAdjointBaseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}}
@@ -335,19 +329,7 @@ private theorem normalized_square
   rw [hq, Category.id_comp] at hp'
   exact hp' sq
 
-/-- Composition coherence for the normalized right adjoints, at every unbounded input.
-Source: blueprint Step 1; Stacks Tags 0F7J, 0F7K
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence).
-
-Proof: The sum adjunction counit folds each summand; after two extensions it sends a nested
-summand to its original section. Sheafification proves equality of the two sheaf counits.
-Apply this degreewise and descend through localization, using
-lemma-affine-space-etale-localization--4 and lem-weil-pbc-localization-universal-property.
-The proper-support/sum comparison of lem-sfb-quasifinite-compact-support-exact intertwines
-this sum compositor with the actual compact-support compositor. Conjugate that equality
-using def-weil-pbc-adjunction-conjugate and lem-weil-pbc-mate-pasting. The conjugate of the
-sum compositor is the pullback compositor by the counit calculation. This gives the equation.
-No boundedness or constructibility assumption occurs in the degreewise argument. -/
+/-- Composition coherence for the normalized right adjoints, at every unbounded input. -/
 theorem etaleSumRightAdjoint_comp
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]
@@ -384,15 +366,7 @@ theorem etaleSumRightAdjoint_comp
     etaleSumRightAdjointCompIso]
   convert h using 1
 
-/-- The identity normalization uses the canonical identity comparison.
-Source: blueprint Step 1; Stacks Tag 0F7K
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence).
-
-Proof: The proper-support comparison of the identity compactification is the canonical
-identity sum comparison (lem-sfb-quasifinite-compact-support-exact). Its conjugate is the
-identity pullback comparison by def-weil-pbc-composite-adjunction and
- def-weil-pbc-adjunction-conjugate. Canonical refinement comparisons give the same equation
-for the chosen compactification. -/
+/-- The identity normalization uses the canonical identity comparison. -/
 theorem etaleSumRightAdjoint_id
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X] [HasCompactification (𝟙 X)]
@@ -407,20 +381,7 @@ theorem etaleSumRightAdjoint_id
     hid, Iso.refl_symm, Iso.refl_trans, Iso.trans_refl, unboundedEtaleLowerShriekId] using
     etaleNormalizedMates_identity A X (HasCompactification.compactification (𝟙 X)) G adj
 
-/-- Base change preserves the normalized dualizing coefficient object.
-Source: blueprint Step 1; Stacks Tag 03S6
-(blueprint: lem-pur-etale-sum-right-adjoint-coherence).
-
-Proof: Expand the adjunction conjugate to express the compact-support counit as the sum
-counit after d and rho. The specified sheaf sum base-change map is the mate of the pullback
-square: expand its definition as the conjugate of underived exchange, paste the inverse-image
-and sum adjunctions, and cancel their triangles (lem-weil-pbc-mate-pasting). Its counit square
-therefore commutes. Apply this degreewise to unbounded representatives and use localization.
-The actual proper/open exchange intertwines d with the inverse sum exchange by
-lem-pur-etale-support-map-compatibility (1), for arbitrary w, including non-finite proper
-compactification factors. Transpose the defining counit composite of b across the sum
-adjunction, substitute these two identities, and cancel the injective hom bijection. At A_X
-the pullback-unit identifications give exactly the displayed equality. -/
+/-- Base change preserves the normalized dualizing coefficient object. -/
 theorem etaleSumRightAdjoint_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U U' X X' : Scheme.{u}}

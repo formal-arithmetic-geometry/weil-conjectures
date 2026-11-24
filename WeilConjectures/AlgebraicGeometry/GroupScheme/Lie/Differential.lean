@@ -87,8 +87,7 @@ theorem lieEquivTangent_infPointsMap (f : G ⟶ H) [IsMonHom f] (x : Lie G) :
   rw [Equiv.symm_apply_apply, coe_infPointsMap_apply, Category.assoc]
 
 /-- The differential `df : Lie(G) → Lie(H)` of a homomorphism of group schemes `f : G ⟶ H` over
-`k`: on tangent vectors, `v ↦ v ≫ f`. It is a homomorphism of Lie algebras.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+`k`: on tangent vectors, `v ↦ v ≫ f`. It is a homomorphism of Lie algebras. -/
 noncomputable def differential (f : G ⟶ H) [IsMonHom f] : Lie G →ₗ⁅k⁆ Lie H where
   toFun x := lieEquiv H (infPointsMap f ((lieEquiv G).symm x))
   map_add' x y := by
@@ -150,8 +149,7 @@ theorem differential_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
 
 /-- If the commutators of the points of `H` with values in `k[ε, δ]/(ε², δ²)` factor through the
 subgroup scheme `f : G ⟶ H`, then the brackets of tangent vectors of `H` are tangent to `G`: the
-bracket is the mixed term of the commutator of the points `1 + εx` and `1 + δy`.
-(blueprint: `lemma-restriction-normal-subgroup`) -/
+bracket is the mixed term of the commutator of the points `1 + εx` and `1 + δy`. -/
 theorem lie_mem_range_differential_of_commutator_mem (f : G ⟶ H) [IsMonHom f] [Mono f]
     (hf : ∀ a b : points H (DualNumber (DualNumber k)),
       ⁅a, b⁆ ∈ (IsMonHom.monoidHom f _).range)
@@ -183,7 +181,7 @@ theorem lie_mem_range_differential_of_commutator_mem (f : G ⟶ H) [IsMonHom f] 
   rw [tangentMul, ← kerPost_tangentMap, ← tangentMul, hu, hc, tangentMul_tangentBracket]
 
 /-- If the subgroup scheme `f : G ⟶ H` contains the commutators of `H`, then the brackets of
-tangent vectors of `H` are tangent to `G`. (blueprint: `lemma-restriction-normal-subgroup`) -/
+tangent vectors of `H` are tangent to `G`. -/
 theorem lie_mem_range_differential_of_containsCommutators (f : G ⟶ H) [IsMonHom f] [Mono f]
     [IsMonHom.ContainsCommutators f] (x y : Lie H) : ⁅x, y⁆ ∈ (differential f).range :=
   lie_mem_range_differential_of_commutator_mem f (fun a b ↦ MonoidHom.mem_range.2
@@ -191,8 +189,7 @@ theorem lie_mem_range_differential_of_containsCommutators (f : G ⟶ H) [IsMonHo
 
 /-- The tangent vectors of a central subgroup scheme `f : G ⟶ H` are central in `Lie(H)`: for
 `x ∈ Lie(G)` and `y ∈ Lie(H)` the points `1 + εx` and `1 + δy` commute over `k[ε, δ]/(ε², δ²)`,
-so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint:
-`lemma-stable-subspaces-center`) -/
+so the mixed term `⁅df(x), y⁆` of their commutator vanishes. -/
 theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
     (hf : ∀ (X : Over (Spec (.of k))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
     (differential f).range ≤ (LieAlgebra.center k (Lie H) : LieSubalgebra k (Lie H)) := by

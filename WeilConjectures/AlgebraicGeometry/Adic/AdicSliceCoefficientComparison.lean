@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicModuleSectionComparison
 
-/-! # Coefficient identification on a pro-etale site object -/
+/-! # Coefficient identification on a pro-etale site object
+
+## References
+
+* Stacks Project, Tag 03CV
+-/
 
 @[expose] public section
 
@@ -16,15 +21,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- Normalized coefficient sheaves restrict by the identity on function sections.
-Source: Stacks 03CV, and the coefficient normalization of the base comparison
-(blueprint: lem-sf-adic-slice-coefficients).
-
-Proof: on each object compose the coefficient identification at its source with
- the inverse coefficient identification after composition to the base. Both are
- the same locally finite functions on the same underlying scheme. Naturality is
- precomposition of functions on either side. The supplied identity conditions
- show that the resulting map leaves every function unchanged. -/
+/-- Normalized coefficient sheaves restrict by the identity on function sections. -/
 theorem adicSliceCoefficientComparison (l : ℕ) [Fact l.Prime]
     (base : ∀ X : Scheme.{u}, AdicModuleSectionComparison l X) :
     ∃ c : ∀ (X : Scheme.{u}) (U : X.ProEt),

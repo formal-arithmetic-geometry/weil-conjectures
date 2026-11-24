@@ -47,8 +47,6 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSuppleme
 
 /-!
 # Discrete constant coefficients on the geometric point
-
-Source: main-20261015, coefficient lemma, second paragraph.
 -/
 
 -- After pruning, this module only keeps private declarations.

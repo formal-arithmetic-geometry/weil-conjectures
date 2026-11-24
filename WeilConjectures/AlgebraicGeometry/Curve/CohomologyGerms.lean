@@ -33,12 +33,18 @@ import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-! # Cohomology germs on the small coordinate-ring colimit model
 
-The free sheaf, derived-sections presheaf, germ comparison and neighbourhood functor
-are the adopted library's constructions. Only their source comparison and source legs
-on `strictHenselizationScheme` are defined here. The adopted source comparison instead
-has target on `strictLocalization`, so it cannot replace these maps definitionally.
+## Implementation details
 
-Source: Stacks Project, Tags 03Q8, 03Q9 and 03QO.
+* The free sheaf, derived-sections presheaf, germ comparison and neighbourhood functor are the
+  adopted library's constructions; only their source comparison and source legs on
+  `strictHenselizationScheme` are defined here. The adopted source comparison has target on
+  `strictLocalization`, so it cannot replace these maps definitionally.
+* `smallModel_strictLocalCohomologySourceIso` uses the uniquely specified restriction of
+  `strictLocalSectionCone`; no arbitrary witness or sheafification isomorphism supplies its data.
+
+## References
+
+* Stacks Project, Tags 03Q8, 03Q9 and 03QO.
 -/
 
 @[expose] public section
@@ -49,16 +55,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- The source isomorphism on the small coordinate-ring colimit model, using its unique germ
-restriction and commutation of exact inverse image with homology.
-Source: Stacks, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-small-model-cohomology-germs).
-
-Construction: choose the uniquely specified restriction of `strictLocalSectionCone`.
-The pointed residue identification supplies a compatible geometric lift to the closed point.
-Global sections there compute the geometric stalk, so the general section-cone criterion
-proves invertibility of this same restriction. Compose with the global-sections image of
-the exact inverse-image/homology comparison. The restriction is uniquely determined;
-no arbitrary witness or sheafification isomorphism supplies its data. -/
+restriction and commutation of exact inverse image with homology. -/
 @[irreducible] noncomputable def smallModel_strictLocalCohomologySourceIso {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -112,10 +109,7 @@ no arbitrary witness or sheafification isomorphism supplies its data. -/
         (upperStar AddCommGrpCat.{v + 1}
           (Scheme.strictHenselizationStructuralMap s)) n).app L)
 
-/-- The forward map is the uniquely specified restriction followed by exact homology.
-Source: Stacks Project, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-small-model-cohomology-germs).
-Proof: unfold the construction; the forward map of `asIso r` is `r`. -/
+/-- The forward map is the uniquely specified restriction followed by exact homology. -/
 theorem smallModel_strictLocalCohomologySourceIso_hom {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -132,13 +126,7 @@ theorem smallModel_strictLocalCohomologySourceIso_hom {S : Scheme.{v}}
   rfl
 
 /-- Canonical source legs: a presheaf germ, the canonical map to the cohomology-sheaf
-stalk, and the unique strict-local germ restriction transported through exact inverse image.
-Source: Stacks, Tags 03Q8 and 03Q9
-(blueprint: def-weil-pbc-small-model-cohomology-germs).
-
-Construction: use the adopted derived-sections presheaf and its canonical homology germ
-map, followed by the source isomorphism for this small model. Naturality is the cocone
-identity for presheaf germs on the pointed affine representative diagram. -/
+stalk, and the unique strict-local germ restriction transported through exact inverse image. -/
 noncomputable def smallModel_strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -169,11 +157,7 @@ noncomputable def smallModel_strictLocalCohomologySourceLegs {S : Scheme.{v}}
       (strictLocalCohomologyPresheaf L n) |>.w (N.map a.unop).op
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A source leg is the homology section restricted along its fixed cone section.
-Source: Stacks Project, Tag 03Q9, restriction from pointed neighbourhoods
-(blueprint: def-weil-pbc-small-model-cohomology-germs).
-Proof: naturality moves the homology comparison across the presheaf germ. The defining
-equation of the unique section-cone restriction then gives the asserted section map. -/
+/-- A source leg is the homology section restricted along its fixed cone section. -/
 theorem smallModel_strictLocalCohomologySourceLegs_app {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

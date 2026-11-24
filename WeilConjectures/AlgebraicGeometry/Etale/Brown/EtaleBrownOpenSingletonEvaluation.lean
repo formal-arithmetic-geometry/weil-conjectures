@@ -10,8 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownOpenSingletonEval
 
 /-! # Open singleton evaluation
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16,
+  pp. 21 and 34--35
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -35,22 +38,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
 variable (O : Type (u + 1)) [CommRing O] (t : O)
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
-/-- The open singleton insertion evaluates to the open coefficient projection.
-Source: Zheng, Construction 5.14, Lemma 5.16 and Construction 4.1,
-printed pp. 21 and 34--35
-(blueprint: lem-pur-etale-brown-open-singleton-evaluation).
-
-Proof: apply the open extension/inverse-image Hom transpose, followed by the
-scalar extension/restriction transpose. The mate equation for q rewrites its open
-coefficient factor as the inverse of derivedTensor. The singleton below-level
-comparison intertwines its Hom transpose with the strict derived transition: on
-flat-term K-flat representatives this is derivedBelow_rep and hom_formula; exact
-localization then gives the statement on every derived object. The inverseTransition
-identity moves that transition through inverse image. Finally the defining conjugate
-identity for insertion and the evaluated open adjunction identity reduce the two
-sides to the same map. Injectivity of the transposes gives the equality. Thus the
-identity coefficient map is included, and no faithfulness of derived evaluation or
-invertibility of any proper singleton mate enters the proof. -/
+/-- The open singleton insertion evaluates to the open coefficient projection. -/
 theorem etaleBrownOpenSingletonEvaluation
     (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)
     (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅

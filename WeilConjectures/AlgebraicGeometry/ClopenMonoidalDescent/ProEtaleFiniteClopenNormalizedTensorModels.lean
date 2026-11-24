@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenMonoidalDescent.ProEtaleClopenKFl
 
 /-! # Normalized tensor models for a finite clopen partition
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YU and 0FPT.
-(blueprint: lem-pur-finite-clopen-normalized-tensor-models)
+## References
+
+* Stacks Project, Tags 06YS, 06YU, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -34,16 +35,7 @@ attribute [local irreducible] DerivedCategory.Q Functor.mapDerivedCategory
 namespace AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent
 
 -- The existential comparison types include dependent monoidal localization structures.
-/-- Produce the normalized ordinary, total and derived tensor witnesses of each component.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YU and 0FPT
-(blueprint: lem-pur-finite-clopen-normalized-tensor-models).
-
-Proof: obtain normalized braided structures and total comparisons from the finite-clopen
-monoidal descent theorem. Its model square is initially normalized on flat-term K-flat
-pairs. Componentwise K-flat detection supplies preservation by restriction. Identify the
-derived comparison with the inverse braided tensorator inside the normalization predicate,
-then apply the proved extension of model normalization to all K-flat pairs. The ordinary
-pure-tensor and total-generator equalities are the supplied normalization clauses. -/
+/-- Produce the normalized ordinary, total and derived tensor witnesses of each component. -/
 theorem finite_clopen_normalized_tensor_models
     (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
     (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]

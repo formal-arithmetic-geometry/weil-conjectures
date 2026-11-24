@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.CompactificationOrdinaryScalarAssembly
 
 /-! # Horizontal scalar compatibility and direct-image acyclicity
-Source: blueprint direct-image proof, paragraph (2).
-(blueprint: lem-sp-compactification-scalar-transition-acyclicity).
 -/
 
 @[expose] public noncomputable section

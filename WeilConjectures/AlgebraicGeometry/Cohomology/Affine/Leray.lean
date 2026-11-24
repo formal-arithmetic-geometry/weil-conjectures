@@ -18,6 +18,12 @@ public import WeilConjectures.Topology.Sheaves.CechComparison
 Leray's theorem: for a cover by affine opens with affine finite intersections, the Čech cohomology
 of a quasi-coherent sheaf is its sheaf cohomology, as modules over the global functions
 (`AlgebraicGeometry.Scheme.Modules.nonempty_cechComplex_linearEquiv_H`).
+
+## Implementation details
+
+* `nonempty_cechComplex_linearEquiv_H` only asserts the existence of an isomorphism; it ought to
+  be the edge map of the Čech-to-derived spectral sequence
+  `CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence`.
 -/
 
 @[expose] public section
@@ -99,14 +105,7 @@ the sheaf cohomology, `Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)`, as `Γ(X, ⊤)`-modules
 The left-hand side is the `q`-th cohomology of the Čech complex `cechComplexFunctor U` of the
 family `U` with coefficients in the presheaf of `Γ(X, ⊤)`-modules `ℱ.presheafModuleCat`; the
 right-hand side carries the `Γ(X, ⊤)`-module structure
-`AlgebraicGeometry.Scheme.Modules.moduleH`.
-
-The isomorphism ought to be the edge map of the Čech-to-derived spectral sequence
-`CategoryTheory.Sheaf.exists_cechToDerivedSpectralSequence`, which is an isomorphism because
-the higher rows of that spectral sequence vanish by `subsingleton_H_succ_of_isAffine`; see the
-implementation notes of this module for what is lost by not naming it.
-
-(blueprint: `lem-pc-cech-computes`) -/
+`AlgebraicGeometry.Scheme.Modules.moduleH`. -/
 @[stacks 01XD]
 theorem nonempty_cechComplex_linearEquiv_H {ι : Type u} (U : ι → X.Opens)
     (hU : ∀ s : Finset ι, s.Nonempty → IsAffineOpen (⨅ i ∈ s, U i)) (hU' : iSup U = ⊤)
@@ -139,13 +138,10 @@ theorem nonempty_cechComplex_linearEquiv_H {ι : Type u} (U : ι → X.Opens)
 /-- **Leray's theorem for schemes separated over an affine base.** Let `X` be separated over an
 affine base `S` and let `𝔘 = (U i)` be a covering of `X` by open affines. Then for every
 quasi-coherent `𝒪_X`-module `ℱ` and every `q` we have `Ȟ^q(𝔘, ℱ) ≅ H^q(X, ℱ)` as
-`Γ(X, ⊤)`-modules. This is `nonempty_cechComplex_linearEquiv_H`, the finite intersections of
-the `U i` being affine because `X` is separated.
+`Γ(X, ⊤)`-modules.
 
 Restricting scalars along `f.appTop`, the isomorphism is `Γ(S, 𝒪_S)`-linear, and `k`-linear
-when `S = Spec k`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
+when `S = Spec k`. -/
 theorem nonempty_cechComplex_linearEquiv_H_of_isSeparated {S : Scheme.{u}} (f : X ⟶ S)
     [IsSeparated f] [IsAffine S] {ι : Type u} (U : ι → X.Opens) (hU : ∀ i, IsAffineOpen (U i))
     (hU' : iSup U = ⊤) (ℱ : X.Modules)

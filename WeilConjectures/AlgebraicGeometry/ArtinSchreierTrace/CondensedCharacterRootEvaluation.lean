@@ -79,12 +79,7 @@ private theorem evaluation_pull
     condensedPull_comp]
 
 /-- The value of an averaged coefficient function at a root is the weighted sum
-of its values at the translated roots.
-Source: blueprint lemma-artin-schreier-character-sheaf, explicit averaging projector
-(blueprint: lem-fd-as-character-root-evaluation).
-
-Proof: expand the finite sum defining the projector, move each constant scalar
-through root evaluation, and compose pullbacks of functions. -/
+of its values at the translated roots. -/
 theorem condensedProjector_rootEvaluation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}} (Y : Over X)
@@ -128,16 +123,7 @@ private theorem evaluation_translation
   rw [← he, condensedPull_comp Λ (s ≫ _) _]
 
 /-- On a chart with root-labelled sheets, evaluation at the root trivializes the
-image of the character projector.
-Source: blueprint lemma-artin-schreier-character-sheaf, Step 4, eigenfunction evaluation
-(blueprint: lem-fd-as-character-root-evaluation).
-
-Proof: the sheet projections identify the direct image with the finite product
-of coefficient objects. Translation by c replaces the a-component by the
-(a+c)-component. Constant scalars commute with the projections. Reindexing the
-averaging sum therefore gives matrix entry n⁻¹χ(a-b). The character-matrix image
-lemma identifies its image with the coefficient object by the zero projection.
-Exact pullback preserves images, so this is precisely the stated evaluation. -/
+image of the character projector. -/
 theorem condensedCharacterImage_rootEvaluation_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}} (Y : Over X)
@@ -211,13 +197,7 @@ theorem condensedCharacterImage_rootEvaluation_isIso
   infer_instance
 
 /-- Constants give the inverse of root evaluation on the trivial-character
-image, after pullback to a root chart.
-Source: blueprint lemma-artin-schreier-character-sheaf, trivial-character clause
-(blueprint: lem-fd-as-character-root-evaluation).
-
-Proof: the image factorization replaces the composite with the image inclusion
-by the projector. Its evaluation is the weighted sum of translated evaluations.
-Each constant has the same value at every root; the sum of n copies of n⁻¹ is 1. -/
+image, after pullback to a root chart. -/
 theorem condensedTrivialCharacter_constantMap_evaluation
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}} (Y : Over X)

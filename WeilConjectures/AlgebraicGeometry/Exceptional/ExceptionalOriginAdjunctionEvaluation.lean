@@ -9,7 +9,13 @@ public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInt
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
 import Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! # Evaluation of the origin adjunction -/
+/-! # Evaluation of the origin adjunction
+
+## References
+
+* Zheng, Lemmas 4.10 and 5.22, Proposition 5.24
+* Stacks Project, Tag 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -548,24 +554,7 @@ private theorem origin_hom_evaluation
     htS htN hq (CX.image.counit n M.obj)
 
 -- The three concrete evaluation identities elaborate over large derived categories.
-/-- Evaluation of origin-adjunction Hom words and quotient transitions.
-Source: Zheng Lemmas 4.10 and 5.22 and Proposition 5.24; Stacks 0B65.
-(blueprint: lem-sf-exceptional-origin-adjunction-evaluation).
-
-Proof: the transpose equations determine the system and finite Hom maps after
-precomposition with the respective source site counits. Evaluate these equations,
-substitute the comparison evaluation square, and use the three evaluated
-adjunctions. The evaluated source counit is the finite counit composed with the
-two inverse/direct evaluation comparisons; cancel it, using its invertibility on
-origins. Hence evaluation intertwines the forward Hom maps. Apply this identity
-to the identity of the left image for the unit, and to the counit for the counit,
-using bijectivity of the finite Hom map. For quotient transitions use the actual
-etale transition equation before evaluation, then apply the site inverse tensor
-comparison. The scalar/site pullback cube identifies its derived tensor map and
-the inverse-transition restriction comparison as scalar-adjunction mates. Moving
-through this mate square gives exactly the displayed transpose. The intermediate
-tensor object may be unbounded, so all transposes are taken in the unbounded
-categories. No equality is inferred from agreement at every evaluation. -/
+/-- Evaluation of origin-adjunction Hom words and quotient transitions. -/
 theorem exceptionalOriginAdjunctionEvaluation
     (record : ExceptionalSystemTransportData G CX CY CZ P R)
     (hfinite : ∀ n M, CX.levelOrigin n M →

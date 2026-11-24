@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Supported.DiagonalSupportedAcyclic
 
 /-! # Transporting only the supported coefficient source
-
-Source: diagonal tower coefficient changes, initial supported-source identification.
-(blueprint: lem-diagonal-completed-supported-transport).
 -/
 
 @[expose] public noncomputable section
@@ -270,9 +267,7 @@ private theorem normalized_transport_core
         diagonalTraceRightSingle G RG M') ht
   simpa only [Functor.map_comp, Category.assoc] using hfinal
 /-- The supported coefficient isomorphism is an actual ordinary direct-image
-comparison at the diagonal, followed by the regular-unit comparison.
-Source: coefficient changes, initial supported-source identification.
-(blueprint: lem-diagonal-completed-supported-transport). -/
+comparison at the diagonal, followed by the regular-unit comparison. -/
 def completedSupportedCoefficientIso (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (eP : CompletedRealization l (ProjectiveLine Y))
     (eW : CompletedRealization l (diagonalSurface Y))
@@ -286,9 +281,7 @@ def completedSupportedCoefficientIso (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
       (diagonalImmersion Y)).mapIso eP.unitIso
 
 /-- Categorical cancellation for an ordinary square; the heterogeneous form
-keeps the source-object equality explicit.
-Source: categorical cancellation in the supported-source normalization.
-(blueprint: lem-diagonal-completed-supported-transport). -/
+keeps the source-object equality explicit. -/
 private theorem normalized_underlying_square
     {C D : Type*} [Category C] [Category D]
     (H : C ⥤ D) {A B T : C} {S : D}
@@ -322,14 +315,7 @@ private theorem completed_source_underlying (l : ℕ) [Fact l.Prime] (Y : Scheme
               (Scheme.purTwistZlCompletion (ProjectiveLine Y) l)))) := rfl
 
 /-- The explicit supported coefficient isomorphism has the prescribed
-underlying-sheaf normalization.
-
-Source: coefficient changes, initial supported-source identification.
-(blueprint: lem-diagonal-completed-supported-transport).
-
-Proof: the ordinary diagonal square intertwines the two underlying-sheaf
-comparisons. Cancel the image of the regular-module underlying isomorphism,
-then compose with the direct image of the regular-unit comparison. -/
+underlying-sheaf normalization. -/
 theorem completedSupportedCoefficientIso_normalization (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (eP : CompletedRealization l (ProjectiveLine Y))
     (eW : CompletedRealization l (diagonalSurface Y))
@@ -354,28 +340,7 @@ theorem completedSupportedCoefficientIso_normalization (l : ℕ) [Fact l.Prime] 
 /-- The constructed supported comparison transports every normalized acyclic
 supported source through the universal-unit derived square.
 The coefficient realizations and all ordinary squares are inputs, rather than
-part of the conclusion. No trace or integration identity occurs.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), supported-source
-identification; diagonal trace proof step 9.
-(blueprint: lem-diagonal-completed-supported-transport).
-
-Proof: expand the constructed isomorphism. The diagonal ordinary square's
-normalization and naturality of the underlying comparison give the displayed
-source normalization. For a projection f, transport the ordinary supported
-isomorphism using the regular-unit comparison, its ordinary coefficient square,
-and the constructed source comparison. On underlying sheaves the composite is
-the composition isomorphism for direct images followed by the equality
-Delta f = id and the identity direct-image isomorphism. Thus it has the required
-support normalization. Apply the full universal-unit equation to the complex
-concentrated in degree zero at the supported source. The single-complex and
-single-functor comparison isomorphisms identify this equation with the displayed
-derived source square. All other arrows in that square are isomorphisms:
-exact equivalences preserve the original source's acyclicity, and the endpoint
-and derived-square comparisons are isomorphisms. Consequently the condensed
-single-object derived unit is an isomorphism. Together with the normalized
-ordinary isomorphism this gives the asserted NormalizedSource. -/
+part of the conclusion. No trace or integration identity occurs. -/
 theorem completedSupportedCoefficient_transport (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (ProjectiveLine Y)]

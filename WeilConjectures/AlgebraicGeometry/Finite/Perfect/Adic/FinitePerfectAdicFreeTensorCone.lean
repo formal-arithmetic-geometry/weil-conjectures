@@ -11,7 +11,10 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Ordinary tensor models of finite-free coefficient cones
 
-Source: Stacks Project, Tag 09C6, the finite-free coefficient calculation.
+## References
+
+* Stacks Project, Tag 09C6 (the finite-free coefficient calculation)
+* Stacks Project, Modules on Sites, Tags 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -22,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Ordinary completed constant realization, before localization.
-Source: Stacks Tags 093J--093M. -/
+/-- Ordinary completed constant realization, before localization. -/
 def finitePerfectAdicOrdinary (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) : ModuleCat.{t} A ⥤ CompletedAdicModules X d :=
   finitePerfectAdicConstant X A ⋙ completedAdicScalarExtension X d
@@ -34,8 +36,7 @@ instance finitePerfectAdicOrdinary_additive (X : Scheme.{t}) {A : Type t} [CommR
   unfold finitePerfectAdicOrdinary
   infer_instance
 
-/-- The actual coefficient diagram tensored with a variable module.
-Source: Stacks Tag 09C6. -/
+/-- The actual coefficient diagram tensored with a variable module. -/
 def finitePerfectAdicTensorFunctor (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) :
     CompletedAdicModules X d ⥤ (ℕᵒᵖ ⥤ CompletedAdicModules X d) :=
@@ -57,15 +58,13 @@ private theorem tensorProjection_natural
     f ≫ (ρ_ N).inv ≫ N ◁ q = (ρ_ M).inv ≫ M ◁ q ≫ f ▷ B := by
   rw [rightUnitor_inv_naturality_assoc, ← whisker_exchange]
 
-/-- The coefficient projection tensored with an arbitrary completed module.
-Source: Stacks Tag 09C6, the maps in the finite-projective coefficient calculation. -/
+/-- The coefficient projection tensored with an arbitrary completed module. -/
 def finitePerfectAdicTensorProjection (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (M : CompletedAdicModules X d) (n : ℕ) :
     M ⟶ ((finitePerfectAdicTensorFunctor X d).obj M).obj (op n) :=
   (ρ_ M).inv ≫ M ◁ finitePerfectAdicCoefficientProjection X d n
 
-/-- Tensor projection commutes with every module map.
-Source: Stacks Tag 09C6; functoriality of tensor and its right unitor. -/
+/-- Tensor projection commutes with every module map. -/
 theorem finitePerfectAdicTensorProjection_naturality
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     {M N : CompletedAdicModules X d} (f : M ⟶ N) (n : ℕ) :
@@ -74,30 +73,25 @@ theorem finitePerfectAdicTensorProjection_naturality
         ((finitePerfectAdicTensorFunctor X d).map f).app (op n) := by
   exact tensorProjection_natural f (finitePerfectAdicCoefficientProjection X d n)
 
-/-- The ordinary tensor cone, with its actual coefficient projections.
-Source: Stacks Tag 09C6. -/
+/-- The ordinary tensor cone, with its actual coefficient projections. -/
 def finitePerfectAdicTensorCone (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (M : CompletedAdicModules X d) :
     Cone ((finitePerfectAdicTensorFunctor X d).obj M) :=
   ((tensorLeft M).mapCone (finitePerfectAdicCoefficientCone X d)).extend (ρ_ M).inv
 
-/-- The explicit complex of ordinary completed constant modules.
-Source: Stacks Tag 09C6. -/
+/-- The explicit complex of ordinary completed constant modules. -/
 def finitePerfectAdicOrdinaryComplex (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (P : CochainComplex (ModuleCat.{t} A) ℤ) :=
   ((finitePerfectAdicOrdinary X d).mapHomologicalComplex (.up ℤ)).obj P
 
-/-- Tensor each term of the ordinary completed realization with the actual coefficient tower.
-Source: Stacks Tag 09C6. -/
+/-- Tensor each term of the ordinary completed realization with the actual coefficient tower. -/
 def finitePerfectAdicTensorComplexDiagram (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (P : CochainComplex (ModuleCat.{t} A) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ :=
   (((finitePerfectAdicTensorFunctor X d).mapHomologicalComplex (.up ℤ)).obj
     (finitePerfectAdicOrdinaryComplex X d P)).asFunctor
 
-/-- The tensor projections form a cone of complexes. Differentials commute because the
-projection construction is natural for every module map, including each differential.
-Source: Stacks Tag 09C6. -/
+/-- The tensor projections form a cone of complexes. -/
 def finitePerfectAdicTensorComplexCone (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (P : CochainComplex (ModuleCat.{t} A) ℤ) :
     Cone (finitePerfectAdicTensorComplexDiagram X d P) where
@@ -258,26 +252,7 @@ private theorem tensorPowerIso_unit {B : C} (q : 𝟙_ C ⟶ B) :
 
 end TensorPowers
 
-/-- A free algebraic module gives precisely a finite power of the coefficient cone.
-
-Source: Stacks Project, Tag 09C6, finite-free case of the displayed coefficient calculation;
-Modules on Sites, Tags 093J--093M.
-(blueprint: lem-weil-pbc-finite-perfect-adic-free-tensor-cone).
-
-Proof: the constant realization of A is the unit module of the constant ring sheaf.
-Ordinary scalar extension sends that unit to the completed-ring unit: on local tensor
-sections the isomorphism sends s tensor a to s times the scalar image of a, and the
-inverse sends s to s tensor 1. Balancing and local generation prove both identities.
-The constant realization and scalar extension are additive, hence preserve finite
-biproducts. Apply these unit comparisons to the coordinate decomposition of A^r.
-Tensor with a coefficient module also preserves finite biproducts. The left unitor
-identifies the tensor of the unit with each coefficient module. These comparisons
-are natural for all coefficient maps and hence define the diagram isomorphism e.
-On each coordinate the cone square is the equality sending s tensor a to
-projection(s) times scalar(a); it follows from naturality of the unitors. Equality
-of the coordinate maps proves the displayed cone equation. For r = 0 all objects
-are zero and the same argument uses the empty biproduct; no nonzero-ring assumption
-is made. This statement concerns only free modules, with no complex or derived data. -/
+/-- A free algebraic module gives precisely a finite power of the coefficient cone. -/
 theorem finitePerfectAdicFreeTensorCone_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) (r : ℕ) :
     let M := (finitePerfectAdicOrdinary X d).obj (ModuleCat.of A (Fin r → A))

@@ -64,11 +64,14 @@ into a single projective space `ℙ(N; S)` over `S`, is the separate statement
   and `AlgebraicGeometry.ProperClosedModel`, the outcome is not packaged as a structure: the
   graph is a definition and its properties are separate statements, so that a consumer obtains
   them by typeclass inference rather than by destructing an existential.
-* The hypotheses are minimal rather than the ones of the blueprint: the members of the cover
+* The hypotheses are minimal: the members of the cover
   need not be affine and need not cover `X`, only the tuple morphism needs to be quasi-compact
   (which holds for instance if `X` is a Noetherian space), and `U∞` need not be dense in `X`.
 * `Nonempty ι` is genuinely needed: for an empty cover the product is `S` itself and the tuple
   morphism is the structure morphism of `U∞`, which is not an immersion.
+* In `AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over`, the index type `ι` lives in
+  an arbitrary universe while the Segre embedding is stated for an index type in the universe
+  of the schemes; the product is reindexed along an equivalence `ι ≃ ULift.{u} (Fin k)`.
 
 ## References
 
@@ -93,7 +96,7 @@ models, as an object of `Over S`. -/
 noncomputable def ambient : Over S := ∏ᶜ fun i ↦ Over.mk (ℙ((M i).n; S) ↘ S)
 
 /-- **The product of the ambient projective spaces is proper over `S`**, being a finite product
-of proper `S`-schemes. This is what replaces the Segre embedding. -/
+of proper `S`-schemes. -/
 instance isProper_ambient_hom : IsProper (ambient M).hom :=
   haveI (i : ι) : IsProper (Over.mk (ℙ((M i).n; S) ↘ S)).hom :=
     inferInstanceAs (IsProper (ℙ((M i).n; S) ↘ S))
@@ -282,11 +285,7 @@ end QuasiCompact
 closed immersion `Z ⟶ ∏_S ℙ(Mᵢ.n; S)` of `AlgebraicGeometry.ChowGraph.emb` with the `m`-fold
 Segre embedding `AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_pi` yields a closed
 immersion of `Z` into a projective space `ℙ(N; S)` with `N` finite, compatible with the
-structure morphisms over `S`.
-
-The index type `ι` of the cover lives in an arbitrary universe, while the Segre embedding is
-stated for an index type in the universe of the schemes; the two are matched up by reindexing
-the product along an equivalence `ι ≃ ULift.{u} (Fin k)`. -/
+structure morphisms over `S`. -/
 @[stacks 0200 "step 7 of the proof"]
 theorem exists_isClosedImmersion_over :
     ∃ (N : Type u) (_ : Finite N) (g : ChowGraph M ⟶ ℙ(N; S)),

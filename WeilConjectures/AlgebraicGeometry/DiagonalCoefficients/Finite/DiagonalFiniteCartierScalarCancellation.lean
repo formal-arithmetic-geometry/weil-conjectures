@@ -13,9 +13,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierScalarUnitDerivedUnit
 
 /-! # Cancellation of normalized finite Cartier scalar adjuncts
-
-Source: coefficient changes (1).
-(blueprint: lem-diagonal-finite-cartier-scalar-cancellation).
 -/
 
 @[expose] public noncomputable section
@@ -32,14 +29,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 attribute [local irreducible] geoCartierConstant geoCartierLine
 
-/-- Two quotient classes with the same normalized scalar adjunct are equal.
-Source: coefficient changes (1), and the supported Cartier scalar unit
-(blueprint: lem-diagonal-finite-cartier-scalar-cancellation).
-Proof: Extract the normalized source and root maps and the supported unit from
-the given Cartier scalar compatibility. Apply the other square to these same
-maps. Convert the supported Cartier scalar unit to the exact-functor DerivedUnit
-property. Its degree-two Ext bijection is injective. The two squares give equal
-images under this injection, since they have the same right-hand side. -/
+/-- Two quotient classes with the same normalized scalar adjunct are equal. -/
 theorem class_eq_of_scalar_square
     {R A : Type (u + 1)} [CommRing R] [CommRing A]
     (φ : R →+* A) {N : ℕ} {hR : (N : R) = 0} {hA : (N : A) = 0}

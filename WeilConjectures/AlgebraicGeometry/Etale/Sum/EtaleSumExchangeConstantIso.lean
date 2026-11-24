@@ -11,10 +11,10 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Canonical constants for exact derived pullback
 
-Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F
-(blueprint: def-pur-etale-sum-exchange-constant-iso).
+## References
 
-The existing constant comparison is preserved verbatim and isolated from its coherence proof.
+* Stacks Project, Sites and Sheaves, Tag 0H7J
+* Stacks Project, Derived Categories, Tag 015F
 -/
 
 @[expose] public section
@@ -28,9 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical constant-sheaf identification for exact derived inverse image,
-written using the existing single-functor and constant-sheaf comparisons.
-Source: Stacks Project, Sites and Sheaves, Tag 0H7J; Derived Categories, Tag 015F
-(blueprint: def-pur-etale-sum-exchange-constant-iso). -/
+written using the existing single-functor and constant-sheaf comparisons. -/
 noncomputable def etaleSumExchangeConstantIso
     (A : Type (u + 1)) [CommRing A] {Y Z : Scheme.{u}} (f : Y ⟶ Z) :
     (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj

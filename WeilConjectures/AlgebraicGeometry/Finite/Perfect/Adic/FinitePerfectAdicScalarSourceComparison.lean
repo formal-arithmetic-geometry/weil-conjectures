@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAd
 
 /-! # Direct constant presentation of the ordinary chart source
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J and 093M
 -/
 
 -- After pruning, this module only keeps private declarations.

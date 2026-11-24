@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerTensorHomologyComparison
 
 /-! # Chartwise comparison for finite quotient coefficient layers
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-layer-local-complex-core).
+
+## References
+
+* Stacks Project, Tags 0942, 094H, 094I
 -/
 
 @[expose] public noncomputable section
@@ -22,21 +24,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- The residue perfect complex admits a finite local model for the coefficient layer.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0942, 094H and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-layer-local-complex-core).
-
-Proof: Let Q=I^(n+1)/I^(n+2), regarded as a finite module over A/I. The
-compatibility squares identify the layer object with the residue reduction
-balanced-tensored with Q and restricted to the successor coefficient ring. On the
-specified chart, tensor the given bounded finite-projective residue complex with
-Q. Projectivity computes the derived tensor by ordinary tensor, while the
-finite quotient and the annihilation by I make every term finite over the
-successor ring. Exact constant realization and exact slice restriction transport
-the resulting homology identifications to the layer object. The support bounds
-are inherited termwise; empty charts use the zero complex.
--/
+/-- The residue perfect complex admits a finite local model for the coefficient layer. -/
 theorem finiteQuotient_layer_local_complex_core
     (X : Scheme.{t}) [IsLocallyNoetherian X] [CompactSpace X]
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

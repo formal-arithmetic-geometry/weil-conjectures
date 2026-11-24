@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 
 /-! # Separate class and trace equations for fixed pullback endpoints
 
-Source: diagonal coefficient changes, paragraph (3), the class and trace squares.
-(blueprint: def-diagonal-pullback-squares).
 
 The small proposition wrappers keep concrete coefficient constructions out of
 elaboration of the derived equation types. They contain exactly the published

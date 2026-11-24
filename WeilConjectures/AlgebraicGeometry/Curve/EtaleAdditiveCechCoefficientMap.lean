@@ -10,7 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleAdditiveCechNormaliza
 
 /-! # The fixed additive coefficient maps before totalization
 
-Source: Stacks Project, Tags 03P2 and 01EQ.
+## References
+
+* Stacks Project, Tag 03P2
+* Stacks Project, Tag 01EQ (Lemma 20.11.2)
 -/
 
 @[expose] public section
@@ -23,9 +26,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The lifted ordinary unit Cech complex, before the resolution augmentation.
-Source: Stacks Project, Tag 03P2, ordinary coefficient Cech complex.
-(blueprint: lem-pbc-additive-cech-coefficient-horizontal) -/
+/-- The lifted ordinary unit Čech complex, before the resolution augmentation. -/
 noncomputable abbrev additiveCechCoefficientComplex {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) :=
   (((forget₂ (ModuleCat.{u} Γ(X, ⊤)) AddCommGrpCat.{u} ⋙
@@ -33,9 +34,7 @@ noncomputable abbrev additiveCechCoefficientComplex {X : Scheme.{u}} {ι : Type 
       (cechOver X.toSpecΓ U (SheafOfModules.unit X.ringCatSheaf)))
 
 /-- The prescribed coefficient augmentation into resolution degree zero.
-This is the product of the actual section coordinates and I.ι.f 0.
-Source: Stacks Project, Tag 01EQ, beta augmentation.
-(blueprint: lem-pbc-additive-cech-coefficient-horizontal) -/
+This is the product of the actual section coordinates and `I.ι.f 0`. -/
 noncomputable def additiveCechCoefficientMap {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :
     (additiveCechCoefficientComplex U).X n ⟶
@@ -57,22 +56,7 @@ noncomputable def additiveCechCoefficientMap {X : Scheme.{u}} {ι : Type u}
           change ((I.ι.f 0).hom.app _) (_ + _) = _
           exact map_add _ _ _ })
 
-/-- The fixed coordinate maps commute with the horizontal Cech differential.
-Source: Stacks Project, Tag 03P2, the natural structure-section coordinates;
-Tag 01EQ, Lemma 20.11.2, naturality of beta.
-(blueprint: lem-pbc-additive-cech-coefficient-horizontal)
-
-Proof: Project both sides to any tuple of m+1 opens. Expand the alternating
-Cech differential into its cofaces. For each deleted index, naturality of
-restrictFunctorΓ.inv identifies the restriction of a unit section with the
-restriction of the corresponding regular function on the open subscheme.
-The structural scalar restriction along toSpecΓ agrees with that restriction.
-Naturality of I.ι.f 0 then commutes this restriction past the augmentation.
-These coordinate equalities give equality for each coface, hence for their
-signed sum, because all maps are additive and ULift preserves addition.
-Outside adjacent degrees both differentials are zero. Products indexed by an
-empty tuple family are zero objects; repeated or empty opens obey the same
-naturality identities. No affine or covering hypothesis is used. -/
+/-- The fixed coordinate maps commute with the horizontal Čech differential. -/
 theorem additiveCechCoefficientMap_comm {X : Scheme.{u}} {ι : Type u} [Finite ι]
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf)
     (n m : ℕ) :
@@ -150,9 +134,7 @@ theorem additiveCechCoefficientMap_comm {X : Scheme.{u}} {ι : Type u} [Finite �
   simpa only [hc] using c.comm n m
 
 
-/-- The resolution differential kills the fixed coefficient augmentation.
-Source: Stacks Project, Tag 01EQ, the augmented resolution is a complex.
-(blueprint: lem-pbc-additive-cech-coefficient-horizontal) -/
+/-- The resolution differential kills the fixed coefficient augmentation. -/
 theorem additiveCechCoefficientMap_vertical {X : Scheme.{u}} {ι : Type u}
     (U : ι → X.Opens) (I : InjectiveResolution X.etaleAdditiveSheaf) (n : ℕ) :
     additiveCechCoefficientMap U I n ≫

@@ -14,8 +14,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 /-!
 # The affine-line localization triangle in normalized projective coordinates
-Source: blueprint proposition-purity-vector-bundles, Step 5(b), detailed affine-space trace steps 2,
-3 and 6.
 -/
 
 @[expose] public noncomputable section
@@ -58,27 +56,7 @@ private theorem normalize_closed_coordinate
   · simp [b, Category.assoc, hc]
 
 /-- Push the open-closed triangle along the projective-line projection, retaining both
-coordinates of the normalized projective-line decomposition.
-Source: blueprint lemma-integral-linear-character--1, steps 2, 3 and 6
-(blueprint: lem-amb-affine-trace-line-localization).
-
-Proof: retain the closed vertex B = Rq_* Ri_* i^* M of the open-closed triangle
-for the infinity section i and affine chart j, and push that triangle along Rq_*.
-The exact/derived inverse-image comparison transports its open counit to the specified
-adjunction J, including the induced comparison on the connecting morphism.
-Tensor D.decomposition with K, use the tensor-unit comparison on the second summand,
-and apply the proper projection formula to construct b₀ : B₀ ⊞ K ≅ Rq_* M, where
-B₀ = K tensor A_S(1)[2]. The counit normalization gives b₀ followed by the projective
-counit equal to second projection. The tensor-projection adjunct calculation identifies
-the first injection followed by b₀ with the adjunct of the canonical isomorphism
-q* B₀ ≅ M. Its composite with the restriction map r is invertible: it is the unit of
-the composite adjunction q* then i*, followed by the image of an isomorphism, and
-q* then i* is equivalent to identity because i is a section of q.
-Change the first coordinate of b₀ by the inverse of this isomorphism B₀ ≅ B.
-This makes the first injection followed by b and r exactly identity, while preserving
-the normalized second projection. No assertion on the second restriction component
-is required. All comparisons and the proper projection formula are unbounded.
-The zero ring and empty scheme give the same argument in the zero category. -/
+coordinates of the normalized projective-line decomposition. -/
 theorem affineTraceLine_localization (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA) (S : Scheme.{u}) [IsNoetherian S]

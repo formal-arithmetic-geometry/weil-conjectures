@@ -21,10 +21,16 @@ import WeilConjectures.AlgebraicGeometry.Local.LocalFibreDimensionOpen
 # Bad-locus contradiction for affine limit fibre dimensions
 
 This is the bad-locus and Noetherian-fibre stabilization part of the affine limit dimension
-argument. It is split from the final existence theorem so that the top-level implication remains
-fully checked while this long construction can be proved independently.
-Source: Stacks Project, Limits, Tag 05M5, `lemma-limit-dimension`.
-(blueprint: lem-weil-pbc-affine-limit-fibre-dimension-bound-core).
+argument.
+
+## Implementation details
+
+* This part is split from the final existence theorem so that the long construction can be
+  proved independently of the top-level implication.
+
+## References
+
+* Stacks Project, Limits, Tag 05M5
 -/
 
 @[expose] public section
@@ -364,11 +370,6 @@ private theorem localDim_stage_le
 
 /-- If every finite stage has a fibre of dimension strictly greater than `d`, then the limiting
 fibre cannot have dimension at most `d`, under the finite type and closed-comparison hypotheses.
-This is the bad-locus contradiction in Tag 05M5: the bad local-dimension loci are open complements,
-their reduced closed subschemes have a nonempty affine inverse limit, and Noetherian stabilization
-of a fixed limiting fibre produces a point contradicting the assumed bound.
-Source: Stacks Project, Limits, Tag 05M5, `lemma-limit-dimension`, affine specialization.
-(blueprint: lem-weil-pbc-affine-limit-fibre-dimension-bound-core).
 -/
 theorem fibre_dimension_contradiction_of_all_stages_bad
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]

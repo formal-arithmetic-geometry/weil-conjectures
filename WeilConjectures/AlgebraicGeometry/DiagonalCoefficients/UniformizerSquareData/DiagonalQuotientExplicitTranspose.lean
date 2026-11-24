@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteScalarSourceTranspose
 
 /-! # Transpose of the explicitly constructed successive endpoint
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-quotient-explicit-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -76,11 +73,7 @@ attribute [local semireducible] quotientAdjunction
 attribute [local semireducible] quotientExplicitTranspose quotientSingleNormalized
   quotientOrdinary quotientScalarOrdinary
 
-/-- The explicit successive finite endpoint has the ordinary normalized transpose.
-Source: coefficient changes (1). (blueprint: lem-diagonal-quotient-explicit-transpose).
-Proof: specialize finite scalar adjunction transport to the two supplied scalar
-compatibilities and the given finite source comparison; unfold only the named
-ordinary source-map constructions. -/
+/-- The explicit successive finite endpoint has the ordinary normalized transpose. -/
 theorem quotient_explicit_transpose :
     q.quotientExplicitTranspose = q.quotientSingleNormalized := by
   constructed_exact @realized_compatibility_transpose _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _

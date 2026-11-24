@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage
 import Mathlib.Algebra.Category.Grp.Kernels
 
 /-! # The sectionwise kernel of restriction to a closed subscheme
-(blueprint: lem-sc-etale-ideal-sections-kernel)
 -/
 
 @[expose] public section
@@ -117,30 +116,7 @@ private theorem pulledIdealCoordinates_range {X Y : Scheme.{u}} (g : Y ⟶ X)
     (ConcreteCategory.bijective_of_isIso q.toImage.appTop).1).symm
 
 /-- On every etale object, the canonical map from pulled-back ideal sections is the
-kernel of restriction to the base-changed closed subscheme.
-Source: blueprint `lemma-cohomology-multiplicative-group--6`, Proof, Step 1 and its Claim.
-(blueprint: lem-sc-etale-ideal-sections-kernel)
-
-Proof: Flat module pullback preserves finite limits, so the pulled-back ideal
-inclusion is monic. Compose it with the canonical structure-module isomorphism.
-The base-change ideal-image theorem identifies its image subobject with the
-kernel ideal of the base-changed closed immersion. Its choice of adjunction is
-removed using leftAdjointUniq: naturality makes the alternative composite differ
-by precomposition with an isomorphism, which leaves its image unchanged.
-Pullback symmetry identifies the two choices of base-change projection.
-Since the composite is monic, the image equality gives a unique isomorphism from
-the pulled-back ideal module to the specified kernel ideal module, compatible
-with inclusion into the structure module. Evaluate at the top open: this gives
-an injective map whose range is the kernel of restriction to the kernel ideal's
-closed subscheme. The actual closed immersion factors through this subscheme by
-toImage, an isomorphism, so its map on global sections is injective and the same
-range is the kernel of restriction to the actual fibre product. Corestrict the
-section map to this additive kernel; it is bijective and hence gives an additive
-isomorphism to the concrete kernel group. Transport the concrete limiting kernel
-fork along that isomorphism and apply the limit-preserving additive universe lift.
-On the empty object all groups are zero. For I=0 restriction is the identity and
-its kernel is zero; for I=top the closed subscheme is empty and the inclusion is
-an isomorphism. No finiteness or dimension assumption is used. -/
+kernel of restriction to the base-changed closed subscheme. -/
 theorem etaleIdealSectionsInclusion_isKernel {X : Scheme.{u}} (I : X.IdealSheafData)
     (U : X.Etaleᵒᵖ) :
     ∃ h : (etaleIdealSectionsInclusion I).app U ≫

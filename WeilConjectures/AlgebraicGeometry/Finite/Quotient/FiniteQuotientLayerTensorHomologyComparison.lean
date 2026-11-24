@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Quotient.FiniteQuotientLayerTens
 
 /-! # The homology comparison for the explicit ideal-layer tensor complex
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094I, the displayed balancing identity,
-and Tags 094H and 06YU.
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-homology-comparison).
+## References
+
+* Stacks Project, Tags 094I, 094H, 06YU
 -/
 
 @[expose] public noncomputable section
@@ -26,35 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
-/-- Compute the layer homology from the specified residue projective complex.
-This statement concerns the already constructed tensor complex; it does not assert
-existence of a finite model or any bound on its homology. Only an upper bound and
-projectivity are needed, with no finite-generation or lower-bound hypothesis.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 094I, the displayed balancing identity,
-Tag 094H, and the bounded-above flat-complex calculation of derived tensor (06YU).
-(blueprint: lem-weil-pbc-finite-quotient-layer-tensor-homology-comparison).
-
-Proof: put L=I^(n+1)/(I I^(n+1)), with its residue-ring action. The standard
-ideal-power quotient equivalence identifies L with the kernel of the algebraic
-successor-to-previous quotient map. Exact constant realization identifies its
-constant sheaf, after the specified successor coefficient isomorphism, with the
-kernel of finiteQuotientUnitMap. The transition square in hcompat identifies
-the action through the residue ring, and its scalar square identifies that action
-with the completed scalar action. Derived tensor associativity therefore writes
-the layer, on the slice over Z, as the residue reduction tensored over the residue
-coefficient sheaf with the constant sheaf L, retaining the successor-ring action.
-Slice restriction is exact and commutes with this tensor calculation. Apply e to
-replace the residue reduction by the given constant complex P. A bounded-above
-complex of projectives is K-flat; its constant realization is likewise K-flat.
-Consequently its derived tensor with L is the ordinary termwise tensor, with
-differential 1 tensor d_P. This is exactly finiteQuotientLayerTensorComplex,
-including restriction of scalars from the residue ring to the successor ring.
-Finally exact constant realization, coefficient transport along the isomorphism
-phi, and exact slice restriction commute with homology, giving the displayed
-isomorphism in every degree. All constructions respect zero modules, zero ideal
-layers, zero coefficient rings, and the empty chart. No basis or finite generation
-is used in this comparison. -/
+/-- Compute the homology of the layer tensor complex from the specified residue projective
+complex, assuming only an upper bound and projectivity of its terms. -/
 theorem finiteQuotient_layer_tensor_homology_comparison
     (X : Scheme.{t})
     {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)

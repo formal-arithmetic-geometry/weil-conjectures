@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.CompleteCompactificationLimitSupport
 
 /-! # Assembling strict scalar comparisons from their normalized finite components
-Source: blueprint direct-image proof, paragraph (2).
-(blueprint: lem-sp-compactification-ordinary-scalar-assembly).
 -/
 
 @[expose] public noncomputable section

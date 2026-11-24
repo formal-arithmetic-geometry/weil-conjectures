@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientScalars
 
 /-! # Composition of supplied scalar arrow squares
-
-Source: diagonal tower coefficient changes (1), the two scalar delta squares.
-(blueprint: lem-diagonal-scalar-arrow-composition).
 -/
 
 @[expose] public noncomputable section

@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingDerivedLocalConst
 
 /-! # Consecutive algebraic stalk reductions
 
-Source: Stacks Project, Tag 09C6, the balancing isomorphism between consecutive levels.
-(blueprint: lem-weil-pbc-finite-perfect-adic-stalk-reduction).
+## References
+
+* Stacks Project, Tag 09C6 (the balancing isomorphism between consecutive levels)
 -/
 
 @[expose] public noncomputable section
@@ -43,29 +44,10 @@ private def finitePerfectAdic_pullback_constant_model
     (Functor.mapDerivedCategoryNatIso
       (upperStarConstantSheafIso (ModuleCat.{t + 1} B) g)).app E
 
-/-- Two already descended quotient levels have the expected algebraic scalar extension.
-This only relates the two supplied perfect fibres; it constructs neither etale levels
-nor their comparison maps, and has no cover-existence conclusion.
-
-Source: Stacks Project, proetale.tex, lemma-connected-adic-lisse (Tag 09C6), the
-sentence asserting L_(n+1) tensor^L (A/I^(n+1)) = L_n; Cohomology on Sites,
-lemma-locally-constant-map, and tensor compatibility of geometric inverse image.
-(blueprint: lem-weil-pbc-finite-perfect-adic-stalk-reduction).
-
-Proof: finite-ring derived local constancy on the connected nonempty chart identifies
-both supplied etale levels locally with their geometric stalks at v. Compose with their
-recorded small-universe fibre isomorphisms. The two transport maps give local constant
-models of the actual quotients by D'.algebra and D.algebra. Refine these covers by
-fibre products and choose a member over v. On it, associativity of derived scalar
-extension identifies the actual (n+1)-quotient tensored with A/I^(n+1) with the actual
-n-quotient. The coefficient compatibility equations identify its scalar map with the
-specified quotient homomorphism. Constant realization commutes with derived scalar
-extension, so this yields an isomorphism between the constant realizations of the two
-claimed algebraic objects. Apply a geometric stalk on that nonempty member. Tensor
-pullback and the constant-stalk isomorphism give the required isomorphism in the lifted
-module universe. Exact fully faithful universe lift reflects it in the small derived
-category. Only these two levels are involved; no compatible choice of transition maps,
-normalization of their adjoint transposes, or simultaneous marking is required. -/
+/-- Two already descended quotient levels have the expected algebraic scalar extension
+`L_(n+1) ⊗^L (A/I^(n+1)) ≅ L_n`. This only relates the two supplied perfect fibres; it
+constructs neither etale levels nor their comparison maps, and has no cover-existence
+conclusion. -/
 theorem finitePerfectAdic_stalk_reduction
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

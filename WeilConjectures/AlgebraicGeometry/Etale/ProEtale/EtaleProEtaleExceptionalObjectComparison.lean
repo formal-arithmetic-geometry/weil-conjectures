@@ -47,9 +47,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Object comparison for exceptional transport
-
-Source: blueprint main-20261015, the final restriction paragraph of
-`theorem-f-shriek-finite-coefficients`, transport Steps 1 and 2.
 -/
 
 @[expose] public section
@@ -155,21 +152,7 @@ private theorem etale_boundedConstructible_iff
     · exact (_root_.DerivedCategory.isLE_iff K b).mp hb i hi
 
 /-- Intrinsic bounded constructible objects are precisely comparison images
-of bounded constructible etale objects. The coefficient ring may be zero.
-Source: blueprint main-20261015, `lem-sf-etale-proetale-exceptional-transport`,
-Steps 1 and 2 (blueprint: new-etale-proetale-exceptional-object-comparison).
-
-Proof: identify fixed-module constructibility with the finite constant-model predicate
-using finite-model local constancy and geometric stalks in one direction, and finite
-models for lisse sheaves in the other. If the original stratification has no strata,
-the scheme is empty; use the one-stratum identity stratification and the empty cover.
-Translate etale module constructibility to the source constructible-sheaf predicate,
-and translate the explicit vanishing interval to boundedness for the canonical
-t-structure. For the forward implication, each constructible cohomology sheaf has an
-etale origin. The source bounded-constructible reconstruction theorem then supplies
-an etale origin for the complex. Conversely, exact comparison commutes with homology,
-preserves constructibility and boundedness, and these properties transport along the
-origin isomorphism. Empty schemes, zero objects, and the zero ring are included. -/
+of bounded constructible etale objects. The coefficient ring may be zero. -/
 theorem exceptionalTransport_constructible_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (T : Scheme.{u}) [IsNoetherian T] :

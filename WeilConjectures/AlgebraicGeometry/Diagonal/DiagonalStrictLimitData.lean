@@ -19,11 +19,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open Lean Meta Elab Tactic
 namespace AlgebraicGeometry.ProEtale
 
-/-- Convert the recovered strict finite equations into the Cartier normalization.
-Source: the diagonal system interface and finite normalization
-(blueprint: lem-sfb-diagonal-strict-limit-data).
-Proof: preserve the strict witnesses and apply the proved HEq-to-equality conversion
-at each finite level. -/
+/-- Convert the recovered strict finite equations into the Cartier normalization. -/
 theorem diagonal_strict_limit_data (ℓ : ℕ) [Fact ℓ.Prime]
     (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))]

@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 
 /-! # Canonical Brown comparison transition
-Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35.
+
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 5.15 and Lemma 5.16, pp. 34--35
 -/
 
 @[expose] public noncomputable section
@@ -310,17 +312,7 @@ private theorem open_tensor_transition {m n : ℕ} (h : n ≤ m)
     (etaleBrownEvaluationMate B m).1 (etaleBrownEvaluationMate B n).1 (B.openMate h)
     tX tZ (fun H ↦ inverse_tensor_transition (S := S) h H) K
 
-/-- The canonical compact-support evaluation respects actual derived transitions.
-Source: Zheng, Construction 5.15 and Lemma 5.16, printed pp. 34--35
-(blueprint: lem-pur-etale-brown-support-transition).
-
-Proof: transpose the strict transition square of the open and proper image
-comparisons through their recorded scalar adjunctions. The open and proper mate
-identities identify the resulting squares with the inverse-image tensor transition
-and direct-image transition. Paste the two squares using projection_def and
-naturality of properProjection, then expand S.evaluation and cancel the comparison
-isomorphisms. This gives the displayed equation for every unbounded derived input.
-The argument uses no flatness or boundedness assumption. -/
+/-- The canonical compact-support evaluation respects actual derived transitions. -/
 theorem etaleBrownSupportTransition {m n : ℕ} (h : n ≤ m)
     (K : DerivedCategory (strictEtaleCoefficientSystem X O t)) :
     (S.levelFunctor n).map

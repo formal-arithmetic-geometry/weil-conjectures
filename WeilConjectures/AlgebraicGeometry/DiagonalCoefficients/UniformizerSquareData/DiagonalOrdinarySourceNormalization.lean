@@ -10,9 +10,6 @@ import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalSource
 import all WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientUnitNormalization
 
 /-! # Normalization of the ordinary supported source square
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: lem-diagonal-ordinary-source-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -337,13 +334,7 @@ private theorem cyclic_underlying :
     (supported_endpoint_underlying (q.cyclic.units (ProjectiveLine Y)) q.cyclic.supported)
     (finite_source_transpose_underlying q.cyclic.eP q.cyclic.eW q.cyclic.sourceComparison)
 
-/-- Normalized finite realizations give the ordinary supported source square.
-Source: coefficient changes (1). (blueprint: lem-diagonal-ordinary-source-normalization).
-Proof: forget module structure and cancel the inverse realization counit. The supplied
-normalizations reduce the maps to diagonal pushforwards of coefficient-unit maps.
-The unit and multiplication by the killing power jointly cover the pulled-back
-l-adic ring, so the two unital maps agree. The source map is its constant-generator
-map by sheafification uniqueness. -/
+/-- Normalized finite realizations give the ordinary supported source square. -/
 theorem ordinary_source_eq
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (hs : q.RestrictionNormalized s) :

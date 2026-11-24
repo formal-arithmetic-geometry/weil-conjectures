@@ -19,9 +19,7 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- The supported finite constant object in the fixed diagonal module category.
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: def-sfb-diagonal-trace-finite-cartier-source-object). -/
+/-- The supported finite constant object in the fixed diagonal module category. -/
 abbrev finiteCartierSourceObject (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (n : ℕ) :
     DiagonalMod l (diagonalSurface Y) :=
   (diagonalFiniteToPadic l n (diagonalSurface Y)).obj

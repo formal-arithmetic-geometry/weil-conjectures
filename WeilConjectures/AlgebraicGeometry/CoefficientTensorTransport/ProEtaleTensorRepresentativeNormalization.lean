@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleCoefficientPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
 
-/-! # Normalization equations for tensor representatives -/
+/-! # Normalization equations for tensor representatives
+
+## References
+
+* Stacks Project, Tags 07A4, 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,13 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
-/-- The selected canonical comparison has its specified equation on representatives.
-Source: Stacks Tags 07A4 and 0G7E; proEtaleCanonicalTensorPullback.
-(blueprint: lem-pbc-canonical-tensor-representative-normalization)
-
-Proof: the canonical comparison is the unique comparison chosen from the existing
-existence-and-uniqueness theorem. Its specification gives the displayed equation,
-with the actual signed-total functor in the source. No comparison is chosen here. -/
+/-- The selected canonical comparison has its specified equation on representatives. -/
 theorem canonical_tensor_representative {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -53,14 +52,7 @@ theorem canonical_tensor_representative {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (Classical.choose_spec (proEtaleCanonicalTensorPullback f R S c a b).2.exists)
     P Q hp hq
 
-/-- Naturality of a tensor representative, expressed using actual complex maps.
-Source: naturality of ProEtaleTensorModel.representative, Stacks Tag 07A4.
-(blueprint: lem-pbc-canonical-tensor-representative-normalization)
-
-Proof: regard the two chain maps as morphisms in the full subcategory of flat
-K-flat complexes. Apply naturality of the representative natural isomorphism to
-their product and reverse the resulting equation. No condition on the chain maps
-other than their endpoints is needed, including when the complexes are zero. -/
+/-- Naturality of a tensor representative, expressed using actual complex maps. -/
 theorem tensor_representative_naturality {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (a : ProEtaleTensorModel X R)
     {P Q P' Q' : CochainComplex (proEtaleRingModules X R) ℤ}

@@ -45,9 +45,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The expanded finite coordinate equation, with all concrete categorical structures shared.
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: def-sfb-diagonal-trace-supported-finite-coordinate-equation). -/
+/-- The expanded finite coordinate equation, with all concrete categorical structures shared. -/
 @[irreducible] def supportedFiniteCoordinateEquation
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

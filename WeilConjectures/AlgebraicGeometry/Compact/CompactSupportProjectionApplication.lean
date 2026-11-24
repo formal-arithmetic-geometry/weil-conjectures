@@ -12,7 +12,6 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 
 This names the existing canonical transformation's component without repeatedly expanding
 its bifunctor-category instance arguments at concrete module coefficients.
-Source: current blueprint, `lem-pur-coprojection`, canonical-map paragraph.
 -/
 @[expose] public section
 set_option autoImplicit false

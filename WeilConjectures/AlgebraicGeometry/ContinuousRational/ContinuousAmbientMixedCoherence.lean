@@ -11,8 +11,9 @@ set_option linter.privateModule false
 
 /-! # Normalized continuous tensor coherence
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15
-(blueprint: lem-per-continuous-ambient-mixed-coherence).
+## References
+
+* Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section

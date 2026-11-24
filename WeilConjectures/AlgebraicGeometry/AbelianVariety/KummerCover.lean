@@ -77,11 +77,7 @@ theorem Scheme.exists_isClosed_mem_ne {X : Scheme.{u}} [JacobsonSpace X] [Connec
 
 /-- Let `X` be a regular integral Jacobson scheme with at least two points, `x ∈ X` and `2 ≤ n`.
 Then `x` has an affine open neighbourhood `U` with a unit `f ∈ Γ(X, U)` which is not an `n`-th
-power in the function field of `X`.
-
-Choose an affine open `V ∋ x` and a closed point `y ∈ V` different from `x`. By prime avoidance
-there is `a ∈ Γ(X, V)` invertible at `x` whose germ at `y` lies in `𝔪_y \ 𝔪_y ^ 2`; then
-`U = D(a)` and the restriction of `a` work, as `𝒪_{X,y}` is integrally closed. -/
+power in the function field of `X`. -/
 theorem Scheme.exists_isAffineOpen_isUnit_not_exists_pow (X : Scheme.{u}) [IsIntegral X]
     [IsRegular X] [JacobsonSpace X] [Nontrivial X] (x : X) {n : ℕ} (hn : 2 ≤ n) :
     ∃ (U : X.Opens) (hxU : x ∈ U) (f : Γ(X, U)), IsAffineOpen U ∧ IsUnit f ∧
@@ -138,13 +134,9 @@ theorem Scheme.exists_isAffineOpen_isUnit_not_exists_pow (X : Scheme.{u}) [IsInt
   exact IsIntegrallyClosed.not_exists_pow_eq_algebraMap (R := X.presheaf.stalk y)
     (P := maximalIdeal _) haM ha.2 hn
 
-/-- Blueprint `sk-rem-sf-fullcd-scope`: an abelian variety `E` of positive dimension over a
-field is covered by finitely many affine opens `U i`, each carrying a unit `f i ∈ Γ(E, U i)` which
-is not an `r`-th power in the function field of `E`, for `2 ≤ r`.
-
-`E` is integral, regular and Jacobson, and it has at least two points since its dimension is
-positive; so `AlgebraicGeometry.Scheme.exists_isAffineOpen_isUnit_not_exists_pow` provides such an
-open around every point, and finitely many of them cover the quasi-compact `E`. -/
+/-- An abelian variety `E` of positive dimension over a field is covered by finitely many affine
+opens `U i`, each carrying a unit `f i ∈ Γ(E, U i)` which is not an `r`-th power in the function
+field of `E`, for `2 ≤ r`. -/
 theorem IsAbelianVariety.exists_finite_cover_units_not_pow {K : Type u} [Field K]
     (E : Over (Spec (.of K))) [IsAbelianVariety E] (hE : 0 < IsAbelianVariety.dim E) {r : ℕ}
     (hr : 2 ≤ r) :

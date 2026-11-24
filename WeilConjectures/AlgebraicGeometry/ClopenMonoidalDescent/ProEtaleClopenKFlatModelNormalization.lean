@@ -39,8 +39,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Extending the clopen tensor normalization to all K-flat complexes
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS and 06YT.
-(blueprint: lem-pur-clopen-kflat-model-normalization)
+## References
+
+* Stacks Project, Tags 06YS, 06YT
 -/
 
 @[expose] public noncomputable section
@@ -90,16 +91,7 @@ private theorem flat_resolution {X : Scheme.{t}}
     (SheafOfModules.siteSheafTensorRightIso R (V.X n)).symm (hflat n), hq⟩
 
 -- Elaborating both natural-isomorphism composites involves large dependent functor types.
-/-- The normalization on flat-term K-flat models extends to every K-flat pair.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS and 06YT
-(blueprint: lem-pur-clopen-kflat-model-normalization).
-
-Proof: the two sides of the model square are natural isomorphisms on pairs of K-flat
-complexes, using the native comparison and the restricted K-flat comparison. Resolve
-each input by a flat-term K-flat complex. The maps of resolutions become isomorphisms
-under localization, hence also under tensor and restriction. Naturality and cancellation
-transport the known square on the resolving pair to the given pair. No termwise flatness
-of the given pair, boundedness, or nonzero coefficient assumption is needed. -/
+/-- The normalization on flat-term K-flat models extends to every K-flat pair. -/
 theorem clopen_kflat_model_normalization
     {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology X) CommRingCat.{max u (t + 1)})

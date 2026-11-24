@@ -12,9 +12,9 @@ import all WeilConjectures.CategoryTheory.Finite.FiniteTowerLimitOrthogonality
 
 /-! # Local descent for completed coefficient lines
 
-Source: Stacks Tags 099L, 099M and 091Q, and the diagonal trace proof,
-paragraph (1).
-(blueprint: lem-sfb-diagonal-completed-line-complete-aux).
+## References
+
+* Stacks Project, Tags 099L, 099M, 091Q
 -/
 
 @[expose] public noncomputable section
@@ -102,18 +102,6 @@ private theorem completedCoefficient_difference (l : ℕ) [Fact l.Prime] (S : Sc
 
 /--
 The local-to-global part of completeness for a completed coefficient line.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-and Stacks Tags 099L, 099M and 091Q.
-
-Proof: on each member of the displayed pro-etale cover, identify the line with the
-regular completed coefficient module. The quotient tower of that regular module is
-surjective on the weakly contractible basis, hence its derived inverse limit agrees
-with its ordinary limit. The principal-ideal orthogonal criterion gives vanishing
-of maps from every complex on which `l` acts invertibly. Exact restriction to the
-constant coefficient category and descent for a sheaf cover transport this vanishing
-to the globally displayed line. The empty site is included vacuously.
-(blueprint: lem-sfb-diagonal-completed-line-complete-aux).
 -/
 theorem diagonalCompletedLine_complete_of_cover (l : ℕ) [Fact l.Prime] (S : Scheme.{u})
     [IsNoetherian S] [DiagonalTraceLocalizations l S]

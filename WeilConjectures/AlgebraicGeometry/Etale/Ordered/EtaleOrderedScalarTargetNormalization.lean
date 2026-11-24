@@ -15,7 +15,12 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensorSymmetryInvolutive
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleNormalizedScalarSymmetry
 import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 
-/-! # Normalization of one side of the ordered scalar projection square -/
+/-! # Normalization of one side of the ordered scalar projection square
+
+## References
+
+* Stacks Project, Tags 07A4, 0E8I, 0GL6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -149,22 +154,7 @@ private theorem local_transport
   · exact derivedTensorSymmetry_involutive B X _ _
   · exact (etaleHomTensorComparison_existsUnique X φ).choose_spec.1.2.1 M _
 
-/-- Normalize the target-side scalar transport before applying the mixed equation.
-Source: Stacks 0E8I, 0GL6 and 07A4; the target normalization in the local open square
-(blueprint: lem-pur-ordered-scalar-target-normalization).
-
-Proof: identify the inverse open comparison with openScalarExtension.inv by the
-unit-transpose uniqueness of the open adjunction. Identify tensorIso with the inverse
-of etaleHomTensorComparison by uniqueness of their flat K-flat normalization.
-Transport scalarPullbackIso along the exact/left-derived pullback comparisons to
-openScalarRestriction. Naturality moves the open comparison through the final
-symmetry. On a flat K-flat pair, ordinary scalar balancing commutes with the signed
-swap, since the coefficient scalar has degree zero. Descend that equality through
-localization and extend it to all pairs by naturality of resolutions. The two signed
-swaps cancel. The remaining exact-pullback comparisons cancel, and the inverse open
-projection cancels canonicalGammaExact. The only surviving factor is the image of
-the ambient inverse symmetry. All operations are invertible, so zero inputs, the
-empty open and zero rings satisfy the same formula. -/
+/-- Normalize the target-side scalar transport before applying the mixed equation. -/
 theorem etaleOrderedScalar_targetNormalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

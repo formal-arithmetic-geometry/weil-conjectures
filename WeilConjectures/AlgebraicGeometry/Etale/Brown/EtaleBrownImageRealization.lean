@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownImageRealizationI
 
 /-! # Normalized realization of a geometric image
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -32,22 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- A normalized image comparison for the supplied geometric derived adjunction.
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4.
-(blueprint: lem-pur-etale-brown-image-realization).
-
-Proof: the ordinary direct-image comparison is the identity on sections, followed
-by A.rightUnderlying. Naturality of the structural constant-ring map makes this
-map linear; the inverse has the identical sections. Exact equivalences preserve
-K-injectivity, so the supplied universal right-derived functor and the published
-right-derived lowerStar are right-derived functors of this same ordinary square.
-Their unique unit-compatible comparison is an isomorphism and gives exactly the
-displayed cochain-unit equation. Take its inverse mate to define inverse. The
-realization functors are equivalences, so this mate is invertible. Its normalization
-is the mate inverse law. The ordinary transpose of B and the published geometric
-transpose identify this with localization of inverse image. No properness or
-coefficient finiteness is used. In particular the identity map, empty schemes,
-and zero coefficient ring are covered by the same universal properties. -/
+/-- A normalized image comparison for the supplied geometric derived adjunction. -/
 theorem etaleBrownImageRealization_exists
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) (n : ℕ)

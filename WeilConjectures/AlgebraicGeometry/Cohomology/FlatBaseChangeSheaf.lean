@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.StalkPullback
 
 /-!
 # Cohomology and flat base change, for sheaves
-
 -/
 
 @[expose] public section

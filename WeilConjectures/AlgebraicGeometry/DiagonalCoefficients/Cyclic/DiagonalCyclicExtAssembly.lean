@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalExtRepresentative
 
 /-! # Generic assembly of a transported Ext class
-
-Source: diagonal tower coefficient changes (1), and limit (3).
-(blueprint: lem-diagonal-cyclic-ext-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -78,13 +75,7 @@ private theorem finiteExtRepresentative
   simp only [Ext.comp_hom, Ext.mk₀_hom, ShiftedHom.mk₀_comp,
     ShiftedHom.comp_mk₀, Ext.mapExactFunctor_hom, ShiftedHom.map, Category.assoc]
 
-/-- The endpoint squares and finite arrow equation transport the Ext class.
-Source: diagonal finite-reduction comparisons, formal arrow and Ext assembly.
-(blueprint: lem-diagonal-cyclic-ext-assembly).
-Proof: use naturality of e to replace G(delta), then the finite arrow equation.
-The source square cancels the source isomorphisms. The target square cancels the
-root isomorphisms. The representative equation for c and exact-functor Ext-to-Hom
-formula identify the result with the normalized evaluation. Ext.homEquiv is injective. -/
+/-- The endpoint squares and finite arrow equation transport the Ext class. -/
 theorem cyclicExtAssembly
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
@@ -136,10 +127,7 @@ theorem cyclicExtAssembly
           ((DerivedCategory.singleFunctor B 0).map t.hom)⟦(n : ℤ)⟧') hs ht hf
     _ = _ := (finiteExtRepresentative E s t c).symm
 
-/-- Combine the coefficient comparison, arrow equation and finite-cycle equality.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-ext-assembly).
-Proof: eliminate the supplied coefficient comparison. Apply cyclicExtAssembly
-using its two squares, then compose with the given finite-cycle equality. -/
+/-- Combine the coefficient comparison, arrow equation and finite-cycle equality. -/
 theorem cyclicExtAssembly_of_comparison
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {B : Type u₂} [Category.{v₂} B] [Abelian B]
@@ -179,11 +167,7 @@ theorem cyclicExtAssembly_of_comparison
   exact (cyclicExtAssembly G R F E δ f e sa ta a b s t σ τ c d hc hrep hs ht hf).trans
     hcycle
 
-/-- Assemble normalized finite witnesses before specializing their categories.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-ext-assembly).
-Proof: eliminate the two finite endpoints and two arrow endpoints in the abstract
-categories. Their normalizations give the coefficient comparison; the previous
-assembly theorem combines that comparison, the arrow and the cycle equation. -/
+/-- Assemble normalized finite witnesses before specializing their categories. -/
 theorem cyclicExtAssembly_of_normalizations
     {C : Type u₁} [Category.{v₁} C] [Abelian C]
     {B : Type u₂} [Category.{v₂} B] [Abelian B]

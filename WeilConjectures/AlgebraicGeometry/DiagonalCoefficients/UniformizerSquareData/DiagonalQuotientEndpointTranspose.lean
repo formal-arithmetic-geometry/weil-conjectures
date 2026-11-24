@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Scalar.DiagonalScalarEndpointsTranspose
 
 /-! # The successive target endpoint under its actual adjunction
-
-Source: diagonal tower coefficient changes (1), normalized scalar extension.
-(blueprint: lem-diagonal-quotient-endpoint-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -51,10 +48,7 @@ private theorem insertion_comp
 namespace UniformizerSquareData
 
 attribute [local irreducible] Adjunction.homEquiv instCategoryDerivedCategory in
-/-- The degree-zero endpoint transposes to its ordinary root insertion.
-Source: diagonal tower coefficient changes (1)
-(blueprint: lem-diagonal-quotient-endpoint-transpose).
-Proof: Compose the scalar endpoint normalizations with the finite equivalence transpose. -/
+/-- The degree-zero endpoint transposes to its ordinary root insertion. -/
 theorem quotientEndpointZero_transpose
     {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
     {E : PadicAlgCl.FiniteIntermediateField l} {π : PadicAlgCl.integers l E} {n : ℕ}

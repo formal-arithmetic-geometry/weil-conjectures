@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientScalarComparison
 import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientRealizationIsoLift
 
-/-! # Homology-level lift from a constant adic quotient realization -/
+/-! # Homology-level lift from a constant adic quotient realization
+
+## References
+
+* Stacks Project, Tags 093J, 03DH and 03Q3.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,16 +23,7 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- A realized isomorphism on a nonempty etale chart admits an algebraic
-morphism whose cohomology maps are all isomorphisms.
-
-Source: Stacks Project, sites-modules.tex, Tags 093J and 03DH; proetale.tex,
-Tag 03Q3.
-(blueprint: lem-weil-pbc-constant-adic-quotient-realization-homology-lift).
-
-Proof: apply the point-stalk extraction theorem to obtain an algebraic
-isomorphism.  The unbounded derived isomorphism criterion identifies an
-isomorphism in the derived category with isomorphisms on every homology object.
--/
+morphism whose cohomology maps are all isomorphisms. -/
 theorem constantAdicQuotientRealization_homology_lift
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ)

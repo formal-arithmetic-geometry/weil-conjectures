@@ -118,9 +118,7 @@ instance : (pullback g).PreservesKFlatQuasiIso :=
 the total left derived functor of the pullback `g^* : S.Modules ⥤ T.Modules`
 (`CategoryTheory.Functor.leftDerivedFunctor`). It is computed on a complex `E` by applying `g^*`
 termwise to a K-flat resolution `P ⟶ E`; this is the derived tensor product
-`𝒪_T ⊗ᴸ_{g⁻¹𝒪_S} g⁻¹ E`, as `g^* P = 𝒪_T ⊗_{g⁻¹𝒪_S} g⁻¹ P` termwise.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
+`𝒪_T ⊗ᴸ_{g⁻¹𝒪_S} g⁻¹ E`, as `g^* P = 𝒪_T ⊗_{g⁻¹𝒪_S} g⁻¹ P` termwise. -/
 noncomputable def derivedPullback : DerivedCategory S.Modules ⥤ DerivedCategory T.Modules :=
   (pullback g).leftDerivedFunctor
 
@@ -138,9 +136,7 @@ instance : (derivedPullback g).IsLeftDerivedFunctor (derivedPullbackCounit g)
 /-- **Termwise derived pullback of a bounded above flat complex.** Let `E` be a complex of flat
 `𝒪_S`-modules vanishing in large degrees. Then the derived pullback `Lg^* E` is represented by the
 termwise pullback `g^* E`: the canonical map `Lg^* E ⟶ g^* E` is an isomorphism. Indeed a bounded
-above complex of flat modules is K-flat.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
+above complex of flat modules is K-flat. -/
 theorem isIso_derivedPullbackCounit_app (E : CochainComplex S.Modules ℤ) (b : ℤ)
     [E.IsStrictlyLE b] (hE : ∀ n, ObjectProperty.flat (E.X n)) :
     IsIso ((derivedPullbackCounit g).app ((HomotopyCategory.quotient _ _).obj E)) :=
@@ -148,9 +144,7 @@ theorem isIso_derivedPullbackCounit_app (E : CochainComplex S.Modules ℤ) (b : 
     (CochainComplex.kFlat_of_isStrictlyLE_of_flat E b hE)
 
 /-- The derived pullback of a bounded above complex `E` of flat `𝒪_S`-modules is the termwise
-pullback: `Lg^* E ≅ g^* E` in `D(𝒪_T)`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--2`) -/
+pullback: `Lg^* E ≅ g^* E` in `D(𝒪_T)`. -/
 noncomputable def derivedPullbackObjIsoOfFlat (E : CochainComplex S.Modules ℤ) (b : ℤ)
     [E.IsStrictlyLE b] (hE : ∀ n, ObjectProperty.flat (E.X n)) :
     (derivedPullback g).obj (DerivedCategory.Q.obj E) ≅

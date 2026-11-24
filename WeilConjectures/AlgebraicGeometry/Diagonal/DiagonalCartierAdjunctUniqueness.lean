@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cartier.CartierCanonicalAdjunct
 public import WeilConjectures.AlgebraicGeometry.Kummer.KummerStrictTargetTransport
 
-/-! # Cartier class uniqueness for the negative Kummer adjunct
-Source: diagonal tower system proof, step (4).
-(blueprint: lem-sfb-diagonal-cartier-adjunct-uniqueness). -/
+/-! # Cartier class uniqueness for the negative Kummer adjunct -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,9 +43,7 @@ private theorem double_negative_ext_associativity
 
 /-- The finite diagonal Cartier classes with the named coefficient structures.
 This is the existing uniquely determined Cartier class, specialized to the
-surface and collected into a family so its concrete interfaces are shared.
-Source: diagonal tower system proof, step (4)
-(blueprint: lem-sfb-diagonal-cartier-adjunct-uniqueness). -/
+surface and collected into a family so its concrete interfaces are shared. -/
 def diagonalResidueClasses (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤))) :
     ∀ n : ℕ, Ext.{u + 1}
@@ -65,24 +61,7 @@ def diagonalResidueClasses (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
       (diagonalSurface_power_unit ℓ Y hY n)
 
 /-- The negative Kummer adjunct of the positive diagonal boundary is the
-normalized residue Cartier class.
-
-Source: diagonal tower system proof, step (4), and the defining scalar-adjunct
-characterization of the Cartier reduction
-(blueprint: lem-sfb-diagonal-cartier-adjunct-uniqueness).
-
-Proof: expand the positive integral boundary as minus the transported pole
-boundary. The negative sign of Kummer transport cancels this sign by bilinearity
-of the Ext product. Associativity moves the units comparison into the transported
-pole boundary, giving exactly CartierProReductionSpec. The residue ring is
-finite, since the prime power is positive. The pro-etale component of
-cartierReduction_existsUnique then identifies e with the chosen unique class,
-which is the definition of cartierResidueReducedPro. Only the equality of the
-full scalar adjunct is used. In particular this proof does not infer equality
-from a Chern composite and does not involve a derived reduction presentation,
-source normalization, target system or evaluation. The proof hW is any proof
-that the prime is a unit on the surface; its powers and the pulled-back powers
-from hY agree by proof irrelevance. -/
+normalized residue Cartier class. -/
 theorem diagonal_cartier_class_of_adjunct (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u})
     (hY : IsUnit (ℓ : Γ(Y, ⊤)))
     (hW : IsUnit (ℓ : Γ(diagonalSurface Y, ⊤))) (n : ℕ)

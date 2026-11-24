@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Comma.Arrow
 
 The functor is termwise restriction along the inverse coefficient isomorphism,
 followed by the normalized section-action encoding. All of its data are constructed.
+
+## References
+
+* Stacks Project, Tags 03D3, 09C8
 -/
 
 @[expose] public noncomputable section
@@ -30,9 +34,7 @@ variable {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R]
 
 /-- Restrict scalars along the inverse ring isomorphism and use the fixed-scalar
-section-action encoding. Source: blueprint finite-coefficient identification, steps 1
-and 8; Stacks Tags 03D3 and 09C8
-(blueprint: def-sfb-finite-coefficient-operation-encoding). -/
+section-action encoding. -/
 def coefficientEncoding (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u})
     (E : Encoding A T) : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) ⥤
@@ -41,9 +43,7 @@ def coefficientEncoding (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u
   (Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
     (coefficientMap e.inv.hom T)).mapDerivedCategory ⋙ E.fixedDerived.functor
 
-/-- The constructed encoding is an equivalence, since both factors are exact equivalences.
-Source: scalar restriction along an isomorphism and normalized section-action encoding
-(blueprint: def-sfb-finite-coefficient-operation-encoding). -/
+/-- The constructed encoding is an equivalence, since both factors are exact equivalences. -/
 instance coefficientEncoding_isEquivalence
     (e : Mon.mk R ≅ Mon.mk (coefficient A)) (T : Scheme.{u}) (E : Encoding A T) :
     (coefficientEncoding A e T E).IsEquivalence := by

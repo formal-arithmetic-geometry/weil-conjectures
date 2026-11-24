@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicCartierFrame
 
 /-! # From a realized Ext class to its arrow
-
-Source: diagonal coefficient changes (1).
-(blueprint: lem-diagonal-finite-cartier-class-to-arrow).
 -/
 
 @[expose] public noncomputable section
@@ -28,11 +25,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 attribute [local irreducible] geoCartierConstant geoCartierLine finiteRealizedClass
 
 /-- Applying the Ext-to-derived-Hom equivalence gives precisely the normalized
-Cartier-arrow equation. No coefficient or endpoint data are changed.
-Source: diagonal coefficient changes (1).
-(blueprint: lem-diagonal-finite-cartier-class-to-arrow).
-Proof: apply the Hom equivalence to the equality of classes, cancel its inverse
-in the explicitly constructed finite realization, and unfold the canonical arrow. -/
+Cartier-arrow equation. No coefficient or endpoint data are changed. -/
 theorem finiteCartierArrowEquation_of_class
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {A : Type (u + 1)} [CommRing A] [Finite A]

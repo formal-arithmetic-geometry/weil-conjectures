@@ -156,8 +156,7 @@ to reparametrisation by an automorphism `g` of `Spec k̄` commuting with `σ`:
              s'
 ```
 
-that is `g ≫ s = s' ≫ g_Xʲ`. The residue field embeddings `κ(x) ↪ k̄` of `s` and `s'` differ by
-an element of `Gal(κ(x) / k)`, a power of the Frobenius. -/
+that is `g ≫ s = s' ≫ g_Xʲ`. -/
 theorem exists_iso_comp_eq_comp_geometricGaloisFrobenius_pow [Finite k]
     (s s' : Spec (.of (AlgebraicClosure k)) ⟶ f.geometricFiber)
     (hss' : (s ≫ f.geometricFiberProj).base (IsLocalRing.closedPoint _) =

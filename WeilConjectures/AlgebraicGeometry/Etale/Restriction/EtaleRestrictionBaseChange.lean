@@ -14,8 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.Derived.DerivedExtensionZeroBaseCha
 
 /-! # Scalar restriction and the open base-change mate
 
-Source: Stacks Project, Tags 0F7J and 0GL6.
-(blueprint: lem-sf-etale-restriction-open-base-change).
+## References
+
+* Stacks Project, Tags 0F7J, 0GL6
 -/
 
 -- After pruning, this module only keeps private declarations.

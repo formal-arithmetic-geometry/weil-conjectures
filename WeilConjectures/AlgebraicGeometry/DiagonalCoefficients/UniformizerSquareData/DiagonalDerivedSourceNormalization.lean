@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareD
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalSingleSourceSquare
 
 /-! # The normalized square of derived source transposes
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-derived-source-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -63,10 +60,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
 
 attribute [local semireducible] quotientSingleNormalized cyclicSingleNormalized
 
-/-- The ordinary supported source square gives the square of derived transposes.
-Source: coefficient changes (1). (blueprint: lem-diagonal-derived-source-normalization).
-Proof: substitute both proved endpoint transposes into the proved single-image
-source square, using congruence of its two extension functions. -/
+/-- The ordinary supported source square gives the square of derived transposes. -/
 theorem source_transpose_square
     (s : q.quotientRight ≅ q.restriction ⋙ q.cyclicRight)
     (hs : q.RestrictionNormalized s) :

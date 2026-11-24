@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceTwistedSplit
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalTraceCompletedHomBijection
 
 /-! # Geometric presentations of the projective-line trace
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1).
 -/
 
 @[expose] public noncomputable section
@@ -26,33 +24,7 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 /-- The unit and the hyperplane Chern class admit compatible strict-system and
-completed-coefficient presentations on a specified projective-line model.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-construction of the splitting and the direct-image/limit comparisons; expanded
-DAG proof steps 1--6.
-(blueprint: lem-sfb-diagonal-trace-presentation-existence).
-
-Proof: construct the Chern morphism on the whole varying-coefficient system by
-reducing the integral line-bundle extension, and use the hyperplane bundle of
-this model. Its class is the class of the section [1:0]: on the standard charts
-the equations are x1/x0 and 1, with transition x0/x1 for their inverses. The
-finite Cartier normalization therefore has positive degree one. The unit/Chern
-map evaluates to the finite projective-line decomposition. Its cone has zero
-cohomology at every level, so it is invertible in the system derived category.
-Twisting its inverse and taking the second projection gives a map which kills
-the twisted unit and sends the Chern class to one, also after every evaluation.
-Restrict the varying coefficient systems to constant Z_l scalars, retaining their
-sections and transitions. Exact restriction and the ringed-topos composition
-comparison give the normalized varying and completed direct-image squares.
-The canonical direct-image/derived-limit comparison supplies the limit square.
-The quotient tower and root tower have epimorphic transitions, so their Milnor
-comparisons are invertible. Their ordinary limits are the completed unit and
-Tate line by their defining projections. These comparisons give precisely the
-unit_limit and line_limit fields. The completed line and unit are derived complete;
-derived direct image preserves completeness. Restriction from completed to constant
-scalars is an equivalence on these complete objects, so its map on the indicated
-Hom set is bijective. No completed trace morphism is chosen here. -/
+completed-coefficient presentations on a specified projective-line model. -/
 theorem exists_diagonalTracePresentation (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S) [IsNoetherian S] [IsNoetherian X]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

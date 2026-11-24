@@ -12,7 +12,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteTowerLimi
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
-/-! # Invertibility of continuous coefficient pullback along immersions -/
+/-! # Invertibility of continuous coefficient pullback along immersions
+
+## References
+
+* Bhatt--Scholze, Lemma 6.5.8(1) and the paragraph before Definition 6.8.6.
+-/
 
 @[expose] public section
 
@@ -295,24 +300,7 @@ private theorem rationalLift (l : ℕ) [Fact l.Prime] (E : Type u)
   exact (congrArg (v.hom.app U) hbapp).symm.trans
     (hc.trans (hvval.trans (hφ U a)))
 
-/-- The canonical integral and rational pullback maps are isomorphisms for immersions.
-
-Source: Bhatt--Scholze, Lemma 6.5.8(1) and paragraph before Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficient-pullback-isIso).
-
-Proof: Compare the continuous residue cones with the finite constant towers.
-Inverse image preserves these towers by the existing finite-tower theorem. The
-canonical integral pullback is the resulting isomorphism because its compositions
-with all residue projections agree, by the inverse-image adjunction and pointwise
-reduction. No additional limit-preservation theorem for immersions is needed.
-For rational coefficients, the normalized localization comparison proves both
-uniqueness of maps on integral numerators and extension of maps that invert the
-uniformizer. Compose inverse integral pullback with pulled-back integral inclusion.
-The canonical constant-ring comparisons show this map inverts the uniformizer:
-it agrees on constants with a map from the constant field sheaf. Extend it to
-rational coefficients. Coefficient naturality and uniqueness on integral numerators
-prove one inverse equation. The other follows by cancelling pulled-back integral
-inclusion, an epimorphism by the same uniqueness and the inverse-image adjunction. -/
+/-- The canonical integral and rational pullback maps are isomorphisms for immersions. -/
 theorem continuousCoefficientPullback_isIso (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u})
