@@ -32,15 +32,14 @@ the determinant `Δ ∈ O` of their vectorised matrices is nonzero, and for `N` 
 
 ## Main statements
 
-- `Representation.exists_forall_isIrreducible_baseChange_of_congr`: blueprint
-  `lemma-detecting-irreducibility-finite-quotient--1`.
+- `Representation.exists_forall_isIrreducible_baseChange_of_congr`: absolute irreducibility is
+  detected by a finite quotient of the lattice.
 
-## Implementation notes
+## Implementation details
 
 The stable lattice `L` is recorded as a basis `b` of `V` in which all the matrices of `ρ` have
 entries in `O`; its existence for a continuous representation of a profinite group is
-`proposition-lattices-representations-normal-scheme`
-(`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`). Extension of scalars of `ρ` to a field `K`
+`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`. Extension of scalars of `ρ` to a field `K`
 is `(Module.End.baseChangeHom E K V).toMonoidHom.comp ρ`.
 -/
 
@@ -167,9 +166,8 @@ variable {O E K G V ι : Type*} [CommRing O] [IsNoetherianRing O] [IsLocalRing O
   [Field E] [Algebra O E] [IsFractionRing O E] [Field K] [IsAlgClosed K] [Algebra E K]
   [Group G] [AddCommGroup V] [Module E V] [Fintype ι] [DecidableEq ι]
 
-/-- **Absolute irreducibility has a finite matrix witness**
-(blueprint: `lemma-detecting-irreducibility-finite-quotient--1`). Let `ρ` be a representation of `G`
-on an `E`-vector space `V` with basis `b`, in which the matrices of `ρ` have entries in `O`, and
+/-- **Absolute irreducibility has a finite matrix witness.** Let `ρ` be a representation of `G` on
+an `E`-vector space `V` with basis `b`, in which the matrices of `ρ` have entries in `O`, and
 assume that `ρ` is irreducible over an algebraically closed field `K ⊇ E`. Then there is
 `N ≥ 1` such that every subgroup `H ≤ G` whose matrices are congruent modulo `𝔪ᴺ` to all the
 matrices of `ρ(G)` acts absolutely irreducibly on `V`: irreducibly after extension of scalars

@@ -10,10 +10,16 @@ public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 import WeilConjectures.RingTheory.AdjoinRootCRTRootBlockAux
 
-/-! # Simultaneous CRT coordinates for multiplication matrices
+/-! # CRT block coordinates for multiplication by the root
 
-Source: Stacks Project, Tag 09XI, proof of (3) implies (1).
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix)
+Let `f` be monic whose reduction modulo `I` factors as a product `g * h` of coprime monic
+polynomials. After reindexing and conjugation by a unit matrix over `A/I`, the reduced matrix of
+multiplication by the root of `f` is block diagonal with the multiplication-by-root matrices of
+`g` and `h`.
+
+## References
+
+* [Stacks Project, Tag 09XI]
 -/
 
 @[expose] public section
@@ -22,27 +28,9 @@ universe u
 
 namespace Polynomial
 
-/-- Root multiplication has CRT block coordinates after coefficient reduction.
-Source: Stacks Project, Tag 09XI, proof of (3) implies (1), the decomposition of B/IB.
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix-root-block)
-
-Proof: write R = A/I and fbar = f.map (Ideal.Quotient.mk I). The leading coefficient
-of a monic polynomial is one, so fbar has degree deg f over the nonzero ring R.
-The power-basis multiplication matrix of the root reduces to that of the root in
-AdjoinRoot fbar: divide each product of powers by f using monic division, reduce
-its coefficients, and use uniqueness of the remainder modulo fbar. Since g and h
-are coprime, their principal ideals are comaximal and their product, equal to
-(g*h), is their intersection. The Chinese remainder algebra equivalence therefore
-identifies AdjoinRoot fbar with AdjoinRoot g times AdjoinRoot h and takes the root
-to the pair of roots. Concatenate the power bases of these two factors.
-Monicity gives deg f = deg g + deg h, so choose the index equivalence d.
-The matrix U of the CRT coordinate equivalence from the reindexed reduced power
-basis to this concatenated basis is invertible, with inverse the matrix of the
-inverse coordinate equivalence. Intertwining multiplication by the root, and
-using the matrix-of-composition identity, yields the asserted conjugation.
-If a factor is one, its quotient is zero and its power basis is empty; the same
-argument applies. If f is one, both factors have degree zero and all matrices are
-empty. No nontriviality of either factor quotient is required. -/
+/-- Let `f` be monic with `f mod I = g * h` for coprime monic `g`, `h`. Then there are an index
+equivalence `d` and a unit matrix `U` over `A/I` conjugating the reindexed reduced matrix of
+multiplication by the root of `f` into `fromBlocks Tg 0 0 Th`. -/
 theorem adjoinRoot_crt_matrix_root_block
     {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)]
     (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X])
