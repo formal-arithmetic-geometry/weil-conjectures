@@ -99,9 +99,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Internal Hom of finite-stage constructible complexes
 
-Source: Weil conjectures blueprint, sec-six-functors/sk-prop-sf-biduality-general,
-proposition-six-operations-dctf--15, order 2138
-(blueprint: proposition-six-operations-dctf--15).
+For a separated scheme `X` of finite type over a finite field, of dimension at most `d`, and
+bounded constructible complexes `K`, `L` with Tor amplitudes in `[a, b]` and `[c, e]`, the derived
+internal Hom from `K` to `L` is bounded constructible with Tor amplitude in
+`[c - b - 2d, e - a + 2d]`, on both the etale and the pro-etale site.
 
 ## Main statements
 
@@ -111,6 +112,14 @@ proposition-six-operations-dctf--15, order 2138
 The two statements give the etale and pro-etale assertions separately. On the etale
 site the scalar ring is its canonical universe lift; on the pro-etale site the recorded
 constant-ring module category already uses that lift. No perfectness is assumed.
+
+## Implementation details
+
+On the etale site, biduality identifies `L` with `D_X D_X L`, and currying identifies the internal
+Hom with `D_X (K ⊗^L D_X L)`; the bounds then follow from the bounds for Verdier duality and for
+the derived tensor product. On the pro-etale site one chooses bounded constructible etale origins
+of `K` and `L` with the same Tor intervals, applies the etale result, and transports along the
+compatibility of inverse image with internal Hom.
 -/
 
 @[expose] public section
@@ -215,20 +224,8 @@ private theorem etaleHomBound (k : Type u) [Field k] [IsAlgClosed k]
 -- Align quotient coefficient specializations with the canonical ring hierarchy.
 attribute [local instance 2000] CommRing.toRing
 
-/-- Etale internal Hom is bounded constructible, with the asserted Tor interval.
-The input intervals already imply finite Tor amplitude. Finiteness of the lifted
-coefficient ring is supplied by the recorded positive-level finiteness theorem.
-Source: blueprint order 2138 (blueprint: proposition-six-operations-dctf--15).
-
-Proof:
-1. General biduality (theorem-verdier-biduality--1) identifies L with D_X D_X L.
-Apply internal Hom(K,-), then the natural currying isomorphism of
-lem-weil-pbc-ringed-internal-hom-exact-restriction, to identify the result with
-D_X(K tensor^L D_X L), without a perfectness hypothesis.
-2. By lemma-verdier-duality-preserves-constructibility--1, D_X L is constructible with interval
-[-e-2d,-c]. By proposition-six-operations-dctf--14 the tensor with K is constructible with interval
-[a-e-2d,b-c]. Dualizing again gives bounded constructibility and the interval
-[c-b-2d,e-a+2d]. Transport these properties across the displayed isomorphism. -/
+/-- On the etale site, the derived internal Hom from `K` to `L` is bounded constructible with
+Tor amplitude in `[c - b - 2d, e - a + 2d]`. -/
 theorem finite_constructible_derivedHom_etale
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -293,25 +290,8 @@ private theorem finiteTor_iso
   obtain ⟨a, b, ht⟩ := h.2
   exact ⟨a, b, torAmplitude_iso X _ f a b ht⟩
 
-/-- Pro-etale internal Hom preserves finite-Tor bounded constructibility and has the
-same interval bound. The internal Hom is the recorded Hom-complex localization on the
-original small site, whose object and morphism universes remain distinct.
-Source: blueprint order 2138 (blueprint: proposition-six-operations-dctf--15).
-
-Proof:
-1. By theorem-comparison-constructible-sheaves choose bounded constructible etale
-origins K', L'. By clause (ii) of lem-sf-comparison-tor-amplitude they retain the
-original intervals [a,b] and [c,e].
-2. Apply the etale argument: biduality theorem-verdier-biduality--1 and currying
-lem-weil-pbc-ringed-internal-hom-exact-restriction give Hom(K',L') as
-D_X(K' tensor^L D_X L'). The two duality bounds of
-lemma-verdier-duality-preserves-constructibility--1 and tensor bound
-proposition-six-operations-dctf--14 give bounded constructibility and interval [c-b-2d,e-a+2d].
-3. By proposition-six-operations-dctf--15, inverse image of this internal Hom
-is the internal Hom of the inverse images. That comparison applies since K' is
-finite-Tor constructible and L' is bounded constructible. Clause (i) of
-lem-sf-comparison-tor-amplitude preserves bounded constructibility and the exact
-interval. Transport through the chosen identifications with K,L. -/
+/-- On the pro-etale site, the derived internal Hom of finite-Tor constructible complexes `K` and
+`L` is finite-Tor constructible with Tor amplitude in `[c - b - 2d, e - a + 2d]`. -/
 theorem finite_constructible_derivedHom_proEtale
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
