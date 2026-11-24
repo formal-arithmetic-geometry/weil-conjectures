@@ -10,9 +10,11 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 
-/-! # ProEtaleComparisonLocalization
+/-! # Compatibility of the pro-etale comparison with etale localization
 
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
+## References
+
+* Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -116,14 +118,8 @@ private theorem leftMate_localization_isIso
   infer_instance
 
 /-- If the local comparison counit is invertible, so is the restriction of the global
-counit. This is the counit form of compatibility of comparison with etale localization.
-Source: Stacks Project, Tag 099Y, proof, compatibility of comparison with restriction.
-The identity-on-sections lower-star/restriction comparison has mate equal to the
-source lowerStarCompComparisonLowerStarIso, as checked by the pullback projections.
-The iterated mate identity then makes its mate under the comparison adjunctions
-invertible. The mate counit equation identifies the restricted global counit, up to
-these isomorphisms, with the local counit. Cancel the comparison isomorphisms.
-(auxiliary; not a blueprint node) -/
+counit. This is the counit form of compatibility of comparison with etale localization
+(Stacks, Tag 099Y). -/
 theorem comparison_counit_restriction_isIso
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (V : X.Etale)
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))

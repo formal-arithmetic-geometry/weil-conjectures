@@ -12,15 +12,7 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.FiniteSplitEtaleHypercover
 variable {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
 
-/-- Retain all hypercover data through a fixed degree.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2.
-Restrict all simplicial, nondegenerate and matching data. Reindex the full splitting cofan by the
-finite set of retained degrees and epimorphisms from the given simplex: an epimorphism forces the
-target degree not to exceed the source degree. The inverse reindexing inserts that bound, giving
-the same colimit universal property. Restrict matching cones to retained simplices and extend
-their indices back to the full lower-degree category; the original matching universal property
-supplies exactly the required lift and uniqueness.
-(auxiliary; not a blueprint node) -/
+/-- Retain all hypercover data through a fixed degree. -/
 noncomputable def finiteTruncation (U : FiniteSplitEtaleHypercover X) (r : ℕ) :
     TruncatedFiniteSplitEtaleHypercover X r where
   simplicial := (SimplicialObject.truncation r).obj U.simplicial

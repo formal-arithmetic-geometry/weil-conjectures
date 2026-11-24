@@ -11,7 +11,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-! # Nonpositive connectivity of derived tensor
 
-Source: Stacks Project, Tag 06YH, construction with bounded-above flat resolutions.
+## References
+
+* Stacks Project, Tag 06YH.
 -/
 
 @[expose] public section
@@ -27,13 +29,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
   [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
   [HasDerivedCategory.{w} C]
 
-/-- The tensor of degree-zero objects has no positive cohomology.
-Source: Stacks Project, Tag 06YH, derived tensor using flat resolutions.
-(blueprint: lem-sc-module-cup-derived-tensor-connectivity)
-Proof: degree-zero objects are in D≤0. The upstream flat-resolution tensor
-connectivity theorem gives D≤(0+0), which is D≤0. The result applies to module
-sheaves by their recorded closed monoidal Grothendieck structure and functorial
-flat resolutions; no flatness assumption on the two coefficient sheaves is used. -/
+/-- The tensor of degree-zero objects has no positive cohomology (Stacks, Tag 06YH). -/
 theorem moduleCup_derived_tensor_connectivity (F G : C) :
     (((singleFunctor C 0).obj F) ⊗ ((singleFunctor C 0).obj G)).IsLE 0 := by
   simpa using isLE_tensor ((singleFunctor C 0).obj F) ((singleFunctor C 0).obj G) 0 0

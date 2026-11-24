@@ -12,8 +12,9 @@ public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-! # Additive section fractions on an ambient open
 
-Source: Stacks Project, Tags 09MR and 01PW, the presentation by fractions.
-(blueprint: def-sc-open-section-fraction-presentation).
+## References
+
+* [Stacks, Tags 09MR and 01PW]
 -/
 
 @[expose] public section
@@ -23,9 +24,7 @@ open CategoryTheory MonoidalCategory DirectSum
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The additive relations for section fractions on an arbitrary ambient open.
-Source: Stacks Project, Tags 09MR and 01PW.
-(blueprint: def-sc-open-section-fraction-presentation). -/
+/-- The additive relations for section fractions on an arbitrary ambient open. -/
 noncomputable def openSectionFractionRelations {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (U : X.Opens) :
     AddSubgroup (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, U)) :=
@@ -34,16 +33,12 @@ noncomputable def openSectionFractionRelations {X : Scheme.{u}} (L F : X.Modules
       DirectSum.of (fun i : ℕ ↦ Γ(F ⊗ L.tensorPow i, U)) (n + b)
         ((mulTensorPowSection (homOfGlobalSection L s) F n b).app U t)}
 
-/-- Additive degree-zero section fractions over `U`, with all fraction relations retained.
-Source: Stacks Project, Tags 09MR and 01PW.
-(blueprint: def-sc-open-section-fraction-presentation). -/
+/-- Additive degree-zero section fractions over `U`, with all fraction relations retained. -/
 noncomputable abbrev OpenSectionFractionPresentation {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (U : X.Opens) : Type u :=
   (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, U)) ⧸ openSectionFractionRelations L F s U
 
-/-- The section fraction represented by the numerator `t` in degree `n`.
-Source: Stacks Project, Tags 09MR and 01PW.
-(blueprint: def-sc-open-section-fraction-presentation). -/
+/-- The section fraction represented by the numerator `t` in degree `n`. -/
 noncomputable def openSectionFraction {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (U : X.Opens) (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, U)) :
     OpenSectionFractionPresentation L F s U :=

@@ -14,8 +14,11 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Detection of formal maps by a torsion comparison and one quotient
 
-Source: Stacks Project, Tags 0889 and 088A, uniqueness argument;
-Tag 0881, exactness of coherent completion.
+## References
+
+* [Stacks Project, Tag 0889](https://stacks.math.columbia.edu/tag/0889)
+* [Stacks Project, Tag 088A](https://stacks.math.columbia.edu/tag/088A)
+* [Stacks Project, Tag 0881](https://stacks.math.columbia.edu/tag/0881)
 -/
 
 @[expose] public section
@@ -45,23 +48,7 @@ private theorem kernel_quotient_projection_isIso
   exact isIso_of_mono_of_epi _
 
 /-- One separating quotient detects the difference of two formal maps into Q
-whose composites with b agree.
-Source: Stacks Project, Tags 0889 and 088A, uniqueness argument.
-Proof: let T be the coherent kernel of b. The map T → Q/J^(n+1)Q factors
-through T/J^(m+1)T for every m ≥ n. Since it is monomorphic, the quotient
-projection of T is monomorphic as well as epimorphic, hence invertible. Thus
-the completion of T has invertible transitions at and above n. Exactness of
-coherent completion (Stacks, Tag 0881) transports the kernel fork T → Q → R
-to a kernel fork in the formal category. The difference f - g therefore factors
-through the completion of T. At level n, precompose the separating map with
-this factor followed by the inverse quotient projection. The resulting composite
-is f_n - g_n = 0, so the factor at n is zero. Naturality and invertible kernel
-transitions give zero at all higher levels. At lower levels cancel the epimorphic
-transition of M from n to that level. All components of the factor vanish, hence
-f - g = 0. The bound hker is unnecessary once hsep is given, but its original
-binder is retained. For J=0 the quotients are the original modules; for the unit
-ideal hsep forces T=0. No termwise preservation of kernels is asserted.
-(blueprint: lem-weil-pbc-formal-map-torsion-finite-detection). -/
+whose composites with b agree. (Stacks, Tags 0889 and 088A.) -/
 theorem formalMap_torsion_finite_detection
     {X : Scheme.{u}} [IsNoetherian X] (J : X.IdealSheafData)
     (Q R : CoherentModules X) (b : Q ⟶ R)

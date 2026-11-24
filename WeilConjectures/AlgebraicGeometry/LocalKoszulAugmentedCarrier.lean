@@ -24,8 +24,10 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # A locally augmented Koszul carrier
 
-Source: Stacks Project, Tags 0BQY and 068C.
-(blueprint: new-s1-local-koszul-augmented-carrier). -/
+## References
+
+* [Stacks, Tags 0BQY and 068C]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -338,35 +340,8 @@ private theorem local_koszul_pullback_zero {Z Y : Scheme.{u}} (i : Z ⟶ Y)
   exact differential_zero_of_iso e hA x y
 
 /-- A specified algebraic Koszul resolution gives a local K-flat resolution whose
-restricted tensor pullback has bounded finite-free terms and zero differential.
-
-Source: Stacks Project, Tag 068C, finite-free Koszul resolution; Tag 0BQY,
-proof's local Koszul construction and quotient calculation.
-(blueprint: new-s1-local-koszul-augmented-carrier).
-
-Proof: Put A = Gamma(Y,U) and I = ker(i)(U). The closed immersion on U identifies
-its source with Spec(A/I). Extend Q.pi to integer degrees and replace Q.complex
-by the Koszul complex using hQ. Apply affine_koszul_finite_free_resolution to
-this augmentation; it incorporates the quotient identification and sheafification.
-The reindexing sends degree n to -n, with zero terms in positive cochain degrees.
-This gives a complex B on U and a quasi-isomorphism to the
-restriction of i_*O_Z in degree zero. Each exterior basis makes B^{-n} free of
-rank binomial(m,n); exterior powers vanish for n > m. Thus B is bounded and
-termwise flat, hence K-flat by the finite filtration by its single-degree terms.
-Take K to be the termwise module pushforward of B along U.ι. The restriction of
-this pushforward back to U is naturally isomorphic to B: sections over an open
-of U are unchanged by the pushforward and restriction. Transport the augmentation
-and K-flatness along this isomorphism. This construction needs no exactness or
-K-flatness of the pushforward on all of Y.
-On W = V intersect i^{-1}(U), restriction of i^*K is the tensor pullback of B
-along the restricted immersion, followed by restriction to W's over site.
-This follows termwise from the inverse-image and extension-of-scalars formula
-for tensorPullback. Every generator f_j has zero image in the quotient, by hf,
-so the pulled-back contraction differential is zero. Scalar extension and open
-restriction take each displayed exterior basis to a basis over the new ring
-sheaf. The bounds [-m,0] are preserved. For m=0 this is the degree-zero unit
-complex; for an empty open or zero quotient the same bases describe zero
-modules over the zero ring. No arbitrary choice of a zero model is used. -/
+restricted tensor pullback has bounded finite-free terms and zero differential
+(Stacks, Tags 068C and 0BQY). -/
 theorem exists_local_koszul_augmented_carrier
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [(Scheme.Modules.tensorPullback i).Additive]

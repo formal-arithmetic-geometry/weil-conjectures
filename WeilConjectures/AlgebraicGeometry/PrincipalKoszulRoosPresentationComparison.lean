@@ -12,11 +12,13 @@ import all WeilConjectures.CategoryTheory.FlatScalarKoszulTowerComparison
 import WeilConjectures.CategoryTheory.StrictRoosDerivation
 import all WeilConjectures.CategoryTheory.StrictRoosDerivedLimitComparison
 
-/-! # Normalized principal Koszul Roos presentation comparison
+/-!
+# Normalized principal Koszul Roos presentation comparison
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 0A0E;
-sites-cohomology.tex, Tag 0941.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099B, 0A0E and 0941,
+  <https://stacks.math.columbia.edu/tag/0A0E>, <https://stacks.math.columbia.edu/tag/0941>
 -/
 
 @[expose] public noncomputable section
@@ -44,11 +46,8 @@ local instance (priority := 1100)
       (R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R))).has_limit
         (Discrete.functor H)
 
-/-- The zero-coordinate Roos lift of a strict augmentation of a tower of complexes.
-This factors the construction through abstract tower data to avoid unfolding a concrete
-Koszul tensor tower while checking its compatibility proof.
-Source: Stacks Tag 0941
-(auxiliary; not a blueprint node). -/
+/-- The zero-coordinate Roos lift of a strict augmentation of a tower of complexes
+(Stacks, Tag 0941). -/
 def principalTowerRoosUnit
     (P : CochainComplex (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -60,9 +59,8 @@ def principalTowerRoosUnit
     (fun n ↦ (γ.naturality (homOfLE (Nat.le_succ n)).op).symm.trans
       (Category.id_comp _))
 
-/-- The strict degree-zero unit into the principal Koszul Roos complex.
-Source: Stacks Tags 0A0E and 0941
-(auxiliary; not a blueprint node). -/
+/-- The strict degree-zero unit into the principal Koszul Roos complex
+(Stacks, Tags 0A0E and 0941). -/
 def principalKoszulRoosUnit
     (P : CochainComplex (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -171,24 +169,8 @@ private theorem normalized_augmentation_transport
 
 -- The unit calculation compares several large, definitionally equal tower presentations.
 /-- The negative principal cone and the dual singleton Koszul system give the same
-normalized strict derived completion, for every presentation of the latter.
-
-Source: Stacks Project, algebraization.tex, proof of Tag 0A0E;
-sites-cohomology.tex, Tag 0941
-(auxiliary; not a blueprint node).
-
-Proof: evaluate the dual positive two-term Koszul complex at one in each of its two
-nonzero degrees. The signed Hom differential identifies it with the negative cone of
-multiplication by a^(n+1). The inverse dual transitions have components (a,1), and the
-dual projection is the degree-zero cone inclusion. Tensor symmetry therefore gives an
-augmentation-compatible strict tower isomorphism. The normalized strict Roos comparison
-identifies its cone with total derived inverse limit. The uniqueness of the right-derived
-functor compares that inverse limit with D.inverseLimit, respecting the comparison units;
-D.tensorFactors identifies the descended tower on the representative P. Naturality at the
-specified localization representative gives D.unit at Q(P), hence the displayed equality.
-Finite free Koszul factors preserve quasi-isomorphisms, so P need not be K-flat. Zero
-complexes, a zero section, and an invertible section obey the same chain calculations.
--/
+normalized strict derived completion, for every presentation of the latter
+(Stacks, Tags 0A0E and 0941). -/
 theorem principalKoszulRoos_presentation_comparison
     [HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]

@@ -22,18 +22,7 @@ universe u
 namespace AlgebraicGeometry
 
 /-- A proper finitely presented scheme over a Noetherian approximation descends to
-one proper stage, with its pullback square retained.
-Source: Stacks Project, Limits, Tags 01ZM and 081F, as used in Tag 0A0P.
-(blueprint: lem-weil-pbc-proper-noetherian-stage)
-Proof: reindex N by a nonempty directed set using Tag 0032. Apply
-finite-presentation descent to its limiting cone. This gives a finitely presented
-stage morphism p and a cartesian square with g.
-The stage source is qcqs because p is finitely presented and the base is Noetherian.
-Apply properness descent (081F) to p and the identity of its base: its limit base
-change is g, hence proper. Pull back p to the stage supplied by 081F. Properness
-holds there; finite presentation is preserved by base change. Pasting pullback
-squares gives the displayed square with g and the original approximation leg.
-The resulting stage in the directed reindexing is an object of N.I. -/
+one proper stage, with its pullback square retained (Stacks, Tags 01ZM, 081F and 0A0P). -/
 theorem exists_proper_noetherian_stage
     {Y S : Scheme.{u}} (g : Y ⟶ S) [IsProper g]
     [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g]

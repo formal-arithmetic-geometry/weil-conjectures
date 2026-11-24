@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestricti
 
 /-! # Canonical comparisons for degree-zero Picard base change
 
-Source: Stacks Project, Tags 0095, 0096, 08HY and 0BDP.
+## References
+
+* Stacks Project, Tags 0095, 0096, 08HY and 0BDP.
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Tensor pullback composition, transported from ordinary pullback.
-Source: Stacks Project, Tags 0095 and 0096; uniqueness of left adjoints.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+(Stacks, Tags 0095, 0096) -/
 noncomputable def picardTensorCompIso {A B C : Scheme.{u}}
     (k : A ⟶ B) (l : B ⟶ C) (M : C.Modules) :
     (tensorPullback k).obj ((tensorPullback l).obj M) ≅
@@ -33,8 +34,7 @@ noncomputable def picardTensorCompIso {A B C : Scheme.{u}}
       (pullbackComp k l).app M ≪≫ (picardTensorComparison (k ≫ l)).symm.app M
 
 /-- The map between the non-iterated fibre products induced by a base morphism.
-Source: Stacks Project, Tag 0BDP, change-of-base paragraph.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+(Stacks, Tag 0BDP) -/
 noncomputable def picardBaseChangeTop {X S W T : Scheme.{u}}
     (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) :
     CategoryTheory.Limits.pullback f (h ≫ j) ⟶ CategoryTheory.Limits.pullback f j :=
@@ -43,8 +43,7 @@ noncomputable def picardBaseChangeTop {X S W T : Scheme.{u}}
     (by rw [Category.assoc]; exact CategoryTheory.Limits.pullback.condition)
 
 /-- The canonical direct-image base-change map, with the top pullbacks composed.
-Source: Stacks Project, Tags 08HY and 0BDP, change-of-base paragraph.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+(Stacks, Tags 08HY, 0BDP) -/
 noncomputable def picardDirectImageBaseChangeMap {X S W T : Scheme.{u}}
     (f : X ⟶ S) (j : W ⟶ S) (h : T ⟶ W) (M : X.Modules) :
     (tensorPullback h).obj
@@ -64,8 +63,7 @@ noncomputable def picardDirectImageBaseChangeMap {X S W T : Scheme.{u}}
               rw [CategoryTheory.Limits.pullback.lift_fst]))).hom)
 
 /-- Pull evaluation back and transpose it; this fixes the dual comparison map.
-Source: Stacks Project, Tag 0FNV, the coordinate dual basis computation.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+(Stacks, Tag 0FNV) -/
 noncomputable def picardTensorDualComparison {W T : Scheme.{u}} (h : T ⟶ W)
     (M : W.Modules) : (tensorPullback h).obj (dual M) ⟶ dual ((tensorPullback h).obj M) :=
   MonoidalClosed.curry ((picardTensorObjIso h M (dual M)).inv ≫
@@ -93,9 +91,7 @@ private theorem picardTensorObjIso_inv_naturality {W T : Scheme.{u}} (h : T ⟶ 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Pulling a transpose back and applying the explicit dual comparison is currying
-of the pulled pairing. This is naturality of the tensor comparison, followed by
-injectivity of uncurrying. Source: Stacks Project, Tag 0095, tensor formula.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+of the pulled pairing. (Stacks, Tag 0095) -/
 private theorem picardTensorDualComparison_uncurry {W T : Scheme.{u}} (h : T ⟶ W)
     (M N : W.Modules) (g : N ⟶ dual M) :
     MonoidalClosed.uncurry ((tensorPullback h).map g ≫ picardTensorDualComparison h M) =
@@ -108,8 +104,7 @@ private theorem picardTensorDualComparison_uncurry {W T : Scheme.{u}} (h : T ⟶
   rw [← Functor.map_comp_assoc, id_tensorHom, ← MonoidalClosed.uncurry_eq]
 
 /-- A commuting square of pairings gives a commuting square of their transposes.
-Source: Stacks Project, Tag 0BDP, transpose of the degree-zero cup pairing.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+(Stacks, Tag 0BDP) -/
 private theorem picardTranspose_square {T : Scheme.{u}} {A A' B B' : T.Modules}
     (c : A ⟶ A') (a : B ⟶ B') (φ : B ⟶ dual A) (ψ : B' ⟶ dual A')
     (hpair : (c ⊗ₘ a) ≫ MonoidalClosed.uncurry ψ = MonoidalClosed.uncurry φ) :
@@ -122,9 +117,7 @@ private theorem picardTranspose_square {T : Scheme.{u}} {A A' B B' : T.Modules}
   exact hpair.symm
 
 /-- Invertible comparison maps and compatibility of pairings give a base-change
-square for transposes. All isomorphisms are constructed from the specified maps.
-Source: Stacks Project, Tag 0BDP, dualizing the degree-zero cup pairing.
-(blueprint: lem-sc-picard-canonical-base-change-comparisons) -/
+square for transposes. (Stacks, Tag 0BDP) -/
 theorem picardBaseChangeSquare_of_pairings {W T : Scheme.{u}} (h : T ⟶ W)
     (N D : W.Modules) (NT DT : T.Modules)
     (φ : D ⟶ dual N) (ψ : DT ⟶ dual NT)

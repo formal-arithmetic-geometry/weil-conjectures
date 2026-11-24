@@ -16,8 +16,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Finite-fibre enumeration and application of the unramified-local decomposition
-produce the input required by `finite_coproduct_of_unramified_decomposition`.
-(blueprint: lem-weil-pbc-finite-unramified-etale-local-input). -/
+produce the input required by `finite_coproduct_of_unramified_decomposition`. -/
 theorem finite_decomposition_input
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [LocallyOfFiniteType f]
     [IsOpenImmersion (pullback.diagonal f)] (x : X) :
@@ -61,8 +60,7 @@ theorem finite_decomposition_input
 
 /-- Shrinking and reindexing a finite clopen decomposition removes its
 remainder and yields the finite coproduct presentation used in Lemma 04HJ.
-This packages the open shrinking, base change, and coproduct bookkeeping.
-(blueprint: lem-weil-pbc-finite-unramified-etale-local-reduction). -/
+This packages the open shrinking, base change, and coproduct bookkeeping. -/
 theorem finite_coproduct_of_unramified_decomposition
     {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [LocallyOfFiniteType f]
     [IsOpenImmersion (pullback.diagonal f)] (x : X) (n : ℕ) (pts : Fin n → Y)

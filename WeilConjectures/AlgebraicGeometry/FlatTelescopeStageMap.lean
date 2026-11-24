@@ -16,8 +16,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 
 /-! # Flat telescope presentations and stage maps
 
-Source: Stacks Project, Tags 06YS and 06YJ; concrete model morphisms in the
-normalization plan. (blueprint: def-sc-flat-telescope-stage-map).
+## References
+
+* Stacks Project, Tags 06YS and 06YJ
 -/
 
 @[expose] public section
@@ -36,12 +37,8 @@ local instance (Y : Scheme.{u}) :
     HasColimitsOfShape.has_colimit _
   exact ⟨⟨⟨_, HomologicalComplex.isColimitCoconeOfHasColimitEval F⟩⟩⟩
 
-/-- A concrete sequential telescope of bounded-above flat complexes.
-The transition cone is constructed explicitly; no existence witness supplies its data.
-Source: Stacks Project, Tag 06YS, telescope construction.
-(blueprint: lem-sc-normalized-flat-telescope-comparison). 
-(blueprint: def-sc-flat-telescope-stage-map)
--/
+/-- A concrete sequential telescope of bounded-above flat complexes
+(Stacks, Tag 06YS). -/
 def isFlatTelescope (Y : Scheme.{u})
     (P : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) : Prop :=
   ∃ (E : ℕ → CochainComplex
@@ -52,12 +49,8 @@ def isFlatTelescope (Y : Scheme.{u})
     CochainComplex.mappingCone (𝟙 (∐ E) -
       Sigma.desc (fun n : ℕ ↦ t n ≫ Sigma.ι E (n + 1))) = P
 
-/-- Homotopy objects represented by flat telescopes or their translates by one.
-This predicate records actual representatives and contains no choice of data.
-Source: Stacks Project, Tag 06YJ.
-(blueprint: lem-sc-normalized-flat-telescope-comparison). 
-(blueprint: def-sc-flat-telescope-stage-map)
--/
+/-- Homotopy objects represented by flat telescopes or their translates by one
+(Stacks, Tag 06YJ). -/
 def flatTelescopeShiftRepresentative (Y : Scheme.{u})
     (X : HomotopyCategory
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)) : Prop :=
@@ -66,19 +59,14 @@ def flatTelescopeShiftRepresentative (Y : Scheme.{u})
       ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P = X ∨
         ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj P)⟦(1 : ℤ)⟧ = X)
 
-/-- The endomorphism whose cone is the sequential telescope.
-Source: Stacks Project, Tag 06YS.
-(blueprint: def-sc-flat-telescope-stage-map). -/
+/-- The endomorphism whose cone is the sequential telescope (Stacks, Tag 06YS). -/
 noncomputable def flatTelescopeDifferential {Y : Scheme.{u}}
     (E : ℕ → CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ)
     (t : ∀ n : ℕ, E n ⟶ E (n + 1)) : (∐ E) ⟶ (∐ E) :=
   𝟙 (∐ E) - Sigma.desc (fun n : ℕ ↦ t n ≫ Sigma.ι E (n + 1))
 
 /-- Maps obtained from maps of bounded-flat towers, allowing an integer translate
-and transport along homotopy isomorphisms. The commutative square is a condition
-on the explicitly constructed sum map, not unspecified cone-map data.
-Source: Stacks Project, Tags 06YS and 06YJ; model-map part of the parent plan.
-(blueprint: def-sc-flat-telescope-stage-map). -/
+and transport along homotopy isomorphisms (Stacks, Tags 06YS and 06YJ). -/
 def flatTelescopeStageMap (Y : Scheme.{u})
     {X X' : HomotopyCategory
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (ComplexShape.up ℤ)}

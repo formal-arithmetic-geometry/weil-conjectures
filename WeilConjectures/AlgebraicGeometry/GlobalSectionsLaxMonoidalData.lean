@@ -8,7 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.ModuleCupNaiveMap
 /-! # Tensor-counit normalization of the global pullback
 
-Source: Stacks Tags 008A, 008Y, 0B6A and 0FKU. -/
+## References
+
+* Stacks Project, Tags 008A, 008Y, 0B6A and 0FKU.
+-/
 
 @[expose] public section
 universe u
@@ -114,22 +117,8 @@ private theorem globalSectionsTensor_right_unitality
   exact (rightUnitor_hom_app_tmulSection (X := X) (M := M) (U := ⊤) r s).symm
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The canonical lax structure has the concrete unit and tensor maps.
-Source: Stacks, Section 17.16 (Tag 01CA), the sheaf tensor construction;
-WeilConjectures.AlgebraicGeometry.Modules.TensorSection, the section tensor identities.
-(blueprint: lem-sc-global-sections-lax-monoidal-data)
-Proof: choose the unit map induced by unitSectionsEquiv and the tensorator induced
-by the bilinear pairing tmulSection. Naturality in either argument follows by applying
-whiskerRight_app_tmulSection and whiskerLeft_app_tmulSection to pure tensors.
-The associativity diagram agrees on every triple of pure tensors by
-associator_hom_app_tmulSection: both sides give the nested tensor section with
-parentheses changed by the sheaf associator. The left and right unit diagrams agree
-on pure tensors by leftUnitor_hom_app_tmulSection and rightUnitor_hom_app_tmulSection:
-both sides send r tensor s (respectively s tensor r) to r times s.
-TensorProduct.ext' and ModuleCat.hom_ext extend these identities to all morphisms,
-so the prescribed maps define a lax monoidal structure. Its unit and tensorator
-are the required maps by construction. The same equations hold for zero modules
-and the empty scheme; no injectivity or surjectivity of the tensorator is asserted. -/
+/-- The canonical lax structure on global sections has the concrete unit and tensor maps
+(Stacks, Tag 01CA). -/
 theorem globalSectionsFunctor_laxMonoidal_data
     :
     ∃ lax : (RingedSpace.globalSectionsFunctor X.toRingedSpace).LaxMonoidal,

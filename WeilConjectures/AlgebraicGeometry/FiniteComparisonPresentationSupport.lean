@@ -17,10 +17,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 
 /-! # Private support for finite comparison presentation
 
-These are the completed general coefficient, site-equivalence and constant-model
+These are the general coefficient, site-equivalence and constant-model
 arguments of `FiniteComparisonPresentation`, separated to bound elaboration time.
-Source: blueprint finite comparison, coefficient paragraph, Stacks Tags 03CY, 09AJ
-and 09AL (auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 03CY, 09AJ and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -68,17 +70,7 @@ open scoped CategoryTheory.Obj
 attribute [local irreducible] monoidalOfOplaxIsos
 
 open InternalAbelianSheafModule in
-/-- The section-module equivalence is strong monoidal.
-
-Source: the normalized section tensor and unit comparison with coherence
-(auxiliary; not a blueprint node).
-
-Proof: take the tensor and unit isomorphisms and their naturality, associativity,
-and unit identities from `internal_section_tensor_comparison`. Feed the inverse
-isomorphisms to `Functor.CoreMonoidal.mk'`. Naturality follows from tensoring with
-identities; the two unit equations follow by cancelling the unitors. The resulting
-core monoidal structure supplies the required strong monoidal structure.
--/
+/-- The section-module equivalence is strong monoidal. -/
 theorem sectionMonoidal_exists
     {C : Type c} [Category.{h} C] (J : GrothendieckTopology C)
     [UnivLE.{max c h, w}] [HasSheafify J Ab.{w}]

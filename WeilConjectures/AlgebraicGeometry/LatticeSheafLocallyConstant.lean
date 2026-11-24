@@ -42,8 +42,9 @@ public import WeilConjectures.CategoryTheory.SiteModuleCompatibleTuples
 /-!
 # Local constancy of the sheaf of integral lattices
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), pp. 59--60
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.4(6).
 -/
 
 @[expose] public section
@@ -55,31 +56,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- The presheaf of integral lattice classes is a sheaf, locally the constant sheaf of
-cosets `g GL_n(A)`, with the specified map `g ↦ (g A^n, α_g)`.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), proof, pp. 59--60
-(auxiliary; not a blueprint node).
-
-Proof: (1) The map `m ↦ α(1 ⊗ m)` is injective by a local integral basis and coordinatewise
-inclusion of continuous functions. Intertwining isomorphisms are unique, and two pairs are
-equivalent exactly when their embedded submodules agree. (2) Matching pairs therefore have
-unique transition maps satisfying the cocycle condition. Apply site-module-sheaf gluing
-(lem-weil-pbc-site-module-sheaf-gluing). (3) Glue their embeddings in `L`, extend scalars,
-and glue the inverse rationalizations. This gives unique amalgamation of classes.
-(4) For a trivialization of rank `n`, the constant matrix `g` gives `g A^n`; multiplication
-on the right by an integral invertible matrix preserves it. On a nonempty test object,
-evaluation at a point shows equality implies equality of cosets. The empty covering handles
-empty objects. (5) A local integral basis rationalizes to mutually inverse continuous matrices;
-evaluation shows its rank is `n`. (6) The integer subring is open because it contains
-the open unit ball. Intersect inverse images of this subring under the finitely many
-entries of `g(x)⁻¹g` and `g⁻¹g(x)` to get neighborhoods with constant coset.
-Lift these entries to continuous integral coefficient matrices to identify their lattice
-images. Open-immersion covers are directly pro-etale covers, giving local surjectivity.
-(7) Extend the coset map by constant sheafification. The unit is locally bijective also
-in the larger value universe. Its factorization through our map transfers local
-bijectivity, and the set-sheaf criterion gives the asserted isomorphism.
-Rank zero gives the unique zero
-pair, and the empty-cover axiom gives the unique section over an empty scheme. The original
-trivializing cover of `L` then gives local constancy with varying ranks. -/
+cosets `g GL_n(A)`, with the specified map `g ↦ (g A^n, α_g)`. -/
 theorem integralLatticeSheaf_locallyConstant (X : Scheme.{u})
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

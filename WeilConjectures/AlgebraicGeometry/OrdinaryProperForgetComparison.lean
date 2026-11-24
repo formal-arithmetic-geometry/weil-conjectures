@@ -7,10 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
 /-! # Proper forget-supports with recorded ordinary endpoints
-
-Source: the canonical proper forget-supports comparison in
-WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,13 +26,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   Functor.leftDerivedFunctor Functor.mapDerivedCategory AlgebraicGeometry.ProjectiveSpace
 
 /-- The existing proper forget-supports isomorphism, with the ordinary direct-image
-endpoint fixed before taking components. This is precisely the canonical construction:
-forget-supports followed by ordinary direct-image composition and congruence.
-The original isomorphism supplies both arrows and the inverse identities.
-The definition is not irreducible: consumers of `diagonalLift` and
-`projectionComparison` identify it with the original isomorphism by `rfl`.
-Source: LowerShriekToLowerStar, rightDerivedLowerShriekIsoRightDerivedLowerStar.
-(auxiliary; not a blueprint node). -/
+endpoint fixed before taking components. -/
 noncomputable def ordinaryProperForgetComparison
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :

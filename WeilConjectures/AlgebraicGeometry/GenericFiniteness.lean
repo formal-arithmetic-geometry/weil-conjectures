@@ -44,12 +44,7 @@ lemma Scheme.Hom.eq_of_specializes_of_eq {T S : Scheme.{u}} (p : T ⟶ S) [Local
 
 /-- **Generic finiteness of quasi-finite morphisms.** A separated, quasi-compact, locally
 quasi-finite morphism of finite type `f : W ⟶ S` to an irreducible affine scheme is finite over
-some open neighbourhood of the generic point of `S`.
-
-By Zariski's Main Theorem `W` is a quasi-compact open of a scheme `T` finite over `S`. A point
-of the closure of `W` over the generic point `η` is a specialization of a point of `W`, which
-also lies over `η`, hence equals it, the fibres of `T` being discrete. So the closed set
-`p(closure W \ W)` does not contain `η`, and over its complement `W` is closed in `T`. -/
+some open neighbourhood of the generic point of `S`. -/
 theorem Scheme.Hom.exists_isFinite_morphismRestrict_of_irreducibleSpace {W S : Scheme.{u}}
     (f : W ⟶ S) [IsAffine S] [IrreducibleSpace S] [LocallyQuasiFinite f] [LocallyOfFiniteType f]
     [IsSeparated f] [QuasiCompact f] :

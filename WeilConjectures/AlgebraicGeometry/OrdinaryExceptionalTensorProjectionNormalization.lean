@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarCoefficientPul
 import WeilConjectures.AlgebraicGeometry.OrdinaryExceptionalScalarTensorData
 
 /-! Ordered constant-tensor normalization of the inverse coefficient comparison.
-Source: Zheng, Construction 2.26; the normalized proper coefficient projection formula
-(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization). -/
+
+## References
+
+* Zheng, Construction 2.26.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,13 +27,7 @@ namespace AlgebraicGeometry.Etale
 if the coefficient identifications `B_Y[0] ≅ (B[0])_Y` and `B_Z[0] ≅ (B[0])_Z` are
 compatible with the two pullback identifications, then the scalar-coefficient ordered
 projection map, followed by these identifications, is the ordered constant projection
-isomorphism `properConstantProjectionIso` for the constant complex `B[0]`.
-Source: the projection clause of properFiniteCoefficientExtension and Zheng,
-Construction 2.26
-(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization).
-
-Proof: naturality of the signed derived symmetry and of the projection map in the
-coefficient, followed by the assumed compatibility of the pullback identifications. -/
+isomorphism `properConstantProjectionIso` for the constant complex `B[0]`. -/
 theorem ordinaryExceptional_orderedProjection_transport
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y) [IsProper p]
@@ -80,19 +77,7 @@ theorem ordinaryExceptional_orderedProjection_transport
   erw [hX]
 
 /-- Under the canonical scalar/constant-tensor identifications, the restricted inverse
-proper coefficient comparison is the inverse ordered constant projection.
-
-Source: the projection clause of properFiniteCoefficientExtension and Zheng,
-Construction 2.26
-(blueprint: lem-sfb-ordinary-exceptional-tensor-projection-normalization).
-
-Proof: apply the projection equation for scalarMate, and cancel its two tensor symmetry
-isomorphisms. Express the coefficient object B as the constant sheaf of its restricted
-A-module, commute the constant functor with the degree-zero embedding, and use naturality
-of the derived tensor and pullback comparisons. The resulting forward comparison is
-properConstantProjectionIso conjugated by ordinaryScalarTensorIso. Invert the equality
-of isomorphisms, substitute q.hom = scalarMate, and cancel the scalar tensor comparison
-at the source. This gives the displayed inverse comparison in the required order. -/
+proper coefficient comparison is the inverse ordered constant projection. -/
 theorem ordinaryExceptional_tensorProjection_normalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y]

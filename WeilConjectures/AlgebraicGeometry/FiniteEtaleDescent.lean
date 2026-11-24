@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentEssentiallySurjective
 /-!
 # Effective etale descent for finite etale schemes
 
-Source: Stacks Project, Descent, Tags 023V, 0245, 02LA, 02VN, and the
-blueprint's `lem-galois-descent` (blueprint: lem-galois-descent).
+## References
+
+* Stacks Project, Tags 023V, 0245, 02LA, 02VN
 -/
 
 @[expose] public section
@@ -28,36 +29,7 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- For a surjective etale map `g : Y' ⟶ Y`, the base-change functor from
 finite etale schemes over `Y` to finite etale schemes over `Y'` with descent
-data is an equivalence (blueprint: lem-galois-descent).
-
-The pullback square identifies each image with `P ×_Y Y'`; the transport
-equation says its datum is the canonical comparison of the two pullbacks,
-and the final equation says morphisms are sent to their base changes.
-
-Proof plan from the node, following Stacks:
-
-1. The singleton etale surjection is an etale covering and hence an fpqc
-   covering by `lem-weil-pbc-fpqc-finer-than-etale` (Topologies, Tag 022C).
-   This requires a quasi-compact covering family, not a quasi-compact `g`.
-2. Base change preserves finite etale morphisms
-   (`def-weil-pbc-finite-etale-category`). Identify both iterated pullbacks
-   with `P ×_Y Y''` by `def-pc-fibre-product`. Over the triple product the
-   comparisons satisfy the cocycle; the same identifications show every
-   base-changed morphism is compatible (`proposition-jacobian-over-ground-field--1`).
-3. Apply `lem-galois-fpqc-morphisms-descend` (Descent, Tag 02W0) to the
-   covering in Step 1. Compatible maps between the canonical objects
-   descend uniquely, giving full faithfulness.
-4. A finite morphism is affine (`def-weil-finite-integral-morphism` and
-   `pqf-def-affine-morphism`). Apply
-   `lem-galois-fpqc-affine-descent-effective` (Descent, Tag 0245) to obtain
-   `P` over `Y` and an isomorphism of its canonical datum with the given one.
-5. Its base change is finite etale since it is isomorphic to the given
-   finite etale object. Descend these properties by
-   `lem-weil-pbc-fpqc-descend-finite` (Tag 02LA) and
-   `lem-galois-fpqc-descend-etale` (Tag 02VN). Thus `P` is finite etale,
-   and the compatible isomorphism from Step 4 gives essential surjectivity.
-6. Choose such preimages. Full faithfulness supplies a quasi-inverse on
-   morphisms and makes the chosen isomorphisms natural, giving equivalence. -/
+data is an equivalence. -/
 theorem finiteEtaleDescent {Y Y' : Scheme.{v}} (g : Y' ⟶ Y)
     [Surjective g] [Etale g] :
     ∃ (F : Y.FiniteEtale ⥤ AlgebraicGeometry.FiniteEtaleDescentData g)

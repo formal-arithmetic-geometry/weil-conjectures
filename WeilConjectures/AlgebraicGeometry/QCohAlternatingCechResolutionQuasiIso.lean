@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparison
 
 /-! # Čech totalization of a quasi-coherent resolution
 
-Source: Stacks Project, Cohomology, Lemma 08C2.
-(blueprint: lem-sc-qcoh-alternating-cech-resolution-quasi-iso)
+## References
+
+* Stacks Project, Tag 08C2.
 -/
 
 @[expose] public section
@@ -220,24 +221,7 @@ private theorem alternatingCechDouble_strictlyLE
   exact alternatingCechDouble_isZero_column U F p (Or.inr (by omega))
 
 /-- Čech totalization sends a quasi-coherent complex's K-injective resolution to a
-quasi-isomorphism, without boundedness of the coefficient complex.
-
-Source: Stacks Project, Cohomology, Lemma 08C2, affine-basis application using Tag 01XB.
-(blueprint: lem-sc-qcoh-alternating-cech-resolution-quasi-iso).
-
-Proof: Apply the affine-open section comparison to every increasing tuple
-intersection. Project the actual extended column to its tuple section complexes;
-the product of these projections is an isomorphism by the degreewise product
-comparison and extensionXIso. Finite products preserve quasi-isomorphisms because
-the additive homology functor preserves finite products. Naturality of the
-projections therefore makes every nonnegative column map a quasi-isomorphism.
-Negative columns vanish by extension by zero. For p at least r there are no
-increasing (p+1)-tuples: injectivity would force p+1 at most r. Thus the double
-complexes are strictly supported in columns 0 through r-1. Apply the existing
-HomologicalComplex₂.total.quasiIso_map_of_finitely_many_columns, without any
-boundedness in coefficient degree. The empty interval for r=0 is included.
-The cover hypothesis is retained in the unchanged signature; the proof in fact
-uses only affineness of the intersections. -/
+quasi-isomorphism, without boundedness of the coefficient complex (Stacks, Tags 08C2, 01XB). -/
 theorem qcoh_alternatingCech_resolution_quasiIso
     (X : Scheme.{u}) (r : ℕ) (U : Fin r → X.Opens) (hU : iSup U = ⊤)
     (hAffine : ∀ (p : ℕ) (t : Fin (p + 1) → Fin r), IsAffineOpen (⨅ k, U (t k)))

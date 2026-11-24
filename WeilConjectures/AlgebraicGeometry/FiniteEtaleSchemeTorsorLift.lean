@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 /-!
 # Lifting an equivariant finite étale scheme
 
-Source: Stacks Project Tag 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-finite-etale-scheme-torsor-lift)
+## References
+
+* Stacks Project, Tag 0A5G
 -/
 
 @[expose] public section
@@ -327,8 +328,7 @@ end Representable
 
 /-- **Torsors with a representable underlying sheaf.** A torsor `P` under the constant sheaf `M`
 on the small étale site of `Y` whose underlying sheaf of sets is represented by a finite étale
-`Y`-scheme `Q` is the sheaf torsor of an `M`-torsor, with total space `Q`.
-(blueprint: `thm-galois-lc-etale`, simply transitive actions) -/
+`Y`-scheme `Q` is the sheaf torsor of an `M`-torsor, with total space `Q`. -/
 private theorem exists_toSheafTorsor_equiv_of_iso
     (P : Sheaf.Torsor ((constantSheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
       (AddCommGrpCat.of M))) {Q : Scheme.{u}} (π : Q ⟶ Y) [IsFinite π] [Etale π]
@@ -640,24 +640,7 @@ private theorem isIso_sigmaDesc_of_equivariant_iso
   exact IsIso.of_isIso_fac_right h
 
 /-- An equivariant finite étale scheme whose base change is a torsor is surjective
-and has an invertible simple-transitivity morphism.
-
-Source: Stacks Project Tag 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-finite-etale-scheme-torsor-lift)
-
-Proof: Finite coproducts and fibre products of finite étale schemes are finite étale.
-Base change identifies the morphism from the copies of P to P ×_Y P with the
-simple-transitivity morphism downstairs, using the comparison e on both factors and
-each coproduct summand. It is therefore invertible downstairs. The fully faithful
-base-change functor reflects isomorphisms, proving invertibility upstairs.
-The image U of π is open because π is étale, and closed because π is finite.
-With its open subscheme structure its inclusion j into Y is finite étale. Factor π
-through U. After base change, surjectivity of the torsor downstairs says that the
-open immersion j has full image; thus its base change is an isomorphism. Reflect
-this isomorphism in the finite étale category to show that j is an isomorphism.
-Since U was the image of π, π is surjective. This uses no point of either base:
-when Y₀ is empty the equivalence still reflects the isomorphism of j, and the
-trivial group is included. No action equations are needed for these two properties. -/
+and has an invertible simple-transitivity morphism. (Stacks, Tag 0A5G.) -/
 private theorem finiteEtale_torsor_conditions_reflect
     [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]
     {Y Y₀ P : Scheme.{u}} (i : Y₀ ⟶ Y)
@@ -793,28 +776,7 @@ private theorem finiteEtale_torsor_conditions_reflect
 
 
 /-- A finite étale base-change equivalence lifts a scheme torsor together with its action.
-Source: Stacks Project Tag 0A5G, final paragraph, categorical action-lifting argument.
-(blueprint: lem-weil-pbc-finite-etale-scheme-torsor-lift)
-
-Proof: A torsor R₀ under the finite constant group is locally the finite constant set M.
-Tag 03RV represents its underlying sheaf by a finite étale scheme. Yoneda lifts each
-constant action map; its faithfulness gives the action equations. Simple transitivity
-on sections and local existence make the representative a scheme torsor t₀, with a
-sheaf torsor isomorphism to R₀. This is the argument of
-EtaleTorsorDescent.exists_toSheafTorsor_equiv, applied through lower representability
-interfaces rather than importing that module, which now creates an import cycle.
-Essential surjectivity lifts the finite étale scheme underlying t₀ to P over Y.
-Fullness lifts each action endomorphism, conjugated by the chosen base-change isomorphism.
-Faithfulness gives the zero and addition equations. Finite coproducts and fibre products
-of finite étale schemes are finite étale and are preserved by base change. Thus the map
-from the coproduct of the copies of P, indexed by M, to P ×_Y P becomes the torsor
-isomorphism for t₀. Reflection of isomorphisms makes it an isomorphism upstairs.
-The image of P → Y is open because P → Y is étale and closed because it is finite.
-Its open-and-closed immersion U → Y is finite étale, and its pullback is an isomorphism:
-t₀ is surjective, so its base-changed image is all Y₀. Reflecting this isomorphism
-shows U = Y and hence P → Y is surjective. These data define the lifted scheme torsor.
-The chosen isomorphism commutes with the structure maps and every lifted action.
-No geometric point is selected, so empty bases and the trivial group are included. -/
+(Stacks, Tag 0A5G.) -/
 theorem finiteEtale_lifts_scheme_torsor
     [(@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).IsStableUnderBaseChange]
     {Y Y₀ : Scheme.{u}} (i : Y₀ ⟶ Y)

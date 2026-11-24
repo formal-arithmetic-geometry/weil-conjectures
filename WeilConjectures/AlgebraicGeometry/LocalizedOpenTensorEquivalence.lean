@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 
 /-! # Tensor comparison for the localized open-site equivalence
 
-Source: Stacks Project, Modules, Tag 01CD.
-(blueprint: lem-sc-localized-open-tensor-equivalence).
+## References
+
+* [Stacks, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
 -/
 
 @[expose] public section
@@ -32,20 +33,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The equivalence from the localized open site to the open subscheme preserves
-sheaf tensor products, naturally in both factors.
-Source: Stacks Project, Modules, Tag 01CD, applied to the equivalence of open sites.
-(blueprint: lem-sc-localized-open-tensor-equivalence).
-
-Proof: an object of the localized site is an open V contained in U, and corresponds
-under the open-site equivalence to the same open V of U.toScheme. The coefficient
-rings identify by the restriction isomorphism of the structure sheaf. On presheaf
-modules the tensor comparison sends a pure tensor of sections to the tensor of the
-corresponding sections; its inverse uses the inverse coefficient isomorphism.
-The balanced relations and restriction maps are preserved. The site equivalence
-preserves covering sieves, so these inverse maps descend through sheafification
-to inverse maps of sheaf tensors. Applying either module map to a pure tensor
-commutes with this construction, which gives the displayed naturality identity.
-The construction also applies to the empty open and to zero modules. -/
+sheaf tensor products, naturally in both factors. (Stacks, Tag 01CD) -/
 theorem exists_localizedOpen_tensor_equivalence (X : Scheme.{u}) (U : X.Opens) :
     letI : MonoidalCategory
       (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) :=

@@ -17,8 +17,10 @@ import Mathlib.RingTheory.Etale.Kaehler
 /-!
 # The cotangent dimension at a closed point over an algebraically closed field
 
-Source: Stacks Project, Algebra, Lemma 00TR and localization of the cotangent space.
-(blueprint: lem-weil-pbc-maximal-ideal-differential-cotangent-dimension).
+## References
+
+* [Stacks, Algebra, Tag 00TR](https://stacks.math.columbia.edu/tag/00TR)
+* [Stacks, Algebra, Tag 00RT](https://stacks.math.columbia.edu/tag/00RT)
 -/
 
 @[expose] public section
@@ -30,21 +32,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- The differential fibre has the dimension of the cotangent space of the local ring.
-Source: Stacks Project, Algebra, Lemma 00TR; Lemma 00RT for localization.
-(blueprint: lem-weil-pbc-maximal-ideal-differential-cotangent-dimension).
-
-Proof: The residue field K at m is a finite type k-algebra because S -> K is
-surjective at a maximal ideal. Zariski's lemma makes K finite over k, so algebraic
-closedness makes k -> K bijective. Put R = S_m. The inverse of k -> K followed
-by k -> R gives a k-algebra section of R -> K. Its composition with R -> R/n²
-is a section of R/n² -> K, where n is the maximal ideal of R. Mathlib's equivalence
-between such sections and conormal retractions gives a left inverse of
-n/n² -> K tensor[R] Omega[R/k], proving injectivity. The conormal sequence is exact
-and Omega[K/k] = 0, proving surjectivity as well. The resulting R-linear equivalence
-is K-linear, since R -> K is surjective. Finally, localization is formally etale,
-so Omega[R/k] = R tensor[S] Omega[S/k]. Tensoring with K and cancelling the base
-change identifies the differential fibre with K tensor[S] Omega[S/k]. Taking
-finranks of these two explicit linear equivalences proves the equality. -/
+(Stacks, Tags 00TR, 00RT) -/
 theorem finrank_cotangentSpace_atMaximal_eq_differentials
     (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S]
     [IsAlgClosed k] [Algebra.FiniteType k S]

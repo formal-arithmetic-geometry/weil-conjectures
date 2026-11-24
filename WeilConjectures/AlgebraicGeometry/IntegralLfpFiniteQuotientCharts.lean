@@ -50,21 +50,7 @@ private noncomputable def setPullbackCompIso {X Y Z : Scheme.{u}}
 
 /-- A sufficiently high scalar power has locally free image. Its quotient has a
 finite locally constant underlying sheaf of sets.
-
-Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), and the
-continuous Smith invariant argument in the parent integral resolution node.
-
-Proof: choose the local charts and their eventual bounds. The base is noetherian,
-hence compact and quasi-separated. Quasi-compact refinement gives a finite affine
-cover refining the chart cover. Its arrows are quasi-compact, so it is again a
-pro-etale cover. Take the maximum of the finitely many local bounds. The image
-charts pull back as finite free modules. For the quotient charts, inverse image
-commutes with composition and preserves constant sheaves: both comparisons follow
-from the corresponding adjunctions. Pull back the finite constant set charts
-along the refinement. This proves both assertions for one common exponent and
-one common cover. Empty finite families have maximum zero. No definitions choose
-witnesses of an unproved existence statement.
--/
+(Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3)) -/
 theorem integral_lfp_finite_quotient_charts
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]

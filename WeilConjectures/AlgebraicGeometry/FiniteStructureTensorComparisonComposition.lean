@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Tensor compatibility of the pinned composition comparison
 
-Source: Stacks Project, Tags 01CD, 0095 and 0096, used in the multiplication paragraph of
-Tag 09ZT (blueprint: lem-weil-pbc-finite-structure-tensor-comparison-composition).
+## References
+
+* Stacks Project, Tags 01CD, 0095 and 0096.
 -/
 
 @[expose] public section
@@ -85,23 +86,7 @@ private theorem composition_unit_sections
       ((ah.unit.app M).app U x)) = (ak.unit.app M).app U x at he
   exact he
 
-/-- The tensor comparisons respect the composition comparison pinned by adjunction mates.
-Source: Stacks Project, Tags 01CD (`lemma-tensor-product-pullback`), 0095 and 0096;
-this is the tensor coherence calculation in the multiplication paragraph of 09ZT.
-
-Proof: Apply the composite pullback-pushforward adjunction to both morphisms. The mate
-identity defining `tensorPullbackCompositionIso` identifies the composite unit followed
-by the pushforward comparison with the unit for k followed by the pushforward of the
-composition comparison. Precompose the resulting maps with pure tensor sections of
-M and N. The section formula of `module_pullback_tensor`, first for h and then for g,
-sends these sections to the tensor of the two successive unit images. The same formula
-for k sends them to the tensor of the k-unit images. The mate identity separately for
-M and N identifies these two answers. Pushforward comparison on sections is restriction
-along the equality of inverse-image opens; such restriction commutes with pure tensor
-sections. The tensor universal property and the adjunction bijection imply equality of
-the original morphisms. Empty schemes and zero modules need no separate choice: the
-same universal properties and formulas apply.
-(blueprint: lem-weil-pbc-finite-structure-tensor-comparison-composition). -/
+/-- The tensor comparisons respect the composition comparison pinned by adjunction mates. -/
 theorem finiteStructure_tensorComparison_composition
     {X S T : Scheme.{u}} (g : T ⟶ S) (h : S ⟶ X) (k : T ⟶ X)
     (w : g ≫ h = k) (M N : X.Modules) :

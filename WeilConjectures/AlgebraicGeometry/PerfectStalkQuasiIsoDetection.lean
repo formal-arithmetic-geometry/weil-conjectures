@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkInverseHomotopiesSpread
 
 /-! # Detecting a quasi-isomorphism of strictly perfect complexes near a point
 
-Source: Stacks Project, Tags 09RE, 0BC7 (2), and 00CR.
-(blueprint: lem-sc-perfect-stalk-quasi-iso-detection).
+## References
+
+* Stacks Project, Tags 09RE, 0BC7 and 00CR.
 -/
 
 @[expose] public section
@@ -53,22 +54,7 @@ private theorem perfect_stalk_isKProjective
   exact CochainComplex.isKProjective_of_projective L b
 
 /-- A fixed chain map of strictly perfect complexes on an open which is a
-quasi-isomorphism at one stalk becomes a quasi-isomorphism on a smaller affine open.
-
-Source: Stacks Project, Tags 09RE, 0BC7 (2), and 00CR.
-(blueprint: lem-sc-perfect-stalk-quasi-iso-detection).
-
-Proof: Taking stalks carries each finite-free retraction to a retraction of a
-projective stalk module. The support bounds are preserved, so both stalk complexes
-are K-projective. Mathlib's quasi-isomorphism criterion gives a homotopy equivalence
-whose forward map is the specified stalk map of f. Lift its inverse as a chain map
-on an affine neighbourhood V. Naturality of the restriction/stalk comparison
-transports both inverse homotopies to the composites of the restricted f and this
-lift. Spread these two specified homotopies after shrinking again. They give a
-homotopy equivalence whose forward map is exactly the restriction of f to W;
-its forward map is a quasi-isomorphism. This avoids derived sheaf equivalences,
-cones and a derived Hom colimit diagram. Zero complexes, disjoint bounds and
-non-Noetherian rings are handled by the same finite-component descent. -/
+quasi-isomorphism at one stalk becomes a quasi-isomorphism on a smaller affine open. -/
 theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (P Q : CochainComplex

@@ -17,7 +17,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # Clearing denominators for a local map from a closed structure module
 
-Source: Stacks Project, Tags 01YB and 01YE, the ideal-power extension step.
+## References
+
+* [Stacks, Tags 01YB, 01YE and 01QY]
 -/
 
 @[expose] public section
@@ -28,24 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A local map from a closed structure module extends after restricting its source
 by a nonzero ideal on the integral closed subscheme. No injectivity is assumed or
-asserted. Agreement holds on the entire given open, not just on the generic stalk.
-Source: Stacks Project, Tag 01YB (extension from ideal powers), as used in the last
-paragraph of Tag 01YE, with the affine closed-pushforward calculation of Tag 01QY.
-(blueprint: lem-pc-local-closed-ideal-map-extension)
-
-Proof: let I be the vanishing ideal of the closed complement of U. Mathlib's
-support formula identifies its support with that complement. The ambient extension
-lemma applies Tag 01YB to H = i_*O_W and G and gives n and chi:I^n H -> G with the
-specified equality on U. Define J = (I^n).comap i using actual ideal-sheaf data.
-Its support is the inverse image of the support of I^n, which is contained in the
-support of I. If J were zero, its support would be all of W, so i(eta) would lie
-outside U, contradicting hx. Thus J is nonzero, including when n = 0. The normalized
-closed structure ideal-product comparison gives an isomorphism e:i_*J -> I^n H
-commuting with the inclusions into H. Set alpha = e.hom followed by chi. Restriction
-preserves composition; associativity and the two inclusion equations prove agreement
-on the entire U. This also covers a zero local map and U = X; there is no assertion
-that alpha is injective. The two bridge lemmas carry the ambient extension and affine
-comparison steps separately. No unproved existence theorem supplies the data of J. -/
+asserted. Agreement holds on the entire given open, not just on the generic stalk. -/
 theorem local_closed_ideal_map_extension
     {X W : Scheme.{u}} [IsNoetherian X]
     (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W]

@@ -17,13 +17,13 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 /-!
 # Strict principal reduction and its compatible cone comparisons
 
-proof.md`,
-Cones paragraph; Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node).
-
-Positive level n+1 is indexed by n : ℕ, as in AdicCompletion. Cone coordinates
+Positive level n+1 is indexed by n: ℕ, as in AdicCompletion. Cone coordinates
 are ordered target, shifted source. The comparison is one natural family,
 including its quotient transitions and its specified reduction coaugmentations.
+
+## References
+
+* Stacks Project, Tag 014E (definition of the cone).
 -/
 
 @[expose] public noncomputable section
@@ -41,18 +41,14 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The standard cone coordinates in target, shifted-source order.
-Source: Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node). -/
+/-- The standard cone coordinates in target, shifted-source order (Stacks, Tag 014E). -/
 def principalConeCoordinates {C : Type uC} [Category.{vC} C] [Preadditive C]
     [HasBinaryBiproducts C] {A B : CochainComplex C ℤ} (f : A ⟶ B) (q : ℤ) :
     (CochainComplex.mappingCone f).X q ≅ B.X q ⊞ A.X (q + 1) :=
   HomologicalComplex.homotopyCofiber.XIsoBiprod f q (q + 1) rfl ≪≫
     biprod.braiding _ _
 
-/-- The signed four-coordinate interchange (b,a,b',a') to (b,b',a,-a').
-Source: blueprint Cones paragraph, explicit cone interchange
-(auxiliary; not a blueprint node). -/
+/-- The signed four-coordinate interchange (b,a,b',a') to (b,b',a,-a'). -/
 def principalConeInterchange {C : Type uC} [Category.{vC} C] [Preadditive C]
     [HasBinaryBiproducts C] (B A B' A' : C) :
     (B ⊞ A) ⊞ (B' ⊞ A') ⟶ (B ⊞ B') ⊞ (A ⊞ A') :=
@@ -1062,16 +1058,12 @@ namespace PrincipalReduction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- Multiplication by the (n+1)-st power of the specified uniformizer on a complex.
-Source: blueprint Cones paragraph and the scalar construction in the resolution
-(auxiliary; not a blueprint node). -/
+/-- Multiplication by the (n+1)-st power of the specified uniformizer on a complex. -/
 abbrev scalar (d : End (Mod.regular (DerivedNakayama.integerRing l E))) (n : ℕ)
     (M : CochainComplex (AdicCompletion.Modules l E X) ℤ) : M ⟶ M :=
   DerivedNakayama.scalarOnComplex l E X (d ^ (n + 1)) M
 
-/-- The canonical derived reduction followed by integral scalar restriction.
-Source: blueprint Cones paragraph, underlying integral-module reductions
-(auxiliary; not a blueprint node). -/
+/-- The canonical derived reduction followed by integral scalar restriction. -/
 abbrev reductionFunctor (n : ℕ) : DerivedCategory (AdicCompletion.Modules l E X) ⥤
     DerivedCategory (AdicCompletion.Modules l E X) :=
   AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n
@@ -1157,38 +1149,7 @@ private theorem action_succ
   rw [pow_succ, action_mul]
 
 /-- Strict principal reductions, with the signed cone and shift comparisons and their
-canonical derived interpretation, simultaneously at all positive levels.
-
-Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node).
-
-Proof plan (the ten steps of the node):
-1. Use the scalar differential (dx + pi^(n+1)y,-dy). Diagonal maps are functorial;
-   (x,pi y) is a chain map by pi^(n+1)pi=pi^(n+2), and (m,0) is the coaugmentation.
-2. Morphisms of scalar cone triangles and lem-sf-triangle-morphism-iso show
-   quasi-isomorphism preservation. Localization descends the functor and its maps;
-   the direct-sum coordinates prove additivity after localization.
-3. The two-term resolution of lemma-reduction-derived-nakayama--1 has flat rank-one
-   terms; lem-weil-pbc-independent-bounded-flat-kflat makes it K-flat.
-4. Resolve M using lem-pc-kflat-resolution. The signed tensor interchange identifies
-   its tensor with that two-term resolution with this scalar cone. The localization
-   and transformation-extension clauses of lem-weil-pbc-site-derived-tensor-descent
-   give one natural comparison on all unbounded complexes.
-5. Lift coefficient transitions by (pi,id) and reduction by the degree-zero identity.
-   Tensoring identifies them with the specified transition and coaugmentation, so
-   their localizations are the canonical maps of definition-derived-adic-completeness.
-6. Expand the four-coordinate differentials. The map (b,a,b',a') to (b,b',a,-a')
-   is a chain isomorphism with inverse (u,v,w,z) to (u,w,v,-z).
-7. The shift differential is (-1)^r d. The map (x,y) to (x,(-1)^r y) intertwines
-   the differentials, is its own inverse, and is coherent under addition of integers.
-8. Diagonal chain maps commute with both formulas. Multiplication by pi on the
-   second coordinate commutes with the permutation and sign, giving all tower squares.
-9. Cone inclusion becomes inclusion; the negative-projection boundary becomes
-   (-a,a') after the shift comparison. Coaugmentations become the cone map of the
-   two coaugmentations and the shifted coaugmentation, respectively.
-10. The cone and boundary squares identify images of cone triangles with cone
-    triangles. Every distinguished derived triangle has a cone representative, so
-    the localized functor with this shift structure is additive and exact. -/
+canonical derived interpretation, simultaneously at all positive levels (Stacks, Tag 014E). -/
 theorem principal_reduction_cone_calculus :
     ∃ d : End (Mod.regular (DerivedNakayama.integerRing l E)),
       (∀ (S : Profinite.{u}ᵒᵖ) (a : (DerivedNakayama.integerRing l E).obj.obj S)
@@ -1313,12 +1274,9 @@ open AlgebraicGeometry.ProEtale.AdicCompletion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- The strict data of the simultaneous principal calculus. Its canonical predicate
-also retains all existential comparison data and equations of the node.
-Its strict objects, maps, transitions and units are fixed
-by the scalar and coordinate equations; the comparisons retain all normalizations.
-Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E
-(auxiliary; not a blueprint node). -/
+/-- The strict data of the simultaneous principal calculus: the strict objects, maps,
+transitions and units are fixed by the scalar and coordinate equations, and the comparisons
+retain all normalizations (Stacks, Tag 014E). -/
 structure PrincipalReductionConeData where
   d : End (Mod.regular (DerivedNakayama.integerRing l E))
   D : ℕ → CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ
@@ -1329,12 +1287,8 @@ structure PrincipalReductionConeData where
   T : ∀ n : ℕ, D (n + 1) ⟶ D n
   j : ∀ n : ℕ, 𝟭 (CochainComplex (Modules l E X) ℤ) ⟶ D n
 
-/-- Exact canonical characterization of the simultaneous principal calculus.
-The conjunction is under the scalar test binders. This is equivalent to placing
-its remaining clauses outside them: use the one-point profinite test and the zero
-section. Keeping these binders shared avoids repeated closed-proof abstraction.
-Source: blueprint first-reduction proof, Cones paragraph; Stacks Tag 014E
-(auxiliary; not a blueprint node). -/
+/-- Exact canonical characterization of the simultaneous principal calculus
+(Stacks, Tag 014E). -/
 def PrincipalReductionConeData.IsCanonical (data : PrincipalReductionConeData l E X) : Prop :=
   ∀ (S : Profinite.{u}ᵒᵖ)
     (a : (DerivedNakayama.integerRing l E).obj.obj S) (s : S.unop),
@@ -1430,38 +1384,7 @@ def PrincipalReductionConeData.IsCanonical (data : PrincipalReductionConeData l 
             (DerivedCategory.Q.obj M))
 
 /-- Strict principal reductions, with the signed cone and shift comparisons and their
-canonical derived interpretation, simultaneously at all positive levels.
-
-Stacks Tag 014E, definition-cone
-(auxiliary; not a blueprint node).
-
-Proof plan (the ten steps of the node):
-1. Use the scalar differential (dx + pi^(n+1)y,-dy). Diagonal maps are functorial;
-   (x,pi y) is a chain map by pi^(n+1)pi=pi^(n+2), and (m,0) is the coaugmentation.
-2. Morphisms of scalar cone triangles and lem-sf-triangle-morphism-iso show
-   quasi-isomorphism preservation. Localization descends the functor and its maps;
-   the direct-sum coordinates prove additivity after localization.
-3. The two-term resolution of lemma-reduction-derived-nakayama--1 has flat rank-one
-   terms; lem-weil-pbc-independent-bounded-flat-kflat makes it K-flat.
-4. Resolve M using lem-pc-kflat-resolution. The signed tensor interchange identifies
-   its tensor with that two-term resolution with this scalar cone. The localization
-   and transformation-extension clauses of lem-weil-pbc-site-derived-tensor-descent
-   give one natural comparison on all unbounded complexes.
-5. Lift coefficient transitions by (pi,id) and reduction by the degree-zero identity.
-   Tensoring identifies them with the specified transition and coaugmentation, so
-   their localizations are the canonical maps of definition-derived-adic-completeness.
-6. Expand the four-coordinate differentials. The map (b,a,b',a') to (b,b',a,-a')
-   is a chain isomorphism with inverse (u,v,w,z) to (u,w,v,-z).
-7. The shift differential is (-1)^r d. The map (x,y) to (x,(-1)^r y) intertwines
-   the differentials, is its own inverse, and is coherent under addition of integers.
-8. Diagonal chain maps commute with both formulas. Multiplication by pi on the
-   second coordinate commutes with the permutation and sign, giving all tower squares.
-9. Cone inclusion becomes inclusion; the negative-projection boundary becomes
-   (-a,a') after the shift comparison. Coaugmentations become the cone map of the
-   two coaugmentations and the shifted coaugmentation, respectively.
-10. The cone and boundary squares identify images of cone triangles with cone
-    triangles. Every distinguished derived triangle has a cone representative, so
-    the localized functor with this shift structure is additive and exact. -/
+canonical derived interpretation, simultaneously at all positive levels (Stacks, Tag 014E). -/
 theorem principalReductionConeData :
     ∃ data : PrincipalReductionConeData l E X, data.IsCanonical l E X := by
   obtain ⟨d, hd, D, hobj, χ, T, j, sD, sF, κ, Φ, h⟩ :=

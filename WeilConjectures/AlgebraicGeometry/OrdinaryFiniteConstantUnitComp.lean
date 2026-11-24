@@ -11,8 +11,6 @@ import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
 import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 
 /-! # Composition of the canonical derived constant units
-
-Source: blueprint lemma-class-diagonal-projective-line, adjunction-unit pasting.
 -/
 
 @[expose] public noncomputable section
@@ -122,19 +120,7 @@ end
 section
 universe u'
 
-/-- Pasting the two constant-object units gives the constant unit for the composite.
-Source: blueprint lemma-class-diagonal-projective-line, proof step 3; the composition
-normalization of upperStarConstantSheafIso.
-(auxiliary; not a blueprint node)
-
-Proof: expand the constant derived single units using derivedSingleUnit_eq. Naturality of the
-second unit rewrites the two units as the unit of the composite adjunction, followed
-by direct image of the two constant comparisons. The conjugate characterization of
-rightDerivedLowerStarComp changes this to the unit of the composite morphism with
-the pullback-composition comparison. On single objects the derived comparison is
-the single of the underived comparison. upperStarConstantSheafIso_comp identifies
-its product with the constant comparison for the composite. This gives precisely
-the right-hand side, with no choice of comparison. -/
+/-- Pasting the two constant-object units gives the constant unit for the composite. -/
 theorem constantDerivedUnit_comp (B : Type u') [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]
     [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
@@ -219,12 +205,8 @@ private theorem nativeSingleComparison_eq (A : Type (u + 1)) [CommRing A]
   unfold singleFunctorCompLeftDerivedUpperStarIso
   rfl
 
-/-- Expand the supported constant unit through the recorded finite adjunction.
-Source: the canonical derived constant unit, Stacks 0A45.
-(auxiliary; not a blueprint node).
-Proof: first identify the full derived adjunction and single-comparison isomorphism
-with their recorded forms. Expand the unchanged supported unit by derivedSingleUnit_eq,
-apply those equations, and use ordinaryFiniteUnitPullback_hom for the two factors. -/
+/-- Expand the supported constant unit through the recorded finite adjunction
+(Stacks, Tag 0A45). -/
 theorem supportedDerivedUnit_eq (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     supportedDerivedUnit A f =
@@ -236,12 +218,7 @@ theorem supportedDerivedUnit_eq (A : Type (u + 1)) [CommRing A]
   rfl
 
 /-- The recorded constant units respect composition and the canonical direct-image
-comparison. Source: blueprint projective-line diagonal calculation, unit pasting.
-(auxiliary; not a blueprint node).
-
-Proof: expand the recorded units. The generic constant-unit composition theorem
-pastes the two derived adjunction units and identifies their constant-sheaf
-comparison with the comparison for the composite. -/
+comparison. -/
 theorem supportedDerivedUnit_comp (A : Type (u + 1)) [CommRing A]
     {X Y Z : Scheme.{u}} (e : X ⟶ Y) (p : Y ⟶ Z) :
     supportedDerivedUnit A p ≫

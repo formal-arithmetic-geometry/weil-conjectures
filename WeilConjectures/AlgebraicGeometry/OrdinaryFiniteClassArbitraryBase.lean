@@ -137,20 +137,7 @@ private theorem bijective_extToSheafHOf_arbitraryBase
         (Abelian.Ext.eq_zero_of_injective _) rfl)
       (fun y ↦ Abelian.Ext.covariant_sequence_exact₁ _ hS y (@Subsingleton.elim _ hI _ _) rfl)
 
-/-- The specified class map is bijective over every base scheme.
-Source: Stacks Project, Tag 03FD, and the normalized constants adjunction.
-(auxiliary; not a blueprint node).
-
-Proof: the constant free rank-one module represents sections, by evaluation at
-one; the chosen integral generator realizes exactly this identification. In
-degree zero the Ext/cohomology comparison is therefore bijective. Embed a
-module sheaf into an injective and take its cokernel. The underlying abelian
-sheaf of the injective has zero higher global-section cohomology over an
-arbitrary scheme, by Tag 03FD. The two long exact sequences, naturality of the
-comparison, and induction identify the cokernels in every successive degree.
-The normalized comparison thus is bijective in all degrees. Finally apply the
-Ext/derived-morphism equivalence, which is itself bijective. The argument also
-applies to the empty scheme and to the zero coefficient ring. -/
+/-- The specified class map is bijective over every base scheme (Stacks, Tag 03FD). -/
 theorem ordinaryFiniteClass_bijective_arbitraryBase (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) :
     Function.Bijective (ordinaryFiniteClass A T F n) := by

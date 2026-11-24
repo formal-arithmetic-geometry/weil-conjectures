@@ -21,13 +21,13 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 /-!
 # Split presentations of a pro-etale constant trivialization
 
-Source: Stacks Project, Tags 098Z, 03P5, 03YW and 0AP6; blueprint proof of
-`lemma-lattices-lisse-e-sheaves`, part (2)
-(blueprint: lem-sfb-proetale-constant-split-descent).
-
 The overlap isomorphism is stated explicitly. Its cocycle is expressed using the
 recorded scheme descent datum, whose transport is required to preserve the same
 sections. Thus its overlap isomorphism is the unique one already specified.
+
+## References
+
+* Stacks Project, Tags 098Z, 03P5, 03YW and 0AP6.
 -/
 
 @[expose] public section
@@ -40,39 +40,32 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The codiagonal of the coproduct of copies of a scheme.
-Source: Stacks Project, Tag 03YW
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+/-- The codiagonal of the coproduct of copies of a scheme (Stacks, Tag 03YW). -/
 noncomputable def proetaleSplitCodiagonal (V : Scheme.{u}) (S : Type w)
     [Small.{u} S] : (∐ fun _ : S ↦ V) ⟶ V :=
   Sigma.desc (fun _ : S ↦ 𝟙 V)
 
-/-- Forget a localized pro-etale object to its underlying scheme over the cover.
-Source: Stacks Project, Tag 098Z, localized site
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+/-- Forget a localized pro-etale object to its underlying scheme over the cover
+(Stacks, Tag 098Z). -/
 def proetaleSliceToOver {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEtale p] :
     Over (Scheme.ProEt.mk p) ⥤ Over V :=
   Over.post (Scheme.ProEt.forget X) ⋙ Over.iteratedSliceForward (Over.mk p)
 
-/-- The first overlap projection as a morphism in the small pro-etale site.
-Source: Stacks Project, Tag 023V, and blueprint proof (2)
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+/-- The first overlap projection as a morphism in the small pro-etale site
+(Stacks, Tag 023V). -/
 noncomputable def proetaleSplitOverlapFirst {X V : Scheme.{u}} (p : V ⟶ X)
     [WeaklyEtale p] :
     Scheme.ProEt.mk (pullback.fst p p ≫ p) ⟶ Scheme.ProEt.mk p :=
   MorphismProperty.Over.homMk (pullback.fst p p) rfl
 
-/-- The second overlap projection as a morphism in the small pro-etale site.
-Source: Stacks Project, Tag 023V, and blueprint proof (2)
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+/-- The second overlap projection as a morphism in the small pro-etale site
+(Stacks, Tag 023V). -/
 noncomputable def proetaleSplitOverlapSecond {X V : Scheme.{u}} (p : V ⟶ X)
     [WeaklyEtale p] :
     Scheme.ProEt.mk (pullback.fst p p ≫ p) ⟶ Scheme.ProEt.mk p :=
   MorphismProperty.Over.homMk (pullback.snd p p) (pullback.condition (f := p) (g := p)).symm
 
-/-- The point in the labelled component of a split presentation.
-Source: Stacks Project, Tag 03YW
-(blueprint: lem-sfb-proetale-constant-split-descent). -/
+/-- The point in the labelled component of a split presentation (Stacks, Tag 03YW). -/
 noncomputable def proetaleSplitLabel {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEtale p]
     (S : Type w) [Small.{u} S] (W : Over (Scheme.ProEt.mk p)) (s : S) :
     (proetaleSliceToOver p).obj W ⟶ Over.mk (proetaleSplitCodiagonal V S) :=
@@ -84,10 +77,8 @@ noncomputable def proetaleSplitLabel {X V : Scheme.{u}} (p : V ⟶ X) [WeaklyEta
 /-- The representability and overlap/descent-data part of the split presentation: natural
 bijections `rho` from maps over `V` into the labelled coproduct to the sections of `F`,
 normalized on labels by `e`, the unique overlap isomorphism matching the two `rho`, and a
-transport-form scheme descent datum preserving `rho`.
-Source: Stacks Project, Tags 098Z, 03P5, 03YW and 001P
-(blueprint: lem-sfb-proetale-constant-split-descent;
-split blueprint: lem-sfb-proetale-constant-split-descent-data). -/
+transport-form scheme descent datum preserving `rho`
+(Stacks, Tags 098Z, 03P5, 03YW and 001P). -/
 def proetaleConstantSplitDescentData {X V : Scheme.{u}} (p : V ⟶ X)
     [QuasiCompact p] [Surjective p] [WeaklyEtale p] [IsAffine V]
     (S : Type w) [Small.{u} S] [UnivLE.{u + 1, w}]

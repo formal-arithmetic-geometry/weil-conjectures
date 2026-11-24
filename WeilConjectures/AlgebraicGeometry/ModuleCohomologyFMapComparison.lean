@@ -13,9 +13,10 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 
 /-! # Homotopy comparison of the auxiliary injective complexes
 
-Source: Stacks Project, Derived Categories, Tags 013P and 013S, and Cohomology
-of Sheaves, Remark 01FB
-(blueprint: lem-weil-pbc-module-cohomology-fmap-comparison).
+## References
+
+* [Stacks, Derived Categories, Tags 013P and 013S]
+* [Stacks, Cohomology of Sheaves, Remark 01FB]
 -/
 
 @[expose] public section
@@ -81,23 +82,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two auxiliary injective complexes admit a comparison morphism intertwining
-both the pushforward comparison and the lifted module map, up to homotopy.
-Source: Stacks Project, Derived Categories, Tags 013P and 013S; Cohomology of Sheaves,
-Remark 01FB (blueprint: lem-weil-pbc-module-cohomology-fmap-comparison).
-
-Proof: take the identity descents between the two resolutions of F and of G.
-Extend all complexes by zero to integer indices. The auxiliary target K' is bounded
-below and termwise injective, hence K-injective. In the homotopy category, precomposition
-with the quasi-isomorphism lambda induces a bijection on maps into K'. Apply its
-surjectivity to the composite of the pushforward identity descent with lambda'. This
-produces a map e from K to K' and a homotopy for the first square.
-For the second square, precompose its two
-routes with the augmentation of J. The compatibility equations for beta and beta',
-the augmentation equations for the identity descents, and the first homotopy identify
-these routes up to homotopy. Precomposition with the quasi-isomorphism J's augmentation
-is injective on homotopy classes of maps into K', so the second routes are homotopic.
-Full faithfulness of extension by zero returns the map and homotopies
-to natural indices. No cohomology functor or inverse of a sections map is used here. -/
+both the pushforward comparison and the lifted module map, up to homotopy
+(Stacks, Tags 013P, 013S and 01FB). -/
 theorem moduleCohomologyFMapData_comparison {X Y : Scheme.{u}} (h : X ⟶ Y)
     {G : Y.Modules} {F : X.Modules} (φ : G ⟶ (pushforward h).obj F)
     (C C' : ModuleCohomologyFMapData h G F φ) :

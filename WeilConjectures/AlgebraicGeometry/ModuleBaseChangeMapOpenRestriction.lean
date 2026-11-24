@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!
 # Module base change maps and open restriction
 
-Source: Stacks Project, Tags 02KG, 0ATL, 0ATM, 00A0 and 08HY
-(blueprint: lem-weil-pbc-module-base-change-map-open-restriction).
+## References
+
+* [Stacks, Tags 02KG, 0ATL, 0ATM, 00A0 and 08HY]
 -/
 
 @[expose] public section
@@ -32,9 +33,7 @@ noncomputable section
 set_option autoImplicit false
 
 /-- The module base change map is adjoint to the pushforward of the pullback unit,
-using the sectionwise identification of composite pushforwards.
-Source: Stacks Project, Tag 08HY
-(blueprint: lem-weil-pbc-module-base-change-map-open-restriction). -/
+using the sectionwise identification of composite pushforwards (Stacks, Tag 08HY). -/
 def moduleBaseChangeMap {X S T X₁ : Scheme.{u}}
     (f : X ⟶ S) (f₁ : X₁ ⟶ T) (u₁ : T ⟶ S) (v : X₁ ⟶ X)
     (h : v ≫ f = f₁ ≫ u₁) (F : X.Modules) :
@@ -47,12 +46,7 @@ def moduleBaseChangeMap {X S T X₁ : Scheme.{u}}
       (pushforwardCongr h).hom.app ((tensorPullback v).obj F) ≫
       (pushforwardComp f₁ u₁).inv.app ((tensorPullback v).obj F))
 
-/-- Naturality of the adjoint-defined base change map.
-Source: Stacks Project, Tag 08HY
-(blueprint: lem-weil-pbc-module-base-change-map-open-restriction).
-Proof: the unit is natural in F; pushforward and the sectionwise composition
-identifications preserve that equality. Naturality of the adjunction Hom bijection
-then gives the displayed equality. This is the naturality clause preceding step (1). -/
+/-- Naturality of the adjoint-defined base change map (Stacks, Tag 08HY). -/
 theorem moduleBaseChangeMap_naturality {X S T X₁ : Scheme.{u}}
     (f : X ⟶ S) (f₁ : X₁ ⟶ T) (u₁ : T ⟶ S) (v : X₁ ⟶ X)
     (h : v ≫ f = f₁ ≫ u₁) {F G : X.Modules} (φ : F ⟶ G) :
@@ -69,24 +63,8 @@ theorem moduleBaseChangeMap_naturality {X S T X₁ : Scheme.{u}}
   exact (t ≫ Functor.whiskerLeft (tensorPullback v) q).naturality φ
 
 /-- Base change maps commute with restriction to open squares with full inverse-image
-opens, and the restriction maps are isomorphisms.
-Source: Stacks Project, Tags 02KG (locality), 00A0 (restriction), 0ATL and 0ATM (pasting)
-(blueprint: lem-weil-pbc-module-base-change-map-open-restriction).
-Proof:
-(1) By lem-weil-pbc-module-restriction-open-immersion-colimits and
-lem-weil-pbc-open-immersion-module-pullback-restriction, open-immersion pullback is
-sectionwise restriction and its unit restricts sections. The full inverse-image
-hypotheses identify the opens computing both sides of rho and rho', so these maps
-are isomorphisms (00A0).
-(2) Paste the original square with the primed open square. By
-lem-weil-pbc-module-base-change-map-pasting (0ATM), its outer map is jV^* beta followed
-by b, including the canonical pullback composition comparisons.
-(3) Paste the unprimed open square with the restricted square. The same pasting lemma
-(0ATL, 0ATM) gives a followed by beta-circle. The commutation relations identify the
-outer squares, hence their adjoint-defined maps agree.
-(4) The comparisons a and b are composites of pullback composition isomorphisms,
-pullbacks of rho, and rho'. They are isomorphisms, and cancellation in (3) gives the
-isomorphism criterion. No affine or quasi-coherence hypothesis is needed. -/
+opens, and the restriction maps are isomorphisms
+(Stacks, Tags 02KG, 00A0, 0ATL and 0ATM). -/
 theorem moduleBaseChangeMap_open_restriction
     {X S X' S' U V XU X'V : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

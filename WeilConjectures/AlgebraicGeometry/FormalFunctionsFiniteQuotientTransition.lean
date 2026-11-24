@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Adjacent-level naturality of the finite quotient comparison
 
-Source: Stacks Project, Tag 02OD, finite-level identifications, and Tags 01F7 and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-transition)
+## References
+
+* Stacks Project, Tags 02OD, 01F7 and 01FB
 -/
 
 @[expose] public section
@@ -147,24 +148,7 @@ private theorem cohomology_triangle {A B C : Scheme.{u}}
 /-- Any family of sheaf maps factoring the finite pullback units respects adjacent
 quotient transitions after applying the cohomology h-maps. The maps are not assumed
 invertible, and the statement makes no assertion of linearity over the local ring.
-
-Source: Stacks Project, Tag 02OD, finite-level identifications; Tags 01F7 and 01FB.
-(blueprint: lem-weil-pbc-formal-functions-finite-quotient-transition)
-Proof: Write j_n for the finite fibre immersion into the local base change and t_n for
-the transition from fibre n to fibre n+1. Pullback uniqueness gives t_n followed by
-j_(n+1) = j_n. The adjunction equations defining formalFunctionsFiniteFMap and
-formalFibreTransitionFMap identify the composite unit through these two morphisms
-with the unit for j_n, with the canonical composition identification of direct images.
-Precompose the desired sheaf square with the quotient projection at level n+1.
-The quotient-transition cokernel equation identifies its left side with the level-n
-unit. The unit equations for e and for the transition identify its right side with
-the same map. Cancel the epimorphic quotient projection to obtain the sheaf square.
-Apply moduleCohomologyFMap_source_naturality to the quotient transition and
-moduleCohomologyFMap_comp to t_n and j_(n+1). Transport across their equality with j_n
-using the canonical pushforward congruence. The sheaf square then yields the displayed
-identity of additive maps. This does not use surjectivity of a map on cohomology; only
-the sheaf quotient projection is cancelled. It applies to n = 0, every p, and the zero
-module exactly as to all other levels. -/
+(Stacks, Tags 02OD, 01F7 and 01FB.) -/
 theorem formalFunctions_finite_quotient_transition {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (y : Y) (p : ℕ) :
     let X' := pullback (Y.fromSpecStalk y) f

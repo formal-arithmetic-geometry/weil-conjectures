@@ -29,7 +29,7 @@ The auxiliary isomorphisms in the `AlgebraicGeometry.Scheme.Modules` namespace i
 to an open subset `U` with the pullback of `M` along the open immersion `U.ι`; this is what
 makes invertibility stable under pullback.
 
-## Implementation notes
+## Implementation details
 
 `Y.Modules` lives in `Type (u + 1)`, so `Y.Pic` as defined here does too, even though `Pic Y`
 is really a small group; that it is `u`-small is `AlgebraicGeometry.Scheme.Pic.small`. The group
@@ -38,17 +38,14 @@ law, which comes from the tensor product of invertible modules, is defined in
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.Pic`: the Picard group of a scheme, as a set
-  (blueprint `def:sc-picard-group`).
-- `AlgebraicGeometry.Scheme.Pic.map`: the pullback map on Picard groups
-  (blueprint `lem:pc-pic-presheaf-functorial`).
-- `AlgebraicGeometry.picardPresheaf`: the Picard presheaf of `f : X ⟶ S`
-  (blueprint `def:pc-picard-presheaf`).
+- `AlgebraicGeometry.Scheme.Pic`: the Picard group of a scheme, as a set.
+- `AlgebraicGeometry.Scheme.Pic.map`: the pullback map on Picard groups.
+- `AlgebraicGeometry.picardPresheaf`: the Picard presheaf of `f : X ⟶ S`.
 
 ## Main results
 
 - `SheafOfModules.IsInvertible.pullback`: the pullback of an invertible sheaf of modules along
-  a morphism of schemes is invertible (blueprint `lem:pc-pic-presheaf-functorial`).
+  a morphism of schemes is invertible.
 -/
 
 @[expose] public section
@@ -99,21 +96,8 @@ noncomputable def overIsoUnitOfPullbackIotaIso {M : Y.Modules} {U : Y.Opens}
   (overEquiv U).functor.preimageIso
     (overEquivObjOverIso M U ≪≫ e ≪≫ (overEquivObjUnitIso U).symm)
 
-/-- The key local computation behind functoriality of the Picard presheaf: if `M` is trivial
-on an open subset `U` of `Y`, then its pullback along `g : X ⟶ Y` is trivial on `g ⁻¹ᵁ U`.
-
-The isomorphism is read off the restriction square of `g` over `U`, in which both composites
-are `g ⁻¹ᵁ U ⟶ Y`, so that pulling `M` back along either path gives the same module:
-
-```
-  (g ⁻¹ᵁ U).toScheme ── g ∣_ U ──▶ U.toScheme
-        │                              │
-  (g ⁻¹ᵁ U).ι                        U.ι
-        │                              │
-        ▼                              ▼
-        X ──────────── g ────────────▶ Y
-```
--/
+/-- If `M` is trivial on an open subset `U` of `Y`, then its pullback along `g : X ⟶ Y` is
+trivial on `g ⁻¹ᵁ U`. -/
 noncomputable def pullbackOverUnitIso (g : X ⟶ Y) (M : Y.Modules) (U : Y.Opens)
     (e : M.over U ≅ SheafOfModules.unit (Y.ringCatSheaf.over U)) :
     ((Modules.pullback g).obj M).over (g ⁻¹ᵁ U) ≅
@@ -127,8 +111,7 @@ noncomputable def pullbackOverUnitIso (g : X ⟶ Y) (M : Y.Modules) (U : Y.Opens
 
 end Modules
 
-/-- The pullback of an invertible sheaf of modules along a morphism of schemes is invertible.
-This is the functoriality part of blueprint `lem:pc-pic-presheaf-functorial`. -/
+/-- The pullback of an invertible sheaf of modules along a morphism of schemes is invertible. -/
 theorem _root_.SheafOfModules.IsInvertible.pullback {g : X ⟶ Y} {M : Y.Modules}
     (hM : M.IsInvertible) : ((Modules.pullback g).obj M).IsInvertible := by
   obtain ⟨q, hq⟩ := hM.exists_isInvertibleData
@@ -157,14 +140,7 @@ lemma _root_.SheafOfModules.IsInvertible.fromSkeleton_toSkeleton (M : Y.Modules)
 
 variable (Y) in
 /-- The Picard group of a scheme `Y`: the set of isomorphism classes of invertible sheaves
-of `𝒪_Y`-modules, realized as the invertible classes inside the skeleton of `Y.Modules`.
-Its group law, induced by the tensor product with the dual as inverse, is
-`AlgebraicGeometry.Scheme.Pic.instCommGroup`.
-
-(blueprint: `def-sc-picard-group`)
-
-This lives in `Type (u + 1)` rather than `Type u`; see the implementation notes of this
-module. -/
+of `𝒪_Y`-modules, realized as the invertible classes inside the skeleton of `Y.Modules`. -/
 def Pic : Type (u + 1) :=
   { L : Skeleton Y.Modules // ((fromSkeleton Y.Modules).obj L).IsInvertible }
 
@@ -203,13 +179,7 @@ lemma eq_iff_nonempty_iso {L L' : Y.Pic} :
   rw [Pic.ext_iff, ← toSkeleton_eq_toSkeleton_iff, toSkeleton_fromSkeleton_obj,
     toSkeleton_fromSkeleton_obj]
 
-/-- **The Picard group is small.** Although `Y.Pic` lives in `Type (u + 1)`, it is `u`-small.
-
-Let `P` be the product, over all opens `U` of `Y`, of the pushforwards `U.ι_* 𝒪_U`. An invertible
-module `M` embeds into `P`: on each open `U` over which `M` is trivial, `M` maps to
-`U.ι_* (M|_U) ≅ U.ι_* 𝒪_U`, and since these opens cover `Y` the resulting map is a monomorphism
-(`Scheme.Modules.hom_ext_of_restrictAdjunction_unit`). So the isomorphism class of `M` is
-determined by a subobject of `P`, and `Y.Modules` is well-powered, being Grothendieck abelian. -/
+/-- **The Picard group is small.** Although `Y.Pic` lives in `Type (u + 1)`, it is `u`-small. -/
 theorem small (Y : Scheme.{u}) : Small.{u} Y.Pic := by
   classical
   have : IsGrothendieckAbelian.{u} Y.Modules := SheafOfModules.isGrothendieckAbelian Y.ringCatSheaf
@@ -331,13 +301,7 @@ lemma isPullback_baseChangeMap_of_isPullback (f : X ⟶ S) {T₁ T₂ T₃ T₄ 
 
 /-- The Picard presheaf of a morphism of schemes `f : X ⟶ S`: it sends a scheme `T` over `S`
 to the Picard group of the fibre product `X_T = X ×[S] T`, and a morphism over `S` to the
-corresponding pullback map on Picard groups. Functoriality: pulling back along `X_{T'} ⟶ X_T`
-sends invertible modules to invertible modules and respects isomorphisms
-(`AlgebraicGeometry.Scheme.Pic.map`), and `(g₁ ∘ g₂)^* = g₂^* g₁^*`, `id^* = id`
-(`AlgebraicGeometry.Scheme.Pic.map_comp`, `AlgebraicGeometry.Scheme.Pic.map_id`).
-
-(blueprint: `definition-relative-picard-functor`,
-`definition-relative-picard-functor`) -/
+corresponding pullback map on Picard groups. -/
 noncomputable def picardPresheaf (f : X ⟶ S) : (Over S)ᵒᵖ ⥤ Type (u + 1) where
   obj T := (Limits.pullback f T.unop.hom).Pic
   map φ := TypeCat.ofHom (Pic.map (baseChangeMap f φ.unop))

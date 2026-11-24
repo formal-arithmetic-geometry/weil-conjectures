@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 /-!
 # Small locally constant sheaves from lattice-class presentations
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6), passage from lattice pairs to classes.
-(auxiliary; not a blueprint node)
+## References
+
+* [Bhatt--Scholze, Proposition 6.8.4(6)]
 -/
 
 @[expose] public section
@@ -225,28 +226,7 @@ private theorem small_latticeClass_local_properties {X : Scheme.{u}}
 
 /-- A large lattice-class presentation, locally a nonempty constant coset sheaf,
 gives a small locally constant, locally inhabited sheaf with lattice representatives,
-after an isomorphism of its coefficient rings.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), lattice-class sheaf construction.
-(auxiliary; not a blueprint node)
-
-Proof: choose class representatives only inside this proof, and send each class to
-its family of embedded integral submodules on every object of its slice. The exact
-restriction criterion at the identity implies injectivity. Thus every section set
-is small in universe u+1. Shrink these sets and transport restrictions and the sheaf
-condition through the natural equivalences. The universe-lift functor preserves local
-injectivity and local surjectivity; the locally bijective characterization of
-sheafification therefore shows that it commutes with constant sheaves. Hence the
-given constant-coset isomorphisms descend to the smaller section universe.
-Choose finite local free generators for L' and identify each finite basis with Fin n.
-These trivializations supply a cover with nonempty constant descriptions on its
-slices. The canonical equivalence between a slice and the member's small pro-etale
-site transports constant sheaves, giving local constancy in the required sense.
-A value in the constant set maps through the sheafification unit at the identity
-object to give a section on each member. For any inhabited section set, the inverse
-shrinking equivalence and surjectivity of the class presentation give a lattice pair
-for a', L'. Transport that single pair along the commuting coefficient square using
-`integral_lattice_pair_of_coefficient_iso`. Empty covers and rank zero require no
-nonemptiness assumption on the scheme or the finite bases. -/
+after an isomorphism of its coefficient rings. -/
 theorem small_lattice_sheaf_of_coset_presentation {X : Scheme.{u}}
     {R S R' S' : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}}
     (a : R ⟶ S) (a' : R' ⟶ S') (eR : R' ≅ R) (eS : S' ≅ S)

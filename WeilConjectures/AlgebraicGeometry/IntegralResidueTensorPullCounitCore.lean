@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullPresent
 
 /-! The normalized middle composite for the residue tensor-pull counit.
 
-Source: Bhatt--Scholze, Remark 6.8.15 and the proof of Lemma 6.5.9(5), p. 51.
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt--Scholze, Remark 6.8.15 and Lemma 6.5.9(5)
 -/
 
 @[expose] public section

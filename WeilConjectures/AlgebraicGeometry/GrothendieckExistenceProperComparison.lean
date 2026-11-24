@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FormalSystemsPushPull
 
 /-! # Projective-modification comparison for proper algebraization
 
-Source: Stacks Project, Proposition 088C, last paragraph, and Lemma 088B.
-(blueprint: lem-weil-pbc-proper-existence-comparison).
+## References
+
+* [Stacks Project, Tags 088C, 088B]
 -/
 
 @[expose] public section
@@ -30,28 +31,7 @@ namespace AlgebraicGeometry
 /-- A formal module on a nonempty proper scheme compares with a completed coherent module.
 The error is killed by a power of an ideal all of whose positive powers are nonzero.
 This statement does not assume algebraization on any closed subscheme.
-Source: Stacks Project, Proposition 088C, last paragraph, and Lemma 088B.
-(blueprint: lem-weil-pbc-proper-existence-comparison).
-
-Proof:
-1. Apply Chow's lemma (Tag 0200) to f. Its proper surjective modification q:Y -> X
-is an isomorphism on a dense open U. Since X is nonempty, U is nonempty. The immersion
-of Y into finite projective space is closed: its composite to Spec A is proper and
-projective space is separated over Spec A. The finite-coordinate embedding theorem
-puts Y in standard projective space, including an empty homogeneous index set.
-2. Let K be the radical ideal of the reduced complement X minus U. Its support is that
-complement. For every e >= 1 the support of K^e equals the support of K, and misses U.
-The zero ideal has support all of X, so K^e is nonzero. This includes U = X: K is then
-the unit ideal, whose powers are nonzero on a nonempty scheme.
-3. Pull M back along q using formal-systems pullback (Tag 0887). Projective existence
-(Tag 0885) gives a coherent F on Y and an isomorphism q^*M to its completion. The ideal
-on Y is the extension of I along q followed by f, by functoriality of ideal comap.
-The pullback functor's inclusion equation gives the same isomorphism in the ambient
-inverse-system category, as required by the push-pull theorem.
-4. Apply formal-systems push-pull (Tag 088B) to q, K, F and that isomorphism. It gives
-coherence of H = q_*F, a map alpha:M -> H-completion, and a positive exponent t killing
-the kernel and cokernel. Kernel forks, cokernel coforks and their universal properties
-are exactly those furnished by that theorem. Together with step 2 these are the claim. -/
+(Stacks, Proposition 088C and Lemma 088B) -/
 theorem proper_existence_comparison
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

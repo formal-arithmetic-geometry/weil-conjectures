@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 
 /-! # ProEtaleLisseFiniteModels
 
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
+## References
+
+* Stacks Project, Tag 099Y.
 -/
 
 @[expose] public section
@@ -37,11 +39,8 @@ private noncomputable def comparisonConstantIso (X : Scheme.{u})
       X.smallEtaleTopology (ProEt.topology X) (op (Etale.mk (𝟙 X))))).leftAdjointUniq
     (constantSheafAdj (ProEt.topology X) (ModuleCat.{u + 1} Λ) (ProEt.isTerminalMkId X))
 
-/-- Finite étale local models remain finite pro-étale models after comparison.
-Source: Stacks Project, Tag 099Y, proof of `lemma-compare-locally-constant`.
-The proof transports each finite constant trivialization through comparison pullback,
-its restriction comparison, and the constant-sheaf comparison.
-(auxiliary; not a blueprint node) -/
+/-- Finite étale local models remain finite pro-étale models after comparison
+(Stacks, Tag 099Y). -/
 theorem comparison_finite_models_of_etale_finite_values
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

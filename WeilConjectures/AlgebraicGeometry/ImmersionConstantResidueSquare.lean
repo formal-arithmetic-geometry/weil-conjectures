@@ -12,7 +12,9 @@ import all WeilConjectures.CategoryTheory.RingedPullbackPresentationOnSites
 
 /-! # Ordinary immersion pullback in constant-scalar coordinates
 
-Source: Stacks Tags 03A0, 03CY, 06YY, 099L and 099R.
+## References
+
+* Stacks Project, Tags 03A0, 03CY, 06YY, 099L, 099R.
 -/
 
 @[expose] public noncomputable section
@@ -176,21 +178,7 @@ attribute [-instance] coefficientModelAdditiveSheafify coefficientEtaleModelAddi
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective in
 /-- Constant-ring module pullback agrees with fixed-scalar inverse image before deriving.
-Source: Stacks Tags 00YV, 03A0, 03CY and 03D2
-(auxiliary; not a blueprint node).
-
-Proof: transpose the whiskered constant-presheaf unit to construct the canonical
-constant-ring direct-image map. The constantInverseImageScalarNormalization
-equation identifies its transpose with the specified algebraic constantMap.
-The supplied ringed-presentation adjunction therefore identifies ordinary tensor
-pullback as left adjoint to this module direct image. After scalar restriction
-and AsSmall evaluation, that direct image commutes with the original fixed-scalar
-direct image: the section maps are identities, and linearity follows from the
-sheafification Hom-equivalence equation that every constant a maps to a.
-Compare scalar restriction with coefficientModelFixedScalars via restrictionIso.
-Compose the two adjunctions with the model and scalar equivalences and conjugate
-the right-adjoint square to obtain the required isomorphism of left adjoints.
-All section identities and adjunctions apply also to the zero ring and empty sites. -/
+(Stacks, Tags 00YV, 03A0, 03CY, 03D2.) -/
 theorem sfbImmersion_constantResidueSquare
     {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i]
     (k : Type (u + 1)) [CommRing k] :

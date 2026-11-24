@@ -18,7 +18,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Coefficient naturality for a local finite free resolution
 
-Source: Stacks Project, Tags 08DL and 08DM. -/
+## References
+
+* [Stacks, Tags 08DL and 08DM]
+-/
 
 @[expose] public section
 
@@ -37,27 +40,7 @@ attribute [local irreducible] Scheme.Modules.overEquiv Scheme.Modules.restrictFu
 
 
 /-- A bounded finite free resolution on an open computes restricted Ext
-naturally in every coefficient sheaf.
-Source: Stacks Project, Tag 08DL (restriction of derived internal Hom), and
-Tag 08DM (finite locally free computation of derived internal Hom).
-(blueprint: lem-sc-local-finite-free-homology-natural).
-
-Proof: Use the functorial K-injective resolution of each coefficient single
-complex. The localization comparison for derived internal Hom is natural in
-the coefficient, as is its restriction to the open. Restriction is exact and
-preserves K-injectives. Transport from the over site to the open subscheme.
-Precomposition with the augmentation is a quasi-isomorphism on Hom into these
-K-injectives. Since E is bounded with finite free terms, internal Hom from E
-preserves acyclicity: finite free internal Hom is exact and only finitely many
-source terms contribute to each total degree. The cone of the coefficient
-resolution is acyclic, so postcomposition with that resolution is also a
-quasi-isomorphism on Hom out of E. These are natural transformations whose
-components are quasi-isomorphisms. Take homology, invert their componentwise
-isomorphisms, and compose with the exact restriction homology comparison.
-This gives a natural isomorphism of coefficient functors. All computations use
-complexes and homology in the ambient supplied derived universe; no derived
-category on the open in that universe is required. The zero resolution and
-empty open are included. -/
+naturally in every coefficient sheaf (Stacks, Tags 08DL and 08DM). -/
 theorem local_finite_free_homology_natural
     {Y : Scheme.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

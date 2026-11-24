@@ -10,8 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleLocalQuotientVanishing
 
 /-! # Effectivity of the kernel construction for compatible local subobjects
 
-Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Sites, Tag 04TR.
 -/
 
 @[expose] public section
@@ -21,16 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical comparison from the explicitly constructed kernel is an
-isomorphism when the local subobjects agree on overlaps.
-
-Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node).
-
-Proof: the overlap calculation shows that q_i has zero composite with the
-restriction of the simultaneous quotient map. Inverse image along U_i preserves
-the kernel, so q_i factors through the restricted constructed subobject. The
-canonical comparison and this factor are inverse, by cancellation of the
-monomorphisms q_i and the restricted kernel inclusion. -/
+isomorphism when the local subobjects agree on overlaps (Stacks, Sites, Tag 04TR). -/
 theorem isIso_localSubobjectKernelComparison
     (X : Scheme.{u}) (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X)

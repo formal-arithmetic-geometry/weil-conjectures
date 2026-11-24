@@ -14,28 +14,16 @@ import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 
 /-! # Flat finite-presentation maps with dense irreducible fibres
 
-Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)
-(blueprint: lem-weil-pbc-flat-fibres-irreducible)
+## References
+
+* [Stacks Project, Tag 00I6](https://stacks.math.columbia.edu/tag/00I6)
 -/
 
 @[expose] public section
 
-/--
-For a flat finitely presented algebra over an irreducible ring, irreducibility of
-fibres over a dense set of primes implies irreducibility of the total spectrum.
-Source: Stacks Project, Algebra, Lemma 00I6 (algebra-lemma-flat-fibres-irreducible)
-(blueprint: lem-weil-pbc-flat-fibres-irreducible).
-Proof: flatness and finite presentation make the induced map
-`PrimeSpectrum T → PrimeSpectrum R` open by
-`lem-weil-pbc-flat-finite-presentation-open` (Stacks Tag 00I1).
-For each prime `p`, its set-theoretic fibre is homeomorphic to the spectrum of
-`p.asIdeal.Fiber T` by `lem-weil-pbc-fibre-spec-homeomorphism` (Stacks Tag 00E6).
-Thus `hdense` gives irreducible topological fibres over a dense set of primes.
-Apply `lem-weil-pbc-irreducible-on-top` (Stacks Tag 004Z) to this open map and
-the irreducible base `hR` to obtain irreducibility of the total spectrum.
-Nonemptiness follows by choosing a prime in the dense set (the base is nonempty)
-and then a point in its nonempty irreducible fibre.
--/
+/-- For a flat finitely presented algebra over an irreducible ring, irreducibility of
+fibres over a dense set of primes implies irreducibility of the total spectrum
+(Stacks, Tag 00I6). -/
 theorem flat_finitePresentation_dense_irreducible_fibres
     {R T : Type*} [CommRing R] [CommRing T] [Algebra R T]
     (hR : IsIrreducible (Set.univ : Set (PrimeSpectrum R)))

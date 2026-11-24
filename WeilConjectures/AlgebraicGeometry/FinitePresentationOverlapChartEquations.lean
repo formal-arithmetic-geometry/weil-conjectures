@@ -17,8 +17,10 @@ import Mathlib.Data.Finset.Order
 
 /-! # Eventual equations on diagonal and threefold overlap charts
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-eventual-chart-equations). -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -90,33 +92,7 @@ private theorem overlapChosenEquations {ι : Type u} {S : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency true in
 /-- The diagonal and triple equations for the prescribed transitions hold on
 finite-stage universal test charts. No comparison with a global module is asserted.
-Source: Stacks Project, Tag 01ZR, first proof (Zariski gluing), and Tag 05N7 (3).
-(blueprint: lem-pc-fp-overlap-eventual-chart-equations).
-
-Proof: At stage k form the diagonal defect on each cover chart and the
-composition defect on each chosen threefold overlap. The latter is the difference
-of T12 followed by T23 and T13, so both maps have the same source and target.
-All these test schemes are quasi-compact: cover charts are affine opens in a
-quasi-separated scheme, and the threefold overlaps are intersections of finitely
-many such opens. Their maps to Spec(R_k) are quasi-compact. The source and target
-modules are restrictions of T's components. The given component isomorphisms
-identify them with pullbacks of the prescribed finitely presented quasi-coherent
-N_a; pullback preserves these properties. In particular the sources have finite
-type. Pullback commutes with subtraction and composition. Naturality of T and
-coherence of its limit pullback therefore make the limit pullbacks of all defects
-zero. Apply finitePresentation_zero_map_descent to each defect, with its test
-scheme over Spec(R_k) as the initial model and initial stage k. The identity
-base change is identified with the test scheme by the canonical pullback
-isomorphism; the limit base change is identified with the corresponding limit
-test scheme by the pullback universal properties. Each defect then vanishes at a
-stage above k. There are finitely many cover members and triples, so directedness
-gives a common upper bound l. Zero maps stay zero under further pullback, and the
-pseudofunctor composition comparisons identify the resulting maps with the defects
-of the prescribed T' at l. Use the base-changed pairwise and threefold pullbacks
-as sq and sq3; their universal properties determine their objects up to canonical
-isomorphism. The refinement maps remain the displayed pullback lifts, not new
-choices of transitions. For an empty cover take l=k and the equations are vacuous.
-The cited zero-map descent theorem already handles directed preorders. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_overlap_eventual_chart_equations
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

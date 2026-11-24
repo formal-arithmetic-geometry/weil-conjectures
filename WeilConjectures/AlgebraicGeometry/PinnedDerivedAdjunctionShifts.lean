@@ -13,7 +13,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjuncti
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 
 /-! # Shift compatibility of the selected derived adjunction
-Source: Stacks Project, Tags 08HY and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 08HY and 0D5S.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -168,8 +172,8 @@ private theorem rightKanShiftUnique
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The adjunction selected with the composition-pinned left-derived counit.
-Source: Stacks Project, Tag 08HY, canonical derived adjunction. -/
+/-- The adjunction selected with the composition-pinned left-derived counit
+(Stacks, Tag 08HY). -/
 abbrev pinnedDerivedAdjunction
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -182,21 +186,7 @@ abbrev pinnedDerivedAdjunction
       (Classical.choose_spec exists_derivedPullbackComposition.{u, w}))) f))
 
 /-- The selected derived adjunction respects the counit-compatible pullback shifts
-and the recorded right-derived direct-image shifts.
-Source: Stacks Project, Tag 08HY, canonical derived adjunction; Tag 079W.
-(blueprint: lem-pc-pinned-derived-adjunction-shifts).
-Proof: the normalization equation of exists_schemeDerivedAdjunction identifies
-its Hom equivalence on localized representatives with the termwise tensor-pullback
-adjunction, the selected left-derived counit and the right-derived unit. The
-termwise adjunction commutes with shifts. On K-injective representatives the
-right-derived unit commutes with the shift structure transported from the
-K-injective equivalence. Combine this with the assumed shift equation for the
-selected left-derived counit to obtain the shifted Hom-equivalence equation.
-K-flat and K-injective resolutions represent every object, so naturality extends
-this equation to arbitrary derived objects. Apply it to identity morphisms to
-obtain the shift equations for the derived unit and counit, precisely the two
-fields of Adjunction.CommShift. This concerns one morphism, independently of
-any base-change square or pullback composition comparison. -/
+and the recorded right-derived direct-image shifts (Stacks, Tags 08HY and 079W). -/
 theorem pinnedDerivedAdjunction_commShift
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 
 /-! # Lifting the comparison map of the second adic system
 
-Source: Stacks Project, Tag 088A, construction of the maps G_e → H/K^e H.
+## References
+
+* [Stacks Project, Tag 088A]
 -/
 
 @[expose] public section
@@ -120,23 +122,7 @@ private theorem torsion_completion_bijective
     F G (hsupp F hFs) (hsupp G hGs)
 
 /-- Construct a comparison map for an already algebraized second-ideal system.
-Source: Stacks Project, Tag 088A (lemma-existence-tricky), construction of
-G_e → H/K^e H, using the closed-immersion equivalence of Tag 087T.
-https://stacks.math.columbia.edu/tag/088A
-(blueprint: lem-weil-pbc-devissage-second-adic-system-lift-compatibility).
-
-Proof: Coherent modules killed by powers of K descend to a common closed thickening.
-Closed pushforward is fully faithful and commutes naturally with I-completion.
-The assumed completion equivalence on that thickening therefore gives a bijection
-on Hom sets for the ambient I-completion. Form the doubly natural morphism τ by
-composing σ, the K-reduction of α, and θ inverse. The terms N_e and H/K^(e+1)H
-are coherent and annihilated by K^(e+1), so surjectivity lifts τ_e uniquely to d_e.
-For adjacent indices, the two composites of d with the transitions have equal
-I-completions by naturality of τ. Both endpoints are killed by a common higher
-power of K, so injectivity makes the composites equal. Assemble these adjacent
-compatible maps as a natural transformation δ. Its component lifting equations,
-composed with θ, give precisely the displayed squares. The maps are uniquely
-specified by their completions; no arbitrary witness or square hypothesis is used. -/
+(Stacks, Tag 088A) -/
 theorem grothendieckDevissage_secondAdicSystem_lift_compatibility
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

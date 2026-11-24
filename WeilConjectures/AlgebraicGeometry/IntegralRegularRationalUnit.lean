@@ -21,21 +21,8 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- A nowhere-zero continuous integral multiplier becomes invertible over E.
-
-Source: Bhatt--Scholze, Section 6.8, integral-to-field coefficient extension.
-(auxiliary; not a blueprint node)
-
-Proof: realize regular-module maps as multiplication by their continuous coefficient.
-Extension from O_E to E sends the regular module to the regular E-module and sends this
-map to multiplication by the image of the same coefficient. Its pointwise reciprocal
-is continuous because the coefficient is nowhere zero. Multiplication by that reciprocal
-is the inverse regular E-module endomorphism. The supplied compatibility square
-identifies its composite with the integral coefficient inclusion. The regular-module
-scalar-extension isomorphism intertwines the two endomorphisms by the adjunction
-universal property, so scalar extension of the original map is also invertible. Neither
-a matrix, a dominating entry, nor a rational cokernel hypothesis is used.
-Empty schemes give the identity endomorphism of the zero regular module. -/
+/-- A nowhere-zero continuous integral multiplier becomes invertible over E
+(Bhatt–Scholze, Section 6.8). -/
 theorem integralRegular_rationalUnit_of_nowhereZero (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u})
     (e : condensedRingObj (integralCoeff ℓ E) X ⟶

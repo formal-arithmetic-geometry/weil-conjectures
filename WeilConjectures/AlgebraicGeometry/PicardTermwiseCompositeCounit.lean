@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PicardTermwiseCompositeCounitCore
 
 /-! # Composition equation for explicit termwise comparison morphisms
 
-Source: Stacks Project, Tags 06YJ and 0D5S.
-(blueprint: lem-sc-picard-termwise-composite-counit)
+## References
+
+* Stacks Project, Tags 06YJ and 0D5S
 -/
 
 @[expose] public section
@@ -108,32 +109,8 @@ set_option linter.unusedVariables false in
 -- Preserve the original statement, including its unused lambda binder t.
 /-- The composites of a fixed morphism with the pinned tensor-pullback counits
 satisfy the composition equation. No perfectness, invertibility, or representation
-of E on the open site is assumed: this is an equation of explicitly given morphisms.
-
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks, and Tag 06YJ,
-computation on complexes.
-(blueprint: lem-sc-picard-termwise-composite-counit)
-
-Proof:
-1. Substitute t = s;U.ι, s' = i;s and t' = i;t using hf, hs and ht.
-   The remaining factorization hf' is the associativity equality. Replace its
-   proof by that equality using proof irrelevance, retaining its eqToIso as the
-   associativity transport in the composition law. Put P = overEquiv(U)(K).
-2. The defining left-derived-lift equation of the pinned c(i,s), evaluated on
-   the image of P in the homotopy category, says that c(i,s).hom followed by
-   the composite counit equals the successive counits followed by the ordinary
-   tensor-pullback composition comparison. Whisker with the complex quotient.
-   The natural isomorphism quotientCompQhIso and the factorization of tensor
-   pullback through the homotopy quotient identify these counits with
-   picardTermwiseCounit. The same factorization identifies the inverse of the
-   ordinary comparison with picardTermwiseModelRestrictionIso. Cancel the two
-   comparison isomorphisms to obtain the inverse-composition counit equation.
-3. Expand b. Naturality of c(i,s).inv at e moves e through this equation.
-   The associativity law for c(i,s,U.ι), evaluated at E, identifies the two
-   inverse-composition paths from L(i;s;U.ι)(E). Reassociate composition and
-   substitute the equation of step 2. This is exactly the displayed equality.
-   No counit is canceled as an isomorphism; the argument applies to arbitrary
-   e and arbitrary complexes, including the zero complex and empty schemes. -/
+of `E` on the open site is assumed: this is an equation of explicitly given morphisms
+(Stacks, Tags 0D5S and 06YJ). -/
 theorem picard_termwise_composite_counit
     (W : Scheme.{v}) (E : schemeDerivedCategory W) (U : W.Opens)
     (K : CochainComplex

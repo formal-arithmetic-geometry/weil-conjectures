@@ -14,9 +14,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 
 /-! # Local dimension of a flat quasi-finite chart over a smooth scheme
 
-Source: Stacks Project, Tag 01UA; flat quasi-finite codimension invariance;
-the source library smooth dimension theorem.
-(blueprint: lem-sbc-flat-quasi-finite-smooth-local-dimension)
+## References
+
+* [Stacks Project, Tag 01UA](https://stacks.math.columbia.edu/tag/01UA)
 -/
 
 @[expose] public section
@@ -25,24 +25,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Flat quasi-finite charts over a smooth n-dimensional scheme have local dimension n.
-
-Source: Stacks Project, Tag 01UA; source-library coheight and smooth dimension theorems.
-Proof: Let U be any open neighbourhood of x and f its morphism to P.
-Flatness and local finite presentation make f open, so its image V is a nonempty
-open of P. Both P and V are smooth of relative dimension n over k, and thus have
-dimension n by the proved source-library smooth dimension theorem.
-Quasi-finiteness makes f injective on comparable points, so dim U is at most dim P.
-For the reverse bound, dim V is the supremum of the coheights of its points. Lift
-each point z of V to a point a of U. The open inclusion V into P preserves coheight,
-and the proved flat locally quasi-finite coheight theorem identifies coheight of
-f(a) in P with coheight of a in U. Each such coheight is at most dim U. Hence
-dim V is at most dim U, so dim U equals n. All neighbourhoods of x therefore have
-dimension n, and the infimum defining local dimension is n.
-The point x guarantees the nonemptiness needed for the smooth dimension theorem.
-No separability, reducedness, or etaleness of h is assumed. This includes finite flat
-inseparable charts and charts with nonreduced source.
-(blueprint: lem-sbc-flat-quasi-finite-smooth-local-dimension) -/
+/-- Flat quasi-finite charts over a smooth n-dimensional scheme have local dimension n
+(Stacks, Tag 01UA). -/
 theorem topologicalKrullDimAt_eq_of_flat_quasiFinite_to_smooth
     {k : Type u} [Field k] {X P : Scheme.{u}}
     (h : X ⟶ P) (g : P ⟶ Spec (.of k)) (n : ℕ)

@@ -14,8 +14,11 @@ import WeilConjectures.AlgebraicGeometry.FormalModuleQuotientAffineProjectionKer
 /-!
 # Affine sections of the explicit formal quotient projection
 
-Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection).
+## References
+
+* [Stacks Project, Tag 01I8](https://stacks.math.columbia.edu/tag/01I8)
+* [Stacks Project, Tag 01IC](https://stacks.math.columbia.edu/tag/01IC)
+* [Stacks Project, Tag 087W](https://stacks.math.columbia.edu/tag/087W)
 -/
 
 @[expose] public section
@@ -26,19 +29,7 @@ namespace AlgebraicGeometry
 
 /-- On an affine spectrum the actual sheaf quotient projection is surjective and has
 kernel the ideal power times the original module. No completeness or finiteness is needed.
-Source: Stacks Project, Tags 01I8, 01IC and 087W, affine module correspondence.
-(blueprint: lem-weil-pbc-formal-module-quotient-affine-projection).
-
-Proof: The tilde unit identifies M with the global sections of its associated sheaf.
-The ideal sheaf associated with I has global ideal I after transport by ΓSpecIso.
-Induct on the positive exponent to identify the range of the power inclusion with I^m:
-the first power is J.toModulesι, and each successor is the image of multiplication by J.
-The affine tensor-sections comparison identifies the range of multiplication of this
-power with the tilde module as I^m times all sections. The product and its cokernel are
-quasi-coherent. Exactness of affine sections on quasi-coherent modules says the cokernel
-projection is surjective with kernel this range. Transport through the tilde unit gives
-the asserted surjectivity and kernel equality. At I=bottom the kernel is zero; at I=top
-the quotient is zero. The zero module causes no exception. -/
+(Stacks, Tags 01I8, 01IC and 087W.) -/
 theorem formalModuleQuotient_affine_projection
     (A : Type u) [CommRing A] (I : Ideal A)
     (J : (Spec (CommRingCat.of A)).IdealSheafData)

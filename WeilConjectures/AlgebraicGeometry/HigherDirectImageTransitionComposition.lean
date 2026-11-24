@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitionNaturality
 
 /-! # Composition of higher direct image triangles
 
-Source: Stacks Project, Tag 09Z1, canonical comparison maps, and Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-composition).
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8
 -/
 
 @[expose] public section
@@ -27,21 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The two successive transitions in a tower of commutative triangles agree with
 its composite, after the ordinary pullback composition comparison.
-Source: Stacks Project, Tag 09Z1, canonical comparisons; Tag 03Q8.
-(blueprint: lem-sbc-higher-image-transition-composition).
-
-Proof: Before homology, expand both transitions as the adjoints of the pulled-back
-counits. Express the unit for the composite pullback adjunction as the successive
-units, transported through the inverse-image composition comparison. Naturality
-moves the middle unit past the first counit; the triangle identity cancels this
-pair. Associativity of the pullback comparisons identifies the remaining expression
-with the transition for `b ≫ a`. For a sheaf placed in degree zero, the exact-functor
-comparison with singleFunctor commutes with composition: compute on the degree-zero
-complex using the factorization through the homotopy category. This identifies the
-remaining derived pullback comparison with singleFunctor applied to the ordinary
-pullback comparison. Naturality in the coefficient sheaf moves the map f past the second transition.
-Apply homology, preserving compositions. The equalities of the
-three structure morphisms occur only as proof-irrelevant transports. -/
+(Stacks, Tags 09Z1 and 03Q8) -/
 theorem higher_direct_image_transition_composition
     (Λ : Type (u + 1)) [CommRing Λ] {S Y Y' Y'' : Scheme.{u}}
     (a : Y' ⟶ Y) (b : Y'' ⟶ Y') (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Y'' ⟶ S)

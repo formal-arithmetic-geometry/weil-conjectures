@@ -19,9 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Genus and Jacobians under algebraically closed extension
-
-Source: blueprint, `sec-curve-estimates/sbc-thm-algebraically-closed-invariance`, order 1030
-(blueprint: proposition-cohomology-smooth-affine-curve--4).
 -/
 
 @[expose] public section
@@ -68,28 +65,10 @@ private theorem exists_jacobian_of_connected
     rw [Iso.symm_symm_eq, Equiv.symm_apply_apply]
     exact he
 
-/-- Source: blueprint, `sec-curve-estimates/sbc-thm-algebraically-closed-invariance`, order 1030
-(blueprint: proposition-cohomology-smooth-affine-curve--4).
-
-The genus is unchanged, and any two Jacobian identifications are carried to one another
+/-- The genus is unchanged, and any two Jacobian identifications are carried to one another
 by an isomorphism over the extended field. Compatibility is tested on degree-zero line
 bundles over every test scheme: the canonical iterated-pullback isomorphism transports the
-line bundle, and the classifying morphisms agree after projection to the original Jacobian.
-The maps from line bundles to the Picard sheaf are locally surjective, so this tests equality
-of the representing identifications, including on sheafified sections.
-
-Proof: a connected scheme over a separably closed field is geometrically connected.
-Smoothness then gives geometric irreducibility and geometric reducedness, hence geometric
-integrality. `baseChange_curve` gives the connected-curve structure after extension;
-geometric integrality and smoothness are stable under base change. On an integral smooth
-curve, dimension one gives smoothness of relative dimension one. The comparison of genus
-with arithmetic genus and `arithmeticGenus_pullback` prove the genus equality.
-For each curve, `exists_jacobian` supplies a representing commutative group scheme,
-proper, geometrically integral, and smooth of relative dimension the arithmetic genus.
-These properties give `IsAbelianVariety`; its Krull dimension is that relative dimension,
-so the genus comparison and the given representation give `IsJacobian`.
-Finally `jacobian_compatibility` gives the compatibility square for the chosen pair of
-representing identifications. -/
+line bundle, and the classifying morphisms agree after projection to the original Jacobian. -/
 theorem genus_jacobian_invariant
     {k K : Type u} [Field k] [Field K] [IsAlgClosed k] [IsAlgClosed K] [Algebra k K]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k))

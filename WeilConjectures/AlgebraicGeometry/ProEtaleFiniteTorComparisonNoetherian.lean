@@ -42,6 +42,10 @@ flat K-flat representative, which stays K-flat, and uses
 `constructibleComparisonTensorTest_reflects_zero` to reflect vanishing of the tensor test.
 The equivalence is then restricted along the bounded constructible equivalence of
 `constructibleComparison`.
+
+## References
+
+* Stacks Project, Tags 05VD, 07A4, 06YQ, 08G0 and 08G1.
 -/
 
 @[expose] public noncomputable section

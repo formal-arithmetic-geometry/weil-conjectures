@@ -14,11 +14,12 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # Actual internal oplax components on resolving models
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E, 07A2 and 07A4
-(auxiliary; not a blueprint node).
-
 The generic predicates expose the component equations of the specified localized arrows.
 The final statement specializes them to the actual internal pro-etale module pullback.
+
+## References
+
+* Stacks Project, Tags 0G7E, 07A2 and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +34,8 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory.Functor
 
-/-- A natural square commutes also on the actual inverse images of specified arrows.
-The isomorphisms have the functor images as their forward maps, fixing the inverses.
-Source: Stacks 07A4, resolving localization
-(auxiliary; not a blueprint node). -/
+/-- A natural square commutes also on the actual inverse images of specified arrows
+(Stacks, Tag 07A4). -/
 def ResolvingInverseSquares {A : Type a} [Category.{b} A]
     {B : Type c} [Category.{d} B] {U V : A ⥤ B}
     (τ : U ⟶ V) (W : MorphismProperty A) : Prop :=
@@ -78,37 +77,31 @@ variable {C : Type a} [Category.{u + 1} C] [Abelian C]
   (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat]
   [F.IsLeftAdjoint] [F.Monoidal]
 
-/-- The actual comparison a: L(r⁻¹) followed by the resolution transformation.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The comparison `a`: `L(r⁻¹)` followed by the resolution transformation. -/
 def resolvingComparisonA := Functor.uncurry.map F.leftDerivedDerivedTensorCounit
 
-/-- The actual comparison c: tensor the resolution transformations, then apply r⁻¹.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The comparison `c`: tensor the resolution transformations, then apply `r⁻¹`. -/
 def resolvingComparisonC := Functor.uncurry.map F.derivedTensorLeftDerivedCounit
 
-/-- The homotopy total oplax arrow, followed by the derived localization.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The homotopy total oplax arrow, followed by the derived localization. -/
 def resolvingTotalArrow :=
   Functor.uncurry.map (Functor.postcompose₂MapWhiskeringLeft₂
     (OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F) DerivedCategory.Qh)
 
-/-- Restrict the specified localized tensor transformation to homotopy representatives.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- Restrict the specified localized tensor transformation to homotopy representatives. -/
 def resolvingDelta (δ : F.leftDerivedDerivedTensor ⟶ F.derivedTensorLeftDerived) :=
   Functor.uncurry.map
     ((((Functor.whiskeringLeft₂ _).obj DerivedCategory.Qh).obj DerivedCategory.Qh).map δ)
 
-/-- Quasi-isomorphisms between resolving pairs, in both homotopy variables.
-Source: Stacks 0G7E and 07A4 (auxiliary; not a blueprint node). -/
+/-- Quasi-isomorphisms between resolving pairs, in both homotopy variables. -/
 def resolvingPairArrows (P : ObjectProperty (CochainComplex C ℤ)) :
     MorphismProperty (HomotopyCategory C (.up ℤ) × HomotopyCategory C (.up ℤ)) :=
   fun A B s ↦ P A.1.as ∧ P A.2.as ∧ P B.1.as ∧ P B.2.as ∧
     HomotopyCategory.quasiIso C (.up ℤ) s.1 ∧
     HomotopyCategory.quasiIso C (.up ℤ) s.2
 
-/-- The resolving component assertion for a fixed localized tensor transformation.
-Its comparison transformations are the existing derived counits; no new lift is chosen.
-Source: Stacks 0G7E and 07A4 (auxiliary; not a blueprint node). -/
+/-- The resolving component assertion for a fixed localized tensor transformation,
+with comparison transformations the existing derived counits. -/
 def ResolvingOplaxComponents
     (P : ObjectProperty (CochainComplex C ℤ))
     (Q : ObjectProperty (CochainComplex D ℤ))
@@ -323,31 +316,8 @@ private theorem internal_monoidal_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
   unfold internalPullMonoidal
   exact internalPullOplax_eq_canonical Λ f
 
-/-- The actual internal oplax components on flat-term K-flat models.
-Source: Stacks 0G7E, 07A2 and 07A4; the component identities are agent calculations
-(auxiliary; not a blueprint node).
-
-Proof, following the six DAG steps.
-1. The section K-flat comparison preserves and reflects resolving membership. Transport
-   ringed pullback preservation through the ordinary operations comparison; use the
-   K-flat total tensor model theorem for total closure. The regular complex resolves.
-2. The independent-universe pullback computation makes the section resolution counit
-   invertible. Derived pushpull normalization conjugates the image of the internal
-   counit to this map. The derived equivalence reflects invertibility. Apply to the
-   two factors, their signed tensor total and the regular complex.
-3. The existing comparisonA is L(r inverse) followed by eta, while comparisonC is
-   eta tensor eta followed by r inverse. Their factors are invertible on these models.
-4. The total oplax comparison identifies b on the homotopy category. Two-variable
-   localization computes its lift as c inverse followed by q(b) after a. Uniqueness
-   identifies the lift with internalDelta; hence delta followed by c equals a then q(b).
-5. Localizing the actual ordinary unit gives eta followed by q(u), with the identity
-   target comparison. This is the specified derived unit, not a new unit choice.
-6. The four maps are natural transformations. Comparisons a,c identify their functors
-   with restrictions of derived functors, so resolving quasi-isomorphisms are inverted.
-   Multiply the naturality squares by their inverse vertical arrows to obtain the
-   four ResolvingInverseSquares assertions. Compositions cover inversion in either
-   variable. There is no flatness assumption on a coefficient map or boundedness.
--/
+/-- The actual internal oplax components on flat-term K-flat models
+(Stacks, Tags 0G7E, 07A2 and 07A4). -/
 theorem internal_oplax_resolving_components {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Functor.ResolvingOplaxComponents (CondensedRing.upperStar Λ f)
       (KFlatSectionComparison.internalResolving Λ Y)

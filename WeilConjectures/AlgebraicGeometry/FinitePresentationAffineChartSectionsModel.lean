@@ -16,7 +16,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Algebraic models for affine chart sections
-Source: Stacks Project, Tags 01ZR and 05N7. -/
+
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -25,20 +29,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The finite presentation of the restricted module descends as algebraic sections.
-Source: Stacks Project, Algebra Tag 05N7 and Limits Tag 01ZR, affine object clause.
-(blueprint: lem-pc-fp-affine-chart-sections-model).
-
-Proof: On the upper tail above i the stage chart rings are base changes of the fixed
-chart ring. Affine pullback identifies these with tensor products, which commute
-with directed colimits. Uniqueness of the affine limit identifies the limit chart
-ring with that colimit. The restriction of M has finitely presented sections since
-it is finitely presented and the chart is affine. Apply the object clause of module
-descent over a directed preorder: lift a finite relation matrix and form its range
-quotient at a stage. Its scalar extension is the original sections module. The
-pullback pasting isomorphism identifies the limit chart with the iterated chart
-in the conclusion, and transports the section comparison. Zero rings and modules
-are treated by the same relation quotient; no choice of unspecified sheaf data
-is made. -/
+(Stacks, Tags 05N7 and 01ZR) -/
 theorem exists_finitePresentation_affine_chart_sections_model
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

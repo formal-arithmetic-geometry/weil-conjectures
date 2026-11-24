@@ -69,24 +69,8 @@ private theorem finite_cofan_trans
   intro j
   simpa only [Function.comp_apply, ν, Category.assoc] using hR (e j).1 (e j).2
 
-/-- Source: Stacks, Hypercoverings, 0DAV and 01GJ, with finite choices as in 094K.
-
-Proof: Form the qcqs matching boundary of A and the relative matching covering
-into K_(n+1), as in the unconstrained replacement construction. Pull back S_(n+1)
-to this covering object. Refine the resulting etale cover by affine opens and use
-quasi-compactness of the boundary to select finitely many. Their disjoint union N
-is a relative matching cover, with its chosen finite cofan solving S_(n+1).
-Attach N to A using the split attachment construction, retaining A below degree n+1.
-The top term is N together with copies of the old nondegenerate objects indexed by
-proper surjections [n+1] to [q]. For an old nondegenerate object, pull back the
-finite solving cofan of A_q along its inclusion into A_q; finite coproducts are
-universal in the etale category. Each resulting constituent solves S_q, and the
-assumed operator stability sends this solution into S_(n+1) along the degeneracy.
-Combine these finite cofans and the chosen one for N to present the whole top
-term. Lower cofans are retained via the restriction equality. All new affine
-pieces have the finiteness properties required for a replacement stage, and
-the boundary cover gives its matching surjectivity.
-(auxiliary; not a blueprint node) -/
+/-- A finite split replacement stage solving the sieves `S` up to degree `n` extends to one up
+to degree `n + 1` (Stacks, Tags 0DAV, 01GJ, 094K). -/
 theorem exists_local_replacement_stage_extension
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (K : SimplicialObject X.Etale) (hK : IsEtaleHypercover K)

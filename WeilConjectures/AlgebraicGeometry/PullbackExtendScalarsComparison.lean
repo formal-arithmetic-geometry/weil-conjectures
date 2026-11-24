@@ -27,9 +27,7 @@ variable {X Y : Scheme.{u}} (g : Y ⟶ X)
   (φ : R ⟶ S) [IsMonHom φ]
 
 omit [IsCommMonObj S] in
-/-- The canonical comparison, given by uniqueness of the two left adjoints.
-Source: the monoidal inverse-image adjunction and restriction of scalars.
-(auxiliary; not a blueprint node) -/
+/-- The canonical comparison, given by uniqueness of the two left adjoints. -/
 @[irreducible] noncomputable def pullbackExtendScalarsComparison :
     Mod.extendScalars φ ⋙ (upperStar Ab.{u + 1} g).mapMod S ≅
       (upperStar Ab.{u + 1} g).mapMod R ⋙

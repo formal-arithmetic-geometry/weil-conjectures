@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 
 /-! # Flat module objects under pro-étale inverse image
 
-Source: Stacks Project, Tag 05VD, inverse image of flat module sheaves.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Tag 05VD.
 -/
 
 @[expose] public section
@@ -29,23 +30,7 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Inverse image followed by transport along an isomorphism of coefficient
-rings preserves flat module objects.
-
-Source: Stacks Project, Tag 05VD, lemma-pullback-flat.
-(auxiliary; not a blueprint node)
-
-Proof. The explicit balanced tensor comparison transports internal flatness to
-site-flatness of section modules. Construct the set-valued inverse image as left
-Kan extension followed by sheafification, with its usual right adjoint. Filtered
-colimits of types commute with finite limits, so this inverse image is left exact.
-The algebraic-operations comparison identifies its module inverse image with the
-internal inverse image, including restriction along the coefficient isomorphism.
-Apply the existing universe-polymorphic algebraic inverse-image flatness theorem.
-Transfer the result through the source equivalence unit and the comparison
-isomorphism: the local equational criterion is invariant under isomorphism by
-mapping a finite relation forward and its local factorization sections backward.
-Finally use the reverse tensor comparison to recover internal flatness. All finite
-limits and finite sums include their empty cases. No Noetherian hypothesis is used. -/
+rings preserves flat module objects. (Stacks, Tag 05VD) -/
 theorem inverseImageModule_preservesFlat {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]

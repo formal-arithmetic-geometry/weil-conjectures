@@ -13,8 +13,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Transport of a module pullback comparison across a scheme isomorphism
 
-Source: Stacks Project, Tags 06YJ, 08HY and 0D5S.
-(blueprint: lem-pc-module-pullback-comparison-iso-transport).
+## References
+
+* [Stacks, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks, Tag 08HY](https://stacks.math.columbia.edu/tag/08HY)
+* [Stacks, Tag 0D5S](https://stacks.math.columbia.edu/tag/0D5S)
 -/
 
 @[expose] public section
@@ -46,25 +49,8 @@ private theorem postcompose_rightKanExtension
   exact ⟨⟨(IsTerminal.equivOfIso (Functor.RightExtension.postcompose₂ObjMkIso U ε))
     (IsTerminal.isTerminalObj _ _ (LF.isUniversalOfIsRightKanExtension ε))⟩⟩
 
-/-- A comparison on a module transports through an isomorphism over its base.
-Source: Stacks Project, Tag 06YJ, left-derived pullback; Tag 0D5S, composition;
-Tag 08HY, counit construction.
-(blueprint: lem-pc-module-pullback-comparison-iso-transport).
-
-Proof: Direct image along e.hom is an exact equivalence, inverse to tensor
-pullback along e.hom. Tensor pullback composition and e.hom followed by p = a
-identify e_*(a^*G) with p^*G. The exact equivalence commutes with localization
-and with the single functor; these identifications give m, independently of j.
-Unpack hc as a left-derived counit epsilon. Postcompose epsilon with the exact
-equivalence e_* and the underived composition identification. Postcomposition by
-an equivalence preserves the right Kan extension universal property defining a
-left-derived functor. Precompose this counit with j.inv to get a witnessing
-left-derived counit for Lp^*. Its value at G[0], followed by the single-complex
-identification, defines d. Naturality of the single-complex identifications
-and j.hom followed by j.inv = identity give U(c) followed by m = j followed by d.
-Thus every supplied j works: any automorphism in j is absorbed in the new
-witnessing counit. No flatness of G is assumed. The exact-equivalence argument
-also covers the zero module and the empty scheme. -/
+/-- A comparison on a module transports through an isomorphism over its base
+(Stacks, Tags 06YJ, 0D5S and 08HY). -/
 theorem exists_modulePullbackComparison_iso_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -17,8 +17,9 @@ import all WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisGeometricCol
 
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 
-Source: Stacks Project, Tags 09RE and 08BW.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even).
+## References
+
+* Stacks Project, Tags 09RE and 08BW.
 -/
 
 @[expose] public section
@@ -190,25 +191,7 @@ private noncomputable def shiftedBinaryHomEquiv
     · simp [Preadditive.add_comp, Category.assoc, ← Functor.map_comp]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Fixed outer-column comparison at index 0.
-Source: Stacks Project, perfect.tex Tag 09RE.
-(blueprint: lem-pc-perfect-hom-mayer-vietoris-geometric-columns-even-zero).
-
-Proof: Apply the single-open stage presentation with shift -1 on U and on V.
-Their mapped cocones are recognized as local comparisons by the set-colimit
-preservation of the abelian-group forgetful functor and the inclusion/desc law.
-The row's second triangle object is the two-open biproduct. Its shifted projections
-split each stage and the apex; shifted injections give the inverse splitting.
-The prescribed second component of the geometric triangle maps identifies both
-projections with the transitions and cocone legs of the single-open diagrams.
-The induced map from the column colimit to the product of the single-open colimits
-is bijective: stage representatives give surjectivity after moving to a common
-stage, and eventual equality in each factor gives injectivity after moving both
-equalities to a common later stage. Transport the product of the two basic local
-comparisons through this source equivalence and the inverse apex splitting.
-The transported map equals the original colimit.desc on every stage representative.
-The proof also covers empty opens, coincident opens and zero perfect objects.
--/
+/-- Fixed outer-column comparison at index 0 (Stacks, Tag 09RE). -/
 theorem perfect_hom_mayerVietoris_geometric_columns_even_zero
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)
