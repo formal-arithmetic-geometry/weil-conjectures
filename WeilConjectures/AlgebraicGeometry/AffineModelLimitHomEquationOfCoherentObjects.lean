@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineModelComparisonDataFromHomEquations
 
 /-! # Hom transport from coherent affine object comparisons
-Source: Stacks Project, Tags 09RE and 0D5S. -/
+
+## References
+
+* Stacks Project, Tags 09RE and 0D5S
+-/
 
 @[expose] public section
 universe u w
@@ -18,22 +22,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The limit Hom equation follows from the natural comparison and object triangles.
-Source: Stacks Project, Tag 09RE and derived pullback composition, Tag 0D5S.
-(blueprint: lem-pc-affine-model-limit-hom-equation-of-coherent-objects).
-
-Proof: Fix the arrow from j to the cocone point.
-Apply naturality of the supplied full two-label comparison θ to the given chain
-map a; it need not descend to the bottom. Scalar reassociation identifies
-scalarExtensionHom with κE.hom followed by extension of a followed by κK.inv,
-where κ is affineModelScalarAssocIso. The two object triangles express the
-comparison at the target as κ, θ, pullback of the source comparison and the
-inverse perfectHomComparison. Substitute these formulas and expand map_comp.
-Cancel adjacent inverse pairs, use naturality of θ, then cancel its inverse
-pair. The result is exactly the conjugated Hom transport written below.
-Proof irrelevance identifies the generated pullback-instance proofs with the
-named arrow representation. The argument includes identity arrows, zero rings,
-zero complexes and coincident labelled objects. -/
+/-- The limit Hom equation follows from the natural comparison and object triangles
+(Stacks, Tags 09RE and 0D5S). -/
 theorem affineModelLimitHomEquation_of_coherent_objects
     {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R)

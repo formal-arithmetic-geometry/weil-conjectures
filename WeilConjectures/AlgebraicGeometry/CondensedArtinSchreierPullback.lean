@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreier
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-! # Pullback of the condensed Artin--Schreier sheaf of a function
-
-Source: latest blueprint, lem-fd-base-change.proof.md, integrand paragraph.
-(blueprint: lem-fd-condensed-artin-schreier-pullback).
 -/
 
 @[expose] public noncomputable section
@@ -45,19 +42,7 @@ private theorem nonempty_derivedPullback_single_comp
 
 -- Keep the character image abstract during the derived comparisons.
 /-- The degree-zero Artin--Schreier complex pulls back to the complex of the
-pulled-back function, including on the empty scheme.
-
-Source: latest blueprint, sec-fourier-transform/sk-thm-inversion/
-lem-fd-base-change.proof.md, integrand paragraph
-(blueprint: lem-fd-condensed-artin-schreier-pullback).
-
-Proof: Module pullback is exact, so its derived functor agrees with the termwise
-functor and carries a degree-zero complex to the degree-zero pullback. The map
-to affine one-space defined by the pulled-back function is the composite of the
-original map with the scheme morphism, by the coordinate description of
-homOfVector. The module pullback composition isomorphism therefore identifies
-the two degree-zero modules. No flatness or nontriviality of the character is
-needed, since the coefficient ring is pulled back from the point. -/
+pulled-back function, including on the empty scheme. -/
 theorem nonempty_iso_condensedArtinSchreierSheafOf_derivedPullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] [Fintype k]

@@ -14,7 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # A cohomology colimit cocone for a cofiltered system over a fixed scheme
 
-Source: Stacks Project, Theorem 59.51.3, Tag 09YQ.
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section
@@ -30,34 +32,7 @@ cofiltered qcqs system with affine transitions has a colimit given by limit coho
 The stage isomorphisms identify its objects, and `r` records the compatible restriction
 maps from the fixed base. The last equation specifies the comparison on those maps.
 
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ), with the cofiltered-category reduction
-of `lem-weil-pbc-filtered-category-exists-directed-final`.
-(blueprint: lem-weil-pbc-cofiltered-etale-cohomology-cocone)
-
-Proof:
-1. At stage j take the abelian group H^q(D_j, pi_j inverse image of G). Along an
-   arrow k to j use cohomological pullback followed by the inverse-image composition
-   isomorphism. Naturality of pi and inverse-image coherence give identity and
-   composition, defining H on J opposite. The maps r_j are cohomologyMap pi_j.
-   Pullback functoriality proves their displayed compatibility.
-2. The composites c_j followed by pi_j agree: choose a common predecessor for any
-   two indices, and use the cone and natural transformation equations. Call this
-   map t. Inverse-image composition identifies the pullback to the limit of every
-   stage sheaf with t inverse image of G, compatibly with all transitions.
-3. Choose a small directed final functor to J opposite. Its opposite is initial,
-   so the reindexed scheme cone is still a limit and has the same limit object.
-   The constant compatible limit sheaves have colimit t inverse image of G,
-   since the index category is nonempty and connected.
-4. Apply Tag 09YQ to the reindexed directed qcqs system with affine transitions.
-   It identifies the colimit of its cohomology groups with H^q(c.pt, t inverse
-   image of G). Finality transfers this colimit universal property to J opposite.
-   Use the canonical pullback maps to form B; the comparison is an isomorphism e.
-5. Pullback functoriality and the composition comparisons identify e B_j r_j
-   with cohomologyMap t. The stage identifications give eH_j r_j = cohomologyMap
-   pi_j. These prove all displayed equations. No torsion assumption is used.
-
-This asserts a cohomology colimit, before choosing a class or testing vanishing.
-It includes q = 0, zero sheaves, empty schemes and a one-object index category. -/
+(Stacks, Tag 09YQ) -/
 theorem exists_cofiltered_etale_cohomology_cocone
     {J : Type u} [SmallCategory J] [IsCofiltered J] {S : Scheme.{u}}
     (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)

@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.SiteCechComplex
 
 /-! # Compatible affine étale Čech presentation data
 
-Source: Stacks Project, Tag 099U, finite Čech limit reductions.
+## References
+
+* Stacks Project, Tag 099U
 -/
 
 @[expose] public section
@@ -19,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
 /-- Compatible affine étale approximations of a specified finite Čech nerve.
-The cone identities include every index map, not only the alternating faces.
-Source: Stacks Project, Tag 099U (auxiliary; not a blueprint node). -/
+The cone identities include every index map, not only the alternating faces (Stacks, Tag 099U). -/
 structure CoefficientAffineCechPresentation (X : Scheme.{u})
     {U : Scheme.coefficientProEtaleSiteModel.{u, v} X} {m : ℕ}
     {V : Fin m → Scheme.coefficientProEtaleSiteModel.{u, v} X} {f : ∀ a, V a ⟶ U}

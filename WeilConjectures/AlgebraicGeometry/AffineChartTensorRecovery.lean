@@ -17,7 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Pullback of morphisms in normalized tensor coordinates
 
-Source: Stacks Project, Tags 01I6, 0095 and 0096.
+## References
+
+* Stacks Project, Tags 01I6, 0095 and 0096
 -/
 
 @[expose] public section
@@ -94,27 +96,8 @@ private theorem unitTensor_smul {A B : Type u} [CommRing A] [CommRing B]
   rw [ModuleCat.ExtendScalars.smul_tmul, mul_one]
 
 
-/-- Tensor coordinates detect pullback of a morphism across a scheme square.
-Source: Stacks Project, Tag 01I6, and Tags 0095 and 0096.
-(blueprint: lem-pc-affine-chart-tensor-coordinate-recovery).
-
-Proof: Let d identify v⁎f₀⁎L with l⁎fₓ⁎L using the square equation hv.
-The comparison carries the composite direct pullback unit to the iterated stage
-unit, by composition of the pullback adjunctions. For Q, compare the additive
-maps from B ⊗ₐ Q to sections on V given by d followed after pullback along v
-of e₀N(cQ.inv(1 ⊗ -)), and by pullback along l of eₓN. On 1 ⊗ n, cQ's
-normalization and the unit comparison give equality. On b ⊗ n, semilinearity
-and the ring-map equation move b outside and give the same equality. Tensor
-induction proves equality on every stage tensor. The normalization for P
-identifies the input sections under d.inv. Compare the two claimed sheaf maps
-on pullbacks of eₓM(1 ⊗ m): naturality of the pullback unit, hψ, hτ, the
-Q-coordinate identity and hs give equality. Semilinearity extends to b ⊗ m,
-additivity to every stage tensor, and surjectivity of eₓM to every stage global
-section. Since X₁ is affine and fₓ⁎M is quasi-coherent, affine reconstruction
-and the pullback adjunction determine a morphism from these generator images.
-Thus the two sheaf maps are equal. This proof uses no limit or colimit, no
-existence of comparison models, and no finite-presentation hypothesis. It also
-covers empty affine schemes, zero rings and zero modules. -/
+/-- Tensor coordinates detect pullback of a morphism across a scheme square
+(Stacks, Tags 01I6, 0095 and 0096). -/
 private theorem tensor_coordinate_square
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (r : A →+* B) (r₁ : B →+* C) (r₀ : A →+* C)
@@ -241,16 +224,8 @@ private theorem tensor_coordinate_square
       _ = _ := (pullbackΓ_naturality l s' _).symm
   | add z z' hz hz' => simp only [map_add, hz, hz']
 
-/-- A chart specialization of the tensor-coordinate square criterion.
-Source: Stacks Project, Tag 01I6, and Tags 0095 and 0096.
-(blueprint: lem-pc-affine-chart-tensor-coordinate-recovery).
-
-Proof: Form the canonical lift from the iterated chart to the direct chart.
-Its second-projection equation is the square equation for the two maps to U(a).
-Apply the tensor-coordinate square criterion proved above. Its comparison is
-exactly the comparison in chartOrdinaryMapRecovery. The criterion proves the
-section identity by tensor induction, pullback-unit composition and affine
-quasi-coherent reconstruction, as detailed in the preceding proof. -/
+/-- A chart specialization of the tensor-coordinate square criterion
+(Stacks, Tags 01I6, 0095 and 0096). -/
 theorem affine_chart_tensor_coordinate_recovery
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     (r : A →+* B) (r₁ : B →+* C) (r₀ : A →+* C)

@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit
 
 /-! # Compatibility of the canonical single-open direct-image comparison
 
-Source: Stacks Project, Tags 08FE, 0D5T and 08BV.
+## References
+
+* Stacks Project, Tags 08FE, 0D5T and 08BV
 -/
 
 @[expose] public section
@@ -91,29 +93,8 @@ private theorem cancel_into_right_adjoint
     congrArg (fun v ↦ (a.homEquiv A N).symm v) h
 
 /-- The canonical single-open comparison commutes with restriction for any
-inclusion W ≤ U, before taking a biproduct or a signed difference.
-Source: Stacks Project, Tags 08FE and 0D5T, their K-injective and composition
-comparisons; Tag 08BV, the restriction arrow in the displayed sequence of complexes.
-
-Proof: Each nested restriction mate composes with the U-unit to the W-unit.
-This follows by naturality of the exact nested-restriction comparison and the
-left triangle identity of the U-adjunction. Open direct image is fully faithful
-and preserves K-injectives, since it is right adjoint to exact open restriction.
-Consequently its right derived functor is fully faithful. The U-restriction of
-the derived U-unit is therefore invertible. Restrict further to W and conjugate
-by schemeDerivedOpenRestrictionCompIso to see that W-restriction of the U-unit
-is invertible as well. By schemeMVOpenComparison_unit, the direct image of the
-X-unit, followed by the comparison at U, is the Y-unit. Applying W-restriction
-and cancelling that invertible comparison shows that W-restriction of the direct
-image of the X-unit is invertible. The W-adjunction Hom equivalence now permits
-cancellation of this direct image of the X-unit in maps into the W-direct-image
-object. After precomposition by it, the left side is the direct image of the
-X-unit at W, followed by its comparison, hence the Y-unit at W. The right side
-is the Y-unit at U followed by the Y-restriction mate, hence the same Y-unit at W.
-This proves the equality. It does not require a cover, a biproduct or a sign.
-For W=U the same argument reduces to the triangle identity; for W empty the
-right-adjoint target vanishes, and cancellation remains valid.
-(blueprint: lem-pc-derived-mayer-vietoris-open-comparison-restriction). -/
+inclusion W ≤ U, before taking a biproduct or a signed difference
+(Stacks, Tags 08FE, 0D5T and 08BV). -/
 theorem schemeMVOpenComparison_restriction
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

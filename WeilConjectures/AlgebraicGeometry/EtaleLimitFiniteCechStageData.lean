@@ -18,7 +18,9 @@ set_option linter.unusedVariables false
 
 /-! # Canonical descended finite Čech comparison
 
-Source: Stacks Project, Tags 09YN, 09YP and 09YQ.
+## References
+
+* Stacks Project, Tags 09YN, 09YP and 09YQ
 -/
 
 @[expose] public section
@@ -70,32 +72,7 @@ private theorem pasting_fst {X Y Z : Scheme.{u}} (q : X ⟶ Y) (r : Y ⟶ Z)
   simp [MorphismProperty.Over.pullbackComp_inv_app_left]
 
 /-- Descend a finite covering and construct its canonical complex diagram and cocone.
-Source: Stacks Project, Limits, Tags 01ZM (spreading out), 07RP (étaleness), 07RR
-(surjectivity); Étale Cohomology, Tag 09YQ; Sites, Tag 09YN; Cohomology on Sites,
-Tag 09YP, proof of lemma-colimit.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-stage-data).
-
-Proof: The qcqs étale objects U and V_k have finite presentation over the qcqs base.
-Spread out these objects and the finite family of arrows. Descend étaleness using 07RP.
-Apply 07RR to the finite disjoint union of the covering arrows to make the family
-jointly surjective at a common stage i₀. Choose the resulting U₀, V₀, f₀ and their
-base-change isomorphisms eU, eV; their arrow equation is part of descent. All later
-families are the actual pullbacks B_j(U₀), B_j(V₀), B_j(f₀), hence remain covering.
-The products W₀ over U₀ pull back to the products over Uj and U. Their isomorphisms
-are the unique maps preserving each projection, as required by the eNj and eNlim
-equations. Pullback pasting constructs γ and δ; their first-projection equations
-uniquely prescribe them, since their other projection is fixed in the étale category.
-In degree n define A_j to be the product of the sections F_j on the stage nerve.
-For every arrow a, prescribe its tuple component by the unit for D(a.op), followed
-by φ_a and the inverse of γ. Define the cocone tuple component by the unit for π_j,
-then eG_j inverse, L.ι_j, and the inverse of δ. These are precisely the last two
-equations. Naturality of the units and the coefficient maps with respect to every
-nerve projection commutes with the face maps, hence with the alternating differential.
-The coefficient identity and composition equations, pullback uniqueness, and hG
-then prove the functor and cocone laws. Take eA and eK to be the resulting complex
-identifications. No section-continuity isomorphism or colimit universal property is
-asserted here; these belong to the separate colimit theorem. Empty K gives empty
-products of section groups; the same formulas define zero complexes. -/
+(Stacks, Tags 01ZM, 07RP, 07RR, 09YQ, 09YN and 09YP) -/
 theorem exists_etale_limit_finite_cech_stage_data
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

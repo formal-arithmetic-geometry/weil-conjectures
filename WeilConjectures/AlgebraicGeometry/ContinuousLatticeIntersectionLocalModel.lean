@@ -24,18 +24,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The canonical intersection is locally the kernel of an integral matrix whose
-rationalization is surjective.
-Source: Bhatt--Scholze, Lemma 6.8.13, finite-etale descent of integral structures;
-the intersection and bounded-denominator matrix argument is an agent variant.
-(auxiliary; not a blueprint node)
-
-Proof. Use the rational matrix model on compact covering schemes. Clear its finite
-matrix of denominators. The localization unit of a standard finite free integral
-module is monic, and multiplication by a power of ℓ is invertible on rational
-modules. Thus the kernel of the integral adjoint of the rational matrix is
-isomorphic to the kernel of its integral numerator. The latter still rationalizes
-to a surjection. Compose this kernel isomorphism with the supplied local model.
-Empty pieces and rank-zero matrices are included in the same constructions. -/
+rationalization is surjective (Bhatt–Scholze, Lemma 6.8.13). -/
 theorem continuousLatticeIntersection_localModel
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (X : Scheme.{u})

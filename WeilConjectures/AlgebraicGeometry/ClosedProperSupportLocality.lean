@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ProperMorphismFpqcDescent
 /-!
 # Base change and étale descent of closed proper supports
 
-Source: Stacks Project, Tags 0CYP and 0F4J
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0CYP and 0F4J
 -/
 
 @[expose] public section
@@ -27,24 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- Closed subsets proper over the base remain proper after any base change, and
 properness descends along any jointly surjective étale family. No quasi-compactness
-of the ambient morphism, base, or covering members is assumed.
-Source: Stacks Project, Tags 0CYP and 0F4J.
-(auxiliary; not a blueprint node)
-
-Proof:
-1. Give `C` its reduced induced closed structure with immersion `i`. Pull `i` back
-   along `T ×[S] S' → T`. The range formula `Scheme.Pullback.range_snd` identifies
-   the resulting closed immersion's image with the inverse image of `C`.
-2. Paste this pullback square with the square defining `T ×[S] S'`. Properness is
-   stable under this base change. Independence of the chosen closed structure
-   (`closed_subset_proper_over_base_properties`) proves the first clause.
-3. Regard the jointly surjective étale family as a cover of the identity object in
-   the small étale site and apply `fpqcCover_of_smallEtaleCover`. By independence
-   of closed structure, each pulled-back closed subscheme from step 1 is proper.
-4. The pasted squares identify these morphisms with the canonical base changes of
-   `i ≫ p`. Transport properness across their canonical isomorphisms and apply
-   `isProper_of_fpqc_cover`. This is precisely properness of `C` over `S`.
--/
+of the ambient morphism, base, or covering members is assumed (Stacks, Tags 0CYP and 0F4J). -/
 theorem closed_proper_support_locality
     {T S : Scheme.{u}} (p : T ⟶ S) [LocallyOfFiniteType p]
     (C : TopologicalSpace.Closeds T) :

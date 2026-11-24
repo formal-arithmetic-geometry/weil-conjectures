@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueTransport
 
 /-! # Fixed residue pullback data
 
-Source: Stacks Tags 03A0 and 03CY.
+## References
+
+* Stacks Project, Tags 03A0 and 03CY
 -/
 
 @[expose] public noncomputable section
@@ -62,9 +64,8 @@ attribute [local instance 40000] modelAbelian fixedAbelian standardDerived
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
 /-- Pure inverse image of a fixed-scalar residue, followed by the actual small-site
-and constant-ring equivalences. No completed coefficient ring occurs in this functor.
-Source: Stacks Tags 03A0 and 03CY
-(auxiliary; not a blueprint node). -/
+and constant-ring equivalences. No completed coefficient ring occurs in this functor
+(Stacks, Tags 03A0 and 03CY). -/
 def sfbFixedResiduePull {X S : Scheme.{u}} (i : S ⟶ X)
     (k : Type (u + 1)) [CommRing k] :
     Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) ⥤

@@ -15,8 +15,9 @@ import Mathlib.RingTheory.Support
 
 /-! # Support of a coherent affine map invertible off a closed set
 
-Source: Stacks Project, Lemma 01Y9 and the last paragraph of Lemma 088B.
-(blueprint: lem-weil-pbc-coherent-affine-map-support-radical)
+## References
+
+* Stacks Project, Tags 01Y9 and 088B
 -/
 
 @[expose] public section
@@ -72,23 +73,8 @@ private theorem bijective_app_of_restrict_iso
     (E.map ((SheafOfModules.overFunctor X.ringCatSheaf V).map c))
 
 /-- A coherent map invertible outside V(L) has affine section kernel and cokernel
-whose annihilator radicals contain L. This involves no formal system or proper map.
-
-Source: Stacks Project, Lemma 01Y9, its affine support criterion (Algebra, Lemma 00L6),
-and the last paragraph of Lemma 088B.
-(blueprint: lem-weil-pbc-coherent-affine-map-support-radical)
-
-Proof: Kernels and cokernels of coherent maps over the Noetherian Spec R are
-coherent. Restriction to an open is exact. Thus the hypothesis makes both vanish
-on the complement of V(L), so their supports lie in V(L). On an affine, sections
-are exact on quasi-coherent modules, and identify these sheaf kernels and cokernels
-with the linear kernel and quotient by the range of the section map. Coherence
-makes these finite R-modules; their supports are V of their annihilators. The
-zero-locus containment V(Ann) subset V(L) is equivalent to L subset radical(Ann).
-The zero ring causes no exception: its spectrum and all modules are zero. L = 0
-makes the asserted inclusions automatic, and L = top says c itself is invertible,
-so both section kernel and cokernel are zero with unit annihilators.
--/
+whose annihilator radicals contain L. This involves no formal system or proper map
+(Stacks, Tags 01Y9, 00L6 and 088B). -/
 theorem coherentAffineMap_support_radical
     (R : Type u) [CommRing R] [IsNoetherianRing R] (L : Ideal R)
     (A D : CoherentModules (Spec (CommRingCat.of R))) (c : A.obj ⟶ D.obj)

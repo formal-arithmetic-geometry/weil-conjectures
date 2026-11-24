@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalCone
 
 /-! # Compatibility of terminal section identifications
 
-Source: Stacks Project, Tags 03S2, 03CB and 03CC.
-(blueprint: lem-weil-pbc-sets-terminal-transition).
+## References
+
+* Stacks Project, Tags 03S2, 03CB and 03CC
 -/
 
 @[expose] public section
@@ -83,21 +84,8 @@ private lemma terminalRestriction_unit
         simp [d, e, MorphismProperty.Over.mapPullbackAdj]
         rfl
 
-/-- Source: Stacks Project, Tag 03S2 and Sites Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-sets-terminal-transition).
-
-Proof: First prove the restriction-unit equation for an arbitrary site morphism
-`f : V ⟶ U`. Postcompose with the restriction isomorphism at the terminal object
-of `V`. Its naturality at the diagonal lift moves it past diagonal restriction.
-The restriction-unit equation then replaces the unit with restriction along the
-first pullback projection. This projection composed with the diagonal lift is
-`f.left`, by `pullback.lift_fst`. The terminal-object identification has identity
-underlying map, so functoriality of `H` gives `H.obj.map f.op`. Cancel the terminal
-restriction isomorphism. Finally apply `etaleSetTerminalCone` with `T = V.left`,
-`p = V.hom`, `t = f.left`, `t₀ = r.left`, using the over-morphism equations for
-both structure maps. Substitute the proved restriction-unit equation and
-reassociate. This gives the displayed equation, including identities and empty
-schemes. -/
+/-- The terminal restriction isomorphisms are compatible with restriction along `f : V ⟶ U`
+(Stacks, Tags 03S2, 03CB and 03CC). -/
 theorem etaleSetTerminalTransition
     {R : Scheme.{u}} (H : Sheaf R.smallEtaleTopology (Type (u + 1)))
     (U V W : R.Etale) (f : V ⟶ U) (q : U ⟶ W) (r : V ⟶ W)

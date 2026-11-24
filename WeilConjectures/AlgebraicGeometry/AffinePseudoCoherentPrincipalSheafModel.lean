@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.AffinePrincipalSheafComplexTransport
 import WeilConjectures.AlgebraicGeometry.AffineFiniteFreeSheafComplexLift
 
 /-! A finite-free witness for the local principal-open pseudo-coherence comparison.
-(blueprint: lem-pc-affine-pseudo-coherent-principal-sheaf-model)
 -/
 
 @[expose] public section
@@ -26,36 +25,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- A finite-free module complex whose associated sheaf is the principal-open model.
-Source: Stacks Project, Tag 08E7, converse proof, local-model comparison.
-(blueprint: lem-pc-affine-pseudo-coherent-principal-sheaf-model).
-
-Proof:
-Restrict P and the given derived isomorphism along D(f) ≤ U. Open restriction is
-exact, hence computes derived restriction termwise and preserves zero objects.
-It preserves free sheaves of each finite rank. Identify D(f) with Spec(A_f),
-transporting sheaves of modules along this scheme isomorphism and the equivalence
-between the localized open site and the open subscheme. These equivalences are
-exact and induce equivalences between the chosen derived categories, independently
-of their morphism universes. For each degree at or below the supplied bound choose
-an identification of the transported term with a finite free sheaf. Take E in that
-degree to be the free A_f-module of the same rank. In degrees above the bound take
-the zero module and use the zero-object identification instead. The tilde/Gamma
-adjunction identifies these associated sheaves with the transported terms of P.
-Full faithfulness of tilde lifts every differential; its faithfulness proves the
-square-zero equations and gives an isomorphism of associated-sheaf complexes.
-Thus E is strictly bounded above and all its terms are finite and free.
-The principal-open sections formula for tilde identifies restriction of tilde N
-with tilde(A_f tensor_A N), naturally in N: on each smaller principal open both
-sections are the same further localization, with the same localization maps.
-Apply this natural comparison to M and its differentials. Compose its derived
-isomorphism with the restriction of hiso and with the inverse of the associated
-sheaf identification of E to obtain the displayed sheaf-derived isomorphism.
-If D(f) is empty, A_f is the zero ring, all modules and sheaves in question are
-zero, and E can be the zero complex. Rank zero, f a unit, and arbitrary integer
-upper bounds require no extra hypotheses. No module-derived isomorphism is
-asserted here; reflection through the affine derived equivalence is a separate
-step in the importing theorem. -/
+/-- A finite-free module complex whose associated sheaf is the principal-open model
+(Stacks, Tag 08E7). -/
 theorem affine_pseudoCoherent_principal_sheaf_model (A : Type u) [CommRing A]
     [HasDerivedCategory.{wX}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

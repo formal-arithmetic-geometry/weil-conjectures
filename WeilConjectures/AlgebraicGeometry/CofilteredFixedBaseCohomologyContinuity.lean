@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Presentable.Directed
 
 /-! # Continuity for a supplied fixed-base cohomology cocone
 
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ), and Tag 0032.
+## References
+
+* Stacks Project, Tags 09YQ and 0032
 -/
 
 @[expose] public section
@@ -27,35 +29,8 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency false
 
 /-- The canonical cocone of fixed-base cohomology is a colimit. This asserts only the
-universal property for supplied diagram and cocone data; it does not construct them.
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ), and Tag 0032.
-(blueprint: lem-weil-pbc-cofiltered-fixed-base-cohomology-continuity)
-
-Proof:
-1. Choose a small nonempty directed partial order A and a final functor A to J opposite
-   by the cofiltered limit directed reindexing lemma (Stacks 0032). Its opposite is
-   initial, so whiskering c gives a limit cone with the same point. The reindexed
-   schemes are qcqs and their transition maps are affine by the given instances.
-2. At a stage take the inverse image of G along the structure map to S. The inverse
-   of upperStarComp gives the sheaf transition map, using naturality of pi. The
-   unit and associativity coherence of inverse-image composition give its identity
-   and composition laws. The hypotheses hH identify the reindexed H with its
-   canonical cohomology diagram.
-3. On the limit use the constant diagram with value t inverse image G. The equations
-   ht and upperStarComp identify this diagram with the pulled-back stage sheaves.
-   Associativity coherence gives compatibility of these identifications with the
-   transitions. A nonempty directed category is connected, so the identity cocone
-   on this constant diagram is a colimit of the limit sheaves.
-4. Apply nonempty_isColimit_etale_cohomology_of_isLimit (Stacks 09YQ) to this reindexed
-   system and this constant sheaf colimit. Its specified comparison legs are exactly
-   the right sides of hB. Thus the whiskering of B is a colimit cocone.
-5. Finality reflects the colimit universal property of B, giving the result on J
-   opposite. The isomorphisms eH and eB only transport objects and do not change this
-   property. Neither the source theorem nor this argument requires torsion.
-
-Edge cases: the index is nonempty by cofilteredness; the one-object case reduces to
-an isomorphism cocone. Zero sheaves, empty schemes and degree zero require no changes.
--/
+universal property for supplied diagram and cocone data; it does not construct them
+(Stacks, Tags 09YQ and 0032). -/
 theorem nonempty_isColimit_cofiltered_fixed_base_cohomology
     {J : Type u} [SmallCategory J] [IsCofiltered J] {S : Scheme.{u}}
     (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)

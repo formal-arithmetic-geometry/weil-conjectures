@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 /-!
 # Subsheaves of constructible module sheaves on Noetherian schemes
 
-Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, and Stacks Project,
-Proposition 59.74.1(3), Tag 03RY
-(blueprint: lem-weil-pbc-constructible-subobjects-noetherian).
+## References
+
+* Stacks Project, Tag 03RY
 -/
 
 @[expose] public section
@@ -28,16 +28,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Every subsheaf of a constructible sheaf of modules over a finite commutative ring
-on the small etale site of a Noetherian scheme is constructible.
-Source: Stacks Project, Proposition 59.74.1(3), Tag 03RY
-(blueprint: lem-weil-pbc-constructible-subobjects-noetherian).
-
-Proof:
-Compare finite constant-value constructibility with `IsConstructibleSheaf` using
-`isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf`. A finite commutative ring is Noetherian.
-Apply `constructible_of_mono_noetherian`, whose proof uses generic constancy of
-module subobjects followed by Noetherian induction on closed subsets, and convert
-back with the same comparison. -/
+on the small etale site of a Noetherian scheme is constructible (Stacks, Tag 03RY). -/
 theorem isConstructibleEtaleModuleSheaf_of_mono_noetherian
     {T : Scheme.{u}} [IsNoetherian T] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     {G F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}

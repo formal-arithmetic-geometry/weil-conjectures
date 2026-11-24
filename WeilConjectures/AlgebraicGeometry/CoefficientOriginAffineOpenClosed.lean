@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Affine open-closed gluing of coefficient-sized etale origin
 
-Source: Stacks Project, proetale.tex, Tag 09AK, proof of lemma-compare-constructible.
+## References
+
+* Stacks Project, Tag 09AK
 -/
 
 @[expose] public noncomputable section
@@ -157,31 +159,7 @@ private theorem fixed_extensions (X : Scheme.{u})
     eP.counitIso.app S.X₂⟩⟩
 
 /-- Etale origin glues from the complementary open and closed subschemes of an
- affine scheme, with coefficients of independent size.
-Source: Stacks Project, Tag 09AK, proof of lemma-compare-constructible, the open-closed
-short exact sequence; Tag 09AH, lemma-ses-associated-to-open
-(auxiliary; not a blueprint node).
-
-Proof: let eta:F -> i_*i^*F be the unit of the canonical fixed-module adjunction.
-The localization-kernel lemma makes eta epic and puts its kernel in the etale
-comparison essential image from the hypothesis on j^*F. Closed direct image
-preserves etale origin, so i_*i^*F is in that image by the hypothesis on i^*F.
-The canonical kernel sequence is therefore short exact with both endpoints in
-the image.
-
-To prove closure under extensions, first work with intrinsic constant-ring
-modules. Exactness of comparison and the existing injective-acyclicity statement
-make its bounded-below derived adjunction unit invertible. Lift the connecting
-arrow of the single-complex triangle through this fully faithful functor and
-complete it to a distinguished triangle. Its image has the same endpoints and
-connecting map as the original triangle, so their middle objects are isomorphic.
-Apply zeroth homology and its comparison isomorphism to obtain an antecedent for
-the original middle sheaf. Transfer this assertion through the constant-scalar
-equivalences, and apply it to the kernel sequence above. No concentration assertion
-for the lifted middle complex is needed. All module values remain in max v (u+1).
-Empty endpoint schemes, the zero ring, and full-image nonisomorphic closed
-immersions use the same unit, kernel and triangle constructions.
--/
+affine scheme, with coefficients of independent size (Stacks, Tags 09AK, 09AH). -/
 theorem coefficientFixed_essImage_affine_openClosed
     (A : Type (max v (u + 1))) [CommRing A]
     {X Z U : Scheme.{u}} [IsAffine X] (i : Z ⟶ X) (j : U ⟶ X)

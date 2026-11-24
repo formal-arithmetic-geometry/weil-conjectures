@@ -14,8 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Mono part of affine-basis section resolution comparison
 
-Source: Stacks Project, Tag 08C2, singleton cover; Tag 071B, compatible resolution tower.
-(blueprint: lem-sc-affine-basis-sections-resolution-homology-mono).
+## References
+
+* Stacks Project, Tags 08C2 and 071B
 -/
 
 @[expose] public section
@@ -73,30 +74,7 @@ private theorem shortComplexTheta_naturality {X : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The section resolution map induces a monomorphism on homology in each degree.
-Source: Stacks Project, Tag 08C2, lemma-alternating-cech-complex-complex-ss,
-and Tag 071B, lemma-K-injective.
-(blueprint: lem-sc-affine-basis-sections-resolution-homology-mono).
-
-Proof: Use the cokernel and homology vanishing assumptions at W = V. The opcycle
-sequence 0 -> H^j(F) -> coker(d^(j-1)) -> im(d^j) -> 0 and its long exact
-cohomology sequence give positive-cohomology vanishing of the boundaries.
-The cycle sequence 0 -> im(d^(j-1)) -> ker(d^j) -> H^j(F) -> 0 then gives
-positive-cohomology vanishing of the cycles. In particular the incoming kernel
-and image at degree n have zero first module cohomology on V, using the
-ordinary/module cohomology comparison and exact open restriction.
-Apply the short-complex section comparison to F.sc n: the adjunction-normalized
-comparison from presheaf homology to underlying sheaf homology is invertible
-at V. Its naturality follows from naturality of the sheafification homology
-isomorphism and of the adjunction counit. Since i is a quasi-isomorphism, the
-map on sheaf homology is invertible. Thus the naturality square identifies the
-section homology map followed by the target comparison with a composite of
-isomorphisms. Cancellation gives monicity without requiring invertibility of
-the target comparison. Finally exact presheaf evaluation commutes naturally
-with homology, giving the asserted native module-valued map. The module-to-group
-forgetful functor reflects invertibility in the source comparison. No tower,
-boundedness, termwise acyclicity, or K-injectivity is needed for this mono proof;
-the original hypotheses are retained. Empty opens and all integer degrees are
-included. -/
+(Stacks, Tags 08C2 and 071B). -/
 theorem affineBasisSections_resolution_homology_mono
     (X : Scheme.{u}) (V : X.Opens) (hV : IsAffineOpen V)
     (F J : CochainComplex X.Modules ℤ) [J.IsKInjective]

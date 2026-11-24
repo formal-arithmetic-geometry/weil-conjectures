@@ -16,9 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ClopenRankStratumModuleProjector
 
 /-! # The derived summand cut out by a clopen rank stratum
 
-Source: the rank-idempotent construction in steps 1--2 of
-`lem-sc-clopen-rank-strata-homology-lift`; Stacks Tag 00EE (clopen idempotents).
-(blueprint: lem-sc-clopen-rank-stratum-derived-projector)
+## References
+
+* Stacks Project, Tag 00EE (clopen idempotents)
 -/
 
 @[expose] public section
@@ -86,32 +86,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A rank stratum cuts out a retract of every derived direct-image-algebra module.
 Its homology vanishes whenever the original homology is supported on a different
 stratum. Maps from modules on the chosen stratum are fixed by the homology projector.
-This statement constructs the summand, without a concentration hypothesis or a map
-from a single complex.
-
-Source: steps 1--2 of `lem-sc-clopen-rank-strata-homology-lift`, expanding the
-rank-idempotent argument of `lem-sc-clopen-rank-strata-formality`; Stacks Tag 00EE.
-(blueprint: lem-sc-clopen-rank-stratum-derived-projector)
-
-Proof: The fiber U_q of r is clopen. Take the unique global section of O_Z which
-restricts to 1 on U_q and 0 on its complement. Its direct image is a central
-idempotent of i_*O_Z. On a cochain representative C of K, multiplication by this
-section is a chain idempotent. Construct its image submodule sheaf in each degree;
-restriction maps and differentials preserve these images. Call the image complex
-C_q. Multiplication by the idempotent factors as a projection C to C_q followed by
-the inclusion C_q to C, and their composite on C_q is the identity. Apply Q and
-transport along Q(C) isomorphic to K to obtain L, inclusion and projection.
-The image functor is exact: the decomposition M = eM plus (1-e)M is natural in M,
-and kernels and cokernels split into the same two summands. Consequently H^m(C_q)
-is the e-image of H^m(C). On a module pushed forward from U_k with k different
-from q, e acts by zero: the fibers are disjoint, and the module has zero sections
-on their complementary clopen component. The same remains true after direct image
-along i. The e-image of this homology is therefore zero. On a module from U_q,
-e acts by the identity. Every module-linear map from such a module commutes with
-e, so composing it with the homology projector leaves it unchanged. These arguments
-also cover empty fibers and arbitrary, possibly infinite, images of r; only one
-idempotent is used. No choice of an arbitrary module from an existence theorem is
-needed: C_q is the termwise image of the explicit multiplication chain map. -/
+(Stacks, Tag 00EE). -/
 theorem clopenRankStratum_derived_projector
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{wA} (SheafOfModules.{u}

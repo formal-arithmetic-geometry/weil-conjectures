@@ -22,9 +22,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # Comparison of affine sheaf Hom transport with module scalar extension
 
-Source: Stacks Project, perfect.tex, Tag 09RE, affine calculation, using Tags
-08EB and 06Z0 for the models and Tag 08DW for pullback.
-(blueprint: lem-pc-affine-perfect-hom-presentation).
+## References
+
+* Stacks Project, Tags 09RE, 08EB, 06Z0 and 08DW
 -/
 
 @[expose] public section
@@ -67,39 +67,8 @@ private theorem affinePresentation_Q_map_surjective
   simpa using h
 
 /-- A perfect pair on an affine scheme admits a module-derived Hom presentation,
-compatible with both finite-stage transport and transport to the limit.
-This is a comparison theorem only: it asserts neither bijectivity of the colimit
-comparison nor descent of morphisms or homotopies.
-
-Source: Stacks Project, perfect.tex, Tag 09RE, affine part of the proof of
-lemma-descend-homomorphisms; Tags 08EB, 06Z0 and 08DW.
-(blueprint: lem-pc-affine-perfect-hom-presentation).
-
-Proof: Set J = {j | i ≤ j} with initial stage o = i. Write Y = Spec B using
-Y.isoSpec, and form the diagram F(j) = B tensor over R(i) with R(j). Tensor
-extension preserves the filtered ring colimit; the colimit of F is therefore
-B tensor over R(i) with c.pt. Identify these spectra with the chosen pullbacks
-by their universal properties. Perfectness implies quasi-coherent cohomology.
-Transport P and Q along this scheme isomorphism using its exact derived
-equivalence; the localized-site equivalences preserve their perfectness and
-quasi-coherence. The affine bounded-projective criterion supplies bounded
-finite-projective models E and K. The initial ring B tensor over R(i) with R(i)
-is canonically B, so transport the models through this ring isomorphism.
-Their flat terms compute derived scalar extension without
-resolutions. The affine quasi-coherent derived equivalence is fully faithful,
-and its termwise tilde comparison and derived-pullback tilde comparison give
-equivalences between module-derived and sheaf-derived Hom sets at every stage
-and at the limit. Take H to be the module-derived Hom diagram on the tail above o,
-and d its canonical scalar-extension cocone, whose vertex is the module-derived
-Hom at colimit F. Thus ident and e can be the identity equivalences. Chain-map
-scalar extension gives the two module compatibility equations. Conjugating by
-the tilde and pullback comparisons gives stage and limit. Naturality of tilde
-base change and the counit-pinned derived composition comparison identify these
-conjugations with perfectStageMap and perfectLimitMap, giving the final two
-equations. The identity and composition laws for scalar extension make H a
-functor and d a cocone. None of this uses morphism or homotopy descent. For the
-zero ring the module and sheaf categories are zero and the same construction
-works. The tail is inhabited by o, even if I is otherwise only a preorder. -/
+compatible with both finite-stage transport and transport to the limit
+(Stacks, Tags 09RE, 08EB, 06Z0, 08DW). -/
 theorem exists_affinePerfectHomPresentation
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

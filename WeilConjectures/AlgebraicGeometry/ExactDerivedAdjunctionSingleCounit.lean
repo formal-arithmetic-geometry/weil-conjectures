@@ -14,8 +14,9 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # The exact derived adjunction counit on a single complex
 
-Source: Stacks Project, Tag 0AX3, derived trace as an adjunction counit.
-(blueprint: lem-sc-exact-derived-adjunction-single-counit).
+## References
+
+* Stacks Project, Tag 0AX3
 -/
 
 @[expose] public section
@@ -30,17 +31,8 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
   [HasKInjectiveResolutions A] [HasKInjectiveResolutions B]
 
-/-- The single comparison for an exact right adjoint preserves the derived counit.
-Source: Stacks Project, Tag 0AX3, trace-map counit comparison
-(blueprint: lem-sc-exact-derived-adjunction-single-counit).
-
-Proof: Apply the factorization formula for the counit of the localized adjunction
-at the homotopy image of L[0]. Replace the exact right-derived unit by the inverse
-localization comparison, using its uniqueness factorization. The counit of the
-homotopy adjunction is the quotient of the termwise counit. The single comparisons
-identify this termwise counit with the single of the underived counit, by naturality
-in the sole nonzero degree. Cancel the invertible exact-functor comparisons to obtain
-the displayed equality. No faithfulness, nonzero object or boundedness is needed. -/
+/-- The single comparison for an exact right adjoint preserves the derived counit
+(Stacks, Tag 0AX3). -/
 theorem exact_derivedAdjunction_single_counit {T : A ⥤ B} {H : B ⥤ A}
     [T.Additive] [H.Additive]
     [PreservesFiniteLimits T] [PreservesFiniteColimits T]

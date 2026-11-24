@@ -41,22 +41,7 @@ private theorem compactModelAffineLineExchange_aux
     (fun _ _ _ _ _ sq' _ _ ↦ projectiveLineExceptionalBaseChange Λ S sq')
 
 /-- The canonical exceptional exchange for an affine-line projection over an affine base,
-with finite field coefficients.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism--6, affine-line model case,
-and lem-asd-smooth-generic-direct-image.proof.md, relative dual base-change step.
-(auxiliary; not a blueprint node).
-
-Proof: Compactify the affine line by the projective line. The projective-line adjunction
-identifies its exceptional inverse image with inverse image tensored with the Tate line
-and shifted by two. Its counit is the trace pairing, and its unit comes from the supported
-diagonal class. Both the trace and the supported diagonal class commute with arbitrary
-base change, so the counit equation defining the mate of inverse compact exchange
-identifies that mate with the inverse-image and Tate-line comparison, an isomorphism.
-For the open affine chart, exceptional restriction equals ordinary restriction; its mate
-is the usual inverse-image composition isomorphism. Pasting these two adjunctions proves
-invertibility of the canonical affine-line mate. This applies to arbitrary complexes,
-including zero, and an empty base gives the unique map in the zero derived category.
-The map is the compactification-defined canonical exchange, not a chosen isomorphism. -/
+with finite field coefficients. -/
 theorem compactModelAffineLineExchange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (_hfield : IsField Λ) :
     AffineLineBaseChange Λ := by

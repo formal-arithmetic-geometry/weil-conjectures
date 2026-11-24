@@ -13,7 +13,9 @@ import WeilConjectures.FieldTheory.EtaleFieldGaloisClassification
 /-!
 # Local realization of equivariant geometric-point maps
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* Stacks Project, Tag 03QR
 -/
 
 @[expose] public section
@@ -26,11 +28,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The singleton at a point of an étale K-scheme is the spectrum of its residue field.
-The base algebra is the canonical map recovered from the residue-field point by Spec.
-Source: Stacks Project, Tag 02GL(1). Discreteness follows from quasi-finiteness over a
-one-point base. The residue-field map is étale, so the extension is finite separable.
-The residue-field point lifts to the singleton open; it is a surjective closed immersion
-into a reduced scheme, hence an isomorphism. -/
+The base algebra is the canonical map recovered from the residue-field point by Spec
+(Stacks, Tag 02GL). -/
 private theorem singleton_chart
     (K : Type u) [Field K] (X : Scheme.Etale (Spec (CommRingCat.of K))) (x : X.left) :
     let i := Spec.homEquiv (X.left.fromSpecResidueField x ≫ X.hom)
@@ -103,19 +102,7 @@ private theorem singleton_chart
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An equivariant geometric-point map is realized on a neighbourhood of each source point.
-Source: Stacks Project, Tag 03QR, finite-spectrum classification in the equivalence proof
-(blueprint: lem-exc-etale-field-point-map-local).
-
-Proof: Take the singleton open U at the given point. By the étale fibre decomposition
-it is Spec L for a finite separable K-extension L. Its geometric points identify with
-K-embeddings L → Ksep and form a nonempty transitive Galois set. Equivariance makes
-their images lie in one orbit, hence in the singleton open Spec L' of the target.
-The finite Galois classification gives a K-algebra homomorphism L' → L whose map on
-embeddings is exactly the restriction of the given equivariant map. Apply Spec,
-transport through the singleton-open isomorphisms, and compose with the target open
-immersion. This gives f, its equality over Spec K, and the displayed identity for
-every geometric point of U. There is no source point to consider for an empty source;
-if the target is empty, existence of the given map excludes any nonempty source. -/
+(Stacks, Tag 03QR). -/
 theorem etaleFieldPointMap_local
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (X Y : Scheme.Etale (Spec (CommRingCat.of K)))

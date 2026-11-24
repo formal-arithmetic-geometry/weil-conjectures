@@ -9,7 +9,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-! # Scalar section comparison along an inverse system
-Source: Stacks Project, Tags 09YN and 09YQ.
+
+## References
+
+* Stacks Project, Tags 09YN and 09YQ
 -/
 
 @[expose] public section
@@ -235,19 +238,7 @@ private theorem section_id
   exact hresult he
 
 /-- The displayed stage maps form a diagram and the limit maps form a cocone.
-Source: Stacks Project, Sites, Tag 09YN, proof of lemma-colimit, and Etale
-Cohomology, Tag 09YQ, inverse-image composition comparisons.
-(blueprint: lem-weil-pbc-etale-limit-scalar-section-map-laws).
-
-Proof: The first-projection equations and the equations over the base determine
-all pullback comparisons uniquely. Pullback uniqueness therefore gives the identity
-and composition laws for gamma and the compatibility of gamma with delta.
-Transpose the stage maps through the inverse-image adjunction. Naturality of its
-unit, the identity and composition assumptions on phi, and the preceding pullback
-laws give the identity and composition equations for rho. Transpose the cocone
-legs in the same way. The transition formula hG and cocone naturality of L then
-give rho followed by mu equal to mu. These calculations use no continuity theorem,
-and remain valid on empty objects and for zero sheaves. -/
+(Stacks, Tags 09YN and 09YQ) -/
 theorem etale_limit_scalar_section_map_laws
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

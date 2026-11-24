@@ -12,7 +12,9 @@ import Mathlib.Algebra.Homology.Refinements
 
 /-! # Injectivity of the first Čech cohomology map
 
-Source: Stacks Project, Cohomology, Lemma 0B8R (blueprint: lem-sc-cech-h1-injective).
+## References
+
+* Stacks Project, Tag 0B8R
 -/
 
 @[expose] public section
@@ -94,19 +96,7 @@ private theorem mono_homology_one_of_column_kernels {C : Type*} [Category C] [Ab
   rw [Category.assoc, ← a.comm, ← Category.assoc, hx, hh]
 
 /-- The canonical map from first Čech cohomology of an open cover to first module
-cohomology is injective. Source: Stacks Project, Cohomology, Lemma 0B8R
-(blueprint: lem-sc-cech-h1-injective).
-
-Proof: take the canonical comparison supplied by `cechH1Map_natural` (Stacks 01EQ).
-For an injective resolution I, the augmentation of Cech cochains into each resolution
-column is its degree-zero kernel, by `moduleCech_resolution_column_zero`. If the image
-of a degree-one cycle is a total boundary, its primitive lies in the sole degree-zero
-summand (0,0). Projection of its differential to (1,0) is zero, so the kernel property
-lifts this primitive to a degree-zero Cech cochain. Projection to (0,1), followed by
-cancellation of the monomorphic column augmentation, identifies its Cech differential
-with the original cycle. Thus H¹(beta) is monomorphic. The defining comparison equation
-factors H¹(beta) through c, so c is monomorphic and therefore injective. This is an
-elementary low-degree chase in the double complex of Tag 01EQ, written by G1. -/
+cohomology is injective (Stacks, Tag 0B8R). -/
 theorem cechH1_injective (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (hcover : iSup U = ⊤) :
     ∃ c : ∀ F : X.Modules,

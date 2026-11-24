@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.GlueComponentTransitionCocycle
 
 /-! # ExistsGluedInvertible
 
-Source: Stacks Project, Varieties Lemma 09NE. -/
+## References
+
+* Stacks Project, Tag 09NE
+-/
 
 @[expose] public section
 universe u v
@@ -50,25 +53,8 @@ private theorem nonempty_iso_of_common_transitions
     simpa only [hP, smul_smul] using hab)
   rw [hQ, smul_smul, hc]
 
-/-- Source: literature/stacks-project/varieties.tex, Varieties Lemma 09NE, proof.
-
-Proof: The proved closed-cover frame construction chooses a point-indexed open cover,
-free frames for each component module on the inverse images of its members, and units
-on overlaps realizing all component frame changes. Distinct cover members overlap
-only outside the union T of component intersections, and diagonal units are one.
-Restrict frame relations to any smaller ambient open. Cancelling a free component
-frame proves the inverse and cocycle identities after restriction to each component.
-Off T the reduced-cover section bijection then proves these identities on Y; if all
-indices coincide they follow from the diagonal units being one. Apply the stated
-Cech transition gluing theorem to obtain N, free frames, and invertibility.
-Pull the frames back to each component. They remain free and have the same transition
-coefficients as the prescribed component frames. The proved common-transition
-comparison glues their frame-preserving isomorphism, using the source library's
-free-generator gluing theorem. Finally identify tensor pullback with the source
-pullback by uniqueness of left adjoints to module pushforward. All constructions
-include empty inverse-image opens. For Y empty the point-indexed cover is empty;
-an empty component index family forces this case by hcover.
-(blueprint: lem-sc-exists-glued-invertible) -/
+/-- Invertible modules on the closed pieces of a finite cover with discrete overlaps glue to an
+invertible module on `Y` (Stacks, Tag 09NE). -/
 theorem existsGluedInvertible
     {Y : Scheme.{u}} [IsReduced Y] {ι : Type v} [Finite ι]
     (Z : ι → Scheme.{u}) (i : ∀ a : ι, Z a ⟶ Y) [∀ a : ι, IsClosedImmersion (i a)]

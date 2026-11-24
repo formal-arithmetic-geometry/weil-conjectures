@@ -18,8 +18,9 @@ correspond to solutions `x : ι → Γ(U, ⊤)` of the equations `f_k(x) = 0`, w
 coefficients are mapped into `Γ(U, ⊤)` by the structure morphism. The bijection is
 natural in `U`.
 
-Source: Stacks Project, Tag 0GKU, proof of lemma-frobenius-linear-on-vb
-(the global-sections/affine-spectrum adjunction and the quotient universal property).
+## References
+
+* Stacks Project, Tag 0GKU
 -/
 
 @[expose] public section

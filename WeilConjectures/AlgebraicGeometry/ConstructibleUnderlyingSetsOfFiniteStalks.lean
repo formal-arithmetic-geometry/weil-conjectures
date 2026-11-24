@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Constructibility after forgetting modules with finite stalks
 
-Source: Stacks Project, Tags 095E and 09Z6.
-(blueprint: lem-weil-pbc-constructible-underlying-sets-of-finite-stalks).
+## References
+
+* Stacks Project, Tags 095E and 09Z6
 -/
 
 @[expose] public section
@@ -57,19 +58,7 @@ private theorem finiteLocallyConstant_underlyingSets {Λ : Type (u + 1)}
     exact Finite.of_equiv M e.toEquiv.symm
 
 /-- Module constructibility and finite geometric stalks imply set constructibility.
-
-Source: Stacks Project, Tags 095E and 09Z6, and the finite-stalk refinement of
-`lem-weil-pbc-finite-pushforward-finite-stalk-module`, step 1.
-(blueprint: lem-weil-pbc-constructible-underlying-sets-of-finite-stalks)
-
-Proof: Retain the source stratification. Forget each module locally constant datum.
-Inverse image commutes with forgetting modules, by filtered left Kan extensions and
-sheafification. The inverse-image stalk comparison identifies every stalk on a
-stratum with a source geometric stalk, hence makes it finite as a set. The
-point-ulift isomorphism reconciles the universes in the hypothesis. Transport local
-constancy and stalk finiteness through the forgetful comparison isomorphism on each
-stratum. This works for empty strata and the zero sheaf and uses no finiteness of the
-coefficient ring. -/
+(Stacks, Tags 095E and 09Z6) -/
 theorem isConstructibleEtaleSheafOfSets_of_finite_module_stalks
     (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

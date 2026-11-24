@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.HomComplexRestrictOpen
 /-!
 # Derived internal Hom commutes with restriction to opens
 
-Source: literature/stacks-project/cohomology.tex, Lemma 08DL
-(blueprint: lem-sc-derived-internal-hom-restrict-open).
+## References
+
+* Stacks Project, Tag 08DL
 -/
 
 @[expose] public section
@@ -35,26 +36,8 @@ noncomputable local instance (X : RingedSpace.{u}) (U : Opens X)
   inferInstanceAs (Category.{w}
     (DerivedCategory (SheafOfModules.{u} ((moduleRings X).over U))))
 
-/-- Restriction of derived internal Hom to an open agrees canonically with the
-internal Hom of the restricted objects.
-
-Source: literature/stacks-project/cohomology.tex, Lemma 08DL.
-Proof:
-1. Represent the second argument by a functorial K-injective resolution
-   (`prop-pur-kinjective-resolutions-exist`); compute Hom using
-   `def-pur-derived-internal-hom`.
-2. By `lem-sc-derived-k-injective-restrict-open`, restriction preserves K-injectives.
-   It is exact, so the restricted
-   resolution computes the restricted derived internal Hom.
-3. By `def-pur-sheaf-hom` and `def-pur-hom-complex`, the sheaf Hom complexes
-   agree termwise after restriction, including products
-   and differentials, giving an isomorphism in the derived category.
-4. Pass the complex isomorphism to the derived category. Its components restrict
-   local maps, so it is natural in both arguments and successive open inclusions.
-   Representative and resolution independence follows from
-   `def-pur-derived-internal-hom`.
-(Uses `def-pur-derived-internal-hom` and the open restriction K-injective lemma.)
-(blueprint: lem-sc-derived-internal-hom-restrict-open). -/
+/-- Restriction of derived internal Hom to an open agrees canonically with the internal Hom of
+the restricted objects (Stacks, Tag 08DL). -/
 theorem derivedInternalHom_restrict_open
     (X : RingedSpace.{u}) (U : Opens X)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

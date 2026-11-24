@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisImageResolutionComp
 
 /-! # DerivedMayerVietorisDirectImageBoundary
 
-Source: Stacks Project, Cohomology, Tags 08BV and 0D5T; Derived Categories of Schemes,
-Tag 0DJ9 (blueprint: lem-pc-derived-mayer-vietoris-direct-image-boundary).
+## References
+
+* Stacks Project, Tags 08BV, 0D5T and 0DJ9
 -/
 
 @[expose] public section
@@ -73,29 +74,8 @@ private theorem mv_degreewise_split (X : Scheme.{u}) (U V : X.Opens)
   exact ⟨((schemeMayerVietorisComplex_shortExact X U V hcover I hI).map_of_exact
     (HomologicalComplex.eval _ _ n)).splittingOfInjective⟩
 
-/-- The explicitly constructed boundary commutes with the recorded direct-image comparisons.
-Source: Stacks Tags 08BV, 0D5T and 0DJ9
-(blueprint: lem-pc-derived-mayer-vietoris-direct-image-boundary).
-
-Proof:
-1. Use the fixed K-injective representative I of E with injective terms. Its concrete
-   Mayer--Vietoris sequence is short exact and split in each degree, since its first
-   term is injective. Its other terms are K-injective: restriction preserves this
-   property, open direct image is right adjoint to exact restriction, and biproducts
-   of K-injective complexes are K-injective.
-2. Apply the termwise-split short-exact-sequence triangle comparison for h_*.
-   It identifies the image boundary, including the commutation with shift, with the
-   boundary of the termwise image sequence.
-3. Resolve h_*I by a K-injective complex J with injective terms. The resolution map
-   and its restrictions induce a map from the image sequence to the Mayer--Vietoris
-   sequence of J. The intersection component is the direct-image composition followed
-   by the inverse open-restriction comparison, by their K-injective computation formulas.
-4. Apply triangleOfSESδ_naturality to this map of short exact sequences. Compose with
-   the resolution isomorphisms and the explicit intersection comparisons used in
-   schemeMVBoundary. Cancel the computation isomorphisms. Naturality of these comparisons
-   and of commutation with shift gives the displayed equation for E. No assertion
-   about the other two triangle squares is used here.
--/
+/-- The explicitly constructed boundary commutes with the recorded direct-image comparisons
+(Stacks, Tags 08BV, 0D5T and 0DJ9). -/
 theorem schemeMV_directImage_boundary
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     (hcover : U ⊔ V = ⊤)

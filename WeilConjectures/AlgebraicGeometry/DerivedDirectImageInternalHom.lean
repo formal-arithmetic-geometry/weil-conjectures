@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 /-!
 # Internal-Hom comparison for derived direct image
 
-Source: Stacks Project, cohomology.tex, Remark remark-projection-formula-for-internal-hom
-(blueprint: lem-pc-sheaf-rhom-projection-formula).
+## References
+
+* Stacks Project, Cohomology, the remark on the projection formula for internal Hom
 -/
 
 @[expose] public section
@@ -50,14 +51,8 @@ variable (H : Cᵒᵖ × C ⥤ C) (J : Dᵒᵖ × D ⥤ D)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 include hx hy in
-/-- Transpose evaluation with fixed natural tensor-Hom bijections.
-The formula at the identity defines each component. Naturality in the test object
-proves its mate equation. Applying the target equivalence to a naturality square,
-then using the source equivalence's naturality, the tensor comparison's naturality,
-and counit naturality proves that the components form a natural transformation.
-Unlike the isomorphism-based helper in GlobalHomAdjunctionIso, this construction
-requires only a natural tensor comparison, which need not be invertible.
-Source: Stacks, Tag 08I3 (blueprint: lem-pc-sheaf-rhom-projection-formula). -/
+/-- Transpose evaluation with fixed natural tensor-Hom bijections, requiring only a natural
+(not necessarily invertible) tensor comparison (Stacks, Tag 08I3). -/
 private theorem internalHomMate_of_tensorComparison :
     ∃ c : H ⋙ R ⟶ R.op.prod R ⋙ J,
       ∀ (L M : C) (A : D) (α : A ⟶ R.obj (H.obj (op L, M))),
@@ -147,8 +142,7 @@ variable {C : Type uC} [Category.{vC} C] [MonoidalCategory C]
     e A' L' M' (a ≫ g ≫ H.map (b.op, d)) = (a ⊗ₘ b) ≫ e A L M g ≫ d)
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Build the tensor-Hom adjunction from the pinned natural bijections.
-Source: Stacks, Tag 08DJ (blueprint: lem-pc-sheaf-rhom-projection-formula). -/
+/-- Build the tensor-Hom adjunction from the pinned natural bijections (Stacks, Tag 08DJ). -/
 private def tensorAdjunctionCore (L : C) :
     Adjunction.CoreHomEquiv (tensorRight L) ((Functor.curry.obj H).obj (op L)) where
   homEquiv A M := (e A L M).symm
@@ -173,24 +167,7 @@ end TensorHomAdjunction
 /-- The natural internal-Hom comparison for `Rf_*`, specified as the mate of evaluation.
 The witnesses `a`, `bX`, `bY` and `t` exhibit the pullback/direct-image adjunction,
 tensor/internal-Hom adjunctions and pullback/tensor comparison. The last equation
-specifies the comparison, rather than merely asserting the existence of some arrow.
-
-Source: Stacks Project, cohomology.tex, Remark remark-projection-formula-for-internal-hom
-(blueprint: lem-pc-sheaf-rhom-projection-formula).
-
-Proof:
-1. Use lem-pc-ringed-spaces-derived-adjoint-general for the adjunction `a` and
-   lem-sc-derived-internal-hom-adjunction for `bX` and `bY`. Evaluation is the counit
-   of the latter adjunctions, equivalently the transpose of the identity of RHom.
-2. For a test object `A` and `α : A ⟶ Rf_* RHom(L,M)`, transpose `α` by `a`, then
-   by `bX`. Use lem-pc-derived-pullback-tensor-product to identify the pullback of
-   `A ⊗ Rf_*L` with `Lf^*A ⊗ Lf^*Rf_*L`. Precompose with identity tensor the
-   counit `Lf^*Rf_*L ⟶ L`. Transpose back by `a` and `bY`. Yoneda constructs the
-   asserted comparison. This is the relative cup product followed by `Rf_*` of
-   evaluation, exactly the construction in the source remark.
-3. All operations are natural; hence the comparison is natural in both `L` and
-   `M`. The displayed equation records its mate construction on every test map.
-   No invertibility of the resulting comparison is asserted. -/
+specifies the comparison, rather than merely asserting the existence of some arrow. -/
 theorem exists_derivedDirectImage_internalHom_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

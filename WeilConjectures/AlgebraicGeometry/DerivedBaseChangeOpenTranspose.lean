@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenComparisonUnit
 
 /-! # Transposition of the canonical base-change map for one open
 
-Source: Stacks Project, Tags 08HY, 08FE and 0D5T.
-(blueprint: lem-pc-derived-base-change-open-transpose).
+## References
+
+* Stacks Project, Tags 08HY, 08FE and 0D5T
 -/
 
 @[expose] public section
@@ -29,26 +30,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Transposing the open base-change component gives restriction of the transposed
-coefficient map followed by the inverse normalized direct-image/open comparison.
-There is only one open; no cover, boundary, short exact sequence or shift occurs.
-Source: Stacks Tags 08HY (remark-base-change), 08FE
-(lemma-restrict-direct-image-open) and 0D5T (lemma-derived-pushforward-composition).
-(blueprint: lem-pc-derived-base-change-open-transpose).
-
-Proof: postcompose both maps with the invertible schemeMVOpenComparison hom.
-Their common target is the open direct image of the restriction of Rg(K').
-Precomposition with the old-open unit is injective on maps into any such right
-adjoint object: transpose under its restriction adjunction and cancel restriction
-of the unit, which is invertible by schemeDerivedOpen_unit_isIso.
-For the first path, naturality of the g Hom equivalence changes precomposition
-with that unit to pullback of the unit before the open component. Apply
-mvOpenBaseChange_unit: this is ψ followed by the new-open unit. Transpose again
-using Hom-equivalence naturality on the right, and apply
-schemeMVOpenComparison_unit. The result is the transpose of ψ followed by the
-old-open unit at Rg(K'). Naturality of the old-open unit gives the same expression
-for the second path. The injectivity and the initial isomorphism cancellation
-prove the equation. Empty and top opens and zero ψ satisfy exactly the same unit
-identities; no SES boundary, composition-mate computation or shift is needed. -/
+coefficient map followed by the inverse normalized direct-image/open comparison
+(Stacks, Tags 08HY, 08FE, 0D5T). -/
 theorem derivedBaseChange_open_transpose
     {X X' : Scheme.{u}} (g : X' ⟶ X) (W : X.Opens)
     (K : schemeDerivedCategory X) (K' : schemeDerivedCategory X')

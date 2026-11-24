@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.InternalHomCounitMateIso
 
 /-! # Derived internal Hom adjunction for pullback and direct image
 
-Source: Stacks Project, Cohomology, Remark 08I3 and Lemmas 079W, 08DJ
-(blueprint: lem-pc-derived-internal-hom-pullback-adjunction).
+## References
+
+* Stacks Project, Cohomology, Tags 08I3, 079W, 08DJ
 -/
 
 @[expose] public section
@@ -30,38 +31,9 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical internal-Hom comparison, its counit composite as a natural isomorphism,
-and its map on zeroth hypercohomology. The witnesses are the adjunction `a`
-(Lg^* ⊣ Rg_*), the tensor/internal-Hom adjunctions `bS`, `bT`, and the pullback--tensor
-comparison `t` (lem-pc-derived-pullback-tensor-product), in the form of the existing
-lem-pc-sheaf-rhom-projection-formula. The first equation specifies gamma as the mate under
-`a` and `bT` of `t.inv` followed by Lg^* of evaluation (the counit of `bS`, the transpose of
-the identity of internal Hom). The isomorphism `d` is the counit composite, `z` is the
-comparison of global sections with pushforward (lem-pc-derived-sections-pushforward-comparison),
-and `eS`, `eT` are identifications H⁰(RHom(L,M)) = Hom(L,M) natural in both variables, as
-in lem-pur-rhom-global-sections; the final equation says the map induced on H⁰ is
-φ ↦ ε_E ∘ Lg^*φ.
-
-Source: Stacks Project, Cohomology, Remark 08I3, Tags 079W and 08DJ
-(blueprint: lem-pc-derived-internal-hom-pullback-adjunction).
-
-Proof:
-1. Obtain `a` from lem-pc-ringed-spaces-derived-adjoint-general, `bS` and `bT` from
-   lem-sc-derived-internal-hom-adjunction, and `t` from
-   lem-pc-derived-pullback-tensor-product. Pull back evaluation, precompose with `t.inv`,
-   transpose by `bT`, then take the mate by `a`; this constructs gamma. Naturality of
-   all the adjunctions and of `t` makes gamma a natural transformation.
-2. Compose gamma with direct image of internal Hom applied to the counit of `a`.
-   Test against any object A on S: tensor/internal-Hom adjunction on S followed by
-   `a` and `t` identifies maps into the source with maps from Lg*A tensor Lg*M into E.
-   The adjunction `a` followed by tensor/internal-Hom adjunction on T identifies maps
-   into the target with that same group. The triangle identities, naturality and the
-   defining evaluation equation make postcomposition the identity under these
-   bijections. Yoneda gives invertibility. All constructions are natural in M and E.
-3. Apply H⁰. Use lem-pur-rhom-global-sections on both schemes and
-   lem-pc-derived-sections-pushforward-comparison on the whole scheme for `z`.
-   Taking the mate and postcomposing with the counit sends a morphism phi to
-   Lg*(phi) followed by the counit, as the last equation records. -/
+/-- The canonical internal-Hom comparison for pullback and direct image, its counit composite
+as a natural isomorphism, and its map on zeroth hypercohomology; the final equation says the
+map induced on `H⁰` is `φ ↦ ε_E ∘ Lg^*φ` (Stacks, Tags 08I3, 079W, 08DJ). -/
 theorem derivedInternalHom_pullback_adjunction
     {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings S.toRingedSpace))]

@@ -11,9 +11,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphProperAmbientSecondSide
 
 /-! # Proper changes of ambient scheme in the explicit graph comparison
 
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, applied to the
-product/intersection formula of `EtaleLocallyClosedGraphModel`.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -45,30 +45,7 @@ private theorem cancel_proper_ambient_boundaries
   rw [hm, ← Category.assoc, h₁]
 
 /-- The explicit graph comparison commutes with a Cartesian proper change of its ambient
-scheme, before any shrinking of the supporting open.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7C (vertical pasting) and 0F7D
-(horizontal pasting); the proper-projection grids of steps 5--7 in
-lem-pur-etale-pairwise-product-graph-normalization.
-(auxiliary; not a blueprint node).
-
-Proof: in the products `s.P ×_Y c.Z` and `t.P ×_Y c.Z`, the map induced by `pr`
-is proper. The supporting neighborhood for `t` is the inverse image of the one
-for `s` by the supplied Cartesian square. The neighborhood for `c` and their
-intersection are also related by Cartesian proper maps. Their proper graph lifts
-are compatible with these maps by the pullback projection equations and `hz`.
-For each supporting neighborhood, expand the side word of the graph comparison.
-Vertical pasting of the normalized proper/open exchange identifies this side word
-with the old side word followed by the proper-projection exchange and direct-image
-compositor. For the intersection word, apply vertical pasting to the graph triangle
-above the proper-projection square and horizontal pasting to the two open inclusions.
-Naturality interchanges the two exchange factors and gives the same projection
-exchange at both ends. Substitute these equations in `B₂⁻¹ R(B₁₂) B₁`.
-The two occurrences of the intersection projection exchange cancel. The remaining
-side factor is precisely the displayed compositor--Cartesian-exchange word.
-Associativity of the canonical direct-image and open compositors supplies the
-parenthesizations shown below. The argument also applies to empty schemes and to
-identity maps; it requires no quasi-compactness of either supporting open. -/
+scheme, before any shrinking of the supporting open (Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleGraphComparisonFromOpen_properAmbient
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

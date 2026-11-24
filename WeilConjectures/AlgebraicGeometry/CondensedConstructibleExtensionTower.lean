@@ -63,22 +63,8 @@ private theorem pushforward_tower
     have h := F.map_distinguished _ hdist
     exact ⟨_, _, _, _, _, h, pushforward_piece ℓ E i A hA, ih B hB⟩
 
-/-- A constructible sheaf is a finite distinguished extension of its locally free pieces.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), noetherian induction.
-(auxiliary; not a blueprint node)
-
-Proof: induct on closed subsets C of T, simultaneously for every closed immersion
-Z → T whose image is contained in C and every constructible module M on Z. Apply the
-one-step decomposition on Z. If M[0] is already a piece, the tower has length zero.
-Otherwise obtain a proper closed immersion i : Z' → Z, a constructible MZ on Z', and
-a distinguished triangle A → M[0] → D(i_*)MZ[0] with A a piece. The image of Z' in T
-is strictly smaller than C: choose a point of Z outside the image of i, then use
-injectivity of the ambient closed immersion to exclude its image from the new closed
-support. Induction supplies a tower for MZ[0]. Exact closed pushforward carries it to a
-tower on Z; on a generator, the single-functor comparison and composition of closed
-pushforwards identify the result with a generator on Z. Mapping each distinguished
-triangle then preserves the tower length. Prepending the displayed triangle adds one
-extension. Apply the induction result at the full support with the identity immersion. -/
+/-- A constructible sheaf is a finite distinguished extension of its locally free pieces
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem exists_condensedConstructible_extension_tower
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

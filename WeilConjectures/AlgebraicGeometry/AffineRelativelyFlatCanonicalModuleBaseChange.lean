@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineAlternatingCechBaseChangeFactoriz
 
 /-! # Affine computation of relatively flat canonical module base change
 
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5;
-Stacks Project, Tag 0A1D, specializing to a module in degree zero.
+## References
+
+* Stacks Project, Tag 0A1D
 -/
 
 @[expose] public section
@@ -53,30 +54,8 @@ private theorem affineAlternatingCechModel_bounded
     (ModuleCat.restrictScalars (((Scheme.ΓSpecIso A).inv ≫ f.appTop).hom) ⋙
       tilde.functor A) hext
 
-/-- Over affine bases the canonical module base-change composite is invertible.
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves--2`, Steps 2--5, and Stacks Tag
-0A1D. (blueprint: lem-pc-affine-relatively-flat-canonical-module-base-change).
-
-Proof: choose a finite ordered affine cover of X. Separatedness over Spec A makes
-all finite intersections affine. Their modules of sections of G are flat over A
-by relative flatness. The finite alternating Cech complex K thus consists of flat
-A-modules and is bounded; its sheafification computes Rf_*G. Use the flat-complex
-counit comparison to compute Lg^* on this complex by ordinary tensor with B.
-For each intersection Spec C, the affine section-pullback isomorphism identifies
-Gamma(G, Spec C) tensor_A B with the sections of the pulled-back module on
-Spec (C tensor_A B). The pure-tensor formula respects restrictions, so these
-isomorphisms commute with the alternating differentials. They identify the tensor
-complex with the Cech complex of the pulled-back cover. The Cech characterization
-of base change identifies its map with the displayed canonical mate followed by
-Rf'_*c. This identifies the map, not merely its source and target. Consequently it
-is a composite of isomorphisms. Derived tensor of G[0] has no positive cohomology,
-and its degree-zero cohomology is ordinary pullback. A map from it to (p*G)[0]
-factors through degree-zero cohomology. Two left-derived counits differ by a natural
-automorphism of Lp*, by right Kan extension uniqueness; on degree-zero cohomology
-this induces an automorphism of p*G. Thus changing the counit changes c by an
-invertible ordinary-target map. Its derived direct image is invertible as well.
-For an empty X the empty Cech complex is zero, and the same argument applies.
-No flatness over O_X is used. -/
+/-- Over affine bases the canonical module base-change composite is invertible
+(Stacks, Tag 0A1D). -/
 theorem canonicalModuleBaseChange_isIso_affine_of_isFlatOver
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

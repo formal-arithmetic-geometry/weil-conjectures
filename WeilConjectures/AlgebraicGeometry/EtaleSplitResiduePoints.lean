@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.RingTheory.RingHom.PurelyInseparable
 /-!
 # Splitting the residue fields of finitely many points by an étale neighborhood
 
-Source: Stacks Project, More on Morphisms, proof of Lemma 02LM, lines 12056--12079.
-(blueprint: lem-weil-pbc-etale-split-residue-points).
+## References
+
+* Stacks Project, Tag 02LM
 -/
 
 @[expose] public section
@@ -89,30 +90,8 @@ private theorem fixed_pair_finite {X U S : Scheme.{u}} {f : X ⟶ S} {g : U ⟶ 
   rw [← Scheme.Hom.comp_apply, Scheme.Pullback.tensorCongr_SpecTensorTo]
   exact Scheme.Pullback.SpecTensorTo_SpecOfPoint w.val
 
-/-- Source: Stacks Project, More on Morphisms, proof of Lemma 02LM, paragraph beginning
-"Let y_{i,j}", and Schemes, Lemma 01JT.
-(blueprint: lem-weil-pbc-etale-split-residue-points).
-
-Proof:
-1. Form the triplet `(x,u,s,hx,hu)`. Its tensor ring is the categorical pushout of
-   the two residue-field maps out of `κ(s)`. The compatibility of `e` identifies this
-   pushout with `L ⊗[κ(s)] κ(x)`, with its factors interchanged. The map from `κ(u)`
-   corresponds to the left tensor inclusion after applying `e.symm`.
-2. Restrict `Scheme.Pullback.carrierEquiv` to points with projections `(x,u)`.
-   The triplet is uniquely determined by those projections; hence this gives an
-   equivalence of that subtype with the spectrum of the tensor ring. Transporting
-   `hcard` across the ring isomorphism proves its finiteness.
-3. For any such point `w`, the kernel of `ofPointTensor w` corresponds to a prime
-   ideal of `L ⊗[κ(s)] κ(x)`. By `hsplit` its quotient is a finite purely inseparable
-   field over `L`. The quotient ring isomorphism transports this assertion to the
-   triplet tensor ring.
-4. Apply the field-quotient clause of `exists_residueField_equiv_ofPointTensor`.
-   Its compatibility with the second tensor inclusion identifies the transported
-   scalar map with the composite in the conclusion. Transport a finite generating
-   family and the purely inseparable power identities along these compatible field
-   isomorphisms to obtain the two assertions for `κ(w)`.
-This does not require `g` to be etale, finite type, or surjective. It also applies
-when `x` is not isolated and when the family from which `x` was chosen has repetitions. -/
+/-- Finiteness of a purely inseparable pullback along a split tensor of residue fields
+(Stacks, Tags 02LM, 01JT). -/
 private theorem finite_purelyInseparable_pullback_of_split_tensor
     {X U S : Scheme.{u}} (f : X ⟶ S) (g : U ⟶ S)
     (s : S) (x : X) (u : U) (hx : f x = s) (hu : g u = s)
@@ -198,23 +177,8 @@ private theorem finite_purelyInseparable_pullback_of_split_tensor
   exact RingHom.IsPurelyInseparable.of_comp_eq_comp' e.bijective θ.bijective hc.symm
     (RingHom.isPurelyInseparable_algebraMap_iff.mpr hpure)
 
-/-- Source: Stacks Project, More on Morphisms, proof of Lemma 02LM,
-lines 12056--12079 (blueprint: lem-weil-pbc-etale-split-residue-points).
-
-Proof:
-1. Transport the finite extensions at `f (x i)` to extensions of `κ(s)` using `hx`.
-   Apply `exists_separable_split_purelyInseparable_prime_quotients` to these fields.
-2. Realize the resulting finite separable extension `L/κ(s)` as the residue field of
-   an étale neighborhood by `Scheme.exists_etale_neighbourhood_prescribed_residueField`.
-   Its compatible field isomorphism transports the tensor products and their prime spectra.
-3. The fibre-product point correspondence identifies points over `(x i,u)` with the primes
-   of `κ(u) ⊗[κ(s)] κ(x i)`. Those spectra are finite; choose bijections with `Fin (m i)`.
-   Each list is injective and exhausts exactly the points over that pair.
-4. Every tensor prime quotient is a finite purely inseparable field over `κ(u)` by step 1.
-   `exists_residueField_equiv_ofPointTensor` identifies it with the point's residue field,
-   compatibly with the second projection, giving the asserted extension properties.
-The empty family requires no points; choose the identity neighborhood. No distinctness or
-isolatedness is needed: only the individual finite residue extensions are used. -/
+/-- There is an étale neighbourhood of `s` splitting the residue points `x i` of `f`
+(Stacks, Tag 02LM). -/
 theorem exists_etale_split_residue_points
     {X S : Scheme.{u}} (f : X ⟶ S) (s : S) (n : ℕ) (x : Fin n → X)
     (hx : ∀ i, f (x i) = s)

@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRestrictedSectionsInclusionMono
 
 /-! # Degreewise restricted sections comparison
 
-Source: Stacks Project, Tag 015J, proof remark (3), column filtration.
+## References
+
+* Stacks Project, Tag 015J
 -/
 
 @[expose] public section
@@ -23,23 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The degree-n factorization of the restricted sections inclusion is invertible.
-Source: Stacks Project, Tag 015J, proof remark (3), column filtration.
-
-Proof: The extension in resolution degree vanishes at negative indices. In total
-degree n, the restricted mapped total therefore has precisely the summands
-(r,s) with r ≥ 0, s ≥ q and r+s=n, hence q ≤ s ≤ n. Truncation is the identity
-on the retained summands and zero elsewhere. Its total inclusion is consequently
-injective and has image the finite sum of the images of these coprojections.
-By the definition of secondFiltration and T.filtration_formula, that image is
-T.L.complexStep q n. The explicit etaleCEMappedTotalIso identifies global sections
-of the restricted sheaf total with this mapped total, without changing its image
-or injectivity. Factoring this inclusion through the degree-n step inclusion is
-thus an isomorphism onto that image. Evaluation of Subobject.factorThru_arrow
-shows that the stated factorization has this composite, and cancellation of the
-monic step inclusion identifies it with that isomorphism. If n < q, the diagonal
-is empty and both objects are zero; negative q and zero summands cause no change.
-(blueprint: lem-weil-pbc-etale-restricted-sections-lift-component-isIso). -/
+/-- The degree-n factorization of the restricted sections inclusion is invertible
+(Stacks, Tag 015J). -/
 theorem etaleRestrictedSectionsLift_component_isIso
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

@@ -192,14 +192,9 @@ private theorem baseChange_eq
           (derivedPullback g').map ((relativeMVAdj f).counit.app E)) := by
   rfl
 
-/-- The mate calculation before the final relative composition comparison.
-Source: Stacks Project, Cohomology, Tags 08HY and 0D5S.
-(blueprint: new-lem-pc-derived-base-change-horizontal-mate).
-The proof expands each base-change map as the transpose of the corresponding
-counit, uses naturality and the triangle identity, and then applies associativity
-of the pinned pullback comparison. This is the intermediate mate identity used
-by `schemeDerivedBaseChange_horizontal`; it is stated before postcomposition by
-the canonical direct-image composition isomorphism. -/
+/-- The mate calculation before the final relative composition comparison, stated before
+postcomposition by the canonical direct-image composition isomorphism
+(Stacks, Tags 08HY, 0D5S). -/
 theorem schemeDerivedBaseChange_horizontal_mate
     {A X S A' X' S' : Scheme.{u}}
     (j : A ⟶ X) (f : X ⟶ S) (j' : A' ⟶ X') (f' : X' ⟶ S')

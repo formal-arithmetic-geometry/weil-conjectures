@@ -16,9 +16,7 @@ open CategoryTheory AlgebraicGeometry
 open AlgebraicGeometry Scheme
 namespace AlgebraicGeometry
 /-- A finite trivializing datum on the spectrum of a field yields the finite separable
-extension and constant pullback in the target theorem.
-Source: Stacks Project, Lemma 02GL and the proof of Lemma 09Z6.
-(blueprint: lem-weil-pbc-constructible-field-finite-separable-constant-step3-7) -/
+extension and constant pullback in the target theorem (Stacks, Tags 02GL and 09Z6). -/
 theorem constructible_field_finite_separable_constant_of_datum
     (k : Type u) [Field k]
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

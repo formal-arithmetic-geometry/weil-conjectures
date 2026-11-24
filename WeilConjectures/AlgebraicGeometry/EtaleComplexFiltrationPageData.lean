@@ -19,8 +19,9 @@ import Mathlib.CategoryTheory.Abelian.Exact
 
 /-! # Stable-page representatives of the etale image filtration
 
-Source: Stacks Project, Tags 015J and 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-filtration-page-data).
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section
@@ -31,9 +32,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The map on ordinary sheaf cohomology in one complex degree, with fixed endpoints.
-Source: Stacks Project, Tag 0EZM, the first-page comparison maps.
-(blueprint: lem-weil-pbc-etale-complex-filtration-page-data). -/
+/-- The map on ordinary sheaf cohomology in one complex degree, with fixed endpoints
+(Stacks, Tag 0EZM). -/
 noncomputable def complexTermCohomologyMap
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ)
@@ -76,28 +76,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 1000000 in
 set_option linter.unusedVariables false in
 /-- Functorial hypercohomology pages identify image-filtration classes with stable pages.
-This constructs the pages and their graded-class dictionary; it does not assert
-continuity or that a kernel class eventually lies in a deeper step.
-Source: Stacks Project, Tag 015J, and Tag 0EZM, proof of Lemma 59.52.1.
-
-Proof: Apply the functorial Cartan--Eilenberg hypercohomology presentation to each
-bounded-below complex, every transition pair, and each cocone pair at the limit.
-The identity and composition laws give E and the compatible maps v. Swap the two
-bidegree coordinates so that resolution degree comes first. The first-page
-identifications are ordinary sheaf cohomology; functoriality gives exactly the two
-first-page equations. Negative resolution degrees are zero. The limit complex
-vanishes below a because inverse image preserves zero objects and complex colimits
-are degreewise. The support region r >= 0, s >= a gives a single stable page N in
-bidegree (p-q,q), simultaneously for all stages and the limit. Identify that page
-with the q-th graded piece of the abutment filtration. This filtration equals the
-predicate in the statement: a map T -> F with T zero below q factors through the
-stupid truncation F^{>=q}, and its inclusion gives the converse. Define classMap
-by the quotient projection and the inverse convergence isomorphism, transporting
-along eH. Its kernel is the (q+1)-st step. Naturality gives transition_mem and
-class_transition, using hH and hP to identify abutment maps. A class whose canonical
-limit image is zero has zero limit graded projection, giving class_limit_zero.
-These assertions use no sheaf-continuity or colimit-injectivity assertion.
-(blueprint: lem-weil-pbc-etale-complex-filtration-page-data). -/
+(Stacks, Tags 015J and 0EZM). -/
 theorem exists_etaleComplexFiltrationPageData
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

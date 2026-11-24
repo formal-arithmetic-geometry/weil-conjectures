@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCompositionCoun
 
 /-! # Compatibility of the canonical single-open direct-image comparison
 
-Source: Stacks Project, Tags 08FE, 0D5T and 08BV.
+## References
+
+* Stacks Project, Tags 08FE, 0D5T and 08BV
 -/
 
 @[expose] public section
@@ -174,23 +176,7 @@ private theorem unit_with_composition
   exact ht
 
 /-- Direct image and the canonical open comparison carry a single restriction unit
-on X to the corresponding restriction unit on Y. No cover or triangle is involved.
-Source: Stacks Project, Tag 08FE, proof on K-injective representatives; Tag 0D5T,
-canonical composition of derived direct images; Tag 08BV, first proof paragraph.
-
-Proof: First apply schemeMVOpenComposition_counit_Q on a K-injective representative
-of an object A on the inverse-image open. The two counit composites are natural
-transformations, so their equality transports along schemeMVResolutionIso to every A.
-Transpose the desired unit equation under the Y-open adjunction Hom equivalence.
-Expand the comparison into its composition factor and the inverse open-restriction
-factor. Counit naturality moves the latter past the Y counit; apply the extended
-counit computation at A = LX(E). Naturality of the restriction comparison for the
-X-open unit reduces the remaining middle factor to the X-adjunction left triangle
-identity. The restriction comparison and its inverse cancel. Injectivity of the
-Hom equivalence proves the original equation. This applies to empty and full opens
-and requires no cover. The only postponed part is the separately stated normalized
-counit computation, which does not contain the unit equation being proved here.
-(blueprint: lem-pc-derived-mayer-vietoris-open-comparison-unit). -/
+on X to the corresponding restriction unit on Y (Stacks, Tags 08FE, 0D5T and 08BV). -/
 theorem schemeMVOpenComparison_unit
     (X Y : Scheme.{u}) (h : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

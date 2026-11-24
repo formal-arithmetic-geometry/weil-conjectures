@@ -122,23 +122,7 @@ private theorem adicFiniteBoundedConstructible_iso (X : Scheme.{u}) [IsNoetheria
       (hv q hq).of_iso ((coefficientModelCohomology _ q).mapIso i.symm)⟩
 
 /-- Each reduction has a bounded constructible etale origin with the same Tor
-interval. No compatibility or residue marking is asserted here.
-Source: Stacks Project, proetale.tex, Tag 09C2 (3)-(4) and Tag 09AL.
-(auxiliary; not a blueprint node).
-
-Proof: Identify the ordinary comparison functors as left adjoints of the same
-module direct image. Constant inverse-image scalar normalization supplies the
-required equality of ring maps. Uniqueness of left derived functors then identifies
-adicFinitePullback with the derived comparison used by constructibleComparison.
-The latter's bounded constructible equivalence and the given e show that the
-residue reduction is bounded constructible. Apply the coefficient-filtration
-constructibility lemma (Tag 09BR) to obtain constructible cohomology at every
-level. The flat-model characterization of the assumed Tor interval bounds each
-reduction in [a,b]. Apply the finite-Tor comparison equivalence to this bounded
-constructible finite-Tor object. Its counit gives an etale origin, and reflection
-of the Tor test gives precisely [a,b]. Transport its comparison isomorphism back
-along the identification with adicFinitePullback. Each level is treated separately,
-so no compatibility or prescribed zero marking is introduced. -/
+interval. No compatibility or residue marking is asserted here (Stacks, Tags 09C2 and 09AL). -/
 theorem adicFiniteEtale_origins
     (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] (J : Ideal A)

@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpectrumDirectImageCoordin
 
 /-! # Affine spectrum unit normalization
 
-Source: Stacks Project, Tag 0D5S, composition coherence used in the affine reduction.
-(blueprint: lem-pc-affine-spectrum-unit-normalization).
+## References
+
+* Stacks Project, Tag 0D5S
 -/
 
 @[expose] public section
@@ -28,12 +29,7 @@ variable [∀ Y : Scheme.{u},
 
 -- Work through the constructed pullback functor interface during coherence calculations.
 
-/-- The triangle equation for composition units follows from associativity and the
-left and right unit laws. Transport the two composites of the spectrum isomorphism
-and its inverse to identities, apply those unit laws, and identify the remaining
-transport maps by proof irrelevance. This is the coherence part of the normalization
-proof below. Source: Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-affine-spectrum-unit-normalization). -/
+/-- The triangle equation for composition units (Stacks, Tag 0D5S). -/
 private theorem composition_unit_triangle
     (F : ∀ {P Q : Scheme.{u}}, (P ⟶ Q) →
       (schemeDerivedCategory Q ⥤ schemeDerivedCategory P))
@@ -108,22 +104,7 @@ private theorem composition_unit_triangle
   simp only [Category.assoc, eqToIso.hom, eqToHom_app, eqToHom_trans]
 
 /-- The inverse unit of the adjointified spectrum equivalence is the original
-composition comparison followed by the identity comparison.
-
-Proof: write h = isoSpec.hom and v = isoSpec.inv, and let a and b be the
-composition/identity comparisons for h;v and v;h respectively. Apply the
-associativity law for c to v,h,v. Transport h;v and v;h along the two inverse
-identities. The right unit law at v identifies c(v,id) with pullback of i X;
-the left unit law at v identifies c(id,v) with i(Spec Γ(X,⊤)) at v* K.
-After cancelling the common composition comparison, the resulting equation
-is v*.map(a.app K) = b.app(v*.obj K). Invert this equation to obtain the
-triangle law for a.symm and b. The equivalence constructed by Equivalence.mk
-has the same counit b and a faithful forward functor v*. Its inverse unit
-also maps to b at v*.obj K, by Equivalence.counit_app_functor. Faithfulness
-therefore identifies its inverse unit with a, component by component.
-Source: Stacks Project, Tag 0D5S, composition of derived pullbacks; the triangle
-calculation is the first step of the original cancellation node's proof.
-(blueprint: lem-pc-affine-spectrum-unit-normalization). -/
+composition comparison followed by the identity comparison. -/
 theorem affineSpectrum_unit_normalization (X : Scheme.{u}) [IsAffine X] :
   let c : ∀ {P Q Z : Scheme.{u}} (k : P ⟶ Q) (l : Q ⟶ Z),
       derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=

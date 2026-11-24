@@ -9,8 +9,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 
 /-! # Naturality of the shared derived tensor symmetry
-Source: Stacks Project, Cohomology, Tag 0FPB.
-(blueprint: lem-sc-scheme-derived-tensor-symmetry).
+
+## References
+
+* Stacks Project, Tag 0FPB
 -/
 
 @[expose] public section
@@ -35,23 +37,7 @@ private theorem naturalDerivedSymmetry {C D : Type*} [Category C] [Category D]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The shared derived tensor has a natural symmetry.
-Source: Stacks Project, cohomology.tex, Lemma cohomology-lemma-symmetric-monoidal-derived,
-Tag 0FPB, using Tag 064K for invariance under K-flat replacement.
-(blueprint: lem-sc-scheme-derived-tensor-symmetry).
-
-Proof: Choose K-flat resolutions P and Q of K and L. On the (p,q) summand of
-Tot(P tensor Q), use the sheaf tensor symmetry multiplied by (-1)^(pq).
-The total differential's signs make this a chain isomorphism to Tot(Q tensor P).
-Both total complexes compute the shared derived tensor, so localization gives
-K tensor^L L isomorphic to L tensor^L K. The maps commute with maps of complexes
-on each summand. A quasi-isomorphism tensored with a K-flat complex remains a
-quasi-isomorphism: its cone is the tensor of the acyclic cone and is acyclic
-by K-flatness. Common K-flat resolutions thus identify the symmetries for different
-representatives. Represent derived morphisms by roofs and use this independence
-to descend the termwise naturality square to all derived morphisms. Equivalently,
-use DerivedMonoidal.braiding' of the shared localization Qh and its two naturality
-lemmas; this is exactly the Koszul braiding just described. -/
+/-- The shared derived tensor has a natural symmetry (Stacks, Tags 0FPB and 064K). -/
 theorem exists_schemeDerivedTensorSymmetry (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] :
     ∃ s : ∀ K L : schemeDerivedCategory X, K ⊗ L ≅ L ⊗ K,

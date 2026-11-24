@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 
 /-! # Bounded-below copowers for finite condensed coefficient fields
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1),
-and coproducts as filtered colimits of finite subcoproducts.
+## References
+
+* Hemo–Richarz–Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -115,21 +116,8 @@ noncomputable local instance (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u 
 
 -- The explicit colimit and truncation transports elaborate in several large module categories.
 set_option backward.isDefEq.respectTransparency false in
-/-- Derived direct image commutes with copowers of one bounded-below complex.
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1).
-(auxiliary; not a blueprint node)
-
-Proof: choose a strictly bounded-below complex representing M. Its finite subcoproducts
-have the same lower bound, degree by degree. Their projections to good truncation are
-isomorphisms, so the truncated filtered-colimit cocone is also a colimit of the original
-diagram. Condensed qcqs pushforward continuity says that its image under Q, derived direct
-image, and each homology functor is a colimit. An additive functor preserving the filtered
-colimit of finite subcoproducts preserves their coproduct. Transport the representative
-coproduct through Q and its chosen isomorphism to M. Homology preserves coproducts in the
-Grothendieck derived category, so the image of the canonical direct-image comparison under
-each homology functor is invertible by cancellation of the homology coproduct comparison.
-The derived homology criterion concludes. Finite subsets of the empty set still form a
-filtered category, so the same argument includes the empty copower. -/
+/-- Derived direct image commutes with copowers of one bounded-below complex
+(Hemo–Richarz–Scholbach, Lemma 5.3(1)). -/
 theorem condensedSubfield_bounded_copower_comparison
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

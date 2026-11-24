@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # The local completion reflector for the actual residue kernel
 
-Source: Stacks Project, Tags 099L, 099E and 099F.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099L, 099E and 099F
 -/
 
 @[expose] public noncomputable section
@@ -26,13 +27,8 @@ open CategoryTheory.ConstantCompletion
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The kernel of the actual residue projection on the slice is of finite type.
-Source: Stacks Tags 099L and 099E
-(auxiliary; not a blueprint node).
-Proof: choose finitely many generators of J. The sectionwise quotient formula for the
-completed coefficient sheaf identifies the residue kernel with their span. This remains
-the same formula on every object of the slice. The global generating sections on each
-further slice give finite local generators of the kernel module. -/
+/-- The kernel of the actual residue projection on the slice is of finite type
+(Stacks, Tags 099L and 099E). -/
 theorem adicResidueKernel_finiteType
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :
@@ -62,13 +58,8 @@ theorem adicResidueKernel_finiteType
 attribute [local instance] HasDerivedCategory.standard
 
 /-- A genuine augmented Cech model for the residue kernel; its unit is invertible
-on every object satisfying the existing local completeness predicate.
-Source: Stacks Tags 099E and 099F
-(auxiliary; not a blueprint node).
-Proof: the preceding finite generation supplies the hypothesis of the existing global
-extended-Cech model theorem. Apply its reflector theorem to the same kernel inclusion.
-Its completeness hypothesis is definitionally ConstantCompletion.IsComplete, so the
-unit-isomorphism clause applies without changing any ideal or coefficient action. -/
+on every object satisfying the existing local completeness predicate (Stacks, Tags 099E and 099F).
+-/
 theorem adicResidueCompletionModel_exists
     (X : Scheme.{u}) {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A]
     (J : Ideal A) (U : coefficientProEtaleSiteModel.{u, v} X) :

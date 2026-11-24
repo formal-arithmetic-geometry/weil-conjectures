@@ -14,9 +14,9 @@ import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 
 /-! # Splitting an affine module map detected on residue fibres
 
-Source: Stacks Project, Tags 056J and 00NX, the finite-cokernel support
-argument and finite-projective splitting.
-(blueprint: lem-pc-affine-residue-epi-splitting)
+## References
+
+* Stacks Project, Tags 056J and 00NX
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An epimorphic image of a finite-type module is finite type: compose each local finite
-family of generating sections with the epimorphism. Source: Stacks Project, Tag 01B7. -/
+family of generating sections with the epimorphism (Stacks, Tag 01B7). -/
 private theorem finiteType_of_epi {X : Scheme.{u}} {P Q : X.Modules}
     (a : P ⟶ Q) [Epi a] [P.IsFiniteType] : Q.IsFiniteType := by
   obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData P
@@ -97,27 +97,8 @@ private theorem epi_of_residue_epi {X : Scheme.{u}} {P Q : X.Modules}
   exact Abelian.epi_of_cokernel_π_eq_zero a (hzero.eq_of_tgt _ _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Residue surjectivity splits a map onto a finitely presented flat affine module.
-
-Source: Stacks Project, Tags 056J and 00NX; finite-cokernel Nakayama argument.
-(blueprint: lem-pc-affine-residue-epi-splitting).
-
-Proof: The quasi-coherent cokernel of f is finite type, since it is an epimorphic
-image of the finite-presentation target. Pullback preserves cokernels, and all residue
-pullbacks of f are epimorphisms, so all residue pullbacks of its cokernel vanish.
-The support-pullback equality of 056J makes every cokernel stalk zero. Sheaf separation
-makes the cokernel zero and f an epimorphism. This step needs no flatness or affine-ness.
-Now identify S with Spec A, where A = Γ(S, ⊤), and restrict M, N and f to Spec A.
-The quasi-coherent counit isomorphisms and full faithfulness of tilde show that the
-section map is an epimorphism. Finite presentation of N gives finite presentation of
-its affine sections, and IsFlatOver evaluated at the top affine open gives flatness.
-Thus these sections are projective by 00NX. Transport projectivity through the affine
-section identification and use Projective.factorThru to split the section map.
-Apply tilde and conjugate by the counit isomorphisms to split the restricted sheaf map.
-Finally transport the section back along the inverse affine isomorphism. Naturality
-of the counit and of the restriction-composition isomorphism proves both right-inverse
-identities. No finiteness of M is needed. The empty scheme case follows from the same
-argument: the stalk conditions are vacuous and sheaf separation gives zero modules. -/
+/-- Residue surjectivity splits a map onto a finitely presented flat affine module
+(Stacks, Tags 056J and 00NX). -/
 theorem affine_isSplitEpi_of_residue_epi (S : Scheme.{u}) (hS : IsAffine S)
     (M N : S.Modules) (f : M ⟶ N)
     (hMqc : M.IsQuasicoherent) (hNqc : N.IsQuasicoherent)

@@ -17,11 +17,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The two duplicate faces cancel by the alternating permutation law.
-Proof: construct the permutation exchanging the equal entries, apply the alternating
-cochain law, compare restriction composites by the fibre-product universal property,
-and use the opposite face signs to cancel.
-(blueprint: lem-pc-cech-differential-repeated-cancellation) -/
+/-- The two duplicate faces cancel by the alternating permutation law. -/
 theorem cechDifferential_repeated_cancellation (X : Scheme.{u}) {I : Type v}
     (U : I → X.Opens) (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})
     (S : SiteCechComplex U (fun i ↦ homOfLE (le_top : U i ≤ ⊤)))

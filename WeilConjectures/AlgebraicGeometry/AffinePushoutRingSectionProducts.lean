@@ -20,25 +20,8 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 variable {U X : Scheme.{u}} (f : U ⟶ X)
-/-- Affine pushout sections are finite sums of products of the two section legs.
-Source: Stacks Project, Morphisms, Tag 01SB, affine reduction; Schemes, Tags 01IA and 01HV.
-(blueprint: stage3-affine-pushout-ring-section-products).
-
-Proof: Let W = f⁻¹V, D = Γ(X,V), C = Γ(U,W), and A = f_*O_U. Since f is
-affine, W is affine and f_*O_U is quasi-coherent as an O_X-module. Use
-pushout scalar-extension cancellation on the regular A-module. Its inverse
-image is the regular module of f⁻¹A, since the inverse-image unit respects
-ring operations. Extension along t identifies this with the regular B-module:
-the maps z ⊗ a ↦ z*t(a) and z ↦ z ⊗ 1 are inverse by the balancing relation,
-and descend through sheafification. The affine pullback section theorem now
-gives a surjective linear map C ⊗[D] C → B(W). The cancellation unit formula
-and O_U-linearity show that its pure-tensor value is b(c)*t(η(d)). Every tensor
-is a finite sum of pure tensors: prove this by tensor induction, using the
-empty list for zero, a singleton for a pure tensor, and concatenation for
-addition. A preimage of a given section therefore gives the required list.
-This uses only surjectivity of the linear comparison and makes no assertion
-about uniqueness or tensor relations among the products. The zero ring and
-empty W are covered by the empty-list case. -/
+/-- Affine pushout sections are finite sums of products of the two section legs
+(Stacks, Tags 01SB, 01IA and 01HV). -/
 theorem affinePushoutSection_products [IsAffineHom f]
     (B : U.toTopCat.Sheaf CommRingCat.{u}) (b : U.sheaf ⟶ B)
     (t : TopCat.Sheaf.inverseImageRing f.base

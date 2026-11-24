@@ -13,9 +13,6 @@ import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSect
 
 /-! Tensor addition clause for the condensed Artin--Schreier sheaf.
 
-Source: current blueprint, sec-fourier-transform/sk-lem-as-properties/lem-fd-as-lisse.md
-(blueprint: lemma-artin-schreier-character-sheaf--2).
-
 The recorded `qlbarTraceSheafOf` is an abbreviation for the target condensed
 Artin--Schreier sheaf.  The qlbar trace tensor theorem supplies the coherence map;
 the only remaining input is the explicit trace comparison bridge for an arbitrary
@@ -38,14 +35,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open AlgebraicGeometry.ArtinSchreierTrace
 
-/-- Tensor addition for the condensed Artin--Schreier sheaf.
-
-Proof source: lemma-artin-schreier-character-sheaf and lemma-artin-schreier-character-sheaf.  The
-bridge gives comparison isomorphisms for `f`, `g`, and `f+g`; compose these with
-`AlgebraicGeometry.ArtinSchreierTrace.qlbar_artinSchreier_trace_tensor_properties`.  The equality
-`a*f+a*g=a*(f+g)` is the elementary scalar distributivity step.
-(blueprint: lemma-artin-schreier-character-sheaf--2).
--/
+/-- Tensor addition for the condensed Artin--Schreier sheaf. -/
 theorem condensedArtinSchreierSheafOf_tensor_addition
     (k₀ : Type u) [Field k₀] [Fintype k₀] (ℓ : ℕ) [Fact ℓ.Prime]
     [Fact (ringChar k₀ ≠ ℓ)] (X₀ : Scheme.{u})

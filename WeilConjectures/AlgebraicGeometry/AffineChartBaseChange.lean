@@ -24,7 +24,7 @@ map, so that `Spec.map φ ≫ W.2.fromSpec : Spec S ⟶ Z` is an affine probe th
   (`AlgebraicGeometry.Scheme.Hom.ker_pullback_fst_comp`).
 
 These are used to compute the strict localization of a transverse corner and its punctured
-divisors (blueprint `lemma-punctured-surface-punctured-curve--1`).
+divisors.
 -/
 
 @[expose] public section

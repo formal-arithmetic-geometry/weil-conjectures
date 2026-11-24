@@ -17,8 +17,9 @@ import Mathlib.RingTheory.Flat.Tensor
 /-!
 # Sections of constant module sheaves
 
-Source: Stacks Project, sites-modules, Tags 093J, 093K, 093L
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 093J, 093K and 093L
 -/
 
 universe u
@@ -312,25 +313,7 @@ end TensorComparison
 
 /-- Sections of constant modules are exact, commute with finitely presented tensor
 factors by the canonical comparison, naturally in both modules and the site object,
-and preserve flatness over a commutative Noetherian ring.
-Source: Stacks Project, sites-modules, Tags 093J, 093K, 093L
-(auxiliary; not a blueprint node).
-
-Proof: (1) Sheafification is exact and kernels of sheaves are sectionwise kernels
-(situation-conventions). The module sheafification interface
-(lem-pc-sites-module-sheafification-interface) identifies the underlying abelian
-sheafification. A set-theoretic section of a surjective module map induces a section
-of its constant sheaf of sets, hence surjectivity on every object's sections.
-(2) Choose a finite presentation of Q. Tensor right exactness
-(lem-weil-pbc-tensor-right-exact) and (1), together with preservation of finite
-sums by evaluation, identify the same cokernel on both sides. The displayed formula
-on pure tensors specifies the canonical comparison. All maps used commute with
-module morphisms and restrictions, giving the two naturality identities.
-(3) A finitely generated ideal is finitely presented over a Noetherian ring
-(lem-sc-noetherian-finite-module-finite-presentation). Apply (2) to that ideal;
-flatness of M and (1) make its tensor inclusion injective on sections. Use tensor
-symmetry and the finitely generated ideal flatness criterion
-(lem-weil-pbc-flat-fg-ideal-criterion) to conclude flatness of the sections. -/
+and preserve flatness over a commutative Noetherian ring (Stacks, Tags 093J, 093K and 093L). -/
 theorem constantModule_section_properties
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Type (u)) [CommRing R] [IsNoetherianRing R] :

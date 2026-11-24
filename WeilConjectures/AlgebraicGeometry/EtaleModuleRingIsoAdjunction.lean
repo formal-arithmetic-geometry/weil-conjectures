@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # EtaleModuleRingIsoAdjunction
 
-Source: Stacks Project, Tags 03D3, 03D6, 03D7.
-(blueprint: lem-weil-pbc-etale-module-ring-iso-adjunction). -/
+## References
+
+* Stacks Project, Tags 03D3, 03D6 and 03D7
+-/
 
 @[expose] public section
 
@@ -27,23 +29,8 @@ namespace AlgebraicGeometry
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport a linearity criterion through an isomorphism of ring sheaves.
-Source: Stacks Project, Tags 03D3 and 03D7, specialized to an invertible ring map.
-
-Proof: let LM be L0 followed by restriction of scalars along c.inv. Restriction
-along c.hom and c.inv are inverse equivalences: on sections their composite actions
-are the original action, by the two inverse-ring equations. Their identity maps
-on abelian groups give the comparison t. Define e by composing t with e0 after
-forgetting. A map from LM(G) to F is RU-linear precisely when the same abelian map
-from L0(G) to restriction of F along c.hom is Lr(RV)-linear. Apply hlin to this map.
-Its adjunct is RV-linear for gamma, because the adjunct of c.hom is gamma (hc):
-the hom-equivalence formula gives gamma = ar.unit.app RV followed by pushforward
-of c.hom. Thus direct image followed by scalar restriction is exactly pushforward
-along gamma. Restrict the abelian hom equivalence to these linear morphisms.
-Faithfulness makes the lifts unique; naturality gives the module adjunction am.
-The identity underlying t proves the comparison equation, and the restricted
-hom equivalence gives the final displayed equation.
-(blueprint: lem-weil-pbc-etale-module-ring-iso-adjunction). -/
+/-- Transport a linearity criterion through an isomorphism of ring sheaves
+(Stacks, Tags 03D3 and 03D7). -/
 theorem etaleModuleRingIsoAdjunction (U V : Scheme.{u}) (f : U ⟶ V)
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1})

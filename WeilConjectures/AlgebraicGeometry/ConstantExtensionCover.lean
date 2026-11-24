@@ -19,7 +19,9 @@ import WeilConjectures.ConstructibleSheaf.Biproduct
 /-!
 # Local presentations of extensions with finite constant outer terms
 
-Source: Stacks Project, Etale Cohomology Tag 03RX (3), via Modules on Sites Tag 093U.
+## References
+
+* Stacks Project, Tags 03RX and 093U
 -/
 
 @[expose] public section
@@ -73,22 +75,7 @@ private theorem exists_constantCokernel_cover {Y : Scheme.{u}} {Λ : Type (u + 1
   rwa [hw]
 
 /-- An extension with constant outer terms of finite stalks has a cover on which its middle
-term is constant. Source: Stacks Project, Tags 03RX (3) and 093U.
-(blueprint: lem-constructible-constant-extension-cover)
-
-Proof: Discard empty members of covers. Write the outer terms as constant sheaves M and N.
-Their values are finitely generated, since they identify with geometric stalks on a nonempty
-scheme. Choose a finite free presentation Λ^m → N, with kernel K. The finite ring hypothesis
-makes K and Λ^m finite. The epimorphism from the middle term to N admits simultaneous local
-lifts of the finitely many generators by local surjectivity and intersection of their covering
-sieves. These lifts give a morphism r from the constant sheaf Λ^m to the middle term. Its
-restriction to K factors through M, defining g. Exactness of the constant sheaf functor makes
-the middle term the cokernel of (-g, inclusion): K → M ⊞ Λ^m: the quotient map sends (a,v)
-to a+r(v); it is epi, and its kernel consists of pairs (-g(k),k). On a further cover, the
-morphism g between finite constant sheaves is induced by a module homomorphism, by the
-constant morphism lemma. The displayed cokernel is then the constant sheaf of its module
-cokernel. The composite covers give the asserted cover. Empty schemes admit the empty cover;
-no splitting of the original extension is asserted. -/
+term is constant (Stacks, Tags 03RX and 093U). -/
 theorem exists_constantExtension_cover {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
     [Finite Λ] {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hS : S.ShortExact)

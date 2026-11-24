@@ -11,9 +11,11 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonComposition
 
 /-! # Propagation of matching global sections to an arbitrary cone
-Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-etale-fpqc-matching-sections-pullback). -/
+
+## References
+
+* Stacks Project, Tags 09XN, 03CB and 03CC
+-/
 
 @[expose] public section
 
@@ -166,23 +168,8 @@ private theorem sectionCompare_comp {S Y W Z : Scheme.{u}} (g : Y ⟶ S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XN, paragraph beginning "Let V";
-Sites Tags 03CB and 03CC for composition units.
-(blueprint: lem-weil-pbc-etale-fpqc-matching-sections-pullback).
-
-Proof: The equality a ≫ g_j = b ≫ g_k defines l = (a,b) from Z to
-T_j ×_S T_k. Pull the given overlap equality back along l and restrict to the
-identity étale object of Z. The unit is natural in the sheaf morphisms given by
-the composition isomorphisms and in the site morphisms given by the terminal
-restriction maps. Their associativity equation identifies the two successive
-composition maps with composition along l ≫ pr_j and l ≫ pr_k. The composition
-unit equation combines the two unit maps, and the presheaf functor law combines
-the restrictions. The resulting maps to the fibre products have first projections
-a and b and second projection id_Z, hence equal the displayed maps by pullback
-uniqueness. The equations l ≫ pr_j = a and l ≫ pr_k = b identify the results with
-the stated expressions; equality elimination gives precisely the transport along
-hab. No covering, open, or representative is used. Empty Z gives the unique
-sections; the same formulas hold when j = k or a and b are identities. -/
+/-- The matching sections of an fpqc family of compatible sections are compatible with pullback
+(Stacks, Tags 09XN, 03CB and 03CC). -/
 theorem etaleFpqcMatchingSections_pullback
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (F : Sheaf S.smallEtaleTopology (Type (u + 1)))

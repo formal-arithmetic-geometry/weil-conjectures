@@ -16,7 +16,9 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 /-!
 # Internal group objects and the abelian direct image
 
-Source: Stacks Project, Section 00YR and Proposition 00YV, proof of (2).
+## References
+
+* Stacks Project, Tags 00YR and 00YV
 -/
 
 @[expose] public section
@@ -25,29 +27,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Source: Stacks Project, Section 00YR and Proposition 00YV, proof of (2).
-(blueprint: lem-weil-pbc-etale-abelian-direct-image-internal)
-
-Proof: At each site take the sectionwise identification of abelian sheaves with
-internal commutative group objects from `sheavesAlgebraicStructuresAbelian`.
-The forward functor uses addition, zero and negation as multiplication, unit and
-inverse; its inverse recovers the sectionwise abelian groups and homomorphisms.
-The strict inverse identities give equivalences eV and eU, and the underlying
-functor identities give iV and iU. The set direct image is precomposition along
-base change. Its product comparison is the sectionwise pairing map, and its
-terminal comparison is the unique map of singleton sheaves. Consequently the
-operations on the image under R.mapCommGrp are exactly the operations of the
-original abelian sheaf evaluated at the base-changed object. For each F the underlying
-map of β is R.map (iU.hom.app F) followed by iV.inv.app (f_* F). The section
-formulas for the two identifications show that this map preserves addition and
-zero. The inverse uses iV.hom followed by R.map iU.inv and preserves the same
-operations; preservation of negation follows from the group laws. These maps
-are inverse because iU and iV are isomorphisms. Naturality follows from the
-naturality of iU and iV and the sectionwise formula for direct image on morphisms;
-faithfulness of CommGrp.forget gives the group-object naturality equation.
-Composing the formula for β with iV.hom cancels iV.inv and gives the displayed
-equation.
-This argument uses no inverse image and no finite-limit assumption on it. -/
+/-- The abelian étale direct image agrees with the direct image of commutative group objects,
+compatibly with the forgetful functors (Stacks, Tags 00YR and 00YV). -/
 theorem etaleAbelianDirectImageInternal (U V : Scheme.{u}) (f : U ⟶ V) :
     let R : Sheaf U.smallEtaleTopology (Type (u + 1)) ⥤
         Sheaf V.smallEtaleTopology (Type (u + 1)) :=

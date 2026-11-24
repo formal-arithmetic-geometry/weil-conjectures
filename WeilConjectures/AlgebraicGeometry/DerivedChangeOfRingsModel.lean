@@ -8,8 +8,9 @@ public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # Canonical derived change-of-rings model
 
-Source: Stacks Project Tags 06YT, 06YY and 06XN
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YT, 06YY and 06XN
 -/
 
 @[expose] public noncomputable section
@@ -31,12 +32,8 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasDerivedCategory.{wS}
     (SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J S))]
 
-/-- The canonical cochain model selected by the derived change-of-rings existence theorem.
-
-Source: Stacks Project Tags 06YT, 06YY and 06XN
-(auxiliary; not a blueprint node). The selected object is the
-canonical universal model supplied by `nonempty_derivedChangeOfRingsCochainModel`.
--/
+/-- The canonical cochain model selected by the derived change-of-rings existence theorem
+(Stacks, Tags 06YT, 06YY and 06XN). -/
 def canonicalDerivedChangeOfRingsModel :
     DerivedChangeOfRingsCochainModel.{u, v, r, wO, wS} φ :=
   Classical.choice (nonempty_derivedChangeOfRingsCochainModel φ)

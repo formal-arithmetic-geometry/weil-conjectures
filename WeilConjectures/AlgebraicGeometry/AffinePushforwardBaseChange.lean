@@ -26,9 +26,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 
 /-! # Affine pushforward and arbitrary base change
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02KG; the algebra and composition
-clauses are the affine-local consequences specified by the DAG node
-(blueprint: lem-weil-pbc-affine-pushforward-base-change).
+## References
+
+* Stacks Project, Tag 02KG
 -/
 
 @[expose] public section
@@ -61,16 +61,8 @@ private theorem baseChange_unit_top {X S X' S' : Scheme.{u}}
     pushforwardCongr_hom_app_app] using ht
 
 
-/-- Affine pushforward preserves quasi-coherence and its canonical base change map is invertible.
-Source: Stacks Project, Lemma 02KG
-(blueprint: lem-weil-pbc-affine-pushforward-base-change).
-Proof: (1) affine morphisms are quasi-compact and quasi-separated, so pushforward preserves
-quasi-coherence (01LC). (2) Restrict to affine opens on the two bases using the open-restriction
-base change lemma; isomorphisms are detected on this basis. (3) Identify the resulting square
-with spectra of R, R-prime, B and R-prime tensor B. (4) Replace F by the tilde of its sections
-using the affine tilde-Gamma adjunction. The pushforward and pullback tilde comparisons identify
-the base change map with r tensor m mapping to (r tensor 1) tensor m, by the adjunction unit.
-Its inverse sends (r tensor b) tensor m to r tensor b*m. Thus it is an isomorphism. -/
+/-- Affine pushforward preserves quasi-coherence and its canonical base change map is invertible
+(Stacks, Tag 02KG). -/
 theorem affinePushforward_baseChange {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f]
@@ -83,14 +75,8 @@ theorem affinePushforward_baseChange {X S X' S' : Scheme.{u}}
 
 /-- On affine charts, the canonical map is the tensor associativity identification.
 The two equivalences are pinned by their values on generators, using the canonical units.
-Applying this assertion to restricted affine squares gives the formula on affine opens.
-Source: Stacks Project, Lemma 02KG, affine computation (01I9)
-(blueprint: lem-weil-pbc-affine-pushforward-base-change).
-Proof: step (4) of the node: the tilde-Gamma counit identifies quasi-coherent modules with
-tildes. Pushforward of tilde is restriction of scalars; pullback of tilde is extension of
-scalars. Their unit formulas give the two displayed generator equations. Adjointness of beta
-then gives beta(eta_g(m)) = eta_g-prime(m), so linearity gives the last equation. The inverse
-of the resulting map sends (r tensor b) tensor m to r tensor b*m. -/
+Applying this assertion to restricted affine squares gives the formula on affine opens
+(Stacks, Tags 02KG and 01I9). -/
 theorem affinePushforward_baseChange_affine_formula
     (R B R' : Type u) [CommRing R] [CommRing B] [CommRing R']
     [Algebra R B] [Algebra R R'] (M : ModuleCat.{u} B) :
@@ -171,18 +157,8 @@ theorem affinePushforward_baseChange_affine_formula
   simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
 
 
-/-- For the structure sheaf the base change isomorphism respects multiplication and unit.
-Multiplications are specified on all tensor sections, so they are the canonical sheaf
-multiplications, rather than unspecified algebra structures. The tensor comparison is the
-one of module_pullback_tensor, and epsilon is the landed tensorPullbackObjUnitToUnit
-(the adjoint of the structure ring map); gamma is beta for O_X followed by f'_* of epsilon.
-Source: Lemma 02KG, affine formula for M = B; node clause (2)
-(blueprint: lem-weil-pbc-affine-pushforward-base-change).
-Proof: step (5) of the node: the structure sheaf is quasi-coherent. Clause (1) and the
-structure-sheaf pullback isomorphism make gamma invertible. On affine charts its formula
-is the identity of R-prime tensor B, hence respects products and 1. The same follows from
-the adjoint ring-map description of module-base-change-map-algebra. These equalities glue.
-The inverse of an invertible module map respecting multiplication and unit respects them too. -/
+/-- For the structure sheaf the base change isomorphism respects multiplication and unit
+(Stacks, Tag 02KG). -/
 theorem affinePushforward_baseChange_algebra {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f] :
@@ -219,14 +195,8 @@ theorem affinePushforward_baseChange_algebra {X S X' S' : Scheme.{u}}
   have := (tensorPullbackObjUnitToUnit_isIso g').1
   exact ⟨mu, mu', hmu, hmu', inferInstance, hmult, hunit⟩
 
-/-- Compatibility with a further base change under the canonical composition isomorphisms.
-Source: Stacks Project, Cohomology, Remark 0ATM; node clause (3)
-(blueprint: lem-weil-pbc-affine-pushforward-base-change).
-Proof: step (6) of the node: cartesian-square pasting identifies the iterated fibre product
-with the outer one. Take adjoints of the four-arrow composite. Naturality of units and the
-unit compatibility of the conjugate composition isomorphisms reduce its adjoint to the
-pushforward of the unit for h-prime followed by g-prime, the defining adjoint of the outer
-base change map. This is exactly moduleBaseChangeMap_pasting. -/
+/-- Compatibility with a further base change under the canonical composition isomorphisms
+(Stacks, Tag 0ATM). -/
 theorem affinePushforward_baseChange_comp
     {X S X' S' X'' S'' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (f'' : X'' ⟶ S'')

@@ -12,8 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Unit--Leray computation on K-injective complexes
 
-Source: Stacks Project, Tags 08BJ, 070I, 01F8, 01F9, 01FA and 08J6.
-(blueprint: lem-weil-pbc-kinjective-unit-leray).
+## References
+
+* Stacks Project, Tags 08BJ, 070I, 01F8, 01F9, 01FA and 08J6
 -/
 
 @[expose] public section
@@ -127,23 +128,8 @@ private lemma sections_unit {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
       ((upperStarLowerStarAdjunction AddCommGrpCat.{uNatural + 1} f).unit.app M)]
   rfl
 
-/-- The unit--Leray map on K-injective complexes is represented by the sectionwise map.
-Source: Stacks Project, Tags 08BJ and 070I; cohomology.tex, Tags 01F8--01FA;
-sites-cohomology.tex, Tag 08J6.
-(blueprint: lem-weil-pbc-kinjective-unit-leray).
-
-Proof: Adjoint j to a map I → f_*J. Since inverse image is exact, direct image
-preserves K-injectives (Tag 08BJ). The derived units on I, J and f_*J are therefore
-invertible. Expand the derived adjunction unit using its defining unit compatibility.
-Move the factorization isomorphism for exact inverse image through the Leray
-isomorphism by naturality. The composite right-derived unit compatibility for
-f_* followed by Γ identifies the remaining factors with Γ of the underived
-adjunction unit followed by the sectionwise identification Γ_X f_* ≅ Γ_Y.
-Naturality of the Γ_Y unit with respect to j gives the last factor Γ_Y(j).
-In degree i the resulting chain map is globalSectionsUpperStarMap applied to I.X i
-followed by Γ_Y(j.f i), hence it is w by extensionality. Localizing gives the
-asserted equality, with the inverse units expressed as rightDerivedFunctorObjQIso.
-No resolution augmentation or homology functor is used in this calculation. -/
+/-- The unit--Leray map on K-injective complexes is represented by the sectionwise map
+(Stacks, Tags 08BJ, 070I, 01F8, 01FA and 08J6). -/
 theorem etaleKInjective_unit_leray
     {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (I : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ)

@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 /-! # Finite coefficient models are closed under extensions
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, Hom and object-descent
-arguments. The Hom argument does not use object descent. We use it independently
-of the two-colimit theorem to descend the boundary map of a short exact sequence.
 -/
 @[expose] public section
 universe u wC wD wE vC vD vE uC uD uE
@@ -161,19 +158,7 @@ private lemma boundary_identification
 
 attribute [local irreducible] derivedExtendScalarsCompIso
 
-/-- Finite constructible coefficient models are closed under distinguished extensions.
-Source: upstream `ModuleObject/Colimit/TwoColimit.lean`, Hom and object descent.
-(auxiliary; not a blueprint node)
-Proof: represent the boundary of the given triangle as a map from the single complex
-of the third finite model into the scalar extension of the shifted first finite model.
-The coefficient-complex presentation and constructible Hom continuity descend this
-map to one common finite stage. Complete it to a distinguished triangle there. Serre
-closure and exact coefficient extension make its middle object bounded constructible.
-The tensor comparisons commute with shifts, so its extended boundary is the given
-boundary. The triangle isomorphism axiom identifies the two middle objects. Taking
-zeroth cohomology and commuting it with exact scalar extension gives the desired model.
-The endpoint models may be zero and may be over different fields.
--/
+/-- Finite constructible coefficient models are closed under distinguished extensions. -/
 theorem exists_finiteCoefficient_model_of_triangle
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime]

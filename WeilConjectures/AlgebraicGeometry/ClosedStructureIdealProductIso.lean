@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 /-! # A normalized closed structure ideal-product comparison
 
-Source: Stacks Project, Tag 01QY, affine quotient calculation.
-(blueprint: lem-pc-closed-structure-ideal-product-iso)
+## References
+
+* Stacks Project, Tag 01QY
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
 /-- The chosen and abelian images have the same section range on every open, without
-quasi-coherence or affineness assumptions.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+quasi-coherence or affineness assumptions (Stacks, Tag 01YP). -/
 private theorem image_range_eq_abelian {X : Scheme.{u}} {M N : X.Modules}
     (φ : M ⟶ N) (U : X.Opens) :
     Set.range ((image.ι φ).app U) = Set.range ((Abelian.image.ι φ).app U) := by
@@ -53,9 +52,7 @@ open MonoidalCategory Opposite in
 open scoped TensorProduct in
 /-- The image of any map out of a quasi-coherent tensor product is generated on an
 affine open by the images of pure tensor sections. The target is an arbitrary
-quasi-coherent module; the map need not be ideal multiplication.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+quasi-coherent module; the map need not be ideal multiplication (Stacks, Tag 01YP). -/
 private theorem tensor_image_range_affine {X : Scheme.{u}} {J M N : X.Modules}
     (ψ : J ⊗ M ⟶ N) [J.IsQuasicoherent] [M.IsQuasicoherent] [N.IsQuasicoherent]
     (U : X.affineOpens) :
@@ -84,9 +81,8 @@ private theorem tensor_image_range_affine {X : Scheme.{u}} {J M N : X.Modules}
     rintro s ⟨a, t, rfl⟩
     exact ⟨Modules.tmulSection a t, rfl⟩
 
-/-- Equality of arbitrary morphisms is equivalent to equality on affine sections.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+/-- Equality of arbitrary morphisms is equivalent to equality on affine sections
+(Stacks, Tag 01YP). -/
 private theorem hom_eq_iff_affine {X : Scheme.{u}} {M N : X.Modules}
     (φ ψ : M ⟶ N) :
     φ = ψ ↔ ∀ V : X.affineOpens, ∀ s : Γ(M, V.1), φ.app V.1 s = ψ.app V.1 s := by
@@ -110,9 +106,7 @@ private theorem hom_eq_iff_affine {X : Scheme.{u}} {M N : X.Modules}
     exact h i.1 _
 
 /-- Subobject order is equivalent to affine section-range inclusion. No quasi-coherence
-is assumed on any of the three modules.
-Source: Stacks Project, proof of Lemma 01YP
-(blueprint: lem-weil-pbc-closed-immersion-ideal-power-image). -/
+is assumed on any of the three modules (Stacks, Tag 01YP). -/
 private theorem subobject_le_iff_affine_range {X : Scheme.{u}} {M N P : X.Modules}
     (i : M ⟶ P) (j : N ⟶ P) [Mono i] [Mono j] :
     Subobject.mk i ≤ Subobject.mk j ↔
@@ -150,25 +144,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Identify the pushforward of the extended ideal with its ambient ideal product,
-including the compatibility with the inclusions into the closed structure module.
-Source: Stacks Project, Tag 01QY (lemma-closed-immersion-pushforward).
-(blueprint: lem-pc-closed-structure-ideal-product-iso)
-
-Proof: On an affine open V = Spec A in X, its inverse image under the closed
-immersion is Spec B, where B = A/K and the structure map pi : A -> B is surjective.
-If L = I(V), the ideal of I.comap i on this inverse image is Ideal.map pi L.
-Surjectivity makes pi(L) an ideal: a scalar b lifts to a in A, and b*pi(l) = pi(a*l).
-Thus this extended ideal equals the B-submodule L B. The ambient product I H,
-where H = i_* O_W, is the image of multiplication L tensor_A B -> B, and has
-exactly the same sections L B. Both inclusions are injective: the upstairs ideal
-inclusion is injective on sections, closed pushforward preserves this, and the
-product inclusion is an image inclusion. On the affine basis their ranges agree.
-The two subobjects of H consequently agree: a local lift through either inclusion
-is unique, so the lifts agree on overlaps and glue by the sheaf axiom. The equal
-subobjects give an isomorphism between their domains commuting with their monic
-arrows into H. This is the displayed equation. The argument uses neither
-Noetherianity nor integrality. It applies to the zero ideal, the unit ideal, and
-the empty closed subscheme; all comparisons preserve the given inclusions. -/
+including the compatibility with the inclusions into the closed structure module (Stacks, Tag 01QY).
+-/
 theorem closed_structure_ideal_product_iso
     {X W : Scheme.{u}} (i : W ⟶ X) [IsClosedImmersion i]
     (I : X.IdealSheafData) :

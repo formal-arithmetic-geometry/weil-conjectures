@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # Scalar composition and geometric comparison
 
-Source: Stacks Project, Tags 06YY, 0G7E and 09AL, normalized tensor balancing.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YY, 0G7E and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -278,22 +279,7 @@ private theorem inverse_paste {C : Type*} [Category C]
     _ = _ := by simp
 
 /-- Comparison with geometric inverse image respects a composite scalar extension.
-Source: Stacks Project, Tags 06YY, 0G7E and 09AL; the normalized comparison
-calculation in parent proof steps 3 and 4.
-(auxiliary; not a blueprint node).
-
-Proof: take a flat-term K-flat representative P of K. Its scalar extensions
-and geometric pullbacks are again flat-term K-flat, so all computation maps
-in adicFiniteComparisonFormula and adicFiniteExtendCompFormula are invertible.
-Substitute those formulas into both sides and cancel the computation maps.
-The remaining ordinary comparison commutes with scalar composition: both
-maps are the unique module inverse-image/scalar-extension map carrying
-successive tensor insertions to the same insertion. Equivalently, on local
-pure tensors both send ((p tensor x) tensor y) to the inverse image of p
-tensor g(x)*y. The specified ring-map equality identifies the final scalar
-action. Equality after sheafification and localization gives the formula on
-P. Every K has such a representative, so naturality proves the assertion.
-This applies to arbitrary rings and maps, including identity maps. -/
+(Stacks, Tags 06YY, 0G7E and 09AL). -/
 theorem adicComparison_composition (X : Scheme.{u})
     {A B C : Type (max v (u + 1))} [CommRing A] [CommRing B] [CommRing C]
     (f : A →+* B) (g : B →+* C) (h : A →+* C) (e : h = g.comp f)

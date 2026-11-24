@@ -17,8 +17,7 @@ namespace AlgebraicGeometry
 
 /-- The empty-index case of dense-open component modification gluing.
 The component-cover hypothesis forces the target to be empty; the empty open is dense
-and the empty coproduct map is an isomorphism.
-(blueprint: theorem-cohomology-curves) -/
+and the empty coproduct map is an isomorphism. -/
 theorem exists_dense_open_isIso_component_modifications_of_zero
     (X : Scheme.{u}) [IsReduced X]
     (C : Fin 0 → Scheme.{u}) (ι : ∀ i, C i ⟶ X)

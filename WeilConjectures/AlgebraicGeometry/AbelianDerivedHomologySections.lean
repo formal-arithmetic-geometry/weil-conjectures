@@ -11,7 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 
 /-! # Local derived representatives of homology sections
 
-Source: Stacks Project, Tags 072W and 03Q8.
+## References
+
+* Stacks Project, Tags 072W and 03Q8
 -/
 
 @[expose] public section
@@ -23,18 +25,8 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Every homology section locally comes from a derived section of the free
-abelian sheaf. The comparison is specified by homology and the identity generator.
-Source: Stacks Project, Tags 072W and 03Q8.
-(blueprint: lem-sc-abelian-derived-homology-sections).
-
-Proof: Shift K by q and use a bounded-below injective representative. Its zeroth
-homology is the sheaf cokernel of boundaries in cycles. Locally a homology section
-lifts to a cycle. The free abelian sheaf of that neighborhood corepresents its
-sections, so the cycle gives a chain map from its degree-zero single complex.
-The image of this map in the derived category induces the original homology
-section. The canonical shift comparison identifies that zeroth homology with
-H^q(K). Thus the derived-section map is locally surjective. This includes the
-zero object, empty test schemes, and all integer degrees. -/
+abelian sheaf. The comparison is specified by homology and the identity generator
+(Stacks, Tags 072W and 03Q8). -/
 theorem exists_abelianDerivedHomology_sections_comparison (S : Scheme.{u}) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     ∃ τ : (abelianComparisonFree S ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙

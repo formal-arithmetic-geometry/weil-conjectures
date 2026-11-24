@@ -27,25 +27,7 @@ namespace AlgebraicGeometry
 open Scheme Etale
 
 /-- A closed affine pair admits a henselian neighborhood whose cohomology is computed
-by a small filtered system of etale neighborhoods. Torsion is not needed here.
-
-Source: Stacks Project, Tag 0A51, second displayed equality in the affine proof;
-Tags 0A02 and 09YQ.
-(blueprint: lem-weil-pbc-affine-closed-henselian-neighborhood-colimit)
-
-Proof: Write X = Spec B and Z = Spec (B/K), using affineness of a closed subscheme.
-Apply pair_henselization to (B,K). Choose a small skeleton of the essentially small
-filtered category, then a cofinal directed preorder. Its ring colimit A is henselian
-along L = KA, and the quotient map B/K to A/L is an isomorphism. On spectra its
-inverse gives e; the structure map t satisfies the displayed triangle. Pull J back
-to each neighborhood and to Spec A. Compose inverse images to obtain the compatible
-sheaf diagram and the cohomology diagram H. Continuity for spectra of filtered ring
-colimits identifies its colimit with cohomology of the pullback to Spec A. Commuting
-module pullback with forgetting coefficients identifies the stage and limit groups
-with the groups in the statement. Take the resulting colimit cocone c. Essential
-smallness and cofinality ensure that the index has universe u. The quotient
-isomorphism gives the triangle, including for K = B (empty closed fibre) and K = 0.
--/
+by a small filtered system of etale neighborhoods (Stacks, Tags 0A51, 0A02, 09YQ). -/
 theorem Etale.affine_closed_henselian_neighborhood_colimit
     (Λ : Type (u + 1)) [CommRing Λ] {X Z : Scheme.{u}} [IsAffine X]
     (i : Z ⟶ X) [IsClosedImmersion i]

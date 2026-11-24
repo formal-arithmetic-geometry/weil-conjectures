@@ -20,8 +20,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # The lowest cohomology of truncated derived sections
 
-Source: Stacks Project, Tag 05TC (2), and Tag 06Z0, proof of Lemma 36.3.5.
-(blueprint: new-affine-derived-sections-truncated-bottom).
+## References
+
+* Stacks Project, Tags 05TC and 06Z0
 -/
 
 @[expose] public section
@@ -31,25 +32,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Left exactness computes the lowest cohomology of truncated derived sections.
-This statement applies to every derived sheaf object, without quasi-coherence.
-Source: Stacks Project, Tag 05TC (2); Tag 06Z0, cohomology calculation.
-(blueprint: new-affine-derived-sections-truncated-bottom).
-
-Proof: Write S for sections followed by scalar transport; it preserves finite
-limits. Lift truncGE n into the bounded below derived category. The canonical
-map truncLT (n + 1) -> identity becomes invertible on H^n after derived S,
-by isIso_homologyFunctor_rightDerivedFunctorPlus_truncLEι. On this lifted
-functor, truncGE n after truncLT (n + 1) is already invertible, since the
-objects have no cohomology below n. The natural isomorphism
-DerivedCategory.Plus.eTruncLTCompETruncGEIso identifies this double truncation
-with H^n followed by the single functor in degree n. Commutation of single
-functors, derived S and homology with shifts reduces its cohomology to the
-single functor in degree zero. Compose the single-functor derived comparison
-with rightDerivedZeroIsoSelf. Finally use compatibility of bounded below
-and unbounded derived S and the canonical H^n truncGE projection isomorphism.
-Ordinary S is definitionally moduleSpecΓFunctor. Every map is natural, and no
-quasi-coherence, boundedness of the original object, or nonzero-ring hypothesis
-is needed. -/
+This statement applies to every derived sheaf object, without quasi-coherence
+(Stacks, Tags 05TC and 06Z0). -/
 theorem affineDerivedSections_truncated_bottom (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

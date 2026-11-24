@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # Proper support of the compactification algebraization candidate
 
-Source: Stacks Project, Theorem 088E, the paragraph beginning "Thus" after the
-boundary-support argument (blueprint: new-chow-algebraization-core-support).
+## References
+
+* Stacks Project, Tag 088E
 -/
 
 @[expose] public section
@@ -29,19 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Restricting a compactification algebraization whose support avoids the boundary
-has proper support. Source: Stacks Project, Theorem 088E, the paragraph beginning
-"Thus" after the boundary-support argument.
-(blueprint: new-chow-algebraization-core-support)
-
-Proof: The coherent module on the locally Noetherian compactification has closed
-support C. Its reduced induced closed subscheme is proper over the base, as the
-compactification is proper. Since C lies in the open subscheme, its closed immersion
-lifts uniquely to that open subscheme. The lift is a closed immersion: its composite
-with the separated open immersion is a closed immersion. Its composite to the base
-is unchanged and proper. Its range is exactly the inverse image of C, which is the
-support of the restriction by the finite-type pullback support formula. Transport
-stalks along the supplied restriction isomorphism and use independence of the
-closed subscheme structure in the proper-support criterion. -/
+has proper support (Stacks, Tag 088E). -/
 private theorem compactificationRestriction_support
     {S P Y : Scheme.{u}} [IsLocallyNoetherian P]
     (p : P ⟶ S) [IsProper p] (j : Y ⟶ P) [IsOpenImmersion j]
@@ -122,18 +111,8 @@ private theorem closed_subset_avoids_boundary
     exact hIM
   exact hy.2 (hCU ⟨hy.1, hyV⟩)
 
-/-- Proper support for the algebraization constructed on a proper compactification.
-Source: Stacks Project, Theorem 088E, the displayed support equation and the following
-boundary-support and restriction paragraphs.
-(blueprint: new-chow-algebraization-core-support)
-
-Proof: Let C be the closed support of F'. The boundary C minus j(Y) is closed in P,
-so its image under the proper map p is closed in Spec A. If nonempty, choose a maximal
-ideal in this image. Adic completeness puts I in every maximal ideal, so this point
-lies in V(I). A point above it belongs to C intersect p inverse V(I), which by hypothesis
-lies in j(Y), a contradiction. Thus C lies in j(Y). Lift the reduced closed support
-into Y, use its proper map to the base, and identify its range with the support of F
-using finite-type pullback support and the restriction isomorphism. -/
+/-- Proper support for the algebraization constructed on a proper compactification
+(Stacks, Tag 088E). -/
 theorem chow_algebraization_candidate_support
     (A : Type u) [CommRing A] (I : Ideal A) [IsAdicComplete I A]
     {P Y : Scheme.{u}} [IsLocallyNoetherian P]

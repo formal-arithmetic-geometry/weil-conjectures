@@ -57,13 +57,7 @@ namespace AlgebraicGeometry.ProEtale
 open Scheme PadicAlgCl
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- Scalar-extension coequalizers commute with the final coefficient-ring colimit.
-Source: archived `TwoColimit.lean`, coefficient construction, and the defining
-coequalizer of `Mod.extendScalars`. Tensor with a fixed object preserves colimits.
-The two action maps are compatible with coefficient inclusion. The universal
-property of the coefficient colimit therefore descends through their coequalizers.
-Forgetting module structure reflects colimits, and complex colimits are degreewise.
-(auxiliary; not a blueprint node) -/
+/-- Scalar-extension coequalizers commute with the final coefficient-ring colimit. -/
 theorem nonempty_isColimit_coefficientComplexCocone
     {E F : FiniteIntermediateField ℓ}
     (C : CochainComplex

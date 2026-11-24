@@ -14,8 +14,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # The ordinary complex projection formula for a closed structure sheaf
 
-Source: Stacks Project, Modules, Tags 01AX and 08KS; More on Algebra, Tag 068G.
-(blueprint: lem-pc-closed-structure-tensor-complex-projection). -/
+## References
+
+* Stacks Project, Tags 01AX, 08KS and 068G
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -26,21 +28,8 @@ universe u
 open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Tensor with the pushed-forward structure sheaf is termwise pullback and pushforward.
-Source: Stacks Project, Modules, Tags 01AX and 08KS; More on Algebra, Tag 068G.
-(blueprint: lem-pc-closed-structure-tensor-complex-projection).
-
-Proof: the ordinary projection map M tensor i_*O_Z -> i_*(i^*M) is induced by the
-pullback adjunction and the tensor unit on Z. At a point i(z) both stalks are
-M_{i(z)} tensor_{O_{Y,i(z)}} O_{Z,z}, and the map is the identity on pure tensors.
-Off the closed image, the open complement shows both stalks are zero. Stalks
-therefore detect that the map is an isomorphism for every M. Naturality makes
-these isomorphisms commute with every differential of P. Tensor with a single
-complex in degree zero has just one nonzero summand in each total degree; the
-single/total-tensor comparison identifies its differential with d_P tensor 1,
-with sign +1. Compose this comparison with the degreewise projection isomorphism.
-No K-flatness, augmentation or derived category is needed. Empty sources give
-zero complexes on both sides; the identity immersion gives the ordinary unit law. -/
+/-- Tensor with the pushed-forward structure sheaf is termwise pullback and pushforward
+(Stacks, Tags 01AX, 08KS and 068G). -/
 theorem nonempty_closedStructure_tensor_complex_projection
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [(Scheme.Modules.tensorPullback i).Additive]

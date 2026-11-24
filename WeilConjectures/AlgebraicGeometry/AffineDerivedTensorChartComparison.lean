@@ -21,8 +21,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 
 /-! # Derived tensor through the canonical affine spectrum chart
 
-Source: Stacks Project, Tags 08DX(2) and 08DV.
-(blueprint: lem-pc-affine-derived-tensor-chart-comparison).
+## References
+
+* Stacks Project, Tags 08DX and 08DV
 -/
 
 @[expose] public section
@@ -41,20 +42,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Compute affine derived tensor through the canonical spectrum chart, on given
-module complexes and a given K-flat resolution of the first complex.
-Source: Stacks Project, Tag 08DX(2), using Tag 08DV.
-Proof: X.toSpecΓ is an isomorphism because X is affine. Exact restriction along it
-preserves quasi-isomorphisms, tensor products, coproducts, and K-flat complexes.
-Termwise tilde sends the given quasi-isomorphism s to a quasi-isomorphism, and tilde P
-is K-flat by Tag 08DV. Thus restriction of tilde P is a K-flat representative of
-restriction of tilde M. Compute the left derived tensor using that representative.
-The affine tilde total-tensor comparison, restricted degree by degree, identifies
-its total tensor with restriction of tilde Tot(P tensor N). Restriction preserves
-arbitrary coproducts, including those in the unbounded total complex. This proves
-the comparison for the specified resolution, without choosing an arbitrary derived
-model. No quasi-coherence or boundedness assumption is used, and zero rings and
-zero complexes are included.
-(blueprint: lem-pc-affine-derived-tensor-chart-comparison). -/
+module complexes and a given K-flat resolution of the first complex (Stacks, Tags 08DX and 08DV). -/
 theorem affine_derivedTensor_chart_comparison (X : Scheme.{u}) [IsAffine X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (M N P : CochainComplex (ModuleCat.{u} Γ(X, ⊤)) ℤ)

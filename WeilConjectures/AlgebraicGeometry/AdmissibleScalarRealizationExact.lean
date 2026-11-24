@@ -30,10 +30,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 /-!
 # Exact scalar realization for admissible continuous coefficients
 
-Source: Stacks Project, Modules on Sites, Tags 093J and 093M; blueprint main-20261015,
-internal-Hom stability proof, paragraphs 2--3
-(auxiliary; not a blueprint node).
-
 The scalar realization is the existing `FiniteConstantModel.modelFunctor`. The algebraic
 closure below uses all continuous functions. Universe lifts of the three standard scalar
 rings carry their induced topologies and do not change their rings or sections.
@@ -61,9 +57,8 @@ open FiniteConstantModel
 
 variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
-/-- Restrict the actual realized module sheaf to the localized site over `U`.
-Source: Stacks 00Y0, localization, and 093J, constant modules
-(auxiliary; not a blueprint node). -/
+/-- Restrict the actual realized module sheaf to the localized site over `U`
+(Stacks, Tags 00Y0 and 093J). -/
 def localizedModel (T : Scheme.{u}) (U : T.ProEt) :=
   modelFunctor A T ⋙
     InternalAbelianSheafModule.sectionModuleFunctor (Scheme.ProEt.topology T)
@@ -71,9 +66,8 @@ def localizedModel (T : Scheme.{u}) (U : T.ProEt) :=
     SheafOfModules.overFunctor _ U
 
 /-- Noetherian scalars, additive exact realization on all scalar modules, and the same
-assertion for the actual restricted coefficient sheaf on every localized site.
-Source: Stacks 093J and 093M and the field split-sequence argument
-(auxiliary; not a blueprint node). -/
+assertion for the actual restricted coefficient sheaf on every localized site
+(Stacks, Tags 093J and 093M). -/
 def ScalarAssertions (T : Scheme.{u}) : Prop :=
   IsNoetherianRing A ∧ (modelFunctor A T).Additive ∧
     PreservesFiniteLimits (modelFunctor A T) ∧
@@ -84,9 +78,7 @@ def ScalarAssertions (T : Scheme.{u}) : Prop :=
 
 /-- The actual completed coefficient assertion: an isomorphism of ring sheaves with the
 positive constant quotient tower, and flatness over constant scalars on all sheaf modules,
-also on every localized site. Here `p` is the specified uniformizer.
-Source: Stacks 093M and the integral coefficient limit comparison
-(auxiliary; not a blueprint node). -/
+also on every localized site. Here `p` is the specified uniformizer (Stacks, Tag 093M). -/
 def CompletedIdentification (T : Scheme.{u}) (p : A) : Prop :=
   (∃! e : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
       (Scheme.ProEt.topology T)

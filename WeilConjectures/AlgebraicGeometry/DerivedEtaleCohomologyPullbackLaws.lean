@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedUnitLerayComp
 
 /-! # Identity and composition of pullback on derived étale cohomology
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-derived-cohomology-pullback-laws).
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section
@@ -111,26 +112,8 @@ private lemma unitLeray_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
   exact τ.naturality a
 
 -- Elaborating the dependent presentation families and compatibility equations.
-/-- Identity and composition of pullback on derived étale cohomology.
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-derived-cohomology-pullback-laws).
-
-Proof: Rewrite every P using hP. For the identity scheme map, the inverse-image
-identity isomorphism identifies the adjunction unit with the identity after
-the direct-image identity isomorphism. The Leray comparison for that direct
-image is the same identity comparison. The complex identity map in the
-statement is the inverse-image identity comparison, so all comparisons cancel.
-For composable maps, naturality moves the second unit past the first lifted
-complex morphism. The composite-unit equation for inverse images identifies
-the two units with the unit of g ≫ f, transported through upperStarComp.
-The derived direct-image composition is its conjugate under the adjunctions;
-the Leray comparison is compatible with that composition by the uniqueness
-of right-derived comparisons. The two complex comparison maps combine to
-the displayed map of the composite pair, by naturality of
-mapDerivedCategoryFactors and the composition comparison. Apply RΓ and
-homologyFunctor, using preservation of composition, to obtain the equation.
-These arguments apply to all cochain complexes; bounded-below complexes are
-only the inputs needed in this statement. -/
+/-- Identity and composition of pullback on derived étale cohomology
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem derivedEtaleCohomology_pullback_laws
     (P : ∀ {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
       (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ)

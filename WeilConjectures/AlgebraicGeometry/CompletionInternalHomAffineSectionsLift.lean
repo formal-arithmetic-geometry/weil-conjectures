@@ -17,7 +17,9 @@ import Mathlib.Algebra.Module.FinitePresentation
 
 /-! # Affine comparison for completed internal Hom
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, affine-local argument.
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section
@@ -28,33 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- A compatible quotient morphism family has a unique compatible lift on each affine open.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, affine-local proof;
-Lemma 087W; Algebra, Lemmas 00MA and 00MB; More on Algebra, Lemma 087R.
-(blueprint: lem-weil-pbc-completion-internal-hom-affine-sections-lift).
-
-Proof:
-1. For the affine open U put A = O_X(U), J = I(U), N = G(U), M = F(U),
-   H = Hom_A(N,M). The ring A is Noetherian and N, M, H are finite. The affine
-   tilde-sections adjunction, coherence of internal Hom, and the affine ideal-product
-   and quotient comparison identify the source at level n with H/J^(n+1)H.
-   The quotient projections on affine sections are surjective. The factorization
-   equation he therefore identifies e_n(U) with canonical evaluation of quotient
-   linear maps, using unique factorization through the quotient of G.
-2. The affine formal-module equivalence identifies compatible quotient morphisms
-   with Hom over the completed ring A^ from N^ to M^. Compatible sections of the
-   source identify with H^. Their evaluation is the A^-linear componentwise map
-   beta : H^ -> Hom_{A^}(N^,M^).
-3. Completion of each finite module P is A^ tensor_A P. Flatness of A^ over A and
-   finite presentation of N identify A^ tensor_A H with
-   Hom_{A^}(A^ tensor_A N, A^ tensor_A M). Conjugate by the natural completion-tensor
-   equivalences. The resulting bijection agrees with beta: both are A^-linear and
-   on 1 tensor h both are the completed map h^, by completion-tensor naturality.
-   Apply this bijection to the family t restricted to U. Its inverse gives the
-   local section family, including transition compatibility. Injectivity gives
-   uniqueness of the entire compatible family; no finite-level e_n is asserted
-   to be an isomorphism. -/
+/-- A compatible quotient morphism family has a unique compatible lift on each affine open
+(Stacks, Tags 0882, 087W). -/
 theorem completion_internal_hom_affine_sections_lift {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

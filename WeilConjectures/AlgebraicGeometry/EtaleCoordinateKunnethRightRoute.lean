@@ -19,12 +19,7 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 variable (A : Type (u + 1)) [CommRing A]
 
 /-- The projection/exchange route identifies with the canonical Kunneth map after
-composing `R p₁_*` and `R f_*`.  This is the second mate calculation in the
-coordinate interchange argument.
-Source: the coordinate interchange calculation in
-`literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/`.
-(auxiliary; not a blueprint node).
--/
+composing `R p₁_*` and `R f_*`. -/
 theorem coordinateKunneth_rightRoute_comp_kunneth
     [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (L : DerivedCategoryModule A Y) (M : DerivedCategoryModule A X) :

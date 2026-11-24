@@ -20,24 +20,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Sites and Sheaves, Proposition 00YV.
-(blueprint: lem-weil-pbc-etale-inverse-image-abelian-lift-hom)
-
-Proof: Use `sheaves_algebraicStructures_objects` to identify abelian sheaves
-with internal commutative group objects on both sites, with their sectionwise
-operations. Finite-limit preservation of L implies finite-product preservation.
-Apply `Adjunction.liftsGroupRingObjects` to the set adjunction a. Transport the
-resulting group-object adjunction through those identifications. Its right adjoint
-is the abelian direct image: on each base-changed object it has the original
-sections, operations and restrictions, so its underlying comparison with the set
-direct image is the identity. The lift's hom-set equation therefore compares the
-forgotten abelian adjunct with the set adjunct of its underlying comparison.
-
-The transported left adjoint and `Etale.upperStar` are both left adjoint to this
-same abelian direct image. Choose their comparison by `Adjunction.leftAdjointUniq`,
-which intertwines the two adjunction bijections. Forget that comparison and compose
-it with the lift's underlying isomorphism to obtain ea. Substitution in the lifted
-hom-set equation gives exactly the displayed equation for every G, F and h. -/
+/-- Compatibility of the abelian lift of the étale inverse image with the forgetful functors on
+morphisms (Stacks, Tag 00YV). -/
 theorem etaleInverseImageAbelianLift_hom (U V : Scheme.{u}) (f : U ⟶ V)
     (hL : PreservesFiniteLimits (Scheme.etaleSetPullback f)) :
     let b := MorphismProperty.Over.pullback @Etale ⊤ f
