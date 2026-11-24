@@ -48,9 +48,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory diagonalTracePush
 
-/-- Evaluation commutes with ordinary direct image of constant-scalar towers.
-Source: diagonal tower limit proof (1), levelwise direct image.
-(blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
+/-- Evaluation commutes with ordinary direct image of constant-scalar towers. -/
 def finiteEvaluationOrdinary (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     (f : X ⟶ S) (n : ℕ) :
     diagonalTraceSystemPush l f ⋙ (evaluation ℕᵒᵖ (DiagonalMod l S)).obj (op n) ≅
@@ -58,10 +56,7 @@ def finiteEvaluationOrdinary (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
         lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f := Iso.refl _
 
 /-- The unit-normalized exact square for evaluation and total direct image.
-Its normalization determines its isomorphism uniquely.
-Source: diagonal tower limit proof (1), evaluation preserves K-injectives because
-its left adjoint is exact; uniqueness of total right derived functors.
-(blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
+Its normalization determines its isomorphism uniquely. -/
 @[no_expose] def finiteEvaluationSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     (f : X ⟶ S)
@@ -88,9 +83,7 @@ its left adjoint is exact; uniqueness of total right derived functors.
       exact Rf.computation _ (tower_evaluation_isKInjective (DiagonalMod l X) I (op n)))
   exact ⟨e.iso, e.normalization⟩
 
-/-- The completed coefficient unit into the ordinary completed direct image.
-Source: diagonal tower trace proof (2), the unital coefficient map for f.
-(blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
+/-- The completed coefficient unit into the ordinary completed direct image. -/
 def completedPushUnit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S) :
     let MS : DiagonalCompleted l S :=
       SheafOfModules.unit (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l))
@@ -126,9 +119,7 @@ def completedPushUnit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S) 
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (diagonalCompletedCoefficientMap l f))
 
-/-- The actual completed coefficient unit, restricted to constant scalars.
-Source: diagonal tower trace proof (2), before evaluation.
-(blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
+/-- The actual completed coefficient unit, restricted to constant scalars. -/
 def Presentation.finitePushUnit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f) :
@@ -140,9 +131,7 @@ def Presentation.finitePushUnit (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
         diagonalTraceRightSingle (diagonalTracePush l f) p.Rc _) ≫
     p.completed.iso.hom.app _
 
-/-- Evaluation/direct image followed by the inverse varying-scalar comparison.
-Source: diagonal tower trace proof (2), evaluation of the common direct image.
-(blueprint: def-sfb-diagonal-trace-finite-evaluation). -/
+/-- Evaluation/direct image followed by the inverse varying-scalar comparison. -/
 def Presentation.finitePushComparison (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]
     {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f) (n : ℕ) :

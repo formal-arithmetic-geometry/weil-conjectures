@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSuppleme
 
 /-! # Transport of projection arrows through coefficient isomorphisms
 
-Source: Stacks Project, Cohomology on Sites, Tags 0B56 and 07A6.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0B56 and 07A6
+* Stacks Project, Tags 0D6E, 06YT, 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +38,7 @@ private theorem projection_mate_formula
         TS.map (Prod.mkHom (adj.counit.app K) (𝟙 (L.obj Q)))) := by
   simp [derivedProjectionFormulaMate, Adjunction.rightAdjointProjectionMap]
 
-/-- Adjunction compatibility and tensor compatibility transport the projection mate.
-Source: Stacks Tag 0B56, transposition of the tensor/counit composite. -/
+/-- Adjunction compatibility and tensor compatibility transport the projection mate. -/
 private theorem coefficientProjectionMate_transport
     {A B C : Type*} [Category A] [Category B] [Category C]
     (L : A ⥤ B) (H : B ⥤ A) (adj : L ⊣ H)
@@ -108,8 +110,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
   (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
 
-/-- The matching direct-image comparison, with identity restriction on the base removed.
-Source: Stacks Tags 0D6E and 07A6. -/
+/-- The matching direct-image comparison, with identity restriction on the base removed. -/
 private def pushforward :
     proEtaleRingDerivedDirectImage f R S c ≅ pbcDerivedRestrict c.hom ⋙
       proEtaleRingDerivedDirectImage f R
@@ -120,8 +121,7 @@ private def pushforward :
       ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) S
       (𝟙 R) c.hom (Iso.refl _) c (by simp)
 
-/-- Removing identity restriction preserves the adjunction compatibility equation.
-Source: Stacks Tag 07A6. -/
+/-- Removing identity restriction preserves the adjunction compatibility equation. -/
 private theorem adjunction (M : DerivedCategory (proEtaleRingModules Y R))
     (N : DerivedCategory (proEtaleRingModules X S))
     (t : (proEtaleRingDerivedPullback f R S c).obj M ⟶ N) :
@@ -148,8 +148,7 @@ end AlgebraicGeometry.Scheme.CoefficientTensorTransport
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The native derived tensor with its flat K-flat representative comparison.
-Source: Stacks Tags 06YT and 0FPT. -/
+/-- The native derived tensor with its flat K-flat representative comparison. -/
 @[irreducible] private def coefficientTensorModel (W : Scheme.{u})
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) : ProEtaleTensorModel W R where
   tensor := @MonoidalCategory.tensor _ _
@@ -162,29 +161,8 @@ Source: Stacks Tags 06YT and 0FPT. -/
 
 /-- Changing from literal inverse-image coefficients to the canonically identified
 completed coefficients transports the specified tensor projection arrow.
-This concerns only tensor, geometric pullback and direct image. There are no scalar
-extension functors or scalar mates in this statement. The isomorphism r transports
-an arbitrary coefficient object; neither it nor K need be perfect.
-
-Source: Stacks Project, sites-cohomology.tex, equation-projection-formula-map
-(Tag 0B56), and the adjunction comparison of Tag 07A6; blueprint order 1275.
-(blueprint: lem-pbc-completed-tensor-projection-coefficient-transport).
-
-Proof: restriction along the coefficient isomorphism c_f is an exact equivalence
-of module categories, with inverse restriction along c_f inverse. Its unit and
-counit are the identity on sections. Transport the flat K-flat representative
-class and the signed total tensor through this equivalence. The resulting
-bifunctor and representative comparison give aX. The canonical restriction/direct
-image comparison identifies pushforward of the restricted K with the completed
-pushforward of K. Tensor this identification with r to obtain s. Restriction
-commutes with pullback by the action square; combine this with the transported
-tensor and direct-image comparisons to obtain t. On each pair of flat K-flat
-representatives the pullback/tensor comparisons agree on every pure tensor and
-hence on all sections after sheafification. Their localizations therefore agree.
-The coefficient-change adjunction theorem identifies the transported counit with
-the original counit. Transpose the defining tensor-comparison/counit composite:
-naturality of the Hom equivalence gives exactly the asserted equation. The same
-formulas apply to the zero coefficient object, zero ring and empty site. -/
+Only tensor, geometric pullback and direct image are involved. The isomorphism r
+transports an arbitrary coefficient object; neither it nor K need be perfect. -/
 theorem completedTensorProjectionCoefficientTransport
     {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A)

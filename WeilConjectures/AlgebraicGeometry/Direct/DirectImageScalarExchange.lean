@@ -55,17 +55,20 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantScala
 /-!
 # Scalar extension and direct-image geometric exchange
 
-Source: literature/stacks-project/sites-cohomology.tex, Tag 0E47,
-`remark-compose-base-change-horizontal` (blueprint: lem-fix-direct-image-scalar-exchange).
-
-All functors and comparisons below specialize existing canonical constructions to
-constant coefficients. No functor, adjunction, tensor comparison or square comparison
-is supplied as an arbitrary parameter.
+## Main definitions
 - `directImageScalarExtension` is the universal K-flat scalar extension.
 - `directImageScalarPullbackIso` is its canonical tensor/inverse-image comparison.
 - `directImageScalarComparison` is the mate defining chi.
 - `directImageConstantExchange` is the existing ambient ringed exchange for constants.
 - `directImageScalarExchange` is the equality of the two specified composites.
+
+## Implementation details
+All functors and comparisons specialize existing canonical constructions to constant
+coefficients. No functor, adjunction, tensor comparison or square comparison is supplied
+as an arbitrary parameter.
+
+## References
+* [Stacks Project, Tag 0E47](https://stacks.math.columbia.edu/tag/0E47)
 -/
 
 -- After pruning, this module only keeps private declarations.

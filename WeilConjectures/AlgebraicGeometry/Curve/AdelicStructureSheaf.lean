@@ -36,8 +36,6 @@ For `X` proper over `k` both are finite-dimensional.
 - `AlgebraicGeometry.Scheme.finiteDimensional_iInf_localSubalgebra` and
   `AlgebraicGeometry.Scheme.finiteDimensional_quotient_range_localPrincipalPartsMap`:
   finiteness of `⋂_x 𝒪_{X,x}` and of `(⨁_x K ⧸ 𝒪_{X,x}) ⧸ K` for `X` proper.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -222,9 +220,7 @@ lemma localPrincipalPartsMap_apply (f : X.functionField) (x : closedPoints X) :
   rfl
 
 /-- **`H¹(X, 𝒪_X)` via principal parts**: for an integral noetherian `k`-scheme of dimension at
-most one, `H¹(X, 𝒪_X) ≅ (⨁_{x closed} K ⧸ 𝒪_{X,x}) ⧸ K`, canonically.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`) -/
+most one, `H¹(X, 𝒪_X) ≅ (⨁_{x closed} K ⧸ 𝒪_{X,x}) ⧸ K`, canonically. -/
 noncomputable def structureSheafH1Equiv :
     Modules.H (SheafOfModules.unit X.ringCatSheaf) 1 ≃ₗ[k]
       (Π₀ x : closedPoints X,

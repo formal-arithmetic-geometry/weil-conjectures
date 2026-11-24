@@ -120,19 +120,7 @@ attribute [local irreducible] transportEndpoint
 attribute [local irreducible] spRationalTwist spQbarTwist closureLineMap
   HasDerivedCategory.standard Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
-/-- The prescribed ordinary closure-line leg gives an adjoint-normalized derived endpoint.
-
-Source: blueprint diagonal coefficient changes, paragraph (2), scalar extension of the
-rational root line and passage to its degree-zero derived endpoint.
-(blueprint: lem-diagonal-closure-line-endpoint).
-
-Proof: the rational line has rank one locally, so tensoring with its signed inverse is
-an inverse equivalence. Transporting exactness through the internal/section module
-comparison proves flatness. Apply the flat single-complex scalar comparison, whose unit
-normalization is already recorded. Transport this endpoint through the ordinary normalized
-closure-line isomorphism. Naturality of the scalar adjunction and of the restriction/single
-comparison proves its normalization; the ordinary unit equation identifies the resulting
-underlying map with the prescribed closureLineMap. -/
+/-- The prescribed ordinary closure-line leg gives an adjoint-normalized derived endpoint. -/
 theorem diagonalClosure_lineEndpoint (l : ℕ) [Fact l.Prime]
     (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u})
     (hX : IsUnit (l : Γ(X, ⊤))) :

@@ -42,13 +42,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   cyclicLine cyclicLineMap derivedScalars
   diagonalSingleLimitComparison diagonalShiftedSingleLimitComparison
 
-/-- A natural cyclic quotient comparison with its normalized source and root squares.
-Source: coefficient changes (1), diagonal limit (3)
-(blueprint: lem-diagonal-cyclic-reduction-endpoints).
-Proof: obtain the natural quotient comparison and its unit equation on every derived
-object. Apply the independently stated endpoint normalization theorem to this equation,
-the supplied finite quotient squares and the source and root cone normalizations.
-Pair the resulting two endpoint equations with the comparison. -/
+/-- A natural cyclic quotient comparison with its normalized source and root squares. -/
 theorem diagonalCyclicReduction_endpointComparison
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

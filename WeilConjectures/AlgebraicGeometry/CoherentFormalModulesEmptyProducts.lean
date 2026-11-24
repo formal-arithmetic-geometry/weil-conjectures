@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Empty products of coherent formal modules
 
-Source: Stacks Project, Section 0EHN, zero-system argument written out from the definition.
-(blueprint: lem-weil-pbc-coherent-formal-finite-products-empty-products)
+Stacks Project, Tag 0EHN.
 -/
 
 @[expose] public section
@@ -24,19 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The empty limit satisfies the coherent formal module property.
-Source: Stacks Project, Cohomology of Schemes, Section 0EHN,
-zero-system argument from the definition.
-(blueprint: lem-weil-pbc-coherent-formal-finite-products-empty-products).
-
-An empty-diagram limit is zero, and evaluation carries it to zero module sheaves.
-Present each term as the cokernel of the identity on a rank-one free sheaf. This
-presentation gives quasi-coherence and finite local generators; the locally
-Noetherian coherence criterion gives coherence. Each ideal product is a
-subobject of a zero term, hence zero. Each quotient is an epimorphic image of
-a zero term, hence zero. The unique isomorphism between the quotient and the
-preceding term gives the transition condition, since any maps to a zero object agree.
--/
+/-- The empty limit satisfies the coherent formal module property (Stacks, Tag 0EHN). -/
 theorem coherentFormalModules_closedUnderEmptyProducts (X : Scheme.{u})
     [IsNoetherian X] (I : X.IdealSheafData) :
     (IsCoherentFormalModule I).IsClosedUnderLimitsOfShape (Discrete PEmpty) := by

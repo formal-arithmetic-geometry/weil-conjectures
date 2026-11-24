@@ -21,9 +21,9 @@ import WeilConjectures.AlgebraicGeometry.TorAmplitudeQCohTest
 
 /-! # Proper-support direct image of a finite-Tor complex
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.27.1 (Tag 08EV),
-proof from “Hence it suffices to show that Rf_*E has finite tor dimension” to the end
-(blueprint: lem-pc-proper-direct-image-finite-tor).
+## References
+
+* [Stacks Project, Tag 08EV](https://stacks.math.columbia.edu/tag/08EV) (Lemma 36.27.1)
 -/
 
 @[expose] public section
@@ -36,20 +36,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- A bounded coherent complex with proper cohomological support and finite Tor dimension
-over the inverse-image structure sheaf has a derived direct image of finite Tor dimension.
-Source: Stacks Project, Tag 08EV, finite-Tor paragraph.
-(blueprint: lem-pc-proper-direct-image-finite-tor)
-
-Proof:
-1. Proper-support direct image preserves bounded coherent cohomology. Coherence on the
-   Noetherian base implies quasi-coherence of each cohomology sheaf.
-2. The projection-formula lower-bound argument gives a uniform lower tensor bound a
-   for all quasi-coherent modules; this argument is split into its own statement.
-3. If b bounds the cohomology of the direct image above, a bounded-above flat replacement
-   proves that tensor with any module in degree zero has no cohomology above b.
-4. Use [a,max a b] to ensure an ordered interval, combine the two bounds, and apply the
-   quasi-coherent test criterion to extend the interval to every module sheaf.
--/
+over the inverse-image structure sheaf has a derived direct image of finite Tor dimension
+(Stacks, Tag 08EV). -/
 theorem hasFiniteTorDimension_schemeDerivedDirectImage_of_bounded_coherent_support
     (S : Scheme.{u₁}) [IsNoetherian S]
     (X : Scheme.{u₁}) (f : X ⟶ S) [LocallyOfFiniteType f]

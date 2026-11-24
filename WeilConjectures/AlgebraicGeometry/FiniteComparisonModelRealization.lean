@@ -15,9 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Ordinary realization of coefficient-sized constant module sheaves
 
-Source: Stacks Project, Tags 03CY and 09AL; coefficient transport in the opening
-paragraph of the finite comparison proof
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CY and 09AL.
 -/
 
 @[expose] public noncomputable section
@@ -117,14 +117,7 @@ private def restrictionIso :
     rfl
 
 /-- Restricting a module over the sheafified constant ring to constant scalars is an
-exact equivalence. Source: Stacks Tag 03CY
-(auxiliary; not a blueprint node).
-
-Proof: the constant commutative ring, with commutativity forgotten, is canonically
-isomorphic to the constant ring sheaf. Restriction along this isomorphism followed
-by the constant-ring module equivalence is the specified constant-scalar functor:
-the equality of its scalar actions follows from the sheafification unit equation.
-The natural comparison has identity underlying additive maps. -/
+exact equivalence. (Stacks, Tag 03CY.) -/
 theorem coefficientModelFixedScalars_isEquivalence :
     (coefficientModelFixedScalars J A).IsEquivalence := by
   let : (ringRestriction J A).IsEquivalence := ringRestriction_equivalence J A
@@ -142,8 +135,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
 
 /-- Evaluate the etale coefficient model on the original etale site, retaining the
-constant scalar action. Source: Stacks Tags 03CY and 09AL
-(auxiliary; not a blueprint node). -/
+constant scalar action. -/
 def finiteComparisonEtaleModelRealization :
     ConstantCompletion.Mod (ConstantCompletion.constant
       (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A) ⥤
@@ -163,8 +155,7 @@ def finiteComparisonEtaleModelRealization :
       (AsSmall.equiv.{u, u + 1, u + 1} (C := X.Etale)) (ModuleCat.{u + 1} A)).inverse
 
 /-- Evaluate the pro-etale coefficient model on the original pro-etale site, retaining
-the constant scalar action. Source: Stacks Tags 03CY and 09AL
-(auxiliary; not a blueprint node). -/
+the constant scalar action. -/
 def finiteComparisonProEtaleModelRealization :
     ConstantCompletion.Mod (ConstantCompletion.constant
       (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A) ⥤
@@ -182,8 +173,7 @@ def finiteComparisonProEtaleModelRealization :
       (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X)
       (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)) (ModuleCat.{u + 1} A)).inverse
 
-/-- The etale model realization is an equivalence. Source: Stacks Tag 03CY
-(auxiliary; not a blueprint node). -/
+/-- The etale model realization is an equivalence. -/
 instance finiteComparisonEtaleModelRealization_isEquivalence :
     (finiteComparisonEtaleModelRealization X A).IsEquivalence := by
   let := coefficientModelFixedScalars_isEquivalence
@@ -191,8 +181,7 @@ instance finiteComparisonEtaleModelRealization_isEquivalence :
   unfold finiteComparisonEtaleModelRealization
   infer_instance
 
-/-- The pro-etale model realization is an equivalence. Source: Stacks Tag 03CY
-(auxiliary; not a blueprint node). -/
+/-- The pro-etale model realization is an equivalence. -/
 instance finiteComparisonProEtaleModelRealization_isEquivalence :
     (finiteComparisonProEtaleModelRealization X A).IsEquivalence := by
   let := coefficientModelFixedScalars_isEquivalence
@@ -200,14 +189,12 @@ instance finiteComparisonProEtaleModelRealization_isEquivalence :
   unfold finiteComparisonProEtaleModelRealization
   infer_instance
 
-/-- The etale model realization preserves addition. Source: Stacks Tag 03CY
-(auxiliary; not a blueprint node). -/
+/-- The etale model realization preserves addition. -/
 instance finiteComparisonEtaleModelRealization_additive :
     (finiteComparisonEtaleModelRealization X A).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The pro-etale model realization preserves addition. Source: Stacks Tag 03CY
-(auxiliary; not a blueprint node). -/
+/-- The pro-etale model realization preserves addition. -/
 instance finiteComparisonProEtaleModelRealization_additive :
     (finiteComparisonProEtaleModelRealization X A).Additive :=
   Functor.additive_of_preserves_binary_products _
@@ -257,13 +244,7 @@ private def modelPushforwardSquare :
     ext V x
     rfl
 
-/-- The specified coefficient-model realization intertwines comparison inverse image.
-Source: the constant-section equation, Stacks Tags 03CY and 09AL
-(auxiliary; not a blueprint node).
-
-Proof: on direct images, both paths have the same sections. The constant-section
-unit equation identifies their scalar actions. Compose the model pullback adjunction
-with the realization equivalences and use uniqueness of left adjoints. -/
+/-- The specified coefficient-model realization intertwines comparison inverse image. -/
 theorem finiteComparisonModelPullbackSquare :
     Nonempty (constructibleComparisonPullback.{u, u + 1} X A ⋙
         finiteComparisonProEtaleModelRealization X A ≅

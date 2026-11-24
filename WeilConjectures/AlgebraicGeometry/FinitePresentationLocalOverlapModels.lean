@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapCoherence
 
 /-! # Eventual compatibility of fixed local models
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-local-overlap-models). -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -28,32 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Overlap identifications between fixed local models become compatible at a later stage.
-Source: Stacks Project, Limits, Tag 01ZR, first proof (Zariski gluing); Algebra,
-Tag 05N7, map and equality clauses.
-(blueprint: lem-pc-fp-local-overlap-models).
-
-Proof: Conjugate the restriction identifications of M by the given component
-isomorphisms e. This gives comparisons between the two local models on each limit
-overlap, with specified inverses. Quasi-separatedness makes the pairwise overlaps
-of the finite affine cover quasi-compact. Cover these by finitely many affines, and
-likewise cover the intersections in these refinements and the triple overlaps.
-On each such affine, the coordinate rings form a directed colimit and quasi-coherent
-pullback is extension of scalars. The map clause of 05N7 lifts the comparisons and
-inverses between the fixed finitely presented modules. Its equality clause makes
-the inverse identities, agreement on refinement intersections, and triple cocycle
-identities hold at a stage. There are finitely many maps and equations, so directedness
-gives one common stage k above j. Glue the maps across the refinement intersections;
-their inverses glue too, and the cocycle follows on the finite triple-overlap cover.
-Pull these glued overlap maps to any test scheme mapping to two cover members; their
-functoriality, self identity, and composition law give D in the pseudofunctor's
-all-test-schemes definition. Its components are the pulled-back N; this gives their
-isomorphisms without asserting any new finite-presentation result. Compose the given
-e with the pullback-composition comparisons to obtain the component maps η.hom.
-By the way the overlap maps were lifted these commute with the transitions, hence
-define the morphism η. Every component is a composite of isomorphisms. The empty cover
-has unique datum and morphism and vacuous component conditions. No finiteness property
-of M is needed here: it is already locally identified with the supplied finite models.
-For a preorder use the partial-order quotient of the nonempty tail above j. -/
+(Stacks, Tag 01ZR, Tag 05N7) -/
 theorem exists_finitePresentation_local_overlap_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

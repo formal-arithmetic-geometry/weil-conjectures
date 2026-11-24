@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.Diago
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Faithfulness on completed coefficient sheaves in degree zero
-Source: Stacks 06XS(2), and diagonal trace proof paragraph (2).
+
+## References
+
+* [Stacks Project, Tag 06XS](https://stacks.math.columbia.edu/tag/06XS), part (2)
 -/
 
 @[expose] public noncomputable section
@@ -41,13 +44,7 @@ private theorem single_map_injective
   rw [← hf, ← hg, h]
 
 /-- Restriction to discrete scalars detects equality on maps between completed
-coefficient sheaves in degree zero.
-Source: Stacks 06XS(2); diagonal trace proof paragraph (2)
-(blueprint: lem-sfb-diagonal-trace-single-faithful).
-Proof: ordinary scalar restriction retains every underlying section map, so is faithful.
-Fullness of the degree-zero derived embedding writes the two arrows as sheaf maps.
-Naturality of its exact-functor comparison and faithfulness of the degree-zero embedding
-reduce their equality to ordinary scalar restriction. -/
+coefficient sheaves in degree zero. -/
 theorem diagonalTrace_single_map_injective (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     [DiagonalTraceLocalizations l X] {M N : DiagonalCompleted l X}
     (f g : (DerivedCategory.singleFunctor (DiagonalCompleted l X) 0).obj M ⟶

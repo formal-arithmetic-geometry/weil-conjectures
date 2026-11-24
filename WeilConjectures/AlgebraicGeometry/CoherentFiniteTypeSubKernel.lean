@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
 
 /-! # Finite type submodules and kernels of coherent modules
 
-Source: Stacks Project, Modules, Lemma 01BY
-(blueprint: lem-weil-pbc-coherent-finite-type-sub-kernel).
+## References
+
+* Stacks Project, Tag 01BY
 -/
 
 @[expose] public section
@@ -166,25 +167,7 @@ private theorem finiteType_kernel
 
 /-- A finite type submodule of a coherent module is coherent, and the kernel of a
 map from a finite type module to a coherent module is finite type.
-Source: Stacks Project, Modules, Lemma 01BY
-(blueprint: lem-weil-pbc-coherent-finite-type-sub-kernel).
-Proof, following Stacks 01BY (1), (2):
-1. Restriction preserves monomorphisms and kernels, as checked by evaluating on sections.
-2. For a map from a finite free module into `K`, compose with the monomorphism into `G`.
-   Coherence of `G` makes the composite kernel finite type. `kernelCompMono` identifies it
-   with the original kernel, giving coherence of `K`.
-3. Choose finite local generating sections of `F` and reindex each finite index set by
-   `ULift (Fin n)` to obtain a finite free epimorphism `p` onto the restriction of `F`.
-   Coherence of `G` makes the kernel of `p ≫ φ.over U` finite type.
-4. The induced map from that kernel onto `kernel (φ.over U)` is epi. Mathlib's abelian
-   refinement criterion proves this: refine any map into the latter kernel so that its
-   image in `F.over U` lifts through `p`; the lift factors through the composite kernel.
-5. Push finite local generating sections through this epimorphism. Transport across the
-   kernel restriction isomorphism and flatten the covering of coverings using the
-   iterated-slice equivalence. This gives finite local generators of `kernel φ`.
-All auxiliary results are proved here from Mathlib; no holed image or lifting theorem
-is used.
--/
+(Stacks, Tag 01BY). -/
 theorem coherent_finiteType_submodule_kernel
     (X : RingedSpace.{u}) :
     (∀ (K G : SheafOfModules.{u} (moduleRings X))

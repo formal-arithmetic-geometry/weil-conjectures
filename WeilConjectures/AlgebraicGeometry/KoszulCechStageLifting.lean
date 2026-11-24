@@ -12,8 +12,9 @@ public import Mathlib.Algebra.Module.LocalizedModule.Away
 
 /-! # Finite-stage lifting for the Koszul-to-Čech cocone
 
-Source: Stacks, Tags 08D0 and 08D1.
-(blueprint: lem-sc-koszul-cech-stage-lifting)
+## References
+
+* Stacks Project, Tags 08D0 and 08D1.
 -/
 
 @[expose] public section
@@ -120,24 +121,7 @@ private theorem koszul_basis_values
           (koszulCech_evaluation_degree r J.val n) J_1))) (m ⟨J_1.val, hJ _ J_1⟩)) sJ
   exact hb'.trans (by simp only [sJ, eqToHom_refl, ModuleCat.id_apply])
 
-/-- Every total Čech cochain is the image of a cochain at one positive Koszul exponent.
-Source: Stacks, Tag 08D0, proof's localization description, and Tag 08D1,
-finite total-degree diagonals (blueprint: lem-sc-koszul-cech-stage-lifting).
-
-Proof: Transport the target through principalCechObjIso. For each nonempty subset J,
-put p = card(J)-1 and q = n-p. Quasi-coherence on Spec(A) identifies its section on
-D(g_J), where g_J is the product of the f_j, with the localization of global
-sections of F.X q. Write that section, after multiplication by the inverse of
-Int.negOnePow(p*q+p*(p-1)/2), as m_J/g_J^d_J. There are finitely many J, so choose
-E >= 1 and E >= d_J for all J. Replace m_J by g_J^(E-d_J) m_J. At stage e = E-1,
-define each linear map on the ordered exterior basis by these numerators. Terms
-outside the tail's finite support are zero. The free exterior bases therefore give
-a homogeneous module Hom cochain, and koszulCechHomObjIso transports it to the
-specified diagram. The cocone formula gives exactly the chosen sections: g_J is
-invertible on D(g_J), so the formula can be divided by g_J^E. Transport back through
-principalCechObjIso. For r=0 the target has no coordinates, and the zero cochain at
-stage 0 suffices; for zero or nilpotent g_J its localized section module is zero.
-This argument uses cochains, with no cycle or boundedness condition on F. -/
+/-- Every total Čech cochain is the image of a cochain at one positive Koszul exponent. -/
 theorem koszulCechCocone_stage_lifting
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (F : CochainComplex

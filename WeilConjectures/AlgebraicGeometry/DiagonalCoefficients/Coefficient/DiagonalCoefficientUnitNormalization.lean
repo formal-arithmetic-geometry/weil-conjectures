@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedPadicTorsionLinearity
 
 /-! # Constant coefficient and unit normalization
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: lem-diagonal-coefficient-unit-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -115,10 +112,7 @@ private theorem normalized_constant_map
 
 open CategoryTheory.MonoidalCategory MonObj in
 /-- Maps from the integral coefficient ring into a sheaf killed by a prime power
-are determined by their values on the unit.
-Source: coefficient changes (1). (blueprint: lem-diagonal-coefficient-unit-normalization).
-Proof: the unit and multiplication by the prime power are jointly epimorphic. The
-maps agree on the unit by hypothesis, and both vanish after that multiplication. -/
+are determined by their values on the unit. -/
 theorem diagonal_padic_unit_ext (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) (r : ℕ)
     (T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (hT : (l ^ r) • 𝟙 T = 0)

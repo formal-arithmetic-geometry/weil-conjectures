@@ -16,8 +16,9 @@ import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 /-!
 # Bijectivity of evaluation on the geometric stalk of units
 
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation-overfield-bijective).
+## References
+
+* Stacks Project, Tags 03QU and 03QV
 -/
 
 @[expose] public section
@@ -31,30 +32,8 @@ namespace AlgebraicGeometry.Scheme
 -- The filtered colimit and residue-field refinements require additional elaboration work.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- A stalk homomorphism satisfying the evaluation formula is bijective.
-
-Source: Stacks Project, Tags 03QU and Example 03QV (2).
-(blueprint: lem-sc-etale-units-stalk-evaluation-overfield-bijective).
-
-Proof: For surjectivity, a separable-closure unit generates a finite separable
-simple intermediate field L/K. Its spectrum is etale, and its given embedding in
-Omega supplies the geometric lift. Apply the inverse global-sections isomorphism
-of Spec L to the unit in L. The evaluation formula and naturality of the
-isomorphism show that its germ has exactly the desired value; injectivity of
-Ks into Omega removes the embedding.
-For injectivity, use joint surjectivity of the filtered-colimit germ maps to
-represent two stalk elements on a single pointed etale neighbourhood X. Let y
-be the image of its lift. The canonical residue-field map Spec kappa(y) -> X
-followed by X -> Spec K is etale: the structural residue-field map is etale,
-and the residue-field spectrum at the point of Spec K is isomorphic to Spec K
-(it is a reduced surjective closed immersion). Thus Spec kappa(y) is another
-object of the small etale site. The original lift factors through it. Its field
-embedding into Omega is injective. Naturality of the global-sections isomorphism
-therefore makes equality of evaluated values imply equality of the restricted
-unit sections. The filtered-colimit equality criterion identifies their germs.
-No cofinality theorem or common finite compositum is needed for injectivity.
-The proof includes imperfect base fields and transcendental overfields Omega.
-No Galois equivariance is assumed or concluded. -/
+/-- A stalk homomorphism satisfying the evaluation formula is bijective
+(Stacks, Tags 03QU and 03QV). -/
 theorem etaleUnits_stalk_evaluation_overfield_bijective
     (K Ω : Type u) [Field K] [Field Ω]
     [Algebra (SeparableClosure K) Ω] [Algebra K Ω]

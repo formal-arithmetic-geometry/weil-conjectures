@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Second projection pasting for a shrinking graph intersection
 
-Source: Stacks Project, Tags 0F7D and 0F7J, horizontal pasting and the
-intersection calculation (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7D and 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -170,31 +171,7 @@ private theorem openComp_inv
 attribute [local irreducible] openComp
 
 /-- The second triangle commutes with the intersection and neighborhood shrinkings.
-Source: Stacks Project, more-etale.tex, lemma-shriek-proper-and-open-compose-horizontal
-(Tag 0F7D), specialized to the second intersection projection in the product-graph
-extension of the independence calculation of lemma-shriek-composition (Tag 0F7J).
-(auxiliary; not a blueprint node).
-
-Proof: let d:I'→I be graphIntersectionShrink, v2:O2'→O2 be
-graphNeighborhoodShrink, and u2:I→O2, u2':I'→O2' be the second projections.
-The constructed map satisfies d u2 = u2' v2. Its proper graph lifts satisfy
-s' d = s, s u2 = s2, s' u2' = s2' and s2' v2 = s2. All four inclusions are
-open. Apply horizontal pasting of the normalized proper/open exchange to the
-two strings of identity-top Cartesian squares (d,u2) and (u2',v2).
-The common composite inclusion is the same by d u2 = u2' v2, so the two
-composite triangles agree after the canonical equality transport. Remove the
-identity open extensions with their unitors and solve the equality for the
-inverse neighborhood triangle. Whisker with extension along b2:O2→T.
-Use associativity of open extension composition to combine v2,b2 and d,u2,b2.
-The pullback equations u1 b1 = u2 b2 and u1' b1 = u2' b2' identify these
-open words with the first-projection convention in graphIntersectionWord;
-b2' = v2 b2 is graphNeighborhoodShrink_open_fac. Naturality of the open
-compositors moves these equality comparisons through the two triangles.
-Whisker by the common ambient proper image and insert the associators.
-The resulting two paths are exactly graphIntersectionLeg₂ followed by
-graphNeighborhoodTriangle and graphIntersectionShrinkIso followed by the
-smaller second leg. This uses no first triangle and no full middle comparison.
-Identity and empty opens obey the same equations. -/
+(Stacks, Tags 0F7D and 0F7J). -/
 theorem etaleGraphShrinkSecondLeg
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Z W : Scheme.{u}} {h : X ⟶ Z} (c : Compactification h)

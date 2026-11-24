@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetStagePresheafLocallySurjective
 
 /-! # Sheaf-level continuity on the original affine étale site
 
-Source: Stacks Project, Étale Cohomology Tag 09YQ and Sites Tags 0A35 and 09YN.
-(blueprint: lem-weil-pbc-sets-stage-sheaf-colimit).
+## References
+
+* Stacks Project, Tags 09YQ, 0A35 and 09YN
 -/
 
 @[expose] public section
@@ -26,35 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- The canonical stage push-pull sheaves have the limit push-pull sheaf as their
-colimit on the original affine étale site. This is a sheaf colimit assertion:
-it only requires local representatives and local eventual equality, and does not
-assert that evaluation at an affine object preserves the colimit.
-
-Source: Stacks Project, Étale Cohomology Tag 09YQ, degree-zero proof via 0EYL and
-04HR; Sites Tag 0A35, equation-compute-pullback-to-limit, and Tag 09YN.
-(blueprint: lem-weil-pbc-sets-stage-sheaf-colimit).
-
-Proof:
-1. Restrict to the cofinal upper tail of i₀. Present the limit affine étale site
-   as the filtered colimit of the stage sites using the affine-site colimit theorem.
-   Its object, arrow, and covering descent clauses descend every finite diagram
-   occurring in an inverse-image representative or a local equality.
-2. The inverse-image formula of 0A35 expresses a section locally by a section
-   on an object of the original site and an arrow from the limit object to its
-   base change. Descend that arrow to a stage; the adjunction unit gives the
-   corresponding section of the stage inverse image. Equal representatives have
-   their witnessing arrows and equations at a common later stage. Sheafification
-   thus gives the limit push-pull sheaf from the presheaf colimit of stage sheaves.
-3. Transport through the affine/full restriction equivalences. The unit and
-   composition equations of the affine inverse-image comparison identify the
-   resulting maps with etaleSetSectionComparison, including pullback pasting.
-4. A compatible family of maps from the stage sheaves to any sheaf factors
-   uniquely through this sheafification. Local existence in step 2 defines the
-   factorization; local equality makes it independent of representatives, and
-   the sheaf axiom glues it. This proves the colimit universal property. The
-   supplied point and component equations transport it to E and K.
-Empty objects are covered by the empty cover and hence have their unique section;
-no nonemptiness of a section set is assumed. -/
+colimit on the original affine étale site
+(Stacks, Tags 09YQ, 0EYL, 04HR, 0A35, 09YN). -/
 theorem etaleSetStageSheaf_isColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})

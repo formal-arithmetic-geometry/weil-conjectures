@@ -15,17 +15,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- A split unit and its split image force invertibility of the lower matrix entry.
-
-Source: the unit/Chern matrix argument, diagonal coefficients (3)
-(blueprint: lem-diagonal-exchange-line-coordinate).
-
-Proof: the unit has zero projection to the second summand. Its first coordinate
-is split injective and hence invertible by the line hypothesis. Thus the chosen
-first component equals the unit precomposed with that inverse. Applying the
-additive functor and composing with exchange makes it split injective, since the
-unit composite with exchange is split injective. Its target second coordinate
-vanishes as well. Apply the rank-one coordinate argument at the target. -/
+/-- A split unit and its split image force invertibility of the lower matrix entry. -/
 theorem exchangeLineCoordinate_isIso
     {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
     [HasBinaryBiproducts C] [HasBinaryBiproducts D]

@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 
 /-! # Restricting the finite-type kernel condition
 
-Source: Stacks Project, Modules, Definition 01BV and Section 01AF.
-(blueprint: lem-weil-pbc-coherent-kernel-condition-restriction).
+Stacks Project, Tags 01BV, 01B5 and 01AF.
 -/
 
 @[expose] public section
@@ -191,20 +190,7 @@ private noncomputable def restrictionEquivalence {X Y : Scheme.{u}} (s : X ≅ Y
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel condition alone, without assuming the module is of finite type,
 passes to restriction to an open subscheme.
-Source: Stacks Project, Modules, Definition 01BV (definition-coherent), Definition 01B5
-(definition-finite-type), and Section 01AF (section-kernels).
-(blueprint: lem-weil-pbc-coherent-kernel-condition-restriction).
-
-Proof: For an open `V` of `W`, its image is an open `V'` of `X` contained in `W`.
-The open-site module equivalences, composed with restriction along the canonical
-isomorphism `V.toScheme ≅ V'.toScheme`, identify the restriction of `F|_W` to `V`
-with `F.over V'`. This equivalence preserves the structure module,
-finite coproducts, and kernels. Transfer the given map from a free module of rank `n`
-to a map over `V'`; its kernel is finite type by the hypothesis. Transfer the kernel
-back. Finite type is preserved by these site equivalences: each finite family of
-local generators and its epimorphism transfers to the same finite family on the
-corresponding open neighbourhood, and the corresponding neighbourhoods cover.
-This applies also to the empty open and rank zero. -/
+(Stacks, Tags 01BV, 01B5 and 01AF). -/
 theorem coherent_kernel_condition_restriction (X : Scheme.{u}) (F : X.Modules)
     (hK : ∀ (U : X.Opens) (n : ℕ)
       (f : SheafOfModules.free (R := X.ringCatSheaf.over U) (ULift.{u} (Fin n)) ⟶

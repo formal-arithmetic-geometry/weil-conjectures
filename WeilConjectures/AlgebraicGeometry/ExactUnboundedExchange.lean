@@ -10,11 +10,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 /-!
 # Unbounded exchange for exact inverse image
 
-Source: Stacks Project, Tag 07A7
-(blueprint: definition-derived-base-change-map).
-
 This is the adjunction-mate definition with exact inverse image descended termwise.
 It needs no tensor structure on the coefficient category and applies to abelian groups.
+
+## References
+
+* Stacks Project, Tag 07A7
 -/
 
 @[expose] public section
@@ -26,8 +27,8 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The termwise square comparison descended to the unbounded derived category.
-Source: Stacks Project, Tag 07A7 (blueprint: definition-derived-base-change-map). -/
+/-- The termwise square comparison descended to the unbounded derived category (Stacks, Tag 07A7).
+-/
 noncomputable def exactDerivedSquareUpperStarIso
     (A : Type v) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
@@ -40,8 +41,8 @@ noncomputable def exactDerivedSquareUpperStarIso
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Canonical unbounded exchange: the mate of the descended inverse-image square,
-under the canonical adjunctions between exact inverse image and total derived direct image.
-Source: Stacks Project, Tag 07A7 (blueprint: definition-derived-base-change-map). -/
+under the canonical adjunctions between exact inverse image and total derived direct image
+(Stacks, Tag 07A7). -/
 noncomputable def exactDerivedBaseChangeMap
     (A : Type v) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]

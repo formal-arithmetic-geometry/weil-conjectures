@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruc
 import all WeilConjectures.AlgebraicGeometry.ContinuousChartSchemeNaturality
 
 /-! # Compatibility of bounded coefficient constructions
-Source: RefactorInstruction, Section 4, coefficient realization and geometric fibers.
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ namespace AlgebraicGeometry.ProEtale
 
 namespace CondensedQbarScalarConstruction
 
-/- The following private constructions realize steps 1 and 3 of the node's plan.
-Precompose bounded functions with the base-change projection, then extend to the
+/- Precompose bounded functions with the base-change projection, then extend to the
 abelian sheafifications by their adjunction. No existence witness is chosen. -/
 
 set_option backward.isDefEq.respectTransparency false in
@@ -269,34 +267,7 @@ private theorem conjugate_square
       rw [hcancel, Category.comp_id]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Bounded scalar multiplication commutes with arbitrary scheme inverse image.
-
-Source: RefactorInstruction, Section 4, finite-matrix refinement, coefficient
-realization and geometric-fiber comparison, steps 1--3
-(auxiliary; not a blueprint node).
-
-Proof in words: base change of small pro-etale objects sends a bounded function to
-its composite with the first projection. This defines a morphism from the bounded
-presheaf on Y to the direct image of the bounded presheaf on Z. Compose with the
-sheafification unit and use the sheafification adjunction to obtain the corresponding
-morphism of abelian sheaves. Its adjoint is a ring morphism from the inverse image
-of the bounded coefficient sheaf on Y to the bounded coefficient sheaf on Z.
-The square with the two globalCoefficientIso maps and condensedPullbackHom commutes:
-under the point adjunction, evaluate both sides on a profinite test space S and a
-bounded function on S. The normalization globalCoefficientIso_test identifies both
-with that function pulled back through Z[S] to S. The canonical base-change
-isomorphism Y[S] times_Y Z = Z[S] makes these projections equal. Equality follows
-from the adjunction bijection and extensionality on profinite spaces and sections.
-Multiplication by a pulls back to multiplication by a composed with g, as is checked
-on bounded presheaf sections using associativity of function composition.
-Naturality of the monoidal sheafification unit transports this equation to the
-bounded sheaves. Conjugate the commuting square by the global coefficient
-isomorphisms. Naturality of extendScalarsIsoComapInv cancels its two components;
-the remaining regular-module comparisons have underlying maps alpha and alpha^-1,
-where alpha is condensedPullbackHom. This is precisely the asserted equality.
-The finite-extension bound survives every precomposition. If Z is empty both
-endomorphisms are the unique endomorphism of the zero coefficient object.
--/
+/-- Bounded scalar multiplication commutes with arbitrary scheme inverse image. -/
 theorem condensedQbar_scalar_pullback (ℓ : ℕ) [Fact ℓ.Prime]
     {Y Z : Scheme.{u}} (g : Z ⟶ Y)
     (a : PadicAlgCl.finiteIntermediateFieldValued ℓ Y) :

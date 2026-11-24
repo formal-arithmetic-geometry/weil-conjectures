@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.CechSheafLocalQuasiIso
 
 /-! # Čech sheaf resolution with local scalar compatibility
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, displayed complex and proof
-paragraph 1; Stacks Project, Tag 02FU (construction and insertion homotopy).
+## References
+
+* Stacks Project, Tag 02FU (construction and insertion homotopy).
 -/
 
 @[expose] public section
@@ -28,26 +29,7 @@ namespace AlgebraicGeometry
 
 /-- The section identifications of the Čech resolution respect scalars on every open.
 This refines the global-ring-linear presheaf description without changing its complex,
-differential, augmentation, or termwise open-direct-image description.
-Source: blueprint lemma-coherent-base-change-invertible-sheaves, displayed complex and proof
-paragraph 1; Stacks Project, Tag 02FU (construction and insertion homotopy).
-(blueprint: lem-pc-linear-cech-sheaf-resolution).
-
-Proof: Construct P(Z) = j_Z,*(F|Z) as an actual module sheaf on X, with sections
-on B equal to F(Z intersect B), and scalar action through O_X(B) -> O_X(Z intersect B).
-Restrictions in Z define P on opposite opens. Apply the usual Čech complex functor
-and augment by the restrictions of F. The product projections identify each term,
-its signed differential, and its augmentation with the stated presheaf descriptions,
-as in exists_cech_sheaf_resolution. These projections are morphisms of module sheaves:
-in the y coordinate on B, multiplication by a is multiplication by the restriction
-of a along the second product projection. This proves precisely the extra scalar
-formula, including on nonaffine B. The term isomorphisms are those induced by the
-identification of categorical products of opens with intersections. On each cover
-member insertion of its index contracts the augmented complex; hence its augmentation
-is locally a quasi-isomorphism and therefore a quasi-isomorphism on X. Empty covers
-force X empty and give zero terms. No witness is used to define data; the witnesses
-are consumed only inside proofs. The additional scalar formula cannot be inferred
-from an arbitrary global-ring-linear presheaf isomorphism alone. -/
+differential, augmentation, or termwise open-direct-image description. (Stacks, Tag 02FU) -/
 theorem exists_linear_cech_sheaf_resolution
     {X : Scheme.{u}} {ι : Type u} (U : ι → X.Opens) (hU : iSup U = ⊤)
     (F : X.Modules) :

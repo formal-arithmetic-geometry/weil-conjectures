@@ -10,8 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-! # Rigidity of pointed maps from a local spectrum to an etale scheme
 
-Source: Stacks Project, Tag 08HQ, uniqueness, and Tag 02GE (open diagonal)
-(blueprint: proposition-proper-direct-image-constructible-complexes).
+## References
+
+* Stacks Project, Tags 08HQ and 02GE
 -/
 
 @[expose] public section
@@ -21,17 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Two maps from a local spectrum to an etale scheme over the same base agree if
-some field-valued point over the closed point makes them agree.
-Source: Stacks Project, Tag 08HQ, uniqueness, and Tag 02GE (open diagonal)
-(blueprint: proposition-proper-direct-image-constructible-complexes).
-
-Proof: The diagonal of the etale morphism is an open immersion. The pair of maps
-lifts to its target fibre product. The given point factors through the diagonal,
-so the image of the closed point lies in its open range. Every point of a local
-spectrum generalizes the closed point. Thus the whole pair map lands in that
-range and factors through the diagonal. Its two projections are therefore equal.
-Henselianity is unnecessary for this uniqueness argument.
--/
+some field-valued point over the closed point makes them agree (Stacks, Tags 08HQ and 02GE). -/
 theorem etalePointedMapRigidity
     {B : CommRingCat.{v}} [IsLocalRing B]
     {Ω : Type v} [Field Ω] (β : B →+* Ω) [IsLocalHom β]

@@ -107,13 +107,7 @@ private theorem evaluation_mate_iso
   rw [← conjugateIsoEquiv_apply_hom, hβ, hu] at h
   exact h
 
-/-- The coefficient pullback map is the adjoint of the monoidal unit comparison.
-Source: the coefficient adjunction, as used in blueprint lemma-artin-schreier-character-sheaf
-(blueprint: lem-fd-as-coefficient-cover-maps).
-
-Proof: the underlying morphism of the adjoint is condensedPushforwardHom by
-homEquiv_εIso_inv_hom. Maps from the regular module are determined by the image
-of its unit, and regularLift sends that unit to the specified coefficient unit. -/
+/-- The coefficient pullback map is the adjoint of the monoidal unit comparison. -/
 theorem coefficientUnit_eq_adjoint
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X) :
@@ -238,9 +232,7 @@ private theorem condensedPull_eq_coefficientPull
   simp only [condensedPull, coefficientPull, coefficientUnit,
     coefficientUnit_eq_adjoint, Category.assoc]
 
-/-- Coefficient functions form a contravariant functor on the category of covers.
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, restriction of
-coefficient functions (blueprint: lem-wft-as-coefficient-pull-calculus). -/
+/-- Coefficient functions form a contravariant functor on the category of covers. -/
 theorem condensedPull_comp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {W Y Z : Over X}
@@ -270,13 +262,7 @@ private theorem coefficientUnit_pull
     _ = _ := coefficientUnit_congr Λ (Over.w f)
 
 /-- The pullback of a constant coefficient function has that constant value at
-any chosen root.
-Source: blueprint lemma-artin-schreier-character-sheaf, trivial-character clause
-(blueprint: lem-fd-as-coefficient-cover-maps).
-
-Proof: composing the coefficient unit with pullback of functions is the
-coefficient unit of the composite. Adjunction identifies its evaluation with
-the inverse monoidal unit comparison. -/
+any chosen root. -/
 theorem condensedEvaluation_coefficientUnit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}}
@@ -337,16 +323,7 @@ private theorem coefficientEvaluation_eq_sheetProjection
   simpa only [α, Iso.trans_hom, NatTrans.comp_app, Category.assoc] using h
 
 /-- Root evaluation equals the composition-comparison projection followed by the
-monoidal identification of the pulled-back regular module.
-Source: blueprint lemma-artin-schreier-character-sheaf, root-evaluation convention
-(blueprint: lem-fd-as-coefficient-cover-maps).
-
-Proof: apply the pullback/pushforward adjunction for x to both maps. Conjugacy of
-the composition comparison with lowerStarComp identifies the second adjoint with
-lowerStar.map of the adjoint coefficient unit on s, followed by lowerStarComp and
-the equality transport. coefficientUnit_eq_adjoint identifies this with the
-explicit condensedPull definition. The other side is that same map by the
-adjunction triangle identity. -/
+monoidal identification of the pulled-back regular module. -/
 theorem condensedEvaluation_id_eq_sheetProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X T : Scheme.{u}}

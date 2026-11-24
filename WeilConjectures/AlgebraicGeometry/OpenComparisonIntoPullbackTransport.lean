@@ -12,9 +12,9 @@ import WeilConjectures.AlgebraicGeometry.OpenRestrictedComparisonTransport
 
 /-! # Open transport before the coefficient morphism
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, locality of equation-bc on X′;
-Tag 0DJ9, source-open restriction.
-(blueprint: lem-pc-open-comparison-into-pullback-transport).
+## References
+
+* [Stacks, Tag 0DJ8], [Stacks, Tag 0DJ9]
 -/
 
 @[expose] public section
@@ -73,41 +73,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option linter.unusedVariables false in
 /-- Open restriction transports the comparison into derived pullback, before any
 coefficient morphism or target representative is supplied. The right vertical map
-is a natural isomorphism on the entire target derived category, so that it can
-subsequently be applied to any coefficient morphism.
-
-Proof: write j = U.ι, p = pullback.fst g′ j, q = pullback.snd g′ j. Both j and p
-are open immersions. Exact module restriction is tensor pullback along these maps:
-the restriction adjunction and tensor-pullback adjunction identify their left
-adjoints. Exactness and the universal derived counit identify derived pullback
-with derived restriction. The natural restriction-stalk isomorphism, applied to
-complexes and then to cohomology, therefore gives η, from the additive stalk
-cohomology at pz to that of derived pullback along p at z.
-
-For P representing K and Q representing Lj* K, exact restriction of P along j
-is K-flat, and its image in the derived category identifies with Q through eP
-and eQ. At z, j.stalkMap(qz) and p.stalkMap(z) are ring isomorphisms. The pullback
-equation and stalkMap_comp identify the base stalk rings and their actions.
-The restriction-stalk extension isomorphism identifies the stalk complexes.
-Transport derived tensor over the identified base rings using its universal
-counit. Naturality of multiplication makes the cohomology identification linear
-over the transported tensor algebra. Extend to the final stalk ring, forget
-scalars, and compose with the source transport for the derived isomorphism from
-the restricted P to Q. This is l.
-
-The model equations comparison_eq and localized_eq express the localized maps
-as the cohomology of the universal counit and its extension/restriction transpose.
-Naturality of these counits and tensorStalkIso makes their square commute on
-restricted complexes. The defining universal-counit equation for the derived
-composition comparison identifies the right horizontal identification with the
-displayed composition map. ComparisonIntoPullback_naturality transports this
-square from the restricted P to Q. This yields precisely the equation below,
-without any target complex, coefficient morphism, base flatness, or invertibility
-of the horizontal maps. Empty opens have no z; top opens, zero complexes and zero
-rings are covered by the same ring and derived isomorphisms.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, proof of locality of equation-bc;
-Tag 0DJ9, source-open induction paragraph.
-(blueprint: lem-pc-open-comparison-into-pullback-transport). -/
+is a natural isomorphism on the entire target derived category (Stacks, Tags 0DJ8, 0DJ9). -/
 theorem exists_open_comparisonIntoPullback_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

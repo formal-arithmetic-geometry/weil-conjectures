@@ -14,10 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 
 /-! # Comparison of the normalized coefficient unit arrows
-
-Source: blueprint latest, diagonal-tower trace proof, paragraph (1), the
-identification of the coefficient-unit component before applying (G2).
-(blueprint: lem-sfb-diagonal-trace-unit-arrow-comparison)
 -/
 
 @[expose] public noncomputable section
@@ -265,37 +261,7 @@ private def evaluatedUnitArrowIso
     (unit S (Arings l E S)) (c.derivedIso l E) (coefficientEvaluationIso l E S n)
 
 /-- Evaluation and coefficient realization identify the actual coefficient unit
-with the image of the ordinary etale coefficient unit, as an arrow.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), identification with the
-finite coefficient map, before applying projective-line cohomology (G2).
-(blueprint: lem-sfb-diagonal-trace-unit-arrow-comparison).
-
-Proof: the etale/pro-etale direct-image comparison is defined as the mate of
-its inverse-image comparison. Expanding this mate identifies the compared etale
-unit with the pro-etale adjunction unit followed by pushforward of the specified
-constant-object pullback isomorphism. In particular this argument does not need
-the direct-image comparison to be invertible.
-
-For the realization step, the intrinsic tensor direct image and the realized
-fixed-scalar direct image have the same coefficient map. Uniqueness of their
-left adjoints identifies the two ordinary pullbacks. Descend this isomorphism
-by exact functors, and compose with the pullback compositor for e over S.
-Pullback along e and coefficient realization are equivalences. Conjugating
-the two adjunctions through these equivalences identifies their unit arrows:
-the conjugate of the invertible pullback comparison is invertible, and its
-unit equation gives the commuting square.
-
-Comparison of constant sheaves and the canonical constant-module realization
-identify the source with the regular intrinsic module in degree zero. The
-ring equality defining level evaluation identifies this regular module with
-the evaluated tower coefficient object. Finally, the unit identity in
-geometry_adjunction_evaluation and naturality of pushEvaluation give the
-remaining square. The target isomorphism includes the inverse pullEvaluation
-and the image of c.derivedIso. Its invertibility suffices: no separately fixed
-endpoint comparison is asserted, so c.normalization need not be invoked.
-All constructions apply to the empty scheme and the zero coefficient ring;
-no Chern class or projective-line decomposition is used. -/
+with the image of the ordinary etale coefficient unit, as an arrow. -/
 theorem diagonalTrace_unit_arrow_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

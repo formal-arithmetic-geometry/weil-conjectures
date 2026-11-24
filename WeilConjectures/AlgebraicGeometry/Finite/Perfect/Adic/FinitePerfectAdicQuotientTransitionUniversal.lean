@@ -21,7 +21,9 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 
 /-! # Universality of the localized quotient arrows
 
-Source: Stacks Project, Tags 06YY and 09C6.
+## References
+
+* Stacks Project, Tags 06YY, 09C6, 06YN, 0G7E, 03CY and 03DH
 -/
 
 @[expose] public noncomputable section
@@ -92,11 +94,7 @@ theorem completedAdicDerivedChange_kFlat_iso
   clear_value E L
   as_aux_lemma => exact homotopyModelIso E L ε P hε
 
-/-- Ordinary scalar extension along a map of pro-etale ring sheaves preserves K-flatness.
-Source: Stacks Project, Tags 06YN and 0G7E.
-
-Proof: the chosen witness agrees with change of rings on objects and morphisms, and change of
-rings preserves K-flatness (`SheafOfModules.changeOfRings_isKFlat`). -/
+/-- Ordinary scalar extension along a map of pro-etale ring sheaves preserves K-flatness. -/
 theorem completedAdicChange_isAcyclicTensorKFlat
     (X : Scheme.{t}) {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (P : CochainComplex (SheafOfModules.{t + 1}
@@ -109,12 +107,7 @@ theorem completedAdicChange_isAcyclicTensorKFlat
     (completedAdicChangeData X φ).choose_spec.choose_spec.choose hP
 
 /-- Fixed-scalar chart coordinates along an isomorphism `adicConstantRing X B ≅ R` carry
-K-flat complexes of `R`-modules to K-flat complexes of sheaves of `B`-modules on the chart.
-Source: Stacks Project, Tags 03CY, 06YN and 03DH.
-
-Proof: restriction of scalars along the isomorphism `φ` preserves K-flatness
-(`SheafOfModules.isKFlatTensor_restrictScalars_of_isIso`); then apply
-`finiteCoefficientSliceRestriction_kFlat_of_constant`. -/
+K-flat complexes of `R`-modules to K-flat complexes of sheaves of `B`-modules on the chart. -/
 theorem finiteCoefficientSliceRestriction_kFlat
     (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
@@ -128,12 +121,7 @@ theorem finiteCoefficientSliceRestriction_kFlat
     (SheafOfModules.isKFlatTensor_restrictScalars_of_isIso φ K hK)
 
 /-- The fixed-scalar coordinates of a K-flat complex are K-flat over the constant finite
-quotient ring.
-Source: Stacks Project, Tags 06YN and 06YY.
-
-Proof: ordinary scalar extension along the finite projection preserves K-flatness
-(`completedAdicChange_isAcyclicTensorKFlat`), and so do the fixed-scalar chart coordinates
-along the isomorphism `φ m` (`finiteCoefficientSliceRestriction_kFlat`). -/
+quotient ring. -/
 theorem finitePerfectAdicQuotientStrictCoordinates_kFlat
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
@@ -154,14 +142,7 @@ theorem finitePerfectAdicQuotientStrictCoordinates_kFlat
     ((Functor.mapHomologicalComplexCompIso (Iso.refl (Ch ⋙ G)) (.up ℤ)).app P) hb
 
 /-- The ordinary quotient arrow localizes, on every K-flat complex, to a universal arrow for
-derived restriction of scalars along the consecutive quotient map.
-Source: Stacks Project, Tag 06YY (tensor balancing) and Tag 09C6.
-
-Proof sketch: scalar extension along the finite projection preserves K-flatness, and since `φ`
-is an isomorphism the terms of the fixed-scalar coordinates are flat over the constant ring.
-Derived extension of scalars along the quotient map is therefore computed termwise, and the
-transpose of the localized arrow is the balancing isomorphism
-`A_n ⊗ (P ⊗ R_(n+1)) ≅ P ⊗ R_n`. -/
+derived restriction of scalars along the consecutive quotient map. -/
 theorem finitePerfectAdic_quotient_transition_universal
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

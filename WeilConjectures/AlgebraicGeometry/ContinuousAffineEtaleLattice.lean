@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousModuleEncodingLattices
 
 /-! # An integral lattice near a point of a continuous local system
 
-Source: Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
+## References
+
+* Bhatt--Scholze, Proposition 6.8.4 (6)
 -/
 
 @[expose] public section
@@ -43,23 +44,7 @@ private lemma etale_cover_point (X : Scheme.{u}) {I : Type (u + 1)}
     ((congrArg (fun f : U.X i ⟶ X ↦ f y) hb).trans hy)
 
 /-- An integral lattice exists on some affine etale neighbourhood of each point.
-
-Source: Bhatt--Scholze, Proposition 6.8.4(6).
-(auxiliary; not a blueprint node)
-
-Proof in words. Apply the explicit continuous field module equivalence to P.
-The lattice-compatibility theorem supplies finite local freeness of its image.
-Apply exists_lisse_lattice_etale_local to obtain an etale covering with specified
-integral lattices and rationalization isomorphisms. A covering sieve at the
-terminal object contains an etale scheme cover, so some member contains x in its
-image. Apply the compatibility theorem to that member and its supplied lattice;
-the inverse integral equivalence is an explicit construction of the internal
-lattice. Choose an affine open of this member containing a point above x, and
-pull back this lattice to the affine open. Pullback preserves finite free
-modules; pull back the free cover and bind its composite to obtain the required
-raw pro-etale trivialization. The coefficient pullback comparison and composition
-isomorphism identify the rationalization with the composite pullback of P.
-No simultaneous finite selection or disjoint-union assembly is asserted. -/
+(Bhatt--Scholze, Proposition 6.8.4 (6)) -/
 theorem continuousLisse_affine_etale_lattice
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

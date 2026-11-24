@@ -44,9 +44,10 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientBasic
 /-!
 # Continuous coefficient sheaves and immersion restriction
 
-Source: Bhatt--Scholze, Lemmas 4.2.12 and 6.5.8(1), Definition 6.8.1,
-Lemma 6.8.2 and the paragraph preceding Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction).
+## References
+
+* Bhatt--Scholze, Lemmas 4.2.12 and 6.5.8(1), Definition 6.8.1,
+  Lemma 6.8.2 and the paragraph preceding Definition 6.8.6.
 -/
 
 @[expose] public section
@@ -114,29 +115,20 @@ private theorem commRingForgetReflectsLimit {J : Type v} [Category J]
     exact (congrArg (fun f : s.pt ⟶ _ ↦ f x) (hm j)).trans
       (ConcreteCategory.congr_hom (hc.fac ((CategoryTheory.forget CommRingCat).mapCone s) j) x).symm
 
-/-- The coefficient extension field equipped with its spectral norm.
-
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- The coefficient extension field equipped with its spectral norm. -/
 @[instance_reducible]
 noncomputable def coefficientExtensionNormedField (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : NormedField E :=
   (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
 
-/-- Integral continuous coefficient sheaf `A_X`.
-
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Integral continuous coefficient sheaf `A_X`. -/
 noncomputable def integralCoefficientSheaf (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Sheaf (ProEt.topology X) CommRingCat.{u + 1} := by
   letI := coefficientExtensionNormedField l E
   exact continuousCoefficientSheaf X (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))
 
-/-- Rational continuous coefficient sheaf `E_X`.
-
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Rational continuous coefficient sheaf `E_X`. -/
 noncomputable def rationalCoefficientSheaf (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Sheaf (ProEt.topology X) CommRingCat.{u + 1} := by
@@ -147,16 +139,13 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The finite quotient ring at positive level `n+1`, lifted to the pro-etale coefficient universe.
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- The finite quotient ring at positive level `n+1`, lifted to the pro-etale coefficient
+universe. -/
 noncomputable def finiteCoefficientRing (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) : CommRingCat.{u + 1} :=
   CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))
 
-/-- Quotient transition map for positive coefficient levels.
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Quotient transition map for positive coefficient levels. -/
 noncomputable def finiteCoefficientRingMap (l : ℕ) [Fact l.Prime] (E : Type u)
     [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {m n : ℕ} (h : n ≤ m) : finiteCoefficientRing l E m ⟶ finiteCoefficientRing l E n :=
@@ -166,12 +155,7 @@ noncomputable def finiteCoefficientRingMap (l : ℕ) [Fact l.Prime] (E : Type u)
         (Ideal.pow_le_pow_right (I := Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
           Set (Padic.coefficientExtensionIntegers l E))) (Nat.succ_le_succ h)))
 
-/-- The quotient maps satisfy the identity law after passing to constant sheaves.
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction).
-Proof: A quotient map induced by the identity acts identically on every representative;
-quotient induction proves it is the identity ring map. Apply constantSheaf.map_id.
-This is a construction law for node steps 2--4. -/
+/-- The quotient maps satisfy the identity law after passing to constant sheaves. -/
 theorem finiteCoefficientTower_map_id (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (n : ℕᵒᵖ) :
@@ -201,12 +185,7 @@ private theorem uliftQuotientFactorComp {R : Type u} [CommRing R]
   apply ULift.ext
   exact (Ideal.Quotient.factor_comp_apply hIJ hJK x.down).symm
 
-/-- The quotient maps satisfy the composition law after passing to constant sheaves.
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction).
-Proof: Both quotient maps act identically on representatives of the valuation ring;
-quotient induction proves their equality. Apply constantSheaf.map_comp.
-This is a construction law for node steps 2--4. -/
+/-- The quotient maps satisfy the composition law after passing to constant sheaves. -/
 theorem finiteCoefficientTower_map_comp (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (a b c : ℕᵒᵖ) (f : a ⟶ b) (g : b ⟶ c) :
@@ -226,9 +205,7 @@ theorem finiteCoefficientTower_map_comp (l : ℕ) [Fact l.Prime] (X : Scheme.{u}
       (Ideal.pow_le_pow_right (Nat.succ_le_succ g.unop.le))
   rw [hmap, CategoryTheory.Functor.map_comp]
 
-/-- The tower of finite constant coefficient sheaves.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.2(1) (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- The tower of finite constant coefficient sheaves. -/
 noncomputable def finiteCoefficientTower (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     ℕᵒᵖ ⥤ Sheaf (ProEt.topology X) CommRingCat.{u + 1} where
@@ -243,9 +220,7 @@ noncomputable def finiteCoefficientTower (l : ℕ) [Fact l.Prime] (X : Scheme.{u
     intro a b c f g
     exact finiteCoefficientTower_map_comp l X E a b c f g
 
-/-- The completed finite-level coefficient sheaf.
-Source: Bhatt--Scholze, Lemma 6.8.2(1) (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- The completed finite-level coefficient sheaf. -/
 noncomputable def finiteCoefficientLimit (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Sheaf (ProEt.topology X) CommRingCat.{u + 1} :=
@@ -255,9 +230,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Restriction of continuous functions as a ring homomorphism.
-Source: Bhatt--Scholze, Definition 6.8.1 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Restriction of continuous functions as a ring homomorphism. -/
 noncomputable def continuousMapRestrictionRingHom (T : Type (u + 1))
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     {U V : Scheme.{u}} (f : V ⟶ U) : C(U, T) →+* C(V, T) :=
@@ -267,9 +240,7 @@ noncomputable def continuousMapRestrictionRingHom (T : Type (u + 1))
     map_zero' := by ext; rfl
     map_add' := by intros; ext; rfl }
 
-/-- Restriction followed by sectionwise localization.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Restriction followed by sectionwise localization. -/
 noncomputable def localizedContinuousMapRestriction (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     (s : T) {U V : X.ProEtᵒᵖ} (f : U ⟶ V) :
@@ -289,12 +260,7 @@ noncomputable def localizedContinuousMapRestriction (X : Scheme.{u})
     (continuousMapRestrictionRingHom T f.unop.left)
     (ContinuousMap.const U.unop.left s)
 
-/-- Restriction-localization maps satisfy the identity law.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction).
-Proof: The two ring maps agree on every integral numerator by identity precomposition;
-the universal property of Localization.Away makes the ring maps equal.
-This is a construction law for node steps 2--4. -/
+/-- Restriction-localization maps satisfy the identity law. -/
 theorem localizedContinuousMap_map_id (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     (s : T) (U : X.ProEtᵒᵖ) :
@@ -307,12 +273,7 @@ theorem localizedContinuousMap_map_id (X : Scheme.{u})
     IsLocalization.map_eq, RingHom.comp_apply, RingHom.id_apply]
   rfl
 
-/-- Restriction-localization maps satisfy the composition law.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction).
-Proof: Successive and composite precomposition agree on every numerator. The universal
-property of Localization.Away gives equality on fractions, hence on the ring maps.
-This is a construction law for node steps 2--4. -/
+/-- Restriction-localization maps satisfy the composition law. -/
 theorem localizedContinuousMap_map_comp (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     (s : T) (U V W : X.ProEtᵒᵖ) (f : U ⟶ V) (g : V ⟶ W) :
@@ -327,9 +288,7 @@ theorem localizedContinuousMap_map_comp (X : Scheme.{u})
     IsLocalization.Away.map, IsLocalization.map_eq]
   rfl
 
-/-- Sectionwise localization of the continuous-function presheaf on a small pro-etale site.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Sectionwise localization of the continuous-function presheaf on a small pro-etale site. -/
 noncomputable def localizedContinuousMapPresheaf (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     (s : T) : X.ProEtᵒᵖ ⥤ CommRingCat.{u + 1} where
@@ -343,9 +302,7 @@ noncomputable def localizedContinuousMapPresheaf (X : Scheme.{u})
     intro U V W f g
     simpa using congrArg CommRingCat.ofHom (localizedContinuousMap_map_comp X T s U V W f g)
 
-/-- Sheafification of sectionwise localization on the small pro-etale site.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6 (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Sheafification of sectionwise localization on the small pro-etale site. -/
 noncomputable def localizedContinuousCoefficientSheaf (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     (s : T) : Sheaf (ProEt.topology X) CommRingCat.{u + 1} :=
@@ -356,9 +313,7 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Localization of the integral coefficient sheaf at the chosen uniformizer.
-Source: Bhatt--Scholze, Lemma 6.8.2(2) (blueprint:
-lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Localization of the integral coefficient sheaf at the chosen uniformizer. -/
 noncomputable def integralCoefficientLocalization (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Sheaf (ProEt.topology X) CommRingCat.{u + 1} := by
@@ -367,9 +322,7 @@ noncomputable def integralCoefficientLocalization (l : ℕ) [Fact l.Prime] (X : 
     (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))
     (ULift.up (Padic.coefficientExtensionUniformizer l E))
 
-/-- The continuous-function sheaf for a finite quotient, with its discrete topology.
-Source: Bhatt--Scholze, Lemma 4.2.12, discrete-target clause
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- The continuous-function sheaf for a finite quotient, with its discrete topology. -/
 noncomputable def finiteContinuousCoefficientSheaf (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -378,17 +331,13 @@ noncomputable def finiteContinuousCoefficientSheaf (l : ℕ) [Fact l.Prime]
   letI : DiscreteTopology (finiteCoefficientRing l E n) := ⟨rfl⟩
   exact continuousCoefficientSheaf X (finiteCoefficientRing l E n)
 
-/-- Evaluation in the continuous-function presentation; `id` only exposes the carrier.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Evaluation in the continuous-function presentation; `id` only exposes the carrier. -/
 def continuousCoefficientValue (X : Scheme.{u}) (T : Type (u + 1))
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] (U : X.ProEtᵒᵖ)
     (s : (continuousCoefficientSheaf X T).obj.obj U) (x : U.unop.left) : T :=
   (@id C(U.unop.left, T) s) x
 
-/-- Evaluation of an integral continuous coefficient section in the valuation ring.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Evaluation of an integral continuous coefficient section in the valuation ring. -/
 noncomputable def integralCoefficientValue (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) (U : X.ProEtᵒᵖ)
@@ -398,9 +347,7 @@ noncomputable def integralCoefficientValue (l : ℕ) [Fact l.Prime]
   exact (continuousCoefficientValue X
     (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) U s x).down
 
-/-- Evaluation of a rational continuous coefficient section in the coefficient field.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Evaluation of a rational continuous coefficient section in the coefficient field. -/
 noncomputable def rationalCoefficientValue (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) (U : X.ProEtᵒᵖ)
@@ -408,9 +355,7 @@ noncomputable def rationalCoefficientValue (l : ℕ) [Fact l.Prime]
   letI := coefficientExtensionNormedField l E
   exact (continuousCoefficientValue X (ULift.{u + 1, u} E) U s x).down
 
-/-- Evaluation of a discrete finite quotient section, in the site's coefficient universe.
-Source: Bhatt--Scholze, Lemma 4.2.12
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Evaluation of a discrete finite quotient section, in the site's coefficient universe. -/
 noncomputable def finiteContinuousCoefficientValue (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) (n : ℕ) (U : X.ProEtᵒᵖ)
@@ -421,9 +366,7 @@ noncomputable def finiteContinuousCoefficientValue (l : ℕ) [Fact l.Prime]
   exact continuousCoefficientValue X (finiteCoefficientRing l E n) U s x
 
 /-- The normalization that specifies pullback of continuous functions uniquely, using
-its adjunct on each test object. The variable factor of base change is first.
-Source: Bhatt--Scholze, Lemma 6.5.8(1), paragraph before Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+its adjunct on each test object. The variable factor of base change is first. -/
 def continuousCoefficientRestrictionNormalized (T : Type (u + 1))
     [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
     {Z X : Scheme.{u}} (h : Z ⟶ X)
@@ -435,9 +378,7 @@ def continuousCoefficientRestrictionNormalized (T : Type (u + 1))
       ((((proEtaleSheafAdjunction h CommRingCat.{u + 1}).homEquiv _ _) c).hom.app
         (Opposite.op U) s) x = s ((CategoryTheory.Limits.pullback.fst U.hom h) x)
 
-/-- Pullback normalization for the integral coefficient ring in its valuation topology.
-Source: Bhatt--Scholze, Lemma 6.5.8(1)
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Pullback normalization for the integral coefficient ring in its valuation topology. -/
 def integralCoefficientRestrictionNormalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {Z X : Scheme.{u}} (h : Z ⟶ X)
@@ -447,9 +388,7 @@ def integralCoefficientRestrictionNormalized (l : ℕ) [Fact l.Prime]
   exact continuousCoefficientRestrictionNormalized
     (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) h c
 
-/-- Pullback normalization for the rational coefficient ring in its valuation topology.
-Source: Bhatt--Scholze, paragraph before Definition 6.8.6
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- Pullback normalization for the rational coefficient ring in its valuation topology. -/
 def rationalCoefficientRestrictionNormalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {Z X : Scheme.{u}} (h : Z ⟶ X)
@@ -458,9 +397,7 @@ def rationalCoefficientRestrictionNormalized (l : ℕ) [Fact l.Prime]
   letI := coefficientExtensionNormedField l E
   exact continuousCoefficientRestrictionNormalized (ULift.{u + 1, u} E) h c
 
-/-- The sectionwise normalization of the coefficient inclusion `A → E`.
-Source: Bhatt--Scholze, Definition 6.8.1 and Lemma 6.8.2(2)
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+/-- The sectionwise normalization of the coefficient inclusion `A → E`. -/
 def integralRationalCoefficientNormalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u}) (a : integralCoefficientSheaf l X E ⟶ rationalCoefficientSheaf l X E) :
@@ -472,9 +409,7 @@ def integralRationalCoefficientNormalized (l : ℕ) [Fact l.Prime]
 
 /-- Normalization of the localization comparison on integral numerators.
 A ring map from a localization is determined by these values, so this specifies the
-canonical fraction map, including every power of the uniformizer in the denominator.
-Source: Bhatt--Scholze, Lemma 6.8.2(2)
-(blueprint: lem-weil-pbc-continuous-coefficients-immersion-restriction). -/
+canonical fraction map, including every power of the uniformizer in the denominator. -/
 def integralCoefficientLocalizationNormalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (X : Scheme.{u})

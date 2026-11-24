@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import WeilConjectures.AlgebraicGeometry.OpenExtensionTensorCounitIsIso
 
 /-! Projection mate for transported open extension.
-Source: Stacks Project, Tags 01AK, 06YB and 08BS.
-(blueprint: lem-pc-open-extension-projection-formula). -/
+
+## References
+
+* Stacks Project, Tags 01AK, 06YB and 08BS.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,12 +35,7 @@ local instance openExtensionProjectionStandardDerivedAux (X : Scheme.{u}) (U : X
   HasDerivedCategory.standard _
 
 /-- The projection mate is invertible for the transported adjunction.
-Source: Stacks Project, Tags 01AK, 06YB and 08BS.
-(blueprint: lem-pc-open-extension-projection-aux).
-Proof: the derived unit and the counit on J(A) tensor K are invertible. Tensoring
-that unit with the identity and composing with the strong monoidal comparison gives
-an invertible morphism f. The adjunction homEquiv_counit formula identifies its
-transpose with J.map f followed by that counit, so both factors are invertible. -/
+(Stacks, Tags 01AK, 06YB and 08BS) -/
 theorem openExtension_projection_formula_of_adjunction (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

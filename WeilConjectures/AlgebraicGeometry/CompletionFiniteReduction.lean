@@ -30,7 +30,7 @@ set_option linter.privateModule false
 
 /-! # Finite reduction of the normalized quotient completion
 
-Source: Stacks Tags 099M and 091N; blueprint order 1260.
+Stacks Project, Tags 099M and 091N.
 -/
 
 @[expose] public noncomputable section

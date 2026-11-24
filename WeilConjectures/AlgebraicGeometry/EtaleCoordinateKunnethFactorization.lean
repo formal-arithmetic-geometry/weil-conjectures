@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose
 
 /-! # Two coordinate factorizations before applying a trace
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

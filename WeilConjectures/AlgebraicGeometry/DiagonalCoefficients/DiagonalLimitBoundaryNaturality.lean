@@ -8,8 +8,6 @@ module
 public import Mathlib.CategoryTheory.Functor.Category
 
 /-! # Transporting a whole-system boundary through normalized endpoints
-
-Source: blueprint diagonal coefficient changes, paragraph (3).
 -/
 
 @[expose] public section
@@ -18,16 +16,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Naturality of a comparison of entire systems transports a boundary equation
-as soon as the two endpoint squares commute.
-
-Source: blueprint coefficient changes (3), naturality before finite evaluation.
-(blueprint: lem-diagonal-limit-boundary-naturality).
-
-Proof: postcompose with the monic target comparison. Replace the target endpoint
-square, then use the defining boundary equation. Naturality moves the boundary
-through the comparison, and the original boundary square identifies the result
-with the new boundary. The source endpoint square and the new defining boundary
-equation give the other side. Cancel the target comparison. -/
+as soon as the two endpoint squares commute. -/
 theorem diagonalLimitBoundary_naturality
     {A B A' B' : Type*}
     [Category A] [Category B] [Category A'] [Category B']

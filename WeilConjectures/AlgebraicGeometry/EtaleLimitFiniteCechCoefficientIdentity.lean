@@ -20,25 +20,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 set_option linter.unusedVariables false in
 /-- The identity law for prescribed descended Cech coefficient maps.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the displayed canonical
-Cech comparison. This is the identity part of the agent's explicit etale realization.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-identity).
-
-Proof: Apply HomologicalComplex.Hom.ext in degree n, then Pi.hom_ext at each tuple t.
-Postcompose each component equation by the presheaf image of eNj; this is an
-isomorphism and hence can be cancelled. Use the transition formula for the identity
-arrow and substitute hidentity after rewriting D.map_id. Evaluate
-upperStarId_hom_app_unit_app on Wj j n t: the unit followed by the identity
-coefficient map is restriction along the canonical projection from the identity
-pullback to Wj. The hom of gamma j j (identity) is precisely this projection.
-To check this identification, compose the hom of gamma with the first
-projection Wj j n t -> W0 n t and use hγ. It has the same first projection as the
-canonical comparison; both maps are over D_j, so their second projections also
-agree. The target Wj is the pullback of W0 over D_j, and pullback.hom_ext gives
-equality. The two inverse restriction maps cancel. This leaves the tuple projection
-of the identity cochain map, as required. If K is empty, no tuple t exists in any
-degree, and product extensionality is vacuous. This proves only the identity law.
--/
+(Stacks, Tag 09YP) -/
 theorem etale_limit_finite_cech_coefficient_identity
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizationComposition
 
 /-! # Bundled finite realization endpoints and their proved arrow calculation
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: def-diagonal-finite-route-data).
 -/
 
 @[expose] public noncomputable section

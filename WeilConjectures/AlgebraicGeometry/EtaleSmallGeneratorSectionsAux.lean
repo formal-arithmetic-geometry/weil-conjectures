@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSmallGenerator
 import Mathlib.Algebra.Category.Grp.LargeColimits
 
 /-! Auxiliary cardinal bound for the concrete etale generator.
-(blueprint: lem-sc-etale-small-generator-sections-surjective)
 -/
 
 @[expose] public section
@@ -137,24 +136,8 @@ private theorem small_dense_extension_essentiallySmall
     Iso.hom_inv_id, G.map_id, Category.id_comp] at hi'
   exact hi'
 
-/-- The section type of the concrete generator is a quotient of a u-small type.
-Source: Stacks Project, Tags 00W1 and 01DO; Mathlib's concrete plus construction
-and dense-subsite comparison.
-(blueprint: lem-sc-etale-small-generator-sections-surjective)
-
-Proof: An abelian-group colimit is a quotient of the direct sum of its values,
-so small diagrams of small groups have small colimits. On the small model,
-matching families and the set of covers are u-small. Every plus section is
-represented by a matching family, so plus preserves pointwise smallness.
-Apply this twice and compare with the chosen sheafification by uniqueness of
-left adjoints. Thus free-Yoneda sheaves and their small coproduct have small
-sections. The unit isomorphisms of the two comparison equivalences identify
-restrictions of the transported generator with these sections. Cover-density
-makes restriction into the product over model objects and maps injective;
-this product is u-small. Finally, the inverse of `equivShrink` is the required
-surjection. Empty objects and empty covering families need no separate choice:
-the matching-family and restriction products also include these cases.
--/
+/-- The section type of the concrete generator is a quotient of a `u`-small type (Stacks, Tags
+00W1 and 01DO). -/
 theorem etaleSmallGenerator_sections_surjective (X : Scheme.{u}) (U : X.Etaleᵒᵖ) :
     ∃ α : Type u, ∃ f : α → ((etaleSmallGenerator X).obj.obj U),
       Function.Surjective f := by

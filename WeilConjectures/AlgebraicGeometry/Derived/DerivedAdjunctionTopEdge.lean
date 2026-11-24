@@ -11,7 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedAdjunctionTopEdgeLocalCa
 /-! # Top cohomology of the derived adjunction
 The normalized local edge is identified with the counit on an upper truncation.
 Adjunction naturality then gives its action on every bounded-above source.
-Source: Stacks, derived.tex, Tags 08J5 and 05TC; cohomology.tex, Tags 079W and 0BKJ.
+
+## References
+
+* Stacks Project, Tags 08J5, 05TC, 079W, 0BKJ
 -/
 
 @[expose] public section

@@ -76,10 +76,6 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Coherent compact-support comparison on coefficient systems
 
-Source: latest blueprint, sec-smooth-purity/sk-lem-sp-field-extension,
-sk-lem-sp-field-extension-towers.proof.md (2), proper/open system comparison
-(blueprint: lem-sp-field-shriek-system-comparison).
-
 All arrows below live in the ordinary derived category of the ringed sequence site.
 The recorded section-preserving equivalence identifies this with the original strict
 tower category. Index n denotes positive exponent n+1. The structures package the
@@ -112,25 +108,19 @@ variable (P : PurityFiniteSetting.{u})
 
 attribute [local irreducible] coefficientMap HasDerivedCategory.standard
 
-/-- Invertibility on the recorded normalized full subcategory.
-Source: blueprint (2), finite isomorphisms and conservativity
-(blueprint: lem-sp-field-shriek-system-comparison). -/
+/-- Invertibility on the recorded normalized full subcategory. -/
 structure InvertibilityLaw (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) where
   invertible : ∀ (E F : Index P) (h : E ≤ F)
     (M : SpTowerShriek.D P.coefficients.l E.val X), normalized P D E X M →
     IsIso ((comparison P D h c).app M)
 
-/-- The complete system comparison assertion, retaining every clause.
-Source: blueprint (2), all comparison clauses
-(blueprint: lem-sp-field-shriek-system-comparison). -/
+/-- The complete system comparison assertion, retaining every clause. -/
 structure Laws (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     extends InvertibilityLaw P D c, MixedLaw P D c, CoherenceLaw P D c
 
 /-- The specified natural isomorphism on the recorded normalized full subcategory.
-Its forward morphism is literally the proper/open word, not an unspecified isomorphism.
-Source: blueprint (2), b : C_Y P_A isomorphic to P_B C_X
-(blueprint: lem-sp-field-shriek-system-comparison). -/
+Its forward morphism is literally the proper/open word, not an unspecified isomorphism. -/
 def iso (D : Models P) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (l : Laws P D c) {E F : Index P} (h : E ≤ F) :
     (normalized P D E X).ι ⋙

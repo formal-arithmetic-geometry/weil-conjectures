@@ -253,23 +253,8 @@ private noncomputable def encodingPullbackNatIso (T U : Scheme.{u}) (j : U ⟶ T
     EU.symm.toAdjunction
   exact a.leftAdjointUniq (b.ofNatIsoRight kr)
 
-/-- The common coefficient encoding commutes with inverse image along a scheme morphism.
-Source: Bhatt--Scholze, Proposition 5.3.2; the sectionwise encoding of internal
-modules and the coefficient identification pulled back from one fixed point.
-(blueprint: lem-weil-pbc-finite-discrete-restriction-encoding)
-
-Proof in words. Write the encoding as restriction of scalars along the fixed
-constant-ring identification, followed by sectionwise encoding. At the presheaf
-level, sectionwise encoding commutes with direct image, which is precomposition;
-restriction of scalars commutes with that same precomposition. The coefficient
-maps commute because all are obtained by pulling back eR from the profinite point.
-Restrict this direct-image isomorphism to sheaves. Conjugating by the two encoding
-equivalences and using uniqueness of left adjoints gives the inverse-image
-isomorphism. The internal inverse image is mapMod followed by extension of
-scalars along condensedPullbackHom. This ring map is invertible, so extension
-of scalars is canonically restriction along its inverse. Evaluate the resulting
-natural isomorphism at M. This uses no finiteness, nonempty-space, or nonzero-ring
-assumption. -/
+/-- The common coefficient encoding commutes with inverse image along a scheme morphism
+(Bhatt--Scholze, Proposition 5.3.2). -/
 theorem finiteDiscreteCoefficient_restrictionEncoding
     (T U : Scheme.{u}) (j : U ⟶ T) (M : FiniteDiscreteInternalModules B T) :
     Nonempty (

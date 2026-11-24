@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.StalkComparisonCoordinateInvariance
 
 /-! # Stalk condition of the universal pullback counit
 
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-pc-counit-stalk-condition-from-localized-comparison).
+## References
+
+* Stacks Project, Tag 0DJ8
 -/
 
 @[expose] public section
@@ -58,22 +59,7 @@ private theorem resolution_counit_isIso
   infer_instance
 
 /-- The localized tensor comparison on the original complex suffices for the
-coordinate-independent stalk condition of its universal pullback counit.
-
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-Proof: fix K-flat coordinates c for the counit and a point z. The representing
-identity of c identifies its chain map, after localization, with the universal
-pullback counit on the original complex G. Exactness of stalks transports the
-representative isomorphisms c.e and c.e' to cohomology isomorphisms. The universal
-left-derived counit equations in cohomologyModel identify the source comparison
-computed on c.P with that computed on G, by functoriality of derived scalar
-extension and the isomorphism c.e. The degreewise tensorStalkIso identifies the
-ordinary scalar-extension target with the stalk of tensorPullback G. Naturality
-of these identifications and c.represents show that stalkComparison c is the
-localizedComparison for G conjugated by these source and target isomorphisms.
-Thus its invertibility follows from the hypothesis for every z and i. This
-argument uses only the canonical maps, and applies also to acyclic or unbounded G.
-(blueprint: lem-pc-counit-stalk-condition-from-localized-comparison). -/
+coordinate-independent stalk condition of its universal pullback counit (Stacks, Tag 0DJ8). -/
 theorem counit_stalkCondition_of_localizedComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

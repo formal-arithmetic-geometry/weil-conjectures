@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalUniformizerRouteEndpoints
 
 /-! # Functors and endpoints for the two finite coefficient routes
-
-Source: diagonal tower coefficient changes (1), derived adjunction transitivity.
-(blueprint: def-diagonal-coefficient-route-endpoints).
 -/
 
 @[expose] public noncomputable section

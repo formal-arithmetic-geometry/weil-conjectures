@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystemNatural
 
 /-! # Complex presentation of the varying-coefficient raw diagram
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-abelian-raw-cocone-complex-presentation).
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -70,38 +71,7 @@ private theorem presentation_of_iso
 set_option backward.isDefEq.respectTransparency true in
 /-- The prescribed raw diagram and its cocone admit a geometric complex presentation.
 This asserts only the input data for continuity, with no colimit assertion on B.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit, reduction to affine U),
-Tag 03Q8 (restricted cohomology), and Tag 0EZM (lemma-colimit-variant-complexes,
-canonical pullback/coefficient maps).
-(blueprint: lem-sbc-abelian-raw-cocone-complex-presentation).
-
-Proof: Form X_i times_S U and X times_S U, with induced maps given by the pullback
-universal property. That property also proves the cone is limiting. Base change
-preserves affine transitions and qcqs structure morphisms. Because U is affine,
-each stage is a compact quasi-separated scheme. Pull back F_i along the projections
-to X_i and use upperStarComp to pull back phi. Its unit and associativity coherence
-transport hphiid and hphicomp to the restricted system. Form the degree-zero single
-complexes: they vanish below zero and their maps are obtained using the single-functor
-comparison. On the limit restrict H and identify each object using eH and the
-inverse-image composition comparison. The formula hH gives its canonical transitions.
-The restriction functor is a left adjoint, so it preserves the coefficient colimit;
-the single-complex functor preserves this colimit termwise. This gives G, eG, hG,
-L and IsColimit L in EtaleComplexCohomologyPresentation.
-Use the free abelian represented sheaf/sections adjunction at U. Its inverse image
-represents sections on X_i times_S U. Etale restriction preserves injectives because
-its left adjoint is exact. Thus on a bounded-below injective resolution this adjunction
-identifies the raw derived-Hom group with restricted cohomology, additively. The fully
-faithful inclusion of D+ in D compares this with cohomology of the single complex.
-Apply these isomorphisms to e.inv and eB.inv to identify K and B.pt with those groups.
-Choose P to be exactly the derived adjunction-unit pullback displayed in the definition.
-Naturality of derived adjunction, inverse-image composition, and the single and shift
-comparisons identifies the raw five-factor formula with P followed by the coefficient
-map. Applied to each stage arrow and hmap this proves hH of the presentation; applied
-to each cone projection and hleg it proves hB. Both are equalities of homomorphisms,
-by extensionality. Reindex through the double-opposite equivalence to meet the index
-convention in the presentation. No continuity theorem is used. For degree zero these
-are the section adjunctions; for empty U all the groups are zero, and the same
-comparisons still apply. -/
+(Stacks, Tags 09Z1, 03Q8 and 0EZM). -/
 theorem abelianRawCocone_complex_presentation {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

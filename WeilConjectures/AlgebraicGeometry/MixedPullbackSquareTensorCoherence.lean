@@ -12,9 +12,10 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.DerivedPullbackCompositionTensorKFlat
 
 /-! # Tensor coherence of the canonical pullback square
-Source: Stacks Project, cohomology.tex, Tags 079U and 08HY;
-duality.tex, Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-pullback-square-tensor-coherence).
+
+## References
+
+* Stacks Project, Tags 079U, 08HY and 0AA8.
 -/
 
 @[expose] public section
@@ -35,9 +36,8 @@ attribute [local irreducible] mixedHomTensorPullbackIso schemeDerivedTensorMonoi
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Canonical square comparison, made from the fixed composition comparisons.
-Source: Stacks Project, Remark 08HY
-(blueprint: lem-sc-mixed-pullback-square-tensor-coherence). -/
+/-- Canonical square comparison, made from the fixed composition comparisons
+(Stacks, Tag 08HY). -/
 def mixedPullbackSquareComparison
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y) :
     derivedPullback g ⋙ derivedPullback (pullback.snd f g) ≅
@@ -176,19 +176,7 @@ private theorem composition_tensor
     Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj,
     Functor.prod_obj, tensor_obj, Category.assoc] using h
 
-/-- Tensor coherence of the canonical square comparison.
-Source: Stacks Project, cohomology.tex, Lemma 079U and Remark 08HY;
-duality.tex, Tag 0AA8, final comparison diagrams.
-(blueprint: lem-sc-mixed-pullback-square-tensor-coherence).
-
-Proof: choose K-flat representatives of P and Q. Their tensor and successive
-pullbacks are K-flat. The normalization equations identify all four tensorators with
-ordinary pullback tensor comparisons, and the two composition comparisons with the
-mates of ordinary direct-image composition. Both ordinary paths carry a pure tensor
-to the tensor of the same pulled-back sections. Localize this equality and cancel
-only the invertible K-flat derived counits. Naturality and resolution isomorphisms
-transport the result to arbitrary P and Q. Equality of the scheme composites supplies
-the canonical equality transport. No base-change morphism is cancelled. -/
+/-- Tensor coherence of the canonical square comparison (Stacks, Tags 079U, 08HY and 0AA8). -/
 theorem mixedPullbackSquareComparison_tensor
     {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (P Q : schemeDerivedCategory Y) :

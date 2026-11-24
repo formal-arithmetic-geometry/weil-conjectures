@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystem
 
 /-! # Complex presentation of raw restricted cohomology
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation).
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1.
 -/
 
 @[expose] public section
@@ -29,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 /-- Existence of input data for complex continuity, together with identifications of its cocone with
 specified groups and maps. This proposition does not assert that the cohomology cocone is a
 colimit, or that its legs represent every class. The coefficient cocone `L` is a colimit
-of complexes; cohomology need not preserve it without the geometric continuity theorem. 
-(blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation)
+of complexes; cohomology need not preserve it without the geometric continuity theorem.
 -/
 inductive RawCohomologyComplexPresentation
     (J : Type v) [SmallCategory J] (A : Jᵒᵖ → AddCommGrpCat.{v + 1})
@@ -123,27 +123,8 @@ inductive RawCohomologyComplexPresentation
       RawCohomologyComplexPresentation J A Z b p
 
 /-- The raw restricted-cohomology groups admit a presentation by the canonical
-cohomology cocone of uniformly bounded-below complexes on a qcqs inverse system.
-Source: Stacks Project, Tag 09Z1 (base change to an affine etale object and the
-restricted-cohomology system), Tag 03Q8 (derived Hom computes restricted cohomology),
-and Tag 0EZM (the canonical complex cohomology maps).
-(blueprint: lem-sbc-higher-direct-image-raw-affine-complex-presentation).
-
-Proof: Apply exists_restricted_affine_complex_system to the geometric and coefficient
-system. It supplies the qcqs limiting diagram, single-complex transitions, common
-lower bound zero, coefficient colimit and canonical cohomology cocone. These data
-involve restricted cohomology, without raw derived Hom. Independently apply
-exists_raw_restricted_cohomology_natural_iso: for every structure morphism and
-coefficient map it identifies raw derived Hom with restricted cohomology and
-intertwines the explicit raw pullback with rawAffineRestrictedCohomologyMap.
-Compose its stage isomorphisms with the geometric restrictionIso, and its limit
-isomorphism with restrictionLimitIso. Fill the presentation constructor using
-the geometric data and rawAffineComplexPullback; the prescribed equation hP is
-reflexivity. For a class t, expand these composite isomorphisms, use the geometric
-leg equation on the image of t, and use the natural-comparison equation under
-the limit isomorphism. This proves the required compatibility. The two imported
-theorems retain the geometric construction and restricted-Hom comparison as
-separate obligations; no continuity or existence of representatives is used. -/
+cohomology cocone of uniformly bounded-below complexes on a qcqs inverse system
+(Stacks, Tags 09Z1, 03Q8 and 0EZM). -/
 theorem exists_raw_affine_complex_presentation {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

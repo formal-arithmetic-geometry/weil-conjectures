@@ -16,21 +16,8 @@ universe u w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
 namespace AlgebraicGeometry
 
-/-- Shifted-unit comparison needed for the K-flat counit data.
-
-This is a conditional lemma: the isomorphism `Lf^*(O_Y[1]) ≅ O_Z[1]` is obtained from the
-assumed instance `[Functor.Monoidal (derivedPullback f)]`, which supplies `Lf^*O_Y ≅ O_Z`.
-No such monoidal structure on `derivedPullback f` is constructed in the project yet.
-
-Source: Stacks Project, Tag 06YJ, translated-unit comparison.  The proof uses
-that a monoidal derived pullback carries the monoidal unit to the monoidal unit,
-and that a triangulated functor carries the integer shift of an object to the
-corresponding shift of its image.  Composing these canonical isomorphisms with
-the canonical shifted-unit comparison on the target gives the displayed
-isomorphism; the required coherence follows from the functoriality of the
-shift and the monoidal unitors.
-(blueprint: lem-sc-derived-pullback-shifted-unit-iso-data).
--/
+/-- The isomorphism `Lf^*(O_Y[1]) ≅ O_Z[1]`, assuming `derivedPullback f` is monoidal.
+(Stacks, Tag 06YJ) -/
 theorem exists_derivedPullback_shifted_unit_iso
     {Z Y : Scheme.{u}} (f : Z ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

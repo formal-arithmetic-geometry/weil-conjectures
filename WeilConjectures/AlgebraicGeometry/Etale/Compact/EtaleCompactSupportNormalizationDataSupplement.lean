@@ -26,8 +26,10 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportNormalization
 /-!
 # Constructed graph comparisons for compact supports
 
-Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6
-(blueprint: def-asd-compact-support-graph-comparison).
+## References
+
+* SGA 4 XVII 5.2.2 and 6.2.11
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public section
@@ -41,25 +43,19 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The compact-support exchange as a 2-square, for canonical pasting.
-Source: SGA 4 XVII 5.2.2
-(blueprint: def-asd-compact-support-graph-comparison). -/
+/-- The compact-support exchange as a 2-square, for canonical pasting. -/
 noncomputable def exactCompactSupportExchangeSquare
     (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
     {f : U ⟶ X} (c : Compactification f) (g : X' ⟶ X) :=
   TwoSquare.mk _ _ _ _ (exactCompactSupportExchange A c g)
 
-/-- The specified sum exchange as a 2-square, for the same canonical pasting.
-Source: Stacks Project Tag 03S6
-(blueprint: def-asd-compact-support-graph-comparison). -/
+/-- The specified sum exchange as a 2-square, for the same canonical pasting. -/
 noncomputable def exactEtaleSumExchangeSquare
     (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
     (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :=
   TwoSquare.mk _ _ _ _ (exactEtaleSumExchange A f g).hom
 
-/-- Regard a proper refinement as a compactification of the coarser open immersion.
-Source: SGA 4 XVII 6.2.11
-(blueprint: def-asd-compact-support-graph-comparison). -/
+/-- Regard a proper refinement as a compactification of the coarser open immersion. -/
 def refinementOpenCompactification
     {U X : Scheme.{u}} {f : U ⟶ X} {c d : Compactification f}
     (r : c.Refinement d) : Compactification d.i where
@@ -73,9 +69,7 @@ def refinementOpenCompactification
 section IdentityNormalization
 attribute [local instance 2000] Abelian.toPreadditive
 
-/-- Identity normalization: remove the exact derived direct image of the identity.
-Source: SGA 4 XVII 6.2.11
-(blueprint: def-asd-compact-support-graph-comparison). -/
+/-- Identity normalization: remove the exact derived direct image of the identity. -/
 noncomputable def identityEtaleCompactSupportComparison
     (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
@@ -90,8 +84,7 @@ noncomputable def identityEtaleCompactSupportComparison
 
 end IdentityNormalization
 
-/-- Core comparison data: the geometric and degreewise normalization maps.
-Source: SGA 4 XVII 5.2.2 and 6.2.11 (blueprint: def-asd-compact-support-graph-comparison). -/
+/-- Core comparison data: the geometric and degreewise normalization maps. -/
 structure EtaleCompactSupportCore (A : Type (u + 1)) [CommRing A] where
   comparison : ∀ {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]
     [IsLocallyNoetherian U] [CompactSpace U] [IsLocallyNoetherian X] [CompactSpace X]

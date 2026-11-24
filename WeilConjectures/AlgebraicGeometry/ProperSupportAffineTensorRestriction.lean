@@ -22,7 +22,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 
 /-! # Affine restriction of proper-support tensor data
 
-Source: Stacks Project, Tag 0A1H, affine reduction; Tag 0A1D, tensor base change.
+## References
+
+* [Stacks, Tag 0A1H] (affine reduction), [Stacks, Tag 0A1D] (tensor base change)
 -/
 
 @[expose] public section
@@ -34,24 +36,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry
 
 /-- Restrict the input tensor data to an affine open, using its spectrum coordinates.
-Source: Stacks Project, Tag 0A1H, the sentence reducing to an affine base, and Tag 0A1D.
-Proof: set j = U.isoSpec.inv followed by U.ι, and form X' = X ×_S Spec Γ(U, O).
-Let f' be its second projection, E' the derived pullback of E by its first projection,
-and G' the termwise tensor pullback of G. Base change preserves finite presentation,
-quasi-compactness and quasi-separatedness of f. Derived pullback preserves perfectness.
-The tensor-pullback functor is additive, hence sends each zero term of G to a zero term;
-local finite presentations pull back to local finite presentations. The stalk tensor
-formula and base-change stability of flat modules give relative flatness of each term.
-For a finitely presented module its pulled support is the inverse image of its support,
-by Nakayama on the finite stalk module over the local ring map. The reduced structure
-on that inverse image is a closed subscheme of the base change of the original reduced
-support; properness survives base change and closed immersion, giving proper support.
-Apply cartesian_tensor_data_comparison to f and j. Pull its isomorphism back along
-U.isoSpec.hom, then use composition of derived pullbacks and the identity comparison
-for U.isoSpec.hom followed by j = U.ι. This gives the displayed comparison.
-The construction works on an empty affine open and for zero complexes; no Noetherian
-approximation or direct-image perfectness is used.
-(blueprint: lem-pc-proper-support-affine-tensor-restriction). -/
+(Stacks, Tags 0A1H, 0A1D) -/
 theorem properSupport_affine_tensor_restriction
     {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]

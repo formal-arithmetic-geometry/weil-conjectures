@@ -11,8 +11,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
 
 /-! # Scalars in the underived affine associated-sheaf functor
 
-Source: Stacks Project, Tags 01I6 and 06Z0, associated-sheaf construction.
-(blueprint: lem-sc-affine-sheafification-scalar).
+## References
+
+* Stacks Project, Tags 01I6 and 06Z0
 -/
 
 @[expose] public section
@@ -21,9 +22,7 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Scalar calculation for the associated-sheaf construction.
-Source: Stacks Project, Tag 01I6.
-(blueprint: lem-sc-affine-sheafification-scalar). -/
+/-- Scalar calculation for the associated-sheaf construction (Stacks, Tag 01I6). -/
 private theorem tilde_scalar_sections (R : CommRingCat.{u}) (M : ModuleCat.{u} R) (r : R)
     (V : (Spec R).Opens) (x : Γ(tilde M, V)) :
     (tilde.map (r • 𝟙 M)).app V x =
@@ -54,9 +53,7 @@ private theorem tilde_scalar_sections (R : CommRingCat.{u}) (M : ModuleCat.{u} R
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Scalar calculation for the associated-sheaf construction.
-Source: Stacks Project, Tag 01I6.
-(blueprint: lem-sc-affine-sheafification-scalar). -/
+/-- Scalar calculation for the associated-sheaf construction (Stacks, Tag 01I6). -/
 private theorem affine_scalar_coefficient (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
     (r : X.presheaf.obj (op U)) (W : Over U) :
     let V : (U : Scheme.{u}).Opens := U.overEquivalence.functor.obj W
@@ -89,23 +86,8 @@ private theorem affine_scalar_coefficient (X : Scheme.{u}) (U : X.Opens) (hU : I
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Affine sheafification takes multiplication by an affine section to multiplication
-by its restrictions on the localized site. This is an underived statement about one module.
-Source: Stacks Project, Tag 01I6, the associated-sheaf construction and its linearity;
-Tag 06Z0, its termwise use in the derived affine equivalence.
-(blueprint: lem-sc-affine-sheafification-scalar).
-
-Proof: Write the affine sheafification as tilde followed by restriction along the affine
-spectrum isomorphism and the inverse over-site equivalence. On tilde, multiplication by r
-on a module sends a local fraction m/s to rm/s; this is multiplication by the image of r
-in the local structure ring. Restriction along the spectrum isomorphism transports this
-image by the structure-sheaf ring map. The defining affine spectrum isomorphism identifies
-this transported section on each open V contained in U with the restriction of r from U
-to V. The inverse over-site equivalence only reindexes V as an object of Over U and
-transports the coefficient ring through the canonical restriction identification. Thus
-every component of the mapped scalar identity is multiplication by the corresponding
-component of overSections U r. The homModule action has precisely these components.
-Extensionality of module-sheaf morphisms proves the equality. This fraction calculation
-also holds for r = 0 and for the empty open, with the unique maps of zero rings. -/
+by its restrictions on the localized site. This is an underived statement about one module
+(Stacks, Tags 01I6 and 06Z0). -/
 theorem affine_perfect_sheafification_scalar (X : Scheme.{u}) (U : X.Opens)
     (hU : IsAffineOpen U) (M : ModuleCat.{u} (X.presheaf.obj (op U)))
     (r : X.presheaf.obj (op U)) :

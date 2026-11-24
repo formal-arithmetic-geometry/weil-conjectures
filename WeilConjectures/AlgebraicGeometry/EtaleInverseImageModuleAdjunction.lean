@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Inverse image of modules on small étale sites
 
-Source: Stacks Project, Modules on Sites, Tags 03D1, 03D2 and 03D3
-(blueprint: situation-conventions).
+## References
+
+* Stacks Project, Tags 03D1, 03D2 and 03D3
 -/
 
 @[expose] public section
@@ -27,10 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Restrict a hom equivalence to morphisms seen by faithful forgetful functors.
-Source: Stacks Project, Tag 03D3, restriction and naturality step;
-Mathlib `Adjunction.mkOfHomEquiv` and its unit/counit formulas
-(blueprint: situation-conventions). -/
+/-- Restrict a hom equivalence to morphisms seen by faithful forgetful functors (Stacks, Tag
+03D3). -/
 private theorem adjunctionOfLinearLifts
     {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
     (L : C ⥤ D) (R : D ⥤ C) (La : A ⥤ B) (Ra : B ⥤ A)
@@ -120,26 +119,8 @@ private theorem adjunctionOfLinearLifts
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Inverse image transports the scalar action and the abelian adjunction restricts to modules.
-Source: Stacks Project, Tags 03D1--03D3
-(blueprint: situation-conventions).
-
-Proof:
-1. By situation-conventions and
-   situation-conventions, inverse image preserves products and
-   transports the ring and group operations. Apply it to the module axioms to obtain
-   the displayed action. Direct image is sectionwise, with restriction of scalars along
-   the ring unit (03D1, 03D2); both constructions preserve linear maps.
-2. Naturality of the set unit at the scalar action, together with its compatibility with
-   product projections, proves that the abelian unit is linear (the square in 03D3).
-3. Naturality of the counit at the scalar action proves that it is linear: on the first
-   product projection use the triangle identity, and on the second use counit naturality.
-   This supplies the implication omitted in 03D3.
-4. By situation-conventions, the adjoint of alpha is R(alpha) after the
-   unit, and alpha is L(beta) followed by the counit. Steps 1--3 prove both implications.
-5. Restrict the abelian hom equivalence to the subsets of linear maps. Its naturality
-   gives the module adjunction; its unit and counit are the linear maps of steps 2--3.
-   The module category is situation-conventions. -/
+/-- Inverse image transports the scalar action and the abelian adjunction restricts to modules
+(Stacks, Tags 03D1 and 03D3). -/
 theorem etaleInverseImageModuleAdjunction (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1}) :
     let L := Scheme.etaleSetPullback f

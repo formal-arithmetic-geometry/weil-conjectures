@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Galois.GaloisStalkActionEssSurj
 /-!
 # Canonical set-valued stalk equivalence over an algebraically closed extension
 
-Source: Stacks Project, Tags 03QT and 03QW.
+## References
+
+* Stacks Project, Tags 03QT and 03QW
 -/
 
 @[expose] public section

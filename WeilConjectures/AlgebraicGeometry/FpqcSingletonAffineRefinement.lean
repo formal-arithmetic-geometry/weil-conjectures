@@ -12,8 +12,10 @@ public import Mathlib.AlgebraicGeometry.Limits
 /-!
 # Affine refinement of a singleton fpqc covering
 
-Source: Stacks Project, Topologies, Definition 022B and Lemma 022E, with the finite
-coproduct construction (blueprint: lem-galois-fpqc-singleton-affine-refinement).
+## References
+
+* [Stacks Project, Tag 022B](https://stacks.math.columbia.edu/tag/022B)
+* [Stacks Project, Tag 022E](https://stacks.math.columbia.edu/tag/022E)
 -/
 
 @[expose] public section
@@ -25,19 +27,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 /-- If a singleton fpqc covering has affine base, finitely many affine opens of its source
-give an affine coproduct whose induced map is flat, surjective, and an fpqc covering.
-
-Source: Stacks Project, Topologies, Definition 022B and Lemma 022E
-(blueprint: lem-galois-fpqc-singleton-affine-refinement).
-
-Apply the finite affine-open image condition of the fpqc covering to the whole affine base;
-the source map is flat. Form the finite coproduct of the chosen opens and use its universal
-property to obtain the map to the original source. A finite coproduct of affine schemes is
-affine. The induced map is surjective since the images of the opens cover the base, and it
-is flat because the coprojections and the open inclusions identify the local rings with
-those of the original flat map. Finally, for every affine open of the base, its inverse
-image under the resulting flat surjection is affine and witnesses the singleton fpqc
-condition. The empty family is allowed when the base is empty. -/
+give an affine coproduct whose induced map is flat, surjective, and an fpqc covering
+(Stacks, Topologies, Definition 022B and Lemma 022E). -/
 theorem exists_fpqc_singleton_affine_refinement {X S : Scheme.{u}} [IsAffine S]
     (f : X ⟶ S) (hf : Presieve.singleton f ∈ fpqcPrecoverage S) :
     ∃ (n : ℕ) (U : Fin n → X.Opens), (∀ j, IsAffineOpen (U j)) ∧

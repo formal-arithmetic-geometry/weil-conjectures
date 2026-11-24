@@ -53,12 +53,22 @@ public import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbac
 /-!
 # Completed lisse sheaves and normalized finite etale systems
 
-Source: Bhatt--Scholze, Lemma 6.8.2, Corollary 5.1.5 and Proposition 6.8.4(1),(4),
-pp. 35, 58--59 (blueprint: def-per-lisse-completed-system-data).
-
 Positive exponent n+1 is indexed by n. The finite-free restriction of the recorded
 Weil II system category is explicit. Coefficients are actual completed ring sheaves;
 the continuous-function presentation is identified by its residue projections.
+
+## Implementation details
+
+* `ModuleOperation` retains independent site object and morphism universes.
+* In `IntegralOperation` all adjunctions are on ambient module sheaves, so their left
+  adjoints are genuine tensor pullbacks, without extra assumptions.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2, Corollary 5.1.5 and Proposition 6.8.4(1),(4),
+  pp. 35, 58--59.
+* Deligne, Weil II, (1.1.1) b), c), d).
+* Stacks Project, Tags 03D1 and 03D2.
 -/
 
 @[expose] public noncomputable section
@@ -74,8 +84,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.CompletedLisse
 
-/-- The coefficients and scheme in BS 6.8.4, with exactly the hypotheses of this node.
-Source: BS 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+/-- The coefficients and scheme in BS 6.8.4, with exactly the hypotheses of that statement. -/
 structure Base (l : ℕ) [Fact l.Prime] where
   E : Type (u + 1)
   field : Field E
@@ -91,37 +100,30 @@ attribute [instance] Base.field Base.algebra Base.finiteDimensional Base.noether
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Integral coefficients, using the recorded valuation ring.
-Source: BS 6.8.2 (blueprint: def-per-lisse-completed-system-data). -/
+/-- Integral coefficients, using the recorded valuation ring. -/
 noncomputable abbrev Integers (P : Base.{u} l) := Padic.coefficientExtensionIntegers l P.E
 
-/-- The actual inverse limit of constant finite quotient ring sheaves.
-Source: BS 6.8.2(1) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The actual inverse limit of constant finite quotient ring sheaves. -/
 noncomputable abbrev completedRing (P : Base.{u} l) :=
   adicLisseCompletedRing P.X
     (Ideal.span ({Padic.coefficientExtensionUniformizer l P.E} : Set (Integers l P)))
 
-/-- The ring of continuous rational coefficients, canonically the localized completion.
-Source: BS 6.8.2(2) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The ring of continuous rational coefficients, canonically the localized completion. -/
 noncomputable abbrev rationalRing (P : Base.{u} l) := lisseFieldSheafSized l P.E P.X
 
-/-- The full category of completed lisse modules; finite rank may vary and may be zero.
-Source: BS 6.8.3 (blueprint: def-per-lisse-completed-system-data). -/
+/-- The full category of completed lisse modules; finite rank may vary and may be zero. -/
 noncomputable abbrev Integral (P : Base.{u} l) :=
   (SheafOfModules.isFiniteLocallyFree
     ((adicLisseForget P.X).obj (completedRing l P))).FullSubcategory
 
-/-- Rational lisse modules over the continuous/localized coefficient sheaf.
-Source: BS 6.8.3 (blueprint: def-per-lisse-completed-system-data). -/
+/-- Rational lisse modules over the continuous/localized coefficient sheaf. -/
 noncomputable abbrev Rational (P : Base.{u} l) :=
   (SheafOfModules.isFiniteLocallyFree
     ((adicLisseForget P.X).obj (rationalRing l P))).FullSubcategory
 
 /-- The finite-free restriction of the recorded normalized system category. Freeness is
 expressed on every geometric stalk as an integral-linear isomorphism with A_n^r.
-The recorded finite-local-constancy condition makes this exactly etale local freeness.
-Source: Weil II (1.1.1) b), BS 6.8.4(1)
-(blueprint: def-per-lisse-completed-system-data). -/
+The recorded finite-local-constancy condition makes this exactly etale local freeness. -/
 noncomputable def IsFreeSystem (P : Base.{u} l) (F : LisseIntegralSheaf l P.E P.X) : Prop :=
   ∀ (n : ℕ) (κ : Type u) [Field κ] [IsAlgClosed κ] (x : Spec (.of κ) ⟶ P.X),
     ∃ r : ℕ, Nonempty
@@ -129,39 +131,32 @@ noncomputable def IsFreeSystem (P : Base.{u} l) (F : LisseIntegralSheaf l P.E P.
         (A := ModuleCat.{u + 1} (Integers l P))).obj (F.obj.obj (op n)) ≃ₗ[Integers l P]
           (Fin r → Padic.coefficientExtensionRing l P.E (n + 1)))
 
-/-- Normalized finite-free etale towers, with the recorded compatible-family morphisms.
-Source: BS 6.8.4(1) (blueprint: def-per-lisse-completed-system-data). -/
+/-- Normalized finite-free etale towers, with the recorded compatible-family morphisms. -/
 noncomputable abbrev Systems (P : Base.{u} l) := ObjectProperty.FullSubcategory (IsFreeSystem l P)
 
 /-- The raw rational category restricted to precisely the finite-free integral systems.
-No idempotent completion or existence of a global lattice is imposed.
-Source: BS 6.8.4(4), Weil II (1.1.1) c)
-(blueprint: def-per-lisse-completed-system-data). -/
+No idempotent completion or existence of a global lattice is imposed. -/
 noncomputable abbrev RawRational (P : Base.{u} l) :=
   ObjectProperty.FullSubcategory
     (fun F : LisseRationalSheaf l P.E P.X ↦ IsFreeSystem l P F.integral)
 
-/-- Forget only the module action, retaining the sheaf of abelian groups.
-Source: BS 6.8.4(1) (blueprint: def-per-lisse-completed-system-data). -/
+/-- Forget only the module action, retaining the sheaf of abelian groups. -/
 noncomputable abbrev integralForget (P : Base.{u} l) :=
   SheafOfModules.toSheaf.{u + 1} ((adicLisseForget P.X).obj (completedRing l P))
 
-/-- Underlying abelian sheaves of the recorded normalized etale levels.
-Source: BS 6.8.4(1) (blueprint: def-per-lisse-completed-system-data). -/
+/-- Underlying abelian sheaves of the recorded normalized etale levels. -/
 noncomputable def etaleDiagram (P : Base.{u} l) (F : Systems l P) :
     ℕᵒᵖ ⥤ Sheaf P.X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
   F.obj.obj ⋙ sheafCompose _ (forget₂ (ModuleCat.{u + 1} (Integers l P)) AddCommGrpCat)
 
 /-- The actual levelwise etale-to-pro-etale inverse image, on underlying abelian sheaves.
-The coefficient actions are retained by the scalar equations in Comparison.
-Source: BS 5.1.5, 6.8.4(1) (blueprint: def-per-lisse-completed-system-data). -/
+The coefficient actions are retained by the scalar equations in Comparison. -/
 noncomputable def proEtaleDiagram (P : Base.{u} l) (F : Systems l P) :
     ℕᵒᵖ ⥤ Sheaf (ProEt.topology P.X) AddCommGrpCat.{u + 1} :=
   etaleDiagram l P F ⋙ supportSiteComparisonCoefficientPullback AddCommGrpCat.{u + 1} P.X
 
 /-- Constant scalar multiplication on completed modules, transported by the coefficient
-identification. Its underlying abelian map is the same actual scalar endomorphism.
-Source: BS 6.8.2 (blueprint: def-per-lisse-completed-system-data). -/
+identification. Its underlying abelian map is the same actual scalar endomorphism. -/
 noncomputable def integralScalar (P : Base.{u} l)
     (e : lisseIntegerSheafSized l P.E P.X ≅ completedRing l P)
     (M : Integral l P) (a : Integers l P) :
@@ -170,8 +165,7 @@ noncomputable def integralScalar (P : Base.{u} l)
     (integralLisseScalar l P.E P.X
       ((SheafOfModules.restrictScalars ((adicLisseForget P.X).map e.hom)).obj M.obj) a)
 
-/-- Multiplication by a rational constant on a rational module, with its actual action.
-Source: BS 6.8.4(4) (blueprint: def-per-lisse-completed-system-data). -/
+/-- Multiplication by a rational constant on a rational module, with its actual action. -/
 noncomputable def rationalScalar (P : Base.{u} l)
     (M : ringedSiteModules.{u + 1} ((adicLisseForget P.X).obj (rationalRing l P)))
     (a : P.E) : M ⟶ M :=
@@ -187,9 +181,7 @@ noncomputable def rationalScalar (P : Base.{u} l)
        exact (M.val.map_smul f (lisseFieldConstantSized l P.E P.X _ a) x).symm }⟩
 
 /-- The fixed completed-coefficient comparison at one base. Every functor is normalized
-by quotient/limit universal properties and every rational map by its pure-tensor formula.
-Source: BS 5.1.5, 6.8.2, 6.8.4(1),(4)
-(blueprint: def-per-lisse-completed-system-data). -/
+by quotient/limit universal properties and every rational map by its pure-tensor formula. -/
 structure IntegralComparison (P : Base.{u} l) where
   integralComparison : IntegralLisseReductionEquivalence l P.E P.X
   coefficientIso : lisseIntegerSheafSized l P.E P.X ≅ completedRing l P
@@ -238,8 +230,7 @@ structure IntegralComparison (P : Base.{u} l) where
         ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (Integers l P)) AddCommGrpCat)).map
           ((equivalence.counitIso.hom.app F).hom.hom.app (op n))) = (completion F).app (op n)
 
-/-- The integral comparison together with rational realization.
-Source: BS 6.8.4(1),(4) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The integral comparison together with rational realization. -/
 structure Comparison (P : Base.{u} l) extends IntegralComparison l P where
   rationalRealization : RawRational l P ⥤ Rational l P
   rationalObject (F : RawRational l P) :
@@ -260,32 +251,25 @@ structure Comparison (P : Base.{u} l) extends IntegralComparison l P where
   rationalFullyFaithful : rationalRealization.FullyFaithful
 
 /-- A simultaneous scheme pullback and finite coefficient inclusion. Pure pullbacks
-and pure coefficient extensions are obtained by taking the other map to be an identity.
-Source: BS 6.8.4 and Weil II (1.1.1) d)
-(blueprint: def-per-lisse-completed-system-data). -/
+and pure coefficient extensions are obtained by taking the other map to be an identity. -/
 structure Arrow (P Q : Base.{u} l) where
   scheme : Q.X ⟶ P.X
   coefficient : P.E →ₐ[ℚ_[l]] Q.E
 
-/-- Identity operation, including identity coefficient extension.
-Source: BS 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+/-- Identity operation, including identity coefficient extension. -/
 noncomputable def identity (P : Base.{u} l) : Arrow l P P := ⟨𝟙 P.X, AlgHom.id _ _⟩
 
-/-- Composition retains the actual scheme composite and field inclusion composite.
-Source: BS 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+/-- Composition retains the actual scheme composite and field inclusion composite. -/
 noncomputable def composite {P Q S : Base.{u} l} (a : Arrow l P Q)
     (b : Arrow l Q S) : Arrow l P S :=
   ⟨b.scheme ≫ a.scheme, b.coefficient.comp a.coefficient⟩
 
-/-- The ramified source index ceil((m+1)/e)-1 from the recorded scalar extension.
-Source: Weil II (1.1.1) d) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The ramified source index ceil((m+1)/e)-1 from the recorded scalar extension. -/
 noncomputable abbrev sourceIndex {P Q : Base.{u} l} (a : Arrow l P Q) (m : ℕ) :=
   lisseScalarSourceIndex l P.E Q.E a.coefficient m
 
 /-- The actual finite-level operation: etale module pullback and then sheafified
-balanced scalar extension to A'_m, retaining the A'-action by restriction of scalars.
-Source: BS 6.8.4(1), Weil II (1.1.1) d)
-(blueprint: def-per-lisse-completed-system-data). -/
+balanced scalar extension to A'_m, retaining the A'-action by restriction of scalars. -/
 noncomputable def finiteLevel {P Q : Base.{u} l} (a : Arrow l P Q) (m : ℕ) :
     Systems l P ⥤ Sheaf Q.X.smallEtaleTopology (ModuleCat.{u + 1} (Integers l Q)) :=
   ObjectProperty.ι _ ⋙ ObjectProperty.ι _ ⋙
@@ -297,9 +281,7 @@ noncomputable def finiteLevel {P Q : Base.{u} l} (a : Arrow l P Q) (m : ℕ) :
             (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l Q.E (m + 1))))
 
 /-- The canonical map to scalar extension, on underlying abelian sheaves. This is the
-universal module unit followed by the actual sheafification unit, so sends x to 1 tensor x.
-Source: Stacks, Modules on Sites, scalar extension; Weil II (1.1.1) d)
-(blueprint: def-per-lisse-completed-system-data). -/
+universal module unit followed by the actual sheafification unit, so sends x to 1 tensor x. -/
 noncomputable def finiteScalarUnit {X : Scheme.{u}} {A B : Type (u + 1)} [Ring A] [Ring B]
     (φ : A →+* B) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (sheafCompose _ (forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat)).obj F ⟶
@@ -313,9 +295,7 @@ noncomputable def finiteScalarUnit {X : Scheme.{u}} {A B : Type (u + 1)} [Ring A
       (forget₂ (ModuleCat.{u + 1} B) AddCommGrpCat)⟩
 
 /-- The finite-level pullback/scalar-extension unit, with source quotient reindexed
-by the ramification ceiling. Its two factors are the specified universal units.
-Source: BS 6.8.4(1), Weil II (1.1.1) d)
-(blueprint: def-per-lisse-completed-system-data). -/
+by the ramification ceiling. Its two factors are the specified universal units. -/
 noncomputable def finiteEtaleUnit {P Q : Base.{u} l} (a : Arrow l P Q) (F : Systems l P) (m : ℕ) :
     (etaleDiagram l P F).obj (op (sourceIndex l a m)) ⟶
       (Etale.lowerStar AddCommGrpCat.{u + 1} a.scheme).obj
@@ -332,9 +312,7 @@ noncomputable def finiteEtaleUnit {P Q : Base.{u} l} (a : Arrow l P Q) (F : Syst
             (F.obj.obj.obj (op (sourceIndex l a m)))))
 
 /-- The same finite unit on the pro-etale site, using precisely the canonical site
-comparison mate. No preservation of an infinite limit by inverse image is asserted.
-Source: BS 5.1.5, 6.8.4(1); the comparison-pullback dependency
-(blueprint: def-per-lisse-completed-system-data). -/
+comparison mate. No preservation of an infinite limit by inverse image is asserted. -/
 noncomputable def finiteProEtaleUnit {P Q : Base.{u} l} (a : Arrow l P Q)
     (F : Systems l P) (m : ℕ) :
     (proEtaleDiagram l P F).obj (op (sourceIndex l a m)) ⟶
@@ -349,17 +327,14 @@ noncomputable def finiteProEtaleUnit {P Q : Base.{u} l} (a : Arrow l P Q)
         ((supportSiteEtaleComparisonAdjunction AddCommGrpCat.{u + 1} a.scheme).homEquiv _ _
           |>.symm (finiteEtaleUnit l a F m)))
 
-/-- A finite tower with its prescribed finite-level scalar/pullback identifications.
-Source: Weil II (1.1.1) d), BS 6.8.4(1)
-(blueprint: def-per-lisse-completed-system-data). -/
+/-- A finite tower with its prescribed finite-level scalar/pullback identifications. -/
 structure EtaleOperation {P Q : Base.{u} l} (a : Arrow l P Q) where
   functor : Systems l P ⥤ Systems l Q
   level (m : ℕ) :
     functor ⋙ ObjectProperty.ι _ ⋙ ObjectProperty.ι _ ⋙
       (CategoryTheory.evaluation _ _).obj (op m) ≅ finiteLevel l a m
 
-/-- The unit on the actual output levels, normalized by their finite tensor description.
-Source: BS 6.8.4(1) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The unit on the actual output levels, normalized by their finite tensor description. -/
 noncomputable def EtaleOperation.unit {P Q : Base.{u} l} {a : Arrow l P Q}
     (T : EtaleOperation l a) (F : Systems l P) (m : ℕ) :
     (etaleDiagram l P F).obj (op (sourceIndex l a m)) ⟶
@@ -369,8 +344,7 @@ noncomputable def EtaleOperation.unit {P Q : Base.{u} l} {a : Arrow l P Q}
     ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (Integers l Q)) AddCommGrpCat)).map
       ((T.level m).inv.app F))
 
-/-- The same normalized unit after site comparison, given by the specified adjoint mate.
-Source: BS 5.1.5, 6.8.4(1) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The same normalized unit after site comparison, given by the specified adjoint mate. -/
 noncomputable def EtaleOperation.proEtaleUnit {P Q : Base.{u} l} {a : Arrow l P Q}
     (T : EtaleOperation l a) (F : Systems l P) (m : ℕ) :
     (proEtaleDiagram l P F).obj (op (sourceIndex l a m)) ⟶
@@ -384,8 +358,7 @@ noncomputable def EtaleOperation.proEtaleUnit {P Q : Base.{u} l} {a : Arrow l P 
           |>.symm (T.unit l F m)))
 
 /-- The coefficient maps are fixed on all continuous functions, and the completed
-coefficient map by its continuous presentation. They are maps of actual ring sheaves.
-Source: BS 6.8.2 and 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+coefficient map by its continuous presentation. They are maps of actual ring sheaves. -/
 structure RingOperation {P Q : Base.{u} l} (a : Arrow l P Q)
     (cP : Comparison l P) (cQ : Comparison l Q) where
   integral : lisseIntegerSheafSized l P.E P.X ⟶
@@ -412,9 +385,7 @@ structure RingOperation {P Q : Base.{u} l} (a : Arrow l P Q)
         (proEtaleSheafDirectImage a.scheme CommRingCat.{u + 1}).map
           (cQ.coefficientIso.inv ≫ lisseIntegerToFieldSized l Q.E Q.X)
 
-/-- Completed module direct image with the specified coefficient map; no preservation
-of infinite inverse limits by inverse image is used.
-Source: Stacks 03D1; BS 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+/-- Completed module direct image with the specified coefficient map. -/
 noncomputable def RingOperation.integralPush {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} (R : RingOperation l a cP cQ) :
     ringedSiteModules.{u + 1} ((adicLisseForget Q.X).obj (completedRing l Q)) ⥤
@@ -425,8 +396,7 @@ noncomputable def RingOperation.integralPush {P Q : Base.{u} l} {a : Arrow l P Q
     (R := (adicLisseForget Q.X).obj (completedRing l Q))
     ((adicLisseForget P.X).map R.completed)
 
-/-- Rational module direct image, with the same continuous coefficient formula.
-Source: Stacks 03D1; BS 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+/-- Rational module direct image, with the same continuous coefficient formula. -/
 noncomputable def RingOperation.rationalPush {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} (R : RingOperation l a cP cQ) :
     ringedSiteModules.{u + 1} ((adicLisseForget Q.X).obj (rationalRing l Q)) ⥤
@@ -438,9 +408,7 @@ noncomputable def RingOperation.rationalPush {P Q : Base.{u} l} {a : Arrow l P Q
     ((adicLisseForget P.X).map R.rational)
 
 /-- The canonical ringed-module pullback is specified by its full adjunction, together
-with its restriction to lisse objects and the resulting universal unit. This interface
-retains independent site object and morphism universes.
-Source: Stacks 03D2; BS 6.8.4 (blueprint: def-per-lisse-completed-system-data). -/
+with its restriction to lisse objects and the resulting universal unit. -/
 structure ModuleOperation {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} (R : RingOperation l a cP cQ) where
   integralAmbient :
@@ -456,8 +424,7 @@ structure ModuleOperation {P Q : Base.{u} l} {a : Arrow l P Q}
   rational : Rational l P ⥤ Rational l Q
   rationalUnderlying : rational ⋙ ObjectProperty.ι _ ≅ ObjectProperty.ι _ ⋙ rationalAmbient
 
-/-- The canonical unit x to 1 tensor x for the lisse integral module pullback.
-Source: Stacks 03D2 (blueprint: def-per-lisse-completed-system-data). -/
+/-- The canonical unit x to 1 tensor x for the lisse integral module pullback. -/
 noncomputable def ModuleOperation.integralUnit {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} {R : RingOperation l a cP cQ}
     (M : ModuleOperation l R) (N : Integral l P) :
@@ -468,8 +435,7 @@ noncomputable def ModuleOperation.integralUnit {P Q : Base.{u} l} {a : Arrow l P
     (proEtaleSheafDirectImage a.scheme AddCommGrpCat.{u + 1}).map
       ((integralForget l Q).map (M.integralUnderlying.inv.app N))
 
-/-- The same universal unit for rational module pullback.
-Source: Stacks 03D2 (blueprint: def-per-lisse-completed-system-data). -/
+/-- The same universal unit for rational module pullback. -/
 noncomputable def ModuleOperation.rationalUnit {P Q : Base.{u} l} {a : Arrow l P Q}
     {cP : Comparison l P} {cQ : Comparison l Q} {R : RingOperation l a cP cQ}
     (M : ModuleOperation l R) (N : Rational l P) :
@@ -483,8 +449,7 @@ noncomputable def ModuleOperation.rationalUnit {P Q : Base.{u} l} {a : Arrow l P
       ((SheafOfModules.toSheaf ((adicLisseForget Q.X).obj (rationalRing l Q))).map
         (M.rationalUnderlying.inv.app N))
 
-/-- The comparison image of a map at one finite level, retaining exactly its underlying map.
-Source: BS 5.1.5 (blueprint: def-per-lisse-completed-system-data). -/
+/-- The comparison image of a map at one finite level, retaining exactly its underlying map. -/
 noncomputable def levelMap {P : Base.{u} l} {F G : Systems l P} (f : F ⟶ G) (m : ℕ) :
     (proEtaleDiagram l P F).obj (op m) ⟶ (proEtaleDiagram l P G).obj (op m) :=
   (supportSiteComparisonCoefficientPullback AddCommGrpCat.{u + 1} P.X).map
@@ -498,10 +463,7 @@ attribute [irreducible] finiteScalarUnit finiteEtaleUnit finiteProEtaleUnit
 
 /-- Pullback and finite coefficient extension, with the finite transition equation,
 quotient-normalized reduction comparison, projection-normalized reconstruction, and the
-fraction-normalized rational realization square. All adjunctions are on ambient module
-sheaves, so their left adjoints are genuine tensor pullbacks, without extra assumptions.
-Source: BS 6.8.4(1),(4), Weil II (1.1.1) d)
-(blueprint: def-per-lisse-completed-system-data). -/
+fraction-normalized rational realization square. -/
 structure IntegralOperation {P Q : Base.{u} l} (a : Arrow l P Q)
     (cP : Comparison l P) (cQ : Comparison l Q) where
   rings : RingOperation l a cP cQ
@@ -530,8 +492,7 @@ structure IntegralOperation {P Q : Base.{u} l} (a : Arrow l P Q)
           (cQ.completion (etale.functor.obj F)).app (op m)) =
       (cP.completion F).app (op (sourceIndex l a m)) ≫ etale.proEtaleUnit l F m
 
-/-- The integral operation and its raw rational extension.
-Source: BS 6.8.4(1),(4) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The integral operation and its raw rational extension. -/
 structure Operation {P Q : Base.{u} l} (a : Arrow l P Q)
     (cP : Comparison l P) (cQ : Comparison l Q) extends IntegralOperation l a cP cQ where
   raw : RawRational l P ⥤ RawRational l Q
@@ -565,17 +526,14 @@ structure Operation {P Q : Base.{u} l} (a : Arrow l P Q)
           ((modules.integralUnit l (cP.equivalence.inverse.obj
             ⟨F.obj.integral, F.property⟩)).hom.app (op V) x)))
 
-/-- Underlying abelian sheaves for rational coefficients.
-Source: BS 6.8.4(4) (blueprint: def-per-lisse-completed-system-data). -/
+/-- Underlying abelian sheaves for rational coefficients. -/
 noncomputable abbrev rationalForget (P : Base.{u} l) :=
   SheafOfModules.toSheaf.{u + 1} ((adicLisseForget P.X).obj (rationalRing l P))
 
 /-- The comparison over all allowed schemes and coefficient fields, including its
 identity and composition equations. Composition covers two pullbacks, two finite
 extensions, and mixed pullback/extension. The integral and rational operation comparisons
-are normalized by the actual adjunction units and the chosen fibre-product comparisons.
-Source: BS 6.8.4(1),(4), with its reduction/limit/localization maps
-(blueprint: def-per-lisse-completed-system-data). -/
+are normalized by the actual adjunction units and the chosen fibre-product comparisons. -/
 structure SystemCore where
   comparison (P : Base.{u} l) : Comparison l P
   operation {P Q : Base.{u} l} (a : Arrow l P Q) :
@@ -621,8 +579,7 @@ structure SystemCore where
         ((rationalForget l S).map ((rationalComp a b).hom.app M).hom) =
       (operation (composite l a b)).modules.rationalUnit l M
 
-/-- The ambient operations and the transported system and rational coherence.
-Source: BS 6.8.4(1),(4) (blueprint: def-per-lisse-completed-system-data). -/
+/-- The ambient operations and the transported system and rational coherence. -/
 structure System extends SystemCore l where
   etaleId (P : Base.{u} l) : (operation (identity l P)).etale.functor ≅ 𝟭 _
   rawId (P : Base.{u} l) : (operation (identity l P)).raw ≅ 𝟭 _

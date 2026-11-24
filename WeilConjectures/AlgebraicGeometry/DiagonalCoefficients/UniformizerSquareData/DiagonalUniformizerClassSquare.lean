@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalUniformizerRouteRealization
 
 /-! # Applying the successive realization identity
-
-Source: diagonal tower coefficient changes (1), independent endpoint and realization steps.
-(blueprint: lem-diagonal-uniformizer-class-square).
 -/
 
 @[expose] public noncomputable section
@@ -50,10 +47,7 @@ attribute [local semireducible] CyclicCartierFrame.reduce
 
 set_option linter.defProp false in
 /-- Apply the successive realization identity to the proved criterion from the preceding step.
-The other independent proof arguments remain available in its inferred type.
-Source: coefficient changes (1) (blueprint: lem-diagonal-uniformizer-class-square).
-Proof: supply the named endpoint or realization theorem to the preceding proved
-criterion. This is a proof term; it constructs no mathematical data. -/
+The other independent proof arguments remain available in its inferred type. -/
 @[irreducible] def UniformizerSquareData.realizedSquare
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

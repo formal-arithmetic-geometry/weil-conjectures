@@ -16,8 +16,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 
 /-! # A module-complex model for affine derived pullback
 
-Source: Stacks Project, Tag 08DW(2), using Tag 06Z0 and Tag 08DV.
-(blueprint: lem-pc-affine-derived-pullback-module-model).
+## References
+
+* Stacks Project, Tags 08DW, 06Z0 and 08DV
 -/
 
 @[expose] public section
@@ -35,18 +36,8 @@ namespace AlgebraicGeometry
 attribute [local instance] Functor.additive_of_preserves_binary_products
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-/-- Affine derived pullback has a module-complex representative on the target spectrum.
-Source: Stacks Project, Tag 08DW(2), Tag 06Z0 and Tag 08DV.
-Proof: use the canonical spectrum presentations of X and Y and the induced ring map.
-The affine derived equivalence represents E by termwise tilde of a module complex M.
-Choose a K-flat resolution P of M. The affine pullback comparison identifies its
-pullback with termwise tilde of the base-changed complex B tensor P. The tilde complex of P,
-restricted along Y to its spectrum, represents E.
-The base-changed complex along f.appTop.hom represents its pullback after termwise tilde
-and exact restriction along X to its spectrum. Transport the natural comparisons
-through the two canonical spectrum presentations. No flatness of f or boundedness of E is
-needed; the zero ring is allowed.
-(blueprint: lem-pc-affine-derived-pullback-module-model). -/
+/-- Affine derived pullback has a module-complex representative on the target spectrum
+(Stacks, Tags 08DW, 06Z0 and 08DV). -/
 theorem exists_affine_derivedPullback_module_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsAffine X] [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

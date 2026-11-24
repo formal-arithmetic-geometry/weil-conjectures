@@ -12,7 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.FormalKernelBilinearActionAssociati
 
 /-! # Bilinear multiplication on formal kernel pieces
 
-Source: Stacks Project, Lemma 087Z and Section 0EHN.
+## References
+
+* Stacks Project, Tags 087Z and 0EHN
 -/
 
 @[expose] public section
@@ -74,32 +76,7 @@ private theorem sections_eq_of_local {X : Scheme.{u}} (K : X.Modules) (U : X.Ope
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Bilinear action maps on formal kernels, before imposing any algebra laws.
-Source: Stacks Project, Lemma 087Z, its associated graded module construction,
-and Section 0EHN; https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-bilinear-action-exists).
-
-Proof: The product-section lemma supplies, for each fixed a and x, the unique
-kernel section satisfying all local representative equations. Choose this unique
-section as out(a,x). Restriction preserves its equations by functoriality, so
-uniqueness proves restriction compatibility. The equation on U itself, with the
-identity restriction, proves the formula for a given global representative and lift.
-The adjacent formal transitions are quotient projections followed by isomorphisms,
-hence epis; induction proves that every transition is epi. Quotient projections
-for the coefficients are also epis. The local surjectivity theorem for sheaves
-therefore gives simultaneous lifts of any three input sections near each point.
-For addition in the first variable lift both coefficients and one kernel section;
-the sum of the coefficients lifts their sum. Apply the product formula three times
-and use distributivity. For addition in the second variable lift one coefficient
-and both kernel sections; the sum of the lifts lifts the sum, and distributivity
-again compares the outputs. For scalar multiplication restrict the scalar to the
-smaller open and multiply the coefficient lift, or the kernel lift, by it. The
-product formula and the associativity and commutativity of scalar multiplication
-compare the outputs. Each comparison is an equality after the kernel inclusion,
-which is injective on sections. Sheaf separation turns these local equalities into
-the four global linearity identities. LinearMap.mk₂ packages them into the requested
-bilinear maps; the already proved restriction and product equations finish.
-Empty opens use the empty-cover separation argument, and degree zero uses the
-identity kernel inclusion. No arbitrary global lifting of an epimorphism is used. -/
+(Stacks, Tag 087Z and Section 0EHN.) -/
 theorem formalKernel_bilinear_action_exists {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I) :
     ∃ act : ∀ (m n : ℕ) (U : X.Opens),

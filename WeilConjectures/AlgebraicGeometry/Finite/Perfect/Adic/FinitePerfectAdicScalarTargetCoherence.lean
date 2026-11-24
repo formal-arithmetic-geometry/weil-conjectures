@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.CompletedConstantProjection.CompletedCo
 
 /-! # Transition compatibility of the completed finite comparison
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J, 093M and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -70,15 +72,7 @@ private def targetStep
     (Ideal.Quotient.factor_comp_mk (Ideal.pow_le_pow_right (Nat.le_succ (n + 1)))).symm).symm
     (finitePerfectAdicScalarModelOrdinary X d)
 
-/-- Scalar tensors of constant generators determine an ordinary realization map.
-
-Source: Stacks Project, Tags 06YY and 093J.
-(blueprint: new-s3-finite-perfect-adic-scalar-target-coherence)
-
-Proof: precompose with the identity restriction isomorphism and apply scalar-tensor
-extensionality. Pure tensors generate the tensor presheaf, and constant generators
-locally generate its module argument; sheafification extends the equality to all
-sections. -/
+/-- Scalar tensors of constant generators determine an ordinary realization map. -/
 theorem finitePerfectAdicScalarOrdinary_hom_ext
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : ModuleCat.{t} A) (T : CompletedAdicModules X d)

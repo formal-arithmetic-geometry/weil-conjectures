@@ -147,29 +147,7 @@ private theorem integral_subring_single_bound
 The other coefficient rings of Deligne's finiteness theorem are the declarations of the same
 name in the namespaces `ContinuousMapRingObj`, `PadicIntegersRingObj`, `UnitBallRingObj` and
 `FiniteDiscreteRingObj`.
-
-Source: Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8;
-blueprint `proposition-six-operations-dctf--5`, coefficient-reduction argument.
-(auxiliary; not a blueprint node)
-
-Proof: finite type over a field makes both schemes noetherian of finite dimension and
-makes the morphism qcqs. For finite discrete coefficients killed by a power of ell,
-use the classical etale model and the finite cohomological bound in Deligne's theorem.
-For integral coefficients, a constructible sheaf is derived complete and its derived
-residue-field reduction is bounded constructible on the etale site. Direct image
-commutes with derived inverse limits and with this reduction, since the residue field
-is a perfect coefficient complex. The uniform finite-coefficient direct-image bound
-and the integral completeness criterion imply boundedness above of the integral image.
-For rational coefficients choose a constructible integral sheaf model and use the
-qcqs comparison of direct image with inversion of the uniformizer. Localization is
-exact and preserves the bound. For the algebraic closure descend the constructible
-sheaf to a finite extension, apply its bound, and use the direct-image scalar-change
-comparison and exact extension to the algebraic closure. For embedded integer rings,
-the induced norm identifies their subrings with the closed unit ball by equality.
-The general closed-unit-ball case uses its defining norm inequality. The finite
-torsion argument also covers the zero coefficient ring and n=0, since its
-annihilating exponent is then one. These arguments concern only a single sheaf, not a general
-bounded complex; finite truncation induction is performed by the consumer. -/
+(Deligne, SGA 4½, Th. finitude 1.1; Bhatt--Scholze, Sections 6.7--6.8.) -/
 theorem finiteTypeDirectImage_single_boundedAbove
     (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))

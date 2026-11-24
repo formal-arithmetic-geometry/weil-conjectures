@@ -15,7 +15,12 @@ import Mathlib.Algebra.Category.ModuleCat.Kernels
 import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
-/-! # Ordinary scalar coordinates for an integral constant model -/
+/-! # Ordinary scalar coordinates for an integral constant model
+
+## References
+
+* [Stacks Project, Tag 093J](https://stacks.math.columbia.edu/tag/093J)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,20 +31,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteModelQuotient
 
 /-- A finitely presented internal scalar module gives an ordinary finitely presented
-integral scalar model on a scheme.
-
-Source: blueprint latest, ctf-equals-bc, Local models, first two sentences; Stacks Tag 093J.
-(blueprint: lem-sfb-integral-scalar-model-coordinates).
-
-Proof: write Q as the cokernel of a finite matrix over the scalar ring. The regular-module
-universal property rewrites its entries as scalar sections. The constant realization sends
-this matrix to the corresponding scalar matrix over the coefficient sheaf on T. The same
-matrix over the continuous coefficient ring at the profinite point has finitely presented
-cokernel. The existing continuousScalarFinitePresentation theorem realizes that cokernel
-as the continuous extension of an ordinary finitely presented module P. Pull it to T.
-Preservation of finite biproducts and cokernels identifies both resulting scalar matrices,
-so their cokernels are isomorphic. This includes zero ranks and the empty scheme. No
-quotient, derived reduction, cohomology calculation or flatness assumption is involved. -/
+integral scalar model on a scheme. -/
 theorem integral_scalar_model_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

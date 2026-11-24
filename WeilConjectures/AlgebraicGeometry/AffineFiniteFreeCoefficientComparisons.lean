@@ -15,9 +15,10 @@ import WeilConjectures.AlgebraicGeometry.AffineHomComparisonFiniteFree
 
 /-! # Finite-free affine Hom comparisons with coefficients
 
-Source: Stacks Project, Tag 01HV, lemma-spec-sheaves (4)-(5), and
-Tag 0BQZ, lemma-regular-immersion-ext, the displayed coefficient map.
-(blueprint: lem-sc-affine-finite-free-coefficient-comparisons). -/
+## References
+
+* Stacks Project, Tags 01HV, 0BQZ
+-/
 
 @[expose] public section
 
@@ -26,24 +27,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Degreewise affine Hom comparisons are natural in boundaries and coefficients.
-Source: Stacks Project, Tag 01HV, lemma-spec-sheaves (4)-(5), and Tag 0BQZ,
-lemma-regular-immersion-ext, the displayed coefficient map.
-(blueprint: lem-sc-affine-finite-free-coefficient-comparisons).
-
-Proof: Choose a finite basis of each K_q. On D(g), an internal Hom from the
-associated sheaf of K_q to the associated sheaf of N is the tuple of its
-values on the localized basis, with entries in N_g. Evaluation on that basis
-identifies Hom_A(K_q,N) with the finite direct sum of copies of N. Localizing
-this finite sum gives the same tuple. These identifications commute with
-restriction by 01HV (5), so they glue to mutually inverse sheaf maps. For a
-boundary with matrix (a_ij), precomposition on both sides sends (v_i) to
-(sum_i a_ij v_i)_j. For a coefficient map g, postcomposition sends (v_i) to
-(g(v_i)) on both sides. These formulas prove both naturality identities on
-the principal-open basis and hence on all opens. Transport by isoSpec
-preserves these identities. The argument is degreewise: no boundedness,
-regularity, or freeness of N is assumed. Empty bases, zero rings and empty
-charts give the unique maps between zero objects. -/
+/-- Degreewise affine Hom comparisons are natural in boundaries and coefficients (Stacks, Tags
+01HV, 0BQZ). -/
 theorem affine_finite_free_coefficient_comparisons
     {Y : Scheme.{u}} (U : Y.affineOpens)
     (K : ChainComplex (ModuleCat.{u} Γ(Y, U.1)) ℕ)

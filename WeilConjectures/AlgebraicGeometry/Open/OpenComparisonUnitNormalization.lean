@@ -64,7 +64,7 @@ sites. The first factor converts etale restriction to inverse image; the middle 
 is the recorded canonical comparison, and the last converts pro-etale inverse image to
 restriction. No independent comparison is chosen. -/
 noncomputable def openComparisonRestrictionIso (A : Type (u + 1)) [CommRing A]
-    [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
         comparisonUpperStar (ModuleCat.{u + 1} A) U ≅
       comparisonUpperStar (ModuleCat.{u + 1} A) X ⋙
@@ -80,7 +80,7 @@ adjunction, postcomposition with the sectionwise identity `r R_X ≅ R_U s`, and
 inverses of the comparison and pro-etale open adjunctions. Every factor is a natural
 bijection, so their composite is natural in the two sheaves. -/
 noncomputable def openComparisonHomEquiv (A : Type (u + 1)) [CommRing A]
-    [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) :
     ((comparisonUpperStar (ModuleCat.{u + 1} A) X).obj
@@ -98,7 +98,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private lemma openComparisonRestrictionIso_conjugate
-    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     conjugateEquiv
       ((comparisonAdjunction (ModuleCat.{u + 1} A) X).comp
@@ -143,7 +143,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 private lemma openComparisonRestriction_directImage_mate
-    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (mateEquiv
       (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j)
@@ -174,7 +174,7 @@ private lemma openComparisonRestriction_directImage_mate
 /-- The natural Hom chain sends `h` to `c_F⁻¹ ≫ h`, and the specified comparison `c`
 intertwines the two open units via the canonical restriction comparison `a`. -/
 theorem openComparison_unit_normalization (A : Type (u + 1)) [CommRing A]
-    [Finite A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
       (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))
       (h : (comparisonUpperStar (ModuleCat.{u + 1} A) X).obj

@@ -85,13 +85,7 @@ lemma isEquivalence_tensorRight_of_isInvertible (P : X.Modules) [P.IsInvertible]
 
 /-- **The projection formula for higher direct images** and an invertible module: for
 `f : X ⟶ Y`, an `𝒪_X`-module `ℱ` and an invertible `𝒪_Y`-module `𝒩`,
-`R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩`. Twisting by `f^* 𝒩` is an autoequivalence of `X.Modules`,
-so it is exact and preserves injective objects, and
-`R^q (f_* ∘ (- ⊗ f^* 𝒩)) ≅ R^q f_* ∘ (- ⊗ f^* 𝒩)`;
-twisting by `𝒩` is exact, so `R^q ((- ⊗ 𝒩) ∘ f_*) ≅ (- ⊗ 𝒩) ∘ R^q f_*`; and the two composites
-are isomorphic by the projection formula `projectionNatIso`.
-
-(blueprint: `lem-pc-projection-formula`) -/
+`R^q f_* (ℱ ⊗ f^* 𝒩) ≅ R^q f_* ℱ ⊗ 𝒩`. -/
 noncomputable def higherDirectImageTensorObjPullbackIso [HasInjectiveResolutions X.Modules]
     (f : X ⟶ Y) (ℱ : X.Modules) (𝒩 : Y.Modules) [𝒩.IsInvertible] (q : ℕ) :
     (higherDirectImage f q).obj (ℱ ⊗ (pullback f).obj 𝒩) ≅ (higherDirectImage f q).obj ℱ ⊗ 𝒩 :=

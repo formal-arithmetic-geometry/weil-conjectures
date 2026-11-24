@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModel
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicExtEvaluationAssembly
 
 /-! # Ext assembly at one evaluation of strict diagonal systems
-
-Source: diagonal limit (3).
-(blueprint: lem-diagonal-cyclic-ext-diagonal-assembly).
 -/
 
 @[expose] public noncomputable section
@@ -35,10 +32,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext Ext.homEquiv
   Ext.comp Ext.mk₀ Ext.mapExactFunctor Functor.mapDerivedCategory shiftFunctor
 
 /-- Specialize evaluation assembly to the diagonal coefficient categories, while
-keeping every object, endpoint and class abstract.
-Source: diagonal limit (3) (blueprint: lem-diagonal-cyclic-ext-diagonal-assembly).
-Proof: apply the evaluation assembly with the supplied localization choices of
-module sheaves and their systems. No geometric endpoint is substituted here. -/
+keeping every object, endpoint and class abstract. -/
 theorem cyclicExtAssembly_diagonal
     (l : ℕ) [Fact l.Prime] (W : Scheme.{u})
     [DiagonalTraceLocalizations l W]

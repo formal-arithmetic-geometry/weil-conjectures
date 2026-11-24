@@ -67,20 +67,7 @@ set_option backward.isDefEq.respectTransparency.types true
 -- Retain the named normalization hypotheses of the existing public interface.
 set_option linter.unusedVariables false in
 /-- The supported-source endpoint equation for a quotient-unit-preserving comparison.
-This is the source half of the normalized endpoint argument.
-
-Source: coefficient changes (1), supported source endpoint; diagonal limit (3),
-normalized source cone.
-(blueprint: lem-diagonal-cyclic-quotient-normalized-source-endpoint).
-
-Proof: project the supported source cone equation hs0 to level n. Use the sourceIso
-normalization, the finite source comparison and the supported scalar Endpoint's
-adjunction equation to identify the full supported quotient generator. The assumed
-quotient-unit square he replaces its scalar adjunction unit by M.unit. Apply hsa and
-the normalization hs, then cancel the supported finite integral generator between
-degree-zero objects, using full faithfulness of the single functor and faithfulness of the
-ordinary coefficient forgetful functor. This gives the inverse-source equation.
-The empty scheme and n = 0 follow from the same maps and cancellation statements. -/
+This is the source half of the normalized endpoint argument. -/
 theorem diagonalCyclicQuotient_normalizedSourceEndpoint
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

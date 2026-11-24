@@ -190,14 +190,7 @@ end LocalTensor
 
 /-- On an object factoring through a finite free neighborhood, the sectionwise tensor
 product already computes sheafified scalar extension.
-Source: Bhatt--Scholze, Proposition 6.8.4(6), finite free local bases, and Stacks, Tag 03EK.
-(auxiliary; not a blueprint node).
-Proof: restrict the tensor presheaf to the given free neighborhood. The finite free
-coordinate isomorphism identifies it with a finite product of the target ring sheaf,
-so it is a sheaf there. The sheafification unit is locally bijective, also after
-restriction to this slice. A locally bijective map between sheaves is an isomorphism.
-Evaluate this isomorphism at the given factoring object. Empty objects and empty bases
-are included in the finite product argument. -/
+(Bhatt--Scholze, Proposition 6.8.4(6); Stacks, Tag 03EK) -/
 theorem localFreeTensorUnit_isIso {X : Scheme.{u}}
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (α : R ⟶ S)
     (V : X.ProEt)

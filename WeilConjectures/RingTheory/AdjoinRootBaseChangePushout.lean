@@ -8,7 +8,11 @@ module
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Category.Ring.Constructions
 
-/-! Adjoining a root commutes with arbitrary coefficient change. -/
+/-! # Adjoining a root commutes with base change
+
+For a ring map `α : R →+* S` and `F : R[X]`, the square formed by `R → S`, `R → R[X]/(F)`,
+`S → S[X]/(F.map α)` and `R[X]/(F) → S[X]/(F.map α)` is a pushout in `CommRingCat`.
+-/
 
 @[expose] public section
 
@@ -18,13 +22,8 @@ universe u
 
 namespace CommRingCat
 
-/-- The coefficient-change square of polynomial root quotients is a pushout.
-Source: blueprint lemma-artin-schreier-character-sheaf, affine-chart construction.
-(blueprint: new-m1-adjoin-root-pushout)
-
-Proof: a compatible pair of ring maps out of S and R[T]/F supplies a root of the image of F.
-Lift the first ring map through S[T]/map(F), sending T to that root. It extends both given
-maps, and uniqueness follows because coefficients and T generate the quotient. -/
+/-- For `α : R →+* S` and `F : R[X]`, the square with sides `α`, `AdjoinRoot.of F`,
+`AdjoinRoot.of (F.map α)` and `AdjoinRoot.map α F (F.map α)` is a pushout in `CommRingCat`. -/
 theorem isPushout_adjoinRoot_map {R S : Type u} [CommRing R] [CommRing S]
     (α : R →+* S) (F : R[X]) :
     IsPushout (ofHom α) (ofHom (AdjoinRoot.of F))
@@ -71,9 +70,8 @@ theorem isPushout_adjoinRoot_map {R S : Type u} [CommRing R] [CommRing S]
       rw [AdjoinRoot.lift_root]
       exact h
 
-/-- The pushout statement transported along a specified equality of polynomials.
-Source and proof: substitute the equality into `isPushout_adjoinRoot_map`.
-(blueprint: new-m1-adjoin-root-pushout) -/
+/-- Variant of `isPushout_adjoinRoot_map` with `F.map α` replaced by a polynomial `G` equal to
+it. -/
 theorem isPushout_adjoinRoot_map_eq {R S : Type u} [CommRing R] [CommRing S]
     (α : R →+* S) (F : R[X]) (G : S[X]) (h : F.map α = G) :
     IsPushout (ofHom α) (ofHom (AdjoinRoot.of F))

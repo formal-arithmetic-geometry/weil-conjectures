@@ -10,8 +10,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Lifting a finite geometric stalk to neighbourhood sections
 
-Source: Stacks Project, Tag 0GKC, the finite-presentation paragraph.
-(blueprint: lem-weil-pbc-etale-finite-stalk-local-presentation).
+## References
+
+* Stacks Project, Tag 0GKC
 -/
 
 @[expose] public section
@@ -89,18 +90,7 @@ private theorem finite_germ_relations
       · exact congrArg (G.obj.map g.op) (hT j hj)
 
 /-- The identity of a finite geometric stalk lifts to a linear map into the sections
-on one pointed etale neighbourhood.
-
-Source: Stacks Project, Tag 0GKC, finite-presentation paragraph, expanded using the finite
-operation table (blueprint: lem-weil-pbc-etale-finite-stalk-local-presentation).
-
-Proof: Represent every element of the finite stalk by a section. Cofilteredness puts
-these representatives on one pointed neighbourhood. Equality in the stalk is eventual
-equality, so refine for all addition and scalar-multiplication relations; there are only
-finitely many because both the stalk and coefficient ring are finite. The resulting
-representatives define a linear map. Its composite with the germ map is the identity
-because each chosen representative has its prescribed germ. This also handles the zero
-ring and the zero stalk. -/
+on one pointed etale neighbourhood. -/
 theorem exists_etale_finite_stalk_section
     {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))

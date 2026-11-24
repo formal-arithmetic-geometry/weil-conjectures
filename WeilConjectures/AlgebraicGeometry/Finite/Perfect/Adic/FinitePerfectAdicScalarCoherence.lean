@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.Derived.DerivedNormalizationArrowsS
 
 /-! # Canonical scalar coherence of finite quotient realization
 
-Source: Stacks Project, Tags 03CY and 06YY.
+## References
+
+* Stacks Project, Tags 03CY, 06YY and 05RU
 -/
 
 @[expose] public noncomputable section
@@ -33,16 +35,12 @@ variable {C : Type (t + 1)} [Category.{t} C] {J : GrothendieckTopology C}
   [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
   [Presheaf.IsLocallyInjective J β] [Presheaf.IsLocallySurjective J β]
 
-/-- The associated module sheaf for a locally bijective fixed-scalar presentation.
-Source: Stacks Tag 03CY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- The associated module sheaf for a locally bijective fixed-scalar presentation. -/
 def finitePerfectAdicAssociated :=
   sheafToPresheaf J (ModuleCat.{t + 1} B) ⋙
     ProEtale.finiteCoefficientModulePresheaf C B ⋙ PresheafOfModules.sheafification.{t + 1} α
 
-/-- Extend the abelian sheafification unit across compatible fixed scalar maps.
-Source: Stacks Tag 03CY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- Extend the abelian sheafification unit across compatible fixed scalar maps. -/
 def finitePerfectAdicAssociatedMap (q : B →+* D) (p : R ⟶ S)
     (h : ∀ Z : Cᵒᵖ, α.app Z ≫ p.hom.app Z = RingCat.ofHom q ≫ β.app Z)
     (N : Sheaf J (ModuleCat.{t + 1} D)) :
@@ -132,19 +130,7 @@ private theorem associatedMap_naturality (q : B →+* D) (p : R ⟶ S)
   exact toSheafify_naturality J gAb
 
 /-- Associated module sheaves commute with compatible scalar restriction by the unique
-comparison whose components are the specified sheafification-unit maps.
-
-Source: Stacks Project, Tags 03CY and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence).
-
-Proof: both underlying abelian sheaves are the sheafification of the same presheaf.
-Define a map before associated sheafification by its unit on that presheaf. It is
-B-linear because the displayed square of scalar maps commutes. The adjunction for
-associated module sheafification extends it to an R-linear map. After forgetting
-modules, precomposition with the unit identifies this map with the identity; the
-unit is invertible since the input is already a sheaf. The forgetful functor reflects
-isomorphisms, so this map gives the comparison. Naturality and uniqueness follow from
-faithfulness of that same forgetful functor. This includes empty sites and zero rings. -/
+comparison whose components are the specified sheafification-unit maps. -/
 theorem finitePerfectAdicAssociated_coherence_existsUnique
     (q : B →+* D) (p : R ⟶ S)
     (h : ∀ Z : Cᵒᵖ, α.app Z ≫ p.hom.app Z = RingCat.ofHom q ≫ β.app Z) :
@@ -167,9 +153,7 @@ theorem finitePerfectAdicAssociated_coherence_existsUnique
   funext N
   exact he' N
 
-/-- The unique associated-sheaf scalar comparison fixed on underlying abelian sheaves.
-Source: Stacks Tag 03CY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- The unique associated-sheaf scalar comparison fixed on underlying abelian sheaves. -/
 def finitePerfectAdicAssociatedCoherence (q : B →+* D) (p : R ⟶ S)
     (h : ∀ Z : Cᵒᵖ, α.app Z ≫ p.hom.app Z = RingCat.ofHom q ≫ β.app Z) :
     sheafCompose J (ModuleCat.restrictScalars.{t + 1} q) ⋙
@@ -177,9 +161,7 @@ def finitePerfectAdicAssociatedCoherence (q : B →+* D) (p : R ⟶ S)
       finitePerfectAdicAssociated β ⋙ SheafOfModules.restrictScalars.{t + 1} p :=
   (finitePerfectAdicAssociated_coherence_existsUnique α β q p h).choose
 
-/-- The explicit compositor for ordinary scalar restriction of module sheaves.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- The explicit compositor for ordinary scalar restriction of module sheaves. -/
 def finitePerfectAdicRestrictComp {P : Sheaf J RingCat.{t + 1}}
     (a : R ⟶ S) (b : S ⟶ P) (c : R ⟶ P) (h : a ≫ b = c)
     (N : SheafOfModules.{t + 1} P) :
@@ -203,9 +185,7 @@ def finitePerfectAdicRestrictComp {P : Sheaf J RingCat.{t + 1}}
 
 end Associated
 
-/-- Consecutive finite quotient presentations respect their constant scalar units.
-Source: Stacks Tags 03CY and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- Consecutive finite quotient presentations respect their constant scalar units. -/
 theorem finitePerfectAdicSliceScalar_step (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (W : X.ProEt) (n : ℕ) (Z : (Over W)ᵒᵖ) :
     (finitePerfectAdicSliceScalar X d W (n + 1)).app Z ≫
@@ -235,9 +215,7 @@ theorem finitePerfectAdicSliceScalar_step (X : Scheme.{t}) {A : Type t} [CommRin
   ext x
   rfl
 
-/-- The componentwise canonical scalar comparison after restricting to the chart slice.
-Source: Stacks Tags 03CY and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- The componentwise canonical scalar comparison after restricting to the chart slice. -/
 def finitePerfectAdicScalarComponent
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
@@ -276,8 +254,7 @@ def finitePerfectAdicScalarComponent
       (by rw [← π.map_comp, hw]) ((finitePerfectAdicSliceModules X d W n).obj P)
 
 /-- The ordinary scalar compositor, assembled from associated sheafification and
-composition of restriction of scalars. Source: Stacks Tags 03CY and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+composition of restriction of scalars. -/
 def finitePerfectAdicScalarModulesCoherence
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
@@ -311,9 +288,7 @@ def finitePerfectAdicScalarModulesCoherence
   exact DFunLike.congr_fun
     (congrArg (fun k ↦ (k.val.app Z).hom.toAddMonoidHom) h) x
 
-/-- Localize the uniquely normalized ordinary scalar compositor.
-Source: Stacks Tags 05RU and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-scalar-coherence). -/
+/-- Localize the uniquely normalized ordinary scalar compositor. -/
 def finitePerfectAdicScalarCoherence
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)

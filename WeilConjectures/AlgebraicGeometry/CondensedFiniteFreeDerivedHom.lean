@@ -23,9 +23,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Shifted additive Hom on strict complexes with condensed coefficients.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), canonical Hom comparison.
-(auxiliary; not a blueprint node) -/
+/-- Shifted additive Hom on strict complexes with condensed coefficients
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 noncomputable abbrev condensedShiftedHom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -37,17 +36,8 @@ noncomputable abbrev condensedShiftedHom
         Ab.{u + 1} :=
   DerivedCategory.Q ⋙ shiftFunctor _ n ⋙ preadditiveCoyoneda.obj (op K)
 
-/-- Derived Hom from a locally finite free module is derived sections of its exact dual tensor.
-Source: Stacks Project, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2), evaluation step.
-(auxiliary; not a blueprint node)
-
-Proof: take the actual internal Hom functor H = Mod.ihom P. The proved local
-finite free calculation shows that H preserves all small colimits. It is a right
-adjoint, so it also preserves all limits. Consequently it is exact and additive,
-including on rank-zero trivializations. Apply the evaluation theorem to identify
-derived Hom from P[0] with degree n derived sections of H on complexes, naturally
-in the complex. This argument does not choose H from an unproved existence theorem.
-There is no filtered diagram, colimit comparison, or uniform bound in the assertion. -/
+/-- Derived Hom from a locally finite free module is derived sections of its exact dual tensor
+(Stacks, Tag 08JJ; Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 theorem condensed_finite_free_derived_hom
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

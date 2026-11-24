@@ -12,9 +12,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Transposed entries for sheafified dual basis maps
 
-Source: Stacks Project, schemes.tex, Tag 01HV, functoriality of localization;
-Mathlib LinearAlgebra/Dual/Basis.lean, Basis.dualBasis_repr.
-(blueprint: lem-sc-affine-basis-dual-matrix).
+## References
+
+* Stacks Project, Tag 01HV
 -/
 
 @[expose] public section
@@ -23,9 +23,7 @@ universe u
 open CategoryTheory Module
 namespace AlgebraicGeometry
 
-/-- The based affine module in free-sheaf coordinates.
-Source: Stacks Project, Tag 01HV.
-(blueprint: lem-sc-affine-basis-dual-matrix). -/
+/-- The based affine module in free-sheaf coordinates (Stacks, Tag 01HV). -/
 @[irreducible]
 noncomputable def affineBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} Γ(Y, U.1)) {I : Type u} (b : Basis I Γ(Y, U.1) M) :
@@ -37,9 +35,7 @@ noncomputable def affineBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOpens)
       tildeFinsupp (R := Γ(Y, U.1)) I) ≪≫
     Scheme.Modules.restrictFreeIso U.2.isoSpec.hom I
 
-/-- The algebraic module dual in dual-basis free-sheaf coordinates.
-Source: Stacks Project, Tag 01HV; Basis.dualBasis_repr.
-(blueprint: lem-sc-affine-basis-dual-matrix). -/
+/-- The algebraic module dual in dual-basis free-sheaf coordinates (Stacks, Tag 01HV). -/
 @[irreducible]
 noncomputable def affineDualBasisCoordinatesIso {Y : Scheme.{u}} (U : Y.affineOpens)
     (M : ModuleCat.{u} Γ(Y, U.1)) {I : Type u} [Finite I]
@@ -155,25 +151,8 @@ private lemma free_component {R : CommRingCat.{u}} {X : Scheme.{u}}
   simp only [Functor.map_comp, Category.assoc]
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Sheafification and restriction preserve the transposed entries of a dual map.
-Source: Stacks Project, schemes.tex, Tag 01HV(4)-(5) and functoriality;
-Basis.dualBasis_repr in Mathlib.LinearAlgebra.Dual.Basis.
-(blueprint: lem-sc-affine-basis-dual-matrix).
-
-Proof: Write a_ij = bM.repr (f (bN j)) i. The coefficient at j of the functional
-bM.dualBasis i precomposed with f is a_ij, by dualBasis_repr. The basis repr
-maps and their inverses therefore identify the two algebraic matrix components
-with the same scalar endomorphism of A. The coproduct comparison tildeFinsupp
-carries each sheafified single basis vector to the corresponding free generator:
-this follows from its defining coconePointUniqueUpToIso and the injection
-identities for that isomorphism. Its coordinate projections likewise agree by
-finite coproduct extensionality. The restrictFreeIso has the same property,
-by the generator identities for mapFreeIso and the natural isomorphism between
-restriction and pullback. Apply the two functors to the equal scalar components;
-functors preserve their compositions, so the displayed components are equal.
-This proves the assertion on all opens without any choice of sections. The
-argument uses no division or nonzero coefficient. For an empty basis there
-are no pairs (i,j), and for a zero ring all scalar components are zero. -/
+/-- Sheafification and restriction preserve the transposed entries of a dual map
+(Stacks, Tag 01HV). -/
 theorem affineBasisDualMatrix_component {Y : Scheme.{u}} (U : Y.affineOpens)
     (M N : ModuleCat.{u} Γ(Y, U.1)) {I J : Type u} [Finite I] [Finite J]
     [DecidableEq I] [DecidableEq J]

@@ -17,14 +17,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
-/-- The normalized root-limit comparison has exactly the coefficient root cone.
-Source: diagonal trace proof (1), the root-limit projections.
-(blueprint: lem-sfb-diagonal-trace-normalized-root-cone).
-Proof: forget the scalar action and postcompose with the root-system isomorphism.
-The inverse preserved-limit comparison followed by its n-th projection is the
-root-limit projection. The normalization of e cancels the target root isomorphism,
-and line_projection gives this same map for the coefficient cone. Faithfulness
-of scalar forgetting proves the original equation. -/
+/-- The normalized root-limit comparison has exactly the coefficient root cone. -/
 theorem diagonalTrace_normalizedRootCone (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T]
     (c : SpTowerClasses.Chern l (ULift.{u} (Padic l)) T)

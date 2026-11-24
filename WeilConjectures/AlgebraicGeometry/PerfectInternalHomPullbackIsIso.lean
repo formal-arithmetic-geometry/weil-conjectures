@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Invertibility of the evaluation-defined perfect internal-Hom pullback map
 
-Source: Stacks Project, cohomology.tex, Tags 08I3 and 0FPC.
-(blueprint: lem-pc-perfect-internal-hom-pullback-isIso).
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tags 08I3 and 0FPC.
 -/
 
 @[expose] public section
@@ -125,28 +126,8 @@ private theorem monoidal_adjunct_isIso_of_tensorIso
 
 /-- Pullback of internal Hom from a perfect source commutes with internal Hom.
 This asserts invertibility of the evaluation-defined map, for the fixed normalized
-tensor-Hom adjunctions and a canonical pullback tensor comparison, rather than
-existence of an unrelated isomorphism between the two objects.
-
-Source: Stacks Project, cohomology.tex, Remark 08I3 and Example 0FPC.
-(blueprint: lem-pc-perfect-internal-hom-pullback-isIso).
-
-Proof: Equip M with quasi-coherent cohomology using PerfectImpliesQCoh, and
-apply perfect_rhom_tensor_comparison with both inputs M to obtain an exact pairing
-of M with its perfect dual D. Realize the supplied canonical tensor comparison by
-canonicalPullbackTensor_monoidal_realization; its inverse is the monoidal tensorator.
-The upstream counit formula and two proved private helpers perform the remaining
-categorical calculation.
-The rigid tensor adjunction has counit associator followed by evaluation and the
-right unitor. A monoidal functor carries this counit to the transported pairing's
-counit after precomposition by its inverse tensorator. Uniqueness of right adjoints
-identifies both internal-Hom functors with tensoring by the respective duals.
-Naturality of the target adjunction and compatibility of these counits show that
-precomposing the displayed mate by the pulled-back source identification gives
-inverse tensorator followed by the target identification. All these maps are
-invertible, so cancellation proves the displayed mate invertible. This argument
-uses arbitrary adjunctions and arbitrary K, hence applies to the fixed normalized
-adjunctions without any quasi-coherence or boundedness assumption on K. -/
+tensor-Hom adjunctions and a canonical pullback tensor comparison
+(Stacks, Tags 08I3 and 0FPC). -/
 theorem perfect_internalHom_pullback_isIso
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

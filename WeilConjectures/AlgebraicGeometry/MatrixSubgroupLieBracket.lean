@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.MixedCommutatorTangent
 /-!
 # Tangent matrices and the differential of a rational representation
 
-Source: Milne, Algebraic Groups (2017), Chapter 10, Lie algebra of a closed matrix subgroup
-and differential of a representation (blueprint: `def-wf-lie-algebra-derivation`).
+## References
+
+* [Milne, *Algebraic Groups* (2017), Chapter 10]
 -/
 
 @[expose] public section
@@ -27,18 +28,7 @@ namespace AlgebraicGeometry.GeneralLinearGroup
 /-- The matrices `X` for which `1 + εX` belongs to a closed matrix subgroup form a linear
 subspace closed under commutators. Every rational representation has a linear differential
 on this subspace, characterized by its dual-number points, preserving the commutator.
-Source: Milne, Algebraic Groups (2017), Chapter 10
-(blueprint: `def-wf-lie-algebra-derivation`).
-
-Proof: the subspace is the matrix Lie algebra `lieSubalgebra I`. The differential of the closed
-immersion `V(I) ⟶ GL_n` identifies `Lie(V(I))` with it, and the differential of `r` is read
-through this identification. A point `g` with matrix `1 + εX` reduces to the identity, so it is
-the tangent point of the tangent vector with matrix `X`, and `r(g) = 1 + ε dr(X)`. Both
-differentials are homomorphisms of Lie algebras, so `dr` preserves `XY - YX`.
-
-Finite-dimensional vector spaces are written in coordinates `kⁿ` and `kᵐ`; neither index
-set is required to be nonempty. The final equality uses any `Z` representing `[X,Y]` in the
-subspace. -/
+(Milne, *Algebraic Groups*, Chapter 10) -/
 theorem exists_tangentMatrixSubmodule_differential
     {k : Type u} [Field k]
     {n m : Type u} [Fintype n] [DecidableEq n] [Fintype m] [DecidableEq m]

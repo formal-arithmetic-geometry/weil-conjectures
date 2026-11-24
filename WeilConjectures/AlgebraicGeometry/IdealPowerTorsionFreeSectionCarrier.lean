@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentIdealPowerTorsionFreeProduct
 
 /-! # An ideal-power-torsion-free carrier of an open section
 
-Source: Stacks Project, Tag 01YB, first two paragraphs of the proof.
-(blueprint: lem-pc-ideal-power-torsion-free-section-carrier)
+## References
+
+* Stacks Project, Tag 01YB
 -/
 
 @[expose] public section
@@ -33,25 +34,7 @@ noncomputable local instance {X : Scheme.{u}} (F : X.Modules) {V W : X.Opens} (h
 
 /-- A quasi-coherent section on an ideal complement has a quasi-coherent carrier
 inside the original module with zero ideal-power annihilators.
-
-Source: Stacks Project, Tag 01YB, first two paragraphs of the proof.
-(blueprint: lem-pc-ideal-power-torsion-free-section-carrier)
-
-Proof: The section defines a map from the structure module on U. Its image is
-quasi-coherent and finite type. Extend this image to a finite-type quasi-coherent
-submodule H of E by 01PF; on a Noetherian scheme H is coherent by 01XZ. The section
-therefore lifts to H(U). For each n take the quasi-coherent annihilator H_n of I^n.
-These form an increasing chain, so 01Y8 gives r with H_n contained in H_r for all n.
-Set T = H_r. Artin-Rees 01YA supplies c such that I^(r+c)H intersects T in zero,
-since that intersection is contained in I^r T = 0. Set G = I^(r+c)H with its
-canonical inclusion into E. It is quasi-coherent. On U the ideal is the structure
-module, so G(U) maps bijectively to H(U); lift the given section to t in G(U).
-If a section x of G on W is killed, locally on every smaller open, by I^n, its
-image in H lies in H_n and hence in T. It also lies in G, so the zero intersection
-forces it to vanish, and the inclusion G into H is injective on sections.
-The recursive powers have the same local ideal products, so the stated annihilator
-condition is exactly this one. For U empty use the zero carrier; for I the unit
-ideal take H itself, and for E zero use the zero carrier. -/
+(Stacks, Tag 01YB) -/
 theorem exists_idealPower_torsionFree_section_carrier
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (E : X.Modules) [E.IsQuasicoherent] (U : X.Opens)

@@ -52,7 +52,7 @@ lemma le_ker_iff_range_subset_support {W : Scheme.{u}} (g : W ⟶ X) [IsReduced 
   simp [TopologicalSpace.Closeds.ext_iff, Set.preimage_eq_univ_iff]
 
 /-- The kernel of a morphism from a reduced scheme is the vanishing ideal of the closure of its
-range: both are the largest ideal sheaf whose support contains the range. -/
+range. -/
 lemma _root_.AlgebraicGeometry.Scheme.Hom.ker_eq_vanishingIdeal {W : Scheme.{u}} (g : W ⟶ X)
     [IsReduced W] : g.ker = vanishingIdeal ⟨closure (Set.range g), isClosed_closure⟩ := by
   refine le_antisymm ?_ ?_

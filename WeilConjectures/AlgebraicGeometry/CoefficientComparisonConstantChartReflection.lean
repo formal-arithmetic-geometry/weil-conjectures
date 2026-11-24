@@ -9,7 +9,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafi
 
 /-! # Reflection of one constant comparison chart
 
-Source: Stacks Project, Tags 099T and 099Y, comparison and localization.
+## References
+
+* Stacks Project, Tags 099T and 099Y
 -/
 
 @[expose] public noncomputable section
@@ -100,25 +102,7 @@ private theorem chartComparisonUnit_isIso (X : Scheme.{u})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A constant comparison chart on one etale object descends with the identical module.
 There are no covering, local-constancy, finiteness or Noetherian assumptions.
-Source: Stacks Project, Tag 099T, lemma-fully-faithful, and Tag 099Y,
-lemma-compare-locally-constant, localization step
-(auxiliary; not a blueprint node).
-
-Proof: let U be the etale X-scheme underlying V. The equivalences between the slice
-sites and the sites of U identify restriction of comparison inverse image with
-comparison inverse image on U. This follows by taking left mates of the commuting
-square of sectionwise direct images. Both constant sheaf functors are left adjoints
-to terminal-object evaluation, so comparison carries the constant etale sheaf of M
-to the constant pro-etale sheaf of the same M. Thus the supplied isomorphism is an
-isomorphism between the inverse images of F restricted to U and constant M.
-The comparison unit is invertible by Tag 099T: the filtered-colimit formula for
-inverse image, followed by sheafification, leaves sections on etale objects
-unchanged. This argument works with ModuleCat in the coefficient universe, since
-filtered colimits of modules are exact and computed on underlying modules. Full
-faithfulness therefore lifts the supplied isomorphism to the etale site of U.
-Transport back to the slice over V using AsSmall and the slice-site equivalences.
-No model is resized. If U is empty both sheaf categories are terminal, so the same
-unit and constant comparisons apply, including M zero and the zero ring. -/
+(Stacks, Tags 099T and 099Y). -/
 theorem coefficientComparison_constant_over_reflect (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

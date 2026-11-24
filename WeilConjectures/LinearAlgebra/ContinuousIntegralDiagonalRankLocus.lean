@@ -10,7 +10,23 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 import Mathlib.Topology.Algebra.IsOpenUnits
 import Mathlib.Topology.Instances.Matrix
 
-/-! # Local reduction near a fixed diagonal on its rank locus -/
+/-!
+# Local reduction near a fixed diagonal on its rank locus
+
+A continuous matrix over the integers of a finite extension of `ℚ_l`, close to a fixed Smith
+diagonal and of rank at most the number of its nonzero diagonal entries, is locally continuously
+equivalent to that diagonal.
+
+## Implementation details
+
+The proof divides the error in each pivot column by the nonzero pivot, inverts `1 + B` via the
+adjugate formula, and then clears the remaining columns with a square-zero correction `1 - q`;
+any leftover entry would give a nonzero minor of size `r + 1`, contradicting the rank bound.
+
+## References
+
+* Hemo--Richarz--Scholbach, arXiv:2305.18131, proof of Theorem 6.12(2)
+-/
 
 @[expose] public section
 

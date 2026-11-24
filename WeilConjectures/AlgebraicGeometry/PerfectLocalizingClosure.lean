@@ -12,9 +12,10 @@ public import Mathlib.CategoryTheory.ObjectProperty.Retract
 
 /-! # The localizing closure of perfect complexes
 
-Source: Stacks Project, Derived Categories of Schemes, Theorem 09IS
-(`perfect.tex`, theorem-bondal-van-den-Bergh), and Derived Categories, Lemma 09SN
-(`derived.tex`, lemma-write-as-colimit) (blueprint: def-pc-perfect-localizing-closure).
+## References
+
+* Stacks Project, Derived Categories of Schemes, Theorem 09IS.
+* Stacks Project, Derived Categories, Lemma 09SN.
 -/
 
 @[expose] public section
@@ -28,9 +29,8 @@ namespace AlgebraicGeometry
 
 
 /-- The smallest strictly full subcategory of `D_QCoh(𝒪_X)` containing every perfect
- complex and closed under shifts, cones, retracts, and arbitrary set-indexed coproducts
-Source: Stacks Project, Theorem 09IS and Lemma 09SN.
-(blueprint: def-pc-perfect-localizing-closure). -/
+complex and closed under shifts, cones, retracts, and arbitrary set-indexed coproducts
+(Stacks, Tags 09IS and 09SN). -/
 def perfectLocalizingClosure (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     [∀ U : X.Opens,

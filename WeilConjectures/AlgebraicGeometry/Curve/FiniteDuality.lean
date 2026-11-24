@@ -28,6 +28,13 @@ bijective on the sections over these opens by the local duality for the trace of
   sections is compatible with restriction between affine opens.
 - `AlgebraicGeometry.Scheme.exists_isIso_pushforwardHomObjComparison_unit`: the trace
   identification `f_* Ω¹_{X/k} ≅ Hom(f_* 𝒪_X, Ω¹_{ℙ¹/k})`.
+
+## Implementation details
+
+- The hypothesis `hf` of `exists_isIso_pushforwardHomObjComparison_unit` (`f` unramified at the
+  generic points, i.e. `k(X)/k(t)` separable) cannot be dropped: the trace of differentials
+  vanishes identically when `f` is inseparable, so the comparison is then the zero map.
+  Downstream, `exists_isFinite_flat_hom_projectiveLine` provides a separable `f` and `hf`.
 -/
 
 @[expose] public section
@@ -95,19 +102,8 @@ over `k` and `f : X ⟶ ℙ¹_k` a finite flat morphism over `k`, unramified at 
 `X`. There is a trace map `τ : f_* Ω¹_{X/k} ⟶ Ω¹_{ℙ¹_k/k}` such that
 `f_* Ω¹_{X/k} ⟶ Hom(f_* 𝒪_X, Ω¹_{ℙ¹_k/k})`, `ω ↦ (a ↦ τ(a ω))`, is an isomorphism: the comparison
 `φ ↦ τ ∘ f_* φ` for `ℳ = 𝒪_X`. Locally over `V = Spec R ⊆ ℙ¹_k` with `f⁻¹V = Spec B` this is
-`Ω¹_{B/k} ≅ Hom_R(B, Ω¹_{R/k})`, the codifferent of the finite flat extension `R ⊆ B`, i.e.
-Grothendieck duality `f^! Ω¹_{ℙ¹} ≅ Ω¹_{X/k}` for `f`; `τ` is glued from the traces of
-differentials `c da ↦ Tr(C · dA)` over the basic opens of the standard charts of `ℙ¹_k`.
-
-The hypothesis `hf` (`f` unramified at the generic points, i.e. `k(X)/k(t)` separable) is not
-in the blueprint statement, but the blueprint's own proof uses it: the generic-point step is the
-perfect trace pairing of the separable extension `k(X) ⊇ k(t)` together with left exactness of
-the Kähler sequence. It cannot be dropped: the isomorphism is induced by the trace of
-differentials, which vanishes identically when `f` is inseparable (e.g. a Frobenius-type map),
-so for such `f` the comparison is the zero map. Downstream (`nonempty_dual_H_one_iso`) `f` is
-chosen by `exists_isFinite_flat_hom_projectiveLine`, which provides a separable `f` and `hf`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`, the trace identification) -/
+`Ω¹_{B/k} ≅ Hom_R(B, Ω¹_{R/k})`; `τ` is glued from the traces of differentials
+`c da ↦ Tr(C · dA)` over the basic opens of the standard charts of `ℙ¹_k`. -/
 theorem exists_isIso_pushforwardHomObjComparison_unit (f : X ⟶ ProjectiveLine (Spec (.of k)))
     [f.IsOver (Spec (.of k))] [IsFinite f] [Flat f]
     (hf : ∀ x : X, IsField (X.presheaf.stalk x) → (f.stalkMap x).hom.FormallyUnramified) :

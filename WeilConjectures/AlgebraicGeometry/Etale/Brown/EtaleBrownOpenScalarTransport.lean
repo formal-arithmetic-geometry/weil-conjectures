@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownOpenScalarTranspo
 
 /-! # Open scalar mate in normalized realizations
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4, 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -31,27 +33,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- The local open scalar square for the specified adjunction mates.
-Source: Zheng, Construction 5.14 and Lemma 5.16; Stacks 07A4 and 0GL6.
-(blueprint: lem-pur-etale-brown-open-scalar-transport).
-
-Proof: first take the left-adjoint conjugate of the recorded invertible
-restriction/inverse-image square under the composite scalar/open adjunctions.
-Its open mate is the inverse recorded derivedTensor, by restrictedDirect_mate,
-restrictedInverse_mate and the iterated-mate identity. This constructs op.
-For its transport equation, transpose both paths under the published open extension/restriction
-adjunction. The normalization of jo replaces its mate by the inverse normalized
-inverse-image comparison. The normalization of op replaces its mate by the inverse
-recorded derivedTensor. The scalar comparison is itself normalized by its scalar
-restriction mate. Take a second mate along scalar restriction: the iterated-mate
-identity reduces the remaining square to the identity-on-sections scalar restriction
-square for inverse image. On cochain representatives this follows from the ordinary
-restriction/inverse-image square and its unit formula. The derivedTensor_rep and
-geometric transpose equations descend that identity through localization. Thus the
-transposes are precisely the open-unit transpose defining ExceptionalCoefficients.openIso.
-Injectivity of the open Hom bijection proves the square. No finite-coefficient or
-boundedness assumption is needed, including the empty open and identity quotient.
-This is only the open factor; no proper image or compact-support pasting enters. -/
+/-- The local open scalar square for the specified adjunction mates. -/
 theorem etaleBrownOpenScalarTransport
     (O : Type (u + 1)) [CommRing O] (t : O)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

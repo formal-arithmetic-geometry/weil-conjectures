@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedQCoh
 
 /-! # Finite-term presentations on arbitrary affine schemes
 
-Source: Stacks Project, Tag 08EB, transported by the canonical affine isomorphism
-(blueprint: lem-pc-perfect-affine-finite-presentation).
+## References
+
+* Stacks Project, Tag 08EB, transported by the canonical affine isomorphism.
 -/
 
 @[expose] public section
@@ -30,10 +31,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Termwise associated sheaf followed by pushforward along the canonical affine isomorphism.
-This is an explicit construction on complexes, before passage to the derived category.
-Source: Stacks Project, Tag 08EB (blueprint: lem-pc-perfect-affine-finite-presentation). 
-(blueprint: def-pc-affine-module-complex-functor)
--/
+This is an explicit construction on complexes, before passage to the derived category. -/
 noncomputable def affineModuleComplexFunctor (Y : Scheme.{u}) [IsAffine Y] :
     CochainComplex (ModuleCat.{u} Γ(Y, ⊤)) ℤ ⥤
       CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ :=
@@ -47,24 +45,7 @@ noncomputable def affineModuleComplexFunctor (Y : Scheme.{u}) [IsAffine Y] :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Every perfect quasi-coherent derived object on an affine scheme has a finite-term module
-complex presentation under the explicit associated-sheaf functor.
-Source: Stacks Project, Tag 08EB; Step 1 of lem-pc-perfect-affine-classes-small
-(blueprint: lem-pc-perfect-affine-finite-presentation).
-
-Proof: Put A = Γ(Y, O_Y) and use Y.isoSpec : Y ≅ Spec A. Pushforward along the
-isomorphism and its inverse are exact mutually inverse functors on module sheaves;
-their termwise extensions therefore invert quasi-isomorphisms and give mutually inverse
-functors on derived categories. Quasi-coherence is preserved by these functors, as can
-be checked on the corresponding affine opens. Perfectness is preserved too: transport
-the covering in IsPerfect along the isomorphism, and transport each strictly perfect
-complex. The finite free objects and their retraction maps are preserved, as are the
-zero terms and the degree bounds. Apply perfect_iff_affine_bounded_projective to the
-transported object on Spec A. This produces a bounded finite projective complex P and
-an isomorphism with its termwise associated sheaf. Apply the inverse exact functor to
-this isomorphism and use the derived counit. Its image is precisely the localization
-of affineModuleComplexFunctor Y applied to P. Retain finiteness of its terms and forget
-boundedness and projectivity, which are unnecessary for the smallness argument.
-The zero ring and zero complex require no separate hypothesis. -/
+complex presentation under the explicit associated-sheaf functor (Stacks, Tag 08EB). -/
 theorem exists_affine_finite_module_presentation (Y : Scheme.{u}) [IsAffine Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     [∀ V : Y.Opens,

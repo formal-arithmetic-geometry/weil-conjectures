@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeTopIso
 
 /-! # Coordinate naturality of the derived base-change mate
 
-Source: Stacks Project, Tags 08HY, 0D5S and 0D5T.
-(blueprint: lem-pc-derived-base-change-coordinate-naturality).
+## References
+
+* Stacks Project, Tags 08HY, 0D5S and 0D5T
 -/
 
 @[expose] public section
@@ -25,26 +26,8 @@ universe u w
 open CategoryTheory Limits
 namespace AlgebraicGeometry
 
-/-- Changing coordinates of a cartesian square transports its derived base-change mate.
-Source: Stacks Project, Tag 08HY, adjoint description; Tags 0D5S and 0D5T, composition.
-(blueprint: lem-pc-derived-base-change-coordinate-naturality).
-
-Proof: The pullback universal property applied to g' and f' followed by eT gives
-an isomorphism e from X' to P. Its two projections are g' and f' followed by eT.
-Put U = R(e.hom)_* and T = R(eT.inv)_*. Composition of derived direct images
-along e.hom, q and eT.inv gives k. Since e is an isomorphism, its inverse pullback
-and its direct image are naturally isomorphic, by uniqueness of the right adjoint
-to its pullback equivalence. Derived pullback composition along p and e gives j.
-The same argument for eS and eT gives a on the source functors. Choose all these
-comparisons using mates of the coherent pullback composition comparisons fixed
-in schemeDerivedBaseChangeMap, rather than unrelated adjunction structures.
-Transpose the asserted equation under the second-projection adjunction. The
-composition comparisons and their unit laws cancel eS, eT and e with their
-inverses. The two transposes are then Lg'^* applied to the counit of f. Naturality
-of that counit and associativity of pullback composition identify them. The Hom
-equivalence is injective, so the original arrows agree, naturally in E. This
-argument uses no module comparison and no invertibility of the base-change map;
-it also works for empty schemes and for the zero object. -/
+/-- Changing coordinates of a cartesian square transports its derived base-change mate
+(Stacks, Tags 08HY, 0D5S and 0D5T). -/
 theorem exists_derivedBaseChange_coordinate_naturality
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

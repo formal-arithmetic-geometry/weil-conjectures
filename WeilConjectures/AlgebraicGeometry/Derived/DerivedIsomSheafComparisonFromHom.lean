@@ -11,8 +11,11 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 /-!
 # Passing from Hom comparison to Isom comparison by inverse pairs
 
-Source: Stacks Project, Tag 00WJ, exactness of set sheafification, applied to inverse pairs.
-(blueprint: lem-weil-pbc-derived-isom-comparison-from-hom)
+Exactness of set sheafification is applied to inverse pairs.
+
+## References
+
+* [Stacks Project, Tag 00WJ](https://stacks.math.columbia.edu/tag/00WJ)
 -/
 
 -- After pruning, this module only keeps private declarations.

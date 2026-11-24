@@ -34,8 +34,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientCon
 
 /-! # Ordinary constant tensor compatibility for the finite coefficient layer
 
-Source: Stacks Project, Tags 03EK, 03EL and 094I.
-(blueprint: lem-weil-pbc-finite-quotient-layer-ordinary-tensor-comparison).
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 094I
 -/
 
 @[expose] public noncomputable section
@@ -107,25 +108,7 @@ private theorem tensorRestrictionComparison
     Functor.isoWhiskerLeft (tensorRight L) eR ≪≫ Functor.isoWhiskerRight s (U ⋙ V)⟩
 
 /-- Ordinary tensor with the constant residue layer agrees with constant
-realization of the explicit algebraic layer tensor, retaining the successor action.
-
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
-Tag 094I, the ordinary constant ideal-layer tensor calculation.
-(blueprint: lem-weil-pbc-finite-quotient-layer-ordinary-tensor-comparison).
-
-Proof: constant module sheafification preserves tensor products. Lifting modules
-by ULift commutes with tensor by the canonical lifted pure-tensor equivalence;
-extension along phi_0 also preserves tensor by balanced scalar extension.
-These comparisons identify C(P) tensor C(L) with C(P tensor L), naturally in P.
-Apply the symmetry to obtain C(L tensor P). Restriction along the successor to
-residue coefficient map agrees with constant realization after the algebraic
-quotient B -> C: cancel the constant quotient map from A in hc.2 to obtain this
-coefficient square. Extension along the isomorphism phi_(n+1) transports the
-square to the actual successor coefficient sheaf. These maps commute with all
-module morphisms since on local constant generators they send x tensor l to
-l tensor x; local tensor generation and sheafification determine the maps.
-No flatness, projectivity, boundedness or finiteness assumption on P or L is
-used. Zero layers, zero rings and empty sites use the same universal properties. -/
+realization of the explicit algebraic layer tensor, retaining the successor action. -/
 theorem finiteQuotient_layer_ordinary_tensor_comparison
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ k : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (k + 1)) ⟶

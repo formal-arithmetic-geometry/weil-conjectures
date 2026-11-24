@@ -13,8 +13,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Cohomology colimits of evaluated complex terms
 
-Source: Stacks Project, Tags 09YQ and 0032.
-(blueprint: lem-weil-pbc-complex-term-cohomology-colimit).
+## References
+
+* Stacks Project, Tags 09YQ and 0032
 -/
 
 @[expose] public section
@@ -50,21 +51,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.dsimp.instances true in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
-/-- Ordinary sheaf cohomology preserves the cocone of evaluated complex terms.
-Source: Stacks Project, Theorem 59.51.3 (Tag 09YQ).
-
-Proof: Evaluate G, its object isomorphisms eG, and its colimit cocone L at s.
-Evaluation preserves complex colimits. Taking components at s of hidentity,
-hcomposition, and hG gives the three scalar sheaf coherence equations. Apply
-nonempty_isColimit_etale_cohomology_of_cofiltered_isLimit to this scalar system
-in degree r. Expanding complexTermCohomologyMap gives cohomologyMap followed by
-Sheaf.H.map, so hH and hB supply exactly its cohomology arrow and cocone-leg
-conditions. The scalar theorem performs directed replacement (Stacks Tag 0032)
-and applies ordinary directed continuity (Tag 09YQ), then transports the colimit
-back through finality. No lower bound or spectral-sequence data enter this argument.
-Edge cases: I is nonempty by cofilteredness. Degree zero and zero term sheaves are
-included in 09YQ; the argument does not require torsion.
-(blueprint: lem-weil-pbc-complex-term-cohomology-colimit). -/
+/-- Ordinary sheaf cohomology preserves the cocone of evaluated complex terms (Stacks, Tag 09YQ). -/
 theorem nonempty_isColimit_complex_term_cohomology
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

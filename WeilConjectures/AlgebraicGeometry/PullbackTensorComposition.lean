@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Tensor compatibility of ordinary pullback composition
 
-Source: Stacks Project, Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 0095 and 0096.
 -/
 
 @[expose] public section
@@ -83,35 +85,8 @@ private theorem pullbackComp_tensor_inv
               (pullbackComp k l).inv.app N).app ((k ≫ l) ⁻¹ᵁ U) z) hc).symm)))))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ordinary pullback composition isomorphism preserves the tensorator.
-Source: Stacks Project, Definition 6.26.1(2), Tag 0095; Lemma 6.26.2, Tag 0096.
-(blueprint: lem-sc-pullback-tensor-composition)
-
-Proof: The presheaf pullback is extension of scalars after the inverse-image
-construction. Its tensorator multiplies scalar coefficients. Its canonical
-composition comparison sends r tensor (s tensor m) to r*k-sharp(s) tensor m:
-this map has the composite adjunction unit, hence equals the unique composition
-comparison normalized by the pullback/pushforward adjunction. On the pure tensors
-(r tensor (s tensor m)) tensor (r-prime tensor (s-prime tensor n)), the left
-route produces r*r-prime*k-sharp(s*s-prime) tensor (m tensor n). The right
-route produces (r*k-sharp(s))*(r-prime*k-sharp(s-prime)) tensor (m tensor n).
-Commutativity and preservation of multiplication by k-sharp identify them.
-Here generators carry representatives on neighbourhoods in the inverse-image
-colimit; two representatives can be restricted to a common neighbourhood.
-The formula commutes with these restrictions and with the balancing relations,
-so the tensor and colimit universal properties extend the equality to the
-presheaf maps. After sheafification, arbitrary sections are locally represented
-by these finite sums of generators; equality on them gives equality of sheaf
-maps by the uniqueness part of the sheaf condition. The fixed pullback monoidal
-structure descends these tensorators along sheafification via the monoidal
-lifting comparison sheafificationCompPullback. The descended composition map
-has the composite adjunction unit: on each generator the unit inserts scalar 1
-at both stages, and the formula sends 1 tensor (1 tensor m) to 1 tensor m.
-Injectivity of the adjunction Hom bijection therefore identifies this map with
-the specified pullbackComp, rather than an arbitrary composition isomorphism.
-Thus localization gives exactly the displayed equation.
-The generator argument also covers zero modules, zero rings, empty schemes
-and identity arrows; there are no finiteness or invertibility assumptions. -/
+/-- The ordinary pullback composition isomorphism preserves the tensorator
+(Stacks, Tags 0095 and 0096). -/
 @[reassoc]
 theorem pullbackComp_tensor
     {X Y Z : Scheme.{u}} (k : Z ⟶ Y) (l : Y ⟶ X) (M N : X.Modules) :

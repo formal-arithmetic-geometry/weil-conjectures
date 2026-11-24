@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.ComplexTermCohomologyColimit
 
 /-! # Termwise continuity on the first hypercohomology page
 
-Source: Stacks Project, Tag 0EZM, invoking Tag 09YQ in every complex degree.
-(blueprint: lem-weil-pbc-etale-complex-first-page-continuity).
+## References
+
+* Stacks Project, Tags 0EZM and 09YQ
 -/
 
 @[expose] public section
@@ -31,23 +32,7 @@ local macro_rules
 -- The dependent first-page and graded-class witnesses are elaborated together.
 set_option linter.unusedVariables false in
 /-- Sheaf continuity gives the canonical isomorphism on each first-page term.
-Only the first-page dictionary is used; no stable-page or abutment assertion
-is part of this conclusion.
-Source: Stacks Project, Tag 0EZM, proof of Lemma 59.52.1, and Theorem 59.51.3 (09YQ).
-
-Proof: Reindex I.op by a nonempty directed cofinal set. Whiskering preserves the
-complex colimit and the opposite scheme limit. Evaluate each complex in degree s;
-complex colimits are degreewise, and the coherence equations hG, hidentity and
-hcomposition evaluate to the corresponding sheaf-system equations. For r >= 0,
-apply sheaf continuity in cohomological degree r.toNat to these sheaves. The
-firstIso, first_transition and first_comparison equations identify its diagram
-and cocone with the first-page diagram and its canonical cocone. Hence that
-cocone is a colimit. For r < 0 all the source terms and target term are zero by
-negative and negativeLimit, so the same cocone is a colimit. Cofinality transports
-this conclusion back to I.op. Any displayed map from the chosen colimit with the
-prescribed legs is the canonical comparison and is therefore an isomorphism.
-The lower bound and all stable-page data are irrelevant to this argument.
-(blueprint: lem-weil-pbc-etale-complex-first-page-continuity). -/
+(Stacks, Tags 0EZM and 09YQ). -/
 theorem etale_complex_first_page_continuity
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

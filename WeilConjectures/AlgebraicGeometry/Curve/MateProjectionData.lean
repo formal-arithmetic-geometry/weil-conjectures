@@ -13,11 +13,15 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Projection data for the small coordinate-ring colimit model
 
-Source: Stacks Project, Tag 03Q9, final injective-complex paragraph.
+## Implementation details
 
-The target is `strictHenselizationScheme s`. The adopted names in
-`WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionData` use
-`strictLocalization s`; the explicit small-model names here keep the two APIs distinct.
+* The target is `strictHenselizationScheme s`. The names in
+  `WeilConjectures.AlgebraicGeometry.StrictLocalMateProjectionData` use
+  `strictLocalization s`; the explicit small-model names here keep the two APIs distinct.
+
+## References
+
+* Stacks Project, Tags 03Q9, 03QO
 -/
 
 @[expose] public section
@@ -29,9 +33,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Exact strict-local sections and Leray identify the target with limit cohomology.
-Source: Stacks, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-small-model-mate-projection-data). -/
+/-- Exact strict-local sections and Leray identify the target with limit cohomology. -/
 noncomputable def smallModel_strictLocalBaseChangeTargetIso
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -55,9 +57,7 @@ noncomputable def smallModel_strictLocalBaseChangeTargetIso
     (pullback.snd f (Scheme.strictHenselizationStructuralMap s)) n _
 
 /-- Hypercohomology identifications, their transitions, and their compatibility with
-projection restriction. There is no source colimit assertion in this data.
-Source: Stacks, Tag 03Q9, final proof paragraph
-(blueprint: def-weil-pbc-small-model-mate-projection-data). -/
+projection restriction. -/
 structure SmallModelStrictLocalMateProjectionData
     {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)

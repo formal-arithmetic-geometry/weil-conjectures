@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.D
 
 /-! # The kernel construction for local subobjects
 
-Source: Stacks Project, Sites, Tag 04TR, expressed using kernels and pushforwards.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 04TR
 -/
 
 @[expose] public section
@@ -26,16 +27,14 @@ variable (X : Scheme.{u}) (Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
   (q : ∀ i, L i ⟶ (upperStar Ab.{u + 1} (U.f i)).obj Q)
 
 /-- The simultaneous local quotient map: adjoint each local cokernel map and
-assemble the resulting maps to pushforwards into a product.
-(auxiliary; not a blueprint node). -/
+assemble the resulting maps to pushforwards into a product. -/
 noncomputable def localSubobjectQuotientMap : Q ⟶
     ∏ᶜ fun i => (lowerStar Ab.{u + 1} (U.f i)).obj (cokernel (q i)) :=
   Pi.lift fun i => (upperStarLowerStarAdjunction Ab.{u + 1} (U.f i)).homEquiv _ _
     (cokernel.π (q i))
 
 /-- The global subobject cut out by membership in every local subobject.
-It is an actual kernel construction, with no choice from a descent theorem.
-(auxiliary; not a blueprint node). -/
+It is an actual kernel construction, with no choice from a descent theorem. -/
 noncomputable def localSubobjectKernel : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1} :=
   kernel (localSubobjectQuotientMap X Q U L q)
 

@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-!
 # Kummer compatibility under algebraically closed base change
-
-Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph
-(blueprint: lem-sc-kummer-base-change-compatibility).
 -/
 
 @[expose] public section
@@ -149,24 +145,7 @@ private theorem kummer_comparison (C P : Scheme.{u}) (π : P ⟶ C) (n : ℕ) :
   exact kernel.lift_ι _ _ _
 
 /-- Kummer sequences, their connecting maps, and affine Picard torsion commute with extension of
-algebraically closed ground fields. The proof follows the blueprint: base change preserves the
-curve hypotheses; the comparison of units is adjoint to pullback; naturality of the derived
-cohomology long exact sequence gives the ladder; degree zero is pullback of units and degree one
-is pullback of invertible modules; in the affine case the Jacobian quotient and the abelian-variety
-estimate give the isomorphism on `n`-torsion.
-
-Source: Weil conjectures blueprint, sec-curve-estimates/sbc-thm-algebraically-closed-invariance,
-proper-case Kummer naturality sentence and affine-case Picard-torsion paragraph
-(blueprint: lem-sc-kummer-base-change-compatibility).
-
-Proof: use `lem-sc-base-change-curve` for the hypotheses on the base change. The comparison map
-of units and its restriction to roots of unity commute with the power maps, so the induced map of
-short exact Kummer sequences is a `ShortComplex.Hom`. Apply `Sheaf.H.map_δSucc` and the
-functoriality of the pullback maps to obtain the long-exact-sequence ladder. The degree-zero and
-Picard assertions are the recorded pullback lemmas. For an affine curve, use the compactification
-and Jacobian quotient from `proposition-cohomology-smooth-affine-curve--3`, clauses (c) and (d) of
-`thm-av-final`, and `proposition-cohomology-smooth-affine-curve--3`.
--/
+algebraically closed ground fields. -/
 theorem kummer_base_change_compatibility
     (k k' : Type u) [Field k] [Field k'] [IsAlgClosed k] [IsAlgClosed k'] [Algebra k k']
     (C : Scheme.{u}) (f : C ⟶ Spec (.of k)) [IsConnectedCurve f] [Smooth f]

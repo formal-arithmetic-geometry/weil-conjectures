@@ -90,9 +90,7 @@ theorem Hom.finrank_stalk_eq_finrank_residueField (f : X ⟶ Y) (x : X) (z : Y) 
 
 /-- **The degree of a finite flat morphism of integral schemes is the degree of the extension of
 function fields.** For a finite flat morphism `f : X ⟶ Y` of integral schemes, the rank
-`d = f.finrank (genericPoint Y)` of `f_* 𝒪_X` is `[k(X) : k(Y)]`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`d = f.finrank (genericPoint Y)` of `f_* 𝒪_X` is `[k(X) : k(Y)]`. -/
 theorem Hom.finrank_genericPoint_eq_finrank_functionField [IsIntegral X] [IsIntegral Y]
     (f : X ⟶ Y) [Flat f] [IsFinite f] :
     letI := (f.functionFieldMap f.apply_genericPoint_of_flat).hom.toAlgebra
@@ -143,9 +141,7 @@ variable (π : X ⟶ Y) [IsFinite π]
 /-- The pullback `π^* D = ∑_x n_{π(x)} e_x [x]` of a divisor `D = ∑_y n_y [y]` along a finite
 morphism `π`, where `e_x` is the ramification index
 (`AlgebraicGeometry.Scheme.Hom.ramificationIndex`).
-It has finite support since the fibres of `π` are finite.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+It has finite support since the fibres of `π` are finite. -/
 noncomputable def Divisor.pullback : Y.Divisor →+ X.Divisor where
   toFun D := Finsupp.ofSupportFinite
     (fun P ↦ D ⟨π P.1, π.isClosed_singleton_apply P.2⟩ * π.ramificationIndex P.1) <| by
@@ -172,9 +168,7 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [IsIntegral X] [IsLocallyNoether
   [IsIntegral Y] (π : X ⟶ Y) [IsFinite π] [Flat π]
 
 /-- **Degree of the pullback of a point.** `deg π^*[y] = d` for every closed point `y`, where
-`d = π.finrank (genericPoint Y)` is the degree of `π`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`d = π.finrank (genericPoint Y)` is the degree of `π`. -/
 theorem Divisor.degree_pullback_single
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -237,9 +231,7 @@ theorem Divisor.degree_pullback_single
 
 /-- **Degree of pullbacks of divisors.** For a finite flat morphism `π : X ⟶ Y` of proper smooth
 integral curves over an algebraically closed field `k`, of degree `d = π.finrank (genericPoint Y)`,
-`deg π^* D = d · deg D` for every divisor `D` on `Y`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+`deg π^* D = d · deg D` for every divisor `D` on `Y`. -/
 theorem Divisor.degree_pullback
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [Y.Over (Spec (.of k))]
@@ -254,9 +246,7 @@ theorem Divisor.degree_pullback
 
 /-- **Degree of pullbacks of divisors.** For a finite flat morphism `π : X ⟶ Y` of proper smooth
 integral curves over an algebraically closed field `k`, `deg π^* D = [k(X) : k(Y)] · deg D` for
-every divisor `D` on `Y`.
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality`) -/
+every divisor `D` on `Y`. -/
 theorem Divisor.degree_pullback_eq_finrank_functionField_mul
     [X.Over (Spec (.of k))] [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [Y.Over (Spec (.of k))]

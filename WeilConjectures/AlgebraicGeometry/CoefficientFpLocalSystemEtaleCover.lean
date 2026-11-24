@@ -13,7 +13,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Etale trivializing charts for coefficient-sized local systems
 
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant.
+## References
+
+* Stacks Project, Tag 099Y
 -/
 
 @[expose] public section
@@ -430,30 +432,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A local system with finitely presented models has constant charts on objects
 coming from the etale site. The images of these objects cover the pro-etale site.
-The conclusion only concerns restrictions and covers, not comparison inverse image.
-
-Source: Stacks Project, Tag 099Y, proof of lemma-compare-locally-constant
-(auxiliary; not a blueprint node).
-
-Proof: apply the hypothesis at the terminal object and index its covering sieve by
-its arrows, obtaining a covering family U_i with finitely presented models M_i.
-For each i construct the set sheaf H_i = Isom(F, constant M_i). On U_j, its slice
-restriction is the Isom sheaf between constant M_j and constant M_i. Finite generation
-of both models identifies this with the constant set of module isomorphisms.
-For the Hom calculation, lift the images of finitely many generators to constants
-on a common covering sieve. Away from an empty covering sieve, injectivity of the
-constant-sheaf unit reconstructs a linear map; separatedness detects equality.
-Lift both maps of an isomorphism and refine the sieve to impose the inverse laws.
-These arguments are the private fixedConstantHom and fixedConstantIsom helpers,
-generalized from ProEtaleUniformModelEtaleCover to arbitrary small-site universes.
-Thus all H_i are locally constant. They are jointly locally inhabited, since H_j
-has the displayed trivialization as a section on U_j. Apply the set-valued
-coefficientLocallyConstant_etaleSections to this family. Each resulting section is
-a slice isomorphism F to the restriction of constant M_i. The constant-sheaf
-restriction isomorphism gives the requested chart, with the original finite
-presentation proof. This avoids partitioning the base into model-type opens.
-Different model types simply give empty local isomorphism sets. Empty covering
-families and zero models are handled by the same constructions. -/
+(Stacks, Tag 099Y) -/
 theorem coefficientFpLocalSystem_etaleCover (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (F : Sheaf (Scheme.coefficientProEtaleModelTopology.{u, v} X)

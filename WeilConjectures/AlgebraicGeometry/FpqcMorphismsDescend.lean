@@ -13,7 +13,9 @@ public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 /-!
 # Descent of morphisms along an fpqc covering
 
-Source: Stacks Project, Descent, Lemma Tag 02W0 (blueprint: lem-galois-fpqc-morphisms-descend).
+## References
+
+* [Stacks Project, Tag 02W0](https://stacks.math.columbia.edu/tag/02W0)
 -/
 
 @[expose] public section
@@ -30,9 +32,7 @@ variable {S X U W : Scheme.{u}}
 
 /-- The canonical comparison isomorphism `pr₀^*(U ×ₛ X) ≅ pr₁^*(U ×ₛ X)` over `X ×ₛ X`:
 the composite of the canonical isomorphisms of both sides with `U ×ₛ (X ×ₛ X)`, which exist
-since `pr₀ ≫ f = pr₁ ≫ f`.
-Source: Stacks Project, Descent, Definition Tag 023V
-(blueprint: lem-galois-fpqc-morphisms-descend). -/
+since `pr₀ ≫ f = pr₁ ≫ f` (Stacks, Descent, Definition 023V). -/
 noncomputable def canonicalDescentIso (pU : U ⟶ S) (f : X ⟶ S) :
     pullback (pullback.snd pU f) (pullback.fst f f) ≅
       pullback (pullback.snd pU f) (pullback.snd f f) :=
@@ -40,17 +40,15 @@ noncomputable def canonicalDescentIso (pU : U ⟶ S) (f : X ⟶ S) :
     pullback.congrHom rfl pullback.condition ≪≫
     (pullbackLeftPullbackSndIso pU f (pullback.snd f f)).symm
 
-/-- The morphism induced on fibre products by a morphism over `S`.
-Source: Stacks Project, Descent, Definition Tag 023V
-(blueprint: lem-galois-fpqc-morphisms-descend). -/
+/-- The morphism induced on fibre products by a morphism over `S`
+(Stacks, Descent, Definition 023V). -/
 noncomputable def baseChangeMap (pU : U ⟶ S) (pW : W ⟶ S) (f : X ⟶ S)
     (α : U ⟶ W) (hα : pU = α ≫ pW) :
     pullback pU f ⟶ pullback pW f :=
   pullback.map pU f pW f α (𝟙 X) (𝟙 S) hα (by simp)
 
-/-- The base change of an `S`-morphism is a morphism of descent data.
-Source: Stacks Project, Descent, Definition Tag 023V
-(blueprint: lem-galois-fpqc-morphisms-descend). -/
+/-- The base change of an `S`-morphism is a morphism of descent data
+(Stacks, Descent, Definition 023V). -/
 theorem baseChangeMap_compatible (pU : U ⟶ S) (pW : W ⟶ S) (f : X ⟶ S)
     (α : U ⟶ W) (hα : pU = α ≫ pW) :
     ∃ hβ : (baseChangeMap pU pW f α hα) ≫ pullback.snd pW f = pullback.snd pU f,
@@ -77,13 +75,8 @@ private theorem effectiveEpi_of_fpqc_singleton {A B : Scheme.{u}} (q : A ⟶ B)
   exact (GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable _).isSheafFor _
     (Precoverage.generate_mem_toGrothendieck hq)
 
-/-- Morphisms of schemes over `S` descend uniquely along an fpqc singleton.
-Source: Stacks Project, Descent, Lemma Tag 02W0 (blueprint: lem-galois-fpqc-morphisms-descend).
-
-The proof pulls back the fpqc covering to `U`, translates the compatibility equation to
-equality on the double overlap, applies fpqc representable descent, verifies the descended
-morphism is over `S`, and proves reconstruction and uniqueness by the pullback universal
-property. -/
+/-- Morphisms of schemes over `S` descend uniquely along an fpqc singleton
+(Stacks, Descent, Lemma 02W0). -/
 theorem fpqc_morphisms_descend (f : X ⟶ S)
     (hfpqc : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)
     (pU : U ⟶ S) (pW : W ⟶ S) :

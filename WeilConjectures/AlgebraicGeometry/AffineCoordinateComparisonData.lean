@@ -18,8 +18,11 @@ public import Mathlib.CategoryTheory.InducedCategory
 public import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 
 /-! # Affine-coordinate comparison data
-Source: Stacks Project, Tags 08DW, 06Y1 and 0D5S.
-(blueprint: def-pc-affine-coordinate-comparison-data). -/
+
+## References
+
+* Stacks Project, Tags 08DW, 06Y1 and 0D5S
+-/
 
 @[expose] public section
 universe u w
@@ -32,9 +35,8 @@ set_option backward.isDefEq.respectTransparency.types false
 variable [∀ X : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
 
-/-- An affine coordinate and its specified localized tilde functor. All data are supplied.
-Source: the affine-coordinate square in Stacks, Tag 08DW(2).
-(blueprint: def-pc-affine-coordinate-comparison-data). -/
+/-- An affine coordinate and its specified localized tilde functor. All data are supplied
+(Stacks, Tag 08DW). -/
 structure AffineComparisonCoordinate where
   A : CommRingCat.{u}
   X : Scheme.{u}
@@ -54,18 +56,15 @@ structure AffineComparisonCoordinate where
         (moduleRings (Spec A).toRingedSpace)) (tilde.functor A))
       ⟨fun _ _ ↦ tilde.map_zero⟩ (.up ℤ)) ⋙ DerivedCategory.Q ⋙ d.functor
 
-/-- The acyclic-tensor criterion for a supplied model; no model is chosen.
-Source: Stacks Project, Tag 06Y1.
-(blueprint: def-pc-affine-coordinate-comparison-data). -/
+/-- The acyclic-tensor criterion for a supplied model; no model is chosen (Stacks, Tag 06Y1). -/
 abbrev AffineComparisonKFlat (A : CommRingCat.{u})
     (M : CochainComplex (ModuleCat.{u} A) ℤ) : Prop :=
   ∀ L : CochainComplex (ModuleCat.{u} A) ℤ, L.Acyclic →
     (CochainComplex.mapBifunctor L M
       (MonoidalCategory.curriedTensor (ModuleCat.{u} A))).Acyclic
 
-/-- Comparison on the full category of two labelled models, including cross morphisms.
-Source: Stacks Project, Tag 08DW(2), natural affine comparison.
-(blueprint: def-pc-affine-coordinate-comparison-data). -/
+/-- Comparison on the full category of two labelled models, including cross morphisms
+(Stacks, Tag 08DW). -/
 abbrev AffineCoordinateComparisonFamily : Type _ :=
   ∀ (a b : AffineComparisonCoordinate.{u, w}) (φ : a.A →+* b.A) (p : b.X ⟶ a.X),
     b.σ.hom ≫ p = Spec.map (CommRingCat.ofHom φ) ≫ a.σ.hom →

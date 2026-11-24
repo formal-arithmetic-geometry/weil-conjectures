@@ -13,9 +13,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Det
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 
 /-! # Coordinates of roots of the universal Artin–Schreier cover
-
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, the root charts
-in Multiplicativity and Duality (blueprint: lem-wft-as-root-coordinate-calculus).
 -/
 
 @[expose] public noncomputable section

@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.Complete
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 
 /-! # The action of a normalized realization on sections
-
-Source: diagonal coefficient changes, paragraph (1), coefficient identification.
-(blueprint: lem-sfb-diagonal-completed-section-action).
 -/
 
 @[expose] public noncomputable section
@@ -29,28 +26,20 @@ variable {C : Type c} [Category.{v} C] {D : Type d} [Category.{v'} D]
   [(J.W (A := Ab.{w})).IsMonoidal] [(K.W (A := Ab.{w})).IsMonoidal]
 attribute [local instance] Sheaf.monoidalCategory
 
-/-- Evaluate an internal action through the presheaf tensor comparison.
-Source: sectionwise internal module actions
-(blueprint: lem-sfb-diagonal-completed-section-action). -/
+/-- Evaluate an internal action through the presheaf tensor comparison. -/
 def action {R : Sheaf J Ab.{w}} [MonObj R] (M : Mod (Sheaf J Ab.{w}) R)
     (U : Cᵒᵖ) (a : R.obj.obj U) (x : M.X.obj.obj U) : M.X.obj.obj U :=
   ((Functor.LaxMonoidal.μ (sheafToPresheaf J Ab.{w}) R M.X).app U ≫
     (Mod.act M.X).hom.app U).hom (a ⊗ₜ[ℤ] x)
 
-/-- Evaluate a coefficient morphism to direct image with the original section type.
-Source: the sectionwise sheaf pushforward
-(blueprint: lem-sfb-diagonal-completed-section-action). -/
+/-- Evaluate a coefficient morphism to direct image with the original section type. -/
 def pushScalar (F : C ⥤ D) [F.IsContinuous J K]
     {R : Sheaf J Ab.{w}} {S : Sheaf K Ab.{w}}
     (φ : R ⟶ (F.sheafPushforwardContinuous Ab.{w} J K).obj S)
     (U : Cᵒᵖ) (a : R.obj.obj U) : S.obj.obj (F.op.obj U) :=
   φ.hom.app U a
 
-/-- Read scalar restriction and ordinary direct image on sections.
-Source: the lax monoidal sheaf pushforward tensor comparison
-(blueprint: lem-sfb-diagonal-completed-section-action).
-Proof: naturality of the tensor comparison moves the coefficient map to the input.
-The tensor comparison for direct image is the restriction of the original comparison. -/
+/-- Read scalar restriction and ordinary direct image on sections. -/
 theorem action_pushforward (F : C ⥤ D) [F.IsContinuous J K]
     {R : Sheaf J Ab.{w}} [MonObj R] {S : Sheaf K Ab.{w}} [MonObj S]
     (φ : R ⟶ (F.sheafPushforwardContinuous Ab.{w} J K).obj S) [IsMonHom φ]
@@ -88,10 +77,7 @@ private theorem map_action {R : Sheaf J Ab.{w}} [MonObj R]
   simp only [NatTrans.comp_app, Category.assoc] at hn'
   exact congrArg (fun f ↦ f.hom (a ⊗ₜ[ℤ] x)) (h'.trans hn')
 
-/-- Sectionwise compatibility on pure tensors implies linearity of an internal map.
-Source: the presheaf tensor comparison and pure-tensor extensionality
-(blueprint: lem-sfb-diagonal-completed-section-action).
-Proof: test equality after the tensor comparison, then on each sectionwise pure tensor. -/
+/-- Sectionwise compatibility on pure tensors implies linearity of an internal map. -/
 theorem linear_of_action {R : Sheaf J Ab.{w}} [MonObj R]
     {M N : Mod (Sheaf J Ab.{w}) R} (g : M.X ⟶ N.X)
     (h : ∀ (U : Cᵒᵖ) (a : R.obj.obj U) (x : M.X.obj.obj U),
@@ -119,17 +105,14 @@ end CategoryTheory.SheafModuleSection
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- Evaluate an internal module action on two local sections, using the tensor comparison
-from the presheaf tensor to the sheaf tensor. Source: the sectionwise description of internal
-abelian module sheaves (blueprint: lem-sfb-diagonal-completed-section-action). -/
+from the presheaf tensor to the sheaf tensor. -/
 def coefficientSectionAction {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (N : Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) X) (U : X.ProEtᵒᵖ)
     (a : (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X).obj.obj U)
     (x : N.X.obj.obj U) : N.X.obj.obj U :=
   CategoryTheory.SheafModuleSection.action N U a x
 
-/-- The underlying coefficient comparison fixed by the regular-module normalization.
-Source: diagonal coefficient identification, paragraph (1)
-(blueprint: lem-sfb-diagonal-completed-section-action). -/
+/-- The underlying coefficient comparison fixed by the regular-module normalization. -/
 def completedRealizationScalarIso {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (e : CompletedRealization l X) :
     (diagonalCompletedRestriction l X ⋙ diagonalForget l X).obj
@@ -137,37 +120,28 @@ def completedRealizationScalarIso {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
       condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X :=
   (e.underlying.app _).symm ≪≫ (Mod.forget _).mapIso e.unitIso
 
-/-- The scalar comparison evaluated on actual completed coefficient sections.
-Source: regular-module normalization
-(blueprint: lem-sfb-diagonal-completed-section-action). -/
+/-- The scalar comparison evaluated on actual completed coefficient sections. -/
 def completedRealizationScalarSection {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (e : CompletedRealization l X) (U : X.ProEtᵒᵖ)
     (a : (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj.obj U) :
     (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X).obj.obj U :=
   (completedRealizationScalarIso e).hom.hom.app U a
 
-/-- The inverse scalar comparison as a map into actual completed coefficient sections.
-Source: regular-module normalization of the realization
-(blueprint: lem-sfb-diagonal-completed-section-action). -/
+/-- The inverse scalar comparison as a map into actual completed coefficient sections. -/
 def completedRealizationScalarInv {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (e : CompletedRealization l X) (U : X.ProEtᵒᵖ)
     (a : (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X).obj.obj U) :
     (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l)).obj.obj U :=
   (completedRealizationScalarIso e).inv.hom.app U a
 
-/-- Applying the scalar comparison after its typed inverse returns the original section.
-Source: inverse cancellation for the regular-module comparison
-(blueprint: lem-sfb-diagonal-completed-section-action).
-Proof: evaluate the inverse-hom identity of completedRealizationScalarIso on the section. -/
+/-- Applying the scalar comparison after its typed inverse returns the original section. -/
 theorem completedRealizationScalarInv_hom {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (e : CompletedRealization l X) (U : X.ProEtᵒᵖ)
     (a : (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X).obj.obj U) :
     completedRealizationScalarSection e U (completedRealizationScalarInv e U a) = a := by
   exact congrArg (fun q ↦ q.hom.app U a) (completedRealizationScalarIso e).inv_hom_id
 
-/-- The inverse underlying comparison with the original module's section type explicit.
-Source: the given underlying comparison of a completed realization
-(blueprint: lem-sfb-diagonal-completed-section-action). -/
+/-- The inverse underlying comparison with the original module's section type explicit. -/
 def completedRealizationSectionInv {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (e : CompletedRealization l X) (M : DiagonalCompleted l X) (U : X.ProEtᵒᵖ)
     (m : M.val.obj U) : (e.F.obj M).X.obj.obj U :=
@@ -339,26 +313,7 @@ private theorem coefficientAction_restrict {l : ℕ} [Fact l.Prime]
     (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X)).obj N).val.map_smul f a x
 
 /-- At one site, a normalized completed realization identifies the scalar action on
-sections. This asserts no direct-image comparison or isomorphism between functors.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1), coefficient identification;
-the local-free-module argument in lem-diagonal-completed-ordinary-square.
-(blueprint: lem-sfb-diagonal-completed-section-action).
-
-Proof: the unit normalization identifies the coefficient comparison after every finite
-projection. These projections jointly detect equality on the completed coefficient sheaf.
-Construct the free module on a universe-lifted local representable by module
-sheafification. Reconstruct the section module of its realized internal module and
-apply automatic linearity into this free target to the underlying comparison.
-Cancel that isomorphism to get the action identity on the distinguished generator.
-The free/Yoneda/sheafification adjunctions construct a linear map sending this
-generator to the specified section of any module. Apply the realization functor to
-that map and use its internal linearity and naturality of the underlying comparison.
-This first proves the identity over pro-affine etale objects. They form a
-cover-dense basis of the pro-etale site. Restrict both sides along this basis, use
-naturality of the action, coefficient comparison and underlying comparison, and
-apply sheaf separatedness. Thus the identity holds on every pro-etale object. -/
+sections. This asserts no direct-image comparison or isomorphism between functors. -/
 theorem completedRealization_section_action (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (e : CompletedRealization l X) (M : DiagonalCompleted l X)
     (U : X.ProEtᵒᵖ)
@@ -399,10 +354,7 @@ theorem completedRealization_section_action (l : ℕ) [Fact l.Prime]
     exact S.downward_closed hf i
   exact F.isSeparated U.unop S hS lhs rhs (fun _ _ hf ↦ hf)
 
-/-- The single-site action identity with the original section types explicit.
-Source: completedRealization_section_action
-(blueprint: lem-sfb-diagonal-completed-section-action).
-Proof: apply the single-site action identity; the section inverse is the same map. -/
+/-- The single-site action identity with the original section types explicit. -/
 theorem completedRealization_section_action_typed (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (e : CompletedRealization l X) (M : DiagonalCompleted l X)
     (U : X.ProEtᵒᵖ)

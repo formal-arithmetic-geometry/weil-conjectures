@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.FilteredStationaryCycleComparison
 
 /-! # Stationary CE comparisons at outer filtration bounds
 
-Source: Stacks Project, Tag 012K, cycle and boundary formulas and graded cohomology.
-(blueprint: lem-weil-pbc-ce-stationary-comparisons-at-bounds).
+## References
+
+* Stacks Project, Tag 012K
 -/
 
 @[expose] public section
@@ -89,25 +90,7 @@ set_option linter.unusedVariables false in
 -- The existing hR and ht binders in the signature are used only implicitly.
 /-- Stationary comparison naturality whenever the two outer filtration steps stabilize.
 There is no support assumption, first-page formula, augmentation, or inverse-image lift.
-Source: Stacks Project, Tag 012K, formulas for cycles, boundaries and graded cohomology;
-explicit outer-step version of steps 4--5 of lem-weil-pbc-supported-ce-filtered-totals.
-(blueprint: lem-weil-pbc-ce-stationary-comparisons-at-bounds).
-
-Proof. Replace the outer steps in the cycle and boundary formulas by bottom and top.
-The resulting quotient is the quotient of actual cycles in step q by cycles in step
-q+1 and total boundaries lying in step q. Map it to the successive quotient of the
-cohomology images of the two steps. Its kernel is exactly those cycles and boundaries,
-and it is surjective, yielding the canonical quotient-to-image isomorphism. Transport
-it along D.c n and use D.H_formula, then compose with e. This constructs eInf from
-representative equations, not an arbitrary isomorphism; proof irrelevance identifies
-all witnesses of the outer equalities.
-For a filtered total map b, restrict its homology map to each cohomology image and
-transport along the c-isomorphisms, obtaining t and ht. Inclusion compatibility
-follows by cancelling the target step arrow. The page-map representative hypothesis
-and the canonical comparison send each actual cycle to the same image under b.
-The projections from actual cycles onto stationary page quotients are epimorphic;
-cancel them to prove the cokernel.map equation. Proof irrelevance removes the choice
-of hc. Zero totals and zero steps use the same quotient universal properties. -/
+(Stacks, Tag 012K) -/
 theorem exists_etaleCE_stationary_comparisons_at_bounds
     (D : ∀ (X : Scheme.{u})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

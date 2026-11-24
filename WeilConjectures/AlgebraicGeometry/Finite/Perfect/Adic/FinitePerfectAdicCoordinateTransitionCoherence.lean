@@ -14,13 +14,16 @@ import Mathlib.CategoryTheory.Adjunction.Comma
 
 /-! # Coherence of finite perfect adic coordinate transitions
 
-Source: Stacks Project, Tags 09AL, 09C6 and 06YY.
-
 This descends a coherent pro-etale quotient system to specified etale origins.
-The former assertion for arbitrary independent arrows and realizations was false;
-its zero-arrow diagnostic is retained below. The parent existential statement
-`finitePerfectAdic_descend_coordinate_transitions` is unchanged.
-(blueprint: new-w5-finite-perfect-adic-coordinate-transition-coherence)
+
+## Implementation details
+
+* A zero-arrow diagnostic in this file shows that the corresponding assertion for arbitrary
+  independent arrows and realizations is false.
+
+## References
+
+* Stacks Project, Tags 09AL, 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -92,20 +95,7 @@ private theorem realization_square
 
 -- Elaborating the two mate squares expands several derived-functor adjunctions.
 /-- Coherent quotient-coordinate arrows descend through the supplied bounded-below
-etale origins, preserving scalar realization and sourcewise universality.
-
-Source: Stacks Project, Tags 09AL, 09C6 and 06YY.
-(blueprint: new-w5-finite-perfect-adic-coordinate-transition-coherence).
-
-Proof: transpose each pro-etale quotient arrow through scalar extension. Its adjunct
-is an isomorphism by the supplied normalization. Conjugate this isomorphism by the
-specified origins and the canonical comparison/scalar-extension mate. Full faithfulness
-with bounded-below target gives a unique etale isomorphism. Transpose it back to get
-the etale coefficient arrow. The mate unit identity gives its exact comparison square.
-The etale arrow is universal, and remains so after etale pullback. Compose each supplied
-quotient realization with the inverse image of the specified origin comparison. The
-comparison square and naturality of both scalar compositors give the required tower
-square. This does not assert coherence for independently chosen arrows or isomorphisms. -/
+etale origins, preserving scalar realization and sourcewise universality. -/
 theorem finitePerfectAdic_coordinate_transition_coherence
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶

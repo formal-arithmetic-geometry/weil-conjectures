@@ -11,9 +11,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
 
 /-! Pullback transport for an ordinary condensed coefficient comparison.
-
-Source: latest blueprint, lemma-fourier-transform-constant-sheaf proof, coefficient paragraph
-(blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

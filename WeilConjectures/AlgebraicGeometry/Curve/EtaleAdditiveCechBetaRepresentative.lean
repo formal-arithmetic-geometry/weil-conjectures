@@ -12,7 +12,10 @@ import Mathlib.Algebra.Homology.ConcreteCategory
 
 /-! # Coefficient representatives of arbitrary total homology classes
 
-Source: Stacks Project, Tags 03P2 and 01EQ. -/
+## References
+
+* Stacks Project, Tags 03P2, 01EQ
+-/
 
 @[expose] public section
 
@@ -24,17 +27,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The coefficient augmentation represents every total homology class.
-Source: Stacks Project, Tags 03P2 and 01EQ, the affine column comparison.
-(blueprint: new-w2-additive-cech-beta-representative)
-
-Proof: Choose a preimage of the given class under the beta homology isomorphism,
-then a cycle representing that class using the surjection homologyPi. Its
-cochain is an ULift of an ordinary cochain x; the lifted differential equation
-implies that x is a cycle. Construct the ordinary cycle using cyclesMk. Apply
-the chain map to the lifted cycle. Naturality of iCycles gives its beta inclusion,
-and naturality of homologyPi gives the desired class. No global cycle, covering
-condition, compactness or choice of an edge equivalence is used. -/
+/-- The coefficient augmentation represents every total homology class. -/
 theorem additiveCech_beta_representative
     (X : Scheme.{u}) [X.IsSeparated] {ι : Type u} [Finite ι]
     (U : ι → X.Opens)

@@ -10,8 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Stalk of an inverse image, compatible with germs of pulled-back sections
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3)
-(blueprint: lem-weil-pbc-inverse-image-stalk-germ).
+## References
+
+* Stacks Project, Tag 03Q1.
 -/
 
 @[expose] public section
@@ -31,20 +32,7 @@ schemes, `y : Spec Ω ⟶ Y` a geometric point and `x̄ = y ≫ f`. There is an 
 of `ȳ` to the germ of `a` at `(U, ū)`. Here `f⁻¹ = Etale.upperStar`, `η` is the unit of
 `Etale.upperStarLowerStarAdjunction`, stalks and germs are `pointSmallEtale`'s
 `sheafFiber`/`toPresheafFiber`, and `(ū, ȳ)` is `(pointSmallEtaleFiberEtaleIso f y).inv`.
-
-Proof: take `Etale.upperStarCompSheafFiberIso`, the general-site identification of
-pullback stalks transported along `pointSmallEtaleComapIso`. To check the germ formula,
-compose with its inverse and expand its three factors. The germ formula for an
-isomorphism of points transports `ū` to `(pointSmallEtaleFiberEtaleIso f y).inv.app U ū`.
-The germ formula for `sheafFiberComapIso` gives the unit of the abstract sheaf pullback.
-Move the comparison with the constructed pullback past the germ map by naturality;
-`Adjunction.unit_leftAdjointUniq_hom_app` identifies the resulting composite with the
-unit of `Etale.upperStarLowerStarAdjunction`. Naturality in `G` is already part of the
-chosen natural isomorphism. This is the general-site route of Stacks Tag 03Q1 (3),
-which cites Sites Tag 05V1, rather than its alternative direct colimit computation.
-
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03Q1 (3)
-(blueprint: lem-weil-pbc-inverse-image-stalk-germ). -/
+(Stacks, Tag 03Q1) -/
 theorem inverseImage_stalk_germ
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]

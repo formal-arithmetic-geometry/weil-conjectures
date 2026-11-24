@@ -519,30 +519,7 @@ private theorem realize_factorization (l : ℕ) [Fact l.Prime]
     (realized_factor_composite l f eX eS R D canonical hcanonical push cF z w b hb)
 
 /-- A realized local Chern class of a base line factors through the shifted
-integral Tate line on that base, before taking any right adjunct.
-
-Source: diagonal coefficient changes (3), base Chern component of the Picard decomposition.
-(blueprint: lem-diagonal-local-chern-base-factorization).
-
-Proof: represent M by an invertible module L. Whole-system Chern naturality
-for L, read through the tower pullback/push adjunction, gives a;R(θ_X)=θ_S;t,
-where a is the adjunct of the coefficient-unit pullback and t that of the
-shifted line pullback. The completed unit and the shifted integral root line on
-S are complete (local freeness of rank one, shift adjunction), and so is
-p.Rc(completedLine_X[2]) (p.completed, uniqueness of right-derived functors and
-the pullback/direct-image adjunction). Full faithfulness of scalar restriction
-on complete objects lifts the base normalization of θ_S to z on S, and lifts
-the restricted, derived-limit image of t (conjugated by the line comparisons
-and p.sourceMap) to b with z;b=b₀;p.Rc(w), where b₀ is the completed push unit;
-this uses the finite-push unit seed, naturality of p.completed, p.limits and
-p.varying, and hw. Choose a completed realization e_S on S, the canonical
-condensed right-derived direct image D and the derived ordinary realization
-square. Put γ=localChern_S(z) and realize b as a:V→D(T). The realized-unit
-transport and canonical-unit-push theorems identify γ;a with the derived
-adjunct of cF.derived;localChern_X(w); v is the inverse adjunct of a, and
-naturality of the derived adjunction gives the factorization. The direct-image
-data are constructed inside the proof; the statement uses no horizontal square,
-no hyperplane summand, no trace, and no direct-image or exchange comparison. -/
+integral Tate line on that base, before taking any right adjunct. -/
 theorem diagonalLocalChern_base_factorization (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

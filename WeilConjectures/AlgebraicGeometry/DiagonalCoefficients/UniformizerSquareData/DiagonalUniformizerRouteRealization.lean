@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalUniformizerRouteCompatibility
 
 /-! # The supplied successive uniformizer scalar squares
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: lem-diagonal-uniformizer-route-realization).
 -/
 
 @[expose] public noncomputable section

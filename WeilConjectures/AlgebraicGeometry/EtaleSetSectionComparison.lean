@@ -9,7 +9,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 
 /-! # Canonical comparison maps on sections of étale inverse images
-Source: Stacks Project, Tag 09YQ and Sites Tags 03CB and 03CC. -/
+
+## References
+
+* Stacks Project, Tags 09YQ, 03CB and 03CC
+-/
 
 @[expose] public section
 
@@ -20,12 +24,7 @@ namespace AlgebraicGeometry
 /-- The section comparison for a commuting triangle `T ⟶ S ⟶ R`: first use the
 inverse-image unit, then the composition isomorphism from
 `etaleSetInverseImageCompositionUnits`, and finally restrict along the canonical
-iterated-fibre-product isomorphism. This defines the transition maps and limit legs
-in the continuity statement.
-
-Source: Stacks Project, Étale Cohomology, Tag 09YQ, degree-zero section comparison;
-Sites, Tags 03CB and 03CC
-(blueprint: def-weil-pbc-sets-section-comparison). -/
+iterated-fibre-product isomorphism (Stacks, Tags 09YQ, 03CB, 03CC). -/
 noncomputable def etaleSetSectionComparison
     {R S T : Scheme.{u}} (h : T ⟶ S) (f : S ⟶ R) (k : T ⟶ R) (hk : h ≫ f = k)
     (G : Sheaf R.smallEtaleTopology (Type (u + 1))) (U : R.Etale) :

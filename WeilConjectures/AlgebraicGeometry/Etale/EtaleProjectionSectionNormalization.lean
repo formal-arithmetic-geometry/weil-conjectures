@@ -37,7 +37,9 @@ set_option linter.privateModule false
 
 /-! # Normalization of the étale projection comparison
 
-Source: Stacks Project, Tag 0GKF.
+## References
+
+* Stacks Project, Tag 0GKF
 -/
 
 @[expose] public section

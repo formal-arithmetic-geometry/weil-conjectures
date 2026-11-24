@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 
 /-! # Rank-one ordinary scalar comparisons
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J and 093M
 -/
 
 -- After pruning, this module only keeps private declarations.

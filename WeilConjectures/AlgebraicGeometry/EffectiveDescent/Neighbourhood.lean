@@ -145,9 +145,7 @@ lemma isOpen_setOf_forall_univ_mem [IsFinite p] {T : Set V.left} (hT : IsOpen T)
 locally of finite presentation and `D` a descent datum on `V` relative to `p`. If every finite set
 of points of `V` lying over one point of `Y` lies in an affine open (the hypothesis of Stacks
 0CCI), then every point `v` of `V` has an affine open neighbourhood `U` which is invariant under
-`D` and lies over an affine open of `Y`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`, a step of the proof) -/
+`D` and lies over an affine open of `Y`. -/
 theorem exists_isInvariant_isAffineOpen_of_fibre [IsFinite p] [Flat p]
     [LocallyOfFinitePresentation p] (D : DescentDatum p V)
     (hV : ∀ (y : Y) (s : Set V.left), s.Finite → (∀ x ∈ s, (V.hom ≫ p) x = y) →
@@ -209,9 +207,7 @@ theorem exists_isInvariant_isAffineOpen_of_fibre [IsFinite p] [Flat p]
 /-- **Invariant affine neighbourhoods** (Stacks 03JE, 0H8K). Let `p : X ⟶ Y` be finite, flat and
 locally of finite presentation and `D` a descent datum on `V` relative to `p`. If every finite set
 of points of `V` lies in an affine open, then every point `v` of `V` has an affine open
-neighbourhood `U` which is invariant under `D` and lies over an affine open of `Y`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`, a step of the proof) -/
+neighbourhood `U` which is invariant under `D` and lies over an affine open of `Y`. -/
 theorem exists_isInvariant_isAffineOpen [IsFinite p] [Flat p] [LocallyOfFinitePresentation p]
     (D : DescentDatum p V)
     (hV : ∀ s : Set V.left, s.Finite → ∃ U : V.left.Opens, IsAffineOpen U ∧ s ⊆ U)

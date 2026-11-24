@@ -25,20 +25,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- Source: Stacks Project, Tags 09ZB, 03RV and 09ZA (the geometric step).
-(blueprint: lem-weil-pbc-gabber-h1-torsors-trivial).
-
-Proof: Local trivializations identify the underlying sheaf of each torsor with the
-finite constant sheaf M. Hence it is finite locally constant. By Tag 03RV it is the
-sheaf of sections of a finite etale scheme V over Z; Yoneda transports the M-action.
-The morphism V to Z is surjective, since a torsor is locally nonempty. The spectrum
-of R is affine, integral and normal, and its function field is FractionRing R, which
-is separably closed. Z is affine as a closed subscheme; V is affine as a finite scheme
-over Z. Apply Tag 09ZA to obtain a section of V to Z. Under representability this is
-a global torsor section t. On each object of the site, the map m to m + t is an
-M-equivariant bijection by simple transitivity, and these maps commute with restriction.
-They form an equivariant sheaf isomorphism from the trivial torsor to the given one.
-This argument also covers the empty scheme and the trivial coefficient group. -/
+/-- Every torsor under a finite constant abelian sheaf on a closed subscheme of the spectrum of a
+normal domain with separably closed fraction field is trivial.
+(Stacks, Tags 09ZB, 03RV and 09ZA) -/
 theorem torsors_trivial_of_finite_etale_sections
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [IsSepClosed (FractionRing R)] (Z : Scheme.{u})

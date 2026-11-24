@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Etale complex graded class descent
 
 The graded lifting step of the finite spectral-sequence comparison in Stacks Tag 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-graded-class-descent).
 -/
 
 @[expose] public section
@@ -26,36 +25,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- The finite abutment filtration has stage representatives on each graded piece.
-Source: Stacks Project, Tags 0EZM and 015J, finite-term spectral-sequence comparison.
-(blueprint: lem-weil-pbc-etale-complex-graded-class-descent).
-
-Proof: Reindex the filtered opposite category by a nonempty directed cofinal
-system (0032). Termwise sheaf continuity (09YQ) identifies the colimit of the
-first pages with the first page on the limit. Use the functorial termwise
-hypercohomology spectral sequences of 015J, with bidegrees (complex degree,
-resolution degree). Filtered colimits of abelian groups preserve homology.
-Starting with the first-page comparison, induct on r: compatibility with
-differentials identifies the colimit short complex of incoming and outgoing
-differentials with the target short complex. Preservation of homology and the
-page isomorphisms give the comparison isomorphism on page r+1. Vanishing outside
-complex degree >= a and resolution degree >= 0 persists because the next page
-is homology. At bidegree (s,t), incoming and outgoing differentials
-are zero once r > max (t+1) (s-a); this bound is independent of the stage.
-Consequently the stable-page comparison is an isomorphism in every bidegree.
-
-The abutment filtration in degree p is whole at a and zero at p+1. Pull it
-back along eB and set S n to its step a+n. If p<a, the entire abutment is zero,
-so S 0 is both whole and zero. Otherwise the length is (p+1-a).toNat. For
-x in S n, identify its coset modulo S (n+1) with its stable-page class in
-bidegree (a+n,p-a-n). The stable-page colimit isomorphism gives a representative
-at one stage. Convergence identifies that representative with a coset in the
-stage abutment filtration. Choose a lift y in that stage filtration step.
-Functoriality of convergence identifies its image coset with that of x, so
-x minus its image belongs to S (n+1). The abutment clause of pullback
-functoriality, hP, hH and hB identify this image with B.ι.app (op i) y.
-A stage of the cofinal system is also an original stage. This proves the
-asserted graded lifting property without combining the different pieces. -/
+/-- The finite abutment filtration has stage representatives on each graded piece
+(Stacks, Tags 0EZM and 015J). -/
 theorem exists_etale_complex_graded_class_rep
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

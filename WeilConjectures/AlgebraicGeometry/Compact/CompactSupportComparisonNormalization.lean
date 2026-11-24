@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparis
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Agreement of the two specified compact-support site comparisons
-
-Source: blueprint thm-sf-ambient-adjoint-class.proof.md, normalized Hom chain.
-(blueprint: lem-coef-compact-support-comparison-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -23,21 +20,7 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison used in the specified exceptional Hom chain is the canonical
-proper/open compact-support comparison.
-
-Source: blueprint thm-sf-ambient-adjoint-class.proof.md, four-factor Hom chain,
-and lem-coef-finite-dualizing.proof.md, paragraph 3
-(blueprint: lem-coef-compact-support-comparison-normalization).
-
-Proof: expand both comparisons into the exact open extension comparison followed
-by the canonical proper direct-image counit mate. The open comparison on D+ is the
-restriction of the termwise comparison on the unbounded category. Naturality of
-rightDerivedFunctorPlusCompatibility moves this identification through the proper
-factor. Compatibility of mapDerivedCategoryPlus with composition identifies the
-remaining inclusion comparisons. Thus both components are the same proper mate
-composed with the same exact open comparison. Componentwise equality gives the
-natural-isomorphism equality. This also applies to identity-open compactifications
-and to the empty source; no new adjunction is chosen. -/
+proper/open compact-support comparison. -/
 theorem compactSupportComparisonNormalization
     (R : Type (u + 1)) [CommRing R] [Finite R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :

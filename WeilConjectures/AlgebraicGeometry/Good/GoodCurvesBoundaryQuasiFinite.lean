@@ -26,9 +26,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
 /-!
 # The boundary of fibrewise nonempty opens in good curves
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0GKX,
-lemma-constant-shriek-rel-dim-1, the second boundary Zprime, using Tag 0GK7
-(blueprint: lem-weil-pbc-good-curves-boundary-quasifinite).
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0GKX (the second boundary `Z'`)
+* Stacks Project, Tags 0GK7, 01J3, 01J4
 -/
 
 @[expose] public section
@@ -42,9 +43,7 @@ namespace AlgebraicGeometry
 /-- The canonical map to the base from the reduced closed complement of the open union
 of the `O i` in the coproduct of the `C i`. The open union is the supremum of the open
 images of `u i` followed by the coprojections. Its complement carries the reduced
-induced closed structure given by the existing vanishing-ideal construction.
-Source: Stacks Project, Tag 0GKX, second boundary Zprime; Tags 01J3 and 01J4
-(blueprint: lem-weil-pbc-good-curves-boundary-quasifinite). -/
+induced closed structure given by the existing vanishing-ideal construction. -/
 noncomputable def goodCurvesBoundaryMap
     {I : Type u} (B : Scheme.{u}) (T C O : I → Scheme.{u})
     (t : ∀ i, T i ⟶ B) (b : ∀ i, C i ⟶ T i) (u : ∀ i, O i ⟶ C i)
@@ -91,44 +90,8 @@ private theorem proper_sigmaMap
     (hpb i).isoPullback.hom, (hpb i).isoPullback_hom_snd]
   infer_instance
 
-/-- Source: Stacks Project, Tag 0GKX, the assertion that the second boundary Zprime
-is quasi-finite, with the good-curves hypotheses of Tag 0GK7 made explicit
-(blueprint: lem-weil-pbc-good-curves-boundary-quasifinite).
-
-Proof plan:
-1. Each finite `t i` is proper (lem-weil-pbc-finite-proper), so `b i ≫ t i` is
-   proper (lem-weil-pbc-proper-composition).
-2. Their finite coproduct is proper: finite type follows by combining finite affine
-   covers; separatedness is checked on the pieces `C i ×[B] C j` of the diagonal,
-   empty off the equal-index pieces; universal closedness follows from a finite union
-   of closed images after any base change (lem-weil-pbc-scheme-coproduct-family).
-3. The reduced complement is a closed immersion
-   (lem-weil-pbc-reduced-induced-closed-subscheme), hence its map to `B` is proper
-   (lem-weil-pbc-closed-immersion-proper). It is separated and of finite type.
-   Over the locally Noetherian base it is locally of finite presentation
-   (pqf-lem-lft-fp-locnoeth); properness also gives quasi-compactness and a
-   quasi-compact diagonal, hence quasi-separatedness.
-4. Each fibre of `b i` is proper and smooth over its residue field
-   (lem-weil-pbc-proper-base-change, sbc-lem-smooth-criterion). It is Noetherian
-   (lem-weil-pbc-finite-type-over-noetherian), and regular by the smooth-field
-   criterion applied to the identity field extension
-   (lem-weil-pbc-geometric-regularity-smooth-field-criterion). Geometric connectedness
-   gives connectedness; nonemptiness and regularity give irreducibility
-   (rem-pc-regular-normal). No perfection of the residue field is needed.
-5. The open fibre is nonempty. On an irreducible scheme of dimension at most one,
-   every point outside it is closed (lem-sc-scheme-sober,
-   lem-sc-dim-one-point-outside-open-closed). Its closed complement is finite
-   by Noetherianity (lem-sc-noetherian-closed-points-finite). In dimension zero
-   the complement is empty.
-6. For any point of `B`, each `t i` has a finite fibre (pqf-lem-finite-qf,
-   pqf-lem-qf-finitefibres). The boundary fibre is the disjoint union of the finite
-   complements from step 5 over these points and over the finite set `I`.
-   The fibre homeomorphism (def-pc-scheme-fibre) and the image of the reduced
-   closed immersion justify this set-level decomposition; reduction need not commute
-   with base change.
-7. Finite type and finite fibres imply quasi-finiteness (pqf-lem-qf-finitefibres).
-   The other conclusions were obtained in step 3. Empty `I`, `B` or `T i`
-   contribute no points and are permitted throughout. -/
+/-- The second boundary `Z'` of a good curve diagram is quasi-finite over the base, with the
+good-curves hypotheses made explicit. -/
 theorem good_curves_boundary_quasiFinite
     {I : Type u} [Finite I] (B : Scheme.{u}) [IsLocallyNoetherian B] [CompactSpace B]
     (T C O : I → Scheme.{u})

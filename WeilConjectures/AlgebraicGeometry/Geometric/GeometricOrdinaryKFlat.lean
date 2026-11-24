@@ -91,8 +91,10 @@ import all WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePu
 
 /-! # K-flat preservation for the ordinary geometric realization
 
-Source: Stacks 0G7E; Zheng Construction 4.1.
-(blueprint: lem-coef-geometric-ordinary-kflat)
+## References
+
+* Stacks Project, Tag 0G7E
+* Zheng, Construction 4.1
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -227,16 +229,7 @@ private theorem system_inverse_kflat [PreservesFiniteLimits uInv]
     ((NatIso.mapHomologicalComplex (O.ordinaryPullEvaluation n) (.up ℤ)).app P).symm hk
 
 /-- The given ordinary inverse image preserves flat-term K-flat representatives at
-all coefficient levels and on the sequence site.
-Source: Stacks 0G7E; Zheng Construction 4.1.
-(blueprint: lem-coef-geometric-ordinary-kflat).
-
-Proof: apply ringed-topos pullback preservation at each level with identity scalar
-extension, then remove that extension using the scalar unit. Evaluation preserves
-flat-term K-flat complexes. Exact jointly faithful evaluations detect acyclicity;
-their right coextension adjoints make tensor evaluation commute with total tensors.
-Consequently levelwise K-flatness implies K-flatness of the system. Transport the
-levelwise pullbacks through O.ordinaryPullEvaluation to conclude. -/
+all coefficient levels and on the sequence site. -/
 theorem geometricOrdinary_kflat [PreservesFiniteLimits uInv] :
     (∀ (n : ℕ) (P : CochainComplex (Mod.{c, v, max c v r} J (B n)) ℤ),
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := B n) P →

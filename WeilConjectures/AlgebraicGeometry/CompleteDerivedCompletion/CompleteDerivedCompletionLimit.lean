@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 The derived limit is computed by the Roos fibre, is a derived limit of the derived
 evaluations, and is compatible with exact equivalences.
-Source: blueprint Assertions 4--5 (blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -44,17 +43,13 @@ namespace CompleteDerivedCompletion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The cochain unit of the derived limit, as a natural transformation.
-Source: blueprint Notation 1 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- The cochain unit of the derived limit, as a natural transformation. -/
 def rlimUnit (T : Scheme.{u}) :
     ExactProductsRoos.ordinary ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ rlim l E T where
   app K := (inverseLimit l E T).rightDerivedFunctorUnitQ K
   naturality _ _ f := (inverseLimit l E T).rightDerivedFunctorUnitQ_naturality f
 
-/-- The derived limit is the Roos fibre of `1 - shift`.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: exact countable products and the K-injective normalization of the derived limit
-let `lem-weil-pbc-exact-products-roos-comparison` apply. -/
+/-- The derived limit is the Roos fibre of `1 - shift`. -/
 theorem rlim_roos (T : Scheme.{u}) :
     Nonempty (DerivedCategory.Q ⋙ rlim l E T ≅ ExactProductsRoos.fibre ⋙ DerivedCategory.Q) := by
   obtain ⟨e, -⟩ := ExactProductsRoos.comparisonIso (rlim l E T) (rlimUnit l E T) (by
@@ -65,8 +60,7 @@ theorem rlim_roos (T : Scheme.{u}) :
     infer_instance)
   exact ⟨e.symm⟩
 
-/-- Derived limits are invariant under isomorphism of the limit object.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Derived limits are invariant under isomorphism of the limit object. -/
 theorem isDerivedLimit_of_iso {C : Type*} [Category C] [HasZeroObject C]
     [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -106,11 +100,7 @@ private def limitAsFunctorIsoOrdinary (A : Type*) [Category A] [Abelian A]
   ((HomologicalComplex.functorEquivalenceInverseCompMapHomologicalComplexLim A
     (.up ℤ) ℕᵒᵖ).app I.asFunctor).symm
 
-/-- The derived limit is a derived limit of the derived evaluations.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: represent the tower by a K-injective complex; exact countable products give
-derived products and the termwise inverse limit computes the derived limit of its
-evaluations, which is the derived limit functor on a K-injective complex. -/
+/-- The derived limit is a derived limit of the derived evaluations. -/
 theorem rlim_isDerivedLimit (T : Scheme.{u}) :
     ∃ (_products : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E T))),
       ∀ M : DTow l E T,
@@ -175,10 +165,7 @@ namespace CompleteDerivedCompletion
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The derived limit is compatible with exact equivalences of module categories.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: conjugate the constant comparison of the inverse equivalence under the composite
-derived adjunctions; the derived functor of an exact functor is its induced functor. -/
+/-- The derived limit is compatible with exact equivalences of module categories. -/
 theorem rlim_equivalence {T T' : Scheme.{u}}
     (e : AdicCompletion.Modules l E T ≌ AdicCompletion.Modules l E T')
     [e.functor.Additive] :
@@ -200,8 +187,7 @@ theorem rlim_equivalence {T T' : Scheme.{u}}
   exact ⟨conjugateIsoEquiv (a₁.comp (constantLimitAdjunction l E T))
     ((constantLimitAdjunction l E T').comp a₂) (constantInterchange l E e.inverse).symm⟩
 
-/-- Evaluation at the top level is left adjoint to the constant tower functor.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral). -/
+/-- Evaluation at the top level is left adjoint to the constant tower functor. -/
 def evaluationZeroConstAdjunction (A : Type*) [Category A] :
     (evaluation ℕᵒᵖ A).obj (op 0) ⊣ Functor.const ℕᵒᵖ :=
   Adjunction.mkOfUnitCounit {
@@ -227,11 +213,7 @@ def evaluationZeroConstAdjunction (A : Type*) [Category A] :
       dsimp
       simp }
 
-/-- The unit of the derived constant-limit adjunction is an isomorphism.
-Source: blueprint Assertion 5 (blueprint: proposition-proper-base-change-complete-integral).
-Proof: constant towers of K-injective complexes are K-injective, so on a K-injective
-complex the derived unit is the ordinary unit, which is invertible because the index
-category is connected. -/
+/-- The unit of the derived constant-limit adjunction is an isomorphism. -/
 theorem constantLimit_unit_isIso (T : Scheme.{u})
     (M : DerivedCategory (AdicCompletion.Modules l E T)) :
     IsIso ((constantLimitAdjunction l E T).unit.app M) := by

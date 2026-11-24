@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
 
 /-! # Fixed endpoint comparisons for horizontal duality mates
 
-Source: Stacks Project, Tags 0D5S, 0D5T and 0ATR.
-(blueprint: lem-sc-horizontal-duality-mate-comparisons).
+## References
+
+* Stacks Project, Tags 0D5S, 0D5T and 0ATR
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ noncomputable section
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Restriction of derived pullback to quasi-coherent complexes. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- Restriction of derived pullback to quasi-coherent complexes.
 -/
 def horizontalMatePullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     schemeDerivedQCohCategory Y ⥤ schemeDerivedQCohCategory X :=
@@ -35,8 +35,7 @@ def horizontalMatePullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f)
     (fun E ↦ (derivedPullback_tensor_preserve_QCoh f).1 E.obj E.property)
 
-/-- Restriction of derived direct image to quasi-coherent complexes. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- Restriction of derived direct image to quasi-coherent complexes.
 -/
 def horizontalMatePushforward {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -46,23 +45,20 @@ def horizontalMatePushforward {X Y : Scheme.{u}}
     ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)
     (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property)
 
-/-- The composition isomorphism determined by the left-derived universal property. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- The composition isomorphism determined by the left-derived universal property.
 -/
 def horizontalMateAmbientComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
   (Classical.choose (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition)))) f g
 
-/-- The identity isomorphism from the same coherent comparison family. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- The identity isomorphism from the same coherent comparison family.
 -/
 def horizontalMateAmbientId (X : Scheme.{u}) : derivedPullback (𝟙 X) ≅ 𝟭 _ :=
   (Classical.choose (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition)))).2) X
 
-/-- Coherent composition comparison on quasi-coherent complexes. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- Coherent composition comparison on quasi-coherent complexes.
 -/
 def horizontalMateComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     horizontalMatePullback g ⋙ horizontalMatePullback f ≅
@@ -71,16 +67,14 @@ def horizontalMateComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (Functor.isoWhiskerLeft (schemeDerivedQCohProperty Z).ι
       (horizontalMateAmbientComp f g))
 
-/-- Coherent identity comparison on quasi-coherent complexes. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- Coherent identity comparison on quasi-coherent complexes.
 -/
 def horizontalMateId (X : Scheme.{u}) : horizontalMatePullback (𝟙 X) ≅ 𝟭 _ :=
   Functor.fullyFaithfulCancelRight (schemeDerivedQCohProperty X).ι
     (Functor.isoWhiskerLeft (schemeDerivedQCohProperty X).ι
       (horizontalMateAmbientId X))
 
-/-- Pullback along a scheme isomorphism, with inverse the pullback along its inverse. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- Pullback along a scheme isomorphism, with inverse the pullback along its inverse.
 -/
 def horizontalMateEquivalence {X Y : Scheme.{u}} (e : X ≅ Y) :
     schemeDerivedQCohCategory Y ≌ schemeDerivedQCohCategory X :=
@@ -90,8 +84,7 @@ def horizontalMateEquivalence {X Y : Scheme.{u}} (e : X ≅ Y) :
     (horizontalMateComp e.hom e.inv ≪≫
       eqToIso (congrArg horizontalMatePullback e.hom_inv_id) ≪≫ horizontalMateId X)
 
-/-- The pinned derived pullback/direct-image adjunction restricted to QCoh. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- The pinned derived pullback/direct-image adjunction restricted to QCoh.
 -/
 def horizontalMateAdjunction {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -106,8 +99,7 @@ def horizontalMateAdjunction {X Y : Scheme.{u}}
     (schemeDerivedQCohProperty Y).fullyFaithfulι
     (schemeDerivedQCohProperty X).fullyFaithfulι (Iso.refl _) (Iso.refl _)
 
-/-- Direct-image composition is the conjugate of the fixed pullback comparison. 
-(blueprint: lem-sc-horizontal-duality-mate-comparisons)
+/-- Direct-image composition is the conjugate of the fixed pullback comparison.
 -/
 def horizontalMatePushComp {X Y Z : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -121,10 +113,7 @@ def horizontalMatePushComp {X Y Z : Scheme.{u}}
     (horizontalMateComp f g)
 
 /-- Transport of the right adjoint across an isomorphism of the source schemes.
-The direct-image comparison is the conjugate of the pinned pullback comparison;
-the last comparison is right-adjoint uniqueness for the supplied adjunctions.
-Source: Stacks Project, Tags 0D5S, 0D5T and 0ATR.
-(blueprint: lem-sc-horizontal-duality-mate-comparisons). -/
+(Stacks, Tags 0D5S, 0D5T and 0ATR) -/
 def horizontalMateRightAdjointIso {P Q Z : Scheme.{u}}
     [CompactSpace P] [QuasiSeparatedSpace P] [CompactSpace Q] [QuasiSeparatedSpace Q]
     [CompactSpace Z] [QuasiSeparatedSpace Z]
@@ -146,8 +135,7 @@ def horizontalMateRightAdjointIso {P Q Z : Scheme.{u}}
       ((ev.symm.toAdjunction.comp adjc).ofNatIsoLeft li.symm)
 
 /-- Source endpoint comparison for the two successive pullbacks.
-Source: Stacks Project, Tag 0D5S and Tag 0ATR.
-(blueprint: lem-sc-horizontal-duality-mate-comparisons). -/
+(Stacks, Tags 0D5S and 0ATR) -/
 def horizontalMateSourceIso {X Y Y' Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y' ⟶ Y) (h : Z ⟶ Y') (E : schemeDerivedCategory X) :
     (derivedPullback (pullback.fst (pullback.snd f g) h)).obj
@@ -163,8 +151,7 @@ def horizontalMateSourceIso {X Y Y' Z : Scheme.{u}}
 
 /-- Target endpoint comparison, first composing the pullbacks on the input,
 then transporting the supplied right adjoints across the pullback associativity iso.
-Source: Stacks Project, Tag 0ATR, Lemma 48.5.2.
-(blueprint: lem-sc-horizontal-duality-mate-comparisons). -/
+(Stacks, Tag 0ATR) -/
 def horizontalMateTargetIso {X Y Y' Z : Scheme.{u}}
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']
     [CompactSpace Z] [QuasiSeparatedSpace Z]

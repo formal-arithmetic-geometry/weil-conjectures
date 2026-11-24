@@ -13,9 +13,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Quotient line normalization of the scalar/pullback mate
-
-Source: diagonal coefficient changes, paragraph (3), line endpoint normalization.
-(blueprint: lem-diagonal-quotient-line-pullback-normalization).
 -/
 
 @[expose] public noncomputable section

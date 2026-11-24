@@ -10,8 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceTwistedSplit
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientProjection
 
 /-! # Integration from unit and Chern components of the model trace
-
-Source: diagonal tower trace proof paragraphs (1)--(2), inverse splitting and finite projection.
 -/
 
 @[expose] public noncomputable section
@@ -27,15 +25,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   SpTowerClasses.coefficient SheafOfModules.unit exactConeComparison
 
 /-- The actual inverse-splitting trace kills the twisted unit and sends the
-relative Chern adjunct to one.
-
-Source: diagonal tower trace proof paragraph (1)
-Proof: substitute the two established components of the twisted splitting and the
-formula defining the model trace. The twisted pushforward isomorphism cancels its
-inverse. Functoriality combines the splitting and its inverse, so they cancel as
-well. The remaining two biproduct composites are inl followed by snd, which is
-zero, and inr followed by snd, which is identity. The positive-unit and contraction
-isomorphisms preserve these two equations. -/
+relative Chern adjunct to one. -/
 private theorem model_trace_components
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]
@@ -210,24 +200,7 @@ private theorem projected_trace_of_components
     (V.map (t.model.trace l E)) _ hβ'
 
 /-- A source map with a base component and a coefficient-one Chern component
-integrates to the canonical coefficient projection.
-
-Source: diagonal tower trace proof paragraphs (1)--(2)
-(blueprint: lem-sfb-diagonal-trace-model-trace-components).
-Proof: the twisted-splitting component identities identify the unit and Chern
-arrows as the two inclusions followed by the splitting. Substitute the definition
-of the actual model trace and cancel the twisted-pushforward isomorphism and the
-splitting against their inverses. The biproduct equations show that the unit is
-killed and the Chern adjunct is sent to one.
-
-Exact restriction and evaluation preserve these equations. Apply the evaluated
-trace to the assumed pretrace sum. Additivity kills its arbitrary base term and
-leaves the projected coefficient unit. Result.reductions identifies this with the
-projection of the completed trace composite. Finally, the normalized exact-cone
-projection theorem identifies the coefficient unit and its derived projection,
-followed by the restriction/evaluation single comparisons, with the actual
-ordinary coefficientProjection. Postcomposing the equality by these comparisons
-gives the displayed identity. -/
+integrates to the canonical coefficient projection. -/
 theorem diagonalTrace_integral_of_components
     (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S]

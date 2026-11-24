@@ -17,12 +17,13 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackPerfect
 
 /-! # Affine pullback of a perfect generator
 
-Source: Stacks Project, Derived Categories of Schemes, Remark 36.16.4, Tag 0BQT
-(blueprint: lem-pc-perfect-generator-pullback).
-
 The weak generator condition is expressed by the shifted-Hom vanishing criterion,
 just as in `AlgebraicGeometry.exists_perfect_generator`. All test objects belong to
 `D_QCoh`, while the Hom groups and shifts are computed in the ambient derived category.
+
+## References
+
+* Stacks Project, Derived Categories of Schemes, Remark 36.16.4 (Tag 0BQT).
 -/
 
 @[expose] public section
@@ -34,24 +35,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The derived pullback of a perfect generator along an affine morphism of qcqs schemes
-is a perfect generator of the quasi-coherent derived category of the source.
-Source: Stacks Project, Tag 0BQT (blueprint: lem-pc-perfect-generator-pullback).
-
-Proof:
-1. By `lem-pc-derived-pullback-tensor-qcoh`, derived pullback preserves quasi-coherent
-cohomology. The adjunction `lem-pc-ringed-spaces-derived-adjoint` applies to the chosen
-scheme functors. The comparison in `lem-sc-finite-affine-derived-equivalence` transports
-quasi-coherence to the derived pushforward of E. The shift compatibility supplied by
-`lemma-coherent-base-change-invertible-sheaves--2` and the adjunction identify Hom from the shifted
-pullback of M to E with Hom from the shifted M to the derived pushforward of E.
-2. If all the former Hom groups are subsingletons, so are the latter. The hypothesis
-`hgen` gives that the derived pushforward of E is zero.
-3. By `lem-sc-affine-derived-pushforward-conservative`, affine derived pushforward reflects
-isomorphisms between quasi-coherent objects. The zero endomorphism of E becomes an
-isomorphism because its image has zero source and target. Thus it is itself invertible,
-forcing the identity of E to be zero. Conversely, Hom into a zero object is subsingleton.
-This is precisely the generator criterion on the source.
-4. The pullback is perfect by `lem-pc-derived-pullback-perfect`. -/
+is a perfect generator of the quasi-coherent derived category of the source
+(Stacks, Tag 0BQT). -/
 theorem perfect_generator_pullback {X X' : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace X'] [QuasiSeparatedSpace X']

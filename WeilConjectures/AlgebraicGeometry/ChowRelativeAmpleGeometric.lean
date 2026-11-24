@@ -20,17 +20,8 @@ namespace AlgebraicGeometry
 
 /-- Geometric consequences of the Chow immersion.
 
-Source: Stacks Project, Cohomology of Schemes, Proposition 30.19.1 (Tag 02O5).
-Proof in words: properness of `g` and `π` is stable under composition, and the
-projective-space structure map is separated.  Hence the proper immersion `j`
-has closed image, so the closed-image criterion makes `j` a closed immersion;
-properness also supplies the quasi-compactness required for projectivity of
-`π ≫ g`.  Base-changing `j` along `g` and composing with the graph of `π`
-gives `ProjectiveSpace.liftBaseChange π j hj`; the diagonal of the proper map
-`g` is closed, so this composite is a closed immersion.  The same properness
-and quasi-compactness argument then makes `π` projective.
-
-(blueprint: theorem-chow-s-lemma-projective-form--2) -/
+The immersions `j` and `ProjectiveSpace.liftBaseChange π j hj` are closed immersions, and
+`π ≫ g` and `π` are projective (Stacks, Tag 02O5). -/
 theorem chow_relative_ample_geometric (m : ℕ) (S Z X' : Scheme.{u})
     (g : Z ⟶ S) (π : X' ⟶ Z)
     (j : X' ⟶ ℙ(ULift.{u} (Fin (m + 1)); S))

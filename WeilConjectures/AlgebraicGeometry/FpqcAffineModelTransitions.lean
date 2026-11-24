@@ -16,8 +16,9 @@ public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic
 /-!
 # Transition maps between effective affine models
 
-Source: Stacks Project, Descent, Tag 02W3, general-base proof (nested affine opens).
-(blueprint: lem-galois-fpqc-affine-model-transitions)
+## References
+
+* [Stacks Project, Tag 02W3](https://stacks.math.columbia.edu/tag/02W3)
 -/
 
 @[expose] public section
@@ -30,18 +31,8 @@ namespace AlgebraicGeometry
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Two effective affine models admit a Cartesian transition over an inclusion.
-Source: Stacks Project, Descent, Tag 02W3, general-base proof; Tag 02W0.
-(blueprint: lem-galois-fpqc-affine-model-transitions)
-
-Proof: Restrict the model over B to U for an inclusion U into B. Its pullback
-along X_U -> U and the U-model both identify with V_U. The compatibility with D
-identifies their transports, so fpqc full faithfulness descends the comparison
-isomorphism and its inverse. Compose with the projection to the B-model to get t.
-The comparison isomorphism makes its square Cartesian. The equation with r is the
-reconstruction equation of the descended morphism.
-Base changes of the singleton fpqc covering are fpqc. This works also when U,
-X_U or V_U is empty, and does not assume intersections of affine opens are affine. -/
+/-- Two effective affine models admit a Cartesian transition over an inclusion
+(Stacks, Descent, Tags 02W3 and 02W0). -/
 theorem fpqc_affine_model_transition
     {X S : Scheme.{u}} (f : X ⟶ S)
     (hf : Presieve.singleton f ∈ Scheme.fpqcPrecoverage S)

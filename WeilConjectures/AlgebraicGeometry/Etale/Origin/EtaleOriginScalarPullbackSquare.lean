@@ -10,7 +10,15 @@ import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginRestrictionPull
 import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginExtensionPullbackCube
 import all WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
 
-/-! # Intrinsic realization and scalar pullback coherence -/
+/-! # Intrinsic realization and scalar pullback coherence
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4 (pullback of derived tensor), Tag 0B56
+  (the projection is the counit transpose) and Tag 0E48 (compatibility of canonical
+  comparisons)
+* Stacks Project, Modules on Sites, Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,23 +41,8 @@ private theorem conjugate_tensor_square
   simp only [Category.assoc, d.inv_hom_id, Category.comp_id]
   rw [h, ← F.map_comp_assoc, e.inv_hom_id, F.map_id, Category.id_comp]
 
-/-- The local scalar/tensor square commutes with the etale-origin pullback comparison.
-This involves only left-adjoint operations on an arbitrary unbounded input C.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4 (pullback of derived tensor),
-Tag 0B56 (the projection is the counit transpose), and Tag 0E48 (compatibility of
-canonical comparisons); modules on sites, Tag 03EL.
-(blueprint: lem-fix-etale-origin-scalar-pullback-square).
-
-Proof: expand properOriginTensorIso into its inverse etale scalar/tensor
-comparison, inverse realization/restriction comparison and inverse scalar-extension
-site comparison. Naturality moves the site comparison past restriction/pullback.
-The extension cube and the restriction cube identify the resulting two faces.
-Naturality of originPullback and properOriginRestrictionIso moves the remaining
-etale scalar-pullback arrows together. The proved scalar_tensor_pullback_square,
-conjugated by the two inverse scalar/tensor comparisons, gives the tensor face.
-Functoriality composes these equalities. Thus the only new obligations are the
-two tensor-free realization cubes, separately about restriction and extension.
+/-- The local scalar/tensor square commutes with the etale-origin pullback comparison,
+for an arbitrary unbounded input C.
 -/
 theorem etaleOriginScalarPullbackSquare
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]

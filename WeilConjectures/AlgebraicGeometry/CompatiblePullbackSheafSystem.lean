@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-! # Compatible pullbacks of a fixed sheaf
 
-Source: Stacks Project, Sites, Tag 03CB, and Etale Cohomology, Tag 09YQ.
-(blueprint: lem-weil-pbc-compatible-pullback-sheaf-system).
+## References
+
+* Stacks Project, Tags 03CB and 09YQ
 -/
 
 @[expose] public section
@@ -39,24 +40,8 @@ private theorem upperStarComp_inv_of_eq_id {X T : Scheme.{u}}
     congrArg (fun e ↦ e.inv.app G) (upperStarComp_id_left AddCommGrpCat.{u + 1} a)
 
 /-- Canonical pullback comparisons give a sheaf system, identified on a cone with a
-constant diagram. No limit or quasi-compactness hypothesis is needed.
-Source: Stacks Project, Sites, Tag 03CB (composition of morphisms of sites), and the
-compatible inverse-image system in Etale Cohomology, Tag 09YQ.
-(blueprint: lem-weil-pbc-compatible-pullback-sheaf-system).
-
-Proof:
-1. The transition from i to j is the inverse composition comparison for D.map f.op
-   and v i. For an identity map, the left unit law for upperStarComp identifies this
-   with upperStarId, including transport along D.map_id.
-2. For f : i -> j and g : j -> k, apply the associativity law for upperStarComp to
-   D.map g.op, D.map f.op and v i. Transport by D.map_comp and wv, take inverse
-   components, and cancel the comparison for the first two maps. This is exactly
-   the displayed composition equation for phi.
-3. Apply the same calculation to d.pi at j, D.map f.op and v i. The cone equation
-   identifies their first composite with d.pi at i. After transport by wLimit, it
-   says that the comparison from stage i, followed by the transition and the inverse
-   comparison at j, is the identity of vLimit inverse image of G. Thus S is the
-   constant diagram with precisely the required comparison maps. -/
+constant diagram. No limit or quasi-compactness hypothesis is needed (Stacks, Tags 03CB and 09YQ).
+-/
 theorem compatiblePullbackSheafSystem
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u}) (d : Cone D)
     (T : Scheme.{u}) (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})

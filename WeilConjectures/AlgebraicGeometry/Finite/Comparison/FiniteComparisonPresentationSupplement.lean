@@ -545,8 +545,9 @@ set_option linter.privateModule false
 
 /-! # Coefficient presentation of the finite comparison predicates
 
-Source: blueprint finite comparison, coefficient paragraph, and Stacks Tags 03CY,
-09AJ and 09AL (blueprint: lem-ctf-finite-comparison-presentation).
+## References
+
+* Stacks Project, Tags 03CY, 09AJ, 09AL
 -/
 
 @[expose] public noncomputable section

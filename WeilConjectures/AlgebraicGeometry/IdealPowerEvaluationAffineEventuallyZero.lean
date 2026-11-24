@@ -17,8 +17,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine local vanishing of ideal-power evaluation
 
-Source: Stacks Project, Properties, Lemma 01PM, injectivity argument, as used in 01PQ.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero).
+## References
+
+* Stacks Project, Tags 01PM and 01PQ
 -/
 
 @[expose] public section
@@ -128,29 +129,8 @@ private theorem basicOpen_le_surjective_stalk {X : Scheme.{u}} {I : X.Modules}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The affine ideal is finitely generated, and evaluation vanishing forces it into
- the radical of the annihilator of the image of the affine section map.
-
-Source: Stacks Project, Properties, Lemma 01PM, proof of injectivity, and 01PQ,
-first proof paragraph.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero).
-
-Proof: put A = Gamma(V, O_X) and J = image(Gamma(V, I) -> A). Quasi-coherence
-and finite type identify Gamma(V, I) with a finite A-module; its image J is
-therefore finitely generated. On V every recursive power P_n is quasi-coherent,
-its inclusion is monic with section image J^n, and J^n is finitely generated.
-For any f in J, the basic open D(f) lies in U: at each point of D(f), the germ
-of f belongs to the image ideal and is a unit, so the stalk inclusion is surjective.
-On any open W contained in U, restrict the given section one to W. Its image
-under the power inclusion is 1. Every section s of P_n on W equals j_n(s) times
-this restricted section: apply the injective j_n and use linearity. Naturality
-and the evaluation hypothesis thus show that phi vanishes on W, hence on D(f).
-Choose finitely many generators of Gamma(V, P_n). Each image under phi restricts
-to zero on D(f), so the localization zero criterion gives a power of f killing
-it. The maximum of these finitely many exponents kills every generator image,
-hence by linearity the entire image of phi on V. Thus f belongs to the radical
-of its annihilator. This holds for every f in J. For an empty generating set the
-image is zero and exponent zero suffices; for n=0 the power module is the unit.
-The zero ring and empty affine open are covered by the same argument. -/
+the radical of the annihilator of the image of the affine section map.
+(Stacks, Tags 01PM and 01PQ) -/
 private theorem ideal_power_evaluation_affine_radical
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
@@ -226,27 +206,7 @@ private theorem affine_hom_zero {X : Scheme.{u}} {M N : X.Modules}
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation zero forces eventual vanishing on a single affine open. No compactness
 of the ambient scheme is required.
-
-Source: Stacks Project, Properties, Lemma 01PM, proof of injectivity, and Lemma 01PQ,
-first proof paragraph.
-(blueprint: lem-weil-pbc-ideal-power-evaluation-affine-eventually-zero).
-
-Proof: On V put A = Γ(V, O_X) and let J be the image of the ideal inclusion on
-sections. Tensor and image sections identify the section image of P_n with J^n,
-including n = 0. Finite type makes J finitely generated; injectivity of the
-power inclusion and finite generation of J^n make Gamma(P_n,V) finite over A.
-For f in J, D(f) lies in U by the stalk description. The restricted section one n
-maps to 1 under the injective power inclusion, so linearity and naturality make
-phi zero on D(f). Localization then makes every element of the finite image of
-phi_V killed by some power of f. The support-annihilator criterion gives
-J contained in the radical of the image annihilator. Finite generation gives
-k with J^k contained in that annihilator. Set m = n+k. Under the injective
-power inclusion, J^k times Gamma(P_n,V) has image J^m; compatibility of r with
-the power inclusions puts its section image in this multiple. Thus phi composed
-with r is zero on sections over V. Clear denominators on basic opens using
-quasi-coherence of P_m, then use sheaf separation on their covers of every
-subopen of V to obtain the zero restricted morphism. This also covers the zero
-ideal, the zero ring, the empty affine open, and n = 0. -/
+(Stacks, Tags 01PM and 01PQ) -/
 theorem ideal_power_evaluation_affine_eventually_zero
     {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]

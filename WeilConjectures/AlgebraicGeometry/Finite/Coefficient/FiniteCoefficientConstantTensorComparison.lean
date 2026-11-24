@@ -68,8 +68,9 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherenc
 
 /-! # Tensor compatibility of ordinary constant coefficient realization
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03EL and 0GMW.
-(blueprint: lem-weil-pbc-finite-coefficient-constant-tensor-comparison).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03EL, 0GMW
 -/
 
 @[expose] public noncomputable section
@@ -185,18 +186,7 @@ private def layerLiftTensor {B : Type t} [CommRing B] (M N : ModuleCat.{t} B) :
     Functor.isoWhiskerLeft E' ((curriedTensor _).flip.mapIso (e.app N).symm) ≪≫
       Functor.isoWhiskerRight e.symm (tensorRight (E.obj N))
 
-/-- Ordinary constant realization carries tensor products to sheaf tensor products.
-
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03EL and 0GMW.
-(blueprint: lem-weil-pbc-finite-coefficient-constant-tensor-comparison).
-
-Proof: the lifted pure-tensor equivalence identifies the constant presheaf of a
-module tensor with the sectionwise tensor of the constant presheaves. Apply the
-module-sheafification tensor comparison and its naturality. Ordinary coefficient
-extension preserves tensors by the balanced scalar-extension comparison. Identify
-that extension with the prescribed completedAdicChange functor using its object
-and morphism equalities, then compose the two natural isomorphisms. No flatness,
-finite generation, nonzero-ring or nonempty-site hypothesis is used. -/
+/-- Ordinary constant realization carries tensor products to sheaf tensor products. -/
 theorem finiteCoefficient_constant_tensor_comparison (X : Scheme.{t})
     (B : Type t) [CommRing B]
     {R : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}

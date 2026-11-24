@@ -26,9 +26,7 @@ attribute [local instance] AlgebraicGeometry.ProEtale.diagonalHasLimit
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   diagonalCompletedSource diagonalCompletedCoefficientMap
 
-/-- Form the ordinary source comparison with all structures shared abstractly.
-Source: diagonal trace proof (1), the ordinary supported-source cone.
-(blueprint: def-sfb-diagonal-trace-ext-source-comparison). -/
+/-- Form the ordinary source comparison with all structures shared abstractly. -/
 @[irreducible]
 def extSourceComparison
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
@@ -40,9 +38,7 @@ def extSourceComparison
     (p : ExtDerivedPresentation S H) (s : F.obj P ≅ limit S) (L : DiagonalRlim B) :=
   diagonalSingleLimitComparison F L P S p.K s p.source
 
-/-- The single-limit comparison for a chosen strict supported Ext presentation.
-Source: diagonal trace proof (1), the ordinary supported-source cone.
-(blueprint: def-sfb-diagonal-trace-supported-source-comparison). -/
+/-- The single-limit comparison for a chosen strict supported Ext presentation. -/
 @[irreducible]
 def supportedSourceComparison
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})

@@ -32,7 +32,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.RingTheory.Finiteness.Cardinality
 
-/-! # Algebraic local representatives of derived maps of finite constant complexes -/
+/-! # Algebraic local representatives of derived maps of finite constant complexes
+
+## References
+
+* Stacks Project, Tags 09BE, 08FR
+-/
 
 @[expose] public section
 
@@ -394,28 +399,7 @@ private theorem local_finite_point
   simpa only [Functor.map_comp, Category.assoc] using heq
 
 /-- A derived morphism between restrictions of bounded finite constant complexes is
-locally the restriction of an algebraic derived morphism.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 09BE and 08FR, with the finite-source
-truncation argument of the constant derived mapping sheaf lemma.
-(blueprint: lem-weil-pbc-finite-ring-constant-derived-map-local)
-
-Proof: Finite terms give finite homology. Since a finite ring is Noetherian, the
-cohomology criterion makes E pseudo-coherent. An m-pseudo-coherent approximation,
-for m two below a lower bound of G, gives a bounded finite free complex P -> E.
-The homology sequence puts its cone in degrees at most m. Orthogonality applied
-to the cone and its negative shift, and the exact Hom sequences of the triangle
-and its inverse rotation, identify maps from E to G with maps from P to G.
-Exact constant realization and inverse image preserve this comparison. Local-actual
-represents the map from constant P by a chain map on an etale cover. Descending its
-finitely many components gives an algebraic chain map on a further covering sieve;
-injectivity of the constant-section units reflects the chain equations. On objects
-covered by the empty sieve all sheaves are zero. Lift the algebraic derived class
-through the approximation bijection and use the localized bijection for equality.
-Finally apply this argument over V and use the constant inverse-image comparison.
-The image sieve of the constant algebraic Hom presheaf comparison is covering,
-because the local lifts cover every point of V. Zero rings, empty schemes, and
-zero complexes are included. -/
+locally the restriction of an algebraic derived morphism. -/
 theorem finiteRing_constant_derived_map_local
     (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]
     (E G : CochainComplex (ModuleCat.{u + 1} B) ℤ)

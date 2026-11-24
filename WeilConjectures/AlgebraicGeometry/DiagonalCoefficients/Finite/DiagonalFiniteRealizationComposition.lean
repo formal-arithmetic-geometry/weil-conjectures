@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.Diag
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteRealizationCompositionCore
 
 /-! # Composition of supplied finite realization endpoints
-
-Source: diagonal tower coefficient changes (1), scalar compatibility and Ext realization.
-(blueprint: lem-diagonal-finite-realization-composition).
 -/
 
 @[expose] public noncomputable section

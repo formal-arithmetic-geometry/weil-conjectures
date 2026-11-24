@@ -24,8 +24,6 @@ field `K`, and `x` a closed point. The local ring `𝒪_{X,x} ⊆ K`
   `AlgebraicGeometry.Scheme.Hom.dense_setOf_isClosed_finite_isSeparable`), then for a uniformiser
   `ϖ` some `u ∈ 𝒪_{X,x}` acts on `𝒪_{X,x} ⧸ ϖ 𝒪_{X,x}` with nonzero trace
   (`AlgebraicGeometry.Scheme.exists_trace_mapQ_ne_zero_of_isSeparable`).
-
-(blueprint: `theorem-riemann-roch-coherent-serre-duality--2`)
 -/
 
 @[expose] public section
@@ -115,7 +113,7 @@ lemma finite_residueField_localSubalgebra :
   have := (X ↘ Spec (.of k)).finite_residueField_of_isClosed x hx
   exact Module.Finite.equiv (residueFieldLocalSubalgebraEquiv k X x).symm.toLinearEquiv
 
-/-- **Commensurability of the local rings** (one-sided): `(f 𝒪_{X,x} + 𝒪_{X,x}) ⧸ 𝒪_{X,x}` is
+/-- **Commensurability of the local rings**: `(f 𝒪_{X,x} + 𝒪_{X,x}) ⧸ 𝒪_{X,x}` is
 finite-dimensional over `k` for every `f ∈ K`. -/
 theorem finiteDimensional_sup_quotient_localSubalgebra (f : X.functionField) :
     FiniteDimensional k (↥(f • Subalgebra.toSubmodule (localSubalgebra k X x) ⊔

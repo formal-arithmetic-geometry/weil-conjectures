@@ -31,12 +31,15 @@ import Mathlib.Algebra.Category.FGModuleCat.Abelian
 import Mathlib.Algebra.Homology.FullSubcategory
 /-!
 # Completed constant realization of finite complexes
-Source: Stacks Project, proetale.tex, Tags 09BT and 09BV; sites-modules.tex,
-Tags 093J--093M; algebra.tex, Tag 00MB
-(blueprint: lem-weil-pbc-completed-constant-finite-complex-realization).
+
 Positive quotient levels are indexed by `n : ℕ`, with exponent `n + 1`.
 The comparison is stated on finite-free resolutions of bounded finite complexes.
 Naturality on the category of resolutions includes independence of the resolution.
+
+## References
+
+* Stacks Project, proetale.tex, Tags 09BT and 09BV; sites-modules.tex, Tags 093J--093M;
+  algebra.tex, Tag 00MB
 -/
 
 -- After pruning, this module only keeps private declarations.

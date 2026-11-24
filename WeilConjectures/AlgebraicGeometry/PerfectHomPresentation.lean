@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectHomContinuity
 
 /-! # Transport of perfect Hom continuity through pinned Hom equivalences
 
-Source: Stacks Project, Tags 09RE and 0D5S.
-(blueprint: lem-pc-perfect-hom-presentation).
+## References
+
+* Stacks Project, Tags 09RE and 0D5S.
 -/
 
 @[expose] public section
@@ -41,10 +42,7 @@ variable {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
   (ψ : ∀ k b, (G k).obj (F k b) ≅ O b)
 
 /-- A geometric presentation of the stage Hom sets and their actual limit images.
-The equations pin the Hom equivalences to the given functors and comparisons.
-This structure asserts no lifting, eventual equality, or stage transport.
-Source: Stacks Project, Tags 09RE and 0D5S.
-(blueprint: lem-pc-perfect-hom-presentation). -/
+The equations pin the Hom equivalences to the given functors and comparisons. -/
 structure PerfectHomPresentation where
   Y : Scheme.{u}
   s : Y ⟶ Spec (R.obj i)
@@ -70,19 +68,8 @@ structure PerfectHomPresentation where
 
 variable {R c i C F D O G ψ}
 
-/-- A pinned presentation transfers the existing perfect Hom continuity theorem.
-Source: Stacks Project, Tag 09RE, Hom-colimit isomorphism, and Tag 0D5S.
-(blueprint: lem-pc-perfect-hom-presentation).
-
-Proof: transport a stage morphism into the presented geometric Hom set, apply
-canonical derived-pullback transport, and transport back. Preservation of identity
-and composition follows from the stage equivalences and the pullback functor laws.
-The pinning equation and the composition comparison show that the limit image is
-unchanged. Apply perfect Hom continuity to each ordered pair of the two perfect
-objects. Its surjectivity gives a lift, which is transported back through the stage
-and apex equivalences. Its eventual equality clause gives equality of the two
-transported morphisms at every later stage; injectivity of the stage equivalence
-then gives the required equality in the original categories. -/
+/-- A pinned presentation transfers the existing perfect Hom continuity theorem
+(Stacks, Tags 09RE and 0D5S). -/
 theorem PerfectHomPresentation.toSystem
     (p : PerfectHomPresentation R c i C F D O G ψ) (hc : IsColimit c) :
     Nonempty (DirectedPerfectHomSystem (Set.Ici i) C F D O G ψ) := by

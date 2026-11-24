@@ -83,24 +83,7 @@ theorem matrix_coefficient_pullback (ℓ : ℕ) [Fact ℓ.Prime]
   exact integralRegularCoefficient_pullback ℓ E f _ y
 
 /-- Canonical continuous matrix coefficients commute with a second pullback.
-
-Source: Bhatt--Scholze, Section 6.8, continuous coefficient realization;
-functoriality of the specified inverse image and its finite biproduct comparison.
-(auxiliary; not a blueprint node)
-
-Proof: express each matrix entry as inclusion, the matrix morphism, then projection.
-Naturality of the biproduct comparison commutes these inclusions and projections
-with pullback. The regular-module comparison identifies the remaining entry with
-the pullback of the original regular endomorphism. Conjugate by the canonical
-continuous coefficient realization. The adjunction defining chartComparison is
-natural in the scheme: on every profinite test object both composites first apply
-the test projection and then the same continuous coefficient function. Consequently
-the conjugated regular endomorphism multiplies by the composite of the original
-coefficient function with the underlying scheme map. Evaluate at the unit section.
-The inverse-image composition comparison and coefficient pullback comparison cancel
-to identify this iterated pullback with the canonical pullback along g≫f.
-This proves the asserted pointwise equality for every row and column, including
-empty schemes and empty matrices. -/
+(Bhatt--Scholze, Section 6.8) -/
 theorem integralMatrixFunctions_pullback (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y) {n t : ℕ}

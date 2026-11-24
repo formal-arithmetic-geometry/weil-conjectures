@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PicardPullbackPerfectPairing
 
 /-! # The local dual-basis criterion for degree-zero cup product
 
-Source: Stacks Project, Tag 0BDP, final paragraph.
+## References
+
+* Stacks Project, Tag 0BDP.
 -/
 
 @[expose] public section
@@ -27,26 +29,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- On a single base, cup product detects the evaluation counit when the direct image
 and the bundle have the same local rank. Neither properness nor flatness nor universal
-base-change compatibility is an assumption of this local calculation.
-
-Source: Stacks Project, Tag 0BDP, final paragraph, the two displayed dual bases.
-(blueprint: lem-sc-picard-cup-product-local-dual-bases)
-
-Proof: Put p = X_W → W, q = X_W → X, M = q^*E and N = p_*M.
-If the cup transpose is invertible, the pushed pairing is perfect. Since N is
-finite locally free, pulling this exact pairing back and using the proved cup
-counit identity gives a retraction of p^*N → M. On each neighbourhood supplied
-by hRanks, this is a split injection between locally free modules of rank r.
-At stalks a split injection between finite free modules of equal rank is bijective;
-stalk detection and the open cover therefore make the counit invertible.
-Conversely the explicit evaluation pairing between q^*E and q^*(dual E) is perfect:
-monoidal pullback preserves the exact pairing, and the canonical unit comparison
-differs from the monoidal one by a scalar automorphism. If the counit is invertible,
-for every W-module P the adjunction, perfect evaluation, tensor comparison and
-invertible structure-sheaf unit identify Hom(P,p_*q^*(dual E)) with Hom(P,dual N).
-Naturality and the cup counit identity identify this bijection with postcomposition
-by the cup transpose. Yoneda proves that transpose invertible. Rank zero and empty
-schemes are included in these categorical and stalkwise arguments. -/
+base-change compatibility is an assumption of this local calculation. (Stacks, Tag 0BDP) -/
 theorem picardCupProduct_isIso_iff_counit_of_local_ranks
     {X S W : Scheme.{u}} (f : X ⟶ S) (E : X.Modules) [E.IsFiniteLocallyFree]
     (j : W ⟶ S)

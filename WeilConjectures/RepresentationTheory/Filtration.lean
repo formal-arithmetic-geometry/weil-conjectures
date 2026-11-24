@@ -91,8 +91,8 @@ noncomputable def subquotientComapSubtypeEquiv {A S U : Subrepresentation ρ} (h
       rw [sub_self]
       exact U.toSubmodule.zero_mem⟩
 
-/-- For a subrepresentation `A`, the subquotient `S / U` of `ρ`, for `U ≤ S ≤ A`... computed via the
-images in `ρ` of subrepresentations of `A`: `A(S) / A(U) ≃ S / U`. -/
+/-- For a subrepresentation `A` and subrepresentations `S, U` of `A`, the subquotient of `ρ` formed
+by the images of `S` and `U` in `V` is equivalent to the subquotient `S / U` of `A`. -/
 noncomputable def subquotientMapSubtypeEquiv {A : Subrepresentation ρ}
     (S U : Subrepresentation A.toRepresentation) :
     ((map A.subtype S).subquotient (map A.subtype U)).Equiv (S.subquotient U) :=

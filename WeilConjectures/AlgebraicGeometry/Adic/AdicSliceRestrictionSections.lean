@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicModuleSectionComparison
 import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientLocalization
 
-/-! # Section maps for normalized native restriction -/
+/-! # Section maps for normalized native restriction
+
+## References
+
+* Stacks Project, Tags 03CE, 03EK and 0E8H
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -16,9 +21,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The additive section isomorphism induced by the actual inverse-image comparison.
-Source: Stacks 03CE and the specified native inverse-image/localization isomorphism
-(blueprint: lem-sf-adic-slice-restriction-linear). -/
+/-- The additive section isomorphism induced by the actual inverse-image comparison, the
+specified native inverse-image/localization isomorphism. -/
 noncomputable def adicSliceSectionEquiv {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (P : AdicModuleSectionComparison l X)
     (Q : AdicModuleSectionComparison l U.left)
@@ -141,20 +145,7 @@ private theorem restriction_sections_apply {l : ℕ} [Fact l.Prime] {X : Scheme.
   simp only [adicSliceSectionEquiv, AddEquiv.trans_apply, AddEquiv.symm_apply_apply]
   rfl
 
-/-- Native restriction on sections respects the restricted coefficient action.
-Source: Stacks 03CE, 03EK and 0E8H; the action step of normalized module restriction
-(blueprint: lem-sf-adic-slice-restriction-linear).
-
-Proof: identify inverse image along the site object with literal restriction,
-using its distinguished initial indexing object. Under the specified identity
-of coefficient functions the native coefficient structure morphism becomes the
-identity. The monoidal inverse-image comparison carries the pulled-back internal
-action to the original action on the composed object. Evaluate this equality on
-the pure tensor of the coefficient and the section. The two base action formulas
-identify its two sides with the scalar actions displayed here, and the supplied
-section equivalences identify its underlying map with adicSliceSectionEquiv.
-This argument uses arbitrary local coefficient functions and arbitrary sections;
-it imposes no flatness or finite-rank hypothesis. -/
+/-- Native restriction on sections respects the restricted coefficient action. -/
 theorem adicSliceSectionEquiv_smul {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
     (U : X.ProEt) (P : AdicModuleSectionComparison l X)
     (Q : AdicModuleSectionComparison l U.left)

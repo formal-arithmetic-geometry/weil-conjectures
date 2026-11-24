@@ -13,7 +13,10 @@ import WeilConjectures.CategoryTheory.InjectiveCechAugmentationQuasiIso
 
 /-! # Compatibility of normalized comparisons with inverse image
 
-Source: Stacks Project, Tags 01EQ and 01FD. -/
+## References
+
+* Stacks Project, Tag 01EQ (Lemma 20.11.2) and Tag 01FD (Lemma 20.15.1)
+-/
 
 @[expose] public section
 universe u
@@ -118,34 +121,7 @@ private lemma cechOverAbCycles_π
     convert hn using 1
     rfl
 
-/-- Inverse image respects any normalized additive Cech comparison systems.
-This is a compatibility statement for existing systems, not an existence assertion.
-
-Source: Stacks Project, Tag 01FD, Lemma 20.15.1, and the normalized comparison
-construction of Tag 01EQ, Lemma 20.11.2.
-(blueprint: lem-pc-cech-comparison-inverse-image-compatibility)
-
-Proof: Pass from scalar-restricted Čech cycles to the explicit abelian complex
-using cechComplexFunctorIso, presheafOverForgetIso, and mapCyclesIso for the exact
-forgetful functor. The cycle inclusion is coordinatewise cechCoordinate, and the
-homology projection agrees with cechOverHomologyAddEquiv by the canonical
-mapCyclesIso/mapHomologyIso square and naturality of homologyπ.
-
-Write F and G for the underlying abelian sheaves of M and N. Construct the Čech
-chain map A associated to the underlying coefficient map a : F → g_*G. The
-coordinate hypothesis says that A sends the transported cycle z to z'. Since the
-cycle inclusion is monic, the transported cycles agree, and naturality of
-homologyπ identifies their classes.
-
-Factor a as the inverse-image adjunction unit followed by g_*coeff. Naturality
-of coeff with respect to restrictions gives a factorization of A as the unit
-Čech map B followed by the Čech coefficient map. Apply
-cechComparison_inverseImage_unit to B, then the naturality of c'.comparison to
-coeff. Functoriality of homology and the class equality give the displayed law.
-The inverse-image-unit theorem contains the normalized uniqueness and resolution
-pentagon arguments; coefficient naturality and scalar/cycle transport are proved
-here. No affine-intersection, acyclicity or quasi-coherence hypothesis is used;
-the chain-map and transport calculations also apply to an empty index set. -/
+/-- Inverse image respects any normalized additive Čech comparison systems. -/
 theorem cechComparison_inverseImage_compatibility
     {R S : Type u} [CommRing R] [CommRing S] {X Y : Scheme.{u}} {ι : Type u}
     (g : Y ⟶ X) (f : X ⟶ Spec (.of R)) (f' : Y ⟶ Spec (.of S))

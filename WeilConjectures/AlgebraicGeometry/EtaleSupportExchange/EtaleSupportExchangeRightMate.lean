@@ -53,13 +53,13 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFinite.QuasiFiniteCompactSu
 
 /-! # The full right mate of etale compact-support exchange
 
-Source: Stacks Project, Tag 03S6 (lemma-shriek-base-change); blueprint etale locality,
-Step 1, and the proper/open normalization in lem-pur-etale-support-map-compatibility (1)
-(blueprint: lem-pur-etale-support-exchange-right-mate).
-
 The helpers assemble existing canonical maps. All equations concern natural transformations
 on the ordinary unbounded categories, with arbitrary chosen right adjoints and adjunctions.
 The comparison d is the inverse of the constructed graph map, not an arbitrary isomorphism.
+
+## References
+
+* Stacks Project, Tags 03S6, 0F7I, 0F7K, 0F7L, 0GKM
 -/
 
 @[expose] public section
@@ -80,10 +80,7 @@ attribute [local irreducible] upperStar lowerStar etaleLowerShriek
   exactCompactSupportExchange exactEtaleSumExchange
 
 /-- The specified proper exchange followed by inverse open-extension exchange, as an iso.
-The exact/left-derived inverse-image transports are those in exactCompactSupportExchange.
-Invertibility uses the existing unbounded proper base-change theorem for finite coefficients.
-Source: Stacks Tags 0F7L and 03S6
-(blueprint: lem-pur-etale-support-exchange-right-mate). -/
+The exact/left-derived inverse-image transports are those in exactCompactSupportExchange. -/
 noncomputable def exchangeIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} {e : U ⟶ X} (c : Compactification e) (w : X' ⟶ X) :
@@ -105,9 +102,7 @@ noncomputable def exchangeIso
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
         (pullback.snd w e)) _
 
-/-- Rho is the conjugate of the inverse canonical support/sum comparison.
-Source: Stacks Tag 03S6; Mathlib Adjunction/Mates, conjugateIsoEquiv
-(blueprint: lem-pur-etale-support-exchange-right-mate). -/
+/-- Rho is the conjugate of the inverse canonical support/sum comparison. -/
 noncomputable def rightAdjointIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (e : U ⟶ X) [Etale e] [IsSeparated e] [QuasiCompact e]
@@ -120,9 +115,7 @@ noncomputable def rightAdjointIso
     (canonicalEtaleCompactSupportComparison A e c).symm
 
 /-- The full right mate B for the pulled-back compactification and every unbounded input.
-Its transpose is exactly the inverse exchange followed by the pulled-back counit.
-Source: Stacks Tag 03S6; Mathlib Adjunction/Mates, mateEquiv
-(blueprint: lem-pur-etale-support-exchange-right-mate). -/
+Its transpose is exactly the inverse exchange followed by the pulled-back counit. -/
 noncomputable def rightMate
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} {e : U ⟶ X} (c : Compactification e) (w : X' ⟶ X)
@@ -135,15 +128,7 @@ noncomputable def rightMate
       (upperStar (ModuleCat.{u + 1} A) w).mapDerivedCategory ⋙ G' :=
   (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ (exchangeIso A c w).inv))
 
-/-- The inverse-comparison clause, as an equality of natural isomorphisms.
-Source: Stacks Tag 03S6; support-map compatibility (1)
-(blueprint: lem-pur-etale-support-exchange-right-mate).
-
-Proof: Apply lem-pur-etale-support-map-compatibility (1) with (T,V,g,h) = (X,U,w,w').
-The normalization in lem-amb-unbounded-compact-support-comparisons identifies its exchange
-with exchangeIso. Invert the resulting equality and cancel the two support comparisons.
-This gives C inverse after d' inverse equal to b inverse followed by w-star of d inverse.
-All maps act on the entire unbounded categories. -/
+/-- The inverse-comparison clause, as an equality of natural isomorphisms. -/
 theorem inverse_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]
@@ -172,16 +157,7 @@ theorem inverse_comparison
       using (etaleCompactSupportGraph_coherence A).base_change e c w
   exact congrArg Iso.symm h
 
-/-- The displayed common sum-adjunction transpose, at every unbounded K.
-Source: Stacks Tag 03S6 and blueprint etale locality Step 1
-(blueprint: lem-pur-etale-support-exchange-right-mate).
-
-Proof: Set M = G(K). First use inverse_comparison to replace C inverse after d' inverse.
-Use the conjugate counit identity to replace epsilon after d inverse by evaluation after
-S(rho). Naturality of inverse sum exchange moves rho across the exchange. Finally apply
-lem-pur-etale-sum-exchange-counit on the whole unbounded category. This gives exactly the
-four equalities of Step 3 in the DAG proof. Step 4 identifies the other transpose using
-naturality of d' inverse and the defining adjunct of B. No cohomology detection is used. -/
+/-- The displayed common sum-adjunction transpose, at every unbounded K. -/
 theorem common_transpose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]
@@ -262,18 +238,7 @@ theorem common_transpose
         W.map (S.map (rho.app K)) at hn
   rw [← Category.assoc, ← hn, Category.assoc, he, S'.map_comp, Category.assoc]
 
-/-- The full right-adjoint exchange equation, as a natural-transformation identity.
-Source: Stacks Tag 03S6 and blueprint etale locality Step 1
-(blueprint: lem-pur-etale-support-exchange-right-mate).
-
-Proof: Put M = G(K). By inverse_comparison, the transpose after d' inverse is the inverse
-sum exchange followed by w-star of the compact-support counit after d inverse. The conjugate
-counit identity changes this to w-star of evaluation after S(rho). Naturality of inverse
-sum exchange moves rho across it. The derived counit equation of
-lem-pur-etale-sum-exchange-counit then gives evaluation after S'(chi after w'-star rho).
-On the other hand, the defining transpose of B and naturality of d' inverse give this same
-transpose for rho' after B. Injectivity of the sum adjunction hom bijection proves the
-equation at every K; naturality gives the displayed identity of natural transformations. -/
+/-- The full right-adjoint exchange equation, as a natural-transformation identity. -/
 theorem rightMate_eq
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X X' : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]
@@ -404,14 +369,8 @@ private lemma comparison_refinement
     (unboundedEtaleCompactSupport_comparison_coherence A e).2, hd]
   exact hc.symm
 
-/-- Rho agrees under every canonical compactification comparison, including proper refinements.
-Source: Stacks Tags 0F7I, 0F7K, 0GKM
-(blueprint: lem-pur-etale-support-exchange-right-mate).
-
-Proof: For t : F(c) to F(d), compactification independence of the support comparison gives
-d(d) after t = d(c) (lem-sfb-quasifinite-compact-support-exact). Invert and conjugate using
-the contravariant composition law of def-weil-pbc-adjunction-conjugate. The result is
-rho(c) after theta = rho(d). Common-refinement independence extends it to any c and d. -/
+/-- Rho agrees under every canonical compactification comparison, including proper
+refinements. -/
 theorem rightAdjointIso_refinement
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} [IsLocallyNoetherian U] [CompactSpace U]

@@ -15,7 +15,10 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteRadicialModelDescent
 /-!
 # Extending a finite radicial local model to an affine neighbourhood
 
-Source: Stacks Project, Tag 0GK7, the generic radicial-extension step, using limit descent.
+## References
+
+* Stacks Project, Tag 0GK7 (the generic radicial-extension step)
+* Stacks Project, Limits, Tags 01ZM, 01ZO and 07RR
 -/
 
 @[expose] public section
@@ -27,18 +30,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- A specified finite-presentation radicial cover of a local stalk extends to a finite
 radicial cover of an affine open neighbourhood. The displayed square realizes the original
-cover, rather than just constructing an unrelated cover of the neighbourhood.
-
-Source: Stacks Project, Tag 0GK7, radicial-extension step, using Tags 01ZM, 01ZO and 07RR.
-(blueprint: lem-weil-pbc-finite-radicial-neighbourhood-model)
-
-Proof: Express Spec of the stalk as the inverse limit of the affine neighbourhoods.
-Apply finite radicial model descent and identify its resulting affine base with its
-open subscheme in the original scheme. Transport the cartesian square through these
-isomorphisms. Finiteness, surjectivity, universal injectivity and finite presentation
-are invariant under the resulting isomorphism of the target. This uses no reducedness
-assumption and works for any point, including a component generic point of a reduced base.
--/
+cover, rather than just constructing an unrelated cover of the neighbourhood. -/
 theorem exists_finite_radicial_neighbourhood_model
     (S : Scheme.{u}) (s : S) {Z : Scheme.{u}}
     (g : Z ⟶ Spec (S.presheaf.stalk s))

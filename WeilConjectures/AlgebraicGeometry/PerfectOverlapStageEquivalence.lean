@@ -16,8 +16,9 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # The cartesian equivalence for the overlap at a finite stage
 
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: def-pc-perfect-overlap-stage-equivalence).
+## References
+
+* Stacks Project, Tags 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -35,9 +36,8 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The exact nested-open restriction agrees with derived pullback along its inclusion.
-Source: Stacks Project, Tag 08DW, restriction of derived pullback.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+/-- The exact nested-open restriction agrees with derived pullback along its inclusion
+(Stacks, Tag 08DW). -/
 noncomputable def overlapOpenInclusionPullbackIso (X : Scheme.{u})
     {W U : X.Opens} (i : W ⟶ U) :
     derivedPullback (X.homOfLE (leOfHom i)) ≅
@@ -72,9 +72,7 @@ noncomputable def overlapOpenInclusionPullbackIso (X : Scheme.{u})
     T.mapDerivedCategoryFactorsh.hom Q ≪≫ (Functor.mapDerivedCategoryNatIso θ).symm
 
 /-- Derived pullback along the inverse of a scheme isomorphism, with its inverse
-constructed from pullback along the isomorphism itself.
-Source: Stacks Project, Tag 0D5S, composition and identity pullback.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+constructed from pullback along the isomorphism itself (Stacks, Tag 0D5S). -/
 noncomputable def overlapSchemeIsoDerivedEquivalence {X Y : Scheme.{u}} (e : X ≅ Y) :
     schemeDerivedCategory X ≌ schemeDerivedCategory Y := by
   let identity : ∀ Z : Scheme.{u}, derivedPullback (𝟙 Z) ≅ 𝟭 _ :=
@@ -86,10 +84,8 @@ noncomputable def overlapSchemeIsoDerivedEquivalence {X Y : Scheme.{u}} (e : X �
     (perfectHomComposition e.inv e.hom ≪≫
       eqToIso (congrArg (fun f ↦ derivedPullback f) e.inv_hom_id) ≪≫ identity Y)
 
-/-- The overlap inverse image is the base change of the original overlap.
-The equivalence is constructed from the cartesian open-restriction square.
-Source: Stacks Project, Tag 08DW, compatibility with open restriction.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+/-- The overlap inverse image is the base change of the original overlap
+(Stacks, Tag 08DW). -/
 noncomputable def perfectOverlapStageEquivalence
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (p' : X ⟶ T) (p : Y ⟶ S) (q : T ⟶ S)
     (h : IsPullback g p' p q) (U V : Y.Opens) :
@@ -99,9 +95,7 @@ noncomputable def perfectOverlapStageEquivalence
     ((isPullback_morphismRestrict g (U ⊓ V)).paste_vert h).isoPullback
 
 /-- The stage equivalence carries exact restriction of a pulled-back object to
-pullback of its restriction on the original overlap.
-Source: Stacks Project, Tag 08DW, restriction and composition of pullback.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+pullback of its restriction on the original overlap (Stacks, Tag 08DW). -/
 noncomputable def perfectOverlapStageObjectIso
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (p' : X ⟶ T) (p : Y ⟶ S) (q : T ⟶ S)
     (h : IsPullback g p' p q) (U V L : Y.Opens) (hWL : U ⊓ V ≤ L) :
@@ -136,9 +130,7 @@ noncomputable def perfectOverlapStageObjectIso
     (perfectHomComposition (pullback.fst ((U ⊓ V).ι ≫ p) q) (Y.homOfLE hWL)).symm
 
 /-- The apex equivalence first identifies the localized-open site with the actual
-open subscheme, then applies the cartesian overlap equivalence.
-Source: Stacks Project, Tags 08DW and 05RU.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+open subscheme, then applies the cartesian overlap equivalence (Stacks, Tags 08DW and 05RU). -/
 noncomputable def perfectOverlapApexEquivalence
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (p' : X ⟶ T) (p : Y ⟶ S) (q : T ⟶ S)
     (h : IsPullback g p' p q) (U V : Y.Opens)
@@ -160,9 +152,8 @@ noncomputable def perfectOverlapApexEquivalence
   exact e.mapDerivedCategory.trans
     (perfectOverlapStageEquivalence g p' p q h U V)
 
-/-- The supplied local object isomorphism gives the object comparison at the apex.
-Source: Stacks Project, Tag 08DW, restriction of the supplied pullback isomorphism.
-(blueprint: def-pc-perfect-overlap-stage-equivalence). -/
+/-- The supplied local object isomorphism gives the object comparison at the apex
+(Stacks, Tag 08DW). -/
 noncomputable def perfectOverlapApexObjectIso
     {X Y S T : Scheme.{u}} (g : X ⟶ Y) (p' : X ⟶ T) (p : Y ⟶ S) (q : T ⟶ S)
     (h : IsPullback g p' p q) (U V L : Y.Opens) (hWL : U ⊓ V ≤ L)

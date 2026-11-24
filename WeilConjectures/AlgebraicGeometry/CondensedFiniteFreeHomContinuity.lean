@@ -47,20 +47,8 @@ private theorem isColimit_of_truncated_comparison
 
 set_option backward.isDefEq.respectTransparency true in
 -- Elaborating the exact dual tensor and derived sections requires extra heartbeats.
-/-- Continuity for a pro-etale locally finite free internal module.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), locally free calculation.
-(auxiliary; not a blueprint node)
-
-Proof: finite free trivializations identify the dual tensor functor with finite powers.
-Hence it is exact, preserves filtered colimits and preserves the common termwise bound.
-The evaluation-normalized derived Hom formula identifies Hom(P[0],N[n]) with degree n
-of derived global sections of the dual tensor of N. Use the equivalence between internal
-module objects and sheaves of modules for the identical coefficient ring to apply that
-formula. Noetherianity implies qcqs, so derived global sections commute with these
-filtered colimits. Good truncation at the common bound compares the continuity cocone
-with the termwise colimit cocone by a quasi-isomorphism. Naturality of evaluation and
-shift identifies the comparison with the stated colimit.desc on the original legs.
-Finite powers include the zero power, so empty schemes and rank zero need no exception. -/
+/-- Continuity for a pro-etale locally finite free internal module (Hemo–Richarz–Scholbach, Lemma
+5.3(2)). -/
 theorem condensed_finite_free_hom_continuity
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

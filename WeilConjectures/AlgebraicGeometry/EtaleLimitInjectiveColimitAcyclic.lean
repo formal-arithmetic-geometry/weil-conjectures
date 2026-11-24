@@ -25,7 +25,9 @@ public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Etale replacement: construction and vanishing
 
-Source: Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ
 -/
 
 @[expose] public section
@@ -34,26 +36,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- A compatible injective coefficient system has an acyclic pulled-back colimit.
-Source: Stacks Project, Tags 09YP and 09YQ, Cech acyclicity argument using 09YN.
-(blueprint: lem-weil-pbc-etale-limit-injective-colimit-acyclic).
-
-Proof: The limit and its projection morphisms are qcqs with affine projections.
-Restrict to the cofinal finite qcqs etale covers. Descend each finite affine cover,
-its maps and its finitely many objects to a common stage using the affine etale site
-colimit presentation. Every iterated fibre product in its Cech nerve is qcqs and has
-an inverse presentation with affine transitions. Degree-zero section continuity,
-including eventual equality, identifies sections of the colimit sheaf on each such
-object with the filtered colimit of the stage sections. The canonical units in this
-comparison commute with restrictions. Finite products commute with filtered group
-colimits, so the entire Cech complex is the filtered colimit of the stage complexes.
-The stage coefficient sheaves are injective, hence their positive Cech cohomology
-vanishes. Exact filtered group colimits preserve this vanishing. The Cech criterion
-on the cofinal finite qcqs covers gives positive object cohomology vanishing. Apply
-it to the terminal etale object and degree n+1 to obtain global vanishing.
-No higher-degree continuity is used. Empty schemes, the zero system, degree zero
-and a singleton index satisfy the same argument.
--/
+/-- A compatible injective coefficient system has an acyclic pulled-back colimit
+(Stacks, Tags 09YP, 09YQ and 09YN). -/
 theorem etale_limit_injective_colimit_acyclic
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

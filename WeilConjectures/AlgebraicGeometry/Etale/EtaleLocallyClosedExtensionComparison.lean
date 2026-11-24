@@ -16,13 +16,15 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 /-!
 # Étale extension by zero for locally closed immersions
 
-Source: literature/stacks-project/etale-cohomology.tex, Tag 0GJ1
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
-
 The finite-open comparison is stated for the canonical pullback square.  The
 closure-defined extension uses the scheme-theoretic image and its canonical
 open factor.  Its factorization and closed-immersion compatibilities are
 recorded as natural-isomorphism existence statements.
+
+## References
+
+* Stacks Project, Étale Cohomology, Tags 0GJ1, 0F70 and 04CA
+* Stacks Project, Morphisms, Tags 01R6--01R8
 -/
 
 @[expose] public noncomputable section
@@ -36,12 +38,8 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
-/-- The closure-defined étale extension associated to a quasi-compact immersion.
-
-Source: Stacks Project, Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison). It is the composite of
-extension by zero along `a.toImage` and direct image along `a.imageι`.
--/
+/-- The closure-defined étale extension associated to a quasi-compact immersion. It is the
+composite of extension by zero along `a.toImage` and direct image along `a.imageι`. -/
 noncomputable def etaleLocallyClosedExtension
     {A : Type (u + 1)} [CommRing A]
     {S X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a]
@@ -52,15 +50,9 @@ noncomputable def etaleLocallyClosedExtension
   exact Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) a.toImage ⋙
     Etale.lowerStar (ModuleCat.{u + 1} A) a.imageι
 
-/-- The canonical restriction normalization for the closure-defined extension.
-
-Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70 and 04CA;
-Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
-
-This is the inverse of the open-extension unit, followed by the closed
-pushforward counit, with the pullback composition comparison for
-`a = a.toImage ≫ a.imageι`. -/
+/-- The canonical restriction normalization for the closure-defined extension: the inverse
+of the open-extension unit, followed by the closed pushforward counit, with the pullback
+composition comparison for `a = a.toImage ≫ a.imageι`. -/
 noncomputable def etaleLocallyClosedExtensionRestrictionIso
     {A : Type (u + 1)} [CommRing A]
     {S X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a]
@@ -88,10 +80,6 @@ noncomputable def etaleLocallyClosedExtensionRestrictionIso
         (ModuleCat.{u + 1} A) a.toImage).unit).symm
 
 /-- The canonical restriction normalization for a closed-then-open factorization.
-
-Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70, 04CA and 0GJ1
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
-
 The two adjunction units/counits and the pullback composition comparison specify
 the restriction to the identity on the locally closed source. -/
 noncomputable def etaleFactorizationRestrictionIso
@@ -123,10 +111,6 @@ noncomputable def etaleFactorizationRestrictionIso
         (ModuleCat.{u + 1} A) h).counit
 
 /-- The canonical restriction normalization after a further closed immersion.
-
-Source: literature/stacks-project/etale-cohomology.tex, Tags 0F70 and 04CA;
-Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
 It uses pullback composition, the closed counit for `i`, and the closure normalization
 for `b`. -/
 noncomputable def etaleClosedCompositionRestrictionIso
@@ -207,7 +191,7 @@ private theorem normalized_iso_exists
     _ = _ := by simp [τ]
 
 /-- Restricting the scheme-theoretic image to a closed-then-open factorization recovers
-its closed factor, by the kernel form of image base change (Stacks Tags 01R6--01R8). -/
+its closed factor. -/
 private theorem closure_factorization_square
     {S W X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a] [QuasiCompact a]
     (h : S ⟶ W) (j : W ⟶ X) [IsClosedImmersion h] [IsOpenImmersion j]
@@ -235,7 +219,7 @@ private theorem closure_factorization_iso
 
 /-- The closures in two closed ambient schemes have equal ideals over the larger ambient
 scheme. Transport extension by zero along their unique isomorphism and compose direct images.
-Source: Stacks Tags 01R6--01R8 and the direct-image formula. -/
+-/
 private theorem closure_closed_composition_iso
     {A : Type (u + 1)} [CommRing A]
     {S Y X : Scheme.{u}} (a : S ⟶ X) [IsImmersion a] (hqa : QuasiCompact a)
@@ -274,49 +258,9 @@ private theorem closure_closed_composition_iso
       eqToIso (by congr 1))
       (Etale.lowerStar M a.imageι)
 
-/-- Étale closed/open interchange and closure-defined extension by zero.
-
-Source: literature/stacks-project/etale-cohomology.tex, Tag 0GJ1,
-lemma-compatible-shriek-push-finite, together with Morphisms, Tags 01R6--01R8
-(blueprint: lem-sfb-etale-locally-closed-extension-comparison).
-
-Proof route. (1) Closed immersions are finite, so
-`Etale.isIso_finiteOpenComparison` applied to
-`IsPullback.of_hasPullback g u` proves the first conjunct.  By the definition
-of `Etale.finiteOpenComparison`, its map is the transpose under
-`u_! ⊣ u^*` of the inverse of the exchange map
-`u^* g_* v_! L ≅ h_* v^* v_! L ≅ h_* L`.
-(2) This comparison is linear over the constant finite ring: naturality under
-scalar endomorphisms gives linearity on sections, and the module adjunction
-has the same units and counits as the underlying abelian adjunction.
-(3) A locally closed immersion into a Noetherian scheme is quasi-compact and
-quasi-separated; the same holds after passing to a closed ambient subscheme.
-The scheme-theoretic image therefore supplies the open factor `a.toImage` and
-closed factor `a.imageι`.
-(4) The restriction of the image square to an open factorization is the
-cartesian square obtained from `S ×_X W ≅ S`; the scheme-image restriction and
-closed-image lemmas identify its closed edge with `S`.
-(5) The inverse finite-open comparison gives an initial factorization comparison.
-To normalize any comparison `e₀ : F ≅ G`, write `R = a^*` and let
-`α : F ⋙ R ≅ 𝟭` and `β : G ⋙ R ≅ 𝟭` be the displayed restriction helpers.
-Set `γ = (e₀ ▷ R) ≪≫ β` and `τ = γ.symm ≪≫ α`. Whiskering the automorphism
-`τ` of the identity with `F` gives `θ : F ≅ F`; then `θ ≪≫ e₀` is normalized,
-by naturality of `γ`. For uniqueness, if two comparisons agree after `R`, their
-quotient is an endomorphism of `F`. Fullness lifts it to the source, and the
-restriction identification `α` shows that lift is the identity. Faithfulness
-then identifies the two comparisons. The extension `F` is fully faithful since
-open extension and closed direct image are fully faithful.
-(6) For `b : S ⟶ Y` and closed `i : Y ⟶ X`, scheme-theoretic density of
-`b.toImage` gives `a.imageι.ker = (b.imageι ≫ i).ker`. The closed-immersion
-lift for this equality is an isomorphism `q : b.image ≅ a.image` over `X`.
-Its compatibility with the open factors follows by canceling `a.imageι`.
-(7) Direct images compose by `Etale.lowerStarComp`. For the isomorphism `q`,
-direct image equals open extension: both identify with inverse pullback.
-Composition of open extensions then identifies the two closure extensions.
-Apply the normalization and uniqueness argument of step (5), now using
-`etaleClosedCompositionRestrictionIso`. All constructions are already for
-`ModuleCat A`, so no separate passage from abelian sheaves is needed.
--/
+/-- Étale closed/open interchange and closure-defined extension by zero: the finite-open
+comparison along a closed immersion is invertible, and the closure-defined extension is
+compatible with closed-then-open factorizations and with further closed immersions. -/
 theorem etale_locallyClosed_extension_comparison
     {A : Type (u + 1)} [CommRing A] [Finite A]
     (X : Scheme.{u}) [IsNoetherian X]

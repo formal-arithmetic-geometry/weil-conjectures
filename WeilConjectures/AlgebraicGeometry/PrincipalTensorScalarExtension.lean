@@ -8,9 +8,6 @@ public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import WeilConjectures.Algebra.Homology.InternalKFlatScalarTowerRealization
 
 /-! # Derived tensor and extension-restriction with their specified maps
-
-Source: blueprint, derived Nakayama resolution, On X paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -29,27 +26,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
 /-- Tensor with the pulled-back finite quotient agrees with derived extension followed
-by restriction, preserving the quotient transitions and the adjunction units.
-
-Source: blueprint derived Nakayama resolution, On X paragraph; principal reduction
-normalization proof steps 2 and 3.
-(auxiliary; not a blueprint node).
-
-Proof: the coequalizer for extension followed by restriction is the balanced tensor
-with the restricted regular quotient. Its inverse sends the class of b tensor x to
-the extension generator b tensor x; the two balancing relations coincide. The
-braiding puts the quotient in the second variable. This identifies the ordinary
-unit with the right unitor inverse followed by tensoring the quotient unit.
-For a K-flat representative P the derived computation counit is invertible, and
-exact restriction commutes with localization. Compose these with the ordinary
-balanced comparison and the K-flat tensor computation. Naturality extends through
-roofs of K-flat complexes and gives the stated natural isomorphism. On generators
-the quotient transition sends b tensor x to its image tensor x. Taking its mate
-under the extension-restriction adjunction gives precisely integralStep: the
-composition of restrictions is restrictComp and uniqueness of left adjoints gives
-reductionComp. Compatibility of the derived adjunction with its computation counit
-identifies the unit, so no unit or transition is chosen anew. Zero complexes and
-the empty scheme require no exception. -/
+by restriction, preserving the quotient transitions and the adjunction units. -/
 theorem principal_tensor_scalar_extension :
     ∃ e : ∀ n : ℕ, DerivedNakayama.reductionFunctor l E X (n + 1) ≅
         AdicCompletion.derivedReduction l E X n ⋙ AdicCompletion.restrict l E X n,

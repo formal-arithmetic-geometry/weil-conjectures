@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Cohomological bounds after scalar extension
 
-Source: Stacks Project, Tags 08G0, 08G1, 06YQ and 06YY, bounded flat models.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 08G0, 08G1, 06YQ and 06YY
 -/
 
 @[expose] public noncomputable section
@@ -24,19 +25,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme
 
 /-- Scalar extension of a complex of Tor amplitude [a,b] has cohomology in [a,b].
-Source: Stacks Project, Cohomology on Sites, Tags 08G0, 08G1, 06YQ and 06YY; the scalar-extension
-boundedness part of lem-sfb-adic-finite-etale-transitions, proof step 2.
-(auxiliary; not a blueprint node).
-
-Proof: the coefficient-model flat-model criterion supplies a representative P
-supported in [a,b] with flat terms. It is K-flat by the bounded-above flat
-criterion. The universal scalar computation identifies the extended derived
-object with the localization of change(f)(P). Scalar extension is additive,
-so it preserves the zero terms outside [a,b]. Consequently that localization
-has cohomology only in [a,b]. Apply cohomology to the computation and the
-representative isomorphism to transport the bounds to the extended object.
-This works for every ring map, including the identity and maps to the zero
-ring; it uses no constructibility or Noetherian assumption. -/
+(Stacks, Tags 08G0, 08G1, 06YQ and 06YY). -/
 theorem adicScalarExtension_bound {C : Type w} [SmallCategory C]
     (T : GrothendieckTopology C) {A B : Type w} [CommRing A] [CommRing B]
     (f : A →+* B) (K : ConstantCompletion.D (constant T A)) (a b : ℤ)

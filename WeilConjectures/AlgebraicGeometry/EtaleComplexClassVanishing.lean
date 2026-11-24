@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleHypercohomologyFiltration
 /-! # Etale complex class vanishing
 
 The vanishing half of the finite spectral-sequence comparison in Stacks Tag 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-class-vanishing).
 -/
 
 @[expose] public section
@@ -27,33 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
-/-- A stage hypercohomology class vanishing on the limit eventually vanishes.
-Source: Stacks Project, Tag 0EZM, proof of lemma-colimit-variant-complexes;
-Tag 015J (termwise hypercohomology spectral sequence).
-(blueprint: lem-weil-pbc-etale-complex-class-vanishing).
-
-Proof: First choose a directed cofinal reindexing of the filtered opposite
-index category (Tag 0032), preserving the scheme limit and complex colimit.
-For descent, a representative at a reindexed stage is already an original-stage
-representative. For vanishing at an arbitrary original stage i, finality first
-supplies an arrow from i to a reindexed stage in the opposite category. Transport
-the class there, find its later zero witness in the directed system, and compose
-the two arrows back in the original category. Apply 09YQ to the system in each
-complex degree and use the functorial first hypercohomology spectral sequences
-of 015J. Exact filtered colimits propagate
-first-page comparison isomorphisms through the page homology construction.
-The vanishing region r >= 0, s >= a gives a uniform stabilization bound in each
-bidegree and finite abutment filtrations in total degree p. If a stage class
-maps to zero, its leading nonzero graded component becomes zero on the limit
-stable page, and thus becomes zero at a later stage. At that stage the class
-lies one step deeper in the filtration. Repeat through the finite range
-a <= s <= p; after a finite number of transitions it lies in the zero step.
-Compose the transitions (filteredness supplies common refinements whenever
-needed). Functoriality of the spectral sequence identifies the transition on
-abutments with P followed by the map of complexes; hH gives precisely H.map.
-The equation hB and the injective isomorphism eB identify the initial vanishing
-condition with vanishing in the derived limit abutment. If p < a all stage
-abutments are zero, so the identity transition suffices. -/
+/-- A stage hypercohomology class vanishing on the limit eventually vanishes
+(Stacks, Tags 0EZM and 015J). -/
 theorem exists_etale_complex_class_eq_zero
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

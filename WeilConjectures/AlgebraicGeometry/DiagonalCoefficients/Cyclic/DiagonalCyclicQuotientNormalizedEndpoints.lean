@@ -44,28 +44,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 
 set_option linter.unusedVariables false in
 /-- A quotient-unit-preserving comparison has the supported-source and root squares.
-This assertion assumes the comparison, and constructs no quotient functor comparison.
-
-Source: coefficient changes (1), supported and root endpoints; diagonal limit (3),
-normalized source and root cones
-(blueprint: lem-diagonal-cyclic-quotient-normalized-endpoints).
-
-Proof: project the supported source cone equation hs0 to n. Use the sourceIso
-normalization, the finite source comparison and the supported scalar Endpoint's
-adjunction equation to identify the full supported quotient generator. The assumed
-quotient-unit square replaces its scalar adjunction unit by M.unit. Apply hsa and
-the normalization hs, then cancel the quotient projection (which is epic on this
-flat degree-zero supported coefficient). This gives the inverse-source equation.
-For the root endpoint, ht0 identifies each limit projection with the actual root
-projection. IntegralRoots uniqueness identifies the two integral-root maps.
-The finite root maps coincide because their inclusions into the units sheaf agree
-and that inclusion is monic. Use p.lineEndpoint.normalization and ht, transpose
-p.line.iso by scalar adjunction, and apply the assumed quotient-unit square and hta.
-The root quotient is a flat rank-one finite line, so its normalized unit detects
-the remaining degree-zero map. Exact-single and shift naturality give the displayed
-shifted equation. No derived arrow is inferred merely from its finite evaluations;
-the cancellation is only at these prescribed flat coefficient endpoints. The empty
-scheme and n=0 follow from the same maps and cancellation statements. -/
+This assertion assumes the comparison, and constructs no quotient functor comparison. -/
 theorem diagonalCyclicQuotient_normalizedEndpoints
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

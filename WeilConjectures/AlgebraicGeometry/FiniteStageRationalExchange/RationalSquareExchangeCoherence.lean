@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.RationalRaw
 import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.FiniteStageKaroubiExtension
 
 /-! # Scalar compatibility of the composite rational exchange
-
-Source: sketch32, lines 1218--1228 and 1291--1321.
-(blueprint: lem-sbc-rational-square-exchange-coherence)
 -/
 
 @[expose] public noncomputable section

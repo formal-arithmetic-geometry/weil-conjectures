@@ -24,13 +24,13 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 /-!
 # Uniform Tor bounds for compact supports
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-lem-sp-tower-bound,
-`sk-lem-sp-tower-bound-uniform.md`; Stacks Project, Tag 0F10
-(blueprint: prose-09-23).
-
 Finite coefficients use the recorded ordinary ringed pro-etale derived category.
 The second clause uses the existing strict semilinear sequence-site presentation of
 coefficient towers. Its natural index n denotes the positive exponent n+1.
+
+## References
+
+* [Stacks Project, Tag 0F10](https://stacks.math.columbia.edu/tag/0F10)
 -/
 
 @[expose] public noncomputable section

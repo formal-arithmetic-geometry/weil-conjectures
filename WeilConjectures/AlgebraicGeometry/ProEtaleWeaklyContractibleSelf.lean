@@ -36,15 +36,7 @@ private theorem weaklyContractible_transfer
 namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- A weakly contractible pro-etale object has weakly contractible final object on
-its own small site. Source: Stacks Tags 090M, 00Y1 and 094T.
-(blueprint: lem-pe-proetale-weakly-contractible-self).
-
-Proof: transport the site to its coefficient-sized model. Localizing at the given
-object preserves weak contractibility, by the fibre description of the slice topos.
-Transport back along the equivalence of over categories, then identify this slice
-with the small pro-etale site of the underlying scheme. The identity arrow becomes
-the final object of that site. All transports preserve epimorphisms and their
-section maps. -/
+its own small site (Stacks, Tags 090M, 00Y1 and 094T). -/
 theorem isWeaklyContractible_self_of_object (X : Scheme.{u}) (W : X.ProEt)
     (hW : (topology X).IsWeaklyContractible.{u + 1} W) :
     (topology W.left).IsWeaklyContractible.{u + 1} (ProEt.mk (𝟙 W.left)) := by

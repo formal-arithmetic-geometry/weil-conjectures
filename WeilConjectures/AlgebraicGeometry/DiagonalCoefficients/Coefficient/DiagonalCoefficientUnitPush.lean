@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 
 /-! # The canonical direct-image unit on a coefficient module
-
-Source: diagonal tower coefficient changes (1), ordinary coefficient units and their
-universal right-derived comparisons.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +25,7 @@ variable {A B : Type a} [Category.{v} A] [Category.{v} B]
   [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
   {F : A ⥤ B} [F.Additive]
 
-/-- The specified universal derived unit on a single object.
-Source: diagonal trace universal-unit normalization.
-(blueprint: def-diagonal-coefficient-unit-push). -/
+/-- The specified universal derived unit on a single object. -/
 def singlePushComparison (D : DiagonalRightDerived F) (M : A) :
     (DerivedCategory.singleFunctor B 0).obj (F.obj M) ⟶
       D.R.obj ((DerivedCategory.singleFunctor A 0).obj M) :=
@@ -38,10 +33,7 @@ def singlePushComparison (D : DiagonalRightDerived F) (M : A) :
       ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).inv.app M) ≫
     D.η.app ((HomologicalComplex.single A (.up ℤ) 0).obj M)
 
-/-- Naturality of the specified single-object derived unit.
-Source: diagonal trace universal-unit normalization.
-(blueprint: def-diagonal-coefficient-unit-push).
-Proof: compose naturality of the single-complex isomorphism and the universal unit. -/
+/-- Naturality of the specified single-object derived unit. -/
 theorem singlePushComparison_naturality (D : DiagonalRightDerived F)
     {M N : A} (f : M ⟶ N) :
     (DerivedCategory.singleFunctor B 0).map (F.map f) ≫ singlePushComparison D N =
@@ -83,11 +75,7 @@ private theorem singleFactor (M : A) :
   exact (Iso.inv_comp_eq (U.mapDerivedCategoryFactors.app _)).mp
     (U.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app M)
 
-/-- The full derived-unit square evaluated on a single coefficient object.
-Source: diagonal trace universal-unit normalization.
-(blueprint: def-diagonal-coefficient-unit-push).
-Proof: evaluate the normalization on the single complex and cancel the canonical
-single-complex comparisons. Their coherence is checked in each degree. -/
+/-- The full derived-unit square evaluated on a single coefficient object. -/
 theorem singlePushComparison_square
     (s : DiagonalTrace.ExactSquareOfUniverses F G U V RF RG ordinary) (M : A) :
     V.mapDerivedCategory.map (singlePushComparison RF M) ≫
@@ -161,9 +149,7 @@ theorem singlePushComparison_square
 
 end ExactSquare
 
-/-- The ordinary coefficient-unit adjunct, with its regular-module endpoints fixed.
-Source: diagonal tower coefficient changes (1), coefficient one.
-(blueprint: def-diagonal-coefficient-unit-push). -/
+/-- The ordinary coefficient-unit adjunct, with its regular-module endpoints fixed. -/
 @[irreducible]
 def coefficientOrdinaryUnit
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -174,11 +160,7 @@ def coefficientOrdinaryUnit
   (CondensedRing.upperStarLowerStarAdjunction Λ (ProjectiveLine Y ↘ Y)).homEquiv _ _
     (Functor.Monoidal.εIso (CondensedRing.upperStar Λ (ProjectiveLine Y ↘ Y))).inv
 
-/-- The ordinary coefficient-unit arrow is the structural coefficient map.
-Source: diagonal tower coefficient changes (1), the unital coefficient normalization.
-(blueprint: def-diagonal-coefficient-unit-push).
-Proof: the ordinary pullback-adjunction unit-coherence theorem identifies its
-underlying sheaf map with the structural condensed-coefficient map. -/
+/-- The ordinary coefficient-unit arrow is the structural coefficient map. -/
 theorem coefficientOrdinaryUnit_underlying
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (Y : Scheme.{u}) :
@@ -188,9 +170,7 @@ theorem coefficientOrdinaryUnit_underlying
   exact CondensedRing.homEquiv_εIso_inv_hom Λ (ProjectiveLine Y ↘ Y)
 
 /-- The coefficient-unit arrow, before composing with a local derived class.
-It uses the ordinary pullback adjunction and the given universal derived unit.
-Source: diagonal tower coefficient changes (1).
-(blueprint: def-diagonal-coefficient-unit-push). -/
+It uses the ordinary pullback adjunction and the given universal derived unit. -/
 @[irreducible]
 def coefficientUnitPush
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -200,9 +180,7 @@ def coefficientUnitPush
   (DerivedCategory.singleFunctor _ 0).map (coefficientOrdinaryUnit Λ Y) ≫
     singlePushComparison D (Mod.regular (condensedRingObj Λ (ProjectiveLine Y)))
 
-/-- The canonical derived finite-unit adjunct, with fixed unit endpoints.
-Source: diagonal tower coefficient changes (1), finite coefficient units.
-(blueprint: def-diagonal-coefficient-unit-push). -/
+/-- The canonical derived finite-unit adjunct, with fixed unit endpoints. -/
 @[irreducible]
 def finiteUnitAdjunct (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u}) :
     geoP1Unit A Y ⟶
@@ -211,9 +189,7 @@ def finiteUnitAdjunct (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u}) :
     (ProjectiveLine Y ↘ Y)).homEquiv _ _
       (geoP1UnitPullback A (ProjectiveLine Y ↘ Y)).hom
 
-/-- Adjunction of a finite local arrow, with fixed derived-unit endpoints.
-Source: diagonal tower coefficient changes (1), finite coefficient adjunction.
-(blueprint: def-diagonal-coefficient-unit-push). -/
+/-- Adjunction of a finite local arrow, with fixed derived-unit endpoints. -/
 @[irreducible]
 def finiteAdjunct (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     {Z : DerivedCategory (Sheaf (Scheme.ProEt.topology (ProjectiveLine Y))
@@ -223,10 +199,7 @@ def finiteAdjunct (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     (ProjectiveLine Y ↘ Y)).homEquiv _ _
       ((geoP1UnitPullback A (ProjectiveLine Y ↘ Y)).hom ≫ z)
 
-/-- Composing the unit adjunct with a pushed arrow computes its adjunct.
-Source: diagonal tower coefficient changes (1), adjunction naturality.
-(blueprint: def-diagonal-coefficient-unit-push).
-Proof: apply right naturality of the canonical derived adjunction bijection. -/
+/-- Composing the unit adjunct with a pushed arrow computes its adjunct. -/
 theorem finiteUnitAdjunct_naturality (A : Type (u + 1)) [CommRing A] (Y : Scheme.{u})
     {Z : DerivedCategory (Sheaf (Scheme.ProEt.topology (ProjectiveLine Y))
       (ModuleCat.{u + 1} A))} (z : geoP1Unit A (ProjectiveLine Y) ⟶ Z) :

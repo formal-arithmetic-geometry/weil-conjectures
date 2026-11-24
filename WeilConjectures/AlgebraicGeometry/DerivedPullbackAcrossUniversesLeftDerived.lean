@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Left-derived universal property after localization transport
 
-Source: Stacks Project, Tags 06YJ and 05RU.
-(blueprint: lem-sc-derived-pullback-across-universes-left-derived).
+## References
+
+* Stacks Project, Tags 06YJ and 05RU
 -/
 
 @[expose] public section
@@ -140,21 +141,7 @@ private theorem transport_derivedPullback_leftDerived
   exact ⟨δ, ⟨hδ⟩⟩
 
 /-- The transported pullback remains a left derived functor of the concrete tensor
-pullback. Source: Stacks Project, Tags 06YJ and 05RU.
-(blueprint: lem-sc-derived-pullback-across-universes-left-derived).
-
-Proof: the object and morphism formulas identify P with scheme tensor pullback.
-In the standard localization, unfold derivedPullback and take the counit and its
-left-derived universal property from derivedPullback_spec. Precompose and
-postcompose by the localization equivalences defining derivedPullbackAcrossUniverses.
-Use the canonical factorization isomorphisms Qh ⋙ E ≅ Qh_standard for both schemes
-and the associators of functor composition to transport the counit to the displayed
-source and target. For any competing counit, precompose and postcompose by the inverse
- equivalences, apply the standard left-derived universal property, and transport the
-unique resulting natural transformation back. Cancellation of the equivalence unit
-and counit proves both factorization and uniqueness. Thus the transported comparison
-is left derived without a common localization universe. This applies also to empty
-schemes, zero complexes, and identity morphisms. -/
+pullback (Stacks, Tags 06YJ and 05RU). -/
 theorem exists_derivedPullbackAcrossUniverses_leftDerived
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

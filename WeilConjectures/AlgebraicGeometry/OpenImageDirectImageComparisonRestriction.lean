@@ -11,8 +11,9 @@ import all WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonRestricti
 
 /-! # Compatibility of the ordinary open-image comparison with nested restriction
 
-Source: Stacks Project, Cohomology, Tags 08FE and 08BV.
-(blueprint: lem-pc-open-image-direct-image-comparison-restriction).
+## References
+
+* Stacks Project, Cohomology, Tags 08FE and 08BV.
 -/
 
 @[expose] public section
@@ -26,20 +27,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- The fixed ordinary comparison commutes with restriction to any smaller open.
-Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: lem-pc-open-image-direct-image-comparison-restriction).
-Proof: Open direct image is fully faithful, so the larger-open restriction
-of its adjunction unit is invertible. Applying the overlap restriction and
-conjugating by schemeOpenRestrictionCompIso shows that restriction of this
-unit to the smaller open is invertible as well. Unit compatibility of the
-ordinary comparison transfers this property to the direct image of the
-inverse-image-open unit. The smaller-open adjunction Hom equivalence therefore
-allows cancellation of that direct image in maps into the smaller-open image.
-After precomposition by it, both sides become the smaller-open unit: use
-schemeOpenModuleImage_unit_restriction on X and Y and the comparison unit
-identity at U and W. This proves equality without expanding the nested mate
-on sections. Empty and repeated opens need no exception; all the adjunction
-identities and invertibilities continue to hold. -/
+(Stacks, Tags 08FE and 08BV) -/
 theorem schemeOpenImageDirectImageComparison_restriction
     (X Y : Scheme.{u}) (h : X ⟶ Y) {W U : Y.Opens} (i : W ⟶ U)
     (M : SheafOfModules.{u} (moduleRings X.toRingedSpace)) :

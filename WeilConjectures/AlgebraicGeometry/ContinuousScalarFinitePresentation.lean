@@ -23,9 +23,7 @@ open scoped CategoryTheory.Obj TensorProduct
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The actual extension of an ordinary scalar module to continuous condensed coefficients.
-Source: blueprint integral-heart triangulated proof, paragraph (2), finite scalar models
-(auxiliary; not a blueprint node). -/
+/-- The actual extension of an ordinary scalar module to continuous condensed coefficients. -/
 def continuousScalarFunctor (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A] :
     ModuleCat.{u + 1} A ⥤ Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -304,20 +302,7 @@ private theorem ordinary_presentation (N : ModuleCat.{u + 1} A)
 end ContinuousScalarPresentation
 
 /-- Finitely presented modules over continuous condensed coefficients are precisely
-extensions of ordinary finitely presented scalar modules.
-
-Source: blueprint integral-heart triangulated proof, paragraph (2), finite scalar
-presentations; Stacks Tag 0518
-(auxiliary; not a blueprint node).
-
-Proof: endomorphisms of the regular condensed module are its sections at the point.
-Continuous functions on a point are the scalar ring A. Thus every matrix between
-finite free condensed modules is the extension of an ordinary scalar matrix.
-Constant sheafification and extension of scalars preserve cokernels and send the
-regular scalar module to the regular condensed module. Transporting a finite
-presentation proves the forward implication. Applying the same functors to a finite
-ordinary presentation proves the reverse implication. This includes zero ranks,
-zero rings and torsion quotients, and needs no flatness hypothesis. -/
+extensions of ordinary finitely presented scalar modules (Stacks, Tag 0518). -/
 theorem continuousScalarFinitePresentation (A : Type u) [CommRing A]
     [TopologicalSpace A] [IsTopologicalRing A]
     (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

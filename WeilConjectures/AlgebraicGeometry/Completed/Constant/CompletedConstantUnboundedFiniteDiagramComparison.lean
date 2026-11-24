@@ -125,9 +125,10 @@ import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantDer
 
 /-! # Finite diagrams of arbitrary completed constant complexes
 
-Source: Stacks Tags 06YY, 06YU and 093J--093M; the finite tensor comparison
-in amplification (c).
-(blueprint: lem-weil-pbc-completed-constant-unbounded-finite-diagram-comparison).
+## References
+
+* Stacks Project, Tags 06YY and 06YU (scalar extension on K-flat resolutions)
+* Stacks Project, Tags 093J--093M (completed constant sheaf reduction)
 -/
 
 @[expose] public noncomputable section
@@ -238,25 +239,7 @@ private theorem transition_naturality
 
 /-- Finite scalar extension compares the completed realization with the realization
 through the constant algebraic ring, naturally in every quotient map. There is no
-local-system hypothesis, chosen algebraic tower, effectivity assumption or bound on E.
-
-Source: Stacks Tags 06YY and 06YU, scalar extension on K-flat resolutions;
-Tags 093J--093M, completed constant sheaf reduction; finite tensor comparison
-in amplification (c).
-(blueprint: lem-weil-pbc-completed-constant-unbounded-finite-diagram-comparison).
-
-Proof: first factor the completed realization through the single derived scalar
-extension from the inverse image of the constant completion ring. The coefficient
-map is the inverse image of the limit lift of constantAdicFiniteCone. Its composite
-with each quotient projection is constantAdicFiniteProjection, by limit.lift_π.
-Apply derived scalar-extension normalization to these factorizations to obtain
-the quotient-linear isomorphisms. Ordinary scalar-restriction comparisons are
-identity on sections, so they satisfy associativity; exact derivation transports
-that identity. Adjunction.leftAdjointCompIso_assoc gives the corresponding
-associativity for derived normalization. Transposing it along the last extension
-adjunction gives normalization's compatibility with pbcReductionTransition.
-Finally transition naturality transports this equality along the single completed
-realization comparison, proving the forward square for all n ≤ m, including n = m. -/
+local-system hypothesis, chosen algebraic tower, effectivity assumption or bound on E. -/
 theorem completed_constant_unbounded_finite_diagram_comparison
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

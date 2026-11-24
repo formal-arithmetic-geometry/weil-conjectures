@@ -12,7 +12,9 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 /-! # Residue data and local tensor generators
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 093J--093M.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 093J--093M.
 -/
 
 @[expose] public noncomputable section
@@ -22,9 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
-/-- The finite residue module with its quotient-ring action.
-Source: Stacks Tags 093J--093M
-(blueprint: def-weil-pbc-completed-constant-residue-data). -/
+/-- The finite residue module with its quotient-ring action. -/
 abbrev completedConstantResidueModule (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (N : ModuleCat.{u + 1} (AdicCompletion I A)) (n : ℕ) :=
@@ -34,9 +34,7 @@ abbrev completedConstantResidueModule (X : Scheme.{u})
         (I ^ (n + 1) • ⊤ : Submodule A (completedConstantUnderlyingModule I N))))
 
 /-- Multiplication on a constant quotient module by a quotient-ring section.
-The abelian sheaf is the same sheafification whether its scalar ring is A or A/I^k.
-Source: Stacks Tag 03EK
-(blueprint: def-weil-pbc-completed-constant-residue-data). -/
+The abelian sheaf is the same sheafification whether its scalar ring is A or A/I^k. -/
 def completedConstantResidueMul (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
     (N : ModuleCat.{u + 1} (AdicCompletion I A)) (n : ℕ) (U : X.ProEtᵒᵖ)
@@ -199,9 +197,7 @@ theorem constantMap_isIso (X : Scheme.{u})
     infer_instance
   exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf _)
 
-/-- A semilinear identity on one additive group identifies its two constant scalar actions.
-Source: Stacks Tag 03EK, constant-module sheafification
-(blueprint: def-weil-pbc-completed-constant-residue-data). -/
+/-- A semilinear identity on one additive group identifies its two constant scalar actions. -/
 theorem constantScalar_compatibility (X : Scheme.{u})
     {B D : Type (u + 1)} [CommRing B] [CommRing D] (f : B →+* D)
     (V : Type (u + 1)) [AddCommGroup V] [Module B V] [Module D V]

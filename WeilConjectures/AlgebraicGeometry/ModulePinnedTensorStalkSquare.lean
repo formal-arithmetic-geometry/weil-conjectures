@@ -13,7 +13,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 
 /-! # The module tensor pullback square on stalks
 
-Source: Stacks Project, Modules, Tags 01CD and 01CB; Sheaves, Tag 0098.
+## References
+
+* [Stacks, Tag 01CD](https://stacks.math.columbia.edu/tag/01CD)
+* [Stacks, Tag 01CB](https://stacks.math.columbia.edu/tag/01CB)
+* [Stacks, Tag 0098](https://stacks.math.columbia.edu/tag/0098)
 -/
 
 @[expose] public section
@@ -28,17 +32,7 @@ noncomputable section
 namespace AlgebraicGeometry.Scheme.Modules
 
 -- The stalk tensor transports require elaborating nested scalar-change functors.
-/-- The canonical module tensor pullback and stalk maps commute with the scalar tensorator.
-
-Proof: use extension-of-scalars extensionality and tensor induction. Represent the two
-stalk vectors by sections on a common neighborhood. The source tensor stalk map sends
-its pure tensor germ to the tensor of the germs, and the pullback stalk map sends the
-pulled-back germ to one tensor the original germ. The pullback tensor comparison sends
-pulled-back pure tensors to tensors of pulled-back sections. Applying the target tensor
-stalk map and the two pullback stalk maps therefore gives the scalar tensorator on
-one tensor a pure tensor. Additivity and scalar linearity give equality everywhere.
-Source: Stacks Project, Modules, Tags 01CD and 01CB; Sheaves, Tag 0098.
-(blueprint: lem-pc-module-pinned-tensor-stalk-square). -/
+/-- The canonical module tensor pullback and stalk maps commute with the scalar tensorator. -/
 theorem module_pinned_tensor_stalk_square {X Y : Scheme.{u}}
     (f : X ⟶ Y) (x : X) (M N : Y.Modules) :
     let SX := RingedSpace.moduleStalkFunctor X.toRingedSpace x

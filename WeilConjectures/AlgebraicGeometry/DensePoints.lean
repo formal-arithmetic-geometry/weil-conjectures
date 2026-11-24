@@ -22,11 +22,8 @@ Let `k` be a separably closed field and let `X` be a smooth `k`-scheme, given by
 structure morphism `f : X ⟶ Spec k`. Then the `k`-rational points of `X` are Zariski dense
 in `X`.
 
-The proof follows Stacks, Tag 056U. Over any field `k`, a smooth `X` is, around every point,
-étale over an affine space `𝔸ⁿ_k`. Étale morphisms are open, and a nonempty open of `𝔸ⁿ_k`
-contains a point with coordinates in a separable closure of `k`, since a nonzero polynomial does
-not vanish identically on an infinite field. Residue field extensions along étale morphisms
-are separable, so every nonempty open of `X` contains a closed point whose residue field is
+The proof follows Stacks, Tag 056U: a smooth `X` is, around every point, étale over an affine
+space `𝔸ⁿ_k`, so every nonempty open of `X` contains a closed point whose residue field is
 finite and separable over `k`. If `k` is separably closed, such a residue field is `k` itself,
 and the point is `k`-rational. In particular `X(k)` is nonempty as soon as `X` is.
 
@@ -169,9 +166,7 @@ private lemma exists_etale_mvPolynomial (f : X.Hom (Spec (.of k))) [Smooth f] (x
     ← IsAffineOpen.isoSpec_inv_ι, Category.assoc, Iso.hom_inv_id_assoc]
 
 /-- **Density of separable points.** Let `X` be a smooth scheme over a field `k`. Then the
-closed points `x` of `X` whose residue field `κ(x)` is finite and separable over `k` are dense.
-
-(blueprint: `lemma-twisting-h-0-1-h`) -/
+closed points `x` of `X` whose residue field `κ(x)` is finite and separable over `k` are dense. -/
 @[stacks 056U]
 theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [Smooth f] :
     Dense {x : X | IsClosed {x} ∧ letI := (f.residueFieldAlgebraMap x).toAlgebra
@@ -196,9 +191,7 @@ theorem Hom.dense_setOf_isClosed_finite_isSeparable (f : X.Hom (Spec (.of k))) [
 
 /-- **Zariski density of rational points.** Let `X` be a smooth scheme over a separably closed
 field `k`, given by its structure morphism `f : X ⟶ Spec k`. Then the image in `X` of the set
-`X(k)` of `k`-rational points is Zariski dense.
-
-(blueprint: `lemma-twisting-h-0-1-h`, `lemma-representability-picard-functor`) -/
+`X(k)` of `k`-rational points is Zariski dense. -/
 theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f] :
     DenseRange fun p : f.fieldPoints k ↦ (p.1.base default : X) := by
   refine f.dense_setOf_isClosed_finite_isSeparable.mono fun x hx ↦ ?_
@@ -210,9 +203,7 @@ theorem Hom.denseRange_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [S
   exact e.symm_apply_apply c
 
 /-- **Rational points of a smooth scheme exist.** A nonempty smooth scheme over a separably
-closed field `k` has a `k`-rational point.
-
-(blueprint: `lemma-representability-picard-functor`) -/
+closed field `k` has a `k`-rational point. -/
 theorem Hom.nonempty_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k))) [Smooth f]
     [Nonempty X] : Nonempty (f.fieldPoints k) :=
   f.denseRange_fieldPoints.nonempty
@@ -221,9 +212,7 @@ open Limits in
 /-- The `K`-rational point `x_K = Spec K ×_k x` of the base change `X_K = X ×_k Spec K`
 induced by a `k`-rational point `x` of `X`, for a field extension `K` of `k`. A `k`-rational
 point is an element of `AlgebraicGeometry.Scheme.Hom.fieldPoints`, a section `Spec k ⟶ X` of the
-structure morphism, and `x_K` is the induced section `σ_T` for `T = Spec K`.
-
-(blueprint: `def-pc-rational-point`) -/
+structure morphism, and `x_K` is the induced section `σ_T` for `T = Spec K`. -/
 noncomputable def Hom.baseChangeFieldPoint (f : X.Hom (Spec (.of k))) (K : Type u) [Field K]
     [Algebra k K] (p : f.fieldPoints k) :
     (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).fieldPoints K :=
@@ -271,9 +260,7 @@ open Limits in
 /-- **Density of the base-changed rational points.** Let `X` be a smooth scheme over a
 separably closed field `k` and let `K` be a field extension of `k`. Then the `K`-rational
 points `x_K` of `X_K = X ×_k Spec K` coming from the `k`-rational points `x` of `X` are
-Zariski dense in `X_K`.
-
-(blueprint: `lemma-twisting-h-0-1-h`, part (1)) -/
+Zariski dense in `X_K`. -/
 theorem Hom.denseRange_baseChangeFieldPoint [IsSepClosed k] (f : X.Hom (Spec (.of k)))
     [Smooth f] (K : Type u) [Field K] [Algebra k K] :
     DenseRange fun p : f.fieldPoints k ↦ (f.baseChangeFieldPoint K p).1.base default := by
@@ -290,9 +277,7 @@ open Limits in
 separably closed field `k`, let `K` be a field extension of `k` and let `φ` be a morphism of
 `𝒪_{X_K}`-modules, e.g. a global section `s : 𝒪_{X_K} ⟶ ℒ` of an invertible module. If `φ` does
 not vanish identically, i.e. its zero scheme `Z(φ)` is not all of `X_K`, then there is a
-`k`-rational point `x` of `X` such that `φ` does not vanish at `x_K`.
-
-(blueprint: `lemma-twisting-h-0-1-h`, part (2)) -/
+`k`-rational point `x` of `X` such that `φ` does not vanish at `x_K`. -/
 theorem Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus [IsSepClosed k]
     (f : X.Hom (Spec (.of k))) [Smooth f] (K : Type u) [Field K] [Algebra k K]
     {M N : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).Modules} (φ : M ⟶ N)
@@ -304,9 +289,7 @@ theorem Hom.exists_baseChangeFieldPoint_notMem_support_zeroLocus [IsSepClosed k]
 /-- **Non-vanishing at a rational point.** Let `X` be a reduced smooth scheme over a separably
 closed field `k`, e.g. a smooth projective curve, and let `φ : ℳ ⟶ 𝒩` be a nonzero morphism of
 invertible `𝒪_X`-modules, e.g. a nonzero global section `s : 𝒪_X ⟶ ℒ`. Then `φ` does not vanish
-at some `k`-rational point of `X`.
-
-(blueprint: `lemma-twisting-h-0-1-h`, part (3)) -/
+at some `k`-rational point of `X`. -/
 theorem Hom.exists_fieldPoints_notMem_support_zeroLocus [IsSepClosed k]
     (f : X.Hom (Spec (.of k))) [Smooth f] [IsReduced X] {M N : X.Modules}
     [SheafOfModules.IsInvertible.{u, u, u} M] [SheafOfModules.IsInvertible.{u, u, u} N]
@@ -321,12 +304,7 @@ theorem Hom.exists_fieldPoints_notMem_support_zeroLocus [IsSepClosed k]
     φ.zeroLocus.support.isClosed.isOpen_compl ⟨y, hy⟩
 
 /-- **Infinitude of the rational points of a curve.** A smooth proper geometrically integral
-curve over a separably closed field has infinitely many rational points. Every rational point
-is a closed point, so if there were only finitely many of them, their union would be closed and,
-by `AlgebraicGeometry.Scheme.Hom.denseRange_fieldPoints`, equal to `X`; then `X` would be a
-finite discrete space, of dimension zero, whereas the curve `X` has dimension one.
-
-(blueprint: `lemma-twisting-h-0-1-h`, part (3)) -/
+curve over a separably closed field has infinitely many rational points. -/
 theorem Hom.infinite_fieldPoints [IsSepClosed k] (f : X.Hom (Spec (.of k)))
     [SmoothOfRelativeDimension 1 f] [IsProper f] [GeometricallyIntegral f] :
     Infinite (f.fieldPoints k) := by

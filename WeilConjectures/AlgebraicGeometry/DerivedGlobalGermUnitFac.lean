@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # DerivedGlobalGermUnitFac
 
-Source: Stacks Project, Tags 095T, 01F8 and 08J6.
+## References
+
+* Stacks Project, Tags 095T, 01F8 and 08J6
 -/
 
 @[expose] public section
@@ -26,9 +28,8 @@ noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedGlobalGermUnitFac
     : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
-/-- Formal unit compatibility for a germ following two Leray comparisons.
-The functors remain abstract so reduction does not unfold the small-etale constructions.
-Source: the unit formulas for the library's bounded below derived comparisons. -/
+/-- Formal unit compatibility for a germ following two Leray comparisons. The functors remain
+abstract. -/
 private theorem derived_unit_germ_fac
     {C D E A : Type*} [Category C] [Category D] [Category E] [Category A]
     [Abelian C] [Abelian D] [Abelian E] [Abelian A]
@@ -174,22 +175,8 @@ private theorem derived_unit_germ_fac
 -- The original interface retains the square and its unused source-side functors.
 set_option linter.unusedVariables false in
 /-- The target-side derived unit and germ, precomposed with the global-sections unit,
-are the localized section-unit-and-germ composite followed by the target units.
-Source: Stacks Project, cohomology.tex, Tags 01EZ and 01F8;
-sites-cohomology.tex, Remark 08J6.
-(blueprint: lem-weil-pbc-derived-global-germ-unit-fac)
-
-Proof: Use `derivedCohomologyPullback_eq_derivedUnit` to replace Γ of the derived
-adjunction unit followed by Leray by the derived pullback of sections. Its defining
-right-derived descent formula, precomposed with Γ_X's unit, is the localized section
-unit, followed by Γ_X' on the homotopy category and the inverse g'^* factorization.
-Move that inverse across the target germ by naturality. Expand the target derived
-germ: the Leray unit compatibility and the right-derived natural-transformation unit
-compatibility turn Γ_X' followed by its germ into the localized inverse terminal
-section identification and underived germ. The exact stalk comparison contributes the
-inverse stalk factorization followed by the stalk image of the f'_* unit.
-Combine localized maps using functoriality; the underived map is precisely b and the
-remaining three comparisons, in their order, are c. -/
+are the localized section-unit-and-germ composite followed by the target units
+(Stacks, Tags 01EZ, 01F8 and 08J6). -/
 theorem derivedGlobalGerm_unit_fac
     {X X' Y Y' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y')
     (g : Y' ⟶ Y) (g' : X' ⟶ X) (sq : CommSq g' f' f g)

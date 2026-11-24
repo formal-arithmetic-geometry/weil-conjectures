@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 
-/-! # The actual adic coefficient map under localization -/
+/-! # The actual adic coefficient map under localization
+
+## References
+
+* Stacks Project, Tag 03CE
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -17,13 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
-/-- The actual coefficient pullback is the identity on functions after localization.
-Source: Stacks 03CE and the native coefficient pullback adjunction.
-(blueprint: lem-sf-adic-coefficient-localization).
-The two inverse-image functors are left adjoints to the same direct image. Apply the
-localization adjunction to their comparison followed by the identity on coefficient
-functions. Its adjunct is precomposition with the pullback projection, which is the
-native coefficient map to direct image. Adjunction injectivity identifies the maps. -/
+/-- The actual coefficient pullback is the identity on functions after localization. -/
 theorem comparisonNativeCoefficient {l : ℕ} [Fact l.Prime]
     {V W : Scheme.{u}} (g : W ⟶ V) (hg : WeaklyEtale g) :
     upperStarAdicConstantSheafHom l g =

@@ -9,7 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Etale.EtaleExceptionalConstantTe
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 import WeilConjectures.CategoryTheory.Derived.DerivedSingleConstantsComparison
 
-/-! # Pullback of the constant scalar coefficient -/
+/-! # Pullback of the constant scalar coefficient
+
+## References
+
+* Stacks Project, Tag 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,10 +31,7 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
   Functor.leftDerivedFunctor Functor.mapDerivedCategory Functor.rightDerivedFunctor
   derivedTensor upperStar lowerStar
 
-/-- The derived constant inverse-image comparison on a single complex.
-Source: Stacks Tag 07A6 (blueprint: lem-pur-etale-constant-pullback-single).
-Proof: expand exact derivation, move its comparison through the constant single
-isomorphism by naturality, apply derived single comparison, and cancel inverses. -/
+/-- The derived constant inverse-image comparison on a single complex. -/
 theorem etaleConstantPullback_single
     (C : Type (u + 1)) [CommRing C] {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : ModuleCat.{u + 1} C) :

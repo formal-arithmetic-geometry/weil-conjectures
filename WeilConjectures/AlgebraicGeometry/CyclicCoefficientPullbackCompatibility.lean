@@ -14,14 +14,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Compatibility of the canonical cyclic coefficient comparisons with pullback.
-Source: Stacks Project, Tag 03Q8, and the constant-sheaf pullback coherence.
-(blueprint: lem-sbc-cyclic-coefficient-pullback-compatibility).
-
-Proof: Apply `cohomologyMap_map` to the coefficient comparison on the target.
-The composition identity for constant-sheaf inverse images identifies the
-resulting coefficient morphism with the comparison on the source composed with
-the inverse of the upper-star composition isomorphism.
+/-- Compatibility of the canonical cyclic coefficient comparisons with pullback (Stacks, Tag 03Q8).
 -/
 theorem cyclicCoefficientPullbackCompatibility {X Y : Scheme.{u}}
     (h : Y ⟶ X) (e q : ℕ) (W V : X.Etale) (v : V ⟶ W)

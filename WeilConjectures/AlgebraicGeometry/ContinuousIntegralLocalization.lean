@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralImage
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsSequentialColimit
 
-/-! # The localization telescope of integral continuous coefficients -/
+/-! # The localization telescope of integral continuous coefficients
+
+## References
+
+* Bhatt–Scholze, Lemma 6.8.2
+-/
 
 @[expose] public section
 
@@ -21,9 +26,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The localization-unit cocone for an additive adjunction whose localized object
-has invertible multiplication by ℓ.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(auxiliary; not a blueprint node). -/
+has invertible multiplication by ℓ. -/
 noncomputable def scalarLocalizationUnitCocone
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     {L : A ⥤ B} {U : B ⥤ A} [U.Additive] (adj : L ⊣ U) (K : A)
@@ -36,9 +39,7 @@ noncomputable def scalarLocalizationUnitCocone
     rw [← Preadditive.comp_nsmul, ← U.map_nsmul, ← ht, Preadditive.nsmul_comp,
       Category.id_comp]
 
-/-- The unit of integral localization, with its nth leg divided by ℓⁿ.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(auxiliary; not a blueprint node). -/
+/-- The unit of integral localization, with its nth leg divided by ℓⁿ. -/
 noncomputable def integralLocalizationCocone (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X))) :
@@ -49,9 +50,7 @@ noncomputable def integralLocalizationCocone (X : Scheme.{u})
   exact scalarLocalizationUnitCocone ℓ
     (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap (integralScalarMap ℓ E) X)) K
 
-/-- The same telescope in the universe of the small pro-etale sites.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(auxiliary; not a blueprint node). -/
+/-- The same telescope in the universe of the small pro-etale sites. -/
 abbrev integralLocalizationLiftedSequence {C : Type v} [Category.{w} C] [Preadditive C]
     (K : C) : ULift.{x} ℕ ⥤ C :=
   (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor ⋙ Mod.smulSequence K ℓ
@@ -66,9 +65,7 @@ open CategoryTheory Limits MonoidalCategory MonObj
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- Reindex the unit telescope along the order equivalence with the lifted natural numbers.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(blueprint: def-weil-pbc-integral-localization-telescope). -/
+/-- Reindex the unit telescope along the order equivalence with the lifted natural numbers. -/
 noncomputable def integralLocalizationLiftedCocone (X : Scheme.{u})
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) X))) :

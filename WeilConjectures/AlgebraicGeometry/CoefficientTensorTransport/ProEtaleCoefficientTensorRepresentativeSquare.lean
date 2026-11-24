@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEtaleTens
 
 /-! # Compatibility on flat K-flat representative pairs
 
-(blueprint: lem-pbc-coefficient-restriction-tensor-representative-square)
+## References
+
+* Stacks Project, Tags 03EL, 07A4, 07A6
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -59,16 +61,7 @@ private theorem map_tensor_representative_paste
   simp only [Category.assoc]
   rw [reassoc_of% hu, reassoc_of% hm, hrep, ← reassoc_of% hchain]
 
-/-- Compatibility for a flat K-flat pair, given the normalized restriction comparison.
-
-Source: Stacks Tags 03EL, 07A4 and 07A6.
-(blueprint: lem-pbc-coefficient-restriction-tensor-representative-square)
-
-Proof: normalize both geometric tensor maps on representatives. Naturality of their
-factorizations moves the canonical coefficient pullback comparison past the tensor
-representative. The normalization of gamma rewrites the other side. Naturality of
-z's representative and the localized chain square identify the resulting composites.
-Cancel the invertible representative and the two pullback factorizations. -/
+/-- Compatibility for a flat K-flat pair, given the normalized restriction comparison. -/
 theorem representative_square {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})

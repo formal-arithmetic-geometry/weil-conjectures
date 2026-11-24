@@ -12,10 +12,13 @@ import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionBijecti
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionDifferential
 import WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionAugmentation
 
-/-! # Subset coordinates for the alternating tuple total
+/-!
+# Subset coordinates for the alternating tuple total
 
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-coordinates).
+## References
+
+* Stacks Project, Tag 08C1, <https://stacks.math.columbia.edu/tag/08C1>
+* Stacks Project, Tag 01FM, <https://stacks.math.columbia.edu/tag/01FM>
 -/
 
 @[expose] public section
@@ -30,26 +33,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 
 /-- The tuple total has the displayed subset coordinates, including its differential
 and the restriction of a section into the singleton coordinates. The source complex
-and a map from it are not part of this statement.
-
-Source: Stacks Project, Tag 08C1, equation (20.40.0.1), and Tag 01FM.
-(blueprint: lem-sc-principal-open-cech-subset-coordinates).
-
-Proof: Send an increasing tuple to its range; its inverse is the increasing enumeration
-of a finite subset. Its intersection is the preimage of the basic open of the product.
-Apply the explicit restriction section identification on each intersection. In degree n
-only the columns 0 through r-1 occur. Regroup their finite direct sum by cardinality,
-identifying the coefficient degree with n+1-card S, and compose with tau. This gives
-b and its inverse. For the differential, deleting position k erases the corresponding
-index j, and k counts the indices less than j; the horizontal signs and restrictions
-therefore agree. The vertical sign is (-1)^(card S-1). Naturality of section transport
-identifies coefficient differentials and proof irrelevance identifies equality
-transports. Use the assumed differential formula to obtain the first equation.
-The degree-zero column consists precisely of the singleton coordinates: restricting
-a section gives the displayed function, and all other columns receive zero. Expanding
-the explicit augmentation gives the second equation. If r=0 both finite coordinate
-families are empty and the total is zero. Repeated opens keep their distinct indices;
-empty intersections have zero sections by the sheaf axiom. -/
+and a map from it are not part of this statement (Stacks, Tags 08C1 and 01FM). -/
 theorem principalOpenCech_subset_coordinates
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (J : CochainComplex

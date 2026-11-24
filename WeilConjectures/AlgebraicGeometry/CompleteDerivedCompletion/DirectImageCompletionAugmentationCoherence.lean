@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 This is the strict derived-category square needed by the direct-image completion
 unit.  Its proof is the localization calculation comparing the normalized cone
 map with the degree-zero cone inclusion.
-(blueprint: aux-weil-pbc-direct-image-augmentation-coherence)
 -/
 
 @[expose] public noncomputable section
@@ -129,8 +128,7 @@ private theorem directImage_augmentation_factors (T : Scheme.{u})
 augmentation through constant towers.  This is obtained by expanding
 `Localization.liftNatTrans` and applying the inr equation for mapping cones;
 the normalization equation `IsPullReduction` then identifies the two localized
-maps.  It is independent of any choice of K-injective representative.
-(blueprint: aux-weil-pbc-direct-image-augmentation-coherence) -/
+maps.  It is independent of any choice of K-injective representative. -/
 theorem directImage_augmentation_pullReduction_coherence :
     ∀ M : DerivedCategory (AdicCompletion.Modules l E Y),
       (dpull l E f).map ((augmentation l E Y).app M) ≫

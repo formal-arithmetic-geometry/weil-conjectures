@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareD
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalQuotientExplicitTranspose
 
 /-! # Transpose of the successive supported endpoint
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-source-quotient-transpose).
 -/
 
 @[expose] public noncomputable section
@@ -64,11 +61,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
 
 attribute [local semireducible] quotientAdjunction
 
-/-- The supported endpoint transpose in degree zero.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-quotient-transpose).
-Proof: apply exact single-object adjunction transport to the supplied scalar endpoint
-normalization and finite realization. For the successive route, first compose the two
-scalar normalizations. -/
+/-- The supported endpoint transpose in degree zero. -/
 theorem quotient_transpose : q.quotientTranspose = q.quotientSingleNormalized := by
   exact q.quotient_source_constructor.trans q.quotient_explicit_transpose
 

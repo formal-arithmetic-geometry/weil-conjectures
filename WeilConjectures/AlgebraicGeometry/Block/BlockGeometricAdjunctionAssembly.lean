@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 
 /-! # Assembly of the repeated ordinary geometric adjunction
 
-Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10.
+## References
+
+* Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10
 -/
 
 @[expose] public noncomputable section

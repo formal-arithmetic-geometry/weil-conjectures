@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCETotalizeAugmentedComparison
 
 /-! # Coherent first pages from prescribed Cartan--Eilenberg resolutions
 
-Source: Stacks Project, Tags 015J, 015K and 012K.
-(blueprint: lem-weil-pbc-ce-coherent-prescribed-resolutions).
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section
@@ -29,31 +30,7 @@ namespace AlgebraicGeometry.Etale
 set_option linter.unusedVariables false in
 -- Elaborate the dependent raw-resolution and presentation families together.
 /-- Construct coherent first-page comparisons while retaining the supplied bicomplexes.
-Source: Stacks Project, Tags 015J and 015K, and the quotient-page construction of
-Tag 012K; step 2 of lem-weil-pbc-ce-supported-first-page-lifts.
-(blueprint: lem-weil-pbc-ce-coherent-prescribed-resolutions).
-
-Proof. For each supplied augmented CE resolution, apply global sections, extend the
-resolution degree by zero, flip, and filter the total by complex degree. The lower
-row bound and nonnegative resolution degree make every diagonal finite. Construct
-pages from their actual cycle/boundary quotients in a common finite crop. The page
-differentials and successor-page comparisons are fixed by their representative
-equations, so increasing a crop preserves them. Use the canonical row cohomology
-comparison, multiplied in bidegree (q,p) by (-1)^(pq), and the natural comparison to
-ordinary sheaf H for the first-page identifications. The total augmentation,
-K-injective comparison, its global sections, and the transported homology-image
-filtration supply the other fields of D. Its I field is the supplied I, not a newly
-chosen resolution.
-For each f and v, augmented CE comparison supplies a bidegree-preserving map between
-the prescribed resolutions. Extend, flip and totalize it; the degree-zero
-augmentation equations give the displayed strict square on every diagonal summand.
-Conjugate its sections lift by the finite-diagonal comparisons. It preserves complex
-degree, hence factors through every filtration step. Its maps on graded cycles
-preserve boundaries and descend to the chosen page quotients. The representative
-equations and common crops make these quotient maps commute with successor-page
-homology comparisons, defining M. The same row comparison computes its first-page
-map as cohomologyMap followed by Sheaf.H.map; the matching signs cancel. These
-constructions include zero bicomplexes, empty diagonals and empty schemes. -/
+(Stacks, Tags 015J, 015K and 012K) -/
 theorem exists_etaleCE_coherent_prescribed_resolutions
     (I : ∀ (X : Scheme.{u})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})),

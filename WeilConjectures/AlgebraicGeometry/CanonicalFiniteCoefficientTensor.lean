@@ -15,11 +15,7 @@ import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoeffi
 import all WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
 import all WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ProEtaleSectionModuleFunctors
 
-/-! # The normalized tensor structure of the canonical finite coefficient equivalence
-
-Source: the coefficient-presentation step in det-thm-sf-pf-finite.proof.md.
-(blueprint: lem-d5-canonical-finite-coefficient-tensor).
--/
+/-! # The normalized tensor structure of the canonical finite coefficient equivalence -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,8 +28,7 @@ attribute [local instance 20000] sheafBraidedCategory
 attribute [local irreducible] Mod.monoidalClosed
 open FiniteDiscreteOrdinary
 
-/-- Normalization on the original local sections (blueprint:
-lem-d5-canonical-finite-coefficient-tensor). -/
+/-- Normalization on the original local sections. -/
 def CanonicalFiniteTensorNormalized
     (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     [DiscreteTopology A] [Finite A] (X : Scheme.{u})
@@ -346,25 +341,7 @@ private theorem canonicalFixed_tensor_pure (T : Scheme.{u})
 end
 
 /-- The canonical finite coefficient equivalence has its unique section-normalized
-strong monoidal structure.
-
-Source: det-thm-sf-pf-finite.proof.md, coefficient realization; the balanced tensor
-construction of Modules on Sites, Stacks Tags 03CY and 03EK.
-(blueprint: lem-d5-canonical-finite-coefficient-tensor).
-
-Proof: restrict scalars along constRingSheafToCondensedRingObj and apply the
-constant-ring module/sheaf equivalence. A balanced pairing of the resulting fixed
-scalar sheaves is the same as a pairing balanced over the internal coefficient ring:
-constant scalar sections generate the constant ring sheaf locally. Sheafifying the
-two universal balanced pairings gives inverse tensor maps. Their tensorator sends a
-pair of local sections to the same internal pure tensor, giving the formula below.
-The regular module gives the unit comparison. Naturality, associativity and both
-unit identities can be checked on local pure tensors. These comparisons are
-isomorphisms by the two universal properties. Pure tensors generate the sheafified
-tensor, so the formula uniquely determines every tensorator. The unit map is then
-determined by the unit identities (equivalently, uniqueness of a unit for a fixed
-multiplication). Thus the monoidal structure is unique. No nonempty-scheme or
-nonzero-ring assumption is used. -/
+strong monoidal structure (Stacks, Tags 03CY and 03EK). -/
 theorem canonicalFiniteCoefficientTensor
     (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
     [DiscreteTopology A] [Finite A] (X : Scheme.{u}) :

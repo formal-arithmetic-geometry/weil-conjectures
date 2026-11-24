@@ -16,8 +16,10 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 
 /-! # K-flat model for internal Hom into a derived direct image
 
-Source: Stacks Project, Cohomology, Tags 08I3, 08DH, 06YS and 079P.
-(blueprint: lem-pc-derived-hom-pushforward-kflat-model). -/
+## References
+
+* Stacks Project, Tags 08I3, 08DH, 06YS and 079P
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -83,25 +85,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- For a K-flat source and K-injective complex on the source scheme, derived
 internal Hom into its termwise direct image is represented by the direct image of
-internal Hom from the termwise tensor pullback.
-
-Source: Stacks Project, Cohomology, Remark 08I3, Section 08DH, Tags 06YS and 079P.
-(blueprint: lem-pc-derived-hom-pushforward-kflat-model).
-
-Proof: First work in standard derived localizations on both schemes. For a K-injective
-complex J, Ri_*Q(J) is represented by Q(i_*J). For K-flat P, Li*Q(P) is represented by
-Q(i*P). Apply the internal-Hom pullback/direct-image adjunction of Remark 08I3 to Q(P)
-and Q(J). The K-injective representative theorem identifies the internal Hom on Z
-with Q(Hom(i*P,J)). This Hom complex is K-injective: on each open subset, tensoring
-an acyclic complex with the restriction of the K-flat i*P gives an acyclic complex,
-and mapping it into the restriction of J gives an acyclic Hom complex. Thus its
-derived direct image is computed by its termwise direct image. Compose these
-comparisons. Finally use the equivalence between the standard localization on Y and
-the supplied localization; its defining comparison with Q transports internal Hom
-and the two actual complexes, giving the asserted isomorphism in the supplied
-universe. No auxiliary derived category on Z is part of the statement. The identity
-map reduces to the K-injective Hom computation; zero complexes and empty schemes
-are respected by every comparison. No closed-immersion hypothesis is needed. -/
+internal Hom from the termwise tensor pullback (Stacks, Tags 08I3, 08DH, 06YS and 079P). -/
 theorem nonempty_derivedHom_pushforward_kFlat_model
     {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [hY : HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

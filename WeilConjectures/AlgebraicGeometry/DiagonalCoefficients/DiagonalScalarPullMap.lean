@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientDiagrams
 
 /-! # Generic scalar pullback tensor equation
-
-Source: diagonal coefficient changes, paragraph (3).
-(blueprint: def-sfb-diagonal-scalar-pull-map).
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The balanced-tensor equation for extension of an arbitrary coefficient map.
-Source: latest blueprint, diagonal coefficient changes, paragraph (3).
-(blueprint: def-sfb-diagonal-scalar-pull-map). -/
+/-- The balanced-tensor equation for extension of an arbitrary coefficient map. -/
 def ScalarPullMap
     {R T : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj T] [IsCommMonObj T]

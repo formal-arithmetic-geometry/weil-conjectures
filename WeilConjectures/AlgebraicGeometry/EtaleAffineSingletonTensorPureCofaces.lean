@@ -12,8 +12,10 @@ import WeilConjectures.RingTheory.FaithfullyFlat.Amitsur
 public import WeilConjectures.AlgebraicGeometry.EtaleAffineSingletonTensorPureCofaceFixed
 
 /-! # Pure-tensor coface formula for singleton sections
-Source: Stacks Project, Tag 03P2, the tensor differential formula.
-(blueprint: new-etale-affine-singleton-tensor-pure-cofaces).
+
+## References
+
+* Stacks Project, Tag 03P2
 -/
 
 @[expose] public section

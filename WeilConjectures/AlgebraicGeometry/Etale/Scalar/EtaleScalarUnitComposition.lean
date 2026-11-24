@@ -98,15 +98,7 @@ private theorem unit_comp_transport
   rw [reassoc_of% hn]
   exact h
 
-/-- The regular scalar units compose through the fixed derived scalar compositor.
-Source: finite-dualizing normalization, paragraphs 1--3 and the final sentence.
-Proof: on presheaf sections the ordinary restriction units compose by composition
-of the coefficient ring maps; the sheaf unit comparison gives the same equality
-for sheaves. Identify each regular derived unit with the exact-single adjunction
-insertion of its ordinary unit. The insertion composition formula gives the fixed
-left-adjoint compositor. Naturality transports this equation from single objects
-back to the derived tensor units.
-(blueprint: lem-coef-etale-scalar-unit-composition) -/
+/-- The regular scalar units compose through the fixed derived scalar compositor. -/
 theorem normalizedScalarUnit_comp
     {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (hχ : χ = ψ.comp φ)

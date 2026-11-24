@@ -13,6 +13,22 @@ import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.Algebra.Field.ULift
 import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
+/-!
+# Closed points over a prime after algebraically closed base change
+
+For a prime `q` of a finite type `k`-algebra `S`, there is an algebraically closed field `K`
+over `k` and a closed point of `Spec (K ⊗[k] S)` lying over `q`.
+
+## Implementation details
+
+`K` is the algebraic closure of `ULift κ(q)`, which lives in `Type (max u v)`. The maximal
+ideal is the kernel of the surjection `K ⊗[k] S → K`, `λ ⊗ s ↦ λ s̄`.
+
+## References
+
+* Stacks Project, Algebra, Tag 00TT.
+-/
+
 @[expose] public section
 
 universe u v
@@ -21,19 +37,8 @@ open scoped TensorProduct
 
 namespace Algebra
 
-/-- Existence of an algebraically closed closed point above a prime, omitting the
-differential-fibre comparison. Source: Stacks Project, Tag 00TT.
-(blueprint: new-algclosed-prime-over).
-
-Proof: Put κ = κ(q), and form K as the algebraic closure of ULift κ, lifting
-κ into universe max u v. Compose the injective map κ → K with S → κ to get
-f : S → K, and equip K with the k-algebra structure defined by f ∘ (k → S).
-The tensor universal property gives φ : K ⊗[k] S → K, λ ⊗ s ↦ λ f(s).
-It is surjective because φ(λ ⊗ 1) = λ, so ker φ is maximal. For s in S,
-φ(1 ⊗ s) = 0 iff its image in κ is zero, since κ → K is injective.
-The kernel of S → κ is q, so ker φ contracts to q. This constructs all
-witnesses without selecting data from any unproved existence theorem.
--/
+/-- Let `S` be a finite type algebra over a field `k` and `q` a prime of `S`. There is an
+algebraically closed field `K` over `k` and a maximal ideal of `K ⊗[k] S` lying over `q`. -/
 theorem exists_algClosed_prime_over
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S] [FiniteType k S]
     (q : PrimeSpectrum S) :

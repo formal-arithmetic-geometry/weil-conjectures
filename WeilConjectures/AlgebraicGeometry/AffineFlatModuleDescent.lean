@@ -17,8 +17,9 @@ import WeilConjectures.RingTheory.FpModuleTensorModelComparison
 /-!
 # Eventual flatness for finitely presented modules over affine inverse limits
 
-Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3)
-(blueprint: lem-pc-affine-flat-module-descent).
+## References
+
+* Stacks Project, Tag 02JO
 -/
 
 @[expose] public section
@@ -30,35 +31,8 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry
 
-/--
-Source: Stacks Project, Algebra, Lemma 10.168.1 (Tag 02JO), part (3)
-(blueprint: lem-pc-affine-flat-module-descent).
-
-1. Finite presentation over the base gives finite presentation of the
-   prescribed algebra and module stages; the directed colimit criteria
-   identify their limits. Apply `lem-weil-pbc-limit-module-finite-presentation`
-   to obtain a finite-type Noetherian approximation.
-2. At each prime of the limit algebra, localization-colimit and
-   localization-tensor lemmas identify the localized approximations and their
-   module colimit with the localization of the given flat module.
-3. Apply `lem-weil-pbc-colimit-eventually-flat` to each localized system,
-   obtaining a stage whose localized module is flat at that prime.
-4. `lem-weil-pbc-openness-of-flatness` gives open flat loci at each stage;
-   tensor base change and the affine local criterion make them persistent.
-5. Quasi-compactness of the limit spectrum makes finitely many inverse images
-   of those open loci cover it, hence one sufficiently late inverse image.
-6. The complement at that stage is a closed set. Its ideal generates the unit
-   ideal at the limit, and the finite unit relation lifts to a later stage,
-   whose entire spectrum lies in its flat locus.
-7. The prime-local criterion `lem-pc-affine-sections-flat-over-base` makes
-   that Noetherian model module flat over its model base ring.
-8. Finite-presentation algebra descent through
-   `lem-weil-pbc-colimit-category-fp-algebras` and module-map descent through
-   `lem-pc-fp-module-map-descent-affine` compare the model algebra and module
-   with every sufficiently late prescribed stage by isomorphisms.
-9. `lem-weil-pbc-flat-module-base-change` transports model flatness across
-   those isomorphisms to every later prescribed module.
--/
+/-- A finitely presented module whose base change to the limit ring is flat is already flat
+after base change to every sufficiently late stage (Stacks, Tag 02JO). -/
 theorem exists_eventually_flat_of_finitePresentation
     {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)

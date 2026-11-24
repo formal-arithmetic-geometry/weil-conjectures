@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.Adjunction.MateCube
 
 /-! # The canonical restriction model in geometric scalar coordinates
 
-Source: Zheng, Construction 5.15 and Lemma 5.16; Stacks 07A4 and 0FND.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Constructions 4.1 and 5.15, Lemma 5.16
+* Stacks Project, Tags 03CY, 05RU, 07A4, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -1122,27 +1124,7 @@ private theorem brown_exact_restriction_cube
     (comm := ordinary)
 
 -- The localization cube simultaneously compares twelve factorization isomorphisms.
-/-- The exact ordinary restriction cube commutes after Brown realization.
-Source: Zheng, Construction 4.1 and Lemma 5.16; Stacks 03CY, 05RU and 07A4.
-(blueprint: lem-pur-etale-brown-canonical-restriction-cube).
-
-Proof: compare the ordinary inverse mates of the specified direct-image
-comparisons at the two coefficient levels. The section equation for those
-comparisons identifies their underlying maps with A.rightUnderlying. Transpose
-using A.levelTranspose and the geometric sheaf adjunctions. The equation
-A.restrictInverseUnderlying identifies the two composites after forgetting scalar
-structure; the ordinaryRestriction comparisons are identities on these sections.
-Faithfulness gives the ordinary restriction cube. Apply cochain prolongation and
-localization. Postcompose both derived composites with the invertible realization
-factor of the common target. Naturality and the canonical restriction representative
-equation identify its first face; hinverse identifies the geometric faces; the
-Brown restriction representative equations identify its remaining faces. The
-ordinary cube makes the resulting cochain maps equal. Fully faithful
-precomposition with Q extends the equality to all derived objects. Finally
-transport the two geometric faces along the exact-to-left-derived pullback
-isomorphisms. The definition of scalarRestrictionPullbackIso cancels these
-comparison factors and gives the displayed equation. This uses neither properness
-nor finiteness, nor the scalar inverse mate or its invertibility. -/
+/-- The exact ordinary restriction cube commutes after Brown realization. -/
 theorem strictEtaleBrownCanonicalRestrictionCube
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W)

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CoproductCopiesMorphismsClopen
 
 /-! # Representing finite constant sheaves on the pro-etale site
 
-Source: Stacks Project, Tags 0H7J, 03YW and 098T.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0H7J, 03YW and 098T.
 -/
 
 @[expose] public section
@@ -81,16 +82,8 @@ noncomputable def proEtaleFiniteConstantComparison (U : Scheme.{u}) (E : Type u)
     (((ProEt.topology U).uliftYoneda.{u + 1}.obj
       (proEtaleFiniteConstantObject U E)).property)⟩
 
-/-- Finite disjoint unions represent finite constant pro-etale sheaves.
-Source: Stacks Project, Tags 0H7J, 03YW and 098T.
-(auxiliary; not a blueprint node)
-
-Proof: The constant-section map labels the components. A represented section is a
-clopen partition, so the map is locally surjective on the open cover by its pieces.
-If two different labels give the same represented section then the domain is empty,
-where the empty covering proves local injectivity. Sheafification is locally
-bijective; hence its induced map into the representable sheaf is locally bijective,
-and therefore is an isomorphism. This includes the empty finite set. -/
+/-- Finite disjoint unions represent finite constant pro-etale sheaves
+(Stacks, Tags 0H7J, 03YW and 098T). -/
 theorem proEtaleFiniteConstantComparison_isIso (U : Scheme.{u}) (E : Type u) [Finite E] :
     IsIso (proEtaleFiniteConstantComparison U E) := by
   let H := proEtaleFiniteConstantPresheaf U E

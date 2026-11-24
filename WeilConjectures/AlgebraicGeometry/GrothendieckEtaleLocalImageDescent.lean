@@ -9,7 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.GrothendieckEtaleLocalImage
 import WeilConjectures.AlgebraicGeometry.GrothendieckEtaleLocalImageDetection
 
 /-! # Finite-cover descent for the categorical local image
-Source: Stacks Project, Tag 00WL, image subsheaves and composition of covering families.
+
+## References
+
+* [Stacks Project, Tag 00WL]
 -/
 
 @[expose] public section
@@ -24,18 +27,7 @@ variable {X : Scheme.{u}} (A : Type u') [Category.{u + 1} A] [Abelian A]
 
 /-- Factoring through the categorical local image can be checked on a finite covering
 family. No projectivity or presentability of the source object is assumed.
-
-Source: Stacks Project, Tag 00WL, the image subsheaf argument; the categorical finite-cover
-argument uses AB5 through the directed-pullback detection lemma.
-Proof: compose x with the cokernel of the local-image inclusion at W. If all its
-restrictions actually lift locally, transitivity of covering sieves shows that x lifts
-locally on W, so its image lies in the local image and this composite is zero. Now remove
-the local-lifting assumptions one member of the finite cover at a time. For each member,
-the local-image detection lemma applies to its restriction and the same composite.
-Precomposition preserves all remaining local lifts. Finite induction removes every
-assumption. The vanishing of the cokernel composite gives the desired factorization.
-The empty covering is included: the initial step already has no lifting assumptions.
-(auxiliary; not a blueprint node). -/
+(Stacks, Tag 00WL) -/
 theorem localImage_factors_of_finite_cover
     {F G : Sheaf X.smallEtaleTopology A} (p : F ⟶ G)
     (W : X.Etale) (B : A) (x : B ⟶ G.obj.obj (op W))

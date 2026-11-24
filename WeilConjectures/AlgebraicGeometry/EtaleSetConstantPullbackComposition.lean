@@ -13,8 +13,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Constant comparison compatibility
 
-Source: Stacks Project, Tags 03CB, 03CC, 0B65, and 03P5.
-(blueprint: lem-weil-pbc-etale-set-constant-pullback-composition).
+## References
+
+* Stacks Project, Tags 03CB, 03CC, 0B65 and 03P5
 -/
 
 @[expose] public section
@@ -25,20 +26,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Constant comparisons respect the chosen inverse-image composition comparison.
-Source: Stacks Project, Tags 03CB, 03CC, 0B65, and 03P5.
-(blueprint: lem-weil-pbc-etale-set-constant-pullback-composition).
-Proof: compare maps from the constant sheaf on V using its adjunction with terminal
-sections. Evaluate each map on a constant generator at the terminal object. The
-unit equation for the constant comparison replaces each inverse comparison by the
-corresponding inverse-image unit. The section formula for the chosen composition
-comparison replaces the two successive units by the composite unit, with the
-canonical fibre-product comparison. This comparison preserves terminal objects and
-therefore takes an equal-valued constant generator to the same generator. The
-composite constant unit equation identifies the result with the inverse comparison
-for v composed with h. Equality on terminal generators, followed by injectivity of
-the constant-sheaf adjunction, proves equality of morphisms. No invertibility of a
-map out of a constant sheaf, or condition on the schemes, is used. -/
+/-- Constant comparisons respect the chosen inverse-image composition comparison
+(Stacks, Tags 03CB, 03CC, 0B65 and 03P5). -/
 theorem etaleSetConstantPullbackComposition
     (P U V : Scheme.{u}) (h : U ⟶ P) (v : V ⟶ U) (A : Type (u + 1)) :
     (etaleSetConstantPullbackComparison v).inv.app A ≫

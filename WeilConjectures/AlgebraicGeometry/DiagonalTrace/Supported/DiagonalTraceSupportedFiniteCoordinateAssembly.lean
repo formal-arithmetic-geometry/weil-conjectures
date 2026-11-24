@@ -46,16 +46,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   completedSupportedUnit
 
 /-- Assemble the finite coordinate equation from the ordinary source-unit equation
-and the normalized finite Ext equation.
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: lem-sfb-diagonal-trace-supported-finite-coordinate-assembly).
-
-Proof: specialize diagonalTrace_finiteBoundary_of_ordinaryUnit to the completed
-restriction, the chosen coefficient system, and the two normalized finite coordinates.
-The named finiteCartierArrow is the Hom of the finite Cartier class. The source,
-root, and exact-single comparisons in supportedFiniteCoordinateEquation are exactly
-these specialized abstract comparisons. No source normalization or existence of
-coordinates is assumed or constructed here. -/
+and the normalized finite Ext equation. -/
 theorem diagonalTrace_supportedFiniteCoordinateAssembly
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.MayerVietorisOpenCompositionComplexLoca
 
 /-! # Open composition units on a restricted source complex
 
-Source: Stacks Project, Tags 08FE and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restricted-source-unit).
+## References
+
+* Stacks Project, Tags 08FE and 0D5T.
 -/
 
 @[expose] public section
@@ -25,20 +26,8 @@ set_option synthInstance.maxSize 2048
 noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
-/-- The open-composition unit equation with its source in the open-image complex notation.
-Source: Stacks Project, Tags 08FE, 0D5T and 079V.
-
-Proof: put J equal to the termwise restriction of I. The open-image complex is
-restriction followed by open pushforward in each degree. It is definitionally equal
-to termwise open pushforward of J: both objects and differentials are obtained by
-applying the same composite functor, and Scheme.Modules.pushforward is the ringed-space
-module direct image of the scheme morphism. Apply
-schemeMVOpenComposition_complex_localization to beta, its canonicality equation and J.
-All three maps on each side are exactly the maps in that theorem.
-No inverse exact restriction factor or derived restriction comparison enters this
-argument. Empty opens, full opens, identity morphisms and arbitrary complexes satisfy
-the same termwise identities; no injectivity or cover hypothesis is needed.
-(blueprint: lem-pc-mayer-vietoris-open-composition-restricted-source-unit). -/
+/-- The open-composition unit equation with its source in the open-image complex notation
+(Stacks, Tags 08FE, 0D5T and 079V). -/
 theorem schemeMVOpenComposition_restricted_source_unit
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

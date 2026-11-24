@@ -22,8 +22,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 
 /-! # The derived truncation comparison on an affine open
 
-Source: Stacks Project, Tag 08D4, parts (1)--(3), and Tag 0AVW.
-(blueprint: lem-sc-affine-open-derived-truncation-comparison).
+## References
+
+* Stacks Project, Tags 08D4 and 0AVW
 -/
 
 @[expose] public section
@@ -32,24 +33,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 /-- Derived sections on an affine open send the canonical lower-truncation
-projection to an isomorphism on cohomology in its cutoff degree.
-Source: Stacks Project, Tag 08D4 with N = 1; Tag 0AVW, cohomology calculation.
-(blueprint: lem-sc-affine-open-derived-truncation-comparison).
-
-Proof: Let F be evaluation at U followed by forgetting the scalar action.
-Sections commute with countable products, since limits of module sheaves are
-computed sectionwise. Affine-open module cohomology vanishing gives R^pF(M) = 0
-for quasi-coherent M and p >= 1. Put K = Q(I). Quasi-coherence of its homology
-follows from the homology factorization through Q. The strictly lower truncation
-E = truncLT n K still has quasi-coherent homology and is supported in degrees at
-most n-1. Apply the unbounded cohomological bound with N = 1 to E. This gives
-H^n(RF(E)) = 0 and H^(n+1)(RF(E)) = 0. Apply RF to the distinguished triangle
-E to K to truncGE n K. Its long exact sequence makes the displayed projection
-invertible after forgetting scalars. Exact forgetting commutes with right derived
-functors and homology, and reflects isomorphisms, giving invertibility over
-O_X(U). All comparisons are natural and preserve the specified projection.
-No K-injectivity or boundedness of I is required. Zero complexes, empty affine
-opens, and all integer degrees satisfy the same argument. -/
+projection to an isomorphism on cohomology in its cutoff degree (Stacks, Tags 08D4 and 0AVW). -/
 theorem affine_open_derived_truncation_comparison
     (X : Scheme.{v})
     [HasDerivedCategory.{w} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

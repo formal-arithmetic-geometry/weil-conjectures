@@ -32,8 +32,9 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Constant module adjunction on a slice and the unit identity for mates
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CY and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +53,7 @@ section Constant
 variable {C : Type w} [SmallCategory C] (T : GrothendieckTopology C)
   (A : Type w) [CommRing A] (U : C)
 
-/-- The coefficient unit restricted to the slice. Source: Stacks 03CY
-(auxiliary; not a blueprint node). -/
+/-- The coefficient unit restricted to the slice (Stacks, Tag 03CY). -/
 def localRingUnit :
     (Functor.const (Over U)ᵒᵖ).obj (RingCat.of A) ⟶
       (siteModuleRings ((constant T A).over U)).obj :=
@@ -71,21 +71,19 @@ instance localRingUnit_surjective :
   change Presheaf.IsLocallySurjective (T.over U) (whiskerLeft _ _)
   exact Presheaf.isLocallySurjective_whisker (T.over U) T (Over.forget U) _
 
-/-- Constant module sheafification directly on the slice. Source: Stacks 03CY
-(auxiliary; not a blueprint node). -/
+/-- Constant module sheafification directly on the slice (Stacks, Tag 03CY). -/
 def localConstant : ModuleCat.{w} A ⥤ Mod ((constant T A).over U) :=
   siteConstantModulePresheafGeneral (C := Over U) A ⋙
     PresheafOfModules.sheafification (localRingUnit T A U)
 
-/-- Terminal sections with their original algebraic scalars. Source: Stacks 03CY
-(auxiliary; not a blueprint node). -/
+/-- Terminal sections with their original algebraic scalars (Stacks, Tag 03CY). -/
 def localSections : Mod ((constant T A).over U) ⥤ ModuleCat.{w} A :=
   SheafOfModules.forget _ ⋙
     PresheafOfModules.restrictScalars (localRingUnit T A U) ⋙
       PresheafOfModules.evaluation _ (op (Over.mk (𝟙 U)))
 
-/-- Constant module presheaves are left adjoint to evaluation at the terminal object.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Constant module presheaves are left adjoint to evaluation at the terminal object
+(Stacks, Tag 03CY). -/
 def constantPresheafAdjunction {D : Type w} [SmallCategory D]
     (V : D) (hV : IsTerminal V) :
     siteConstantModulePresheafGeneral (C := D) A ⊣
@@ -118,14 +116,13 @@ def constantPresheafAdjunction {D : Type w} [SmallCategory D]
     rw [h]
     exact congrArg (fun f ↦ f x) (P.map_id (op V))
 
-/-- Constant realization on the slice is left adjoint to algebraic sections.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Constant realization on the slice is left adjoint to algebraic sections (Stacks, Tag 03CY). -/
 def localAdjunction : localConstant T A U ⊣ localSections T A U :=
   (constantPresheafAdjunction A (Over.mk (𝟙 U)) (Over.mkIdTerminal (X := U))).comp
     (PresheafOfModules.sheafificationAdjunction (localRingUnit T A U))
 
-/-- Restrict the module sheafification unit, then extend by sheafification on the slice.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Restrict the module sheafification unit, then extend by sheafification on the slice
+(Stacks, Tag 03CY). -/
 def localConstantMap (M : ModuleCat.{w} A) :
     (localConstant T A U).obj M ⟶
       ((commutativeSiteConstantModuleFunctor T A).obj M).over U := by
@@ -143,8 +140,7 @@ def localConstantMap (M : ModuleCat.{w} A) :
             ((siteConstantModulePresheafGeneral (C := C) A).obj M)).naturality
               f.unop.left.op) }
 
-/-- The comparison preserves the original constant generators.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The comparison preserves the original constant generators (Stacks, Tag 03CY). -/
 theorem localConstantMap_fac (M : ModuleCat.{w} A) :
     toSheafify (T.over U)
         ((siteConstantModulePresheafGeneral (C := Over U) A).obj M).presheaf ≫
@@ -158,8 +154,8 @@ theorem localConstantMap_fac (M : ModuleCat.{w} A) :
   exact congrArg (PresheafOfModules.toPresheaf _).map
     ((PresheafOfModules.sheafificationHomEquiv (localRingUnit T A U)).apply_symm_apply _)
 
-/-- Restriction to a slice preserves the locally bijective sheafification unit.
-Source: Stacks 00XR, 03CY (auxiliary; not a blueprint node). -/
+/-- Restriction to a slice preserves the locally bijective sheafification unit
+(Stacks, Tags 00XR and 03CY). -/
 theorem localConstantMap_isIso (M : ModuleCat.{w} A) :
     IsIso (localConstantMap T A U M) := by
   have hi : Presheaf.IsLocallyInjective (T.over U)
@@ -184,8 +180,8 @@ theorem localConstantMap_isIso (M : ModuleCat.{w} A) :
   rw [← isIso_iff_of_reflects_iso _ (SheafOfModules.toSheaf _)]
   exact (Sheaf.isLocallyBijective_iff_isIso _).mp ⟨hi', hs'⟩
 
-/-- The comparison between constant module sheafifications on the two sites.
-Source: Stacks 00XR, 03CY (auxiliary; not a blueprint node). -/
+/-- The comparison between constant module sheafifications on the two sites
+(Stacks, Tags 00XR and 03CY). -/
 def localConstantIso : localConstant T A U ≅
     commutativeSiteConstantModuleFunctor T A ⋙ SheafOfModules.overFunctor _ U := by
   have hIso (M : ModuleCat.{w} A) : IsIso (localConstantMap T A U M) :=
@@ -210,8 +206,7 @@ def localConstantIso : localConstant T A U ≅
     ((PresheafOfModules.sheafificationAdjunction (realizationRingUnit T A)).unit.naturality
       ((siteConstantModulePresheafGeneral (C := C) A).map f))
 
-/-- Scalar extension commutes with restriction to the slice.
-Source: Stacks 03EK, 00XR (auxiliary; not a blueprint node). -/
+/-- Scalar extension commutes with restriction to the slice (Stacks, Tags 03EK and 00XR). -/
 theorem changeOverIso_exists {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     Nonempty (SheafOfModules.overFunctor _ U ⋙
         change ((T.overPullback CommRingCat U).map f) ≅
@@ -219,15 +214,13 @@ theorem changeOverIso_exists {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
   ⟨NatIso.ofComponents (AdicPerfectModel.changeOverIso f U)
     (fun g ↦ AdicPerfectModel.changeOverIso_naturality f U g)⟩
 
-/-- The proved scalar/restriction comparison. Source: Stacks 03EK, 00XR
-(auxiliary; not a blueprint node). -/
+/-- The proved scalar/restriction comparison (Stacks, Tags 03EK and 00XR). -/
 def changeOverIso {R S : Sheaf T CommRingCat.{w}} (f : R ⟶ S) :
     SheafOfModules.overFunctor _ U ⋙ change ((T.overPullback CommRingCat U).map f) ≅
       change f ⋙ SheafOfModules.overFunctor _ U :=
   Classical.choice (changeOverIso_exists T U f)
 
-/-- Fixed-scalar presheaf underlying a module on the slice.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Fixed-scalar presheaf underlying a module on the slice (Stacks, Tag 03CY). -/
 def fixedPresheaf (M : Mod ((constant T A).over U)) :
     (Over U)ᵒᵖ ⥤ ModuleCat.{w} A :=
   let P := (PresheafOfModules.restrictScalars (localRingUnit T A U)).obj M.val
@@ -236,8 +229,7 @@ def fixedPresheaf (M : Mod ((constant T A).over U)) :
     map_id := fun V ↦ by ext x; exact congrArg (fun f ↦ f x) (P.map_id V)
     map_comp := fun f g ↦ by ext x; exact P.map_comp_apply f g x }
 
-/-- Forget the sheafified scalar action, retaining all algebraic scalars.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Forget the sheafified scalar action, retaining all algebraic scalars (Stacks, Tag 03CY). -/
 def fixedScalars : Mod ((constant T A).over U) ⥤ Sheaf (T.over U) (ModuleCat.{w} A) where
   obj M := ⟨fixedPresheaf T A U M,
     Presheaf.isSheaf_of_isSheaf_comp (T.over U) _
@@ -250,8 +242,7 @@ def fixedScalars : Mod ((constant T A).over U) ⥤ Sheaf (T.over U) (ModuleCat.{
         ext x
         exact PresheafOfModules.naturality_apply f.val g x } }
 
-/-- The constant generators considered with their algebraic scalar action.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The constant generators considered with their algebraic scalar action (Stacks, Tag 03CY). -/
 def fixedConstantUnit (M : ModuleCat.{w} A) :
     (Functor.const (Over U)ᵒᵖ).obj M ⟶
       ((fixedScalars T A U).obj ((localConstant T A U).obj M)).obj where
@@ -274,16 +265,15 @@ instance fixedConstantUnit_surjective (M : ModuleCat.{w} A) :
     (toSheafify (T.over U)
       ((siteConstantModulePresheafGeneral (C := Over U) A).obj M).presheaf) x
 
-/-- Sheafify the algebraic constant generators.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Sheafify the algebraic constant generators (Stacks, Tag 03CY). -/
 def fixedConstantMap (M : ModuleCat.{w} A) :
     (constantSheaf (T.over U) (ModuleCat.{w} A)).obj M ⟶
       (fixedScalars T A U).obj ((localConstant T A U).obj M) :=
   ((sheafificationAdjunction (T.over U) (ModuleCat.{w} A)).homEquiv _ _).symm
     (fixedConstantUnit T A U M)
 
-/-- Both module and fixed-scalar sheafifications have the same locally bijective unit.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Both module and fixed-scalar sheafifications have the same locally bijective unit
+(Stacks, Tag 03CY). -/
 theorem fixedConstantMap_isIso (M : ModuleCat.{w} A) :
     IsIso (fixedConstantMap T A U M) := by
   let a := toSheafify (T.over U) ((Functor.const (Over U)ᵒᵖ).obj M)
@@ -298,8 +288,8 @@ theorem fixedConstantMap_isIso (M : ModuleCat.{w} A) :
     infer_instance
   exact (Sheaf.isLocallyBijective_iff_isIso _).mp ⟨hi, hs⟩
 
-/-- Fixed scalars identify module constant realization with the fixed-module constant sheaf.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Fixed scalars identify module constant realization with the fixed-module constant sheaf
+(Stacks, Tag 03CY). -/
 def fixedConstantIso : constantSheaf (T.over U) (ModuleCat.{w} A) ≅
     localConstant T A U ⋙ fixedScalars T A U := by
   have hIso (M : ModuleCat.{w} A) : IsIso (fixedConstantMap T A U M) :=
@@ -321,8 +311,8 @@ def fixedConstantIso : constantSheaf (T.over U) (ModuleCat.{w} A) ≅
     ((PresheafOfModules.sheafificationAdjunction (localRingUnit T A U)).unit.naturality
       ((siteConstantModulePresheafGeneral (C := Over U) A).map f))
 
-/-- The constant-module/sections monad is the usual constant fixed-module section functor.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The constant-module/sections monad is the usual constant fixed-module section functor
+(Stacks, Tag 03CY). -/
 def sectionsIso : AdicCohomology.sections (R := A) (T.over U) (Over.mk (𝟙 U)) ≅
     localConstant T A U ⋙ localSections T A U :=
   Functor.isoWhiskerRight (fixedConstantIso T A U)
@@ -336,8 +326,7 @@ variable {B D E : Type*} [Category* B] [Category* D] [Category* E]
   {F₀ : B ⥤ D} {R₀ : D ⥤ B} {F₁ : B ⥤ E} {R₁ : E ⥤ B} {C₀ : E ⥤ D}
   (a₀ : F₀ ⊣ R₀) (a₁ : F₁ ⊣ R₁) (θ : F₁ ⋙ C₀ ≅ F₀)
 
-/-- The mate of inverse balancing. Source: adjunction unit/counit identities
-(auxiliary; not a blueprint node). -/
+/-- The mate of inverse balancing. -/
 def balancingMate : R₁ ⟶ C₀ ⋙ R₀ where
   app N := a₀.unit.app (R₁.obj N) ≫
     R₀.map (θ.inv.app (R₁.obj N) ≫ C₀.map (a₁.counit.app N))
@@ -351,8 +340,7 @@ def balancingMate : R₁ ⟶ C₀ ⋙ R₀ where
     simp only [Functor.comp_map, ← C₀.map_comp]
     rw [a₁.counit_naturality]
 
-/-- A balancing mate intertwines the units. Source: adjunction unit/counit identities
-(auxiliary; not a blueprint node). -/
+/-- A balancing mate intertwines the units. -/
 theorem balancingMate_unit (M : B) :
     a₀.unit.app M = a₁.unit.app M ≫
       (balancingMate a₀ a₁ θ).app (F₁.obj M) ≫ R₀.map (θ.hom.app M) := by

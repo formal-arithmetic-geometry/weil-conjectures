@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 
 /-! # Consecutive normalized arrows for actual finite levels
 
-Source: Stacks Project, Tags 09C6 and 06YY.
-(blueprint: lem-weil-pbc-finite-perfect-adic-actual-level-transitions).
+## References
+
+* Stacks Project, Tags 09C6 and 06YY
 -/
 
 @[expose] public noncomputable section

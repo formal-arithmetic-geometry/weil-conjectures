@@ -69,25 +69,6 @@ private theorem pullbackModelComp
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Glue compatible open/closed models by finite-stage extension classification.
-
-Source: `ModuleObject/Colimit/TwoColimit.lean`, support-induction split; tensor
-adjunction, Ext-continuity and Serre closure perform the gluing. Proof: Enlarge EU and EZ
-to their finite compositum and extend the two models to it. Let N be the pullback of M to
-Y. Open/closed localization expresses N as an extension of the closed direct image of its
-restriction to Z by the open extension by zero of its restriction to U. Extend the two
-finite-field models by these functors. Their finite stratifications combine to prove
-constructibility. Scalar extension commutes with open extension by zero by its
-tensor-restriction adjunction; it commutes with closed direct image at finite stages by a
-finite field basis and at the algebraic closure by filtered-colimit continuity. Thus these
-objects model the outer terms of the localization sequence. Exact scalar extension and
-exact restriction induce the derived adjunction. Under this adjunction the localization
-extension class is a degree-one map into the filtered colimit of finite-stage extensions of
-the open model. Ext-continuity for the constructible closed model represents it at one
-finite stage. The finite-stage adjunction and extension classification produce a short exact
-sequence over that field. Serre closure makes its middle term constructible. Exact scalar
-extension preserves its extension class, and extension classification identifies the extended
-middle term with N.
-(auxiliary; not a blueprint node)
 -/
 theorem glue_nonempty_support_open_closed_models
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]

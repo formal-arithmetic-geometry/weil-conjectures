@@ -14,8 +14,10 @@ import WeilConjectures.CategoryTheory.CartesianScalarDistributivityTransport
 
 /-! # Distributivity of the transported scalar action
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-scalar-distributivity-right). -/
+## References
+
+* Stacks Project, Tag 03D2
+-/
 
 @[expose] public section
 
@@ -53,31 +55,8 @@ private theorem pairIso_inv_snd
   exact (limit.isLimit (pair X Y)).conePointUniqueUpToIso_inv_comp
     (CartesianMonoidalCategory.tensorProductIsBinaryProduct X Y) ⟨WalkingPair.right⟩
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-inverse-image-scalar-distributivity-right).
-
-Proof: First apply `etaleInverseImageAlgebraicStructures` to obtain canonical
-ring and abelian lifts and their operation transport equations. The hom-equivalence
-compatibility of the supplied comparisons identifies them with these canonical
-comparisons: use uniqueness of left adjoints, and cancel the set-adjunction
-hom equivalence to identify the underlying comparison components. Thus the
-addition operations on `Lr.obj O` and `La.obj (FV.obj G)` are exactly the
-conjugates of source addition by the supplied comparisons and product comparison.
-
-Write the first source distributivity diagram on O times (G times G): the
-composite adding the last two factors and then applying muV equals the composite
-applying muV to the first and second, and to the first and third factors, and
-then adding. Write the second diagram on (O times O) times G in the same way,
-adding the first two factors. Both equalities hold on sections by the supplied
-formula for muV and the source module's `smul_add` and `add_smul` axioms.
-Apply L to both equalities. Its product comparison is invertible because L
-preserves finite limits. Naturality of that comparison with respect to
-projections, diagonals and addition rewrites the two transported diagrams as
-the corresponding diagrams for mu. Substitute the addition transport equations
-just identified, cancel comparison isomorphisms, and evaluate at (r,(x,y)) and
-((r,s),x). Products of set sheaves are sectionwise products, so these are valid
-sections for every W. The resulting equalities are precisely the two displayed
-laws. No multiplicative or unit law is asserted here. -/
+/-- The transported scalar action on the inverse image distributes over addition of scalars
+(Stacks, Tag 03D2). -/
 theorem etaleInverseImageScalarDistributivity_right (U V : Scheme.{u}) (f : U ⟶ V)
     (O : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     [PreservesFiniteLimits (Scheme.etaleSetPullback f)] :

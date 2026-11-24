@@ -16,21 +16,24 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
 /-!
 # Ordinary Künneth at a finite coefficient ring
 
-Source: Weil blueprint (snapshot slopmaster2-20261029-2300), sec-smooth-purity/sk-prop-an,
-node proposition-ordinary-external-kunneth, order 3254; Stacks Project, Tag 0F1P
-(blueprint: proposition-ordinary-external-kunneth).
-
-The exterior-product map is the recorded canonical Künneth map
-`kunnethGlobalSectionsMap` of definition-kunneth-map--1, on the unbounded derived categories
-`DerivedCategoryModule` of def-weil-pbc-derived-categories, with the ordinary derived tensor
-`derivedTensor` of proposition-open-direct-image-preserves-finite, at the coefficient ring
-`Padic.coefficientExtensionRing l E n = 𝒪_E / ϖ_E ^ n` of
-def-weil-l-adic-coefficient-extension.
+The exterior-product map is the canonical Künneth map `kunnethGlobalSectionsMap`, on the
+unbounded derived categories `DerivedCategoryModule`, with the ordinary derived tensor
+`derivedTensor`, at the coefficient ring
+`Padic.coefficientExtensionRing l E n = 𝒪_E / ϖ_E ^ n`.
 
 ## Main statements
 
 - `isIso_kunnethGlobalSectionsMap_finiteCoefficientRing`: the exterior-product map is an
   isomorphism for arbitrary unbounded complexes.
+
+## Implementation details
+
+The separable closedness of `D.k` used to form the map comes from its specified algebraic
+closure structure (a proposition; any proof gives the same map).
+
+## References
+
+* Stacks Project, Tag 0F1P.
 -/
 
 @[expose] public section
@@ -50,32 +53,8 @@ attribute [local instance 2000] CommRing.toRing
 field of the finite-field datum `D`, let `X, Y` be separated finite-type `k`-schemes, let
 `A = 𝒪_E / ϖ_E ^ n` for a finite extension `E / ℚ_l` and `n ≥ 1`, with `l ≠ char k`. For
 `K ∈ D(X_ét, A)` and `M ∈ D(Y_ét, A)`, the exterior-product map
-`RΓ(X, K) ⊗ᴸ_A RΓ(Y, M) ⟶ RΓ(X ×_k Y, p_X^* K ⊗ᴸ_A p_Y^* M)` is an isomorphism.
-
-Source: blueprint order 3254, node proposition-ordinary-external-kunneth
-(sec-smooth-purity/sk-prop-an); Stacks Project, Tag 0F1P
-(blueprint: proposition-ordinary-external-kunneth).
-
-The separable closedness of `D.k` used to form the map comes from its specified algebraic
-closure structure (a proposition; any proof gives the same map).
-
-Proof:
-1. (def-weil-l-adic-coefficient-extension) The coefficient ring `Λ = 𝒪_E / ϖ_E ^ n` is
-   finite since `n ≥ 1`.
-2. (lem-weil-l-adic-extension-integers-dvr) In the DVR `𝒪_E` the maximal ideal is generated
-   by the uniformizer `ϖ_E`, and `|l|_E = |l|_l = l⁻¹ < 1`, so `l ∈ (ϖ_E)`. Hence
-   `l ^ n ∈ (ϖ_E) ^ n` and `l ^ n` annihilates `Λ`. As `l ≠ char k`, `l ^ n` is a unit in
-   `k` and in `Γ(Spec k)`. So `Λ` has an exponent invertible on `Spec k`.
-3. (lem-sf-finite-ring-native-kunneth) `k` is separably closed (algebraically closed) and
-   `X, Y` are of finite type over `k`, so for the finite ring `Λ` the native relative Künneth
-   map `Ra_* K ⊗ᴸ_Λ Rb_* M ⟶ R(a ∘ p_X)_*(p_X^* K ⊗ᴸ_Λ p_Y^* M)` over the point is an
-   isomorphism, for arbitrary unbounded `K, M`.
-4. (definition-kunneth-map--1) By definition the exterior-product map is the composite of the
-   inverses of the comparisons `RΓ(Spec k, Ra_* -) ≅ RΓ(X, -)` (and for `b`), the point
-   tensor comparison `RΓ(Spec k, -) ⊗ RΓ(Spec k, -) ≅ RΓ(Spec k, - ⊗ᴸ -)`, `RΓ(Spec k, -)`
-   applied to the map of step 3, and the comparison for `a ∘ p_X`. Every factor is an
-   isomorphism, hence so is the composite. No boundedness or finite generation is used.
--/
+`RΓ(X, K) ⊗ᴸ_A RΓ(Y, M) ⟶ RΓ(X ×_k Y, p_X^* K ⊗ᴸ_A p_Y^* M)` is an isomorphism
+(Stacks, Tag 0F1P). -/
 theorem isIso_kunnethGlobalSectionsMap_finiteCoefficientRing
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (hl : l ≠ ringChar D.k)

@@ -17,7 +17,9 @@ coordinates of the two finite quotients, by a square which is the identity on se
 explicit quotient arrow is the chart image of the ring-level quotient transition followed by
 this square.
 
-Source: Stacks Project, Tags 03CY, 03DA and 09C6.
+## References
+
+* Stacks Project, Tags 03CY, 03DA and 09C6
 -/
 
 @[expose] public noncomputable section

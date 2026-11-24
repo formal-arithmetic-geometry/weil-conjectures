@@ -10,9 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 
 /-! # Intersection transport along a proper refinement graph
 
-Source: Stacks Project, Tags 0F7C--0F7D, and step 2 of
-`lem-pur-etale-graph-refinement-normalization`.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -126,27 +126,7 @@ private theorem exchange_open_congr
     Iso.refl_hom, NatTrans.id_app, Category.id_comp]
 
 /-- The intersection comparison is unchanged after transport along the proper graph.
-
-Source: Stacks Tags 0F7C--0F7D, vertical and horizontal pasting;
-`lem-pur-etale-graph-refinement-normalization`, steps 2--3.
-(auxiliary; not a blueprint node).
-
-Proof: put T = r.Z ×_Y s.Z, O₁ = T ×_{s.Z} X and O₂ = T ×_{r.Z} X.
-The proper graph z = (1,rs.hom) pulls both O₁ and O₂ back to r.i:X -> r.Z,
-by square₁ and square₂. Pulling back their intersection W gives the same X,
-since r.i is mono. Let uν:W -> Oν be the open projections and sW the common
-proper graph. For each ν paste the identity-top graph square for sW,uν,sν
-vertically with the Cartesian square for sν,r.i,bν,z. The outer square is
-the same for both ν, since u₁b₁ = u₂b₂ and both upstairs lifts are 1_X.
-Vertical proper/open pasting expresses its exchange as the triangle exchange
-followed by transportν and the open compositor. Identity normalization removes
-the upstairs identity extension. Equate the two expressions for the outer
-exchange and cancel the invertible first triangle. The remaining open
-compositor--triangle word is precisely locallyClosedGraphMiddle. Whisker by
-the common exterior R(p)_*, insert its two associators, and compose with the
-same proper compositor Rz_* Rp_* -> R(r.g)_*. This is the displayed equation.
-There are no graph side maps or refinement comparison in this assertion.
-Empty opens and identity refinements use the same pasting and identity laws. -/
+ (Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleRefinementGraphMiddleTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (s r : Compactification f)

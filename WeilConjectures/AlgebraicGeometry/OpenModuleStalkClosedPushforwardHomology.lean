@@ -16,8 +16,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Homology of a localized closed-pushforward stalk complex
 
-Source: Stacks Project, Sheaves, Tag 00AE, and Modules, Tag 01AG.
-(blueprint: lem-sc-open-module-stalk-closed-pushforward-homology).
+## References
+
+* Stacks Project, Sheaves, Tag 00AE, and Modules, Tag 01AG.
 -/
 
 @[expose] public section
@@ -29,27 +30,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- A complex derived-isomorphic to a restricted closed pushforward has the expected
 stalk homology. No boundedness or projectivity of its terms is assumed or asserted.
-Source: Stacks Project, Sheaves, Tag 00AE, and Modules, Tag 01AG;
-steps 3 and 4 of lem-sc-strict-perfect-closed-pushforward-stalk-model.
-(blueprint: lem-sc-open-module-stalk-closed-pushforward-homology).
-
-Proof: the equivalence of the slice site with the open-subspace site is exact.
-Module stalks commute with kernels and cokernels by Tag 01AG, and restriction
-of scalars along the open immersion's stalk ring map is exact. The composite
-therefore preserves homology and quasi-isomorphisms and induces a functor on
-derived categories. Apply it to e. Neighbourhoods inside U are cofinal at i(x),
-so the stalk of the restriction of a sheaf agrees with its original stalk.
-Apply nonempty_restriction_stalk_extension_iso to the single complex of that
-sheaf and evaluate in degree zero. Restrict scalars, then cancel extension of
-scalars using the adjunction unit, which is invertible since the ring map is
-an isomorphism. Compose with overFunctorEquiv to obtain the required linear
-coefficient isomorphism. Compatibility with the single functor
-identifies the resulting object with the original pushforward stalk in degree
-zero. Homology of a single complex is zero away from zero and is its coefficient
-module at zero. Tag 00AE identifies the pushforward stalk with the source stalk;
-the germ formula in closedImmersion_pushforward_stalks gives linearity through
-(i.stalkMap x).hom. The stalk of the source unit sheaf identifies linearly with
-the source stalk ring by its germ map. Compose these identifications. -/
+(Stacks, Tags 00AE and 01AG) -/
 theorem openModuleStalk_closedPushforward_homology
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

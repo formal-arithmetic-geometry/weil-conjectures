@@ -10,8 +10,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
 
 /-! # Named Ext existence for diagonal coefficient sheaves
 
-Source: Mathlib's Ext existence for Grothendieck abelian categories.
-(blueprint: lem-diagonal-cyclic-coefficient-has-ext).
+Ext existence follows from Mathlib's Ext existence for Grothendieck abelian categories.
 -/
 
 @[expose] public section
@@ -20,11 +19,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- Coefficient sheaves have Ext, with the standard proof shared by name.
-Source: Mathlib `IsGrothendieckAbelian.hasExt`.
-(blueprint: lem-diagonal-cyclic-coefficient-has-ext).
-Proof: module sheaves form a Grothendieck abelian category. Apply its standard
-Ext existence instance; this merely names that existing proof. -/
+/-- Coefficient sheaves have Ext, by `IsGrothendieckAbelian.hasExt`, with the proof
+shared by name. -/
 theorem cyclicCoefficientHasExt (l : ℕ) [Fact l.Prime] (W : Scheme.{u}) :
     HasExt.{u + 1} (DiagonalMod l W) := by
   infer_instance

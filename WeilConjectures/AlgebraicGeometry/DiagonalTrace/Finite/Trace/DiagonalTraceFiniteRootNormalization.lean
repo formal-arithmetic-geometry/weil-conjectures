@@ -38,9 +38,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
   diagonalSingleLimitComparison diagonalExactFunctorExtImage
   diagonalShiftedSingleLimitComparison diagonalCompletedGenerator
 
-/-- Normalize the finite root endpoint on its actual underlying root sheaf.
-Source: diagonal-limit clause (3), root normalization of the positive Cartier class.
-(blueprint: def-sfb-diagonal-trace-finite-root-normalization). -/
+/-- Normalize the finite root endpoint on its actual underlying root sheaf. -/
 @[irreducible]
 def FiniteRootNormalization
     (l : ℕ) [Fact l.Prime]

@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientPullback
 
 /-! # Canonical pullback of continuous coefficient sections
 
-Source: Bhatt--Scholze, Definition 6.8.1 and the paragraph before Definition 6.8.6.
+## References
+
+* Bhatt--Scholze, Definition 6.8.1 and the paragraph before Definition 6.8.6.
 -/
 
 @[expose] public section

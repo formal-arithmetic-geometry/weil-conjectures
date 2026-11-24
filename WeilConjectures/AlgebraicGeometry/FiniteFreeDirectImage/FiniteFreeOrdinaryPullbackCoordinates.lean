@@ -127,7 +127,9 @@ import all WeilConjectures.Algebra.Homology.Finite.FiniteFreeScalarExtension
 
 /-! # Ordinary finite-basis coordinates and scalar pullback
 
-Source: Stacks Project, Tags 03EK and 03EL.
+## References
+
+* Stacks Project, Tags 03EK, 03EL, 06YY
 -/
 
 @[expose] public noncomputable section
@@ -330,19 +332,7 @@ private theorem ordinaryCoordinate_square {Z W : Scheme.{u}} {q : Z ⟶ W}
   rfl
 
 /-- A basis and its pullback give ordinary coordinate isomorphisms whose square
-commutes with the actual geometric and scalar comparisons.
-Source: Stacks Project, Tags 03EK, 03EL and 06YY.
-(blueprint: lem-sp-finite-free-ordinary-pullback-coordinates).
-
-Proof: transport the regular-module basis along exact inverse image and the regular
-module unit comparison. The tensor coordinates of these bases are natural. They
-make extension finite powers, and hence both universal derived counits invertible.
-Project the ordinary square to one coordinate and transpose through the geometric
-adjunction. On a local pure tensor its two sides are the pulled-back coordinate of
-the coefficient multiplied by the pulled-back module section. Naturality of the
-geometric unit identifies the coefficient coordinates, and conjugation identifies
-the ordinary balancing on pure tensors. Tensor generation and product
-extensionality finish the square. The argument includes the empty basis. -/
+commutes with the actual geometric and scalar comparisons. -/
 theorem finiteFreeDirectImage_ordinaryPullbackCoordinates {Z W : Scheme.{u}} (q : Z ⟶ W)
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     (R S : Coefficients q) (a : CoefficientMap R S) (d : ℕ)

@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
 
 /-! # Existence of the derived-to-ordinary module pullback comparison
 
-Source: Stacks Project, Cohomology, Remark 08HY.
-(blueprint: lem-pc-canonical-module-base-change-open-comparison-c0,
-stage3-canonicalModuleBaseChange_iso_comparison_c0).
+## References
+
+* Stacks Project, Tag 08HY
 -/
 
 @[expose] public section
@@ -25,13 +25,8 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- For every morphism of schemes `a : X ⟶ Y` and every module `G` on `Y`, there is a map
-`La^*(G[0]) ⟶ (a^*G)[0]` which is the derived-to-ordinary pullback comparison at `G`.
-Source: Stacks Project, Cohomology, Remark 08HY.
-
-Proof: the specification of the chosen derived pullback supplies an additive underived functor,
-equal to `tensorPullback a` on objects and maps, together with a left-derived counit `ε`.
-Evaluate `ε` at `G[0]` in the homotopy category and compose with the localization of the
-identification of `a^*` applied to `G[0]` with `(a^*G)[0]`. -/
+`La^*(G[0]) ⟶ (a^*G)[0]` which is the derived-to-ordinary pullback comparison at `G`
+(Stacks, Tag 08HY). -/
 theorem exists_isDerivedModulePullbackComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

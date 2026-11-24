@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 The exact constant-tower comparison is invertible by the unbounded exact
 adjunction square and its K-injective normalization.
-(blueprint: aux-weil-pbc-direct-image-constant-mate-iso)
 -/
 
 @[expose] public noncomputable section
@@ -33,11 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The mate of the constant/pullback interchange is an isomorphism.  The
-proof uses the K-injective representative normalization of the right-derived
-constant-tower square; the mate is invertible on representatives and hence on
-all derived objects.
-(blueprint: aux-weil-pbc-direct-image-constant-mate-iso) -/
+/-- The mate of the constant/pullback interchange is an isomorphism. -/
 theorem directImage_constant_mate_isIso :
     IsIso ((mateEquiv (moduleAdjunction l E f) (towerAdjunction l E f)
       (.mk _ _ _ _ (constantInterchange l E

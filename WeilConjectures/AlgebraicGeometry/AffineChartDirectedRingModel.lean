@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartTensorComparison
 /-!
 # Directed ring models of base changes of an affine chart
 
-Source: Stacks Project, Limits, Tag 07RP (affine reduction), Tags 01YX and 01YW.
-(blueprint: lem-weil-pbc-affine-chart-directed-ring-model).
+## References
+
+* Stacks Project, Tags 07RP, 01YX and 01YW
 -/
 
 @[expose] public section
@@ -40,28 +41,8 @@ private theorem etale_iff_of_chart_factorization
 
 /-- One affine triple has a finitely presented ring model over the upper tail.
 The model identifies étaleness at the limit, and étaleness at a stage implies
-étaleness of the original chart at that stage.
-
-Source: Stacks Project, Limits, Tag 07RP, affine reduction; Tags 01YX and 01YW;
-Schemes, Tags 01JR and 01I4; Morphisms, Tags 01TQ and 02GJ.
-(blueprint: lem-weil-pbc-affine-chart-directed-ring-model).
-
-Proof: Let J be the upper tail of I above i₀. For i in J take the affine open
-Wᵢ = (Sᵢ → Sᵢ₀)⁻¹(W) and let F(i) = Γ(Wᵢ). The transition maps define F
-covariantly. Its initial ring F(i₀) canonically identifies with Γ(W). Take
-B = Γ(V), C = Γ(U), with the algebra structures induced by the maps to W.
-The restriction of f₀ gives an algebra map φ, finitely presented by
-LocallyOfFinitePresentation.finitePresentation_appLE. The preimages of U and V
-at any stage identify with U ×[W] Wᵢ and V ×[W] Wᵢ. By the affine pullback
-formula these are spectra of F(i) ⊗ B and F(i) ⊗ C; the restricted map is
-Spec(id ⊗ φ), as follows by checking both pullback projections. The restricted
-limit cone over W is limiting, and Spec takes the ring colimit to this limit.
-Hence the same formulas hold at the limit, and restriction/cancellation of the
-open inclusion of the target chart proves the first étale equivalence. Given
-étaleness of the ring-model map at i, the corresponding restricted chart map is
-étale; composing with the open inclusion into Yᵢ gives the last assertion.
-No compactness is used,
-and no index at which a ring map becomes étale is asserted here. -/
+étaleness of the original chart at that stage
+(Stacks, Tags 07RP, 01YX, 01YW, 01JR, 01I4, 01TQ and 02GJ). -/
 theorem exists_affineChart_directedRingModel
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

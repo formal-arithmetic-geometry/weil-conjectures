@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.FormalKernelBilinearActionAssociative
 
 /-! # The graded action on formal kernels
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087Z.
+## References
+
+* Stacks Project, Tag 087Z
 -/
 
 @[expose] public section
@@ -28,27 +30,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The associated graded ideal algebra acts on the successive formal-system kernels.
-Source: Stacks Project, Lemma 087Z, the graded module construction in its affine proof,
-and Section 0EHN; https://stacks.math.columbia.edu/tag/087Z.
-(blueprint: lem-weil-pbc-formal-kernel-graded-action-exists).
-
-Proof: Iterate the defining reductions to identify the quotient of F_l by I^r F_l
-with F_r for l >= r >= 1. Thus all transitions are epimorphisms. Locally lift a
-section x of K_n to F_(m+n+1). Since its reduction to F_n is zero when n>0, this lift
-lies locally in I^n F_(m+n+1); for n=0 there is no such condition. Multiplication by
-a representative a in I^m gives a section whose reduction to F_(m+n) is zero,
-and hence a section of K_(m+n). A change of lift lies in I^(n+1) F_(m+n+1),
-and a change of a lies in I^(m+1); their products lie in the annihilating submodule
-I^(m+n+1) F_(m+n+1). This proves independence. Quotient projections and transitions
-are sheaf epimorphisms, so the local construction defines bilinear action maps on
-arbitrary opens by gluing, compatible with restriction. Check associativity after
-locally lifting all inputs to one common level; the representative multiplication
-hypothesis on A makes both expressions equal to (ab)t=a(bt). The unit hypothesis
-makes the degree-zero unit act as 1. The kernel inclusions are monic, so these local
-identities prove the required laws. The construction gives the displayed identity
-for every existing lift t, whether or not a global lift exists for other sections.
-The argument includes n=0, m=0, empty opens, and zero modules. Finite generation of
-the action is not asserted here. -/
+(Stacks, Tag 087Z and Section 0EHN.) -/
 theorem formalKernel_graded_action_exists {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F : CoherentFormalModule X I)
     (A : GradedSheafAlgebra (formalAssociatedGradedPiece I))

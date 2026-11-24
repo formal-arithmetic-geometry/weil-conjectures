@@ -11,7 +11,12 @@ import WeilConjectures.AlgebraicGeometry.Constant.ConstantAdicQuotientModelReali
 
 /-! # Realization-level extension comparison for consecutive quotient models
 
-This is the geometric transport step in the algebraic extension argument. -/
+This is the geometric transport step in the algebraic extension argument.
+
+## References
+
+* Stacks Project, Tag 09C6 (consecutive quotient balancing); Tags 0D6D and 03Q3.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,17 +27,7 @@ attribute [local instance] HasDerivedCategory.ofIsGrothendieckAbelian
 
 /-- The consecutive tower normalization transports supplied constant models after
 inverse image and identifies the lower realization with derived scalar extension of
-the upper model.
-
-Source: Stacks Project, proetale.tex, Tag 09C6, consecutive quotient balancing;
-Tags 0D6D and 03Q3.
-(blueprint: lem-weil-pbc-constant-adic-quotient-model-realization-extension-iso).
-
-Proof: apply the normalization of the supplied adic tower at the consecutive
-indices, pull it back to the pointed etale chart, and paste the tensor-pullback
-comparison with the canonical constant quotient scalar comparison.  The two supplied
-model isomorphisms then identify the resulting endpoints.  Completion evaluation
-commutes with the quotient projections by the canonical factor maps. -/
+the upper model. -/
 theorem constantAdicQuotient_model_realization_extension_iso
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)

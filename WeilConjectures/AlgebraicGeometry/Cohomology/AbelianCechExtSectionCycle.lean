@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Ext cocycles give section cycles
 
-Source: Stacks Project, Tags 01EQ and 01FD.
-(blueprint: lem-pc-ext-section-cycle)
+## References
+
+* Stacks Project, Tags 01EQ, 01FD
 -/
 
 @[expose] public section
@@ -22,14 +23,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 
-/-- An Ext cocycle determines a section cycle by the constant-sheaf adjunction.
-Source: Stacks Project, Tag 01EQ, resolution sections; Mathlib's adjunction
-and the universal property of cycles. (blueprint: lem-pc-ext-section-cycle)
-
-Proof: Apply the adjunction to a. Naturality takes its composite with the
-resolution differential to the composite with the section differential, which
-is zero since a is a cocycle. Factor the resulting morphism through cycles
-and evaluate on the generator 1 of the lifted integers. -/
+/-- An Ext cocycle determines a section cycle by the constant-sheaf adjunction. -/
 theorem abelianCech_ext_section_cycle
     {X : Scheme.{u}} {F : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}}
     (I : InjectiveResolution F) (q : ℕ)

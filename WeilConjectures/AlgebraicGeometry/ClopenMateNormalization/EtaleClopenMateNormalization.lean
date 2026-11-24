@@ -120,9 +120,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Proper-support normalization of the finite etale clopen mate
 
-Source: Stacks Project, More on Etale Cohomology, Tag 0F7B,
-first paragraph of the proof of lemma-shriek-proper-and-open
-(blueprint: lem-cbc-etale-clopen-mate-normalization).
+## References
+
+* Stacks Project, More on Etale Cohomology, Tag 0F7B, first paragraph of the proof
+* Stacks Project, Tags 015F, 070K, 01JY, 01W4, 01W6, 03S5, 0F50, 0F51
 -/
 
 @[expose] public noncomputable section
@@ -159,8 +160,7 @@ variable {C₁ C₂ C₃ C₄ : Type*}
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
 
 /-- Exact localization of a natural-transformation square, retaining the canonical
-composition comparisons. Source: Stacks Tags 015F and 070K
-(blueprint: def-cbc-localized-clopen-square). -/
+composition comparisons. -/
 @[no_expose, irreducible] def clopenLocalizedSquare (σ : G ⋙ L' ⟶ L ⋙ G') :
     G.mapDerivedCategory ⋙ L'.mapDerivedCategory ⟶
       L.mapDerivedCategory ⋙ G'.mapDerivedCategory :=
@@ -239,8 +239,7 @@ section Plus
 variable [EnoughInjectives C₁] [EnoughInjectives C₃]
 
 /-- Exact localization of a natural-transformation square, retaining the canonical
-composition comparisons. Source: Stacks Tags 015F and 070K
-(blueprint: def-cbc-localized-clopen-square). -/
+composition comparisons. -/
 @[no_expose, irreducible] def clopenLocalizedSquarePlus (σ : G ⋙ L' ⟶ L ⋙ G') :
     G.mapDerivedCategoryPlus ⋙ L'.mapDerivedCategoryPlus ⟶
       L.mapDerivedCategoryPlus ⋙ G'.mapDerivedCategoryPlus :=
@@ -280,9 +279,7 @@ private theorem clopenLocalizedSquarePlus_fac (σ : G ⋙ L' ⟶ L ⋙ G')
 omit [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃]
   [EnoughInjectives C₁] [EnoughInjectives C₃] in
 /-- Component factorization of the exact localized square. This exposes the
-normalization of the constructed map without exposing its implementation.
-Source: Stacks Tags 015F and 070K
-(blueprint: def-cbc-localized-clopen-square). -/
+normalization of the constructed map without exposing its implementation. -/
 theorem clopenLocalizedSquarePlus_factorization (σ : G ⋙ L' ⟶ L ⋙ G')
     (K : HomotopyCategory.Plus C₂) :
     (clopenLocalizedSquarePlus σ).app (DerivedCategory.Plus.Qh.obj K) ≫
@@ -415,13 +412,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek
   upperStarLowerStarAdjunction openImmersionLowerShriekUpperStarAdjunction
 
-/-- The lift to the cartesian open is clopen.
-Source: Stacks Tags 01JY, 01W4, 01W6 and 0F7B
-(blueprint: lem-cbc-etale-clopen-mate-normalization).
-Proof: its square with k and the open projection is cartesian since i is monic.
-Thus the lift is open. The projection to S is proper, hence separated, and its
-composite with the lift is r, which is proper. Proper-over-separated makes the
-lift proper. An open proper immersion is a closed immersion. -/
+/-- The lift to the cartesian open is clopen. -/
 theorem lift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -438,9 +429,7 @@ theorem lift_clopen {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((pullback.lift k r h).isClosedMap.isClosed_range)⟩
 
 /-- Identity on a clopen component and zero on its complement: the ordinary
-inverse-image/direct-image unit, transported through the canonical support inclusion.
-Source: Stacks Tags 03S5, 0F51 and 0F7B
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+inverse-image/direct-image unit, transported through the canonical support inclusion. -/
 def projection {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
     𝟭 (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⟶
@@ -474,8 +463,7 @@ private theorem projection_restrict {U X : Scheme.{u}} (s : U ⟶ X)
   simp only [CategoryTheory.Functor.map_inv, IsIso.inv_hom_id_assoc]
   exact (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) s).left_triangle_components F
 
-/-- Transport of open extension along equality of its scheme morphism.
-Source: Stacks Tag 03S5 (blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- Transport of open extension along equality of its scheme morphism. -/
 def openCongr {U X : Scheme.{u}} {f g : U ⟶ X}
     [IsOpenImmersion f] [IsOpenImmersion g] (e : f = g) :
     openImmersionLowerShriek (ModuleCat.{u + 1} Λ) f ≅
@@ -545,9 +533,7 @@ private theorem open_comp_unit_transport {V P W : Scheme.{u}}
     open_comp_unit Λ s b F
 
 /-- The prescribed composite of cartesian open base change, the clopen projection,
-and the canonical open-extension and inverse-image compositors.
-Source: Stacks Tag 0F7B, first proof paragraph
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+and the canonical open-extension and inverse-image compositors. -/
 @[no_expose] def alpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -578,9 +564,7 @@ Source: Stacks Tag 0F7B, first proof paragraph
       (eqToIso (congrArg (upperStar (ModuleCat.{u + 1} Λ))
         (pullback.lift_snd k r h))).hom)
 
-/-- The prescribed sheaf alpha, expressed using its four defining factors.
-Source: Stacks Tag 0F7B, first proof paragraph
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- The prescribed sheaf alpha, expressed using its four defining factors. -/
 theorem alpha_app {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
@@ -798,8 +782,7 @@ private theorem alpha_open_unit {V W S T : Scheme.{u}}
       (ModuleCat.{u + 1} Λ) (IsPullback.of_hasPullback p i).flip.toCommSq E)
     _ (upper_comp_transport Λ s q r (pullback.lift_snd k r h)) F
 
-/-- The ordinary proper-adjunction mate of the specified clopen comparison.
-Source: Stacks Tag 0F7B (blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- The ordinary proper-adjunction mate of the specified clopen comparison. -/
 @[no_expose] def mate {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -810,9 +793,7 @@ Source: Stacks Tag 0F7B (blueprint: lem-cbc-etale-clopen-mate-normalization). -/
   mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r)
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p) (alpha Λ k r p i h)
 
-/-- Exact localization of the specified alpha, on the ordinary derived categories.
-Source: Stacks Tags 015F and 0F7B
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- Exact localization of the specified alpha, on the ordinary derived categories. -/
 @[no_expose] def derivedAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -822,9 +803,7 @@ Source: Stacks Tags 015F and 0F7B
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategory :=
   clopenLocalizedSquare (alpha Λ k r p i h)
 
-/-- Restriction of the exact localization of alpha to bounded-below objects.
-Source: Stacks Tags 015F and 0F7B
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- Restriction of the exact localization of alpha to bounded-below objects. -/
 @[no_expose] def derivedAlphaPlus {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -834,9 +813,7 @@ Source: Stacks Tags 015F and 0F7B
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus :=
   clopenLocalizedSquarePlus (alpha Λ k r p i h)
 
-/-- The bounded-below alpha is the exact localized sheaf square.
-Source: Stacks Tags 015F and 0F7B
-(blueprint: def-cbc-etale-clopen-mate-normalization-data). -/
+/-- The bounded-below alpha is the exact localized sheaf square. -/
 theorem derivedAlphaPlus_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -844,9 +821,7 @@ theorem derivedAlphaPlus_eq {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   rfl
 
 /-- The actual proper mate, using the unbounded derived adjunction induced by the
-ordinary inverse-image/direct-image adjunction.
-Source: Stacks Tags 0F7B and 070K
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+ordinary inverse-image/direct-image adjunction. -/
 @[no_expose] def derivedMate {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -858,9 +833,7 @@ Source: Stacks Tags 0F7B and 070K
     (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p)
     (derivedAlpha Λ k r p i h))
 
-/-- The proper mate in D+, formed with the induced bounded-below adjunctions.
-Source: Stacks Tags 0F7B and 015F
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- The proper mate in D+, formed with the induced bounded-below adjunctions. -/
 def derivedMatePlus {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
@@ -873,9 +846,7 @@ def derivedMatePlus {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (derivedAlphaPlus Λ k r p i h))
 
 /-- The support-preserving comparison selected from the recorded coherence theorem.
-Its inclusion into (ir)_* = (pk)_* retains every section, uniquely determining it.
-Source: Stacks Tags 0F50, 0F51 and 0F7B
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+Its inclusion into (ir)_* = (pk)_* retains every section, uniquely determining it. -/
 @[no_expose] def supportComparison [Finite Λ] {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
@@ -887,9 +858,7 @@ Source: Stacks Tags 0F50, 0F51 and 0F7B
   (properOpenInterchangeData Λ).underived k i r p h
 
 /-- The named normalized finite comparison from the recorded coherence theorem.
-Its derived-unit normalization uniquely determines its natural transformation.
-Source: Stacks Tag 0F7B
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+Its derived-unit normalization uniquely determines its natural transformation. -/
 def normalizedComparison [Finite Λ] {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
@@ -900,9 +869,7 @@ def normalizedComparison [Finite Λ] {V W S T : Scheme.{u}}
         (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus :=
   (properOpenInterchangeCoherence Λ).choose_spec.choose k i r p h
 
-/-- The degreewise support identification, followed by the specified p_*t.
-Source: Stacks Tag 0F7B, the displayed chain map in its first proof paragraph
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- The degreewise support identification, followed by the specified p_*t. -/
 @[no_expose] def resolutionArrow [Finite Λ] {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
@@ -917,9 +884,7 @@ Source: Stacks Tag 0F7B, the displayed chain map in its first proof paragraph
   (NatTrans.mapHomologicalComplex (supportComparison Λ k r p i h).hom (.up ℤ)).app J ≫
   ((lowerStar (ModuleCat.{u + 1} Λ) p).mapHomologicalComplex (.up ℤ)).map t
 
-/-- The chain transpose alpha followed by the ordinary r-counit and the chosen t.
-Source: Stacks Tag 0F7B and the termwise adjunction
-(blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- The chain transpose alpha followed by the ordinary r-counit and the chosen t. -/
 @[no_expose] def transposeArrow {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
@@ -937,16 +902,14 @@ Source: Stacks Tag 0F7B and the termwise adjunction
     (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) r).mapHomologicalComplex
       (.up ℤ)).counit.app J) ≫ t
 
-/-- Canonical source identification between D+ and its fully faithful ambient category.
-Source: Stacks Tags 015F, 070K (blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- Canonical source identification between D+ and its fully faithful ambient category. -/
 def sourceCompatibility {V S T : Scheme.{u}} (r : V ⟶ S) (i : S ⟶ T)
     [IsOpenImmersion i]
     (L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategory.mapIso
     ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusCompatibility.app L)
 
-/-- Canonical target identification between D+ and its fully faithful ambient category.
-Source: Stacks Tags 015F, 070K (blueprint: lem-cbc-etale-clopen-mate-normalization). -/
+/-- Canonical target identification between D+ and its fully faithful ambient category. -/
 def targetCompatibility {V W T : Scheme.{u}} (k : V ⟶ W) (p : W ⟶ T)
     [IsOpenImmersion k]
     (L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
@@ -1151,31 +1114,8 @@ private theorem ordinary_normalized [Finite Λ] {V W S T : Scheme.{u}}
 
 /-- The underived mate is exactly the section-preserving proper-support identification;
 the derived mate is the named normalized finite comparison and agrees with its ambient
-unbounded construction. Quasi-compactness is required only as in the node, with no
-cartesian assumption. The representative and transpose clauses are stated below.
-Source: Stacks Tag 0F7B, first proof paragraph
-(blueprint: lem-cbc-etale-clopen-mate-normalization).
-
-Proof: (1) The lift is open by open base change and proper by proper-over-separated,
-hence clopen. (2) The cartesian open comparison is the transpose of the open unit;
-restricting it and the clopen projection along k gives identity under those units.
-(3) Include the proper mate into p_*k_*F. Under the composite inverse-image
-adjunction its transpose is the r-counit. The support identification has exactly
-the same transpose because it preserves underlying sections. Cancel the monic
-support inclusion to identify the maps. (4) Naturality gives degreewise equality
-on complexes. (5) Exact inverse image and open extension descend through localization.
-The derived adjunction is induced by the ordinary one: on K-injective targets its
-counit is represented by the chain counit, by derived-counit compatibility and the
-K-injective Hom bijection. (6) Naturality of that bijection in t gives the support
-chain map followed by p_*t. (7) This is exactly the coherence theorem's normalized
-finite comparison. The same argument includes r = identity and V = S. The canonical
-D+ compatibility isomorphisms identify the two derived adjunctions and exact
-localizations, proving the displayed ambient equation.
-Dependencies: properSupportSheafComposition, derivedExtensionZeroBaseChangeUnderivedCompatibility,
-etaleInverseImageModulesExact, exact-functor localization, termwise adjunction,
-K-injective total derivation, preservation of K-injectives by right adjoints of
-exact functors, the K-injective Hom bijection, derived-counit compatibility, and
-properOpenInterchangeCoherence, as in steps 1--7 of the DAG proof. -/
+unbounded construction. No cartesian assumption is made. The representative and
+transpose clauses are stated below. -/
 theorem etaleClopenMateNormalization [Finite Λ] {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
     [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]

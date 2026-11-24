@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.CanonicalModuleBaseChangeIsoComparison
 
 /-! # The canonical module base-change arrow in affine charts
 
-Source: Stacks Project, Tags 08IB (local reduction), 08HY (the canonical mate),
-and 08FE (restriction of derived direct image).
+## References
+
+* Stacks Project, Tags 08IB, 08HY and 08FE
 -/
 
 @[expose] public section
@@ -38,22 +39,8 @@ private theorem comparison_comp
   rw [← Category.assoc, h, Category.assoc, h', ← Category.assoc]
 
 /-- Restriction and affine charts identify the canonical *arrow*, without asserting
-that it is invertible. Both the restricted scheme and its module are explicit.
-Source: Stacks Project, Tag 08IB, first paragraph of the proof; Tag 08HY and Tag 08FE.
-(blueprint: lem-pc-canonical-module-base-change-affine-chart-comparison).
-
-Proof: first apply exists_canonicalModuleBaseChange_open_comparison to V and W.
-This gives the comparison cV on the chosen pullback of f restricted to V and
-g.resLE V W, and endpoint isomorphisms aV and bV with a commuting square.
-Apply exists_canonicalModuleBaseChange_iso_comparison to that chosen cartesian
-square and the spectrum charts V.isoSpec and W.isoSpec. Its module is exactly
-H = G restricted to U. It gives c0, endpoint isomorphisms a0 and b0, and a second
-commuting square. The resulting chart maps are definitionally the displayed fA
-and gA. Take a = aV followed by a0 and b = bV followed by b0. Associativity
-composes the two square equations, giving the required equality. The transported
-comparison c0 satisfies the comparison predicate supplied by the coordinate step.
-Neither step assumes flatness, quasi-coherence or invertibility of base change.
-Both apply to empty opens and the zero module. -/
+that it is invertible. Both the restricted scheme and its module are explicit
+(Stacks, Tags 08IB, 08HY and 08FE). -/
 theorem exists_canonicalModuleBaseChange_affineChart_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

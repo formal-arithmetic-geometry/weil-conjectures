@@ -126,22 +126,7 @@ private noncomputable def intersectComplexIso
 
 
 /-- Evaluating the categorical Čech complex of the intersection presheaf gives
- the concrete Čech complex for the family intersected with the evaluating open.
-
-Source: blueprint `lemma-coherent-base-change-invertible-sheaves`, proof paragraph 1, Čech
-coordinates. (blueprint: lem-pc-cech-evaluation-comparison)
-
-Proof: In degree n, the categorical product is indexed by tuples
- a : Fin (n+1) → ι. Evaluation and forgetting scalars preserve this product.
-Its a-th factor is P((∏ b, U(a b)) ∩ V), canonically identified with
-P(⋂ b, (U(a b) ∩ V)); here Fin (n+1) is nonempty. The universal property
-of the product identifies these factors with the dependent-function cochains
-of the concrete complex. A coface deletes the corresponding tuple entry and
-restricts along the inclusion of intersections in both constructions. Thus
-these degreewise identifications commute with every coface and with their
-alternating sums, giving an isomorphism of cochain complexes. This argument
-also applies to empty opens, empty index types, and zero coefficient modules.
--/
+ the concrete Čech complex for the family intersected with the evaluating open. -/
 theorem cech_evaluation_comparison
     {X : TopCat.{u}} {ι : Type u} {R : Type u} [Ring R]
     (U : ι → Opens X) (P : (Opens X)ᵒᵖ ⥤ ModuleCat.{u} R) (V : Opens X) :

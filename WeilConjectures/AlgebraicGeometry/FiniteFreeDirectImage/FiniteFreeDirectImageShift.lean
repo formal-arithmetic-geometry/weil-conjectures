@@ -12,7 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # Shift compatibility of the canonical coefficient comparison
 
-Source: Stacks Project, Tags 07A6 and 0DVC.
+## References
+
+* Stacks Project, Tags 07A6, 0DVC
 -/
 
 @[expose] public noncomputable section
@@ -74,16 +76,7 @@ private theorem restriction_shift {Z W : Scheme.{u}} {q : Z ⟶ W}
       Category.comp_id, Category.assoc] using h
   exact heq ▸ hm
 
-/-- The canonical scalar/direct-image mate commutes with the prescribed shifts.
-Source: Stacks Project, Tags 07A6 and 0DVC.
-(blueprint: lem-sp-finite-free-direct-image-shift).
-
-Proof: restriction/pullback is induced termwise, hence commutes with shifts.
-The normalized restriction/direct-image comparison is its mate under the canonical
-unbounded derived adjunctions. Those adjunctions commute with shifts, as do scalar
-adjunctions with their induced left shifts. Conjugation therefore gives shift
-compatibility of balancing, and a second application of the mates correspondence
-gives shift compatibility of comparison. -/
+/-- The canonical scalar/direct-image mate commutes with the prescribed shifts. -/
 theorem finiteFreeDirectImageShift {Z W : Scheme.{u}} {q : Z ⟶ W}
     (sW : ScalarModel W) (sZ : ScalarModel Z)
     {R S : Coefficients q} (a : CoefficientMap R S) :

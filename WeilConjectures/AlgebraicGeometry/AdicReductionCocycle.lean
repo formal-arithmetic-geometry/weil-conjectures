@@ -10,8 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 
 /-! # Cocycle for the canonical quotient reductions
 
-Source: Stacks Project, Tags 06YY and 09C2, ordinary tensor balancing.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YY and 09C2
 -/
 
 @[expose] public noncomputable section
@@ -365,18 +366,7 @@ private theorem rho_eq (X : Scheme.{u})
   rfl
 
 /-- The canonical quotient reassociations obey their cocycle before any descent.
-Source: Stacks Project, Tag 09C2, repeated quotient tensor computations; parent
-proof steps 1 and 4. (auxiliary; not a blueprint node).
-
-Proof: resolve N by a flat-term K-flat complex P. Successive scalar extensions
-are computed on the successive ordinary extensions of P. Use the normalization
-adicFiniteExtendCompFormula for each reassociation and cancel the invertible
-computation maps. Both resulting ordinary chain maps send
-(((p tensor x) tensor y) tensor z) to
-p tensor q(r,n)(x) * q(m,n)(y) * z. They agree by associativity of multiplication
-and the quotient factor identities. Sheafification preserves this equality.
-Transport along the resolution isomorphism by naturality. The same calculation
-includes equal indices, where the quotient factor is the identity. -/
+(Stacks, Tag 09C2). -/
 theorem adicReduction_cocycle (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (N : adicFiniteAmbient.{u, v} X A)

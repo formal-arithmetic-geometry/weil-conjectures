@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ScalarUnitClassPullback
 
 /-! # External cup with one after identifying the unit coefficients
 
-Source: Stacks Project, Varieties, Tag 0BED; Cohomology, cup products.
-(blueprint: lem-sc-external-cup-unit-coefficient-identities).
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -29,25 +30,8 @@ noncomputable local instance (X : Scheme.{u}) :
   SheafOfModules.monoidalCategory X.sheaf
 
 /-- Identifying the two pulled-back unit coefficients and applying the tensor unitor
-turns external cup with the degree-zero class of one into scalar projection pullback.
-Source: Stacks Project, Tag 0BED, maps preceding varieties-equation-kunneth-on-cech;
-Cohomology, section-cup-product; Tag 01F7, functoriality.
-(blueprint: lem-sc-external-cup-unit-coefficient-identities).
-
-Proof: Compute scalar cohomology on a common acyclic resolution and represent the
-canonical degree-zero unit class by the augmentation of the section one. The scalar
-Ext comparison sends it to the degree-zero scalar-unit morphism, by evaluation at one
-in the constant-sheaf adjunction. Projection inverse image followed by the coefficient
-map preserves this class: its adjunction formula is the tensor-pullback unit formula,
-and the structure-sheaf ring map sends one to one. The tensor pairing on a computing
-resolution extends the sectionwise tensor map. Composing with the two adjoint unit
-maps and the tensor unitor sends s tensor one and one tensor s to s. Consequently
-pairing a cycle with the unit cocycle gives its pulled-back cycle. The same formula
-holds on boundaries, so it descends to cohomology. The derived Ext tensor construction
-of scalarCohomologyCup computes this pairing, independently of the resolution lifts;
-apply the acyclic-resolution characterization of cup products. In degrees (1,0) and
-(0,1) there is no interchange sign. These give the two displayed identities, before
-any module-to-abelian comparison and without any Kunneth or spanning assertion. -/
+turns external cup with the degree-zero class of one into scalar projection pullback
+(Stacks, Tags 0BED and 01F7). -/
 theorem external_cup_unit_coefficient_identities (k : Type u) [Field k]
     (X Y : Scheme.{u}) (f : X ⟶ Spec (CommRingCat.of k))
     (g : Y ⟶ Spec (CommRingCat.of k)) :

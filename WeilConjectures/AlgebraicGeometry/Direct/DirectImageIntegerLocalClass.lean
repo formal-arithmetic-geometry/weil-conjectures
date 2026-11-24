@@ -13,9 +13,8 @@ import WeilConjectures.AlgebraicGeometry.Square.SquareLocalClassNaturality
 
 /-! # The local direct-image class on an integer complex
 
-Source: Stacks Project, Cohomology, Tag 01E4, lemma-describe-higher-direct-images,
-and Tags 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-integer-local-class).
+## References
+* Stacks Project, Tags 01E4, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -90,16 +89,6 @@ private theorem directImage_leray_model
 
 /-- The derived direct-image local class is ordinary sheafification on a K-injective
 integer complex, with the specified resolution and Leray normalizations.
-Source: Stacks Project, Tags 01E4, 0BKJ and 0D5X.
-(blueprint: lem-weil-pbc-direct-image-integer-local-class).
-
-Proof: Evaluate the universal factorization defining the Leray transformation at the
-complex, and cancel the direct-image derived unit. Compare the two direct-image
-functors by a map between K-injective models; naturality of their resolution
-isomorphisms identifies the comparison on the given model. Transport by the supplied
-isomorphism from the derived object. Taking homology identifies the Leray comparison
-with the derived-section unit. Naturality of the local class and its unit calculation
-then cancel all resolution factors and leave the ordinary sheafification class.
 -/
 theorem directImage_integer_localClass
     {X Y : RingedSpace.{u}}

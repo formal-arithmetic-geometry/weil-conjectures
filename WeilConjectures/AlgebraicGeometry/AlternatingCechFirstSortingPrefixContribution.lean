@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechSortingOperators
 /-!
 # Prefix contributions in the first sorting homotopy
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1.
-(blueprint: lem-pc-alternating-cech-first-sorting-junction-prefix-contribution)
+## References
+
+* Stacks Project, Tag 01FM
 -/
 
 @[expose] public section
@@ -50,25 +51,8 @@ private theorem prefix_junction_filter {p : ℕ}
     simp [cechJunction]
 
 open Classical in
-/-- Prefix-labelled junction deletions contribute the unadvanced partial sorting stages.
-Source: Stacks Project, Cohomology of Sheaves, Tag 01FM, equation 20.23.6.1.
-
-Proof: Fix sigma, a and a partial sorting permutation tau. In the prefix of
-q = cechJunction sigma tau a, q(r) = sigma(r). Injectivity of sigma shows
-that q(r) = sigma(a) and r <= a hold exactly when r = a. Removing this
-position gives q composed with a.succAbove = tau: below a this uses the
-fixed-prefix condition, and at and above a it uses the tail branch of q.
-The composite of the two index maps is the index map for tau because
-X.Opens is a thin category, so parallel morphisms are equal. Apply functoriality
-of F and move integer scalar
-multiplication through its additive maps. The two powers (-1)^a multiply
-to 1, so the remaining term is sign(tau) times the restriction along tau.
-For a pair failing the stable or partial sorting filter, both contributions
-are zero. The partial sorting filter is exactly the filter defining B(a).
-Summing these identities over r, tau, a and sigma, and commuting the sigma
-and a sums, gives the claimed equality. No uniqueness of stable sorting is
-needed here. Repeated values of t are harmless since deletion uses labels.
-(blueprint: lem-pc-alternating-cech-first-sorting-junction-prefix-contribution) -/
+/-- Prefix-labelled junction deletions contribute the unadvanced partial sorting stages
+(Stacks, Tag 01FM). -/
 theorem cechFirstSortingJunctionPrefixContribution (X : Scheme.{u}) {I : Type v}
     [LinearOrder I] (U : I → X.Opens)
     (F : X.Opensᵒᵖ ⥤ AddCommGrpCat.{w})

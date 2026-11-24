@@ -14,8 +14,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Local quotient models for shifted stabilized kernels
 
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b).
-(blueprint: lem-weil-pbc-formal-kernel-shifted-stalk-model).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -25,22 +24,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false
 
 /-- After a uniform shift, the stalk system is the power-quotient system of a module.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a) and (b).
-(blueprint: lem-weil-pbc-formal-kernel-shifted-stalk-model).
-
-Proof: Apply the compatible stalk presentation theorem to obtain p_m : M -> S_m
- with the uniform bound on ker p_(n+d). The stalk q_n of the defining quotient
- projection is surjective with kernel J^(n+1) S_(n+d), by exactness of stalks
- and the stalk formula for ideal powers and their products. Since p_(n+d) is
- surjective, the composite f_n = q_n p_(n+d) is surjective and its kernel is
- J^(n+1) M + ker p_(n+d). The bound makes this sum just J^(n+1) M.
- The first isomorphism theorem therefore gives M/J^(n+1) M isomorphic to
- the stalk of the shifted quotient. Use its inverse for E_n. To check the
- transition equation, lift a stalk section along f_(n+1); the cokernel
- equation for formalModuleQuotientMap and compatibility of p reduce both
- sides to the class of the same element of M. This also applies to zero
- and unit ideals, zero modules, and the empty scheme. -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_shifted_stalk_model
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

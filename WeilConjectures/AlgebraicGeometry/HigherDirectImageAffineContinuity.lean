@@ -13,8 +13,9 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-! # Affine sections of higher images under inverse limits
 
-Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
-(blueprint: sbc-lem-higher-image-affine-continuity).
+## References
+
+* Stacks Project, Tags 09Z1 and 03Q8.
 -/
 
 @[expose] public section
@@ -27,33 +28,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- On each affine etale object, the canonical higher-image cocone is a colimit
-of modules. Object isomorphisms and the equations on maps and legs present exactly
-the canonical diagram; they impose no extra geometric assumption.
-Source: Stacks Project, Tags 03Q8 and 09Z1, proof using cohomology continuity 09YQ.
-(blueprint: sbc-lem-higher-image-affine-continuity).
-
-Proof: Express higher images as sheafifications of restricted cohomology presheaves
-(Tag 03Q8). For an affine etale V over S, base change of the inverse system has qcqs
-stages, affine transitions, and limit V times_S c.pt. The sheaves are pulled back
-from W; their further pullbacks to the limit form a diagram canonically isomorphic
-to the constant diagram with value the pullback of G. The cofiltered index is
-nonempty and connected, so its opposite diagram has this pullback as colimit.
-Apply continuity for sheaves as degree-zero complexes (09YQ, or 0EZM) on every
-affine etale object over V. For a cofiltered category, first use a small cofinal
-directed presentation, and transport the limit and colimit along cofinality.
-The resulting presheaf colimit comparison is an isomorphism on the affine basis.
-These maps commute with restriction because they arise from the canonical derived
-adjunction units. Sheafification commutes with colimits, giving the comparison of
-sheaves. On the small etale site evaluation on an affine object preserves filtered
-colimits: finite affine etale covers suffice, their intersections are quasi-compact,
-and the finite equalizer sheaf condition commutes with filtered module colimits.
-Evaluating the sheaf comparison therefore gives precisely the displayed cocone.
-The same argument works for modules over the constant ring: an injective module
-sheaf is acyclic for abelian section cohomology on every etale object (Tag 03FD),
-so an injective module resolution computes the underlying abelian cohomology.
-This identifies restricted cohomology and derived pushforward after forgetting
-scalars. The comparison maps are linear, and forgetting reflects isomorphisms.
-For negative q all cohomology objects vanish, so the same conclusion holds. -/
+of modules (Stacks, Tags 03Q8 and 09Z1). -/
 theorem nonempty_isColimit_higher_image_affine
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)

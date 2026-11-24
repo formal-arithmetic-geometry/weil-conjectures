@@ -15,8 +15,10 @@ import WeilConjectures.CategoryTheory.RingedKoszulCompletionReflector
 The Koszul reflector identification `koszul_quotient_reflector`.
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section
@@ -90,19 +92,8 @@ private theorem complete_of_iso {R S : Sheaf J CommRingCat.{u}} (q : R ⟶ S)
     (H.mapIso ((Iso.refl _).prod ((ringedDerivedRestriction R U).mapIso e))).symm
 
 /-- Koszul and finite-quotient completion are canonically identified, preserving the units;
-their common functor is the reflector for the local internal-Hom completeness condition.
-Source: Stacks 099L, 099M, 0A0E
-(auxiliary; not a blueprint node).
-Proof: apply the ringed Koszul reflector to the global generators, including the empty
-list. For constant coefficients the Noetherian Koszul augmentation has pro-zero cone.
-Exact constant sheafification and tensor by a fixed K-flat model preserve this property.
-The strict-tower derived-limit theorem inverts the augmentation and identifies its unit
-with the quotient unit. For completed coefficients, restrict to constant coefficients:
-the finite reductions, strict Koszul tensors and units agree, and restriction identifies
-total derived limits by the flat exact adjunction on strict towers. Conservativity
-of exact restriction detects the augmentation isomorphism over the completion as well.
-Transport the reflector property and the unit-isomorphism criterion across this
-unit-preserving natural isomorphism. -/
+their common functor is the reflector for the local internal-Hom completeness condition
+(Stacks, Tags 099L, 099M and 0A0E). -/
 theorem koszul_quotient_reflector [IsNoetherianRing A] (b : Bool) (r : ℕ) (a : Fin r → A)
     (ha : Ideal.span (Set.range a) = I) :
     ∃ K : KoszulPresentation J A I b r a,

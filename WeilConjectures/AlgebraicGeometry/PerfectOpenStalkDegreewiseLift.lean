@@ -15,8 +15,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Extending degreewise maps between perfect open-site stalks
 
-Source: Stacks Project, Tags 09RE and 01CP.
-(blueprint: lem-sc-perfect-open-stalk-degreewise-lift).
+## References
+
+* Stacks Project, Tags 09RE and 01CP.
 -/
 
 @[expose] public section
@@ -28,27 +29,8 @@ namespace AlgebraicGeometry.Scheme
 noncomputable section
 
 /-- Degreewise stalk maps extend on a common affine neighbourhood, without any
-chain equations, in the coordinates of the canonical restriction comparison.
-
-Source: Stacks Project, Tag 09RE, affine finite-presentation calculation, and
-Tag 01CP, finite-presentation internal-Hom stalk comparison.
-(blueprint: lem-sc-perfect-open-stalk-degreewise-lift).
-
-Proof: Pass from the slice site over U to the open subscheme U. The finite-free
-retractions make every term of P finitely presented. Apply the internal-Hom stalk
-comparison to each component and represent its preimage by a section of internal
-Hom near x. Such a section is a local sheaf morphism, giving the required local
-map without any finiteness assumption on its target. Outside the finite support interval of P,
-use zero maps, since the source is zero.
-Intersect the finitely many neighbourhoods, then take an affine neighbourhood W
-of x inside the intersection. Restrict all representatives to W. Cofinality of
-neighbourhoods inside W and the open-immersion stalk-ring isomorphisms give a
-natural isomorphism `openModuleStalkRestrictionComparison` between restriction
-followed by the W stalk and the U stalk; apply it termwise to obtain e. The germ
-formulas give the stated component
-identities. Empty source support intervals and zero ranks require no representatives
-and give the zero family. No perfectness assumption on Q or affineness
-assumption on U is needed. No differential compatibility is imposed or asserted. -/
+chain equations, in the coordinates of the canonical restriction comparison
+(Stacks, Tags 09RE and 01CP). -/
 theorem exists_affine_perfect_open_stalk_degreewise_lift
     (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)
     (P Q : CochainComplex

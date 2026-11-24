@@ -14,8 +14,9 @@ public import Mathlib.Basic.UnivLE
 
 /-! # A universe bound from a nonzero etale module-sheaf section
 
-Source: the sheaf condition (Stacks Project, Sites, Definition 00VR), applied to
-scheme disjoint unions (Schemes, Section 01JA). The size argument is written by S1.
+## References
+
+* Stacks Project, Tags 00VR and 01JA
 -/
 
 @[expose] public section
@@ -25,24 +26,8 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- A nonzero section forces the scheme universe to be small in the section universe.
-Source: Stacks Project, Sites, Definition 00VR (sheaf condition), and Schemes,
-Section 01JA (gluing schemes, including disjoint unions); size argument written by S1.
-(blueprint: lem-weil-pbc-etale-module-sheaf-nonzero-section-universe).
-
-Proof: For each type A in the scheme universe, form the disjoint union V of A copies
-of U, with its etale structure map to X. The summand inclusions form an etale cover.
-Put E = F(U). For each a in A, prescribe maps E -> E that are the identity on summand a
-and zero on every other summand. On two distinct summands a common source is empty,
-so its section module is terminal; on the same summand the two restriction arrows
-are equal since the inclusion is a monomorphism. Thus the family is compatible.
-The module-valued sheaf condition glues it to a map t(a) : E -> F(V). If t(a) = t(b)
-with a != b, restriction to summand a gives id_E = 0. Applying this equality to s
-contradicts s != 0. Hence A embeds in the type of module maps E -> F(V), which lies
-in the section universe. This proves Small A for every A, namely UnivLE.
-The empty indexing type causes no problem: the same argument supplies its unique
-empty injection. Empty U and the zero coefficient ring cannot have the required
-nonzero section. No products in the module category or bounds on A are assumed. -/
+/-- A nonzero section forces the scheme universe to be small in the section universe
+(Stacks, Tags 00VR and 01JA). -/
 theorem etale_module_sheaf_section_univLE (X : Scheme.{u}) (Λ : Type v) [CommRing Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{max v w} Λ))
     (U : X.Etale) (s : F.obj.obj (op U)) (hs : s ≠ 0) : UnivLE.{u, max v w} := by

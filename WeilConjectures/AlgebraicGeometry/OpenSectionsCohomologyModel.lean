@@ -15,7 +15,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 
 /-! # Ordinary representatives for the open-sections comparison
 
-Source: Stacks Project, Tags 08BS and 079V.
+## References
+
+* [Stacks, Tags 08BS and 079V]
 -/
 
 @[expose] public section
@@ -30,14 +32,12 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The canonical abelian structure on ringed-space modules, cached for elaboration.
-This is an abbreviation of Mathlib's sheaf-module abelian instance.
-(blueprint: lem-sc-open-sections-cohomology-model-comparison). -/
+This is an abbreviation of Mathlib's sheaf-module abelian instance. -/
 abbrev openComparisonModuleAbelian (X : RingedSpace.{u}) :
     Abelian (SheafOfModules.{u} (moduleRings X)) := inferInstance
 
 /-- The canonical abelian structure on over-site modules, cached for elaboration.
-This is an abbreviation of Mathlib's sheaf-module abelian instance.
-(blueprint: lem-sc-open-sections-cohomology-model-comparison). -/
+This is an abbreviation of Mathlib's sheaf-module abelian instance. -/
 abbrev openComparisonOverModuleAbelian (X : RingedSpace.{u})
     (V : TopologicalSpace.Opens X) :
     Abelian (SheafOfModules.{u} ((moduleRings X).over V)) := inferInstance
@@ -256,28 +256,8 @@ set_option linter.unusedSectionVars false in
 -- Inline the standard module-derived category to match the comparison map's data.
 set_option linter.style.haveILetI false in
 -- The normalized comparison checks several concrete functor identifications.
-/-- The open-sections comparison is normalized on every ordinary complex class.
-Source: Stacks Project, Tags 08BS and 079V.
-(blueprint: lem-sc-open-sections-cohomology-model-comparison).
-
-Proof: Let T be restriction through the over-equivalence. Extension by zero is an exact
-left adjoint of over-restriction, so the adjunction criterion for preservation of
-K-injectives applies. The over-equivalence also preserves K-injectives. Thus T sends
-K-injectives to K-injectives. On a K-injective representative J the ordinary-to-derived
-units for ambient sections and for global sections on T(J) are isomorphisms.
-The exact scalar-forgetting functors commute with homology. Conjugate the ordinary
-sections isomorphism openComparisonOrdinaryIso by these two units and by the exact
-restriction factorization to obtain the comparison at Q(J). Naturality of all four
-maps proves naturality for homotopy classes of chain maps. Localization is fully
-faithful on K-injectives, and every derived object has such a representative, so this
-comparison descends to a natural isomorphism on the specified ambient derived category.
-For an arbitrary complex K choose a quasi-isomorphism K to J. Naturality of both units
-and of the sections and homology comparisons proves the displayed square after mapping
-to J. Since the induced derived map is invertible, cancel it to obtain the square on K.
-No quasi-coherence or boundedness is required; an empty open and the zero ring give
-zero groups with the same comparison. The two module-derived categories may have
-different universe choices: all conjugations occur through their own units and Q.
--/
+/-- The open-sections comparison is normalized on every ordinary complex class
+(Stacks, Tags 08BS and 079V). -/
 theorem exists_openComparison_cohomology_model_iso :
     ∃ e : (openComparisonRestriction A U).mapDerivedCategory ⋙
         openComparisonGlobalCohomology A U ≅ openComparisonAmbientCohomology A U,

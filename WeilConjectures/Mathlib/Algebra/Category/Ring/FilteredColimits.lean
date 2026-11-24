@@ -364,8 +364,7 @@ noncomputable def adjoinFinsetCocone : Cocone (adjoinFinsetDiagram k K) where
   ι := { app S := ofHom (Algebra.adjoin k (S : Set K)).val.toRingHom }
 
 /-- A `k`-algebra `K` is the filtered colimit in `CommRingCat` of its `k`-subalgebras generated
-by finite subsets: this is checked on underlying types, where every element of `K` lies in the
-subalgebra it generates. -/
+by finite subsets. -/
 noncomputable def isColimitAdjoinFinsetCocone : IsColimit (adjoinFinsetCocone k K) := by
   classical
   have := reflectsColimitsOfShape_of_reflectsIsomorphisms (G := forget CommRingCat.{u})

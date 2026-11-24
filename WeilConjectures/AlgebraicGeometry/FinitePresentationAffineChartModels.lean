@@ -13,9 +13,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # Object models on one fixed affine chart
 
-Source: Stacks Project, Limits, Tag 01ZR, first proof, affine case;
-Algebra, Tag 05N7, object clause.
-(blueprint: lem-pc-fp-affine-chart-object-models). -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -27,29 +28,7 @@ namespace AlgebraicGeometry
 
 /-- A finitely presented module has a model at one finite stage on a fixed affine chart.
 No finiteness of the cover or of the ambient morphism is needed.
-Source: Stacks Project, Limits, Tag 01ZR, first proof, affine case;
-Algebra, Tag 05N7, object clause.
-(blueprint: lem-pc-fp-affine-chart-object-models).
-
-Proof: Work on the upper tail above i, replacing its directed preorder by its
-partial-order quotient. This tail is nonempty because it contains i. For the
-fixed affine chart V.X a, its base changes have rings
-Gamma(V.X a) tensor_{R_i} R_j. Tensor products commute with directed colimits.
-The affine spectrum functor takes ring colimits to limits; uniqueness of the
-limit and the affine pullback comparison identify the limit chart ring with
-this colimit. Restrict M to the limit chart. Its quasi-coherence and finite
-presentation identify its sections with a finitely presented module over that
-ring. Choose a finite free presentation, lift the finitely many entries of
-its relation matrix to a stage k above i, and take the cokernel of the lifted
-matrix. This is a genuine finite-presentation module, not an unspecified
-chosen sheaf. Its associated sheaf pulls back to the restriction of M by the
-affine module equivalence and the tensor-pullback comparison. For any j above
-k extend this cokernel along the stage ring map. Finite presentation and
-quasi-coherence are preserved. Associativity of scalar extension, followed
-by the original comparison, gives the asserted isomorphism on the iterated
-pullback chart. Equivalent indices give canonically isomorphic rings, so the
-construction descends back from the partial-order quotient. Empty charts,
-zero rings and zero modules use the same cokernel construction. -/
+(Stacks, Tags 01ZR and 05N7) -/
 theorem exists_finitePresentation_affine_chart_object_models
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

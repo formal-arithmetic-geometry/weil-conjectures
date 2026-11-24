@@ -28,8 +28,9 @@ import Mathlib.Algebra.Module.TransferInstance
 
 /-! # A Chow module with finite cohomology and generic rank one
 
-Source: Stacks Project, Proposition 30.19.1, Tag 02O5, Chow construction.
-(blueprint: lem-pc-v3-chow-finite-cohomology-witness)
+## References
+
+* Stacks Project, Tag 02O5
 -/
 
 @[expose] public section
@@ -42,26 +43,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option linter.unusedVariables false in
 /-- The Chow construction supplies one coherent module with finite cohomology on each
-integral closed support, with its generic stalk the one-dimensional residue-field module.
-
-Source: Stacks Project, Proposition 30.19.1, Tag 02O5, the construction following the
-short exact sequence argument, label `proposition-proper-pushforward-coherent`.
-(blueprint: lem-pc-v3-chow-finite-cohomology-witness)
-
-Proof: The proper source and its closed subscheme W are Noetherian. Apply Chow's lemma
- to W over T, obtaining a projective modification π : W' → W that is an isomorphism over
- a dense open. The projective embedding gives an invertible module L relatively ample
- for both π and W' → T. Choose a common power killing both positive higher direct images,
- and put G = i_* π_* L^n. Projective-space cohomology finiteness on affine opens of W
- proves coherence of π_* L^n; use this independent projective argument, not the general
- proper coherence theorem. Closed pushforward preserves coherence. The Leray comparison
- and affine-base cohomology identify H^q(G) with H^q(W', L^n), which is finite by the
- projective-space theorem, with scalars induced by f.appTop. On the dense open π is an
- isomorphism, so the generic stalk is a line over the function field of W. Closed
- immersion identifies this field with the residue field at i(η); the scalar action is
- the quotient action and the maximal ideal annihilates it. The support is contained
- in i(W) by closed pushforward and contains its generic point. Coherence makes it closed,
- so it equals i(W). No ideal on W or induction hypothesis is needed for this module. -/
+integral closed support, with its generic stalk the one-dimensional residue-field module
+(Stacks, Tag 02O5). -/
 theorem exists_chow_finite_cohomology_witness {X T : Scheme.{u}}
     (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (W : Scheme.{u}) (i : W ⟶ X) [IsClosedImmersion i] [IsIntegral W] :

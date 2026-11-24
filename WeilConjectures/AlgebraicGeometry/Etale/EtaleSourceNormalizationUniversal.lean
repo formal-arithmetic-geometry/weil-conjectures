@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Comma
 
 /-! # Universal scalar arrows on an etale source
 
-Source: Stacks Project, Tags 06YS, 0G7E, 0D6D and 03ED.
-(blueprint: lem-weil-pbc-etale-source-normalization-universal).
+## References
+
+* Stacks Project, Tags 06YS, 0G7E, 0D6D and 03ED
 -/
 
 @[expose] public noncomputable section
@@ -123,25 +124,6 @@ private theorem etaleNormalizationScalarMate_isIso (Z : Scheme.{u})
     Iso.symm_hom, Iso.symm_inv, hs, Category.assoc] using h
 
 /-- An initial coefficient arrow stays initial on every etale source.
-
-Source: `sites-cohomology.tex`, K-flat resolutions (06YS), their pullback (0G7E),
-and composition of derived pullbacks (0D6D); the small etale site (03ED).
-(blueprint: lem-weil-pbc-etale-source-normalization-universal).
-
-Proof: pass from fixed-ring module sheaves to modules over their constant ring
-sheaves. Let L be derived extension along q, left adjoint to exact restriction.
-Initiality of the supplied arrow identifies its target with L applied to its
-source, with the arrow equal to the adjunction unit followed by that isomorphism.
-Choose a K-flat resolution with flat terms. Inverse image to an etale source
-preserves K-flatness and flatness. Both applying inverse image before extension
-and applying extension before inverse image are represented by the same
-sheafified balanced tensor complex. This gives an invertible inverse scalar mate.
-The tensor unit x maps to 1 tensor x, so its unit identity is exactly the localized
-normalizationPullbackIso used in etaleIsomorphismNormalizationArrow. Consequently
-the displayed arrow is the new adjunction unit followed by the tensor comparison
-and the pulled target isomorphism. Transport of the initial unit gives its
-universality. No boundedness, flatness of S over R, or nonemptiness of the source
-is needed; zero objects and zero coefficient rings are included.
 -/
 theorem etaleSourceNormalization_universal (Z : Scheme.{u})
     {R S : Type (u + 1)} [CommRing R] [CommRing S] (q : R →+* S)

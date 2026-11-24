@@ -14,8 +14,6 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Transporting a finite-free complex to a principal affine open
-
-(blueprint: lem-pc-affine-principal-sheaf-complex-transport)
 -/
 
 @[expose] public section
@@ -49,35 +47,8 @@ private noncomputable def transport_tilde_localization (A : Type u) [CommRing A]
         ((ModuleCat.extendRestrictScalarsAdj φ.hom).comp
           (tilde.adjunction (R := .of (Localization.Away f))))
 
-/-- Restrict a finite-free sheaf complex and its derived comparison to `Spec(A_f)`.
-Source: Stacks Project, Tag 08E7, converse proof, local-model comparison;
-Tag 01HV (sections on principal opens), and Tag 08BS (exact open restriction).
-(blueprint: lem-pc-affine-principal-sheaf-complex-transport).
-
-Proof: Let V = D(f). Restrict P from the localized open site of U to that of V,
-then use the equivalence with modules on the open subscheme V and the scheme
-isomorphism V ≅ Spec(A_f). Define C to be this termwise image of P, with the
-image differentials. Restriction and transport are additive and exact; hence the
-complex identities hold and zero terms above the original bound remain zero.
-They carry a free sheaf on a finite set to the free sheaf on the same set:
-restriction commutes with the direct sums of copies of the structure sheaf,
-and the scheme isomorphism identifies the structure sheaves. Apply these
-functors to each given finite-free term isomorphism to obtain the asserted ranks.
-The principal-open sections formula identifies the transported restriction of
-tilde N with tilde(A_f tensor_A N). On the basis of principal opens in Spec(A_f),
-both sides are the further localization of N, with identical restriction maps.
-The identifications are natural in N and therefore commute with differentials,
-yielding the comparison of complexes for M. Exactness allows termwise restriction
-and transport to descend to derived categories. Use the canonical localization
-comparison between choices of derived categories when the morphism universes
-are wX and wY; it identifies their Q functors. Apply the induced functor to hiso,
-use its compatibility with Q, compose with the preceding complex comparison,
-and invert the result to obtain Q(C) ≅ Q(tilde(A_f tensor_A M)).
-If V is empty, its localized module category and the module category of the
-zero ring A_f have only zero objects, and the same construction applies.
-No bound below, nonzero-ring assumption, or rank-positivity assumption is used.
-This step constructs only a sheaf complex: lifting its differentials to modules
-through affine full faithfulness is a separate theorem. -/
+/-- Restrict a finite-free sheaf complex and its derived comparison to `Spec(A_f)`
+(Stacks, Tags 08E7, 01HV and 08BS). -/
 theorem affine_principal_sheaf_complex_transport (A : Type u) [CommRing A]
     [HasDerivedCategory.{wX}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

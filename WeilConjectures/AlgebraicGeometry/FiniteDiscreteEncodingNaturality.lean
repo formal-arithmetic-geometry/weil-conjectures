@@ -44,15 +44,7 @@ private theorem terminal_map_exists (T : Scheme.{u}) (V : T.ProEt) :
       (proEtTerminal specZ.{u})) :=
   ⟨(proEtIsTerminal _).from V⟩
 
-/-- Canonical constant scalars commute with every scheme direct-image coefficient map.
-Source: blueprint coefficient-identification proof, step 8; the unit comparison for
-constantSchemeIso. (auxiliary; not a blueprint node).
-
-Proof: at the base change of the terminal pro-etale object over Spec Z, the two maps
-are the same constant-sheaf unit followed by the inverse-image adjunction unit. The
-composition law for these units gives their equality. Naturality propagates this
-identity along the unique arrow from any site object to that base-changed terminal
-object. No finite, discrete, nonzero-ring or nonempty-scheme hypothesis is used. -/
+/-- Canonical constant scalars commute with every scheme direct-image coefficient map. -/
 theorem canonicalAbelianMap_naturality (T U : Scheme.{u}) (j : U ⟶ T) (V : T.ProEtᵒᵖ) :
     (toSheafify (Scheme.ProEt.topology T)
         ((Functor.const T.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} A))) ≫

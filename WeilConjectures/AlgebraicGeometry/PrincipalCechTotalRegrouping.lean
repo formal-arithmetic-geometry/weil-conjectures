@@ -10,10 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.PrincipalCechColumns
 public import Mathlib.Algebra.Homology.TotalComplex
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
-/-! # Regrouping the graded terms of principal Čech columns
+/-!
+# Regrouping the graded terms of principal Čech columns
 
-Source: Stacks, Tag 08D1, alternating total cochains
-(blueprint: lem-sc-principal-cech-total-regrouping).
+## References
+
+* Stacks Project, Tag 08D1, <https://stacks.math.columbia.edu/tag/08D1>
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ variable {A : Type u} [CommRing A] (r : ℕ) (f : Fin r → A)
 variable (F : CochainComplex (SheafOfModules.{u}
   (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)
 
-/-- Include a single product row into the explicit cochains, extending by zero.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-total-regrouping). -/
+/-- Include a single product row into the explicit cochains, extending by zero. -/
 def principalCechRowToTerms (p q n : ℤ) (hpq : p + q = n) :
     ((principalCechColumnFunctor r f p).obj F).X q ⟶ principalCechTerms r f F n := by
   classical
@@ -47,8 +48,7 @@ def principalCechRowToTerms (p q n : ℤ) (hpq : p + q = n) :
       map_add' := fun x y ↦ by funext J; exact (component J).hom.map_add x y
       map_smul' := fun a x ↦ by funext J; exact (component J).hom.map_smul a x }
 
-/-- The subset coordinate of a row inclusion is its projection, or zero off the row.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-total-regrouping). -/
+/-- The subset coordinate of a row inclusion is its projection, or zero off the row. -/
 theorem principalCechRowToTerms_apply (p q n : ℤ) (hpq : p + q = n)
     (x : ((principalCechColumnFunctor r f p).obj F).X q)
     (J : {J : Finset (Fin r) // J.Nonempty}) :
@@ -68,9 +68,7 @@ theorem principalCechRowToTerms_apply (p q n : ℤ) (hpq : p + q = n)
     else 0) x = _
   split_ifs <;> rfl
 
-/-- The explicit graded regrouping map, for any bicomplex with the given columns.
-It uses the coproduct universal property, rather than a chosen existence witness.
-Source: Stacks, Tag 08D1 (blueprint: lem-sc-principal-cech-total-regrouping). -/
+/-- The explicit graded regrouping map, for any bicomplex with the given columns. -/
 def principalCechTotalRegroup
     (B : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     (e : ∀ p, B.X p ≅ (principalCechColumnFunctor r f p).obj F) (n : ℤ) :
@@ -173,21 +171,7 @@ private theorem retract_row_apply (p q n : ℤ) (h : p + q = n)
     rfl
   · rfl
 
-/-- Regrouping is an isomorphism of modules in each total degree.
-Source: Stacks, Tag 08D1, the finite alternating total
-(blueprint: lem-sc-principal-cech-total-regrouping).
-
-Proof: evaluate each categorical product of section complexes in degree q. Its
-projections exhibit a product of the section modules in that degree, since evaluation
-preserves products. Nonempty subsets have cardinalities between 1 and r, so only
-rows 0 through r-1 are nonzero. The diagonal coproduct therefore has finite support.
-For each subset J, put its coordinate in the unique summand p=card(J)-1,
-q=n+1-card(J), using the inverse of e p and the degreewise product identification.
-Sum these finitely many coordinate insertions. This is an inverse of the displayed
-map: after a subset projection only its own row survives, and on each coproduct
-summand all its product projections are recovered. Empty rows are zero objects;
-for r=0 both families are empty and the same argument identifies zero modules.
-The proof uses no differential or boundedness of F. -/
+/-- Regrouping is an isomorphism of modules in each total degree. -/
 theorem principalCechTotalRegroup_isIso
     (B : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     (e : ∀ p, B.X p ≅ (principalCechColumnFunctor r f p).obj F) (n : ℤ) :

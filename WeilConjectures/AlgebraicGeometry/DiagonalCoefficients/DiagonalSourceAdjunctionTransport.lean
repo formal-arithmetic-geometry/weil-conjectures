@@ -10,9 +10,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 import all WeilConjectures.CategoryTheory.Exact.ExactDegreeZeroSupplement
 
 /-! # Exact adjunction transport on single objects
-
-Source: diagonal tower coefficient changes (1), exact scalar and finite-realization adjunctions.
-(blueprint: lem-diagonal-source-adjunction-transport).
 -/
 
 @[expose] public noncomputable section
@@ -159,10 +156,7 @@ private theorem composite_homEquiv_single
   simp only [Iso.inv_hom_id_app, Functor.map_comp]
   erw [Category.comp_id]
 
-/-- Exact single comparisons commute with a scalar adjunction followed by an equivalence.
-Source: coefficient changes (1). (blueprint: lem-diagonal-source-adjunction-transport).
-Proof: transpose the finite-equivalence endpoint by the counit identity, then compose
-the two adjunction transposes and use exact composition-single naturality. -/
+/-- Exact single comparisons commute with a scalar adjunction followed by an equivalence. -/
 theorem finite_homEquiv_single
     (R : D ⥤ C) [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R]

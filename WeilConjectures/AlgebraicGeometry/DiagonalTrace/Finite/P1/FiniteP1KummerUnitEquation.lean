@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1KummerCoordinates
 
 /-! # The finite source coordinate through the single comparison
-
-Source: diagonal-tower trace (1), normalized finite positive Kummer class before direct image.
-(blueprint: lem-sfb-finite-p1-kummer-unit-equation).
 -/
 
 @[expose] public noncomputable section
@@ -21,15 +18,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses
 
 /-- The normalized source coordinate on X is the exact single-complex comparison of
-evaluation followed by the finite source coordinate.
-
-Source: diagonal-tower trace (1), coefficient units
-(blueprint: lem-sfb-finite-p1-kummer-unit-equation).
-
-Proof: unfold both coordinates. Each is the composite of the single comparison of
-evaluation, the single complex of the inverse of c.unit, the inverse of nuSingle and
-the inverse ordinary unit pullback along e; the two sides differ only by
-reassociation. -/
+evaluation followed by the finite source coordinate. -/
 theorem finiteP1_unit_coordinate_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X S : Scheme.{u}} (e : X ≅ ProjectiveLine S)

@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient.FiniteCoefficientScalarComparison
 
 /-! # Root normalization of the finite additive coordinate
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-coefficient-root-coordinate).
 -/
 
 @[expose] public noncomputable section
@@ -30,18 +27,7 @@ attribute [local irreducible] finiteScalarLineCoordinate finiteScalarComparison
   cartierRootsComparison Functor.mapDerivedCategory
 
 /-- The line coordinate carries the comparison image of root scalar extension
-to the actual finite root map. Source: diagonal-tower trace (1), root-section
-normalization of the coefficient coordinates
-(blueprint: lem-sfb-finite-coefficient-root-coordinate).
-
-Proof: apply the site-comparison adjunction, so it suffices to test etale root
-sections. Naturality of its unit moves scalar extension to the section before
-the unit. The mate equation for forgetting coefficients and the actual
-associated-module-sheaf unit identify its image with the scalar-unit section of
-one tensor the root. Apply line_sections with the identity restriction. The
-right side is the same tensor by the defining finiteRootMap equation and the
-roots comparison. The argument uses all root sections and includes zero rings
-and empty schemes. -/
+to the actual finite root map. -/
 theorem finiteScalarLineCoordinate_root (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT) :

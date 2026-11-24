@@ -14,9 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FiberDegreeOfSplitCofan
 /-!
 # Splitting neighbourhoods with prescribed degree
 
-Source: Stacks Project, Tag 04HN (lemma-finite-etale-etale-local) and Tag 03SH
-(section-trace-method), paragraph after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-degree-split-at).
+## References
+
+* Stacks Project, Tags 04HN and 03SH
 -/
 
 @[expose] public section
@@ -30,29 +30,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Each point of a small étale object has a neighbourhood on which a finite étale
-morphism of degree `d` splits into exactly `d` clopen copies of that neighbourhood.
-Source: Stacks Project, Tag 04HN (lemma-finite-etale-etale-local), with the fibre-degree
-count in Tag 03SH (section-trace-method), after Definition 03SE.
-(blueprint: lem-weil-pbc-finite-etale-degree-split-at).
-
-Proof:
-1. Apply `finite_etale_etale_local_split` to the finite étale projection
-   `Y ×_X W → W` and the given point `w`. It supplies an étale neighbourhood
-   `g : U → W`, a point above `w`, and a finite clopen coproduct of copies of `U`.
-2. Choose an algebraic closure of the residue field of the distinguished point of `U`.
-   The degree of the geometric fibre of `f` at the composite geometric point is `d`:
-   use `fiberDegree_of_isPullback`, `fiberDegree_eq_finrankΓ`, and the prescribed
-   `IsFiniteLocallyFreeOfDegree.fiberDegree_eq`. The theorem
-   `exists_overIso_sigma_of_isSepClosed` identifies that fibre with a coproduct of
-   exactly `d` copies of the algebraically closed field's spectrum.
-3. Pull the local splitting back to this geometric point. Base change preserves the
-   clopen coproduct and the isomorphisms of its pieces with `U`; pullback pasting
-   identifies the resulting scheme with the same geometric fibre. Each copy of the
-   spectrum has one point, so the finite splitting index set has cardinality `d`.
-4. Reindex by `Fin d`. Compose `g` with `W.hom` to make an object `V` of `X.Etale`,
-   and use pullback pasting to transport the cofan to `pullback f V.hom`.
-   Its projections remain isomorphisms, and its distinguished point maps to `w`.
-   If `d = 0`, the cofan is empty; if `W` is empty there is no point to consider. -/
+morphism of degree `d` splits into exactly `d` clopen copies of that neighbourhood
+(Stacks, Tags 04HN and 03SH). -/
 theorem exists_finiteEtale_degree_split_at
     {X Y : Scheme.{u}} (f : Y ⟶ X) [Etale f]
     (d : ℕ) [f.IsFiniteLocallyFreeOfDegree d]

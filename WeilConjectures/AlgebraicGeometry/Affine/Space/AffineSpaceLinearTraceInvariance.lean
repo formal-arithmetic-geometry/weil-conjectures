@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionFamily
 import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearActionRigidity
 
 /-! # Linear changes of coordinates preserve the affine-space counit trace
-
-Source: blueprint sec-smooth-purity/sk-prop-an/lem-amb-linear-trace-invariance.md,
-proof paragraphs 1 and 2 (blueprint: proposition-purity-vector-bundles).
 -/
 
 @[expose] public noncomputable section
@@ -24,36 +21,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Every invertible linear coordinate change preserves the actual coordinate-tower
 counit trace. The existential square is the Cartesian-square certificate for the concrete
-polynomial map v ↦ gv; it is not an extra hypothesis on g or a choice of action.
-Source: blueprint linear-trace lemma, statement and both proof paragraphs
-(blueprint: proposition-purity-vector-bundles).
-
-Proof, following the node's seven steps:
-1. Construct G = D(det) in affine matrix space. Its coordinate ring on Spec R is
-   R[x_ij,z]/(z det(x)-1), finite type over R, hence G is Noetherian. The universal
-   invertible matrix gives a; the inverse is z adj(x). The given g and the identity
-   define sections s_g and e. The coordinate formulas give the Cartesian square below.
-2. Compactify the affine-space projections by the standard open in projective space;
-   these maps are separated and finite type, with quasi-compact open and proper factors.
-   Apply proposition-composition-base-change-rf-shriek to the universal automorphism square and base
-   changes. Use lem-asd-etale-finite-twist-pullback for theta_a. Exchange pasting gives
-   C_u u* rho_a = rho_(a_T) C_u; at the identity both factors are identities.
-3. Conjugate rho_a by the specified trace isomorphism of lemma-integral-linear-character--1.
-   Degree-zero full faithfulness identifies the resulting endomorphism of A_G with an
-   ordinary module-sheaf map. Its value b on 1 determines it by linearity. The constant
-   sheaf section lemmas identify b with a Zariski-locally-constant function beta on G.
-   The trace base-change equation identifies its pullback with the corresponding scalar.
-4. Each residue-field fibre of G is nonempty and connected: its ring is a polynomial
-   domain localized at the nonzero determinant, whose value at the identity is 1.
-   Its zero prime lies in every nonempty basic open. This includes dimension zero.
-5. On each such fibre beta equals 1 at the identity by Step 2. A locally constant map
-   on a connected space is constant (lem-weil-pbc-connected-locally-constant-map).
-6. Every point of G lifts to its residue-field fibre. Thus beta is everywhere 1, hence
-   b = 1 by the constant-sheaf section identification. Degree-zero faithfulness gives
-   t_G rho_a = t_G as an actual derived equality. The empty base causes no exception.
-7. Pull back along s_g and use exchange pasting and trace base change. Cancel C_(s_g)
-   to obtain t_S rho_g = t_S. In dimension zero this is the identity-adjunction equation.
--/
+polynomial map v ↦ gv; it is not an extra hypothesis on g or a choice of action. -/
 theorem affineSpaceLinearTraceInvariance (N : ℕ) (hN : 0 < N)
     (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

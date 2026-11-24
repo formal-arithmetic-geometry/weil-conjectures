@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomTransport
 import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-! # The filtered system of stage Hom sets
-Source: Stacks Project, Tags 09RE and 0D5S.
-(blueprint: lem-pc-perfect-hom-stage-colimit).
+
+## References
+
+* Stacks Project, Tags 09RE and 0D5S.
 -/
 
 @[expose] public section
@@ -41,25 +43,8 @@ private theorem homMap_identity
   apply hi
   simpa only [Category.id_comp] using perfectHomMap_trans s (𝟙 T) (𝟙 T) f
 
-/-- The stage Hom sets and canonical transport form a functor with a set colimit.
-No geometric finiteness, perfectness, or local continuity is needed.
-
-Source: Stacks Project, Tag 09RE, filtered Hom system; Tag 0D5S, composition coherence.
-(blueprint: lem-pc-perfect-hom-stage-colimit).
-
-Proof: At j take the Hom set between the pullbacks of P and Q, using ULift if
-needed to put it in Type (max u w). Transport along j ≤ k is perfectStageMap.
-For identity arrows, perfectHomMap_trans makes the transport idempotent.
-It is injective: base change of an identity is an identity, its derived pullback
-is naturally isomorphic to the identity by exists_derivedPullbackComposition,
-and conjugation by the composition comparisons preserves injectivity. An
-injective idempotent map is the identity. For two consecutive
-arrows, perfectHomMap_trans and the pullback identity baseChangeMap_comp give
-the composition law; the equal proofs of inequalities are identified by proof
-irrelevance. These laws define H, with the evident ident equivalences. Take its
-set colimit and canonical colimit cocone, which exist for this small diagram.
-The transition equation follows from the definition of H.map. This also covers
-an empty Hom set; no element or arbitrarily chosen geometric object is required. -/
+/-- The stage Hom sets and canonical transport form a functor with a set colimit
+(Stacks, Tags 09RE and 0D5S). -/
 theorem perfect_hom_stage_colimit
     {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u}) (i : I)
     (Y : Scheme.{u}) (s : Y ⟶ Spec (R.obj i))

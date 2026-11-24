@@ -17,8 +17,9 @@ public import WeilConjectures.AlgebraicGeometry.TwoOpenComparisonDiagram
 
 /-! # Types of the prescribed overlap comparisons
 
-Source: Stacks Project, Tags 09RE and 09RF.
-(blueprint: def-pc-perfect-overlap-hom-continuity-data).
+## References
+
+* Stacks Project, Tags 09RE and 09RF.
 -/
 
 @[expose] public section
@@ -41,10 +42,8 @@ attribute [local instance 2000] openComparisonModuleAbelian openComparisonOverMo
   schemeOpenOverlapRestriction_preservesFiniteLimits
   schemeOpenOverlapRestriction_preservesFiniteColimits
 
-/-- Functorial transports and object comparisons for a simultaneous restriction diagram.
-All data is supplied as structure fields; the equations retain the given comparisons.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: def-pc-perfect-overlap-hom-continuity-data). -/
+/-- Functorial transports and object comparisons for a simultaneous restriction diagram
+(Stacks, Tags 08DW and 0D5S). -/
 structure TwoOpenTransportData
     {A₀ B₀ A₁ B₁ P₀ Q₀ P₁ Q₁ C : Type*}
     [Category* A₀] [Category* B₀] [Category* A₁] [Category* B₁]
@@ -66,10 +65,9 @@ structure TwoOpenTransportData
   hθV : θV = κV.app B ≪≫ LV.mapIso φV ≪≫ siteV.app E
 
 -- Exact open restriction comparisons need this instance-search budget.
-/-- Real comparison data at every later stage, without an overlap transition.
-The final fields pin both local identifications to the supplied comparisons.
-Source: Stacks Project, Tags 08DW and 0D5S.
-(blueprint: def-pc-perfect-overlap-hom-continuity-data). -/
+/-- Comparison data at every later stage, without an overlap transition.
+The final fields pin both local identifications to the supplied comparisons
+(Stacks, Tags 08DW and 0D5S). -/
 noncomputable def perfectOverlapComparisonDataType
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)
@@ -177,9 +175,8 @@ noncomputable def perfectOverlapComparisonDataType
         LU LV PU PV RU RV A B E φU φV
 
 -- Exact open restriction comparisons need this instance-search budget.
-/-- The Hom-continuity proposition with dependent stage expressions kept behind an API.
-Source: Stacks Project, Tag 09RE.
-(blueprint: def-pc-perfect-overlap-hom-continuity-data). -/
+/-- The Hom-continuity proposition with dependent stage expressions kept behind an API
+(Stacks, Tag 09RE). -/
 noncomputable def perfectOverlapHomContinuityStatement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c)

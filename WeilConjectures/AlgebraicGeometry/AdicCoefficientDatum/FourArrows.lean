@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerDirectImageSupp
 /-!
 # The four finite-level arrows
 
-Source: blueprint, proper base change, four finite-level arrows, order 1343;
-Stacks Project Tags 07A7, 09C9, 0B56 and 0944 (blueprint: def-weil-pbc-four-arrows).
-
 The horizontal arrows and the finite exchange are isomorphisms. The reduced ambient
 exchange is a morphism; neither its invertibility nor commutativity of this square is
 part of this definition. All scalar extensions and pullbacks are uncompleted.
@@ -24,7 +21,11 @@ part of this definition. All scalar extensions and pullbacks are uncompleted.
 ## Main definitions
 
 - `AlgebraicGeometry.Scheme.AdicCoefficientDatum.fourArrows`:
-  the recorded construction or statement of this node.
+  the four finite-level arrows of the proper base change square.
+
+## References
+
+* Stacks Project, Tags 07A7, 09C9, 0B56, 0944, 0D6D and 0D6E
 -/
 
 @[expose] public section
@@ -226,9 +227,7 @@ namespace AlgebraicGeometry.Scheme
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 /-- The finite-coefficient projection is the adjunct of chi followed by scalar extension
-of the ambient counit. Its target retains the quotient-coefficient action.
-Source: blueprint four arrows; Stacks Tags 0B56 and 0944
-(blueprint: def-weil-pbc-four-arrows). -/
+of the ambient counit. Its target retains the quotient-coefficient action. -/
 noncomputable def AdicCoefficientDatum.finiteProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
     (H : d.derived X) (n : ℕ) :
     (d.reduction Y n).obj ((d.push f).obj H) ⟶
@@ -240,15 +239,7 @@ noncomputable def AdicCoefficientDatum.finiteProjection {X Y : Scheme.{u}} (f : 
           ((proEtaleRingDerivedAdjunction f (d.completedRing Y) (d.completedRing X)
             (d.integralRingIso f)).counit.app H))
 
-/-- The specified finite projection is invertible, also without properness or a bound on H.
-Source: blueprint four arrows; Stacks Tags 0944, 0D6D and 0D6E
-(blueprint: def-weil-pbc-four-arrows).
-Proof: the coefficient-change adjunction comparison identifies the restriction of this
-adjunct with the canonical uncompleted projection-formula mate for (P_n)_Y. The perfect
-coefficient theorem lemma-weil-pbc-perfect-projection-formula gives the signed finite-total
-inverse. Exact restriction reflects derived isomorphisms by
-lem-weil-pbc-ring-sheaf-change-adjunction, hence the original quotient-linear map is an
-isomorphism. The same argument applies to f' and H = Lg'*K. -/
+/-- The specified finite projection is invertible, also without properness or a bound on H. -/
 theorem AdicCoefficientDatum.finiteProjection_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (H : d.derived X) (n : ℕ) : IsIso (d.finiteProjection f H n) := by
   have he : d.finiteProjection f H n = completedDirectImageProjectionFormula f d n H := by
@@ -263,8 +254,7 @@ theorem AdicCoefficientDatum.finiteProjection_isIso {X Y : Scheme.{u}} (f : X �
 attribute [instance] AdicCoefficientDatum.finiteProjection_isIso
 
 /-- A square of four arrows with exactly the asserted three isomorphisms. No equation
-between its two paths is imposed. Source: blueprint four arrows
-(blueprint: def-weil-pbc-four-arrows). -/
+between its two paths is imposed. -/
 structure FourFiniteLevelArrows {C : Type v} [Category.{w} C] (corners : Fin 4 → C) where
   h : corners 0 ≅ corners 1
   h' : corners 2 ≅ corners 3
@@ -372,12 +362,7 @@ private theorem exchangeTransportRings (Λ : Type (u + 1)) [CommRing Λ] [Finite
   subst cf cg cg' cf' M
   exact (finiteExchangeInvertible sq Λ N W).isIso hc
 
-/-- The finite proper-base-change theorem in the normalized corner notation.
-Source: blueprint four arrows, Stacks 09C9
-(blueprint: def-weil-pbc-four-arrows).
-Proof: apply finiteLevelProEtaleBaseChange to the finite quotient and its retained
-etale witness. The finiteExchange abbreviation is exactly that canonical ringed
-adjunction mate, so the conclusion is unchanged. -/
+/-- The finite proper-base-change theorem in the normalized corner notation. -/
 theorem AdicCoefficientDatum.finiteExchange_isIso [IsProper f]
     (K : d.derived X) (n : ℕ)
     (W : FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))
@@ -395,8 +380,7 @@ theorem AdicCoefficientDatum.finiteExchange_isIso [IsProper f]
 
 /-- The finite exchange is the canonical ambient exchange with its isomorphism certified
 by finite-level proper base change and the specified witness. The underlying morphism
-contains no witness choices. Source: blueprint four arrows; Stacks Tags 07A7 and 09C9
-(blueprint: def-weil-pbc-four-arrows). -/
+contains no witness choices. -/
 noncomputable def AdicCoefficientDatum.finiteExchangeIso [IsProper f]
     (K : d.derived X) (n : ℕ)
     (W : FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))
@@ -409,9 +393,7 @@ noncomputable def AdicCoefficientDatum.finiteExchangeIso [IsProper f]
 /-- The four specified arrows at positive level n+1: pullback of the finite projection;
 projection followed by pushforward of delta; chi followed by reduction of the ambient
 exchange; and the canonical finite-coefficient exchange. The family W retains separate
-bounded-below etale witnesses, with no uniform bound or compatibility requirement.
-Source: blueprint four arrows, order 1343; Stacks Tags 07A7, 09C9, 0B56 and 0944
-(blueprint: def-weil-pbc-four-arrows). -/
+bounded-below etale witnesses, with no uniform bound or compatibility requirement. -/
 noncomputable def AdicCoefficientDatum.fourArrows [IsProper f] (K : d.derived X)
     (_hK : d.TowerComplete X K)
     (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1))

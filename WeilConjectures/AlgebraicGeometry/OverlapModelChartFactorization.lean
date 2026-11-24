@@ -160,24 +160,8 @@ private theorem tensor_compat_iso {X Y Z : Scheme.{u}}
   apply Iso.ext
   exact tensor_compat p q t h F
 
-/-- Factorization of one canonical chart comparison through the stage model.
-Source: Stacks Project, Tags 0095, 0096 and 0097 (composition of inverse images and
-uniqueness of their adjunction comparisons); Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-model-chart-factorization).
-
-Proof: Expand the direct and stage model comparisons. The tensor composition
-comparison followed by the comparisons from tensor to abstract pullback equals
-abstract pullback composition followed by the comparison for the composite.
-Indeed, apply the conjugation equivalence for the composite adjunctions: both
-maps correspond to pushforward composition followed by congruence along h₀.
-Whisker this equality by pullback along z. Use naturality to move the comparison
-for q₀ through the composition isomorphisms, and use the pullback composition
-pentagon on the triples (z, p₀, q₀), (l, d, q₀), and the subsequent map r₀.
-The equation hz identifies their composite routes. The equations hk, hl, htr,
-hvu, hδ and hzv identify both exterior routes to A. The remaining composition
-comparisons cancel in inverse pairs, giving the displayed factorization.
-Only invertible canonical comparisons are used. The argument also works for
-identity maps, zero module sheaves and empty schemes; no faithfulness is needed. -/
+/-- Factorization of one canonical chart comparison through the stage model
+(Stacks, Tags 0095, 0096, 0097 and 01ZR). -/
 theorem overlap_model_chart_factorization
     {H₀ Hₖ H K L A B C D : Scheme.{u}}
     (q₀ : Hₖ ⟶ H₀) (p₀ : H ⟶ Hₖ) (t₀ : H ⟶ H₀) (h₀ : p₀ ≫ q₀ = t₀)

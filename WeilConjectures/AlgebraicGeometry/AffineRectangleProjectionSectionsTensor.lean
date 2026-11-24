@@ -55,24 +55,8 @@ private theorem externalTensorAlgebraEquiv_tmul
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary section modules of the two projection pullbacks on an affine rectangle
-have tensor product over its coordinate ring equal to the tensor of the factor sections.
-Source: Stacks Project, Tag 0BED, affine computation in lemma-kunneth; Tags 01IA and 01I9.
-(blueprint: lem-sc-affine-rectangle-projection-sections-tensor).
-
-Proof: Put A = Gamma(X,U), B = Gamma(Y,V), C = Gamma(X times_k Y,W),
-M = Gamma(F,U), and N = Gamma(G,V). The rectangle W is affine. The affine
-fibre-product section square says C is the pushout of A and B over k, with
-its actual projection ring maps. Affine pullback sections identify the two
-projection-section modules with C tensor_A M and C tensor_B N, taking
-1 tensor s to the restricted adjunction unit of s. Tensor these C-linear
-bijections over C. The standard pushout base-change cancellation, tensor
-commutativity, and base-change cancellation give an isomorphism from their
-source to M tensor_k N. Its inverse sends s tensor t to
-(1 tensor s) tensor (1 tensor t). Compose that inverse with the two
-pullback-section comparisons to obtain e, with the stated formula. The
-formula determines e on pure tensors and hence on all tensors. This uses
-no sheaf tensor-section comparison. All identities hold over zero rings;
-empty opens and zero coefficient modules therefore need no exception. -/
+have tensor product over its coordinate ring equal to the tensor of the factor sections
+(Stacks, Tags 0BED, 01IA and 01I9). -/
 theorem exists_affine_rectangle_projection_sections_tensor
     (k : Type w) [Field k] (X Y : Scheme.{w})
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
