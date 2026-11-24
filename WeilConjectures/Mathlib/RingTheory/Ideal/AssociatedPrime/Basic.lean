@@ -24,16 +24,14 @@ namespace Module
 variable (R : Type*) [CommRing R] (M : Type*) [AddCommGroup M] [Module R M]
 
 /-- The associated primes of an `R`-module `M` in the sense of Stacks Tag 00LA: the prime ideals
-`q` of `R` such that `q = {a ∈ R | a • z = 0}` for some `z ∈ M`. No Noetherian hypothesis is
-imposed. (blueprint: `def-weil-pbc-annihilator-associated-primes`) -/
+`q` of `R` such that `q = {a ∈ R | a • z = 0}` for some `z ∈ M`. -/
 def annihilatorAssociatedPrimes : Set (Ideal R) :=
   {q | q.IsPrime ∧ ∃ z : M, q = LinearMap.ker (LinearMap.toSpanSingleton R M z)}
 
 variable {R M}
 
 /-- Characterisation of `annihilatorAssociatedPrimes`: `q` is a prime ideal which is the exact
-annihilator of some element `z ∈ M`.
-(blueprint: `def-weil-pbc-annihilator-associated-primes`) -/
+annihilator of some element `z ∈ M`. -/
 theorem mem_annihilatorAssociatedPrimes_iff {q : Ideal R} :
     q ∈ annihilatorAssociatedPrimes R M ↔ q.IsPrime ∧ ∃ z : M, ∀ a : R, a ∈ q ↔ a • z = 0 := by
   refine and_congr_right fun _ ↦ exists_congr fun z ↦ ?_

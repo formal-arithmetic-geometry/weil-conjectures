@@ -20,9 +20,7 @@ stated with an explicit generator.
 open IsLocalRing
 
 /-- **Local domains with principal maximal ideal.** A noetherian local domain `R` whose maximal
-ideal is `(t)` for some `t ≠ 0` is a discrete valuation ring.
-
-(blueprint: `lem-sc-principal-ideal-dvr`) -/
+ideal is `(t)` for some `t ≠ 0` is a discrete valuation ring. -/
 theorem IsDiscreteValuationRing.of_maximalIdeal_eq_span_singleton {R : Type*} [CommRing R]
     [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] {t : R} (ht : t ≠ 0)
     (h : maximalIdeal R = Ideal.span {t}) : IsDiscreteValuationRing R := by

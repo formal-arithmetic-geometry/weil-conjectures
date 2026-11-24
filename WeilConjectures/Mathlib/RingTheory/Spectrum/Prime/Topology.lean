@@ -36,9 +36,7 @@ namespace PrimeSpectrum
 variable {R S : Type*} [CommSemiring R] [CommSemiring S]
 
 /-- A prime in the closure of the range of `PrimeSpectrum.comap f` is a specialization of a
-prime in the range: the closure of the range is the zero locus of `RingHom.ker f`, and a
-prime containing `RingHom.ker f` is the contraction of some prime of `S` up to
-specialization (Stacks Project Tag 00FK). -/
+prime in the range. -/
 @[stacks 02JQ]
 theorem exists_specializes_of_mem_closure_range_comap (f : R →+* S) {z : PrimeSpectrum R}
     (hz : z ∈ closure (Set.range (comap f))) : ∃ q : PrimeSpectrum S, comap f q ⤳ z := by
@@ -55,8 +53,7 @@ theorem mem_genericPoints_iff {p : PrimeSpectrum R} :
   change closure ({p} : Set (PrimeSpectrum R)) ∈ irreducibleComponents (PrimeSpectrum R) ↔ _
   rw [closure_singleton, zeroLocus_ideal_mem_irreducibleComponents, p.2.radical]
 
-/-- A reduced ring whose spectrum is irreducible is a domain: the nilradical `⊥` is prime.
-(blueprint: `lem-wf-affine-dimension-drop`, first claim) -/
+/-- A reduced ring whose spectrum is irreducible is a domain. -/
 theorem isDomain_of_irreducibleSpace (R : Type*) [CommRing R] [IsReduced R]
     [IrreducibleSpace (PrimeSpectrum R)] : IsDomain R := by
   have := irreducibleSpace_iff_isPrime_nilradical.mp ‹_›

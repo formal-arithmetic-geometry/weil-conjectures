@@ -28,6 +28,11 @@ When `k` contains a finite field `k₀` with `q` elements, the roots of `X^q - X
 are the translates `u + c`, `c ∈ k₀`, of one of them, so the Galois group of `k((t))` acts
 transitively on them by translations.
 
+For `k` an algebraic closure of `k₀` and `t = 1 / x` the coordinate at `∞ ∈ ℙ¹`, `Gal(L/K)` is
+the inertia group at infinity, and an element `σ` with `σ u = u + c` acts on the geometric
+generic stalk of the Artin–Schreier sheaf `ℒ_{ψ(a x)}` by `ψ(±c)`. Hence for nontrivial `ψ`
+a nonzero linear Artin–Schreier sheaf is ramified at infinity.
+
 ## Main statements
 
 - `LaurentSeries.irreducible_X_pow_sub_X_sub_C_single`: `Xⁿ - X - b t⁻¹` is irreducible over
@@ -77,12 +82,7 @@ namespace LaurentSeries
 
 /-- For `n ≥ 2` and `b ≠ 0`, the polynomial `Xⁿ - X - b t⁻¹` is irreducible over `k((t))`. In
 characteristic `p`, for `n` a power of `p`, this says that the Artin–Schreier extension
-`uⁿ - u = b / t` of `k((t))` has degree `n`: it is the step "the cover is totally ramified" of
-the blueprint lemma `lemma-unramified-at-infinity-no-linear-characters--1`, where `k` is
-algebraically closed and `t = 1 / x` is the coordinate at infinity.
-
-The proof inverts the variable: `u⁻¹` is a root of the Eisenstein polynomial
-`Yⁿ + (t / b) (Yⁿ⁻¹ - 1)` over `k[[t]]`. -/
+`uⁿ - u = b / t` of `k((t))` has degree `n`. -/
 theorem irreducible_X_pow_sub_X_sub_C_single {n : ℕ} (hn : 2 ≤ n) {b : k} (hb : b ≠ 0) :
     Irreducible (X ^ n - X - C (HahnSeries.single (-1 : ℤ) b) : (LaurentSeries k)[X]) := by
   set K := LaurentSeries k
@@ -156,17 +156,7 @@ theorem irreducible_X_pow_sub_X_sub_C_single {n : ℕ} (hn : 2 ≤ n) {b : k} (h
 /-- *The Galois group of an Artin–Schreier extension acts by all translations.* Let `k₀` be a
 finite field with `q` elements, `k` a field over `k₀`, `a ∈ k₀ˣ` and `L` an algebraic closure of
 `K = k((t))`. If `u ∈ L` is a root of `X^q - X - a t⁻¹`, then for every `c ∈ k₀` some
-`σ ∈ Gal(L/K)` maps `u` to `u + c`.
-
-Indeed `u + c` is again a root, as `c^q = c`, and the polynomial is irreducible
-(`LaurentSeries.irreducible_X_pow_sub_X_sub_C_single`), so `u` and `u + c` are conjugate.
-
-For `k` an algebraic closure of `k₀` and `t = 1 / x` the coordinate at `∞ ∈ ℙ¹`, `Gal(L/K)` is
-the inertia group at infinity, and `u^q - u = a / t` is the Artin–Schreier cover `u^q - u = a x`
-defining `ℒ_{ψ(a x)}`. An element `σ` with `σ u = u + c` acts on the geometric generic stalk of
-`ℒ_{ψ(a x)}` by `ψ(±c)`, so for nontrivial `ψ` inertia at infinity acts nontrivially: a
-nonzero linear Artin–Schreier sheaf is ramified at infinity.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+`σ ∈ Gal(L/K)` maps `u` to `u + c`. -/
 theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single {k₀ : Type*} [Field k₀] [Finite k₀]
     [Algebra k₀ k] {a : k₀} (ha : a ≠ 0) (L : Type*) [Field L] [Algebra (LaurentSeries k) L]
     [IsAlgClosure (LaurentSeries k) L] {u : L}

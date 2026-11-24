@@ -28,8 +28,8 @@ Let `G` be a `p`-group and `V` a finite-dimensional `𝔽_p`-linear representati
 - `Representation.invariants_ne_bot_of_isPGroup`: `V^G ≠ 0` for `V ≠ 0`.
 - `Representation.exists_forall_sub_mem_of_isPGroup`: for a proper `G`-stable subspace `W`
   there is `x ∉ W` with `g x - x ∈ W` for all `g`.
-- `Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup`: both statements of
-  the blueprint lemma together (blueprint: `lemma-reduction-unipotent-local-system--1`).
+- `Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup`: both statements
+  above together.
 - `Representation.IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top`: in an irreducible
   representation the invariants of a normal subgroup are zero or everything.
 -/
@@ -44,8 +44,7 @@ variable {p : ℕ} [Fact p.Prime] {G V : Type*} [Group G] [AddCommGroup V] [Modu
   [FiniteDimensional (ZMod p) V] (ρ : Representation (ZMod p) G V)
 
 /-- **The invariants of a `p`-group on a nonzero finite-dimensional `𝔽_p`-representation are
-nonzero.** The fixed points of the action on the finite set `V`, of cardinality
-`p ^ dim V`, are congruent to `|V| ≡ 0` modulo `p`; since `0` is fixed, so is some `x ≠ 0`. -/
+nonzero.** -/
 theorem invariants_ne_bot_of_isPGroup (hG : IsPGroup p G) [Nontrivial V] :
     ρ.invariants ≠ ⊥ := by
   let : MulAction G V := MulAction.compHom V ρ
@@ -60,8 +59,7 @@ theorem invariants_ne_bot_of_isPGroup (hG : IsPGroup p G) [Nontrivial V] :
 
 /-- **A step of the `p`-group filtration**: for a proper `G`-stable subspace `W` of a
 finite-dimensional `𝔽_p`-representation of a `p`-group `G`, there is `x ∉ W` such that
-`g x - x ∈ W` for every `g`, i.e. whose class in `V / W` is invariant. This is
-`Representation.invariants_ne_bot_of_isPGroup` for the quotient representation `V / W`. -/
+`g x - x ∈ W` for every `g`, i.e. whose class in `V / W` is invariant. -/
 theorem exists_forall_sub_mem_of_isPGroup (hG : IsPGroup p G) (W : Submodule (ZMod p) V)
     (hW : ∀ g, W ≤ W.comap (ρ g)) (hne : W ≠ ⊤) :
     ∃ x ∉ W, ∀ g, ρ g x - x ∈ W := by
@@ -127,8 +125,7 @@ finite-dimensional `𝔽_p`-linear representation of `G`. If `V ≠ 0` then `V^G
 (for any `V`) there is a flag `0 = F 0 ≤ F 1 ≤ ⋯ ≤ F n = V`, `n = dim V`, of `G`-stable
 subspaces with `dim F i = i` such that `G` acts trivially on each quotient
 `F (i + 1) / F i`, i.e. `g x - x ∈ F i` for `x ∈ F (i + 1)`. Its successive quotients are thus
-the trivial one-dimensional representation. The finiteness of `G` is not needed.
-(blueprint: `lemma-reduction-unipotent-local-system--1`) -/
+the trivial one-dimensional representation. The group `G` need not be finite. -/
 theorem invariants_ne_bot_and_exists_filtration_of_isPGroup (hG : IsPGroup p G) :
     (Nontrivial V → ρ.invariants ≠ ⊥) ∧
       ∃ F : ℕ → Submodule (ZMod p) V, F 0 = ⊥ ∧ F (finrank (ZMod p) V) = ⊤ ∧
@@ -157,8 +154,7 @@ variable {k G V : Type*} [Field k] [Group G] [AddCommGroup V] [Module k V]
   (ρ : Representation k G V) (S : Subgroup G) [S.Normal]
 
 /-- In an irreducible representation the invariants `V^S` of a normal subgroup `S` are zero or
-everything: they form a subrepresentation, since `s (g v) = g (g⁻¹ s g) v = g v` for `v ∈ V^S`
-(`Representation.le_comap_invariants`). -/
+everything. -/
 theorem IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top [IsIrreducible ρ] :
     invariants (ρ.comp S.subtype) = ⊥ ∨ invariants (ρ.comp S.subtype) = ⊤ :=
   (IsSimpleOrder.eq_bot_or_eq_top (⟨invariants (ρ.comp S.subtype),

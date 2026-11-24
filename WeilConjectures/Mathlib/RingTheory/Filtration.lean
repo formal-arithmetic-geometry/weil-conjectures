@@ -28,6 +28,13 @@ Jacobson radical of `S`, and `M` a finite `S`-module. If `M ⧸ I M` is flat ove
   (Stacks, Tags 00MK and 0AS8; Matsumura, Theorem 22.3).
 - `Module.Flat.lTensor_subtype_injective_of_forall_ker`: relative purity, the surjectivity
   statement of Stacks, Tag 00MO.
+
+## References
+
+- Stacks Project, Tags 00MK and 0AS8 (local criterion for flatness), 051C (the vanishing of
+  `Tor₁`), 00MO (relative purity), 00ME (local criterion for a single element) and 00HD
+  (flatness of a cokernel).
+- Matsumura, *Commutative Ring Theory*, Theorem 22.3.
 -/
 
 @[expose] public section
@@ -192,7 +199,7 @@ lemma lTensor_subtype_injective_of_flat
 
 /-- **Purity for modules killed by `I`.** If `M ⧸ I M` is flat over `R ⧸ I` and `M ⊗ I → M`
 is injective, then for submodules `L ≤ L'` of any module with `I • L' ≤ L`, the map
-`M ⊗ L → M ⊗ L'` is injective. This is the vanishing of `Tor₁(L' ⧸ L, M)` (Stacks, Tag 051C). -/
+`M ⊗ L → M ⊗ L'` is injective. This is the vanishing of `Tor₁(L' ⧸ L, M)`. -/
 lemma lTensor_inclusion_injective_of_smul_le
     (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
@@ -341,7 +348,7 @@ lemma map_eq_zero_of_lTensor_subtype_eq_zero_of_flat
     rw [LinearMap.rTensor_tmul, Submodule.subtype_apply, key]
     exact hψ k k.2 f
 
-/-- **Relative purity** (the surjectivity in Stacks, Tag 00MO). Assume `M ⊗ N' → M ⊗ N` is
+/-- **Relative purity.** Assume `M ⊗ N' → M ⊗ N` is
 injective for `N' ≤ N` killed by `I`. Let `L ≤ N` contain `I N`, and suppose that for every `k` in
 the kernel of `M ⊗ I → M` and every `n : N` the image of `k` under `M ⊗ I → M ⊗ L`,
 `m ⊗ i ↦ m ⊗ i n`, vanishes. Then `M ⊗ L → M ⊗ N` is injective. -/
@@ -403,7 +410,7 @@ theorem lTensor_subtype_injective_of_forall_ker
 
 /-- If `M ⧸ I M` is flat over `R ⧸ I` and `M ⊗ I → M` is injective, then `M ⊗ L → M` is
 injective for every ideal `L` containing a power of `I`. This is the vanishing of
-`Tor₁(R ⧸ L, M)` (Stacks, Tag 051C). -/
+`Tor₁(R ⧸ L, M)`. -/
 lemma lTensor_subtype_injective_of_pow_le
     (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →
       ∀ N' : Submodule R N, Function.Injective (N'.subtype.lTensor M))
@@ -519,11 +526,10 @@ theorem of_lTensor_injective_of_forall {S : Type*} [CommRing S] [Algebra R S]
     exact Submodule.smul_mem_smul (Ideal.mem_map_of_mem _ hr) trivial
   rwa [hkrull] at this
 
-/-- **The local criterion for flatness** (Stacks, Tags 00MK and 0AS8; Matsumura, Theorem 22.3).
+/-- **The local criterion for flatness.**
 Let `R → S` be a map of noetherian rings, `I` an ideal of `R` with `I S` contained in the
 Jacobson radical of `S`, and `M` a finite `S`-module. If `M ⧸ I M` is flat over `R ⧸ I` and
-`M ⊗ I → M` is injective, then `M` is flat over `R`.
-(blueprint: `lem-weil-pbc-flat-variant-local-criterion`) -/
+`M ⊗ I → M` is injective, then `M` is flat over `R`. -/
 theorem of_flat_quotient_of_lTensor_injective {S : Type*} [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [IsNoetherianRing S] [Module S M] [IsScalarTower R S M]
     [Module.Finite S M] [Flat (R ⧸ I) (M ⧸ I • (⊤ : Submodule R M))]
@@ -589,7 +595,7 @@ private lemma rTensor_toLinearMap_injective_of_smul_eq_zero [Flat R M] [I.IsMaxi
   rw [key]
   simpa using hψ
 
-/-- **The local criterion for a single element** (Stacks, Tag 00ME). Let `R → S` be a map of
+/-- **The local criterion for a single element.** Let `R → S` be a map of
 rings with `S` noetherian, `I` a maximal ideal of `R` with `I S` contained in the Jacobson
 radical of `S`, `M` a finite `S`-module which is flat over `R`, and `s ∈ S` acting injectively
 on `M ⧸ I M`. Then `s` acts injectively on `M ⊗ N` for every finite `R`-module `N`. -/
@@ -689,7 +695,7 @@ lemma exists_rid_lTensor_eq_of_mem_smul_top {m : M} (hm : m ∈ I • (⊤ : Sub
     obtain ⟨y', hy'⟩ := h'
     exact ⟨y + y', by rw [map_add, map_add, hy, hy']⟩
 
-/-- **Flatness of a cokernel** (Stacks, Tag 00HD). If `M` is flat and `φ : M → M` stays injective
+/-- **Flatness of a cokernel.** If `M` is flat and `φ : M → M` stays injective
 modulo every ideal, i.e. `φ m ∈ J M` implies `m ∈ J M`, then `M ⧸ φ(M)` is flat. -/
 theorem quotient_range [Flat R M] (φ : M →ₗ[R] M)
     (h : ∀ (J : Ideal R) (m : M), φ m ∈ J • (⊤ : Submodule R M) → m ∈ J • (⊤ : Submodule R M)) :
