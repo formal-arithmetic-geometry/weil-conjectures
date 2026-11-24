@@ -442,8 +442,7 @@ private theorem diagonal_rank_locus_generic
       ((Matrix.rank_mul_le_right _ _).trans (hrank t.val))
 
 /-- Near a specified Smith diagonal, a continuous matrix of rank at most its number
-of nonzero diagonal entries is continuously equivalent to that same diagonal.
- -/
+of nonzero diagonal entries is continuously equivalent to that same diagonal. -/
 theorem continuous_integral_diagonal_rank_locus
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]
