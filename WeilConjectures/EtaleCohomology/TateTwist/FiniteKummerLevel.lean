@@ -265,7 +265,6 @@ over the prime `ℓ`, and let `A = 𝒪_E / ϖ^{eN}`, a ring of characteristic `
 `T` on which `ℓ` is invertible, the finite-level twist `A(1)_T = μ_{ℓ^N} ⊗_ℤ A`
 (`AlgebraicGeometry.Etale.tateTwistSheaf`) is canonically isomorphic to
 `μ_{ℓ^N,T} ⊗_{ℤ/ℓ^N} A`, with `μ_{ℓ^N}` viewed as a sheaf of `ℤ/ℓ^N`-modules. -/
-
 noncomputable def tateTwistSheafOneIsoQuotientSpanPow (T : Scheme.{u})
     [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T] :
     haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N

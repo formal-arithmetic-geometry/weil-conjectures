@@ -143,7 +143,6 @@ noncomputable def unitsPowEqEquiv {R : Type*} [CommRing R] (a : Rˣ) :
 over an étale `U ⟶ X`, the sections of the Kummer extension `E_u`
 (`AlgebraicGeometry.Scheme.kummerExtension`) lying over the section `1` of `ℤ` correspond to the
 `X`-morphisms `U ⟶ 𝒯_u`. -/
-
 noncomputable def kummerExtensionFiberEquiv :
     {e : (kummerExtension n u).obj.obj (op U) //
         (kummerExtensionToInt n u).hom.app (op U) e = constantSheafIntOne U} ≃
