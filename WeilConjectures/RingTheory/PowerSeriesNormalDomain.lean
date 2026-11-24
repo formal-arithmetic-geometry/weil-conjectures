@@ -32,7 +32,6 @@ integral power series is almost integral over `R`.
 * [Stacks Project, Tag 0BI0](https://stacks.math.columbia.edu/tag/0BI0)
 -/
 
-
 @[expose] public section
 
 universe u
@@ -41,7 +40,6 @@ namespace PowerSeries
 
 /-- If a power series `f` over `K = Frac(R)` is almost integral over `R⟦X⟧` and its coefficients
 below `n` vanish, then its coefficient of degree `n` is almost integral over `R`. -/
-
 private theorem coeff_almostIntegral (R K : Type u) [CommRing R] [IsDomain R]
     [Field K] [Algebra R K] [IsFractionRing R K]
     (f : PowerSeries K) (hf : IsAlmostIntegral (PowerSeries R) f)
@@ -81,7 +79,6 @@ private theorem coeff_almostIntegral (R K : Type u) [CommRing R] [IsDomain R]
 
 /-- Over a Noetherian integrally closed domain `R`, every coefficient of a power series over
 `K = Frac(R)` that is almost integral over `R⟦X⟧` lies in the image of `R`. -/
-
 private theorem coeff_mem_range (R K : Type u) [CommRing R] [IsNoetherianRing R]
     [IsDomain R] [IsIntegrallyClosed R] [Field K] [Algebra R K] [IsFractionRing R K]
     (f : PowerSeries K) (hf : IsAlmostIntegral (PowerSeries R) f) (n : ℕ) :
@@ -126,7 +123,6 @@ private theorem coeff_mem_range (R K : Type u) [CommRing R] [IsNoetherianRing R]
 
 /-- A one-variable power series ring over a Noetherian normal domain is a Noetherian normal
 domain. -/
-
 theorem noetherian_normal_domain (R : Type u) [CommRing R] [IsNoetherianRing R]
     [IsDomain R] [IsIntegrallyClosed R] :
     IsNoetherianRing (PowerSeries R) ∧

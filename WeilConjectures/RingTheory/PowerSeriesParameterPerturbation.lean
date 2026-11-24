@@ -31,7 +31,6 @@ The new map sends `Xᵢ` to `φ(Xᵢ) + Yᵢ`.
 * Stacks Project, More on Algebra, Lemma 07NN, final proof paragraph
 -/
 
-
 @[expose] public section
 
 universe u v
@@ -164,7 +163,6 @@ parameters of the target, with a split surjection back to the original target. P
 `π : ΛB⟦X₁, …, X_{n+e}⟧ → ΛB⟦X₁, …, Xₑ⟧` and a local map `h` with `π ∘ h = φ`, such that
 `h(t)` extends to a regular system of parameters, where `t` consists of the variables (preceded
 by `c` in the Cohen case). -/
-
 theorem exists_power_series_parameter_perturbation
     {ΛA : Type u} {ΛB : Type v} [CommRing ΛA] [CommRing ΛB] (n e c : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) ΛA)]

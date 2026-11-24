@@ -23,7 +23,6 @@ If `I = (f₁, …, fₙ)`, then evaluation at the `fᵢ` defines a surjective r
 * [Stacks Project, Tag 05GH](https://stacks.math.columbia.edu/tag/05GH)
 -/
 
-
 @[expose] public section
 
 universe u
@@ -34,7 +33,6 @@ namespace MvPowerSeries
 `Φ : R⟦X₁, …, Xₙ⟧ →+* AdicCompletion I R` sending `X i` to `fᵢ` and constants to themselves,
 whose projection to `R ⧸ I ^ m` (for `m ≥ 1`) is: truncate below total degree `m`, evaluate at
 `f`, and reduce modulo `I ^ m`. -/
-
 theorem exists_surjective_toAdicCompletion {R : Type u} [CommRing R] (n : ℕ)
     (f : Fin n → R) (I : Ideal R) (hI : I = Ideal.span (Set.range f)) :
     ∃ Φ : MvPowerSeries (Fin n) R →+* AdicCompletion I R,

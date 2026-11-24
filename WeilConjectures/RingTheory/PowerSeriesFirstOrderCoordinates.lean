@@ -23,7 +23,6 @@ their constant and linear coefficients, with a trivial square-zero extension.
 * [Stacks Project, Tag 07EI](https://stacks.math.columbia.edu/tag/07EI), construction of `f₁`
 -/
 
-
 @[expose] public section
 
 universe u v
@@ -33,7 +32,6 @@ namespace MvPowerSeries
 /-- Constant and linear coefficients identify power series modulo the square of the
 variables' ideal with a trivial square-zero extension. The variables' ideal is precisely
 the subspace with zero first coordinate. -/
-
 theorem exists_firstOrder_coordinates (σ : Type u) [Finite σ] (K : Type v) [Field K] :
     let T := MvPowerSeries σ K
     let N : Ideal T := Ideal.span (Set.range (fun i ↦ (X i : T)))

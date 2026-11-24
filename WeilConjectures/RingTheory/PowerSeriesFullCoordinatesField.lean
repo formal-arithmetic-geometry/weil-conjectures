@@ -26,7 +26,6 @@ images of the variables under a `K`-algebra automorphism.
 * Stacks Project, More on Algebra, Lemma Tag 07NM (1)
 -/
 
-
 @[expose] public section
 
 universe u
@@ -37,7 +36,6 @@ namespace MvPowerSeries
 
 /-- If `t` is a regular system of parameters of `K⟦X₁, …, Xₙ⟧` of length `n`, then there is a
 `K`-algebra isomorphism of power series rings sending each variable `X i` to `tᵢ`. -/
-
 theorem exists_algEquiv_full_parameters_field
     (K : Type u) [Field K] (n : ℕ) (t : List (MvPowerSeries (Fin n) K))
     (hparams : IsLocalRing.IsRegularSystemOfParameters t) (hlen : t.length = n) :

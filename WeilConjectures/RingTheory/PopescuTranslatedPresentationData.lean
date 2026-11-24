@@ -19,7 +19,6 @@ presentation so that they vanish under this map, keeping the strictly standard w
 * [Stacks Project, Tag 07CR](https://stacks.math.columbia.edu/tag/07CR)
 -/
 
-
 @[expose] public section
 
 universe u v
@@ -32,7 +31,6 @@ open MvPolynomial
 there is a presentation of `A` whose generators are killed by `ρ`, together with a Jacobian
 minor identity for `π` and the ideal-square containment witnessing that `π` is strictly
 standard. -/
-
 theorem exists_popescu_translated_presentation_data
     (R : Type u) (A : Type v) [CommRing R] [CommRing A]
     [Algebra R A] [FinitePresentation R A] (π : R)

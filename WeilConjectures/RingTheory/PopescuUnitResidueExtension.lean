@@ -37,7 +37,6 @@ evaluates `T` at `s`.
 * Stacks Project, Tags 07FH and 07FI
 -/
 
-
 @[expose] public section
 
 set_option autoImplicit false
@@ -110,7 +109,6 @@ with `z sᵠ - 1` nilpotent in `B`, and a family `y : Fin m → A` of copies of 
 with the residue field extension induced by `A₀ ≤ A`, either `m = 0` and the residue field
 extension is formally étale, or `m = 1` and the residue field of `A` is generated over that
 of `A₀` by the transcendental residue of `s`. -/
-
 theorem exists_popescu_unit_residue_extension
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

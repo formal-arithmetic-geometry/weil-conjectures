@@ -36,7 +36,6 @@ No parameters in the target ring and no Artinian solution are chosen here. The c
 * Stacks Project, Tags 07CE, 07EZ and 07CC
 -/
 
-
 @[expose] public section
 
 universe u v w
@@ -81,7 +80,6 @@ retraction `ρ : C₀ → B` with `ρ ∘ β₀ = (A → B)`, and `c > 0`, such 
 `R` and every `h : B → Λ`, the induced map `γ : R ⊗[S] C₀ → Λ` satisfies
 `popescuIdeal (h ∘ (A → B)) ≤ popescuIdeal γ`, and `0` and the images of `xᵢ^c` are strictly
 standard in `R ⊗[S] C₀`. -/
-
 theorem exists_popescu_universal_standardizer
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

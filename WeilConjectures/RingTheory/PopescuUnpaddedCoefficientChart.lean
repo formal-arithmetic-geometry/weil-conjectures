@@ -33,7 +33,6 @@ transport essential smoothness also applies when `d = 0`.
 * [Stacks Project, Tag 07FJ](https://stacks.math.columbia.edu/tag/07FJ)
 -/
 
-
 @[expose] public section
 
 set_option autoImplicit false
@@ -97,7 +96,6 @@ kernel stabilization conditions, an ideal `H` of `R` generating the parameter id
 and an Artinian local `k`-algebra `D'` such that `E = D'[t₁, …, t_d]` is essentially smooth
 over `R/H^n`, with `n = N + d(8c)`, together with a flat local map `g : D' → Λ_q/m^n` and
 lifts of `α` and of the coefficients `ℓᵢⱼ` that are compatible with `g`. -/
-
 theorem exists_popescu_unpadded_coefficient_chart
     {k : Type u} {A : Type v} {Λ : Type w}
     [Field k] [CommRing A] [CommRing Λ] [Algebra k A] [Algebra k Λ]

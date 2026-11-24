@@ -22,7 +22,6 @@ coefficient quotient.
 * [Stacks Project, Tag 07CP](https://stacks.math.columbia.edu/tag/07CP)
 -/
 
-
 @[expose] public section
 
 universe a c b
@@ -54,7 +53,6 @@ private theorem localized_surjection_bijective
 the `k`-th chart element `aₖ`. Then the localization of `B ⊗[R] D` at `1 ⊗ s` is isomorphic,
 as a `B`-algebra, to the polynomial algebra on `Eₖ` over `B ⊗[R/(π²)]` the localization of
 the reduced quotient at `aₖ`. -/
-
 theorem popescu_zero_base_chart_polynomial (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

@@ -35,7 +35,6 @@ of `t`. These values are nilpotent, so evaluation of power series is well define
 * Stacks Project, Tags 07NM and 07NL
 -/
 
-
 @[expose] public section
 
 universe u v w
@@ -144,7 +143,6 @@ private theorem adjust_coordinates
 `g : T →ₐ[R] D ⧸ J` kills a power of the maximal ideal of `T` and `J ^ 2 = 0`, then there is a
 ring map `f : T →+* D` lifting `g` with `f (i r) = algebraMap R D r` for every `r ∈ t`. The lift
 `f` need not be `R`-linear. -/
-
 theorem exists_parameterPreserving_ringLift
     (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]

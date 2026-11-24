@@ -23,7 +23,6 @@ variables, and its value is characterized by its reductions modulo powers of `I`
 * Stacks Project, More on Algebra, Tags 07NL and 07NN
 -/
 
-
 @[expose] public section
 
 universe u v
@@ -35,7 +34,6 @@ namespace MvPowerSeries
 `α` on constants and sends `X i` to `b i`. Moreover, `E F` is the unique `t` congruent modulo
 `I ^ N` to `MvPolynomial.eval₂ α b (F.truncTotal N)` (the evaluation of the truncation of `F`
 below total degree `N`) for every `N ≥ 1`. -/
-
 theorem exists_unique_adic_evaluation {C : Type u} {T : Type v}
     [CommRing C] [CommRing T] (α : C →+* T) (I : Ideal T) [IsAdicComplete I T]
     (n : ℕ) (b : Fin n → T) (hb : ∀ i : Fin n, b i ∈ I) :

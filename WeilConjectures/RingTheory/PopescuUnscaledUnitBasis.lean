@@ -36,7 +36,6 @@ obtaining an actual power of `s` in the enlarged subalgebra is a separate Froben
 * Stacks Project, Tags 07FH and 07FI
 -/
 
-
 @[expose] public section
 
 set_option autoImplicit false
@@ -85,7 +84,6 @@ subalgebra `A ⊇ A₀`, an integer `Q ≥ 1`, a unit `z` of `A` with `z sᵠ - 
 and a family `y : Fin m → A` of copies of `s` such that the residue differentials of the
 `a₀ⱼ` and the `yⱼ` form a basis of the Kähler differentials of the residue field of `A`
 over `k`. -/
-
 theorem exists_popescu_unscaled_unit_basis
     (k : Type u) (Λ : Type v) [Field k] [CommRing Λ] [Algebra k Λ]
     [IsNoetherianRing Λ] (p : ℕ) [CharP k p] (hp : 0 < p)

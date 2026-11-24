@@ -21,7 +21,6 @@ relations over the scalar extension of the reduced quotient.
 * [Stacks Project, Tag 07CP](https://stacks.math.columbia.edu/tag/07CP)
 -/
 
-
 @[expose] public section
 
 universe a c b
@@ -106,7 +105,6 @@ polynomial ring by the equations `fₗ - π zₗ` and the `k`-th chart relations
 is isomorphic, as a `B`-algebra, to the quotient of the polynomial ring in the `zₗ` over
 `L = B ⊗[R/(π²)]` the reduced quotient by the linear relations
 `aₖ zₗ - ∑_{j ∈ Eₖ} hₖₗⱼ zⱼ`, compatibly with the coefficient maps from `R[x]`. -/
-
 theorem zero_base_single_chart_unlocalized (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

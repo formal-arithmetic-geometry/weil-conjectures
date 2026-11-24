@@ -25,7 +25,6 @@ arbitrary `B`, including the zero ring and non-flat scalar extensions.
 * [Stacks Project, Tag 07CP](https://stacks.math.columbia.edu/tag/07CP)
 -/
 
-
 @[expose] public section
 
 universe a c b
@@ -38,7 +37,6 @@ namespace Algebra.PopescuLiftPresentation
 vanishes. Let `Dₖ` be the quotient of the polynomial ring by the equations `fₗ - π zₗ` and the
 `k`-th chart relations. Then every chart relation `p_{k'l}` vanishes in the localization of
 `B ⊗[R] Dₖ` at the image of `aₖ`. -/
-
 theorem zero_base_chart_relations (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] [Algebra R Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

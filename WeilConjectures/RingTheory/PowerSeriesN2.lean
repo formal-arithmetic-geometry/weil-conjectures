@@ -23,7 +23,6 @@ domain.
 * Stacks Project, Algebra, Lemma Tag 032Q
 -/
 
-
 @[expose] public section
 
 universe u
@@ -32,7 +31,6 @@ namespace PowerSeries
 
 /-- Over a Noetherian N-2 domain, the one-variable formal power series ring is a
 Noetherian N-2 domain. -/
-
 theorem noetherian_domain_isN2 (R : Type u) [CommRing R] [IsDomain R]
     [IsNoetherianRing R] (hR : IsN2 R (FractionRing R)) :
     IsNoetherianRing (PowerSeries R) ∧

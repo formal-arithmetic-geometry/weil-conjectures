@@ -26,7 +26,6 @@ criterion to the element `X`.
 * Stacks Project, Algebra, Lemma Tag 032Q
 -/
 
-
 @[expose] public section
 
 universe u
@@ -74,7 +73,6 @@ private theorem isN2_quotient_X (A : Type u) [CommRing A] [IsDomain A]
     (FractionRing A) (FractionRing (PowerSeries A ⧸ I)) e.symm.injective hA
 
 /-- If `R` is a Noetherian N-2 domain, then the power series ring `R⟦X⟧` is N-2. -/
-
 theorem isN2_power_series (R : Type u) [CommRing R] [IsDomain R]
     [IsNoetherianRing R] (hR : IsN2 R (FractionRing R)) :
     IsN2 (PowerSeries R) (FractionRing (PowerSeries R)) := by

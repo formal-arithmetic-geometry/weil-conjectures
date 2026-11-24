@@ -20,7 +20,6 @@ Popescu lift presentation is a polynomial algebra over the localized reduced quo
 * [Stacks Project, Tag 07CP](https://stacks.math.columbia.edu/tag/07CP)
 -/
 
-
 @[expose] public section
 
 universe a c b
@@ -35,7 +34,6 @@ polynomial ring by the equations `fₗ - π zₗ` and the `k`-th chart relations
 localization of `B ⊗[R] Dₖ` at the image of `aₖ` is isomorphic, as a `B`-algebra, to the
 polynomial algebra on `Eₖ` over `B ⊗[R/(π²)]` the localization of the reduced quotient at
 `aₖ`. -/
-
 theorem zero_base_single_chart_polynomial (R : Type a) (Cbar : Type c)
     [CommRing R] [CommRing Cbar] (π : R)
     [Algebra (R ⧸ Ideal.span ({π ^ 2} : Set R)) Cbar]

@@ -29,7 +29,6 @@ No smoothness, presentation of the source, or Popescu resolution is needed here.
 * [Stacks Project, Tag 07F9](https://stacks.math.columbia.edu/tag/07F9)
 -/
 
-
 @[expose] public section
 
 universe u v
@@ -89,7 +88,6 @@ of `fⱼ` in the last `m` variables, let `Fⱼ` be the partial homogenization of
 variables with respect to a new last variable. Then there is a point `l ∈ Λ^(n+m+2)` whose
 middle coordinates start with `a`, whose first and last coordinates lie outside `q`, and at
 which every `X₀ Fⱼ` vanishes. -/
-
 theorem exists_homogenized_local_equations
     {R : Type u} {Λ : Type v} [CommRing R] [CommRing Λ] [Algebra R Λ]
     (q : PrimeSpectrum Λ) (n m c : ℕ)

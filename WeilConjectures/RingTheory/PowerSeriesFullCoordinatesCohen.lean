@@ -27,7 +27,6 @@ then the `tᵢ` are the images of the variables under a `Λ`-algebra automorphis
 * Stacks Project, More on Algebra, Lemma Tag 07NM (3)
 -/
 
-
 @[expose] public section
 
 universe u
@@ -40,7 +39,6 @@ namespace MvPowerSeries
 series such that `p, t₁, …, tₙ` is a regular system of parameters of `Λ⟦X₁, …, Xₙ⟧`. Then
 there is a `Λ`-algebra isomorphism of power series rings sending each variable `X i` to `tᵢ`.
 -/
-
 theorem exists_algEquiv_full_parameters_cohen
     (Λ : Type u) [CommRing Λ] [IsLocalRing Λ] [IsNoetherianRing Λ]
     (p n : ℕ) (hΛ : IsCohenRing p Λ) (t : List (MvPowerSeries (Fin n) Λ))

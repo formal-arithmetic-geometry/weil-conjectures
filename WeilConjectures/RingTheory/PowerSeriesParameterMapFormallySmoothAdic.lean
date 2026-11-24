@@ -33,7 +33,6 @@ closed fibre.
   argument after the base-change reduction
 -/
 
-
 @[expose] public section
 
 universe u v
@@ -48,7 +47,6 @@ characteristic-zero fields or Cohen rings of the same residue characteristic `p`
 with `p` in the Cohen case) and `i(t), y` is one of `T`. If the closed fibre `T / m_R T` is
 adically formally smooth over the residue field of `R`, then `T` is `m_T`-adically formally
 smooth over `R`. -/
-
 theorem formallySmoothAdic_of_parameters_closedFiber
     (ΛR : Type u) (ΛT : Type v) [CommRing ΛR] [CommRing ΛT] (n m : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) ΛR)]
