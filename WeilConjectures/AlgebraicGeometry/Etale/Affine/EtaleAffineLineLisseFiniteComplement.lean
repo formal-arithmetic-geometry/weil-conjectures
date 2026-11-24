@@ -12,7 +12,11 @@ import WeilConjectures.AlgebraicGeometry.AffineSpace.AffineLineDenseOpenFiniteCo
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 
-/-! A lisse open with finite complement after shrinking an affine-line base. -/
+/-! A lisse open with finite complement after shrinking an affine-line base.
+
+## References
+* [Stacks Project, Tag 0GKZ](https://stacks.math.columbia.edu/tag/0GKZ)
+-/
 
 @[expose] public section
 
@@ -23,20 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- A constructible sheaf on a relative affine line is lisse with finite complement after
-restricting the base to a dense affine open.
-Source: Stacks Project, Tag 0GKZ, the generic-constancy and generic-finiteness paragraph.
-(blueprint: lem-weil-pbc-affine-line-lisse-finite-complement)
-
-Proof: The base and relative line are Noetherian. Apply generic constancy to obtain a dense
-lisse open in the line. Its reduced closed complement has finite fibres over each component
-generic point of the base: each such fibre is a proper closed subset of an affine line over
-a field, so its points correspond to factors of a nonzero polynomial. The generic-finiteness
-neighborhood theorem makes this complement finite after shrinking the base to a dense open.
-Choose a principal open contained in this open and containing all the finitely many minimal
-primes, using finite prime avoidance. This principal open is dense, affine, and finite type
-over the integers. Identify it with its affine spectrum, pull back the original lisse open,
-and use base-change stability of finiteness and finite local constancy. For an empty base,
-take the zero ring and the empty opens; all conclusions hold. -/
+restricting the base to a dense affine open. -/
 theorem exists_dense_affine_open_lisse_finite_complement
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (Y : Scheme.{u}) [IsAffine Y]
     [Algebra.FiniteType ℤ Γ(Y, ⊤)]

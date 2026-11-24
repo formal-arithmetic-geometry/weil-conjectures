@@ -189,10 +189,6 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # Specified strict-perfect models for derived ringed-topos pullback
 
-Source: Stacks Project, Cohomology on Sites, Tag 08H3, lemma-strictly-perfect-pullback;
-Tag 06YQ and Section derived-pullback, Tag 06YY
-(blueprint: lem-weil-pbc-strict-perfect-ringed-pullback-model).
-
 The finite-free comparison is characterized on all local pure tensors, so its choice
 is uniquely determined. The transported splittings are degreewise, with no assertion
 that they commute with the differentials.
@@ -203,6 +199,10 @@ that they commute with the differentials.
 - `ringedPullbackStrictPerfectPackage`: the specified transported degreewise splittings.
 - `ringedPullbackComplexComparison`: the given comparison on cochain complexes.
 - `strictPerfectRingedPullbackModel`: flatness, K-flatness, bounds and natural comparison.
+
+## References
+
+* Stacks Project, Tags 08H3, 06YQ, 06YY
 -/
 
 @[expose] public section

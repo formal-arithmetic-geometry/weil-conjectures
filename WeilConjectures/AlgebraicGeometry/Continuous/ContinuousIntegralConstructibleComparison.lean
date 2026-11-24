@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousIntegralCoefficien
 /-!
 # Continuous and completed integral constructibility
 
-Source: Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
-(blueprint: lem-weil-pbc-continuous-integral-constructible-comparison)
+## References
+
+* Bhatt--Scholze, Definition 6.8.10 and Proposition 6.8.11(3).
 -/
 
 -- After pruning, this module only keeps private declarations.

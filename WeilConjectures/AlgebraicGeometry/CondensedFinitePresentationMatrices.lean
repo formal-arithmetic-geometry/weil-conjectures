@@ -13,9 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 
 /-!
 # Descent of local finite presentation matrices
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph,
-presentation-matrix step (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -248,20 +245,7 @@ private lemma finite_affine_lfp_cover (X : Scheme.{u}) [CompactSpace X] [QuasiSe
     rw [hw] at hi
     exact hi
 
-/-- Local finite presentation matrices lift simultaneously to one finite coefficient field.
-
-Source: upstream ModuleObject/Colimit/TwoColimit.lean, (Obj) descent paragraph, first
-finite-presentation step (auxiliary; not a blueprint node).
-
-Proof: refine the given presentation cover using quasi-compactness to a finite affine
-pro-etale cover. Monoidal inverse image preserves finite free modules and cokernels,
-so it preserves the presentations on this refinement. The coefficient cocone is a
-colimit, also after inverse image along f and the covering arrows. On each affine
-covering scheme the qcqs section calculus lifts every entry of each finite matrix to
-a finite coefficient field. Directedness moves all finitely many lifts to one field.
-Take these matrices over that field. Scalar extension preserves their cokernels and
-finite free modules, giving the displayed local comparisons. Empty covers and zero
-ranks use empty families and any coefficient stage supplied by filteredness. -/
+/-- Local finite presentation matrices lift simultaneously to one finite coefficient field. -/
 theorem exists_common_finiteCoefficient_presentation_matrices
     (T X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (f : X ⟶ T) (ℓ : ℕ) [Fact ℓ.Prime]

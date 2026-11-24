@@ -8,14 +8,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-! # Graph-normalized unbounded compact-support composition
 
-proof.md`, paragraph 3;
-upstream `LowerShriekComposition.lean`, graph constructions in the proofs of
-`nonempty_iso_rightDerivedLowerShriekOfCompactification` and
-`nonempty_iso_rightDerivedLowerShriek_comp`
-(auxiliary; not a blueprint node).
-
 Expose the actual graph constructions as data, without choosing an arbitrary
 isomorphism from their existence theorems. The supplied open parts may be non-qc.
+
+## Implementation details
+
+The constructions are those in the proofs of
+`nonempty_iso_rightDerivedLowerShriekOfCompactification` and
+`nonempty_iso_rightDerivedLowerShriek_comp`.
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +33,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- Compute compact support through a proper map and a proper/open factorization,
 by the two graph embeddings in the product of the proper parts and their open
-intersection. This is the construction in upstream `LowerShriekComposition.lean`,
-proof of `nonempty_iso_rightDerivedLowerShriekOfCompactification`;
-source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+intersection. -/
 def sfGraphCompactificationComparison {X Y P U : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (π : P ⟶ Y) [IsProper π] (e : U ⟶ P)
     [IsOpenImmersion e] (h : X ⟶ U) [IsProper h] (fac : h ≫ e ≫ π = f) :
@@ -109,11 +106,8 @@ def sfGraphCompactificationComparison {X Y P U : Scheme.{u}}
     Functor.associator _ _ _ ≪≫ eB.symm
 
 /-- The graph-normalized compositor for three supplied compactifications.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3; upstream
-`LowerShriekComposition.lean`, proof of `nonempty_iso_rightDerivedLowerShriek_comp`.
 Compute both sides in the product of the proper parts, restrict to its open over Y,
-and interchange proper direct image and open extension. No closure or qc hypothesis
-is used (auxiliary; not a blueprint node). -/
+and interchange proper direct image and open extension. -/
 def sfGraphCompactSupportCompIso {X Y T : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ T) (cf : Compactification f) (cg : Compactification g)
     (cfg : Compactification (f ≫ g)) :

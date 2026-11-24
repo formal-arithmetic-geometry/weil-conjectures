@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineExtensionSectionsModelFactorizati
 
 /-! # Invertibility of the affine unit mate on K-flat tilde models
 
-Source: Stacks Project, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: lem-pc-affine-extension-sections-model-mate).
+## References
+
+* Stacks Project, Tags 06Z0, 08DV, 08DW and 0AA7
 -/
 
 @[expose] public section
@@ -28,20 +29,8 @@ variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 variable [∀ (A : Type u) [Ring A], HasDerivedCategory.{w} (ModuleCat.{u} A)]
 
-/-- The normalized extension/sections mate is invertible on termwise tilde models.
-Source: Stacks, perfect.tex, Tags 06Z0, 08DV, 08DW and 0AA7.
-(blueprint: lem-pc-affine-extension-sections-model-mate).
-Proof: The given complex M is K-flat. Exact tilde carries M to a K-flat
-complex. The affine pullback formula identifies pulled-back tilde M with
-tilde of B tensor M.
-Derived sections recovers the latter module complex by the affine equivalence.
-The extension/restriction adjunction on complexes identifies the transpose of
-the pullback unit with this comparison. Localization preserves this equation;
-uniqueness of left adjoints identifies the fixed extension adjunction. The
-equation hr identifies the derived lift of the underived sections comparison v
-with r by the right-derived universal property. Thus the
-transpose in the statement is a composite of comparison isomorphisms. Neither
-flatness of the ring map nor boundedness of M is used. -/
+/-- The normalized extension/sections mate is invertible on termwise tilde models
+(Stacks, Tags 06Z0, 08DV, 08DW and 0AA7). -/
 theorem affineExtensionSections_model_mate_isIso
     {R B : CommRingCat.{u}} (g : Spec B ⟶ Spec R)
     (v : RingedSpace.moduleDirectImage g.toLRSHom.toShHom ⋙

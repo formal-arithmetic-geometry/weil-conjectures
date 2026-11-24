@@ -14,8 +14,12 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelIndepend
 
 /-! # AffineBaseChangeTildeGlobalComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-global-comparison). -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 08HY
+* Stacks Project, Tag 06Y6
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,24 +34,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The global base-change square for the explicit tensor cohomology module and arrow.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof; Tags 08HY and 06Y6.
-(blueprint: lem-pc-affine-base-change-tilde-global-comparison).
-
-Proof: use an R-K-flat resolution of the restricted M. The universal property of
-m.derived identifies it, compatibly with m.counit, with the module scalar-extension
-derived functor. Exact tilde identifies its cohomology with tilde of the restriction
-of m.cohomology. The cartesian tensor-algebra isomorphism transports that module to
-U. The canonical affine direct-image comparison is natural: affine vanishing and
-the unbounded bound N=1 identify H(Rf'_*) with f'_*H, and the tilde/Gamma counit
-identifies f'_*H with restriction of its cohomology module. This gives d and eU.
-On the common K-flat span, the derived base-change mate is scalar extension of the
-ordinary tensor comparison. The defining equation m.comparison_eq identifies it
-with m.comparison; m.localized_eq identifies its extension to A' with the specified
-module arrow. The target coordinate is the inverse pullback counit followed by e,
-exactly affineBaseChangeTildeCohomologyIso. Applying H therefore gives the displayed
-square. No stalk calculation is needed here. The construction uses no boundedness,
-Tor independence or nonzero-ring hypothesis. -/
+/-- The global base-change square for the explicit tensor cohomology module and arrow. -/
 theorem exists_affineBaseChangeTildeGlobalComparison
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

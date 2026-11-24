@@ -40,17 +40,8 @@ private theorem image_resolution_comparison_of_localization
   simp only [hfactor, Q.map_comp, Category.assoc, c.inv_hom_id, Category.comp_id]
   rw [hnat, reassoc_of% hl, ← H.map_comp, hn]
 
-/-- The restriction-induced intersection component realizes the canonical derived comparison.
-Source: Stacks Project, Tags 08FE, 08BV and 0D5T.
-(blueprint: lem-pc-mayer-vietoris-image-resolution-comparison-intersection).
-
-Proof: Factor the constructed third component into the sectionwise isomorphism and
-open image of f. Postcompose by the target open-image computation isomorphism,
-which is invertible. Naturality of the general localization map moves f across
-that map. The source-only localization compatibility identifies the remaining
-source composite with the canonical derived open comparison. The normalization
-of f, after cancelling the target resolution isomorphism and applying the inverse
-source resolution isomorphism, supplies the final equality. -/
+/-- The restriction-induced intersection component realizes the canonical derived comparison
+(Stacks, Tags 08FE, 08BV and 0D5T). -/
 theorem schemeMV_image_resolution_comparison_intersection
     (X Y : Scheme.{u}) (h : X ⟶ Y) (U V : Y.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

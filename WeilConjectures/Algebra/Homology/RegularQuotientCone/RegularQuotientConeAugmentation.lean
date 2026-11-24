@@ -49,8 +49,13 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Normalized principal-quotient cone augmentation
 
-Source: Stacks Project, Tags 06YP, 06YY and 07A6.
-(blueprint: lem-cbc-regular-quotient-cone-augmentation).
+## References
+
+* Stacks Project, Tag 06YP
+* Stacks Project, Tag 06YS
+* Stacks Project, Tag 06YT
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
 -/
 
 @[expose] public section
@@ -77,8 +82,7 @@ variable [EssentiallySmall.{r} C]
 change-of-rings model. The section equation fixes the coefficient unit, and the cone
 component equation fixes the augmentation, including its zero shifted component.
 The factorization isomorphisms specify localizations, not freely chosen comparisons.
-Source: Stacks 06YP, 06YY and 07A6
-(blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
+-/
 structure Augmentation
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections)
     (d : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) where
@@ -156,37 +160,7 @@ structure Augmentation
 /-- The normalized principal-quotient augmentation, without termwise flatness.
 The zero composite says precisely `φ(t) = 0`; short exactness is in module sheaves,
 so no surjectivity on sections or existence of points is assumed.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YP, 06YS, 06YT, 06YY and 07A6
-(blueprint: lem-cbc-regular-quotient-cone-augmentation).
-
-Proof:
-1. Use the normalized ordinary coefficient adjunction to define its unit termwise.
-The zero coefficient composite implies that the scalar annihilates restricted modules;
-naturality of the scalar therefore says that this unit kills multiplication by t.
-The mapping-cone descent construction gives the strict augmentation with zero shifted
-component, its naturality and its composite with the unshifted inclusion.
-2. For flat-term complexes, tensor the given coefficient short exact sequence degreewise.
-The regular tensor unitor and normalized scalar-extension comparison identify its maps
-with the scalar and the coefficient unit. The short-exact-sequence cone projection is
-therefore the augmentation and is a quasi-isomorphism. Resolve an arbitrary K-flat
-complex by a flat-term K-flat complex. Cone invariance, preservation by the specified
-ordinary extension model, exact restriction and naturality give the result for it too.
-Cone invariance itself follows from the two-isomorphisms property of cone triangles.
-3. Transfer the specified universal cochain left-derived pair to homotopy categories.
-Apply derived-adjunction compatibility using the resolving K-flat class and exact
-restriction. Its representative formula at the identity, transported through the canonical
-quotient/localization comparisons, gives the normalized cochain unit equation.
-4. Localize the scalar cone and its inclusion. Postcomposing the universal cochain
-counit with the derived right adjoint preserves its Kan extension property. Thus the
-strict augmentation factors uniquely through this counit. The factor is invertible
-on K-flats, hence on all complexes by resolutions and naturality, and on every derived
-object by essential surjectivity. This constructs A with the prescribed components.
-5. On K-flats, cancel the invertible universal counit and use the strict inclusion
-identity to identify i followed by A with the derived unit. Resolve arbitrary complexes
-to extend the equality by naturality, then use essential surjectivity of localization.
-The result is a natural isomorphism on the whole derived category, so its naturality
-also includes every resolution-comparison roof and its cocycle identities. -/
+-/
 theorem nonempty_augmentation
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections)
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫

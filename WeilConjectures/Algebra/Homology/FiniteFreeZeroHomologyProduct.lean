@@ -19,7 +19,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Homology of a finite-free zero-differential internal Hom complex
 
-Source: Stacks Project, Tags 0BQY and 0A8X.
+## References
+
+* Stacks Project, Tags 0BQY and 0A8X
 -/
 
 @[expose] public section
@@ -166,30 +168,7 @@ private noncomputable def fan_postcompose_iso
     have hmi := congrArg (· ≫ (e i).inv) (hm i)
     simpa only [fan_mk_proj, Category.assoc, Iso.hom_inv_id, Category.comp_id] using hmi
 
-/-- The coordinate homology maps exhibit Hom-complex homology as a product.
-
-Source: Stacks Project, Tag 0BQY, finite-free Hom calculation in Lemma 48.15.4,
-expanded using Tag 0A8X, the product terms and differential of the Hom complex.
-(blueprint: new-h3-finite-free-zero-homology-product).
-
-Proof: Write P = Hom(E,K) and F_p = Hom(E.X p,-). The fixed product projections
-and the zero differential of E give a map from the three-term short complex of P
-at n to F_p applied to the three-term short complex of K at p+n. These maps are
-product projections on each of the three objects, hence form a limiting fan of
-short complexes. Outside a finite interval the source E.X p is zero and therefore
-all three coordinate objects are zero. Restrict the fan to the finite interval;
-its missing projections are uniquely zero. The additive short-complex homology
-functor preserves this finite product, and its image of every omitted object is
-again zero, giving a limiting fan on homology. finiteFreeInternalHomExact and
-Functor.exact_tfae show that F_p preserves homology. Its canonical comparison
-isomorphism identifies each coordinate homology with Hom(E.X p,H^(p+n)(K)).
-Postcompose the limiting fan by these isomorphisms to obtain g. The comparison
-on cycles followed by F_p(iCycles) is the ambient projection; this morphism is
-monic because F_p is exact. Thus every supplied cycle lift d equals the canonical
-one. Naturality of homologyπ and the exact-functor homology comparison give the
-last equation. Transport along p+n=q gives the proof-indexed form. Empty support,
-rank-zero coordinates, and arbitrary (not concentrated) K use the same argument.
--/
+/-- The coordinate homology maps exhibit Hom-complex homology as a product. -/
 theorem finiteFreeZero_homologyProduct
     {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
     (R : Sheaf S CommRingCat.{u})

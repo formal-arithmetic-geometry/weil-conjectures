@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 /-!
 # Lifting continuous maps along a stalkwise isomorphism
 
-Source: Bhatt--Scholze, the more precise statement following Lemma 2.2.8.
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 2.2.8
 -/
 
 @[expose] public section
@@ -113,17 +115,7 @@ private theorem existsUnique_sheaf_lift {X Y W : Scheme.{u}} (f : X ⟶ Y)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A continuous lift along a morphism that is an isomorphism on all stalks extends
-uniquely to a scheme morphism over the base.
-
-Source: Bhatt--Scholze, the more precise statement following Lemma 2.2.8
-(blueprint: new-lem-zl-stalk-isomorphism-lifting).
-
-Proof: transpose the structure-sheaf map along inverse image. On stalks its transpose is
-an isomorphism, since inverse image and sheafification preserve stalks; it is therefore
-an isomorphism of sheaves. Its inverse gives the unique sheaf map above the specified
-continuous map. The composite with the base map is the original structure map by
-adjunction. Its stalk maps are the original local maps composed with inverses of local
-ring isomorphisms, hence are local. Uniqueness follows from the same adjunction. -/
+uniquely to a scheme morphism over the base. -/
 theorem Scheme.existsUnique_lift_of_stalkMap_isIso {X Y W : Scheme.{u}}
     (f : X ⟶ Y) (hf : ∀ x : X, IsIso (f.stalkMap x)) (g : W ⟶ Y)
     (a : W.toTopCat ⟶ X.toTopCat) (ha : a ≫ f.base = g.base) :

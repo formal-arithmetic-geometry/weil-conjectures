@@ -16,8 +16,9 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Conservative
 
 /-! # Generic restriction of locally constant module sheaves on a normal base
 
-Source: `lem-sp-normalized-tate-line-comparison`, proof step 3, and the local
-constant-sheaf calculation of `proposition-proper-direct-image-finite-coefficients`.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 09Z5
 -/
 
 @[expose] public section
@@ -32,22 +33,8 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-/-- The actual generic-point adjunction unit is invertible on locally constant sheaves.
-Source: `lem-sp-normalized-tate-line-comparison`, proof step 3; the local calculation
-is `proposition-proper-direct-image-finite-coefficients` (Stacks Project, Tag 09Z5).
-(blueprint: lem-sp-normal-generic-locally-constant-unit).
-
-Proof in words: the normal generic constant theorem says that the generic-point
-adjunction unit is invertible on every constant module sheaf. Etale base change
-transports this fact to the base change of the generic-point morphism along any
-etale map W to V, first on pullbacks of constant sheaves from V. Pullback preserves
-constant sheaves with their values unchanged, so the transported assertion holds
-for every constant sheaf on W. Now choose an etale cover on which G is constant.
-Naturality of the adjunction unit transports its invertibility through each
-trivialization. The unit form of the base change map identifies that local unit
-with the pullback of the original unit, up to isomorphisms. Finally a jointly
-surjective etale cover detects isomorphisms. No generic-fibre identification or
-choice of gluing maps is needed. -/
+/-- On a normal integral scheme, the generic-point adjunction unit is invertible on locally
+constant sheaves. -/
 theorem isIso_normalGeneric_locallyConstant_unit
     (Λ : Type (u + 1)) [CommRing Λ] (V : Scheme.{u})
     [IsIntegral V] (hV : IsNormalScheme V)

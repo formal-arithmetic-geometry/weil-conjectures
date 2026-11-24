@@ -19,9 +19,7 @@ variable {C D H : Type*} [Category C] [Category D] [Category H]
   [Abelian C] [Abelian D] [Abelian H]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory H]
 
-/-- Exact single-arrow transport respects ordinary natural isomorphisms.
-Source: localization naturality and compatibility on single complexes.
-(blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Exact single-arrow transport respects ordinary natural isomorphisms. -/
 theorem mapSingleArrow_natIso (F G : C ⥤ D) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -49,9 +47,7 @@ theorem mapSingleArrow_natIso (F G : C ⥤ D) [F.Additive] [G.Additive]
   simp only [← (shiftFunctor (DerivedCategory D) n).map_comp]
   rw [Functor.single_nat F G e Y]
 
-/-- Successive exact transports equal transport by the composite functor.
-Source: localization composition and compatibility on single complexes.
-(blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Successive exact transports equal transport by the composite functor. -/
 theorem mapSingleArrow_composite (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -84,8 +80,7 @@ theorem mapSingleArrow_composite (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Add
   dsimp only [e, Iso.symm_hom]
   rw [Functor.single_comp F G Y]
 
-/-- Exact transport preserves precomposition by an ordinary map.
-Source: naturality of the single comparison (blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Exact transport preserves precomposition by an ordinary map. -/
 theorem mapSingleArrow_precompose (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     {X X' Y : C} (a : X' ⟶ X) (n : ℤ)
@@ -98,9 +93,7 @@ theorem mapSingleArrow_precompose (F : C ⥤ D) [F.Additive]
   dsimp only [Functor.comp_map] at hn
   rw [← reassoc_of% hn]
 
-/-- Exact transport preserves postcomposition by a shifted ordinary map.
-Source: naturality of the shift and single comparisons
-(blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Exact transport preserves postcomposition by a shifted ordinary map. -/
 theorem mapSingleArrow_postcompose (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     {X Y Y' : C} (b : Y ⟶ Y') (n : ℤ)
@@ -114,9 +107,7 @@ theorem mapSingleArrow_postcompose (F : C ⥤ D) [F.Additive]
   have hn := (F.mapDerivedCategorySingleFunctor 0).hom.naturality b
   dsimp only [Functor.comp_map] at hn
   rw [← Functor.map_comp, hn, Functor.map_comp]
-/-- Evaluation, target identification and forgetting equal their exact composite.
-Source: the definition and exact transport laws
-(blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Evaluation, target identification and forgetting equal their exact composite. -/
 theorem forgetEvaluatedArrow_eq (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -128,8 +119,7 @@ theorem forgetEvaluatedArrow_eq (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Addi
   unfold forgetEvaluatedArrow
   rw [mapSingleArrow_postcompose, mapSingleArrow_composite]
 
-/-- An underlying arrow with endpoints transports by the exact composite.
-Source: exact transport laws (blueprint: lem-sfb-exact-arrow-transport). -/
+/-- An underlying arrow with endpoints transports by the exact composite. -/
 theorem map_underlyingSingleArrow (F : C ⥤ D) (G : D ⥤ H) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -147,9 +137,7 @@ end
 end AlgebraicGeometry.ProEtale.SpTowerClasses
 
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
-/-- Compose a naturality square with its two normalized endpoints.
-Source: associativity and functoriality of shifts
-(blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Compose a naturality square with its two normalized endpoints. -/
 theorem finiteBoundary_square_glue {D : Type*} [Category D] [HasShift D ℤ]
     {I X Y R S A B C Z : D} (n : ℤ)
     (p : I ⟶ X) (q : X ⟶ R) (r : Y ⟶ S) (eX : R ⟶ A) (eY : S ⟶ B)
@@ -161,13 +149,7 @@ theorem finiteBoundary_square_glue {D : Type*} [Category D] [HasShift D ℤ]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hn, reassoc_of% hc]
   simp only [← (shiftFunctor D n).map_comp_assoc, Iso.hom_inv_id_assoc]
-/-- Assemble a transported scalar square before specializing any module categories.
-Source: exact single-arrow transport, naturality and square gluing.
-(blueprint: lem-sfb-exact-arrow-transport).
-Proof: transport the given square through F followed by V. Naturality for e is
-its second square. The square gluing identity then inserts the ordinary source,
-target and target-isomorphism maps. Functoriality of the single functor writes
-the two endpoint composites as the displayed single maps. -/
+/-- Assemble a transported scalar square before specializing any module categories. -/
 theorem finiteBoundary_exact_glue
     {A C D H : Type*} [Category A] [Category C] [Category D] [Category H]
     [Abelian A] [Abelian C] [Abelian D] [Abelian H]
@@ -208,8 +190,7 @@ theorem finiteBoundary_exact_glue
     (mapSingleArrow (G ⋙ F ⋙ V) (2 : ℤ) a) (mapSingleArrow (F ⋙ V) (2 : ℤ) f) h hn
   simpa only [Functor.map_comp, Functor.mapIso_hom, Functor.mapIso_inv,
     Category.assoc] using hg
-/-- Transfer a commuting square along four identified arrows.
-Source: equality elimination (blueprint: lem-sfb-exact-arrow-transport). -/
+/-- Transfer a commuting square along four identified arrows. -/
 theorem finiteBoundary_congr {D : Type*} [Category D] {X X' Y Y' : D}
     {q q' : X ⟶ X'} {r r' : Y ⟶ Y'} {a a' : X' ⟶ Y'} {b b' : X ⟶ Y}
     (hq : q = q') (hr : r = r') (ha : a = a') (hb : b = b')
@@ -219,11 +200,7 @@ theorem finiteBoundary_congr {D : Type*} [Category D] {X X' Y Y' : D}
   subst a'
   subst b'
   exact h
-/-- Assemble an exact scalar square with its ordinary endpoint identifications.
-Source: exact square gluing and equality elimination
-(blueprint: lem-sfb-exact-arrow-transport).
-Proof: use the exact transport square, apply the single functor to the source
-and target equalities, and substitute the given evaluations of the two arrows. -/
+/-- Assemble an exact scalar square with its ordinary endpoint identifications. -/
 theorem finiteBoundary_identified_glue
     {A C D H : Type*} [Category A] [Category C] [Category D] [Category H]
     [Abelian A] [Abelian C] [Abelian D] [Abelian H]

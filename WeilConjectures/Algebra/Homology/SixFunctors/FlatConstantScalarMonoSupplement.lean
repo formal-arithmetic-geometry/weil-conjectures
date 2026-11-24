@@ -31,8 +31,9 @@ import Mathlib.Algebra.Category.Ring.Limits
 
 /-! # Regular constant scalars on flat module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03ER(3), 08FC and 03DA
-(blueprint: lem-sfb-flat-constant-module-scalar-mono).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03ER(3), 08FC and 03DA
 -/
 
 -- After pruning, this module only keeps private declarations.

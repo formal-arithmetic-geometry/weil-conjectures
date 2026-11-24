@@ -15,7 +15,13 @@ import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperSheafTransposeN
 import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphTransferNormalization
 import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphDerivedMate
 
-/-! # The graph transpose of the normalized sheaf map -/
+/-! # The graph transpose of the normalized sheaf map
+
+## References
+
+* Stacks Project, Tag 0F7B, case (b)
+* Stacks Project, Tag 0F4L (graph support description)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,24 +35,7 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   derivedEtaleLowerShriekUpperStarAdjunction etaleLowerShriekUpperStarAdjunction
 
 /-- A sheaf map normalized into the common direct image has the graph transfer as
-its transpose after passage through the right-derived units.
-Source: Stacks Project, Tag 0F7B, case (b), and Tag 0F4L, graph support description.
-(blueprint: lem-pur-proper-sheaf-unit-graph-transpose).
-
-Proof in words: on sheaves, transpose tau under v_! adjoint to v^*, and follow by
-base change for c.g. Its restriction to the clopen graph is the adjunction unit
-for c.i. Its restriction to the complementary open is zero. To see this, compose
-with the inclusion into the common direct image; hτ gives exactly the proper
-support inclusion, and that inclusion is monic. Thus the transpose is proper
-composition through the graph followed by its extension-by-zero unit.
-Apply this equality degreewise. The mixed derived mate unit formula transports
-ordinary base change to exact derived base change. Naturality of the
-right-derived units and the unit identity for proper direct-image composition
-move the q-unit to the front. The derived comparison for the clopen graph is
-the derived sheaf isomorphism, so its unit cancels. What remains is the displayed
-transfer, with the q-unit in front. This calculation uses only the sheaf map,
-base change and ordinary derived direct images; it makes no reference to
-compact-support composition or its chosen comparisons. -/
+its transpose after passage through the right-derived units. -/
 theorem properSheafUnit_graph_transpose
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}}

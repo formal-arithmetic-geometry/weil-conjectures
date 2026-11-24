@@ -29,16 +29,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-/-- The open-closed localization sequence is short exact.
-Source: Stacks Project, Tag 09AH (auxiliary; not a blueprint node).
-
-Proof: restriction to the open identifies the sequence with the split sequence
-`F|U → F|U → 0`, using full faithfulness of extension by zero. Restriction to the
-closed identifies it with `0 → F|Z → F|Z`, using the closed-immersion counit.
-Both inverse images are exact and together detect zero objects: an object vanishing
-on the open is supported on the closed and is the direct image of its closed
-restriction. They therefore detect monomorphisms, epimorphisms and exactness.
--/
+/-- The open-closed localization sequence is short exact (Stacks, Tag 09AH). -/
 theorem exact_openClosedSequence (Λ : Type (u + 1)) [CommRing Λ]
     {X Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]

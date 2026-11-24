@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianCohomologyPresenta
 
 /-! # Affine derived classes for cartesian higher images
 
-Source: Stacks Project, Tag 0EYM, second proof, left vertical arrow.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section
@@ -36,23 +38,8 @@ noncomputable local instance localInst_CartesianHigherImageAffineComplexPresenta
 
 /-- Present affine cartesian derived classes by a qcqs scheme system and its
 abelian complex cohomology cocone. The presentation has canonical transition and
-leg equations, and contains no cohomology continuity or representative assertion.
-Source: Stacks Project, Tag 0EYM, second proof, the square preceding part (1);
-Tags 0EYL, 03Q8 and 09YQ.
-(blueprint: lem-sc-cartesian-higher-image-affine-complex-presentation).
-
-Proof: Descend U to an affine etale model V over a stage i using the cofiltered
-model theorem. The actual over-category Over i is cofiltered. Pull the diagram
-and cone back to X times_k S_i. The chart-system theorem supplies its limiting
-cone, affine transitions and qcqs structure maps. Pull F to X times_k S_i and
-apply the restricted-over abelian cohomology presentation, obtaining H, B and
-canonical comparison and cone-leg equations. The chart comparison identifies
-its apex cohomology with the limit derived Hom and gives compatible stage lifts.
-Use J = Over i and a(j) = j.left, compose the apex isomorphisms, and combine the
-chart comparison equation with the presentation's cone-leg equation. This is
-an explicit assembly before invoking cohomology continuity.
-No arbitrary witness or unproved existence theorem is used to define a sheaf,
-functor, object or map. Empty test schemes and q=0 use the same constructions. -/
+leg equations, and contains no cohomology continuity or representative assertion
+(Stacks, Tags 0EYM, 0EYL, 03Q8 and 09YQ). -/
 theorem exists_cartesianHigherImage_affine_complex_presentation
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

@@ -103,8 +103,10 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # The normalized geometric coefficient pullback mate
 
-Source: Zheng Construction 4.1; Stacks 03EL, 0G7E and 07A6.
-(blueprint: lem-coef-geometric-coefficient-pullback-mate)
+## References
+
+* Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10
+* Stacks Project, Tags 03EL, 0G7E, 06YY, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -246,19 +248,7 @@ private theorem inverseImage_good [PreservesFiniteLimits uInv] (n : ℕ)
       ((HomologicalComplex.eval _ (.up ℤ) k).mapIso ic) (ht.2 k)⟩
 
 -- The representative comparison elaborates several independent coefficient universes.
-/-- The inverse mate of coefficient restriction and geometric pullback is invertible.
-Source: Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10;
-Stacks 03EL, 0G7E, 06YY and 07A6.
-(blueprint: lem-coef-geometric-coefficient-pullback-mate).
-
-Proof: the ordinary scalar inverse-image comparison intertwines the two ordinary
-scalar units. The identity-on-underlying-sheaves restriction comparison therefore
-has this isomorphism's inverse as its left mate. On a flat-term K-flat complex,
-inverse image preserves K-flatness. The normalized scalar adjunction transposes
-identify the derived mate with that ordinary isomorphism, conjugated by the two
-K-flat model comparisons and the exact inverse-image localization comparisons.
-All of these factors are invertible. Every derived object is isomorphic to such
-a representative, so naturality proves invertibility on every derived object. -/
+/-- The inverse mate of coefficient restriction and geometric pullback is invertible. -/
 theorem geometricCoefficientPullbackMate_isIso [PreservesFiniteLimits uInv]
     {m n : ℕ} (h : n ≤ m) :
     IsIso ((mateEquiv (A.scalar h).adjunction (target.scalar h).adjunction).symm

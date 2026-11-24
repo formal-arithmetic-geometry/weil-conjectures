@@ -21,8 +21,6 @@ open CategoryTheory
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The exact comparison with the existing cached etale single embedding.
-Source: diagonal coefficient changes (1), the finite constant unit comparison.
-(blueprint: def-diagonal-finite-single-comparison).
 
 This is the canonical exact-derived single comparison. Its functor interface uses
 `ordinaryFiniteSingleFunctor`, so its component objects retain the existing
@@ -42,9 +40,7 @@ private theorem whisker_eqToIso_trans_heq {C D E : Type*}
   simp
 
 /-- The cached comparison is the canonical exact-derived comparison after identifying
-its source single functor. Source: the exact-derived comparison in coefficient changes (1).
-(blueprint: def-diagonal-finite-single-comparison).
-Proof: transport along the cached-functor equality and eliminate that equality. -/
+its source single functor. -/
 theorem finiteSingleComparison_heq (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
     HEq (finiteSingleComparison A X)
       ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategorySingleFunctor 0) := by

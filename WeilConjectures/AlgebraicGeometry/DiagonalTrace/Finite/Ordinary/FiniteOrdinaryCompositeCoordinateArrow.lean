@@ -8,10 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Ordinary.FiniteOrdinaryTransportImages
 
 /-! # Composite and successive ordinary coordinate arrows
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: def-sfb-finite-ordinary-composite-coordinate-arrow).
-(blueprint: def-sfb-finite-ordinary-successive-coordinate-arrow).
 -/
 
 @[expose] public noncomputable section
@@ -49,9 +45,7 @@ attribute [local instance 100000] CategoryTheory.Abelian.toPreadditive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- Actual Hom between two arbitrary intrinsic coordinate endpoints.
-Source: the existing intrinsic degree-zero and shift constructions
-(blueprint: def-sfb-finite-ordinary-composite-coordinate-arrow). -/
+/-- Actual Hom between two arbitrary intrinsic coordinate endpoints. -/
 def FiniteOrdinaryCoordinateArrowHom (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     (M' N' : Scheme.reductionModules T (SpTowerShriek.B l E T n)) :=
@@ -59,8 +53,7 @@ def FiniteOrdinaryCoordinateArrowHom (n : ℕ)
     ((DerivedCategory.singleFunctor _ 0).obj N')⟦(2 : ℤ)⟧
 
 /-- Normalize the actual comparison-realization image using its given single
-comparison and arbitrary endpoint coordinates. Source: exact single and shift
-comparison (blueprint: def-sfb-finite-ordinary-composite-coordinate-arrow). -/
+comparison and arbitrary endpoint coordinates. -/
 def finiteOrdinaryCompositeCoordinateArrow (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}
@@ -84,9 +77,7 @@ def finiteOrdinaryCompositeCoordinateArrow (n : ℕ)
         ((SpTowerP1.nuSingle l E n T N) ≪≫
           (DerivedCategory.singleFunctor _ 0).mapIso v)).hom
 
-/-- The same coordinates applied to the actual successive exact image.
-Source: exact comparison and realization in normalized coordinates
-(blueprint: def-sfb-finite-ordinary-successive-coordinate-arrow). -/
+/-- The same coordinates applied to the actual successive exact image. -/
 def finiteOrdinarySuccessiveCoordinateArrow (n : ℕ)
     [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u})
     {M N : OrdinaryEtaleModules (FiniteRing l E n) T}

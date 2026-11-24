@@ -14,8 +14,12 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeOrdinaryComparison
 
 /-! # AffineBaseChangeTildeCanonicalGlobalComparison
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-canonical-global-comparison). -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08IB
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -61,26 +65,7 @@ private theorem tensorAlgebraMap_isIso
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Affine mate calculation for the fixed module-derived tensor construction.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof and equation-bc;
-more-algebra.tex, Tag 06Y6; perfect.tex, Tag 08IB.
-(blueprint: lem-pc-affine-base-change-tilde-canonical-global-comparison).
-
-Proof: unfold the fixed tensor model, whose functor is constructed by an R-K-flat
-resolution and extension of scalars. Affine higher-direct-image vanishing, with
-unbounded cohomological bound one, identifies derived direct-image cohomology
-naturally with ordinary direct image of cohomology. Compose with the tilde/Gamma
-counit and restriction-of-scalars comparison to obtain d. Exact tilde identifies
-the cohomology of the scalar-extended resolution with the associated sheaf of
-its module cohomology. The cartesian tensor-algebra isomorphism transports it to
-A', giving eU. On this fixed resolution the scheme mate is the scalar extension
-of the augmentation to the restricted A-complex, by the tensor-pullback unit
-formula. Its homology is the fixed model's comparison. The localized comparison
-is its adjoint after extension to A'. The inverse pullback counit and e give the
-target coordinate b. Applying homology to the mate equation gives the square.
-There is no comparison of two arbitrary derived functors or tensor actions in
-this statement; that is the separate model-independence lemma. Zero rings and
-zero complexes obey the same construction; no boundedness is used. -/
+/-- Affine mate calculation for the fixed module-derived tensor construction. -/
 theorem exists_affineBaseChangeTildeCanonicalGlobalComparison
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

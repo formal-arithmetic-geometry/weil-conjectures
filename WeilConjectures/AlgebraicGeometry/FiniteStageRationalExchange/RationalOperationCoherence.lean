@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.RationalRaw
 import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.FiniteStageKaroubiExtension
 
 /-! # Coefficient coherence for one completed operation pair
-
-Source: sketch32, lines 1218--1228 and 1291--1321.
-(blueprint: lem-sbc-rational-operation-coherence)
 -/
 
 @[expose] public noncomputable section

@@ -17,8 +17,9 @@ import WeilConjectures.Algebra.Homology.BaseTensorLocalizationHomologyNaturality
 
 /-! Generator calculation for base localization comparison.
 
-Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-localization-comparison-aux).
+## References
+
+* Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
 -/
 
 @[expose] public section
@@ -47,19 +48,7 @@ set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 include tRpA tRpB tAD tBD tApD tBpD in
-/-- The base-localization comparison identity on extension generators.
-Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-localization-comparison-aux).
-
-Proof: expand the two localized comparisons using their `localized_eq`
-identities and the comparison equations of the two models.  The universal
-counit equation for `baseLocalizationDerivedMap` gives the corresponding
-ordinary square.  Evaluating in each degree on `1 tensor x`, the ordinary
-identification is fixed by the displayed formula for `tau`; the resulting
-value is the canonical B-linear base-localization cohomology map.  This is
-exactly the generator calculation needed for the extension-of-scalars
-extensionality argument in `baseLocalization_comparison`.
--/
+/-- The base-localization comparison identity on extension generators. -/
 theorem baseLocalization_comparison_aux (S : Submonoid R) [IsLocalization S Rp]
     (i : ℤ) (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

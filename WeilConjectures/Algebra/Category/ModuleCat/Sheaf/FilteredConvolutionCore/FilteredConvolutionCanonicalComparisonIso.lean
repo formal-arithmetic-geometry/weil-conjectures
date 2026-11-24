@@ -122,9 +122,7 @@ set_option linter.unusedVariables false in
 /-- Under finite bounds, termwise split projections in the first filtration and flat
 first graded terms identify the canonical comparison with the associated graded
 isomorphism.  The proof is the degreewise finite split calculation and exactness of
-flat tensoring, followed by totalization and the Koszul differential check.
-Source: Steps 3--6 of the proof of `lem-trf-filtered-convolution-graded-quotient`.
-(blueprint: lem-trf-filtered-convolution-graded-quotient). -/
+flat tensoring, followed by totalization and the Koszul differential check. -/
 theorem canonical_comparison_isIso
     {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (a b c d : ℤ) (hPa : F.F a = ⊤) (hPb : F.F (b + 1) = ⊥)

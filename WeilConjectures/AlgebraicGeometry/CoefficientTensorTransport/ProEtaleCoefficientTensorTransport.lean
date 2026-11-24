@@ -12,8 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientTensorTransport.ProEt
 
 /-! # Tensor comparison for an isomorphism of coefficient sheaves
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6, and Modules on Sites,
-Tag 03EL. The comparison here concerns inverse image and tensor only.
+The comparison here concerns inverse image and tensor only.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4, 07A6
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public noncomputable section

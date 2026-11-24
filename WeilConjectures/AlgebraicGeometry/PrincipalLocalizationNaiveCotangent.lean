@@ -12,8 +12,16 @@ import Mathlib.LinearAlgebra.Isomorphisms
 /-!
 # Principal localization and the naive cotangent complex
 
-Source: Stacks Project, Algebra, Lemma 08JZ, statement and proof
-(blueprint: lem-weil-pbc-principal-localization-naive-cotangent).
+## Implementation details
+
+In the main statement, `P` bundles the surjection from `A[x_s]` and a chosen section, and
+`localizationAway Bg g` sends its sole variable to `1/g`. Mathlib writes tensors with the
+scalar extension on the left, so the degree-zero base change is
+`Bg ⊗[B] (B ⊗[P.Ring] Ω[P.Ring⁄A])`, canonically `Bg ⊗[P.Ring] Ω[P.Ring⁄A]`.
+
+## References
+
+* Stacks Project, Algebra, Lemma 08JZ, <https://stacks.math.columbia.edu/tag/08JZ>
 -/
 
 @[expose] public section
@@ -27,40 +35,7 @@ namespace Algebra.Generators
 set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 2048 in
 /-- A polynomial presentation and its principal localization have the displayed conormal
-and differential splittings. Source: Stacks Project, Algebra, Lemma 08JZ
-(blueprint: lem-weil-pbc-principal-localization-naive-cotangent).
-
-`P` bundles the surjection alpha from `A[x_s]` and a chosen section; its kernel is `P.ker`.
-`localizationAway Bg g` sends its sole variable to `1/g`; its `comp P` is beta.
-Its ring `A[x_s,x]` is the usual flattening of `P[x]`. Mathlib writes tensors with the
-scalar extension on the left. Thus the degree-zero base change is
-`Bg ⊗[B] (B ⊗[P.Ring] Ω[P.Ring⁄A])`, canonically `Bg ⊗[P.Ring] Ω[P.Ring⁄A]`.
-The equivalences `e1`, `e2` give clauses (1), (2) with their specified generators;
-`e0` and the commuting-square equation give the isomorphism of two-term complexes.
-
-Proof, following the node's eight steps:
-1. Apply lem-weil-pbc-polynomial-coefficient-map-kernel to alpha on coefficients and
-lem-weil-pbc-localization-away-polynomial-quotient to `B[x] → Bg`. Their composite is beta
-by def-weil-pbc-mv-polynomial-ring. Both are surjective. Lift a multiplier of `gx-1`
-through the first map to show its inverse image is `I P[x] + (fx-1)`.
-2. Use theorem-finite-etale-covers-proper-henselian--2 and tensor associativity:
-the differential module splits into the old differentials and the free generator `dx`.
-3. Inclusion of kernels induces the conormal map; extend its scalars to Bg. Step 1 shows
-this image and the class of `fx-1` generate the new conormal module.
-4. This inclusion after localization is injective by
-lem-weil-pbc-principal-localization-conormal-injective. Its proof maps to `(P/I²)[1/f]`,
-where the image of J is square-zero, so a class killed by J² vanishes after localization.
-5. By def-weil-pbc-kahler-differentials, the differential on an old class is its old
-differential. Leibniz gives `d(fx-1) = g⁻¹ df + g dx`; its dx-coordinate is g.
-6. If an old class plus `b[fx-1]` vanishes, apply the dx-coordinate of its differential:
-`bg = 0`. Since g is a unit, b = 0; then step 4 kills the old class. Together with
-step 3 this proves clause (1), including its rank-one generator.
-7. Replace dx by `g⁻² df + dx`. This change of basis fixes the old summand and sends
-the differential of `[fx-1]` to g times the new generator. Hence the two equivalences
-commute with the differential, proving clause (3).
-8. Multiplication by g is bijective. Kernels and cokernels of a direct sum of maps are
-the direct sums of their kernels and cokernels. The extra summand therefore has zero
-kernel and cokernel, giving the injectivity equivalence and cokernel isomorphism. -/
+and differential splittings (Stacks, Tag 08JZ). -/
 theorem principal_localization_naive_cotangent
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     {S : Type w} (P : Generators A B S) (g : B) (f : P.Ring)

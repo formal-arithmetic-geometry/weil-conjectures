@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
 /-!
 # Sections of a comparison into a direct image resolution
 
-Source: Stacks Project, Tag 0A50, proof.
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section
@@ -22,8 +24,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluate a complex morphism into a direct image, then restrict along a chosen
-map to the corresponding fibre product. This is an explicit chain map. 
-(blueprint: def-weil-pbc-etale-resolution-section-transfer)
+map to the corresponding fibre product. This is an explicit chain map.
 -/
 noncomputable def resolutionSectionTransfer {X Y : Scheme.{u}} (g : Y ⟶ X)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -43,8 +44,7 @@ noncomputable def resolutionSectionTransfer {X Y : Scheme.{u}} (g : Y ⟶ X)
     exact congrArg (fun f ↦ f ≫ (L.X j).obj.map k.op) h
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Section transfers commute with restriction whenever the site square commutes. 
-(blueprint: def-weil-pbc-etale-resolution-section-transfer)
+/-- Section transfers commute with restriction whenever the site square commutes.
 -/
 theorem resolutionSectionTransfer_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -67,8 +67,7 @@ theorem resolutionSectionTransfer_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)
       (L.X n).obj.map k.op = _
   rw [← Functor.map_comp, ← Functor.map_comp, ← op_comp, ← op_comp, h]
 
-/-- The terminal étale object maps to its base change along g. 
-(blueprint: def-weil-pbc-etale-resolution-section-transfer)
+/-- The terminal étale object maps to its base change along g.
 -/
 noncomputable def terminalSectionPullback {X Y : Scheme.{u}} (g : Y ⟶ X) :
     Scheme.Etale.mk (𝟙 Y) ⟶
@@ -76,8 +75,7 @@ noncomputable def terminalSectionPullback {X Y : Scheme.{u}} (g : Y ⟶ X) :
   MorphismProperty.Over.homMk
     (pullback.lift g (𝟙 Y) ((Category.comp_id _).trans (Category.id_comp _).symm)) (by simp)
 
-/-- The inverse-image open maps to the base change of the original open. 
-(blueprint: def-weil-pbc-etale-resolution-section-transfer)
+/-- The inverse-image open maps to the base change of the original open.
 -/
 noncomputable def openSectionPullback {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Opens) :
     Scheme.Etale.mk (g ⁻¹ᵁ W).ι ⟶
@@ -86,8 +84,7 @@ noncomputable def openSectionPullback {X Y : Scheme.{u}} (g : Y ⟶ X) (W : X.Op
     (pullback.lift (morphismRestrict g W) (g ⁻¹ᵁ W).ι (morphismRestrict_ι g W)) (by simp)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Transfer on sections of a whole scheme. 
-(blueprint: def-weil-pbc-etale-resolution-section-transfer)
+/-- Transfer on sections of a whole scheme.
 -/
 noncomputable abbrev globalResolutionSectionTransfer {X Y : Scheme.{u}} (g : Y ⟶ X)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -97,8 +94,7 @@ noncomputable abbrev globalResolutionSectionTransfer {X Y : Scheme.{u}} (g : Y �
     (Scheme.Etale.mk (𝟙 Y)) (terminalSectionPullback g)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Transfer on sections over an open. 
-(blueprint: def-weil-pbc-etale-resolution-section-transfer)
+/-- Transfer on sections over an open.
 -/
 noncomputable abbrev openResolutionSectionTransfer {X Y : Scheme.{u}} (g : Y ⟶ X)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)
@@ -144,9 +140,7 @@ theorem openSectionPullback_naturality {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit morphism of restriction-pair/difference section complexes induced by a
-complex morphism into the direct image. This construction requires no covering assumption.
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: def-weil-pbc-etale-resolution-section-transfer) -/
+complex morphism into the direct image (Stacks, Tag 0A50). -/
 noncomputable def resolutionSectionShortComplexTransfer {X Y : Scheme.{u}} (g : Y ⟶ X)
     (U V : X.Opens)
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ)

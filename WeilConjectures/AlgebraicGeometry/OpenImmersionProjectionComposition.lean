@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 /-! # Composition of the tensor comparison for extension by zero
 
-Source: Stacks Project, Tags 0GL1 and 0E8I.
+## References
+
+* Stacks Project, Tags 0GL1 and 0E8I.
 -/
 
 @[expose] public section
@@ -458,22 +460,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
 
 omit [HasSmallSiteSheafify B] in
 /-- The inverse open projection formulas compose through the specified open compositor.
-Source: Stacks Project, sites-cohomology Tag 0GL1 and sites-modules Tag 0E8I
-(auxiliary; not a blueprint node).
-
-Proof: the sheaf tensor comparison for extension by zero restricts to the identity on
-its open and is zero off that open. For two nested opens both compositions therefore
-extend the same tensor morphism by zero, with the same adjunction units. This identifies
-them through the canonical compositor, which is the comparison of left adjoints of
-restriction. Pass to complexes, preserving the direct-sum tensor differential, and use
-K-flat representatives for the tensor factors. The exact extension functors and their
-composition comparisons descend through quasi-isomorphisms. The canonical derived
-pullback compositor supplies precisely the final tensor-factor map displayed below.
-Equivalently, transpose through the composite derived open adjunction: the two
-transposes are the same composite of pullback tensor comparisons and units. Their
-equality follows from composition of units and the monoidal pullback composition law.
-Neither boundedness nor finite Tor dimension is used.
--/
+(Stacks, Tags 0GL1 and 0E8I) -/
 theorem derivedOpenImmersionLowerShriekProjectionIso_inv_comp
     {X Y Z : Scheme.{u}} (j : X ⟶ Y) (b : Y ⟶ Z) (a : X ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion b] [IsOpenImmersion a]

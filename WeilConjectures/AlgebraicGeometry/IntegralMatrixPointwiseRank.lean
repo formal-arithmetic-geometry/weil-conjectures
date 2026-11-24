@@ -235,23 +235,7 @@ private lemma integral_matrix_corank_at_free (ℓ : ℕ) [Fact ℓ.Prime]
   exact hdim.symm.trans hq
 
 /-- The evaluated integral matrix has constant field rank on a free rational-cokernel
-cover member.
-
-Source: Bhatt--Scholze, Section 6.8, continuous integral coefficient framework,
-and Example 4.1.10, exact geometric-field evaluation.
-(auxiliary; not a blueprint node)
-
-Proof: choose the supplied rational-cokernel cover and choose its finite free basis
-on each member, of rank q. Pull the cokernel presentation and this basis to an
-algebraic closure of the residue field at any point. Scheme inverse image preserves
-cokernels, as does final-object evaluation over the algebraically closed field.
-The coefficient pullback comparison and the canonical continuous realization identify
-the evaluated presentation with the pointwise E-matrix displayed here. Evaluation
-sends the free target and cokernel to E-vector spaces of dimensions t and q.
-Rank-nullity therefore gives matrix rank t-q, independent of the point.
-The integral matrix and its E-valued image have the same entries under the scalar
-inclusion O_E to E. A rank-zero source, rank-zero target or empty member causes no
-exception; the rank formula still applies wherever there is a point. -/
+cover member. (Bhatt--Scholze, Section 6.8 and Example 4.1.10) -/
 theorem integralMatrix_pointwise_rank (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (n t : ℕ) (X : Scheme.{u})

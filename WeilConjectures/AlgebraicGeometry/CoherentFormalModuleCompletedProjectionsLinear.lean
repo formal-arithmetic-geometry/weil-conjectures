@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Completed linear projections of formal modules
 
-Source: Stacks Project, Lemma 087X, affine description of K'_(l,m), using Lemma 087W.
-(blueprint: lem-weil-pbc-formal-completed-projections-linear).
+## References
+
+* Stacks Project, Tags 087X and 087W
 -/
 
 @[expose] public section
@@ -28,12 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Lemma 087W and Lemma 087X.
-(blueprint: lem-weil-pbc-formal-completed-projections-linear).
-
-Build the completed modules from the section towers. The completion action is
-coordinatewise, the finite-limit theorem supplies the projection kernels, and the
-map of limits induced by alpha is completion-linear by checking every projection. -/
+/-- The map of completed modules induced by a morphism of coherent formal modules is linear
+over the completion (Stacks, Tags 087W and 087X). -/
 theorem coherentFormalModule_completed_projections_linear
     {X : Scheme.{u}} [IsNoetherian X] (I : X.IdealSheafData)
     (F H : CoherentFormalModule X I) (α : F ⟶ H) (U : X.affineOpens) :

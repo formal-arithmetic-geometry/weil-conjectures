@@ -333,15 +333,8 @@ private theorem coefficientSectionsIso_pullback {X Y : Scheme.{u}}
   erw [reassoc_of% ht, reassoc_of% he, reassoc_of% hu]
   simp
 
-/-- Exact coefficient change commutes with the canonical maps on affine pullback sections.
-Source: Stacks, Sites, Tag 0738(4), and the inverse-image adjunction.
-Proof: the pullback comparison is the unique isomorphism between the two left adjoints
-of the objectwise commuting direct-image/coefficient right adjoints. Its unit equation,
-evaluated at the terminal object, identifies the two maps on sections. For a composite,
-apply the same equation to the composite adjunction. Uniqueness of transposes identifies
-the two routes with the inverse-image composition comparison. The affine sheafification
-comparison is natural, because it is the sheafification unit evaluated on an affine object.
-(auxiliary; not a blueprint node) -/
+/-- Exact coefficient change commutes with the canonical maps on affine pullback sections
+(Stacks, Tag 0738). -/
 theorem coefficientPullbackSectionsIso_comp {S X Y : Scheme.{u}}
     [IsAffine X] [IsAffine Y] [PreservesFiniteLimits L]
     (F : Sheaf S.smallEtaleTopology B) (h : X ⟶ Y) (f : Y ⟶ S)

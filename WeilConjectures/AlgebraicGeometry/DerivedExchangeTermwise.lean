@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DerivedExchangeUnboundedTransport
 /-!
 # Termwise construction of the derived exchange morphism
 
-Source: Stacks Project, `sites-cohomology.tex`, Lemma 0736 and Remark 07A7;
-`derived.tex`, Lemmas 070I, 070K and 0DVC. The comparison between these constructions
-is the blueprint's explicit argument (blueprint: prose-04-06).
+## References
+
+* Stacks Project, Tags 0736, 07A7, 070I, 070K, 0DVC
 
 ## Main statements
 
@@ -70,39 +70,7 @@ exchange, using the canonical comparisons with the chosen injective representati
 The localization is written as `Qh` after the homotopy quotient, canonically isomorphic to `Q`.
 The chosen representatives `P` and `P'` and their resolutions `ρ` and `ρ'` are supplied by
 `DerivedCategory.Plus.injectiveObjectEquivalence`; `h.1` and `h.2` are the unique homotopy
-classes comparing `I` and `J` with them (their existence and uniqueness is the second clause;
-the third states the node's claims for that pair). Thus `χ` and `χ'` are precisely the node's
-`χ_(I,s)` and `χ_(J,t)`, followed by the existing comparison to the right-derived functor.
-
-Proof (the seven steps of the node):
-1. Lift `s⁻¹ ≫ ρ` to the unique comparison of K-injectives and lift its inverse
-   (`lem-weil-pbc-kinjective-hom-derived`). Faithfulness makes these homotopy inverses;
-   termwise pushforward preserves homotopies (`lem-weil-pbc-termwise-adjunction-homotopy`).
-   The resulting `χ` is an isomorphism and is natural for maps of representatives
-   (`def-weil-pbc-direct-image`, `lem-weil-pbc-derived-direct-image-triangulated`).
-2. Naturality of the derived counit and the termwise comparison expresses the counit on
-   `(I,s)` as `s⁻¹ Q(ε_I) φ` (`prose-04-06`,
-   `situation-conventions`, `lem-weil-pbc-termwise-adjunction-homotopy`).
-3. On a bounded below complex `N`, the derived unit is `χ Q(f'_*(r) η_N)` for a
-   K-injective resolution `r` of `f'⁻¹N` (the same adjunction node and
-   `lem-weil-pbc-kinjective-hom-derived`, `def-weil-abstract-derived-category`).
-4. The derived square isomorphism on a complex is the localized termwise square
-   isomorphism conjugated by the inverse-image comparisons
-   (`def-weil-pbc-derived-square-iso`, `situation-conventions`).
-5. Naturality of the square isomorphism and counit makes the underived exchanges a
-   morphism of complexes; the termwise unit gives its adjoint formula
-   (`definition-underived-base-change-map--1`, `def-weil-pbc-inverse-image`,
-   `definition-underived-base-change-map`, `lem-weil-pbc-termwise-adjunction-homotopy`).
-6. For bounded below `I`, substitute steps 2--4 in the mate formula
-   (`definition-derived-base-change-map`); use naturality of `χ` and uniqueness of lifts
-   to identify the result with `Q(e)` followed by `χ'`.
-7. For arbitrary `I`, compare it with the chosen bounded below injective representative
-   by step 1. Transport `j` along the homotopy inverse; naturality of underived exchange
-   (`lemma-weil-pbc-underived-exchange-naturality`) and the inverse-image comparisons
-   identifies both source comparisons and the same target comparison, giving the equation.
-Source: Stacks Project, Lemma 0736 and Remark 07A7; `derived.tex`, Lemmas 070I, 070K, 0DVC;
-comparison given here in the blueprint
-(blueprint: prose-04-06). -/
+classes comparing `I` and `J` with them (Stacks, Tags 0736, 07A7, 070I, 070K, 0DVC). -/
 lemma derivedExchangeTermwise
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
 /-!
 # Underlying sheaves and scalar action of pro-etale module inverse image
 
-Source: Stacks Project, Tags 03D2, 03D3 and 04JC.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Tags 03D2, 03D3 and 04JC.
 -/
 
 @[expose] public section
@@ -106,24 +107,8 @@ private theorem underlying {X Y : Scheme.{u}} (f : Y ⟶ X)
     Functor.isoWhiskerLeft (SheafOfModules.toSheaf A) (modelAbelianPullbackIso f)⟩
 
 /-- The module inverse image agrees with ordinary inverse image on underlying abelian
-sheaves and on the scalar-action graph, for every morphism of schemes.
-
-Source: Stacks Project, Tags 03D2, 03D3 and 04JC.
-(auxiliary; not a blueprint node)
-
-Proof: apply finite-product-preserving set inverse image to the module addition and action.
-Functoriality carries the identities expressing the module laws to the same identities in
-the inverse-image ring.  Transport the resulting module through the small-model site
- equivalences.  An abelian map from this module is linear precisely when its adjunct is
-linear for the ring adjunction unit: naturality of that unit on the scalar-action map and
-its product comparison prove both implications.  This gives a module adjunction with the
-same right functor as the constructed module pullback.  Uniqueness of left adjoints gives
-the natural abelian comparison.  The ring comparison comes from the ring-object lift of
-the set adjunction.  For the final assertion, the hypothesis says that the map (a,b,t)
-factors through the graph of scalar multiplication.  A finite-limit-preserving functor
-preserves this graph and its factorization, giving the displayed sectionwise equality.
-No immersion or nonzero coefficient hypothesis is used.
--/
+sheaves and on the scalar-action graph, for every morphism of schemes
+(Stacks, Tags 03D2, 03D3 and 04JC). -/
 theorem proEtale_moduleInverseImage_comparison
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :

@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceConstruc
 public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 
 /-! # Restriction of the unbounded affine compact-support comparison
-
-Source: blueprint vector integration, comparison of ordered compact supports.
-(blueprint: lem-amb-affine-trace-compact-comparison-restriction).
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +24,7 @@ attribute [local irreducible] rightDerivedLowerShriekOfCompactificationIso
   upperStar
 
 /-- Construct the unbounded tower comparison from the compact-support identity,
-the standard affine-line compactifications and the compact-support compositor.
-Source: blueprint sec-smooth-purity/sk-prop-an, vector integration overlap calculation.
-(blueprint: lem-amb-affine-trace-compact-comparison-restriction). -/
+the standard affine-line compactifications and the compact-support compositor. -/
 def affineTraceUnboundedCompactComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] : (d : ℕ) →
     affineTraceLeft A S d ≅
@@ -363,27 +358,7 @@ private lemma restriction_successor
     (unbounded_succ_app A S d (DerivedCategory.Plus.ι.obj K)) (plus_succ_app A S d K) hp
 
 /-- The recursively constructed unbounded comparison restricts to the specified
-bounded-below comparison.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-overlap calculation, bounded-below/unbounded compact-support comparison.
-(blueprint: lem-amb-affine-trace-compact-comparison-restriction).
-
-Proof: induct on d. In dimension zero, use the compact-support composition restriction
-for the identity pair and the left unit equations on D+ and D. Naturality of the
-inclusion comparison and faithfulness of compact supports along the identity identify
-its unit restriction; compose with the inverse identity comparisons to obtain the
-asserted zero equation. For a successor, write q for the last affine-line projection
-and c for its standard projective-line compactification. The comparison restriction
-for c and the chosen compactification says that the inclusion of their D+ comparison,
-followed by the chosen inclusion comparison, equals the c inclusion comparison followed
-by the unbounded compactification comparison. Take components of the successor tower
-comparison equations. Apply the line restriction equation under the preceding tower
-functor. Naturality of the preceding inclusion comparison moves the bounded-below line
-comparison across it. Naturality of the preceding unbounded tower comparison then
-moves the line inclusion comparison across that comparison. The induction hypothesis
-and the compact-support composition restriction finish the pasted square.
-Reassociation proves the equation. These
-arguments apply to all bounded-below objects, including zero objects and empty bases. -/
+bounded-below comparison. -/
 theorem affineTraceUnboundedCompactComparison_restriction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)

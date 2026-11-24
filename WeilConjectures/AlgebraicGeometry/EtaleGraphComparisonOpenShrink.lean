@@ -9,9 +9,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleGraphShrinkMiddlePasting
 
 /-! # Shrinking the supporting open in the explicit graph comparison
 
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, and the
-product/intersection formula of `EtaleLocallyClosedGraphModel`.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -170,32 +170,7 @@ private theorem shrink_cancel
   simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.hom_inv_id_assoc]
 
 /-- The explicit graph comparison commutes with shrinking the supporting open while
-keeping its ambient proper scheme fixed.
-
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D; the elementary
-neighborhood move in lem-pur-etale-graph-comparison-interchange, steps 1--3.
-(auxiliary; not a blueprint node).
-
-Proof: the two graph products with `c.Z` have the same ambient scheme and the same
-first supporting neighborhood. The smaller second neighborhood is the inverse
-image of `v`, and its intersection with the first neighborhood is the corresponding
-open subspace of the old intersection. The graph lifts factor through both smaller
-opens since `ha` holds. All graph lifts are proper by proper-to-separated, and all
-the resulting identity-top graph squares are Cartesian since their bottom arrows
-are monomorphisms. Expand the two graph comparisons as `B₂⁻¹ R(B₁₂) B₁`.
-Let `D_v` be the Cartesian neighborhood square with top the smaller open inclusion
-and bottom `v`, and let `E` be its identity-top graph triangle. The smaller side
-square is `D_v` pasted horizontally before the old side square. The triangle for
-`ha` is `E` stacked vertically above `D_v`. Apply the two pasting laws, cancel the
-common exchange for `D_v`, and move the exchange for `E` past the old side exchange
-by naturality. This compares the second side words. For the middle words apply
-horizontal pasting to the intersection graph triangle followed by each projection;
-the two occurrences of the smaller-intersection triangle cancel. Substitute the
-side and middle equations into the graph words. The remaining factor is the inverse
-triangle interchange followed by the canonical open compositor, with `he` identifying
-the composite open. This is the word below.
-The identity direct image on the first side is the same in both formulas and cancels.
-The proof does not require quasi-compactness and is valid for identity or empty opens. -/
+keeping its ambient proper scheme fixed (Stacks, Tags 0F7C and 0F7D). -/
 theorem etaleGraphComparisonFromOpen_openShrink
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

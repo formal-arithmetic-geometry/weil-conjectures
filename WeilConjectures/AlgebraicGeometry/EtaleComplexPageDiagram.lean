@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
 import WeilConjectures.AlgebraicGeometry.EtalePageMapCoherence
 /-! # Coordinate-swapped diagram of functorial hypercohomology pages
 
-Source: Stacks Project, Tags 015J and 0EZM.
-(blueprint: lem-weil-pbc-etale-complex-page-diagram).
+## References
+
+* Stacks Project, Tags 015J and 0EZM
 -/
 
 @[expose] public section
@@ -106,22 +107,8 @@ private noncomputable def swapSequenceFunctor :
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent page and presentation families.
 set_option linter.unusedVariables false in
-/-- Assemble functorial pullback presentations into a spectral diagram, with coordinates swapped.
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
-
-Proof: Send op i to the presentation T₀ of F i, and f.op to its pullback map M.
-The identities and composition laws for M, transported through the displayed
-canonical inverse-image isomorphisms, give the functor laws. The maps induced by
-(c.π.app i, (eG i).inv followed by the cocone leg) form a compatible cocone: use
-hG and the cocone equation, and then the composition law. Reindex every page
-complex through the coordinate-swap equivalence (x,y) ↦ (y,x); the differential
-vector becomes (1-r,r). Transport the successive homology isomorphisms through
-this equivalence. Evaluation in a swapped bidegree gives pageIso and pageIsoLimit,
-and transport of page morphisms gives their two naturality equations. The global
-first-page equation hfirst supplies the ordinary cohomology dictionaries and their
-naturality; the presentation's negative-degree vanishing supplies the two negative
-resolution-degree statements. No stabilization or filtration comparison is used.
-(blueprint: lem-weil-pbc-etale-complex-page-diagram). -/
+/-- Assemble functorial pullback presentations into a spectral diagram, with coordinates swapped
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem exists_etaleComplex_page_diagram
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

@@ -27,8 +27,9 @@ import WeilConjectures.AlgebraicGeometry.ContinuousFieldCokernelLocalFree
 /-!
 # Local triviality over continuous p-adic field coefficients
 
-Source: Hemo--Richarz--Scholbach, Example 3.1, and the agent rank/descent argument
-recorded in (auxiliary; not a blueprint node).
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -137,23 +138,8 @@ private lemma free_pullback_comp_iff {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y �
   exact ⟨fun h ↦ free_of_iso (free_comap φ h) i.symm,
     fun h ↦ free_of_comap φ (free_of_iso h i)⟩
 
-/-- Local finite presentations over continuous field coefficients are locally finite free.
-Source: Hemo--Richarz--Scholbach, Example 3.1, with the agent rank/descent argument
-(auxiliary; not a blueprint node).
-Proof: use the preceding continuous-function realization. Pull a finite presentation to a
-geometric point; inverse image and evaluation preserve cokernels, and covers of a geometric
-point split. Its dimension is independent of the algebraically closed representative.
-The presentation matrix consists of continuous functions, so the dimension is n minus its
-pointwise rank. Flat going-down lifts generalizations through presentation covers.
-Continuous functions to the Hausdorff field E agree at comparable points, hence the rank
-descends and is constant on specializations. Noetherianity gives finitely many irreducible
-components and sobriety gives their generic points. Rank levels are therefore clopen.
-Restrict presentations to these levels. Nonvanishing loci of maximal-rank minors cover;
-Gaussian elimination using the continuous inverse of each invertible minor reduces the
-matrix to an identity block and a Schur complement. The latter vanishes pointwise, hence
-is zero as a matrix of functions. Its cokernel is finite free. For rank zero use the zero
-matrix directly. Composing the covers proves the assertion, including the empty scheme.
-All cokernels are ordinary sheaf cokernels; no completeness hypothesis is used. -/
+/-- Local finite presentations over continuous field coefficients are locally finite free
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem exists_finiteFree_cover_of_condensedField_lfp
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -224,16 +210,8 @@ theorem exists_finiteFree_cover_of_condensedField_lfp
   rcases ij with ⟨i, j⟩
   exact (free_pullback_comp_iff ((D i).f j) (C.f i) P).mpr (hD i j)
 
-/-- The local triviality assertion applies on every noetherian locally closed stratum.
-Source: the concluding application in the agent rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-Proof: restrict the module to a stratum of its finite locally closed stratification.
-The coefficient composition comparison identifies the restricted ring with the condensed
-coefficient ring of the stratum. Apply the local triviality theorem there, to the finite
-presentations in the stratified constructibility hypothesis. Pullback preserves the
-coefficient comparison, so its finite free modules give exactly the displayed ones.
-This includes empty strata, rank zero, and presentations with zero rows or columns. -/
+/-- The local triviality assertion applies on every noetherian locally closed stratum
+(Hemo--Richarz--Scholbach, Example 3.1). -/
 theorem exists_finiteFree_cover_on_condensedField_strata
     (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

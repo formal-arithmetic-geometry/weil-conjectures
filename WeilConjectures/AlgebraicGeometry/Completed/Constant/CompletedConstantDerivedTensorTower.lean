@@ -49,8 +49,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Derived quotient towers from K-flat invariance
 
-Source: Stacks Tags 06XN, 06YT and 06YU.
-(blueprint: lem-weil-pbc-completed-constant-derived-tensor-tower).
+## References
+
+* Stacks Project, Tags 06XN, 06YT, 06YU
 -/
 
 -- After pruning, this module only keeps private declarations.

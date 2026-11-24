@@ -170,12 +170,15 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryCommonQuotientTower
 
 /-! # Ordinary common-quotient scalar extensions
 
-Source: Stacks Project, Modules on Sites, Tag 03EK (section-tensor-product).
 The result concerns module sheaves before passing to complexes or derived categories.
 Quotient units are proved epic, their local ideal-product kernels are computed, and their
 transition compatibility follows from the pure-section formulas. The existence theorem
 constructs the normalized ordinary comparison and coefficient transitions.
 The quotient units themselves are constructed by the sheafification adjunction.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -455,8 +458,7 @@ private theorem quotientUnit_epi
   exact (toSheaf _).epi_of_epi_map inferInstance
 
 omit [EssentiallySmall.{r} C] in
-/-- The actual quotient unit has the prescribed section formula.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ordinary-common-quotient-tower). -/
+/-- The actual quotient unit has the prescribed section formula. -/
 theorem commonQuotientUnit_sections
     {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R)
     (U : Cᵒᵖ) (x : M.val.obj U) :
@@ -1001,8 +1003,7 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
 
 variable {D a b}
 
-/-- The constructed quotient units have the normalized pure-section formula.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ordinary-common-quotient-tower). -/
+/-- The constructed quotient units have the normalized pure-section formula. -/
 theorem OrdinaryCommonQuotientTower.unit_sections
     (O : OrdinaryCommonQuotientTower D a b) (n : ℕ) (M : Mod R)
     (U : Cᵒᵖ) (x : M.val.obj U) :
@@ -1013,12 +1014,7 @@ theorem OrdinaryCommonQuotientTower.unit_sections
             ⊗ₜ[R.obj.obj U, ((D.projection n).hom.app U).hom] x)) := by
   rfl
 
-/-- The pure-section transition formula forces compatibility of quotient units.
-Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
-Proof: evaluate the transition on 1 tensor x. Ring transitions preserve 1,
-so the result is exactly the unit at the next level. Equality on sections proves
-componentwise equality and therefore equality of natural transformations. -/
+/-- The pure-section transition formula forces compatibility of quotient units. -/
 theorem OrdinaryCommonQuotientTower.unit_transition
     (O : OrdinaryCommonQuotientTower D a b) (n : ℕ) :
     O.unit (n + 1) ≫ O.transition n = O.unit n := by
@@ -1033,13 +1029,7 @@ theorem OrdinaryCommonQuotientTower.unit_transition
     (((O.unit (n + 1)).app M).val.app U x) = ((O.unit n).app M).val.app U x
   rw [O.unit_sections, O.transition_sections, O.unit_sections, map_one]
 
-/-- The normalized quotient unit is epi using local scalar lifts and tensor generation.
-Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
-Proof: the presheaf unit is locally surjective by induction on tensors: lift a pure
-scalar along the local quotient projection; sums lift on the intersection cover.
-Sheafification units are locally surjective, so the composite is locally surjective
-and therefore epi. Transport along the prescribed ordinary object equality. -/
+/-- The normalized quotient unit is epi using local scalar lifts and tensor generation. -/
 theorem OrdinaryCommonQuotientTower.unit_epi
     (O : OrdinaryCommonQuotientTower D a b) (n : ℕ) (M : Mod R) :
     Epi ((O.unit n).app M) := by
@@ -1060,14 +1050,7 @@ theorem OrdinaryCommonQuotientTower.unit_epi
   have h : Epi (u ≫ e.inv) := inferInstance
   simpa [u, Category.assoc] using h
 
-/-- The section normalizations determine all ordinary comparison data uniquely.
-Source: Stacks 03EK
-(blueprint: lem-weil-pbc-ordinary-common-quotient-tower).
-Proof: units agree on every section. For a transition or a comparison, restrict
-scalars to R and precompose with the epic quotient unit. The formulas at 1 tensor x
-make the resulting maps equal on every section. Cancel the unit; restriction leaves
-the underlying functions unchanged, so the original maps agree. Proof fields are
-irrelevant. This also verifies that choosing the normalized data is unambiguous. -/
+/-- The section normalizations determine all ordinary comparison data uniquely. -/
 theorem OrdinaryCommonQuotientTower.unique
     (O O' : OrdinaryCommonQuotientTower D a b) : O = O' := by
   have ht : O.transition = O'.transition := by

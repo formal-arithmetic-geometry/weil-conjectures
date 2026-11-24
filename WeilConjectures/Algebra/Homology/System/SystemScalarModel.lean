@@ -109,7 +109,10 @@ import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Normalized ordinary and derived scalar models
 
-Source: Stacks 03D7, 06YY, 0FND and 09T5; Zheng, Construction 4.1.
+## References
+
+* Stacks Project, Tags 03D7, 03DA, 03DB, 03EK, 05RU, 06YY, 09T5, 0FND
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -124,10 +127,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-/-- Exactness of scalar restriction, with no flatness of the ring map.
-Source: Stacks 03DA and 03DB (blueprint: lem-pur-system-scalar-model).
-Proof: the underlying abelian sheaf and all its maps are unchanged. Kernels and
-sheafified cokernels therefore coincide with those before restriction. -/
+/-- Exactness of scalar restriction, with no flatness of the ring map. -/
 theorem systemScalarRestriction_exact {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
     PreservesFiniteLimits (restrictScalars.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) ∧
@@ -150,21 +150,18 @@ theorem systemScalarRestriction_exact {R S : Sheaf J CommRingCat.{w}} (φ : R �
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves F (toSheaf R'),
     preservesFiniteColimits_of_reflects_of_preserves F (toSheaf R')⟩
 
-/-- Exact restriction preserves finite limits. Source: Stacks 03DA
-(blueprint: lem-pur-system-scalar-model). -/
+/-- Exact restriction preserves finite limits. -/
 instance systemScalarRestrictionLimits {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
     PreservesFiniteLimits (restrictScalars.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) :=
   (systemScalarRestriction_exact φ).1
-/-- Exact restriction preserves finite colimits. Source: Stacks 03DA
-(blueprint: lem-pur-system-scalar-model). -/
+/-- Exact restriction preserves finite colimits. -/
 instance systemScalarRestrictionColimits {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
     PreservesFiniteColimits (restrictScalars.{w}
       ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) :=
   (systemScalarRestriction_exact φ).2
 
-/-- Standard localization at a coefficient level; no restriction on cohomological bounds.
-Source: Stacks 05RU (blueprint: lem-pur-system-scalar-model). -/
+/-- Standard localization at a coefficient level; no restriction on cohomological bounds. -/
 instance systemRingHasDerived (R : Sheaf J CommRingCat.{w}) :
     HasDerivedCategory (ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R)) :=
   HasDerivedCategory.standard _
@@ -173,8 +170,7 @@ variable [EssentiallySmall.{w} C]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The local pure tensor in the ordinary functor of the recorded derived-change model.
-The scalar is first, as in the project's change-of-rings construction.
-Source: Stacks 03EK and 03D7 (blueprint: lem-pur-system-scalar-model). -/
+The scalar is first, as in the project's change-of-rings construction. -/
 def systemModelTmul {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S}
     (D : DerivedChangeOfRingsCochainModel φ)
     (P : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R))
@@ -185,9 +181,7 @@ def systemModelTmul {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S}
 
 /-- The recorded derived-change-of-rings model together with its actual scalar
 adjunctions. The ordinary unit is fixed on local generators and the derived transpose
-is fixed by the universal counit on complexes.
-Source: Stacks 03D7, 06YY, 0FND and 09T5
-(blueprint: lem-pur-system-scalar-model). -/
+is fixed by the universal counit on complexes. -/
 structure SystemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) where
   model : DerivedChangeOfRingsCochainModel φ
   ordinaryAdj : model.E ⊣ restrictScalars.{w}
@@ -206,14 +200,7 @@ structure SystemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) where
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Every actual coefficient map has a scalar model with normalized ordinary and derived
-adjunctions. Source: Stacks 03D7, 06YY and 0FND
-(blueprint: lem-pur-system-scalar-model).
-Proof: use the existing cochain derived-change-of-rings universal pair. Descend its
-comparison through the homotopy quotient and transfer its universal property. The ordinary
-coefficient adjunction fixes the unit on local generators. The existing derived Hom
-comparison gives the normalized derived adjunction on homotopy representatives; transporting
-its equation back to complexes gives the required equation for every complex and chain map.
-No flatness of the coefficient map or of the complex is required. -/
+adjunctions. -/
 theorem nonempty_systemScalarModel {R S : Sheaf J CommRingCat.{w}} (φ : R ⟶ S) :
     Nonempty (SystemScalarModel φ) := by
   classical

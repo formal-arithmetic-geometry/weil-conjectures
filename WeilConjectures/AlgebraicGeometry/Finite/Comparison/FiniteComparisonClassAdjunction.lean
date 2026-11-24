@@ -36,9 +36,6 @@ import Mathlib.CategoryTheory.EssentialImage
 /-!
 # Exceptional adjunction on the comparison class
 
-Source: Weil blueprint, sec-smooth-purity/sk-prop-sf-existence,
-thm-sf-ambient-adjoint-class.md (blueprint: thm-sf-ambient-adjoint-class).
-
 The interface retains the natural Hom equivalences and the compactification comparisons.
 The right functor is written as the specified comparison composite, without an ambient
 pro-etale adjunction hypothesis. A single etale right adjoint normalizes the right functors
@@ -126,9 +123,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- The named direct-image comparison on D+, placed in the ordinary derived
-categories using their specified inclusion comparisons. It is the actual counit mate.
-Source: blueprint comparison-class adjunction, proper direct-image comparison
-(blueprint: thm-sf-ambient-adjoint-class). -/
+categories using their specified inclusion comparisons. It is the actual counit mate. -/
 def fixedDirectImageComparisonIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {S V : Scheme.{u}} (c : S ⟶ V) [QuasiCompact c] [QuasiSeparated c] :
     DerivedCategory.Plus.ι ⋙
@@ -151,9 +146,7 @@ def fixedDirectImageComparisonIso (A : Type (u + 1)) [CommRing A] [Finite A]
     Functor.isoWhiskerRight
       (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategoryPlusCompatibility _
 
-/-- Compact support comparison with the specified direct-image counit mate.
-Source: blueprint comparison-class adjunction, chosen compactification
-(blueprint: thm-sf-ambient-adjoint-class). -/
+/-- Compact support comparison with the specified direct-image counit mate. -/
 noncomputable def fixedCompactSupportComparisonIso {X Y : Scheme.{u}} {f : X ⟶ Y}
     (A : Type (u + 1)) [CommRing A] [Finite A] (c : Compactification f) :
     DerivedCategory.Plus.ι ⋙ D(ν^*(X)[ModuleCat.{u + 1} A]) ⋙
@@ -187,9 +180,7 @@ noncomputable def fixedCompactSupportComparisonIso {X Y : Scheme.{u}} {f : X ⟶
     Functor.isoWhiskerLeft DerivedCategory.Plus.ι (Functor.associator _ _ _).symm
 
 /-- Canonical compactification comparison on etale representatives, obtained by
-transporting the canonical etale comparison through the specified compact-support maps.
-Source: blueprint comparison-class adjunction, clause (3)
-(blueprint: thm-sf-ambient-adjoint-class). -/
+transporting the canonical etale comparison through the specified compact-support maps. -/
 def fixedCompactSupportOriginIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
     (c d : Compactification f) :=
@@ -205,9 +196,7 @@ and targets. For the finite coefficient ring `Λ`, the comparison components mus
 `fixedCompactSupportOriginIso`, the existing transport of the
 canonical étale comparisons. The Hom bijection at `c₀` must be the transport of `adj` by
 the fixed compact-support comparison and derived comparison adjunction. The datum also
-includes preservation of bounded-below complexes by the transported right functor.
-Source: Weil blueprint, thm-sf-ambient-adjoint-class.md, clauses (2)--(3)
-(blueprint: thm-sf-ambient-adjoint-class). -/
+includes preservation of bounded-below complexes by the transported right functor. -/
 structure FixedComparisonClassAdjunction
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] (c₀ : Compactification f)
@@ -534,18 +523,7 @@ private def buildFixedComparisonClassAdjunction
     simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
 
 /-- The normalized comparison-class datum for any specified ordinary etale adjunction
-whose right functor preserves a lower bound after derived comparison direct image.
-Source: blueprint thm-sf-ambient-adjoint-class, proof of clauses (2)--(3)
-(blueprint: lem-sf-specified-comparison-class-construction).
-
-Proof: on each bounded-below etale representative, compose the fixed compact-support
-comparison, the comparison adjunction, the supplied etale adjunction, and full faithfulness
-of comparison pullback on bounded-below targets. Descend these natural bijections along
-the equivalence onto the etale-origin full subcategory. Transport the canonical etale
-compactification comparisons through that same equivalence. Their identity and cocycle
-laws, and compatibility with the Hom bijections, descend because the equivalence is fully
-faithful. This is the existing construction `buildFixedComparisonClassAdjunction`, with
-its specified-adjoint and coefficient parameters retained. -/
+whose right functor preserves a lower bound after derived comparison direct image. -/
 theorem nonempty_fixedComparisonClassAdjunction_of_boundedBelow
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c₀ : Compactification f)

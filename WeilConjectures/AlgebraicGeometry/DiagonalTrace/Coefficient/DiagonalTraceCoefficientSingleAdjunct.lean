@@ -24,18 +24,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   Adjunction.mapDerivedCategoryRightDerivedAdjunction
   Functor.mapDerivedCategorySingleFunctor Functor.rightDerivedFunctorObjQIso
 
-/-- The derived coefficient adjunct is the ordinary adjunct followed by the cochain unit.
-
-Source: geometric classes proof (3), coefficient-pullback unit normalization;
-diagonal tower trace proof (2), coefficient-unit square.
-(blueprint: lem-sfb-diagonal-trace-coefficient-single-adjunct).
-
-Proof: the derived coefficient pullback is the exact single-functor comparison
-followed by the localization of its ordinary isomorphism. The canonical derived
-adjunction unit on a cochain complex is its ordinary unit followed by the right
-cochain unit. Evaluate on a single object and use naturality for the ordinary
-coefficient isomorphism. This gives the ordinary adjunct followed by the canonical
-right-derived single-object comparison. -/
+/-- The derived coefficient adjunct is the ordinary adjunct followed by the cochain unit. -/
 theorem diagonalTrace_coefficient_single_adjunct
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X S : Scheme.{u}}

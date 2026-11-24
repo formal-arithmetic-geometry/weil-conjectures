@@ -30,8 +30,7 @@ Over a perfect field such a datum is given by the normalizations of the irreduci
 of `X_red` (`AlgebraicGeometry.isGenericCurveModelData_of_perfectField`); over an arbitrary field
 it exists after a finite purely inseparable extension
 (`AlgebraicGeometry.exists_isPurelyInseparable_isGenericCurveModelData`), by descent from the
-perfect closure. These are the generic-fibre steps of
-`proposition-proper-direct-image-finite-coefficients`.
+perfect closure. These are the generic-fibre steps of the construction of generic curve models.
 -/
 
 @[expose] public section
@@ -139,9 +138,8 @@ lemma exists_smoothOfRelativeDimension_fromNormalization {k : Type u} [Field k]
     hiso⟩
 
 /-- **The generic curve model over a perfect field.** A scheme of finite type and of dimension at
-most one over a perfect field `E` has a generic curve model datum: the normalizations of the
-irreducible components of `X_red` (smooth since `E` is perfect, `lemma-proper-smooth-model--1`),
-which are isomorphisms over a dense open; a dense open of a curve has finite complement. -/
+most one over a perfect field `E` has a generic curve model datum, given by the normalizations of
+the irreducible components of `X_red`. -/
 theorem isGenericCurveModelData_of_perfectField {E : Type u} [Field E] [PerfectField E]
     {X : Scheme.{u}} (g : X ⟶ Spec (.of E)) [LocallyOfFiniteType g] [QuasiCompact g]
     (hdim : topologicalKrullDim X ≤ 1) : IsGenericCurveModelData g := by
@@ -213,11 +211,7 @@ theorem isGenericCurveModelData_of_perfectField {E : Type u} [Field E] [PerfectF
 
 /-- **The generic curve model after a purely inseparable extension.** Let `X` be of finite type,
 quasi-separated and of dimension at most one over a field `K`. There is a finite purely
-inseparable extension `L/K` such that the base change `X_L` has a generic curve model datum.
-The datum exists over the perfect closure of `K`
-(`AlgebraicGeometry.isGenericCurveModelData_of_perfectField`); it is defined over a finite
-subextension (finite presentation), and its properties descend along the faithfully flat
-extension of the perfect closure. -/
+inseparable extension `L/K` such that the base change `X_L` has a generic curve model datum. -/
 theorem exists_isPurelyInseparable_isGenericCurveModelData (K : Type u) [Field K]
     {X : Scheme.{u}} (g : X ⟶ Spec (.of K)) [LocallyOfFiniteType g] [QuasiCompact g]
     [QuasiSeparated g] (hdim : topologicalKrullDim X ≤ 1) :

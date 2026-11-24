@@ -53,30 +53,7 @@ attribute [local irreducible] CategoryTheory.Abelian.Ext
 /-- The projected supported strict class is the canonical finite Cartier arrow.
 This assertion has no Chern normalization hypothesis: its endpoint is the reduced
 Cartier class, not the Chern composite. The coordinates are normalized on one and
-on roots, so the displayed endpoint cannot be chosen to fit the source composite.
-
-Source: diagonal trace proof (2), source projection; diagonal-system proof (4).
-(blueprint: lem-sfb-diagonal-trace-supported-finite-boundary-source-step).
-
-Proof: compose k.coefficientForget with the canonical constant finite-ring
-comparison to identify the evaluated coefficient unit with the constant residue
-module. The residue-action equation of r makes this comparison linear, and
-k.coefficient_one fixes its value on one. At level n take the source and root
-isomorphisms sigma,t from hxi. Define the frame line isomorphism by e_n inverse
-followed by t. FiniteRootNormalization and he give exactly a.line_roots.
-Compose hs at n with the forgotten source coordinate sigma. The source
-normalization in hxi identifies the resulting integral generator with the canonical
-positive finite quotient. Apply the ordinary finite-unit equation to this source
-map: completedSupportedUnit followed by the source map is the finite
-constant-to-supported unit after the actual coefficient projection and the
-coefficient coordinate. This ordinary equation is the remaining sheaf calculation.
-Use hp to replace the presented arrow by xi, and the n-th finite-cycle equation
-in hxi to replace its normalized evaluation by cartierResidueReducedPro.
-The root normalization in hxi and he identify the target comparison with the
-frame line coordinates. Finally the exact-cone projection equation identifies
-the coefficient input for any L with its actual n-th projection. This proves the
-stated supportedBoundaryEquation for arbitrary L₀ and L. The exponent is n+1,
-so the same argument covers n=0; on the empty scheme all maps are unique. -/
+on roots, so the displayed endpoint cannot be chosen to fit the source composite. -/
 theorem diagonalTrace_supportedFiniteBoundary_sourceStep
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

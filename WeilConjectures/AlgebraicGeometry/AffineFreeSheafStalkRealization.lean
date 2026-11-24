@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.AffineFreeBasisGermMap
 
 /-! # Realizing section modules on an affine open and comparing their stalks
 
-Source: Stacks Project, Tags 01HV, 01IB, 01C6 and 0098.
+## References
+
+* Stacks Project, Tags 01HV, 01IB, 01C6 and 0098
 -/
 
 @[expose] public section
@@ -40,30 +42,8 @@ private theorem coordinate_hom_ext {R : Type u} [CommRing R] (n : ℕ)
   rw [coordinate_expansion n v]
   simp only [map_sum, map_smul, h]
 
-/-- Affine sheafification realizes coordinate modules, naturally on their stalk maps.
-
-Source: Stacks Project, Tag 01HV, Lemma 26.5.4 (7) (associated-sheaf stalk localization),
-Tag 01IB (modules on an affine scheme), Tag 01C6 (finite free sheaves),
-and Tag 0098 (stalks under restriction along the affine chart).
-(blueprint: lem-sc-affine-free-sheaf-stalk-realization).
-
-Proof: The existing affinePerfectSheafification is tilde followed by restriction
-along the affine chart and the inverse of the slice-site equivalence. Its value on
-a finite coordinate module is the coproduct of copies of the structure sheaf indexed
-by its standard basis. The stalk of that finite coproduct is the finite
-coordinate module over the stalk ring. Neighbourhoods contained in U are cofinal
-at x, so ordinary open direct image followed by the ambient stalk gives the same
-module with the same scalar action. Explicitly, send a coordinate tuple (r_p) to
-the finite sum of r_p times the germ of its standard basis section. An arbitrary
-stalk element is represented locally by finitely many coordinate sections; their
-germs give its inverse image. If a tuple maps to zero, its coordinate projection
-germs are all zero, proving injectivity. Conversely, the finite projection-inclusion
-identity shows that this inverse reconstructs every germ. These maps are linear
-over the ambient stalk ring because scalar multiplication on germs is induced by
-multiplication on sections, and give e n. On each basis germ the stalk
-of a sheafified map is its coefficient matrix mapped by the germ homomorphism.
-Thus the assumed coefficient equalities imply the displayed naturality equation.
-Rank zero uses the empty coproduct and its unique map; U need not be quasi-compact. -/
+/-- Affine sheafification realizes coordinate modules, naturally on their stalk maps
+(Stacks, Tags 01HV, 01IB, 01C6 and 0098). -/
 theorem exists_affine_freeSheaf_stalk_realization
     (X : Scheme.{u}) (x : X) (U : X.Opens) (hxU : x ∈ U) (hU : IsAffineOpen U) :
     ∃ e : ∀ n : ℕ, ModuleCat.of (X.presheaf.stalk x)

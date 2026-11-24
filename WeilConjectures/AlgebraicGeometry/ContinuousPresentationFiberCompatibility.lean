@@ -14,7 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 /-!
 # Compatibility of scalar cokernel classes on presentation covers
 
-Source: HRS Example 3.1 and the geometric evaluation argument in the parent node.
+## References
+
+* Hemo--Richarz--Scholbach, Example 3.1
 -/
 
 @[expose] public section
@@ -240,25 +242,7 @@ private noncomputable def pointCoordinates
   exact (G.mapIso (pointRegularIso E Ω z)).toLinearEquiv.trans (liftedRegularCoordinates E)
 
 /-- Evaluation at the final object over one algebraically closed field.
-
-Source: Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1
-(auxiliary; not a blueprint node).
-
-Proof in words. Apply final-object sections to the underlying abelian sheaf and its
-internal action. Sections is lax monoidal: its tensorator sends a pair of sections to
-its tensor section, so its image is an internal module over the ring of global sections.
-The canonical continuous realization identifies this ring with ULift E: every continuous
-function on the one-point spectrum is constant, and evaluation at z is its inverse.
-Transport the action along this ring isomorphism and use the tensor universal property
-for internal modules in abelian groups to obtain an ordinary E-module. The internal
-linearity diagrams make all evaluated arrows E-linear; they are unchanged as additive
-maps, hence this functor is additive. Over an algebraically closed field every covering
-of the final object splits. Consequently abelian sections preserves finite colimits.
-The forgetful functor from internal modules computes those colimits, and the ordinary
-module forgetful functor reflects them; hence evaluation preserves finite colimits.
-The regular module gives E with its usual action. Evaluate its endomorphism at 1 to
-get the displayed normalization, since both coefficient identifications are the
-specified continuous realization followed by evaluation at z. -/
+(Bhatt--Scholze, Example 4.2.11; Hemo--Richarz--Scholbach, Example 3.1) -/
 private theorem exists_condensedField_point_evaluation
     (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
@@ -594,26 +578,7 @@ private theorem condensedField_coordinates_of_conjugacy
     ((hb₀ (t.inv ≫ P.map f ≫ t.hom)).trans (hc f))
 
 /-- Transport the normalized regular-module evaluation along one geometric map.
-
-Source: Hemo--Richarz--Scholbach, Example 3.1; the adjoint-test characterization of
-continuous realization in `condensedFieldContinuousMapIso_test`
-(auxiliary; not a blueprint node).
-
-Proof in words. Restriction along the inverse coefficient isomorphism sends the
-regular pulled-back coefficient module to the regular coefficient module on V.
-The canonical isomorphism is the coefficient isomorphism itself. Module inverse image
-along a sends that regular module to the regular coefficient module on Spec Ω, by the
-strong monoidality of inverse image and the extension-of-scalars regular-module
-comparison. Let t denote their composite. Apply H to t and compose with the given
-regular-module coordinate b on Spec Ω; this gives the required linear equivalence.
-Conjugation by t transports every regular-module endomorphism f. The normalization
-of H computes its scalar from the canonical continuous realization on Spec Ω.
-The adjoint-test equation for that realization, naturality of the unit, and the
-coefficient pullback comparison identify this transported coefficient with the
-pullback along a of the continuous coefficient of f on V. A continuous function
-pulled back to Spec Ω has value at z equal to its original value at a(z). This proves
-the formula. The argument needs no finite presentation and is valid for any H with
-the stated normalization; a zero functor cannot satisfy that normalization. -/
+(Hemo--Richarz--Scholbach, Example 3.1) -/
 private theorem condensedField_geometric_evaluation_scalars
     (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
@@ -644,36 +609,8 @@ private theorem condensedField_geometric_evaluation_scalars
   intro f
   simpa only [coefficientValue, continuousCoefficientValue] using geometric_scalar_value E Ω p a z f
 
-/-- Compatible geometric evaluation, independent of any chosen module or presentation.
-Source: the geometric evaluation step of the rank/descent argument accompanying
-Hemo--Richarz--Scholbach, Example 3.1; Bhatt--Scholze, Example 4.2.11
-(auxiliary; not a blueprint node).
-
-Proof: use the supplied maps from the common algebraically closed field. First
-extend scalars along the canonical coefficient isomorphism for p or g, then apply
-module inverse image along a or d. Both routes end in modules over the condensed
-coefficient ring on Spec(Omega). Evaluate their underlying sheaves and actions at
-the final object. The continuous realization identifies that ring with ULift E,
-since the spectrum of a field has one point. Define the E-action on each evaluated
-module by applying its internal action to ULift(e) tensor m. The tensor universal
-property and internal unit and associativity equations give an ordinary E-module;
-the internal linearity diagram makes every evaluated morphism E-linear.
-
-A pro-etale cover of an algebraically closed field splits through a member, so
-abelian evaluation preserves cokernels. Finite colimits of internal modules are
-computed on their underlying abelian sheaves, as tensoring preserves these
-colimits. The ordinary module forgetful functor reflects these colimits, proving
-finite-colimit preservation of evaluation. Inverse image and change of scalars
-preserve finite colimits too. Each construction is additive. The module inverse
-image composition comparisons, coefficient comparisons and the equality had give
-the displayed natural isomorphism on all modules over X.
-
-The regular coefficient module evaluates to E, giving b and c by evaluation at 1.
-An endomorphism of the regular module is multiplication by its value on 1. The
-adjoint-test characterization of the canonical continuous realization identifies
-its image under geometric pullback with the value of its continuous coefficient
-at a(z) or d(z). This proves both scalar formulas. The maps from the field exclude
-empty source schemes V and W. No finite presentation or finite rank is required. -/
+/-- Compatible geometric evaluation, independent of any chosen module or presentation
+(Hemo–Richarz–Scholbach, Example 3.1; Bhatt–Scholze, Example 4.2.11). -/
 private theorem exists_condensedField_compatible_evaluations
     (E : Type u) [CommRing E]
     [TopologicalSpace E] [IsTopologicalRing E] [TotallyDisconnectedSpace E]
@@ -823,28 +760,14 @@ private noncomputable def cokernelCoordinates
   rw [← hf, LinearMap.range_comp, LinearMap.range_comp,
     LinearMap.range_eq_top.2 a.symm.surjective, Submodule.map_top]
 
-/-- Underlying module inverse image along a scheme map. Source: HRS Example 3.1.
-(auxiliary; not a blueprint node) -/
+/-- Underlying module inverse image along a scheme map (Hemo–Richarz–Scholbach, Example 3.1). -/
 noncomputable def pulledMod (T : Type u) [CommRing T] [TopologicalSpace T]
     [IsTopologicalRing T] {X Y : Scheme.{u}} (p : Y ⟶ X)
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (baseCoeff T X)) :=
   ((upperStar Ab.{u + 1} p).mapMod (baseCoeff T X)).obj M
 
 /-- Two presentations of the same sheaf have isomorphic scalar cokernels over a common
-base point. Source: HRS Example 3.1; parent proof step 3.
-
-Proof: lift the two points to a point of the fibre product, then take an algebraic
-closure of its residue field. Both pulled-back presentations present the same module
-over this geometric point. Evaluation at the final object of its pro-etale site is
-right exact, since every pro-etale cover of a geometric point splits. It sends the
-regular coefficient module to T and sends multiplication by a continuous coefficient
-to multiplication by its value at the chosen point, by the adjoint characterization
-of the canonical realization. Finite biproduct coordinates therefore identify the two
-evaluated cokernels with the scalar matrix cokernels in the statement. Their common
-identification with the evaluation of M gives an isomorphism, hence equality in the
-skeleton. This uses no field structure on T, no rank comparison, and no Noetherianity.
-Empty covering members contain no points; zero rows and columns are ordinary cokernels.
-(auxiliary; not a blueprint node) -/
+base point. (Hemo--Richarz--Scholbach, Example 3.1) -/
 theorem presentationFiberType_eq
     (T : Type u) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
     [TotallyDisconnectedSpace T] (X : Scheme.{u})

@@ -12,7 +12,10 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Ordinary geometric images of strict coefficient systems
 
-Source: Zheng, Construction 4.1; Stacks Project, Tags 03DA and 03DB.
+## References
+
+* Stacks Project, Tags 03D7, 03DA, 03DB
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -229,27 +232,7 @@ private theorem evaluations_jointlyReflect :
       change inv (f.app n) ≫ f.app n = 𝟙 _
       exact IsIso.inv_hom_id _
 
-/-- The geometric morphism acts on strict systems with the ordinary level adjunctions.
-Source: Zheng, Construction 4.1, printed p. 21; Stacks 03DA, 03DB and 03D7.
-
-Proof: A constant set sheaf is the coproduct of one terminal sheaf for each element.
-The left adjoint L preserves this coproduct and, by left exactness, the terminal sheaf.
-The resulting constant-sheaf isomorphism carries each scalar generator to itself.
-Transport ring operations and module operations through the finite-product comparison
-of L. The scalar-generator equation identifies the transported quotient ring with the
-specified constant quotient ring. The underlying-sheaf adjunction restricts to module
-maps, since the equations for addition and scalar action transpose to the same equations.
-This gives the level right adjoints and their displayed transpose formulas. Kernels
-are preserved by left exactness and cokernels by the lifted adjunction, proving exactness.
-Restricting a coefficient action before or after this transport gives the same action;
-the identity on the underlying sheaf is the restriction comparison. It is compatible
-with all quotient maps. Apply these level functors to a system's components and successive
-transitions, using that comparison for inverse image and its adjoint mate for direct image.
-Transposing the component maps identifies their transition compatibility equations, so
-the component adjunctions restrict to the system adjunction with the stated formula.
-Kernels and cokernels of strict systems are componentwise, proving system exactness.
-Neither regularity nor completeness of the coefficient ring is needed here.
-(blueprint: lem-pur-coefficient-system-ordinary-images). -/
+/-- The geometric morphism acts on strict systems with the ordinary level adjunctions. -/
 theorem coefficientSystemOrdinaryImage_exists [PreservesFiniteLimits L] :
     Nonempty (CoefficientSystemOrdinaryImage (J := J) (K := K) O ell L V adj) := by
   obtain ⟨S⟩ := coefficientLevelOrdinaryImage_exists O ell L V adj

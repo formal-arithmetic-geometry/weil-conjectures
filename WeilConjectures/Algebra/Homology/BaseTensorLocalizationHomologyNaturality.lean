@@ -14,8 +14,9 @@ import all WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySqu
 
 /-! Ordinary tensor localization and homology.
 
-Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
-(blueprint: lem-pc-base-tensor-localization-homology-naturality).
+## References
+
+* Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
 -/
 
 @[expose] public section
@@ -44,23 +45,7 @@ variable (R A B Rp D : Type u)
 
 omit [Algebra R Rp] tRpA tRpB [Algebra A D] tAD tApD in
 include tBD tBpD in
-/-- Naturality of the ordinary tensor-to-localized homology maps.
-Source: Stacks Project, perfect.tex, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-base-tensor-localization-homology-naturality).
-
-Proof: restrict the ordinary tensor complexes and their maps to B.
-The B-action on the localized complex is the same whether restricted through
-A tensor over R B or A tensor over Rp B, by the scalar tower hypotheses.
-Thus restriction-composition isomorphisms identify the two restrictions.
-The generator formulas show that ordinaryToLocalized for L followed by tau
-is ordinaryToLocalized for K preceded by psi: each sends (1 tensor b) tensor q
-to the image of b in D tensor q. These elements generate the restricted
-ordinary complex since (a tensor b) tensor q = (1 tensor b) tensor (a q).
-Take degree-i homology of this chain-map square. Naturality of mapHomologyIso
-for restriction of scalars, including its compatibility with composition,
-transports the square back to the displayed underlying-element identity.
-This argument concerns ordinary complexes only; it uses no counit, derived
-comparison, cohomology of a derived functor, or localizedComparison. -/
+/-- Naturality of the ordinary tensor-to-localized homology maps. -/
 theorem baseTensorLocalization_homology_naturality (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

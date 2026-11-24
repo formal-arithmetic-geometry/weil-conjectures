@@ -12,6 +12,10 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 The off-diagonal entry of a factorization square gives a nullhomotopy of its
 mapping-cone transition, before localization or any inverse limit.
+
+## References
+
+* Stacks Project, Tags 014E and 014F
 -/
 
 @[expose] public section
@@ -22,13 +26,7 @@ open CochainComplex CochainComplex.HomComplex
 
 namespace HomologicalComplex
 
-/-- A diagonal factoring both sides of a square gives a nullhomotopy of the cone map.
-Source: Stacks Tags 014E--014F; the explicit mapping-cone differential.
-(blueprint: lem-pur-diagonal-cone-transition-homotopy).
-Proof: the homotopy in degree i is the second cone projection, followed by the
-factorization in degree i, followed by the first cone inclusion in degree i-1.
-The two mixed differential terms cancel by the chain-map equation of the diagonal.
-Its other two terms are exactly the diagonal entries of the cone transition. -/
+/-- A diagonal factoring both sides of a square gives a nullhomotopy of the cone map. -/
 theorem diagonalConeTransitionHomotopy
     {T : Type*} [Category T] {A : Type*} [Category A] [Abelian A]
     {C D : CochainComplex (T ⥤ A) ℤ} (α : C ⟶ D)

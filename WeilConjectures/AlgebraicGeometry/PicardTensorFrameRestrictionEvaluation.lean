@@ -11,18 +11,7 @@ set_option autoImplicit false
 universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- The global-section map of the residue lift is section evaluation.
-Source: Mathlib/AlgebraicGeometry/Stalk.lean,
-Opens.fromSpecStalkOfMem_toSpecΓ; Mathlib/AlgebraicGeometry/ResidueField.lean,
-the definition of Scheme.evaluation. Used in the degree-zero argument of Stacks 0BF2.
-(blueprint: lem-sc-picard-tensor-frame-restriction-evaluation)
-
-Proof: Cancel the open immersion to identify the residue lift with Spec of the
-residue quotient followed by the stalk lift. The composite with U.toSpecΓ is
-Spec of the germ map followed by residue. Apply global sections, use naturality
-of ΓSpecIso, and evaluate the resulting ring-hom equality on ΓSpecIso.inv a.
-The inverse/hom cancellation gives germ followed by residue, which is the
-definition of evaluation. This applies to every section, including zero and one. -/
+/-- The global-section map of the residue lift is section evaluation (Stacks, Tag 0BF2). -/
 theorem picardResidueLift_appTop_eval (W : Scheme.{v}) (w : W)
     (U : W.Opens) (hwU : w ∈ U) (a : Γ(W, U)) :
     (ΓSpecIso (W.residueField w)).hom

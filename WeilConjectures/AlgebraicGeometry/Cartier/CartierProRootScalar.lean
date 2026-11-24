@@ -8,8 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
 
 /-! # Cartier reduction and site comparison
-Source: blueprint main-20261015, Cartier comparison proof
-(blueprint: lem-sp-cartier-reduction-site-comparison).
+
+## References
+
+* Stacks Project, Tags 0152, 06YY, 0GLZ
 -/
 
 @[expose] public noncomputable section
@@ -29,15 +31,9 @@ attribute [local irreducible] comparisonUpperStar cartierUnitsComparison
   CartierEtaleReductionSpec CartierProReductionSpec cartierResidueReducedPro
 
 /-- For n>0 invertible on Z, commutative rings R,A killed by n and a hom φ:R→A, let
-θ:ν*(R_Z(1))→Res(ν*(A_Z(1))) be normalized on pure root tensors through the comparison adjunction
-units. Then the pro-etale root map for R followed by forget(θ) equals the pro-etale root map for A
-[def-sfb-cartier-reduction-data, lemma-cycle-class-cartier-divisor].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-cartier-pro-root-scalar).
-Proof: Unfold the root map and cancel its common inverse roots comparison. Transpose the remaining
-maps under the abelian comparison adjunction. The forgetful comparison is itself the mate of the
-module comparison unit, so adjunction naturality reduces the equality to the specified tensor
-normalization at a=1. Ring homomorphisms preserve one. -/
+θ:ν*(R_Z(1))→Res(ν*(A_Z(1))) be normalized on pure root tensors through the comparison
+adjunction units. Then the pro-etale root map for R followed by forget(θ) equals the
+pro-etale root map for A. -/
 theorem pro_root_scalar (n : ℕ) (hn : 0 < n) {R A : Type (u + 1)}
     [CommRing R] [CommRing A] (φ : R →+* A) (hR : (n : R) = 0) (hA : (n : A) = 0)
     (Z : Scheme.{u}) (hZ : IsUnit (n : Γ(Z, ⊤)))

@@ -8,9 +8,7 @@ module
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
-/-! # Natural transformations between exact derived functors
-Source: localization universal property and naturality of the single comparisons.
-(blueprint: lem-sfb-exact-derived-transformation). -/
+/-! # Natural transformations between exact derived functors -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,9 +25,7 @@ variable {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
 
-/-- Localize a termwise natural transformation between exact functors.
-Source: localization universal property
-(blueprint: lem-sfb-exact-derived-transformation). -/
+/-- Localize a termwise natural transformation between exact functors. -/
 def exactDerivedTransformation (τ : F ⟶ G) : F.mapDerivedCategory ⟶ G.mapDerivedCategory :=
   Localization.liftNatTrans DerivedCategory.Q (HomologicalComplex.quasiIso A (.up ℤ))
     (F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
@@ -37,9 +33,7 @@ def exactDerivedTransformation (τ : F ⟶ G) : F.mapDerivedCategory ⟶ G.mapDe
     F.mapDerivedCategory G.mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex τ (.up ℤ)) DerivedCategory.Q)
 
-/-- The localized transformation has the given termwise components.
-Source: localization factorization
-(blueprint: lem-sfb-exact-derived-transformation). -/
+/-- The localized transformation has the given termwise components. -/
 theorem exactDerivedTransformation_app (τ : F ⟶ G) (P : CochainComplex A ℤ) :
     (exactDerivedTransformation τ).app (DerivedCategory.Q.obj P) =
       F.mapDerivedCategoryFactors.hom.app P ≫
@@ -49,9 +43,7 @@ theorem exactDerivedTransformation_app (τ : F ⟶ G) (P : CochainComplex A ℤ)
     Functor.whiskerRight_app]
   rfl
 
-/-- Termwise localization preserves compatibility with shifts.
-Source: termwise shift compatibility and essential surjectivity of localization
-(blueprint: lem-sfb-exact-derived-transformation). -/
+/-- Termwise localization preserves compatibility with shifts. -/
 instance exactDerivedTransformation_commShift (τ : F ⟶ G) :
     NatTrans.CommShift (exactDerivedTransformation τ) ℤ := by
   have heq : Functor.whiskerLeft DerivedCategory.Q (exactDerivedTransformation τ) =
@@ -67,9 +59,7 @@ instance exactDerivedTransformation_commShift (τ : F ⟶ G) :
   exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Q
     (fun X ↦ ⟨_, (DerivedCategory.Q.objObjPreimageIso X).inv, inferInstance⟩)
 
-/-- The comparison for a single object is natural also in the exact functor.
-Source: the single-complex comparison and localization factorization
-(blueprint: lem-sfb-exact-derived-transformation). -/
+/-- The comparison for a single object is natural also in the exact functor. -/
 theorem exactDerivedTransformation_single (τ : F ⟶ G) (M : A) :
     (exactDerivedTransformation τ).app ((DerivedCategory.singleFunctor A 0).obj M) ≫
         (G.mapDerivedCategorySingleFunctor 0).hom.app M =
@@ -128,9 +118,7 @@ theorem exactDerivedTransformation_single (τ : F ⟶ G) (M : A) :
     (hcalc.trans ((Category.assoc _ _ _).symm.trans
       (congrArg (fun f ↦ f ≫ (DerivedCategory.singleFunctor B 0).map (τ.app M)) (hc F)).symm))
 
-/-- The exact-single comparison respects both a natural transformation and a shift.
-Source: shift compatibility followed by the degree-zero single comparison
-(blueprint: lem-sfb-exact-derived-transformation). -/
+/-- The exact-single comparison respects both a natural transformation and a shift. -/
 theorem exactDerivedTransformation_shiftedSingle (τ : F ⟶ G) (M : A) (r : ℤ) :
     (exactDerivedTransformation τ).app
         (((DerivedCategory.singleFunctor A 0).obj M)⟦r⟧) ≫

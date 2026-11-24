@@ -160,12 +160,8 @@ lemma exists_smooth_chart_of_mem_range [Smooth g] [IsClosedImmersion s] (hs : s 
       exact smoothOfRelativeDimension_extendedReesAlgebra_of_etale _ _ hψ hψf)
     exact SmoothOfRelativeDimension.smooth d _
 
-/-- Blueprint `prose-09-12` (2): the coordinates, for a smooth morphism whose
-relative dimension may vary.
-
-**The deformation space is smooth.** If `g` is smooth with closed section `s`, then
-`g̃ : D_s V ⟶ 𝔸¹_B` is smooth: near every point the relative dimension of `g` is constant, and the
-charts of `AlgebraicGeometry.Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj` apply. -/
+/-- **The deformation space is smooth.** If `g` is smooth (of possibly varying relative
+dimension) with closed section `s`, then `g̃ : D_s V ⟶ 𝔸¹_B` is smooth. -/
 theorem smooth_deformationSpaceProj [Smooth g] [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) :
     Smooth (deformationSpaceProj g s) := by
   have H : ∀ x, ∃ O : s.ker.deformationSpace.Opens, x ∈ O ∧

@@ -11,7 +11,9 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnbound
 
 /-! # Exact localization of the ordinary inverse-image restriction square
 
-Source: Zheng, Construction 4.1; Stacks 05R7 and 05RU.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
+* Stacks Project, Tags 05R7, 05RU, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -38,11 +40,8 @@ variable (O : Type (u + 1)) [CommRing O] (t : O)
   {m n : ℕ} (h : m ≤ n)
 
 /-- The exact lift of the ordinary coefficient-restriction inverse-image square.
-Source: Zheng, Construction 4.1; Stacks 05R7 and 05RU.
-(blueprint: def-pur-etale-brown-canonical-restriction).
-
-The representative equation determines this isomorphism uniquely by fully faithful
-precomposition with the derived localization; the choice introduces no arbitrary data. -/
+It is determined uniquely by its representative equation, by fully faithful
+precomposition with the derived localization. -/
 def strictEtaleBrownCanonicalRestriction :
     (PW.scalar h).restriction ⋙ (B.level n).inverse ≅
       (B.level m).inverse ⋙ (PV.scalar h).restriction :=
@@ -55,10 +54,7 @@ def strictEtaleBrownCanonicalRestriction :
     (B.level m).inverseFactors (B.level n).inverseFactors
     (PV.scalar h).restrictionFactors (A.restrictInverse h)).choose
 
-/-- The canonical lift has the prescribed cochain representative.
-Source: Zheng, Construction 4.1; Stacks 05R7 and 05RU.
-(blueprint: def-pur-etale-brown-canonical-restriction).
-Proof: this is the lifting equation of fully faithful localization precomposition. -/
+/-- The canonical lift has the prescribed cochain representative. -/
 theorem strictEtaleBrownCanonicalRestriction_rep
     (K : CochainComplex (strictEtaleLevel W O t m) ℤ) :
     (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom.app
@@ -82,15 +78,7 @@ theorem strictEtaleBrownCanonicalRestriction_rep
     (PV.scalar h).restrictionFactors (A.restrictInverse h)).choose_spec K
 
 -- Transposing the scalar adjunction exposes several localization factors.
-/-- The tensor comparison is the scalar mate of the exact restriction square.
-Source: Zheng, Construction 4.1; Stacks 06YY and 07A4.
-(blueprint: lem-pur-etale-brown-canonical-restriction-mate).
-
-Proof: compute the inverse scalar mate on complexes using the normalized scalar
-adjunctions. On a flat-term K-flat resolution, the tensor representative equation
-identifies it with the inverse of derivedTensor. Cancel the invertible scalar
-comparison on this resolution. Naturality and the quasi-isomorphism from the
-resolution identify the components on every derived object. -/
+/-- The tensor comparison is the scalar mate of the exact restriction square. -/
 theorem strictEtaleBrownCanonicalRestriction_mate :
     ((mateEquiv (PW.scalar h).derivedAdj (PV.scalar h).derivedAdj).symm
       (.mk _ _ _ _ (strictEtaleBrownCanonicalRestriction O t g A PW PV B h).hom)) =

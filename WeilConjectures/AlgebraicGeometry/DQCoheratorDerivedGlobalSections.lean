@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Coherator detection for morphisms in the derived category
 
-Source: Stacks Project, duality.tex, Tag 0B6I, final proof paragraph.
-(blueprint: lem-pc-dq-coherator-derived-global-sections).
+## References
+
+* Stacks Project, Tag 0B6I
 -/
 
 @[expose] public section
@@ -26,19 +27,7 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 /-- An isomorphism after the coherator induces an isomorphism on derived global sections.
-Source: Stacks Project, duality.tex, Tag 0B6I, final proof paragraph.
-(blueprint: lem-pc-dq-coherator-derived-global-sections).
-
-Proof: replace the source and target by K-injective complexes I and J. Full faithfulness
-of the K-injective model represents the transported derived morphism by a chain map
-s : I → J. Its image after the coherator is invertible, since the changes of
-representatives are isomorphisms. Apply dqCoherator_detects_globalSections to s:
-termwise global sections of s are a quasi-isomorphism. Localization therefore sends
-this map to an isomorphism. The right-derived global-sections unit is invertible on
-K-injectives and natural in s, identifying this localized map with derived global
-sections of the original morphism. Transport back along the representative isomorphisms.
-This works also for the zero morphism when its image under DQ is an isomorphism;
-no quasi-coherence of the source or target is required. -/
+(Stacks, Tag 0B6I) -/
 theorem dqCoherator_isIso_derivedGlobalSections (Y : Scheme.{u})
     [CompactSpace Y] [QuasiSeparatedSpace Y]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

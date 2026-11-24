@@ -15,8 +15,9 @@ import WeilConjectures.RingTheory.CoverModuleExact
 /-!
 # Finite gluing of graded-module charts
 
-Source: Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-gluing)
+## References
+
+* Stacks Project, Constructions, Section 01M3 and Lemmas 01M4, 01M7 and 01MB.
 -/
 
 @[expose] public section
@@ -32,9 +33,8 @@ variable {S M : Type u} [CommRing S] [AddCommGroup M] [Module S M]
 variable (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]
 
 /-- Restrict the ordinary localized module action along the inclusion of the homogeneous
-localization. This changes only scalars, not the localization or its operations.
-Source: Stacks, Algebra, Section 00JM.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-gluing) -/
+localization. This changes only scalars, not the localization or its operations
+(Stacks, Algebra, Section 00JM). -/
 local instance localizedModuleHomogeneousScalarsChartGluing (T : Submonoid S) :
     Module (HomogeneousLocalization 𝒜 T) (LocalizedModule T M) :=
   Module.compHom (LocalizedModule T M)
@@ -47,29 +47,8 @@ local notation "R[" f "]" => HomogeneousLocalization.Away 𝒜 (f).val.1
 local notation "N[" f "]" => LocalizedModule.Away (f).val.1 M
 local notation "D[" f "]" => basicOpen 𝒜 (f).val.1
 
-/-- Finite unique gluing for a graded-module chart system, including the empty cover.
-Source: Stacks Project, Constructions, Lemma 01M4 (1)(c)--(h) and the construction
-before Definition 01M6; Algebra, Lemma 00EK.
-(blueprint: lem-weil-pbc-proj-graded-module-chart-gluing)
-
-Proof:
-1. Use standardOpenProperties to obtain the unit-ideal generators
-   u_i = g_i^deg(f)/f^deg(g_i) in R[f] for the displayed cover.
-2. Apply gradedModuleAwayRestriction. Its submodule has the same carrier as Z, so
-   Submodule.ext identifies them. The given rho agrees with its restriction: represent
-   each element by an ordinary localized fraction and use the stated fraction formula.
-   The ambient ring maps agree by the uniqueness of maps out of S_f that commute with S;
-   injectivity of homogeneous-localization inclusion gives equality of rhoS.
-3. Transport the principal localization comparisons to Z. The comparison to each chart
-   sends t/1 to rho(t). The generator for the product chart is u_i*u_j: this follows by
-   multiplying the two fractions. The comparison composition law identifies the two
-   overlap maps with the canonical localization maps in coverModuleExact.
-4. Transport q_i back along these comparisons. The overlap assumption is exactly the
-   compatibility hypothesis of coverModuleExact. That theorem gives a unique t in Z f,
-   and its localization equations give the asserted restriction equations. Conversely
-   any solution localizes to this glued t and hence equals it. For n=0 the unit-ideal
-   hypothesis forces R[f] to be the zero ring and Z f the zero module, so the same
-   existence and uniqueness proof applies without a maximum over an empty set. -/
+/-- Finite unique gluing for a graded-module chart system, including the empty cover
+(Stacks, Constructions, Lemma 01M4; Algebra, Lemma 00EK). -/
 theorem gradedModuleChart_gluing
     (𝓜 : ℤ → AddSubgroup M) (h𝓜 : DirectSum.IsInternal 𝓜)
     (hsmul : ∀ (n : ℕ) (z : ℤ) (a : S) (y : M),

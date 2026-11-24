@@ -14,9 +14,11 @@ import all WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdent
 
 /-! # Invertibility of the derived scalar and geometric pullback mate
 
-Source: Stacks 07A4 and 0G7E; blueprint scalar-six direct-image proof,
-finite rings paragraph (blueprint: lem-sfb-proetale-scalar-pullback-mate-invertible).
 The proofs use flat resolutions and the normalized scalar adjunction units.
+
+## References
+
+* Stacks Project, Tags 07A4, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -130,14 +132,7 @@ private theorem pro_computed_iso
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, hs, Category.assoc] using h
 
-/-- The pro-etale inverse scalar mate is invertible for arbitrary coefficient maps.
-Source: Stacks 07A4 and 0G7E
-(blueprint: lem-sfb-proetale-scalar-pullback-mate-invertible).
-Proof: the ordinary left mate is invertible by iterated mates and pointwise
-restriction/coextension. Representably flat base change preserves the local relation
-criterion for flat sheaves. The resulting flat K-flat resolutions compute the
-left derived scalar mate. Finally transport the mate across uniqueness of scalar
-left adjoints and the canonical exact geometric comparison. -/
+/-- The pro-etale inverse scalar mate is invertible for arbitrary coefficient maps. -/
 theorem proEtaleScalarPullbackMate_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -210,13 +205,7 @@ private theorem et_computed_iso
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, hs, Category.assoc] using h
 
-/-- The etale inverse scalar mate is invertible for arbitrary coefficient maps.
-Source: Stacks 07A4 and 0G7E
-(blueprint: lem-sfb-proetale-scalar-pullback-mate-invertible).
-Proof: apply the ordinary restriction/direct-image mate identity, then the flat
-resolution comparison. Etale pullback preserves flatness stalkwise. Uniqueness of
-left adjoints and the exact geometric comparison transport invertibility to the
-specified scalar adjunction. -/
+/-- The etale inverse scalar mate is invertible for arbitrary coefficient maps. -/
 theorem etaleScalarPullbackMate_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :

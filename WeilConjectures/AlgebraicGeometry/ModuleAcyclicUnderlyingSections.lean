@@ -88,19 +88,8 @@ private lemma pullbackForgetIso_unit {X Y : Scheme.{u}} (i : Y ⟶ X) (R : Type 
   simp
   rfl
 
-/-- Forgetting coefficients preserves bijectivity of restriction on global sections.
-Source: Stacks Project, Tag 03FD (forgetting coefficients) and Tag 095T, paragraph 2.
-(blueprint: new-module-acyclic-underlying-sections)
-
-Proof: The forgetful functor from modules to abelian groups preserves limits and
-colimits. It therefore commutes with the sheafification construction of inverse
-image. This gives the canonical natural isomorphism U(i^* M) ≅ i^* U(M).
-Evaluation at the terminal site object and the global-sections/terminal-sections
-isomorphisms identify the underlying group of Γ(M) with Γ(U(M)), and similarly on Y.
-Naturality of the inverse-image adjunction unit identifies the restriction maps
-under these comparisons. The given module isomorphism has a two-sided inverse;
-forget its scalar structure and conjugate by the comparison isomorphisms to obtain
-an inverse of the displayed abelian restriction. This also applies to the zero sheaf. -/
+/-- Forgetting coefficients preserves bijectivity of restriction on global sections
+(Stacks, Tags 03FD and 095T). -/
 theorem Etale.bijective_underlying_globalSectionsUpperStarMap
     {X Y : Scheme.{u}} (i : Y ⟶ X) (r : ℕ)
     (M : Sheaf X.smallEtaleTopology

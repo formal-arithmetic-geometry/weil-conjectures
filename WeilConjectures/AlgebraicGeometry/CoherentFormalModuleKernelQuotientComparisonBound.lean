@@ -12,7 +12,9 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleKernelQuotientTrans
 
 /-! # Artin--Rees bounds for stabilized kernel quotients
 
-Source: Stacks Project, Lemma 087X.
+## References
+
+* Stacks Project, Tag 087X
 -/
 
 @[expose] public section
@@ -20,20 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
-/-- Sufficiently large shifts give the successive quotient comparisons.
-
-Source: Stacks Project, Lemma 087X, claims (b)--(c).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-comparison-bound).
-
-Proof: The transition epimorphism lemma proves surjectivity using stabilization of
-kernel images, independently of Artin--Rees. The eventual exactness lemma supplies
-one bound and, for every sufficiently large shift and every n, the zero composite
-and exactness of the ideal-product inclusion followed by the quotient transition.
-In an abelian category an exact pair with epimorphic second arrow presents its
-target as the cokernel of the first arrow. Uniqueness of cokernels compares this
-presentation with formalModuleQuotient. Its defining equation gives precisely
-the requested equation with formalModuleQuotientπ.
--/
+/-- Sufficiently large shifts give the successive quotient comparisons (Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_comparison_bound {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

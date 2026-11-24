@@ -9,9 +9,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import Mathlib.Tactic.CategoryTheory.Reassoc
 
 /-! # Ext squares from the two endpoints of a derived mate
-
-Source: diagonal tower coefficient changes (1), naturality and the Ext/Hom identification.
-(blueprint: lem-diagonal-ext-mate-square).
 -/
 
 @[expose] public noncomputable section
@@ -98,14 +95,7 @@ private theorem ext_mate_square
 
 /-- The source and target equations for a derived natural comparison imply the
 corresponding Yoneda square. The comparison is supplied by its independent
-normalized endpoint calculations.
-
-Source: diagonal tower coefficient changes (1), naturality and Ext/Hom.
-(blueprint: lem-diagonal-ext-mate-square).
-Proof: choose the comparison given by the source calculation, use the target
-calculation for that same comparison, and apply naturality to the supplied arrow.
-Cancel its source isomorphism and use exact-functor single/shift comparisons to
-identify the resulting equality with composition in Ext. -/
+normalized endpoint calculations. -/
 theorem finiteCoefficient_extSquare_of_endpoints
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory C] [HasExt C]
     {D : Type u'} [Category.{v'} D] [Abelian D] [HasDerivedCategory D] [HasExt D]

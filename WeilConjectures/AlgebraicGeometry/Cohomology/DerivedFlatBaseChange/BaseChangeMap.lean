@@ -24,13 +24,16 @@ v          v
 S' --g---> S
 ```
 with `S`, `S'` affine, `f` quasi-compact and quasi-separated and `g` flat. Then the canonical
-base change map `Lg^* Rf_* E ⟶ Rf'_* Lg'^* E` is an isomorphism for every `E ∈ D_QCoh(𝒪_X)`
-(Stacks 08IB, 02KH).
+base change map `Lg^* Rf_* E ⟶ Rf'_* Lg'^* E` is an isomorphism for every `E ∈ D_QCoh(𝒪_X)`.
 
 The square is Tor-independent since `g` is flat
 (`AlgebraicGeometry.flat_right_pullback_torIndependent`), so this is the case `P = 𝒪_X` of
 `AlgebraicGeometry.torIndependent_perfect_tensor_baseChange`, transported to an arbitrary
 cartesian square by `AlgebraicGeometry.exists_derivedBaseChange_coordinate_naturality`.
+
+## References
+
+* Stacks Project, Tags 08IB and 02KH
 -/
 
 @[expose] public section
@@ -67,7 +70,7 @@ theorem schemeDerivedQCohProperty_singleFunctor {X : Scheme.{u}}
     · exact DerivedCategory.isZero_of_isLE _ 0 i hi
 
 /-- Flat base change for the chosen pullback square of `f` and `g`: the case `P = 𝒪_X` of
-`torIndependent_perfect_tensor_baseChange`. Source: Stacks Project, Tags 08IB and 02KH. -/
+`torIndependent_perfect_tensor_baseChange`. -/
 theorem isIso_schemeDerivedBaseChangeMap_of_flat_pullback
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

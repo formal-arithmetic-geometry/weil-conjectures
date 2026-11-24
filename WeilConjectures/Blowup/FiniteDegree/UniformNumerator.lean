@@ -13,6 +13,10 @@ import all WeilConjectures.Blowup.FiniteDegree.LocalAlgebra
 
 Each chart-ideal generator of an ideal sheaf on the blow-up is cleared into a numerator whose
 fractions lie in the chart ideals of every chart (`AffineBlowup.exists_uniform_numerator`).
+
+## References
+
+* Stacks Project, Tag 0803
 -/
 
 @[expose] public section
@@ -29,12 +33,11 @@ open HomogeneousLocalization
 
 variable {A : Type u} [CommRing A] (I₀ : Ideal A)
 
-/-- **The uniform numerator construction** (Steps 2–3 of the blueprint proof of Stacks
-Tag 0803, ring-level form): given a finite generating set `s` of `I₀`, a family of
-chart ideals `Jc` agreeing on overlaps, and a chart fraction `g/aᵉ` lying in the chart
-ideal of the `a`-chart, there is a threshold `d₀` such that for every `d ≥ d₀` there is
-a numerator `m ∈ I₀ᵈ` with `m/aᵈ = g/aᵉ` on the `a`-chart whose fraction `m/bᵈ` lies in
-the chart ideal of every `b`-chart, `b ∈ s`. -/
+/-- **The uniform numerator construction**, ring-level form: given a finite
+generating set `s` of `I₀`, a family of chart ideals `Jc` agreeing on overlaps, and a chart
+fraction `g/aᵉ` lying in the chart ideal of the `a`-chart, there is a threshold `d₀` such
+that for every `d ≥ d₀` there is a numerator `m ∈ I₀ᵈ` with `m/aᵈ = g/aᵉ` on the `a`-chart
+whose fraction `m/bᵈ` lies in the chart ideal of every `b`-chart, `b ∈ s`. -/
 lemma AffineBlowup.exists_uniform_numerator
     (s : Finset A) (hs : Ideal.span (s : Set A) = I₀)
     (Jc : ∀ (b : A) (hb : b ∈ I₀), Ideal (HomogeneousLocalization.Away (reesGrading I₀)
@@ -83,14 +86,11 @@ lemma AffineBlowup.exists_uniform_numerator
     rw [AffineBlowup.chartFrac_pow_mul I₀ ha' (hs ▸ Ideal.subset_span hbs) hg hm]
     exact hN b hbs k (hkN b hbs)
 
-/-- **The uniform numerator finset** (Steps 2–4 of the blueprint proof of Stacks
-Tag 0803, ring-level form): given a finite generating set `s` of `I₀` and a compatible
-family of chart ideals `Jc` with finite generating sets `G`, there is a threshold `d₀`
-such that for every `d ≥ d₀` there is a finite set `M ⊆ I₀ᵈ` of numerators whose chart
-fractions `m/bᵈ` lie in every chart ideal, and which clear every generator of every
-chart ideal: `μ · (b/1)ᵈ = m/1` on the `b`-chart. All indexing over the generating
-sets happens here, over an abstract ring, keeping the `Finset` bookkeeping away from
-the section rings of schemes. -/
+/-- **The uniform numerator finset**, ring-level form: given a finite generating set `s` of
+`I₀` and a compatible family of chart ideals `Jc` with finite generating sets `G`, there is
+a threshold `d₀` such that for every `d ≥ d₀` there is a finite set `M ⊆ I₀ᵈ` of numerators
+whose chart fractions `m/bᵈ` lie in every chart ideal, and which clear every generator of
+every chart ideal: `μ · (b/1)ᵈ = m/1` on the `b`-chart. -/
 lemma AffineBlowup.exists_uniform_numerator_finset
     (s : Finset A) (hs : Ideal.span (s : Set A) = I₀)
     (Jc : ∀ (b : A) (hb : b ∈ I₀), Ideal (HomogeneousLocalization.Away (reesGrading I₀)

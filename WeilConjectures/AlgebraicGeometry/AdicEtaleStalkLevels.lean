@@ -13,8 +13,9 @@ import all WeilConjectures.AlgebraicGeometry.NilpotentCoefficientLissity
 
 /-! # Algebraic levels of a normalized etale quotient system
 
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 09C6
 -/
 
 @[expose] public noncomputable section
@@ -31,25 +32,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A normalized constructible etale quotient system with lisse residue has perfect
 algebraic stalk levels on an affine weakly contractible cover. The input consists only
-of finite etale complexes; no complete complex or completed coefficient ring occurs.
-Source: Stacks Project, proetale.tex, Tag 09C6, first paragraph; Tags 094I and 09BI.
-(auxiliary; not a blueprint node).
-
-Proof: Induct on n. The canonical quotient from A/J^(n+2) to A/J^(n+1)
-is surjective with square-zero kernel, since 2(n+1) is at least n+2.
-The given beta and nilpotent-coefficient reflection therefore propagate lisse
-finite-type cohomology from C_n to C_(n+1); bounded-above follows from hC.
-Cover X by its open connected components and refine each by affine spectra of
-w-contractible rings. Disjoint refinements of their covers prove weak
-contractibility on the actual coefficient-sized slices. This construction handles
-the empty scheme with an empty family. Choose the specified point z in the
-component containing each covering member, and let E_n be the explicit exact
-derived stalk of C_n at the algebraic closure of the residue field of z.
-The single-complex connected-stalk theorem gives perfect E_0 and the individual
-constant-realization isomorphisms for every level. The scalar-extension/stalk
-comparison, followed by the stalk of beta n, gives the consecutive algebraic
-reduction isomorphisms. No inverse limit, reconstruction, or simultaneous choice
-of compatible constant markings is used. -/
+of finite etale complexes; no complete complex or completed coefficient ring occurs
+(Stacks, Tags 09C6, 094I and 09BI). -/
 theorem adicEtale_stalk_levels
     (X : Scheme.{u}) [IsNoetherian X]
     {A : Type (max v (u + 1))} [CommRing A] [IsNoetherianRing A] (J : Ideal A)

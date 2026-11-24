@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Category.Grp.AB
 
 /-! # Restriction transformation on canonical open diagrams
 
-Source: Stacks Project, Tags 0A50 and 09YQ.
+## References
+
+* Stacks Project, Tags 0A50 and 09YQ
 -/
 
 @[expose] public section
@@ -22,22 +24,8 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
-/-- Construct only the restriction transformation, with its canonical components and right square.
-
-Source: Stacks Project, Tags 0A50 and 09YQ, naturality of restriction.
-(blueprint: lem-weil-pbc-etale-limit-open-restriction-transform).
-
-Proof: At j take the pair of the actual restrictions from H^(q+1)(F_j), conjugated
-by eH, eKU and eKV, and then the inverse of the evaluation biproduct/product
-comparison. The projection identities characterize this morphism. To prove
-naturality, postcompose with each biproduct projection and its supplied object
-isomorphism. Substitute hH, hKU and hKV; coefficient naturality and pullback
-composition identify both sides. For the right square, postcompose with the
-ordinary product projections and use h₄U and h₄V. Substitute the canonical
-single-open leg formulas hιU and hιV, then hB. Naturality of restriction under
-the restricted cone projection and the coefficient leg identifies both sides.
-No connecting morphism, difference map or exactness is needed. Empty factors
-and coincident opens satisfy the same projection argument. -/
+/-- Construct only the restriction transformation, with its canonical components and right square
+(Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_restriction_transform
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

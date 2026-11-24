@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCompari
 import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Sections of inverse images of locally split exact sequences
-
-Source: `lem-pc-cech-cover-relative-effacement`, inverse-image splitting paragraph.
-(blueprint: lem-pc-inverse-image-locally-split-sections)
 -/
 
 @[expose] public section
@@ -34,24 +31,7 @@ private noncomputable def pullbackCompIso {X Y Z : TopCat.{u}}
       (TopCat.Sheaf.pullbackPushforwardAdjunction AddCommGrpCat.{u} (f ≫ g))
 
 /-- A short exact sequence split on an open remains surjective on sections
-of every open contained in its inverse image.
-Source: `lem-pc-cech-cover-relative-effacement`, inverse-image splitting paragraph.
-(blueprint: lem-pc-inverse-image-locally-split-sections)
-
-Proof: Identify open restriction with inverse image along the open inclusion
-using Mathlib `sheafPullbackIso`. Restriction preserves limits and, being a
-left adjoint, colimits. Restrict the sequence to W. Its first arrow has a retraction, so exactness
-supplies a splitting of the whole sequence. For B contained in g inverse-image W, construct the
-continuous map B to W by b maps to g(b). Pull the splitting back along this map.
-The canonical composition isomorphisms for
-inverse image identify this sequence with the restriction of g inverse-image T
-to B. The images of the splitting maps still satisfy the
-splitting identities, since inverse image is additive and preserves composition.
-Evaluate the resulting split epimorphism on the top open of B. Its image
-in Y is exactly B, so evaluating the section of the quotient map gives
-a right inverse of the displayed group homomorphism, hence surjectivity. This
-also covers B empty and W empty, where the section groups of a sheaf are zero.
-No covering hypothesis is used. -/
+of every open contained in its inverse image. -/
 theorem inverseImage_surjective_sections_of_localSplit
     {X Y : Scheme.{u}} (g : Y ⟶ X)
     (T : ShortComplex (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}))

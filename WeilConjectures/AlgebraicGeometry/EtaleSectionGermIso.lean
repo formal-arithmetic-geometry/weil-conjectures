@@ -15,8 +15,9 @@ set_option linter.privateModule false
 
 /-! # Section maps that are isomorphisms on all geometric stalks
 
-Source: Stacks Project, Tags 03PT and 0GKC, stalkwise-isomorphism step.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03PT and 0GKC
 -/
 
 @[expose] public section

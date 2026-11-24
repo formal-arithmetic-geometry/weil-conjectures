@@ -19,16 +19,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The chosen categorical pullback carries the pulled-back descent datum.
-Source: Stacks Project, Descent, Tag 023Y (1), pullback of descent data.
-(blueprint: lem-galois-fpqc-canonical-pullback-datum)
-
-For a point of the pullback over a : T → X', project to V, transport by D along
-(a ≫ h, b ≫ h), and pair the transported point with b : T → X'. The pullback
-universal property supplies a unique point of the pullback over b. Its two
-projections show naturality, the identity law, and the cocycle law using the
-corresponding laws of D. The first projection gives IsBaseChange. This construction
-uses no covering assumption and works for empty schemes and identity maps. -/
+/-- The chosen categorical pullback carries the pulled-back descent datum
+(Stacks, Descent, Tag 023Y (1)). -/
 theorem exists_canonical_pullback_descent_datum {S X X' : Scheme.{u}}
     (f : X ⟶ S) (g : X' ⟶ S) (h : X' ⟶ X) (hc : h ≫ f = g)
     {V : Over X} (D : Over.DescentDatum f V) :

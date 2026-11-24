@@ -43,14 +43,13 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChan
 /-!
 # Cartesian stratum restriction with canonical finite constant coefficients
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03D8 and 093R,
-lemma-pullback-module, lemma-push-pull-composition-modules and
-lemma-pullback-locally-constant
-(blueprint: lem-sf-cartesian-stratum-module-restriction).
-
 The underlying comparison is normalized by the actual tensor-unit adjunction,
 then by the canonical inverse-image composition comparisons. All fibre products
 are the chosen fibre products of the original schemes.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D8, 03CB, 093R
 -/
 
 @[expose] public section
@@ -60,9 +59,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Forget the constant coefficient action to the underlying abelian sheaf.
-Source: Stacks Project, Tag 03D2
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+/-- Forget the constant coefficient action to the underlying abelian sheaf. -/
 noncomputable abbrev proEtaleConstantModuleToAbelianSheaf (X : Scheme.{u})
     (A : Type u) [CommRing A] :
     proEtaleRingModules X (proEtaleConstantRing X A) ⥤
@@ -70,11 +67,9 @@ noncomputable abbrev proEtaleConstantModuleToAbelianSheaf (X : Scheme.{u})
   SheafOfModules.toSheaf _
 
 /-- The canonical comparison from abelian inverse image to underlying module
-pullback. Transpose the underlying unit of the tensor-unit-normalized module
-adjunction through the abelian inverse-image adjunction. Thus this uses the
-actual map sending an inverse-image section to its tensor with one.
-Source: Stacks Project, Tags 03D2 and 03D3
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+pullback: the transpose of the underlying unit of the tensor-unit-normalized module
+adjunction through the abelian inverse-image adjunction, i.e. the map sending an
+inverse-image section to its tensor with one. -/
 noncomputable def proEtaleConstantModuleUnderlyingComparison
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A]
     (M : proEtaleRingModules Y (proEtaleConstantRing Y A)) :
@@ -86,9 +81,7 @@ noncomputable def proEtaleConstantModuleUnderlyingComparison
     ((proEtaleConstantModuleToAbelianSheaf Y A).map
       ((proEtaleConstantRingAdjunction A f).unit.app M))
 
-/-- Apply the two tensor-unit comparisons successively.
-Source: Stacks Project, Tag 03D8
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+/-- Apply the two tensor-unit comparisons successively. -/
 noncomputable def proEtaleIteratedConstantModuleUnderlyingComparison
     {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) (A : Type u) [CommRing A]
     (M : proEtaleRingModules V (proEtaleConstantRing V A)) :
@@ -101,9 +94,7 @@ noncomputable def proEtaleIteratedConstantModuleUnderlyingComparison
       (proEtaleConstantModuleUnderlyingComparison k A M) ≫
     proEtaleConstantModuleUnderlyingComparison h A ((proEtaleConstantRingPullback A k).obj M)
 
-/-- Equality transport, compatible with the canonical constant-section maps.
-Source: Stacks Project, Tag 03D8
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+/-- Equality transport, compatible with the canonical constant-section maps. -/
 theorem proEtaleSheafTransport_existsUnique
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [∀ T : Scheme.{u}, HasWeakSheafify (ProEt.topology T) D]
@@ -119,9 +110,7 @@ theorem proEtaleSheafTransport_existsUnique
   · intro e he
     exact he.1
 
-/-- Equality transport with a named normalization API.
-Source: Stacks Project, Tag 03D8
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+/-- Equality transport with a named normalization API. -/
 noncomputable def proEtaleSheafTransport
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [∀ T : Scheme.{u}, HasWeakSheafify (ProEt.topology T) D]
@@ -157,9 +146,7 @@ private theorem isoFactorization_eq
   apply (cancel_epi p.hom).mp
   simpa using he
 
-/-- Cancellation uniquely determines the square comparison.
-Source: Stacks Project, Tag 03D8
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+/-- Cancellation uniquely determines the square comparison. -/
 theorem stratumSheafComparison_existsUnique
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [∀ T : Scheme.{u}, HasWeakSheafify (ProEt.topology T) D]
@@ -174,9 +161,7 @@ theorem stratumSheafComparison_existsUnique
 
 /-- The specified underlying square comparison, through the equal composites
 of the actual fibre-product projections. The composition comparisons are the
-mates of the canonical fibre-product associativity maps on direct images.
-Source: Stacks Project, Tags 03D8 and 03CB
-(blueprint: lem-sf-cartesian-stratum-module-restriction). -/
+mates of the canonical fibre-product associativity maps on direct images. -/
 noncomputable def proEtaleCartesianStratumSheafComparison
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [∀ T : Scheme.{u}, HasWeakSheafify (ProEt.topology T) D]
@@ -667,28 +652,7 @@ private theorem coefficientSquare_cancelled
     (coefficientTransport_congr pullback.condition.symm A)
 
 /-- Canonical coefficient-linear restriction to the actual cartesian stratum,
-including preservation of local constancy and all finite geometric stalks.
-Source: Stacks Project, Tags 03D2, 03D8 and 093R
-(blueprint: lem-sf-cartesian-stratum-module-restriction).
-
-Proof: (1) By prop-weil-pbc-proetale-constant-ring-map each specified coefficient
-map is invertible. Cancel extension of scalars in the actual sheafified tensor:
-the contraction sends a pure tensor to the action of the inverse coefficient
-map, and its inverse tensors with one. This is precisely the comparison obtained
-from the tensor-unit-normalized module adjunction used above.
-(2) Apply lem-pur-proetale-constant-ring-composition to both projection paths.
-Both coefficient maps agree with that of the common composite, including on
-every constant section. (3) Under these identifications take the inverse of the
-first inverse-image composition comparison followed by the second, transporting
-through pullback.condition. Naturality on addition and scalar multiplication,
-and finite-product preservation from lem-weil-pbc-left-exact-site-inverse-image-tensor,
-show that this map is additive and coefficient-linear. Naturality in M gives
-the displayed naturality equation, and the construction gives the underlying
-normalization equation. (4) Apply lem-pur-proetale-finite-local-constancy-pullback
-to g' and s_A^*M. Transfer local trivializations and geometric stalk finiteness
-across theta. (5) Nothing changes the original schemes or assumes Noetherianity,
-reducedness or invertibility. On the empty source the sheaves are zero and
-there are no geometric points; for the zero coefficient ring all modules are zero. -/
+including preservation of local constancy and all finite geometric stalks. -/
 theorem proEtale_cartesianStratum_moduleRestriction
     {S Y X : Scheme.{u}} (s : S ⟶ X) [IsImmersion s] (g : Y ⟶ X)
     (A : Type u) [CommRing A] [Finite A] :

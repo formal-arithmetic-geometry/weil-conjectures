@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # The canonical annihilator of an ideal power
 
-Source: Stacks Project, Properties, Tags 01PO and 01PQ.
+## References
+
+* Stacks Project, Tags 01PO and 01PQ
 -/
 
 @[expose] public section
@@ -27,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Sections locally annihilated by a module inclusion into the structure sheaf. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- Sections locally annihilated by a module inclusion into the structure sheaf.
 -/
 def idealAnnihilatorSections {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules)
@@ -43,8 +44,7 @@ def idealAnnihilatorSections {X : Scheme.{u}} {P : X.Modules}
     intro r s hs V h b
     rw [F.map_smul, smul_comm, hs V h b, smul_zero]
 
-/-- The local annihilation condition is stable under restriction. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- The local annihilation condition is stable under restriction.
 -/
 def idealAnnihilatorPresheaf {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) : F.val.Submodule where
@@ -59,7 +59,7 @@ def idealAnnihilatorPresheaf {X : Scheme.{u}} {P : X.Modules}
     rw [← ConcreteCategory.comp_apply, ← Functor.map_comp]
     convert hh using 1
 
-/-- (blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent) -/
+/-- The presheaf of sections annihilated locally by the ideal inclusion is a sheaf. -/
 theorem idealAnnihilatorPresheaf_isSheaf {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) :
     Presheaf.IsSheaf (Opens.grothendieckTopology X)
@@ -105,16 +105,14 @@ theorem idealAnnihilatorPresheaf_isSheaf {X : Scheme.{u}} {P : X.Modules}
     intro i
     exact congrArg Subtype.val (ht i)
 
-/-- The actual subsheaf of sections annihilated locally by the ideal inclusion. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- The actual subsheaf of sections annihilated locally by the ideal inclusion.
 -/
 noncomputable def idealAnnihilator {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) : X.Modules :=
   ⟨(idealAnnihilatorPresheaf j F).toPresheafOfModules,
     idealAnnihilatorPresheaf_isSheaf j F⟩
 
-/-- The inclusion of the canonical annihilator subsheaf. 
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent)
+/-- The inclusion of the canonical annihilator subsheaf.
 -/
 noncomputable def idealAnnihilatorι {X : Scheme.{u}} {P : X.Modules}
     (j : P ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) :
@@ -228,24 +226,7 @@ private theorem annihilator_quasicoherent_of_affine_fg {X : Scheme.{u}} {P : X.M
       rfl
 
 /-- The annihilator of each power of a finite-type quasi-coherent ideal is quasi-coherent.
-
-Source: Stacks Project, Properties, Tag 01PO, proof of (1), applied to the powers
-in the proof of Tag 01PQ.
-(blueprint: lem-weil-pbc-ideal-power-annihilator-quasicoherent).
-
-Proof: On an affine open Spec R identify I with a finitely generated ideal J and
-F with the sheaf associated to an R-module M. The recursive image construction
-of ideal powers gives J^n, which is finitely generated, including J^0 = R.
-The canonical subsheaf has sections killed by J^n: annihilation on the affine
-open implies annihilation on every smaller affine open by localization, and
-these smaller affines cover any open. Put N = {m in M | J^n m = 0}. For a
-principal open D(f), localization of N injects into M_f. If m/f^r is killed
-by (J^n)_f, choose finite generators of J^n and clear a power of f in each
-annihilation equation. Their maximum e gives f^e m in N, showing that
-m/f^r belongs to N_f. With no generators, take e = 0. Thus the canonical
-annihilator is the sheaf associated to N on every affine open; the inclusions
-into F make these local identifications compatible. It is quasi-coherent.
--/
+(Stacks, Tags 01PO and 01PQ) -/
 theorem ideal_power_annihilator_quasicoherent {X : Scheme.{u}} {I : X.Modules}
     (ι : I ⟶ SheafOfModules.unit X.ringCatSheaf) [Mono ι]
     [I.IsQuasicoherent] [I.IsFiniteType] (F : X.Modules) [F.IsQuasicoherent]

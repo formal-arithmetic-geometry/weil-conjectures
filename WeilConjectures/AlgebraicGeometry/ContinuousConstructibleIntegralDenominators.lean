@@ -215,19 +215,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
   [FiniteDimensional ℚ_[ℓ] E]
 set_option backward.isDefEq.respectTransparency false in
-/-- Multiplying a rational derived morphism by a power of ℓ gives an integral morphism.
-Source: Bhatt--Scholze, Lemma 6.8.12 and Proposition 6.8.14(2).
-(auxiliary; not a blueprint node)
-
-Proof. Tensor the coefficient localization telescope with a complex representing B.
-Tensor preserves the colimit. Extension followed by restriction is tensor with the
-restricted rational regular module; the normalized zeroth leg is its adjunction unit.
-Every stage is isomorphic to B and therefore has the same cohomological lower bound.
-Sequential Hom continuity factors the adjoint of the given rational morphism through
-one stage. Multiplication by the corresponding power of ℓ takes this leg to the zeroth
-leg. Naturality and injectivity of the adjunction bijection yield an integral lift.
-Finally transport along the representative of B and the canonical isomorphism between
-the left derived functor and the derived functor of exact scalar extension. -/
+/-- Multiplying a rational derived morphism by a power of ℓ gives an integral morphism
+(Bhatt–Scholze, Lemma 6.8.12 and Proposition 6.8.14(2)). -/
 theorem continuousConstructible_clear_denominators (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (A B : integralConstructible ℓ E X)

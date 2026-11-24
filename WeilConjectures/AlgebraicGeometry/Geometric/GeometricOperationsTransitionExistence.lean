@@ -10,8 +10,9 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Compatibility of geometric operation transitions
 
-Source: Zheng Construction 4.1 and Lemma 4.10.
-(blueprint: lem-coef-semilinear-geometric-operations-transition-existence)
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
 -/
 
 @[expose] public noncomputable section

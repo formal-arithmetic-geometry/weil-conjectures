@@ -10,8 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantCom
 
 /-! # The finite-module tensor-to-completion comparison
 
-Source: Stacks Project, more-algebra.tex, Tag 0912; sites-modules.tex,
-Tags 093J--093M. Only the comparison is asserted here, not exactness or local lissity.
+Only the comparison is asserted here, not exactness or local lissity.
+
+## References
+
+* Stacks Project, more-algebra.tex, Tag 0912; sites-modules.tex, Tags 093J--093M
 -/
 
 @[expose] public noncomputable section
@@ -22,22 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 /-- The tensor-to-limit comparison for finite completion modules, with its two
-projection identities.
-Source: Stacks Project, more-algebra.tex, Tag 0912 (lemma-limit-flat), and
-sites-modules.tex, Tags 093J--093M.
-(blueprint: lem-weil-pbc-completed-constant-finite-module-comparison).
-
-Proof: construct the finite projections for every completion module by sheafifying
-the evaluation-semilinear residue map and using the scalar-extension adjunction. They
-commute with the successor transitions, so the limit universal property gives a fixed
-comparison map. The invertibility step is `completedConstantComparisonMap_isIso`;
-apply it to a finite module and take `asIso` of that map. The composite with each
-limit projection is exactly the constructed finite projection. Its proved linearity
-formula gives the first assertion. Its proved naturality for C-linear maps gives
-the second. The quotient maps, pure-tensor formulas, transition compatibility and
-these two identities were constructed independently of the remaining invertibility
-step, and do not require N to be finite. The residual invertibility argument is the
-finite-presentation tensor-limit calculation of Tags 0912 and 093J--093M. -/
+projection identities. -/
 theorem completed_constant_finite_module_comparison (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
     (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)

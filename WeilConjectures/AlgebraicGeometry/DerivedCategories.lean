@@ -14,11 +14,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-!
 # Derived categories of etale sheaves of modules
 
-Source: literature/blueprint/master/blueprint/sec-curve-estimates/
-`lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md`
-(blueprint: def-weil-pbc-derived-categories); Stacks Project, Derived Categories, Tag 05RU.
-
-The notions of the node are existing declarations, in the encoding of etale sheaves of
+The notions below are given by existing declarations, in the encoding of etale sheaves of
 `Λ`-modules that the six-functor and proper-base-change chapters use
 (`Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)`, `Λ : Type (u + 1)`):
 
@@ -32,10 +28,14 @@ The notions of the node are existing declarations, in the encoding of etale shea
 ## Main definitions
 
 * `AlgebraicGeometry.Etale.DerivedCategory.torsionCohomology`: an object of `D(T_et, Λ)` has
-  torsion cohomology. On `D^+` it restricts to the source's
+  torsion cohomology. On `D^+` it restricts to
   `AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology`
   (`WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf`, stalkwise; the two
   agree by `AlgebraicGeometry.Scheme.isTorsionSheaf_iff_isTorsion`).
+
+## References
+
+* Stacks Project, Derived Categories, Tag 05RU
 -/
 
 @[expose] public section
@@ -48,10 +48,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- An object `K` of `D(T_et, Λ)` has *torsion cohomology* if every cohomology sheaf
 `H^r(K)`, as a sheaf of abelian groups, is a torsion sheaf: every local section is locally
-killed by a positive integer (`CategoryTheory.Sheaf.IsTorsion`).
-Source: blueprint
-`sec-curve-estimates/lem-sc-second-kummer-divisors/def-weil-pbc-derived-categories.md` (blueprint:
-def-weil-pbc-derived-categories). -/
+killed by a positive integer (`CategoryTheory.Sheaf.IsTorsion`). -/
 def DerivedCategory.torsionCohomology (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) :
     ObjectProperty (DerivedCategoryModule Λ T) :=
   fun K ↦ ∀ r : ℤ, CategoryTheory.Sheaf.IsTorsion

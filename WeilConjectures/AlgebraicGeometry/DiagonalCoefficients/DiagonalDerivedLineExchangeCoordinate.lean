@@ -40,8 +40,7 @@ private theorem transport_composite
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunctor
   Functor.rightDerivedFunctor CondensedRing.upperStar CondensedRing.lowerStar
 
-/-- The actual integral Tate line in degree minus two.
-(blueprint: lem-diagonal-derived-line-exchange-coordinate). -/
+/-- The actual integral Tate line in degree minus two. -/
 abbrev diagonalShiftedIntegralLine (l : ℕ) [Fact l.Prime] (S : Scheme.{u}) :=
   ((DerivedCategory.singleFunctor (Modules (Profinite.continuousMapRingObj.{u} ℤ_[l]) S)
     0).obj (zlLine l S))⟦(2 : ℤ)⟧
@@ -64,18 +63,7 @@ private theorem pull_line_iso (l : ℕ) [Fact l.Prime]
 
 -- Compare the independently normalized derived functor endpoints.
 /-- For vertical morphisms admitting sections, exchange on integral Tate lines
-has invertible first coordinate in every split unit/Chern decomposition.
-
-Source: the unit component of diagonal coefficients (3)
-(blueprint: lem-diagonal-derived-line-exchange-coordinate).
-
-Proof: form the canonical twisted adjunction unit using an inverse-image
-isomorphism of integral Tate lines. A section splits this unit. Its composite
-with exchange is another split unit, by the mate identity, without any choice
-of trivializations. Transport both along the prescribed canonical functor
-equalities. Degree minus two to degree zero maps vanish by the standard
-t-structure. The rank-one coordinate criterion therefore makes both the unit
-coordinate and the exchange coordinate invertible. -/
+has invertible first coordinate in every split unit/Chern decomposition. -/
 theorem diagonalDerivedLineExchange_coordinate (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]

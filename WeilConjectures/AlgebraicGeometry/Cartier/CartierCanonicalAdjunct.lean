@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalSheafExt
 
-/-! # Cartier adjunct uniqueness with shared canonical sheaf structures
-Source: diagonal tower system proof, step (4).
-(blueprint: lem-sfb-cartier-canonical-adjunct). -/
+/-! # Cartier adjunct uniqueness with shared canonical sheaf structures -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,10 +29,7 @@ attribute [local irreducible] DerivedCategory.singleFunctors
   cartierResidueReducedPro diagonalFiniteToPadic diagonalForget diagonalScalarExtension
   diagonalScalarAdjunction diagonalIntegralBoundary
 
-/-- The existing uniquely characterized Cartier class, with canonical coefficient structures.
-Source: the full Cartier scalar-adjunct characterization
-(blueprint: lem-sfb-cartier-canonical-adjunct).
-This is the existing unique class, with no additional witness choice. -/
+/-- The existing uniquely characterized Cartier class, with canonical coefficient structures. -/
 def canonicalCartierClass (R : Type (u + 1)) [CommRing R] [Finite R]
     (n : ℕ) (hn : 0 < n) (hR : (n : R) = 0) {Z W : Scheme.{u}}
     (i : Z ⟶ W) [IsClosedImmersion i] (hI : i.ker.IsInvertible)
@@ -44,15 +39,7 @@ def canonicalCartierClass (R : Type (u + 1)) [CommRing R] [Finite R]
   cartierReducedPro R n hn hR i hI hW
 
 /-- Full Cartier-adjunct uniqueness with the named canonical sheaf structures.
-Source: Cartier unit proof, full scalar-adjunct characterization
-(blueprint: lem-sfb-cartier-canonical-adjunct).
-
-Proof: the displayed equation is exactly CartierProReductionSpec, after unfolding
-that predicate and cartierScalarBoundaryEquation. The pro-etale component of
-cartierReduction_existsUnique identifies any such class with its unique witness.
-That witness is cartierReducedPro and therefore canonicalCartierClass. All
-coefficient-structure comparisons are performed for an arbitrary scheme W and
-ring R, before specialization to the diagonal. -/
+-/
 theorem canonical_cartier_class_of_adjunct (R : Type (u + 1)) [CommRing R] [Finite R]
     (n : ℕ) (hn : 0 < n) (hR : (n : R) = 0) {Z W : Scheme.{u}}
     (i : Z ⟶ W) [IsClosedImmersion i] (hI : i.ker.IsInvertible)

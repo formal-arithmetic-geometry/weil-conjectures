@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityFiniteLevelFi
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityFiniteLevelProjectionTransport
 
 /-! # Finite projection invertibility in normalized level coordinates
-
-Source: blueprint operations proof (2a); finite-Tor site comparison (ii)
-(blueprint: lem-sp-finite-level-projection-criterion).
 -/
 
 @[expose] public noncomputable section

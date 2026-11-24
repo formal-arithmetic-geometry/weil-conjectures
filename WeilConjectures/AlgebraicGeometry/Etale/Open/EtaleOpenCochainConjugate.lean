@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 
-/-! # The ordinary open/scalar conjugation identity on cochain complexes. -/
+/-! # The ordinary open/scalar conjugation identity on cochain complexes.
+
+## References
+
+* Stacks Project, Tags 03DI, 0E8I
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -61,14 +66,7 @@ private theorem complex_conjugate
     Functor.mapHomologicalComplex_obj_X, Functor.comp_obj] using h
 
 /-- The cochain comparison of open extension and scalar extension is conjugate to the
-cochain restriction comparison.
-Source: Stacks 0E8I, 03DI; normalization proof step 2.
-
-Proof: Uniqueness of left adjoints makes the ordinary comparison conjugate to the given
-right-adjoint isomorphism. The cochain adjunction's unit and counit are the ordinary unit
-and counit in every degree. Evaluate the conjugation formula in every degree and apply
-that ordinary conjugation identity. This uses no flatness or nonemptiness hypotheses.
-(blueprint: lem-coef-etale-open-cochain-conjugate). -/
+cochain restriction comparison. -/
 theorem etaleOpenScalarCochainConjugate
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :

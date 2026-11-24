@@ -30,11 +30,8 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The actual derived extension counit is invertible on the integral scalar complex.
-Source: Stacks Tag 06YY.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv).
-Proof: the integral complex is K-flat, so the defining left derived functor computes
-ordinary extension on this complex. Apply the K-flat counit criterion. -/
+/-- The actual derived extension counit is invertible on the integral scalar complex
+(Stacks, Tag 06YY). -/
 theorem internalPerfectReductionCounit_isIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
@@ -47,10 +44,9 @@ theorem internalPerfectReductionCounit_isIso (W : Scheme.{u})
     (Mod.extendScalars (AdicCompletion.quotient l E W n)) _
       (internalPerfectIntegralComplex_kflat l E W P a b ha hb hfree)
 
-/-- Canonical comparison of actual derived reduction with the localized ordinary model.
-It is the derived counit, preceded by the quotient factorization of the integral complex.
-Source: Stacks Tag 06YY.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv). -/
+/-- Canonical comparison of actual derived reduction with the localized ordinary model:
+the derived counit, preceded by the quotient factorization of the integral complex
+(Stacks, Tag 06YY). -/
 def internalPerfectReductionOrdinaryIso (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
@@ -66,10 +62,8 @@ def internalPerfectReductionOrdinaryIso (W : Scheme.{u})
     asIso ((Mod.extendScalars (AdicCompletion.quotient l E W n)).leftDerivedFunctorCounit.app
       ((HomotopyCategory.quotient _ (.up ℤ)).obj (internalPerfectIntegralComplex l E W P)))
 
-/-- Endomorphism comparison fixed by the derived counit and K-projective localization.
-The inverse of localization is uniquely determined by the localization bijection.
-Source: Stacks Tags 06YY and 064B.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv). -/
+/-- Endomorphism comparison fixed by the derived counit and K-projective localization
+(Stacks, Tags 06YY and 064B). -/
 def internalPerfectReductionHomEquiv (X : Scheme.{u}) (W : X.ProEt)
     (hW : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
@@ -87,10 +81,8 @@ def internalPerfectReductionHomEquiv (X : Scheme.{u}) (W : X.ProEt)
       (CochainComplex.IsKProjective.Qh_map_bijective
         (internalPerfectOrdinaryReduction l E W.left P n) _)).symm
 
-/-- Localization of the canonical Hom comparison is conjugation by the model isomorphism.
-Source: the uniquely determined inverse of K-projective localization.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv).
-Proof: localization and its inverse cancel; the Hom congruence is conjugation. -/
+/-- Localization of the canonical Hom comparison is conjugation by the model
+isomorphism. -/
 theorem internalPerfectReductionHomEquiv_localize (X : Scheme.{u}) (W : X.ProEt)
     (hW : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
@@ -112,11 +104,7 @@ theorem internalPerfectReductionHomEquiv_localize (X : Scheme.{u}) (W : X.ProEt)
   change q (q.symm _) = _
   exact q.apply_symm_apply _
 
-/-- The successor derived counit intertwines ordinary reduction of endomorphisms.
-Source: naturality of the universal derived counit and ordinary balancing.
-(blueprint: def-pe-internal-perfect-reduction-hom-equiv).
-Proof: apply counit naturality to the homotopy endomorphism, then cancel the ordinary
-balancing isomorphism with its inverse. No flatness assumption is needed for this identity. -/
+/-- The successor derived counit intertwines ordinary reduction of endomorphisms. -/
 theorem internalPerfectOrdinaryStepCounit_naturality (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) (f : internalPerfectOrdinaryHom l E W P (n + 1)) :

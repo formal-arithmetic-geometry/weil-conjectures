@@ -38,18 +38,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunc
   CompletedRealization.singleUnit CompletedRealization.shiftedLine modelExchange
 
 -- Compare the independently normalized derived functor endpoints.
-/-- The geometric exchange has degree one on the normalized Chern component.
-
-Source: diagonal coefficient changes (3), elimination of the base Picard component.
-(blueprint: lem-diagonal-completed-chern-high-coordinate).
-
-Proof: lift each local hyperplane Chern class through the fully faithful category
-of complete objects. The normalized adjunct comparison identifies their canonical
-adjuncts with the two given realized Chern arrows. The local Chern exchange
-factorization has a relative term and a term through the base Tate line in degree
-minus two. Compose with the given degree-one projection. The base term vanishes
-by the standard t-structure, and the relative term is the unit comparison because
-the new Chern arrow has degree one. -/
+/-- The geometric exchange has degree one on the normalized Chern component. -/
 theorem diagonalCompletedChern_highCoordinate (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian S] [IsNoetherian X'] [IsNoetherian S']

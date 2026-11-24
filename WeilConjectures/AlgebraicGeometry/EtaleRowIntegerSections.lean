@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleRowSectionsEvaluationSquare
 
 /-! # Ordinary comparison before removing extension by zero
 
-Source: Stacks Project, Tags 06XR, 01F8 and 08J6.
-(blueprint: lem-weil-pbc-row-integer-sections).
+## References
+
+* Stacks Project, Tags 06XR, 01F8 and 08J6
 -/
 
 @[expose] public section
@@ -24,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits CochainComplex HomComplex Abelian
 namespace AlgebraicGeometry.Etale
 open Scheme
 
-/-- Apply the sections unit and an integer-indexed comparison.
-Source: Stacks Project, Tag 015K; evaluation maps in Tags 01F9 and 01FA.
-(blueprint: lem-weil-pbc-row-integer-sections). -/
+/-- Apply the sections unit and an integer-indexed comparison (Stacks, Tags 015K, 01F9 and 01FA). -/
 noncomputable def ceIntegerSectionsMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℤ}
@@ -40,9 +39,8 @@ noncomputable def ceIntegerSectionsMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     ((Sheaf.Γ Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}).mapHomologicalComplex
       (ComplexShape.up ℤ)).map φ
 
-/-- Extend a supplied row map, commuting inverse image with extension by zero.
-Source: Stacks Project, Tags 015J and 015K.
-(blueprint: lem-weil-pbc-row-integer-sections). -/
+/-- Extend a supplied row map, commuting inverse image with extension by zero
+(Stacks, Tags 015J and 015K). -/
 noncomputable def ceExtendedRowMap {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     {J : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
     {J' : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1}) ℕ}
@@ -64,23 +62,8 @@ private lemma map_square {C : Type w} {D : Type w'}
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- The integer-indexed sections map computes the coefficient and pullback map on Ext.
-Source: Stacks Project, Tags 06XR, 01F8 (equations 01F9 and 01FA) and 08J6.
-(blueprint: lem-weil-pbc-row-integer-sections).
-
-Proof. Represent an Ext class by a cocycle from the constant integer sheaf into R.
-Apply the exact inverse-image functor, precompose with the inverse constant-sheaf
-comparison, and postcompose with ψ. The augmentation equality makes the two roofs
-agree after postcomposition with v, by ext_mapExactFunctor_coefficient_cocycle.
-CohomologyClass.mk and Cocycle.fromSingleMk are surjective, so the equality descends
-from cocycles to Hom-complex homology. Evaluation at 1 commutes with postcomposition.
-The constant-sheaf transpose identifies evaluation after inverse image with the
-sections unit; the terminal-sections comparison identifies that unit with ceSectionsUnit.
-Thus complexSectionsIso intertwines homPullbackMap with ceIntegerSectionsMap. Apply
-homology, then cancel the Ext/resolution and classSections isomorphisms to obtain the
-square below. This argument makes no comparison with nonnegative sections homology;
-that extension-by-zero transport is a separate step. Degree zero, zero sheaves, zero
-comparisons and empty schemes obey the same cocycle calculation. -/
+/-- The integer-indexed sections map computes the coefficient and pullback map on Ext
+(Stacks, Tags 06XR, 01F8, 01F9, 01FA and 08J6). -/
 theorem ceIntegerSectionsIso_naturality {X Y : Scheme.{uNatural}} (f : Y ⟶ X)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})
     (G' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{uNatural + 1})

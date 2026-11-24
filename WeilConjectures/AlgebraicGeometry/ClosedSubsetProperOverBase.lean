@@ -13,15 +13,14 @@ public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 /-!
 # Closed subsets and module supports proper over a base
 
-Source: Stacks Project, Cohomology of Schemes, Definition 30.26.2 (Tag 0CYM),
-condition (1) of Lemma 30.26.1 (Tag 0CYL), and the paragraph before Lemma 30.26.7
-(Tag 0CYS); Sheaves of Modules, Definition 17.5.1 (Tag 01AT)
-(blueprint: def-weil-pbc-closed-subset-proper-over-base).
-
 ## Main definitions
 
 * `Scheme.IsClosedSubsetProperOver`: properness of the reduced induced closed subscheme.
 * `Scheme.Modules.HasSupportProperOver`: closedness and properness of the nonzero-stalk locus.
+
+## References
+
+* Stacks Project, Tags 0CYM, 0CYL, 0CYS and 01AT
 -/
 
 @[expose] public section
@@ -35,9 +34,8 @@ namespace AlgebraicGeometry.Scheme
 /-- A closed subset is proper over the base if its reduced induced closed subscheme is proper.
 The ideal `IdealSheafData.vanishingIdeal Z` consists of sections vanishing at every point of
 `Z`; its subscheme is the reduced induced structure of Stacks Tags 01J3 and 01J4, as stated
-in `IdealSheafData.reduced_induced_closed_subscheme`, including uniqueness over `X`.
-Source: Stacks Project, Tag 0CYM and condition (1) of Tag 0CYL.
-(blueprint: def-weil-pbc-closed-subset-proper-over-base) -/
+in `IdealSheafData.reduced_induced_closed_subscheme`, including uniqueness over `X`
+(Stacks, Tags 0CYM and 0CYL). -/
 def IsClosedSubsetProperOver {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (Z : TopologicalSpace.Closeds X) : Prop :=
   IsProper ((IdealSheafData.vanishingIdeal Z).subschemeι ≫ f)
@@ -48,9 +46,8 @@ namespace Modules
 failure of `Subsingleton` for the stalk (the project's inline support convention).
 It has support proper over the base exactly
 when this set is closed and is proper over the base with its reduced induced structure.
-The existential closed subset expresses closedness without assuming it for arbitrary `F`.
-Source: Stacks Project, Tag 01AT and the paragraph before Tag 0CYS.
-(blueprint: def-weil-pbc-closed-subset-proper-over-base) -/
+The existential closed subset expresses closedness without assuming it for arbitrary `F`
+(Stacks, Tags 01AT and 0CYS). -/
 def HasSupportProperOver {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (F : X.Modules) : Prop :=
   ∃ Z : TopologicalSpace.Closeds X,

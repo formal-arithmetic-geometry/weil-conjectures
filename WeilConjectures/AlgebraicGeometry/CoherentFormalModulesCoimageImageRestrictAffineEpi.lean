@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Abelian.Transfer
 
 /-! # Epimorphic affine restriction of the formal coimage-image comparison
 
-Source: Stacks Project, Lemmas 087W and 087X.
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section
@@ -65,15 +67,7 @@ private theorem restriction_preserves_cokernel {X : Scheme.{u}} [IsNoetherian X]
     infer_instance
   exact preservesColimit_of_reflects_of_preserves R V
 
-/-- The affine restriction of the coimage-image comparison is epic.
-Source: Stacks Project, Lemma 087X, affine calculation of Coim=Im.
-(blueprint: lem-weil-pbc-coherent-formal-coimage-image-affine-epi).
-
-Proof: On an affine open, the coherent formal module equivalence identifies the
-comparison with the map from a module modulo its kernel onto its image. The first
-isomorphism theorem makes this map surjective; restriction and associated sheaf
-preserve that surjectivity. The conclusion is invariant under the unique
-isomorphisms between supplied kernel and cokernel structures. -/
+/-- The affine restriction of the coimage-image comparison is epic (Stacks, Tag 087X). -/
 theorem coherentFormalModules_coimageImage_isEpi_restrict_affine
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     [HasKernels (CoherentFormalModule X I)]

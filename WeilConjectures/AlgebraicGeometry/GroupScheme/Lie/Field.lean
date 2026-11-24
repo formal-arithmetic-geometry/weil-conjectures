@@ -354,14 +354,13 @@ namespace GrpObj
 variable (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom]
 
 /-- The Lie algebra of a group scheme of finite type over a field only sees the identity
-component: the differential of the open immersion `G° ⟶ G` is bijective.
-(blueprint: `proposition-cartier-s-theorem`) -/
+component: the differential of the open immersion `G° ⟶ G` is bijective. -/
 theorem differential_identityComponentι_bijective :
     Function.Bijective (differential (identityComponentι G)) :=
   differential_bijective_of_isOpenImmersion (identityComponentι G)
 
 /-- The Lie algebra of a group scheme of finite type over a field is the Lie algebra of its
-identity component. (blueprint: `proposition-cartier-s-theorem`) -/
+identity component. -/
 noncomputable def lieEquivIdentityComponent : Lie (identityComponent G) ≃ₗ⁅k⁆ Lie G :=
   lieEquivOfIsOpenImmersion (identityComponentι G)
 

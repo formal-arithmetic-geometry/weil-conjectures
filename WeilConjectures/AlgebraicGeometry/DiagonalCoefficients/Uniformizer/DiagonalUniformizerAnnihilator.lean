@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient
 import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 
 /-! # An explicit annihilator of every uniformizer quotient
-
-Source: diagonal tower coefficient changes, proof paragraph (1).
-(blueprint: lem-diagonal-uniformizer-annihilator).
 -/
 
 @[expose] public section
@@ -21,15 +18,7 @@ universe u
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 /-- The quotient by pi^(n+1) is killed by l^(n+1), including for ramified
-extensions. A cofinal-subsystem argument is unnecessary for this annihilator.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraph (1).
-(blueprint: lem-diagonal-uniformizer-annihilator).
-
-Proof: l belongs to the maximal ideal of the integer ring, which is (pi).
-Taking the (n+1)-st power puts l^(n+1) in (pi)^(n+1), so its image in the
-quotient is zero. The same holds after lifting the quotient's universe. -/
+extensions. A cofinal-subsystem argument is unnecessary for this annihilator. -/
 theorem diagonalUniformizer_annihilator
     (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l)
     (π : PadicAlgCl.integers l E)

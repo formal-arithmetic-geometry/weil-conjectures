@@ -52,7 +52,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Completed scalar extension of constant residue modules
 
-Source: Stacks Project, Tags 093J and 093M.
+## References
+
+* Stacks Project, Tags 093J and 093M
 -/
 
 -- After pruning, this module only keeps private declarations.

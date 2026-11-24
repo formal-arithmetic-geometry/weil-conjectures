@@ -35,7 +35,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 /-- Horizontal pasting for dual base change: for Cartesian squares `sq` (along `g`) and `sq₂`
 (along `g₂`), the dual base change isomorphism of the pasted square `sq₂.paste_horiz sq` is the
 pasting of those of `sq` and `sq₂`, using the canonical direct-image compositors
-`rightDerivedLowerStarComp` (blueprint: `definition-trace-morphism--1`, step 4). -/
+`rightDerivedLowerStarComp`. -/
 def DualBaseChangeHorizontalPasting {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'} {g₂' : X₂ ⟶ X'}
     {f₂ : X₂ ⟶ Y₂} [HasCompactification f₂] [QuasiCompact f₂]
     (sq : IsPullback g' f' f g) (sq₂ : IsPullback g₂' f₂ f' g₂) : Prop :=
@@ -53,8 +53,7 @@ def DualBaseChangeHorizontalPasting {X₂ Y₂ : Scheme.{u}} {g₂ : Y₂ ⟶ Y'
 
 /-- Vertical pasting for dual base change: for a Cartesian square `t` stacked on top of `sq`,
 the dual base change isomorphism of the pasted square `t.paste_vert sq` is the pasting of those
-of `t` and `sq`, using the exceptional compositors conjugate to `rightDerivedLowerShriekCompIso`
-(blueprint: `definition-trace-morphism--1`, step 4). -/
+of `t` and `sq`, using the exceptional compositors conjugate to `rightDerivedLowerShriekCompIso`. -/
 def DualBaseChangeVerticalPasting {X₀ X₀' : Scheme.{u}} {e : X₀ ⟶ X} {g₀' : X₀' ⟶ X₀}
     {f₀' : X₀' ⟶ X'} [HasCompactification e] [HasCompactification (e ≫ f)]
     [QuasiCompact (e ≫ f)] [HasCompactification f₀'] [QuasiCompact f₀']

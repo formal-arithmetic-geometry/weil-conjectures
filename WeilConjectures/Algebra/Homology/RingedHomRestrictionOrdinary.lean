@@ -13,8 +13,10 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Coherent restriction of ordinary internal Hom complexes
 
-Source: Stacks Project, Tags 0A8X and 08JB.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 08JB](https://stacks.math.columbia.edu/tag/08JB)
 -/
 
 @[expose] public noncomputable section
@@ -786,23 +788,7 @@ private theorem factor_coherence
     (op (Over.mk ((Over.map f).map Z.unop.hom))) x
 
 /-- The ordinary Hom-complex comparisons for slice restriction and relocalization form a
-compatible family. No derived category, K-injective replacement, or boundedness is involved.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0A8X and 08JB; the latter's proof refers to
-this computation in the construction of internal Hom.
-(auxiliary; not a blueprint node).
-
-Proof: In degree n restrict the product over p of the sheaves Hom(L^p,M^(p+n)). Slice
-restriction and relocalization preserve these products, since their underlying presheaves
-are precomposition. The sheaf Hom comparison sends a local linear map to the same map on
-the further slice, using the iterated-slice equivalence. Apply these factor comparisons to
-the product-limit projections of homComplex. They commute with precomposition and
-postcomposition, hence identify both terms of d_M f - (-1)^n f d_L. The product
-isomorphisms are therefore chain isomorphisms natural in both complexes. For V to U,
-successive and direct restrictions evaluate each factor at the same object over V;
-composition transport is the identity there. Postcompose with every Hom-product projection
-and evaluate local maps to prove the displayed compatibility. The argument applies also
-to zero complexes, identity arrows, nonmonomorphisms and unbounded complexes. -/
+compatible family. No derived category, K-injective replacement, or boundedness is involved. -/
 theorem ordinary_comparisons
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

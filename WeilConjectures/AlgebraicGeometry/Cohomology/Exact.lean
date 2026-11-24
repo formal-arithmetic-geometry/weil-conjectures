@@ -72,10 +72,7 @@ lemma subsingleton_H_of_isZero {M : X.Modules} (h : IsZero M) (n : ℕ) : Subsin
 /-- **Vanishing from the long exact cohomology sequence.** For a short exact sequence
 `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` of sheaves of modules, the long exact sequence contains
 `H^n(M₂) ⟶ H^n(M₃) ⟶ H^{n+1}(M₁)`, so `H^n(M₃) = 0` as soon as `H^n(M₂) = 0` and
-`H^{n+1}(M₁) = 0`.
-
-The underlying sequence of abelian sheaves is again short exact, since `SheafOfModules.toSheaf`
-is exact (`SheafOfModules.preservesFiniteColimits_toSheaf`). -/
+`H^{n+1}(M₁) = 0`. -/
 lemma subsingleton_H_of_shortExact {S : ShortComplex X.Modules} (hS : S.ShortExact) (n : ℕ)
     [Subsingleton (S.X₂.H n)] [Subsingleton (S.X₁.H (n + 1))] : Subsingleton (S.X₃.H n) := by
   refine ⟨fun x y ↦ ?_⟩

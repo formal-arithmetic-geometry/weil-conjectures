@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleFpqcRepresentativeOpen
 
 /-! # Étale local existence for compatible fpqc section data
 
-Source: Stacks Project, Tag 09XN, agreement opens and local representatives.
-(blueprint: lem-weil-pbc-etale-fpqc-local-representatives). -/
+## References
+
+* Stacks Project, Tag 09XN
+-/
 
 @[expose] public section
 
@@ -26,31 +28,8 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Source: Stacks Project, Tag 09XN, proof, paragraphs beginning "Let V" and
-"By construction"; Tag 09XM for the agreement-open universal property.
-(blueprint: lem-weil-pbc-etale-fpqc-local-representatives).
-
-This asserts local existence only. It neither chooses sections nor asserts that
-representatives are compatible on common test objects.
-
-Proof:
-For every étale V/S and t in F(V), take the largest agreement opens on each
-T_i ×_S V between the unit image of t and the restriction of s_i. The overlap
-hypothesis and the unit-compatible composition isomorphisms identify their two
-inverse images on double overlaps. Descend these opens to W in V using fpqc
-open descent. Restricting t to W gives the matching equation on every T_i ×_S W
-by the agreement-open universal property and unit naturality.
-Locally on T_i, the inverse-image section description expresses s_i as the
-restriction of a unit image of some t on an étale V/S. Apply the preceding
-construction to every representative. Its test scheme factors through W: after
-base change by every T_j it lies in the corresponding agreement open by the
-overlap hypothesis; joint surjectivity detects containment in the descended open.
-These test schemes cover all T_i. Since the T_i jointly cover S, the resulting
-W jointly cover S, and therefore generate a covering sieve in the small étale
-topology. Take P to be their arrows into the identity object. Every such arrow
-admits its restricted section satisfying the displayed matching equation.
-For an empty base, take the empty covering presieve; no choice of a point or a
-nonempty index type is needed. -/
+/-- Local existence of representatives of sections of an étale sheaf along an fpqc cover
+(Stacks, Tags 09XN and 09XM). Compatibility on common test objects is not asserted. -/
 theorem etaleFpqcSections_exists_local_representatives
     {S : Scheme.{u}} {I : Type v} (T : I → Scheme.{u}) (g : ∀ i, T i ⟶ S)
     (hcover : Presieve.ofArrows T g ∈ Scheme.fpqcPrecoverage S)

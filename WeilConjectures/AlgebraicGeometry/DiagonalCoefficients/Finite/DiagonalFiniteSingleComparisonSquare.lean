@@ -150,16 +150,7 @@ private theorem single_square_transport_cached
 end SingleSquare
 
 /-- Exact-derived single comparisons carry an ordinary inverse-image comparison square
-into the corresponding derived square, with the cached degree-zero embeddings.
-Source: diagonal coefficient changes (1), compatibility of the finite comparison
-with inverse image. (blueprint: lem-diagonal-finite-single-comparison-square).
-
-Proof: compatibility of exact-derived comparisons with composition and natural
-isomorphisms gives the undecorated square. Naturality moves the three ordinary
-arrows across the single comparisons. Cancel the exact/left-derived comparison
-isomorphisms and transport the single functors along their recorded equalities.
-This applies to arbitrary sheaves and arrows; no nonempty or nonzero hypothesis
-is used. -/
+into the corresponding derived square, with the cached degree-zero embeddings. -/
 theorem finite_single_comparison_square (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))

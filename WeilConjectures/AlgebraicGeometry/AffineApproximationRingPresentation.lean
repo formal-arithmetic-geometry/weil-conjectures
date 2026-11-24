@@ -12,7 +12,9 @@ public import Mathlib.RingTheory.FiniteType
 
 /-! # Ring presentation of affine approximation stages
 
-Source: Stacks Project, Tags 0GS2 and 0A0P.
+## References
+
+* Stacks Project, Tags 0GS2 and 0A0P
 -/
 
 @[expose] public section
@@ -23,21 +25,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Express an affine-base proper approximation as a diagram of rings.
-
-Source: Stacks Project, Tag 0A0P, affine-base clause, and Tag 0GS2, General case.
-(blueprint: lem-weil-pbc-affine-approximation-ring-presentation).
-
-Proof: Set B to the global-section diagram of Ss, with arrows reversed. Every affine
-stage has its canonical isomorphism to Spec of its global sections. Compose fs with
-these isomorphisms to obtain g; their naturality makes g a natural transformation.
-Compose the global-section cocone of piS with the inverse of the canonical
-A-to-global-sections isomorphism of Spec A to obtain alpha. Transporting the given
-colimit across this isomorphism gives the required colimit at A. Naturality of the
-canonical affine isomorphisms and the given commuting squares give the displayed
-squares for p, g, and alpha. Properness is preserved by the isomorphisms; finite type
-over the integers is exactly the given finite-type ring-map property. No ideal is
-involved in this change of presentation. -/
+/-- Express an affine-base proper approximation as a diagram of rings (Stacks, Tags 0A0P and 0GS2).
+-/
 theorem affine_approximation_ring_presentation
     {A : Type u} [CommRing A] {Y : Scheme.{u}} (f : Y ⟶ Spec (.of A))
     {Λ : Type u} [Preorder Λ]

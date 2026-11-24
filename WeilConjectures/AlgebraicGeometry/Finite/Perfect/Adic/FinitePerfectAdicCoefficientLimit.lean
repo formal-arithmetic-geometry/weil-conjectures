@@ -13,7 +13,10 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # The ordinary limit of the actual coefficient module tower
 
-Source: Stacks Project, Tag 09C6, the coefficient case of the finite-projective calculation.
+## References
+
+* Stacks Project, Tag 09C6 (the coefficient case of the finite-projective calculation)
+* Stacks Project, Modules on Sites, Tag 03DA
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +27,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- The actual finite-coefficient module diagram, including its specified transitions.
-Source: Stacks Tag 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit). -/
+/-- The actual finite-coefficient module diagram, including its specified transitions. -/
 def finitePerfectAdicCoefficientDiagram (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) : ℕᵒᵖ ⥤ CompletedAdicModules X d :=
   Functor.ofOpSequence (completedAdicFiniteModuleStep X d)
@@ -38,9 +39,7 @@ private theorem coefficientStep_apply (X : Scheme.{t}) {A : Type t} [CommRing A]
       (completedAdicFiniteStep X d n).hom.app U x :=
   (completedAdicFiniteModuleStep_exists X d n).exists.choose_spec U x
 
-/-- The limit projections, viewed as linear maps of coefficient modules.
-Source: Stacks Tag 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit). -/
+/-- The limit projections, viewed as linear maps of coefficient modules. -/
 def finitePerfectAdicCoefficientProjection (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :
     SheafOfModules.unit (completedAdicRing X d) ⟶ completedAdicFiniteModule X d n where
@@ -65,9 +64,7 @@ def finitePerfectAdicCoefficientProjection (X : Scheme.{t}) {A : Type t} [CommRi
         exact ConcreteCategory.congr_hom
           ((completedAdicProjection X d n).hom.naturality f) x }
 
-/-- The completed coefficient unit supplies a cone of actual quotient projections.
-Source: Stacks Tag 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit). -/
+/-- The completed coefficient unit supplies a cone of actual quotient projections. -/
 def finitePerfectAdicCoefficientCone (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) : Cone (finitePerfectAdicCoefficientDiagram X d) where
   pt := SheafOfModules.unit (completedAdicRing X d)
@@ -94,17 +91,7 @@ def finitePerfectAdicCoefficientCone (X : Scheme.{t}) {A : Type t} [CommRing A]
     exact (congrArg (fun f : completedAdicRing X d ⟶
       completedAdicFiniteRing X d n ↦ (f.hom.app U).hom x) h).symm)
 
-/-- The completed coefficient unit is the limit of the actual quotient module diagram.
-
-Source: Stacks Project, Tag 09C6, the coefficient case of the displayed limit calculation.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-
-Proof: forget to module presheaves and evaluate on each site object. Forget the scalar
-module structure to additive groups. The resulting diagram and cone are the additive
-groups of the ring diagram and its defining limit cone, with exactly the same
-projections. These forgetful and evaluation functors preserve limits; scalar
-restriction and evaluation reflect the limit assertions. Thus the coefficient cone
-is a limit in module sheaves. This includes zero rings and empty site objects. -/
+/-- The completed coefficient unit is the limit of the actual quotient module diagram. -/
 theorem finitePerfectAdicCoefficient_isLimit (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) : Nonempty (IsLimit (finitePerfectAdicCoefficientCone X d)) := by
   classical
@@ -142,15 +129,7 @@ theorem finitePerfectAdicCoefficient_isLimit (X : Scheme.{t}) {A : Type t} [Comm
       ext x
       rfl))
 
-/-- The actual consecutive coefficient module map is epimorphic.
-
-Source: Stacks Tag 09C6 and Modules on Sites, Tag 03DA.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-Proof: choose a set section of the surjective quotient map. Since both finite rings
-are discrete, the section is continuous; postcomposition lifts each continuous
-coefficient section. Sheafification preserves local surjectivity. The normalized
-module map has the same functions on sections, so its underlying additive sheaf map
-is locally surjective and hence epi. Faithful forgetting reflects epimorphisms. -/
+/-- The actual consecutive coefficient module map is epimorphic. -/
 theorem finitePerfectAdicCoefficientStep_epi (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) : Epi (completedAdicFiniteModuleStep X d n) := by
   classical
@@ -198,17 +177,7 @@ theorem finitePerfectAdicCoefficientStep_epi (X : Scheme.{t}) {A : Type t} [Comm
   exact F.epi_of_epi_map inferInstance
 
 /-- Compatible retracts of the actual finite-free coefficient diagram have their
-specified retract cone as a limit, and its degree-zero localization as a Roos limit.
-
-Source: Stacks Project, Tag 09C6, the finite-projective summand step.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-
-Proof: lift a cone into the finite-free limit after the inclusion, then project to
-its retract. The two compatibility equations and the splitting prove factorization.
-For uniqueness, include into the free limit and use its uniqueness, then project.
-Each transition in the retract diagram is epimorphic: its composite with the split
-epimorphism from the free term is the free transition followed by a split epimorphism.
-Finally apply the epimorphic-complex Roos theorem to the degree-zero complex tower. -/
+specified retract cone as a limit, and its degree-zero localization as a Roos limit. -/
 theorem finitePerfectAdicRetract_roos (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (r : ℕ)
     (B : ℕᵒᵖ ⥤ CompletedAdicModules X d)
@@ -288,9 +257,7 @@ theorem finitePerfectAdicRetract_roos (X : Scheme.{t}) {A : Type t} [CommRing A]
   infer_instance
 
 /-- A compatible finite-free retract of one degree of a coefficient tower and its cone.
-The two cone equations retain the actual coefficient projections.
-Source: Stacks Tag 09C6.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit). -/
+The two cone equations retain the actual coefficient projections. -/
 structure FinitePerfectAdicCoefficientRetract (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (B : ℕᵒᵖ ⥤ CompletedAdicModules X d) (c : Cone B) where
   rank : ℕ
@@ -313,17 +280,7 @@ structure FinitePerfectAdicCoefficientRetract (X : Scheme.{t}) {A : Type t} [Com
       ((finitePerfectAdicCoefficientCone X d).π.app n) ≫ projection.app n
 
 /-- A coefficient complex tower with compatible finite-free retracts in every degree
-has its specified completed cone as its Roos derived limit.
-
-Source: Stacks Project, Tag 09C6, the finite-projective complex inverse-limit calculation.
-(blueprint: lem-weil-pbc-finite-perfect-adic-coefficient-limit).
-
-Proof: in each degree the compatible retract theorem proves that the given cone is
-limiting and the consecutive maps are epimorphic. Evaluation jointly reflects limits
-of complexes, so the original complex cone is limiting. Apply the epimorphic-complex
-Roos theorem. Ranks may vary with the degree, and zero ranks are allowed. The theorem
-requires the actual compatible retracts, rather than merely unrelated levelwise
-finite-projectivity assertions. No boundedness is necessary for this Roos assertion. -/
+has its specified completed cone as its Roos derived limit. -/
 theorem finitePerfectAdicProjectiveComplex_roos (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A)
     (T : ℕᵒᵖ ⥤ CochainComplex (CompletedAdicModules X d) ℤ) (c : Cone T)

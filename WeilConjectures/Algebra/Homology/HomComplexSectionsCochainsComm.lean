@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 /-!
 # Section projections respect the external Hom differential
 
-Source: Stacks Project, Tag 0A8X, differential of the Hom complex.
-(blueprint: lem-pur-hom-complex-sections-cochains-comm)
+## References
+
+* Stacks Project, Tag 0A8X, differential of the Hom complex
+* Stacks Project, Tag 0A8X, differential of the Hom complex; Tag 0A8Y
 -/
 
 @[expose] public section
@@ -69,23 +71,7 @@ private lemma section_sub_units_component
   rw [PresheafOfModules.sub_app, PresheafOfModules.zsmul_app]
   rfl
 
-/-- Any degreewise identification given by the section projections respects differentials.
-Source: Stacks Project, Tag 0A8X, differential of the Hom complex; Tag 0A8Y.
-(blueprint: lem-pur-hom-complex-sections-cochains-comm)
-
-Proof: compare the two external cochains on each component p,q with p+j=q.
-For j=i+1, apply the differential projection identity of homComplex_exists at
-q'=p+i and p'=p+1, then evaluate at U and at each localized object W.
-Evaluation preserves subtraction and integer scalar multiplication. Internal Hom
-postcomposition and precomposition evaluate to composition with the restricted
-differentials. Substitute the given component formulas for e in degree i and j.
-Mathlib's external differential is the first composite plus j.negOnePow times
-the second composite; j=i+1 gives j.negOnePow=-i.negOnePow, exactly the internal
-Hom differential. Extensionality of module-sheaf morphisms and cochains proves
-the equality. No bijectivity or cycle condition is used, so this step is separate
-from the product universal property and the homology quotient argument. At zero
-complexes both sides vanish; at i=0 the formula is d_I f - f d_L; at i=-1 it is
- d_I f + f d_L. Products allow arbitrary unbounded families. -/
+/-- Any degreewise identification given by the section projections respects differentials. -/
 theorem homComplex_sections_cochains_comm
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

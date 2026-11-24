@@ -13,10 +13,11 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 /-!
 # Extension of complexes preserves colimits
 
-Source: the degreewise colimit construction in Mathlib's
-`Algebra.Homology.HomologicalComplexLimits`, applied to extension by zero.
-The proof is moved unchanged from `ProEtaleModuleCohomologyCoproducts`.
-(auxiliary; not a blueprint node).
+The degreewise colimit construction of Mathlib, applied to extension by zero.
+
+## References
+
+* Mathlib, `Algebra.Homology.HomologicalComplexLimits` and `Algebra.Homology.Embedding.Extend`
 -/
 
 @[expose] public section
@@ -25,15 +26,7 @@ universe u v w z
 
 open CategoryTheory CategoryTheory.Limits
 
-/-- Extension by zero along an embedding of complex shapes preserves colimits.
-Source: Mathlib, `Algebra.Homology.HomologicalComplexLimits` and
-`Algebra.Homology.Embedding.Extend`; the existing proof in
-`WeilConjectures.AlgebraicGeometry.ProEtaleModuleCohomologyCoproducts`.
-(auxiliary; not a blueprint node).
-Proof: after evaluation at a degree in the embedding range, extension is naturally
-isomorphic to evaluation at its preimage. Outside the range, it is the zero
-functor. Both preserve colimits, including empty ones. Colimits of complexes are
-computed degreewise, so the extension functor preserves them. -/
+/-- Extension by zero along an embedding of complex shapes preserves colimits. -/
 theorem extension_preservesColimits {C : Type u} [Category.{v} C]
     [HasZeroObject C] [HasZeroMorphisms C]
     {ι ι' : Type*} {c : ComplexShape ι} {c' : ComplexShape ι'}

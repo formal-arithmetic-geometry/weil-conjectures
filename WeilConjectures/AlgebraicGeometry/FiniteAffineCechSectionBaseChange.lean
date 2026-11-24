@@ -15,7 +15,9 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 
 /-! # Termwise base change and the ordered Čech comparison
 
-Source: Stacks Project, Tags 02KE, 01FK and 01FM.
+## References
+
+* Stacks Project, Tags 02KE, 01FK and 01FM
 -/
 
 @[expose] public section
@@ -25,33 +27,9 @@ open CategoryTheory Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Compare the specified model with the direct-image complex of a Čech sheaf complex.
-Its sectionwise terms, differential and local scalar actions are needed. There is no cover
-assumption,
-no augmentation, no acyclicity hypothesis and no assertion about derived direct images.
-Source: Stacks Project, Tag 02KE, affine termwise section calculation; Tag 01FK,
-ordered versus alternating Čech cochains; Tag 01FM for the homotopy equivalence
-with usual Čech cochains.
-(blueprint: lem-pc-finite-affine-cech-section-base-change).
-
-Proof: On each affine open B of T', the cartesian square identifies the inverse images
-of the V_i with the base changes along B -> U. Separatedness makes every nonempty
-intersection of the V_i affine. For such an intersection Z, the affine pullback formula
-identifies its new sections with Gamma(B,O) tensor over Gamma(U,O) Gamma(Z,F|Y).
-The pure-tensor formula commutes with restrictions in Z and B. Tensor commutes with
-the finite products indexed by increasing tuples, so these maps identify the pullback
-of the specified model with the increasing-tuple section complex on B. Negative degrees
-are zero, by extension from natural degrees. Restrict usual cochains to increasing
-ones; the ordered Čech comparison gives a quasi-isomorphism, naturally under restriction
-of B. The hypotheses e, hd and hlinear identify the usual section complex with the sections of
-f'_*D and their signed differential, without using an augmentation of D. Exact restriction
-identifies homology sheaves on B with the homology of the restricted complexes. The
-comparison isomorphisms thus agree on overlaps and glue to the asserted homology
-isomorphism. The GammaSpecIso action and the final affine-chart pullback in the definition
-of the model are exactly the actions in the pure-tensor formula. For an empty family
-all products are zero and both complexes have zero homology.
-The local scalar formula makes this an isomorphism of module sheaves.
-No tensor-homology
-interchange, flatness or injective resolution is used. -/
+There is no cover assumption, no augmentation, no acyclicity hypothesis and no assertion
+about derived direct images.
+(Stacks, Tags 02KE, 01FK and 01FM.) -/
 theorem finiteAffineCech_section_baseChange {X T : Scheme.{u}} (f : X ⟶ T)
     [IsSeparated f] (F : X.Modules) [F.IsQuasicoherent]
     (U : T.Opens) (hU : IsAffineOpen U) {r : ℕ}

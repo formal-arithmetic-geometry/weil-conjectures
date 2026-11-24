@@ -21,8 +21,11 @@ import WeilConjectures.AlgebraicGeometry.DerivedSelfTorChosenAffineCoordinates
 import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine coordinates for intrinsic derived self-Tor
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS(1).
-(blueprint: new-p1-derived-self-tor-affine-coordinates). -/
+
+## References
+
+* Stacks Project, Tags 08DX, 06YH, 01I9 and 00LS
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -75,33 +78,8 @@ set_option linter.unusedVariables false in
 -- The nested hypotheses keep their documented names although the conclusion is nondependent.
 /-- The intrinsic derived self-tensor of a closed-immersion quotient has normalized
 projective-resolution coordinates on affine opens. The restriction equation holds
-for any augmented quotient-resolution comparison, whose existence is not asserted here.
-
-Source: Stacks Project, Tags 08DX(2), 06YH, 01I9 and 00LS(1).
-(blueprint: new-p1-derived-self-tor-affine-coordinates).
-
-Proof: Restrict the intrinsic derived tensor to an affine U. The quotient section
-map identifies the restricted coefficient with the associated sheaf of A/I, where
-A = Gamma(U) and I is the kernel ideal. Sheafify the chosen projective resolution
-P of A/I, including its quotient-normalized augmentation, and extend chain degree
-j to cochain degree -j. Exactness of associated sheaf makes this a resolution.
-Projective terms are flat, their associated sheaves are flat, and the extended
-complex is nonpositive, hence K-flat. The derived tensor counit and the normalized
-affine tensor comparison identify the intrinsic self-tensor with associated sheaf
-of P tensor A/I, extended to nonpositive degrees. Exact associated sheaf commutes
-with homology; extension identifies degree -n with chain degree n. Compose with
-the associated-sheaf section unit to obtain the coordinate equivalence.
-
-On a basic inclusion, a supplied augmented comparison a sheafifies to a morphism
-of these resolutions. The augmentation equation makes its image in the derived
-category the coefficient restriction map. The pure-tensor equation for k identifies
-its associated-sheaf tensor morphism. Naturality of the derived tensor counit,
-affine tensor comparison and exact homology comparison gives the restriction square.
-Naturality of the section unit and restriction-of-scalars homology isomorphism turns
-this square into the displayed element equation. Different augmented lifts induce
-the same map: the comparison homotopy of projective resolutions tensors with the
-quotient map, and homotopic chain maps act equally on homology. Zero quotients,
-degree zero and empty basic opens use the same units and comparisons. -/
+for any augmented quotient-resolution comparison, whose existence is not asserted here
+(Stacks, Tags 08DX, 06YH, 01I9 and 00LS). -/
 theorem exists_derived_selfTor_affine_coordinates
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i] (n : ℕ) :
     letI := HasDerivedCategory.standard

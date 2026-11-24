@@ -33,12 +33,7 @@ private theorem exists_cover_of_local_property
   obtain ⟨C, hC⟩ := Classical.skolem.mp hQ
   exact ⟨𝒰.bind C, fun i ↦ hC i.1 i.2⟩
 
-/-- Compose local finite-free refinements into one pro-etale cover.
-
-Source: Stacks Project, Sites, covering composition; RefactorInstruction.tex, Section 4
-(auxiliary; not a blueprint node).
-The covering presieve is the indexed composition of the original presieve with each
-local presieve; the finite-free isomorphisms are carried along the composite maps. -/
+/-- Compose local finite-free refinements into one pro-etale cover. -/
 theorem exists_condensedQbar_refinement_of_local
     (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackTensorUnitSection
 
 /-! # Symmetry of the boundary pullback tensor comparison
 
-Source: Stacks Project, Tags 01CA and 01CD.
-(blueprint: lem-sc-boundary-pullback-tensor-braiding).
+## References
+
+* Stacks Project, Tags 01CA and 01CD
 -/
 
 @[expose] public section
@@ -39,22 +40,8 @@ private theorem tensor_hom_ext {X : Scheme.{u}} {A B C : X.Modules}
   | tmul s t => exact h U.unop s t
   | add z w hz hw => simp only [map_add, hz, hw]
 
-/-- The transported pullback tensor comparison respects symmetry for arbitrary modules.
-
-Source: Stacks Project, Tag 01CD, lemma-tensor-product-pullback, and Tag 01CA.
-(blueprint: lem-sc-boundary-pullback-tensor-braiding).
-Proof: first use the canonical Mathlib pullback comparison. On presheaf tensor
-sections the proved pullback_δ_app_unit_tmulSection identifies the pullback of x tensor y
-with the tensor of their pullbacks. The sheaf tensor braiding is induced by x tensor y mapping
-to y tensor x. The two composites therefore agree on pure presheaf tensors;
-bilinearity and the sheafification universal property give equality of the
-sheaf morphisms. Equivalently one can check this after stalk base extension,
-where it is the usual symmetry of tensor products of modules. Finally expand
-boundaryPullbackTensorIso and use naturality of boundaryPullbackComparison on
-the original braiding, and naturality of braiding on its two component
-isomorphisms. Cancel the inverse component maps to obtain the displayed square.
-No invertibility or closed immersion is used; zero modules and empty schemes
-satisfy the same pure tensor computation. -/
+/-- The transported pullback tensor comparison respects symmetry for arbitrary modules
+(Stacks, Tags 01CD, 01CA). -/
 theorem boundaryPullbackTensorIso_braiding {X Z : Scheme.{u}} (j : Z ⟶ X)
     (A B : X.Modules) :
     (tensorPullback j).map (β_ A B).hom ≫ (boundaryPullbackTensorIso j B A).hom =

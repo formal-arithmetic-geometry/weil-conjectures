@@ -29,7 +29,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 set_option linter.unusedSectionVars false in
 /-- The left half: the restricted tensor model, the open pin and the mixed representative
-equation. (blueprint: lem-sf-finite-restriction-representative-square) -/
+equation. -/
 theorem leftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj P))

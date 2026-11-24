@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FormalFunctionsCompleteBase
 
 /-! # Canonical inverse-limit sections over a complete affine base
 
-Source: Stacks Project, Tag 087U, degree zero for the identity of Spec A.
+## References
+
+* Stacks Project, Tag 087U
 -/
 
 @[expose] public section
@@ -28,17 +30,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual quotient projections identify sections of a coherent module over a
-complete affine base with the inverse limit of its completed sections.
-Source: Stacks Project, Tag 087U, degree zero for the identity of Spec A.
-(blueprint: lem-weil-pbc-affine-complete-coherent-sections)
-
-Proof: Apply degree-zero formal functions over the complete base to the proper
-identity of Spec A. Comapping J along the identity gives J. The section functor
-followed by restriction along the inverse of GammaSpecIso and the identity's
-appTop is definitionally moduleSpecGammaFunctor. Rewrite the formal-functions
-isomorphism and its projection equations along this functor equality. The actual
-quotient maps are retained throughout. If I is the unit ideal, completeness
-forces A and the section module to be zero, so the same assertion holds. -/
+complete affine base with the inverse limit of its completed sections (Stacks, Tag 087U). -/
 theorem affine_complete_coherent_sections
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

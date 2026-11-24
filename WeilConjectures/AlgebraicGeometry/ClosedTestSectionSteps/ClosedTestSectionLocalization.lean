@@ -9,8 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ClosedTestDerivedExchangeModel.C
 
 /-! # Canonical section localization for arbitrary sources
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0D6E and 0D6F.
-(blueprint: lem-sfb-nonaffine-proetale-section-localization). -/
+## References
+
+* Stacks Project, Tags 0D6E, 0D6F
+-/
 
 @[expose] public noncomputable section
 

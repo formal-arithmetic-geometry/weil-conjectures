@@ -25,9 +25,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 /-- Insert integral constants into the actual finite coefficient sheaf, evaluate a
 strict-system arrow, and project its line endpoint to finite roots. All data are
-specified maps: this construction uses no normalization equation or chosen lift.
-Source: diagonal tower trace proof (1), finite coefficient and root coordinates.
-(blueprint: def-diagonal-local-finite-cone-chern-class). -/
+specified maps: this construction uses no normalization equation or chosen lift. -/
 @[irreducible]
 def finiteConeChernClass
     (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [DiagonalTraceLocalizations l T]

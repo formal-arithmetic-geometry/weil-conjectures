@@ -16,8 +16,10 @@ import WeilConjectures.Algebra.Homology.BoundedGradedMapColimitDescent
 
 /-! # AffinePerfectGradedHomDescent
 
-Source: Stacks Project, Tags 09RE and 05N7.
-(blueprint: lem-pc-affine-perfect-graded-hom-descent)
+## References
+
+* Stacks Project, Tag 09RE
+* Stacks Project, Tag 05N7
 -/
 
 @[expose] public section
@@ -98,26 +100,7 @@ end ModuleCat
 namespace CochainComplex
 
 set_option linter.unusedVariables false in
-/-- Descend a degree-minus-one graded family without imposing chain-map or homotopy equations.
-
-Source: Stacks Project, Tag 09RE, affine case (1), finite number of finitely
-presented source terms; Tag 05N7 (2).
-Proof: In the finite interval supporting E₀, descend each component s(m,m-1)
-using finite-presentation map descent. The source and target terms are finitely
-presented by hypothesis. Directedness gives one common stage above i.
-Transport all components to that stage by scalar-extension associativity, and
-put zero outside the interval. Components of a different degree are not required.
-The canonical comparison isomorphisms in map descent are uniquely determined
-by their value on tensors 1 ⊗ x, and hence are precisely extendScalarsComp,
-after the equality hc identifies the ring homomorphisms. Thus the transported
-components have exactly the stated equality with s. On zero source terms this
-is automatic, since scalar extension preserves zero objects. No relation with
-any differential or prescribed chain map is asserted. For a preorder take the
-quotient by mutual comparability, choose representatives, and use the equivalent
-partial-order index category in finite-presentation descent. Ring maps between
-equivalent indices are inverse isomorphisms. Transport back and take an upper
-bound with i. An empty support interval gives the zero family at any stage above i.
-(blueprint: lem-pc-affine-perfect-graded-hom-descent) -/
+/-- Descend a degree-minus-one graded family without imposing chain-map or homotopy equations. -/
 theorem affine_perfect_gradedHom_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

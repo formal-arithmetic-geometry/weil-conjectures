@@ -452,7 +452,13 @@ import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnboundedComparison
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemOrdinaryImages
 
-/-! # Ordinary normalized system pullback squares -/
+/-! # Ordinary normalized system pullback squares
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 03D2, 099R, 0B65
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -803,24 +809,7 @@ private theorem finiteComparison
     asIso_hom, Iso.symm_hom] using hh
 
 -- Assembly compares both inverse-image paths at every coefficient level and system transition.
-/-- The normalized pullback comparison on ordinary coefficient systems and levels.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03D2, 099R and 0B65.
-(blueprint: lem-sf-exceptional-system-ordinary-pullback-square).
-
-Proof: On underlying sheaves use the inverse of the canonical comparison between
-etale and pro-etale inverse images. Compose the two algebraic inverse-image
-presentations on each path, inserting the canonical equal-universe ULift comparisons
-when using the independent-universe algebraic comparison API. Their ring comparison
-fixes every constant coefficient by the constants normalization, hence is the identity
-by the universal property of constant ring sheafification. The algebraic comparison
-on modules is therefore linear over the fixed coefficient quotient. Its underlying
-equation is the first
-displayed equality and determines it uniquely. Compatibility with restriction of
-scalars follows by applying the faithful underlying-sheaf functor and the normalized
-restriction comparisons. Assemble these level comparisons into a system comparison,
-using the transition normalization of the prescribed system inverse functors. Its
-components are isomorphisms, so it is an isomorphism; the construction gives the
-second displayed equation. No derived functor or open adjoint is used. -/
+/-- The normalized pullback comparison on ordinary coefficient systems and levels. -/
 theorem exceptionalSystemOrdinaryPullbackSquare_exists
     [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))]
     {T U : Scheme.{u}} (g : T ⟶ U)

@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Etale.Origin.EtaleOriginRestrictionPull
 import all WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteOpenScalarRealizationTransport
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMateData
 
-/-! # Intrinsic realization and scalar pullback coherence -/
+/-! # Intrinsic realization and scalar pullback coherence
+
+## References
+
+* Stacks Project, Tags 06YY, 07A6, 0D6D, 0E48
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -108,24 +113,7 @@ private theorem site_scalar_mate
     Functor.associator_inv_app, Category.id_comp, Category.assoc]
   rfl
 
-/-- The extension/realization comparison commutes with geometric pullback.
-Source: Stacks 0D6D, 06YY and 07A6; extension part of the coefficient comparison
-in Tag 0E48 (blueprint: lem-fix-etale-origin-extension-pullback-cube).
-
-Proof: compute the ordinary scalar extension by the balanced tensor product.
-The section-normalized site realization and the scalar adjunction comparison send
-x tensor b to the same section in either order of inverse image and realization.
-For an unbounded input C choose a flat-term K-flat resolution. Inverse image and
-derived scalar extension are computed by the ordinary operations on this model.
-The ordinary balancing identity in every degree commutes with the differential,
-so it gives equality of the comparison chain maps. The representative
-normalization of Etale.scalarPullbackIso identifies its component; the intrinsic
-scalar-adjunction mate identifies directImageScalarPullbackIso. The normalized
-site comparison identifies originPullback through its geometric counit equation.
-Cancel the common localized resolution arrows and use naturality to descend the
-cube to C. No scalar restriction/tensor identification, projection formula or
-boundedness assertion is used. Identity coefficient maps, zero rings and empty
-schemes satisfy the same balancing identity. -/
+/-- The extension/realization comparison commutes with geometric pullback. -/
 theorem etaleOriginExtensionPullbackCube
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {Z Y : Scheme.{u}} (p : Z ⟶ Y)

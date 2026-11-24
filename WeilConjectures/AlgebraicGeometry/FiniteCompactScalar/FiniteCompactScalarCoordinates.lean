@@ -10,8 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompac
 /-!
 # The open and proper factors of the intrinsic site comparison
 
-Source: Stacks Tags 09AF, 099R and 00YV. These are the two factors of the
-canonical compact-support comparison, with its existing normalization.
+These are the two factors of the canonical compact-support comparison, with its existing
+normalization.
+
+## References
+
+* Stacks Project, Tags 09AF, 099R, 00YV
 -/
 
 @[expose] public noncomputable section

@@ -11,8 +11,11 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # The colimit of the models from their final pushout squares
-Source: Stacks Tag 00R0, colimit clause, expanded using pushout universal properties.
-(blueprint: lem-weil-pbc-limit-finite-presentation-colimits)
+
+## References
+
+* [Stacks Project, Tag 00R0](https://stacks.math.columbia.edu/tag/00R0), colimit clause, and
+  Tag 00QV
 -/
 
 @[expose] public section
@@ -23,16 +26,7 @@ universe u
 
 namespace Algebra
 
-/-- The final pushout squares transfer the base colimit to the model colimit.
-Source: Stacks Tag 00R0, colimit clause (the non-local construction of Tag 00QV).
-Proof: compose a cocone on `Sfun` with `η` and descend it through the base colimit.
-At each index the pushout gives a map from `cS.pt` to the cocone point. For comparable
-indices these maps agree by pushout uniqueness and cocone naturality. A common upper
-bound then shows they agree at any two indices. Choose one index using nonemptiness;
-its map factors every cocone leg. Uniqueness follows by pushout uniqueness at this index:
-the `Sfun` leg is prescribed, and the base leg is prescribed by base-colimit uniqueness.
-(blueprint: lem-weil-pbc-limit-finite-presentation-colimits)
--/
+/-- The final pushout squares transfer the base colimit to the model colimit. -/
 theorem colimits_of_limit_finite_presentation_core
     {Λ : Type u} [Preorder Λ] [Nonempty Λ]
     [IsDirected Λ (fun a b => a ≤ b)]

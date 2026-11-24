@@ -23,8 +23,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 
 /-- The positive connecting morphism, shifted once and followed by shift addition.
-Source: blueprint latest, `sk-prop-sp-tower-geometric-classes.proof.md`, clause (2).
-(blueprint: def-sfb-positive-kummer-boundary).
 This is the actual connecting morphism of the given short exact Kummer sequence,
 with explicitly named abelian-tower endpoints. -/
 def towerKummerBoundary (l : ℕ) [Fact l.Prime] {T : Scheme.{u}} (k : Kummer l T) :

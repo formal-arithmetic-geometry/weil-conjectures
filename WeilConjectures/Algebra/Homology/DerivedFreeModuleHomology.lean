@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Derived maps out of a free module
-Source: Stacks Project, Tag 09M1, proof, first paragraph.
+## References
+
+* Stacks Project, Tag 09M1 (first paragraph of the proof)
 -/
 
 @[expose] public section
@@ -83,21 +85,7 @@ private theorem projective_single_homology_bijective
     change H.map a = g ≫ H.map T.mor₂ at ha
     rw [← H.map_comp, hf, ha]
 
-/-- Maps from the free rank-one module in degree zero compute zeroth cohomology.
-Source: Stacks Project, Tag 09M1, proof, first paragraph (the affine module calculation).
-(blueprint: lem-pc-derived-free-module-hom-homology).
-Proof: Maps from a projective module in degree zero to any strictly negative
-complex vanish, by Mathlib's projective-source vanishing theorem and a strictly
-bounded-above representative. In the canonical truncation triangle
-τ<0(E) → E → τ≥0(E), maps from A[0] to both τ<0(E) and its shift by 1 vanish.
-The exact Hom sequence therefore makes postcomposition with E → τ≥0(E) bijective.
-Zeroth homology is bijective on maps A[0] → τ≥0(E), by the shifted-heart homology
-comparison, and H^0(E) → H^0(τ≥0(E)) is an isomorphism. Hence H^0 is bijective on
-maps A[0] → E for arbitrary, possibly unbounded E. This is an additive map, so it
-is an additive equivalence. Precompose with the inverse of H^0(A[0]) ≅ A, then
-evaluate the resulting A-linear map at 1. The composite sends g to
-(ε.inv ≫ H^0(g))(1). The composition law for H^0 gives naturality for every derived
-morphism, independently of representatives. The argument covers the zero ring. -/
+/-- Maps from the free rank-one module in degree zero compute zeroth cohomology. -/
 theorem derivedFreeModule_hom_homology (A : Type u) [Ring A]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)] :
     let H := DerivedCategory.homologyFunctor (ModuleCat.{u} A) 0 ⋙

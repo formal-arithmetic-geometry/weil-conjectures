@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # Affine coordinates for a coherent completion system
 
-Source: Stacks Project, Tags 087W, 01I7 and 01IB.
+## References
+
+* Stacks Project, Tags 087W, 01I7 and 01IB
 -/
 
 @[expose] public section
@@ -25,28 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- Canonical affine completion projections, including their inverse-limit property.
-
-Source: Stacks Project, Tag 087W, first paragraph; Tags 01I7 and 01IB,
-affine module/sections comparison.
-(blueprint: lem-weil-pbc-completion-affine-sections-coordinates).
-
-Proof:
-1. Coherence on the Noetherian scheme implies quasi-coherence and finite type. On U,
-   the ideal-product comparison and exactness of affine sections identify the cokernel
-   at level n with P(U)/(I(U)^(n+1) P(U)). The identification is the unique linear
-   equivalence carrying the sheaf quotient projection to the module quotient projection.
-2. The quotient identifications commute with all transitions: precompose each claimed
-   equality with the surjective ordinary section quotient and use the defining equations
-   of the cokernel transitions. Compose their inverses with AdicCompletion.eval to define p.
-3. The evaluation maps are surjective. Their joint injectivity at positive levels follows
-   from AdicCompletion.ext; the omitted zeroth quotient is zero. The formula on of follows
-   from eval_of. Completed scalar multiplication acts at level n through eval of the ring;
-   replacing that scalar by any ordinary representative gives the scalar formula.
-4. Given compatible sections, apply the quotient identifications at every positive level
-   and use zero at level zero. Transition compatibility makes an element of AdicCompletion.
-   Its projections are exactly the given sections. This proves the inverse-limit property.
-No choice of generators or of arbitrary module data is required. -/
+/-- Canonical affine completion projections, including their inverse-limit property
+(Stacks, Tags 087W, 01I7 and 01IB). -/
 theorem completion_affine_sections_coordinates {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (P : CoherentModules X) (U : X.affineOpens) :
     let A := Γ(X, U.val)

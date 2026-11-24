@@ -55,13 +55,6 @@ algebraically closed field of characteristic zero, is
 The bracket on `Matrix n n k` is the commutator bracket `LieRing.ofAssociativeRing`, activated
 locally as in `Mathlib.Algebra.Lie.Matrix`. Following `𝔾𝕃(n; k)`, the base ring is written `k`
 even when it is only a commutative ring.
-
-## Blueprint
-
-- `def-wf-lie-algebra-derivation`: the Lie algebra of `GL_n` as its tangent space at the identity,
-  rational representations and their differentials.
-- `lemma-stable-subspaces-center`: subspaces stable under the group are stable under its Lie
-algebra.
 -/
 
 @[expose] public section
@@ -82,8 +75,7 @@ section GeneralLinear
 variable (n : Type u) [Fintype n] [DecidableEq n] (k : Type u) [CommRing k]
 
 /-- The invertible matrix `1 + εX` over the dual numbers `k[ε]`, with inverse `1 - εX`: the point
-of `GL_n` with values in `k[ε]` corresponding to the tangent vector `X ∈ gl_n`.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+of `GL_n` with values in `k[ε]` corresponding to the tangent vector `X ∈ gl_n`. -/
 noncomputable def dualUnit {n : Type*} [Fintype n] [DecidableEq n] {k : Type*} [CommRing k]
     (X : Matrix n n k) : GL n (DualNumber k) :=
   ⟨1 + X.map inr, 1 - X.map inr,
@@ -301,8 +293,7 @@ theorem bijective_toMatrixLieHom : Function.Bijective (toMatrixLieHom n k) := by
   simp [Matrix.one_apply, apply_ite]
 
 /-- The Lie algebra of the general linear group is `gl_n`, the matrices with the commutator
-bracket: the tangent vector `1 + εX` corresponds to `X`.
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+bracket: the tangent vector `1 + εX` corresponds to `X`. -/
 noncomputable def lieAlgebraEquivMatrix : GrpObj.Lie 𝔾𝕃(n; k) ≃ₗ⁅k⁆ Matrix n n k :=
   LieEquiv.ofBijective _ (bijective_toMatrixLieHom n k)
 
@@ -335,7 +326,7 @@ variable {k : Type u} [CommRing k] (G : Over (Spec (.of k))) [GrpObj G]
 
 /-- A rational representation of a group scheme `G` over `k` on `k^m`: a morphism of schemes
 `G ⟶ GL_m` over `k`, required to be a homomorphism of group schemes through an `IsMonHom`
-instance. (blueprint: `def-wf-lie-algebra-derivation`) -/
+instance. -/
 abbrev RationalHom :=
   G ⟶ 𝔾𝕃(m; k)
 
@@ -344,7 +335,7 @@ variable {G m}
 namespace RationalHom
 
 /-- A rational representation of `G` on `R`-points: the group homomorphism `G(R) → GL m R` given
-by composing points `Spec R ⟶ G` with `r`. (blueprint: `def-wf-lie-algebra-derivation`) -/
+by composing points `Spec R ⟶ G` with `r`. -/
 noncomputable def points (r : RationalHom G m) [IsMonHom r] (R : Type u) [CommRing R]
     [Algebra k R] : AlgebraicGeometry.points G R →* GL m R :=
   (homMulEquiv m k R).toMonoidHom.comp (IsMonHom.monoidHom r _)
@@ -421,7 +412,7 @@ namespace RationalHom
 
 /-- The differential `dr : Lie(G) → gl_m` of a rational representation `r`: the differential of
 the homomorphism of group schemes `G ⟶ GL_m`, read in `gl_m` through `Lie(GL_m) = gl_m`. It is a
-homomorphism of Lie algebras. (blueprint: `def-wf-lie-algebra-derivation`) -/
+homomorphism of Lie algebras. -/
 noncomputable def differential (r : RationalHom G m) [IsMonHom r] :
     GrpObj.Lie G →ₗ⁅k⁆ Matrix m m k :=
   (lieAlgebraEquivMatrix m k).toLieHom.comp (GrpObj.differential r)
@@ -495,12 +486,7 @@ variable {k : Type u} [Field k] {G : Over (Spec (.of k))} [GrpObj G]
 namespace RationalHom
 
 /-- For a reduced group scheme `G` locally of finite type over an algebraically closed field, a
-subspace stable under `G(k)` is stable under the points of `G` with values in the dual numbers.
-
-The condition `r(g) U ⊆ U` is cut out by the matrix coefficients `g ↦ l(r(g) w)`, `U ≤ ker l`,
-`w ∈ U`, which are functions on `G`. They vanish at the `k`-points, so they vanish on the reduced
-scheme `G` (`AlgebraicGeometry.eq_zero_of_forall_appTop_eq_zero`), and `r(g)` preserves
-`U ⊗ k[ε]` for every `g ∈ G(k[ε])`. (blueprint: `lemma-stable-subspaces-center`) -/
+subspace stable under `G(k)` is stable under the points of `G` with values in the dual numbers. -/
 theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ g : AlgebraicGeometry.points G k, U ≤ U.comap (Matrix.toLin' (r.points k g)))
@@ -550,16 +536,7 @@ theorem snd_mulVec_mem_of_le_comap [IsAlgClosed k] [IsReduced G.left]
 
 /-- Over an algebraically closed field of characteristic zero, a subspace stable under the
 differential of a rational representation of a connected group scheme `G` locally of finite type
-is stable under `G(k)`.
-
-It suffices that the matrix coefficients `f = l(r(·) w)`, `U ≤ ker l`, `w ∈ U`, vanish on `G`.
-On an affine open `Spec A` around the identity `e`, the invariant derivation `D_X` of a tangent
-vector `X` is the infinitesimal right translation by `1 + εX`
-(`AlgebraicGeometry.GrpObj.exists_algHom_specMap_comp_eq_mul`), so
-`D_X l(r(·) w) = l(r(·) dr(X) w)` and these functions form a set stable under all `D_X`, vanishing
-at `e`. By Cartier's lemma (`AlgHom.mem_iInf_pow_ker_of_forall_exists_derivation`) they vanish
-in the local ring at `e`, hence on the irreducible reduced scheme `G`.
-(blueprint: `lemma-stable-subspaces-center`) -/
+is stable under `G(k)`. -/
 theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k))
     (hU : ∀ X : GrpObj.Lie G, U ≤ U.comap (Matrix.toLin' (r.differential X)))
@@ -756,7 +733,7 @@ theorem le_comap_toLin'_points [IsAlgClosed k] [CharZero k] [ConnectedSpace G.le
 /-- The group–Lie comparison for invariant subspaces: over an algebraically closed field of
 characteristic zero, a subspace is stable under a connected group scheme locally of finite type
 acting by a rational representation if and only if it is stable under the differential of the
-representation. (blueprint: `lemma-stable-subspaces-center`, `lemma-stable-subspaces-center--1`) -/
+representation. -/
 theorem _root_.AlgebraicGeometry.GeneralLinearGroup.invariant_iff_differential_invariant
     [IsAlgClosed k] [CharZero k] [ConnectedSpace G.left]
     [LocallyOfFiniteType G.hom] (r : RationalHom G m) [IsMonHom r] (U : Submodule k (m → k)) :

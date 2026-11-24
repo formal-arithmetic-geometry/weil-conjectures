@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Cohomology of the affine algebra derived unit
 
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
+## References
+
+* Stacks Project, Tag 0AVW
 -/
 
 @[expose] public section
@@ -51,31 +53,7 @@ private theorem restriction_exact {Z : TopCat.{v}}
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Under the cohomology comparison, the derived affine algebra unit is the
-underived unit applied to the cohomology module.
-Source: Stacks Project, Tag 0AVW, perfect-lemma-affine-morphism-equivalence, proof.
-(blueprint: lem-sc-affine-algebra-derived-unit-homology-factorization).
-
-Proof: First take the tensor-derived adjunction of
-RingedSpace.derivedModulePullback_adjunction. The flat stalk localizations of g
-make its underived tensor pullback exact. Applying an exact functor to kernels
-and images gives a natural identification H^n(Lg-star M) with g-star H^n(M).
-The latter is quasi-coherent by the affine module correspondence, so Lg-star M
-has quasi-coherent cohomology. Exact scalar restriction to O_Y compares Rg-star
-with Rf-star: both use the same K-injective resolution and underlying pushed
-complex. The affine unbounded cohomology formula, justified by affine vanishing
-and the unbounded cohomological bound, identifies H^n(Rg-star Lg-star M) with
- g_* g^* H^n(M). This comparison is natural and compatible with the derived unit:
-on a representative and its resolution the unit is induced by the underived
-adjunction, and the comparison sends it to the ordinary unit on cohomology.
-One may check this on affine opens, where the map sends a module section to
-its tensor with 1. These maps agree on restrictions and hence on sheaves.
-Uniqueness of left adjoints transports the comparison from tensor pullback to P
-and from its derived left adjoint to L, with the adjunction-compatible natural
-isomorphisms. Absorb their cohomology components in the target isomorphism e.
-This gives the stated equality for a and adj even when these are not the chosen
-canonical adjunctions. The argument uses all integer degrees and does not assume
-boundedness. Identity morphisms, empty schemes and zero cohomology give the
-identity between the respective objects, including the zero objects. -/
+underived unit applied to the cohomology module (Stacks, Tag 0AVW). -/
 theorem affine_algebra_derived_unit_homology_factorization
     {X Y : Scheme.{v}} (f : X ⟶ Y) [IsAffineHom f]
     [HasDerivedCategory.{wX} (SheafOfModules.{v} (moduleRings X.toRingedSpace))]

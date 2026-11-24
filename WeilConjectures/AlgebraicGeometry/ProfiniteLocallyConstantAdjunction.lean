@@ -9,8 +9,13 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-! # The adjunction for locally constant integer-valued functions
 
-Reuse the source module's private natural Hom equivalence through `import all`.
-Source: Stacks Project, Tag 097D, and the cited source proof.
+## Implementation details
+
+The source module's private natural Hom equivalence is reused through `import all`.
+
+## References
+
+* Stacks Project, Tag 097D.
 -/
 
 @[expose] public section
@@ -20,16 +25,7 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The locally constant integer algebra functor is a right adjoint.
-
-Source: Stacks Project, Tag 097D, and the private Hom equivalence in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic`.
-(auxiliary; not a blueprint node)
-
-Proof: The existing Hom equivalence identifies maps from the connected components
-of the prime spectrum of R to S with ring maps from locally constant integer
-functions on S to R. Its inverse laws and naturality are already proved in the
-source module. Applying adjunctionOfEquivLeft assembles the desired adjunction. -/
+/-- The locally constant integer algebra functor is a right adjoint (Stacks, Tag 097D). -/
 theorem profiniteToCommRingCatOp_isRightAdjoint :
     profiniteToCommRingCatOp.{u}.IsRightAdjoint :=
   ⟨_, ⟨Adjunction.adjunctionOfEquivLeft profiniteLocallyConstantHomEquiv

@@ -14,8 +14,9 @@ import WeilConjectures.FieldTheory.CommonExtensionFields
 /-!
 # Geometric connectedness after a field extension
 
-Source: Stacks Project, `varieties.tex`, Lemma 33.7.3, tag 054N
-(blueprint: lem-weil-geometrically-connected-check-after-extension).
+## References
+
+* Stacks Project, Tag 054N.
 -/
 
 @[expose] public section
@@ -28,21 +29,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Geometric connectedness over a field is equivalent to geometric connectedness
-of its base change along any field extension.
-
-Source: Stacks Project, `varieties.tex`, Lemma 33.7.3, tag 054N
-(blueprint: lem-weil-geometrically-connected-check-after-extension).
-Proof: If `X` is geometrically connected, every field extension of `k` gives a
-connected base change, and this applies to extensions of `k'` by associativity
-of base change. Conversely, for an arbitrary extension `k''/k`, choose a common
-extension of `k'` and `k''` over `k`; geometric connectedness after `k'` makes
-the common base change connected. The map from the common base change to the
-`k''`-base change is a surjective base change, so connectedness descends along
-its continuous surjective map. Pullback pasting and cancellation implement
-the iterated base-change identifications directly; the common extension is
-`Field.exists_common_extension`, and surjectivity of the projection is Mathlib's
-base-change stability instance for `Surjective`.
-(blueprint: lem-weil-geometrically-connected-check-after-extension). -/
+of its base change along any field extension (Stacks, Tag 054N). -/
 theorem geometricallyConnected_iff_of_fieldExtension
     {k k' : Type u} [Field k] [Field k'] [Algebra k k']
     (X : Scheme.{u}) [X.Over (Spec (.of k))] :

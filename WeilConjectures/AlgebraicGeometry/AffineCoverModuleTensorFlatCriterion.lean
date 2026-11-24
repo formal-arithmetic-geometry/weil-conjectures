@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 
 /-! # Tensor flatness on a specified affine cover
 
-Source: Stacks Project, Morphisms, Tag 01U4; Algebra, Tag 00HT;
-Limits, Tag 05LY, affine-local reduction.
+## References
+
+* Stacks Project, Tags 01U4, 00HT and 05LY
 -/
 
 @[expose] public section
@@ -71,26 +72,8 @@ private theorem flat_tensor_right_unit_iff
     (Module.Flat.equiv_iff E)
 
 /-- Flatness after an affine base change is equivalent to tensor flatness of the actual
-section modules on a specified affine covering. No finiteness or descent is asserted.
-Source: Stacks Project, Morphisms, Tag 01U4; Algebra, Tag 00HT; Limits, Tag 05LY.
-(blueprint: lem-pc-affine-cover-module-tensor-flat-criterion).
-
-Proof: Each inverse image of U_b in the fibre product is affine: identify U_b with
-Spec of its section ring and use the spectrum tensor-product pullback formula. The
-quasi-coherent pullback has sections T tensor_A Gamma(M,U_b), compatibly with the
-map to Spec T. The multiplication map T tensor_A A -> T and t -> t tensor 1 are
-inverse ring maps. Their induced module isomorphism identifies the tensor module
-in the statement with those sections, respecting the base action. The isomorphism
-e identifies the arbitrary affine base Y with Spec T over Spec A, so the same
-comparisons apply to the chosen pullback along p. Flatness over Y implies flatness
-of these sections by the affine-section criterion (01U4). Conversely, tensor
-flatness gives flatness of each chart's sections over T, hence flatness of every
-module stalk over the corresponding base local ring, by localization. The inverse
-images of the U_b cover the fibre product, so all its relative stalks are flat.
-Quasi-coherence and the prime-local flatness criterion (00HT) then imply flatness
-of sections on any affine source open over any affine base open, which is exactly
-IsFlatOver. An empty covering forces X empty; all pulled-back sections are zero.
-The zero ring and zero modules satisfy the same tensor and localization formulas. -/
+section modules on a specified affine covering. No finiteness or descent is asserted
+(Stacks, Tags 01U4, 00HT and 05LY). -/
 theorem affine_cover_module_tensor_flat_criterion
     (A T : CommRingCat.{u}) {X Y : Scheme.{u}} (f : X ⟶ Spec A)
     (M : X.Modules) [M.IsQuasicoherent]

@@ -12,9 +12,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-! # Lifting an etale cover and finite-source comparison through a thickening
 
-Source: Stacks Project Tag 04DZ; finite splitting descent, step 1 and the
-pullback comparison at the start of step 2.
-(blueprint: lem-weil-pbc-etale-cover-thickening-lift)
+## References
+
+* Stacks Project, Tag 04DZ
 -/
 
 @[expose] public section
@@ -27,24 +27,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Lift an etale covering of a thickening, together with the comparison maps on
-its pullback of an arbitrary source.
-
-Source: Stacks Project Tag 04DZ; steps 1--2 of
-`lem-weil-pbc-finite-splitting-closed-immersion-descent`.
-(blueprint: lem-weil-pbc-etale-cover-thickening-lift)
-
-Proof: The restriction of r to U is a surjective closed immersion, hence a
-universal homeomorphism. Essential surjectivity of its etale base-change functor
-lifts each old cover object to an etale object over U, with an isomorphism from
-its pullback to the old object. Compose the inverse isomorphism with the first
-pullback projection to obtain t. This is a surjective closed immersion.
-These lifts cover U: lift a point to U_R, use the old covering, and map its
-point through t. Form p on the finite-source pullbacks by the universal
-property. Associativity of pullbacks and restriction identifies p with the
-base change of t, so p is also a surjective closed immersion. The equation
-is the first projection equation of this pullback map. If the old covering
-is empty then U_R, and therefore U, is empty and the empty family suffices.
-No splitting hypothesis or finiteness hypothesis on f is needed. -/
+its pullback of an arbitrary source (Stacks, Tag 04DZ). -/
 theorem exists_etale_cover_thickening_lift
     {X Y R : Scheme.{u}} (f : X ⟶ Y)
     (r : R ⟶ Y) [IsClosedImmersion r] [Surjective r] (U : Y.Opens)

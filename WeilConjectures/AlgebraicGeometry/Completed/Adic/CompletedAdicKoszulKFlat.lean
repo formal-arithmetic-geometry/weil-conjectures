@@ -70,8 +70,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 /-! # K-flatness of the completed exterior Koszul complexes
 
-Source: Stacks Project, Tags 06YQ and 0G7E.
-(blueprint: lem-weil-pbc-completed-adic-koszul-kflat).
+## References
+
+* Stacks Project, Tags 06YQ, 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -263,18 +264,7 @@ private theorem koszulPowerSheaf_flat_kflat (X : Scheme.{t}) (A : Type t) [CommR
     (SheafOfModules.siteSheafTensorRightIso R (K.X i)).symm (hf i)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The recorded completed Koszul complex is K-flat, without a regularity assumption.
-Source: Stacks Project, Tags 06YQ and 0G7E
-(blueprint: lem-weil-pbc-completed-adic-koszul-kflat).
-
-Proof: the constant functor is additive and sends the rank-one module to the unit,
-as its sheafification Hom equivalence shows. The exterior-power basis presents
-its Koszul terms as finite sums of that unit. Tensor with such a sum is a finite
-sum of identity functors and is exact. Extension by zero to cochain indices is
-bounded above, so the bounded flat criterion makes the constant Koszul complex
-K-flat. The change-of-rings K-flat theorem applies to these flat terms. The
-normalized scalar-extension witness identifies that changed complex with the
-recorded completed Koszul complex, degree by degree and on differentials. -/
+/-- The recorded completed Koszul complex is K-flat, without a regularity assumption. -/
 theorem completedAdicKoszul_isKFlat (T : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (r : ℕ) (a : Fin r → A) (m : ℕ) :
     CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing T d)

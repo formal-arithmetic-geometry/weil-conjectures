@@ -14,7 +14,9 @@ import Mathlib.AlgebraicGeometry.Geometrically.Integral
 
 /-! # Geometric integrality depends only on the function field
 
-Source: Stacks Project, Tags 0559, 035W and 054Q.
+## References
+
+* Stacks Project, Tags 0559, 035W and 054Q
 -/
 
 @[expose] public section
@@ -89,24 +91,8 @@ private theorem affine_baseChange_integral_iff
   exact hi.trans (affine_isIntegral_iff _)
 
 /-- Geometric integrality of integral affine schemes over a field transfers along
-an isomorphism of fraction fields which fixes the base sections.
-
-Source: Stacks Project, Tag 0559, first proof, geometric integrality of L;
-Tags 035W and 054Q (geometric reducedness and irreducibility at generic points).
-Proof: Write B and C for the two section domains and identify their fraction fields
-with L using e. The compatibility he identifies the actions of K on this field.
-For every field extension E/K, E tensor_K B is a domain by geometric integrality
-of X and the affine base-change formula. Its localization at B minus zero is
-E tensor_K L, which is again a nonzero domain: these denominators remain nonzero,
-since B embeds in its scalar extension. The inclusion C -> L is K-linear because
-of he and Gamma(Spec K)=K. Flatness of the K-vector space E preserves its
-injectivity, so E tensor_K C embeds into E tensor_K L and is a nonzero domain.
-Its spectrum is the base change of Y to E and hence is integral. Every map from
-a field spectrum to Spec K is such a field extension. Thus q is geometrically
-integral, implying both geometric irreducibility and geometric reducedness.
-The integral hypotheses exclude empty spectra and ensure the fraction rings
-are fields. No normality, smoothness or perfection assumption is needed.
-(blueprint: lem-sbc-field-fraction-ring-geometric-integrality) -/
+an isomorphism of fraction fields which fixes the base sections
+(Stacks, Tags 0559, 035W, 054Q). -/
 theorem geometrically_integral_of_fractionRing_equiv
     {K : Type u} [Field K] {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     [IsIntegral X] [IsIntegral Y]

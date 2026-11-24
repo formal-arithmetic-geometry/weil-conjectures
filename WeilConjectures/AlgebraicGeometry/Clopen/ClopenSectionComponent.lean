@@ -24,10 +24,12 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # The clopen component description for a section of an open immersion
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-sf-operations,
-lem-weil-pbc-clopen-section-direct-image.proof.md, disjoint-open-cover description
-and displayed section formula; Stacks Project, `proetale.tex`, Tags 098K and 09AE
-(blueprint: lem-sp-clopen-section-component).
+The description uses the disjoint open cover given by the section and the displayed
+section formula.
+
+## References
+
+* Stacks Project, Tags 098K, 09AE
 -/
 
 @[expose] public section

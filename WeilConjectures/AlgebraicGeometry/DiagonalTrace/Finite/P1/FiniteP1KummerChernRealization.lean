@@ -10,10 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Class.TowerClassF
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.P1.FiniteP1KummerBoundaryTransport
 
 /-! # Scalar realization of the finite Kummer Chern class
-
-Source: blueprint latest, diagonal-tower trace proof (1), identification of
-the positive section class before taking its direct-image adjunct.
-(blueprint: lem-sfb-finite-p1-kummer-chern-realization).
 -/
 
 @[expose] public noncomputable section
@@ -50,9 +46,7 @@ private theorem comparison_adjunct
     (ad.homEquiv _ _).symm_apply_apply f
   rw [h]
 
-/-- The comparison image of the normalized positive etale Kummer class.
-Source: diagonal-tower trace (1), the section-class component of (G2)
-(blueprint: lem-sfb-finite-p1-kummer-chern-realization). -/
+/-- The comparison image of the normalized positive etale Kummer class. -/
 def finiteP1PositiveClass (S : Scheme.{u}) [IsNoetherian S]
     (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] :
     geoP1Unit (FiniteRing l E n) (ProjectiveLine S) ⟶
@@ -95,9 +89,7 @@ private theorem ordinary_positive_adjunct
   rfl
 
 /-- The second injection of the specified positive decomposition is the ordinary
-adjunct of its Kummer class. This uses the defining component, not invertibility.
-Source: diagonal-tower trace (1), definition of (G2)
-(blueprint: lem-sfb-finite-p1-kummer-chern-realization). -/
+adjunct of its Kummer class. This uses the defining component, not invertibility. -/
 theorem finiteP1PositiveClass_adjunct (S : Scheme.{u}) [IsNoetherian S]
     (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) [Finite (SpTowerShriek.R l E n)] :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (FiniteRing l E n))
@@ -112,36 +104,7 @@ theorem finiteP1PositiveClass_adjunct (S : Scheme.{u}) [IsNoetherian S]
   exact ordinary_positive_adjunct _ _ _ _ S _
 
 /-- Finite Kummer normalization determines the coefficient-linear class itself,
-with no tower pushforward or coefficient pullback in this statement.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md` (1), the identification of the
-section class; `sk-lem-geo-p1-cohomology.proof.md`, Kummer normalization.
-(blueprint: lem-sfb-finite-p1-kummer-chern-realization).
-
-Proof: exact evaluation on single complexes and on shifts first identifies
-Ev(line[2]) with the finite coefficient Tate line in degree minus two, using
-lineEvaluation. The line section comparison in c identifies this line with
-associated-module realization of the comparison pullback of the etale Tate
-line. Pullback along e identifies that object with the pullback of the line
-on P¹; these canonical comparisons construct t. The constant comparison is
-finiteOverUnitCoordinate: it sends one to one, by c.unit_sections.
-Apply hc to the Picard class e*O(1) and the level n. Its displayed boundary
-equality says that, after forgetting scalars and precomposing with the
-integral quotient, the evaluated Chern class is exactly the positive Kummer
-boundary followed by z mapping to 1 tensor z. The normalized line comparison
-c.line_sections identifies that root map with the etale scalar root map.
-Exact site comparison commutes with the Kummer connecting morphism, and the
-Picard pullback of O(1) along e is the same line bundle in both constructions.
-The constants/scalar-extension adjunction identifies maps from the regular
-coefficient unit with maps from the integral unit after scalar restriction;
-hence this equality on the integral generator determines the original
-coefficient-linear derived arrow. The finiteP1PositiveClass used here is the actual comparison image
-of the etale Kummer class, independently of any pushforward. The proved
-finiteP1PositiveClass_adjunct identifies its adjunct with the second
-component of the decomposition. This proves the
-displayed equality before direct image, without the inverse decomposition,
-negative twists, or any cohomology-vanishing assertion. Trivial line bundles,
-empty schemes and the zero ring are covered by the same natural maps. -/
+with no tower pushforward or coefficient pullback in this statement. -/
 theorem finiteP1_kummer_chern_realization
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     (e : X ≅ ProjectiveLine S) (cX : Chern l E X)

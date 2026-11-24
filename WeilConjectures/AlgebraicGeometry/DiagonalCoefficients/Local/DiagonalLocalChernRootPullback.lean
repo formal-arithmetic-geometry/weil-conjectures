@@ -758,28 +758,7 @@ private theorem comparison_commShift
   infer_instance
 
 -- Instantiate the exact cone diagram on the normalized completed endpoints.
-/-- The normalized positive-root cone is preserved, including the canonical shift.
-
-Source: latest blueprint, diagonal coefficient changes (3).
-(blueprint: lem-diagonal-local-chern-root-pullback).
-
-Proof: use the full cone equation in the pullback data for the completed root module and
-its lineProjection. Transpose the ordinary scalar comparison using completedMate and
-varyingMate. The normalized right comparisons are the identity on underlying sections.
-At each root projection the completed line endpoint is therefore the actual root
-inverse-image map, by completedLine_normalization. On a root tensored with a coefficient,
-LinePullback.normalization gives the same root inverse image with the pulled coefficient.
-The line_tensor equation identifies every restricted line section with a root tensored
-with one. Its finite line evaluation is the specified tensor. The normalized pullback
-therefore sends it to the pulled root; injectivity of the finite evaluation and scalar
-restriction identifies the line sections. Together with line_projection, sheaf/module
-and tower extensionality give equality of entire cones.
-Substitute in the cone equation, and use exact-derived composition and single comparison
-naturality. This gives the unshifted line equation. Shift it by two. The canonical exact
-scalar squares, the whole-tower comparison and the derived tower functors commute with
-shifts. Naturality of those shift isomorphisms gives exactly the displayed equation,
-with the positive Kummer root comparison and without a change of connecting-map sign.
-No faithfulness of derived finite evaluation is used. -/
+/-- The normalized positive-root cone is preserved, including the canonical shift. -/
 theorem diagonalLocalChern_root_pullback (l : ℕ) [Fact l.Prime]
     {X S X' S' : Scheme.{u}} [IsNoetherian X] [IsNoetherian X']
     {f : X ⟶ S} {f' : X' ⟶ S'} (hX : X' ⟶ X)

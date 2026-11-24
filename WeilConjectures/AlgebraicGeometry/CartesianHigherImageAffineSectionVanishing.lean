@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianHigherImageAffineSectionLocalV
 
 /-! # Eventual vanishing of affine relative higher-image sections
 
-Source: Stacks Project, Tag 0EYM, second proof.
+## References
+
+* Stacks Project, Tag 0EYM
 -/
 
 @[expose] public section
@@ -22,23 +24,8 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- An affine section killed by the relative limit comparison dies at a later stage.
-Source: Stacks Project, Tag 0EYM, second proof, injectivity on affine etale objects.
-(blueprint: lem-sc-cartesian-higher-image-affine-section-vanishing)
-
-Proof: Lift the section locally to the cohomology presheaf of the stage cartesian
-source. Its zero limit image becomes zero in this presheaf after an etale refinement,
-by local injectivity of sheafification. Refine by affine objects and descend these
-finitely presented objects and arrows to a common stage. Base change the source
-system to each descended affine object and apply cohomology continuity (09YQ);
-each zero limit class is killed at a later stage. Naturality of the presheaf
-comparison, exact inverse image and exchange pasting identify these images with
-the displayed transition. Quasi-compactness of U supplies a finite subcover, and
-cofilteredness supplies one common killing arrow, equalizing the finitely many
-parallel arrows if needed. The transitioned section is zero on this cover, hence
-zero by sheaf separatedness. Empty U and zero sections give the identity witness;
-q = 0 is the same equality-of-sections argument. No stage exchange is assumed
-invertible. -/
+/-- An affine section killed by the relative limit comparison
+dies at a later stage (Stacks, Tag 0EYM). -/
 theorem exists_cartesianHigherImage_affine_section_eq_zero
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

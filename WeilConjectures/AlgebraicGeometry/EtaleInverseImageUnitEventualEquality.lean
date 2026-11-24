@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Eventual equality for a single inverse-image unit
 
-Source: Stacks Project, Sites Tag 0A35 and Etale Cohomology Tag 09YQ.
+## References
+
+* Stacks Project, Tags 0A35 and 09YQ
 -/
 
 @[expose] public section
@@ -21,25 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 /-- Equality under the inverse-image unit for one stage sheaf is detected by
-an inverse-image unit at a later scheme stage.
-Source: Stacks Project, Sites Tag 0A35 (lemma-compute-pullback-to-limit),
-and Etale Cohomology Tags 0EYL, 04HR and 09YQ.
-(blueprint: lem-weil-pbc-etale-inverse-image-unit-eventual-equality).
-
-Proof: Restrict the system to the cofinal directed tail above i. Cover U by
-finitely many affine opens. The affine transition maps preserve affineness after
-base change. Present the limit affine etale site by the filtered colimit of
-stage affine etale sites (0EYL). Restriction to this basis is an equivalence of
-sheaf categories (04HR). The inverse-image section formula of 0A35, applied to
-this single sheaf, identifies the limit unit images with images of the original
-sections in the filtered colimit of sections of its stage inverse images.
-Equality of these images is witnessed at a later stage. The adjunction unit
-formula identifies the witness maps with the displayed units. Do this on each
-of the finitely many affine opens, choose a common later stage, and use unit
-naturality and separatedness on the pulled-back cover to obtain equality on U.
-This does not involve any colimit of varying sheaves. For empty U the sheaf
-condition for the empty covering gives equality already at i; a zero sheaf and
-a singleton directed index satisfy the same argument. -/
+an inverse-image unit at a later scheme stage (Stacks, Tags 0A35, 0EYL, 04HR and 09YQ). -/
 theorem etale_inverse_image_unit_eventual_equality
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

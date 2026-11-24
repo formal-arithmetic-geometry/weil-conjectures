@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompat
 
 /-! # Pullback of flat single-object pairings after symmetry
 
-Source: Stacks Tags 06YQ and 06YU
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YQ and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -53,18 +54,8 @@ private theorem swap_pairing_pullback
   simpa only [Category.assoc] using
     congrArg (fun a ↦ d ≫ a ≫ q') (swap_naturality T' s' l m).symm
 
-/-- A flat degree-zero pairing remains compatible with pullback after swapping its factors.
-
-Source: Stacks Tags 06YQ and 06YU; the symmetry step of the finite-line evaluation argument
-(auxiliary; not a blueprint node).
-
-Proof: lift the given ordinary pairing square using the pullback field of
-etaleSingleFunctor_monoidalCompatibility. Use the supplied braiding square for the
-derived inverse-image tensor comparison. Compose that braiding square with the
-lifted pairing square,
-then use naturality of the derived symmetry to move both factor comparisons across it.
-This gives the negative-first pairing square in the displayed order. Only the left
-factors L and L' need to be flat; the other factors and the pairings are arbitrary. -/
+/-- A flat degree-zero pairing remains compatible with pullback after swapping its factors
+(Stacks, Tags 06YQ and 06YU). -/
 theorem flatSinglePairing_symmetricPullback
     (B : Type uB) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

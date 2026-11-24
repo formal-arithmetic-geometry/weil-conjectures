@@ -17,10 +17,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Étale cohomology over a local ring as a colimit
 
-Source: Stacks Project, Étale Cohomology, Tag 09AX, proof, and Tags 03Q6 and 09YQ;
-Cohomology on Sites, Tag 03F3
-(blueprint: lem-weil-pbc-etale-cohomology-local-ring-colimit).
-
 The diagram is a presentation of the actual object-cohomology presheaf, with its arrows
 specified as well as its objects. The object cohomology H^q(U, F) is Ext from the
 sheafified free abelian sheaf on the representable `uliftYoneda U` (Mathlib's
@@ -30,6 +26,10 @@ AbelianHigherDirectImagePresheaf). The conclusion supplies the restriction compa
 the unique factorizations of the local-scheme morphism, and a colimit cocone whose legs
 are the pullbacks followed by inverse-image composition. `Sheaf.H` is the recorded Ext
 encoding of abelian-sheaf cohomology; its K-injective comparison is a comparison theorem.
+
+## References
+
+* Stacks Project, Tags 09AX, 03Q6, 09YQ and 03F3
 -/
 
 @[expose] public section
@@ -69,25 +69,7 @@ private theorem cohomologyMap_pullback_triangle_named
 
 /-- Object cohomology on open subschemes identifies with cohomology of the restricted
 sheaf, and its canonical pullbacks to the local scheme form a colimit cocone.
-Source: Stacks Project, Tags 09AX (proof), 03Q6, 09YQ and 03F3
-(blueprint: lem-weil-pbc-etale-cohomology-local-ring-colimit).
-
-Proof:
-1. Use etaleOpenObjectCohomology_natural for the comparison e and its naturality.
-2. Mathlib's fromSpecStalkOfMem supplies g and its factorization. Cancel the open
-   immersion to prove uniqueness and compatibility with inclusions.
-3. Conjugate the diagram's maps by d followed by e. Naturality of e identifies the
-   resulting transitions with cohomological pullback and inverse-image composition.
-4. The triangle laws for fixed-base cohomology identify the two successive pullbacks
-   with the direct pullback. Thus the prescribed maps form a cocone B with point the
-   local-scheme cohomology and comparison b equal to the identity.
-5. Apply etaleRestrictedCohomology_neighbourhood_colimit to B. Its proof restricts to
-   affine neighbourhoods, uses their stated scheme limit and fixed-base cohomology
-   continuity, and transfers the colimit property by cofinality.
-6. If a class has zero image, injectivity of b makes its coprojection equal to that
-   of zero. Mathlib's filtered-colimit equality criterion gives a smaller
-   neighbourhood on which the class is zero.
--/
+(Stacks, Tags 09AX, 03Q6, 09YQ and 03F3) -/
 theorem etaleCohomology_localRing_colimit
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (x : X) (q : ℕ)

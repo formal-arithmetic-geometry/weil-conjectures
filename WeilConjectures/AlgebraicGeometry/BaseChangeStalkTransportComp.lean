@@ -21,16 +21,8 @@ variable (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
 
 variable {Y : Scheme.{u}} {e : Y ⟶ T} {h : Y ⟶ X}
 
-/-- Canonical target restriction commutes with transport from the original square.
-
-Source: canonical pullback restrictions in Stacks Tags 0F07 and 09Z1.
-(blueprint: lem-sbc-stalk-transport-composition)
-
-Proof: expand the canonical pullback lifts and apply target transition composition.
-Uniqueness of the lift identifies the composite of the two lifts with the direct lift.
-The equation defining a morphism over T identifies the composite coefficient pullback
-with the prescribed one. Apply the stalk functor and its composition law.
--/
+/-- Canonical target restriction commutes with transport from the original square
+(Stacks, Tags 0F07 and 09Z1). -/
 theorem baseChangeStalkTransport_comp (sq : IsPullback e h g p)
     {U V : Over T} (φ : U ⟶ V) :
     baseChangeStalkTransport Λ p g q F x sq V ≫

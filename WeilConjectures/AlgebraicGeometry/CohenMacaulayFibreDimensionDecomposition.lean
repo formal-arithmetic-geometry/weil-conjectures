@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 
 /-! # Relative dimension decomposition of a fibre Cohen-Macaulay open
 
-Source: Stacks Project, Tags 02NM, 02NJ and 0A21.
-(blueprint: lem-sbc-cohen-macaulay-fibre-dimension-decomposition)
+## References
+
+* Stacks Project, Tags 02NM, 02NJ and 0A21
 -/
 
 @[expose] public section
@@ -27,25 +28,8 @@ universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
 
-/-- A fibre Cohen-Macaulay open partitions into open pieces of constant local fibre dimension.
-
-Source: Stacks Project, Tag 02NM, using the equidimensional convention of Tag 02NJ
-and local dimension of locally algebraic schemes (Tag 0A21 (3), (5)).
-Proof: Restrict f over U and then restrict its source to W. Flatness and local finite
-presentation survive both restrictions. The fibres are locally Noetherian. Each of
-their stalks is a stalk of an original fibre, via the open restriction inclusions and
-the residue-field isomorphisms. The hypothesis on depth therefore says all these
-fibres are Cohen-Macaulay. Tag 02NM gives a coproduct decomposition of W into clopen
-subschemes indexed by the nonnegative integer relative dimension. By Tag 02NJ each
-nonempty fibre of the nth piece is equidimensional of dimension n. At each point,
-shrink any open neighbourhood to a finite-type affine neighbourhood. Every component
-through that point has dimension n; its nonempty open subsets still have dimension n
-by Tag 0A21. Consequently the infimum of neighbourhood dimensions is n. The fibre
-inclusion into the original fibre is an open immersion. The already proved
-`IsOpen.topologicalKrullDimAt_eq` preserves local topological dimension on its image.
-Map each piece into X: its image V n is open, the images are pairwise disjoint,
-and their union is W. Empty pieces and empty W cause no exception.
-(blueprint: lem-sbc-cohen-macaulay-fibre-dimension-decomposition) -/
+/-- A fibre Cohen-Macaulay open partitions into open pieces of constant local fibre dimension
+(Stacks, Tags 02NM, 02NJ and 0A21). -/
 theorem exists_fibre_dimension_open_partition_of_depth_eq_ringKrullDim
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] (W : X.Opens)

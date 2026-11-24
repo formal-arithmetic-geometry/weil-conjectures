@@ -10,9 +10,10 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCoherenc
 
 /-! # The degree-zero completed Koszul unit is invertible
 
-Source: Stacks Project, Tag 099M, the finite Koszul construction; Tag 03EK,
-scalar extension of module sheaves.
-(blueprint: lem-weil-pbc-completed-koszul-unit-zero-iso).
+## References
+
+* Stacks Project, Tag 099M (the finite Koszul construction)
+* Stacks Project, Tag 03EK (scalar extension of module sheaves)
 -/
 
 @[expose] public noncomputable section
@@ -130,21 +131,7 @@ private theorem normalizedScalarTensor_map
   exact hn.symm
 
 attribute [local irreducible] completedAdicRing in
-/-- The specified degree-zero completed Koszul unit is an isomorphism.
-Source: Stacks Project, Tag 099M, finite Koszul complexes; Tag 03EK, scalar extension.
-(blueprint: lem-weil-pbc-completed-koszul-unit-zero-iso).
-
-Proof: constant module sheafification sends the rank-one module to the unit.
-The inverse sends the constant generator one to the unit section one; the
-sheafification Hom equivalence and the unit-module/section equivalence prove the
-two inverse identities. Exterior degree zero is canonically the rank-one module,
-so the uncompleted Koszul unit is invertible. Apply the actual additive scalar
-extension functor to this isomorphism and precompose with the inverse of the
-scalar-extension unit comparison. The resulting map sends one to the recorded
-sheafified tensor of one with the Koszul unit. Uniqueness in
-completedAdicKoszulUnitZero_exists identifies it with the specified completed
-unit. Thus that unit is a composite of isomorphisms. This works for rank zero,
-the zero ring and the empty scheme. -/
+/-- The specified degree-zero completed Koszul unit is an isomorphism. -/
 theorem completedKoszulUnitZero_isIso
     (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (r : ℕ) (a : Fin r → A) (n : ℕ) :

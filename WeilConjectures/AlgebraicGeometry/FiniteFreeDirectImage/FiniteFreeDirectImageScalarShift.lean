@@ -43,7 +43,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Counit-compatible shifts of normalized scalar models
 
-Source: Stacks Project, Tags 06YY and 07A6.
+## References
+
+* Stacks Project, Tags 06YY, 07A6
 -/
 
 @[expose] public noncomputable section
@@ -54,18 +56,7 @@ universe u
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.FiniteFreeDirectImage
 
-/-- The normalized scalar adjunction gives the universal counit's shift structure.
-Source: Stacks Project, Tags 06YY and 07A6.
-(blueprint: lem-sp-finite-free-scalar-shift).
-
-Proof: the inverse mate of the exact restriction factorization commutes with shifts,
-since the ordinary and derived scalar adjunctions do. The unit normalization
-identifies that inverse mate with the universal counit on flat-term K-flat
-complexes. Resolve any complex by one of these; naturality and invertibility of
-the localized resolution extend the equality to all complexes. Thus the universal
-counit commutes with shifts. Exact restriction induces a triangulated functor.
-The left adjoint of this triangulated functor, with the specified compatible shift,
-is triangulated as well. -/
+/-- The normalized scalar adjunction gives the universal counit's shift structure. -/
 theorem finiteFreeDirectImageScalarShift {X : Scheme.{u}} (s : ScalarModel X)
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S) :
     (s.presentation a).derived.IsTriangulated ∧

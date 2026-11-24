@@ -12,8 +12,10 @@ public import WeilConjectures.Algebra.Homology.RingedSiteKFlatStalkCriterion
 /-!
 # K-flatness under algebraic inverse image
 
-Source: Stacks Project, Cohomology on Sites, Tags 0DEN and 0DEP.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Tag 0DEN
+* Stacks Project, Tag 0DEP
 -/
 
 @[expose] public section
@@ -171,16 +173,7 @@ private theorem precoverageTopology {E : Type uC} [Category.{vC} E]
       ((J.arrows_mem_toPrecoverage_iff S).2 hS)
 
 /-- Algebraic inverse image preserves K-flat complexes when the target has a specified
-conservative family of points. No termwise flatness or boundedness is required.
-Source: Stacks Project, Cohomology on Sites, Tags 0DEN and 0DEP
-(auxiliary; not a blueprint node).
-
-Proof: for every target point, compose its ring and module presentation with the
-algebraic inverse image. The ring is the target stalk ring, the module functor is the
-composite, and preservation of all operation graphs follows by applying the two
-presentations successively. The forward stalk criterion at the composite point makes
-each target stalk K-flat. Apply the reverse stalk criterion to the conservative family.
-The construction also covers an empty conservative family and the zero ring. -/
+conservative family of points. No termwise flatness or boundedness is required. -/
 theorem AlgebraicInverseImageOfUniverses.isKFlat_of_points
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D) :
     ∀ (f : GeometricMorphism (Sheaf JD (Type w)) (Sheaf JC (Type w)))

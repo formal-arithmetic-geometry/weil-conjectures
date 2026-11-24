@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.FlatTermKFlatFunctor
 
 /-! # Derived tensor computation under a flat-preserving monoidal functor
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -77,17 +79,7 @@ private theorem nativeCochainTensorComparison
 end AbstractCochains
 
 /-- An exact flat-preserving monoidal left adjoint computes the published constant-ring
-unbounded derived tensor as the native tensor of its images.
-
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E.
-(auxiliary; not a blueprint node).
-
-Proof: choose flat-term K-flat representatives of both inputs. The published tensor's
-cochain comparison computes their tensor. Flat-term K-flat preservation makes the
-second image K-flat, so the target localization tensorator is invertible. Compose the
-source comparison, exact-functor localization factors, the monoidal cochain comparison,
-and that inverse tensorator. Map the two representative isomorphisms to finish. This
-uses no boundedness, finiteness or flatness assumption on the derived inputs. -/
+unbounded derived tensor as the native tensor of its images. -/
 theorem constantRingDerivedTensorComparison {C D : Type w} [SmallCategory C] [SmallCategory D]
     (J : GrothendieckTopology C) (T : GrothendieckTopology D)
     (A : Type w) [CommRing A]

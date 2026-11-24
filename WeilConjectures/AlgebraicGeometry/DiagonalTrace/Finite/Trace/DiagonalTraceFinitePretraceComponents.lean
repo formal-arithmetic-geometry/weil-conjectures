@@ -10,10 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTrac
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceDivisorChernAdjoint
 
 /-! # Finite components of the supported diagonal before applying trace
-
-Source: diagonal tower trace proof paragraph (2), and the supported diagonal
-component formula in the finite projective-line adjunction.
-(blueprint: lem-sfb-diagonal-trace-finite-pretrace-components).
 -/
 
 @[expose] public noncomputable section
@@ -26,26 +22,7 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- At one coefficient level, the supported diagonal has an arbitrary base component
-and exactly one positive relative Chern component, before applying any trace.
-
-Source: `sk-prop-diagonal-tower-trace.proof.md`, paragraph (2), together with
-the divisor-line, Chern-additivity and adjunction argument in
-`lem-amb-p1-diagonal-chern-components`.
-(blueprint: lem-sfb-diagonal-trace-finite-pretrace-components).
-
-Proof: finite projection and the normalized supported-source comparison identify
-this arrow with the projected coefficient unit followed by the evaluated Chern
-adjunct of the actual diagonal divisor line (finiteDivisorAdjoint).
-
-Factor that divisor line into a base pullback and the hyperplane line of p.model.
-Chern additivity, normalized Chern pullback and naturality of the geometric
-adjunction give the two tower components (divisorChernAdjoint_components).
-Pulling hY back gives the invertibility hypotheses of that tower identity.
-
-Apply the additive exact restriction and evaluation functors to the identity,
-and precompose with the projected coefficient unit. Its base component is the
-witness beta; its relative component has coefficient one. This calculation uses
-no trace, inverse splitting or integration identity. -/
+and exactly one positive relative Chern component, before applying any trace. -/
 theorem diagonalTrace_finitePretrace_components
     (l : ℕ) [Fact l.Prime]
     (Y : Scheme.{u}) [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)]

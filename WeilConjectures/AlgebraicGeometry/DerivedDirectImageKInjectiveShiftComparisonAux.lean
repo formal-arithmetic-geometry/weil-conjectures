@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-! # Naturality component for the shifted K-injective comparison
 
-Source: Stacks Project, Tag 079V.
-(blueprint: lem-pc-direct-image-kinjective-comparison-shift-aux)
+## References
+
+* Stacks Project, Tag 079V
 -/
 
 @[expose] public section
@@ -129,20 +130,7 @@ private lemma comparison_app {X Y : RingedSpace.{u}}
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison after applying the inverse derived shift map is the shifted
-comparison followed by the inverse localized shift identification.
-Source: Stacks Project, Tag 079V.
-(blueprint: lem-pc-direct-image-kinjective-comparison-shift-aux)
-
-Proof: express the unit restricted to K-injectives in terms of the comparison
-used to transport the derived shift structure and the unit of the K-injective
-equivalence. Naturality and the equivalence triangle identity identify this
-expression with the right-derived unit, so that unit commutes with shifts.
-Extend this compatibility to every homotopy-category object using its
-quasi-isomorphism to a K-injective resolution. Whisker with the quotient functor
-and the localization identifications to obtain the complex-level comparison.
-Its component at a K-injective is the inverse of the displayed comparison iso.
-Apply its shift-compatibility equation and cancel the two comparison isomorphisms
-and the localized shift identification to obtain the claimed equation. -/
+comparison followed by the inverse localized shift identification (Stacks, Tag 079V). -/
 theorem derivedModuleDirectImageKInjectiveIso_shift_aux
     {X Y : RingedSpace.{u}}
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]

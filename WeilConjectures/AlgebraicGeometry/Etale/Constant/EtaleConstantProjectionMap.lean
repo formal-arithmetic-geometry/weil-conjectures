@@ -17,13 +17,14 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 /-!
 # The derived constant-coefficient projection map
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0F12, and sites-cohomology.tex,
-Tags 07A4, 07A6 and 0B56 (blueprint: def-kun-constant-projection-morphism).
-
 The constant presheaf tensor constraints have identity components, so their coherence
 proofs determine a unique structure. Sheafification and the existing total left derived
 tensor comparison give the constant-sheaf comparison. The map is its counit mate under
 the existing unbounded derived adjunction. No choice of an arbitrary comparison is made.
+
+## References
+
+* Stacks Project, Tags 0F12, 07A4, 07A6 and 0B56
 -/
 
 @[expose] public section
@@ -50,14 +51,7 @@ end CachedComparison
 namespace AlgebraicGeometry.Etale
 
 /-- The constant presheaf has the unique monoidal core whose unit and tensor constraints
-have identity components. Source: the constant inverse image in Stacks Tag 0F12 and the
-ordinary tensor comparison underlying Tag 07A4
-(blueprint: def-kun-constant-projection-morphism).
-Proof: use identity maps in every component for the unit and tensor constraints and their
-inverses. Restriction maps of constant presheaves are identities. Naturality therefore
-reduces to the same map on both sides. Evaluate the associativity and unit diagrams at
-any site object: they reduce to the corresponding diagrams in ModuleCat. These component
-identities also determine the isomorphisms uniquely, and proof fields are propositions. -/
+have identity components. -/
 theorem exists_etaleConstantPresheafCoreMonoidal (Λ : Type (u + 1)) [CommRing Λ]
     (X : Scheme.{u}) :
     ∃ h : (Functor.const X.Etaleᵒᵖ (C := ModuleCat.{u + 1} Λ)).CoreMonoidal,
@@ -72,16 +66,14 @@ theorem exists_etaleConstantPresheafCoreMonoidal (Λ : Type (u + 1)) [CommRing �
     rfl
 
 /-- The constant-presheaf monoidal structure with identity components. Its data are
-uniquely fixed by the normalization in the preceding theorem.
-Source: Stacks Tag 0F12 (blueprint: def-kun-constant-projection-morphism). -/
+uniquely fixed by the normalization in `exists_etaleConstantPresheafCoreMonoidal`. -/
 noncomputable instance etaleConstantPresheafMonoidal (Λ : Type (u + 1)) [CommRing Λ]
     (X : Scheme.{u}) :
     (Functor.const X.Etaleᵒᵖ (C := ModuleCat.{u + 1} Λ)).Monoidal :=
   (Classical.choose (exists_etaleConstantPresheafCoreMonoidal Λ X)).toMonoidal
 
 /-- The monoidal constant-sheaf functor is the composite of the normalized constant
-presheaf functor and monoidal sheafification.
-Source: Stacks Tag 07A4 (blueprint: def-kun-constant-projection-morphism). -/
+presheaf functor and monoidal sheafification. -/
 noncomputable instance etaleConstantSheafMonoidal (Λ : Type (u + 1)) [CommRing Λ]
     (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).Monoidal :=
@@ -89,15 +81,7 @@ noncomputable instance etaleConstantSheafMonoidal (Λ : Type (u + 1)) [CommRing 
     (Functor.const X.Etaleᵒᵖ ⋙ presheafToSheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).Monoidal
 
-/-- Constant module sheaves of flat modules are flat for sheaf tensor.
-Source: the constant inverse image in Stacks Tag 0F12 and Tag 07A4
-(blueprint: def-kun-constant-projection-morphism).
-Proof: at every geometric point the stalk of a constant module sheaf is the original
-module, and the sheaf tensor has stalk equal to the tensor of the stalks. If the module
-is flat, tensoring with it preserves exact sequences of stalks. Geometric stalks form
-a conservative family of exact functors on the small etale site, so tensoring with the
-constant module sheaf preserves exact sequences of sheaves. This is categorical flatness.
-The empty scheme has the zero sheaf category, where the same assertion holds. -/
+/-- Constant module sheaves of flat modules are flat for sheaf tensor. -/
 theorem etaleConstantSheaf_preservesFlat (Λ : Type (u + 1)) [CommRing Λ]
     (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesFlat := by
@@ -120,7 +104,6 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- The unbounded adjunction of derived constant sheaves and derived global sections.
-Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism).
 Exactness identifies the left derived functor with termwise constant sheaves. -/
 noncomputable def derivedConstantGlobalSectionsAdjunction (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology A).leftDerivedFunctor ⊣

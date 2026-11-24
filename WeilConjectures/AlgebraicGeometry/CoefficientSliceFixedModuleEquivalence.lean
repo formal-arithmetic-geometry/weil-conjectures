@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-! # Fixed-scalar coordinates on a coefficient-sized pro-etale slice
 
-Source: Stacks Project, Tags 00XZ and 04IX.
+## References
+
+* Stacks Project, Tags 00XZ and 04IX
 -/
 
 @[expose] public section
@@ -22,19 +24,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Weakly-etale localization in fixed-scalar sheaves, with its inverse-image comparison.
-
-Source: Stacks Project, Sites, Tag 00XZ; Modules on Sites, Tag 04IX.
-(auxiliary; not a blueprint node).
-
-Proof: conjugate the concrete weakly-etale slice equivalence by AsSmall, and use
-its equivalence of covering sieves to obtain S. Composition with the structural
-map is left adjoint to scheme base change. Precomposition on sheaves therefore
-identifies the fixed-scalar inverse image with restriction along composition.
-After the site equivalence this is the over-forgetful functor, giving the first
-comparison. The site equivalence is both continuous and cocontinuous, so its
-precomposition commutes with sheafification. Applying that comparison to a
-constant presheaf proves the last assertion. -/
+/-- Weakly-etale localization in fixed-scalar sheaves, with its inverse-image comparison
+(Stacks, Tags 00XZ and 04IX). -/
 theorem coefficient_slice_fixed_module_equivalence
     (Y : Scheme.{u}) (U : coefficientProEtaleSiteModel.{u, u} Y)
     (k : Type (u + 1)) [CommRing k] :

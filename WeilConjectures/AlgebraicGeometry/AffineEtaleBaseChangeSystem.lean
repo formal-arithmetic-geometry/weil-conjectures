@@ -15,8 +15,7 @@ import Mathlib.AlgebraicGeometry.AffineTransitionLimit
 /-!
 # AffineEtaleBaseChangeSystem
 
-Source: Stacks Project, Étale Cohomology 0EYL; Sites 09YL.
-(blueprint: lem-weil-pbc-affine-etale-base-change-system).
+(Stacks, Tags 0EYL, 09YL.)
 -/
 
 @[expose] public section
@@ -27,24 +26,10 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Source: Stacks Project, Étale Cohomology 0EYL, qcqs case; Topologies 04HR.
-
-Proof (steps 1--4 of lem-weil-pbc-affine-etale-site-colimit):
-1. The cone projections are affine by uniqueness of limits and
-   lem-weil-pbc-limit-affine-transition. Affine morphism permanence makes base change
-   preserve affine objects; étaleness is stable under base change.
-2. Choose identity functors on diagonal indices, ordinary restricted base change on
-   other indices, and base change along the cone projections for v. The first projections
-   give natural transformations p and q. For diagonal indices use the identity projection.
-3. Pullback pasting and uniqueness give natural comparisons gamma and delta compatible
-   with the first projections. Use identity comparisons on diagonal indices. Both sides
-   of every cocycle have the same two projections, hence agree by pullback uniqueness.
-4. Base change preserves finite jointly surjective étale coverings and all pullbacks.
-   This gives continuity. Restriction to the affine site is a sheaf equivalence (04HR).
-   Conjugate small-site inverse image by these equivalences to obtain the displayed
-   adjunctions and finite-limit preservation for sheaves of Type u. The construction is
-   coefficient-universe independent; equivalences preserve finite limits.
-(blueprint: lem-weil-pbc-affine-etale-base-change-system). -/
+/-- For a directed limit of qcqs schemes with affine transition maps, base change of affine
+étale objects gives a coherent system of functors between the stages and to the limit, with
+pullback squares and compatible isomorphisms, preserving finite étale coverings
+(Stacks, Tags 0EYL, 04HR). -/
 theorem exists_affineEtale_baseChange_system
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

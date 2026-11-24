@@ -19,6 +19,9 @@ provides the Chow modification `π : X' ⟶ X` together with an immersion
 is moreover proper, `ι` is a closed immersion and hence so is `(π, ι)`. This is the form of
 Chow's lemma used in the reduction of proper base change to the projective line.
 
+The general form of this statement, for an arbitrary lift into
+`ℙ(n; X) = X ×_S ℙ(n; S)`, is `AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_lift`.
+
 ## Main definitions
 
 - `AlgebraicGeometry.ChowModification.toProjectiveSpaceSource` — the morphism
@@ -33,13 +36,6 @@ Chow's lemma used in the reduction of proper base change to the projective line.
   immersion.
 - `AlgebraicGeometry.ChowModification.isClosedImmersion_toProjectiveSpaceSource` — if `f` is
   proper, it is a closed immersion.
-
-## Blueprint
-
-The declarations of this file implement `lemma:weil-pbc-chow-embedding-over-x` of the
-proper-base-change blueprint for the Chow modification of a morphism to a Noetherian base;
-the general form of that lemma, for an arbitrary lift into `ℙ(n; X) = X ×_S ℙ(n; S)`, is
-`AlgebraicGeometry.ProjectiveSpace.isClosedImmersion_lift`.
 -/
 
 @[expose] public section
@@ -120,8 +116,7 @@ end
 
 /-- **The Chow embedding over `X`**: for `f : X ⟶ S` proper, the morphism
 `(π, ι) : X' ⟶ ℙ(index f; X)` of `toProjectiveSpaceSource` is a closed immersion, the diagram
-being the one of `AlgebraicGeometry.ChowModification.toProjectiveSpaceSource_map`.
-(blueprint: `theorem-chow-s-lemma-projective-form--2`) -/
+being the one of `AlgebraicGeometry.ChowModification.toProjectiveSpaceSource_map`. -/
 instance isClosedImmersion_toProjectiveSpaceSource {X S : Scheme.{u}} (f : X ⟶ S)
     [IsNoetherian S] [IsProper f] :
     IsClosedImmersion (toProjectiveSpaceSource f) :=

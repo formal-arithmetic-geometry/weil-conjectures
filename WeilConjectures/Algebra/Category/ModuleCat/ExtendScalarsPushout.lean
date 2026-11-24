@@ -14,7 +14,10 @@ public import Mathlib.RingTheory.IsTensorProduct
 For a pushout square of commutative rings `A → B → D`, `A → C → D` and a `C`-module `M`,
 `B ⊗_A M ≅ D ⊗_C M` as `B`-modules, sending `b ⊗ m` to `p b ⊗ m`
 (`ModuleCat.exists_extendScalars_restrictScalars_iso_of_isPushout`).
-Source: Stacks Project, Tag 00DE.
+
+## References
+
+* Stacks Project, Tag 00DE
 -/
 
 @[expose] public section
@@ -28,8 +31,7 @@ open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
 
 /-- Base change along a pushout square of commutative rings: for a module `M` over `C`,
-`B ⊗_A M ≅ D ⊗_C M`, sending `b ⊗ m` to `p b ⊗ m`.
-Source: Stacks Project, Tag 00DE (tensor cancellation). -/
+`B ⊗_A M ≅ D ⊗_C M`, sending `b ⊗ m` to `p b ⊗ m`. -/
 theorem exists_extendScalars_restrictScalars_iso_of_isPushout
     {A B C D : CommRingCat.{r}}
     (f : A ⟶ B) (g : A ⟶ C) (p : B ⟶ D) (q : C ⟶ D)

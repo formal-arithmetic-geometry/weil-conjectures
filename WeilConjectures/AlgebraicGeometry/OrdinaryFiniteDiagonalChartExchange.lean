@@ -11,8 +11,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistComposition
 
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
 
 # Exchange for the two normalized projective-line diagonal charts -/
 @[expose] public noncomputable section

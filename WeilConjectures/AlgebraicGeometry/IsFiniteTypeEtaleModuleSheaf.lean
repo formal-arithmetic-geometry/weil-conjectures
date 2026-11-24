@@ -12,8 +12,9 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoeffic
 /-!
 # Finite type sheaves of modules on the small etale site
 
-Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF
-(blueprint: def-weil-pbc-etale-module-finite-type).
+## References
+
+* Stacks Project, Tags 03DE, 03DL and 03DF.
 -/
 
 @[expose] public section
@@ -26,13 +27,8 @@ namespace AlgebraicGeometry.Scheme
 
 /-- A module-valued etale sheaf is of finite type if an etale covering makes it generated
 by finitely many global sections. On the site localized at each cover member, this means
-an epimorphism from the constant sheaf of a finite free module. The constant sheaf of
-`Fin n → Λ` is the direct sum of `n` copies of the constant ring sheaf, and its morphisms
-to the restriction correspond to `n` global sections by the constant-sheaf adjunction.
-The terminal-object covering formulation is equivalent to the all-objects formulation
-by base change of covers. No local constancy is required in this definition.
-Source: Stacks Project, Tags 03DE(4), 03DL(5), and 03DF
-(blueprint: def-weil-pbc-etale-module-finite-type). -/
+an epimorphism from the constant sheaf of a finite free module. No local constancy is
+required in this definition. -/
 def IsFiniteTypeEtaleModuleSheaf {Y : Scheme.{v}} {Λ : Type (v + 1)} [CommRing Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{v + 1} Λ)) : Prop :=
   ∃ 𝒰 : Cover.{v} etalePrecoverage Y, ∀ i : 𝒰.I₀, ∃ n : ℕ,

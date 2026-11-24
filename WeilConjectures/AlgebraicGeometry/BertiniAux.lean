@@ -18,7 +18,7 @@ public import WeilConjectures.RingTheory.BertiniCurve
 # Auxiliary results for the Bertini argument
 
 Glue between the ring-level Bertini theorem and the geometric fiber of an affine scheme over a
-finite field (blueprint `lemma-curve-preserving-finite-cover--1`).
+finite field.
 
 ## Main statements
 

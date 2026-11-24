@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Regular
 /-!
 # Fibrewise density in a good curve diagram
 
-Source: Stacks Project, Tag 0GK7, last paragraph.
+## References
+
+* Stacks Project, Tag 0GK7, last paragraph
 -/
 
 @[expose] public section
@@ -91,19 +93,7 @@ private theorem dense_fibres_of_cover
 
 set_option backward.isDefEq.respectTransparency false in
 /-- In a good curve diagram, surjectivity of each marked open onto its constant-field
-base implies both required fibrewise densities.
-
-Source: Stacks Project, Tag 0GK7, final paragraph.
-(blueprint: lem-weil-pbc-good-curves-fibre-density)
-
-Proof: A smooth geometrically connected fibre is regular and connected, hence
-irreducible. Its open subscheme cut out by j is preirreducible. Surjectivity of the
-marked open gives a point in each such fibre, so that open is dense. For any point
-in a fibre of X over V, lift it through the surjective coproduct map and then to
-the corresponding fibre of Y_i over T_i. This fibre maps continuously into the
-chosen X fibre. The lifted point lies in the closure of the marked open, so its
-image lies in the closure of W. This also proves the empty-family case.
--/
+base implies both required fibrewise densities. -/
 theorem good_curves_fibre_density
     {X V : Scheme.{u}} (f : X ⟶ V) (n : ℕ)
     (T Y B : Fin n → Scheme.{u}) (t : ∀ i, T i ⟶ V)

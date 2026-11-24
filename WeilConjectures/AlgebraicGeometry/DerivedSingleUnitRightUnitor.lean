@@ -12,10 +12,6 @@ import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 
 /-!
 # Functorial normalization of the single-unit comparison
-
-Source: the normalized projective counit calculation in
-`lem-amb-affine-space-top-trace.proof.md`.
-(blueprint: lem-route-derived-single-unit-right-unitor).
 -/
 
 @[expose] public noncomputable section
@@ -26,17 +22,7 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-/-- Postcomposing the image of the canonical single-unit comparison changes no map.
-Source: the projective-line counit identification in the first paragraph of
-`lem-amb-affine-space-top-trace.proof.md`.
-(blueprint: lem-route-derived-single-unit-right-unitor)
-
-Proof: the canonical single-unit isomorphism has identity inverse, hence identity
-forward map by its hom-inv identity. A functor sends this identity to the identity,
-and postcomposition cancels it by the category left-identity law.
-In particular this cancels the single-unit factor before the derived right unitor.
-The argument works on the empty scheme and over the zero coefficient ring.
--/
+/-- Postcomposing the image of the canonical single-unit comparison changes no map. -/
 theorem map_singleFunctorObjUnitIso_hom_comp
     (B : Type v) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]

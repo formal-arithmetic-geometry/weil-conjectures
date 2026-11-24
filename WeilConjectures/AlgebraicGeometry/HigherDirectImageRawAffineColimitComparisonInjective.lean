@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.AbelianRawCoconeComplexPresentation
 
 /-! # Injectivity of the raw affine cohomology colimit comparison
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-raw-affine-colimit-comparison-injective).
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1.
 -/
 
 @[expose] public section
@@ -27,8 +28,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Data for the raw affine comparison, with the canonical maps retained as natural
 transformations. Its existence is asserted by the theorem below; this type makes
-no choice of a witness and contains no unproved data.
-(blueprint: lem-sbc-raw-affine-colimit-comparison-injective). -/
+no choice of a witness and contains no unproved data. -/
 structure RawAffineColimitComparisonData {I : Type v} [Preorder I]
     [IsDirected I (· ≤ ·)] [Nonempty I] {S : Scheme.{v}}
     (A : I → S.Etaleᵒᵖ ⥤ AddCommGrpCat.{v + 1})
@@ -53,44 +53,10 @@ structure RawAffineColimitComparisonData {I : Type v} [Preorder I]
   hinj : Function.Injective (colimit.desc K B)
 
 /-- The canonical colimit comparison for raw cohomology on an affine etale
-object is injective. The raw stage and limit maps are natural transformations whose components are
-constrained to be the explicit raw pullbacks. The diagram is constrained by these maps.
-This statement asserts no eventual vanishing and no
-uniformity over further restrictions.
-Source: Stacks Project, Tag 09Z1 (the displayed cohomology colimit in the proof),
-Tag 03Q8 (restricted cohomology), and Tag 0EZM (continuity for single complexes).
-(blueprint: lem-sbc-raw-affine-colimit-comparison-injective).
-
-Proof: Base change the diagram and its limiting cone along U → S. The pullback
-universal properties preserve the limit. The stages are qcqs because the structure
-maps are qcqs and U is affine; transitions remain affine after base change. Pull
-back each coefficient sheaf and its coherent transitions to the new stages. Pull
-back H to the limit and use the inverse-image composition comparisons to obtain
-its canonical transition equations. Inverse image preserves the coefficient
-colimit, and degree-zero single complexes preserve these termwise colimits.
-The complexes have common lower bound zero. Form K from their cohomology groups,
-with maps canonical derived pullback followed by the coefficient transitions.
-The raw functions are additive: each factor is an additive functor map or composition
-with a fixed morphism in a preadditive derived category. Construct tau and beta with
-these component homomorphisms. Naturality of inverse-image composition and of the
-single-functor comparison moves precomposition with a restriction map across the
-source comparisons, and functoriality moves it across derived pullback. The shifted
-coefficient map is independent of the test object. This proves the naturality
-squares, so tau and beta are actual natural transformations with the stated components.
-The coherent coefficient equations imply the functor laws. Form B with vertex
-cohomology of the coefficient colimit and the canonical pullback legs.
-The free abelian sheaf sections adjunction identifies raw derived Hom with
-cohomology on the base changes: etale restriction preserves injectives because
-its left adjoint is exact. Fully faithful inclusion of D⁺ into D identifies this
-with cohomology of the single complexes. These additive identifications give
-eStage and eLimit. Naturality of inverse-image composition, derived adjunction,
-the single-complex comparison and the shift comparison gives the two displayed
-equations. Apply complex cohomology continuity (0EZM) to this system. Transport
-its colimit universal property along these identifications to B. Thus the
-canonical colimit.desc K B is an isomorphism, in particular injective. This proof
-uses only injectivity of continuity; surjectivity is not part of the assertion.
-For degree zero this is section continuity. For the empty affine U all the groups
-are zero and the comparison is injective. -/
+object is injective. The raw stage and limit maps are natural transformations whose
+components are constrained to be the explicit raw pullbacks, and the diagram is constrained
+by these maps. This statement asserts no eventual vanishing and no uniformity over
+further restrictions (Stacks, Tags 09Z1, 03Q8 and 0EZM). -/
 theorem exists_raw_affine_colimit_comparison_injective {S : Scheme.{v}}
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Over S)

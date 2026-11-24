@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveClassReducedSplitting
 /-!
 # Lifting a derived complex for a projective class
 
-Source: Stacks Project, More on Algebra, Lemma 15.75.2 (Tag 0BCA)
-(blueprint: lem-sc-complex-lift-class-projective).
+## References
+
+* Stacks Project, Tag 0BCA
 -/
 
 @[expose] public section
@@ -34,38 +35,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- Stacks Project, More on Algebra, Tag 0BCA, lemma-lift-complex
-(blueprint: lem-sc-complex-lift-class-projective).
-
-Reduction is Mathlib's extension of scalars to `R ⧸ I`, including the differential.
-The class condition is expressed for any model of a binary direct sum. The hypothesis
-on the derived reduction is included in `hK`: a bounded-above projective representative
-computes derived tensor product by ordinary termwise extension of scalars.
-
-Proof:
-1. Choose the representative in (5). By (1) its terms are projective, hence flat.
-   Apply `lem-pc-module-bounded-flat-kflat` and `lem-pur-derived-change-of-rings`
-   to compute derived reduction. By (4), E is bounded above and projective; use
-   `lem-pc-ring-derived-map-representative` to represent the derived isomorphism
-   by a quasi-isomorphism from E to the reduced representative.
-2. Its cone C is bounded above and acyclic. Each term is a sum of two reductions,
-   hence a reduction of a class member by (2).
-3. Apply `lem-sc-complex-lift-acyclic-projective` to lift C to an acyclic class
-   complex A with a termwise surjective reduction map to C.
-4. Use `lem-pc-ring-derived-map-representative` to lift the cone inclusion to a map
-   from the representative to A up to homotopy. Lift the homotopy through the
-   termwise surjection by projectivity and subtract its boundary to obtain strict
-   commutation. Its reduction is a split injection with class-reduction cokernel.
-5. Such a map between class members is split injective: lift the projection onto
-   the reduced cokernel to a class member by projectivity. By (3) it is surjective
-   and splits. Its kernel is in the class by (2). The projection of the original
-   map onto this kernel is an isomorphism modulo I, hence surjective by (3),
-   and splits by (1). Its kernel T is in the class by (2) and has zero reduction.
-   Zero is in the class as a summand; (3) applied to zero to T gives T = 0.
-6. The cokernel complex Q is bounded above with class terms. Since A is acyclic,
-   Q shifted by -1 represents K. The termwise split sequence remains exact after
-   reduction; its cokernel is E shifted by 1, so Q shifted by -1 reduces to E
-   as a complex, with all differentials respected. -/
+/-- Lifting of complexes along reduction modulo `I`, for a class of projective modules
+(Stacks, Tag 0BCA). -/
 theorem complex_lift_class_projective
     (R : Type u) [CommRing R] (I : Ideal R)
     (Pclass : Set (ModuleCat.{max u v} R))

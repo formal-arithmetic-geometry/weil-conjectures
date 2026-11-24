@@ -19,14 +19,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Pullback with normalized condensed coefficients preserves local finite presentation.
-
-Source: Bhatt--Scholze, Section 6.8; the pullback calculation in
-`CondensedConstructibleSerre.lean`.
-Proof: base change a pro-etale presentation cover, pull back the finite free presentation,
-and transport the resulting module along the inverse coefficient comparison.
-(auxiliary; not a blueprint node)
--/
+/-- Pullback with normalized condensed coefficients preserves local finite presentation
+(Bhatt–Scholze, Section 6.8). -/
 theorem lfp_condensedUpperStar
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)

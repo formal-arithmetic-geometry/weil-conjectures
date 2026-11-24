@@ -16,7 +16,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # The dual of the free coefficient telescope
 
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af.
+## References
+
+* Stacks Project, Tag 0997
 -/
 
 @[expose] public section
@@ -28,14 +30,12 @@ open scoped CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
-/-- The countable coproduct of the coefficient unit on the slice site.
-Source: Stacks Project, Tag 0997 (auxiliary; not a blueprint node). -/
+/-- The countable coproduct of the coefficient unit on the slice site. -/
 noncomputable abbrev localCoefficientFree {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C) :=
   ∐ fun _ : ℕ ↦ SheafOfModules.unit ((localCoefficientRings R).over U)
 
-/-- Identity minus the forward multiplication shift on the free sum.
-Source: Stacks Project, Tag 0997 (auxiliary; not a blueprint node). -/
+/-- Identity minus the forward multiplication shift on the free sum. -/
 noncomputable def localCoefficientTelescopeMap {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     (f : R.obj.obj (op U)) : localCoefficientFree R U ⟶ localCoefficientFree R U :=
@@ -555,25 +555,7 @@ private theorem evaluation_scalar
   exact (φ.app (op (Over.mk (𝟙 V.unop)))).hom.map_smul a (1 : (R.over U).obj.obj V)
 
 /-- Internal derived Hom sends the free telescope endomorphism to the Roos
-endomorphism on the product of copies of the restricted target.
-
-Source: Stacks Project, Tag 0997, proof of lemma-hom-from-Af, (1) equivalent to (3).
-(auxiliary; not a blueprint node).
-
-Proof:
-1. On the slice choose a K-injective complex I representing the restricted target L.
-Compute derived internal Hom from the free sum in degree zero as Hom-complex(P[0],I).
-2. In each degree only the source degree zero contributes. A local map from the free
-sum is determined by its restrictions to all unit summands. Evaluation at one identifies
-these restrictions with the sections of I. This gives a chain isomorphism from the Hom
-complex to the termwise product of copies of I, with its actual coordinate projections.
-3. The product of K-injectives represents the derived product with those projections.
-Compose with the representative isomorphism Q(I) ≅ L to obtain the asserted isomorphism.
-4. Precomposition with identity minus the f-weighted forward shift sends a family x to
-(x_n - f*x_(n+1))_n. Naturality of evaluation at one, of the K-injective comparison, and
-of the derived restriction comparison identifies the scalar on Q(I) with the specified
-localSectionDerivedMultiplication. Equality follows by the product's projection extensionality.
-This uses no exactness of products of sheaves. -/
+endomorphism on the product of copies of the restricted target. -/
 theorem localCoefficientTelescope_rhom_product
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))

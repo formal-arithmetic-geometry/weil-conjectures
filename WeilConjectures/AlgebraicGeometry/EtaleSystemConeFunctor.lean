@@ -12,8 +12,9 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Pulling a coefficient system to a cone
 
-Source: Stacks Project, Tags 0EXZ and 04JC.
-(blueprint: lem-weil-pbc-etale-system-cone-functor).
+## References
+
+* Stacks Project, Tags 0EXZ and 04JC
 -/
 
 @[expose] public section
@@ -34,21 +35,8 @@ private theorem cone_pullback_unit {X Y : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Y
   subst b
   simp [upperStarComp_id_right]
 
-/-- Pulling a compatible coefficient system to an arbitrary cone gives a functor.
-Source: Stacks Project, Tag 0EXZ, transport of a system along compatible inverse
-images; the canonical inverse-image comparisons are those of Sites, Tag 03CB.
-(blueprint: lem-weil-pbc-etale-system-cone-functor).
-
-Proof: Set G.obj i to inverse image of F i along c.pi at i. Set G.map f to the
-composition comparison for c.pi at j and D.map f.op, followed by inverse image
-of φ f. Take eG i to be the identity isomorphism. For identity arrows, substitute
-hidentity and D.map_id: naturality of the identity comparison and its unit law
-cancel the two unit comparisons, leaving the identity. For f followed by g,
-substitute hcomposition and apply naturality of the composition comparison to
-φ f. Its associativity equation identifies the two nested comparisons; the
-cone equation and D.map_comp identify their composite scheme maps. This gives
-the functor composition law. The transition equation is the definition of map,
-with identity comparison isomorphisms inserted on its two ends. -/
+/-- Pulling a compatible coefficient system to an arbitrary cone gives a functor
+(Stacks, Tags 0EXZ and 03CB). -/
 theorem etale_system_cone_functor
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -18,8 +18,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! # Square-zero section-power obstruction
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS.
-(blueprint: lem-sc-square-zero-section-power-obstruction).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09MS, 0B8S
 -/
 
 @[expose] public section
@@ -30,27 +31,7 @@ universe u
 
 /-- A section has a quasi-coherent degree-one obstruction on the closed subscheme.
 If a tensor power of the section kills it, the next power lifts. No affine-open
-hypothesis is needed to construct the obstruction or establish this implication.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 09MS, equation (30.17.5.1),
-and Cohomology, Lemma 0B8S.
-(blueprint: lem-sc-square-zero-section-power-obstruction).
-
-Proof: Tensor the ideal sequence by L^d, which is invertible, to obtain an exact
-sequence with kernel I tensor L^d and quotient j_*j^*(L^d). The kernel is killed
-by I, since I^2=0. Identify it with the pushforward of its pullback using the
-annihilated-module theorem. The affine-morphism edge isomorphism identifies its
-H^1 with H^1 on Z. Take F=j^*(I tensor L^n), which is quasi-coherent, and take xi
-to be the boundary of s under this identification. Form the direct sum of the
-sequences over d. Local frames of L identify the resulting graded algebra with
-a polynomial algebra, so it is commutative and its kernel is square zero.
-The boundary derivation theorem and induction give boundary(s^(e+1)) =
-(e+1) s^e xi. Inclusion and projection of graded summands identify this with
-the degree n*(e+1) boundary. Naturality of the edge isomorphism identifies the
-s^e action with the displayed H^1 map. Its vanishing therefore makes the
-boundary zero. Exactness supplies a global lift t. Iterated tensor-pullback
-comparisons (including the unit comparison when n=0) give a, and identify
-restriction of t followed by a with the pure tensor power of s. -/
+hypothesis is needed to construct the obstruction or establish this implication. -/
 theorem exists_square_zero_section_power_obstruction
     {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j]

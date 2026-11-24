@@ -19,21 +19,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 
 /-- A section whose canonical restriction to the affine limit is zero vanishes at a later stage.
-Source: Stacks Project, Tag 03Q6, degree zero of lemma-colimit, proof steps (1)--(3);
-Sites, Tag 0A35, lemma-pullback-to-limit; Etale Cohomology, Tag 0EYL.
-Proof: Rewrite the canonical component formula in the vanishing hypothesis.
-The zero-neighbourhood lemma gives an open U in D(j) containing the limit image
-and on which s restricts to zero. Each stage is compact because it is affine,
-and each transition is affine because its source and target are affine.
-Mathlib exists_map_eq_top supplies k and f : k ⟶ j whose image lies in U.
-Use IsOpenImmersion.lift to factor D(f) through U as a morphism of etale objects
-over X. Presheaf functoriality expresses restriction along D(f) as restriction
-to U followed by restriction along this factor. The first restriction is zero;
-the second is a group homomorphism and preserves zero.
-The empty limit is covered by the same compact-limit theorem, which then supplies
-a stage mapping into U. Singleton diagrams and the zero sheaf need no separate case.
-No site-colimit or directed-reindexing theorem is used by this proof.
-(blueprint: affine-open-sections-zero-detection) -/
+(Stacks, Tags 03Q6, 0A35, 0EYL). -/
 theorem affineOpenSections_zero_detection
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

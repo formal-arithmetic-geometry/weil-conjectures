@@ -28,8 +28,9 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHense
 
 /-! # Local strict-henselian stalk criterion for exchange
 
-Source: Stacks Project, Tag 0EZU, lemma-base-change-f-star-general-stalks
-(blueprint: lem-weil-pbc-exchange-strict-local-cohomology-stalk-criterion).
+## References
+
+* [Stacks Project, Tag 0EZU](https://stacks.math.columbia.edu/tag/0EZU)
 -/
 
 @[expose] public section

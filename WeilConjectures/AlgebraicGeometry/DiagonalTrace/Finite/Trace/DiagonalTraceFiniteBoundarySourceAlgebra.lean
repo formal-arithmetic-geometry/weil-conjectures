@@ -351,9 +351,7 @@ private theorem projectedPresentedArrow
   erw [(F.mapDerivedCategorySingleFunctor 0).hom.naturality_assoc]
   simp only [Functor.comp_map, ← Functor.map_comp_assoc]
 
-/-- The finite coefficient input followed by the fixed finite arrow and line coordinates.
-Source: diagonal trace proof (2), finite Cartier composite.
-(blueprint: def-sfb-diagonal-trace-finite-coordinate-map). -/
+/-- The finite coefficient input followed by the fixed finite arrow and line coordinates. -/
 @[irreducible] def finiteBoundaryCoordinateMap
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Abelian A] [Abelian B] [Abelian C]
@@ -374,9 +372,7 @@ Source: diagonal trace proof (2), finite Cartier composite.
     (DerivedCategory.singleFunctor B 0).map unit ≫ delta ≫
     (supportedFiniteShiftedCoordinates V W n b).inv
 
-/-- The derived finite boundary equation in shared categorical coordinates.
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: def-sfb-diagonal-trace-finite-boundary-coordinate-equation). -/
+/-- The derived finite boundary equation in shared categorical coordinates. -/
 @[irreducible] def finiteBoundaryCoordinateEquation
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Abelian A] [Abelian B] [Abelian C]
@@ -401,9 +397,7 @@ Source: diagonal trace proof (2), finite source projection.
     finiteBoundaryCoordinateMap F V L M N W n alpha q unit zHom
       b
 
-/-- The evaluated Ext class in the specified finite source and target coordinates.
-Source: diagonal trace proof (2), finite Cartier normalization.
-(blueprint: def-sfb-diagonal-trace-normalized-finite-ext-class). -/
+/-- The evaluated Ext class in the specified finite source and target coordinates. -/
 @[irreducible] def normalizedFiniteExtClass
     {B : Type*} [Category B] [Abelian B] [HasExt B] [HasExt (ℕᵒᵖ ⥤ B)]
     {S H : ℕᵒᵖ ⥤ B} (xi : Ext S H 2) (n : ℕ) {R T : B}
@@ -413,20 +407,7 @@ Source: diagonal trace proof (2), finite Cartier normalization.
       (Ext.mk₀ t.hom) (add_zero 2)) (zero_add 2)
 
 /-- An ordinary source-unit equation and a normalized evaluated Ext class determine
-its finite boundary under arbitrary exact single, shift and limit comparisons.
-
-Source: diagonal trace proof (2), finite source projection.
-(blueprint: lem-sfb-diagonal-trace-finite-boundary-from-ordinary-unit).
-
-Proof: cancel the finite target coordinate isomorphism. Naturality of the derived
-limit projection moves the source presentation isomorphism next to its inverse.
-The presentation equation replaces the represented arrow by the Ext class.
-Naturality of the exact shift and single comparisons cancels the root transport
-against the target coordinates. The normalized Ext equation is its corresponding
-derived Hom equation by Ext.comp_hom and Ext.mapExactFunctor_hom. The ordinary
-source equation factors through the normalized source isomorphism inverse, so
-this Hom equation applies. The exact-cone projection identity identifies the
-remaining coefficient input with its prescribed ordinary projection. -/
+its finite boundary under arbitrary exact single, shift and limit comparisons. -/
 theorem diagonalTrace_finiteBoundary_of_ordinaryUnit
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Abelian A] [Abelian B] [Abelian C]

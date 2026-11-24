@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.Grp.AB
 /-!
 # Lifting a stalk equivalence to abelian group objects
 
-Source: Stacks Project, Tag 04JQ, the formal transport step.
+## References
+
+* Stacks Project, Tag 04JQ
 -/
 
 @[expose] public section

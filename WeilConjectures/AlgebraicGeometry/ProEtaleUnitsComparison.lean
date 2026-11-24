@@ -10,7 +10,9 @@ import WeilConjectures.Mathlib.Algebra.Category.Grp.Adjunctions
 /-!
 # Comparison for units on the pro-etale site
 
-Source: Stacks Project, Tags 0GLZ and 01ZC.
+## References
+
+* Stacks Project, Tags 0GLZ and 01ZC.
 -/
 
 @[expose] public noncomputable section
@@ -99,16 +101,7 @@ private theorem isIso_app_of_colimits {C B J : Type*} [Category* C] [Category* B
   rw [heq]
   infer_instance
 
-/-- The comparison counit for full units is invertible.
-Source: Stacks Project, Tags 0GLZ and 01ZC
-(auxiliary; not a blueprint node).
-Proof: on an affine pro-etale presentation, comparison sections are the filtered
-colimit of etale sections. Units commute with filtered colimits of rings: descend
-a unit and its inverse, then descend their product equation. Global sections
-turn cofiltered limits of affine schemes into filtered colimits of rings. The
-counit is already invertible on etale objects by full faithfulness. Naturality
-and uniqueness of colimits prove invertibility on each affine pro-etale object;
-the affine dense subsite detects isomorphisms of sheaves. -/
+/-- The comparison counit for full units is invertible (Stacks, Tags 0GLZ and 01ZC). -/
 theorem proEtaleUnitsCounit_isIso (Z : Scheme.{u}) :
     IsIso ((comparisonAdjunction AddCommGrpCat.{u + 1} Z).counit.app
       (Scheme.ProEt.gmSheaf Z)) := by

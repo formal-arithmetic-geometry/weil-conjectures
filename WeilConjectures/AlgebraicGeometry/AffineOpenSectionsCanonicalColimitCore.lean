@@ -16,12 +16,8 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry TopologicalSpace
 /-- The affine continuity theorem for a supplied canonical restriction transformation.
-Source: Stacks Project, Tag 03Q6, degree-zero continuity on affine neighbourhoods.
-The affine-site continuity argument identifies sections on the limiting affine scheme with
-the filtered colimit of sections on the affine stages; the displayed component formula
-ensures that this identification is the cocone built from ν. The proof uses the limit cone
-and the affine/open hypotheses.
-(blueprint: affine-open-sections-canonical-colimit-core) -/
+Sections on the limiting affine scheme are the filtered colimit of sections on the affine
+stages, via the cocone built from `ν` (Stacks, Tag 03Q6). -/
 theorem affineOpenSections_canonical_colimit_core
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

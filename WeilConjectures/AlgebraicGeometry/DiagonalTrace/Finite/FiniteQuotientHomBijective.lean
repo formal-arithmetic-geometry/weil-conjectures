@@ -38,8 +38,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 
-/-! Integral generator homomorphism bijection for finite coefficients.
-(blueprint: lem-sfb-finite-quotient-hom-bijective). -/
+/-! Integral generator homomorphism bijection for finite coefficients. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

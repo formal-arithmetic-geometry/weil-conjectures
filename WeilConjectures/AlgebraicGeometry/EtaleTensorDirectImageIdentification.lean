@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorOpenSectionsNaturality
 
 /-! # Direct image of tensor-sections sheaves
 
-Source: Stacks Project, Tags 03DW, 03P2 and 0733.
+## References
+
+* Stacks Project, Tags 03DW, 03P2 and 0733
 -/
 
 @[expose] public section
@@ -87,18 +89,7 @@ private theorem etaleTensorOpenSectionIso_coeff_natural
             (Category.assoc _ _ _).symm)))
 
 /-- The underlying abelian sheaf is the direct image of the tensor-sections sheaf,
-naturally in the specified tensor-pullback maps.
-Source: Stacks Project, Descent, Tag 03DW(2), and Etale Cohomology, Tag 03P2.
-(blueprint: lem-sc-etale-tensor-direct-image-identification)
-
-Proof: on an open W, compare restriction along W into X with tensor pullback
-using uniqueness of left adjoints to module pushforward. Normalize this comparison
-by the restriction and tensor adjunction units. Evaluation at the top open of W
-identifies F(W) with the tensor-pullback sections. The composition unit equation
-makes these identifications commute with restriction to smaller opens, so they
-assemble into a sheaf isomorphism. Naturality of the left-adjoint comparison in F,
-and the component formula hm, give the displayed naturality square. This also
-works for the empty open and does not require X to be affine or separated. -/
+naturally in the specified tensor-pullback maps (Stacks, Tags 03DW and 03P2). -/
 theorem etaleTensorDirectImageIdentification
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale)
     [i.IsContinuous (Opens.grothendieckTopology X.carrier) X.smallEtaleTopology]

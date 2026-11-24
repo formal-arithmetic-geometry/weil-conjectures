@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeNaturality
 
 /-! # Finite-stage chart representatives of raw cartesian classes
 
-Source: Stacks Project, Tags 0EYM, 0EYL and 0GIT.
-(blueprint: lem-sc-cartesian-raw-class-chart-representative).
+## References
+
+* Stacks Project, Tags 0EYM, 0EYL and 0GIT
 -/
 
 @[expose] public section
@@ -44,34 +45,8 @@ private theorem cartesian_exchange_comp_named {X S T T' T'' : Scheme.{u}}
   subst d
   exact cartesian_map_comp_local f g g' g'' a b w w' P
 
-/-- A raw stage class admits a chart representative after one further base change.
-
-Source: Stacks Project, Tags 0EYL and 0GIT for descent with the original stage
-coefficient complex fixed; Tag 0EYM for the exchange comparison square.
-(blueprint: lem-sc-cartesian-raw-class-chart-representative).
-
-Proof: Restrict the inverse system to arrows into i and descend the affine test
-object to an affine etale model. The resulting models form a limiting qcqs system
-with affine transitions. Apply derived cohomology continuity with the fixed
-bounded-below complex cartesianDerivedImage f (D.obj i).hom F[0]. The free
-representable sections adjunction identifies the given raw class with the
-hypercohomology of its pullback to V, so surjectivity gives a representative at
-one model. For this identification with arbitrary bounded-below coefficients,
-take a bounded-below injective representative: evaluation at the free
-representable generator computes its restricted derived sections. Replace the
-descended affine model by its base change to the representative's stage and
-rename that stage j; it is still affine because the transition is affine.
-Apply the stage exchange to that representative. Derived adjunction
-and the raw restricted cohomology comparison identify it with x on the
-cartesian chart. Let l be the identity object at this new stage, and let b be
-its arrow to i. Pasting of exchange maps identifies the limit image of x with
-the limit image of z. For any arrow a to l, naturality of restricted cohomology,
-derived adjunction, the exact inverse-image single and shift comparisons, and
-exchange pasting identify the pullback of x with z followed by the displayed
-transition along a.left followed by b. These are equalities of specified maps,
-before invoking continuity on the chart system. No zero hypothesis or eventual
-vanishing is asserted. The argument also includes empty affine V and q=0.
--/
+/-- A raw stage class admits a chart representative after one further base change
+(Stacks, Tags 0EYL, 0GIT and 0EYM). -/
 theorem exists_cartesianRawClass_chart_representative
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

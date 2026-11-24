@@ -15,8 +15,11 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Normalized finite-level geometric comparisons
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16,
+  pp. 21 and 34--35
+* Stacks Project, Tags 03CY, 06YY, 07A4
 -/
 
 @[expose] public noncomputable section
@@ -55,29 +58,7 @@ private theorem inverseMateIso_mate
     (mateEquiv a b (.mk _ _ _ _ (inverseMateIso a b e).inv)) = e.hom := by
   exact ((mateEquiv a b).apply_symm_apply _)
 
-/-- Normalized realizations and coefficient projection, without singleton extension.
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16,
-printed pp. 21 and 34--35; Stacks 03CY, 06YY and 07A4
-(blueprint: lem-pur-etale-brown-level-comparisons).
-
-Proof: restriction along the constant-ring sheafification unit is an additive
-equivalence, retaining sections and maps. Localize it exactly to obtain the three
-level realizations. The identity on sections gives ordinary scalar restriction;
-localization fixes its derived comparison, and the scalar-adjunction mate fixes scalar
-extension. Identify ordinary geometric direct images on each section. Uniqueness of
-their universal right derived functors, with the specified units, gives the right-image
-comparison; its adjunction mate gives inverse image. The open extension comparison is
-the mate against the two open extension/restriction adjunctions. Compose it with the
-proper right-image comparison to define levelComparison, by associativity.
-Take the mates of the recorded derivedTensor maps for the proper and open factors.
-After the normalized realizations, the proper mate is the published proper coefficient
-projection and the open mate is the scalar-balancing comparison. The finite torsion
-coefficient projection theorem makes the former invertible; the latter is already an
-isomorphism. Their composite defines projection, by associativity. Applying the
-scalar transpose equations and composing the two geometric counits identifies its
-inverse with compactScalarMap, which is projection_recorded_q. This uses neither
-singleton extensions nor any Brown adjoint. Identity transitions and the zero quotient
-ring are included: their normalized units and the same mate calculation apply. -/
+/-- Normalized realizations and coefficient projection, without singleton extension. -/
 theorem etaleBrownLevelComparisons
     (D : WeilConjectures.FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

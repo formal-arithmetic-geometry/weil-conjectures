@@ -14,8 +14,9 @@ set_option linter.privateModule false
 
 /-! # Localization of the sectionwise tensor comparison
 
-Source: Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 03CV, 03EK, 06YL, 06YS and 08J9.
 -/
 
 @[expose] public noncomputable section

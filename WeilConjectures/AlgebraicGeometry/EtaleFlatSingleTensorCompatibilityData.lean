@@ -10,8 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-! # Data for tensor compatibility of degree-zero etale sheaves
 
-Source: Stacks Project, Cohomology, Tags 06YQ and 06YU.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 06YQ and 06YU
 -/
 
 @[expose] public section
@@ -31,9 +32,7 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X X' : AlgebraicGeometry.Scheme.{u}}
 
-/-- The canonical degree-zero derived pairing computed on a flat left factor.
-Source: Stacks Tag 06YQ; (auxiliary; not a blueprint node).
-This explicit result type uses the same derived tensor bifunctor as its consumers. -/
+/-- The canonical degree-zero derived pairing computed on a flat left factor (Stacks, Tag 06YQ). -/
 @[irreducible]
 noncomputable def singleFunctorFlatPairing
     (L M N : Sheaf X.smallEtaleTopology B) (hL : ObjectProperty.flat L)
@@ -44,10 +43,8 @@ noncomputable def singleFunctorFlatPairing
   (singleFunctorObjTensorIso (A := B) (X := X) L M hL).hom ≫
     (DerivedCategory.singleFunctor _ 0).map f
 
-/-- Apply an ordinary pullback arrow after the canonical single/pullback comparison.
-Source: Stacks Tag 06YQ;
-(auxiliary; not a blueprint node).
-No resolution or inverse-image comparison is chosen here. -/
+/-- Apply an ordinary pullback arrow after the canonical single/pullback comparison
+(Stacks, Tag 06YQ). -/
 noncomputable def singleFunctorPullbackMap (v : X' ⟶ X)
     {L : Sheaf X.smallEtaleTopology B} {L' : Sheaf X'.smallEtaleTopology B}
     (f : (upperStar B v).obj L ⟶ L') :
@@ -56,10 +53,8 @@ noncomputable def singleFunctorPullbackMap (v : X' ⟶ X)
   (singleFunctorCompLeftDerivedUpperStarIso B v).hom.app L ≫
     (DerivedCategory.singleFunctor _ 0).map f
 
-/-- The equations expressing the tensor compatibility of flat degree-zero models.
-Source: Stacks Tags 06YQ and 06YU;
-(auxiliary; not a blueprint node).
-The support sheaves and all ordinary multiplication or support maps are arbitrary inputs. -/
+/-- The equations expressing the tensor compatibility of flat degree-zero models
+(Stacks, Tags 06YQ and 06YU). -/
 structure EtaleFlatSingleTensorCompatibility (v : X' ⟶ X)
     [(upperStar B v).PreservesFlat] : Prop where
   associativity {L M N P Q R T : Sheaf X.smallEtaleTopology B}

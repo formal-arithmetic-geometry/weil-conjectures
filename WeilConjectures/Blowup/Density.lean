@@ -12,8 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreti
 
 # Scheme-theoretic density is preserved by admissible blow-ups
 
-This file proves the density-preservation lemma for admissible blow-ups
-(blueprint: `lemma:nagata-admissible-blowup-preserves-density`; proof order item 20):
+This file proves the density-preservation lemma for admissible blow-ups:
 
 - `Scheme.IdealSheafData.IsInvertible.isSchemeTheoreticallyDominant_compl_support`:
   the complement of the support of an invertible ideal is scheme-theoretically
@@ -26,13 +25,12 @@ This file proves the density-preservation lemma for admissible blow-ups
   is a quasi-compact scheme-theoretically dense open of `X`, its inverse image under a
   `U`-admissible blow-up is scheme-theoretically dense in the total space;
 - `AlgebraicGeometry.IsAdmissible.dense_preimage_blowupMap_of_qcqs` and its open form
-  `AlgebraicGeometry.IsAdmissible.dense_coe_preimage_blowupMap`
-  (blueprint: `lemma:nagata-conrad-dense-in-admissible-blowup`): the inverse image of a
+  `AlgebraicGeometry.IsAdmissible.dense_coe_preimage_blowupMap`: the inverse image of a
   dense subset of a qcqs scheme under an admissible blow-up is topologically dense. The
   Noetherian special case is `AlgebraicGeometry.IsAdmissible.dense_preimage_blowupMap`.
 
-It also proves the existence statement of the blueprint's
-`lemma:nagata-conrad-schematically-dense-blowup`, in its absolute and relative forms:
+It also proves the existence of a blow-up making the inverse image of a quasi-compact open
+scheme-theoretically dense, in absolute and relative forms:
 
 - `AlgebraicGeometry.exists_isAdmissible_isSchemeTheoreticallyDominant_preimage`: for a
   quasi-compact open `U` of a qcqs scheme `X` there is a `U`-admissible blow-up in which
@@ -44,6 +42,10 @@ It also proves the existence statement of the blueprint's
   total space of `B` and compose the two blow-ups (`IsAdmissible.exists_comp`, Stacks
   Tag 080L).
 
+## References
+
+* Stacks Project, Tag 01PH
+* Stacks Project, Tag 080L
 -/
 
 @[expose] public section
@@ -112,7 +114,6 @@ theorem IsInvertible.isSchemeTheoreticallyDominant_compl_support
         Γ(Y, Y.basicOpen (a x)) (powers_le_nonZeroDivisors (ha x))
 
 /-- **The complement of the center is scheme-theoretically dense in a blow-up**
-(blueprint: `lemma:nagata-admissible-blowup-preserves-density`, blow-up part).
 
 The extension of `I` to the blow-up is an invertible ideal. -/
 theorem isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support
@@ -130,8 +131,7 @@ namespace IsAdmissible
 
 variable {X : Scheme.{u}} {U : X.Opens} (B : IsAdmissible X U)
 
-/-- **Scheme-theoretic density is preserved by admissible blow-ups** (blueprint:
-`lemma:nagata-admissible-blowup-preserves-density`; proof order item 20): if `U` is a
+/-- **Scheme-theoretic density is preserved by admissible blow-ups**: if `U` is a
 quasi-compact scheme-theoretically dense open of `X`, then the inverse image of `U`
 under any `U`-admissible blow-up is scheme-theoretically dense in the total space. -/
 theorem isSchemeTheoreticallyDominant_preimage_ι [QuasiCompact U.ι]
@@ -171,8 +171,7 @@ theorem dense_coe_preimage_preservedOpen [CompactSpace X] [QuasiSeparatedSpace X
     Scheme.Hom.denseRange (B.I.blowupMap ⁻¹ᵁ B.preservedOpen).ι
   rwa [DenseRange, Scheme.Opens.range_ι] at hdr
 
-/-- **Topological density transports through an admissible blow-up** (blueprint:
-`lemma:nagata-conrad-dense-in-admissible-blowup`).
+/-- **Topological density transports through an admissible blow-up**.
 
 The preimage of the complement of the center is dense
 (`IsAdmissible.dense_coe_preimage_preservedOpen`) and the blow-up is an isomorphism
@@ -226,15 +225,9 @@ theorem dense_preimage_blowupMap [IsNoetherian X] {D : Set X} (hD : Dense D) :
 
 end IsAdmissible
 
-/-- **A `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**
-(blueprint: `lemma:nagata-conrad-schematically-dense-blowup`, absolute form).
-
-Blow up a finite-type center supported exactly on the boundary `Uᶜ`
-(`Scheme.exists_finiteType_ideal_coe_support_eq_compl`, Stacks Tag 01PH). Such a center
-is `U`-admissible and its preserved open is `U` on the nose, so the density of the
-inverse image of the complement of the center
-(`Scheme.IdealSheafData.isSchemeTheoreticallyDominant_blowupMap_preimage_compl_support`)
-is the assertion. -/
+/-- **A `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**: for a
+quasi-compact open `U` of a qcqs scheme `X`, some `U`-admissible blow-up has
+scheme-theoretically dense inverse image of `U`. -/
 theorem exists_isAdmissible_isSchemeTheoreticallyDominant_preimage
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) :
@@ -252,15 +245,8 @@ theorem exists_isAdmissible_isSchemeTheoreticallyDominant_preimage
 
 namespace IsAdmissible
 
-/-- **A further `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**
-(blueprint: `lemma:nagata-conrad-schematically-dense-blowup`, relative form).
-
-The total space of `B` is again qcqs and `B.I.blowupMap ⁻¹ᵁ U` is again quasi-compact
-(`IsAdmissible.isProper_blowupMap`), so the absolute form
-`exists_isAdmissible_isSchemeTheoreticallyDominant_preimage` applies to it; composing the
-two blow-ups (`IsAdmissible.exists_comp`, Stacks Tag 080L) gives a `U`-admissible center
-`K` on `X` together with an identification of the two total spaces over `X`, along which
-the density transports. -/
+/-- **A further `U`-admissible blow-up in which `U` becomes scheme-theoretically dense**:
+the blow-up may be chosen to dominate a given `U`-admissible blow-up `B`. -/
 theorem exists_comp_isSchemeTheoreticallyDominant_preimage
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) (B : IsAdmissible X U) :

@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReduce
 /-! # Target projection transport for ordinary finite reduction
 
 The coefficient-side finite comparison removes the target quotient restriction.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -26,12 +25,8 @@ variable {C C' : Type u} [SmallCategory C] [SmallCategory C']
 variable {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
-/-- The target quotient restriction is canonically the target projection change-of-scalars.
-Source: Stacks Project, sites-modules.tex, Tags 03EK and 03EL.
-Proof: whisker the finite coefficient comparison on the second site by the completed
-inverse-image pullback functor.
-(auxiliary; not a blueprint node).
--/
+/-- The target quotient restriction is canonically the target projection change-of-scalars
+(Stacks, Tags 03EK and 03EL). -/
 theorem ordinaryReducedPull_targetQuotientIso (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (n : ℕ) :
     Nonempty ((pull F (completedMap F A I) ⋙ res (coefficientMap J' A I) ⋙

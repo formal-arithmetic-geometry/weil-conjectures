@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.SixFunctors.MixedDerivedMateUnit
 import WeilConjectures.AlgebraicGeometry.ProperGraphTransfer.EtaleProperGraphTransfer
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 
-/-! # Unit calculus for exact-derived transposition -/
+/-! # Unit calculus for exact-derived transposition
+
+## References
+
+* Stacks Project, Tags 0D6E, 0F7B
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -274,10 +279,7 @@ private lemma transpose_baseChange_normal
   simp only [Functor.map_comp, Category.assoc]
   rw [hn, reassoc_of% hb]
 
-/-- Exact-derived transposition and mixed base change commute with the homotopy unit.
-The proof transports the exact adjunction unit, then applies naturality and the
-mixed base-change unit identity. Source: Stacks Project Tags 0D6E and 0F7B.
-(blueprint: lem-pur-proper-sheaf-transpose-unit-calculus). -/
+/-- Exact-derived transposition and mixed base change commute with the homotopy unit. -/
 theorem exactDerivedTranspose_baseChange_normal
     {C D E Z S : Type*} [Category C] [Category D] [Category E]
     [Category Z] [Category S]

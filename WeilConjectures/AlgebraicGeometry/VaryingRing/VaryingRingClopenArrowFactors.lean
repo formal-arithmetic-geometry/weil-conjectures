@@ -10,10 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpe
 /-!
 # The two factors of the clopen inverse-image arrow
 
-Source: Stacks Project, Tag 0F7B, open case
-(blueprint: def-sp-varying-ring-clopen-arrow-factors).
 The cartesian open comparison and the subsequent clopen section projection are
 kept separate, before taking proper-adjunction mates.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0F7B, 05RU, 09AE
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
 
-/-- Exact localization of a transformation between two composites.
-Source: Stacks 05RU (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+/-- Exact localization of a transformation between two composites. -/
 def localizedArrow
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]
@@ -72,8 +73,7 @@ private theorem localizedArrow_comp
   simp only [NatTrans.mapHomologicalComplex_comp, Functor.whiskerRight_comp,
     Localization.comp_liftNatTrans_assoc]
 
-/-- The exact cartesian open comparison, prior to the clopen projection.
-Source: Stacks 09AE (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+/-- The exact cartesian open comparison, prior to the clopen projection. -/
 def openBaseChange {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -81,8 +81,7 @@ def openBaseChange {U' U X' X : Scheme.{u}}
   localizedArrow (extension R φ j) (pull R φ g) (pull R φ a) (extension R φ j')
     (moduleBeta R φ a j' j g h hsq).hom
 
-/-- The clopen section projection, with its outgoing open and pullback compositors.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+/-- The clopen section projection, with its outgoing open and pullback compositors. -/
 def moduleSectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -103,8 +102,7 @@ def moduleSectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     ((moduleGComp R φ (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
       (eqToIso (congrArg (pull R φ) (pullback.lift_snd k r h))).hom) (extension R φ k)
 
-/-- Exact localization of the clopen section projection.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+/-- Exact localization of the clopen section projection. -/
 def sectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -113,8 +111,7 @@ def sectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   localizedArrow (pull R φ (pullback.snd p i)) (extension R φ (pullback.fst p i))
     (pull R φ r) (extension R φ k) (moduleSectionArrow R φ k r p i h)
 
-/-- The same clopen section factor in the existing strict-tower calculus.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors). -/
+/-- The same clopen section factor in the existing strict-tower calculus. -/
 def strictSectionArrow (B : Type (u + 1)) [CommRing B]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
@@ -144,10 +141,7 @@ def strictSectionArrow (B : Type (u + 1)) [CommRing B]
       ((StrictTower.gComp B (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
         (eqToIso (congrArg (StrictTower.G B) (pullback.lift_snd k r h))).hom) (StrictTower.J B k)
 
-/-- The varying-system arrow is the composite of its two separately localized factors.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors).
-Proof: localization preserves composition; the original moduleAlpha is the open
-base-change comparison followed by moduleSectionArrow, with the same associators. -/
+/-- The varying-system arrow is the composite of its two separately localized factors. -/
 theorem alpha_factorization {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -159,9 +153,7 @@ theorem alpha_factorization {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
   rw [openBaseChange, sectionArrow, localizedArrow_comp]
   rfl
 
-/-- The strict-tower arrow has the identical two-factor expression.
-Source: Stacks 0F7B (blueprint: def-sp-varying-ring-clopen-arrow-factors).
-Proof: expand the two definitions and associate their composites. -/
+/-- The strict-tower arrow has the identical two-factor expression. -/
 theorem strictAlpha_factorization (B : Type (u + 1)) [CommRing B]
     {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]

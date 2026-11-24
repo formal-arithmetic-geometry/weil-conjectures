@@ -32,7 +32,12 @@ public import Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
-/-! Compatibility of the two presentations of the pro-etale inverse-image map. -/
+/-! Compatibility of the two presentations of the pro-etale inverse-image map.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 00WX
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -43,16 +48,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 /-- The inverse-image map defined from the pro-etale adjunction is the adjoint of the
-constant direct-image map.
-
-Source: Stacks Project, Tag 00WX; this is the adjunction compatibility used in the
-integer endpoint calculation.
-(blueprint: lem-sp-integral-site-pullback-integer-endpoint-inverse-image).
-
-Proof: expand `proEtaleConstantInverseImageMap`.  The hom-set equivalence for the
-pro-etale inverse-image adjunction sends the counit composite back to its defining
-direct-image map by `Adjunction.homEquiv_counit`; the two adjunction presentations
-have the same sheaf-pullback construction. -/
+constant direct-image map. -/
 theorem integral_site_pullback_integer_endpoint_inverse_image {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _).symm
         (Scheme.proEtaleConstantDirectImageMap f AddCommGrpCat.{u + 1}

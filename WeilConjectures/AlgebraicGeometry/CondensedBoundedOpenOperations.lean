@@ -21,18 +21,7 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Open extension and restriction preserve bounded constant-model constructibility,
-without a finite-Tor assumption on their inputs.
-Source: current blueprint def-fix-six-functor-datum and its open factor;
-the finite-stratification extension-by-zero construction
-(blueprint: lem-e6-condensed-bounded-open-operations).
-
-Proof: the exact extension functor preserves the cohomological bounds. Extend
-each finite stratification of a cohomology sheaf by its closed complement, on
-which extension by zero is zero and hence has a finite constant model. The
-homology comparison for an exact derived functor identifies these cohomology
-sheaves with those of the derived extension. For restriction, pull back each
-stratification and each finite constant local model; exactness again preserves
-bounds and identifies cohomology. No Tor-amplitude condition is used. -/
+without a finite-Tor assumption on their inputs. -/
 theorem condensedBoundedOpenOperations
     (ℓ : ℕ) [Fact ℓ.Prime] (p : ℕ) [Fact p.Prime] (hpℓ : p ≠ ℓ)
     (k : Type u) [Field k] [CharP k p]

@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 
 /-! # Degree-zero chain maps into connective complexes
 
-Source: Stacks Project, Derived Categories, Section 13.11 (Tag 05RR), truncation
-calculus of fractions. (blueprint: lem-sc-connective-single-hom)
+## References
+
+* Stacks Project, Tag 05RR
 -/
 
 @[expose] public section
@@ -24,17 +25,7 @@ namespace DerivedCategory
 
 /-- Localization does not change maps from a degree-zero object into a complex
 which is zero in negative degrees. No projectivity or acyclicity of global sections
-is assumed.
-Source: Stacks Project, Derived Categories, Section 13.11 (Tag 05RR).
-(blueprint: lem-sc-connective-single-hom)
-
-Proof: Truncate a right fraction to degrees both at least and at most zero on its
-source. The denominator is then a quasi-isomorphism between complexes concentrated
-in degree zero, hence an isomorphism. This proves surjectivity. For injectivity apply
-zeroth homology. In the source both adjacent differentials vanish, so its zeroth
-homology is its zeroth term. In the target the incoming differential vanishes, so
-zeroth homology embeds into the zeroth term. Naturality recovers the degree-zero
-component, which determines a chain map from a single complex. -/
+is assumed (Stacks, Tag 05RR). -/
 theorem connective_single_hom_bijective
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (M : C) (K : CochainComplex C ℤ)

@@ -13,7 +13,9 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 /-!
 # Zero-differential free graded modules as coproducts of single complexes
 
-Source: Stacks Project, Differential Graded Algebra, Tag 09KN, proof.
+## References
+
+* [Stacks Project, Tag 09KN](https://stacks.math.columbia.edu/tag/09KN), proof
 -/
 
 @[expose] public section
@@ -118,22 +120,7 @@ private noncomputable def freeBasisEvalIsColimit
     exact hx
 
 /-- A zero-differential complex with a specified free basis in each degree is the
-coproduct of copies of the ring concentrated in the degrees of those basis vectors.
-
-Source: Stacks Project, Differential Graded Algebra, Tag 09KN,
-proof, the identification of the upper and lower graded free modules.
-
-Proof. Index the summands by pairs `(n, b)` with `b : B n`. Map the copy of the
-ring concentrated in degree `n` to `K` by sending `1` to `e n` inverse applied to
-`Finsupp.single b 1`. This is a map of complexes since all differentials of `K`
-are zero. In any fixed degree `m`, the summands with `n != m` are zero. The
-remaining summands have the usual free-module coproduct universal property:
-a linear map out of `B m →₀ A` is uniquely determined by its values on the basis
-vectors. Transport that property along `e m`. Evaluation jointly detects
-colimits of complexes, so these inclusions exhibit `K` as the coproduct of the
-single complexes. Uniqueness of colimits gives the required isomorphism.
-This includes empty basis types and the zero ring.
-(blueprint: lem-pc-zero-differential-free-coproduct) -/
+coproduct of copies of the ring concentrated in the degrees of those basis vectors. -/
 theorem nonempty_iso_coproduct_single_of_zero_d
     {A : Type u} [CommRing A] (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (B : ℤ → Type u) (e : ∀ n : ℤ, K.X n ≃ₗ[A] (B n →₀ A))

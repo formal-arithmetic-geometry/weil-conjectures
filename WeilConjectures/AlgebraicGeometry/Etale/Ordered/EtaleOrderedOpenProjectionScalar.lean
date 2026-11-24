@@ -14,6 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Ordered.EtaleOrderedOpenProjectio
 /-! # Scalar change for the local ordered open projection
 
 This is the open-immersion square before inserting a compactification pullback compositor.
+
+## References
+
+* Stacks Project, Tags 07A4, 0E8I, 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +37,7 @@ attribute [local irreducible] derivedTensorSymmetry
   leftDerivedUpperStarComp leftDerivedUpperStarIsoMapDerivedCategory
   Functor.leftDerivedFunctorIsoMapDerivedCategory
 
-/-- The ordered open projection, without any composite-pullback identification.
-Source: Stacks 0E8I and 0GL6 (blueprint: lem-pur-etale-ordered-open-projection-scalar). -/
+/-- The ordered open projection, without any composite-pullback identification. -/
 @[irreducible] def orderedOpenProjection (R : Type (u + 1)) [CommRing R]
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
     (T : DerivedCategoryModule R Z) (M : DerivedCategoryModule R X) :
@@ -50,28 +53,7 @@ Source: Stacks 0E8I and 0GL6 (blueprint: lem-pur-etale-ordered-open-projection-s
       (((derivedTensorSymmetry (ModuleCat.{u + 1} R) X).hom.app M).app
         ((upperStar (ModuleCat.{u + 1} R) j).leftDerivedFunctor.obj T))
 
-/-- Scalar change commutes with the local ordered open projection.
-Source: Stacks 0E8I, 0GL6 and 07A4; step 1 and the signed-symmetry part of step 2
-of lem-pur-etale-open-scalar-projection.
-(blueprint: lem-pur-etale-ordered-open-projection-scalar).
-
-Proof: take the mixed tensor/scalar equation of etaleOpenScalarComparisons at M,T.
-Identify openScalarExtension with ExceptionalCoefficients.openIso by their common
-open-adjunction unit transpose. Identify openScalarRestriction with the inverse of
-scalarPullbackIso transported along the exact/left-derived pullback comparisons.
-The inverse of etaleHomTensorComparison is ExceptionalCoefficients.tensorIso:
-both have the same ordinary scalar balancing map on flat K-flat representatives,
-and the normalization uniqueness theorem identifies them. Cancel the invertible
-open projection and scalar comparisons to orient the mixed equation from the
-ambient tensor product to extension by zero. Transport exact restriction to left
-derived restriction. Conjugate by the signed symmetries on Z and X. Scalar
-balancing commutes with the signed swap: on a bidegree (p,q) tensor both routes
-have the sign (-1)^(p*q), and the coefficient scalar has degree zero. These are
-identical chain maps on flat K-flat representatives, hence identical after
-localization. Naturality extends the equality to every derived pair. This needs
-no compactification, proper direct image, or pullback composition. The empty open,
-zero objects and zero coefficient rings satisfy the same unit and balancing
-identities; no flatness, boundedness, finiteness or quasi-compactness is assumed. -/
+/-- Scalar change commutes with the local ordered open projection. -/
 theorem etaleOrderedOpenProjectionScalar
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

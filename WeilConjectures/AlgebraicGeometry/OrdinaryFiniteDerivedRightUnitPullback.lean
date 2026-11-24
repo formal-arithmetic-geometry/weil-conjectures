@@ -8,8 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 /-! # Pullback of the inverse right unit with constant degree-zero coefficients
 
-Source: monoidal inverse-image coherence, Stacks Tag 06YU; the right-unit step of
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 06YU (monoidal inverse-image coherence).
 -/
 
 @[expose] public noncomputable section
@@ -86,18 +87,8 @@ private theorem generic_unit
       (singleFunctorObjUnitIso B Y).inv) hu
     (leftDerivedUpperStarTensorComparison_rightUnitor_hom B f K)
 
-/-- The prescribed constant-object comparison preserves the inverse right-unit map.
-
-Source: Stacks Tag 06YU and the unit step of the finite-twist evaluation argument
-(auxiliary; not a blueprint node).
-
-Proof: identify the constant degree-zero complex with the derived monoidal unit.
-The single/pullback comparison is the exact-functor comparison; at the coefficient unit
-its composite with constant pullback is the monoidal unit comparison. Naturality of the
-tensor comparison in this unit identification reduces the assertion to oplax right
-unitality. Postcomposition with the right-unitor isomorphism then gives its inverse
-version. All objects and pullbacks are arbitrary, including zero coefficients and
-empty schemes. -/
+/-- The prescribed constant-object comparison preserves the inverse right-unit map
+(Stacks, Tag 06YU). -/
 theorem ordinaryFiniteDerivedRightUnit_pullback
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :

@@ -11,8 +11,9 @@ import WeilConjectures.CategoryTheory.FlatConstantTensorProZeroCones
 
 /-! # Single-complex tensor comparisons for ordinary reduction towers
 
-Source: Stacks Project, Modules on Sites, Tag 03EK; Cohomology on Sites, total tensor.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +27,7 @@ attribute [local instance] flatConstantCochainMonoidal flatConstantCochainMonoid
   SheafOfModules.monoidalCategory
   Functor.preservesZeroMorphisms_of_additive
 
-/-- The termwise tensor of the unit complex is the single quotient complex.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The termwise tensor of the unit complex is the single quotient complex (Stacks, Tag 03EK). -/
 @[irreducible] def quotientUnitIso
     (O : Sheaf J CommRingCat.{u})
     (Q : Mod O) :
@@ -36,8 +36,8 @@ Source: Stacks 03EK (auxiliary; not a blueprint node). -/
   (CochainComplex.mapBifunctorSingle₂Iso (curriedTensor _) Q (𝟙_ _)).symm ≪≫
     λ_ ((HomologicalComplex.single _ (.up ℤ) 0).obj Q)
 
-/-- Total tensor with a termwise tensor of the unit is ordinary termwise tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Total tensor with a termwise tensor of the unit is ordinary termwise tensor (Stacks, Tag 03EK).
+-/
 @[irreducible] def quotientTensorIso
     (O : Sheaf J CommRingCat.{u})
     (Q : Mod O) (P : CochainComplex (Mod O) ℤ) :
@@ -104,13 +104,11 @@ private lemma quotientTensorIso_naturality
       exact congrArg (fun z ↦ (tensorLeft P).map (quotientUnitIso J O Q).hom ≫ z)
         (singleTensor_naturality J O P f)
 
-/-- The tower of right tensor functors attached to a coefficient tower.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The tower of right tensor functors attached to a coefficient tower (Stacks, Tag 03EK). -/
 def tensorTower (O : Sheaf J CommRingCat.{u}) (Q : ℕᵒᵖ ⥤ Mod O) :
     Mod O ⥤ ℕᵒᵖ ⥤ Mod O := (Q ⋙ (curriedTensor (Mod O)).flip).flip
 
-/-- Tensor towers are additive by evaluation at every level.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- Tensor towers are additive by evaluation at every level (Stacks, Tag 03EK). -/
 theorem tensorTower_additive (O : Sheaf J CommRingCat.{u})
     (Q : ℕᵒᵖ ⥤ Mod O) : (tensorTower J O Q).Additive := by
   constructor
@@ -121,15 +119,8 @@ theorem tensorTower_additive (O : Sheaf J CommRingCat.{u})
 
 attribute [local instance] tensorTower_additive
 
-/-- Tensoring the termwise coefficient tower at the cochain unit gives its value at P.
-
-Source: Stacks 03EK and the total tensor convention of Cohomology on Sites.
-(auxiliary; not a blueprint node).
-
-Proof: identify termwise tensor of the unit with the quotient in degree zero by
-single-factor total tensor and the left unitor. Tensor this identification with P,
-then use single-factor total tensor again. Naturality in each quotient transition
-is the naturality of the single-factor comparison and the left unitor. -/
+/-- Tensoring the termwise coefficient tower at the cochain unit gives its value at P
+(Stacks, Tag 03EK). -/
 def tensorTowerComparison (O : Sheaf J CommRingCat.{u})
     (Q : ℕᵒᵖ ⥤ Mod O) (P : Cx O) :
     (((tensorTower J O Q).mapHomologicalComplex (.up ℤ)).obj (𝟙_ (Cx O))).asFunctor ⋙

@@ -15,8 +15,11 @@ import Mathlib.Data.Fintype.Order
 /-!
 # Lifting maps into a tensor colimit
 
-Source: Stacks Project, Algebra, Tag 05LI, proof of (3).
-(blueprint: lem-pc-fp-restricted-hom-colimit).
+A map from a finitely presented stage module into a tensor colimit lifts to a later stage.
+
+## References
+
+* Stacks Project, Algebra, Tag 05LI (proof of (3))
 -/
 
 @[expose] public section
@@ -90,22 +93,7 @@ private theorem lift_finitePresentation
   exact (hc _ _ _ _).trans (LinearMap.congr_fun ha₀ z)
 
 /-- A map from a finitely presented stage module into a tensor colimit lifts as
-an uncurried map at a later stage. The target module need not be finitely presented.
-
-Source: Stacks Project, Algebra, Tag 05LI, proof of (3),
-label algebra-lemma-module-map-property-in-colimit.
-(blueprint: lem-pc-fp-restricted-hom-colimit).
-
-Proof: choose finite generators and finitely many generators of their relations
-in M. Each generator image in A tensor N is a finite sum of pure tensors, whose
-coefficients can be lifted to a common stage j above i. The relation combinations
-of these lifted images vanish in the final tensor product. Tensor product
-commutes with the directed colimit, so each such relation vanishes at some later
-stage. Choose one upper bound for the finitely many relations. The lifted images
-then define an Ai-linear map a into Aj tensor N. For any comparison e satisfying
-the displayed pure-tensor equation, linearity forces the same comparison on all
-pure tensors and their sums, giving the asserted equality. Empty presentations
-and the zero target give the zero map. -/
+an uncurried map at a later stage. The target module need not be finitely presented. -/
 theorem exists_stage_restricted_hom
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat) (i : I) (M N : ModuleCat.{max u v} (F.obj i))

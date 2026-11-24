@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalCoefficientRouteComparison
 
 /-! # Endpoint equations for the finite coefficient comparison
-
-Source: diagonal tower coefficient changes (1), derived adjunction transitivity.
-(blueprint: def-diagonal-coefficient-route-equations).
 -/
 
 @[expose] public noncomputable section

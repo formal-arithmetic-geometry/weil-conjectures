@@ -17,8 +17,10 @@ import Mathlib.CategoryTheory.Sites.Abelian
 /-!
 # Local lifting for epimorphisms and exact complexes of module sheaves
 
-Source: Stacks Project, Modules, Section 01AF and Lemma 01AG; Sheaves, Definition
-007U and Lemma 0H7H (blueprint: lem-weil-pbc-ringed-space-module-exactness-local-lifting).
+## References
+
+* Stacks Project, Modules, Section 01AF and Lemma 01AG
+* Stacks Project, Sheaves, Definition 007U and Lemma 0H7H
 -/
 
 @[expose] public section
@@ -70,32 +72,9 @@ private theorem local_lifts_iff_epi (X : RingedSpace.{u})
     intro x hxW
     exact Opens.mem_iSup.mpr ⟨⟨x, hxW⟩, hx ⟨x, hxW⟩⟩
 
-/--
-Source: Stacks Project, Modules, Section 01AF and Lemma 01AG; Sheaves, Definition
-007U and Lemma 0H7H (blueprint: lem-weil-pbc-ringed-space-module-exactness-local-lifting).
-
-The category of modules on a ringed space is abelian (Mathlib's
-`SheafOfModules.instAbelian`) and its kernels are computed sectionwise.
-Epimorphisms are exactly the maps admitting local lifts of sections, and exactness
-at the middle term of a complex is exactly local lifting of sections annihilated by
-the second map.
-
-Proof:
-1. Evaluation preserves kernels. Map the exact kernel sequence to the category of
-   modules on each open and apply `ShortComplex.moduleCat_exact_iff`.
-2. `Preadditive.epi_iff_isZero_cokernel` gives the zero-cokernel characterization.
-3. Forgetting to abelian sheaves preserves colimits and hence epimorphisms, by
-   `SheafOfModules.preservesFiniteColimits_toSheaf` (Stacks, Modules on Sites, 03DB
-   and 03CO). It reflects epimorphisms because it is faithful. Apply Mathlib's
-   `TopCat.Sheaf.isLocallySurjective_iff_epi`. Its pointwise neighborhood condition
-   is equivalent to the stated covering condition: a cover gives a neighborhood of
-   each point, and chosen neighborhoods indexed by the points of W cover W.
-4. Factor χ as F → kernel φ → G. `ShortComplex.exact_iff_epi_kernel_lift` identifies
-   exactness with the first map being epi; apply step 3 to this map.
-5. Step 1 lifts each section killed by φ to a kernel section. Naturality of the kernel
-   inclusion translates restrictions, and its sectionwise injectivity translates
-   the local lifting equations in both directions.
--/
+/-- Kernels of module maps on a ringed space are computed sectionwise, epimorphisms are
+the maps with local lifts of sections, and exactness at the middle term is local lifting of
+sections annihilated by the second map. -/
 theorem module_exactness_local_lifting (X : RingedSpace.{u}) :
     (∀ (F G : SheafOfModules.{u} (moduleRings X)) (φ : F ⟶ G) (W : Opens X),
         Set.range (ConcreteCategory.hom ((kernel.ι φ).val.app (op W))) =

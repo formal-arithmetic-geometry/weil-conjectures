@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedPadicTorsionLinearit
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Cyclic.DiagonalCyclicUniformizerSourceEquation
 
 /-! # The constant-source endpoint of cyclic coefficient continuation
-
-Source: diagonal tower coefficient changes (1), scalar units and finite constants.
-(blueprint: lem-diagonal-cyclic-uniformizer-source).
 -/
 
 @[expose] public noncomputable section
@@ -170,33 +167,7 @@ private theorem ordinary_restriction_unique
 
 /-- The two ordinary restriction functors have a unique underlying-identity
 comparison; its derived mate has the prescribed supported constant endpoint.
-There is no equality involving a diagonal arrow in this statement.
-
-Source: latest blueprint, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md (1), composition of coefficient
-extensions and their scalar units; the source normalization in the parent
-coefficient-square proof, steps 1 and 2.
-(blueprint: lem-diagonal-cyclic-uniformizer-source).
-
-Proof: use the underlying and counit isomorphisms of each inverse finite
-realization to identify its underlying abelian sheaf with the given ordinary
-module. The two resulting Z_l actions coincide: the coefficient isomorphisms
-are unital, hA annihilates l^(n+1), and the induced map from the cyclic quotient
-is cartierResidueAlgebra. Equivalently, pull the ring maps to W, factor through
-the sheafified cyclic quotient and test on its constant generators. Transporting
-the identity between the two underlying sheaves therefore gives a module
-isomorphism. Its naturality follows after faithful forgetting, where it is the
-naturality of the two underlying isomorphisms. Faithful forgetting also proves
-uniqueness. Derive this ordinary comparison and take its mate under the actual
-composite scalar adjunctions. Endpoint.normalization says that each supported
-endpoint is the adjoint of supportMap of its regular coefficient unit.
-FiniteSourceComparison.normalization and FiniteRealization.unit_normalization
-identify its finite realization with the ordinary pushed constant unit. The
-normalization of maps.source agrees with that unit on every constant section;
-sheafification's universal property makes the maps equal. Naturality of exact
-single comparisons transports this equality to SourceEquation. These arguments
-use no root endpoint or diagonal arrow. For an empty base every map is unique;
-for the zero coefficient ring the supported map has zero target. -/
+There is no equality involving a diagonal arrow in this statement. -/
 theorem diagonalCyclic_uniformizerSource
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E) (n : ℕ)

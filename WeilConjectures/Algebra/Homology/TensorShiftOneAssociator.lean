@@ -9,9 +9,12 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 public import Mathlib.Algebra.Homology.BifunctorShift
 
-/-! # First-factor translation and the total tensor associator
-Source: Stacks Project, Tag 06YH, the homogeneous-summand calculation.
-(blueprint: lem-sc-total-tensor-shift-one-associator).
+/-!
+# First-factor translation and the total tensor associator
+
+## References
+
+* Stacks Project, Tag 06YH, the homogeneous-summand calculation.
 -/
 
 @[expose] public section
@@ -27,18 +30,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasColimitsOfSize.{0, 0} C]
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- First-factor translation by one commutes with the total tensor associator.
-Source: Stacks Project, Tag 06YH, the homogeneous-summand calculation in
-lem-sc-scheme-canonical-tensor-shift-associator-kflat-one.
-(blueprint: lem-sc-total-tensor-shift-one-associator).
-
-Proof. Test the two maps on each tridegree summand of the source total complex.
-The first-factor shift map has coefficient one. Reassociation applies the module
-associator, so either order gives the same map into the target summand, with first
-index increased by one. Coproduct extensionality in each degree, followed by
-complex extensionality, proves equality. The maps already commute with the
-signed differentials by construction of mapBifunctorShift₁Iso. This works also
-for zero complexes and in characteristic two. -/
+/-- First-factor translation by one commutes with the total tensor associator. -/
 theorem tensorShiftOne_associator (P T U : CochainComplex C ℤ) :
     (α_ (P⟦(1 : ℤ)⟧) T U).hom ≫
         (mapBifunctorShift₁Iso P (T ⊗ U) (curriedTensor C) 1).hom =

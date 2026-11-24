@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Exactness of the boundary of a fixed normalized resolution
 
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-exact).
+## References
+
+* Stacks Project, Tag 0A50
 -/
 
 @[expose] public section
@@ -49,16 +50,7 @@ attribute [local instance] preservesBinaryBiproducts_of_preservesBiproducts
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The constructed boundary is exact on both sides for the actual restrictions.
-Source: Stacks Project, Tag 0A50, proof.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-exact)
-
-Proof: The fixed resolution gives a short exact sequence of section complexes.
-Homology preserves their biproduct, identifying the middle homology with the
-product of the two open homologies. Canonical comparison restriction identities
-identify the two horizontal maps with the restriction pair and difference.
-Transport homology exactness at the intersection and at the successor whole
-term along these additive equivalences. The transported connecting map is
-precisely the constructed boundary. This applies to empty and coincident opens. -/
+(Stacks, Tag 0A50) -/
 private theorem etaleMayerVietorisCanonicalBoundary_exact {X : Scheme.{u}}
     (U V : X.Opens) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
@@ -154,11 +146,7 @@ private theorem etaleMayerVietorisCanonicalBoundary_exact {X : Scheme.{u}}
       ((ShortComplex.ab_exact_iff_function_exact _).mp (hS.homology_exact₁ q (q + 1) rfl))
 
 /-- Exactness with the intersection supplied by an equality.
-Source: Stacks Project, Tag 0A50, the preceding exactness and intersection identification.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-exact)
-
-Proof: Substitute the intersection equality and apply canonical boundary exactness.
-The two inclusion proofs agree by proof irrelevance. -/
+(Stacks, Tag 0A50) -/
 private theorem etaleMayerVietorisBoundaryOn_exact {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution F)
@@ -178,10 +166,7 @@ private theorem etaleMayerVietorisBoundaryOn_exact {X : Scheme.{u}}
   exact etaleMayerVietorisCanonicalBoundary_exact U V hcover F I c q
 
 /-- Exactness of the fixed boundary interface.
-Source: Stacks Project, Tag 0A50, long exact cohomology sequence.
-(blueprint: lem-weil-pbc-etale-mayer-vietoris-canonical-boundary-exact)
-
-Proof: Unfold only the fixed resolution choices and apply named-intersection exactness. -/
+(Stacks, Tag 0A50) -/
 theorem etaleMayerVietorisFixedBoundary_exact {X : Scheme.{u}}
     (U V W : X.Opens) (hW : W = U ⊓ V) (hcover : U ⊔ V = ⊤)
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})

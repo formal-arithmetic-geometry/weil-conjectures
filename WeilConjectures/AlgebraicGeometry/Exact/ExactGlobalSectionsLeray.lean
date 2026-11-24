@@ -11,7 +11,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Leray on a base with exact global sections
 
-Source: Stacks Project, Tags 03Q9 and 03QO, derived-functor composition.
+## References
+
+* Stacks Project, Tags 03Q9, 03QO
 -/
 
 @[expose] public section
@@ -20,9 +22,8 @@ universe v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- Exact global sections commute with homology; derived composition then gives Leray.
-Source: Stacks Project, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-exact-global-sections-leray). -/
+/-- The Leray isomorphism on homology over a base with exact global sections: exact global
+sections commute with homology. -/
 noncomputable def exactGlobalSectionsLerayHomologyIso {Y T : Scheme.{v}}
     (h : PreservesFiniteColimits (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (t : Y ⟶ T) (q : ℤ)

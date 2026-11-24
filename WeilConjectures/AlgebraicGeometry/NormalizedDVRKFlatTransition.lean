@@ -106,9 +106,8 @@ abbrev normalizedDVRKFlatTransitionLocal2 :
     AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 attribute [local instance] normalizedDVRKFlatTransitionLocal2
 
-/-- The universal derived tensor counit followed by the exact restriction comparison.
-Source: Stacks Tag 06YY; blueprint final proof step of DVR effectivity.
-This is an actual morphism built from the fixed derived functors. -/
+/-- The universal derived tensor counit followed by the exact restriction comparison
+(Stacks, Tag 06YY). -/
 noncomputable def normalizedDVRKFlatComparison (n : ℕ)
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
     (scalarReductionDerivedRestriction l E X n).obj

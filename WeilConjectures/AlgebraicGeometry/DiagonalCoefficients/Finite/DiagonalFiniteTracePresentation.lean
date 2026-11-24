@@ -11,9 +11,6 @@ import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalDiagonalRightDerived
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedPushSquare
 
 /-! # Constructing finite trace presentations at generic coefficients
-
-Source: diagonal tower coefficient changes, paragraph (1).
-(blueprint: lem-diagonal-finite-trace-presentation).
 -/
 
 @[expose] public noncomputable section
@@ -25,13 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-/-- The canonical finite right-derived model, full normalized square and positive splitting.
-Source: coefficient changes (blueprint: lem-diagonal-finite-trace-presentation).
-Proof: choose the published right-derived functor with its canonical cochain unit.
-Its unit normalization is composition with the identity. Derive the supplied
-ordinary square by uniqueness of right-derived functors under exact equivalences.
-The proved projective-line decomposition supplies the positive splitting and its
-specified hom. Insert these data into the trace presentation. -/
+/-- The canonical finite right-derived model, full normalized square and positive splitting. -/
 theorem finiteTracePresentation_exists
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (A : Type (u + 1)) [CommRing A] [Finite A]

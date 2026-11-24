@@ -50,14 +50,15 @@ import Mathlib.RingTheory.Nilpotent.Lemmas
 /-!
 # Completeness and residue reduction of completed perfect models
 
-Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication;
-Stacks Tags 093J, 093M, 099Q, 06YQ and 0E8K
-(auxiliary; not a blueprint node).
-
 We use the equivalent coefficient-sized small model of the pro-etale site. The ring
 and the module universe are independent of the scheme universe. Positive exponents
 are indexed by n : ℕ, meaning n+1. In particular the residue field is A/I^(0+1).
 All helpers below only name the actual complexes and maps in the assertion.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.6.11, reverse implication
+* Stacks Project, Tags 093J, 093M, 099Q, 06YQ and 0E8K
 -/
 
 @[expose] public noncomputable section
@@ -77,19 +78,18 @@ namespace AlgebraicGeometry.Scheme.AdicPerfectModel
 variable {C : Type w} [SmallCategory C] (J : GrothendieckTopology C)
   {A : Type w} [CommRing A] (I : Ideal A)
 
-/-- The actual termwise constant complex, using the recorded exact realization.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+/-- The actual termwise constant complex, using the recorded exact realization (Stacks, Tag 093J).
+-/
 abbrev constantComplex (R : Type w) [CommRing R] :=
   (commutativeSiteConstantModuleFunctor J R).mapHomologicalComplex (.up ℤ)
 
-/-- The complex B tensor_A P, before localization.
-Source: Bhatt--Scholze 6.6.11 (auxiliary; not a blueprint node). -/
+/-- The complex `B ⊗_A P`, before localization (Bhatt--Scholze, Proposition 6.6.11). -/
 abbrev model (P : CochainComplex (ModuleCat.{w} A) ℤ) :=
   ((ConstantCompletion.change (ConstantCompletion.coefficientMap J A I)).mapHomologicalComplex
     (.up ℤ)).obj ((constantComplex J A).obj P)
 
-/-- The ordinary algebraic residue complex k tensor_A P, with its k-action retained.
-Source: Stacks 093M (auxiliary; not a blueprint node). -/
+/-- The ordinary algebraic residue complex k tensor_A P, with its k-action retained
+(Stacks, Tag 093M). -/
 def algebraicResidue (P : CochainComplex (ModuleCat.{w} A) ℤ) :
     CochainComplex (ModuleCat.{w} (A ⧸ I ^ (0 + 1))) ℤ :=
   letI := (ModuleCat.extendRestrictScalarsAdj
@@ -97,37 +97,34 @@ def algebraicResidue (P : CochainComplex (ModuleCat.{w} A) ℤ) :
   ((ModuleCat.extendScalars (Ideal.Quotient.mk (I ^ (0 + 1)))).mapHomologicalComplex
     (.up ℤ)).obj P
 
-/-- The constant sheaf of the ordinary residue complex.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+/-- The constant sheaf of the ordinary residue complex (Stacks, Tag 093J). -/
 abbrev constantResidue (P : CochainComplex (ModuleCat.{w} A) ℤ) :=
   (constantComplex J (A ⧸ I ^ (0 + 1))).obj (algebraicResidue I P)
 
 variable {J}
 
-/-- Restrict actual complexes and chain maps to the localized site.
-Source: Stacks 03DJ (auxiliary; not a blueprint node). -/
+/-- Restrict actual complexes and chain maps to the localized site (Stacks, Tag 03DJ). -/
 def overComplex (R : Sheaf J CommRingCat.{w}) (U : C) :
     ConstantCompletion.Cx R ⥤ ConstantCompletion.Cx (R.over U) :=
   letI := ringedOverFunctor_additive R U
   (SheafOfModules.overFunctor (siteModuleRings R) U).mapHomologicalComplex
     (.up ℤ)
 
-/-- Cohomology in the standard derived localization used throughout the coefficient API.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+/-- Cohomology in the standard derived localization used throughout the coefficient API
+(Stacks, Tag 05RU). -/
 abbrev cohomology (R : Sheaf J CommRingCat.{w}) (q : ℤ) :=
   @DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard (ConstantCompletion.Mod R)) q
 
 variable (J)
 
-/-- Constant module sections, through the actual additive sheafification unit.
-Source: Stacks 093J (auxiliary; not a blueprint node). -/
+/-- Constant module sections, through the actual additive sheafification unit (Stacks, Tag 093J). -/
 def constantSection (R : Type w) [CommRing R] (N : ModuleCat.{w} R) (U : Cᵒᵖ) (x : N) :
     ((commutativeSiteConstantModuleFunctor J R).obj N).val.obj U :=
   (toSheafify J ((siteConstantModulePresheafGeneral (C := C) R).obj N).presheaf).app U x
 
 /-- The normalization fixing the canonical residue comparison on local tensor generators.
-The image of (c tensor (b tensor p)) is c times bar(b) times the constant section 1 tensor p.
-Source: Stacks 093M (auxiliary; not a blueprint node). -/
+The image of (c tensor (b tensor p)) is c times bar(b) times the constant section 1 tensor p
+(Stacks, Tag 093M). -/
 def IsResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ)
     (f : ((ConstantCompletion.change (ConstantCompletion.projection J A I 0)).mapHomologicalComplex
       (.up ℤ)).obj (model J I P) ⟶ constantResidue J I P) : Prop :=
@@ -141,9 +138,8 @@ def IsResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ)
         constantSection J (A ⧸ I ^ (0 + 1)) ((algebraicResidue I P).X q) U
           ((1 : A ⧸ I ^ (0 + 1)) ⊗ₜ[A, Ideal.Quotient.mk (I ^ (0 + 1))] p)
 
-/-- The same canonical tensor formula on a slice, with the restricted coefficient sheaf.
-Source: Stacks 03DJ, 093M and 0E8K
-(auxiliary; not a blueprint node). -/
+/-- The same canonical tensor formula on a slice, with the restricted coefficient sheaf
+(Stacks, Tags 03DJ, 093M and 0E8K). -/
 def IsSliceResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ) (U : C)
     (f : ((ConstantCompletion.change
       ((J.overPullback CommRingCat U).map
@@ -166,10 +162,8 @@ def IsSliceResidueComparison (P : CochainComplex (ModuleCat.{w} A) ℤ) (U : C)
 
 variable {J}
 
-/-- The complete assertion on a site or a slice, retaining the canonical chain comparison.
-This uses the existing local internal-Hom completeness predicate and universal derived counit.
-Source: Bhatt--Scholze 6.6.11; Stacks 093J, 093M, 099Q and 06YY
-(auxiliary; not a blueprint node). -/
+/-- The complete assertion on a site or a slice, retaining the canonical chain comparison
+(Bhatt--Scholze, Proposition 6.6.11; Stacks, Tags 093J, 093M, 099Q and 06YY). -/
 def HasCompleteResidueCalculation
     {B k : Sheaf J CommRingCat.{w}} (π : B ⟶ k)
     (M : ConstantCompletion.Cx B) (V : ConstantCompletion.Cx k)
@@ -968,35 +962,8 @@ open AdicPerfectModel
 attribute [local irreducible] ConstantCompletion.completed
 
 /-- Completed bounded finite-projective models are locally derived complete and their
-canonical derived residue comparison is an isomorphism, on the site and every slice.
-Source: Bhatt--Scholze 6.6.11, reverse implication; Stacks 093J, 093M, 099Q, 06YQ, 0E8K
-(auxiliary; not a blueprint node).
-
-Proof, following the seven DAG steps:
-1. Split each finite-projective P^i off a finite free module. Constant sheaves preserve
-   the splitting, so B tensor P^i is the image of the same idempotent on B^r. Sectionwise
-   limits identify this with lim_n of the constant sheaves P^i/I^n P^i, including rank zero.
-2. Noetherianity makes I finitely generated. Torsion-limit completeness applies to these
-   inverse limits and their bounded complex. Restriction of scalars preserves and reflects
-   local derived completeness for the extended ideal, giving completeness over B.
-3. The constant-completion quotient theorem identifies B/IB with the constant residue field,
-   through the first projection. It assumes no finite underlying residue set or regularity.
-4. Each term is a retract of a finite free B-module, hence flat. Bounded-above flat complexes
-   are K-flat, so the universal derived-change-of-rings counit computes reduction ordinarily.
-5. The displayed tensor-generator formula is balanced, natural in the differential, and
-   invertible on finite free modules and their retracts. It gives the canonical chain
-   isomorphism; its composite with the universal counit is the asserted derived isomorphism.
-6. Exactness of constant realization identifies cycles, boundaries and cohomology. The
-   algebraic residue terms are finite-dimensional vector spaces, hence so is their
-   cohomology. Both complexes have zero terms, hence zero cohomology, outside [a,b].
-7. Localization identifies the slice with the pro-etale site of the covering object.
-   Restriction is exact, commutes with tensor and preserves K-flat complexes and limits.
-   Restrict the same chain comparison and apply the preceding argument on the slice.
-   This works for every object, so in particular every covering slice, and for a>b.
-
-The kernel of the first projection is IB by the Noetherian constant-completion quotient
-identification. Thus HasCompleteResidueCalculation uses exactly local derived IB-completeness.
-No completeness or localness assumption on A, or perfectness of its quotients, is used. -/
+canonical derived residue comparison is an isomorphism, on the site and every slice
+(Bhatt--Scholze, Proposition 6.6.11; Stacks, Tags 093J, 093M, 099Q, 06YQ and 0E8K). -/
 theorem adicPerfectModel_complete_reduction
     (T : Scheme.{u}) (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (_hI : I.IsMaximal)

@@ -18,8 +18,9 @@ import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
 /-!
 # Open pullback in the second coefficient
 
-Source: Stacks Project, Tags 09XP and 0F1E, the coefficient calculation in
-lem-pur-supported-product-localization, steps 5 and 11.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09XP, 0F1E
 -/
 
 @[expose] public section
@@ -29,8 +30,7 @@ universe u v₁ v₂ v₃ u₁ u₂ u₃
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
-/-- Pull the uncut first supported coefficient to the second open product.
-Source: Stacks Tag 0F1E (blueprint: lem-pur-supported-coefficient-second-open-tensor). -/
+/-- Pull the uncut first supported coefficient to the second open product. -/
 noncomputable def supportSecondOpenFirstCoefficientMap (A : Type (u + 1)) [CommRing A]
     {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
     [IsClosedImmersion b] (V : Y.Opens) (M : DerivedCategory (ModuleCat.{u + 1} A)) :
@@ -45,8 +45,7 @@ noncomputable def supportSecondOpenFirstCoefficientMap (A : Type (u + 1)) [CommR
     (upperStar (ModuleCat.{u + 1} A) (supportedSecondOpenMap f g V)).mapDerivedCategory.map
       ((supportFirstCoefficientProjectionIso A f g b).inv.app M)
 
-/-- Pull the second supported coefficient to the open product by the mate of restriction.
-Source: Stacks Tag 0F1E (blueprint: lem-pur-supported-coefficient-second-open-tensor). -/
+/-- Pull the second supported coefficient to the open product by the mate of restriction. -/
 noncomputable def supportSecondOpenCoefficientMap (A : Type (u + 1)) [CommRing A]
     {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
     [IsClosedImmersion d] (V : Y.Opens) (N : DerivedCategory (ModuleCat.{u + 1} A)) :

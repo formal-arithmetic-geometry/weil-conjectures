@@ -13,7 +13,13 @@ import WeilConjectures.AlgebraicGeometry.Proper.Etale.ProperEtaleCompositorRawUn
 import WeilConjectures.AlgebraicGeometry.Proper.Etale.ProperEtaleSheafSupportMap
 import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperSheafUnitGraphTranspose
 
-/-! # The graph transpose of the compact-support compositor -/
+/-! # The graph transpose of the compact-support compositor
+
+## References
+
+* Stacks Project, Tags 0F7B, 0F7I, 0F7J
+* SGA 4, Exposé XVII, 6.2.11
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -68,22 +74,7 @@ private theorem graphTransferNat_app
   rw [Category.comp_id]
   rfl
 
-/-- The transpose of compact-support composition is the clopen graph transfer.
-Source: Stacks Project, Tags 0F7B, 0F7I, 0F7J; SGA 4 XVII 6.2.11.
-(blueprint: lem-pur-proper-compositor-graph-transpose).
-
-Proof in words: proper support constructs a normalized sheaf map into c. Compute the
-chosen compositor after the raw direct-image unit on a compatible tower, using the
-proper comparison, etale graph comparison, and open/proper interchange unit formulas;
-then transport by common refinements. The sheaf graph-transpose theorem identifies
-the transpose of this mixed unit, followed by proper base change, with the explicit
-graph transfer after the same direct-image unit. Package the graph transfer and the
-compositor transpose followed by base change as natural transformations. Adjunction
-naturality gives equality after the right-derived unit on every homotopy object.
-Uniqueness of transformations out of the right-derived functor gives equality on all
-derived objects. The unit and support formulas also cover empty and identity maps.
-No representative complex, derived-functor unit, or sheaf transformation tau occurs
-in the assertion. -/
+/-- The transpose of compact-support composition is the clopen graph transfer. -/
 theorem properCompositor_graph_transpose
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {W V Y : Scheme.{u}}

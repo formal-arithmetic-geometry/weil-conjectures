@@ -13,7 +13,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 
 /-! # Transport of embedded integral coefficients
 
-Source: the integral-models Stacks comparison, Stacks Tag 09C1.
+## References
+* Stacks Project, Tags 0999, 099F, 09C1
 -/
 
 @[expose] public noncomputable section
@@ -121,23 +122,6 @@ attribute [local irreducible] IntegralModelsStacks.smallDerivedObject
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [-instance] integralModel_coefficientMonObj in
 /-- A continuous coefficient ring isomorphism preserves the local completeness condition.
-
-Source: integral-models-stacks, scalar-square transport; Stacks Tags 0999, 099F and 09C1
-(blueprint: lem-sfb-embedded-integral-completeness-transport).
-
-Proof: evaluate e on the one-point profinite set. Naturality for each point of a
-profinite S shows that e acts on every continuous function by this ring isomorphism
-on its values. In particular it carries constant functions to constant functions.
-The induced isomorphism of integer rings carries the unique maximal ideal to the
-unique maximal ideal. The hypothesis on pi therefore identifies the kernel of the
-first quotient with the kernel of the spectral first quotient. Constant sheafification
-and exact inverse image preserve the scalar square. Restriction along the resulting
-isomorphisms commutes with restriction along the constant-to-continuous maps.
-The section-module equivalence and the equivalent small site preserve this square.
-On every slice, corresponding kernel sections have corresponding localizations;
-restriction along the ring isomorphism identifies the derived internal Hom from each
-localization. It preserves and reflects zero objects. Applying this to every slice and
-every kernel section proves the iff, for arbitrary complexes without a bound.
 -/
 theorem embeddedIntegralCompletenessTransport
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)

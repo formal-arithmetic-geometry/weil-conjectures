@@ -25,16 +25,7 @@ private theorem conjugate_transpose
     (conjugateEquiv a₁ a₂ α).naturality e, ← Category.assoc, unit_conjugateEquiv,
     Functor.map_comp, Category.assoc]
 
-/-- Transpose an exchange around the other side of its adjoint square.
-
-Source: blueprint latest, diagonal coefficient changes (3), closed-source exchange.
-(blueprint: lem-diagonal-closed-exchange-transpose).
-
-Proof: the conjugate identity moves the square comparison across the composite
-adjunction. Naturality transposes the pulled closed counit, and the closed
-adjunction triangle cancels that counit. What remains is closed direct image of
-the transpose of the endpoint, followed by the direct-image square comparison.
-This is purely categorical and needs no exactness or base-change invertibility. -/
+/-- Transpose an exchange around the other side of its adjoint square. -/
 theorem diagonalClosedExchange_transpose
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {I : B ⥤ A} {RI : A ⥤ B} {W : A ⥤ C} {RW : C ⥤ A}

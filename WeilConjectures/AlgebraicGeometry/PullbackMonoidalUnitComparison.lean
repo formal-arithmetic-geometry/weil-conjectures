@@ -11,7 +11,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Normalization of the monoidal pullback unit
 
-Source: Stacks Project, Tags 01CD and 0096, canonical tensor pullback and its adjunction.
+## References
+
+* Stacks Project, Tags 01CD and 0096.
 -/
 
 @[expose] public section
@@ -22,22 +24,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
-/-- The monoidal counit is the canonical pullback map of the structure sheaf.
-Source: Stacks Project, Tag 01CD (Modules), and Tag 0096 (Sheaves).
-(blueprint: lem-sc-pullback-monoidal-unit-comparison).
-
-Proof: apply the pullback-pushforward adjunction's injective hom equivalence.
-The image of pullbackObjUnitIso.hom is unitToPushforwardObjUnit, the structure-ring
-map, by pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. The monoidal
-pullback is obtained by descending presheaf pullback followed by sheafification along
-sheafification. Expand its unit with functorMonoidalOfComp_ε and invert the resulting
-composite to compute its counit. The sheafification/pullback comparison is
-leftAdjointUniq for the two composite adjunctions; its unit compatibility cancels the
-comparison with the adjacent sheafification unit and counit. The remaining presheaf
-pullback counit has adjoint the structure-ring map, by the defining presheaf monoidal
-adjunction formula. Thus both images are unitToPushforwardObjUnit. Injectivity gives
-the stated equality. This is a morphism equality, so works on empty schemes and for
-arbitrary scheme morphisms; no closed-immersion or invertibility hypothesis is used. -/
+/-- The monoidal counit is the canonical pullback map of the structure sheaf
+(Stacks, Tags 01CD and 0096). -/
 theorem pullback_monoidal_unit_comparison {X Z : Scheme.{u}} (j : Z ⟶ X) :
     Functor.OplaxMonoidal.η (pullback j) = (pullbackObjUnitIso j).hom := by
   let : (sheafification X).Monoidal := sheafificationMonoidal X

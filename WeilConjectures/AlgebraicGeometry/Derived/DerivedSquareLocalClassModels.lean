@@ -11,8 +11,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Local classes of the ordinary-unit map in a square
 
-Source: Stacks Project, Cohomology, Tags 01E4, 01FB, 0BKJ and 0D5X.
-(blueprint: def-weil-pbc-derived-square-local-models).
+## References
+
+* Stacks Project, Tags 01E4, 01FB, 0BKJ, 0D5X
 -/
 
 @[expose] public section
@@ -33,9 +34,7 @@ private theorem map_pasting {C D : Type*} [Category C] [Category D] (F : C ⥤ D
 namespace AlgebraicGeometry
 open Scheme.Modules
 
-/-- Restrict an h-map, keeping the restriction of its global coefficient as target.
-Source: Stacks Project, Tag 01FB
-(blueprint: def-weil-pbc-derived-square-local-models). -/
+/-- Restrict an h-map, keeping the restriction of its global coefficient as target. -/
 def restrictedDirectImageMap {Z X : Scheme.{u}} (v : Z ⟶ X)
     {F : X.Modules} {G : Z.Modules} (φ : F ⟶ (pushforward v).obj G) (U : X.Opens) :
     (restrictFunctor U.ι).obj F ⟶
@@ -53,9 +52,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The canonical total/classical comparison, with the total derived-category
-universe fixed by the supplied family of scheme module categories.
-Source: total/classical right-derived compatibility
-(blueprint: def-weil-pbc-derived-square-local-models). -/
+universe fixed by the supplied family of scheme module categories. -/
 def schemeSingleCohomologyComparison {X S : Scheme.{u}} (f : X ⟶ S)
     (F : X.Modules) (q : ℕ) :
     (DerivedCategory.homologyFunctor.{w, u, u + 1}
@@ -66,9 +63,7 @@ def schemeSingleCohomologyComparison {X S : Scheme.{u}} (f : X ⟶ S)
   Functor.homologyRightDerivedFunctorObjSingleFunctorIso
     (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) F q
 
-/-- Inverse-open hypercohomology, evaluated upstairs on the same K-injective model.
-Source: Stacks Project, Tag 0D5X
-(blueprint: def-weil-pbc-derived-square-local-models). -/
+/-- Inverse-open hypercohomology, evaluated upstairs on the same K-injective model. -/
 @[irreducible] def squareInverseOpenComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℤ)
     (K : schemeDerivedCategory X) :
     (RingedSpace.inverseOpenHypercohomologyPresheaf f.toLRSHom.toShHom q).obj K ≅
@@ -88,9 +83,7 @@ attribute [local irreducible] RingedSpace.topEdgeInverseModel
   RingedSpace.topEdgeLocalModel RingedSpace.topEdgeLocalClass
 
 /-- The inverse-open comparison carries the inverse-open class map to the class map
-upstairs. This equation unfolds the comparison exactly once.
-Source: Stacks Project, Tag 0D5X
-(blueprint: def-weil-pbc-derived-square-local-models). -/
+upstairs. This equation unfolds the comparison exactly once. -/
 theorem squareInverseOpenComparison_class {X Y : Scheme.{u}} (f : X ⟶ Y) (q : ℤ)
     (K : schemeDerivedCategory X) :
     RingedSpace.topEdgeInverseLocalClass f.toLRSHom.toShHom q K =
@@ -112,9 +105,7 @@ theorem squareInverseOpenComparison_class {X Y : Scheme.{u}} (f : X ⟶ Y) (q : 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The explicit local section comparison through an augmentation-normalized resolution.
-Source: Stacks Project, Tags 01E4 and 0D5X
-(blueprint: def-weil-pbc-derived-square-local-models). -/
+/-- The explicit local section comparison through an augmentation-normalized resolution. -/
 @[irreducible] def squareLocalResolutionComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F : X.Modules) (q : ℕ) (V : Y.Opens) (I : InjectiveResolution F)
     (U : X.Opens) (hU : U = f ⁻¹ᵁ V) (R : RestrictedResolutionSections I U) :

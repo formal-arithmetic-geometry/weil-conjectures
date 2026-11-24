@@ -8,9 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 
 /-! # Scalar-compatible tensor maps between free internal modules
-
-Source: coefficient Tate twists, the integral tower transition formula
-(blueprint: lem-coefficient-free-tensor-linear).
 -/
 
 @[expose] public section
@@ -19,11 +16,7 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.MonObj
 namespace AlgebraicGeometry.ProEtale
 
-/-- Linearity of the reduction tensor root-power map over the integral ring.
-Source: integral limit transitions (blueprint: lem-coefficient-free-tensor-linear).
-Proof: the coefficient square commutes, and reduction is a ring homomorphism.
-Associativity of tensor then moves the integral scalar through the tensor map.
-The equality of the underlying morphism determines the module morphism uniquely. -/
+/-- Linearity of the reduction tensor root-power map over the integral ring. -/
 theorem coefficientFreeTensor_linear
     {C : Type*} [Category C] [MonoidalCategory C]
     {R B D : C} [MonObj R] [MonObj B] [MonObj D]

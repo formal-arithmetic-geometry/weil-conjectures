@@ -9,9 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteCo
 
 /-! # Direct image and finite coefficient realization
 
-Source: Stacks Project, Modules on Sites, sheafification of module presheaves
-and the definition of pushforward (sites-modules.tex).
-(blueprint: lem-weil-pbc-finite-coefficient-realization-direct-image)
+## References
+
+* Stacks Project, Modules on Sites (sheafification of module presheaves, pushforward)
 -/
 
 -- After pruning, this module only keeps private declarations.

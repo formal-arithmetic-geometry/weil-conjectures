@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletion
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosLimitData
 
-/-! Canonical derived-limit projection normalization. -/
+/-! Canonical derived-limit projection normalization.
+
+## References
+
+* Stacks Project, Tag 0A07
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,20 +24,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
   AdicCompletion.modulesDerived
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The conjugate limit comparison preserves the canonical counit projections.
-Source: blueprint direct-image limits, proof (1); Stacks Tag 0A07.
-(blueprint: lem-pbc-direct-image-roos-projection-compatibility)
-
-Proof: expand pushLimitIso as the conjugate of constantInterchange under the two
-composite adjunctions. The counit identity for conjugate transformations expresses
-constant of this comparison followed by the target counit as pushforward of the
-source counit, after the constant/pullback interchange. Evaluate this identity at n.
-The evaluation mate identity moves pushEvaluationMap through the tower counit.
-Coherence of exact localization identifies constantInterchange followed by
-pullEvaluation with the two canonical constantEvaluationIso components. Cancel
-these components and use their naturality. The remaining equality is precisely
-the displayed square, naturally in M; the adjunction triangle identities give
-the same formula for identity morphisms and zero towers. -/
+/-- The conjugate limit comparison preserves the canonical counit projections. -/
 theorem directImage_roos_projection_compatibility {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : DTow l E X) (n : ℕ) :
     (pushLimitIso l E f).hom.app M ≫

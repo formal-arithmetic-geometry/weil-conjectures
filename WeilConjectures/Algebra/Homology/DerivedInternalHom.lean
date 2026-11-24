@@ -18,13 +18,14 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 /-!
 # Derived internal Hom on a ringed site
 
-Source: Stacks Project, sites-cohomology.tex, Sections 08J7, 0A8X and 07A5
-(blueprint: def-pur-derived-internal-hom).
-
 `derivedInternalHom J R : D(O)ᵒᵖ × D(O) ⥤ D(O)` is the functor induced, through the
 product localization `Q.op.prod Q`, by `(L, M) ↦ Q (Hom^•(L, I(M)))`, where `I` is the
 functorial K-injective resolution `CochainComplex.kInjectiveResolutionFunctor` of the
 Grothendieck abelian category of `O`-modules (`SheafOfModules.isGrothendieckAbelian`).
+
+## References
+
+* Stacks Project, Sections 08J7, 0A8X and 07A5, and Lemma 0A95
 -/
 
 @[expose] public section
@@ -37,19 +38,7 @@ namespace CategoryTheory
 
 /-- After any functorial K-injective replacement `I` in the second variable, the
 localized Hom-complex bifunctor sends quasi-isomorphisms in either variable to
-isomorphisms.
-
-Source: Stacks Project, sites-cohomology.tex, Section 08J7, Lemma 0A95
-(blueprint: def-pur-derived-internal-hom).
-
-Proof:
-1. A morphism of `W.op.prod W` is a pair `(t.op, s)` of quasi-isomorphisms; it factors as
-   `(t.op, 𝟙) ≫ (𝟙, s)`, so it suffices to treat each variable separately.
-2. For `s : M ⟶ M'` a quasi-isomorphism, naturality `η.app M ≫ I.map s = s ≫ η.app M'`
-   and two-out-of-three make `I.map s` a quasi-isomorphism between K-injective complexes.
-3. `quasiIso_homComplex_map` (`lem-pur-rhom-well-defined`), with `t = 𝟙` resp. `s = 𝟙`,
-   makes the induced Hom-complex maps quasi-isomorphisms, so `DerivedCategory.Q` inverts
-   them. -/
+isomorphisms. -/
 theorem derivedInternalHom_inverts
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
@@ -90,12 +79,8 @@ theorem derivedInternalHom_inverts
 functor induced through the localization `Q.op.prod Q` by
 `(L, M) ↦ Q (𝓗om^•(L, I(M)))`, with `I` the functorial K-injective resolution
 `CochainComplex.kInjectiveResolutionFunctor` of the Grothendieck abelian category of
-`O`-modules. The Hom complex is `homComplexFunctor` (`def-pur-hom-complex`). For a fixed
-first variable it agrees with the internal hom `DerivedCategory.internalHomQhObj` of the derived
-tensor product (`derivedInternalHomIsoInternalHomQhObj`).
-
-Source: Stacks Project, sites-cohomology.tex, Sections 08J7, 0A8X and 07A5
-(blueprint: def-pur-derived-internal-hom). -/
+`O`-modules.
+The Hom complex is `homComplexFunctor`. -/
 noncomputable def derivedInternalHom
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
@@ -119,19 +104,7 @@ noncomputable def derivedInternalHom
 
 /-- Computation of derived internal Hom with any functorial K-injective replacement
 `η : 𝟭 ⟶ I`: `R𝓗om(Q L, Q M) ≅ Q (𝓗om^•(L, I(M)))`, naturally in both variables
-(contravariant in `L`, covariant in `M`).
-
-Source: Stacks Project, sites-cohomology.tex, Section 08J7 and Lemma 0A95
-(blueprint: def-pur-derived-internal-hom).
-
-Proof:
-1. For the resolution used in `derivedInternalHom`, this is `Localization.fac`.
-2. For another replacement `I`, the maps `I₀(M) ← M → I(M)` are quasi-isomorphisms into
-   K-injective complexes, so `Q(η₀)⁻¹ ≫ Q(η)` lifts to a homotopy class of chain maps
-   `I₀(M) ⟶ I(M)`, natural up to homotopy, each a quasi-isomorphism.
-3. `quasiIso_homComplex_map` (`lem-pur-rhom-well-defined`) makes the induced maps of Hom
-   complexes quasi-isomorphisms; homotopic maps give equal maps after `Q`, so these form a
-   natural isomorphism after localization. -/
+(contravariant in `L`, covariant in `M`). -/
 theorem derivedInternalHom_comparison
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
@@ -193,18 +166,7 @@ theorem derivedInternalHom_comparison
 
 /-- Independence of the representatives and of an arbitrary K-injective target:
 for complexes `Lc` representing `L` and a K-injective `Ic` representing `M`,
-`R𝓗om(L, M) ≅ Q (𝓗om^•(Lc, Ic))`.
-
-Source: Stacks Project, sites-cohomology.tex, Section 08J7 and Lemma 0A95
-(blueprint: def-pur-derived-internal-hom).
-
-Proof:
-1. Compute with the functorial resolution via `derivedInternalHom_comparison`.
-2. Represent the comparison `Q(I₀(Ic)) ≅ Q(Ic)` of two K-injective complexes by a chain
-   map; it is a quasi-isomorphism since it represents an isomorphism.
-3. Lemma 0A95 (`lem-pur-rhom-well-defined`) makes the induced Hom-complex map a
-   quasi-isomorphism, hence an isomorphism after localization.
-4. Apply the functor to the representative isomorphisms of `L` and `M` and compose. -/
+`R𝓗om(L, M) ≅ Q (𝓗om^•(Lc, Ic))`. -/
 theorem derivedInternalHom_obj_iso
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

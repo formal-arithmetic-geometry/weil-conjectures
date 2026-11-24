@@ -15,7 +15,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Affine sections of the finite-level completion quotients
 
-Source: Stacks Project, Lemma 0881, affine quotient identification.
+## References
+
+* Stacks Project, Tag 0881
 -/
 
 @[expose] public section
@@ -30,26 +32,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Affine sections identify the positive-level completion quotients with the module
 quotients, compatibly with transitions and coherent-module maps. No inverse limit,
-realization equivalence, or reflection of limits is asserted here.
-
-Source: Stacks Project, Lemma 0881, proof, affine identification of the quotient system;
-Lemma 01IB for the affine sections/tilde equivalence.
-(blueprint: lem-weil-pbc-formal-completion-affine-quotients).
-
-Proof: Restriction to the open subscheme preserves ideal products, their powers,
-and cokernels. Use the equality hρ to identify the underlying system with the
-restricted quotients of G. Pushforward followed by sections on U recovers sections
-of those quotients on the original affine open. The affine ideal dictionary and
-exactness of sections on quasi-coherent modules identify the image of I^(n+1)G
-with J^(n+1)Γ(G,U) and the cokernel with its module quotient. This gives θ.
-For transitions, precompose both proposed maps with the surjective quotient map
-Γ(G,U) -> Γ(G,U)/J^(m+1)Γ(G,U). Both composites are the quotient projection
-at level n, by the defining equation of formalModuleQuotientMap. For a coherent
-map f, precompose with the quotient projection for G; naturality of the cokernel
-projection makes both composites the quotient projection for H after Γ(f,U).
-Surjectivity proves both equalities. All powers are positive. For J=0 the quotient
-maps are identities, for J=1 both quotients are zero, and the zero module and empty
-open satisfy the same cokernel argument. -/
+realization equivalence, or reflection of limits is asserted here
+(Stacks, Tags 0881 and 01IB). -/
 theorem formalCompletion_affine_quotients
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData)
     (U : X.Opens) [IsNoetherian U.toScheme] (hU : IsAffineOpen U)

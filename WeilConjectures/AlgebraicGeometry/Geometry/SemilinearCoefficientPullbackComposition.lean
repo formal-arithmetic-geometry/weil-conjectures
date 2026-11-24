@@ -112,7 +112,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Composition of normalized coefficient pullback squares
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03CZ and 07A4.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* Stacks Project, Tags 03CZ, 07A4
 -/
 
 @[expose] public noncomputable section

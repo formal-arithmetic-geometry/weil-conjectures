@@ -18,8 +18,7 @@ with countable products, so the long exact cohomology sequence of this triangle 
 ```
   0 ⟶ R¹lim Hⁱ(Fₙ) ⟶ Hʲ(R lim Fₙ) ⟶ lim Hʲ(Fₙ) ⟶ 0,
 ```
-where `R¹lim Hⁱ(Fₙ)` is the cokernel of `1 - t` on `∏ Hⁱ(Fₙ)` (Stacks 0CQD, 0940; blueprint
-`proposition-milnor-sequence--2`, `proposition-milnor-sequence`).
+where `R¹lim Hⁱ(Fₙ)` is the cokernel of `1 - t` on `∏ Hⁱ(Fₙ)`.
 
 ## Main results
 
@@ -27,6 +26,10 @@ where `R¹lim Hⁱ(Fₙ)` is the cokernel of `1 - t` on `∏ Hⁱ(Fₙ)` (Stacks
 - `DerivedCategory.isIso_lift_homologyFunctor_mapCone_of_isHomotopyLimit`: if `1 - t` is an
   epimorphism on `∏ Hⁱ(Fₙ)` (`R¹lim = 0`, e.g. under Mittag-Leffler), then
   `Hʲ(R lim Fₙ) ≅ lim Hʲ(Fₙ)`.
+
+## References
+
+* Stacks Project, Tags 0CQD and 0940
 -/
 
 @[expose] public section
@@ -39,14 +42,10 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
   [Abelian.HasKInjectiveResolutions C] [HasLimitsOfShape (Discrete ℕ) C]
   [HasExactLimitsOfShape (Discrete ℕ) C] {F : ℕᵒᵖ ⥤ DerivedCategory C} {c : Cone F}
 
-/-- **The Milnor short exact sequence** (Stacks 0CQD, blueprint `proposition-milnor-sequence--2`).
-Let `c` be a homotopy limit cone over a tower `F` in `D(C)`, let `i + 1 = j`, let `P` be a
-product of the `Hⁱ(Fₙ)` with its transition endomorphism `t` (components
-`∏ Hⁱ(Fₘ) ⟶ Hⁱ(Fₙ₊₁) ⟶ Hⁱ(Fₙ)`) and let `d` be a limit cone over `n ↦ Hʲ(Fₙ)`. Then there is
-a short exact sequence
-`0 ⟶ coker (1 - t) ⟶ Hʲ(c.pt) ⟶ d.pt ⟶ 0`,
-i.e. `0 ⟶ R¹lim Hⁱ(Fₙ) ⟶ Hʲ(R lim Fₙ) ⟶ lim Hʲ(Fₙ) ⟶ 0`, whose second map is induced by the
-legs of `c`. -/
+/-- **The Milnor short exact sequence.** For a homotopy limit cone `c` over a tower `F` in `D(C)`
+and `i + 1 = j`, there is a short exact sequence
+`0 ⟶ coker (1 - t) ⟶ Hʲ(c.pt) ⟶ d.pt ⟶ 0`, where `t` is the transition endomorphism of the
+product `P` of the `Hⁱ(Fₙ)` and `d` is a limit cone over `n ↦ Hʲ(Fₙ)`. -/
 theorem shortExact_milnor_of_isHomotopyLimit (hc : IsHomotopyLimit c) (i j : ℤ)
     (hij : i + 1 = j) {P : Fan fun n : ℕ ↦ (homologyFunctor C i).obj (F.obj (op n))}
     (hP : IsLimit P) (t : P.pt ⟶ P.pt)

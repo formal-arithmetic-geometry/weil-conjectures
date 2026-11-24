@@ -13,11 +13,13 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Change of rings preserves K-flat complexes
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.18.1, Tag 0G7E.
-
 Unlike `SheafOfModules.changeOfRings_isKFlat_of_flat_terms`, no flatness of the terms is
 assumed: K-flatness of `K ⊗_R S` only uses the tensor cancellation
 `U(N ⊗_S (M ⊗_R S)) ≅ UN ⊗_R M` and the exactness of restriction of scalars.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.18.1, Tag 0G7E
 -/
 
 @[expose] public section
@@ -93,13 +95,7 @@ private theorem changeOfRingsHom_id_kflatGeneral
   exact a.map_id _
 
 
-/-- Change of rings preserves K-flatness.
-Source: Stacks, Tag 0G7E.
-
-Proof: if `F` is acyclic over `S`, its restriction `UF` is acyclic over `R`, so
-`Tot(UF ⊗_R K)` is acyclic. The tensor cancellation isomorphisms
-`U(F^i ⊗_S (K^j ⊗_R S)) ≅ UF^i ⊗_R K^j` assemble to an isomorphism of total complexes, and
-restriction of scalars reflects acyclicity. -/
+/-- Change of rings preserves K-flatness. -/
 theorem changeOfRings_isKFlat (hK : CochainComplex.IsKFlatTensor K) :
     CochainComplex.IsKFlatTensor (changeOfRingsComplex φ K) :=
   open CategoryTheory.Limits MonoidalCategory in by

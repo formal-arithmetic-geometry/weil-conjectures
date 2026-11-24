@@ -13,15 +13,14 @@ import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosDescent
 /-!
 # Canonical strict derived-limit comparison for exact product-preserving functors
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md,
-final proof paragraph; Stacks Project, Tags 0940, 0941 and 07KC
-(auxiliary; not a blueprint node).
-
 The tower functor is Mathlib's actual postcomposition by `F`, on both complexes and
 localizations. All Roos, resolution, triangle and augmentation clauses concern the same
 natural isomorphism `lambda`. The signed coordinates are `(x,y)=(u,-v)` in Mathlib's
 shifted-cone coordinates `(u,v)`, giving `d(x,y)=(dx,(1-s)x-dy)`.
+
+## References
+
+* Stacks Project, Tags 0940, 0941, 07KC
 -/
 
 @[expose] public noncomputable section
@@ -198,9 +197,8 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
 
 /-- The full signed Roos specification for exact product-preserving functors.
 This packages verbatim the witnesses and normalization equations of
-`exactProductFunctorStrictLimit`, so specialization can retain a named predicate.
-Source: Stacks 0940, 0941 and 07KC
-(auxiliary; not a blueprint node). -/
+`exactProductFunctorStrictLimit`, so specialization can retain a named predicate
+(Stacks, Tags 0940, 0941 and 07KC). -/
 def StrictLimitAssertions (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{wA} A)
@@ -422,50 +420,7 @@ end StrictLimitSpecification
 
 -- The interface retains every signed-cone and resolution normalization law.
 /-- The canonical comparison for exact additive countable-product-preserving module functors.
-
-Source: the final paragraph of the blueprint proof of
-lem-cbc-completed-extension-zero-comparison, refined by Stacks Project, Tags 0940,
-0941 and 07KC (auxiliary; not a blueprint node).
-
-Proof, following the nine steps of the blueprint node:
-1. Apply situation-conventions to `F` and its postcomposition on
-   towers. Levelwise exactness is lem-weil-tower-category-levelwise-abelian. Exact
-   countable products identify termwise and derived products by
-   lem-weil-derived-limit-products-core. The projection equations characterize phi.
-2. Apply lem-weil-strict-roos-comparison in both categories. In Mathlib's shifted cone,
-   use `(x,y)=(u,-v)` to obtain the displayed signed differential. Invert the normalized
-   comparison to obtain thetaA and thetaB; the inverse-limit inclusion is `(iota,0)`.
-3. Product projections give phi F(s)=s' phi and phi F(d)=d phi. Additivity gives the
-   same identity for 1-s. On the two biproduct summands, phi therefore defines the chain
-   isomorphism kappa; its inverse uses phi inverse on both summands.
-4. Conjugate kappa by thetaA and thetaB to define lambda. Each factor is invertible.
-   Product-projection naturality proves naturality on strict chain maps. The Roos
-   descent and exact-functor localization extend it to quasi-isomorphism inverses and
-   hence every derived morphism.
-5. The first triangle map is projection to x. The connecting map is minus inclusion
-   into y in these signed coordinates, with Mathlib's cone/shift convention from
-   def-weil-abstract-derived-category. The diagonal kappa intertwines both maps; its
-   shift uses F.mapDerivedCategory.commShiftIso. Conjugating gives the two equations.
-6. An ordinary tower limit is the kernel of 1-s on its product. Exact F preserves
-   this kernel, and phi identifies its defining endomorphisms, giving beta. Do this
-   degreewise; the projection equations show beta commutes with differentials.
-7. Resolve the source and image tower using prop-pur-kinjective-resolutions-exist
-   on the small tower sites. For resolutions with injective terms the normalized
-   inclusions satisfy iotaJ (lim r) betaI = H(r) kappaI F(iotaI): both first components
-   have n-th projection r_n F(pr_n) and both second components are zero. Cancel the
-   normalized quasi-isomorphisms from lem-weil-strict-roos-comparison. The computation
-   of lem-weil-pbc-ringed-strict-tower-homotopy-limit gives the stated unit-normalized
-   resolution formula. Naturality at q supplies the inverse of the derived F(q).
-8. For arbitrary K-injective resolutions, refine them to ones with injective terms.
-   By lem-weil-pbc-kinjective-hom-derived these refinements are homotopy equivalences;
-   the comparison into a K-injective target exists and is unique up to homotopy.
-   Additive F and ordinary limit preserve those homotopies. Naturality of beta
-   transports step 7 back to the original resolutions. Every resulting formula
-   equals the same lambda, proving independence of all resolution choices.
-9. A strict augmentation has signed Roos map `(gamma,0)`. Its first projections
-   after kappa are F(gamma_n), and its second component stays zero. The augmentation
-   clause of lem-weil-strict-roos-comparison identifies these with the canonical
-   derived-limit maps, giving the last equality for every compatible family. -/
+(Stacks, Tags 0940, 0941, 07KC). -/
 theorem exactProductFunctorStrictLimit
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max uC vC r}]

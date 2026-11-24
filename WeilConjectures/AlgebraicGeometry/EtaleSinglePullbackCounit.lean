@@ -26,17 +26,8 @@ variable {B : Type uB} [Category.{u + 1} B] [Abelian B]
   [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
   {X : AlgebraicGeometry.Scheme.{u}}
 
-/-- The prescribed derived single/pullback map factors through the derived counit.
-Source: Stacks, Cohomology on Sites, Tag 06YY; the exact-functor comparisons
-leftDerivedFunctorIsoMapDerivedCategory and mapDerivedCategorySingleFunctor.
-(auxiliary; not a blueprint node).
-Proof: express the counit using leftDerivedFunctorIsoMapDerivedCategory_hom_fac.
-Its naturality moves the single/Qh comparison past the exact-functor comparison.
-Expand mapDerivedCategoryFactorsh and mapDerivedCategorySingleFunctor. The mapped
-inverse and forward quotient/Qh comparisons cancel. The homotopy functor's quotient
-comparison has identity components. Finally, naturality of quotientCompQhIso moves
-the termwise single comparison past its inverse component. The remaining composite
-is exactly singleFunctorCompLeftDerivedUpperStarIso followed by singleFunctorObjIsoQh. -/
+/-- The prescribed derived single/pullback map factors through the derived counit
+(Stacks, Tag 06YY). -/
 theorem singleFunctorObjIsoQh_pullback_counit
     {X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)
     (L : Sheaf X.smallEtaleTopology B) :

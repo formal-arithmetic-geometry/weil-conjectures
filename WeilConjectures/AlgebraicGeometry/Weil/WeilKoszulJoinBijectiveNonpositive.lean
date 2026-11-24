@@ -12,10 +12,12 @@ import Mathlib.LinearAlgebra.Prod
 
 /-! # Nonpositive-degree exterior basis splitting
 
-Projection to the tail and contraction with the head coordinate give an explicit
-inverse to exterior assembly. Only head degrees zero and one survive in the tensor
-coproduct; checking these summands proves the graded join map is bijective.
-(Source: Stacks Project, Tag 0664; blueprint: new-weil-pbc-koszul-join-graded-nonpositive.)
+This file proves that the graded join map is bijective in nonpositive degrees, by splitting
+the exterior basis into the head coordinate and the tail.
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0664, 0628, 0629
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +37,7 @@ open ExteriorAlgebra
 
 variable (R : Type (u + 1)) [CommRing R] (r : ℕ)
 
-/-- Wedge on the left with the first standard generator, after prefix inclusion.
-Source: Stacks Project, Tags 0628 and 0629
-(head-generator version of the source-library last-generator assembly proof). -/
+/-- Wedge on the left with the first standard generator, after prefix inclusion. -/
 private noncomputable def headWedge (n : ℕ) :
     ⋀[R]^n (Fin r →₀ R) →ₗ[R] ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
   (LinearMap.codRestrict (⋀[R]^(n + 1) (Fin (r + 1) →₀ R))
@@ -50,9 +50,7 @@ private noncomputable def headWedge (n : ℕ) :
       exact Submodule.mul_mem_mul (LinearMap.mem_range_self (ι R) _) x.property)).comp
     (exteriorPower.map n (koszulTailInclusion (A := R) r))
 
-/-- The explicit assembly map `(a,b) ↦ inclusion(a) + e_head ∧ inclusion(b)`.
-Source: Stacks Project, Tags 0628 and 0629
-(head-generator version of the source-library last-generator assembly proof). -/
+/-- The explicit assembly map `(a,b) ↦ inclusion(a) + e_head ∧ inclusion(b)`. -/
 private noncomputable def headAssembly (n : ℕ) :
     (⋀[R]^(n + 1) (Fin r →₀ R) × ⋀[R]^n (Fin r →₀ R)) →ₗ[R]
       ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
@@ -182,25 +180,7 @@ private theorem exterior_split (x : ExteriorAlgebra R (Fin (r + 1) →₀ R)) :
     abel_nf
     simp only [mul_smul_comm, ← mul_assoc]
 
-/-- Source: Stacks Project, Tags 0628 and 0629, splitting the exterior algebra on
-adjoining the first generator
-(head-generator version of the source-library last-generator assembly proof).
-
-Proof: let `p` be restriction of a finitely supported vector to the tail and
-let `δ` evaluate its head coordinate. Inclusion `j` and restriction satisfy
-`p ∘ j = id`, and `p(e_head)=0`. Define the inverse on degree `n+1` by
-`x ↦ (Λ^(n+1)(p)(x), Λ^n(p)(contractLeft δ x))`. Contraction kills the exterior
-algebra of the tail: prove this by left induction using its defining Leibniz
-rule. Consequently contracting `j(a) + e_head ∧ j(b)` gives `j(b)`, so both
-components of the proposed inverse recover `(a,b)`.
-
-For the other inverse identity put `T=Λ(j) ∘ Λ(p)` on the full exterior algebra
-and `L=ι(e_head)`. Left induction proves `T(x) + L*T(contractLeft δ x) = x`.
-The scalar and addition cases are immediate. For `ι(v)*x`, decompose the vector
-as `j(p(v)) + δ(v)*e_head`; use the contraction rule, the induction hypothesis,
-anticommutation of `ι(j(p(v)))` with `L`, and `L*L=0`. Restrict this identity to
-degree `n+1`. All maps are genuine constructions and the identities hold also
-for `r=0`, the zero ring, and degrees above the rank. -/
+/-- The head assembly map `(a,b) ↦ inclusion(a) + e_head ∧ inclusion(b)` is bijective. -/
 private theorem headAssembly_bijective (n : ℕ) :
     Function.Bijective (headAssembly R r n) := by
   let δ : Fin (r + 1) → R := fun i ↦ if i = (0 : Fin (r + 1)) then 1 else 0
@@ -558,9 +538,7 @@ private theorem join_zero (r : ℕ) (a : Fin (r + 1) → A) (m : ℕ) :
 /-- Exterior projection and contraction split each negative-degree target into
 its head-free and head-containing summands. The tensor coproduct has exactly these
 surviving summands. Degree zero instead uses naturality of the zeroth exterior
-power. This includes rank zero, the zero ring, and exterior degrees above the rank.
-Source: Stacks Project, Tags 0628 and 0664.
-(blueprint: new-weil-pbc-koszul-join-graded-nonpositive). -/
+power. This includes rank zero, the zero ring, and exterior degrees above the rank. -/
 theorem koszulJoinGraded_bijective_of_nonpositive
     {A : Type (u + 1)} [CommRing A] (r : ℕ) (a : Fin (r + 1) → A)
     (m : ℕ) (i : ℤ) (hi : i ≤ 0) :

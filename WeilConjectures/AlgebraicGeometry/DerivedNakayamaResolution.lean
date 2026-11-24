@@ -120,12 +120,7 @@ def reductionMap (X : Scheme.{u}) {m n : ℕ}
   (CondensedRing.derivedTensor (integerRing l E) X).flip.map
     ((DerivedCategory.singleFunctor _ 0).map ((pullback l E X).map f))
 
-/-- Strong monoidal pullback takes the regular module to the regular module.
-
-Proof: both underlying objects are p_X^* R. The transported regular action is the
-monoidal comparison followed by p_X^* of multiplication, exactly the multiplication
-of the transported ring. Extensionality for module objects and proof irrelevance give
-the equality. This identifies the scalar action transported from the point to `X`. -/
+/-- Strong monoidal pullback takes the regular module to the regular module. -/
 theorem pullback_regular (X : Scheme.{u}) :
     (pullback l E X).obj (Mod.regular (integerRing l E)) =
       Mod.regular (condensedRingObj (integerRing l E) X) := by
@@ -714,38 +709,7 @@ private theorem naturalCone (X : Scheme.{u}) (n : ℕ) :
     ((pointResolution l E n).map_of_exact (pullback l E X))
     (regularPullbackIso l E X) r rfl τ hτ
 
-/-- The coefficient sequence, its natural cone interpretation, and the quotient-power triangles.
-
-Proof:
-1. The ring of integers of `E` is a discrete valuation ring with a nonzero uniformizer
-   (`uniformizer_ne_zero`), continuous division on its image and finite quotient rings. Its
-   positive-power ideals are open, so their quotient topologies are discrete
-   (`quotientDiscrete`).
-2. On each profinite `S`, division identifies the kernel and a lift chosen on each clopen fibre
-   proves surjectivity of continuous reduction. Kernels are sectionwise and cokernels sheafify
-   (`shortExact_of_sectionwise`); all maps are linear for pointwise actions. This gives the
-   short exact sequence `pointResolution` on the point.
-3. The exact monoidal inverse image `pullback` from the point transports this sequence and its
-   actions to `X` (`shortExact_pullback_reductionShortComplex`) and takes the regular module
-   to the regular module (`pullback_regular`, `regularPullbackIso`); the internal/section-module
-   equivalence preserves underlying sheaves.
-4. The complex `[R --π^n--> R]` in degrees `-1, 0` augments quasi-isomorphically to `B_n[0]`.
-   Its rank-one free terms are flat and it is bounded above, hence K-flat.
-5. Choose a K-flat representative for arbitrary unbounded `K`. Tensor-model descent and signed
-   interchange compute its reduction by the cone differential `(dx + π^n y, -dy)`, functorially
-   in chain maps (`UnitScalar.reductionComparisonViaIso`, `scalarOnComplex_eq`). The natural
-   isomorphism `naturalCone` identifies the standard cone model `coneFunctor` with the
-   reduction functor `reductionFunctor` after localization; hence it descends naturally to the
-   derived category.
-6. The maps `[x] ↦ [π^n x]` and `[y] ↦ [y]` give the short exact quotient-power sequence
-   (`PowerQuotients.sequences`): cancellation proves injectivity, representatives give the
-   kernel and surjectivity. Finite discreteness gives continuous lifts on clopen fibres, and
-   exact pullback gives the sequence on `X`.
-7. Its short-exact-sequence triangle (`DerivedCategory.triangleOfSES_distinguished`) stays
-   distinguished after derived tensor with `K`, since `tensorLeft K` is triangulated. The two
-   arrows are precisely the displayed derived images `reductionMap` of the normalized quotient
-   maps. Take `m = 1` for the final triangle. No boundedness of `K` or invertibility of `l` on
-   `X` is used. -/
+/-- The coefficient sequence, its natural cone interpretation, and the quotient-power triangles. -/
 theorem derived_nakayama_resolution :
     ∃ (d : End (Mod.regular (integerRing l E))),
       (∀ (S : Profinite.{u}ᵒᵖ) (f : (integerRing l E).obj.obj S) (s : S.unop),

@@ -49,8 +49,7 @@ namespace GrpObj
 
 /-- The infinitesimal points of a group scheme `G` over `S`: the points `v : S[ε] ⟶ G` over `S`
 reducing to the identity along `i : S ⟶ S[ε]`, the kernel of `G(S[ε]) → G(S)`. Its group law is
-the addition of tangent vectors, and it is in bijection with `Lie(G)` (`lieEquiv`).
-(blueprint: `def-wf-lie-algebra-derivation`) -/
+the addition of tangent vectors, and it is in bijection with `Lie(G)` (`lieEquiv`). -/
 noncomputable def infPoints : Subgroup (Scheme.dualNumbersOver S ⟶ G) :=
   (pointsPrecomp G (Scheme.dualNumbersιOver S)).ker
 
@@ -126,7 +125,7 @@ noncomputable def omegaHom (v : Scheme.dualNumbersOver S ⟶ G) :
 
 /-- The bridge from infinitesimal points to the Lie algebra: a point `v : S[ε] ⟶ G` reducing to
 the identity goes to the `ε`-coefficient of `v^♯`, a derivation `𝒪_G → e_*𝒪_S`, that is a morphism
-`ω_{G/S} = e^*Ω¹_{G/S} ⟶ 𝒪_S`. (blueprint: `def-wf-lie-algebra-derivation`) -/
+`ω_{G/S} = e^*Ω¹_{G/S} ⟶ 𝒪_S`. -/
 noncomputable def toLie (v : infPoints G) : Lie G :=
   (Scheme.Modules.pullbackCongr (ι_comp_left_eq G v.2)).inv.app G.hom.cotangentSheaf ≫
     omegaHom G v.1

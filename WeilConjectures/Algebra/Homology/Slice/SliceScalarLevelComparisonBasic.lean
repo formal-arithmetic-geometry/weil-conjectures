@@ -10,8 +10,10 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.SemilinearSliceScalar
 /-! # Data of the scalar level comparison
 
 The existing coefficient-linear comparison API, separated from its construction.
-Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
-(blueprint: def-sf-slice-scalar-level-comparison-data).
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +37,7 @@ variable (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r}) (U : C)
     (sliceScalarRings.{c, v, r} B U) (sliceScalarAlgebra.{c, v, r} B U O α))
   (extension : SliceSystemExtensionPresentation.{c, v, r} B U)
 
-/-- Transport a level comparison along the specified object identifications.
-Source: Stacks 03EK (blueprint: def-sf-slice-scalar-level-comparison-data). -/
+/-- Transport a level comparison along the specified object identifications. -/
 def sliceScalarComponentHom
     (e : ∀ G n,
       changeOfRings.{v, c, max c v r} (α.app (op n))
@@ -53,9 +54,7 @@ def sliceScalarComponentHom
           eqToHom (extension.obj_eq (AV.F.obj G) n).symm
 
 /-- Levelwise scalar projection formula and its generator equations, prior to assembling
-an isomorphism of strict systems or complexes.
-Source: Stacks 0E8I, 03DI, 03CY and 03EK
-(blueprint: def-sf-slice-scalar-level-comparison-data). -/
+an isomorphism of strict systems or complexes. -/
 structure SliceScalarLevelComparison where
   /-- Its coefficient-linear component on the actual sheafified tensor objects. -/
   component : ∀ G n,

@@ -10,12 +10,15 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Ordinary coefficient adjunction on a ringed site
 
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03DA
-(auxiliary; not a blueprint node).
 
 Sheafification of the sectionwise tensor/restriction Hom equivalence gives the normalized
 ordinary adjunction. Exactness of restriction follows through the forgetful functor to
 abelian sheaves.
+
+## References
+
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 03DA
 -/
 
 @[expose] public section
@@ -206,18 +209,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 omit [EssentiallySmall.{r} C] in
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction of scalars is exact, and sheafified sectionwise tensor is its left adjoint,
-with Hom map given by evaluation at the image of `1 ⊗ x`.
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 03DA.
-(auxiliary; not a blueprint node)
-Proof: The sectionwise extension/restriction Hom equivalence commutes with restriction maps:
-this follows on pure tensors from naturality of the ring morphism. Compose it with the
-module sheafification Hom equivalence to obtain the displayed Hom equivalence. Its
-naturality gives an adjunction for the prescribed functor E, since its maps are exactly
-the sheafified maps id tensor f. Restriction preserves kernels sectionwise. Cokernels
-are sheafifications of sectionwise cokernels, whose underlying additive presheaves do
-not change under restriction of scalars. The naturality of sheafification identifies
-these cokernels after restriction. Additivity and preservation of kernels and cokernels
-imply preservation of finite limits and finite colimits. -/
+with Hom map given by evaluation at the image of `1 ⊗ x`. -/
 theorem sheafRingCoefficientOrdinaryAdjunction (φ : O ⟶ O') :
     ∃ (_ : PreservesFiniteLimits (restrictScalars.{r}
                     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)))

@@ -31,7 +31,7 @@ Let `A` be a commutative local ring with maximal ideal `𝔪`. A cochain complex
 
 These are the minimal models of perfect complexes over a local ring.
 
-## Implementation notes
+## Implementation details
 
 If some differential `d : Mⁱ ⟶ Mⁱ⁺¹` is nonzero modulo `𝔪`, we pick `x ∈ Mⁱ` and a linear
 form `φ` on `Mⁱ⁺¹` with `φ (d x) = 1`. The map `G = φ(-) • x : Mⁱ⁺¹ ⟶ Mⁱ` satisfies

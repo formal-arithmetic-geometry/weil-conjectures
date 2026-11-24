@@ -56,9 +56,9 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedFiniteExchangeCo
 The open extension, clopen projection and proper/open gamma on completed-ring modules,
 split out of `CompleteCompactSupportProetale`.
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-prop-sf-cbc,
-node proposition-composition-base-change-rf-shriek--4 (blueprint:
-proposition-composition-base-change-rf-shriek--4).
+## References
+
+* Stacks Project, Tags 01K5, 03DI, 03DJ, 07A6, 07A7, 09AE, 0F7B, 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -74,8 +74,7 @@ namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
-/-- The projection of an open pullback, as an arrow in the original pro-etale site.
-Source: Stacks 09AE, localization (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The projection of an open pullback, as an arrow in the original pro-etale site. -/
 def cbcOpenProjection {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     (V : T.ProEt) :
     (cbcOpenSiteFunctor j inferInstance).obj ((proEtaleBaseChange j).obj V) ⟶ V :=
@@ -286,12 +285,7 @@ private theorem cbcRestrictionAdjunction_unit {U T : Scheme.{t}} (j : U ⟶ T)
   rfl
 
 /-- Restriction of sections is the unit from a module to direct image of open restriction.
-Its section formula fixes the comparison, including its completed scalar action.
-Source: Stacks 03DI and 09AE (blueprint: proposition-composition-base-change-rf-shriek--4).
-Proof: apply each presheaf restriction to the displayed pullback projection. Functoriality
-makes these maps natural. The finite coefficient projections show scalar compatibility;
-limit uniqueness gives the same compatibility for completed coefficients. The formula on
-all sections uniquely determines a sheaf map and then the natural transformation. -/
+Its section formula fixes the comparison, including its completed scalar action. -/
 theorem cbcRestrictionUnit_existsUnique {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] :
     ∃! η : 𝟭 (proEtaleRingModules T (d.completedRing T)) ⟶
@@ -307,14 +301,12 @@ theorem cbcRestrictionUnit_existsUnique {U T : Scheme.{t}} (j : U ⟶ T)
   ext M V x
   exact (hθ M V.unop x).trans (cbcRestrictionAdjunction_unit d j M V.unop x).symm
 
-/-- The section-normalized restriction unit.
-Source: Stacks 03DI (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The section-normalized restriction unit. -/
 def cbcRestrictionUnit {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
   (cbcRestrictionUnit_existsUnique d j).choose
 
 -- Transposing the section unit compares the concrete and small-model module categories.
-/-- Ordinary inverse image identifies with open restriction by transposing its section unit.
-Source: Stacks 03DI and 09AE (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Ordinary inverse image identifies with open restriction by transposing its section unit. -/
 def cbcPullToRestriction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
         (d.integralRingIso j) ⟶ cbcOpenRestriction d j inferInstance :=
@@ -324,13 +316,7 @@ def cbcPullToRestriction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
         (𝟭 (proEtaleRingModules T (d.completedRing T)))
           (cbcOpenRestriction d j inferInstance)).symm (cbcRestrictionUnit d j)
 
-/-- The specified restriction comparison is invertible.
-Source: Stacks 03DI and 09AE (blueprint: proposition-composition-base-change-rf-shriek--4).
-Proof: the open-site adjunction, with its finite-projection-normalized coefficient maps,
-lifts to an adjunction between restriction and direct image. Its unit has exactly the
-specified section formula. Uniqueness of that unit identifies the displayed transpose
-with the comparison between the two left adjoints to the same direct image. Uniqueness
-of left adjoints makes this comparison invertible. -/
+/-- The specified restriction comparison is invertible. -/
 theorem cbcPullToRestriction_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] : IsIso (cbcPullToRestriction d j) := by
   let a := proEtaleRingModuleAdjunction j (d.completedRing T) (d.completedRing U)
@@ -350,8 +336,7 @@ theorem cbcPullToRestriction_isIso {U T : Scheme.{t}} (j : U ⟶ T)
   rw [he]
   infer_instance
 
-/-- The exact, section-normalized open adjunction on completed coefficients.
-Source: Stacks 03DI and 03DJ (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The exact, section-normalized open adjunction on completed coefficients. -/
 def cbcDerivedOpenAdjunction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcDerivedOpenShriek d j inferInstance ⊣ d.pull j :=
   Adjunction.ofNatIsoRight
@@ -361,47 +346,37 @@ def cbcDerivedOpenAdjunction {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j
     (proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
       (d.integralRingIso j)).rightDerivedFunctorIsoMapDerivedCategory
 
-/-- Abbreviation for the recorded exact open extension, without a new construction.
-Source: Stacks 03DI (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Abbreviation for the recorded exact open extension, without a new construction. -/
 abbrev cbcJ {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :=
   cbcDerivedOpenShriek d j inferInstance
 
-/-- Open composition is the unique comparison of the composition adjunctions.
-Source: Stacks 03DI, 0F7D (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Open composition is the unique comparison of the composition adjunctions. -/
 def cbcJComp {U V T : Scheme.{t}} (j : U ⟶ V) (k : V ⟶ T)
     [IsOpenImmersion j] [IsOpenImmersion k] : cbcJ d j ⋙ cbcJ d k ≅ cbcJ d (j ≫ k) :=
   Adjunction.leftAdjointCompIso (cbcDerivedOpenAdjunction d j)
     (cbcDerivedOpenAdjunction d k) (cbcDerivedOpenAdjunction d (j ≫ k))
     (d.pullComp j k).symm
 
-/-- Equality transport for the recorded open extension.
-Source: blueprint canonical comparisons (blueprint:
-proposition-composition-base-change-rf-shriek--4). -/
+/-- Equality transport for the recorded open extension. -/
 def cbcJCongr {U T : Scheme.{t}} {j k : U ⟶ T}
     [IsOpenImmersion j] [IsOpenImmersion k] (h : j = k) : cbcJ d j ≅ cbcJ d k :=
   by
     subst k
     exact Iso.refl _
 
-/-- Proper inverse image/direct image with their published tensor-normalized adjunction.
-Source: Stacks 07A6 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Proper inverse image/direct image with their published tensor-normalized adjunction. -/
 abbrev cbcPullPushAdjunction {U T : Scheme.{t}} (f : U ⟶ T) : d.pull f ⊣ d.push f :=
   proEtaleRingDerivedAdjunction f (d.completedRing T) (d.completedRing U)
     (d.integralRingIso f)
 
-/-- Pullback composition around a commutative square, with its canonical compositors.
-Source: Stacks 07A7 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Pullback composition around a commutative square, with its canonical compositors. -/
 def cbcSquarePull {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) :
     d.pull i ⋙ d.pull r ≅ d.pull p ⋙ d.pull k :=
   (d.pullComp r i).symm ≪≫ eqToIso (congrArg (fun f ↦ d.pull f) h.symm) ≪≫
     d.pullComp k p
 
-/-- The open unit is invertible, including on the empty open subscheme.
-Source: Stacks 03DI (blueprint: proposition-composition-base-change-rf-shriek--4).
-Proof: restriction of the extension presheaf has just the summand indexed by the
-structure map of an object over the open. Sheafification and localization preserve
-this unit identification, so every component of the derived unit is invertible. -/
+/-- The open unit is invertible, including on the empty open subscheme. -/
 theorem cbcOpenUnit_isIso {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     IsIso (cbcDerivedOpenAdjunction d j).unit := by
   let W := cbcOpenObject j inferInstance
@@ -459,8 +434,7 @@ theorem cbcOpenUnit_isIso {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
   have : (cbcJ d j).Faithful := Functor.Faithful.of_iso eD
   infer_instance
 
-/-- The inverse open comparison is the transpose of the open-extension unit.
-Source: Stacks 09AE and 07A7 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The inverse open comparison is the transpose of the open-extension unit. -/
 def cbcBetaInv {U' U T' T : Scheme.{t}}
     (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g) :
@@ -472,13 +446,7 @@ def cbcBetaInv {U' U T' T : Scheme.{t}}
       Functor.whiskerLeft (cbcJ d j) (cbcSquarePull d a j' j g h).inv ≫
       (Functor.associator (cbcJ d j) (d.pull g) (d.pull j')).inv)
 
-/-- The unit-normalized open comparison is invertible for a Cartesian open square.
-Source: Stacks 09AE (blueprint: proposition-composition-base-change-rf-shriek--4).
-Proof: ordinary open base change identifies the target with an object in the essential
-image of the fully faithful open extension. The open counit at that target is therefore
-invertible. The transpose in the definition is the pulled-back open unit followed by
-the square compositor, both invertible. Its inverse transpose is extension applied to
-that isomorphism followed by the invertible counit. -/
+/-- The unit-normalized open comparison is invertible for a Cartesian open square. -/
 theorem cbcBetaInv_isIso {U' U T' T : Scheme.{t}}
     (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -505,8 +473,7 @@ theorem cbcBetaInv_isIso {U' U T' T : Scheme.{t}}
   rw [Adjunction.homEquiv_counit]
   infer_instance
 
-/-- Cartesian open comparison, in the forward direction fixed by the inverse unit-mate.
-Source: Stacks 09AE (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Cartesian open comparison, in the forward direction fixed by the inverse unit-mate. -/
 def cbcBeta {U' U T' T : Scheme.{t}}
     (a : U' ⟶ U) (j' : U' ⟶ T') (j : U ⟶ T) (g : T' ⟶ T)
     [IsOpenImmersion j] [IsOpenImmersion j'] (h : a ≫ j = j' ≫ g)
@@ -514,8 +481,7 @@ def cbcBeta {U' U T' T : Scheme.{t}}
   (@asIso _ _ _ _ (cbcBetaInv d a j' j g h)
     (cbcBetaInv_isIso d a j' j g h sq)).symm
 
-/-- Open extension to direct image, fixed by the ordinary units of both adjunctions.
-Source: Stacks 09AE (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Open extension to direct image, fixed by the ordinary units of both adjunctions. -/
 def cbcOpenToPush {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     cbcJ d j ⟶ d.push j :=
   (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft (cbcJ d j) (cbcPullPushAdjunction d j).unit ≫
@@ -574,12 +540,7 @@ private theorem cbcClopenReverseAdjunction {U T : Scheme.{t}} (j : U ⟶ T)
     cbcOpenShriek_finiteColimits d j inferInstance
   exact ⟨br.mapExactDerivedCategory⟩
 
-/-- The specified open-to-direct-image map is invertible on a clopen immersion.
-Source: Stacks 09AE (blueprint: proposition-composition-base-change-rf-shriek--4).
-Proof: split every test object into its two clopen parts. Both extension and direct
-image give the sections on the image part and zero on the complement. The units in
-the definition identify the comparison with identity on that first factor. The same
-formula holds on complexes and descends through the exact localizations. -/
+/-- The specified open-to-direct-image map is invertible on a clopen immersion. -/
 theorem cbcOpenToPush_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] [IsClosedImmersion j] : IsIso (cbcOpenToPush d j) := by
   obtain ⟨ar⟩ := cbcClopenReverseAdjunction d j
@@ -603,8 +564,7 @@ theorem cbcOpenToPush_isIso {U T : Scheme.{t}} (j : U ⟶ T)
     exact IsIso.comp_isIso' hu (IsIso.comp_isIso' hw (IsIso.id _))
   exact NatIso.isIso_of_isIso_app _
 
-/-- Canonical clopen projection; identity on the image and zero on the complement.
-Source: Stacks 09AE (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Canonical clopen projection; identity on the image and zero on the complement. -/
 def cbcClopenProjection {U T : Scheme.{t}} (j : U ⟶ T)
     [IsOpenImmersion j] [IsClosedImmersion j] : 𝟭 (d.derived T) ⟶ d.pull j ⋙ cbcJ d j :=
   (cbcPullPushAdjunction d j).unit ≫ Functor.whiskerLeft (d.pull j)
@@ -612,8 +572,7 @@ def cbcClopenProjection {U T : Scheme.{t}} (j : U ⟶ T)
 
 /-- The non-Cartesian proper/open comparison before taking its proper-adjunction mate.
 It projects onto the clopen image of (k,r) in the fibre product, with no extra
-Cartesian-square hypothesis on a refinement.
-Source: Stacks 0F7B, 07A7 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+Cartesian-square hypothesis on a refinement. -/
 def cbcProperOpenAlpha {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -639,8 +598,7 @@ def cbcProperOpenAlpha {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (pullback.snd p i)).inv ≫
       (eqToIso (congrArg (fun f ↦ d.pull f) (pullback.lift_snd k r h))).hom) (cbcJ d k)
 
-/-- The canonical proper/open map is the proper-adjunction mate of the clopen projection.
-Source: Stacks 0F7B, 07A7 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The canonical proper/open map is the proper-adjunction mate of the clopen projection. -/
 def cbcProperOpenGamma {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -649,8 +607,7 @@ def cbcProperOpenGamma {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (cbcProperOpenAlpha d k r p i h)
 
 /-- The base-changed finite-type morphism is quasi-compact. This is a consequence
-of the supplied square, not an additional typeclass hypothesis in the coherence laws.
-Source: Stacks 01K5 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+of the supplied square, not an additional typeclass hypothesis in the coherence laws. -/
 abbrev cbcBaseChangeQuasiCompact {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {g' : X' ⟶ X} [QuasiCompact f]
     (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z)
@@ -660,9 +617,7 @@ abbrev cbcBaseChangeQuasiCompact {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X'
       (c.quasiCompact_openImmersion inferInstance))
 
 /-- The recorded exchange, with its quasi-compactness instance named for explicit
-transport to a base-changed compactification. Its map is definitionally unchanged.
-Source: blueprint ordered two-factor composite (blueprint:
-proposition-composition-base-change-rf-shriek--4). -/
+transport to a base-changed compactification. Its map is definitionally unchanged. -/
 abbrev cbcExchange {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     {g : Y' ⟶ Y} {g' : X' ⟶ X} [qf : QuasiCompact f]
     (c : Compactification f) (c' : Compactification f') (gbar : c'.Z ⟶ c.Z)
@@ -672,9 +627,7 @@ abbrev cbcExchange {X' X Y' Y : Scheme.{t}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
     (K : (cbcCompleteProperty d X r a ha).FullSubcategory) :=
   completedCompactSupportExchange d c c' gbar sp sj r a ha K
 
-/-- The exact chosen-compactification functor Rp_* j_! on completed-ring modules.
-Source: blueprint displayed definition of Rf_!^c (blueprint:
-proposition-composition-base-change-rf-shriek--4). -/
+/-- The exact chosen-compactification functor Rp_* j_! on completed-ring modules. -/
 abbrev cbcSupport {X Y : Scheme.{t}} {f : X ⟶ Y} (c : Compactification f) :=
   cbcJ d c.i ⋙ d.push c.g
 

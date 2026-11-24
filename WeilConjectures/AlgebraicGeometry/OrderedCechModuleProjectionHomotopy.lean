@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.OrderedCechModuleCoordinates
 
 /-! # Sorting homotopy for the module Čech projection
 
-Source: Stacks Project, Tags 01FK and 01FM.
+## References
+
+* [Stacks, Tags 01FK and 01FM]
 -/
 
 @[expose] public section
@@ -63,18 +65,8 @@ private theorem fullCoordinate_ext {X' T' : Scheme.{u}} (f' : X' ⟶ T')
   simpa only [← ConcreteCategory.comp_apply, ← Hom.comp_app, E.hom_inv_id,
     Hom.id_app, ConcreteCategory.id_apply, map_zero] using hv'
 
-/-- The signed projection is homotopic to identity before any kernel hypothesis.
-Source: Stacks 01FM, equations 20.23.6.1 and 20.23.6.2.
-(blueprint: lem-pc-ordered-cech-module-projection-homotopy).
-
-Proof: Transport the first sorting family H and the second family J along e on every
-open. Their identities give dH+Hd=id-kappa and dJ+Jd=kappa-P. Naturality follows
-termwise from restriction functoriality; local linearity follows from hlinear since
-all terms restrict the same scalar to the same intersection. Their sum is therefore
-an actual family of module-sheaf maps with boundary id-P. Push forward these maps
-and extend by zero in negative degrees. The degree-zero incoming component is zero,
-as in the natural-degree families. These give the asserted homotopy. The formulas
-also apply to empty families and to degrees with no increasing tuples. -/
+/-- The signed projection is homotopic to identity before any kernel hypothesis
+(Stacks, Tag 01FM). -/
 theorem orderedCech_module_projection_homotopy {X' T' : Scheme.{u}} (f' : X' ⟶ T')
     (M : X'.Modules) {r : ℕ} (W₀ : ULift.{u} (Fin r) → X'.Opens)
     (D : CochainComplex X'.Modules ℕ)

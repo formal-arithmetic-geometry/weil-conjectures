@@ -11,7 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenExtTranspor
 import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
 /-! # Free abelian sheaves for a two-open cover
 
-Source: Stacks Project, Tag 01EB.
+## References
+
+* Stacks Project, Tag 01EB and Section 01F7
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -20,28 +22,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Abelian
 namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] cohomologyHasSheafify cohomologyHasExt
 variable {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] {X : Scheme.{u}}
-/-- Compatible Ext presentations for a single cohomology term.
-Source: Stacks Project, Tag 01EB and Section 01F7.
-(blueprint: lem-pc-open-free-ext-comparison)
-
-Proof: The sheafification of the free abelian presheaf on the represented open
-represents sections on that open by the free/forgetful and sheafification
-adjunctions. Restriction and extension by zero for an open immersion are exact
-adjoint functors. Their derived adjunction identifies Ext from this free sheaf
-with cohomology of the restricted coefficient sheaf. For the top open this is
-also the usual constant-integer-sheaf definition of global cohomology. Naturality
-in coefficients identifies scalar multiplication with Ext postcomposition.
-Inverse image carries the represented free sheaf to the free sheaf on the
-preimage open: under inverse-image adjunction both represent sections of direct
-image on the original open. Cartesian open-subscheme isomorphisms and composition
-of module pullback identify its coefficients with the displayed base-changed
-module. Apply the same derived adjunction on the base-changed scheme. Its
-coefficient naturality gives the second scalar equation. Its naturality under
-inverse image and the adjoint coefficient morphism identifies the comparison with
-H.baseChangeLinear, whose definition uses this same constant-sheaf comparison and
-coefficient map. This proves the last equation. Empty opens and zero coefficients
-give zero groups and require no additional hypotheses.
--/
+/-- Compatible Ext presentations for a single cohomology term. -/
 theorem H.openFreeExtComparison (f : X ⟶ Spec (.of R)) (M : X.Modules) (W : X.Opens) :
     let F := (SheafOfModules.toSheaf X.ringCatSheaf).obj M
     let G := invImage (baseChangeFst (S := S) f)

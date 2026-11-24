@@ -16,8 +16,9 @@ import WeilConjectures.RingTheory.FiniteMapColimitDescent
 /-!
 # Finiteness descent on an affine open over an affine base open
 
-Source: Stacks Project, Limits, proof of Tag 01ZO, affine calculation, and Algebra,
-Tag 07RG (blueprint: lem-weil-pbc-descend-finite-affine-base-piece).
+## References
+
+* Stacks Project, Tags 01ZO and 07RG
 -/
 
 @[expose] public section
@@ -28,27 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
-/-- The affine calculation in finiteness descent, with a common affine base open.
-
-Source: Stacks Project, Limits, proof of Tag 01ZO, and Algebra, Tag 07RG
-(blueprint: lem-weil-pbc-descend-finite-affine-base-piece).
-
-Proof: Pull back the affine base open `W` to the upper tail above `k`. Affine
-transitions make all these opens affine; their limit is the corresponding open of
-`c.pt`, by open pullback pasting and the affine-transition limit theorem. Its
-coordinate ring is the directed colimit of the stage coordinate rings, by the
-Spec adjunction. The inverse image of `V` at `k` is affine, since its projection
-to `V` is affine. Its inverse image under the assumed affine morphism at `k`
-is affine too. Write their rings as `B` and `C`, over the ring `A` of the
-pullback of `W` at `k`. Local finite type says that `B → C` is finite type.
-Pullback pasting and the affine spectrum tensor-product isomorphism identify
-later restrictions with Spec of `A_i ⊗ B → A_i ⊗ C`, compatibly with transition
-maps; the limit restriction is the analogous map over `colim A_i`. Its
-finiteness gives finiteness of that ring map. Tag 07RG gives finiteness at some
-stage. Translate this back across the affine-spectrum comparison to obtain the
-required finite restriction. This calculation works also when `V` or `W` is empty:
-the corresponding coordinate rings are zero rings and the morphisms are finite.
--/
+/-- The affine calculation in finiteness descent, with a common affine base open
+(Stacks, Tags 01ZO and 07RG). -/
 theorem exists_isFinite_morphismRestrict_baseChange_affine_base_piece
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (D : Iᵒᵖ ⥤ Scheme.{u})

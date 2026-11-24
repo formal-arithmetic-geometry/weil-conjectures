@@ -241,4 +241,31 @@ theorem Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom (π : S'' ⟶ S')
 
 end Source
 
+/-- Integral changes of source and base. Assume `BC(p, Λ, q - 1)` for some `q ≥ 1`. Then
+
+1. for an integral surjective `π : T' ⟶ T` and a quasi-compact quasi-separated `g : T ⟶ S`, if
+   the base-change map over `π ≫ g` is an isomorphism at `π⁻¹ F`, then so is the one over `g`
+   at `F`;
+2. for an integral `π : S' ⟶ S`, the base change `p'` of `p` along `π` and `g' : T ⟶ S'`, the
+   base-change map over `g' ≫ π` is an isomorphism at `F` if and only if the one for `p'` over
+   `g'` is. -/
+theorem Etale.BaseChangeProperty.isIso_baseChangeHomologyMap_of_integral_source_and_base
+    {X S : Scheme.{u}} {p : X ⟶ S} {q : ℤ} (hq : 1 ≤ q)
+    (hprev : Etale.BaseChangeProperty Λ p (q - 1)) :
+    (∀ {T T' Y Y' : Scheme.{u}} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} {e' : Y' ⟶ T'}
+      {h' : Y' ⟶ X} [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
+      (π : T' ⟶ T) [IsIntegralHom π], Function.Surjective π.base →
+      ∀ (sq' : IsPullback e' h' (π ≫ g) p) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        IsIso (Etale.baseChangeHomologyMap Λ sq' q ((π)^*[ModuleCat.{u + 1} Λ].obj F)) →
+          IsIso (Etale.baseChangeHomologyMap Λ sq q F)) ∧
+    (∀ {S' X' T Y : Scheme.{u}} {p' : X' ⟶ S'} {π' : X' ⟶ X} {g' : T ⟶ S'} {e : Y ⟶ T}
+      {h' : Y ⟶ X'} (π : S' ⟶ S) [IsIntegralHom π] (_ : IsPullback π' p' p π)
+      (sq' : IsPullback e h' g' p') (sq : IsPullback e (h' ≫ π') (g' ≫ π) p)
+      (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsIso (Etale.baseChangeHomologyMap Λ sq q F) ↔
+        IsIso (Etale.baseChangeHomologyMap Λ sq' q F)) :=
+  ⟨fun sq π _ hπ sq' F hF ↦
+    Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective Λ q hq hprev sq π hπ sq' F hF,
+    fun π _ hπ sq' sq F ↦ Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom Λ π hπ sq' sq q F⟩
+
 end AlgebraicGeometry

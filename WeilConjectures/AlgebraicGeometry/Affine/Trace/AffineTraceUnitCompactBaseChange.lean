@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Affine.Linear.AffineLinearTraceA
 import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceCompactComparisonRestriction
 
 /-! # Base change of the compact-support comparison at the affine Tate coefficient
-
-Source: blueprint vector integration, overlap calculation, transport of tower exchange.
-(blueprint: lem-amb-affine-trace-unit-compact-base-change).
 -/
 
 @[expose] public noncomputable section
@@ -327,26 +324,7 @@ private lemma comparison_eq
 
 /-- The comparison with ordinary compact supports intertwines tower exchange at the
 canonical Tate coefficient with ordinary exchange and its canonical coefficient map.
-There is no vector bundle, frame or inverse-chart square in this statement.
-Source: blueprint sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md,
-overlap calculation, comparison of coordinate-tower exchange with ordinary exchange.
-(blueprint: lem-amb-affine-trace-unit-compact-base-change).
-
-Proof: express the ordered tower comparison on bounded-below objects by the recursive
-compactification comparison followed by the compact-support compositor. At zero the
-comparison is inverse to the compact-support identity comparison, and exchange is the
-identity; the unit compatibility of compact-support exchange gives the equation.
-For a successor, expand the last affine-line step. Its exchange is the proper/open
-exchange on the standard projective compactification, conjugated by the comparisons
-with the chosen compactification. Apply compatibility of exchange with compact-support
-composition, then compactification independence to identify this conjugate with ordinary
-line exchange. The preceding tower equation identifies the remaining factor. Transport
-through the bounded-below inclusion using the composition and exchange compatibility
-of the unbounded compact-support package. The right coefficient is bounded below by
-affine-space top trace; exact pullback preserves this property. Naturality of the tower
-comparison moves the isomorphism b through it, giving the displayed equation. The proof
-uses only canonical comparison and exchange maps, so it also covers d=0, empty bases,
-and the zero coefficient ring. -/
+There is no vector bundle, frame or inverse-chart square in this statement. -/
 theorem affineTraceUnitCompactComparison_baseChange
     (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

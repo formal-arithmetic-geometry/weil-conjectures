@@ -16,7 +16,9 @@ import all WeilConjectures.AlgebraicGeometry.ConstantModulePushforwardFunctorial
 
 /-! # Degree-zero strict-local stalk comparison for constant coefficients
 
-Source: Stacks Project, Tag 03Q9, applied in Tag 09Z5.
+## References
+
+* Stacks Project, Tags 03Q9 and 09Z5
 -/
 
 @[expose] public section
@@ -82,33 +84,8 @@ private theorem coefficient_two_pullbacks
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical degree-zero strict-local stalk comparison for constant coefficients
-carries the unit applied to a coefficient to the same constant section on the strict fibre.
-Source: Stacks Project, Tag 03Q9, degree zero and its restriction construction,
-as used in the first assertion of Tag 09Z5.
-(blueprint: lem-weil-pbc-constant-strict-fibre-stalk-comparison)
-
-Proof: Apply the existing qcqs strict-local module comparison to f^* M_Y.
-Its target is global sections of p^* f^* M_Y, where p is the projection from the
-strict fibre to X. Apply twice the canonical inverse-image/constant-sheaf
-isomorphism, then evaluate global sections at the identity etale object.
-This composite is invertible because each factor is invertible.
-For the coefficient equation, choose any representative affine pointed
-neighbourhood. Its map to the terminal object carries its marked point to t,
-since the terminal object's point fibre has exactly one element. Naturality of
-the constant-presheaf sheafification map and the stalk germ maps therefore
-express the terminal coefficient germ on this neighbourhood. Naturality of
-the unit and the comparison's defining germ formula give first the unit for f,
-then the unit for p, followed by restriction along the strict-local limit leg.
-The canonical constant-pullback comparisons preserve constant generators.
-Move these comparisons through the restrictions and through the second unit
-by naturality. Applying the generator equation first for f and then for p
-leaves the constant generator on the iterated pullback. Naturality of
-sheafification along the limit leg gives the required constant section on
-the strict fibre. These are equations of module morphisms throughout.
-
-Edge cases: no normality or connectedness hypothesis is used. If the strict fibre
-is empty, the stalk and the section module both vanish and the coefficient map
-is zero. Arbitrary modules and the zero coefficient ring are allowed. -/
+carries the unit applied to a coefficient to the same constant section on the strict fibre
+(Stacks, Tags 03Q9 and 09Z5). -/
 theorem constant_strict_fibre_stalk_comparison
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]

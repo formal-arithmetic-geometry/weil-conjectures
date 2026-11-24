@@ -16,8 +16,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 /-!
 # Closed subsets proper over a base: structures, subsets, and images
 
-Source: Stacks Project, Cohomology of Schemes, Lemmas 0CYL, 0CYN, and 0CYQ
-(blueprint: lem-weil-pbc-closed-subset-proper-over-base-properties).
+## References
+
+* Stacks Project, Tags 0CYL, 0CYN and 0CYQ
 -/
 
 @[expose] public section
@@ -29,29 +30,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Closed subset properness is independent of the chosen closed subscheme structure,
-passes to closed subsets, and is preserved by images under morphisms over the base.
-Source: Stacks Project, Cohomology of Schemes, Lemmas 0CYL, 0CYN, and 0CYQ.
-(blueprint: lem-weil-pbc-closed-subset-proper-over-base-properties)
-
-Proof:
-1. Put `R = Z_red`, with its canonical closed immersion `i : R ⟶ X` and image `Z`.
-   For any closed immersion `i'` with image `Z`, the reduced-source kernel criterion
-   `IdealSheafData.le_ker_iff_range_subset_support` and the closed-immersion lifting
-   property give `a : R ⟶ Z'` with `a ≫ i' = i` (Stacks Tag 0356).
-2. The factor `a` is a closed immersion because its composite with `i'` is one.
-   It is surjective because `i` and `i'` have the same image and `i'` is injective.
-   If `R ⟶ S` is proper, separatedness descends along `a` by Tag 09MQ (4),
-   and universal closedness by Tag 03GN. Local finite type follows by composition.
-   Conversely, properness of `Z' ⟶ S` implies properness of `R ⟶ S` by composition
-   with the proper closed immersion `a`. This proves both structure equivalences.
-3. For `Y ≤ Z`, the reduced structure on `Y` factors into `R` by the same kernel
-   criterion. The factor is a closed immersion, so its composite to `S` is proper.
-4. For the image assertion, `h = i ≫ g` is proper because its composite with the
-   separated map `f'` is proper. Its range is closed and equals `g '' Z`.
-   The source of `h` is reduced, so its kernel is the vanishing ideal of this range.
-   Thus its scheme-theoretic image is the reduced induced structure of that range,
-   and `isProper_imageι_comp` (Tag 0AH6) proves it proper over `S`.
--/
+passes to closed subsets, and is preserved by images under morphisms over the base
+(Stacks, Tags 0CYL, 0CYN and 0CYQ). -/
 theorem closed_subset_proper_over_base_properties
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f]
     (Z : TopologicalSpace.Closeds X) :

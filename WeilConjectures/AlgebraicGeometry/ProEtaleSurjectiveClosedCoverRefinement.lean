@@ -117,20 +117,7 @@ private theorem affine_cover_lift {X Z : Scheme.{u}} [IsAffine X]
     _ = pullback.snd (B.f b) i := by simp [t]
 set_option backward.isDefEq.respectTransparency false in
 /-- A pro-etale cover of a surjective closed subscheme has a covering refinement
-obtained by base change from the ambient scheme.
-
-Source: Stacks Project Tag 09AB, affine ind-etale basis argument, and Tag 09BK.
-Proof: for an affine quotient A/I, refine the given cover by a finite jointly
-surjective family from the affine ind-etale basis. Apply the closed-site lift to
-each member. Its closed fibre is the original member, so surjectivity of the
-closed immersion makes the lifted family jointly surjective. Finitely many affine
-members give a quasi-compact pro-etale cover. The cartesian closed-fibre squares
-supply its refinement maps. Identify any affine closed immersion with an affine
-quotient using its ideal and the canonical affine isomorphisms. Finally apply
-this construction on an affine open cover of the target and bind the resulting
-covers. All constructions allow an empty family when the target is empty.
-(auxiliary; not a blueprint node)
--/
+obtained by base change from the ambient scheme (Stacks, Tags 09AB and 09BK). -/
 theorem exists_cover_refinement_surjective_closed {X Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [Surjective i]
     (C : Cover.{u} proetalePrecoverage Z) :

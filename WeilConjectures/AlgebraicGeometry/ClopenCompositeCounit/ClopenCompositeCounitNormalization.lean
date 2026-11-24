@@ -17,12 +17,12 @@ import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplemen
 /-!
 # Clopen projection and composite derived counit
 
-Source: blueprint main-20261015, prop-sf-pf-coherence.proof.md,
-compactification-independence and open-restriction/counit calculation; Stacks
-04TS, 015F, 0037 and 0DV0 (blueprint: lem-sf-clopen-composite-counit-normalization).
-
 All maps below use the existing constant-module sheaves on the small pro-etale site.
 The projector is the localization of the sheaf-level clopen component projection.
+
+## References
+
+* Stacks Project, Tags 04TS, 015F, 0037, 0DV0, 03DI
 -/
 
 @[expose] public noncomputable section
@@ -39,16 +39,14 @@ namespace AlgebraicGeometry.ProEtale.ClopenCompositeCounit
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- The specified inverse-image/direct-image adjunction, written with exact termwise
-inverse image. Source: Stacks 015F, 0037
-(blueprint: lem-sf-clopen-composite-counit-normalization). -/
+inverse image. -/
 def adjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (upperStar (ModuleCat.{u + 1} Λ) f).mapDerivedCategory ⊣
       (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor :=
   (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).ofNatIsoLeft
     (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) f)
 
-/-- The identity-on-open unit, localized from the normalized sheaf adjunction.
-Source: Stacks 03DI, 015F (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+/-- The identity-on-open unit, localized from the normalized sheaf adjunction. -/
 def openUnit {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
     𝟭 (DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} Λ))) ≅
       (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategory ⋙
@@ -58,16 +56,13 @@ def openUnit {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
       (asIso (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) s).unit) ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The stipulated adjunct of the inverse open unit, as a natural transformation.
-Source: Stacks 0037 (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+/-- The stipulated adjunct of the inverse open unit, as a natural transformation. -/
 def comparison {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategory ⟶
       (lowerStar (ModuleCat.{u + 1} Λ) s).rightDerivedFunctor :=
   ((adjunction Λ s).whiskerRight _).homEquiv _ _ (openUnit Λ s).inv
 
-/-- The canonical sheaf comparison is invertible on a clopen immersion.
-This is the published comparison, with its existing invertibility proof.
-Source: Stacks 04TS (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+/-- The canonical sheaf comparison is invertible on a clopen immersion. -/
 def sheafComparison {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
     openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s ≅
@@ -77,8 +72,7 @@ def sheafComparison {U X : Scheme.{u}} (s : U ⟶ X)
   asIso (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) s)
 
 /-- The sheaf reverse adjunction. Its unit is identity on the selected clopen piece
-and zero on the complementary open: restrict a section, then insert it by zero.
-Source: Stacks 04TS, 0037 (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+and zero on the complementary open: restrict a section, then insert it by zero. -/
 def reverseSheafAdjunction {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
     upperStar (ModuleCat.{u + 1} Λ) s ⊣ openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s :=
@@ -86,8 +80,7 @@ def reverseSheafAdjunction {U X : Scheme.{u}} (s : U ⟶ X)
     (sheafComparison Λ s).symm
 
 /-- The specified degreewise clopen projector, obtained by localizing its exact
-sheaf adjunction; no identification with the derived direct-image unit is assumed.
-Source: Stacks 04TS, 015F (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+sheaf adjunction; no identification with the derived direct-image unit is assumed. -/
 def projector {U X : Scheme.{u}} (s : U ⟶ X)
     [IsOpenImmersion s] [IsClosedImmersion s] :
     𝟭 (DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))) ⟶
@@ -95,8 +88,7 @@ def projector {U X : Scheme.{u}} (s : U ⟶ X)
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategory :=
   (exactDerivedAdjunction (reverseSheafAdjunction Λ s)).unit
 
-/-- Canonical pullback composition, with the orientation P_s P_q to P_(s;q).
-Source: Stacks 0037 (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+/-- Canonical pullback composition, with the orientation P_s P_q to P_(s;q). -/
 def pullbackComposition {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W) :
     (upperStar (ModuleCat.{u + 1} Λ) q).mapDerivedCategory ⋙
         (upperStar (ModuleCat.{u + 1} Λ) s).mapDerivedCategory ≅
@@ -105,8 +97,7 @@ def pullbackComposition {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W) :
     Functor.mapDerivedCategoryNatIso (upperStarComp (ModuleCat.{u + 1} Λ) s q).symm
 
 /-- Direct-image composition is the conjugate of inverse pullback composition for
-the pasted adjunction, fixing the unit and counit normalization.
-Source: Stacks 0037, 0DV0 (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+the pasted adjunction, fixing the unit and counit normalization. -/
 def directComposition {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W) :
     (lowerStar (ModuleCat.{u + 1} Λ) s).rightDerivedFunctor ⋙
         (lowerStar (ModuleCat.{u + 1} Λ) q).rightDerivedFunctor ≅
@@ -114,8 +105,7 @@ def directComposition {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W) :
   conjugateIsoEquiv ((adjunction Λ q).comp (adjunction Λ s)) (adjunction Λ (s ≫ q))
     (pullbackComposition Λ s q).symm
 
-/-- The specified a = c composed with S_q(t_s).
-Source: Stacks 0037, 0DV0 (blueprint: lem-sf-clopen-composite-counit-normalization). -/
+/-- The specified a = c composed with S_q(t_s). -/
 def compositeComparison {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W)
     [IsOpenImmersion s] :
     (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategory ⋙
@@ -124,9 +114,7 @@ def compositeComparison {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W)
   Functor.whiskerRight (comparison Λ s)
     (lowerStar (ModuleCat.{u + 1} Λ) q).rightDerivedFunctor ≫ (directComposition Λ s q).hom
 
-/-- The whole stipulated composite, with the pullback identification inserted explicitly.
-Source: blueprint prop-sf-pf-coherence.proof.md, open-restriction/counit calculation
-(blueprint: lem-sf-clopen-composite-counit-normalization). -/
+/-- The whole stipulated composite, with the pullback identification inserted explicitly. -/
 def cancellation {U X W : Scheme.{u}} (s : U ⟶ X) (q : X ⟶ W)
     [IsOpenImmersion s] [IsClosedImmersion s]
     (M : DerivedCategory (Sheaf (ProEt.topology U) (ModuleCat.{u + 1} Λ))) :=

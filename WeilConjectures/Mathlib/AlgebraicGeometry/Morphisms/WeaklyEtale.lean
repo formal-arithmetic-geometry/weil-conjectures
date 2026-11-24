@@ -28,6 +28,8 @@ nonempty source has a section: an affine open of `V` is the spectrum of a nonzer
 - `AlgebraicGeometry.weaklyEtale_SpecMap_algebraMap_iff`
 - `AlgebraicGeometry.exists_comp_eq_id_of_weaklyEtale`: a weakly étale scheme over an
   algebraically closed field `K` with a point has a `K`-point.
+- `AlgebraicGeometry.weaklyEtale_iff_of_iSup_eq_top`: weak étaleness is Zariski local on the
+  source.
 -/
 
 @[expose] public section
@@ -98,5 +100,12 @@ theorem exists_comp_eq_id_of_weaklyEtale {K : Type u} [Field K] [IsAlgClosed K] 
   congr 1
   ext x
   exact ψ.commutes x
+
+/-- Let `f : U ⟶ X` be a morphism of schemes and `U = ⋃ᵢ Uᵢ` a Zariski open covering. Then `f`
+is weakly étale if and only if every restriction `Uᵢ ⟶ X` is weakly étale. -/
+theorem weaklyEtale_iff_of_iSup_eq_top {U X : Scheme.{u}} (f : U ⟶ X) {ι : Type*}
+    (V : ι → U.Opens) (hV : iSup V = ⊤) :
+    WeaklyEtale f ↔ ∀ i, WeaklyEtale ((V i).ι ≫ f) :=
+  IsZariskiLocalAtSource.iff_of_iSup_eq_top (P := @WeaklyEtale) V hV
 
 end AlgebraicGeometry

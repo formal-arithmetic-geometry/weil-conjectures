@@ -11,8 +11,10 @@ import WeilConjectures.AlgebraicGeometry.Etale.Brown.EtaleBrownProperScalarSquar
 
 /-! # Proper scalar mate in normalized realizations
 
-Source: Zheng, Construction 4.1, Constructions 5.14--5.15 and Lemma 5.16;
-Stacks 03CY, 06YY and 07A4.
+## References
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1,
+  Constructions 5.14--5.15 and Lemma 5.16
+* Stacks Project, Tags 03CY, 06YY, 07A4, 0F0G, 0GL6
 -/
 
 @[expose] public noncomputable section
@@ -32,22 +34,7 @@ attribute [local instance] CoefficientSystemOrdinaryImage.inverseAdditive
   CoefficientSystemOrdinaryImage.systemInverseAdditive
   CoefficientSystemOrdinaryImage.systemRightAdditive
 
-/-- The proper scalar projection and its local transport square.
-Source: Zheng, Lemma 5.16; Stacks 0F0G, 0GL6 and 07A4.
-(blueprint: lem-pur-etale-brown-proper-scalar-transport).
-
-Proof: form the geometric right mate of the recorded derivedTensor. Its transport
-through the normalized image and scalar comparisons is scalarMate: apply the scalar
-Hom bijection, replace scalar comparisons by their restriction mates, and use the
-unit-compatible direct-image squares on cochains. The ordinary restriction square
-is the identity on sections in both encodings, so localization and the uniqueness
-of the right-derived unit give the same restricted square. The scalar unit equation
-then identifies the transposes. This proves the displayed local square. The proper
-finite-coefficient projection theorem makes scalarMate invertible on every derived
-input. All other factors in the square are isomorphisms, and RW.derived m reflects
-isomorphisms; hence the recorded mate is invertible. Take its inverse isomorphism
-as projection. This proof applies to nonflat quotients and the zero ring; no bound
-on the input, no regularity, and no separatedness of the target is used. -/
+/-- The proper scalar projection and its local transport square. -/
 theorem etaleBrownProperScalarTransport
     (O : Type (u + 1)) [CommRing O] (t : O)
     {V W : Scheme.{u}} (g : V ⟶ W) [IsProper g]

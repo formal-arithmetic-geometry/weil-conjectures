@@ -14,7 +14,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 
 /-! # Exactness of extension from a constant field presheaf
 
-Source: Stacks Project, Modules, Tag 02N4; Sheaves on Spaces, Tag 0095.
+## References
+
+* Stacks Project, Tags 02N4 and 0095
 -/
 
 @[expose] public section
@@ -39,22 +41,7 @@ private theorem fieldModuleFunctor_preservesMonomorphisms
     infer_instance
 
 /-- Extension from the constant field presheaf preserves monomorphisms before
-sheafification.
-
-Source: Stacks Project, Modules, Tag 02N4; Sheaves on Spaces, Tag 0095.
-(blueprint: lem-sc-field-scalar-presheaf-pullback-mono).
-
-Proof: put α_U = R(X -> U) ∘ α. The identity-site presheaf pullback is computed
-at U by R(U) ⊗[k] V(U). Here R(U) is a right k-module by a · c = a α_U(c),
-and left R(U) acts on the first factor by left multiplication. This bimodule
-construction does not assume that R(U) is commutative or that α_U(k) is central.
-Its universal property gives the natural sectionwise tensor description of the
-Mathlib presheaf pullback. A monomorphism of module presheaves is injective at
-every open. Every right module over a field is flat, so tensoring these injections
-with R(U) remains injective. Hence the image morphism is pointwise injective and
-therefore a monomorphism of R-module presheaves. If R(U) is the zero ring, the
-tensor is zero and the assertion still holds; the empty space also needs no
-nonempty-open assumption. -/
+sheafification (Stacks, Tags 02N4, 0095). -/
 theorem fieldScalarPresheafPullback_preservesMonomorphisms
     {k : Type u} [Field k] (X : TopCat.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})

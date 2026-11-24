@@ -10,8 +10,17 @@ import WeilConjectures.AlgebraicGeometry.RingedTopoiInverseImageTensorPairingIsI
 
 /-! # Tensor comparison for the algebraic inverse image
 
-Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
+The specified algebraic inverse image preserves tensor products, compatibly with the pure
+tensor pairings.
+
+## Implementation details
+
+The comparison is built from the supplied algebraic inverse image, including its underlying
+natural isomorphism, rather than from an arbitrary other inverse-image lift.
+
+## References
+
+* [Stacks, Tag 03EL]
 -/
 
 @[expose] public section
@@ -26,22 +35,7 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   (uInv : Sheaf J (Type u) ⥤ Sheaf K (Type u))
   (I : AlgebraicInverseImage uInv R RI)
 
-/-- The specified algebraic inverse image preserves tensor products with their pairings.
-Source: Stacks Project, Modules on Sites, Tag 03EL, third equality of the proof.
-(auxiliary; not a blueprint node).
-
-Proof: The right adjoint preserves products. Transport its additive operations and the
-RI-action along the adjunction to give its module direct image, with action of R through
-the adjoint of I.ringUnderlying. The graph equations I.moduleAdd and I.moduleSMul,
-tested on universal pairs and triples, identify the mates of the linearity equations.
-Thus adjunction restricts to a natural bijection between bilinear maps on I(M), I(N)
-and bilinear maps on M, N with values in that direct image. Apply the sheaf tensor
-universal property before and after this bijection. The resulting natural Hom bijection
-is represented by an isomorphism. Evaluating the bijection on identities gives the
-isomorphism and its inverse; naturality gives their inverse equations and simultaneous
-naturality. Evaluating on any pair of generalized sections gives the displayed pure
-formula. This uses the given algebraic lift, including its underlying natural iso;
-no arbitrary identification with a different inverse-image lift is used. -/
+/-- The specified algebraic inverse image preserves tensor products with their pairings. -/
 theorem exists_inverseImageTensorComparison
     (uPush : Sheaf K (Type u) ⥤ Sheaf J (Type u))
     (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] :

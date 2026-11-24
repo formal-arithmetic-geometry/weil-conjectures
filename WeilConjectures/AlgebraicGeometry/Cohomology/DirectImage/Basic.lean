@@ -44,11 +44,7 @@ theorem isGrothendieckAbelian (X : Scheme.{u}) : IsGrothendieckAbelian.{u} X.Mod
 
 /-- The `q`-th **higher direct image** functor `R^q f_*` along a morphism of schemes
 `f : X ⟶ T`: the `q`-th right derived functor of the pushforward functor
-`AlgebraicGeometry.Scheme.Modules.pushforward f : X.Modules ⥤ T.Modules`.
-
-Both `X.Modules` and `T.Modules` are abelian and the pushforward is additive, so the only
-extra input is the existence of injective resolutions in `X.Modules`, which is taken as an
-instance hypothesis. -/
+`AlgebraicGeometry.Scheme.Modules.pushforward f : X.Modules ⥤ T.Modules`. -/
 noncomputable def higherDirectImage (f : X ⟶ T) [HasInjectiveResolutions X.Modules] (q : ℕ) :
     X.Modules ⥤ T.Modules :=
   (pushforward f).rightDerived q

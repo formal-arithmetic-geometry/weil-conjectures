@@ -216,16 +216,7 @@ private theorem normalizationOfFormula (X : Scheme.{u}) (F : X.Modules)
 
 -- Affineness is only needed for the subsequent invertibility theorem.
 set_option linter.unusedVariables false in
-/-- A normalized degree comparison homomorphism, without invertibility.
-Source: Stacks Project, Tag 03P2, affine calculation; Tag 03DR, equation (35.8.1).
-(blueprint: new-etale-affine-singleton-tensor-degree-comparison-hom)
-
-Proof: the product projections induce compatible maps on global functions.
-Tensor universality sends tprod(b) to the product of their images. Combine this
-map with the additive, semilinear section restriction by the universal property
-of the coefficient tensor product. Lift the resulting additive map through ULift
-and map it into the outer categorical product. The projection equation for Pi.lift
-and the pure-tensor equations for both tensor lifts give the required normalization.
+/-- A normalized degree comparison homomorphism, without invertibility (Stacks, Tags 03P2 and 03DR).
 -/
 theorem exists_singletonTensorDegreeComparison_hom
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]

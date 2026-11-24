@@ -22,8 +22,9 @@ import WeilConjectures.AlgebraicGeometry.NormalizedDirectImageSquareUnit
 
 /-! # Normalization of the open-square comparison on K-injective representatives
 
-Source: Stacks Project, Cohomology, Tags 08FE, 08BS, 079W and 0D5S.
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization).
+## References
+
+* Stacks Project, Cohomology, Tags 08FE, 08BS, 079W and 0D5S.
 -/
 
 @[expose] public section
@@ -130,11 +131,8 @@ noncomputable section
 variable [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
   (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Derive the ordinary sectionwise comparison and identify exact open pullback
-by uniqueness of left adjoints. All data are specified by functorial derivation
-and adjunction uniqueness; the ordinary IsIso theorem determines only the inverse.
-Source: Stacks Tags 08FE, 08BS, 079W
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization). -/
+/-- The derived sectionwise comparison, with exact open pullback identified by uniqueness
+of left adjoints. -/
 def perfectHomOpenDerivedComparison {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S) :
     schemeDerivedDirectImage (pullback.fst s r) ⋙ schemeMVDerivedRestriction Y B ≅
@@ -191,10 +189,7 @@ def perfectHomOpenDerivedComparison {S Y T : Scheme.{u}}
     Functor.isoWhiskerRight (Functor.rightDerivedFunctorIsoMapDerivedCategory.{w, w} H) _
       ≪≫ Functor.isoWhiskerRight σH _
 
-/-- Transport the explicitly derived comparison to the supplied adjunctions.
-The conjugations are isomorphisms determined by the identity of the left adjoints.
-Source: Stacks Tag 079W and Mathlib's adjoint uniqueness
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization). -/
+/-- Transport the explicitly derived comparison to the supplied adjunctions. -/
 def perfectHomOpenSuppliedComparison {S Y T : Scheme.{u}}
     (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
     (a : derivedPullback B.ι ⊣ schemeDerivedDirectImage B.ι)
@@ -238,31 +233,8 @@ set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
 -- Comparing fixed derived adjunctions requires extra instance conversion.
 /-- On K-injective representatives the derived sectionwise comparison satisfies
-the counit equation for the fixed pullback-composition comparison and canonical adjunctions.
-Source: Stacks Project, Cohomology, `lemma-restrict-direct-image-open` (08FE),
-`lemma-restrict-K-injective-to-open` (08BS), `lemma-adjoint` (079W), and
-`lemma-derived-pullback-composition` (0D5S).
-(blueprint: lem-pc-perfect-hom-open-mate-resolution-normalization).
-
-Proof: First take the projection and open adjunctions pinned to the shared
-left-derived counits and ordinary tensor adjunctions. Expand the derived
-comparison into its exact-composition comparison, right derivation of the
-ordinary open mate, K-injective-composition comparison, and exact-open
-pullback identification. The right-derived unit factorization equations
-identify these factors on I with the ordinary sectionwise comparison; open
-restriction preserves K-injectivity by 08BS. The left-derived counit equation
-for perfectHomComposition, evaluated on K-flat representatives, identifies
-the inverse pullback square with the ordinary pullback-composition square.
-Transpose that equation using the normalized derived Hom equivalences of
-079W. On each open W of B both sides are the same map from sections on
-pi inverse (B.ι image W), obtained by the ordinary tensor counit and
-restriction. The equality of opens follows from the cartesian square.
-Thus the maps of complexes coincide and localization gives the displayed
-counit equation for the canonical adjunctions. No arbitrary adjunctions,
-assertion about an arbitrary derived object, or invertibility of the derived
-mate occurs in this obligation. Adjunction transport is proved separately
-in the importing module. Empty and full opens and
-the zero complex satisfy these same sectionwise equations. -/
+the counit equation for the fixed pullback-composition comparison and canonical adjunctions
+(Stacks, Tags 08FE, 08BS, 079W and 0D5S). -/
 theorem perfectHomOpenComparison_counit_resolution
     {S Y T : Scheme.{u}} (s : Y ⟶ S) (B : Y.Opens) (r : T ⟶ S)
     (I : CochainComplex

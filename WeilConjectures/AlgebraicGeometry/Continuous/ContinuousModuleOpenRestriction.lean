@@ -14,8 +14,9 @@ set_option linter.privateModule false
 /-!
 # Continuous-coefficient restriction on the localized pro-etale site
 
-Source: Stacks Project, Tags 09BN, 00XZ and 03D2
-(blueprint: lem-weil-pbc-continuous-module-open-restriction).
+## References
+
+* Stacks Project, Tags 09BN, 00XZ and 03D2.
 -/
 
 @[expose] public noncomputable section

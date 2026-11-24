@@ -10,6 +10,14 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.Flat.Stability
+
+/-! # Finite projective modules become free after localization
+
+## References
+
+* Stacks Project, Tags 00NX and 00O0
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe v
@@ -17,10 +25,7 @@ open CategoryTheory
 namespace ModuleCat
 set_option backward.dsimp.instances true in
 /--
-(blueprint: new-residue-kernel-unit-minor-base-change-free)
-Finite projective modules remain free after localization at a prime.
-Source: Stacks Project, Tags 00NX and 00O0. Finite projectivity gives flatness,
-and finite flat modules over the local ring A are free. -/
+Finite projective modules remain free after localization at a prime. -/
 theorem residue_kernel_unit_minor_base_change_free
     (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R)
     (hfX : Module.Finite R X) (hfY : Module.Finite R Y)

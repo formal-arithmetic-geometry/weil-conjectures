@@ -14,12 +14,13 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 /-!
 # Compatibility of the étale cohomology edge map with base change
 
-Source: Stacks Project, Etale Cohomology, Section 03SB, proof of Lemma 0A5D
-(blueprint: lem-weil-pbc-edge-map-base-change).
-
 The edge map is written as pullback on cohomology followed by the counit. In the finite
 case, its bijectivity and that of the exchange followed by the base-changed edge map give
 the two isomorphisms identifying the horizontal pullback maps.
+
+## References
+
+* Stacks Project, Tags 03SB and 0A5D
 -/
 
 @[expose] public section
@@ -30,28 +31,8 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
-/-- The edge map commutes with cartesian base change, without any hypothesis on `f`.
-Source: Stacks Project, Section 03SB, proof of Lemma 0A5D
-(blueprint: lem-weil-pbc-edge-map-base-change).
-
-Proof (steps 1--6 of the node):
-1. Fix resolutions and unwind the edge maps as pullback followed by the counit. The
-exchange map is the adjoint of the square isomorphism followed by pullback of the counit
-(definition-underived-base-change-map--1, def-weil-pbc-inverse-image,
-lem-weil-pbc-inverse-image-composition, def-weil-pbc-cohomology-pullback,
-prose-03-02). Independence of resolutions follows from
-proposition-cohomology-p-1-over-henselian--1, clause 1.
-2. The induced maps `Sheaf.H.map` preserve composition and identities, by composition
-of comparison lifts and functoriality of global sections and cohomology.
-3. The adjunct-counit identity (situation-conventions) identifies pullback
-of exchange followed by the counit with the square isomorphism followed by pullback
-of the original counit; upstream this is `upperStar_map_baseChangeMap_app_counit`.
-4. Naturality and composition of cohomological pullback
-(proposition-cohomology-p-1-over-henselian--1, clauses 3 and 4) express the left side as
-pullback along the diagonal followed by the inverse composition isomorphism and counit.
-5. Apply the same naturality and composition clauses to the right side.
-6. Substitute step 3 and cancel the composition isomorphisms. Both diagonal maps are
-pullback along the same morphism, so the two sides agree. -/
+/-- The edge map commutes with cartesian base change, without any hypothesis on `f`
+(Stacks, Section 03SB, Lemma 0A5D). -/
 theorem cohomology_edgeMap_baseChange
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g)
@@ -129,15 +110,8 @@ theorem cohomology_edgeMap_baseChange
 
 /-- When `f` is finite and the underived exchange is invertible, the vertical comparison
 maps in `cohomology_edgeMap_baseChange` are isomorphisms (bijective additive maps).
-Thus that identity identifies `g`-pullback with `g'`-pullback through these isomorphisms.
-Source: Stacks Project, Section 03SB, proof of Lemma 0A5D
-(blueprint: lem-weil-pbc-edge-map-base-change).
-
-Proof (step 7 of the node): finite morphisms are stable under base change
-(lem-weil-pbc-finite-morphism-permanence), so `f'` is finite. Both edge maps are bijective
-by lemma-finite-morphisms-cohomology--2. The exchange is an isomorphism, hence its
-map on cohomology is bijective by step 2. Their composite is bijective. Step 6 then gives
-the asserted identification of pullbacks through these two canonical isomorphisms. -/
+Thus that identity identifies `g`-pullback with `g'`-pullback through these isomorphisms
+(Stacks, Section 03SB, Lemma 0A5D). -/
 theorem bijective_edgeMap_baseChange
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [IsFinite f]

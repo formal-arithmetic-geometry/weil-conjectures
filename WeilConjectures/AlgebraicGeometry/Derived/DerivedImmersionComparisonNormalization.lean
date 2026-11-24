@@ -23,9 +23,9 @@ import WeilConjectures.CategoryTheory.Derived.DerivedMateComparison
 /-!
 # Restriction normalization of derived immersion comparisons
 
-Source: blueprint main-20261015, proof of `proposition-six-operations-dctf--15`,
-second paragraph; Stacks Tags 09AF, 09BM, 09AA, 015F and 0FND
-(blueprint: lem-sf-derived-immersion-comparison-normalization).
+## References
+
+* Stacks Project, Tags 09AF, 09BM, 09AA, 015F, 0FND, 03DI, 09AE, 04CA, 08M3, 0B65
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -167,25 +167,20 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Open etale restriction is also a left adjoint, hence preserves colimits.
-Source: Stacks Tag 03DI; the existing restriction/direct-image adjunction
-(blueprint: lem-sf-derived-immersion-comparison-normalization). -/
+/-- Open etale restriction is also a left adjoint, hence preserves colimits. -/
 instance derivedImmersionEtaleRestriction_isLeftAdjoint (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).IsLeftAdjoint :=
   (Etale.openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j).isLeftAdjoint
 
-/-- Open pro-etale restriction is also a left adjoint, hence preserves colimits.
-Source: Stacks Tag 09AE; the existing restriction/direct-image adjunction
-(blueprint: lem-sf-derived-immersion-comparison-normalization). -/
+/-- Open pro-etale restriction is also a left adjoint, hence preserves colimits. -/
 instance derivedImmersionProEtaleRestriction_isLeftAdjoint (A : Type (u + 1)) [CommRing A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (openImmersionRestriction (ModuleCat.{u + 1} A) j).IsLeftAdjoint :=
   (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} A) j).isLeftAdjoint
 
 /-- Termwise canonical pullback comparison in open-restriction form, using the exact
-composition identifications. Source: Stacks Tags 09AF and 015F
-(blueprint: lem-sf-derived-immersion-comparison-normalization). -/
+composition identifications. -/
 def derivedImmersionOpenPullbackComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
@@ -196,9 +191,7 @@ def derivedImmersionOpenPullbackComparison (A : Type (u + 1)) [CommRing A] [Fini
     Functor.mapDerivedCategoryNatIso (openComparisonRestrictionIso A j) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Termwise descent of the specified canonical open extension comparison.
-Source: Stacks Tags 09AF and 015F
-(blueprint: lem-sf-derived-immersion-comparison-normalization). -/
+/-- Termwise descent of the specified canonical open extension comparison. -/
 def derivedImmersionOpenExtensionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
@@ -210,26 +203,14 @@ def derivedImmersionOpenExtensionComparison (A : Type (u + 1)) [CommRing A] [Fin
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j) ≪≫
         (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Etale closed direct image is exact; left exactness is already supplied by its
-right-adjoint structure. Source: Stacks Tags 04CA and 08M3
-(blueprint: lem-sf-derived-immersion-comparison-normalization).
-
-Proof: identify the etale topos of the closed subscheme with the closed complement
-topos. Its direct image on modules is exact and fully faithful, with invertible
-restriction counit, as in lem-trf-oriented-closed-base-localization. -/
+/-- Etale closed direct image is exact. -/
 @[instance] theorem derivedImmersionClosedEtale_exact (A : Type (u + 1)) [CommRing A]
     [Finite A] {Z X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X]
     (h : Z ⟶ X) [IsClosedImmersion h] :
     PreservesFiniteColimits (Etale.lowerStar (ModuleCat.{u + 1} A) h) := by
   infer_instance
 
-/-- Pro-etale closed direct image is exact over a Noetherian target; its left
-exactness is the right-adjoint structure. Source: Stacks Tag 09BM
-(blueprint: lem-sf-derived-immersion-comparison-normalization).
-
-Proof: the complement open immersion is quasi-compact: every open in a Noetherian
-scheme is quasi-compact. Apply proposition-extension-zero-restriction-closed-subscheme--4 to this
-complement. No constructibility hypothesis is used. -/
+/-- Pro-etale closed direct image is exact over a Noetherian target. -/
 @[instance] theorem derivedImmersionClosedProEtale_exact (A : Type (u + 1)) [CommRing A]
     [Finite A] {Z X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X]
     (h : Z ⟶ X) [IsClosedImmersion h] :
@@ -241,14 +222,7 @@ complement. No constructibility hypothesis is used. -/
     exact isCompl_compl
   exact preservesFiniteColimits_lowerStar_of_isCompl (R := A) h V.ι hV
 
-/-- The ordinary closed comparison is the specified counit transpose, not an
-independently chosen isomorphism. Source: Stacks Tag 0B65
-(blueprint: lem-sf-derived-immersion-comparison-normalization).
-
-Proof: the direct-image comparison is the double mate of the sectionwise comparison
-of direct images. The iterated-mate identity identifies it with the mate of the
-canonical pullback comparison. Applying the inverse-transpose counit formula gives
-exactly the asserted component formula. -/
+/-- The ordinary closed comparison is the specified counit transpose. -/
 theorem derivedImmersionClosed_sheaf_transpose (A : Type (u + 1)) [CommRing A] [Finite A]
     {Z X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X]
     (h : Z ⟶ X) [IsClosedImmersion h]

@@ -10,8 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearOrdinaryDir
 
 /-! # Reindexed ordinary geometric cores
 
-Source: Zheng Construction 4.1 and the paragraph preceding Lemma 4.10.
 This is the local construction before assembling the system adjunction.
+
+## References
+
+* Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10
 -/
 
 @[expose] public noncomputable section

@@ -22,9 +22,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDer
 
 /-! # Stalkwise Tor bounds for a perfect closed immersion
 
-Source: Stacks Project, Duality for Schemes, Tag 0A9U, hypothesis translation
-in lem-sc-smooth-proper-diagonal-tensor-formula step 1.
-(blueprint: lem-sc-perfect-immersion-stalkwise-tor-bounds).
+## References
+
+* Stacks Project, Duality for Schemes, Tag 0A9U.
 -/
 
 @[expose] public section
@@ -60,25 +60,8 @@ private theorem tor_isZero_of_tor'_isZero
 namespace AlgebraicGeometry
 
 /-- Perfection of the pushforward of the unit along a closed immersion gives finite
-Tor bounds in both tensor variables on the actual stalk restriction of scalars.
-Source: Stacks Project, Tag 0A9U, hypothesis translation in step 1 of
-lem-sc-smooth-proper-diagonal-tensor-formula.
-(blueprint: lem-sc-perfect-immersion-stalkwise-tor-bounds).
-
-Proof. Fix z in Z and put y = i(z). Direct image along a closed immersion is exact
-on modules: its stalk is the source stalk at points of Z and zero outside Z.
-Consequently the stalk at y of Ri_*O_Z is O_{Z,z}, restricted along i.stalkMap z,
-in degree zero. Take a strictly perfect local model furnished by hperfect at y.
-Stalks preserve its finite-free direct-summand presentations, exactness, and its
-quasi-isomorphism, giving a bounded complex of finite projective O_{Y,y}-modules
-representing this restricted module. Choose a natural number larger than the
-absolute values of the endpoints of this finite complex. Tensoring its projective
-resolution with any test module has zero homology above this bound, proving the
-Tor' assertion. For Tor, resolve the test module and use the tensor double complex:
-augmenting its test-module direction computes the same bounded projective model
-because those terms are flat; augmenting the other direction computes the derived
-functor defining Tor. The two computations identify Tor and Tor', so the same
-bound works. The argument is pointwise and permits bounds depending on z. -/
+Tor bounds in both tensor variables on the actual stalk restriction of scalars
+(Stacks, Tag 0A9U). -/
 theorem perfectImmersion_stalkwiseTorBounds
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

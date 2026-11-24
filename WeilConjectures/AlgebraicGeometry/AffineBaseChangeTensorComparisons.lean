@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 
 /-! # Tensor coordinates for the two sides of affine base change
 
-Source: Stacks Project, Schemes, Lemma 01I9 and Cohomology of Schemes, Lemma 02KG.
-(blueprint: lem-weil-pbc-affine-base-change-tensor-comparisons).
+## References
+
+* Stacks Project, Tags 01I9 and 02KG
 -/
 
 @[expose] public section
@@ -80,18 +81,8 @@ private theorem tensorQCSections (A C : Type u) [CommRing A] [CommRing C]
       (Spec.map (CommRingCat.ofHom (algebraMap A C))))).unit.app F).app ⊤)
       (fromTildeΓ_app_toOpen (R := .of A) F n))
 
-/-- Tensor coordinates for the source and target, normalized by the pullback units.
-Source: Stacks Project, Schemes, Lemma 01I9 (1),(2), and Cohomology of Schemes, Lemma 02KG.
-(blueprint: lem-weil-pbc-affine-base-change-tensor-comparisons).
-Proof: Pushforward of tilde along Spec of R to B is tilde of restriction of scalars,
-with the same global sections and canonical section m. Compose its pullback with the
-unit-compatible pullback-tilde isomorphism and the tilde global-sections unit to get a.
-For b, apply the pullback-tilde comparison to B to R' tensor B, take global sections,
-and restrict scalars along R' to R' tensor B. Both comparisons are isomorphisms by
-01I9 and the tilde-Gamma adjunction. Their unit formulas give the first equation and
-b.symm(((1 tensor 1) tensor z*m)) = eta(tilde.toOpen(z*m)). The balancing relation
-over B identifies ((1 tensor z) tensor m) with ((1 tensor 1) tensor z*m), giving the
-second equation. These constructions work also for the zero rings and zero module. -/
+/-- Tensor coordinates for the source and target, normalized by the pullback units
+(Stacks, Tags 01I9 and 02KG). -/
 theorem exists_affineBaseChange_tensorComparisons
     (R B R' : Type u) [CommRing R] [CommRing B] [CommRing R']
     [Algebra R B] [Algebra R R'] (M : ModuleCat.{u} B) :

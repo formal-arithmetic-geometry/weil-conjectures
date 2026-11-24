@@ -15,8 +15,9 @@ import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Derived tensor preserves vanishing of cohomology at a stalk
 
-Source: Stacks Project, Cohomology, Tag 06YB; Tag 08EH, support conclusion
-(blueprint: lem-sc-derived-tensor-stalk-vanishing).
+## References
+
+* Stacks Project, Tags 06YB and 08EH
 -/
 
 @[expose] public section
@@ -35,20 +36,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option synthInstance.maxSize 512 in
 /-- Tensoring a representative with a K-flat complex preserves vanishing
 of all cohomology at an individual stalk. No affine, perfect, or closed-support
-hypothesis is needed.
-Source: Stacks Project, Cohomology, Tag 06YB; Tag 08EH, support conclusion
-(blueprint: lem-sc-derived-tensor-stalk-vanishing).
-
-Proof:
-1. Exactness of the module stalk functor identifies the homology of the stalk
-   complex of P with the stalks of the cohomology sheaves of Q(P). Transport
-   along eA: by the hypothesis these modules are zero, so P_x is acyclic.
-2. By the stalk criterion for K-flatness, J_x tensors every acyclic complex to
-   an acyclic complex. Thus Tot(P_x tensor J_x) is acyclic.
-3. The natural stalk-total-tensor comparison identifies this complex with the
-   stalk of Tot(P tensor J). Exactness of the stalk functor again identifies
-   its zero homology with the stalks of the cohomology of Q(Tot(P tensor J)).
-   Their underlying groups are therefore subsingletons. -/
+hypothesis is needed (Stacks, Tags 06YB and 08EH). -/
 theorem derived_tensor_stalk_vanishing
     (X : Scheme.{uX})
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]

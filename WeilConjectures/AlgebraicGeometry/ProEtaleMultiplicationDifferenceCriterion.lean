@@ -20,7 +20,9 @@ set_option linter.privateModule false
 
 /-! # The multiplication difference on a pro-etale slice
 
-Source: Stacks Project, algebraization.tex, Tag 0997, and proetale.tex, Tag 099Q.
+## References
+
+* Stacks Project, Tags 0997 and 099Q.
 -/
 
 @[expose] public noncomputable section

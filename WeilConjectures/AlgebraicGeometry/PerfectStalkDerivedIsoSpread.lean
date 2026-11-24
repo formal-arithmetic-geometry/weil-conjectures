@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectStalkQuasiIsoDetection
 
 /-! # Extending a derived stalk isomorphism between existing local perfect models
 
-Source: Stacks Project, Tag 09RE, affine full faithfulness, and Tag 0BC7 (2).
-(blueprint: lem-sc-perfect-stalk-derived-iso-spread).
+## References
+
+* Stacks Project, Tags 09RE and 0BC7.
 -/
 
 @[expose] public section
@@ -69,31 +70,7 @@ private theorem restrict_model_for_stalk_spread (X : Scheme.{u})
       T.mapDerivedCategoryFactors.app K⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Existing local perfect models with isomorphic derived stalks are isomorphic nearby.
-
-Source: Stacks Project, Tag 09RE, affine proof, and Tag 0BC7 (2), with Tags 00CR and 06Z0.
-(blueprint: lem-sc-perfect-stalk-derived-iso-spread).
-
-Proof:
-1. Intersect U with the neighbourhood V supplied for Q(G), and take an affine
-   neighbourhood of x inside that intersection. Restrict P and H to it. These are
-   strictly perfect complexes. Their terms are retracts of finite free sheaves, hence
-   quasi-coherent; the affine correspondence gives bounded finite projective complexes
-   over the section ring A. Exactness of stalks and the local comparison for G identify
-   their prime-localized derived objects with the derived stalks of G and H.
-2. Present the prime localization as the filtered colimit of the A_f outside the prime.
-   Full faithfulness for perfect complexes (09RE, or 0BC7 (2)) descends the given
-   isomorphism and its inverse to one common principal neighbourhood. Injectivity
-   of the Hom comparison descends both inverse identities after a further shrinking.
-   This gives an actual derived isomorphism on an affine open W containing x inside U.
-3. Use the affine derived sheaf equivalence and the restriction comparisons to identify
-   the two descended objects with Q(G restricted to W) and Q(H restricted to W).
-   Compose with these identifications to obtain the conclusion. No terms, ranks or
-   differentials of H are changed. The argument also works for zero complexes and any
-   bounds, and only takes principal opens inside one affine chart, so no separatedness
-   hypothesis is required. The derived-category universes on sheaves and stalk modules
-   may differ: comparisons are transported through their localization equivalences.
--/
+/-- Existing local perfect models with isomorphic derived stalks are isomorphic nearby. -/
 theorem exists_affine_restriction_iso_of_perfect_stalk_iso
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

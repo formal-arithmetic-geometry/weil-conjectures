@@ -168,22 +168,7 @@ private theorem completed_map_injective'
 
 -- The complete-object and comparison calculations use concrete localization instances.
 /-- Realization identifies a completed Chern adjunct with the canonical derived
-adjunct of its normalized local Chern class.
-
-Source: diagonal trace proof (1), and coefficient changes (1), the first adjunct square.
-(blueprint: lem-diagonal-completed-model-chern-adjunct).
-
-Proof: expand the model Chern adjunct as the adjunction unit followed by the
-pushforward of its actual hyperplane class. Restrict this equation to the whole
-constant-coefficient system. The coefficient-unit seed and naturality of the
-varying and limit comparisons show that the completed adjunct of z has exactly
-the normalization of b. Both source and target are complete, so full faithfulness
-of completed scalar restriction identifies those completed maps. Apply the exact
-realization and its universally normalized push square. Its ordinary unit
-normalization and the full canonical derived-unit equation identify the realized
-unit with the canonical condensed adjunction unit. Naturality moves the realized
-local arrow through the push square; cancel the specified unit and line isomorphisms.
-No Cartesian square or trace identity is used here. -/
+adjunct of its normalized local Chern class. -/
 theorem diagonalCompletedModelChern_adjunct (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
     [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]

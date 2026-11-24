@@ -26,6 +26,10 @@ sequence `A₁ ⟶ A₂ ⟶ B ⟶ A₄ ⟶ A₅` of quasi-coherent modules `Aᵢ
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_shortExact`: extensions.
 - `AlgebraicGeometry.Scheme.Modules.isQuasicoherent_of_exact_of_exact_of_exact`: the middle term
   of a five-term exact sequence.
+
+## References
+
+* [Stacks Project, Tag 01BF](https://stacks.math.columbia.edu/tag/01BF)
 -/
 
 @[expose] public section
@@ -106,10 +110,7 @@ lemma isQuasicoherent_of_isZero {M : X.Modules} (hM : IsZero M) :
   isQuasicoherent_of_forall_isAffineOpen M
     (fun _ _ _ _ ↦ ⟨0, 0, (h _ _).trans (h _ _).symm⟩) (fun _ _ _ _ _ ↦ ⟨0, h _ _⟩)
 
-/-- A binary biproduct of quasi-coherent modules is quasi-coherent.
-
-Source: Stacks Project, Modules, Lemma 01BF
-(blueprint: lem-weil-pbc-quasi-coherent-module-direct-sum). -/
+/-- A binary biproduct of quasi-coherent modules is quasi-coherent. -/
 lemma isQuasicoherent_biprod (M N : X.Modules)
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) M]
     [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) N] :

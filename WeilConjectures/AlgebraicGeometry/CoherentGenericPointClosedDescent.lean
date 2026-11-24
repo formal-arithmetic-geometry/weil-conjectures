@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Descent of the generic maximal-ideal-annihilated part
 
-Source: Stacks Project, Tag 01YE, first two paragraphs of the proof.
-(blueprint: lem-weil-pbc-coherent-generic-point-closed-descent).
+Stacks Project, Tag 01YE.
 -/
 
 @[expose] public section
@@ -34,32 +33,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The part of a coherent module annihilated by the defining ideal descends to the
 integral closed subscheme, and its inclusion has an invertible generic stalk.
-
-Source: Stacks Project, Tag 01YE, first two paragraphs of the proof.
-(blueprint: lem-weil-pbc-coherent-generic-point-closed-descent).
-
-Proof:
-1. The module of the defining ideal J is quasi-coherent: it is the kernel of the map
-from the structure module to its closed-subscheme pushforward, which is quasi-coherent
-by affine pushforward. The structure module is coherent. Thus J is coherent as a
-quasi-coherent submodule, and in particular finite type. The coherence criterion gives
-quasi-coherence of F. Apply sections_annihilated_by_ideal to obtain F' and its monic
-inclusion ι into F. Again the coherent-submodule criterion makes F' coherent.
-2. The range formula on sections says that every image ι(s) is annihilated by J.
-Injectivity of ι on sections implies J annihilates F' on sections. Apply
-closedImmersion_pushforward_annihilated to F': its tensor pullback G is quasi-coherent
-and finite type, and the adjunction unit η : F' → i_*G is invertible. The source Z is
-Noetherian because i is a quasi-compact morphism locally of finite type. Therefore G
-is coherent. Set β = η⁻¹ followed by ι; it is mono.
-3. The stalk description of F' gives injectivity of ι's generic stalk map. For
-surjectivity, every germ a of a J-section maps to zero under the local-ring map at η:
-the section vanishes on the closed subscheme, hence under i.app, and germs commute with
-i.stalkMap. A unit cannot map to zero in the nontrivial local ring on Z. Consequently
-this germ belongs to the ambient maximal ideal. The hypothesis hkill therefore
-annihilates every element of F's generic stalk by every such germ, so the range
-formula makes ι's generic stalk map surjective. It is invertible, as is the stalk map
-of η⁻¹; their composite is the stalk map of β. The proof also covers zero stalks.
-No equality between J's stalk and the maximal ideal is needed. -/
+(Stacks, Tag 01YE). -/
 theorem coherent_generic_point_closed_descent {X Z : Scheme.{w}} [IsNoetherian X]
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIntegral Z]
     (F : X.Modules) (hF : RingedSpace.IsCoherent X.toRingedSpace F)

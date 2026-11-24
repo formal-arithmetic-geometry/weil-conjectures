@@ -13,9 +13,9 @@ import WeilConjectures.AlgebraicGeometry.GabberAbsolutelyAlgebraicallyClosed
 /-!
 # Integral covers with trivial étale cohomology
 
-Source: Stacks Project, Lemma 09ZD (label `lemma-integral-cover-trivial-cohomology`),
-part (1), etale-cohomology.tex line 14467
-(blueprint: lem-weil-pbc-integral-cover-trivial-cohomology).
+## References
+
+* Stacks Project, Tag 09ZD, part (1).
 -/
 
 @[expose] public section
@@ -28,19 +28,8 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry
 
 /-- An affine scheme admits an integral surjective cover whose closed subschemes have
-vanishing positive-degree étale cohomology with finite constant coefficients.  The
-proof follows Stacks Lemma 09ZD(1): construct the cover from the integral closure of a
-polynomial presentation in an algebraic closure of its fraction field, then apply
-Lemma 09ZC to closed subschemes. (blueprint: lem-weil-pbc-integral-cover-trivial-cohomology)
-
-Proof steps: the polynomial presentation and integral-closure construction use
-`def-weil-affine-spectrum`, `lem-weil-pbc-polynomial-ring-domain`,
-`def-weil-algebraic-closure`, and `lem-weil-pbc-integral-closure-algebraic-extension-normal`;
-integrality uses `lem-weil-pbc-spec-integral-ring-map-integral`; surjectivity uses
-`pqf-lem-lying-over`; and the vanishing assertion uses
-`lem-weil-pbc-gabber-absolutely-algebraically-closed`, together with the stated
-closed-immersion, constant-sheaf, and étale-cohomology notions.
--/
+vanishing positive-degree étale cohomology with finite constant coefficients.
+(Stacks, Tag 09ZD(1)) -/
 theorem exists_integral_cover_trivial_cohomology (X : Scheme.{u}) [IsAffine X] :
     ∃ (X' : Scheme.{u}) (π : X' ⟶ X),
       IsIntegralHom π ∧ Surjective π ∧

@@ -103,20 +103,7 @@ private theorem pushforward_toSpecΓ_isQuasicoherent
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The associated-sheaf/global-sections counit is natural on any affine scheme,
-and invertible on quasi-coherent modules.
-Source: Stacks Project, Lemma 26.7.5 (Tag 01IB).
-(blueprint: lem-pc-affine-sheaf-resolution-from-ring-model), proof step 1.
-
-Proof: Push a module forward along X.toSpecΓ. Its global sections agree with the
-original sections as Γ(X,⊤)-modules: the scalar action uses ΓSpecIso.inv followed
-by X.toSpecΓ.appTop = ΓSpecIso.hom, whose composite is the identity. This gives a
-natural isomorphism of global-section functors. Apply tilde to that isomorphism,
-compose with the spectrum counit, and restrict back along X.toSpecΓ. The
-restriction adjunction counit identifies the result with the original module.
-Pushforward along this scheme isomorphism is naturally isomorphic to restriction
-along its inverse and therefore preserves quasi-coherence. The spectrum counit
-is invertible on a quasi-coherent module by Tag 01IB, so the composite is too.
-The empty affine scheme and zero module satisfy the same argument. -/
+and invertible on quasi-coherent modules (Stacks, Tag 01IB). -/
 private theorem exists_affineChart_counit (X : Scheme.{u}) [IsAffine X] :
     ∃ ε : SheafOfModules.evaluation.{u} X.ringCatSheaf (.op ⊤) ⋙
         (tilde.functor Γ(X, ⊤) ⋙ restrictFunctor X.toSpecΓ) ⟶ 𝟭 X.Modules,
@@ -149,22 +136,8 @@ private theorem exists_affineChart_counit (X : Scheme.{u}) [IsAffine X] :
   dsimp only [ε, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
   infer_instance
 
-/-- Sheafification transfers an actual finite-free ring resolution to an affine scheme.
-Source: Stacks Project, Tag 01IB (affine equivalence), and Tag 01HV (exactness of tilde).
-(blueprint: lem-pc-affine-sheaf-resolution-from-ring-model).
-
-Proof: Identify the affine scheme with the spectrum of its global section ring via its
-canonical affine isomorphism. Transport the tilde/global-sections adjunction across this
-isomorphism. Apply tilde termwise to P and to f. Localization of modules is exact, so
-sheafification is exact and sends f to a quasi-isomorphism. Since every term of C is
-quasi-coherent, the counit from the sheafified global-sections complex to C is a termwise
-isomorphism; its naturality makes it an isomorphism of complexes. Compose with that
-counit to obtain the required map. The zero-preserving tilde functor preserves the
-termwise upper bound. For each term of P choose a finite basis, enumerate it by Fin r,
-and lift its index universe by ULift. Tilde carries the resulting free-module isomorphism
-to an isomorphism with the free sheaf on ULift (Fin r). These choices occur only within
-this existential proof, not in a definition. The zero ring and empty affine scheme
-produce zero sheaves, so rank zero works in those cases. -/
+/-- Sheafification transfers an actual finite-free ring resolution to an affine scheme
+(Stacks, Tags 01IB and 01HV). -/
 theorem exists_affine_sheaf_resolution_of_ring_model
     {T : Scheme.{u}} (U : T.Opens) [IsAffine U.toScheme]
     (C : CochainComplex U.toScheme.Modules ℤ) (d : ℕ)

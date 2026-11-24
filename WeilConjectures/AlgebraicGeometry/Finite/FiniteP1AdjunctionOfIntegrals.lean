@@ -302,10 +302,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-! # Assembling the finite projective-line diagonal kernel
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-`thm-amb-p1-adjunction.proof.md`, unit construction and both triangles.
-(blueprint: lem-sp-finite-p1-adjunction-of-integrals).
 -/
 
 @[expose] public section
@@ -384,10 +380,7 @@ theorem right_triangle_components
 /-- The adjunction `Rf_! ⊣ f^*(-) ⊗ᴸ B` of a trace-diagonal kernel whose two diagonal
 integrals are identities, for `B` the pullback of an even-shifted lisse rank-one line: its unit is
 `SfDiagonalKernel.unit` and its counit is `SfDiagonalKernel.counit`, the inverse projection map
-followed by the trace and the left unitor. The functors are kept abstract.
-
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the unit construction and both
-triangles (blueprint: lem-sp-finite-p1-adjunction-of-integrals). -/
+followed by the trace and the left unitor. The functors are kept abstract. -/
 noncomputable def adjunction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} [IsProper f]
@@ -442,35 +435,7 @@ theorem isLisseRankOneSheaf_finiteEtaleTateLine
 /-- The projective-line adjunction assembled from a supplied base-compatible finite-root
 splitting and a supported diagonal class `κ` whose two diagonal integrals are identities: the
 kernel adjunction `SfDiagonalKernel.adjunction` of `finiteP1CoordinateKernel`, read through
-`Rq_! ≅ Rq_*`, with the shift moved outside the right tensor factor.
-
-Source: blueprint `thm-amb-p1-adjunction.proof.md`, the displayed unit and both
-triangle computations, using the arbitrary-base integrals of
-`sk-prop-sp-tower-geometric-p1.proof.md`.
-(blueprint: lem-sp-finite-p1-adjunction-of-integrals).
-
-Proof in words: write q for the projective-line projection. Reindex the standard
-ULift (Fin 2) homogeneous coordinates by Option (ULift (Fin 1)); the induced
-scheme isomorphism commutes with q. Transport the splitting, its trace, and the
-supported diagonal class through that isomorphism. Both diagonal integrals
-remain identities, by functoriality and cancellation of the comparison inverses.
-The counit is inverse proper projection, then tensor with the supplied trace,
-then the tensor-unit constraint. To construct the unit on any complex M, identify
-M with Rp2_*Delta_*M using p2 Delta = id. The closed-immersion projection formula
-identifies Delta_*M with Delta_*Lambda tensor p1^*M. Tensor the supported diagonal
-class with p1^*M, push along p2, and apply inverse proper exchange to obtain
-q^*Rq_*M tensor Lambda(1)[2]. These operations give natural transformations.
-For the first triangle, proper exchange, direct-image composition and projection
-naturality rewrite the composite as Rq_* of M tensored with the first diagonal
-integral. The first integral identity makes it the identity. In the second
-triangle the common coefficient p1^*q^*K = p2^*q^*K comes outside p2_* by proper
-projection; the remaining kernel map is the second diagonal integral, hence the
-identity. The trace base-change equation supplied by hbc identifies the traces
-in these two computations with the chosen splitting traces. The shifted line
-has even shift two, so moving its two copies past each other gives sign +1.
-The two triangles produce the adjunction on all unbounded complexes. Finally
-move the shift outside right tensor using derivedTensorRightShiftIso. No
-normalized abstract twist, normalization comparison, or new splitting is used. -/
+`Rq_! ≅ Rq_*`, with the shift moved outside the right tensor factor. -/
 noncomputable def finiteP1AdjunctionOfIntegrals
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (N : ℕ) (hN : 0 < N) (hΛ : (N : Λ) = 0)

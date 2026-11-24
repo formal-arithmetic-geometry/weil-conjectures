@@ -10,7 +10,9 @@ import Mathlib.CategoryTheory.Adjunction.Comma
 
 /-! # Universal normalization arrows on etale source sites
 
-Source: Stacks Project, Tags 06YY, 03ED and 09BV.
+## References
+
+* Stacks Project, Tags 03DA, 06YY, 03ED and 09BV
 -/
 
 @[expose] public noncomputable section
@@ -88,9 +90,7 @@ end CategoryTheory.StructuredArrow
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical coefficient mate for etale inverse image, localized exactly.
-Source: Stacks Tags 03DA and 03ED.
-(blueprint: def-weil-pbc-etale-universal-normalization). -/
+/-- The canonical coefficient mate for etale inverse image, localized exactly. -/
 def etaleNormalizationCoefficients {Y Z : Scheme.{t}} (f : Z ⟶ Y)
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S) :
     normalizationRestrict Y.smallEtaleTopology q ⋙
@@ -135,9 +135,7 @@ def etaleNormalizationCoefficients {Y Z : Scheme.{t}} (f : Z ⟶ Y)
       Z.smallEtaleTopology q)
 
 /-- A specified coefficient arrow is universal on source sites and has the canonical
-restriction coherence. This contains no isomorphism-presheaf map.
-Source: Stacks Tags 06YY and 03ED.
-(blueprint: def-weil-pbc-etale-universal-normalization). -/
+restriction coherence. -/
 structure EtaleUniversalNormalization (Y : Scheme.{t})
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R))}
@@ -156,15 +154,7 @@ structure EtaleUniversalNormalization (Y : Scheme.{t})
           ((localIsomorphismRestrictionComp Y S f).inv.app C')
 
 /-- Two coherent universal arrows induce a normalized map on the actual source-site
-Isom presheaves. No sheafification, finite coefficient, or stalk assumption is needed.
-Source: Stacks Tags 06YY and 09BV.
-(blueprint: lem-weil-pbc-etale-universal-normalization-presheaf).
-Proof: at each object use initiality of the two structured arrows to transport an
-isomorphism. The two descended maps are inverse by uniqueness. For restriction, pull
-its defining square back through the canonical coefficient mate. The coherence equations
-identify its edges with the arrows on the smaller source. Their universality makes the
-pulled square's solution unique, proving naturality. The factorization equation is
-exactly the required normalization equation. -/
+Isom presheaves. -/
 theorem etaleUniversalNormalization_presheaf (Y : Scheme.{t})
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (C K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R)))

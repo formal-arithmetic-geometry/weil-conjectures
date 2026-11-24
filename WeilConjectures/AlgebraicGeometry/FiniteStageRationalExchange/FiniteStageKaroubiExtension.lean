@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.Fini
 public import WeilConjectures.CategoryTheory.StageSystem.StageSystemKaroubi
 
 /-! # Supported extension on the actual coefficient systems
-
-Source: sketch32, lines 1208--1228 and 1291--1321.
-(blueprint: lem-sbc-finite-stage-karoubi-extension)
 -/
 
 @[expose] public noncomputable section

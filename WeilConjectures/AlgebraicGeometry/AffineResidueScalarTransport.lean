@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Scalar transport from the affine prime residue field
 
-Source: Stacks Project, Tag 0098; naturality of scheme residue maps.
-(blueprint: lem-sc-affine-residue-scalar-transport)
+## References
+
+* Stacks Project, Tag 0098
 -/
 
 @[expose] public section
@@ -24,21 +25,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace AlgebraicGeometry.Scheme
 
-/-- The field transport in the affine chart equals extension by section evaluation.
-Source: Stacks Project, Tag 0098 (sheaves-lemma-stalk-pullback), and the residue
-map construction in Mathlib.AlgebraicGeometry.ResidueField.
-(blueprint: lem-sc-affine-residue-scalar-transport)
-
-Proof: Put A = Gamma(W,U), p = hU.isoSpec.hom z and k = kappa_W(z).
-Naturality of evaluation under U.ι and hU.isoSpec.hom, together with
-Spec.algebraMap_residueFieldIso_inv, gives e.hom composed with evaluation equal
-to A -> kappa(p). Here e is invertible since both scheme maps are open immersions.
-On a module M send b tensor m, after restricting scalars along e.hom, to
-e.inv(b) tensor m in k tensor_A M. Its inverse sends a tensor m to e.hom(a)
-tensor m. The preceding ring equality makes both maps balanced and k-linear.
-The inverse equations hold on pure tensors, which generate the tensor products.
-Both maps commute with module homomorphisms, giving the natural isomorphism.
-No freeness, boundedness, derived category or flatness of A -> k is required. -/
+/-- The field transport in the affine chart equals extension by section evaluation
+(Stacks, Tag 0098). -/
 theorem affine_residue_scalar_transport (W : Scheme.{v}) (U : W.Opens)
     (hU : IsAffineOpen U) (z : U) :
     let e := asIso (U.ι.residueFieldMap z) ≪≫

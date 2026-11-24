@@ -154,23 +154,7 @@ private def coefficientRingIso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) :
     exact coefficientMap_iso l T n.unop
   exact asIso η
 
-/-- The unital additive identification of the restricted coefficient tower.
-
-Source: blueprint latest, `sk-prop-diagonal-tower-trace.proof.md`, paragraph (1),
-finite scalar restriction and the coefficient-unit identification.
-(blueprint: lem-sfb-diagonal-trace-coefficient-identification).
-
-Proof: the spectral absolute value on ULift Q_l is the lifted p-adic absolute
-value. Its valuation-one subring identifies with Z_l by the lifted identity.
-The quotient by l^(n+1) therefore identifies with Z/l^(n+1), by the surjective
-residue map with kernel (l^(n+1)). Apply constant sheafification to these unital
-ring isomorphisms, then forget to additive groups. The section, restriction and
-transition equations of r identify its underlying coefficient tower with the
-one just constructed. Quotient reductions commute with the residue maps, so
-these comparisons form a tower isomorphism. Each map preserves one, which gives
-the displayed equation after transporting by the section equality of r.
-The argument includes the first positive level and the zero sheaf on an empty
-site. No completed projection or root module enters the construction. -/
+/-- The unital additive identification of the restricted coefficient tower. -/
 @[no_expose] def diagonalTraceCoefficientIdentification (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (r : Restriction l (ULift.{u} (Padic l)) T) :
     r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T)) ⋙ diagonalForget l T ≅

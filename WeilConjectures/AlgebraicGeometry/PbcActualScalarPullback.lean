@@ -22,8 +22,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 The recorded arbitrary ringed-topos tensor/pullback interface is reexported.
 The helpers retain its ordinary adjunction and K-flat normalization for the
 completed coefficient structure maps, which need not be isomorphisms.
-Source: Stacks Tags 03EL, 06YY, 0D6D and 099N
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 03EL, 06YY, 0D6D and 099N.
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +40,8 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) {A B : Type (u + 1)} [CommRing A] [Com
     (φY : pbcAdicCompletion Y dA ⟶ pbcAdicCompletion Y dB)
     (φX : pbcAdicCompletion X dA ⟶ pbcAdicCompletion X dB)
 
-/-- Forget commutativity in a coefficient morphism without changing its ring map.
-Source: Stacks Tag 03EL
-(auxiliary; not a blueprint node). -/
+/-- Forget commutativity in a coefficient morphism without changing its ring map
+(Stacks, Tag 03EL). -/
 abbrev pbcActualCoefficientRingMap (T : Scheme.{u})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) :=
   (sheafCompose (ProEt.topology T)

@@ -71,8 +71,16 @@ import Mathlib.CategoryTheory.Abelian.ShortExact
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 
 /-! # Representative short exact sequence for the finite coefficient layer
-Source: Stacks Project, sites-cohomology.tex, Tag 0942.
-(blueprint: lem-weil-pbc-finite-quotient-coefficient-layer-triangle-core).
+
+## Implementation details
+
+* `finiteQuotient_coefficient_layer_core` resolves the successor reduction by a flat-term
+  K-flat complex, tensors the kernel-unit-quotient sequence, and records the resulting
+  degreewise short exact sequence; the triangle theorem then only applies `triangleOfSES`.
+
+## References
+
+* Stacks Project, Tag 0942
 -/
 
 @[expose] public noncomputable section
@@ -332,14 +340,8 @@ private theorem previousModelIso
     (completedAdicCommProjection_comp X d (n + 1) n (Nat.le_succ n)) C)
   exact ⟨restrictedModelIso F en' eb.symm ≪≫ DerivedCategory.Q.mapIso et⟩
 
-/-- The flat representative and coefficient sequence underlying the coefficient-layer triangle.
-The construction resolves the successor reduction by a flat-term K-flat complex, tensors the
-actual kernel-unit-quotient sequence, and records the resulting degreewise short exact sequence.
-The later triangle theorem only applies `triangleOfSES` and identifies the three representatives.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0942, lemma-bounded, proof (1).
-(blueprint: lem-weil-pbc-finite-quotient-coefficient-layer-triangle-core).
--/
+/-- The flat representative and degreewise short exact coefficient sequence underlying the
+coefficient-layer triangle. -/
 theorem finiteQuotient_coefficient_layer_core
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (M : DerivedCategory (CompletedAdicModules X d)) (n : ℕ) :

@@ -17,8 +17,9 @@ import Mathlib.CategoryTheory.Presentable.Finite
 /-!
 # Factorization from constructible sheaves into filtered colimits
 
-Source: Stacks Project, Tag 09Z4, the surjectivity assertion for module sheaves.
-(blueprint: lem-weil-pbc-constructible-large-colimit-factorization).
+## References
+
+* Stacks Project, Tag 09Z4
 -/
 
 @[expose] public section
@@ -81,22 +82,7 @@ private theorem affineFree_finitelyPresentable
 /-- Maps from constructible module sheaves into filtered colimits factor through a stage,
 including indexing categories in the coefficient universe.
 
-Source: Stacks Project, Tag 09Z4 (lemma-constructible-is-compact), module-sheaf case.
-(blueprint: lem-weil-pbc-constructible-large-colimit-factorization).
-
-Proof: A constructible sheaf has a finite presentation by sums of extensions by zero of
-rank-one constant modules on affine etale objects (Tag 095N). Hom from each such free
-sheaf is evaluation on its affine etale object, by the free-Yoneda and sheafification
-adjunctions. Evaluation on a quasi-compact quasi-separated etale object commutes with
-filtered colimits (Sites Tag 0738, using Etale Cohomology Tag 03Q4). Hom from the
-presented sheaf is therefore the equalizer of the two Hom maps from the finite presentation.
-Filtered colimits of sets commute
-with finite limits, so Hom from the presented sheaf commutes with filtered colimits.
-Every element of a filtered colimit of sets is represented at one stage, yielding the
-asserted factorization. These arguments apply to a small category in universe u+1:
-the site is essentially small there and the module values and morphisms live there.
-An empty scheme or the zero sheaf gives the zero map; filteredness still supplies an
-index. No constructibility assumption is made on the diagram objects. -/
+(Stacks Project, Tag 09Z4) -/
 theorem exists_constructible_hom_of_isColimit
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]

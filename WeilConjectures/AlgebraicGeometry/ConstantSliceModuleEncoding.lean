@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Internal module coordinates on a coefficient-sized slice
 
-Source: Stacks Project, Tags 00YV, 03CY and 04IX.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 00YV, 03CY and 04IX
 -/
 
 @[expose] public section
@@ -191,25 +192,8 @@ private theorem overObj
     (J : GrothendieckTopology C) (U : C) (M : Sheaf J D) :
     (J.overPullback D U).obj M = M.over U := rfl
 
-/-- Encoding comparison for all modules, before choosing any presentation.
-
-Source: Stacks Project, Sites, Tag 00YV, functoriality of algebraic structures;
-Modules on Sites, Tags 03CY and 04IX, sheafification and localization of modules.
-(auxiliary; not a blueprint node).
-
-Proof: reconstruct internal modules by the section-module equivalence, transport
-through AsSmall, restrict scalars along c and use the constant-ring/fixed-scalar
-equivalence. Pull c directly along U.hom ≫ f using the actual condensed coefficient
-map to obtain coordinates dZ on Z = U.left. The global encoding comparison along
-this composite sends its internal inverse image to the fixed-scalar inverse image
-along the composite. Composition of fixed-scalar direct images and uniqueness of
-left adjoints identify that inverse image with inverse image along f followed by
-U.hom. The weakly-etale slice equivalence then identifies the latter with slice
-restriction. This avoids an intermediate encoding on Y and the internal-module
-pullback compositor. The global encoding sends the regular module to the constant
-regular k-module, and the slice equivalence preserves that constant sheaf. All
-coordinate choices are uniquely determined. The empty scheme and zero ring use
-the same constructions. -/
+/-- Encoding comparison for all modules, before choosing any presentation
+(Stacks, Tags 00YV, 03CY and 04IX). -/
 theorem constant_slice_module_encoding
     {X Y : Scheme.{u}} (f : Y ⟶ X)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

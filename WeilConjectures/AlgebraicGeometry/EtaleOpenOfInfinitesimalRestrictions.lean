@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 /-!
 # Étale neighborhoods from quotient restrictions
 
-Source: Stacks Project, Tag 0GS2, using Tag 0A43(2).
-(blueprint: lem-weil-pbc-etale-infinitesimal-restrictions-proper-neighborhood).
+## References
+
+* Stacks Project, Tags 0GS2 and 0A43
 -/
 
 @[expose] public section
@@ -27,25 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Étaleness on all infinitesimal restrictions yields an étale open neighborhood of
- the closed fiber. This packages the closed-immersion and ideal-sheaf identifications
- in the proof of Stacks Project, Tag 0GS2.
-
-Proof:
-1. Let j be the projection Y ×_A Spec(A/I) → Y. The quotient-base-change ideal
-   theorem makes j a closed immersion and identifies its kernel with the extended
-   ideal I O_Y. For the projection j_n from Y ×_A Spec(A/I^(n+1)), the same theorem
-   and the extended-ideal power formula give j.ker^(n+1) = j_n.ker.
-2. A closed immersion j_n is isomorphic to its scheme-theoretic image, whose
-   inclusion is j_n.ker.subschemeι. Base change this isomorphism along g. The
-   second-projection identity identifies the composite with the given étale
-   restriction followed by j_n.toImage. Étaleness is preserved under composition
-   with isomorphisms and reflected by precomposition with an isomorphism, so the
-   restriction to (j.ker^(n+1)).subschemeι is étale.
-3. Apply etale_on_open_of_etale_infinitesimal_neighbourhoods with j and j.ker.
-   Its conclusion is exactly the desired open neighborhood and étaleness.
-   The argument also covers an empty closed fiber, I = 0, and I = A.
-(blueprint: lem-weil-pbc-etale-infinitesimal-restrictions-proper-neighborhood)
--/
+ the closed fiber (Stacks, Tag 0GS2). -/
 theorem etale_open_of_infinitesimal_restrictions
     {A : Type u} [CommRing A] (I : Ideal A) [IsAdicComplete I A]
     {X Y : Scheme.{u}} (f : Y ⟶ Spec (.of A)) (g : X ⟶ Y)

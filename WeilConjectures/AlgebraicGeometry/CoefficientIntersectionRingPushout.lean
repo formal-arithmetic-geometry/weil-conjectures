@@ -13,7 +13,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-! # Affine coefficient intersection computation
 
-Source: Stacks Project, Tags 0097, 01I9, 01IA and 02KG.
+## References
+
+* Stacks Project, Tags 0097, 01I9, 01IA and 02KG
 -/
 
 @[expose] public section
@@ -24,19 +26,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
-/-- The coefficient intersection rings form the affine tensor pushout.
-Source: Stacks Project, Tag 02KG, affine computation in Lemma 30.5.1.
-(blueprint: aux-pc-coefficient-intersection-ring-pushout).
-
-Proof: Lift the given cartesian square to Y = f inverse image U. Restrict it
-to Z and B. The resulting cartesian square has upper left corner the open
-I = W intersect f' inverse image B. All four corners are affine: U, Z and B
-by hypothesis, and I by affine base change. Taking global sections gives a
-pushout square of commutative rings. The appLE maps in the statement are its
-maps. Naturality of appTop and cancellation of GammaSpecIso with the canonical
-chart identify its A -> D map with coefficientBaseRingMap. Commutativity
-provides both scalar towers; the affine ring pushout gives Algebra.IsPushout.
-The argument also applies to empty affine opens (the zero ring). -/
+/-- The coefficient intersection rings form the affine tensor pushout (Stacks, Tag 02KG). -/
 theorem coefficientIntersection_ring_pushout
     {X T : Scheme.{u}} (f : X ⟶ T) [IsSeparated f]
     (U : T.Opens) (hU : IsAffineOpen U)

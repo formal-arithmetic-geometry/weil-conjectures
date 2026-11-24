@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverFiel
 /-! # Canonical base-change stalk transitions
 
 The targets and restriction maps used in the continuity step of Stacks Tag 0F07.
-(blueprint: def-sbc-canonical-base-change-stalk-transitions)
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ noncomputable def baseChangeStalkMap (U : Over T) :
       (((U.hom)^*[ModuleCat.{u + 1} Λ]).obj F))
 
 /-- Restriction of a target stalk along a morphism over `T`, with its coefficient comparison.
-The pullback lift is canonical, so this is the same map used in the limit theorem. 
-(blueprint: def-sbc-canonical-base-change-stalk-transitions)
+The pullback lift is canonical, so this is the same map used in the limit theorem.
 -/
 noncomputable def baseChangeTargetStalkMap {U V : Over T} (φ : U ⟶ V) :
     baseChangeTargetStalk Λ p g q F x V ⟶ baseChangeTargetStalk Λ p g q F x U :=

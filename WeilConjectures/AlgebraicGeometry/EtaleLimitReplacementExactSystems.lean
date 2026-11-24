@@ -14,7 +14,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 
 /-! # Etale replacement: construction and vanishing
 
-Source: Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 0EXZ, 09YP, 09YN and 09YQ
 -/
 
 @[expose] public section
@@ -24,25 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- Compatible stage short exact sequences and their limit sequence.
-Source: Stacks Project, Tags 0EXZ and 09YP, construction of the injective system and
-its cokernel; exactness of filtered sheaf colimits.
-(blueprint: lem-weil-pbc-etale-limit-replacement-exact-systems).
-
-Proof: For each k take the canonical injective embedding F_k into Injective.under F_k.
-At i take the product of the direct images of these injectives over all arrows i to k.
-The adjunction transposes the coefficient transitions into product components. The
-identity component makes the induced embedding monic. Exact inverse image makes each
-factor injective and products preserve injectivity. Composition of arrows defines the
-product transitions; the canonical adjunction comparisons prove the identity and
-composition laws. Take the actual stage cokernels of the embeddings. Exact inverse
-image preserves their cokernel property, so cancelling the quotient epimorphisms proves
-the quotient transition laws. Pull all three systems to X using the cone comparisons,
-then take their actual filtered colimits. Exact filtered sheaf colimits give the limit
-short exact sequence. The stage coprojections induce the displayed morphisms of short
-complexes, whose first and third components are precisely the prescribed comparisons.
-This is only the construction: no vanishing or cohomology boundary is asserted.
--/
+/-- Compatible stage short exact sequences and their limit sequence (Stacks, Tags 0EXZ and 09YP). -/
 theorem etale_limit_replacement_exact_systems
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

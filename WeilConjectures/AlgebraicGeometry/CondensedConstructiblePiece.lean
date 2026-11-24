@@ -20,9 +20,8 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 /-- Single sheaves obtained by extension by zero from an open in a closed subscheme,
-with a locally finitely presented coefficient module on the open.
-Source: the open/closed steps of Hemo--Richarz--Scholbach, Lemma 5.3(2).
-(auxiliary; not a blueprint node) -/
+with a locally finitely presented coefficient module on the open
+(Hemo--Richarz--Scholbach, Lemma 5.3(2)). -/
 def condensedConstructiblePiece
     (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) :

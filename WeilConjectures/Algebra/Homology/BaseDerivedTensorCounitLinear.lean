@@ -14,8 +14,9 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 /-!
 # Linearity of the cohomological scalar extension counit
 
-Source: Stacks Project, Tags 06Y6 and 08IB, canonical tensor comparison
-(blueprint: lem-pc-base-derived-tensor-counit-linear).
+## References
+
+* Stacks Project, Tags 06Y6 and 08IB, canonical tensor comparison.
 -/
 
 @[expose] public section
@@ -71,24 +72,8 @@ private theorem tensorLinearLift
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 -- The comparison uses the exact restriction-of-scalars homology isomorphism.
-/-- Source: Stacks Project, Tags 06Y6 and 08IB, canonical tensor comparison
-(blueprint: lem-pc-base-derived-tensor-counit-linear).
-
-Proof: For each a in A, the supplied generator equation shows that ordinaryIso
-intertwines multiplication by a: on b tensor q both composites are
-(1 tensor b) tensor (a times q), and tensor induction proves equality on all terms.
-Naturality of the supplied counit with respect to a times identity then shows that
-its cohomology map intertwines the derived A-action with the ordinary A-action.
-The homology factorization maps for localization and the homotopy quotient, and
-restriction-of-scalars homology isomorphisms, are natural for these endomorphisms.
-Compose cohomologyIso.hom, the homology counit, both factorization maps, homology
-of ordinaryIso, and the forward restriction-of-scalars homology isomorphism.
-Use haction to see that the resulting B-linear map out of cohomology commutes with
-multiplication by a tensor 1. It also commutes with 1 tensor b by B-linearity.
-Products and sums of pure tensors generate the algebra tensor product, so tensor
-induction makes the map E-linear. Bundle it as comparison. Cancellation of the
-restriction homology isomorphism gives the displayed equation. This uses no
-left-derived universal property or existence of a derived functor or of an action. -/
+/-- Given the action of `A` through the derived functor, there is a comparison from the
+cohomology to the homology of the extended complex that agrees with the counit. -/
 theorem exists_baseDerivedTensorCounit_linear
     (Q : CochainComplex (ModuleCat.{max uR uA uB v} A) ℤ)
     [(extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).Additive]

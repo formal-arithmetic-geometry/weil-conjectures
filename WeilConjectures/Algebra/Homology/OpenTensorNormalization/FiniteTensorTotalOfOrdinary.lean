@@ -8,9 +8,12 @@ module
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
-/-! Signed-total assembly of a normalized ordinary tensor comparison.
+/-! # Signed-total assembly of a normalized ordinary tensor comparison
 
-Source: Stacks, Homology, Tags 0A5J and 012Z. -/
+## References
+
+* Stacks Project, Homology, Tags 0A5J and 012Z
+-/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false

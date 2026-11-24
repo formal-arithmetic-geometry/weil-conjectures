@@ -59,8 +59,9 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Specified evaluation and inverse tensor pair for a sheaf line
 
-Source: Stacks Project, Modules on Sites, Tags 0B8Q and 0B8N.
-(blueprint: lem-pur-sheaf-line-evaluation-inverse-pair)
+## References
+
+* Stacks Project, Modules on Sites, Tags 0B8Q and 0B8N; Tags 03DD, 03EK, 04TT
 -/
 
 @[expose] public noncomputable section
@@ -77,18 +78,15 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})]
   (R : Sheaf J CommRingCat.{max uC vC r})
 
-/-- The module category already defined on the given ringed site.
-Source: Stacks 03DD (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+/-- The module category already defined on the given ringed site. -/
 abbrev Modules := ringedSiteModules.{max uC vC r}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
-/-- The existing internal Hom dual to the coefficient unit.
-Source: Stacks 0B8Q (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+/-- The existing internal Hom dual to the coefficient unit. -/
 abbrev dual (P : Modules.{uC, vC, r} R) : Modules.{uC, vC, r} R :=
   homObj (R := R) P (𝟙_ (Modules.{uC, vC, r} R))
 
-/-- The image of a pure tensor under the sheafification unit and tensor comparison.
-Source: Stacks 03EK (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+/-- The image of a pure tensor under the sheafification unit and tensor comparison. -/
 def pureTensor (M N : Modules.{uC, vC, r} R) (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) : (M ⊗ N).val.obj U :=
   (tensorObjIsoSheafification M N).inv.val.app U
@@ -96,19 +94,16 @@ def pureTensor (M N : Modules.{uC, vC, r} R) (U : Cᵒᵖ)
       (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).unit.app
         (M.val ⊗ N.val)).app U (x ⊗ₜ[R.obj.obj U] y))
 
-/-- Reassociation, evaluation of the last two factors, and the right unitor.
-Source: Stacks 0B8N (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+/-- Reassociation, evaluation of the last two factors, and the right unitor. -/
 def cancellation (P Q : Modules.{uC, vC, r} R) (e : P ⊗ Q ≅ 𝟙_ (Modules.{uC, vC, r} R)) :
     tensorRight P ⋙ tensorRight Q ≅ 𝟭 (Modules.{uC, vC, r} R) :=
   (tensorRightTensor P Q).symm ≪≫ (tensoringRight (Modules.{uC, vC, r} R)).mapIso e ≪≫
     rightUnitorNatIso (Modules.{uC, vC, r} R)
 
-/-- Global ring sections, acting componentwise on module morphisms.
-Source: Stacks 04TT (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+/-- Global ring sections, acting componentwise on module morphisms. -/
 abbrev scalars := RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)
 
-/-- The existing sectionwise scalar action, with no chosen linear structure.
-Source: Stacks 04TT (blueprint: lem-pur-sheaf-line-evaluation-inverse-pair). -/
+/-- The existing sectionwise scalar action, with no chosen linear structure. -/
 instance coefficientLinear : Linear (scalars.{uC, vC, r} R) (Modules.{uC, vC, r} R) :=
   homLinear R.obj ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).property
 
@@ -814,36 +809,7 @@ inverse tensor equivalences. The equations characterize evaluation on images of 
 presheaf tensors; the local equations hold for every normalized section pair. The
 natural isomorphisms are explicitly the reassociation/evaluation/unitor composites.
 Linearity over global sections implies the asserted B-linearity by restriction along
-any ring homomorphism B → Γ(R); all displayed components are R-module morphisms.
-
-Source: Stacks Project, Modules on Sites, Tags 0B8Q and 0B8N.
-(blueprint: lem-pur-sheaf-line-evaluation-inverse-pair)
-
-Proof plan:
-1. On each trivializing slice write P = Rp. Restricting internal Hom is
-   relocalization, so evaluation at p identifies the dual with R, with basis phi
-   satisfying phi(p) = 1. Changing p to up changes phi to u⁻¹phi.
-2. Construct the sectionwise bilinear evaluation as a map of presheaf tensors.
-   The sheafification adjunction and the canonical tensor comparison induce the
-   sheaf evaluation map, with its asserted value on every pure tensor.
-3. On a trivializing slice, evaluation on the basis identifies dual sections
-   with scalars, and tensor evaluation is bijective. Thus presheaf evaluation is
-   locally bijective. Sheafification inverts it, proving evaluation is an
-   isomorphism without choosing or gluing an inverse separately.
-4. Reassociate, evaluate the last factors, and apply the right unitor. Naturality
-   of tensor and the constraints gives the two natural isomorphisms a and b.
-5. Their local inverses insert p tensor phi, respectively phi tensor p.
-   Balancing proves the four local formulas and their invariance under basis change.
-6. Evaluate the first triangle on x tensor cp. It gives the original tensor.
-   Pure-tensor extensionality and separatedness make this equation global.
-   With this triangle, the specified maps define an equivalence; the general
-   second triangle of an equivalence gives the other required equation.
-7. Thus the functors are inverse additive equivalences. Equivalences preserve
-   limits and colimits; hence they are exact and both factors are flat.
-8. Sectionwise tensoring commutes with addition and scalar multiplication on maps.
-   Evaluation, constraints and their inverses are module morphisms, so their
-   components are linear over every B acting through R.
--/
+any ring homomorphism B → Γ(R); all displayed components are R-module morphisms. -/
 theorem evaluation_inverse_pair (P : Modules.{uC, vC, r} R)
     (hP : ∀ U : C, ∃ s : Sieve U, s ∈ J U ∧
       ∀ (V : C) (f : V ⟶ U), s f →

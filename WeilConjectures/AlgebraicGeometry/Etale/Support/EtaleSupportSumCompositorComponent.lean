@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 
 /-! Component form of the support/sum compositor equation.
 
-Source: Stacks Project, More on Etale Cohomology, Tags 0F7J, 0F7K and 0F50.
-(blueprint: lem-pur-etale-support-sum-compositor-component).
+## References
+
+* Stacks Project, More on Étale Cohomology, Tags 0F50, 0F7J, 0F7K
 -/
 
 @[expose] public section
@@ -208,13 +209,7 @@ private lemma unit_naturality
     Category.id_comp, Category.comp_id, Category.assoc]
   rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_fach σ K)]
 
-/-- The support/sum compositor equation at one derived-category object.
-Source: Stacks Project, Tags 0F7J, 0F7K and 0F50.
-(blueprint: lem-pur-etale-support-sum-compositor-component).
-
-The component equation is obtained by the graph-normalized exact support construction,
-the nested-summand calculation, and exact compactification-unit composition. It is the
-objectwise form of the natural-transformation equation used by the compositor. -/
+/-- The support/sum compositor equation at one derived-category object. -/
 theorem etaleSupportSumCompositor_app
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T]

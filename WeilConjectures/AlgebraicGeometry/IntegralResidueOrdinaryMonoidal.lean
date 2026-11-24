@@ -12,8 +12,11 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequal
 /-! # Strong monoidal ordinary pullback for condensed coefficient module objects
 
 Balanced tensor coequalizers give the tensorator, with coherence checked on their
-presentation epimorphisms. Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(auxiliary; not a blueprint node)
+presentation epimorphisms.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15
 -/
 
 @[expose] public section

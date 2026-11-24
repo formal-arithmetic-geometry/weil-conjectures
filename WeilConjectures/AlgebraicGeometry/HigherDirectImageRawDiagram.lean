@@ -12,8 +12,9 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawPullbackComposition
 
 /-! # The raw cohomology diagram
 
-Source: Stacks Project, Tag 09Z1, the canonical cohomology comparison maps.
-(blueprint: lem-sbc-higher-image-raw-pullback-functorial).
+## References
+
+* [Stacks Project, Tag 09Z1](https://stacks.math.columbia.edu/tag/09Z1)
 -/
 
 @[expose] public section
@@ -44,23 +45,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 -- Expanding canonical derived inverse-image comparisons requires substantial reduction.
 /-- The explicit raw pullbacks satisfy identity and composition, independently of any
-limit, affineness, or quasi-compactness assumption.
-Source: Stacks Project, Tag 09Z1, canonical comparison maps in lemma-relative-colimit.
-(blueprint: lem-sbc-higher-image-raw-pullback-functorial).
-
-Proof: The derived inverse-image functor is additive, and composition with fixed
-morphisms is additive in each argument. Thus the five-factor formula preserves zero
-and addition. Expand the five factors defining raw pullback. For an identity morphism, the
-identity comparison for inverse image cancels the single-functor comparison and its
-inverse. Naturality of the shift comparison cancels its identity factors, leaving the
-original derived morphism. For composable arrows, functoriality of derived inverse image
-moves the five factors of the first pullback through those of the second. Naturality of
-the single-functor comparison cancels the adjacent inverse and direct comparisons.
-The associativity coherence of inverse-image composition identifies the resulting
-source comparison with that for the composite. Its coefficient comparison is identified
-in the same way, using the two equations defining morphisms in Over W. Compatibility of
-derived inverse image with shifts identifies the remaining shift comparison. Thus the
-five surviving factors are exactly those of the composite raw pullback. -/
+limit, affineness, or quasi-compactness assumption. (Stacks, Tag 09Z1) -/
 theorem higherDirectImageRawOverPullback_functorial
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale) :
@@ -97,8 +82,7 @@ theorem higherDirectImageRawOverPullback_functorial
   · intro A B C f g z
     exact higherDirectImageRawOverPullback_comp Λ k G q f g U z
 
-/-- The additive map on raw cohomology; its data are the explicit five-factor formula. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The additive map on raw cohomology; its data are the explicit five-factor formula.
 -/
 noncomputable def higherDirectImageRawOverPullbackHom
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -111,8 +95,7 @@ noncomputable def higherDirectImageRawOverPullbackHom
       map_zero' := (higherDirectImageRawOverPullback_functorial Λ k G q U).1 A B f
       map_add' := (higherDirectImageRawOverPullback_functorial Λ k G q U).2.1 A B f }
 
-/-- The bundled additive map is exactly the prescribed raw pullback. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The bundled additive map is exactly the prescribed raw pullback.
 -/
 theorem higherDirectImageRawOverPullbackHom_apply
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -123,8 +106,7 @@ theorem higherDirectImageRawOverPullbackHom_apply
       higherDirectImageRawOverPullback Λ k G q f U z := rfl
 
 /-- The contravariant raw cohomology functor on Over W. No data are chosen from an
-existence theorem: objects and maps are the fixed raw presheaves and explicit pullbacks. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+existence theorem: objects and maps are the fixed raw presheaves and explicit pullbacks.
 -/
 noncomputable def higherDirectImageRawOverFunctor
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -148,8 +130,7 @@ noncomputable def higherDirectImageRawOverFunctor
     exact (higherDirectImageRawOverPullback_functorial Λ k G q U).2.2.2
       _ _ _ g.unop f.unop z
 
-/-- The raw cohomology diagram of an inverse system. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The raw cohomology diagram of an inverse system.
 -/
 noncomputable abbrev higherDirectImageRawDiagram
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
@@ -157,8 +138,7 @@ noncomputable abbrev higherDirectImageRawDiagram
     {I : Type u} [Category.{u} I] (D : I ⥤ Over W) (U : S.Etale) :=
   D.op ⋙ higherDirectImageRawOverFunctor Λ k G q U
 
-/-- The raw cohomology cocone of a scheme cone, before any assertion of continuity. 
-(blueprint: def-sbc-higher-image-raw-diagram)
+/-- The raw cohomology cocone of a scheme cone, before any assertion of continuity.
 -/
 noncomputable def higherDirectImageRawCocone
     (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)

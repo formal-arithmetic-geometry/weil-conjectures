@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientComparisonRepresentableConti
 
 /-! # Affine continuity of coefficient-sized etale inverse images
 
-Source: blueprint continuity-map detail and Stacks Project, proetale.tex,
-lemma-limit-pullback (Tag 099S), and its affine section formula.
+Stacks Project, Tag 099S.
 -/
 
 @[expose] public noncomputable section
@@ -93,31 +92,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The restriction cocone of an etale inverse image is a colimit on every
 specified affine etale presentation. No finite-generation hypothesis is needed.
 
-Source: blueprint det-pe-classical-definition-continuity-map and the affine
-comparison section formula; Stacks Project, Tag 099S, lemma-limit-pullback
-(auxiliary; not a blueprint node).
-
-Proof: before sheafification inverse image is the left Kan extension along the
-opposite inclusion of etale objects. Maps from an affine cofiltered scheme limit
-to an etale scheme factor through a stage, and equalities of maps are detected at
-a later stage, by local finite presentation. This says the representables used
-in the Kan extension turn the given limit into a colimit. The colimit expression
-for Kan extension then gives the same assertion for every module presheaf.
-For an etale sheaf this Kan extension is already a sheaf on the affine ind-etale
-basis, by descent of coverings and their finite intersections to finite stages.
-Thus the sheafification unit is invertible on every stage and on the vertex.
-Naturality transports the colimit cocone to the sheafified inverse image. These
-are exactly the projection restriction maps in sectionCocone. AsSmall changes
-neither the objects nor the projections; uniqueness of comparison left adjoints
-identifies the transported construction with the displayed functor. The argument
-works for index size u+1 by the same finite-presentation factorization argument:
-a map and an equality involve finitely much algebraic data, hence occur at a stage
-of the original filtered diagram. One may compute the affine-basis sheafification
-using a small ind-etale presentation (lem-pe-ind-etale-small-index); naturality of
-the Kan-extension formula then gives the original projection cocone. No claim
-that index shrinking itself supplies a cofinal functor is needed. Colimits of modules
-exist in the coefficient universe and preserve the scalar action. The zero sheaf
-and the empty affine scheme give the zero colimit by the same argument. -/
+(Stacks, Tag 099S). -/
 theorem coefficientFixedComparison_isColimit (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (G : Sheaf (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

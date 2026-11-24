@@ -31,9 +31,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 /-- Coordinates on the evaluated coefficient unit and line, fixed on one and roots.
 The coefficient normalization is imposed on every local section corresponding to
 one under the specified coefficient comparison. The line normalization is the
-actual root tensor map, not an unspecified line isomorphism.
-Source: diagonal trace proof (2), finite coefficient and root identifications.
-(blueprint: def-sfb-diagonal-trace-supported-finite-boundary-frame). -/
+actual root tensor map, not an unspecified line isomorphism. -/
 structure SupportedFiniteBoundaryFrame
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -66,9 +64,7 @@ structure SupportedFiniteBoundaryFrame
         (cartierResidue_cast l (n + 1)) (diagonalSurface Y)
         (pow_pos (Fact.out : l.Prime).pos _) (diagonalSurface_power_unit l Y hY n))
 
-/-- Evaluate an exact image of a single sheaf, using only the canonical comparisons.
-Source: exact evaluation and exact restriction comparisons.
-(blueprint: def-sfb-diagonal-trace-supported-finite-boundary-unit-coordinates). -/
+/-- Evaluate an exact image of a single sheaf, using only the canonical comparisons. -/
 @[irreducible] def supportedFiniteSingleCoordinates
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
@@ -83,9 +79,7 @@ Source: exact evaluation and exact restriction comparisons.
     (((evaluation ℕᵒᵖ B).obj (op n)).mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor B 0).mapIso a
 
-/-- The analogous coordinates after shifting by two, with both exact shift maps.
-Source: exact shift comparisons in the finite Cartier calculation.
-(blueprint: def-sfb-diagonal-trace-supported-finite-boundary-line-coordinates). -/
+/-- The analogous coordinates after shifting by two, with both exact shift maps. -/
 @[irreducible] def supportedFiniteShiftedCoordinates
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
@@ -103,9 +97,7 @@ Source: exact shift comparisons in the finite Cartier calculation.
 
 /-- Forget support of a finite Cartier class and express its arrow in the fixed
 coefficient coordinates. The input is the actual coefficient cone projection;
-no arbitrary intermediate morphism or witness of an existence theorem is used.
-Source: diagonal trace proof (2), the constant-to-supported finite Cartier arrow.
-(blueprint: def-sfb-diagonal-trace-supported-finite-boundary-cartier-map). -/
+no arbitrary intermediate morphism or witness of an existence theorem is used. -/
 @[irreducible] def SupportedFiniteBoundaryFrame.cartierMap
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) (hY : IsUnit (l : Γ(Y, ⊤)))
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

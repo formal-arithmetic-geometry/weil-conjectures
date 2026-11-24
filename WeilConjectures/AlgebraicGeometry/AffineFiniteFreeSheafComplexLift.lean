@@ -12,8 +12,6 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Lifting finite-free sheaf complexes on an affine scheme
-
-(blueprint: lem-pc-affine-finite-free-sheaf-complex-lift)
 -/
 
 @[expose] public section
@@ -27,17 +25,8 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency.types false in
 -- Elaborating the two equivalent module-category presentations needs extra heartbeats.
 /-- A bounded-above finite-free sheaf complex on an affine scheme is the associated
-sheaf complex of a bounded-above finite-free module complex.
-Source: Stacks Project, Tag 08E7, converse proof; Tags 01I7 and 01IB.
-(blueprint: lem-pc-affine-finite-free-sheaf-complex-lift).
-
-Proof: Choose the rank of each term and the corresponding free module. The tilde
-isomorphism for finite direct sums identifies its associated sheaf with that term.
-Lift the differentials conjugated by these identifications using full faithfulness
-of tilde. Faithfulness proves the shape and square-zero equations. The termwise
-identifications form a complex isomorphism. The chosen modules are finite and free;
-faithfulness reflects zero objects, so the same upper bound works. This also handles
-rank zero and the zero ring without choosing an artificial rank above the bound. -/
+sheaf complex of a bounded-above finite-free module complex
+(Stacks, Tags 08E7, 01I7, 01IB). -/
 theorem affine_finiteFree_sheaf_complex_lift (A : Type u) [CommRing A]
     (P : CochainComplex
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ)

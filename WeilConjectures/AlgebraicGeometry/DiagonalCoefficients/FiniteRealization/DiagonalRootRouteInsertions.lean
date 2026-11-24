@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerSquareData.DiagonalCoefficientRouteComparison
 
 /-! # Ordinary root insertions for the two coefficient routes
-
-Source: diagonal tower coefficient changes (1), ordinary scalar adjunction units.
-(blueprint: def-diagonal-root-route-insertions).
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +33,7 @@ attribute [local irreducible] derivedScalars quotientLine cyclicLine
   DerivedCategory.singleFunctors HomotopyCategory.singleFunctors
   HasDerivedCategory.standard
 
-/-- Transpose an ordinary line isomorphism under the finite equivalence.
-Source: coefficient changes (1) (blueprint: def-diagonal-root-route-insertions). -/
+/-- Transpose an ordinary line isomorphism under the finite equivalence. -/
 def FiniteRealization.rootInsertion
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {B : Type (u + 1)} [CommRing B]
@@ -46,8 +42,7 @@ def FiniteRealization.rootInsertion
     M ⟶ e.F.asEquivalence.inverse.obj N :=
   e.F.asEquivalence.unitIso.hom.app M ≫ e.F.asEquivalence.inverse.map i.hom
 
-/-- Forgetting the finite-equivalence transpose recovers the specified underlying map.
-Source: equivalence triangle identity (blueprint: def-diagonal-root-route-insertions). -/
+/-- Forgetting the finite-equivalence transpose recovers the specified underlying map. -/
 theorem FiniteRealization.rootInsertion_underlying
     {R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj R] [IsCommMonObj R] {B : Type (u + 1)} [CommRing B]
@@ -100,8 +95,7 @@ variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
   {A : Type (u + 1)} [CommRing A] {hA : ((l ^ (n + 1) : ℕ) : A) = 0}
   (q : UniformizerSquareData l Y E π n A hA)
 
-/-- The cyclic semilinear root map followed by the finite-equivalence transpose.
-Source: coefficient changes (1) (blueprint: def-diagonal-root-route-insertions). -/
+/-- The cyclic semilinear root map followed by the finite-equivalence transpose. -/
 def cyclicRootInsertion :
     zlLine l (diagonalSurface Y) ⟶ q.cyclicRight.obj
       (geoCartierLine (diagonalResidue.{u} l n) (l ^ (n + 1))
@@ -110,8 +104,7 @@ def cyclicRootInsertion :
     (Mod.comap (coefficientMap (cyclicMap l n) (diagonalSurface Y))).map
       (q.cyclic.eW.rootInsertion _ q.cyclic.lineEndpoint.iso)
 
-/-- The successive ordinary root map, transposed through the finite equivalence.
-Source: coefficient changes (1) (blueprint: def-diagonal-root-route-insertions). -/
+/-- The successive ordinary root map, transposed through the finite equivalence. -/
 def quotientRootInsertion :
     zlLine l (diagonalSurface Y) ⟶ q.quotientRight.obj
       (geoCartierLine A (l ^ (n + 1)) hA (diagonalSurface Y)) :=
@@ -123,8 +116,7 @@ def quotientRootInsertion :
 
 end UniformizerSquareData
 
-/-- The shifted exact-single insertion into a derived right functor.
-Source: coefficient changes (1) (blueprint: def-diagonal-root-route-insertions). -/
+/-- The shifted exact-single insertion into a derived right functor. -/
 def shiftedRootInsertion
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]

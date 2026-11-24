@@ -10,9 +10,6 @@ import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Coefficient.Finite
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Scalar.FiniteScalarCoordinateNormalization
 
 /-! # Scalar transport of an arbitrary finite ordinary arrow
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-coefficient-coordinate-conjugation).
 -/
 
 @[expose] public noncomputable section
@@ -51,13 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- Exact scalar conjugation in coefficient coordinates, before realizing an
-ordinary cohomology class. Source: diagonal-tower trace (1), exact forgetting
-(blueprint: lem-sfb-finite-coefficient-coordinate-conjugation).
-
-Proof: apply exact scalar conjugation to comparison, realization and forgetting.
-The unit-section normalization is the source equation, so its inverse cancels.
-The target comparison is the cached scalar line coordinate. All substitutions
-are made in the generic category calculation before specialization. -/
+ordinary cohomology class. -/
 theorem finiteOrdinaryCoordinateArrow_scalar_expanded (n : ℕ) [Finite (SpTowerShriek.R l E n)]
     (T : Scheme.{u}) {hT : IsUnit ((l ^ (n + 1) : ℕ) : Γ(T, ⊤))}
     (c : SpTowerP1.CoefficientCoordinates l E n T hT)

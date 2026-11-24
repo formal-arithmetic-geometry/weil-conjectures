@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteStageRationalExchange.FiniteStageRationalExchangeData
 
 /-! # Coefficient coherence for one completed operation pair
-
-Source: sketch32, lines 1218--1228 and 1291--1321.
-(blueprint: lem-sbc-raw-operation-coherence)
 -/
 
 @[expose] public noncomputable section

@@ -17,8 +17,9 @@ import WeilConjectures.Compactification.Defs
 /-!
 # Integral constant module pushforwards are filtered colimits of finite pushforwards
 
-Source: Stacks Project, Tag 09Z6, finite approximation paragraph, using Tag 09Z1.
-(blueprint: lem-weil-pbc-integral-constant-module-pushforward-colimit).
+## References
+
+* Stacks Project, Tag 09Z6 (using Tag 09Z1).
 -/
 
 @[expose] public section
@@ -31,26 +32,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- An integral direct image of a finite constant module sheaf on a Noetherian base is
 a small filtered colimit of finite direct images of the same constant module.
-
-Source: Stacks Project, Tag 09Z6, final paragraph of the proof of (1), transferred to (3),
-using Tags 09YZ and 09Z1.
-(blueprint: lem-weil-pbc-integral-constant-module-pushforward-colimit).
-
-Proof: Present the integral morphism nu as a cofiltered limit of finite X-schemes with
-an index category of size u, using its finite approximation. Each transition map is affine,
-and each structure map and nu are affine, hence quasi-compact and quasi-separated. Reverse
-the index category to form a filtered diagram D of direct images of the constant module M.
-The transition map is obtained from the inverse-image unit and the canonical comparison
-between the pullback of a constant sheaf and the constant sheaf with the same value.
-Functoriality follows from naturality of the unit and the inverse-image composition
-comparison. The limit projections define a compatible cocone into nu_* M. The pullbacks
-of the constant sheaves to the limit are canonically constant, with all transition maps
-identified with identities; their colimit is constant M since the index is nonempty and
-connected. The relative colimit theorem 09Z1 in degree zero identifies the cocone as a
-colimit on underlying abelian sheaves. Forgetting modules preserves and creates filtered
-colimits of sheaves, computed by sheafifying sectionwise module colimits, so the cocone is
-also a module-sheaf colimit. Take Z and f from the finite approximation and the stage
-isomorphisms from the definition of D. This includes zero M and the empty scheme. -/
+(Stacks, Tags 09Z6, 09Z1.) -/
 theorem exists_filtered_colimit_finite_lowerStar_constant
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [IsNoetherian X]

@@ -12,8 +12,13 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.InternalHomRestrictScheme
 import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
 
-/-! # The frame of a principal Cartier divisor
-Source: Stacks Tags 01WQ and 0A45, the principal-chart calculation.
+/-!
+# The frame of a principal Cartier divisor
+
+## References
+
+* Stacks Project, Tag 01WQ, <https://stacks.math.columbia.edu/tag/01WQ>
+* Stacks Project, Tag 0A45, <https://stacks.math.columbia.edu/tag/0A45>
 -/
 
 @[expose] public noncomputable section
@@ -89,15 +94,8 @@ private theorem pullback_section_eq_local {D T : Scheme.{u}} (i : D ⟶ T)
   erw [e.hom.naturality, e.inv_hom_id_app_assoc]
 
 /-- The dual frame of a principal Cartier ideal is global, and its complementary
-canonical section is that frame acted on by the equation as a unit.
-Source: Stacks Tags 01WQ and 0A45 (blueprint: lem-pur-principal-cartier-torsor-frame).
-Proof: the equation is a global free generator of its invertible ideal. Dualize
-its associated isomorphism to obtain a frame of the dual ideal. The dual of the
-ideal inclusion is the equation times this frame, by functoriality of internal
-Hom. Pull back to the basic open where the equation is a unit. Naturality of the
-module pseudofunctor identifies restriction of the global frame with this pulled
-frame; the torsor action is multiplication by that unit. Injectivity of the map
-from torsor frames to their underlying isomorphisms gives the assertion. -/
+canonical section is that frame acted on by the equation as a unit
+(Stacks, Tags 01WQ and 0A45). -/
 theorem principalCartierTorsorFrame (T : Scheme.{u}) (f : Γ(T, ⊤))
     (hI : (T.zeroLocusSubschemeι {f}).ker.IsInvertible) :
     let := hI.isInvertible_dual_toModules

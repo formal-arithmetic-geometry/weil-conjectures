@@ -10,7 +10,13 @@ public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordi
 import WeilConjectures.Algebra.Homology.AffineDerivedPushforwardSheafEdge
 import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonFactorization
 
-/-! Identity-representative affine cohomology edge normalization. -/
+/-! # Identity-representative affine cohomology edge normalization
+
+## References
+
+* Stacks Project, Tag 0AVW
+* Stacks Project, Tag 08D4
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,16 +29,7 @@ variable [∀ Y : Scheme.{u},
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The affine edge equation for the canonical representative. The proof is the
-identity-representative part of the affine cohomology edge construction, using
-Stacks Project, perfect.tex, Tags 0AVW and 08D4.
-(blueprint: lem-pc-affine-pushforward-cohomology-edge-identity).
-
-Proof: construct the edge transformation from the sheaf-level edge, the supplied
-ordinary comparison, and the tilde/Gamma counit. Exactness of tilde identifies
-cohomology of the canonical representative; naturality and the adjunction
-triangle identity reduce the coordinate composite to the derived-unit edge.
-This is the canonical-representative restriction of the full normalization. -/
+/-- The affine edge equation for the canonical representative. -/
 theorem exists_affinePushforwardCohomologyEdge_identity
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
     (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅

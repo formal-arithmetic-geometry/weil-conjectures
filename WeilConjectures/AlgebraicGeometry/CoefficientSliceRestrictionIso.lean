@@ -14,8 +14,9 @@ import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 
 /-! # Invariance of the coefficient slice model under internal restriction isomorphisms
 
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-More on Morphisms, Tags 094T and 0951; Sites, Section 00XZ.
+## References
+
+* Stacks Project, Tags 03CY, 00YV, 094T, 0951 and 00XZ
 -/
 
 @[expose] public section
@@ -357,30 +358,8 @@ private theorem slice_of_model_iso
 attribute [local irreducible] fixedModel sectionFixedModel modelEquivalence modelPullbackIso
 
 /-- Reconstruction on the coefficient slice respects an isomorphism of internal inverse images.
-This comparison concerns arbitrary modules; it has no finite presentation or point-module input.
-
-Source: Stacks, Modules on Sites, Tag 03CY; Sites, Tag 00YV;
-More on Morphisms, Tags 094T and 0951; Sites, Section 00XZ.
-(auxiliary; not a blueprint node).
-
-Proof: let Z be the underlying scheme of U and g its structural map to Y. Section
-reconstruction identifies internal modules with modules over their section ring sheaves.
-Transport this equivalence along the small-site equivalence. The inverse-image comparison
-for section reconstruction identifies the resulting inverse image along g composed with f
-with the ringed-site inverse image: both are left adjoints to the same sectionwise direct
-image with its restricted scalar action. The cartesian coefficient comparison identifies
-its pulled-back ring with the section ring of the coefficient on Z. Restricting scalars
-along c commutes with this comparison, since on both sides the action is obtained by
-precomposing with the pulled-back map c. The equivalence between modules over the constant
-ring sheaf and sheaves of k-modules similarly commutes with inverse image, by uniqueness of
-left adjoints to the identical sectionwise direct images. Finally weakly etale localization
-identifies sheaves on Z with sheaves on the slice over U; the AsSmall equivalences give the
-same identification on the coefficient-sized sites. Together these comparisons identify,
-for each module Q on X, the displayed fixed-scalar sheaf on the slice with the reconstruction
-of the internal inverse image of Q on Z. Apply this reconstruction functor to the given
-isomorphism between the inverse images of N and M, and conjugate by the two comparisons.
-No conservativity of inverse image, finiteness, or choice of a presentation is used.
--/
+This comparison concerns arbitrary modules; it has no finite presentation or point-module input
+(Stacks, Tags 03CY, 00YV, 094T, 0951 and 00XZ). -/
 theorem coefficient_slice_iso_of_internal_restriction_iso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)

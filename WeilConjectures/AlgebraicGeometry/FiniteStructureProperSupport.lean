@@ -17,7 +17,10 @@ import WeilConjectures.AlgebraicGeometry.ModuleSupportProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 
 /-! # Proper support of finite structure direct images
-Source: Stacks Project, Tags 09ZT, 056J and 0CYQ.
+
+## References
+
+* Stacks Project, Tags 09ZT, 056J and 0CYQ.
 -/
 
 @[expose] public section
@@ -27,19 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The structure module of a finite scheme has proper direct-image support when
-its composite to the base is proper.
-Source: Stacks Project, Lemma 09ZT, the support condition in Remark 088F;
-Morphisms Lemma 056J and Cohomology of Schemes Lemmas 0CYN and 0CYQ.
-
-Proof: The finite direct image is coherent on locally Noetherian X, hence
-quasi-coherent and finite type. Its support is closed by 056J. This support is
-contained in the closed image of Y: outside the image there is an open neighborhood
-with empty inverse image, and every section of the structure sheaf there is zero.
-Consequently all germs there are zero. The full closed subset Y is proper over S,
-and its image in the separated finite-type X is proper over S by 0CYQ. A closed
-subset of that image is proper by 0CYN. This includes Y empty and the zero section
-rings without a nonempty-fiber assumption.
-(blueprint: lem-weil-pbc-finite-structure-proper-support). -/
+its composite to the base is proper. (Stacks, Tags 09ZT, 056J, 0CYQ.) -/
 theorem finite_structure_proper_support {Y X S : Scheme.{u}}
     (p : Y ⟶ X) (f : X ⟶ S) [IsFinite p] [IsLocallyNoetherian X]
     [IsSeparated f] [LocallyOfFiniteType f] [IsProper (p ≫ f)] :

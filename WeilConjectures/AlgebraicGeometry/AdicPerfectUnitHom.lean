@@ -11,8 +11,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # The unit case of the ordinary quotient Hom comparison
 
-Source: Stacks Project, Tags 093T and 09C6.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 093T and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -211,34 +212,8 @@ private theorem adic_quotient_linear {A : Type w} [CommRing A]
   exact Submodule.Quotient.induction_on _ x (fun _ ↦ rfl)
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The natural ordinary quotient Hom comparison, with its rank-one computation.
-Source: Stacks Project, Modules on Sites, Tag 093T; proetale.tex, Tag 09C6,
-quotient total-Hom calculation; More on Algebra, Tag 0A8H.
-(auxiliary; not a blueprint node).
-
-Proof: use the scalar section adjunction of
-adicPerfectQuotientSectionAdjunction. Write H_n for quotient followed by constant
-A-module sections, retaining its A-action, F_n for quotient realization, R_n for
-its right adjoint, and e_n : H_n = F_n R_n for the section identification.
-The functor H_n is A-linear: constant sheafification is A-linear and the algebraic
-quotient preserves scalar multiples of maps. For x in H_n(Hom_A(M,N)), evaluation
-at m in M gives H_n(ev_m)(x). This is linear in m and additive in x. Postcompose
-with e_n(N) and transpose through F_n left adjoint to R_n to define t_n(M,N).
-Evaluation commutes with arbitrary pre- and postcomposition; naturality of e_n
-and of the adjunction then proves the stated two-variable naturality.
-
-When M=A, evaluation at 1 identifies Hom_A(A,N) with N. Every functor preserves
-this isomorphism, and linear maps from A are determined by their value at 1.
-Hence x maps bijectively to the linear map a maps to H_n(ev_a)(x). Postcomposition
-with e_n(N) and adjunction are bijections, proving the required rank-one claim.
-For a successor, naturality of the quotient transition with evaluation identifies
-the two evaluation maps after the section transition. Transpose the conjugated
-morphism through the lower adjunction. Its transpose is the upper transpose
-followed by kappa and R_n of the balancing map: expand homEquiv using the unit,
-use the unit compatibility, cancel the inverse balancing maps, and use naturality
-of kappa. The section-transition compatibility now proves the successor identity.
-The geometric scalar normalization is the remaining separate theorem; no
-finite-projective hypothesis or internal-Hom isomorphism is used here. -/
+/-- The natural ordinary quotient Hom comparison, with its rank-one computation
+(Stacks, Tags 093T, 09C6 and 0A8H). -/
 theorem adicPerfectUnitHom (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X) :

@@ -56,7 +56,12 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
-/-! # Flatness and K-flatness in constant-scalar coordinates -/
+/-! # Flatness and K-flatness in constant-scalar coordinates
+
+## References
+
+* Stacks Project, Tags 03CV, 03ER, 093J, 06YS, 0G7D, 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -90,16 +95,7 @@ private instance realizationColimits : PreservesColimitsOfShape ℤ (ringedReali
   let := Scheme.etaleSumTensorTestRealization_isEquivalence X A
   infer_instance
 
-/-- Flatness is invariant under the canonical scalar realization.
-Source: Stacks Project, Tags 03CV, 03ER and 093J
-(blueprint: lem-pur-etale-constant-module-flat).
-
-Proof: the ring comparison in ExternalRHom is the inverse of the comparison
-used by the constant-module tensor equivalence. Both are the sheafification
-comparison for forgetting commutativity, followed by the identity constant
-presheaf comparison. Thus the realizations agree. Apply the flatness equivalence
-of the constant-module tensor realization. This includes the empty scheme and
-zero coefficient ring. -/
+/-- Flatness is invariant under the canonical scalar realization. -/
 private theorem ringedRealization_flat_iff (M : Modules A X) :
     SheafOfModules.IsFlatOnSite
       (J := X.smallEtaleTopology) (R := realizationRing X.smallEtaleTopology A)
@@ -160,16 +156,7 @@ private theorem independent_of_categorical
     HomologicalComplex.acyclic_of_isZero _ (T.map_isZero (isZero_zero _))
   exact fun i ↦ (exactAt_iff_of_quasiIsoAt (T.map (0 : O ⟶ Z)) i).1 (htzero i)
 
-/-- Flat-term native K-flat complexes remain K-flat in constant-scalar coordinates.
-Source: Stacks Project, Tags 06YS, 0G7D and 0G7E
-(blueprint: lem-pur-etale-scalar-flat-kflat-comparison).
-
-Proof: scalar realization takes flat objects to flat module sheaves by the flat
-comparison. As an additive functor preserving integer-indexed colimits and flat
-objects, it takes flat-term K-flat complexes to categorical K-flat complexes.
-Apply its right-tensor quasi-isomorphism test to the map from zero to any acyclic
-complex. The tensor with zero is zero, hence the tensor with the test complex is
-acyclic. This is precisely the independent-coefficients K-flat predicate. -/
+/-- Flat-term native K-flat complexes remain K-flat in constant-scalar coordinates. -/
 theorem ringedComplex_flat_kFlat (P : Complexes A X)
     (hP : (HomologicalComplex.quasiIso (Modules A X) (.up ℤ)).kFlat P)
     (hf : ∀ n, ObjectProperty.flat (P.X n)) :

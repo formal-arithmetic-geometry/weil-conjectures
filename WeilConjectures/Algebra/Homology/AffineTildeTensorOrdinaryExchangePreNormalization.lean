@@ -20,7 +20,13 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 public import
   WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain
 
-/-! The derived equality before target-map expansion and direct-image reassociation. -/
+/-! # The derived equality before target-map expansion and direct-image reassociation
+
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08HY
+-/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -170,19 +176,7 @@ attribute [local irreducible] affineTildePushforwardComparison
   affineTildeTensorOrdinarySourceIso
 
 set_option cleanup.letToHave false in
-/-- The affine exchange calculation before expanding the target coefficient map.
-Source: Stacks Project, Tags 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization).
-Proof: transpose the ordinary base-change mate under tensor pullback along f'.
-The pullback/tilde comparisons send the unit to 1 tensor q, while the affine
-pushforward comparison uses the same tilde unit, sections restriction and counit.
-Thus both transposed maps send b tensor q to psi(b) tensor q. The hypothesis hk
-identifies them on these generators. Tensor induction and complex extensionality
-prove the chain-map equality. Pass it through the homotopy quotient and localization.
-Naturality of the right-derived unit then moves the inverse tensor/tilde comparison
-to the final direct image. This proves the displayed equation before cancellation
-against the invertible derived pullback counit; no such invertibility is assumed
-here. Zero complexes and zero rings use the same generator calculation. -/
+/-- The affine exchange calculation before expanding the target coefficient map. -/
 private theorem affineTildeTensorOrdinaryExchange_preNormalization_private
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]

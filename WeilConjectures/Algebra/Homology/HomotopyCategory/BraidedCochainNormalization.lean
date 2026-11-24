@@ -10,8 +10,10 @@ import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 
 /-! # Braided lift of an additive functor to signed cochain complexes
 
-Source: Stacks Project, Tags 06YU and 0FPT.
-(blueprint: lem-pur-braided-cochain-normalization).
+## References
+
+* [Stacks Project, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
+* [Stacks Project, Tag 0FPT](https://stacks.math.columbia.edu/tag/0FPT)
 -/
 
 @[expose] public noncomputable section
@@ -110,19 +112,7 @@ private theorem cochain_delta_of_summands [G.Braided]
     HomologicalComplex.mapBifunctorComparisonApp, δNatTrans_app_app] using hf p q n hpq
 
 /-- The cochain lift of an additive braided functor preserves the signed braiding,
-with inverse tensorator characterized on total summands and the canonical single unit.
-
-Source: Stacks Project, Tags 06YU and 0FPT; the canonical strong cochain construction of
-WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex.
-(blueprint: lem-pur-braided-cochain-normalization).
-
-Proof: Use mapCochainComplexMonoidal for the strong structure. On every total summand,
-the two braiding composites have the same Koszul sign. The ordinary braided equation
-identifies the remaining factors; coproduct extensionality and cancellation prove the
-cochain braided equation. The formula for the inverse tensorator on summands and the
-coproduct universal property identify any morphism satisfying those formulas. The inverse
-unit of the concrete construction is the single-complex comparison followed by the single
-of the ordinary inverse unit. This also covers zero objects and zero coefficients. -/
+with inverse tensorator characterized on total summands and the canonical single unit. -/
 theorem braided_cochain_normalization [G.Braided] :
     ∃ c : (G.mapHomologicalComplex (.up ℤ)).Braided,
       (∀ (P Q : CochainComplex C ℤ)

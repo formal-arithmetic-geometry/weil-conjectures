@@ -16,7 +16,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitFiniteCechCoefficientLeg
 
 /-! # Canonical coefficient maps on descended Čech complexes
 
-Source: Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP. -/
+## References
+
+* Stacks Project, Tags 01ZM, 07RP, 07RR and 09YP
+-/
 
 @[expose] public section
 universe u
@@ -27,30 +30,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 -- Keep the existing signature, including its redundant geometric hypotheses.
 set_option linter.unusedVariables false in
 /-- Cochain maps with the specified coefficient components obey the diagram laws.
-Source: Stacks Project, Tag 09YP, proof of lemma-colimit, the canonical Čech
-comparison. The inverse-image unit laws are expressed in
-WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-coefficient-laws).
-
-Proof: Equality of cochain maps is checked in every degree, and equality of
-maps into the section product is checked after every tuple projection. Cancel
-the image of the target nerve isomorphism. For the identity law substitute
-hidentity in the tuple formula. The inverse-image identity unit law reduces
-the section map to identity followed by the canonical identity pullback
-comparison; hgamma identifies gamma with that comparison by pullback
-uniqueness. For composition substitute the two tuple formulas and move
-presheaf restrictions past the unit and phi by naturality. Substitute
-hcomposition and the unit form of upperStarComp coherence. Both geometric
-pasting maps have the same first projection to W0 by hgamma and the same
-structural morphism, so pullback uniqueness identifies them. This gives the
-single tuple formula for the composite. For the leg equation perform the
-same unit-composition calculation, now with the cone identity c.w and hdelta.
-Substitute hG; cancel eG with its inverse and use L.w to replace G(a) followed
-by the later leg by the earlier leg. Product and cochain-map extensionality
-finish all three equations. Empty K causes no exception: all component
-checks are vacuous. No existence or differential-compatibility assertion is
-part of this theorem: m and l are already cochain maps.
--/
+(Stacks, Tag 09YP) -/
 theorem etale_limit_finite_cech_coefficient_laws
     {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D)

@@ -14,8 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.EtalePullbackSingleComp
 
 /-! # Coherence of varying-coefficient raw pullbacks
 
-Source: Stacks Project, Tags 03Q8 and 09Z1.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence-extend).
+## References
+
+* Stacks Project, Tags 03Q8 and 09Z1
 -/
 
 @[expose] public section
@@ -190,25 +191,7 @@ private theorem pullbackHom_comp (𝒜 : Type (v + 2)) [Category.{v + 1} 𝒜]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pulling a raw class back twice composes the coefficient morphisms through
-`upperStarComp`. Source: Stacks Project, Tag 09Z1, canonical cohomology maps,
-and Tag 03CB, composition of inverse images.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence-extend).
-
-Proof: Transport along wd, wa, and wb to reduce to composite scheme morphisms.
-Expand both five-factor raw pullback formulas and distribute the outer derived
-pullback over composition. Naturality of its single-complex comparison moves the
-inner source comparison through the outer inverse comparison. The adjacent
-single-complex hom and inv cancel. The already proved generic lemmas
-Functor.plus_single_comp and Functor.plus_single_natIso identify the single
-comparisons with the derived composition comparison. Naturality of that derived
-comparison moves it past the raw class;
-its compatibility with shifts moves it through the shifted coefficient factors.
-The underived upperStarComp associativity law for b, a, h identifies the remaining
-source factors. Functor.map_comp combines the remaining shifted coefficient maps
-into upperStarComp(b,a) followed by b inverse image of phi followed by psi.
-These are exactly the five factors of the direct pullback. All transports in
-witnesses of equalities coincide by proof irrelevance. This argument allows
-identity maps, zero coefficients and classes, empty schemes, and degree zero. -/
+`upperStarComp` (Stacks, Tags 09Z1 and 03CB). -/
 private theorem abelianHigherDirectImageRawPullback_comp {S Y Y' Z : Scheme.{v}}
     (a : Y' ⟶ Y) (b : Z ⟶ Y') (d : Z ⟶ Y) (wd : b ≫ a = d)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (h'' : Z ⟶ S)
@@ -231,32 +214,8 @@ private theorem abelianHigherDirectImageRawPullback_comp {S Y Y' Z : Scheme.{v}}
 
 
 set_option linter.unusedVariables false in
-/-- Natural transformations with the prescribed raw components obey the colimit cocone law.
-Source: Stacks Project, Tag 09Z1 (lemma-relative-colimit), canonical comparison maps;
-Tag 03CB for inverse-image composition.
-(blueprint: lem-sbc-abelian-raw-pullback-coherence-extend).
-
-Proof: Fix f : i → j and a raw class z at a test object V. By hτ and hβ, the
-component of tau f followed by beta j is the iterated explicit raw pullback along
-D.map f.op and c.π.app (op j). Expand its two five-factor formulas. Functor.map_comp
-and naturality of the single comparison cancel the intermediate single hom/inv
-pair. The derived composition comparison is natural in z, commutes with the shift,
-and on single complexes agrees with the underived comparison, as in
-abelianPullbackSingleComposition. Associativity of upperStarComp combines the source
-factors. Cone naturality c.w f.op identifies the composite scheme map with
-c.π.app (op i); proof irrelevance identifies the resulting witnesses of Over.w.
-
-Write C for the component of upperStarComp in hH, and P for pullback along the
-j-th cone leg. The coefficient of this composite is
-C ≫ P.map (φ f) ≫ (eH j).inv ≫ colimit.ι H j.
-From hH and colimit.w H f this is (eH i).inv ≫ colimit.ι H i: precompose
-H.map f ≫ colimit.ι H j = colimit.ι H i with (eH i).inv, substitute hH,
-and cancel (eH i).inv ≫ (eH i).hom. The composite formula therefore equals
-the i-th cone-leg raw pullback, which hβ identifies with beta i. Extensionality
-in z and V proves tau f ≫ beta j = beta i. No identity/composition laws of tau
-are assumed, and hφid and hφcomp are not used. The proof uses only colimit
-naturality, not a limit or a continuity theorem, and also covers zero coefficients,
-empty test objects, and degree zero. For an empty index set the conclusion is vacuous. -/
+/-- Natural transformations with the prescribed raw components obey the colimit cocone law
+(Stacks, Tags 09Z1 and 03CB). -/
 theorem abelianRawPullback_coherent_extend {S : Scheme.{v}}
     {I : Type v} [Preorder I]
     (D : Iᵒᵖ ⥤ Over S)

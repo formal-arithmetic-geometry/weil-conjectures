@@ -12,8 +12,10 @@ public import Mathlib.CategoryTheory.Category.Preorder
 
 /-! # Transport of an adjunction mate along an isomorphism of diagrams
 
-Source: Stacks Project, Tag 02N7, mate construction; Tag 0B65, adjunction conjugation.
-(blueprint: lem-weil-pbc-formal-system-exchange-mate-compatibility).
+## References
+
+* [Stacks Project, Tag 02N7](https://stacks.math.columbia.edu/tag/02N7)
+* [Stacks Project, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
 -/
 
 @[expose] public section
@@ -45,17 +47,8 @@ private theorem exchange_unit
   rw [← Category.assoc a (adjR.unit.app (T.obj N)), hunit]
   simp only [Category.assoc]
 
-/-- A mate identity on objects transports to isomorphic diagrams.
-Source: Stacks Project, Tag 02N7 (adjunction mate construction) and Tag 0B65.
-(blueprint: lem-weil-pbc-formal-system-exchange-mate-compatibility).
-
-Proof: Evaluate at a level n. Expand pullback of the composite unit and beta.
-Naturality of B at beta moves beta after B at L(G_n). Substitute the supplied
-objectwise mate identity. Naturality of the R-adjunction unit at the component
-of eqToHom hG moves that component inside Q of R. Functoriality of Q identifies
-the resulting four arrows with the component of the displayed transported beta.
-Whiskering and vertical composition give the displayed component of t.
-This uses no coherence, ideals, invertibility of B, flatness or scheme properties. -/
+/-- A mate identity on objects transports to isomorphic diagrams
+(Stacks, Tags 02N7 and 0B65). -/
 theorem formal_system_exchange_mate_compatibility
     {C D E A : Type*} [Category C] [Category D] [Category E] [Category A]
     (L : D ⥤ C) (P : C ⥤ D) (T : D ⥤ E) (U : C ⥤ A)

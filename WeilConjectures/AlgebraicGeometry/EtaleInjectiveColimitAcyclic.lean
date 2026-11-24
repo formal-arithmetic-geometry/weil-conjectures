@@ -16,8 +16,9 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 /-!
 # Acyclicity of filtered colimits of injective etale sheaves
 
-Source: Stacks Project, Tag 0739, proof, last paragraph, and Tag 03Q5.
-(blueprint: lem-weil-pbc-etale-injective-colimit-acyclic).
+## References
+
+* Stacks Project, Tags 0739 and 03Q5
 -/
 
 @[expose] public section
@@ -142,24 +143,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- If sections on every member of a finite Čech nerve preserve filtered colimits,
 then its Čech cohomology functors preserve coefficient-size colimits in every degree.
-Source: Stacks Project, Tag 0739, proof of `lemma-colim-works-over-collection`,
-the finite-cover Čech step.
-(blueprint: lem-weil-pbc-etale-injective-colimit-acyclic).
-
-Proof:
-1. In degree `q`, the Čech complex is the product of evaluation at the objects
-   `piObj (fun j : Fin (q + 1) ↦ Over.mk (f (a j)))`, indexed by
-   `a : Fin (q + 1) → K`. This index type is finite, including when `K` is empty.
-2. The hypothesis identifies each factor of the image cocone with a colimit.
-   Filtered colimits in abelian groups commute with finite products (finite products
-   are finite biproducts). Thus the image cocone is a colimit in every degree.
-   The component comparison maps commute with each restriction along a face map,
-   by naturality of the original cocone; hence they commute with the alternating
-   sums defining the differential. Degreewise colimits are colimits of complexes.
-3. Filtered colimits of abelian groups are exact. Applied to the kernels and images
-   of the differentials this identifies the homology of the colimit complex with
-   the colimit of the homology groups. Composing with step 2 gives preservation
-   by the displayed Čech cohomology functor, with its original cocone legs. -/
+(Stacks, Tag 0739). -/
 private theorem coefficientFiniteEtaleCechHomology
     (X : Scheme.{u}) (U : X.Etale) (K : Type (u + 1)) [Finite K]
     (V : K → X.Etale) (f : ∀ k : K, V k ⟶ U)
@@ -189,8 +173,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
 /-- Transfer the module-valued sections theorem through the equivalence between abelian
 sheaves and sheaves of modules over lifted integers. Both equivalence functors preserve
-colimits, so the original evaluation cocone is a colimit. Source: Stacks 0738 (4),
-0739, via `etale_sections_filtered_colimit`. -/
+colimits, so the original evaluation cocone is a colimit (Stacks, Tags 0738 and 0739). -/
 private theorem abelianSectionsColimit (Y : Scheme.{u}) (V : Y.Etale)
     [CompactSpace V.left] [QuasiSeparatedSpace V.left]
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
@@ -226,28 +209,7 @@ private theorem abelianSectionsColimit (Y : Scheme.{u}) (V : Y.Etale)
 
 /-- A filtered colimit of injective etale abelian sheaves is acyclic for global
 sections on a quasi-compact quasi-separated scheme.
-Source: Stacks Project, Tag 0739, proof, last paragraph, applied to the qcqs
-etale basis as in Tag 03Q5.
-(blueprint: lem-weil-pbc-etale-injective-colimit-acyclic)
-
-Proof: Let B consist of the qcqs objects in the small etale site. Every covering
-of a B-object admits a finite affine etale refinement. Finite fibre products
-of objects in these coverings remain qcqs, by base change and composition of
-qcqs morphisms. Sections of a filtered colimit commute with evaluation on B:
-use finite local representatives and a common upper stage for their finitely
-many matching equalities. Apply this also on every covering fibre product.
-Thus on a finite B-cover the Cech complex of the colimit is the colimit of
-the Cech complexes of the injectives: its products are finite and commute with
-filtered colimits. The latter complexes have zero positive cohomology by
-injective Cech acyclicity. Exactness of filtered colimits of abelian groups
-therefore gives zero positive Cech cohomology for the colimit. The Cech
-vanishing criterion on B gives zero positive right derived evaluation on
-every B-object. The terminal etale object X belongs to B, and evaluation
-there is naturally global sections. Transporting right derived evaluation
-along this natural isomorphism yields the stated vanishing. No torsion
-hypothesis or bound on the index below the coefficient universe is used;
-all covers in this calculation are finite. For the zero diagram and for
-empty X the groups vanish as well. -/
+(Stacks, Tags 0739 and 03Q5). -/
 theorem isZero_rightDerived_globalSections_colimit_of_injective_coefficientSize
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]

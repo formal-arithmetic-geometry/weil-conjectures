@@ -17,16 +17,16 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Pullback of the dual of a finite locally free module on a ringed site
 
-Source: Stacks Project, Modules on Sites, Tags 0GMX and 0FNY; the Powers and duals
-paragraph of `lemma-inverse-image-coefficient-sheaves--2`, main-20261015
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback).
-
 The coefficient morphism `a : R → u_* S` is the adjunct of the source's
 `c : f⁻¹ R → S`. The module pullback is Mathlib's left adjoint, hence the same
 sheafified relative tensor product. Its adjunction unit sends a section to its
 pulled-back section. The equation below characterizes the canonical comparison
 by evaluation on these sections, exactly as in Stacks 0GMX. In particular it
 specializes to the stated Kronecker-delta formula for every local dual basis.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D7, 0GMX, 0FNY, 03EL and 04J0
 -/
 
 @[expose] public section
@@ -51,17 +51,16 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
 
 /-- Mathlib's module pullback with its existence proof supplied explicitly.
 This transparent abbreviation permits the statement to assert existence of the
-adjoint instead of imposing it as a further hypothesis. Source: Stacks Project,
-Modules on Sites, Tags 03D7 and 0GMX
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback). -/
+adjoint instead of imposing it as a further hypothesis.
+-/
 noncomputable abbrev ringedSitePullbackFunctor
     (hAdj : (pushforward.{max u v w} a).IsRightAdjoint) :=
   @pullback _ _ _ _ _ _ _ _ _ _ a hAdj
 
 /-- A section pulled back along a ringed site morphism, using the unit of the
 module pullback adjunction. This is the image `1 ⊗ f⁻¹(m)` in the sheafified tensor
-product. Source: Stacks Project, Modules on Sites, Tag 0GMX
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback). -/
+product.
+-/
 noncomputable def ringedSitePullbackSection
     (hAdj : (pushforward.{max u v w} a).IsRightAdjoint)
     (M : ringedSiteModules.{max u v w}
@@ -87,28 +86,8 @@ private theorem isIso_of_over_cover
   exact isIso_of_reflects_iso f (toSheaf A)
 
 /-- The evaluation comparison is invertible for a finite locally free module,
-contravariantly natural, and carries pulled-back dual bases to dual bases.
-Source: Stacks Project, Modules on Sites, Tags 0GMX, 0FNY, 03EL and 04J0
-(blueprint: lem-pur-ringed-site-finite-free-dual-pullback).
-
-The comparison is specified, rather than taken as an arbitrary morphism: for
-all local functionals `φ` and sections `m`, its evaluation on their pullbacks
-is the coefficient image of `φ(m)`. The equation holds after every restriction,
-since `V` is arbitrary. With `φ = eⱼ∨` and `m = eₖ` it says exactly that the
-value is `δⱼₖ * 1`. The finite-free cover uses arbitrary ranks, including zero.
-
-Proof: Construct the module left adjoint by
-`module_pushforward_isRightAdjoint_of_universes`. Extend the evaluation pairing
-by `exists_pullback_pairing_transfer`.
-Its uniqueness gives uniqueness of the comparison family. For a morphism b,
-the two naturality composites are extensions of the same pairing: adjunction
-unit naturality makes both evaluate (φ,m) as the scalar image of φ(b(m)).
-On each finite-free chart, `isIso_over_pullback_dual_of_free` makes the
-restricted comparison invertible, using internal-Hom restriction and the
-finite-biproduct calculation on the slice. Cover preservation and preservation of the
-terminal object show that the objects U(V_i) cover D. Mathlib's
-`Sheaf.isIso_of_coversTop` then detects invertibility of the underlying
-additive sheaf map, and `toSheaf` reflects the resulting isomorphism. -/
+contravariantly natural, and carries pulled-back dual bases to dual bases. Its evaluation
+on pullbacks of local functionals `φ` and sections `m` is the coefficient image of `φ(m)`. -/
 theorem finite_free_dual_pullback
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

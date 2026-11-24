@@ -19,9 +19,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 import Mathlib.CategoryTheory.Subobject.WellPowered
 
 /-! # Essential smallness of constructible module objects
-
-Source: blueprint `lemma-hypotheses-brown-representability--5`, local finite-presentation counting.
-(blueprint: lem-sfb-constructible-module-objects-essentially-small)
 -/
 
 @[expose] public section
@@ -124,10 +121,7 @@ private theorem ab_exists_mem_precoverage_map_eq_zero {V : U.ProEt} (s : ToType 
 /-- **Restrictions along a quasi-compact jointly surjective family detect sections.** Let
 `g k : Z k ⟶ U` be finitely many quasi-compact morphisms jointly covering `U`. A section `s` of
 a pro-étale sheaf of modules `F` on `U` whose images under the units `F ⟶ (g k)_* (g k)^* F` all
-vanish is zero: `s` vanishes on weakly étale neighbourhoods of the points of every
-`V ×_U Z k` (`AlgebraicGeometry.ProEtale.exists_mem_precoverage_map_eq_zero`), and these
-neighbourhoods form a pro-étale cover of `V`
-(`AlgebraicGeometry.QuasiCompactCover.of_comp_factor`). -/
+vanish is zero. -/
 private theorem ab_eq_zero_of_forall_unit_app_eq_zero {κ : Type*} [Finite κ] {Z : κ → Scheme.{u}}
     (g : ∀ k, Z k ⟶ U) [∀ k, QuasiCompact (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))
     (F : Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) {V : U.ProEt}
@@ -276,23 +270,6 @@ private structure ConstructiblePresentationData where
 
 /-- Constructible module objects over a fixed sheaf of rings on a Noetherian scheme
 form an essentially small class in the sheaf morphism universe.
-
-Source: blueprint `lemma-hypotheses-brown-representability--5`, steps 1–10; the proved
-local-vanishing argument in `UpperLowerStar.Detection` and cover conservativity in
-`LowerShriek.Open.Conservative` of the source library.
-(blueprint: lem-sfb-constructible-module-objects-essentially-small)
-
-Proof: stratifications, pro-etale covers, ranks, and finite presentation matrices
-form a small set of local data. For fixed such data, pull back to each cover member
-of each stratum. These exact left adjoints jointly detect zero objects. The adjoints
-of the prescribed local isomorphisms embed any realizing module into the product of
-the right adjoints of the prescribed local cokernels: the kernel has zero pullback
-everywhere and is therefore zero. Zero detection is proved: restrictions to a
-pro-etale cover are conservative, and the local-vanishing argument for finitely many
-quasi-compact, jointly surjective immersions detects sections. Noetherianity makes
-the stratum immersions quasi-compact. The module category is Grothendieck abelian,
-hence well-powered, so subobjects of each fixed product form an essentially small
-class. The union over the small collection of local data remains essentially small.
 -/
 theorem constructibleModuleObjects_essentiallySmall :
     ObjectProperty.EssentiallySmall.{u + 1} (IsConstructibleModuleObject R) := by

@@ -11,7 +11,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Flatness for the canonical coefficient-model comparison pullback
-Source: Stacks Project, Tag 05VD.
+
+## References
+
+* Stacks Project, Tag 05VD
 -/
 
 @[expose] public section
@@ -37,20 +40,8 @@ private theorem flat_zero {C : Type w} [SmallCategory C]
   exact (ObjectProperty.flat_of_isZero hM).2
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The canonical comparison inverse image preserves flat module sheaves.
-Source: Stacks Project, Tag 05VD, lemma-pullback-flat; blueprint finite-Tor comparison,
-paragraph Flatness is preserved (auxiliary; not a blueprint node).
-
-Proof: the continuous inclusion and the canonical constant-section ring map give a
-ringed-topos morphism whose module direct image is exactly the specified pushforward.
-Apply RingedToposMorphism.exists_kFlatPullback. Its left adjoint is naturally isomorphic
-to constructibleComparisonPullback by uniqueness of left adjoints to that direct image.
-Place M in degree zero. Its other terms are zero, hence flat, and the bounded-above
-flat-complex theorem makes it K-flat. The general pullback theorem gives flat terms
-for its image. The degree-zero term is the pullback of M; transport its flatness along
-the single-complex term isomorphism and the left-adjoint identification.
-This works for any discrete commutative coefficient ring, including the zero ring,
-and requires no constructibility or Noetherian hypothesis. -/
+/-- The canonical comparison inverse image preserves flat module sheaves
+(Stacks, Tag 05VD). -/
 theorem constructibleComparisonPullback_flat (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (M : ConstantCompletion.Mod (ConstantCompletion.constant
@@ -101,12 +92,7 @@ theorem constructibleComparisonPullback_flat (X : Scheme.{u})
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Termwise comparison carries K-flat complexes with flat terms to K-flat complexes.
-Source: Stacks Project, Tag 0G7E
-(auxiliary; not a blueprint node).
-Proof: construct the same ringed-topos morphism and identify its supplied pullback
-with the canonical module pullback by uniqueness of left adjoints. The general
-K-flat pullback theorem gives K-flatness before this identification. Tensor the
-complex isomorphism with each acyclic test to transport its vanishing homology. -/
+(Stacks Project, Tag 0G7E) -/
 theorem constructibleComparisonComplexPullback_kFlat (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     (P : ConstantCompletion.Cx (ConstantCompletion.constant

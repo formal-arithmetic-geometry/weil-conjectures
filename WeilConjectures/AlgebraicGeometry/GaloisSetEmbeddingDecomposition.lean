@@ -15,7 +15,9 @@ import Mathlib.Topology.Algebra.MulAction
 /-!
 # Decomposition of continuous Galois sets into field embedding sets
 
-Source: Stacks Project, Tag 03QR.
+## References
+
+* [Stacks Project, Tag 03QR](https://stacks.math.columbia.edu/tag/03QR)
 -/
 
 @[expose] public section
@@ -28,19 +30,8 @@ namespace AlgebraicGeometry
 
 attribute [local instance] etaleFieldDiscreteForget₂ etaleFieldActionForget₂
 
-/-- A continuous discrete Galois set is a disjoint union of finite separable embedding sets.
-Source: Stacks Project, Tag 03QR, construction of the inverse functor.
-(blueprint: lem-exc-galois-set-embedding-decomposition).
-
-Proof: Take I to be the orbit quotient of the underlying action, in the same universe.
-For each orbit choose a representative. Its stabilizer is open because the orbit map
-is continuous and the singleton of the representative is open. The Galois group is
-compact, so its quotient by this stabilizer is finite; the orbit-stabilizer equivalence
-makes the orbit finite. Apply the finite Galois classification to that nonempty
-transitive orbit. It yields a finite separable intermediate field E i and an equivariant
-bijection from the orbit to the K-embeddings of E i in Ksep. Combine these bijections
-with the canonical equivalence of the original set with the sum of its orbits.
-If the original set is empty, I is empty and the sum is empty. -/
+/-- A continuous discrete Galois set is a disjoint union of finite separable embedding sets
+(Stacks, Tag 03QR). -/
 theorem galoisSet_embedding_decomposition
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (M : DiscreteContAction (Type u) (Gal(Ksep/K))) :

@@ -9,8 +9,10 @@ public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBa
 
 /-! # Coinduction for strict semilinear systems
 
-Source: Stacks 0941, the coinduced sequence construction.
-(blueprint: lem-coef-system-coinduced-adjunction).
+## References
+
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 0941
 -/
 
 @[expose] public noncomputable section
@@ -28,19 +30,16 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r}) (n : ℕ)
 
-/-- The coinduced module at a vertex, zero below the input vertex.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The coinduced module at a vertex, zero below the input vertex. -/
 def rightLevel (M : systemLevel B n) (k : ℕ) : systemLevel B k :=
   if h : n ≤ k then (systemRestriction B h).obj M else 0
 
-/-- The identification of a nonzero coinduced vertex with scalar restriction.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The identification of a nonzero coinduced vertex with scalar restriction. -/
 def rightAboveIso (M : systemLevel B n) {k : ℕ} (hk : n ≤ k) :
     rightLevel B n M k ≅ (systemRestriction B hk).obj M :=
   eqToIso (dite_eq_left hk)
 
-/-- The coinduced transition, given by scalar-restriction coherence above the vertex.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The coinduced transition, given by scalar-restriction coherence above the vertex. -/
 def rightTransition (M : systemLevel B n) {j k : ℕ} (h : j ≤ k) :
     rightLevel B n M k ⟶ (systemRestriction B h).obj (rightLevel B n M j) :=
   if hj : n ≤ j then
@@ -54,8 +53,7 @@ def rightTransition (M : systemLevel B n) {j k : ℕ} (h : j ≤ k) :
         (systemRestriction B h).map (rightAboveIso B n M hj).inv
   else 0
 
-/-- Above the input vertex, the transition is the scalar-restriction compositor.
-Source: Stacks 0941 (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Above the input vertex, the transition is the scalar-restriction compositor. -/
 theorem rightTransition_above (M : systemLevel B n) {j k : ℕ}
     (h : j ≤ k) (hj : n ≤ j) :
     rightTransition B n M h =
@@ -65,8 +63,7 @@ theorem rightTransition_above (M : systemLevel B n) {j k : ℕ}
           (by rw [← B.map_comp]; rfl)).inv.app M ≫
         (systemRestriction B h).map (rightAboveIso B n M hj).inv := dite_eq_left hj
 
-/-- The coinduced strict system, with its sectionwise identity and composition laws.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The coinduced strict system, with its sectionwise identity and composition laws. -/
 def rightObj (M : systemLevel B n) : StrictRingSystem B where
   level := rightLevel B n M
   transition h := rightTransition B n M h
@@ -123,22 +120,19 @@ def rightObj (M : systemLevel B n) : StrictRingSystem B where
         exact ((systemRestriction B (h.trans q)).map_isZero hz).eq_of_tgt _ _
     exact congrArg (fun f ↦ f.val.app U x) he
 
-/-- The vertexwise action of coinduction on a module morphism.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The vertexwise action of coinduction on a module morphism. -/
 def rightLevelMap {M N : systemLevel B n} (f : M ⟶ N) (k : ℕ) :
     rightLevel B n M k ⟶ rightLevel B n N k :=
   if hk : n ≤ k then (rightAboveIso B n M hk).hom ≫
     (systemRestriction B hk).map f ≫ (rightAboveIso B n N hk).inv else 0
 
-/-- Above the input vertex, coinduction acts by scalar restriction.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Above the input vertex, coinduction acts by scalar restriction. -/
 theorem rightLevelMap_above {M N : systemLevel B n} (f : M ⟶ N)
     {k : ℕ} (hk : n ≤ k) :
     rightLevelMap B n f k = (rightAboveIso B n M hk).hom ≫
       (systemRestriction B hk).map f ≫ (rightAboveIso B n N hk).inv := dite_eq_left hk
 
-/-- The strict-system morphism induced by a module morphism.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The strict-system morphism induced by a module morphism. -/
 def rightMap {M N : systemLevel B n} (f : M ⟶ N) :
     rightObj B n M ⟶ rightObj B n N where
   app := rightLevelMap B n f
@@ -164,8 +158,7 @@ def rightMap {M N : systemLevel B n} (f : M ⟶ N) :
         exact isZero_zero _
       exact ((systemRestriction B h).map_isZero hz).eq_of_tgt _ _
 
-/-- The explicit coinduction functor at a fixed vertex.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The explicit coinduction functor at a fixed vertex. -/
 def rightExtension : systemLevel B n ⥤ StrictRingSystem B where
   obj := rightObj B n
   map := rightMap B n
@@ -196,8 +189,7 @@ def rightExtension : systemLevel B n ⥤ StrictRingSystem B where
         exact isZero_zero _
       exact hz.eq_of_src _ _
 
-/-- Coinduction preserves addition, since scalar restriction and zero do so.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Coinduction preserves addition, since scalar restriction and zero do so. -/
 instance rightExtension_additive : (rightExtension B n).Additive where
   map_add {M N} f g := by
     apply strictRingSystem_hom_ext B
@@ -217,8 +209,7 @@ instance rightExtension_additive : (rightExtension B n).Additive where
         exact isZero_zero _
       exact hz.eq_of_src _ _
 
-/-- Evaluation of coinduction above the input vertex is scalar restriction.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Evaluation of coinduction above the input vertex is scalar restriction. -/
 def rightExtension_above {k : ℕ} (hk : n ≤ k) :
     rightExtension B n ⋙ systemEvaluation B k ≅ systemRestriction B hk :=
   NatIso.ofComponents (fun M ↦ rightAboveIso B n M hk) (fun f ↦ by
@@ -227,22 +218,19 @@ def rightExtension_above {k : ℕ} (hk : n ≤ k) :
     simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
     rfl)
 
-/-- Extend a map from a vertex using the actual iterated system transitions.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Extend a map from a vertex using the actual iterated system transitions. -/
 def coextendApp (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M.level n ⟶ N) (k : ℕ) : M.level k ⟶ rightLevel B n N k :=
   if hk : n ≤ k then M.transition hk ≫ (systemRestriction B hk).map f ≫
     (rightAboveIso B n N hk).inv else 0
 
-/-- The coextension formula at a vertex at or above the input vertex.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- The coextension formula at a vertex at or above the input vertex. -/
 theorem coextendApp_above (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M.level n ⟶ N) {k : ℕ} (hk : n ≤ k) :
     coextendApp B n M N f k = M.transition hk ≫ (systemRestriction B hk).map f ≫
       (rightAboveIso B n N hk).inv := dite_eq_left hk
 
-/-- Extend a vertex map to its coinduced strict-system morphism.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Extend a vertex map to its coinduced strict-system morphism. -/
 def coextend (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M.level n ⟶ N) : M ⟶ (rightExtension B n).obj N where
   app := coextendApp B n M N f
@@ -264,8 +252,7 @@ def coextend (M : StrictRingSystem B) (N : systemLevel B n)
         exact isZero_zero _
       exact ((systemRestriction B h).map_isZero hz).eq_of_tgt _ _
 
-/-- Recover a vertex map from a coinduced morphism by the scalar unit.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Recover a vertex map from a coinduced morphism by the scalar unit. -/
 def coevaluate (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M ⟶ (rightExtension B n).obj N) : M.level n ⟶ N :=
   f.app n ≫ (rightAboveIso B n N (Nat.le_refl n)).hom ≫
@@ -274,8 +261,7 @@ def coevaluate (M : StrictRingSystem B) (N : systemLevel B n)
 
 attribute [local implicit_reducible] rightExtension rightObj systemEvaluation
 
-/-- Coextension followed by evaluation is the original vertex map.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Coextension followed by evaluation is the original vertex map. -/
 theorem coevaluate_coextend (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M.level n ⟶ N) : coevaluate B n M N (coextend B n M N f) = f := by
   change (coextendApp B n M N f n) ≫ _ = f
@@ -284,8 +270,7 @@ theorem coevaluate_coextend (M : StrictRingSystem B) (N : systemLevel B n)
   ext U x
   exact congrArg (fun y ↦ f.val.app U y) (M.identity n U x)
 
-/-- Evaluation followed by coextension is the original coinduced morphism.
-Source: Stacks 0941 and 015F (blueprint: lem-coef-system-coinduced-adjunction). -/
+/-- Evaluation followed by coextension is the original coinduced morphism. -/
 theorem coextend_coevaluate (M : StrictRingSystem B) (N : systemLevel B n)
     (f : M ⟶ (rightExtension B n).obj N) : coextend B n M N (coevaluate B n M N f) = f := by
   apply strictRingSystem_hom_ext B
@@ -327,13 +312,7 @@ theorem coextend_coevaluate (M : StrictRingSystem B) (N : systemLevel B n)
       exact isZero_zero _
     exact hz.eq_of_tgt _ _
 
-/-- Evaluation at a level has the explicitly constructed coinduced right adjoint.
-Source: Stacks 0941 (blueprint: lem-coef-system-coinduced-adjunction).
-Proof: extend f:M_n→N at k≥n by the transition M_k→Res(M_n), followed by Res(f),
-and put zero below n. The system composition law proves compatibility. Restriction
-at n is inverse to this extension: one inverse law is the identity transition,
-and the other is the naturality square for n≤k. These formulas commute with maps
-in both variables, so the Hom equivalences define the adjunction. -/
+/-- Evaluation at a level has the explicitly constructed coinduced right adjoint. -/
 def adjunction : systemEvaluation B n ⊣ rightExtension B n := by
   refine Adjunction.mkOfHomEquiv
     { homEquiv := fun M N ↦

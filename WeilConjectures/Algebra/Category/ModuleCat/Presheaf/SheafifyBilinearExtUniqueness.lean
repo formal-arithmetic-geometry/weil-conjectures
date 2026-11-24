@@ -10,24 +10,16 @@ public import Mathlib.Algebra.Category.Ring.Limits
 /-!
 # Uniqueness of bilinear extensions through module sheafification
 
-Source: Stacks Project, Modules on Sites, Tag 0GMW.
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMW
 -/
 
 @[expose] public section
 universe u v w
 open CategoryTheory
 namespace PresheafOfModules
-/-- Natural bilinear families agreeing on the two module units are equal.
-Source: Stacks Project, Modules on Sites, Tag 0GMW, uniqueness in the
-sheafification universal property.
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension-uniqueness)
-
-Proof: For sections `x,y`, intersect the covering image sieves of the two units.
-Every arrow in this covering sieve gives lifts `a,b` of both restrictions.
-Naturality of both families identifies their restricted values with their values
-on these unit images. The assumed unit agreement makes these equal. Since `H`
-is a sheaf, separatedness gives equality of the values on `x,y` themselves.
-Function and linear-map extensionality give equality of the two families. -/
+/-- Natural bilinear families agreeing on the two module units are equal. -/
 theorem unique_bilinear_sheafification_extension
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasWeakSheafify J AddCommGrpCat.{max u v w}]

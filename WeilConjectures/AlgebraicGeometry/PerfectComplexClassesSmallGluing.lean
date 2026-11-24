@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.PerfectComplexClassesSmallGluingCore
 
 /-! # Gluing smallness of perfect isomorphism classes
 
-Source: Step 2 of lem-pc-perfect-complexes-compact-set, using Stacks Project,
-Tags 08BV and 08DR (blueprint: lem-pc-perfect-classes-small-gluing).
+## References
+
+* Stacks Project, Tags 08BV and 08DR.
 -/
 
 @[expose] public section

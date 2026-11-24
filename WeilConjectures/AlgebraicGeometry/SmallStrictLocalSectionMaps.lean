@@ -8,8 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.SetsPushforwardStalkStrictHensel
 
 /-! # Section maps in the small strict-henselization presentation
 
-Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 03Q9]
+* [Stacks, Tag 09YQ]
+* [Stacks, Tag 09YU]
 -/
 
 @[expose] public section
@@ -22,9 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The comparison of the small ring colimit with the full affine colimit is over the base.
-Source: Stacks Project, Tag 03Q9, independence of the affine representative category.
-(auxiliary; not a blueprint node). -/
+/-- The comparison of the small ring colimit with the full affine colimit is over the base. -/
 theorem smallStrictLocalization_toBase
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -63,9 +64,7 @@ theorem smallStrictLocalization_toBase
   simpa only [Category.assoc] using hh.trans hsmall
 
 /-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine
-pointed neighbourhood `j`.
-Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
-(auxiliary; not a blueprint node). -/
+pointed neighbourhood `j`. -/
 @[irreducible]
 noncomputable def smallStrictHenselizationBaseChangeMap
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -79,9 +78,7 @@ noncomputable def smallStrictHenselizationBaseChangeMap
     (by simpa using (smallStrictLocalization_toBase y).symm) (by simp) ≫
       strictHenselizationBaseChangeMap f y j
 
-/-- Projection of the transported leg to X.
-Source: Stacks Project, Tag 03Q9, fibre product projections.
-(auxiliary; not a blueprint node). -/
+/-- Projection of the transported leg to X. -/
 @[reassoc (attr := simp)]
 theorem smallStrictHenselizationBaseChangeMap_snd
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -94,9 +91,7 @@ theorem smallStrictHenselizationBaseChangeMap_snd
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The transported leg has the original small spectrum-cone projection.
-Source: Stacks Project, Tag 03Q9, compatibility of the canonical colimit comparison.
-(auxiliary; not a blueprint node). -/
+/-- The transported leg has the original small spectrum-cone projection. -/
 @[reassoc]
 theorem smallStrictHenselizationBaseChangeMap_fst
     {X Y : Scheme.{u}} (f : X ⟶ Y)

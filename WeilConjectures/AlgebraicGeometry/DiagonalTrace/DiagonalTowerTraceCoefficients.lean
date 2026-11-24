@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 
 /-! # Normalized coefficient cones for the trace
-Source: blueprint main-20261015, sk-prop-diagonal-tower-trace, proof steps 1--8
-(blueprint: def-sfb-diagonal-trace-coefficients).
 
 ## Main definitions
 - `DiagonalTrace.completedUnit` and `DiagonalTrace.completedLine` are degree-zero objects.
@@ -31,24 +29,20 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 open SpTowerClasses WeilConjectures
 
-/-- The completed unit in degree zero, with its actual coefficient-sheaf action.
-Source: blueprint trace clause 1 (blueprint: def-sfb-diagonal-trace-coefficients). -/
+/-- The completed unit in degree zero, with its actual coefficient-sheaf action. -/
 abbrev completedUnit (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] :=
   (DerivedCategory.singleFunctor (DiagonalCompleted l T) 0).obj
     (SheafOfModules.unit (Scheme.purTwistRing T (Scheme.purTwistZlCompletion T l)))
 
-/-- The completed root-limit Tate line in degree zero.
-Source: blueprint trace clause 1 (blueprint: def-sfb-diagonal-trace-coefficients). -/
+/-- The completed root-limit Tate line in degree zero. -/
 abbrev completedLine (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] :=
   (DerivedCategory.singleFunctor (DiagonalCompleted l T) 0).obj (Scheme.purTwistZlModule T l)
 
 /-- The two canonical coefficient cones. All comparisons are normalized on sections:
 coefficient one goes to one, a root goes to its tensor with one, and the completed
-projections are the actual ring-limit and root-limit projections.
-Source: blueprint trace proof steps 4--5
-(blueprint: def-sfb-diagonal-trace-coefficients). -/
+projections are the actual ring-limit and root-limit projections. -/
 structure Coefficients (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     [DiagonalTraceLocalizations l T] (c : Chern l E T) (r : Restriction l E T) where
@@ -97,8 +91,7 @@ structure Coefficients (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 end AlgebraicGeometry.ProEtale.DiagonalTrace
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 open SpTowerClasses WeilConjectures
-/-- The completed coefficient cone mapped through the universal derived-limit unit.
-Source: blueprint trace proof step 5 (blueprint: def-sfb-diagonal-trace-coefficients). -/
+/-- The completed coefficient cone mapped through the universal derived-limit unit. -/
 def Coefficients.unitMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{u}}
     [DiagonalTraceLocalizations l T] {c : Chern l E T} {r : Restriction l E T}
@@ -107,8 +100,7 @@ def Coefficients.unitMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       L.R.obj (r.F.mapDerivedCategory.obj (unit T (Arings l E T))) :=
   exactConeComparison (diagonalCompletedRestriction l T) r.F L _ _ a.coefficientProjection
 
-/-- The analogous root-limit comparison, prior to the shift by two.
-Source: blueprint trace proof step 5 (blueprint: def-sfb-diagonal-trace-coefficients). -/
+/-- The analogous root-limit comparison, prior to the shift by two. -/
 def Coefficients.lineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {T : Scheme.{u}}
     [DiagonalTraceLocalizations l T] {c : Chern l E T} {r : Restriction l E T}

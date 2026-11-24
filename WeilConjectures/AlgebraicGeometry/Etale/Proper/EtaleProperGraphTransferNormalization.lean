@@ -10,7 +10,12 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphDerive
 import all WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperGraphMateNormalization
 import WeilConjectures.AlgebraicGeometry.Etale.Proper.EtaleProperDerivedCompositionUnit
 
-/-! # Normal form of the proper clopen graph transfer -/
+/-! # Normal form of the proper clopen graph transfer
+
+## References
+
+* Stacks Project, Tags 0F4L, 0F7B
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -45,9 +50,7 @@ private lemma unit_transfer_normal
   rw [← reassoc_of% hn, ← Q.map_comp_assoc, ← hs]
 
 /-- The clopen graph transfer, precomposed with the right-derived unit, is the
-ordinary sheaf graph map followed by the target right-derived unit and exact factors.
-Source: Stacks Project Tags 0F7B and 0F4L; the graph and compositor unit identities.
-(blueprint: lem-pur-proper-graph-transfer-normalization). -/
+ordinary sheaf graph map followed by the target right-derived unit and exact factors. -/
 theorem properGraphTransfer_normal
     (A : Type (u + 1)) [CommRing A]
     {W V Y : Scheme.{u}} (q : W ⟶ V) [IsProper q]

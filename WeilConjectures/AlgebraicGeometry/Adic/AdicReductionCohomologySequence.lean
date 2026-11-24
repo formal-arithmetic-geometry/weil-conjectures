@@ -32,9 +32,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 set_option linter.privateModule false
 
 /-! # The cohomology sequence for a completed DVR quotient
-
-Source: blueprint integral truncations, hypothesis paragraph, and the quotient-resolution
-argument in steps 1 and 3 of lem-weil-pbc-adic-tor-flat-cohomology.
 -/
 
 @[expose] public noncomputable section

@@ -12,8 +12,10 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Localized derived pullback with independent universes
 
-Source: Stacks Project, Tags 06YJ and 08DW; uniqueness of localization.
-(blueprint: def-pc-localized-mixed-derived-pullback).
+## References
+
+* [Stacks, Tag 06YJ](https://stacks.math.columbia.edu/tag/06YJ)
+* [Stacks, Tag 08DW](https://stacks.math.columbia.edu/tag/08DW)
 -/
 
 @[expose] public section
@@ -22,11 +24,8 @@ universe u wW wO
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- Transport derived tensor pullback through canonical equivalences of localizations.
-All objects and maps are constructed from localization and the existing derived pullback;
-no witness of mere existence is chosen.
-Source: Stacks Project, Tags 06YJ and 08DW.
-(blueprint: def-pc-localized-mixed-derived-pullback). -/
+/-- Derived tensor pullback transported through canonical equivalences of localizations.
+(Stacks, Tags 06YJ, 08DW) -/
 noncomputable def localizedMixedDerivedPullback
     {S T : Scheme.{u}} (U : S.Opens) (V : U.toScheme.Opens) (W : T.Opens)
     (g : V.toScheme ⟶ W.toScheme)

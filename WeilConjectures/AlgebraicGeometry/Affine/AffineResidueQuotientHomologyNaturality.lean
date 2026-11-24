@@ -13,8 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 
 /-! # The natural quotient-to-homology comparison for affine residue complexes
 
-Source: Stacks Project, Tag 010V; Mathlib's concrete module homology API.
-(blueprint: new-affine-residue-quotient-homology-naturality)
+## References
+
+* Stacks Project, Tag 010V
 -/
 
 @[expose] public section
@@ -212,18 +213,7 @@ private theorem abstractCycle_naturality
 -- The statement compares tensor-product and quotient module structures.
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The explicit residue quotient computes tensor homology naturally in all chain maps.
-No perfectness, affinity or derived-category hypothesis is required for this algebraic step.
-Source: Stacks Project, Tag 010V; Mathlib's concrete module homology API.
-(blueprint: new-affine-residue-quotient-homology-naturality)
-
-Proof: Identify the ordinary residue tensor with scalar extension on each term.
-Restrict this natural term comparison to the kernels of the outgoing differentials.
-The image of the incoming differential corresponds to the incoming boundary
-submodule. Descend the kernel isomorphism to the quotient and use the canonical
-module homology isomorphism. Naturality of homology projections and the term
-comparison proves the equation first on cycle classes. Surjectivity of the
-cycle-class projection proves it on every homology class. -/
+/-- The explicit residue quotient computes tensor homology naturally in all chain maps. -/
 theorem affine_residue_quotient_homology_naturality :
     let F : SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U) ⥤
         ModuleCat.{v} Γ(W, U) := SheafOfModules.evaluation _ (.op (Over.mk (𝟙 U)))

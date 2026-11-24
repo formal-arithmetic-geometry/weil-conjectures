@@ -22,8 +22,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Terminal
 /-!
 # Gabber's degree-zero criterion for etale sheaves of sets
 
-Source: Stacks Project, Lemma 59.82.2 (Tag 09ZF)
-(blueprint: lem-weil-pbc-gabber-h0-etale-criterion).
+## References
+
+* Stacks Project, Lemma 59.82.2 (Tag 09ZF).
 -/
 
 @[expose] public section
@@ -110,55 +111,7 @@ private theorem unit_transport {X W : Scheme.{u}} (a b : W ⟶ X) (e : a = b)
 
 /-- If Zariski restriction to a closed subscheme is bijective on sections for every
 set-valued sheaf, and remains so after every finite base change, then etale restriction
-is bijective on sections for every set-valued sheaf. Source: Stacks Project, Lemma 59.82.2
-(Tag 09ZF) (blueprint: lem-weil-pbc-gabber-h0-etale-criterion).
-
-Proof:
-0. Use the inverse-image units and their composition isomorphisms from
-`lem-weil-pbc-sets-etale-inverse-image-composition-units`. After a finite base change,
-closed immersions, finiteness and surjectivity persist by
-`lem-weil-pbc-closed-immersion-base-change`, `lem-weil-pbc-finite-morphism-permanence`
-and `lem-weil-pbc-surjective-base-change`; the identity is finite.
-1. By `lem-weil-pbc-gabber-zariski-etale-restriction-injective`, Zariski restriction
-followed by the comparison injection is etale restriction. The two hypotheses therefore
-give injectivity on X and on every finite X' over X.
-2. Every nonempty closed subset meets Z: otherwise its pushforward constant two-element
-sheaf has two distinct global sections whose restrictions agree. Use
-`lem-weil-pbc-closed-pushforward-constant-stalks`,
-`lem-weil-pbc-sets-inverse-image-stalk`, and
-`lem-weil-pbc-sheaf-sections-determined-by-germs`.
-3. A section t of the inverse image is locally represented by sections s_j on etale
-X-schemes U_j and maps V_j to U_j over X, with V_j covering Z. Use
-`lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`,
-`lem-weil-pbc-site-sheafification-sections-local`,
-`situation-conventions`,
-`situation-conventions`, and
-`lem-weil-pbc-filtered-colimit-sets-elementwise`.
-4. Shrink U_j to make V_j surjective over U_j times Z. This uses openness of etale
-morphisms and the subspace topology of a closed immersion. The sheaf condition then
-gives equality of t with the pullback of s_j on all of U_j times Z. Use
-`definition-torsion-sheaves--3`, `lem-weil-pbc-etale-morphism-open-map`,
-and `situation-conventions`.
-5. The union of the images of U_j is open and contains Z, so its closed complement
-is empty by step 2. Thus their disjoint union covers X; use
-`lem-weil-pbc-etale-local-on-source`.
-6. Apply `lemma-weil-pbc-finite-refinement-etale-cover` to obtain a finite surjective
-X' over X and an open covering W_alpha of X' mapping into the U_j over X.
-7. Pull back the s_j to sections s'_alpha on W_alpha and t to t' on Z'. The composition
-isomorphisms and unit compatibilities identify their restrictions to W_alpha times Z.
-8. The comparison injection of step 1 makes the Zariski restrictions of s'_alpha
-agree on overlaps in Z'. They glue to a Zariski inverse-image section sigma. The finite
-base-change hypothesis lifts sigma to a global s' on X', whose restriction is t'.
-9. The two pullbacks of s' to X' times X' agree after restriction to Z' times Z',
-by compatibility of the inverse-image units. Injectivity from step 1 for this finite
-X-scheme makes them equal; finiteness uses `lem-weil-pbc-finite-composition`.
-10. By `lem-weil-pbc-sets-finite-surjective-descent`, s' descends to a section s on X.
-Its restriction is t: their pullbacks to Z' agree by step 8 and unit compatibility,
-and restriction along the finite surjection Z' to Z is injective by the same descent
-lemma. This proves surjectivity and hence bijectivity.
-
-The unit is evaluated at the terminal etale X-object. Its base change is terminal over
-Z, canonically isomorphic to Z itself, so its sections are global sections on Z. -/
+is bijective on sections for every set-valued sheaf. (Stacks, Tag 09ZF) -/
 theorem gabber_h0_etale_criterion
     {X Z : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     (i : Z ⟶ X) [IsClosedImmersion i]

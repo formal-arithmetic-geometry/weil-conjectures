@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 /-!
 # Reflection of local torsion by the etale to pro-etale comparison
 
-Source: Stacks Tags 099T and 03SA; proper-base-change proof, torsion descent.
-(blueprint: lem-pe-comparison-reflects-local-torsion).
+Stacks Project, Tags 099T and 03SA.
 -/
 
 @[expose] public section
@@ -173,19 +172,8 @@ private theorem torsion_comparison_stalkIso
     Functor.isoWhiskerRight e Φ.sheafFiber ≪≫ b.symm ≪≫ hb ≪≫
       (Scheme.pointSmallEtale t).uliftSheafFiberIso.{u + 1} A⟩
 
-/-- Exact fully faithful comparison inverse image reflects local integer torsion.
-Source: Stacks Tags 099T and 03SA, and blueprint theorem-proper-base-change-classical-pro, opening
-paragraph (blueprint: lem-pe-comparison-reflects-local-torsion).
-Proof: every germ in the pro-etale geometric stalk is represented by a section on
- a pointed weakly etale neighbourhood. A covering on which that section is torsion
- has a member lifting the geometric point: base change to the algebraically closed
- field and split a nonempty weakly etale member. The restricted section is killed
- by a positive integer, so its germ is too. The canonical comparison-stalk
- isomorphism transfers torsion to the etale stalk. Forgetting scalars commutes with
- these filtered colimits. The conservative family of algebraically closed etale
- points then gives local torsion on the original module sheaf. No uniform integer
- annihilator or exactness of comparison direct image is assumed.
--/
+/-- Exact fully faithful comparison inverse image reflects local integer torsion
+(Stacks, Tags 099T and 03SA). -/
 theorem comparisonUpperStar_reflects_local_torsion (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))

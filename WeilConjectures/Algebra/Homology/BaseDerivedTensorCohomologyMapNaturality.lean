@@ -10,8 +10,10 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Naturality of localized comparison along canonical model maps
 
-Source: Stacks Project, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-base-derived-tensor-model-map-localized-naturality). -/
+## References
+
+* Stacks Project, Tags 06Y6 and 08IB.
+-/
 
 @[expose] public section
 
@@ -27,26 +29,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
   [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]
   [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]
 
-/-- A counit-compatible model map commutes with the localized comparison.
-Source: Stacks Project, Tags 06Y6 and 08IB.
-
-Proof: restrict g to B and use its prescribed cohomology equation. The equation
-for the counits, and counit naturality at the restricted chain map f, give the
-ordinary comparison square after composing with the homology identification.
-The ordinary tensor associators are natural: both composites take b tensor q
-in degree k to (1 tensor b) tensor f(q), so tensor extensionality proves equality.
-The comparison_eq identities and naturality of mapHomologyIso then show
-that g followed by n.comparison equals m.comparison followed by homology of
-termwise extension of f. Likewise the two ordinaryToLocalized composites
-send e tensor q to the image of e tensor f(q); they are equal by tensor
-extensionality. Transpose the desired localized equation through the
-extension/restriction adjunction. Naturality of its unit and the localized_eq
-identities reduce the transposed equation to these two ordinary squares and
-naturality of mapHomologyIso. The adjunction homEquiv is injective, proving
-the claim. This uses no exactness of extension from A tensor_R B to C.
-Zero rings and zero complexes cause no exception, since tensor extensionality
-and the adjunction still apply.
-(blueprint: lem-pc-base-derived-tensor-model-map-localized-naturality). -/
+/-- A counit-compatible model map commutes with the localized comparison. -/
 theorem baseDerivedTensorCohomologyMap_localized_naturality
     (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')
     (m : BaseDerivedTensorCohomologyModel R A B Q C)

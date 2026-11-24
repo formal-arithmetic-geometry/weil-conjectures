@@ -49,9 +49,7 @@ derived functors `R^p Γ(X, -)` are the cohomology functors `H^p(X, -)`, just as
 functors of the direct image `f_*` are the higher direct images
 `AlgebraicGeometry.Scheme.Modules.higherDirectImage`; a short exact sequence of `𝒪_X`-modules
 gives a long exact sequence of these derived functors
-(`CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_δ_exact`).
-
-(blueprint: `pqf-def-cohomology`) -/
+(`CategoryTheory.ShortComplex.ShortExact.exists_rightDerived_δ_exact`). -/
 noncomputable def globalSectionsFunctor : X.Modules ⥤ AddCommGrpCat.{u} :=
   toPresheaf X ⋙ (CategoryTheory.evaluation _ _).obj (op ⊤)
 
@@ -83,9 +81,7 @@ theorem pushforward_comp_globalSectionsFunctor :
 /-- **The Leray spectral sequence.** For a morphism of schemes `f : X ⟶ Y` and an `𝒪_X`-module
 `ℱ` there is a first quadrant spectral sequence
 `E₂^{p,q} = H^p(Y, R^q f_* ℱ) ⇒ H^{p+q}(X, ℱ)`, where `H^p(Y, -) = R^p Γ(Y, -)` and
-`H^n(X, -) = R^n Γ(X, -)`. It is the Grothendieck spectral sequence of `Γ(Y, -) ∘ f_*`.
-
-(blueprint: `pqf-lem-leray`) -/
+`H^n(X, -) = R^n Γ(X, -)`. It is the Grothendieck spectral sequence of `Γ(Y, -) ∘ f_*`. -/
 theorem exists_leraySpectralSequence [HasInjectiveResolutions X.Modules]
     [HasInjectiveResolutions Y.Modules] (ℱ : X.Modules) :
     ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{u},
@@ -103,9 +99,7 @@ theorem exists_leraySpectralSequence [HasInjectiveResolutions X.Modules]
 
 /-- **The exact sequence of low degree terms of the Leray spectral sequence.** For a morphism
 `f : X ⟶ Y` and an `𝒪_X`-module `ℱ` there is an exact sequence
-`0 ⟶ H¹(Y, f_* ℱ) ⟶ H¹(X, ℱ) ⟶ H⁰(Y, R¹ f_* ℱ) ⟶ H²(Y, f_* ℱ)`.
-
-(blueprint: `pqf-lem-leray-lowdegree`) -/
+`0 ⟶ H¹(Y, f_* ℱ) ⟶ H¹(X, ℱ) ⟶ H⁰(Y, R¹ f_* ℱ) ⟶ H²(Y, f_* ℱ)`. -/
 theorem exists_leray_lowDegree_exact [HasInjectiveResolutions X.Modules]
     [HasInjectiveResolutions Y.Modules] (ℱ : X.Modules) :
     ∃ (a : ((globalSectionsFunctor Y).rightDerived 1).obj ((pushforward f).obj ℱ) ⟶
@@ -130,9 +124,7 @@ theorem exists_leray_lowDegree_exact [HasInjectiveResolutions X.Modules]
   · refine ShortComplex.exact_of_iso ?_ h₂
     exact ShortComplex.isoMk (Iso.refl _) e₀₁ e₂₀ (by simp) (by simp)
 
-/-- If `R¹ f_* ℱ = 0`, then `H¹(X, ℱ) ≅ H¹(Y, f_* ℱ)`.
-
-(blueprint: `pqf-lem-leray-lowdegree`) -/
+/-- If `R¹ f_* ℱ = 0`, then `H¹(X, ℱ) ≅ H¹(Y, f_* ℱ)`. -/
 theorem nonempty_rightDerived_one_iso_of_isZero [HasInjectiveResolutions X.Modules]
     [HasInjectiveResolutions Y.Modules] (ℱ : X.Modules)
     (h : IsZero ((higherDirectImage f 1).obj ℱ)) :

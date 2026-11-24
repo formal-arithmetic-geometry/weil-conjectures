@@ -17,8 +17,6 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import all Mathlib.Logic.Small.Defs
 
 /-! # Finite Cartier classes detect endomorphisms of their roots line
-
-Source: diagonal coefficient changes (3), supported positive Kummer normalization.
 -/
 
 @[expose] public noncomputable section
@@ -86,23 +84,7 @@ private theorem canonical_postcomp_injective
   exact hf.symm.trans ((congrArg V.map hfk).trans hk)
 
 /-- Postcomposition of the positive finite Cartier class detects ordinary
-endomorphisms of its finite roots line, after restriction of finite scalars.
-Source: diagonal coefficient changes (3), and the arbitrary-base finite P1
-integral normalization of the supported diagonal class.
-(blueprint: lem-diagonal-finite-cartier-endomorphism-detection).
-
-Proof: fullness of finite scalar restriction lifts the endomorphisms to the
-finite module category. Translate the assumed equality into equality of the
-restricted Ext composites; supported cyclic class restriction detects their
-equality. The uniqueness clause of the Cartier reduction/site comparison
-identifies the residue reduction with the canonical comparison class. Full
-faithfulness of site comparison lifts the finite pro-etale line endomorphisms
-to the etale line. Precomposition by the supported source mate and injectivity
-of the comparison map on Ext give equality of the etale class composites.
-Apply finiteEtaleDiagonalClass_postcomp_injective and map the resulting
-ordinary equality through comparison and scalar restriction. Only the
-supported-source Ext map is used injectively; no faithfulness of a functor
-on arbitrary derived arrows is asserted. -/
+endomorphisms of its finite roots line, after restriction of finite scalars. -/
 theorem finiteCartierClass_endomorphism_injective
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     [DiagonalTraceLocalizations l (diagonalSurface Y)]

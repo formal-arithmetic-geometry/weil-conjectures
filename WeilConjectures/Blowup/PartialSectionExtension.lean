@@ -14,11 +14,8 @@ public import WeilConjectures.Blowup.PartialSectionExtensionReduction
 # Extending a partial section after an admissible blow-up
 
 This file proves **Conrad's Theorem 2.4** in the reduced form in which it is used on the
-Conrad/Zariski's-Main-Theorem route to elimination of indeterminacy (Stacks Project Tag
-081S), together with the special case recorded as Conrad's Remark 2.5.
-
-Reference: Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 2.4 and
-Remark 2.5.
+Conrad/Zariski's-Main-Theorem route to elimination of indeterminacy, together with the
+special case recorded as Conrad's Remark 2.5.
 
 Conrad states his theorem over an auxiliary base `S`, for a morphism `Y ⟶ S` and a
 rational `S`-map from `X` to `Y`; the first step of his proof replaces `Y` by `Y ×_S X`
@@ -29,47 +26,28 @@ and thereby reduces to the case `S = X`. Only that reduced form is stated here:
   quasi-compact morphism locally of finite type with `Y` qcqs. A section `f` of `p` over
   `U` whose image is closed in `p⁻¹(V)` extends, after a `V`-admissible blow-up of `X`,
   to a section of `p` over an open `W` of the blow-up containing the preimage of `U`, and
-  the graph of the extension is closed in `Y ×_X X'`
-  (blueprint: `thm:nagata-conrad-elimination`, in the form reduced to the base `X`);
+  the graph of the extension is closed in `Y ×_X X'`;
 - `AlgebraicGeometry.exists_admissibleBlowup_extend_section`: **Conrad's Remark 2.5**, the
   case `V = U`. Here the closed-image hypothesis is automatic: `f` is then a section of
   the separated morphism `p ∣_ U`, hence a closed immersion
-  (blueprint: `lemma:nagata-conrad-morphism-is-quasi-domination`).
 
 The first statement is what
-`AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap` (Tag 081S)
-in `WeilConjectures.Compactification.EliminationOfIndeterminacy` is deduced from; with its
-proof here,
-that deduction and the Nagata compactification theorem's dependence on it are
-unconditional.
+`AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap`
+in `WeilConjectures.Compactification.EliminationOfIndeterminacy` is deduced from.
 
-## Structure of the proof
+## Implementation details
 
-The mathematics is in the three files imported here, and the proof below is their
-assembly:
-
-1. if `p` is quasi-affine as a morphism, the statement is Conrad's Case 3,
-   `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom_of_le`;
-2. in general
-   `AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph` produces a
-   `V`-admissible blow-up `q : X̃ ⟶ X` over which the scheme-theoretic image `F(U)‾` of the
-   graph `F = (f, σ)` is quasi-finite, of finite type, separated and quasi-compact over
-   `X̃`;
-3. `AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite` (Zariski's Main Theorem)
-   turns those four properties into quasi-affineness of `F(U)‾ ⟶ X̃` *as a morphism* —
-   neither `X̃` nor `F(U)‾` is quasi-affine as a scheme;
-4. `AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup` base changes
-   the whole problem along `q`, and
-5. `AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_isClosedImmersion`
-   replaces the base-changed target `Y ×_X X̃` by the closed subscheme `F(U)‾`, which by
-   step 3 is quasi-affine over `X̃`, reducing to step 1.
-
-The two orientations of the fibre product have to be reconciled: step 2 works in
-`Y ×_X X̃ = pullback p q` and steps 4 and 5 in `X̃ ×_X Y = pullback q p`. The bridge is
-`CategoryTheory.Limits.pullbackSymmetry`, and it is used only through the closed immersion
+The proof assembles the three files imported here (Conrad's Case 3, quasi-finiteness of the
+graph over a blow-up, and Zariski's Main Theorem). The two orientations of the fibre product
+`Y ×_X X̃ = pullback p q` and `X̃ ×_X Y = pullback q p` are reconciled by
+`CategoryTheory.Limits.pullbackSymmetry`, used only through the closed immersion
 `F.imageι ≫ (pullbackSymmetry p q).hom`, so that no transport of scheme-theoretic images
 along an isomorphism is needed.
 
+## References
+
+* Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 2.4 and Remark 2.5
+* Stacks Project, Tag 081S
 -/
 
 @[expose] public section
@@ -84,23 +62,8 @@ namespace AlgebraicGeometry
 
 variable {X : Scheme.{u}}
 
-/-- **Conrad's Theorem 2.4, reduced to the base `X`** (blueprint:
-`thm:nagata-conrad-elimination`, in the form reduced to the base `X`;
-`def:nagata-conrad-quasi-domination`).
-
-Conrad's Theorem 2.4 is stated for a rational map over an auxiliary base `S`; the first
-step of his proof replaces `Y` by `Y ×_S X`, which is the reduction to the form stated
-here. In the vocabulary of the blueprint the hypothesis says that `(U, f)` is a
-quasi-domination of `V` over `Y`, and the conclusion that `(W, g)` is a
-quasi-domination of the blow-up over `Y` extending `f`.
-
-Elimination of indeterminacy (Stacks Project Tag 081S,
-`AlgebraicGeometry.exists_admissibleBlowup_isOpenImmersion_strictTransformMap`) is
-deduced from this statement.
-
-Density of `U` is not used: neither Conrad's Case 3 nor the quasi-finiteness of the graph
-needs it. The hypothesis is kept because it is part of the interface consumed
-downstream. -/
+/-- **Conrad's Theorem 2.4, reduced to the base `X`**. Density of `U` is not used; the
+hypothesis is kept because it is part of the interface consumed downstream. -/
 theorem exists_admissibleBlowup_extend_partialSection
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
@@ -216,18 +179,9 @@ theorem exists_admissibleBlowup_extend_partialSection
       (B₁.preimage_blowupMap_mono hUV) (B₁.isCompact_coe_preimage_blowupMap hU)
       (B₁.isCompact_coe_preimage_blowupMap hV) f' hf'p hf'c)
 
-/-- Blueprint `corollary-extension-proper-target--1`, section form.
-
-**Conrad's Remark 2.5**: the case `V = U` of
-`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection` (blueprint:
-`thm:nagata-conrad-elimination` with `V = U`, together with
-`lemma:nagata-conrad-morphism-is-quasi-domination`). Combined with
-`AlgebraicGeometry.QuasiDomination.U_eq_top` it yields the extension to a proper target
-`AlgebraicGeometry.exists_admissibleBlowup_extend_of_isProper`.
-
-No closedness hypothesis is needed: over `U` the morphism `f` is a section of the
-separated morphism `p ∣_ U`, hence a closed immersion, so its image is closed in
-`p⁻¹(U)`. -/
+/-- **Conrad's Remark 2.5**: the case `V = U` of
+`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection`. No closedness hypothesis
+is needed, since over `U` the section `f` is a closed immersion. -/
 theorem exists_admissibleBlowup_extend_section
     [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) (hUdense : Dense (U : Set X))

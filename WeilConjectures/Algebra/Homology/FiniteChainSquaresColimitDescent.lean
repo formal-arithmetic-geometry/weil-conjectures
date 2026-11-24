@@ -19,8 +19,9 @@ import Mathlib.Data.Int.Interval
 
 /-! # Eventual commutativity of finitely many chain squares
 
-Source: Stacks Project, Tag 09RE, affine case (1), via Tag 05N7, equality clause.
-(blueprint: lem-pc-finite-chain-squares-colimit-descent)
+## References
+
+* Stacks Project, Tag 09RE, affine case (1), via Tag 05N7
 -/
 
 @[expose] public section
@@ -84,24 +85,7 @@ private theorem finite_equalities_at_common_stage
 /-- Finitely many squares of a fixed graded map commute at a later stage if they
 commute after extension to the colimit. No support bound or chain-map condition is
 required outside the specified interval.
-
-Source: Stacks Project, Tag 09RE, affine case (1), via Tag 05N7 (3).
-Proof: For each integer n in [a,b], compare the two composites from the extended Pⁿ
-to the extended Qⁿ⁺¹. Their scalar extensions are equal by hcomm and functoriality.
-The two modules at the current stage are finitely presented, since extension of
-scalars preserves finite presentation. The equality clause of Tag 05N7 makes this
-square commute at a later stage. There are only finitely many n, so directedness
-gives one stage j above i where all these equalities hold. Extend every vⁿ to j and
-conjugate with the canonical associativity isomorphisms to obtain wⁿ. Naturality of
-these isomorphisms identifies the square for w with the extension of the square for
-v, hence proves the requested finite list of equations. The associativity coherence
-of extension of scalars identifies the further extension of w with that of v in
-every degree, including degrees outside [a,b]. This uses no descent of new maps.
-For a preorder, use the same finite-presentation relation proof with directed upper
-bounds and the filtered-ring elementwise criterion, or transport Tag 05N7 through
-the antisymmetrization equivalence and lift its index back. If b < a there are no
-equations: choose j = i, with the identity scalar-extension comparisons.
-(blueprint: lem-pc-finite-chain-squares-colimit-descent) -/
+-/
 theorem eventually_commuting_finite_chain_squares
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

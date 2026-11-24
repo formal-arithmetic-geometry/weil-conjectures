@@ -14,8 +14,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 /-! # Scalar extension of an explicit mixed total tensor
 
 The comparison is at the level of complexes, without derived-category or flatness assumptions.
-Source: Stacks Project, Tag 06Y6, tensor associativity in the proof of derived change of rings.
-(blueprint: new-lem-pc-mixed-total-tensor-scalar-extension).
+
+## References
+
+* Stacks Project, Tag 06Y6
 -/
 
 @[expose] public section
@@ -214,22 +216,7 @@ private theorem mixedTotalIso_formula
   exact hi
 
 
-/-- Scalar extension commutes with the mixed total tensor, with its pure-tensor formula.
-Source: Stacks Project, Tag 06Y6, the total-tensor identifications in its proof.
-(blueprint: new-lem-pc-mixed-total-tensor-scalar-extension).
-
-Proof: in bidegree (p,q), the source is Aq tensor_A
-(Q^p tensor_A (A tensor_R F^q)). Reassociate tensors, extend the second factor
-A tensor_R F^q along A -> Aq, and identify its extension with Aq tensor_R F^q.
-The resulting Aq-linear isomorphism sends a tensor (x tensor (b tensor y)) to
-(a tensor x) tensor (algebraMap A Aq b tensor y). Its inverse sends
-(a tensor x) tensor (c tensor y) to ac tensor (x tensor (1 tensor y)).
-The balancing relations show that both maps are well-defined and mutually inverse.
-They commute with each of the two differentials by their pure-tensor formulas;
-the sign (-1)^p is unchanged. Extension of scalars preserves coproducts because
-it is a left adjoint. Thus the bidegree isomorphisms assemble on each diagonal
-into an isomorphism of total complexes. The specified formula follows by taking
-a=b=c=1. No exactness of Aq tensor_A - is used, so nonflat and zero rings are allowed. -/
+/-- Scalar extension commutes with the mixed total tensor, with its pure-tensor formula. -/
 theorem exists_mixedTotalTensor_scalarExtension
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (F : CochainComplex (ModuleCat.{u} R) ℤ) :

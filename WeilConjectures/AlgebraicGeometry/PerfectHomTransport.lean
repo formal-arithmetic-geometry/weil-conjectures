@@ -10,8 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 
 /-! # Canonical transport of Hom groups in the base-change system.
-Source: Stacks Project, Cohomology, Tag 0D5S and perfect.tex, Tag 09RE.
-(blueprint: lem-pc-perfect-hom-transport).
+
+## References
+
+* Stacks Project, Cohomology, Tag 0D5S; Tag 09RE.
 -/
 
 @[expose] public section
@@ -23,17 +25,15 @@ namespace AlgebraicGeometry
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- The fixed counit-pinned comparison for composition of derived pullbacks.
-Source: Stacks Project, Tag 0D5S (blueprint: lem-pc-perfect-hom-transport). -/
+/-- The fixed counit-pinned comparison for composition of derived pullbacks
+(Stacks, Tag 0D5S). -/
 noncomputable def perfectHomComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     derivedPullback g ⋙ derivedPullback f ≅ derivedPullback (f ≫ g) :=
   Classical.choose (Classical.choose_spec (Classical.choose_spec
     (Classical.choose_spec exists_derivedPullbackComposition))) f g
 
 /-- The counit-pinned comparison for a base-change arrow. This is the same fixed
-construction as `perfectDescentComparison`, with no independently chosen data.
-Source: Stacks Project, Tag 0D5S
-(blueprint: lem-pc-perfect-hom-transport). -/
+construction as `perfectDescentComparison`. -/
 noncomputable def perfectHomComparison {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) :
     derivedPullback (pullback.fst s T'.hom) ≅
@@ -41,8 +41,7 @@ noncomputable def perfectHomComparison {X S : Scheme.{u}} (s : X ⟶ S)
   eqToIso (congrArg (fun k ↦ derivedPullback k) (baseChangeMap_fst s g).symm) ≪≫
     (perfectHomComposition (baseChangeMap s g) (pullback.fst s T.hom)).symm
 
-/-- Conjugate pullback on Hom by the fixed composition comparisons.
-Source: Stacks Project, Tag 09RE (blueprint: lem-pc-perfect-hom-transport). -/
+/-- Conjugate pullback on Hom by the fixed composition comparisons. -/
 noncomputable def perfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q : schemeDerivedCategory X}
     (f : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -52,14 +51,14 @@ noncomputable def perfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
   (perfectHomComparison s g).hom.app P ≫
     (derivedPullback (baseChangeMap s g)).map f ≫ (perfectHomComparison s g).inv.app Q
 
-/-- (blueprint: lem-pc-perfect-hom-transport) -/
+/-- Transport of the identity morphism is the identity. -/
 @[simp] theorem perfectHomMap_id {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) (P : schemeDerivedCategory X) :
     perfectHomMap s g (𝟙 ((derivedPullback (pullback.fst s T.hom)).obj P)) =
       𝟙 _ := by
   simp [perfectHomMap]
 
-/-- (blueprint: lem-pc-perfect-hom-transport) -/
+/-- Transport of Hom is compatible with composition. -/
 @[simp] theorem perfectHomMap_comp {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q K : schemeDerivedCategory X}
     (a : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -69,7 +68,8 @@ noncomputable def perfectHomMap {X S : Scheme.{u}} (s : X ⟶ S)
     perfectHomMap s g (a ≫ b) = perfectHomMap s g a ≫ perfectHomMap s g b := by
   simp [perfectHomMap, Category.assoc]
 
-/-- (blueprint: lem-pc-perfect-hom-transport) -/
+/-- Two Hom morphisms have equal transports if and only if they have equal derived pullbacks
+along the base-change map. -/
 theorem perfectHomMap_eq_iff {X S : Scheme.{u}} (s : X ⟶ S)
     {T T' : Over S} (g : T' ⟶ T) {P Q : schemeDerivedCategory X}
     (a b : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -175,9 +175,7 @@ private theorem homMap_trTo {X S : Scheme.{u}} (s : X ⟶ S) {T T' : Over S}
     Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app, Category.assoc]
 
 -- Reducing the fixed comparison construction exposes the conjugation formula.
-/-- Conjugated Hom transport composes along successive base-change maps.
-Source: Stacks Project, Tags 0D5S and 09RE
-(blueprint: lem-pc-perfect-hom-transport). -/
+/-- Conjugated Hom transport composes along successive base-change maps. -/
 theorem perfectHomMap_trans {X S : Scheme.{u}} (s : X ⟶ S) {T T' T'' : Over S}
     (g : T' ⟶ T) (h : T'' ⟶ T') {P Q : schemeDerivedCategory X}
     (a : (derivedPullback (pullback.fst s T.hom)).obj P ⟶
@@ -190,8 +188,7 @@ theorem perfectHomMap_trans {X S : Scheme.{u}} (s : X ⟶ S) {T T' T'' : Over S}
   apply ht.trans
   exact trTo_congr _ _ _ _ _ _ (baseChangeMap_comp s h g).symm a
 
-/-- Transport from one finite stage to a later finite stage.
-Source: Stacks Project, Tag 09RE (blueprint: lem-pc-perfect-hom-transport). -/
+/-- Transport from one finite stage to a later finite stage. -/
 noncomputable def perfectStageMap {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k)
@@ -204,8 +201,7 @@ noncomputable def perfectStageMap {I : Type u} [Preorder I] (R : I ⥤ CommRingC
     (Over.homMk (Spec.map (R.map (homOfLE hjk)))
       (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) f
 
-/-- Transport from a finite stage to the colimit scheme.
-Source: Stacks Project, Tag 09RE (blueprint: lem-pc-perfect-hom-transport). -/
+/-- Transport from a finite stage to the colimit scheme. -/
 noncomputable def perfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j : I} (hij : i ≤ j) {P Q : schemeDerivedCategory X}
@@ -217,7 +213,7 @@ noncomputable def perfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ CommRingC
     (Over.homMk (Spec.map (c.ι.app j))
       (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) f
 
-/-- (blueprint: lem-pc-perfect-hom-transport) -/
+/-- Transport between finite stages sends the identity morphism to the identity. -/
 @[simp] theorem perfectStageMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k) (P : schemeDerivedCategory X) :
@@ -230,7 +226,7 @@ noncomputable def perfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ CommRingC
     (Over.homMk (Spec.map (R.map (homOfLE hjk)))
       (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl)) P
 
-/-- (blueprint: lem-pc-perfect-hom-transport) -/
+/-- Transport to the colimit scheme sends the identity morphism to the identity. -/
 @[simp] theorem perfectLimitMap_id {I : Type u} [Preorder I]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) {i : I} {X : Scheme.{u}}
     (s : X ⟶ Spec (R.obj i)) {j : I} (hij : i ≤ j) (P : schemeDerivedCategory X) :
@@ -243,18 +239,8 @@ noncomputable def perfectLimitMap {I : Type u} [Preorder I] (R : I ⥤ CommRingC
     (Over.homMk (Spec.map (c.ι.app j))
       (by dsimp; rw [← Spec.map_comp, c.w (homOfLE hij)])) P
 
-/-- Transport to the colimit is compatible with increasing the finite stage.
-No perfectness or finite-presentation hypothesis is needed for this coherence identity.
-Source: Stacks Project, Cohomology, Tag 0D5S, and perfect.tex, Tag 09RE
-(blueprint: lem-pc-perfect-hom-transport).
-
-Proof: apply the associativity law of `exists_derivedPullbackComposition` to the
-finite-stage base-change map, the map from the colimit scheme, and the projection
-onto X. The equality of their composite base-change map with the direct map follows
-from the pullback universal property and the cocone equation. Whisker the resulting
-comparison identity at P and Q; naturality of the composition comparison transports
-pullback of f. Cancel the adjacent comparison and inverse-comparison components.
-The resulting conjugated Hom maps are precisely the two sides below. -/
+/-- Transport to the colimit is compatible with increasing the finite stage
+(Stacks, Tags 0D5S and 09RE). -/
 theorem perfectLimitMap_stage {I : Type u} [Preorder I] (R : I ⥤ CommRingCat.{u})
     (c : Cocone R) {i : I} {X : Scheme.{u}} (s : X ⟶ Spec (R.obj i))
     {j k : I} (hij : i ≤ j) (hjk : j ≤ k) {P Q : schemeDerivedCategory X}

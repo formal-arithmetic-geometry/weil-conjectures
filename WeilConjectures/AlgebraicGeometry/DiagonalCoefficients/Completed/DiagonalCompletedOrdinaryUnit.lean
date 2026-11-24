@@ -186,17 +186,7 @@ private theorem completedPushUnit_one (l : ℕ) [Fact l.Prime]
   exact hh.one_hom
 
 -- The normalized sheaf comparisons require several large definitional conversions.
-/-- Ordinary realization carries the actual completed unit map to the coefficient unit.
-Source: diagonal tower coefficient changes (1), the normalized unital coefficient maps.
-(blueprint: lem-diagonal-completed-ordinary-unit).
-
-Proof: maps out of the regular module are determined by their value on coefficient one.
-The unit normalization, tested at every finite coefficient projection, shows that each
-realization unit isomorphism takes completed coefficient one to condensed coefficient one.
-Indeed the finite projections jointly detect equality in the actual completed coefficient
-limit. The ordinary square preserves underlying sections, and the actual completed
-coefficient map and the condensed structural map both preserve one. Thus the two maps
-have the same value on one and coincide. This works on the empty scheme as well. -/
+/-- Ordinary realization carries the actual completed unit map to the coefficient unit. -/
 theorem completed_ordinary_unit
     (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
     (eY : CompletedRealization l Y) (eP : CompletedRealization l (ProjectiveLine Y))

@@ -36,7 +36,9 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 
 /-! # Section-normalized tensor comparison for module restriction
 
-Source: Stacks Project, Tags 03EK and 04B8.
+## References
+
+* Stacks Project, Tags 03EK and 04B8.
 -/
 
 @[expose] public noncomputable section
@@ -57,16 +59,7 @@ variable {C : Type c} [Category.{v} C] {D : Type d} [Category.{z} D]
 -- Section evaluation crosses both coefficient-ring and sheafification presentations.
 /-- Module restriction along a continuous and cocontinuous functor with invertible
 coefficient map commutes with the ordinary tensor, naturally in both factors and
-with the identity formula on pure sections.
-Source: Stacks Project Tags 03EK and 04B8
-(blueprint: lem-sf-sectionwise-tensor-comparison).
-
-Proof: use the balanced presheaf tensor comparison for the invertible scalar map,
-then commute restriction with sheafification. Naturality of the sheafification unit
-computes the inverse comparison on pure tensors, and cancellation gives the forward
-formula. Maps out of a sheafified tensor are determined by these sections, so their
-formula also proves naturality in both factors. No nonzero ring, point or boundedness
-hypothesis is used. -/
+with the identity formula on pure sections. -/
 theorem sectionwiseTensorComparison
     (f : C ⥤ D) [f.IsContinuous J K] [f.IsCocontinuous J K]
     (R : Sheaf J CommRingCat.{w}) (S : Sheaf K CommRingCat.{w})

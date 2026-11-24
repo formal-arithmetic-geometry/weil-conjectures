@@ -45,7 +45,12 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import all WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulFiniteQuotientComparison
 
-/-! # Ordinary scalar comparison definitions and exactness -/
+/-! # Ordinary scalar comparison definitions and exactness
+
+## References
+
+* Stacks Project, Tags 093J, 093M, 03CY, 03DA, 03DJ, 05RU and 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,8 +62,7 @@ attribute [local instance] finitePerfectModelsAbLocallyBijective
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] completedAdicChangeData completedAdicRing
 
-/-- Ordinary completed realization, written without the later tensor-cone modules.
-Source: Stacks Tags 093J and 093M. -/
+/-- Ordinary completed realization, written without the later tensor-cone modules. -/
 abbrev finitePerfectAdicScalarModelOrdinary (X : Scheme.{t}) {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) : ModuleCat.{t} A ⥤ CompletedAdicModules X d :=
   finitePerfectAdicConstant X A ⋙ completedAdicScalarExtension X d
@@ -70,8 +74,7 @@ instance finitePerfectAdicScalarModelOrdinary_additive
   unfold finitePerfectAdicScalarModelOrdinary
   infer_instance
 
-/-- Exactness of completed scalar extension, directly from completed constant flatness.
-Source: Stacks Tags 093J and 093M. -/
+/-- Exactness of completed scalar extension, directly from completed constant flatness. -/
 theorem finitePerfectAdicScalarModelExtension_exact
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A) :
     PreservesFiniteLimits (completedAdicScalarExtension X d) ∧
@@ -87,14 +90,13 @@ theorem finitePerfectAdicScalarModelExtension_exact
       (completionRingIso X d r a ha) (completedAdicScalar X d)
       (completionRingIso_scalar X d r a ha)).2.1
 
-/-- The ordinary coefficient-universe transport. Source: Stacks Tag 05RU. -/
+/-- The ordinary coefficient-universe transport. -/
 abbrev finitePerfectAdicScalarModelLift (B : Type t) [CommRing B] :
     ModuleCat.{t} B ⥤ ModuleCat.{t + 1} (ULift.{t + 1} B) :=
   ModuleCat.uliftFunctor.{t + 1, t} B ⋙ ModuleCat.restrictScalars.{t + 1}
     (ULift.ringEquiv : ULift.{t + 1} B ≃+* B).toRingHom
 
-/-- The ordinary realization of a constant quotient module on the specified slice.
-Source: Stacks Tags 093J and 03CY. -/
+/-- The ordinary realization of a constant quotient module on the specified slice. -/
 def finitePerfectAdicOrdinaryScalarSource
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
@@ -108,15 +110,14 @@ def finitePerfectAdicOrdinaryScalarSource
       (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) U.hom ⋙
     finitePerfectAdicScalarModules X d V U W f n
 
-/-- Ordinary completed extension of the underlying A-module, restricted to the slice.
-Source: Stacks Tags 093M and 03DJ. -/
+/-- Ordinary completed extension of the underlying A-module, restricted to the slice. -/
 def finitePerfectAdicOrdinaryScalarTarget
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (W : X.ProEt) (n : ℕ) :=
   ModuleCat.restrictScalars (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ⋙
     finitePerfectAdicScalarModelOrdinary X d ⋙ SheafOfModules.overFunctor (completedAdicRing X d) W
 
-/-- Exactness of the ordinary scalar source. Source: Stacks Tags 093J and 06YY. -/
+/-- Exactness of the ordinary scalar source. -/
 theorem finitePerfectAdicOrdinaryScalarSource_exact
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
@@ -130,8 +131,7 @@ theorem finitePerfectAdicOrdinaryScalarSource_exact
   unfold finitePerfectAdicOrdinaryScalarSource
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Exactness of ordinary completed realization on a slice.
-Source: Stacks Tags 093M and 03DJ. -/
+/-- Exactness of ordinary completed realization on a slice. -/
 theorem finitePerfectAdicOrdinaryScalarTarget_exact
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (W : X.ProEt) (n : ℕ) :
@@ -149,22 +149,20 @@ theorem finitePerfectAdicOrdinaryScalarTarget_exact
   unfold finitePerfectAdicOrdinaryScalarTarget finitePerfectAdicScalarModelOrdinary
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Universe transport commutes with scalar restriction, on the identical lifted action.
-Source: Stacks Tag 05RU. -/
+/-- Universe transport commutes with scalar restriction, on the identical lifted action. -/
 def finitePerfectAdicScalarModelLiftRestrict {B D : Type t} [CommRing B] [CommRing D]
     (q : B →+* D) :
     ModuleCat.restrictScalars q ⋙ finitePerfectAdicScalarModelLift B ≅
       finitePerfectAdicScalarModelLift D ⋙ ModuleCat.restrictScalars (RingHom.ulift q) :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _)
 
-/-- Consecutive quotient restriction commutes with coefficient-universe transport.
-Source: Stacks Tag 05RU; each component is the identity linear map. -/
+/-- Consecutive quotient restriction commutes with coefficient-universe transport;
+each component is the identity linear map. -/
 def finitePerfectAdicScalarModelLiftStep {A : Type t} [CommRing A]
     (d : AdicCoefficientDatum A) (n : ℕ) :=
   finitePerfectAdicScalarModelLiftRestrict (Ideal.Quotient.factorPowSucc d.ideal (n + 1))
 
-/-- Paste a coefficient square with a comparison for the remaining composite.
-Source: Stacks Tag 06YY; composition and whiskering of natural isomorphisms. -/
+/-- Paste a coefficient square with a comparison for the remaining composite. -/
 def finitePerfectAdicPasteCoefficientStep
     {C D E E' F : Type*} [Category C] [Category D] [Category E] [Category E'] [Category F]
     {R : C ⥤ D} {L : C ⥤ E'} {H : D ⥤ E} {S : E' ⥤ E}
@@ -172,8 +170,7 @@ def finitePerfectAdicPasteCoefficientStep
     R ⋙ H ⋙ P ≅ L ⋙ Q :=
   isoWhiskerRight e P ≪≫ isoWhiskerLeft L z
 
-/-- The ordinary source compositor, fixed by the constant and inverse-image units.
-Source: Stacks Tags 03DA, 03CY and 06YY. -/
+/-- The ordinary source compositor, fixed by the constant and inverse-image units. -/
 def finitePerfectAdicOrdinaryScalarSourceStep
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (V : X.Etale) (U : V.left.ProEt) (W : X.ProEt)
@@ -203,8 +200,7 @@ def finitePerfectAdicOrdinaryScalarSourceStep
         (finitePerfectAdicPasteCoefficientStep eU
           (finitePerfectAdicScalarModulesCoherence X d V U W f n))))
 
-/-- The ordinary target compositor is associativity of restriction along quotient maps.
-Source: Stacks Tag 06YY. -/
+/-- The ordinary target compositor is associativity of restriction along quotient maps. -/
 def finitePerfectAdicOrdinaryScalarTargetStep
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (W : X.ProEt) (n : ℕ) :

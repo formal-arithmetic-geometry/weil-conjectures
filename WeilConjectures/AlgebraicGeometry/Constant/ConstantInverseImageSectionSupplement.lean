@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.ConstantInverseImageSection
 
 /-! # Transporting global coefficient sections
 
-Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2
-(blueprint: lem-sp-constant-inverse-image-section).
+## References
+
+* Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03D2 and 093M.
 -/
 
 @[expose] public noncomputable section
@@ -21,10 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.ConstantCompletion
 
-/-- Transport preserves the vanishing of a global section under a ring map.
-Source: Stacks 00YV, 03D2 (blueprint: lem-sp-constant-inverse-image-section).
-Proof: naturality of the underlying-ring comparison identifies the image with the
-inverse image of the zero-valued composite. The ringZero graph identity makes it zero. -/
+/-- Transport preserves the vanishing of a global section under a ring map. -/
 theorem inverseImageSection_zero
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}
@@ -49,11 +47,7 @@ theorem inverseImageSection_zero
   rw [L.map_comp] at hz
   exact hn.symm.trans hz
 
-/-- Transported ideal elements remain in the kernel of the constant quotient.
-Source: Stacks 03D2, 093M (blueprint: lem-sp-constant-inverse-image-section).
-Proof: the sheafification unit intertwines the quotient with the constant map
-A → A/I. Thus a in I maps to zero. Apply inverseImageSection_zero and naturality
-of F.constants for this quotient homomorphism. No rigidity of constants is needed. -/
+/-- Transported ideal elements remain in the kernel of the constant quotient. -/
 theorem transportedConstantSection_quotient
     {C E : Type u} [SmallCategory C] [SmallCategory E]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology E}

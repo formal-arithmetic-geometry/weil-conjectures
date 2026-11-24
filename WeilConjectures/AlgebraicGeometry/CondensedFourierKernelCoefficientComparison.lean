@@ -14,9 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientPullbackIso
 public import WeilConjectures.AlgebraicGeometry.CondensedProjectorCoefficientNaturality
 
 /-! Coefficient comparison for a pulled-back Artin–Schreier kernel.
-
-Source: the scalar-extension paragraph of the first-formula proof
-(blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -276,18 +273,7 @@ private theorem ordinaryArtinScalar
 
 /-- Scalar extension along `E → Q̄_ℓ` of the condensed Artin–Schreier sheaf of a global
 function `b` is isomorphic to the Artin–Schreier sheaf of the induced `Q̄_ℓ`-character, also for
-a trivial character.
-
-Source: latest blueprint, lemma-fourier-transform-constant-sheaf proof, coefficient paragraph
-(blueprint: lem-fd-unit-punctured-kernel-coefficient-comparison).
-Proof. `#k₀` is a unit in `E`, and a ring map preserves `Ring.inverse` of a unit; the
-constant-section ring maps commute with `E → Q̄_ℓ`. The regular Push comparison along the
-finite (hence qcqs) Artin–Schreier map is invertible by the finite-subextension Push
-comparisons of `condensedCoefficientCompatibility`; it intertwines deck translations
-and multiplication by global sections, hence the two character projectors. Exact scalar
-extension preserves images, so the images of the projectors correspond; the Pull comparison
-along the morphism defined by `b` transports this isomorphism to `condensedArtinSchreierSheafOf`.
--/
+a trivial character. -/
 theorem condensed_fourier_kernel_coefficient_comparison
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

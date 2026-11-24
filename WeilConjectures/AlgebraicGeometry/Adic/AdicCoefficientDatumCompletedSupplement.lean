@@ -81,9 +81,6 @@ public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatumCompleted
 /-!
 # Completed adic coefficient datum and its strict reduction tower
 
-Source: blueprint, proper base change, order 1239; Stacks Tags 099L and 099M
-(blueprint: def-weil-pbc-adic-coefficient-datum).
-
 The site has object universe t+1 and morphism universe t. Coefficients and modules
 are in t+1. The ambient ring is the actual inverse limit of the finite constant
 quotient sheaves, not the constant sheaf associated to the original ring.
@@ -95,6 +92,19 @@ quotient sheaves, not the constant sheaf associated to the original ring.
 * `adicDatumAdjunction`: normalized derived scalar adjunction.
 * `adicDatumDerivedTower`: universal strict quotient tower.
 * `adicDatumModelTower`: its explicit K-flat computation.
+
+## Implementation details
+
+* `adicDatumScalarPair` is irreducible and packaged once, so that its fields have a stable
+  interface.
+* `adicDatumSiteModulesAbelian` keeps the site variable, which retains the coefficient-universe
+  proof arguments directly.
+* `adicDatumModulesAbelian` fixes the abelian structure as data, which prevents implicit instance
+  choices from unfolding the large sheafification construction in derived comparison types.
+
+## References
+
+* Stacks Project, Tags 099L, 099M, 06YY, 05RU, 03DA and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -122,31 +132,23 @@ variable [TopologicalSpace P] [DiscreteTopology P]
 
 end FiniteCoefficientComparison
 
-/-- The ambient unbounded derived category, with the standard localization.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The ambient unbounded derived category, with the standard localization. -/
 abbrev adicDatumDerived := completedConstantDerived (adicDatumModules T d)
 
 section ScalarChange
 
 variable {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S)
 
-/-- The two presentations select the same ordinary tensor functor.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: both are the ordinary functor in the same independent-coefficient witness,
-with the same standard derived-category instances. -/
+/-- The two presentations select the same ordinary tensor functor. -/
 theorem adicDatumOrdinaryExtension_eq :
     completedConstantExtension T φ = reductionChange T φ := by
   rfl
 
-/-- The homotopy localization with the same standard derived-category instance.
-Source: Tag 05RU (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The homotopy localization with the same standard derived-category instance. -/
 abbrev adicDatumQh (B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :=
   @DerivedCategory.Qh (completedConstantModules T B) _ _ (HasDerivedCategory.standard _)
 
-/-- The scalar derived pair with its specification stated in this coefficient presentation.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: take the universal pair in derivedChangeOfRingsIndependentCoefficients, using
-its specified ordinary extension functor and the standard localizations. -/
+/-- The scalar derived pair with its specification stated in this coefficient presentation. -/
 theorem adicDatumScalarDerived_exists :
     ∃ (F : completedConstantDerived (completedConstantModules T R) ⥤
         completedConstantDerived (completedConstantModules T S))
@@ -161,8 +163,7 @@ theorem adicDatumScalarDerived_exists :
   change ∃ F, reductionDerivedSpec T φ F
   exact reductionDerivedExistence T φ
 
-/-- The universal scalar pair as data, retaining its counit and K-flat computation.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The universal scalar pair as data, retaining its counit and K-flat computation. -/
 structure AdicDatumScalarPair where
   functor : completedConstantDerived (completedConstantModules T R) ⥤
     completedConstantDerived (completedConstantModules T S)
@@ -175,8 +176,7 @@ structure AdicDatumScalarPair where
     (hC : CochainComplex.IsKFlatIndependentCoefficients (R := R) C) :
     IsIso (counit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj C))
 
-/-- The specified universal pair, packaged once so its fields have a stable interface.
-Source: Stacks Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The specified universal scalar pair. -/
 @[irreducible]
 def adicDatumScalarPair : AdicDatumScalarPair T φ where
   functor := (adicDatumScalarDerived_exists T φ).choose
@@ -208,8 +208,7 @@ private theorem adicDatumOrdinaryAdjunction_formula :
 
 end ScalarChange
 
-/-- The actual limit projection to the positive quotient level n+1.
-Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The actual limit projection to the positive quotient level n+1. -/
 def adicDatumProjection (n : ℕ) :
     adicDatumRing T d ⟶ (adicLisseRingSystem T d.ideal).obj (op n) :=
   limit.π (adicLisseRingSystem T d.ideal) (op n)
@@ -219,17 +218,12 @@ attribute [local irreducible] adicDatumRing adicLisseRingSystem
 attribute [local instance 20000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
-/-- The existing module-sheaf Abelian structure with a variable site.
-Keeping the site variable retains the coefficient-universe proof arguments directly.
-Source: Stacks 03DA (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The existing module-sheaf Abelian structure with a variable site. -/
 abbrev adicDatumSiteModulesAbelian {B : Type (t + 1)} [Category.{t} B]
     [EssentiallySmall.{t + 1} B] (J : GrothendieckTopology B)
     (R : Sheaf J RingCat.{t + 1}) : Abelian (SheafOfModules.{t + 1} R) := inferInstance
 
-/-- The existing Abelian structure with the geometric coefficient-universe instance.
-This fixed data interface prevents implicit instance choices from unfolding the
-large sheafification construction in derived comparison types.
-Source: Stacks 03DA (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+/-- The existing Abelian structure with the geometric coefficient-universe instance. -/
 abbrev adicDatumModulesAbelian (U : Scheme.{t})
     (R : Sheaf (ProEt.topology U) CommRingCat.{t + 1}) :
     Abelian (proEtaleRingModules U R) :=
@@ -251,11 +245,7 @@ open SheafOfModules
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- Transport K-flat preservation from an existing normalized scalar pair.
-Source: Stacks Tag 0G7E (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: the scalar pair exists by the universal derived scalar adjunction. Its
-ordinary object and map formulas identify its extension functor with E by functor
-extensionality. Apply scalarExtension_preservesKFlat to that functor. -/
+/-- Transport K-flat preservation from an existing normalized scalar pair. -/
 private theorem adicDatumExtension_kflat_site
     {D : Type u} [Category.{v} D] [EssentiallySmall.{r} D]
     {J : GrothendieckTopology D}
@@ -290,11 +280,7 @@ private theorem adicDatumExtension_kflat_site
 end GenericKFlatTransport
 
 open SheafOfModules MonoidalCategory in
-/-- K-flatness survives ordinary extension, with no flatness hypothesis on the ring map.
-Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
-Proof: tensor an acyclic S-complex N with the extended R-complex. Balancing identifies
-it with the tensor of the original K-flat complex and the restricted N. Restriction
-is exact, so the latter is acyclic. This is exactly the K-flatness criterion over S. -/
+/-- K-flatness survives ordinary extension, with no flatness hypothesis on the ring map. -/
 theorem adicDatumExtension_kflat (C : CochainComplex (completedConstantModules T R) ℤ)
     (hC : CochainComplex.IsAcyclicTensorKFlat (R := R) C) :
     CochainComplex.IsAcyclicTensorKFlat (R := S)
