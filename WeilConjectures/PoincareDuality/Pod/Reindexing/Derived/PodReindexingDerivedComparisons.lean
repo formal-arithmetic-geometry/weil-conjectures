@@ -10,8 +10,21 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Localization of the normalized strict reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
+We show that the strict reindexing comparisons along an isomorphism of schemes descend to
+derived comparisons satisfying all localization laws.
+
+## Implementation details
+
+The core laws (reduction evaluation, limit projection, unit, finite and limit models) are proved
+in `podReindexingDerivedComparisonsCore`; the `pullback` field is then replaced by the
+normalized completed-pullback realization from `podReindexingDerivedComparisonsPullback`. The
+derivation passes through sectionwise equivalences on integral and finite modules, the
+normalized limit-to-Roos map on K-injective systems, and the universal property of
+localization. No completeness or boundedness is used.
+
+## References
+
+* Stacks 03EL, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -42,30 +55,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- Descend the prescribed strict comparisons to the selected derived adjunctions.
-Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
-
-Proof: derive the exact sectionwise equivalences on integral modules, finite
-modules and whole coherent systems. The restriction projection squares give the
-finite restriction and evaluation comparisons. Conjugating the scalar-extension
-adjunction by these equivalences gives the finite extension comparison; its
-counit on K-flat representatives identifies it with the strict quotient map.
-The quotient transitions make these maps a coherent reduction-system comparison.
-Compute total limit on K-injective systems by the normalized limit-to-Roos map.
-The strict diagonal Roos comparison then descends to the limit comparison, with
-the displayed equation on every system complex. Its product projections give
-the limit-projection formula. Transport the ordinary system tensor/limit Hom
-bijection before deriving. The quotient generator formula identifies its unit,
-and the projection formula identifies its counit, as whole-system maps. Hence
-the reduction and limit comparisons satisfy both stated adjunction equations.
-Identify completion with the chosen reduction/limit composite using the unique
-left-adjoint comparison and the primitive completion-unit normalization. The
-same simultaneous quotient presentation and the target's normalized Roos model
-identify the given completed pullback with reduction, system pullback and total
-limit. This gives its representative normalization on every good complex and
-coherent presentation. Universal localization gives naturality and independence
-of all representatives. No completeness or boundedness is used in these steps. -/
+/-- Given strict reindexing data along `g` satisfying its laws and quotient comparisons `β`
+normalized on generators and compatible with the quotient transitions, there are derived
+reindexing comparisons satisfying all localization laws, including pullback normalization. -/
 theorem podReindexingDerivedComparisons
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

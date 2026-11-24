@@ -11,8 +11,12 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The original completion augmentation and the selected reduction calculus
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-completion-normalization).
+The original completion augmentation is identified with the unit of the selected
+reduction/limit adjunction.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -40,18 +44,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The original completion augmentation agrees with the actual unit of the selected
-reduction/limit adjunction.
-Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-completion-normalization).
-
-Proof: take the normalized primitive completion model on the singleton family W.
-Both its reduction functor and the selected reduction functor are left adjoint to
-the same total-limit functor. The unique left-adjoint comparison identifies their
-actual units. Whisker that comparison by total limit and compose it with the
-primitive model's completion comparison. The primitive unit normalization and the
-unit formula for the unique left-adjoint comparison give the required equality.
-The construction does not use nonemptiness of W or boundedness of a complex. -/
+/-- There is an isomorphism from the completion functor to the selected reduction followed
+by total limit, under which the original completion augmentation agrees with the unit of the
+selected reduction/limit adjunction. -/
 theorem podReindexingCompletionNormalization (W : Scheme.{t})
     [∀ w : W, Invertible (l : W.residueField w)] :
     ∃ e : IntegralOnSlice.completion l E W none ≅

@@ -11,12 +11,15 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Generator part of strict tensor tower reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers-generators).
+## Implementation details
 
-This is the first strictly smaller component of the strict-tower assertion. The
-unproved construction is the sectionwise tensor comparison together with the two
-quotient maps of `D`; its inverse is obtained from the inverse quotient maps.
+The levelwise isomorphism is the sectionwise tensor comparison together with the two quotient
+maps of `D`; its inverse is obtained from the inverse quotient maps. Tower naturality is treated
+separately.
+
+## References
+
+* [Stacks: Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -45,12 +48,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The strict tower isomorphism and its pure tensor generator formula.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-strict-tensor-towers).
-The statement records only the levelwise isomorphism and the generator equation;
-tower naturality is a separate component.
--/
+/-- Reindexing the strict tensor tower of `P`, `Q` is isomorphic to the strict tensor tower of
+the reindexed complexes, by an isomorphism sending a pure tensor `x ⊗ y` to the tensor of the
+images of `x` and `y` under the quotient maps of `D`. -/
 theorem podReindexingStrictTensorTowersGenerators
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

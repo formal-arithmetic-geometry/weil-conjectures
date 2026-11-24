@@ -7,12 +7,11 @@ module
 
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDerivedCoreData
 
-/-! Reduction evaluation law for raw derived comparison data.
+/-! # Reduction evaluation law for raw derived comparison data
 
-The proof constructs the corresponding normalized comparison law from the strict
-quotient, evaluation, and Roos-limit calculations.  This is a strictly smaller
-obligation than the assembled five-law package.
-(blueprint: lem-pod-reindexing-derived-core-reduction-evaluation) -/
+We state the reduction-evaluation law for the completion reindexing datum assembled from raw
+derived comparison data. It is one conjunct of the core law package, split off as a separate
+obligation. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,13 +41,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- Reduction evaluation law for raw derived comparison data.
-
-Source: the strict quotient, evaluation, and Roos-limit descent calculation
-from the proof of lem-pod-reindexing-derived-comparisons-core.  The statement
-records one conjunct of the assembled core package; its proof is intentionally
-split off so it can be proved independently.
-(blueprint: lem-pod-reindexing-derived-core-reduction-evaluation) -/
+/-- The assembled datum of raw derived comparison data `Q` satisfies the reduction-evaluation
+law. -/
 theorem podReindexingDerivedCoreData_reductionEvaluation
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

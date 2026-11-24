@@ -17,8 +17,9 @@ tensor comparison, followed by the reduction comparisons, with the localization 
 chain map: the transported system cochain tensor comparison followed by the two unary chain
 models.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EL, 07A4, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+## References
+
+* Stacks 03CO, 03EL, 05RU, 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The coefficient identification of the Hom resolution model is the completed reduction
-coefficient map.
-Source: Stacks 03CO; uniqueness of maps into an inverse limit. -/
+coefficient map. -/
 theorem podReindexingCoefficient_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
@@ -72,8 +72,7 @@ theorem podReindexingCoefficient_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The module reindexing functor of the Hom resolution model is the ordinary one.
-Source: Stacks 03CO. -/
+/-- The module reindexing functor of the Hom resolution model is the ordinary one. -/
 theorem podReindexingFunctor_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     podReindexingFunctor l E g none = isoReductionIntegralInverse l E g := by
   exact congrArg (fun c : (isoSectionwiseInverseImage g RingCat.{u + 1}).obj
@@ -85,8 +84,7 @@ theorem podReindexingFunctor_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The derived reindexing functor of the Hom resolution model is the ordinary one.
-Source: Stacks 03CO, 05RU. -/
+/-- The derived reindexing functor of the Hom resolution model is the ordinary one. -/
 theorem podReindexingDerivedFunctor_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g := by
   exact congrArg (fun c : (isoSectionwiseInverseImage g RingCat.{u + 1}).obj
@@ -95,8 +93,7 @@ theorem podReindexingDerivedFunctor_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [Is
       (isoSectionwiseModuleInverseImage g c.hom).mapDerivedCategory)
     (podReindexingCoefficient_none_eq l E g)
 
-/-- The module reindexing functor of the Hom resolution model is exact.
-Source: Stacks 03CO. -/
+/-- The module reindexing functor of the Hom resolution model is exact. -/
 theorem podReindexingFunctor_none_exact {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (podReindexingFunctor l E g none).Additive ∧
       PreservesFiniteLimits (podReindexingFunctor l E g none) ∧
@@ -107,8 +104,7 @@ theorem podReindexingFunctor_none_exact {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso 
   exact @isoSectionwiseModuleInverseImage_exact.{u, u} X Y g inferInstance _ _ c.hom
     c.isIso_hom
 
-/-- A localization factor transported along an equality of exact functors.
-Source: Stacks 05RU. -/
+/-- A localization factor transported along an equality of exact functors. -/
 theorem reductionFactorOfIso_mapDerivedCategory {C₁ C₂ : Type*} {_ : Category C₁}
     {_ : Abelian C₁} {_ : HasDerivedCategory C₁} {_ : Category C₂} {_ : Abelian C₂}
     {_ : HasDerivedCategory C₂}
@@ -127,8 +123,7 @@ theorem reductionFactorOfIso_mapDerivedCategory {C₁ C₂ : Type*} {_ : Categor
     simp
   simp [reductionFactorOfIso_hom, this]
 
-/-- Equal exact functors have equal localization factors, after the equality transports.
-Source: Stacks 05RU. -/
+/-- Equal exact functors have equal localization factors, after the equality transports. -/
 theorem Functor.mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} [Category C₁] [Abelian C₁]
     [HasDerivedCategory C₁] [Category C₂] [Abelian C₂] [HasDerivedCategory C₂]
     (F G : C₁ ⥤ C₂) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -145,8 +140,7 @@ theorem Functor.mapDerivedCategoryFactors_congr {C₁ C₂ : Type*} [Category C�
   simp [this]
 
 /-- The transported system localization factor is the localization factor of system
-inverse image.
-Source: Stacks 05RU, 0941. -/
+inverse image. -/
 theorem systemFactor_hom_app_eq {X Y : Scheme.{u}} (g : X ⟶ Y)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
     (PodReductionRepresentatives.systemFactor l E g).hom.app C =
@@ -155,8 +149,7 @@ theorem systemFactor_hom_app_eq {X Y : Scheme.{u}} (g : X ⟶ Y)
   exact Functor.mapDerivedCategoryFactors_congr _ _ (PodReductionRepresentatives.inverse_eq l E g)
     (PodReductionRepresentatives.derived_eq l E g) _
 
-/-- The categorical pasting behind the chain-level model of the system tensor comparison.
-Source: naturality of the system tensor comparison. -/
+/-- The categorical pasting behind the chain-level model of the system tensor comparison. -/
 theorem systemTensorChain_paste {DY DX : Type*} [Category* DY] [Category* DX]
     (G : DY ⥤ DX) (TY : DY × DY ⥤ DY) (TX : DX × DX ⥤ DX)
     (w : TY ⋙ G ≅ G.prod G ⋙ TX)
@@ -201,8 +194,7 @@ local notation "S[" W "]" => coefficientTotalTensor.{u, u + 1, u}
 
 /-- The coherent system tensor comparison, followed by the two reduction comparisons, is the
 localization of the transported system cochain tensor comparison followed by two unary chain
-models, provided these models localize the unary reduction comparisons.
-Source: Stacks 03EL, 07A4, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+models, provided these models localize the unary reduction comparisons. -/
 theorem podReindexing_systemTensor_chainModel
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g)
@@ -318,8 +310,7 @@ theorem podReindexing_systemTensor_chainModel
     (hqσ := Functor.map_comp _ _ _)
 
 /-- The identification of the reindexed complex of the Hom resolution model with the
-ordinary reindexed complex.
-Source: Stacks 03CO. -/
+ordinary reindexed complex. -/
 def podReindexComplexIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     (podReindexingComplexFunctor l E g none).obj P ≅ (isoReductionIntegralComplex l E g).obj P :=
@@ -336,8 +327,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The unary reduction model of a good representative, transported to the ordinary
 reindexed complex, localizes the reduction comparison followed by the ordinary localization
-factor.
-Source: Stacks 05RU, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+factor. -/
 theorem podReductionUnary_transport {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g)
     (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)

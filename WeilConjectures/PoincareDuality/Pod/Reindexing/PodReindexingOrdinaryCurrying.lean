@@ -12,8 +12,15 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingOrdin
 
 /-! # Ambient signed currying under normalized reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 2 and 4;
-Stacks 07A4, 08J9, 099B and 099M (blueprint: lem-pod-reindexing-ordinary-currying).
+## Implementation details
+
+The currying square is first proved for the reindexing functor `F` itself and then transported
+to an equal functor `G` along `eqToIso h`; equality induction makes every transport the
+identity. The argument is ambient: it uses neither constructibility nor completion.
+
+## References
+
+* [Stacks: Tags 07A4, 08J9, 099B, 099M]
 -/
 
 @[expose] public noncomputable section
@@ -61,21 +68,9 @@ private theorem transport_currying
   erw [HD.map_id, Category.comp_id]
   exact ht M L N f
 
-/-- The ordinary signed M-first currying comparison on all ambient derived objects.
-Source: blueprint dual-Tate compatibility, Step 2; Stacks 08J9 and 07A4
-(blueprint: lem-pod-reindexing-ordinary-currying).
-
-Proof: the ordinary evaluation lemma gives Hom-first transposition for c. The
-signed braiding changes Hom-first order to M-first order: on a homogeneous
-summand the two reindexing paths both multiply Fy tensor Fx by (-1)^(pq).
-The pure tensor formula of c.tensorChain therefore identifies these paths;
-K-flat localization and the recorded tensor model extend the equality to all
-unbounded derived objects. Compose this braiding square with the Hom-first
-transpose equation. Finally transport from F to the equal projection-normalized
-functor G using eqToIso h: equality induction makes every transport the identity,
-after which the preceding M-first equation applies. The inverse source component
-in the displayed formula enters the contravariant Hom variable. The argument is
-ambient: it uses neither constructibility nor completion. -/
+/-- Normalized reindexing `G` (equal to the reindexing functor) is compatible with the signed
+M-first currying `(M ⊗ L ⟶ N) ≃ (L ⟶ Hom(M, N))` on all ambient derived objects, via the
+tensor and internal Hom comparisons of `c`. -/
 theorem podReindexing_ordinary_currying
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

@@ -8,10 +8,21 @@ module
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionDescentData
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Mixed normalization for scalar/reindexing tensor descent
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-mixed-normalization).
+The mixed scalar/reindexing tensor chain on a pair of good constructible representatives is
+identified with the fixed tensor comparisons, the scalar tensor normalization and the derived
+factor maps of scalar extension and reindexing.
+
+## Implementation details
+
+The proof applies the scalar normalization on the source, uses that scalar localization factors
+preserve constructibility, applies the target-field tensor law and moves both scalar factors by
+tensor naturality.
+
+## References
+
+* Stacks Project, Tags 03EL, 05RU, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -73,12 +84,10 @@ private theorem pasteNormalization
   rw [ht, ← Category.assoc (F.map f), hn]
   simp only [Category.assoc]
 
-/-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-mixed-normalization).
-Proof: Apply the scalar normalization on the source. Scalar localization factors preserve
-    constructibility. Apply the target-field tensor Model law, and use tensor naturality to move
-    both scalar factors. Paste these three equalities. -/
+/-- Mixed normalization on representatives: for good constructible `P, Q`, the completed tensor
+comparison followed by the mixed derived chain equals the scalar tensor normalization, the target
+tensor comparison `T'.tensor`, the tensor of the scalar and reindexing factor maps, and the
+target completed tensor comparison. -/
 theorem podTensorMixedRepresentativeNormalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

@@ -11,7 +11,12 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Limit realization of the normalized completed tensor reindexing
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
+The completed tensor comparison of a normalized reindexing is the limit of the coherent system
+tensor map (dual-Tate compatibility).
+
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -29,29 +34,10 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The completed tensor comparison is the limit of the coherent system tensor map.
-This identifies isomorphisms only; no ordinary tensor comparison or augmentation occurs.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC, 0941
-(blueprint: lem-pod-reindexing-tensor-limit-model).
+/-- For constructible `M`, `N`, the completed tensor comparison is the limit of the coherent
+system tensor map: the displayed equation holds in the tensor frame of `M` and `N`.
 
-Proof: take simultaneous flat-term K-flat representatives of M and N. The tensor
-realizations pullbackTensorIntegralTensorModel identify both completed tensors with
-the limit of the tensor of their coherent reductions. Apply A.limit's LimitModel
-normalization to that system tensor. Its restricted tower is the finite tensor tower
-by pullbackTensorTensorTower. The system tensor map is the localized cochain map
-specified by pullbackTensorSystemComparison; on every total summand it sends the two
-factors to their inverse-image unit sections. The whole-system adjunct formula
-podReindexing_reduction_inv_mate, computed using LimitModel and the strict quotient
-units, identifies A.reduction on these representatives with A.quotient; FiniteModel
-and QuotientGenerators give its pure-section formula. Thus the
-resulting map on each strict tower level is T.tower by T.Generators. Include quotient
-transitions using QuotientTransition and TowerNaturality. After restriction, A's
-RoosFst and RoosSnd equations identify both cone coordinates of this map with A.roos
-followed by Roos(T.tower). T.Model identifies its localization with T.tensor. Cancel
-the representative tensor realization isomorphisms. Naturality of T.tensor and of all
-the system comparisons descends the equation to constructible M,N along the product
-of the good-complex localizations. No completeness of their ordinary tensor is used;
-zero inputs and the empty scheme satisfy the same coordinate equations. -/
+See [Stacks, Tags 07A4, 08TC, 0941]. -/
 theorem podReindexing_tensor_limit_model
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

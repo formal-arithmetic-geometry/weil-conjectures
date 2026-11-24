@@ -7,10 +7,19 @@ module
 
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensorCoefficientTransitionDescentData
 
-/-! # Completed tensor square for scalar/reindexing transitions
+/-! # Representative square for scalar/reindexing tensor descent
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-representative-square).
+On a good representative, the derived factor maps of reindexing and scalar extension commute
+with the complex-level coefficient transition.
+
+## Implementation details
+
+The proof applies the exact-derived composition and natural-isomorphism factor equations
+(`exactSquareFactors`).
+
+## References
+
+* Stacks Project, Tags 03EL, 05RU, 06YY, 0941
 -/
 
 @[expose] public noncomputable section
@@ -91,11 +100,10 @@ private theorem exactSquareFactors
   simp only [NatIso.mapHomologicalComplex]
   repeat' erw [Category.assoc]
 
-/-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-representative-square).
-Proof: Apply the exact-derived composition and natural-isomorphism factor equations separately in
-    both variables. Product extensionality gives the square. -/
+/-- Representative square: for a good representative `P`, the reindexing factor followed by the
+scalar-extension factor and the complex transition `S.complex` equals the reindexed
+scalar-extension factor followed by the reindexing factor at the scalar-extended
+representative. -/
 theorem podTensorCoefficientRepresentativeSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

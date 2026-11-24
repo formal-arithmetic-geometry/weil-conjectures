@@ -16,13 +16,13 @@ import WeilConjectures.SmoothPurity.Pullback.PullbackTensorIntegralUnitCoherence
 
 /-! # Tensor constraints for a normalized reindexing family
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-tensor-family-tensor-constraints).
+For a lawful family of normalized completion and tensor comparisons with fixed identity and
+composition comparisons, the completed tensor maps satisfy the associator, braiding and unitor
+constraints.
 
-This statement isolates the strict tensor-generator calculation from the identity
-and composition construction. It is used only after those two comparisons have been
-fixed, so its conclusion is strictly smaller than the parent family-coherence
-assertion.
+## References
+
+* [Stacks, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -251,15 +251,8 @@ private theorem leftUnitorNatural (W : Scheme.{u})
       S.tensor.map (Prod.mkHom e.hom (𝟙 (Q.obj M))) ≫ k) hn
 
 /--
-For a fixed completion/tensor family and fixed section-normalized identity and
-composition comparisons, the completed tensor maps satisfy associativity, signed
-braiding and both unitors. On homogeneous strict generators the two associator
-paths are the same map, the two braiding paths carry the same Koszul sign, and the
-coefficient unit is preserved. Tensor-model descent and naturality extend these
-equalities to all constructible objects. The zero and empty-scheme cases are
-included by the same generator formulas.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-tensor-family-tensor-constraints).
+For a fixed completion/tensor family and fixed identity and composition comparisons, the
+completed tensor maps satisfy associativity, signed braiding and both unitors.
 -/
 theorem podReindexingTensorFamilyTensorConstraints
     (completion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
