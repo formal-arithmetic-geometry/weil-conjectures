@@ -15,8 +15,14 @@ import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyNormaliz
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 
-/-! The termwise affine exchange chain map before localization.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization-chain). -/
+/-! # The termwise affine exchange chain map before localization
+
+## References
+
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08HY
+-/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -182,11 +188,7 @@ local instance chainTildeAdditive (A : Type u) [CommRing A] :
   intro M N f g
   exact tilde.map_add (R := .of A) f g
 
-/-- The termwise pushforward comparison used in the target-map expansion.
-Source: Stacks, Tag 01I9.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization). 
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization-chain)
--/
+/-- The termwise pushforward comparison used in the target-map expansion. -/
 def affineTildePushforwardComplexMap
     (D B : Type u) [CommRing D] [CommRing B] (ψ : B →+* D)
     (C : CochainComplex (ModuleCat.{u} D) ℤ) :
@@ -204,13 +206,7 @@ def affineTildePushforwardComplexMap
           comm' := fun i j _ ↦ (σ.hom.naturality (C.d i j)).symm }
 
 -- The degreewise comparison includes the chosen tensor and pushforward functors.
-/-- The ordinary termwise exchange chain map in affine tensor coordinates.
-Source: Stacks Project, Tags 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-tensor-ordinary-exchange-prenormalization-chain).
-The assertion is the pre-localization calculation: the source comparison followed by
-ordinary module base change equals the coefficient map, affine pushforward comparison,
-and the inverse tensor/tilde comparison. It is proved degreewise on pure tensors and
-then by tensor induction and extensionality. -/
+/-- The ordinary termwise exchange chain map in affine tensor coordinates. -/
 theorem affineTildeTensorOrdinaryExchange_preNormalization_chain
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]

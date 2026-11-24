@@ -11,8 +11,9 @@ public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 
 /-! # Scalar compatibility of the canonical localization cohomology map
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-first-localization-cohomology-semilinear).
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
 -/
 
 @[expose] public section
@@ -38,9 +39,7 @@ variable (R A Aq B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- Canonical cohomology map induced by the localization unit and universal counits.
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-first-localization-cohomology-semilinear). -/
+/-- Canonical cohomology map induced by the localization unit and universal counits. -/
 noncomputable def localizationModelMap (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -126,18 +125,7 @@ private theorem localizationModelMap_left (i : ℤ)
       congrArg (fun z ↦ (L.cohomologyIso i).hom ≫ H.map z) hd
   exact congrArg (fun f ↦ f x) hc
 
-/-- The unit-induced map respects the tensor coefficient actions.
-Source: Stacks Project, Tag 06Y6, naturality of derived tensor and scalar multiplication.
-(blueprint: lem-pc-first-localization-cohomology-semilinear).
-
-Proof: the termwise unit intertwines multiplication by a on Q with multiplication
-by its image on Aq tensor_A Q, by tensor balancing. Apply the homotopy quotient,
-the derived functor and homology. Naturality of the universal counit comparison
-intertwines these endomorphisms. The cohomologyIso_smul fields identify them with
-includeLeft a on the source and includeLeft (algebraMap A Aq a) on the target.
-The map is B-linear by construction, hence also intertwines includeRight b.
-Tensor induction, using additivity and the product of the two actions on pure
-tensors, proves the assertion for every tensor coefficient. -/
+/-- The unit-induced map respects the tensor coefficient actions. -/
 theorem localizationModelMap_smul (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

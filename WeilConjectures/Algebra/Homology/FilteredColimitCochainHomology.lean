@@ -17,7 +17,9 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 
 /-! # Filtered colimits commute with cochain homology
 
-Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
+## References
+
+* Stacks Project, Tag 0954, proof of Lemma 47.8.2
 -/
 
 @[expose] public section
@@ -27,21 +29,7 @@ open CategoryTheory Limits
 
 namespace ModuleCat
 
-/-- Filtered colimits of module complexes commute with homology.
-Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2, passage of the
-filtered colimit through cohomology.
-(blueprint: lem-sbc-filtered-colimit-cochain-homology).
-
-Proof: Colimits of module complexes are computed in every degree. Filtered
-colimits of modules are exact: a finite equation holds in a filtered colimit
-if it holds at some later stage. Consequently they preserve kernels, images
-and cokernels. Apply this first to the kernels of the outgoing differentials,
-then to the images of the incoming differentials, and finally to the quotient
-of cycles by boundaries. This yields the displayed isomorphism between the
-colimit of the homology modules and the homology of the colimit complex.
-In degree zero there is no incoming differential and the same argument uses
-the zero boundary module. The argument applies to arbitrary modules and
-small filtered categories, with no Noetherian or finite-generation assumption. -/
+/-- Filtered colimits of module complexes commute with homology. -/
 theorem nonempty_colimit_homology_iso
     {R : Type (max u v)} [CommRing R] {D : Type v} [SmallCategory D] [IsFiltered D]
     (F : D ⥤ CochainComplex (ModuleCat.{max u v} R) ℕ) (q : ℕ) :

@@ -12,8 +12,10 @@ import WeilConjectures.Algebra.Homology.OpenOverHomComplexCycleProjectionHomolog
 
 /-! # Cycle projection and quotient comparisons for restricted Hom complexes
 
-Source: Stacks Project, Tags 0A8X and 08DL.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison). -/
+## References
+
+* Stacks Project, Tags 0A8X and 08DL
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -44,23 +46,7 @@ private theorem openOver_projection_square_comp
     F.map (i ≫ p) ≫ e = c ≫ i' ≫ p' := by
   rw [Functor.map_comp, Category.assoc, ← hp, ← Category.assoc, hc, Category.assoc]
 
-/-- The projection square on Hom cycles and the cycle-to-homology quotient square.
-Source: Stacks Project, Tags 0A8X and 08DL; steps 1 and 2 of the parent plan.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison).
-
-Proof: Restriction preserves products by sectionwise computation and the open-site
-equivalence. The limiting fans of the chosen Hom projections and e give a unique
-degreewise isomorphism carrying every projection to its e comparison. Naturality
- of e for the two differentials, together with additivity of restriction, gives a
- chain isomorphism h. Restriction is exact: localization preserves finite limits
- and colimits, and overFunctorEquiv transports these properties across the open-site
-equivalence. Let z and d be the inverse cycle and homology comparisons for P.
- Set c=z followed by cyclesMapIso h and a=d followed by homologyMapIso h.
- Naturality of cycle inclusions and the projection identity for h give the first
- square. Naturality of the cycle-to-homology quotient for exact functors and chain
- maps gives the second. No cycle comparison for T or J is needed in these squares.
- Empty opens, zero complexes and unbounded complexes obey the same universal
- properties; the product uses every integer index. -/
+/-- The projection square on Hom cycles and the cycle-to-homology quotient square. -/
 theorem openOver_homComplex_cycle_projection_comparison (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
     (e : ∀ M N : X.Modules,

@@ -13,8 +13,10 @@ import WeilConjectures.Algebra.Homology.FlatIteratedScalarExtensionHomologySquar
 
 /-! # Flat change of the final coefficient ring of a tensor cohomology model
 
-Source: Stacks Project, Tags 06Y6 and 00HD.
-(blueprint: lem-pc-flat-final-coefficient-model-comparison). -/
+## References
+
+* Stacks Project, Tags 06Y6 and 00HD
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -189,26 +191,7 @@ private theorem equalScalarComplexIso_inv_one
   subst g
   rfl
 
-/-- Flat change of the final coefficient ring commutes with a model's comparison.
-Source: Stacks Project, Tag 06Y6 (uniqueness of derived tensor) and Tag 00HD
-(exact tensor by a flat module).
-(blueprint: lem-pc-flat-final-coefficient-model-comparison).
-
-Proof: the universal counits identify the two models' derived functors. Apply
-cohomology at the restricted complex, and conjugate by their cohomologyIso maps.
-Naturality at multiplication by a in A and cohomologyIso_smul make the resulting
-B-linear isomorphism A-tensor-B-linear. The comparison_eq equations identify the
-ordinary comparison maps under this isomorphism. Extend it along A tensor_R B
-to E and then to D; tensor associativity identifies this with extension directly
-to D. This constructs e. Flatness of k makes its extension exact. The natural
-homology isomorphism for that exact extension, and the termwise coefficient unit,
-identify extension of the E-localized comparison with the D-localized comparison:
-transpose by extension/restriction adjunction and substitute both localized_eq
-identities. On 1 tensor (1 tensor x) the coefficient chain map is precisely tau.
-Two successive applications of ExtendScalars.hom_ext show that its given formula
-fixes it uniquely. Taking homology proves the equation. No flatness of E or D
-over A tensor_R B is used. Identity maps, zero complexes, and zero final rings
-satisfy the same tensor and adjunction equations. -/
+/-- Flat change of the final coefficient ring commutes with a model's comparison. -/
 theorem exists_flatFinalCoefficientModelComparison
     (R A B E D : Type u)
     [CommRing R] [CommRing A] [CommRing B] [CommRing E] [CommRing D]

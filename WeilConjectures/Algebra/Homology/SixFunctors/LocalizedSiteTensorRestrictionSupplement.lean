@@ -15,8 +15,9 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Tensor products and restriction to a localized ringed site
 
-Source: Stacks Project, Modules on Sites, Tags 03EL and 03DH
-(blueprint: lem-sfb-localized-site-tensor-restriction).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL and 03DH
 -/
 
 @[expose] public section
@@ -221,26 +222,7 @@ attribute [local instance] tensorOverComparison_isIso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction to a localized ringed site commutes naturally with tensor products,
-with the comparison sending each sheafified pure tensor to the same pure tensor.
-Source: Stacks Project, Modules on Sites, Tags 03EL and 03DH
-(blueprint: lem-sfb-localized-site-tensor-restriction).
-
-Proof:
-1. The restriction of the sectionwise tensor presheaf equals the tensor presheaf of
-   the restrictions: at `V → U` both have sections `F(V) ⊗ G(V)` and the same
-   restriction maps. This identification is natural in both factors, by
-   `def-pur-localized-ringed-site` and `def-pur-sheaf-tensor-product`.
-2. Apply `lem-cbc-sieve-slice-sheafification` to the underlying abelian presheaf.
-   By `def-weil-presheaf-modules-sheafification`, module sheafification has this
-   underlying abelian sheafification. The comparison from slice sheafification
-   to restricted sheafification commutes with the two units.
-3. Transport the module action through this comparison. The unit equation shows
-   that the transported action extends the original presheaf action. Uniqueness
-   of the extending action in module sheafification makes the comparison linear.
-4. Invert that comparison to obtain the isomorphism below. Its unit equation on
-   `x ⊗ y` gives the pure-tensor formula. Naturality of the presheaf identification
-   and of slice sheafification gives the equation for arbitrary `f` and `g`.
-No finiteness, flatness, fibre products or subcanonicity is used. -/
+with the comparison sending each sheafified pure tensor to the same pure tensor. -/
 theorem exists_localizedSiteTensorRestriction
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]

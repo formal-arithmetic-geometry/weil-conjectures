@@ -9,8 +9,11 @@ module
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.SecondLocalizationRawCounitSquare
 /-! # Ordinary comparison for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-ordinary-B-square). -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,24 +35,7 @@ variable (R A B Bp D : Type u)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 include tRB in
-/-- The B-linear ordinary counit square, before forgetting module structures.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-(blueprint: lem-pc-second-localization-ordinary-B-square).
-
-Proof: install the target model's universal left-derived-functor instance.
-The defining leftDerivedLift factorization of secondLocalizationDerivedMap
-identifies its composite with K.counit with L.counit extended to Bp and the
-ordinary scalar-extension associator. Evaluate at the restriction of Q to R,
-apply degree-i homology, and use the defining localization factorization of
-flatDerivedHomologyIso to commute the flat extension with homology. Transpose
-along extension/restriction of scalars B to Bp: the unit sends x to 1 tensor x.
-Substitute the two comparison_eq identities and cancel the cohomologyIso maps.
-The ordinary associator sends b tensor x to image(b) tensor x; the given hφ
-identifies its transpose, conjugated by ordinaryIso, with φB, by tensor
-induction after precomposing with L.ordinaryIso. Naturality of the homology
-factorization maps and of mapHomologyIso for restriction to B completes the
-B-linear identity below. This calculation uses no forgetful functor, no
-localizedComparison, and no hypothesis on flatness of D. -/
+/-- The B-linear ordinary counit square, before forgetting module structures. -/
 theorem secondLocalization_ordinary_B_square (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

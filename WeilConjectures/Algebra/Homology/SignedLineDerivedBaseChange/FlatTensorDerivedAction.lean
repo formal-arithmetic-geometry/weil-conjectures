@@ -8,7 +8,14 @@ module
 public import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLineDerivedBaseChangeData
 import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.FlatLineResolvingNormalization
 
-/-! # Localization of an exact tensor action -/
+/-! # Localization of an exact tensor action
+
+## References
+
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 06YU
+* Stacks Project, Tag 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,15 +40,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
 
 omit [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})]
   [K.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})] in
-/-- Localizing a tensor comparison with flat fixed factors gives a unique derived action.
-Source: Stacks Project, Tags 06YU, 07A4 and 015F.
-(blueprint: lem-pur-flat-tensor-derived-action)
-Proof: compose the two flat-factor resolving comparisons, the exact functor
-factorization and the termwise tensor comparison. This gives an isomorphism after
-precomposition with the cochain localization. Lift it uniquely through that
-localization. Cancellation of the two resolving comparisons gives the displayed
-square. The same cancellation and full faithfulness of localization whiskering
-prove uniqueness. No boundedness hypothesis is used. -/
+/-- Localizing a tensor comparison with flat fixed factors gives a unique derived action. -/
 theorem flat_tensor_derived_action
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]

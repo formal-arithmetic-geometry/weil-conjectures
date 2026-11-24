@@ -10,10 +10,12 @@ public import WeilConjectures.Algebra.Homology.HomComplexProjections
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
-/-! # Signed dual and Hom into a single sheaf
+/-!
+# Signed dual and Hom into a single sheaf
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-to-single).
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section
@@ -31,12 +33,7 @@ private lemma homObjMap_zero_source {M M' N : SheafOfModules.{u}
     SheafOfModules.homObjMap (R := R) (0 : M' ⟶ M) (𝟙 N) = 0 := by
   exact (((SheafOfModules.homFunctor R).flip.obj N).map_zero (op M) (op M'))
 
-/-- The signed dual differential squares to zero.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: def-sc-signed-sheaf-dual-complex).
-Proof: the two signs factor out, and precomposition reverses composition.
-The remaining composite is precomposition by two successive differentials of L,
-which is zero by the complex identity. -/
+/-- The signed dual differential squares to zero. -/
 theorem signedSheafDual_d_comp_d
     (L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -50,9 +47,7 @@ theorem signedSheafDual_d_comp_d
     HomologicalComplex.d_comp_d, homObjMap_zero_source, smul_zero]
 
 /-- The signed internal sheaf dual of an integer cochain complex.
-It has terms Hom(L^(-n), N) and differential -(-1)^n times precomposition.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: def-sc-signed-sheaf-dual-complex). -/
+It has terms Hom(L^(-n), N) and differential -(-1)^n times precomposition. -/
 noncomputable def signedSheafDualComplex
     (L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -80,18 +75,7 @@ private lemma isIso_dependent {D : Type*} [Category D] {A : D} {B : ℤ → D}
   exact hi
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Hom into a single sheaf is its signed internal dual complex.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, product Hom differential.
-(blueprint: lem-sc-hom-complex-to-single).
-
-Proof: project the degree n product to its factor p=-n. All other factors have
-zero target and are zero objects. The inverse is the product lift with identity
-at p=-n and zero elsewhere. The product universal property proves both inverse
-identities. Transport the surviving target term along the canonical degree-zero
-isomorphism of the single complex. The target differential is zero; the Hom
-projection formula leaves -(-1)^n times precomposition by L.d(-(n+1),-n).
-Thus the degreewise isomorphisms commute with differentials. This works for any
-integer-indexed complex and any sheaf N, including zero sheaves and empty sites. -/
+/-- Hom into a single sheaf is its signed internal dual complex. -/
 theorem homComplex_to_single_iso
     (L : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)

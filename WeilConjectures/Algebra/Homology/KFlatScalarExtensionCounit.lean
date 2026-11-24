@@ -14,10 +14,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Mathlib.Algebra.Category.ModuleCat.AB
 
-/-! # Universal scalar extension counit on a K-flat complex
+/-!
+# Universal scalar extension counit on a K-flat complex
 
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
-(blueprint: lem-pc-kflat-scalar-extension-counit).
+## References
+
+* Stacks Project, Tags 06Y6, 064L and 06Y4
 -/
 
 @[expose] public section
@@ -29,19 +31,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
-/-- The universal derived scalar extension counit is invertible on K-flat complexes.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, using Tag 064L.
-(blueprint: lem-pc-kflat-scalar-extension-counit).
-
-Proof: Convert the acyclic-tensor hypothesis to the source-library K-flat
-predicate. Scalar extension sends quasi-isomorphisms between K-flat complexes
-to quasi-isomorphisms: tensor the map with B in degree zero and apply Tag 064L.
-The source-library characterization of universal left derived functors by their
-counit on K-flat complexes now applies to the given universal pair. Its proof
-uses the K-flat left derivability structure, supplied by actual functorial flat
-resolutions of module complexes (Tag 06Y4), and the localization universal
-property. Thus the given counit is invertible at P. There is no boundedness or
-flatness hypothesis on B. -/
+/-- The universal derived scalar extension counit is invertible on K-flat complexes. -/
 theorem scalarExtensionCounit_isIso_of_kFlat
     {R B : Type u} [CommRing R] [CommRing B] (f : R →+* B)
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]

@@ -14,8 +14,9 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 /-!
 # Zig-zag modules of homological double complexes
 
-Source: Stacks Project, Algebra, Lemma Tag 00M1, proof
-(blueprint: def-weil-pbc-double-complex-zigzag-module).
+## References
+
+* [Stacks Project, Tag 00M1](https://stacks.math.columbia.edu/tag/00M1), proof
 -/
 
 @[expose] public section
@@ -26,12 +27,12 @@ namespace HomologicalComplex₂
 
 variable {R : Type*} [CommRing R]
 
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The positions of total
+/-- The positions of total
 degree `n` in the first quadrant (Stacks, Algebra, Tag 00M1). -/
 def ZigzagIndex (n : ℕ) := {i : ℕ × ℕ // i.1 + i.2 = n}
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The direct sum
+/-- The direct sum
 `Tₙ(A) = ⨁_{p+q=n} Aₚ,ᵩ` (Stacks, Algebra, Tag 00M1). -/
 abbrev zigzagTotal (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
     (ComplexShape.down ℕ)) (n : ℕ) :=
@@ -39,7 +40,7 @@ abbrev zigzagTotal (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down �
 
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The equation
+/-- The equation
 `d(aₚ₊₁,ᵩ) - δ(aₚ,ᵩ₊₁) = 0` on `Tₙ(A)` (Stacks, Algebra, Tag 00M1). -/
 def zigzagRelation (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
     (ComplexShape.down ℕ)) (n p q : ℕ) (h : p + 1 + q = n) :
@@ -54,7 +55,7 @@ def zigzagRelation (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down �
         ⟨(p, q + 1), by omega⟩)
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The submodule of
+/-- The submodule of
 zig-zags in degree `n`: every adjacent horizontal and vertical image agrees
 (Stacks, Algebra, Tag 00M1). In degree zero the condition is empty. -/
 def zigzagCycles (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
@@ -71,7 +72,7 @@ def zigzagCycles (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ
     simp [map_smul, ha p q h]
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The image in
+/-- The image in
 `Tₙ(A)` of one component `b` of `Tₙ₊₁(A)`: `d b` at `(p-1,q)` and
 `δ b` at `(p,q-1)`, omitting a component at the boundary
 (Stacks, Algebra, Tag 00M1). -/
@@ -92,7 +93,7 @@ noncomputable def zigzagBoundaryComponent (A : HomologicalComplex₂ (ModuleCat 
    else 0)
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The linear map
+/-- The linear map
 `Dₙ₊₁ : Tₙ₊₁(A) → Tₙ(A)` whose `(p,q)` component is
 `d(bₚ₊₁,ᵩ) + δ(bₚ,ᵩ₊₁)` (Stacks, Algebra, Tag 00M1). -/
 noncomputable def zigzagBoundary (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
@@ -101,14 +102,14 @@ noncomputable def zigzagBoundary (A : HomologicalComplex₂ (ModuleCat R) (Compl
     (zigzagBoundaryComponent A n)
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The submodule
+/-- The submodule
 `Bₙ(A) = range(Dₙ₊₁)` of trivial zig-zags (Stacks, Algebra, Tag 00M1). -/
 noncomputable def zigzagBoundaries (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
     (ComplexShape.down ℕ)) (n : ℕ) : Submodule R (zigzagTotal A n) :=
   (zigzagBoundary A n).range
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The module
+/-- The module
 `𝐇ₙ(A) = Zₙ(A) / (Zₙ(A) ∩ Bₙ(A))`. The intersection is taken inside
 `Zₙ(A)` by comapping `Bₙ(A)` along its inclusion (Stacks, Algebra, Tag 00M1). -/
 abbrev zigzagModule (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
@@ -116,7 +117,7 @@ abbrev zigzagModule (A : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down 
   (zigzagCycles A n) ⧸ ((zigzagBoundaries A n).comap (zigzagCycles A n).subtype)
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) A bicomplex morphism
+/-- A bicomplex morphism
 acts componentwise on `Tₙ`; at `(p,q)` this is `Φₚ,ᵩ`
 (Stacks, Algebra, Tag 00M1). -/
 noncomputable def zigzagTotalMap {A B : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
@@ -129,17 +130,7 @@ noncomputable def zigzagTotalMap {A B : HomologicalComplex₂ (ModuleCat R) (Com
 
 set_option backward.isDefEq.respectTransparency false in
 open Classical in
-/-- (blueprint: lem-weil-pbc-double-complex-zigzag-module-functorial)
-The componentwise map preserves zig-zags and trivial zig-zags
-(Stacks, Algebra, Tag 00M1, proof and functoriality paragraph).
-
-For a zig-zag `a`, apply `Φ` to each equality `d a = δ a`. Commutation of the
-component maps of `Φ` with both differentials turns this into the corresponding
-equality for `Φ a`, so `Φ a` is a zig-zag. For a boundary `D b`, inspect each
-component: linearity and commutation with `d` and `δ` give
-`Φ (d b + δ b) = d (Φ b) + δ (Φ b)`. Hence `Φ (D b) = D (Φ b)`, including at
-the boundary where the missing term is zero. Thus the image of every boundary
-is a boundary. This is clause (b) of the functoriality node. -/
+/-- The componentwise map preserves zig-zags and trivial zig-zags. -/
 theorem zigzagTotalMap_preserves
     {A B : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
       (ComplexShape.down ℕ)} (Φ : A ⟶ B) (n : ℕ) :
@@ -191,7 +182,7 @@ theorem zigzagTotalMap_preserves
     exact ⟨zigzagTotalMap Φ (n + 1) b, (LinearMap.congr_fun boundary_map b).symm⟩
 
 open Classical in
-/-- (blueprint: def-weil-pbc-double-complex-zigzag-module) The map
+/-- The map
 `𝐇ₙ(Φ)` induced by a bicomplex morphism, sending `[a]` to `[Φ(a)]`.
 Its quotient compatibility is supplied by `zigzagTotalMap_preserves`
 (Stacks, Algebra, Tag 00M1). -/

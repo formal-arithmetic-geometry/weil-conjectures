@@ -20,7 +20,11 @@ import WeilConjectures.Algebra.Homology.SpliceIncomingDifferential
 /-!
 # One-degree extension of an acyclic lift tail
 
-Source: Stacks Project, Tag 0BC9, proof of lemma-lift-acyclic-complex.
+A finite projective lift tail can be extended by one degree.
+
+## References
+
+* Stacks Project, Tag 0BC9 (proof of the lifting lemma for acyclic complexes)
 -/
 
 @[expose] public section
@@ -45,27 +49,7 @@ structure AcyclicLiftTail (R : Type u) [CommRing R] (I : Ideal R)
   exact : ∀ i, n < i → complex.ExactAt i
   iso : ∀ i, n ≤ i → IsIso (comparison.f i)
 
-/-- Extend a finite projective lift tail by one degree.
-
-Source: Stacks Project, Tag 0BC9, proof, the split-tail and next-term construction
-(blueprint: lem-sc-acyclic-lift-tail-extension).
-
-Proof: Starting at degree b, split the surjections onto cycles using projectivity.
-Descending through the finite tail identifies each term with the sum of its cycle
-module and the next cycle module. The summand hypothesis puts all these cycle
-modules in P (including the zero module). Choose a lift M in P of E in degree n-1.
-The differential of E lands in the reduction of the cycle module Z in degree n:
-the split tail remains split after reduction, and E is exact in degree n.
-Projectivity of M lifts the resulting map M -> Z/IZ to M -> Z. Its reduction is
-surjective, so the surjectivity hypothesis makes the lifted map surjective.
-Compose it with the inclusion of Z in the degree-n term. Put M in degree n-1,
-keep the old terms and differentials above n, and put zero below n-1. This is a
-complex since the new map lands in cycles. It is exact in degree n and remains
-exact above n. Its reduction comparison is the chosen isomorphism in degree n-1
-and the previous comparison in all higher degrees. The inclusion of the old tail
-commutes with this comparison and is an isomorphism in every degree at least n.
-Every unchanged term belongs to P; the new term does by choice, and the lower
-zero terms already occur in the old tail. -/
+/-- Extend a finite projective lift tail by one degree. -/
 theorem exists_extend_acyclicLiftTail
     (R : Type u) [CommRing R] (I : Ideal R)
     (P : ModuleCat.{max u v} R → Prop)

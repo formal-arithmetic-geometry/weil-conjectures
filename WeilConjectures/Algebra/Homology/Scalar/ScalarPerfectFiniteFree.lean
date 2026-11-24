@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Normalized finite free scalar models
 
-Source: Stacks Project, sites-modules.tex, Tags 03CY, 03EK and 0GMW.
+## References
+
+* Stacks Project, sites-modules.tex, Tags 03CY, 03EK and 0GMW
 -/
 
 @[expose] public noncomputable section

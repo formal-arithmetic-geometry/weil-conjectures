@@ -97,7 +97,12 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
 
-/-! # Computing derived pullback on K-flat tensor representatives -/
+/-! # Computing derived pullback on K-flat tensor representatives
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YY, 07A4 and 0G7E
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -327,20 +332,7 @@ private theorem isKFlat_inverseImage
 
 set_option synthInstance.maxSize 2048 in
 /-- Derived pullback computes the ordinary pullback on a K-flat flat-term complex and
-on the total tensor of two such complexes.
-Source: Stacks Project, Cohomology on Sites, Tags 06YY, 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-kflat-tensor-pullback-computation-universes).
-Proof: algebraic inverse image preserves finite limits and epimorphisms, hence
-homology. Its image of a K-flat flat-term complex is K-flat by applying the ringed-topos
-pullback theorem with identity scalar extension and cancelling the canonical identity
-extension isomorphism. The existing independent-universe derived change-of-rings theorem
-then preserves quasi-isomorphisms between these images. The object and map equalities
-identify their composite with the specified uStar. Resolve every homotopy object by a
-K-flat complex with flat terms, and apply the resolving-class derived-functor theorem.
-Its counit is invertible on these representatives. The unique isomorphism of left
-derived functors transports that assertion to LF and epsilon; the canonical quotient
-comparisons transport it to complexes. Finally the existing total-tensor model theorem
-supplies K-flatness and flat terms for the tensor, so the same computation applies. -/
+on the total tensor of two such complexes. -/
 theorem derivedPullback_kflat_tensor_computation
     {C D : Type s} [Category.{h} C] [Category.{h} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}

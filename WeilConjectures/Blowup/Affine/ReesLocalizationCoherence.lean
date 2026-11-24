@@ -31,11 +31,8 @@ that these maps are coherent with the canonical identifications of iterated loca
   underlying ring maps.
 - `AlgebraicGeometry.reesGrading.hom_localization_mul` /
   `AlgebraicGeometry.AffineBlowup.hom_localization_mul` — iterated localization coherence
-  (blueprint: `definition-admissible-blow-up--1`).
 - `AlgebraicGeometry.reesGrading.hom_localization_one` /
   `AlgebraicGeometry.AffineBlowup.hom_localization_one` — localization at one
-  (blueprint: `definition-admissible-blow-up--1`).
-
 -/
 
 @[expose] public section
@@ -88,7 +85,7 @@ lemma _root_.IsLocalization.Away.mulAlgEquiv_comp_algebraMap :
     rw [RingHom.comp_apply, RingHom.comp_apply, ← IsScalarTower.algebraMap_apply]
     exact (IsLocalization.Away.mulAlgEquiv B C D s t).commutes a
 
-/-- Blueprint `definition-admissible-blow-up--1`: Iterated localization coherence.
+/-- Iterated localization coherence for the Rees grading.
 
 Localizing the Rees algebra first at `s` (`A → B = A_s`) and then at `t` (`B → C = (A_s)_t`)
 gives the same graded map as localizing at `s * t` (`A → D = A_{st}`), after the canonical
@@ -104,7 +101,7 @@ theorem reesGrading.hom_localization_mul (h₁ : I.map (algebraMap A B) = J)
   exact reesGrading.hom_comp_of_comp_eq _ _ _
     (IsLocalization.Away.mulAlgEquiv_comp_algebraMap B C D s t) _ _ _
 
-/-- Blueprint `definition-admissible-blow-up--1`: Iterated localization coherence, for the
+/-- Iterated localization coherence, for the
 induced morphisms of affine blow-ups. -/
 theorem AffineBlowup.hom_localization_mul (h₁ : I.map (algebraMap A B) = J)
     (h₂ : J.map (algebraMap B C) = K)
@@ -123,7 +120,7 @@ section One
 
 variable [Algebra A B] [IsLocalization.Away (1 : A) B]
 
-/-- Blueprint `definition-admissible-blow-up--1`: Localization at one.
+/-- Localization at one for the Rees grading.
 
 After the canonical identification `A_1 ≅ A` (`IsLocalization.atOne`), the Rees localization
 map at `1` is the identity of the Rees algebra. -/
@@ -135,7 +132,7 @@ theorem reesGrading.hom_localization_one (h₁ : I.map (algebraMap A B) = J)
     (RingHom.ext fun a => (IsLocalization.atOne A B).symm.commutes a) h₁ h₂ (Ideal.map_id I)]
   exact reesGrading.hom_id
 
-/-- Blueprint `definition-admissible-blow-up--1`: Localization at one, for the induced
+/-- Localization at one, for the induced
 morphisms of affine blow-ups. -/
 theorem AffineBlowup.hom_localization_one (h₁ : I.map (algebraMap A B) = J)
     (h₂ : J.map ((IsLocalization.atOne A B).symm : B →+* A) = I) :

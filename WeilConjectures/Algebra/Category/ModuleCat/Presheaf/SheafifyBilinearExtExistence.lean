@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Category.Ring.Limits
 /-!
 # Existence of bilinear extensions through module sheafification
 
-Source: Stacks Project, Modules on Sites, Tag 0GMW.
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMW
 -/
 
 @[expose] public section
@@ -19,27 +21,7 @@ open CategoryTheory
 namespace PresheafOfModules
 set_option backward.isDefEq.respectTransparency false in
 -- The local gluing argument checks compatibility and four linearity laws in one declaration.
-/-- A restriction-compatible bilinear family extends to the module sheafifications.
-Source: Stacks Project, Modules on Sites, Tag 0GMW, the sheafification step of the
-construction of tensor products.
-(blueprint: lem-pc-sites-module-sheafification-bilinear-extension-existence)
-
-Proof: Forget the module structures. The underlying maps of the two module
-sheafification units are locally bijective maps of presheaves of sets, so their
-product is locally bijective. Since the underlying presheaf of sets of `H` is a
-sheaf, the natural map `(x,y) ↦ β X x y` extends uniquely to a natural map from
-the product of the underlying sheafifications to `H`. Its unit equation is the
-factorization equation. To prove additivity in the first variable, compare its
-value on `(x + x', y)` with the sum of its values on `(x,y)` and `(x',y)`.
-On a common covering sieve, all three sections lift along the module units;
-naturality, the unit equation, and additivity of `β` make their restrictions
-agree. Separatedness of `H` gives equality. The second-variable argument uses
-lifts of `x,y,y'` in the same way. For scalar compatibility, also lift the scalar
-along the locally surjective ring map `α`, on a common refinement of the covers
-lifting the module sections. The units respect the scalar actions; linearity of
-`β` over `O` proves both scalar identities on this cover, and separatedness gives
-the identities over `R`. Thus the natural set map defines a curried `R`-linear
-map at every object, with exactly the required naturality and unit equations. -/
+/-- A restriction-compatible bilinear family extends to the module sheafifications. -/
 theorem exists_bilinear_sheafification_extension
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasWeakSheafify J AddCommGrpCat.{max u v w}]

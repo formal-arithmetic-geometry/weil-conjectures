@@ -31,9 +31,7 @@ namespace DerivedCategory
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
   {M : DerivedCategory C} {A : C} {n : ℤ}
 
-/-- If `M ≅ A[-n]` is concentrated in degree `n`, then `Hⁱ(M) = 0` for `i ≠ n`.
-
-(blueprint: `lem-pc-degree-zero-properties`) -/
+/-- If `M ≅ A[-n]` is concentrated in degree `n`, then `Hⁱ(M) = 0` for `i ≠ n`. -/
 lemma isZero_homologyFunctor_obj_of_iso_singleFunctor (e : M ≅ (singleFunctor C n).obj A)
     {i : ℤ} (hi : i ≠ n) : IsZero ((homologyFunctor C i).obj M) := by
   refine IsZero.of_iso ?_ ((homologyFunctor C i).mapIso e)
@@ -41,9 +39,7 @@ lemma isZero_homologyFunctor_obj_of_iso_singleFunctor (e : M ≅ (singleFunctor 
   · exact isZero_of_isGE _ n i hi
   · exact isZero_of_isLE _ n i hi
 
-/-- If `M ≅ A[-n]` is concentrated in degree `n`, then `Hⁿ(M) ≅ A`.
-
-(blueprint: `lem-pc-degree-zero-properties`) -/
+/-- If `M ≅ A[-n]` is concentrated in degree `n`, then `Hⁿ(M) ≅ A`. -/
 noncomputable def homologyFunctorObjIsoOfIsoSingleFunctor (e : M ≅ (singleFunctor C n).obj A) :
     (homologyFunctor C n).obj M ≅ A :=
   (homologyFunctor C n).mapIso e ≪≫ (singleFunctorCompHomologyFunctorIso C n).app A

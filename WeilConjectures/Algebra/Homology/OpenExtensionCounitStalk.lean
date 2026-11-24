@@ -17,8 +17,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Stalks of the open-extension counit
 
-Source: Stacks Project, Sheaves, Tag 00A7, clauses (2)--(4).
-(blueprint: lem-sc-open-extension-counit-stalk)
+## References
+
+* Stacks Project, Sheaves, Tag 00A7, clauses (2)--(4)
 -/
 
 @[expose] public section
@@ -29,28 +30,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace
 namespace SheafOfModules
 
 /-- The counit of any left adjoint to open restriction is an isomorphism on
-stalks inside the open, and its source has zero stalks outside the open.
-Source: Stacks Project, Sheaves, Tag 00A7, clauses (2)--(4).
-(blueprint: lem-sc-open-extension-counit-stalk)
-
-Proof: Restriction has a right adjoint (direct image) whose counit is invertible:
-the forgetful functor from opens over W is fully faithful, so its adjunction unit
-is invertible, and the direct-image counit restricts along that unit sectionwise.
-The adjoint-triple criterion makes the unit of the specified adjunction a invertible.
-Its right triangle identity therefore makes the restricted counit invertible.
-At an inside point, evaluate this restricted map on the image opens of W and apply
-the abelian stalk functor. The restriction-stalk comparison isomorphisms conjugate
-this map to the global counit stalk map, as checked on germs. Hence that map is
-invertible, without identifying the specified adjunction with a canonical one.
-
-Outside W, use localizedModule_adjunction_exact to obtain the canonical left
-adjoint, the direct-sum extension presheaf followed by module sheafification.
-A neighborhood containing x has no arrow to W; its direct sum is zero. Every
-presheaf stalk element is represented by such a section, hence is zero. The
-sheafification unit induces a stalk isomorphism, so the sheafified stalk is zero.
-Uniqueness of left adjoints supplies an isomorphism from S to this construction;
-apply the abelian stalk functor and transport the zero-object property. No covering
-hypothesis is used. The empty and whole-space opens require no exceptions. -/
+stalks inside the open, and its source has zero stalks outside the open. -/
 theorem open_extension_counit_stalk (X : AlgebraicGeometry.RingedSpace.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (_hR : R = (sheafCompose (Opens.grothendieckTopology X)

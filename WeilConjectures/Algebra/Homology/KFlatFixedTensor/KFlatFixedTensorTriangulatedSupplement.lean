@@ -67,15 +67,14 @@ public import WeilConjectures.Algebra.Homology.KFlatFixedTensorTriangulated
 /-!
 # Exact descent of tensoring with a fixed K-flat complex
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YM, 06YP and 06YU;
-derived.tex, definition-cone and definition-distinguished-triangle;
-more-algebra.tex, Tag 0FNH, item-shift-tensor.
-(blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated)
-
 The derived bifunctor and its resolving comparison are the ones already supplied
 by site-derived-tensor descent. The presentation packages the existing choices once,
 so its dependent comparisons share the same checked data. `derivedTensor_eq_published`
 records their equality. All site and coefficient universes remain independent.
+
+## References
+
+* Stacks Project, Tags 06YM, 06YP, 06YS, 06YU, 03EK, 0FNH and Modules on Sites, Section 03DA
 -/
 
 @[expose] public noncomputable section
@@ -799,9 +798,7 @@ section ShiftKFlat
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
-/-- K-flatness for the canonical sheaf tensor is stable under shifts.
-Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated). -/
+/-- K-flatness for the canonical sheaf tensor is stable under shifts. -/
 theorem shift_kFlat
     (A : CochainComplex (Modules R) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients A) (n : ℤ) :

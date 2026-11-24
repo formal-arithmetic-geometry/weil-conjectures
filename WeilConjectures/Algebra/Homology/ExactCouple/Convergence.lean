@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 We consider exact couples indexed by `ℤ × ℤ` whose map `α` has degree `(-1, 0)` and whose map `g`
 has degree `0`. We think of an index `(p, n)` as a filtration degree `p` and a total degree `n`:
-the bigraded couples of the blueprint, indexed by `(p, q)` with `α` of degree `(-1, 1)`,
-correspond to these through `(p, q) ↦ (p, p + q)`.
+the bigraded couples indexed by `(p, q)` with `α` of degree `(-1, 1)` correspond to these
+through `(p, q) ↦ (p, p + q)`.
 
 The abutment of such a couple is given by structure maps `ι p n : D^{p, n} ⟶ Aⁿ`. When the
 objects `D^{p, n}` vanish for `p ≫ 0` and the maps `ι p n` are isomorphisms for `p ≪ 0`, the
@@ -78,16 +78,12 @@ lemma degIter_neg_one_zero (N : ℕ) :
 variable {b : ℤ × ℤ} (X : ExactCouple C ((-1, 0) : ℤ × ℤ) b 0)
 
 /-- A couple is *regular* if for every index `i`, the differentials `d_r` arriving at `i` vanish
-for `r ≫ 0`; equivalently, the boundaries `B_r ⊆ E` at `i` are eventually constant.
-
-(blueprint: `def-sp-convergence`) -/
+for `r ≫ 0`; equivalently, the boundaries `B_r ⊆ E` at `i` are eventually constant. -/
 def IsRegular : Prop :=
   ∀ i : ℤ × ℤ, ∃ n₀ : ℕ, ∀ n ≥ n₀, ∀ j, (X.derivedIter n).d j i = 0
 
 /-- A couple is *complete* if for every index `i` the images of the composites
-`αʳ : D (i + (r, 0)) ⟶ D i` have zero intersection.
-
-(blueprint: `def-sp-convergence`) -/
+`αʳ : D (i + (r, 0)) ⟶ D i` have zero intersection. -/
 def IsComplete : Prop :=
   ∀ (i : ℤ × ℤ) (P : Subobject (X.D i)),
     (∀ r : ℕ, P ≤ imageSubobject (X.αPow r (i + ((r : ℤ), 0)) i)) → P = ⊥
@@ -95,16 +91,9 @@ def IsComplete : Prop :=
 /-- The data of the convergence of the spectral sequence of the couple `X` to the filtrations
 `F n` of objects `A n`, along the structure maps `ι p n : D^{p, n} ⟶ Aⁿ` of the abutment.
 
-For every index `(p, n)` (filtration degree `p`, total degree `n`), it consists of a page
-`stage p n` from which on the differentials leaving and arriving at `(p, n)` vanish (so that the
-entry has reached its stable value `E_∞^{p, n}`), and of isomorphisms `E_N^{p, n} ≅ grᵖ Aⁿ` on
-these pages, compatible with the structure maps: the composite of the map
-`g : D_N^{p - N, n} ⟶ E_N^{p, n}` of the `N`-th derived couple with the isomorphism is induced by
-`D_N^{p - N, n} ⊆ D^{p - N, n} ⟶ Aⁿ`, which factors through `Fᵖ Aⁿ`.
-
-This is the convention for a couple whose map `g` has degree `0`.
-
-(blueprint: `def-sp-convergence`) -/
+For every index `(p, n)` it consists of a page `stage p n` from which on the differentials at
+`(p, n)` vanish, and of isomorphisms `E_N^{p, n} ≅ grᵖ Aⁿ` on these pages, compatible with the
+structure maps `ι`. -/
 structure ConvergenceData {A : ℤ → C} (ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n)
     (F : ∀ n, DecreasingFiltration (A n)) where
   /-- The page from which on the entry at `(p, n)` is stable. -/
@@ -120,9 +109,7 @@ structure ConvergenceData {A : ℤ → C} (ι : ∀ p n : ℤ, X.D (p, n) ⟶ A 
 
 /-- The spectral sequence of the couple *converges* to the filtrations `F n` of the objects
 `A n`, along the structure maps `ι p n : D^{p, n} ⟶ Aⁿ` of the abutment, if it admits
-convergence data `CategoryTheory.ExactCouple.ConvergenceData`.
-
-(blueprint: `def-sp-convergence`) -/
+convergence data `CategoryTheory.ExactCouple.ConvergenceData`. -/
 def ConvergesTo {A : ℤ → C} (ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n)
     (F : ∀ n, DecreasingFiltration (A n)) : Prop :=
   Nonempty (X.ConvergenceData ι F)
@@ -279,9 +266,7 @@ couple indexed by `ℤ × ℤ` with `α` of degree `(-1, 0)` and `g` of degree `
 `ι : D^{p, n} ⟶ Aⁿ` be compatible with `α`. Suppose that in each total degree `n`, the maps
 `ι` are isomorphisms for `p ≪ 0` and the objects `D^{p, n}` vanish for `p ≫ 0`. Then the
 spectral sequence of `X` converges to the filtration `Fᵖ Aⁿ = im (D^{p, n} ⟶ Aⁿ)`: these are its
-convergence data.
-
-(blueprint: `def-sp-convergence`) -/
+convergence data. -/
 noncomputable def abutmentConvergenceData :
     X.ConvergenceData ι (X.abutmentFiltration ι hι) where
   stage := X.abutmentStage ι hiso hzero
@@ -295,9 +280,7 @@ include hiso hzero in
 couple indexed by `ℤ × ℤ` with `α` of degree `(-1, 0)` and `g` of degree `0`, and let
 `ι : D^{p, n} ⟶ Aⁿ` be compatible with `α`. Suppose that in each total degree `n`, the maps
 `ι` are isomorphisms for `p ≪ 0` and the objects `D^{p, n}` vanish for `p ≫ 0`. Then the
-spectral sequence of `X` converges to the filtration `Fᵖ Aⁿ = im (D^{p, n} ⟶ Aⁿ)`.
-
-(blueprint: `def-sp-convergence`) -/
+spectral sequence of `X` converges to the filtration `Fᵖ Aⁿ = im (D^{p, n} ⟶ Aⁿ)`. -/
 theorem convergesTo_abutmentFiltration :
     X.ConvergesTo ι (X.abutmentFiltration ι hι) :=
   ⟨X.abutmentConvergenceData ι hι hiso hzero⟩

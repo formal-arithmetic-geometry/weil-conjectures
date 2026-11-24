@@ -11,9 +11,12 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
-/-! # Completed scalars on an annihilated tower limit
+/-!
+# Completed scalars on an annihilated tower limit
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087W.
+## References
+
+* Stacks Project, Cohomology of Schemes, proof of Lemma 087W
 -/
 
 @[expose] public section
@@ -26,28 +29,8 @@ namespace ModuleCat
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The limit of a tower annihilated at level `n` by `I^(n+1)` has the canonical
-completed scalar action. No finiteness or surjectivity hypothesis is needed.
-The underlying module and its comparison are specified by the limit universal property;
-the residue equation determines the completed action coordinatewise. Thus the pair
-`N, e` is unique up to the unique completed-linear isomorphism respecting `e`.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, the sentence defining
-`M = lim M_n` as a module over the completion.
-(blueprint: lem-weil-pbc-adic-tower-completed-scalar-limit).
-
-Proof: Annihilation makes the scalar endomorphism map A -> End_A(T_n) factor
-through A/I^(n+1). Composing it with the completion residue gives d_n(r).
-For a representative Cauchy sequence of r, representatives at comparable indices
-differ by an element of the smaller ideal power. That power kills the smaller term,
-so d_n(r) commutes with transitions. The ordinary A-module limit universal property
-lifts these coordinate endomorphisms to an endomorphism v(r) of the limit.
-Joint injectivity of the projections proves that v preserves zero, one, addition
-and multiplication. Restrict the endomorphism-module action along this ring map to
-make the existing limit a module over the completion. For scalars from A the residue
-equation recovers the original A-action, so the identity on underlying elements is
-the restricted A-linear isomorphism e. The coordinate formula proves the assertion.
-The same formula and joint injectivity determine the completed action uniquely
-relative to e. -/
+completed scalar action, unique up to the unique completed-linear isomorphism respecting `e`.
+No finiteness or surjectivity hypothesis is needed. -/
 theorem adicTower_completedScalarLimit (A : Type u) [CommRing A] (I : Ideal A)
     (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)
     (hT : ∀ n : ℕ, I ^ (n + 1) • (⊤ : Submodule A (T.obj (op n))) = ⊥) :

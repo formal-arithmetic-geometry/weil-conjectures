@@ -62,15 +62,7 @@ lemma mem_presheafHomLinearSubfunctor_obj {U : Cᵒᵖ}
   Iff.rfl
 
 /-- The underlying presheaf of types of `homObj M N` is the subpresheaf of `R`-linear morphisms
-of `presheafHom M.presheaf N.presheaf`:
-```
-  Cᵒᵖ --(homObj M N).presheaf--> AddCommGrpCat
-   |                                   |
-   | presheafHomLinearSubfunctor M N   | forget
-   v                                   v
-  Type ============================== Type
-```
--/
+of `presheafHom M.presheaf N.presheaf`. -/
 @[simps!]
 noncomputable def homObjCompForgetIso :
     (homObj M N).presheaf ⋙ forget _ ≅ (presheafHomLinearSubfunctor M N).toFunctor :=

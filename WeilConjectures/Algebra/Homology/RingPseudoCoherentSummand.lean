@@ -25,8 +25,9 @@ namespace DerivedCategory
 /-!
 # Direct summands of pseudo-coherent complexes
 
-Source: literature/stacks-project/more-algebra.tex, Tags 064X and 064U
-(blueprint: lem-pc-ring-pseudo-coherent-summand).
+## References
+
+* Stacks Project, More on Algebra, Tags 064X and 064U
 -/
 
 private theorem mPseudoCoherent_of_homology_map {R : Type u} [CommRing R]
@@ -74,17 +75,7 @@ private theorem pseudoCoherent_iff_all {R : Type u} [CommRing R]
   exact ⟨fun h m => mPseudoCoherent_of_homology_map m e.hom (fun _ _ ↦ inferInstance) (h m),
     fun h m => mPseudoCoherent_of_homology_map m e.inv (fun _ _ ↦ inferInstance) (h m)⟩
 
-/-- A direct summand of an `m`-pseudo-coherent complex is `m`-pseudo-coherent.
-Proof: the bounded witness gives a common upper cohomology bound. Cohomology of each
-summand is a quotient of that of `K ⊞ L`, hence vanishes above this bound. The zero
-witness makes both summands `B`-pseudo-coherent for a sufficiently large `B`.
-Descend simultaneously from `B` to `m`: if both summands are `(n + 1)`-pseudo-coherent,
-the split triangles `K → K ⊞ L → L` and `L → L ⊞ K → K`, together with clause one of
-`isMPseudoCoherent_of_distinguished_triangle`, make both `n`-pseudo-coherent.
-The original witness gives `n`-pseudo-coherence of the middle terms whenever `m ≤ n`.
-This is a simultaneous degree descent in place of the shift descent of Tag 064X.
-Source: Stacks Project, More on Algebra, Tag 064X.
-(blueprint: lem-pc-ring-pseudo-coherent-summand) -/
+/-- A direct summand of an `m`-pseudo-coherent complex is `m`-pseudo-coherent. -/
 theorem mPseudoCoherent_summand {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)] (m : ℤ)
     (K L : DerivedCategory (ModuleCat.{v} R))
@@ -134,13 +125,7 @@ theorem mPseudoCoherent_summand {R : Type u} [CommRing R]
   simpa only [heq] using descend (B - m).toNat (by omega)
 
 /-- If `K ⊞ L` is quasi-isomorphic to a bounded-above complex of finite free modules
-(pseudo-coherent), then so are `K` and `L`.
-Proof (node): stupid truncations of a bounded-above finite free model show `K ⊞ L` is
-`m`-pseudo-coherent for every `m`, hence so are `K` and `L` by the first clause, and an
-object that is `m`-pseudo-coherent for every `m` has a bounded-above finite free model,
-built downward degree by degree (Stacks, Tag 064U).
-Source: Stacks Project, More on Algebra, Tags 064X and 064U.
-(blueprint: lem-pc-ring-pseudo-coherent-summand) -/
+(pseudo-coherent), then so are `K` and `L`. -/
 theorem pseudoCoherent_summand {R : Type u} [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (K L : DerivedCategory (ModuleCat.{v} R))

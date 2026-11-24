@@ -15,6 +15,14 @@ import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
 import WeilConjectures.Algebra.Homology.HomComplexMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
+/-!
+# Derived internal Hom from a bounded-above finite free model: auxiliary statement
+
+## References
+
+* Stacks Project, Tag 0GM8 (case (2)) and Section 08J7
+-/
+
 @[expose] public section
 
 universe u w
@@ -25,14 +33,7 @@ namespace AlgebraicGeometry
 
 /-- The bounded-above finite-free Hom complex computes derived internal Hom when the
 second complex is bounded below. This is the injective-resolution and acyclic-Hom
-part of `derivedInternalHom_of_boundedAbove_finiteFree`.
-Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Section 08J7
-(blueprint: lem-sc-derived-hom-finite-free-model-aux).
-Proof: replace `G` by a bounded-below K-injective resolution `I`; the cone of the
-replacement is bounded below and acyclic, so finite-free Hom preserves the
-quasi-isomorphism. The derived internal Hom computation with `I` and the
-K-injective comparison then identify the localized Hom complex with derived Hom.
--/
+part of `derivedInternalHom_of_boundedAbove_finiteFree`. -/
 theorem derivedInternalHom_of_boundedAbove_finiteFree_aux
     (U : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U))]

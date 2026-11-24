@@ -36,9 +36,7 @@ namespace ExactCouple
 variable {C : Type u} [Category.{v} C] [Abelian C] {κ : Type w} [AddCommGroup κ] {a b c : κ}
 
 /-- A *morphism of exact couples* `X ⟶ Y`: morphisms `τD : X.D i ⟶ Y.D i` and
-`τE : X.E i ⟶ Y.E i` compatible with `α`, `f` and `g`.
-
-(blueprint: `lem-sp-couple-morphism`) -/
+`τE : X.E i ⟶ Y.E i` compatible with `α`, `f` and `g`. -/
 structure Hom (X Y : ExactCouple C a b c) where
   /-- The morphisms on the `D`-objects. -/
   τD (i : κ) : X.D i ⟶ Y.D i
@@ -123,9 +121,7 @@ lemma homologyMap_dMap_comp_eqToHom (m n : ℕ) (h : m = n + 1) (pq : κ)
 /-- **The morphism of spectral sequences induced by a morphism of exact couples**: on the
 `r`-th page it is the morphism of complexes `(E_r, d_r) ⟶ (E'_r, d'_r)` induced by the morphism
 of the `(r - r₀)`-th derived couples, and it is compatible with the identifications of the
-homology of a page with the next page.
-
-(blueprint: `lem-sp-couple-morphism`) -/
+homology of a page with the next page. -/
 noncomputable def spectralSequenceMap (r₀ : ℤ) :
     X.spectralSequence r₀ ⟶ Y.spectralSequence r₀ where
   hom r _ := (φ.derivedIter (r - r₀).toNat).dMap

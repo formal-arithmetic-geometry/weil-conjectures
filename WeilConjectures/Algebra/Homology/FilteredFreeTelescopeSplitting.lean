@@ -136,49 +136,7 @@ private theorem telescope_exact {A : Type u} [CommRing A]
       exact hn.trans (hc.fac (cone s) n).symm
   exact (ShortComplex.mk a b hab).exact_of_g_is_cokernel hcok
 
-/-- The explicitly constructed telescope sequence is split exact in each degree.
-Source: Stacks Project, Tags 09KL--09KM, admissible telescope sequence.
-(blueprint: lem-pc-filtered-free-telescope-splitting)
-
-Proof: write S = direct sum of F n, a = identity minus successor, and b for the
-augmentation induced by the compatible inclusions. These are precisely the maps
-in the statement; they commute with differentials because their summand maps do.
-Compatibility gives b a = 0. Work in an arbitrary degree k, identifying S.X k
-with the direct sum of (F n).X k by preservation of coproducts by evaluation.
-Every vector has finite support. The zeroth coordinate of a(x) is x_0; once the
-coordinates before n vanish, its nth coordinate is x_n. Induction therefore
-proves that a is injective. Exhaustion proves that b is surjective.
-For exactness at S, take z with b(z) = 0 and choose N containing its finite support.
-For i <= N let t(i,N) be the composite of the transition maps, with t(N,N) = id.
-The relations e_i(x) - e_(i+1)(step_i(x)) = a(e_i(x)) show, by a finite
-sum, that z is congruent modulo image(a) to e_N(sum_i t(i,N)(z_i)).
-The image of this last coefficient under ι_N is b(z) = 0. Since ι_N is monic,
-the coefficient is zero. Thus kernel(b) = image(a), in every degree.
-
-Choose the given degree-k retractions r_i of step_i. For i < j define r(j,i)
-by composing r_(j-1), ..., r_i, and put r(i,i) = id. Define a linear map
-l : S.X k -> S.X k on the jth summand by giving its ith coordinate as
--r(j,i) for i < j, and zero for i >= j. This has finite support on every
-summand and hence defines a map out of the direct sum. In l a on summand n,
-the coordinates below n cancel using step_n followed by r_n = id; coordinate
-n is id and coordinates above n vanish. Hence l a = id.
-Let p = id - a l. It kills image(a). By the kernel calculation and surjectivity
-of b, it factors uniquely as s b for a linear s : P.X k -> S.X k.
-Equivalently s(x) = p(z) for any lift b(z) = x; differences of lifts lie in
-image(a), which p kills, so this formula is independent of the lift and linear.
-Then b s = id by surjectivity, and a l + s b = id by definition of p.
-These three identities give the required ShortComplex.Splitting. The retractions
-need not commute with differentials: the splitting is only degreewise. No
-K-projectivity, zero initial stage or boundedness assumption is used here.
-
-For its downstream use, the coproduct S is K-projective whenever the stages are:
-restrict a map to an acyclic complex to each summand, choose a null homotopy,
-and assemble the components by degreewise coproducts. The split exact sequence
-gives a distinguished triangle S -> S -> P -> S[1] in the homotopy category.
-K-projectivity is left orthogonality to acyclic complexes, stable under shifts
-and extensions; the exact Hom sequence then makes P K-projective. These final
-two arguments are separate checked proofs in the assembly, not hypotheses or
-conclusions of this construction lemma. Zero rings and zero filtrations are included. -/
+/-- The explicitly constructed telescope sequence is split exact in each degree. -/
 theorem filteredTelescope_degreewise_splitting {A : Type u} [CommRing A]
     (P : CochainComplex (ModuleCat.{max u v} A) ℤ)
     (F : ℕ → CochainComplex (ModuleCat.{max u v} A) ℤ)

@@ -14,8 +14,11 @@ import WeilConjectures.Algebra.Homology.RingedSitePullback.PullbackLocalizationO
 
 /-! # Scalar-square compatibility of normalized signed pullbacks
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
-(blueprint: lem-pur-signed-line-scalar-pullback-naturality)
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 04J0
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public section
@@ -279,26 +282,7 @@ private theorem pullback_signed_basis
     change φ.app W ((scalarTensorPower R' L' (n + 1)).val.map W.unop.hom.op e) = _
     exact hn.trans (by change R'.obj.map W.unop.hom.op _ = 1; rw [hv, map_one])
 
-/-- A compatible scalar square remains compatible in every signed degree.
-Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0;
-steps 2 and 6--8 of the signed-line scalar/pullback argument.
-(blueprint: lem-pur-signed-line-scalar-pullback-naturality)
-
-Proof: Use the pullback localization comparison to pull a trivializing cover of L
-to a cover on the target site. On a member choose a basis e, and let v be its image
-under c after insertion of the scalar 1. Let e' and v' be the images under p and q
-of their adjunction-unit sections. Localization and the coefficient-unit comparison
-show that these are target bases. The assumed degree-one square says that c' sends
-e' tensor 1 to v'. Tensor recursion carries all positive basis powers to the
-corresponding target powers. The negative evaluation clause carries each dual basis
-to its target dual basis, since its value on the positive basis is 1. The scalar
-normalizations carry the same signed basis powers to each other. Reassociating
-scalar extension and pullback sends (x tensor s) tensor t to (x tensor 1) tensor b(s)t;
-balancing uses the commuting coefficient square. On each chart both composites in
-the required square therefore take the signed basis generator to the same signed
-basis, including degree zero. Linearity gives equality on all local sections and
-sheaf uniqueness glues it globally. This theorem asserts compatibility only for
-given normalized families, and does not construct either family. -/
+/-- A compatible scalar square remains compatible in every signed degree. -/
 theorem signedLineScalarPullbackSquare_of_normalized
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

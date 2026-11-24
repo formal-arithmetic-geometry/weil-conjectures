@@ -41,9 +41,9 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Finite-basis tensor evaluation
 
-Source: Stacks Project, Modules on Sites, Tags 03EK, 03CY, 03DA and 03DB;
-finite-basis consequence with explicit section formulas.
-(blueprint: lem-pur-based-sheaf-tensor-evaluation).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK, 03CY, 03DA and 03DB
 -/
 
 @[expose] public noncomputable section
@@ -67,9 +67,7 @@ variable {C : Type uC} [Category.{vC} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]
   {R S : Sheaf J CommRingCat.{u}}
 
-/-- Evaluate a finite power using its coordinate projections.
-Source: Stacks 03DB, sectionwise limits
-(blueprint: lem-pur-based-sheaf-tensor-evaluation). -/
+/-- Evaluate a finite power using its coordinate projections. -/
 def basedTensorProductSections (d : ℕ)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
     (U : Cᵒᵖ) :

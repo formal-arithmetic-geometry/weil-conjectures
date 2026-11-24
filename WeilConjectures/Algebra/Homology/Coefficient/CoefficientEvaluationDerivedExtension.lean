@@ -14,8 +14,10 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 /-!
 # Derived extension and coherence relative to a strict evaluation adjunction
 
-Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tags 06XN, 0FND and 09T5.
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence).
+## References
+
+* Stacks Project, Tags 06XN, 09T5, 0FND
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -155,9 +157,7 @@ local notation "ev" => coefficientEvaluation (J := J) (O := O) (ell := ell)
 local notation "tensor" => coefficientTensor (J := J) (O := O) (ell := ell)
 local notation "tensorAdj" => coefficientTensorAdj (J := J) (O := O) (ell := ell)
 
-/-- The truncation map is constructed as the mate of the derived system transition.
-Source: Zheng, Construction 4.1, p. 21
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence). -/
+/-- The truncation map is constructed as the mate of the derived system transition. -/
 def coefficientEvaluationSigma
     {ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell)}
     [∀ n, (ordinary.extension n).Additive]
@@ -174,9 +174,7 @@ attribute [local irreducible] coefficientEvaluationSigma
 
 /-- Index coherence for fixed strict, scalar-derived and evaluation-derived adjunctions.
 All adjunctions, their universal comparisons and their normalized representative
-transposes have already been constructed.
-Source: Zheng, Construction 4.1, p. 21; Stacks 06XN and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence). -/
+transposes have already been constructed. -/
 structure CoefficientEvaluationDerivedCoherenceData
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive]
@@ -352,41 +350,7 @@ private theorem sigma_representative
   erw [Category.id_comp, Category.comp_id]
 
 /-- Derived compatibility of the strict truncation inclusions, with identity and
-composition laws for their adjunction mates.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tags 06XN, 0FND and 09T5
-(blueprint: lem-pur-coefficient-evaluation-derived-extension-coherence).
-Proof: scalar extension takes flat-term K-flat complexes to flat-term K-flat complexes.
-For such a complex P, transpose the proposed sigma representative equation first under
-the normalized evaluation adjunction and then under the normalized scalar adjunction.
-Their representative formulas and the transition's localization equation reduce both
-sides to the ordinary extension Hom formula and the strict truncation's transpose.
-Injectivity of the two Hom bijections proves the sigma comparison.
-On a flat-term K-flat P define the derived associator by the composite of the second
-derived tensor applied to the first counit, the second counit at the first tensor of P,
-the localization of the ordinary associator, and the inverse direct tensor counit.
-All these maps are isomorphisms: the first and direct counits compute on P, and the
-second computes because scalar extension preserves the resolving class. Naturality of
-these counits and of the ordinary associator gives naturality on resolving complexes.
-Pass to their homotopy classes. Every homotopy object admits a resolving complex, and
-the calculus of quasi-isomorphism fractions gives common resolving refinements. Thus
-the same formula is independent of the chosen resolution and descends naturally to
-the derived categories. The inverse formula, using the inverse ordinary associator,
-gives its inverse. Its defining equation is exactly derivedAssoc_rep. Any other
-comparison with that equation agrees after canceling the invertible direct counit on
-each resolving complex, hence agrees on every derived object.
-For the identity index, the ordinary tensor unit normalization and strict Hom formula
-identify the strict truncation with extension applied to the ordinary tensor unit.
-For three indices, evaluate the two successive strict truncations at q. Below the
-smallest index, transpose by the three scalar Hom bijections. Tensor unit normalization
-reduces both values to the same product of scalar factors; above it the source is zero.
-The faithful component evaluations therefore give the strict composition identity.
-Apply the sigma representative comparison to these ordinary identities and insert the
-derived unit and associator comparison equations. On a flat-term K-flat resolution all
-universal counits in these equations are invertible, including those after a scalar
-extension, so cancellation gives sigma_id and sigma_comp on its localized object.
-Every derived object is isomorphic to one of these objects. Naturality along that
-isomorphism proves both laws on every derived object. No flatness of quotient maps is
-assumed. -/
+composition laws for their adjunction mates. -/
 theorem coefficientEvaluationDerivedCoherence
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive]

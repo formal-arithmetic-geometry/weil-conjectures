@@ -62,8 +62,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 
 /-! # Finite tensor restriction coherence
-
-(blueprint: lem-sf-finite-tensor-restriction-coherence)
 -/
 
 -- After pruning, this module only keeps private declarations.

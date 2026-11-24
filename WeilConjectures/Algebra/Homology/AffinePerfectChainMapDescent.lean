@@ -18,8 +18,10 @@ import WeilConjectures.Algebra.Homology.FiniteChainSquaresColimitDescent
 
 /-! # Descent of chain maps between affine perfect complexes
 
-Source: Stacks Project, Tag 09RE, affine case (1).
-(blueprint: lem-pc-affine-perfect-chain-map-descent)
+## References
+
+* Stacks Project, Tag 09RE
+* Stacks Project, Tag 05N7
 -/
 
 @[expose] public section
@@ -51,23 +53,7 @@ private theorem graded_comm_of_conjugate
       simp only [Category.assoc, eP.hom.comm_assoc m n]
 
 /-- Chain maps between the limit base changes of bounded finite projective complexes
-are scalar extensions of chain maps at some later stage.
-
-Source: Stacks Project, Tag 09RE, affine case (1); Tag 05N7 for finite-presentation descent.
-Proof: Finite projective terms are finitely presented by Mathlib. Use
-`exists_bounded_graded_map_of_directed_colimit` to descend the components in the
-finite support of E₀, without yet requiring chain-map equations. Conjugation by
-the canonical scalar-extension isomorphisms identifies the extended components
-with f. Cancelling those isomorphisms and using their differential naturality
-proves that all chain squares commute over the colimit. Apply
-`eventually_commuting_finite_chain_squares` to the finitely many squares whose
-source degree lies in the support interval. Outside that interval extension of
-scalars preserves the zero source, so the equations hold automatically. These
-components define g. The two componentwise comparison equalities compose, and
-unfolding `scalarExtensionHom` and componentwise extensionality give its required
-equality with f. The two descent lemmas handle directed preorders; no partial-order
-assumption is added here.
-(blueprint: lem-pc-affine-perfect-chain-map-descent) -/
+are scalar extensions of chain maps at some later stage. -/
 theorem affine_perfect_chainMap_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

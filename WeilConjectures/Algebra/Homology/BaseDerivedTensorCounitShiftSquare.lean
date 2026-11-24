@@ -11,9 +11,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 /-! # The B-linear cohomological counit square under integer shift
 
-Source: Stacks Project, Tags 05SU, 06Y6 and 08IB; the explicit square is an
-explicit compatibility calculation for the ordinary shift model.
-(blueprint: lem-pc-base-derived-tensor-counit-shift-square).
+## References
+
+* Stacks Project, Tags 05SU, 06Y6 and 08IB.
 -/
 
 @[expose] public section
@@ -105,28 +105,7 @@ private theorem restriction_shiftMap_homology
   rw [hshift']
 set_option backward.isDefEq.respectTransparency true in
 /-- The cohomological counit, before any tensor-algebra action is supplied, commutes
-with the prescribed shift isomorphisms.
-Source: Stacks Project, Tag 05SU (derived shift comparisons), Tag 06Y6 (derived
-extension), and Tag 08IB (ordinary comparison). This precise diagram calculation
-is the explicit part of step 3 of the ordinary shift model.
-
-Proof: Restrict e to R and pass through the homotopy quotient and Qh. Naturality
-of counit for this map gives the first comparison square. Its CommShift equation
-gives the square for the shift of K. Apply derived B-homology in degree j and
-compose with the homology shift to degree j-n. The homology factorization
-isomorphisms for Qh and the homotopy quotient intertwine these shifts, by their
-induced ShiftSequence structures. The ordinary tensor isomorphisms intertwine e
-and shift: on b tensor x both sides send it to (1 tensor b) tensor e(x), and the
-shift changes the differential by the same sign on both sides. The specified
-generator formulas determine the ordinary isomorphisms, so this holds for the
-supplied isomorphisms, not just chosen representatives. Finally restriction from
-E to B is exact. Its homology comparison is natural and commutes with shift;
-compose this square with the preceding ones. Their interior edges cancel to give
-the displayed equality. No E-action, transported model, localized comparison,
-flatness or invertibility of counit is used. For n=0 the shift edges are the unit
-comparisons; zero complexes give the zero square; nonflat extensions cause no
-problem because only restriction is required to preserve homology.
-(blueprint: lem-pc-base-derived-tensor-counit-shift-square). -/
+with the prescribed shift isomorphisms. -/
 theorem baseDerivedTensor_counit_shift_square
     (derived : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     [derived.CommShift ℤ]

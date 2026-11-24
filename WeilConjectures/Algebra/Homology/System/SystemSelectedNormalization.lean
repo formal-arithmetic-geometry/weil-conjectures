@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.SmoothPurity.AdjunctionTransitionCoherence
 
 /-! # Normalization under selected left extension
 
-Source: Zheng, Construction 4.1; integral scalar mates, proof step 2
-(blueprint: lem-pur-system-selected-normalization).
+## References
+
+* Zheng, Construction 4.1
 -/
 
 @[expose] public section

@@ -12,6 +12,10 @@ public import WeilConjectures.Blowup.FiniteDegree.ChartIdeal
 
 Numerators of chart-ideal generators generate `I_E^d · J` chart by chart
 (`AlgebraicGeometry.Scheme.IdealSheafData.ideal_pow_mul_le_comap_of_numerators`).
+
+## References
+
+* Stacks Project, Tag 0803
 -/
 
 @[expose] public section
@@ -88,7 +92,7 @@ private lemma span_eq_of_map_iso_span {R S : CommRingCat.{u}} (E : R ≅ S)
     CommRingCat.hom_id, Ideal.map_id] at h1
   exact h1.symm
 
-/-- **The generation step of Stacks Tag 0803**, ring-level form: if every generator
+/-- **The generation step**, ring-level form: if every generator
 `μ` of an ideal spanned by `e '' G` satisfies `μ · f(b)ᵈ = f(m)` for some `m` in an
 ideal `K` of the base ring, then `(g b)ᵈ · span (e '' G)` is contained in the
 extension of `K` along the composite `g` of `f` and `e`. -/
@@ -131,10 +135,9 @@ private lemma span_pow_mul_span_le_map_explicit
   rw [← hxy, heq]
   exact Ideal.mem_map_of_mem g hmK
 
-/-- **The chartwise generation inequality** (Step 4 of the blueprint proof of Stacks
-Tag 0803): if every generator of the chart model of `J` on the `b`-chart has a
-numerator in `L(V)`, then the ideal of `I_Eᵈ · J` on the chart is contained in that of
-the inverse image of `L`. -/
+/-- **The chartwise generation inequality**: if every generator of the chart model of `J` on
+the `b`-chart has a numerator in `L(V)`, then the ideal of `I_Eᵈ · J` on the chart is
+contained in that of the inverse image of `L`. -/
 lemma Scheme.IdealSheafData.ideal_pow_mul_le_comap_of_numerators
     (I : X.IdealSheafData) (J : I.blowup.IdealSheafData) (L : X.IdealSheafData)
     (V : X.affineOpens) {b : Γ(X, V.1)} (hb : b ∈ I.ideal V) (d : ℕ)

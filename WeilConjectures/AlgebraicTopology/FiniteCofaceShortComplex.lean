@@ -36,13 +36,7 @@ theorem finiteCofaceMap_comm
   · rw [HomologicalComplex.shape _ _ _ h, HomologicalComplex.shape _ _ _ h,
       HasZeroMorphisms.comp_zero, HasZeroMorphisms.zero_comp]
 
-/-- A map on the finite cosimplicial truncation determines a map of three-term complexes.
-Source: blueprint étale cohomology continuity, detailed proof paragraph 2.
-Naturality at every coface commutes with the alternating sum defining each differential. For pairs
-of degrees not differing by one the differential is zero. The predecessor and successor of q in
-the natural-number cochain shape lie through q+1, including predecessor zero at q=0. These
-equations verify both short-complex squares for the three displayed components.
-(auxiliary; not a blueprint node) -/
+/-- A map on the finite cosimplicial truncation determines a map of three-term complexes. -/
 noncomputable def finiteCofaceShortComplexMap (q : ℕ)
     (e : SimplexCategory.Truncated.inclusion (q + 1) ⋙ K ⟶
       SimplexCategory.Truncated.inclusion (q + 1) ⋙ L) :

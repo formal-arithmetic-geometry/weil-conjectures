@@ -14,7 +14,12 @@ import WeilConjectures.Algebra.Homology.HomologyEvaluationRoofNaturality
 
 /-! # Compatibility of homology evaluation with a quasi-isomorphism roof
 
-Source: Stacks Project, Tags 0A8X, 0A95, and 08DL. -/
+## References
+
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 0A95](https://stacks.math.columbia.edu/tag/0A95)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -119,37 +124,7 @@ private theorem homologyEvaluation_roof_of_cycle_pairings
 
 /-- Restriction and a quasi-isomorphism roof identify cycle evaluations by a
 commutative square. No finite-freeness, zero-differential, concentration, or
-invertibility hypothesis on the model evaluation is used.
-
-Source: Stacks Project, Tag 0A8X, Hom-complex projections; Tag 0A95,
-quasi-isomorphism invariance into K-injectives; Tag 08DL, open restriction.
-(blueprint: new-v4-homology-evaluation-roof-comparison).
-
-Proof: Write F for the two restrictions and K = F(J). Exactness of restriction
-identifies F(H^n(Hom(T,J))) with H^n(Hom(F(T),K)), and identifies restricted
-homology and internal Hom with the corresponding objects on the over site.
-Construct the comparison from the fixed projections: overHomObjIso and
-internalHom_overEquiv supply natural isomorphisms on each internal-Hom factor.
-Restriction preserves these products sectionwise; the open equivalence preserves
-all limits. The product universal property gives degreewise isomorphisms with
-the specified projection equations. Applying each target projection and the
-Hom differential formula proves compatibility with the differentials. The factor
-comparisons reindex the same local linear maps, so evaluation on local sections
-is preserved. Thus this comparison carries he to evaluation on F(T); a bare
-existential isomorphism of Hom complexes alone would not give that compatibility.
-Apply Hom(-,K) to q and p. K-injectivity and quasi-isomorphism invariance give
-isomorphisms on homology from Hom(F(T),K) and Hom(E,K) to Hom(L,K).
-Their composite supplies a, oriented from the restricted source to the model
-source. Homology(q) and Homology(p) are isomorphisms; applying the internal-Hom
-bifunctor and the restriction comparison supplies b with the same orientation.
-The product-projection naturality equation identifies evaluation after
-precomposition with q or p on cycle representatives. The first identity for c
-identifies the resulting K-cycle, and the second identifies its homology class
-with f applied to the Hom class. Thus both routes in the asserted square agree
-on Hom-cycles and on source cycles. All homology classes lift locally to cycles,
-so separatedness of the target sheaf and of internal Hom gives equality of
-morphisms. This proves the square without assuming that f is invertible.
-No basis, support bound, concentration hypothesis, or nonzero open is used. -/
+invertibility hypothesis on the model evaluation is used. -/
 theorem homologyEvaluation_roof_comparison (X : Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (e : (homComplex (R := X.sheaf) T J).homology n ⟶

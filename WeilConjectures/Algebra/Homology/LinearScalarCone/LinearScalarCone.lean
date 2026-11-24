@@ -9,8 +9,9 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 
 /-! # Localization of the explicit linear scalar cone
 
-Source: Stacks, Tags 014A and 06YS, principal two-term complex.
-(blueprint: def-coef-linear-scalar-cone).
+## References
+
+* Stacks Project, Tags 014A, 06YS, 0941 and 05SU (principal two-term complex)
 -/
 
 @[expose] public noncomputable section
@@ -23,14 +24,12 @@ namespace CochainComplex.LinearScalarCone
 variable {R : Type r} [Ring R] {A : Type u} [Category.{v} A] [Abelian A] [Linear R A]
   [HasDerivedCategory.{w} A] (s : R)
 
-/-- The actual diagonal cone functor, without any choice of resolutions.
-Source: Stacks 014A (blueprint: def-coef-linear-scalar-cone). -/
+/-- The actual diagonal cone functor, without any choice of resolutions. -/
 abbrev cochain : CochainComplex A ℤ ⥤ CochainComplex A ℤ :=
   CochainComplex.smulArrow s ⋙ CochainComplex.ConeCoimage.cone
 
 /-- Cone formation inverts quasi-isomorphisms. The two unchanged vertices of its
-mapping-cone triangle give the assertion by the two-isomorphisms property.
-Source: Stacks 014A (blueprint: def-coef-linear-scalar-cone). -/
+mapping-cone triangle give the assertion by the two-isomorphisms property. -/
 theorem inverts : (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy
     (cochain (A := A) s ⋙ DerivedCategory.Q) := by
   intro P P' f hf
@@ -49,8 +48,7 @@ theorem inverts : (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy
       (HomotopyCategory.mappingCone_triangleh_distinguished (s • 𝟙 P'))) hi hi
   exact (NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A) _).1 hm
 
-/-- The explicit augmentation from a scalar cone in a normalized tower.
-Source: Stacks 0941 (blueprint: def-coef-linear-scalar-cone). -/
+/-- The explicit augmentation from a scalar cone in a normalized tower. -/
 def augmentation {ϖ : R} {T : ℕᵒᵖ ⥤ CochainComplex A ℤ}
     (hT : CochainComplex.IsNormalizedAdicTower ϖ T) (n : ℕ) (m : ℕᵒᵖ) :
     (cochain (ϖ ^ n)).obj (T.obj ((CategoryTheory.Pretriangulated.addOpFunctor n).obj m)) ⟶
@@ -59,21 +57,18 @@ def augmentation {ϖ : R} {T : ℕᵒᵖ ⥤ CochainComplex A ℤ}
       ((CochainComplex.IsNormalizedAdicTower.arrowTower (ϖ := ϖ) (T := T) n).obj m) ≫
     CochainComplex.ConeCoimage.desc.app _ ≫ hT.cokerDesc n m
 
-/-- The universal localization of the explicit cone, on every derived morphism.
-Source: Stacks 05SU (blueprint: def-coef-linear-scalar-cone). -/
+/-- The universal localization of the explicit cone, on every derived morphism. -/
 @[irreducible]
 def derived : DerivedCategory A ⥤ DerivedCategory A :=
   Localization.lift (cochain (A := A) s ⋙ DerivedCategory.Q) (inverts s) DerivedCategory.Q
 
-/-- Its canonical representative comparison, fixed by localization's universal property.
-Source: Stacks 05SU (blueprint: def-coef-linear-scalar-cone). -/
+/-- Its canonical representative comparison, fixed by localization's universal property. -/
 def comparison : DerivedCategory.Q ⋙ derived (A := A) s ≅
     cochain s ⋙ DerivedCategory.Q := by
   unfold derived
   exact Localization.fac (cochain (A := A) s ⋙ DerivedCategory.Q) (inverts s) DerivedCategory.Q
 
-/-- The localized augmented projection at one strict tower term.
-Source: Stacks 0941 (blueprint: def-coef-linear-scalar-cone). -/
+/-- The localized augmented projection at one strict tower term. -/
 def derivedAugmentation {ϖ : R} {T : ℕᵒᵖ ⥤ CochainComplex A ℤ}
     (hT : CochainComplex.IsNormalizedAdicTower ϖ T) (n : ℕ) (m : ℕᵒᵖ) :
     (derived (ϖ ^ n)).obj

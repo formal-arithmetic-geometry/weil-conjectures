@@ -23,14 +23,6 @@ For a K-flat complex `P`, the reduction `Q P ⟶ res Q Φ(P)` is then a universa
 `Q P` to the derived functor `res : D(𝒜') ⥤ D(𝒜)`
 (`CategoryTheory.Functor.ReductionDatum.bijective_comp_map`): it exhibits `Φ(P)` as the
 derived base change of `P`.
-
-The proof is elementary. A morphism `Q P ⟶ res M` is a fraction `inv (Q s) ≫ Q g` with
-`s : X ⟶ P` a quasi-isomorphism, which may be taken from a K-flat complex; then `g` factors
-through the reduction of `X`, and `Φ(s)` is a quasi-isomorphism. A morphism
-`h : Q Φ(P) ⟶ M` killed by the reduction is a fraction `Q w ≫ inv (Q s)`; pulling back the
-reduction of `P` along `s` and resolving gives a K-flat complex `V` with a quasi-isomorphism to
-`P` through which `h` becomes the image of a chain map that is null-homotopic after reduction,
-and homotopies descend along the epimorphism `r`.
 -/
 
 @[expose] public section

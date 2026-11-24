@@ -13,8 +13,9 @@ import Mathlib.RingTheory.IsTensorProduct
 /-!
 # Degreewise ordinary base tensor comparison
 
-Source: Stacks Project, Tags 00CX, 05G3 and 08IB.
-(blueprint: lem-pc-base-tensor-ordinary-degree-iso).
+## References
+
+* Stacks Project, Tags 00CX, 05G3 and 08IB.
 -/
 
 @[expose] public section
@@ -28,21 +29,8 @@ open scoped TensorProduct ChangeOfRings
 
 namespace ModuleCat
 
-/-- Stacks Project, Tags 00CX and 05G3 (tensor universal property and base change),
-and Tag 08IB (affine comparison).
-(blueprint: lem-pc-base-tensor-ordinary-degree-iso).
-
-Proof: define the forward B-linear map on generators by
-b tensor m ↦ (1 tensor b) tensor m. Define the inverse on double pure tensors by
-(a tensor b) tensor m ↦ b tensor (a m). R-balancing follows from the R-algebra
-structures on A and B, and A-balancing follows from associativity of the A-action
-on M. The first composite fixes b tensor m. The second fixes every double pure
-tensor since (1 tensor b) tensor (a m) = (a tensor b) tensor m by A-balancing.
-Tensor induction proves both composite identities. The resulting equivalence is
-B-linear and has the claimed generator formula. No flatness is required.
-Mathlib's Algebra.IsPushout.cancelBaseChange supplies this equivalence; its
-symm_tmul lemma supplies the formula after identifying the scalar actions of
-ModuleCat's ring-hom-based extension and restriction with the algebra actions. -/
+/-- The ordinary base tensor comparison exists degreewise as an isomorphism of `B`-modules,
+given on pure tensors by the displayed formula. -/
 theorem exists_baseTensorOrdinaryDegreeIso
     (R : Type uR) (A : Type uA) (B : Type uB)
     [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]

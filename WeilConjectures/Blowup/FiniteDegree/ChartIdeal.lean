@@ -98,12 +98,9 @@ section MapMembership
 variable {X Y : Scheme.{u}}
 
 /-- **Membership in the pushforward ideal through a covering family of affine probes**:
-let `g : Y ⟶ X` be quasi-compact, `K` an ideal sheaf on `Y`, `V` an affine open of `X`
-and `x` a section over `V`. Suppose given open-immersion probes `cᵢ : Spec Sᵢ ⟶ Y`
-lying over `V` and covering `g⁻¹(V)`, such that the pullback of `x` to each probe lies
-in the ideal of sections of the pullback of `K`. Then `x` lies in the ideal of the
-pushforward `K.map g` over `V`. This makes the blueprint's maximal candidate
-`π₎(I_E^d J)` accessible chart by chart. -/
+if open-immersion probes `cᵢ : Spec Sᵢ ⟶ Y` cover `g⁻¹(V)` and the pullback of `x` to each
+probe lies in the ideal of sections of the pullback of `K`, then `x` lies in the ideal of
+the pushforward `K.map g` over `V`. -/
 lemma Scheme.IdealSheafData.mem_ideal_map_of_probes (K : Y.IdealSheafData)
     (g : Y ⟶ X) [QuasiCompact g] (V : X.affineOpens) (x : Γ(X, V.1))
     {ι : Type u} {S : ι → CommRingCat.{u}} (c : ∀ i, Spec (S i) ⟶ Y)

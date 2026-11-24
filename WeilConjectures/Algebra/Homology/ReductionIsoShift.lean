@@ -182,16 +182,7 @@ private lemma tensor_inv_shift (M : CochainComplex A ℤ) (b : B) (t : ℤ) :
   simp only [IsIso.inv_hom_id_assoc]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- The canonical reduction comparison commutes with signed integer shifts.
-Source: blueprint derived Nakayama resolution, On X, and first reduction, Cones.
-(auxiliary; not a blueprint node).
-
-Proof: the total-tensor comparison on coefficient degrees zero and minus one has
-respectively the unitor and the signed unitor as components. Shifting the first
-input changes the latter sign by (-1)^t, precisely the inverse cone shift.
-Localize this square using the K-flat scalar cone and the shift compatibility
-of the derived tensor counit. Naturality of the tensor shift with the localized
-augmentation transports the square to the coefficient quotient. -/
+/-- The canonical reduction comparison commutes with signed integer shifts. -/
 theorem reductionIso_inv_signed_shift {b : B} {N : A} {p : 𝟙_ A ⟶ N}
     (w : (b • 𝟙 (𝟙_ A)) ≫ p = 0)
     (hS : (ShortComplex.mk _ _ w).ShortExact) (M : CochainComplex A ℤ) (t : ℤ) :

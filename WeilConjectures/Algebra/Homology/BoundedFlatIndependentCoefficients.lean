@@ -17,8 +17,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-! # Bounded flat complexes at independent coefficient universes
 
-Source: Stacks Project, Tag 06YQ.
-(auxiliary; not a blueprint node). -/
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YQ
+-/
 
 @[expose] public section
 universe u v w
@@ -61,21 +63,7 @@ theorem flat_to_cat (M : 𝒜) (h : IsFlatOnSite (J := J) (R := R) M) :
   exact ⟨(exactFunctor _ _).prop_of_iso
     (BraidedCategory.tensorLeftIsoTensorRight M).symm hr, hr⟩
 
-/-- A bounded-above complex with flat terms is K-flat at independent universes.
-Source: Stacks Project, Cohomology on Sites, Tag 06YQ.
-(auxiliary; not a blueprint node).
-
-Proof: the site tensor functor is naturally isomorphic to the monoidal tensor
-functor, by the sheafification counit and its monoidal tensor comparison. Thus
-site-flatness of each term gives categorical flatness. Tensor colimit preservation
-makes tensor additive and gives the graded tensor instances. Filtered colimits of
-abelian groups are exact; forgetting sheaf-module structure preserves and reflects
-exactness, so sequential colimits of module sheaves are exact as well. Apply the
-source-library bounded-above flat criterion, proved from finite flat stupid
-truncations and their filtered colimit. It says tensoring preserves quasi-isomorphisms.
-Apply it to the map from the zero complex to an arbitrary acyclic complex. Its
-source tensor is zero, so the target tensor is acyclic. This is exactly independent-
-coefficient K-flatness. Zero rings and the zero complex require no separate case. -/
+/-- A bounded-above complex with flat terms is K-flat at independent universes. -/
 theorem isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
     (P : CochainComplex 𝒜 ℤ) (n : ℤ) [P.IsStrictlyLE n]
     (hflat : ∀ i, IsFlatOnSite (J := J) (R := R) (P.X i)) :

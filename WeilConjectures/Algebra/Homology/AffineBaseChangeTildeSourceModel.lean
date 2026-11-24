@@ -15,8 +15,9 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeStalkComparison
 
 /-! # Affine base change computed on a module K-flat resolution
 
-Source: Stacks Project, Tag 0DJ8, affine proof and equation-bc.
-(blueprint: lem-pc-affine-base-change-tilde-source-model).
+## References
+
+* Stacks Project, Tag 0DJ8
 -/
 
 @[expose] public section
@@ -31,30 +32,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Compute the source model on a termwise tilde of a K-flat module complex.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, affine proof and equation-bc.
-(blueprint: lem-pc-affine-base-change-tilde-source-model).
-
-Proof: use the functorial R-K-flat resolution of the restricted module complex M.
-The comparison span in exists_affineDerivedBaseChangeComparison computes the
-base-change mate: identify ordinary pullback with extension of scalars using the
-termwise tilde comparison and use the universal derived counits to descend it.
-Use exists_affineDerivedBaseChangeLocalization to give source and target
-cohomology their A tensor_R R' actions. The cartesian square identifies that
-algebra with A'; transport the source action to obtain U, and the comparison to
-obtain a. Exact tilde identifies the restricted U with source cohomology, giving
-eU. For every quasi-coherent derived target, affine vanishing and the unbounded
-cohomological bound N=1 identify H(Rf'_*) with ordinary direct image of H.
-The tilde/Gamma counit and the pushforward/restriction comparison then give d,
-naturally in the target. The mate calculation gives the global square.
-At p, localize the same comparison span; the localization theorem identifies
-U_p with derived tensor cohomology over the three stalk rings, extended to the
-fourth. Termwise tilde stalks identify M with its localized complex. Exact stalks,
-tensorStalkIso, and the universal pullback counit identify the target and map
-with affineBaseChangeIntoPullback. The counit naturality transports through e.
-This proves the localized equation for this module representative. The zero
-complex, zero rings, and every degree are included; no boundedness or flatness
-of any ring homomorphism is used. -/
+/-- Compute the source model on a termwise tilde of a K-flat module complex. -/
 theorem exists_affineBaseChangeTildeSourceModel
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A')

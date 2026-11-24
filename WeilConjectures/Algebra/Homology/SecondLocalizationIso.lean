@@ -11,8 +11,11 @@ public import Mathlib.RingTheory.Localization.Basic
 import WeilConjectures.Algebra.Homology.DerivedTensorFlatSecondLocalization
 import WeilConjectures.Algebra.Homology.SecondLocalizationIsoAux
 /-! # Invertibility of the second localization map
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-(blueprint: lem-pc-second-localization-iso). -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -38,23 +41,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
 include tRB tAD tBD tApD tBpD tBBpD in
-/-- The characterized coefficient map becomes invertible after extension to D.
-Source: Stacks Project, Tag 0DJ8 affine localization identity; Tag 06Y6.
-(blueprint: lem-pc-second-localization-iso).
-
-Proof: compute both universal derived functors on an R-K-flat resolution of Q.
-Extension along the flat localization B to Bp is exact, so its homology is
-extension of B-homology. The ordinary associator identifies the extended
-resolution with extension from R to Bp. Its counit square identifies the derived
-lift in secondLocalizationDerivedMap with this associator, by uniqueness of
-left derived lifts. Thus the cohomology map is the standard flat base change
-isomorphism after extension to Bp. Naturality with multiplication by A on Q and
-the cohomologyIso_smul equations prove A-linearity; Bp-linearity is built in.
-Tensor induction therefore gives linearity over A tensor_R Bp. Tensor
-associativity extends this isomorphism to D and supplies the generator formula.
-Every localization denominator is a unit in D. No flatness of D is required.
-If T contains zero, Bp and D are zero and both extended modules are zero.
-Identity localization gives the unique counit-compatible model transport. -/
+/-- The characterized coefficient map becomes invertible after extension to D. -/
 theorem exists_secondLocalization_iso
     (T : Submonoid B) [IsLocalization T Bp] (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

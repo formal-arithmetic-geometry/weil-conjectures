@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Ring.Limits
 /-!
 # Local representatives of constant field sections
 
-Source: Stacks Project, Sites, Tag 0H7J; Modules on Sites, Tag 03CY.
+## References
+
+* Stacks Project, Sites, Tags 0H7J and 00W1; Modules on Sites, Tag 03CY
 -/
 
 @[expose] public section
@@ -38,27 +40,7 @@ private instance forgetCommRing_reflectsLimits :
           K (forget CommRingCat.{r})
         exact ⟨CategoryTheory.Limits.isLimitOfReflects (forget CommRingCat.{r}) h⟩ } }
 
-/-- Sections of the associated constant field sheaf locally come from field elements.
-Source: Stacks Project, Sites, Tag 0H7J and the associated-sheaf construction, Tag 00W1;
-Modules on Sites, Tag 03CY
-(auxiliary; not a blueprint node).
-
-Proof: in the plus construction a section is represented by a matching family on a
-covering sieve. Restricting to any arrow of that sieve gives a section coming from
-one stage earlier. A section of the double plus construction therefore locally comes
-from the original presheaf, by transitivity of covering sieves. The double plus
-construction is the associated sheaf; the adjunction uniquely identifies its unit
-with the unit of any chosen sheafification. For an independently sized site, one can
-avoid enlarging the field carrier by taking, inside the chosen associated ring sheaf,
-the subpresheaf of sections locally in the image of the unit. It is a subring on each
-object: intersect the two covering sieves to check sums and products; negation and
-the constants zero and one are immediate. Covering transitivity shows it is a sheaf.
-The unit factors through this sheaf of subrings. The universal property of the chosen
-sheafification gives a retraction of its inclusion, whose composite with the inclusion
-is the identity because it agrees with the identity on the unit. Hence every section
-of the chosen associated sheaf is locally in the image. This proves local surjectivity
-without identifying all sections of the constant sheaf with field elements globally.
-The empty covering sieve causes no exception to this argument. -/
+/-- Sections of the associated constant field sheaf locally come from field elements. -/
 theorem constantFieldUnit_locallySurjective
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [EssentiallySmall.{m} C] [HasWeakSheafify J CommRingCat.{r}]

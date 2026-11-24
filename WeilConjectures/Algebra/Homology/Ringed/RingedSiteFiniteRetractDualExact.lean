@@ -20,13 +20,14 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-! # Internal dual and exact Hom of a finite-free retract
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, final finite-free/direct-summand
-calculation, expanded in the node into dual-basis and kernel/epimorphism calculations
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact).
-
 The coefficient universe contains both site universes, without equating them. All maps
 below use the existing internal Hom. The bidual isomorphism is specified by evaluation
 on every object of every slice, and its inverse by the finite dual-basis formula.
+
+## References
+
+* Stacks Project, Tag 08JJ (final finite-free/direct-summand calculation)
+* Stacks Project, Tags 03EM and 03DA (internal Hom and the abelian category of modules)
 -/
 
 @[expose] public noncomputable section
@@ -263,18 +264,14 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v w}]
   {R : Sheaf J CommRingCat.{max c v w}}
 
-/-- The standard coordinate projection from the existing finite free sheaf.
-Source: Stacks 08JJ, coordinate calculation
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact). -/
+/-- The standard coordinate projection from the existing finite free sheaf. -/
 def finiteRetractCoordinate (n : ℕ) (j : ULift.{max c v w} (Fin n)) :
     free (R := (sheafCompose J (forget₂ CommRingCat.{max c v w} RingCat.{max c v w})).obj R)
       (ULift.{max c v w} (Fin n)) ⟶
       unit ((sheafCompose J (forget₂ CommRingCat.{max c v w} RingCat.{max c v w})).obj R) :=
   Sigma.desc (fun k : ULift.{max c v w} (Fin n) ↦ if k = j then 𝟙 _ else 0)
 
-/-- The section `t_j = p(u_j)`, evaluated on any object of the site.
-Source: Stacks 08JJ, dual-basis calculation
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact). -/
+/-- The section `t_j = p(u_j)`, evaluated on any object of the site. -/
 def finiteRetractVector {n : ℕ}
     {T : ringedSiteModules.{max c v w} ((sheafCompose J (forget₂ CommRingCat.{max c v w}
       RingCat.{max c v w})).obj R)}
@@ -283,9 +280,7 @@ def finiteRetractVector {n : ℕ}
     (j : ULift.{max c v w} (Fin n)) (U : Cᵒᵖ) : T.val.obj U :=
   (ιFree j ≫ p).val.app U (1 : R.obj.obj U)
 
-/-- The section `λ_j = u_j^* i` of the existing internal dual, as a map on the slice.
-Source: Stacks 08JJ, dual-basis calculation
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact). -/
+/-- The section `λ_j = u_j^* i` of the existing internal dual, as a map on the slice. -/
 def finiteRetractCovector {n : ℕ}
     {T : ringedSiteModules.{max c v w} ((sheafCompose J (forget₂ CommRingCat.{max c v w}
       RingCat.{max c v w})).obj R)}
@@ -726,37 +721,7 @@ attribute [local irreducible] finiteRetractCoordinate finiteRetractVector finite
 attribute [-instance] proofAbelian proofHomContraAdditive
   proofHasFiniteBiproducts proofSectionModule proofHomPreservesZero
 
-/-- Internal duality, dual bases, biduality, and exact internal Hom for a finite-free retract.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, final two paragraphs;
-sites-modules.tex, Tags 03EM and 03DA supply internal Hom and the abelian category
-(blueprint: lem-sfb-ringed-site-finite-retract-dual-exact).
-
-Proof: (1) Coordinate inclusions and projections identify the finite product of copies
-of the coefficient sheaf with its coproduct. On each slice, evaluation on the standard
-vectors identifies Hom from this free sheaf to F with the finite power of F. Its inverse
-sends a tuple to the linear map given by its finite linear combination. These formulas
-commute with restriction and postcomposition. (2) Precompose with p and i; their composite
-is the identity because i followed by p is the identity. Specializing the coordinate
-identification to F = R exhibits the dual as a finite-free retract. (3) Expand i(t) in
-coordinates and apply p to get the dual-basis identity. Apply an arbitrary local linear
-functional to this identity to expand that functional in the covectors λ_j. (4) Evaluation
-is a sheaf map. The displayed sum defines its inverse: one composite is the dual-basis
-identity, and the other follows from the functional expansion and commutativity of R.
-(5) Associativity of composition makes the precomposition splittings natural in F.
-(6) Finite powers are the constant-diagram colimit over a finite discrete category.
-The finite biproduct comparison identifies this colimit functor with the limit functor,
-so finite powers preserve finite limits and colimits and hence short exact sequences.
-Transport this through the natural coordinate isomorphisms; epimorphisms here are
-categorical, with no assertion of surjectivity on sections. (7) The natural splitting
-displays the Hom(T,-) short complex as a retract of the finite-power short complex.
-Its left map is monic and its right map epic by cancellation against the split maps.
-(8) Applying functorial homology makes its homology a retract of the zero homology of
-the finite-power complex. It is therefore zero, proving exactness of the retract.
-(9) Every operation is
-restriction, evaluation, composition, a finite sum or scalar multiplication. The formulas
-therefore commute with passing to every localized site and with relocalization. For n=0
-the splitting forces T=0, and the same proof uses empty sums. -/
+/-- Internal duality, dual bases, biduality, and exact internal Hom for a finite-free retract. -/
 theorem ringedSite_finite_retract_dual_exact
     (n : ℕ)
     (T : ringedSiteModules.{max c v w} ((sheafCompose J (forget₂ CommRingCat.{max c v w}

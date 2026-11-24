@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModelAux
 /-!
 # Derived internal Hom from a bounded-above finite free model
 
-Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Cohomology on Sites,
-Section 08J7 (blueprint: lem-sc-derived-hom-finite-free-model).
+## References
+
+* Stacks Project, Tag 0GM8 (case (2)) and Section 08J7
 -/
 
 @[expose] public section
@@ -27,21 +28,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 namespace AlgebraicGeometry
 
 /-- A bounded-above finite free model computes derived internal Hom into a bounded-below
-complex of module sheaves on a ringed space.
-Source: Stacks Project, Cohomology, Tag 0GM8, case (2), and Cohomology on Sites,
-Section 08J7 (blueprint: lem-sc-derived-hom-finite-free-model).
-
-Proof:
-1. By `lem-sc-bounded-below-injective-resolution`, choose a quasi-isomorphism `G ⟶ I`
-   with `I` bounded below, termwise injective and K-injective.
-2. Its cone is bounded below and acyclic. Apply
-   `lem-sc-bounded-above-finite-free-hom-acyclic` to that cone: the induced morphism
-   `homComplex E G ⟶ homComplex E I` is a quasi-isomorphism.
-3. By `def-pur-derived-internal-hom`, `homComplex E I` computes derived internal Hom
-   from `Q(E)` to `Q(G)`. The localization comparison into `I` is bijective by
-   `lem-sc-kinjective-quasi-iso-comparison`. Localize the quasi-isomorphism in step 2
-   and use `f : E ⟶ K` to identify `Q(E)` with `Q(K)`. Compose the resulting
-   isomorphisms to obtain the stated representation. -/
+complex of module sheaves on a ringed space. -/
 theorem derivedInternalHom_of_boundedAbove_finiteFree
     (U : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U))]

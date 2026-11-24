@@ -16,11 +16,6 @@ public import Mathlib.Algebra.Homology.QuasiIso
 /-!
 # K-flat complexes of modules on a ringed site
 
-Source: the blueprint of the Weil conjectures, chapter `chap-The-Picard-scheme-of-a-curve`, unit
-`lemma-triviality-fibres--2` (blueprint: def-pc-kflat-complex); Stacks Project, Cohomology on Sites,
-Definition `sites-cohomology-definition-K-flat` (Tag 06YN), and the term "K-flat resolution" as
-used in Lemma `sites-cohomology-lemma-K-flat-resolution` (Tag 06YS).
-
 Let `R` be a sheaf of commutative rings on a site `(C, J)`. Sheaves of modules over `R` carry the
 monoidal structure `SheafOfModules.monoidalCategory R` (the tensor product is the sheafification
 of the tensor product of presheaves of modules); it is not an instance and is used here with
@@ -39,6 +34,11 @@ of the tensor product of presheaves of modules); it is not an instance and is us
 - `SheafOfModules.preservesZeroMorphisms_curriedTensor`,
   `SheafOfModules.preservesZeroMorphisms_curriedTensor_obj`: the tensor product of sheaves of
   modules preserves zero morphisms in each variable (needed to form the total tensor complex).
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YN and 06YS
+* Stacks Project, Modules on Sites, Section 03EK
 -/
 
 @[expose] public section
@@ -246,14 +246,7 @@ private lemma W_whiskerLeft_kf (F : PresheafOfModules.{max u v} (𝓡).obj)
       PresheafOfModules.isSheaf_homObj N.isSheaf⟩
 
 /-- The tensor localization is monoidal also when the site's morphisms live in a
-separate universe. Source: Stacks Project, Modules on Sites, Section 03EK;
-Cohomology on Sites, Definition 06YN (blueprint: def-pc-kflat-complex).
-
-Proof: use the sectionwise tensor/internal-Hom adjunction for presheaves of modules.
-For a sheaf N the internal Hom into N is a sheaf. Thus tensoring a locally bijective
-map induces bijections on morphisms into all sheaves, so its sheafification is an
-isomorphism. Symmetry gives the same assertion in the other variable. This argument
-is the proof of SheafOfModules.isMonoidal_W and does not require equal hom universes. -/
+separate universe. -/
 @[instance]
 theorem isMonoidal_W_separateHomUniverse :
     (J.W.inverseImage (PresheafOfModules.toPresheaf.{max u v}
@@ -267,14 +260,9 @@ theorem isMonoidal_W_separateHomUniverse :
       exact ((𝓦).arrow_mk_iso_iff
         (Arrow.isoMk (β_ P₁ G) (β_ P₂ G))).2 (W_whiskerLeft_kf R G hf)
 
-/-- (blueprint: def-pc-kflat-complex) The tensor product of sheaves of modules over a sheaf of
+/-- The tensor product of sheaves of modules over a sheaf of
 commutative rings `R` (`SheafOfModules.monoidalCategory R`) preserves zero morphisms in the first
-variable: `0 ▷ M = 0`. Needed to form the total tensor complex of Stacks, Tag 06YN.
-
-Proof: `M ↦ - ⊗ M` is, up to the counit isomorphism of sheafification, sheafification of the
-tensor product of presheaves of modules, which is computed sectionwise in `ModuleCat`, where it
-is additive (`MonoidalPreadditive (ModuleCat _)`); sheafification is a left adjoint, hence
-preserves zero morphisms. -/
+variable: `0 ▷ M = 0`. Needed to form the total tensor complex. -/
 @[instance]
 theorem preservesZeroMorphisms_curriedTensor :
     letI := monoidalCategory R
@@ -311,12 +299,9 @@ theorem preservesZeroMorphisms_curriedTensor :
       hz.eq_of_src ((0 : (0 : SheafOfModules.{max u v} (𝓡)) ⟶ Y) ▷ M) 0,
       comp_zero]
 
-/-- (blueprint: def-pc-kflat-complex) The tensor product of sheaves of modules over a sheaf of
+/-- The tensor product of sheaves of modules over a sheaf of
 commutative rings `R` (`SheafOfModules.monoidalCategory R`) preserves zero morphisms in the
-second variable: `M ◁ 0 = 0`. Needed to form the total tensor complex of Stacks, Tag 06YN.
-
-Proof: as for `SheafOfModules.preservesZeroMorphisms_curriedTensor`, or from it by the symmetry
-`SheafOfModules.symmetricCategory R`. -/
+second variable: `M ◁ 0 = 0`. Needed to form the total tensor complex. -/
 @[instance]
 theorem preservesZeroMorphisms_curriedTensor_obj
     (M : SheafOfModules.{max u v} ((sheafCompose J
@@ -346,14 +331,10 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 -- The `max u v` module universe makes the `HasMapBifunctor` instance term exceed the default
 -- `synthInstance.maxSize` of 128.
 set_option synthInstance.maxSize 256 in
-/-- (blueprint: def-pc-kflat-complex) Let `R` be a sheaf of commutative rings on a site `(C, J)`.
-A cochain complex `K` of sheaves of `R`-modules is *K-flat* if for every acyclic complex `F` of
-`R`-modules (all cohomology sheaves vanish, `F.Acyclic`) the total tensor complex
-`Tot(F ⊗_R K) = mapBifunctor F K (curriedTensor _)` is acyclic (Stacks, Tag 06YN). The tensor
-product is `SheafOfModules.monoidalCategory R`. The general notion `CochainComplex.KFlat`
-(`CochainComplex.IsKFlat`) asks instead that tensoring with `K` on both sides preserve
-quasi-isomorphisms; for a site whose morphisms live in the universe of the rings the two agree
-(`CochainComplex.isKFlatTensor_iff_kFlat`, `CochainComplex.isKFlatTensor_iff_isKFlat`). -/
+/-- A cochain complex `K` of sheaves of `R`-modules is *K-flat* if for every acyclic complex `F` of
+`R`-modules the total tensor complex `Tot(F ⊗_R K) = mapBifunctor F K (curriedTensor _)` is
+acyclic. For a site whose morphisms live in the universe of the rings this agrees with
+`CochainComplex.KFlat` (`CochainComplex.isKFlatTensor_iff_kFlat`). -/
 def IsKFlatTensor
     (K : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J
@@ -365,10 +346,9 @@ def IsKFlatTensor
           (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) ℤ,
     F.Acyclic → (mapBifunctor F K (curriedTensor _)).Acyclic
 
-/-- (blueprint: def-pc-kflat-complex) Let `R` be a sheaf of commutative rings on a site `(C, J)`.
-A *K-flat resolution* of a cochain complex `G` of sheaves of `R`-modules is a quasi-isomorphism
-`f : K ⟶ G` of complexes of `R`-modules with `K` K-flat (`CochainComplex.IsKFlatTensor`); Stacks,
-Tag 06YN, the term as used in Tag 06YS. -/
+/-- A *K-flat resolution* of a cochain complex `G` of sheaves of `R`-modules is a
+quasi-isomorphism `f : K ⟶ G` of complexes of `R`-modules with `K` K-flat
+(`CochainComplex.IsKFlatTensor`). -/
 def IsKFlatTensorResolution
     {K G : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J

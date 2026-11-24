@@ -10,9 +10,12 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Normalized cone boundary and quotient-linear coinduction trace
 
-Source: Stacks Tags 06YP, 06YY and 07A6; the connecting morphism of the principal-resolution
-triangle and adjoint transposition.
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+## References
+
+* Stacks Project, Tag 06YP
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,10 +32,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {t : (unit (derivedChangeRingIndependentCoefficients J R)).sections}
   {d : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ}
 
-/-- The strict cone projection, natural for every chain map.
-Source: Stacks Tags 06YP, 06YY and 07A6; the connecting morphism of the principal-resolution
-triangle and adjoint transposition.
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+/-- The strict cone projection, natural for every chain map. -/
 def chainBoundary : cone R t ⟶ shiftFunctor (CochainComplex (Modules R) ℤ) (1 : ℤ) where
   app P := (CochainComplex.mappingCone.triangle ((complexScalar R t).app P)).mor₃
   naturality {P Q} f :=
@@ -41,9 +41,7 @@ def chainBoundary : cone R t ⟶ shiftFunctor (CochainComplex (Modules R) ℤ) (
 
 /-- Descend the strict mapping-cone boundary through localization, then use the
 normalized augmentation to identify its domain with extension followed by restriction.
-Source: Stacks Tags 06YP, 06YY and 07A6; the connecting morphism of the principal-resolution
-triangle and adjoint transposition.
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+-/
 def Augmentation.boundary (b : Augmentation φ t d) :
     d.T ⋙ b.V ⟶ shiftFunctor (DerivedCategory (Modules R)) (1 : ℤ) := by
   let Q := DerivedCategory.Q (C := Modules R)
@@ -54,20 +52,14 @@ def Augmentation.boundary (b : Augmentation φ t d) :
       (Q.commShiftIso (1 : ℤ)).hom
   exact b.A.inv ≫ Localization.liftNatTrans Q W (Q ⋙ b.D) (Q ⋙ H) b.D H β
 
-/-- Shift the source of the boundary back by one, giving the trace before transposition.
-Source: Stacks Tags 06YP, 06YY and 07A6; the connecting morphism of the principal-resolution
-triangle and adjoint transposition.
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+/-- Shift the source of the boundary back by one, giving the trace before transposition. -/
 def Augmentation.traceCounit (b : Augmentation φ t d) :
     (shiftFunctor (DerivedCategory (Modules R)) (-1 : ℤ) ⋙ d.T) ⋙ b.V ⟶ 𝟭 _ :=
   (Functor.associator _ _ _).hom ≫
     Functor.whiskerLeft (shiftFunctor _ (-1 : ℤ)) b.boundary ≫
       (shiftFunctorCompIsoId (DerivedCategory (Modules R)) (-1 : ℤ) 1 (by omega)).hom
 
-/-- Transposition makes the cone trace linear over the quotient coefficient sheaf.
-Source: Stacks Tags 06YP, 06YY and 07A6; the connecting morphism of the principal-resolution
-triangle and adjoint transposition.
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+/-- Transposition makes the cone trace linear over the quotient coefficient sheaf. -/
 def Augmentation.coinductionTrace (b : Augmentation φ t d)
     {G : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S)} (a : b.V ⊣ G) :
     shiftFunctor (DerivedCategory (Modules R)) (-1 : ℤ) ⋙ d.T ⟶ G where
