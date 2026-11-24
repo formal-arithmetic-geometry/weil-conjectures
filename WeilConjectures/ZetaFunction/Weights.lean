@@ -122,12 +122,7 @@ theorem IsMixedOfWeightsAtMost.hasWeightsAtMostOver_globalSections {ι : PadicAl
     G.globalSections.HasWeightsAtMostOver k₀ ι w := by
   intro β hβ
   obtain ⟨x, hx⟩ := exists_hasEigenvalue_stalk_of_hasEigenvalue_globalSections G hβ
-  have h := hG.hasWeightsAtMost x _ hx
-  have hm := (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).degreeOver_ne_zero x.2
-  have hq : (0 : ℝ) ≤ Nat.card k₀ := Nat.cast_nonneg _
-  rw [map_pow, norm_pow, Scheme.Hom.residueCard, Nat.cast_pow, ← Real.rpow_natCast_mul hq,
-    mul_comm, Real.rpow_mul_natCast hq] at h
-  exact (pow_le_pow_iff_left₀ (norm_nonneg _) (Real.rpow_nonneg hq _) hm).1 h
+  exact norm_le_rpow_of_norm_pow_degreeOver_le (hG.hasWeightsAtMost x _ hx)
 
 variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

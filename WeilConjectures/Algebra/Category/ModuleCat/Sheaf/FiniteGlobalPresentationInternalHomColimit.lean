@@ -15,8 +15,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 /-!
 # Internal Hom from a module with a finite global presentation
 
-Source: Stacks Project, Modules on Sites, Tag 0GMZ, the finite global presentation case
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMZ, the finite global presentation case
 -/
 
 @[expose] public section
@@ -376,25 +377,7 @@ private theorem preserves_colimit_of_limit
 
 namespace SheafOfModules
 
-/-- Internal Hom from a module with a finite global presentation preserves filtered colimits.
-
-Source: Stacks Project, Modules on Sites, Tag 0GMZ, proof after the local reduction.
-(auxiliary; not a blueprint node)
-
-Proof: Let `G` and `K` be the finite sets of generators and relations in `p`.
-The presentation is the cokernel of `free K → free G`. Restriction to any slice site
-preserves this cokernel: its underlying abelian restriction is a left adjoint because
-`Over.forget` is cocontinuous, and the module forgetful functor preserves and reflects
-colimits. Applying Hom on each slice therefore identifies internal Hom from `P` with
-the kernel of internal Hom from `free G` to internal Hom from `free K`, naturally in
-the target. Internal Hom from `free G` is the finite product of copies of the target:
-a local linear map from a rank-one free module is determined by the image of one.
-Filtered colimits of abelian sheaves are exact and commute with finite products.
-The same holds for module sheaves, since their forgetful functor preserves colimits,
-preserves finite limits and reflects isomorphisms. Consequently the comparison on
-these kernels is an isomorphism, with the given coprojections. This proves preservation
-of the colimit. Empty sets of generators or relations are included by empty products.
--/
+/-- Internal Hom from a module with a finite global presentation preserves filtered colimits. -/
 theorem internalHom_preserves_filteredColimit_of_finitePresentation
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]

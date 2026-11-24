@@ -19,8 +19,11 @@ namespace CategoryTheory
 universe u v w
 
 /-! # Local sections after sheafification
-Source: literature/stacks-project/sites.tex, Sites, Theorem 00WB and Lemma 00WK
-(blueprint: lem-weil-pbc-site-sheafification-sections-local)
+
+## References
+
+* [Stacks, Tag 00WB]
+* [Stacks, Tag 00WK]
 -/
 
 -- The unit is locally surjective even without a relation between u and w:
@@ -52,7 +55,7 @@ private theorem unit_locally_surjective
     simpa [G] using this
   exact e ▸ (l.app U s).property
 
--- Source: Stacks Project, Sites, Lemma 00WK, local representability.
+-- Local representability (Stacks, Tag 00WK).
 -- Extract a precoverage cover inside the unit's covering image sieve,
 -- then choose a preimage on each covering arrow.
 private theorem local_representatives
@@ -75,7 +78,7 @@ private theorem local_representatives
   exact ⟨S, fun V f hf ↦ (hle V f hf).choose, hS,
     fun V f hf ↦ (hle V f hf).choose_spec.symm⟩
 
--- Source: Stacks Project, Sites, Lemma 00WK, converse. Local agreement
+-- The converse (Stacks, Tag 00WK). Local agreement
 -- maps to local agreement in G; separatedness gives compatibility, and
 -- the sheaf condition glues the family uniquely.
 private theorem local_descent
@@ -108,14 +111,6 @@ private theorem local_descent
   exact hG.isSheafFor_of_mem_precoverage hS y hy
 
 /-- Local representability and descent for sheafification on a site.
-Source: Sites, Theorem Tag 00WB and Lemma Tag 00WK
-(blueprint: lem-weil-pbc-site-sheafification-sections-local).
-The unit is locally surjective by the image-subsheaf argument above. Extract a
-precoverage cover and representatives from each covering image sieve. Local
-injectivity of the unit gives local equality of representatives on every overlap.
-Conversely, local agreement gives compatibility in the sheaf by separatedness;
-the sheaf condition then glues uniquely. Finally, local injectivity and the
-precoverage criterion give local equality of any sections with equal images.
 The value universe includes both site universes, as required for the plus construction.
 -/
 theorem sheafification_sections_local

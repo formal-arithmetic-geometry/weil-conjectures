@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.DimensionLocallyAlgebraic
 
 /-! # Local dimension of an equidimensional open in a locally algebraic scheme
 
-Source: Stacks Project, Tag 0A21 (3), (5).
-(blueprint: lem-sbc-equidimensional-open-local-dimension)
+## References
+
+* Stacks Project, Tag 0A21
 -/
 
 @[expose] public section
@@ -23,24 +24,8 @@ universe u
 open CategoryTheory Topology
 namespace AlgebraicGeometry
 
-/-- Pure dimension of an open in a locally algebraic scheme gives its local dimension.
-
-Source: Stacks Project, Tag 0A21 (3), (5).
-Proof: In the sober open subspace O, dimension is the supremum of the dimensions
-of closures of points. Each such closure embeds in an irreducible component,
-so hdim bounds dim O, and therefore every open neighbourhood, by n.
-For the reverse bound fix a component C through x and construct its closed
-subscheme using the vanishing ideal on O. Its underlying space is homeomorphic
-to C, it is irreducible, and its map to Spec k is locally of finite type.
-For each open neighbourhood U of x in O, the inverse image of U in this closed
-subscheme is nonempty. The existing dimension_locally_algebraic theorem
-(Tag 0A21 (3)) gives its dimension as dim C = n. Its embedding into U gives
-n <= dim U. Thus all neighbourhoods have dimension n; take their infimum and
-transport local dimension from O to Y by IsOpen.topologicalKrullDimAt_eq.
-Empty O has no points, so the statement is vacuous. The vanishing-ideal
-subscheme is an actual construction; no object is chosen from an unproved
-existence statement.
-(blueprint: lem-sbc-equidimensional-open-local-dimension) -/
+/-- Pure dimension of an open in a locally algebraic scheme gives its local dimension
+(Stacks, Tag 0A21). -/
 theorem topologicalKrullDimAt_eq_of_equidimensional_open
     {k : Type u} [Field k] {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType g] (O : Y.Opens) (n : ℕ)

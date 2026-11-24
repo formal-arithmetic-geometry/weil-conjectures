@@ -26,7 +26,14 @@ import Mathlib.Algebra.Category.Grp.Colimits
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 
-/-! # Compatible finite coordinates for ordinary tensor pullback -/
+/-! # Compatible finite coordinates for ordinary tensor pullback
+
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 03EL
+* W. Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,24 +48,7 @@ namespace AlgebraicGeometry.ProEtale.SpTowerClasses
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The finite ordinary tensor comparisons, before assembly on the sequence site.
-
-Source: Stacks 03EL, Zheng Construction 4.1, and blueprint
-`sk-lem-sp-tower-bound-operations.proof.md`, clause (2).
-(blueprint: lem-sfb-tower-class-tensor-level-coordinates).
-
-Proof: forget the derived fields of g.generic and apply the existing ordinary tensor
-existence theorem. Its system comparisons are natural in both factors. Conjugate
-by the natural isomorphisms between the explicit site tensor and the monoidal
-sheaf tensor, and transport along the specified coefficient, transition and
-ordinary pull-functor equalities. Evaluate this constructed natural isomorphism
-to obtain delta. Naturality of the actual system transition with respect to its
-components gives horizontal compatibility; evaluating its naturality gives the
-second clause. The finite adjunction section formula is
-TensorCoordinates.comparison_normalization for this fixed construction. Its
-argument uses the ordinary tensor evaluation square, the generalized pure-tensor
-formula, the underlying finite unit normalization and ordinary unit evaluation.
-The transition and naturality clauses use no derived faithfulness assumption. -/
+/-- The finite ordinary tensor comparisons, before assembly on the sequence site. -/
 theorem exists_tensorLevelCoordinates {b : SpTowerShriek.Base l E}
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : SpTowerShriek.Geometry l E b f)
     (hpush : ∀ (n : ℕ)

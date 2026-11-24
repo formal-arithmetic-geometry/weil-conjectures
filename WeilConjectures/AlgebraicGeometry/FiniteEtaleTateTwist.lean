@@ -13,13 +13,14 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # Nonnegative finite torsion Tate twists on the small étale site
 
-Source: Stacks Project, Étale Cohomology, Section 03PK and Groupoids, Example 040M
-(auxiliary; not a blueprint node).
-
-Module-valued sheaves are modules over the constant ring sheaf, via the existing
-`etaleConstantModuleFunctor` and its inverse. The tensor below is the canonical
+Module-valued sheaves are modules over the constant ring sheaf, via
+`etaleConstantModuleFunctor` and its inverse. The tensor product used below is the
 sheafification of the section tensor product in this encoding. No derived or pro-étale
 Tate object is used.
+
+## References
+
+* Stacks Project, Étale Cohomology, Section 03PK, and Groupoids, Example 040M.
 -/
 
 @[expose] public noncomputable section
@@ -32,11 +33,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Sections of the existing roots-of-unity sheaf are killed by `N`.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node).
-Proof: the kernel inclusion into the multiplicative-group sheaf is injective on sections.
-Its composite with multiplication by `N` is zero by the kernel condition. Naturality of
-scalar multiplication therefore makes `N` times every kernel section zero. -/
+/-- Sections of the roots-of-unity sheaf are killed by `N`. (Stacks, Section 03PK.) -/
 theorem finiteEtaleMu_annihilated (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ)
     (x : (T.rootsOfUnitySheaf N).obj.obj U) : N • x = 0 := by
   have h : N • 𝟙 (T.rootsOfUnitySheaf N) = 0 := by
@@ -52,25 +49,22 @@ theorem finiteEtaleMu_annihilated (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ)
   rw [e, NatTrans.app_nsmul, NatTrans.id_app] at hx
   exact hx
 
-/-- The existing roots-of-unity sections with their unique `ZMod N`-module action.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+/-- The roots-of-unity sections with their unique `ZMod N`-module action.
+(Stacks, Section 03PK.) -/
 def finiteEtaleMuModuleObj (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ) :
     ModuleCat.{u + 1} (ZMod N) :=
   letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N U)
   ModuleCat.of (ZMod N) ((T.rootsOfUnitySheaf N).obj.obj U)
 
 /-- Restriction of roots of unity, with the same additive map made `ZMod N`-linear.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+(Stacks, Section 03PK.) -/
 def finiteEtaleMuModuleMap (T : Scheme.{u}) (N : ℕ) {U V : T.Etaleᵒᵖ} (f : U ⟶ V) :
     finiteEtaleMuModuleObj T N U ⟶ finiteEtaleMuModuleObj T N V :=
   letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N U)
   letI := AddCommGroup.zmodModule (finiteEtaleMu_annihilated T N V)
   ModuleCat.ofHom (((T.rootsOfUnitySheaf N).obj.map f).hom.toZModLinearMap N)
 
-/-- Identity law for the module enhancement of roots of unity.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node).
-Proof: forgetting the linear structure gives exactly the identity restriction of the
-existing roots-of-unity sheaf; linear maps are equal when their functions are equal. -/
+/-- Identity law for the module enhancement of roots of unity. -/
 theorem finiteEtaleMuModuleMap_id (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ) :
     finiteEtaleMuModuleMap T N (𝟙 U) = 𝟙 (finiteEtaleMuModuleObj T N U) := by
   ext x
@@ -79,11 +73,7 @@ theorem finiteEtaleMuModuleMap_id (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ)
   rw [(T.rootsOfUnitySheaf N).obj.map_id]
   rfl
 
-/-- Composition law for the module enhancement of roots of unity.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node).
-Proof: both underlying maps are restrictions in the existing roots-of-unity sheaf.
-Its functor composition law identifies them, and equality of underlying functions gives
-equality of the linear maps. -/
+/-- Composition law for the module enhancement of roots of unity. -/
 theorem finiteEtaleMuModuleMap_comp (T : Scheme.{u}) (N : ℕ)
     {U V W : T.Etaleᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
     finiteEtaleMuModuleMap T N (f ≫ g) =
@@ -95,8 +85,8 @@ theorem finiteEtaleMuModuleMap_comp (T : Scheme.{u}) (N : ℕ)
   rw [(T.rootsOfUnitySheaf N).obj.map_comp]
   rfl
 
-/-- The existing roots-of-unity presheaf with its exponent action of `ZMod N`.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+/-- The roots-of-unity presheaf with its exponent action of `ZMod N`.
+(Stacks, Section 03PK.) -/
 def finiteEtaleMuModulePresheaf (T : Scheme.{u}) (N : ℕ) :
     T.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} (ZMod N) where
   obj := finiteEtaleMuModuleObj T N
@@ -105,14 +95,14 @@ def finiteEtaleMuModulePresheaf (T : Scheme.{u}) (N : ℕ) :
   map_comp := finiteEtaleMuModuleMap_comp T N
 
 /-- The canonical scalar map exists exactly when the coefficient ring is killed by `N`.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+(Stacks, Section 03PK.) -/
 def finiteEtaleTwistScalar (N : ℕ) (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     ZMod N →+* A :=
   ZMod.castHom ((CharP.cast_eq_zero_iff A (ringChar A) N).mp hA) A
 
 /-- The first finite torsion twist: sheafify the sectionwise extension of scalars
 `A ⊗[ZMod N] μ_N`, canonically the same as `μ_N ⊗[ZMod N] A` by symmetry.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+(Stacks, Section 03PK.) -/
 def finiteEtaleTateLine (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
@@ -121,8 +111,7 @@ def finiteEtaleTateLine (T : Scheme.{u}) (N : ℕ)
 
 /-- The nonnegative finite torsion twists: degree zero is the constant coefficient sheaf,
 degree one is extension of scalars of roots of unity, and subsequent degrees are tensor
-powers using the canonical sheaf tensor product.
-Source: Stacks, Section 03PK (auxiliary; not a blueprint node). -/
+powers using the canonical sheaf tensor product. (Stacks, Section 03PK.) -/
 def finiteEtaleTateTwist (T : Scheme.{u}) (N : ℕ)
     (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :
     ℕ → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)

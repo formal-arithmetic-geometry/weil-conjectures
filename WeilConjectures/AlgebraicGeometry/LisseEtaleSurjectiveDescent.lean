@@ -15,10 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 
 /-!
 # Descent of lissity along a surjective etale map
-
-Source: smooth purity blueprint, final paragraph of
-`lem-weil-pbc-finite-pushforward-generic-constructible`.
-(blueprint: lem-weil-pbc-lisse-etale-surjective-descent).
 -/
 
 @[expose] public section
@@ -57,26 +53,7 @@ private theorem isConstant_over_iff_setRestriction {X : Scheme.{u}} (U : X.Etale
         (F.over U)).IsConstant U.left.smallEtaleTopology := h
     exact Sheaf.isConstant_congr _ (overSetIsoRestriction U F).symm
 
-/-- Lissity of a set sheaf descends through a surjective etale cover.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
-`lem-weil-pbc-finite-pushforward-generic-constructible`, final paragraph;
-step 5 of `lem-weil-pbc-finite-map-generic-lisse-preservation`.
-(blueprint: lem-weil-pbc-lisse-etale-surjective-descent).
-
-Proof: Choose an etale cover of T trivializing p inverse image F. Compose its
-members with p. Surjectivity makes the composite family a cover of Y, and
-etaleness is preserved by composition. Restriction of p inverse image F to each
-member is canonically the restriction of F to that member viewed over Y;
-this follows from the equivalence between the localized small etale site and
-the small etale site of the member. Transport each constant trivialization
-through this equivalence. This proves local constancy of F. For any geometric
-point s over Y, surjectivity supplies a point of T above its image. Because p is
-etale and the field of s is separably closed, s lifts to a geometric point t
-of T with t followed by p equal to s. The inverse-image stalk isomorphism
-identifies the stalk of F at s with the stalk of p inverse image F at t, which
-is finite by hypothesis. Thus F has finite geometric stalks. For an empty base
-the cover and the stalk conditions are vacuous, so the same argument applies. -/
+/-- Lissity of a set sheaf descends through a surjective etale cover. -/
 theorem isLisseEtaleSheafOfSets_of_etale_surjective_pullback
     {Y T : Scheme.{u}} (p : T ⟶ Y) [Etale p] [Surjective p]
     (F : Sheaf Y.smallEtaleTopology (Type (u + 1)))

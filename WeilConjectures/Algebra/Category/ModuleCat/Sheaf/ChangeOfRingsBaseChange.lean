@@ -16,7 +16,10 @@ For a square of sheaves of commutative rings `f : A ⟶ B`, `g : A ⟶ C'`, `p :
 change of rings commutes with restriction of scalars:
 `B ⊗_A Res_g M ≅ Res_p (D ⊗_{C'} M)` (`SheafOfModules.changeOfRingsBaseChangeIso`),
 naturally in `M` (`SheafOfModules.changeOfRingsBaseChangeIso_hom_naturality`).
-Source: Stacks Project, Tag 03EK.
+
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 @[expose] public section
@@ -42,7 +45,7 @@ variable {C : Type a} [Category.{b} C] [EssentiallySmall.{r} C] {J : Grothendiec
   (h : ∀ U : Cᵒᵖ, IsPushout (f.hom.app U) (g.hom.app U) (p.hom.app U) (q.hom.app U))
 
 /-- The sectionwise base-change comparison of change-of-rings presheaves along a
-sectionwise pushout square. Source: Stacks Project, Tag 03EK. -/
+sectionwise pushout square. -/
 noncomputable def changeOfRingsPresheafBaseChangeIso
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj C')) :
     SheafOfModules.changeOfRingsPresheaf f
@@ -90,7 +93,7 @@ theorem changeOfRingsPresheafBaseChangeIso_hom_tmul
     (f.hom.app U) (g.hom.app U) (p.hom.app U) (q.hom.app U) (h U) (M.val.obj U)).choose_spec b m
 
 /-- Base change of change of rings along a sectionwise pushout square of ring sheaves:
-`B ⊗_A Res_g M ≅ Res_p (D ⊗_{C'} M)`. Source: Stacks Project, Tag 03EK. -/
+`B ⊗_A Res_g M ≅ Res_p (D ⊗_{C'} M)`. -/
 noncomputable def changeOfRingsBaseChangeIso
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj C')) :
     SheafOfModules.changeOfRings f

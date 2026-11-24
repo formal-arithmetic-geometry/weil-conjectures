@@ -11,9 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Finite.FiniteEval
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.FiniteExactArrow.FiniteExactArrowCalculus
 
 /-! # Evaluating the integral Kummer composite
-
-Source: diagonal-tower trace (1), finite Kummer classes and exact comparison.
-(blueprint: lem-sfb-finite-integral-boundary-evaluation-map).
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +35,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Ext.homEquiv
   HasDerivedCategory.standard DerivedCategory.singleFunctors
   integerComparison cartierRootsComparison cartierUnitsComparison
 
-/-- Exact evaluation preserves the integral connecting composite.
-Source: exact-functor naturality of Yoneda composition
-(blueprint: lem-sfb-finite-integral-boundary-evaluation-map). -/
+/-- Exact evaluation preserves the integral connecting composite. -/
 theorem finiteIntegralBoundary_evaluation_map (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
     (k : Kummer l T) (n : ℕ) (L : T.Pic) :
     @Eq (FiniteIntegralBoundaryArrow l T n)

@@ -14,7 +14,7 @@ public import WeilConjectures.Algebra.Homology.ExactCouple.EdgeCollapse
 We consider exact couples `X` indexed by `(p, n) ∈ ℤ × ℤ` (filtration degree `p`, total degree
 `n`) with `α` of degree `(-1, 0)` and `g` of degree `0`, as in
 `WeilConjectures/Algebra/Homology/ExactCouple/Convergence.lean`, and whose map `f` has a degree
-`b` with `1 ≤ b.1` (for the couples of blueprint `def-sp-exact-couple`, `b = (2, 1)`). Writing
+`b` with `1 ≤ b.1` (for example `b = (2, 1)`). Writing
 `q = n - p`, such a couple is a *half-plane couple* with bound `a` if `D^{p, n} = 0` for `q < a`
 and `E^{p, n} = 0` unless `p ≥ 0` and `q ≥ a` (`CategoryTheory.ExactCouple.IsHalfPlane`).
 
@@ -107,9 +107,7 @@ variable {b : ℤ × ℤ} (X : ExactCouple C ((-1, 0) : ℤ × ℤ) b 0)
 
 /-- An exact couple indexed by `(p, n)` (filtration degree `p`, total degree `n`) is a
 *half-plane couple* with bound `a` if, writing `q = n - p`, `D^{p, n} = 0` for `q < a` and
-`E^{p, n} = 0` unless `p ≥ 0` and `q ≥ a`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+`E^{p, n} = 0` unless `p ≥ 0` and `q ≥ a`. -/
 structure IsHalfPlane (a : ℤ) : Prop where
   isZero_D (p n : ℤ) (h : n - p < a) : IsZero (X.D (p, n))
   isZero_E (p n : ℤ) (h : p < 0 ∨ n - p < a) : IsZero (X.E (p, n))
@@ -198,9 +196,7 @@ lemma α_comp_halfPlaneι (p n : ℤ) :
     · rw [halfPlaneι_of_neg h hb (p + 1) n (by omega)]
 
 /-- The filtration `Fᵖ Aⁿ = im (D^{p, n} ⟶ Aⁿ)` of the abutment `Aⁿ = D^{0, n}` of a half-plane
-couple: `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})` for `p ≥ 0` and `Fᵖ Aⁿ = Aⁿ` for `p ≤ 0`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+couple: `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})` for `p ≥ 0` and `Fᵖ Aⁿ = Aⁿ` for `p ≤ 0`. -/
 noncomputable def halfPlaneFiltration (n : ℤ) : DecreasingFiltration (X.D (0, n)) :=
   X.abutmentFiltration (halfPlaneι h hb) (α_comp_halfPlaneι h hb) n
 
@@ -224,9 +220,7 @@ lemma halfPlaneFiltration_F_eq_bot (n p : ℤ) (hp : n - a < p) :
   change imageSubobject (halfPlaneι h hb p n) = ⊥
   rw [(h.isZero_D p n (by omega)).eq_of_src (halfPlaneι h hb p n) 0, imageSubobject_zero]
 
-/-- The filtration of the abutment of a half-plane couple is finite and separated.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+/-- The filtration of the abutment of a half-plane couple is finite and separated. -/
 lemma isFiniteSeparated_halfPlaneFiltration (n : ℤ) :
     (halfPlaneFiltration h hb n).IsFiniteSeparated := by
   refine ⟨halfPlaneFiltration_F_eq_top h hb n 0 le_rfl,
@@ -236,9 +230,7 @@ lemma isFiniteSeparated_halfPlaneFiltration (n : ℤ) :
 
 /-- **The convergence data of a half-plane couple.** The spectral sequence of a half-plane
 couple converges to `Aⁿ = D^{0, n}` with the filtration `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})`:
-`E_∞^{p, n} ≅ Fᵖ Aⁿ / Fᵖ⁺¹ Aⁿ`, compatibly with the maps `D^{p, n} ⟶ D^{0, n}`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+`E_∞^{p, n} ≅ Fᵖ Aⁿ / Fᵖ⁺¹ Aⁿ`, compatibly with the maps `D^{p, n} ⟶ D^{0, n}`. -/
 noncomputable def halfPlaneConvergenceData :
     X.ConvergenceData (halfPlaneι h hb) (halfPlaneFiltration h hb) :=
   X.abutmentConvergenceData (halfPlaneι h hb) (α_comp_halfPlaneι h hb)
@@ -246,26 +238,20 @@ noncomputable def halfPlaneConvergenceData :
     (fun n ↦ ⟨n - a + 1, fun p hp ↦ h.isZero_D p n (by omega)⟩)
 
 /-- **Convergence of a half-plane couple.** The spectral sequence of a half-plane couple
-converges to `Aⁿ = D^{0, n}` with the filtration `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+converges to `Aⁿ = D^{0, n}` with the filtration `Fᵖ Aⁿ = im (αᵖ : D^{p, n} ⟶ D^{0, n})`. -/
 theorem convergesTo_halfPlaneFiltration :
     X.ConvergesTo (halfPlaneι h hb) (halfPlaneFiltration h hb) :=
   ⟨halfPlaneConvergenceData h hb⟩
 
 include h hb in
-/-- A half-plane couple is regular.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+/-- A half-plane couple is regular. -/
 theorem isRegular_of_isHalfPlane : X.IsRegular := by
   intro i
   exact ⟨(halfPlaneConvergenceData h hb).stage i.1 i.2,
     fun N hN j ↦ (halfPlaneConvergenceData h hb).d_in i.1 i.2 N hN j⟩
 
 include h in
-/-- A half-plane couple is complete.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+/-- A half-plane couple is complete. -/
 theorem isComplete_of_isHalfPlane : X.IsComplete := by
   rintro ⟨p, n⟩ P hP
   have hr := hP (n - a - p + 1).toNat
@@ -308,9 +294,7 @@ variable {X : ExactCouple C ((-1, 0) : ℤ × ℤ) (2, 1) 0} {a : ℤ} (h : X.Is
 include h in
 /-- **Stabilisation in a half-plane couple of type `b = (2, 1)`.** The `N`-th derived couple is
 the page `E_r` with `r = N + 2`; writing `q = n - p`, the differentials of `E_r` leaving and
-arriving at `(p, n)` vanish as soon as `r > max (q - a + 1) p`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+arriving at `(p, n)` vanish as soon as `r > max (q - a + 1) p`. -/
 theorem derivedIter_d_eq_zero_of_isHalfPlane (N : ℕ) (p n : ℤ)
     (hN : max (n - p - a + 1) p < N + 2) :
     (∀ j, (X.derivedIter N).d (p, n) j = 0) ∧ (∀ j, (X.derivedIter N).d j (p, n) = 0) := by
@@ -319,9 +303,7 @@ theorem derivedIter_d_eq_zero_of_isHalfPlane (N : ℕ) (p n : ℤ)
 
 /-- **The entries of a half-plane couple of type `b = (2, 1)` stabilise.** Writing `q = n - p`,
 for `r = N + 2 > max (q - a + 1) p` the entry `E_r^{p, n}` of the page `E_r` (the `N`-th derived
-couple) is isomorphic to the graded piece `grᵖ Aⁿ` of the abutment `Aⁿ = D^{0, n}`.
-
-(blueprint: `thm-sp-half-plane-convergence`) -/
+couple) is isomorphic to the graded piece `grᵖ Aⁿ` of the abutment `Aⁿ = D^{0, n}`. -/
 noncomputable def halfPlaneDerivedIterEIsoGr (N : ℕ) (p n : ℤ)
     (hN : max (n - p - a + 1) p < N + 2) :
     (X.derivedIter N).E (p, n) ≅ (halfPlaneFiltration h (by norm_num) n).gr p :=

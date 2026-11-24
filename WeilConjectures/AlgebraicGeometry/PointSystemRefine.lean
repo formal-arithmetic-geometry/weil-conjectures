@@ -13,8 +13,15 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 /-!
 # One-cover refinement of a pointed inverse system
 
-Source: Stacks Project, Sites, Tag 00YO (Lemma lemma-refine), proof of Tag 00YP
-(auxiliary; not a blueprint node).
+## Implementation details
+
+The index types live in an arbitrary universe `w`, the sheaf takes values in
+`Type (max w t)` and the representables are lifted to `Type (max w v)`, so that the filtered
+colimits over `J` exist without tying `J`, `K` or the sheaf to the object universe of `C`.
+
+## References
+
+* Stacks Project, Sites, Tags 00YO and 00YP.
 -/
 
 @[expose] public section
@@ -181,35 +188,12 @@ private theorem refinementMap_ι
   convert colimit.ι_pre (R ⋙ H) e.toOrderHom.toFunctor j using 1
   rfl
 
-/-- The one-cover refinement lemma for the inverse-system point construction.
+/-- The one-cover refinement lemma for the inverse-system point construction
+(Stacks, Tag 00YO).
 
 The section stalk is the filtered colimit of `F` along `V`, and the functor `u'`
 is the filtered colimit of universe-lifted Yoneda representables along the same
-inverse system. The index types live in an arbitrary universe `w`, the sheaf
-takes values in `Type (max w t)` and the representables are lifted to
-`Type (max w v)`, so that the filtered colimits over `J` exist without tying
-`J`, `K` or the sheaf to the object universe of `C`. The canonical maps to a
-refinement are Mathlib's `colimit.pre`; the factorization clause uses the map
-induced by `uliftYoneda.map (wk k)`.
-
-Proof steps from Tag 00YO:
-1. Represent `f` at an index of `J`, pass to its directed tail, and pull back the
-   finite covering along that representative using the site pullback axiom
-   [def-weil-pbc-sites-and-cohomology].
-2. Apply the sheaf equalizer to obtain an injection into the finite product of
-   sections on the pullbacks, and use filtered-colimit commutation with finite
-   limits [lem-weil-pbc-filtered-colimits-commute-finite-limits] to choose a
-   cover member preserving the distinct images of `s` and `s'`.
-3. Form the disjoint-union refinement of the original index poset and its tail,
-   with the pullback objects and transition maps from the proof of Tag 00YO.
-4. The tail copy is cofinal, so distinctness survives under `colimit.pre`, and
-   the pullback square gives the required factorization through `W_k`.
-The equality `h` is retained explicitly so that both canonical maps remain
-well-typed for arbitrary index and sheaf universes.
-
-Source: Stacks Project, Sites, Tag 00YO (Lemma lemma-refine), proof of Tag 00YP
-(auxiliary; not a blueprint node).
--/
+inverse system. -/
 theorem pointSystemRefine
     {C : Type u} [Category.{v} C]
     (P : Precoverage C) (hP : P.IsSiteForCoverings)

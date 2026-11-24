@@ -9,7 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleCoefficientInjectiveSystemD
 
 /-! # Identity calculation at one outgoing-arrow factor
 
-Source: Stacks Project, Tag 0EXZ, canonical product components.
+## References
+
+* Stacks Project, Tag 0EXZ
 -/
 
 @[expose] public section
@@ -38,21 +40,7 @@ private theorem identity_component
     Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.id_comp,
     Functor.id_map] using (lowerStarId AddCommGrpCat.{u + 1} V).inv.naturality p
 
-/-- Identity calculation at one outgoing-arrow factor.
-Source: Stacks Project, Tag 0EXZ, canonical maps ψ, expanded with the adjunction
-mate equations and direct-image coherence in UpperLowerStar.Coherence.
-(blueprint: lem-weil-pbc-etale-coefficient-product-identity-component).
-
-Proof: replace id composed with the outgoing arrow by that arrow. Transport the
-scheme morphism D(id) to the identity via D.map_id. The inverse right unit equation
-for lowerStarComp identifies the direct-image comparison with lowerStarId.inv at
-this factor. Apply the injective adjunction homEquiv to both sides. Its naturality
-in the target makes the transpose of the proposed identity component equal to the
-transpose of upperStarId.hom followed by the direct image of the projection. The
-unit mate equation upperStarId_hom_app_unit_app identifies that transpose with
-lowerStarId.inv at the product. Naturality of lowerStarId.inv moves the projection
-past this identity comparison and gives the left side. This is a single-factor
-calculation; no product extensionality or composition law is asserted. -/
+/-- Identity calculation at one outgoing-arrow factor (Stacks, Tag 0EXZ). -/
 theorem etale_coefficient_product_identity_component
     {I : Type u} [Preorder I] (D : Iᵒᵖ ⥤ Scheme.{u})
     (F : ∀ i : I, Sheaf (D.obj (op i)).smallEtaleTopology AddCommGrpCat.{u + 1}) (i : I)

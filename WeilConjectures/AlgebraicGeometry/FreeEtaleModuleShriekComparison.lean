@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 /-!
 # Free etale module sheaves as extensions by zero
 
-Source: Stacks Project, Modules on Sites, Tag 03DI and the equation following it.
-(blueprint: lem-weil-pbc-free-etale-module-shriek-comparison).
+## References
+
+* Stacks Project, Modules on Sites, Tag 03DI.
 -/
 
 @[expose] public section
@@ -103,23 +104,7 @@ private lemma shriekSectionEquiv_comp
     (h.hom.naturality i.inv.op).symm
 
 /-- The sheafified free module on an etale representable is extension by zero of
-its constant rank-one module sheaf.
-
-Source: Stacks Project, Modules on Sites, Tag 03DI, and
-`equation-map-lower-shriek-OU-into-module` immediately following it.
-(blueprint: lem-weil-pbc-free-etale-module-shriek-comparison).
-
-Proof: The free-module adjunction followed by Yoneda identifies maps from the
-presheaf `uliftYoneda.obj W` composed with `ModuleCat.free` to the underlying
-presheaf of F with sections of F on W. Sheafification preserves this bijection.
-The localization adjunction for the etale map W.hom identifies maps from its
-extension by zero of the constant rank-one sheaf to F with maps from that constant
-sheaf to the restriction of F. By the constant-sheaf adjunction, these are maps
-from the rank-one module to global sections on W. W is the terminal object of
-its small etale site, so global sections are F(W), and a linear map from the
-rank-one module is determined freely by the image of 1. Both bijections are
-natural in F. The uniqueness of representing objects gives the asserted iso.
-This uses no affineness or separation condition on W.hom. -/
+its constant rank-one module sheaf. (Stacks, Tag 03DI) -/
 theorem free_etale_module_shriek_comparison
     (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] (W : X.Etale) :
     Nonempty

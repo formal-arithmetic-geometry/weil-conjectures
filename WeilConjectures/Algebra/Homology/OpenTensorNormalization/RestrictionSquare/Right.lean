@@ -28,8 +28,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (e : FiniteComparisons A o)
 
 set_option linter.unusedSectionVars false in
-/-- The right half: the tensor model on `U`, the ringed tensor comparison and the open pin.
-(blueprint: lem-sf-finite-restriction-representative-square) -/
+/-- The right half: the tensor model on `U`, the ringed tensor comparison and the open pin. -/
 theorem rightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj P))

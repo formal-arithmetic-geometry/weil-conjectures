@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Detecting quasi-isomorphisms through sections
 
-Source: Stacks Project, sites-cohomology.tex, proof of Lemma 0A95
-(blueprint: lem-pur-quasi-iso-of-sections).
+## References
+
+* Stacks Project, Tag 0A95
 -/
 
 @[expose] public section
@@ -29,16 +30,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Sectionwise quasi-isomorphisms induce quasi-isomorphisms of module sheaves.
-Source: Stacks Project, sites-cohomology.tex, proof of Lemma 0A95
-(blueprint: lem-pur-quasi-iso-of-sections).
-
-Proof: forget the module structure and view the complexes as complexes of presheaves of
-abelian groups. Evaluation at each site object is exact and jointly detects their cohomology
-isomorphisms. Sheafification is exact, so the presheaf quasi-isomorphism remains one after
-sheafification. The counit of sheafification identifies the resulting complexes naturally
-with the original abelian-sheaf complexes. Finally the exact forgetful functor from module
-sheaves to abelian sheaves reflects isomorphisms, hence reflects quasi-isomorphisms. -/
+/-- Sectionwise quasi-isomorphisms induce quasi-isomorphisms of module sheaves. -/
 theorem quasiIso_of_sections
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{max u v}}

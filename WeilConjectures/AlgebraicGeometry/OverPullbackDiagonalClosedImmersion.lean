@@ -12,8 +12,9 @@ public import Mathlib.CategoryTheory.Comma.Over.Pullback
 /-!
 # Closed immersions of base-changed diagonals
 
-Source: Stacks Project, Limits, Tag 01ZQ; compatibility of diagonals with base change.
-(blueprint: lem-weil-pbc-over-pullback-diagonal-closed-immersion).
+## References
+
+* [Stacks, Tag 01ZQ]
 -/
 
 @[expose] public section
@@ -26,21 +27,7 @@ namespace AlgebraicGeometry
 
 set_option backward.defeqAttrib.useBackward true in
 /-- Base change of the diagonal over the original base detects separatedness of the
-base-changed morphism.
-
-Source: Stacks Project, Limits, Tag 01ZQ, the diagonal base-change identification in the
-proof; equivalently the universal property of fibre products.
-(blueprint: lem-weil-pbc-over-pullback-diagonal-closed-immersion).
-
-Proof: Write X' = X ×_S T and Y' = Y ×_S T. The universal properties of the fibre products
-identify (X ×_Y X) ×_S T with X' ×_{Y'} X': the two components are the base-changed
-projections to X, with their common component to T. Conversely the two projections from
-X' ×_{Y'} X' have equal components to T and give the inverse map. Checking both
-projections proves that these maps are inverse. Under this isomorphism the base change
-of Δ_f becomes Δ_{f'}, since both of its projections to X' are the identity. A closed
-immersion is invariant under composition with an isomorphism, and IsSeparated f' means
-exactly that Δ_{f'} is a closed immersion. This proves both implications. No compactness
-or finiteness hypothesis is used; the argument also applies to empty schemes. -/
+base-changed morphism (Stacks, Tag 01ZQ). -/
 theorem isClosedImmersion_overPullback_diagonal_iff
     {S T : Scheme.{u}} (g : T ⟶ S) (X Y : Over S) (f : X ⟶ Y) :
     IsClosedImmersion

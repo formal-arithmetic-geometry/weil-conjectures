@@ -9,9 +9,7 @@ import WeilConjectures.ConstructibleSheaf.InternalHom
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
 
 /-! # Flatness and ordinary identity self braiding of an etale line
-
-Source: blueprint latest, second triangle even-shift computation.
-(auxiliary; not a blueprint node). -/
+-/
 
 @[expose] public noncomputable section
 suppress_compilation
@@ -46,18 +44,7 @@ private lemma line_trivializations {Y : Scheme.{u}}
   exact Iso.refl _
 
 attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
-/-- Flatness and ordinary identity self braiding of an etale line.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, second triangle.
-(auxiliary; not a blueprint node).
-
-Proof: The etale trivializing cover supplies isomorphisms to the tensor unit. The existing
-tensorInverseOfUpperStarIso constructs the internal-dual tensor inverse, so flat_of_tensorIso
-gives flatness.
-Upper-star functors of this cover preserve equalizers and jointly reflect isomorphisms, hence are
-jointly faithful on ordinary sheaf morphisms. Transport braiding through the monoidal adjunction,
-and use braiding naturality along the local unit isomorphisms. The self braiding of the unit is
-identity by unitor coherence. Cancel the invertible tensor comparisons and apply joint
-faithfulness. -/
+/-- Flatness and ordinary identity self braiding of an etale line. -/
 theorem etaleLineFlatAndBraiding {Y : Scheme.{u}}
     (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))
     (hJ : Scheme.IsLisseRankOneSheaf J) :

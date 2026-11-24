@@ -20,8 +20,9 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
 /-!
 # Constructibility of torsion abelian sheaves and of cyclic-coefficient module sheaves
 
-Source: Stacks Project, Tags 03RW(2),(3), 095E and 03RU; the comparison is explicit
-(blueprint: lem-weil-pbc-constructible-torsion-modules-agree).
+## References
+
+* Stacks Project, Tags 03RW (2), (3), 095E and 03RU
 -/
 
 @[expose] public section
@@ -154,35 +155,10 @@ private theorem finiteSetLocal_congr {Y : Scheme.{v}}
 -- Comparing coefficient structures and stratifications requires substantial reduction.
 /-- An abelian sheaf killed by a positive integer is torsion and has a unique cyclic-ring
 module structure. Underlying-set constructibility of the curve coefficient pair agrees
-with constructibility of the module sheaf. On every fixed stratification (finite partition
-into constructible locally closed parts with scheme immersions) the three stratum conditions
-agree: finite local constancy of the set-sheaf pullback of the underlying sheaf of sets,
-abelian local constancy of the abelian inverse image with finite geometric stalks, and
-module local constancy with finite constant values. So the same partitions and immersions
-serve for both notions. Uniqueness of the module structure is stated in the fiber of the
-forgetful functor: any other module lift of `F` has exactly one module isomorphism compatible
-with the given identifications with `F`.
-
-Proof:
-1. Evaluate the annihilation equation on every section to obtain local torsion, and use
-   `isTorsionAbelianSheaf_characterizations` to obtain the curve's torsion predicate.
-   `exists_module_sheaf_of_nsmul_id_eq_zero` constructs a ModuleCat-valued lift.
-2. Every additive map between cyclic modules is linear: lift a residue scalar to an integer
-   and use compatibility with integer multiplication. Thus the forgetful functor is fully
-   faithful, as is its functor on sheaves. Lift `e ≪≫ eN.symm` to obtain the unique isomorphism.
-3. Inverse image commutes with forgetting to abelian groups or sets. Its left Kan extension
-   is filtered, and forgetting preserves those colimits. Sheafification commutes with
-   forgetting; for modules to abelian groups this follows because the locally injective
-   and locally surjective conditions are the same conditions on underlying sections.
-4. Apply `finite_local_abelian_forget_iff` to each abelian inverse image, transporting the
-   condition along the isomorphism of step 3. Apply `finite_local_cyclic_module_forget_iff`
-   to each module inverse image, using step 3 and the specified underlying-sheaf isomorphism.
-   Pointwise equivalences give both equivalences on every fixed stratification.
-5. The two stratification structures have identical fields. Retain their partition, domains
-   and immersions in both directions, and apply step 4 on each part. This proves the global
-   constructibility equivalence from the definitions.
-Source: Stacks Project, Tags 03RW(2),(3), 095E and 03RU; explicit comparison
-(blueprint: lem-weil-pbc-constructible-torsion-modules-agree). -/
+with constructibility of the module sheaf, using the same partitions and immersions.
+Uniqueness of the module structure is stated in the fiber of the forgetful functor: any
+other module lift of `F` has exactly one module isomorphism compatible with the given
+identifications with `F`. -/
 theorem constructible_torsion_modules_agree
     {k : Type v} [Field k] [IsAlgClosed k] {C : Scheme.{v}}
     (f : C ⟶ Spec (.of k)) [IsCurve f]

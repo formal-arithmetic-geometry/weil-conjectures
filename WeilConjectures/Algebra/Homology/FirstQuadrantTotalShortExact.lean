@@ -12,7 +12,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 
 /-! # Exactness of finite-diagonal totalization
 
-Source: Stacks Project, tag 012X, the finite-diagonal total complex construction.
+## References
+
+* Stacks Project, tag 012X, the finite-diagonal total complex construction
 -/
 
 @[expose] public section
@@ -86,18 +88,7 @@ private lemma diagonalShortComplex_shortExact {J : Type} [Finite J]
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite-diagonal totalization, followed by extension by zero, preserves short exactness.
-Source: Stacks Project, tag 012X, definition of the total complex and finite diagonals.
-(blueprint: lem-sp-first-quadrant-total-extend-short-exact).
-
-Proof: evaluate the short complex in bidegree (p,q). Evaluation in either complex
-category preserves kernels and cokernels, so the resulting sequence in C is short exact.
-In total degree n take the finite direct sum of these sequences over p+q=n. In an
-abelian category finite biproducts preserve kernels and cokernels, hence this sum is
-short exact. These sums are exactly the components of the two totalized maps.
-The degreewise criterion for short exactness proves the claim over the naturals.
-Extension by zero has the same sequences in nonnegative degrees and a zero sequence
-in each negative degree, so the criterion applies again over the integers. -/
+/-- Finite-diagonal totalization, followed by extension by zero, preserves short exactness. -/
 theorem totalExtendShortComplex_shortExact
     (S : ShortComplex (HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)))
     (hS : S.ShortExact) : (totalExtendShortComplex S).ShortExact := by

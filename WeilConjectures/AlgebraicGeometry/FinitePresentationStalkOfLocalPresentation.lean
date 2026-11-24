@@ -19,7 +19,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Finite presentation of a stalk from a supplied local presentation
 
-Source: Stacks Project, Modules, Lemma 01CP, third paragraph; Definition 01BN.
+## References
+
+* Stacks Project, Modules, Lemma 01CP; Definition 01BN.
 -/
 
 @[expose] public section
@@ -158,29 +160,7 @@ private theorem map_presentation_finitePresentation
   exact Submodule.fg_range _
 
 -- Scalar transport and the slice equivalence unfold several nested stalk instances.
-/-- A supplied finite presentation on a neighborhood makes the stalk finitely presented.
-
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third
-paragraph, the right exact source-stalk sequence; Definition 01BN.
-(blueprint: lem-weil-pbc-stalk-finite-presentation-of-local-presentation)
-
-Proof: The presentation P expresses F.over U as the cokernel of the map from
-free P.relations.I to free P.generators.I, given by the relation sections and
-the kernel inclusion. The neighborhoods contained in U are cofinal among the
-neighborhoods of x: intersect any neighborhood with U. Hence restricting to U
-leaves the stalk ring and the module stalk unchanged, with their germ actions.
-The unit stalk is the regular stalk module via the forgetful-colimit
-comparison; its scalar compatibility is checked on simultaneous germs.
-Colimit preservation identifies the stalk of each finite free sheaf with the
-finite direct sum of unit stalks, hence with the corresponding finite product.
-Transport P.isColimit to a surjection from the generator free module onto F_x,
-whose kernel is the image of the relation free module. This image is finitely
-generated since the relation index set is finite. Apply
-Module.finitePresentation_of_surjective to obtain the conclusion, and transfer
-it along nonempty_moduleRestrictionStalk_iso.
-An empty generator set gives the zero module; an empty relation set gives a
-zero kernel. The same argument applies to the zero ring, and a pointed
-neighborhood cannot be empty. No local Noetherian hypothesis is used. -/
+/-- A supplied finite presentation on a neighborhood makes the stalk finitely presented. -/
 theorem finitePresentation_stalk_of_localPresentation
     (X : RingedSpace.{u}) (F : Modules X) (x : X)
     (U : Opens X) (_hxU : x ∈ U)

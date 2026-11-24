@@ -72,8 +72,7 @@ private lemma module_isZero_of_isEmpty {Y : Scheme.{u}} [IsEmpty Y]
 /-- Empty-support branch of the finite-coefficient support induction step.
 
 The pro-etale module category on an empty scheme is zero, so the zero finite model
-over any finite coefficient field supplies the conclusion.
-(auxiliary; not a blueprint node) -/
+over any finite coefficient field supplies the conclusion. -/
 theorem exists_finiteCoefficient_model_on_closed_support_step_empty
     (T : Scheme.{u}) [TopologicalSpace.NoetherianSpace T]
     (ℓ : ℕ) [Fact ℓ.Prime]

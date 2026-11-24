@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorRestrictedRingCompariso
 
 /-! # Coefficient transport for the ordinary derived tensor comparison
 
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
-(blueprint: lem-pc-base-derived-tensor-ordinary-ring-comparison).
+## References
+
+* Stacks Project, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -151,29 +152,7 @@ private theorem exists_extensionComplexIso
     rw [hq])
   exact ⟨s, hl⟩
 
-/-- Transport the ordinary comparison, before extension to the fourth ring.
-
-Proof: compatible eR, eA and eB induce a tensor-ring isomorphism eE, sending
- a tensor b to eA(a) tensor eB(b). Tensoring the input isomorphism gives s,
-with the stated generator formula. Restriction along eR and eB gives exact
-inverse equivalences on module, homotopy and derived categories. If the chosen
-derived categories have different morphism universes, use their localization
-universal properties to identify the two category-of-fractions presentations.
-Transport M's universal left-derived functor and counit through these
- equivalences. Uniqueness of universal left-derived functors identifies the
-result with N's functor, compatibly with the counits. Apply homology and conjugate
-by cohomologyIso to obtain the cohomology isomorphism k. Naturality for
-multiplication by a and cohomologyIso_smul give eA-semilinearity; B-linearity
-gives eB-semilinearity. Tensor induction gives eE-semilinearity, for both k and
-its inverse. The comparison_eq identities, counit compatibility and homology
-naturality at s give the displayed ordinary comparison square. The ordinaryIso
-maps are identified on generators by ordinaryIso_tmul. Neither localizedComparison
-nor ordinaryToLocalized occurs in this conclusion. Zero rings and zero complexes
-are allowed; no flatness or invertibility of comparisons is used.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change, independence of
-choices and derived change of rings; the two-universe formulation uses
-localization uniqueness.
-(blueprint: lem-pc-base-derived-tensor-ordinary-ring-comparison). -/
+/-- Transport the ordinary comparison, before extension to the fourth ring. -/
 theorem exists_baseDerivedTensor_ordinary_ring_comparison
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

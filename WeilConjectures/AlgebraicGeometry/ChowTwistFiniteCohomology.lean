@@ -23,9 +23,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 
 /-! # Finite cohomology of a sufficiently large Chow twist
 
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-construction of the module pi_* L^n.
-(blueprint: lem-pc-q2-chow-twist-finite-cohomology)
+## References
+
+* Stacks Project, Tag 02O5
 -/
 
 @[expose] public section
@@ -40,27 +40,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The analytic part of the Chow construction, for a specified projective model.
-No integrality, birationality, or generic-stalk condition is required.
-
-Source: Stacks Project, Tag 02O5, proposition-proper-pushforward-coherent,
-paragraphs defining L and G and applying the relative Leray spectral sequence.
-(blueprint: lem-pc-q2-chow-twist-finite-cohomology)
-
-Proof:
-1. Put p = pi followed by i. The scheme X is Noetherian because it is proper
-   over the affine Noetherian T. Separatedness of f gives a closed graph embedding
-   of Y into projective space over X. Relative graph-twist vanishing chooses n
-   killing every positive higher direct image of L.tensorPow n along p.
-2. Invertibility of L makes its powers quasi-coherent and finitely presented.
-   The independent projective pushforward argument gives finite type of p_* L^n:
-   degree-zero projective finiteness on affine opens and quasi-coherent localization
-   suffice. Quasi-coherence and the locally Noetherian finite-type criterion give
-   coherence. Transport this along pushforwardComp pi i to i_* pi_* L^n.
-3. The given closed embedding over T gives finite cohomology of L^n over Gamma(T,O).
-   A linear Leray comparison for p, whose positive higher images vanish, identifies
-   these groups with the cohomology of p_* L^n. The pushforwardComp isomorphism
-   identifies the latter with that of i_* pi_* L^n. Restrict scalars along f.appTop
-   and transport finite generation through the two linear equivalences. -/
+No integrality, birationality, or generic-stalk condition is required (Stacks, Tag 02O5). -/
 theorem exists_chow_twist_finite_cohomology {X W T Y : Scheme.{u}}
     (f : X ⟶ T) [IsProper f] [IsAffine T] [IsNoetherianRing Γ(T, ⊤)]
     (i : W ⟶ X) [IsClosedImmersion i] (π : Y ⟶ W) [IsProper π]

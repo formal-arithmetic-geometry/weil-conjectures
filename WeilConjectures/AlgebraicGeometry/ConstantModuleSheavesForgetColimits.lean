@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 /-!
 # Forgetting constant module coefficients preserves colimits
 
-Source: Stacks Project, Tags 03DB and 03CO.
-(blueprint: lem-weil-pbc-constant-module-sheaves-forget-colimits).
+## References
+
+* Stacks Project, Tags 03DB, 03CO
 -/
 
 @[expose] public section
@@ -25,32 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
 
 /-- Forgetting constant module coefficients preserves colimits of the size of the
-coefficient category, on any small etale site.
-Source: Stacks Project, Tag 03DB, proof of lemma-limits-colimits; Tag 03CO,
-lemma-limits-colimits-abelian-sheaves.
-(blueprint: lem-weil-pbc-constant-module-sheaves-forget-colimits)
-
-Proof: For a diagram of module sheaves, take its sectionwise colimit in module
-presheaves and then sheafify. On each object, forgetting a module colimit gives
-its abelian-group colimit: the group colimit has the unique scalar action for
-which every coprojection is linear, and its universal map to any module is
-linear by uniqueness on the coprojections. Sheafification commutes with forgetting
-this action. Indeed local module sections and their matching equalities give
-exactly the local sections and matching equalities of the underlying abelian
-presheaf, and scalar multiplication extends uniquely through sheafification.
-Thus forgetting the sheafified module colimit gives the sheafification of the
-abelian presheaf colimit. The latter is the abelian-sheaf colimit by Tag 03CO.
-All comparisons commute with the original coprojections, proving preservation
-of the canonical cocone, and not just an isomorphism of objects.
-For the formal proof, restriction of scalars along ℤ → Λ is left adjoint to
-coextension. Its composite with the equivalence from ℤ-modules to abelian groups
-is definitionally the coefficient forgetful functor, so it too is a left adjoint.
-The induced compose-and-sheafify functor is therefore a left adjoint. Since
-forgetting preserves sheaves, the sheafification natural isomorphism identifies
-this functor with sheafCompose. Transport the adjunction across that isomorphism
-and apply preservation of colimits by left adjoints. No compactness or finiteness
-hypothesis is used. For an empty diagram the construction gives
-the zero sheaf; for an identity diagram it gives the original sheaf. -/
+coefficient category, on any small etale site (Stacks, Tags 03DB, 03CO). -/
 theorem constantModuleSheaves_forget_preservesColimits (X : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] :
     PreservesColimitsOfSize.{u + 1, u + 1}

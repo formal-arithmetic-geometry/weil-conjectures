@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 /-! # Coherent tensor powers of twists on the projective line
 
-Source: Stacks Project, Constructions, Tags 01MS and 01MU.
-(blueprint: lem-sc-p1-twist-coherent-powers).
+## References
+
+* [Stacks Project, Tags 01MS and 01MU](https://stacks.math.columbia.edu/tag/01MS)
 -/
 
 @[expose] public section
@@ -175,27 +176,8 @@ private theorem twistOne_invertible (k : Type u) [Field k] :
   exact ⟨_, MvPolynomial.isHomogeneous_X k i, hi⟩
 
 /-- Multiplication isomorphisms with the pointwise product formula give normalized,
-coherent identifications of positive and negative tensor powers with the twists.
-
-Source: Stacks Project, Constructions, Tags 01MS and 01MU; Step 2 of
-lem-sc-p1-twist-multiplication.
-(blueprint: lem-sc-p1-twist-coherent-powers).
-
-Proof: Start both families in degree zero with the canonical unit isomorphism,
-which sends 1 to 1. Define the positive successor by braiding O(1) past its
-previous tensor power and then applying multiplication. On each coordinate
-chart this sends the tensor power of the coordinate basis to its ordinary power.
-The perfect multiplication pairing O(1) tensor O(-1) to O(0), followed by the
-inverse unit isomorphism, identifies O(-1) with the dual of O(1): locally it
-sends the inverse coordinate basis to the dual basis. Define the negative family
-by iterating multiplication of this inverse twist. In each coordinate chart the
-negative successor square evaluates a coordinate against its dual basis and
-reduces x_i^(-(a+1)) x_i to x_i^(-a). Both sides therefore agree on the local
-tensor basis. The positive square similarly expresses associativity and
-commutativity of fraction multiplication. The two charts cover, so these local
-identities are global morphism identities. At a=0 both families use exactly
-the same unit isomorphism, giving the specified normalization. No scalar choices
-remain, and negative exponents are handled by localization of the coordinate. -/
+coherent identifications of positive and negative tensor powers with the twists
+(Stacks, Tags 01MS and 01MU). -/
 theorem projectiveLine_twist_coherent_powers (k : Type u) [Field k]
     (μ : ∀ n m : ℤ,
         Proj.twist (MvPolynomial.homogeneousSubmodule (Fin 2) k) n ⊗

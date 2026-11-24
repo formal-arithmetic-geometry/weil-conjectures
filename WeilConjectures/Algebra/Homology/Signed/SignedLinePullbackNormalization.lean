@@ -12,8 +12,11 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplemen
 
 /-! # Normalization predicates for signed line pullback
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
-(blueprint: def-pur-signed-line-pullback-normalization-data)
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 04J0
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public section
@@ -38,14 +41,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   [HasWeakSheafify J AddCommGrpCat.{max u v w}]
   [HasWeakSheafify K AddCommGrpCat.{max u v w}]
 
-/-- Unit, degree one, positive tensor recursion, and negative evaluation normalization.
-Source: Stacks 03EL and 0GMX; node proof steps 1, 3--5.
-(blueprint: lem-pur-signed-line-scalar-pullback-square)
-The last equation is the pulled evaluation pairing on generators. Since the positive
-map is invertible it says exactly that the negative map is the transpose of that pairing
-followed by precomposition with the inverse positive map. All source objects V are tested,
-including after restriction; bilinearity and the module adjunction extend it to the
-entire tensor product of the pullbacks. -/
+/-- Unit, degree one, positive tensor recursion, and negative evaluation normalization. -/
 def SignedLinePullbackNormalized
     {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
@@ -90,13 +86,7 @@ def SignedLinePullbackNormalized
           (scalarTensorPower R L (n + 1)) V x)) =
       a.hom.app (op V) (φ.app (op (Over.mk (𝟙 V))) x))
 
-/-- The actual scalar/pullback square, tested on its canonical local generators.
-Source: Stacks 03EL, tensor balancing; blueprint first-line square; node proof steps 2, 8.
-(blueprint: lem-pur-signed-line-scalar-pullback-square)
-Under Θ, the pulled image of x tensor s is (pulled x tensor 1) tensor b(s).
-Thus this equation is exactly q F_S(c) = c' (p tensor 1) Θ. Equality on these
-sections determines the two morphisms by scalar-extension and pullback adjunctions.
-No surjectivity of the sectionwise sheafification unit is assumed. -/
+/-- The actual scalar/pullback square, tested on its canonical local generators. -/
 def SignedLineScalarPullbackSquare
     {R S : Sheaf J CommRingCat.{max u v w}}
     {R' S' : Sheaf K CommRingCat.{max u v w}} (ι : R ⟶ S) (ι' : R' ⟶ S')

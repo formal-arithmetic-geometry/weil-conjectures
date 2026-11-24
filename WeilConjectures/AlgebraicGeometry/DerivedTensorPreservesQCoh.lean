@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine-local cohomology of derived tensor
 
-Source: Stacks Project, Tag 08DX, part (1), with its affine calculation in part (2).
-(blueprint: lem-pc-derived-tensor-qcoh-component).
+## References
+
+* Stacks Project, Tag 08DX
 -/
 
 @[expose] public section
@@ -39,17 +40,8 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 -- The independent localizations and their tensor instances require extra elaboration steps.
 set_option synthInstance.maxSize 2048 in
-/-- Affine-local cohomology calculation for a K-flat tensor representative.
-Source: Stacks Project, Tag 08DX(1), proof using Tag 08DX(2) and Tag 06Z0.
-Proof: exact restriction commutes with cohomology and with the total tensor of complexes,
-and preserves K-flatness. On the affine U, represent the restrictions of Q(P) and Q(N)
-by tilde of module complexes using 06Z0. Resolve the first module complex by a K-flat
-complex. The affine tensor comparison identifies the restricted tensor representative
-with tilde of the total tensor of this resolution and the second module complex.
-Tilde is exact, so every cohomology sheaf is tilde of a module and is quasi-coherent.
-Transfer through the derived comparison and the equivalence with the over category.
-This works in all degrees, including unbounded complexes and the empty open.
-(blueprint: lem-pc-derived-tensor-qcoh-component). -/
+/-- Affine-local cohomology calculation for a K-flat tensor representative
+(Stacks, Tags 08DX and 06Z0). -/
 theorem derivedTensor_cohomology_over_affine {X : Scheme.{uX}}
     [HasDerivedCategory.{wD} (SheafOfModules.{uX} (moduleRings X.toRingedSpace))]
     (P N : CochainComplex (SheafOfModules.{uX} (moduleRings X.toRingedSpace)) ℤ)

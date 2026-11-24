@@ -27,17 +27,14 @@ extension theorem `AlgebraicGeometry.exists_admissibleBlowup_extend_section`.
 - `AlgebraicGeometry.QuasiDomination`: the data of a quasi-domination of `X` over `Y`;
 - `AlgebraicGeometry.QuasiDomination.graph`: the graph `U ⟶ Y ×ₛ X` of a quasi-domination;
 - `AlgebraicGeometry.QuasiDomination.Extends`: a quasi-domination extends a morphism defined
-  on a smaller open (blueprint: `definition-quasi-domination--1`).
+  on a smaller open.
 
 ## Main results
 
 - `AlgebraicGeometry.QuasiDomination.of_isSeparated`: a morphism to a separated target is a
-  quasi-domination of its own source (blueprint:
-  `corollary-extension-proper-target--1`);
+  quasi-domination of its own source;
 - `AlgebraicGeometry.QuasiDomination.U_eq_top`: a quasi-domination over a universally closed
-  target is defined everywhere (blueprint:
-  `lemma:nagata-conrad-quasi-domination-proper-target`).
-
+  target is defined everywhere.
 -/
 
 @[expose] public section
@@ -52,23 +49,9 @@ namespace AlgebraicGeometry
 
 variable {S X Y : Scheme.{u}}
 
-/-- Blueprint `definition-quasi-domination--1`:
-Quasi-domination.
-
-A quasi-domination of `x : X ⟶ S` over a separated `y : Y ⟶ S` is a morphism `hom : U ⟶ Y`
-over `S`, defined on a dense open `U ⊆ X`, whose graph `U ⟶ Y ×ₛ X` has closed range.
-
-```text
-    U ──hom──→ Y
-    │          │
-U.ι │          │ y
-    ↓          ↓
-    X ───x───→ S
-```
-
-The graph is the morphism `U ⟶ Y ×ₛ X` induced by this square, and the condition is that
-its range be closed.
--/
+/-- A **quasi-domination** of `x : X ⟶ S` over a separated `y : Y ⟶ S` is a morphism
+`hom : U ⟶ Y` over `S`, defined on a dense open `U ⊆ X`, whose graph `U ⟶ Y ×ₛ X` has
+closed range. -/
 structure QuasiDomination (x : X ⟶ S) (y : Y ⟶ S) [IsSeparated y] where
   /-- The dense open of `X` on which the quasi-domination is defined. -/
   U : X.Opens
@@ -102,7 +85,7 @@ condition, restated in terms of `AlgebraicGeometry.QuasiDomination.graph`. -/
 theorem isClosed_range_graph (q : QuasiDomination x y) : IsClosed (Set.range q.graph) :=
   q.isClosed_range_lift
 
-/-- Blueprint `definition-quasi-domination--1`: the quasi-domination `q` *extends* the
+/-- The quasi-domination `q` *extends* the
 morphism `f' : U' ⟶ Y` defined on an open `U' ⊆ X`, i.e. `U' ⊆ U` and `q.hom` restricts to
 `f'` on `U'`. -/
 def Extends (q : QuasiDomination x y) {U' : X.Opens} (f' : U'.toScheme ⟶ Y) : Prop :=
@@ -123,12 +106,9 @@ theorem isClosed_range_lift_of_isIso {W : Scheme.{u}} (hom : W ⟶ Y) (j : W ⟶
     IsClosedImmersion.of_comp (pullback.lift hom j h) (pullback.snd y x)
   exact (pullback.lift hom j h).isClosedEmbedding.isClosed_range
 
-/-- Blueprint `corollary-extension-proper-target--1`: **a morphism to a
-separated target is a quasi-domination of its own source**.
-
-For a separated `y : Y ⟶ S` and any `hom : U ⟶ Y`, the pair `(U, hom)` is a quasi-domination
-of `U` over `Y`: the open `U ⊆ U` is dense, and the graph is a section of the separated
-`Y ×ₛ U ⟶ U`, hence a closed immersion. -/
+/-- **A morphism to a separated target is a quasi-domination of its own source**: for a
+separated `y : Y ⟶ S` and any `hom : U ⟶ Y`, the pair `(U, hom)` is a quasi-domination of
+`U` over `Y`. -/
 def of_isSeparated {U : Scheme.{u}} (y : Y ⟶ S) [IsSeparated y] (hom : U ⟶ Y) :
     QuasiDomination (hom ≫ y) y where
   U := ⊤
@@ -139,12 +119,8 @@ def of_isSeparated {U : Scheme.{u}} (y : Y ⟶ S) [IsSeparated y] (hom : U ⟶ Y
     have : IsIso ((⊤ : U.Opens).ι) := inferInstanceAs (IsIso U.topIso.hom)
     isClosed_range_lift_of_isIso _ _ _
 
-/-- Blueprint `prose-A-14`: **a quasi-domination
-over a universally closed target is defined everywhere**.
-
-The projection `pullback.snd y x : Y ×ₛ X ⟶ X` is universally closed, being a base change of
-`y`, so the closed range of the graph maps onto a closed subset of `X`. That subset is `U`,
-which is therefore closed as well as dense, hence all of `X`. -/
+/-- **A quasi-domination over a universally closed target is defined everywhere**: the open
+`U` on which it is defined is all of `X`. -/
 theorem U_eq_top [UniversallyClosed y] (q : QuasiDomination x y) : q.U = ⊤ := by
   have hcl : IsClosed ((pullback.snd y x).base '' Set.range q.graph) :=
     (pullback.snd y x).isClosedMap _ q.isClosed_range_graph

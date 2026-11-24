@@ -11,8 +11,6 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # The geometric comparison from the pro-etale to the etale site
 
-Source: Stacks Project, Tag 099R, opening paragraph; Sites, Tags 00WX, 00X6 and 00YV.
-
 The inclusion is the existing `Scheme.toProEt`, identity on schemes and arrows.
 Its continuity and finite-limit preservation are the existing instances
 `Scheme.isContinuous_toProEt` and `Scheme.preservesFiniteLimits_toProEt`.
@@ -21,6 +19,10 @@ sheafification, rather than a chosen abstract left adjoint, for any coefficient 
 with the needed colimits and sheafification. For abelian coefficients its inverse image is
 definitionally `ProEtale.comparisonUpperStar`; for sets it is the geometric morphism from
 the pro-etale to the etale topos.
+
+## References
+
+* Stacks Project, Tag 099R; Sites, Tags 00WX, 00X6 and 00YV.
 -/
 
 @[expose] public section
@@ -38,20 +40,15 @@ variable [∀ X : Scheme.{u}, HasWeakSheafify X.smallEtaleTopology D]
 variable [∀ X : Scheme.{u}, HasWeakSheafify (Scheme.ProEt.topology X) D]
 
 /-- The comparison inverse image, constructed by left Kan extension along `toProEt X`
-followed by sheafification. The Kan extension at `W` is the colimit over
-`CostructuredArrow (toProEt X).op (op W)`, which is the opposite of the category of pairs
-`(U, W ⟶ u(U))` of Tag 00WX. It is definitionally `comparisonUpperStar` for abelian
-coefficients.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 099R, 00WX and 0B65. -/
+followed by sheafification. It is definitionally `comparisonUpperStar` for abelian
+coefficients (Stacks, Tags 099R, 00WX and 0B65). -/
 noncomputable abbrev comparisonCoefficientPullback (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X) D
     X.smallEtaleTopology (Scheme.ProEt.topology X)
 
 /-- The canonical comparison adjunction for the common coefficient category: the inverse
-image `comparisonCoefficientPullback` is left adjoint to restriction along `toProEt X`.
-Source: blueprint, proposition-comparison-etale-derived-category--5, proof steps 1--4;
-Stacks, Tags 099R, 00WX and 0B65. -/
+image `comparisonCoefficientPullback` is left adjoint to restriction along `toProEt X`
+(Stacks, Tags 099R, 00WX and 0B65). -/
 noncomputable abbrev comparisonCoefficientAdjunction (X : Scheme.{u}) :=
   Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (Scheme.toProEt X) D
     X.smallEtaleTopology (Scheme.ProEt.topology X)
@@ -59,22 +56,8 @@ noncomputable abbrev comparisonCoefficientAdjunction (X : Scheme.{u}) :=
 end
 
 /-- For sets, the inverse image `comparisonCoefficientPullback` preserves finite limits, so
-the comparison adjunction is the geometric morphism from the pro-etale to the etale topos.
-Source: Stacks Project, Tags 099R, 00X6 and 00WJ.
-
-Proof: etale morphisms are weakly etale since they and their open diagonals are flat.
-The existing inclusion therefore retains the underlying schemes and arrows. The terminal
-scheme and scheme fibre products give terminal objects and fibre products in both sites;
-their universal properties show that the inclusion preserves them and hence finite limits.
-Etale covering families are fpqc by `fpqcCover_of_smallEtaleCover`, and their arrows are
-weakly etale, so they are pro-etale covering families. Restriction consequently sends
-sheaves to sheaves. Apply the continuous-functor sheaf adjunction (00WX): its left adjoint
-is the left Kan extension followed by sheafification. The comma categories in this Kan
-extension are filtered, using finite limits of the etale site and their preservation by
-the inclusion (the presheaf-pullback left-exactness lemma). Filtered colimits of sets
-preserve finite limits, so the Kan extension is left exact. Sheafification is left exact
-by 00WJ, and so is inclusion of sheaves into presheaves. Their composite is left exact.
-All categories and comma colimits are taken in the common larger site universe. -/
+the comparison adjunction is the geometric morphism from the pro-etale to the etale topos
+(Stacks, Tags 099R, 00X6 and 00WJ). -/
 theorem preservesFiniteLimits_comparisonCoefficientPullback_type (T : Scheme.{u}) :
     PreservesFiniteLimits (comparisonCoefficientPullback (Type (u + 1)) T) := by
   have hlan : PreservesFiniteLimits
@@ -105,11 +88,8 @@ section
 open CategoryTheory CategoryTheory.Limits
 
 /-- The set-valued comparison adjunction, with inverse image given by left Kan extension
-followed by sheafification and direct image by restriction along `toProEt T`.
-The Kan extension at `W` is the colimit over `CostructuredArrow (toProEt T).op (op W)`,
-which is the opposite of the category of pairs `(U, W ⟶ u(U))` of Tag 00WX.
-Source: Stacks Project, Tags 099R and 00WX
-(blueprint: proposition-comparison-morphism-inverse-image). -/
+followed by sheafification and direct image by restriction along `toProEt T`
+(Stacks, Tags 099R and 00WX). -/
 noncomputable def proEtaleSiteComparison (T : Scheme.{u}) :
     Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
       (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) ⊣

@@ -9,10 +9,12 @@ module
 public import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluation
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 
-/-! # HomComplexUnitEvaluationIsIso
+/-!
+# HomComplexUnitEvaluationIsIso
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-is-iso).
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section
@@ -31,19 +33,7 @@ private lemma isIso_dependent {D : Type v} [Category.{v'} D] {A : D} {B : ℤ �
 
 set_option backward.isDefEq.respectTransparency true in
 -- Dependent projection and sheaf types require extra elaboration steps.
-/-- The degreewise evaluation map is invertible.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(blueprint: lem-sc-hom-complex-unit-evaluation-is-iso).
-
-Proof: the specified projections form a limit fan. For nonzero source degree p,
-the single complex has zero object, and its internal Hom to any target is zero:
-every localized linear map from zero is zero. Thus projection to degree zero
-is an isomorphism. Its inverse is the limit lift with identity at zero and zero
-at every other index. The limit hom-ext principle proves both inverse identities.
-Transport from the source's zero degree to the unit is an isomorphism under
-internal Hom. Finally evaluation at one is `SheafOfModules.homObjUnitIso`.
-Their composite is therefore an isomorphism. This includes zero rings, empty
-sites, zero complexes, and every integer target degree. -/
+/-- The degreewise evaluation map is invertible. -/
 theorem homComplex_unit_evaluation_isIso
     (M : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (n : ℤ) :

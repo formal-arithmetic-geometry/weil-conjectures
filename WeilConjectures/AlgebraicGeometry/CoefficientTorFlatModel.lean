@@ -10,7 +10,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Bounded flat models for the coefficient-model Tor test
 
-Source: Stacks Project, Tags 08G0 and 08G1.
+## References
+
+* Stacks Project, Tags 08G0 and 08G1
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +26,7 @@ namespace CategoryTheory
 variable {C : Type w} [SmallCategory C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{w})
 
-/-- Homology of the ordinary tensor with a degree-zero module.
-Source: Stacks Tags 06YN and 08FZ (auxiliary; not a blueprint node). -/
+/-- Homology of the ordinary tensor with a degree-zero module (Stacks, Tags 06YN and 08FZ). -/
 abbrev coefficientModelTensorTest (P : ConstantCompletion.Cx R)
     (M : ConstantCompletion.Mod R) (q : ℤ) : ConstantCompletion.Mod R :=
   ((((ringedKoszulTensor R).obj P).obj
@@ -87,12 +88,8 @@ private theorem nativeKFlat_iff (P : ConstantCompletion.Cx R) :
       (CochainComplex.mapBifunctor Z P (curriedTensor _))).mpr (h Z hZ')
     exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) ht, ht⟩
 
-/-- Every coefficient-model derived object has a K-flat representative with flat terms.
-Source: Stacks Project, Tag 06YS
-(auxiliary; not a blueprint node).
-Proof: use the native functorial flat resolution of a localization representative.
-The acyclic-test criterion identifies its native K-flatness with the coefficient
-predicate. Localize the quasi-isomorphism and compose with the representative iso. -/
+/-- Every coefficient-model derived object has a K-flat representative with flat terms
+(Stacks, Tag 06YS). -/
 theorem exists_coefficientModelFlatKFlatRepresentative (K : ConstantCompletion.D R) :
     ∃ P : ConstantCompletion.Cx R, P.IsKFlatIndependentCoefficients ∧
       (∀ i, SheafOfModules.IsFlat (P.X i)) ∧
@@ -106,12 +103,8 @@ theorem exists_coefficientModelFlatKFlatRepresentative (K : ConstantCompletion.D
     ⟨asIso ((ConstantCompletion.Q R).map π) ≪≫
       (ConstantCompletion.Q R).objObjPreimageIso K⟩⟩
 
-/-- Tensor-test homology depends only on the derived class of a K-flat representative.
-Source: Stacks Project, Tags 06YN and 06YY
-(auxiliary; not a blueprint node).
-Proof: compute the native derived tensor on both K-flat representatives, tensor the
-supplied derived isomorphism with the identity of the degree-zero module, and apply
-derived homology and its localization factorization. -/
+/-- Tensor-test homology depends only on the derived class of a K-flat representative
+(Stacks, Tags 06YN and 06YY). -/
 theorem coefficientModelTensorTest_iso (P Q : ConstantCompletion.Cx R)
     (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)
     (e : (ConstantCompletion.Q R).obj P ≅ (ConstantCompletion.Q R).obj Q)
@@ -170,18 +163,8 @@ private theorem nativeTor_iff (K : ConstantCompletion.D R) (a b : ℤ) (hab : a 
     exact ⟨(DerivedCategory.isGE_iff _ a).mpr (fun q hq ↦ hz q (Or.inl hq)),
       (DerivedCategory.isLE_iff _ b).mpr (fun q hq ↦ hz q (Or.inr hq))⟩
 
-/-- A coefficient-model Tor bound is exactly a flat complex in the same interval.
-Source: Stacks Project, Tags 08G0 and 08G1
-(auxiliary; not a blueprint node).
-
-Proof: identify the K-flat acyclic test with preservation of quasi-isomorphisms using
-cones and tensor symmetry. The native derived tensor is computed by precisely that
-ordinary total tensor on every K-flat representative. Hence its Tor predicate agrees
-with the coefficient-model predicate. Apply the generic bounded-flat-model criterion:
-test against the unit, take a bounded-above flat resolution, and truncate at the lower
-bound. The opcycle term is flat by universal tensor exactness in the preceding degree.
-Conversely a bounded flat model is K-flat and its tensor with any degree-zero sheaf
-vanishes termwise outside the given interval. -/
+/-- A coefficient-model Tor bound is exactly a flat complex in the same interval
+(Stacks, Tags 08G0 and 08G1). -/
 theorem coefficientModelTorAmplitude_iff_flatModel (K : ConstantCompletion.D R)
     (a b : ℤ) (hab : a ≤ b) :
     HasCoefficientModelTorAmplitude R K a b ↔

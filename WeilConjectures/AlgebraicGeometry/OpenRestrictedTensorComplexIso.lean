@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 
 /-! # Underived tensor restriction and its derived target transport
 
-Source: Stacks Project, Tags 0D5U and 0D5S, exact restriction and composition.
-(blueprint: def-pc-open-restricted-tensor-complex-iso).
+## References
+
+* Stacks Project, Tags 0D5U and 0D5S (exact restriction and composition).
 -/
 
 @[expose] public section
@@ -26,8 +27,7 @@ namespace AlgebraicGeometry.SingleComplexBaseChange
 
 /-- Tensor pullback along an open immersion agrees with exact restriction, with
 normalization fixed by the chosen tensor adjunction and the usual pullback adjunction.
-Source: Stacks Project, Tag 0D5U.
-(blueprint: def-pc-open-restricted-tensor-complex-iso). -/
+(Stacks, Tag 0D5U) -/
 def openTensorRestrictionIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] :
     Scheme.Modules.tensorPullback j ≅ Scheme.Modules.restrictFunctor j :=
   (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).leftAdjointUniq
@@ -36,9 +36,7 @@ def openTensorRestrictionIso {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j
 
 /-- The termwise restriction comparison, constructed by tensor composition and
 open restriction; its orientation is from restriction of pullback to pullback
-of restriction. No derived pullback or complex is involved.
-Source: Stacks Project, Tags 0097 and 0D5U.
-(blueprint: def-pc-open-restricted-tensor-complex-iso). -/
+of restriction. No derived pullback or complex is involved. -/
 def openTensorRestrictionSquareIso {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Opens) :
     Scheme.Modules.tensorPullback k ⋙ Scheme.Modules.restrictFunctor (pullback.fst k U.ι) ≅
       Scheme.Modules.restrictFunctor U.ι ⋙ Scheme.Modules.tensorPullback (pullback.snd k U.ι) :=
@@ -50,8 +48,7 @@ def openTensorRestrictionSquareIso {X X' : Scheme.{u}} (k : X' ⟶ X) (U : X.Ope
     Functor.isoWhiskerRight (openTensorRestrictionIso U.ι) _
 
 /-- Chain-level comparison obtained by applying the constructed tensor restriction
-square degreewise. Source: Stacks Project, Tags 0097 and 0D5U.
-(blueprint: def-pc-open-restricted-tensor-complex-iso). -/
+square degreewise. -/
 def openTensorRestrictionComplexIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -64,9 +61,7 @@ def openTensorRestrictionComplexIso
   (NatIso.mapHomologicalComplex (openTensorRestrictionSquareIso k U) (.up ℤ)).app P
 
 /-- The localized tensor restriction square, with source the derived open pullback
-of the ordinary pullback complex. Both factors are constructed isomorphisms.
-Source: Stacks Project, Tags 0D5U and 0D5S.
-(blueprint: def-pc-open-restricted-tensor-complex-iso). -/
+of the ordinary pullback complex. Both factors are constructed isomorphisms. -/
 def openRestrictedTensorDerivedIso
     [∀ Y : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

@@ -30,13 +30,14 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 /-!
 # Theorem on formal functions over a complete Noetherian base ring
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087U
-(blueprint: lem-weil-pbc-formal-functions-complete-base).
-
 The index n represents the positive level n+1. H^p and Γ are A-modules by restriction of
-scalars along (ΓSpecIso A).inv ≫ f.appTop, as in lem-weil-pbc-theorem-formal-functions.
+scalars along (ΓSpecIso A).inv ≫ f.appTop, as in the theorem on formal functions.
 The isomorphism is specified on every limit projection, so it is the canonical map.
 The degree-zero assertion uses actual global sections.
+
+## References
+
+* Stacks Project, Tag 087U
 -/
 
 @[expose] public section
@@ -112,19 +113,7 @@ private theorem finite_moduleCohomology
 
 /-- For a proper scheme over a complete Noetherian base, coherent cohomology is the
 inverse limit of the cohomology of the infinitesimal quotients, as A-modules.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087U
-(blueprint: lem-weil-pbc-formal-functions-complete-base).
-
-Proof: By lem-pc-coherent-hi (Lemma 02O6), the cohomology module H is finite over A.
-By lem-weil-pbc-finite-module-complete-over-complete-noetherian (Algebra, Lemma 00MA),
-the completion map c : H → H^ is bijective. By lem-weil-pbc-theorem-formal-functions
-(Theorem 02OC), the map θ identifies the
-resulting completion with the inverse limit of the cohomology of the quotients;
-the map in the statement is the composite of these two canonical isomorphisms:
-its nth projection sends x to the image of x under the quotient-induced map,
-since the formal-functions map sends x modulo I^(n+1) to that same image.
-Thus the composite has the displayed projections and is an isomorphism.
--/
+(Stacks, Tag 087U.) -/
 theorem formalFunctions_complete_base
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]
@@ -176,15 +165,7 @@ theorem formalFunctions_complete_base
   exact LinearMap.congr_fun (hθ n) x
 
 /-- The degree-zero case: global sections are the inverse limit of the global sections of
-the infinitesimal quotients, as A-modules.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087U, p = 0
-(blueprint: lem-weil-pbc-formal-functions-complete-base).
-
-Proof: H^0 is global sections (the zeroth right derived functor of the left-exact
-global-sections functor), naturally in the module; transport formalFunctions_complete_base
-at p = 0 along this natural isomorphism, which carries the quotient-induced maps to the
-quotient-induced maps on global sections.
--/
+the infinitesimal quotients, as A-modules. (Stacks, Tag 087U, `p = 0`.) -/
 theorem globalSections_formalFunctions_complete_base
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) [IsAdicComplete I A]

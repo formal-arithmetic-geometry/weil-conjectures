@@ -10,9 +10,11 @@ public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
-# GradedModuleAwayClearingModule
+# Clearing denominators for degree-zero module restriction maps
 
-Source: Stacks Project, Constructions, Lemma 01M4.
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), part (1)(h)
 -/
 
 @[expose] public section
@@ -22,23 +24,7 @@ universe u v
 namespace LocalizedModule
 
 set_option linter.unusedVariables false in
-/-- Clearing denominators for degree-zero module restriction maps.
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(h).
-(blueprint: lem-weil-pbc-graded-module-away-clearing-module)
-
-Proof: If g is nilpotent, M_g and its submodule Z_g are zero; choose n = 0 and x = 0.
-Otherwise represent y in Z_g as v/g^n with numerator and denominator of equal degree,
-using hZ. Since g^n is nonzero, directness of the ring grading identifies their common
-degree with n*deg(g). Set d = deg(f), delta = deg(g), and V = g^(n*(d-1)) • v.
-The grading compatibility puts V in module degree n*d*delta. Thus the fraction
-V/f^(n*delta) belongs to Z_f by hZ. In M_g, lambdaS(U) = g^d/f^delta: a ring map
-preserving S sends the inverse of f to its inverse. Semilinearity of lambda, its
-value on v/1, and invertibility of f give lambda(V/f^(n*delta)) = V/f^(n*delta).
-This equals (g^d/f^delta)^n • (v/g^n), since d > 0 and
-n*(d-1)+n = n*d. Compatibility of rho and rhoS with the ambient maps transfers
-this equality to Z_g; its inclusion into M_g is injective. This supplies x and n.
-No cancellation in S or M is used: only f and g are canceled in M_g, where they
-act invertibly. Zero numerators and n = 0 are included in the calculation. -/
+/-- Clearing denominators for degree-zero module restriction maps. -/
 theorem gradedModuleAwayClearingModule
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

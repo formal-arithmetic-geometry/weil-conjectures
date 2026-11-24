@@ -19,7 +19,9 @@ set_option linter.unusedVariables false
 
 /-! # Canonical descended finite Čech comparison
 
-Source: Stacks Project, Tags 09YN, 09YP and 09YQ.
+## References
+
+* Stacks Project, Tags 09YN, 09YP and 09YQ
 -/
 
 @[expose] public section
@@ -160,36 +162,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 /-- The canonical descended comparison cocone is colimiting.
-Source: Stacks Project, Sites, Tag 09YN; Étale Cohomology, Tag 09YQ (qcqs inverse
-limits); Cohomology on Sites, Tag 09YP, proof of lemma-colimit.
-(blueprint: lem-weil-pbc-etale-limit-finite-cech-colimit).
-
-Proof: Fix n and a tuple t. The qcqs scheme W₀(n,t) has affine-transition base
-changes Wj(j,n,t); their limit is Wlim(n,t), by the base-change limit theorem. The
-projection equations force γ and δ to be the pullback-pasting comparisons. Identify
-the small étale topoi with the full affine étale models (09YQ), apply section
-continuity (09YN) on affine objects: compute inverse-image sections by their
-filtered later-stage presentations (09YM), insert these into the sectionwise
-colimit of G, and reindex the two filtered colimits by their final common
-refinements. Objects, arrows and equalities descend by the site-colimit
-presentation, so the diagonal refinement yields the stage section diagram with
-exactly the units followed by φ as transitions. Glue across a finite affine cover
-of the qcqs nerve object. Filtered colimits commute with the finite equalizer for this
-gluing, including the finite affine covers of intersections. Thus the section
-cocone with transitions η followed by φ and γ inverse, and legs η followed by eG
-inverse, L.ι and δ inverse, is colimiting. The tail is final, so the given hL supplies
-the same colimit sheaf after restricting G to the tail. The last two hypotheses
-identify, after eNj and eNlim, exactly these maps with every component of A.map and
-cA.ι. The set of tuples Fin(n+1) → K is finite. Filtered colimits in abelian groups
-commute with this product, so cA is colimiting in degree n. For any complex cocone,
-the degreewise universal properties give unique maps into its vertex. Their
-commutation with differentials follows by precomposing with all stage legs and
-using the cocone laws; degreewise uniqueness proves this is a unique complex map.
-Hence cA is a colimit in complexes. This proves a universal property for the
-prescribed cocone, not for an arbitrary cocone sharing its objects. In a singleton
-constant system with identity identifications, its degree-zero leg equation is
-identity followed by L.ι; with identity L.ι it excludes a zero leg on a nonzero group.
-Empty K and zero coefficients give zero products, so cause no exception. -/
+(Stacks, Tags 09YN, 09YQ and 09YP) -/
 theorem finite_cech_stage_data_is_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

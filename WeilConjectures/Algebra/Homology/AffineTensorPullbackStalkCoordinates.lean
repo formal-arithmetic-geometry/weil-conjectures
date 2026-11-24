@@ -13,8 +13,12 @@ import WeilConjectures.Algebra.Homology.AffineBaseChangeGlobalSectionsFactorizat
 
 /-! # AffineTensorPullbackStalkCoordinates
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+## References
+
+* Stacks Project, Tag 01HV
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,9 +33,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The additive equivalence of a module isomorphism.
-Source: Mathlib, `CategoryTheory.Iso.toLinearEquiv`.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+/-- The additive equivalence of a module isomorphism. -/
 def affineModuleIsoAddEquiv {R : Type u} [Ring R]
     {U V : ModuleCat.{u} R} (d : U ≅ V) : U ≃+ V where
   toFun := d.hom
@@ -44,17 +46,13 @@ def affineModuleIsoAddEquiv {R : Type u} [Ring R]
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
-/-- Forward-map equation for the module-isomorphism additive equivalence.
-Source: Mathlib, `CategoryTheory.Iso.toLinearEquiv_apply`.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+/-- Forward-map equation for the module-isomorphism additive equivalence. -/
 theorem affineModuleIsoAddEquiv_coe {R : Type u} [Ring R]
     {U V : ModuleCat.{u} R} (d : U ≅ V) :
     ⇑(affineModuleIsoAddEquiv d) = d.hom := by
   rfl
 
-/-- Localization followed by a specified sheaf isomorphism at an affine stalk.
-Source: Stacks Project, Tag 01HV.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+/-- Localization followed by a specified sheaf isomorphism at an affine stalk. -/
 def affineTildeLocalizationStalkIso (A : Type u) [CommRing A]
     (p : PrimeSpectrum A) (V : ModuleCat.{u} A) (W : (Spec (.of A)).Modules)
     (d : (tilde.functor (.of A)).obj V ≅ W) :
@@ -67,9 +65,7 @@ def affineTildeLocalizationStalkIso (A : Type u) [CommRing A]
 
 omit [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
-/-- Forward map of localization followed by the stalk of a sheaf isomorphism.
-Source: Stacks Project, Tag 01HV.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates). -/
+/-- Forward map of localization followed by the stalk of a sheaf isomorphism. -/
 theorem affineTildeLocalizationStalkIso_apply (A : Type u) [CommRing A]
     (p : PrimeSpectrum A) (V : ModuleCat.{u} A) (W : (Spec (.of A)).Modules)
     (d : (tilde.functor (.of A)).obj V ≅ W)
@@ -80,7 +76,8 @@ theorem affineTildeLocalizationStalkIso_apply (A : Type u) [CommRing A]
           (StructureSheaf.toStalkₗ A V p)) x) := by
   rfl
 
-/-- (blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates) -/
+/-- The stalk at `p` of the degree-`i` derived homology of the tensor pullback of the tilde
+complex of `M` is the localization at `p` of the homology of the extended complex. -/
 def affineTensorPullbackHomologyStalkIso
     (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (p : PrimeSpectrum A') (i : ℤ) :
@@ -108,12 +105,7 @@ def affineTensorPullbackHomologyStalkIso
 /-- Affine localization identifies the base-change coordinate with the stalk map
 of the inverse ordinary pullback counit.  This is the geometric localization
 identity from Stacks Tag 0DJ8; the remaining supplied representative isomorphism
-is handled by functoriality in the main theorem.
-(blueprint: new-lem-pc-affine-tensor-pullback-stalk-coordinates-at).
-Proof: expand affine localization and stalk coordinates; the adjunction triangle and
-naturality of the localization germ map identify the inverse counit component. Apply
-the supplied representative isomorphism by functoriality. This works for arbitrary
-complexes and degrees, including zero objects. -/
+is handled by functoriality in the main theorem. -/
 theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
     (A A' : Type u) [CommRing A] [CommRing A'] (φg' : A →+* A')
     (K : schemeDerivedCategory (Spec (.of A)))
@@ -185,20 +177,7 @@ theorem affineTensorPullbackHomologyStalkIso_counit_coordinate
       rfl
 
 
-/-- The canonical target coordinate commutes with stalk localization.
-Source: Stacks Project, Tags 01I9, 01HV and 0DJ8.
-(blueprint: lem-pc-affine-tensor-pullback-stalk-coordinates).
-Proof: expand the target coordinate into exact tilde homology, the termwise
-pullback comparison, the inverse derived counit and e. For the sheaf isomorphism
-d so obtained, the tilde/global-sections unit followed by the tilde/Gamma counit
-is the identity by the adjunction triangle. Naturality of the localization germ
-map identifies the localization of Gamma(d) with the stalk of tilde(Gamma(d)).
-Composing with the stalk counit therefore gives the stalk of d. The first factors
-of d are exactly the isomorphisms defining affineTensorPullbackHomologyStalkIso;
-its final factor is the inverse derived counit followed by derived pullback of e.
-Functoriality of homology and stalks gives the displayed equation. The argument
-works in every degree for arbitrary complexes; zero complexes and identity maps
-cause no exceptions, and zero rings have no primes. -/
+/-- The canonical target coordinate commutes with stalk localization. -/
 theorem affineTensorPullbackHomologyStalkIso_coordinates
     (A A' : Type u) [CommRing A] [CommRing A'] (φg' : A →+* A')
     (K : schemeDerivedCategory (Spec (.of A)))

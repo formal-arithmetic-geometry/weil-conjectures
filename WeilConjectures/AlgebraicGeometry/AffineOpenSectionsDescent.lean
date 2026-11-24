@@ -21,22 +21,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry Topological
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Every section of the inverse image on the affine limit descends to an affine stage.
-Source: Stacks Project, Tag 03Q6, degree zero of lemma-colimit, proof steps (1)--(3);
-Sites, Tag 0A35, lemma-pullback-to-limit; Etale Cohomology, Tag 0EYL.
-Proof: Obtain a unit representative of t on an arbitrary étale X-object U, with
-ψ from the terminal object to its pullback. This is the inverse-image section step,
-separated as affineOpenSections_inverse_image_unit_representatives. The first projection
-of ψ defines q from the limit to U, over X. Since U is étale, it is locally of finite
-presentation. Mathlib's affine-limit morphism factorization theorem gives a stage j
-and g : D(j) to U over X whose composite with the cone projection is q.
-Let γ be this étale-site morphism and let σ be the canonical terminal-to-pullback map
-of D(j). The pullback universal property proves σ followed by p^*γ equals ψ: the
-first projection is the factorization equation, and the second is the equation over
-the limit. Choose s = F(γ)(b). Naturality of the adjunction unit, the supplied formula
-hν₀, and functoriality identify ν₀(s) with the representative equation for t.
-The geometric factorization includes empty limits and singleton diagrams; the remaining
-section lemma records the corresponding sheaf edge cases. No target signature changes.
-(blueprint: affine-open-sections-descent) -/
+(Stacks, Tags 03Q6, 0A35, 0EYL). -/
 theorem affineOpenSections_descent
     {X : Scheme.{u + 1}} {J : Type (u + 1)} [SmallCategory J] [IsCofiltered J]
     (D : J ⥤ X.Etale)

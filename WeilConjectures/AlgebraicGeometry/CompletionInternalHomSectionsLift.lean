@@ -14,8 +14,9 @@ import Mathlib.Topology.Sheaves.Sheaf
 
 /-! # Unique section lifts of compatible quotient morphisms
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, proof.
-(blueprint: lem-weil-pbc-completion-internal-hom-sections-lift).
+## References
+
+* Stacks Project, Tag 0882
 -/
 
 @[expose] public section
@@ -120,42 +121,8 @@ private theorem compatible_sections_lift_of_affine {X : Scheme.{u}}
     exact (congrArg (fun l ↦ l.val n) hl').trans (hs n U).symm
 
 /-- Every compatible family of maps between the completed quotient terms has a
-unique lift to compatible sections of the quotients of internal Hom. The maps e
-are required to be the quotient factorizations of postcomposition.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0882, affine-local proof;
-Lemma 087W, and Algebra, Lemmas 00MA and 00MB; More on Algebra, Lemma 087R.
-(blueprint: lem-weil-pbc-completion-internal-hom-sections-lift).
-
-Proof:
-1. On an affine open U, put A = O_X(U), M = F(U), N = G(U), and J = I(U).
-   A is Noetherian. Coherence and the affine tilde-sections adjunction identify
-   F, G, and Hom(G,F) on U with the finite modules M, N, and H = Hom_A(N,M).
-   Ideal products and quotient projections on affine sections are J^n-products
-   and the corresponding module quotient projections. The equation he therefore
-   identifies e_n(U) with h mod J^n H ↦ (x mod J^n N ↦ h(x) mod J^n M).
-   Surjectivity of the source quotient and the unique factorization through
-   G/J^n G determine this map; there is no choice of a different e_n.
-2. The affine formal-module equivalence identifies compatible quotient morphisms
-   with Hom over the completed ring A^ of N^ and M^. Compatible H/J^n H
-   sections identify with H^. Their evaluation map is the completed-ring-linear
-   map beta evaluating compatible representatives componentwise.
-3. Completion of each finite module P = N, M, H is A^ tensor_A P. The completed
-   ring is flat over A, and the finite A-module N is finitely presented, so flat
-   base change identifies A^ tensor_A H with Hom_{A^}(A^ tensor_A N, A^ tensor_A M).
-   Conjugating by the completion-tensor isomorphisms gives a bijection to
-   Hom_{A^}(N^, M^). It equals beta: both maps are A^-linear and on each generator
-   1 tensor h their values are the completed map h^, by tensor-completion
-   naturality. Thus each compatible local morphism family has a unique section lift.
-4. For a global family t, restrict it to every affine open and use step 3 to
-   obtain local lifts. Evaluation commutes with restriction because e_n are
-   sheaf morphisms. On affine subopens of intersections, uniqueness makes these
-   lifts agree. Such subopens cover the intersections; the sheaf condition
-   therefore glues each level to a global section s_n. Transition compatibility
-   holds on the affine cover, hence globally, so s is a compatible section family.
-   Evaluation agrees with t locally, hence globally. Finally, any two global
-   lifts agree on every affine open by step 3 and thus agree at every level.
-This proves existence and uniqueness, without claiming any e_n is an isomorphism. -/
+unique lift to compatible sections of the quotients of internal Hom, where the maps `e`
+are the quotient factorizations of postcomposition (Stacks, Tags 0882, 087W). -/
 theorem completion_internal_hom_sections_lift {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F G : CoherentModules X)
     (e : ∀ n : ℕᵒᵖ,

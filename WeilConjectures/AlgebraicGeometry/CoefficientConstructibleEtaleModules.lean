@@ -12,10 +12,9 @@ public import WeilConjectures.CategoryTheory.ConstantCoefficientScalarExtension
 
 /-! # Constructible etale modules in the coefficient universe
 
-Source: Stacks Project, Tags 03RW(3) and 09AL
-(auxiliary; not a blueprint node).
-These are the recorded affine-local definitions on the equivalent coefficient-sized model.
-The constant scalar action and every locally closed stratum are retained.
+## References
+
+* Stacks Project, Tags 03RW and 09AL
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,8 @@ attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 
 namespace CategoryTheory
 
-/-- Restrict a constant-ring sheaf module to constant scalars, keeping its additive sheaf.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+/-- Restrict a constant-ring sheaf module to constant scalars, keeping its additive sheaf
+(Stacks, Tag 03CY). -/
 def coefficientModelFixedScalars {C : Type w} [SmallCategory C]
     (T : GrothendieckTopology C) (A : Type w) [CommRing A] :
     ConstantCompletion.Mod (ConstantCompletion.constant T A) ⥤ Sheaf T (ModuleCat.{w} A) where
@@ -50,8 +49,8 @@ def coefficientModelFixedScalars {C : Type w} [SmallCategory C]
       naturality := fun {_ _} g ↦ by ext x; exact PresheafOfModules.naturality_apply f.val g x }
 
 /-- The usual locally constant finite-module condition on any small site.
-The value may vary between covering members, and finiteness means module generation.
-Source: Stacks Tag 03RW(3) (auxiliary; not a blueprint node). -/
+The value may vary between covering members, and finiteness means module generation
+(Stacks, Tag 03RW). -/
 def IsCoefficientModelLocallyConstantFinite {C : Type w} [SmallCategory C]
     (T : GrothendieckTopology C) (A : Type w) [CommRing A]
     (F : Sheaf T (ModuleCat.{w} A)) : Prop :=
@@ -64,17 +63,13 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Base change on the equivalent small etale models.
-Source: Stacks Tags 03D2 and 00VC (auxiliary; not a blueprint node). -/
+/-- Base change on the equivalent small etale models (Stacks, Tags 03D2 and 00VC). -/
 abbrev coefficientEtaleBaseChange {X Y : Scheme.{u}} (f : X ⟶ Y) :
     smallModelComparisonEtaleSite.{u, v} Y ⥤ smallModelComparisonEtaleSite.{u, v} X :=
   AsSmall.down ⋙ MorphismProperty.Over.pullback @Etale ⊤ f ⋙ AsSmall.up
 
-/-- Continuity is transported from etale base change along the site equivalences.
-Source: Stacks Tags 03D2 and 00VC (auxiliary; not a blueprint node).
-Proof: AsSmall.down and AsSmall.up preserve covering sieves under the induced topologies;
-base change preserves etale covers and is the original continuous etale-site functor.
-Compose these three continuous functors. -/
+/-- Continuity is transported from etale base change along the site equivalences
+(Stacks, Tags 03D2 and 00VC). -/
 @[instance] theorem coefficientEtaleBaseChange_isContinuous {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (coefficientEtaleBaseChange.{u, v} f).IsContinuous
       (smallModelComparisonEtaleTopology.{u, v} Y)
@@ -97,8 +92,7 @@ Compose these three continuous functors. -/
     (smallModelComparisonEtaleTopology.{u, v} Y) Y.smallEtaleTopology
     (smallModelComparisonEtaleTopology.{u, v} X)
 
-/-- The same inverse image, constructed by Kan extension and sheafification.
-Source: Stacks Tag 03D2 (auxiliary; not a blueprint node). -/
+/-- The same inverse image, constructed by Kan extension and sheafification (Stacks, Tag 03D2). -/
 def coefficientEtaleFixedPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type (max v (u + 1))) [CommRing A] :=
   Functor.sheafPullbackConstruction.sheafPullback (coefficientEtaleBaseChange.{u, v} f)
@@ -106,8 +100,8 @@ def coefficientEtaleFixedPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     (smallModelComparisonEtaleTopology.{u, v} Y) (smallModelComparisonEtaleTopology.{u, v} X)
 
 /-- Affine-local constructibility with finite locally closed strata and finitely generated
-constant module models. Inverse image and trivializations are on the equivalent small sites.
-Source: Stacks Tag 03RW(3) (auxiliary; not a blueprint node). -/
+constant module models. Inverse image and trivializations are on the equivalent small sites
+(Stacks, Tag 03RW). -/
 def IsCoefficientConstructibleEtaleModule (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (F : CategoryTheory.ConstantCompletion.Mod
@@ -121,8 +115,7 @@ def IsCoefficientConstructibleEtaleModule (X : Scheme.{u})
         ((coefficientEtaleFixedPullback.{u, v} (S.immersion i ≫ U.ι) A).obj
           ((coefficientModelFixedScalars _ A).obj F))
 
-/-- Bounded constructible cohomology, using the standard derived category.
-Source: Stacks Tag 09AL (auxiliary; not a blueprint node). -/
+/-- Bounded constructible cohomology, using the standard derived category (Stacks, Tag 09AL). -/
 def IsCoefficientBoundedConstructibleEtale (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A]
     (K : CategoryTheory.ConstantCompletion.D
@@ -133,14 +126,13 @@ def IsCoefficientBoundedConstructibleEtale (X : Scheme.{u})
   ∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, q < a ∨ b < q →
     IsZero ((coefficientModelCohomology _ q).obj K)
 
-/-- All ambient module morphisms between constructible objects are retained.
-Source: Stacks Tag 03RW(3) (auxiliary; not a blueprint node). -/
+/-- All ambient module morphisms between constructible objects are retained (Stacks, Tag 03RW). -/
 abbrev CoefficientConstructibleEtaleModuleCategory (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :=
   ObjectProperty.FullSubcategory (IsCoefficientConstructibleEtaleModule X A)
 
-/-- All ambient derived morphisms between bounded constructible objects are retained.
-Source: Stacks Tag 09AL (auxiliary; not a blueprint node). -/
+/-- All ambient derived morphisms between bounded constructible objects are retained
+(Stacks, Tag 09AL). -/
 abbrev CoefficientBoundedConstructibleEtaleCategory (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :=
   ObjectProperty.FullSubcategory (IsCoefficientBoundedConstructibleEtale X A)

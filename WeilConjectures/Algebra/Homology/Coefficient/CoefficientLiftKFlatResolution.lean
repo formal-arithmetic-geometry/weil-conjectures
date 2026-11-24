@@ -29,7 +29,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Ulift
 
 /-! # K-flat resolutions compatible with the coefficient-universe lift
 
-Source: Stacks Project, more-algebra.tex, lemma-K-flat-resolution and remark-P-resolution.
+## References
+
+* Stacks Project, More on Algebra, the existence of K-flat resolutions and the
+  filtered-free resolution
 -/
 
 @[expose] public section
@@ -38,23 +41,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits
 
 /-- A small complex admits a K-flat resolution which remains K-flat after lifting
-both its ring and module carriers to the next universe.
-
-Source: Stacks Project, more-algebra.tex, lemma-K-flat-resolution and
-remark-P-resolution (the filtered-free resolution).
-(blueprint: lem-weil-pbc-coefficient-lift-kflat-resolution).
-
-Proof: choose a flat-term K-flat resolution in the original module universe.
-The coefficient-lift functor is additive, preserves flat modules (universe lift
-preserves flatness and restricting along the ring equivalence preserves flatness),
-and preserves colimits indexed by the ordered integers. The latter follows by
-forgetting to sets: the small module forgetful functor preserves filtered colimits,
-the type-universe lift preserves colimits, and the larger module forgetful functor
-reflects filtered colimits. Apply kFlat_map_of_flat_terms to this resolution.
-That theorem proves preservation using a flat resolution and its acyclic flat-term
-cone, bounded-above good truncations, and exact filtered colimits. Thus its tests
-include all acyclic complexes in the larger universe. No bound on the original
-complex is assumed, and the zero complex and zero ring are included. -/
+both its ring and module carriers to the next universe. -/
 theorem CochainComplex.exists_coefficientLift_kFlat_resolution
     {B : Type t} [CommRing B] (P : CochainComplex (ModuleCat.{t} B) ℤ) :
     ∃ (R : CochainComplex (ModuleCat.{t} B) ℤ) (f : R ⟶ P),

@@ -14,8 +14,9 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatu
 
 /-! # Natural additive comparison for acyclic module direct image
 
-Source: Stacks Project, Tags 01F4 (1), 01EY and 03FD.
-(blueprint: lem-pc-k2-leray-acyclic-additive-naturality)
+## References
+
+* Stacks Project, Tags 01F4 (1), 01EY and 03FD.
 -/
 
 @[expose] public section
@@ -92,30 +93,7 @@ private theorem acyclic_composite_comparison
   simpa only [Category.assoc] using congrArg (fun k ↦ c.hom ≫ k) hd.symm
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The additive Leray comparison commutes with coefficient endomorphisms.
-
-Source: Stacks Project, cohomology.tex, Tags 01F4 (1) and 01EY;
-sites-cohomology.tex, Tag 03FD.
-(blueprint: lem-pc-k2-leray-acyclic-additive-naturality)
-
-Proof: Put A = p_* and B = Γ(X, -). The vanishing hypothesis says that F is
-A-right-acyclic. For an injective resolution I of F, the augmentation
-F[0] ⟶ I becomes a quasi-isomorphism after applying A, by
-`quasiIso_map_of_rightAcyclic_nat`; its terms are B-right-acyclic by the
-module pushforward injective acyclicity theorem. The acyclic-resolution
-comparison for B and `isoRightDerivedObj` for A ⋙ B therefore give an
-isomorphism between the two right-derived computations. Lifting an
-endomorphism of F with `InjectiveResolution.desc`, the lift commutes with the
-augmentation. Naturality of `acyclicComparison_naturality` and
-`isoRightDerivedObj_inv_naturality`, followed by cancellation, shows that this
-isomorphism commutes with every endomorphism.
-
-The natural sections-resolution comparison identifies the latter computation
-with module cohomology on Y after forgetting scalars. The existing natural
-source comparison identifies module cohomology on X and Y with H. Composing
-these additive equivalences and applying their naturality equations gives the
-displayed equality. The same argument includes q = 0, zero coefficients and
-empty schemes; no scalar-linearity assertion is used. -/
+/-- The additive Leray comparison commutes with coefficient endomorphisms. -/
 theorem exists_addEquiv_H_pushforward_natural_of_higherDirectImage_vanishing
     {Y X : Scheme.{u}} (p : Y ⟶ X) [HasInjectiveResolutions Y.Modules]
     (F : Y.Modules)

@@ -10,7 +10,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Tensor bounds for arbitrary representatives over a constant field sheaf
 
-Source: Bhatt--Scholze, Remark 6.3.2; Stacks Project, Tags 03ER and 06YL.
+## References
+
+* Bhatt–Scholze, Remark 6.3.2
+* Stacks Project, Tags 03ER and 06YL
 -/
 
 @[expose] public noncomputable section
@@ -38,16 +41,8 @@ private theorem ring_field_tensor_exact
     (SheafOfModules.siteSheafTensorRightIso (ConstantCompletion.constant J k) N) h
 
 /-- Every representative of a bounded derived object over a constant field sheaf has
-bounded tensor with a sheaf placed in degree zero. K-flatness is not needed here.
-
-Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 03ER and 06YL
-(auxiliary; not a blueprint node).
-Proof: every module sheaf over the constant field sheaf is flat by the local
-relation criterion. The comparison from site sheaf tensor to monoidal tensor
-therefore makes right tensor exact. Localization and its homology comparison give
-the bounds on the displayed representative P.
-The signed total of P with N[0] is naturally its termwise right tensor by N, which
-commutes with homology by exactness. Thus its outside-interval homology is zero. -/
+bounded tensor with a sheaf placed in degree zero. K-flatness is not needed here (Bhatt–Scholze,
+Remark 6.3.2; Stacks, Tags 03ER and 06YL). -/
 theorem constantFieldResidueTensor_bounds
     (C : ConstantCompletion.D (ConstantCompletion.constant J k))
     (a b : ℤ)

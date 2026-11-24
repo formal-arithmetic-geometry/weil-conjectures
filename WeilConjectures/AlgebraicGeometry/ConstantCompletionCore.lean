@@ -32,8 +32,10 @@ Scalar changes, finite and derived comparisons, quotient-tower completion and Ko
 presentations.
 
 Part of the split of `Sheaf.Paper.ConstantCompletionEquivalence`.
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
-(auxiliary; not a blueprint node).
+
+## References
+
+* Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940
 -/
 
 @[expose] public noncomputable section
@@ -298,13 +300,8 @@ end CoefficientIdeal
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction along the canonical completion map gives the asserted equivalence.
-Source: Stacks 099I and the opening of 099L
-(auxiliary; not a blueprint node).
-Proof: flat_and_quotients gives flatness and the quotient isomorphism modulo I. The
-constant ideal is finite type since A is Noetherian. Apply the general flat ringed-ideal
-complete equivalence. The kernel ideals in IsComplete are exactly I and I times the
-completed ring by the preceding sections formulas. Its ambient functor is dres. -/
+/-- Restriction along the canonical completion map gives the asserted equivalence
+(Stacks, Tags 099I and 099L). -/
 theorem equivalence (J : GrothendieckTopology C) (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) :
     ∃ e : ObjectProperty.FullSubcategory (IsComplete (projection J A I 0)) ≌
@@ -340,10 +337,7 @@ private def scalarPresheaf {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The ordinary scalar-extension map respects identities and composition.
-Source: Stacks 06YY (auxiliary; not a blueprint node).
-Proof: before sheafification these are the identity and composition laws of the
-sectionwise extension-of-scalars functors. Sheafification preserves those equations. -/
+/-- The ordinary scalar-extension map respects identities and composition (Stacks, Tag 06YY). -/
 theorem change_laws {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     (∀ M : Mod R, SheafOfModules.changeOfRingsHom.{u, u, u} φ M (𝟙 M) = 𝟙 _) ∧
     (∀ (M N L : Mod R) (f : M ⟶ N) (g : N ⟶ L),
@@ -354,8 +348,8 @@ theorem change_laws {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     PresheafOfModules.sheafification (𝟙 (siteModuleRings S).obj)
   exact ⟨fun M ↦ F.map_id M, fun _ _ _ f g ↦ F.map_comp f g⟩
 
-/-- The additive ordinary scalar extension, with the recorded objects and maps.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+/-- The additive ordinary scalar extension, with the recorded objects and maps (Stacks, Tag 06YY).
+-/
 def change {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : Mod R ⥤ Mod S where
   obj := SheafOfModules.changeOfRings.{u, u, u} φ
   map := SheafOfModules.changeOfRingsHom.{u, u, u} φ _
@@ -364,11 +358,7 @@ def change {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : Mod R ⥤ Mod S wher
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Ordinary scalar extension is additive.
-Source: Stacks 06YY (auxiliary; not a blueprint node).
-Proof: sectionwise scalar extension is additive by its ordinary module adjunction.
-Module sheafification is additive by its adjunction to additive restriction and forgetful
-functors. Their composite has exactly the objects and maps defining change. -/
+/-- Ordinary scalar extension is additive (Stacks, Tag 06YY). -/
 theorem change_additive {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     (change φ).Additive := by
   have (U : Cᵒᵖ) : (ModuleCat.extendScalars (φ.hom.app U).hom).Additive :=
@@ -391,8 +381,7 @@ attribute [instance] change_additive
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- The derived scalar-extension universal property and K-flat computation.
-This packages an existing notion, with its universal comparison retained.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+This packages an existing notion, with its universal comparison retained (Stacks, Tag 06YY). -/
 structure DerivedExtension {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) where
   functor : D R ⥤ D S
   comparison : Q R ⋙ functor ⟶
@@ -401,13 +390,8 @@ structure DerivedExtension {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) where
     (HomologicalComplex.quasiIso (Mod R) (ComplexShape.up ℤ))
   computation : ∀ P : Cx R, P.IsKFlatTensor → IsIso (comparison.app P)
 
-/-- The recorded derived change-of-rings theorem supplies this universally specified pair.
-Source: Stacks 06YY (auxiliary; not a blueprint node).
-Proof: use derivedChangeOfRingsIndependentCoefficients with the standard localizations.
-Identify its ordinary tensor witness with change on objects and maps. Compose its
-homotopy counit with quotientCompQhIso and mapHomotopyCategoryFactors. The composite
-localization universal property gives the complex-level universal property, and its
-K-flat computation transports across those factorization isomorphisms. -/
+/-- The recorded derived change-of-rings theorem supplies this universally specified pair
+(Stacks, Tag 06YY). -/
 theorem derivedExtension_exists {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     Nonempty (DerivedExtension φ) := by
   let := HasDerivedCategory.standard (Mod R)
@@ -423,27 +407,24 @@ theorem derivedExtension_exists {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
              ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP) }⟩
 
 /-- Select the universal derived pair, which is determined up to its unique normalized
-natural isomorphism; no arbitrary tensor functor is chosen. Source: Stacks 06YY
-(auxiliary; not a blueprint node). -/
+natural isomorphism; no arbitrary tensor functor is chosen (Stacks, Tag 06YY). -/
 def derivedExtension {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : DerivedExtension φ :=
   Classical.choice (derivedExtension_exists φ)
 
 attribute [local irreducible] derivedExtension
 
-/-- The specified derived extension of scalars. Source: Stacks 06YY
-(auxiliary; not a blueprint node). -/
+/-- The specified derived extension of scalars (Stacks, Tag 06YY). -/
 def extend {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : D R ⥤ D S :=
   (derivedExtension φ).functor
 
-/-- Its universal computation comparison on complexes. Source: Stacks 06YY
-(auxiliary; not a blueprint node). -/
+/-- Its universal computation comparison on complexes (Stacks, Tag 06YY). -/
 def extendComparison {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) :
     Q R ⋙ extend φ ⟶ (change φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ Q S :=
   (derivedExtension φ).comparison
 
 /-- The scalar-extension insertion on sections, including the sheafification unit.
-The target is the sheafification defining the actual scalar-extension tensor functor.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+The target is the sheafification defining the actual scalar-extension tensor functor
+(Stacks, Tag 06YY). -/
 def tensorSection {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) (M : Mod R)
     (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) : ((change φ).obj M).val.obj U :=
   ((PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).unit.app
@@ -734,13 +715,8 @@ attribute [irreducible] resCompIso transitionLift scalarTransition
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The finite comparison before localization, uniquely fixed on sheafified pure tensors.
-Source: Stacks 099L, 06YY (auxiliary; not a blueprint node).
-Proof: the finite quotients have the same kernel after extending the constant ideal.
-Consequently restriction-linear maps to a finite-quotient module are completion-linear.
-The two tensor functors are therefore left adjoints to the same restriction functor.
-Uniqueness of left adjoints gives the comparison, and the adjunction unit gives its
-pure-tensor formula. The formula on tensors with first factor one determines it uniquely. -/
+/-- The finite comparison before localization, uniquely fixed on sheafified pure tensors
+(Stacks, Tags 099L and 06YY). -/
 theorem finiteComparison_existsUnique (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : res (coefficientMap J A I) ⋙ change (quotient J A I n) ≅
@@ -760,16 +736,15 @@ theorem finiteComparison_existsUnique (J : GrothendieckTopology C) (A : Type u)
       ((flat_and_quotients J A I).2.2 n U.unop).2, Ideal.map_span, ← Set.range_comp']
     exact ((flat_and_quotients J A I).2.1 n U.unop).2
 
-/-- The canonical finite comparison, with its pure-tensor normalization fixed uniquely.
-Source: Stacks 099L (auxiliary; not a blueprint node). -/
+/-- The canonical finite comparison, with its pure-tensor normalization fixed uniquely
+(Stacks, Tag 099L). -/
 def finiteComparison (J : GrothendieckTopology C) (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) (n : ℕ) :
     res (coefficientMap J A I) ⋙ change (quotient J A I n) ≅
       change (projection J A I n) :=
   (finiteComparison_existsUnique J A I n).exists.choose
 
-/-- The standard computation square for exact restriction of scalars.
-Source: Stacks 099I (auxiliary; not a blueprint node). -/
+/-- The standard computation square for exact restriction of scalars (Stacks, Tag 099I). -/
 def resFactors {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     (res φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ Q R ≅ Q B ⋙ dres φ :=
   letI := HasDerivedCategory.standard (Mod R)
@@ -1206,12 +1181,8 @@ attribute [local irreducible] dres change
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Finite scalar comparison in D(S_n), normalized on every flat-term K-flat complex.
-Source: Stacks 099L, 06YY (auxiliary; not a blueprint node).
-Proof: a flat-term K-flat B-complex remains K-flat over R because B is R-flat.
-Use finiteComparison on that representative. Its pure-tensor formula is natural and
-independent of replacements by the universal derived-change-of-rings counits, giving
-this natural isomorphism and the displayed computation square. -/
+/-- Finite scalar comparison in D(S_n), normalized on every flat-term K-flat complex
+(Stacks, Tags 099L and 06YY). -/
 theorem finiteDerivedComparison (J : GrothendieckTopology C) (A : Type u) [CommRing A]
     [IsNoetherianRing A] (I : Ideal A) (n : ℕ) :
     ∃ e : dres (coefficientMap J A I) ⋙ extend (quotient J A I n) ≅
@@ -1252,36 +1223,30 @@ end
 
 variable (J A I)
 
-/-- The two coefficient sheaves, false for constant and true for completed coefficients.
-Source: Stacks 099L (auxiliary; not a blueprint node). -/
+/-- The two coefficient sheaves, false for constant and true for completed coefficients
+(Stacks, Tag 099L). -/
 abbrev coefficients (b : Bool) : Sheaf J CommRingCat.{u} :=
   if b then completed J A I else constant J A
 
-/-- Their structural constant coefficient maps. Source: Stacks 099L
-(auxiliary; not a blueprint node). -/
+/-- Their structural constant coefficient maps (Stacks, Tag 099L). -/
 def baseMap (b : Bool) : constant J A ⟶ coefficients J A I b :=
   match b with
   | false => 𝟙 _
   | true => coefficientMap J A I
 
-/-- Their finite projections, the original quotient maps. Source: Stacks 099L
-(auxiliary; not a blueprint node). -/
+/-- Their finite projections, the original quotient maps (Stacks, Tag 099L). -/
 def finiteMap (b : Bool) (n : ℕ) : coefficients J A I b ⟶ finite J A I n :=
   match b with
   | false => quotient J A I n
   | true => projection J A I n
 
-/-- Finite reduction with the original coefficient action retained. Source: Stacks 099L
-(auxiliary; not a blueprint node). -/
+/-- Finite reduction with the original coefficient action retained (Stacks, Tag 099L). -/
 def reduction (b : Bool) (n : ℕ) :
     Mod (coefficients J A I b) ⥤ Mod (coefficients J A I b) :=
   change (finiteMap J A I b n) ⋙ res (finiteMap J A I b n)
 
-/-- The quotient transition is fixed uniquely by its sectionwise tensor formula.
-Source: Stacks 099L, 06YY (auxiliary; not a blueprint node).
-Proof: the finite quotient transition preserves the balanced tensor relations because
-it commutes with the coefficient projections. Sheafify its map s tensor m ↦ bar(s) tensor m.
-The formula is linear, commutes with restrictions and module maps, and determines it uniquely. -/
+/-- The quotient transition is fixed uniquely by its sectionwise tensor formula
+(Stacks, Tags 099L and 06YY). -/
 theorem reductionStep_existsUnique (b : Bool) (n : ℕ) :
     ∃! t : reduction J A I b (n + 1) ⟶ reduction J A I b n,
       ∀ (M : Mod (coefficients J A I b)) (U : Cᵒᵖ)
@@ -1311,22 +1276,20 @@ theorem reductionStep_existsUnique (b : Bool) (n : ℕ) :
   intro U s m
   exact (ht' M U s m).trans (scalarTransition_tmul _ _ _ h M U s m).symm
 
-/-- The actual finite quotient transition with its uniquely specified tensor formula.
-Source: Stacks 099L (auxiliary; not a blueprint node). -/
+/-- The actual finite quotient transition with its uniquely specified tensor formula
+(Stacks, Tag 099L). -/
 def reductionStep (b : Bool) (n : ℕ) :
     reduction J A I b (n + 1) ⟶ reduction J A I b n :=
   (reductionStep_existsUnique J A I b n).exists.choose
 
-/-- The strict reduction tower, retaining all its transitions functorially.
-Source: Stacks 099L, 099M (auxiliary; not a blueprint node). -/
+/-- The strict reduction tower, retaining all its transitions functorially
+(Stacks, Tags 099L and 099M). -/
 def reductionTower (b : Bool) : Mod (coefficients J A I b) ⥤
     (ℕᵒᵖ ⥤ Mod (coefficients J A I b)) :=
   (Functor.ofOpSequence (reductionStep J A I b)).flip
 
-/-- The tower is additive, since every evaluation is additive scalar extension/restriction.
-Source: Stacks 06YY (auxiliary; not a blueprint node).
-Proof: evaluate the additive-functor identity at each tower index. The chosen tensor functor
-and restriction of scalars are additive. Evaluation is jointly faithful. -/
+/-- The tower is additive, since every evaluation is additive scalar extension/restriction
+(Stacks, Tag 06YY). -/
 theorem reductionTower_additive (b : Bool) : (reductionTower J A I b).Additive := by
   constructor
   intro M N f g
@@ -1340,8 +1303,7 @@ theorem reductionTower_additive (b : Bool) : (reductionTower J A I b).Additive :
 
 attribute [instance] reductionTower_additive
 
-/-- The constant module tower functor. Source: Stacks 0940
-(auxiliary; not a blueprint node). -/
+/-- The constant module tower functor (Stacks, Tag 0940). -/
 abbrev constantTower (O : Sheaf J CommRingCat.{u}) : Mod O ⥤ (ℕᵒᵖ ⥤ Mod O) :=
   Functor.const ℕᵒᵖ
 
@@ -1397,11 +1359,8 @@ private theorem scalarExtensionUnit_exists {R S : Sheaf J CommRingCat.{u}} (φ :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The strict quotient unit is uniquely determined by m ↦ 1 tensor m at every level.
-Source: Stacks 099M (auxiliary; not a blueprint node).
-Proof: the scalar-extension units commute with quotient transitions since they preserve 1.
-They are linear in the original coefficients and natural in M, so form a natural
-transformation of strict towers. The section formula determines every component. -/
+/-- The strict quotient unit is uniquely determined by m ↦ 1 tensor m at every level
+(Stacks, Tag 099M). -/
 theorem reductionUnit_existsUnique (b : Bool) :
     ∃! η : constantTower J (coefficients J A I b) ⟶ reductionTower J A I b,
       ∀ (M : Mod (coefficients J A I b)) (n : ℕ) (U : Cᵒᵖ) (m : M.val.obj U),
@@ -1443,34 +1402,30 @@ theorem reductionUnit_existsUnique (b : Bool) :
   ext U m
   exact (hη' M n.unop U m).trans (hη n.unop M U m).symm
 
-/-- The actual strict quotient-tower unit. Source: Stacks 099M
-(auxiliary; not a blueprint node). -/
+/-- The actual strict quotient-tower unit (Stacks, Tag 099M). -/
 def reductionUnit (b : Bool) :
     constantTower J (coefficients J A I b) ⟶ reductionTower J A I b :=
   (reductionUnit_existsUnique J A I b).exists.choose
 
 variable {J A I}
 
-/-- The standard derived category of strict module towers. Source: Stacks 0940
-(auxiliary; not a blueprint node). -/
+/-- The standard derived category of strict module towers (Stacks, Tag 0940). -/
 abbrev TD (O : Sheaf J CommRingCat.{u}) :=
   @DerivedCategory (ℕᵒᵖ ⥤ Mod O) _ _ (HasDerivedCategory.standard _)
 
-/-- Localization of strict tower complexes. Source: Stacks 0940
-(auxiliary; not a blueprint node). -/
+/-- Localization of strict tower complexes (Stacks, Tag 0940). -/
 abbrev TQ (O : Sheaf J CommRingCat.{u}) :
     CochainComplex (ℕᵒᵖ ⥤ Mod O) ℤ ⥤ TD O :=
   @DerivedCategory.Q (ℕᵒᵖ ⥤ Mod O) _ _ (HasDerivedCategory.standard _)
 
-/-- The degreewise limit functor on complexes, with an abstract coefficient category.
-Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+/-- The degreewise limit functor on complexes, with an abstract coefficient category
+(Stacks, Tag 0940). -/
 def complexLimitFunctor (M : Type*) [Category M] [Preadditive M]
     [HasLimitsOfShape ℕᵒᵖ M] [(lim : (ℕᵒᵖ ⥤ M) ⥤ M).PreservesZeroMorphisms] :
     CochainComplex (ℕᵒᵖ ⥤ M) ℤ ⥤ CochainComplex M ℤ :=
   (lim : (ℕᵒᵖ ⥤ M) ⥤ M).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The ordinary termwise limit of strict tower complexes. Source: Stacks 0940
-(auxiliary; not a blueprint node). -/
+/-- The ordinary termwise limit of strict tower complexes (Stacks, Tag 0940). -/
 abbrev ordinaryLimit (O : Sheaf J CommRingCat.{u}) :
     CochainComplex (ℕᵒᵖ ⥤ Mod O) ℤ ⥤ Cx O :=
   letI : (lim : (ℕᵒᵖ ⥤ Mod O) ⥤ Mod O).Additive :=
@@ -1479,8 +1434,8 @@ abbrev ordinaryLimit (O : Sheaf J CommRingCat.{u}) :
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The total right derived strict-limit universal property and K-injective computation.
-Source: Stacks 0940, 0941 (auxiliary; not a blueprint node). -/
+/-- The total right derived strict-limit universal property and K-injective computation
+(Stacks, Tags 0940 and 0941). -/
 structure StrictLimit (O : Sheaf J CommRingCat.{u}) where
   functor : TD O ⥤ D O
   comparison : ordinaryLimit O ⋙ Q O ⟶ TQ O ⋙ functor
@@ -1489,11 +1444,8 @@ structure StrictLimit (O : Sheaf J CommRingCat.{u}) where
   computation : ∀ P : CochainComplex (ℕᵒᵖ ⥤ Mod O) ℤ,
     P.IsKInjective → IsIso (comparison.app P)
 
-/-- The strict-tower theorem supplies this existing total derived functor and comparison.
-Source: Stacks 0940 (auxiliary; not a blueprint node).
-Proof: specialize ringedStrictTowerHomotopyLimit to O with commutativity retained and to
-the standard localizations. Project its universal right-derived pair and its computation
-on K-injective tower complexes. These are precisely the fields displayed here. -/
+/-- The strict-tower theorem supplies this existing total derived functor and comparison
+(Stacks, Tag 0940). -/
 theorem strictLimit_exists (O : Sheaf J CommRingCat.{u}) : Nonempty (StrictLimit O) := by
   let := HasDerivedCategory.standard (Mod O)
   let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod O)
@@ -1504,26 +1456,23 @@ theorem strictLimit_exists (O : Sheaf J CommRingCat.{u}) : Nonempty (StrictLimit
            universal := huniv
            computation := hcomp }⟩
 
-/-- Select the total derived strict limit by its universal comparison.
-Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+/-- Select the total derived strict limit by its universal comparison (Stacks, Tag 0940). -/
 def strictLimit (O : Sheaf J CommRingCat.{u}) : StrictLimit O :=
   Classical.choice (strictLimit_exists O)
 
 attribute [local irreducible] strictLimit
 
-/-- Total right derived strict inverse limit, not a noncanonical triangulated cone.
-Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+/-- Total right derived strict inverse limit, not a noncanonical triangulated cone
+(Stacks, Tag 0940). -/
 def rlim (O : Sheaf J CommRingCat.{u}) : TD O ⥤ D O := (strictLimit O).functor
 
-/-- Its universal comparison from ordinary termwise inverse limit.
-Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+/-- Its universal comparison from ordinary termwise inverse limit (Stacks, Tag 0940). -/
 def limitComparison (O : Sheaf J CommRingCat.{u}) :
     ordinaryLimit O ⋙ Q O ⟶ TQ O ⋙ rlim O := (strictLimit O).comparison
 
 variable (J A I)
 
-/-- The ordinary strict reduction-tower complex, on one fixed representative.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+/-- The ordinary strict reduction-tower complex, on one fixed representative (Stacks, Tag 099M). -/
 abbrev reductionComplex (b : Bool) (P : Cx (coefficients J A I b)) :=
   ((reductionTower J A I b).mapHomologicalComplex (ComplexShape.up ℤ)).obj P
 
@@ -1575,11 +1524,8 @@ private theorem complexLimitUnit {M : Type*} [Category M] [Preadditive M]
     exact hg q n.unop
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ordinary limit unit is the unique chain map with the prescribed quotient components.
-Source: Stacks 099M, 0940 (auxiliary; not a blueprint node).
-Proof: at degree q use limit.lift on the strict quotient-unit cone. The differential
-commutes with every projection by naturality of reductionUnit, hence with their limit.
-Joint monicity of the projections proves uniqueness in every degree. -/
+/-- The ordinary limit unit is the unique chain map with the prescribed quotient components
+(Stacks, Tags 099M and 0940). -/
 theorem ordinaryUnit_existsUnique (b : Bool) (P : Cx (coefficients J A I b)) :
     ∃! f : P ⟶ (ordinaryLimit (coefficients J A I b)).obj (reductionComplex J A I b P),
       ∀ (q : ℤ) (n : ℕ), f.f q ≫
@@ -1590,8 +1536,7 @@ theorem ordinaryUnit_existsUnique (b : Bool) (P : Cx (coefficients J A I b)) :
     Functor.additive_of_preserves_binary_products _
   exact complexLimitUnit (reductionTower J A I b) (reductionUnit J A I b) P
 
-/-- The actual ordinary strict-limit unit, fixed by its quotient projections.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+/-- The actual ordinary strict-limit unit, fixed by its quotient projections (Stacks, Tag 099M). -/
 def ordinaryUnit (b : Bool) (P : Cx (coefficients J A I b)) :
     P ⟶ (ordinaryLimit (coefficients J A I b)).obj (reductionComplex J A I b P) :=
   (ordinaryUnit_existsUnique J A I b P).exists.choose
@@ -1943,9 +1888,8 @@ private theorem derived_tower_presentation_cps
   exact ⟨mk LT β unit hu hc he⟩
 
 /-- The universal derived-tower laws and the actual quotient-unit computation.
-Naming this predicate keeps the dependent record small; its normalization is unchanged.
-Source: Stacks 099M, 06YY, 0940
-(auxiliary; not a blueprint node). -/
+Naming this predicate keeps the dependent record small; its normalization is unchanged
+(Stacks, Tags 099M, 06YY and 0940). -/
 def QuotientPresentationLaws (b : Bool)
     (tower : D (coefficients J A I b) ⥤ TD (coefficients J A I b))
     (comparison : Q (coefficients J A I b) ⋙ tower ⟶
@@ -1966,9 +1910,8 @@ def QuotientPresentationLaws (b : Bool)
 set_option genSizeOf false in
 set_option genInjectivity false in
 /-- A universal derived strict reduction tower with its prescribed completion unit.
-The laws specify the actual quotient maps and total right derived strict inverse limit.
-Source: Stacks 099M, 06YY, 0940
-(auxiliary; not a blueprint node). -/
+The laws specify the actual quotient maps and total right derived strict inverse limit
+(Stacks, Tags 099M, 06YY and 0940). -/
 structure QuotientPresentation (b : Bool) where
   tower : D (coefficients J A I b) ⥤ TD (coefficients J A I b)
   comparison : Q (coefficients J A I b) ⋙ tower ⟶
@@ -2012,15 +1955,8 @@ private theorem module_tower_presentation {O : Sheaf J CommRingCat.{u}}
   exact derived_tower_presentation_cps T η S hres hT (rlim O) (limitComparison O) u hu X mk
 
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Strict diagram K-flat replacements and the universal derived limit supply this pair.
-Source: Stacks 06YY, 0940, 099M
-(auxiliary; not a blueprint node).
-Proof: use a single flat-term K-flat representative for the entire reduction tower.
-Each scalar extension preserves quasi-isomorphisms between such representatives, so the
-resolving-class localization theorem gives the displayed universal tower and computation.
-Apply total right derived limit to its strict quotient units. Their naturality and
-invariance under quasi-isomorphisms descend the unit to D(O). The comparison square is
-its construction, and determines it because every object has such a representative. -/
+/-- Strict diagram K-flat replacements and the universal derived limit supply this pair
+(Stacks, Tags 06YY, 0940 and 099M). -/
 theorem quotientPresentation_exists (b : Bool) : Nonempty (QuotientPresentation J A I b) := by
   let : Abelian (Mod (coefficients J A I b)) :=
     { (inferInstance : Abelian (Mod (coefficients J A I b))) with
@@ -2038,33 +1974,31 @@ theorem quotientPresentation_exists (b : Bool) : Nonempty (QuotientPresentation 
 
 end
 
-/-- Choose the universally specified reduction tower and normalized unit.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+/-- Choose the universally specified reduction tower and normalized unit (Stacks, Tag 099M). -/
 def quotientPresentation (b : Bool) : QuotientPresentation J A I b :=
   Classical.choice (quotientPresentation_exists J A I b)
 
 attribute [local irreducible] quotientPresentation
 
-/-- Quotient-tower derived completion, using total right derived inverse limit.
-Source: Stacks 099M (auxiliary; not a blueprint node). -/
+/-- Quotient-tower derived completion, using total right derived inverse limit (Stacks, Tag 099M).
+-/
 def completion (b : Bool) : D (coefficients J A I b) ⥤ D (coefficients J A I b) :=
   (quotientPresentation J A I b).tower ⋙ rlim (coefficients J A I b)
 
-/-- Its prescribed quotient-tower completion unit. Source: Stacks 099M
-(auxiliary; not a blueprint node). -/
+/-- Its prescribed quotient-tower completion unit (Stacks, Tag 099M). -/
 def completionUnit (b : Bool) : 𝟭 (D (coefficients J A I b)) ⟶ completion J A I b :=
   (quotientPresentation J A I b).unit
 
-/-- The existing strict Koszul presentation, for the images of the given generators.
-Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
+/-- The existing strict Koszul presentation, for the images of the given generators
+(Stacks, Tag 0A0E). -/
 abbrev KoszulPresentation (b : Bool) (r : ℕ) (a : Fin r → A) :=
   letI := HasDerivedCategory.standard (Mod (coefficients J A I b))
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod (coefficients J A I b))
   RingedKoszulLimitPresentation (coefficients J A I b) r
     (fun i ↦ algebraSection (baseMap J A I b) (a i))
 
-/-- Completion from the actual dual Koszul tensor tower with transitions (a_i,1).
-Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
+/-- Completion from the actual dual Koszul tensor tower with transitions (a_i,1) (Stacks, Tag 0A0E).
+-/
 def koszulCompletion {b : Bool} {r : ℕ} {a : Fin r → A}
     (K : KoszulPresentation J A I b r a) : D (coefficients J A I b) ⥤
       D (coefficients J A I b) :=
@@ -2072,8 +2006,7 @@ def koszulCompletion {b : Bool} {r : ℕ} {a : Fin r → A}
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod (coefficients J A I b))
   K.completion
 
-/-- The specified degree-zero Koszul unit in the standard localization.
-Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
+/-- The specified degree-zero Koszul unit in the standard localization (Stacks, Tag 0A0E). -/
 def koszulUnit {b : Bool} {r : ℕ} {a : Fin r → A}
     (K : KoszulPresentation J A I b r a) (M : D (coefficients J A I b)) :
     M ⟶ (koszulCompletion J A I K).obj M :=

@@ -16,9 +16,9 @@ import WeilConjectures.Algebra.Homology.FiniteStripConeGradedMapDifferential
 
 /-! # Three-term comparison for the finite-strip cone filtration
 
-Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable
-variant, refined by the explicit diagonal quotient argument of
-lem-sc-finite-strip-cone-filtration, step 3.
+## References
+
+* Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable variant
 -/
 
 @[expose] public section
@@ -27,29 +27,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace HomologicalComplex₂
 
-/-- The three-term short complexes of the graded cone and translated row cone agree.
-Source: Stacks Project, Homology, Lemma 12.25.4 (Tag 0133), second-variable variant;
-explicit cone refinement in lem-sc-finite-strip-cone-filtration, step 3.
-(blueprint: lem-sc-finite-strip-cone-filtration-graded-point)
-
-Proof: Evaluation of cochain complexes preserves cokernels, so evaluate the
-cokernel defining the graded piece degreewise. In degree m, quotient the vertical
-tail p by the tail p+1. The diagonal
-coproduct leaves only K^(m-p,p), together with A.X p when m=p-1. The diagonal
-projections induce inverse maps on the quotient: all other summands factor
-through the next tail and vanish. To check the inverse on the quotient, cancel
-its epic cokernel projection and check on the source and supported diagonal
-inclusions generating the step. The p diagonal gives the identity; every larger
-vertical index factors through step p+1 and gives zero. The vertical differential
-increases its vertical index and therefore vanishes in the quotient. The
-horizontal total sign is one. The negative source differential also increases
-the vertical index and vanishes; the surviving augmentation block is a p.
-The single-complex identifications and hf
-identify these blocks with the row cone. Apply these degreewise isomorphisms
-at m=n-1,n,n+1. The component differential formulas give the two commuting
-squares, hence an isomorphism of short complexes. Zero summands outside the
-strip and the single complex are handled by their unique maps, including r=0.
--/
+/-- The three-term short complexes of the graded cone and translated row cone agree. -/
 theorem finite_strip_cone_filtration_graded_point
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))

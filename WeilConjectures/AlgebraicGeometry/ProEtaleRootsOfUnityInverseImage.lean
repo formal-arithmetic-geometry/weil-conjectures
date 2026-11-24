@@ -9,12 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
 
 /-! # Inverse-image comparison for pro-etale roots of unity
 
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
-
 ## Main definitions
 
 - `proEtaleRootsOfUnityDirectImageMap`: pullback of roots along the projection.
 - `proEtaleRootsOfUnityInverseImageMap`: its inverse-image adjunct.
+
+## References
+
+* Stacks Project, Tag 03PK.
 -/
 
 @[expose] public section
@@ -49,10 +51,7 @@ private theorem sections_map (S : Scheme.{u}) (N : ℕ) {U V : S.ProEtᵒᵖ}
   rw [← sections_inclusion, ← sections_inclusion] at h
   exact congrArg (fun y ↦ y.down.toMul) h
 
-/-- Naturality of the sectionwise projection formula.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
-The pullback projection square commutes, and global sections turn this commutative
-square into the equality of ring maps used below. -/
+/-- Naturality of the sectionwise projection formula (Stacks, Tag 03PK). -/
 private theorem proEtaleRootsOfUnityDirectImageNaturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) :
     ∀ (U V : Y.ProEtᵒᵖ) (a : U ⟶ V),
@@ -108,13 +107,8 @@ private theorem proEtaleRootsOfUnityDirectImageNaturality {X Y : Scheme.{u}} (f 
         (restrictRootsOfUnity a'.unop.left.appTop.hom N (Additive.toMul y)))
         ((eX U).apply_symm_apply (r U (eY U x)))).symm.trans h.symm)
 
-/-- Pullback of roots along the fibre-product projection uniquely determines a sheaf map.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node).
-Proof: on `V`, pull units back by the global-sections ring map of `pullback.fst V.hom f`.
-Ring homomorphisms preserve multiplication, powers and one, so this is a group homomorphism
-on roots. The pullback projection commutes with every arrow `V' → V`; functoriality of
-global sections gives naturality. The roots-section equivalences and injectivity of their
-inclusions imply uniqueness sectionwise, hence uniqueness as a sheaf map. -/
+/-- Pullback of roots along the fibre-product projection uniquely determines a sheaf map
+(Stacks, Tag 03PK). -/
 theorem existsUnique_proEtaleRootsOfUnityDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) :
     ∃! b : proEtaleRootsOfUnitySheaf Y N ⟶
@@ -152,8 +146,8 @@ theorem existsUnique_proEtaleRootsOfUnityDirectImageMap {X Y : Scheme.{u}} (f : 
       ((proEtaleRootsOfUnitySections X N
         ((proEtaleBaseChange f).op.obj V)).apply_symm_apply _).symm
 
-/-- The direct-image root map `β`, fixed uniquely by the fibre-product projection formula.
-Source: Stacks Project, Tag 03PK (auxiliary; not a blueprint node). -/
+/-- The direct-image root map `β`, fixed uniquely by the fibre-product projection formula
+(Stacks, Tag 03PK). -/
 noncomputable def proEtaleRootsOfUnityDirectImageMap {X Y : Scheme.{u}} (f : X ⟶ Y)
     (N : ℕ) :
     proEtaleRootsOfUnitySheaf Y N ⟶

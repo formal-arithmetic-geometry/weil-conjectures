@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 
 /-! # CoherentFormalModulesAffineQuotient
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+Stacks Project, Tag 087W.
 -/
 
 @[expose] public section
@@ -100,23 +100,8 @@ private theorem finite_of_completion_generators
     exact Submodule.smul_mem _ a ih
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Quotient systems of finite completed modules satisfy the coherent formal conditions.
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof reduction to module
-systems; Algebra 05GG (completion modulo an ideal power), and Schemes 01I7/01IB.
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine-quotient).
-
-Proof: Write B for the completion. Since A is Noetherian, I is finitely generated and
-B/I^(n+1)B = A/I^(n+1). For finite B-module N, reducing a finite generating family
-shows N/I^(n+1)N is finite over A/I^(n+1), hence over A. Affine tilde is exact and
-identifies ideal products and their cokernels with module ideal products and quotients.
-Consequently the nth sheaf in the displayed completion is canonically tilde of this
-finite A-module. It is quasi-coherent of finite type, hence coherent on Spec A.
-Multiplication by I^(n+1) on this quotient is zero, giving the annihilation condition.
-For successive levels, quotienting N/I^(n+2)N by I^(n+1) gives N/I^(n+1)N because
-I^(n+2)N is contained in I^(n+1)N. Applying tilde and the cokernel comparison gives
-the required quotient isomorphism. Its composite with the projection is the canonical
-reduction map, which is exactly formalCompletionFunctor's transition. These are the
-three clauses of IsCoherentFormalModule. -/
+/-- Quotient systems of finite completed modules satisfy the coherent formal conditions
+(Stacks, Tag 087W). -/
 theorem coherentFormalModules_affine_quotient_coherent
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)
@@ -210,12 +195,7 @@ theorem coherentFormalModules_affine_quotient_coherent
     exact formalModuleQuotient_iterated J F (Nat.le_succ (n + 1))
 
 /-- The canonical quotient functor, lifted to coherent formal systems.
-Its objects and maps are the existing sheaf quotient construction; only the proof of
-membership in the full subcategory uses the preceding theorem.
-Source: Stacks Project, Lemma 087W (blueprint:
-lem-weil-pbc-coherent-formal-modules-affine-quotient). 
-(blueprint: lem-weil-pbc-coherent-formal-modules-affine-quotient)
--/
+(Stacks, Tag 087W). -/
 noncomputable def coherentFormalModules_affine_quotientFunctor
     (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (J : (Spec (CommRingCat.of A)).IdealSheafData)

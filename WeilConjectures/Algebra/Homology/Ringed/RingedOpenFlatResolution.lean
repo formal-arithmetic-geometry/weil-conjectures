@@ -38,14 +38,15 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Flat resolutions under ringed slice extension
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8I
-(lemma-j-shriek-and-tensor); the cochain and strict-tower refinement is agent-written
-(blueprint: lem-cbc-ringed-open-flat-resolution).
-
 Extension is the existing direct-sum presheaf followed by module sheafification.
 All complexes are integer-indexed and may be unbounded. Strict inverse sequences
 are functors from the opposite natural-number order, indexed starting at zero;
 reindexing by n + 1 gives the convention of towers starting at one.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI, 03DJ, 03EK and 0E8I
+* Stacks Project, Homology, Tag 010N
 -/
 
 @[expose] public noncomputable section
@@ -62,10 +63,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-/-- Present the fixed-right-factor site tensor using the left presheaf tensor.
-Source: Stacks Project, Tag 03EK (blueprint: lem-cbc-ringed-open-flat-resolution).
-Proof: braid the presheaf factors, apply the shared sectionwise tensor comparison,
-and whisker by the forgetful functor and module sheafification. -/
+/-- Present the fixed-right-factor site tensor using the left presheaf tensor. -/
 private def siteLeftTensorIso {T : Type c} [Category.{v} T]
     {K : GrothendieckTopology T} [EssentiallySmall.{r} T]
     [HasSheafify K AddCommGrpCat.{r}]
@@ -86,9 +84,7 @@ variable {S : Type c} [Category.{v} S] {J : GrothendieckTopology S}
   (R : Sheaf J CommRingCat.{max c v r}) (U : S)
 
 /-- The existing quasi-isomorphism predicate with canonical small-site sheafification
-witnesses supplied explicitly. No homology theory or notion of quasi-isomorphism is changed.
-Source: Stacks Project, Modules on Sites, Tags 03DI--03DJ, and Homology, Tag 010N
-(blueprint: lem-cbc-ringed-open-flat-resolution). -/
+witnesses supplied explicitly. No homology theory or notion of quasi-isomorphism is changed. -/
 abbrev ringedOpenQuasiIso {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     {P Q : CochainComplex (SheafOfModules.{max c v r}
@@ -101,25 +97,7 @@ abbrev ringedOpenQuasiIso {T : Type c} [Category.{v} T] {K : GrothendieckTopolog
   QuasiIso f
 
 /-- Ringed slice extension preserves K-flatness, flat terms, and termwise epimorphic
-quasi-isomorphisms, without a boundedness assumption.
-
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8I
-(lemma-j-shriek-and-tensor); agent-written resolution refinement
-(blueprint: lem-cbc-ringed-open-flat-resolution).
-
-Proof:
-1. Reuse the K-flat preservation conjunct of ringedOpen_totalTensor_kFlat. That theorem
-   already proves the unbounded total-tensor comparison and the signed interchange.
-2. Fix M = P.X i. Presheaf braiding and siteTensorRightIso identify site flatness
-   with exactness of forgetting M's variable partner, tensoring on the left with M.val,
-   and sheafifying. Call this functor SM. Restrict the natural projection isomorphism
-   to pairs (M,N), varying N: it identifies restriction followed by SM and extension
-   with the analogous functor for e_! M. The three functors are exact, so this last
-   functor is exact. The same presheaf comparison translates back to site flatness.
-3. Exact extension preserves epimorphisms and homology. The component of an extended
-   chain map is the extension of its component. Mathlib's
-   HomologicalComplex.quasiIso_map_of_preservesHomology gives the quasi-isomorphism
-   assertion using the same canonical sheafification witnesses as ringedOpenQuasiIso. -/
+quasi-isomorphisms, without a boundedness assumption. -/
 theorem ringedOpen_preserves_flat_resolution :
     (∀ P : CochainComplex (SheafOfModules.{max c v r}
         (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ,

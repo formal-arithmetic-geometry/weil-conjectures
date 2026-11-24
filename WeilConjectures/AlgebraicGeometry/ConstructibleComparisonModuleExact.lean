@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Exactness and faithfulness on intrinsic comparison modules
-Source: Stacks Project, Tags 00YV and 099T.
+
+## References
+
+* Stacks Project, Tags 00YV, 099T
 -/
 
 @[expose] public noncomputable section
@@ -399,31 +402,8 @@ private theorem comparisonUnderlying (X : Scheme.{u})
   exact ⟨e⟩
 
 /-- The canonical constant-coefficient comparison on intrinsic module sheaves is
-left exact and faithful, in the full coefficient universe.
-Source: Stacks Project, Tags 00YV (6) and 099T; blueprint comparison on classical
-module sheaves (auxiliary; not a blueprint node).
-
-Proof: first construct the constant-set pullback isomorphism by uniqueness of the
-constant-sheaf and comparison adjunctions. Its unit equation at the terminal object,
-then naturality, show that it sends every constant section to the same constant.
-Commute the underlying-set functor with constant sheafification. The resulting ring
-presentation has exactly constructibleComparisonRingMap as its unit. Apply the
-module inverse-image unit comparison to identify the underlying additive sheaf of
-the canonical module pullback with the abelian-sheaf pullback. Representable flatness
-of the site inclusion and exact filtered colimits imply left exactness of that
-abelian pullback; the module forgetful functor reflects finite limits.
-
-For faithfulness, repeat the proved comparison-unit argument with additive sheaves
-in universe max v (u+1). On the affine pro-etale basis the Kan extension is already a
-sheaf: it carries the standard cofiltered presentations to filtered colimits, and
-filtered colimits of abelian groups are exact. Density of the affine basis shows
-that sheafification preserves its affine etale sections. Full faithfulness of the
-etale inclusion makes the Kan-extension unit invertible there, so the comparison
-unit is invertible. Transport this faithful abelian comparison through the AsSmall
-site equivalences, identify its left adjoint with the small-model pullback by
-uniqueness, and use the underlying additive-sheaf comparison to reflect equality of
-module morphisms. This argument applies to the zero ring and the empty scheme and
-needs no Noetherianity or constructibility. -/
+left exact and faithful, in the full coefficient universe
+(Stacks, Tags 00YV, 099T). -/
 theorem constructibleComparisonPullback_exact_faithful (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] :
     PreservesFiniteLimits (constructibleComparisonPullback X A) ∧

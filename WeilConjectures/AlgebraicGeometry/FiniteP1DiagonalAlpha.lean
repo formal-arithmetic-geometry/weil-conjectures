@@ -15,9 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-! # Invertibility of the diagonal source comparison
-
-Source: blueprint lemma-class-diagonal-projective-line, standard-chart Cartier calculation;
-lem-sp-tower-p1-arbitrary-base-integrals, steps 2 and 6.
 -/
 
 @[expose] public noncomputable section
@@ -101,16 +98,7 @@ attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategory
 attribute [local irreducible] projectiveLineDiagonalAlpha ordinaryFiniteUnitPullback
   derivedUpperStarLowerStarAdjunction
 
-/-- The canonical source comparison for the diagonal is an isomorphism over every base.
-Source: blueprint lemma-class-diagonal-projective-line, derived-composition identification alpha.
-(auxiliary; not a blueprint node)
-
-Proof: each projection composed with the diagonal is identity. The corresponding
-composite inverse-image functor is therefore naturally isomorphic to identity,
-so its adjunction unit is invertible. Expand the two constant-object units in alpha.
-Naturality of the second unit rewrites their composite as the composite adjunction
-unit followed by direct image of the two constant-object comparison isomorphisms.
-Every factor is invertible. No compatibility choice or Noetherian hypothesis is needed. -/
+/-- The canonical source comparison for the diagonal is an isomorphism over every base. -/
 theorem isIso_projectiveLineDiagonalAlpha (A : Type (u + 1)) [CommRing A]
     (S : Scheme.{u}) (a : Bool) :
     IsIso (C := DerivedCategoryModule A (ProjectiveLine S))

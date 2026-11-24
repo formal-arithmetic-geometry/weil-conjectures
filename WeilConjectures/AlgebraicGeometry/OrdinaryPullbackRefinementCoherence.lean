@@ -9,7 +9,11 @@ module
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-! # Ordinary pullback coherence for a refined three-step path
-Source: Stacks Project, Tags 0095 and 0096. -/
+
+## References
+
+* [Stacks, Tags 0095 and 0096]
+-/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -62,21 +66,7 @@ private theorem refinement_comp_square {A B C D E : Scheme.{u}}
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   rw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-/-- Ordinary pullbacks of two refined three-step paths agree.
-Source: Stacks Project, Tags 0095 and 0096; ordinary-pullback portion of step 2
-of lem-pc-open-cover-tensor-comparison-coherence.
-(blueprint: lem-pc-ordinary-pullback-refinement-coherence).
-Proof: Expand rhoK and rhoL. Apply pseudofunctor_associativity to reassociate each
-three-step path to the pullback of its composite. Naturality of pullbackComp moves
-the first comparison through pullback z. The equations Hz, Hd identify the composite
-path z then pK then sK with pL then sL; H0 identifies the path z then rK with rL.
-The equations HK and HL identify each of these total paths followed by f with the
-path through h. Congruence is eqToIso, so its composites depend only on the endpoint
-equality, by proof irrelevance. Thus both expanded composites are the same canonical
-comparison between the pullbacks of the same scheme map. Cancel inverse composition
-comparisons, restore the associators, and evaluate at M. This argument uses no open
-cover condition, tensor pullback or adjunction, and applies to empty schemes, zero
-modules and identity refinements. -/
+/-- Ordinary pullbacks of two refined three-step paths agree (Stacks, Tags 0095 and 0096). -/
 theorem ordinary_pullback_refinement_coherence
     {X A B C K L W : Scheme.{u}}
     (f : A ⟶ X) (sK : B ⟶ A) (sL : C ⟶ A)

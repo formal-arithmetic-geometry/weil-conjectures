@@ -192,12 +192,13 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # Ringed-topos derived pullback with independent site universes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY (lemma-derived-base-change).
-(blueprint: lem-weil-pbc-ringed-topoi-derived-pullback).
-
 This generalizes the existing interface to sites small relative to the coefficient
 universe, keeping their object and morphism universes independent. The original
 specialized declaration is retained by public import.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -455,8 +456,8 @@ private theorem kFlat_inverseImage_independent
 
 /-- The resolution comparison witnesses of derived ringed pullback, with the explicit
 computation formula and its naturality, identity and composition equations.
-Source: Stacks Project, Tag 06YY (blueprint: lem-weil-pbc-ringed-topoi-derived-pullback).
-This packages the resolution clauses of the existing node, without new assumptions. -/
+This packages the resolution clauses of the derived ringed pullback, without new
+assumptions. -/
 structure RingedPullbackResolutionComparisons
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]
@@ -521,18 +522,7 @@ structure RingedPullbackResolutionComparisons
         (comparison (A := A) (P := P'') p'' hp'' hf'' hq'').hom
 
 /-- The exact universal derived ringed pullback, its computation on flat-term K-flat
-complexes, and natural resolution comparisons with their identity and composition laws.
-Source: Stacks Project, Tag 06YY (blueprint: lem-weil-pbc-ringed-topoi-derived-pullback).
-Proof: exact algebraic inverse image and extension of scalars preserve quasi-isomorphisms
-between flat-term K-flat complexes, by the K-flat ringed pullback lemma. Flat-term K-flat
-resolutions give a resolving class, so localization supplies the universal left derived
-functor and its computation transformation. This transformation is invertible on that
-class. For a resolution p define alpha(p) by the inverse of LF(Q(p)) followed by the
-computation transformation. The resolution square and naturality of that transformation
-prove naturality of alpha. For two resolutions use alpha(p) inverse followed by alpha(q);
-a compatible chain map gives precisely this comparison. Cancellation proves its identity
-and composition laws. These constructions require only relative smallness of the sites,
-so the site object and morphism universes need not equal the coefficient universe. -/
+complexes, and natural resolution comparisons with their identity and composition laws. -/
 theorem ringedTopoiDerivedPullbackIndependent
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{r} C] [EssentiallySmall.{r} D]

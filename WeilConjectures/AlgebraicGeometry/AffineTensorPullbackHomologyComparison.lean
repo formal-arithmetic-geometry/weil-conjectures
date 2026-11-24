@@ -16,9 +16,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 
 /-! # Affine tensor and pullback homology comparison
 
-Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact.
-(blueprint: lem-pc-affine-tensor-pullback-homology-comparison).
+## References
+
+* Stacks Project, Tags 01IB and 01I9
 -/
 
 @[expose] public section
@@ -31,26 +31,7 @@ open CategoryTheory Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The homology of the module tensor complex is the restricted module of sections
-of the homology of the affine scheme pullback.
-Source: Stacks Project, Tags 01IB and 01I9, and steps 1--2 of
-lem-pc-affine-universal-tensor-exact.
-(blueprint: lem-pc-affine-tensor-pullback-homology-comparison).
-
-Proof: The complex comparison identifies ordinary scalar extension of the section
-complex P, after applying tilde, with the scheme pullback complex. To commute tilde
-with homology, first prove it preserves kernels: the kernel of a map between tilde
-objects is quasi-coherent; its affine counit presents it as a tilde object. Lift
-its kernel inclusion through full faithfulness and reflect the kernel limit cone.
-Thus tilde preserves finite limits, while its left adjunction preserves colimits.
-The affine unit identifies each module with sections of its tilde. Apply the
-homology comparison isomorphisms for tilde and for restriction of scalars, then
-apply global sections to the complex comparison. Finally commute the tensor
-factors to identify restricted B tensor_A P with P tensor_A B. Compatibility with
-differentials is checked by tensor induction, so these isomorphisms give
-the asserted isomorphism. No flatness or boundedness is used: the functor applied
-to C is ordinary pullback, and the tensor is ordinary tensor, not derived tensor.
-For B the zero ring both sides are zero; for C zero or for an empty affine S the
-same argument gives the zero isomorphism. -/
+of the homology of the affine scheme pullback (Stacks, Tags 01IB and 01I9). -/
 theorem affine_tensor_pullback_homology_comparison (S : Scheme.{u}) [IsAffine S]
     (C : CochainComplex S.Modules ℤ)
     (hqc : ∀ n : ℤ, (C.X n).IsQuasicoherent)

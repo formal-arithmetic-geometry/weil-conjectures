@@ -6,9 +6,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(auxiliary; not a blueprint node).
-
 # Explicit type of the canonical tensor comparison -/
 @[expose] public noncomputable section
 set_option autoImplicit false

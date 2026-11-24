@@ -62,22 +62,7 @@ private theorem inverse_unit_comparison
 -- The unfolding of `derivedPullback_tensorUnitIso` against the lax unit of `Q` goes through
 -- the derived monoidal structure; it needs slightly more than the default budget.
 /-- Normalize the explicitly constructed unit comparison before any tensor comparison is used.
-Source: Stacks Project, Cohomology, Tag 079U, parent unit proof, step 1;
-the explicit construction in `derivedPullback_tensorUnitIso`.
-(blueprint: lem-pc-derived-pullback-tensor-unit-normalization).
-Proof: Q is the homotopy quotient followed by Qh, transported along quotientCompQhIso.
-The quotient unit comparison and this transport have identity components, hence
-its lax unit morphism is the lax unit morphism of Qh. The latter is invertible by
-DerivedCategory.isIso_ε_Qh, proving the first assertion. Write u for the single-image
-unit comparison of F on complexes. The definition of tensorPullback_unitHomotopyIso
-is the quotient image of u followed by the inverse functor-factorization comparison.
-The latter has identity components, so Qh of its inverse is Q of u inverse.
-Invert the four factors defining derivedPullback_tensorUnitIso: the result is
-L of the source localization unit, then the supplied counit at U, then Q of u inverse,
-then the inverse target localization unit. Compose with the target localization
-unit and cancel its inverse. This proves the displayed formula. This calculation
-uses no tensorator of L and no K-flatness or boundedness hypothesis. It applies
-also to zero complexes, zero rings, and empty schemes. -/
+(Stacks, Tag 079U) -/
 theorem derivedPullback_tensorUnitIso_normalization {T X : Scheme.{uModel}} (g : T ⟶ X)
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings X.toRingedSpace))]
     [HasDerivedCategory.{wModel} (SheafOfModules.{uModel} (moduleRings T.toRingedSpace))]

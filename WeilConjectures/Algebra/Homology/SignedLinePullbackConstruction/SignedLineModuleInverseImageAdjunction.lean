@@ -11,8 +11,11 @@ import WeilConjectures.Algebra.Homology.SignedLinePullbackConstruction.SignedLin
 import WeilConjectures.CategoryTheory.SignedLinePullbackConstruction.SignedLineSheafPullbackForgetComparison
 import all WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 /-! # Restricting the abelian inverse-image adjunction to modules
-Source: Stacks Project, Modules on Sites, Tag 03D3.
-(blueprint: lem-pur-signed-line-module-inverse-image-adjunction).
+
+## References
+
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 03D3
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -87,16 +90,7 @@ private theorem linear_of_adjunct_linear
   intro V r m
   exact congrArg (fun q ↦ q.hom.app V (r, m)) hmaps
 include hgen in
-/-- Identify module pullback after constructing its action and testing scalar maps on units.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-pur-signed-line-module-inverse-image-adjunction).
-Proof: The unit is linear by the action hypothesis. The scalar-pair testing property
-shows that an abelian map is linear whenever its adjunct is linear: compare its two
-scalar-action composites on pairs of unit sections. Lift the abelian inverse-image
-maps using this criterion. Faithfulness proves the functor laws. The abelian hom
-bijection restricts to linear maps in both directions, naturally. This gives a module
-adjunction to the specified scalar-restricted pushforward. Uniqueness of left adjoints
-identifies it with Mathlib's pullback. Forgetting gives the stated comparison. -/
+/-- Identify module pullback after constructing its action and testing scalar maps on units. -/
 private theorem inverseImage_underlying_of_actions
     (actions : ∀ M : SheafOfModules.{max u v w} A, InverseImageAction φ M) :
     ∃ e : pullback.{max u v w} φ ⋙ toSheaf B ≅
@@ -209,14 +203,7 @@ private theorem inverseImage_underlying_of_actions
   change P.map ((pullbackPushforwardAdjunction φ).unit.app M) ≫
     P.map (T.map (q.hom.app M)) = _
   exact hh.trans hu0
-/-- A ring unit presenting the set inverse image identifies the underlying module pullback.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(blueprint: lem-pur-signed-line-module-inverse-image-adjunction).
-Proof: the canonical abelian/set comparison is compatible with its unit. Pair this
-presentation with the given ring presentation. It both constructs scalar actions and
-shows that linearity can be tested on unit pairs. Apply the restricted adjunction
-comparison proved above. The unit equation for leftAdjointUniq identifies the chosen
-module unit, followed by this comparison, with the original abelian unit. -/
+/-- A ring unit presenting the set inverse image identifies the underlying module pullback. -/
 theorem inverseImage_underlying_of_ring_presentation
     [(CategoryTheory.forget AddCommGrpCat.{max u v w}).PreservesLeftKanExtensions F.op]
     [K.PreservesSheafification (CategoryTheory.forget AddCommGrpCat.{max u v w})]

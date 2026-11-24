@@ -18,17 +18,7 @@ universe u v
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 /-- Restrict canonical inverse image to the constructible module subcategories.
-Source: blueprint constructible-comparison-equivalence, part (1), Stacks Tag 09AK
-(auxiliary; not a blueprint node).
-
-Proof: the constructibility test lifts the canonical inverse image to the two full
-subcategories. Ambient full faithfulness gives fullness and faithfulness there.
-A constructible target is continuous by the finite-cover classicality argument;
-classical descent supplies an etale antecedent and an isomorphism of its image
-with the target. Constructibility is invariant under that isomorphism and reflected
-by inverse image, so this antecedent belongs to the source full subcategory.
-This proves essential surjectivity. The resulting equivalence uses this lifted
-functor itself, so its forward-functor identification is reflexive. -/
+(Stacks, Tag 09AK) -/
 theorem constructibleComparison_moduleEquivalence (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] :
     ∀ [CompactSpace X] [QuasiSeparatedSpace X],

@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Localization.LocallySmall
 
 /-! # A compact open model for transported overlap restriction
 
-Source: Stacks Project, Tag 09IM, overlap setup; explicit open-range comparison.
-(blueprint: lem-sc-compact-overlap-restriction-model).
+## References
+
+* Stacks Project, Tag 09IM
 -/
 
 @[expose] public section
@@ -29,25 +30,7 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Transported overlap restriction is ordinary compact-open restriction followed by
-an equivalence. No perfect object or morphism lifting is asserted.
-Source: Stacks Project, Tag 09IM, overlap setup. The comparison below is an explicit
-construction from the exact restriction and equivalence APIs of Mathlib.
-(blueprint: lem-sc-compact-overlap-restriction-model).
-
-Proof: Take U to be the inverse image of W under V.ι. The compact-open intersection
-criterion in a quasi-separated space makes W intersect V compact, since affine V is
-compact. The open embedding V.ι identifies U with this intersection, so U is compact.
-The induced inclusion U.toScheme to (W intersect V).toScheme is a scheme isomorphism.
-Its exact module-sheaf equivalence transports the supplied derived localization on the
-ambient overlap to one on U, in the same Hom universe w. Derive that equivalence to
-obtain e. At the module-sheaf level, Modules.overMapCompOverEquiv identifies transported
-restriction from V with restriction along the inclusion of the ambient overlap into V.
-Factor this inclusion through U and the preceding scheme isomorphism; the restriction
-composition isomorphism and Modules.overFunctorEquiv identify it with ordinary open
-restriction followed by the equivalence. Derive this natural isomorphism using
-mapDerivedCategoryCompIso and mapDerivedCategoryNatIso. This proves the displayed
-comparison on every object and morphism. If the overlap is empty, the same empty-open
-isomorphism and exact equivalence apply. -/
+an equivalence (Stacks, Tag 09IM). -/
 theorem exists_compact_overlap_restriction_model
     (X : Scheme.{u}) [QuasiSeparatedSpace X]
     (W V : X.Opens) (hW : IsCompact (W : Set X)) (hV : IsAffineOpen V)

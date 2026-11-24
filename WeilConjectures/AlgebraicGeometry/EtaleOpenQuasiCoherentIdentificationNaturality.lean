@@ -14,10 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsMapNaturality
 /-!
 # Naturality of the open tensor-section comparison
 
-Source: Stacks Project, Descent, Tags 03DR (equation-quasi-coherent-presheaf) and
-03DU, item 4. Normalized pullback composition and adjunction-unit naturality give
-compatibility with every triangle over the open subscheme.
-(blueprint: lem-weil-pbc-etale-open-qcoherent-identification-naturality)
+## References
+
+* Stacks Project, Tags 03DR and 03DU
 -/
 
 @[expose] public section
@@ -33,10 +32,8 @@ open Scheme.Modules
 
 attribute [local irreducible] tensorPullback tensorPullbackObj
 
-/-- Associativity of normalized left-adjoint composition, specialized to scheme
-pushforwards. Source: Stacks 03DR, functoriality in equation-quasi-coherent-presheaf;
-Mathlib `Adjunction.leftAdjointCompIso_assoc`. Pushforward coherence is sectionwise
-identity, independently of the chosen left adjoints. -/
+/-- Associativity of normalized left-adjoint composition, specialized to scheme pushforwards
+(Stacks, Tag 03DR). -/
 private theorem composition_associativity
     (L : ∀ {A B : Scheme.{u}}, (A ⟶ B) → B.Modules ⥤ A.Modules)
     (adj : ∀ {A B : Scheme.{u}} (f : A ⟶ B), L f ⊣ pushforward f)
@@ -56,8 +53,7 @@ private theorem composition_associativity
   ext M V x
   rfl
 
-/-- The module component of normalized tensor-composition associativity.
-Source: Stacks 03DR, equation-quasi-coherent-presheaf. -/
+/-- The module component of normalized tensor-composition associativity (Stacks, Tag 03DR). -/
 private theorem tensor_composition_associativity
     {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ D)
     (F : D.Modules) :
@@ -75,9 +71,8 @@ private theorem tensor_composition_associativity
   unfold tensorSectionsComp
   convert h using 1
 
-/-- Move an inverse composition comparison across the other composition comparison.
-Source: Stacks 03DR, equation-quasi-coherent-presheaf. This follows by cancelling
-isomorphisms in the forward associativity equation. -/
+/-- Move an inverse composition comparison across the other composition comparison
+(Stacks, Tag 03DR). -/
 private theorem tensor_composition_inverse
     {A B C D : Scheme.{u}} (a : A ⟶ B) (b : B ⟶ C) (c : C ⟶ D)
     (F : D.Modules) :
@@ -93,8 +88,7 @@ private theorem tensor_composition_inverse
   erw [CategoryTheory.Functor.map_id]
   erw [Category.id_comp]
 
-/-- Naturality of the global-section unit in its module argument.
-Source: Stacks 03DR, equation-quasi-coherent-presheaf; adjunction-unit naturality. -/
+/-- Naturality of the global-section unit in its module argument (Stacks, Tag 03DR). -/
 private theorem section_unit_naturality {A B : Scheme.{u}} (a : A ⟶ B)
     {M N : B.Modules} (φ : M ⟶ N) :
     tensorSectionsUnit a M ≫ ((tensorPullback a).map φ).app ⊤ =
@@ -109,9 +103,8 @@ private theorem section_unit_naturality {A B : Scheme.{u}} (a : A ⟶ B)
   simp only [Functor.id_map, Functor.comp_map, Hom.comp_app, pushforward_map_app] at hn
   exact hn.symm
 
-/-- The inverse comparison intertwines the section restrictions for a triangle.
-Source: Stacks 03DR, equation-quasi-coherent-presheaf. Eliminate the triangle equality,
-evaluate inverse associativity at the top open, and use unit naturality. -/
+/-- The inverse comparison intertwines the section restrictions for a triangle (Stacks, Tag 03DR).
+-/
 private theorem composition_restriction {A B C D : Scheme.{u}}
     (a : A ⟶ B) (b : B ⟶ C) (c : A ⟶ C) (j : C ⟶ D)
     (h : a ≫ b = c) (F : D.Modules) :
@@ -133,9 +126,7 @@ private theorem composition_restriction {A B C D : Scheme.{u}}
   rfl
 
 /-- The prescribed comparison on global sections, constructed from two module
-isomorphisms rather than chosen from an existence theorem.
-Source: Stacks Descent 03DR, equation (35.8.1), and 03DU, item 4.
-(blueprint: lem-weil-pbc-etale-open-qcoherent-identification-naturality) -/
+isomorphisms rather than chosen from an existence theorem (Stacks, Tags 03DR and 03DU). -/
 noncomputable def etaleOpenTensorSectionsComponentIso {X U : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (F : X.Modules) (v : U.Etale) :
     Γ((Scheme.Modules.tensorPullback (v.hom ≫ j)).obj F, ⊤) ≅
@@ -148,20 +139,8 @@ noncomputable def etaleOpenTensorSectionsComponentIso {X U : Scheme.{u}}
           (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j)).leftAdjointUniq
             (Scheme.Modules.restrictAdjunction j)).app F))
 
-/-- The explicit section comparisons commute with an etale restriction.
-Source: Stacks Descent 03DR, equation (35.8.1), and 03DU, item 4.
-(blueprint: lem-weil-pbc-etale-open-qcoherent-identification-naturality)
-
-Proof: expand each restriction as the canonical unit for g followed by the normalized
-composition comparison and transport along the triangle equation. Naturality of the
-unit moves the pullback of the tensor/restriction comparison past section pullback.
-The associativity equation for normalized composition, applied to g.left, v.hom and j,
-moves the inverse comparison for v.hom and j past the composition comparison for g.
-Naturality of tensorSectionsComp moves the module comparison through the remaining
-composition map. The two transports agree by g.w and associativity of scheme
-composition. Evaluating these module morphism equations at the whole source scheme
-proves the displayed equality. Identity arrows give the identity square; for the empty
-scheme or the zero module both sides are the unique section homomorphism. -/
+/-- The explicit section comparisons commute with an etale restriction (Stacks, Tags 03DR and 03DU).
+-/
 theorem etaleOpenTensorSectionsComponent_naturality {X U : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (F : X.Modules) {v w : U.Etale} (g : w ⟶ v) :
     Scheme.Modules.etaleTensorSectionsRestriction F

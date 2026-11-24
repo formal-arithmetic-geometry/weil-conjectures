@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.RawDerivedClassAffineDescent
 
 /-! # Finite-stage data for a raw cartesian class
 
-Source: Stacks Project, Tags 0EYL, 0EYM and 0GIT.
-(blueprint: lem-sc-cartesian-raw-class-chart-data).
+## References
+
+* Stacks Project, Tags 0EYL, 0EYM and 0GIT
 -/
 
 @[expose] public section
@@ -45,19 +46,8 @@ private theorem chartClassPullback_postcomp {B T T' : Scheme.{u}}
   simp only [cartesianChartClassPullback, Functor.map_comp, Category.assoc]
   rw [Functor.commShiftIso_hom_naturality]
 
-/-- Stage exchange turns a raw finite-stage representative into a chart class.
-
-Source: Stacks Project, Tags 0EYL and 0GIT for raw descent; Tag 0EYM for exchange.
-(blueprint: lem-sc-cartesian-raw-class-chart-data).
-
-Proof: Descend the original raw class while keeping its bounded-below coefficient
-complex fixed. Postcompose the resulting finite-stage class with stage exchange.
-Apply the inverse chart adjunction, then raw cohomology evaluation, to define x.
-Naturality of the shift comparison shows that pullback of chart classes commutes
-with postcomposition. Cancel the evaluation and adjunction isomorphisms to obtain
-the base-stage identity. This constructs x explicitly from the descended class;
-no class is chosen from a mere existence theorem inside a definition.
--/
+/-- Stage exchange turns a raw finite-stage representative into a chart class
+(Stacks, Tags 0EYL, 0GIT and 0EYM). -/
 theorem exists_cartesianRawClass_chart_data
     {k : Type u} [Field k]
     {I : Type u} [SmallCategory I] [IsCofiltered I]

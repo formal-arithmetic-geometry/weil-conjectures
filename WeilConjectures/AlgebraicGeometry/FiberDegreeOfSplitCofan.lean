@@ -11,9 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 /-!
 # Fibre degree of a finite coproduct of copies
 
-Source: Stacks Project, Tag 03SH (section-trace-method), paragraph after
-Definition 03SE: a split finite étale map has degree equal to its number of sheets.
-(blueprint: lem-weil-pbc-fiber-degree-split-cofan).
+A split finite étale map has degree equal to its number of sheets.
+
+## References
+
+* Stacks Project, Tag 03SH
 -/
 
 @[expose] public section
@@ -26,20 +28,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- The fibre degree of a finite coproduct of copies of the base counts its summands.
-Source: Stacks Project, Tag 03SH (section-trace-method), after Definition 03SE.
-(blueprint: lem-weil-pbc-fiber-degree-split-cofan).
-
-Proof:
-1. The cofan identifies `Z` with the coproduct of the `D j`. Under each isomorphism
-   `D j → U` its structure map is the identity of `U`. Thus this is an isomorphism
-   over `U` from `Z` to the coproduct of `J` copies of `U`.
-2. Pull back along `Spec κ(x) → U`. Pullback preserves scheme coproducts, so the
-   fibre is a coproduct of `J` copies of `Spec κ(x)`, compatibly with its structure map.
-3. The global sections of this finite coproduct form the product algebra
-   `∏ j : J, κ(x)`. Its dimension over `κ(x)` is the sum of `J` copies of one,
-   namely `Nat.card J`. By the definition of fibre degree this is the result.
-   For `J` empty the fibre is empty and the zero algebra has dimension zero. -/
+/-- The fibre degree of a finite coproduct of copies of the base counts its summands
+(Stacks, Tag 03SH). -/
 theorem Scheme.Hom.fiberDegree_eq_nat_card_of_split_cofan
     {Z U : Scheme.{u}} (p : Z ⟶ U) [IsAffineHom p]
     {J : Type u} [Finite J] (D : J → Scheme.{u}) (i : ∀ j, D j ⟶ Z)

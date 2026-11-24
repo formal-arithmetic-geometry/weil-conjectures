@@ -23,8 +23,9 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 
 /-! # Bounded-below direct image and quasi-coherence
 
-Source: Stacks Project, perfect.tex, Tag 08D5, bounded-below paragraph
-(blueprint: lem-pc-derived-direct-image-bounded-below-qcoh).
+## References
+
+* Stacks Project, Tag 08D5
 -/
 
 @[expose] public section
@@ -97,26 +98,7 @@ private theorem property_of_filtration {C : Type*} [Category* C] [Abelian C]
   exact P.prop_of_iso (asIso (⊤ : Subobject M).arrow) htop
 
 /-- Derived direct image of a bounded-below object with quasi-coherent cohomology
-has quasi-coherent cohomology. No compactness of the target is required.
-Source: Stacks Project, perfect.tex, Tag 08D5, bounded-below paragraph
-(blueprint: lem-pc-derived-direct-image-bounded-below-qcoh).
-
-Proof:
-1. Represent E by a strictly bounded-below complex, using the standard t-structure.
-   Apply exists_truncationHypercohomology to the module direct-image functor.
-   Its right derived functor is definitionally schemeDerivedDirectImage.
-   The E2 comparisons identify the terms with R^p f_* H^j(E).
-2. The qcqs higher-direct-image theorem (Tag 01XJ, lem-pc-finite-support-hi)
-   makes these terms quasi-coherent. Negative p and j < a terms vanish.
-3. Each later page is a Limits.kernel modulo an image. The quasi-coherent Limits.kernel and
-   Limits.cokernel/image lemmas imply, by induction on the page, quasi-coherence of
-   every page term. In total degree q only 0 <= p <= q-a occurs, and each
-   term stabilizes at a finite page by the half-plane bounds.
-4. The convergence theorem supplies a finite filtration of H^q(Rf_*E), with
-   those stable terms as graded pieces. Start from its zero last step and use
-   isQuasicoherent_of_shortExact successively to deduce quasi-coherence of all
-   filtration steps, ending at H^q(Rf_*E). This applies to every integer q.
--/
+has quasi-coherent cohomology. No compactness of the target is required (Stacks, Tag 08D5). -/
 theorem schemeDerivedDirectImage_preserves_QCoh_of_isGE
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

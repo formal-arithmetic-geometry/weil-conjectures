@@ -10,8 +10,11 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
 /-! # Ordinary comparison square from a transported counit square
 
-Source: Stacks Project, Tag 06Y6, independence of choices.
-(blueprint: lem-pc-base-derived-tensor-ring-counit-square). -/
+## References
+
+* Stacks Project, Tag 06Y6, independence of choices.
+* Stacks Project, Tag 05RR.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -80,29 +83,7 @@ private theorem forgetHomologyMap
   simp only [F, Iso.inv_hom_id_assoc]
 
 
-/-- A square for the raw derived counits gives the ordinary model comparison square.
-
-Proof: substitute comparison_eq for M and N. The identity hk cancels the
-cohomology identifications, and hf replaces the transported N counit by the
-M counit followed by homology(v). The two routes from ordinary R0-to-B0
-extension to the restriction of the ordinary tensor-algebra complex agree:
-on b tensor x, ordinaryIso_tmul, hv, and hs give respectively
-(1 tensor eB(b)) tensor q(x). The equality heE at 1 tensor b identifies the
-coefficient maps. Tensor induction proves equality in every degree; hence the
-chain maps and their maps on homology agree. Restriction along includeRight
-and then eB equals restriction along eE and includeRight, by heE on 1 tensor b.
-Use the identity-on-elements restriction-composition isomorphism to compare
-these functors. Naturality of exact-restriction homology isomorphisms and their
-compatibility with composition identify the two homology maps in the square.
-Cancel the invertible restriction homology maps and evaluate the equality of
-B0-linear morphisms at x. This proves the displayed equality of underlying
-elements. No universality, invertibility of f or k, scalar-action identity,
-flatness, or properties of the maps to C0 and C are needed. This is just the
-ordinary-complex and exact-homology part of the coefficient transport argument;
-it also applies to zero maps, zero rings, and zero complexes.
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1; exact-restriction homology
-naturality as in Tag 05RR.
-(blueprint: lem-pc-base-derived-tensor-ring-counit-square). -/
+/-- A square for the raw derived counits gives the ordinary model comparison square. -/
 theorem baseDerivedTensor_ring_counit_square
     {R₀ A₀ B₀ C₀ R A B C : Type u}
     [CommRing R₀] [CommRing A₀] [CommRing B₀] [CommRing C₀]

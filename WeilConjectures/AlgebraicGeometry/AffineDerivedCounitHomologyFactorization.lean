@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.AffineDerivedSectionsHomologyComparison
 
 /-! # The derived affine counit on cohomology
 
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5.
-(blueprint: new-affine-derived-counit-homology-factorization).
+## References
+
+* Stacks Project, Tag 06Z0
 -/
 
 @[expose] public section
@@ -28,28 +29,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- On cohomology the derived affine counit is the ordinary tilde-sections counit,
-after identifying its source with associated sheaf of sections of cohomology.
-Source: Stacks Project, Tag 06Z0, proof of Lemma 36.3.5, counit calculation.
-(blueprint: new-affine-derived-counit-homology-factorization).
-
-Proof: Global sections, being right adjoint, preserves products; transport of scalars
-through ΓSpecIso is exact and preserves products. Affine vanishing gives the bound
-N = 1 on quasi-coherent sheaves. The same holds after forgetting to abelian groups,
-an exact conservative functor. Apply the unbounded cohomological bound to the negative
-truncation and use its truncation triangle to identify degree-zero derived sections
-with ordinary sections of degree-zero cohomology. Shifts give this comparison in every
-degree. Exact associated sheaf commutes with cohomology. For the adjunction induced
-from ordinary tilde and sections, these comparisons identify the derived counit with
-the ordinary counit: on a K-injective representative this is the evaluation map,
-and the truncation comparisons are natural for that map. For the functors F and G
-of the statement, descend the given comparison for F through Q and use the comparison
-for G. Uniqueness of right adjoints supplies an isomorphism between the transported
-canonical adjunction and adj; absorb its image on cohomology into the source comparison.
-The target remains the same cohomology sheaf, giving exactly the displayed equation.
-No boundedness of K is assumed: the uniform bound and products are what justify the
-negative-truncation passage. The zero object and the zero ring give the zero-map
-identity between zero objects, so neither is excluded.
--/
+after identifying its source with associated sheaf of sections of cohomology (Stacks, Tag 06Z0). -/
 theorem affineDerivedCounit_homology_factorization (A : Type u) [CommRing A]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]
     [HasDerivedCategory.{wY}

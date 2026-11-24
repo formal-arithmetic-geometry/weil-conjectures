@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleShiftedQuoti
 
 /-! # Surjective shifted kernel quotient transitions
 
-Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-transition-epi).
+Stacks Project, Tag 087X.
 -/
 
 @[expose] public section
@@ -20,21 +19,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Shifted quotient transitions of the stabilized kernel image system are epimorphisms.
-
-Source: Stacks Project, Lemma 087X, proof of claims (a)--(c).
-(blueprint: lem-weil-pbc-formal-kernel-quotient-transition-epi).
-
-Proof: Fix adjacent levels a+1 and a of S, and choose l >= a+1+c.
-The map ker(alpha_l) to F_a factors through its map to F_(a+1).
-By hc its images at these two levels are exactly the subobjects represented by
-j_(a+1) and j_a. By hS both inclusions are monomorphisms. Naturality of j then
-identifies the induced map between these images with the S transition.
-The image of the composite ker(alpha_l) to S_(a+1) to S_a is all of S_a,
-so the S transition is epi. Composing it with the target quotient projection remains epi.
-The defining equation for formalModuleQuotientMap factors this composite through the
-source quotient projection, so the induced shifted quotient transition is epi too.
-This argument does not require a bound on d, and also applies to zero modules,
-zero or unit ideals, and the empty scheme. -/
+(Stacks, Tag 087X). -/
 theorem coherentFormalModule_kernel_quotient_transition_epi {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)
     (c : ℕ) (S : ℕᵒᵖ ⥤ X.Modules) (j : S ⟶ F.obj)

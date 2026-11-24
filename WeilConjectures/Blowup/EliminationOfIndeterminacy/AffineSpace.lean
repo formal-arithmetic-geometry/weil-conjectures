@@ -14,7 +14,6 @@ public import WeilConjectures.Blowup.EliminationOfIndeterminacy.CommonDenominato
 
 Conrad's Theorem 2.4, Case 1, for a relative affine-space target over an affine base
 (`AlgebraicGeometry.exists_isAdmissible_extend_affineSpace`).
-(Blueprint: `lemma:nagata-conrad-affine-space-extension`.)
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ section Statement
 variable {X : Scheme.{u}}
 
 /-- **Extension to relative affine space after one admissible blow-up** (Conrad,
-Theorem 2.4, Case 1, the sub-case `Y = 𝔸ⁿ_X`; blueprint:
-`lemma:nagata-conrad-affine-space-extension`).
+Theorem 2.4, Case 1, the sub-case `Y = 𝔸ⁿ_X`).
 
 Difference from the informal statement: "agrees with `f` over `U`" is expressed through
 the identification of the preimage of `U` with `U` along `B.isIso_blowupMap_restrict`. -/

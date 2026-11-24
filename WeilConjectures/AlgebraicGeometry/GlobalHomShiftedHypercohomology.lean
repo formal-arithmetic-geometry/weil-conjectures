@@ -14,8 +14,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftComparison
 
 /-! # Shift and global-section comparison for internal derived Hom
-Source: Stacks Project, Tags 08JA and 0B6A.
-(blueprint: lem-sc-global-hom-shifted-hypercohomology).
+
+## References
+
+* Stacks Project, Tags 08JA and 0B6A.
 -/
 
 @[expose] public section
@@ -116,29 +118,8 @@ private noncomputable def globalSectionsShiftIso (X : Scheme.{u})
 
 /-- Cohomology of module-valued global Hom agrees with zeroth additive-group-valued
 hypercohomology of the internal Hom of shifted arguments. This comparison concerns
-only cohomology, not the identification with derived morphisms.
-Source: Stacks Project, Tag 08JA, proof of Lemma 21.35.1; Tag 0B6A, Section 20.44.
-(blueprint: lem-sc-global-hom-shifted-hypercohomology).
-
-Proof: Represent P by a K-flat complex L and Q by a K-injective complex I. Their
-sheaf Hom complex is K-injective, so its termwise global sections compute RΓ.
-The shifted complexes L[m] and I[n] remain K-flat and K-injective. The standard
-signed reindexing identifies Hom(L[m], I[n]) with Hom(L,I)[n-m]: in degree k,
-reindex a component from p to p+m and multiply it by (-1)^(m*k). The differential
-on each side is d_I a - (-1)^degree a d_L, with the shift signs included; thus this
-is an isomorphism of complexes, natural in the second argument. Taking global
-sections and H⁰ gives H^(n-m) of the unshifted global Hom complex.
-Evaluation at the unit sheaf gives the additive isomorphism between the underlying
-group of module-valued global sections and Hom_O(O,-), the functor used in
-ringedSiteZerothHypercohomology. On each open this evaluation sends a module map
-O → F to the image of 1; its inverse sends a section s to multiplication by s.
-Both maps commute with differentials and morphisms. Right-derived resolution
-comparisons and localization therefore give the displayed additive equivalences,
-independent of the chosen representatives. A derived morphism q can be represented
-after K-injective replacement, and all the comparisons commute with its map and
-with its shift, proving the displayed naturality. These constructions use all
-integer degrees and do not require boundedness, quasi-coherence, or any relation
-between the sheaf and module localization universes. -/
+only cohomology, not the identification with derived morphisms
+(Stacks, Tags 08JA and 0B6A). -/
 theorem schemeGlobalHom_shiftedHypercohomology_equiv
     [∀ Z : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

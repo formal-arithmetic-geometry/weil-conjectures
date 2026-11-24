@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 /-!
 # Module sheaves and modules over the constant ring sheaf
 
-Source: Stacks Project, Modules on Sites, Section 18.11, Lemma 18.11.1.
-(blueprint: new-constant-ring-module-sheaf-equivalence)
+## References
+
+* Stacks Project, Modules on Sites, Lemma 18.11.1
 -/
 
 @[expose] public section
@@ -153,24 +154,7 @@ private instance (X : Scheme.{u}) (r : ℕ) : (restriction X r).EssSurj where
     exact ⟨M, ⟨ObjectProperty.isoMk _ (asIso f).symm⟩⟩
 
 /-- The two encodings of sheaves of modules over ZMod r are equivalent, compatibly
-with their underlying abelian sheaves.
-Source: Stacks Project, Modules on Sites, Section 18.11, Lemma 18.11.1
-(https://stacks.math.columbia.edu/tag/03CY), applied to the constant ring presheaf.
-(blueprint: new-constant-ring-module-sheaf-equivalence)
-
-Proof: First identify the single and double lifts of ZMod r by the ring isomorphism
-sending a lifted element to its twice-lifted value. A module-valued sheaf has an
-action of the constant ring presheaf on its underlying abelian sheaf. Extend this
-action to the sheafification of that presheaf: locally represent a section of the
-constant ring sheaf by constant scalars, act on the restrictions of the module
-section, and glue. Independence of representatives, the module laws and linearity
-of maps are local assertions and follow from the original action and sheaf
-uniqueness. Conversely restrict an action along the sheafification unit and the
-ring isomorphism. The two constructions retain the underlying abelian sheaf and
-all underlying morphisms. Uniqueness of the extended action gives inverse natural
-isomorphisms, hence an equivalence and the displayed natural isomorphism of
-forgetful functors. This works for r = 0 and r = 1 as well as for the empty scheme;
-no nonzero scalar or nonempty covering assumption is used. -/
+with their underlying abelian sheaves (Stacks, Tag 03CY). -/
 theorem constantRing_moduleSheaf_equivalence (X : Scheme.{u}) (r : ℕ) :
     ∃ E : Sheaf X.smallEtaleTopology
         (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) ≌

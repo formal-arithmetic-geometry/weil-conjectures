@@ -14,6 +14,14 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
+/-!
+# Core of the retract closure of the localized tensor comparison predicate
+
+## References
+
+* Stacks Project, Tag 0DJA(1)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory MonoidalCategory
@@ -63,9 +71,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-/-- Core component of retract closure, with the representative and model quantifiers exposed.
-Source: Stacks Project, Tag 0DJA(1), retract part.
-(blueprint: lem-pc-localized-tensor-comparison-closure-retracts-core) -/
+/-- Core component of retract closure, with the representative and model quantifiers exposed. -/
 theorem localizedTensorComparisonProperty_retract_core
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

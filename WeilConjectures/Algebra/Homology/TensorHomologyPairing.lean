@@ -14,9 +14,9 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 /-!
 # The bilinear product on the homology of a total tensor complex
 
-Source: Stacks Project, More on Algebra, Tag 068G, the construction of
-`equation-simple-tor-product`, and Varieties, Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-pairing)
+## References
+
+* Stacks Project, Tags 068G, 068K, 0BED
 -/
 
 @[expose] public section
@@ -106,24 +106,7 @@ private theorem tensor_cycles_lift {k : Type u} [CommRing k]
   refine ⟨(T.sc n).cyclesMk x hx', ?_⟩
   exact (T.sc n).i_cyclesMk x hx'
 
-/-- The class of a tensor of cocycles depends bilinearly on their homology classes.
-Source: Stacks Project, Tag 068G, construction preceding Lemma 068K;
-Tag 0BED, `equation-kunneth-on-cech`.
-(blueprint: lem-sc-tensor-homology-pairing)
-
-Proof: Put T = Tot(A tensor B). For cocycles a and b the signed Leibniz formula
-makes the inclusion of a tensor b a cocycle of T. The kernel property of iCycles
-gives its unique lift z. Taking homology gives a bilinear map on the two cycle
-spaces: addition and scalar multiplication follow from the linearity of the
-inclusion, the injectivity of iCycles, and the linearity of homologyπ.
-If a = d_A a', then the included a tensor b is d_T of the inclusion of a' tensor b
-in degree n-1. Its class is therefore zero. If b = d_B b', its inclusion is
-(-1)^p times d_T of the inclusion of a tensor b', and again its class is zero.
-Thus this bilinear map annihilates boundaries in either variable. Descend it through
-Z(A)/B(A) and Z(B)/B(B), using the quotient universal property in each variable,
-and identify these quotients with the abstract homology modules. This gives c.
-The lift of the tensor of the two cycles supplies z in the conclusion, and the
-quotient descent gives the displayed representative equation. -/
+/-- The class of a tensor of cocycles depends bilinearly on their homology classes. -/
 theorem tensor_homology_pairing {k : Type u} [CommRing k]
     (A B : CochainComplex (ModuleCat.{u} k) ℤ) (p q n : ℤ) (hpq : p + q = n) :
     ∃ c : A.homology p →ₗ[k] B.homology q →ₗ[k]

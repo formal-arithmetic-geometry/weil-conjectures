@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.EtaleTermwiseHypercohomology
 
 /-! # Coherence of the unswapped étale page maps
 
-Source: Stacks Project, Tags 015J, 015K and 0EZM.
-(blueprint: lem-weil-pbc-etale-page-map-coherence).
+## References
+
+* Stacks Project, Tags 015J, 015K and 0EZM
 -/
 
 @[expose] public section
@@ -31,24 +32,8 @@ private theorem apply_eq_index {A : Sort*} {B : A → Sort*} {R : Sort*}
 set_option backward.isDefEq.respectTransparency false in
 -- Elaborate the dependent inverse-image and spectral-page map families.
 set_option linter.unusedVariables false in
-/-- The supplied pullback page maps obey diagram and cocone equations.
-Source: Stacks Project, Tag 015J (functorial hypercohomology), Tag 015K
-(comparison maps), and Tag 0EZM (inverse-system comparison).
-
-Proof: For identity maps, transport M across D.map_id, substitute hidentity,
-and apply hid. The extra identity-complex comparison is componentwise identity.
-For composition, transport M across D.map_comp, substitute hcomposition,
-and apply hcomp. The composition-complex inverse comparison in hcomp is the
-same componentwise map as the displayed NatIso.mapHomologicalComplex comparison.
-For cocone compatibility, apply hcomp to D.map f and c.π.app j, then transport
-along c.w f. Its complex map is
-upperStarComp.hom followed by the pullback of φ f followed by (eG j).inv and
-L.ι.app (op j). Substitute hG, cancel (eG i).inv with (eG i).hom, and use
-L.w f.op. This gives precisely (eG i).inv followed by L.ι.app (op i).
-All transports are equality transports of scheme arrows with fixed endpoints;
-prove their compatibility with M by equality induction. No choices of
-presentations, page objects, or comparison maps are made here.
-(blueprint: lem-weil-pbc-etale-page-map-coherence). -/
+/-- The supplied pullback page maps obey diagram and cocone equations
+(Stacks, Tags 015J, 015K and 0EZM). -/
 theorem etale_page_map_coherence
     {I : Type u} [SmallCategory I] [IsCofiltered I]
     (D : I ⥤ Scheme.{u}) (c : Cone D)

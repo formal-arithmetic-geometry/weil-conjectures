@@ -15,8 +15,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-!
 # Bounded-above projective models of derived module objects
 
-Source: Stacks Project, Tags 0645 and 0646, and the downward construction of Tag 05T7
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0645 and 0646, and the downward construction of Tag 05T7
 -/
 
 @[expose] public section
@@ -42,22 +43,7 @@ private theorem quasiIso_unop_reverse
 
 namespace DerivedCategory
 
-/-- An object with no cohomology above `b` has a projective complex model zero above `b`.
-Source: Stacks Project, Tags 0645 and 0646, parts (2) and (3)
-(auxiliary; not a blueprint node).
-
-Proof:
-1. The standard t-structure supplies a representative K strictly zero above b.
-2. ModuleCat A has enough projectives, so its opposite has enough injectives.
-   Taking opposites and reversing integer degrees sends K to a complex K' zero below -b.
-3. Apply Mathlib's exact-bound injective replacement theorem to K'. This is the unbundled
-   version of `lem-sc-bounded-below-injective-resolution-existence`, and gives a
-   quasi-isomorphism K' → J with injective terms and J zero below -b.
-4. Reverse degrees and take opposites again. The resulting L has projective terms and
-   is zero above b. The induced map L → K'' is a quasi-isomorphism: degree n homology
-   is the opposite of degree -n homology, checked on the three-term short complexes.
-5. The unit of the opposite equivalence identifies K'' with K. Localization inverts the
-   quasi-isomorphism, and composing with Q(K) ≅ C gives the required model. -/
+/-- An object with no cohomology above `b` has a projective complex model zero above `b`. -/
 theorem exists_boundedAbove_projective_model
     (A : Type u) [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{max u v} A)]
     (C : DerivedCategory (ModuleCat.{max u v} A)) (b : ℤ)

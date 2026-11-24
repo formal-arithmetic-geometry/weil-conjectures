@@ -17,9 +17,10 @@ import Mathlib.Order.Minimal
 
 /-! # Ascending chains of quasi-coherent submodules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 30.10.1 (Tag 01Y8), and the
-maximal-element form used in Tags 088C and 088E
-(blueprint: lem-weil-pbc-noetherian-acc-quasi-coherent).
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 30.10.1 (Tag 01Y8), and the
+  maximal-element form used in Tags 088C and 088E.
 -/
 
 @[expose] public section
@@ -54,30 +55,7 @@ private theorem exists_finite_affine_cover (X : Scheme.{u}) [IsNoetherian X] :
 
 /-- On a Noetherian scheme, ascending sequences of quasi-coherent submodules of a coherent
 module stabilize. Every nonempty set of these submodules, or of quasi-coherent ideal
-sheaves (`X.IdealSheafData`), has a maximal element under inclusion.
-
-Source: Stacks Project, Tag 01Y8; maximal-element form as used in Tags 088C and 088E
-(blueprint: lem-weil-pbc-noetherian-acc-quasi-coherent).
-
-Proof:
-1. Choose a finite affine open cover using compactness and the affine-open basis.
-   Local Noetherianness gives Noetherian section rings on these opens.
-2. Coherence gives finite presentations by taking local generators and generators of
-   their kernels. The proved source-library affine finite-presentation theorem makes
-   the ambient sections finite. Evaluate subobject arrows and take their linear ranges;
-   subobject factorization makes these maps monotone.
-3. Apply finite-module ACC to each affine section chain and take the finite supremum of
-   its stabilization indices. The section images then agree on the cover. An inclusion
-   into a quasi-coherent subobject which is surjective on these affines is surjective on
-   their basic opens: extend a power multiple of a section, lift on the affine, restrict,
-   then divide by the defining unit. The sheaf basis test gives equality globally.
-4. The chain condition on the subtype of quasi-coherent subobjects gives well-foundedness
-   of strict inclusion in the increasing direction. Mathlib supplies maximal elements in
-   every nonempty set of this subtype.
-5. For ideal sheaves, finite-module ACC applies directly to the section ideals over the
-   same cover. Mathlib's ideal-sheaf extensionality on an affine cover gives stabilization
-   globally. Convert this to well-foundedness and apply the same maximal-element theorem.
-   This does not require any coherence theorem for the structure sheaf. -/
+sheaves (`X.IdealSheafData`), has a maximal element under inclusion (Stacks, Tag 01Y8). -/
 theorem noetherian_quasicoherent_submodules (X : Scheme.{u}) [IsNoetherian X]
     (F : SheafOfModules.{u} (moduleRings X.toRingedSpace))
     (hF : RingedSpace.IsCoherent X.toRingedSpace F) :

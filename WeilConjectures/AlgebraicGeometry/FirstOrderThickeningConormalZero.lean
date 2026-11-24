@@ -14,8 +14,10 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 /-!
 # A first order thickening with zero conormal is an isomorphism
 
-Source: Stacks Project, Tags 04FE and 01R3.
-(blueprint: lem-weil-pbc-first-order-thickening-conormal-zero).
+## References
+
+* [Stacks Project, Tag 04FE](https://stacks.math.columbia.edu/tag/04FE)
+* [Stacks Project, Tag 01R3](https://stacks.math.columbia.edu/tag/01R3)
 -/
 
 @[expose] public section
@@ -29,17 +31,7 @@ namespace AlgebraicGeometry
 attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEquiv_symm
 
 /-- A square-zero closed immersion is an isomorphism if its conormal module vanishes.
-This is the ideal-theoretic part of (3) implies (2) in Tag 04FE; it does not require
-any universal lifting property.
-Source: Stacks Project, Tag 04FE, proof, and Tag 01R3 (2).
-(blueprint: lem-weil-pbc-first-order-thickening-conormal-zero).
-Proof: on any affine open U in X', let I be the kernel of the section map of i.
-The affine conormal identification (01R3 (2)) identifies the conormal sections
-on i⁻¹(U) with I/I². Zero conormal makes this quotient zero. The first order
-hypothesis gives I² = 0 on U, so I itself is zero. This holds on every affine
-open, hence the kernel ideal sheaf is zero. A closed immersion with zero kernel
-ideal is an isomorphism, by IsClosedImmersion.isIso_iff_ker_eq_bot. This also
-covers empty schemes and the zero ideal, without finiteness assumptions. -/
+This does not require any universal lifting property. (Stacks, Tags 04FE and 01R3.) -/
 theorem firstOrderThickening_isIso_of_conormal_isZero {X X' : Scheme.{u}}
     (i : X ⟶ X') (hi : IsFirstOrderThickening i)
     (hC : IsZero ((Scheme.Modules.tensorPullback i).obj i.ker.toModules)) :

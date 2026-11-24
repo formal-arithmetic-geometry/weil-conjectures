@@ -13,9 +13,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Kernel ideal modules under open restriction
 
-Source: Stacks Project, Sheaves, Lemma 00A0; More on Morphisms, Lemma 09ZU;
-and Morphisms, Section 01R1 preceding Definition 01R2.
-(blueprint: lem-weil-pbc-open-restriction-kernel-module).
+## References
+
+* Stacks Project, Tags 00A0, 09ZU and 01R1.
 -/
 
 @[expose] public section
@@ -51,19 +51,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The kernel ideal module of a closed immersion restricts to the kernel ideal
-module of its restriction to an ambient open subscheme.
-Source: Stacks Project, Sheaves, Lemma 00A0; More on Morphisms, Lemma 09ZU;
-and Morphisms, Section 01R1 preceding Definition 01R2.
-(blueprint: lem-weil-pbc-open-restriction-kernel-module).
-Proof: The preimage equality and commuting square identify `iV` with the base
-change of `i` along `V'.ι`. On every open of `V'`, its functions are the functions
-on the corresponding ambient open, and the functions on its inverse image in
-`V` are those on the inverse image in `Z`. These identifications commute with
-the two immersion maps. Their kernels therefore agree. The ideal modules are
-the kernels of the structure module maps to the closed subschemes; the section
-identifications commute with restriction and scalar multiplication, giving an
-isomorphism of ideal modules. Finally tensor pullback along the open immersion
-is restriction, by uniqueness of its left adjoint to pushforward. -/
+module of its restriction to an ambient open subscheme. -/
 theorem nonempty_tensorPullback_open_kernel
     {Z Z' : Scheme.{u}} (i : Z ⟶ Z') [IsClosedImmersion i]
     {V : Z.Opens} {V' : Z'.Opens} (iV : V.toScheme ⟶ V'.toScheme)

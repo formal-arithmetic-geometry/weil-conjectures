@@ -25,9 +25,7 @@ attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ring
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The complex whose localization defines the integral scalar model.
-Source: blueprint, Compatible isomorphisms, constant finite-free scalar complex.
-(blueprint: def-pe-internal-perfect-ordinary-reductions). -/
+/-- The complex whose localization defines the integral scalar model. -/
 def internalPerfectIntegralComplex (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
     CochainComplex (AdicCompletion.Modules l E W) ℤ :=
@@ -42,19 +40,16 @@ def internalPerfectIntegralComplex (W : Scheme.{u})
     FiniteConstantModel.modelFunctor (Padic.coefficientExtensionIntegers l E) W
   (F.mapHomologicalComplex (.up ℤ)).obj P
 
-/-- Termwise ordinary extension along the actual integral-to-finite quotient.
-Source: Stacks Tags 06YY and 09C6, ordinary reduction of a finite-free complex.
-(blueprint: def-pe-internal-perfect-ordinary-reductions). -/
+/-- Termwise ordinary extension along the actual integral-to-finite quotient
+(Stacks, Tags 06YY and 09C6). -/
 def internalPerfectOrdinaryReduction (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) :=
   ((Mod.extendScalars (AdicCompletion.quotient l E W n)).mapHomologicalComplex (.up ℤ)).obj
     (internalPerfectIntegralComplex l E W P)
 
-/-- The ordinary balancing isomorphism for two consecutive reductions.
-It is fixed by uniqueness of left adjoints and the actual quotient factorization.
-Source: Stacks Tag 06YY, associativity of scalar extension.
-(blueprint: def-pe-internal-perfect-ordinary-reductions). -/
+/-- The ordinary balancing isomorphism for two consecutive reductions
+(Stacks, Tag 06YY). -/
 def internalPerfectOrdinaryReductionStep (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) :
@@ -67,18 +62,16 @@ def internalPerfectOrdinaryReductionStep (W : Scheme.{u})
       eqToIso (by congr 1; exact AdicCompletion.quotient_transition l E W n)) (.up ℤ)).app
     (internalPerfectIntegralComplex l E W P)
 
-/-- Endomorphisms modulo chain homotopy of the ordinary quotient model.
-Source: Stacks Tags 064B and 09C6.
-(blueprint: def-pe-internal-perfect-ordinary-reductions). -/
+/-- Endomorphisms modulo chain homotopy of the ordinary quotient model
+(Stacks, Tags 064B and 09C6). -/
 abbrev internalPerfectOrdinaryHom (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) :=
   (HomotopyCategory.quotient _ (.up ℤ)).obj (internalPerfectOrdinaryReduction l E W P n) ⟶
     (HomotopyCategory.quotient _ (.up ℤ)).obj (internalPerfectOrdinaryReduction l E W P n)
 
-/-- Ordinary scalar extension on homotopy classes, conjugated by balancing.
-Source: Stacks Tag 09C6, reduction of chain maps and homotopies.
-(blueprint: def-pe-internal-perfect-ordinary-reductions). -/
+/-- Ordinary scalar extension on homotopy classes, conjugated by balancing
+(Stacks, Tag 09C6). -/
 def internalPerfectOrdinaryHomStep (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) (f : internalPerfectOrdinaryHom l E W P (n + 1)) :
@@ -89,11 +82,8 @@ def internalPerfectOrdinaryHomStep (W : Scheme.{u})
     ((Mod.extendScalars (AdicCompletion.transition l E W n)).mapHomotopyCategory (.up ℤ)).map f ≫
       H.map a.hom
 
-/-- The ordinary reduction step reduces a representative chain map and balances its scalars.
-Source: functoriality of the homotopy quotient.
-(blueprint: def-pe-internal-perfect-ordinary-reductions).
-Proof: the induced homotopy functor sends a chain-map class to its scalar-extended class;
-the quotient functor preserves the two compositions with the balancing isomorphism. -/
+/-- The ordinary reduction step reduces a representative chain map and balances its
+scalars. -/
 theorem internalPerfectOrdinaryHomStep_map (W : Scheme.{u})
     (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
     (n : ℕ) (f : internalPerfectOrdinaryReduction l E W P (n + 1) ⟶

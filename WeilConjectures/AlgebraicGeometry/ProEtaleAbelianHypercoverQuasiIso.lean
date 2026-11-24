@@ -16,7 +16,9 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Hypercover totalization preserves bounded-below quasi-isomorphisms
 
-Source: Stacks Project, Tag 09A2, second proof paragraph, and Tag 0946 (1).
+## References
+
+* Stacks Project, Tag 09A2 and Tag 0946 (1).
 -/
 
 @[expose] public section
@@ -84,16 +86,8 @@ private theorem sectionBicomplex_zero
 -- Comparing section-column maps unfolds the section and extension functor compositions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Weakly contractible terms suffice for bounded-below quasi-isomorphism invariance;
-no covering or matching-map hypotheses are needed for this comparison.
-Source: Stacks Project, Tags 09A2 and 0946 (1).
-(auxiliary; not a blueprint node).
-
-Proof: choose a common lower bound N. In each nonnegative simplicial degree p,
-evaluation at U_p preserves homology by weak contractibility. Thus the vertical
-complex map is a quasi-isomorphism.
-The extension-by-zero column isomorphisms identify these vertical maps with the
-columns of the section bicomplex map. Negative columns are zero. Both bicomplexes
-vanish for p<0 or q<N, so bounded-below total-column comparison applies. -/
+no covering or matching-map hypotheses are needed for this comparison
+(Stacks, Tags 09A2 and 0946). -/
 theorem abelianHypercoverTotal_map_quasiIso_of_weaklyContractible
     (haff : ∀ p : ℕ, IsAffine (U _⦋p⦌).left.left)
     (hweak : ∀ (p : ℕ) (F G : Sheaf (topology X) (Type (u + 1))) (f : F ⟶ G),

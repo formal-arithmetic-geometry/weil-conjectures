@@ -17,8 +17,9 @@ import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 /-!
 # Dimension of an affine spectrum under field extension
 
-Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3)
-(blueprint: lem-weil-pbc-dimension-preserved-field-extension).
+## References
+
+* Stacks Project, Tag 00P3
 -/
 
 @[expose] public section
@@ -30,25 +31,7 @@ open scoped TensorProduct
 namespace AlgebraicGeometry
 
 /-- Scalar extension preserves the topological Krull dimension of an affine spectrum.
-Source: Stacks Project, Algebra, Lemma 10.116.5 (Tag 00P3)
-(blueprint: lem-weil-pbc-dimension-preserved-field-extension).
-
-Proof (the node's split, using Tags 00P4 and 0B7I):
-1. Tensor-factor symmetry induces a homeomorphism between the spectra of `K ⊗[k] S`
-   and `S ⊗[k] K`. Global topological Krull dimension is invariant under this
-   homeomorphism, so work in the latter factor order.
-2. By `lem-weil-pbc-field-extension-base-change-faithfully-flat`, the map from `S`
-   to `S ⊗[k] K` is faithfully flat. By
-   `lem-weil-pbc-faithfully-flat-surjective-spectrum`, contraction along this map is
-   surjective on prime spectra: every prime of `S` has a prime above it.
-3. For each prime of `S ⊗[k] K`, apply
-   `lem-weil-pbc-dimension-at-point-field-extension` (00P4) directly. Its local
-   dimension equals that at the contracted prime of `S`.
-4. By `lem-weil-pbc-dimension-supremum-local-dimensions` (0B7I), each global dimension
-   is the supremum of its local dimensions. Surjectivity from step 2 and equality
-   from step 3 identify these suprema. The empty spectrum has supremum `⊥`, so the
-   zero algebra is included as well.
--/
+(Stacks, Tag 00P3) -/
 theorem topologicalKrullDim_spec_tensorProduct_of_field_extension
     (k : Type u) (K : Type v) (S : Type w) [Field k] [Field K] [CommRing S]
     [Algebra k K] [Algebra k S] [Algebra.FiniteType k S] :

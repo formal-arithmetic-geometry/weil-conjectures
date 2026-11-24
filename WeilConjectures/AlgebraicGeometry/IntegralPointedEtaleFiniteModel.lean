@@ -10,9 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
 
 /-!
 # Finite models of pointed étale neighbourhoods over an integral morphism
-
-Source: blueprint `lemma-integral-changes-source-base--2`, integral finite-subalgebra argument.
-(blueprint: lem-sbc-integral-pointed-etale-finite-model)
 -/
 
 @[expose] public section
@@ -26,22 +23,7 @@ namespace AlgebraicGeometry.Scheme.Hom.Nbhd
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A pointed étale neighbourhood over an integral morphism has a finite model after
-restricting the base to an affine neighbourhood.
-
-Source: blueprint `lemma-integral-changes-source-base--2`, proof, integral finite-subalgebra
-argument; see also the finite-subalgebra construction in `exists_hom_disjoint_cover_of_isAffine`.
-(blueprint: lem-sbc-integral-pointed-etale-finite-model)
-
-Proof: Choose an affine open of Y containing y, regarded as a pointed étale neighbourhood
-c. Its pullback T to X is affine since f is integral. Write A = Γ(c) and B = Γ(T), with
-B integral over A. Pull V back to T and choose a standard étale affine neighbourhood of
-(v, (u,t)). This standard étale B-algebra descends to a finite A-subalgebra B₀ of B by
-adjoining its finitely many presentation coefficients. Let Z = Spec B₀, let g be its
-finite map to c, and let ρ be the induced map T → Z. Let W be the descended standard étale
-Z-scheme. The tensor-product identification gives a map from W ×_Z T to V over X.
-Lift the original geometric point through the standard étale affine chart and transport
-it through the tensor-product identification. Its composites to V and T are v and (u,t),
-respectively, giving r and the two required equalities. -/
+restricting the base to an affine neighbourhood. -/
 theorem exists_pointed_etale_finite_model
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)

@@ -11,6 +11,16 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import Mathlib.Topology.Sheaves.Module
 public import Mathlib.Geometry.RingedSpace.Stalks
 
+/-!
+# Componentwise stalk comparison for restriction
+
+Linear stalk comparison maps for restriction of module sheaves to an open.
+
+## References
+
+* Stacks Project, Sheaves, Section 6.31, Lemma 6.31.1 (3)
+-/
+
 @[expose] public section
 open CategoryTheory TopologicalSpace Opposite
 universe u
@@ -56,14 +66,6 @@ private def restrictScalarsHomOfSemilinear {R S : CommRingCat.{u}} (e : R ≅ S)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Componentwise linear stalk comparison for restriction, with its germ formula.
-Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3).
-(blueprint: new-module-restriction-stalk-components).
-
-Proof: represent a restricted stalk element by a germ on a neighborhood in the open,
-then send it to the germ on its image in the ambient space.  The additive stalk
-comparison is induced by the final neighborhood functor.  The germ scalar
-multiplication formula, applied on a common neighborhood, shows that this map is
-linear after transporting scalars along the inverse restriction-stalk ring map.
 -/
 theorem exists_moduleRestrictionStalk_components (X : RingedSpace.{u}) (W : Opens X)
     (x : X) (hx : x ∈ W) :

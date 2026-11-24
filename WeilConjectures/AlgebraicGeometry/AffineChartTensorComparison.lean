@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 /-!
 # Tensor-product comparison for a single affine chart
 
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Morphisms, Tag 01TQ.
-(blueprint: lem-weil-pbc-affine-chart-tensor-comparison).
+## References
+
+* Stacks Project, Tags 01JR, 01I4 and 01TQ
 -/
 
 @[expose] public section
@@ -29,29 +30,8 @@ namespace AlgebraicGeometry
 
 /-- A fixed affine triple admits one finitely presented algebra map whose tensor
 base changes describe the restricted chart morphism for every compatible affine base open.
-There is no inverse system or limiting cone in this statement.
-
-Source: Stacks Project, Schemes, Tags 01JR and 01I4; Morphisms, Tag 01TQ;
-Limits, Tag 07RP, affine reduction.
-(blueprint: lem-weil-pbc-affine-chart-tensor-comparison).
-
-Proof: Set B = Γ(Y₀,V) and C = Γ(X₀,U). The isomorphism e0 identifies R with
-Γ(S,W). Transport the algebra structures given by Y₀.hom.appLE W V eV and
-X₀.hom.appLE W U along this identification. The inclusion needed for the latter
-follows from eU, eV, and f₀.left ≫ Y₀.hom = X₀.hom. The restriction
-f₀.left.appLE V U eU is an R-algebra map φ by functoriality of appLE.
-Its underlying ring map is finitely presented by finitePresentation_appLE hV hU eU;
-this is precisely φ.FinitePresentation. For any t and compatible e, the inverse
-image of V in Y_T is V ×_W W_T, and the inverse image of U in X_T is U ×_W W_T.
-Indeed their structure maps factor through W_T by the two given open inclusions;
-the open pullback universal property identifies these schemes and projections.
-Apply hV.isoSpec, hU.isoSpec, e0 and e, then pullbackSpecIso, to identify them
-with Spec(A ⊗[R] B) and Spec(A ⊗[R] C). Compatibility h ensures that these are
-pullbacks over the algebraMap R A. The chart map corresponds to Spec(id ⊗ φ):
-check its two projections using the identities on a ⊗ 1 and 1 ⊗ b, and use
-pullback uniqueness. The restricted map factors the original source-chart map through the target
-chart inclusion, giving the asserted equality. Empty charts cause no exception: the same
-pullback and spectrum identities hold for zero coordinate rings. -/
+There is no inverse system or limiting cone in this statement
+(Stacks, Tags 01JR, 01I4, 01TQ and 07RP). -/
 theorem exists_affineChart_tensorComparison
     {S : Scheme.{u}} (X₀ Y₀ : Over S) (f₀ : X₀ ⟶ Y₀)
     [LocallyOfFinitePresentation f₀.left]

@@ -16,8 +16,9 @@ import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 
 /-! # Bounded models for one degree of algebraic residue fibres
 
-Source: Stacks Project, Tag 0BDI, stupid truncation.
-(blueprint: lem-sc-bounded-finite-free-fiber-model).
+## References
+
+* Stacks Project, Tag 0BDI
 -/
 
 @[expose] public section
@@ -29,19 +30,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Stupid truncation makes a bounded-above finite-free complex bounded while preserving
-one degree of cohomology after every residue-field extension.
-
-Source: Stacks Project, Tag 0BDI, stupid truncation.
-(blueprint: lem-sc-bounded-finite-free-fiber-model).
-
-Proof: Set K to F stupidly truncated below i-1. It vanishes below i-1, and above b
-because F does. Each retained term is isomorphic to the corresponding term of F;
-each removed term is zero, hence finite free of rank zero. The terms in degrees i-1,
-i and i+1, together with their two differentials, are unchanged. After extension
-of scalars to any residue field the same is true. The two three-term short complexes
-are isomorphic, hence their homology in degree i is isomorphic. Take finrank.
-If b is less than i-1, the truncation is zero and both degree-i homologies vanish.
-The zero ring is harmless since it has no prime ideals. -/
+one degree of cohomology after every residue-field extension (Stacks, Tag 0BDI). -/
 theorem exists_bounded_finiteFree_fiber_model (A : Type u) [CommRing A]
     (F : CochainComplex (ModuleCat.{u} A) ℤ) (b : ℤ) (hb : F.IsStrictlyLE b)
     (hfree : ∀ n : ℤ, Module.Free A (F.X n) ∧ Module.Finite A (F.X n)) (i : ℤ) :

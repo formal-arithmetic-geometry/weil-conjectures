@@ -20,8 +20,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 /-!
 # Finite étale Čech cohomology and filtered colimits
 
-Source: Stacks Project, Cohomology on Sites, Tag 0739, proof of `lemma-colim-works-over-collection`.
-(blueprint: lem-weil-pbc-finite-etale-cech-filtered-colimit).
+## References
+
+* Stacks Project, Tag 0739
 -/
 
 @[expose] public section
@@ -141,25 +142,8 @@ private theorem finiteEtaleCechComplexColimit (X : Scheme.{u}) (U : X.Etale)
   exact preservesColimitsOfShape_of_natIso e.symm
 
 /-- If sections on every member of a finite Čech nerve preserve filtered colimits,
-then its Čech cohomology functors preserve those colimits, in every degree.
-Source: Stacks Project, Tag 0739, proof of `lemma-colim-works-over-collection`,
-the finite-cover Čech step.
-(blueprint: lem-weil-pbc-finite-etale-cech-filtered-colimit).
-
-Proof:
-1. In degree `q`, the Čech complex is the product of evaluation at the objects
-   `piObj (fun j : Fin (q + 1) ↦ Over.mk (f (a j)))`, indexed by
-   `a : Fin (q + 1) → K`. This index type is finite, including when `K` is empty.
-2. The hypothesis identifies each factor of the image cocone with a colimit.
-   Filtered colimits in abelian groups commute with finite products (finite products
-   are finite biproducts). Thus the image cocone is a colimit in every degree.
-   The component comparison maps commute with each restriction along a face map,
-   by naturality of the original cocone; hence they commute with the alternating
-   sums defining the differential. Degreewise colimits are colimits of complexes.
-3. Filtered colimits of abelian groups are exact. Applied to the kernels and images
-   of the differentials this identifies the homology of the colimit complex with
-   the colimit of the homology groups. Composing with step 2 gives preservation
-   by the displayed Čech cohomology functor, with its original cocone legs. -/
+then its Čech cohomology functors preserve those colimits, in every degree
+(Stacks, Tag 0739). -/
 theorem preservesColimitsOfShape_finiteEtaleCechHomology
     (X : Scheme.{u}) (U : X.Etale) (K : Type (u + 1)) [Finite K]
     (V : K → X.Etale) (f : ∀ k : K, V k ⟶ U)

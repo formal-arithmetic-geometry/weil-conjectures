@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.GabberH0ZariskiSectionUnitEquation
 
 /-! # The top-open comparison unit equation
 
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-top-unit-equation).
+## References
+
+* [Stacks, Tag 09ZF], [Stacks, Tags 03CB, 03CC]
 -/
 
 @[expose] public section
@@ -21,21 +22,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry
 
-/-- The explicit section comparison carries the topological unit to the etale unit.
-Source: Stacks Project, Tag 09ZF, fourth proof paragraph; Sites, Tags 03CB and 03CC.
-(blueprint: lem-weil-pbc-gabber-h0-zariski-top-unit-equation).
-
-Proof: Apply hbeta at the top open. Its right side is the etale unit for i'
-followed by restriction along the preimage-open isomorphism. Unfold the section
-comparison: first the top-open/iterated-identity pullback isomorphism, then the
-unit-compatible sheaf composition isomorphism, then pullbackComp, and finally
-transport along pullback.condition. Naturality of the unit with respect to the
-top-open/identity isomorphism identifies the first two restrictions with the
-unit applied to gabberZariskiLift. The composition-unit equation identifies
-the remaining maps with etaleSetDescentComparison h i'. The last transport is
-exactly pullback.condition.symm as in the statement. This does not use a
-representative, a cover, or a target section; on the empty scheme the same
-naturality identities apply. -/
+/-- The explicit section comparison carries the topological unit to the etale unit. -/
 theorem gabber_h0_zariski_top_unit_equation
     {X Z X' : Scheme.{u}} (i : Z ⟶ X) (h : X' ⟶ X)
     (F : Sheaf X.smallEtaleTopology (Type (u + 1)))

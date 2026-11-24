@@ -37,9 +37,7 @@ variable (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The specified b followed by finite compact support of the input reduction.
 The b in this definition is literally the proper counit mate followed by the open
-scalar comparison, as fixed by reductionDirectImageComparison.
-Source: blueprint paragraph (1), the displayed composite
-(blueprint: lem-sp-shriek-normalized-transition-comparison). -/
+scalar comparison, as fixed by reductionDirectImageComparison. -/
 def word {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
     (scalarExtensionFunctor (quotientMap l E h) Y).obj
         ((SpTowerShriek.finiteF l E b c n).obj ((SpTowerShriek.Ev l E X n).obj C)) ⟶
@@ -51,9 +49,7 @@ def word {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
     (SpTowerShriek.finiteF l E b c m).map (rho l E b X h C)
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- The actual output reduction, conjugated by the canonical compact-support evaluations.
-Source: blueprint paragraph (1); prose-09-23 evaluation identifications
-(blueprint: lem-sp-shriek-normalized-transition-comparison). -/
+/-- The actual output reduction, conjugated by the canonical compact-support evaluations. -/
 def actual {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
     (scalarExtensionFunctor (quotientMap l E h) Y).obj
         ((SpTowerShriek.finiteF l E b c n).obj ((SpTowerShriek.Ev l E X n).obj C)) ⟶

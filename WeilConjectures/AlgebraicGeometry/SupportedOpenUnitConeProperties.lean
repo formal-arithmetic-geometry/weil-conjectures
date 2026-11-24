@@ -15,8 +15,12 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenUnitRestrictionIso
 
 /-! # Support of the open unit cone
 
-Source: Stacks Project, Tags 09IR, 08D5 and 08DF; Tag 0E4G, support triangle.
-(blueprint: lem-pc-supported-open-unit-cone-properties).
+## References
+
+* [Stacks, Tag 09IR]
+* [Stacks, Tag 08D5]
+* [Stacks, Tag 08DF]
+* [Stacks, Tag 0E4G]
 -/
 
 @[expose] public section
@@ -27,24 +31,7 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- The cone of an open unit remains quasi-coherent and supported, and is zero on U.
-This assertion constructs no generator and has no orthogonality hypothesis.
-Source: Stacks Project, Tag 09IR, unit-cone paragraph; Tags 08D5 and 08DF.
-(blueprint: lem-pc-supported-open-unit-cone-properties).
-
-Proof: Apply the already stated canonical openRestriction_support_triangle to K.
-Transport its restriction from modules on the open subscheme to the over-site by
-Modules.overEquiv and the exact derived comparison. Uniqueness of right adjoints
-identifies the canonical right adjoint with R, respecting the specified adjunction
-unit. TR3 extends the resulting isomorphisms of the first two triangle vertices to
-a triangle morphism, and the triangle morphism isomorphism criterion makes the cones
-isomorphic. Thus C is quasi-coherent and zero on U, as the canonical cone is.
-For support on T, put O = X minus T. Supported derived restriction makes K zero on O.
-Open base change identifies restriction of R(K restricted to U) to O with derived
-direct image of K restricted to U intersect O, which is zero. A right adjoint sends
-zero to zero. Restrict the triangle exactly to O: the first two vertices are zero,
-so the cone is zero. Its homology stalks at all points of O are therefore zero.
-The argument permits empty U and T and unbounded K; it constructs no test object. -/
+/-- The cone of an open unit remains quasi-coherent and supported, and is zero on U. -/
 theorem supported_open_unit_cone_properties
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

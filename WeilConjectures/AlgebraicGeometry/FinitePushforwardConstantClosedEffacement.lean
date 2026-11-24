@@ -24,8 +24,9 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # Killing one finite-pushforward component by a finite-cover unit
 
-Source: Stacks Project, Tag 09ZE, proof, second paragraph, using Tag 09ZD (2).
-(blueprint: lem-weil-pbc-finite-pushforward-constant-closed-unit-killing)
+## References
+
+* Stacks Project, Tags 09ZE and 09ZD.
 -/
 
 @[expose] public section
@@ -48,35 +49,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A class with coefficients in a finite pushforward of a finite constant module dies
 under the pushforward of the unit of a finite surjective cover of the source.
 
-Source: Stacks Project, Tag 09ZE, proof, second paragraph, using Tags 0959 and 09ZD (2).
-(blueprint: lem-weil-pbc-finite-pushforward-constant-closed-unit-killing)
-
-Proof:
-1. Since `f` is finite and `X` affine, `Y` is affine. Form `YZ = Y ×_X Z`; its
-   projection to `Y` is a closed immersion. Forgetting module coefficients commutes
-   with direct image (both are precomposition), and with constant sheaves by
-   `constantCommuteCompose`. Pull back the latter isomorphism to identify the
-   underlying abelian coefficients on `YZ` with the constant group underlying `M`.
-2. Apply the finite exchange isomorphism to identify the restricted coefficient
-   sheaf with the finite pushforward from `YZ` of the constant underlying abelian
-   group of `M`. Apply the finite-pushforward edge isomorphism, followed by the
-   constant inverse-image comparison, to obtain a constant-coefficient class on `YZ`.
-3. Apply `exists_isFinite_surjective_constant_cohomology_eq_zero` to the closed
-   immersion `YZ ⟶ Y`. This gives a finite surjective finitely presented `π : Y' ⟶ Y`
-   whose base change to `YZ` kills that class. Here the underlying abelian group of
-   `M` is finite and `q > 0`.
-4. Apply `cohomology_baseChange_unit_edge_compatibility` to `f`, `π`, and `i`
-   for abelian sheaves, using the nested pullback `Y' ×_Y YZ` and its composite
-   cartesian square. The image under finite exchange and the edge isomorphism for
-   `π ≫ f` is the pullback of the class killed in step 3, followed by an isomorphism,
-   hence zero. Both maps are injective, so the abelian pushforward unit kills the
-   original class. Remove the direct-image composition isomorphism by injectivity.
-5. Take the abelian adjoint `a` of the forgotten module unit. The adjunction
-   bijection gives `η_ab ≫ π_* a = U(η_module)`, without needing `a` to be invertible.
-   Push this factorization forward by `f`, restrict by `i`, and apply cohomology.
-   The first factor kills the class by step 4, so the composite also kills it.
-   No constructibility or comparison hypothesis is used; zero coefficients and
-   empty schemes give zero classes by the same argument. -/
+(Stacks, Tag 09ZE, Tag 0959, Tag 09ZD) -/
 theorem exists_finite_cover_pushforward_unit_closed_cohomology_eq_zero
     {X Y Z : Scheme.{u}} [IsAffine X] (f : Y ⟶ X) [IsFinite f]
     [LocallyOfFinitePresentation f] (i : Z ⟶ X) [IsClosedImmersion i]

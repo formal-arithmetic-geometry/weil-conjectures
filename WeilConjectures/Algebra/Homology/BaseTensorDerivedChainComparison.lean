@@ -14,7 +14,12 @@ import all Mathlib.Algebra.Homology.Localization
 import WeilConjectures.Algebra.Homology.BaseTensorCoefficientNaturalMap
 import WeilConjectures.Algebra.Homology.ScalarExtensionDerivedRestriction
 
-/-! # Comparison in the derived category, before homology -/
+/-! # Comparison in the derived category, before homology
+
+## References
+
+* Stacks Project, Tags 065Y, 065Z, 06Y6 and 0DJ7.
+-/
 
 @[expose] public section
 
@@ -35,21 +40,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} D)]
 
-/-- Derived coefficient chain comparison.
-Source: Stacks Project, Tag 065Y, construction of equation-comparison-map
-(Tag 065Z); Tag 06Y6; perfect.tex equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-chain-comparison).
-
-Proof: resolve an A-complex by an A-K-flat complex U and its restriction by an
-R-K-flat complex V. The map V to Res(U) induces on pure tensors the displayed
-coefficient map into Res(D tensor_A U). Invert the resolution counits and the
-quasi-isomorphism U to P. Comparison maps of resolutions commute with this map
-on pure tensors, and tensor induction proves the commuting squares. Applying
-the same argument to roofs proves naturality and independence of refinements.
-The augmentation squares and counit naturality give the displayed derived
-equation at P, without assuming the counit at P is invertible. Finally use the
-unique counit-compatible isomorphisms of left derived functors to transport the
-construction to the supplied universal pairs F and L. -/
+/-- Derived coefficient chain comparison. -/
 theorem exists_baseTensorDerivedChainComparison
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶

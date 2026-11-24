@@ -21,8 +21,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Quasi-coherence of a specified finite scalar right adjoint
 
-Source: Stacks Project, Tag 0AX2, comparison of right adjoints
-(blueprint: lem-sc-finite-scalar-right-adjoint-qcoh).
+## References
+
+* Stacks Project, Tag 0AX2.
 -/
 
 @[expose] public section
@@ -77,23 +78,7 @@ private theorem openModuleLocallySmall (Y : Scheme.{u})
     (P ⋙ DerivedCategory.singleFunctor (SheafOfModules.{u} R) 0)
 
 /-- Any specified right adjoint of derived scalar restriction has quasi-coherent
-cohomology at a bounded-below quasi-coherent input.
-Source: Stacks Project, Tag 0AX2, with Tags 0BV0 and 0AX3
-(blueprint: lem-sc-finite-scalar-right-adjoint-qcoh).
-
-Proof: Construct the direct-image algebra B with structure map f.c. On each open U,
-local module pushforward is faithful, since an open V contained in U is isomorphic
-to U × V. Composing it with the faithful degree-zero embedding into D(O_Y) proves
-local smallness in the specified morphism universe. K-injective resolutions then
-construct the local derived categories required by finite_pushforward_derivedHom_qcoherent.
-That theorem gives quasi-coherence of B and of the constructed algebra-valued derived
-Hom after restriction of scalars. The adjunction sheafAlgebraDerivedHom_adjunction
-identifies this explicit derived Hom as a right adjoint of the specified left functor.
-Uniqueness of right adjoints gives an isomorphism to rhoR. For each integer n,
-quasiCoherent_iff_restrictScalars converts the underlying O_Y-module quasi-coherence
-of the nth cohomology sheaf to B-module quasi-coherence. Apply the homology functor to
-the right-adjoint isomorphism and transport quasi-coherence. No output bound must be
-chosen or transported. Empty schemes, zero objects and shifts obey the same argument. -/
+cohomology at a bounded-below quasi-coherent input (Stacks, Tags 0AX2, 0BV0, 0AX3). -/
 theorem finite_scalar_right_adjoint_qcoh {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsFinite f] [IsNoetherian X] [IsNoetherian Y]
     [HasDerivedCategory.{wY} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

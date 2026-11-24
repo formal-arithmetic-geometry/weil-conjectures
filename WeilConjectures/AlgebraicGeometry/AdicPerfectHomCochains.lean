@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.AdicPerfectModuleHom
 
 /-! # Evaluation of ordinary quotient Hom cochains
 
-Source: Stacks Project, Tags 093T, 09C6 and 0A8H.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 093T, 09C6 and 0A8H
 -/
 
 @[expose] public noncomputable section
@@ -521,30 +522,8 @@ private theorem actualDiagram_realized (X : Scheme.{u})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Evaluation identifies the entire graded quotient Hom complex, before taking
 cycles, boundaries or homotopy classes. The equation is in every cochain degree.
-No weak contractibility or exactness of section evaluation is assumed.
-
-Source: Stacks Project, Modules on Sites, Tag 093T; proetale.tex, Tag 09C6,
-the displayed quotient Hom calculation; More on Algebra, Tag 0A8H.
-(auxiliary; not a blueprint node).
-
-Proof: compose the scalar-balancing isomorphism for completed-to-finite change
-with the constant-sheaf scalar-extension comparison, and restrict to the slice.
-This identifies each ordinary quotient term with the constant realization of
-its algebraic quotient. For a finite free source, evaluate a sheaf-linear map
-on the finite basis. This gives the constant sheaf of algebraic Hom after
-quotienting; finite-projective splittings give the same comparison for retracts.
-The source terms outside [a,b] vanish. Thus in every degree the Hom product is
-a finite product, and both quotient and additive constant realization commute
-with it. The termwise comparisons assemble to the asserted graded isomorphisms.
-Their naturality for precomposition and postcomposition identifies both summands
-of the signed differential d_Q f - (-1)^q f d_P, giving complex isomorphisms.
-For the successor equation, scalar balancing multiplies the adjacent scalars.
-On a locally constant linear map and a pure tensor in its source, both sides
-are its value followed by the quotient map. Such local tensors generate; sheaf
-separatedness gives equality on all sections. It passes to finite-projective
-retracts and the finite product. This verifies the displayed equation in every
-degree, without passage to cohomology. Empty intervals, zero rings, the unit
-ideal and empty slices give zero complexes and their unique isomorphisms. -/
+No weak contractibility or exactness of section evaluation is assumed
+(Stacks, Tags 093T, 09C6 and 0A8H). -/
 theorem adicPerfectHomCochains (X : Scheme.{u})
     {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)
     (U : coefficientProEtaleSiteModel.{u, v} X)

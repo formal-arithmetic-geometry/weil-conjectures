@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Homology.CyclePullbackTower
 /-!
 # Equations for the explicit cycle-pullback tower
 
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1), the descending step.
+## References
+
+* Stacks Project, Derived Categories, Tag 05T7 (1) (the descending step)
 -/
 
 @[expose] public section
@@ -98,21 +100,7 @@ private theorem comm_top (T : A ⥤ A) (π : T ⟶ 𝟭 A)
   simpa only [Category.assoc, comp_zero, eqToHom_refl, Category.comp_id] using
     congrArg (fun f ↦ eqToHom (term_eq T π F N N hi) ≫ f) h
 
-/-- The integer-indexed differentials square to zero and commute with the augmentation.
-
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1).
-(blueprint: lem-pc-cycle-pullback-tower-laws-stage3).
-
-Proof: In a successor stage the differential is pi, followed by the second pullback
-projection and the inclusion of the kernel of the preceding stage's differential.
-Thus its composite with that preceding differential is zero by the kernel equation.
-The first projection followed by the target differential equals the second projection
-followed by the kernel inclusion and the preceding augmentation, by the pullback
-condition. Precompose this equation by pi. For integer degree i below N, the tower
-index in degree i+1 is one less than the index in degree i, so the two equations
-transport to exactly the displayed equations. At i=N the next terms are zero;
-the same calculation uses the initial stage. Above N all differentials and
-augmentations are zero, and both equations follow from composition with zero. -/
+/-- The integer-indexed differentials square to zero and commute with the augmentation. -/
 theorem tower_laws {A : Type u} [Category.{v} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] (T : A ⥤ A) (π : T ⟶ 𝟭 A)
     (F : B ⥤ CochainComplex A ℤ) (N : ℤ) :

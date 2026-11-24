@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitOpenCompatibleBoundaries
 
 /-! # Difference and boundary maps on canonical open diagrams
 
-Source: Stacks Project, Tags 0A50 and 09YQ.
+## References
+
+* Stacks Project, Tags 0A50 and 09YQ
 -/
 
 @[expose] public section
@@ -298,46 +300,8 @@ private theorem algebraic_boundary_transport
 set_option backward.isDefEq.respectTransparency true in
 -- The large dependent cohomology signature and its transports require additional elaboration steps.
 set_option linter.unusedVariables false in
-/-- Construct the difference and boundary maps, leaving the restriction row supplied.
-
-Source: Stacks Project, Tag 0A50, coefficient-natural long exact sequence;
-Tag 09YQ, coherent-system maps.
-(blueprint: lem-weil-pbc-etale-limit-open-boundary-transform).
-
-Proof: Use the supplied covering equations at each tail stage and at c.pt.
-Inverse image preserves intersections, identifying the intersection with the
-supplied intersection open.
-Use the
-functorial Mayer--Vietoris connecting transformation before evaluating at the
-coefficient sheaves, so the same boundary is natural for all transitions and
-cone legs. Transport the difference and boundary by eKU, eKV, eKI and eH;
-at the bottom transport the boundary by eB.inv. More explicitly, identify the
-stage biproduct with the ordinary product by evaluation's biproduct comparison
-and biprodIsoProd, then apply the two object isomorphisms. The map a_j is this
-identification followed by restriction from U_j to the intersection minus
-restriction from V_j, followed by eKI_j.inv. The map b_j is eKI_j.hom followed
-by the canonical boundary delta_j followed by eH_j.inv. The bottom a' is the
-actual difference of intersection restrictions, and b' is delta_L followed by
-eB.inv. The comparisons are all isomorphisms, so images and kernels of these
-maps are the images and kernels in the original long exact sequence.
-Coefficient naturality and
-pullback naturality prove that the stage maps are natural transformations.
-The long exact sequence gives exactness of (a,b). For (b,r), the supplied
-component formulas hrU and hrV identify the kernel of r with the kernel of
-the actual pair of restrictions: the biproduct projections are jointly monic
-and eKU,eKV are isomorphisms. The long exact sequence gives that kernel as
-the image of b. Transport also gives bottom exactness. Naturality under the
-restricted cone projections followed by the coefficient legs proves the two
-left squares. For the difference square, postcompose the two factors with
-intersection restriction and subtract; h₁U and h₁V replace the product leg by the
-two supplied legs. Pullback/coefficient naturality identifies each resulting term
-with the intersection leg after the corresponding stage restriction. For the
-boundary square, substitute hB and hιI, cancel eH and eKI, and apply the naturality
-of the same connecting transformation under the cone projection followed by
-(eG_j).inv;L_j. These equations are exactly the two asserted left squares.
-This theorem constructs neither r nor a product cocone map and
-asserts no right square. The argument also applies to empty or coincident
-opens. -/
+/-- Construct the difference and boundary maps, leaving the restriction row supplied
+(Stacks, Tags 0A50 and 09YQ). -/
 theorem etale_limit_open_boundary_transform
     (X : Scheme.{u}) (U V : X.Opens)
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]

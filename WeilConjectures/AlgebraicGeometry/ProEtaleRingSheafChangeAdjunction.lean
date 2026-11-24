@@ -23,9 +23,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 /-!
 # Compatible changes of ring sheaves and derived adjunctions
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6;
-Modules on Sites, lemma-adjoint-push-pull-modules
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0D6D, 0D6E and 07A6; Modules on Sites.
 -/
 
 @[expose] public section
@@ -133,21 +133,14 @@ private theorem ringUnitComparison
   rw [hh]
   infer_instance
 
-/-- Restriction along a commutative ring-sheaf map on the original small site.
-Source: Stacks, Modules on Sites (auxiliary; not a blueprint node). -/
+/-- Restriction along a commutative ring-sheaf map on the original small site. -/
 noncomputable abbrev proEtaleRingRestrictScalars {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     proEtaleRingModules T S ⥤ proEtaleRingModules T R :=
   SheafOfModules.restrictScalars.{u + 1}
     ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map a)
 
-/-- Restriction is exact and conservative before deriving.
-Source: Stacks, Derived Categories, Tag 05RT
-(auxiliary; not a blueprint node).
-Proof: restriction leaves the underlying abelian sheaf and its kernels and sheafified
-cokernels unchanged. A bijective linear sheaf map has a linear inverse: apply the map
-to the proposed scalar-linearity equality for its inverse. Thus restriction reflects
-isomorphisms and preserves finite limits and finite colimits. -/
+/-- Restriction is exact and conservative before deriving (Stacks, Tag 05RT). -/
 theorem proEtaleRingRestrictScalars_properties {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteLimits (proEtaleRingRestrictScalars a) ∧
@@ -175,8 +168,7 @@ theorem proEtaleRingRestrictScalars_properties {T : Scheme.{u}}
     exact preservesFiniteColimits_of_reflects_of_preserves F (SheafOfModules.toSheaf.{u + 1} R₀)
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
-/-- Left exactness of restriction. Source: Stacks, Tag 05RT
-(auxiliary; not a blueprint node). -/
+/-- Left exactness of restriction (Stacks, Tag 05RT). -/
 theorem proEtaleRingRestrictScalars_preservesFiniteLimits {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteLimits (proEtaleRingRestrictScalars a) :=
@@ -184,8 +176,7 @@ theorem proEtaleRingRestrictScalars_preservesFiniteLimits {T : Scheme.{u}}
 
 attribute [local instance] proEtaleRingRestrictScalars_preservesFiniteLimits
 
-/-- Right exactness of restriction. Source: Stacks, Tag 05RT
-(auxiliary; not a blueprint node). -/
+/-- Right exactness of restriction (Stacks, Tag 05RT). -/
 theorem proEtaleRingRestrictScalars_preservesFiniteColimits {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     PreservesFiniteColimits (proEtaleRingRestrictScalars a) :=
@@ -265,12 +256,8 @@ private noncomputable def restrictionDirectImageInv (N : proEtaleRingModules U S
       naturality := by intros; ext n; rfl }
 
 include comm in
-/-- The underived comparison is uniquely specified by identity on every section.
-Source: Stacks, Tag 0D6E (auxiliary; not a blueprint node).
-Proof: both composites have sections `N(U ×_V W)`. Their actions coincide by taking
-adjoints of the coefficient-square identity. Identity on those sections is linear,
-commutes with restrictions and module maps, and is its own inverse. Sectionwise
-faithfulness determines the natural isomorphism uniquely. -/
+/-- The underived comparison is uniquely specified by identity on every section
+(Stacks, Tag 0D6E). -/
 theorem proEtaleRingRestrictionDirectImage_existsUnique :
     ∃! e : proEtaleRingModuleDirectImage f SV SU cS ⋙ proEtaleRingRestrictScalars aV ≅
         proEtaleRingRestrictScalars aU ⋙ proEtaleRingModuleDirectImage f RV RU cR,
@@ -312,17 +299,15 @@ theorem proEtaleRingRestrictionDirectImage_existsUnique :
   ext n
   exact he' N W n
 
-/-- Canonical direct-image comparison, determined by the actual identity on sections.
-Source: Stacks, Tag 0D6E (auxiliary; not a blueprint node). -/
+/-- Canonical direct-image comparison, determined by the actual identity on sections
+(Stacks, Tag 0D6E). -/
 noncomputable def proEtaleRingRestrictionDirectImage :
     proEtaleRingModuleDirectImage f SV SU cS ⋙ proEtaleRingRestrictScalars aV ≅
       proEtaleRingRestrictScalars aU ⋙ proEtaleRingModuleDirectImage f RV RU cR :=
   Classical.choose
     (proEtaleRingRestrictionDirectImage_existsUnique f RV SV RU SU aV aU cR cS comm)
 
-/-- The inverse-image comparison before inversion is the mate of identity on sections.
-Source: Stacks, lemma-adjoint-push-pull-modules
-(auxiliary; not a blueprint node). -/
+/-- The inverse-image comparison before inversion is the mate of identity on sections. -/
 noncomputable def proEtaleRingRestrictionPullbackApp (M : proEtaleRingModules V SV) :
     (proEtaleRingModulePullback f RV RU cR).obj ((proEtaleRingRestrictScalars aV).obj M) ⟶
       (proEtaleRingRestrictScalars aU).obj ((proEtaleRingModulePullback f SV SU cS).obj M) :=
@@ -389,14 +374,7 @@ attribute [local irreducible] proEtaleRingRestrictionPullbackApp
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The specified mate is natural and invertible.
-Source: Stacks, Modules on Sites, lemma-adjoint-push-pull-modules
-(auxiliary; not a blueprint node).
-Proof: unit and counit naturality and naturality of the sectionwise identity give
-naturality. Under the tensor-unit normalized adjunctions this mate is identity on
-underlying inverse-image abelian sheaves. Its two scalar actions are equal because
-`cS.inv aU = inverseImage(aV) cR.inv`, the coefficient-square equation. Hence it is
-an isomorphism. No flatness of the coefficient-change maps is used. -/
+/-- The specified mate is natural and invertible. -/
 theorem proEtaleRingRestrictionPullbackApp_properties :
     (∀ (M N : proEtaleRingModules V SV) (h : M ⟶ N),
       (proEtaleRingModulePullback f RV RU cR).map
@@ -445,9 +423,7 @@ theorem proEtaleRingRestrictionPullbackApp_properties :
       (ringUnitComparison f RV RU cR adjR ((proEtaleRingRestrictScalars aV).obj M))
       (ringUnitComparison f SV SU cS adjS M) ht
 
-/-- The canonical ordinary inverse-image comparison, with its direction reversed.
-Source: Stacks, lemma-adjoint-push-pull-modules
-(auxiliary; not a blueprint node). -/
+/-- The canonical ordinary inverse-image comparison, with its direction reversed. -/
 noncomputable def proEtaleRingRestrictionPullbackInv :
     proEtaleRingRestrictScalars aV ⋙ proEtaleRingModulePullback f RV RU cR ⟶
       proEtaleRingModulePullback f SV SU cS ⋙ proEtaleRingRestrictScalars aU where
@@ -455,10 +431,7 @@ noncomputable def proEtaleRingRestrictionPullbackInv :
   naturality := (proEtaleRingRestrictionPullbackApp_properties
     f RV SV RU SU aV aU cR cS comm).1
 
-/-- The ordinary comparison is invertible. Source: Stacks, Modules on Sites
-(auxiliary; not a blueprint node).
-Proof: each component is invertible by the identity-on-inverse-image calculation
-in proEtaleRingRestrictionPullbackApp_properties; naturality gives the inverse. -/
+/-- The ordinary comparison is invertible. -/
 theorem proEtaleRingRestrictionPullbackInv_isIso :
     IsIso (proEtaleRingRestrictionPullbackInv f RV SV RU SU aV aU cR cS comm) := by
   have (M : proEtaleRingModules V SV) :

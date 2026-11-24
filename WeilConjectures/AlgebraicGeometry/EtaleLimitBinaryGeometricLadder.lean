@@ -16,8 +16,9 @@ import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.CategoryTheory.Filtered.Connected
 /-! # Geometric Mayer--Vietoris ladder before continuity
 
-Source: Stacks Project, Tags 09YQ and 0A50.
-(blueprint: lem-weil-pbc-etale-limit-binary-geometric-ladder).
+## References
+
+* Stacks Project, Tags 09YQ and 0A50
 -/
 
 @[expose] public section
@@ -91,50 +92,8 @@ private theorem cofinal_right_square
       Functor.Final.ι_colimitIso_hom_assoc, colimit.ι_desc_assoc] using h j
   rw [hs, Iso.inv_hom_id_assoc]
 
-/-- Exact natural ladder with certified neighboring comparisons, without assuming continuity.
-
-Source: Stacks Project, Tag 09YQ (theorem-colimit), restriction of its coherent systems,
-and Tag 0A50 (lemma-mayer-vietoris), its exact sequence and coefficient naturality.
-(blueprint: lem-weil-pbc-etale-limit-binary-geometric-ladder).
-
-Proof: Pass to the cofinal directed tail above i₀ and transfer U and V to the
-union stage by e. Restrict the scheme diagram and cone to inverse-image opens.
-The restricted cones are limits by isLimitOpensCone. Affine projections and
-transitions preserve compactness of the opens; opens inherit quasi-separatedness.
-The intersection is compact on the quasi-separated union stage, without assuming
-that the ambient X is quasi-separated. Restrict the coherent coefficients by
-inverse image. Its identity and composition isomorphisms give coherence, and its
-left adjoint property preserves the sheaf colimit. Construct the canonical
-cohomology diagrams and cocones in every degree, using pullback functoriality.
-Each has a stage isomorphic to U, V or their intersection. Their comparisons
-therefore have system certificates; no continuity has been applied.
-
-For p=q+1 use the Mayer--Vietoris segment whose first two terms are the degree-q
-product on U,V and the degree-q group on their intersection, and whose fourth
-term is the degree-p product. Keep these as functors K₁,K₂,K₃,K₄ on the directed tail, with
-Mayer--Vietoris maps as natural transformations. Their two pairs are pointwise exact.
-Finality supplies eQ from the tail middle colimit to the original middle colimit.
-Filtered colimits commute with finite products for the neighboring comparisons.
-The limit Mayer--Vietoris segment has the actual restriction r' of the statement.
-Pullback naturality and coefficient naturality of the connecting map and of the
-restrictions give the three squares, including the middle comparison prescribed
-by hB. The three neighboring comparisons are products of system comparisons,
-or one system comparison, conjugated by the cofinality and coefficient isomorphisms.
-Use the iso, comp and prod certificate constructors for these conjugations.
-
-For p=0 take K₁,K₂ to be constant zero functors and B₁,B₂ to be zero groups.
-Their comparisons are isomorphisms, so use iso certificates. Take K₃ to be the
-tail middle diagram and K₄ the degree-zero stage products on U,V.
-Initial restriction injectivity in Mayer--Vietoris
-gives pointwise Exact b r; the other exact pairs and first two squares are automatic.
-The last square is restriction naturality, and its comparison has a product
-certificate as above. No negative-degree term is used.
-
-Empty and coincident opens give the same constructions, with zero factors or
-diagonal and difference maps. All objects are eliminated only inside this proof;
-no definition chooses data from the existential connecting-map assertions.
-This lemma supplies geometry and stage exactness. It asserts neither exactness
-of the two colimit pairs nor surjectivity or injectivity of the neighboring comparisons. -/
+/-- Exact natural ladder with certified neighboring comparisons, without assuming continuity
+(Stacks, Tags 09YQ and 0A50). -/
 theorem etale_limit_binary_geometric_ladder
     (X : Scheme.{u}) (U V : X.Opens)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

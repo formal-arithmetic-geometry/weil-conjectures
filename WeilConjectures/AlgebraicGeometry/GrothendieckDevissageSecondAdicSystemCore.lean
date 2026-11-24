@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.GrothendieckDevissageSecondAdicSystemTo
 
 /-! # Algebraization after a supplied quotient interchange
 
-Source: Stacks Project, Tags 088A and 0888
-(blueprint: lem-weil-pbc-devissage-second-adic-system-core).
+## References
+
+* [Stacks Project, Tags 088A, 0888]
 -/
 
 @[expose] public section
@@ -28,25 +29,7 @@ namespace AlgebraicGeometry
 
 /-- Algebraize the K-power quotients, with compatible maps and a uniform torsion bound.
 The supplied θ is characterized by its projection equation; N and δ are constructed
-jointly with σ, rather than being arbitrary objects.
-Source: Stacks Project, Tags 088A and 0888
-(blueprint: lem-weil-pbc-devissage-second-adic-system-core).
-
-Proof: identify coherent modules and formal systems killed by K^e with the
-corresponding categories on V(K^e), using the closed-immersion equivalences.
-Algebraize the formal systems M_n/K^e M_n by hthick. Full faithfulness lifts
-the transitions uniquely; reduction modulo K^e gives the previous level,
-since completion preserves quotients and reflects isomorphisms. This defines N.
-The chosen algebraization isomorphisms give σ, natural in n and e; naturality
-in e follows from the definition of the lifted transitions. Reduce α modulo
-K^e and compose with the inverse of θ. Full faithfulness lifts this map to
-δ_e. Faithfulness proves transition compatibility, giving δ and the square.
-If K^t kills the component kernels and cokernels of α, reduction modulo K^e
-kills those of the reduced map by K^(2t), by Remark 0888. On affine opens of
-V(K^e), the same remark transfers this completed bound to δ_e with exponent
-4t. These local annihilation identities give the global uniform bound. Since
-t is positive, so is 4t; every level used has exponent e+1 or n+1.
--/
+jointly with σ, rather than being arbitrary objects. (Stacks, Tags 088A and 0888) -/
 theorem grothendieckDevissage_secondAdicSystem_core
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I)

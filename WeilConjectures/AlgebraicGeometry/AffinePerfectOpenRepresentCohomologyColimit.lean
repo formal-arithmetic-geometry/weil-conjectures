@@ -34,8 +34,7 @@ private theorem koszulOpenHom_inverse_naturality
     _ = v := by rw [← Category.assoc, hu', Category.id_comp]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Intermediate representability and colimit assertion; source Tags 08DC and 08DD.
-(blueprint: lem-sc-affine-perfect-open-represent-cohomology-colimit) -/
+/-- Intermediate representability and colimit assertion; source Tags 08DC and 08DD. -/
 theorem affine_perfect_open_represent_cohomology_colimit
     (A : Type uMain) [CommRing A] (r : ℕ) (f : Fin r → A)
     [HasDerivedCategory.{wMain}

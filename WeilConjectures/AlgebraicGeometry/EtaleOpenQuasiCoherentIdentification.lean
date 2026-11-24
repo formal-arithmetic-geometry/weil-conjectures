@@ -13,8 +13,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 
 /-! # Quasi-coherent coefficients under restriction to an open etale site
 
-Source: Stacks Project, Sites, Section 00XZ; Descent, Tags 03DR and 03DU.
-(blueprint: lem-weil-pbc-etale-open-qcoherent-identification).
+## References
+
+* Stacks Project, Tags 00XZ, 03DR and 03DU
 -/
 
 @[expose] public section
@@ -24,8 +25,8 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- Restriction along an open immersion for the small coefficient universe.
-The continuous localization functor is used directly, without changing coefficient data.
-Source: Stacks Sites 00XZ (blueprint: lem-weil-pbc-etale-open-qcoherent-identification). -/
+The continuous localization functor is used directly, without changing coefficient data
+(Stacks, Tag 00XZ). -/
 noncomputable def etaleOpenSmallRestriction {X U : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     Sheaf X.smallEtaleTopology AddCommGrpCat.{u} ⥤
@@ -37,28 +38,8 @@ noncomputable def etaleOpenSmallRestriction {X U : Scheme.{u}} (j : U ⟶ X)
     AddCommGrpCat.{u} U.smallEtaleTopology X.smallEtaleTopology
 
 /-- The canonical sectionwise identification of the restricted quasi-coherent etale sheaf.
-We use sheafPushforwardContinuous directly so that coefficients remain in the original
-universe of etaleTensorSectionsSheaf. The formula pins down the sheaf isomorphism and
-its naturality in the module: it is inverse normalized pullback composition followed by
-pullback of the canonical tensor-pullback/restriction comparison.
-Source: Stacks Project, Sites, Section 00XZ; Descent, Tag 03DR, equation (35.8.1),
-and Tag 03DU, item 4; module restriction and pullback along an open immersion.
-(blueprint: lem-weil-pbc-etale-open-qcoherent-identification).
-
-Proof: for an etale v : V to U, restriction evaluates F_et at v composed with j, hence
-has sections Gamma(V,(v composed with j)^*F). The inverse normalized composition
-isomorphism c_(v,j) identifies these with Gamma(V,v^*j^*F). The canonical adjunction
-uniqueness isomorphism identifies tensor pullback along j with restriction of F;
-applying v^* gives Gamma(V,v^*(F|_U)). These are exactly the prescribed components.
-Each component is invertible. For every morphism g of U-etale objects, the normalized
-composition law and unit naturality move these two maps across the section restriction
-rho_g; the two composites agree by associativity of normalized pullback composition
-and naturality of the restriction/pullback comparison. Consequently the components
-form a presheaf isomorphism, and therefore a sheaf isomorphism, since both presheaves
-are sheaves. The component formula also makes the isomorphism natural in F: all its
-maps are components of natural isomorphisms of module functors, so a module morphism
-commutes with them after evaluation. The empty open, identity open and zero module
-satisfy the same formulas; no affine, finite-type or separation hypothesis is used. -/
+It is inverse normalized pullback composition followed by pullback of the canonical
+tensor-pullback/restriction comparison (Stacks, Tags 00XZ, 03DR and 03DU). -/
 theorem etaleTensorSectionsSheaf_openIdentification {X U : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (F : X.Modules) [F.IsQuasicoherent] :
     ∃ e : (etaleOpenSmallRestriction j).obj

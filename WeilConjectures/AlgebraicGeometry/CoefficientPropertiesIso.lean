@@ -10,9 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStra
 /-!
 # Isomorphism invariance of native coefficient properties
 
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5,
-transport of constructible filtration terms and lissity.
-(blueprint: lem-zl-native-coefficient-properties-iso)
+Transport of constructible filtration terms and lissity along module isomorphisms.
 -/
 
 @[expose] public noncomputable section
@@ -44,13 +42,7 @@ private theorem finiteConstantStratified_of_iso {X : Scheme.{u}}
     ((CondensedRing.upperStar Λ (S.immersion a)).mapIso e) (hS a)⟩
 
 /-- Constructibility with finite constant scalar models is invariant under module
-isomorphisms, on qcqs schemes and on the affine-open definition for other schemes.
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5
-(blueprint: lem-zl-native-coefficient-properties-iso).
-Proof: keep the finite stratification and its pro-etale covers and scalar models.
-Precompose each local model isomorphism with the restriction of the given module
-isomorphism. On a non-qcqs scheme apply this construction on every affine open.
-The inverse isomorphism gives the converse. -/
+isomorphisms, on qcqs schemes and on the affine-open definition for other schemes. -/
 theorem constantModelConstructible_iso_iff {X : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (e : M ≅ N) :
@@ -66,12 +58,7 @@ theorem constantModelConstructible_iso_iff {X : Scheme.{u}}
     exact finiteConstantStratified_of_iso Λ
       ((CondensedRing.upperStar Λ U.ι).mapIso e) (hB U hU)
 
-/-- Lissity is invariant under an isomorphism of coefficient modules.
-Source: latest blueprint, `thm-zl-real-mixed-by-curves.proof.md`, paragraph 5
-(blueprint: lem-zl-native-coefficient-properties-iso).
-Proof: keep the pro-etale cover trivializing the second module, and precompose
-its finite-free trivialization with the pullback of the given isomorphism.
-Apply the same argument to the inverse for the reverse implication. -/
+/-- Lissity is invariant under an isomorphism of coefficient modules. -/
 theorem lisseCoefficientModule_iso_iff {X : Scheme.{u}}
     {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
     (e : M ≅ N) : IsLisseCoefficientModule Λ M ↔ IsLisseCoefficientModule Λ N := by

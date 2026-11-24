@@ -18,8 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 /-!
 # Coordinates for base change on compatible affine charts
 
-Source: Stacks Project, Tags 02KG and 01I9.
-(blueprint: lem-weil-pbc-affine-base-change-chart-coordinates).
+## References
+
+* Stacks Project, Tags 02KG and 01I9
 -/
 
 @[expose] public section
@@ -66,29 +67,8 @@ private theorem source_chart_unit_comparison {S S' : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Target chart tensor coordinates normalized by the pullback unit of g'.
-Source: Stacks Project, Tags 02KG (reduction to spectra), 01I9 (1),(2),
-01I4 (affine fibre products), and 08HY (pushforward composition identifications).
-
-Proof: Put V = f⁻¹U and V' = f'⁻¹W. The square implies V' ≤ g'⁻¹V.
-Affineness of f and its base change makes V and V' affine. Restrict the square
-and use the canonical spectrum presentations of U, V and W. The fibre-product
-spectrum isomorphism identifies Γ(X',V') with D = R' tensor_R B, respecting
-the maps from R' and B. Apply exists_tensorPullback_affine_sections to g',
-V, V' and F. Swap its tensor factors and transport the first factor through
-the section-ring isomorphism to obtain the required equivalence from sections
-to D tensor_B M. Its linearity over Γ(X',V') implies R'-linearity after
-restriction of scalars along f'. On ((1 tensor z) tensor m), the balancing
-relation gives ((1 tensor 1) tensor (z*m)). The pure-tensor unit formula of
-the affine-sections theorem identifies its image with eta_g'(z*m) restricted
-to V'. On the other hand, k.app U is eta_g' on V, followed by the identity
-pushforward composition maps and the restriction along the equality of
-inverse-image opens from sq.w. Functoriality of restriction identifies its
-restriction to W with that same section on V', proving the normalization.
-This constructs only the target coordinates; it makes no assertion about
-the source coordinates or beta. Empty V' has zero section ring and zero
-sections, and the spectrum/tensor argument applies unchanged. If F is zero,
-all section maps and both tensor modules are zero as required. -/
+/-- Target chart tensor coordinates normalized by the pullback unit of g'
+(Stacks, Tags 02KG, 01I9, 01I4 and 08HY). -/
 private theorem exists_affineBaseChange_target_chart_unit_comparison {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f]
@@ -207,20 +187,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The two section modules on a compatible pair of affine charts have tensor coordinates,
 and the canonical base change map sends `r ⊗ m` to `(r ⊗ 1) ⊗ m` in these coordinates.
-Source: Stacks Project, Tag 02KG, proof's reduction to spectra; Tag 01I9 (1), (2).
-(blueprint: lem-weil-pbc-affine-base-change-chart-coordinates)
-
-Proof: Quasi-coherence of the affine pushforward and the affine pullback section
-formula give the source coordinates, normalized by eta_g followed by restriction to W.
-The section-ring pushout theorem for the cartesian square identifies the ring on
-f'⁻¹W with R' tensor_R B, compatibly with both ring maps. The same affine pullback
-section formula for g' gives the target coordinates. Tensor balancing identifies
-((1 tensor z) tensor m) with the unit image of z*m; composing restriction maps
-identifies this with the defining adjoint k of beta on W. Apply the adjunction
-identity homEquiv(homEquiv.symm(k)) = k and naturality of beta with restriction
-from g⁻¹U to W. This proves the formula at 1 tensor m. Finally R'-linearity
-of a.symm, beta and b extends it to every r tensor m. No invertibility of beta
-is assumed. All constructions apply also to empty opens, zero rings and zero modules. -/
+(Stacks, Tags 02KG and 01I9). -/
 theorem exists_affineBaseChange_chart_coordinates {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)
     (sq : IsPullback g' f' f g) [IsAffineHom f]

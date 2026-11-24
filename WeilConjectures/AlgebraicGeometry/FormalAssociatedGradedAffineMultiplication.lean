@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 
 /-! # Multiplication of associated graded pieces on the affine basis
 
-Source: Stacks Tags 087Z, 01I8 and 01IC.
+## References
+
+* Stacks Project, Tags 087Z, 01I8 and 01IC
 -/
 
 @[expose] public section
@@ -118,24 +120,8 @@ private theorem projection_kernel {X : Scheme.{u}} (I : X.IdealSheafData)
     obtain ⟨b, hb, hba⟩ := ha
     exact formalPolynomial_power_injective I.toModulesι n V.1 hba ▸ hb
 
-/-- Multiplication of representatives descends on the affine basis.
-Source: Stacks Tags 087Z, 01I8 and 01IC.
-(blueprint: lem-weil-pbc-formal-associated-graded-affine-multiplication).
-
-Proof: Put R = Gamma(X,V) and J = I.ideal V. The affine power range theorem
-identifies the monic inclusion of the m-th power with J^m (degree zero is R).
-The affine quotient theorem gives a surjective projection with kernel
-J times J^m, which maps under that inclusion to J^(m+1). Thus its quotient is
-J^m/J^(m+1). Multiply representatives into J^(m+n), then project to its
-quotient. If the first input changes by J^(m+1), its product changes by
-J^(m+n+1); the same holds for the second input. Lift this bilinear map through
-both quotient projections (LinearMap.liftQ₂), transporting along the affine
-quotient identifications. This proves the displayed identity for every lift c
-of the product, since the power inclusion is injective. Restrictions between
-affine opens commute with the inclusions, quotient projections and ring
-multiplication. Surjectivity of the two source projections therefore proves
-naturality on all inputs. Degree zero, the zero ideal, the unit ideal and the
-empty affine open all satisfy the same power and quotient computations. -/
+/-- Multiplication of representatives descends on the affine basis
+(Stacks, Tags 087Z, 01I8 and 01IC). -/
 theorem formalAssociatedGraded_affine_multiplication_exists {X : Scheme.{u}}
     (I : X.IdealSheafData) (m n : ℕ) :
     ∃ beta : ∀ V : X.affineOpens,

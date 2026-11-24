@@ -75,9 +75,11 @@ public import WeilConjectures.AlgebraicGeometry.Picard.DerivedAdjunctionCompatib
 
 /-! # Singleton extension and arbitrary coefficient change
 
-Source: Stacks 0D6D, lemma-derived-pullback-composition, and Zheng, Construction 4.1.
-The singleton functor is an extension left adjoint, not a geometric inverse image.
-(blueprint: def-pur-system-singleton-scalar-comparisons)
+## References
+
+* Stacks Project, Tags 03D7, 03DA, 03EK, 06XN, 06YT, 09T5, 0D6D, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -92,9 +94,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-/-- The coefficient morphism on the vertical sequence site, with component a_j.
-Source: Stacks 03EK; Zheng 4.1
-(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The coefficient morphism on the vertical sequence site, with component a_j. -/
 def singletonSequenceRingMap {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D) :
     systemSequenceRing B ⟶ systemSequenceRing D :=
   ⟨Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := C)).functor
@@ -103,50 +103,42 @@ def singletonSequenceRingMap {B D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : 
 variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- The existing sequence-equivalence additivity instance, with the projection exposed.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The existing sequence-equivalence additivity instance, with the projection exposed. -/
 instance singletonSequenceFunctorAdditive :
     (strictSystemSequenceEquivalence B).functor.Additive := strictSystemToSequenceAdditive B
 
-/-- The existing inverse-equivalence additivity instance, with the projection exposed.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The existing inverse-equivalence additivity instance, with the projection exposed. -/
 instance singletonSequenceInverseAdditive :
     (strictSystemSequenceEquivalence B).inverse.Additive := sequenceToStrictSystemAdditive B
 
 /-- Sequence-site evaluation is the inverse equivalence followed by exact evaluation,
-so it preserves finite limits. Source: Zheng 4.1
-(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+so it preserves finite limits. -/
 instance singletonSequenceEvaluationLimits (n : ℕ) :
     PreservesFiniteLimits (systemSequenceEvaluation B n) :=
   inferInstanceAs (PreservesFiniteLimits
     ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n))
 
-/-- Sequence-site evaluation preserves finite colimits, for the same reason.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- Sequence-site evaluation preserves finite colimits, for the same reason. -/
 instance singletonSequenceEvaluationColimits (n : ℕ) :
     PreservesFiniteColimits (systemSequenceEvaluation B n) :=
   inferInstanceAs (PreservesFiniteColimits
     ((strictSystemSequenceEquivalence B).inverse ⋙ systemEvaluation B n))
 
-/-- The existing ordinary singleton, realized on its ringed sequence site.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The existing ordinary singleton, realized on its ringed sequence site. -/
 abbrev singletonSequenceOrdinary (n : ℕ) :=
   systemSingleFunctor S T B n ⋙ (strictSystemSequenceEquivalence B).functor
 
-/-- The specified ordinary singleton adjunction transported across the sequence equivalence.
-Source: Zheng 4.1 (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The specified ordinary singleton adjunction transported across the sequence equivalence. -/
 def singletonSequenceOrdinaryAdjunction (n : ℕ) :
     singletonSequenceOrdinary S T B n ⊣ systemSequenceEvaluation B n :=
   (systemSingleAdjunction S T B n).comp (strictSystemSequenceEquivalence B).toAdjunction
 
-/-- The existing unbounded derived singleton on the ringed sequence site.
-Source: Stacks 06XN (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The existing unbounded derived singleton on the ringed sequence site. -/
 abbrev singletonSequenceDerived (n : ℕ) :=
   (systemSingleDerivedExtension B n S T).derived ⋙
     (strictSystemSequenceEquivalence B).functor.mapDerivedCategory
 
-/-- Its actual derived adjunction, transported along the exact-functor compositor.
-Source: Stacks 0FND (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- Its actual derived adjunction, transported along the exact-functor compositor. -/
 def singletonSequenceDerivedAdjunction (n : ℕ) :
     singletonSequenceDerived S T B n ⊣ (systemSequenceEvaluation B n).mapDerivedCategory :=
   ((systemSingleDerivedExtension B n S T).adjunction.comp
@@ -154,8 +146,7 @@ def singletonSequenceDerivedAdjunction (n : ℕ) :
       (Functor.mapDerivedCategoryCompIso (strictSystemSequenceEquivalence B).inverse
         (systemEvaluation B n))
 
-/-- The representative comparison of the transported singleton universal derived pair.
-Source: Stacks 06XN (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The representative comparison of the transported singleton universal derived pair. -/
 def singletonSequenceComparison (n : ℕ) (P : CochainComplex (systemLevel B n) ℤ) :
     (singletonSequenceDerived S T B n).obj (DerivedCategory.Q.obj P) ⟶
       DerivedCategory.Q.obj
@@ -167,21 +158,17 @@ def singletonSequenceComparison (n : ℕ) (P : CochainComplex (systemLevel B n) 
 
 variable {B} {D : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}} (a : B ⟶ D)
 
-/-- Actual scalar restriction on the sequence site.
-Source: Stacks 03DA (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- Actual scalar restriction on the sequence site. -/
 abbrev singletonSequenceRestriction :=
   restrictScalars.{w} ((sheafCompose (coefficientSequenceTopology J)
     (forget₂ CommRingCat.{w} RingCat.{w})).map (singletonSequenceRingMap a))
 
-/-- Actual scalar restriction at one level.
-Source: Stacks 03DA (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- Actual scalar restriction at one level. -/
 abbrev singletonLevelRestriction (n : ℕ) :=
   restrictScalars.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map
     (a.app (op n)))
 
-/-- Evaluation and restriction commute by the identity on sections.
-Source: Stacks 03DA; vertical-site calculation
-(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- Evaluation and restriction commute by the identity on sections. -/
 def singletonRestrictionEvaluation (n : ℕ) :
     singletonSequenceRestriction a ⋙ systemSequenceEvaluation B n ≅
       systemSequenceEvaluation D n ⋙ singletonLevelRestriction a n :=
@@ -191,9 +178,7 @@ def singletonRestrictionEvaluation (n : ℕ) :
 
 variable (A : SystemScalarModel (singletonSequenceRingMap a))
 
-/-- The ordinary comparison is the conjugate of identity-on-sections restriction.
-Source: Stacks 03D7 and 03EK
-(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The ordinary comparison is the conjugate of identity-on-sections restriction. -/
 def singletonScalarOrdinaryIso (n : ℕ) :
     singletonSequenceOrdinary S T B n ⋙ A.model.E ≅
       (S (a.app (op n))).model.E ⋙ singletonSequenceOrdinary S T D n :=
@@ -203,8 +188,7 @@ def singletonScalarOrdinaryIso (n : ℕ) :
         (singletonSequenceOrdinaryAdjunction S T D n))
 
 /-- Derived evaluation commutes with actual scalar restriction, using the canonical
-exact-functor compositor and the identity-on-sections ordinary square.
-Source: Stacks 03DA (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+exact-functor compositor and the identity-on-sections ordinary square. -/
 def singletonDerivedRestrictionEvaluation (n : ℕ) :
     (singletonSequenceRestriction a).mapDerivedCategory ⋙
       (systemSequenceEvaluation B n).mapDerivedCategory ≅
@@ -212,9 +196,7 @@ def singletonDerivedRestrictionEvaluation (n : ℕ) :
       (singletonLevelRestriction a n).mapDerivedCategory :=
   Functor.mapDerivedCategorySquareIso (singletonRestrictionEvaluation a n)
 
-/-- The displayed derived comparison, fixed by the specified composite adjunctions.
-Source: Stacks 0FND and 09T5
-(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The displayed derived comparison, fixed by the specified composite adjunctions. -/
 def singletonScalarDerivedIso (n : ℕ) :
     singletonSequenceDerived S T B n ⋙ A.model.T ≅
       (S (a.app (op n))).model.T ⋙ singletonSequenceDerived S T D n :=
@@ -223,22 +205,18 @@ def singletonScalarDerivedIso (n : ℕ) :
       ((S (a.app (op n))).adjunction.comp
         (singletonSequenceDerivedAdjunction S T D n))
 
-/-- The source composite's canonical map to its ordinary cochain representative.
-Source: Stacks 0D6D (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The source composite's canonical map to its ordinary cochain representative. -/
 def singletonScalarSourceComparison (n : ℕ) (P : CochainComplex (systemLevel B n) ℤ) :=
   A.model.T.map (singletonSequenceComparison S T B n P) ≫
     A.model.ε.app (((singletonSequenceOrdinary S T B n).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The target composite's canonical map to its ordinary cochain representative.
-Source: Stacks 0D6D (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The target composite's canonical map to its ordinary cochain representative. -/
 def singletonScalarTargetComparison (n : ℕ) (P : CochainComplex (systemLevel B n) ℤ) :=
   (singletonSequenceDerived S T D n).map ((S (a.app (op n))).model.ε.app P) ≫
     singletonSequenceComparison S T D n
       ((((S (a.app (op n))).model.E).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The canonical map from the lower singleton, transposed from evaluated L_m.
-Source: Zheng 4.1; the singleton evaluation formula
-(blueprint: def-pur-system-singleton-scalar-comparisons). -/
+/-- The canonical map from the lower singleton, transposed from evaluated L_m. -/
 def singletonLowerMap (R : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {n m : ℕ} (h : n ≤ m)
     (P : DerivedCategory (systemLevel R m)) :
     (singletonSequenceDerived S T R n).obj ((systemDerivedTensor S R h).obj P) ⟶
@@ -248,8 +226,7 @@ def singletonLowerMap (R : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {n m : ℕ} (h
       ((systemSingleDerivedBelow R h S T).inv.app P))
 
 /-- Scalar associativity in the square of coefficient maps, normalized by the actual
-scalar restriction adjunctions, not an arbitrary isomorphism of evaluated objects.
-Source: Stacks 03EK, 06YT (blueprint: def-pur-system-singleton-scalar-comparisons). -/
+scalar restriction adjunctions, not an arbitrary isomorphism of evaluated objects. -/
 def singletonScalarSquare (n m : ℕ) (h : n ≤ m) :
     systemDerivedTensor S B h ⋙ (S (a.app (op n))).model.T ≅
       (S (a.app (op m))).model.T ⋙ systemDerivedTensor S D h :=

@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.TorsionModuleFlatBaseChangeIso
 /-!
 # Flat base change of an ideal-power torsion submodule
 
-Source: More on Algebra, Lemma 05EC, part (1)
-(blueprint: lem-weil-pbc-torsion-submodule-flat-base-change-iso).
+## References
+
+* More on Algebra, Lemma 05EC, part (1)
 -/
 
 @[expose] public section
@@ -72,26 +73,7 @@ private theorem killed_by_fg_lift
   exact hz
 
 /-- For a flat ring map inducing an isomorphism modulo a finitely generated ideal,
-base change identifies the ideal-power torsion submodule.
-
-Source: More on Algebra, Lemma 05EC, part (1)
-(blueprint: lem-weil-pbc-torsion-submodule-flat-base-change-iso).
-Proof:
-Put `T = primaryComponent M I`. Every element of T is killed by a positive power
-of I, so the torsion-module comparison of Lemma 05E9 gives a bijection
-`T → S ⊗[R] T`. Flatness makes the tensor of `T.subtype` injective. Their composite
-is the indicated map, proving injectivity.
-For surjectivity, take an element y killed by `I ^ n`. Choose a finite generating
-set s of `I ^ n`, using finite generation of I. Define the linear map
-`δ : M → (s → M)` by `δ(m)(a) = a • m`. Tensoring δ and then applying the
-finite-product tensor equivalence gives `z ↦ (a • z)`; this identity follows by
-tensor induction. Thus y is in the kernel of the tensored δ. Flat exactness lifts
-y to `S ⊗[R] ker δ`. Each element of `ker δ` is killed by the generators, hence
-by all of `I ^ n`, so `ker δ ≤ T`. Map the lift into `S ⊗[R] T` and use the
-surjectivity of the torsion-module comparison to write it as `1 ⊗ x`.
-This is the finite test-map and flatness argument of 05EC (1), applied directly
-to the generators of `I ^ n` rather than to the quotient by T. It also covers
-exponent zero and the empty generating set without separate assumptions. -/
+base change identifies the ideal-power torsion submodule. -/
 theorem Ideal.primaryComponent_baseChange_bijective
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [Algebra R S] (I : Ideal R) (hI : I.FG)

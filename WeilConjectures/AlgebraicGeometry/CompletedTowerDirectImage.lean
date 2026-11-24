@@ -77,8 +77,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Total direct image of strict completed-coefficient towers
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1276;
-Stacks Project, Tag 099N (blueprint: proposition-proper-base-change-complete-integral--1).
+Stacks Project, Tag 099N.
 -/
 
 @[expose] public noncomputable section
@@ -92,8 +91,7 @@ namespace AlgebraicGeometry.Scheme
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) {A : Type (u + 1)} [CommRing A]
   (d : AdicCoefficientDatum A)
 
-/-- The completed coefficient direct-image structure map adjoint to c_f.
-Source: blueprint order 1276 (blueprint: proposition-proper-base-change-complete-integral--1). -/
+/-- The completed coefficient direct-image structure map adjoint to c_f. -/
 def completedCoefficientDirectImageMap :
     pbcAdicCompletion Y d ⟶
       (proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj (pbcAdicCompletion X d) :=

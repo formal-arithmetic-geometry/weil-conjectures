@@ -10,8 +10,9 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Pullback composition on a sheaf in degree zero
 
-Source: Stacks Tag 0D6D, composition of derived pullback; Tag 09Z1, restriction maps.
-(blueprint: lem-sbc-pullback-single-comp)
+## References
+
+* Stacks Project, Tags 0D6D and 09Z1
 -/
 
 @[expose] public section
@@ -138,25 +139,7 @@ namespace AlgebraicGeometry
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Composition of the degree-zero comparisons for two exact étale pullbacks.
-
-Source: Stacks Tags 0D6D and 09Z1; the coefficient identity in the proof of
-lem-sbc-pullback-comparison-comp, step 2.
-(blueprint: lem-sbc-pullback-single-comp)
-
-Proof: represent F[0] by the single cochain complex on F. The composition comparison
-for the levelwise pullbacks is the underived pullback composition comparison in degree
-zero; in every other degree its components are the unique maps of zero objects. The
-single-complex comparison for each pullback is the identity at degree zero, and the
-canonical zero-object comparison elsewhere. Hence the two routes agree degreewise.
-Apply the derived localization Q to these equalities. Expand the single-functor
-comparison as the factorization comparison followed by Q of the levelwise single
-comparison. Naturality of the factorization comparison and the factorization laws
-for derived composition and derived natural isomorphisms identify the two routes.
-The bounded-below comparisons are restrictions of these same isomorphisms along the
-fully faithful inclusion D⁺ → D, which reflects equality. The inverse underived
-composition comparison at the end gives exactly the displayed orientation. This
-argument applies to identity morphisms and zero sheaves without extra assumptions.
--/
+ (Stacks, Tags 0D6D and 09Z1). -/
 theorem Etale.upperStarPlusComp_single
     {T T₁ T₂ : Scheme.{u}} (π₁ : T₁ ⟶ T₂) (π₂ : T₂ ⟶ T)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

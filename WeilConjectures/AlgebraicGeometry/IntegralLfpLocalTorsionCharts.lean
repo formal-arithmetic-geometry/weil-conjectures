@@ -1428,36 +1428,8 @@ end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- An integral finite-presentation cover admits local torsion bounds and finite quotient charts.
-
-Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), and the
-continuous Smith invariant argument in the parent integral resolution node.
-
-Proof: extend scalars to E and use field local triviality for the rational module.
-On a finite-presentation cover, normalize the pulled-back integral coefficients
-and induct strongly on the number of source generators. The analytic matrix
-cover gives either a zero presentation matrix or a nowhere-zero dominating
-entry. In the zero case the cokernel is finite free. In the other case, divide
-the selected row and column by the pivot, split the finite biproduct bases, and
-use elementary block operations to identify the cokernel with the direct sum
-of the pivot cokernel and the Schur-complement cokernel. After rationalization
-the pivot is invertible, so the latter cokernel remains locally finite free
-and the induction applies to its strictly smaller source rank.
-
-For a nowhere-zero cyclic pivot, shrink to constant-norm neighborhoods. Division
-by its value at the center in both directions identifies its cokernel with a
-finite constant principal quotient, and convergence of powers of ℓ gives an
-eventual annihilating bound. Its eventual scalar image is zero, hence finite
-free. A finite-free module has finite-free scalar image and finite constant
-scalar quotient for every exponent. Binary direct sums preserve both assertions
-on a common refinement, with the maximum of the two bounds. Thus the induction
-combines actual local scalar charts without constructing a simultaneous Smith
-normal form. Finally transport through the presentation isomorphism, coefficient
-isomorphisms, and composition of pullbacks. Preservation of images and cokernels,
-and the underlying-set pullback comparison, give exactly the two pullbacks in
-the statement. Zero ranks and empty cover members are included. No data is
-chosen from a mere existence theorem in a definition.
--/
+/-- An integral finite-presentation cover admits local torsion bounds and finite quotient
+charts. (Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3)) -/
 theorem integral_lfp_local_torsion_charts
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]

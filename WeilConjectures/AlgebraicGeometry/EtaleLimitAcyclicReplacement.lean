@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-! # Acyclic replacement of an inverse system of etale sheaves
 
-Source: Stacks Project, Tags 09YP, 0EXZ, 0739, 09YN and 09YQ.
+## References
+
+* Stacks Project, Tags 09YP, 0EXZ, 0739, 09YN and 09YQ
 -/
 
 @[expose] public section
@@ -27,32 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
 set_option linter.unusedVariables false in
-/-- Compatible injective embeddings give a short exact limit sequence with acyclic middle term.
-
-Source: Stacks Project, Tag 09YP, injective-system step 0EXZ and dimension shifting 0739;
-Tag 09YQ transports it to schemes, using 09YN, 0EYL and 04HR.
-(blueprint: lem-weil-pbc-etale-limit-acyclic-replacement).
-
-Proof: Embed each F_k into an injective A_k and take E_i to be the product of the
-pushforwards of A_k over arrows i -> k. Adjunction defines compatible monomorphisms
-F_i -> E_i, monic on the identity component. Exact inverse image makes each pushforward
-preserve injectives, and products of injectives are injective. Set FR_i to the cokernel;
-exact inverse image transports the cokernels and cancellation of their quotient
-maps proves the identity and composition equations. Pull back to the limit and take
-filtered colimits, obtaining the displayed short exact sequence with middle term E.
-For each finite affine cover of a qcqs etale object, descend the cover and all its
-iterated fibre products to a stage. Degree-zero section continuity 09YN identifies
-sections of E with the filtered colimit of stage sections. Finite products commute
-with these colimits, identifying the Cech complex with the filtered colimit of the
-injective stage Cech complexes. Injective Cech acyclicity and exact filtered group
-colimits give positive Cech vanishing. Finite qcqs covers are cofinal, so the Cech
-criterion gives positive cohomology vanishing, including at the terminal object.
-The limit boundary d is postcomposition with the extension class of this exact
-sequence. Stage boundaries beta are the corresponding extension-class maps.
-Naturality for exact inverse image and for the maps to the limit sequence gives
-hbeta. No surjectivity or lower-degree comparison diagram is asserted here.
-The argument includes empty schemes, zero systems, degree zero, and a singleton index.
--/
+/-- Compatible injective embeddings give a short exact limit sequence with acyclic middle term
+(Stacks, Tags 09YP, 0EXZ, 0739, 09YQ, 09YN, 0EYL and 04HR). -/
 theorem etale_limit_acyclic_replacement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

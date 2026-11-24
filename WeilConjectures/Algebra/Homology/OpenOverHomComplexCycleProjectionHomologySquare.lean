@@ -8,8 +8,12 @@ module
 public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
-/-! Homology quotient comparison square.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison-homology-square). -/
+/-! # Homology quotient comparison square
+
+## References
+
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL), exactness of restriction
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -27,19 +31,7 @@ noncomputable local instance (priority := 2000)
     (X : Scheme.{u}) : Abelian X.Modules :=
   SheafOfModules.instAbelian X.ringCatSheaf
 set_option backward.isDefEq.respectTransparency false in
-/-- A restricted chain isomorphism induces compatible cycle and homology comparisons.
-Source: Stacks Project, Tag 08DL, exactness of restriction; Mathlib's short-complex
-mapCyclesIso and mapHomologyIso comparison and naturality identities.
-(blueprint: new-t4-open-over-hom-complex-cycle-projection-comparison-homology-square).
-Proof: Restriction to an open is exact, since it computes kernels sectionwise and
-cokernels after sheafification, which commutes with open restriction. The over-site
-functor has the same properties, transported through the open-site equivalence.
-Let z and d be the inverse mapCyclesIso and mapHomologyIso comparisons for P.
-Compose z with the cycle isomorphism induced by h, and d with the homology
-isomorphism induced by h, obtaining c and a. Naturality of cycle inclusions gives
-the first identity. Naturality of the homology quotient under exact functors and
-chain maps gives the second identity. In particular both comparisons come from
-the SAME chain isomorphism; an arbitrary cycle isomorphism is insufficient. -/
+/-- A restricted chain isomorphism induces compatible cycle and homology comparisons. -/
 theorem openOver_chain_cycle_homology_comparison (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
     (P : CochainComplex X.Modules ℤ)

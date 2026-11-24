@@ -16,8 +16,9 @@ set_option linter.privateModule false
 /-!
 # Structural coherence for three proper images and three open extensions
 
-Source: Stacks Project, More on Étale Cohomology, Tag 0F7K, proof of
-`lemma-pseudo-functor`.
+## References
+
+* Stacks Project, More on Étale Cohomology, Tag 0F7K
 -/
 
 @[expose] public section

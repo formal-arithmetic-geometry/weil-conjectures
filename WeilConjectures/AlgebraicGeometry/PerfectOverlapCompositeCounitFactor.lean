@@ -12,7 +12,10 @@ import WeilConjectures.AlgebraicGeometry.PerfectOverlapCompositeStageMap
 import WeilConjectures.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport
 
 /-! # A component of composite overlap compatibility
-Source: Stacks Project, Tags 08DW and 0D5S.
+
+## References
+
+* Stacks Project, Tags 08DW and 0D5S.
 -/
 
 @[expose] public section
@@ -40,21 +43,8 @@ variable [∀ (Z : Scheme.{u}) (U : Z.Opens),
   HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Z.toRingedSpace).over U))]
 
 set_option linter.unusedVariables false in
-/-- Factoring the constructed stage map through the prescribed natural comparison.
-Source: Stacks Project, Tag 08DW, compatibility of restriction with pullback.
-
-Proof: First rewrite the endpoint stage functors by their proved equations,
-so the stage transport is the fixed derived transport. On either Boolean branch
-expand the stage-map constructor. Its first
-factor is the stage pullback of the open-site counit, and the remaining
-factors are the explicitly constructed tail. The component formula
-`perfectOverlapNaturalComparisonOfSquare_hom_app` writes eta as that same
-counit followed by the derived transport. Postcomposing eta with the inverse
-transport cancels the transport by the isomorphism identities. Associativity
-then gives precisely the displayed factorization. The two presentations of
-an inverse-image intersection agree by `Scheme.Hom.preimage_inf`; their
-inclusion proofs agree by proof irrelevance. No nonemptiness is used.
-(blueprint: lem-pc-perfect-overlap-composite-counit-factor). -/
+/-- Factoring the constructed stage map through the prescribed natural comparison
+(Stacks, Tag 08DW). -/
 theorem perfectOverlapCompositeCounitFactor
     {X Y K C T S : Scheme.{u}}
     (f : K ⟶ Y) (gk : X ⟶ K) (g : X ⟶ Y) (hgf : gk ≫ f = g)

@@ -17,7 +17,9 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 /-!
 # Classicality of finite stratified module sheaves
 
-Source: Stacks Project, Tags 09AK and 099Y.
+## References
+
+* Stacks Project, Tags 09AK and 099Y.
 -/
 
 @[expose] public section
@@ -30,19 +32,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-/-- The comparison counit is invertible for finite locally constant stratified sheaves.
-Source: Stacks Project, Tag 09AK, lemma-compare-constructible, proof of essential image
-membership (auxiliary; not a blueprint node).
-
-Proof: on each stratum, transport the finite constant models to slice sites and
-use their finite geometric stalks to obtain a lisse pro-etale sheaf. The lisse-origin
-comparison supplies an etale preimage on that stratum. Apply classicality gluing
-through the given finite stratification, proved by Zariski localization and the
-open-closed induction in `comparison_essImage_of_stratification`. Finally full
-faithfulness of comparison identifies essential-image membership with invertibility
-of the counit. This asserts classicality; constructibility of the etale preimage is
-proved separately by reflection on the same strata.
--/
+/-- The comparison counit is invertible for finite locally constant stratified sheaves
+(Stacks, Tag 09AK). -/
 theorem isIso_comparison_counit_of_finite_stratification
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X : Scheme.{u}}
     (S : Scheme.Stratification X)

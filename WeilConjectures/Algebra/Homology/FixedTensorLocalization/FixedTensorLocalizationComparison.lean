@@ -58,12 +58,17 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 
 /-! # Normalized exact localization of fixed tensor
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YU and its preceding construction;
-categories.tex, Tags 04VG and 04VK; derived.tex, definition-distinguished-triangle.
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison)
-
 The abbreviations expose the published resolving tensor and comparison, rather than choosing
 new resolutions or a new tensor. `NormalizedDescent` packages the conclusions for one side.
+
+## References
+
+* Stacks Project, Tag 06YU and its preceding construction
+* Stacks Project, Tag 04VG
+* Stacks Project, Tag 04VK
+* Stacks Project, Modules on Sites, Tag 03DA
+* Stacks Project, Tag 06YM
+* Stacks Project, Tag 06YS
 -/
 
 @[expose] public noncomputable section
@@ -80,25 +85,20 @@ namespace SheafOfModules.FixedTensorLocalization
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
-/-- The recorded module-sheaf category. Source: Stacks, Modules on Sites, 03DA
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- The recorded module-sheaf category. -/
 abbrev Modules := CategoryTheory.ringedSiteModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
-/-- Unbounded complexes. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- Unbounded complexes. -/
 abbrev Complexes := CochainComplex (Modules R) ℤ
 
-/-- The homotopy category. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- The homotopy category. -/
 abbrev Homotopy := HomotopyCategory (Modules R) (.up ℤ)
 
-/-- Quotient by chain homotopy. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- Quotient by chain homotopy. -/
 abbrev quotient := HomotopyCategory.quotient (Modules R) (.up ℤ)
 
-/-- The direct-sum total tensor with its canonical signs. Source: Stacks, Tag 06YM
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- The direct-sum total tensor with its canonical signs. -/
 abbrev totalTensor :=
   let _ (I : Type r) : Limits.HasColimitsOfShape (Discrete I)
       (PresheafOfModules.{r}
@@ -110,17 +110,13 @@ abbrev totalTensor :=
 
 variable [HasDerivedCategory.{w} (Modules R)]
 
-/-- The chosen-universe derived category. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- The chosen-universe derived category. -/
 abbrev Derived := DerivedCategory (Modules R)
 
-/-- Homotopy localization. Source: Stacks, Tag 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- Homotopy localization. -/
 abbrev Q := DerivedCategory.Qh (C := Modules R)
 
-/-- The resolving full subcategory selected by the published descent theorem.
-Source: Stacks, Tags 06YS and 06YU
-(blueprint: lem-weil-pbc-fixed-tensor-localization-comparison). -/
+/-- The resolving full subcategory selected by the published descent theorem. -/
 abbrev resolving : ObjectProperty (Homotopy R) :=
   (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose
 

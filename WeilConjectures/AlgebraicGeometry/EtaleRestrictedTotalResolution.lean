@@ -11,7 +11,9 @@ import WeilConjectures.CategoryTheory.CartanEilenbergTotalResolution
 
 /-! # Properties of the restricted augmented CE total
 
-Source: Stacks Project, Tags 015J and 0133.
+## References
+
+* Stacks Project, Tags 015J and 0133
 -/
 
 @[expose] public section
@@ -22,10 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The augmentation with prescribed degree-zero summand maps.
-Source: Stacks, Tags 015J and 0133. Its data are explicit; only the named
-commutation lemma supplies the chain-map proof.
-(blueprint: def-weil-pbc-etale-restricted-augmentation). -/
+/-- The augmentation with prescribed degree-zero summand maps (Stacks, Tags 015J, 0133). -/
 noncomputable def etaleRestrictedAugmentation
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))
@@ -50,24 +49,7 @@ private noncomputable def restrictedRowAugmentation
       HomologicalComplex.stupidTruncMap T.a (ComplexShape.embeddingUpIntGE q)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The explicit restricted augmentation is a K-injective resolution.
-Source: Stacks, Tag 015J, proof remark (3), and Tag 0133.
-
-Proof: Restrict T.a to outer degrees at least q and extend by zero. In a retained
-row, the restriction is conjugate to T.a.f s by the stupid-truncation component
-isomorphisms, hence is a quasi-isomorphism by T.rows. In an omitted row both
-complexes are zero. The retained terms are injective by T.terms and the omitted
-terms are zero, hence injective. The restricted bicomplex vanishes below q.
-Apply cartanEilenberg_total_resolution to these rows and the stupid truncation,
-which is bounded below by q. Its augmentation formula agrees degreewise with
-etaleRestrictedAugmentationComponent: in retained rows the projection and
-inclusion cancel, and in omitted rows the source is zero. Extensionality of
-chain maps identifies the resulting augmentation with the explicit map here.
-Thus it is a quasi-isomorphism and its total is K-injective. Equivalently the
-finite diagonal filtration of its cone has acyclic augmented rows, and its
-terms are finite sums of injectives. This also treats the zero complex, negative
-q, and degrees below q, whose diagonals are empty.
-(blueprint: lem-weil-pbc-etale-restricted-total-resolution). -/
+/-- The explicit restricted augmentation is a K-injective resolution (Stacks, Tags 015J, 0133). -/
 theorem etaleRestrictedTotal_resolution
     (X : Scheme.{u})
     (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}))

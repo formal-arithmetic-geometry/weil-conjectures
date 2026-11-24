@@ -104,9 +104,7 @@ lemma isLocallyLinear_overlapCoordFst (A : VectorBundleAtlas c p z) (i j : A.ι)
   simp only [overlapSwap_appTop_overlapCoordSnd, overlapSwap_appTop_overlapCoordFst] at h
   exact h
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-**The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the span of the
+/-- **The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the span of the
 coordinates of the chart `i` consists of functions locally linear in the coordinates of the
 chart `j`, and conversely. -/
 theorem span_chart_coord_le_locallyLinear_and_symm (A : VectorBundleAtlas c p z) (i j : A.ι) :
@@ -120,9 +118,7 @@ theorem span_chart_coord_le_locallyLinear_and_symm (A : VectorBundleAtlas c p z)
   ⟨A.span_chart_coord_le_locallyLinear i j,
     span_le_locallyLinearSubmodule _ (A.isLocallyLinear_overlapCoordFst i j)⟩
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-**The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the functions
+/-- **The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the functions
 locally linear in the coordinates of the chart `i` are exactly those locally linear in the
 coordinates of the chart `j`. -/
 theorem locallyLinearSubmodule_overlap_eq (A : VectorBundleAtlas c p z) (i j : A.ι) :

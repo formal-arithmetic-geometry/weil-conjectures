@@ -13,8 +13,9 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Connected
 
 /-! # Spectrum of the coordinate-ring colimit of affine base changes
 
-Source: Stacks Project, Tags 09RF and 01YW.
-(blueprint: lem-pc-affine-descent-spectrum-iso).
+## References
+
+* Stacks Project, Tags 09RF and 01YW
 -/
 
 @[expose] public section
@@ -30,24 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 open Opposite
 
 /-- The explicit canonical morphism from the limit affine base change to the spectrum
-of the colimit of the tail coordinate rings is an isomorphism.
-Source: Stacks Project, Tag 09RF, affine case; Limits, Tag 01YW
-(blueprint: lem-pc-affine-descent-spectrum-iso).
-
-Proof: The tail above i is nonempty and directed and its inclusion is final: for
-any index k choose a common upper bound of i and k. Thus restriction of c to this
-tail is still colimiting. The spectra of its rings form a limiting inverse diagram,
-since Spec identifies rings opposite with affine schemes and preserves limits.
-Lift this connected limit to schemes over Spec R_i and apply the right-adjoint
-base-change functor Over.pullback t. Forgetting the over structure preserves
-connected limits. Its underlying cone has vertex pullback t (Spec.map (c.ι.app i))
-and legs precisely affineDescentLimitMap. All its stages and its vertex are affine:
-both factors and the base are affine, so a fibre product is affine. Global sections
-on affine schemes send this limit to the colimit of affineDescentRings. The induced
-colimit isomorphism is exactly colimit.desc to affineDescentRingCocone, because its
-composites with every colimit injection are the prescribed appTop maps. The displayed
-morphism is the affine spectrum isomorphism composed with Spec of that ring
-isomorphism, hence is an isomorphism. Empty schemes and zero rings are included. -/
+of the colimit of the tail coordinate rings is an isomorphism (Stacks, Tags 09RF and 01YW). -/
 theorem isIso_affine_descent_colimit_toSpec
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) (c : Cocone R) (hc : IsColimit c) (i : I)

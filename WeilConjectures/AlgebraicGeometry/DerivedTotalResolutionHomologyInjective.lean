@@ -170,28 +170,7 @@ private theorem homology_exact_of_cycles_exact
 
 -- Preserve the inherited, unused negative-column augmentation hypothesis and its binder hp.
 set_option linter.unusedVariables false in
-/-- The total augmentation is injective on homology in every degree.
-Source: Stacks Project, Homology, Tag 09IZ, proof.
-(blueprint: lem-pc-derived-total-resolution-homology-injective)
-
-Proof. A boundary-lifting diagram chase proves exactness of each horizontal
-homology row from the exact term and cycle rows. Concretely, if the image
-of a cycle z is d w, the next horizontal image of w is a cycle. Lift that
-cycle backwards using exactness of the cycle row, subtract the lift from
-w, and lift the difference backwards using exactness of the term row.
-Subtract the differential of this primitive from z; exactness of the
-cycle row now lifts the resulting cycle to the preceding column. At the
-augmentation, surjectivity on terms lifts w directly instead.
-
-The column-zero inclusion j is a chain map because the positive columns
-vanish, and j ≫ ε = a. The finite-support reduction theorem makes H(j)
-surjective, using the interior homology rows just proved. The composite
-K.d (-1) 0 ≫ j is null-homotopic: its homotopy in degree q is the inclusion
-of (K.X (-1)).X q into total degree q-1. The signed vertical term cancels
-the differential of the source, leaving the horizontal term. Therefore
-H(K.d (-1) 0) ≫ H(j) = 0. Given x in the kernel of H(ε), lift x along H(j)
-to y. Then H(a)(y) = 0. Exactness at H(K.X 0) lifts y along H(K.d (-1) 0),
-so x = 0 by the null-homotopy. Zero kernel gives injectivity. -/
+/-- The total augmentation is injective on homology in every degree (Stacks, Tag 09IZ). -/
 theorem total_resolution_homology_injective
     (M : CochainComplex (ModuleCat R) ℤ)
     (K : HomologicalComplex₂ (ModuleCat R) (ComplexShape.up ℤ)

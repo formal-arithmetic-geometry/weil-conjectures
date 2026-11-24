@@ -10,7 +10,14 @@ import all WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLi
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 import Mathlib.Tactic.CategoryTheory.Slice
 
-/-! # Coherence of localized normalized line comparisons -/
+/-! # Coherence of localized normalized line comparisons
+
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FNY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -716,18 +723,7 @@ private theorem derived_family_of_ordinary
     ouR ouS opR opS oeR oeS (by intro d E; exact hsquare d E) hou hop hoe
     (OrdinaryLineConstraints R P) (OrdinaryLineConstraints S Q) hoR hoS
 
-/-- Normalized ordinary line comparisons yield coherent derived line actions.
-Source: Stacks Project, Tags 03EL, 0FNY and 07A4; Powers and duals, step 11.
-(blueprint: lem-pur-signed-line-localized-coherence)
-Proof: construct the ordinary unit, positive-power reassociation and dual evaluation.
-Their pure-tensor formulas determine them. The normalization of T and the pure-tensor
-formula for gamma make the three ordinary squares commute, by tensor generation and
-the module pullback adjunction. Lift these constraints through the quasi-isomorphism
-localization using the two comparisons in b. On every localized complex, the square
-in DerivedAction replaces each eta by the corresponding termwise gamma. The three
-resulting diagrams are the images under Q of the ordinary squares. Localization
-whiskering is faithful, so the diagrams hold on every derived object. The prescribed
-representative normalizations of b make these precisely DerivedLineConstraints. -/
+/-- Normalized ordinary line comparisons yield coherent derived line actions. -/
 theorem signed_line_localized_coherence
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]

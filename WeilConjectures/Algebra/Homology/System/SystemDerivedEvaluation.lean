@@ -11,7 +11,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Componentwise cohomology and detection for strict systems
 
-Source: Zheng, Construction 4.1; Stacks 015F and 05RU.
+## References
+
+* Stacks Project, Tags 015F, 05RU
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -26,17 +29,13 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- Cohomology of strict systems is evaluated componentwise.
-Source: Stacks 015F (blueprint: lem-pur-system-derived-evaluation). -/
+/-- Cohomology of strict systems is evaluated componentwise. -/
 def systemDerivedCohomology (n : ℕ) (q : ℤ) :
     DerivedCategory.homologyFunctor (StrictRingSystem B) q ⋙ systemEvaluation B n ≅
       derivedSystemEvaluation B n ⋙ DerivedCategory.homologyFunctor (systemLevel B n) q :=
   (systemEvaluation B n).mapDerivedCategoryHomologyFunctorIso q
 
-/-- Cohomology vanishes exactly when it vanishes at every coefficient level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
-Proof: commute exact evaluation with cohomology and apply joint detection of zero
-objects in the strict abelian category. -/
+/-- Cohomology vanishes exactly when it vanishes at every coefficient level. -/
 theorem systemDerivedHomology_isZero_iff (M : DerivedCategory (StrictRingSystem B)) (q : ℤ) :
     IsZero ((DerivedCategory.homologyFunctor (StrictRingSystem B) q).obj M) ↔
       ∀ n, IsZero ((DerivedCategory.homologyFunctor (systemLevel B n) q).obj
@@ -44,11 +43,7 @@ theorem systemDerivedHomology_isZero_iff (M : DerivedCategory (StrictRingSystem 
   rw [strictRingSystem_isZero_iff]
   exact forall_congr' (fun n ↦ ((systemDerivedCohomology B n q).app M).isZero_iff)
 
-/-- Derived evaluations jointly detect isomorphisms.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
-Proof: isomorphisms in a derived category are detected by all cohomology functors.
-Exact evaluation commutes with cohomology; the strict evaluations jointly detect
-isomorphisms of the resulting systems. The forward direction is functoriality. -/
+/-- Derived evaluations jointly detect isomorphisms. -/
 theorem systemDerivedEvaluation_isIso_iff
     {M N : DerivedCategory (StrictRingSystem B)} (f : M ⟶ N) :
     IsIso f ↔ ∀ n, IsIso ((derivedSystemEvaluation B n).map f) := by
@@ -65,11 +60,7 @@ theorem systemDerivedEvaluation_isIso_iff
         ((derivedSystemEvaluation B n).map f)) := inferInstance
     exact (NatIso.isIso_map_iff (systemDerivedCohomology B n q) f).2 hi
 
-/-- A common cohomological bound is detected level by level.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
-Proof: both bounds are equivalent to vanishing of cohomology in the corresponding
-half-line. Interchange the level and degree quantifiers and use componentwise
-cohomology and joint detection of zero objects. The same bound is used at every level. -/
+/-- A common cohomological bound is detected level by level. -/
 theorem systemDerivedEvaluation_bounds_iff
     (M : DerivedCategory (StrictRingSystem B)) (q : ℤ) :
     (M.IsGE q ↔ ∀ n, ((derivedSystemEvaluation B n).obj M).IsGE q) ∧
@@ -100,10 +91,7 @@ theorem systemDerivedEvaluation_bounds_iff
       intro n
       exact (DerivedCategory.isLE_iff _ q).1 (h n) i hi
 
-/-- A strict cochain map is a quasi-isomorphism exactly when every evaluation is.
-Source: Zheng 4.1 (blueprint: lem-pur-system-derived-evaluation).
-Proof: localization detects quasi-isomorphisms. Commute it with evaluation and use
-joint detection of isomorphisms by derived evaluations. -/
+/-- A strict cochain map is a quasi-isomorphism exactly when every evaluation is. -/
 theorem strictRingSystem_quasiIso_iff {K L : CochainComplex (StrictRingSystem B) ℤ}
     (f : K ⟶ L) : QuasiIso f ↔ ∀ n,
       QuasiIso (((systemEvaluation B n).mapHomologicalComplex (.up ℤ)).map f) := by

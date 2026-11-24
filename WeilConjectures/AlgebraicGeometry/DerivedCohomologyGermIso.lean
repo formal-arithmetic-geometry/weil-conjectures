@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-! # Canonical derived sections and strict-local cohomology germs
 
-Source: Stacks Project, Tags 03Q8 and 03Q9. The derived Hom comparison is the
-explicit free-abelian-sheaf construction used in AbelianHigherDirectImagePresheaf.
+## References
+
+* Stacks Project, Tags 03Q8 and 03Q9
 -/
 
 @[expose] public section
@@ -373,19 +374,8 @@ end LocalComparison
 end GermComparison
 
 /-- The canonical derived-sections comparison induces an isomorphism on geometric stalks.
-This is only the local sheafification assertion, with no strict-local limit or base-change mate.
-Source: Stacks, Tag 03Q8 and Cohomology on Sites, Tag 0BKV
-(blueprint: lem-weil-pbc-derived-cohomology-germ-isomorphism).
-
-Proof: represent L[n] by a bounded below K-injective complex M. The derived Hom from
-Z[U][0] is represented by cycles in M(U), modulo boundaries. The displayed map sends
-such a cycle to its homology section. Locally, every homology section lifts to a cycle,
-because cycles surject onto the homology sheaf. If the homology section of a cycle
-vanishes, locally the cycle lifts through the differential from degree -1; the lift is
-a null homotopy of the map from Z[U][0]. Hence the comparison is locally bijective.
-Sheafification makes it an isomorphism, and geometric stalks are unchanged by
-sheafification. Finally the homology shift isomorphism transports H^0(L[n]) to H^n(L).
-The cycle and boundary argument applies for every integer n and also for L = 0. -/
+This is only the local sheafification assertion, with no strict-local limit or base-change mate
+(Stacks, Tags 03Q8 and 0BKV). -/
 theorem isIso_strictLocalCohomologyGermMap {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

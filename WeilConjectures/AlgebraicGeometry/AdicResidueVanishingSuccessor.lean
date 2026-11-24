@@ -13,9 +13,9 @@ import Mathlib.Algebra.Homology.HomologySequence
 
 /-! # Successive quotient vanishing
 
-Source: Stacks Project, More on Algebra, Tag 0G1T, derived vanishing modulo an ideal;
-proetale.tex, Tag 09C6, finite reduction argument.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 0G1T and 09C6
 -/
 
 @[expose] public noncomputable section
@@ -130,24 +130,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- Vanishing of the residue and one finite reduction implies vanishing of the next.
 No completeness or boundedness is required.
 
-Source: Stacks Project, more-algebra.tex, Tag 0G1T, lemma-derived-vanishing-mod-I;
-proetale.tex, Tag 09C6, finite reduction argument.
-(auxiliary; not a blueprint node).
-
-Proof: take a termwise-flat K-flat representative P of Q over the completed
-coefficient sheaf on the slice. Its ordinary residue and nth scalar extensions
-are acyclic by the specified K-flat computation comparisons. The consecutive
-coefficient short exact sequence has a residue-module kernel and the regular
-successor and nth quotient modules as its middle and last terms. Tensor it
-termwise with P; flatness preserves short exactness. Balanced tensor cancellation
-identifies the left complex with the restriction of the tensor of the residue
-extension of P and the kernel module. That extension is acyclic and remains
-K-flat, so this tensor is acyclic. Cancellation with the regular quotient unit
-makes the right complex acyclic as well. Exact homology makes the middle complex
-acyclic. Cancellation and the K-flat computation comparison identify this with
-vanishing of the specified successor reduction. Exact faithful restriction
-reflects acyclicity throughout. For J=0 the reductions are identical; for J=top
-the quotient categories are zero. No quotient-perfectness hypothesis is used. -/
+(Stacks, Tags 0G1T and 09C6). -/
 theorem adicResidue_vanishing_successor
     (X : AlgebraicGeometry.Scheme.{u}) {A : Type (max v (u + 1))}
     [CommRing A] [IsNoetherianRing A] (J : Ideal A)

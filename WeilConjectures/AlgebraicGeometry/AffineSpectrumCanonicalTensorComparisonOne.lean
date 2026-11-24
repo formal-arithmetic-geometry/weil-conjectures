@@ -284,24 +284,7 @@ private theorem canonicalSpectrumStalkComplexIso_one
   rfl
 
 -- The fixed complex and its scalar-change functors require substantial reduction.
-/-- The coefficient-one comparison for the canonical input chain coordinates.
-Proof: represent x by the germ of a section s of P.X k. The original tensor-stalk
-comparison takes 1 tensor x to the germ of the pullback adjunction unit on s.
-The additive comparison along j takes this to the germ of its pullback along j:
-this follows from restriction-stalk compatibility and adjunction uniqueness.
-The inverse of alpha is the mate of the pushforward composition isomorphism.
-The composite-adjunction unit identity therefore identifies this successive
-pullback-unit germ with the germ obtained by pulling s first along X.isoSpec.inv
-and then along Spec.map g'.appTop. By definition, the extension/restriction unit
-sends x to 1 tensor x; applying the inverse pullback-stalk comparison yields
-canonicalSpectrumStalkComplexIso.hom(x). The spectrum tensor-stalk comparison
-sends 1 tensor this element to precisely the preceding germ. Cancel that last
-comparison to obtain the asserted coefficient-one equation. Stalk elements all
-have section-germ representatives, so this establishes the equation for all x.
-The mapHomologicalComplex composition isomorphisms have identity components and
-do not alter this calculation. Zero modules and empty spectra cause no exception.
-Source: Stacks Project, Tags 0098, 0096, and 0DJ8.
-(blueprint: lem-pc-affine-spectrum-canonical-tensor-comparison-one). -/
+/-- The coefficient-one comparison for the canonical input chain coordinates. -/
 theorem canonicalSpectrum_tensor_comparison_one
     {X X' S S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

@@ -14,8 +14,9 @@ import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePushforwardNoe
 /-!
 # Finite-pushforward embeddings of constructible module sheaves
 
-Source: Stacks Project, Etale Cohomology, Lemma 09Z7 (3)
-(blueprint: lem-weil-pbc-constructible-module-finite-pushforward-embedding).
+## References
+
+* Stacks Project, Tag 09Z7
 -/
 
 @[expose] public section
@@ -28,26 +29,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- A constructible sheaf over a finite commutative coefficient ring on a quasi-compact,
 quasi-separated scheme embeds into a finite biproduct of direct images of constant finite
-module sheaves along finite, locally finitely presented morphisms.
-
-Source: Stacks Project, Etale Cohomology, Lemma 09Z7 (3)
-(blueprint: lem-weil-pbc-constructible-module-finite-pushforward-embedding).
-
-Proof:
-1. Descend the constructible sheaf to a Noetherian scheme, obtaining an isomorphism of its
-   pullback with `F` (lem-weil-pbc-constructible-module-noetherian-descent; 01ZA and 09YU).
-2. Embed the descended sheaf into a finite sum of finite pushforwards of constant finite
-   modules (lem-weil-pbc-constructible-module-finite-pushforward-noetherian; 09Z6 (3)).
-3. Each finite morphism to the Noetherian scheme is locally of finite presentation
-   (pqf-lem-finite-fp-locnoeth and def-sbc-locally-finite-presentation).
-4. Pull the embedding back: inverse image is exact and preserves finite sums and constant
-   sheaves; finite pushforward commutes with base change (0959). The base-changed morphisms
-   remain finite and locally of finite presentation
-   (lemma-finiteness-small-etale-topoi--3).
-5. Compose with the inverse of the descent isomorphism to obtain the required monomorphism.
-   Finite morphisms are quasi-compact and separated, so the resulting morphisms are also of
-   finite presentation, as in Stacks. A finite coefficient ring is Noetherian, and finite
-   modules over it are equivalently modules whose underlying sets are finite. -/
+module sheaves along finite, locally finitely presented morphisms (Stacks, Tag 09Z7). -/
 theorem finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]

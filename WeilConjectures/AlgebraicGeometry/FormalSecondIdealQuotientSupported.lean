@@ -14,8 +14,9 @@ import all WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforwardAdic
 
 /-! # Formal quotients by a second ideal
 
-Source: Stacks Project, Tag 088A, the systems F_n/K^e F_n.
-(blueprint: lem-weil-pbc-formal-second-ideal-quotient-supported).
+## References
+
+* [Stacks Project, Tag 088A](https://stacks.math.columbia.edu/tag/088A)
 -/
 
 @[expose] public section
@@ -25,20 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The second-ideal quotient system is annihilated by the closed thickening's ideal.
-Source: Stacks Project, Tag 088A, construction of G_e.
-(blueprint: lem-weil-pbc-formal-second-ideal-quotient-supported).
-
-Proof: At I-level n the system is M_n/K^(e+1)M_n, so the cokernel quotient
-construction makes multiplication by the recursively defined K-power zero.
-The kernel ideal of the closed immersion V(K^(e+1)) into X is K^(e+1).
-On each affine open the section images of its associated ideal module and of the
-recursively constructed ideal power are both the ideal K(U)^(e+1). Hence their
-products with the quotient module have the same zero image there. The quotient
-and ideal products are quasi-coherent. Equality on the affine basis therefore
-makes the product inclusion zero globally, and its monomorphism proves the
-product object is zero. This establishes the asserted annihilation at every n;
-no algebraization or compatibility of algebraization choices is required. -/
+/-- The second-ideal quotient system is annihilated by the closed thickening's ideal
+(Stacks, Tag 088A). -/
 theorem formalSecondIdealQuotient_supported
     {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData)
     (M : CoherentFormalModule X I) (e : ℕ) :

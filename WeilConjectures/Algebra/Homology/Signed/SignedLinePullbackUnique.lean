@@ -11,9 +11,12 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 /-! # Uniqueness of the normalized signed pullback comparison
 
-Source: Stacks Project, Tags 03EL, 0GMX, 0FNY and 07A4; the current blueprint,
-Powers and duals in lemma-inverse-image-coefficient-sheaves--2.
-(blueprint: lem-pur-signed-line-pullback-unique)
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FNY
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public noncomputable section
@@ -80,14 +83,7 @@ private theorem pullback_hom_ext
   exact h V.unop
 
 include hcover in
-/-- Evaluation and tensor recursion determine all signed pullback comparisons.
-Source: Stacks 03EL and 0GMX; Powers and duals, uniqueness of the normalized extension.
-(blueprint: lem-pur-signed-line-pullback-unique)
-Proof: the adjunction unit detects morphisms out of a pullback. Degree zero and one
-are fixed. Induction and tensor generation determine every positive degree. For a
-negative degree, postcompose with the dual of the positive comparison. Both resulting
-maps are the unique transfer of the same evaluation pairing. Cancel that dual
-isomorphism to obtain equality. The argument also applies over the zero ring. -/
+/-- Evaluation and tensor recursion determine all signed pullback comparisons. -/
 theorem signedLinePullback_normalized_unique
     (T T' : ∀ d : ℤ, (ringedSitePullbackFunctor a
       (module_pushforward_isRightAdjoint_of_universes a)).obj

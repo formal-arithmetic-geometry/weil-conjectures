@@ -28,21 +28,10 @@ section Statement
 
 variable {X : Scheme.{u}}
 
-/-- **Transporting a partial extension along a lift over an open of the base.** Let
-`p : Y ⟶ X` and `π : X' ⟶ X` be morphisms, let `V` be an open of `X` and let
-`b : Bl ⟶ V` be a scheme over `V` receiving a lift `ρ` of `π` over `V`. An extension
-`g : W ⟶ p ⁻¹ᵁ V` of the restriction `fV` of `f : U ⟶ Y`, defined on an open `W` of `Bl`
-containing the inverse image of `U`, pulls back along `ρ` to an open `W'` of `X'`
-contained in `π ⁻¹ᵁ V` and containing `π ⁻¹ᵁ U ⊓ π ⁻¹ᵁ V`, together with a morphism
-`G : W' ⟶ Y` over `X` which agrees with `f` wherever both are defined and whose graph,
-seen inside `Y ×_X X'`, is closed above `V`.
-
-This is the transport step in the proof of Conrad's Theorem 2.4, Case 2: `X'` is the
-blow-up of the global center, `Bl` the blow-up of the local center over the affine open
-`V`, and `ρ` the canonical comparison morphism. The closedness of the graph above `V` is
-obtained by exhibiting the graph of `G` above `V` as a base change of the graph of `g`
-along the comparison morphism of the two pullbacks, so that it is again a closed
-immersion. -/
+/-- **Transporting a partial extension along a lift over an open of the base** (Conrad,
+Theorem 2.4, Case 2): an extension `g` of `fV` over an open `W` of `Bl`, with closed graph,
+pulls back along `ρ : π ⁻¹ᵁ V ⟶ Bl` to a morphism `G : W' ⟶ Y` over `X` agreeing with `f` wherever
+both are defined, with graph closed above `V`. -/
 theorem exists_extend_of_lift {X X' Y Bl : Scheme.{u}} {p : Y ⟶ X} {π : X' ⟶ X}
     {U V : X.Opens} {f : U.toScheme ⟶ Y}
     {b : Bl ⟶ V.toScheme} {ρ : (π ⁻¹ᵁ V).toScheme ⟶ Bl} (hρ : ρ ≫ b = π ∣_ V)

@@ -13,8 +13,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Normalized affine tensor sections
 
-Source: Stacks Project, Tags 01I9, 01IA and 03DR.
-(blueprint: new-etale-affine-tensor-sections-equiv) -/
+## References
+
+* Stacks Project, Tags 01I9, 01IA and 03DR
+-/
 
 @[expose] public section
 
@@ -46,22 +48,8 @@ private theorem tensorQuasicoherent {A B : Scheme.{u}} (f : A ⟶ B)
 
 -- Compare tensor-product scalar instances and sectionwise module morphisms.
 /-- Over affine objects, tensoring coefficient sections with the target ring gives
-sections on the target, with the unit-normalized restriction formula.
-Source: Stacks Project, Tags 01I9, 01IA and 03DR.
-(blueprint: new-etale-affine-tensor-sections-equiv)
-
-Proof: compare tensorPullback U.hom with ordinary pullback through the unique
-isomorphism of left adjoints to pushforward U.hom.  Ordinary pullback preserves
-quasi-coherence, so the tensor pullback of F is quasi-coherent.  Apply the affine
-pullback sections formula to a.left on the whole affine schemes U and V.  Its
-pure-tensor formula is c(m tensor b) = b times the adjunction-unit pullback of m.
-Compose with the global-sections isomorphism induced by tensorSectionsComp,
-then transport along a.w.  Both are linear for functions on V.  The definition
-of etaleTensorSectionsRestriction therefore gives the displayed equation.
-The affine sections map is bijective, and the composition and equality transports
-are isomorphisms, giving an additive equivalence.  This argument includes the
-zero module and empty affine schemes.
--/
+sections on the target, with the unit-normalized restriction formula
+(Stacks, Tags 01I9, 01IA and 03DR). -/
 theorem exists_etaleAffineTensorSectionsEquiv
     (X : Scheme.{u}) (F : X.Modules) [F.IsQuasicoherent]
     (U V : X.Etale) (a : V ⟶ U) (hU : IsAffine U.left) (hV : IsAffine V.left) :

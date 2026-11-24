@@ -18,8 +18,9 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 /-!
 # Symmetry of Tor for modules over a commutative ring
 
-Source: Stacks Project, Algebra, Lemma Tag 00M3.
-(blueprint: lem-weil-pbc-tor-symmetry).
+## References
+
+* Stacks Project, Algebra, Tag 00M3
 -/
 
 @[expose] public section
@@ -58,21 +59,7 @@ private theorem tor_resolution_naturality
   rfl
 
 /-- Tor computed by resolving its first argument is naturally symmetric in its two arguments.
-The components of the natural isomorphism are isomorphisms of `R`-modules.
-
-Source: Stacks Project, Algebra, Lemma Tag 00M3 (lemma-tor-left-right).
-(blueprint: lem-weil-pbc-tor-symmetry)
-
-Proof: Form the tensor bicomplex of chosen projective resolutions. Its rows and columns
-are exact in positive degrees by flatness of projective modules. Identify the column
-cokernel complex with the first resolution tensored with the second module, and identify
-the row cokernel complex with the second resolution tensored with the first module
-(using tensor commutativity). Compose these identifications on homology with the
-natural double-complex comparison and the projective-resolution computations of Tor.
-The cokernel identifications and double-complex comparison commute with the tensor
-of lifts of module maps. The resolution computation also commutes with these lifts,
-so the composite is natural in both arguments. Package these components as a natural
-isomorphism of the curried bifunctors. -/
+The components of the natural isomorphism are isomorphisms of `R`-modules. -/
 theorem nonempty_tor'_flip_iso (R : Type u) [CommRing R] (i : ℕ) :
     Nonempty (Tor' (ModuleCat.{u} R) i ≅ (Tor' (ModuleCat.{u} R) i).flip) := by
   obtain ⟨col, hcol⟩ := HomologicalComplex₂.tensorResolutionColumnCokernelIso R

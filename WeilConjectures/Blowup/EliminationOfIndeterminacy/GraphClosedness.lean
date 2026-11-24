@@ -36,9 +36,7 @@ variable {σ : Type u}
 generating the unit ideal and satisfying the compatibilities
 `v i * w i' j = v i' * w i j`, and let `γ` be a morphism over `Spec S` from the union
 `O` of the basic opens `D(v i)` to the relative affine space whose `j`-th coordinate on
-`D(v i)` is the fraction `w i j / v i`. Then the range of `γ` is closed in the whole
-relative affine space: it is the vanishing locus of the sections
-`v̂ᵢ · coordⱼ − ŵᵢⱼ`. -/
+`D(v i)` is `w i j / v i`. Then the range of `γ` is closed in the relative affine space. -/
 theorem isClosed_range_of_basicOpen_fractions {S : CommRingCat.{u}} {ι : Type*}
     (v : ι → S) (w : ι → σ → S)
     (hone : (1 : S) ∈ Ideal.span (Set.range v ∪ ⋃ i, Set.range (w i)))

@@ -14,7 +14,9 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 
 /-! # Eventual perfect model on a specified open
 
-Source: Stacks Project, Tag 09RF, descent of each restriction and enlargement of its stage.
+## References
+
+* Stacks Project, Tag 09RF (descent of each restriction and enlargement of its stage).
 -/
 
 @[expose] public section
@@ -100,20 +102,8 @@ private theorem openBaseChange_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Descent on one original open supplies models on its inverse image at every later stage.
-Source: Stacks Project, Tag 09RF, choice and subsequent base change of each local model.
-(blueprint: lem-pc-perfect-descent-open-eventual-model).
-
-Proof: Put O = f inverse W and restrict the limit perfect object to the inverse image of O.
-The presentation O.toScheme → Xi is an open immersion with image W, because W is contained
-in the image of f. Pullback along the open immersion preserves perfectness (Tag 09UA).
-Apply dW to this presentation. It gives an index j ≥ i, a perfect stage model, and a limit
-comparison. For k ≥ j pull that model back along the transition morphism. The canonical
-cartesian identifications of the base change of O with the inverse-image open in the base
-change of Z transport it to A. Pullback preserves perfectness; the composition comparison
-for derived pullbacks and the comparison with exact open restriction identify its limit
-pullback with the displayed restriction of E. Empty opens and non-antisymmetric preorders
-use the same pullback identifications; no colimit hypothesis is needed. -/
+/-- Descent on one original open supplies models on its inverse image at every later stage
+(Stacks, Tag 09RF). -/
 theorem perfect_descent_open_eventual_model
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ i : I, IsNoetherianRing (R.obj i)]

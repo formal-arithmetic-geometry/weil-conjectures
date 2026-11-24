@@ -12,8 +12,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-! # Zero neighbourhood of a section killed by the inverse-image unit
 
-Source: Stacks Project, Tags 09XM and 03Q1.
-(blueprint: lem-weil-pbc-etale-unit-zero-neighbourhood)
+## References
+
+* Stacks Project, Tags 09XM and 03Q1
 -/
 
 @[expose] public section
@@ -101,19 +102,8 @@ private theorem etaleUnit_zero_pointed_witness
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- A section killed on the whole base-changed object vanishes near its image.
-Source: Stacks Project, Tag 09XM (equality locus) and Tag 03Q1 (pullback stalks).
-(blueprint: lem-weil-pbc-etale-unit-zero-neighbourhood).
-Proof: At a point of V ×_X T choose a geometric point above it. The inverse-image
-stalk comparison, compatible with the adjunction unit, identifies the germ of s
-at its image in V with the germ of its unit image. The latter is zero by hs.
-A zero geometric germ is represented by an étale neighbourhood on which s is zero.
-Its image in V is open; the neighbourhood covers that image, so sheaf separatedness
-makes s zero on the image. Take the union of all such opens. Sheaf separatedness
-on their open covering makes s zero on this union, which contains the image of
-V ×_X T. The uniqueness isomorphism of left adjoints identifies the supplied unit
-with the standard inverse-image unit. For an empty base change the image is empty
-and the empty open works; the zero section permits the whole open. -/
+/-- A section killed on the whole base-changed object vanishes near its image
+(Stacks, Tags 09XM and 03Q1). -/
 theorem etaleUnit_zero_neighbourhood
     {X T : Scheme.{u + 1}} (p : T ⟶ X)
     (H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} ⥤

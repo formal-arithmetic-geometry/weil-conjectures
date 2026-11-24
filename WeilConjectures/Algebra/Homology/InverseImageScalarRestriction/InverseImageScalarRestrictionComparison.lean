@@ -15,11 +15,14 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
-/-! # Inverse image and restriction of scalars
+/-!
+# Inverse image and restriction of scalars
 
 The comparison is fixed by the underlying inverse image of sheaves of sets.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03DA.
-(blueprint: lem-pur-inverse-image-scalar-restriction-comparison).
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D2 and 03DA
 -/
 
 @[expose] public noncomputable section
@@ -231,20 +234,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restricting scalars commutes with an algebraic inverse image along a compatible
 ring square. The underlying morphism is the identity between the two presentations
-of the same inverse image of a sheaf of sets.
-
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03DA
-(blueprint: lem-pur-inverse-image-scalar-restriction-comparison).
-
-Proof: Transport the identity of underlying inverse-image sheaves through the two
-specified underlying isomorphisms. To verify additivity, apply the two graph equations
-to the product of the underlying module sheaf with itself, using preservation of this
-product by inverse image. For scalar multiplication use the product of the underlying
-ring sheaf and module sheaf; compatibility of the ring square identifies the scalar
-on the two sides. The resulting section maps are linear and natural. Their underlying
-maps are isomorphisms, so reflection of isomorphisms by the underlying-sheaf functor
-gives a natural isomorphism. Cancelling the second underlying isomorphism gives the
-asserted normalization. -/
+of the same inverse image of a sheaf of sets. -/
 theorem exists_comparison
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]

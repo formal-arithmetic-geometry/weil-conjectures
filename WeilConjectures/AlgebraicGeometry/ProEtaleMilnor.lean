@@ -30,14 +30,14 @@ import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleMittagLeffler
 /-!
 # The Milnor theorem for arbitrary ring sheaves on the pro-etale site
 
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-pe-milnor/_section.md; Stacks Tags 0940, 0941, 0947 and 07KW
-(blueprint: proposition-milnor-sequence).
-
 The strict cone functor and all module/cohomology towers are the existing constructions
 of `IntegralOperationsWellDefined` and `MilnorTower`. No cone is chosen in a bare
 triangulated category. The declarations below give the total-derived-functor
 comparison and all cohomological, epimorphic and sectionwise Mittag-Leffler clauses.
+
+## References
+
+* Stacks Project, Tags 0940, 0941, 0947 and 07KW.
 -/
 
 @[expose] public noncomputable section
@@ -55,25 +55,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 /-- The functorial strict Roos fibre computes the total right derived inverse limit.
 The universal pair is asserted to exist, with its unit invertible on K-injectives;
 the displayed natural isomorphism uses the positive `1-T` cone, not its negative.
-
-Source: latest blueprint, proposition-milnor-sequence; Stacks Tags 0940 and 0941
-(blueprint: proposition-milnor-sequence).
-
-Proof:
-1. Module sheaves over the small site form a Grothendieck abelian category, as does
-   their countable diagram category. Resolve strict tower complexes by K-injectives.
-   The additive ordinary inverse-limit functor therefore has the universal right-derived
-   pair of def-sfb-right-derived-functor, with unit invertible on K-injectives.
-2. Exact countable products identify the termwise products with derived products.
-   Strict tower maps commute with 1-T, and their diagonal cone maps respect composition.
-3. Apply lem-weil-pbc-exact-products-roos-comparison to the universal pair. Its fibre
-   uses -(1-T); multiplying the target cone summand by -1 gives a chain isomorphism
-   from Cone(1-T) to Cone(-(1-T)), natural in the strict tower. Shift by -1 and compose
-   with that comparison to obtain the natural isomorphism asserted here.
-4. The universal property on complexes is the universal property on the homotopy
-   category in def-sfb-right-derived-functor: the ordinary termwise limit is additive
-   and preserves chain homotopies. Localization through the homotopy quotient identifies
-   the two sets of natural transformations and their unit-factorization maps. -/
+(Stacks, Tags 0940 and 0941.) -/
 theorem milnor_totalDerived (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)})
     [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} R)]
@@ -153,29 +135,7 @@ theorem milnor_totalDerived (X : Scheme.{t})
 sectionwise Mittag-Leffler vanishing, all for the same strict Roos construction.
 Here e₁ identifies R¹lim with the cokernel. The left endpoint of the exact sequence
 is the actual degree-one derived limit of the cohomology sheaves. The final implication
-is tested only on affine weakly contractible objects.
-
-Source: latest blueprint, proposition-milnor-sequence; Stacks Tag 0947 (6),(7), Tag 07KW
-(blueprint: proposition-milnor-sequence).
-
-Proof:
-1. Apply proposition-milnor-sequence--2 to the strict cone. The long exact cohomology sequence
-   and exact products give the natural cokernel/kernel short exact sequence.
-   For a module tower in degree zero, its cohomology is lim in degree zero, coker(1-T)
-   in degree one, and zero in every other degree; in particular it vanishes for p>1.
-   Substituting this e₁ identification in degree q-1 gives the displayed Milnor sequence.
-2. If transitions are epimorphisms, their sections on affine weakly contractible W
-   are surjective. For any a=(a_n), choose m_0=0 and recursively lift m_n-a_n along t_n
-   to m_(n+1). This solves (1-T)m=a on W. Exactness detection makes 1-T an epimorphism
-   of sheaves, and proposition-milnor-sequence--3 identifies the canonical ordinary-limit
-   comparison with an isomorphism in the derived category.
-3. More generally apply the algebraic Mittag-Leffler lemma, Tag 07KW, to M_n(W).
-   The finite-prefix exact sequence and ML exactness of inverse limit show that 1-T
-   on the full section product is surjective. Evaluation on W preserves products
-   and cokernels, so coker(1-T)(W)=0. The affine weakly contractible family detects
-   zero sheaves. Thus R¹lim vanishes. Apply this to H^(q-1)(K_n) for the Milnor term.
-4. Preservation of cokernels makes every sheaf epimorphism surjective on these
-   section modules, explaining why checking the condition on this basis suffices. -/
+is tested only on affine weakly contractible objects. (Stacks, Tags 0947 and 07KW.) -/
 theorem milnor (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)})
     [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} R)] :
@@ -286,17 +246,8 @@ theorem milnor (X : Scheme.{t})
     exact (isZero_cokernel_of_epi (towerTransitionEndomorphism (K := F) t)).of_iso (e₁ M)
 
 /-- The same strict cone represents a homotopy limit in the triangulated sense.
-The existential product witness asserts product existence rather than assuming it;
-the following use of IsDerivedLimit uses precisely that product structure.
-
-Source: latest blueprint, proposition-milnor-sequence; Stacks Tags 08TC and 0941
-(blueprint: proposition-milnor-sequence).
-
-Proof: exact products make Q preserve the termwise product of the representative
-complexes. Rotate the mapping-cone triangle and shift it by -1. Its middle map is
-1-T, after the standard sign isomorphism. Transport the two product vertices along
-the product comparison isomorphism. The resulting distinguished triangle is exactly
-IsDerivedLimitTriangle, so its two outside arrows witness IsDerivedLimit. -/
+The existential product witness asserts product existence rather than assuming it.
+(Stacks, Tags 08TC and 0941.) -/
 theorem milnor_homotopyLimit (X : Scheme.{t})
     (R : Sheaf (topology X) RingCat.{max u (t + 1)})
     [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} R)]

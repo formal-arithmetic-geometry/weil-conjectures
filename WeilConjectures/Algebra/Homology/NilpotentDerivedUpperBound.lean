@@ -24,14 +24,14 @@ set_option linter.privateModule false
 /-!
 # Nilpotent derived reduction detects an upper cohomological bound
 
-Source: Stacks Project, More on Algebra, Tag 0H75,
-lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only adaptation used by Tag 09AR
-(auxiliary; not a blueprint node).
-
 Ordinary modules are encoded on the existing one-object site with bottom topology.
 The additive scalar-extension functor and its left derived functor are specified by
 exactly the object formula, morphism formula and universal property supplied by
 `SheafOfModules.derivedChangeOfRings`; no choice of a particular model is required.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0H75 (upper-bound-only adaptation used by Tag 09AR)
 -/
 
 @[expose] public section

@@ -18,8 +18,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # A tensor precomposition map invertible over a pulled-back open
 
-Source: Stacks Project, Tags 08DW, 08DX and 0E4G, Lemma 48.4.4.
-(blueprint: lem-sc-derived-tensor-precomposition-open).
+## References
+
+* Stacks Project, Tags 08DW, 08DX and 0E4G
 -/
 
 @[expose] public section
@@ -379,27 +380,8 @@ private theorem tensorLocalIso (X : Scheme.{u}) (U : X.Opens)
     (NatIso.isIso_map_iff c (a ▷ P)).mp inferInstance
   exact isIso_of_reflects_iso _ Ed
 
-/-- Pull back a perfect map to the tensor unit and tensor it with P.
-Source: Stacks Project, Tags 08DW(1), 08DX(1), and Tag 0E4G, Lemma 48.4.4,
-last paragraph.
-(blueprint: lem-sc-derived-tensor-precomposition-open).
-
-Proof: Work first in the standard derived localizations. The tensor unit is the
-structure sheaf in degree zero, and its pullback is the tensor unit on X; the
-K-flat pullback of the structure sheaf gives this isomorphism e. Perfect I has
-quasi-coherent cohomology. Pullback preserves quasi-coherent cohomology by 08DW,
-and tensor preserves it by 08DX, giving the assertion about Lf*I tensor P.
-Restriction to U = f inverse image V commutes with derived pullback and derived
-tensor. Thus restriction of Lf*i is pullback of i restricted to V, and is invertible.
-Its tensor with P restricted to U is invertible, as are the restrictions of e
-and the left unitor. Their composite is therefore invertible. Transport the
-pullback and these identifications through the unique localization equivalences
-in derivedPullbackAcrossUniverses to the specified independent universes and
-through exact restriction to the specified open categories. Naturality of those
-comparisons identifies the transported composite with the displayed map.
-No adjunction, direct image, annihilation hypothesis or support of P is used.
-For empty V, zero P or I equal to the unit the same isomorphism computations apply.
-The existential e is not used to define chosen data. -/
+/-- Pull back a perfect map to the tensor unit and tensor it with P
+(Stacks, Tags 08DW, 08DX and 0E4G). -/
 theorem exists_derivedTensor_precomposition_open
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -15,9 +15,12 @@ import Mathlib.GroupTheory.FiniteAbelian.Basic
 /-!
 # Cyclic vanishing for finitely generated integer modules
 
-Source: Mathlib.GroupTheory.FiniteAbelian.Basic, the structure theorem, and the
-cyclic-decomposition step of the constant-coefficient reduction in Stacks Tag 0F08.
-(blueprint: lem-sbc-fg-cyclic-functor-vanishing)
+An additive functor vanishes on a finitely generated integer module killed by `d` if it vanishes
+on the cyclic modules of every order dividing `d`.
+
+## References
+
+* Stacks Project, Tag 0F08 (cyclic-decomposition step of the constant-coefficient reduction)
 -/
 
 @[expose] public section
@@ -57,20 +60,7 @@ private theorem pairSum_snd {J A B : Type*} [AddCommGroup A] [AddCommGroup B]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- An additive functor vanishes on a finitely generated integer module killed by d
-if it vanishes on the cyclic modules of every order dividing d.
-
-Source: AddCommGroup.equiv_free_prod_directSum_zmod, Mathlib/GroupTheory/FiniteAbelian/Basic,
-and the cyclic-decomposition argument in Stacks Tag 0F08.
-(blueprint: lem-sbc-fg-cyclic-functor-vanishing)
-
-Proof: Apply the structure theorem to the additive group of M. Each torsion factor
-Z/e is killed by d, so evaluating d on its generator gives e dividing d. A nonempty
-free part has a generator of infinite order, forcing d=0. In this case Z=ZMod 0 and
-0 divides d. Lift the resulting finite decomposition to the coefficient universe
-and equip its additive equivalence with the canonical lifted-integer linearity.
-An additive functor preserves finite biproducts, including the empty biproduct.
-Its value on every summand is zero by H, so its value on M is zero. This includes
-d=0, d=1, M=0, and an empty torsion index. -/
+if it vanishes on the cyclic modules of every order dividing d. -/
 theorem isZero_obj_of_fg_of_cyclic
     {C : Type v} [Category.{w} C] [Preadditive C]
     (F : ModuleCat.{u + 1} (ULift.{u + 1} ℤ) ⥤ C) [F.Additive]

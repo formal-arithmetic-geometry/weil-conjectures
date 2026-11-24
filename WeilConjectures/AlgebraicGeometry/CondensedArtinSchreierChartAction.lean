@@ -121,16 +121,7 @@ private theorem regular_identity_sheet
   simpa only [condensedRegularSheetProjection, Mod.regularMapIso_hom,
     Mod.tensorUnit_eq_regular] using unit_identity_sheet Λ f s hs hw
 
-/-- Translations permute the sheet evaluations by addition.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, the character chart
-(blueprint: lem-kernel-condensed-chart-action).
-
-Proof. The defining translation is the regular-module deck pullback. Evaluation after
-this pullback is evaluation on the composite sheet, by the adjunction and composition
-coherence formula. The composite of translations by a and c is translation by a+c.
-The equality of coefficient unit comparisons under the same transport gives the stated
-normalized sheet evaluation, including c=0 and characteristic two. -/
+/-- Translations permute the sheet evaluations by addition. -/
 theorem condensedArtinSchreierChart_translation (a c : k) :
     (CondensedRing.upperStar Λ q).map
         (condensedArtinSchreierTranslationAction Λ k c).asHom ≫
@@ -144,15 +135,7 @@ theorem condensedArtinSchreierChart_translation (a c : k) :
   simpa only [condensedArtinSchreierChartProjection,
     ← Etale.artinSchreierTranslation_add] using h
 
-/-- Evaluation on the zero-labelled sheet is the adjunction counit.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, evaluation at zero
-(blueprint: lem-kernel-condensed-chart-action).
-
-Proof. Translation by zero is the identity morphism. In the sheet restriction formula,
-the identity-composition comparison is the inverse of the identity-pullback comparison.
-Naturality moves that comparison across the counit. At the coefficient unit it is the
-inverse strong-monoidal unit comparison, so the two comparisons cancel. -/
+/-- Evaluation on the zero-labelled sheet is the adjunction counit. -/
 theorem condensedArtinSchreierChart_zero :
     condensedArtinSchreierChartProjection Λ k 0 =
       (CondensedRing.upperStarLowerStarAdjunction Λ q).counit.app

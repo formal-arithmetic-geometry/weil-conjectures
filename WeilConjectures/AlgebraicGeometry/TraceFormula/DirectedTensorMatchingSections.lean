@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 
 /-! # Sections of the directed tensor matching module
 
-Source: Stacks Project, Sheaves, Tags 00AL, 00AM and 04TN; Constructions, Tag 01LI.
-(blueprint: lem-trf-directed-tensor-matching-chart-is-iso)
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 00AL, 00AM, 04TN, 01LI
 -/
 
 @[expose] public section

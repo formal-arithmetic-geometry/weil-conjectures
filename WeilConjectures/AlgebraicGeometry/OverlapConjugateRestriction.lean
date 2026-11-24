@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.Modules.ZariskiDescent
 
 /-! # Restricting a conjugated transition to an iterated overlap
 
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction). -/
+## References
+
+* Stacks Project, Tag 01ZR (2) (first proof), and Tag 0095. -/
 
 @[expose] public section
 
@@ -30,11 +31,8 @@ set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- The comparison of tensor and abstract inverse image determined by their adjunctions.
-Source: Stacks Project, Tag 0096.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
--/
+/-- The comparison of tensor and abstract inverse image determined by their adjunctions
+(Stacks, Tag 0096). -/
 @[irreducible]
 def overlapAdjunctionComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
     Scheme.Modules.tensorPullback p ≅ Scheme.Modules.pullback p :=
@@ -42,11 +40,8 @@ def overlapAdjunctionComparison {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction p))
     (Scheme.Modules.pullbackPushforwardAdjunction p)
 
-/-- The direct model comparison with prescribed chart projections.
-Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
--/
+/-- The direct model comparison with prescribed chart projections
+(Stacks, Tags 0095 and 0096). -/
 @[irreducible]
 def overlapDirectModelComparison {H H₀ A B : Scheme.{u}}
     (t : H ⟶ H₀) (r : H₀ ⟶ A) (k : H ⟶ A)
@@ -57,11 +52,8 @@ def overlapDirectModelComparison {H H₀ A B : Scheme.{u}}
   (overlapAdjunctionComparison t).app _ ≪≫
     pullbackCompOfEq t r k htr N ≪≫ (pullbackCompOfEq v u k hvu N).symm
 
-/-- The stage model comparison with prescribed chart projections.
-Source: Stacks Project, Tags 0095 and 0096.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
--/
+/-- The stage model comparison with prescribed chart projections
+(Stacks, Tags 0095 and 0096). -/
 @[irreducible]
 def overlapStageModelComparison {K H H₀ A B : Scheme.{u}}
     (d : K ⟶ H) (q : H ⟶ H₀) (r : H₀ ⟶ A)
@@ -74,11 +66,8 @@ def overlapStageModelComparison {K H H₀ A B : Scheme.{u}}
     pullbackCompOfEq (d ≫ q) r (s ≫ u) h N ≪≫
     ((Scheme.Modules.pullbackComp s u).app N).symm
 
-/-- The part of the iterated comparison preceding the component isomorphism.
-Source: Stacks Project, Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
--/
+/-- The part of the iterated comparison preceding the component isomorphism
+(Stacks, Tag 0095). -/
 def overlapIteratedRestrictionIso {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (d : U.I₀) :
@@ -90,11 +79,8 @@ def overlapIteratedRestrictionIso {X Y Z : Scheme.{u}} (U : X.OpenCover.{u})
     (Scheme.Modules.pullbackCongr (pullback.lift_snd _ _ _).symm).app (N d) ≪≫
     ((Scheme.Modules.pullbackComp _ _).app (N d)).symm
 
-/-- Comparison from a model restriction to the iterated chart restriction.
-Source: Stacks Project, Tag 0095, composition of inverse images.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
--/
+/-- Comparison from a model restriction to the iterated chart restriction
+(Stacks, Tag 0095). -/
 def overlapDirectRestrictionIso {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (a b d : U.I₀)
@@ -117,11 +103,8 @@ def overlapDirectRestrictionIso {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
     ((Scheme.Modules.pullbackComp r (overlapIteratedChartHom U q p t h d)).app _).symm ≪≫
     (Scheme.Modules.pullback r).mapIso (overlapIteratedRestrictionIso U q p t h N d).symm
 
-/-- The explicit conjugation of a transition on a direct model overlap.
-Source: Stacks Project, Tag 01ZR (2), first proof.
-(blueprint: lem-pc-overlap-conjugate-restriction). 
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit)
--/
+/-- The explicit conjugation of a transition on a direct model overlap
+(Stacks, Tag 01ZR (2)). -/
 @[irreducible]
 def overlapConjugatedTransition {X Z H : Scheme.{u}} (U : X.OpenCover.{u})
     (t : Z ⟶ X) (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)
@@ -370,24 +353,7 @@ private theorem pair_square_native
 
 /-- Explicit-transition intermediate for the conjugated restriction theorem.
 A pair morphism whose base change is this restricted conjugate satisfies the pair square.
-There is no tensor stage morphism or recovery hypothesis in this statement.
-Source: Stacks Project, Tag 01ZR (2), first proof, and Tag 0095.
-(blueprint: lem-pc-overlap-conjugate-restriction-explicit).
-
-Proof: Substitute the equation naming the conjugated transition. Expand the two
-direct restriction isomorphisms. Naturality moves the
-pullbacks of the component maps through the composition comparisons. Cancel
-τ_a and τ_b against their inverses. The naturality equation of the descent datum
-on the direct cover identifies the pulled-back transition along z with the
-transition on the maps r_a followed by the iterated chart map and r_b followed
-by that map. The composition pentagon then identifies its two exterior
-comparisons with the comparisons for the descent datum of M on the iterated
-cover. The source comparison becomes the hom of overlapIteratedComparison;
-the inverse target comparison cancels its hom. Substitute the given base-change
-identity and use associativity to obtain overlapPairSquare. Projection equations hz_a,
-hz_b and hν give exactly the prescribed base and chart maps. This argument
-uses only naturality and invertible comparisons, and also applies to empty
-overlaps, repeated charts, zero modules, and identity base changes. -/
+There is no tensor stage morphism or recovery hypothesis in this statement. -/
 theorem overlap_conjugate_restriction_explicit {X Y Z H : Scheme.{u}} (U : X.OpenCover.{u})
     (q : Y ⟶ X) (p : Z ⟶ Y) (t : Z ⟶ X) (h : p ≫ q = t)
     (N : (d : U.I₀) → (U.X d).Modules) (M : Z.Modules)

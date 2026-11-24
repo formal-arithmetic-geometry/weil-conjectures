@@ -15,8 +15,10 @@ import WeilConjectures.Algebra.Homology.BoundedGradedMapColimitDescent
 
 /-! # Descent of the maps of a bounded graded family
 
-Source: Stacks Project, Tag 0BC7, proof of (1), using Tag 05N7, clause (2).
-(blueprint: lem-pc-bounded-graded-family-map-colimit-descent).
+## References
+
+* Stacks Project, More on Algebra, Tag 0BC7, proof of (1)
+* Stacks Project, Algebra, Tag 05N7, clause (2)
 -/
 
 @[expose] public section
@@ -27,24 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Descend the maps of a bounded graded family, without imposing composite relations.
-
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), using Algebra,
-Tag 05N7, clause (2).
-(blueprint: lem-pc-bounded-graded-family-map-colimit-descent).
-
-Proof: Regard the fixed terms M n as a cochain complex C with zero differentials,
-and the shifted terms M (n+1) as a second such complex B. Conjugate the adjacent
-maps of Q by e to obtain graded components from the colimit extension of C to
-that of B. Apply bounded graded component-map descent to C and B. The source
-bounds are exactly hzero and both term families are finitely presented by hfp.
-The components of its canonical complex comparison are the canonical module
-scalar-extension comparisons. Their inverses followed by e give a single family
-e' for all degrees. Define d m n by the descended component when m+1=n and zero
-otherwise. Cancel the comparison isomorphisms in the descended equation to prove
-the adjacent compatibility squares; in nonadjacent degrees both maps are zero.
-No square-zero condition is imposed on these adjacent maps. Empty bounds and
-preorders are included by the component-map theorem. -/
+/-- Descend the maps of a bounded graded family, without imposing composite relations. -/
 theorem exists_bounded_graded_maps_of_directed_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

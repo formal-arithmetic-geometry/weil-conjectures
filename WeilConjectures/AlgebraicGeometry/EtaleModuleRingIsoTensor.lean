@@ -12,8 +12,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! # EtaleModuleRingIsoTensor
 
-Source: Stacks Project, Tags 03D3, 03D6, 03D7.
-(blueprint: lem-weil-pbc-etale-module-ring-iso-tensor). -/
+## References
+
+* Stacks Project, Tags 03D3, 03D6 and 03D7
+-/
 
 @[expose] public section
 
@@ -226,24 +228,8 @@ private theorem tensorComparisonSheafIso_unit (U : Scheme.{u})
   exact h'
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Identify extension along a ring isomorphism using a restriction comparison.
-Source: Stacks Project, Definition 03D6 and Lemma 03D7; the tensor-restriction
-adjunction in Tag 03CZ, specialized to an isomorphism.
-
-Proof: at W send a pure tensor a tensor m to t.inv(G)(c.inv(a) times m).
-The scalar-linearity of t.inv and the inverse-ring identities prove that this map
-is RU(W)-linear and balanced over Lr(RV)(W). The tensor universal property extends
-it to all tensors. Its inverse sends n to 1 tensor t.hom(G)(n). The composite on
-n is n by the inverse comparison equation and the unit action. The composite on
-a tensor m is itself: use c.hom(c.inv(a)) = a and the balancing relation to move
-c.inv(a) from m onto the first factor. Pure tensors generate the tensor product.
-Naturality of c and t proves compatibility with restriction maps. Consequently
-the section maps give inverse presheaf morphisms to the underlying presheaf of
-LM(G). Sheafification, whose unit is invertible on that sheaf, produces d(G) and
-preserves the pure-tensor formula. For a module map G to H, the two composites
-agree on pure tensors by naturality of t and linearity of L0.map; sheafification
-then proves the displayed naturality of d.
-(blueprint: lem-weil-pbc-etale-module-ring-iso-tensor). -/
+/-- Identify extension along a ring isomorphism using a restriction comparison
+(Stacks, Tags 03D6, 03D7 and 03CZ). -/
 theorem etaleModuleRingIsoTensor (U V : Scheme.{u}) (f : U ⟶ V)
     (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})
     (RU : Sheaf U.smallEtaleTopology CommRingCat.{u + 1})

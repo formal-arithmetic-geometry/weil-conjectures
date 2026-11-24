@@ -11,8 +11,10 @@ public import WeilConjectures.Algebra.Homology.KFlat
 /-!
 # Naturality of the sheaf tensor comparison
 
-Source: Stacks Project, Modules on Sites, Section 03EK.
-(blueprint: lem-sc-hom-tensor-comparison-natural)
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK
+* Stacks Project, Section 03EK and Lemma 03CY
 -/
 
 @[expose] public section
@@ -47,20 +49,7 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Naturality of the tensor comparison isomorphism.
-Source: Stacks Project, Section 03EK and Lemma 03CY.
-(blueprint: lem-sc-hom-tensor-comparison-natural)
-
-Proof: Let S be module sheafification and epsilon its invertible counit.
-The comparison is the tensor of the inverse counit components followed by
-S's tensorator. Naturality of the inverse counit gives
-f;epsilon(A) inverse = epsilon(A') inverse;S(f.val), and likewise for g.
-The tensor interchange law combines these two identities. Tensorator
-naturality then identifies the resulting composite with the comparison
-at A',B' followed by S(f.val tensor g.val). Associativity gives the result.
-No invertibility of f or g is used; identity and zero maps and zero objects
-are included. This is the first step of the section-map naturality proof,
-before forgetting and composing with the sheafification unit. -/
+/-- Naturality of the tensor comparison isomorphism. -/
 theorem homTensorComparison_natural {A A' B B' : Mod}
     (f : A' ⟶ A) (g : B' ⟶ B) :
     letI := SheafOfModules.monoidalCategory R

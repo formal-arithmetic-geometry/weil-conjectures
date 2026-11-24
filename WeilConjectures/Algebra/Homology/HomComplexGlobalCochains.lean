@@ -13,9 +13,10 @@ import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-!
 # Global sections of the sheaf Hom complex as ordinary cochains
 
-Source: Stacks Project, Cohomology on Sites, Section 21.34, Equation (21.34.0.2)
-(Tag 0A8Z), and Lemma 21.34.8 (Tag 0A96).
-(blueprint: lem-pur-hom-complex-global-cochains)
+## References
+
+* Stacks Project, Tag 0A8Z (Cohomology on Sites, Section 21.34, Equation (21.34.0.2))
+* Stacks Project, Tag 0A96 (Cohomology on Sites, Lemma 21.34.8)
 -/
 
 @[expose] public section
@@ -49,24 +50,7 @@ private lemma factorEquiv_comp {M M' N N' : Mod}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Global sections, represented by morphisms from the rank-one free module sheaf,
-identify the sheaf Hom complex with the ordinary complex of cochains.
-Source: Stacks Project, Cohomology on Sites, Equation (21.34.0.2) (Tag 0A8Z).
-(blueprint: lem-pur-hom-complex-global-cochains)
-
-Proof: choose the product projections specified by `homComplex_exists`.
-The universal property of each product identifies maps from the rank-one free
-module sheaf with families of maps to its internal Hom factors. The equivalence
-`SheafOfModules.unitHomEquiv` identifies the latter with global sections, and
-`SheafOfModules.homObjSectionsEquiv` identifies those sections with module-sheaf
-morphisms. Reindex the family from p to triples (p,q,p+n=q) to obtain ordinary
-cochains. All maps preserve addition, so this is an additive equivalence.
-Apply the differential projection formula to each component. Postcomposition
-with d_B and precomposition with d_A become ordinary composition under the
-internal-Hom sections equivalence. The formula is d_B f - (-1)^n f d_A,
-precisely the external cochain differential. Equality on every component proves
-the asserted compatibility. Products allow unbounded families; no local
-acyclicity or boundedness is assumed. For a zero complex all factors vanish;
-for zero differentials both differentials vanish. -/
+identify the sheaf Hom complex with the ordinary complex of cochains. -/
 theorem homComplex_global_cochains
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u v})

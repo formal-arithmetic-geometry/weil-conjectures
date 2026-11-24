@@ -19,8 +19,9 @@ import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 
 /-! # The direct-image factorization of a tensor precomposition
 
-Source: Stacks Project, Tag 08EU and Tag 0E4G, Lemma 48.4.4.
-(blueprint: lem-sc-derived-tensor-precomposition-projection).
+## References
+
+* Stacks Project, Tags 08EU and 0E4G
 -/
 
 @[expose] public section
@@ -93,26 +94,8 @@ private theorem projection_factorization_unit_change
   rw [reassoc_of% hex]
   rw [leftUnitor_naturality]
 
-/-- The direct image of tensor precomposition factors through its base tensor map.
-Source: Stacks Project, Tag 08EU, canonical projection formula and naturality,
-and Tag 0E4G, Lemma 48.4.4, projection-formula paragraph.
-(blueprint: lem-sc-derived-tensor-precomposition-projection).
-
-Proof: For the canonical pullback unit identification e0, the perfect projection
-formula, with the tensor symmetry, gives an isomorphism from Rf*(Lf*I tensor P)
-to I tensor Rf*P. Naturality in i and unit coherence identify Rf* of the
-precomposition map with that isomorphism followed by i tensor identity and the
-left unitor. These identities are preserved by the localization equivalences
-used in derivedPullbackAcrossUniverses. Conjugate the isomorphism by hF at R and P;
-hF naturality identifies the resulting equality with F.map of the full-subcategory
-morphism. For the supplied arbitrary unit isomorphism e, let c = e0.inv followed
-by e.hom, an automorphism of the tensor unit on X, and let d be its action on P
-via the left unitor. The map built with e equals the canonical map followed by d.
-Modify the projection factor t0 by I tensor F(d). Tensor naturality moves F(d)
-across i tensor identity, and left-unitor naturality gives precisely the displayed
-factorization. Only existence of t is asserted; it is not chosen as definition data.
-There is no adjunction, beta, Q, open or annihilation assumption in this statement.
-Zero P and zero i obey the same naturality identities. -/
+/-- The direct image of tensor precomposition factors through its base tensor map
+(Stacks, Tags 08EU and 0E4G). -/
 theorem exists_derivedTensor_precomposition_projection
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

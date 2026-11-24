@@ -23,26 +23,20 @@ namespace AlgebraicGeometry.Etale
 set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
-/-- The canonical derived inverse-image/direct-image adjunction, recorded once.
-Source: the derived adjunction in blueprint proposition-adjunction-projective-line--1.
-(auxiliary; not a blueprint node). -/
+/-- The canonical derived inverse-image/direct-image adjunction, recorded once. -/
 @[irreducible]
 def ordinaryFiniteAdjunction (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ordinaryFinitePullback A f ⊣ ordinaryFinitePushforward A f :=
   derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
 
-/-- The recorded module direct image retains the canonical additivity property.
-Source: additivity of the canonical unbounded direct image.
-(auxiliary; not a blueprint node). -/
+/-- The recorded module direct image retains the canonical additivity property. -/
 instance ordinaryFinitePushforward_additive (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (ordinaryFinitePushforward A f).Additive :=
   Functor.additive_rightDerivedFunctor (lowerStar (ModuleCat.{u + 1} A) f)
 
-/-- Transport an arrow from the constant object through the canonical inverse image.
-Source: adjunction transport in blueprint proposition-adjunction-projective-line--1.
-(auxiliary; not a blueprint node). -/
+/-- Transport an arrow from the constant object through the canonical inverse image. -/
 @[irreducible]
 def ordinaryFiniteArrowPullback (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -51,10 +45,7 @@ def ordinaryFiniteArrowPullback (A : Type (u + 1)) [CommRing A]
     ordinaryFiniteUnit A X ⟶ L' :=
   (ordinaryFiniteUnitPullback A f).inv ≫ (ordinaryFinitePullback A f).map d ≫ v
 
-/-- The published twisted unit is the unit of the recorded adjunction.
-Source: blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node).
-Proof: expand the recorded adjunction, which is the canonical derived adjunction. -/
+/-- The published twisted unit is the unit of the recorded adjunction. -/
 theorem ordinaryFiniteP1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
@@ -65,10 +56,7 @@ theorem ordinaryFiniteP1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
   unfold ordinaryFiniteP1Unit ordinaryFiniteAdjunction
   rfl
 
-/-- The published Chern component is the adjunct for the recorded adjunction.
-Source: blueprint lemma-cohomology-projective-line-trace.
-(auxiliary; not a blueprint node).
-Proof: expand the recorded adjunction; both sides are the same canonical adjunct. -/
+/-- The published Chern component is the adjunct for the recorded adjunction. -/
 theorem ordinaryFiniteP1ChernPushforward_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (S : Scheme.{u})
     (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶

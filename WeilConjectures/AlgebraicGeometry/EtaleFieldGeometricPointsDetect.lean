@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-!
 # Detection of morphisms by geometric points over a field
 
-Source: Stacks Project, Tags 02GL and 03QR.
+## References
+
+* Stacks Project, Tags 02GL and 03QR
 -/
 
 @[expose] public section
@@ -27,19 +29,8 @@ open CategoryTheory AlgebraicGeometry
 namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Geometric points detect morphisms from an étale scheme over a field.
-Source: Stacks Project, Tag 03QR, full-faithfulness argument, using Tag 02GL
-(blueprint: lem-exc-etale-field-geometric-points-detect).
-
-Proof: An étale scheme over K is discrete by quasi-finiteness and reduced because
-Spec K is reduced. The singleton open U at each point is reduced and irreducible,
-hence integral. Since Ksep is separably closed, the étale lifting theorem supplies
-p : Spec Ksep → U over K. It is surjective because U has one point and flat because
-U is integral with one point. Thus p is an epimorphism. The assumed equality on
-geometric points, applied to p followed by U → X, cancels p and gives equality on U.
-The singleton opens cover X, so open-local extensionality gives f = g. An empty
-source is covered by the same universal quantification over its empty point type.
-The target need not be étale. -/
+/-- Geometric points detect morphisms from an étale scheme over a field
+(Stacks, Tags 03QR and 02GL). -/
 theorem etaleFieldGeometricPoints_detect
     (K Ksep : Type u) [Field K] [Field Ksep] [Algebra K Ksep]
     [IsSepClosure K Ksep] (X : Scheme.Etale (Spec (CommRingCat.of K)))

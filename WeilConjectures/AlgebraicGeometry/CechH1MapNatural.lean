@@ -11,11 +11,12 @@ import WeilConjectures.AlgebraicGeometry.CechComparisonMapNaturality
 
 /-! # Naturality of the first Čech-to-cohomology comparison
 
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ
-(blueprint: lem-sc-cech-h1-map-natural).
-
 The canonical comparison is characterized by the existing `IsModuleCechComparison`
 predicate, so its existence cannot be witnessed by an arbitrary natural homomorphism.
+
+## References
+
+* Stacks Project, Tag 01EQ
 -/
 
 @[expose] public section
@@ -27,17 +28,8 @@ open CategoryTheory CategoryTheory.Limits Opposite TopologicalSpace
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- For every open cover of a scheme, the canonical comparison from first Čech cohomology
-of an `O_X`-module to its first module cohomology exists and is natural in the module.
-Source: Stacks Project, Cohomology of Sheaves, Lemma 01EQ
-(blueprint: lem-sc-cech-h1-map-natural).
-
-Proof:
-Specialize `cechComparisonMapNaturality` to degree one. Choose the canonical comparison
-for each module using its existence conjunct. The comparison predicate determines the
-map uniquely: evaluate it at one injective resolution and cancel the resolution
-identification and the invertible homology map of alpha. Apply the theorem's naturality
-conjunct to these comparisons. This reuses the same injective-resolution double-complex
-construction and its lift squares, without repeating them. -/
+of an `O_X`-module to its first module cohomology exists and is natural in the module
+(Stacks, Tag 01EQ). -/
 theorem cechH1Map_natural (X : Scheme.{u}) {ι : Type u} (U : ι → X.Opens)
     (hcover : iSup U = ⊤) :
     ∃ c : ∀ F : X.Modules,

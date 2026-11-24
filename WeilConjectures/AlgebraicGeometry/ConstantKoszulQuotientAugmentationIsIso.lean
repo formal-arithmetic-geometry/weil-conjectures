@@ -13,8 +13,9 @@ import WeilConjectures.RingTheory.NoetherianKoszulAugmentationProZero
 
 /-! # Derived-limit invertibility of the normalized strict augmentation
 
-Source: Stacks Project, proetale.tex, Tag 099M, and sites-modules.tex, Tag 093M.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 099M, 093M
 -/
 
 @[expose] public noncomputable section
@@ -61,24 +62,7 @@ private theorem proZero_of_exact_realization
 /-- A normalized strict augmentation becomes invertible after total derived inverse
 limit on a flat-term K-flat complex. This concerns strict complexes, before descent
 and independently of either chosen Koszul or quotient presentation.
-Source: Stacks Project, Tag 099M (lemma-naive-completion), proof; Tag 093M
-(lemma-completion-flat); More on Algebra, the sequence of Koszul complexes.
-(auxiliary; not a blueprint node).
-
-Proof: apply noetherian_koszul_augmentation_pro_zero to A and the ordered generators.
-The exterior model identifies its negative complex and diagonal transitions with the
-dual of the positive tensor Koszul system. Apply the exact constant-module realization
-and then extend scalars to the coefficient sheaf. The extension is flat: it is the
-identity for b=false, and flat_and_quotients gives flatness and the finite quotient
-identifications for b=true. Tensor with P. The zero-summand and unit normalization
-identify the resulting map with the supplied augmentation: the dual complex has no
-positive degrees, its degree-zero term is the unit, and the tensor coproduct inclusions
-jointly determine every component. Tensor commutes with cones using the sign (-1)^p
-on the shifted-source summand in P-degree p. Thus flatConstantTensorProZeroCones makes
-the cone tower pro-zero and makes total right derived inverse limit invert this map.
-The right-derived universal property identifies that functor with the specified rlim.
-The empty list generates I=0, when the coefficient augmentation is an isomorphism;
-for the zero ring all complexes vanish. No exactness of products is used. -/
+(Stacks Project, Tags 099M, 093M) -/
 theorem koszulQuotientAugmentation_isIso [IsNoetherianRing A] (b : Bool) (r : ℕ)
     (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)
     (α : ringedKoszulTensorTowerFunctor (coefficients J A I b) r

@@ -13,7 +13,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 /-!
 # Comparison of total complexes bounded below in both directions
 
-Source: Stacks Project, Homology, Tags 012X and 0132.
+## References
+
+* Stacks Project, Homology, Tags 012X, 0132 and 0133
 -/
 
 @[expose] public section
@@ -63,17 +65,7 @@ private theorem totalProjection_quasiIsoAt
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- A columnwise quasi-isomorphism of double complexes uniformly bounded below in both
-coordinates is a quasi-isomorphism on coproduct total complexes.
-Source: Stacks Project, Homology, Tags 012X and 0132.
-(auxiliary; not a blueprint node).
-
-Proof: in total homology degree n discard columns p>M=n-Q+1. The projection changes
-none of the three terms computing that homology: every discarded summand has q<Q
-and is zero. The remaining bicomplexes have finitely many columns P,...,M.
-Their column maps are quasi-isomorphisms, since the cutoff projection is an
-isomorphism in every retained column. Finite-column total comparison applies.
-Totalize the naturality square of cutoff projections and use two-out-of-three in
-degree n. This works also for n<P+Q, when the effective diagonal is empty. -/
+coordinates is a quasi-isomorphism on coproduct total complexes. -/
 theorem quasiIso_totalMap_of_boundedBelow_columns
     {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)} (f : K ⟶ L) (P Q : ℤ)
     (hK : ∀ p q : ℤ, p < P ∨ q < Q → IsZero ((K.X p).X q))
@@ -119,11 +111,9 @@ theorem quasiIso_totalMap_of_boundedBelow_columns
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The transposed form of bounded-below column comparison.
-Source: Stacks Project, Tag 0133, using signed symmetry of total complexes.
-(auxiliary; not a blueprint node).
-Proof: flip both bicomplexes, apply column comparison, and conjugate by the
-natural signed total-flip isomorphisms. -/
+/-- The transposed form of bounded-below column comparison: a rowwise quasi-isomorphism of
+double complexes uniformly bounded below in both coordinates is a quasi-isomorphism on
+coproduct total complexes. -/
 theorem quasiIso_totalMap_of_boundedBelow_rows
     {K L : HomologicalComplex₂ C (up ℤ) (up ℤ)} (f : K ⟶ L) (P Q : ℤ)
     (hK : ∀ p q : ℤ, p < P ∨ q < Q → IsZero ((K.X p).X q))

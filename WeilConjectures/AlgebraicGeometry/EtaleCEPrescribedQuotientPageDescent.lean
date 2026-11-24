@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.HypercohomologyFirstPage
 
 /-! # Quotient-page descent on prescribed CE resolutions
 
-Source: Stacks Project, Derived Categories, Tags 015J and 015K; Homology, Tag 012K.
-(blueprint: lem-weil-pbc-ce-prescribed-quotient-page-descent).
+## References
+
+* Stacks Project, Tags 015J, 015K and 012K
 -/
 
 @[expose] public section
@@ -34,39 +35,7 @@ set_option linter.unusedVariables false in
 -- Elaborate the dependent CE totals and representative equations together.
 /-- Retain prescribed CE bicomplexes in quotient-page presentations and descend supplied
 filtered augmented comparisons. No bicomplex comparison or total lift is constructed.
-Source: Stacks Project, Tag 015J, first-page computation; Tag 015K; Homology,
-Tag 012K, lemma-spectral-sequence-filtered-complex and lemma-functorial.
-(blueprint: lem-weil-pbc-ce-prescribed-quotient-page-descent).
-
-Proof. For each supplied I,a, use the flipped sections total and complex-degree
-filtration. The lower bound for I and extension by zero in the resolution degree
-make its diagonal sums finite. Keep I as the I field and a as the augmentation
-field of the presentation. Construct positive pages from the actual cycle/boundary
-cokernels with the uniquely specified
-representative differential. Use the unique normalized successor homology comparison,
-specified on successor cycles, for the successor-page isomorphisms. These constructions
-are componentwise and require no uniform upper bound on the filtration across all total
-degrees. Adjoin the graded page zero. The finite-diagonal row comparison,
-multiplied by (-1)^(pq), identifies page one with ordinary sheaf cohomology. Retain the
-CE total augmentation, K-injective comparison and transported homology-image filtration
-from the first hypercohomology construction to fill every field of D.
-Given φ,u and their summand equation, the assumed filtration restrictions carry each
-r-cycle to an r-cycle and each r-boundary to an r-boundary. Descend the resulting
-maps through the boundary cokernels. The chain-map equation for the total map proves
-commutation with the representative differential. The successor homology comparison
-is fixed on representatives, so these page maps commute with it and define N.
-The cokernel descent equation is precisely EtaleCEPageMapOnRepresentatives.
-On page one the summand equation gives the Γ-image of φ in each resolution row,
-preceded by the sections pullback unit. Compare each prescribed injective row with
-the chosen injective resolution.
-Use the Ext-to-resolution-sections comparison, given by evaluation at 1 in the
-constant integer sheaf, to choose ordinaryComparison coherently across schemes.
-The augmentation equation hφ and the resolution computation of Ext pullback
-identify the row map with cohomologyMap followed by Sheaf.H.map.
-The identical factors (-1)^(pq) in source and target commute with the additive row
-map and cancel, proving the stated first-page equation. All these constructions use
-finite limits and cokernels in each bidegree, so zero rows and empty schemes require
-no exceptions. -/
+(Stacks, Tags 015J, 015K and 012K) -/
 theorem exists_etaleCE_prescribed_quotient_page_descent
     (I : ∀ (X : Scheme.{uNatural})
       (K : CochainComplex.Plus (Sheaf X.smallEtaleTopology AddCommGrpCat.{uNatural + 1})),

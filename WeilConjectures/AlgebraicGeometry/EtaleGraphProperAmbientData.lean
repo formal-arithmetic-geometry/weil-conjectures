@@ -8,12 +8,12 @@ public import WeilConjectures.AlgebraicGeometry.EtaleGraphPresentation
 
 /-! # The proper maps between two product-graph models
 
-Source: Stacks Project, more-etale.tex, Tags 0F7C and 0F7D, applied to the explicit
-product and supporting neighborhoods of the graph model.
-(auxiliary; not a blueprint node).
-
 Every map below is a pullback lift. The two transport isomorphisms are made from
 Cartesian proper/open exchange and the canonical direct-image compositors.
+
+## References
+
+* Stacks Project, Tags 0F7C and 0F7D
 -/
 
 @[expose] public noncomputable section
@@ -27,9 +27,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- Transport a proper/open/proper word along a Cartesian proper ambient map.
-Source: Stacks Tag 0F7C, vertical proper/open pasting
-(auxiliary; not a blueprint node). -/
+/-- Transport a proper/open/proper word along a Cartesian proper ambient map (Stacks, Tag 0F7C). -/
 def etaleProperAmbientTransport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y U U' P P' : Scheme.{u}}
@@ -58,17 +56,14 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   (q : t.U ⟶ s.U) (sq : IsPullback q t.e s.e pr)
   (hz : t.a ≫ q = s.a) (hp : pr ≫ s.p = t.p)
 
-/-- The map `P_t ×_Y C → P_s ×_Y C` induced by the proper ambient map.
-Source: Stacks Tags 0F7C--0F7D, proper-projection grid
-(auxiliary; not a blueprint node). -/
+/-- The map `P_t ×_Y C → P_s ×_Y C` induced by the proper ambient map (Stacks, Tags 0F7C and 0F7D).
+-/
 def properAmbientProduct : pullback t.p c.g ⟶ pullback s.p c.g :=
   pullback.lift (pullback.fst t.p c.g ≫ pr) (pullback.snd t.p c.g)
     (by rw [Category.assoc, hp]; exact pullback.condition)
 
 omit [IsProper pr] in
-/-- The product map is Cartesian over the ambient map.
-Source: Stacks Tags 0F7C--0F7D; cancel the defining right pullback square
-(auxiliary; not a blueprint node). -/
+/-- The product map is Cartesian over the ambient map (Stacks, Tags 0F7C and 0F7D). -/
 theorem properAmbientProduct_isPullback :
     IsPullback (s.properAmbientProduct c t pr hp) (pullback.fst t.p c.g)
       (pullback.fst s.p c.g) pr := by
@@ -79,26 +74,21 @@ theorem properAmbientProduct_isPullback :
   · simp only [properAmbientProduct, pullback.lift_fst]
   · exact (IsPullback.of_hasPullback s.p c.g).flip
 
-/-- Properness of the product map follows by base change of `pr`.
-Source: Stacks Tags 0F7C--0F7D
-(auxiliary; not a blueprint node). -/
+/-- Properness of the product map follows by base change of `pr` (Stacks, Tags 0F7C and 0F7D). -/
 instance properAmbientProduct_proper : IsProper (s.properAmbientProduct c t pr hp) :=
   MorphismProperty.of_isPullback (s.properAmbientProduct_isPullback c t pr hp).flip
     inferInstance
 
 omit [IsProper pr] in
-/-- The product map commutes with the proper maps to the base.
-Source: the first pullback projection equation
-(auxiliary; not a blueprint node). -/
+/-- The product map commutes with the proper maps to the base. -/
 theorem properAmbientProduct_base :
     s.properAmbientProduct c t pr hp ≫ (pullback.fst s.p c.g ≫ s.p) =
       pullback.fst t.p c.g ≫ t.p := by
   dsimp only [properAmbientProduct]
   rw [pullback.lift_fst_assoc, Category.assoc, hp]
 
-/-- The map on the neighborhood pulled back from the compactification open.
-Source: Stacks Tags 0F7C--0F7D, first supporting neighborhood
-(auxiliary; not a blueprint node). -/
+/-- The map on the neighborhood pulled back from the compactification open
+(Stacks, Tags 0F7C and 0F7D). -/
 def properAmbientFirst :
     pullback (pullback.snd t.p c.g) c.i ⟶ pullback (pullback.snd s.p c.g) c.i :=
   pullback.lift (pullback.fst _ _ ≫ s.properAmbientProduct c t pr hp) (pullback.snd _ _)
@@ -106,9 +96,7 @@ def properAmbientFirst :
         exact pullback.condition)
 
 omit [IsProper pr] in
-/-- The first supporting neighborhood square is Cartesian.
-Source: pull back the proper product map along the open from the compactification
-(auxiliary; not a blueprint node). -/
+/-- The first supporting neighborhood square is Cartesian. -/
 theorem properAmbientFirst_isPullback :
     IsPullback (s.properAmbientFirst c t pr hp) (pullback.fst _ _)
       (pullback.fst _ _) (s.properAmbientProduct c t pr hp) := by
@@ -119,9 +107,8 @@ theorem properAmbientFirst_isPullback :
   · simp only [properAmbientFirst, pullback.lift_fst]
   · exact (IsPullback.of_hasPullback (pullback.snd s.p c.g) c.i).flip
 
-/-- The map on the neighborhood pulled back from the presentation open.
-Source: Stacks Tags 0F7C--0F7D, second supporting neighborhood
-(auxiliary; not a blueprint node). -/
+/-- The map on the neighborhood pulled back from the presentation open (Stacks, Tags 0F7C and 0F7D).
+-/
 def properAmbientSecond :
     pullback (pullback.fst t.p c.g) t.e ⟶ pullback (pullback.fst s.p c.g) s.e :=
   pullback.lift (pullback.fst _ _ ≫ s.properAmbientProduct c t pr hp)
@@ -130,9 +117,7 @@ def properAmbientSecond :
       rw [← Category.assoc, pullback.condition, Category.assoc, ← sq.w])
 
 omit [IsProper pr] in
-/-- The second supporting neighborhood square is Cartesian.
-Source: paste the two defining neighborhood squares with the supplied Cartesian open square
-(auxiliary; not a blueprint node). -/
+/-- The second supporting neighborhood square is Cartesian. -/
 theorem properAmbientSecond_isPullback :
     IsPullback (s.properAmbientSecond c t pr q sq hp) (pullback.fst _ _)
       (pullback.fst _ _) (s.properAmbientProduct c t pr hp) := by
@@ -146,9 +131,7 @@ theorem properAmbientSecond_isPullback :
 
 include sq hz in
 omit [IsProper pr] in
-/-- The first graph lift commutes with the first neighborhood map.
-Source: compare both pullback projections, using the ambient square and `hz`
-(auxiliary; not a blueprint node). -/
+/-- The first graph lift commutes with the first neighborhood map. -/
 theorem properAmbientFirst_graph :
     locallyClosedGraphS₁ t.a t.e t.p c.i c.g
         ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) ≫
@@ -168,9 +151,7 @@ theorem properAmbientFirst_graph :
 
 include hz in
 omit [IsProper pr] in
-/-- The second graph lift commutes with the second neighborhood map.
-Source: compare both pullback projections and use `t.a ≫ q = s.a`
-(auxiliary; not a blueprint node). -/
+/-- The second graph lift commutes with the second neighborhood map. -/
 theorem properAmbientSecond_graph :
     locallyClosedGraphS₂ t.a t.e t.p c.i c.g
         ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) ≫
@@ -191,9 +172,7 @@ theorem properAmbientSecond_graph :
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
-/-- The specified transport on the first graph word.
-Source: Stacks Tag 0F7C, proper projection exchange for the first supporting open
-(auxiliary; not a blueprint node). -/
+/-- The specified transport on the first graph word (Stacks, Tag 0F7C). -/
 def properAmbientFirstTransport :
     R((locallyClosedGraphS₁ s.a s.e s.p c.i c.g
       ((Category.assoc _ _ _).trans (s.fac.trans c.comm)))_*[ModuleCat.{u + 1} A]) ⋙
@@ -207,9 +186,7 @@ def properAmbientFirstTransport :
     (s.properAmbientFirst c t pr hp) (s.properAmbientFirst_isPullback c t pr hp)
     (s.properAmbientFirst_graph c t pr q sq hz hp) (s.properAmbientProduct_base c t pr hp)
 
-/-- The specified transport on the second graph word.
-Source: Stacks Tag 0F7C, proper projection exchange for the second supporting open
-(auxiliary; not a blueprint node). -/
+/-- The specified transport on the second graph word (Stacks, Tag 0F7C). -/
 def properAmbientSecondTransport :
     R((locallyClosedGraphS₂ s.a s.e s.p c.i c.g
       ((Category.assoc _ _ _).trans (s.fac.trans c.comm)))_*[ModuleCat.{u + 1} A]) ⋙

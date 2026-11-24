@@ -29,7 +29,9 @@ public import WeilConjectures.Algebra.Homology.ScalarHomOrdinaryTensorComparison
 
 /-! # The ordinary normalized scalar tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EL, and Tag 0GMW for sheafification
 -/
 
 @[expose] public section
@@ -243,15 +245,7 @@ private theorem extendedTensor_hom_ext (M N : scalarModules J R)
   intro V x y
   exact h V x y
 
-/-- Scalar extension preserves the sheaf tensor product with its unit normalization.
-Source: Stacks Project, Modules on Sites, Tag 03EL, and Tag 0GMW for sheafification.
-(blueprint: lem-sfb-scalar-ordinary-tensor-comparison).
-
-Proof: transport the existing binary scalar-extension tensor core along its identity
-sectionwise identification with the ordinary extension presheaf. Identify both sheaf
-tensors with their sheafifications; their unit formulas identify all pure sections.
-Naturality follows from the extension adjunction and generation of tensors by pure
-sections. No flatness hypothesis is required. -/
+/-- Scalar extension preserves the sheaf tensor product with its unit normalization. -/
 theorem scalarOrdinaryTensorComparison_exists :
     ∃ e : ∀ M N : scalarModules J R,
       s.extension.obj ((monoidalCategory R).tensorObj M N) ≅

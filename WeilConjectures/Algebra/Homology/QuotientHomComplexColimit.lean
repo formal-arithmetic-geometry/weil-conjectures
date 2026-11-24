@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Quotient Hom complexes and the torsion subcomplex
 
-Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
+## References
+
+* Stacks Project, Tag 0954
 -/
 
 @[expose] public section
@@ -126,20 +128,7 @@ private def quotientHomCocone {R : Type u} [CommRing R] (J : Ideal R)
 
 /-- Taking the colimit of the complexes `Hom(R/J^n,K)` gives the ideal-power
  torsion subcomplex of `K`.
-Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
-(blueprint: lem-sbc-quotient-hom-complex-colimit).
-
-Proof: In each degree, evaluation of a linear map at the class of 1 identifies
-`Hom(R/J^n,K^k)` with the submodule annihilated by `J^n`. The quotient transition
-maps give inclusions of these submodules. Every torsion element is killed by
-one power and therefore belongs to the image of one evaluation map. Two maps
-with the same value at 1 agree, so these maps identify the filtered colimit
-with the union of the annihilator submodules, namely `Ideal.primaryComponent`.
-Postcomposition with the differential commutes with evaluation. Thus the
-identifications in all degrees form an isomorphism of cochain complexes.
-Exponent zero gives the zero module; for the zero and unit ideals the union
-is respectively the entire module and zero. No finite-generation hypothesis
-is needed for this identification. -/
+-/
 theorem nonempty_colimit_quotientHomComplex_iso_torsion
     {R : Type u} [CommRing R] (J : Ideal R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) :

@@ -17,8 +17,12 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-!
 # Exact restriction of module sheaves and injective objects
 
-Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK
-(blueprint: lem-weil-pbc-module-open-restriction-injectives).
+## References
+
+* [Stacks, Tag 01E1](https://stacks.math.columbia.edu/tag/01E1)
+* [Stacks, Tag 02N5](https://stacks.math.columbia.edu/tag/02N5)
+* [Stacks, Tag 01AJ](https://stacks.math.columbia.edu/tag/01AJ)
+* [Stacks, Tag 01AK](https://stacks.math.columbia.edu/tag/01AK)
 -/
 
 @[expose] public section
@@ -65,25 +69,8 @@ private theorem restriction_resolution (X : Scheme.{u}) (U : X.Opens)
 /-- Restriction to an open `U` (`SheafOfModules.overFunctor`, modules over `𝒪_X.over U`)
 is additive and exact, preserves injective objects, and sends an injective resolution
 to its termwise restriction with restricted augmentation. Direct image along the
-inclusion (`SheafOfModules.pushforward (SheafOfModules.pushforwardOver U)`, sections
-`𝒥(W ∩ U)`, Mathlib's right adjoint of restriction) also preserves injective objects.
-
-Source: Stacks Project, Cohomology, Tags 01E1 and 02N5; Modules, Tags 01AJ and 01AK
-(blueprint: lem-weil-pbc-module-open-restriction-injectives).
-
-Proof: (1) Restriction is sectionwise additive by `situation-conventions`.
-Its stalk at a point of the open is naturally the original stalk: restrict a representative
-section to its intersection with the open; equality of germs is unchanged. Thus exactness
-follows from `lem-weil-pbc-module-stalk-exact` and `def-weil-pbc-exact-sequence`.
-(2) By `lem-weil-pbc-module-extension-by-zero-adjunction`, extension by zero is left adjoint
-to restriction. Its stalks are the original stalks inside the open and zero outside, so it
-is exact. Apply `lem-sp-right-adjoint-preserves-injectives`.
-(3) By `lem-weil-pbc-module-restriction-open-immersion-colimits`, restriction is left adjoint
-to direct image; apply the same injectivity lemma using (1).
-Finally, (1) preserves exactness of the augmented resolution and (2) preserves injectivity
-of every term. Restriction preserves zero terms, so this is an injective resolution as in
-`def-sp-injective-resolutions`; enough injectives are supplied by
-`lem-weil-pbc-scheme-modules-enough-injectives`. -/
+inclusion (`SheafOfModules.pushforward (SheafOfModules.pushforwardOver U)`) also preserves
+injective objects. -/
 theorem module_open_restriction_injectives (X : Scheme.{u}) (U : X.Opens) :
     (SheafOfModules.overFunctor.{u} X.ringCatSheaf U).Additive ∧
     (∀ S : ShortComplex (SheafOfModules.{u} X.ringCatSheaf), S.Exact →

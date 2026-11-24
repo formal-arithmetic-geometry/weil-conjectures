@@ -108,15 +108,7 @@ theorem isIntegral_globalSectionsRingHom [UniversallyClosed (X ↘ Spec (.of k))
     (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of k)).inv).2) this
 
 /-- **Global functions on a proper curve.** A proper, reduced and connected scheme `X` over an
-algebraically closed field `k` has `H⁰(X, 𝒪_X) = k`. A global function `a` is integral over `k`
-(`AlgebraicGeometry.Scheme.isIntegral_globalSectionsRingHom`), so `k[a] ⊆ Γ(X, 𝒪_X)` is a finite
-reduced `k`-algebra without nontrivial idempotents, hence equal to `k`
-(`IsAlgClosed.finrank_eq_one_of_isReduced`).
-
-The blueprint states this for proper connected curves; reducedness is needed, as the proper
-connected curve `ℙ¹_k ×_k Spec k[ε]/(ε²)` has `H⁰ = k[ε]/(ε²)`. It holds for the smooth curves to
-which the blueprint applies it.
-(blueprint: `lem-sc-global-functions`) -/
+algebraically closed field `k` has `H⁰(X, 𝒪_X) = k`. -/
 instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘ Spec (.of k))]
     [IsReduced X] [ConnectedSpace X] : GlobalSectionsBijective k X := by
   let A := Γ(X, ⊤)
@@ -141,13 +133,7 @@ instance GlobalSectionsBijective.of_isAlgClosed [IsAlgClosed k] [IsProper (X ↘
   exact ⟨c, hc⟩
 
 /-- A proper `k`-scheme that is geometrically connected and geometrically reduced has
-`H⁰(X, 𝒪_X) = k` (Stacks 0BUG). This is the input `Γ(X, 𝒪_X) = k` of Step 4 of blueprint
-`lemma-rigidity` (`lemma-rigidity`).
-
-Let `K` be an algebraic closure of `k`, `A = Γ(X, 𝒪_X)` and `B = Γ(X_K, 𝒪_{X_K})`. By flat base
-change `B = K ⊗_k A`, and `B = K` since `X_K` is proper, reduced and connected over the
-algebraically closed field `K` (`AlgebraicGeometry.Scheme.GlobalSectionsBijective.of_isAlgClosed`).
-Thus `A` has dimension `1` over `k`, and the injective map `k → A` is bijective. -/
+`H⁰(X, 𝒪_X) = k` (Stacks 0BUG). -/
 instance GlobalSectionsBijective.of_geometricallyConnected [IsProper (X ↘ Spec (.of k))]
     [GeometricallyConnected (X ↘ Spec (.of k))] [GeometricallyReduced (X ↘ Spec (.of k))] :
     GlobalSectionsBijective k X := by
@@ -214,9 +200,7 @@ theorem GlobalSectionsBijective.of_geometricallyIntegral [IsProper (X ↘ Spec (
   inferInstance
 
 /-- A smooth proper connected scheme over a separably closed field `k` has
-`H⁰(X, 𝒪_X) = k`.
-
-(blueprint: `prose-C-04`, part (1)) -/
+`H⁰(X, 𝒪_X) = k`. -/
 theorem GlobalSectionsBijective.of_isSepClosed [IsSepClosed k] [Smooth (X ↘ Spec (.of k))]
     [IsProper (X ↘ Spec (.of k))] [ConnectedSpace X] : GlobalSectionsBijective k X :=
   have := GeometricallyConnected.of_isSepClosed (k := k) X

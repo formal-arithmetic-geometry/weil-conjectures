@@ -15,7 +15,8 @@ import Mathlib.Algebra.Ring.Hom.InjSurj
 
 /-! # GenericProductMapDenominators
 
-Generic finite-algebra calculation from the smooth purity blueprint.
+Generic finite-algebra calculation: a generic splitting defines the reduced base-change map,
+with coordinate denominators cleared.
 -/
 
 @[expose] public section
@@ -60,22 +61,7 @@ private theorem clear_denominator_of_span
 
 /-- A generic splitting defines the reduced base-change map, with coordinate denominator
 clearing and a specified value on the image of every element of the original algebra.
-Neither finiteness nor Noetherianity is needed for this assertion.
-
-Source: smooth purity blueprint, `sk-prop-sf-cbc`,
-`lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-generic-product-map-denominators)
-
-Proof: Tensor associativity and commutation identify B tensor_A K' with
-(K tensor_A B) tensor_K K'. The map B tensor_A R to this generic algebra followed
-by the quotient and e kills every nilpotent, because a product of fields is reduced.
-Thus it factors through the source reduction, giving f and the pure-tensor identity.
-For z in L_j, apply e inverse to the vector supported at j with value z. Every element
-of B tensor_A K' is a finite sum of pure tensors. Write their K' coefficients as
-fractions over R, multiply the finitely many nonzero denominators, and lift the
-resulting numerator to B tensor_A R. Passing to the quotient gives a*z = f(x)_j.
-The product denominator is nonzero: R embeds in its fraction field K'. Empty sums
-use denominator 1. If r is zero the coordinate assertion is vacuous. -/
+Neither finiteness nor Noetherianity is needed for this assertion. -/
 theorem exists_generic_product_map_denominators
     (A : Type u) [CommRing A]
     (B : Type v) [CommRing B] [Algebra A B]

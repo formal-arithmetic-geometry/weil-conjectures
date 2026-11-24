@@ -16,12 +16,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
-/-- A bounded-above complex representative can be replaced by a termwise flat one.
-Source: Stacks Project, Tag 077J.
-(blueprint: new-pc-bounded-above-model-flat-replacement).
-Apply the functorial bounded-above flat replacement to a good truncation of the
-representative; its augmentation is a quasi-isomorphism, hence induces the
-required isomorphism in the derived category. -/
+/-- A bounded-above complex representative can be replaced by a termwise flat one
+(Stacks, Tag 077J). -/
 theorem exists_flat_model_of_boundedAbove_model
     {B : Scheme.{u}}
     [hB : HasDerivedCategory (SheafOfModules.{u} (moduleRings B.toRingedSpace))]

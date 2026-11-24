@@ -17,8 +17,9 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 /-!
 # Column cokernel of the tensor of two resolutions
 
-Source: Stacks Project, Algebra, Tag 00M3, cokernel computation and functoriality.
-(blueprint: lem-weil-pbc-tensor-resolution-column-cokernel-iso)
+## References
+
+* Stacks Project, Tag 00M3
 -/
 
 @[expose] public section
@@ -82,21 +83,7 @@ private theorem columnDesc_isIso {R : Type u} [CommRing R]
 
 
 /-- The column cokernel complex is the singly tensored resolution, naturally
-with respect to augmentation-compatible maps of both resolutions.
-
-Source: Stacks Project, Algebra, Tag 00M3, proof, cokernel computation and
-functoriality paragraph.
-(blueprint: lem-weil-pbc-tensor-resolution-column-cokernel-iso)
-
-Proof: Tensor the cokernel cofork Q₁ → Q₀ → N with Pₚ. Tensoring is a left
-adjoint, so the resulting cofork is a cokernel cofork. The evaluated column
-cokernel of the bicomplex is another cokernel of the same map. Their unique
-comparison is therefore an isomorphism. These comparisons commute with the
-P differentials: precompose with the cokernel projection and use bifunctoriality
-of tensor. They assemble to a chain isomorphism. For a and b compatible with
-f and g, precomposing the naturality square with each cokernel projection
-reduces it to b₀ ≫ Q'.π₀ = Q.π₀ ≫ g and tensor bifunctoriality.
-Cancel the projections, which are epimorphisms, to obtain the stated square. -/
+with respect to augmentation-compatible maps of both resolutions. -/
 theorem tensorResolutionColumnCokernelIso (R : Type u) [CommRing R] :
     ∃ e : ∀ (M N : ModuleCat.{u} R) (P : ProjectiveResolution M)
         (Q : ProjectiveResolution N),

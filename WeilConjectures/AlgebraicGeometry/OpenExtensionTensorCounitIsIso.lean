@@ -11,8 +11,11 @@ import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import all WeilConjectures.AlgebraicGeometry.DerivedOpenTensorHomBijective
 
 /-! # Open extension counit on a derived tensor
-Source: Stacks Project, Tags 00A7, 08BS and 06YB.
-(blueprint: lem-pc-open-extension-tensor-counit-isiso). -/
+
+## References
+
+* Stacks Project, Tags 00A7, 08BS and 06YB.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,23 +35,7 @@ local instance standardDerivedOpenExtensionTensorCounitIsIso (X : Scheme.{u}) (U
   HasDerivedCategory.standard _
 
 /-- The counit of open extension is invertible on a tensor with an extended object.
-Source: Stacks Project, Cohomology Tags 08BS, 06YB and 06YH; Modules Tag 01AK.
-Proof: use the proved support lemmas in DerivedOpenTensorHomBijective (imported
-with `all` because they are private). Construct the exact canonical extension-by-zero
-left adjoint to restriction and derive it. At a point outside U its value has acyclic
-stalk; on U restriction
-of extension is the identity. By uniqueness of left adjoints the same stalk
-properties hold for any J ⊣ R. Compute the derived tensor with K-flat
-representatives. Stalks commute with total tensor, and K-flatness is stalkwise.
-Outside U an acyclic stalk of J(A) tensored with the K-flat stalk of K is acyclic;
-thus J(A) tensor K has zero cohomology stalks outside U. The counit on any such
-supported object is invertible: inside U its restriction is the inverse of the
-unit, by the triangle identity and invertibility of the unit; outside U its source
-and target have zero cohomology stalks. The cone therefore has acyclic stalks at
-all points, so is zero in the derived category. This proves the actual counit
-component invertible. The empty open makes both objects zero; for the total open
-the adjunction is an equivalence. No monoidal structure on R is used.
-(blueprint: lem-pc-open-extension-tensor-counit-isiso). -/
+(Stacks, Tags 08BS, 06YB, 06YH and 01AK) -/
 theorem openExtension_tensor_counit_isIso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (U : X.Opens)

@@ -23,11 +23,13 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 /-!
 # K-flatness and flatness under the telescope construction
 
-Source: Stacks Project, Cohomology on Sites, proof of Lemma 06YS, with Lemmas 06YQ,
-06YR and 07A3; Modules on Sites, Lemma 03EU (blueprint: lem-pc-kflat-closure).
-
 The site and module universes are those of the landed `SheafOfModules.IsFlat`
 (`C : Type u`, `Category.{u} C`, rings and modules in `u`).
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS (proof), 06YQ, 06YR and 07A3
+* Stacks Project, Modules on Sites, Tag 03EU
 -/
 
 @[expose] public section
@@ -90,22 +92,7 @@ private theorem isKFlat_coproduct_small
 
 /-- Bounded-above flat complexes are K-flat; K-flat complexes are closed under mapping
 cones, countable direct sums and sequential homotopy colimits; countable sums of flat
-sheaves of modules are flat.
-Source: Stacks Project, proof of Tag 06YS, Tags 06YQ, 06YR, 07A3 and 03EU
-(blueprint: lem-pc-kflat-closure).
-
-Proof:
-1. Apply `lem-pc-bounded-above-flat-kflat-site`: truncate an acyclic test complex above,
-tensor with the bounded-above flat complex, and filter the total complex. The graded
-pieces are acyclic by flatness. Pass to the filtered colimit using exactness.
-2. Apply `lem-pc-kflat-cone-direct-sum`: total tensor commutes with cones and countable
-sums, and both constructions preserve acyclicity. For a sequence, its homotopy colimit
-is the cone of `1 - shift` on its sum (`lem-pc-complex-hocolim-colimit`), so it is K-flat.
-3. The sheaf-module category is Grothendieck abelian
-(`prop-pur-kinjective-resolutions-exist`) and its tensor is symmetric monoidal closed
-(`lem-pc-sheaf-modules-tensor-closed`). Tensor with a flat sheaf preserves finite limits.
-Apply `lem-weil-pbc-flat-coproduct`; right exactness and symmetry then give exactness of
-tensor-right with the sum, hence flatness by `def-pc-flat-sheaf-modules`. -/
+sheaves of modules are flat. -/
 theorem kFlat_closure
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]

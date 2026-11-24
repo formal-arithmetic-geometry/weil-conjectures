@@ -13,6 +13,17 @@ import Mathlib.Algebra.Category.ModuleCat.Descent
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Localization.BaseChange
 
+/-!
+# Denominator torsion in the localization-unit kernel
+
+In ordinary complex cohomology, a class killed by the localization unit is killed by an element
+of the localizing submonoid.
+
+## References
+
+* Stacks Project, Tags 00CS and 00DK
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -22,17 +33,7 @@ open scoped TensorProduct ChangeOfRings
 
 namespace RingTensorCohomology
 
-/-- Ordinary complex cohomology has denominator torsion in the localization-unit kernel.
-Source: Stacks Project, Tags 00CS and 00DK, exactness of module localization.
-(blueprint: new-lem-pc-complex-localization-unit-kernel).
-
-Proof: represent x by a cycle z in degree i. Its localized image is a boundary,
-so write a boundary witness as y/t with y in C^(i-1) and t in S. The equation
-z/1 = d(y)/t says that some s in S kills t*z-d(y) in C^i, by the equality
-criterion for localized modules. Thus (s*t)*z = d(s*y). This is a boundary
-already in C, and hence (s*t)*x = 0. The product s*t belongs to S. This uses only
-the two adjacent terms of C, so no boundedness is required. If 0 is in S, its
-zero multiple works; for S={1} the unit is an isomorphism and x=0. -/
+/-- Ordinary complex cohomology has denominator torsion in the localization-unit kernel. -/
 theorem complexLocalizationUnit_kernel (A Aq : Type u) [CommRing A] [CommRing Aq]
     [Algebra A Aq] (S : Submonoid A) [IsLocalization S Aq] (i : ℤ)
     (C : CochainComplex (ModuleCat.{u} A) ℤ) (x : C.homology i)

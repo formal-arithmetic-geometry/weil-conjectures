@@ -28,22 +28,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 set_option backward.defeqAttrib.useBackward true in
 /-- A coherent source has a finite free cokernel presentation near each point.
-Source: Stacks Project, Modules, Lemma 01BW (lemma-coherent-finite-presentation).
-(blueprint: lem-weil-pbc-coherent-local-finite-presentation).
-
-Proof:
-Finite type gives an open neighbourhood W of x and an epimorphism from a finite
-free module to G.over W. Reindex its finite basis by ULift (Fin n). The kernel
-is of finite type by the second condition of RingedSpace.IsCoherent. Choose a
-smaller neighbourhood V of x and an epimorphism from a free module with basis
-ULift (Fin m) to the restriction of this kernel. Restriction to a smaller open
-preserves epimorphisms and kernels: stalks are unchanged at points of that open.
-Compose this second epimorphism with the restricted kernel inclusion to obtain
-a map a between the two finite free modules on V. Its image is the kernel of
-the first epimorphism restricted to V, so that epimorphism is a cokernel of a
-in the abelian category of module sheaves. Cokernel uniqueness gives the stated
-isomorphism. Identify the finite free modules with the finite biproducts of the
-restricted unit; the empty basis gives the zero object, so ranks zero are allowed. -/
+(Stacks, Tag 01BW). -/
 theorem coherent_local_finite_presentation
     (X : Scheme.{u}) (G : X.Modules)
     (hG : RingedSpace.IsCoherent X.toRingedSpace G) (x : X) :

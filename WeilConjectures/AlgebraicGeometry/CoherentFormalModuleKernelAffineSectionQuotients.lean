@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleStabilizedKernelSec
 
 /-! # Affine section quotients of stabilized formal kernels
 
-Source: Stacks Project, Tags 087W and 087X, affine calculation for claim (a).
-(blueprint: lem-weil-pbc-formal-kernel-affine-section-quotients).
+Stacks Project, Tags 087W and 087X.
 -/
 
 @[expose] public section
@@ -25,25 +24,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Stabilized formal kernel sections are compatible quotients of one completed submodule.
-
-Source: Stacks Project, Lemma 087X (lemma-inverse-systems-abelian), calculation of
-K prime_m, using Lemma 087W (lemma-inverse-systems-affine).
-(blueprint: lem-weil-pbc-formal-kernel-affine-section-quotients).
-
-Proof: Restrict both formal systems and their map to U, and transport along U's
-canonical isomorphism with Spec Gamma(U,O_X). The affine formal-module equivalence
-gives finite completed modules N and P, a completed-linear map f, and compatible
-surjective A-linear projections with kernels K^(m+1)N and K^(m+1)P. Put L = ker f.
-The reduced-kernel image bound supplies a. At level l = max(m+c,m+a), the image
-of the finite-level kernel in N/K^(m+1)N equals the image of L. Stabilization hc
-identifies this with the image at m+c. Affine sections preserve kernels and images
-of quasi-coherent modules, so hS identifies this image with Gamma(U,S_m).
-Restriction of the projection to L followed by this identification defines q_m;
-it is surjective and its zero criterion is membership in K^(m+1)N. The components
-of j are monic by hS. Apply naturality of j to q_b(z) and cancel j_a on sections
-to obtain transition compatibility for every a <= b.
-No stalks, localized submodule order maps, or intersection bounds are constructed.
-Empty U, zero modules, and zero or unit ideals obey the same quotient formulas. -/
+(Stacks, Tags 087X and 087W). -/
 theorem coherentFormalModule_kernel_affine_section_quotients
     {X : Scheme.{u}} [IsNoetherian X]
     (I : X.IdealSheafData) (F H : CoherentFormalModule X I) (α : F ⟶ H)

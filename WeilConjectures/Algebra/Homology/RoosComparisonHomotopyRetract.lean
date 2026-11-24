@@ -14,9 +14,11 @@ import WeilConjectures.Algebra.Homology.RoosComparisonHomotopies
 
 /-! # Homotopy retract diagrams for Roos comparisons
 
-Source: Stacks Project, Derived Categories, Tag 070M, and the split-envelope
-extension recorded in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-roos-comparison-homotopy-retract).
+Roos comparisons carry a homotopy retraction of towers to a homotopy retraction of arrows.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 070M
 -/
 
 @[expose] public section
@@ -27,25 +29,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Roos comparisons carry a homotopy retraction of towers to a homotopy retraction
-of arrows. This is a naturality and homotopy-invariance statement; it assumes no
-K-injectivity, split transitions or quasi-isomorphism of either comparison.
-
-Proof: For a chain map u, define the product map degreewise by eP, the component
-maps of u, and ePJ. Naturality of u implies that it commutes with the transition
-endomorphisms. The kernel universal property then defines lU, and the direct sum
-of the product maps in successive degrees defines cU under eC and eCJ. Checking
-both projections proves the chain-map equations and the comparison square.
-Perform the same construction for r to obtain lR and cR and the reverse square.
-Products and kernels are additive functors applied termwise. Applying them to a
-homotopy u r ~ id gives a homotopy lU lR ~ id. On the signed cone the homotopy
-is H(y,x)=(-P(h)y,P(h)x). The mixed terms cancel by naturality of the transition
-endomorphism: -s P(h)x + P(h)s x = 0. Thus cU cR ~ id as well. The specified
-comparison equations ensure that the two squares use exactly eta and etaJ.
-
-Source: Stacks Project, Derived Categories, Tag 070M; the explicit extension
-in lem-weil-derived-limit-roos-complex.
-(blueprint: lem-weil-roos-comparison-homotopy-retract). -/
+/-- Roos comparisons carry a homotopy retraction of towers to a homotopy retraction of
+arrows. This is a naturality and homotopy-invariance statement; it assumes no
+K-injectivity, split transitions or quasi-isomorphism of either comparison. -/
 theorem roos_comparison_homotopy_retract
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

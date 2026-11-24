@@ -18,8 +18,9 @@ import WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
 /-!
 # Sectionwise invariance of Hom complexes into K-injectives
 
-Source: Stacks Project, sites-cohomology.tex, Lemmas 0A94 and 0A95
-(blueprint: lem-pur-hom-complex-sections-quasi-iso).
+## References
+
+* Stacks Project, Lemmas 0A94 and 0A95
 -/
 
 @[expose] public section
@@ -30,25 +31,7 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-/-- The map of Hom complexes induces a quasi-isomorphism on sections over every site object.
-Source: Stacks Project, sites-cohomology.tex, Lemma 0A95, using Lemma 0A94
-(blueprint: lem-pur-hom-complex-sections-quasi-iso).
-
-Proof: fix an object `U` and a degree `n`. The product projections in `homComplex_exists`
-identify sections with families of morphisms on `C/U`. In degree zero the cocycle equation
-is the chain-map equation, and degree-minus-one coboundaries are precisely null-homotopies.
-The same calculation after shifting the first complex by `-n` identifies degree `n`
-cohomology of sections with morphisms from the shifted first complex to the second in the
-localized homotopy category, compatibly with pre- and postcomposition. Restriction of module
-sheaves to `C/U` has exact extension by zero as a left adjoint, hence preserves K-injectives;
-restriction itself is exact, hence preserves the quasi-isomorphisms `s` and `t` and their
-shifts. Apply the canonical bijection `rhom_into_kinjective_local` to the shifted complexes
-and both K-injective targets. The induced cohomology map is then composition with the
-images of restricted `t` and `s` in the localized derived category. These images are
-isomorphisms, so composition with their inverses is an inverse to the cohomology map.
-Thus the homology map on sections is bijective in every degree, which for abelian groups
-is equivalent to being an isomorphism. This is the claimed quasi-isomorphism. No step here
-uses exactness of sheafification or a comparison with cohomology sheaves. -/
+/-- The map of Hom complexes induces a quasi-isomorphism on sections over every site object. -/
 theorem homComplex_sections_quasiIso
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{max u v}}

@@ -14,8 +14,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine values of a presheaf satisfying principal localization
 
-Source: Stacks Project, Tags 01HV and 009H.
-(blueprint: lem-pc-affine-localization-sheafification).
+## References
+
+* Stacks Project, Tags 01HV and 009H
 -/
 
 @[expose] public section
@@ -27,24 +28,8 @@ open CategoryTheory TopologicalSpace Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Sheafification preserves affine values when restrictions to principal opens
-are localizations. No sheaf condition is assumed on non-affine opens.
-
-Source: Stacks Project, Tags 01HV and 009H (sheaves on a basis).
-(blueprint: lem-pc-affine-localization-sheafification).
-
-Proof: fix an affine W = Spec A and set N = P(W). The localization hypotheses
-identify P(D(a)) with N[1/a] by the canonical numerator map. Uniqueness of maps
-out of localized modules makes these identifications compatible with further
-principal restrictions, including intersections D(a) ∩ D(b) = D(ab). They are
-also linear for the localized structure rings. Thus on the principal-open
-basis of W, P agrees with the associated-module sheaf tilde N. This is a sheaf
-on the basis; arbitrary covers reduce to finite covers because principal opens
-are quasi-compact, and the finite-cover equalizer is the module localization
-sheaf condition. Extension from the basis is unique. Sheafification restricted
-to W is this extension, and its unit agrees with the canonical identification
-on every basis member. At W = D(1) that map is an isomorphism. Empty opens cause
-no exception: localization at zero forces the module on the empty open to be
-zero. No values of P on non-affine opens are used. -/
+are localizations. No sheaf condition is assumed on non-affine opens (Stacks, Tags 01HV and 009H).
+-/
 theorem affineLocalization_sheafification_unit_isIso (T : Scheme.{u})
     (P : _root_.PresheafOfModules.{u} T.ringCatSheaf.obj)
     (hlocal : ∀ (U : T.Opens), IsAffineOpen U → ∀ a : Γ(T, U),

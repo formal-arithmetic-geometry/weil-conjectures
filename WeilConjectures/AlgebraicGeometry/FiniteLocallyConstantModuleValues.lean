@@ -22,9 +22,15 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Finite values of locally constant etale module sheaves
 
-Source: Stacks Project, Tags 03RU, 03RW(3), and 093N(1); the equivalences are
-agent-formulated from these definitions
-(blueprint: lem-weil-pbc-finite-locally-constant-module-values).
+## Implementation details
+
+The existing finite-sheaf predicate uses finitely generated stalks at separably closed
+points; over a finite ring this is equivalent to finite stalks. Testing at algebraically
+closed points is equivalent by invariance under algebraic closure of the geometric field.
+
+## References
+
+* Stacks Project, Tags 03RU, 03RW(3), 093N(1), and 03PN
 -/
 
 @[expose] public section
@@ -122,36 +128,7 @@ private theorem finiteSheaf_of_finiteType
 /-- Over a finite commutative ring, the existence of a trivialization with finite module
 values, finite local constancy, and local constancy together with finite type are equivalent.
 Every geometric stalk through a member of any such trivialization is isomorphic, as a
-module, to that member's constant value.
-
-Proof:
-1. Transport a constant-value trivialization from the localized site to the small etale
-   site of the cover member, using `overSheafEquivFunctorObjOverIso` and
-   `constantSheafSheafCongrIso`. Compose `upperStarCompSheafFiberIso` with its stalk and
-   `sheafFiberConstantSheafIso` to identify the original stalk with the constant value.
-   These are isomorphisms in ModuleCat, so no separate scalar-linearity argument is needed.
-2. Finite type implies finite stalks at separably closed points: lift a point through its
-   generating cover and apply the stalk functor to the generating epimorphism. The site
-   equivalence preserves epimorphisms, and the stalk functor does so because it is left
-   adjoint to the skyscraper functor. The source stalk is the finite free module, so its
-   quotient is finite and hence finitely generated. Transport back by the pullback-stalk
-   isomorphism.
-3. Finite constant values are finitely generated; apply
-   `locallyConstant_finiteValues_isFiniteType` to obtain finite type. The given datum
-   supplies local constancy, and step 2 supplies the finite-sheaf predicate.
-4. Conversely, remove empty members of a locally constant cover. This remains a cover:
-   every point is covered by a member containing a point. On each remaining member,
-   choose a point and the separable closure of its residue field. Step 1 identifies its
-   constant value with a finitely generated stalk. Over the finite coefficient ring,
-   that constant value is a finite set.
-5. Combine these implications to obtain both equivalences. The moreover assertion is
-   step 1 for the specified member and geometric point; it requires no finiteness.
-
-The existing finite-sheaf predicate uses finitely generated stalks at separably closed
-points; over a finite ring this is equivalent to finite stalks. Testing at algebraically
-closed points is equivalent by invariance under algebraic closure of the geometric field.
-Source: Stacks Project, Tags 03RU, 03RW(3), 093N(1), and the stalk calculations of 03PN
-(blueprint: lem-weil-pbc-finite-locally-constant-module-values). -/
+module, to that member's constant value. -/
 theorem finite_locally_constant_module_values_iff
     {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

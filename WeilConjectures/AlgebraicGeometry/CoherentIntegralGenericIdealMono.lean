@@ -59,17 +59,7 @@ private theorem ideal_map_eq_zero_of_generic_stalk (Z : Scheme.{w}) [IsIntegral 
 -- Keep the existing signature; the shorter proof does not need coherence.
 set_option linter.unusedVariables false in
 /-- A map in the integral lattice construction is injective once it is generically an
-isomorphism.  This is the coordinatewise generic-stalk argument of Stacks, Tag 01YE.
-(blueprint: lem-weil-pbc-coherent-integral-generic-ideal-map-mono).
-
-Proof sketch: take the coherent kernel of the map.  Exactness of module stalks and
-the generic isomorphism show that its generic stalk is zero.  Embed this kernel in
-the finite coproduct of copies of the ideal and project to each coordinate.  Each
-coordinate image is a quasi-coherent ideal with zero generic stalk, hence is zero on
-an integral scheme.  All coordinates of every kernel section therefore vanish, so
-the kernel is zero and the map is mono.  Coherence of the kernel and the image
-ideals supplies the stated finiteness hypotheses.  The formal proof is left as this
-named theorem for the subsequent argument. -/
+isomorphism.  This is the coordinatewise generic-stalk argument of Stacks, Tag 01YE. -/
 theorem mono_of_coherent_ideal_sum_generic_iso (Z : Scheme.{w}) [IsNoetherian Z]
     [IsIntegral Z] (G : Z.Modules) (hG : RingedSpace.IsCoherent Z.toRingedSpace G)
     (r : ℕ) (I : Z.IdealSheafData)

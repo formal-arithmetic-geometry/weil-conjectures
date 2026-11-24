@@ -12,7 +12,10 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 /-! # Injective acyclicity for intrinsic coefficient comparison
-Source: Stacks Tags 099U and 099V.
+
+## References
+
+* Stacks Project, Tags 099U and 099V
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -121,27 +124,7 @@ private theorem intrinsicUnitIso (X : Scheme.{u})
     (SheafOfModules.toSheaf _) hmap inferInstance
 
 /-- The ordinary comparison unit is invertible on injectives, whose inverse images
-are acyclic for comparison direct image. The sheafification, enough-injectives and additive
-instances only specify the ordinary derived-functor constructions; they exist
-canonically on the two small sites. Any adjunction between the fixed functors
-has the asserted unit property.
-Source: Stacks Tags 099U and 099V; blueprint bounded-below comparison
-(auxiliary; not a blueprint node).
-
-Proof: transport constant-ring modules through the constant-scalar and AsSmall
-site equivalences. The constant-section ring map identifies the intrinsic unit
-with the ordinary comparison unit, which is invertible. This is independent of
-the choice of adjunction between the fixed functors. On an affine etale object,
-restriction preserves injectives because it has exact extension by zero as a
-left adjoint. The ind-etale affine basis admits compatible refinements by inverse
-limits of finite-stage etale coverings, with their nerves descending to a common
-stage. Each augmented module Cech complex is exact on an injective; exact filtered
-colimits preserve this exactness. The basis Cech criterion therefore gives the
-positive cohomology vanishing of the pullback on every affine etale object.
-Applying the direct image to an injective resolution and sheafifying these local
-computations gives vanishing of every positive right-derived direct image. All
-transport functors are exact equivalences and preserve injectivity and this
-vanishing. This uses neither finiteness of A nor nonemptiness of X. -/
+are acyclic for comparison direct image (Stacks, Tags 099U, 099V). -/
 theorem coefficientComparison_injectiveAcyclic (X : Scheme.{u})
     (A : Type (max v (u + 1))) [CommRing A]
     [HasSheafify (Scheme.smallModelComparisonEtaleTopology.{u, v} X)

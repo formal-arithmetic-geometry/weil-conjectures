@@ -13,8 +13,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleLimitReindexTransitionCoherence
 
 /-! # The comparison cocone on the affine tail
 
-Source: Stacks Project, Tag 09YQ, cofinal-tail reduction.
-(blueprint: lem-weil-pbc-etale-limit-affine-stage-tail-colimit).
+## References
+
+* Stacks Project, Tag 09YQ
 -/
 
 @[expose] public section
@@ -23,26 +24,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Etale
 
-/-- The comparison cocone restricted above an affine stage is a colimit.
-
-Source: Stacks Project, Tag 09YQ (theorem-colimit), the cofinal-tail reduction.
-(blueprint: lem-weil-pbc-etale-limit-affine-stage-tail-colimit).
-
-Proof: the upper tail of i0 is nonempty and directed. Its inclusion into I is
-final, since every i has a common upper bound with i0. Its opposite is initial,
-so whiskering the scheme cone preserves its limit. Whiskering the coefficient
-cocone preserves its colimit. Each tail scheme has an affine morphism to the
-affine scheme at i0, and is therefore affine. Restrict the coefficient sheaves,
-transition maps, and the identifications eG and eH to this tail. The identity
-and composition equations follow from functoriality of the inclusion; the
-sheaf-transition, cohomology-transition and comparison-leg equations are the
-original equations at the included indices. Apply affine cohomology comparison
-(lem-weil-pbc-etale-limit-cohomology-affine-comparison) to these restricted data.
-It identifies precisely the whiskered B as a colimit. No assertion about a
-particular cohomology class or its eventual vanishing is made here.
-For a singleton indexing system the restriction is the whole system. Degree
-zero, zero sheaves and empty affine schemes are included in affine comparison;
-no earlier scheme is assumed affine. -/
+/-- The comparison cocone restricted above an affine stage is a colimit (Stacks, Tag 09YQ). -/
 theorem etale_limit_affine_stage_tail_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) (hc : IsLimit c)

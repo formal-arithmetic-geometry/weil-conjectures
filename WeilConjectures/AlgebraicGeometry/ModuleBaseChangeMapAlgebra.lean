@@ -13,10 +13,11 @@ public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 /-!
 # Algebra compatibility of the structure-sheaf base change map
 
-Source: Stacks Project, Cohomology, Remark 08HY; Sheaves, Tags 0093, 0095, 0096;
-Modules, Tag 01CD. The algebra compatibility is the explicit argument in the node,
-not a separately stated Stacks lemma
-(blueprint: lem-weil-pbc-module-base-change-map-algebra).
+## References
+
+* [Stacks, Cohomology, Remark 08HY]
+* [Stacks, Sheaves, Tags 0093, 0095, 0096]
+* [Stacks, Modules, Tag 01CD]
 -/
 
 @[expose] public section
@@ -151,27 +152,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The adjunction and tensor comparisons require elaborating several sheafification types.
 /-- The canonical base change map on structure sheaves has adjoint `f_*(g'^sharp)`
 and preserves multiplication and units. The multiplications are characterized on pure
-section tensors, so they are the actual ring multiplications, not arbitrary algebra data.
-
-Source: Stacks Project, Cohomology, Remark 08HY; Sheaves, Tags 0093, 0095, 0096;
-Modules, Tag 01CD; algebra compatibility is explicit
-(blueprint: lem-weil-pbc-module-base-change-map-algebra).
-Proof:
-(1) Use the Hom bijection of def-pc-module-pullback and its natural unit. Identify
-`f_* g'_*` with `g_* f'_*` through the pushforward composition and square comparisons;
-0093 identifies the module actions.
-(2) By lem-weil-pbc-module-pullback-structure-sheaf, the adjoint of epsilon is sharp.
-Functoriality and the defining adjoint of beta therefore give the displayed adjoint of gamma;
-on sections this is exactly gamma(eta(a)) = g'^sharp(a).
-(3) Multiplication on the pushforward is induced by sectionwise ring multiplication,
-using def-pur-sheaf-tensor-product and def-weil-presheaf-modules-sheafification.
-Compare the adjoints of the two multiplication composites. Uniqueness of sheafification
-reduces equality to pure tensors. Naturality of eta gives g'^sharp(ab) on the first side;
-lem-weil-pbc-module-pullback-tensor gives g'^sharp(a) g'^sharp(b) on the second.
-These agree because g'^sharp is a ring homomorphism (def-pc-scheme).
-(4) Compare adjoints of the unit composites. Naturality and step (2) give
-(f composed with g')^sharp; the epsilon characterization gives (g composed with f')^sharp.
-They agree by the square and 0093. Thus gamma is an O_S'-algebra morphism. -/
+section tensors, so they are the actual ring multiplications, not arbitrary algebra data
+(Stacks, Remark 08HY; Tags 0093, 0095, 0096, 01CD). -/
 theorem moduleBaseChangeMap_algebra
     {X S X' S' : Scheme.{v}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

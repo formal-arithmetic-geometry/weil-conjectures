@@ -10,8 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.MayerVietorisImageChainData
 
 /-! # The explicit restriction-localization chain
 
-Source: Stacks Project, Tags 08FE and 08BV.
-(blueprint: def-pc-mayer-vietoris-restriction-localization-chain).
+## References
+
+* Stacks Project, Tags 08FE, 08BV and 079V.
 -/
 
 @[expose] public section
@@ -24,16 +25,10 @@ noncomputable section
 namespace AlgebraicGeometry
 attribute [local instance 2000] schemeMVModuleAbelian
 
-/-- The restriction/localization chain from restricted h_*I to R(h|W)_* of
-restricted QI. Source: Stacks Tags 08FE and 079V.
-
-Construction: use the exact Y-restriction factor, then the localized underived
-restriction/direct-image comparison, then the direct-image unit on the restricted
-complex, then the derived restricted direct image of the inverse X-restriction factor.
-All four maps are the existing explicit constructions; no existence witness is chosen.
-Irreducibility keeps their construction out of downstream categorical conversions;
-its unit compatibility is stated in MayerVietorisImageRestrictionLocalization.
-(blueprint: def-pc-mayer-vietoris-restriction-localization-chain). -/
+/-- The restriction/localization chain from restricted `h_*I` to `R(h|W)_*` of restricted `QI`:
+the exact `Y`-restriction factor, the localized restriction/direct-image comparison, the
+direct-image unit on the restricted complex, and the derived restricted direct image of the
+inverse `X`-restriction factor. -/
 @[irreducible]
 def schemeMVRestrictionLocalizationChain
     (X Y : Scheme.{u}) (h : X ⟶ Y) (W : Y.Opens)

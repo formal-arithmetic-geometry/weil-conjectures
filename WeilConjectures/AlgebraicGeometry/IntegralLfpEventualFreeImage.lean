@@ -22,16 +22,7 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A sufficiently high scalar power has locally free image. Its quotient has a
 locally finite free module of canonical generators.
-
-Source: Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3), and the
-continuous Smith invariant argument in the parent integral resolution node.
-
-Proof: choose the power and finite quotient charts from
-integral_lfp_finite_quotient_charts. Apply the proved free-generator comparison:
-free module objects commute with pullback and send a finite constant sheaf of sets
-to the finite biproduct of regular modules indexed by that set. The image statement
-is unchanged. The construction also covers a zero quotient, whose underlying set
-has one element, and empty schemes. -/
+(Bhatt--Scholze, Definition 6.8.10, Proposition 6.8.11(3)) -/
 theorem integral_lfp_eventual_free_image
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]

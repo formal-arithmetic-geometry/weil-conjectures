@@ -19,7 +19,9 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # ComplexLiftConeCokernel
 
-Source: Stacks Project, Tag 0BCA.
+## References
+
+* Stacks Project, Tag 0BCA
 -/
 
 @[expose] public section
@@ -32,22 +34,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- A strict lift of the cone inclusion has the expected reduced cokernel.
-
-Source: Stacks Project, Tag 0BCA, cokernel paragraph.
-(blueprint: lem-sc-complex-lift-cone-cokernel).
-
-Proof: Extension of scalars is a left adjoint, so it preserves cokernels,
-also on complexes, whose cokernels are computed degreewise. The equality hf
-identifies the reduced first arrow, after the middle-object isomorphism e,
-with the cone inclusion. Cokernel uniqueness gives an isomorphism from the
-reduction of the actual cokernel of f to the cokernel of the cone inclusion.
-The cone projection onto E[1] is that cokernel, since in each degree the cone
-is the biproduct of the reduced K term and the shifted E term, and the
-projection is the second projection. This isomorphism is compatible with
-cokernel projections. Transport the biproduct retraction and section across
-e and this cokernel isomorphism in each degree to obtain the splitting.
-Neither acyclicity nor injectivity of f over R is needed for this argument. -/
+/-- A strict lift of the cone inclusion has the expected reduced cokernel (Stacks, Tag 0BCA). -/
 theorem complex_lift_cone_cokernel
     (R : Type u) [CommRing R] (I : Ideal R)
     (E : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ)

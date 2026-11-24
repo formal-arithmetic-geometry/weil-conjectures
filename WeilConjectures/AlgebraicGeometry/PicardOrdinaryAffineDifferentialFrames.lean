@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 /-! # Sheaf frames from section bases of finite-free retracts
 
-Source: Stacks Project, Tag 0BF2, and finite-projective module algebra.
+## References
+
+* Stacks Project, Tag 0BF2
 -/
 
 @[expose] public section
@@ -245,23 +247,8 @@ private lemma overFree_projection (W : Scheme.{w}) (U : W.Opens)
     Modules.ιFree_freeπ]
   split_ifs <;> simp
 
-/-- The section bases realize the differential as a column of sheaf maps.
-Source: Stacks Project, Tag 0BF2, degree-zero calculation, and the finite-projective
-module argument applied to sheaves of modules.
-(blueprint: lem-sc-picard-ordinary-affine-differential-frames)
-
-Proof: Maps from the unit sheaf are sections at the terminal object. Therefore
-maps out of a retract of a free sheaf are determined by their terminal section
-maps. Given a section basis, send each free generator to its inverse image under
-the basis. This sheaf map is bijective on terminal sections. To construct its
-inverse, lift the generators of a free sheaf of which the term is a retract,
-using the inverse terminal section map, and compose with the retract inclusion.
-Equality on terminal sections proves both inverse identities. Apply this to the
-rank-one basis and to the finite coordinate basis, then transport the resulting
-isomorphisms through the open-site equivalence. The equivalence preserves the
-unit, free coproducts and their projections. Evaluate hd at one to identify the
-column, and transport its coefficients with U.topIso. The argument includes
-m=0 and needs no affine tilde construction. -/
+/-- The section bases realize the differential as a column of sheaf maps
+(Stacks, Tag 0BF2). -/
 theorem picard_ordinary_affine_differential_frames
     (W : Scheme.{v}) (U : W.Opens) (_hU : IsAffineOpen U)
     (m : ℕ) (d : Fin m → Γ(W, U))

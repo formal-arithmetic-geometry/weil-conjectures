@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-! # Scalar extension of module-valued sheaves
 
-Source: Stacks Project, Sheaves on Spaces, Tags 0095 and 0096.
+## References
+
+* Stacks Project, Tags 0095 and 0096
 -/
 
 @[expose] public section
@@ -46,8 +48,7 @@ variable {k : Type u} [Ring k] (X : TopCat.{u})
   (α : k →+* R.obj.obj (op ⊤))
 
 /-- Scalar extension: forget the sheaf condition, pull back modules over the constant
-ring presheaf, and sheafify. The pullback is specified by its adjunction.
-(blueprint: def-sc-field-scalar-extension). -/
+ring presheaf, and sheafify. The pullback is specified by its adjunction. -/
 noncomputable def fieldScalarExtension :
     Sheaf (Opens.grothendieckTopology X) (ModuleCat.{max u v} k) ⥤
       SheafOfModules.{max u v} R := by

@@ -12,9 +12,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Constant-ring comparison for etale inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 03D6, 03D7, 04JC;
-Sites and Sheaves, Example 0H7J
-(blueprint: lem-weil-pbc-constant-ring-inverse-image-comparison).
+## References
+
+* Stacks Project, Tags 03D2, 03D3, 03D6, 03D7, 04JC and 0H7J
 -/
 
 @[expose] public section
@@ -26,19 +26,8 @@ open scoped TensorProduct ChangeOfRings
 
 namespace AlgebraicGeometry
 
-/-- Constant rings commute with the ring inverse image, with the compatible abelian lift.
-Source: Stacks Project, Sites and Sheaves, Example 0H7J; Modules on Sites, 03D2.
-(blueprint: lem-weil-pbc-constant-ring-inverse-image-comparison).
-
-Proof: Choose the compatible ring and abelian lifts of
-`etaleInverseImageAlgebraicStructures`. For any ring sheaf F on U, the ring
-adjunction and the constant-sheaf adjunction identify maps from Lr(RV) to F
-with maps from R to F(U): the direct image has the same global sections.
-The constant-sheaf adjunction on U identifies these with maps from RU to F.
-Yoneda gives c. Define gamma as the adjunct of c.hom. Evaluating the composite
-bijection on the identity of RU shows that gamma sends every constant section
-r to the constant section r after base change. The two compatibility equations
-are the hom-equivalence equations of the chosen algebraic lifts. -/
+/-- Constant rings commute with the ring inverse image, with the compatible abelian lift
+(Stacks, Tags 0H7J and 03D2). -/
 theorem etaleConstantRingInverseImageComparison (U V : Scheme.{u}) (f : U ⟶ V)
     (R : CommRingCat.{u + 1}) :
     (fun (RV : Sheaf V.smallEtaleTopology CommRingCat.{u + 1})

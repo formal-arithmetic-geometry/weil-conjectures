@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExistsOfUni
 /-!
 # Exact left adjunction for restriction to a localized ringed site
 
-Source: Stacks Project, Tags 03DI, 03DJ and 08FI.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, Tags 03DI, 03DJ and 08FI
 -/
 
 @[expose] public section
@@ -27,26 +28,7 @@ namespace CategoryTheory
 localized restriction functor preserves zero morphisms, there is a functor `G` from
 localized `R`-module sheaves to `R`-module sheaves preserving finite limits and finite
 colimits, together with an adjunction `G ⊣ restriction`, and the localized restriction
-functor is additive.
-
-Proof: for a localized module sheaf N, form the presheaf whose sections at V are
-the direct sum of N(V,f) over arrows f : V to U, and sheafify it. Restrictions
-send the f-summand to the composite-arrow summand using N's restriction map.
-A map from this presheaf into a module sheaf M is equivalent to a map N to
-M restricted to C/U: restrict to each summand in one direction, and sum the
-component maps in the other. These operations are inverse and natural, and
-sheafification gives the adjunction. The construction is additive. A monomorphism
-of localized sheaves is injective on every section, so its presheaf extension
-is injective on each direct sum. Exact module sheafification preserves this
-monomorphism. As an additive left adjoint the extension is right exact;
-preservation of monomorphisms therefore makes it exact. An exact additive
-functor between abelian categories preserves finite limits and finite colimits.
-Restriction preserves addition sectionwise.
-
-Source: Stacks Project, Tags 03DI and 03DJ, the exact left adjoint used in
-Tag 08FI, Lemma 21.20.1.
-(auxiliary; not a blueprint node)
--/
+functor is additive. -/
 theorem localized_restriction_adjunctionOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}]

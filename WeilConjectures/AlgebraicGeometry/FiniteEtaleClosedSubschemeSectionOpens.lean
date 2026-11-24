@@ -20,24 +20,9 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
-/-- Source: Stacks Project, Étale Cohomology, Lemma 59.80.6 (Tag 09ZA),
-first paragraph of the proof (blueprint: lem-weil-pbc-gabber-finite-etale-section-opens).
-
-Proof: Write `X = Spec R`. A closed subscheme of an affine scheme is affine, so
-`Z = Spec (R/I)`, and write `V = Spec B` as an étale algebra over `R/I`.
-By Stacks Tag 04D1 (the étale algebra lifting theorem), lift `B` to an étale
-`R`-algebra `C`, with `C ⊗[R] (R/I) ≃ B`. Thus `U = Spec C` is affine étale
-and separated over `X`, and `U ×[X] Z ≃ V` over `Z`.
-Apply Stacks Tag 09Z9 to `U → X`: its source has a covering by pairwise disjoint
-nonempty opens, each mapping to `X` by an open immersion. Since `U` is affine
-it is quasi-compact, so finitely many of these opens cover. Disjointness and
-nonemptiness ensure that these are all the opens of the decomposition. The
-complement of each is the union of the others, so each is closed as well.
-Pull the finite family back along `U ×[X] Z → U` and transport it along the
-isomorphism with `V`. Inverse images preserve closedness, disjointness, and
-the covering property. Each restriction to `Z` is the base change of an open
-immersion to `X`, hence an open immersion. Empty inverse images are allowed;
-if `V` is empty the empty family also satisfies the conclusion. -/
+/-- An affine étale scheme over a closed subscheme of an affine integral normal scheme with
+separably closed function field is covered by finitely many pairwise disjoint clopen opens,
+each mapping to the closed subscheme by an open immersion (Stacks, Tag 09ZA). -/
 theorem Etale.exists_finite_clopen_opens_of_closedImmersion
     {X Z V : Scheme.{u}} [IsAffine X] [IsIntegral X]
     (hX : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧

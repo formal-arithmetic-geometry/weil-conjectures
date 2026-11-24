@@ -10,7 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesRestriction
 
 /-! # Affine section comparisons for coherent formal modules
 
-Source: Stacks Project, Lemmas 087W and 087X.
+## References
+
+* Stacks Project, Tags 087W and 087X
 -/
 
 @[expose] public section
@@ -58,20 +60,7 @@ private def sectionsIso {X : Scheme.{u}} (U : X.Opens) (M : X.Modules) :
   exact l.toModuleIso
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Termwise restriction identifies affine sections as A-module diagrams.
-Source: Stacks Project, Lemma 087X, restriction to an affine open.
-(blueprint: lem-weil-pbc-formal-affine-limit-comparison)
-
-Proof: At each coherent formal module and each level use restrictAppIso for the
-open immersion V.ι at the top open. Its target is sections on V.ι '' ⊤, which
-is V; transport along this equality using the presheaf map isomorphism. Restrict
-scalars on the source along V.topIso.inv. The scalar equation for restrictAppIso
-and the defining equation of topIso make this an A-linear isomorphism.
-Naturality of restrictAppIso and presheaf transport proves compatibility with
-transition maps and with maps of formal modules. Assemble first the levelwise
-isomorphisms and then the isomorphisms natural in formal modules. This argument
-uses no affine finiteness or completion, and holds for empty opens as well.
--/
+/-- Termwise restriction identifies affine sections as A-module diagrams (Stacks, Tag 087X). -/
 theorem coherentFormalModule_affine_limit_comparison
     (X : Scheme.{u}) [IsNoetherian X] (I : X.IdealSheafData) (V : X.affineOpens)
     [IsNoetherian V.1.toScheme] :

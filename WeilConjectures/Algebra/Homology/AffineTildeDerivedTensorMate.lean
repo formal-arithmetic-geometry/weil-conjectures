@@ -17,8 +17,14 @@ public import WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchange
 
 /-! # The derived affine tensor mate before taking homology
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+## References
+
+* Stacks Project, Tag 06Z0
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 08HY
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,9 +39,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The induced exact associated-sheaf functor, using the proved exactness of tilde.
-Source: Stacks Project, Tag 06Z0.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+/-- The induced exact associated-sheaf functor, using the proved exactness of tilde. -/
 def affineExactTildeDerived (B : Type u) [CommRing B]
     [HasDerivedCategory.{wM} (ModuleCat.{u} B)] :
     DerivedCategory.{wM} (ModuleCat.{u} B) ⥤
@@ -57,9 +61,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   (M : CochainComplex (ModuleCat.{u} A) ℤ)
   (m : ModuleCat.BaseDerivedTensorCohomologyModel R A B M D)
 
-/-- The actual cohomology coordinates of derived associated sheaf of the tensor model.
-Source: Stacks Project, Tags 06Z0 and 06Y6.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+/-- The actual cohomology coordinates of derived associated sheaf of the tensor model. -/
 def affineTildeDerivedTensorSourceIso (i : ℤ) :
     (affinePushforwardTilde B).obj
         ((ModuleCat.restrictScalars Algebra.TensorProduct.includeRight.toRingHom).obj
@@ -81,9 +83,7 @@ def affineTildeDerivedTensorSourceIso (i : ℤ) :
   exact T.mapIso (m.cohomologyIso i) ≪≫
     (T.mapDerivedCategoryHomologyFunctorIso i).app _
 
-/-- Scalar-extension augmentation and coefficient map, as a map of B-complexes.
-Source: Stacks Project, Tag 06Y6, ordinary comparison in equation-bc.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+/-- Scalar-extension augmentation and coefficient map, as a map of B-complexes. -/
 def affineTildeTensorCoefficientComplexMap
     (φ : A →+* D) (ψ : B →+* D)
     (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
@@ -128,9 +128,7 @@ private theorem affineTildeTensorCoefficientComplexMap_tmul
 
 /-- The raw derived tensor counit followed by the coefficient map, ordinary affine
 pushforward comparison and right-derived pushforward unit. This construction uses
-no base-change mate, pullback counit or cohomological degree.
-Source: Stacks Project, Tags 06Y6, 01I9 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate). -/
+no base-change mate, pullback counit or cohomological degree. -/
 def affineTildeDerivedTensorToPushforward
     (φ : A →+* D) (ψ : B →+* D)
     (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)
@@ -188,28 +186,7 @@ attribute [local irreducible] tilde Functor.mapDerivedCategory affineTildePushfo
 
 set_option linter.unusedVariables false in
 /-- The affine base-change mate on the derived scalar-extension object, before
-applying any homology functor. Its source comparison is independent of D.
-Source: Stacks Project, Tags 0DJ8 (affine proof and equation-bc), 06Y6 and 08HY.
-(blueprint: lem-pc-affine-tilde-derived-tensor-mate).
-
-Proof: Resolve the restriction of M to R by a flat K-flat complex P and its
-quasi-isomorphic augmentation. The universal property of m.derived and m.counit
-identifies m.derived on this restriction with scalar extension of P to B.
-Exact tilde takes the augmentation to a quasi-isomorphism; its K-flat image
-computes derived pullback. The termwise affine pushforward comparison and the
-right-derived unit identify Rf_* Q(tilde M) with Q(tilde res_R M), using affine
-acyclicity and its unbounded comparison. These comparisons give sigma, without
-using D. On P the pinned derived-unit compatibility identifies the mate with
-ordinary exchange followed by the pushforward unit. The unit-normalized
-pullback/tilde comparison identifies ordinary exchange with scalar extension
-of the augmentation followed by the coefficient map. Its two restrictions are
-phi and psi, so the identity-on-carriers scalar comparison and equality transport
-are exactly the factors in affineTildeTensorCoefficientComplexMap. Naturality of
-the derived units transports the augmentation to m.counit. Cancel the invertible
-p-pullback counit and the tensor-pullback comparison, which give the displayed
-target representative t. This yields the equation in the derived category.
-All resolutions are unbounded; no cartesian or coefficient invertibility
-assumption is used. Zero rings and the zero complex satisfy the same identities. -/
+applying any homology functor. Its source comparison is independent of D. -/
 theorem exists_affineTildeDerivedTensorMate
     (φ : A →+* D) (ψ : B →+* D)
     (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)

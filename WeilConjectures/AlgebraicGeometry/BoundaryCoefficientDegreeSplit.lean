@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.PullbackMonoidalUnitComparison
 
 /-! # Splitting off the first coefficient block
 
-Source: Stacks Project, Tags 01CD and 09MS.
-(blueprint: lem-sc-boundary-coefficient-degree-split).
+## References
+
+* Stacks Project, Tags 01CD and 09MS
 -/
 
 @[expose] public section
@@ -260,27 +261,7 @@ private theorem coefficient_product_cast {X : Scheme.{u}} (J L : X.Modules)
   simp only [eqToHom_refl, whiskerLeft_id, id_whiskerRight, Category.id_comp]
 
 /-- The coefficient comparison splits off the initial n factors and compares the
-remaining factors with the section degree. Unlike block interchange this holds
-for arbitrary L; it never permutes its factors.
-
-Source: Stacks Project, Tag 01CD, lemma-tensor-product-pullback, and Tag 09MS,
-coherent-equation-ses (expansion of the canonical tensor identifications).
-(blueprint: lem-sc-boundary-coefficient-degree-split).
-Proof: expand tensorPowMulIso at e+2: its first step splits off n factors by
-tensorPowAddIso, and its remaining step groups n(e+1) factors into e+1 blocks.
-Naturality and associativity of the monoidal pullback comparison move this
-initial split through pullback. Induction on d in boundaryPullbackPowIso shows
-that pulling back a concatenation of d factors is the iterated tensorator on
-those factors. Induction on e, using associator coherence at each successor,
-then identifies the grouped remaining factors with boundarySectionDegreeIso.
-The initial coefficient factor stays fixed throughout. The degree-zero
-coefficient comparison, followed by its right unitor, is just the arithmetic
-identification n*1=n: its pullback unit comparison cancels the unit comparison
-in the tensorator by right unitality. Substituting this zero-degree identity
-and the preceding grouping identity gives the displayed morphism equality.
-At n=0 every L block is the unit and the same induction uses triangle identities;
-at e=0 there is one remaining block. No symmetry, invertibility, square-zero
-hypothesis, or assertion that arbitrary sheaf tensor sections are pure is used. -/
+remaining factors with the section degree (Stacks, Tags 01CD, 09MS). -/
 theorem boundaryCoefficientDegreeIso_split {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (n e : ℕ) :
     let a := n * (e + 1)

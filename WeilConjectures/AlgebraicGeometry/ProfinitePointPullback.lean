@@ -16,9 +16,6 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 
 /-!
 # The geometric inverse image from the profinite point
-
-Source: RefactorInstruction.tex, Section 4, lem:XS and prop:pX, and Section 5,
-eq:triangle and thm:alpha (auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -29,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The set inverse image is left Kan extension followed by sheafification.
-Source: RefactorInstruction, prop:pX
-(auxiliary; not a blueprint node). -/
+/-- The set inverse image is left Kan extension followed by sheafification. -/
 noncomputable abbrev profinitePointSetInverseImage :
     Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) ⥤
       Sheaf (Scheme.ProEt.topology specZ.{u}) (Type (u + 1)) :=
@@ -39,23 +34,7 @@ noncomputable abbrev profinitePointSetInverseImage :
     (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ)
 
 /-- Geometric inverse image from the profinite point, including the specified monoidal
-comparison with the inverse image along every scheme morphism.
-
-Source: RefactorInstruction, lem:XS, prop:pX, eq:triangle, thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (1) Apply the relative profinite test-object theorem at Spec Z to obtain finite
-limits and covering preservation, identifying its maps with spectrum of precomposition.
-(2) Apply the left-exact site inverse-image tensor theorem to obtain the sheafified Kan
-extension adjunction, exactness and strong symmetric monoidality.
-(3) The inverse-image composition comparison is the conjugate of the canonical
-fibre-product comparison. Uniqueness of adjunction-compatible comparisons gives the
-identity and associativity laws, and the site tensor theorem makes it monoidal.
-(4) Whisker the comparison for h and the structure morphism by pointUpperStar and use
-comp_toSpecZ. This is exactly upperStarFromPointComp, and is natural and monoidal.
-(5) Apply it to ring operations to get the ring-sheaf isomorphism. The subsequent
-coherence declarations record the identity, composition, linear, derived and square
-clauses explicitly. -/
+comparison with the inverse image along every scheme morphism. -/
 theorem profinite_point_pullback :
     (∀ S : Profinite.{u}, WeaklyEtale (toSpecZ (profiniteToScheme.obj S))) ∧
     PreservesFiniteLimits profiniteToProEt.{u} ∧
@@ -129,15 +108,7 @@ private lemma pointComparison_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = 
   simp
 
 /-- The point comparisons satisfy identity and composition on abelian sheaves, hence
-also on ring sheaves, since all their components preserve ring operations.
-Source: RefactorInstruction, eq:triangle and thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (3) Transport inverse-image adjunctions to strictly composed right adjoints and
-apply associativity of the unique conjugate comparison; identity follows by comparison
-with the identity adjunction. (4) Whisker with pointUpperStar and use comp_toSpecZ.
-(5) Naturality at addition, negation, zero, multiplication and one proves that these
-same equations are equations of ring maps, not merely maps of underlying sheaves. -/
+also on ring sheaves, since all their components preserve ring operations. -/
 theorem profinite_point_pullback_coefficient_coherence :
     (∀ (X : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}),
       (upperStarFromPointComp (𝟙 X)).hom.app Λ =
@@ -163,16 +134,7 @@ theorem profinite_point_pullback_coefficient_coherence :
 
 /-- Abelian inverse-image composition is coherent, including both units and every
 commutative square. The square map is explicitly the comparison through the common
-composite, so it includes noncartesian squares and identity arrows.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tag 03CB
-(auxiliary; not a blueprint node).
-
-Proof: (3) Fibre-product maps preserve both projections, so their associativity and unit
-diagrams commute by the universal property. Conjugate these diagrams using the
-inverse-image adjunctions; uniqueness of the conjugate comparison preserves the equations.
-(8) For a square, compose the inverse-image comparison with the inverse comparison for
-the other route after transporting along the equality of the two composite morphisms.
-Both resulting point-comparison paths equal the comparison for that common morphism. -/
+composite, so it includes noncartesian squares and identity arrows (Stacks, Tag 03CB). -/
 theorem profinite_point_pullback_abelian_coherence :
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y)
       (M : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}),
@@ -222,13 +184,7 @@ theorem profinite_point_pullback_abelian_coherence :
 open scoped CategoryTheory.Obj
 
 /-- The identity comparison of module direct images is uniquely determined by the
-identity comparison on underlying abelian sheaves.
-Source: RefactorInstruction, Section 5, coherence of eq:triangle
-(auxiliary; not a blueprint node).
-
-Proof: (5) condensedPushforwardHom_id identifies the scalar action with the identity
-action through lowerStarId. (6) Hence that abelian identity map and its inverse are
-linear. Faithfulness of forgetting the action proves uniqueness. -/
+identity comparison on underlying abelian sheaves. -/
 theorem existsUnique_profinitePointModuleDirectImageIdentity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -268,9 +224,7 @@ theorem existsUnique_profinitePointModuleDirectImageIdentity
     exact ht M
 
 /-- The canonical identity comparison of module direct images, selected by its unique
-underlying map, not by a mere existence of an unrelated isomorphism.
-Source: RefactorInstruction, Section 5, eq:triangle
-(auxiliary; not a blueprint node). -/
+underlying map, not by a mere existence of an unrelated isomorphism. -/
 noncomputable def profinitePointModuleDirectImageIdentity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -278,9 +232,7 @@ noncomputable def profinitePointModuleDirectImageIdentity
   (existsUnique_profinitePointModuleDirectImageIdentity Λ X).exists.choose
 
 /-- The canonical identity comparison of module inverse images is the conjugate of
-that of the direct images under the specified module adjunction.
-Source: RefactorInstruction, Section 5, eq:triangle
-(auxiliary; not a blueprint node). -/
+that of the direct images under the specified module adjunction. -/
 noncomputable def profinitePointModuleIdentity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -289,9 +241,8 @@ noncomputable def profinitePointModuleIdentity
     (profinitePointModuleDirectImageIdentity Λ X).symm
 
 /-- The scalar-extension pullback has the original exact abelian inverse image as its
-underlying sheaf, via restriction along the inverse coefficient isomorphism.
-Source: RefactorInstruction, thm:alpha; Stacks, Tags 03D2 and 03D8
-(auxiliary; not a blueprint node). -/
+underlying sheaf, via restriction along the inverse coefficient isomorphism
+(Stacks, Tags 03D2 and 03D8). -/
 noncomputable def profinitePointModuleForgetPullbackIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -549,16 +500,8 @@ private lemma moduleComposition_forget
     hm'.symm hu ha.symm
 
 /-- The module comparison is the linear lift of the abelian comparison. Exactness
-follows because extension of scalars along the coefficient isomorphism is an equivalence.
-Source: RefactorInstruction, thm:alpha; Stacks, Tags 03D2 and 03D8
-(auxiliary; not a blueprint node).
-
-Proof: (6) Apply inverse image to the module action and substitute the inverse coefficient
-isomorphism in the scalar variable. The balanced maps r tensor m to alpha inverse(r)m
-and m to 1 tensor m are inverse, giving profinitePointModuleForgetPullbackIso. Naturality
-of the abelian composition comparison at the action makes it linear; its underlying map
-is the equation below. Forgetting is faithful and creates kernels and sheafified cokernels,
-so exactness and the abelian unit and associativity equations lift to modules. -/
+follows because extension of scalars along the coefficient isomorphism is an equivalence
+(Stacks, Tags 03D2 and 03D8). -/
 theorem profinite_point_pullback_module_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] :
@@ -811,13 +754,7 @@ private lemma moduleComp_assoc_app {X Y Z W : Scheme.{u}}
 
 end ModuleMates
 
-/-- Module inverse images satisfy both unit equations and associativity.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (6) Use the normalized linear lifts in profinite_point_pullback_module_comparison.
-Apply the faithful forgetful functors and the corresponding abelian equations from step 3.
-The coherence of coefficient maps in step 5 identifies all scalar actions. -/
+/-- Module inverse images satisfy both unit equations and associativity. -/
 theorem profinite_point_pullback_module_coherence
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] :
@@ -855,14 +792,7 @@ theorem profinite_point_pullback_module_coherence
   · intro X Y Z W f g h M
     exact moduleComp_assoc_app Λ f g h M
 
-/-- Monoidality of the canonical abelian inverse-image composition comparison.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (2) The sheafified Kan-extension inverse images have their canonical tensor
-structures by the site inverse-image tensor theorem. (3) The composition comparison
-is adjunction-compatible, so the monoidal comparison clause of that theorem applies.
-Equivalently, conjugate the monoidal direct-image comparison and use the tensor mates. -/
+/-- Monoidality of the canonical abelian inverse-image composition comparison. -/
 @[instance]
 theorem profinitePoint_isMonoidal_upperStarComp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
@@ -880,9 +810,8 @@ theorem profinitePoint_isMonoidal_upperStarComp
   exact inferInstanceAs (NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f g).symm.inv)
 
 /-- The canonical ring-object composition comparison, obtained by lifting the abelian or
-linear comparison through the existing functor on algebraic structures or localization.
-Source: RefactorInstruction, eq:triangle and thm:alpha; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
+linear comparison through the existing functor on algebraic structures or localization
+(Stacks, Tags 00YV and 05RU). -/
 noncomputable def profinitePointRingComp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (upperStar Ab.{u + 1} (f ≫ g)).mapMon ≅ (upperStar Ab.{u + 1} g).mapMon ⋙ (upperStar Ab.{u +
@@ -890,9 +819,8 @@ noncomputable def profinitePointRingComp
   Functor.mapMonNatIso (upperStarComp Ab.{u + 1} f g) ≪≫ Functor.mapMonCompIso
 
 /-- The canonical ring-object identity comparison, using the existing lift of the
-ordinary inverse-image identity and its normalization on the identity functor.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
+ordinary inverse-image identity and its normalization on the identity functor
+(Stacks, Tags 00YV and 05RU). -/
 noncomputable def profinitePointRingIdentity
     (X : Scheme.{u}) :
     (upperStar Ab.{u + 1} (𝟙 X)).mapMon ≅ 𝟭 (Mon (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})) :=
@@ -905,18 +833,8 @@ private lemma ringComparison_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f
   subst w
   rfl
 
-/-- The ring-object inverse-image comparisons satisfy both units and associativity.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha; Stacks, Tag 05RU
-(auxiliary; not a blueprint node).
-
-Proof: (5) Ring maps inherit the equations because forgetting multiplication is faithful.
-(6) Module equations inherit them because forgetting the action is faithful.
-(7) Apply the exact-functor derived factorization to the ordinary pullbacks. Naturality
-at each differential makes the ordinary comparisons isomorphisms of complexes. The
-localization universal property lifts them uniquely, preserves identity and composition,
-and detects equality after precomposition with Q, so the degreewise unit and associativity
-equations descend. (8) The two square routes are compared with the pullback of their common
-composite; the same uniqueness identifies this comparison after localization. -/
+/-- The ring-object inverse-image comparisons satisfy both units and associativity
+(Stacks, Tag 05RU). -/
 theorem profinite_point_pullback_ring_coherence
     :
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (M : Mon (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})),
@@ -1060,9 +978,8 @@ namespace AlgebraicGeometry.ProEtale
 open scoped CategoryTheory.Obj
 
 /-- The canonical termwise derived composition comparison, obtained by lifting the abelian or
-linear comparison through the existing functor on algebraic structures or localization.
-Source: RefactorInstruction, eq:triangle and thm:alpha; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
+linear comparison through the existing functor on algebraic structures or localization
+(Stacks, Tags 00YV and 05RU). -/
 noncomputable def profinitePointAbelianDerivedComp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (upperStar Ab.{u + 1} (f ≫ g)).mapDerivedCategory ≅
@@ -1071,9 +988,8 @@ noncomputable def profinitePointAbelianDerivedComp
     (Functor.mapDerivedCategoryCompIso (upperStar Ab.{u + 1} g) (upperStar Ab.{u + 1} f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
-ordinary inverse-image identity and its normalization on the identity functor.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
+ordinary inverse-image identity and its normalization on the identity functor
+(Stacks, Tags 00YV and 05RU). -/
 noncomputable def profinitePointAbelianDerivedIdentity
     (X : Scheme.{u}) :
     (upperStar Ab.{u + 1} (𝟙 X)).mapDerivedCategory ≅ 𝟭 (DerivedCategory (Sheaf
@@ -1089,18 +1005,7 @@ private lemma abelianDerived_congr {X Y : Scheme.{u}} {f g : X ⟶ Y} (w : f = g
 
 /-- The termwise derived inverse-image comparisons satisfy both units and associativity.
 The square clause identifies the derived square comparison with the unique descent of
-the termwise ordinary comparison through the common composite.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha; Stacks, Tag 05RU
-(auxiliary; not a blueprint node).
-
-Proof: (5) Ring maps inherit the equations because forgetting multiplication is faithful.
-(6) Module equations inherit them because forgetting the action is faithful.
-(7) Apply the exact-functor derived factorization to the ordinary pullbacks. Naturality
-at each differential makes the ordinary comparisons isomorphisms of complexes. The
-localization universal property lifts them uniquely, preserves identity and composition,
-and detects equality after precomposition with Q, so the degreewise unit and associativity
-equations descend. (8) The two square routes are compared with the pullback of their common
-composite; the same uniqueness identifies this comparison after localization. -/
+the termwise ordinary comparison through the common composite (Stacks, Tag 05RU). -/
 theorem profinite_point_pullback_abelianderived_coherence
     :
     (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) Ab.{u
@@ -1200,9 +1105,8 @@ theorem profinite_point_pullback_abelianderived_coherence
     rw [abelianDerived_congr w]
 
 /-- The canonical termwise derived composition comparison, obtained by lifting the abelian or
-linear comparison through the existing functor on algebraic structures or localization.
-Source: RefactorInstruction, eq:triangle and thm:alpha; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
+linear comparison through the existing functor on algebraic structures or localization
+(Stacks, Tags 00YV and 05RU). -/
 noncomputable def profinitePointModuleDerivedComp
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -1215,9 +1119,8 @@ noncomputable def profinitePointModuleDerivedComp
       (CondensedRing.upperStar Λ f)).symm
 
 /-- The canonical termwise derived identity comparison, using the existing lift of the
-ordinary inverse-image identity and its normalization on the identity functor.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tags 00YV and 05RU
-(auxiliary; not a blueprint node). -/
+ordinary inverse-image identity and its normalization on the identity functor
+(Stacks, Tags 00YV and 05RU). -/
 noncomputable def profinitePointModuleDerivedIdentity
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -1238,18 +1141,7 @@ private lemma moduleDerived_congr
 
 /-- The termwise derived inverse-image comparisons satisfy both units and associativity.
 The square clause identifies the derived square comparison with the unique descent of
-the termwise ordinary comparison through the common composite.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha; Stacks, Tag 05RU
-(auxiliary; not a blueprint node).
-
-Proof: (5) Ring maps inherit the equations because forgetting multiplication is faithful.
-(6) Module equations inherit them because forgetting the action is faithful.
-(7) Apply the exact-functor derived factorization to the ordinary pullbacks. Naturality
-at each differential makes the ordinary comparisons isomorphisms of complexes. The
-localization universal property lifts them uniquely, preserves identity and composition,
-and detects equality after precomposition with Q, so the degreewise unit and associativity
-equations descend. (8) The two square routes are compared with the pullback of their common
-composite; the same uniqueness identifies this comparison after localization. -/
+the termwise ordinary comparison through the common composite (Stacks, Tag 05RU). -/
 theorem profinite_point_pullback_modulederived_coherence
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -1366,15 +1258,7 @@ private lemma ringLiftUnderlying
 
 /-- The coefficient comparison is the ring lift of the stipulated point comparison.
 Its component preserves both multiplication and addition because it is a morphism in
-monoid objects of abelian sheaves; commutative rings remain commutative by braidedness.
-Source: RefactorInstruction, Section 5, thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (5) Apply the monoidal natural isomorphism to a ring object. Naturality with
-respect to every operation gives the ring map; the construction of mapMonNatIso gives
-the asserted underlying component. Its inverse is also a ring map. The coefficient
-identity and composition equations are the earlier abelian equations under a faithful
-forgetful functor, so they hold as equations of ring maps as well. -/
+monoid objects of abelian sheaves; commutative rings remain commutative by braidedness. -/
 theorem profinite_point_pullback_ring_comparison
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) :
@@ -1417,15 +1301,7 @@ private lemma squareOfMorphisms
 
 /-- The module square comparison has precisely the underlying abelian square map
 obtained via the common composite. The displayed normalization prevents an arbitrary
-choice of an isomorphism between the two module pullbacks.
-Source: RefactorInstruction, Section 5, eq:triangle and thm:alpha
-(auxiliary; not a blueprint node).
-
-Proof: (8) Use the inverse of the linear composition comparison for the first route,
-transport along the given equality of composite scheme maps, then use the comparison
-for the second route. Step 6 identifies these maps after forgetting the module actions
-with their abelian counterparts. Step 5 identifies both routes on coefficients with
-the point comparison for the common morphism. This gives exactly the equation below. -/
+choice of an isomorphism between the two module pullbacks. -/
 theorem profinite_point_pullback_module_square
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -1478,16 +1354,13 @@ theorem profinite_point_pullback_module_square
   simpa only [V, Functor.map_comp, Category.assoc] using hh
 
 /-- The geometric set inverse image for an arbitrary scheme is the point inverse image
-followed by the actual scheme inverse image along its structure morphism.
-Source: RefactorInstruction, prop:pX and eq:triangle
-(auxiliary; not a blueprint node). -/
+followed by the actual scheme inverse image along its structure morphism. -/
 noncomputable abbrev profinitePointSetSchemeInverseImage (X : Scheme.{u}) :=
   profinitePointSetInverseImage.{u} ⋙
     Scheme.proEtaleSheafInverseImage (toSpecZ X) (Type (u + 1))
 
-/-- Set inverse-image composition, conjugate to the canonical direct-image comparison.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tag 03CB
-(auxiliary; not a blueprint node). -/
+/-- Set inverse-image composition, conjugate to the canonical direct-image comparison
+(Stacks, Tag 03CB). -/
 noncomputable def profinitePointSetComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     Scheme.proEtaleSheafInverseImage (f ≫ g) (Type (u + 1)) ≅
       Scheme.proEtaleSheafInverseImage g (Type (u + 1)) ⋙
@@ -1497,18 +1370,15 @@ noncomputable def profinitePointSetComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : 
         (Scheme.proEtaleSheafAdjunction f (Type (u + 1))))).symm
     (lowerStarComp (Type (u + 1)) f g).symm).symm
 
-/-- Set inverse-image identity, conjugate to the canonical direct-image identity.
-Source: RefactorInstruction, Section 5, eq:triangle; Stacks, Tag 03CB
-(auxiliary; not a blueprint node). -/
+/-- Set inverse-image identity, conjugate to the canonical direct-image identity
+(Stacks, Tag 03CB). -/
 noncomputable def profinitePointSetIdentity (X : Scheme.{u}) :
     Scheme.proEtaleSheafInverseImage (𝟙 X) (Type (u + 1)) ≅ 𝟭 _ :=
   (conjugateIsoEquiv Adjunction.id
     (Scheme.proEtaleSheafAdjunction (𝟙 X) (Type (u + 1)))).symm
       (lowerStarId (Type (u + 1)) X).symm
 
-/-- The set-level point comparison is composition followed by the structure-map equality.
-Source: RefactorInstruction, Section 5, eq:triangle
-(auxiliary; not a blueprint node). -/
+/-- The set-level point comparison is composition followed by the structure-map equality. -/
 noncomputable def profinitePointSetSchemeComp {X Y : Scheme.{u}} (f : X ⟶ Y) :
     profinitePointSetSchemeInverseImage Y ⋙
         Scheme.proEtaleSheafInverseImage f (Type (u + 1)) ≅
@@ -1655,17 +1525,7 @@ private lemma setPointSchemeComp_hom_app {X Y : Scheme.{u}} (f : X ⟶ Y)
   simpa only [NatTrans.comp_app, Functor.associator_hom_app,
     Functor.whiskerLeft_app, Category.id_comp] using hh
 
-/-- The geometric point comparisons are coherent already on sets.
-Source: RefactorInstruction, prop:pX and Section 5, eq:triangle
-(auxiliary; not a blueprint node).
-
-Proof: (2) The scheme base-change functors preserve finite limits and coverings, so their
-inverse images and their composite with the point inverse image preserve finite limits.
-(3) Conjugate the fibre-product identity and composition comparisons. Their diagrams
-commute by uniqueness of maps preserving the projections; uniqueness of the conjugate
-comparison carries these diagrams to inverse images. (4) Whisker with the point inverse
-image and use the structure-map identity. (8) Both routes around a commutative square
-therefore give the comparison for its common composite. -/
+/-- The geometric point comparisons are coherent already on sets. -/
 theorem profinite_point_pullback_set_coherence :
     (∀ X : Scheme.{u}, PreservesFiniteLimits (profinitePointSetSchemeInverseImage X)) ∧
     (∀ (X : Scheme.{u}) (F : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))),

@@ -16,14 +16,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
 /-!
 # Smooth duality from the étale and affine-line cases
 
-`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor_of_finite` has the statement of
-`proposition-exceptional-inverse-image-smooth-morphism`. It applies the tip's reduction
+`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor_of_finite` is smooth duality
+for finite coefficients. It applies the reduction
 `exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` to two lemmas: the étale case
 (the unit/tensor comparison for an étale map over an arbitrary base) and the affine-line case
 (the canonical duality on the compactified affine line). This module does not import
 `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality`, so that the smooth generic direct
-image (`lemma-smooth-morphisms-locally-constant-sheaves`), which uses smooth duality, has no import
-path back to `Finiteness/Deligne.lean`.
+image, which uses smooth duality, has no import path back
+to `Finiteness/Deligne.lean`.
 -/
 
 @[expose] public section
@@ -168,19 +168,11 @@ private lemma affineLineSmoothDuality : AffineLineSmoothDuality Λ := by
   exact (ambientTensorMap_compactification Λ p c K) ▸ this
 
 include d in
-/-- Smooth cohomological duality without a chosen orientation (the statement of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`,
-`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), proved from
-`exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine` by the étale case and the
-affine-line case below. It is kept apart from `SmoothDuality.lean` so that the prime-field case of
-`lemma-smooth-morphisms-locally-constant-sheaves` does not import that file.
-
-Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`
-be a finite ring whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is
-a locally constant sheaf `L` of free rank-one `Λ`-modules: `L` is locally constant, every stalk
-of `L` at a geometric point is free of rank one, and `ω_f ≅ L[2d]`. For every complex `K` on `Y`,
-the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`) is an isomorphism. -/
+/-- Smooth cohomological duality without a chosen orientation. Let `f : X ⟶ Y` be smooth,
+separated, compactifiable and of pure relative dimension `d`, let `Λ` be a finite ring whose
+exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`. Then `ω_f[-2d]` is a locally constant
+sheaf `L` of free rank-one `Λ`-modules, and for every complex `K` on `Y` the canonical map `ω_f
+⊗ᴸ Lf^* K ⟶ Rf^! K` is an isomorphism. -/
 theorem exists_dualizingComplex_iso_and_tensor_of_finite :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),

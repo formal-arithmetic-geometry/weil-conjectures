@@ -11,8 +11,9 @@ public import WeilConjectures.Algebra.Homology.TotalFreeFiltrationOddQuotientMap
 /-!
 # Degreewise bijectivity of the odd quotient map
 
-Source: Stacks Project, Tag 09KP, alternating column filtration.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-bijective)
+## References
+
+* Stacks Project, Tag 09KP, alternating column filtration.
 -/
 
 @[expose] public section
@@ -224,28 +225,7 @@ private lemma oddFullQuotientMap_surjective (j : ℕ) (k : ℤ) :
   change π ((step K S e h_positive (2 * j + 1)).f k y') = 0 at hzero
   rw [hzero, zero_add]
 
-/-- The descended odd quotient map is degreewise bijective.
-Source: Stacks Project, Tag 09KP, proof of lemma-resolve, successive quotients.
-(blueprint: lem-pc-derived-total-filtration-odd-quotient-bijective)
-
-Proof. Define a map from the total degree object to the third endpoint by
-projecting to column -j, applying e_j inverse, and applying (S j).g. The total
-coproduct universal property gives this map without any choice of vectors.
-It vanishes on the full columns with a<j and on every lower piece, using the
-short-complex zero relation when a=j. It therefore kills stage 2j+1.
-Restrict it to stage 2j+2 and descend through the evaluated cokernel, which is
-a cokernel since evaluation preserves colimits. Its composite with the
-full-column map is (S j).g. The factorization equation defining oddQuotientMap
-and epimorphy of (S j).g in every degree show that this projection is a left
-inverse to oddQuotientMap, proving injectivity. For surjectivity, prove directly
-from the supremum defining term that stage 2j+2 is contained in stage 2j+1
-plus the range of the full column -j. Lift a quotient vector along its
-surjective cokernel projection and decompose it into those two pieces. The
-first is killed by the projection, and the second comes from the full-column
-map. Its factorization through (S j).g gives a preimage under oddQuotientMap.
-No splitting, freeness, or zero endpoint differential is used. The arguments
-include j=0, zero modules, and the zero ring.
--/
+/-- The descended odd quotient map is degreewise bijective. -/
 theorem oddQuotientMap_bijective
     (h_exact : ∀ j, (S j).ShortExact) (j : ℕ) (k : ℤ) :
     Function.Bijective ((oddQuotientMap K S e h_positive h_exact j).f k) := by

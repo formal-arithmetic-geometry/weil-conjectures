@@ -22,8 +22,11 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 
 /-! Per-degree quasi-coherence for the Koszul normal determinant.
-Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0
-(blueprint: lem-sc-koszul-normal-determinant-term-qcoherent). -/
+
+## References
+
+* Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0.
+-/
 
 @[expose] public section
 
@@ -33,26 +36,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Each nonnegative term of the normal determinant complex is quasi-coherent.
-
-Source: Stacks Project, Duality for Schemes, Tags 0BQZ and 0BR0
-(blueprint: lem-sc-koszul-normal-determinant-term-qcoherent).
-
-Proof: Around a point of Z choose the affine neighbourhood in hregular and write
-A for its ring, I for the ideal and B for A/I. The pulled-back ideal sheaf is
-associated to I/I². Koszul regularity implies vanishing of first Koszul homology.
-Given a relation on the generator classes modulo I², subtract products of
-generators to lift it to a Koszul cycle. Expressing that cycle as a boundary
-shows that every coefficient lies in I. Together with generation of I this
-proves that the generator classes form a B-basis of I/I². The conormal and
-its internal dual are therefore finite locally free on Z. On the clopen
-rank-n stratum hr identifies their rank with n. The sectionwise exterior-power
-construction, followed by sheafification, gives the associated exterior power
-on these affine trivializations, hence a line bundle on that stratum. Direct
-image from a clopen subscheme is locally this line bundle or the zero sheaf,
-so it is quasi-coherent. Since n is nonnegative, this is the prescribed term.
-The empty stratum contributes zero; for n = 0 the empty wedge is the structure
-sheaf. Thus rank zero and the empty scheme are included. -/
+/-- Each nonnegative term of the normal determinant complex is quasi-coherent. -/
 theorem koszulRegularImmersion_dualizing_term {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsNoetherian Y] [IsClosedImmersion i]
     (hregular : ∀ z : Z, ∃ U : Y.affineOpens, i z ∈ U.1 ∧

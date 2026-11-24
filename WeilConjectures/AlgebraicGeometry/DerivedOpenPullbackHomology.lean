@@ -11,9 +11,6 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Cohomology of derived pullback along an open inclusion
-
-Source: the exact-open-restriction step of blueprint lem-pc-derived-single-open-locus.
-(blueprint: lem-pc-derived-open-pullback-homology).
 -/
 
 @[expose] public section
@@ -27,24 +24,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Derived open pullback cohomology is ordinary restriction of cohomology.
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, cohomology-sheaf gluing
-paragraph; step 3 of lem-pc-derived-single-open-locus, exactness of open restriction.
-(blueprint: lem-pc-derived-open-pullback-homology).
-
-Proof: tensor pullback along W.ι is naturally isomorphic to ordinary module
-pullback by uniqueness of left adjoints to pushforward. For an open immersion,
-ordinary pullback is naturally isomorphic to restrictFunctor W.ι and is exact.
-Represent E by a cochain complex G and take a K-flat resolution P → G. The
-specification of the chosen derivedPullback gives an invertible derived counit
-at P. Compose it with the localization and homotopy-quotient comparisons to
-identify the derived pullback of E with localized termwise tensor pullback of P.
-Exactness gives the homology comparison for this termwise functor. The localized
-resolution identifies H^n(P) with H^n(E). Finally the ordinary pullback/restriction
-comparison identifies the resulting sheaf with restriction of H^n(E).
-No boundedness, connectivity or quasi-coherence is required, and the argument
-works for every integer n and for the empty open. -/
+/-- Derived open pullback cohomology is ordinary restriction of cohomology. -/
 theorem nonempty_homology_derivedOpenPullback_iso_restrict
     {T : Scheme.{u}} (W : T.Opens)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings T.toRingedSpace))]

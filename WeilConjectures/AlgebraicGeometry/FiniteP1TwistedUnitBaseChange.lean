@@ -8,9 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Exchange for the twisted projective-line unit
-
-Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph; the mate-unit
-calculation in lem-sp-finite-p1-kummer-naturality, step 3.
 -/
 
 @[expose] public noncomputable section
@@ -425,23 +422,7 @@ private theorem p1Unit_eq (A : Type (u + 1)) [CommRing A] (N : ℕ)
     Functor.map_comp, Category.assoc]
   rfl
 
-/-- The twisted unit commutes with projective-line exchange over arbitrary bases.
-Source: blueprint lemma-cohomology-projective-line-trace, base-change paragraph, and
-lem-sp-finite-p1-kummer-naturality, step 3.
-(auxiliary; not a blueprint node).
-
-Proof: the roots comparison is unique since the kernel inclusion into G_m is
-monic. The pure-tensor generators then determine the coefficient-line comparison.
-Identify the normalized transport with the finite-twist transport, which satisfies
-composition. Applying the degree-zero and shift comparisons gives the commuting
-square of shifted-line comparisons around the projective-line square. The exact
-inverse-image square descends to derived categories, and its mate is the specified
-exchange. The mate-unit identity identifies the image of the q-unit followed by
-exchange with the q'-unit followed by the inverse-image square. Postcompose with
-the shifted-line transport and substitute its commuting square. Naturality of the
-q'-unit gives exactly the displayed equation. This uses neither invertibility of
-exchange nor a splitting. Normalization and the mate identity also apply to the
-empty scheme, the zero coefficient ring, and N=1. -/
+/-- The twisted unit commutes with projective-line exchange over arbitrary bases. -/
 theorem ordinaryFiniteP1_twisted_unit_baseChange
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

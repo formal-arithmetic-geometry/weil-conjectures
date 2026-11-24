@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionHomologyInt
 
 /-! # Integral and finite-level Tor bounds in the fixed presentations
 
-Source: blueprint latest, normalized-towers-reduction, final Tor-bound sentence;
-Stacks Tags 0651, 06YY, 08FZ.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0651, 06YY, 08FZ
 -/
 
 @[expose] public noncomputable section

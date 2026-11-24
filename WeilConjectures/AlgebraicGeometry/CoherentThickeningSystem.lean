@@ -11,8 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 
 /-! # Coherent systems on a tower of schemes
 
-Source: Stacks Project, Cohomology of Schemes, Remark 088F
-(blueprint: def-weil-pbc-coherent-thickening-system).
+Stacks Project, Tag 088F.
 
 The tower is indexed starting at zero. Its objects have coherent terms and pullback
 isomorphisms; its arrows are precisely compatible families of linear maps.
@@ -28,8 +27,8 @@ namespace AlgebraicGeometry
 
 set_option autoImplicit false
 
-/-- Coherent terms with pullback transition isomorphisms on a tower.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- Coherent terms with pullback transition isomorphisms on a tower
+(Stacks, Tag 088F). -/
 structure CoherentThickeningSystem (T : ℕ → Scheme.{u}) (i : ∀ n, T n ⟶ T (n + 1)) where
   term : ∀ n, (T n).Modules
   coherent : ∀ n, RingedSpace.IsCoherent (T n).toRingedSpace (term n)
@@ -39,16 +38,16 @@ namespace CoherentThickeningSystem
 
 variable {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}
 
-/-- Compatible families, with the equation in composition order.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- Compatible families, with the equation in composition order
+(Stacks, Tag 088F). -/
 structure Hom (F G : CoherentThickeningSystem T i) where
   app : ∀ n, F.term n ⟶ G.term n
   compatibility : ∀ n,
     (F.comparison n).hom ≫ app n =
       (Scheme.Modules.tensorPullback (i n)).map (app (n + 1)) ≫ (G.comparison n).hom
 
-/-- Identity families satisfy compatibility because pullback preserves identities.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- Identity families satisfy compatibility because pullback preserves identities
+(Stacks, Tag 088F). -/
 theorem id_compatibility (F : CoherentThickeningSystem T i) (n : ℕ) :
     (F.comparison n).hom ≫ 𝟙 (F.term n) =
       (Scheme.Modules.tensorPullback (i n)).map (𝟙 (F.term (n + 1))) ≫
@@ -56,8 +55,7 @@ theorem id_compatibility (F : CoherentThickeningSystem T i) (n : ℕ) :
   simp
 
 /-- Composition preserves compatibility: substitute the two compatibility equations,
-associate compositions and use preservation of composition by pullback.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+associate compositions and use preservation of composition by pullback (Stacks, Tag 088F). -/
 theorem comp_compatibility {F G H : CoherentThickeningSystem T i}
     (f : Hom F G) (g : Hom G H) (n : ℕ) :
     (F.comparison n).hom ≫ (f.app n ≫ g.app n) =
@@ -66,20 +64,19 @@ theorem comp_compatibility {F G H : CoherentThickeningSystem T i}
   rw [Functor.map_comp, ← Category.assoc, f.compatibility n]
   rw [Category.assoc, g.compatibility n, ← Category.assoc]
 
-/-- The identity compatible family.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- The identity compatible family
+(Stacks, Tag 088F). -/
 def identity (F : CoherentThickeningSystem T i) : Hom F F :=
   ⟨fun n ↦ 𝟙 (F.term n), id_compatibility F⟩
 
-/-- Componentwise composition of compatible families.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- Componentwise composition of compatible families
+(Stacks, Tag 088F). -/
 def composition {F G H : CoherentThickeningSystem T i} (f : Hom F G) (g : Hom G H) :
     Hom F H :=
   ⟨fun n ↦ f.app n ≫ g.app n, comp_compatibility f g⟩
 
-/-- Category laws hold componentwise; the module category laws give each equality,
-and equality of families gives equality of compatible arrows by proof irrelevance.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- Category laws hold componentwise
+(Stacks, Tag 088F). -/
 theorem category_laws :
     (∀ (F G : CoherentThickeningSystem T i) (f : Hom F G),
       composition (identity F) f = f) ∧
@@ -100,8 +97,8 @@ theorem category_laws :
     cases h
     simp only [composition, Category.assoc]
 
-/-- The category of coherent systems, with exactly the compatible families as arrows.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- The category of coherent systems, with exactly the compatible families as arrows
+(Stacks, Tag 088F). -/
 instance category : Category (CoherentThickeningSystem T i) where
   Hom := Hom
   id := identity
@@ -110,8 +107,8 @@ instance category : Category (CoherentThickeningSystem T i) where
   comp_id := fun {F G} f ↦ category_laws.2.1 F G f
   assoc := fun {F G H K} f g h ↦ category_laws.2.2 F G H K f g h
 
-/-- Evaluation at a level, sending a compatible family to its component.
-Source: Stacks, Remark 088F (blueprint: def-weil-pbc-coherent-thickening-system). -/
+/-- Evaluation at a level, sending a compatible family to its component
+(Stacks, Tag 088F). -/
 def evaluation (T : ℕ → Scheme.{u}) (i : ∀ n, T n ⟶ T (n + 1)) (n : ℕ) :
     CoherentThickeningSystem T i ⥤ (T n).Modules where
   obj F := F.term n

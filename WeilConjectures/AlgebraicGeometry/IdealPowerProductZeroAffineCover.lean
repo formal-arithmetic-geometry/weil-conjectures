@@ -17,8 +17,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Detecting vanishing of an ideal-power product on an affine cover
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01Y9, and
-Schemes, Lemma 01I8 (blueprint: lem-weil-pbc-ideal-power-product-zero-affine-cover).
+## References
+
+* Stacks Project, Tags 01Y9 and 01I8
 -/
 
 @[expose] public section
@@ -68,22 +69,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- An ideal-power product of a quasi-coherent module vanishes if and only if the
 corresponding powers of ideals of affine sections annihilate the section modules
 on an affine open cover. Neither finiteness nor Noetherianity is needed here.
-
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 01Y9; Schemes,
-Lemma 01I8 (blueprint: lem-weil-pbc-ideal-power-product-zero-affine-cover).
-
-Proof: On each affine open identify the ideal and module with the tilde sheaves
-of their sections by the tilde/global-sections adjunction. The tensor comparison
-and preservation of images identify the product with the tilde of I^t M; induction
-on t identifies the power with I^t. For t = 0 the power inclusion is the identity
-of the structure sheaf, and multiplication is the left unitor, so the product is M.
-The submodule I^t M is zero exactly when every element of I^t annihilates every
-section, equivalently I^t is contained in Ann(M). A quasi-coherent sheaf on an
-affine is zero exactly when its section module is zero, by the counit isomorphism
-and preservation of zero by tilde. Finally a sheaf zero on an open cover is zero:
-restrict any section to its intersections with the covering opens and use the
-uniqueness clause of the sheaf axiom. The reverse implication follows by restricting
-a zero sheaf. This also covers an empty cover of the empty scheme. -/
+(Stacks, Tags 01Y9 and 01I8) -/
 theorem idealPowerProduct_isZero_iff_affine_cover (X : Scheme.{u})
     (F : X.Modules) [F.IsQuasicoherent] (K : X.IdealSheafData)
     (S : Set X.affineOpens) (hS : ∀ x : X, ∃ U ∈ S, x ∈ U.1) (t : ℕ) :

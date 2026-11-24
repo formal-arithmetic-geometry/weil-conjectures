@@ -11,7 +11,9 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # The inverse ordinary base-change square on quasi-coherent derived categories
 
-Source: Stacks Project, Tag 0AA6, equation-base-change-map.
+## References
+
+* Stacks Project, Tag 0AA6.
 -/
 
 @[expose] public section
@@ -44,16 +46,14 @@ private theorem secondMate_formula
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-/-- Derived pullback restricted to quasi-coherent objects. 
-(blueprint: lem-sc-duality-base-change-inverse-square-mate)
+/-- Derived pullback restricted to quasi-coherent objects.
 -/
 noncomputable abbrev qcPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (schemeDerivedQCohProperty X).lift
     ((schemeDerivedQCohProperty Y).ι ⋙ derivedPullback f)
     (fun E ↦ (derivedPullback_tensor_preserve_QCoh f).1 E.obj E.property)
 
-/-- Derived direct image restricted to quasi-coherent objects. 
-(blueprint: lem-sc-duality-base-change-inverse-square-mate)
+/-- Derived direct image restricted to quasi-coherent objects.
 -/
 noncomputable abbrev qcDirectImage {X Y : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -62,8 +62,7 @@ noncomputable abbrev qcDirectImage {X Y : Scheme.{u}}
     ((schemeDerivedQCohProperty X).ι ⋙ schemeDerivedDirectImage f)
     (fun E ↦ (schemeDerivedDirectImage_qcqs_hasRightAdjoint X Y f).fst E.obj E.property)
 
-/-- The ordinary base-change transformation on the full quasi-coherent subcategories. 
-(blueprint: lem-sc-duality-base-change-inverse-square-mate)
+/-- The ordinary base-change transformation on the full quasi-coherent subcategories.
 -/
 noncomputable def qcBaseChange {X Y S : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -119,8 +118,7 @@ noncomputable def qcBaseChange {X Y S : Scheme.{u}}
           rfl
         exact gen _ _ _ _ }
 
-/-- The inverse ordinary base-change square. 
-(blueprint: lem-sc-duality-base-change-inverse-square-mate)
+/-- The inverse ordinary base-change square.
 -/
 noncomputable def qcInverseBaseChange {X Y S : Scheme.{u}}
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
@@ -140,21 +138,8 @@ noncomputable def qcInverseBaseChange {X Y S : Scheme.{u}}
   have : IsIso β := NatIso.isIso_of_isIso_app β
   exact inv β
 
-/-- The fixed second mate is the mate of the inverse ordinary base-change square.
-Source: Stacks Project, Tag 0AA6, equation-base-change-map.
-(blueprint: lem-sc-duality-base-change-inverse-square-mate)
-
-Proof: Restrict the pinned pullback/direct-image adjunctions to the full
-quasi-coherent subcategories. Apply the iterated mates identity to the ordinary
-base-change transformation: its iterated mate is its conjugate under the two
-composite adjunctions. Conjugation carries the inverse ordinary transformation
-to the inverse conjugate. Taking its inverse mate under the two pullback
-adjunctions gives pullback of a applied to the base unit, followed by pullback
-of the inverse conjugate, followed by the upper counit. This is precisely the
-fixed definition. The other order of the same iterated mates correspondence
-is the mate of the inverse ordinary square under the direct-image/right-adjoint
-adjunctions. Thus their components agree, with no assumption on invertibility
-of the second mate. The argument is valid also for zero objects and empty schemes. -/
+/-- The fixed second mate is the mate of the inverse ordinary base-change square
+(Stacks, Tag 0AA6). -/
 theorem dualityEquationBaseChangeMap_eq_inverseSquareMate
     {X Y Y' : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     [CompactSpace Y] [QuasiSeparatedSpace Y] [CompactSpace Y'] [QuasiSeparatedSpace Y']

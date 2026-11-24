@@ -10,20 +10,20 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.Quotient.Defs
 import Mathlib.LinearAlgebra.Isomorphisms
 
+/-! # Kernel and cokernel of a diagonal normal form
+
+## References
+
+* Stacks Project, Tag 00O0 (kernel and cokernel computation after the unit-minor operations)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe v
 namespace ModuleCat
 
-/-- Computing the kernel and cokernel of an actual diagonal normal form.
-
-Source: Stacks Project, Tag 00O0, the kernel and cokernel computation after the
-unit-minor operations. Proof: a vector is in the kernel precisely when its U
-coordinate is zero and its last coordinate is in ker g. The source equivalence
-therefore identifies ker g with ker f. Project the target along eY onto C/range g.
-This map is onto, and its kernel consists precisely of vectors whose C coordinate
-is g(a), hence precisely the image of f. The first isomorphism theorem finishes.
-(blueprint: new-residue-kernel-unit-minor-quotient) -/
+/-- The kernel and cokernel of a map in diagonal normal form: `ker g ≃ ker f` and
+`Y ⧸ range f ≃ C ⧸ range g`. -/
 theorem residue_kernel_unit_minor_quotient
     (A : Type v) [CommRing A] (X Y U C : ModuleCat.{v} A)
     (f : X →ₗ[A] Y) (g : A →ₗ[A] C)

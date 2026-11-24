@@ -16,9 +16,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ComplementaryTrunc
 
 /-! The complete-to-unit direction of the extended Cech criterion.
 
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(blueprint: lem-weil-pbc-extended-cech-complete-implies-unit-isIso).
-
 Proof: for one section, apply contravariant derived internal Hom to the degreewise
 split sequence O[1/s][-1] → [O → O[1/s]] → O. Vanishing on the localization makes
 precomposition by the augmentation invertible. Tensor–Hom currying and the K-flatness
@@ -27,6 +24,10 @@ For a complete object, the required vanishing holds for each member of every loc
 generating list. The augmented local description and internal-Hom restriction
 comparison identify the actual augmentation maps. Invertibility descends along the
 generating cover; composition with evaluation at one gives the specified unit.
+
+## References
+
+* Stacks Project, Tags 099B and 099F
 -/
 
 @[expose] public section
@@ -374,10 +375,8 @@ private theorem derived_isIso_of_cover
   have := hsheaf
   exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf R)
 
-/-- A locally derived complete object has invertible augmented extended Cech unit.
-
-Source: Stacks Project, algebraization.tex, Tags 099B and 099F.
-(blueprint: lem-weil-pbc-extended-cech-complete-implies-unit-isIso). -/
+/-- A locally derived complete object has invertible augmented extended Cech unit
+(Stacks, Tags 099B and 099F). -/
 theorem ringedExtendedCech_complete_implies_unit_isIso
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (O : Sheaf J CommRingCat.{u})

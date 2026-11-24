@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Comparison of the two constant coefficient module constructions
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YY and 094I.
+## References
+
+* Stacks Project, Tags 06YY and 094I
 -/
 
 @[expose] public section
@@ -198,17 +200,7 @@ private theorem compare_of_iso
         (cancel.app (((constantCoefficientModule T B).obj M).over U))
 
 /-- The finite local constant-module descriptions formed by sheafifying in
-commutative rings agree with those formed in rings. Source: Stacks Project,
-Modules on Sites, Tag 093U; Cohomology on Sites, Tag 094I
-(auxiliary; not a blueprint node).
-
-Proof: forgetting commutativity commutes with sheafification. The resulting
-constant-ring isomorphism intertwines the two sheafification units. The module
-sheafification adjunction then identifies the two constant-module constructions
-after transporting coefficients. This identification is an isomorphism because
-its underlying additive-group sheaf map is the identity. Restriction of scalars
-commutes with slices and is an equivalence for a ring-sheaf isomorphism, so transport
-each local constant finite-module trivialization in either direction. -/
+commutative rings agree with those formed in rings (Stacks, Tags 093U and 094I). -/
 theorem exists_constantCoefficientRing_localModels_comparison
     {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)
     (B : Type u) [CommRing B] :

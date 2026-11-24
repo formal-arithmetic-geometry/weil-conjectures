@@ -62,8 +62,11 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Flat-term successive quotient tensor sequences
 
-Source: blueprint main-20261015, integral criterion reductions, second paragraph;
-Stacks Project, Modules on Sites, Tags 03DA, 03EK, 03ER.
+## References
+
+* Stacks Project, Tag 03DA
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 03ER
 -/
 
 -- After pruning, this module only keeps private declarations.

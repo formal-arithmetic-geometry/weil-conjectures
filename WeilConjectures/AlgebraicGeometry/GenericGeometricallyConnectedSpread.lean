@@ -15,8 +15,9 @@ import WeilConjectures.AlgebraicGeometry.GenericFibreIncidenceSpread
 /-!
 # Spreading geometric connectedness of a generic fibre
 
-Source: Stacks Project, Tag 055G (lemma-geometrically-connected-generic-fibre).
-(blueprint: lem-sbc-generic-geometrically-connected-spread)
+## References
+
+* Stacks, Tag 055G
 -/
 
 @[expose] public section
@@ -60,26 +61,7 @@ private theorem finite_closed_cover_paths {T : Type*} [TopologicalSpace T]
   exact hl (hk.tail ⟨z, hzk, hzl⟩)
 
 /-- A finite type family with geometrically connected generic fibre has geometrically
-connected fibres on an open neighbourhood of the generic point.
-
-Source: Stacks Project, Tag 055G, lemma-geometrically-connected-generic-fibre.
-Proof: after a finite extension of the generic field and shrinking the base, arrange
-that the finitely many generic irreducible components are geometrically irreducible.
-This change of base is open and surjective over an open, so geometric connectedness
-of fibres descends. Reduce the base. Take closures of the generic components.
-Shrink so these closures cover the total space and so pairs having empty generic
-intersection are disjoint. Shrink again so every component has geometrically
-irreducible fibres. For each pair with nonempty generic intersection, generic
-flatness makes that intersection flat and finitely presented after further
-shrinking; its image is then open and contains the generic point. Intersect these
-finitely many images. The graph of nonempty intersections of the generic components
-is connected because the generic fibre is connected. On the resulting open, after
-any separably closed field extension each component is irreducible and this same
-connected graph of intersections persists. Their union is therefore connected.
-Descent returns a nonempty open in the original base, which contains its generic
-point by irreducibility. The argument also covers a single generic component.
-
-(blueprint: lem-sbc-generic-geometrically-connected-spread) -/
+connected fibres on an open neighbourhood of the generic point (Stacks, Tag 055G). -/
 theorem exists_open_geometricallyConnected_fibres_of_generic {X S : Scheme.{u}}
     [IrreducibleSpace S] (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f]
     (hη : GeometricallyConnected (f.fiberToSpecResidueField (genericPoint S))) :

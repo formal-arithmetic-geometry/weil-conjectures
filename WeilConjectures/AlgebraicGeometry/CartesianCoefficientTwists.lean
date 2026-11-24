@@ -153,8 +153,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # Cartesian coefficients and Tate twists
 
-md`
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
+md`.
 -/
 
 @[expose] public noncomputable section
@@ -473,14 +472,7 @@ private theorem sectionRingPullbackIso_ofMonHom
   exact sectionRingPullbackIso_existsUnique f RY RX α eta
     (fun V a ↦ congrArg (fun q ↦ q.hom.app V a) heta) (liftRingSheafMap f _ _ φ) hφ
 
-/-- The ring-sheaf encoding of alpha is uniquely fixed by its abelian adjunct.
-Source: blueprint coefficient compatibility, lemma-inverse-image-coefficient-sheaves--1
-(blueprint: lemma-inverse-image-coefficient-sheaves--2).
-Proof: reconstruct section rings from the internal multiplication. The coefficient
-adjunct is a ring homomorphism since condensedPullbackHom is monoidal. Lift the
-abelian adjunction to ring objects. Its adjunct determines the map uniquely, and
-alpha is invertible by lemma-inverse-image-coefficient-sheaves--1; forgetting reflects
-isomorphisms. -/
+/-- The ring-sheaf encoding of alpha is uniquely fixed by its abelian adjunct. -/
 theorem spCoefficientIso_existsUnique
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] :

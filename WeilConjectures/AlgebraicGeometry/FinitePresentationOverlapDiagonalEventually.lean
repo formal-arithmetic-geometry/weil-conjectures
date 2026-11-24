@@ -16,8 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 
 /-! # Persistent eventual diagonal overlap equation
 
-Source: Stacks Project, Tags 01ZR and 05N7.
-(blueprint: lem-pc-fp-overlap-diagonal-eventually). -/
+## References
+
+* Stacks Project, Tags 01ZR and 05N7
+-/
 
 @[expose] public section
 
@@ -103,22 +105,7 @@ private lemma refinement_comp
 set_option linter.unusedVariables false in
 /-- The identity defect of a single cover chart vanishes eventually, and remains
 zero at every later stage.
-Source: Stacks Project, Tag 01ZR (3), finite-type zero-map descent.
-(blueprint: lem-pc-fp-overlap-diagonal-eventually).
-
-Proof: On the chart at k subtract the identity from its self transition. Its source
-and target are pullbacks of the prescribed finitely presented quasi-coherent module,
-up to the supplied component isomorphism. The source is therefore of finite type.
-The chart is quasi-compact over Spec(R_k), as an affine chart base changed along
-an affine map. The identity-base-change comparison identifies this defect with a
-map to which finitePresentation_zero_map_descent applies. Naturality of transitions,
-the pullback composition comparisons, and limit coherence show that its limit
-pullback is zero. Zero-map descent gives l. At any m above l the defect is still
-zero since pullback is additive. The canonical chart refinement maps compose,
-by the pullback universal property, and pseudofunctor associativity identifies
-this pullback defect with the self transition of the prescribed T' minus identity.
-Thus the displayed equation holds. This also handles zero modules and empty charts;
-the theorem is only invoked for an actual cover index. -/
+(Stacks, Tag 01ZR) -/
 theorem finitePresentation_overlap_diagonal_eventually
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

@@ -14,7 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 
 /-! # Evaluation of a specified normalized Isom presheaf map
 
-Source: Stacks Project, Tags 09BV and 0F63; functoriality of comparison and evaluation.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09BV, 0F63, 03DA, 03ED, 098K
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +26,7 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-/-- Pull a coefficient-normalization arrow to an etale object, using the canonical mate.
-Source: Stacks Tags 03DA and 03ED.
-(blueprint: def-weil-pbc-etale-isomorphism-normalization-arrow). -/
+/-- Pull a coefficient-normalization arrow to an etale object, using the canonical mate. -/
 def etaleIsomorphismNormalizationArrow (Y : Scheme.{t})
     {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     {C : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R))}
@@ -526,23 +526,7 @@ end EvaluationHelpers
 namespace AlgebraicGeometry.Scheme
 
 /-- Evaluation respects an already specified presheaf map whose generators satisfy
-normalization. This is a preservation statement: it constructs neither a reduction map
-nor normalization universal arrows, and assumes no finite, perfect, or lisse objects.
-
-Source: Stacks Project, Tags 09BV and 0F63, with the canonical coefficient mate of
-Tags 03DA and 098K.
-(blueprint: lem-weil-pbc-source-isomorphism-normalized-presheaf-evaluation).
-
-Proof: the equation on etale generators is an equality of maps of the Isom presheaves
-into the presheaf of morphisms with restricted coefficients. Sheafify that equality and
-apply comparison inverse image. On a weakly contractible affine the pro-etale
-sheafification unit is invertible. Its inverse commutes with presheaf maps, by naturality
-of the unit. Thus evaluation commutes with the given presheaf map and with the two
-compositions in its generator equation. Slice-to-source localization carries coefficient
-restriction to the canonical coefficient mate; pasting comparison and restriction mates
-identifies the resulting arrows with localProEtaleNormalization. Transport the equality
-through these localization isomorphisms to obtain the displayed square. No bijectivity of
-comparison on arbitrary sections, local existence of isomorphisms, or cover is used. -/
+normalization. -/
 theorem sourceIsomorphism_normalized_presheaf_evaluation
     (Y : Scheme.{t}) {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S)
     (C K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{t + 1} R)))

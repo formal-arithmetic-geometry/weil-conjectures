@@ -19,8 +19,9 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 /-!
 # Refining an already chosen complex to flat terms with proper support
 
-Source: Stacks Project, Tags 05LY, 081G and 0CYS; tensor pullback functoriality.
-(blueprint: lem-pc-chosen-complex-flat-proper-refinement).
+## References
+
+* Stacks Project, Tags 05LY, 081G and 0CYS
 -/
 
 @[expose] public section
@@ -66,32 +67,9 @@ private theorem zero_flat_proper {X S : Scheme.{u}} (f : X ⟶ S)
       infer_instance
 
 /-- Refine an already chosen bounded finitely presented complex at stage `j`.
-This statement does not descend a complex from the limit: the entire finite-stage
-complex `H`, including its differentials, is an input. Its limit pullback is assumed
-flat with proper support. The output identifies the new limit pullback with the
-pullback of this particular `H`, compatibly with all differentials.
-
-Source: Stacks Project, Limits of Schemes, Tag 05LY and Tag 081G; Cohomology of
-Schemes, Tag 0CYS; pullback pasting and tensor pullback functoriality.
-(blueprint: lem-pc-chosen-complex-flat-proper-refinement).
-
-Proof: choose bounds `a,b` for `H`. For each degree in the finite integer interval
-`[a,b]`, regard its term as a finitely presented module on `X_j`. Pullback pasting
-identifies its limit pullback with the displayed module base change. Tag 05LY gives
-a stage where that chosen term is flat, and Tag 081G gives a stage where its support
-is proper, using Tag 0CYS to interpret proper support. Both properties persist under
-further base change. Choose one common upper bound of `j` and these finitely many
-stages by directedness. Outside the interval the terms are zero, with flat sections
-and empty proper support, so impose no additional stage condition. Pull back `H`
-to this common stage using the additive tensor pullback functor on complexes.
-Pullback preserves zero objects and finite presentation, so this complex is bounded
-and finitely presented. Its terms are flat with proper support by the choice of stage.
-The composition isomorphism of tensor pullback, together with pullback pasting,
-identifies its limit pullback with that of `H`; naturality gives the equation for each
-differential. If the interval is empty, take `j` itself. For a preorder, restrict to a final
-directed poset in its thin filtered category (Tag 0032); finality preserves the limit.
-Apply the directed-poset argument there and return the resulting stage through the
-final functor. Thus antisymmetry is not an assumption. -/
+The finite-stage complex `H` is an input, and its limit pullback is assumed flat with
+proper support. The output identifies the new limit pullback with the pullback of `H`,
+compatibly with all differentials (Stacks, Tags 05LY, 081G and 0CYS). -/
 theorem exists_chosen_complex_flat_proper_refinement
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)]

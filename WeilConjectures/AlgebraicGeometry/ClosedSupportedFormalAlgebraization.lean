@@ -13,8 +13,10 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 
 /-! # Transporting algebraization along a closed immersion
-Source: Stacks Project, Theorem 088E, first paragraph, and Lemma 087T.
-(blueprint: lem-weil-pbc-closed-supported-formal-algebraization).
+
+## References
+
+* Stacks Project, Tags 088E and 087T
 -/
 
 @[expose] public section
@@ -27,16 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-/-- Essential surjectivity on a closed subscheme algebraizes supported formal modules.
-Source: Stacks Project, Theorem 088E, first paragraph, using Tags 087T and 088A.
-(blueprint: lem-weil-pbc-closed-supported-formal-algebraization).
-Proof: The formal closed-immersion equivalence lifts M, with its annihilation proof,
-to a coherent formal module on Z for K.comap j. Essential surjectivity of completion
-on Z supplies a coherent module G and a completion isomorphism. Closed pushforward
-preserves coherence. The natural completion comparison for closed pushforward,
-followed by pushforward of the algebraization isomorphism and the equivalence's
-counit, gives the displayed isomorphism on X. All choices occur inside an existence
-proof; no module is defined by an arbitrary unproved existence witness. -/
+/-- Essential surjectivity on a closed subscheme algebraizes supported formal modules
+(Stacks, Tags 088E, 087T and 088A). -/
 theorem closedSupported_formal_algebraization
     {X Z : Scheme.{u}} [IsNoetherian X] (j : Z ⟶ X) [IsClosedImmersion j]
     (K : X.IdealSheafData)

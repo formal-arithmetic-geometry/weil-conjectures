@@ -11,8 +11,9 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-! # Construction of the symmetric algebra sheaf
 
-Source: Stacks Project, Modules, Lemma 01CG (lemma-local-tensor-algebra).
-(blueprint: lem-weil-pbc-symmetric-algebra-sheaf-construction).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tag 01CG
 -/
 
 @[expose] public section

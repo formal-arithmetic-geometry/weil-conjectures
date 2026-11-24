@@ -24,14 +24,13 @@ import WeilConjectures.CategoryTheory.Sites.TorsionSheafConstantModule
 /-!
 # Derived reduction of an extension by a divisible sheaf
 
-Source: the Cartier unit proof, paragraphs 4 and 5, in blueprint main-20261015;
-Stacks Tags 06YU, 06YV, 06YY, 0152, 09T5 and 0FND
-(auxiliary; not a blueprint node).
 Kernel and quotient objects are specified by their short exact sequences, including
 existence of their residue-coefficient structures. The normalized identifications are
 unique, so the definition of the reduced boundary makes no arbitrary choice of map.
-The normalized sheaf scalar adjunction is an item helper; the general internal-module
-derived extension of scalars remains the recorded dependency interface.
+
+## References
+
+* Stacks Project, Tags 06YU, 06YV, 06YY, 0152, 09T5 and 0FND
 -/
 
 @[expose] public section
@@ -39,11 +38,9 @@ set_option autoImplicit false
 universe u v r wZ wR u' v' wZ' wR'
 open CategoryTheory CategoryTheory.Limits
 
-/-- An extension together with its residue kernel and quotient presentations.
-Source: Cartier proof, paragraph 4
-(auxiliary; not a blueprint node).
-The three short exact sequences specify the extension, the kernel of multiplication
-by n on its first term, and the cokernel of multiplication by n on its last term. -/
+/-- An extension together with its residue kernel and quotient presentations: the three short
+exact sequences specify the extension, the kernel of multiplication by `n` on its first term,
+and the cokernel of multiplication by `n` on its last term. -/
 structure CategoryTheory.ScalarReductionPresentation
     {A B : Type*} [Category* A] [Category* B] [Preadditive A]
     (R : B ⥤ A) (n : ℕ) where
@@ -58,11 +55,8 @@ structure CategoryTheory.ScalarReductionPresentation
   kummer : (ShortComplex.mk i (n • 𝟙 S.X₁) wi).ShortExact
   quotient : (ShortComplex.mk (n • 𝟙 S.X₃) p wp).ShortExact
 
-/-- Two scalar-reduction identifications characterized by their adjunction units.
-Source: Cartier proof, paragraph 4
-(auxiliary; not a blueprint node).
-The quotient unit and Kummer unit equations record the complete normalization,
-including the degree-one target and its sign. -/
+/-- Two scalar-reduction identifications characterized by their adjunction units, including
+the degree-one target and its sign. -/
 structure CategoryTheory.NormalizedReductionIdentifications
     {A B : Type*} [Category* A] [Category* B] [HasShift B ℤ]
     (L : A ⥤ B) (R : B ⥤ A) (X₁ X₃ : A) (H Q : B) (Z : A)
@@ -339,10 +333,7 @@ private theorem scalarForget_preservesFiniteColimits (A : Sheaf J RingCat.{r}) :
 
 set_option linter.unusedSectionVars false in
 /-- Restriction is exact: it retains the underlying abelian sheaf.
-Source: Stacks 03D7 and 015F (auxiliary; not a blueprint node).
-Proof: kernels are sectionwise kernels with restricted action. Cokernels are the
-sheafifications of the same abelian presheaf quotients on both sides. Restriction
-therefore preserves kernels and cokernels, hence all finite limits and colimits. -/
+(Stacks, Tags 03D7 and 015F) -/
 theorem sheafScalarRestriction_exact :
     PreservesFiniteLimits (restrictScalars.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)) ∧
@@ -362,14 +353,14 @@ theorem sheafScalarRestriction_exact :
     preservesFiniteColimits_of_reflects_of_preserves res (toSheaf Z')⟩
 
 /-- Exact restriction preserves finite limits.
-Source: Stacks 015F (auxiliary; not a blueprint node). -/
+(Stacks, Tag 015F) -/
 noncomputable instance sheafScalarRestrictionLimits :
     PreservesFiniteLimits (restrictScalars.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)) :=
   (sheafScalarRestriction_exact q).1
 
 /-- Exact restriction preserves finite colimits.
-Source: Stacks 015F (auxiliary; not a blueprint node). -/
+(Stacks, Tag 015F) -/
 noncomputable instance sheafScalarRestrictionColimits :
     PreservesFiniteColimits (restrictScalars.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)) :=
@@ -902,17 +893,7 @@ private theorem ordinary_scalar_adjunction_exists :
 -- Keep normalization comparisons from unfolding the sheafification implementation.
 set_option backward.isDefEq.respectTransparency true in
 /-- The ordinary and derived adjunctions, including both unit normalizations.
-Source: Stacks 03D7, 015F, 09T5, 0FND
-(auxiliary; not a blueprint node).
-Proof: the sectionwise tensor/restriction adjunction sends m to 1 tensor m;
-sheafification extends it uniquely and gives the first equation. Exactness of
-restriction identifies its right derived functor with termwise restriction.
-Apply the derived-adjoint-functors theorem to the universal pair D. On a K-flat
-complex the ordinary unit has ordinary adjunct the identity. The pre-derived
-adjunction formula therefore has derived adjunct the identity as well. This is
-exactly the second equation, using D's universal counit and the localization
-comparison for restriction. K-flat resolutions extend this formula to every
-object, independently of its representative. -/
+(Stacks, Tags 03D7, 015F, 09T5, 0FND) -/
 theorem sheafDerivedScalarAdjunction_exists :
     ∃ a : D.E ⊣ restrictScalars.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q),
@@ -950,21 +931,20 @@ theorem sheafDerivedScalarAdjunction_exists :
   exact ⟨ad, fun K _ ↦ had K⟩
 
 /-- The ordinary adjunction determined by its sectionwise unit.
-Source: Stacks 03D7 (auxiliary; not a blueprint node). -/
+(Stacks, Tag 03D7) -/
 noncomputable def sheafScalarOrdinaryAdjunction : D.E ⊣ restrictScalars.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q) :=
   Classical.choose (sheafDerivedScalarAdjunction_exists q D)
 
 /-- The derived adjunction determined by its K-flat unit normalization.
-Source: Stacks 09T5 and 0FND (auxiliary; not a blueprint node). -/
+(Stacks, Tags 09T5 and 0FND) -/
 noncomputable def sheafScalarDerivedAdjunction : D.T ⊣ (restrictScalars.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map q)).mapDerivedCategory :=
   Classical.choose (Classical.choose_spec (sheafDerivedScalarAdjunction_exists q D)).2
 
 /-- The canonical shift comparison, induced from exact restriction by the normalized
-adjunction. This fixes compatibility with its unit, instead of choosing an unrelated
-triangulated shift structure. Source: Stacks 06YY and 09T5
-(auxiliary; not a blueprint node). -/
+adjunction.
+(Stacks, Tags 06YY and 09T5) -/
 private theorem scalar_derived_unit
     (P : CochainComplex
       (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J Z)) ℤ)
@@ -993,51 +973,49 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
 
-/-- The constant integer ring sheaf. Source: Stacks 06YU and the Cartier proof,
-paragraph 4 (auxiliary; not a blueprint node). -/
+/-- The constant integer ring sheaf.
+(Stacks, Tag 06YU) -/
 noncomputable abbrev integers :=
   (constantSheaf J CommRingCat.{r}).obj (CommRingCat.of (ULift.{r} ℤ))
 
-/-- The constant residue ring sheaf. Source: Stacks 06YU and the Cartier proof,
-paragraph 4 (auxiliary; not a blueprint node). -/
+/-- The constant residue ring sheaf.
+(Stacks, Tag 06YU) -/
 noncomputable abbrev residues (n : ℕ) :=
   (constantSheaf J CommRingCat.{r}).obj (CommRingCat.of (ULift.{r} (ZMod n)))
 
 /-- The actual constant coefficient projection, induced by integer reduction.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+(Stacks, Tag 06YU) -/
 noncomputable def projection (n : ℕ) : integers J ⟶ residues J n :=
   (constantSheaf J CommRingCat.{r}).map (CommRingCat.ofHom
     (ULift.ringEquiv.symm.toRingHom.comp
       ((Int.castRingHom (ZMod n)).comp ULift.ringEquiv.toRingHom)))
 
 /-- Integer module sheaves, using the recorded general ringed-site category.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+(Stacks, Tag 06YU) -/
 noncomputable abbrev Integral :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J (integers J))
 
 /-- Residue module sheaves, using the recorded general ringed-site category.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+(Stacks, Tag 06YU) -/
 noncomputable abbrev Residue (n : ℕ) :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J (residues J n))
 
 /-- Ordinary restriction along the actual coefficient projection.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+(Stacks, Tag 06YY) -/
 noncomputable abbrev restriction (n : ℕ) : Residue J n ⥤ Integral J :=
   restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map
     (projection J n))
 
-/-- The unit integer sheaf, as a module over itself.
-Source: Cartier proof, paragraph 5 (auxiliary; not a blueprint node). -/
+/-- The unit integer sheaf, as a module over itself. -/
 noncomputable abbrev integerUnit : Integral J :=
   unit (derivedChangeRingIndependentCoefficients J (integers J))
 
-/-- The unit residue sheaf, as a module over itself.
-Source: Cartier proof, paragraph 5 (auxiliary; not a blueprint node). -/
+/-- The unit residue sheaf, as a module over itself. -/
 noncomputable abbrev residueUnit (n : ℕ) : Residue J n :=
   unit (derivedChangeRingIndependentCoefficients J (residues J n))
 
 /-- The ordinary coefficient unit sends 1 to 1 and is induced by the constant ring map.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+(Stacks, Tag 06YU) -/
 noncomputable def coefficientUnit (n : ℕ) :
     integerUnit J ⟶ (restriction J n).obj (residueUnit J n) :=
   ((restriction J n).obj (residueUnit J n)).unitHomEquiv.symm
@@ -1048,9 +1026,7 @@ variable {J} (n : ℕ)
 
 /-- An extension and presentations of its torsion and quotient sheaves.
 The two additional short exact sequences specify precisely ker(n on B), its natural
-residue action, and coker(n on F); they also express epimorphy on B and monicity on F.
-Source: Cartier proof, paragraph 4
-(auxiliary; not a blueprint node). -/
+residue action, and coker(n on F); they also express epimorphy on B and monicity on F. -/
 abbrev Presentation := CategoryTheory.ScalarReductionPresentation (restriction J n) n
 
 set_option backward.isDefEq.respectTransparency false
@@ -1308,17 +1284,17 @@ variable [HasDerivedCategory.{wZ} (Integral J)]
   (D : DerivedChangeOfRingsCochainModel (projection J n))
 
 /-- Termwise derived restriction.
-Source: Stacks 015F (auxiliary; not a blueprint node). -/
+(Stacks, Tag 015F) -/
 noncomputable abbrev derivedRestriction := (restriction J n).mapDerivedCategory
 
 /-- The normalized derived scalar unit on an integer module sheaf.
-Source: Stacks 09T5, 0FND (auxiliary; not a blueprint node). -/
+(Stacks, Tags 09T5, 0FND) -/
 noncomputable def eta (A : Integral J) :=
   (sheafScalarDerivedAdjunction (projection J n) D).unit.app
     ((DerivedCategory.singleFunctor (Integral J) 0).obj A)
 
 /-- The canonical Kummer boundary, with termwise restriction and single comparison.
-Source: Stacks 0152 (auxiliary; not a blueprint node). -/
+(Stacks, Tag 0152) -/
 noncomputable def kappa (P : Presentation (J := J) n) :=
   P.kummer.singleδ ≫
     (((restriction J n).mapDerivedCategorySingleFunctor 0).inv.app P.H)⟦(1 : ℤ)⟧' ≫
@@ -1327,8 +1303,7 @@ noncomputable def kappa (P : Presentation (J := J) n) :=
 
 /-- Normalized reduction identifications. The quotient isomorphism induces the actual
 quotient projection on units; the torsion isomorphism induces the Kummer boundary.
-Source: Cartier proof, paragraphs 4 and 5; Stacks 06YY and 0152
-(auxiliary; not a blueprint node). -/
+(Stacks, Tags 06YY and 0152) -/
 abbrev Identifications (P : Presentation (J := J) n) :=
   CategoryTheory.NormalizedReductionIdentifications D.T (derivedRestriction n)
     ((DerivedCategory.singleFunctor (Integral J) 0).obj P.S.X₁)
@@ -1360,33 +1335,7 @@ private theorem multiplication_triangle [NeZero n] (A : Integral J) :
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The two reduction isomorphisms, with their canonical unit normalization.
-Source: Cartier proof, paragraphs 4 and 5; Stacks 06YU, 06YY, 0152, 09T5 and 0FND
-(auxiliary; not a blueprint node).
-Proof:
-1. Use the normalized scalar adjunction (sk-def-sfb-derived-extension-of-scalars).
-   Exact restriction is termwise, and its derived unit on a K-flat representative
-   is the ordinary coefficient unit; this formula commutes with shifts.
-2. The constant sequence Z --n--> Z --> R is exact, and A tensor R = coker(n on A).
-   Both assertions follow locally from integers and their residue classes.
-3. Resolve A by a flat-term K-flat complex P (lem-pc-kflat-resolution).
-   The termwise multiplication sequence gives the distinguished triangle
-   A --n--> A --eta--> Res Lq(A) --> A[1]
-   (lem-pur-derived-change-of-rings; lem-weil-pbc-complex-ses-triangle).
-4. Its long exact cohomology sequence gives only degrees -1 and 0, the kernel
-   and cokernel of n (lem-sf-derived-homology-long-exact). Use the rotated triangle
-   to fix the map to A, rather than an unspecified cohomology boundary.
-5. Canonical truncation in residue modules identifies a complex with its sole
-   cohomology sheaf in the appropriate degree (def-sbc-standard-tstructure-derived-category).
-6. Compare the multiplication triangle for B with the rotated Kummer triangle
-   B --n--> B --kappa--> H[1] ---i[1]--> B[1]. TR3 fixes the identification by
-   (-i) H^-1(alphaB) = H^-1(delta). Monicity of i fixes its sign uniquely.
-   Shifted single-object full faithfulness identifies its restriction with that
-   triangle map (lem-weil-pbc-derived-single-fully-faithful).
-7. The quotient unit fixes alphaF uniquely because p is epi. The Kummer unit
-   fixes alphaB uniquely: Hom(B,H)=0 by n-divisibility, and the Kummer exact
-   Hom sequence makes precomposition with kappa injective on End(H[1]).
-   Residue-linearity is automatic for integer-linear maps of n-annihilated sheaves.
-   These facts give uniqueness, not an unspecified choice of either isomorphism. -/
+(Stacks, Tags 06YU, 06YY, 0152, 09T5 and 0FND) -/
 theorem divisible_extension_derived_reduction [HasTerminal C] (hn : 1 ≤ n)
     (P : Presentation (J := J) n) : Nonempty (Unique (Identifications n D P)) := by
   classical
@@ -1469,9 +1418,7 @@ theorem divisible_extension_derived_reduction [HasTerminal C] (hn : 1 ≤ n)
   cases hB
   rfl
 
-/-- The unique normalized identifications; their data is determined by the unit equations.
-Source: Cartier proof, paragraph 4
-(auxiliary; not a blueprint node). -/
+/-- The unique normalized identifications; their data is determined by the unit equations. -/
 noncomputable def identifications [HasTerminal C] (hn : 1 ≤ n)
     (P : Presentation (J := J) n) : Identifications n D P :=
   (Classical.choice (divisible_extension_derived_reduction n D hn P)).default

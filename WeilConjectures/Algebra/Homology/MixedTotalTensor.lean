@@ -13,9 +13,6 @@ public import Mathlib.Algebra.Homology.Bifunctor
 /-!
 # Total tensor with two coefficient rings
 
-Source: Stacks Project, More on Algebra, Section 06Y5 preceding Lemma 06Y6
-(blueprint: def-pc-mixed-total-tensor).
-
 ## Main definitions
 
 - `ModuleCat.mixedTensor`: tensor over `R`, with the `A`-action through the first factor.
@@ -25,6 +22,10 @@ Source: Stacks Project, More on Algebra, Section 06Y5 preceding Lemma 06Y6
 
 - `ModuleCat.mixedTensor_preservesZeroMorphisms`: zero preservation in the first variable.
 - `ModuleCat.mixedTensor_obj_preservesZeroMorphisms`: zero preservation in the second variable.
+
+## References
+
+* Stacks Project, Section 06Y5 and Tag 06Y6
 -/
 
 @[expose] public section
@@ -35,24 +36,21 @@ open CategoryTheory MonoidalCategory
 
 namespace ModuleCat
 
-/-- (blueprint: def-pc-mixed-total-tensor) The bifunctor `(M, E) ↦ M ⊗_A (A ⊗_R E)`,
-canonically `M ⊗_R E`, with its `A`-module structure through `M`.
-Source: Stacks Project, Section 06Y5, construction preceding Lemma 06Y6. -/
+/-- The bifunctor `(M, E) ↦ M ⊗_A (A ⊗_R E)`,
+canonically `M ⊗_R E`, with its `A`-module structure through `M`. -/
 noncomputable abbrev mixedTensor {R A : Type u} [CommRing R] [CommRing A] (f : R →+* A) :
     ModuleCat.{u} A ⥤ ModuleCat.{u} R ⥤ ModuleCat.{u} A :=
   curriedTensor (ModuleCat.{u} A) ⋙
     (Functor.whiskeringLeft _ _ _).obj (extendScalars f)
 
-/-- (blueprint: def-pc-mixed-total-tensor) The mixed module tensor preserves zero
-morphisms in its first variable. Source: Stacks Project, Section 06Y5.
-Proof: extension of scalars and tensoring are additive, so their composite is additive. -/
+/-- The mixed module tensor preserves zero
+morphisms in its first variable. -/
 @[instance] theorem mixedTensor_preservesZeroMorphisms {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) : (mixedTensor f).PreservesZeroMorphisms := by
   infer_instance
 
-/-- (blueprint: def-pc-mixed-total-tensor) The mixed module tensor preserves zero
-morphisms in its second variable. Source: Stacks Project, Section 06Y5.
-Proof: extension of scalars and tensoring with the fixed module are additive. -/
+/-- The mixed module tensor preserves zero
+morphisms in its second variable. -/
 @[instance] theorem mixedTensor_obj_preservesZeroMorphisms {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) (X : ModuleCat.{u} A) : ((mixedTensor f).obj X).PreservesZeroMorphisms := by
   refine ⟨?_⟩
@@ -65,9 +63,8 @@ Proof: extension of scalars and tensoring with the fixed module are additive. -/
   rw [h]
   simp
 
-/-- (blueprint: def-pc-mixed-total-tensor) The total tensor bifunctor on complexes, with
-terms `⨁_{p+q=n} Mᵖ ⊗_R Eᑫ` and differential `d_M ⊗ 1 + (-1)^p 1 ⊗ d_E`.
-Source: Stacks Project, Section 06Y5 and Lemma 06Y6. -/
+/-- The total tensor bifunctor on complexes, with
+terms `⨁_{p+q=n} Mᵖ ⊗_R Eᑫ` and differential `d_M ⊗ 1 + (-1)^p 1 ⊗ d_E`. -/
 noncomputable def mixedTotalTensor {R A : Type u} [CommRing R] [CommRing A] (f : R →+* A) :
     CochainComplex (ModuleCat.{u} A) ℤ ⥤
       CochainComplex (ModuleCat.{u} R) ℤ ⥤ CochainComplex (ModuleCat.{u} A) ℤ :=

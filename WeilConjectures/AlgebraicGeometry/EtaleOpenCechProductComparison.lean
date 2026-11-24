@@ -14,9 +14,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Comparing open products with étale fibre products
 
-Source: Stacks Project, Tags 03AK and 03AM; product comparison in
-lem-sc-etale-open-cech-injective-augmentation, proof step 1.
-(blueprint: lem-sc-etale-open-cech-product-comparison)
+## References
+
+* Stacks Project, Tags 03AK and 03AM
 -/
 
 @[expose] public section
@@ -149,25 +149,8 @@ private theorem degreeIso_indexMap
   exact congrArg Quiver.Hom.op (productIso_indexMap i ht U (tupleEquiv n s) α)
 
 /-- Finite-limit preservation identifies the pulled-back open Čech complex with
-that of the image family over the terminal object, after lifting its index universe.
-
-Source: Stacks Project, Tags 03AK and 03AM; the product comparison in step 1 of
-lem-sc-etale-open-cech-injective-augmentation.
-(blueprint: lem-sc-etale-open-cech-product-comparison)
-
-Proof: For each nonempty finite tuple t, the image under i of its open product is
-an étale product, because i preserves finite products. Since i(top) is terminal,
-this is also the fibre product of the images over i(top). Construct the unique
-projection-compatible isomorphism with the product in Over (i(top)). Restriction
-by P gives the corresponding isomorphism of section groups. Reindex tuples by
-s ↦ fun k ↦ (s k).down, whose inverse is t ↦ fun k ↦ ULift.up (t k), and use the
-product universal property to get degreewise inverse maps. Omitting any factor
-commutes with the product comparison: the two composites have the same projections.
-This also holds for the tuple reindexing, so these maps commute with every face
-and therefore with the alternating differential. The inverse maps give the
-inverse complex map. For an empty family, every tuple index is empty because the
-tuples have positive length; both section products are zero, and the same maps
-are inverse. No sheaf, covering, finiteness of the index, or injectivity is used. -/
+that of the image family over the terminal object, after lifting its index universe
+(Stacks, Tags 03AK and 03AM). -/
 theorem etaleOpenCechProductComparison
     (X : Scheme.{u}) (i : X.Opens ⥤ X.Etale) [PreservesFiniteLimits i]
     (ht : IsTerminal (i.obj ⊤)) {ι : Type u} (U : ι → X.Opens)

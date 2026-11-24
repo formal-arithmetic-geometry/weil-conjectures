@@ -15,13 +15,14 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Inverse image along an object of the small pro-etale site
 
-Source: Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J;
-Modules on Sites, Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5
-(auxiliary; not a blueprint node).
-
 The comparison data below spell out the canonical presheaf coprojections and
 sheafification unit. The theorem applies to an arbitrary site object, with no
 monomorphism or finiteness hypothesis.
+
+## References
+
+* Stacks Project, Sites and Sheaves, Tags 03CE, 00VC, 00XZ, 00WH and 0H7J;
+  Modules on Sites, Tags 03D2 and 03EK; pro-etale functoriality, Tag 09A5.
 -/
 
 @[expose] public section
@@ -34,26 +35,16 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The distinguished pair `(U → X, (id, str))` in the inverse-image index.
-The chosen pullback puts the variable factor first. Its arrow is the unit of
-composition left adjoint to base change, hence is exactly the pair of the identity
-and the structure map, rather than an arbitrary arrow to the fibre product.
-Source: Stacks, Tags 03CE and 00VC
-(auxiliary; not a blueprint node). -/
+/-- The distinguished pair `(U → X, (id, str))` in the inverse-image index
+(Stacks, Tags 03CE and 00VC). -/
 noncomputable def proEtaleObjectInverseImageIndexPoint {X : Scheme.{u}} (W : X.ProEt)
     (U : W.left.ProEt) : proEtaleInverseImageIndex W.hom U :=
   StructuredArrow.mk
     ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ W.hom W.prop trivial).unit.app U)
 
-/-- Clause (1)'s canonical comparison data for a specified category of values.
-`presheafIso` is restriction to the object followed by the presheaf inverse image;
-its components are the distinguished coprojections, expressed using the Kan unit.
-The final equation identifies the inverse of `sheafIso` with those coprojections
-followed by the actual sheafification unit. Both isomorphisms are natural in the
-sheaf, and their components are presheaf/sheaf morphisms, hence natural in site objects.
-This structure only packages the assertions; it does not choose any comparison.
-Source: Stacks, Tags 03CE, 00VC and 00WH
-(auxiliary; not a blueprint node). -/
+/-- The canonical comparison data for the inverse image along an object, for a specified
+category of values: `presheafIso` and `sheafIso` with the distinguished coprojections
+(Stacks, Tags 03CE, 00VC and 00WH). -/
 structure ProEtaleObjectRestrictionComparison {X : Scheme.{u}} (W : X.ProEt)
     (D : Type v) [Category.{u + 1} D] [HasColimitsOfSize.{u + 1, u + 1} D]
     [HasWeakSheafify (ProEt.topology W.left) D] where

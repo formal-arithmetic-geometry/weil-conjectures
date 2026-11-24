@@ -18,16 +18,8 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
-/-- Algebraic stalk-tower criterion after the finite-presentation and fibre identifications.
-Apply the affine stalk localization-model theorem to the projection and to its
-composite with the chart. Stalk-map composition gives the local scalar tower.
-Base stalk flatness and the open-immersion stalk isomorphism give base flatness
-of the source stalk; the factorization identifies this with the composite tower.
-The closed-fibre module comparison supplies the fibre hypothesis. Apply the
-local criterion with the source stalk as its own finitely presented nonzero module;
-its second conclusion is chart flatness. Scheme stalk maps are automatically local.
-Source: Stacks Project, Tags 00R7 and 00RH.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison-reverse-aux-ring-bridge) -/
+/-- Algebraic stalk-tower criterion after the finite-presentation and fibre identifications
+(Stacks, Tags 00R7 and 00RH). -/
 theorem polynomial_chart_stalk_flat_comparison_reverse_ring_bridge
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]
@@ -70,12 +62,8 @@ theorem polynomial_chart_stalk_flat_comparison_reverse_ring_bridge
   have hresult := Module.flat_of_flat_closedFiber R S B B P Q W V hf
   exact ⟨hresult.2, inferInstance⟩
 
-/-- Local criterion step for the reverse polynomial-chart flatness comparison.
-The proof is the Stacks Project local flatness criterion (Tags 00R7 and 00RH):
-write the relevant stalks as essentially finitely presented local algebras over
-the base stalk, use flatness over the base and flatness of the closed fibre,
-and transport flatness through the canonical fibre-stalk identification.
-(blueprint: lem-sbc-polynomial-chart-stalk-flat-comparison-reverse-aux) -/
+/-- Local criterion step for the reverse polynomial-chart flatness comparison
+(Stacks, Tags 00R7 and 00RH). -/
 theorem polynomial_chart_stalk_flat_comparison_reverse_aux
     {X T : Scheme.{u}} [IsAffine T] (f : X ⟶ T)
     [Flat f] [LocallyOfFinitePresentation f]

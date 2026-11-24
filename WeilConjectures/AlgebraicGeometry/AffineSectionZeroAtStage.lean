@@ -18,9 +18,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Affine
 /-!
 # Detection of affine module section vanishing at one stage
 
-Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
-Algebra, Tags 05N7 (3) and 05LI (1).
-(blueprint: lem-pc-affine-section-zero-at-stage).
+## References
+
+* Stacks Project, Tags 01ZR, 05N7 and 05LI
 -/
 
 @[expose] public section
@@ -128,22 +128,8 @@ private theorem cocone_tensor_one_zero_at_stage
   refine ⟨k, hjk, ?_⟩
   simpa only [LinearMap.rTensor_tmul, AlgHom.toLinearMap_apply, map_one] using hk
 
-/-- A section killed at the affine inverse limit is killed at one stage.
-Source: Stacks Project, Limits, Tag 01ZR (3), first proof; Algebra, Tag 05LI (1).
-(blueprint: lem-pc-affine-section-zero-at-stage).
-
-Proof: the inverse images of U are affine by base change of affine morphisms.
-Restrict the ring diagram to the upper tail of j. Pullback pasting and
-isLimitBaseChangeCone identify the limit chart with the inverse limit of the
-stage charts; the affine Spec/Gamma equivalence identifies its ring with their
-filtered colimit. Quasi-coherence identifies pullback sections with scalar
-extension of G on the j-th chart. The canonical unit sends y to 1 tensor y.
-Apply the zero clause of TensorProduct.directedColimitBaseChangeElementwise to
-this tensor to obtain one later stage. The affine pullback comparison is
-bijective and therefore reflects zero. Finally uniqueness of left adjoints
-intertwines any supplied adjunction unit with the canonical unit by an
-isomorphism. Its section components preserve and reflect zero. This includes
-empty charts and zero modules and does not require finite presentation. -/
+/-- A section killed at the affine inverse limit is killed at one stage
+(Stacks, Tags 01ZR and 05LI). -/
 theorem section_affine_open_zero_at_stage
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (R : I ⥤ CommRingCat.{u})

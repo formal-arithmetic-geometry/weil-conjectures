@@ -21,9 +21,16 @@ scalar, with `A⟦1⟧` restricted from the quotient coefficients, and if the co
 adjoint of derived restriction is computed at `X⟦1⟧` by the restricted ordinary counit, then the
 quotient-linear coinduction trace is invertible at `X⟦1⟧`.
 
-Source: Stacks Tags 06YP, 06YY, 07A6, 0A70 and 08FZ; the principal short exact sequence of
-complexes and its cone-boundary/coinduction comparison.
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms). -/
+## References
+
+* Stacks Project, Tag 0145
+* Stacks Project, Tag 05SS
+* Stacks Project, Tag 06YP
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
+* Stacks Project, Tag 08FZ
+* Stacks Project, Tag 0A70
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,10 +47,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {t : (unit (derivedChangeRingIndependentCoefficients J R)).sections}
   {d : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ}
 
-/-- Derived restriction of a normalized augmentation is additive and conservative.
-Source: Stacks Tags 05SS and 06YY; restriction is exact and faithful, so it commutes with
-cohomology and reflects isomorphisms of module sheaves
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms). -/
+/-- Derived restriction of a normalized augmentation is additive and conservative. -/
 theorem Augmentation.V_additive_and_reflectsIsomorphisms (b : Augmentation φ t d) :
     b.V.Additive ∧ b.V.ReflectsIsomorphisms := by
   obtain ⟨hlim, hcol, -⟩ := sheafRingCoefficientOrdinaryAdjunction φ
@@ -68,9 +72,7 @@ theorem Augmentation.V_additive_and_reflectsIsomorphisms (b : Augmentation φ t 
     exact isIso_of_reflects_iso _ (restriction φ)
   exact ⟨Functor.additive_of_iso e.symm, reflectsIsomorphisms_of_iso e.symm⟩
 
-/-- Shifting back the shift by `-1` of an isomorphism `z : Z⟦1⟧ ≅ W` recovers `z`.
-Source: Stacks Tag 0145; the compatibilities of the shift functors
-(auxiliary; not a blueprint node). -/
+/-- Shifting back the shift by `-1` of an isomorphism `z : Z⟦1⟧ ≅ W` recovers `z`. -/
 theorem shift_one_neg_one_transpose {D : Type*} [Category D] [HasShift D ℤ] {Z W : D}
     (z : Z⟦(1 : ℤ)⟧ ≅ W) :
     ((shiftFunctorCompIsoId D (1 : ℤ) (-1) (by omega)).symm.app Z ≪≫
@@ -85,9 +87,7 @@ theorem shift_one_neg_one_transpose {D : Type*} [Category D] [HasShift D ℤ] {Z
   rw [hn, shift_shiftFunctorCompIsoId_inv_app]
   simp
 
-/-- The normalized cone boundary at a localized complex is the localized strict cone projection.
-Source: Stacks Tags 06YP and 07A6; the definition of the descended boundary
-(blueprint: lem-sf-regular-quotient-cone-boundary). -/
+/-- The normalized cone boundary at a localized complex is the localized strict cone projection. -/
 theorem Augmentation.boundary_app_Q (b : Augmentation φ t d)
     (P : CochainComplex (Modules R) ℤ) :
     b.boundary.app (DerivedCategory.Q.obj P) =
@@ -101,17 +101,7 @@ open CochainComplex CochainComplex.mappingCone in
 `0 ⟶ A ⟶ X ⟶ X ⟶ 0` is a short exact sequence of complexes with the regular scalar as second
 map, `A⟦1⟧` is restricted from a quotient complex `N`, and the counit of the right adjoint at
 `Y` is computed by a strict map `N ⟶ Y` extending `ε⟦1⟧`.
-Source: Stacks Tags 06YP, 06YY, 07A6, 0A70 and 08FZ; the principal short exact sequence of
-complexes and its cone-boundary/coinduction comparison
-(blueprint: lem-sf-regular-quotient-trace-on-injective-terms).
-
-Proof: let `P` be the mapping cone of `ε`, a model of `X` through the quasi-isomorphism
-`p : P ⟶ X`. The cone boundary `P ⟶ A⟦1⟧` is killed by the scalar, and the augmentation
-adjoint formula identifies restriction of its adjoint transpose with the strict scalar-cone
-augmentation of `P`, which is a quasi-isomorphism. As derived restriction is conservative, the
-transpose is invertible. The chain homotopy between this augmentation and the cone boundary
-shows that, after the identification of `P` with `X`, the transpose is minus the adjoint
-transpose of the normalized trace counit. Hence the trace is invertible. -/
+-/
 theorem Augmentation.isIso_coinductionTrace_app_of_shortExact (b : Augmentation φ t d)
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0)

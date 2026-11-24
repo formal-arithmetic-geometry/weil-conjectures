@@ -12,8 +12,13 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Sheaf-level affine ordinary tensor homology coordinates
 
-Source: Stacks Project, Tag 01I9.
-(blueprint: new-lem-pc-affine-base-change-global-sections-factorization). -/
+Factorization of the affine global-sections coordinate before localization.
+
+## References
+
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,19 +32,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Factorization of the affine global-sections coordinate before localization.
-Source: Stacks Project, Tags 01I9 and 0DJ8; the coordinate is defined in
-`affineBaseChangeTildeCohomologyIso`.
-(blueprint: new-lem-pc-affine-base-change-global-sections-factorization).
-Proof: write C for the scalar-extended complex and delta for the termwise
-pullback comparison. The coordinate's sheaf isomorphism is the inverse exact
- tilde homology map, then the inverse derived homology factorization, then
-homology of delta inverse, the inverse derived counit, and the representative e.
-Its first three factors are affineTensorPullbackHomologySheafIso. The hom map of
-an isomorphism composite is the composite of its hom maps. Homology and global
-sections preserve composition, and mapIso has the corresponding forward map.
-The remaining leading factor is tilde.isoTop(C.homology i). Thus the forward
-global-sections map factors exactly as displayed. No localization, prime,
-quasi-coherence of the final derived object, or flatness is needed. -/
+The coordinate is defined in
+`affineBaseChangeTildeCohomologyIso`. -/
 theorem affineBaseChangeTildeCohomologyIso_globalSections_factorization
     (A A' : Type u) [CommRing A] [CommRing A'] (φg' : A →+* A')
     (K : schemeDerivedCategory (Spec (.of A)))

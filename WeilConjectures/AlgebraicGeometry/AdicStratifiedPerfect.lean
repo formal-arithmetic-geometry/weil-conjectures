@@ -14,8 +14,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Adic constructibility and stratified perfect models
 
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
-(auxiliary; not a blueprint node).
+## References
+
+* Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -128,27 +129,8 @@ private theorem sfbComplete_triangulated (X : Scheme.{u})
   exact ⟨inferInstance, inferInstance⟩
 
 /-- Adic constructibility is equivalent to stratified perfect local models; these objects
-are bounded and form a full triangulated subcategory.
-Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
-(auxiliary; not a blueprint node).
-
-Proof: The geometric forward lemma gives the finite-projective local representatives;
-each represents a perfect object by using itself as witness. The geometric reverse
-lemma gives completeness, global cohomological bounds, and a bounded constructible etale
-residue representative. Exact tensor over the residue field gives its finite Tor
-amplitude in the same interval. These two implications prove the equivalence, and the
-reverse lemma gives boundedness.
-
-For the remaining assertions, use an independent categorical argument. Local derived
-completeness is the intersection of vanishing conditions for exact slice restriction
-followed by derived internal Hom from a section localization. It is therefore closed
-under isomorphisms, shifts and triangles. The proved residue-closure theorem expresses
-bounded constructible etale residue origin as the inverse image of a triangulated
-essential image under exact reduction and fixed-scalar restriction. The intersection of
-these two triangulated properties is exactly IsSfbAdicConstructible. Its standard
-ObjectProperty API gives zero, isomorphism and shift invariance, and all three ambient
-triangle implications. This closure argument does not depend on the geometric lemmas.
-All definitions, coefficients, universes and the statement are unchanged. -/
+are bounded and form a full triangulated subcategory
+(Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11). -/
 theorem adic_stratified_perfect (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (_hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)

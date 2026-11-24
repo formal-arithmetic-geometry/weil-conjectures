@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.CartesianChartExchangeChartMap
 
 /-! # Evaluation of the restricted chart cone map
 
-Source: Stacks Project, Tags 0EYM and 03Q8.
+## References
+
+* Stacks Project, Tags 0EYM and 03Q8
 -/
 
 @[expose] public section
@@ -26,9 +28,8 @@ namespace AlgebraicGeometry.Etale
 attribute [local irreducible] cohomology upperStar rawAffineComplexPullback
   rightDerivedGlobalSections DerivedCategory.Q
 
-/-- The specified raw pullback of the canonical inverse-evaluation stage class.
-Source: Stacks Project, Tags 0EYM and 03Q8.
-(blueprint: def-sc-cartesian-chart-restricted-raw-class). -/
+/-- The specified raw pullback of the canonical inverse-evaluation stage class
+(Stacks, Tags 0EYM and 03Q8). -/
 @[irreducible]
 noncomputable def cartesianChartRestrictedRawClass
     {S X : Scheme.{u}} (f : X ⟶ S)
@@ -72,11 +73,7 @@ noncomputable def cartesianChartRestrictedRawClass
   let z' := abelianHigherDirectImageRawPullback l h h' wl q G G' φ V z
   z'
 
-/-- The defining equation of the cached chart raw class.
-Source: Stacks Project, Tags 0EYM and 03Q8.
-(blueprint: def-sc-cartesian-chart-restricted-raw-class).
-
-Proof: Unfold the real raw-pullback construction; both sides are identical. -/
+/-- The defining equation of the cached chart raw class (Stacks, Tags 0EYM and 03Q8). -/
 theorem cartesianChartRestrictedRawClass_eq
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)
@@ -123,19 +120,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency true in
 /-- Evaluation at the apex sends the restricted cohomology cone map to the
-raw pullback of the canonical inverse-evaluation class.
-Source: Stacks Project, Tags 0EYM and 03Q8.
-(blueprint: lem-sc-cartesian-chart-restricted-map-evaluation).
-
-Proof: First identify restrictedOverCohomologyMap with the raw affine map for
-l, h and h'. Unfold their literal derived pullback and coefficient formulas. The
-coefficient morphisms agree by the displayed second-projection equality and
-proof irrelevance. Apply rawRestrictedCohomologyClass_map: the raw affine map
-of x is evaluation of z'. Finally apply the proved chartCohomologyIso_eval
-from CartesianChartExchangeEvaluation to z'. Its free-source precomposition
-is exactly the map displayed here. Combine these two equalities by congruence
-and transitivity. This calculation uses neither exchange nor the stage lift,
-and holds for degree zero and empty test objects without changes. -/
+raw pullback of the canonical inverse-evaluation class (Stacks, Tags 0EYM and 03Q8). -/
 theorem cartesianChartRestrictedCohomologyMap_eval
     {S X : Scheme.{u}} (f : X ⟶ S)
     {I : Type u} [SmallCategory I] (D : I ⥤ Over S) (c : Cone D)

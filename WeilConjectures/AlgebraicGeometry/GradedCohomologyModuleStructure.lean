@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 /-!
 # The homogeneous action on graded cohomology
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897
-(blueprint: lem-weil-pbc-graded-cohomology-module-structure).
+## References
+
+* [Stacks Project, Cohomology of Schemes, Tag 0897]
 -/
 
 @[expose] public section
@@ -29,29 +30,8 @@ namespace AlgebraicGeometry
 
 
 /-- The homogeneous action induces the uniquely specified action on graded cohomology.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 0897(1), the graded action in
-its statement; this algebraic part does not require properness or finite generation.
-(blueprint: lem-weil-pbc-graded-cohomology-module-structure).
-
-Proof:
-Write H_m = H^p(X, G_m). Applying the additive cohomology functor to mu gives
-additive maps H_m -> H_(m+k), additive in b by hmu_add. Functoriality and hmu_mul
-give the composition law, after transporting along the equalities of degrees.
-For a = 1, hmu_scalar says sectionwise that mu m 0 (1) is the identity (with the
-transport m+0=m). Thus its cohomology map is the identity.
-
-Every b in B has a unique finite homogeneous decomposition, by hgrading. Define
-b acting on a finite family (x_m) by summing the images H^p(mu m k b_k)(x_m)
-in degree m+k. The sum is finite. Additivity in both arguments follows from
-additivity of the homogeneous decomposition and the maps above. The unit law
-uses hunit and the identity map just established. For the product law expand the
-two finite sums; hmul places b_k c_l in degree k+l and hmu_mul identifies its
-map with the composite. This constructs a Module B structure, with the asserted
-formula on homogeneous generators. That formula also determines the action
-uniquely: every scalar and every vector is a finite sum of such generators.
-No geometric finiteness assertion is used in this construction.
--/
+This algebraic statement requires neither properness nor finite generation.
+(Stacks, Tag 0897) -/
 theorem gradedCohomologyModuleStructure
     {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
     (graded : ℕ → Submodule A B)

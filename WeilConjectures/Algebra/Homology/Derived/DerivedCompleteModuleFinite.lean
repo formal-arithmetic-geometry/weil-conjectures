@@ -26,9 +26,13 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Finiteness of derived-complete modules with finite residue
 
-Source: Stacks Project, More on Algebra, Tag 09BA (`lemma-derived-complete-finite`),
-specialized to an `I`-adically complete Noetherian ring
-(blueprint: lem-weil-derived-complete-module-finite).
+A derived-complete module over an `I`-adically complete Noetherian ring whose reduction
+modulo `I` is finite is itself finite.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 09BA
+* Stacks Project, More on Algebra, Tags 091R and 09B9
 -/
 
 @[expose] public section
@@ -332,37 +336,7 @@ private theorem difference_of_derived_complete {A : Type u} [CommRing A]
 
 /-- Over a complete Noetherian ring, a derived-complete module with finite reduction
 modulo the ideal is finite, and its canonical map to its adic completion is bijective.
-The completion consists of compatible residue classes, with componentwise operations.
-Source: Stacks Project, More on Algebra, Tag 09BA (`lemma-derived-complete-finite`),
-specialized to a complete ring (blueprint: lem-weil-derived-complete-module-finite).
-
-Proof:
-1. Exact countable products of modules give countable products in the derived category,
-   preserved by cohomology, by `lemma-reduction-derived-nakayama`. Complete the tower
-   endomorphism `1 - s` to a Roos triangle. Derived completeness makes its first vertex
-   zero, hence `1 - s` is invertible. Apply degree-zero cohomology and identify the
-   product of degree-zero modules with sequences: the resulting invertible linear map
-   is `Δ_f(a)_n = a_n - f • a_(n+1)` for each `f ∈ I`.
-2. Bijectivity of `Δ_f` passes to the range of a map between two modules satisfying it:
-   lift a sequence in the range, solve upstairs, and apply the map. It also passes to
-   a quotient by a submodule satisfying it: lift a sequence, and solve its difference
-   in the submodule to prove injectivity; solve a lift to prove surjectivity.
-3. An ordinarily complete module satisfies this bijectivity: the Cauchy partial sums
-   `sum_{j<k} f^j • b_(n+j)` converge to a solution, and separatedness makes the kernel
-   zero. This is the geometric-series argument of Stacks, Tag 091R.
-4. For a finite generating set of an ideal, induct by quotienting out the range of
-   multiplication by its first generator. The quotient still satisfies all the
-   sequence conditions by step 2. If the ideal times the module is the whole module,
-   induction makes this quotient zero. Multiplication by the first generator is then
-   surjective; iterating a choice of preimage of any element produces a sequence in
-   the kernel of `Δ_f`, so the original module is zero. The empty set case is immediate.
-   This is the derived Nakayama argument of Stacks, Tag 09B9, in sequence form.
-5. Lift a finite set of residue generators and let `N` be their finite span in `M`.
-   The existing finite-module completion theorem makes `N` ordinarily complete, so
-   steps 1--3 give the sequence conditions on `M/N`. Residue generation gives
-   `I • (M/N) = M/N`. Noetherianity and step 4 give `M/N = 0`, hence `N = M` is finite.
-6. Apply `lem-weil-pbc-finite-module-complete-over-complete-noetherian` to `M` and
-   translate ordinary completeness to bijectivity of `AdicCompletion.of I M`. -/
+The completion consists of compatible residue classes, with componentwise operations. -/
 theorem finite_and_completion_bijective_of_isDerivedComplete
     {A : Type u} [CommRing A] [IsNoetherianRing A]
     [HasDerivedCategory.{w} (ModuleCat.{v} A)] (I : Ideal A)

@@ -103,8 +103,9 @@ import WeilConjectures.Algebra.Homology.Site.SiteDerivedTensorDescent
 /-!
 # Projection-formula coherence for a square of ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tags 0E48, 07A4 and 0D6D
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence).
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0E48, 07A4 and 0D6D
 -/
 
 @[expose] public section
@@ -265,9 +266,7 @@ private theorem edge_preserves_flat_kflat
   exact ObjectProperty.prop_of_iso (exactFunctor _ _)
     (siteSheafTensorRightIso B.ring _) (ht n)
 
-/-- The canonical ordinary module square applied termwise to a complex.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+/-- The canonical ordinary module square applied termwise to a complex. -/
 noncomputable def RingedTensorSquare.complexComparison
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     g.pullback.mapHomologicalComplex (ComplexShape.up ℤ) ⋙
@@ -379,19 +378,7 @@ private theorem square_condition_transport
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The representative square determines the derived commutation isomorphism uniquely.
-Proof: use the resolving homotopy subcategory and localization equivalence of
-lem-weil-pbc-site-derived-tensor-descent. The specified left-derived counits are
-invertible there by uniqueness of left derived functors and the representative
-computation in lem-weil-pbc-ringed-topoi-derived-pullback. Successive pullbacks stay
-flat K-flat by lem-weil-pbc-ringed-pullback-preserves-kflat; the tensor-right
-identification bridges its flatness convention. Compose the two counits on each
-route and apply the ordinary square termwise. Full faithfulness of precomposition
-along localization gives a unique derived isomorphism. Naturality of the comparison
-between Qh and Q, followed by cancellation of its components, gives precisely the
-stated complex representative equation. This also proves uniqueness.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+/-- The representative square determines the derived commutation isomorphism uniquely. -/
 theorem RingedTensorSquare.derivedComparison_existsUnique
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     ∃! theta : g.left ⋙ k.left ≅ f.left ⋙ h.left,
@@ -447,29 +434,23 @@ theorem RingedTensorSquare.derivedComparison_existsUnique
     obtain ⟨hp, hf⟩ := (hP Z.obj).1 Z.property
     exact (square_condition_transport s theta' Z.obj.as).1 (ht' Z.obj.as hp hf)
 
-/-- The specified derived commutation isomorphism, selected by its unique
-K-flat representative characterization. Only a uniqueness-determining proof is postponed.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+/-- The specified derived commutation isomorphism, selected by its unique K-flat
+representative characterization. -/
 noncomputable def RingedTensorSquare.derivedComparison
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     g.left ⋙ k.left ≅ f.left ⋙ h.left :=
   Classical.choose s.derivedComparison_existsUnique.exists
 
-/-- The exchange transformation is exactly the mate of the canonical derived square,
-using the existing Mathlib mate equivalence (def-weil-pbc-adjunction-mate).
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+/-- The exchange transformation is the mate of the canonical derived square, using the
+Mathlib mate equivalence. -/
 noncomputable def RingedTensorSquare.exchange
     (s : RingedTensorSquare Y X Y' X' f g h k) :
     f.right ⋙ g.left ⟶ h.left ⋙ k.right :=
   (mateEquiv f.derivedAdjunction k.derivedAdjunction
     (TwoSquare.mk g.left f.left k.left h.left s.derivedComparison.hom))
 
-/-- The projection map is the adjunct of tensor comparison followed by counit tensor
-identity. In particular no projection-formula isomorphism is assumed.
-Source: Stacks, Cohomology on Sites, Tags 07A4, 0D6D, 0E48
-(blueprint: lem-weil-pbc-ringed-exchange-tensor-coherence). -/
+/-- The projection map is the adjunct of the tensor comparison followed by the counit tensor
+identity. In particular no projection-formula isomorphism is assumed. -/
 noncomputable def RingedTensorEdge.projection
     {A B : RingedTensorCorner.{u, w}} (e : RingedTensorEdge A B)
     (a : RingedTensorModel A) (b : RingedTensorModel B)

@@ -20,11 +20,9 @@ public import WeilConjectures.AlgebraicGeometry.ChartNormalDifferential.ChartNor
 /-!
 # Centred diagonal neighbourhood and its differential under an étale source map
 
-Source: current blueprint, `sk-prop-sp-orientation-charts.proof.md`, Steps 1--2:
-remove the off-diagonal components, form the Cartesian centre squares, apply the
-canonical flat conormal graded comparison, and identify its normal map with the
-differential (Stacks Tags 02GE, 0473 and 0635).
-(blueprint: lem-sp-chart-centre-transport)
+## References
+
+* Stacks Project, Tags 02GE, 0473, 0635 and 08S2
 -/
 
 @[expose] public noncomputable section
@@ -45,28 +43,7 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
 namespace AlgebraicGeometry
 
 /-- The canonical centred-neighbourhood transport, including its graded and tangent maps.
-Source: current blueprint, `sk-prop-sp-orientation-charts.proof.md`, Steps 1--2;
-Stacks Tags 02GE, 0473, 0635 and 08S2
-(blueprint: lem-sp-chart-centre-transport).
-
-Proof: Since the structural morphisms are separated, so are g, h and uV.
-The etale diagonal of uV is open and closed in F = V ×_X V, while
-F is closed in V ×_Y V by base change of the separated diagonal of g.
-Thus the complement of F minus its diagonal is the specified open O and contains
-the whole diagonal. Computing the fibre products gives the two centre squares
-and the base-change square for (W0,s). The restrictions of b and a are separated
-etale morphisms, since they are base changes and composites of uV.
-Flat conormal base change now gives the unique graded map, an isomorphism in every
-degree, with local formula [c] tensor r maps to [q-sharp(c) r]. Its degree zero is
-the scalar map and its degree one is the canonical conormal map. Relative Spec
-gives its Cartesian normal map and preserves the augmentation zero sections.
-For a smooth diagonal, the symmetric-algebra identification of the normal cone
-with the tangent bundle sends da to the second-factor-minus-first-factor class.
-Pulling that class back along (uV,uV) sends it to the same difference for uV-sharp(a).
-The universal property of differentials and the symmetric algebra therefore
-identifies this specific normal map with duV; etaleness makes its tangent square
-Cartesian. At d=0 the diagonal component is clopen and the graded algebra has
-only degree zero. The same constructions and equations apply to the empty source. -/
+(Stacks, Tags 02GE, 0473, 0635 and 08S2). -/
 theorem chart_centre_transport (k : Type u) [Field k]
     {X Y V : Scheme.{u}}
     (aX : X ⟶ Spec (CommRingCat.of k))

@@ -25,8 +25,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Continuity of ordinary condensed-coefficient pushforward
 
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)
-(auxiliary; not a blueprint node).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 5.3(1)
 -/
 
 @[expose] public section
@@ -45,8 +46,7 @@ noncomputable local instance
       (condensedRingObj Λ X)) := inferInstance
 
 /-- The cocone obtained from good truncation, retaining the original complexes as its
-source. Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
-(auxiliary; not a blueprint node). -/
+source. (Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 noncomputable def condensedContinuityCocone
     {A : Type v} [Category.{w} A] [Abelian A]
     {I : Type x} [Category.{y} I] (D : I ⥤ CochainComplex A ℤ) (a : ℤ)
@@ -56,8 +56,7 @@ noncomputable def condensedContinuityCocone
       (colimit.cocone (D ⋙ (ComplexShape.embeddingUpIntGE a).truncGEFunctor A))
 
 /-- The canonical comparison induced by the maps to the termwise truncated colimit.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
-(auxiliary; not a blueprint node). -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 noncomputable def condensedContinuityComparison
     {A : Type v} [Category.{w} A] [Abelian A]
     {B : Type u} [Category.{z} B]
@@ -70,8 +69,7 @@ noncomputable def condensedContinuityComparison
 
 /-- Evaluation of the underlying abelian sheaf at the terminal pro-etale object.
 Its right derived functor is ordinary uncompleted derived global sections of modules.
-Source: Hemo--Richarz--Scholbach, proof of Lemma 5.3(1)
-(auxiliary; not a blueprint node). -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 noncomputable abbrev condensedModuleSections
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] (X : Scheme.{u}) :
@@ -129,26 +127,7 @@ set_option synthInstance.maxSize 4096 in
 filtered colimits on cohomology. There is no torsion, completeness, or constructibility
 condition on the coefficient ring or its modules.
 
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
-(auxiliary; not a blueprint node).
-
-Proof: replace each complex by its good truncation at the common lower bound. Exactness
-of filtered colimits in module sheaves identifies cohomology of their termwise colimit
-with the colimit of cohomology. Cover every object of the target site by affine weakly
-contractible objects V. Their inverse images W are qcqs because f is qcqs. Resolve W
-by an acyclic hypercover whose terms are finite disjoint unions of weakly contractible
-affines. On each component, evaluation is exact and preserves filtered colimits
-(lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits). The hypercover
-computes derived sections (lem-weil-pbc-proetale-hypercover-computes-bounded-complex).
-In total degree r only the finitely many hypercover degrees 0 through r-a occur.
-Evaluation commutes with the filtered colimit in each of these degrees; finite products
-and finite sums commute with filtered colimits of modules. Thus the total complexes
-are canonically identified, including both differential summands. Exact filtered
-colimits then commute with cycles, boundaries and their quotient. On K-injective
-resolutions, the formula (f_*J)(V)=J(W) identifies this with precisely the cohomology
-comparison induced by the original cocone legs. The comparison is invertible on every
-V. A sheaf map invertible on this covering basis is invertible: injectivity follows
-from separation and surjectivity follows by lifting locally and gluing. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensed_qcqs_pushforward_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -239,18 +218,7 @@ set_option synthInstance.maxHeartbeats 100000 in
 set_option synthInstance.maxSize 4096 in
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary derived global sections of a qcqs scheme satisfy the same comparison.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1)
-(auxiliary; not a blueprint node).
-
-Proof: choose an affine weakly contractible hypercover of W=X and form its actual
-section total after forgetting the internal module action. The existing proved
-internal-module row theorem gives injective row descent. Bounded-below row and column
-comparison then identify this total naturally with the actual right derived global-sections functor.
-Affine
-evaluation and diagonal coproducts commute with filtered colimits; homology does
-so because these colimits are exact. Good truncation is a quasi-isomorphism under
-the given cohomological bound. Transporting its colimit cocone through the natural
-model identifies its universal map with the stated canonical comparison. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensed_qcqs_globalSections_continuity
     (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -340,18 +308,7 @@ theorem condensed_qcqs_globalSections_continuity
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The representative comparison induces the canonical isomorphism on each homology object.
-Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1), representative
-comparison step.
-(auxiliary; not a blueprint node)
-
-Proof: apply the homology functor to the leg equation, transport along the componentwise
-isomorphism `e`, and identify the target using `ε`. Naturality and the colimit universal
-property identify the resulting map with the canonical continuity comparison, which is an
-isomorphism by the hypothesis `h`. Exact colimits commute with complex homology;
-cancel this invertible homology-colimit comparison and the isomorphism induced by `e`
-to obtain the asserted homology map. This is the homology-level statement used to prove
-the representative quasi-isomorphism below.
--/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensedContinuityComparison_representatives_homology
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
     {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]
@@ -414,19 +371,7 @@ theorem condensedContinuityComparison_representatives_homology
 quasi-isomorphic representatives. The equation on each leg requires the specified
 canonical derived map, rather than an arbitrary map of representatives.
 
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), hypercover proof
-(auxiliary; not a blueprint node).
-
-Proof: exact filtered colimits in B commute with kernels, images, and cokernels,
-so cohomology of the termwise colimit P is the colimit of its cohomology.
-The natural isomorphism e identifies each term with F(QD_i), and ε identifies the
-value at the truncated colimit. The leg equation identifies the cohomology map of
-the displayed chain map with precisely the continuity comparison. It is an
-isomorphism in every degree by h. Thus the chain map is a quasi-isomorphism.
-The argument quantifies over all choices of P,L,e,ε and the normalized cocone, so
-objectwise quasi-isomorphic replacements give the same derived comparison under
-these identifications. Apply this with F equal to derived pushforward, or to derived
-module sections, and h the corresponding continuity theorem above. -/
+(Hemo--Richarz--Scholbach, Lemma 5.3(1)) -/
 theorem condensedContinuityComparison_representatives
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory.{w} A]
     {B : Type u} [Category.{z} B] [Abelian B] [HasDerivedCategory.{z} B]

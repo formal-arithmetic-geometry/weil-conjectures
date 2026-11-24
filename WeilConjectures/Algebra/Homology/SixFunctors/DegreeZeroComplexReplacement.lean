@@ -14,9 +14,12 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 /-!
 # Replacement of complexes by objects of degree zero
 
-Source: Stacks Project, Derived Categories, Tag 07K6, `lemma-replace-resolution`,
-the uniformly bounded finite-degree specialization
-(blueprint: lem-sf-degree-zero-complex-replacement).
+The explicit finite argument uses the kernel/cone comparison; the statement is the uniformly
+bounded finite-degree specialization of the replacement lemma.
+
+## References
+
+* Stacks Project, Derived Categories, Tags 07K6, 070M and 014Q
 -/
 
 @[expose] public section
@@ -146,35 +149,7 @@ private theorem exists_quasiIso_degree_zero_of_term_bound
 
 /-- A uniformly bounded nonnegative degree function admitting embeddings into degree-zero
 objects, bounded on binary direct sums by the maximum, and decreasing on cokernels as
-specified below admits a degree-zero replacement of every integer-indexed cochain complex.
-
-Source: Stacks Project, Derived Categories, Tag 07K6, `lemma-replace-resolution`
-(blueprint: lem-sf-degree-zero-complex-replacement).
-
-Proof (finite induction for the uniformly bounded specialization):
-1. Embed zero in an object E of degree zero. The inequality for E → E → 0 gives
-   d(0) = 0. Applying the inequality to 0 → A → B for an isomorphism and its inverse
-   shows that d is invariant under isomorphisms.
-2. Choose embeddings eⁿ : Kⁿ → Eⁿ with d(Eⁿ) = 0. Define Iⁿ = Eⁿ ⊕ Eⁿ⁺¹ and
-   d_I(a, b) = (b, 0). Its differential squares to zero. The components
-   jⁿ = (eⁿ, d_Kⁿ ≫ eⁿ⁺¹) define a chain map K → I, since d_K² = 0.
-   Projection onto the first summand proves jⁿ mono. The direct-sum inequality
-   gives d(Iⁿ) = 0. This construction uses only binary sums, even for unbounded K.
-3. If every d(Kⁿ) ≤ N + 1, take the cokernel p : I → Q of j in the abelian
-   category of complexes. Evaluating its short exact sequence in each degree gives
-   d(Qⁿ) ≤ max(d(Kⁿ) - 1, d(Iⁿ)) ≤ N. The map p is degreewise epic, and the
-   kernel universal property gives an isomorphism K ≅ ker(p).
-4. Apply `lem-weil-degreewise-epi-kernel-cocone-qis` to p. It gives a quasi-isomorphism
-   ker(p) → Cone(p)[-1], hence one from K. The term in degree n of the shifted cone
-   is isomorphic to Iⁿ ⊕ Qⁿ⁻¹. Isomorphism invariance and the direct-sum inequality
-   bound its degree by N. Thus a finite cone construction lowers the term bound by one.
-5. Induct on the bound. At zero take the identity. At N + 1 apply step 4, then the
-   induction hypothesis at N, and compose the quasi-isomorphisms. Finally apply the
-   termwise result with the given global bound D.
-
-The explicit finite argument is written by V2 using the kernel/cone comparison of
-Stacks Tags 070M and 014Q; the statement is the uniformly bounded case of Tag 07K6.
--/
+specified below admits a degree-zero replacement of every integer-indexed cochain complex. -/
 theorem exists_quasiIso_degree_zero_of_bounded_degree
     (C : Type u) [Category.{v} C] [Abelian C]
     (d : C → ℕ) (D : ℕ) (hbound : ∀ A : C, d A ≤ D)

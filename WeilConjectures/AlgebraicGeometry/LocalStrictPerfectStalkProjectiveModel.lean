@@ -17,8 +17,9 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Bounded finite-projective models of locally strictly perfect stalks
 
-Source: Stacks Project, Tags 08C4, 08CM, 01AG and 00A0.
-(blueprint: lem-sc-local-strict-perfect-stalk-projective-model).
+## References
+
+* [Stacks, Tags 08C4, 08CM, 01AG and 00A0]
 -/
 
 @[expose] public section
@@ -28,11 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Finite free sheaves have finitely generated open stalks.
-Source: Stacks Project, Tags 08C4 and 01AG.
-Proof: identify the unit stalk with the regular module, preserve its finite
-coproduct, reindex to `Fin m`, and identify the coproduct with a finite product.
-Finite products of finite modules are finite, including the empty product. -/
+/-- Finite free sheaves have finitely generated open stalks. -/
 private theorem openStalk_free_finite
     (X : Scheme.{u}) (V : X.Opens) (y : V.toScheme) (m : ℕ) :
     Module.Finite (X.presheaf.stalk (V.ι y))
@@ -67,33 +64,8 @@ private theorem openStalk_free_finite
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A local strictly perfect representative supplies a bounded finite-projective
-representative of the termwise stalk of any complex representing the same derived object.
-
-Source: Stacks Project, Cohomology of Sheaves, Tags 08C4 and 08CM;
-Modules, Tag 01AG; Sheaves, Tag 00A0 (restriction to an open neighbourhood).
-(blueprint: lem-sc-local-strict-perfect-stalk-projective-model).
-
-Proof:
-1. Choose V, P and its derived comparison from hlocal. The category of opens over V
-   is equivalent to the open-subspace site of V. At x, neighbourhoods contained in V
-   are cofinal among all neighbourhoods. Germ restriction therefore identifies both
-   the stalk ring and the stalk modules of a restricted sheaf with their stalks on X.
-   This identification commutes with all sheaf morphisms, hence with differentials.
-2. Apply the stalk functor termwise to P to obtain L over O_X,x. Stalks preserve zero
-   objects, so the lower and upper bounds of P give the same bounds for L. Stalks
-   commute with finite coproducts, and the germ of the unit module is the stalk ring.
-   Consequently the stalk of the finite free sheaf on Fin m is the free module of
-   rank m. Apply stalks to each retraction in IsStrictlyPerfect. Its composite is
-   the identity by functoriality. Thus every L.X j is a retract of a finite free
-   module: it is finite and projective, without using local-ring freeness yet.
-3. Stalks are exact by Tag 01AG, so preserve quasi-isomorphisms. Their termwise
-   functor descends to the derived localization. Apply it to the local comparison,
-   and compose with the cofinal germ comparison and eG. This gives Q(L) isomorphic
-   to Q(G_x). This last argument uses the universal property of localization; the
-   morphism universes v and w can differ, since it only transports an isomorphism
-   between the represented objects, not an equivalence of the entire categories.
-No residue fibre, finiteness of its cohomology, or minimal model is asserted here.
-For a zero representative all terms and their retracts are zero. -/
+representative of the termwise stalk of any complex representing the same derived object
+(Stacks, Tags 08C4, 08CM, 01AG and 00A0). -/
 theorem exists_localStrictPerfect_stalk_projective_model
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
