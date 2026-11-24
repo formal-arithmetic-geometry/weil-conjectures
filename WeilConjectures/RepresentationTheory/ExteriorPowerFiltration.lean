@@ -143,8 +143,7 @@ def sigmaSnocEquiv (t r : ℕ) :
 /-- **The exterior powers of a filtered representation.** Let `0 = F₀ ≤ F₁ ≤ ⋯ ≤ F_t = V` be a
 finite filtration of a finite-dimensional representation, with graded pieces
 `A_i = F_{i+1} / F_i`. Then `⋀^r V` has a finite filtration whose graded pieces are the tensor
-products `⨂ᵢ ⋀^{nᵢ} A_i`, one for each tuple `(n₁, …, n_t)` with `∑ nᵢ = r`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`) -/
+products `⨂ᵢ ⋀^{nᵢ} A_i`, one for each tuple `(n₁, …, n_t)` with `∑ nᵢ = r`. -/
 theorem hasGradedPieces_exteriorPower_of_monotone (t : ℕ) : ∀ {V : Type v} [AddCommGroup V]
     [Module k V] [FiniteDimensional k V] (ρ : Representation k W V)
     (F : Fin (t + 1) → Subrepresentation ρ) (_ : Monotone F) (_ : F 0 = ⊥)
@@ -242,9 +241,8 @@ variable {V : Type v} [AddCommGroup V] [Module k V] [FiniteDimensional k V]
 /-- **The exterior power of a filtered representation.** Let `0 = V₀ ⋖ ⋯ ⋖ V_t = V` be a
 composition series, with factors `A_i`, and `r ≥ 0`. Then `⋀^r V` has a finite filtration whose
 graded pieces, in a suitable order, are the representations `⨂ᵢ ⋀^{nᵢ} A_i`, each tuple
-`(n₁, …, n_t)` with `∑ nᵢ = r` occurring exactly once; by
-`nontrivial_piTensorProduct_exteriorPower_iff` the nonzero ones are those with `nᵢ ≤ dim A_i`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`) -/
+`(n₁, …, n_t)` with `∑ nᵢ = r` occurring exactly once. The nonzero ones are those with
+`nᵢ ≤ dim A_i`. -/
 theorem hasGradedPieces_exteriorPower (s : ρ.CompositionSeries) (r : ℕ) :
     HasGradedPieces (ρ.exteriorPower r) fun n : {n : Fin s.length → ℕ // ∑ i, n i = r} ↦
       EquivTo (piTprodExteriorPower (fun i ↦ s.factor i) n.1) :=

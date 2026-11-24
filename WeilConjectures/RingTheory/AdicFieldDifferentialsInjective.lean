@@ -20,9 +20,22 @@ import WeilConjectures.RingTheory.GeometricallyRegularH1Injective
 /-!
 # Base-field differentials of an adically formally smooth local algebra
 
-Source: Stacks Project, More on Algebra, Theorem Tag 07EL, (2) implies (5),
-and Proposition Tag 07NQ, final proof paragraph; Algebra, Proposition Tag 0322
-(blueprint: lem-weil-pbc-fs-adic-field-differentials-injective).
+Let `C` be a Noetherian local `k`-algebra with residue field `K`, formally smooth for the
+`m`-adic topology. We show that `K ⊗[k] Ω[k⁄ℤ] → K ⊗[C] Ω[C⁄ℤ]` is injective.
+
+## Implementation details
+
+In characteristic zero, `K / k` is formally smooth, so already `K ⊗[k] Ω[k⁄ℤ] → Ω[K⁄ℤ]` is
+injective, and this map factors through `K ⊗[C] Ω[C⁄ℤ]`. In characteristic `p`, `C` is
+geometrically regular over `k`, so the map `H₁(L_{K/k}) → m/m²` is injective, which gives the
+injectivity for differentials over `ZMod p`; these agree with differentials over `ℤ`.
+
+The tensor factors are written as `K ⊗[k] Ω[k⁄ℤ]` (rather than `Ω[k⁄ℤ] ⊗[k] K`), using the
+canonical symmetry.
+
+## References
+
+* Stacks Project, Tag 07EL, (2) implies (5); Tag 07NQ, final proof paragraph; Tag 0322.
 -/
 
 @[expose] public section
@@ -52,36 +65,11 @@ private theorem charZero_injective (k : Type u) (K : Type v)
   exact (LinearMap.injective_iff_eq_zero_of_exact
     (Algebra.H1Cotangent.exact_δ_mapBaseChange ℤ k K)).mpr (Subsingleton.elim _ _)
 
-/-- Source: Stacks Project, Tags 07EL, 07NQ and 0322.
-(blueprint: lem-weil-pbc-fs-adic-field-differentials-injective)
-For a Noetherian local `k`-algebra `C` formally smooth for its maximal-ideal-adic topology,
-the canonical map `K ⊗[k] Ω[k⁄ℤ] → K ⊗[C] Ω[C⁄ℤ]` is injective, where `K = C/m`.
-The tensor factors are reversed from the printed statement via the canonical symmetry.
-In characteristic zero its composition with the map to `Ω[K⁄ℤ]` is still injective.
-In characteristic `p`, the canonical maps identify the differentials over `ℤ` and `ZMod p`.
-
-Proof (the blueprint's seven steps):
-1. Since `C` is nonzero and `k` is a field, `k → C → K` embeds `k` in `K`, so their
-characteristic is either zero or a prime. The displayed map is the residue-field base
-change of the first map in the differential exact sequence for `ℤ → k → C`
-(lem-weil-pbc-kahler-differentials-first-exact-sequence).
-2. In characteristic zero, `K/k` is formally smooth
-(lem-weil-pbc-char-zero-field-extension-formally-smooth). The first differential map
-`K ⊗[k] Ω[k⁄ℤ] → Ω[K⁄ℤ]` is consequently injective by
-lem-weil-pbc-formally-smooth-differentials-injective, following Tag 0322.
-3. On generators, this map factors through `K ⊗[C] Ω[C⁄ℤ]` by the differential
-exact-sequence map for `ℤ → C → K`. Injectivity of the composite proves both zero
-characteristic conclusions.
-4. In positive characteristic, adic formal smoothness gives geometric regularity
-by lem-weil-pbc-fs-adic-field-geometrically-regular (07EL (2) implies (1)).
-5. Geometric regularity gives injectivity of `H₁(L_{K/k}) → m/m²` by
-lem-weil-pbc-geometrically-regular-h1-injective (07E5 (1) implies (3)).
-6. This implies injectivity for differentials over the prime field by
-lem-weil-pbc-h1-injective-differentials-injective-char-p (07E5 (3) implies (4)).
-7. An integer-relative derivation kills the image of the prime field; thus the universal
-properties identify differentials over `ℤ` and `ZMod p` for both `k` and `C`. These
-identifications commute with the canonical map on differential generators. This gives
-the asserted injectivity over `ℤ` and the positive-characteristic identifications. -/
+/-- Let `C` be a Noetherian local `k`-algebra, formally smooth for its maximal-ideal-adic
+topology, with residue field `K`. Then the canonical map `K ⊗[k] Ω[k⁄ℤ] → K ⊗[C] Ω[C⁄ℤ]` is
+injective. In characteristic zero its composition with the map to `Ω[K⁄ℤ]` is still injective,
+and in characteristic `p` the canonical maps from differentials over `ℤ` to differentials over
+`ZMod p` are bijective for `k` and `C`. -/
 theorem residueField_mapBaseChange_injective_of_formallySmoothAdic
     (k : Type u) (C : Type v) [Field k] [CommRing C] [Algebra k C]
     [IsLocalRing C] [IsNoetherianRing C]

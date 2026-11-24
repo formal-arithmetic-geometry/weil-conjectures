@@ -23,8 +23,19 @@ import WeilConjectures.RepresentationTheory.LocallyConstantCochainsAcyclicEmbedd
 /-!
 # Effaceable locally constant cochain cohomology over the integers
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, profinite comparison.
-(blueprint: lem-sc-locally-constant-cochains-effaceable).
+The cohomology of locally constant inhomogeneous cochains of discrete `ℤ`-representations of a
+profinite group is an effaceable cohomological delta-functor whose degree zero part is the
+invariants.
+
+## Implementation details
+
+The delta-functor structure comes from the degreewise short exact sequences of cochain
+complexes. Effaceability uses the embedding of `M` into `LocallyConstant G M` with right
+translation, whose cochain complex is exact in positive degrees.
+
+## References
+
+* [Stacks Project, Tag 0DVG](https://stacks.math.columbia.edu/tag/0DVG)
 -/
 
 @[expose] public section
@@ -73,35 +84,11 @@ private theorem exists_homology_deltaFunctor
           (C.mapShortComplex.map φ) (hse S hS) (hse R hR) n (n + 1) rfl }
   exact ⟨T, rfl⟩
 
-/-- The locally constant inhomogeneous complex gives an effaceable delta-functor
-with degree zero equal to invariants. The terms, coefficient maps and differential
-specify the complex functor up to its natural coordinate isomorphism.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed inhomogeneous differential
-and final profinite comparison.
-(blueprint: lem-sc-locally-constant-cochains-effaceable).
-
-Proof: In degree n take the additive group of locally constant functions G^n to E(M).
-The first face uses the action, the interior faces multiply adjacent arguments, and the
-last face drops the last argument. The open-stabilizer condition makes each orbit map
-locally constant. Thus all faces preserve local constancy; they are additive, and the
-face identities cancel the terms of the square of the alternating differential.
-Postcomposition by equivariant coefficient maps defines the complex functor. For a short
-exact sequence, kernels are pointwise and surjectivity follows by choosing a lift on each
-of the finitely many clopen fibers of a cochain on compact G^n. These degreewise short
-exact sequences give natural connecting maps and the exact homology sequence, hence T.
-In degree zero, G^0 is a point and the differential is g acting on m minus m; there are
-no incoming boundaries. This identifies T in degree zero naturally with invariants.
-Embed M into D(M), the locally constant functions G to M with right translation, by the
-orbit map. Evaluation at 1 proves monicity. Compactness of the finite clopen partition
-of a function gives an open subgroup fixing it, so D(M) is a discrete representation.
-For a positive-degree D(M)-valued cochain c, insert x in its first coordinate and evaluate
-its value at 1 to define h(c)(g_1,...,g_{n-1})(x)=c(x,g_1,...,g_{n-1})(1).
-A finite cover in the compact x coordinate shows that h(c) is locally constant into the
-whole discrete function module. Expansion gives dh+hd=1 in positive degrees, with all
-merged and final faces cancelling. Every positive cocycle is therefore a boundary.
-The induced map on positive cohomology into D(M) is zero; transport this monomorphism
-back across E to obtain effacement in A. This uses arbitrary integer modules. -/
+/-- Let `G` be a compact totally disconnected group and `A` an abelian category equivalent to
+discrete `ℤ`-representations of `G`. There is a functor `C` from `A` to cochain complexes whose
+terms are the locally constant cochains `G^n → E M`, with the inhomogeneous differential, and
+whose cohomology is an effaceable cohomological delta-functor with degree zero isomorphic to
+the invariants. -/
 theorem exists_locallyConstantCochains_effaceable
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
