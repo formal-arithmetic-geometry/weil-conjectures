@@ -31,12 +31,22 @@ public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrows
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex,
-Tag 03EL (blueprint: def-pur-cochain-coefficient-arrows).
+Coefficient-change arrows on cochain sheaves: scalar association, the restriction-of-scalars
+tensor comparison on total complexes, and their compatibility with the signed differential.
+
+## Implementation details
 
 The tensor, associator, Koszul symmetry and action unitors below are the existing
 homological-complex constructions. Coefficient arrows are characterized on
 scalar-extension generators, and composition uses the adjunction conjugate.
+Maps out of a sheafified scalar extension are determined on inserted original sections, and the
+scalar-association maps are built on generalized pure tensors and extended by the bilinear
+universal property and sheafification; no flatness or injectivity of coefficient maps is used.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4.
+* Stacks Project, Modules on Sites, Tags 03CY, 03EK and 03EL.
 -/
 
 @[expose] public section
@@ -55,9 +65,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 
 variable {R : Sheaf J CommRingCat.{w}} {S : Sheaf K CommRingCat.{w}}
 
-/-- The canonical scalar-association map epsilon, with its actual tensor source and target.
-Source: Stacks 03EL and 07A4
-(blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- The canonical scalar-association map epsilon, with its actual tensor source and target. -/
 noncomputable def epsilon {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     (P Q : Complex A) : (extend a).obj (P ⊗ Q) ≅
       (extend a).obj P ⊗ (extend a).obj Q :=
@@ -65,8 +73,7 @@ noncomputable def epsilon {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
 
 attribute [instance] CoefficientSquare.additive'
 
-/-- Change coefficients while keeping the original inverse-image adjunction.
-Source: Stacks 03EL (blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- Change coefficients while keeping the original inverse-image adjunction. -/
 noncomputable def changed (f : RingedPullback R S) (d : CoefficientSquare f) :
     RingedPullback d.R' d.S' where
   uInv := f.uInv
@@ -84,8 +91,7 @@ noncomputable def changed (f : RingedPullback R S) (d : CoefficientSquare f) :
 
 /-- Scalar association is normalized on every generalized inverse-image generator.
 Together with S'-linearity and balancing this specifies exactly
-`s' ⊗ (x ⊗ r) ↦ (1 ⊗ x) ⊗ s' phi'(r)`.
-Source: Stacks 03EL (blueprint: def-pur-cochain-coefficient-arrows). -/
+`s' ⊗ (x ⊗ r) ↦ (1 ⊗ x) ⊗ s' phi'(r)`. -/
 def IsScalarAssociation (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d))
     (b : extensionFunctor d.sourceMap ⋙ (changed f d).L ≅
@@ -384,17 +390,7 @@ private theorem pullHomEquiv_exists (f : RingedPullback R S) (k : Comparison f)
   rw [Functor.map_comp, ← Category.assoc (insertion _ _), ← q_eq f k M]
   simp only [generator, Functor.map_id, Category.id_comp, Category.assoc]
 
-/-- Original inverse-image generators detect maps after source coefficient extension.
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EL
-(blueprint: def-pur-cochain-coefficient-arrows).
-Proof: maps out of sheafified scalar extension are determined by their composites with
-its unit. The source extension is generated as an R'-module by those inserted original
-sections. Inverse image preserves this generating presentation: it is left adjoint and
-preserves finite products, and the algebraic inverse-image graph laws preserve addition
-and scalar multiplication. Thus the inverse images of inserted original sections generate
-after extending scalars to S'. Equality on every generalized original section therefore
-implies equality of module maps. The argument is by universal properties of module
-presentations and sheafification and requires neither points nor a nonzero coefficient. -/
+/-- Original inverse-image generators detect maps after source coefficient extension. -/
 private theorem coefficientGenerator_hom_ext {A : Sheaf J CommRingCat.{w}} (a : A ⟶ R)
     (f : RingedPullback R S) (k : Comparison f) (M : Modules A) (H : Modules S)
     (b c : f.L.obj ((extensionFunctor a).obj M) ⟶ H)
@@ -538,17 +534,7 @@ private theorem coefficientHomEquiv_exists (f : RingedPullback R S) (k : Compari
   simp only [generator, changed, Functor.map_id, Category.id_comp, Category.assoc] at hh ⊢
   exact hh
 
-/-- The balanced scalar-association map for one module is invertible.
-Source: Stacks Project, Modules on Sites, Tag 03EL
-(blueprint: def-pur-cochain-coefficient-arrows).
-Proof: inverse image preserves the colimit presentation of a module tensor product.
-Apply it to R' tensor_R M, then extend scalars to S'. The coefficient square identifies
-both scalar actions of R on S'. The balanced tensor map sends s' tensor (r' tensor m)
-to s' times the image of r' tensor (1 tensor m). Its inverse inserts the R' unit.
-The balancing relations make both maps well-defined; their composites fix pure tensors.
-Sheafification extends these mutually inverse maps. On generalized sections their unit
-formula is exactly the displayed equation. This argument includes zero rings and modules;
-no flatness or injectivity of any coefficient map is used. -/
+/-- The balanced scalar-association map for one module is invertible. -/
 private theorem coefficientAssociation_component (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d)) (M : Modules R) :
     ∃ b : (changed f d).L.obj ((extensionFunctor d.sourceMap).obj M) ≅
@@ -607,13 +593,7 @@ private theorem coefficientAssociation_component (f : RingedPullback R S) (k : C
   rw [Category.assoc, hhom]
   simp only [gy, generator, Functor.map_id, Category.id_comp, Category.assoc]
 
-/-- The compatible coefficient square gives a unique normalized scalar association.
-Source: Stacks 03EL (blueprint: def-pur-cochain-coefficient-arrows).
-Proof: on generalized pure tensors use the coefficient square to move the R'
-scalar across the tensor relation. Multiplication of S' scalars gives the forward
-map; insertion of the two units gives its inverse. The bilinear universal property,
-then sheafification, extend the maps. The two composites are identities on pure
-tensors. Those generators also give naturality and uniqueness. -/
+/-- The compatible coefficient square gives a unique normalized scalar association. -/
 theorem scalarAssociation_existsUnique (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d)) :
     ∃! b : extensionFunctor d.sourceMap ⋙ (changed f d).L ≅
@@ -649,15 +629,12 @@ theorem scalarAssociation_existsUnique (f : RingedPullback R S) (k : Comparison 
     intro Z x
     exact (he' M Z x).trans (hb M Z x).symm
 
-/-- The unique canonical module scalar-association isomorphism.
-Source: Stacks 03EL (blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- The unique canonical module scalar-association isomorphism. -/
 noncomputable def scalarAssociation (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d)) :=
   Classical.choose (scalarAssociation_existsUnique f k d k')
 
-/-- Kappa is the termwise lift of the normalized scalar-association map.
-Source: Stacks 03EL and 07A4
-(blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- Kappa is the termwise lift of the normalized scalar-association map. -/
 noncomputable def kappa (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d)) (P : Complex R) :
     (pull (changed f d)).obj ((extend d.sourceMap).obj P) ≅
@@ -665,8 +642,7 @@ noncomputable def kappa (f : RingedPullback R S) (k : Comparison f)
   (NatIso.mapHomologicalComplex (scalarAssociation f k d k') (.up ℤ)).app P
 
 /-- Tau is the extension unit followed by the inverse scalar association, with
-restriction of scalars making the semilinear map an S-linear map.
-Source: Stacks 03EL (blueprint: def-pur-cochain-coefficient-arrows). -/
+restriction of scalars making the semilinear map an S-linear map. -/
 noncomputable def transitionModule (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d)) :
     f.L ⟶ extensionFunctor d.sourceMap ⋙ (changed f d).L ⋙
@@ -674,17 +650,14 @@ noncomputable def transitionModule (f : RingedPullback R S) (k : Comparison f)
   Functor.whiskerLeft f.L (extensionAdjunction d.targetMap).unit ≫
     Functor.whiskerRight (scalarAssociation f k d k').inv (restrictionFunctor d.targetMap)
 
-/-- The canonical transition chain map, rather than an inverse to coefficient change.
-Source: Stacks 03EL (blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- The canonical transition chain map, rather than an inverse to coefficient change. -/
 noncomputable def tau (f : RingedPullback R S) (k : Comparison f)
     (d : CoefficientSquare f) (k' : Comparison (changed f d)) (P : Complex R) :
     (pull f).obj P ⟶ (restrictComplex d.targetMap).obj
       ((pull (changed f d)).obj ((extend d.sourceMap).obj P)) :=
   (NatTrans.mapHomologicalComplex (transitionModule f k d k') (.up ℤ)).app P
 
-/-- The canonical lax tensor map for restriction of scalars, obtained by adjunction.
-Source: Stacks 03CY and 03EK
-(blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- The canonical lax tensor map for restriction of scalars, obtained by adjunction. -/
 noncomputable def restrictionTensorModule {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     (M N : Modules B) :
     (restrictionFunctor a).obj M ⊗ (restrictionFunctor a).obj N ⟶
@@ -807,9 +780,7 @@ private theorem laxTotalComponent_comm
 
 end
 
-/-- Sum of the canonical restriction tensor maps over a total degree.
-Source: Stacks 03EK and 07A4
-(blueprint: def-pur-cochain-coefficient-arrows). -/
+/-- Sum of the canonical restriction tensor maps over a total degree. -/
 noncomputable def restrictionTensorComponent {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     (P Q : Complex B) (n : ℤ) :
     ((restrictComplex a).obj P ⊗ (restrictComplex a).obj Q).X n ⟶
@@ -821,12 +792,7 @@ noncomputable def restrictionTensorComponent {A B : Sheaf J CommRingCat.{w}} (a 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Restriction's tensor comparison commutes with the signed total differential.
-Source: Stacks 03EK and 07A4
-(blueprint: def-pur-cochain-coefficient-arrows).
-Proof: on each summand, naturality of the adjunction's unit and counit and of
-scalar extension's tensor comparison commutes with each differential. Restriction
-is additive, so it preserves the factor (-1)^p. Sum the two equations. -/
+/-- Restriction's tensor comparison commutes with the signed total differential. -/
 theorem restrictionTensorComponent_comm {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     (P Q : Complex B) (n m : ℤ) :
     restrictionTensorComponent a P Q n ≫
@@ -837,9 +803,7 @@ theorem restrictionTensorComponent_comm {A B : Sheaf J CommRingCat.{w}} (a : A �
     (fun f g ↦ (restrictionTensorModule_naturality a f g).symm) P Q n m
 
 /-- The usual restriction-of-scalars tensor map on total complexes.
-It sends a homogeneous pure tensor `x ⊗ y` to `x ⊗ y` and is not asserted invertible.
-Source: Stacks 03EK and 07A4
-(blueprint: def-pur-cochain-coefficient-arrows). -/
+It sends a homogeneous pure tensor `x ⊗ y` to `x ⊗ y` and is not asserted invertible. -/
 noncomputable def restrictionTensor {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     (P Q : Complex B) :
     (restrictComplex a).obj P ⊗ (restrictComplex a).obj Q ⟶

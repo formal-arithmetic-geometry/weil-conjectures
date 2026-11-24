@@ -13,8 +13,19 @@ import WeilConjectures.RingTheory.JacobiZariskiRegularSequenceLeftInjective
 /-!
 # Left exactness of the Jacobi–Zariski sequence for fields
 
-Source: Stacks Project, More on Algebra, Tag 07E2, `lemma-transitivity-gamma`
-(blueprint: lem-weil-pbc-transitivity-gamma).
+For a tower of fields `K → L → M`, the Jacobi–Zariski sequence is exact including its left
+endpoint: `M ⊗_L H_1(L/K) → H_1(M/K)` is injective.
+
+## Implementation details
+
+The exactness and surjectivity clauses away from the left endpoint come from Mathlib. For left
+injectivity, a kernel element is descended to a finite complete-intersection subalgebra
+(`FieldTheory.exists_completeIntersection_subalgebra`), where injectivity follows from
+`jacobiZariski_left_injective_of_regularSequence` and flatness of all `L`-modules.
+
+## References
+
+* Stacks Project, More on Algebra, Tags 07E2, 07D5, 07D4, 07BQ and 07BV.
 -/
 
 @[expose] public section
@@ -216,11 +227,7 @@ private theorem tensor_conormal_finite_support
             congrArg₂ (· + ·) hpmap hqmap
 
 open _root_.TensorProduct in
-/-- Left injectivity in the transitivity sequence for a tower of fields.
-Source: Stacks Project, More on Algebra, Tag 07E2, with the complete-intersection
-subalgebra argument. The proof proceeds by descending a kernel element to a finite
-complete-intersection subalgebra and applying the regular-sequence injectivity lemma.
-(blueprint: lem-weil-pbc-transitivity-gamma) -/
+/-- Left injectivity in the transitivity sequence for a tower of fields. -/
 private theorem transitivityGamma_left_injective
     (K : Type u) (L : Type v) (M : Type w)
     [Field K] [Field L] [Field M]
@@ -273,38 +280,11 @@ private theorem transitivityGamma_left_injective
   exact Submodule.zero_mem _
 
 
-/-- Source: Stacks Project, More on Algebra, Tag 07E2, `lemma-transitivity-gamma`
-(blueprint: lem-weil-pbc-transitivity-gamma).
-
-For a tower of fields, the entire Jacobi–Zariski sequence is exact, including its left
+/-- For a tower of fields, the entire Jacobi–Zariski sequence is exact, including its left
 endpoint. Tensor factors are written with `M` first, as in
 `Algebra.jacobiZariski_homology_sequence`; the symmetry sends `h ⊗ c` to `c ⊗ h`.
 The left map sends `c ⊗ h` to `c • H1Cotangent.map K K L M h`, the map induced by
-`K[L] → K[M]` on canonical presentations.
-
-Proof, following Stacks Tags 07E2, 07D5, 07D4, 07BQ, and 07BV:
-1. Mathlib proves the five exactness and surjectivity clauses, including exactness
-   at the first homology of M/K since M is flat over the field L.
-2. At a regular-sequence presentation over L, use
-   `jacobiZariski_left_injective_of_regularSequence`. Tensoring the inclusion of
-   H1 into the conormal module is injective because every L-module is flat.
-   The formula on pure tensors identifies the resulting composite with the
-   canonical base-change map, proving injectivity at that finite stage.
-3. By tensor induction, express an arbitrary tensor x by a polynomial relation g
-   representing its image in the conormal module. Choose the finite set E of its
-   tensor coefficients. For every subalgebra containing E, construct a tensor y
-   and a polynomial q representing its image, with y mapping to x and q to g.
-4. If x is in the kernel, g belongs to the square of the presentation ideal.
-   Induction on membership in the product ideal supplies a finite set F of
-   variables supporting the relation factors. In every subalgebra containing F,
-   g lifts to a member of the square of that subalgebra's presentation ideal.
-   Evaluation commutes with variable renaming, and the subalgebra inclusion is
-   injective, so all lifted factors remain relations.
-5. Apply `FieldTheory.exists_completeIntersection_subalgebra` to E union F.
-   Its embedded quotient has image S with the required regular presentation.
-   Injectivity of variable renaming identifies the two lifted representatives;
-   hence the tensor y is in the kernel at S. Step 2 gives y = 0, and therefore
-   x = 0. Combine this injectivity with step 1. -/
+`K[L] → K[M]` on canonical presentations. -/
 theorem transitivityGamma
     (K : Type u) (L : Type v) (M : Type w)
     [Field K] [Field L] [Field M]

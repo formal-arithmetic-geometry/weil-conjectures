@@ -15,8 +15,17 @@ import WeilConjectures.RingTheory.WellOrderedUnionProjectiveDimensionSucc
 /-!
 # Projective dimension of a well-ordered union of submodules
 
-Source: Stacks Project, Algebra, Lemma 0D1U
-(blueprint: lem-weil-pbc-well-ordered-union-projective-dimension).
+This file shows that a well-ordered increasing union of submodules whose successive
+quotients have projective dimension at most `n` has projective dimension at most `n`.
+
+## Implementation details
+
+The predecessor union is represented by its submodule supremum and pulled back along the
+inclusion of `F e` into `M`. For a least index this is the zero submodule.
+
+## References
+
+* Stacks Project, Algebra, Lemma 0D1U
 -/
 
 @[expose] public section
@@ -26,20 +35,7 @@ universe u v w
 namespace ModuleCat
 
 /-- A well-ordered increasing union of submodules whose successive quotients have
-projective resolutions of length at most `n` has a projective resolution of length at most `n`.
-The predecessor union is represented by its submodule supremum and pulled back along the
-inclusion of `F e` into `M`. For a least index this is the zero submodule.
-Source: Stacks Project, Algebra, Lemma 0D1U
-(blueprint: lem-weil-pbc-well-ordered-union-projective-dimension).
-
-Proof: generalize the module, the index type and all filtration hypotheses before
-induction on the length bound. At zero use the splitting/direct-sum base case
-`hasProjectiveResolutionLE_of_wellOrderedUnion_zero`. At a successor use
-`hasProjectiveResolutionLE_of_wellOrderedUnion_succ`, supplying the generalized
-induction hypothesis. The successor obligation constructs a projective presentation,
-filters its kernel, applies the induction hypothesis to that kernel and splices its
-resolution with the presentation. These two obligations are stated separately;
-the induction combining them is complete. -/
+projective resolutions of length at most `n` has a projective resolution of length at most `n`. -/
 theorem hasProjectiveResolutionLE_of_wellOrderedUnion
     {R : Type u} [CommRing R] (M : ModuleCat.{v} R) (n : ℕ)
     {E : Type w} [LinearOrder E] [IsWellOrder E (· < ·)]

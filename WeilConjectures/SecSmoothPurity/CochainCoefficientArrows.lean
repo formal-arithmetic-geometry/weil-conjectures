@@ -11,12 +11,22 @@ import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and sites-modules.tex,
-Tag 03EL (auxiliary; not a blueprint node).
-
 The tensor, associator, Koszul symmetry and action unitors below are the existing
 homological-complex constructions. Coefficient arrows are characterized on
 scalar-extension generators, and composition uses the adjunction conjugate.
+
+## Implementation details
+
+The normalized scalar-extension adjunction is obtained by composing the sectionwise balanced
+tensor-hom correspondence with the module sheafification adjunction; its unit determines it.
+
+## References
+
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks Project, Tag 03D2](https://stacks.math.columbia.edu/tag/03D2)
+* [Stacks Project, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks Project, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks Project, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public section
@@ -35,8 +45,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 
 variable {R : Sheaf J CommRingCat.{w}} {S : Sheaf K CommRingCat.{w}}
 
-/-- Identity inverse image, transporting every operation by the identity.
-Source: Stacks 03D2 (auxiliary; not a blueprint node). -/
+/-- Identity inverse image, transporting every operation by the identity. -/
 noncomputable def identityAlgebraicInverseImage (A : Sheaf J CommRingCat.{w}) :
     SheafOfModules.AlgebraicInverseImage (𝟭 (Sheaf J (Type w))) A A where
   ringUnderlying := Iso.refl _
@@ -50,10 +59,7 @@ noncomputable def identityAlgebraicInverseImage (A : Sheaf J CommRingCat.{w}) :
   moduleZero := fun _ _ _ h ↦ h
   moduleSMul := fun _ _ _ _ _ h ↦ h
 
-/-- Functor laws for the existing sheafified scalar extension.
-Source: Stacks 03CY (auxiliary; not a blueprint node).
-Proof: on a pure tensor the maps are `s ⊗ x ↦ s ⊗ h(x)`.
-Identity and composition hold on these tensors; sheafification is functorial. -/
+/-- Functor laws for the existing sheafified scalar extension. -/
 theorem extensionFunctor_laws {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     (∀ M : Modules A, SheafOfModules.changeOfRingsHom a M (𝟙 M) = 𝟙 _) ∧
       (∀ (M N H : Modules A) (b : M ⟶ N) (c : N ⟶ H),
@@ -83,8 +89,7 @@ theorem extensionFunctor_laws {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     intro U
     exact (ModuleCat.extendScalars (a.hom.app U).hom).map_comp _ _
 
-/-- Actual scalar extension, with the scalar placed first by the existing API.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Actual scalar extension, with the scalar placed first by the existing API. -/
 noncomputable def extensionFunctor {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     Modules A ⥤ Modules B where
   obj M := SheafOfModules.changeOfRings a M
@@ -92,14 +97,12 @@ noncomputable def extensionFunctor {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
   map_id := (extensionFunctor_laws a).1
   map_comp := (extensionFunctor_laws a).2 _ _ _
 
-/-- Actual restriction of scalars; this keeps the underlying abelian sheaf.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Actual restriction of scalars; this keeps the underlying abelian sheaf. -/
 noncomputable abbrev restrictionFunctor {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :=
   SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)
 
-/-- The sheafification-unit image of `s ⊗ x` in scalar extension.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The sheafification-unit image of `s ⊗ x` in scalar extension. -/
 noncomputable def extensionTmul {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     (M : Modules A) (U : Cᵒᵖ) (s : B.obj.obj U) (x : M.val.obj U) :
     ((extensionFunctor a).obj M).val.obj U :=
@@ -254,12 +257,7 @@ private noncomputable def tensorAdjunction
           Equiv.apply_symm_apply]
       homEquiv_naturality_right := fun f b ↦ tensorHomEquiv_naturality_right c _ f b }
 
-/-- The scalar-extension adjunction normalized by `x ↦ 1 ⊗ x`.
-Source: Stacks 03CY and 03D7
-(auxiliary; not a blueprint node).
-Proof: compose the sectionwise balanced tensor hom correspondence with the
-module sheafification adjunction. The resulting unit has the displayed formula.
-The unit determines the counit, so an adjunction with this formula is unique. -/
+/-- There is a unique scalar-extension adjunction whose unit is `x ↦ 1 ⊗ x`. -/
 theorem extensionAdjunction_existsUnique {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     ∃! adj : extensionFunctor a ⊣ restrictionFunctor a,
       ∀ (M : Modules A) (U : Cᵒᵖ) (x : M.val.obj U),
@@ -275,20 +273,16 @@ theorem extensionAdjunction_existsUnique {A B : Sheaf J CommRingCat.{w}} (a : A 
   ext M U x
   exact (hadj M U x).trans (hunit M U x).symm
 
-/-- The unique normalized scalar-extension adjunction.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The unique normalized scalar-extension adjunction. -/
 noncomputable def extensionAdjunction {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :=
   Classical.choose (extensionAdjunction_existsUnique a)
 
-/-- Scalar extension is additive because it is a left adjoint between abelian categories.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Scalar extension is additive because it is a left adjoint between abelian categories. -/
 noncomputable instance extensionFunctorAdditive {A B : Sheaf J CommRingCat.{w}}
     (a : A ⟶ B) : (extensionFunctor a).Additive :=
   (extensionAdjunction a).left_adjoint_additive
 
-/-- The object/map presentation of scalar extension with identity inverse image.
-Source: Stacks 03CY (auxiliary; not a blueprint node).
-Proof: expand the functor map; the two transport maps are identities. -/
+/-- The object/map presentation of scalar extension with identity inverse image. -/
 theorem extensionFunctor_mapPresentation {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B)
     {M N : Modules A} (b : M ⟶ N) :
     (extensionFunctor a).map b = eqToHom (rfl :
@@ -296,8 +290,7 @@ theorem extensionFunctor_mapPresentation {A B : Sheaf J CommRingCat.{w}} (a : A 
         SheafOfModules.changeOfRingsHom a M b ≫ eqToHom rfl := by
   simp [extensionFunctor]
 
-/-- Scalar extension as the actual ringed identity-topos pullback.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Scalar extension as the actual ringed identity-topos pullback. -/
 noncomputable def extensionPullback {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     RingedPullback A B where
   uInv := 𝟭 _
@@ -313,8 +306,7 @@ noncomputable def extensionPullback {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B
   V := restrictionFunctor a
   moduleAdj := extensionAdjunction a
 
-/-- The normalized comparison for scalar extension, uniquely fixed by pure tensors.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- The normalized comparison for scalar extension, uniquely fixed by pure tensors. -/
 noncomputable def extensionComparison {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :
     Comparison (extensionPullback a) :=
   Classical.choice
@@ -322,22 +314,18 @@ noncomputable def extensionComparison {A B : Sheaf J CommRingCat.{w}} (a : A ⟶
     A B A (𝟭 _) (identityAlgebraicInverseImage A) a (extensionFunctor a)
     (fun _ ↦ rfl) (𝟭 _) Adjunction.id (extensionFunctor_mapPresentation a)).1
 
-/-- Termwise scalar extension on unbounded cochain complexes.
-Source: Stacks 03CY and 07A4
-(auxiliary; not a blueprint node). -/
+/-- Termwise scalar extension on unbounded cochain complexes. -/
 noncomputable abbrev extend {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :=
   pull (extensionPullback a)
 
-/-- Insertion of the scalar unit, as a morphism of underlying sheaves.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- Insertion of the scalar unit, as a morphism of underlying sheaves. -/
 noncomputable def insertion {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) (M : Modules A) :
     (underlying A).obj M ⟶ (underlying B).obj ((extensionFunctor a).obj M) :=
   (underlying A).map ((extensionAdjunction a).unit.app M)
 
 /-- The compatible coefficient square over the same geometric inverse image.
 In particular the equality of the two coefficient maps is part of the input.
-The module functor is required to be the actual scalar-extension presentation.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+The module functor is required to be the actual scalar-extension presentation. -/
 structure CoefficientSquare (f : RingedPullback R S) where
   R' : Sheaf J CommRingCat.{w}
   S' : Sheaf K CommRingCat.{w}
@@ -364,8 +352,7 @@ structure CoefficientSquare (f : RingedPullback R S) where
 
 attribute [instance] CoefficientSquare.additive'
 
-/-- A generalized inverse-image generator, followed by scalar-unit insertion.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+/-- A generalized inverse-image generator, followed by scalar-unit insertion. -/
 noncomputable def generator (f : RingedPullback R S) (k : Comparison f)
     {M : Modules R} {Z : Sheaf J (Type w)} (x : Z ⟶ (underlying R).obj M) :
     f.uInv.obj Z ⟶ (underlying S).obj (f.L.obj M) :=
@@ -420,8 +407,7 @@ set_option backward.defeqAttrib.useBackward true
 private noncomputable instance pushPreservesLimits (f : RingedPullback R S) :
     PreservesLimits f.uPush := f.adj.rightAdjoint_preservesLimits
 
-/-- The restriction of scalars on complexes, applied termwise.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+/-- The restriction of scalars on complexes, applied termwise. -/
 noncomputable abbrev restrictComplex {A B : Sheaf J CommRingCat.{w}} (a : A ⟶ B) :=
   (restrictionFunctor a).mapHomologicalComplex (.up ℤ)
 

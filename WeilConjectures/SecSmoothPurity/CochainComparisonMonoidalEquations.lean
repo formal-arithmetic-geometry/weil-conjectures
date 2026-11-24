@@ -12,9 +12,9 @@ set_option linter.privateModule false
 
 /-! # Monoidal equations for the canonical cochain comparison
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, sites-modules.tex, Tag 03EL, and sites-cohomology.tex, Tag 07A4.
 -/
 
 @[expose] public section

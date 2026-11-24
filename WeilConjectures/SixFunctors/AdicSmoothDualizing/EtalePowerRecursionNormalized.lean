@@ -9,8 +9,8 @@ public import WeilConjectures.SixFunctors.AdicSmoothDualizing.AdicSmoothDualizin
 
 /-! # Normalization from the finite Tate-power recurrence
 
-Source: the ordered tensor-power construction in the smooth-dualizing corollary.
-(blueprint: lem-sf-etale-power-recursion-normalized).
+A family satisfying the zero and successor equations of the ordered finite Tate-power
+construction in the smooth-dualizing corollary has the full normalization.
 -/
 
 @[expose] public noncomputable section
@@ -26,11 +26,7 @@ namespace WeilConjectures
 namespace AdicSmoothDualizing
 
 /-- A family with the specified zero and successor equations has the original full normalization.
-Source: ordered finite Tate powers (blueprint: lem-sf-etale-power-recursion-normalized).
-Proof: at zero use the supplied heterogeneous equality. For each successor take the actual
-right-tensor map, tensor-shift comparison, flat single-complex comparison and sheaf-power
-map as witnesses. Their heterogeneous equalities are reflexive, and the supplied successor
-equation is precisely the required composite equation. -/
+-/
 theorem etalePowerPresentation_normalized (P : PurityFiniteSetting.{u})
     (T : Scheme.{u}) (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤)))
     (c : (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧)
