@@ -16,8 +16,14 @@ import WeilConjectures.RingTheory.AdjoinRootCRTLiftBlock
 
 /-! # Simultaneous CRT coordinates for multiplication matrices
 
-Source: Stacks Project, Tag 09XI, proof of (3) implies (1).
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix)
+Let `f` be monic whose reduction modulo `I` factors as a product `g * h` of coprime monic
+polynomials. There are coordinates over `A/I` in which multiplication by the root of `f` is block
+diagonal with the multiplication-by-root matrices of `g` and `h`, and multiplication by a CRT lift
+`e` is `diag(1, 0)`.
+
+## References
+
+* [Stacks Project, Tag 09XI]
 -/
 
 @[expose] public section
@@ -26,24 +32,11 @@ universe u
 
 namespace Polynomial
 
-/-- Coefficient reduction and Chinese remainders simultaneously put multiplication
-by the root and by a CRT lift in block coordinates.
-Source: Stacks Project, Tag 09XI, proof of (3) implies (1), the decomposition of B/IB.
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix)
-
-Proof: a monic quotient has the power basis, and coefficient reduction preserves
-its degree over the nonzero residue ring. Reducing the coefficients of representatives
-of degree less than deg f identifies its coordinate module with the power-basis
-coordinate module of AdjoinRoot of the reduced polynomial. The CRT map to
-AdjoinRoot g times AdjoinRoot h is an algebra equivalence: coprimality makes the
-principal ideals comaximal, and their intersection is the ideal of g*h. Concatenate
-the power bases of the two factors. Their dimensions add to deg f, so choose an
-index equivalence d. The matrix of the resulting coordinate equivalence is a unit U.
-The algebra equivalence takes the root to the pair of roots and e to (1,0), by
-its two prescribed residues. Intertwining multiplication by these elements gives
-the two conjugation identities. If either factor has degree zero, its quotient is
-zero and its basis is empty; the same construction applies. No idempotence of e
-in AdjoinRoot f is required, since only its residue is used. -/
+/-- Let `f` be monic with `f mod I = g * h` for coprime monic `g`, `h`, and let `e ∈ A[X]/(f)`
+map to `1` in `(A/I)[X]/(g)` and to `0` in `(A/I)[X]/(h)`. Then there are an index equivalence
+`d` and a unit matrix `U` over `A/I` conjugating the reduced matrix of multiplication by the root
+into `fromBlocks Tg 0 0 Th`, and the reduced matrix of multiplication by `e` into
+`fromBlocks 1 0 0 0`. -/
 theorem adjoinRoot_crt_matrix
     {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)]
     (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X])
