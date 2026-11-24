@@ -13,8 +13,11 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Change of rings preserves K-flat complexes with flat terms
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.18.1, Tag 0G7E,
-identity-topos coefficient-change case (auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.18.1, Tag 0G7E (identity-topos
+  coefficient-change case)
+* Stacks Project, Tag 05V4
 -/
 
 @[expose] public section
@@ -80,29 +83,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : Grothendiec
   (K : CochainComplex (SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)
 
-/-- Change of rings preserves K-flatness and flatness of every term.
-Source: Stacks, Tag 0G7E (auxiliary; not a blueprint node).
-
-Proof:
-1. Restriction of scalars leaves underlying abelian sheaves unchanged. Kernels are
-sectionwise and cokernels are sheafified sectionwise cokernels; thus restriction preserves
-and reflects exactness and acyclicity (def-pc-sheaf-restrict-scalars,
-situation-conventions).
-2. For an R-module M and S-module N, the balanced maps n tensor (m tensor s) maps to
-sn tensor m and n tensor m maps to n tensor (m tensor 1) give inverse natural maps
-U(N tensor_S (M tensor_R S)) and UN tensor_R M. Construct them on presheaf tensor
-generators, then extend by monoidal sheafification. The resulting comparison is natural
-in both factors (lem-pur-change-of-rings-tensor-cancellation).
-3. Restrict a short exact sequence of S-modules, tensor with K.X p, and use step 2.
-Exactness of tensor with K.X p and reflection of exactness prove flatness of its change
-of rings (Stacks, Tag 05V4).
-4. Take direct sums of step 2 over a+b=n. Restriction commutes with these sheafified
-sums of finite-support tuples. The resulting isomorphism of total complexes respects
-the two differential terms, including the sign (-1)^a on the second term
-(def-pc-tensor-complex-sheaves).
-5. If F is acyclic over S, UF is acyclic over R. K-flatness of K makes Tot(UF tensor_R K)
-acyclic. Steps 4 and 1 give acyclicity of Tot(F tensor_S (K tensor_R S)), which is
-K-flatness of the changed complex (def-pc-kflat-complex). Combine with step 3. -/
+/-- Change of rings preserves K-flatness and flatness of every term. -/
 theorem changeOfRings_isKFlat_of_flat_terms_independentCoefficients
     (E : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R) ⥤
       SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj S))

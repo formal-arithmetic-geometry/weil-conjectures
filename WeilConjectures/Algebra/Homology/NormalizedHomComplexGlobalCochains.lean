@@ -13,9 +13,10 @@ public import WeilConjectures.Algebra.Homology.HomComplexProjections
 /-!
 # Component-normalized global cochains of the sheaf Hom complex
 
-Source: Stacks Project, Cohomology on Sites, Section 21.34, Equation (21.34.0.2)
-(Tag 0A8Z), and Lemma 21.34.8 (Tag 0A96).
-(blueprint: lem-pc-normalized-hom-complex-global-cochains)
+## References
+
+* Stacks Project, Cohomology on Sites, Section 21.34, Equation (21.34.0.2) (Tag 0A8Z), and Lemma
+  21.34.8 (Tag 0A96)
 -/
 
 @[expose] public section
@@ -36,14 +37,14 @@ local notation "𝓡" =>
 set_option hygiene false in
 local notation "Mod" => SheafOfModules.{u} 𝓡
 
-/-- (blueprint: lem-pc-normalized-hom-complex-global-cochains) -/
+/-- Global sections of the internal Hom sheaf correspond additively to morphisms. -/
 noncomputable def normalizedHomFactorEquiv (M N : Mod) :
     (SheafOfModules.unit 𝓡 ⟶ SheafOfModules.homObj (R := R) M N) ≃+ (M ⟶ N) where
   toEquiv := (SheafOfModules.unitHomEquiv _).trans
     (SheafOfModules.homObjSectionsEquiv M N)
   map_add' f g := by rfl
 
-/-- (blueprint: lem-pc-normalized-hom-complex-global-cochains) -/
+/-- The equivalence `normalizedHomFactorEquiv` is compatible with pre- and post-composition. -/
 lemma normalizedHomFactorEquiv_comp {M M' N N' : Mod}
     (s : SheafOfModules.unit 𝓡 ⟶ SheafOfModules.homObj (R := R) M N)
     (f : M' ⟶ M) (g : N ⟶ N') :
@@ -52,8 +53,7 @@ lemma normalizedHomFactorEquiv_comp {M M' N N' : Mod}
   rfl
 
 /-- Construct the global-cochain comparison from a specified product cone.
-The inverse is the unique lift to that product. 
-(blueprint: lem-pc-normalized-hom-complex-global-cochains)
+The inverse is the unique lift to that product.
 -/
 noncomputable def normalizedHomGlobalCochainsOfFan (A B : CochainComplex Mod ℤ) (n : ℤ)
     (Z : Mod) (π : ∀ p q : ℤ, p + n = q → (Z ⟶
@@ -87,8 +87,7 @@ noncomputable def normalizedHomGlobalCochainsOfFan (A B : CochainComplex Mod ℤ
         intro p q hpq
         simp [add_comp] }
 
-/-- The projections exposed by the Hom-complex product specification. 
-(blueprint: lem-pc-normalized-hom-complex-global-cochains)
+/-- The projections exposed by the Hom-complex product specification.
 -/
 noncomputable def normalizedHomProjection (A B : CochainComplex Mod ℤ)
     (n p q : ℤ) (h : p + n = q) :
@@ -96,8 +95,7 @@ noncomputable def normalizedHomProjection (A B : CochainComplex Mod ℤ)
   (Classical.choose
     (homComplex_projections_exists.{u, u, u, u} (J := J) (R := R))) A B n p q h
 
-/-- The canonical product projections of the chosen Hom complex form a limit cone. 
-(blueprint: lem-pc-normalized-hom-complex-global-cochains)
+/-- The canonical product projections of the chosen Hom complex form a limit cone.
 -/
 theorem normalizedHomProjection_isLimit (A B : CochainComplex Mod ℤ) (n : ℤ) :
     Nonempty (IsLimit (Fan.mk ((homComplex (R := R) A B).X n)
@@ -105,9 +103,7 @@ theorem normalizedHomProjection_isLimit (A B : CochainComplex Mod ℤ) (n : ℤ)
   exact (Classical.choose_spec
     (homComplex_projections_exists.{u, u, u, u} (J := J) (R := R))).1 A B n
 
-/-- The explicit product-projection comparison with ordinary cochains.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains). -/
+/-- The explicit product-projection comparison with ordinary cochains. -/
 noncomputable def normalizedHomGlobalCochains
     (R : Sheaf J CommRingCat.{u}) (A B : CochainComplex Mod ℤ) (n : ℤ) :
     (SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X n) ≃+
@@ -115,9 +111,7 @@ noncomputable def normalizedHomGlobalCochains
   normalizedHomGlobalCochainsOfFan A B n _ (normalizedHomProjection (R := R) A B n)
     (normalizedHomProjection_isLimit A B n).some
 
-/-- The component formula retained by the explicit comparison.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains). -/
+/-- The component formula retained by the explicit comparison. -/
 theorem normalizedHomGlobalCochains_v
     (R : Sheaf J CommRingCat.{u}) (A B : CochainComplex Mod ℤ) (n : ℤ)
     (s : SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X n)
@@ -127,8 +121,7 @@ theorem normalizedHomGlobalCochains_v
         (s ≫ normalizedHomProjection (R := R) A B n p q h) := rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Differential compatibility of the comparison built from two product cones. 
-(blueprint: lem-pc-normalized-hom-complex-global-cochains)
+/-- Differential compatibility of the comparison built from two product cones.
 -/
 lemma normalizedHomGlobalCochainsOfFan_comm (A B : CochainComplex Mod ℤ)
     (i j : ℤ) (hij : i + 1 = j) (Zi Zj : Mod)
@@ -169,13 +162,7 @@ lemma normalizedHomGlobalCochainsOfFan_comm (A B : CochainComplex Mod ℤ)
   simp only [Int.negOnePow_succ, Units.smul_def, Units.val_neg,
     neg_smul, sub_eq_add_neg]
 
-/-- The explicit normalized comparison commutes with the cochain differential.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains).
-Proof: project onto each Hom factor, apply the differential projection formula,
-and identify internal-Hom sections with morphisms. The resulting formula is
-exactly the ordinary cochain differential. For nonconsecutive degrees both
-sides vanish by the complex shape. -/
+/-- The explicit normalized comparison commutes with the cochain differential. -/
 theorem normalizedHomGlobalCochains_comm
     (R : Sheaf J CommRingCat.{u}) (A B : CochainComplex Mod ℤ)
     (i j : ℤ) (s : SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X i) :

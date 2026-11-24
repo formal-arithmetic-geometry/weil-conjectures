@@ -15,8 +15,11 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Inverse to degreewise currying
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
-(blueprint: lem-sc-hom-tensor-degreewise-iso)
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90
+* Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction; Modules on Sites,
+  Section 03EK, tensor product universal property
 -/
 
 @[expose] public section
@@ -242,20 +245,7 @@ private theorem homTerm_hom_ext (L M : CochainComplex Mod ℤ) (n : ℤ)
   exact congrArg (fun f ↦ (f.val.app U).hom s) (h p)
 
 set_option synthInstance.maxSize 256 in
-/-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
-Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;
-Modules on Sites, Section 03EK, tensor product universal property.
-(blueprint: lem-sc-hom-tensor-localized-ext)
-
-Proof: Fix a source section over U and regard its images as morphisms on the
-localized site over U. Restrict each such morphism to every total tensor summand.
-The tensor summand is the sheafification of the presheaf tensor. Equality on
-pure tensors gives equality on the presheaf tensor by its bilinear universal
-property. The sheafification adjunction gives equality on the sheaf tensor,
-including after localization, since sheafification commutes with restriction
-to a localized site. The coproduct universal property gives equality on the
-total term. Finally extensionality of internal-Hom sections, linear maps and
-sheaf morphisms gives equality of the two original morphisms. -/
+/-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors. -/
 private theorem tensorLocalized_ext
     (K L : CochainComplex Mod ℤ) (N X : Mod) (p : ℤ) :
     letI := SheafOfModules.monoidalCategory R
@@ -333,23 +323,7 @@ private theorem tensorLocalized_ext
 
 set_option backward.isDefEq.respectTransparency true in
 set_option synthInstance.maxSize 256 in
-/-- There is one reverse map inverse to every forward map with the currying equation.
-Source: Stacks Project, Tag 0A90, inverse construction 
-(blueprint: lem-sc-hom-tensor-degreewise-iso).
-
-Proof: Restrict a localized map from each total-degree coproduct to its summands.
-Apply the localized tensor-Hom adjunction to curry the K and L inputs successively.
-Combine the q components by the inner Hom product universal property and then the
-p components by the outer Hom product universal property. Restriction naturality
-of currying gives a sheaf morphism in the reverse direction. To check the first
-composite, project to p and q and evaluate at x and y; the assumed equation and
-the tensor-Hom inverse laws give the identity. For the second composite, project
-to total degree, restrict to a summand, and check on pure tensors before
-sheafification; the same inverse laws give the identity. Product and coproduct
-extensionality, and the sheafification adjunction, establish the two identities,
-so the original morphism is an isomorphism. The reverse map is constructed
-independently of a forward map;
-the inverse calculations apply to every map satisfying the evaluation equation. -/
+/-- There is one reverse map inverse to every forward map with the currying equation. -/
 theorem homTensorDegreewise_inverse (K L M : CochainComplex Mod ℤ) (n : ℤ) :
     letI := SheafOfModules.monoidalCategory R
     ∃ b : (homComplex (R := R)

@@ -27,26 +27,17 @@ If `X` is quasi-compact and quasi-separated, `U ⊆ X` is a dense quasi-compact 
 
 with `g : X' ⟶ Y` satisfying `g ≫ y = π ≫ x` and `ι ≫ g = (π ∣_ U) ≫ f`.
 
-The two inputs are:
-
-- the partial-section extension theorem
-  `AlgebraicGeometry.exists_admissibleBlowup_extend_section`, which is a statement about a
-  *section* of a morphism `p : Y' ⟶ X` to the base `X` and has no auxiliary base `S`. To
-  apply it here one first performs Conrad's reduction `Y ⇝ Y ×ₛ X`: take
-  `p := pullback.snd y x : Y ×ₛ X ⟶ X`, which is separated, locally of finite type and
-  quasi-compact as a base change of the proper `y`, with qcqs source because `X` is qcqs and
-  `p` is quasi-compact and separated; the morphism `f` then becomes the section
-  `pullback.lift f U.ι hf` of `p`. The theorem produces an extension over *some* open
-  `W ⊆ X'` containing `π⁻¹(U)`, together with the closedness of its graph;
-- `AlgebraicGeometry.QuasiDomination.U_eq_top`, which turns that closed graph into `W = X'`:
-  the extension is a quasi-domination of `X'` over `Y`, and a quasi-domination over a
-  universally closed target is defined everywhere.
-
 ## Main results
 
 - `AlgebraicGeometry.exists_admissibleBlowup_extend_of_isProper`: the extension statement
   above.
 
+## Implementation details
+
+The proof applies the partial-section extension theorem
+`AlgebraicGeometry.exists_admissibleBlowup_extend_section` (a statement about a *section* of a
+morphism to `X`, with no auxiliary base `S`) after Conrad's reduction `Y ⇝ Y ×ₛ X`, and then
+`AlgebraicGeometry.QuasiDomination.U_eq_top` to see that the extension is defined everywhere.
 -/
 
 @[expose] public section
@@ -57,22 +48,10 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `corollary-extension-proper-target`: Extension to a proper target.
-
-Let `X` be quasi-compact and quasi-separated over `S`, let `U ⊆ X` be a dense quasi-compact
-open and let `y : Y ⟶ S` be proper. Then every `S`-morphism `f : U ⟶ Y` extends to a
-morphism `g` defined on all of a `U`-admissible blow-up `π : X' ⟶ X` of `X`.
-
-```text
-   π⁻¹(U) ──π∣_U──→ U ──f──→ Y
-      │                      │
-    ι │                      │ y
-      ↓                      ↓
-      X' ───π───→ X ───x───→ S
-```
-
-with `g : X' ⟶ Y` satisfying `g ≫ y = π ≫ x` and `ι ≫ g = (π ∣_ U) ≫ f`.
--/
+/-- **Extension to a proper target**: let `X` be quasi-compact and quasi-separated over `S`,
+let `U ⊆ X` be a dense quasi-compact open and let `y : Y ⟶ S` be proper. Then every
+`S`-morphism `f : U ⟶ Y` extends to a morphism `g` defined on all of a `U`-admissible
+blow-up `π : X' ⟶ X` of `X`, with `g ≫ y = π ≫ x` and `ι ≫ g = (π ∣_ U) ≫ f`. -/
 theorem exists_admissibleBlowup_extend_of_isProper {S X Y : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] (x : X ⟶ S) (y : Y ⟶ S) [IsProper y] {U : X.Opens}
     (hU : IsCompact (U : Set X)) (hUdense : Dense (U : Set X)) (f : U.toScheme ⟶ Y)

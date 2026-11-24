@@ -15,8 +15,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Invertibility of the balanced sheaf tensor map
 
-Source: Stacks Project, Cohomology, Tag 08DE, proof.
-(blueprint: lem-pc-balanced-sheaf-tensor-comparison-isIso)
+## References
+
+* Stacks Project, Cohomology, Tag 08DE (proof); Modules on Sites, Tag 0GMW
 -/
 
 @[expose] public section
@@ -64,23 +65,7 @@ private theorem tensor_sections_hom_ext
   exact h W x y
 
 -- The mixed scalar structures require additional definitional equality checks.
-/-- The map inserting `1` in the scalar-extension factor is invertible.
-Source: Stacks Project, Cohomology, Tag 08DE, proof; Modules on Sites, Tag 0GMW.
-
-Proof: let E be the presheaf U ↦ B(U) tensor_R(U) N(U). Before sheafification,
-the balanced maps m tensor (b tensor n) ↦ (b m) tensor n and
-m tensor n ↦ m tensor (1 tensor n) are inverse R(U)-linear maps. The balancing
-relations prove well-definedness and tensor induction proves both inverse identities.
-These maps commute with all restrictions because restriction preserves 1, products,
-and scalar actions. Tensor with the sheafification of E is the sheafification of
-tensor with E (Tag 0GMW). Forgetting module sheafification gives abelian sheafification,
-independently of whether the coefficients are R or B. Thus the sectionwise inverse
-maps induce inverse maps of abelian sheaves. The given formula identifies the
-underlying map of φ with the inverse sectionwise map, by the tensor universal property
-and uniqueness of sheafification. Hence its underlying map is an isomorphism.
-The functor forgetting R-module structure reflects isomorphisms, so φ is invertible.
-No flatness is used; zero rings, zero modules and the empty space are included.
-(blueprint: lem-pc-balanced-sheaf-tensor-comparison-isIso) -/
+/-- The map inserting `1` in the scalar-extension factor is invertible. -/
 theorem balancedTensorComparison_isIso (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))
     (φ : (monoidalCategory R).tensorObj ((restrictScalars (𝓻 α)).obj M) N ⟶

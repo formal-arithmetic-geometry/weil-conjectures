@@ -11,8 +11,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 
 /-! # The localization comparison step for precise vanishing
 
-Source: Stacks Project, Tags 064B and 064D
-(blueprint: lem-pc-ring-precise-vanishing-core).
+## References
+
+* Stacks Project, Tags 064B and 064D
 -/
 
 @[expose] public section
@@ -24,14 +25,7 @@ universe u v w
 
 namespace CategoryTheory
 
-/-- A vanishing result for homotopy morphisms lifts across the derived localization.
-Source: Stacks Project, Tags 064B and 064D
-(blueprint: lem-pc-ring-precise-vanishing-core).
-Proof: the upper bound and termwise projectivity make `P` K-projective. Transport a
-morphism in the derived category along `quotientCompQhIso`, represent it by a
-homotopy-category morphism using `Qh_map_bijective`, apply `hzero`, and cancel the
-two comparison isomorphisms.
--/
+/-- A vanishing result for homotopy morphisms lifts across the derived localization. -/
 theorem precise_vanishing_of_homotopy_zero
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A]

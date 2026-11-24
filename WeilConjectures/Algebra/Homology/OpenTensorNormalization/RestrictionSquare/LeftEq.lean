@@ -25,8 +25,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
-/-- The left half of the representative square after the cancellable suffix.
-(blueprint: lem-sf-finite-restriction-representative-square) -/
+/-- The left half of the representative square after the cancellable suffix. -/
 structure LeftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
     (hp : resolving (finiteInput A gU j' j g sq).R
       ((finiteComplexRealization e.realizeX).obj P))

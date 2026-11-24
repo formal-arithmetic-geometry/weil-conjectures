@@ -151,16 +151,10 @@ lemma internalHomObj_hom_ext {A : C} {n : ℤ} {f g : A ⟶ (internalHomObj P Y)
     f = g :=
   Pi.hom_ext _ _ fun T ↦ h T.p T.q T.hpq
 
-/-- The components of the differential of the internal hom complex, where `[A, B]` denotes
-`(ihom A).obj B`:
-```
-(internalHomObj P Y).X n ──── d n m ────▶ (internalHomObj P Y).X m
-         │                                         │
-         │ (-1)ᵖ • (π_{p,q'} ≫ [P.X p, d_Y]         │ π_{p,q}
-         │          - π_{p',q} ≫ [d_P, Y.X q])      │
-         ╰───────────────────────────────▶ [P.X p, Y.X q]
-```
--/
+/-- The components of the differential of the internal hom complex: composing `d n m` with the
+projection to the factor `(p, q)` equals `(-1) ^ p` times the difference of the projection to
+`(p, q')` followed by `(ihom (P.X p)).map d_Y` and the projection to `(p', q)` followed by
+`(pre d_P).app (Y.X q)`. -/
 @[reassoc]
 lemma internalHomObj_d_π (n m p q : ℤ) (hpq : p + m = q) (q' p' : ℤ) (hq' : p + n = q')
     (hp' : p' + n = q) :
@@ -200,15 +194,9 @@ noncomputable def uncurryCochain {n : ℤ} (w : Cochain K (internalHomObj P Y) n
 
 variable {K}
 
-/-- The components of `curryCochain z`, where `[A, B]` denotes `(ihom A).obj B`: the composition
-```
-K.X q ── (curryCochain z).v q q' ──▶ (internalHomObj P Y).X q' ── π_{p,s} ──▶ [P.X p, Y.X s]
-```
-is `(-1) ^ (p * n)` times the curry of the composition
-```
-P.X p ⊗ K.X q ── ιTensorObj ──▶ (P ⊗ K).X r ── z.v r s ──▶ Y.X s
-```
--/
+/-- The components of `curryCochain z`: the composition of `(curryCochain z).v q q'` with the
+projection of `internalHomObj P Y` to the factor `(p, s)` is `(-1) ^ (p * n)` times the curry of
+the composition of `ιTensorObj` with `z.v r s` on `P.X p ⊗ K.X q`. -/
 @[reassoc]
 lemma curryCochain_v_π {n : ℤ} (z : Cochain (P ⊗ K) Y n) (q q' : ℤ) (hqq' : q + n = q')
     (p s : ℤ) (hps : p + q' = s) (r : ℤ) (hr : p + q = r) (hrs : r + n = s) :
@@ -217,16 +205,9 @@ lemma curryCochain_v_π {n : ℤ} (z : Cochain (P ⊗ K) Y n) (q q' : ℤ) (hqq'
   subst hr
   exact Pi.lift_comp_π _ _
 
-/-- The components of `uncurryCochain w`, where `[A, B]` denotes `(ihom A).obj B`: the
-composition
-```
-P.X p ⊗ K.X q ── ιTensorObj ──▶ (P ⊗ K).X r ── (uncurryCochain w).v r s ──▶ Y.X s
-```
-is `(-1) ^ (p * n)` times the uncurry of the composition
-```
-K.X q ── w.v q q' ──▶ (internalHomObj P Y).X q' ── π_{p,s} ──▶ [P.X p, Y.X s]
-```
--/
+/-- The components of `uncurryCochain w`: the composition of `ιTensorObj` with
+`(uncurryCochain w).v r s` on `P.X p ⊗ K.X q` is `(-1) ^ (p * n)` times the uncurry of the
+composition of `w.v q q'` with the projection of `internalHomObj P Y` to the factor `(p, s)`. -/
 @[reassoc]
 lemma ι_uncurryCochain_v {n : ℤ} (w : Cochain K (internalHomObj P Y) n) (r s : ℤ)
     (hrs : r + n = s) (p q : ℤ) (hpq : p + q = r) (q' : ℤ) (hqq' : q + n = q')
@@ -282,15 +263,7 @@ lemma uncurryCochain_curryCochain {n : ℤ} (z : Cochain (P ⊗ K) Y n) :
     uncurryCochain (curryCochain z) = z :=
   (cochainEquiv P Y K n).symm_apply_apply z
 
-/-- `curryCochain` commutes with the differentials of the hom complexes:
-```
-Cochain (P ⊗ K) Y n ── curryCochain ──▶ Cochain K (internalHomObj P Y) n
-        │                                         │
-        │ δ n m                                   │ δ n m
-        ▼                                         ▼
-Cochain (P ⊗ K) Y m ── curryCochain ──▶ Cochain K (internalHomObj P Y) m
-```
--/
+/-- `curryCochain` commutes with the differentials of the hom complexes. -/
 lemma curryCochain_δ (n m : ℤ) (z : Cochain (P ⊗ K) Y n) :
     curryCochain (δ n m z) = δ n m (curryCochain z) := by
   by_cases hnm : n + 1 = m
@@ -324,15 +297,8 @@ lemma uncurryCochain_δ (n m : ℤ) (w : Cochain K (internalHomObj P Y) n) :
     rw [cochainEquiv_apply, cochainEquiv_apply, curryCochain_δ, curryCochain_uncurryCochain,
       curryCochain_uncurryCochain])
 
-/-- `curryCochain` is natural in the source complex: for `f : K' ⟶ K`, the square
-```
-Cochain (P ⊗ K) Y n ── curryCochain ──▶ Cochain K (internalHomObj P Y) n
-        │                                         │
-        │ (P ◁ f) ≫ -                             │ f ≫ -
-        ▼                                         ▼
-Cochain (P ⊗ K') Y n ─ curryCochain ─▶ Cochain K' (internalHomObj P Y) n
-```
-commutes. -/
+/-- `curryCochain` is natural in the source complex: for `f : K' ⟶ K`, currying commutes with
+precomposition by `P ◁ f` on the left and with precomposition by `f` on the right. -/
 lemma curryCochain_ofHom_whiskerLeft_comp {K' : CochainComplex C ℤ} (f : K' ⟶ K) {n : ℤ}
     (z : Cochain (P ⊗ K) Y n) :
     curryCochain ((Cochain.ofHom (P ◁ f)).comp z (zero_add n)) =
@@ -373,12 +339,8 @@ lemma ofHom_internalHomEquiv_symm (g : K ⟶ internalHomObj P Y) :
   simp [internalHomEquiv]
 
 /-- The tensor-hom bijection is natural in the source complex: for `f : K' ⟶ K` and
-`g : P ⊗ K ⟶ Y`, the morphisms
-```
-P ⊗ K' ── P ◁ f ──▶ P ⊗ K ── g ──▶ Y
-K' ── f ──▶ K ── internalHomEquiv g ──▶ internalHomObj P Y
-```
-correspond to each other under `internalHomEquiv`. -/
+`g : P ⊗ K ⟶ Y`, the morphism `P ◁ f ≫ g` corresponds under `internalHomEquiv` to
+`f ≫ internalHomEquiv g`. -/
 lemma internalHomEquiv_whiskerLeft_comp {K' : CochainComplex C ℤ} (f : K' ⟶ K)
     (g : P ⊗ K ⟶ Y) :
     internalHomEquiv P Y K' (P ◁ f ≫ g) = f ≫ internalHomEquiv P Y K g :=
@@ -441,15 +403,9 @@ lemma internalHom_map {Y' : CochainComplex C ℤ} (k : Y ⟶ Y') :
       internalHomEquiv P Y' _ ((tensorHomAdjunction P).counit.app Y ≫ k) := by
   rfl
 
-/-- The components of `(internalHom P).map k`, where `[A, B]` denotes `(ihom A).obj B`:
-```
-(internalHomObj P Y).X n ── ((internalHom P).map k).f n ──▶ (internalHomObj P Y').X n
-         │                                                          │
-         │ π_{p,q}                                                  │ π_{p,q}
-         ▼                                                          ▼
-   [P.X p, Y.X q] ─────────── [P.X p, k.f q] ─────────────▶ [P.X p, Y'.X q]
-```
--/
+/-- The components of `(internalHom P).map k`: composing the projection to the factor `(p, q)` with
+`((internalHom P).map k).f n` equals composing with the projection of `internalHomObj P Y` to
+that factor followed by `(ihom (P.X p)).map (k.f q)`. -/
 @[reassoc (attr := simp)]
 lemma internalHom_map_f_π {Y' : CochainComplex C ℤ} (k : Y ⟶ Y') (n p q : ℤ) (h : p + n = q) :
     ((internalHom P).map k).f n ≫ internalHomπ P Y' n p q h =

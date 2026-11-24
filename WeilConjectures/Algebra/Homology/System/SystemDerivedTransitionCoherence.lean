@@ -11,7 +11,10 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedTransition
 
 /-! # The actual derived transitions of strict systems
 
-Source: Zheng, Construction 4.1; Stacks 015F.
+## References
+
+* Stacks Project, Tag 015F
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -26,9 +29,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- The actual coefficient restriction compositor.
-Source: Zheng 4.1; Stacks 015F
-(blueprint: lem-pur-system-derived-transition-coherence). -/
+/-- The actual coefficient restriction compositor. -/
 def systemDerivedRestrictionComposition {l m n : ℕ} (h : l ≤ m) (k : m ≤ n) :
     (systemRestriction B h).mapDerivedCategory ⋙
       (systemRestriction B k).mapDerivedCategory ≅
@@ -39,13 +40,7 @@ def systemDerivedRestrictionComposition {l m n : ℕ} (h : l ≤ m) (k : m ≤ n
         rw [← B.map_comp]
         rfl))
 
-/-- Derived transitions compose with the canonical coefficient restriction comparison.
-Source: Zheng 4.1; Stacks 015F
-(blueprint: lem-pur-system-derived-transition-coherence).
-Proof: localization detects equality of natural transformations. Postcompose on a
-cochain complex with the exact evaluation and restriction factorization isomorphisms.
-The transition and compositor representative formulas reduce the two composites to
-the localization of the strict composition law, checked termwise on sections. -/
+/-- Derived transitions compose with the canonical coefficient restriction comparison. -/
 theorem systemDerivedTransition_comp {l m n : ℕ} (h : l ≤ m) (k : m ≤ n)
     (M : DerivedCategory (StrictRingSystem B)) :
     (systemDerivedTransition B k).app M ≫

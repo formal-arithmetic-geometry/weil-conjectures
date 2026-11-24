@@ -11,8 +11,9 @@ import WeilConjectures.Algebra.Homology.IndependentExtensionTensor.ExtensionTens
 
 /-! # The coefficient quotient sequence tensored with a flat module
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YP and 06YY.
-(blueprint: lem-cbc-regular-quotient-flat-sequence).
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YP and 06YY
 -/
 
 @[expose] public section
@@ -41,19 +42,7 @@ attribute [local instance] monoidalCategory
   preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
 /-- A normalized coefficient unit yields the principal quotient short exact sequence
-on any flat module, without requiring quotient maps to be surjective on sections.
-
-Source: Stacks Project, Tags 06YP and 06YY
-(blueprint: lem-cbc-regular-quotient-flat-sequence).
-
-Proof: Tensor the coefficient-ring short exact sequence with M, using its exact tensor
-functor. The normalized regular-tensor isomorphism identifies both first terms with M;
-the extension-tensor comparison identifies the third with restricted scalar extension.
-On the inverse regular unitor, multiplication by t sends 1 tensor x to t tensor x,
-which is 1 tensor tx by balance. The quotient map sends 1 tensor x to 1 tensor x,
-which is the specified coefficient unit. Thus these three isomorphisms identify the
-short exact sequence with the one displayed. Sheafification and tensor normalization
-prove the identities on every section of M; no sections of the quotient are lifted. -/
+on any flat module, without requiring quotient maps to be surjective on sections. -/
 theorem coefficient_shortExact_of_flat
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0)

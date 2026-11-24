@@ -58,8 +58,14 @@ import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 
-/-! Extension of the finite restriction square from resolving representatives.
-(blueprint: lem-sf-finite-base-change-restriction-localization)
+/-! # Finite restriction square from resolving representatives
+
+Extension of the finite restriction square from resolving representatives to all objects of the
+unbounded derived category.
+
+## References
+
+* Stacks Project, Tag 06YS (K-flat resolutions on a ringed site)
 -/
 
 @[expose] public noncomputable section
@@ -131,22 +137,7 @@ private theorem finite_representatives_ext
     (congrArg (fun t ↦ t.app (eD.functor.obj M, eD.functor.obj M)) heq)
 
 /-- Equality on resolving representatives extends to every object of the
-unbounded derived category.  This is the localization and naturality step in
-lem-sf-finite-base-change-restriction-coherence.
-
-Source: Stacks 06YS (K-flat resolutions on a ringed site) and the equivalence
-clause of lem-weil-pbc-site-derived-tensor-descent; the localization step of
-`fix-prop-coherence.proof.md`.
-Proof: by the resolving-localization equivalence there are a flat-term K-flat
-ringed complex `R` and an isomorphism `Q R ≅ e.realizeX.derived.obj M`.  The
-ordinary realization equivalence and its inverse are exact; applied termwise and
-localized they give inverse derived equivalences.  Put `P` the termwise inverse
-realization of `R`; the termwise counit gives `finiteComplexRealization P ≅ R`,
-so it is resolving (flatness and K-flatness are invariant under isomorphism of
-complexes), and `Q P ≅ M`.  Both displayed composites are components at `M` of
-composites of natural transformations between the same two functors of `M`,
-so naturality carries the equality `hrep P` across `Q P ≅ M`.
-(blueprint: lem-sf-finite-base-change-restriction-localization) -/
+unbounded derived category. -/
 theorem finite_base_change_restriction_of_representatives
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

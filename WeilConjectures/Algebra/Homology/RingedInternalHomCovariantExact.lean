@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 
 /-! # Covariant exactness of derived internal Hom
 
-Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 08JC](https://stacks.math.columbia.edu/tag/08JC)
 -/
 
 @[expose] public section
@@ -25,22 +26,7 @@ open CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
-/-- Covariant exactness, including the coherent integer shift structure.
-
-Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
-
-Proof: Fix a complex A representing L. Represent the first arrow of a distinguished target triangle
-by a map g between K-injective complexes J and I. Its cone is K-injective: apply Hom from every
-acyclic test complex to the cone triangle and use exactness and shift-stability of K-injectives. The
-finite graded splitting of Hom(A,Cone(g)) identifies it with Cone(Hom(A,g)), preserving the
-inclusion, projection and connecting morphism under the unsigned target-shift reindexing. The
-product projections prove that this reindexing is natural, equals the identity at zero, and composes
-under addition. Descend the coherent structure and cone comparison through localization, using the
-fixed K-injective augmentation. Every distinguished triangle is isomorphic to a localized cone
-triangle by TR3 and two-out-of-three for isomorphisms, so transfer the distinguished-triangle
-property through that isomorphism. No boundedness or infinite-product exactness is needed.
--/
+/-- Covariant exactness, including the coherent integer shift structure. -/
 theorem ringedInternalHom_covariant_exact
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}

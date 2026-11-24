@@ -13,8 +13,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Ordinary localization in the fixed constant coefficient coordinates
 
-Source: Stacks 09AH and 09BM; blueprint operations proof (2c)
-(blueprint: lem-sp-tower-ordinary-localization).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 09AH, 09BM
 -/
 
 @[expose] public noncomputable section

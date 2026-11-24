@@ -18,8 +18,7 @@ open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization.RestrictionSquare
 
 /-- `mixed_representation_normalized` for the finite coefficients `Mod_A`, with the signed
-total complex written as `finiteTotal`.
-(blueprint: lem-sf-mixed-representation-normalized) -/
+total complex written as `finiteTotal`. -/
 theorem mixed_representation_finite
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]

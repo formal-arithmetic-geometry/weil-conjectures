@@ -21,15 +21,15 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-!
 # Exact symmetric monoidal equivalences and signed total K-flatness
 
-Source: Stacks Project, Tag 06YP, `lemma-K-flat-quasi-isomorphism`, and the
-explicit exact-equivalence and signed-total extension in the blueprint
-(auxiliary; not a blueprint node).
-
 The comparison is specified by its action on every summand, together with
 naturality, associativity, unit, and Koszul symmetry equations. The inverse
 comparison is specified relative to the termwise equivalence's unit and counit.
 The final clauses compare the acyclic and arbitrary-endpoint quasi-isomorphism
 K-flat tests, without requiring exactness of countable coproducts.
+
+## References
+
+* Stacks Project, Tag 06YP
 -/
 
 @[expose] public section
@@ -474,67 +474,7 @@ private theorem inverse_braiding {C D : Type*} [Category C] [Category D]
   rfl
 
 /-- An additive exact symmetric strong monoidal equivalence commutes coherently
-with signed total tensor, reflects flatness, and identifies both K-flat tests.
-Source: Stacks Project, Tag 06YP and the explicit abstract extension
-(auxiliary; not a blueprint node).
-
-Proof:
-1. `lem-weil-pbc-exact-functor-complex-cohomology` identifies the homology of
-   termwise images with images of homology. Faithfulness reflects zero objects
-   and the quasi-inverse reflects invertibility. This gives both directions of
-   the acyclicity and quasi-isomorphism clauses for both functors.
-2. `lem-galois-equivalence-preserves-limits` supplies preservation of the
-   countable coproducts. `lem-sfb-monoidal-equivalence-inverse-structure` equips
-   the inverse with its canonical strong monoidal structure, whose four
-   equations are relative to the given equivalence's unit and counit.
-3. On the degree-n coproduct, define tau by the inverse tensorator followed by
-   each target coprojection. Its inverse uses the forward tensorator followed
-   by the image of the source coprojection. Coproduct uniqueness proves that
-   these maps are inverse (`def-weil-pbc-category-colimit`).
-4. On a (p,q) summand, the two chain-map composites are the sum of the image
-   of d_P tensor identity and (-1)^p times identity tensor the image of d_Q.
-   Additivity carries the integer sign through the functor, including negative
-   degrees. Tensorator naturality proves naturality in both complex arguments.
-5. The ordinary total associator reindexes triple summands and is a chain
-   map: both differentials have coefficients 1, (-1)^p, (-1)^(p+q). Tensor
-   preserves the requisite countable coproducts. Pentagon and triangle reduce
-   to those of the coefficient category. The unit is the tensor unit in degree
-   zero; the unitors use the coefficient unitors on the (0,n) and (n,0) terms.
-6. Test the associativity comparison on triple coprojections. It becomes the
-   inverse-tensorator associativity axiom of `def-sfb-strong-monoidal-functor`.
-   The unit comparison is the inverse unit structure map in degree zero and
-   the unique zero-object maps elsewhere. Its two unitor equations become
-   exactly the inverse forms of the coefficient unit axioms.
-7. The Koszul swap is (-1)^(pq) times beta on a (p,q) summand. Compatibility
-   with d_P uses pq+q=(p+1)q; compatibility with d_Q uses equality modulo two
-   of pq and p+p(q+1). Its inverse uses beta in the opposite order; the hexagon
-   uses p(q+r)=pq+pr. The symmetry equation for tau reduces to the given
-   symmetric-functor equation, since the functor preserves integer multiples.
-8. Regard tau and the unit comparison as the strong monoidal structure on
-   the termwise forward functor. Apply the canonical inverse-structure theorem
-   from step 2 directly to the equivalence of complexes. Its axioms give inverse
-   naturality, associativity, both unitors, and the four unit/counit equations.
-   Its symmetry follows by applying the faithful forward functor, using the
-   counit tensor equation, counit naturality, and forward symmetry.
-9. Tensor with F(X) is naturally isomorphic to the composite of the inverse
-   functor, tensor with X, and the forward functor, by the tensorator and the
-   counit. Exactness is preserved by composition and natural isomorphism.
-   Apply the same argument to the inverse and use the unit to get reflection.
-10. Test an image complex against an acyclic N. Its inverse image is acyclic
-    by step 1. Tau followed by tensoring the counit identifies its tensor with
-    the forward image of the tested tensor. Step 1 preserves and reflects
-    acyclicity, giving both directions; the Koszul swap handles either order.
-11. If P passes the acyclic test and u is any quasi-isomorphism, its cone is
-    acyclic (`lem-pur-quasi-iso-cone-acyclic`). By
-    `lem-sfb-additive-total-tensor-cone-comparison`, tensoring that cone is
-    chain-isomorphic to the cone of tensoring u. Transfer acyclicity across
-    this isomorphism, then use the cone criterion again. Koszul
-    symmetry gives the other tensor order. Endpoints of u are unrestricted.
-12. Conversely apply the quasi-isomorphism test to zero into any acyclic
-    complex. Additivity identifies its tensored source with a zero object,
-    so its target is acyclic. Combine this equivalence of tests in each
-    category with step 10 to get preservation and reflection of both tests
-    by both termwise functors. -/
+with signed total tensor, reflects flatness, and identifies both K-flat tests. -/
 theorem exactMonoidal_totalTensor_kFlat (E : M ≌ A)
     [E.functor.Additive] [E.inverse.Additive] [E.functor.Monoidal]
     (hβ : ∀ X Y : M,

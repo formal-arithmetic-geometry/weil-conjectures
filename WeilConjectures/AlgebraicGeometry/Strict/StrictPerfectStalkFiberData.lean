@@ -17,8 +17,9 @@ import Mathlib.RingTheory.LocalRing.Module
 
 /-! # Strictly perfect stalks and derived residue cohomology
 
-Source: Stacks Project, Tags 0BCD, 08EB and 06YB.
-(blueprint: lem-sc-strict-perfect-stalk-fiber-data).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0BCD, 08EB, 06YB
 -/
 
 @[expose] public section
@@ -28,34 +29,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 noncomputable section
 
-/-- The stalk of a locally strictly perfect object is pseudo-coherent, and any finite-free
-representative of it computes the derived residue fibre.
-
-Source: Stacks Project, Tag 0BCD, local-ring paragraph; Tags 08EB and 06YB.
-(blueprint: lem-sc-strict-perfect-stalk-fiber-data).
-
-Proof:
-1. Choose the strictly perfect representative P on V from hlocal. Restriction to V
-   followed by its stalk at x agrees with taking the stalk on X, since neighbourhoods
-   contained in V are cofinal. Stalks are exact, hence preserve quasi-isomorphisms and
-   derived isomorphisms. Apply this to eG and the comparison of P with E restricted to V.
-2. The stalk of a rank-m free sheaf is the free stalk module of rank m. Apply stalks to
-   the retractions in IsStrictlyPerfect: the terms of the resulting bounded complex
-   are finite projective over the local ring O_X,x, hence finite free. Its bounds are
-   preserved because stalks preserve zero objects. This gives hK.
-3. The finite-free representative chosen by hK is bounded above, hence K-flat. Termwise
-   extension along O_X,x -> kappa(x) computes its derived residue tensor product.
-   Resolve G by a K-flat sheaf complex. Its stalk is K-flat, and the tensor-pullback
-   stalk formula identifies its residue pullback with residue extension of its stalk.
-   Sections on the one-point residue spectrum are exact. Derived invariance of
-   residue tensor therefore identifies the chosen model's degree-i homology with
-   derivedFiberCohomology X E i x. This identification is linear over
-   kappa(x) = IsLocalRing.ResidueField O_X,x. Transport hfin across the linear
-   isomorphism, and use invariance of finrank to obtain the displayed equality.
-The computation concerns every bounded-above finite-free representative of the same
-derived object: K-flatness makes residue cohomology invariant under its derived comparison.
-It therefore applies to Classical.choose hK. No rank-minimal model is constructed here.
--/
+/-- The stalk of a locally strictly perfect object is pseudo-coherent, and the chosen
+finite-free representative of it computes the derived residue fibre cohomology. -/
 theorem strictPerfect_stalk_fiberData
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

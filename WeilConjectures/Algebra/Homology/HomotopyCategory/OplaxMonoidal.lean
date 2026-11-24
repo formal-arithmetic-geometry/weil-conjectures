@@ -19,7 +19,6 @@ a natural transformation of bifunctors on homotopy categories
 `CategoryTheory.Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans`, between
 `(K, L) ↦ G(K ⊗ L)` and `(K, L) ↦ G(K) ⊗ G(L)`. It is an isomorphism when every
 `δ G X Y` is an isomorphism.
-
 -/
 
 @[expose] public section

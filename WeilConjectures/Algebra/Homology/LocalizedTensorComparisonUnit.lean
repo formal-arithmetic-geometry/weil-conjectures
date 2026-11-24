@@ -10,10 +10,12 @@ public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
 
-/-! # Localized tensor comparison for the unit
+/-!
+# Localized tensor comparison for the unit
 
-Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-localized-tensor-comparison-unit).
+## References
+
+* Stacks Project, Tag 0DJA(1), using Tag 0BYJ
 -/
 
 @[expose] public section
@@ -36,31 +38,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-/-- The unshifted free rank-one generator satisfies the comparison predicate.
-Source: Stacks Project, Tag 0DJA(1), with Tag 0BYJ.
-
-Proof: let S be A placed in degree zero. The ULift equivalence identifies the
-specified free module with A, and the chain left unitor identifies S tensor Q
-with Q. Scalar extension is monoidal, so its unit comparison identifies F(S)
-with C in degree zero. Under these identifications, the map
-mu.inv followed by F(S) tensor t is t. For any base-derived model of S tensor Q,
-uniqueness of the universal left-derived counit identifies its cohomology with
-that of m. Naturality for multiplication by a in A makes this identification
-A tensor_R B-linear; the B action is already part of the target module category.
-The equations comparison_eq and localized_eq then identify the comparison
-square, and extension to C preserves the source isomorphism. Thus the given
-all-degree hypothesis proves comparison for S.
-For an arbitrary A-K-flat U representing S in D(A), take a roof implementing
-this derived isomorphism and resolve its apex A-K-flatly. Both maps from that
-apex to U and S are quasi-isomorphisms. Tensor with the A-K-flat Q preserves
-these maps, as does scalar extension of the K-flat complexes to C, followed
-by tensor with N. Apply the universal R-to-B counit to the two tensor maps;
-its naturality gives commuting cohomology squares. The same scalar-action
-argument makes their source maps A tensor_R B-linear isomorphisms. After
-extension to C, the localized_eq equations give the comparison squares.
-Invertibility for S transports along both roof legs to U, for every model
-and every degree. No flatness of C is used; all transports are isomorphisms.
-(blueprint: lem-pc-localized-tensor-comparison-unit). -/
+/-- The unshifted free rank-one generator satisfies the comparison predicate. -/
 theorem localizedTensorComparisonProperty_unit
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

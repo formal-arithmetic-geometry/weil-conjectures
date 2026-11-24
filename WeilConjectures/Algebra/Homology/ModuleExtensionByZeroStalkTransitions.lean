@@ -11,36 +11,24 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkTransitionCoherence
 
+/-!
+# Stalk transitions for extension by zero
+
+Transition maps between extensions by zero along inclusions of opens, and their stalks.
+
+## References
+
+* Stacks Project, Sheaves, Tags 00A7 (2)-(4) and 00A5
+-/
+
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 noncomputable section
 namespace AlgebraicGeometry
-/-- For a ringed space X and global module sheaf F, the counit at the top open is an isomorphism.
-There are maps iota(W,W') from the sheafified extension of F restricted to W to the sheafified
-extension of F restricted to W', for W contained in W'. Their adjunction transposes are the
-restrictions of the W' unit transported by overFunctorMap; iota(W,W) is identity, composites are
-iota(W,W''), and iota(W,top) followed by the top counit is the W counit. For x in W there is an
-isomorphism from F_x to the W extension stalk whose inverse is the stalk of the W counit; these
-isomorphisms intertwine the transition stalk maps.
-
-Proof: Use the inside-open stalk calculation and adjunction triangle identities to see that the
-counit for F restricted to W induces an isomorphism at every x in W: the restriction-stalk
-comparison identifies its composition with the unit with identity. For W=top this proves the
-counit is an isomorphism of sheaves by the stalk criterion. For W <= W', define iota as the
-inverse homEquiv image of the displayed transported restriction of the W' unit. This gives the
-first equation by inverse cancellation. At W=W', the restriction transport is identity, so
-homEquiv sends both iota and identity to the W unit; injectivity proves their equality. For W <=
-W' <= W'', restrict the transpose equations to W and use naturality of the units and coherence of
-overFunctorMap. Their composite is the restriction of the W'' unit; homEquiv injectivity gives
-composition. Applying counits to the same equations and using the triangle identities gives
-iota(W,W') followed by the W' counit equals the W counit; specialize W'=top. Finally take e(W,x)
-to be the inverse of the counit's stalk isomorphism already obtained. Functoriality on stalks
-applied to that counit compatibility says iota_x followed by e(W',x).inv equals e(W,x).inv. Cancel
-these isomorphisms to get the final equation. This construction works for independently chosen
-adjunctions because only their own units, counits and triangle identities are used. Source: Stacks
-Project, Sheaves Lemma 00A7 (2)-(4) and Lemma 00A5.
-(blueprint: lem-sc-module-extension-by-zero-stalk-maps-transitions) -/
+/-- For a global module sheaf `F`, the counit at the top open is an isomorphism, the extensions by
+zero of the restrictions of `F` admit transition maps along inclusions of opens, and for `x` in
+`W` the stalk of `F` at `x` is isomorphic to the stalk of the `W` extension compatibly with them. -/
 theorem moduleExtensionByZero_stalk_transitions (X : RingedSpace.{u}) :
     (∀ F : SheafOfModules.{u} (moduleRings X),
       IsIso ((Classical.choice (open_restriction_adjunction_exact X ⊤).2.2.2.2).counit.app F) ∧

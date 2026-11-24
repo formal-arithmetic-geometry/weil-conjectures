@@ -41,9 +41,7 @@ variable {E Z : Scheme.{u}}
 
 namespace Scheme.Hom
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-A *linear atlas of rank `c`* of `p : E ⟶ Z` with section `z`: open immersions `vᵢ : Vᵢ ⟶ Z`
+/-- A *linear atlas of rank `c`* of `p : E ⟶ Z` with section `z`: open immersions `vᵢ : Vᵢ ⟶ Z`
 covering `Z`, with isomorphisms `φᵢ : E ×_Z Vᵢ ≅ 𝔸^c_{Vᵢ}` over `Vᵢ` carrying `z` to the zero
 section, such that over `Vᵢ ×_Z Vⱼ` every coordinate of the chart `φⱼ` is a linear combination,
 with coefficients in `Γ(Vᵢ ×_Z Vⱼ, 𝒪)`, of the coordinates of `φᵢ`. -/
@@ -77,10 +75,8 @@ structure VectorBundleAtlas (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) where
             (pullback.fst (v i) (v j)) (𝟙 Z) (by simp) (by simp)).appTop
             ((chart i).hom.appTop (AffineSpace.coord (V i) (ULift.up l))))
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-`p : E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a section
-of `p` and a closed immersion, and `(p, z)` admits a linear atlas of rank `c`
+/-- `p : E ⟶ Z` is a *vector bundle of constant rank `c`* with *zero section* `z` if `z` is a
+section of `p` and a closed immersion, and `(p, z)` admits a linear atlas of rank `c`
 (`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas`): Zariski-locally on `Z`, `(E, z)` is
 `(𝔸^c, 0)` with linear transition functions, i.e. `E ≅ Spec_Z (Sym^• ℰ)` for the locally free
 sheaf `ℰ` of rank `c` of fibrewise linear functions, `z` being given by the augmentation. -/
@@ -89,9 +85,7 @@ structure IsVectorBundle (c : ℕ) (p : E ⟶ Z) (z : Z ⟶ E) : Prop where
   isClosedImmersion_zeroSection : IsClosedImmersion z
   nonempty_atlas : Nonempty (VectorBundleAtlas c p z)
 
-/-- Blueprint `proposition-purity-vector-bundles`: Vector bundle with zero section
-
-A *trivialization* of `p : E ⟶ Z`: an étale open `v : Z' ⟶ Z` together with an isomorphism
+/-- A *trivialization* of `p : E ⟶ Z`: an étale open `v : Z' ⟶ Z` together with an isomorphism
 `E ×_Z Z' ≅ 𝔸^c_{Z'}` over `Z'`. -/
 structure VectorBundleTrivialization (c : ℕ) (p : E ⟶ Z) where
   /-- The étale open `Z'`. -/

@@ -12,7 +12,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Normalized scalar-extension adjunction with independent site universes
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03DA and 03DB.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CZ, 03DA and 03DB
 -/
 
 @[expose] public noncomputable section
@@ -213,18 +215,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 
 omit [EssentiallySmall.{r} C] in
 /-- Restriction of scalars is exact, and sheafified sectionwise tensor is its left adjoint,
-with Hom map given by evaluation at the image of `1 ⊗ x`.
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03DA and 03DB.
-(blueprint: lem-weil-pbc-scalar-localization-coefficient-adjunction-of-universes)
-Proof: The sectionwise extension/restriction Hom equivalence commutes with restriction maps:
-this follows on pure tensors from naturality of the ring morphism. Compose it with the
-module sheafification Hom equivalence to obtain the displayed Hom equivalence. Its
-naturality gives an adjunction for the prescribed functor E, since its maps are exactly
-the sheafified maps id tensor f. Restriction preserves kernels sectionwise. Cokernels
-are sheafifications of sectionwise cokernels, whose underlying additive presheaves do
-not change under restriction of scalars. The naturality of sheafification identifies
-these cokernels after restriction. Additivity and preservation of kernels and cokernels
-imply preservation of finite limits and finite colimits. -/
+with Hom map given by evaluation at the image of `1 ⊗ x`. -/
 theorem scalarLocalizationCoefficientAdjunctionOfUniverses (φ : O ⟶ O') :
     ∃ (_ : PreservesFiniteLimits (restrictScalars.{r}
                     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)))

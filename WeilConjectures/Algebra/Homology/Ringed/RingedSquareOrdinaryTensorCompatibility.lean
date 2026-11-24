@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedSquareOrdinaryTensorHomComp
 
 /-! # The ordinary total tensor square
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
 -/
 
 @[expose] public section
@@ -39,26 +41,7 @@ private theorem inverse_square {A : Type*} [Category A] {V W X Z : A}
     _ = q ≫ b.inv := by simp
 
 -- Keep the four total-complex comparison types explicit.
-/-- The ordinary total tensor comparisons commute with the linear square.
-
-Proof: first work with two module sheaves M,N. Precompose each side of the
-module tensor square with scalar-extension insertions of generalized pure tensors.
-The pure-tensor formula for each edge comparison and the insertion equation
-for s show that both paths give the tensor of the two iterated insertions,
-followed by the same map of underlying sheaves. Naturality of s.sets with respect
-to the generalized sections identifies these maps. Linearity then extends the
-identity from inserted generators to arbitrary scalar multiples and finite sums.
-The sheafification universal property extends it to all sections, proving equality
-of module morphisms. Apply this identity to P.X i and Q.X j. The canonical total
-comparison has exactly these maps on the coproduct summands indexed by i+j=n.
-Pullbacks preserve these coproducts since they are left adjoints. The coproduct
-universal property therefore proves the displayed equality in degree n. The
-comparisons preserve i and j, so no factors are exchanged and no extra sign occurs.
-Degreewise equality proves the equality of complex morphisms. This argument uses
-no flatness: it includes zero rings, nonflat structural maps, and zero complexes.
-Source: Stacks, Cohomology on Sites, Tag 07A4 (lemma-pullback-tensor-product),
-and the tensor part of Tag 0E48 (remark-compatible-with-diagram).
-(blueprint: lem-weil-pbc-ringed-square-ordinary-tensor-compatibility). -/
+/-- The ordinary total tensor comparisons commute with the linear square. -/
 theorem ringedSquareOrdinaryTensorCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (P Q : CochainComplex (SheafOfModules.{u}

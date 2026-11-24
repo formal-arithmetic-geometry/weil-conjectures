@@ -33,8 +33,9 @@ import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtension
 /-!
 # Scalar extension with its normalized derived adjunction
 
-Source: Stacks Project, Tags 06YY, 06XN and 09T5.
-(blueprint: lem-pur-coefficient-scalar-derived-adjunction).
+## References
+
+* Stacks Project, Tags 06XN, 06YY, 09T5
 -/
 
 @[expose] public noncomputable section
@@ -109,15 +110,7 @@ private theorem coefficientTensor_quasiIso {m n : ℕ} (h : n ≤ m)
 
 /-- The fixed quotient tensor functor has a universal derived scalar extension,
 computed on every K-flat complex, whose adjunction respects the specified ordinary
-adjunction on all complex representatives.
-Source: Stacks Project, Tags 06YY, 06XN and 09T5
-(blueprint: lem-pur-coefficient-scalar-derived-adjunction).
-Proof: identify the pointwise tensor functor with the change-of-rings functor in the
-independent-coefficient theorem by its object and morphism formulas. That theorem
-shows preservation of quasi-isomorphisms between K-flat complexes. Every complex has
-a K-flat resolution. Restriction of scalars is exact. Apply the resolving-class derived
-adjunction theorem with the fixed ordinary tensor adjunction, retaining its normalized
-transpose formula and its comparison isomorphism on every K-flat representative. -/
+adjunction on all complex representatives. -/
 theorem coefficientScalarDerivedAdjunction {m n : ℕ} (h : n ≤ m) :
     Nonempty (DerivedCoefficientScalarExtension
       (coefficientTensor (J := J) (O := O) (ell := ell) h)
@@ -139,9 +132,7 @@ theorem coefficientScalarDerivedAdjunction {m n : ℕ} (h : n ≤ m) :
         exact ⟨Y, s, hY, hs⟩)
       (fun f hP hQ hf ↦ coefficientTensor_quasiIso h f hP hQ hf)
 
-/-- The family of universal derived quotient scalar extensions.
-Source: Stacks Tags 06YY and 09T5
-(blueprint: lem-pur-coefficient-scalar-derived-adjunction). -/
+/-- The family of universal derived quotient scalar extensions. -/
 abbrev CoefficientScalarDerivedAssignment :=
   ∀ {m n : ℕ} (h : n ≤ m), DerivedCoefficientScalarExtension
     (coefficientTensor (J := J) (O := O) (ell := ell) h)

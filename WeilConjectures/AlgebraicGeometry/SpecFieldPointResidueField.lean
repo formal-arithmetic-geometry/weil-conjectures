@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-! # Morphisms from a field spectrum and residue fields
 
-Source: Stacks Project, Schemes, discussion before Lemma 01J9, and Algebra,
-Local rings and Proposition 00CT (blueprint: lem-weil-pbc-spec-field-point-residue-field).
+Residue fields of points of spectra and of affine opens, and the factorization of a morphism
+from the spectrum of a field through a residue-field point.
 
 ## Main statements
 
@@ -19,6 +19,12 @@ Local rings and Proposition 00CT (blueprint: lem-weil-pbc-spec-field-point-resid
 * `spec_field_point_residue_field_affine_open`: the affine-open factorization.
 * `spec_field_point_residue_field_map`: the kernel point and unique residue-field extension.
 * `spec_field_point_residue_field_generic`: the generic-point fraction-field case.
+
+## References
+
+* [Stacks, Tag 01J9]
+* [Stacks, Tag 00CT]
+* [Stacks, Tag 00E2]
 -/
 
 @[expose] public section
@@ -29,13 +35,9 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (1).
-
-Proof: use `lem-weil-pbc-spec-residue-field-identification` to identify the scheme
-residue field with the residue field of the localization, compatibly with the germ
-and residue maps. Then `lem-weil-pbc-prime-residue-field-algebra` gives the kernel
-and the fraction-field structure on the prime quotient. -/
+/-- The residue field of `Spec R` at `p` is the residue field of the localization at `p`,
+compatibly with the canonical ring maps; the kernel of `R → κ(p)` is `p`, and `κ(p)` is a
+fraction field of `R ⧸ p`. -/
 theorem spec_field_point_residue_field
     (R : CommRingCat.{u}) (p : PrimeSpectrum R) :
     Nonempty ((Spec R).residueField p ≅
@@ -50,15 +52,8 @@ theorem spec_field_point_residue_field
   · exact Scheme.Spec.algebraMap_residueFieldIso_inv R p
   · exact Ideal.ker_algebraMap_residueField p.asIdeal
 
-/-- Stacks, Schemes, discussion before 01J9 and its following diagram
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (2).
-
-Proof: `lem-weil-pbc-affine-open-spec-points` supplies the corresponding prime and
-open immersion. Apply `lem-weil-pbc-residue-field-point-naturality`: the residue-field
-map of the open immersion is an isomorphism, and the canonical point maps commute.
-Use `lem-weil-pbc-spec-residue-field-identification` to replace the affine point map
-by Spec of the canonical ring map. Invert the residue-field isomorphism and compose
-contravariantly to obtain the asserted factorization. -/
+/-- For a point `x` of an affine open `U`, the residue field of `x` is the residue field of the
+corresponding prime of `Γ(X, U)`, and `X.fromSpecResidueField x` factors through `Spec Γ(X, U)`. -/
 theorem spec_field_point_residue_field_affine_open
     (X : Scheme.{u}) (U : X.Opens) (hU : IsAffineOpen U)
     (x : X) (hx : x ∈ U) :
@@ -82,16 +77,8 @@ theorem spec_field_point_residue_field_affine_open
     rw [← Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField hU.fromSpec p]
     simp
 
-/-- Stacks, Schemes, discussion before 01J9; Algebra, 00E2 and 00CT
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), clause (3).
-
-Proof: Spec of a field has the unique prime zero. The point map is prime comap,
-so its image ideal is the kernel (`def-weil-affine-spectrum`). Use
-`lem-weil-pbc-morphism-from-spec-field` to factor the morphism through the image's
-canonical residue-field point. Under `lem-weil-pbc-spec-residue-field-identification`,
-full faithfulness of Spec says that the induced field map extends the given ring map.
-By clause (1) this is extension of the injection from the prime quotient to its fraction
-field. Uniqueness is `lem-weil-pbc-prime-residue-field-algebra`, clause (c). -/
+/-- A ring map `ψ : R → K` to a field determines a point of `Spec R` with prime `ker ψ`, and
+`ψ` extends uniquely to a field map from the residue field at that point. -/
 theorem spec_field_point_residue_field_map
     (R : Type u) [CommRing R] (K : Type u) [Field K] (ψ : R →+* K) :
     ∃ (q : PrimeSpectrum R)
@@ -124,15 +111,8 @@ theorem spec_field_point_residue_field_map
   · intro l' hl'
     exact Ideal.ResidueField.ringHom_ext (hl'.trans hl.symm)
 
-/-- Stacks, Algebra, Local rings and 00CT; Schemes, discussion before 01J9
-(blueprint: lem-weil-pbc-spec-field-point-residue-field), final part of clause (3).
-
-Proof: injectivity gives kernel zero, which is the generic point because every prime
-contains it (`def-weil-affine-spectrum`). Clause (1) identifies its residue field as a
-fraction field of R. Clause (3)'s induced field map extends the given map. It is injective
-as a map of fields. Every element of K is a ratio of images of elements of R, with nonzero
-denominator; the corresponding ratio in the residue field maps to it. Thus the induced
-field map is bijective, hence an isomorphism. -/
+/-- For a fraction field `K` of a domain `R`, the point of `Spec R` given by `R → K` is the
+generic point, with prime `⊥`, and the induced map from its residue field is an isomorphism. -/
 theorem spec_field_point_residue_field_generic
     (R : Type u) [CommRing R] [IsDomain R] (K : Type u) [Field K]
     [Algebra R K] [IsFractionRing R K] :

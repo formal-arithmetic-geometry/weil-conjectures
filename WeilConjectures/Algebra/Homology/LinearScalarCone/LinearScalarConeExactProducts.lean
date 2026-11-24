@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.Linear.FunctorCategory
 
 /-! # Exactness and products for the localized scalar cone
 
-Source: Stacks, Tags 06YS and 0941, the bounded finite-free tensor argument.
-(blueprint: lem-coef-linear-scalar-cone-exact-products).
+## References
+
+* Stacks Project, Tags 06YS and 0941 (the bounded finite-free tensor argument)
 -/
 
 @[expose] public section
@@ -629,27 +630,7 @@ private theorem derived_products (s : R) :
     PreservesLimitsOfShape (Discrete ℕ) (derived (A := A) s) :=
   (derivedAdjunction s).rightAdjoint_preservesLimits.preservesLimitsOfShape
 
-/-- The localized two-term scalar cone is exact and preserves countable products.
-Source: blueprint DVR effectivity proof, bounded-free tensor paragraph; Stacks 06YS,
-0941. (blueprint: lem-coef-linear-scalar-cone-exact-products).
-
-Proof: on complexes the functor is tensor with the two-term free scalar complex,
-using the scalar action of R. Its degree-q object is X^(q+1) plus X^q.
-Interchanging the two cone directions, with a minus sign on their doubly shifted
-summand, identifies its value on a mapping-cone triangle with the triangle of the
-diagonal cone map. This comparison commutes with the signed shift isomorphisms
-and their addition cocycle, so it induces an exact functor on the homotopy
-category. The proved quasi-isomorphism invariance descends it to localization.
-The two-term scalar complex has a two-term dual: its evaluation and coevaluation
-are the identity on matching scalar coordinates, with the tensor differential
-sign on the shifted one. The triangle identities hold separately on the two
-coordinates. Equivalently, the Hom-complex matrix formula identifies maps out of
-one scalar cone with maps into the shifted dual scalar cone. This yields a
-cochain adjunction, compatible with homotopies; both functors preserve
-quasi-isomorphisms, so it descends through localization. The localized scalar
-cone is consequently also a right adjoint and preserves every existing product.
-No regularity of s, boundedness of X, or exactness of ordinary products is needed.
-At s=0 it is identity plus shift; at an invertible s its values are contractible. -/
+/-- The localized two-term scalar cone is exact and preserves countable products. -/
 theorem exact_products
     {R : Type r} [Ring R] {A : Type u} [Category.{v} A] [Abelian A] [Linear R A]
     [HasDerivedCategory.{w} A] (s : R) :

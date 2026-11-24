@@ -16,10 +16,12 @@ import WeilConjectures.Algebra.Homology.TorIndependentScalarAugmentation
 import WeilConjectures.Algebra.Homology.MixedTensorRestrictionComparison
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
-/-! # Tor independence and tensor augmentation
+/-!
+# Tor independence and tensor augmentation
 
-Source: Stacks Project, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-tor-independent-tensor-augmentation).
+## References
+
+* Stacks Project, Tags 06Y6 and 08IB.
 -/
 
 @[expose] public section
@@ -67,22 +69,7 @@ private theorem tensor_restricted_quasiIso_of_scalarExtension
     (Arrow.isoMk (β_ E (S.obj Q)) (β_ E' (S.obj Q)) (by
       exact (BraidedCategory.braiding_naturality_left f (S.obj Q)).symm))).1 hr
 
-/-- Tensoring a K-flat resolution of B with an A-K-flat complex preserves its augmentation.
-Source: Stacks Project, Tags 06Y6 and 08IB.
-(blueprint: lem-pc-tor-independent-tensor-augmentation).
-
-Proof: Resolve A[0] by an R-K-flat complex P. The one-term Tor-acyclic
-comparison proves that P tensor B[0] -> A[0] tensor B[0] is a quasi-isomorphism.
-In the tensor square for P -> A[0] and f, K-flatness of F and P makes the
-other two adjacent sides quasi-isomorphisms. Two-out-of-three proves that
-A[0] tensor f is a quasi-isomorphism, hence scalar extension of f to A is
-one, by the single-factor comparison and exact, conservative restriction.
-The scalar augmentation helper carries out this calculation. Convert hK to
-K-flatness of Q, and tensor the scalar-extended map with Q over A. The signed
-flip, natural mixed tensor restriction comparison and braiding identify its
-restriction with Q restricted to R tensor f. Transport the quasi-isomorphism
-across these natural arrow isomorphisms. No boundedness is required; the same
-argument applies to zero rings and zero complexes. -/
+/-- Tensoring a K-flat resolution of B with an A-K-flat complex preserves its augmentation. -/
 theorem tensorAugmentation_quasiIso_of_torIndependent
     {R A B : Type u} [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B]

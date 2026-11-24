@@ -15,9 +15,10 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-!
 # Hom complexes commute with open restriction
 
-Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
-Cohomology on Sites, Section 0A8X.
-(blueprint: lem-sc-hom-complex-restrict-open).
+## References
+
+* Stacks Project, Cohomology, Tag 08DL, construction of internal Hom; Cohomology on Sites, Section
+  0A8X
 -/
 
 @[expose] public section
@@ -69,24 +70,7 @@ private theorem fan_iso {C : Type*} [Category C] {ι : Type*}
 -- Applying the differential comparison unfolds the chosen product projection types.
 set_option backward.isDefEq.respectTransparency false in
 /-- The ordinary sheaf Hom complex commutes with restriction to an open.
-No boundedness or K-injectivity assumption is needed.
-
-Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
-Cohomology on Sites, Section 0A8X.
-
-Proof: In degree n the Hom complex is the product, over p in Z, of the
-internal Homs from L.X p to M.X (p+n). Open restriction preserves products:
-products of sheaves of modules are computed sectionwise and restriction is
-precomposition with the forgetful functor from the localized site.
-For each factor use SheafOfModules.overHomObjIso, which identifies a local
-linear map with the same map on the further localized site. The resulting
-product isomorphisms commute with pre- and post-composition. Restriction is
-additive, so these isomorphisms identify the differential
- d_M f - (-1)^n f d_L with the differential of the restricted Hom complex.
-They therefore define a chain isomorphism. This works also for the empty
-open, zero complexes and unbounded complexes: no finite-product truncation
-or global-section acyclicity assertion is involved.
-(blueprint: lem-sc-hom-complex-restrict-open). -/
+No boundedness or K-injectivity assumption is needed. -/
 theorem homComplex_restrict_open (X : RingedSpace.{u}) (U : Opens X)
     (L M : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :
     Nonempty (

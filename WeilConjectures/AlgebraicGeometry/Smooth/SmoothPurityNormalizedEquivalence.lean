@@ -60,10 +60,6 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionCo
 /-!
 # Normalized coefficient towers and derived-complete integral complexes
 
-Source: blueprint main-20261015, chap-Smooth-purity,
-`sk-lem-sp-tower/sk-lem-sp-tower-equivalence.md`; Bhatt--Scholze, Lemma 3.5.7
-(blueprint: lemma-sp-tower-adjunction-foundation).
-
 ## Main definitions and statements
 
 - `spCompletedReduction`: the existing reduction transported to completed coefficients.
@@ -71,6 +67,10 @@ Source: blueprint main-20261015, chap-Smooth-purity,
 - `spCompletedTotalProjection`: the resolution-normalized limit projections.
 - `SpNormalizedEquivalence`: the adjunction, its isomorphisms, and constructible restriction.
 - `sp_normalized_equivalence`: existence of this normalized equivalence data.
+
+## References
+
+* B. Bhatt and P. Scholze, *The pro-étale topology for schemes*, Lemma 3.5.7
 -/
 
 @[expose] public noncomputable section

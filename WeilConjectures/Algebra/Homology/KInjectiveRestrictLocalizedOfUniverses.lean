@@ -12,8 +12,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Restriction to a localized ringed site preserves K-injectivity
 
-Source: Stacks Project, Tag 08FI, Lemma 21.20.1
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tag 08FI (Lemma 21.20.1), also used in Tag 0A94
 -/
 
 @[expose] public section
@@ -25,23 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Restriction of a K-injective module complex to C/U is K-injective, for any
-Grothendieck topology on C.
-
-Source: Stacks Project, Tag 08FI, Lemma 21.20.1, also used in Tag 0A94
-(auxiliary; not a blueprint node).
-
-Proof: extension by zero sends a module presheaf N on C/U to the presheaf whose
-sections at V are the direct sum of N(V,f) over arrows f : V to U, with the
-R(V)-action on each summand given by restriction of R. Sheafify this presheaf.
-The sectionwise adjunction, followed by the sheafification adjunction, makes this
-functor left adjoint to restriction. The direct-sum functor and module
-sheafification are exact; hence extension by zero is exact. Given an acyclic
-complex A on C/U and a chain map A to I|U, the induced adjunction on complexes
-transports it to a map from the acyclic extension of A to I. K-injectivity of I
-makes that map null-homotopic. The additive adjunction transports the homotopy
-back to the original chain map. This is the definition of K-injectivity of I|U.
-No pullbacks, small-site hypothesis, or boundedness is required. For I = 0 this
-recovers the zero homotopy, and localization at any U uses the same argument. -/
+Grothendieck topology on C. -/
 theorem isKInjective_restrict_localizedOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}]

@@ -11,7 +11,10 @@ import WeilConjectures.Algebra.Homology.BoundedBelowTotalComparison
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Bounded-below row augmentation comparison
-Source: Stacks Project, Tags 0133 and 01EQ.
+
+## References
+
+* Stacks Project, Tags 0133 and 01EQ
 -/
 
 @[expose] public section
@@ -25,14 +28,7 @@ variable {C : Type*} [Category* C] [Abelian C] [HasCoproducts.{0} C]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A rowwise quasi-isomorphic augmentation of a bounded-below bicomplex is
-quasi-isomorphic on totals.
-Source: Stacks Project, Tags 0133 and 01EQ.
-(auxiliary; not a blueprint node).
-Proof: regard the augmentation as a map from the single column in degree zero.
-Its row maps are quasi-isomorphisms by hypothesis. Both bicomplexes have common
-lower bounds, so row comparison makes the total map a quasi-isomorphism. The
-single-column total is isomorphic degreewise to the augmenting complex. Its
-inverse followed by the total map has the stated components, hence equals b. -/
+quasi-isomorphic on totals. -/
 theorem quasiIso_of_boundedBelow_row_augmentation
     (K : HomologicalComplex₂ C (up ℤ) (up ℤ)) (A : CochainComplex C ℤ) (N : ℤ)
     [A.IsStrictlyGE N]

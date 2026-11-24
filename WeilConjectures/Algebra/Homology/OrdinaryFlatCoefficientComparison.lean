@@ -10,7 +10,9 @@ import all WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoeff
 
 /-! # The ordinary balanced coefficient comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 05V4.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 05V4
 -/
 
 @[expose] public section
@@ -419,23 +421,7 @@ end Construction
 
 /-- If the multiplication B tensor_R S to S is invertible, the balanced map
 S tensor_R Res(M) to S tensor_B M is a natural isomorphism. Flatness is unnecessary
-for this ordinary assertion.
-
-Source: Stacks Project, Modules on Sites, Tags 03EK and 05V4, displayed cancellation.
-(auxiliary; not a blueprint node).
-
-Proof: restriction of scalars commutes with module sheafification, since both
-underlying abelian sheafifications coincide. The sectionwise balanced isomorphism
-Res(M) tensor_R Res(S) = Res(M tensor_B (B tensor_R Res(S))) therefore descends
-by sheafification. Tensor the assumed multiplication isomorphism with M and
-compose with this cancellation. Identify the restrictions of scalar extensions
-with tensoring by the restricted coefficient unit; these identifications are
-identities on pure tensors. Restriction reflects isomorphisms, so the canonical
-S-linear balanced map is invertible. Its formula sends s tensor x to s tensor x:
-the inverse cancellation inserts 1 and multiplication sends 1 tensor s to s.
-All these maps commute with module morphisms. They therefore assemble into a
-natural isomorphism, with the displayed formula after transport by Presentation.obj_eq.
-The argument uses no stalks, no flatness, and applies to zero modules and zero rings. -/
+for this ordinary assertion. -/
 theorem ordinary_flatCoefficientComparison
     (p : ∀ {A A' : Sheaf J CommRingCat.{r}} (a : A ⟶ A'), Presentation a)
     (N : Normalization p) {R B S : Sheaf J CommRingCat.{r}} (φ : R ⟶ B) (ψ : B ⟶ S)

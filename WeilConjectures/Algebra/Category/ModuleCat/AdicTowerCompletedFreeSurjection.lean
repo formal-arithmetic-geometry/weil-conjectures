@@ -12,9 +12,12 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.RingTheory.Finiteness.Cardinality
 
-/-! # Completed free presentations for adic towers
+/-!
+# Completed free presentations for adic towers
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W.
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 087W
 -/
 
 @[expose] public section
@@ -136,29 +139,7 @@ private theorem compatible_preimages (A : Type u) [CommRing A]
   refine ⟨AdicCompletion.mk I P c, fun n ↦ ⟨(a n).val, ?_, (a n).property⟩⟩
   rfl
 
-/-- An adic tower admits a surjective completed finite free presentation.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, proof through the
-short exact sequence with middle term the completed finite free module.
-(blueprint: lem-weil-pbc-adic-tower-completed-free-surjection).
-
-Proof: Choose generators of T_0 and lift them to the limit by recursive lifting
-along the surjective transitions. Compose these lifts with e inverse. Their
-images define compatible presentations at all levels from the quotients of
-A^d by I^(n+1). Nilpotent Nakayama makes every presentation surjective: the
-reduction is the chosen presentation of T_0. Indeed, inductively the composite
-T_n → T_0 is surjective with kernel I T_n: lift an I-multiple through the
-next surjective transition and use its kernel I^(n+1)T_(n+1) ⊆ I T_(n+1).
-Thus T_n/I T_n identifies with T_0, while I^(n+1) kills T_n.
-To lift a presentation kernel
-vector one level, lift its coordinates arbitrarily. Its image is in
-I^(n+1)T_(n+1) by the transition kernel assumption. Correct that image using
-I^(n+1) times a vector in the surjective free presentation. This proves
-surjectivity of the kernel transitions. Exactness of inverse limits for
-surjective kernel transitions gives a surjection from the completion of A^d
-to the limit. The completed scalar residue equation and equality detected by
-all limit coordinates prove that its composite with e inverse is linear over
-the completed ring. This yields the stated q. -/
+/-- An adic tower admits a surjective completed finite free presentation. -/
 theorem adicTower_completedFreeSurjection (A : Type u) [CommRing A]
     (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)
     (hfinite : Module.Finite A (T.obj (op 0)))

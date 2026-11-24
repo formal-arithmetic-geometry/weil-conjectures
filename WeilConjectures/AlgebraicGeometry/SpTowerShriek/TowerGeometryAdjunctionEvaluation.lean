@@ -8,10 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerShriekData
 
 /-! # Evaluation of the normalized tower adjunction
-
-Source: blueprint latest, integral direct-image proof, paragraph (3), and the
-specified unit and counit evaluation laws of the semilinear section calculus.
-(blueprint: lem-sp-tower-geometry-adjunction-evaluation)
 -/
 
 @[expose] public noncomputable section
@@ -195,16 +191,7 @@ private theorem geometry_evaluation_transport (b : Base l E)
     hs p q pg qg hp hq hdA' hu hc
 
 /-- The concrete section-model comparisons preserve the derived adjunction unit
-and counit. This involves no tensor, compactification, or constructibility test.
-Source: blueprint latest, integral direct-image proof, paragraph (3), evaluation of
-projection transposes; SemilinearSections.Geometry.unit_evaluation and
-counit_evaluation (blueprint: lem-sp-tower-geometry-adjunction-evaluation).
-Proof: transport the generic unit and counit evaluation equations through the
-coefficient, transition, target, pull and push identifications of Geometry. Its
-specified pullEvaluation and pushEvaluation are the generic comparisons, and
-its derivedAdjunction_eq and levelAdjunction_eq identify both adjunctions with
-their canonical ordinary-derived localizations. Thus the transported equations
-are precisely the two displayed equations. No detection of equality by levels is used. -/
+and counit. This involves no tensor, compactification, or constructibility test. -/
 theorem geometry_adjunction_evaluation (b : Base l E)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (g : Geometry l E b f) (n : ℕ) :
     (∀ M : D l E Y,

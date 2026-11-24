@@ -21,8 +21,9 @@ natural isomorphism `(M_{f x}) ⊗_ρ 𝒪_{X,x} ≅ (𝒪_X ⊗_{f⁻¹𝒪_Y} 
 (`AlgebraicGeometry.RingedSpace.tensorPullbackStalkIso`), and its termwise extension to complexes
 (`CochainComplex.tensorPullbackStalkComplexIso`).
 
-Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YC.
-(blueprint: lem-pc-tensor-pullback-stalk-complex)
+## References
+
+* Stacks Project, Tags 0098, 06YC
 -/
 
 @[expose] public section
@@ -52,8 +53,7 @@ def tensorPullbackStalkRingHom : Y.presheaf.stalk (f x) →+* X.presheaf.stalk x
 
 /-- The stalk at `x` of the tensor pullback `𝒪_X ⊗_{f⁻¹𝒪_Y} f⁻¹M` is the extension of scalars
 of `M_{f x}` along `tensorPullbackStalkRingHom`. It is the composite of the inverse-image
-scalar transport and the change-of-rings stalk isomorphism.
-Source: Stacks Project, Sheaves, Tag 0098. -/
+scalar transport and the change-of-rings stalk isomorphism. -/
 def tensorPullbackStalkIso (M : RingedSpace.Modules Y) :
     (ModuleCat.extendScalars (tensorPullbackStalkRingHom X Y f α x)).obj
         ((RingedSpace.moduleStalkFunctor Y (f x)).obj M) ≅
@@ -121,21 +121,7 @@ variable (X Y : RingedSpace.{u}) (f : X.carrier ⟶ Y.carrier)
 
 /-- A complex `P` with the termwise tensor pullback formula `e` has the expected stalk complex:
 the stalk of `P` at `x` is the extension of scalars of the stalk of `K` at `f x` along the
-canonical ring map `RingedSpace.tensorPullbackStalkRingHom`.
-Source: Stacks Project, Sheaves, Tag 0098; Cohomology, Tag 06YC, stalk comparison.
-(blueprint: lem-pc-tensor-pullback-stalk-complex)
-
-Proof: at `x`, the natural inverse-image stalk isomorphisms identify the source
-ring and module stalks with those at `f x`. Their formulas on adjunction-unit germs,
-and semilinearity of that unit, show that the module comparison respects the ring
-comparison. Compose the inverse ring-stalk isomorphism with the stalk of `α` to get
-`ρ`. Change of rings commutes with stalks: apply `stalkChangeOfRingsIso` termwise,
-then the preceding inverse-image module comparison. These linear isomorphisms give
-extension of scalars of the original stalk terms. Naturality on module morphisms
-identifies the differentials with extension of the stalk differentials. Finally
-compose with the stalks of `e`; the assumed differential square gives a chain
-isomorphism to the stalk of `P`. This argument imposes no boundedness or flatness
-assumption; if `X` is empty there is no `x`, and zero stalk rings cause no exception. -/
+canonical ring map `RingedSpace.tensorPullbackStalkRingHom`. -/
 def tensorPullbackStalkComplexIso :
     ((ModuleCat.extendScalars
         (RingedSpace.tensorPullbackStalkRingHom X Y f α x)).mapHomologicalComplex (.up ℤ)).obj

@@ -13,7 +13,10 @@ For a morphism `α : A ⟶ B` of sheaves of rings and a presheaf of `B`-modules 
 sheafification of the restriction of scalars of `P` is the restriction of scalars of the
 sheafification of `P` (`SheafOfModules.sheafificationRestrictScalarsIso`): on underlying
 abelian sheaves the comparison map is the identity.
-Source: Stacks Project, Tag 03CZ.
+
+## References
+
+* Stacks Project, Tag 03CZ
 -/
 
 @[expose] public section
@@ -31,8 +34,7 @@ variable {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasWeakSheafify J AddCommGrpCat.{r}]
 
 
-/-- Sheafification commutes with restriction of scalars: the comparison map.
-Source: Stacks Project, Tag 03CZ. -/
+/-- Sheafification commutes with restriction of scalars: the comparison map. -/
 noncomputable def sheafificationRestrictScalarsHom
     {A B : Sheaf J RingCat.{r}} (α : A ⟶ B) (P : PresheafOfModules.{r} B.obj) :
     (PresheafOfModules.sheafification (𝟙 A.obj)).obj
@@ -55,8 +57,7 @@ theorem toSheaf_map_sheafificationRestrictScalarsHom
   rw [Equiv.apply_symm_apply, Adjunction.homEquiv_unit]
   rfl
 
-/-- Sheafification commutes with restriction of scalars.
-Source: Stacks Project, Tag 03CZ. -/
+/-- Sheafification commutes with restriction of scalars. -/
 noncomputable def sheafificationRestrictScalarsIso
     {A B : Sheaf J RingCat.{r}} (α : A ⟶ B) (P : PresheafOfModules.{r} B.obj) :
     (PresheafOfModules.sheafification (𝟙 A.obj)).obj

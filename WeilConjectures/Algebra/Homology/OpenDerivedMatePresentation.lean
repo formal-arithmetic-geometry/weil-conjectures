@@ -12,7 +12,9 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Presentation of derived open-extension mates on complexes
 
-Source: Stacks Project, Tags 08BT and 08BW.
+## References
+
+* Stacks Project, Tags 08BT and 08BW
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
-/-- Localize the termwise adjunction of exact functors. 
-(blueprint: lem-sc-localization-nested-adjunction-mate)
+/-- Localize the termwise adjunction of exact functors.
 -/
 def onDerivedCategory (adj : L ⊣ R) : L.mapDerivedCategory ⊣ R.mapDerivedCategory := by
   letI : CatCommSq (L.mapHomologicalComplex (ComplexShape.up ℤ))
@@ -46,8 +47,7 @@ def onDerivedCategory (adj : L ⊣ R) : L.mapDerivedCategory ⊣ R.mapDerivedCat
     DerivedCategory.Q (HomologicalComplex.quasiIso A (ComplexShape.up ℤ))
     L.mapDerivedCategory R.mapDerivedCategory
 
-/-- Compare a chosen left adjoint with the termwise model on a representative complex. 
-(blueprint: lem-sc-localization-nested-adjunction-mate)
+/-- Compare a chosen left adjoint with the termwise model on a representative complex.
 -/
 def derivedPresentation (adj : L ⊣ R)
     {LD : DerivedCategory B ⥤ DerivedCategory A} (d : LD ⊣ R.mapDerivedCategory)
@@ -60,8 +60,7 @@ def derivedPresentation (adj : L ⊣ R)
       (R.mapDerivedCategory.mapIso e.symm ≪≫ R.mapDerivedCategoryFactors.app K) ≪≫
     L.mapDerivedCategoryFactors.app _
 
-/-- The presentation carries the chosen counit to the termwise counit. 
-(blueprint: lem-sc-localization-nested-adjunction-mate)
+/-- The presentation carries the chosen counit to the termwise counit.
 -/
 theorem derivedPresentation_counit (adj : L ⊣ R)
     {LD : DerivedCategory B ⥤ DerivedCategory A} (d : LD ⊣ R.mapDerivedCategory)
@@ -153,25 +152,7 @@ private theorem derivedComparison_fac
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
   rfl
 
-/-- Exact localization carries a nested adjunction mate to its derived mate.
-
-Source: Stacks Project, Tags 08BT and 08BW; compatibility with localization of the
-unit and counit (Mathlib `Adjunction.localization_unit_app` and
-`Adjunction.localization_counit_app`).
-(blueprint: lem-sc-localization-nested-adjunction-mate).
-
-Proof: Use the adjunction induced termwise on complexes, whose unit and counit in
-each degree are those of the original adjunction. The degreewise hypothesis is
-therefore equality of complex morphisms, by extensionality. Localize that equality.
-Expand the localized unit and counit on Q K using the localization formulas. The
-factorization isomorphisms for composition and for the comparison c identify the
-localized comparison with cD. Cancel inverse factorization isomorphisms to obtain
-the assertion for the localized adjunctions and E = Q K. Naturality transports this
-identity along e. Finally the unique isomorphisms from the chosen derived left
-adjoints to the localized ones carry their units and counits to each other; the
-unit and counit identities for `leftAdjointUniq` give the displayed formula for
-arbitrary d1 and d2. This is an equality for a single nested restriction: no cover,
-short exact sequence, or distinguished triangle is assumed or asserted. -/
+/-- Exact localization carries a nested adjunction mate to its derived mate. -/
 theorem derivedPresentation_mate
     {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{w} C]
     {L2 : C ⥤ A} {R2 : A ⥤ C} {T : B ⥤ C}

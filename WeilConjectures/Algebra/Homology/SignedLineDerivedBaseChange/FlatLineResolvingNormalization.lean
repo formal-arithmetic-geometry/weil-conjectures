@@ -8,7 +8,13 @@ module
 public import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLineDerivedBaseChangeData
 import WeilConjectures.Algebra.Homology.FlatSingleDerivedNormalization.FlatSingleDerivedNormalization
 
-/-! # Resolving comparison for a flat degree-zero tensor factor -/
+/-! # Resolving comparison for a flat degree-zero tensor factor
+
+## References
+
+* Stacks Project, Tag 06YQ
+* Stacks Project, Tag 06YU
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -26,13 +32,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [HasDerivedCategory.{z} (KFlatFixedTensor.Modules A)]
 
 omit [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})] in
-/-- A flat degree-zero factor has the published resolving tensor normalization.
-Source: Stacks 06YQ and 06YU; the flat-single normalization theorem.
-(blueprint: lem-pur-flat-line-resolving-normalization)
-Proof: take the K-flatness and flat-term proofs and the resolving comparison chi
-from flat_single_derived_normalization. Compose chi with the canonical collapse
-from total tensor to the termwise site tensor. The collapse and its inverse cancel,
-leaving the inverse representativeIso, exactly the required normalization. -/
+/-- A flat degree-zero factor has the published resolving tensor normalization. -/
 theorem flat_line_resolving_normalization
     (L : KFlatFixedTensor.Modules A) (hL : IsFlatOnSite (J := J) (R := A) L) :
     ∃ hK : CochainComplex.IsKFlatIndependentCoefficients

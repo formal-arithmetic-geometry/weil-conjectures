@@ -13,10 +13,15 @@ public import Mathlib.CategoryTheory.Category.Preorder
 import WeilConjectures.Algebra.FiniteFamilyCommonStage
 import WeilConjectures.Algebra.Homology.PreorderModuleMapEqualityDescent
 
-/-! # Simultaneous eventual equality of finitely many module maps
+/-!
+# Simultaneous eventual equality of finitely many module maps
 
-Source: Stacks Project, Algebra, Tag 05N7, clause (3).
-(blueprint: lem-pc-finite-family-module-map-equality-colimit).
+A finite family of equalities of maps over a directed colimit holds at one later stage.
+
+## References
+
+* Stacks Project, Algebra, Tag 05N7, clause (3)
+* Stacks Project, More on Algebra, Tag 0BC7 (proof of (1))
 -/
 
 @[expose] public section
@@ -27,22 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- A finite family of equalities of maps over the colimit holds at one later stage.
-
-Source: Stacks Project, Algebra, Tag 05N7, clause (3), used in More on Algebra,
-Tag 0BC7, proof of (1).
-(blueprint: lem-pc-finite-family-module-map-equality-colimit).
-
-Proof: For each t, apply the equality clause of finite-presentation descent to f t and
- g t and choose a stage above i where they agree. Directedness supplies a common upper
-bound for these finitely many stages and i. Map each equality to that upper stage;
-functoriality of extension of scalars and its canonical composition isomorphism
-identify the result with the asserted equality. For an empty family use i itself.
-For a preorder, replace I by its antisymmetrization, choose representatives, and transport
-F and its colimit along the equivalence of indexing categories. Apply the partial-order
-statement there and lift the resulting upper index back to I; the definition of the
-quotient order guarantees that it is above i. The canonical ring and module comparison
-isomorphisms preserve and reflect the equalities of maps in question. -/
+/-- A finite family of equalities of maps over the colimit holds at one later stage. -/
 theorem exists_stage_finite_family_map_eq
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

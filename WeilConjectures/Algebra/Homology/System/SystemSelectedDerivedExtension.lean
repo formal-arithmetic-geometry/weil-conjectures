@@ -13,7 +13,11 @@ import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
 
 /-! # Derived extension from a selected subsequence
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 06XN, 06YT, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -33,12 +37,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ)
 
 /-- Selected extension preserves quasi-isomorphisms between componentwise flat-term
-K-flat representatives. Source: Zheng 4.1; Stacks 06YT
-(blueprint: lem-pur-system-selected-derived-extension).
-Proof: exact evaluation takes the original map to a quasi-isomorphism at the first
-selected index. Scalar extension preserves that quasi-isomorphism between the K-flat
-components. These are the actual evaluations of the extended strict map. Joint
-componentwise detection gives the claimed quasi-isomorphism of strict complexes. -/
+K-flat representatives. -/
 theorem systemSelected_preserves
     {K L : CochainComplex (StrictRingSystem (selectedSystemRings B r)) ℤ} (f : K ⟶ L)
     (hK : systemComponentwiseKFlat (selectedSystemRings B r) K)
@@ -54,12 +53,7 @@ theorem systemSelected_preserves
   exact (S (B.map (homOfLE (systemNextSelected_spec r m).1).op)).model.preserves _
     (hK _).1 (hL _).1 hv
 
-/-- The selected ordinary adjunction has its normalized total derived adjunction.
-Source: Zheng 4.1; Stacks 06XN and 0FND
-(blueprint: lem-pur-system-selected-derived-extension).
-Proof: the simultaneous strict K-flat resolution resolves the componentwise class.
-Selected extension preserves quasi-isomorphisms on this class, so normalized derivation
-applies to the ordinary selected adjunction. -/
+/-- The selected ordinary adjunction has its normalized total derived adjunction. -/
 def systemSelectedDerivedExtension (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
     SystemDerivedLeftExtension (systemSubsequence B r)

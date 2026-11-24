@@ -22,10 +22,8 @@ induced map of chart rings is the localization away from (the image of) `s`.
 ## Main results
 
 - `AlgebraicGeometry.AffineBlowup.isLocalization_away_map` — chart-wise localization
-  (blueprint: `prop:nagata-rees-localization`, in chart form).
 - `AlgebraicGeometry.AffineBlowup.isPullback_hom_of_isLocalization` — the blow-up square
-  of a localization map is a pullback (blueprint: `prop:nagata-affine-blowup-restrict`).
-
+  of a localization map is a pullback.
 -/
 
 @[expose] public section
@@ -44,7 +42,7 @@ include s
 /-- **Chart-wise localization**: if `B = A[1/s]` and `J = I·B`, then on the chart at a
 degree-one element `a·X` the induced map of chart rings
 `Away (reesGrading I) (a·X) →+* Away (reesGrading J) (φ(a)·X)` is the localization away
-from the image of `s`. (blueprint: `prop:nagata-rees-localization`, chart form) -/
+from the image of `s`. -/
 theorem AffineBlowup.isLocalization_away_map (h : I.map (algebraMap A B) = J) (a : A)
     (ha : a ∈ I) :
     IsLocalization.Away (AffineBlowup.awayAlgebraMap I (reesX I a ha) s)
@@ -222,7 +220,7 @@ theorem AffineBlowup.opensRange_hom_of_isLocalization (h : I.map (algebraMap A B
   rfl
 
 /-- **The affine blow-up commutes with localization**: for `B = A[1/s]` and `J = I·B`, the
-blow-up square is a pullback. (blueprint: `prop:nagata-affine-blowup-restrict`) -/
+blow-up square is a pullback. -/
 theorem AffineBlowup.isPullback_hom_of_isLocalization (h : I.map (algebraMap A B) = J) :
     IsPullback (AffineBlowup.hom (algebraMap A B) h) (AffineBlowup.toSpec J)
       (AffineBlowup.toSpec I) (Spec.map (CommRingCat.ofHom (algebraMap A B))) := by

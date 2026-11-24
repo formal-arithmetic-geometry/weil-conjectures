@@ -9,10 +9,12 @@ module
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.Algebra.DirectSum.Basic
 
-/-! # Single-degree generation of finite Rees modules
+/-!
+# Single-degree generation of finite Rees modules
 
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (1).
-(blueprint: lem-weil-pbc-finite-rees-module-single-degree-generation)
+## References
+
+* Stacks Project, Cohomology of Schemes, Lemma 02OA (proof of (1))
 -/
 
 @[expose] public section
@@ -24,25 +26,7 @@ open DirectSum
 namespace AlgebraicGeometry
 
 open Classical in
-/-- A finite graded Rees module is generated from any sufficiently high single degree.
-Source: Stacks Project, Cohomology of Schemes, Lemma 02OA, proof of (1).
-(blueprint: lem-weil-pbc-finite-rees-module-single-degree-generation)
-
-Proof: Choose a finite Rees-module generating set T and let c0 be the maximum of
-all degrees in the supports of its elements, taking zero for an empty set. The case
-k = 0 follows directly from the degree-zero scalar formula with coefficient 1.
-For nonzero a, convolution identifies the action of a*t^r on a degree-d vector with
-L r d a. Zero monomials act by zero; no formula for L r d 0 is required.
-Let S be the indicated A-span in degree c+k. If d <= c, a coefficient in
-I^(k+(c-d)) is a finite sum of products a*b with a in I^k and b in I^(c-d).
-Monomial multiplication and module associativity move b onto the degree-d vector,
-producing a degree-c vector; the remaining action lies in S. Additivity treats sums.
-Project the convolution b*x for a generator x to degree c+k. Its off-degree terms
-vanish; the remaining terms satisfy r=k+(c-d), so the factorization applies.
-Span induction, using the predicate that every scalar multiple has its degree-c+k
-component in S, extends this to the whole Rees module. Apply it to the inclusion of
-an arbitrary degree-c+k vector and scalar 1. The reverse containment is automatic.
-Empty generating sets, zero vectors, c = 0, I = 0 and I = A require no exclusion. -/
+/-- A finite graded Rees module is generated from any sufficiently high single degree. -/
 theorem finite_rees_module_single_degree_generation
     (A : Type v) [CommRing A] (I : Ideal A)
     (M : ℕ → Type v) [∀ n, AddCommGroup (M n)] [∀ n, Module A (M n)]

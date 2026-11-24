@@ -11,8 +11,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-!
 # Universal property of the sheaf tensor product
 
-Source: literature/stacks-project/sites-modules.tex, Section 03EK, display after Tag 0GMW
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK, display after Tag 0GMW
 -/
 
 @[expose] public section
@@ -28,9 +29,8 @@ set_option autoImplicit false
 attribute [local instance] monoidalCategory
 
 /-- Existence part of the sheaf tensor universal property.
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
-through module sheafification; this is exactly the existence construction in the source proof. -/
+through module sheafification. -/
 private theorem tensor_bilinear_universal_exists {C : Type u} [Category.{u} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u})
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -83,7 +83,6 @@ private theorem tensor_bilinear_universal_exists {C : Type u} [Category.{u} C]
   rw [hi]
   exact hh
 /-- Uniqueness part of the sheaf tensor universal property.
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
 A morphism out of the sheafified presheaf tensor is determined by its values on pure tensors,
 by the generating property of the sectionwise module tensor and sheafification. -/
 private theorem tensor_bilinear_universal_unique {C : Type u} [Category.{u} C]
@@ -124,23 +123,7 @@ private theorem tensor_bilinear_universal_unique {C : Type u} [Category.{u} C]
 
 /-- Composition with the pure-tensor map `F × G → F ⊗_O G` is a bijection from
 `Hom_O(F ⊗_O G, H)` to the set of morphisms of sheaves of sets `F × G → H` that are
-`O(U)`-bilinear on sections over every `U`. A bilinear morphism is a family `β` of
-`O(U)`-bilinear maps (curried linear maps) compatible with the restriction maps; the
-pure-tensor map sends `(x, y)` over `U` to the image of `x ⊗ y` under the sheafification
-unit of the presheaf tensor product, identified with `F ⊗ G` by
-`tensorObjIsoSheafification`. The statement says that every such `β` is the composite of
-exactly one morphism `F ⊗ G ⟶ H` with the pure-tensor map (naturality in `H` holds by
-definition of the composite).
-Source: literature/stacks-project/sites-modules.tex, Section 03EK, display after Tag 0GMW
-(blueprint: lem-pc-sites-sheaf-tensor-bilinear-universal)
-Proof: sectionwise, `O(U)`-bilinear maps `F(U) × G(U) → H(U)` correspond to `O(U)`-linear
-maps `F(U) ⊗_{O(U)} G(U) → H(U)` (Tag 00CV), compatibly with restrictions, so restriction-
-compatible bilinear families correspond to morphisms from the presheaf tensor product
-[def-pur-presheaf-tensor-product] into `H`; since `H` is a sheaf, these factor uniquely
-through the sheafification [def-weil-presheaf-modules-sheafification], which is `F ⊗_O G`
-[def-pur-sheaf-tensor-product]. The resulting correspondence is composition with the
-pure-tensor map and is natural in `H`.
--/
+`O(U)`-bilinear on sections over every `U`. -/
 theorem tensor_bilinear_universal {C : Type u} [Category.{u} C]
     {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u})

@@ -156,26 +156,7 @@ private def localTensorBasisIso (X : Scheme.{u})
   convert (congrArg ((a.hom.app (op V.unop.left)).hom) he).trans ha using 1
 
 /-- An internal module trivialized on one slice remains trivialized there after
-extension along a map of commutative coefficient rings.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), rational scalar extension;
-sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md, slice calculation.
-(blueprint: lem-sp-slice-scalar-extension-basis)
-
-Proof: reconstruct section rings and module actions from the internal rings and
-modules. Internal scalar extension is the sheafification of the sectionwise
-balanced tensor S tensor_R L. On the slice the presheaf tensor has the same
-sections and restriction maps as the restricted global tensor. Sheafification
-also restricts to this tensor, since coverings of each slice object are precisely
-its coverings in the original site. Thus the restriction of the actual internal
-extension identifies with scalar extension of the restricted section module.
-Tensor the given basis and its inverse with S; the balancing relations retain
-the inverse equations. The multiplication map S tensor_R R -> S has inverse
-s -> s tensor 1, and both maps are S-linear. Compose these maps to obtain the
-asserted S-linear isomorphism. This requires no flatness, no invertibility of a
-prime, and no hypotheses on L away from the specified slice. In particular the
-argument also applies to zero coefficient rings and the empty slice. -/
+extension along a map of commutative coefficient rings. -/
 theorem spSliceScalarExtensionBasis (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

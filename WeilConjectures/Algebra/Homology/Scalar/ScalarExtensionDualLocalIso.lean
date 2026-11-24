@@ -11,8 +11,9 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 /-!
 # Scalar extension of a locally free rank-one module
 
-Source: Stacks Project, Tags 03EK, 03EM, 04TT.
-(blueprint: lem-sp-scalar-extension-dual-local-iso).
+## References
+
+* Stacks Project, Tags 03EK, 03EM, 04TT
 -/
 
 @[expose] public section
@@ -385,33 +386,7 @@ end DualInverse
 
 end LocalBasis
 
-/-- Scalar extension preserves rank one, and its explicit internal-dual map is invertible.
-Source: Stacks Project, Tags 03EK, 03EM and 04TT
-(blueprint: lem-sp-scalar-extension-dual-local-iso).
-
-Proof: choose local generators data witnessing that `N` is locally free of rank one.
-Its presentation is an isomorphism from the free module on a singleton over every
-member of the covering. Identify this free module with the unit. Restrict the scalar
-extension to each such slice: the restricted sheafification unit is locally bijective,
-so its universal property identifies it with sheafification of the restricted tensor
-presheaf. Extend the two inverse trivialization maps sectionwise and descend them;
-their composites are identities on pure tensors. The unit comparison then identifies
-the extended module with the target unit on the same covering. These trivializations
-witness that the extension is invertible.
-
-For the dual map, the same argument applies to the internal Hom on every slice.
-In the chosen basis the functional is determined by its value on the basis vector.
-The map in `scalarExtensionDualMap_tmul` sends an extended functional to the
-functional with the same scalar coefficient, since evaluation is `s*t*α(f(x))`.
-Thus it is an isomorphism on each trivializing slice: its inverse sends the functional
-with coefficient `s` to `s` times the extended dual basis vector. On overlaps these
-inverses agree, as both invert the same map. Sheaf separatedness gives uniqueness and
-the sheaf gluing property gives a global inverse. The two composites are identities
-locally, hence globally. The internal Hom and its scalar extension use their actual
-maximum universes; the argument uses locally bijective units in that universe and
-the rank-one trivializations in the original module universe. Empty covering families
-and the zero ring cause no exception, since their sheaf conditions force unique local
-data. No flatness is used. -/
+/-- Scalar extension preserves rank one, and its explicit internal-dual map is invertible. -/
 theorem scalarExtensionDual_localIsomorphism
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]

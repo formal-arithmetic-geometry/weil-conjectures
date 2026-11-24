@@ -17,9 +17,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Bounded Hom complexes with exact internal Hom in each source degree
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation,
-and Homology, Tag 0117, long exact cohomology sequence.
-(blueprint: lem-pc-bounded-exact-term-hom-quasi-iso).
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tag 08DM (bounded Hom calculation)
+* Stacks Project, Homology, Tag 0117 (long exact cohomology sequence)
 -/
 
 @[expose] public section
@@ -208,28 +209,7 @@ private lemma quasiIso_homComplex_map_of_interval
 
 /-- A bounded source complex whose termwise internal Hom preserves short exact sequences
 sends every quasi-isomorphism in the second variable to a quasi-isomorphism. The second
-variable is arbitrary, and no K-injective resolution or derived category occurs here.
-
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation;
-Homology, Tag 0117, long exact cohomology sequence.
-(blueprint: lem-pc-bounded-exact-term-hom-quasi-iso).
-
-Proof:
-1. Prove the assertion for a source supported in [a,a+d], by induction on the
-   natural number d. For d=0 use the single-degree exact-term Hom calculation.
-2. For a successor width, take the stupid tail starting at a+1. Its terms are
-   either zero or isomorphic to the corresponding terms of P. Internal Hom from
-   zero is zero; transport short exactness through the other term isomorphisms.
-   The tail has width d, so the induction hypothesis applies. The single complex
-   on P.X a is handled by the base calculation, transporting the exact-term
-   hypothesis through its degree-a term isomorphism.
-3. Extension by zero and restriction of the Hom product factors give a natural
-   short exact sequence with singleton and tail as its outer terms. Apply the
-   upstream long-exact-sequence lemma quasiIso_τ₂ to the outer quasi-isomorphisms
-   and transport the middle quasi-isomorphism through its arrow isomorphism.
-4. For the original bounds a,b choose d=(b-a).toNat, so b ≤ a+d even if b<a.
-   Apply the interval induction. Both target complexes may be unbounded, and no
-   exactness of an infinite product is needed. -/
+variable is arbitrary, and no K-injective resolution or derived category occurs here. -/
 theorem quasiIso_homComplex_map_of_bounded_exact_terms
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

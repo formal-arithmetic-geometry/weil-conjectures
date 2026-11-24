@@ -265,25 +265,7 @@ private theorem sectionSliceTensorBasis (X : Scheme.{u})
   rw [hi]
   exact hk'
 
-/-- Extending a prescribed slice basis gives a basis normalized on the integral unit.
-
-Source: blueprint latest, sec-smooth-purity/sk-prop-an/
-sk-def-sp-tate-twist-locally-free.proof.md, clause (3), scalar extension of the
-integral basis; sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md.
-(blueprint: lem-sp-slice-normalized-scalar-extension-basis)
-
-Proof: reconstruct the section rings and modules. The mate of the sectionwise
-restriction-of-scalars comparison identifies internal scalar extension with
-sheafification of the balanced sectionwise tensor product. Restriction to W
-commutes with this sheafification, since each object of the slice has exactly
-its original covers. Tensor the supplied basis and its inverse with S on the
-slice. Compose with S tensor_R R = S, whose forward map sends s tensor r to
-s times p(r), and whose inverse sends s to s tensor 1. Balancing proves the
-inverse identities and S-linearity. Under this construction p(r) maps to the
-image of i(r) under the extension unit, which is the asserted normalization.
-These are equations of maps of the actual internal modules, retained by section
-reconstruction. The calculation also applies to the zero ring and empty slice.
-No roots, inverse systems, or coefficient-field inclusions are involved. -/
+/-- Extending a prescribed slice basis gives a basis normalized on the integral unit. -/
 theorem spSliceNormalizedScalarExtensionBasis (X : Scheme.{u})
     {R S : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]

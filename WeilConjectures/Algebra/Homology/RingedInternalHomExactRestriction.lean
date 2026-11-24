@@ -23,12 +23,15 @@ import WeilConjectures.CategoryTheory.SiteRelocalizationKInjective
 /-!
 # Internal derived Hom calculus on small ringed sites
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JB and 08JC
-(auxiliary; not a blueprint node).
-
 The tensor functor is specified by its natural total-tensor comparison on K-flat
 representatives. Restriction uses Mathlib's slice functors and their induced functors
 on unbounded derived categories. The opposite triangulated structure reverses shifts.
+
+## References
+
+* [Stacks Project, Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
+* [Stacks Project, Tag 08JB](https://stacks.math.columbia.edu/tag/08JB)
+* [Stacks Project, Tag 08JC](https://stacks.math.columbia.edu/tag/08JC)
 -/
 
 @[expose] public section
@@ -77,13 +80,7 @@ private theorem ringedSite_pushforward_colimits
     { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
-/-- The overFunctor slice restriction is additive.
-
-Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
-
-Proof: Restriction evaluates a sectionwise linear natural transformation on the slice site.
-    Addition of such transformations is sectionwise, so restriction preserves addition. -/
+/-- The overFunctor slice restriction is additive. -/
 @[instance]
 theorem ringedSite_overFunctor_additive
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U :
@@ -94,14 +91,7 @@ theorem ringedSite_overFunctor_additive
   ext V x
   rfl
 
-/-- The overFunctor slice restriction preserves finite limits.
-
-Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
-
-Proof: Kernels and finite products of module sheaves are computed sectionwise. Evaluation along
-    the forgetful functor from the slice preserves these constructions. The ring transport in
-    overMap is the canonical identity on sections. -/
+/-- The overFunctor slice restriction preserves finite limits. -/
 @[instance]
 theorem ringedSite_overFunctor_limits
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U :
@@ -109,15 +99,7 @@ theorem ringedSite_overFunctor_limits
     CommRingCat.{u} RingCat.{u})).obj R) U) := by
   exact ringedSite_pushforward_limits (𝟙 _)
 
-/-- The overFunctor slice restriction preserves finite colimits.
-
-Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
-
-Proof: Finite sums are sectionwise and cokernels are sheafified sectionwise cokernels. Coverings
-    of an object of a slice are exactly coverings of its domain with the given structural arrow.
-    Thus restriction commutes with sheafification and with these cokernels. The same argument
-    applies to overMap. -/
+/-- The overFunctor slice restriction preserves finite colimits. -/
 @[instance]
 theorem ringedSite_overFunctor_colimits
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (U :
@@ -125,13 +107,7 @@ theorem ringedSite_overFunctor_colimits
     CommRingCat.{u} RingCat.{u})).obj R) U) := by
   exact ringedSite_pushforward_colimits (𝟙 _)
 
-/-- The overMap slice restriction is additive.
-
-Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
-
-Proof: Restriction evaluates a sectionwise linear natural transformation on the slice site.
-    Addition of such transformations is sectionwise, so restriction preserves addition. -/
+/-- The overMap slice restriction is additive. -/
 @[instance]
 theorem ringedSite_overMap_additive
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) {U V
@@ -142,14 +118,7 @@ theorem ringedSite_overMap_additive
   ext V x
   rfl
 
-/-- The overMap slice restriction preserves finite limits.
-
-Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
-
-Proof: Kernels and finite products of module sheaves are computed sectionwise. Evaluation along
-    the forgetful functor from the slice preserves these constructions. The ring transport in
-    overMap is the canonical identity on sections. -/
+/-- The overMap slice restriction preserves finite limits. -/
 @[instance]
 theorem ringedSite_overMap_limits
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) {U V
@@ -157,15 +126,7 @@ theorem ringedSite_overMap_limits
     CommRingCat.{u} RingCat.{u})).obj R) f) := by
   exact ringedSite_pushforward_limits (Sheaf.pushforwardOverMapIso _ f).inv
 
-/-- The overMap slice restriction preserves finite colimits.
-
-Source: Stacks Project, Tag 08JB, restriction to a localized ringed site.
-(auxiliary; not a blueprint node).
-
-Proof: Finite sums are sectionwise and cokernels are sheafified sectionwise cokernels. Coverings
-    of an object of a slice are exactly coverings of its domain with the given structural arrow.
-    Thus restriction commutes with sheafification and with these cokernels. The same argument
-    applies to overMap. -/
+/-- The overMap slice restriction preserves finite colimits. -/
 @[instance]
 theorem ringedSite_overMap_colimits
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) {U V
@@ -185,19 +146,7 @@ local instance {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 /-- Derived internal Hom commutes naturally with slice restriction, compatibly
 with successive restrictions. The comparison for V to U, followed by transport
-along the canonical derived overFunctorMap, equals direct restriction to V.
-
-Source: Stacks Project, Tag 08JB (lemma-restriction-RHom-to-U).
-(auxiliary; not a blueprint node).
-
-Proof: Represent M by a K-injective I and L by A. The sections of Hom(A,I) restricted to U, over
-    each arrow W to U, are the same families of local maps as the sections of Hom(A restricted to
-    U, I restricted to U); their differentials coincide. Restriction preserves K-injectivity
-    (lem-pur-kinjective-restrict-localized), so these complexes compute derived internal Hom. The
-    same construction for Over.map f gives s. On every object mapping to V both successive and
-    direct comparisons are identity on these families, after the canonical overFunctorMap
-    transport. This proves the displayed equation; pre- and postcomposition give naturality.
-    Independence of representatives follows from lem-pur-rhom-well-defined. -/
+along the canonical derived overFunctorMap, equals direct restriction to V. -/
 theorem ringedInternalHom_restriction
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}
@@ -313,25 +262,7 @@ theorem ringedInternalHom_restriction
 
 /-- Internal derived Hom preserves distinguished triangles in each variable
 and commutes with shifts. The first variable is a functor from the opposite
-triangulated category, whose shift by m is the original shift by -m.
-
-Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
-
-Proof: For the first variable fix a K-injective I representing M. The graded splitting of the cone
-    gives Hom(C(f),I) as Hom(B,I) plus Hom(A[1],I). Put X=Hom(B,I), Y=Hom(A,I), h=f*. In degree n
-    its differential is (d_X x, d_Y y+(-1)^(n+1)h(x)); (x,y) maps to ((-1)^(n-1)y,x) in C(h)[-1].
-    Rotation gives the reversed distinguished triangle. For the second variable choose K-injective
-    representatives J,I; lem-weil-pbc-kinjective-hom-derived represents the morphism by a chain
-    map g. TR3 and lem-sf-triangle-morphism-iso identify its cone triangle with the given
-    triangle. Its cone is K-injective: Hom from any acyclic test complex is the cone of two
-    acyclic ordinary Hom complexes, hence acyclic. Then Hom(A,C(g)) is the cone of Hom(A,g), with
-    differential (dx+Hom(A,g)y,-dy). These cone calculations descend by
-    lem-pur-homotopy-category-triangulated and lem-pur-rhom-well-defined. The natural shift
-    identifications from lem-pur-derived-internal-hom-shift-left and
-    lem-pur-derived-internal-hom-shift-right give H(P[m],Q)=H(P,Q)[-m] and H(P,Q[n])=H(P,Q)[n].
-    The cone signs give the required triangulated structures. Only finite splittings occur, so no
-    boundedness or finite-generation hypothesis is used. -/
+triangulated category, whose shift by m is the original shift by -m. -/
 theorem ringedInternalHom_exact
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}

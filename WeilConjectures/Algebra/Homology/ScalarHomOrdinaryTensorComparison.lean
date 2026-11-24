@@ -10,7 +10,9 @@ import WeilConjectures.AlgebraicGeometry.ScalarExtensionBinaryCoherence
 
 /-! # The ordinary normalized scalar tensor comparison
 
-Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL, 03EK and 0GMW
 -/
 
 @[expose] public section
@@ -30,8 +32,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
 attribute [local instance] isMonoidal_W_independentCoefficients
 attribute [local irreducible] monoidalCategory
 
-/-- The image of a pure section in the sheaf tensor product.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+/-- The image of a pure section in the sheaf tensor product. -/
 noncomputable def pure (A : Sheaf J CommRingCat.{r})
     (M N : scalarModules J A) (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) :
     ((monoidalCategory A).tensorObj M N).val.obj V :=

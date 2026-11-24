@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedExtensionCoherentTriangle
 
 /-! # Canonical completion of the derived tensor row
 
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1.
+## References
+
+* Stacks Project, Tag 06Y6, Lemma 15.61.1.
 -/
 
 @[expose] public section
@@ -148,31 +150,7 @@ private theorem restrict_exact_row
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Complete the canonical same-degree model maps by the derived connecting map.
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, exactness and independence of
-choices; step 1 of lem-pc-base-derived-tensor-ordinary-triangle-rows.
-
-Proof: choose the triangulated universal derived extension supplied by
-exists_baseDerivedExtension_resolution. Universal uniqueness identifies it with
-m₁.derived. The coherent shift compatible with the counit is unique by the right
-Kan universal property, so this identification respects the given shift structure.
-Exact restriction A to R sends the localized distinguished triangle to D(R).
-Apply derived extension and its long exact cohomology sequence. Identify all
-three vertices with the prescribed model cohomology via universal counit
-uniqueness. The hypotheses hg0, hg1 and hg3 identify its three same-degree maps
-with the prescribed s₀, s₁ and s₃: the counit identities force each δk to be the
-unique universal transformation. Define the B-linear boundary by the displayed
-formula. Multiplication by a in A defines an endomorphism of the input triangle;
-naturality of the cohomology connecting map, the cohomologyIso_smul identities
-and naturality of the unique universal comparison show that this B-linear map
-commutes with a tensor 1. It already commutes with 1 tensor b by B-linearity.
-Tensor induction gives E-linearity, E = A tensor_R B, and thus a morphism s₂.
-Its restriction is exactly the stated formula by construction. The B-linear
-row is conjugate to the long exact row; exact faithful restriction E to B
-reflects exactness, proving the first conclusion. No ordinary counit comparison
-square is claimed here. Zero rings, zero complexes and arbitrary degrees use
-the same universal-property and tensor-induction arguments.
-(blueprint: lem-pc-base-derived-tensor-canonical-row-completion). -/
+/-- Complete the canonical same-degree model maps by the derived connecting map. -/
 theorem exists_baseDerivedTensor_canonical_row_completion
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

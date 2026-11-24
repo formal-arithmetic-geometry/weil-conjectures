@@ -12,8 +12,9 @@ import Mathlib.RingTheory.TensorProduct.Maps
 /-!
 # Tensor coefficient actions from an additive functor
 
-Source: Stacks Project, Tag 06Y6, functorial coefficient actions
-(blueprint: lem-pc-tensor-action-additive-functor).
+## References
+
+* Stacks Project, Tag 06Y6
 -/
 
 @[expose] public section
@@ -75,17 +76,8 @@ private theorem action_of_endomorphisms
   simp [ρ, Algebra.TensorProduct.includeLeft, Algebra.TensorProduct.lift_tmul, f]
 
 -- The coefficient actions use explicit module carriers.
-/-- Source: Stacks Project, Tag 06Y6, functorial coefficient actions
-(blueprint: lem-pc-tensor-action-additive-functor).
-
-Proof: The additive functor induces a ring map on endomorphisms. Compose it with
-scalar multiplication by A. Its restriction to R is scalar multiplication through B
-by hR. B-linear endomorphisms commute with B-scalars. The algebra tensor universal
-property therefore yields a ring map from A tensor B to B-linear endomorphisms.
-Restrict the evaluation module along this ring map. The underlying B-module is the
-original one because the restriction of the ring map to B is the scalar map.
-The identity maps give the B-linear isomorphism, and the restriction to A gives
-the required scalar equation. -/
+/-- An additive functor `K` into `B`-modules gives the `A ⊗ B`-module structure on `K.obj Q`
+compatible with the given `A`- and `B`-actions. -/
 theorem tensorAction_of_additiveFunctor
     (R : Type uR) (A : Type uA) (B : Type uB)
     [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]

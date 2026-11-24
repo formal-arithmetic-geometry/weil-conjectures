@@ -30,9 +30,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 /-!
 # Data for derived slice comparisons
 
-Source: Stacks Project, algebraization.tex, Tag 099J; Modules on Sites, Tag 04J0;
-Cohomology on Sites, Tag 07A6
-(blueprint: def-weil-pbc-ringed-slice-derived-data).
+## References
+
+* Stacks Project, Algebraization, Tag 099J
+* Stacks Project, Modules on Sites, Tag 04J0
+* Stacks Project, Cohomology on Sites, Tag 07A6
 -/
 
 @[expose] public noncomputable section

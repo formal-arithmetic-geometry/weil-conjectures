@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.RestrictionCompositeHomology
 
 /-! # Construction of the derived coefficient comparison
 
-Source: Stacks Project, Tag 06Y6, and equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-comparison).
+## References
+
+* Stacks Project, Tags 06Y5 and 06Y6.
 -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace ModuleCat
 
-/-- The scalar-extension counit on homology, without an invertibility assumption.
-Source: Stacks Project, Tag 06Y6.
-(blueprint: lem-pc-base-tensor-derived-comparison). -/
+/-- The scalar-extension counit on homology, without an invertibility assumption. -/
 def scalarExtensionHomologyMap {A D : Type u} [CommRing A] [CommRing D]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     [HasDerivedCategory.{w} (ModuleCat.{u} D)] (ρ : A →+* D)
@@ -58,9 +57,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
 
 /-- The representative formula characterizing the derived coefficient comparison.
 The coefficient map is quantified with its generator formula, so this condition
-makes no choice of a tensor model.
-Source: Stacks Project, Tag 06Y6; equation-bc, Tag 0DJ7.
-(blueprint: lem-pc-base-tensor-derived-comparison). -/
+makes no choice of a tensor model. -/
 def IsBaseTensorDerivedComparison
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶
@@ -107,30 +104,7 @@ def IsBaseTensorDerivedComparison
           (scalarExtensionHomologyMap _ L ε P i)
 
 set_option backward.defeqAttrib.useBackward true in
-/-- Construct the derived coefficient comparison before introducing cohomology models.
-
-Proof: choose an A-K-flat resolution U to P and an R-K-flat resolution V to
-its restricted complex. Compute F on V using its invertible resolution counit.
-The augmentation V to the restriction of U, followed by coefficient extension,
-gives a B-linear chain map V tensor_R B to the B-restriction of U tensor_A D:
-on generators b tensor v maps to the image of 1 tensor b tensor v in D tensor U.
-The invertible A-to-D counit on U identifies its target with L(Q(U)). Transport
-by the quasi-isomorphism U to P to obtain the comparison at Q(P).
-Comparison maps of resolutions commute with this coefficient map on generators.
-For a roof representing a derived A-linear morphism, resolve its three complexes
-and use those commuting squares; independence of refinements and compatibility
-with composition give a natural transformation on D(A). Apply degree-i homology.
-Compose the resulting comparison with the A-to-D counit at P, which need not be
-invertible. Naturality of both resolution augmentations and the two counits gives
-the displayed representative equation, with the specified localization factors.
-Apply the restriction homology isomorphisms successively, first from D to the
-tensor algebra and then to B. Tensor induction identifies every beta with the
-coefficient map from its generator formula. The universal properties identify
-arbitrary F and L with the resolution functors by their unique counit-compatible
-isomorphisms. No flatness of A over R or of D is used.
-Source: Stacks Project, Section 06Y5, Tag 06Y6 (derived change of rings), and
-perfect.tex, the construction preceding equation-bc (Tag 0DJ7).
-(blueprint: lem-pc-base-tensor-derived-comparison). -/
+/-- Construct the derived coefficient comparison before introducing cohomology models. -/
 theorem exists_baseTensorDerivedComparison
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶

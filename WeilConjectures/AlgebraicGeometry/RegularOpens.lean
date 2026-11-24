@@ -17,8 +17,7 @@ universe u
 
 namespace AlgebraicGeometry
 
-/-- An open subscheme of a regular scheme is regular: the inclusion is étale
-(`AlgebraicGeometry.isRegularLocalRing_stalk_of_etale`). -/
+/-- An open subscheme of a regular scheme is regular. -/
 instance IsRegular.opens {X : Scheme.{u}} [IsRegular X] (U : X.Opens) : IsRegular U :=
   ⟨isRegularLocalRing_stalk_of_etale U.ι fun _ ↦ inferInstance⟩
 

@@ -14,9 +14,11 @@ import all WeilConjectures.CategoryTheory.Ringed.RingedLocalizationModelsSupplem
 /-!
 # Derived slice comparisons and pullback of section localization
 
-Source: Stacks Project, algebraization.tex, Tag 099J; Modules on Sites, Tag 04J0;
-Cohomology on Sites, Tag 07A6
-(blueprint: lem-weil-pbc-ringed-derived-slice-localization).
+## References
+
+* Stacks Project, Algebraization, Tag 099J
+* Stacks Project, Modules on Sites, Tag 04J0
+* Stacks Project, Cohomology on Sites, Tag 07A6
 -/
 
 @[expose] public noncomputable section

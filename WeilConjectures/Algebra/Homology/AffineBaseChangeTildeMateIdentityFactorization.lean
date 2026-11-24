@@ -13,8 +13,12 @@ import WeilConjectures.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordina
 
 /-! # AffineBaseChangeTildeMateIdentityFactorization
 
-Source: Stacks Project, Tag 0DJ8.
-(blueprint: lem-pc-affine-base-change-tilde-mate-identity-factorization). -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -41,36 +45,7 @@ private theorem homology_factorization
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Affine mate compatibility for the identity tilde representative.
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY.
-(blueprint: lem-pc-affine-base-change-tilde-mate-identity-factorization).
-Proof: Restrict M to R and choose a flat K-flat resolution P with a
-quasi-isomorphism to that restriction. Scalar extension of P to R' computes the
-universal left-derived scalar-extension functor in m. Its universal comparison
-with the affine sheaf derived pullback, together with exact tilde and the affine
-acyclic pushforward comparison, identifies its homology with H(Lg* Rf* Q(tilde M)).
-Compose this comparison with m.cohomologyIso to obtain eC. This constructs eC
-independently of A', and does not assert that any base-change map is invertible.
-
-Use derivedBaseChange_unit_compatibility on the common resolution: after the
-right-derived pushforward unit and the pullback counits, the pinned derived mate
-is the termwise ordinary exchange. The unit-normalized tensor-pullback/tilde
-comparison sends this exchange to scalar extension of the resolution augmentation
-followed by the coefficient map A tensor_R R' to A'. Applying homology,
-m.comparison_eq gives the augmentation factor; homology of ordinaryToLocalized
-and exact restriction of scalars give the remaining two factors in cE.
-
-The identity-on-carriers restriction-of-scalars comparison transports this arrow
-along hφf', placing rho.inv after restrictScalars j applied to cE, exactly s.
-Transport the extended complex through hφg'; its homology map is z₀. Exact tilde,
-the termwise affine pushforward comparison, and the right-derived pushforward unit
-then give affineTildePushforwardCohomologyMap. The inverse pullback counit and the
-inverse tensor-pullback/tilde comparison give t for the identity representative.
-Naturality of the derived units and cancellation of the supplied invertible
-pullback counit identify the last factor with H(Rf'* t.hom). Reassociation yields
-the displayed equality. Only commutativity of the square is used in this mate
-calculation; no cartesian square or coefficient-map invertibility is needed.
-All resolutions and homology comparisons apply to unbounded complexes. -/
+/-- Affine mate compatibility for the identity tilde representative. -/
 theorem exists_affineBaseChangeTildeMateIdentityFactorization
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

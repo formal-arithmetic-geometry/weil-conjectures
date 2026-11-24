@@ -8,8 +8,20 @@ public import WeilConjectures.AlgebraicGeometry.SemilinearGeometryCore
 
 /-! # Normalized derived geometric operations on semilinear systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A4
-(auxiliary; not a blueprint node).
+Derived geometric operations on semilinear systems, normalized by canonical K-injective and
+tensor models.
+
+## Implementation details
+
+The derived adjunctions, evaluation identifications and tensor comparisons are pinned down by
+equations on ordinary representatives and sections, so that no sign-twisted or otherwise
+unrelated choice satisfies the interface.
+
+## References
+
+* [Zheng, *Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks*,
+  Construction 4.1, Lemma 4.10]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -42,16 +54,14 @@ variable (A : Data.{c, v, r} J B τ)
   (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
   (adjSet : uInv ⊣ uPush)
 
-/-- Derived geometric operations with canonical K-injective and tensor normalizations.
-Source: Zheng Construction 4.1 and Lemma 4.10 (auxiliary; not a blueprint node). -/
+/-- Derived geometric operations with canonical K-injective and tensor normalizations. -/
 structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet where
   /-- The same derived adjunction at each level. -/
   derivedLevelAdjunction : ∀ n : ℕ,
     (derivedExact.{c, v, max c v r, c, v} J J' (B n)
           (coefficients n) (inverseImage n).modules) ⊣ (levelPush n).rightDerivedFunctor
   /-- The level derived adjunction is the canonical localization of the actual
-  ordinary module adjunction. This equality fixes its hom-equivalence, so a
-  sign-twisted choice cannot satisfy the interface. -/
+  ordinary module adjunction. -/
   derivedLevelAdjunction_canonical : ∀ n : ℕ,
     derivedLevelAdjunction n =
       (levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction
@@ -64,7 +74,7 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
     pull.mapDerivedCategory ⋙ e.{c, v, max c v r} J' coefficients coefficientTransition n ≅
       e.{c, v, max c v r} J B τ n ⋙ (derivedExact.{c, v, max c v r, c, v} J J' (B n)
           (coefficients n) (inverseImage n).modules)
-  /-- Derived direct-image evaluation; no K-injective evaluation assumption is made. -/
+  /-- Derived direct-image evaluation. -/
   pushEvaluation : ∀ n : ℕ,
     push.rightDerivedFunctor ⋙ e.{c, v, max c v r} J B τ n ≅
       e.{c, v, max c v r} J' coefficients coefficientTransition n ⋙ (levelPush
@@ -122,7 +132,7 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
         (levelTensorPullback n).hom.app
           ((e.{c, v, max c v r} J B τ n).obj M, (e.{c, v, max c v r} J B τ n).obj P)
   /-- The chosen ordinary realization acts as the identity on the actual
-  component section carriers. This rules out twisting the evaluation by a sign. -/
+  component section carriers. -/
   ordinaryPullEvaluation_sections : ∀ (n : ℕ) (M : Systems.{c, v, max c v r} J B τ)
     (U : C'ᵒᵖ)
     (x : ((evaluation.{c, v, max c v r} J' coefficients coefficientTransition n).obj
@@ -176,7 +186,7 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
       (inverseImage n).modules ⋙ res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J'
         coefficients coefficientTransition h)
   /-- The ordinary restriction comparison is the identity on the inverse-image
-  underlying sheaf; this excludes an unrelated scalar or sign automorphism. -/
+  underlying sheaf. -/
   restrictionPullback_underlying : ∀ {m n : ℕ} (h : n ≤ m)
     (M : Mod.{c, v, max c v r} J (B n)),
     (underlying.{c, v, r} J' (coefficients m)).map ((restrictionPullback h).hom.app M) ≫
@@ -184,9 +194,7 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
         (inverseImage m).moduleUnderlying.hom.app ((res.{c, v, max c v r} (coefficientMap.{c, v,
           max c v r} J B τ h)).obj M)
   /-- Termwise inverse image carries the horizontal transition of the actual
-  system to the coefficient-restriction inverse image of that transition.
-  This equation is imposed before taking complexes or localizing; specifying
-  evaluation on component objects alone does not specify horizontal maps. -/
+  system to the coefficient-restriction inverse image of that transition. -/
   ordinaryPullTransition : ∀ {m n : ℕ} (h : n ≤ m)
     (M : Systems.{c, v, max c v r} J B τ),
     (transition.{c, v, max c v r} J' coefficients coefficientTransition h).app (pull.obj M) ≫

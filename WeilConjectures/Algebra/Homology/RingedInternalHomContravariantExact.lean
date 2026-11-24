@@ -15,8 +15,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 
 /-! # Contravariant exactness of derived internal Hom
 
-Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks Project, Tag 08JC](https://stacks.math.columbia.edu/tag/08JC)
 -/
 
 @[expose] public section
@@ -232,20 +233,7 @@ end
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.monoidalClosed
 
-/-- Contravariant exactness, including the coherent integer shift structure.
-
-Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated).
-(auxiliary; not a blueprint node).
-
-Proof: Choose a representative K of M and its functorial K-injective replacement I.
-Multiplication by (-1)^(p*n) in degree n on the p-th factor identifies the ordinary
-Hom complex with the signed bifunctor Hom model, naturally for precomposition.
-The localization comparison for RHom identifies this model on the homotopy category
-with Qh.op followed by RHom(-,M). Apply the already proved signed bifunctor Hom
-exactness theorem. Descend its coherent integer shift structure through Qh.op,
-and detect triangulatedness using essential surjectivity on arrows. The construction
-keeps the derived universe arbitrary and adds no boundedness or finiteness hypothesis.
--/
+/-- Contravariant exactness, including the coherent integer shift structure. -/
 theorem ringedInternalHom_contravariant_exact
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}

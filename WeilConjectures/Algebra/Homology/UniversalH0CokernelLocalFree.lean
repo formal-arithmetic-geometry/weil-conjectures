@@ -19,8 +19,9 @@ import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinor
 
 /-! # Local freeness of the first cokernel under universal rank-one H0
 
-Source: Stacks Project, Tags 00O0 and 00NX, local matrix argument.
-(blueprint: new-universal-h0-cokernel-local-free)
+## References
+
+* Stacks Project, Tags 00O0 and 00NX, local matrix argument.
 -/
 
 @[expose] public section
@@ -75,25 +76,7 @@ private theorem h0_kernel_test
   obtain ⟨h⟩ := hH
   exact ⟨(e ≪≫ (ShortComplex.homologyMapIso j).symm ≪≫ h).toLinearEquiv⟩
 
-/-- The cokernel of the first differential is free at every prime.
-
-Source: Stacks Project, Tags 00O0 (unit-minor calculation) and 00NX
-(finite projective modules are free at primes).
-
-Proof: Since the degree-minus-one term is zero, after any scalar extension
-H0 is the kernel of the degree-zero differential. At a prime of R the finite
-projective source and target become finite free over the local ring A. Test the
-hypothesis with its residue field: the matrix has kernel dimension one, hence
-an invertible minor of size n-1, where n is the source rank. Row and column
-operations reduce it to an identity block and a map A to a finite free module.
-Test the hypothesis with A itself: the remaining kernel is isomorphic to A.
-Its injection into A is multiplication by some c. This multiplication is
-injective. Every entry of the remaining map annihilates c, so every entry is
-zero. The localized cokernel is consequently free. Localization is exact, so it
-is the localization of the quotient by the global image.
-For n=1 the identity block is empty. Rank zero cannot occur over a nonzero
-local ring, by the residue-field test. Over the zero ring all modules are zero.
-(blueprint: new-universal-h0-cokernel-local-free) -/
+/-- The cokernel of the first differential is free at every prime. -/
 theorem universalH0_cokernel_local_free
     (R : Type v) [CommRing R]
     (P : CochainComplex (ModuleCat.{v} R) ℤ)

@@ -13,24 +13,22 @@ import Mathlib.CategoryTheory.Adjunction.Evaluation
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
+/-!
+# Evaluation of K-injective complexes of inverse systems
+
+Evaluating a K-injective complex of inverse systems at an index gives a K-injective complex.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 070M
+-/
+
 @[expose] public section
 universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
-/-- Evaluation of a K-injective complex of inverse systems is K-injective.
-Source: Stacks Project, Derived Categories, Tag 070M, and the exact-adjoint
-criterion `Adjunction.preservesKInjectiveComplexes`.
-
-Proof: The left adjoint to evaluation at n sends X at m to the coproduct of
-copies of X indexed by morphisms n to m. This index type is subsingleton, hence
-finite. Its finite coproduct functor is exact in an abelian category. Evaluation
-computes finite limits pointwise, so the left adjoint preserves finite limits;
-it preserves colimits by adjunction and is additive. The exact-adjoint criterion
-therefore makes evaluation preserve K-injectivity. Mapping a complex by this
-functor is definitionally its evaluated complex.
-(blueprint: lem-weil-tower-evaluation-kinjective)
--/
+/-- Evaluation of a K-injective complex of inverse systems is K-injective. -/
 theorem tower_evaluation_isKInjective
     (A : Type u) [Category.{v} A] [Abelian A]
     (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective] (n : ℕᵒᵖ) :

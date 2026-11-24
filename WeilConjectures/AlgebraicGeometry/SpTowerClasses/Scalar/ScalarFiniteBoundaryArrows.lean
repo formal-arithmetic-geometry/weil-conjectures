@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Scalar.TowerScala
 
 /-! # Scalar finite boundary evaluation arrows
 
-The two original endpoint arrows, with their formulas unchanged.
-(blueprint: def-sfb-finite-boundary-arrows). -/
+The two original endpoint arrows, with their formulas unchanged. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

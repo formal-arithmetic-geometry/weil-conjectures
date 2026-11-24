@@ -17,8 +17,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Tensoring a base-flat module with a finite free retract
 
-Source: Stacks Project, Tags 03EU and 00HD, the retract argument in Tag 0DJQ.
-(blueprint: lem-pc-scalar-restricted-tensor-retract-flat).
+## References
+
+* Stacks Project, Tags 03EU and 00HD, the retract argument in Tag 0DJQ
 -/
 
 @[expose] public section
@@ -50,22 +51,7 @@ private theorem restrictScalars_preservesColimits
 
 
 /-- Tensoring with a retract of a finite free module preserves flatness after
-restriction of scalars; the algebra itself need not be flat over the base ring.
-Source: Stacks Project, Tags 03EU and 00HD, applied to the tensor calculation of 0DJQ.
-(blueprint: lem-pc-scalar-restricted-tensor-retract-flat).
-
-Proof: tensor the given inclusion and retraction with N. Functoriality carries
-ι ≫ π = identity to the same equation for P tensor N as a retract of A^m tensor N.
-Restriction of scalars preserves this equation. The free module is the coproduct
-of m copies of the tensor unit. Right tensoring preserves coproducts, and its unit
-isomorphism identifies A^m tensor N with the coproduct of m copies of N. Restriction
-of scalars leaves the underlying abelian sheaf unchanged and hence preserves
-coproducts. Thus the resulting restricted free tensor is a finite coproduct of the
-flat restricted module N, and is flat by Tag 03EU. Flatness passes to a retract:
-its tensor functor is a retract of an exact tensor functor, so preserves exact
-short complexes and thus finite limits and colimits. This proves the conclusion.
-For m = 0 the ambient module is zero, so P is zero; the zero base ring, zero N and
-empty site also satisfy the argument. No flatness assumption on A is used. -/
+restriction of scalars; the algebra itself need not be flat over the base ring. -/
 theorem isFlat_scalarRestricted_tensor_retract
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]

@@ -10,8 +10,9 @@ public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualLocalIs
 /-!
 # Duals and binary ring towers under scalar extension
 
-Source: Stacks Project, Tags 03EK, 03EM, 04TT.
-(blueprint: lem-sp-scalar-extension-dual-tower-core).
+## References
+
+* Stacks Project, Tags 03EK, 03EM, 04TT
 -/
 
 @[expose] public section
@@ -49,10 +50,7 @@ section Universes
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{max u m}]
   [HasWeakSheafify J AddCommGrpCat.{max u m}]
 
-/-- scalarExtensionEmbedding: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The canonical map from a module to the restriction of its scalar extension. -/
 noncomputable def scalarExtensionEmbedding {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -77,10 +75,9 @@ noncomputable def scalarExtensionEmbedding {R S : Sheaf J CommRingCat.{u}} (α :
           (changeOfRingsOfUniverses α N).val.map i (scalarExtensionSection α N U 1 x)
         erw [scalarExtensionSection_naturality, map_one] }
 
-/-- scalarExtensionTowerMiddle: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The map from the scalar extension along `α` to the restriction along `β` of the scalar
+extension along `α ≫ β`.
+-/
 noncomputable def scalarExtensionTowerMiddle {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -111,10 +108,9 @@ noncomputable def scalarExtensionTowerMiddle {R S T : Sheaf J CommRingCat.{u}}
                 (scalarExtensionSection (α ≫ β) N U 1 x)
             erw [scalarExtensionSection_naturality, map_one] } }
 
-/-- scalarExtensionTowerForward: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The forward comparison from the iterated scalar extension along `α` then `β` to the
+scalar extension along `α ≫ β`.
+-/
 noncomputable def scalarExtensionTowerForward {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -125,10 +121,7 @@ noncomputable def scalarExtensionTowerForward {R S T : Sheaf J CommRingCat.{u}}
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionTowerForward_tmul: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The forward tower comparison sends `a ⊗ (s ⊗ x)` to `(a * β s) ⊗ x`. -/
 theorem scalarExtensionTowerForward_tmul {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ)
@@ -143,10 +136,7 @@ theorem scalarExtensionTowerForward_tmul {R S T : Sheaf J CommRingCat.{u}}
   change a • (β.hom.app U s • scalarExtensionSection (α ≫ β) N U 1 x) = _
   rw [scalarExtensionSection_smul, mul_one, scalarExtensionSection_smul]
 
-/-- scalarExtensionTowerBaseReverse: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The map from a module to the restriction along `α ≫ β` of its iterated scalar extension. -/
 noncomputable def scalarExtensionTowerBaseReverse {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -156,10 +146,9 @@ noncomputable def scalarExtensionTowerBaseReverse {R S T : Sheaf J CommRingCat.{
     (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).map
       (scalarExtensionEmbedding β (changeOfRingsOfUniverses α N))
 
-/-- scalarExtensionTowerReverse: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The reverse comparison from the scalar extension along `α ≫ β` to the iterated scalar
+extension along `α` then `β`.
+-/
 noncomputable def scalarExtensionTowerReverse {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -169,10 +158,7 @@ noncomputable def scalarExtensionTowerReverse {R S T : Sheaf J CommRingCat.{u}}
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionTowerReverse_tmul: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The reverse tower comparison sends `a ⊗ x` to `a ⊗ (1 ⊗ x)`. -/
 theorem scalarExtensionTowerReverse_tmul {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ)
@@ -189,10 +175,9 @@ theorem scalarExtensionTowerReverse_tmul {R S T : Sheaf J CommRingCat.{u}}
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionTower_hom_ext: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- Two morphisms out of the iterated scalar extension agree if they agree on iterated
+scalar-extension sections.
+-/
 theorem scalarExtensionTower_hom_ext {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) {H : SheafOfModules.{max u m} ((sheafCompose J
@@ -225,10 +210,7 @@ theorem scalarExtensionTower_hom_ext {R S T : Sheaf J CommRingCat.{u}}
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionTower_reverse_forward: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The reverse tower comparison followed by the forward one is the identity. -/
 theorem scalarExtensionTower_reverse_forward {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -241,10 +223,7 @@ theorem scalarExtensionTower_reverse_forward {R S T : Sheaf J CommRingCat.{u}}
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-/-- scalarExtensionTower_forward_reverse: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The forward tower comparison followed by the reverse one is the identity. -/
 theorem scalarExtensionTower_forward_reverse {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -258,10 +237,9 @@ theorem scalarExtensionTower_forward_reverse {R S T : Sheaf J CommRingCat.{u}}
   rw [mul_one] at hs
   rw [← hs, scalarExtensionSection_base_smul]
 
-/-- scalarExtensionTowerIso: scalar-extension ring-tower construction.
-Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-dual-tower-core).
-The maps multiply the two scalar factors; tensor generation and the sheafification
-adjunction prove the formulas and equality of the two normalized composites. -/
+/-- The tower isomorphism between the iterated scalar extension along `α` then `β` and the
+scalar extension along `α ≫ β`.
+-/
 noncomputable def scalarExtensionTowerIso {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :
@@ -272,9 +250,7 @@ noncomputable def scalarExtensionTowerIso {R S T : Sheaf J CommRingCat.{u}}
   hom_inv_id := scalarExtensionTower_forward_reverse α β N
   inv_hom_id := scalarExtensionTower_reverse_forward α β N
 
-/-- The tower comparison has the explicitly constructed forward component.
-Source: Stacks Project, Tag 03EK
-(blueprint: lem-sp-scalar-extension-dual-tower-core). -/
+/-- The tower comparison has the explicitly constructed forward component. -/
 theorem scalarExtensionTowerIso_hom {R S T : Sheaf J CommRingCat.{u}}
     (α : R ⟶ S) (β : S ⟶ T) (N : SheafOfModules.{max u m} ((sheafCompose J
       (forget₂ CommRingCat RingCat)).obj R)) :

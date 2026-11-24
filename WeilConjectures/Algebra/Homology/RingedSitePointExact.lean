@@ -15,7 +15,12 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
-/-! # Exactness of module stalks at a topos point -/
+/-! # Exactness of module stalks at a topos point
+
+## References
+
+* [Stacks Project, Modules on Sites, Tag 05V3](https://stacks.math.columbia.edu/tag/05V3)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,16 +34,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}
   {p : GeometricMorphism (Type w) (Sheaf J (Type w))}
 
-/-- Module inverse image at a topos point is exact.
-Source: Stacks Project, Modules on Sites, Tag 05V3.
-(auxiliary; not a blueprint node)
-
-Proof: underlying sheaves of sets detect finite limits of modules. The prescribed
-underlying functor is inverse image composed with forgetting module structure, hence
-preserves finite limits. A module-sheaf epimorphism is locally surjective on underlying
-sets. It is therefore an epimorphism of set sheaves; the left adjoint inverse image
-preserves it. Surjectivity of the resulting set map implies that the module map is
-epi. An additive functor between abelian categories preserving kernels and epis is exact. -/
+/-- Module inverse image at a topos point is exact. -/
 theorem exact (s : RingedSitePoint R p) : exactFunctor _ _ s.modules := by
   let := SheafOfModules.hasSheafify_coefficientUniverse (J := J)
   let := SheafOfModules.wEqualsLocallyBijective_coefficientUniverse (J := J)

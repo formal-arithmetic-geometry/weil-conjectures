@@ -11,7 +11,9 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 /-! # Evaluation-normalized closedness of the ringed-site derived tensor
 
-Source: Stacks Project, Tag 08J9, with Tags 0A90 and 0A8Z.
+## References
+
+* Stacks Project, Tag 08J9, with Tags 0A90 and 0A8Z
 -/
 
 @[expose] public noncomputable section
@@ -974,30 +976,7 @@ private theorem closedStructure_uncurry :
 
 /-- The native derived tensor is left adjoint to the recorded derived internal Hom,
 with the evaluation normalization on the fixed simultaneous K-flat comparison.
-The equality fixes only the existing monoidal structure; this theorem constructs
-its adjunctions and checks evaluation, and asserts no symmetry or constraint formulas.
-
-Source: Stacks Project, Tag 08J9, proved using 0A90 and 0A8Z
-(auxiliary; not a blueprint node).
-
-Proof: choose K-flat representatives P,L and a K-injective replacement I(M).
-The sheaf Hom complex Hom(L,I(M)) is K-injective because L is K-flat.
-The Hom-total-tensor isomorphism of 0A90, ordinary global sections and zeroth
-cohomology identify maps from P into this Hom complex with maps from Tot(P tensor L)
-into I(M), modulo homotopy (0A8Z). K-injectivity identifies these classes with
-morphisms in the derived category. The inverse of the native lax comparison
-identifies the other side with morphisms out of the derived tensor. Both
-localizations extend this equivalence uniquely to all derived objects and maps.
-Currying on homogeneous sections sends x tensor y to phi(x)(y), without an
-extra sign: the Hom differential is exactly the total-tensor chain-map equation.
-This also takes homotopies to homotopies. Naturality under precomposition in P,L
-and postcomposition in I(M) holds componentwise and descends through localization,
-including inverse denominators. Package the resulting natural Hom equivalences
-as adjunctions. Naturality in L is the evaluation_naturality field. The componentwise
-formula applied before localization is precisely CoefficientTensorUncurryModel;
-the inverse localized replacement augmentation gives its stated target comparison.
-The monoidal structure and its fixed tensor comparison are those already constructed
-by native K-flat localization, so their equalities are identities. -/
+The equality fixes only the existing monoidal structure. -/
 theorem closedAdjunction :
     ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R),
       S.monoidal = monoidal.{c, v, u, w} J R ∧

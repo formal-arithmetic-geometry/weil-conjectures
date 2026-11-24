@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerS
 public import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictCompactificationComparisonData
 
 /-! # Exchange invertibility for normalized coefficient towers
-
-Source: blueprint operations proof (2b)
-(blueprint: lem-sp-tower-exchange-realization).
 -/
 
 @[expose] public noncomputable section

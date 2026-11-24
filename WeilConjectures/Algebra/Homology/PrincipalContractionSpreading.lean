@@ -13,9 +13,10 @@ import WeilConjectures.Algebra.Homology.MinimalComplex
 
 /-! # Spreading local contractions with free complementary kernels
 
-Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
-and Algebra, Tag 00NX, finite projective modules and local freeness.
-(auxiliary; not a blueprint node)
+## References
+
+* Stacks Project, More on Algebra, Tag 068U
+* Stacks Project, Algebra, Tag 00NX (finite projective modules and local freeness)
 -/
 
 @[expose] public section
@@ -459,27 +460,7 @@ private theorem tensorExtend_naturality
 namespace ModuleCat
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A local middle contraction spreads to a principal open with free complements.
-
-Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
-and Algebra, Tag 00NX, `lemma-finite-projective`.
-(auxiliary; not a blueprint node)
-
-Proof: Finite presentation lifts the local s,t after multiplying them by a
-common denominator outside p. Finiteness clears the error in their middle
-identity. Thus there are actual R-linear s0,t0 and f outside p with
-A s0+t0 B=f. The equation BA=0 makes q=s0 A and r=B t0 satisfy q²=fq and r²=fr.
-For either scaled projector q, its finitely presented cokernel becomes its
-kernel after f is inverted: the map 1-q/f induces this equivalence explicitly.
-At p the normalized projector is idempotent, so its kernel is finite free over
-the local ring. Spread a basis of the cokernel to a principal neighborhood by
-Module.FinitePresentation.exists_free_localizedModule_powers, and base change
-it to the product of f and the two resulting elements. The cokernel-kernel
-equivalence makes both desired kernels free there. Divide s0,t0 by f, and
-replace t by tBt. The middle identity and BA=0 give AsA=A, BtB=B, tBt=t,
-and unchanged kernel of Bt. Transport all maps and free kernels through the
-explicit comparison of tensor products with categorical extension of scalars.
-Empty bases and zero cokernels are included in these constructions. -/
+/-- A local middle contraction spreads to a principal open with free complements. -/
 theorem exists_principal_contraction_of_atPrime
     {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]
     (X Y Z : ModuleCat.{max u v} R) (a : X ⟶ Y) (b : Y ⟶ Z) (hab : a ≫ b = 0)

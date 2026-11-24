@@ -21,8 +21,10 @@ public import WeilConjectures.CategoryTheory.TermwiseAdjunctionSquareUnit
 
 /-! # Scalar restriction and proper/open coherence
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03D7 and 03DI
-(blueprint: lem-sf-semilinear-scalar-proper-open). -/
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03CZ, 03D7, 03DI, 0F7B, 03D8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -337,9 +339,7 @@ private theorem tailHomWord {D : Type*} [Category D]
   rw [reassoc_of% hn₂, hd, reassoc_of% hc, reassoc_of% hn₁,
     reassoc_of% hn₃, reassoc_of% hπ, reassoc_of% hn₄, reassoc_of% hn₅]
 
-/-- The intrinsic ordinary projector is an actual composite of natural transformations.
-Source: Stacks 03DI and 0F7B
-(blueprint: lem-sf-semilinear-scalar-proper-open). -/
+/-- The intrinsic ordinary projector is an actual composite of natural transformations. -/
 def scalarOrdinaryPi
     (κ : ∀ {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s],
       StrictTower.towerJ B s ≅ StrictTower.towerDirectImage B s)
@@ -349,9 +349,7 @@ def scalarOrdinaryPi
   (scalarTowerAdj B s).unit ≫
     Functor.whiskerLeft (StrictTower.towerPullback B s) (κ s).inv
 
-/-- The intrinsic proper/open arrows and their compatibility with scalar restriction.
-Source: Stacks 03D8, 03DI and 0F7B
-(blueprint: lem-sf-semilinear-scalar-proper-open). -/
+/-- The intrinsic proper/open arrows and their compatibility with scalar restriction. -/
 structure OrdinaryScalarProperOpen (C : OrdinaryScalarRestriction R φ B ψ)
     (G : OrdinaryScalarAdjunctions R φ B ψ C) where
   /-- The constant-tower cartesian open comparison, fixed by its transpose below. -/
@@ -1339,24 +1337,7 @@ private theorem scalarAlpha_comparison (C : OrdinaryScalarRestriction R φ B ψ)
     (scalarBeta_comparison R φ B ψ C G (pullback.snd p i) (pullback.fst p i) i p
       pullback.condition.symm (IsPullback.of_hasPullback p i).flip M)
 
-/-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha.
-Source: Stacks 03D8, 03DI and 0F7B; blueprint fix-prop-coherence
-(blueprint: lem-sf-semilinear-scalar-proper-open).
-Proof: choose the constant-tower cartesian beta as the inverse open-unit transpose.
-The inverse-image compositor comparison follows by taking the mates of the
-sectionwise direct-image compositor. The open compositor comparison follows from
-uniqueness of the unit-preserving left-adjoint comparison. Transposing the two sides
-of beta compatibility, substituting these compositor and open-unit equations,
-gives identical morphisms; the adjunction bijection proves their equality.
-For a clopen map, the open unit is invertible and its inverse transpose is the
-extension/direct-image comparison. Take its inverse and compose with the
-direct-image unit to define pi. The already established unit and mate comparisons
-prove pi compatibility. Define alpha by the specified beta, pi and compositor
-word. Substitute beta and pi compatibility and the two compositor equations into
-this word. Naturality moves each coefficient comparison through the factors, and
-the neighboring inverse comparisons cancel. The resulting equation is alpha
-compatibility. None of these arguments assumes that the proper/open square is
-cartesian or that a coefficient map is flat. -/
+/-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha. -/
 theorem ordinaryScalarProperOpen (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
     (C : OrdinaryScalarRestriction R φ B ψ) (G : OrdinaryScalarAdjunctions R φ B ψ C) :
     Nonempty (OrdinaryScalarProperOpen R φ B ψ C G) := by

@@ -15,7 +15,9 @@ public import WeilConjectures.AlgebraicGeometry.StrictLocalLocalizedHomGerm
 
 /-! # Localized Hom classes and restriction of a complex on the base
 
-Source: Stacks Project, Tags 03Q8 and 03Q9, injective-complex computation.
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 03Q8, 03Q9
 -/
 
 /- This original-model counterpart follows the proved calculation in
@@ -36,9 +38,7 @@ attribute [local irreducible] smallModel_sourcePlusHomIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- Restricting a neighbourhood section commutes with a map of sheaves.
-Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+/-- Restricting a neighbourhood section commutes with a map of sheaves. -/
 theorem smallModel_strictHenselizationSectionRestriction_naturality {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s))
@@ -75,9 +75,7 @@ theorem smallModel_strictHenselizationSectionRestriction_naturality {S : Scheme.
   rfl
 
 /-- Evaluation of localized Hom classes as cohomology of the complex of sections, in the
-small coordinate-ring colimit model.
-Source: Stacks Project, Tag 03Q8, computation by an injective complex.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+small coordinate-ring colimit model. -/
 @[irreducible] noncomputable def smallModel_sourceLocalizedSectionsIso {S : Scheme.{v}}
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
@@ -96,9 +94,7 @@ Source: Stacks Project, Tag 03Q8, computation by an injective complex.
       (smallModel_sourceFreeSectionsComplexIso W L)
 
 /-- The natural transformation of pointed neighbourhood section restriction, in the small
-coordinate-ring colimit model.
-Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+coordinate-ring colimit model. -/
 @[irreducible] noncomputable def smallModel_strictLocalSectionRestrictionNat {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
@@ -112,9 +108,7 @@ Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The restriction on the complex of sections, transported to strict-local homology, in the
-small coordinate-ring colimit model.
-Source: Stacks Project, Tag 03Q9, restriction of the complex to the strict local scheme.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+small coordinate-ring colimit model. -/
 @[irreducible] noncomputable def smallModel_strictLocalComplexSectionRestriction
     {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -161,27 +155,7 @@ private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Localizing Hom into a K-injective representative and then restricting its sections
-computes the canonical cohomology germ leg. This is a statement only about a complex on
-S; it has no direct-image functor, pullback square, mate, or fibre cohomology.
-
-Source: Stacks Project, Tag 03Q8, cohomology via injective complexes, and Tag 03Q9,
-construction of restriction to the strict henselization.
-(blueprint: lem-weil-pbc-strict-local-localized-hom-germ).
-
-Proof: represent a localized Hom class by a cocycle from Z[W][0] to L[n]. Such
-representatives exist and are unique modulo homotopy because L is K-injective.
-Evaluation at the free generator identifies its class with the cohomology of L(W).
-The map to H^n(K)(W) applies homology to this cocycle, so sends it to exactly its
-homology section. Naturality of the presheaf fibre moves this map across the germ
-of W. The characterizing equation for strictHenselizationStalkRestriction replaces
-the resulting germ restriction by strictHenselizationSectionRestriction on that
-homology section. Exact inverse image and exact strict-local global sections commute
-with homology; their comparison isomorphisms send this section to the class of the
-restricted cocycle. Boundaries map to boundaries, so the equality descends to
-cohomology. The quotient and localization factorization isomorphisms, and the
-homology shift isomorphism, give precisely the displayed transport. Naturality of
-these isomorphisms with r completes the equality. Nothing requires acyclicity of
-the pulled-back complex. The same argument treats zero classes and every integer n. -/
+computes the canonical cohomology germ leg. -/
 theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

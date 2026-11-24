@@ -27,7 +27,7 @@ derived base change `Q (n + 1) ⊗ᴸ_{A (n + 1)} A n`. Its restrictions of scal
 
 When the `A n` are local and `R` is complete and separated for the tower, the derived limit
 `P = R lim_n Q n` of this tower is represented by a bounded complex of finite free
-`R`-modules and reduces to the levels, `P ⊗ᴸ_R A n ≅ Q n` (Stacks, Tag 09AW). A compatible
+`R`-modules and reduces to the levels, `P ⊗ᴸ_R A n ≅ Q n` (Stacks Project, Tag 09AW). A compatible
 family of endomorphisms `f n` of the `Q n` lifts to an endomorphism `V` of `P`, and the
 categorical trace of any lift reduces to the traces of the `f n`.
 
@@ -49,26 +49,18 @@ categorical trace of any lift reduces to the traces of the `f n`.
   `ModuleCat.NormalizedPerfectTower.trace_eq_of_isLift`: the trace of a lift reduces to the
   traces of the family, and does not depend on the lift.
 
-## Implementation notes
+## Implementation details
 
 Derived base change is expressed by universal arrows (`ModuleCat.IsDerivedBaseChange`): the
-leg `pr_n : P ⟶ Res Q n` is the blueprint's `π_n : P ⊗ᴸ A n ⟶ Q n` read through the adjunction
-between derived base change and restriction of scalars. For the same reason the blueprint's
-condition `π_n ∘ (V ⊗ᴸ A n) = f n ∘ π_n` on a lift `V` is the condition
+leg `pr_n : P ⟶ Res Q n` is the map `π_n : P ⊗ᴸ A n ⟶ Q n` read through the adjunction
+between derived base change and restriction of scalars. For the same reason the condition
+`π_n ∘ (V ⊗ᴸ A n) = f n ∘ π_n` on a lift `V` is the condition
 `V ≫ pr_n = pr_n ≫ Res (f n)` of `ModuleCat.NormalizedPerfectTower.IsLift`: `V ⊗ᴸ A n` is the
 unique endomorphism `g` of `P ⊗ᴸ A n` with `pr_n ≫ Res g = V ≫ pr_n`.
 
-The proof follows the blueprint. Each `Q n` has a minimal model, a bounded complex of finite
-free `A n`-modules whose differentials vanish modulo the maximal ideal
-(`CochainComplex.exists_homotopyEquiv_isMinimal`); quasi-isomorphisms between minimal models are
-isomorphisms (`CochainComplex.isIso_of_quasiIso_of_isMinimal`). In bases, the models are given by
-matrices, and lifting invertible matrices along `A (n + 1) ⟶ A n` strictifies the tower into a
-tower of matrix complexes whose transitions are the reductions of the entries. Their entrywise
-limit is the bounded free complex over `R` representing `P`
-(`DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi`). Lifts are built by choosing chain-level
-representatives level by level and correcting them by lifted homotopies, and traces are
-alternating sums of matrix traces
-(`DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace`).
+## References
+
+* Stacks Project, Tag 09AW
 -/
 
 @[expose] public section
@@ -504,7 +496,7 @@ lemma MatrixModel.trace_f_eq (m : T.MatrixModel c) {f : ∀ n, T.obj n ⟶ T.obj
       rw [Iso.symm_hom, Iso.comp_inv_eq, Category.assoc, m.Q_map_mapHom_comp hπ hker hV G hG n,
         Iso.inv_hom_id_assoc])
 
--- The compatibility `hf` of the blueprint statement is not needed.
+-- The compatibility hypothesis `hf` is not needed.
 set_option linter.unusedVariables false in
 include hπ hker hcomplete hsep hc in
 /-- The categorical trace of a lift `V` of a compatible family `f` reduces to the traces of the
@@ -523,7 +515,7 @@ theorem exists_trace_eq_of_isLift {f : ∀ n, T.obj n ⟶ T.obj n} (hf : T.IsCom
     (m.iso.hom ≫ V ≫ m.iso.inv)
   exact ⟨_, m.trace_eq V G hG, m.trace_f_eq hπ hker hV G hG⟩
 
--- The compatibility `hf` of the blueprint statement is not needed.
+-- The compatibility hypothesis `hf` is not needed.
 set_option linter.unusedVariables false in
 set_option linter.unusedSectionVars false in
 include hπ hker hcomplete hsep hc in

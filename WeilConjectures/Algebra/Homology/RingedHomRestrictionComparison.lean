@@ -10,8 +10,9 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 
 /-! # Normalized descent of an ordinary internal Hom comparison
 
-Source: Stacks Project, Tags 08J7, 0A95 and 08JB.
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Tags 08J7, 0A95 and 08JB
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +36,7 @@ abbrev ordinary {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) : (Complex R)ᵒᵖ × Complex R ⥤ Complex R :=
   Functor.uncurry.obj (homComplexFunctor (R := R))
 
-/-- Transport both arguments of a Hom bifunctor along the same natural isomorphism.
-Source: Stacks 08JB (auxiliary; not a blueprint node). -/
+/-- Transport both arguments of a Hom bifunctor along the same natural isomorphism. -/
 def pairIso {A B : Type*} [Category A] [Category B] {F G : A ⥤ B} (c : F ≅ G) :
     F.op.prod F ≅ G.op.prod G :=
   NatIso.ofComponents (fun X ↦ ((c.app X.1.unop).symm.op).prod (c.app X.2)) (by
@@ -45,8 +45,7 @@ def pairIso {A B : Type*} [Category A] [Category B] {F G : A ⥤ B} (c : F ≅ G
     · exact congrArg Quiver.Hom.op (c.inv.naturality f.1.unop).symm
     · exact c.hom.naturality f.2)
 
-/-- The composite of two internal Hom comparisons, transported along composition.
-Source: Stacks 08JB (auxiliary; not a blueprint node). -/
+/-- The composite of two internal Hom comparisons, transported along composition. -/
 def composite {A B E : Type*} [Category A] [Category B] [Category E]
     {H : Aᵒᵖ × A ⥤ A} {HU : Bᵒᵖ × B ⥤ B} {HV : Eᵒᵖ × E ⥤ E}
     {F : A ⥤ B} {G : B ⥤ E} {V : A ⥤ E} (c : F ⋙ G ≅ V)
@@ -55,8 +54,7 @@ def composite {A B E : Type*} [Category A] [Category B] [Category E]
   Functor.isoWhiskerLeft H c.symm ≪≫ Functor.isoWhiskerRight a G ≪≫
     Functor.isoWhiskerLeft (F.op.prod F) b ≪≫ Functor.isoWhiskerRight (pairIso c) HV
 
-/-- Compatibility of three comparisons with a specified composition isomorphism.
-Source: Stacks 08JB (auxiliary; not a blueprint node). -/
+/-- Compatibility of three comparisons with a specified composition isomorphism. -/
 def Compatible {A B E : Type*} [Category A] [Category B] [Category E]
     (H : Aᵒᵖ × A ⥤ A) (HU : Bᵒᵖ × B ⥤ B) (HV : Eᵒᵖ × E ⥤ E)
     (F : A ⥤ B) (G : B ⥤ E) (V : A ⥤ E) (c : F ⋙ G ≅ V)
@@ -69,9 +67,7 @@ def Compatible {A B E : Type*} [Category A] [Category B] [Category E]
         (Y := (op (V.obj L), V.obj M)) ((c.inv.app L).op, c.hom.app M) =
       c.hom.app (H.obj (op L, M)) ≫ d.hom.app (op L, M)
 
-/-- Compatibility says precisely that the transported composite is the direct comparison.
-Source: Stacks 08JB (auxiliary; not a blueprint node).
-Proof: cancel the given composition isomorphism in each component. -/
+/-- Compatibility says precisely that the transported composite is the direct comparison. -/
 theorem compatible_iff {A B E : Type*} [Category A] [Category B] [Category E]
     (H : Aᵒᵖ × A ⥤ A) (HU : Bᵒᵖ × B ⥤ B) (HV : Eᵒᵖ × E ⥤ E)
     (F : A ⥤ B) (G : B ⥤ E) (V : A ⥤ E) (c : F ⋙ G ≅ V)
@@ -95,9 +91,7 @@ theorem compatible_iff {A B E : Type*} [Category A] [Category B] [Category E]
       e.hom.app (op L, M)) h
     simpa [composite, pairIso, Category.assoc] using hh
 
-/-- The fixed augmentation comparison, using the factorization that defines derived Hom.
-Source: Stacks 08J7 and 0A95
-(auxiliary; not a blueprint node). -/
+/-- The fixed augmentation comparison, using the factorization that defines derived Hom. -/
 def augmentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (Modules R)] :
     ordinary R ⋙ DerivedCategory.Q ⟶
@@ -116,8 +110,7 @@ def augmentation {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (ordinary R ⋙ DerivedCategory.Q) ≫ c.inv
 
 /-- Normalization on actual K-injective representatives. The chain comparison is supplied,
-rather than chosen by the predicate. Source: Stacks 08JB
-(auxiliary; not a blueprint node). -/
+rather than chosen by the predicate. -/
 def Normalized
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -173,17 +166,7 @@ private theorem augmentation_isIso
     (X := (op L, I)) (Y := (op L, F.obj I)) (𝟙 (op L), η.app I)) ≫ _)
   infer_instance
 
-/-- An ordinary natural Hom comparison descends uniquely after K-injective restriction.
-
-Source: Stacks Project, Tags 08J7, 0A95 and 08JB.
-(auxiliary; not a blueprint node).
-
-Proof: precompose with Q in the source variable and with the K-injective inclusion followed
-by Q in the target variable. Both are localizations. The augmentation is invertible on
-K-injective targets, and remains so after T because T preserves K-injectives. Conjugate the
-localized ordinary comparison by these augmentations and the exact-functor factorization.
-Fully faithful precomposition descends this natural isomorphism. Its component equation is
-exactly Normalized. This uses no boundedness assumption. -/
+/-- An ordinary natural Hom comparison descends uniquely after K-injective restriction. -/
 theorem comparison_exists
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -258,12 +241,7 @@ theorem comparison_exists
   simp [p, α, β, q, B, Tc, ι, CochainComplex.KInjectives.ι,
     Category.assoc, ← Functor.map_comp]
 
-/-- The representative equation determines a derived comparison uniquely.
-Source: Stacks 08J7, 0A95 and 08JB
-(auxiliary; not a blueprint node).
-Proof: evaluate after Q in the first variable and K-injective representatives in the
-second. Cancel the invertible augmentation and restriction factorization. The product of
-these localizations is essentially surjective, so equality there is equality everywhere. -/
+/-- The representative equation determines a derived comparison uniquely. -/
 theorem comparison_unique
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

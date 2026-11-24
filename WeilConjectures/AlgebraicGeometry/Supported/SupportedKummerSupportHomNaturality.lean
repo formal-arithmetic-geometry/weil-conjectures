@@ -23,10 +23,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 /-!
 # Naturality of the supported Hom identification under base change
 
-Source: literature/stacks-project/etale-cohomology.tex, Tag 0A45,
-lemma-cohomology-with-support-triangle;
-blueprint sec-smooth-purity/sk-prop-sf-cbc
-(blueprint: lem-asd-supported-kummer-support-hom-naturality).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 0A45, 079P, 070K, 03DA, 03Q1
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleHasS
 attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleHasWeakSheafify
 attribute [local instance 200000] AlgebraicGeometry.Etale.closedSupportEtaleHasGlobalSections
 
-/-- The standard resolution functor and its unit, packaged before site specialization.
-Source: Stacks, Tag 079P (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The standard resolution functor and its unit, packaged before site specialization. -/
 structure SupportedHomResolutionData (C : Type u') [Category.{v'} C] [Abelian C]
     [IsGrothendieckAbelian.{w} C] where
   R : CochainComplex C ℤ ⥤ CochainComplex C ℤ
@@ -59,8 +57,7 @@ structure SupportedHomResolutionData (C : Type u') [Category.{v'} C] [Abelian C]
   isFibrant : ∀ K, (HomologicalComplex.monoQuasiIso C (.up ℤ)).rlp
     (0 : R.obj K ⟶ (0 : CochainComplex C ℤ))
 
-/-- Package the existing functorial resolution, without changing its chosen objects.
-Source: Stacks, Tag 079P (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Package the existing functorial resolution, without changing its chosen objects. -/
 noncomputable def supportedHomResolutionData (C : Type u') [Category.{v'} C] [Abelian C]
     [IsGrothendieckAbelian.{w} C] : SupportedHomResolutionData C where
   R := CochainComplex.kInjectiveResolutionFunctor C
@@ -80,8 +77,7 @@ noncomputable def supportedHomResolutionData (C : Type u') [Category.{v'} C] [Ab
 
 namespace CategoryTheory.Functor
 
-/-- The canonical comparison from a derived functor to its functorial resolution model.
-Source: Stacks, Tag 070K (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The canonical comparison from a derived functor to its functorial resolution model. -/
 noncomputable def supportedHomResolutionMap
     {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     {B : Type u} [Category.{v} B] [Abelian B]
@@ -102,80 +98,69 @@ namespace AlgebraicGeometry.Etale
 attribute [local instance 200000] closedSupportEtaleAbelian
 attribute [local instance 200000] closedSupportEtaleLinear
 
-/-- The Grothendieck property for the same fixed abelian structure.
-Source: Stacks, Tag 03DA (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The Grothendieck property for the same fixed abelian structure. -/
 theorem supportedEtaleGrothendieck (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     IsGrothendieckAbelian.{u + 1} (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
   inferInstance
 
 attribute [local instance 200000] supportedEtaleGrothendieck
 
-/-- The fixed functorial resolution on the etale site.
-Source: Stacks, Tag 079P (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The fixed functorial resolution on the etale site. -/
 noncomputable def supportedResolutionFunctor (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ ⥤
       CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ :=
   (supportedHomResolutionData (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).R
 
-/-- The resolution unit, with its target functor fixed explicitly.
-Source: Stacks, Tag 079P (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The resolution unit, with its target functor fixed explicitly. -/
 noncomputable def supportedResolutionUnit (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
     𝟭 (CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) ⟶
       supportedResolutionFunctor A T :=
   (supportedHomResolutionData (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).unit
 
-/-- Functorial degreewise-injective K-injective replacement, on the specified etale site.
-Source: Stacks, Tag 079P (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Functorial degreewise-injective K-injective replacement, on the specified etale site. -/
 noncomputable abbrev supportedResolution (A : Type (u + 1)) [CommRing A] (T : Scheme.{u})
     (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
     CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ :=
   (supportedResolutionFunctor A T).obj K
 
-/-- The functor of complexes of Hom from the closed constant sheaf.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The functor of complexes of Hom from the closed constant sheaf. -/
 noncomputable def supportedHomComplexFunctor (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T) :=
   (closedSupportHomFunctor A i).mapHomologicalComplex (.up ℤ)
 
-/-- The global-section functor on complexes.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The global-section functor on complexes. -/
 noncomputable def supportedSectionsComplexFunctor (A : Type (u + 1)) [CommRing A]
     (T : Scheme.{u}) :=
   (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The open-section functor on complexes.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The open-section functor on complexes. -/
 noncomputable def supportedOpenSectionsComplexFunctor (A : Type (u + 1)) [CommRing A]
     {V T : Scheme.{u}} (v : V ⟶ T) :=
   (upperStar (ModuleCat.{u + 1} A) v ⋙
     Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- Termwise ordinary Hom from the closed constant sheaf. Source: Stacks, Tag 0A45
-(blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Termwise ordinary Hom from the closed constant sheaf. -/
 noncomputable abbrev supportedHomComplex (A : Type (u + 1)) [CommRing A]
     {D T : Scheme.{u}} (i : D ⟶ T)
     (I : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
     CochainComplex (ModuleCat.{u + 1} A) ℤ :=
   (supportedHomComplexFunctor A i).obj I
 
-/-- Termwise inverse image as a fixed functor on complexes.
-Source: Stacks, Tag 03Q1 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Termwise inverse image as a fixed functor on complexes. -/
 noncomputable def supportedPullbackComplexFunctor (A : Type (u + 1)) [CommRing A]
     {T' T : Scheme.{u}} (h : T' ⟶ T) :
     CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ ⥤
       CochainComplex (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ :=
   (upperStar (ModuleCat.{u + 1} A) h).mapHomologicalComplex (.up ℤ)
 
-/-- The inverse image of a complex is taken termwise; exactness makes this derived pullback.
-Source: Stacks, Tag 03Q1 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The inverse image of a complex is taken termwise; exactness makes this derived pullback. -/
 noncomputable abbrev supportedPullbackComplex (A : Type (u + 1)) [CommRing A]
     {T' T : Scheme.{u}} (h : T' ⟶ T)
     (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :
     CochainComplex (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ :=
   (supportedPullbackComplexFunctor A h).obj K
 
-/-- The normalized cone model, with its complex functors supplied as parameters.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The normalized cone model, with its complex functors supplied as parameters. -/
 structure SupportedHomDiagram (B₀ : Type u) [Category.{v} B₀] [Abelian B₀]
     (D₀ : Type u₀) [Category.{v₀} D₀]
     (Q₀ : CochainComplex B₀ ℤ ⥤ D₀)
@@ -189,8 +174,7 @@ structure SupportedHomDiagram (B₀ : Type u) [Category.{v} B₀] [Abelian B₀]
   restriction : ∀ I n, (E.obj I).X n ⟶ (B.obj I).X n
   normalization : ∀ I, (F.obj I ⟶ E.obj I) → Prop
 
-/-- A normalized cone model of a fixed diagram.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- A normalized cone model of a fixed diagram. -/
 structure SupportedHomConeModelCore (B₀ : Type u) [Category.{v} B₀] [Abelian B₀]
     (D₀ : Type u₀) [Category.{v₀} D₀]
     (Q₀ : CochainComplex B₀ ℤ ⥤ D₀)
@@ -226,8 +210,7 @@ structure SupportedHomConeModelCore (B₀ : Type u) [Category.{v} B₀] [Abelian
     (projection K).f n = (CochainComplex.shiftFunctorObjXIso _ (-1) n m hm).hom ≫
       HomologicalComplex.homotopyCofiber.fstX (q.app (d.R.obj K)) m n hn
 
-/-- Transport a map through the two fixed derived models.
-Source: Stacks, Tag 070K (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Transport a map through the two fixed derived models. -/
 noncomputable abbrev SupportedHomConeModelCore.transport
     {B₀ : Type u} [Category.{v} B₀] [Abelian B₀]
     {D₀ : Type u₀} [Category.{v₀} D₀]
@@ -242,8 +225,7 @@ noncomputable abbrev SupportedHomConeModelCore.transport
     d.H.obj K ⟶ d'.H.obj K' :=
   (M.modelIso K).hom ≫ Q₀.map f ≫ (M'.modelIso K').inv
 
-/-- Build the resolution and section diagram before specifying a concrete sheaf category.
-Source: Stacks, Tags 070K, 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Build the resolution and section diagram before specifying a concrete sheaf category. -/
 noncomputable def supportedHomDiagramFactory
     {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     {D : Type u} [Category.{v} D] [Abelian D]
@@ -264,8 +246,7 @@ noncomputable def supportedHomDiagramFactory
   normalization := fun I t ↦
     t = (NatTrans.mapHomologicalComplex α (.up ℤ)).app I
 
-/-- The functors and normalization maps defining the supported-Hom diagram.
-Source: Stacks, Tags 070K, 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The functors and normalization maps defining the supported-Hom diagram. -/
 noncomputable def supportedHomDiagram (A : Type (u + 1)) [CommRing A]
     {D V T : Scheme.{u}} (i : D ⟶ T) (v : V ⟶ T) :
     SupportedHomDiagram (ModuleCat.{u + 1} A)
@@ -279,8 +260,7 @@ noncomputable def supportedHomDiagram (A : Type (u + 1)) [CommRing A]
     (fun I n ↦ (closedSupportSectionsPullback A v).app (I.X n))
     (closedSupportHomToSections A i)
 
-/-- The condition that a resolution comparison extends the resolution unit.
-Source: Stacks, Tag 079P (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The condition that a resolution comparison extends the resolution unit. -/
 def supportedResolutionComparisonCondition (A : Type (u + 1)) [CommRing A]
     {T' T : Scheme.{u}} (h : T' ⟶ T)
     (K : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
@@ -290,8 +270,7 @@ def supportedResolutionComparisonCondition (A : Type (u + 1)) [CommRing A]
     ((supportedResolutionUnit A T).app K) ≫ a =
       (supportedResolutionUnit A T').app (supportedPullbackComplex A h K)
 
-/-- The degreewise formula for pullback of sections along a comparison of complexes.
-Source: Stacks, Tag 03Q1 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The degreewise formula for pullback of sections along a comparison of complexes. -/
 def supportedSectionsMapCondition (A : Type (u + 1)) [CommRing A]
     {T' T : Scheme.{u}} (h : T' ⟶ T)
     (I : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
@@ -302,8 +281,7 @@ def supportedSectionsMapCondition (A : Type (u + 1)) [CommRing A]
   ∀ n, s.f n = globalSectionsUpperStarMap (ModuleCat.{u + 1} A) h (I.X n) ≫
     (Sheaf.Γ T'.smallEtaleTopology (ModuleCat.{u + 1} A)).map (a.f n)
 
-/-- The degreewise formula for the open part of a pullback square.
-Source: Stacks, Tag 03Q1 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The degreewise formula for the open part of a pullback square. -/
 def supportedOpenSectionsMapCondition (A : Type (u + 1)) [CommRing A]
     {T' T V' V : Scheme.{u}} (h : T' ⟶ T) (v : V ⟶ T) (v' : V' ⟶ T')
     (hV : V' ⟶ V) (sqV : IsPullback hV v' v h)
@@ -319,8 +297,7 @@ def supportedOpenSectionsMapCondition (A : Type (u + 1)) [CommRing A]
           (upperStarComp (ModuleCat.{u + 1} A) v' h (hV ≫ v) sqV.w).hom.app _ ≫
           (upperStar (ModuleCat.{u + 1} A) v').map (a.f n))
 
-/-- The degreewise formula for inverse-image and precomposition on Hom complexes.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The degreewise formula for inverse-image and precomposition on Hom complexes. -/
 def supportedHomMapCondition (A : Type (u + 1)) [CommRing A]
     {T' T D' D : Scheme.{u}} (h : T' ⟶ T) (i : D ⟶ T) (i' : D' ⟶ T')
     (e : (closedSupportHomSource A i') ⟶
@@ -333,8 +310,7 @@ def supportedHomMapCondition (A : Type (u + 1)) [CommRing A]
   ∀ (n : ℤ) (c : (closedSupportHomSource A i) ⟶ I.X n),
     (f.f n) c = e ≫ (upperStar (ModuleCat.{u + 1} A) h).map c ≫ a.f n
 
-/-- Pullback maps with the source complexes and their functors left abstract.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Pullback maps with the source complexes and their functors left abstract. -/
 structure SupportedHomPullbackDiagram
     (B₀ : Type u) [Category.{v} B₀] [Abelian B₀]
     (D₀ : Type u₀) [Category.{v₀} D₀] (Q₀ : CochainComplex B₀ ℤ ⥤ D₀)
@@ -347,8 +323,7 @@ structure SupportedHomPullbackDiagram
   openSpec : ∀ I J, (P.obj I ⟶ J) → (source.B.obj I ⟶ target.B.obj J) → Prop
   homSpec : ∀ I J, (P.obj I ⟶ J) → (source.F.obj I ⟶ target.F.obj J) → Prop
 
-/-- Normalized representative maps for a fixed pullback diagram.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- Normalized representative maps for a fixed pullback diagram. -/
 structure SupportedHomPullbackMaps
     (B₀ : Type u) [Category.{v} B₀] [Abelian B₀]
     (D₀ : Type u₀) [Category.{v₀} D₀] (Q₀ : CochainComplex B₀ ℤ ⥤ D₀)
@@ -371,8 +346,7 @@ structure SupportedHomPullbackMaps
   homMap_spec : ∀ K, d.homSpec (d.source.R.obj K)
     (d.target.R.obj (d.P.obj K)) (resolutionComparison K) (homMap K)
 
-/-- The specialization of the representative-map record to an etale pullback square.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The specialization of the representative-map record to an etale pullback square. -/
 noncomputable def supportedHomPullbackDiagram (A : Type (u + 1)) [CommRing A]
     {T' T D' D V' V : Scheme.{u}} (h : T' ⟶ T) (i : D ⟶ T) (i' : D' ⟶ T')
     (v : V ⟶ T) (v' : V' ⟶ T') (hV : V' ⟶ V) (sqV : IsPullback hV v' v h)
@@ -391,8 +365,7 @@ noncomputable def supportedHomPullbackDiagram (A : Type (u + 1)) [CommRing A]
   openSpec := supportedOpenSectionsMapCondition A h v v' hV sqV
   homSpec := supportedHomMapCondition A h i i' e
 
-/-- The type of normalized maps on the fixed etale pullback diagram.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The type of normalized maps on the fixed etale pullback diagram. -/
 abbrev supportedHomPullbackMapsType (A : Type (u + 1)) [CommRing A]
     {T' T D' D V' V : Scheme.{u}} (h : T' ⟶ T) (i : D ⟶ T) (i' : D' ⟶ T')
     (v : V ⟶ T) (v' : V' ⟶ T') (hV : V' ⟶ V) (sqV : IsPullback hV v' v h)
@@ -407,9 +380,7 @@ abbrev supportedHomPullbackMapsType (A : Type (u + 1)) [CommRing A]
 
 /-- The canonical representative maps for pullback of a closed/open pair. A resolution
 comparison must extend the pulled-back resolution unit. Its section maps and Hom map are
-specified degreewise; the relative pullback is then the diagonal mapping-cone map.
-Source: Stacks, Tag 0A45 and blueprint lemma-cycle-class-cartier-divisor, penultimate paragraph
-(blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+specified degreewise; the relative pullback is then the diagonal mapping-cone map. -/
 structure SupportedKummerSupportHomData (A : Type (u + 1)) [CommRing A]
     {T' T D' D V' V : Scheme.{u}} (h : T' ⟶ T) (i : D ⟶ T)
     (i' : D' ⟶ T') (hD : D' ⟶ D) (v : V ⟶ T) (v' : V' ⟶ T')
@@ -429,66 +400,55 @@ variable {A : Type (u + 1)} [CommRing A]
     {hD : D' ⟶ D} {v : V ⟶ T} {v' : V' ⟶ T'} {sqD : IsPullback hD i' i h}
     {hV : V' ⟶ V} {sqV : IsPullback hV v' v h}
 
-/-- The source normalized cone model.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The source normalized cone model. -/
 noncomputable abbrev sourceModel
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) := N.maps.sourceModel
 
-/-- The target normalized cone model.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The target normalized cone model. -/
 noncomputable abbrev targetModel
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) := N.maps.targetModel
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 noncomputable def resolutionComparison
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.resolutionComparison
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 abbrev resolutionComparison_spec
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.resolutionComparison_spec
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 noncomputable def sectionsMap
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.sectionsMap
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 abbrev sectionsMap_spec
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.sectionsMap_spec
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 noncomputable def openSectionsMap
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.openSectionsMap
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 abbrev openSectionsMap_spec
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.openSectionsMap_spec
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 abbrev restriction_square
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.restriction_square
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 noncomputable def homMap
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.homMap
 
-/-- The original normalized representative-map interface.
-Source: Stacks, Tag 0A45 (blueprint: lem-asd-supported-kummer-support-hom-naturality). -/
+/-- The original normalized representative-map interface. -/
 abbrev homMap_spec
     (N : SupportedKummerSupportHomData A h i i' hD v v' sqD hV sqV) :=
   N.maps.homMap_spec

@@ -13,7 +13,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Explicit open base-change comparisons
 
-Source: Stacks Project, Tags 08FE, 08HY and 0DJ9.
+## References
+
+* [Stacks, Tag 08FE]
+* [Stacks, Tag 08BS]
+* [Stacks, Tag 08HY]
+* [Stacks, Tag 0D5S]
+* [Stacks, Tag 0DJ9]
 -/
 
 @[expose] public section
@@ -24,10 +30,7 @@ namespace AlgebraicGeometry
 
 -- The explicit additivity witnesses require a larger typeclass-search budget.
 /-- The sectionwise open direct-image comparison, derived using exact restriction
-and preservation of K-injectives. This constructs the isomorphism rather than
-selecting an arbitrary witness of its existence.
-Source: Stacks Project, Tags 08FE and 08BS.
-(blueprint: def-pc-n3-open-base-change-comparisons). -/
+and preservation of K-injectives. -/
 noncomputable def singleComplexOpenDirectImageIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -87,9 +90,7 @@ noncomputable def singleComplexOpenDirectImageIso
 
 /-- Source comparison for the bare open base-change identity. Its factors are
 open pullback, pullback composition along the restricted square, open pullback
-on the base, and the explicit direct-image comparison.
-Source: Stacks Project, Tags 08FE, 0D5S and 0DJ9, first paragraph.
-(blueprint: def-pc-n3-open-base-change-comparisons). -/
+on the base, and the explicit direct-image comparison. -/
 noncomputable def singleComplexOpenBaseChangeSourceIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

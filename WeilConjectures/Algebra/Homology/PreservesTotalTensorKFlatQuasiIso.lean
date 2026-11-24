@@ -12,10 +12,6 @@ public import Mathlib.CategoryTheory.Monoidal.Preadditive
 /-!
 # Preservation of quasi-isomorphisms between K-flat complexes
 
-Source: Weil conjectures blueprint, main-20261015, `chap-The-pro-etale-site`,
-`sk-def-sfb-derived-categories`, definition `def-sfb-preserves-kflat-quasi-iso`
-(blueprint: def-sfb-preserves-kflat-quasi-iso).
-
 The binary total tensor is Mathlib's `HomologicalComplex.tensorObj`, with maps
 `HomologicalComplex.tensorHom`. Its degree `n` is the coproduct indexed by pairs
 `(p, q)` with `p + q = n`. The differential is `d_P ⊗ 1 + (-1)^p (1 ⊗ d_Q)`
@@ -42,7 +38,6 @@ variable {C : Type uC} [Category.{vC} C] [Abelian C]
   [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
 
 /-- A complex is K-flat if total tensoring on either side preserves every quasi-isomorphism.
-(blueprint: def-sfb-preserves-kflat-quasi-iso).
 
 `tensorHom (𝟙 P) s` and `tensorHom s (𝟙 P)` are the morphism actions of the two
 functors obtained by fixing one input of `(curriedTensor C).map₂CochainComplex`.

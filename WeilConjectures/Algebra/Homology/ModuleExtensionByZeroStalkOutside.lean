@@ -13,6 +13,16 @@ public import Mathlib.Topology.Sheaves.Module
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.Topology.Sheaves.Sheafify
 
+/-!
+# Stalks of the extension by zero at points outside the open
+
+The stalk of the sheafified extension by zero at a point outside `W` is zero.
+
+## References
+
+* Stacks Project, Sheaves, Tag 00A7 (3), via Tags 00A5 and 007Z
+-/
+
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite TopCat.Presheaf
 universe u
@@ -20,17 +30,7 @@ noncomputable section
 namespace AlgebraicGeometry
 /-- For a ringed space X, open W, module sheaf G on the localized opens of W, and x outside W, the
 stalk at x of the module sheafification of the direct-sum extension-by-zero presheaf of G is the
-zero module over O_X,x.
-
-Proof: Represent an arbitrary stalk element of the extension presheaf by a germ over V containing
-x. No inclusion V -> W exists, since it would imply x belongs to W. The direct sum indexed by
-these inclusions is therefore subsingleton, so the representative and its germ are zero. Thus the
-abelian presheaf stalk is zero. Mathlib's stalkFunctor_map_unit_toSheafify_isIso identifies it
-with the abelian stalk of the module sheafification: the underlying abelian sheafification is
-definitionally the same construction. Transport subsingletonness across this isomorphism and apply
-ModuleCat.isZero_iff_subsingleton. Source: Stacks Project, Sheaves Lemma 00A7 (3), via Lemma 00A5
-and Lemma 007Z.
-(blueprint: lem-sc-module-extension-by-zero-stalk-maps-outside) -/
+zero module over O_X,x. -/
 theorem moduleExtensionByZero_stalk_outside (X : RingedSpace.{u}) :
     (∀ (W : Opens X) (G : SheafOfModules.{u} ((moduleRings X).over W)) (x : X),
       x ∉ W → IsZero ((RingedSpace.moduleStalkFunctor X x).obj

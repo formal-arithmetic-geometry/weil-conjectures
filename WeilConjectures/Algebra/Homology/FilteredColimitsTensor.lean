@@ -18,8 +18,9 @@ import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 /-!
 # Filtered colimits and tensor complexes of sheaves of modules
 
-Source: Stacks Project, Modules on Sites, Lemmas 03DB and 03EP
-(blueprint: lem-pc-module-filtered-colimits-tensor).
+## References
+
+* Stacks Project, Modules on Sites, Lemmas 03DB and 03EP
 -/
 
 @[expose] public section
@@ -35,18 +36,8 @@ local notation "Mod" R => SheafOfModules.{u}
   ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
 
 /-- Filtered colimits of sheaves of modules are exact, and commute with tensor
-complexes and their direct-sum totalizations. Source: Stacks Project, Modules
-on Sites, Lemmas 03DB and 03EP (blueprint: lem-pc-module-filtered-colimits-tensor).
-
-Proof: (1) `prop-pur-kinjective-resolutions-exist` supplies the Grothendieck
-abelian property and exact filtered colimits; consequently they preserve kernels,
-cokernels and cohomology. (2) By `lem-pc-sheaf-modules-tensor-closed`, tensoring
-is a left adjoint and preserves colimits termwise, compatibly with differentials.
-(3) In each degree, the direct-sum totalization of `def-pc-tensor-complex-sheaves`
-is a colimit indexed by pairs of degrees of fixed sum. Colimits commute with
-these colimits, and functoriality makes the isomorphisms commute with the signed
-differentials. Preservation states that the canonical comparison is invertible,
-not merely that the two total complexes happen to be isomorphic. -/
+complexes and their direct-sum totalizations.
+-/
 theorem filteredColimitsTensorComplex
     (C : Type u) [Category.{u} C] (J : GrothendieckTopology C)
     [J.WEqualsLocallyBijective AddCommGrpCat.{u}]

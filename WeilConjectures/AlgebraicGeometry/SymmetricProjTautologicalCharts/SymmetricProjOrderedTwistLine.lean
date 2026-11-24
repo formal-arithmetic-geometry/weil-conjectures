@@ -16,8 +16,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSectionChart
 
 /-! # Existence of the ordered global twist line
 
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-line).
+## References
+
+* [Stacks Project](https://stacks.math.columbia.edu), Tags 01OE, 01OB, 01MS
 -/
 
 @[expose] public section
@@ -42,20 +43,7 @@ private theorem boundary_adjunction_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (Classical.choose_spec (Scheme.Modules.existsUnique_tensorPullbackSectionAdjunction g)).1
 
 set_option linter.unusedVariables false in
-/-- The local normalized affine comparisons glue to a global line isomorphism.
-
-Source: Stacks Project, Constructions, Tags 01OE, 01OB and 01MS.
-(blueprint: lem-trf-symmetric-proj-ordered-twist-line).
-
-Proof: on each affine base chart, use the supplied polynomial and normalized
-Proj comparison to identify the standard degree-one frame with the chart frame
-of the tautological quotient.  The ratio on overlaps is the ratio of the same
-homogeneous generators, so the local isomorphisms satisfy the cocycle condition.
-Glue them, together with their local inverses, by the sheaf gluing theorem.
-The resulting global map is an isomorphism, and its restrictions retain the
-normalized coordinate equations used to glue it.  The argument also covers the
-zero-dimensional and empty-chart cases.
--/
+/-- The local normalized affine comparisons glue to a global line isomorphism. -/
 theorem exists_ordered_twist_line (S : Scheme.{u}) (E : S.Modules)
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E)
     (r : ℕ) (b : RelativeProjectiveSpace.freeModule S r ≅ E)

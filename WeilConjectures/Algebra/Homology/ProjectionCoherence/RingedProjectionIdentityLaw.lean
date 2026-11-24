@@ -101,8 +101,7 @@ import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 
 set_option linter.privateModule false
 
-/-! Field-level coherence law for normalized ringed projection tensor comparisons.
-(blueprint: lem-sfb-ringed-projection-tensor-laws-identity-law) -/
+/-! Field-level coherence law for normalized ringed projection tensor comparisons. -/
 
 @[expose] public section
 set_option autoImplicit false

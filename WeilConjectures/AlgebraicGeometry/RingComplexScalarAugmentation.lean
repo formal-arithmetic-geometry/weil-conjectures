@@ -8,8 +8,10 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexSemilinearExtension
 
 /-! # The canonical augmentation after scalar extension
 
-Source: Stacks Project, Tags 03EK and 099D(c).
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 099D], part (c)
 -/
 
 @[expose] public noncomputable section

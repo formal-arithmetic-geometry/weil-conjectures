@@ -7,7 +7,14 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.MixedRepForward.MixedRepresentationGeneral
 
-/-! Mixed localization representative normalization, for an arbitrary coefficient category. -/
+/-! # Mixed localization representative normalization
+
+Mixed localization representative normalization, for an arbitrary coefficient category.
+
+## References
+
+* Stacks Project, Tag 07A4
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,11 +29,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A]
 
 /-- Normalizes the published mixed tensor representative equation to the model aliases used
-by the restriction square. Source: Stacks Tag 07A4, clause (3) of
-`finiteOpenMixedTensorRepresentative`. The proof expands the canonical map-derived tensor
-comparison, transports the inverse of the oplax map by `Functor.map_inv`, and identifies the
-derived tensor map with tensoring by the identity; see `mixed_representation_general`.
-(blueprint: lem-sf-mixed-representation-normalized) -/
+by the restriction square. -/
 theorem mixed_representation_normalized
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) :

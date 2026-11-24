@@ -24,8 +24,9 @@ for K-flatness: `Tot(Z ⊗ P)` is acyclic for every acyclic `Z`.
 
 No monoidal coherence of the comparison isomorphism is needed.
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YN
-(auxiliary; not a blueprint node).
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YN
 -/
 
 @[expose] public section
@@ -41,12 +42,7 @@ namespace CochainComplex
 variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
 
 /-- An additive equivalence compatible with tensor products carries total tensor complexes of
-cochain complexes to total tensor complexes of their images.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
-
-Proof: the tensor comparison is a natural transformation between the two bifunctors, and an
-equivalence preserves the coproducts defining the total complexes; the induced comparison of
-total complexes is an isomorphism since all its components are. -/
+cochain complexes to total tensor complexes of their images. -/
 theorem nonempty_mapHomologicalComplex_mapBifunctor_tensor_iso
     [Preadditive C] [Preadditive D]
     [MonoidalCategory C] [MonoidalPreadditive C]
@@ -72,20 +68,14 @@ theorem nonempty_mapHomologicalComplex_mapBifunctor_tensor_iso
   have (X Y : C) : IsIso ((τ.app X).app Y) := (e.app (X, Y)).isIso_hom
   exact ⟨asIso (HomologicalComplex.mapBifunctorComparison τ (.up ℤ) V W)⟩
 
-/-- Acyclicity is preserved and reflected by an additive equivalence applied termwise.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
-
-Proof: a faithful exact functor preserves and reflects exactness of each short complex. -/
+/-- Acyclicity is preserved and reflected by an additive equivalence applied termwise. -/
 theorem acyclic_mapHomologicalComplex_iff_of_isEquivalence [Abelian C] [Abelian D]
     (F : C ⥤ D) [F.Additive] [F.IsEquivalence] (P : CochainComplex C ℤ) :
     ((F.mapHomologicalComplex (.up ℤ)).obj P).Acyclic ↔ P.Acyclic :=
   ⟨fun h i ↦ (P.sc i).exact_map_iff_of_faithful F |>.1 (h i),
     fun h i ↦ (P.sc i).exact_map_iff_of_faithful F |>.2 (h i)⟩
 
-/-- The acyclic tensor test for K-flatness is invariant under isomorphism.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
-
-Proof: the total tensor complex is functorial in its second variable. -/
+/-- The acyclic tensor test for K-flatness is invariant under isomorphism. -/
 theorem acyclicTensorTest_of_iso [Abelian C] [MonoidalCategory C]
     [(curriedTensor C).PreservesZeroMorphisms]
     [∀ X, ((curriedTensor C).obj X).PreservesZeroMorphisms]
@@ -99,12 +89,7 @@ theorem acyclicTensorTest_of_iso [Abelian C] [MonoidalCategory C]
     ((((curriedTensor C).map₂HomologicalComplex (.up ℤ) (.up ℤ) (.up ℤ)).obj Z).mapIso e)
 
 /-- An additive equivalence compatible with tensor products preserves and reflects the acyclic
-tensor test for K-flatness.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
-
-Proof: write a test complex of `D` as the image of a test complex of `C` up to the counit.
-The equivalence preserves and reflects acyclicity, and it identifies the image of a total
-tensor complex with the total tensor complex of the images. -/
+tensor test for K-flatness. -/
 theorem acyclicTensorTest_mapHomologicalComplex_iff [Abelian C] [Abelian D]
     [MonoidalCategory C] [MonoidalPreadditive C]
     [MonoidalCategory D] [(curriedTensor D).PreservesZeroMorphisms]
@@ -140,11 +125,7 @@ theorem acyclicTensorTest_mapHomologicalComplex_iff [Abelian C] [Abelian D]
         (V.counitIso.app Z)).app _)
 
 
-/-- The acyclic tensor test implies K-flatness for the class of quasi-isomorphisms.
-Source: Stacks Project, Tag 06YN (auxiliary; not a blueprint node).
-
-Proof: in the homotopy category, K-flatness means that tensoring with the complex on either
-side preserves acyclic objects; the braiding exchanges the two sides. -/
+/-- The acyclic tensor test implies K-flatness for the class of quasi-isomorphisms. -/
 theorem kFlat_of_acyclicTensorTest
     [Abelian C] [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
     [BraidedCategory C] [HasColimitsOfSize.{0, 0} C] (P : CochainComplex C ℤ)

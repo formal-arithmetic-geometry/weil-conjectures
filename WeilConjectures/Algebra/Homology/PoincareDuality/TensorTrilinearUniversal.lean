@@ -34,13 +34,14 @@ import Mathlib.CategoryTheory.HomCongr
 
 /-! # The trilinear universal property of the sheaf tensor product
 
-Source: Stacks Project, Modules on Sites, Sections 03EK, 04TT and Lemma 03EO.
-(blueprint: lem-pd-sheaf-trilinear-universal)
-
 The trilinear maps are expressed directly as restriction-compatible families of
 separately linear functions, without introducing a second notion of sheaf morphism.
 The tensor objects and pure tensors are the existing sheafifications of the
 sectionwise balanced tensor product, including the inner sheafification.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK, 04TT and 03EO
 -/
 
 @[expose] public section
@@ -256,34 +257,8 @@ private theorem map_tmul_both {A A' B B' : SheafOfModules.{u}
 end Helpers
 
 /-- The natural trilinear bijection and its pure-triple equality criterion.
-Source: Stacks Project, Modules on Sites, Sections 03EK, 04TT and Lemma 03EO
-(blueprint: lem-pd-sheaf-trilinear-universal).
-
-The three IsLinearMap conditions express linearity in each variable. The
-subtype's restriction equation says precisely that the maps form a morphism of
-underlying sheaves of sets. The first clause normalizes the equivalences on
-canonical local pure triples. The second is contravariant naturality in all
-three factors and covariant naturality in the target. The third detects equality
-on pure triples over every object, without asserting sectionwise generation
-of the sheafified tensor.
-
-Proof: (1) Put P = homObj T H. The slice description of def-pur-sheaf-hom
-and lem-pur-sheaf-hom-is-sheaf sends a trilinear family beta to the bilinear
-family c_U(x,y)_v(z) = beta_V(x|V,y|V,z). Restriction compatibility makes
-these slice morphisms and makes c bilinear with the restricted scalar action.
-(2) Apply lem-pc-sites-sheaf-tensor-bilinear-universal with target P to get
-a : A tensor B -> P. Evaluation b_U(q,z) = a_U(q)_id(z) is bilinear and
-restriction-compatible. Apply the binary property again to obtain f.
-(3) Evaluating f on a pure triple returns beta, proving surjectivity; the
-canonical tensor maps and f are separately linear and restriction-compatible.
-(4) For any f define a^f_U(q)_v(z) = f_V(q|V tensor z). Semilinearity of
-restrictions and linearity of f give a module morphism A tensor B -> P.
-(5) If f and g agree on all pure triples, their a^f and a^g agree on pure
-pairs after testing every slice component. Binary uniqueness first gives
-a^f = a^g, and a second application gives f = g. This proves injectivity
-and the equality criterion. (6) Tensor maps send pure tensors to tensors
-of their images. Evaluating on pure triples gives the four-variable
-naturality equation; bijectivity also makes the inverse natural. -/
+The first clause normalizes the equivalences on canonical local pure triples, the
+second is naturality in all variables, and the third detects equality on pure triples. -/
 theorem tensor_trilinear_universal
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) :

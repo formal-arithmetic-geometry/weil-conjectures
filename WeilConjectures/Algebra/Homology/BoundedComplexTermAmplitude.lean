@@ -13,8 +13,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
 
 /-! # Bounded complexes and the amplitudes of their terms
 
-Source: Stacks Project, Tag 066H.
-(blueprint: lem-pc-bounded-complex-term-amplitude).
+## References
+
+* Stacks Project, Tag 066H
 -/
 
 @[expose] public section
@@ -84,17 +85,7 @@ private lemma bounded_mem_of_single_terms
     exact S.prop_of_isZero ((HomotopyCategory.quotient D _).map_isZero hzero)
 
 /-- A bounded complex has amplitude `[a,b]` if each of its terms, placed in its actual
-cochain degree, has that amplitude.
-
-Source: Stacks Project, Tag 066H.
-(blueprint: lem-pc-bounded-complex-term-amplitude).
-
-Proof: induct on the finite number of supported degrees, using the degreewise split
-stupid-truncation triangle. Tensoring this distinguished triangle with a module in degree
-zero remains distinguished. Both bounds of the canonical t-structure are extension closed,
-so the middle object inherits the two bounds from the two outer objects. The one-term
-case is the corresponding single complex. If the support interval is empty, every term
-is zero and so is the complex. This argument imposes no flatness on the terms. -/
+cochain degree, has that amplitude. This imposes no flatness on the terms. -/
 theorem bounded_torAmplitude_of_single_terms
     {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     (K : CochainComplex (ModuleCat.{u} R) ℤ) (r s a b : ℤ)

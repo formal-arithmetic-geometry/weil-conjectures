@@ -17,8 +17,9 @@ import WeilConjectures.AlgebraicGeometry.FlatSheafStalk
 /-!
 # Bounded-above flat complexes on a ringed space are K-flat
 
-Source: Stacks Project, Cohomology, Lemma 20.26.9 (Tag 06YD),
-label `lemma-bounded-flat-K-flat` (blueprint: lem-pc-bounded-above-flat-kflat).
+## References
+
+* Stacks Project, Cohomology, Lemma 20.26.9 (Tag 06YD)
 -/
 
 @[expose] public section
@@ -29,19 +30,7 @@ open CategoryTheory CategoryTheory.Limits TopologicalSpace AlgebraicGeometry
 
 namespace CochainComplex
 
-/-- Every bounded-above complex of flat module sheaves on a ringed space is K-flat.
-Source: Stacks Project, Cohomology, Lemma 20.26.9 (Tag 06YD)
-(blueprint: lem-pc-bounded-above-flat-kflat).
-
-Proof:
-1. Fix a point `x`. By `lem-pc-flat-sheaf-stalk-flat`, each stalk of each term is
-   flat over the stalk ring. The stalk complex remains bounded above because the
-   stalk functor sends zero objects to zero objects.
-2. Apply `lem-pc-module-bounded-flat-kflat` to this bounded-above complex of flat
-   modules over the stalk ring. Its total tensor with every acyclic stalk complex
-   is acyclic.
-3. Apply the reverse implication of `lem-pc-kflat-stalk-criterion`: K-flatness of
-   every stalk complex implies K-flatness of the original sheaf complex. -/
+/-- Every bounded-above complex of flat module sheaves on a ringed space is K-flat. -/
 theorem isKFlat_of_boundedAbove_flat_ringedSpace
     (X : RingedSpace.{u})
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)
