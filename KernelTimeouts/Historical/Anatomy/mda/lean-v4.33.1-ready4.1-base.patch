@@ -1,0 +1,1192 @@
+--- a/src/kernel/type_checker.cpp
++++ b/src/kernel/type_checker.cpp
+@@ -9,6 +9,19 @@
+ #include <limits>
+ #include <climits>
+ #include <cstdlib>
++#include <chrono>
++#include <cstdio>
++#include <cstring>
++#include <map>
++#include <string>
++#include <unordered_map>
++#include <algorithm>
++#include <atomic>
++#include <mutex>
++#include <cstdint>
++#include <set>
++#include <tuple>
++#include "lean/mimalloc.h"
+ #include "runtime/interrupt.h"
+ #include "runtime/sstream.h"
+ #include "runtime/flet.h"
+@@ -24,6 +37,744 @@
+ #include "kernel/inductive.h"
+
+ namespace lean {
++namespace anatomy {
++using clock = std::chrono::steady_clock;
++using ns = std::chrono::nanoseconds;
++enum branch : unsigned {
++    Quick, Reflection, QuickReduced, Proof, Delta, SameConstant, SameFVar, Projection,
++    Reduced, Application, Eta, EtaStructure, StringExpansion, UnitLike, Failure, Exception, Unattributed, Count
++};
++static char const * branch_names[] = {
++    "quick", "reflection", "quick_reduced", "proof_irrelevance", "lazy_delta",
++    "same_constant", "same_fvar", "projection", "second_whnf", "application",
++    "eta", "eta_structure", "string_expansion", "unit_like", "failure", "exception", "unattributed"
++};
++static int mode() {
++    static int value = [] {
++        char const * s = std::getenv("LEAN_DEFEQ_ANATOMY");
++        return s && std::strcmp(s, "trace") == 0 ? 2 : s && std::strcmp(s, "counters") == 0 ? 1 : 0;
++    }();
++    return value;
++}
++static double ms(uint64_t n) { return static_cast<double>(n) / 1000000.0; }
++static std::string head(expr const & e) {
++    expr const & f = get_app_fn(e);
++    if (is_constant(f)) return const_name(f).to_string();
++    if (is_proj(f)) return proj_sname(f).to_string() + ".proj";
++    return std::to_string(static_cast<unsigned>(e.kind()));
++}
++static std::string proposition_head(expr e) {
++    while (is_pi(e)) e = binding_body(e);
++    return head(e);
++}
++struct pair_key {
++    expr left;
++    expr right;
++    bool operator==(pair_key const & p) const { return is_eqp(left, p.left) && is_eqp(right, p.right); }
++};
++struct pair_hash {
++    size_t operator()(pair_key const & p) const {
++        return (static_cast<size_t>(reinterpret_cast<uintptr_t>(p.left.raw())) >> 4) ^
++            (static_cast<size_t>(reinterpret_cast<uintptr_t>(p.right.raw())) << 1);
++    }
++};
++struct top_call {
++    uint64_t id = 0, parent = 0, exclusive = 0, inclusive = 0, reduction = 0;
++    unsigned depth = 0, children = 0;
++    std::string left, right;
++    std::string path;
++};
++struct totals {
++    uint64_t calls = 0, successes = 0, failures = 0, max_depth = 0;
++    uint64_t whnf_calls = 0, whnf_ns = 0, delta_calls = 0, delta_ns = 0;
++    uint64_t beta = 0, iota = 0, zeta = 0, proj = 0;
++    uint64_t proof_attempts = 0, proof_prop = 0, proof_prop_ns = 0;
++    uint64_t app_attempts = 0, pi_domains = 0, cache_success = 0, cache_failure = 0;
++    uint64_t cache_success_miss = 0, cache_failure_miss = 0;
++    uint64_t comparison_exclusive = 0, reduction_exclusive = 0;
++    uint64_t dependent_comparison_exclusive = 0, dependent_reduction_exclusive = 0;
++    uint64_t proposition_comparison_exclusive = 0, proposition_reduction_exclusive = 0;
++    uint64_t instantiations = 0, instantiation_ns = 0;
++    uint64_t cpp_expr_created = 0, cpp_expr_bytes = 0;
++    size_t start_rss = 0, peak_rss = 0, start_commit = 0, peak_commit = 0;
++    uint64_t pair_captured = 0, pair_repeats = 0, pair_time = 0;
++    uint64_t prop_pair_captured = 0, prop_pair_repeats = 0;
++    uint64_t branches[Count] = {};
++    uint64_t branch_comparison_ns[Count] = {}, branch_reduction_ns[Count] = {};
++    std::map<unsigned, uint64_t> depth_hist, fanout_hist;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> kinds;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> structural;
++    std::map<std::pair<unsigned, unsigned>, uint64_t> prop_structural;
++    struct depth_cost { uint64_t calls = 0, exclusive = 0, reduction = 0; };
++    std::map<std::pair<std::string, unsigned>, depth_cost> label_depth;
++    std::map<std::string, uint64_t> depth_clamped;
++    std::map<std::pair<std::string, unsigned>, uint64_t> label_fanout;
++    struct transition_cost {
++        uint64_t calls = 0, exclusive = 0, reduction = 0, followup = 0, reduced = 0;
++        uint64_t fanout_sum = 0, distinct_parents = 0;
++        std::map<unsigned, uint64_t> outcomes;
++    };
++    struct transition_key {
++        std::string parent_label, child_label;
++        unsigned branch;
++        std::string child_kind;
++        bool operator<(transition_key const & other) const {
++            return std::tie(parent_label, child_label, branch, child_kind) <
++                std::tie(other.parent_label, other.child_label, other.branch, other.child_kind);
++        }
++    };
++    std::map<transition_key, transition_cost> transitions;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> delta_heads;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> prop_families;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> proof_positions;
++    std::unordered_map<pair_key, uint64_t, pair_hash> exact;
++    std::unordered_map<pair_key, uint64_t, pair_hash> prop_pairs;
++    std::vector<top_call> top;
++    std::map<std::string, std::pair<uint64_t, uint64_t>> path_cost;
++    std::map<std::string, std::pair<std::string, std::string>> path_heads;
++    uint64_t mprwe_raw_events = 0;
++    uint64_t mprwe_trace_calls = 0, mprwe_trace_exclusive = 0;
++    uint64_t mprwe_root_exclusive = 0;
++    struct provenance_cost { uint64_t calls = 0, exclusive = 0, reduction = 0, traced_calls = 0, traced_exclusive = 0; };
++    std::map<std::pair<std::string, std::string>, provenance_cost> mprwe_cost;
++};
++struct comparison;
++static thread_local comparison * current = nullptr;
++static thread_local comparison * next_owner = nullptr;
++static thread_local std::string next_path;
++static thread_local std::string next_kind = "fallback";
++static thread_local unsigned next_index = 0;
++static thread_local bool next_index_valid = false;
++static thread_local unsigned next_category = 0;
++static thread_local branch next_branch = Unattributed;
++static std::string path_kind(char const * label) {
++    if (!std::strcmp(label, "function")) return "function-head";
++    if (!std::strcmp(label, "argument")) return "argument";
++    if (!std::strcmp(label, "binder_domain")) return "binder-domain";
++    if (!std::strcmp(label, "binder_body")) return "dependent-body";
++    if (!std::strcmp(label, "field")) return "field";
++    if (!std::strcmp(label, "field-type")) return "field";
++    if (!std::strcmp(label, "proposition_type")) return "proposition-type";
++    if (!std::strcmp(label, "projection")) return "projection";
++    if (!std::strcmp(label, "lazy_delta")) return "lazy-delta-fallback";
++    if (!std::strcmp(label, "whnf") || !std::strcmp(label, "projection_whnf")) return "whnf-iota-exposure";
++    if (!std::strcmp(label, "eta")) return "eta";
++    if (!std::strcmp(label, "reduction")) return "whnf-iota-exposure";
++    return "fallback";
++}
++struct path_scope {
++    std::string old_path;
++    std::string old_kind;
++    unsigned old_index;
++    bool old_index_valid;
++    unsigned old_category;
++    branch old_branch;
++    comparison * old_owner;
++    path_scope(char const * label, unsigned index, unsigned category, branch initiating = Unattributed):
++        old_path(std::move(next_path)), old_kind(std::move(next_kind)), old_index(next_index),
++        old_index_valid(next_index_valid), old_category(next_category), old_branch(next_branch), old_owner(next_owner) {
++        if (mode()) {
++            if (mode() == 2) next_path = std::string(label) + "[" + std::to_string(index) + "]";
++            next_kind = path_kind(label); next_index = index; next_index_valid = true;
++            next_category = category; next_branch = initiating; next_owner = current;
++        }
++    }
++    path_scope(char const * label, unsigned category = 0, branch initiating = Unattributed):
++        old_path(std::move(next_path)), old_kind(std::move(next_kind)), old_index(next_index),
++        old_index_valid(next_index_valid), old_category(next_category), old_branch(next_branch), old_owner(next_owner) {
++        if (mode()) {
++            if (mode() == 2) next_path = label;
++            next_kind = path_kind(label); next_index = 0; next_index_valid = false;
++            next_category = category; next_branch = initiating; next_owner = current;
++        }
++    }
++    ~path_scope() {
++        if (mode()) {
++            next_path = std::move(old_path); next_kind = std::move(old_kind); next_index = old_index;
++            next_index_valid = old_index_valid; next_category = old_category; next_branch = old_branch;
++            next_owner = old_owner;
++        }
++    }
++};
++static void memory_snapshot(size_t & rss, size_t & commit) {
++    size_t elapsed, user, system, peak_rss, peak_commit, faults;
++    mi_process_info(&elapsed, &user, &system, &rss, &peak_rss, &commit, &peak_commit, &faults);
++}
++static thread_local comparison * reduction_owner = nullptr;
++static thread_local uint64_t * reduction_child_ns = nullptr;
++static thread_local totals data;
++static thread_local unsigned reduction_depth = 0;
++static std::atomic<uint64_t> root_serial{0};
++static thread_local uint64_t active_root_id = 0;
++static uint64_t root_id() { return active_root_id; }
++static thread_local uint64_t mprwe_global_events = 0;
++static unsigned depth_bucket(unsigned n) { return std::min(n, 4096u); }
++static std::FILE * mprwe_stream() {
++    static std::FILE * f = [] {
++        char const * p = std::getenv("LEAN_DEFEQ_MPRWE_EVENTS");
++        return p && *p ? std::fopen(p, "w") : nullptr;
++    }();
++    return f;
++}
++static std::mutex mprwe_mutex;
++static uint64_t mprwe_limit() {
++    static uint64_t n = [] {
++        char const * p = std::getenv("LEAN_DEFEQ_MPRWE_MAX_EVENTS");
++        return p && *p ? static_cast<uint64_t>(std::strtoull(p, nullptr, 10)) : 250000ULL;
++    }();
++    return n;
++}
++static uint64_t mprwe_root_filter() {
++    static uint64_t n = [] {
++        char const * p = std::getenv("LEAN_DEFEQ_MPRWE_ROOT");
++        return p && *p ? static_cast<uint64_t>(std::strtoull(p, nullptr, 10)) : 0ULL;
++    }();
++    return n;
++}
++static std::string mprwe_tag(expr const & e, unsigned category) {
++    unsigned tags = 0;
++    if (category == 1) tags |= 1; // dependent type/body
++    if (category == 2) tags |= 2; // proposition/proof position
++    if (is_proj(get_app_fn(e))) tags |= 4;
++    std::string h = head(e);
++    if (h.find("inferInstance") != std::string::npos || h.find("inst") != std::string::npos) tags |= 8;
++    if (category == 2) tags |= 16;
++    return std::to_string(tags);
++}
++static uint64_t mprwe_fingerprint(expr const & l, expr const & r, unsigned category) {
++    return (static_cast<uint64_t>(hash(l)) << 32) ^ static_cast<uint64_t>(hash(r)) ^ category;
++}
++struct divergence_info {
++    std::string path;
++    uint64_t left = 0, right = 0;
++    bool present = false;
++};
++static uint64_t mprwe_hash(expr const & e) { return static_cast<uint64_t>(hash(e)); }
++static void mprwe_first_divergence(expr const & l, expr const & r, std::string const & path,
++                                   divergence_info & out) {
++    if (out.present || mprwe_hash(l) == mprwe_hash(r)) return;
++    if (l.kind() != r.kind()) {
++        out = {path, mprwe_hash(l), mprwe_hash(r), true};
++        return;
++    }
++    if (is_app(l)) {
++        mprwe_first_divergence(app_fn(l), app_fn(r), path + "/fn", out);
++        mprwe_first_divergence(app_arg(l), app_arg(r), path + "/arg", out);
++    } else if (is_binding(l)) {
++        mprwe_first_divergence(binding_domain(l), binding_domain(r), path + "/domain", out);
++        mprwe_first_divergence(binding_body(l), binding_body(r), path + "/body", out);
++    } else if (is_let(l)) {
++        mprwe_first_divergence(let_type(l), let_type(r), path + "/type", out);
++        mprwe_first_divergence(let_value(l), let_value(r), path + "/value", out);
++        mprwe_first_divergence(let_body(l), let_body(r), path + "/body", out);
++    } else if (is_mdata(l)) {
++        mprwe_first_divergence(mdata_expr(l), mdata_expr(r), path + "/data", out);
++    } else if (is_proj(l)) {
++        mprwe_first_divergence(proj_expr(l), proj_expr(r), path + "/expr", out);
++    } else {
++        out = {path, mprwe_hash(l), mprwe_hash(r), true};
++    }
++    if (!out.present) out = {path, mprwe_hash(l), mprwe_hash(r), true};
++}
++static std::string mprwe_path_bucket(std::string const & path) {
++    size_t slash = 0, pos = 0;
++    while (slash < 6) {
++        pos = path.find('/', pos);
++        if (pos == std::string::npos) return path;
++        ++pos;
++        ++slash;
++    }
++    return path.substr(0, pos) + "*";
++}
++static void mprwe_event(char const * kind, uint64_t root, uint64_t id, uint64_t parent, unsigned depth,
++                        expr const & l, expr const & r, unsigned category, char const * provenance,
++                        char const * divergence, uint64_t exclusive = 0, uint64_t reduction = 0,
++                        bool result = false, char const * phase = "", uint64_t left_hash = 0,
++                        uint64_t right_hash = 0, uint64_t div_left_hash = 0, uint64_t div_right_hash = 0,
++                        uint64_t parent_div_left_hash = 0, uint64_t parent_div_right_hash = 0,
++                        char const * div_path = "", bool sampled = false,
++                        char const * initiating_branch = "unattributed",
++                        char const * child_kind = "fallback", unsigned child_index = 0,
++                        bool child_index_valid = false, bool reduction_since_parent = false,
++                        char const * reduced_side = "", char const * exposed = "",
++                        bool failure_followup = false) {
++    std::FILE * f = mprwe_stream();
++    if (!f || (mprwe_root_filter() && root != mprwe_root_filter()) || mprwe_global_events >= mprwe_limit()) return;
++    std::lock_guard<std::mutex> lock(mprwe_mutex);
++    if (mprwe_global_events >= mprwe_limit()) return;
++    ++data.mprwe_raw_events;
++    ++mprwe_global_events;
++    std::fprintf(f, "{\"event\":\"%s\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"left\":\"%s\",\"right\":\"%s\",\"left_hash\":\"%llu\",\"right_hash\":\"%llu\",\"category\":%u,\"tags_left\":%s,\"tags_right\":%s,\"context\":\"%llu\",\"provenance\":\"%s\",\"divergence\":\"%s\",\"div_path\":\"%s\",\"div_left_hash\":\"%llu\",\"div_right_hash\":\"%llu\",\"parent_div_left_hash\":\"%llu\",\"parent_div_right_hash\":\"%llu\",\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"result\":%s,\"phase\":\"%s\",\"sampled\":%s,\"initiating_branch\":\"%s\",\"child_kind\":\"%s\",\"child_index\":%u,\"child_index_valid\":%s,\"reduction_since_parent\":%s,\"reduced_side\":\"%s\",\"exposed\":\"%s\",\"failure_followup\":%s}\n",
++        kind, static_cast<unsigned long long>(root), static_cast<unsigned long long>(id),
++        static_cast<unsigned long long>(parent), depth, head(l).c_str(), head(r).c_str(),
++        static_cast<unsigned long long>(left_hash), static_cast<unsigned long long>(right_hash), category,
++        mprwe_tag(l, category).c_str(), mprwe_tag(r, category).c_str(),
++        static_cast<unsigned long long>(mprwe_fingerprint(l, r, category)), provenance, divergence,
++        div_path,
++        static_cast<unsigned long long>(div_left_hash), static_cast<unsigned long long>(div_right_hash),
++        static_cast<unsigned long long>(parent_div_left_hash), static_cast<unsigned long long>(parent_div_right_hash),
++        static_cast<unsigned long long>(exclusive), static_cast<unsigned long long>(reduction),
++        result ? "true" : "false", phase, sampled ? "true" : "false", initiating_branch, child_kind, child_index,
++        child_index_valid ? "true" : "false", reduction_since_parent ? "true" : "false",
++        reduced_side, exposed, failure_followup ? "true" : "false");
++}
++static void mprwe_aggregate() {
++    std::FILE * f = mprwe_stream();
++    if (!f || data.calls < 1000) return;
++    std::lock_guard<std::mutex> lock(mprwe_mutex);
++    for (auto const & item : data.mprwe_cost) {
++        auto const & cost = item.second;
++        std::fprintf(f, "{\"event\":\"aggregate\",\"root\":%llu,\"provenance\":\"%s\",\"path\":\"%s\",\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"traced_calls\":%llu,\"traced_exclusive_ns\":%llu,\"total_calls\":%llu,\"root_exclusive_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.first.c_str(), item.first.second.c_str(),
++            static_cast<unsigned long long>(cost.calls), static_cast<unsigned long long>(cost.exclusive),
++            static_cast<unsigned long long>(cost.reduction), static_cast<unsigned long long>(cost.traced_calls),
++            static_cast<unsigned long long>(cost.traced_exclusive), static_cast<unsigned long long>(data.calls),
++            static_cast<unsigned long long>(data.comparison_exclusive));
++    }
++    for (auto const & item : data.transitions) {
++        auto const & cost = item.second;
++        std::string outcome = "mixed";
++        if (cost.outcomes.size() == 1) outcome = branch_names[cost.outcomes.begin()->first];
++        std::fprintf(f, "{\"event\":\"transition\",\"root\":%llu,\"parent_label\":\"%s\",\"child_label\":\"%s\",\"initiating_branch\":\"%s\",\"parent_outcome\":\"%s\",\"child_kind\":\"%s\",\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"failure_followup\":%llu,\"reduction_before_child\":%llu,\"fanout_sum\":%llu,\"distinct_parents\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.parent_label.c_str(), item.first.child_label.c_str(),
++            branch_names[item.first.branch], outcome.c_str(), item.first.child_kind.c_str(),
++            static_cast<unsigned long long>(cost.calls), static_cast<unsigned long long>(cost.exclusive),
++            static_cast<unsigned long long>(cost.reduction), static_cast<unsigned long long>(cost.followup),
++            static_cast<unsigned long long>(cost.reduced), static_cast<unsigned long long>(cost.fanout_sum),
++            static_cast<unsigned long long>(cost.distinct_parents));
++    }
++    for (auto const & item : data.label_depth)
++        std::fprintf(f, "{\"event\":\"distribution\",\"root\":%llu,\"label\":\"%s\",\"metric\":\"depth\",\"bucket\":%u,\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.first.c_str(), item.first.second,
++            static_cast<unsigned long long>(item.second.calls), static_cast<unsigned long long>(item.second.exclusive),
++            static_cast<unsigned long long>(item.second.reduction));
++    for (auto const & item : data.depth_clamped)
++        std::fprintf(f, "{\"event\":\"depth_clamp\",\"root\":%llu,\"label\":\"%s\",\"calls\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.c_str(), static_cast<unsigned long long>(item.second));
++    for (auto const & item : data.label_fanout)
++        std::fprintf(f, "{\"event\":\"distribution\",\"root\":%llu,\"label\":\"%s\",\"metric\":\"fanout\",\"bucket\":%u,\"calls\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), item.first.first.c_str(), item.first.second,
++            static_cast<unsigned long long>(item.second));
++    std::fprintf(f, "{\"event\":\"coverage\",\"root\":%llu,\"traced_calls\":%llu,\"total_calls\":%llu,\"traced_exclusive_ns\":%llu,\"root_exclusive_ns\":%llu,\"raw_events\":%llu}\n",
++        static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(data.mprwe_trace_calls),
++        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.mprwe_trace_exclusive),
++        static_cast<unsigned long long>(data.comparison_exclusive), static_cast<unsigned long long>(data.mprwe_raw_events));
++}
++static void report(uint64_t wall) {
++    char const * min = std::getenv("LEAN_DEFEQ_MIN_MS");
++    if (min && ms(wall) < std::atof(min)) return;
++    std::fprintf(stderr,
++        "ANATOMY root=%llu mode=%s wall_ms=%.3f calls=%llu success=%llu failure=%llu max_depth=%llu "
++        "comparison_exclusive_ms=%.3f reduction_exclusive_ms=%.3f whnf_calls=%llu whnf_ms=%.3f "
++        "delta_calls=%llu delta_ms=%.3f beta=%llu iota=%llu zeta=%llu projection=%llu "
++        "proof_attempts=%llu proposition_compares=%llu proposition_ms=%.3f app_attempts=%llu "
++        "pi_domains=%llu cache_success=%llu cache_failure=%llu cache_success_miss=%llu cache_failure_miss=%llu distinct_exact=%zu exact_repeats=%llu "
++        "pair_capture=%llu pair_repeat_exclusive_ms=%.3f distinct_structural=%zu "
++        "prop_pair_capture=%llu prop_pair_distinct=%zu prop_pair_repeats=%llu "
++        "prop_structural_distinct=%zu proof_position_groups=%zu "
++        "dependent_comparison_ms=%.3f dependent_reduction_ms=%.3f "
++        "proposition_comparison_ms=%.3f proposition_reduction_ms=%.3f "
++        "instantiations=%llu instantiation_ms=%.3f cpp_expr_created=%llu cpp_expr_bytes=%llu "
++        "rss_delta_bytes=%lld commit_delta_bytes=%lld\n",
++        static_cast<unsigned long long>(root_id()), mode() == 2 ? "trace" : "counters", ms(wall),
++        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.successes),
++        static_cast<unsigned long long>(data.failures), static_cast<unsigned long long>(data.max_depth),
++        ms(data.comparison_exclusive), ms(data.reduction_exclusive),
++        static_cast<unsigned long long>(data.whnf_calls), ms(data.whnf_ns),
++        static_cast<unsigned long long>(data.delta_calls), ms(data.delta_ns),
++        static_cast<unsigned long long>(data.beta), static_cast<unsigned long long>(data.iota),
++        static_cast<unsigned long long>(data.zeta), static_cast<unsigned long long>(data.proj),
++        static_cast<unsigned long long>(data.proof_attempts), static_cast<unsigned long long>(data.proof_prop),
++        ms(data.proof_prop_ns), static_cast<unsigned long long>(data.app_attempts),
++        static_cast<unsigned long long>(data.pi_domains), static_cast<unsigned long long>(data.cache_success),
++        static_cast<unsigned long long>(data.cache_failure),
++        static_cast<unsigned long long>(data.cache_success_miss),
++        static_cast<unsigned long long>(data.cache_failure_miss), data.exact.size(),
++        static_cast<unsigned long long>(data.pair_repeats), static_cast<unsigned long long>(data.pair_captured),
++        ms(data.pair_time), data.structural.size(),
++        static_cast<unsigned long long>(data.prop_pair_captured), data.prop_pairs.size(),
++        static_cast<unsigned long long>(data.prop_pair_repeats),
++        data.prop_structural.size(), data.proof_positions.size(),
++        ms(data.dependent_comparison_exclusive), ms(data.dependent_reduction_exclusive),
++        ms(data.proposition_comparison_exclusive), ms(data.proposition_reduction_exclusive),
++        static_cast<unsigned long long>(data.instantiations), ms(data.instantiation_ns),
++        static_cast<unsigned long long>(data.cpp_expr_created),
++        static_cast<unsigned long long>(data.cpp_expr_bytes),
++        static_cast<long long>(data.peak_rss) - static_cast<long long>(data.start_rss),
++        static_cast<long long>(data.peak_commit) - static_cast<long long>(data.start_commit));
++    for (unsigned i = 0; i < Count; ++i)
++        if (data.branches[i])
++            std::fprintf(stderr, "ANATOMY branch=%s calls=%llu comparison_exclusive_ms=%.3f reduction_exclusive_ms=%.3f\n",
++                         branch_names[i], static_cast<unsigned long long>(data.branches[i]),
++                         ms(data.branch_comparison_ns[i]), ms(data.branch_reduction_ns[i]));
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> families(
++        data.prop_families.begin(), data.prop_families.end());
++    std::sort(families.begin(), families.end(), [] (auto const & a, auto const & b) {
++        return a.second.second > b.second.second;
++    });
++    for (size_t i = 0; i < std::min<size_t>(20, families.size()); ++i)
++        std::fprintf(stderr, "ANATOMY proposition=%s calls=%llu exclusive_ms=%.3f\n",
++                     families[i].first.c_str(),
++                     static_cast<unsigned long long>(families[i].second.first),
++                     ms(families[i].second.second));
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> positions(
++        data.proof_positions.begin(), data.proof_positions.end());
++    std::sort(positions.begin(), positions.end(), [] (auto const & a, auto const & b) {
++        return a.second.second > b.second.second;
++    });
++    for (size_t i = 0; i < (mode() == 2 ? positions.size() : std::min<size_t>(20, positions.size())); ++i)
++        std::fprintf(stderr, "ANATOMY proof_position=%s calls=%llu exclusive_ms=%.3f\n",
++                     positions[i].first.c_str(),
++                     static_cast<unsigned long long>(positions[i].second.first),
++                     ms(positions[i].second.second));
++    if (mode() != 2) return;
++    for (auto const & p : data.depth_hist)
++        std::fprintf(stderr, "ANATOMY depth=%u calls=%llu\n", p.first, static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.fanout_hist)
++        std::fprintf(stderr, "ANATOMY fanout=%u calls=%llu\n", p.first, static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.transitions)
++        std::fprintf(stderr, "ANATOMY transition=parent_%s->child_%s,%s,%s calls=%llu exclusive_ms=%.3f reduction_ms=%.3f failure_followup=%llu reduction_before_child=%llu mean_fanout=%.3f distinct_parents=%llu\n",
++                     p.first.parent_label.c_str(), p.first.child_label.c_str(), branch_names[p.first.branch], p.first.child_kind.c_str(),
++                     static_cast<unsigned long long>(p.second.calls), ms(p.second.exclusive),
++                     ms(p.second.reduction), static_cast<unsigned long long>(p.second.followup),
++                     static_cast<unsigned long long>(p.second.reduced),
++                     p.second.distinct_parents ? static_cast<double>(p.second.fanout_sum) / p.second.distinct_parents : 0.0,
++                     static_cast<unsigned long long>(p.second.distinct_parents));
++    for (auto const & p : data.kinds)
++        std::fprintf(stderr, "ANATOMY kinds=%u,%u calls=%llu\n", p.first.first, p.first.second,
++                     static_cast<unsigned long long>(p.second));
++    for (auto const & p : data.delta_heads)
++        std::fprintf(stderr, "ANATOMY delta=%s calls=%llu ms=%.3f\n", p.first.c_str(),
++                     static_cast<unsigned long long>(p.second.first), ms(p.second.second));
++    std::sort(data.top.begin(), data.top.end(), [] (top_call const & a, top_call const & b) {
++        return a.exclusive > b.exclusive;
++    });
++    for (auto const & p : data.top)
++        std::fprintf(stderr, "ANATOMY child=%llu parent=%llu depth=%u children=%u left=%s right=%s "
++                     "path=%s exclusive_ms=%.3f inclusive_ms=%.3f reduction_ms=%.3f\n",
++                     static_cast<unsigned long long>(p.id), static_cast<unsigned long long>(p.parent),
++                     p.depth, p.children, p.left.c_str(), p.right.c_str(), p.path.c_str(), ms(p.exclusive), ms(p.inclusive),
++                     ms(p.reduction));
++    auto prefix_cost = data.path_cost;
++    for (auto const & p : data.path_cost) {
++        auto pos = p.first.rfind('/');
++        while (pos != std::string::npos) {
++            prefix_cost[p.first.substr(0, pos)].second += p.second.second;
++            pos = p.first.rfind('/', pos - 1);
++        }
++    }
++    std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>> paths(prefix_cost.begin(), prefix_cost.end());
++    std::sort(paths.begin(), paths.end(), [](auto const & a, auto const & b) { return a.second.second > b.second.second; });
++    for (size_t i = 0; i < std::min<size_t>(40, paths.size()); ++i)
++        std::fprintf(stderr, "ANATOMY path=%s left=%s right=%s direct_calls=%llu direct_exclusive_ms=%.3f subtree_exclusive_ms=%.3f\n",
++                     paths[i].first.c_str(), data.path_heads[paths[i].first].first.c_str(),
++                     data.path_heads[paths[i].first].second.c_str(),
++                     static_cast<unsigned long long>(data.path_cost[paths[i].first].first),
++                     ms(data.path_cost[paths[i].first].second), ms(paths[i].second.second));
++}
++struct comparison {
++    struct edge_record {
++        std::string kind;
++        std::string child_label;
++        branch initiating_branch = Unattributed;
++        uint64_t exclusive = 0, reduction = 0;
++        bool followup = false, reduced = false;
++    };
++    comparison * parent;
++    expr const & left;
++    expr const & right;
++    clock::time_point start;
++    uint64_t id = 0, child_ns = 0, reduce_ns = 0;
++    unsigned depth = 0, children = 0;
++    unsigned category = 0;
++    std::string path;
++    uint64_t left_hash = 0, right_hash = 0, parent_div_left_hash = 0, parent_div_right_hash = 0;
++    divergence_info divergence;
++    std::string provenance = "Unclassified";
++    bool result = false, completed = false, enabled = false, repeated = false, sampled = false;
++    bool reduction_exposed = false;
++    bool pending_reduction = false, reduced_since_parent = false, failure_followup = false;
++    bool last_child_failed = false;
++    std::string child_kind = "fallback", reduced_side, exposed_definition;
++    unsigned child_index = 0;
++    bool child_index_valid = false;
++    branch initiating_branch = Unattributed;
++    std::string reduction_phase;
++    std::vector<edge_record> edges;
++    branch outcome = Exception;
++    comparison(expr const & t, expr const & s): parent(current), left(t), right(s) {
++        if (!mode()) return;
++        enabled = true;
++        if (!parent) {
++            data = totals{}; active_root_id = root_serial.fetch_add(1, std::memory_order_relaxed) + 1;
++            memory_snapshot(data.start_rss, data.start_commit);
++        }
++        id = ++data.calls;
++        if (parent) {
++            failure_followup = parent->last_child_failed;
++            parent->last_child_failed = false;
++            if (parent->pending_reduction) {
++                reduced_since_parent = true;
++                reduction_phase = parent->reduction_phase;
++                reduced_side = parent->reduced_side;
++                exposed_definition = parent->exposed_definition;
++                parent->pending_reduction = false;
++            }
++        }
++        if (parent == next_owner) {
++            child_kind = next_kind;
++            child_index = next_index;
++            child_index_valid = next_index_valid;
++            initiating_branch = next_branch;
++        }
++        left_hash = mprwe_hash(t);
++        right_hash = mprwe_hash(s);
++        if (mprwe_stream()) {
++            mprwe_first_divergence(t, s, "root", divergence);
++            if (!parent) {
++                provenance = "M0";
++            } else if (left_hash == right_hash) {
++                provenance = "Matched";
++            } else if (divergence.present && parent->divergence.present &&
++                       ((divergence.left == parent->divergence.left && divergence.right == parent->divergence.right) ||
++                        divergence.path.rfind(parent->divergence.path + "/", 0) == 0)) {
++                provenance = "M1";
++            } else if (parent->reduction_exposed) {
++                provenance = "M2";
++            }
++            if (parent) {
++                parent_div_left_hash = parent->divergence.left;
++                parent_div_right_hash = parent->divergence.right;
++            }
++        } else if (!parent) {
++            provenance = "M0";
++        }
++        depth = parent ? parent->depth + 1 : 0;
++        category = parent == next_owner && next_category ? next_category : parent ? parent->category : 0;
++        if (mode() == 2) {
++            path = parent ? parent->path : "root";
++            if (parent == next_owner && !next_path.empty() && path.size() < 160) path += "/" + next_path;
++            if (data.path_heads.find(path) == data.path_heads.end())
++                data.path_heads.emplace(path, std::make_pair(head(t), head(s)));
++        }
++        if (parent) ++parent->children;
++        data.max_depth = std::max<uint64_t>(data.max_depth, depth);
++        ++data.depth_hist[depth_bucket(depth)];
++        ++data.kinds[{static_cast<unsigned>(t.kind()), static_cast<unsigned>(s.kind())}];
++        if (mode() == 2 && data.pair_captured < 5000000) {
++            ++data.pair_captured;
++            auto pair = pair_key{t, s};
++            repeated = data.exact[pair]++ != 0;
++            ++data.structural[{hash(t), hash(s)}];
++        }
++        start = clock::now();
++        current = this;
++        if (mprwe_stream()) {
++            uint64_t before = data.mprwe_raw_events;
++            mprwe_event("enter", root_id(), id, parent ? parent->id : 0, depth, left, right, category,
++                        provenance.c_str(), divergence.present ? "first-divergence" :
++                        (left_hash == right_hash ? "structurally-equal" : "none"), 0, 0, false, "",
++                        left_hash, right_hash, divergence.left, divergence.right,
++                        parent_div_left_hash, parent_div_right_hash, divergence.path.c_str(), sampled,
++                        branch_names[initiating_branch], child_kind.c_str(), child_index, child_index_valid, reduced_since_parent,
++                        reduced_side.c_str(), exposed_definition.c_str(), failure_followup);
++            sampled = data.mprwe_raw_events > before;
++            if (sampled) ++data.mprwe_trace_calls;
++        }
++    }
++    void finish(bool r, branch b) { completed = true; result = r; outcome = b; }
++    ~comparison() {
++        if (!enabled) return;
++        uint64_t inclusive = std::chrono::duration_cast<ns>(clock::now() - start).count();
++        uint64_t exclusive = inclusive > child_ns + reduce_ns ? inclusive - child_ns - reduce_ns : 0;
++        if (reduction_child_ns && parent == reduction_owner) *reduction_child_ns += inclusive;
++        current = parent;
++        if (parent) parent->child_ns += inclusive;
++        if (completed && result) ++data.successes; else ++data.failures;
++        ++data.branches[outcome];
++        data.branch_comparison_ns[outcome] += exclusive;
++        data.branch_reduction_ns[outcome] += reduce_ns;
++        ++data.fanout_hist[children];
++        auto & depth_row = data.label_depth[{provenance, depth_bucket(depth)}];
++        ++depth_row.calls;
++        depth_row.exclusive += exclusive;
++        depth_row.reduction += reduce_ns;
++        if (depth > 4096) ++data.depth_clamped[provenance];
++        ++data.label_fanout[{provenance, children}];
++        data.comparison_exclusive += exclusive;
++        data.reduction_exclusive += reduce_ns;
++        if (category == 1) {
++            data.dependent_comparison_exclusive += exclusive;
++            data.dependent_reduction_exclusive += reduce_ns;
++        } else if (category == 2) {
++            data.proposition_comparison_exclusive += exclusive;
++            data.proposition_reduction_exclusive += reduce_ns;
++        }
++        if (mode() == 2) {
++            auto & cost = data.path_cost[path];
++            ++cost.first;
++            cost.second += exclusive + reduce_ns;
++            if (repeated) { ++data.pair_repeats; data.pair_time += exclusive; }
++            if (data.top.size() < 20 || exclusive > data.top.back().exclusive) {
++                top_call c;
++                c.id = id; c.parent = parent ? parent->id : 0; c.depth = depth; c.children = children;
++                c.exclusive = exclusive; c.inclusive = inclusive; c.reduction = reduce_ns;
++                c.left = head(left); c.right = head(right); c.path = path;
++                data.top.push_back(std::move(c));
++                std::sort(data.top.begin(), data.top.end(), [](top_call const & a, top_call const & b) {
++                    return a.exclusive > b.exclusive;
++                });
++                if (data.top.size() > 20) data.top.pop_back();
++            }
++        }
++        if (parent) {
++            parent->edges.push_back({child_kind, provenance, initiating_branch, exclusive, reduce_ns,
++                                     failure_followup, reduced_since_parent});
++            parent->last_child_failed = !(completed && result);
++        }
++        if (mprwe_stream()) {
++            std::string path_key = mprwe_path_bucket(path);
++            if (data.mprwe_cost.size() >= 256 && data.mprwe_cost.find({provenance, path_key}) == data.mprwe_cost.end())
++                path_key = "__other__";
++            auto & cost = data.mprwe_cost[{provenance, path_key}];
++            ++cost.calls;
++            cost.exclusive += exclusive;
++            cost.reduction += reduce_ns;
++            if (sampled) {
++                ++cost.traced_calls;
++                cost.traced_exclusive += exclusive;
++                data.mprwe_trace_exclusive += exclusive;
++            }
++        }
++        if (mprwe_stream())
++            mprwe_event("exit", root_id(), id, parent ? parent->id : 0, depth, left, right, category,
++                        provenance.c_str(), divergence.present ? "first-divergence" :
++                        (left_hash == right_hash ? "structurally-equal" : "none"),
++                        exclusive, reduce_ns, completed && result, "", left_hash, right_hash,
++                        divergence.left, divergence.right, parent_div_left_hash, parent_div_right_hash,
++                        divergence.path.c_str(), sampled, branch_names[initiating_branch], child_kind.c_str(), child_index, child_index_valid,
++                        reduced_since_parent, reduced_side.c_str(), exposed_definition.c_str(), failure_followup);
++        std::set<totals::transition_key> seen_parents;
++        for (auto const & edge : edges) {
++            totals::transition_key key{provenance, edge.child_label, static_cast<unsigned>(edge.initiating_branch), edge.kind};
++            auto & cost = data.transitions[key];
++            ++cost.calls;
++            cost.exclusive += edge.exclusive;
++            cost.reduction += edge.reduction;
++            if (edge.followup) ++cost.followup;
++            if (edge.reduced) ++cost.reduced;
++            cost.outcomes[static_cast<unsigned>(outcome)]++;
++            if (seen_parents.insert(key).second) {
++                ++cost.distinct_parents;
++                cost.fanout_sum += children;
++            }
++        }
++        if (!parent) {
++            memory_snapshot(data.peak_rss, data.peak_commit);
++            data.mprwe_root_exclusive = data.comparison_exclusive;
++            mprwe_aggregate();
++            report(inclusive);
++        }
++    }
++};
++static void mprwe_reduction(char const * phase, comparison * owner, expr const & before_l,
++                            expr const & after_l, expr const & before_r, expr const & after_r) {
++    if (!owner) return;
++    owner->reduction_exposed = true;
++    bool left_changed = mprwe_hash(before_l) != mprwe_hash(after_l);
++    bool right_changed = mprwe_hash(before_r) != mprwe_hash(after_r);
++    owner->pending_reduction = true;
++    owner->reduction_phase = phase;
++    owner->reduced_side = left_changed && right_changed ? "both" : left_changed ? "left" : right_changed ? "right" : "none";
++    owner->exposed_definition = (left_changed ? head(after_l) : "") + std::string(left_changed && right_changed ? "+" : "") + (right_changed ? head(after_r) : "");
++    if (!mprwe_stream()) return;
++    if (mprwe_root_filter() && root_id() != mprwe_root_filter()) return;
++    if (mprwe_global_events >= mprwe_limit()) return;
++    std::lock_guard<std::mutex> lock(mprwe_mutex);
++    if (mprwe_global_events >= mprwe_limit()) return;
++    ++data.mprwe_raw_events;
++    ++mprwe_global_events;
++    std::fprintf(mprwe_stream(), "{\"event\":\"reduction\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"before_left\":\"%s\",\"after_left\":\"%s\",\"before_right\":\"%s\",\"after_right\":\"%s\",\"before_left_hash\":\"%llu\",\"after_left_hash\":\"%llu\",\"before_right_hash\":\"%llu\",\"after_right_hash\":\"%llu\",\"category\":%u,\"context\":\"%llu\",\"provenance\":\"Unclassified\",\"phase\":\"%s\",\"reduced_side\":\"%s\",\"exposed\":\"%s\"}\n",
++        static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(owner->id),
++        static_cast<unsigned long long>(owner->parent ? owner->parent->id : 0), owner->depth,
++        head(before_l).c_str(), head(after_l).c_str(), head(before_r).c_str(), head(after_r).c_str(),
++        static_cast<unsigned long long>(mprwe_hash(before_l)), static_cast<unsigned long long>(mprwe_hash(after_l)),
++        static_cast<unsigned long long>(mprwe_hash(before_r)), static_cast<unsigned long long>(mprwe_hash(after_r)),
++        owner->category, static_cast<unsigned long long>(mprwe_fingerprint(after_l, after_r, owner->category)), phase,
++        owner->reduced_side.c_str(), owner->exposed_definition.c_str());
++}
++struct reduction {
++    comparison * owner = current;
++    clock::time_point start;
++    uint64_t child_comparisons = 0;
++    bool enabled = false, outer = false;
++    reduction() {
++        if (!owner) return;
++        enabled = true;
++        outer = reduction_depth++ == 0;
++        if (outer) {
++            ++data.whnf_calls;
++            reduction_owner = owner;
++            reduction_child_ns = &child_comparisons;
++            start = clock::now();
++        }
++    }
++    ~reduction() {
++        if (!enabled) return;
++        --reduction_depth;
++        if (outer) {
++            uint64_t elapsed = std::chrono::duration_cast<ns>(clock::now() - start).count();
++            reduction_owner = nullptr;
++            reduction_child_ns = nullptr;
++            elapsed = elapsed > child_comparisons ? elapsed - child_comparisons : 0;
++            data.whnf_ns += elapsed;
++            owner->reduce_ns += elapsed;
++        }
++    }
++};
++struct prop_frame {
++    prop_frame * parent = nullptr;
++    clock::time_point start;
++    uint64_t child = 0;
++    std::string key;
++    std::string proof_key;
++    bool enabled = false;
++    static thread_local prop_frame * current_prop;
++    prop_frame(expr const & left, expr const & right, expr const & proof_left, expr const & proof_right) {
++        if (!current) return;
++        enabled = true;
++        parent = current_prop;
++        key = proposition_head(left) + "|" + proposition_head(right);
++        proof_key = head(proof_left) + "|" + head(proof_right);
++        if (mode() == 2) {
++            ++data.prop_pair_captured;
++            if (data.prop_pairs[pair_key{left, right}]++ != 0) ++data.prop_pair_repeats;
++            ++data.prop_structural[{hash(left), hash(right)}];
++        }
++        start = clock::now();
++        current_prop = this;
++    }
++    ~prop_frame() {
++        if (!enabled) return;
++        uint64_t inclusive = std::chrono::duration_cast<ns>(clock::now() - start).count();
++        current_prop = parent;
++        if (parent) parent->child += inclusive;
++        auto & entry = data.prop_families[key];
++        ++entry.first;
++        entry.second += inclusive > child ? inclusive - child : 0;
++        auto & position = data.proof_positions[proof_key];
++        ++position.first;
++        position.second += inclusive > child ? inclusive - child : 0;
++    }
++};
++thread_local prop_frame * prop_frame::current_prop = nullptr;
++} // namespace anatomy
++extern "C" void lean_anatomy_expr_created(object * e) {
++    if (anatomy::current && !is_scalar(e)) {
++        ++anatomy::data.cpp_expr_created;
++        anatomy::data.cpp_expr_bytes += lean_object_byte_size(e);
++    }
++}
+ static name * g_kernel_fresh = nullptr;
+ static expr * g_dont_care    = nullptr;
+ static name * g_bool_true    = nullptr;
+@@ -466,6 +1217,7 @@
+     If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
+     We also do not cache results. */
+ expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
++    anatomy::reduction anatomy_reduction;
+     scope_rec_depth guard;
+     check_system("type checker: whnf", /* do_check_interrupted */ true);
+
+@@ -502,9 +1254,10 @@
+     case expr_kind::FVar:
+         return whnf_fvar(e, cheap_rec, cheap_proj);
+     case expr_kind::Proj: {
+-        if (auto m = reduce_proj(e, cheap_rec, cheap_proj))
++        if (auto m = reduce_proj(e, cheap_rec, cheap_proj)) {
++            if (anatomy::current) ++anatomy::data.proj;
+             r = whnf_core(*m, cheap_rec, cheap_proj);
+-        else
++        } else
+             r = e;
+         break;
+     }
+@@ -513,6 +1266,7 @@
+         expr f0 = get_app_rev_args(e, args);
+         expr f = whnf_core(f0, cheap_rec, cheap_proj);
+         if (is_lambda(f)) {
++            if (anatomy::current) ++anatomy::data.beta;
+             unsigned m = 1;
+             unsigned num_args = args.size();
+             while (is_lambda(binding_body(f)) && m < num_args) {
+@@ -524,6 +1278,7 @@
+                           cheap_rec, cheap_proj);
+         } else if (f == f0) {
+             if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
++                if (anatomy::current) ++anatomy::data.iota;
+                 if (m_diag) {
+                     auto f = get_app_fn(e);
+                     if (is_constant(f))
+@@ -540,6 +1295,7 @@
+         break;
+     }
+     case expr_kind::Let:
++        if (anatomy::current) ++anatomy::data.zeta;
+         r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
+         break;
+     }
+@@ -565,6 +1321,18 @@
+ optional<expr> type_checker::unfold_definition_core(expr const & e) {
+     if (is_constant(e)) {
+         if (auto d = is_delta(e)) {
++            auto anatomy_start = anatomy::clock::now();
++            if (anatomy::current) ++anatomy::data.delta_calls;
++            auto anatomy_record = [&] {
++                if (!anatomy::current) return;
++                auto elapsed = std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
++                anatomy::data.delta_ns += elapsed;
++                if (anatomy::mode() == 2) {
++                    auto & p = anatomy::data.delta_heads[d->get_name().to_string()];
++                    ++p.first;
++                    p.second += elapsed;
++                }
++            };
+             levels const & us = const_levels(e);
+             unsigned len = length(us);
+             if (m_diag) {
+@@ -572,13 +1340,18 @@
+             }
+             if (len > 0) {
+                 auto it = m_st->m_unfold.find(e);
+-                if (it != m_st->m_unfold.end())
++                if (it != m_st->m_unfold.end()) {
++                    anatomy_record();
+                     return some_expr(it->second);
++                }
+                 expr result = instantiate_value_lparams(*d, us);
+                 m_st->m_unfold.insert(mk_pair(e, result));
++                anatomy_record();
+                 return some_expr(result);
+             } else {
+-                return some_expr(instantiate_value_lparams(*d, us));
++                expr result = instantiate_value_lparams(*d, us);
++                anatomy_record();
++                return some_expr(result);
+             }
+         }
+     }
+@@ -601,16 +1374,16 @@
+     }
+ }
+
++expr mk_bool_true();
++expr mk_bool_false();
++
+ static expr * g_lean_reduce_bool = nullptr;
+-static expr * g_lean_reduce_nat  = nullptr;
++static expr * g_lean_reduce_nat = nullptr;
+
+ namespace ir {
+ object * run_boxed_kernel(environment const & env, options const & opts, name const & fn, unsigned n, object **args);
+ }
+
+-expr mk_bool_true();
+-expr mk_bool_false();
+-
+ optional<expr> reduce_native(environment const & env, expr const & e) {
+     if (!is_app(e)) return none_expr();
+     expr const & arg = app_arg(e);
+@@ -734,6 +1507,7 @@
+
+ /** \brief Put expression \c t in weak head normal form */
+ expr type_checker::whnf(expr const & e) {
++    anatomy::reduction anatomy_reduction;
+     // Do not cache easy cases
+     switch (e.kind()) {
+     case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
+@@ -791,10 +1565,18 @@
+     do {
+         optional<expr> var_s_type;
+         if (binding_domain(t) != binding_domain(s)) {
++            auto inst_start = anatomy::clock::now();
+             var_s_type = instantiate_rev(binding_domain(s), subst.size(), subst.data());
+             expr var_t_type = instantiate_rev(binding_domain(t), subst.size(), subst.data());
+-            if (!is_def_eq(var_t_type, *var_s_type))
+-                return false;
++            if (anatomy::current) {
++                anatomy::data.instantiations += 2;
++                anatomy::data.instantiation_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - inst_start).count();
++            }
++            {
++                anatomy::path_scope path("binder_domain", subst.size(), 1, anatomy::Quick);
++                if (!is_def_eq(var_t_type, *var_s_type)) return false;
++            }
++            if (anatomy::current) ++anatomy::data.pi_domains;
+         }
+         if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
+             // free variable is used inside t or s
+@@ -807,8 +1589,15 @@
+         t = binding_body(t);
+         s = binding_body(s);
+     } while (t.kind() == k && s.kind() == k);
+-    return is_def_eq(instantiate_rev(t, subst.size(), subst.data()),
+-                     instantiate_rev(s, subst.size(), subst.data()));
++    auto inst_start = anatomy::clock::now();
++    expr body_t = instantiate_rev(t, subst.size(), subst.data());
++    expr body_s = instantiate_rev(s, subst.size(), subst.data());
++    if (anatomy::current) {
++        anatomy::data.instantiations += 2;
++        anatomy::data.instantiation_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - inst_start).count();
++    }
++    anatomy::path_scope path("binder_body", subst.size(), 1, anatomy::Quick);
++    return is_def_eq(body_t, body_s);
+ }
+
+ bool type_checker::is_def_eq(level const & l1, level const & l2) {
+@@ -861,9 +1650,12 @@
+ /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
+     This method is used to implement an optimization in the method \c is_def_eq. */
+ bool type_checker::is_def_eq_args(expr t, expr s) {
++    unsigned i = get_app_num_args(t);
+     while (is_app(t) && is_app(s)) {
+-        if (!is_def_eq(app_arg(t), app_arg(s)))
+-            return false;
++        {
++            anatomy::path_scope path("argument", i ? --i : 0, 0, anatomy::Delta);
++            if (!is_def_eq(app_arg(t), app_arg(s))) return false;
++        }
+         t = app_fn(t);
+         s = app_fn(s);
+     }
+@@ -877,6 +1669,7 @@
+         if (!is_pi(s_type))
+             return false;
+         expr new_s  = mk_lambda(binding_name(s_type), binding_domain(s_type), mk_app(s, mk_bvar(0)), binding_info(s_type));
++        anatomy::path_scope path("eta", 0, anatomy::Eta);
+         if (!is_def_eq(t, new_s))
+             return false;
+         return true;
+@@ -894,11 +1687,15 @@
+     constructor_val f_val = f_info.to_constructor_val();
+     if (get_app_num_args(s) != f_val.get_nparams() + f_val.get_nfields()) return false;
+     if (!is_non_rec_structure(env(), f_val.get_induct())) return false;
+-    if (!is_def_eq(infer_type(t), infer_type(s))) return false;
++    {
++        anatomy::path_scope path("field-type", 0, anatomy::EtaStructure);
++        if (!is_def_eq(infer_type(t), infer_type(s))) return false;
++    }
+     buffer<expr> s_args;
+     get_app_args(s, s_args);
+     for (unsigned i = f_val.get_nparams(); i < s_args.size(); i++) {
+         expr proj = mk_proj(f_val.get_induct(), i - f_val.get_nparams(), t);
++        anatomy::path_scope path("field", i - f_val.get_nparams(), 0, anatomy::EtaStructure);
+         if (!is_def_eq(proj, s_args[i])) return false;
+     }
+     return true;
+@@ -909,14 +1706,17 @@
+     \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
+     Return false otherwise. */
+ bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
++    if (anatomy::current) ++anatomy::data.app_attempts;
+     if (is_app(t) && is_app(s)) {
+         buffer<expr> t_args;
+         buffer<expr> s_args;
+         expr t_fn = get_app_args(t, t_args);
+         expr s_fn = get_app_args(s, s_args);
++        anatomy::path_scope fn_path("function", 0, anatomy::Application);
+         if (is_def_eq(t_fn, s_fn) && t_args.size() == s_args.size()) {
+             unsigned i = 0;
+             for (; i < t_args.size(); i++) {
++                anatomy::path_scope path("argument", i, 0, anatomy::Application);
+                 if (!is_def_eq(t_args[i], s_args[i]))
+                     break;
+             }
+@@ -930,24 +1730,36 @@
+ /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
+     Return false otherwise. */
+ lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
++    if (anatomy::current) ++anatomy::data.proof_attempts;
+     // Proof irrelevance support for Prop (aka Type.{0})
+     expr t_type = infer_type(t);
+     if (!is_prop(t_type))
+         return l_undef;
++    if (anatomy::current) ++anatomy::data.proof_prop;
+     expr s_type = infer_type(s);
+-    return to_lbool(is_def_eq(t_type, s_type));
++    auto anatomy_start = anatomy::clock::now();
++    anatomy::prop_frame anatomy_prop(t_type, s_type, t, s);
++    anatomy::path_scope path("proposition_type", 2, anatomy::Proof);
++    bool result = is_def_eq(t_type, s_type);
++    if (anatomy::current)
++        anatomy::data.proof_prop_ns += std::chrono::duration_cast<anatomy::ns>(anatomy::clock::now() - anatomy_start).count();
++    return to_lbool(result);
+ }
+
+ bool type_checker::failed_before(expr const & t, expr const & s) const {
++    bool found;
+     if (hash(t) < hash(s)) {
+-        return m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end();
++        found = m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end();
+     } else if (hash(t) > hash(s)) {
+-        return m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
++        found = m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
+     } else {
+-        return
++        found =
+             m_st->m_failure.find(mk_pair(t, s)) != m_st->m_failure.end() ||
+             m_st->m_failure.find(mk_pair(s, t)) != m_st->m_failure.end();
+     }
++    if (anatomy::current)
++        ++(found ? anatomy::data.cache_failure : anatomy::data.cache_failure_miss);
++    return found;
+ }
+
+ void type_checker::cache_failure(expr const & t, expr const & s) {
+@@ -958,15 +1770,19 @@
+ }
+
+ bool type_checker::succeeded_before(expr const & t, expr const & s) const {
++    bool found;
+     if (hash(t) < hash(s)) {
+-        return m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end();
++        found = m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end();
+     } else if (hash(t) > hash(s)) {
+-        return m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
++        found = m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
+     } else {
+-        return
++        found =
+             m_st->m_success.find(mk_pair(t, s)) != m_st->m_success.end() ||
+             m_st->m_success.find(mk_pair(s, t)) != m_st->m_success.end();
+     }
++    if (anatomy::current)
++        ++(found ? anatomy::data.cache_success : anatomy::data.cache_success_miss);
++    return found;
+ }
+
+ void type_checker::cache_success(expr const & t, expr const & s) {
+@@ -1035,6 +1851,7 @@
+                 // If they are, then t_n and s_n must be definitionally equal, and we can
+                 // skip the delta-reduction step.
+                 if (!failed_before(t_n, s_n)) {
++                    anatomy::path_scope path("lazy_delta", 0, anatomy::Delta);
+                     if (is_def_eq(const_levels(get_app_fn(t_n)), const_levels(get_app_fn(s_n))) &&
+                         is_def_eq_args(t_n, s_n)) {
+                         return reduction_status::DefEqual;
+@@ -1079,6 +1896,7 @@
+     optional<expr> pred_t = is_nat_succ(t);
+     optional<expr> pred_s = is_nat_succ(s);
+     if (pred_t && pred_s) {
++        anatomy::path_scope path("lazy_delta", 0, anatomy::Delta);
+         return to_lbool(is_def_eq_core(*pred_t, *pred_s));
+     }
+     return l_undef;
+@@ -1092,8 +1910,10 @@
+
+         if ((!has_fvar(t_n) && !has_fvar(s_n)) || m_eager_reduce) {
+             if (auto t_v = reduce_nat(t_n)) {
++                anatomy::path_scope path("lazy_delta", 0, anatomy::Delta);
+                 return to_lbool(is_def_eq_core(*t_v, s_n));
+             } else if (auto s_v = reduce_nat(s_n)) {
++                anatomy::path_scope path("lazy_delta", 1, anatomy::Delta);
+                 return to_lbool(is_def_eq_core(t_n, *s_v));
+             }
+         }
+@@ -1131,9 +1951,11 @@
+             if (to_proj_idx(idx, i)) {
+                 if (auto t = reduce_proj_core(t_n, sname, i)) {
+                 if (auto s = reduce_proj_core(s_n, sname, i)) {
++                    anatomy::path_scope path("projection", i, 0, anatomy::Projection);
+                     return is_def_eq_core(*t, *s);
+                 }}
+             }
++            anatomy::path_scope path("projection", 0, 0, anatomy::Projection);
+             return is_def_eq_core(t_n, s_n);
+         }
+     }
+@@ -1144,6 +1966,7 @@
+
+ lbool type_checker::try_string_lit_expansion_core(expr const & t, expr const & s) {
+     if (is_string_lit(t) && is_app(s) && app_fn(s) == *g_string_mk) {
++        anatomy::path_scope path("fallback", 0, anatomy::StringExpansion);
+         return to_lbool(is_def_eq_core(whnf(string_lit_to_constructor(t)), s));
+     }
+     return l_undef;
+@@ -1165,14 +1988,17 @@
+     constructor_val ctor_val = env().get(ctor_name).to_constructor_val();
+     if (ctor_val.get_nfields() != 0)
+         return false;
++    anatomy::path_scope path("fallback", 0, anatomy::UnitLike);
+     return is_def_eq_core(t_type, infer_type(s));
+ }
+
+ bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
++    anatomy::comparison anatomy_scope(t, s);
++    auto anatomy_finish = [&](bool result, anatomy::branch b) { anatomy_scope.finish(result, b); return result; };
+     scope_rec_depth guard;
+     check_system("is_definitionally_equal", /* do_check_interrupted */ true);
+     lbool r = quick_is_def_eq(t, s);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Quick);
+
+     // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
+     // we fully reduce `t` and check whether result is `s`.
+@@ -1180,7 +2006,7 @@
+     // proof terms of the form `Eq.refl true : decide p = true`.
+     if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
+         if (is_constant(whnf(t), *g_bool_true)) {
+-            return true;
++            return anatomy_finish(true, anatomy::Reflection);
+         }
+     }
+
+@@ -1193,56 +2019,60 @@
+     */
+     expr t_n = whnf_core(t, false, true);
+     expr s_n = whnf_core(s, false, true);
++    anatomy::mprwe_reduction("initial_whnf", anatomy::current, t, t_n, s, s_n);
+
+     if (!is_eqp(t_n, t) || !is_eqp(s_n, s)) {
+         r = quick_is_def_eq(t_n, s_n);
+-        if (r != l_undef) return r == l_true;
++        if (r != l_undef) return anatomy_finish(r == l_true, anatomy::QuickReduced);
+     }
+
+     r = is_def_eq_proof_irrel(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Proof);
+
+     /* NB: `lazy_delta_reduction` updates `t_n` and `s_n` even when returning `l_undef`. */
+     r = lazy_delta_reduction(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::Delta);
+
+     if (is_constant(t_n) && is_constant(s_n) && const_name(t_n) == const_name(s_n) &&
+         is_def_eq(const_levels(t_n), const_levels(s_n)))
+-        return true;
++        return anatomy_finish(true, anatomy::SameConstant);
+
+     if (is_fvar(t_n) && is_fvar(s_n) && fvar_name(t_n) == fvar_name(s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::SameFVar);
+
+     if (is_proj(t_n) && is_proj(s_n) && proj_sname(t_n) == proj_sname(s_n) && proj_idx(t_n) == proj_idx(s_n)) {
+         expr t_c = proj_expr(t_n);
+         expr s_c = proj_expr(s_n);
+         if (lazy_delta_proj_reduction(t_c, s_c, proj_sname(t_n), proj_idx(t_n)))
+-            return true;
++            return anatomy_finish(true, anatomy::Projection);
+     }
+
+     // Invoke `whnf_core` again, but now using `whnf` to reduce projections.
+     expr t_n_n = whnf_core(t_n);
+     expr s_n_n = whnf_core(s_n);
+-    if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n))
+-        return is_def_eq_core(t_n_n, s_n_n);
++    anatomy::mprwe_reduction("projection_whnf", anatomy::current, t_n, t_n_n, s_n, s_n_n);
++    if (!is_eqp(t_n_n, t_n) || !is_eqp(s_n_n, s_n)) {
++        anatomy::path_scope path("whnf", 0, anatomy::Reduced);
++        return anatomy_finish(is_def_eq_core(t_n_n, s_n_n), anatomy::Reduced);
++    }
+
+     // At this point, t_n and s_n are in weak head normal form (modulo metavariables and proof irrelevance)
+     if (is_def_eq_app(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::Application);
+
+     if (try_eta_expansion(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::Eta);
+
+     if (try_eta_struct(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::EtaStructure);
+
+     r = try_string_lit_expansion(t_n, s_n);
+-    if (r != l_undef) return r == l_true;
++    if (r != l_undef) return anatomy_finish(r == l_true, anatomy::StringExpansion);
+
+     if (is_def_eq_unit_like(t_n, s_n))
+-        return true;
++        return anatomy_finish(true, anatomy::UnitLike);
+
+-    return false;
++    return anatomy_finish(false, anatomy::Failure);
+ }
+
+ bool type_checker::is_def_eq(expr const & t, expr const & s) {

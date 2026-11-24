@@ -184,3 +184,11 @@ lineage remain Unknown.
    expensive.
 10. Remaining exact measurements require the additional instrumentation
     described in §8.6.
+
+## Audit note
+
+The exact `tensorObj` field replay and the R2/R3 first-branch observation
+support the demonstrated field and branch facts. The regular-alias result is
+an API-level counterfactual, not an M0-preserving cut; the standalone field
+remains expensive. The `leftDerived₂` component shares and strict M1 lineage
+remain **U**, so no component-level claim is promoted to D or S.

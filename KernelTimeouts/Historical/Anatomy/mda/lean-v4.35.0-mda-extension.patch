@@ -1,0 +1,179 @@
+--- a/src/kernel/type_checker.cpp
++++ b/src/kernel/type_checker.cpp
+@@ -21,6 +21,8 @@
+ #include <cstdint>
+ #include <set>
+ #include <tuple>
++#include <sstream>
++#include <fstream>
+ #include "lean/mimalloc.h"
+ #include "runtime/interrupt.h"
+ #include "runtime/sstream.h"
+@@ -63,6 +65,30 @@
+     if (is_proj(f)) return proj_sname(f).to_string() + ".proj";
+     return std::to_string(static_cast<unsigned>(e.kind()));
+ }
++static std::string projection(expr const & e) {
++    expr const & f = get_app_fn(e);
++    if (!is_proj(f)) return "";
++    std::string structure = proj_sname(f).to_string();
++    std::string index = proj_idx(f).to_std_string();
++    static std::map<std::pair<std::string, std::string>, std::string> fields = [] {
++        std::map<std::pair<std::string, std::string>, std::string> result;
++        char const * path = std::getenv("LEAN_DEFEQ_MDA_FIELDS");
++        if (!path || !*path) return result;
++        std::ifstream input(path);
++        std::string s, i, field;
++        while (input >> s >> i >> field) result[{s, i}] = field;
++        return result;
++    }();
++    auto it = fields.find({structure, index});
++    return structure + "." + (it == fields.end() ? "field" : it->second) + ":" + index;
++}
++static std::string source_head(expr const & e) {
++    expr const & f = get_app_fn(e);
++    if (!is_constant(f)) return "unknown";
++    std::string n = const_name(f).to_string();
++    char const * prefix = std::getenv("LEAN_DEFEQ_MDA_SOURCE_PREFIX");
++    return prefix && *prefix && n.rfind(prefix, 0) == 0 ? n : "unknown";
++}
+ static std::string proposition_head(expr e) {
+     while (is_pi(e)) e = binding_body(e);
+     return head(e);
+@@ -84,6 +110,12 @@
+     std::string left, right;
+     std::string path;
+ };
++struct mda_call {
++    uint64_t id = 0, parent = 0, exclusive = 0, subtree = 0;
++    uint64_t calls = 0, m1_calls = 0;
++    std::string label, branch, kind, component, path;
++    std::string left, right, left_expr, right_expr, source, projection_left, projection_right, delta;
++};
+ struct totals {
+     uint64_t calls = 0, successes = 0, failures = 0, max_depth = 0;
+     uint64_t whnf_calls = 0, whnf_ns = 0, delta_calls = 0, delta_ns = 0;
+@@ -132,6 +164,9 @@
+     std::vector<top_call> top;
+     std::map<std::string, std::pair<uint64_t, uint64_t>> path_cost;
+     std::map<std::string, std::pair<std::string, std::string>> path_heads;
++    struct mda_cost { uint64_t calls = 0, exclusive = 0, m1_calls = 0, m1_exclusive = 0; };
++    std::map<std::tuple<std::string, std::string, std::string>, mda_cost> mda_groups;
++    std::vector<mda_call> mda_top;
+     uint64_t mprwe_raw_events = 0;
+     uint64_t mprwe_trace_calls = 0, mprwe_trace_exclusive = 0;
+     uint64_t mprwe_root_exclusive = 0;
+@@ -209,6 +244,22 @@
+ static uint64_t root_id() { return active_root_id; }
+ static thread_local uint64_t mprwe_global_events = 0;
+ static unsigned depth_bucket(unsigned n) { return std::min(n, 4096u); }
++static unsigned mda_limit() {
++    static unsigned n = [] {
++        char const * p = std::getenv("LEAN_DEFEQ_MDA_TOP");
++        return p && *p ? static_cast<unsigned>(std::strtoul(p, nullptr, 10)) : 20u;
++    }();
++    return std::min(n, 100u);
++}
++static std::string mda_quote(std::string const & s) {
++    std::string out;
++    for (char c : s) {
++        if (c == '\\' || c == '"') out += '\\';
++        if (c == '\n' || c == '\r' || c == '\t') out += ' ';
++        else out += c;
++    }
++    return out;
++}
+ static std::FILE * mprwe_stream() {
+     static std::FILE * f = [] {
+         char const * p = std::getenv("LEAN_DEFEQ_MPRWE_EVENTS");
+@@ -320,8 +371,27 @@
+ }
+ static void mprwe_aggregate() {
+     std::FILE * f = mprwe_stream();
+-    if (!f || data.calls < 1000) return;
++    if (!f || data.calls < 1000 || (mprwe_root_filter() && root_id() != mprwe_root_filter())) return;
+     std::lock_guard<std::mutex> lock(mprwe_mutex);
++    for (auto const & item : data.mda_groups) {
++        std::fprintf(f, "{\"event\":\"mda_group\",\"root\":%llu,\"gateway\":\"%s\",\"source\":\"%s\",\"component\":\"%s\",\"calls\":%llu,\"exclusive_ns\":%llu,\"m1_calls\":%llu,\"m1_exclusive_ns\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), mda_quote(std::get<0>(item.first)).c_str(),
++            mda_quote(std::get<1>(item.first)).c_str(), mda_quote(std::get<2>(item.first)).c_str(),
++            static_cast<unsigned long long>(item.second.calls), static_cast<unsigned long long>(item.second.exclusive),
++            static_cast<unsigned long long>(item.second.m1_calls), static_cast<unsigned long long>(item.second.m1_exclusive));
++    }
++    for (auto const & item : data.mda_top) {
++        std::fprintf(f, "{\"event\":\"mda_top\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"label\":\"%s\",\"branch\":\"%s\",\"kind\":\"%s\",\"component\":\"%s\",\"path\":\"%s\",\"left\":\"%s\",\"right\":\"%s\",\"left_expr\":\"%s\",\"right_expr\":\"%s\",\"source\":\"%s\",\"projection_left\":\"%s\",\"projection_right\":\"%s\",\"delta\":\"%s\",\"exclusive_ns\":%llu,\"subtree_exclusive_ns\":%llu,\"subtree_calls\":%llu,\"subtree_m1_calls\":%llu}\n",
++            static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(item.id),
++            static_cast<unsigned long long>(item.parent), item.label.c_str(), item.branch.c_str(),
++            item.kind.c_str(), mda_quote(item.component).c_str(), mda_quote(item.path).c_str(),
++            mda_quote(item.left).c_str(), mda_quote(item.right).c_str(),
++            mda_quote(item.left_expr).c_str(), mda_quote(item.right_expr).c_str(), mda_quote(item.source).c_str(),
++            mda_quote(item.projection_left).c_str(), mda_quote(item.projection_right).c_str(),
++            mda_quote(item.delta).c_str(), static_cast<unsigned long long>(item.exclusive),
++            static_cast<unsigned long long>(item.subtree), static_cast<unsigned long long>(item.calls),
++            static_cast<unsigned long long>(item.m1_calls));
++    }
+     for (auto const & item : data.mprwe_cost) {
+         auto const & cost = item.second;
+         std::fprintf(f, "{\"event\":\"aggregate\",\"root\":%llu,\"provenance\":\"%s\",\"path\":\"%s\",\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"traced_calls\":%llu,\"traced_exclusive_ns\":%llu,\"total_calls\":%llu,\"root_exclusive_ns\":%llu}\n",
+@@ -485,9 +555,11 @@
+     expr const & right;
+     clock::time_point start;
+     uint64_t id = 0, child_ns = 0, reduce_ns = 0;
++    uint64_t subtree_calls = 1, subtree_m1_calls = 0, subtree_exclusive = 0;
+     unsigned depth = 0, children = 0;
+     unsigned category = 0;
+     std::string path;
++    std::string source;
+     uint64_t left_hash = 0, right_hash = 0, parent_div_left_hash = 0, parent_div_right_hash = 0;
+     divergence_info divergence;
+     std::string provenance = "Unclassified";
+@@ -557,6 +629,10 @@
+             if (data.path_heads.find(path) == data.path_heads.end())
+                 data.path_heads.emplace(path, std::make_pair(head(t), head(s)));
+         }
++        source = source_head(t);
++        if (source == "unknown") source = source_head(s);
++        if (source == "unknown" && parent) source = parent->source;
++        subtree_m1_calls = provenance == "M1" ? 1 : 0;
+         if (parent) ++parent->children;
+         data.max_depth = std::max<uint64_t>(data.max_depth, depth);
+         ++data.depth_hist[depth_bucket(depth)];
+@@ -603,6 +679,38 @@
+         ++data.label_fanout[{provenance, children}];
+         data.comparison_exclusive += exclusive;
+         data.reduction_exclusive += reduce_ns;
++        subtree_exclusive += exclusive;
++        if (parent) {
++            parent->subtree_calls += subtree_calls;
++            parent->subtree_m1_calls += subtree_m1_calls;
++            parent->subtree_exclusive += subtree_exclusive;
++        }
++        if (mprwe_stream()) {
++            std::string component = child_kind;
++            if (child_index_valid) component += "[" + std::to_string(child_index) + "]";
++            auto & row = data.mda_groups[{branch_names[initiating_branch], source, component}];
++            ++row.calls;
++            row.exclusive += exclusive;
++            if (provenance == "M1") { ++row.m1_calls; row.m1_exclusive += exclusive; }
++            if (mda_limit() && (data.mda_top.size() < mda_limit() ||
++                subtree_exclusive > data.mda_top.back().subtree)) {
++                mda_call c;
++                c.id = id; c.parent = parent ? parent->id : 0; c.exclusive = exclusive;
++                c.subtree = subtree_exclusive; c.calls = subtree_calls; c.m1_calls = subtree_m1_calls;
++                c.label = provenance; c.branch = branch_names[initiating_branch]; c.kind = child_kind;
++                c.component = component; c.path = path; c.left = head(left); c.right = head(right);
++                std::ostringstream lout, rout;
++                lout << left; rout << right;
++                c.left_expr = lout.str(); c.right_expr = rout.str();
++                c.source = source; c.projection_left = projection(left);
++                c.projection_right = projection(right); c.delta = exposed_definition;
++                data.mda_top.push_back(std::move(c));
++                std::sort(data.mda_top.begin(), data.mda_top.end(), [](mda_call const & a, mda_call const & b) {
++                    return a.subtree > b.subtree;
++                });
++                if (data.mda_top.size() > mda_limit()) data.mda_top.pop_back();
++            }
++        }
+         if (category == 1) {
+             data.dependent_comparison_exclusive += exclusive;
+             data.dependent_reduction_exclusive += reduce_ns;
