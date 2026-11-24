@@ -20,9 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
--- Canonical transport keeps the coordinate in the effective object fixed.
 -- Canonical transport keeps the coordinate in the effective object fixed (Stacks, Tag 023V).
--- Sheaf.AlgebraicGeometry.FiniteEtaleDescentDataExistence.
 private noncomputable def pullbackDatum {Y Y' : Scheme.{u}} (g : Y' ⟶ Y)
     (P : Over Y) : Over.DescentDatum g (Over.mk (pullback.snd P.hom g)) where
   transport f₁ f₂ h z :=

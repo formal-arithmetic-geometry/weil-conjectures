@@ -73,7 +73,7 @@ def ArbitraryBaseFiniteP1Splitting.trace {A : Type (u + 1)} [CommRing A] {N : �
       (Y := ordinaryFiniteUnit A S)
 
 /-- The two arbitrary-base exchange squares, for the splitting and its trace.
-All comparisons are the canonical arrows of the recorded dependency nodes. -/
+All comparisons are the canonical base-change arrows. -/
 def ArbitraryBaseFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
     (d : ∀ (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))),

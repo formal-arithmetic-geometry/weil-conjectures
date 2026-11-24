@@ -31,8 +31,9 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- For a morphism of schemes, the pullback of a finite type module is of finite type
-(Stacks, Tag 01B6). The second conjunct records that the pullback of any epimorphism from
-`free (ULift (Fin n))` over an open `V` is an epimorphism over `f⁻¹ V`. -/
+(Stacks, Tag 01B6). The second conjunct: for every epimorphism from `free (ULift (Fin n))`
+onto `G` over an open `V`, there is an epimorphism of the same rank onto the pullback over
+`f⁻¹ V`. -/
 theorem tensorPullback_isFiniteType (X Y : Scheme.{u}) (f : X ⟶ Y) (G : Y.Modules)
     [G.IsFiniteType] :
     ((tensorPullback f).obj G).IsFiniteType ∧
