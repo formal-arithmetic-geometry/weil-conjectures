@@ -10,11 +10,21 @@ public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import WeilConjectures.LinearAlgebra.ExteriorLocalizationKernelTorsion
 
-/-! # Localization of exterior powers
+/-!
+# Localization of exterior powers
 
-Source: Stacks Project, Tag 0C6F, Lemma 10.13.6 (localization of tensor, symmetric,
-and exterior algebras), restricted to the homogeneous part of degree n.
-(blueprint: new-v2-generic-exterior-power-localization). -/
+If `f : M → N` is a localization at `S` and `A` is the localization of `R` at `S`, then a map
+`⋀^n_R M → ⋀^n_A N` compatible with `f` on pure wedges is a localization at `S`.
+
+## Implementation details
+
+Surjectivity up to denominators is proved by span induction from pure wedges, and the equality
+axiom of module localization comes from `exists_smul_eq_zero_of_localized_wedge`.
+
+## References
+
+* [Stacks Project, Tag 0C6F](https://stacks.math.columbia.edu/tag/0C6F)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -72,22 +82,7 @@ private theorem localizedWedge_surj
     exact (g.map_smul r x).symm
 
 /-- A map characterized on pure wedges localizes exterior powers when the underlying
-module map and coefficient ring are localizations.
-
-Source: Stacks Project, Tag 0C6F, Lemma 10.13.6; the degree-n exterior component.
-(blueprint: new-v2-generic-exterior-power-localization).
-
-Proof: Every element of S acts invertibly on the target, since it is an
-A-module and A is the localization of R. A pure wedge in N has a denominator
-obtained by multiplying the denominators of its entries. The wedge formula
-for g then expresses that denominator multiple as an image. Span induction
-extends the fraction expression to sums (multiply their denominators) and to
-A-scalars (express the scalar itself as a fraction in R). Finally, apply
-exists_smul_eq_zero_of_localized_wedge to x-y whenever g(x)=g(y); it supplies
-the equality axiom of module localization. These three properties are exactly
-IsLocalizedModule. The argument includes n=0, with empty denominator product 1,
-and 0 in S. No freeness or finiteness is used.
--/
+module map and coefficient ring are localizations. -/
 theorem isLocalizedModule_of_pure_wedge
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     (S : Submonoid R) [IsLocalization S A]

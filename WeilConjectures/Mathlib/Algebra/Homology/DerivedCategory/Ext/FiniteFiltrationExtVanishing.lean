@@ -10,8 +10,9 @@ public import Mathlib.CategoryTheory.Subobject.Lattice
 /-!
 # Ext vanishing along a finite subobject filtration
 
-Source: latest blueprint, rational Ext proof, contravariant filtration induction.
-(blueprint: lem-rational-ext-finite-filtration).
+If `Ext^q(-, N)` vanishes on the successive quotients of a finite filtration of `M` by
+subobjects, then `Ext^q(M, N)` vanishes; similarly for `Ext^q(M, -)` and a finite filtration
+of `N`.
 -/
 
 @[expose] public noncomputable section
@@ -36,17 +37,8 @@ private theorem subsingleton_of_source_zero {C : Type u} [Category.{v} C] [Abeli
     rw [← mk₀_id_comp x, h.eq_of_src (𝟙 A) 0, mk₀_zero, zero_comp]
   exact ⟨fun x y ↦ (hz x).trans (hz y).symm⟩
 
-/-- Ext from an object vanishes if it vanishes from each quotient of a finite filtration.
-Source: latest blueprint, rational Ext proof, source filtration induction, and Mathlib's
-contravariant Ext exact sequence (blueprint: lem-rational-ext-finite-filtration).
-
-Proof: The bottom subobject has zero underlying object, so its Ext is zero in every
-degree. At a successor the subobject inclusion is monic and its cokernel gives a short
-exact sequence. Exactness of Ext in the first variable makes every class in the middle
-come from the quotient, because its image in the previous subobject is zero. The
-quotient's Ext is zero, so the middle class is zero. Induct over the finite index. The
-top subobject is isomorphic to the whole object, and Ext transports along this iso.
-This proof includes filtrations of length zero. -/
+/-- If `0 = F₀ ≤ ⋯ ≤ Fₙ = M` is a finite filtration of `M` by subobjects and `Ext^q(-, N)`
+vanishes on each successive quotient `Fₐ₊₁ / Fₐ`, then `Ext^q(M, N)` vanishes. -/
 theorem finiteSubobjectFiltration {C : Type u} [Category.{v} C] [Abelian C]
     [HasExt.{w} C] (M N : C) (q n : ℕ) (F : Fin (n + 1) → Subobject M)
     (hstep : ∀ a : Fin n, F a.castSucc ≤ F a.succ)
@@ -72,12 +64,8 @@ theorem finiteSubobjectFiltration {C : Type u} [Category.{v} C] [Abelian C]
   exact subsingleton_of_source_iso
     (Subobject.isoOfEq _ _ htop ≪≫ Subobject.underlyingIso (𝟙 M)) (hF _)
 
-/-- Isomorphic models for the successive quotients suffice in finite Ext devissage.
-Source: the same finite-filtration argument, transporting the quotient groups along
-isomorphisms (blueprint: lem-rational-ext-finite-filtration).
-
-Proof: transport each quotient's Ext vanishing along its specified source isomorphism,
-then apply the finite subobject filtration theorem. -/
+/-- Variant of `finiteSubobjectFiltration` in which the successive quotients of the filtration
+of `M` are given up to isomorphism. -/
 theorem finiteSubobjectFiltrationOfIso {C : Type u} [Category.{v} C] [Abelian C]
     [HasExt.{w} C] (M N : C) (q n : ℕ) (F : Fin (n + 1) → Subobject M)
     (hstep : ∀ a : Fin n, F a.castSucc ≤ F a.succ)
@@ -107,14 +95,9 @@ private theorem subsingleton_of_target_zero {C : Type u} [Category.{v} C] [Abeli
     rw [← comp_mk₀_id x, h.eq_of_tgt (𝟙 A) 0, mk₀_zero, comp_zero]
   exact ⟨fun x y ↦ (hz x).trans (hz y).symm⟩
 
-/-- Ext into an object vanishes if it vanishes into every finite-filtration quotient.
-Source: latest blueprint, rational Ext proof, covariant target devissage
-(blueprint: lem-rational-ext-finite-filtration).
-
-Proof: The bottom underlying object is zero. At a successor, the image of a middle
-Ext class in the quotient Ext vanishes. Covariant exactness lifts the class to Ext
-into the preceding subobject, which vanishes by induction. The given isomorphisms
-transport quotient vanishing, and the top subobject is isomorphic to N. -/
+/-- If `0 = F₀ ≤ ⋯ ≤ Fₙ = N` is a finite filtration of `N` by subobjects and `Ext^q(M, -)`
+vanishes on objects isomorphic to the successive quotients `Fₐ₊₁ / Fₐ`, then `Ext^q(M, N)`
+vanishes. -/
 theorem finiteTargetSubobjectFiltrationOfIso {C : Type u} [Category.{v} C] [Abelian C]
     [HasExt.{w} C] (M N : C) (q n : ℕ) (F : Fin (n + 1) → Subobject N)
     (hstep : ∀ a : Fin n, F a.castSucc ≤ F a.succ)

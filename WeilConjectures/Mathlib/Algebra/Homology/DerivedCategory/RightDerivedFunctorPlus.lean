@@ -67,8 +67,7 @@ noncomputable def mapHomotopyCategoryPlusSingleFunctorQhObjIso (G : C₀ ⥤ D) 
 variable (F : C ⥤ D) [F.Additive] [EnoughInjectives C]
 
 /-- The right derived functor of `F` sends an injective object `I` placed in degree `n` to
-`F.obj I` placed in degree `n`: the single complex `I[n]` is a bounded below complex of
-injective objects, on which the unit of the right derived functor is an isomorphism. -/
+`F.obj I` placed in degree `n`. -/
 noncomputable def rightDerivedFunctorPlusObjSingleFunctorIso (n : ℤ) (I : C) [Injective I] :
     F.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C n).obj I) ≅
       (DerivedCategory.Plus.singleFunctor D n).obj (F.obj I) :=
@@ -112,8 +111,7 @@ theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_si
 
 /-- For an additive functor `F` out of an abelian category with enough injectives, the right
 derived functor `R⁺F` preserves the property of being cohomologically `≥ n`: if `K` has no
-homology in degrees `< n`, neither has `R⁺F(K)`, since `K` is represented by a complex of
-injective objects concentrated in degrees `≥ n`. -/
+homology in degrees `< n`, neither has `R⁺F(K)`. -/
 theorem CategoryTheory.Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
     {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
@@ -230,8 +228,7 @@ noncomputable instance rightDerivedFunctorPlusCommShift : F.rightDerivedFunctorP
 /-- The right derived functor `RF : D⁺(C) ⥤ D⁺(D)` of an additive functor `F` (for `C` with
 enough injectives) is triangulated, for the shift isomorphism transported along
 `Functor.rightDerivedFunctorPlusIsoInjectiveObject` from `F` applied termwise to complexes of
-injectives. In particular so is the derived direct image `Ru_*` on bounded below derived
-categories of étale sheaves. (blueprint: `lem-weil-pbc-derived-direct-image-triangulated`) -/
+injectives. -/
 instance isTriangulated_rightDerivedFunctorPlus : F.rightDerivedFunctorPlus.IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
   exact Functor.isTriangulated_of_iso F.rightDerivedFunctorPlusIsoInjectiveObject.symm
@@ -249,9 +246,7 @@ lemma rightDerivedFunctorPlusIsoInjectiveObject_inv_app (Y : DerivedCategory.Plu
 
 open DerivedCategory.Plus in
 /-- The unit `F.mapHomotopyCategoryPlus ⋙ Qh ⟶ Qh ⋙ F.rightDerivedFunctorPlus` of the right
-derived functor commutes with the shifts. On complexes of injective objects, this is the
-definition of the shift structure on `F.rightDerivedFunctorPlus`; in general, every bounded
-below complex maps to a complex of injective objects by a quasi-isomorphism. -/
+derived functor commutes with the shifts. -/
 instance commShift_rightDerivedFunctorPlusUnit :
     NatTrans.CommShift F.rightDerivedFunctorPlusUnith ℤ := by
   let inj := (InjectiveObject.ι C).mapHomotopyCategoryPlus

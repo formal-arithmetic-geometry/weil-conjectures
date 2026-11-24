@@ -99,10 +99,8 @@ universe w v u
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
-/-- Blueprint `lem-pur-concentrated-complex-shift`: Complexes with cohomology in a single degree
-
-*Concentration in one degree.* If the homology objects `H^i(K)` vanish for every `i ≠ n`, then
-the truncation triangles identify `K` with `H^n(K)[-n]`, the object `H^n(K)` placed in
+/-- **Complexes with homology in a single degree.** If the homology objects `H^i(K)` vanish for
+every `i ≠ n`, then `K` is isomorphic to `H^n(K)[-n]`, the object `H^n(K)` placed in
 degree `n`. -/
 theorem nonempty_iso_singleFunctor_obj_homologyFunctor_obj (K : DerivedCategory C) (n : ℤ)
     (hK : ∀ i, i ≠ n → IsZero ((homologyFunctor C i).obj K)) :
