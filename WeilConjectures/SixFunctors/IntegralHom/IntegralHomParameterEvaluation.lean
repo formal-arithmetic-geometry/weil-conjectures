@@ -33,7 +33,6 @@ map precomposed with the signed chain exchange.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-set_option linter.unusedSectionVars false
 universe d t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom

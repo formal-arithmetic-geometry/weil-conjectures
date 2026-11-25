@@ -30,9 +30,6 @@ pullback schemes are expensive for the kernel, and an abstract statement is inst
 
 @[expose] public section
 
--- several lemmas do not need all the instances of the section variables
-set_option linter.unusedSectionVars false
-
 universe u
 
 open CategoryTheory Category Limits
@@ -144,6 +141,7 @@ variable (M : CategoryTheory.Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condense
     (T.levelFunctor Λ j).obj M ⟶ (infFunctor Λ ginf).obj M :=
   (unitTransport Λ (T.π j) (T.π_g j) (T.π_g j)).app M
 
+omit [WeaklyEtale ginf] in
 lemma forget_map_transport {j j' : T.J} (h : j ≤ j') :
     (Mod.forget _).map (T.transport Λ M h) =
       (T.g j)_*[Ab.{u + 1}].map ((upperStarForgetIso Λ (T.g j)).inv.app M) ≫
@@ -160,6 +158,7 @@ lemma forget_map_infTransport (j : T.J) :
   unfold infTransport
   exact forget_map_unitTransport_app_eq Λ (T.π j) (T.g j) (T.π_g j) M
 
+omit [WeaklyEtale ginf] in
 lemma transport_refl (j : T.J) : T.transport Λ M (le_refl j) = 𝟙 _ := by
   apply (Mod.forget _).map_injective
   rw [forget_map_transport, upperStarLowerStarHom_congr _ (T.t_refl j),
@@ -169,6 +168,7 @@ lemma transport_refl (j : T.J) : T.transport Λ M (le_refl j) = 𝟙 _ := by
     CategoryTheory.Functor.map_id]
   rfl
 
+omit [WeaklyEtale ginf] in
 lemma transport_comp {j j' j'' : T.J} (h₁ : j ≤ j') (h₂ : j' ≤ j'') :
     T.transport Λ M h₁ ≫ T.transport Λ M h₂ = T.transport Λ M (h₁.trans h₂) := by
   apply (Mod.forget _).map_injective
@@ -198,6 +198,7 @@ noncomputable def moduleDiagram : T.J ⥤
   map_id j := T.transport_refl Λ M j
   map_comp _ _ := (T.transport_comp Λ M _ _).symm
 
+omit [WeaklyEtale ginf] in
 /-- The transition maps of the module diagram. -/
 lemma moduleDiagram_map {j j' : T.J} (f : j ⟶ j') :
     (T.moduleDiagram Λ M).map f = T.transport Λ M (leOfHom f) := rfl
