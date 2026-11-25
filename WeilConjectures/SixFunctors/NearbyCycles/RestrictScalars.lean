@@ -107,7 +107,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ
 variable {Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
-set_option maxHeartbeats 1000000 in
 -- the pasted squares are matched against the pullback exchanges
 /-- **Restriction of scalars of an invertible pullback exchange**: for a morphism of models
 `φ : M ⟶ N`, if the pullback exchange `α_φ : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` with coefficients `Λ'` is
