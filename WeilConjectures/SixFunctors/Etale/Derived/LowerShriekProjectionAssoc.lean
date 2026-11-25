@@ -31,7 +31,7 @@ by zero `i_!`, using the monoidal coherence of their ingredients proved in
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal`.
 
 It is the formal input of the compatibility of the projection formula with finite reduction
-of the coefficients, blueprint `sk-prop-sf-pf-reduction`.
+of the coefficients.
 -/
 
 @[expose] public section

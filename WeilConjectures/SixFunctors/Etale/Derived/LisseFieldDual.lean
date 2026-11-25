@@ -18,11 +18,17 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 # Duals of complexes with finite locally constant cohomology
 
 Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on a scheme `T` whose
-cohomology sheaves are finite locally constant (blueprint
-`lemma-smooth-morphisms-locally-constant-sheaves`). Then the derived dual `C^∨ = RHom(C, λ_T)` has
+cohomology sheaves are finite locally constant. Then the derived dual `C^∨ = RHom(C, λ_T)` has
 finite locally constant cohomology sheaves `H^q(C^∨) ≅ 𝓗om(H^{-q}(C), λ_T)`, and for every morphism
 `v : T' ⟶ T` the canonical comparison `Lv^*(C^∨) ⟶ (Lv^* C)^∨`
 (`AlgebraicGeometry.Etale.coefficientDualComparison`) is an isomorphism.
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_coefficientDual`
+- `AlgebraicGeometry.Etale.isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf`
+
+## Implementation details
 
 A finite locally constant sheaf `E` over a field is flat and dualizable with dual `[E, λ]`
 (`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`), hence so is `E`
@@ -34,11 +40,6 @@ cohomology sequences split into isomorphisms, without any compatibility of the c
 The dévissage is carried out for a general coefficient category and a class of dualizable sheaves
 (`AlgebraicGeometry.Etale.DualizableSheafClass`), and only specialised to `ModuleCat λ` at the
 end: see the implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_coefficientDual`
-- `AlgebraicGeometry.Etale.isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf`
 -/
 
 @[expose] public section
@@ -610,11 +611,8 @@ lemma dualizableSheafClass_isFiniteLocallyConstantSheaf (hΛ : IsField Λ) :
 
 variable {T : Scheme.{u}}
 
-/-- Blueprint `lemma-smooth-morphisms-locally-constant-sheaves`: Duals of complexes with finite
-locally constant cohomology.
-
-Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on `T` whose cohomology
-sheaves are finite locally constant. Then the cohomology sheaves of the derived dual
+/-- Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on `T` whose
+cohomology sheaves are finite locally constant. Then the cohomology sheaves of the derived dual
 `C^∨ = RHom(C, λ_T)` are finite locally constant, with `H^q(C^∨) ≅ 𝓗om(H^{-q}(C), λ_T)`. -/
 theorem isFiniteLocallyConstantSheaf_homology_coefficientDual (hΛ : IsField Λ)
     (C : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a b : ℤ)
@@ -635,12 +633,9 @@ theorem isFiniteLocallyConstantSheaf_homology_coefficientDual (hΛ : IsField Λ)
     ((_root_.DerivedCategory.homologyFunctor _ (-q)).obj C))
   exact ⟨IsFiniteLocallyConstantSheaf.of_iso e.some.symm, e⟩
 
-/-- Blueprint `lemma-smooth-morphisms-locally-constant-sheaves`: Duals of complexes with finite
-locally constant cohomology.
-
-Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on `T` whose cohomology
-sheaves are finite locally constant. For every morphism of schemes `v : T' ⟶ T`, the canonical
-morphism `Lv^*(C^∨) ⟶ (Lv^* C)^∨` is an isomorphism. -/
+/-- Let `λ` be a finite field and `C` a bounded complex of étale `λ`-sheaves on `T` whose
+cohomology sheaves are finite locally constant. For every morphism of schemes `v : T' ⟶ T`, the
+canonical morphism `Lv^*(C^∨) ⟶ (Lv^* C)^∨` is an isomorphism. -/
 theorem isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf (hΛ : IsField Λ)
     (C : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a b : ℤ)
     [C.IsGE a] [C.IsLE b]

@@ -14,10 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unitor
 For a cartesian square `g' ≫ f = f' ≫ g` with `f'` quasi-compact, the base change map
 `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`)
 intertwines the tensor maps `Rf^! M ⊗ᴸ Lf^* N ⟶ Rf^!(M ⊗ᴸ N)` of `f` and of `f'`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), the co-projection maps of
-`lem-pur-coprojection`. This is `CategoryTheory.Adjunction.projectionTensorMap_mateEquiv` for the
-compatibility of the projection map with base change
-(`AlgebraicGeometry.Etale.projectionMap_rightDerivedLowerShriekBaseChangeMap`).
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), the co-projection maps. This is
+`CategoryTheory.Adjunction.projectionTensorMap_mateEquiv` for the compatibility of the projection
+map with base change (`AlgebraicGeometry.Etale.projectionMap_rightDerivedLowerShriekBaseChangeMap`).
 
 ## Main statements
 

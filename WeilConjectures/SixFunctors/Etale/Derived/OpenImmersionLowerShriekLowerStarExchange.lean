@@ -52,9 +52,15 @@ key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
   `AlgebraicGeometry.Etale.refinementLowerShriekBaseChangeDerivedIso` to be restated as a special
   case of `AlgebraicGeometry.Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso`.
 
-## Blueprint
+## Implementation details
 
-This file constructs the map of `thm:open-proper-interchange` on unbounded derived categories.
+That the exchange map is an isomorphism for torsion coefficients is checked after `D(j^*)` and
+after `D(i^*)`, with `i` the closed complement of `j` (open–closed conservativity). After
+`D(j^*)` it is formal: the mate of the exchange map under `j_! ⊣ j^*` and `j'_! ⊣ j'^*` is the
+conjugate of the base change isomorphism, and the units of these adjunctions are isomorphisms.
+After `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
+base change for `g''` along `i`, since the pullback of `j'_!` to the closed complement of `j'`
+vanishes.
 -/
 
 @[expose] public section
@@ -92,8 +98,7 @@ transformation `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*`. It is the mate, along the 
 ```
 
 The 2-cell goes from the path `Rg'_*` then `Dj_!` (left, then bottom) to the path `Dj'_!` then
-`Rg''_*` (top, then right). (blueprint: the map of `thm:open-proper-interchange`, on unbounded
-derived categories) -/
+`Rg''_*` (top, then right). -/
 noncomputable def openImmersionLowerShriekLowerStarExchange (hsq : IsPullback g' j' j g'') :
     R((g')_*[A]) ⋙ D((j)_!open[A]) ⟶ D((j')_!open[A]) ⋙ R((g'')_*[A]) :=
   (mateEquiv (mapDerivedUpperStarLowerStarAdjunction A g')
@@ -133,19 +138,7 @@ torsion as an additive group, then for a cartesian square `g' ≫ j = j' ≫ g''
 `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on the unbounded derived categories `D(-_ét, Λ)` is an
 isomorphism.
 
-The statement fails for general coefficients, which is why `Λ` is torsion here.
-
-Proof: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)` and
-after `D(i^*)` (open–closed conservativity).
-- After `D(j^*)` it is formal: the mate of the exchange map under `j_! ⊣ j^*` and `j'_! ⊣ j'^*`
-  is the conjugate of the base change isomorphism, and the units of `j_! ⊣ j^*` and
-  `j'_! ⊣ j'^*` are isomorphisms (`CategoryTheory.isIso_map_mateEquiv_app_of_isIso`).
-- After `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
-  base change for `g''` along `i`, which is
-  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`, since
-  the pullback of `j'_!` to the closed complement of `j'` vanishes.
-
-(blueprint: unbounded analogue of `thm:open-proper-interchange`) -/
+The statement fails for general coefficients, which is why `Λ` is torsion here. -/
 theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
     (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
     IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) := by

@@ -68,7 +68,7 @@ comparison isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for 
   isomorphisms `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationIso`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` is only available for torsion
   coefficients, where it rests on unbounded proper base change, so `Ex_!` is defined there
-  only. The blueprint defines `Ex_!` on bounded below derived categories; a version built from
+  only. A version of `Ex_!` on bounded below derived categories built from
   `derivedBaseChangeMapPlus` and `rightDerivedLowerShriekOfCompactificationPlusIso` would only
   need bounded below proper base change.
 -/
@@ -113,9 +113,7 @@ square `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered
   Rp_*    ⇓ Ex_*  Rp'_*
    ↓               ↓
   D(Y) --Lg^*---> D(Y')
-```
-
-(blueprint: `sk-def-sf-exchanges`) -/
+``` -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
@@ -155,9 +153,7 @@ cartesian square `g' ≫ f = f' ≫ g`, for torsion coefficients: the map
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` for the
 chosen compactification of `f`, followed by the comparison isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` between the derived lower shriek of `f'`
-computed with its base change and the one computed with the chosen compactification of `f'`.
-That comparison is an isomorphism by proper base change, hence the torsion coefficients.
-(blueprint: `sk-def-sf-exchanges`) -/
+computed with its base change and the one computed with the chosen compactification of `f'`. -/
 noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶

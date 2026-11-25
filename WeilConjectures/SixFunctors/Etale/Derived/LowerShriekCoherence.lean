@@ -17,7 +17,7 @@ compactifications of `f`, with `u = r.hom : c.Z ⟶ d.Z`, whose square over `X` 
 (this holds automatically when `c` is dense, by
 `AlgebraicGeometry.Compactification.Refinement.isPullback_of_isSchemeTheoreticallyDominant`).
 This file proves the coherence of the comparisons between the derived lower shrieks attached
-to different compactifications (blueprint `proposition-construction-independence-rf-shriek`):
+to different compactifications:
 
 * on `d.Z`, the canonical map `α_u : j_{d!} K ⟶ Ru_* j_{c!} K` is an isomorphism for torsion
   coefficients, it is the identity for the identity refinement and it is transitive under
@@ -44,8 +44,7 @@ is an isomorphism, the identity for the identity refinement and transitive.
 - `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekIso`: the isomorphism `α_u` along
   an arbitrary refinement.
 - `AlgebraicGeometry.Etale.refinementOpenImmersionLowerShriekRestrictionIso`: the isomorphism
-  `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` of blueprint
-  `proposition-construction-independence-rf-shriek--7`, whose inverse is adjoint to `α_u`.
+  `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K`, whose inverse is adjoint to `α_u`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso`: the
   comparison `Rf_!(d) ≅ Rf_!(c)` along an arbitrary refinement.
 
@@ -67,6 +66,13 @@ is an isomorphism, the identity for the identity refinement and transitive.
   `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp`:
   identity and transitivity for arbitrary refinements.
 
+## Implementation details
+
+The setting is the bounded below derived category of étale sheaves with finite coefficients,
+on which the comparisons are isomorphisms on all objects (rather than a localization of
+`Dctf` on the pro-étale site). That `α_u` is an isomorphism for a refinement with cartesian
+square rests on proper base change for `u`, checked on the open `X` and on its closed
+complement.
 -/
 
 @[expose] public section
@@ -107,8 +113,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refi
 /-- The comparison `α_u : j_{d!} K ⟶ Ru_* j_{c!} K` on bounded below derived categories
 attached to a refinement `r : c.Refinement d`, with `u = r.hom`, whose square over `X` is
 cartesian: the unit of `D⁺u^* ⊣ R⁺u_*` at `j_{d!} K` followed by `Ru_*` of the inverse of the
-base change isomorphism `u^* j_{d!} ≅ j_{c!}`. (blueprint:
-`proposition-construction-independence-rf-shriek`) -/
+base change isomorphism `u^* j_{d!} ≅ j_{c!}`. -/
 noncomputable def refinementOpenImmersionLowerShriekComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     haveI : ((r.hom)_*[A]).PreservesInjectiveObjects :=
@@ -126,8 +131,7 @@ noncomputable def refinementOpenImmersionLowerShriekComparison
 
 /-- The comparison of candidates `Rf_!(d) ⟶ Rf_!(c)` along a refinement is `R(d.g)_*` of the
 comparison `α_u` of `refinementOpenImmersionLowerShriekComparison`, followed by the
-composition isomorphism `Ru_* ⋙ R(d.g)_* ≅ R(c.g)_*`. (blueprint:
-`proposition-construction-independence-rf-shriek`) -/
+composition isomorphism `Ru_* ⋙ R(d.g)_* ≅ R(c.g)_*`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusComparison_eq
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     haveI : ((r.hom)_*[A]).PreservesInjectiveObjects :=
@@ -144,8 +148,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusComparison_eq
     refinementOpenImmersionLowerShriekComparison]
 
 /-- **Identity law for `α_u`**: for the identity refinement of `c`, the comparison
-`α : j_{c!} ⟶ R(𝟙)_* j_{c!}` is the inverse of the identity isomorphism `R(𝟙)_* ≅ 𝟭`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+`α : j_{c!} ⟶ R(𝟙)_* j_{c!}` is the inverse of the identity isomorphism `R(𝟙)_* ≅ 𝟭`. -/
 theorem refinementOpenImmersionLowerShriekComparison_id
     (hcart : IsPullback c.i (𝟙 X) (Compactification.Refinement.id c).hom c.i) :
     refinementOpenImmersionLowerShriekComparison A (Compactification.Refinement.id c) hcart =
@@ -165,7 +168,7 @@ theorem refinementOpenImmersionLowerShriekComparison_id
 /-- **Transitivity of `α_u`**: for refinements `r : c.Refinement d` and `s : d.Refinement e`
 with cartesian squares over `X`, the comparison attached to `r.comp s` is the composite of
 `α_s`, of `R(s.hom)_*` applied to `α_r` and of the composition isomorphism of the derived
-pushforwards. (blueprint: `proposition-construction-independence-rf-shriek`) -/
+pushforwards. -/
 theorem refinementOpenImmersionLowerShriekComparison_comp
     {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) (hs : IsPullback d.i (𝟙 X) s.hom e.i) :
@@ -227,16 +230,9 @@ section Torsion
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: proper pushforward of extension
-by zero.
-
-**The comparison `α_u : j_{d!} K ⟶ Ru_* j_{c!} K` is an isomorphism** for torsion coefficients:
-this is `isIso_derivedPlus_unit_app_openImmersionLowerShriek`, which rests on proper base change
-for `u = r.hom` and checks the claim on the open `X` and on its closed complement, as in the
-blueprint. Here the square of `u` over `X` is cartesian, i.e. `u⁻¹(X) = X`; for an arbitrary
-refinement the comparison is `refinementOpenImmersionLowerShriekIso`, an isomorphism built from
-this one through a dense refinement. (blueprint:
-`proposition-construction-independence-rf-shriek`) -/
+/-- **Proper pushforward of extension by zero.** For a refinement whose square over `X` is
+cartesian, the comparison `α_u : j_{d!} K ⟶ Ru_* j_{c!} K` is an isomorphism for torsion
+coefficients. -/
 instance isIso_refinementOpenImmersionLowerShriekComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     IsIso (refinementOpenImmersionLowerShriekComparison (ModuleCat.{u + 1} Λ) r hcart) := by
@@ -321,8 +317,7 @@ compactifications `c` and `d` of `f`, with refinements `r : e.Refinement c` and
 `Rf_!(c) ≅ Rf_!(d)` obtained by comparing both with `e` is
 `rightDerivedLowerShriekOfCompactificationPlusIso`, the one obtained through the common
 refinement `Compactification.inf c d`. The proof compares both with the dense common refinement
-`Compactification.inf e (Compactification.inf c d)`, out of which refinements are unique.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+`Compactification.inf e (Compactification.inf c d)`, out of which refinements are unique. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq
     {c d e : Compactification f} (r : e.Refinement c) (s : e.Refinement d)
     (hr : IsPullback e.i (𝟙 X) r.hom c.i) (hs : IsPullback e.i (𝟙 X) s.hom d.i) :
@@ -348,8 +343,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq
         ((Compactification.infFst e e').comp s))]
 
 /-- For a refinement `r : c.Refinement d` whose square over `X` is cartesian, the isomorphism
-`Rf_!(c) ≅ Rf_!(d)` is the inverse of the comparison along `r`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+`Rf_!(c) ≅ Rf_!(d)` is the inverse of the comparison along `r`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq_symm {c d : Compactification f}
     (r : c.Refinement d) (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
     rightDerivedLowerShriekOfCompactificationPlusIso Λ c d =
@@ -362,9 +356,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq_symm {c d : Compacti
   ext : 1
   simp [rightDerivedLowerShriekOfCompactificationPlusComparison_id]
 
-/-- The isomorphism `Rf_!(c) ≅ Rf_!(c)` is the identity. (blueprint:
-`proposition-construction-independence-rf-shriek`)
--/
+/-- The isomorphism `Rf_!(c) ≅ Rf_!(c)` is the identity. -/
 @[simp]
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_refl (c : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusIso Λ c c = Iso.refl _ := by
@@ -376,8 +368,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusIso_refl (c : Compactificat
 
 /-- **The cocycle condition**: for three compactifications `c₁`, `c₂`, `c₃` of `f`, the
 isomorphisms `Rf_!(c₁) ≅ Rf_!(c₂) ≅ Rf_!(c₃)` compose to `Rf_!(c₁) ≅ Rf_!(c₃)`. The proof
-compares all three with one common refinement.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+compares all three with one common refinement. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_trans (c₁ c₂ c₃ : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusIso Λ c₁ c₂ ≪≫
         rightDerivedLowerShriekOfCompactificationPlusIso Λ c₂ c₃ =
@@ -397,8 +388,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusIso_trans (c₁ c₂ c₃ :
   ext : 1
   simp
 
-/-- The isomorphism `Rf_!(d) ≅ Rf_!(c)` is the inverse of `Rf_!(c) ≅ Rf_!(d)`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+/-- The isomorphism `Rf_!(d) ≅ Rf_!(c)` is the inverse of `Rf_!(c) ≅ Rf_!(d)`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_symm (c d : Compactification f) :
     (rightDerivedLowerShriekOfCompactificationPlusIso Λ c d).symm =
       rightDerivedLowerShriekOfCompactificationPlusIso Λ d c := by
@@ -420,8 +410,7 @@ and independence of the common refinement for arbitrary refinements. -/
 
 /-- The comparison `Rf_!(d) ≅ Rf_!(c)` along an arbitrary refinement `r : c.Refinement d`:
 the comparison along `v.comp r` followed by the inverse of the comparison along `v`, for the
-dense refinement `v = Compactification.infFst c c` of `c`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+dense refinement `v = Compactification.infFst c c` of `c`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationPlusRefinementIso
     (r : c.Refinement d) :
     Rf_!(d)[ModuleCat.{u + 1} Λ]+ ≅ Rf_!(c)[ModuleCat.{u + 1} Λ]+ :=
@@ -433,8 +422,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationPlusRefinementIso
 
 /-- Along a refinement whose square over `X` is cartesian, the comparison
 `rightDerivedLowerShriekOfCompactificationPlusRefinementIso` is
-`rightDerivedLowerShriekOfCompactificationPlusComparison`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+`rightDerivedLowerShriekOfCompactificationPlusComparison`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_hom (r : c.Refinement d)
     (hr : IsPullback c.i (𝟙 X) r.hom d.i) :
     (rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ r).hom =
@@ -446,8 +434,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_hom (r : c.Re
 /-- **Independence of the common refinement, for arbitrary refinements**: for any common
 refinement `e` of `c` and `d`, with arbitrary refinements `r : e.Refinement c` and
 `s : e.Refinement d`, the isomorphism `Rf_!(c) ≅ Rf_!(d)` obtained by comparing both with `e`
-is `rightDerivedLowerShriekOfCompactificationPlusIso`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+is `rightDerivedLowerShriekOfCompactificationPlusIso`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso
     {c d e : Compactification f} (r : e.Refinement c) (s : e.Refinement d) :
     rightDerivedLowerShriekOfCompactificationPlusIso Λ c d =
@@ -461,7 +448,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso
   simp [rightDerivedLowerShriekOfCompactificationPlusRefinementIso]
 
 /-- **Identity law for arbitrary refinements**: the comparison along the identity refinement
-is the identity. (blueprint: `proposition-construction-independence-rf-shriek`) -/
+is the identity. -/
 @[simp]
 theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_id (c : Compactification f) :
     rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ
@@ -474,7 +461,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_id (c : Compa
   simp
 
 /-- The comparison along an arbitrary refinement `r : c.Refinement d` is the inverse of the
-isomorphism `Rf_!(c) ≅ Rf_!(d)`. (blueprint: `proposition-construction-independence-rf-shriek`) -/
+isomorphism `Rf_!(c) ≅ Rf_!(d)`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_eq (r : c.Refinement d) :
     rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ r =
       (rightDerivedLowerShriekOfCompactificationPlusIso Λ c d).symm := by
@@ -484,8 +471,7 @@ theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_eq (r : c.Ref
   simp
 
 /-- **Transitivity for arbitrary refinements**: the comparison along a composite `r.comp s`
-of refinements is the composite of the two comparisons, in reverse order.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+of refinements is the composite of the two comparisons, in reverse order. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp
     {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) :
     rightDerivedLowerShriekOfCompactificationPlusRefinementIso Λ (r.comp s) =
@@ -494,16 +480,12 @@ theorem rightDerivedLowerShriekOfCompactificationPlusRefinementIso_comp
   simp only [rightDerivedLowerShriekOfCompactificationPlusRefinementIso_eq,
     ← Iso.trans_symm, rightDerivedLowerShriekOfCompactificationPlusIso_trans]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`: independence of the
-compactification and the cocycle condition.
-
-For compactifications `c`, `d` of a quasi-compact `f`, the isomorphism
-`φ_{d,c} = rightDerivedLowerShriekOfCompactificationPlusIso Λ c d : Rf_!(c) ≅ Rf_!(d)` is
-obtained from the refinement comparisons `ρ` through *any* common refinement `e` whose
-refinement maps have cartesian squares over `X` (e.g. any dense common refinement):
-`φ_{d,c} = ρ_s⁻¹ ∘ ρ_r`; moreover `φ_{c,c} = id` and `φ_{c₃,c₂} ∘ φ_{c₂,c₁} = φ_{c₃,c₁}`.
-The blueprint works with `Loc(Dctf)` on the pro-étale site; the repository's setting for this
-subsection is the bounded below derived category of étale sheaves with finite coefficients. -/
+/-- **Independence of the compactification and the cocycle condition.** For compactifications `c`,
+`d` of a quasi-compact `f`, the isomorphism
+`φ_{d,c} = rightDerivedLowerShriekOfCompactificationPlusIso Λ c d : Rf_!(c) ≅ Rf_!(d)` is obtained
+from the refinement comparisons `ρ` through *any* common refinement `e` whose refinement maps have
+cartesian squares over `X` (e.g. any dense common refinement): `φ_{d,c} = ρ_s⁻¹ ∘ ρ_r`; moreover
+`φ_{c,c} = id` and `φ_{c₃,c₂} ∘ φ_{c₂,c₁} = φ_{c₃,c₁}`. -/
 theorem rightDerivedLowerShriekOfCompactificationPlusIso_coherence :
     (∀ {c d e : Compactification f} (r : e.Refinement c) (s : e.Refinement d)
         (hr : IsPullback e.i (𝟙 X) r.hom c.i) (hs : IsPullback e.i (𝟙 X) s.hom d.i),
@@ -714,8 +696,7 @@ instance isIso_refinementOpenImmersionLowerShriekComparisonAux (u : c.Refinement
 coefficients. It is computed through the dense refinement `w = Compactification.infFst c c`
 as `α_{w.comp u}` followed by the inverse of `R⁺u_* α_w` (modulo the composition isomorphism),
 and agrees with `refinementOpenImmersionLowerShriekComparison` when the square of `u` over `X`
-is cartesian (`refinementOpenImmersionLowerShriekIso_hom_of_isPullback`).
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+is cartesian (`refinementOpenImmersionLowerShriekIso_hom_of_isPullback`). -/
 noncomputable def refinementOpenImmersionLowerShriekIso (u : c.Refinement d) :
     D+((d.i)_!open[ModuleCat.{u + 1} Λ]) ≅
       D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
@@ -734,8 +715,7 @@ lemma refinementOpenImmersionLowerShriekIso_hom_eq (u : c.Refinement d)
   refinementOpenImmersionLowerShriekComparisonAux_eq Λ u _ _ _ _ _ _ _ _ _ _
 
 /-- For a refinement `u` with cartesian square over `X`, `α_u` is
-`refinementOpenImmersionLowerShriekComparison`. (blueprint:
-`proposition-construction-independence-rf-shriek`) -/
+`refinementOpenImmersionLowerShriekComparison`. -/
 theorem refinementOpenImmersionLowerShriekIso_hom_of_isPullback (u : c.Refinement d)
     (hu : IsPullback c.i (𝟙 X) u.hom d.i) :
     (refinementOpenImmersionLowerShriekIso Λ u).hom =
@@ -760,8 +740,7 @@ lemma refinementOpenImmersionLowerShriekComparison_eq_refinementOpenImmersionLow
   exact refinementOpenImmersionLowerShriekComparisonAux_spec Λ u w hw x hx hxc
 
 /-- **Identity law for `α_u`, arbitrary refinements**: for the identity refinement of `c`,
-`α` is the inverse of the identity isomorphism `R(𝟙)_* ≅ 𝟭`.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+`α` is the inverse of the identity isomorphism `R(𝟙)_* ≅ 𝟭`. -/
 theorem refinementOpenImmersionLowerShriekIso_hom_id (c : Compactification f) :
     (refinementOpenImmersionLowerShriekIso Λ (Compactification.Refinement.id c)).hom =
       Functor.whiskerLeft D+((c.i)_!open[ModuleCat.{u + 1} Λ])
@@ -774,8 +753,7 @@ theorem refinementOpenImmersionLowerShriekIso_hom_id (c : Compactification f) :
 
 /-- **Transitivity of `α_u`, arbitrary refinements**: for refinements `r : c.Refinement d` and
 `s : d.Refinement e`, `α_{r.comp s}` is the composite of `α_s`, of `R(s.hom)_*` applied to `α_r`
-and of the composition isomorphism of the derived pushforwards.
-(blueprint: `proposition-construction-independence-rf-shriek`) -/
+and of the composition isomorphism of the derived pushforwards. -/
 theorem refinementOpenImmersionLowerShriekIso_hom_comp {c d e : Compactification f}
     (r : c.Refinement d) (s : d.Refinement e) :
     (refinementOpenImmersionLowerShriekIso Λ (r.comp s)).hom =
@@ -814,12 +792,9 @@ theorem refinementOpenImmersionLowerShriekIso_hom_comp {c d e : Compactification
   simp only [Functor.map_comp, Category.assoc, hassoc]
   rw [reassoc_of% hnat]
 
-/-- The isomorphism `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` of
-blueprint `proposition-construction-independence-rf-shriek--7`, for an arbitrary refinement
-`u : c.Refinement d`: the restriction to `X` of the inverse of `α_u`
-(`refinementOpenImmersionLowerShriekIso`), followed by the inverse of the unit isomorphism
-`K ≅ (d.i)^* (d.i)_! K`. Its inverse is adjoint to `α_u`
-(`homEquiv_refinementOpenImmersionLowerShriekIso_hom_app`). -/
+/-- The isomorphism `θ_u : (d.i)^* Ru_* (c.i)_! K ≅ K` for an arbitrary refinement
+`u : c.Refinement d`: the restriction to `X` of the inverse of `α_u`, followed by the inverse of
+the unit isomorphism `K ≅ (d.i)^* (d.i)_! K`. -/
 noncomputable def refinementOpenImmersionLowerShriekRestrictionIso (u : c.Refinement d) :
     D+((c.i)_!open[ModuleCat.{u + 1} Λ]) ⋙
         (u.hom)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlus ⋙
@@ -831,8 +806,7 @@ noncomputable def refinementOpenImmersionLowerShriekRestrictionIso (u : c.Refine
       (ModuleCat.{u + 1} Λ) d.i).unit).symm
 
 /-- `α_u` is the adjoint, under `D⁺(d.i)_! ⊣ D⁺(d.i)^*`, of the inverse of
-`θ_u = refinementOpenImmersionLowerShriekRestrictionIso`.
-(blueprint: `proposition-construction-independence-rf-shriek--7`) -/
+`θ_u = refinementOpenImmersionLowerShriekRestrictionIso`. -/
 theorem homEquiv_refinementOpenImmersionLowerShriekIso_hom_app (u : c.Refinement d)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus (ModuleCat.{u + 1} Λ) d.i).homEquiv
@@ -840,11 +814,9 @@ theorem homEquiv_refinementOpenImmersionLowerShriekIso_hom_app (u : c.Refinement
       (refinementOpenImmersionLowerShriekRestrictionIso Λ u).inv.app K := by
   simp [refinementOpenImmersionLowerShriekRestrictionIso, Adjunction.homEquiv_unit]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: the refinement map.
-
-Let `r : c.Refinement d` and `s : d.Refinement e` be refinements of compactifications of a
-quasi-compact `f` whose squares over `X` are cartesian (`u⁻¹(X) = X`, automatic for dense
-compactifications), and let `e_r = α_r : j_{d!} ⟶ Ru_* j_{c!}`
+/-- **The refinement map.** Let `r : c.Refinement d` and `s : d.Refinement e` be refinements of
+compactifications of a quasi-compact `f` whose squares over `X` are cartesian (`u⁻¹(X) = X`,
+automatic for dense compactifications), and let `e_r = α_r : j_{d!} ⟶ Ru_* j_{c!}`
 (`refinementOpenImmersionLowerShriekComparison`). Then:
 
 1. `e_r` is the unique map whose adjoint under `D⁺(d.i)_! ⊣ D⁺(d.i)^*` is the inverse of the
@@ -852,11 +824,7 @@ compactifications), and let `e_r = α_r : j_{d!} ⟶ Ru_* j_{c!}`
   identity;
 2. `e_r` is an isomorphism (for finite coefficients, by proper base change);
 3. `e_{id} = id` (modulo `R(𝟙)_* ≅ 𝟭`) and `e_{r.comp s} = R(s)_*(e_r) ∘ e_s` (modulo
-  `R(r ≫ s)_* ≅ R(s)_* R(r)_*`).
-
-The blueprint works with `Loc(Dctf)` on the pro-étale site; the repository's setting for this
-subsection is the bounded below derived category of étale sheaves with finite coefficients, on
-which `e_r` is an isomorphism on all objects. -/
+  `R(r ≫ s)_* ≅ R(s)_* R(r)_*`). -/
 theorem refinementOpenImmersionLowerShriekComparison_coherence {c d e : Compactification f}
     (r : c.Refinement d) (s : d.Refinement e) (hr : IsPullback c.i (𝟙 X) r.hom d.i)
     (hs : IsPullback d.i (𝟙 X) s.hom e.i) :
