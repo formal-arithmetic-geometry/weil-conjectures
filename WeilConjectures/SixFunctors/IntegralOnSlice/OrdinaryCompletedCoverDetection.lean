@@ -10,7 +10,24 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 import all WeilConjectures.WeilSheaf.Supporting.CompletedCoefficientRingedCoherence
 import Mathlib.CategoryTheory.Sites.LocalProperties
 
-/-! # Ordinary completed-coefficient module pullback -/
+/-! # Ordinary completed-coefficient module pullback
+
+We show that ordinary module restriction to a pro-étale covering family detects
+isomorphisms of modules over the completed coefficient sheaf.
+
+## Implementation details
+
+For a weakly étale chart, `ordinaryPull` is identified with module restriction to the
+localized topos at that chart, via uniqueness of the completed direct ring map and of left
+adjoints. These constructions use sheafification in module universe `max u (t+1)`, since the
+sites have size `t+1`. Isomorphisms are then detected on underlying abelian sheaves.
+
+## References
+
+* [Stacks, Tag 04TQ]
+* [Stacks, Tag 00XZ]
+* [Stacks, Tag 09AE]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -168,24 +185,7 @@ private def chartPullIso
     ordinaryPull l E U.hom ≅ chartRestriction l E U :=
   (ordinaryAdjunction l E U.hom).leftAdjointUniq (chartModuleAdjunction l E U)
 
-/-- Ordinary module restriction to a pro-etale covering family detects isomorphisms.
-Source: Stacks, Sites and Sheaves, Tag 04TQ; localized sites, Tag 00XZ;
-Pro-etale Cohomology, Definition 09AE.
-(blueprint: lem-fix-ordinary-completed-cover-detection).
-Proof: a weakly etale chart identifies its pro-etale topos with the localized topos
-at that chart. Finite constant-sheaf restriction is the identity on constant
-sections. Slice restriction preserves limits; taking the finite-coefficient limit
-therefore identifies the completed rings and every projection. Uniqueness of the
-specified completed direct ring map and then uniqueness of left adjoints identify
-ordinaryPull with module restriction to the chart topos. These constructions use
-sheafification in module universe max u (t+1), since the sites have size t+1.
-The given cover of the terminal object pulls back to a cover of each test object,
-so these charts cover the top of the site. Forget module scalars to abelian sheaves.
-The cover-local sheaf isomorphism criterion makes the underlying sheaf map invertible.
-Its inverse is linear: apply the original linear map to the asserted scalar identity
-and use its injectivity and linearity. Thus the original module map is invertible.
-Empty members contribute only zero restrictions; all members together cover S.
-This assertion is only about module sheaves, with no derived morphisms. -/
+/-- Ordinary module restriction to a pro-etale covering family detects isomorphisms. -/
 theorem ordinaryCompletedCoverDetection
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

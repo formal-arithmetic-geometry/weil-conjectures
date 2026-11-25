@@ -11,9 +11,23 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Comparison of the two normalized integral pullback augmentations
 
-Source: Stacks Project, Tags 03EL, 06YY and 0941, and the coefficient-line
-pullback convention of the orientation datum.
-(blueprint: lem-sf-integral-pullback-augmentation-ambient)
+We show that the explicit scalar/root pullback augmentation agrees with the ambient completion
+unit under the canonical comparison of ordinary module inverse images, using the
+coefficient-line pullback convention of the orientation datum.
+
+## Implementation details
+
+The structural ring maps of the two module direct images agree, so uniqueness of left
+adjoints gives an isomorphism of the ordinary module pullbacks with commuting unit square.
+Extended termwise to complexes, this reduces the claim to the coordinate equations of
+`existsUnique_pullbackAugmentation` (via `pullTowerModel` and
+`pullOperationUnit_coordinates`).
+
+## References
+
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -61,27 +75,7 @@ private theorem cocone_hom_ext {A : Type*} [Category* A] [Abelian A]
 
 /-- The explicit scalar/root pullback augmentation is the ambient completion unit
 under the canonical comparison of ordinary module inverse images. No completeness
-or flatness assumption on the complex is involved.
-
-Source: Stacks Project, Tags 03EL, 06YY and 0941; the normalization conventions of
-`theorem-smooth-purity-all-admissible-coefficients`, arbitrary scheme pullback.
-(blueprint: lem-sf-integral-pullback-augmentation-ambient)
-
-Proof: The projection characterizations of `sfCompletedCoefficientMap` and
-`IntegralAmbient.coefficientMap` identify the structural ring maps of the two
-module direct images. They therefore have the same right adjoint. Uniqueness of
-left adjoints gives an isomorphism of their ordinary module pullbacks whose
-adjunction-unit square commutes. Extend that isomorphism termwise to complexes.
-The unit square says that each source section inserted by `moduleSection` maps
-to the corresponding `IntegralAmbient.pullSection`. The quotient augmentation
-sends this section to its scalar tensor with one. By `pullTowerModel`, the tower
-comparison sends that tensor to the published finite pullback generator. Thus
-the composite on the right has exactly the first-component equations of
-`existsUnique_pullbackAugmentation`. Its second component is zero by
-`pullOperationUnit_coordinates`, also after precomposition by the comparison.
-The two coordinate equalities and the mapping-cocone identity give equality of
-the actual chain maps. The argument uses adjunctions and projections, so also applies
-to the empty scheme and to zero complexes. -/
+or flatness assumption on the complex is involved. -/
 theorem integralPullbackAugmentation_ambient
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y) :

@@ -45,12 +45,17 @@ import Mathlib.Algebra.Field.ZMod
 /-!
 # Residue reduction controls integral Tor amplitude
 
-Source: Weil conjectures blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-`lemma-bounds-finite-reductions--2`, order 2133 (blueprint: lemma-bounds-finite-reductions--2).
-
 The finite reduction API uses index `n` for exponent `n+1`. In particular index `0`
 is the residue reduction. Equality of the object predicates states equality of the
 corresponding full subcategories of the same completed integral derived category.
+
+## Implementation details
+
+Each finite reduction is represented by a cochain complex with a K-flat resolution;
+`integralReduction_residue_homology_zero_iff` identifies its residue cohomology with that of
+the first reduction, and the pro-étale residue Tor test gives the amplitude. The common
+cohomology interval in the definition of integral constructibility then gives the integral
+finite-Tor condition; the reverse inclusion is definitional.
 -/
 
 @[expose] public section
@@ -78,19 +83,7 @@ private noncomputable def residueTestDatum (p : ℕ) (hp : p.Prime) : FiniteFiel
 
 /-- Bounds on residue cohomology give the same Tor interval at every finite level,
 and the integral constructible and integral finite-Tor full subcategories coincide.
-This does not identify constructibility with site-perfectness.
-
-Source: blueprint order 2133 (blueprint: lemma-bounds-finite-reductions--2).
-Proof:
-1. Represent each finite reduction by a cochain complex and choose a K-flat resolution.
-Transport its constructibility along the representative isomorphism. The coefficient
-comparison `integralReduction_residue_homology_zero_iff` identifies its residue cohomology with
-that of the first reduction. The support hypothesis makes it zero outside [a,b].
-The pro-etale residue Tor test gives amplitude [a,b]; transport it to the reduction.
-2. The common cohomology interval in the definition of integral constructibility gives
-one interval for every reduction, exactly the integral finite-Tor condition.
-3. The reverse inclusion is definitional, and extensionality gives equality of predicates.
--/
+This does not identify constructibility with site-perfectness. -/
 theorem integral_residue_tor
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]

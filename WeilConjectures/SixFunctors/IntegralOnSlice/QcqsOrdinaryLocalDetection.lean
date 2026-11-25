@@ -15,7 +15,22 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Local detection for ordinary derived restriction
 
-Source: Stacks Tags 09AH, 09BM, 04TQ and 05RT.
+We show that ordinary derived restriction is conservative along isomorphisms of schemes,
+jointly conservative for an open--closed pair, and jointly conservative on a covering family.
+
+## Implementation details
+
+Ordinary restriction is exact for immersions, weakly étale charts and their composites, so
+the chosen left derived pullbacks are identified with `mapDerivedCategory`. Joint reflection
+of isomorphisms by the module restrictions then passes to the unbounded derived categories,
+since exact restriction commutes with every cohomology sheaf.
+
+## References
+
+* [Stacks, Tag 09AH]
+* [Stacks, Tag 09BM]
+* [Stacks, Tag 04TQ]
+* [Stacks, Tag 05RT]
 -/
 
 @[expose] public noncomputable section
@@ -107,22 +122,7 @@ private theorem ordinaryExactJoint
 
 /-- Ordinary derived restriction is conservative on an isomorphic scheme,
 jointly conservative for an open--closed pair, and conservative on a covering family.
-These are tests for arbitrary derived morphisms.
-
-Source: Stacks Tags 09AH, 09BM, 04TQ and 05RT
-(blueprint: lem-fix-qcqs-ordinary-local-detection).
-Proof: ordinary module pullbacks respect identity and composition by uniqueness
-of their ringed adjunctions. The stated ordinary restriction model theorem gives
-exactness for immersions, weakly etale charts, and their composites. Exactness
-identifies the chosen left derived pullbacks with mapDerivedCategory; these
-comparisons and exact derived composition give the required composite arrows.
-An isomorphism of schemes gives mutually inverse restrictions.
-For an open--closed pair use joint reflection for ordinary module restrictions.
-For a cover use joint reflection for ordinary module restrictions to its charts.
-In each case the existing theorem for a jointly reflecting family of exact functors
-passes reflection to the unbounded derived categories: exact restriction commutes
-with every cohomology sheaf, and isomorphisms are detected on all cohomology.
-Transport through the composition comparisons proves the criteria as stated. -/
+These are tests for arbitrary derived morphisms. -/
 theorem qcqsOrdinaryLocalDetection
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
