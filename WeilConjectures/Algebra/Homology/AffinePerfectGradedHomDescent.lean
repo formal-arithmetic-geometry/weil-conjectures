@@ -99,7 +99,6 @@ end ModuleCat
 
 namespace CochainComplex
 
-set_option linter.unusedVariables false in
 /-- Descend a degree-minus-one graded family without imposing chain-map or homotopy equations. -/
 theorem affine_perfect_gradedHom_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
@@ -113,7 +112,7 @@ theorem affine_perfect_gradedHom_descent
       ((((ModuleCat.extendScalars (colimit.ι F i₀).hom).mapHomologicalComplex
       (.up ℤ)).obj E₀).X m ⟶ (((ModuleCat.extendScalars (colimit.ι F i₀).hom).mapHomologicalComplex
       (.up ℤ)).obj K₀).X n)) :
-    ∃ (j : Set.Ici i₀) (hij : i ≤ j)
+    ∃ (j : Set.Ici i₀) (_hij : i ≤ j)
       (t : ∀ m n : ℤ, (ComplexShape.up ℤ).Rel n m →
         ((((ModuleCat.extendScalars (F.map (homOfLE j.property)).hom).mapHomologicalComplex
           (.up ℤ)).obj E₀).X m ⟶

@@ -114,8 +114,8 @@ def algebraModule {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) : Modules R :=
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map ι)).obj
       (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))
 
--- Retain the existing instance binders in the public API.
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+  [HasSheafify J AddCommGrpCat.{r}] in
 /-- The algebra map has a unique R-linear sheaf map with its original section values. -/
 theorem algebraModuleMap_existsUnique {B B' : Sheaf J CommRingCat.{r}}
     (ι : R ⟶ B) (ι' : R ⟶ B') (f : B ⟶ B') (h : ι ≫ f = ι') :
@@ -149,7 +149,7 @@ def algebraModuleMap {B B' : Sheaf J CommRingCat.{r}}
     (ι : R ⟶ B) (ι' : R ⟶ B') (f : B ⟶ B') (h : ι ≫ f = ι') :=
   (algebraModuleMap_existsUnique ι ι' f h).exists.choose
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 /-- The unit of scalar extension, uniquely specified on all local sections. -/
 theorem tensorUnit_existsUnique {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :
     ∃! η : 𝟭 (Modules R) ⟶ siteSheafTensorRight (algebraModule ι),
@@ -201,7 +201,7 @@ theorem tensorUnit_existsUnique {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :
 def tensorUnit {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :=
   (tensorUnit_existsUnique ι).exists.choose
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 private theorem tensorSecondMap_tmul
     (M N N' : Modules R) (g : N ⟶ N') (U : Cᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) :
@@ -218,7 +218,8 @@ variable (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r})
 /-- The module sheaf B_n with its given R-action. -/
 def levelModule (n : ℕ) : Modules R := algebraModule (ι.app (op n))
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 /-- Compatibility of the algebra structure with the consecutive transition. -/
 theorem structure_compatible (n : ℕ) :
     ι.app (op (n + 1)) ≫ B.map (homOfLE (Nat.le_succ n)).op = ι.app (op n) := by
@@ -238,6 +239,7 @@ def transition (P : CochainComplex (Modules R) ℤ) (n : ℕ) :
     (level B ι (n + 1)).obj P ⟶ (level B ι n).obj P :=
   (NatTrans.mapHomologicalComplex (siteSheafTensorRightMap (levelMap B ι n)) (.up ℤ)).app P
 
+omit [EssentiallySmall.{r} C] in
 private theorem tensorUnit_levelMap (n : ℕ) :
     tensorUnit (ι.app (op (n + 1))) ≫ siteSheafTensorRightMap (levelMap B ι n) =
       tensorUnit (ι.app (op n)) := by
@@ -281,7 +283,7 @@ def roosD (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
       eqToHom (congrArg (product B ι P).X (Int.add_sub_cancel i 1).symm) -
       biprod.snd ≫ (product B ι P).d (i - 1) ((i + 1) - 1))
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [HasCountableProducts (Modules R)] in
 /-- The displayed Roos differential squares to zero. -/
 theorem roosD_sq (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
     roosD B ι P i ≫ roosD B ι P (i + 1) = 0 := by
@@ -309,7 +311,7 @@ def unitProduct (P : CochainComplex (Modules R) ℤ) : P ⟶ product B ι P :=
   Pi.lift (fun n =>
     (NatTrans.mapHomologicalComplex (tensorUnit (ι.app (op n))) (.up ℤ)).app P)
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [HasCountableProducts (Modules R)] in
 private theorem unitProduct_oneSubShift (P : CochainComplex (Modules R) ℤ) :
     unitProduct B ι P ≫ oneSubShift B ι P = 0 := by
   apply Pi.hom_ext
@@ -322,6 +324,7 @@ private theorem unitProduct_oneSubShift (P : CochainComplex (Modules R) ℤ) :
     exact congrArg (fun η ↦ η.app (P.X j)) (tensorUnit_levelMap B ι n)
   simp [unitProduct, oneSubShift, Category.assoc, Preadditive.comp_sub, hunit]
 
+omit [EssentiallySmall.{r} C] [HasCountableProducts (Modules R)] in
 /-- The augmentation (unit,0) commutes with differentials. -/
 theorem augmentation_comm (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
     biprod.lift ((unitProduct B ι P).f i) 0 ≫ (roos B ι P).d i (i + 1) =
@@ -344,7 +347,7 @@ def productMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
     product B ι P ⟶ product B ι P' :=
   Limits.Pi.map (fun n => (level B ι n).map a)
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] [HasCountableProducts (Modules R)] in
 private theorem productMap_oneSubShift {P P' : CochainComplex (Modules R) ℤ}
     (a : P ⟶ P') :
     productMap B ι a ≫ oneSubShift B ι P' =
@@ -358,6 +361,7 @@ private theorem productMap_oneSubShift {P P' : CochainComplex (Modules R) ℤ}
   simp [productMap, oneSubShift, Category.assoc, Preadditive.comp_sub,
     Preadditive.sub_comp, ht]
 
+omit [EssentiallySmall.{r} C] [HasCountableProducts (Modules R)] in
 /-- The diagonal product map commutes with the specified differential. -/
 theorem roosMap_comm {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') (i : ℤ) :
     biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)) ≫
@@ -383,6 +387,7 @@ def roosMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
     (fun i => biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)))
     (roosMap_comm B ι a)
 
+omit [EssentiallySmall.{r} C] [HasCountableProducts (Modules R)] in
 private theorem augmentation_naturality {P P' : CochainComplex (Modules R) ℤ}
     (a : P ⟶ P') :
     augmentation B ι P ≫ roosMap B ι a = a ≫ augmentation B ι P' := by

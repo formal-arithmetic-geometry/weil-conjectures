@@ -27,7 +27,6 @@ and exact sections of flat sheaves have regular terms.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
-set_option linter.unusedSectionVars false
 universe u v r wO wS wR wA
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 open CategoryTheory.Functor
@@ -67,6 +66,8 @@ variable [HasDerivedCategory.{wO}
   [HasDerivedCategory.{wR} (ModuleCat.{r} R)]
   [HasDerivedCategory.{wA} (ModuleCat.{r} D.A)]
 
+omit [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.O))]
+    [HasDerivedCategory (ringedSiteModules (derivedChangeRingIndependentCoefficients J D.S))] in
 private theorem c_isIso_on_kFlat (K : CochainComplex (ModuleCat.{r} R) ℤ)
     (hK : (HomologicalComplex.quasiIso (ModuleCat.{r} R) (.up ℤ)).kFlat K) :
     IsIso (D.c K) := by

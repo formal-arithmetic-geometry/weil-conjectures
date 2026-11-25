@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -102,6 +101,8 @@ private noncomputable def localBasis {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ) :
     N.val.obj (op W.unop.left) := e.inv.val.app W (1 : R.obj.obj (op W.unop.left))
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat]
+    [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] in
 private theorem localBasis_natural {U : C}
     (e : N.over U ≅ (𝒪 R).over U) {W V : (Over U)ᵒᵖ} (i : W ⟶ V) :
     N.val.map i.unop.left.op (localBasis N e W) = localBasis N e V := by
@@ -111,6 +112,8 @@ private theorem localBasis_natural {U : C}
   rw [map_one] at h
   exact h.symm
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat]
+    [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] in
 private theorem localDual_basis {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ) :
     (localDual N e).app W (localBasis N e W) = (1 : R.obj.obj (op W.unop.left)) := by
@@ -121,6 +124,8 @@ private noncomputable local instance {U : C} (W : (Over U)ᵒᵖ) :
       (N.val.obj (op W.unop.left)) :=
   inferInstanceAs (SMul (R.obj.obj (op W.unop.left)) (N.val.obj (op W.unop.left)))
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat]
+    [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] in
 private theorem localBasis_coordinates {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ)
     (x : N.val.obj (op W.unop.left)) :
@@ -210,6 +215,8 @@ private noncomputable local instance {U : C} (W : (Over U)ᵒᵖ) :
   inferInstanceAs (SMul (R.obj.obj (op W.unop.left))
     ((homObj N (𝒪 R)).val.obj (op W.unop.left)))
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [HasWeakSheafify J AddCommGrpCat]
+    [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] in
 set_option backward.isDefEq.respectTransparency false in
 private theorem localDual_coordinates {U : C}
     (e : N.over U ≅ (𝒪 R).over U) (W : (Over U)ᵒᵖ)
@@ -243,6 +250,7 @@ private theorem localDual_coordinates {U : C}
         (φ.app (op (Over.mk (𝟙 W.unop.left))) (localBasis N e W)) = _
   exact mul_comm _ _
 
+omit [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] in
 private theorem extendedBasis_natural {U : C}
     (e : N.over U ≅ (𝒪 R).over U) {W V : (Over U)ᵒᵖ} (i : W ⟶ V) :
     (changeOfRingsOfUniverses α N).val.map i.unop.left.op
@@ -250,6 +258,7 @@ private theorem extendedBasis_natural {U : C}
     scalarExtensionSection α N (op V.unop.left) 1 (localBasis N e V) := by
   rw [scalarExtensionSection_naturality, map_one, localBasis_natural]
 
+omit [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCommGrpCat] in
 private theorem dualCoefficient_natural {U : C}
     (e : N.over U ≅ (𝒪 R).over U) {W V : (Over U)ᵒᵖ} (i : W ⟶ V)
     (φ : (homObj (changeOfRingsOfUniverses α N) (𝒪 S)).val.obj (op W.unop.left)) :

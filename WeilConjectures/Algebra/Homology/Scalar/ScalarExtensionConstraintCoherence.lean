@@ -61,7 +61,6 @@ in a monoidal tensor object are transported by `tensorObjIsoSheafification`.
 
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 

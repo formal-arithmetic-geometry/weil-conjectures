@@ -32,7 +32,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-set_option linter.unusedSectionVars false in
+omit [HasDerivedCategory.{w} (ModuleCat.{u} R)] [HasDerivedCategory.{w} (ModuleCat.{u} B)] in
 private theorem tensorLinearLift
     (M N : ModuleCat.{u} (A ⊗[R] B))
     (f : (restrictScalars

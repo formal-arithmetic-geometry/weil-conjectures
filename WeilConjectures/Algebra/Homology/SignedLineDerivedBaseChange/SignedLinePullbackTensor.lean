@@ -57,7 +57,6 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option Elab.async false
 -- Reuse tagged equalities for the tensor-to-site comparison instances.
 set_option backward.defeqAttrib.useBackward true
@@ -95,6 +94,7 @@ private theorem site_tensor_map_pure {M M' N : KFlatFixedTensor.Modules A}
       (sheafCompose J (forget₂ CommRingCat RingCat)).obj A) (𝟙 _)).unit.naturality
       (siteTensorHom f.val N.val))).symm
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})] in
 private theorem pure_def (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
     (x : M.val.obj V) (y : N.val.obj V) :
     CochainScalarConstruction.pure.{max u v w, u, v} A M N V x y =
@@ -102,11 +102,14 @@ private theorem pure_def (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
         (((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app
           (M.val ⊗ N.val)).app V (x ⊗ₜ[A.obj.obj V] y)) := rfl
 
+omit [J.HasSheafCompose (forget₂ CommRingCat.{max u v w} RingCat.{max u v w})] in
 private theorem pure_eq (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
     (x : M.val.obj V) (y : N.val.obj V) :
     ScalarHomOrdinary.pure.{u, v, max u v w} A M N V x y =
       CochainScalarConstruction.pure.{max u v w, u, v} A M N V x y := rfl
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasSheafify J AddCommGrpCat.{max u v w}] in
 private theorem pure_sheaf_apply (M N : KFlatFixedTensor.Modules A) (V : Cᵒᵖ)
     (p : ((CochainScalarConstruction.underlying A).obj M ⊗
       (CochainScalarConstruction.underlying A).obj N).obj.obj V) :
@@ -146,6 +149,10 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {R : Sheaf J CommRingCat.{max u v w}}
   {S : Sheaf K CommRingCat.{max u v w}}
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify K AddCommGrpCat.{max u v w}] in
 private theorem presentation_unit_section
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
       (U.sheafPushforwardContinuous RingCat J K).obj
@@ -182,6 +189,10 @@ private theorem presentation_unit_section
     (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
       M V.unop (f.hom.app V s))) (em.app M).hom_inv_id
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify K AddCommGrpCat.{max u v w}] in
 private theorem pull_section_map
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
       (U.sheafPushforwardContinuous RingCat J K).obj

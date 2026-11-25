@@ -26,7 +26,6 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}

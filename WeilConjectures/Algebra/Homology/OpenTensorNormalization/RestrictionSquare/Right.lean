@@ -27,6 +27,7 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
+-- `IsOpenImmersion j'` is needed to elaborate the proof but is erased from the final term.
 set_option linter.unusedSectionVars false in
 /-- The right half: the tensor model on `U`, the ringed tensor comparison and the open pin. -/
 theorem rightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
