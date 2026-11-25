@@ -20,12 +20,15 @@ import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 
 /-! # Exactness and lower bounds for field-coefficient compact support
 
-Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7, Lemmas 6.1.11--6.1.13;
-Stacks Project, Tag 0G2A, part (3)
-(blueprint: lem-zl-field-shriek-lower-bound).
+## Implementation details
 
 Both coefficient categories and all morphism actions are the recorded constructions.
 The common-stage assertion applies to every normalized compact-support coefficient action.
+
+## References
+
+* Bhatt--Scholze, Definition 6.7.6, Lemma 6.7.7 and Lemmas 6.1.11--6.1.13
+* Stacks Project, Tag 0G2A, part (3)
 -/
 
 @[expose] public section

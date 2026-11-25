@@ -15,10 +15,10 @@ public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
 
 Write `R = (𝒪_E ⧸ ℓⁿ) ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(Mod_{(𝒪_E ⧸ ℓⁿ)_X})` for the reduction modulo
 `ℓⁿ` of bounded constructible `𝒪_E`-complexes, with values in the ambient derived category of
-module objects over `(𝒪_E ⧸ ℓⁿ)_X`. This file proves the integral step (ii) of blueprint
-`theorem-verdier-biduality`: `R` is lax braided monoidal and commutes with internal homs, so it
-carries the double-dual morphism `δ_{K₀}` of `K₀` (relative to `ω_{X, 𝒪_E}`) to the double-dual
-morphism of `R K₀` (relative to `R ω_{X, 𝒪_E}`), and `R` detects isomorphisms (derived Nakayama).
+module objects over `(𝒪_E ⧸ ℓⁿ)_X`. This file proves that `R` is lax braided monoidal and
+commutes with internal homs, so it carries the double-dual morphism `δ_{K₀}` of `K₀` (relative
+to `ω_{X, 𝒪_E}`) to the double-dual morphism of `R K₀` (relative to `R ω_{X, 𝒪_E}`), and that `R`
+detects isomorphisms (derived Nakayama).
 
 ## Main results
 
@@ -27,6 +27,14 @@ morphism of `R K₀` (relative to `R ω_{X, 𝒪_E}`), and `R` detects isomorphi
   isomorphism is an isomorphism.
 - `ProEtale.CondensedRing.isIso_verdierBiduality_of_isIso_toIhomIhom_reduction`: `δ_{K₀}` is an
   isomorphism as soon as the double-dual morphism of `R K₀` relative to `R ω_{X, 𝒪_E}` is.
+
+## Implementation details
+
+Compatibility with internal homs is the restriction to bounded constructible complexes of
+`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`. For the
+detection of zero objects, the reduction triangle shows that `ℓⁿ` acts invertibly on `K`, hence
+on its first derived reduction, where `ℓ` acts by zero; so the first derived reduction vanishes
+and `K = 0` by derived Nakayama, as in `ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`.
 -/
 
 @[expose] public section
@@ -95,15 +103,11 @@ attribute [local instance] leftDerivedIntegersModPowReductionMonoidal
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- Blueprint
-`proposition-six-operations-change-coefficients`, (2), for the coefficient map
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`. **Reduction modulo `ℓⁿ` commutes with internal homs**: for bounded constructible
+/-- **Reduction modulo `ℓⁿ` commutes with internal homs**: for bounded constructible
 `𝒪_E`-complexes `A` and `B`, the comparison
 `v_{A,B} : RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, the transpose of the
 reduction of the evaluation (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an
-isomorphism: the restriction to bounded constructible complexes of
-`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction` (blueprint
-`proposition-six-operations-change-coefficients--7`). -/
+isomorphism. -/
 theorem isIso_ihomComparison_integersModPowReduction
     (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso ((Functor.LaxMonoidal.ihomComparison
@@ -113,11 +117,7 @@ theorem isIso_ihomComparison_integersModPowReduction
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
 /-- **Reduction modulo `ℓⁿ` detects zero objects** (`n ≠ 0`): a bounded constructible
-`𝒪_E`-complex `K` whose reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes is zero. By the reduction triangle
-`ℓⁿ` acts invertibly on `K`, hence on its first derived reduction, where `ℓ` acts by zero; so the
-first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
-`lemma-reduction-derived-nakayama`). This is the argument of
-`ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`. -/
+`𝒪_E`-complex `K` whose reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes is zero. -/
 theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
     {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
     (h : Limits.IsZero ((integersModPowReductionAmbient ℓ E n X).obj K)) : Limits.IsZero K := by
@@ -130,9 +130,8 @@ theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
   exact isZero_of_isIso_pow_zsmul_id X.left ℓ E.1 hn hK
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
-/-- **Derived Nakayama for the reduction modulo `ℓⁿ`** (blueprint
-`lemma-reduction-derived-nakayama`): for `n ≠ 0`, a morphism `f` of bounded constructible
-`𝒪_E`-complexes whose reduction modulo `ℓⁿ` is an isomorphism is an isomorphism. -/
+/-- **Derived Nakayama for the reduction modulo `ℓⁿ`**: for `n ≠ 0`, a morphism `f` of bounded
+constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ` is an isomorphism is an isomorphism. -/
 theorem isIso_of_isIso_integersModPowReductionAmbient_map (hn : n ≠ 0)
     {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧} (f : K ⟶ L)
     (h : IsIso ((integersModPowReductionAmbient ℓ E n X).map f)) : IsIso f := by
@@ -162,10 +161,10 @@ noncomputable def leftDerivedIntegersModPowReductionBraided :
   (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).leftDerivedFunctorBraided
     (Mod.extendScalars_map_braiding_hom_δ (integersModPowReduction X.left ℓ E.1 n))
 
-/-- **Biduality along the reduction modulo `ℓⁿ`** (blueprint `theorem-verdier-biduality`,
-(ii)): for `n ≠ 0`, the double-dual morphism `δ_{K₀}` of a bounded constructible `𝒪_E`-complex is
-an isomorphism as soon as the double-dual morphism of its reduction `R K₀`, relative to the
-reduction `R ω_{X, 𝒪_E}` of the dualizing complex, is one. -/
+/-- **Biduality along the reduction modulo `ℓⁿ`**: for `n ≠ 0`, the double-dual morphism
+`δ_{K₀}` of a bounded constructible `𝒪_E`-complex is an isomorphism as soon as the double-dual
+morphism of its reduction `R K₀`, relative to the reduction `R ω_{X, 𝒪_E}` of the dualizing
+complex, is one. -/
 theorem isIso_verdierBiduality_of_isIso_toIhomIhom_reduction (hn : n ≠ 0)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
     (h : IsIso (toIhomIhom

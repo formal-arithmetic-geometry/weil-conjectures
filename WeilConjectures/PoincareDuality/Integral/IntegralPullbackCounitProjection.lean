@@ -15,9 +15,21 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Finite projection of the normalized coherent pullback counit
 
-The counit projection is computed from a coherent strict quotient presentation,
-the normalized Roos projection, and the finite inverse-image unit comparison.
-Source: Stacks Tags 0941 and 099N(5).
+We compute the finite projections of the normalized coherent pullback counit.
+
+## Implementation details
+
+The counit projection is computed from a coherent strict quotient presentation (supplied by
+`coherentPrimitiveReductionPresentation`), the normalized Roos projection, and the finite
+inverse-image unit comparison. The finite component of the strict pulled-back tower comparison is
+fixed by its values on inverse-image unit generators, since the completed coefficient projection
+is locally surjective. On a K-injective resolution the normalization of the Roos model identifies
+the derived limit-to-Roos map with the limit-tuple map having zero shifted coordinate; naturality
+along the resolution then gives the result for every input.
+
+## References
+
+* [Stacks, Tag 0941], [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -275,33 +287,7 @@ private theorem counit_projection_on_representative {X Y : Scheme.{u}} (f : X ‚ü
 
 /-- Evaluating normalized realization followed by the coherent counit gives
 exactly the scalar adjunct of the defining pullback-tower projection. This is
-a map equality; it asserts neither invertibility nor a system isomorphism.
-Source: Stacks Tags 0941 and 099N(5)
-(blueprint: lem-pod-integral-pullback-counit-projection).
-
-Proof: choose the simultaneous strict quotient presentation of P supplied by
-coherentPrimitiveReductionPresentation, including its whole-tower coherence and
-its comparison at every finite level. Apply M.normalization
-to obtain the strict pulled-back tower comparison q. At degree i, its specified
-formula on inverse-image unit generators, followed by scalar balancing, fixes its
-finite component: both sides are sheaf maps, and the completed coefficient
-projection is locally surjective, so those generators determine the maps.
-The comparison is therefore the unit-normalized integralFinitePullbackModel
-transported by the finite presentation isomorphisms. The strict Roos map commutes
-with its first-product projections. On a K-injective resolution the normalization
-of rho identifies the derived limit-to-Roos map with the limit-tuple map having
-zero shifted coordinate. Its projection is the ordinary limit projection.
-Naturality along the resolution quasi-isomorphism gives this equality for every
-input, and composition with q gives the defining integral pullback projection.
-Apply T.counit_projection, and use naturality of T.reductionEvaluation to move
-M.realization across the finite reduction. Under the finite scalar adjunction
-this is the just-computed tower projection. The S.reductionModel equation
-identifies the source reduction comparison with the universal reduction counit.
-Transport along e from Q(P) to K. The inverse e appearing in the definition of
-integralPullbackFiniteComparison cancels its forward map, as do the finite exact
-pullback factorization and finite reduction isomorphisms. The adjunction Hom
-bijection is injective, so the two finite maps are equal. All steps are natural
-also for zero objects, empty schemes, and n=0 (quotient exponent one). -/
+a map equality; it asserts neither invertibility nor a system isomorphism. -/
 theorem integralPullbackCounitProjection {X Y : Scheme.{u}} (f : X ‚ü∂ Y)
     (S : CoefficientDerivedSystemCalculus l E Y)
     (T : CoefficientDerivedSystemCalculus l E X)

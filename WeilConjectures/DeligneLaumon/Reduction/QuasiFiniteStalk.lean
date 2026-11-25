@@ -101,8 +101,7 @@ theorem WeilSheaf.trace_compactlySupportedCohomology_zero_of_locallyQuasiFinite
 
 /-- **The local polynomial of `H_c^0` of a scheme quasi-finite over `k₀`**:
 `det (1 - T F ∣ H_c^0(T ⊗ k̄, G)) = ∏_t det (1 - T^{deg t} F_t ∣ G_t̄)`, the product running over
-the (finitely many) closed points `t` of `T`. Both sides are determined by the traces of the
-powers of the Frobenius, which agree by the Grothendieck–Lefschetz trace formula. -/
+the (finitely many) closed points `t` of `T`. -/
 theorem WeilSheaf.charpolyRev_compactlySupportedCohomology_zero_of_locallyQuasiFinite
     (G : WeilSheaf k₀ l T) [Fintype T.finitePoints] :
     (G.compactlySupportedCohomology 0).frobeniusEnd.charpolyRev =
@@ -217,8 +216,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 /-- **Compact support base change in degree zero for a quasi-finite morphism.** For a cartesian
 square `X' = X ×_Y Y'` of `k₀`-schemes with `f : X ⟶ Y` separated and quasi-finite, the
 compactly supported cohomology in degree zero of the restriction `h^*(f₀!F)` of the direct image
-of a Weil sheaf `F` is that of the restriction `g^*F`: `Rf₀!F = f₀!F` is concentrated in degree
-zero, `h^* Rf₀! ≅ Rf'₀! g^*`, and `R(f' ≫ a_{Y'})₀! ≅ R(a_{Y'})₀! ∘ Rf'₀!`. -/
+of a Weil sheaf `F` is that of the restriction `g^*F`. -/
 theorem WeilSheaf.nonempty_equiv_compactlySupportedCohomology_upperStar_higherLowerShriek
     (hH : IsPullback g f' f h) (F : WeilSheaf k₀ l X) :
     Nonempty ((((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj
@@ -251,8 +249,7 @@ omit [IsSeparated (X' ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X' ↘ Spec (CommRingCat.of k₀))] in
 /-- **Base change for the degree-zero direct image with compact support of a quasi-finite
 morphism.** For a cartesian square `X' = X ×_Y Y'` of `k₀`-schemes with `f : X ⟶ Y` separated and
-quasi-finite, `h^*(f₀!F) ≅ f'₀!(g^*F)`: `Rf₀!F = f₀!F` is concentrated in degree zero and
-`h^* Rf₀! ≅ Rf'₀! g^*`. -/
+quasi-finite, `h^*(f₀!F) ≅ f'₀!(g^*F)`. -/
 theorem WeilSheaf.nonempty_upperStar_higherLowerShriek_zero_iso
     (hH : IsPullback g f' f h) (F : WeilSheaf k₀ l X) :
     Nonempty ((WeilSheaf.upperStar h).obj ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F) ≅
@@ -295,10 +292,9 @@ variable [IsSeparated f] [LocallyQuasiFinite f] [LocallyOfFiniteType f] [QuasiCo
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The local Frobenius of a quasi-finite direct image** (blueprint:
-`lemma-finite-quasi-finite-direct-images`). For `f : X ⟶ Y` separated and quasi-finite and a closed
-point `y` of `Y`, there are finitely many closed points `x` of `X` above `y`, and
-`det (1 - T F_y ∣ (f₀!F)_ȳ) = ∏_{x ↦ y} det (1 - T^{e_x} F_x ∣ F_x̄)`, with
+/-- **The local Frobenius of a quasi-finite direct image.** For `f : X ⟶ Y` separated and
+quasi-finite and a closed point `y` of `Y`, there are finitely many closed points `x` of `X`
+above `y`, and `det (1 - T F_y ∣ (f₀!F)_ȳ) = ∏_{x ↦ y} det (1 - T^{e_x} F_x ∣ F_x̄)`, with
 `e_x = deg x / deg y = [κ(x) : κ(y)]` (see `Scheme.Hom.degreeOver_dvd_of_isOver`). -/
 theorem WeilSheaf.exists_charpolyRev_stalk_higherLowerShriek_zero (F : WeilSheaf k₀ l X)
     (y : Y.finitePoints) :

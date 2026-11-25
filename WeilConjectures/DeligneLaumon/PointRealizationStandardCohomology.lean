@@ -18,13 +18,19 @@ public import WeilConjectures.SmoothPurity.Sf.SfIntegralStandardTruncations
 
 /-! # Standard cohomology of the specified point realization
 
-Source: Bhatt--Scholze, Propositions 6.8.11(3), 6.8.14 and Section 4.1;
-the exact-sections, localization and coherence argument of the DAG
-(blueprint: lem-a1-point-realization-standard-cohomology).
+We package the canonical truncation comparisons of a t-exact triangulated functor and the
+induced comparison of truncation cohomology.
+
+## Implementation details
 
 The ordinary target is viewed through its full embedding in D(E), and the
 common-stage target through its fully faithful realization in D(Ω). Thus its
 cohomological classes are the usual classes, without choosing a new target category.
+
+## References
+
+* Bhatt--Scholze, Propositions 6.8.11(3), 6.8.14 and Section 4.1
+* BBD, 1.3.3
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +39,8 @@ universe w u uC vC uB vB uA vA uD vD
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Triangulated AlgebraicGeometry
 namespace WeilConjectures
 
-/-- The canonical truncation comparisons together with exactness and t-exactness.
-The equations fix both comparisons by the truncation counit and unit.
-Source: the DAG proof, Steps 2--4, using BBD 1.3.3
-(blueprint: lem-a1-point-realization-standard-cohomology). -/
+/-- The canonical truncation comparisons of a functor `F` together with exactness and
+t-exactness. The equations fix both comparisons by the truncation counit and unit. -/
 structure PointRealizationComparison
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -55,9 +59,8 @@ structure PointRealizationComparison
     F.map ((t.truncGEπ j).app K) ≫ (lower j).hom.app K =
       (s.truncGEπ j).app (F.obj K)
 
-/-- Compose the counit- and unit-characterized comparisons, then commute the shift.
-This is the truncation-induced δ, rather than an arbitrary cohomology isomorphism.
-Source: DAG proof, Step 4 (blueprint: lem-a1-point-realization-standard-cohomology). -/
+/-- The truncation-induced comparison of degree-`j` truncation cohomology, obtained by composing
+the truncation comparisons and commuting with the shift. -/
 def PointRealizationComparison.delta
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

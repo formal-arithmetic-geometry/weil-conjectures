@@ -27,8 +27,9 @@ set_option linter.privateModule false
 /-!
 # Testing finite Tor amplitude at the residue field
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/
-`lem-exc-residue-tor-test.md` (blueprint: theorem-f-shriek-finite-coefficients--1).
+Auxiliary facts for testing finite Tor amplitude of complexes of étale sheaves with finite
+coefficients by reduction to the residue field, such as the identification of the étale derived
+tensor product with the curried tensor product of the derived category.
 -/
 
 @[expose] public section

@@ -20,11 +20,19 @@ import WeilConjectures.PoincareDuality.ExplicitScalarCone.ExplicitScalarConeWord
 /-!
 # Agreement of the specified integral pullback scalar comparisons
 
-Source: blueprint main-20261015,
-`sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md`,
-first paragraph, pullback and inverse automorphism squares; the normalization
-comparison is agent-written
-(blueprint: lem-pod-isomorphism-scalar-comparison-agreement).
+For an isomorphism of schemes, the scalar comparison built from whole-system counits agrees with
+the specified tensor-and-completion comparison.
+
+## Implementation details
+
+Both comparisons are computed in simultaneous normalized quotient models with the actual quotient
+transitions, using the same K-flat terms as `specifiedPullbackComparisonAlpha`; effectivity makes
+all intermediate counits invertible. With source and target word-realization isomorphisms
+`β_A`, `β_B`, the counit-built map `a` satisfies `β_B ≫ a = L(κ) ≫ β_A`
+(`podCounitScalarWordCoordinates`), and the balanced scalar association map shows that the
+tensor-and-completion comparison satisfies the same equation
+(`ExplicitScalarCone.explicitScalarConeWordCoordinates`). Cancelling `β_B` gives the agreement.
+No finite quotient flatness or finite Tor-amplitude assumption is used.
 -/
 
 @[expose] public noncomputable section
@@ -37,43 +45,10 @@ universe u
 open CategoryTheory
 namespace WeilConjectures
 
-/-- The whole-system counit comparison equals the specified tensor-and-completion
-comparison, as a morphism in the ambient derived category. The model parameter D
-carries the representative normalizations of the whole-system construction;
-no arbitrary comparison map is supplied. The completeness proof used on the
-right is supplied by the specified-alpha theorem, and is proof irrelevant.
-
-Source: blueprint main-20261015,
-sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md, first paragraph,
-pullback and inverse automorphism squares; agent-written normalization statement
-(blueprint: lem-pod-isomorphism-scalar-comparison-agreement).
-
-Proof:
-1. Choose simultaneous normalized quotient models by
-   lem-trf-effective-comparison-realization-models, with the actual quotient
-   transitions. For C = R_E,Y K set A = S_X U_g,E C and B = U_g,L S_Y C,
-   using def-trf-integral-comparison-sequence-systems. Use the same flat-term
-   K-flat P and Q = P tensor S_Y as lem-weil-specified-pullback-comparison-alpha.
-   Effectivity makes all intermediate counits invertible. Let beta_A and beta_B
-   be the resulting source and target word-realization isomorphisms.
-2. Lem-trf-counit-realization-substitution identifies the counit-built completed
-   map with beta_B inverse followed by realization of kappa followed by beta_A.
-   These are precisely the lambda and mu normalizations of
-   lem-trf-integral-pullback-comparison-realization. Thus beta_B a = L(kappa) beta_A
-   as entire derived arrows, retaining the tower homotopies.
-3. Apply lem-pur-normalized-scalar-comparison-realization in the same normalized
-   coordinates of def-trf-integral-comparison-realization-models. Balanced scalar
-   association on the simultaneous K-flat quotient systems is the specified d_m:
-   ((g^-1(p tensor a)) tensor b) tensor s maps to
-   (g^-1(p tensor iota_m(a))) tensor (iota_m(b) pi_L,m(s)).
-   Lem-weil-specified-pullback-comparison-alpha applies this map to BOTH Roos
-   coordinates and uses quotient augmentations with zero shifted coordinate.
-   Its canonical tensor/completion alpha therefore satisfies
-   beta_B alpha = L(kappa) beta_A. No finite quotient flatness or finite
-   Tor-amplitude assumption is used.
-4. The two right sides coincide. Cancel beta_B to obtain equality of the two
-   specified morphisms in D(X_proet, O_L), for every constructible-complete K.
--/
+/-- For an isomorphism `g` and a constructible integral object `K`, the whole-system counit
+scalar comparison `integralComparisonScalar l E L ι D g K` equals the specified
+tensor-and-completion comparison `scalarPullbackCompleted`, as morphisms in the ambient derived
+category. -/
 theorem isomorphismScalarComparisonAgreement
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

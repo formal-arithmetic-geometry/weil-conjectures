@@ -10,8 +10,8 @@ public import WeilConjectures.DeligneLaumon.PointRealizationStandardCohomology
 
 /-! # Normalization of the finite point scalar component
 
-Source: the point coefficient convention, blueprint order 1509
-(blueprint: lem-a1-point-scalar-beta-normalization).
+This file concerns the normalization of the finite point scalar component with respect to the
+point coefficient convention.
 -/
 
 @[expose] public noncomputable section
