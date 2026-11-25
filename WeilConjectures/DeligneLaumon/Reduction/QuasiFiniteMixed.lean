@@ -17,9 +17,9 @@ import WeilConjectures.WeilSheaf.CohomologyExact
 
 Let `X` be a separated `k₀`-scheme quasi-finite over `k₀`. Every Weil sheaf `F` on `X` is
 `ι`-mixed (`AlgebraicGeometry.WeilSheaf.isMixed_of_locallyQuasiFinite`). This is the
-dimension-zero case of the blueprint theorem `theorem-real-constructible-sheaves-are-mixed--1`.
+dimension-zero case of the theorem that real constructible Weil sheaves are mixed.
 
-## Implementation notes
+## Implementation details
 
 We argue by strong induction on the total dimension `∑ₓ dim F_x̄` of the stalks at the finitely
 many closed points. A nonzero `F` has a nonzero stalk, hence (by the formula for the local
@@ -45,7 +45,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The constant Weil sheaf `ℚ̄_ℓ` is punctually `ι`-pure of weight `0`: its local Frobenius is
-the identity (blueprint: `corollary-purity-cohomology-smooth-proper-variety`). -/
+the identity. -/
 theorem isPunctuallyPureOfWeight_adicConstant :
     (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 := by
   intro x α hα
@@ -63,7 +63,7 @@ theorem isPunctuallyPureOfWeight_adicConstant :
   · exact absurd h1 hv.2
 
 /-- For a monomorphism `i : G ⟶ F` of Weil sheaves, the dimension of a stalk of `F` is the sum of
-those of `G` and of the cokernel of `i`: the stalk functors are exact. -/
+those of `G` and of the cokernel of `i`. -/
 theorem finrank_stalk_cokernel_add_finrank_stalk
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] {F G : WeilSheaf k₀ l X} (i : G ⟶ F)
     [Mono i] (x : X.finitePoints) :
@@ -86,8 +86,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyQuasiFinite (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- On a `k₀`-scheme quasi-finite over `k₀`, a Weil sheaf with a nonzero stalk has nonzero
-compactly supported cohomology `H_c^0`: a `deg x`-th root `β` of a local Frobenius eigenvalue
-at `x` has `β⁻¹` as a root of `det (1 - T F ∣ H_c^0)`. -/
+compactly supported cohomology `H_c^0`. -/
 theorem nontrivial_compactlySupportedCohomology_zero_of_not_isZero {F : WeilSheaf k₀ l X}
     (hF : ¬ IsZero F) : Nontrivial (F.compactlySupportedCohomology 0).carrier := by
   have : Finite X :=
@@ -110,7 +109,7 @@ theorem nontrivial_compactlySupportedCohomology_zero_of_not_isZero {F : WeilShea
   exact ⟨v, 0, hv.2⟩
 
 /-- On a `k₀`-scheme quasi-finite over `k₀`, a nonzero Weil sheaf has nonzero global sections
-`Γ(X̄, F)`: these are `H^0 = H_c^0`, the scheme being finite, hence proper, over `k₀`. -/
+`Γ(X̄, F)`. -/
 theorem nontrivial_globalSections_of_not_isZero {F : WeilSheaf k₀ l X} (hF : ¬ IsZero F) :
     Nontrivial F.globalSections.carrier := by
   have h₁ := nontrivial_compactlySupportedCohomology_zero_of_not_isZero hF
@@ -132,10 +131,7 @@ theorem nontrivial_globalSections_of_not_isZero {F : WeilSheaf k₀ l X} (hF : �
   exact @Equiv.nontrivial _ _ (WeilCoefficients.linearEquivOfIso e').toEquiv.symm h₂
 
 /-- **Weil sheaves on a quasi-finite scheme are mixed.** Every Weil sheaf on a separated
-`k₀`-scheme quasi-finite over `k₀` is `ι`-mixed: split off the image of `ℚ̄_ℓ(β) ⟶ F` for a
-Frobenius eigenvector of `Γ(X̄, F)`, which is punctually pure, and induct on the total dimension
-of the stalks (blueprint: `theorem-real-constructible-sheaves-are-mixed--1`, the dimension-zero
-case: "a Jordan filtration of each invertible Frobenius operator gives pure factors"). -/
+`k₀`-scheme quasi-finite over `k₀` is `ι`-mixed. -/
 theorem isMixed_of_locallyQuasiFinite (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
     F.IsMixed ι := by
   have : Finite X :=

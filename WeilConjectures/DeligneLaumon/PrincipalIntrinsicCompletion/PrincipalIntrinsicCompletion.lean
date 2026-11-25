@@ -40,10 +40,12 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Principal intrinsic completion with independent coefficient universes
 
-Source: Stacks Project, Tags 099M and 0A0E; the explicit fiber in blueprint order 1247
-(blueprint: def-a1-principal-intrinsic-completion).
-This specializes the published fiber construction to the actual principal Koszul tower
+This specializes the explicit intrinsic fiber construction to the principal Koszul tower
 of the completed local-field coefficients, without identifying coefficient and site sizes.
+
+## References
+
+* Stacks Project, Tags 099M, 0A0E and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -60,21 +62,17 @@ open PrincipalKoszulStrictReplacement
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (W : AlgebraicGeometry.Scheme.{t})
 
-/-- The existing principal Koszul tower, assembled degreewise.
-Source: Stacks 099M (blueprint: def-a1-principal-intrinsic-completion). -/
+/-- The existing principal Koszul tower, assembled degreewise. -/
 abbrev tower (P : CochainComplex (Modules l E W) ℤ) :
     CochainComplex (ℕᵒᵖ ⥤ Modules l E W) ℤ :=
   koszulTowerComplex (completedIntegralCommRingSheafUnrestricted l E W) (sourceTower l E W P)
 
-/-- The explicit intrinsic fiber, with coordinates (x,y) and differential (dx,(1-s)x-dy).
-Source: Stacks 0A0E; blueprint order 1247
-(blueprint: def-a1-principal-intrinsic-completion). -/
+/-- The explicit intrinsic fiber, with coordinates (x,y) and differential (dx,(1-s)x-dy). -/
 def fiber (P : CochainComplex (Modules l E W) ℤ) :
     CochainComplex (Modules l E W) ℤ :=
   CochainComplex.mappingCocone (-roosU (tower l E W P))
 
-/-- The total-tensor unit is the standard right unitor, without any choice of a map.
-Source: Stacks 03EK (blueprint: def-a1-principal-intrinsic-completion). -/
+/-- The total-tensor unit is the standard right unitor, without any choice of a map. -/
 def tensorUnit (P : CochainComplex (Modules l E W) ℤ) :
     (tensorWith l E W P).obj
       ((CochainComplex.singleFunctor (Modules l E W) 0).obj
@@ -85,8 +83,7 @@ def tensorUnit (P : CochainComplex (Modules l E W) ℤ) :
     (completedIntegralCommRingSheafUnrestricted l E W)
   HomologicalComplex.rightUnitor P
 
-/-- Degree-zero Koszul tensor inclusion, in the specified order P tensor Q_n.
-Source: Stacks 099M (blueprint: def-a1-principal-intrinsic-completion). -/
+/-- Degree-zero Koszul tensor inclusion, in the specified order P tensor Q_n. -/
 def levelUnit (P : CochainComplex (Modules l E W) ℤ) (n : ℕ) :
     P ⟶ (sourceTower l E W P).obj (op n) :=
   (tensorUnit l E W P).inv ≫ (tensorWith l E W P).map
