@@ -221,7 +221,6 @@ structure ConstantLeftModuleInverseImageLift
 are compared after the isomorphism from the constant sheaf on pairs. -/
 section CoefficientConstruction
 set_option backward.isDefEq.respectTransparency false
-set_option linter.unusedSimpArgs false
 variable {C D : Type u} [SmallCategory C] [SmallCategory D]
 variable (J : GrothendieckTopology C) (K : GrothendieckTopology D)
 variable (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
@@ -261,7 +260,6 @@ end CoefficientConstruction
 /-! Lift left exact functors to abelian sheaves sectionwise, transport the constant
 scalar endomorphisms, and extend them along ring sheafification. -/
 section TransportConstruction
-set_option linter.unusedSimpArgs false
 open ConstantLeftModuleInverseImage
 attribute [local instance] comp_preservesFiniteLimits
 

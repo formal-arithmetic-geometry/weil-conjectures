@@ -37,7 +37,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-set_option linter.unusedVariables false in
 /-- The colimit over `Under i` of the left Kan extensions `B t` of the stage inverse images of an
 abelian sheaf `G` along the colimit functors is a sheaf for the colimit topology.
 
@@ -50,9 +49,9 @@ theorem colimit_site_raw_abelian_section_isSheaf
     [∀ j, (P j).IsStableUnderFiniteBaseChange] [∀ j, (P j).HasPullbacks]
     (hfinite : ∀ (j : J) (X : F.obj j) (R : Presieve X), R ∈ P j X →
       Finite R.uncurry)
-    (hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
+    (_hcover : ∀ (j k : J) (a : j ⟶ k) (X : F.obj j) (R : Presieve X),
       R ∈ P j X → R.map (F.map a).toFunctor ∈ P k ((F.map a).toFunctor.obj X))
-    (hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
+    (_hpullback : ∀ (j k : J) (a : j ⟶ k) (X Y Z : F.obj j) (R : Presieve X),
       R ∈ P j X → ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
         PreservesLimit (cospan f g) (F.map a).toFunctor)
     [∀ (j k : J) (a : j ⟶ k),

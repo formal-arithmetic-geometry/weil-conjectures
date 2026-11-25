@@ -276,7 +276,6 @@ theorem singleAlpha_baseChange {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
       h h₁ wk wi wp wr ((moduleJ B i).obj M))
 
 open CategoryTheory.ExactDerivedPasting
-set_option linter.unusedSimpArgs false
 
 private structure NativeCubeData (Xv Xs Xw Xt Xv₁ Xs₁ Xw₁ Xt₁ : Scheme.{u}) where
   K : Modules B Xv ⥤ Modules B Xw

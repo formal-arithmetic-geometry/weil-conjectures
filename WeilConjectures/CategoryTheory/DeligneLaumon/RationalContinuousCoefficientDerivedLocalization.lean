@@ -71,7 +71,8 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [HasSheafify J CommRingCat.{u}]
   [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+  [HasSheafify J CommRingCat.{u}] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
 /-- Image of a compatible coefficient family is again compatible.
 Source: Bhatt–Scholze, Proposition 6.8.14(2).
 -/
@@ -263,36 +264,35 @@ private theorem continuousRawIsLocalization
     (Functor.isoWhiskerRight fac.symm E.inv ≪≫ (Functor.associator _ _ _) ≪≫
       Functor.isoWhiskerLeft Q E.asEquivalence.unitIso.symm ≪≫ Q.rightUnitor)
 
-set_option linter.unusedVariables false in
 private theorem continuousRawTriangulation
     (R : Type r) [CommRing R] (C : Type u) [Category.{v} C]
     [Preadditive C] [Linear R C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
     [∀ n : ℤ, (shiftFunctor C n).Linear R] (p : R) :
     ∃ z : HasZeroObject (ScalarLocalization R C p),
-      (fun [zeroInst : HasZeroObject (ScalarLocalization R C p)] ↦
+      (fun [_zeroInst : HasZeroObject (ScalarLocalization R C p)] ↦
         ∃ s : HasShift (ScalarLocalization R C p) ℤ,
-          (fun [shiftInst : HasShift (ScalarLocalization R C p) ℤ] ↦
+          (fun [_shiftInst : HasShift (ScalarLocalization R C p) ℤ] ↦
             (∀ n : ℤ, shiftFunctor (ScalarLocalization R C p) n =
                 map R C p (shiftFunctor C n)) ∧
             ∃ a : ∀ n : ℤ, (shiftFunctor (ScalarLocalization R C p) n).Additive,
-              (fun [addInst : ∀ n : ℤ,
+              (fun [_addInst : ∀ n : ℤ,
                   (shiftFunctor (ScalarLocalization R C p) n).Additive] ↦
                 ∃ q : (localization R C p).CommShift ℤ,
-                  (fun [commInst : (localization R C p).CommShift ℤ] ↦
+                  (fun [_commInst : (localization R C p).CommShift ℤ] ↦
                     (∀ X : C,
                       HEq (((localization R C p).commShiftIso (1 : ℤ)).hom.app X)
                         (𝟙 ((localization R C p).obj ((shiftFunctor C (1 : ℤ)).obj X)))) ∧
                     ∃ t : Pretriangulated (ScalarLocalization R C p),
-                      (fun [triInst : Pretriangulated (ScalarLocalization R C p)] ↦
+                      (fun [_triInst : Pretriangulated (ScalarLocalization R C p)] ↦
                         IsTriangulated (ScalarLocalization R C p) ∧
                         (localization R C p).IsTriangulated ∧
                         ∀ T : Triangle (ScalarLocalization R C p),
                           T ∈ distTriang (ScalarLocalization R C p) ↔
                             ∃ T' : Triangle C, T' ∈ distTriang C ∧
                               Nonempty (T ≅ (localization R C p).mapTriangle.obj T'))
-                        (triInst := t)) (commInst := q)) (addInst := a)) (shiftInst := s))
-        (zeroInst := z) := by
+                        (_triInst := t)) (_commInst := q)) (_addInst := a)) (_shiftInst := s))
+        (_zeroInst := z) := by
   classical
   let M := Submonoid.powers p
   let Q := localization R C p
@@ -472,7 +472,7 @@ private theorem continuousScalarConjugate {A : Type*} [CommRing A]
     {X Y : D} (e : X ≅ Y) (r : A) :
     e.hom ≫ (r • 𝟙 Y) ≫ e.inv = r • 𝟙 X := by simp
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{u} C] [HasSheafify J CommRingCat.{u}] in
 private theorem continuousSheafificationScalar
     (S : Sheaf J CommRingCat.{u})
     (Q : PresheafOfModules.{u} (S.obj ⋙ forget₂ CommRingCat RingCat))
@@ -501,7 +501,7 @@ private theorem continuousSheafificationScalar
     s.val U • (adj.unit.app Q).app U z
   exact ((adj.unit.app Q).app U).hom.map_smul _ _
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{u} C] in
 private theorem continuousCoefficientRestriction
     (A B : Type v) [CommRing A] [CommRing B] (t : A)
     (eB : Localization.Away t ≃+* B) (R : Sheaf J CommRingCat.{u})
@@ -520,7 +520,7 @@ private theorem continuousCoefficientRestriction
 
 attribute [local irreducible] scalarLocalizationCoefficientMapOfUniverses
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{u} C] [HasSheafify J CommRingCat.{u}] in
 private theorem continuousDerivedScalars
     (A B : Type v) [CommRing A] [CommRing B] (S : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (S.obj ⋙ forget₂ CommRingCat RingCat))

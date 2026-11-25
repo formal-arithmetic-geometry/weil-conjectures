@@ -592,7 +592,6 @@ private theorem scalarD_isIso (hψ : ∀ n : ℕ, ψ (n + 1) ≫ φ n = ψ n)
   exact NatIso.isIso_of_isIso_app _
 
 section OrdinaryAlpha
-set_option linter.unusedSimpArgs false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] StrictTower.modulePullback Functor.leftAdjoint

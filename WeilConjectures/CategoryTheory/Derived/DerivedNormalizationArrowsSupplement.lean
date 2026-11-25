@@ -145,8 +145,7 @@ noncomputable def normalizationPullbackMate (q : R →+* S) :
     (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F (ModuleCat.{u + 1} R) J K)).symm
       (TwoSquare.mk _ _ _ _ (𝟙 _)))
 
--- Keep the existing essentially-small instance binders in the public signature.
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{u + 1} C] in
 /-- The canonical mate is invertible: coefficient restriction commutes with inverse image.
 Source: Stacks Tags 00WX and 03DA.
 -/

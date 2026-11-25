@@ -102,7 +102,6 @@ private theorem transport_tensor_adjunction_of_comparisons
   obtain ⟨c, d, h, hd, hh⟩ := hc
   exact transport_tensor_adjunction Q B b R A H HU eX eU hn c d h hd hh
 
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 512 in
@@ -142,15 +141,15 @@ theorem exists_tensorModel_restriction_adjunction
             (HomologicalComplex.mapBifunctorMap (𝟙 P) u (curriedTensor _)
               (ComplexShape.up ℤ))) ≫ r J' E s) := by
   classical
-  letI := SheafOfModules.monoidalCategory X.sheaf
-  letI := (SheafOfModules.tensorClosed X.sheaf).1.some
+  let := SheafOfModules.monoidalCategory X.sheaf
+  let := (SheafOfModules.tensorClosed X.sheaf).1.some
   let R := ((SheafOfModules.overFunctor.{uX} (moduleRings X.toRingedSpace) U) ⋙
     Equivalence.functor
       (C := SheafOfModules.{uX} ((moduleRings X.toRingedSpace).over U))
       (D := SheafOfModules.{uX} (moduleRings U.toScheme.toRingedSpace))
       (Modules.overEquiv U)).mapDerivedCategory
-  letI := schemeDerivedTensorMonoidal X
-  letI := schemeDerivedTensorMonoidal U.toScheme
+  let := schemeDerivedTensorMonoidal X
+  let := schemeDerivedTensorMonoidal U.toScheme
   set_option backward.isDefEq.respectTransparency true in
   set_option backward.isDefEq.respectTransparency.types true in
     refine transport_tensor_adjunction_of_comparisons DerivedCategory.Q _
