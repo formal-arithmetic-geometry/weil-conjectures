@@ -106,14 +106,22 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
-/-!+# Free resolutions over completed integral coefficient sheaves
-
-Source: Stacks Project, proetale.tex, Tag 09C3, and algebraization.tex, Tag 099I;
-sites-modules.tex, Tags 093J and 093M; sites-cohomology.tex, Tags 06YQ and 06YM
-(blueprint: lem-sf-completed-coefficient-free-resolution).
+/-! # Free resolutions over completed integral coefficient sheaves
 
 The index `n` denotes the positive exponent `n + 1`. All coefficients and maps are
 the published constant quotient sheaves, their inverse limit and their projections.
+
+## References
+
+* [Stacks, Tag 09C3]
+* [Stacks, Tag 099I]
+* [Stacks, Tag 093J]
+* [Stacks, Tag 093M]
+* [Stacks, Tag 06YQ]
+* [Stacks, Tag 06YM]
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 06YY]
+* [Bhatt--Scholze, *The pro-étale topology for schemes*, Propositions 3.1.9--3.1.10]
 -/
 
 @[expose] public noncomputable section
@@ -139,35 +147,27 @@ namespace WeilConjectures.CompletedCoefficientFree
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})
 
-/-- The free rank-one complex in degree zero over the existing completion.
-Source: Stacks Tag 09C3 (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+/-- The free rank-one complex in degree zero over the existing completion. -/
 abbrev freeUnitComplex : CochainComplex (scalarReductionSource l E T) ℤ :=
   (CochainComplex.singleFunctor _ 0).obj
     (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T))
 
-/-- Multiplication by the positive uniformizer power on the degree-zero free complex.
-Source: Stacks Tags 093M and 06YM
-(blueprint: lem-sf-completed-coefficient-free-resolution). -/
+/-- Multiplication by the positive uniformizer power on the degree-zero free complex. -/
 def uniformizerPower (n : ℕ) : freeUnitComplex l E T ⟶ freeUnitComplex l E T :=
   (integralScalarChainAction l E T
     (Padic.coefficientExtensionUniformizer l E ^ (n + 1))).app (freeUnitComplex l E T)
 
-/-- The actual two-term free complex `[B --varpi^(n+1)--> B]` in degrees `-1,0`.
-Source: Stacks Tags 093M and 06YM
-(blueprint: lem-sf-completed-coefficient-free-resolution). -/
+/-- The actual two-term free complex `[B --varpi^(n+1)--> B]` in degrees `-1,0`. -/
 def quotientResolution (n : ℕ) : CochainComplex (scalarReductionSource l E T) ℤ :=
   CochainComplex.mappingCone (uniformizerPower l E T n)
 
-/-- The finite coefficient ring as a module over the completion via its projection.
-Source: Stacks Tags 093M and 03CZ
-(blueprint: lem-sf-completed-coefficient-free-resolution). -/
+/-- The finite coefficient ring as a module over the completion via its projection. -/
 abbrev residueModule (n : ℕ) : scalarReductionSource l E T :=
   (scalarReductionRestriction l E T n).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E T n))
 
 /-- The actual quotient projection `B -> R_(n+1)`, as the unit-module map taking
-`1` to `1`; the action on the target is restricted along the limit projection.
-Source: Stacks Tag 093M (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+`1` to `1`; the action on the target is restricted along the limit projection. -/
 def quotientProjection (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T) ⟶
       residueModule l E T n :=
@@ -175,8 +175,7 @@ def quotientProjection (n : ℕ) :
     ((SheafOfModules.unit (integralCoefficientSheaf l E T n)).unitHomEquiv (𝟙 _))
 
 /-- A finite free cell, with rank zero allowed, in an arbitrary integer degree.
-Finite products here are the canonical finite direct sums in the abelian module category.
-Source: Stacks Tag 09C3 (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+Finite products here are the canonical finite direct sums in the abelian module category. -/
 def freeCell (r : ℕ) (d : ℤ) : CochainComplex (scalarReductionSource l E T) ℤ :=
   (CochainComplex.singleFunctor _ d).obj
     (∏ᶜ fun _ : Fin r ↦
@@ -184,8 +183,7 @@ def freeCell (r : ℕ) (d : ℤ) : CochainComplex (scalarReductionSource l E T) 
 
 /-- The canonical reduction of every unbounded derived object. The normalized derived
 adjunction fixes this unit on K-flat representatives by `x -> 1 tensor x`; thus the
-choice of witness does not introduce an arbitrary arrow.
-Source: Stacks Tag 06YY (blueprint: lem-sf-completed-coefficient-free-resolution). -/
+choice of witness does not introduce an arbitrary arrow. -/
 def reductionMap (n : ℕ) (M : DerivedCategory (scalarReductionSource l E T)) :
     M ⟶ (scalarReductionDerivedRestriction l E T n).obj
       ((scalarReductionDerivedExtension l E T n).obj M) :=
@@ -1299,34 +1297,7 @@ private theorem freeCell_complete (r : ℕ) (d : ℤ) :
 /-- The free quotient resolution is K-flat and its canonical augmentation is a
 quasi-isomorphism; every finite free cell is complete through the actual quotient
 projections; and canonical reduction of every unbounded derived object is the cone
-of its uniformizer power.
-
-Source: Stacks Project, proetale.tex Tag 09C3, algebraization.tex Tag 099I,
-sites-modules.tex Tags 093J/093M, sites-cohomology.tex Tags 06YQ/06YM;
-Bhatt--Scholze, Propositions 3.1.9--3.1.10
-(blueprint: lem-sf-completed-coefficient-free-resolution).
-
-Proof:
-1. Sectionwise regularity of the completed scalar and divisibility of the kernel of
-   each completion projection give the actual coefficient short exact sequence.
-   Its image under the single-complex functor has the canonical cone augmentation;
-   the standard mapping-cone short-exact-sequence theorem makes it a quasi-isomorphism.
-2. The unit sheaf is flat over itself. Finite products and the two-term cone have
-   flat terms and are bounded above, so the independent-coefficient bounded-flat
-   criterion makes both the resolution and every free cell K-flat.
-3. The ordinary finite-free quotient tower has the free cell as its limit, with
-   its specified augmentation and epimorphic transitions in every degree. The
-   pro-etale surjective-tower theorem makes one minus shift epimorphic on the
-   complex product. Its kernel is the ordinary limit. The resulting short exact
-   sequence, together with preservation of countable products by localization,
-   gives the required derived-limit triangle with the original augmentation.
-4. On a flat-term K-flat complex, tensor the coefficient short exact sequence
-   degree by degree. Tensor-unit and scalar-extension comparisons identify its
-   maps with scalar multiplication and the ordinary scalar-extension unit.
-   Its derived short-exact-sequence triangle therefore computes reduction.
-   The normalized derived adjunction identifies the second arrow with reductionMap.
-   Finally take a flat-term K-flat resolution of any unbounded object and
-   transport this triangle along its quasi-isomorphism. -/
+of its uniformizer power. -/
 theorem completed_coefficient_free_resolution :
     (∀ n : ℕ,
       CochainComplex.IsKFlatIndependentCoefficients

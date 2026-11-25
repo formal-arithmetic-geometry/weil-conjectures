@@ -13,7 +13,13 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.Integral
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteCoordinateCalculus
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0D6D]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,16 +39,7 @@ attribute [local implicit_reducible] Equivalence.mapDerivedCategory
   sfIntrinsicPullback sfIntrinsicTransport sfIntrinsicExtensionByZero
 set_option backward.defeqAttrib.useBackward true
 
-/-- Finite realization identifies the derived proper counit in the fixed coordinates.
-Source: Stacks 03D6 and 0D6D, compactification-coherence proof, first two paragraphs
-(blueprint: lem-sf-finite-ring-counit-coordinates).
-
-Proof: derive the ordinary finite left-adjoint uniqueness isomorphism using derivedUniq.
-Apply its counit identity to the inverse derived realization comparison.
-derived_realization_mate and mateEquiv_counit give the realization counit identity.
-Finally derived_square_left_comp identifies the composite of the two exact pullback
-squares with finiteDerivedPullCoordinates. The argument applies to every map and
-unbounded derived object, including zero objects and empty schemes. -/
+/-- Finite realization identifies the derived proper counit in the fixed coordinates. -/
 theorem finite_direct_counit_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

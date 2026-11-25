@@ -425,12 +425,7 @@ private theorem coordinateComponent_hom
     (sourceIso_app S f c K L) (targetIso_app S f c K L) _).trans
       (component_hom S f c K L).symm
 
-/-- The specified finite projection is natural on the two full input domains.
-Source: naturality of projectionMapOfCompactification and its coefficient conjugations
-(blueprint: lem-sf-finite-projection-input-naturality).
-Proof: form the source and target natural coefficient comparisons; conjugate the
-published projection natural transformation by them. Evaluate its naturality and
-reflect the resulting equation through the faithful constructible inclusion. -/
+/-- The specified finite projection is natural on the two full input domains. -/
 theorem component_input_naturality (S : SixFunctorFiniteOperations D C E n hn)
     {X Y : SixFunctorSpace D} (f : X ⟶ Y) (c : Compactification f.hom.left)
     {K K' : sixFunctorFiniteCategory D C E n hn X}
