@@ -27,8 +27,6 @@ noncomputable local instance instAB5OfSizeAddCommGrpCat_derivedPulledGlobalGermF
     : AB5OfSize.{u, u} AddCommGrpCat.{u + 1} :=
   AB5OfSize_shrink.{u, u, u + 1, u + 1} _
 
--- Keep the unused abbreviation R in the original statement unchanged.
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency true in
 -- Canonical homotopy comparison endpoints require repeated definitional equality checks.
 /-- The source-side derived germ and exchange, precomposed with the global-sections
@@ -45,7 +43,7 @@ theorem derivedPulledGlobalGerm_fac
     let F' := lowerStar B f'
     let G := upperStar B g
     let G' := upperStar B g'
-    let R := lowerStar B g'
+    let _R := lowerStar B g'
     let H := Sheaf.Γ X.smallEtaleTopology B
     let S := (pointSmallEtale t).sheafFiber
     let a : H ⟶ G' ⋙ F' ⋙ S :=

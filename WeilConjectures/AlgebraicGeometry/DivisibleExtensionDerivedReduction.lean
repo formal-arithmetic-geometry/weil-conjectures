@@ -331,7 +331,7 @@ private theorem scalarForget_preservesFiniteColimits (A : Sheaf J RingCat.{r}) :
       (isColimitOfPreserves (L ⋙ toSheaf.{r} A) hc)
   exact preservesColimit_of_iso_diagram (toSheaf.{r} A) e
 
-set_option linter.unusedSectionVars false in
+omit [EssentiallySmall.{r} C] in
 /-- Restriction is exact: it retains the underlying abelian sheaf.
 (Stacks, Tags 03D7 and 015F) -/
 theorem sheafScalarRestriction_exact :

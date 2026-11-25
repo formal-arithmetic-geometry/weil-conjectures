@@ -22,7 +22,6 @@ set_option autoImplicit false
 set_option genSizeOf false
 set_option genInjectivity false
 set_option synthInstance.maxSize 4096
-set_option linter.style.haveILetI false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
@@ -57,7 +56,7 @@ private theorem geometric_shift
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory R f).hom ℤ := by
   have ha := (CondensedRing.kflat_derived_adjunction_transport_shifts
     (Mon.mk R) f).2.2
-  letI : (CondensedRing.derivedUpperStarLowerStarAdjunction R f).CommShift ℤ := ha
+  let : (CondensedRing.derivedUpperStarLowerStarAdjunction R f).CommShift ℤ := ha
   have he : derivedUpperCommShift R f =
       CondensedRing.modulePullbackDerivedCommShift R f := by
     exact adjoint_shift_eq
@@ -137,8 +136,8 @@ theorem diagonalRealization_pullback_comparison (l : ℕ) [Fact l.Prime]
     apply Iso.ext
     exact hc
   subst coeff
-  letI : eS.F.asEquivalence.functor.Additive := inferInstanceAs eS.F.Additive
-  letI : eX.F.asEquivalence.functor.Additive := inferInstanceAs eX.F.Additive
+  let : eS.F.asEquivalence.functor.Additive := inferInstanceAs eS.F.Additive
+  let : eX.F.asEquivalence.functor.Additive := inferInstanceAs eX.F.Additive
   let raw := Functor.mapDerivedCategorySquareIso
     (diagonalPullbackOrdinaryComparison l f eX eS)
   let upperIso := CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
@@ -147,7 +146,7 @@ theorem diagonalRealization_pullback_comparison (l : ℕ) [Fact l.Prime]
   refine ⟨{
     comparison := comparison
     shifts := by
-      letI : (CondensedRing.upperStar
+      let : (CondensedRing.upperStar
           (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).leftDerivedFunctor.CommShift ℤ :=
         derivedUpperCommShift (Profinite.continuousMapRingObj.{u} ℤ_[l]) f
       have hg : NatTrans.CommShift
@@ -161,7 +160,7 @@ theorem diagonalRealization_pullback_comparison (l : ℕ) [Fact l.Prime]
             (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).mapDerivedCategory)
           (F₂ := derivedUpper (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
           upperIso.symm.hom ℤ := by
-        letI : NatTrans.CommShift
+        let : NatTrans.CommShift
             (F₁ := derivedUpper (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)
             (F₂ := (CondensedRing.upperStar
               (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).mapDerivedCategory)
@@ -170,7 +169,7 @@ theorem diagonalRealization_pullback_comparison (l : ℕ) [Fact l.Prime]
       have hr : NatTrans.CommShift raw.hom ℤ := by
         dsimp [raw]
         infer_instance
-      letI : NatTrans.CommShift
+      let : NatTrans.CommShift
           (F₁ := (CondensedRing.upperStar
             (Profinite.continuousMapRingObj.{u} ℤ_[l]) f).mapDerivedCategory)
           (F₂ := derivedUpper (Profinite.continuousMapRingObj.{u} ℤ_[l]) f)

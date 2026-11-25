@@ -139,8 +139,6 @@ private theorem transport_action
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The unchanged interface retains the unused section x and let-bound coefficient N.
-set_option linter.unusedVariables false in
 /-- Compatibility of the degree-n section obtained from tensorPowSection f 1
 on the degree-n(e+1) coefficient. -/
 theorem tensorGradedAction_projection_first {X Z : Scheme.{u}} (j : Z ⟶ X)
@@ -148,7 +146,7 @@ theorem tensorGradedAction_projection_first {X Z : Scheme.{u}} (j : Z ⟶ X)
     (n : ℕ) (T : TensorGradedPresentation j L) (D : TensorBoundaryComparisonData j L n)
     (hD : canonicalTensorBoundaryComparisons j L hI n = D)
     (e : ℕ) (f : 𝟙_ Z.Modules ⟶ ((tensorPullback j).obj L).tensorPow n)
-    (x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1))
+    (_x : 𝟙_ Z.Modules ⟶ (((tensorPullback j).obj L).tensorPow n).tensorPow (e + 1))
     (σ : ∀ U : X.Opens, T.C.right.obj.obj (op U) →+*
       Module.End ((moduleRings X.toRingedSpace).obj.obj (op U)) (T.I.val.obj (op U)))
     (μ : T.C.right.obj.obj (op ⊤) →+* End T.I)
@@ -168,14 +166,14 @@ theorem tensorGradedAction_projection_first {X Z : Scheme.{u}} (j : Z ⟶ X)
     (haction : ∀ g : T.C.right.obj.obj (op ⊤), ρ g =
       ((RingedSpace.moduleCohomology X.toRingedSpace 1).map (μ g).asHom).hom) :
     let F : Z.Modules := (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow n)
-    let N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
+    let _N : Z.Modules := ((tensorPullback j).obj L).tensorPow n
     let H := RingedSpace.moduleCohomology Z.toRingedSpace 1
     (∀ z : (RingedSpace.moduleCohomology X.toRingedSpace 1).obj T.I,
       tensorGradedCoefficientProjection T D (e + 1)
         (ρ (tensorGradedSection T D 0 (tensorPowSection f 1)) z) =
       H.map (mulTensorPowSection f F e 1) (tensorGradedCoefficientProjection T D e z)) := by
   intro F N H z
-  clear N x
+  clear N _x
   dsimp only [F, H]
   let HX := RingedSpace.moduleCohomology X.toRingedSpace 1
   let HZ := RingedSpace.moduleCohomology Z.toRingedSpace 1

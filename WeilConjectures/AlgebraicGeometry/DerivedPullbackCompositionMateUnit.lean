@@ -60,9 +60,6 @@ private theorem mate_transpose_to
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
-set_option linter.all false in
--- Avoid repeating the expensive chosen-object type comparisons during linting.
--- Matching the composition expands the sheaf and derived-functor instances.
 /-- The conjugate of the fixed pullback comparison satisfies the pasted direct-image
 unit equation, before identifying it with any direct-image composition isomorphism
 (Stacks, Tags 079W, 0D5S and 0D5T). -/

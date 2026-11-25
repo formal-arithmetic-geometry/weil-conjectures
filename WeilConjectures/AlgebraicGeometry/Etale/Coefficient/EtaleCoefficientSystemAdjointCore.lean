@@ -88,7 +88,6 @@ it and proves the existence theorems (split for the per-file compile limit).
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async true
-set_option linter.all false
 set_option genInjectivity false
 set_option genSizeOfSpec false
 set_option genSizeOf false
@@ -158,6 +157,8 @@ structure StrictEtaleExceptionalAdjointData (S : StrictEtaleCompactSupport O ell
 attribute [instance] StrictEtaleExceptionalAdjointData.rightAdditive
   StrictEtaleExceptionalAdjointData.shift
 
+-- Removing deprecated `TwoSquare.natTrans` would change the statement text.
+set_option linter.deprecated false in
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalAdjoint`. -/
 def StrictEtaleExceptionalAdjointCoherence (S : StrictEtaleCompactSupport O ell c)
     (record : StrictEtaleExceptionalAdjointData O ell c S) : Prop :=
@@ -285,6 +286,8 @@ structure StrictEtaleExceptionalTransportData where
   quotientX : StrictEtaleTransportQuotient TX
   quotientY : StrictEtaleTransportQuotient TY
 
+-- Removing deprecated `TwoSquare.natTrans` would change the statement text.
+set_option linter.deprecated false in
 /-- The specified data and canonical coherence of `StrictEtaleExceptionalTransport`. -/
 def StrictEtaleExceptionalTransportCoherence
     (record : StrictEtaleExceptionalTransportData a c SA SB TX TY TZ GA GB) : Prop :=
@@ -453,6 +456,8 @@ private theorem brownFiniteAmplitude
   obtain ⟨r, hr⟩ := ht
   exact ⟨r, fun z ↦ by rw [hr, zero_mul]⟩
 
+-- Removing deprecated `TwoSquare.natTrans` would change the statement text.
+set_option linter.deprecated false in
 private theorem brownFiniteQuotient
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     {X Y : Scheme.{u}}
@@ -497,6 +502,8 @@ private theorem brownInverseWord {C : Type*} [Category C]
   simp only [Category.assoc, Iso.hom_inv_id_assoc, Category.comp_id,
     Iso.hom_inv_id]
 
+-- Removing deprecated `TwoSquare.natTrans` would change the statement text.
+set_option linter.deprecated false in
 private theorem brownCubeMate_isIso
     {A B C D A' B' C' D' : Type*}
     [Category A] [Category B] [Category C] [Category D]

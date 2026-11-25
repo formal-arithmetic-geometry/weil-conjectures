@@ -19,7 +19,6 @@ import WeilConjectures.ConstructibleSheaf.EtaleMorphismDescent
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.all false
 
 universe u
 
@@ -63,6 +62,7 @@ variable (A : Type (u + 1)) [CommRing A]
   {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f] (c : Compactification f)
 private noncomputable abbrev sectionMap : U ⟶ pullback c.g f :=
   pullback.lift c.i (𝟙 U) (by simpa using c.comm.symm)
+omit [IsSeparated f] in
 private theorem section_open : IsOpenImmersion (sectionMap f c) := by
   have : IsOpenImmersion (sectionMap f c ≫ pullback.fst c.g f) := by
     simpa only [sectionMap, pullback.lift_fst] using
@@ -70,6 +70,7 @@ private theorem section_open : IsOpenImmersion (sectionMap f c) := by
   exact FormallyUnramified.isOpenImmersion_of_comp (pullback.fst c.g f) (sectionMap f c)
 attribute [local instance] section_open
 
+omit [Etale f] [IsSeparated f] in
 private theorem section_closed : IsClosedImmersion (sectionMap f c) := by
   have : IsClosedImmersion (sectionMap f c ≫ pullback.snd c.g f) := by
     simpa only [sectionMap, pullback.lift_snd] using
@@ -77,6 +78,7 @@ private theorem section_closed : IsClosedImmersion (sectionMap f c) := by
   exact IsClosedImmersion.of_comp (sectionMap f c) (pullback.snd c.g f)
 attribute [local instance] section_closed
 
+omit [IsSeparated f] in
 private theorem section_comparison_iso :
     IsIso (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (sectionMap f c)) :=
   isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range _ _
@@ -124,8 +126,9 @@ private noncomputable def transfer :
     erw [← Adjunction.unit_naturality_assoc]
     rw [← Functor.map_comp]
     erw [(composition A f c).hom.naturality]
-    simp only [Functor.map_comp, Category.assoc]
+    simp only [Functor.map_comp]
 attribute [local irreducible] transfer
+omit [IsSeparated f] in
 private theorem transfer_formula
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M =
@@ -151,7 +154,7 @@ private theorem transfer_formula
     have h := Adjunction.unit_leftAdjointUniq_hom_app ((s.comp v).ofNatIsoRight t.symm) j N
     simp only [Adjunction.ofNatIsoRight_unit, Adjunction.comp_unit_app,
       NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_hom,
-      Functor.comp_map, Category.assoc] at h
+      Category.assoc] at h
     have hn := t.inv.naturality
       ((((s.comp v).ofNatIsoRight t.symm).leftAdjointUniq j).hom.app N)
     dsimp only [Functor.comp_map] at hn
@@ -170,6 +173,7 @@ private theorem transfer_formula
     (upperStarComp (ModuleCat.{u + 1} A) (sectionMap f c) (pullback.fst c.g f) c.i
       (pullback.lift_fst c.i (𝟙 U) (by simpa using c.comm.symm)).symm) M
   simpa only [composition, transfer] using congrArg (fun z => (projection A f c).app M ≫ z) hv
+omit [IsSeparated f] in
 private theorem transfer_toLowerStar
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M ≫
@@ -200,13 +204,14 @@ private theorem transfer_toLowerStar
         ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) c.i).app M))
   simp only [Functor.id_map, Functor.comp_map] at hn
   rw [← hn]
-  simp only [Functor.comp_map, ← Functor.map_comp_assoc]
+  simp only [← Functor.map_comp_assoc]
   simp only [Category.assoc]
   rw [← Functor.comp_map, ← (upperStarComp (ModuleCat.{u + 1} A) (sectionMap f c)
     (pullback.fst c.g f) c.i
       (pullback.lift_fst c.i (𝟙 U) (by simpa using c.comm.symm)).symm).hom.naturality]
   rw [reassoc_of% hunit]
 
+omit [IsSeparated f] in
 private theorem comparison_at_restriction
     (N : Sheaf (pullback c.g f).smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (sectionMap f c)).app
@@ -218,11 +223,11 @@ private theorem comparison_at_restriction
     (ModuleCat.{u + 1} A) (sectionMap f c)
   simp only [Functor.map_comp, Category.assoc,
     unit_map_openImmersionLowerShriekToLowerStar_app_counit,
-    Adjunction.right_triangle_components_assoc,
-    Category.comp_id]
+    Adjunction.right_triangle_components_assoc]
   exact (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
     (sectionMap f c)).left_triangle_components N |>.symm
 
+omit [IsSeparated f] in
 private theorem section_extension_zero
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
     (B : (pullback c.g f).Etale)
@@ -241,6 +246,7 @@ private theorem section_extension_zero
         HasZeroObject.zeroIsTerminal)
   exact hz.of_iso (ev.mapIso e)
 
+omit [IsSeparated f] in
 private theorem transfer_toLowerStar_postunit
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M ≫
@@ -266,7 +272,7 @@ private theorem transfer_toLowerStar_postunit
     (sectionMap f c)).naturality]
   simp only [projection, NatTrans.comp_app, Functor.rightUnitor_inv_app,
     Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
-    Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id, Category.assoc,
+    Functor.leftUnitor_hom_app, Category.id_comp, Category.assoc,
     asIso_inv, NatIso.isIso_inv_app, IsIso.inv_hom_id_assoc, Functor.map_comp]
   erw [Category.id_comp]
 
@@ -277,6 +283,7 @@ private noncomputable def delta :
   (etaleLowerShriekBaseChangeIso A (IsPullback.of_hasPullback c.g f)).hom ≫
     Functor.whiskerRight (projection A f c) _ ≫ (composition A f c).hom
 attribute [local irreducible] delta
+omit [IsSeparated f] in
 private theorem transfer_eq (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (transfer A f c).app M =
       ((etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)
@@ -284,8 +291,7 @@ private theorem transfer_eq (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A
         ((etaleLowerShriekBaseChangeIso A (IsPullback.of_hasPullback c.g f)).inv.app M ≫
           (delta A f c).app M) := by
   simp only [delta, NatTrans.comp_app, Functor.whiskerRight_app,
-    Iso.inv_hom_id_app_assoc, Adjunction.homEquiv_unit, Functor.map_comp,
-    Category.assoc]
+    Iso.inv_hom_id_app_assoc, Adjunction.homEquiv_unit, Functor.map_comp]
   erw [Adjunction.unit_naturality_assoc]
   with_unfolding_all rfl
 set_option maxRecDepth 4000 in
@@ -342,21 +348,21 @@ private theorem comparison_restriction_unit
   rw [baseChangeMap_flip_eq (ModuleCat.{u + 1} A)
     (IsPullback.of_hasPullback c.g f).toCommSq.flip] at h
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.map_comp, Category.assoc] at h ⊢
+    Functor.map_comp] at h ⊢
   have h' := congrArg (fun z => z ≫
     (lowerStar (ModuleCat.{u + 1} A) (pullback.snd c.g f)).map
       ((upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A)
         (pullback.fst c.g f) inferInstance).hom.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).obj M))) h
-  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-    Category.comp_id] at h'
-  simp only [Functor.map_comp, Category.assoc] at h'
+  simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id] at h'
+  simp only [Functor.map_comp] at h'
   rw [← h']
   simp only [etaleLowerShriekRestrictionAdjunction, Adjunction.ofNatIsoRight_unit,
     NatTrans.comp_app, Functor.whiskerLeft_app, Category.assoc]
   rw [← (upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} A)
     f inferInstance).hom.naturality_assoc]
-  simp only [CategoryTheory.Functor.map_id, Category.comp_id, Functor.comp_obj]
+  simp only [Category.comp_id, Functor.comp_obj]
 
 private noncomputable def normalizedTransfer
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
@@ -371,6 +377,7 @@ private noncomputable def normalizedTransfer
         (ModuleCat.{u + 1} A) c.i).app M)
 attribute [local irreducible] normalizedTransfer
 
+omit [IsSeparated f] in
 private theorem siteBC_iso :
     IsIso (MorphismProperty.Over.pullbackMapComparison
       (inferInstance : Etale f) (inferInstance : Etale (pullback.fst c.g f))
@@ -388,7 +395,7 @@ private noncomputable def graphTestMap (W : U.Etale) :
     (MorphismProperty.Over.map ⊤ (inferInstance : Etale (sectionMap f c))).obj W ⟶
       testObject f c W :=
   MorphismProperty.Over.homMk
-    (pullback.lift (𝟙 W.left) (W.hom ≫ sectionMap f c) (by simp [sectionMap, pullback.lift_snd]))
+    (pullback.lift (𝟙 W.left) (W.hom ≫ sectionMap f c) (by simp [sectionMap]))
     (by simp) trivial
 
 private noncomputable def graphTestMap' (W : U.Etale) :
@@ -401,6 +408,7 @@ private noncomputable def graphTestMap' (W : U.Etale) :
       (MorphismProperty.Over.map ⊤
         (inferInstance : Etale (pullback.fst c.g f))).map (graphTestMap f c W)
 
+omit [IsSeparated f] in
 private theorem graphTestMap_geometry (W : U.Etale) :
     Scheme.Etale.graph f W ≫
       (MorphismProperty.Over.pullbackComp c.i c.g f c.comm).hom.app
@@ -416,16 +424,17 @@ private theorem graphTestMap_geometry (W : U.Etale) :
       (inferInstance : Etale f) (inferInstance : Etale (pullback.fst c.g f))
       (IsPullback.of_hasPullback c.g f).toCommSq.flip).app W))]
   simp only [Category.assoc, ← Functor.map_comp, IsIso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.comp_id]
+    CategoryTheory.Functor.map_id]
   apply MorphismProperty.Over.Hom.ext
   apply pullback.hom_ext
   · apply pullback.hom_ext
     · simp [graphTestMap', graphTestMap, testObject, Scheme.Etale.graph_left,
         MorphismProperty.Over.pullbackMapComparison_app_left]
     · simp [graphTestMap', graphTestMap, testObject, Scheme.Etale.graph_left,
-        MorphismProperty.Over.pullbackMapComparison_app_left, sectionMap, pullback.lift_fst]
+        MorphismProperty.Over.pullbackMapComparison_app_left, sectionMap]
   · simp [graphTestMap', graphTestMap, testObject, Scheme.Etale.graph_left]
 
+omit [IsSeparated f] in
 private theorem transfer_restriction
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (upperStar (ModuleCat.{u + 1} A) (sectionMap f c)).map
@@ -448,6 +457,7 @@ private theorem transfer_restriction
           ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) c.i).app M))
   exact hn.symm.trans (transfer_toLowerStar_postunit A f c M)
 
+omit [IsSeparated f] in
 private theorem normalizedTransfer_restriction
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) :
     (localizationRestriction (ModuleCat.{u + 1} A) (sectionMap f c) inferInstance).map
@@ -493,6 +503,7 @@ private theorem normalizedTransfer_restriction
     IsIso.inv_hom_id_assoc] at he'
   rw [reassoc_of% he']
 
+omit [IsSeparated f] in
 private theorem restrictionBC_iso :
     IsIso (localizationRestrictionBaseChangeMap (ModuleCat.{u + 1} A)
       (IsPullback.of_hasPullback c.g f).toCommSq.flip) :=
@@ -501,6 +512,7 @@ private theorem restrictionBC_iso :
 
 attribute [local instance] restrictionBC_iso
 
+omit [IsSeparated f] in
 private theorem restrictionBC_inv_app
     (N : Sheaf c.Z.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etaleᵒᵖ) :
     (inv ((localizationRestrictionBaseChangeMap (ModuleCat.{u + 1} A)
@@ -529,6 +541,7 @@ private theorem restrictionBC_inv_app
 
 attribute [local irreducible] upperStarLowerStarAdjunction
 
+omit [IsSeparated f] in
 private theorem graph_unit
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) :
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
@@ -593,7 +606,7 @@ private theorem graph_unit
     Functor.sheafPushforwardContinuousId'_inv_app_hom_app] at hh'
   simp only [Functor.id_obj, Functor.comp_obj, Category.assoc,
     ← Functor.map_comp, ← op_comp] at hh'
-  simp only [Iso.inv_hom_id_app, op_id, CategoryTheory.Functor.map_id] at hh'
+  simp only [Iso.inv_hom_id_app] at hh'
   erw [M.obj.map_id] at hh'
   change _ = _ ≫ _ ≫ ((sectionIso A f c).hom.app M).hom.app _ ≫ M.obj.map a.op
     at hh'
@@ -608,6 +621,7 @@ private theorem graph_unit
     ← op_comp, Quiver.Hom.unop_op, ha] at hh'
   exact hh'.symm
 
+omit [IsSeparated f] in
 private theorem normalizedTransfer_graph
     (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale) :
     ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
@@ -666,6 +680,7 @@ private noncomputable def toTest (W : U.Etale) :
       (IsPullback.of_hasPullback c.g f).toCommSq.flip).app W))).left ≫
   pullback.fst ((testObject f c W).hom ≫ pullback.fst c.g f) c.i
 
+omit [IsSeparated f] in
 private theorem toTest_open (W : U.Etale) : IsOpenImmersion (toTest f c W) := by
   unfold toTest
   infer_instance
@@ -674,6 +689,7 @@ attribute [local instance] toTest_open
 
 attribute [local irreducible] toTest
 
+omit [IsSeparated f] in
 private theorem toTest_fst (W : U.Etale) :
     toTest f c W ≫ pullback.fst W.hom (pullback.snd c.g f) =
       pullback.fst (W.hom ≫ f) f := by
@@ -698,6 +714,7 @@ private theorem toTest_fst (W : U.Etale) :
   erw [pullback.lift_fst, Category.comp_id]
   rfl
 
+omit [IsSeparated f] in
 private theorem toTest_base (W : U.Etale) :
     toTest f c W ≫ (testObject f c W).hom ≫ pullback.fst c.g f =
       pullback.snd (W.hom ≫ f) f ≫ c.i := by
@@ -885,23 +902,19 @@ theorem compactSupportGraphSheafComparison_normalization_transpose
   refine Scheme.Etale.graph_hom_ext f M ?_ ?_
   · simp only [lowerStarUnit_app_hom_app, Scheme.Etale.graphExtend_graph,
       ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-      GraphNormalization.restrictionBC_inv_app, localizationRestriction_map_hom_app,
-      lowerStar_map_hom_app, lowerStarComp_hom_app_hom_app]
+      GraphNormalization.restrictionBC_inv_app]
     erw [localizationRestriction_map_hom_app]
     erw [lowerStarComp_hom_app_hom_app]
     erw [lowerStar_map_hom_app]
     simp only [Category.assoc]
-
     exact GraphNormalization.normalizedTransfer_graph A f c M W.unop
   · simp only [lowerStarUnit_app_hom_app, Scheme.Etale.graphExtend_graphComplι,
       ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
-      GraphNormalization.restrictionBC_inv_app, localizationRestriction_map_hom_app,
-      lowerStar_map_hom_app, lowerStarComp_hom_app_hom_app]
+      GraphNormalization.restrictionBC_inv_app]
     erw [localizationRestriction_map_hom_app]
     erw [lowerStarComp_hom_app_hom_app]
     erw [lowerStar_map_hom_app]
     simp only [Category.assoc]
-
     exact GraphNormalization.normalizedTransfer_complement A f c M W.unop
 
 /-- The graph transpose extends each sheet section by zero in the compactification.

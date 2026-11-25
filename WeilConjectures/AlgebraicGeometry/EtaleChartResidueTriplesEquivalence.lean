@@ -42,8 +42,6 @@ private theorem affine_global_sections_faithful
     exact hfg
 
 
--- The legacy statement has unused diagram lets; keep its signature unchanged.
-set_option linter.unusedVariables false in
 /-- The opposite of the category of pointed affine chart neighbourhoods is equivalent to the
 category of residue-field triples (Stacks, Tags 04HX and 04HT). -/
 /- The affine chart construction supplies an equivalence of the indexing categories.
@@ -69,9 +67,9 @@ theorem etale_chart_residue_triples_equivalence_functor
     let NU := Q.FullSubcategory
     let D := (P.ι ⋙ Functor.Elements.π (pointSmallEtale x).fiber ⋙
       Etale.forget Y ⋙ Over.forget Y).op ⋙ Scheme.Γ
-    let DU := Q.ι.op ⋙ D
+    let _DU := Q.ι.op ⋙ D
     let T := EtaleResidueTriples A p K χ
-    let DT := etaleResidueTriplesRingDiagram A p K χ
+    let _DT := etaleResidueTriplesRingDiagram A p K χ
     (∀ (c : NU) (z : c.obj.obj.1.left.residueField
           (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).1),
         (SpecToEquivOfField Ω c.obj.obj.1.left c.obj.obj.2.left).2 z ∈ K) → Nonempty (NUᵒᵖ ≌ T)

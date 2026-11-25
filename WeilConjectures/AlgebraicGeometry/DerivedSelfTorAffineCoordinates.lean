@@ -74,8 +74,6 @@ private theorem quotient_tensor_coordinates_of_chosen
   intro x
   exact (hnat x).trans (congrArg g (ConcreteCategory.congr_hom (H.homologyMap_eq n) x))
 
-set_option linter.unusedVariables false in
--- The nested hypotheses keep their documented names although the conclusion is nondependent.
 /-- The intrinsic derived self-tensor of a closed-immersion quotient has normalized
 projective-resolution coordinates on affine opens. The restriction equation holds
 for any augmented quotient-resolution comparison, whose existence is not asserted here
@@ -114,9 +112,9 @@ theorem exists_derived_selfTor_affine_coordinates
               (.down ℕ)).obj R.complex)
             (k : TA.obj P.complex ⟶ ((ModuleCat.restrictScalars φ).mapHomologicalComplex
               (.down ℕ)).obj (TC.obj R.complex))
-            (hψ : ∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x))
-            (ha : ∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x))
-            (hk : ∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),
+            (_hψ : ∀ x : A, ψ (Ideal.Quotient.mk I x) = Ideal.Quotient.mk J (φ x))
+            (_ha : ∀ x : P.complex.X 0, R.π.f 0 (a.f 0 x) = ψ (P.π.f 0 x))
+            (_hk : ∀ (j : ℕ) (x : P.complex.X j) (y : A ⧸ I),
               k.f j (x ⊗ₜ[A] y) = (show R.complex.X j from a.f j x) ⊗ₜ[C] (ψ y)),
             let e := ((TC.obj R.complex).sc n).mapHomologyIso
               (ModuleCat.restrictScalars φ)

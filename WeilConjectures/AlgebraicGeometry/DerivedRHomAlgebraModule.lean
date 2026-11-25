@@ -593,13 +593,9 @@ noncomputable def toSheafAlgebraHomResolution :
 
 section
 
-variable (hB : B.toModule.IsQuasicoherent)
-  [HasDerivedCategory.{w} (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology Y)
-      (forget₂ CommRingCat RingCat)).obj Y.sheaf))]
-  [HasDerivedCategory.{wB} (SheafOfModules.{u}
+variable [HasDerivedCategory.{wB} (SheafOfModules.{u}
     ((sheafCompose (Opens.grothendieckTopology Y) (forget₂ CommRingCat RingCat)).obj B.right))]
 
-set_option linter.unusedSectionVars false in
 /-- The resolution followed by termwise algebra-valued Hom inverts quasi-isomorphisms
 after localization in D(B) (Stacks, Tags 0BV0 and 0A95). -/
 theorem sheafAlgebraHomResolution_inverts :
@@ -649,6 +645,7 @@ theorem derivedRHomAlgebraModule_comparison :
           DerivedCategory.Q) := by
   exact ⟨Localization.fac _ (sheafAlgebraHomResolution_inverts Y B) DerivedCategory.Q⟩
 
+-- Keep the unused instance binders: callers apply this with `@` and explicit universes.
 set_option linter.unusedSectionVars false in
 /-- Restriction of algebra scalars preserves finite limits (Stacks, Tag 0BV1). -/
 theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
@@ -659,6 +656,7 @@ theorem sheafAlgebraRestrictScalars_preservesFiniteLimits :
 
 attribute [instance] sheafAlgebraRestrictScalars_preservesFiniteLimits
 
+-- Keep the unused instance binders: callers apply this with `@` and explicit universes.
 set_option linter.unusedSectionVars false in
 /-- Restriction of algebra scalars preserves finite colimits (Stacks, Tag 0BV1). -/
 theorem sheafAlgebraRestrictScalars_preservesFiniteColimits :
