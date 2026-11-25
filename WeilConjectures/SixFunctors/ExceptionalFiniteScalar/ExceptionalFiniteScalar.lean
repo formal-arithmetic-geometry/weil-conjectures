@@ -10,6 +10,26 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.SixFunctors.ExceptionalFiniteScalar.FiniteScalarPreservation
 import WeilConjectures.SixFunctors.ExceptionalFiniteScalar.FiniteScalarTorInterval
 
+/-!
+# Existence of the finite scalar restriction package
+
+## Implementation details
+
+For `WeilConjectures.ExceptionalFiniteScalar.finiteScalar_exists`: let `K` be constructible of
+Tor amplitude in `[r, s]` over `A`. Since `T` is of finite type over `k` and `l ≠ p`, `l` is
+invertible on `T`, so `K` is represented by a bounded complex `P` of flat constructible
+`A`-modules in degrees `[r, s]`. A bounded complex of flat sheaves is K-flat, so `K ⊗^L_A B` is
+computed by `P ⊗_A B`, whose terms are flat over `B` and constructible. Hence `K ⊗^L_A B` is
+constructible of Tor amplitude in `[r, s]` over `B`. The functor is the full-subcategory lift
+of `ι ⋙ S_a`, and its shift is induced through the fully faithful `ι` from the ambient derived
+tensor shift. No flatness of the coefficient map is assumed.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 09AL]
+-/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.style.haveILetI false
@@ -19,26 +39,10 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures.ExceptionalFiniteScalar
 
 /-- The literal finite scalar restriction package exists at every finite-type `k`-scheme.
-Source: Stacks 06YY and 09AL; finite scalar construction, steps 1--2
-(blueprint: lem-sf-exceptional-finite-scalar-restriction).
 
 The package records preservation of constructibility and the Tor interval, the
 equality realization of the restricted ambient tensor functor, and its inherited
-commuting shift.  No flatness of the coefficient map is assumed.
-
-Proof in words.  Let `K` be constructible of Tor amplitude in `[r, s]` over `A`.  Since
-`T` is of finite type over `k` and `l ≠ p`, `l` is invertible on `T`, so the flat-model
-lemma gives a bounded complex `P` of flat constructible `A`-modules in degrees `[r, s]`
-representing `K`.  A bounded complex of flat sheaves is K-flat, so `K ⊗^L_A B` is computed
-by `P ⊗_A B`, whose terms are flat over `B` (base change of flatness) and constructible
-(finite coefficient change preserves constructibility).  Hence `K ⊗^L_A B` is constructible of
-Tor amplitude in `[r, s]` over `B` (Tor comparison), which gives `preserves` and
-`torInterval`.  The functor is the full-subcategory lift of `ι ⋙ S_a`, so `scalar_eq` holds
-by `rfl`; take as `commShift` the shift induced through the fully faithful `ι` from the
-ambient derived tensor shift, for which `realizationShift` holds by construction.
-Uses: lemma-flat-models-generators--1, lem-pur-derived-change-of-rings,
-lem-sf-comparison-tor-amplitude.
--/
+commuting shift. -/
 theorem finiteScalar_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]

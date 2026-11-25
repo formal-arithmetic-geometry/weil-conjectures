@@ -15,7 +15,16 @@ import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelComparis
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import all WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 
-/-! # Shift compatibility of the ordinary and completed scalar models -/
+/-! # Shift compatibility of the ordinary and completed scalar models
+
+## Implementation details
+
+For `WeilConjectures.ordinary_completed_scalar_shift`: additive natural transformations commute
+with homotopy shifts degreewise. The ordinary-model comparison intertwines the universal derived
+counits on cochain complexes, hence on homotopy objects by surjectivity of the quotient. The
+right Kan extension universal property applied to this equation, followed by cancellation of
+the universal counit, proves the shift square.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -84,14 +93,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 -- The counit equation compares two explicit presentations of the derived scalar functor.
 /-- The canonical ordinary and completed derived scalar models have a shift-compatible
-comparison preserving completion. Source: the universal derived scalar counits and the
-ordinary-model comparison (blueprint: lem-sf-ordinary-completed-scalar-shift).
-
-Proof: additive natural transformations commute with homotopy shifts degreewise. The
-ordinary-model comparison intertwines the universal derived counits on cochain complexes,
-hence on homotopy objects by surjectivity of the quotient. Apply the right Kan extension
-universal property to this equation. Cancellation of the universal counit proves the shift
-square. The completion identity of the model comparison is retained unchanged. -/
+comparison preserving completion. -/
 theorem ordinary_completed_scalar_shift :
     letI : (AlgebraicGeometry.Scheme.pbcDerivedExtend
         (completedCoefficientMap.{u, u} l E L i T)).CommShift ℤ :=
@@ -145,9 +147,7 @@ theorem ordinary_completed_scalar_shift :
     ((completedOrdinaryScalarExtension.{u, u} l E L i T).mapHomotopyCategory (.up ℤ) ⋙
       DerivedCategory.Qh) ε η tH e.hom h
 
-/-- The intrinsic ordinary comparison is completion restricted to constructible objects.
-Source: the normalized ordinary scalar comparison
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+/-- The intrinsic ordinary comparison is completion restricted to constructible objects. -/
 theorem ordinary_scalar_comparison_hom (K : sfIntegralConstructibleCategory l E T) :
     (sfIntegralOrdinaryComparison l E L i T).hom.app K =
       (scalarCompletion l E L i T).app K.obj := by
@@ -164,9 +164,7 @@ theorem ordinary_scalar_comparison_hom (K : sfIntegralConstructibleCategory l E 
     · exact (sfIntegralOrdinaryComparison_existsUnique l E L i T).exists.choose_spec
   exact (congrArg (fun a ↦ a.hom.app K) he).symm
 
-/-- Completion in the raw ambient model, restricted to intrinsic integral objects.
-Source: the canonical completed scalar comparison
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+/-- Completion in the raw ambient model, restricted to intrinsic integral objects. -/
 def intrinsicScalarCompletion :
     (sfIntegralConstructible l E T).ι ⋙
         AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap.{u, u} l E L i T) ⟶
@@ -175,16 +173,12 @@ def intrinsicScalarCompletion :
   Functor.whiskerLeft (sfIntegralConstructible l E T).ι
     (completedScalarComparison.{u, u} l E L i T)
 
-/-- The restricted comparison has the canonical completion components.
-Source: the defining restriction
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+/-- The restricted comparison has the canonical completion components. -/
 theorem intrinsicScalarCompletion_app_heq (K : sfIntegralConstructibleCategory l E T) :
     HEq ((intrinsicScalarCompletion l E L i T).app K)
       ((completedScalarComparison.{u, u} l E L i T).app K.obj) := by rfl
 
-/-- The ordinary-to-completed comparison pastes to intrinsic completion.
-Source: the completion identity of the ordinary model comparison
-(blueprint: lem-sf-ordinary-completed-scalar-shift). -/
+/-- The ordinary-to-completed comparison pastes to intrinsic completion. -/
 theorem intrinsicScalarCompletion_paste
     (e : integralOrdinaryDerivedScalar l E L i T ≅
       AlgebraicGeometry.Scheme.pbcDerivedExtend (completedCoefficientMap.{u, u} l E L i T))

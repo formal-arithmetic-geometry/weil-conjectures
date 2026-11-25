@@ -51,8 +51,7 @@ of `h^* H` over `W'` corresponding to `h^*(φ_s) ∘ θ⁻¹ : Λ[W'] ⟶ h^* H`
 image `η_H(s)` of `s` under the unit `η : H ⟶ h_* h^* H`, a section of
 `(h_* h^* H)(W) = (h^* H)(W')`. Here `Λ[W]` is the free sheaf `j_{W!} Λ_W`, the sheafification
 of `V ↦ Λ^{(Hom_T(V, W))}`, and the correspondence `Hom(Λ[W], H) ≃ H(W)` is
-`AlgebraicGeometry.Etale.freeSheafHomEquiv`.
-(blueprint: `lem-weil-pbc-inverse-image-free-etale-module`) -/
+`AlgebraicGeometry.Etale.freeSheafHomEquiv`. -/
 theorem existsUnique_upperStarFreeSheafIso :
     ∃! θ : (h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ T).obj W) ≅
         (Etale.freeSheaf Λ Y).obj ((MorphismProperty.Over.pullback @Etale ⊤ h).obj W),

@@ -324,20 +324,15 @@ noncomputable def supportRestrictionMap (F : DerivedCategory (Sheaf T.smallEtale
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.openComplement.ι).unit.app _) ≫
     (supportRestrictionIso₃ Λ b c F).inv
 
-/-- Blueprint `proposition-purity-vector-bundles`: Restriction triangle inside a closed
-support
-
-Let `b : B ⟶ T`, `c : C ⟶ T` be closed immersions, `v : V ⟶ T` the open complement of `C`, and
-`d : D ⟶ T` a closed immersion onto `B ∩ C`; `B ∩ V` is the closed subscheme `B ×_T V` of `V`.
-For every complex `F` of étale sheaves on `T` there is a distinguished triangle
+/-- Restriction triangle inside a closed support: let `b : B ⟶ T`, `c : C ⟶ T` be closed
+immersions, `v : V ⟶ T` the open complement of `C`, and `d : D ⟶ T` a closed immersion onto
+`B ∩ C`; `B ∩ V` is the closed subscheme `B ×_T V` of `V`. For every complex `F` of étale
+sheaves on `T` there is a distinguished triangle
 
 `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F) ⟶ RΓ_{B ∩ C}(T, F)[1]`
 
-in `D(Λ)`, where `RΓ_Z` is the derived functor of the sections supported on `Z`
-(`AlgebraicGeometry.Etale.rightDerivedSectionsWithSupport`). The first map is induced by the
-inclusion of supports and the second by the restriction to `V`
-(`AlgebraicGeometry.Etale.supportInclusionMap`, `AlgebraicGeometry.Etale.supportRestrictionMap`).
--/
+in `D(Λ)`, where `RΓ_Z` is the derived functor of the sections supported on `Z`. The first map
+is induced by the inclusion of supports and the second by the restriction to `V`. -/
 theorem exists_distTriang_supportRestriction
     (F : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ∃ δ, Triangle.mk (supportInclusionMap Λ b c d hd F) (supportRestrictionMap Λ b c F) δ ∈

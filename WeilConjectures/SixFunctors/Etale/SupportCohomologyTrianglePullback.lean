@@ -29,9 +29,9 @@ RΓ_Z'(X', e^*K) ⟶ RΓ(X', e^*K) ⟶ RΓ(U', e^*K) ⟶ RΓ_Z'(X', e^*K)[1]
 ```
 
 natural in the bounded below complex `K`
-(`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback`). Hence the long exact sequence
-of cohomology with support of blueprint `thm-pur-with-support-exactness` is functorial in the
-pair: the pullback maps commute with all the maps of the long exact sequences
+(`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback`). Hence the long exact sequence of
+cohomology with support is functorial in the pair: the pullback maps commute with all the maps of
+the long exact sequences
 (`AlgebraicGeometry.Etale.homology_sectionsWithSupportTrianglePullback_comm`), compatibly with
 composition of morphisms of pairs
 (`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback_comp`).
@@ -329,16 +329,12 @@ lemma sectionsWithSupportPullback_comp :
   ext F
   exact sectionsWithSupportPullbackApp_comp A e i i' h F
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(functoriality in the pair, for arbitrary morphisms of pairs).
-
-For a morphism of schemes `e : X' ⟶ X` and closed immersions `i : Z ⟶ X`, `i' : Z' ⟶ X'` whose
-open complements satisfy `U' ⊆ e⁻¹(U)` (i.e. `e⁻¹(Z) ⊆ Z'`), the pullback maps
-`RΓ_Z(X, K) ⟶ RΓ_{Z'}(X', e^* K)`, `RΓ(X, K) ⟶ RΓ(X', e^* K)` and `RΓ(U, K) ⟶ RΓ(U', e^* K)`
-form a morphism of triangles from `sectionsWithSupportTriangle` of `(X, Z)` to that of
-`(X', Z')` applied to `e^* K`, natural in the bounded below complex `K`. Here `e^*` acts
-termwise on complexes, being exact; it is the derived pullback `Le^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`). -/
+/-- Functoriality of the triangle of cohomology with support in the pair: for a morphism of schemes
+`e : X' ⟶ X` and closed immersions `i : Z ⟶ X`, `i' : Z' ⟶ X'` whose open complements satisfy `U' ⊆
+e⁻¹(U)` (i.e. `e⁻¹(Z) ⊆ Z'`), the pullback maps `RΓ_Z(X, K) ⟶ RΓ_{Z'}(X', e^* K)`, `RΓ(X, K) ⟶
+RΓ(X', e^* K)` and `RΓ(U, K) ⟶ RΓ(U', e^* K)` form a morphism of triangles from
+`sectionsWithSupportTriangle` of `(X, Z)` to that of `(X', Z')` applied to `e^* K`, natural in the
+bounded below complex `K`. -/
 noncomputable def sectionsWithSupportTrianglePullback :
     sectionsWithSupportTriangle A i ⟶ D+((e)^*[A]) ⋙ sectionsWithSupportTriangle A i' :=
   ShortComplex.rightDerivedTrianglePullback (e)^*[A]
@@ -348,10 +344,8 @@ noncomputable def sectionsWithSupportTrianglePullback :
     (openComplementSectionsPullback A e i i' h) (sectionsWithSupportPullback_comp A e i i' h).symm
     (ΓPullback_comp_natTransΓRes A e i i' h).symm
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(functoriality of the long exact sequence in the pair).
-
-The pullback maps along a morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` commute with all
+/-- Functoriality of the long exact sequence of cohomology with support in the pair: the
+pullback maps along a morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` commute with all
 the maps of the long exact sequences
 
 `⋯ ⟶ H^q_Z(X, K) ⟶ H^q(X, K) ⟶ H^q(U, K) ⟶ H^{q+1}_Z(X, K) ⟶ ⋯`
@@ -436,12 +430,10 @@ lemma sectionsWithSupportPullback_comp_comp :
 
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(compatibility of the functoriality in the pair with composition).
-
-For morphisms of pairs `e : (X', Z') ⟶ (X, Z)` and `e' : (X'', Z'') ⟶ (X', Z')`, the morphism of
-triangles of cohomology with support along `e' ≫ e` is the composite of the morphisms of
-triangles along `e` and `e'`, up to the comparison `(e' ≫ e)^* K ≅ e'^* e^* K`. -/
+/-- Compatibility of the functoriality in the pair with composition: for morphisms of pairs `e :
+(X', Z') ⟶ (X, Z)` and `e' : (X'', Z'') ⟶ (X', Z')`, the morphism of triangles of cohomology with
+support along `e' ≫ e` is the composite of the morphisms of triangles along `e` and `e'`, up to the
+comparison `(e' ≫ e)^* K ≅ e'^* e^* K`. -/
 theorem sectionsWithSupportTrianglePullback_comp (K : Plus (Sheaf X.smallEtaleTopology A)) :
     (sectionsWithSupportTrianglePullback A (e' ≫ e) i i'' h'').app K ≫
         (sectionsWithSupportTriangle A i'').map

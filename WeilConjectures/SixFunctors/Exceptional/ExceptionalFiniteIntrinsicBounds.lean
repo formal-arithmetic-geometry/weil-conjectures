@@ -15,8 +15,17 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 
 /-! # Uniform intrinsic bounds for the specified exceptional functor
 
-Source: blueprint theorem-f-shriek-finite-coefficients--1
-(blueprint: lem-sf-finite-intrinsic-exceptional-bounds).
+## Implementation details
+
+For `WeilConjectures.sfFiniteOperations_intrinsicExceptionalBounds`, finite affine target charts,
+affine source charts over them and their closed affine-space presentations are chosen once for
+`f`, discarding empty source charts. The affine chart purity bounds are applied to this
+presentation at each positive coefficient stage; the chart maximum `D` and the target dimension
+`e` are geometric, independent of `E` and `n`. For nonempty source the endpoints are `a - 2D`
+and `b + 2e + 1`; for empty source both constants are zero. Uniqueness of the ordinary étale
+right adjoint identifies the purity functor, defined using a chosen compactification, with the
+right adjoint for the specified `c`, and the canonical exact coefficient realization identifies
+fixed-module constructibility and Tor amplitude with the intrinsic predicates.
 -/
 
 @[expose] public noncomputable section
@@ -132,25 +141,11 @@ private theorem bounds_tor_iso
   intro P Q he f hf hQ M i hi
   exact h.2 P Q (he.map (fun z ↦ z ≪≫ e.symm)) f hf hQ M i hi
 
-/-- Uniform intrinsic exceptional bounds for the specified ambient right functor.
-Source: blueprint theorem-f-shriek-finite-coefficients--1, exceptional construction step 3
-(blueprint: lem-sf-finite-intrinsic-exceptional-bounds).
-
-Proof: Choose finite affine target charts, affine source charts over them, and their
-closed affine-space presentations once for f. Discard empty source charts. Apply
-sf_purity_affine_chart_bounds to this presentation at each positive coefficient
-stage. The chart maximum D and target dimension e are geometric, independent of
-E and n. For nonempty source the resulting endpoints are a-2D and b+2e+1;
-for empty source both constants are zero. The purity functor is defined using a
-chosen compactification. Uniqueness of the ordinary etale right adjoint identifies
-it with the right adjoint for the specified c, compatibly with comparison functors.
-Transport the bounds through that isomorphism. The canonical exact coefficient
-realization identifies fixed-module constructibility and Tor amplitude with the
-intrinsic predicates, including the same interval endpoints. The intrinsic output
-is therefore bounded constructible and has finite Tor amplitude. This gives all
-three assertions. An inverted input cohomological interval forces a zero object;
-additivity sends it to zero, so the same support assertion holds without imposing
-a <= b. Positive Tor intervals already include a <= b by definition. -/
+/-- Uniform intrinsic exceptional bounds for the specified ambient right functor: there are
+constants `cMinus` and `cPlus` such that, for every coefficient field stage `E` and every
+`n`, the intrinsic right functor of `c` preserves finite Tor constructibility, sends objects
+constructible in degrees `[a, b]` to objects constructible in degrees
+`[a + cMinus, b + cPlus]`, and likewise for pro-étale Tor amplitude. -/
 theorem sfFiniteOperations_intrinsicExceptionalBounds (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

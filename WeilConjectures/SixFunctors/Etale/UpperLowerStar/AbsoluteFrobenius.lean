@@ -164,12 +164,10 @@ lemma lowerStarIterateFrobeniusIso_hom_app_hom_app (G : Sheaf X.smallEtaleTopolo
       G.obj.map ((overPullbackIterateFrobeniusIso hp hX n).hom.app V.unop).op :=
   rfl
 
-/-- Étale analogue of blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (stated there for
-the small pro-étale site): the absolute Frobenius acts as the identity on
-the étale topos. For a scheme `X` of characteristic `p`, the pullback `(F_X)^*` along the
-absolute `p ^ n`-power Frobenius is isomorphic to the pullback `(𝟙 X)^*` along the identity. It
-is the conjugate of `AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso` under the
-adjunctions `g^* ⊣ g_*`. -/
+/-- The absolute Frobenius acts as the identity on the étale topos: for a scheme `X` of
+characteristic `p`, the pullback `(F_X)^*` along the absolute `p ^ n`-power Frobenius is
+isomorphic to the pullback `(𝟙 X)^*` along the identity. It is the conjugate of
+`AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso` under the adjunctions `g^* ⊣ g_*`. -/
 noncomputable def upperStarIterateFrobeniusIso :
     (X.iterateFrobenius hp hX n)^*[A] ≅ (𝟙 X)^*[A] :=
   (conjugateIsoEquiv (upperStarLowerStarAdjunction A (𝟙 X))
@@ -292,9 +290,7 @@ isomorphisms `(F_X ≫ f)^* ≅ f^*`
 (F_X ≫ f)^* ≅ F_Y^* ⋙ f^* ≅ (𝟙 Y)^* ⋙ f^* ≅ f^*
 (F_X ≫ f)^* ≅ f^* ⋙ F_X^* ≅ f^* ⋙ (𝟙 X)^* ≅ f^*
 ```
-agree. Both are conjugate to isomorphisms of pushforwards, which are given by restriction maps
-along morphisms into fibre products with the same projections
-(`AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso_naturality`). -/
+agree. -/
 theorem upperStarIterateFrobeniusIso_naturality :
     upperStarComp A f (Y.iterateFrobenius hp hY n) (X.iterateFrobenius hp hX n ≫ f)
         (comp_iterateFrobenius hp f hY hX n).symm ≪≫

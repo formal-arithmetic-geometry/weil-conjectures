@@ -114,6 +114,27 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Homology.HomologicalComplex
 import Mathlib.CategoryTheory.Sites.CoverPreserving
 
+/-!
+# Finite scalar maps on the finite-Tor subcategories
+
+## Implementation details
+
+For `WeilConjectures.ExceptionalFiniteScalar.finiteScalarMapsCore_exists`: the proper/open
+scalar comparison is transported through the finite-Tor full inclusions using bounded-below
+étale origins; this constructs the left comparison and proves its normalization. Fully
+faithful origin functors and the exceptional essential-image condition make the vertical
+adjunction mates invertible, and the scalar comparison cube transports invertibility of the
+ambient étale mate to the finite right mate. The mate counit identity gives the counit
+equation, and finite-image transport of the canonical scalar shift gives both shift equations.
+
+## References
+
+* [Zheng, Construction 2.26 and Proposition 2.29]
+* [Stacks, Tag 0GL6]
+* [Stacks, Tag 09AL]
+* [Stacks, Tag 07A4]
+-/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -867,14 +888,9 @@ private theorem map_map_id_iso_cancel
   simp only [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id, Category.comp_id,
     Category.assoc, Iso.hom_inv_id]
 
-/-- The finite scalar maps apart from the ambient etale mate package.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-maps-core).
-
-This is the finite-subcategory part of the scalar-mate construction.  It records the
-left and right comparison isomorphisms, their normalization and counit equation, and
-their shift compatibilities.  The ambient etale mate package is supplied separately.
--/
+/-- The finite scalar maps apart from the ambient etale mate package: the left and right
+comparison isomorphisms on the finite-Tor subcategories, their normalization and counit
+equation, and their shift compatibilities. -/
 structure FiniteScalarMapsCore
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]
@@ -903,18 +919,7 @@ structure FiniteScalarMapsCore
 attribute [local irreducible] originIso leftScalarMap leftOriginIso scalarOriginIso in
 attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
   WeilConjectures.SemilinearSections.hasDerived in
-/-- The finite-subcategory scalar-mate core exists.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks 0GL6, 09AL and 07A4
-(blueprint: lem-sf-exceptional-finite-scalar-maps-core).
-
-Transport the proper/open scalar comparison through the finite-Tor full inclusions
-using bounded-below etale origins. This constructs the left comparison and proves its
-normalization. Fully faithful origin functors and the exceptional essential-image
-condition make the vertical adjunction mates invertible. The scalar comparison cube
-then transports invertibility of the ambient etale mate to the finite right mate.
-The mate counit identity gives the displayed counit equation; finite-image transport
-of the canonical scalar shift gives both shift equations.
--/
+/-- The finite-subcategory scalar-mate core exists. -/
 theorem finiteScalarMapsCore_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]

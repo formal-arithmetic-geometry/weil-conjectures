@@ -43,6 +43,12 @@ quasi-compact quasi-separated scheme commutes with filtered colimits.
   `Hom(Λ_Z[0], N[0]⟦n⟧)` is the cohomology of the underlying abelian sheaf of `N`.
 - `AlgebraicGeometry.Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject`:
   étale cohomology of a quasi-compact quasi-separated scheme commutes with filtered colimits.
+
+## Implementation details
+
+The filtered colimit statement is reduced to abelian sheaf cohomology of the underlying abelian
+sheaf (`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`) in nonnegative degrees; in
+negative degrees the functor vanishes.
 -/
 
 @[expose] public section
@@ -482,20 +488,10 @@ lemma Etale.isZero_shiftedHomFunctor_obj_of_neg {Z : Scheme.{u}}
 
 end FilteredColimit
 
-/-- Blueprint `lemma-finiteness-small-etale-topoi--2` (subsection
-`lem-sc-second-kummer-divisors`): Filtered colimits of étale cohomology. Let `Z` be a quasi-compact
-and quasi-separated scheme. Then étale cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with
-coefficients in sheaves of `Λ`-modules commutes with filtered colimits:
-`colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`.
-
-The same statement for abelian sheaves is
-`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. As in the blueprint, there is no
-restriction on the size of the filtered category beyond that of the coefficients: it may be any
-filtered category in `Type (u + 1)`, the universe of the sheaves of `Λ`-modules.
-
-The proof identifies the functor with abelian sheaf cohomology of the underlying abelian sheaf
-(`AlgebraicGeometry.Etale.shiftedHomFunctorFreeSheafIso`) in nonnegative degrees; in negative
-degrees it vanishes. -/
+/-- Filtered colimits of étale cohomology: for a quasi-compact quasi-separated scheme `Z`, étale
+cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with coefficients in sheaves of `Λ`-modules
+commutes with colimits over any filtered category `J : Type (u + 1)`:
+`colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`. -/
 @[stacks 03Q6]
 theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
     [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type (u + 1)) [SmallCategory J]
