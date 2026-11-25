@@ -11,12 +11,16 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 
-/-! # Localization of exterior powers
+/-!
+# Localization of exterior powers
 
-Source: the localization argument of
-`new-q1-exterior-sheaf-affine-unit-bijective`, step 2, using the alternating
-universal property of exterior powers (Stacks Project, Algebra, Section 00DM).
-(blueprint: new-v2-exterior-power-localization). -/
+If `M → N` is a localization at `S`, then the induced map on `n`-th exterior powers is a
+localization at `S`, stated for modules in `ModuleCat`.
+
+## References
+
+* [Stacks Project, Section 00DM](https://stacks.math.columbia.edu/tag/00DM)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,13 +31,7 @@ open CategoryTheory
 namespace exteriorPower
 
 /-- A map of exterior powers characterized on pure wedges preserves localization.
-This is the `ModuleCat` form of `isLocalizedModule_of_pure_wedge`.
-Source: Stacks Project, Algebra, Section 00DM; the fraction construction in step 2
-of `new-q1-exterior-sheaf-affine-unit-bijective`.
-(blueprint: new-v2-exterior-power-localization).
-
-Proof: view `N` and `⋀^n_B N` as `R`-modules by restriction of scalars along `R → B`;
-these actions form scalar towers, so `isLocalizedModule_of_pure_wedge` applies. -/
+This is the `ModuleCat` form of `isLocalizedModule_of_pure_wedge`. -/
 theorem isLocalizedModule_of_wedge
     {R B : Type u} [CommRing R] [CommRing B] [Algebra R B]
     (S : Submonoid R) [IsLocalization S B]

@@ -43,6 +43,16 @@ The datum of that sequence together with the two comparison isomorphisms is bund
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.nonempty_fourierCorrection`: it exists.
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection.isLisse` and
   `…FourierCorrection.hasWeightsAtMost`: the correction sheaf is lisse of weights at most `w`.
+
+## Implementation details
+
+The square in `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.FourierCorrection` pins the sequence
+down: a short exact sequence is determined up to isomorphism by its epimorphism, `B'` being its
+kernel, so the sequence is the one obtained from the transform of the rotated triangle
+`B → j_!M[1] → j_*M[1] → B[1]` and not, say, a split one. The square is stated for the middle
+arrow of the rotated triangle only: the first arrow `B → j_!M[1]` is the connecting morphism of
+`0 → j_!M → j_*M → B → 0`, whose formation needs `j_!M → j_*M` to be a monomorphism, and
+comparing whole triangles needs a shift-compatibility of the transform.
 -/
 
 @[expose] public section
@@ -68,9 +78,7 @@ noncomputable def boundaryShortComplex : ShortComplex (WeilSheaf k₀ l (affineL
   ShortComplex.mk ((WeilSheaf.extensionByZeroToDirectImage D.j).app D.sheaf) (cokernel.π _)
     (cokernel.condition _)
 
-/-- The sequence `0 → j_!M → j_*M → B → 0` is short exact: `j_!M → j_*M` is a monomorphism
-(`AlgebraicGeometry.WeilSheaf.mono_extensionByZeroToDirectImage_app`) and `B` is its cokernel.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+/-- The sequence `0 → j_!M → j_*M → B → 0` is short exact. -/
 lemma shortExact_boundaryShortComplex : D.boundaryShortComplex.ShortExact :=
   ShortComplex.ShortExact.mk' (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel _))
     (WeilSheaf.mono_extensionByZeroToDirectImage_app D.j D.sheaf)
@@ -85,15 +93,13 @@ lemma boundaryTriangle_mor₂ :
     D.boundaryTriangle.mor₂ = -D.shiftedExtensionByZeroToMiddleExtension :=
   rfl
 
-/-- The rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is distinguished.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+/-- The rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is distinguished. -/
 lemma boundaryTriangle_distinguished : D.boundaryTriangle ∈ distTriang _ :=
   rot_of_distTriang _ (rot_of_distTriang _
     (WeilSheaf.singleTriangle_distinguished D.shortExact_boundaryShortComplex))
 
 /-- The Fourier transform of the rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is
-distinguished, the transform being a triangulated functor. (blueprint:
-`lemma-fourier-transform-boundary-sequence`) -/
+distinguished. -/
 lemma fourierTransform_mapTriangle_boundaryTriangle_distinguished :
     (fourierTransform ψ).mapTriangle.obj D.boundaryTriangle ∈ distTriang _ :=
   (fourierTransform ψ).map_distinguished _ D.boundaryTriangle_distinguished
@@ -117,14 +123,6 @@ that identify `G[1]` with `FT_ψ(j_!M[1])`, `B'[1]` with `FT_ψ(B)` and `(j'_*M'
 
   0 ──▶ B' ──▶ G ──g──▶ X₃ ≃ j'_*M' ──▶ 0
 ```
-
-The square pins the sequence down: a short exact sequence is determined up to isomorphism by its
-epimorphism, `B'` being its kernel, so the sequence is the one obtained from the transform of the
-rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` and not, say, a split one. The square is stated
-for the middle arrow of the rotated triangle only: the first arrow `B → j_!M[1]` is the connecting
-morphism of `0 → j_!M → j_*M → B → 0`, whose formation needs `j_!M → j_*M` to be a
-monomorphism, and comparing whole triangles needs a shift-compatibility of the transform; the
-square already determines the sequence. (blueprint: `lemma-fourier-transform-boundary-sequence`)
 -/
 structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
   /-- The short exact sequence `0 → B' → G → j'_*M' → 0` on the dual line. -/
@@ -148,9 +146,8 @@ structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
         isoMiddleExtension.hom =
       isoExtensionByZero.hom ≫ (WeilSheaf.toComplex.map seq.g)⟦(1 : ℤ)⟧'
 
-/-- **Steps 1–3 of `lemma-fourier-transform-boundary-sequence`.** The transform of the boundary
-sheaf `B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on the dual line which is lisse.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+/-- The transform of the boundary sheaf `B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on
+the dual line which is lisse. -/
 theorem exists_isLisse_iso_fourierTransform_boundarySheaf (D : LisseOnDenseOpen k₀ l) :
     ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
       Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
@@ -195,9 +192,7 @@ lemma fourierTriangle_mor₁_comp (D : LisseOnDenseOpen k₀ l) :
   rwa [fourierTriangle_mor₂, Preadditive.comp_neg, neg_eq_zero] at h
 
 include eB eM in
-/-- Step 5 of `lemma-fourier-transform-boundary-sequence`: the transform `K` of `j_!M[1]` has its
-cohomology concentrated in degree `-1`, since the two outer terms of the triangle
-`B'[1] → K → (j'_*M')[1] →` have. -/
+/-- The transform of `j_!M[1]` has its cohomology concentrated in degree `-1`. -/
 lemma isZero_homologySheaf_fourierTransform_shiftedExtensionByZero {a : ℤ}
     (ha : a ≠ -1) :
     IsZero ((WeilComplex.homologySheaf a).obj
@@ -216,8 +211,7 @@ lemma isZero_homologySheaf_fourierTransform_shiftedExtensionByZero {a : ℤ}
   exact IsZero.of_mono_zero ((WeilComplex.homologySheaf a).obj (fourierTriangle (ψ := ψ) D).obj₂)
     ((WeilComplex.homologySheaf a).obj (fourierTriangle (ψ := ψ) D).obj₃)
 
-/-- The isomorphism `FT_ψ(j_!M[1]) ≅ G[1]`, `G = 𝓗⁻¹ FT_ψ(j_!M[1])`, of Step 5 of
-`lemma-fourier-transform-boundary-sequence`. -/
+/-- The isomorphism `FT_ψ(j_!M[1]) ≅ G[1]`, `G = 𝓗⁻¹ FT_ψ(j_!M[1])`. -/
 noncomputable def isoExtensionByZeroOfIso :
     (fourierTransform ψ).obj D.shiftedExtensionByZero ≅
       WeilSheaf.toShiftedComplex.obj ((WeilComplex.homologySheaf (-1)).obj
@@ -225,14 +219,14 @@ noncomputable def isoExtensionByZeroOfIso :
   (WeilComplex.nonempty_iso_toShiftedComplex _ fun _ ha ↦
     isZero_homologySheaf_fourierTransform_shiftedExtensionByZero eB eM ha).some
 
-/-- The first map `B' → G` of the sequence of Step 5. -/
+/-- The first map `B' → G` of the correction sequence. -/
 noncomputable def correctionSeqF :
     B' ⟶ (WeilComplex.homologySheaf (-1)).obj
       ((fourierTransform ψ).obj D.shiftedExtensionByZero) :=
   WeilSheaf.toShiftedComplex.preimage
     (eB.inv ≫ (fourierTriangle (ψ := ψ) D).mor₁ ≫ (isoExtensionByZeroOfIso eB eM).hom)
 
-/-- The second map `G → j'_*M'` of the sequence of Step 5. -/
+/-- The second map `G → j'_*M'` of the correction sequence. -/
 noncomputable def correctionSeqG :
     (WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.shiftedExtensionByZero) ⟶
       D'.directImage :=
@@ -250,9 +244,8 @@ lemma toShiftedComplex_map_correctionSeqG :
         (fourierTransform ψ).map D.shiftedExtensionByZeroToMiddleExtension ≫ eM.hom :=
   WeilSheaf.toShiftedComplex.map_preimage _
 
-/-- The short complex `0 → B' → G → j'_*M' → 0` of Step 5 of
-`lemma-fourier-transform-boundary-sequence`, read off from the transform of the rotated boundary
-triangle through the isomorphisms with the shifted sheaves. -/
+/-- The correction short complex `0 → B' → G → j'_*M' → 0`, read off from the transform of the
+rotated boundary triangle through the isomorphisms with the shifted sheaves. -/
 noncomputable def correctionSeq : ShortComplex (WeilSheaf k₀ l (affineLine k₀)) :=
   ShortComplex.mk (correctionSeqF eB eM) (correctionSeqG eB eM)
     (WeilSheaf.toShiftedComplex.map_injective (by
@@ -277,13 +270,13 @@ lemma homologySheaf_map_toShiftedComplex_map {F G : WeilSheaf k₀ l (affineLine
       WeilSheaf.toShiftedComplexCompHomologySheafIso.hom.app F ≫ φ :=
   WeilSheaf.toShiftedComplexCompHomologySheafIso.hom.naturality φ
 
-/-- The first component `𝓗⁻¹ FT_ψ(B) ≅ B'` of the comparison of Step 5. -/
+/-- The first component `𝓗⁻¹ FT_ψ(B) ≅ B'` of the comparison. -/
 noncomputable def correctionIso₁ :
     (WeilComplex.homologySheaf (-1)).obj (fourierTriangle (ψ := ψ) D).obj₁ ≅ B' :=
   (WeilComplex.homologySheaf (-1)).mapIso eB ≪≫
     WeilSheaf.toShiftedComplexCompHomologySheafIso.app B'
 
-/-- The second component `𝓗⁻¹ FT_ψ(j_!M[1]) ≅ G` of the comparison of Step 5. -/
+/-- The second component `𝓗⁻¹ FT_ψ(j_!M[1]) ≅ G` of the comparison. -/
 noncomputable def correctionIso₂ :
     (WeilComplex.homologySheaf (-1)).obj (fourierTriangle (ψ := ψ) D).obj₂ ≅
       (WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.shiftedExtensionByZero) :=
@@ -292,13 +285,13 @@ noncomputable def correctionIso₂ :
     WeilSheaf.toShiftedComplexCompHomologySheafIso.app
       ((WeilComplex.homologySheaf (-1)).obj ((fourierTransform ψ).obj D.shiftedExtensionByZero))
 
-/-- The third component `𝓗⁻¹ FT_ψ(j_*M[1]) ≅ j'_*M'` of the comparison of Step 5. -/
+/-- The third component `𝓗⁻¹ FT_ψ(j_*M[1]) ≅ j'_*M'` of the comparison. -/
 noncomputable def correctionIso₃ :
     (WeilComplex.homologySheaf (-1)).obj (fourierTriangle (ψ := ψ) D).obj₃ ≅ D'.directImage :=
   (WeilComplex.homologySheaf (-1)).mapIso eM ≪≫
     WeilSheaf.toShiftedComplexCompHomologySheafIso.app D'.directImage
 
-/-- The short complex of Step 5 is the sequence `𝓗⁻¹` of the transformed triangle, up to the sign
+/-- The correction short complex is the sequence `𝓗⁻¹` of the transformed triangle, up to the sign
 of the last map. -/
 noncomputable def correctionSeqIso : homologySeq (ψ := ψ) D ≅ correctionSeq eB eM :=
   ShortComplex.isoMk (correctionIso₁ eB) (correctionIso₂ eB eM) (-correctionIso₃ eM)
@@ -319,9 +312,7 @@ noncomputable def correctionSeqIso : homologySeq (ψ := ψ) D ≅ correctionSeq 
         fourierTriangle_mor₂, Functor.map_neg, Preadditive.neg_comp, neg_neg]
       simp only [Functor.map_comp, Category.assoc, Iso.hom_inv_id_map_assoc])
 
-/-- The sequence `0 → B' → G → j'_*M' → 0` of Step 5 is short exact: in the long exact sequence
-of cohomology sheaves of the transformed triangle, `𝓗⁻²` of `(j'_*M')[1]` and `𝓗⁰` of `B'[1]`
-vanish. -/
+/-- The sequence `0 → B' → G → j'_*M' → 0` is short exact. -/
 lemma shortExact_correctionSeq : (correctionSeq eB eM).ShortExact := by
   have hT := fourierTriangle_distinguished (ψ := ψ) D
   refine ShortComplex.shortExact_of_iso (correctionSeqIso eB eM) ?_
@@ -338,7 +329,7 @@ lemma shortExact_correctionSeq : (correctionSeq eB eM).ShortExact := by
   exact { exact := WeilComplex.homologySheaf_exact₂ _ (-1) hT, mono_f := hm, epi_g := he }
 
 /-- The zero-extension comparison datum built from the isomorphisms `FT_ψ(B) ≅ B'[1]` and
-`FT_ψ((j_*M)[1]) ≅ (j'_*M')[1]` by Step 5 of `lemma-fourier-transform-boundary-sequence`. -/
+`FT_ψ((j_*M)[1]) ≅ (j'_*M')[1]`. -/
 noncomputable def fourierCorrectionOfIso : FourierCorrection ψ D D' where
   seq := correctionSeq eB eM
   shortExact := shortExact_correctionSeq eB eM
@@ -353,9 +344,7 @@ noncomputable def fourierCorrectionOfIso : FourierCorrection ψ D D' where
 end Construction
 
 /-- For an irreducible nonexceptional `M` and a Fourier partner `D'` of `D`, the zero-extension
-comparison datum exists. Only the hypothesis on the Fourier partner `D'` enters the argument:
-irreducibility and nonexceptionality serve to guarantee that a Fourier partner exists.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+comparison datum exists. -/
 theorem nonempty_fourierCorrection (_hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l)
     (_hD : D.sheaf.IsIrreducibleLisse)
     (_hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
@@ -363,20 +352,14 @@ theorem nonempty_fourierCorrection (_hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k�
   obtain ⟨B', -, ⟨eB⟩⟩ := D.exists_isLisse_iso_fourierTransform_boundarySheaf ψ
   exact ⟨fourierCorrectionOfIso eB hFT.some⟩
 
-/-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of finite direct
-images of Artin–Schreier kernels. It is `𝓗⁻¹ FT_ψ(B)`, as is the sheaf of
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_isLisse_iso_fourierTransform_boundarySheaf`.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+/-- The correction sheaf `B'` is lisse on the entire dual line. -/
 theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
     (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse := by
   obtain ⟨B', hB', ⟨eB⟩⟩ := D.exists_isLisse_iso_fourierTransform_boundarySheaf ψ
   exact hB'.of_iso (WeilSheaf.toShiftedComplex.preimageIso (c.isoBoundary.symm ≪≫ eB)).symm
 
 /-- The correction sheaf `B'` has weights at most `w` when `M` is punctually `ι`-pure of weight
-`w`: semicontinuity of weights at the boundary points, together with the weight zero of the
-Artin–Schreier kernel
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_of_iso_fourierTransform`).
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+`w`. -/
 theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
     {D D' : LisseOnDenseOpen k₀ l} (c : FourierCorrection ψ D D') {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w :=

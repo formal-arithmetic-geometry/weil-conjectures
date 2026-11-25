@@ -17,8 +17,7 @@ public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceBound
 
 Let `M` be a lisse Weil sheaf on a dense open `j : U₀ ↪ 𝔸¹` with weights at most `w`, and let
 `B = j_*M / j_!M` be its boundary sheaf, supported on the finite complement `S₀` of `U₀`. If the
-Fourier transform of `B` is a shifted Weil sheaf `B'[1]`, then `B'` has weights at most `w`
-(Step 4 of `lemma-fourier-transform-boundary-sequence`).
+Fourier transform of `B` is a shifted Weil sheaf `B'[1]`, then `B'` has weights at most `w`.
 
 By boundary semicontinuity `j_*M`, hence its quotient `B`, has weights at most `w`. The Fourier
 trace formula writes the trace function of `B'` as the finite sum
@@ -78,9 +77,7 @@ theorem exists_fieldPoints_base_eq (x : X.finitePoints) (m : ℕ) (hm : m ≠ 0)
   exact ⟨y, (congrArg y.1.base (Subsingleton.elim _ _)).trans hy⟩
 
 /-- **Weights from trace bounds.** If the trace function of a Weil sheaf `F` satisfies
-`|ι t_{F,n}(y)| ≤ C q^{nw/2}` at all rational points, then `F` has weights at most `w`: at a
-closed point `x` of degree `d` the trace of `F_xᵐ` is the value of the trace function at an
-`𝔽_{q^{md}}`-point over `x`, so it is at most `C (q_x^{w/2})ᵐ`. -/
+`|ι t_{F,n}(y)| ≤ C q^{nw/2}` at all rational points, then `F` has weights at most `w`. -/
 theorem hasWeightsAtMost_of_forall_norm_traceFunction_le (F : WeilSheaf k₀ l X)
     {ι : PadicAlgCl l →+* ℂ} {w C : ℝ}
     (h : ∀ n : ℕ, n ≠ 0 → ∀ y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints
@@ -112,8 +109,7 @@ namespace WeilSheaf.LisseOnDenseOpen
 
 variable (D : LisseOnDenseOpen k₀ l)
 
-/-- **The boundary sheaf vanishes on `U₀`**: the restriction of `j_!M ⟶ j_*M` to `U₀` is an
-isomorphism, and the restriction is exact. -/
+/-- **The boundary sheaf vanishes on `U₀`**: `j^*(j_*M / j_!M) = 0`. -/
 theorem isZero_upperStar_boundarySheaf :
     IsZero ((WeilSheaf.upperStar D.j).obj D.boundarySheaf) := by
   rw [isZero_iff_isZero_carrier]
@@ -177,8 +173,7 @@ theorem traceFunction_boundarySheaf_eq_zero {n : ℕ}
   rw [← traceFunction_upperStar]
   exact traceFunction_eq_zero_of_isZero _ D.isZero_upperStar_boundarySheaf n y'
 
-/-- The boundary sheaf has weights at most `w` when `M` has: it is a quotient of `j_*M`, which
-has weights at most `w` by boundary semicontinuity. -/
+/-- The boundary sheaf has weights at most `w` when `M` has. -/
 theorem hasWeightsAtMost_boundarySheaf {ι : PadicAlgCl l →+* ℂ} {w : ℝ}
     (h : D.sheaf.HasWeightsAtMost ι w) : D.boundarySheaf.HasWeightsAtMost ι w := by
   have : SmoothOfRelativeDimension 1 (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
@@ -199,8 +194,7 @@ private lemma norm_map_addChar (ι : PadicAlgCl l →+* ℂ) (ψ : AddChar k₀ 
     FiniteField.cast_card_eq_zero, zero_mul, AddChar.map_zero_eq_one, map_one]
 
 /-- **The trace bound for the transform of the boundary sheaf.** There is a constant `C` such
-that `|ι ∑_x t_B(x) ψ(Tr(x y))| ≤ C q^{nw/2}` at every `𝔽_{qⁿ}`-point `y`: only the finitely
-many points over the boundary contribute, each by at most `N q^{nw/2}`. -/
+that `|ι ∑_x t_B(x) ψ(Tr(x y))| ≤ C q^{nw/2}` at every `𝔽_{qⁿ}`-point `y`. -/
 theorem exists_forall_norm_sum_traceFunction_boundarySheaf_le (ψ : AddChar k₀ (PadicAlgCl l))
     {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (hB : D.boundarySheaf.HasWeightsAtMost ι w) :
     ∃ C : ℝ, ∀ n : ℕ, ∀ y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
@@ -304,11 +298,8 @@ private lemma traceFunction_fourierTransform_eq_neg_finsum (ψ : AddChar k₀ (P
     ← finsum_comp_equiv (AffineSpace.fieldPointsEquiv k₀ _)]
   simp only [WeilComplex.affineLineTraceFunction, Equiv.symm_apply_apply]
 
-/-- **The transform of the boundary sheaf has weights at most `w`** (Step 4 of
-`lemma-fourier-transform-boundary-sequence`): if `FT_ψ(B) ≅ B'[1]` and `M` has weights at most `w`,
-then `B'` has weights at most `w`. By the Fourier trace formula
-`t_{B'}(y) = ∑_x t_B(x) ψ(Tr(x y))`, a sum over the points of the boundary, so the trace
-function of `B'` is `O(q^{nw/2})`. (blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+/-- **The transform of the boundary sheaf has weights at most `w`**: if `FT_ψ(B) ≅ B'[1]` and
+`M` has weights at most `w`, then `B'` has weights at most `w`. -/
 theorem hasWeightsAtMost_of_iso_fourierTransform (ψ : AddChar k₀ (PadicAlgCl l))
     {ι : PadicAlgCl l →+* ℂ} {w : ℝ} (hw : D.sheaf.HasWeightsAtMost ι w)
     {B' : WeilSheaf k₀ l (affineLine k₀)}

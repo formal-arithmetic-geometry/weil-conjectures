@@ -10,9 +10,9 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorExtensionEquation
 
 /-! # Tensor squares for module coefficient change
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and
-sites-cohomology.tex, Tag 07A4.
-(blueprint: lem-pur-module-tensor-coefficient-equations)
+## References
+
+* Stacks Project, sites-modules.tex, Tag 03EL, and sites-cohomology.tex, Tag 07A4.
 -/
 
 -- After pruning, this module only keeps private declarations.

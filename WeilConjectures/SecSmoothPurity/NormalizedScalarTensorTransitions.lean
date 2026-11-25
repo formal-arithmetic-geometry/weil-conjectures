@@ -13,12 +13,12 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 /-! # Normalized scalar tensor transitions
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL, and
-Cohomology on Sites, Tag 07A4.
-(auxiliary; not a blueprint node).
-
 Scalar tensor comparisons commute with arbitrary semilinear squares. Their
 forward maps insert one and their inverse maps multiply the scalar coefficients.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL, and Cohomology on Sites, Tag 07A4.
 -/
 
 set_option Elab.async false
@@ -47,21 +47,18 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
 open KappaCalculation
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-/-- The normalized comparison of signed tensor totals.
-Source: Stacks 03EL and 07A4 (auxiliary; not a blueprint node). -/
+/-- The normalized comparison of signed tensor totals. -/
 noncomputable def tensorComparison {R : Sheaf J CommRingCat.{w}}
     {S : Sheaf K CommRingCat.{w}} (f : RingedPullback R S) (c : Comparison f)
     (P Q : Complex R) : (pull f).obj (total P Q) ≅
       total ((pull f).obj P) ((pull f).obj Q) := comparison f c P Q
 
-/-- The ordinary tensor map on the signed direct-sum total.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The ordinary tensor map on the signed direct-sum total. -/
 noncomputable def tensorTotalMap {A : Sheaf J CommRingCat.{w}}
     {P Q P' Q' : Complex A} (f : P ⟶ P') (g : Q ⟶ Q') :
     total P Q ⟶ total P' Q' := totalMap f g
 
-/-- The homogeneous inclusion into the signed direct-sum total.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+/-- The homogeneous inclusion into the signed direct-sum total. -/
 noncomputable def tensorι {A : Sheaf J CommRingCat.{w}}
     (P Q : Complex A) (p q n : ℤ) (h : p + q = n) :
     P.X p ⊗ Q.X q ⟶ (total P Q).X n := by
@@ -79,8 +76,7 @@ noncomputable def tensorι {A : Sheaf J CommRingCat.{w}}
     hasFiniteCoproducts_of_hasCoproducts (C := Modules A)
   exact CochainComplex.ιMapBifunctor P Q (curriedTensor (Modules A)) p q n h
 
-/-- Auxiliary formula for scalar tensor transitions. Source: Stacks 03EK, 03EL, 07A4
-(auxiliary; not a blueprint node). -/
+/-- Auxiliary formula for scalar tensor transitions. -/
 def totalPure {A : Sheaf J CommRingCat.{w}} (P Q : Complex A)
     (p q n : ℤ) (h : p + q = n) (U : Cᵒᵖ) (x : (P.X p).val.obj U)
     (y : (Q.X q).val.obj U) : ((total P Q).X n).val.obj U :=

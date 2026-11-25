@@ -19,9 +19,8 @@ stalk of `F` at a geometric point only depends on the underlying point of `X`.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.toPresheafFiber_eq_zero_iff`: the vanishing criterion for germs.
-- `AlgebraicGeometry.Etale.isZero_sheafFiber_iff_of_apply_eq`
-  (`lem-kun-support-geometric-point-independent`): two geometric points with the same image
-  have simultaneously vanishing stalks.
+- `AlgebraicGeometry.Etale.isZero_sheafFiber_iff_of_apply_eq`: two geometric points with the
+  same image have simultaneously vanishing stalks.
 -/
 
 @[expose] public section
@@ -78,12 +77,8 @@ lemma toPresheafFiber_eq_zero_iff {X : Scheme.{u}} {Ω : Type u} [Field Ω] [IsS
       simpa [pointSmallEtale, Etale.forget] using hl
     rw [← ht, ← GrothendieckTopology.Point.toPresheafFiber_w_apply, hz, map_zero]
 
-/-- Blueprint `lem-kun-support-geometric-point-independent`: **the support does not depend on
-the chosen geometric point.** Two geometric points `s₁`, `s₂` of `X` with the same image point
-have simultaneously vanishing stalks: a nonzero germ at `s₂` of a section `z` over `V` shows
-that `z` does not vanish near the image point in `V`, so its germ at a lift of `s₁` to `V`
-(which exists, `V ⟶ X` being étale) does not vanish either
-(`AlgebraicGeometry.Etale.toPresheafFiber_eq_zero_iff`). -/
+/-- **The support does not depend on the chosen geometric point.** Two geometric points `s₁`,
+`s₂` of `X` with the same image point have simultaneously vanishing stalks. -/
 theorem isZero_sheafFiber_iff_of_apply_eq {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsSepClosed Ω₁] [Field Ω₂] [IsSepClosed Ω₂]

@@ -15,15 +15,14 @@ universe u
 
 namespace Polynomial
 
-/-! Auxiliary CRT decomposition statements used by the root-block theorem.
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix-root-block-aux)
+/-! # Auxiliary CRT decomposition statements
+
+Auxiliary statements for putting multiplication by the root of a monic polynomial into CRT block
+coordinates after coefficient reduction.
 -/
 
-/-- The degree indices of a monic CRT factorization can be identified.
-
-Proof: degree additivity for monic products gives equal finite cardinalities, and
-`Fintype.equivOfCardEq` supplies the equivalence.
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix-root-block-aux) -/
+/-- If the reduction of a monic `f` modulo `I` factors as `g * h` with `g`, `h` monic, then
+`Fin f.natDegree` is equivalent to `Fin g.natDegree ⊕ Fin h.natDegree`. -/
 theorem adjoinRoot_crt_degree_equiv
     {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)]
     (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X])
@@ -51,12 +50,10 @@ private theorem root_matrix_entry {R : Type*} [CommRing R]
   rw [AdjoinRoot.powerBasisAux'_repr_apply_to_fun]
   rw [← AdjoinRoot.mk_X, ← map_pow, AdjoinRoot.modByMonicHom_mk]
 
-/-- For a chosen degree identification, CRT supplies the conjugating matrix.
-
-Proof: apply the Chinese remainder algebra equivalence, concatenate the power
-bases, and take the coordinate matrix of this equivalence; its inverse gives the
-conjugation identity.
-(blueprint: lem-weil-pbc-adjoinRoot-crt-matrix-root-block-aux-matrix) -/
+/-- Let `f` be monic with `f mod I = g * h` for coprime monic `g`, `h`. For any index equivalence
+`d`, there is a unit matrix `U` over `A/I` conjugating the reindexed reduced matrix of
+multiplication by the root of `f` into the block diagonal matrix of the multiplication-by-root
+matrices of `g` and `h`. -/
 theorem adjoinRoot_crt_matrix_for_degree_equiv
     {A : Type u} [CommRing A] (I : Ideal A) [Nontrivial (A ⧸ I)]
     (f : A[X]) (hf : f.Monic) (g h : (A ⧸ I)[X])

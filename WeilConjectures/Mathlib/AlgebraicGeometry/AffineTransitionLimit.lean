@@ -50,8 +50,6 @@ Throughout, "of finite type over `ℤ`" is spelled out as `LocallyOfFiniteType` 
 structure morphism `specULiftZIsTerminal.from X : X ⟶ Spec ℤ` together with
 `CompactSpace X`.
 
-(Blueprint: `def:nagata-noetherian-inverse-system`, `prop:nagata-noetherian-inverse-system`.)
-
 ## Checking the limit property locally on a stage
 
 Mathlib's `AlgebraicGeometry.isLimitOpensCone` says that a limit cone over a cofiltered diagram
@@ -144,10 +142,21 @@ for the spectrum of a field over `T` as soon as it holds for `T` itself
 (`AlgebraicGeometry.exists_spec_field_of_isQcqsLocalProperty`). Applied to the failure locus
 of a base-change map, this says that a minimal counterexample can be found over a point.
 
+## Implementation details
+
 Since Mathlib has no notion of a thickening of schemes, a thickening is spelled out as a
 closed immersion which is surjective on points.
 
+In `AlgebraicGeometry.exists_range_map_subset_range_app_of_surjective_isLimitMap`, the naive
+statement "`fₖ` is surjective for all `k ⟶ i` for `i` deep enough" is false for a general
+natural transformation `f`: EGA IV 8.10.5 considers systems induced from a single morphism by
+base change. (Counterexample: `I = ℕᵒᵖ`, `D k = 𝔸¹ ∖ {0, …, k}`, `D' k = 𝔸¹ ∖ {0, …, k - 1}`
+with `f.app k` the open immersion; no `f.app k` is surjective, but the limit map is an
+isomorphism.)
+
 ## References
+
+- [EGA IV₃, Thm. 8.10.5]
 
 - [Stacks: Tag 01Z7](https://stacks.math.columbia.edu/tag/01Z7)
 - [Stacks: Tag 01Z9](https://stacks.math.columbia.edu/tag/01Z9)
@@ -204,8 +213,7 @@ The stages are automatically Noetherian, see
 
 By absolute Noetherian approximation (Stacks Project Tag 01ZA,
 `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`), every quasi-compact
-quasi-separated scheme admits one.
-(Blueprint: `def:nagata-noetherian-inverse-system`.) -/
+quasi-separated scheme admits one. -/
 structure Scheme.NoetherianApproximation (S : Scheme.{u}) where
   /-- The index category of the inverse system. -/
   I : Type u
@@ -679,9 +687,7 @@ lemma res_app_eq_sV_res (E : ExtensionData.{u}) (l : Fin E.n) :
     Scheme.Hom.appLE_map]
 
 /-- (Implementation) A section of `V` restricting to zero on `W` is annihilated by a power
-of each of the chosen generators `b l`: the restriction `Γ(X, V) ⟶ Γ(W, 𝒪)` factors through
-the localization `Γ(X, V) ⟶ Γ(X, X.basicOpen (b l))` because `X.basicOpen (b l) ≤ U ⊓ V`.
-This is the key cancellation step in the proof of Stacks 01Z9. -/
+of each of the chosen generators `b l` (used for Stacks Project Tag 01Z9). -/
 lemma exists_pow_mul_eq_zero_of_sV_eq_zero (l : Fin E.n) {y : Γ(E.X, E.V)}
     (hy : E.sV y = 0) : ∃ K, E.b l ^ K * y = 0 := by
   have := E.hV.isLocalization_basicOpen (E.b l)
@@ -2135,13 +2141,7 @@ private lemma nonempty_noetherianApproximation_finsetSup {X : Scheme.{u}}
 
 /-- **Absolute Noetherian approximation** (Stacks Project Tag 01ZA): every quasi-compact
 quasi-separated scheme is the limit of a cofiltered system of schemes of finite type over
-`ℤ` with affine transition morphisms.
-
-The affine case is `AlgebraicGeometry.Scheme.NoetherianApproximation.ofIsAffine`. The
-general case follows by induction over a finite affine cover: each step extends an
-approximation of a quasi-compact open across one more affine open, see
-`AlgebraicGeometry.Scheme.NoetherianApproximation.ExtensionData.approximation`.
-(Blueprint: `prop:nagata-noetherian-inverse-system`.) -/
+`ℤ` with affine transition morphisms. -/
 @[stacks 01ZA]
 theorem Scheme.nonempty_noetherianApproximation (S : Scheme.{u})
     [CompactSpace S] [QuasiSeparatedSpace S] :
@@ -2170,10 +2170,7 @@ variable {I : Type u} [Category.{u} I] (D : I ⥤ Scheme.{u}) (c : Cone D)
 variable {i : I} {Y : Scheme.{u}} (p : Y ⟶ D.obj i)
 
 set_option backward.defeqAttrib.useBackward true in
-/-- Blueprint `theorem-nagata-s-compactification-theorem--1`: Base-changed system over a chosen
-stage.
-
-The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a morphism
+/-- The base change `{ Y ×_{Dᵢ} Dⱼ }_{j ≤ i}` of the diagram `{ Dⱼ }` along a morphism
 `p : Y ⟶ Dᵢ`, indexed by the cofinal subsystem `Over i`; its transition maps are the base
 changes of the transitions of `D`. The limit `Y ×_{Dᵢ} lim Dⱼ` is `baseChangeCone`. -/
 @[simps] noncomputable def baseChangeDiagram : Over i ⥤ Scheme.{u} where
@@ -2832,12 +2829,7 @@ lemma exists_descendsAtWithOpen {k : I} {X : Scheme.{u}} {g : X ⟶ c.pt}
 
 include hc in
 /-- (Implementation) **An affine scheme of finite presentation over the limit that lies over an
-affine open of one of the stages descends to a finite stage.**
-
-The system is base changed to the affine open `V ⊆ Dᵢ₀`: the base changed system has affine
-stages, so the affine case
-`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`
-applies to it. -/
+affine open of one of the stages descends to a finite stage.** -/
 lemma DescendsToStage.of_isAffine {i₀ : I} {X : Scheme.{u}} [IsAffine X] (g : X ⟶ c.pt)
     [LocallyOfFinitePresentation g] {V : (D.obj i₀).Opens} (hV : IsAffineOpen V)
     (q : X ⟶ V.toScheme) (hq : q ≫ V.ι = g ≫ c.π.app i₀) : DescendsToStage D c g := by
@@ -3148,14 +3140,7 @@ include hc in
 schemes descend to a finite stage** (Stacks Project Tag 01ZM). Let `{Dⱼ}` be a cofiltered
 inverse system of quasi-compact quasi-separated schemes with affine transition maps and let
 `X` be of finite presentation over `lim Dⱼ`. Then `X` is the base change of a scheme `Y` of
-finite presentation over one of the `Dⱼ`.
-
-The affine case is
-`AlgebraicGeometry.Scheme.exists_isPullback_of_locallyOfFinitePresentation_of_isAffine`; the
-general case follows by induction over a finite cover of `X` by affine opens each of which
-lies over an affine open of a fixed stage, gluing the descended charts over a common stage.
-(Blueprint: `lemma:nagata-finite-presentation-descends`;
-`proposition-jacobian-over-ground-field--1`, part (1).) -/
+finite presentation over one of the `Dⱼ`. -/
 @[stacks 01ZM]
 theorem Scheme.exists_isPullback_of_finitePresentation [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {X : Scheme.{u}} (g : X ⟶ c.pt)
@@ -3352,7 +3337,7 @@ closed immersion at a finite stage.**
 Let `γ` be a morphism of finite presentation between schemes over a stage `D_k`, with
 quasi-compact quasi-separated target. If the base change of `γ` to the limit `lim Dⱼ` is a
 closed immersion, then so is its base change to some stage `k' ⟶ k` and to every stage after
-that. (Blueprint: `lemma:nagata-closed-immersion-stage-exists`.) -/
+that. -/
 lemma Scheme.exists_isClosedImmersion_overPullbackMap {k : I}
     {Z Y : Over (D.obj k)} (γ : Z ⟶ Y)
     [LocallyOfFinitePresentation γ.left] [QuasiCompact γ.left] [QuasiSeparated γ.left]
@@ -3449,8 +3434,7 @@ include hc in
 /-- **A finite-presentation model of a separated morphism is separated at a later stage.**
 
 If `X ⟶ lim Dⱼ` is separated and `p : Y ⟶ D_k` is a finite presentation model of it at the
-stage `k`, then the base change of the model to some later stage `k' ⟶ k` is separated.
-(Blueprint: `lemma:nagata-separated-descent-stage-exists`.) -/
+stage `k`, then the base change of the model to some later stage `k' ⟶ k` is separated. -/
 lemma Scheme.exists_isSeparated_pullback_snd {k : I} [CompactSpace (D.obj k)]
     [QuasiSeparatedSpace (D.obj k)] {Y : Scheme.{u}} {p : Y ⟶ D.obj k}
     [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p]
@@ -3510,7 +3494,7 @@ include hc in
 Let `{Dⱼ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
 transition maps and let `X` be separated and of finite presentation over `lim Dⱼ`. Then `X` is
 the base change of a scheme that is separated and of finite presentation over one of the
-stages. (Blueprint: `lemma:nagata-separated-eventually`.) -/
+stages. -/
 @[stacks 01ZQ]
 theorem Scheme.exists_isPullback_of_finitePresentation_of_isSeparated
     [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
@@ -3531,12 +3515,7 @@ include hc in
 quasi-separated schemes with affine transition maps, and let `V`, `W` be of finite presentation
 over a stage `Dᵢ`. Every morphism `V ×_{Dᵢ} lim Dⱼ ⟶ W ×_{Dᵢ} lim Dⱼ` over `lim Dⱼ`, given here by
 its composite `ψ` with the projection to `W`, is the base change of a morphism
-`V ×_{Dᵢ} Dⱼ ⟶ W ×_{Dᵢ} Dⱼ` over some later stage `Dⱼ`.
-
-Part (1) is `AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation`, part (3) is
-`AlgebraicGeometry.Scheme.exists_pullback_fst_comp_eq_of_isLimit`.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+`V ×_{Dᵢ} Dⱼ ⟶ W ×_{Dᵢ} Dⱼ` over some later stage `Dⱼ`. -/
 @[stacks 01ZM]
 theorem Scheme.exists_pullback_hom_of_isLimit [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
@@ -3562,9 +3541,7 @@ include hc in
 (Stacks Project Tag 01ZM, part (3)). Let `{Dⱼ}` be a cofiltered inverse system of quasi-compact
 quasi-separated schemes with affine transition maps, let `V`, `W` be of finite presentation over a
 stage `Dᵢ` and let `ψ χ : V ⟶ W` be morphisms over `Dᵢ` whose base changes to `lim Dⱼ` agree.
-Then their base changes to some later stage `Dⱼ` agree.
-
-(blueprint: `proposition-jacobian-over-ground-field--1`) -/
+Then their base changes to some later stage `Dⱼ` agree. -/
 @[stacks 01ZM]
 theorem Scheme.exists_pullback_fst_comp_eq_of_isLimit [∀ i, CompactSpace (D.obj i)]
     [∀ i, QuasiSeparatedSpace (D.obj i)] {i : I} {V W : Scheme.{u}} (pV : V ⟶ D.obj i)
@@ -3838,8 +3815,7 @@ include hc in
 /-- **Separatedness descends to a finite stage.**
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes with affine
-transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage.
-(Blueprint: `theorem-nagata-s-compactification-theorem--1`.) -/
+transition maps. If `lim Dᵢ` is separated, then `Dᵢ` is separated for every `i` past some stage. -/
 @[stacks 086Q]
 theorem Scheme.exists_isSeparated_of_isLimit [c.pt.IsSeparated] :
     ∃ i₀ : I, ∀ {i : I} (_ : i ⟶ i₀), (D.obj i).IsSeparated := by
@@ -3908,9 +3884,7 @@ include hc in
 
 Let `{Dᵢ}` be a cofiltered inverse system of quasi-compact quasi-separated schemes over a base
 `S`, with affine transition maps and quasi-compact structure morphisms. If `lim Dᵢ ⟶ S` is
-separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage.
-(Blueprint: `theorem-nagata-s-compactification-theorem--1`,
-`theorem-nagata-s-compactification-theorem--1`.) -/
+separated, then `Dᵢ ⟶ S` is separated for every `i` past some stage. -/
 @[stacks 01ZH]
 theorem Scheme.exists_isSeparated_app_of_isLimit (i₀ : I)
     [IsSeparated (c.π.app i₀ ≫ t.app i₀)] :
@@ -4186,7 +4160,7 @@ theorem Scheme.Hom.exists_isImmersion_lift_noetherianApproximation {X S : Scheme
 /-- **Immersion into a scheme of finite presentation** (Stacks Project Tag 01ZE): a
 quasi-compact quasi-separated scheme `X` that is locally of finite type over a quasi-compact
 quasi-separated scheme `S` admits an immersion over `S` into a scheme of finite presentation
-over `S`. (Blueprint: `lemma:nagata-immersion-into-fp-model`.) -/
+over `S`. -/
 @[stacks 01ZE]
 theorem Scheme.Hom.exists_isImmersion_locallyOfFinitePresentation {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
@@ -4275,7 +4249,7 @@ private lemma exists_finiteType_le_of_appLE_eq [IsLocallyNoetherian Z]
     rwa [hts] at hmem
 
 /-- **Every section of an ideal sheaf on a quasi-compact quasi-separated scheme lies in a
-subideal sheaf of finite type.** (Blueprint: `lemma:nagata-closed-subscheme-fp-system`.) -/
+subideal sheaf of finite type.** -/
 theorem exists_finiteType_le_of_mem [CompactSpace Y] [QuasiSeparatedSpace Y]
     (I : Y.IdealSheafData) (U : Y.affineOpens) {s : Γ(Y, U.1)} (hs : s ∈ I.ideal U) :
     ∃ J : Y.IdealSheafData, J ≤ I ∧ (∀ V : Y.affineOpens, (J.ideal V).FG) ∧ s ∈ J.ideal U := by
@@ -4304,8 +4278,7 @@ theorem exists_finiteType_le_of_mem [CompactSpace Y] [QuasiSeparatedSpace Y]
   exact exists_finiteType_le_of_appLE_eq I (N.π.app m) ⟨N.D.map g ⁻¹ᵁ V, hV.preimage _⟩
     ⟨N.π.app k ⁻¹ᵁ V, hU⟩ hmk hmk.ge t (ht' hmk.ge) hs
 
-/-- The subideal sheaves of finite type of an ideal sheaf `I`, ordered by inclusion.
-(Blueprint: `def:nagata-closed-subscheme-fp-system`.) -/
+/-- The subideal sheaves of finite type of an ideal sheaf `I`, ordered by inclusion. -/
 protected abbrev FGSub (I : Y.IdealSheafData) : Type u :=
   {J : Y.IdealSheafData // J ≤ I ∧ ∀ U : Y.affineOpens, (J.ideal U).FG}
 
@@ -4326,8 +4299,7 @@ instance : IsDirectedOrder I.FGSub :=
     Subtype.coe_le_coe.mp le_sup_left, Subtype.coe_le_coe.mp le_sup_right⟩⟩
 
 /-- The cofiltered diagram of the closed subschemes cut out by the subideal sheaves of finite
-type of `I`, with the subscheme inclusions as transition morphisms.
-(Blueprint: `def:nagata-closed-subscheme-fp-system`.) -/
+type of `I`, with the subscheme inclusions as transition morphisms. -/
 @[simps]
 noncomputable def fgSubDiagram : (I.FGSub)ᵒᵖ ⥤ Scheme.{u} where
   obj J := J.unop.1.subscheme
@@ -4390,8 +4362,7 @@ lemma le_ker_π_app_bot_comp_subschemeι [CompactSpace Y] [QuasiSeparatedSpace Y
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **A closed subscheme of a quasi-compact quasi-separated scheme is the cofiltered limit of
-the closed subschemes cut out by the subideal sheaves of finite type of its ideal sheaf.**
-(Blueprint: `lemma:nagata-closed-subscheme-fp-system`.) -/
+the closed subschemes cut out by the subideal sheaves of finite type of its ideal sheaf.** -/
 @[stacks 09ZP]
 noncomputable def isLimitFgSubCone [CompactSpace Y] [QuasiSeparatedSpace Y] :
     IsLimit I.fgSubCone where
@@ -4428,10 +4399,8 @@ set_option backward.defeqAttrib.useBackward true
 open TopologicalSpace in
 /-- **Closed immersion into a scheme of finite presentation**: a quasi-compact quasi-separated
 scheme `X` that is locally of finite type over a quasi-compact quasi-separated scheme `S`
-admits a closed immersion over `S` into a scheme of finite presentation over `S`.
-
-This is Stacks Project Tag 01ZE followed by the shrinking step of Tag 01ZG.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`.) -/
+admits a closed immersion over `S` into a scheme of finite presentation over `S`
+(Stacks Project Tags 01ZE and 01ZG). -/
 theorem Scheme.Hom.exists_isClosedImmersion_locallyOfFinitePresentation {X S : Scheme.{u}}
     (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S]
     [QuasiSeparatedSpace S] [LocallyOfFiniteType f] [QuasiCompact f] :
@@ -4474,7 +4443,7 @@ are closed immersions compatible with `f`:
 
 Every morphism locally of finite type between quasi-compact quasi-separated schemes admits one
 (`AlgebraicGeometry.Scheme.Hom.nonempty_finitePresentationApproximation`, Stacks Project
-Tag 09ZQ). (Blueprint: `def:nagata-finite-type-fp-model-system`.) -/
+Tag 09ZQ). -/
 structure Scheme.Hom.FinitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S) where
   /-- The index category of the inverse system. -/
   I : Type u
@@ -4519,8 +4488,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The finite presentation approximation of `f : X ⟶ S` determined by a closed immersion
 `i : X ⟶ Y` over `S` into an `S`-scheme `Y` that is quasi-compact, quasi-separated and locally of
 finite presentation over `S`: the system of closed subschemes of `Y` cut out by the subideal
-sheaves of finite type of the kernel of `i`. (Blueprint:
-`theorem-nagata-s-compactification-theorem--1`, `theorem-nagata-s-compactification-theorem--1`.) -/
+sheaves of finite type of the kernel of `i`. -/
 noncomputable def Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion
     {X Y S : Scheme.{u}} {f : X ⟶ S} [CompactSpace S] [QuasiSeparatedSpace S] (q : Y ⟶ S)
     (i : X ⟶ Y) [IsClosedImmersion i] [LocallyOfFinitePresentation q] [QuasiCompact q]
@@ -4560,13 +4528,7 @@ noncomputable def Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion
 Tag 09ZQ): a quasi-compact quasi-separated scheme `X` that is locally of finite type over a
 quasi-compact quasi-separated scheme `S` is the cofiltered limit of a system of schemes of
 finite presentation over `S` whose transition morphisms and whose morphisms from `X` are all
-closed immersions.
-
-The system is that of the closed subschemes of a finite presentation model `Y` of `X` over `S`
-cut out by the subideal sheaves of finite type of the kernel of the closed immersion `X ⟶ Y`.
-(Blueprint: `lemma:nagata-finite-type-fp-model-system`,
-`theorem-nagata-s-compactification-theorem--1`.)
--/
+closed immersions. -/
 @[stacks 09ZQ]
 theorem Scheme.Hom.nonempty_finitePresentationApproximation {X S : Scheme.{u}} (f : X ⟶ S)
     [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S] [QuasiSeparatedSpace S]
@@ -4601,11 +4563,7 @@ example {X S : Scheme.{u}} {f : X ⟶ S} (F : f.FinitePresentationApproximation)
 /-- **The separated finite presentation envelope of a morphism of finite type** (Stacks Project
 Tag 01ZJ): a separated morphism `f : X ⟶ S` locally of finite type between quasi-compact
 quasi-separated schemes factors as a closed immersion `i : X ⟶ X'` followed by a separated,
-quasi-compact morphism `f' : X' ⟶ S` locally of finite presentation.
-
-Take a finite presentation approximation of `f` (Stacks Project Tag 09ZQ) and descend the
-separatedness of `f` to a stage of the system (Stacks Project Tag 01ZH); that stage is the
-required envelope. (Blueprint: `prop:nagata-finite-type-closed-in-fp`.) -/
+quasi-compact morphism `f' : X' ⟶ S` locally of finite presentation. -/
 @[stacks 01ZJ]
 theorem Scheme.Hom.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation
     {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace S]
@@ -4751,14 +4709,7 @@ open CommRingCat in
 set_option backward.isDefEq.respectTransparency false in
 /-- **Minimal counterexamples occur over a point.** A qcqs-local property `P` of
 quasi-compact quasi-separated schemes over a quasi-compact quasi-separated base `T` which
-holds for `T` itself holds for some morphism `Spec K ⟶ T` with `K` a field.
-
-By Zorn's lemma there is a minimal closed subscheme `T'` of `T` with `P`. Every nonempty
-quasi-compact open of `T'` has `P`, as otherwise its closed complement would be a smaller closed
-subscheme with `P`. Take a nonempty affine open `Spec A` of `T'` and a minimal prime `p` of `A`;
-then `Spec A_p` is the cofiltered limit of the nonempty basic opens `Spec A[1/f]`, `f ∉ p`, so
-it has `P`, and it is a thickening of the spectrum of its residue field, as `A_p` has a single
-prime ideal. (Blueprint: `lemma-reduction-field`.) -/
+holds for `T` itself holds for some morphism `Spec K ⟶ T` with `K` a field. -/
 @[stacks 0F06]
 theorem exists_spec_field_of_isQcqsLocalProperty (T : Scheme.{u})
     [CompactSpace T] [QuasiSeparatedSpace T]
@@ -5030,14 +4981,11 @@ lemma Scheme.exists_isClosedImmersion_morphismRestrict_comp_π [IsCofiltered I]
 
 
 set_option backward.isDefEq.respectTransparency false in
-/-- **Closed immersions spread out from a limit** (Stacks Project Tag 081B, part (1);
-blueprint `pqf-lem-limit-immersion-descends`). Let `{Dᵢ}` be a cofiltered system of schemes
-with affine transition morphisms and `D_{i₀}` quasi-compact, let `q : D_{i₀} ⟶ S` and let
-`g : Y ⟶ lim Dᵢ` be a closed immersion with `Y` locally of finite type over `S`. Then
-`Y ⟶ D_k` is a closed immersion for every `k` beyond some `j ⟶ i₀`.
-
-Cover `D_{i₀}` by finitely many affine opens mapping into affine opens of `S`, apply the
-affine case over each of them and pass to a common later stage. -/
+/-- **Closed immersions spread out from a limit** (Stacks Project Tag 081B, part (1)).
+Let `{Dᵢ}` be a cofiltered system of schemes with affine transition morphisms and
+`D_{i₀}` quasi-compact, let `q : D_{i₀} ⟶ S` and let `g : Y ⟶ lim Dᵢ` be
+a closed immersion with `Y` locally of finite type over `S`. Then `Y ⟶ D_k` is a
+closed immersion for every `k` beyond some `j ⟶ i₀`. -/
 @[stacks 081B "(1)"]
 theorem Scheme.exists_isClosedImmersion_comp_π [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] (hc : IsLimit c) {S Y : Scheme.{u}}
@@ -5081,12 +5029,7 @@ set_option backward.isDefEq.respectTransparency false in
 cofiltered system of quasi-compact schemes with affine transition morphisms and morphisms
 `q i : Dᵢ ⟶ S`, and let `ι : X ⟶ lim Dᵢ` be an open immersion from a quasi-compact `X` that is
 locally of finite type over `S`. Then there are a stage `i`, a quasi-compact open `U ⊆ Dᵢ` and
-a closed immersion `X ⟶ U` lifting `X ⟶ lim Dᵢ ⟶ Dᵢ`.
-
-The image of `X` descends to a quasi-compact open `V₁` of some stage (Stacks Project
-Tag 01Z4); `X` is then the limit of the preimages of `V₁`, and the closed immersion spreads
-out by Tag 081B. These are Steps 1 and 2 of the proof of blueprint
-`thm-pqf-immersion-descent`. -/
+a closed immersion `X ⟶ U` lifting `X ⟶ lim Dᵢ ⟶ Dᵢ`. -/
 theorem Scheme.exists_isClosedImmersion_of_isOpenImmersion_of_isLimit [IsCofiltered I]
     [∀ {i j} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] (hc : IsLimit c)
     {X S : Scheme.{u}} (q : ∀ i, D.obj i ⟶ S) (ι : X ⟶ c.pt) [IsOpenImmersion ι]
@@ -5120,7 +5063,7 @@ theorem Scheme.exists_isClosedImmersion_of_isOpenImmersion_of_isLimit [IsCofilte
   rw [Category.assoc, h₂, reassoc_of% hg₀]
 
 /-- **Quasi-compact opens of a cofiltered limit descend** (Stacks Project Tag 01Z4, parts (1)
-and (3); blueprint `pqf-lem-limit-qc-open-descends`, items 1 and 3). Let `{Dᵢ}` be a cofiltered
+and (3)). Let `{Dᵢ}` be a cofiltered
 system of quasi-compact schemes with affine transition morphisms and limit `S = lim Dᵢ`, and let
 `V ⊆ S` be a quasi-compact open. Then `V = fᵢ⁻¹(Vᵢ)` for a quasi-compact open `Vᵢ` of some
 stage; the preimages `Vⱼ` of `Vᵢ` at later stages are quasi-compact, their transition morphisms
@@ -5137,7 +5080,7 @@ theorem Scheme.exists_preimage_eq_and_isLimit_opensCone [IsCofiltered I]
     fun f ↦ inferInstance, ⟨isLimitOpensCone D c hc i Vᵢ⟩⟩
 
 /-- **Two descents of a quasi-compact open eventually agree** (Stacks Project Tag 01Z4, part
-(2); blueprint `pqf-lem-limit-qc-open-descends`, item 2). If quasi-compact opens `Vᵢ ⊆ Dᵢ` and
+(2)). If quasi-compact opens `Vᵢ ⊆ Dᵢ` and
 `Vᵢ' ⊆ Dᵢ'` have the same preimage in the limit, then their preimages agree at some stage
 `i'' ≥ i, i'`. -/
 theorem Scheme.exists_map_preimage_eq_map_preimage_of_isLimit [IsCofiltered I]
@@ -5226,13 +5169,7 @@ omit [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ (i : I), CompactS
 include hc' in
 /-- If `lim fᵢ` is surjective and `fᵢ` has open image (e.g. if `fᵢ` is étale), then the image of
 a deep enough transition map `D'ₖ ⟶ D'ᵢ` is contained in the image of `fᵢ`. In particular, the
-base change of `fᵢ` along `D'ₖ ⟶ D'ᵢ` is surjective. Compare [EGA4.3, Thm. 8.10.5 (vi)].
-
-Note that the naive statement "`fₖ` is surjective for all `k ⟶ i` for `i` deep enough" is false
-for a general natural transformation `f`: EGA 8.10.5 considers systems induced from a single
-morphism by base change. (Counterexample: `I = ℕᵒᵖ`, `D k = 𝔸¹ ∖ {0, …, k}`,
-`D' k = 𝔸¹ ∖ {0, …, k - 1}` with `f.app k` the open immersion; no `f.app k` is surjective,
-but the limit map is an isomorphism.) -/
+base change of `fᵢ` along `D'ₖ ⟶ D'ᵢ` is surjective (compare [EGA4.3, Thm. 8.10.5 (vi)]). -/
 lemma exists_range_map_subset_range_app_of_surjective_isLimitMap (f : D ⟶ D') (i : I)
     (hopen : IsOpen (Set.range (f.app i).base))
     (hf : Surjective (IsLimit.map c hc' f)) :

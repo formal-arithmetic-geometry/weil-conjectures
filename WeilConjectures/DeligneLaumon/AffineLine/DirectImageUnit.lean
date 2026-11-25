@@ -17,8 +17,7 @@ public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunctionWeil
 Let `j : U₀ ↪ 𝔸¹` be a dense open immersion. For a Weil sheaf `G` on the affine line, the unit
 `G ⟶ j_* j^* G` becomes an isomorphism on `U₀`, so its kernel and cokernel are punctual. These
 facts, and the restriction of an irreducible lisse sheaf to a smaller dense open, are the
-sheaf-theoretic input of the description of the simple curve perverse sheaves (blueprint
-`lemma-simple-objects--1`).
+sheaf-theoretic input of the description of the simple curve perverse sheaves.
 
 ## Main statements
 
@@ -32,7 +31,13 @@ sheaf-theoretic input of the description of the simple curve perverse sheaves (b
   `A ↪ j_*N ⟶ B ↠ C` with `N` irreducible lisse, `C` punctual and `B` without punctual subsheaf,
   has `A = C = 0` or `B = 0`.
 
-## Implementation notes
+## Implementation details
+
+For `isZero_or_isZero_of_exact`, choose a dense open `k : V ↪ U₀` on which `A` is lisse and `C`
+vanishes; then `A|_V ⊆ N|_V` is `0` or `N|_V`, since `N|_V` is irreducible. If `A|_V = 0`, then
+`A` is a punctual subsheaf of `j_*N`, hence zero, and `M ⟶ B` composed with the injective map
+`θ : B ⟶ j_* k_* (B|_V)` is an isomorphism, so `M ≅ B` and `C = 0`. If `A|_V = N|_V`, then
+`B|_V ⊆ C|_V = 0`, so `B` is punctual, hence zero.
 
 The open immersion `j` of a datum is separated as a monomorphism in the statements of the
 adjunction `j^* ⊣ j_*`. The affine `U₀` gives a second instance, through the separatedness of
@@ -120,9 +125,7 @@ theorem eq_zero_of_support_finite_lowerStar [IsDominant j] {N : WeilSheaf k₀ l
 
 omit [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))] in
 /-- A punctual Weil sheaf `G` on the affine line whose restriction to a dense open
-`j : U₀ ↪ 𝔸¹` is lisse vanishes on `U₀`: the unit `G ⟶ j_* j^* G` is a morphism from a punctual
-sheaf to the direct image of a lisse sheaf, hence zero, and its restriction to `U₀` is
-invertible. -/
+`j : U₀ ↪ 𝔸¹` is lisse vanishes on `U₀`. -/
 theorem isZero_upperStar_of_isLisse [IsDominant j] {G : WeilSheaf k₀ l (affineLine k₀)}
     (hG : G.support.Finite) (hGl : ((upperStar j).obj G).IsLisse) :
     IsZero ((upperStar j).obj G) := by
@@ -160,8 +163,7 @@ theorem isIso_of_isIso_lowerStar_map {N' N : WeilSheaf k₀ l D.U} (i : N' ⟶ N
     ((upperStarLowerStarAdjunction (k₀ := k₀) (l := l) D.j).counit.app N') ((𝟭 _).map i)
 
 /-- For a lisse subsheaf `N' ⊆ N`, the cokernel of `j_* N' ⟶ j_* N` has no nonzero punctual
-subsheaf: by left exactness of `j_*` it embeds into `j_*(N / N')`, the direct image of a lisse
-sheaf. -/
+subsheaf. -/
 theorem isZero_of_mono_cokernel_lowerStar_map {N' : WeilSheaf k₀ l D.U} (i : N' ⟶ D.sheaf)
     [Mono i] (hN' : N'.IsLisse) (G : WeilSheaf k₀ l (affineLine k₀))
     (g : G ⟶ cokernel ((lowerStar D.j).map i)) [Mono g] (hG : G.support.Finite) : IsZero G := by
@@ -235,19 +237,9 @@ theorem exists_dense_forall_notMem (S : Set (affineLine k₀).finitePoints) (hS 
   obtain ⟨a, b, hab⟩ := affineLine.nontrivial k₀
   exact hab ((hx a).trans (hx b).symm)
 
-/-- **Simplicity of a middle extension, sheaf part** (`lemma-simple-objects--1`). Let
-`A ↪ M ⟶ B ↠ C` be an exact sequence of Weil sheaves on the affine line with `M ≅ j_*N` for an
-irreducible lisse `N`, `C` punctual and `B` without nonzero punctual subsheaf. Then `A = C = 0`
-or `B = 0`. Choose a dense open `k : V ↪ U₀` on which `A` and `C` are lisse; then `C|_V = 0`,
-and `A|_V ⊆ N|_V` is `0` or `N|_V`, the restriction `N|_V` being irreducible
-(`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.upperStar_of_isDominant`):
-
-- if `A|_V = 0`, then `A` is a punctual subsheaf of `j_*N`, hence zero, and `M ⟶ B` is
-  injective and an isomorphism on `V`. The map `θ : B ⟶ j_* k_* (B|_V)` is injective, its kernel
-  being a punctual subsheaf of `B`, and `M ⟶ B ⟶ j_* k_* (B|_V)` is the isomorphism
-  `M ≅ j_* k_* (M|_V) ≅ j_* k_* (B|_V)`, the unit `N ⟶ k_* k^* N` being invertible for the
-  lisse `N`. So `M ⟶ B` is an isomorphism and `C = 0`;
-- if `A|_V = N|_V`, then `B|_V ⊆ C|_V = 0`, so `B` is punctual, hence zero. -/
+/-- **Simplicity of a middle extension, sheaf part.** Let `A ↪ M ⟶ B ↠ C` be an exact sequence
+of Weil sheaves on the affine line with `M ≅ j_*N` for an irreducible lisse `N`, `C` punctual and
+`B` without nonzero punctual subsheaf. Then `A = C = 0` or `B = 0`. -/
 theorem isZero_or_isZero_of_exact (hD : D.sheaf.IsIrreducibleLisse)
     {A M B C : WeilSheaf k₀ l (affineLine k₀)} (eM : M ≅ D.directImage) (a : A ⟶ M) (s : M ⟶ B)
     (t : B ⟶ C) [Mono a] [Epi t] (has : a ≫ s = 0) (hst : s ≫ t = 0)
@@ -358,8 +350,7 @@ end LisseOnDenseOpen
 
 /-- **Embedding into a middle extension.** A Weil sheaf `F` on the affine line without nonzero
 punctual subsheaf embeds into the direct image `j_* N` of its restriction `N` to a dense open
-`j : U₀ ↪ 𝔸¹` on which it is lisse, with punctual cokernel: the kernel and the cokernel of the
-unit `F ⟶ j_* j^* F` vanish on `U₀`. (blueprint: `lemma-simple-objects--1`) -/
+`j : U₀ ↪ 𝔸¹` on which it is lisse, with punctual cokernel. -/
 theorem LisseOnDenseOpen.exists_mono_directImage {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
     [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {F : WeilSheaf k₀ l (affineLine k₀)}
     (hF : ∀ (G : WeilSheaf k₀ l (affineLine k₀)) (i : G ⟶ F), Mono i → G.support.Finite →

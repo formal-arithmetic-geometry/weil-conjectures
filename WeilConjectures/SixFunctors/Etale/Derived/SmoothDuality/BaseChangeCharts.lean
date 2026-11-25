@@ -12,29 +12,25 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 /-!
 # Base change for smooth duality from the étale and affine-line cases
 
-Steps 2 and 3 of the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`
-(in the form of the proof of `proposition-exceptional-inverse-image-smooth-morphism`): the canonical
-base change map `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*`
+This file shows that the canonical base change map `β : Lg'^* Rf^! ⟶ Rf'^! Lg^*`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`) of a smooth morphism `f` is an
 isomorphism *provided* it is one for
 
-* étale morphisms (`AlgebraicGeometry.Etale.EtaleBaseChange`): the elementary case (c) of the
-  blueprint, where `Re^! ≅ Le^*` with counit the sum over the geometric sheets of `e_!`;
+* étale morphisms (`AlgebraicGeometry.Etale.EtaleBaseChange`): the elementary case (c), where
+  `Re^! ≅ Le^*` with counit the sum over the geometric sheets of `e_!`;
 * the affine-line projections `𝔸¹_S ⟶ S` over bases on which the exponent of `Λ` is
   invertible (`AlgebraicGeometry.Etale.AffineLineBaseChange`): the elementary case (a), from the
-  explicit projective-line adjunction `proposition-adjunction-projective-line--1` and its
-  compatibility with base change (`lemma-cycle-class-cartier-divisor`,
-  `lemma-cohomology-projective-line-trace`).
+  explicit projective-line adjunction and its compatibility with base change.
 
 The open-immersion case (b) is proved
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`).
 
-* *Composition* (Step 2): the base change maps of a composite are composed from those of the
+* *Composition*: the base change maps of a composite are composed from those of the
   factors (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`); so the
   affine-space projections, `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S} ⟶ 𝔸^d_S ⟶ S`, and the charts
   `V --e--> 𝔸^d_U --p_d--> U ⊆ Y` of the étale-local normal form of a smooth morphism satisfy
   base change.
-* *Descent* (Step 3): the restriction of `β_f` to the base change of an open `V ⊆ X` is, through
+* *Descent*: the restriction of `β_f` to the base change of an open `V ⊆ X` is, through
   `Rv'^! ≅ Lv'^*`, the base change map of `V ⟶ X ⟶ Y`, and isomorphisms descend along the
   covering of `X'` by these opens.
 
@@ -74,8 +70,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 /-- **Base change for a composite.** Let `h = f ≫ g` and let `sq` be a cartesian square of `h`
 with quasi-compact base change. If the base change maps of `f` and of the quasi-compact `g` are
 isomorphisms for all their cartesian squares with quasi-compact base change, then so is the base
-change map of `sq`: it is composed from those of the base changes of `f` and `g`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`). -/
+change map of `sq`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_comp
     {X Y Z X' Z' : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) {h : X ⟶ Z} (w : f ≫ g = h)
     {c : Z' ⟶ Z} {h' : X' ⟶ Z'} {a : X' ⟶ X} (sq : IsPullback a h' h c)
@@ -111,8 +106,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_comp
 /-- **Base change descends along open covers.** Let `sq` be a cartesian square of `f` with
 quasi-compact base change `f'`, and let `v_i : V_i ⟶ X` be quasi-compact open immersions whose
 base changes `v'_i : V'_i ⟶ X'` cover `X'`. If the base change maps of the composites
-`v_i ≫ f` are isomorphisms at `K`, then so is that of `f`: by the composition law and the
-open-immersion case, `Rv'_i^!` of it is invertible, and `Rv'_i^! ≅ Lv'_i^*`. -/
+`v_i ≫ f` are isomorphisms at `K`, then so is that of `f`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_cover {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
@@ -142,9 +136,7 @@ variable (Λ) in
 /-- *Base change for étale morphisms*: for every quasi-compact étale morphism `e : V ⟶ W`
 admitting a compactification and every cartesian square `g' ≫ e = e' ≫ g` with quasi-compact
 `e'` admitting a compactification, the canonical base change map `Lg'^* Re^! ⟶ Re'^! Lg^*` is an
-isomorphism. This is the elementary case (c) of the blueprint proof of
-`proposition-exceptional-inverse-image-smooth-morphism`: `Re^! ≅ Le^*`, with counit the sum over the
-geometric sheets of the extension by zero `e_!`, and both commute with base change. -/
+isomorphism. -/
 def EtaleBaseChange : Prop :=
   ∀ ⦃V W V' W' : Scheme.{u}⦄ (e : V ⟶ W) [_root_.AlgebraicGeometry.Etale e] [QuasiCompact e]
     [HasCompactification e] {g : W' ⟶ W} {e' : V' ⟶ W'} {g' : V' ⟶ V}
@@ -155,22 +147,16 @@ variable (Λ) in
 /-- *Base change for affine-line projections*: for every scheme `S` on which the
 exponent of `Λ` is invertible and every cartesian square of the projection `p : 𝔸¹_S ⟶ S` with
 quasi-compact base change admitting a compactification, the canonical base change map
-`Lg'^* Rp^! ⟶ Rp'^! Lg^*` is an isomorphism. This is the elementary case (a) of the blueprint
-proof of `proposition-exceptional-inverse-image-smooth-morphism--6`: the unit and counit of the
-affine-line adjunction `Rp_! ⊣ p^*(1)[2]` (from `proposition-adjunction-projective-line--1`) commute
-with base change. -/
+`Lg'^* Rp^! ⟶ Rp'^! Lg^*` is an isomorphism. -/
 def AffineLineBaseChange : Prop :=
   ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {p' : P' ⟶ S'} {g' : P' ⟶ 𝔸(ULift.{u} (Fin 1); S)}
     (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin 1); S) ↘ S) g) [HasCompactification p']
     [QuasiCompact p'], IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
 
-/-- **Base change for affine-space projections from the affine line** (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6`, "for affine space by composing those
-adjunctions"): if the affine-line projections satisfy base change, then so do the projections
-`p_d : 𝔸^d_S ⟶ S` over bases on which the exponent of `Λ` is invertible. For `d = 0` the
-projection is an isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the composite
-of the affine-line projection over `𝔸^d_S` and of `p_d`. -/
+/-- **Base change for affine-space projections from the affine line**: if the affine-line
+projections satisfy base change, then so do the projections `p_d : 𝔸^d_S ⟶ S` over bases on which
+the exponent of `Λ` is invertible. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace (h₁ : AffineLineBaseChange Λ)
     (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {p' : P' ⟶ S'} {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)}
@@ -231,10 +217,10 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_chart {X Y : Scheme.{u}}
     (fun _ _ _ _ _ sq'' _ _ ↦
       isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace h₁ d U.toScheme sq'')
 
-/-- Base change over a quasi-separated base on which the exponent of `Λ` is invertible: glue the
-charts of the étale-local normal form (`AlgebraicGeometry.Etale.Smooth.exists_etale_to_affineSpace`)
-along the covering of `X'` by the base changes of their sources
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_cover`). -/
+/-- Base change over a quasi-separated base on which the exponent of `Λ` is invertible: if étale
+morphisms and the affine-line projections satisfy base change, then for every smooth `f : X ⟶ Y`
+of relative dimension `d` admitting a compactification, the base change map of every cartesian
+square of `f` with quasi-compact base change admitting a compactification is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_hasInvertibleExponent {X Y : Scheme.{u}}
     [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f]
     (d : ℕ) [SmoothOfRelativeDimension d f] ⦃X' Y' : Scheme.{u}⦄ {g : Y' ⟶ Y} {f' : X' ⟶ Y'}
@@ -264,19 +250,13 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_hasInvertibleExponent {X Y
       (e x) (hfe x) ((IsPullback.of_hasPullback (V x).ι g').paste_vert sq)
     infer_instance
 
-/-- **Base change for smooth morphisms from the étale and affine-line cases** (Steps 2 and 3 of
-the proof of blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`): if étale
+/-- **Base change for smooth morphisms from the étale and affine-line cases**: if étale
 morphisms and the affine-line projections satisfy base change
 (`AlgebraicGeometry.Etale.EtaleBaseChange`, `AlgebraicGeometry.Etale.AffineLineBaseChange`), then
 for every smooth `f : X ⟶ Y` of relative dimension `d` admitting a compactification, over a
 quasi-separated `Y`, with the exponent of `Λ` invertible on `X`, and every cartesian square
 `g' ≫ f = f' ≫ g` with quasi-compact `f'` admitting a compactification, the canonical base change
-map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism.
-
-The morphism `f` factors through the open subscheme `Y_n` of `Y` on which the exponent `n` of `Λ`
-is a unit, `f = f₀ ≫ ι`, as `n` is a unit on `X`; the base change maps of `f₀` are isomorphisms
-by `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_hasInvertibleExponent`,
-those of the quasi-compact open immersion `ι` by the open-immersion case, and they compose. -/
+map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_etale_of_affineLine {X Y : Scheme.{u}}
     [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X] (f : X ⟶ Y) [HasCompactification f]
     (d : ℕ) [SmoothOfRelativeDimension d f] ⦃X' Y' : Scheme.{u}⦄ {g : Y' ⟶ Y} {f' : X' ⟶ Y'}

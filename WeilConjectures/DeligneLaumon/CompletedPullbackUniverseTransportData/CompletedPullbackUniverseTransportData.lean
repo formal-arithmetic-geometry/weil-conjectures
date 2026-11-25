@@ -11,8 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPull
 
 /-! # Published completed-pullback universe transport
 
-Source: Stacks 03EK/03EL, 099N(5)
-(blueprint: def-a1-completed-pullback-universe-transport-data).
+## References
+
+* [Stacks Project, Tag 03EK, Tag 03EL, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +34,7 @@ namespace WeilConjectures.CompletedPullbackUniverseTransportData
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The recorded ordinary reduction, with its specified completed scalar action.
-Source: Stacks 099N(5) (blueprint: def-a1-completed-pullback-universe-transport-data). -/
+/-- The recorded ordinary reduction, with its specified completed scalar action. -/
 def ordinaryReduction (W : Scheme.{t}) (n : ℕ) : Modules l E W ⥤ Modules l E W :=
   unrestrictedIntegralReductionFunctor l E W n ⋙
     SheafOfModules.restrictScalars

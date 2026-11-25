@@ -33,8 +33,8 @@ under complex conjugation: `𝒦` is `ι`-real.
 ## Main declarations
 
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.realifiedKernel`: the realified kernel.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isReal_realifiedKernel`
-  (`lemma-twisted-envelope--1`): it is `ι`-real.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isReal_realifiedKernel`: it is
+  `ι`-real.
 - `AlgebraicGeometry.WeilSheaf.exists_trace_frobeniusEnd_pow_stalk_fourierKernelTensor`: the
   traces of the local Frobenius of `𝒦_ψ ⊗ pr₁^* F` are `ψ(c) ^ (r n) tr (Fₓ ^ (e n))`.
 - `WeilSheaf.IsPunctuallyPureOfWeight.map_trace_frobeniusEnd_pow_stalk_constantTwist_dual`:
@@ -53,10 +53,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- **The local Frobenius of the Fourier kernel.** At a closed point `z` of the Fourier square,
 the local Frobenius of `𝒦_ψ = μ^* ℒ_ψ` is multiplication by `ψ(c) ^ r`, for some `c ∈ k₀` and
-`r ∈ ℕ` which do not depend on `ψ`: the stalk is a line, on which the Frobenius has the
-characteristic polynomial of the `r`-th power of the local Frobenius of `ℒ_ψ` at `μ z`, which
-is multiplication by `ψ(c)`
-(`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_artinSchreier`). -/
+`r ∈ ℕ` which do not depend on `ψ`. -/
 theorem exists_frobeniusEnd_stalk_fourierKernel (z : (affinePlane k₀).finitePoints) :
     ∃ (c : k₀) (r : ℕ), ∀ ψ : AddChar k₀ (PadicAlgCl l),
       ((fourierKernel ψ).stalk z).frobeniusEnd = ψ c ^ r • LinearMap.id := by
@@ -78,11 +75,7 @@ theorem exists_frobeniusEnd_stalk_fourierKernel (z : (affinePlane k₀).finitePo
 /-- **The traces of the local Frobenius of the kernel sheaf `𝒦_ψ ⊗ pr₁^* F`.** At a closed
 point `z` of the Fourier square over the closed point `x = pr₁ z` of the line, the trace of the
 `n`-th power of the local Frobenius of `𝒦_ψ ⊗ pr₁^* F` is `ψ(c) ^ (r n) tr (Fₓ ^ (e n))`, with
-`c`, `r` and `e` independent of `ψ` and `F`: the stalk is `Hom(𝒦_ψ^∨, (pr₁^* F)_z)`
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_tensorObj`), the Frobenius of the line
-`(𝒦_ψ^∨)_z` is multiplication by `ψ(c) ^ (-r)`
-(`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_fourierKernel`), and the local
-Frobenius of `pr₁^* F` at `z` has the characteristic polynomial of `Fₓ ^ e`. -/
+`c`, `r` and `e` independent of `ψ` and `F`. -/
 theorem exists_trace_frobeniusEnd_pow_stalk_fourierKernelTensor
     (z : (affinePlane k₀).finitePoints) :
     ∃ (c : k₀) (r e : ℕ), ∀ (ψ : AddChar k₀ (PadicAlgCl l))
@@ -122,10 +115,7 @@ theorem exists_trace_frobeniusEnd_pow_stalk_fourierKernelTensor
 
 /-- **The twisted dual of a pure sheaf has the conjugate traces.** If `G` is lisse and
 punctually `ι`-pure of weight `w` and `ι b = q ^ w`, then at every closed point `x` the traces
-of the powers of the local Frobenius of `G^∨ ⊗ 𝓑_b` are the complex conjugates of those of `G`:
-the stalk of `G^∨ ⊗ 𝓑_b` at `x` is the dual of that of `G` with the Frobenius rescaled by
-`b ^ deg x`, and `ι (b ^ deg x) = q_x ^ w`
-(`FrobeniusModule.IsPureOfWeight.map_trace_frobeniusEnd_pow_rescale_dual`). -/
+of the powers of the local Frobenius of `G^∨ ⊗ 𝓑_b` are the complex conjugates of those of `G`. -/
 theorem IsPunctuallyPureOfWeight.map_trace_frobeniusEnd_pow_stalk_constantTwist_dual
     {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] {ι : PadicAlgCl l →+* ℂ}
     {G : WeilSheaf k₀ l X} {w : ℝ} (hG : G.IsPunctuallyPureOfWeight ι w) (hG' : G.IsLisse)
@@ -162,7 +152,7 @@ noncomputable def twistedDual (D : LisseOnDenseOpen k₀ l) (b : (PadicAlgCl l)�
     lisse := isLisse_constantTwist.2 (D.lisse.dual) }
 
 /-- The *realified kernel* `pr₁^*(j_!M) ⊗ 𝒦_ψ ⊕ pr₁^*(j_!M†) ⊗ 𝒦_{ψ⁻¹}` on the Fourier square,
-`M† = M^∨ ⊗ 𝓑_b` being the twisted dual. (blueprint: `lemma-twisted-envelope--1`) -/
+`M† = M^∨ ⊗ 𝓑_b` being the twisted dual. -/
 noncomputable def realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
     (b : (PadicAlgCl l)ˣ) : WeilSheaf k₀ l (affinePlane k₀) :=
   fourierKernelTensor ψ D.extensionByZero ⊞
@@ -170,8 +160,7 @@ noncomputable def realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseO
 
 /-- **The twisted dual has the conjugate traces.** If `M` is punctually `ι`-pure of weight `w`
 and `ι b = q ^ w`, then at every closed point `x` of the line the traces of the powers of the
-local Frobenius of `j_!M† = j_!(M^∨ ⊗ 𝓑_b)` are the complex conjugates of those of `j_!M`.
-(blueprint: `lemma-twisted-envelope--1`, step 1) -/
+local Frobenius of `j_!M† = j_!(M^∨ ⊗ 𝓑_b)` are the complex conjugates of those of `j_!M`. -/
 theorem map_trace_frobeniusEnd_pow_stalk_extensionByZero_twistedDual
     (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
@@ -203,8 +192,7 @@ theorem map_trace_frobeniusEnd_pow_stalk_extensionByZero_twistedDual
 
 /-- **The realified kernel is `ι`-real.** If `M` is punctually `ι`-pure of weight `w` and
 `ι b = q ^ w`, then the realified kernel `pr₁^*(j_!M) ⊗ 𝒦_ψ ⊕ pr₁^*(j_!M†) ⊗ 𝒦_{ψ⁻¹}` is
-`ι`-real: at every closed point its local eigenvalues are stable under complex conjugation.
-Only the purity of `M` is used. (blueprint: `lemma-twisted-envelope--1`) -/
+`ι`-real: at every closed point its local eigenvalues are stable under complex conjugation. -/
 theorem isReal_realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (ι : PadicAlgCl l →+* ℂ)
     (D : LisseOnDenseOpen k₀ l) {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w)
     {b : (PadicAlgCl l)ˣ} (hb : ι b = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :
