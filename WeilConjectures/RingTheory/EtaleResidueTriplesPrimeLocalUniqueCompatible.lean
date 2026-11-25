@@ -12,7 +12,16 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 /-!
 # Compatible affine models of étale residue triples over a prime localization
 
-Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
+Every pointed étale triple over `R_p` receives a compatible pointed map from a pointed étale
+triple over `(R, p)`.
+
+## References
+
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+* [Stacks: Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
+* [Stacks: Tag 07RP](https://stacks.math.columbia.edu/tag/07RP)
+* [Stacks: Tag 01Z6](https://stacks.math.columbia.edu/tag/01Z6)
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
 -/
 
 @[expose] public section
@@ -23,14 +32,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Existence of a compatible descended affine model.
-Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
-(blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux-compatible)
-(blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-aux-model)
-
-Take the identity triple over R and the composite R → Rₚ → t.B. The structure
-equality is immediate, and compatibility follows from t.compatible, hψ and hK.
--/
+/-- Every pointed étale triple `t` over `R_p` receives a compatible pointed map from some
+pointed étale triple over `(R, p)`, namely the identity triple via `R → R_p → t.B`. -/
 theorem etaleResidueTriples_primeLocalization_component_extension_compatible
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

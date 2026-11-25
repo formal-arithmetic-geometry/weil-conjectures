@@ -13,7 +13,9 @@ public import Mathlib.Algebra.MvPolynomial.Rename
 /-!
 # Polynomial presentation of a principal localization
 
-Source: Stacks Project, Algebra, Lemma 00ST (3), localization presentation in its proof.
+## References
+
+* Stacks Project, Algebra, Lemma 00ST (3), localization presentation in its proof
 -/
 
 @[expose] public section
@@ -22,20 +24,9 @@ universe u
 
 namespace Algebra
 
-/-- Adjoining an inverse variable presents the principal localization, for any polynomial h.
-Source: Stacks Project, Algebra, Lemma 00ST (3), and the universal property of localization.
-(blueprint: new-equation-count-localize-presentation).
-
-Proof: evaluate the old variables in S_g and the new variable at the inverse of g.
-Every renamed f_i evaluates to zero, and h times the inverse evaluates to one, so this
-map descends to the displayed quotient T. Conversely, the old variables define R[x] → T;
-the f_i vanish, hence this descends to S → T. The image of g is a unit, with inverse the
-class of the new variable, by the extra relation. The localization universal property
-therefore gives S_g → T. The composites fix the old variables and the inverse variable;
-polynomial induction and quotient surjectivity give the identity on T. The other composite
-fixes S, hence is the identity by uniqueness for localization. These maps are R-algebra maps
-and give the equivalence with the stated generator formulas. This also applies when g is
-zero: both rings are then the zero ring. -/
+/-- Adjoining an inverse variable presents the principal localization, for any polynomial `h`:
+if `S = R[x] ⧸ (f_i)` and `g` is the class of `h`, then `S_g` is isomorphic over `R` to the
+quotient of `R[x, z]` by the `f_i` and `h z - 1`, with `x_i ↦ x_i` and `z ↦ g⁻¹`. -/
 theorem exists_localization_presentation
     (R : Type u) [CommRing R] (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R)
     (h : MvPolynomial (Fin n) R) :
