@@ -11,9 +11,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 /-!
 # An étale basic neighbourhood from vanishing of the naive cotangent complex
 
-Source: Stacks Project, Algebra, Tags 07BU, 00TB, 00U1; Morphisms, Tag 02GJ;
-More on Algebra, proof of Tag 07M7
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`).
+If `H_1` of the naive cotangent complex and the Kähler differentials of a finitely presented
+algebra vanish at a prime `q`, then some principal localization not inverting `q` is étale.
+
+## References
+
+* Stacks Project, Tags 07BU, 00TB, 00U1, 02GJ, and the proof of Tag 07M7
 -/
 
 @[expose] public section
@@ -24,9 +27,7 @@ namespace AlgebraicGeometry
 
 /-- For a finitely presented `A`-algebra `C`, vanishing at a prime `q` of both the first
 homology of the naive cotangent complex and the Kähler differentials gives an étale
-principal neighbourhood of `q` over `Spec A`.
-Source: Stacks Project, Tags 07BU, 00TB, 00U1, 02GJ, and the proof of 07M7.
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+principal neighbourhood of `q` over `Spec A`. -/
 theorem exists_etale_away_of_localization_cotangent_eq_zero
     {A C : Type u} [CommRing A] [CommRing C] [Algebra A C]
     [Algebra.FinitePresentation A C] (q : Ideal C) [q.IsPrime]

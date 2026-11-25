@@ -11,38 +11,33 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeExtension
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestriction
 
+/-! # Cocones on pointed étale diagrams under prime localization
+
+Cocones on the pointed étale ring diagram over `(R, p)` correspond naturally to cocones on
+the pointed étale ring diagram over the localization `R_p`.
+
+## Implementation details
+
+The equivalence combines the unique extension of an `R`-cocone to an `R_p`-cocone
+(`etaleResidueTriples_primeLocalization_cocone_extension`) with the restriction in the other
+direction (`etaleResidueTriples_primeLocalization_cocone_restriction`). No universal cocone
+or algebra structure on the vertex is assumed.
+
+## References
+
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+* [Stacks: Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
+* [Stacks: Tag 07RP](https://stacks.math.columbia.edu/tag/07RP)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
-/-- Cocones on pointed étale ring diagrams before and after prime localization are
-naturally equivalent, with the same vertex and the same restricted base map.
-Source: Stacks Project, Tags 04GW, 00CR, 01ZM and 07RP.
-(blueprint: new-lem-sbc-etale-triples-prime-localization-cocone-equiv)
-
-Proof: Write A = R_p as the filtered colimit of the principal localizations R_s for
-s outside p (Tag 00CR). A finitely presented étale A-algebra descends to an étale
-R_s-algebra (Tags 01ZM, 07RP). Restrict its map to K to this model. Its kernel
-is a prime over p, and its map to K factors uniquely through the residue field;
-composition R → R_s → B_s is étale, so this is an R-triple. Define its leg to V
-using the given R-cocone. Naturality along further principal refinements inverts
-all s outside p in this leg: each refinement is still an R-triple. The leg
-therefore extends uniquely from B_s to its localization, identified with the
-original A-algebra. Morphisms descend at a common stage, and equalities at a
-later stage (01ZM); this proves independence of the model and naturality of
-these extended legs. Descending both directions and the inverse relations of
-a comparison isomorphism deals with different models of an object.
-Conversely, localize each R-triple B at the images of R outside p; base change
-preserves étaleness, and its pointing extends uniquely because these images
-are units in K. Restrict the corresponding A-cocone leg along B → B localized.
-These constructions are inverse: on an A-triple this follows from independence
-of its model; on an R-triple use its principal refinements and naturality,
-together with uniqueness of extension from a localization. Both operations
-commute with postcomposition into every V → W by the same uniqueness.
-Finally, the identity R-triple maps into each descended R-triple. Naturality
-of the original cocone along this map gives the asserted equality on R.
-No universal cocone or algebra structure on the vertex is assumed here. -/
+/-- Cocones on the pointed étale ring diagrams before and after prime localization are
+naturally equivalent, with the same vertex and the same restricted base map on `R`. -/
 theorem etaleResidueTriples_primeLocalization_coconeEquiv
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

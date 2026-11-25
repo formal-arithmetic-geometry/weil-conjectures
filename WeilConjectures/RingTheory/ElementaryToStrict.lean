@@ -6,14 +6,17 @@ Authors: Bin Wu
 
 module
 public import WeilConjectures.RingTheory.StrictlyStandardElement
+
+/-! # Elementary standard elements are strictly standard
+
+## References
+
+* Stacks Project, Smoothing Ring Maps, Definition Tag 07C7 and Lemma Tag 07F5
+-/
+
 @[expose] public section
 universe u v
-/-- Every elementary standard element is strictly standard.
-Source: Stacks Project, Smoothing Ring Maps, Definition Tag 07C7 and Lemma Tag 07F5.
-(blueprint: lem-weil-pbc-elementary-to-strict)
-Choose the coefficient of the initial Jacobian minor for the subset of its columns and
-set all other coefficients to zero; transposing the minor matrix preserves its determinant,
-and the relation condition is unchanged. -/
+/-- Every elementary standard element is strictly standard. -/
 theorem elementary_standard_is_strict
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]
     [Algebra.FinitePresentation R A] {a : A}

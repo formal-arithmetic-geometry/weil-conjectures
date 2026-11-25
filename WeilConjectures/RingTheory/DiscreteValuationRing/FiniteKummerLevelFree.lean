@@ -23,8 +23,9 @@ Let `R` be a discrete valuation ring which is a finite `ℤ_ℓ`-algebra (for in
 ring `𝒪_E` of a finite extension `E` of `ℚ_ℓ`), with uniformizer `ϖ` and ramification index `e`,
 `ℓ = (unit) · ϖ^e`, and let `n = e N`. Then `A = R / ϖ^n` is a free `ℤ/ℓ^N`-module of rank
 `[R : ℤ_ℓ] = e f`, `f` being the residue degree `[R/ϖ : 𝔽_ℓ]`
-(`IsDiscreteValuationRing.free_quotient_span_pow`): `A ≅ (ℤ/ℓ^N)^{ef}`. This is the freeness
-clause of blueprint `lem-pur-finite-kummer-level`.
+(`IsDiscreteValuationRing.free_quotient_span_pow`): `A ≅ (ℤ/ℓ^N)^{ef}`.
+
+## Implementation details
 
 Indeed `R` is a free `ℤ_ℓ`-module of finite rank (finitely generated and torsion free over a
 principal ideal domain), `A = R / ℓ^N R ≅ ℤ/ℓ^N ⊗_{ℤ_ℓ} R` is free of the same rank over `ℤ/ℓ^N`,
@@ -52,8 +53,7 @@ lemma natCast_ne_zero_of_associated : (ℓ : R) ≠ 0 := by
 
 omit [IsDiscreteValuationRing R] in
 include hϖ hℓe in
-/-- `R` is a torsion free `ℤ_ℓ`-module: a nonzero `a ∈ ℤ_ℓ` is a unit times a power of `ℓ`, and
-`ℓ` is nonzero in the domain `R`. -/
+/-- The structure map `ℤ_ℓ → R` is injective, i.e. `R` is a torsion free `ℤ_ℓ`-module. -/
 lemma injective_algebraMap_padicInt : Function.Injective (algebraMap ℤ_[ℓ] R) := by
   refine (injective_iff_map_eq_zero _).2 fun a ha ↦ ?_
   by_contra ha0
@@ -117,15 +117,9 @@ lemma charP_quotient_span : CharP (R ⧸ Ideal.span {ϖ}) ℓ := by
   exact Units.dvd_mul_right.1 h
 
 include hϖ he hℓe in
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
-
-The freeness clause: let `R` (for instance `𝒪_E`) be a discrete valuation ring which is a finite
-`ℤ_ℓ`-algebra, with uniformizer `ϖ` and ramification index `e ≥ 1` (`ℓ = (unit) · ϖ^e`), and let
-`n = e N` with `N ≥ 1`. Then `A = R / ϖ^n` is a free module of finite rank over `ℤ/ℓ^N` (with
-the module structure of a ring of characteristic `ℓ^N`,
-`IsDiscreteValuationRing.charP_quotient_span_pow`), of rank `e f`, where `f = [R/ϖ : 𝔽_ℓ]` is
-the residue degree: `A ≅ (ℤ/ℓ^N)^{ef}`. Its rank is also the rank `[R : ℤ_ℓ]` of `R` over
-`ℤ_ℓ`. -/
+/-- Let `R` be a discrete valuation ring which is a finite `ℤ_ℓ`-algebra, with uniformizer `ϖ`
+and `ℓ = (unit) · ϖ^e`, `e ≥ 1`, and let `N ≥ 1`. Then `A = R / ϖ^{eN}` is a free `ℤ/ℓ^N`-module
+whose rank equals `[R : ℤ_ℓ]` and equals `e f`, where `f = [R/ϖ : 𝔽_ℓ]`. -/
 theorem free_quotient_span_pow (hN : 0 < N) :
     haveI := charP_quotient_span_pow hϖ hℓ.out he hℓe N
     letI := ZMod.algebra (R ⧸ Ideal.span {ϖ ^ (e * N)}) (ℓ ^ N)
