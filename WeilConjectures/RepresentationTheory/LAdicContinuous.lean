@@ -14,8 +14,23 @@ import Mathlib.Topology.MetricSpace.Isometry
 
 /-! # Continuous algebraic-closure representations have finite coefficient models
 
+A finite-dimensional representation of a profinite group over `ℚ̄_ℓ` is continuous if and only
+if it is defined over a finite extension `E` of `ℚ_ℓ` by a continuous representation.
+
+## Main statements
+
+- `Representation.isLAdic_iff_continuous`
+
+## Implementation details
+
 The private coordinate-model constructions are adapted from
-`Sheaf.RepresentationTheory.LAdicSubrepresentation` (group N2).
+`Sheaf.RepresentationTheory.LAdicSubrepresentation`.
+
+Given a continuous representation, choose a basis; by
+`PadicAlgCl.exists_finiteDimensional_forall_mem` the matrix entries lie in one finite extension
+`E`. The inclusion of `E` into `ℚ̄_ℓ` is isometric for the spectral norms, so the entries are
+continuous as `E`-valued functions, and the coordinate representation on `Eⁿ` is a continuous
+model. Conversely, the matrix entries of a model in an extended basis are continuous.
 -/
 
 @[expose] public noncomputable section
@@ -220,22 +235,9 @@ private theorem continuous_coefficient_function
   let := spectralNorm.nontriviallyNormedField ℚ_[l] E
   exact (coefficient_inclusion_isometry l E).isEmbedding.isInducing.continuous_iff.mpr hc
 
--- Finite-field model transport compares the full scalar-restriction and tensor structures.
-/-- Continuous finite-dimensional representations over the p-adic algebraic closure
-are exactly the representations with a continuous finite coefficient model.
-
-Source: blueprint `proposition-lattices-representations-normal-scheme`, clause (5).
-(blueprint: lisse-qlbar-continuous-finite-model)
-
-Proof: choose a finite basis and apply compact-matrix coefficient descent to the
-matrix monoid homomorphism. Its entries lie in one finite intermediate field E.
-The inclusion E into the algebraic closure is isometric for the spectral norms,
-so the entry functions remain continuous in E. The coordinate representation on
-E^n has continuous action by its finite-sum formula. Its image under the basis map
-is an actual invariant E-subspace, and the basis base-change equivalence gives
-exactly the required tensor map. Conversely a finite model has continuous matrix
-entries in an extended basis; compose these entries with the isometric field
-inclusion and use the finite-sum action formula. The argument includes dimension zero. -/
+/-- A representation of a profinite group on a `ℚ̄_ℓ`-vector space is `ℓ`-adic, i.e. has a
+continuous model over a finite extension of `ℚ_ℓ`, if and only if it is finite-dimensional and
+continuous for the module topology. -/
 theorem isLAdic_iff_continuous
     (l : ℕ) [Fact l.Prime] (G : ProfiniteGrp.{v})
     (V : Type w) [AddCommGroup V] [Module (PadicAlgCl l) V]

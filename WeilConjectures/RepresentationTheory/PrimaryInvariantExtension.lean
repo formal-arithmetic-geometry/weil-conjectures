@@ -13,8 +13,17 @@ import Mathlib.RepresentationTheory.Invariants
 /-!
 # Extending a stable subgroup in a finite primary representation
 
-Source: Stacks Project, Tags 0GIZ and 0GJ0
-(blueprint: lem-sc-primary-invariant-extension).
+## Implementation details
+
+The proof is elementary: by the fixed-point count for `p`-group actions the quotient `V / W`
+has a nonzero invariant, hence by Cauchy's theorem an invariant of order `ℓ`. The preimage of
+the invariants killed by `ℓ` is the required `W'`. This replaces the augmentation-ideal
+argument of the Stacks Project.
+
+## References
+
+* [Stacks Project, Tag 0GIZ](https://stacks.math.columbia.edu/tag/0GIZ)
+* [Stacks Project, Tag 0GJ0](https://stacks.math.columbia.edu/tag/0GJ0)
 -/
 
 @[expose] public section
@@ -23,25 +32,9 @@ universe u v
 
 namespace Representation
 
-/-- A proper stable subgroup of a finite primary module can be enlarged by a
-nonzero trivial quotient killed by the prime.
-
-Proof: Form the nonzero finite quotient A = V / W with its induced Q-action.
-It remains ℓ-primary. A nonzero element has order divisible by ℓ, so ℓ divides
-its cardinality. The fixed-point counting theorem for p-group actions, with
-zero as one fixed point, supplies a second fixed point. Hence the invariant
-subgroup I is nonzero and ℓ-primary. Its cardinality is divisible by ℓ, and
-Cauchy's theorem gives an element y of order ℓ in I. Let L consist of all
-invariants in A killed by ℓ; it contains y, so is nonzero. The inverse image W'
-of L strictly contains W. Every element of L is fixed, so W' is stable and
-ρ g x - x lies in W for x in W'. The condition ℓ L = 0 likewise gives ℓ x ∈ W.
-This is an explicit elementary proof of the finite-module case underlying
-the filtration assertion of Tag 0GIZ, using Mathlib's fixed-point count and
-Cauchy's theorem, instead of the augmentation-ideal hint in that source.
-
-Source: Stacks Project, Etale Cohomology, Lemma 0GIZ (lemma-action-l-group),
-the filtration assertion, and Lemma 0GJ0 (lemma-pullback-filtered-modules).
-(blueprint: lem-sc-primary-invariant-extension). -/
+/-- Let `V` be a finite `ℓ`-primary abelian group with an action of an `ℓ`-group `Q`. A proper
+`Q`-stable subgroup `W` of `V` is strictly contained in a `Q`-stable subgroup `W'` such that
+`W' / W` is killed by `ℓ` and carries the trivial action. -/
 theorem exists_primary_invariant_extension
     (Q : Type u) [Group Q] (ℓ : ℕ) (hℓ : ℓ.Prime) (hQ : IsPGroup ℓ Q)
     (V : Type v) [AddCommGroup V] [instVModule : Module ℤ V] [Finite V]

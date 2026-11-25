@@ -6,7 +6,21 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSiteChainTensor
 import all WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientIntrinsicChainTensor
-/-! # Naturality of normalized finite coefficient total tensor comparisons -/
+/-! # Naturality of normalized finite coefficient total tensor comparisons
+
+The chosen pure-tensor chain comparisons for finite coefficients assemble into a natural
+isomorphism of signed total tensor functors.
+
+## Implementation details
+
+The ordinary natural tensor comparison normalized on local pure tensors is lifted to signed
+total complexes by the total-bifunctor comparison; uniqueness of the normalized comparison
+identifies its components with the chosen ones.
+
+## References
+
+* [Stacks Project, Tags 00YV, 06YN and 07A4]
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
@@ -17,9 +31,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- Signed total tensor, shared before specializing the module category of a site.
-It is definitionally `coefficientTotalTensor` at a ringed site (see `target_total_eq`).
-Source: Stacks 06YN, 07A4 (blueprint: lem-sf-finite-coefficient-site-tensor-naturality). -/
+/-- The signed total tensor product of cochain complexes in a monoidal preadditive
+category `D`. -/
 noncomputable def coefficientTotalTensorGeneral
     (D : Type a) [Category.{b} D] [Preadditive D] [MonoidalCategory D]
     [(curriedTensor D).PreservesZeroMorphisms]
@@ -29,9 +42,8 @@ noncomputable def coefficientTotalTensorGeneral
     CochainComplex D ℤ × CochainComplex D ℤ ⥤ CochainComplex D ℤ :=
   Functor.uncurry.obj ((curriedTensor D).map₂CochainComplex)
 
-/-- Naturality of a specified tensor-comparison family, with all functor data shared.
-Source: Stacks 06YN and 07A4
-(blueprint: lem-sf-finite-coefficient-site-tensor-naturality). -/
+/-- The family `ε` is the family of components of a natural isomorphism
+`t ⋙ U ≅ U.prod U ⋙ t'`. -/
 def FiniteHomChainTensorNaturalityAux
     {C : Type a} {D : Type b} [Category.{v} C] [Category.{c} D]
     (U : C ⥤ D) (t : C × C ⥤ C) (t' : D × D ⥤ D)
@@ -148,16 +160,7 @@ private theorem natural_total_ring (X : Scheme.{u}) (A : Type u)
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- The chosen pure-tensor chain comparisons assemble into a natural isomorphism.
-Source: blueprint site comparison paragraph; Stacks 00YV, 06YN and 07A4
-(blueprint: lem-sf-finite-coefficient-site-tensor-naturality).
-
-Proof: choose the ordinary natural tensor comparison normalized on local pure tensors.
-Lift it to signed total complexes by the total-bifunctor comparison. This lift is
-natural in both complexes, is invertible componentwise, and satisfies the prescribed
-map on every summand. Hence each component satisfies the normalization that uniquely
-characterizes the chosen chain comparison. Uniqueness identifies the components.
-The construction is componentwise and includes zero complexes and the empty site. -/
+/-- The chosen pure-tensor chain comparisons assemble into a natural isomorphism. -/
 theorem finiteHomNuChainTensor_naturalIso (n : ℕ) :
     FiniteHomChainTensorNaturalityAux (finiteHomNuComplex l E X n)
       (finiteHomCochainTensorGeneral _)

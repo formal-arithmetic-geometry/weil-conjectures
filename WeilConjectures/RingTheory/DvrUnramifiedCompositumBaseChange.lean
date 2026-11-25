@@ -19,8 +19,10 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-! # Further base change of an unramified DVR compositum
 
-Source: Stacks Project, Tag 09EQ, tensor and local-factor argument.
-(blueprint: lem-sbc-dvr-unramified-compositum-base-change) -/
+## References
+
+* Stacks Project, Tag 09EQ (tensor and local-factor argument), Tags 09E7 and 02FM
+-/
 
 @[expose] public section
 universe u
@@ -42,30 +44,11 @@ private theorem dvr_map_injective
     exact mul_ne_zero (pow_ne_zero n hgp) (w.isUnit.map g).ne_zero
   exact hnot (by rw [hw]; exact hz)
 
-/-- An essentially unramified DVR extension stays so in a local field compositum.
-
-Source: Stacks Project, Tag 09EQ, proof; Tags 09E7 and 02FM.
-(blueprint: lem-sbc-dvr-unramified-compositum-base-change)
-
-Proof: Faithfulness makes V torsion-free and hence flat over the DVR R.
-Form D=A tensor_R V and map it to T using the two compatible maps. Let Q
-be the inverse image of the maximal ideal of T and S=D_Q. The map S -> T
-is local, and its composite with A -> S is the given local map A -> T.
-Essential finite type, flatness and formal unramifiedness survive this
-base change and localization. The local unramified criterion gives
-m(A)S=m(S). Regularity therefore ascends from A to S. Flatness keeps a
-uniformizer p of A nonzero in S, where it generates m(S); consequently S
-is a DVR. A base uniformizer of R stays nonzero in T, by compatibility
-with iV and faithfulness of R -> V. Since its image in A is a multiple
-of p, the image of p in T is nonzero. Uniformizer factorization in S
-therefore makes S -> T injective. Extend it to Frac(S) -> F. The map
-V -> S also extends to Frac(V) -> Frac(S), and the two composites to F
-agree on V, hence on Frac(V). Thus the range of Frac(S) -> F contains
-A and iV(Frac(V)); generation makes that field map surjective, proving
-that F is the fraction field of S. Maximality of valuation rings under
-local inclusions in a common fraction field makes S -> T surjective.
-Transfer essential finite type and formal unramifiedness along this
-surjective A-algebra map. No finiteness assumption on A/R is used. -/
+/-- An essentially unramified DVR extension stays so in a local field compositum. Let `R → V` be
+a faithful local map of DVRs that is essentially of finite type and formally unramified, `R → A`
+a local map of DVRs, and `T` a DVR local over `A` with fraction field `F`, receiving a map
+`V → T` compatible over `R`. If `F` is generated as an `A`-algebra by the image of `Frac V`, then
+`A → T` is essentially of finite type and formally unramified. -/
 theorem dvr_unramified_compositum_base_change
     (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
     (V : Type u) [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]

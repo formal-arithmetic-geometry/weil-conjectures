@@ -27,8 +27,17 @@ sign, sums of traces of powers of local Frobenius of `K`, which are `ι`-real si
 
 - `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one`: reality of `R¹f_!K` when the
   `Rᵛf_!K` vanish for `ν ≠ 1`.
-- `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_snd_one`
-  (`proposition-purity-lisse-part-fourier-transform`): the case of the second projection `𝔸² ⟶ 𝔸¹`.
+- `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_snd_one`: the case of the second
+  projection `𝔸² ⟶ 𝔸¹`.
+
+## Implementation details
+
+The characteristic polynomials in
+`AlgebraicGeometry.WeilSheaf.exists_fiber_expand_charpolyRev_stalk_higherLowerShriek` are stated
+with the instance `AlgebraicClosure.instCommRing`, while `localPolynomial` unfolds to
+`charpolyRev` through `Field.toCommRing`. The two are identified on a generic module
+(`charpolyRev_eq_localPolynomial`), so that the kernel never compares them on the stalk, which
+times out.
 -/
 
 @[expose] public section
@@ -46,9 +55,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Y.Over (Spec (CommRingCat.of k₀))]
 
 /-- The traces of the powers of the Frobenius on the compactly supported cohomology of an `ι`-real
-Weil sheaf concentrated in a single degree `r` are `ι`-real: by the Grothendieck–Lefschetz trace
-formula they are, up to the sign `(-1)ʳ`, sums of multiples of traces of powers of the local
-Frobenius, which are `ι`-real (`FrobeniusModule.isReal_iff_forall_trace_pow`). -/
+Weil sheaf concentrated in a single degree `r` are `ι`-real. -/
 theorem IsReal.isReal_compactlySupportedCohomology_of_subsingleton {ι : PadicAlgCl l →+* ℂ}
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -88,8 +95,7 @@ variable {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- The local polynomial of a Frobenius module over `PadicAlgCl l` is its `charpolyRev`, with the
-`CommRing` instance found by instance search (`AlgebraicClosure.instCommRing`) rather than the one
-unfolded from `Field`; stated on a generic module so that the kernel checks it once. -/
+`CommRing` instance found by instance search rather than the one unfolded from `Field`. -/
 private lemma charpolyRev_eq_localPolynomial {l : ℕ} [Fact l.Prime]
     (M : FrobeniusModule.{v, 0} (PadicAlgCl l)) :
     M.frobeniusEnd.charpolyRev = M.localPolynomial := rfl
@@ -97,17 +103,7 @@ private lemma charpolyRev_eq_localPolynomial {l : ℕ} [Fact l.Prime]
 variable (f) in
 /-- **Reality survives a direct image concentrated in degree one.** Let `f : X ⟶ Y` be a
 separated morphism of finite type of `k₀`-schemes and `K` an `ι`-real Weil sheaf on `X` such
-that the higher direct images `Rᵛf_!K` vanish for `ν ≠ 1`. Then `R¹f_!K` is `ι`-real.
-
-At a closed point `ξ` of degree `d`, with fibre `X_ξ`, compact support base change gives
-`det(1 - T^d F_ξ | (R¹f_!K)_ξ̄) = det(1 - T F | H_c^1(X_ξ ⊗ k̄, K))` and the vanishing of the
-other `H_c^ν(X_ξ ⊗ k̄, K)`
-(`AlgebraicGeometry.WeilSheaf.exists_fiber_expand_charpolyRev_stalk_higherLowerShriek`). The
-restriction of `K` to `X_ξ` is `ι`-real, so `H_c^1(X_ξ ⊗ k̄, K)` is `ι`-real by the
-Grothendieck–Lefschetz trace formula
-(`AlgebraicGeometry.WeilSheaf.IsReal.isReal_compactlySupportedCohomology_of_subsingleton`),
-and the coefficients of `det(1 - T F_ξ)` are among those of its local polynomial.
-(blueprint: `proposition-purity-lisse-part-fourier-transform`, for a general `f`) -/
+that the higher direct images `Rᵛf_!K` vanish for `ν ≠ 1`. Then `R¹f_!K` is `ι`-real. -/
 theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilSheaf k₀ l X}
     (hK : K.IsReal ι) (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l f ν).obj K)) :
     ((higherLowerShriek k₀ l f 1).obj K).IsReal ι := by
@@ -133,9 +129,7 @@ theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilShea
 
 /-- **Reality survives the Fourier projection.** Let `K` be an `ι`-real Weil sheaf on the
 affine plane `𝔸¹ ×_{k₀} 𝔸¹` such that `Rpr₂!K` has no cohomology sheaves outside degree one,
-for the second projection `pr₂ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. Then `R¹pr₂!K` is `ι`-real. This is the
-case `f = pr₂` of `AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_one`.
-(blueprint: `proposition-purity-lisse-part-fourier-transform`) -/
+for the second projection `pr₂ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. Then `R¹pr₂!K` is `ι`-real. -/
 theorem isReal_higherLowerShriek_snd_one {ι : PadicAlgCl l →+* ℂ}
     {K : WeilSheaf k₀ l (affinePlane k₀)} (hK : K.IsReal ι)
     (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l (affinePlane.snd k₀) ν).obj K)) :

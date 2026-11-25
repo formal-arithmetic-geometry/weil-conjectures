@@ -13,8 +13,25 @@ import WeilConjectures.SixFunctors.GeneratorReduction.PullQuotientOrdinaryProjec
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 /-! # Pullback transpose on good representatives
 
-Source: current blueprint fix-prop-coherence, primitive comparisons
-(blueprint: lem-sf-pull-quotient-augmentation-on-good).
+We show that the scalar-adjunction transpose of the ordinary pullback/reduction comparison is
+the strict pullback of the quotient Roos augmentation on a good complex.
+
+## Implementation details
+
+The reference pullback model is expanded: `RealizationModel.model` and naturality of the
+reconstruction unit replace the derived reduction/pullback comparison by the localization of
+the ordinary adjoint-conjugate map, and the Hom normalization of `pullbackTensorReductionModel`
+identifies its scalar transpose with the ordinary quotient unit followed by
+`pullbackTensorLimitUnit`. For an arbitrary tower, the K-injective normalization of
+`pullbackTensorRoosModel` is transported along a K-injective resolution. After cancelling the
+scalar restriction localization factors, the remaining ordinary cochain identity is checked
+after every product projection by `pullQuotientOrdinaryProjection`, using the zero second
+coordinates and the first-coordinate formula for the shifted mapping-cone map. No property of
+`completionUnit`, descent, or `Pull.model` is used.
+
+## References
+
+* Stacks Project, Tags 03D7, 07A6, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -257,26 +274,7 @@ private theorem ordinary_roos
   exact cocone_lifts_map_eq _ _ _ _ _ _ _ _ _ b _ _ hz hr hn
 
 /-- The scalar-adjunction transpose of ordinary pullback/reduction is the
-strict pullback of the quotient Roos augmentation on a good complex.
-Source: current blueprint fix-prop-coherence.proof.md, maps-used sentence;
-Stacks 03D7, 07A6, 0941.
-
-Proof: Expand the reference pullback model. RealizationModel.model and
-naturality of the reconstruction unit replace the derived reduction/pullback
-comparison by the localization of the ordinary adjoint-conjugate map. The Hom
-normalization of pullbackTensorReductionModel identifies its scalar transpose
-with the ordinary quotient unit followed by pullbackTensorLimitUnit.
-For an arbitrary tower, transport the K-injective normalization of
-pullbackTensorRoosModel along a K-injective resolution; naturality of the
-ordinary projections and the explicit zero-homotopy cone lift give the required
-formula on that resolution and hence on the original tower. Cancel the scalar
-restriction localization factors. The remaining ordinary cochain identity is
-checked after every product projection by pullQuotientOrdinaryProjection.
-The zero second coordinates and the first-coordinate formula for the shifted
-mapping-cone map identify the whole Roos lifts. Localize this cochain identity
-and compose with the exact ordinary-pullback localization factor. No property
-of completionUnit, descent, or Pull.model is used.
-(blueprint: lem-sf-pull-quotient-augmentation-on-good). -/
+strict pullback of the quotient Roos augmentation on a good complex. -/
 theorem pullQuotientTranspose_onGood
     (system : IntegralSystemRealization.Operations l E)
     (realization : IntegralSystemRealization.RealizationModel l E system)

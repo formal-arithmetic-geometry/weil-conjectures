@@ -9,27 +9,16 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-!
 # Uniqueness of universal first order thickenings
 
-Source: Stacks Project, Algebra, Section 04EA, the remark following Lemma 04EB.
-(blueprint: lem-weil-pbc-ring-universal-first-order-thickening-uniqueness).
+## References
+
+* [Stacks Project, Section 04EA](https://stacks.math.columbia.edu/tag/04EA), the remark
+  following Lemma 04EB
 -/
 @[expose] public section
 universe u
 namespace Algebra
-/-- Two square-zero thickenings with the universal lifting property are uniquely
-isomorphic over the base. Source: Stacks Project, Algebra, Section 04EA, the remark
-following Lemma 04EB.
-(blueprint: lem-weil-pbc-ring-universal-first-order-thickening-uniqueness).
-
-Proof: For any surjection `q : V → S` with square-zero kernel, the first isomorphism
-theorem identifies `V/ker q` with `S`. Apply the lifting property of `U → S` to the
-inverse identification. Composing with the identification converts the quotient
-equation to `q.comp f = p`, so there is exactly one compatible map `U → V`.
-Apply this with `U = S'`, `V = T` and then with `U = T`, `V = S'` to get maps `f`
-and `g`. Their composites and the identity are compatible maps over `S`; apply
-the same uniqueness with `U = V` to show both composites are identities.
-`AlgEquiv.ofAlgHom` supplies the equivalence, and uniqueness of its forward
-algebra homomorphism supplies uniqueness of the equivalence. No unramified
-hypothesis is needed for this argument. -/
+/-- Two square-zero thickenings of `S` with the universal lifting property are uniquely
+isomorphic over the base. -/
 theorem universalFirstOrderThickening_unique
     (R S S' : Type u) [CommRing R] [CommRing S] [CommRing S'] [Algebra R S]
     [Algebra R S']

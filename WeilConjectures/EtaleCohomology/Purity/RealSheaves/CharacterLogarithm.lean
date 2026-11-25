@@ -11,16 +11,20 @@ public import WeilConjectures.NumberTheory.Padics.Exponential
 /-!
 # The logarithm of a character of the Weil group
 
-Let `χ : W(C₀) → Eˣ` be a character of the Weil group of a curve over a finite field with values
-in a finite extension `E / ℚ_ℓ`, continuous on the geometric fundamental group `π₁(C) = ker deg`.
-Since `π₁(C)` is compact, some power `χ ^ N` maps `π₁(C)` into the principal units
-`1 + ℓ² 𝒪_E`, and `λ(g) = log (χ(g) ^ N)` is a continuous additive character of `π₁(C)` that is
-invariant under conjugation by any element of `W(C₀)`, in particular by a degree-one element
-(blueprint `theorem-rank-one-sheaves-have-finite`).
+Let `χ : W(C₀) → Eˣ` be a character of the Weil group of a curve over a finite field with values in
+a finite extension `E / ℚ_ℓ`, continuous on the geometric fundamental group `π₁(C) = ker deg`. Since
+`π₁(C)` is compact, some power `χ ^ N` maps `π₁(C)` into the principal units `1 + ℓ² 𝒪_E`, and
+`λ(g) = log (χ(g) ^ N)` is a continuous additive character of `π₁(C)` that is invariant under
+conjugation by any element of `W(C₀)`, in particular by a degree-one element.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilGroup.exists_smallLog_pow_hom`: the logarithm of a power of `χ`.
+
+## Implementation details
+
+The compactness of `π₁(C)` is the field `AlgebraicGeometry.WeilGroup.compactSpace_ker`; the
+invariance under conjugation holds because the values of `χ` commute.
 -/
 
 @[expose] public section
@@ -37,16 +41,11 @@ variable (W : WeilGroup p) {l : ℕ} [Fact l.Prime] {E : Type*} [Field E]
   [Algebra E (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
   [FiniteDimensional ℚ_[l] E]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: A multiplicative curve character produces an
-invariant additive character.
-
-Let `χ : W(C₀) → Eˣ` be a character with values in a finite extension `E / ℚ_ℓ` inside `ℚ̄_ℓ`,
+/-- Let `χ : W(C₀) → Eˣ` be a character with values in a finite extension `E / ℚ_ℓ` inside `ℚ̄_ℓ`,
 continuous on `Π = π₁(C) = ker deg`, and let `s ∈ W(C₀)` (for instance of degree one). There is
 `N ≥ 1` such that `χ(g) ^ N` lies in the principal units `1 + ℓ² 𝒪_E` (on which the logarithm is
-defined) for `g ∈ Π`, and `λ(g) = log (χ(g) ^ N)` is a continuous additive character of `Π`
-with `λ(s g s⁻¹) = λ(g) = λ(s⁻¹ g s)`. The compactness of `Π` is the field
-`AlgebraicGeometry.WeilGroup.compactSpace_ker`; the invariance holds because the values of `χ`
-commute. -/
+defined) for `g ∈ Π`, and `λ(g) = log (χ(g) ^ N)` is a continuous additive character of `Π` with
+`λ(s g s⁻¹) = λ(g) = λ(s⁻¹ g s)`. -/
 theorem exists_smallLog_pow_hom (χ : W.carrier →* Eˣ)
     (hχ : Continuous fun g : W.geometric ↦ algebraMap E (PadicAlgCl l) (χ g)) (s : W.carrier) :
     ∃ N : ℕ, 0 < N ∧ (∀ g : W.geometric, χ g ^ N ∈ PadicAlgCl.smallUnits l E) ∧

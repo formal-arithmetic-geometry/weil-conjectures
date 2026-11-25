@@ -12,27 +12,24 @@ public import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoc
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestrictionExists
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRestrictionUnique
 
-/-! # Compatible cocone legs across prime localization -/
+/-! # Compatible cocone legs across prime localization
+
+Every cocone on the pointed étale ring diagram over `R_p` restricts uniquely to a compatible
+cocone on the pointed étale ring diagram over `(R, p)`.
+
+## References
+
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+-/
 
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- Every local cocone has a unique global cocone with compatible pointed legs.
-Source: Stacks Project, Tags 00CR and 04GW.
-(blueprint: new-lem-sbc-etale-triples-prime-localization-cocone-restriction)
-
-Proof: Localize each pointed R-triple B at the images of R outside p. This is an
-etale R_p-algebra by base change. The pointing extends to K because denominators
-are nonzero there; its kernel has inverse image q, by injectivity of the residue
-field maps and the compatibility of the two base pointings. Factor it uniquely
-through its residue field. Restrict the local cocone leg along B to this localized
-triple. Every morphism of global triples localizes, so the restricted legs are
-natural. Every compatible map B to any local triple extends uniquely from this
-localization, and local-cocone naturality proves compatibility. Finally the
-canonical maps into the localized triples force every compatible global cocone
-leg to be this restriction, proving uniqueness. -/
+/-- Every cocone on the pointed étale ring diagram over `R_p` has a unique compatible cocone
+on the pointed étale ring diagram over `(R, p)` with the same vertex. -/
 theorem etaleResidueTriples_primeLocalization_cocone_restriction
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

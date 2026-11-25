@@ -41,15 +41,6 @@ The open–closed triangle `j_!F → j_*F → i_*i^*j_*F` also gives the boundar
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`, since the cohomology of the finite
 boundary `Z` is concentrated in degree zero.
 
-The second half of the same blueprint subsection, that a nonzero linear Artin–Schreier sheaf
-`ℒ_{ψ(a x)}` is ramified at infinity, is stated for the Artin–Schreier extension of the local
-field `k((t))` at infinity, where the inertia group acts:
-`LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
-`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity` (extension to a lisse sheaf across `∞`):
-relating that condition to the inertia action at `∞` needs the fundamental representation of a
-lisse Weil sheaf (`situation-weil`), which does not exist yet, and a direct
-proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
-
 ## Main statements
 
 - `AlgebraicGeometry.exists_linearEquiv_dual_stalk_higherDirectImage`: the local boundary
@@ -57,15 +48,13 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 - `AlgebraicGeometry.exists_exact_compactlySupportedCohomology_boundary`: the boundary sequence
   in degrees zero and one.
 
-## Implementation notes
+## Implementation details
 
-The local boundary pairing follows the Verdier duality argument of the blueprint. The nodes of
-other sections it uses are stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`,
-each with its blueprint id: `theorem-verdier-biduality` (the adjunction `Rf₀! ⊣ Rf^!`,
-biduality, `Rf^! = 𝔻 f^* 𝔻`), `lemma-internal-adjunction-two-exchange-formulas--2` (for `j`),
-`corollary-dualizing-complex-smooth-scheme--1` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
-`proposition-six-operations-dctf--15` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`) and
-`lemma-local-cohomology-right-adjoint--2` (`Ri^! Rj_* = 0`). The steps proved here are:
+The local boundary pairing follows a Verdier duality argument. The inputs from other sections are
+stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`: the adjunction
+`Rf₀! ⊣ Rf^!`, biduality and `Rf^! = 𝔻 f^* 𝔻`, the exchange formulas for `j`,
+`ω_U = ℚ̄_ℓ(1)[2]` and `ω_Z = ℚ̄_ℓ`, `RHom(P, N) = P^∨ ⊗ N` for lisse `P`, and `Ri^! Rj_* = 0`.
+The steps proved here are:
 1. `𝔻_C Rj_* G ≅ j_! 𝔻_U G` (exchange and biduality);
 2. `Ri^! 𝔻_C K ≅ 𝔻_Z i^* K`;
 3. `Ri^! j_! G ≅ i^* Rj_* G [-1]` (open–closed triangle and `j^* Rj_* = 𝟭`);
@@ -78,6 +67,14 @@ The maps `g` and `h` of `AlgebraicGeometry.exists_exact_compactlySupportedCohomo
 are only asserted to exist; they should be the maps induced by
 `WeilSheaf.extensionByZeroToDirectImage j`, which needs the identification
 `H_c(U, F) ≅ H_c(C, j_!F)` and the functoriality of `compactlySupportedCohomology`.
+
+The ramification at infinity of a nonzero linear Artin–Schreier sheaf `ℒ_{ψ(a x)}` is stated for
+the Artin–Schreier extension of the local field `k((t))` at infinity, where the inertia group
+acts: `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
+`AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity` (extension to a lisse sheaf across `∞`):
+relating that condition to the inertia action at `∞` needs the fundamental representation of a
+lisse Weil sheaf, which does not exist yet, and a direct proof would need the triviality of
+lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 -/
 
 @[expose] public section
@@ -93,8 +90,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 open scoped ProEtale
 
 /-- In a noetherian quasi-sober `T₀` space of dimension at most one, the complement of a dense
-open subset is finite: a point outside the open is closed, being a proper specialization of the
-generic point of an irreducible component, which lies in the open. -/
+open subset is finite. -/
 theorem _root_.Dense.finite_compl_of_topologicalKrullDim_le_one {X : Type*} [TopologicalSpace X]
     [QuasiSober X] [T0Space X] [NoetherianSpace X] (h : topologicalKrullDim X ≤ 1) {U : Set X}
     (hU : IsOpen U) (hd : Dense U) : Uᶜ.Finite := by
@@ -127,8 +123,8 @@ theorem _root_.Dense.finite_compl_of_topologicalKrullDim_le_one {X : Type*} [Top
   exact Set.finite_singleton z
 
 omit [Finite k₀] in
-/-- The reduced closed complement `Z₀` of a dense open `U₀` of a smooth curve `C₀` over `k₀`: a
-finite reduced `k₀`-scheme, `C₀` being noetherian of dimension one. -/
+/-- The reduced closed complement `Z₀` of a dense open `U₀` of a smooth curve `C₀` over `k₀` is a
+finite reduced `k₀`-scheme. -/
 theorem exists_isReduced_isClosedImmersion_range_eq_compl_of_curve {U C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ C) [IsOpenImmersion j] [IsDominant j]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]
@@ -217,7 +213,7 @@ closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perf
 
 It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`-dual of `(R¹j_*F)_s̄`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
-twist. (blueprint: `lemma-local-duality-point-c-u--1`)
+twist.
 -/
 theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
@@ -415,16 +411,12 @@ private theorem exact_boundary_of_triangle
     erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
 
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
-of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
-open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
-supported cohomology, and since the boundary `Z₀` is finite its cohomology is concentrated in
-degree zero (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`).
-Hence there are Frobenius-equivariant maps forming an exact sequence
+of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. There
+are Frobenius-equivariant maps forming an exact sequence
 
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`,
 
-and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`.
-(blueprint: `lemma-extreme-degrees-affine-curve`) -/
+and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`. -/
 theorem exists_exact_compactlySupportedCohomology_boundary
     {U C Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))]

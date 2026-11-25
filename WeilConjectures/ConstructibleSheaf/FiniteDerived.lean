@@ -19,15 +19,18 @@ images vanish, and it preserves and reflects constructibility over Noetherian ba
 
 - `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite`:
   `R^q f_* F = 0` for `q ≠ 0` and `f` finite.
-- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isFinite` (blueprint
-  `proposition-proper-direct-image-finite-coefficients`): finite direct images of constructible
-  sheaves over a base of finite type over a field.
-- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isClosedImmersion` (blueprint
-  `proposition-proper-direct-image-finite-coefficients`): closed direct images of constructible
-  sheaves.
-- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_of_rightDerivedLowerStar`
-  (blueprint `lemma-detection-proper-direct-image--1`): `Rp_*` reflects membership in `D^b_c` for
-  `p` finite between Noetherian schemes.
+- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isFinite`: finite direct images
+  of constructible sheaves over a base of finite type over a field.
+- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isClosedImmersion`: closed direct
+  images of constructible sheaves.
+- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_of_rightDerivedLowerStar`:
+  `Rp_*` reflects membership in `D^b_c` for `p` finite between Noetherian schemes.
+
+## Implementation details
+
+In `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isClosedImmersion` the open
+complement of the closed immersion is assumed quasi-compact, which is automatic for a locally
+Noetherian base (see `WeilConjectures.ConstructibleSheaf.ExtensionByZero`).
 -/
 
 @[expose] public section
@@ -48,9 +51,8 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`, vanishing part: for a finite
-morphism `f : X ⟶ S` and a sheaf `F` of `Λ`-modules on `X_ét`, the higher direct images `R^q f_* F`
-vanish for `q ≠ 0`, the direct image `f_*` being exact. -/
+/-- For a finite morphism `f : X ⟶ S` and a sheaf `F` of `Λ`-modules on `X_ét`, the higher
+direct images `R^q f_* F` vanish for `q ≠ 0`. -/
 theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : Scheme.{u}}
     (f : X ⟶ S) [IsFinite f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (hq : q ≠ 0) :
@@ -68,9 +70,7 @@ theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : S
 
 variable [Finite Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Finite direct images of
-constructible sheaves.
-
+/-- Finite direct images of constructible sheaves.
 Let `f : X ⟶ S` be finite with `S` of finite type over a field `k`, and let `F` be a
 constructible sheaf of `Λ`-modules on `X_ét`. Then `f_* F` is constructible on `S_ét` and
 `R^q f_* F = 0` for every `q > 0`. The case of a Noetherian base is
@@ -89,13 +89,9 @@ theorem isConstructibleSheaf_lowerStar_of_isFinite {k : Type u} [Field k] {X S :
     isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite f F q hq.ne'⟩
 
 omit [Finite Λ] in
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Closed immersions preserve
-constructibility.
-
-Let `i : Z ⟶ X` be a closed immersion and `G` a constructible sheaf of `Λ`-modules on `Z_ét`.
-Then `i_* G` is constructible on `X_ét` and `R^q i_* G = 0` for `q > 0`. The open complement of
-`i` is assumed quasi-compact, which is automatic for `X` locally Noetherian (see
-`WeilConjectures.ConstructibleSheaf.ExtensionByZero`). -/
+/-- Closed immersions preserve constructibility. Let `i : Z ⟶ X` be a closed immersion with
+quasi-compact open complement and `G` a constructible sheaf of `Λ`-modules on `Z_ét`. Then
+`i_* G` is constructible on `X_ét` and `R^q i_* G = 0` for `q > 0`. -/
 theorem isConstructibleSheaf_lowerStar_of_isClosedImmersion {Z X : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [QuasiCompact (openComplementOfIsClosedImmersion i).ι]
     (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf G] :
@@ -107,9 +103,7 @@ theorem isConstructibleSheaf_lowerStar_of_isClosedImmersion {Z X : Scheme.{u}} (
   exact ⟨Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact i G,
     fun q hq ↦ isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite i G q hq.ne'⟩
 
-/-- Blueprint `lemma-detection-proper-direct-image--1`: Finite direct image reflects bounded
-constructibility.
-
+/-- Finite direct image reflects bounded constructibility.
 Let `p : Z ⟶ S` be a finite morphism of Noetherian schemes. A complex `K` of étale sheaves of
 `Λ`-modules on `Z` lies in `D^b_c(Z, Λ)` as soon as `Rp_* K` lies in `D^b_c(S, Λ)`. -/
 theorem DerivedCategory.boundedConstructible_of_rightDerivedLowerStar {Z S : Scheme.{u}}

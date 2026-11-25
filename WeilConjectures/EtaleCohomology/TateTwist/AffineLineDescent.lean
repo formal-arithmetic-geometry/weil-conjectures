@@ -25,14 +25,16 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplemen
 /-!
 # Descent of the computations on `𝔸¹` and `𝔾ₘ` with `Λ(1)`-coefficients
 
-The vanishing clauses (a) and (c) of blueprint `sk-prop-a1-kummer` for the twist
-`Λ(1) = μₙ ⊗ Λ`, over a base `B` separated and locally of finite type over an arbitrary field
-`k`: with `p : 𝔸¹_B ⟶ B` and `j : 𝔾_{m,B} ⟶ 𝔸¹_B` the basic open of the coordinate,
+Vanishing of higher direct images on `𝔸¹` and `𝔾ₘ` for the twist `Λ(1) = μₙ ⊗ Λ`, over a base
+`B` separated and locally of finite type over an arbitrary field `k`: with `p : 𝔸¹_B ⟶ B` and
+`j : 𝔾_{m,B} ⟶ 𝔸¹_B` the basic open of the coordinate,
 
 * `R^n p_* Λ(1) = 0` for `n > 0`
   (`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_field`);
 * `R^n p_* Rj_* j^* Λ(1) = 0` for `n ≥ 2`
   (`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_basicOpen_of_field`).
+
+## Implementation details
 
 Over an algebraically closed field and for `B` quasi-compact, these are proved in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`. The quasi-compactness is
@@ -124,9 +126,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsAlgClosed k]
 
 include aY in
 /-- Over an algebraically closed field and without quasi-compactness assumption on `Y`, the
-higher direct images `R^n p_* Λ(1)` of the projection `p : 𝔸¹_Y ⟶ Y` vanish for `n > 0`: by
-étale base change this may be checked on the affine opens `V` of `Y`, where it is
-`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`. -/
+higher direct images `R^n p_* Λ(1)` of the projection `p : 𝔸¹_Y ⟶ Y` vanish for `n > 0`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_isAlgClosed (n : ℤ)
     (hn : 0 < n) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
@@ -154,9 +154,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_isAlgClos
 include aY in
 /-- Over an algebraically closed field and without quasi-compactness assumption on `Y`: for an
 open immersion `j : G ⟶ 𝔸¹_Y` onto the complement of the zero section and `π = j ≫ p`,
-`R^n π_* Λ(1) = 0` for `n ∉ {0, 1}`. By étale base change this may be checked on the affine
-opens of `Y`, where it is
-`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup`. -/
+`R^n π_* Λ(1) = 0` for `n ∉ {0, 1}`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_isAlgClosed
     {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Y)) [IsOpenImmersion j]
     (hj : Set.range j.base =
@@ -193,10 +191,8 @@ variable {k : Type u} [Field k] {B : Scheme.{u}} (aB : B ⟶ Spec (.of k))
 /-- Descent of the vanishing of a cohomology sheaf of a higher direct image of the Tate twist
 along the base change `B' = B ×_k k̄ ⟶ B` to an algebraic closure `k̄` of `k`. Given the base
 change `f' : X' ⟶ B'` of a quasi-compact quasi-separated `f : X ⟶ B`, if `H^n(Rf'_* Λ(m))`
-vanishes, so does `H^n(Rf_* Λ(m))`: the base change map along the field extension is an
-isomorphism (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_fieldExtension`) and
-`B' ⟶ B` is surjective. The hypothesis may use that the exponent of `Λ` is invertible in `k̄`,
-which holds as soon as `B` is nonempty. -/
+vanishes, so does `H^n(Rf_* Λ(m))`. The hypothesis may use that the exponent of `Λ` is
+invertible in `k̄`. -/
 lemma isZero_homology_rightDerivedLowerStar_tateObject_of_algebraicClosure
     [HasInvertibleExponent Λ B] {X X' : Scheme.{u}} (f : X ⟶ B) [QuasiCompact f]
     [QuasiSeparated f] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X']
@@ -230,12 +226,8 @@ lemma isZero_homology_rightDerivedLowerStar_tateObject_of_algebraicClosure
 variable [Finite Λ] (B) [IsSeparated aB] [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`, clause (a), for the twist `Λ(1) = μₙ ⊗ Λ`, over an arbitrary
-field: for `B` separated and locally of finite type over a field `k` and the projection
-`p : 𝔸¹_B ⟶ B`, `R^n p_* Λ(1) = 0` for `n > 0`. After base change to an algebraic closure of
-`k` this is
-`isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_isAlgClosed`.
--/
+/-- For `B` separated and locally of finite type over a field `k` and the projection
+`p : 𝔸¹_B ⟶ B`, `R^n p_* Λ(1) = 0` for `n > 0`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_field (n : ℤ)
     (hn : 0 < n) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
@@ -258,9 +250,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_field (n 
 include aB in
 /-- Over an arbitrary field: for `B` separated and locally of finite type over a field `k`, a
 quasi-compact open immersion `j : G ⟶ 𝔸¹_B` onto the complement of the zero section and
-`π = j ≫ p`, `R^n π_* Λ(1) = 0` for `n ∉ {0, 1}`. After base change to an algebraic closure of
-`k` this is
-`isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_isAlgClosed`. -/
+`π = j ≫ p`, `R^n π_* Λ(1) = 0` for `n ∉ {0, 1}`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_field
     {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); B)) [IsOpenImmersion j] [QuasiCompact j]
     (hj : Set.range j.base =
@@ -287,8 +277,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup_of_
         (pullback.snd aB ι) j' hj' n h₀ h₁
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`, clause (c), for the twist `Λ(1) = μₙ ⊗ Λ`, over an arbitrary
-field: for `B` separated and locally of finite type over a field `k`, the projection
+/-- For `B` separated and locally of finite type over a field `k`, the projection
 `p : 𝔸¹_B ⟶ B` and the basic open `j : 𝔾_{m,B} ⟶ 𝔸¹_B` of the coordinate,
 `R^n p_* Rj_* j^* Λ(1) = 0` for `n ≥ 2`. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_basicOpen_of_field (n : ℤ)

@@ -13,6 +13,25 @@ import WeilConjectures.RingTheory.EtaleResidueTripleUnitRefinement
 import WeilConjectures.RingTheory.EtaleResidueTriplesStrictHenselization
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationComparison
 
+/-!
+# The étale residue triple colimit as a strict henselization of `R_p`
+
+The colimit of pointed étale residue triples over `(R, p)` is a strict henselization of the
+local ring `R_p`.
+
+## Implementation details
+
+Every `s ∉ p` becomes a unit in the colimit, so the identity-triple leg extends to `R_p`. The
+residue field of `R_p` is identified with the scheme residue field, which transports the
+separable closure. `etaleResidueTriples_primeLocalization_comparison` then provides a universal
+local-base ring cocone on the given vertex, and
+`etaleResidueTriples_colimit_isStrictHenselization` converts it into a strict henselization.
+
+## References
+
+* Stacks Project, Tag 04GW
+-/
+
 @[expose] public section
 
 universe u
@@ -20,37 +39,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The residue-triple colimit gives the local-base strict henselization.
-Source: Stacks Project, Tag 04GW.
-(blueprint: new-lem-sbc-etale-triples-localized-core)
-
-Proof: Apply `etaleResidueTriple_unit_refinement` to the identity triple and each
-s outside p. The resulting pointed principal-localization triple makes s a unit;
-cocone naturality makes its image under the identity leg, followed by e, a unit.
-`IsLocalization.lift` therefore extends this ring map uniquely to A = R_p.
-`Spec.residueFieldIso R p` identifies the scheme residue field with the residue
-field of A. Compose its inverse with the given embedding in K to construct the
-residue-field algebra structure on K, and compose with the residue map to construct
-its A-algebra structure. `Algebra.IsSeparable.of_equiv_equiv` transports separability;
-separable closedness of K is unchanged, so this is the required separable closure.
-The field-point equivalence `SpecToEquivOfField` gives a point of Spec A and a
-residue embedding whose evaluation is precisely A to K. The original R to K
-map agrees with its restriction by `Spec.algebraMap_residueFieldIso_inv`.
-`etaleResidueTriples_primeLocalization_comparison` now supplies a universal local-base
-ring cocone on the given vertex C, with all legs respecting the constructed A-map.
-Its proof uses `CommRingCat.localization_colimit_principalLocalizations` to express
-A as the filtered colimit of principal localizations and `etale_finite_data_descent`
-to descend pointed etale objects, morphisms and equalities: restrict the pointing
-to each descended object, lift each finite-presentation morphism at a common stage,
-and clear the finitely many relations at a later stage. Pointing compatibility
-is checked after mapping to K, where all elements outside p are already units.
-Each descended principal-localization algebra is an R-triple. These refinements
-identify cocones and their unique descended maps; uniqueness on fractions forces
-them to respect A. The comparison uses the original legs followed by e, so its
-structural map is the displayed identity-triple map, rather than an arbitrary map.
-Finally `etaleResidueTriples_colimit_isStrictHenselization` converts this universal
-local-base ring cocone to the pointed-algebra presentation, giving strict henselization.
-The vertex and both algebra maps were explicitly constructed before the comparison. -/
+/-- A ring `C` isomorphic to the colimit of étale residue triples is a strict henselization of
+`R_p`, for an `R_p`-algebra structure on `C` extending the leg of the identity triple. -/
 theorem etaleResidueTriples_localized_core
     (R : CommRingCat.{u}) (p : Spec R)
     (K : Type u) [Field K]

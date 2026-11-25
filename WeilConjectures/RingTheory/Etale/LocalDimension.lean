@@ -16,8 +16,18 @@ import WeilConjectures.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 /-!
 # Local dimension under an étale ring map
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07QP
-(blueprint: lem-sc-etale-local-dimension).
+For an étale ring map `A → B` and a prime `q` of `B` lying over `p`, the local rings `A_p` and
+`B_q` have the same Krull dimension.
+
+## Implementation details
+
+The induced map `A_p → B_q` is flat and local, hence faithfully flat, which gives
+`dim A_p ≤ dim B_q` by going down. Conversely, an étale map is of finite type and quasi-finite
+at `q`, so the local dimension inequality gives `dim B_q ≤ dim A_p`.
+
+## References
+
+* Stacks Project, More on Algebra, Lemma Tag 07QP
 -/
 
 @[expose] public section
@@ -26,18 +36,7 @@ universe u v
 
 namespace RingHom.Etale
 
-/-- Localizing an étale ring map at a prime and its contraction preserves Krull dimension.
-Source: Stacks Project, More on Algebra, Lemma Tag 07QP
-(blueprint: lem-sc-etale-local-dimension).
-
-Proof: The induced map on localizations is flat and local
-(`lem-weil-pbc-etale-algebra-flat`, `lem-weil-pbc-flat-local-ring-maps`), hence faithfully flat
-(`lem-pc-local-flat-faithful-flat-reflects-surjective`). Going down yields the lower bound
-`dim A_p ≤ dim B_q` (`lem-sc-faithfully-flat-local-dimension`).
-For the reverse bound, the étale map is of finite type and quasi-finite at `q`
-(Mathlib gives finite type and discrete fibre spectra). Apply the local dimension inequality
-(`lem-weil-pbc-dimension-inequality-quasi-finite`) to obtain `dim B_q ≤ dim A_p`.
-Antisymmetry gives the asserted equality. -/
+/-- Localizing an étale ring map at a prime and its contraction preserves Krull dimension. -/
 theorem ringKrullDim_localization_eq {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     (f : A →+* B) (hf : f.Etale) (q : Ideal B) [q.IsPrime] :
     ringKrullDim (Localization.AtPrime (Ideal.comap f q)) =

@@ -38,7 +38,8 @@ the terminal sheaf of sets (`AlgebraicGeometry.Scheme.unitSection`).
 ## Main results
 
 - `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`: the Galois
-  correspondence (`proposition-lattices-representations-normal-scheme`) as a tensor equivalence.
+  correspondence for finite local systems as a tensor equivalence; its exactness is
+  `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`.
 -/
 
 @[expose] public noncomputable section
@@ -104,8 +105,7 @@ instance (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
   infer_instance
 
 /-- The stalk at `s` of a tensor product of sheaves of `Λ`-modules is the tensor product of the
-stalks, `(F ⊗ G)_s ≅ F_s ⊗ G_s`: the stalk of the presheaf tensor product is the tensor product of
-the stalks, and sheafifying does not change stalks. It sends the germ of `σ ⊗ τ` to
+stalks, `(F ⊗ G)_s ≅ F_s ⊗ G_s`. It sends the germ of `σ ⊗ τ` to
 `σ_s ⊗ τ_s` (`AlgebraicGeometry.Scheme.sheafFiberTensorIso'_inv_tmul`). -/
 def Scheme.sheafFiberTensorIso' (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (Scheme.pointSmallEtale s).sheafFiber.obj (F ⊗ G) ≅
@@ -404,9 +404,7 @@ def Scheme.unitSection (c : Λ) :
 variable [Finite Λ] (G : Type u) [Group G] [∀ P, MulAction G ((Scheme.FiniteEtale.fiber s).obj P)]
   [PreGaloisCategory.IsNaturalSMul (Scheme.FiniteEtale.fiber s) G]
 
-/-- **The Galois action on the stalk of the constant sheaf `Λ_Y` is trivial**: every element of
-the stalk is the germ of a constant section, which comes from the terminal sheaf of sets, whose
-stalk is a point. -/
+/-- **The Galois action on the stalk of the constant sheaf `Λ_Y` is trivial**. -/
 lemma Scheme.IsFiniteLocallyConstantSheaf.galoisAct_unit
     (hU : IsFiniteLocallyConstantSheaf (𝟙_ (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
     (g : G) (w : ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj
@@ -467,8 +465,7 @@ lemma Scheme.galoisRepFunctorUnitIso_hom_hom_apply
 end Unit
 
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems, with its tensor structure.
+/-- Galois correspondence for finite local systems, with its tensor structure.
 
 Let `Y` be a connected scheme, `s` a geometric point, `Λ` a finite ring and `G = π₁(Y, s)` a
 fundamental group of the fibre functor at `s`. The geometric stalk at `s` is an equivalence `e`
@@ -479,8 +476,7 @@ representations of `G` such that
   `τ : e (F₁ ⊗ F₂) ≅ e F₁ ⊗ e F₂`, natural in `F₁` and `F₂`, whose underlying linear map is, via
   `η`, the identification `(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` of
   `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`;
-* `e` sends the constant sheaf `Λ_Y` to the trivial representation `Λ`.
-Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`. -/
+* `e` sends the constant sheaf `Λ_Y` to the trivial representation `Λ`. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFundamentalGroup
     (Y : Scheme.{u}) [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
@@ -510,8 +506,7 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFunda
   ext w
   rfl
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems, as an exact *tensor* equivalence.
+/-- Galois correspondence for finite local systems, as a *tensor* equivalence.
 
 For a connected scheme `Y`, a geometric point `s` and a finite ring `Λ`, there is a profinite
 group `G` (the étale fundamental group `π₁(Y, s)`) and an equivalence `e` between finite locally
@@ -519,9 +514,7 @@ constant sheaves of `Λ`-modules on `Y_ét` and finite continuous representation
 the underlying `Λ`-module of `e F` is the stalk `F_s` (via `η`), `e` is compatible with tensor
 products through an isomorphism of bifunctors `τ` lifting
 `(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` (`AlgebraicGeometry.Scheme.sheafFiberTensorIso'`), and `e` sends
-`Λ_Y` to the trivial representation. See the `_of_isFundamentalGroup` version for the statement
-with `G` named; exactness is
-`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`. -/
+`Λ_Y` to the trivial representation. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor (Y : Scheme.{u})
     [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :

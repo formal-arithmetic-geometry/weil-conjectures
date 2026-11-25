@@ -36,12 +36,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (π : X ⟶ Y) [Is
 
 /-- **Cohomology of a finite pushforward.** For a finite morphism `π : X ⟶ Y`, the derived
 global sections of `π_* K` are those of `K`: `RΓ(Y, π_* K) ≅ RΓ(X, K)`, so that
-`H^q(Y, π_* F) ≅ H^q(X, F)` for every étale sheaf `F` of `Λ`-modules on `X` and every `q`. The
-pushforward `π_*` is exact, so the Grothendieck spectral sequence of `Γ_Y ∘ π_*` degenerates:
-this is the Leray isomorphism
-`AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso` with
-`Rπ_* = π_*` (`AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory`).
-(blueprint: `lemma-finite-morphisms-cohomology--2`) -/
+`H^q(Y, π_* F) ≅ H^q(X, F)` for every étale sheaf `F` of `Λ`-modules on `X` and every `q`. -/
 noncomputable def mapDerivedCategoryLowerStarCompRightDerivedGlobalSectionsIso :
     ((π)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory ⋙
         rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) Y ≅

@@ -14,7 +14,7 @@ public import WeilConjectures.ConstructibleSheaf.InternalHom
 
 Let `Λ` be a commutative ring and let `L` be a locally constant sheaf of `Λ`-modules on the small
 étale site of a scheme `X`, of rank one: its stalk at every geometric point is isomorphic to `Λ`
-(`AlgebraicGeometry.Scheme.HasRankOneStalks`). Then (blueprint `lemma-section-normal-bundle--1`):
+(`AlgebraicGeometry.Scheme.HasRankOneStalks`). Then:
 
 1. the canonical map `Λ_X ⟶ [L, L]` (`CategoryTheory.MonoidalClosed.id`, the adjoint of the right
    unitor, "`1 ↦ id_L`") is an isomorphism
@@ -79,15 +79,8 @@ lemma HasRankOneStalks.of_iso {L L' : Sheaf X.smallEtaleTopology (ModuleCat.{u +
 
 variable (L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
-sheaf
-
-Clause (1): for a locally constant sheaf `L` of rank one, the canonical map
-`Λ_X ⟶ [L, L]`, `1 ↦ id_L` (`CategoryTheory.MonoidalClosed.id`), is an isomorphism. On a
-trivialising cover with nonempty members, `L` is a constant sheaf with stalks `Λ`, hence
-isomorphic to `Λ`, for which the canonical map is an isomorphism; and the pullback, which is
-strong monoidal and commutes with internal homs, carries the canonical map of `L` to the
-canonical map of its pullback. -/
+/-- For a locally constant sheaf `L` of rank one, the canonical map `Λ_X ⟶ [L, L]`,
+`1 ↦ id_L` (`CategoryTheory.MonoidalClosed.id`), is an isomorphism. -/
 theorem isIso_id_of_hasRankOneStalks [IsLocallyConstantSheaf L] (hL : HasRankOneStalks L) :
     IsIso (MonoidalClosed.id L) := by
   obtain ⟨⟨𝒰₀, h𝒰₀⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := L)
@@ -106,10 +99,7 @@ theorem isIso_id_of_hasRankOneStalks [IsLocallyConstantSheaf L] (hL : HasRankOne
 
 variable {L M}
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
-sheaf
-
-Clause (1), endomorphisms: every endomorphism of a locally constant sheaf `L` of rank one is the
+/-- Every endomorphism of a locally constant sheaf `L` of rank one is the
 multiplication (`CategoryTheory.MonoidalCategory.unitEndAction`) by a unique endomorphism of
 `Λ_X`, that is by a unique global section of `Λ_X`, a locally constant function `X → Λ`: the
 action `End Λ_X → End L` is a ring isomorphism. -/
@@ -121,10 +111,7 @@ noncomputable def unitEndRingEquivOfHasRankOneStalks [IsLocallyConstantSheaf L]
     (C := Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   unitEndRingEquiv L
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
-sheaf
-
-Clause (1), automorphisms: the automorphisms of a locally constant sheaf `L` of rank one are the
+/-- The automorphisms of a locally constant sheaf `L` of rank one are the
 multiplications by the units of `End Λ_X`, the locally constant functions `X → Λˣ`. -/
 noncomputable def unitsUnitEndMulEquivAutOfHasRankOneStalks [IsLocallyConstantSheaf L]
     (hL : HasRankOneStalks L) :
@@ -132,10 +119,7 @@ noncomputable def unitsUnitEndMulEquivAutOfHasRankOneStalks [IsLocallyConstantSh
   have := isIso_id_of_hasRankOneStalks L hL
   unitsUnitEndMulEquivAut L
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
-sheaf
-
-Clause (2): two isomorphisms `φ ψ : L ≅ M` between locally constant sheaves of rank one differ
+/-- Two isomorphisms `φ ψ : L ≅ M` between locally constant sheaves of rank one differ
 by a unique unit `u` of `End Λ_X`, a locally constant function `X → Λˣ`: `ψ = u • φ`. -/
 theorem existsUnique_hom_eq_comp_unitEndAction_of_hasRankOneStalks [IsLocallyConstantSheaf M]
     (hM : HasRankOneStalks M) (φ ψ : L ≅ M) :
@@ -144,10 +128,7 @@ theorem existsUnique_hom_eq_comp_unitEndAction_of_hasRankOneStalks [IsLocallyCon
   have := isIso_id_of_hasRankOneStalks M hM
   existsUnique_hom_eq_comp_unitEndAction φ ψ
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Automorphisms of a rank-one finite locally constant
-sheaf
-
-The final assertion of clause (2): for an isomorphism `φ : L ≅ M` and a unit `v` of `Λ`, the
+/-- For an isomorphism `φ : L ≅ M` and a unit `v` of `Λ`, the
 multiple `v • φ` by the constant unit `v` is an isomorphism, whose stalk at every geometric point
 is `v` times the stalk of `φ`. -/
 theorem exists_iso_hom_eq_smul (φ : L ≅ M) (v : Λˣ) :

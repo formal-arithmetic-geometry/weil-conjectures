@@ -38,6 +38,21 @@ Frobenius at a closed point `x` is a Frobenius element at `x`, of degree `e_x`
   immersion of curves.
 - `AlgebraicGeometry.WeilGroup.toStandard`: every Weil group is isomorphic to the one built from
   its base point and fundamental group.
+
+## Implementation details
+
+The restriction `W(U₀) → W(C₀)` of `AlgebraicGeometry.WeilGroup.restrictionHom` is defined for
+any open immersion `j : U₀ ⟶ C₀` of connected, geometrically connected schemes over a finite
+field, not only for curves; its Weil groups are those of
+`AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, built from the arithmetic fundamental groups
+`π₁(V₀, s)`, since the structure `AlgebraicGeometry.WeilGroup` itself is only set up for curves.
+For the surjectivity in the normal case, normality is asked of `V₀` (its local rings are
+integrally closed domains) rather than of `V = V₀ ⊗ k`; it follows from normality of `V` by
+faithfully flat descent, and is equivalent to it over the perfect field `k₀`.
+
+## References
+
+* [Stacks, Tag 0BQM]
 -/
 
 @[expose] public section
@@ -83,8 +98,7 @@ lemma isEmbedding_ker_weilGroupDeg :
   exact hι.injective (Prod.ext hgh ((MonoidHom.mem_ker.1 g.2).trans (MonoidHom.mem_ker.1 h.2).symm))
 
 open scoped FintypeCatDiscrete in
-/-- The geometric part `ker deg` of the Weil group is compact: it is the closed subset of the
-compact group `π₁(X₀, s)` of the elements acting trivially on the constant covers. -/
+/-- The geometric part `ker deg` of the Weil group is compact. -/
 lemma isCompact_ker_weilGroupDeg [CompactSpace G] [∀ P, ContinuousSMul G ((fiber s).obj P)] :
     IsCompact ((weilGroupDeg p s G).ker : Set (weilGroup p s G)) := by
   let T : Set G := {g | ∀ (A : FiniteEtaleAlgebra K) (y : (fiber s).obj (constantCover p A)),
@@ -115,8 +129,7 @@ end Topology
 end Scheme.FiniteEtale
 
 /-- A nonempty quasi-compact scheme locally of finite type over a finite field `K` has a point
-with values in the algebraic closure of `K`: the residue field at a closed point is finite over
-`K`. -/
+with values in the algebraic closure of `K`. -/
 lemma Scheme.Hom.nonempty_algebraicClosure_point {K : Type u} [Field K] {C : Scheme.{u}}
     (p : C ⟶ Spec (.of K)) [LocallyOfFiniteType p] [QuasiCompact p] [Nonempty C] :
     Nonempty (Spec (.of (AlgebraicClosure K)) ⟶ C) := by
@@ -161,8 +174,7 @@ noncomputable def weilFrobenius (x : C.finitePoints) : weilGroup p s G :=
 /-- **The Weil group of a geometrically connected curve over a finite field**, built from a
 fundamental group `G = π₁(C₀, s)` at a geometric point `s` with values in `𝔽̄_q`: the subgroup
 `W(C₀, s) ⊆ π₁(C₀, s) × ℤ` with the induced topology, the local Frobenius at a closed point
-being a chosen Frobenius element. (blueprint `definition-weil-representation--1`,
-`situation-weil`) -/
+being a chosen Frobenius element. -/
 noncomputable def ofFundamentalGroup : WeilGroup p :=
   have : TotallyDisconnectedSpace G :=
     (toAutHomeo (fiber s) G).symm.totallyDisconnectedSpace
@@ -231,8 +243,7 @@ lemma restrictionHom_apply (w : weilGroup pU sU GU) :
 
 omit [Finite K] [GeometricallyConnected p] [Nonempty U] in
 /-- On a smooth curve, base change to a nonempty open preserves connectedness of finite étale
-covers: a connected finite étale cover is smooth over `K`, hence regular, hence irreducible, and
-a nonempty open subscheme of an irreducible scheme is connected (Stacks `0BQM`). -/
+covers. -/
 lemma isConnected_pullback_of_smooth [Smooth p] (P : C.FiniteEtale) (hP : IsConnected P) :
     IsConnected ((Scheme.FiniteEtale.pullback j).obj P) := by
   have := connectedSpace_of_isConnected P
@@ -245,8 +256,7 @@ lemma isConnected_pullback_of_smooth [Smooth p] (P : C.FiniteEtale) (hP : IsConn
   exact isConnected_pullback_of_irreducibleSpace j P
 
 omit [Finite K] [GeometricallyConnected p] [Nonempty U] in
-/-- **The fundamental group of a dense open of a smooth curve surjects** onto that of the curve
-(Stacks `0BQM`, blueprint `theorem-purity-real-sheaves-curves`). -/
+/-- **The fundamental group of a dense open of a smooth curve surjects** onto that of the curve. -/
 lemma restrictionMap_surjective [Smooth p] : Function.Surjective (restrictionMap j τ GU GC) :=
   fundamentalGroupMap_surjective _ GC GU fun P hP ↦ isConnected_pullback_of_smooth (p := p) j P hP
 
@@ -292,8 +302,7 @@ lemma degreeOver_eq (x : U) (hx : x ∈ U.finitePoints) :
 include hj in
 /-- **The restriction of Weil groups along an open immersion** of curves `j : U₀ ⟶ C₀`, for a
 smooth curve `C₀`, the Weil groups being those of `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`
-and the path `τ` from `s_U ≫ j` to `s_C` arbitrary. (blueprint `lemma-boundary-stalk--2`,
-`theorem-purity-real-sheaves-curves`) -/
+and the path `τ` from `s_U ≫ j` to `s_C` arbitrary. -/
 noncomputable def restrictionOfPath [Smooth p] :
     Restriction j (ofFundamentalGroup pU sU GU) (ofFundamentalGroup p sC GC) where
   comp_eq := hj
@@ -345,19 +354,9 @@ The restriction `W(U₀) → W(C₀)` of `AlgebraicGeometry.WeilGroup.restrictio
 any open immersion `j : U₀ ⟶ C₀` of connected, geometrically connected schemes over a finite
 field, not only for curves. It preserves the degrees, it is the map of fundamental groups
 `AlgebraicGeometry.WeilGroup.restrictionMap` on the underlying elements, hence on the geometric
-subgroups `ker deg`, and it is surjective as soon as that map is, e.g. for `C₀` regular or normal
-(blueprint `theorem-purity-real-sheaves-curves`, part (2)).
-
-The blueprint states part (2) for `V₀` separated of finite type over `k₀` with `V = V₀ ⊗ k`
-connected and normal. Here normality is asked of `V₀` (its local rings are integrally closed
-domains); it follows from normality of `V` by faithfully flat descent, and is equivalent to it
-over the perfect field `k₀`. The surjectivity of `π₁(V'₀) → π₁(V₀)` is then
-`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk`,
-giving `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`; the
-regular case is `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`. The Weil
-groups are those of `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, built from the arithmetic
-fundamental groups `π₁(V₀, s)`; the structure `AlgebraicGeometry.WeilGroup` itself is only set
-up for curves. -/
+subgroups `ker deg`, and it is surjective as soon as that map is, e.g. for `C₀` regular
+(`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`) or normal
+(`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`). -/
 
 variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.of K)}
   [GeometricallyConnected p] [ConnectedSpace C] {pU : U ⟶ Spec (.of K)}
@@ -370,21 +369,14 @@ variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
 omit [IsOpenImmersion j] [Nonempty U] in
-/-- The restriction of Weil groups commutes with the degree maps (blueprint
-`theorem-purity-real-sheaves-curves`, part (2)). -/
+/-- The restriction of Weil groups commutes with the degree maps. -/
 lemma weilGroupDeg_restrictionHom (w : weilGroup pU sU GU) :
     weilGroupDeg p sC GC (restrictionHom j hj τ GU GC w) = weilGroupDeg pU sU GU w :=
   rfl
 
 omit [IsOpenImmersion j] [Nonempty U] in
 /-- The restriction of Weil groups maps the geometric subgroup `ker deg` of `W(U₀)` onto that of
-`W(C₀)` if it is surjective (e.g. for `C₀` regular or normal,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`), since it
-preserves degrees. On the underlying elements of `π₁(U₀)` it is the map of fundamental groups
-`AlgebraicGeometry.WeilGroup.restrictionMap` (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`),
-so on the geometric subgroups it is the surjection of part (1) of
-`theorem-purity-real-sheaves-curves`. -/
+`W(C₀)` if it is surjective. -/
 lemma map_ker_weilGroupDeg_restrictionHom
     (hsurj : Function.Surjective (restrictionHom j hj τ GU GC)) :
     (weilGroupDeg pU sU GU).ker.map (restrictionHom j hj τ GU GC) =
@@ -394,10 +386,7 @@ lemma map_ker_weilGroupDeg_restrictionHom
   rw [h, ← MonoidHom.comap_ker, Subgroup.map_comap_eq_self_of_surjective hsurj]
 
 omit [IsOpenImmersion j] [Nonempty U] in
-/-- **The restriction of Weil groups is surjective** if the map of fundamental groups is: an
-element of degree `n` of `W(C₀)` differs from the image of an element of degree `n` of `W(U₀)`
-by an element of the geometric subgroup, which lifts (blueprint
-`theorem-purity-real-sheaves-curves`, part (2)). -/
+/-- **The restriction of Weil groups is surjective** if the map of fundamental groups is. -/
 lemma restrictionHom_surjective_of_surjective
     (hsurj : Function.Surjective (restrictionMap j τ GU GC)) :
     Function.Surjective (restrictionHom j hj τ GU GC) := by
@@ -421,19 +410,14 @@ lemma restrictionHom_surjective_of_surjective
     mul_inv_cancel_left]
 
 /-- **The restriction of Weil groups along a dense open of a regular scheme is surjective**
-(blueprint `theorem-purity-real-sheaves-curves`, part (2), for `C₀` regular, e.g. smooth over
-`K`): the map of fundamental groups is surjective
-(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isRegular`). -/
+(e.g. for `C₀` smooth over `K`). -/
 lemma restrictionHom_surjective_of_isRegular [IsRegular C] [IsLocallyNoetherian C] :
     Function.Surjective (restrictionHom j hj τ GU GC) :=
   restrictionHom_surjective_of_surjective j hj τ GU GC
     (fundamentalGroupMap_surjective_of_isRegular j _ GU GC)
 
 /-- **The restriction of Weil groups along a dense open of a normal scheme is surjective**
-(blueprint `theorem-purity-real-sheaves-curves`, part (2)): if the local rings of the locally
-noetherian scheme `C₀` are integrally closed domains, the map of fundamental groups is surjective
-(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk`).
--/
+if the local rings of the locally noetherian scheme `C₀` are integrally closed domains. -/
 lemma restrictionHom_surjective_of_isIntegrallyClosed_stalk [IsLocallyNoetherian C]
     (hC : ∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) :
     Function.Surjective (restrictionHom j hj τ GU GC) :=
@@ -454,9 +438,7 @@ noncomputable abbrev standard : WeilGroup p :=
   ofFundamentalGroup p W.basePoint W.fundamentalGroup
 
 /-- **A Weil group is isomorphic, as a topological group, to the standard one** built from its
-base point and fundamental group: the isomorphism is `weilGroupEquiv`, which is a homeomorphism
-because both topologies make the geometric part open, with the topology induced from
-`π₁(C₀, s)`. -/
+base point and fundamental group, through `weilGroupEquiv`. -/
 noncomputable def toStandard : W.carrier ≃ₜ* W.standard.carrier where
   toMulEquiv := W.weilGroupEquiv
   continuous_toFun := by
@@ -503,11 +485,9 @@ lemma isConj_toStandard_frobenius (x : C.finitePoints) :
   rw [mul_comm n, mul_assoc, mul_inv_cancel, mul_one]
   exact (W.deg_eq _).symm.trans (W.deg_frobenius x)
 
-/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
-
-The local Frobenius `F_x` at a closed point `x` is well defined up to conjugacy in `W(C₀)`: every
-Frobenius element `f` at `x` of `π₁(C₀, s)`, whatever path from a geometric point over `x` to the
-base point it is transported along, is the image of an element of `W(C₀)` of degree `e_x`, and
+/-- The local Frobenius `F_x` at a closed point `x` is well defined up to conjugacy in `W(C₀)`:
+every Frobenius element `f` at `x` of `π₁(C₀, s)`, whatever path from a geometric point over `x` to
+the base point it is transported along, is the image of an element of `W(C₀)` of degree `e_x`, and
 that element is conjugate to `F_x` in `W(C₀)` (and not merely in `π₁(C₀, s)`). -/
 theorem isConj_frobenius_of_isFrobeniusElement (x : C.finitePoints) {f : W.fundamentalGroup}
     (hf : haveI : Finite (C.residueField x.1) := x.2
@@ -543,7 +523,7 @@ lemma isCurve_comp_of_isAffine [IsAffine U] : IsCurve (j ≫ p) where
 
 omit [Finite K] [IsCurve p] in
 /-- A nonempty open of a smooth geometrically connected scheme over a field is geometrically
-connected: it is geometrically irreducible. -/
+connected. -/
 lemma geometricallyConnected_comp [Nonempty U] [Smooth p] [GeometricallyConnected p] :
     GeometricallyConnected (j ≫ p) := by
   have : GeometricallyIrreducible p := .of_smooth_of_geometricallyConnected p

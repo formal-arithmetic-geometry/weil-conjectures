@@ -34,13 +34,20 @@ on a `k₀`-scheme (`AlgebraicGeometry.WeilSheaf`) rather than for Weil group re
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.tateTwist` and
-  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.tateTwist`: blueprint
-  `proposition-weights-under-usual-operations--14`.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.dual`: blueprint
-`proposition-weights-under-usual-operations--4`.
+  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.tateTwist`: weight shift under a Tate twist.
+- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.dual`: weight of the dual.
 - `AlgebraicGeometry.WeilSheaf.IsReal.tensorPow` and
-  `AlgebraicGeometry.WeilSheaf.IsReal.inv_localPolynomial_stalk_tensorPow_nonneg`: blueprint
-  `lemma-positivity-euler-factors--1`.
+  `AlgebraicGeometry.WeilSheaf.IsReal.inv_localPolynomial_stalk_tensorPow_nonneg`: tensor powers
+  of real sheaves are real, and even ones have positive Euler factors.
+
+## Implementation details
+
+`ℚ̄_ℓ(m)` is `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}`, its dual is `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)⁻ᵐ}`, and
+`𝓗om(ℚ̄_ℓ ⊗ 𝓑_b, F) ≅ F ⊗ 𝓑_{b⁻¹}`; this gives
+`AlgebraicGeometry.WeilSheaf.tateTwistSheafTensorObjIso`. Positivity of the Euler factors of even
+tensor powers uses `det (1 - t M)⁻¹ = exp (∑ tr(Mⁿ) tⁿ / n)`
+(`PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg`): the traces
+`ι tr(Fₓⁿ | (G^{⊗ k})_x̄) = (ι tr(Fₓⁿ | G_x̄))ᵏ` are even powers of real numbers.
 -/
 
 @[expose] public section
@@ -77,8 +84,7 @@ theorem constantCoeff_inv_map_localPolynomial (ι : K →+* ℂ) (M : FrobeniusM
 
 /-- If the `ι`-images of the traces `tr(Fⁿ)`, `n ≥ 1`, of the powers of the Frobenius are
 nonnegative reals, then the complex inverse local factor `ι det(1 - t F)⁻¹` has nonnegative
-real coefficients: by `det (1 - t F)⁻¹ = exp (∑ tr(Fⁿ) tⁿ / n)`
-(`PowerSeries.coeff_inv_prod_one_sub_C_mul_X_nonneg`). -/
+real coefficients. -/
 theorem coeff_inv_map_localPolynomial_nonneg [IsAlgClosed K] (ι : K →+* ℂ)
     (M : FrobeniusModule.{u, v} K)
     (h : ∀ n, 0 < n → 0 ≤ ι (LinearMap.trace K M.carrier (M.frobeniusEnd ^ n))) (k : ℕ) :
@@ -109,8 +115,7 @@ section TateTwist
 variable (k₀ l) in
 /-- The Tate twist `F(m) = ℚ̄_ℓ(m) ⊗ F` of a Weil sheaf (the tensor product with the lisse Tate
 sheaf, as in `AlgebraicGeometry.WeilComplex.tateTwist`) is the constant Weil twist
-`F ⊗ 𝓑_{χ_ℓ(σ)ᵐ}`: `ℚ̄_ℓ(m)` is `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)ᵐ}`, its dual is `ℚ̄_ℓ ⊗ 𝓑_{χ_ℓ(σ)⁻ᵐ}`, and
-`𝓗om(ℚ̄_ℓ ⊗ 𝓑_b, F) ≅ F ⊗ 𝓑_{b⁻¹}`. (blueprint: `prose-10-21`) -/
+`F ⊗ 𝓑_{χ_ℓ(σ)ᵐ}`. -/
 noncomputable def tateTwistSheafTensorObjIso (m : ℤ) (F : WeilSheaf k₀ l X) :
     (tateTwistSheaf k₀ l X m).tensorObj F (isLisse_tateTwistSheaf k₀ l X m) ≅
       F.constantTwist (cyclotomicUnit k₀ l ^ m) :=
@@ -136,8 +141,7 @@ variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- **Weight shift under a Tate twist.** If a Weil sheaf `F` is punctually `ι`-pure of weight
 `w`, its Tate twist `F(n) = ℚ̄_ℓ(n) ⊗ F` is punctually `ι`-pure of weight `w - 2n`, for every
-`n ∈ ℤ`: at a closed point of degree `m` the local Frobenius of `F(n)` is `q^{-mn}` times that
-of `F`. (blueprint: `proposition-weights-under-usual-operations--14`) -/
+`n ∈ ℤ`. -/
 theorem IsPunctuallyPureOfWeight.tateTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) (n : ℤ) :
     ((tateTwistSheaf k₀ l X n).tensorObj F (isLisse_tateTwistSheaf k₀ l X n)
@@ -148,7 +152,7 @@ theorem IsPunctuallyPureOfWeight.tateTwist {ι : PadicAlgCl l →+* ℂ} {F : We
 
 /-- **Weight shift under a Tate twist, for upper bounds.** If a Weil sheaf `F` is `ι`-mixed of
 weights at most `w`, its Tate twist `F(n) = ℚ̄_ℓ(n) ⊗ F` is `ι`-mixed of weights at most
-`w - 2n`, for every `n ∈ ℤ`. (blueprint: `proposition-weights-under-usual-operations--14`) -/
+`w - 2n`, for every `n ∈ ℤ`. -/
 theorem IsMixedOfWeightsAtMost.tateTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsMixedOfWeightsAtMost ι w) (n : ℤ) :
     ((tateTwistSheaf k₀ l X n).tensorObj F (isLisse_tateTwistSheaf k₀ l X n)
@@ -159,7 +163,7 @@ theorem IsMixedOfWeightsAtMost.tateTwist {ι : PadicAlgCl l →+* ℂ} {F : Weil
 
 /-- **Weight shift under a Tate twist, for punctual upper bounds.** If a Weil sheaf `F` has
 punctual weights at most `w`, its Tate twist `F(n) = ℚ̄_ℓ(n) ⊗ F` has punctual weights at most
-`w - 2n`. (blueprint: `proposition-weights-under-usual-operations--14`) -/
+`w - 2n`. -/
 theorem HasWeightsAtMost.tateTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.HasWeightsAtMost ι w) (n : ℤ) :
     ((tateTwistSheaf k₀ l X n).tensorObj F (isLisse_tateTwistSheaf k₀ l X n)
@@ -178,9 +182,7 @@ end TateTwist
 /-! ### Duals -/
 
 /-- **Weight of the linear dual.** If a lisse Weil sheaf `F` is punctually `ι`-pure of weight
-`w`, its dual `F^∨` is punctually `ι`-pure of weight `-w`: the local Frobenius eigenvalues of
-`F^∨` are the inverses of those of `F`. (blueprint:
-`proposition-weights-under-usual-operations--4`) -/
+`w`, its dual `F^∨` is punctually `ι`-pure of weight `-w`. -/
 theorem IsPunctuallyPureOfWeight.dual {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     (hF : F.IsLisse) {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) :
     (F.dual hF).IsPunctuallyPureOfWeight ι (-w) := fun x ↦ by
@@ -198,8 +200,7 @@ lemma frobeniusEnd_stalk_adicConstant (x : X.finitePoints) :
   rfl
 
 /-- The traces of the powers of the local Frobenius on the stalk of a tensor power `F^{⊗ k}` are
-the `k`-th powers of those on the stalk of `F`, times the rank of the constant sheaf: the
-eigenvalues of `Fₓⁿ` on `(F^{⊗ k})_x̄` are the `k`-fold products of those on `F_x̄`. -/
+the `k`-th powers of those on the stalk of `F`, times the rank of the constant sheaf. -/
 theorem trace_frobeniusEnd_pow_stalk_tensorPow {F : WeilSheaf k₀ l X} (hF : F.IsLisse)
     (x : X.finitePoints) (n : ℕ) :
     ∀ k : ℕ, LinearMap.trace _ _ (((F.tensorPow hF k).stalk x).frobeniusEnd ^ n) =
@@ -218,8 +219,7 @@ theorem trace_frobeniusEnd_pow_stalk_tensorPow {F : WeilSheaf k₀ l X} (hF : F.
 
 /-- **Tensor powers of a real sheaf are real.** Every tensor power `G^{⊗ k}` of a lisse
 `ι`-real Weil sheaf `G` is `ι`-real: at every closed point `x` the local characteristic
-polynomial `ι det(1 - t Fₓ | (G^{⊗ k})_x̄)` has real coefficients.
-(blueprint: `lemma-positivity-euler-factors--1`, part (i)) -/
+polynomial `ι det(1 - t Fₓ | (G^{⊗ k})_x̄)` has real coefficients. -/
 theorem IsReal.tensorPow {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀ l X} (hG : G.IsLisse)
     (h : G.IsReal ι) (k : ℕ) : (G.tensorPow hG k).IsReal ι := fun x ↦ by
   rw [FrobeniusModule.isReal_iff_forall_trace_pow]
@@ -230,9 +230,7 @@ theorem IsReal.tensorPow {ι : PadicAlgCl l →+* ℂ} {G : WeilSheaf k₀ l X} 
 /-- **Even tensor powers of a real sheaf are positive.** Let `G` be a lisse `ι`-real Weil sheaf
 and `k` an even natural number. At every closed point `x`, the power series
 `ι det(1 - t Fₓ | (G^{⊗ k})_x̄)⁻¹ = ∑ aₙ tⁿ` has nonnegative real coefficients `aₙ ≥ 0`, and its
-constant term is `1`: by `det (1 - t M)⁻¹ = exp (∑ tr(Mⁿ) tⁿ / n)`, it suffices that the traces
-`ι tr(Fₓⁿ | (G^{⊗ k})_x̄) = (ι tr(Fₓⁿ | G_x̄))ᵏ` are nonnegative, and they are even powers of real
-numbers. (blueprint: `lemma-positivity-euler-factors--1`, part (ii)) -/
+constant term is `1`. -/
 theorem IsReal.inv_localPolynomial_stalk_tensorPow_nonneg {ι : PadicAlgCl l →+* ℂ}
     {G : WeilSheaf k₀ l X} (hG : G.IsLisse) (h : G.IsReal ι) (x : X.finitePoints) {k : ℕ}
     (hk : Even k) :

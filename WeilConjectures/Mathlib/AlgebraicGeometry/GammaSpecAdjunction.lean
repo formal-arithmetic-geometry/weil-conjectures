@@ -50,8 +50,7 @@ lemma resLE_toSpecΓ_basicOpenIsoSpecAway_hom_SpecMap (X : Scheme.{u}) (x : Γ(X
 `Y ⟶ Spec B ⟶ Spec R`, the first map being the canonical morphism `Y.toSpecΓ` and the second
 the morphism `Spec B ⟶ Spec R` of the algebra structure
 (`AlgebraicGeometry.Scheme.toSpecΓ_steinFactorizationBase`). For a proper `p` this is the Stein
-factorization [Stacks 03GX].
-(blueprint: `theorem-comparison-over-henselian-pair-degree`) -/
+factorization [Stacks 03GX]. -/
 noncomputable def Scheme.Hom.steinFactorizationBase {Y : Scheme.{u}} {R : CommRingCat.{u}}
     (p : Y ⟶ Spec R) : Spec Γ(Y, ⊤) ⟶ Spec R :=
   Spec.map ((Scheme.ΓSpecIso R).inv ≫ p.appTop)

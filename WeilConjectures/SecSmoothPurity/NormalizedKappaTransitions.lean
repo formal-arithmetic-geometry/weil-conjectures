@@ -12,12 +12,13 @@ set_option linter.privateModule false
 
 /-! # Normalized coefficient transition formulas
 
-Source: Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03EL.
-(auxiliary; not a blueprint node).
-
 The scalar-extension associator multiplies coefficients. The normalized kappa
 comparison transports arbitrary generalized inverse-image sections, and its
 inverse contracts the coefficient through the recorded ring square.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY, 03D2 and 03EL
 -/
 
 @[expose] public noncomputable section

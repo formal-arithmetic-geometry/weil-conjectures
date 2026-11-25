@@ -22,43 +22,23 @@ import WeilConjectures.RingTheory.DvrUnramifiedCompositumBaseChange
 
 /-! # Weak unramifiedness over a uniformizer-root base
 
-Source: Stacks Project, Tags 0BRM (the last two paragraphs), 09EV, 09EQ and 09E7.
-(blueprint: lem-sbc-dvr-uniformizer-root-compositum-maximal-ideal) -/
+## References
+
+* Stacks Project, Tag 0BRM (the last two paragraphs), Tags 09EV, 09EQ and 09E7
+-/
 
 @[expose] public section
 
 universe u
 namespace RingTheory
 
-/-- The root case of tame ramification cancellation, including further DVR base change.
-
-Source: Stacks Project, Tag 0BRM, the paragraphs after the unit-root claim,
-with Tags 09EV (uniformizer root), 09EQ (further base change), and 09E7.
-(blueprint: lem-sbc-dvr-uniformizer-root-compositum-formally-unramified-data)
-
-Proof: The ring maps to the specified fraction fields are injective. Embed
-Frac(B) into Frac(A) compatibly with B and let K0 be the intermediate field
-it generates with theta. Since theta^e = pi and pi is a uniformizer, the
-Eisenstein root theorem 09EV identifies the normalization of B in K0 with
-the DVR B[theta]; its ramification index is e and its residue field is k(B).
-Choose a uniformizer q of U. The index hypothesis writes pi = w*q^e for a
-unit w of U. In E tensor_Frac(B) K0, theta/q satisfies X^e-w. This is a unit-root
-polynomial with invertible derivative, so the normalization of U in each field
-factor is a local factor of a finite etale U-algebra. Its ramification index
-is one over U and its residue field is finite separable over k(U). Multiplicativity
-in the two towers over B gives index one over B[theta]. Transitivity with the
-assumed separability k(U)/k(B) gives separability over the residue field of
-B[theta]. This is the adic formal smoothness criterion 09E7. Base change now
-from K0 to Frac(A): the tensor of the weakly unramified normalization with A
-has special fibre a product of finite separable extensions of k(A), as in 09EQ.
-The uniformizer of A is a nonzerodivisor in this tensor, so each of its local
-factors above the closed point is a DVR and is already normal. The compatible
-maps and the generation hypothesis select the factor whose fraction field is F.
-The DVR T equals this local factor: both are valuation rings in F and the map is
-local, and a proper overring of a DVR in its fraction field is the field itself.
-Consequently the image of an A-uniformizer generates the maximal ideal of T. The tensor argument
-works for any DVR A containing theta, without finiteness of A over B. When e=1,
-B[theta]=B and the same argument is just weakly unramified base change. -/
+/-- The root case of tame ramification cancellation, including further DVR base change. Let
+`π` be a uniformizer of the DVR `B`, `θ ∈ A` an `e`-th root of `π` in a DVR `A` over `B`, with `e`
+a unit in `B`, and `U` a DVR local over `B` with `m_B U = m_U ^ e` and separable residue field
+extension. Let `E` be the fraction field of `U`, finite separable over `Frac B`, and `F` a field
+over `A` generated over `A` by the image of `E`. Then any DVR `T` local over `A` with fraction
+field `F` and compatible local map `U → T` is essentially of finite type and formally unramified
+over `A`. -/
 theorem dvr_uniformizer_root_compositum_formallyUnramifiedData
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi)
@@ -155,7 +135,8 @@ theorem dvr_uniformizer_root_compositum_formallyUnramifiedData
   exact dvr_unramified_compositum_base_change R V A T k hkR F iV hiV hgenV
 
 
-/-- (blueprint: lem-sbc-dvr-uniformizer-root-compositum-maximal-ideal) -/
+/-- In the setting of `dvr_uniformizer_root_compositum_formallyUnramifiedData`, the maximal ideal
+of `A` generates the maximal ideal of `T`. -/
 theorem dvr_uniformizer_root_compositum_map_maximalIdeal
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi)
