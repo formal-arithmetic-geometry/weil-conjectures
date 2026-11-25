@@ -766,7 +766,6 @@ private theorem openPrefix_filtration
     exact nestedOpen_quotient Λ W T (hnest a) (R.immersion a) t htv ht F
   exact ⟨fun k ↦ hm (V k), hbot, hlast, Classical.axiomOfChoice hs⟩
 
-set_option linter.unusedVariables false in
 /-- The given ordered adapted stratification produces the counit filtration, with its
 successive quotients the extensions by zero of the lisse restrictions. `V` is simply a
 presentation of the open prefixes; its carrier equation fixes every V_k, including
@@ -780,7 +779,7 @@ theorem coefficientHeart_filtration (ℓ : ℕ) [Fact ℓ.Prime]
     (X : Scheme.{u}) [IsNoetherian X]
     (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (coefficientHeartRingObj L) X))
-    (hF : IsConstantModelConstructible (coefficientHeartRingObj L) X F)
+    (_hF : IsConstantModelConstructible (coefficientHeartRingObj L) X F)
     (R : X.FiniteLocallyClosedStratification)
     (hadapt : ∀ a : Fin R.n,
       HasFiniteConstantLocalModel (coefficientHeartRingObj L) (R.domain a)

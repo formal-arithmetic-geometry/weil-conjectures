@@ -22,7 +22,6 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-set_option linter.style.haveILetI false
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem modelOfLocalizedTriangle
@@ -97,7 +96,7 @@ theorem glue_nonempty_support_open_closed_models
       IsConstructibleModuleObject (padicSubfieldRingObj Y ℓ E) P ∧
       Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl Y ℓ E)).obj P ≅
         (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) i).obj M) := by
-  haveI : TopologicalSpace.NoetherianSpace Y :=
+  have : TopologicalSpace.NoetherianSpace Y :=
     i.isClosedEmbedding.isEmbedding.isInducing.noetherianSpace
   have hjk : Set.range j = (Set.range k)ᶜ := by
     ext y

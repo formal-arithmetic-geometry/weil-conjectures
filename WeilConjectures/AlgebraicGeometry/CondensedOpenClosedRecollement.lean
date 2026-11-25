@@ -642,7 +642,6 @@ private theorem rightDerivedPlus_isGE
   intro q hq
   exact F.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE K a hq
 
-set_option linter.unusedVariables false in
 /-- Open-closed recollement on ordinary bounded below derived categories (Stacks, Tags 09AH,
 09BM, 09AA and 09BN). -/
 theorem condensed_open_closed_recollement
@@ -651,7 +650,7 @@ theorem condensed_open_closed_recollement
     (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range j = (Set.range i)ᶜ) :
-    Exists fun [hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦
+    Exists fun [_hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦
     PreservesFiniteLimits (upperStar Λ j) ∧
     PreservesFiniteColimits (upperStar Λ j) ∧
     PreservesFiniteLimits (upperStar Λ i) ∧
@@ -666,15 +665,15 @@ theorem condensed_open_closed_recollement
     ∃ (ishriek : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
         (condensedRingObj Λ X) ⥤
       Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)),
-      Exists fun [hadd : ishriek.Additive] ↦
-      Exists fun [hleft : PreservesFiniteLimits ishriek] ↦
+      Exists fun [_hadd : ishriek.Additive] ↦
+      Exists fun [_hleft : PreservesFiniteLimits ishriek] ↦
       ∃ (ash : lowerStar Λ i ⊣ ishriek)
       (aj : D+(openImmersionLowerShriek Λ j) ⊣ D+(upperStar Λ j))
       (bj : D+(upperStar Λ j) ⊣ (lowerStar Λ j).rightDerivedFunctorPlus)
       (ai : D+(upperStar Λ i) ⊣ D+(lowerStar Λ i))
       (bi : D+(lowerStar Λ i) ⊣ ishriek.rightDerivedFunctorPlus),
-      Exists fun [hjshift : (lowerStar Λ j).rightDerivedFunctorPlus.CommShift ℤ] ↦
-      Exists fun [hishift : ishriek.rightDerivedFunctorPlus.CommShift ℤ] ↦
+      Exists fun [_hjshift : (lowerStar Λ j).rightDerivedFunctorPlus.CommShift ℤ] ↦
+      Exists fun [_hishift : ishriek.rightDerivedFunctorPlus.CommShift ℤ] ↦
       aj = derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus Λ j ∧
       bj = derivedUpperStarLowerStarAdjunctionPlus Λ j ∧
       ai = (upperStarLowerStarAdjunction Λ i).mapDerivedCategoryPlusAdjunction ∧
