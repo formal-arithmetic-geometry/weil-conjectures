@@ -28,6 +28,10 @@ Near a point `x` of the range of `j`, a basic open of `X` inside the range does 
 but not `x`; its complement `V(f)` is finite, as is the complement of the range of `j`, and a
 basic open `D(g)` around `x` avoiding the other points of both meets the range of `j` in
 `D(g) ∖ {x} = D(fg)`.
+
+## References
+
+* [Stacks Project, Tag 01S8](https://stacks.math.columbia.edu/tag/01S8)
 -/
 
 @[expose] public section
@@ -38,13 +42,11 @@ open CategoryTheory Topology TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- **Affineness is local on the target** (Stacks Project Tag 01S8): for a morphism of schemes
-`f : X ⟶ Y` the following are equivalent:
+/-- **Affineness is local on the target**: for a morphism of schemes `f : X ⟶ Y` the
+following are equivalent:
 1. `f` is affine;
 2. the preimage of every affine open of `Y` is affine;
-3. there is a cover of `Y` by affine opens whose preimages are affine.
-(blueprint: `pqf-lem-affine-local-target`; the definition `pqf-def-affine-morphism` is
-`AlgebraicGeometry.IsAffineHom`) -/
+3. there is a cover of `Y` by affine opens whose preimages are affine. -/
 @[stacks 01S8]
 theorem isAffineHom_tfae {X Y : Scheme.{u}} (f : X ⟶ Y) :
     List.TFAE [IsAffineHom f, ∀ U : Y.Opens, IsAffineOpen U → IsAffineOpen (f ⁻¹ᵁ U),

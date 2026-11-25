@@ -89,8 +89,7 @@ open CategoryTheory Limits TensorProduct Topology
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `lemma-openclosed-etale-lifts-locally`: **Étale morphisms lift locally along a
-closed immersion.** If `i : Z ⟶ X` is a closed
+/-- **Étale morphisms lift locally along a closed immersion.** If `i : Z ⟶ X` is a closed
 immersion and `p : W ⟶ Z` is étale, then every point `w` of `W` has an open neighbourhood `W₀`
 which is the base change along `i` of a scheme `V` étale over `X`, in a way compatible with `p`:
 the square
@@ -202,9 +201,7 @@ theorem Etale.exists_isPullback_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z
   rw [Scheme.Hom.resLE_comp_ι] at hpaste
   exact ⟨W.basicOpen a, hw₀, Spec (CommRingCat.of T), _, inferInstance, _, hpaste⟩
 
-/-- Blueprint `lemma-openclosed-etale-lifts-locally`, pointed form.
-
-The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
+/-- The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
 `i : Z ⟶ X` is a closed immersion, `p : W ⟶ Z` is étale and `s : Spec Ω ⟶ W` is a point of `W`
 with values in a field `Ω`, then there is an étale morphism `q : V ⟶ X` together with a morphism
 `g : V ×[X] Z ⟶ W` over `Z` through which `s` factors. -/
@@ -229,10 +226,8 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
 
 /-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
 point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
-`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`: the restriction of `q` to an affine
-open `Spec C` around `w` is given by an étale `B`-algebra `C`, which is standard étale after
-inverting an element not in the prime of `w` (`Algebra.IsEtaleAt.exists_isStandardEtale`).
-The morphism `Spec P.Ring ⟶ W` is an open immersion onto a basic open of the affine open. -/
+`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`, and this morphism
+is an open immersion. -/
 theorem Etale.exists_standardEtalePair_isOpenImmersion {B : CommRingCat.{u}} {W : Scheme.{u}}
     (q : W ⟶ Spec B) [Etale q] (w : W) :
     ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W), IsOpenImmersion e ∧
@@ -270,8 +265,7 @@ theorem Etale.exists_standardEtalePair_isOpenImmersion {B : CommRingCat.{u}} {W 
 
 /-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
 point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
-`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`
-(`AlgebraicGeometry.Etale.exists_standardEtalePair_isOpenImmersion`). -/
+`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`. -/
 theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q : W ⟶ Spec B)
     [Etale q] (w : W) :
     ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W),
@@ -282,13 +276,7 @@ theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q
 /-- An étale morphism `p : V ⟶ S` into an integral normal scheme `S` with separably closed
 function field is a local isomorphism: every point of `V` has an open neighbourhood mapping
 isomorphically onto an open of `S`. Normality of `S` is the hypothesis `hS` that every stalk of
-`S` is integrally closed.
-
-Over affine charts `Spec A ⊆ S` and `Spec B ⊆ V` this is
-`Algebra.Etale.exists_algHom_localizationAway_comap_eq`: every point of `Spec B` lies on a
-section of `Spec B → Spec A` over a basic open of `Spec A`, and a section of an étale morphism
-over an open is an open immersion (`AlgebraicGeometry.FormallyUnramified.isOpenImmersion_of_comp`).
--/
+`S` is integrally closed. -/
 theorem Etale.isLocalIso_of_isSepClosed_functionField {V S : Scheme.{u}} [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     [IsSepClosed S.functionField] (p : V ⟶ S) [Etale p] : IsLocalIso p := by
@@ -332,10 +320,9 @@ theorem Etale.isLocalIso_of_isSepClosed_functionField {V S : Scheme.{u}} [IsInte
   · rw [← σ.isoOpensRange_inv_comp, Category.assoc, hσ]
     infer_instance
 
-/-- **Étale covers of a normal scheme with separably closed function field**
-(blueprint `proposition-base-change-larger-algebraically-closed`). Let `S` be an integral normal
-scheme — normality being the hypothesis `hS` that every stalk of `S` is integrally closed — with
-separably closed function field. Then
+/-- **Étale covers of a normal scheme with separably closed function field.** Let `S` be an
+integral normal scheme — normality being the hypothesis `hS` that every stalk of `S` is
+integrally closed — with separably closed function field. Then
 
 1. every separated étale morphism `p : V ⟶ S` is a disjoint union of open immersions: there are
   nonempty, pairwise disjoint opens `U i` covering `V` with every `(U i).ι ≫ p` an open
@@ -360,8 +347,7 @@ theorem Etale.exists_opens_isOpenImmersion_and_henselianLocalRing_stalk {S : Sch
 integral normal scheme — normality being spelled out as the hypothesis `hS` that every stalk of
 `S` is integrally closed — whose function field `S.functionField` is separably closed, and let
 `p : V ⟶ S` be separated and étale. Then `V` is the disjoint union of a family of opens `U i`
-each of which maps isomorphically onto an open of `S` (blueprint
-`proposition-base-change-larger-algebraically-closed`). -/
+each of which maps isomorphically onto an open of `S`. -/
 @[stacks 09Z9]
 theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
     {V S : Scheme.{u}} [IsIntegral S]
@@ -375,8 +361,7 @@ theorem Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField
 
 /-- The quasi-compact refinement of
 `AlgebraicGeometry.Etale.exists_opens_isOpenImmersion_of_isSepClosed_functionField`: if `V` is
-in addition quasi-compact, then finitely many opens suffice (blueprint
-`proposition-base-change-larger-algebraically-closed`). -/
+in addition quasi-compact, then finitely many opens suffice. -/
 @[stacks 09Z9]
 theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
     {V S : Scheme.{u}} [IsIntegral S]
@@ -391,9 +376,7 @@ theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
 
 /-- Let `f : X ⟶ S` be locally of finite type, `r : Z ⟶ S` étale and `p` a point of `X ×_S Z`
 over `z : Z`. The first projection maps the connected component of `p` in the fibre over `z`
-onto the connected component of its image in the fibre of `f` over `r z`: the map between these
-fibres is open, the fibre of `r` being discrete, and closed, being the base change of the finite
-morphism `Spec κ(z) ⟶ Spec κ(r z)`. -/
+onto the connected component of its image in the fibre of `f` over `r z`. -/
 theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] (r : Z ⟶ S) [Etale r] {z : Z} (p : ↑(pullback f r))
     (hp : pullback.snd f r p = z) :
@@ -455,9 +438,7 @@ theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f :
     (Set.mem_image_of_mem _ mem_connectedComponent) hy'
   exact ⟨q, hq, by rw [← hy, ← hqy]⟩
 
-/-- A scheme `X` étale over a reduced scheme `Y` is reduced: every point of `X` has an affine
-neighbourhood `U` mapping into an affine open `V` of `Y` with `Γ(Y, V) ⟶ Γ(X, U)` étale, so
-`Γ(X, U)` is reduced by `Algebra.Etale.isReduced`, and so is its localisation, the stalk. -/
+/-- A scheme `X` étale over a reduced scheme `Y` is reduced. -/
 theorem isReduced_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsReduced Y] :
     IsReduced X := by
   have (x : X) : _root_.IsReduced (X.presheaf.stalk x) := by
@@ -541,22 +522,15 @@ lemma etale_basicOpen_ι_comp_SpecMap {R S : CommRingCat.{u}} (f : R ⟶ S) (s :
     (φ := f ≫ CommRingCat.ofHom (algebraMap S (Localization.Away s)))).mpr h
   infer_instance
 
-/-- **Smooth morphisms and étale morphisms.** A morphism of schemes is smooth (Mathlib's
-`AlgebraicGeometry.Smooth`: locally given by smooth ring maps, equivalently by standard smooth
-presentations, `AlgebraicGeometry.Smooth.iff_forall_exists_isStandardSmooth`) of relative
-dimension `n` if it is `SmoothOfRelativeDimension n`; the étale morphisms are exactly the smooth
-morphisms of relative dimension zero.
-
-(blueprint: `def-sbc-smooth-morphisms`) -/
+/-- **Smooth morphisms and étale morphisms.** A morphism of schemes is étale if and only if it is
+smooth of relative dimension zero. -/
 theorem etale_iff_smoothOfRelativeDimension_zero {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Etale f ↔ SmoothOfRelativeDimension 0 f := by
   rw [Etale.eq_smoothOfRelativeDimension_zero]
 
 /-- **Residue field extensions of an étale algebra are finite separable.** If
 `Spec B ⟶ Spec A` is étale and `q` is a prime of `B` lying over the prime `p` of `A`, then
-`κ(q)` is a finite separable extension of `κ(p)`.
-
-(blueprint: `lem-weil-pbc-etale-algebra-residue-field-separable`) -/
+`κ(q)` is a finite separable extension of `κ(p)`. -/
 theorem Etale.isSeparable_residueField_of_spec {A B : Type u} [CommRing A] [CommRing B]
     [Algebra A B] (h : Etale (Spec.map (CommRingCat.ofHom (algebraMap A B))))
     (p : Ideal A) [p.IsPrime] (q : Ideal B) [q.IsPrime] [q.LiesOver p]
@@ -569,9 +543,7 @@ theorem Etale.isSeparable_residueField_of_spec {A B : Type u} [CommRing A] [Comm
   exact ⟨inferInstance, inferInstance⟩
 
 /-- **Base change of an étale ring map is étale.** If `Spec A ⟶ Spec R` is étale, then so is
-`Spec (S ⊗[R] A) ⟶ Spec S` for every `R`-algebra `S`.
-
-(blueprint: `lem-weil-pbc-etale-ring-base-change`) -/
+`Spec (S ⊗[R] A) ⟶ Spec S` for every `R`-algebra `S`. -/
 theorem Etale.spec_map_algebraMap_tensorProduct {R S A : Type u} [CommRing R] [CommRing S]
     [CommRing A] [Algebra R A] [Algebra R S]
     (h : Etale (Spec.map (CommRingCat.ofHom (algebraMap R A)))) :
@@ -584,9 +556,7 @@ theorem Etale.spec_map_algebraMap_tensorProduct {R S A : Type u} [CommRing R] [C
 `f : V ⟶ S` be étale, `v : Spec Ω ⟶ V` a morphism from the spectrum of a field and `W` an open
 of `V` containing the image of `v`. Then there is an open immersion `j : Spec R ⟶ V` whose image
 contains the image of `v` and is contained in `W`; `j ≫ f` is étale and `v` factors uniquely
-through `j`.
-
-(blueprint: `lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`) -/
+through `j`. -/
 theorem Scheme.exists_isOpenImmersion_spec_lift_of_etale {S V : Scheme.{u}} (f : V ⟶ S)
     [Etale f] {Ω : Type u} [Field Ω] (v : Spec (.of Ω) ⟶ V) (W : V.Opens)
     (hW : Set.range v.base ⊆ W) :
@@ -607,9 +577,7 @@ open Polynomial in
 monic `Q ∈ S[X]`, the algebra `S' = S[X][Y]/(Q, Y Q' - 1)` (the standard étale algebra of the
 pair `(Q, Q')`) is étale over `S`, and for every `S`-algebra `L` and every `b ∈ L` with
 `Q(b) = 0` and `Q'(b)` a unit there is exactly one `S`-algebra map `S' → L` sending the class of
-`X` to `b`.
-
-(blueprint: `lem-weil-pbc-standard-etale-monic-derivative`) -/
+`X` to `b`. -/
 theorem StandardEtalePair.etale_ofMonic_and_existsUnique {S : Type u} [CommRing S] {Q : S[X]}
     (hQ : Q.Monic) :
     Etale (Spec.map (CommRingCat.ofHom (algebraMap S (StandardEtalePair.ofMonic hQ 1).Ring))) ∧

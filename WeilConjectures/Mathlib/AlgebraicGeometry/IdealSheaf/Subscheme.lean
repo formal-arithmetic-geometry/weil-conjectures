@@ -48,8 +48,8 @@ Let `U` be a dense open subscheme of a scheme `X` whose inclusion is quasi-compa
 `X* := U.ι.image` be the scheme-theoretic image of `U ⟶ X`, the smallest closed subscheme of
 `X` through which `U` factors. Then `X* ⟶ X` is a surjective closed immersion which is an
 isomorphism over `U`, and `U` is a *scheme-theoretically* dense open subscheme of `X*`. This is
-step 2 of the proof of Chow's lemma (blueprint: `lem:chow-scheme-theoretic-closure`): it
-replaces `X` by a scheme in which `U` is scheme-theoretically dense.
+used in the proof of Chow's lemma to replace `X` by a scheme in which `U` is
+scheme-theoretically dense.
 
 Surjectivity holds for the scheme-theoretic image of any dominant quasi-compact morphism, since
 the underlying set of the scheme-theoretic image is the closure of the set-theoretic image
@@ -200,8 +200,7 @@ end AlgebraicGeometry.Scheme.IdealSheafData
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A scheme of finite positive dimension has a closed subscheme of dimension one: the reduced
-induced subscheme structure on the closure of a point of height one. -/
+/-- A scheme of finite positive dimension has a closed subscheme of dimension one. -/
 theorem exists_isClosedImmersion_topologicalKrullDim_eq_one {X : Scheme.{u}}
     (h1 : 1 ≤ topologicalKrullDim X) (htop : topologicalKrullDim X ≠ ⊤) :
     ∃ (C : Scheme.{u}) (i : C ⟶ X), IsClosedImmersion i ∧ topologicalKrullDim C = 1 := by
@@ -292,8 +291,7 @@ lemma range_imageι [QuasiCompact f] :
   rw [IdealSheafData.range_subschemeι, f.support_ker]
 
 /-- The scheme-theoretic image of a dominant quasi-compact morphism is the whole target: the
-closed immersion `f.imageι` is surjective.
-(blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
+closed immersion `f.imageι` is surjective. -/
 instance surjective_imageι [QuasiCompact f] [IsDominant f] : Surjective f.imageι :=
   ⟨Set.range_eq_univ.mp <| by rw [range_imageι, f.denseRange.closure_range]⟩
 
@@ -322,8 +320,7 @@ section
 
 variable [QuasiCompact U.ι]
 
-/-- The scheme-theoretic closure `X*` of a dense open `U ⊆ X` maps onto `X`.
-(blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
+/-- The scheme-theoretic closure `X*` of a dense open `U ⊆ X` maps onto `X`. -/
 lemma surjective_imageι_ι (hU : Dense (U : Set X)) : Surjective U.ι.imageι :=
   have : IsDominant U.ι := ⟨by rwa [DenseRange, range_ι]⟩
   inferInstance
@@ -338,8 +335,7 @@ lemma opensRange_toImage : U.ι.toImage.opensRange = U.ι.imageι ⁻¹ᵁ U := 
   change Set.range U.ι.toImage = U.ι.imageι ⁻¹' (U : Set X)
   rw [h, Set.preimage_image_eq _ U.ι.imageι.isClosedEmbedding.injective]
 
-/-- The scheme-theoretic closure `X* ⟶ X` of an open `U ⊆ X` is an isomorphism over `U`.
-(blueprint: `lem:chow-scheme-theoretic-closure` (1)) -/
+/-- The scheme-theoretic closure `X* ⟶ X` of an open `U ⊆ X` is an isomorphism over `U`. -/
 instance isIso_morphismRestrict_imageι : IsIso (U.ι.imageι ∣_ U) := by
   -- `U.ι.toImage` corestricts to an isomorphism `e : U ≅ X* ∩ U`, ...
   set e := U.ι.toImage.isoOpensRange ≪≫ U.ι.image.isoOfEq (opensRange_toImage U) with he
@@ -352,8 +348,7 @@ instance isIso_morphismRestrict_imageι : IsIso (U.ι.imageι ∣_ U) := by
   exact IsIso.of_isIso_comp_left e.hom _
 
 /-- **`U` is scheme-theoretically dense in its scheme-theoretic closure `X*`**: the inclusion
-of the copy of `U` in `X*` is scheme-theoretically dominant.
-(blueprint: `lem:chow-scheme-theoretic-closure` (2)) -/
+of the copy of `U` in `X*` is scheme-theoretically dominant. -/
 instance isSchemeTheoreticallyDominant_preimage_imageι :
     IsSchemeTheoreticallyDominant (U.ι.imageι ⁻¹ᵁ U).ι := by
   rw [← opensRange_toImage U, ← Scheme.Hom.isoOpensRange_inv_comp U.ι.toImage]
@@ -361,21 +356,18 @@ instance isSchemeTheoreticallyDominant_preimage_imageι :
 
 end
 
-/-- The trace on `X*` of an affine open of `X` is affine, since `X* ⟶ X` is a closed immersion.
-(blueprint: `lem:chow-scheme-theoretic-closure` (3)) -/
+/-- The trace on `X*` of an affine open of `X` is affine. -/
 lemma isAffineOpen_preimage_imageι {V : X.Opens} (hV : IsAffineOpen V) :
     IsAffineOpen (U.ι.imageι ⁻¹ᵁ V) :=
   hV.preimage U.ι.imageι
 
-/-- The traces on `X*` of an open covering of `X` cover `X*`.
-(blueprint: `lem:chow-scheme-theoretic-closure` (3)) -/
+/-- The traces on `X*` of an open covering of `X` cover `X*`. -/
 lemma iSup_preimage_imageι_eq_top {ι : Type*} {V : ι → X.Opens} (hV : ⨆ i, V i = ⊤) :
     ⨆ i, U.ι.imageι ⁻¹ᵁ V i = ⊤ :=
   U.ι.imageι.iSup_preimage_eq_top hV
 
 /-- If a finite family of opens of `X` has intersection `U`, then the traces on `X*` of its
-members have intersection the copy of `U` in `X*`.
-(blueprint: `lem:chow-scheme-theoretic-closure` (3)) -/
+members have intersection the copy of `U` in `X*`. -/
 lemma iInf_preimage_imageι {ι : Type*} [Finite ι] {V : ι → X.Opens} (hV : ⨅ i, V i = U) :
     ⨅ i, U.ι.imageι ⁻¹ᵁ V i = U.ι.imageι ⁻¹ᵁ U := by
   rw [← U.ι.imageι.preimage_iInf, hV]

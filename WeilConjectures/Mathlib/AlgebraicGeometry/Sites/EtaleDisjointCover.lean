@@ -12,11 +12,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 A sheaf `G` on the small étale site of a scheme `X` sends an object `V` covered by finitely
 many pairwise disjoint subobjects `W i ⟶ V` to the product of the `G (W i)`
-(`AlgebraicGeometry.Scheme.Etale.isIso_piLift_of_disjoint`): the sheaf condition for the cover
-reads `G V ≅ ∏ G (W i)` because any two morphisms `Z ⟶ W i`, `Z ⟶ W j` agreeing on `V` are
-either equal (`i = j`, the `W i ⟶ V` being monomorphisms) or have empty source (`i ≠ j`),
-where `G` has terminal sections.
-
+(`AlgebraicGeometry.Scheme.Etale.isIso_piLift_of_disjoint`).
 -/
 
 @[expose] public section
@@ -52,8 +48,7 @@ lemma Etale.comp_map_eq_of_disjoint [∀ i, Mono (π i)]
 
 /-- **A sheaf sends a disjoint cover to a product**: if the pairwise disjoint subobjects
 `π i : W i ⟶ V` cover `V` in the small étale topology, then the restriction maps exhibit
-`G V` as the product of the `G (W i)`.
-(blueprint: `lem-weil-pbc-disjoint-etale-sections-product`) -/
+`G V` as the product of the `G (W i)`. -/
 theorem Etale.isIso_piLift_of_disjoint [∀ i, Mono (π i)]
     (hcov : Sieve.ofArrows W π ∈ X.smallEtaleTopology V)
     (hdisj : ∀ i j, i ≠ j → Disjoint (Set.range (π i).left.base) (Set.range (π j).left.base))
