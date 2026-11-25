@@ -21,6 +21,10 @@ In this repository the `𝒪_E` stage is the derived-complete subcategory
 of `𝒪_E`-modules, and the `E` stage is its rationalization
 `AlgebraicGeometry.DerivedCategoryDerivedCompleteRational`.
 
+## Main statements
+
+- `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`
+
 ## Implementation notes
 
 The statement here is that `Rf^!` preserves derived completeness, which is what makes the
@@ -30,21 +34,20 @@ reductions) and `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotop
 realization at the `𝒪_E` stage of a levelwise isomorphism of normalized systems); the smooth
 traces are in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.Trace`. The purity isomorphism cannot be read
-off `proposition-smooth-purity-finite-coefficients` at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a
+off smooth purity with finite coefficients at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a
 derived complete `K` need not be derived complete (the constant sheaf `𝒪_E` on `𝔾_m` over an
 algebraically closed field is not), whereas `Rf^! K` is.
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedUpperShriek`
-
-## Proof
 
 Derived complete objects are those receiving no nonzero map from an object on which a
 uniformizer `ϖ` of `𝒪_E` acts invertibly
 (`DerivedCategory.derivedComplete_iff_rightOrthogonal`). A map `L ⟶ Rf^! K` is adjoint to a
 map `Rf_! L ⟶ K`, and `ϖ` acts invertibly on `Rf_! L` if it does on `L`, since `Rf_!` is
 `𝒪_E`-linear.
+
+At the integral stage `Rf^!` is the right adjoint of `Rf_!`, whose existence is assumed: the
+instance `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` only covers finite
+coefficients. The essential smallness of the small étale site is provided as a local instance,
+since instance search does not find it in the presence of the imports of this file.
 -/
 
 @[expose] public section
@@ -66,28 +69,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
   [Small.{u + 1} E] {X Y : Scheme.{u}} {d : ℕ} (f : X ⟶ Y) [IsSeparated f]
   [SmoothOfRelativeDimension d f] [HasCompactification f]
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
+/-- The small étale site of a scheme is essentially small. -/
 local instance localInstance_Transport_1 (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
 omit [IsSeparated f] in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Smooth purity over `𝒪_E`, `E` and
-`ℚ̄_ℓ`
-
-**`Rf^!` preserves derived completeness.** Let `f : X ⟶ Y` be smooth separated of pure
+/-- **`Rf^!` preserves derived completeness.** Let `f : X ⟶ Y` be smooth separated of pure
 relative dimension `d` and let `Λ = 𝒪_E` be the integral coefficient stage. Then `Rf^!`
 carries derived-complete objects of `D(Y_ét, 𝒪_E)` to derived-complete objects of
 `D(X_ét, 𝒪_E)`, so that it restricts to the adic categories `D_comp(−, 𝒪_E)` in which the
-`ℓ`-adic formalism is typed. The exceptional inverse image `Rf^!` at the integral stage is the
-right adjoint of `Rf_!`, whose existence is assumed here: the instance
-`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` only covers finite coefficients.
-
-The purity isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` at the adic stage, realized from the
-finite-level purity isomorphisms, is their realization
-(`AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit`). -/
+`ℓ`-adic formalism is typed. Here `Rf^!` is the right adjoint of `Rf_!`, whose
+existence is assumed. -/
 theorem derivedCompleteIntegral_rightDerivedUpperShriek
     [(R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).IsLeftAdjoint]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology

@@ -23,8 +23,7 @@ is one after `Li^*` (where `Li^* Ri_* ≅ 𝟭`) and after the restriction to th
 Together with the identifications `Ψ Λ_X ≅ Λ'_X` pulled back from the terminal scheme and a
 compatible family of identifications `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]`
 (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData`), this makes `Ψ` a change of
-coefficients with supports (`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`,
-blueprint `proposition-compatibility-purity-change-coefficients`), to which
+coefficients with supports (`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`), to which
 `AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso` applies.
 
 ## Main definitions
@@ -195,11 +194,7 @@ lemma map_derivedExtendScalarsUpperShriekMap_app_comp_counit (L : 𝐃(X, Λ)) :
 
 omit [Finite Λ] [Finite Λ'] in
 /-- **The derived extension of scalars carries the restriction map `Λ_X ⟶ Ri_! Λ_Z` to the
-restriction map.** The restriction map is `Λ_X ⟶ Ri_* Li^* Λ_X ≅ Ri_* Λ_Z ≅ Ri_! Λ_Z`
-(`AlgebraicGeometry.Etale.unit_comp_map_comp_inv_eq_supportedRestrictionMap_comp`), and each step
-is compatible with `Ψ`: the unit by the definition of `Ψ Ri_* ≅ Ri_* Ψ` as a mate, and
-`Li^* Λ_X ≅ Λ_Z` by
-`AlgebraicGeometry.Etale.derivedExtendScalarsConstantComplexIso_hom_pullback`.
+restriction map.**
 -/
 lemma map_supportedRestrictionMap_comp_derivedExtendScalarsLowerShriekIso_hom_app :
     (derivedExtendScalars hρ ha X).map (supportedRestrictionMap Λ i) ≫
@@ -262,10 +257,7 @@ structure DerivedExtendScalarsTateShiftData where
 
 variable [Finite Λ] [Finite Λ']
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
-
-**The reduction of coefficients as a change of coefficients with supports.** For a surjective
+/-- **The reduction of coefficients as a change of coefficients with supports.** For a surjective
 morphism `ρ : Λ →+* Λ'` of finite coefficient rings with principal kernel (for instance
 `A_{E,n+1} → A_{E,n}`) and compatible identifications `τ` of the shifted twisting objects, the
 derived extension of scalars `Ψ = - ⊗ᴸ_Λ Λ'`, with its commutations with `Le^*`

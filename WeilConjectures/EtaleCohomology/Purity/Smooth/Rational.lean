@@ -21,6 +21,13 @@ isomorphism is the image of the adic purity isomorphism of
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_iso_fromIntegral_realization_twistShiftPullbackLevel`
+
+## Implementation details
+
+The main statement only packages the realized isomorphism at the `E`-stage: the compatibility
+of the levels is assumed, the objects are arbitrary homotopy limits rather than
+`Lf^* K_E(d)[2d]` and `Rf^! K_E`, and the `IsIso` conclusion follows formally from the integral
+isomorphism.
 -/
 
 @[expose] public section
@@ -54,20 +61,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
     PadicAlgCl.maximalIdealShrink l E ^ (n + 1))]
   {X Y : Scheme.{u}} (d : ℤ) (f : X ⟶ Y) [HasCompactification f]
 
-/-- Rational and `ℚ̄_ℓ` purity (`E`-stage packaging only)
-
-Let `K = (K_n)_n` be a normalized system over `𝒪_E` on `Y`, `S`, `T` normalized systems on `X`
-with levels identified with `Lf^* K_n(d)[2d]` and `Rf^! K_n`, and `γ_n` isomorphisms between
-these levels forming a morphism of normalized systems (`hγ`). Then any homotopy limits of `S`
-and `T` are derived complete, so they are objects of `D_comp(X, 𝒪_E)`; the isomorphism `e`
+/-- **Smooth purity with coefficients in `E`.** Let `K = (K_n)_n` be a normalized system over
+`𝒪_E` on `Y`, `S`, `T` normalized systems on `X` with levels identified with
+`Lf^* K_n(d)[2d]` and `Rf^! K_n`, and `γ_n` isomorphisms between these levels forming a
+morphism of normalized systems (`hγ`). Then any homotopy limits of `S` and `T` are derived
+complete, so they are objects of `D_comp(X, 𝒪_E)`; the isomorphism `e`
 between them of `AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel`
 reduces to `γ_n` at every level, and its image under the exact functor `- ⊗ᴸ_{𝒪_E} E`
-(`DerivedCategoryDerivedCompleteRational.fromIntegral`) is an isomorphism in `D_comp(X, E)`.
-
-This is the `E`-stage packaging of the realized isomorphism, not the `E`-part of the
-blueprint statement: `hγ` is assumed, the objects are arbitrary homotopy limits rather than
-`Lf^* K_E(d)[2d]` and `Rf^! K_E`, and the `IsIso` conclusion follows formally from `e` being an
-isomorphism. -/
+(`DerivedCategoryDerivedCompleteRational.fromIntegral`) is an isomorphism in `D_comp(X, E)`. -/
 theorem exists_iso_fromIntegral_realization_twistShiftPullbackLevel
     (K : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) Y)
     (S T : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) X)

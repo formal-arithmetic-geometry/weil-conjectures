@@ -14,13 +14,19 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 
 Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a closed immersion onto
 `Z ∩ W` (for instance `Z ×_X W`). Reading a class of `H^a_Z(X, F)` as a morphism
-`i_* Λ_Z ⟶ F[a]` (`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`, blueprint
-`lemma-sections-support-closed-subscheme--1`), the supported cup product of `α ∈ H^a_Z(X, F)` and
-`β ∈ H^b_W(X, G)` is
+`i_* Λ_Z ⟶ F[a]` (`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`), the supported cup
+product of `α ∈ H^a_Z(X, F)` and `β ∈ H^b_W(X, G)` is
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ F[a] ⊗ᴸ G[b] ≅ (F ⊗ᴸ G)[a + b]`,
 
 read in `H^{a+b}_{Z ∩ W}(X, F ⊗ᴸ G)` (`AlgebraicGeometry.Etale.cupSupportCohomology`).
+
+## Main definitions
+
+- `AlgebraicGeometry.Etale.lowerStarConstantTensorIso`
+- `AlgebraicGeometry.Etale.cupSupportedHom`, `AlgebraicGeometry.Etale.cupSupportCohomology`
+
+## Implementation details
 
 The identification `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W`
 (`AlgebraicGeometry.Etale.lowerStarConstantTensorIso`) is obtained without stalks. Write
@@ -30,11 +36,6 @@ The identification `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W`
 complement of `Z ∩ W`, being a tensor product of objects vanishing on the complements of `Z` and
 of `W`. By the open–closed triangle the unit of `Lh^* ⊣ Rh_*` at the target is then invertible,
 which gives `Rh_* Λ_V ≅ Rh_* Lh^* Λ_X ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W`.
-
-## Main definitions
-
-- `AlgebraicGeometry.Etale.lowerStarConstantTensorIso`
-- `AlgebraicGeometry.Etale.cupSupportedHom`, `AlgebraicGeometry.Etale.cupSupportCohomology`
 -/
 
 @[expose] public section
@@ -113,8 +114,7 @@ lemma isIso_leftDerivedUpperStar_map_constantComplexToLowerShriekConstantTensor 
   infer_instance
 
 include hr in
-/-- `Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` vanishes on the open complement of `Z ∩ W`: its restriction to that
-complement vanishes on the complements of `Z` and of `W`, which cover it. -/
+/-- `Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` vanishes on the open complement of `Z ∩ W`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_lowerShriekConstantTensor :
     IsZero ((L((h.openComplement.ι)^*[ModuleCat.{u + 1} Λ])).obj
       (lowerShriekConstantTensor Λ i k)) := by
@@ -140,8 +140,7 @@ lemma isZero_leftDerivedUpperStar_openComplement_lowerShriekConstantTensor :
       (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) _ _ _)
 
 include hr in
-/-- The unit `T ⟶ Rh_* Lh^* T` at `T = Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` is an isomorphism, `T` vanishing on
-the open complement of `h` (open–closed triangle). -/
+/-- The unit `T ⟶ Rh_* Lh^* T` at `T = Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` is an isomorphism. -/
 lemma isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_lowerShriekConstantTensor :
     IsIso ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app
       (lowerShriekConstantTensor Λ i k)) := by
@@ -156,9 +155,7 @@ lemma isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_lowerShriekConstantT
   exact (Triangle.isZero₁_iff_isIso₂ _ hT).1 h₁
 
 /-- The identification `Rh_! Λ_V ≅ Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W` for a closed immersion `h` onto `Z ∩ W`
-factoring through `i` and `k`: `Rh_! Λ_V ≅ Rh_* Lh^* Λ_X`, then `Rh_* Lh^*` of the map
-`ηᵢ ⊗ η_k : Λ_X ⟶ Ri_! Λ_Z ⊗ᴸ Rk_! Λ_W`, which `Lh^*` inverts, followed by the inverse of the unit
-of `Lh^* ⊣ Rh_*` at the target, which is invertible since the target is supported on `Z ∩ W`. -/
+factoring through `i` and `k`. -/
 noncomputable def lowerShriekConstantTensorIso :
     (R(h)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ V) ≅ lowerShriekConstantTensor Λ i k :=
   haveI := isIso_leftDerivedUpperStar_map_constantComplexToLowerShriekConstantTensor Λ i k h p q
@@ -180,10 +177,7 @@ noncomputable abbrev lowerStarConstant (i : Z ⟶ X) :
   (_root_.DerivedCategory.singleFunctor _ 0).obj ((i)_*[ModuleCat.{u + 1} Λ].obj
     ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)))
 
-/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports (the
-identification of the coefficient sheaves)
-
-For closed immersions `i : Z ⟶ X`, `k : W ⟶ X` and a closed immersion `h : V ⟶ X` onto `Z ∩ W`
+/-- For closed immersions `i : Z ⟶ X`, `k : W ⟶ X` and a closed immersion `h : V ⟶ X` onto `Z ∩ W`
 factoring through both (for instance `V = Z ×_X W`), the identification
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W` of the coefficient sheaves, the sheaves being placed in degree
 `0` (`AlgebraicGeometry.Etale.lowerShriekConstantTensorIso`, read through
@@ -198,10 +192,8 @@ noncomputable def lowerStarConstantTensorIso :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).mapIso
       (rightDerivedLowerShriekConstantComplexIso Λ k)
 
-/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports (on morphisms)
-
-For classes represented by morphisms `α : i_* Λ_Z ⟶ F[a]` and `β : k_* Λ_W ⟶ G[b]`
-(`lemma-sections-support-closed-subscheme--1`), their supported cup product is the morphism
+/-- For classes represented by morphisms `α : i_* Λ_Z ⟶ F[a]` and `β : k_* Λ_W ⟶ G[b]`, their
+supported cup product is the morphism
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ F[a] ⊗ᴸ G[b] ≅ (F ⊗ᴸ G)[a + b]`,
 
@@ -216,21 +208,17 @@ noncomputable def cupSupportedHom
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).map β ≫
     (derivedTensorShiftIso (ModuleCat.{u + 1} Λ) F G a b).hom
 
-/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports
-
-Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a closed immersion onto
+/-- Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a closed immersion onto
 `Z ∩ W` factoring through both (for instance `h : Z ×_X W ⟶ X`,
 `AlgebraicGeometry.Etale.cupSupportCohomologyPullback`). For `α ∈ H^a_Z(X, F)` and
 `β ∈ H^b_W(X, G)`, represented by morphisms `i_* Λ_Z ⟶ F[a]` and `k_* Λ_W ⟶ G[b]`
-(`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`,
-`lemma-sections-support-closed-subscheme--1`), their
-*supported cup product* is the morphism
+(`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`), their *supported cup product* is
+the morphism
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ (F ⊗ᴸ G)[a + b]`
 
 (`AlgebraicGeometry.Etale.cupSupportedHom`), read as an element of
-`H^{a+b}_{Z ∩ W}(X, F ⊗ᴸ G)`. As throughout the purity chapter (`def-pur-conventions`) this is
-the étale form. The cup product of classes in the model `Λ_X ⟶ Ri_! Ri^! M` is
+`H^{a+b}_{Z ∩ W}(X, F ⊗ᴸ G)`. The cup product of classes in the model `Λ_X ⟶ Ri_! Ri^! M` is
 `AlgebraicGeometry.Etale.cupWithSupports`. -/
 noncomputable def cupSupportCohomology
     {F G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}
@@ -243,9 +231,7 @@ noncomputable def cupSupportCohomology
       (derivedSupportCohomologyAddEquiv Λ k G b β))
 
 omit [IsClosedImmersion h] in
-/-- Blueprint `proposition-purity-vector-bundles`: Cup product with closed supports (for `Z ×_X W`)
-
-The supported cup product `H^a_Z(X, F) × H^b_W(X, G) ⟶ H^{a+b}_{Z ×_X W}(X, F ⊗ᴸ G)` of
+/-- The supported cup product `H^a_Z(X, F) × H^b_W(X, G) ⟶ H^{a+b}_{Z ×_X W}(X, F ⊗ᴸ G)` of
 `AlgebraicGeometry.Etale.cupSupportCohomology` for `h : Z ×_X W ⟶ X`. -/
 noncomputable def cupSupportCohomologyPullback
     {F G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}
