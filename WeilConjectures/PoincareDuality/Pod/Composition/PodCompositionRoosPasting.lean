@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import WeilConjectures.PoincareDuality.Pod.Composition.PodCompositionRoosMap
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosComparison
 
-/-! # Pasting additive Roos comparisons with tower maps -/
+/-! # Pasting additive Roos comparisons with tower maps
+
+Tower-map composition transports through the normalized additive Roos maps.
+
+## References
+
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,14 +25,7 @@ namespace WeilConjectures
 attribute [local implicit_reducible] integralOperationsRoos
   CochainComplex.mappingCocone integralOperationsRoosFunctor
 
-/-- Tower-map composition transports through the normalized additive Roos maps.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941
-(blueprint: lem-pod-composition-roos-pasting).
-
-Proof: replace the three comparison maps by their canonical values. Naturality
-moves the first tower map past the second Roos comparison. The additive Roos
-composition identity combines the three leading factors. Functoriality of Roos
-then sends the assumed tower identity to equality of all remaining factors. -/
+/-- Tower-map composition transports through the normalized additive Roos maps. -/
 theorem podCompositionRoosPasting
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [Abelian B] [Abelian D]

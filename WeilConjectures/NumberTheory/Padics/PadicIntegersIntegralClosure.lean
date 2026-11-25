@@ -30,9 +30,14 @@ import Mathlib.RingTheory.Polynomial.RationalRoot
 /-!
 # Integers in a finite extension of p-adic fields
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md,
-first sentence (blueprint: lem-sfb-padic-integers-integral-closure).
+For finite extensions `E ⊆ F` of `ℚ_[l]`, the ring of integers of `F` is the integral closure of
+the ring of integers of `E`.
+
+## Implementation details
+
+Integrality of the unit ball is read off from the minimal polynomial over `ℚ_[l]`, whose
+coefficients are controlled by the spectral norm; the converse uses that the integer ring of
+`F` is integrally closed.
 -/
 
 @[expose] public section
@@ -41,41 +46,8 @@ universe u v
 
 namespace Padic
 
-/-- For finite p-adic extensions `E ⊆ F`, the unit ball in `F` is the
-integral closure of the unit ball in `E`.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/
-  sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md,
-first sentence (blueprint: lem-sfb-padic-integers-integral-closure).
-Proof:
-1. Put `K = ℚ_[l]` and `A = ℤ_[l]` (def-weil-l-adic-numbers). Its norm is complete
-   and nontrivial since `|l| = l⁻¹ < 1`. The extending absolute value is
-   nonarchimedean by lem-weil-l-adic-extension-absolute-value. Choose a finite
-   `K`-basis `bᵢ` of `F`. The coordinate equivalence `F ≃ₗ[K] Kᵈ` is continuous
-   by lem-weil-pbc-finite-dimensional-linear-homeomorphism: both spaces are
-   Hausdorff topological vector spaces, using compatibility with the base norm.
-2. Continuity gives `ε > 0` such that `|y| < ε` forces every coordinate `cᵢ(y)`
-   to have absolute value less than one. Choose `N ≥ 0` with `l⁻ᴺ < ε`.
-   For `|x| ≤ 1` and every `n ≥ 0`, including zero, `|lᴺ xⁿ| ≤ l⁻ᴺ < ε`.
-   Thus `lᴺ cᵢ(xⁿ)` belongs to `A` and
-   `xⁿ = ∑ i, (lᴺ cᵢ(xⁿ)) (l⁻ᴺ bᵢ)` lies in the finite `A`-module
-   `L = ∑ i, A (l⁻ᴺ bᵢ)`.
-3. The DVR `A` is a PID (def-sc-discrete-valuation-ring), hence Noetherian by
-   lem-weil-pbc-pid-noetherian-normal. The algebra `A[x]`, consisting of finite
-   sums of powers of `x`, is an `A`-submodule of `L`. It is finite over `A` by
-   lem-weil-pbc-noetherian-submodule-finite.
-4. By lem-weil-pbc-finite-algebra-is-integral, `x` satisfies a monic polynomial
-   over `A`. Compatibility of absolute values embeds `A` in the integer ring of
-   `E`, and mapping the polynomial's coefficients preserves monicity and its
-   vanishing in `F`. This proves integrality over the smaller integer ring,
-   as defined by def-weil-pbc-integral-closure.
-5. Conversely, a monic equation of degree `r ≥ 1` gives
-   `xʳ = -∑ j < r, aⱼ xʲ`, with `|aⱼ| ≤ 1` by compatibility of the extending
-   absolute values (def-weil-l-adic-coefficient-extension). If `t = |x| > 1`,
-   the ultrametric inequality gives `t^r ≤ t^(r-1) < t^r`, a contradiction.
-   Hence `|x| ≤ 1`. The two implications give the pointwise equivalence and
-   therefore identify the larger integer ring with the integral closure.
--/
+/-- For finite extensions `E` and `F` of `ℚ_[l]` and a `ℚ_[l]`-embedding `i : E → F`, the
+unit ball of `F` is the integral closure in `F` of the unit ball of `E`. -/
 theorem padic_integers_integralClosure
     (l : ℕ) [Fact l.Prime]
     (E : Type u) (F : Type v) [Field E] [Field F]

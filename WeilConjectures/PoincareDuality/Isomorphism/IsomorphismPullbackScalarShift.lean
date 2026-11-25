@@ -11,7 +11,18 @@ public import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismCoefficient
 import WeilConjectures.PoincareDuality.Isomorphism.IsomorphismPullbackScalarIntegralShift
 import WeilConjectures.SmoothPurity.Rational.RationalPullbackTransitionShiftRational
 
-/-! # A step of coherent isomorphism pullback -/
+/-! # A step of coherent isomorphism pullback
+
+For an isomorphism of schemes, the integral and rational pullback scalar comparisons commute with
+the normalized pullback shifts.
+
+## Implementation details
+
+The integral statement is `isomorphismPullbackScalarIntegralShift`. The rational comparison has
+the localized integral comparison as components, and the degree-one normalizations of rational
+pullback and rational scalar extension transfer the integral shift square through localization.
+The degree-one equation implies the equation for every integer shift, by iteration and inverses.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -96,24 +107,9 @@ private theorem localization_shift_obj (l : ℕ) [Fact l.Prime]
     J⟦(1 : ℤ)⟧ = (sfRationalConstructibleLocalization l E W).obj (J.obj⟦(1 : ℤ)⟧) :=
   Functor.congr_obj (sfRationalTriangulationDatum l E W).choose_spec.choose_spec.1 J
 
-/-- The specified scalar comparison preserves the normalized integral and rational shifts.
-Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
-prop-constructible-truncations.proof.md, final automorphism sentence;
-steps 4, 5 and 7 of lem-pod-isomorphism-pullback-texact-coefficients.
-(blueprint: lem-pod-isomorphism-pullback-scalar-shift).
-
-Proof: identify each ordinary-to-completed scalar comparison with scalarCompletionIso
-using its normalization. Its shift equation is exactly the defining normalization of
-the integral scalar transition. The derived sectionwise inverse-image tensor comparison
-preserves the termwise shifts. The published inverse-image scalar compatibility square
-expresses the specified alpha as the conjugate of these shift-compatible maps through
-eE and eL. Whisker with the fully faithful constructible inclusion and cancel to get
-the integral shift square. The specified rational comparison has components Q_L(alpha).
-The given degree-one normalizations of rational pullback and the corresponding fixed
-normalization of rational scalar extension transfer the integral shift square through
-localization. Its degree-one equation implies the equations for every integer shift:
-iterate for positive shifts and use inverses for negative shifts. No new comparison or
-shift is selected, and all morphisms in the raw rationalized categories are retained. -/
+/-- For normalized integral and rational pullback shifts at stages `E ≤ L`, the integral
+pullback scalar comparison `α` commutes with the integral shifts and the rational pullback
+scalar comparison commutes with the rational shifts. -/
 theorem isomorphismPullbackScalarShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

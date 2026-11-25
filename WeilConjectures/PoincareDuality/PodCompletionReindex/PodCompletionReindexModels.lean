@@ -39,13 +39,21 @@ public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # Projection-normalized reindexing of completion and completed tensor
 
-Source: blueprint, theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
-Stacks Tags 03EL, 07A4 and 0941
-(blueprint: def-pod-completion-reindex-models).
+This file defines the structure `PodCompletionReindex` of ambient comparisons for reindexing
+completion and completed tensor along an isomorphism `g` of schemes, and the normalization
+conditions `PodCompletionReindex.Laws` they are required to satisfy.
 
-The index n means the positive quotient exponent n+1. The ordinary inverse image
-is the existing sectionwise relabelling, with its completed scalar action fixed
-by every quotient projection. The sequence category retains all quotient arrows.
+## Implementation details
+
+The index `n` means the positive quotient exponent `n + 1`. The ordinary inverse image is the
+existing sectionwise relabelling, with its completed scalar action fixed by every quotient
+projection. The sequence category retains all quotient arrows. The comparisons in
+`PodCompletionReindex` are data pinned down by their normalizations on quotient generators,
+adjunction maps and both coordinates of the Roos complex, rather than arbitrary isomorphisms.
+
+## References
+
+* [Stacks, Tags 011G, 03D6, 03EL, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -74,20 +82,17 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- Ordinary reindexing on the ambient derived category, with projection-fixed scalars.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-models). -/
+/-- Ordinary reindexing on the ambient derived category, with projection-fixed scalars. -/
 def podOrdinaryReindex : DerivedCategory (scalarReductionSource l E Y) ⥤
     DerivedCategory (scalarReductionSource l E X) :=
   (isoReductionIntegralInverse l E g).mapDerivedCategory
 
-/-- Reindex the entire strict tower of complexes before taking its Roos realization.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- Reindex the entire strict tower of complexes before taking its Roos realization. -/
 abbrev podReindexTower : (ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) ⥤
     (ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E X) ℤ) :=
   (whiskeringRight ℕᵒᵖ _ _).obj (isoReductionIntegralComplex l E g)
 
-/-- The product map is defined by the actual product projections.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- The product map is defined by the actual product projections. -/
 def podReindexProduct (C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) :
     (isoReductionIntegralComplex l E g).obj (∏ᶜ fun n : ℕ ↦ C.obj (op n)) ⟶
       ∏ᶜ fun n : ℕ ↦ ((podReindexTower l E g).obj C).obj (op n) :=
@@ -97,33 +102,28 @@ def podReindexProduct (C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l
 section SignedRoos
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
-/-- The actual 1-s boundary of a strict tower.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- The actual 1-s boundary of a strict tower. -/
 abbrev podRoosBoundary (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n : ℕ ↦ C.obj (op n))
     (integralOperationsTowerStep C)
 
-/-- Shift the entire strict tower, including its transitions.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- Shift the entire strict tower, including its transitions. -/
 def podShiftTower (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ) :=
   C ⋙ shiftFunctor (CochainComplex A ℤ) r
 
-/-- The inverse of the projection-defined product comparison for shift.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- The inverse of the projection-defined product comparison for shift. -/
 def podShiftProduct (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ) :
     (∏ᶜ fun n : ℕ ↦ (C.obj (op n))⟦r⟧) ⟶ (∏ᶜ fun n : ℕ ↦ C.obj (op n))⟦r⟧ :=
   inv (piComparison (shiftFunctor (CochainComplex A ℤ) r) (fun n : ℕ ↦ C.obj (op n)))
 
-/-- Signed cone-shift data, to be fixed by both coordinates below.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- Signed cone-shift data, to be fixed by both coordinates below. -/
 structure PodSignedRoosShift (A : Type a) [Category.{b} A] [Abelian A]
     [HasCountableProducts A] where
   /-- Comparison with the same signed cochain shift. -/
   comparison : ∀ (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ),
     integralOperationsRoos (podShiftTower C r) ≅ (integralOperationsRoos C)⟦r⟧
 
-/-- Both coordinates specify the actual signed cone-shift map.
-Source: Stacks 011G, 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- Both coordinates specify the actual signed cone-shift map. -/
 def PodSignedRoosShift.Laws (S : PodSignedRoosShift A) : Prop :=
   (∀ (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) (r : ℤ),
     (S.comparison C r).hom ≫ (CochainComplex.mappingCocone.fst (podRoosBoundary C))⟦r⟧' =
@@ -138,8 +138,7 @@ def PodSignedRoosShift.Laws (S : PodSignedRoosShift A) : Prop :=
 
 end SignedRoos
 
-/-- The termwise shift comparison, with the identity component in each degree.
-Source: Stacks 011G (blueprint: def-pod-completion-reindex-models). -/
+/-- The termwise shift comparison, with the identity component in each degree. -/
 def podTowerShift
     (C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) (r : ℤ) :
     (podReindexTower l E g).obj (podShiftTower C r) ≅
@@ -148,19 +147,16 @@ def podTowerShift
     isoWhiskerLeft C ((isoReductionIntegralComplex l E g).commShiftIso r) ≪≫
       (Functor.associator C _ _).symm
 
-/-- The specified coefficient reduction calculus, retaining its actual adjunction.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- The specified coefficient reduction calculus, retaining its actual adjunction. -/
 def podReindexCalculus (W : Scheme.{t}) :=
   (coefficientDerivedSystemEvaluationCalculus l E W).choose
 
-/-- The restricted tower of a coherent system complex, before total derived limit.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- The restricted tower of a coherent system complex, before total derived limit. -/
 def podRestrictedTower {W : Scheme.{t}}
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :=
   (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C).asFunctor
 
-/-- The existing K-injective-normalized comparison to the actual Roos complex.
-Source: Stacks 0941 (blueprint: def-pod-completion-reindex-models). -/
+/-- The existing K-injective-normalized comparison to the actual Roos complex. -/
 def podLimitRoos {W : Scheme.{t}} (ρ : IntegralComparisonRoosModel l E W)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj C) ≅
@@ -170,11 +166,9 @@ def podLimitRoos {W : Scheme.{t}} (ρ : IntegralComparisonRoosModel l E W)
   ρ.comparison.app
     (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)
 
-/-- All ambient comparisons, pinned on quotient generators, actual adjunction maps,
-and both coordinates of the fixed Roos complex. These are data and their defining
-normalizations; their existence, not an arbitrary choice of maps, is asserted below.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The ambient comparisons for reindexing completion along `g`: completion, reduction, limit,
+evaluation, restriction, quotient tensor and Roos comparisons, together with signed shift data,
+K-injective Roos models and the completed pullback identification. -/
 structure PodCompletionReindex where
   /-- The actual completion triangle in the original scalar identity normalization. -/
   completionSource : IntegralOnSlice.completion l E Y none ≅
@@ -233,9 +227,8 @@ structure PodCompletionReindex where
 
 namespace PodCompletionReindex
 
-/-- The two original completion units agree with the actual reduction units.
-The original units are those used by finiteFreeCompletedScalarComparison for E=E.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-models). -/
+/-- The two completion units, composed with the completion comparisons, agree with the
+reduction adjunction units. -/
 def CompletionUnits (D : PodCompletionReindex l E g) : Prop :=
   (∀ K : DerivedCategory (scalarReductionSource l E Y),
     (IntegralOnSlice.completionUnit l E Y none).app K ≫
@@ -244,9 +237,7 @@ def CompletionUnits (D : PodCompletionReindex l E g) : Prop :=
     (IntegralOnSlice.completionUnit l E X none).app K ≫
       D.completionTarget.hom.app K = (podReindexCalculus l E X).adjunction.unit.app K)
 
-/-- The coherent reduction comparison has exactly these finite evaluations.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The coherent reduction comparison has exactly these finite evaluations. -/
 def ReductionEvaluation (D : PodCompletionReindex l E g) : Prop :=
   ∀ (K : DerivedCategory (scalarReductionSource l E Y)) (n : ℕ),
     (coefficientSequenceDerivedEvaluation l E X n).map (D.reduction.hom.app K) ≫
@@ -257,9 +248,7 @@ def ReductionEvaluation (D : PodCompletionReindex l E g) : Prop :=
           (((podReindexCalculus l E Y).reductionEvaluation n).hom.app K) ≫
         (D.finite n).hom.app K
 
-/-- Every limit projection, with its genuine restricted coefficient action.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Every limit projection, with its genuine restricted coefficient action. -/
 def LimitProjection (D : PodCompletionReindex l E g) : Prop :=
   ∀ (A : coefficientSequenceDerived l E Y) (n : ℕ),
     (podOrdinaryReindex l E g).map ((coefficientSequenceProjection l E Y n).app A) ≫
@@ -268,9 +257,7 @@ def LimitProjection (D : PodCompletionReindex l E g) : Prop :=
         ((integralComparisonDerivedSequencePullback l E g).obj A) ≫
         (coefficientFiniteDerivedRestriction l E X n).map ((D.evaluation n).hom.app A)
 
-/-- Transport of the actual unit, as a whole-system adjunction identity.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Transport of the actual unit, as a whole-system adjunction identity. -/
 def Unit (D : PodCompletionReindex l E g) : Prop :=
   ∀ K : DerivedCategory (scalarReductionSource l E Y),
     (podOrdinaryReindex l E g).map ((podReindexCalculus l E Y).adjunction.unit.app K) ≫
@@ -278,9 +265,7 @@ def Unit (D : PodCompletionReindex l E g) : Prop :=
         (coefficientSequenceLimit l E X).map (D.reduction.hom.app K) =
       (podReindexCalculus l E X).adjunction.unit.app ((podOrdinaryReindex l E g).obj K)
 
-/-- Transport of the actual counit, before taking any finite evaluation.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Transport of the actual counit, before taking any finite evaluation. -/
 def Counit (D : PodCompletionReindex l E g) : Prop :=
   ∀ A : coefficientSequenceDerived l E Y,
     D.reduction.inv.app ((coefficientSequenceLimit l E Y).obj A) ≫
@@ -290,17 +275,13 @@ def Counit (D : PodCompletionReindex l E g) : Prop :=
         (podReindexCalculus l E X).adjunction.counit.app
           ((integralComparisonDerivedSequencePullback l E g).obj A)
 
-/-- Completeness concerns this unit, not an unspecified limit-triangle map.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- On every complete object the reduction adjunction unit is an isomorphism. -/
 def CompleteUnit (_D : PodCompletionReindex l E g) : Prop :=
   ∀ K : DerivedCategory (scalarReductionSource l E Y),
     IntegralOnSlice.IsComplete l E Y none K →
       IsIso ((podReindexCalculus l E Y).adjunction.unit.app K)
 
-/-- Normalization on every local scalar-tensor generator.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Normalization on every local scalar-tensor generator. -/
 def QuotientGenerators (D : PodCompletionReindex l E g) : Prop :=
   ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P) (n : ℕ) (i : ℤ) (U : X.ProEt)
@@ -316,9 +297,7 @@ def QuotientGenerators (D : PodCompletionReindex l E g) : Prop :=
           (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app
             (op U) a) x
 
-/-- Consecutive quotient squares hold as actual chain-map equations on sections.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Consecutive quotient squares hold as actual chain-map equations on sections. -/
 def QuotientTransition (D : PodCompletionReindex l E g) : Prop :=
   ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P) (n : ℕ) (i : ℤ) (U : X.ProEt)
@@ -331,9 +310,7 @@ def QuotientTransition (D : PodCompletionReindex l E g) : Prop :=
         ((isoReductionIntegralComplex l E g).obj P) n).f i).val.app (op U))
           ((((D.quotient P hP (n + 1)).hom.f i).val.app (op U)) z)
 
-/-- The finite derived maps are these chain maps on good representatives.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The finite derived maps are these chain maps on good representatives. -/
 def FiniteModel (D : PodCompletionReindex l E g) : Prop :=
   ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (hP : integralOperationsGoodComplex l E Y P) (n : ℕ),
@@ -347,18 +324,14 @@ def FiniteModel (D : PodCompletionReindex l E g) : Prop :=
           ((isoReductionIntegralInverse l E g).mapDerivedCategoryFactors.hom.app P) ≫
         (coefficientFiniteReductionModel l E X _ (D.good P hP).1 n).hom
 
-/-- The product-defined square for the complete 1-s differential.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The product-defined square for the complete 1-s differential. -/
 def RoosBoundary (_D : PodCompletionReindex l E g) : Prop :=
   ∀ C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ,
     (isoReductionIntegralComplex l E g).map (podRoosBoundary C) ≫
         podReindexProduct l E g C =
       podReindexProduct l E g C ≫ podRoosBoundary ((podReindexTower l E g).obj C)
 
-/-- The unshifted coordinate is the actual product comparison.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The unshifted coordinate is the actual product comparison. -/
 def RoosFst (D : PodCompletionReindex l E g) : Prop :=
   ∀ C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ,
     (D.roos C).hom ≫ CochainComplex.mappingCocone.fst
@@ -366,9 +339,7 @@ def RoosFst (D : PodCompletionReindex l E g) : Prop :=
       (isoReductionIntegralComplex l E g).map
         (CochainComplex.mappingCocone.fst (podRoosBoundary C)) ≫ podReindexProduct l E g C
 
-/-- The shifted coordinate has the same product comparison, with the cone shift retained.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The shifted coordinate has the same product comparison, with the cone shift retained. -/
 def RoosSnd (D : PodCompletionReindex l E g) : Prop :=
   ∀ (C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) (i : ℤ),
     (D.roos C).hom.f i ≫ (CochainComplex.mappingCocone.snd
@@ -377,9 +348,7 @@ def RoosSnd (D : PodCompletionReindex l E g) : Prop :=
         ((CochainComplex.mappingCocone.snd (podRoosBoundary C)).v
           i (i - 1) (by omega)) ≫ (podReindexProduct l E g C).f (i - 1)
 
-/-- Naturality before localization, as an equation of entire cone maps.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Naturality before localization, as an equation of entire cone maps. -/
 def RoosNaturality (D : PodCompletionReindex l E g) : Prop :=
   ∀ (C C' : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ)
     (a : C ⟶ C'),
@@ -387,10 +356,8 @@ def RoosNaturality (D : PodCompletionReindex l E g) : Prop :=
         (D.roos C').hom =
       (D.roos C).hom ≫ integralOperationsRoosMap ((podReindexTower l E g).map a)
 
-/-- Reindexing and the signed shift give the same actual cone map.
-  The projection-defined termwise shift map supplies the intervening tower comparison.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- Reindexing and the signed shift give the same cone map, with the termwise shift map
+`podTowerShift` as the intervening tower comparison. -/
 def RoosShift (D : PodCompletionReindex l E g) : Prop :=
   ∀ (C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) (r : ℤ),
     ((D.roos (podShiftTower C r)).hom ≫
@@ -400,10 +367,8 @@ def RoosShift (D : PodCompletionReindex l E g) : Prop :=
         ((isoReductionIntegralComplex l E g).commShiftIso r).hom.app
           (integralOperationsRoos C) ≫ (D.roos C).hom⟦r⟧')
 
-/-- The restricted comparison is the actual sectionwise adjunction-unit map.
-This formula fixes every component before localization and rules out a sign twist.
-Source: Stacks 03D6, 0941, blueprint Steps 1 and 5
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The restricted comparison is the sectionwise adjunction-unit map on every restricted
+section. -/
 def RestrictedGenerators (D : PodCompletionReindex l E g) : Prop :=
   ∀ (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (n : ℕ) (i : ℤ) (U : X.ProEt)
@@ -418,9 +383,7 @@ def RestrictedGenerators (D : PodCompletionReindex l E g) : Prop :=
           (integralComparisonSequenceGenerator l E g (C.X i) n
             ((proEtaleIsoPostcompose g).obj U) x))
 
-/-- The limit comparison is induced by this same full Roos chain map.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The limit comparison is induced by this same full Roos chain map. -/
 def LimitModel (D : PodCompletionReindex l E g) : Prop :=
   ∀ C : CochainComplex (coefficientSequenceModules l E Y) ℤ,
     (podOrdinaryReindex l E g).map (podLimitRoos l E D.sourceRoos C).hom ≫
@@ -432,16 +395,13 @@ def LimitModel (D : PodCompletionReindex l E g) : Prop :=
           ((integralComparisonSequencePullback l E g).mapDerivedCategoryFactors.hom.app C) ≫
         (podLimitRoos l E D.targetRoos _).hom
 
-/-- This is the specified representative comparison, not an arbitrary isomorphism.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- The completed pullback identification `D.pullback` is the normalized representative
+comparison. -/
 def PullbackNormalization (D : PodCompletionReindex l E g) : Prop :=
   IsIntegralComparisonPullbackNormalized l E g
     (podReindexCalculus l E Y) D.targetRoos D.pullback
 
-/-- All normalizations on the same ambient reindexing maps.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-models). -/
+/-- All normalizations on the same ambient reindexing maps. -/
 def Laws (D : PodCompletionReindex l E g) : Prop :=
   CompletionUnits l E g D ∧
   ReductionEvaluation l E g D ∧
@@ -466,8 +426,7 @@ def Laws (D : PodCompletionReindex l E g) : Prop :=
 end PodCompletionReindex
 
 /-- The specified ordinary-to-completed pullback arrow is F(unit), then the normalized
-limit comparison, then the specified identification with completed pullback.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-models). -/
+limit comparison, then the specified identification with completed pullback. -/
 def podOrdinaryToCompleted (D : PodCompletionReindex l E g) :
     podOrdinaryReindex l E g ⟶ integralDerivedPullback l E g :=
   whiskerRight (podReindexCalculus l E Y).adjunction.unit (podOrdinaryReindex l E g) ≫

@@ -9,8 +9,13 @@ public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompl
 
 /-! # Normalized completed tensor reindexing models
 
-Source: blueprint theorem-poincare-duality-frobenius--2 Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: def-pod-completion-tensor-normalization).
+This file states the model and canonical-arrow conditions on a completed tensor comparison
+`PodCompletedTensorReindex` and collects all its normalization conditions in
+`PodCompletedTensorReindex.Laws`.
+
+## References
+
+* [Stacks, Tags 03EL, 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -48,9 +53,8 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   [∀ y : Y, Invertible (l : Y.residueField y)]
   (D : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g D)
 
-/-- The comparison is the localization of the same two-coordinate Roos chain map.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-normalization). -/
+/-- The tensor comparison `T.tensor` is the localization of the two-coordinate Roos chain
+map. -/
 def Model : Prop :=
   ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (hP : sfIntegralConstructible l E Y (DerivedCategory.Q.obj P.obj))
@@ -69,9 +73,7 @@ def Model : Prop :=
           ((podGoodReindex l E g D).obj P,(podGoodReindex l E g D).obj Q))
 
 /-- Equality with the actual completed pullback/tensor comparison after the specified
-  ordinary-to-completed pullback identification.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-normalization). -/
+  ordinary-to-completed pullback identification. -/
 def Canonical : Prop :=
   ∀ M N : sfIntegralConstructibleCategory l E Y,
     (podOrdinaryToCompleted l E g D).app ((integralCompletedTensor l E Y).obj (M.obj,N.obj)) ≫
@@ -80,9 +82,8 @@ def Canonical : Prop :=
         (Prod.mkHom ((podOrdinaryToCompleted l E g D).app M.obj)
           ((podOrdinaryToCompleted l E g D).app N.obj))
 
-/-- Normalization of completed tensor, retaining the actual canonical arrow.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-normalization). -/
+/-- The normalization laws of a completed tensor comparison: the generator, inverse-generator,
+naturality, model and canonical-arrow conditions. -/
 def Laws : Prop :=
   Generators l E g D T ∧
   InverseGenerators l E g D T ∧
