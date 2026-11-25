@@ -16,18 +16,26 @@ public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
-# Integral, finite-coefficient, and algebraic-closure l-adic representations
-
-Source: Deligne, Weil II (1.1.6), and Milne, Lectures on Étale Cohomology, §19, p. 125
-(blueprint: def-pod-l-adic-representations).
+# Integral, finite-coefficient, and algebraic-closure `ℓ`-adic representations
 
 A representation of `G` by linear automorphisms is a monoid homomorphism `G →* (V ≃ₗ[R] V)`
-with jointly continuous action map `fun p : G × V ↦ ρ p.1 p.2`, the form of the pod family
-(`Padic.exists_stable_lattice`, lem-pod-profinite-stable-lattice). `E` carries the topology of
+with jointly continuous action map `fun p : G × V ↦ ρ p.1 p.2`. `E` carries the topology of
 `spectralNorm.nontriviallyNormedField ℚ_[l] E` and `V` the topology `moduleTopology E V`.
 Morphisms are the `R`-linear maps `f` with `f (ρ g v) = σ g (f v)` (`IsEquivariant`); tensor
 products carry the diagonal action (`tensorDiagonal`); the unit is `R` with the trivial action
 `1 : G →* (R ≃ₗ[R] R)`.
+
+## Implementation details
+
+The form `G →* (V ≃ₗ[R] V)` with jointly continuous action matches
+`Padic.exists_stable_lattice`. In `IsLAdic` the scalar-extension equivalence is required to be
+the canonical map `a ⊗ v ↦ a • v`, so an arbitrary isomorphism cannot serve as a descent
+witness.
+
+## References
+
+* P. Deligne, *La conjecture de Weil. II*, (1.1.1)(d) and (1.1.6)
+* J. S. Milne, *Lectures on Étale Cohomology*, §19, p. 125
 -/
 
 @[expose] public section
@@ -38,8 +46,7 @@ open scoped TensorProduct
 namespace Representation
 
 /-- A continuous integral representation is finite over the coefficient ring and has continuous
-joint action for its maximal-ideal-adic module topology. Source: Milne, LEC §19, p. 125,
-and Weil II (1.1.6) (blueprint: def-pod-l-adic-representations). -/
+joint action for its maximal-ideal-adic module topology. -/
 def IsContinuousIntegral (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (G : ProfiniteGrp.{v})
     (M : Type w) [AddCommGroup M] [Module (Padic.coefficientExtensionIntegers l E) M]
@@ -49,8 +56,7 @@ def IsContinuousIntegral (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     Continuous (fun p : G × M ↦ ρ p.1 p.2)
 
 /-- A continuous finite-coefficient representation is finite-dimensional, with continuous joint
-action for the module topology over the spectral-norm topology of `E`. Source: Milne, LEC §19,
-p. 125, and Weil II (1.1.6) (blueprint: def-pod-l-adic-representations). -/
+action for the module topology over the spectral-norm topology of `E`. -/
 def IsContinuousCoefficient (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (G : ProfiniteGrp.{v})
     (V : Type w) [AddCommGroup V] [Module E V] (ρ : G →* (V ≃ₗ[E] V)) : Prop :=
@@ -59,10 +65,10 @@ def IsContinuousCoefficient (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     letI : TopologicalSpace V := moduleTopology E V
     Continuous (fun p : G × V ↦ ρ p.1 p.2)
 
-/-- An l-adic representation descends to a continuous representation on a finite-extension
-structure inside `V`. The scalar-extension equivalence is required to be the canonical map
-`a ⊗ v ↦ a • v`, so an arbitrary isomorphism cannot serve as a descent witness.
-Source: Deligne, Weil II (1.1.6) (blueprint: def-pod-l-adic-representations). -/
+/-- A representation over an algebraic closure `Ω` of `ℚ_ℓ` is `ℓ`-adic if it is
+finite-dimensional and descends to a continuous representation on an `E`-subspace `W` of `V`,
+for a finite extension `E` of `ℚ_ℓ` in `Ω`, such that the canonical map
+`Ω ⊗[E] W → V`, `a ⊗ x ↦ a • x`, is an isomorphism. -/
 def IsLAdic (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω]
     [IsAlgClosure ℚ_[l] Ω] (G : ProfiniteGrp.{v}) (V : Type w)
     [AddCommGroup V] [Module Ω V] (ρ : G →* (V ≃ₗ[Ω] V)) : Prop :=
@@ -75,16 +81,14 @@ def IsLAdic (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] �
         ∃ e : (Ω ⊗[E] W) ≃ₗ[Ω] V,
           ∀ (a : Ω) (x : W), e (a ⊗ₜ[E] x) = a • (x : V)
 
-/-- A morphism of representations is a linear map commuting with the actions.
-Source: Deligne, Weil II (1.1.6) (blueprint: def-pod-l-adic-representations). -/
+/-- A morphism of representations is a linear map commuting with the actions. -/
 def IsEquivariant (R : Type u) [CommRing R] (G : Type z) [Group G]
     (V : Type v) [AddCommGroup V] [Module R V] (W : Type w) [AddCommGroup W] [Module R W]
     (ρ : G →* (V ≃ₗ[R] V)) (σ : G →* (W ≃ₗ[R] W)) (f : V →ₗ[R] W) : Prop :=
   ∀ (g : G) (x : V), f (ρ g x) = σ g (f x)
 
 /-- The diagonal action `g ↦ ρ g ⊗ σ g` on `V ⊗[R] W` (Mathlib's `Representation.tprod`,
-read through `LinearMap.GeneralLinearGroup.generalLinearEquiv`).
-Source: Deligne, Weil II (1.1.6) (blueprint: def-pod-l-adic-representations). -/
+read through `LinearMap.GeneralLinearGroup.generalLinearEquiv`). -/
 noncomputable def tensorDiagonal (R : Type u) [CommRing R] (G : Type z) [Group G]
     (V : Type v) [AddCommGroup V] [Module R V] (W : Type w) [AddCommGroup W] [Module R W]
     (ρ : G →* (V ≃ₗ[R] V)) (σ : G →* (W ≃ₗ[R] W)) : G →* ((V ⊗[R] W) ≃ₗ[R] (V ⊗[R] W)) :=
@@ -95,10 +99,8 @@ noncomputable def tensorDiagonal (R : Type u) [CommRing R] (G : Type z) [Group G
       ((Units.coeHom _).comp
         ((LinearMap.GeneralLinearGroup.generalLinearEquiv R W).symm.toMonoidHom.comp σ))))
 
-/-- Extension of coefficients carries the action `1 ⊗ σ` on `L ⊗[E] V`, canonically the
-same as `σ ⊗ 1` on `V ⊗[E] L` via the tensor flip. For the node this is used when
-`E ⊆ L` are finite subextensions. Source: Deligne, Weil II (1.1.6), coefficient extension,
-and (1.1.1)(d) (blueprint: def-pod-l-adic-representations). -/
+/-- Extension of coefficients: the action `1 ⊗ σ` on `L ⊗[E] V` induced by a representation
+`σ` on an `E`-module `V`. -/
 noncomputable def coefficientScalarExtension (E : Type u) [Field E] (L : Type v) [Field L]
     [Algebra E L] (G : Type z) [Group G] (V : Type w) [AddCommGroup V] [Module E V]
     (ρ : G →* (V ≃ₗ[E] V)) : G →* ((L ⊗[E] V) ≃ₗ[L] (L ⊗[E] V)) :=

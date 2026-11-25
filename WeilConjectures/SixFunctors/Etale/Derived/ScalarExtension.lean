@@ -18,12 +18,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 # Scalar extension between the rational stages
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, with rings of integers `𝒪_E ⊆ 𝒪_L`.
-The scalar extension `- ⊗_E L : D_comp(Y, E) ⥤ D_comp(Y, L)` of blueprint
-`proposition-inverting-ell--2` is computed on an integral representative `K` by the derived
-base change `K ⊗ᴸ_{𝒪_E} 𝒪_L`, followed by rationalization. Here the derived base change is
-characterized by its universal property (`AlgebraicGeometry.Etale.IsDerivedBaseChange`): a
-morphism `η : K ⟶ Res K'` to the restriction of scalars of `K' ∈ D(Y_ét, 𝒪_L)` through which
-every morphism from `K` to a restriction of scalars factors uniquely.
+The scalar extension `- ⊗_E L : D_comp(Y, E) ⥤ D_comp(Y, L)` is computed on an integral
+representative `K` by the derived base change `K ⊗ᴸ_{𝒪_E} 𝒪_L`, followed by rationalization.
+Here the derived base change is characterized by its universal property
+(`AlgebraicGeometry.Etale.IsDerivedBaseChange`): a morphism `η : K ⟶ Res K'` to the restriction
+of scalars of `K' ∈ D(Y_ét, 𝒪_L)` through which every morphism from `K` to a restriction of
+scalars factors uniquely.
 
 ## Main statements
 
@@ -39,7 +39,7 @@ every morphism from `K` to a restriction of scalars factors uniquely.
 - `AlgebraicGeometry.Etale.isTriangulated_derivedCompleteRationalScalarExtension`: the scalar
   extension `D_comp(Y, E) ⥤ D_comp(Y, L)` is triangulated.
 
-## Construction of the derived base change
+## Implementation details
 
 `𝒪_L` is a finite free `𝒪_E`-module with a Frobenius form
 (`PadicAlgCl.exists_basis_frobeniusForm_integersShrinkMap`), so coextension of scalars
@@ -52,6 +52,16 @@ to the objects on which a uniformizer acts invertibly. The derived base change f
 the left adjoint of restriction of scalars (`AlgebraicGeometry.Etale.derivedBaseChange`), and
 the functor between rationalizations is induced along `𝒪_E ⟶ 𝒪_L`
 (`CategoryTheory.Rationalization.mapOfRingHom`).
+
+The independence of the integral representative
+(`AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange`) is the uniqueness of
+the extension of the `𝒪_E`-linear derived base change to the rationalizations: an isomorphism of
+rationalizations is a morphism `f : K₁ ⟶ K₂` with a morphism `g : K₂ ⟶ K₁` such that `g ∘ f` and
+`f ∘ g` are nonzero scalars up to torsion, and the base change of morphisms is functorial and
+linear along `𝒪_E ⟶ 𝒪_L`. For the derived base changes given by
+`AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`, the isomorphism is canonical: it
+is the image of the given isomorphism under the scalar extension, read through
+`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtensionFromIntegralIso`.
 -/
 
 @[expose] public section
@@ -275,20 +285,7 @@ Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. If two integ
 their derived base changes `K₁ ⊗ᴸ_{𝒪_E} 𝒪_L` and `K₂ ⊗ᴸ_{𝒪_E} 𝒪_L` (objects of
 `D_comp(Y_ét, 𝒪_L)` given with the universal property `IsDerivedBaseChange`) become isomorphic in
 `D_comp(Y_ét, L)`. So the scalar extension `(K ⊗ᴸ_{𝒪_E} 𝒪_L) ⊗_{𝒪_L} L` of an object of
-`D_comp(Y_ét, E)` does not depend on the chosen integral representative `K`.
-
-As in the blueprint, this is the uniqueness of the extension of the `𝒪_E`-linear derived base
-change to the rationalizations: an isomorphism of rationalizations is a morphism `f : K₁ ⟶ K₂`
-with a morphism `g : K₂ ⟶ K₁` such that `g ∘ f` and `f ∘ g` are nonzero scalars up to torsion
-(`CategoryTheory.Rationalization.exists_smul_eq_map`,
-`CategoryTheory.Rationalization.map_eq_map_iff`), and the base change of morphisms is
-functorial and linear along `𝒪_E ⟶ 𝒪_L` (`AlgebraicGeometry.Etale.IsDerivedBaseChange.map`).
-
-The statement only asserts that an isomorphism exists. For the derived base changes given by the
-functor `AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`, the isomorphism is
-canonical: it is the image of `e` under the scalar extension
-`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`, read through the isomorphisms
-`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtensionFromIntegralIso`. -/
+`D_comp(Y_ét, E)` does not depend on the chosen integral representative `K`. -/
 theorem nonempty_iso_fromIntegral_of_isDerivedBaseChange
     {K₁ K₂ : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l E}
     {K₁' K₂' : DerivedCategoryDerivedCompleteIntegral Y.smallEtaleTopology l L}
@@ -378,13 +375,7 @@ theorem exists_isDerivedBaseChange_integersShrinkMap
   exact ⟨_, _, isDerivedBaseChange_derivedCoextendRestrictScalarsAdj_unit b φ hφ Y K⟩
 
 variable {l E L} in
-/-- Derived base change along `𝒪_E ⟶ 𝒪_L` preserves derived completeness.
-
-The derived base change is the derived coextension of scalars, which is also right adjoint to
-restriction of scalars. If a uniformizer `ϖ_L` acts invertibly on `Z ∈ D(Y_ét, 𝒪_L)`, so does the
-image of a uniformizer `ϖ_E` of `𝒪_E` (it divides a power of `ϖ_L`), hence `ϖ_E` acts invertibly
-on the restriction of scalars of `Z`. So a morphism `Z ⟶ K ⊗ᴸ 𝒪_L` corresponds to a morphism
-from this restriction of scalars to the derived complete `K`, which vanishes. -/
+/-- Derived base change along `𝒪_E ⟶ 𝒪_L` preserves derived completeness. -/
 theorem derivedCompleteIntegral_derivedBaseChange_integersShrinkMap
     {K : 𝐃(Y, Shrink.{u + 1} (PadicAlgCl.integers l E))}
     (hK : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E K) :
@@ -467,9 +458,8 @@ lemma integersShrinkMap_nonZeroDivisors_le :
       (nonZeroDivisors _).comap (PadicAlgCl.integersShrinkMap l E L) := fun _ hx ↦
   PadicAlgCl.integersShrinkMap_mem_nonZeroDivisors l E L hx
 
-/-- The scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` of blueprint
-`proposition-inverting-ell--2`: the functor induced on the rationalizations by the derived
-base change along `𝒪_E ⟶ 𝒪_L`. -/
+/-- The scalar extension `- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)`: the functor induced on
+the rationalizations by the derived base change along `𝒪_E ⟶ 𝒪_L`. -/
 noncomputable abbrev derivedCompleteRationalScalarExtension :
     DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l E ⥤
       DerivedCategoryDerivedCompleteRational Y.smallEtaleTopology l L :=
@@ -480,19 +470,9 @@ noncomputable abbrev derivedCompleteRationalScalarExtension :
 /-- Scalar extension is an exact triangulated functor.
 
 Let `E ⊆ L` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`. The scalar extension
-`- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)` (`proposition-inverting-ell--2`), induced on
-the rationalizations by the derived base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L`, is a triangulated
-functor: it commutes with shifts and carries distinguished triangles to distinguished triangles.
-
-As in the blueprint, it is the composite of the derived base change, which is triangulated as the
-left adjoint of the triangulated restriction of scalars, and of the rationalization; the induced
-functor on the rationalizations is triangulated
-(`CategoryTheory.Rationalization.isTriangulated_mapOfRingHom`). The derived base change exists
-and preserves derived completeness
-(`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_integersShrinkMap`,
-`AlgebraicGeometry.Etale.derivedCompleteIntegral_derivedBaseChange_integersShrinkMap`). By
-`AlgebraicGeometry.Etale.nonempty_iso_fromIntegral_of_isDerivedBaseChange` the functor does not
-depend on the integral representatives. -/
+`- ⊗_E L : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, L)`, induced on the rationalizations by the derived
+base change `K ↦ K ⊗ᴸ_{𝒪_E} 𝒪_L`, is a triangulated functor: it commutes with shifts and carries
+distinguished triangles to distinguished triangles. -/
 instance isTriangulated_derivedCompleteRationalScalarExtension :
     (derivedCompleteRationalScalarExtension (Y := Y) l E L).IsTriangulated :=
   inferInstance

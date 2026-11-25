@@ -16,9 +16,8 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Irreducible
 A Weil sheaf on the affine line is *punctual* if its support, a set of closed points, is finite.
 The direct image `j_*M` of a lisse Weil sheaf on a dense open has no nonzero punctual subsheaf:
 every morphism from a punctual sheaf to it vanishes
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.eq_zero_of_support_finite`). This is Step 0 of
-the description of the perverse t-structure on a smooth curve (blueprint
-`lemma-perverse-sheaves-curve`).
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.eq_zero_of_support_finite`). This is the first
+step of the description of the perverse t-structure on a smooth curve.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace WeilSheaf
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- The affine line has two distinct points: the generic point and a closed point, the
-polynomial ring `k₀[x]` not being a field. -/
+/-- The affine line has two distinct points. -/
 instance _root_.AlgebraicGeometry.affineLine.nontrivial (k₀ : Type u) [Field k₀] :
     Nontrivial (affineLine k₀) := by
   let e := AffineSpace.SpecIso PUnit.{u + 1} (CommRingCat.of k₀)
@@ -52,13 +50,7 @@ instance _root_.AlgebraicGeometry.affineLine.nontrivial (k₀ : Type u) [Field k
 open scoped ProEtale in
 /-- **A middle extension has no punctual subsheaf**: every morphism from a Weil sheaf `G` of
 finite support on the affine line to the direct image `j_*M` of a lisse Weil sheaf on a dense
-open vanishes. Let `V₀` be the complement of the support of `G`; then `G|_{V₀} = 0`, its stalks
-at the closed points of `V₀` vanishing. The adjoint `j̄^* G ⟶ M` of the morphism therefore
-vanishes on `Ū ∩ V̄₀`, and every point of `Ū` specializes from a point of `Ū ∩ V̄₀`, namely from
-the generic point of the irreducible geometric line, which lies over `V₀` since the affine line
-is not a single closed point. A morphism into the lisse `M` vanishing there vanishes
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`).
-(blueprint: `lemma-perverse-sheaves-curve`, Step 0) -/
+open vanishes. -/
 theorem LisseOnDenseOpen.eq_zero_of_support_finite (D : LisseOnDenseOpen k₀ l)
     {G : WeilSheaf k₀ l (affineLine k₀)} (hG : G.support.Finite) (i : G ⟶ D.directImage) :
     i = 0 := by

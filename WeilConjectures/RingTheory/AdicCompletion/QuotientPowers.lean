@@ -113,8 +113,7 @@ theorem mapRingHom_algebraMap (f : A →+* B) (I : Ideal A) (a : A) :
 
 /-- Let `f : A → B` be a ring map and `I ⊆ A` an ideal such that `A / Iⁿ → B / IⁿB` is bijective
 for every `n ≥ 1`. Then there is a ring isomorphism `θ : Â_I ≃ B̂_{IB}` of adic completions with
-`θ(x)ₙ = f(a) mod (IB)ⁿ` whenever `xₙ = a mod Iⁿ`, and `θ⁻¹ ∘ c_B ∘ f = c_A`.
-(blueprint: `lem-weil-pbc-henselization-completion-data`) -/
+`θ(x)ₙ = f(a) mod (IB)ⁿ` whenever `xₙ = a mod Iⁿ`, and `θ⁻¹ ∘ c_B ∘ f = c_A`. -/
 theorem exists_ringEquiv_of_bijective_quotientMap (f : A →+* B) (I : Ideal A)
     (hq : ∀ n, 1 ≤ n → Function.Bijective (Ideal.quotientMap ((I ^ n).map f) f le_comap_map)) :
     ∃ θ : AdicCompletion I A ≃+* AdicCompletion (I.map f) B,

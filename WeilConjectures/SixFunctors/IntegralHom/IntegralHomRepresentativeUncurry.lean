@@ -74,8 +74,19 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Uncurrying on integral Hom representatives
 
-Source: Stacks 07A4 and 08J9; blueprint coefficient-extension paragraph 2.
-(blueprint: lem-sf-integral-hom-representative-uncurry).
+We show that uncurrying a chain map into a Hom complex agrees, after localization, with the
+normalized right-tensor adjunction.
+
+## Implementation details
+
+The chain map is uncurried by the chain tensor-Hom equivalence, whose product-projection
+formula is ordinary evaluation without a sign. Composing with the fixed injective-resolution
+augmentation and using naturality of chain uncurrying and pure-tensor generation reduces the
+comparison to the normalization of the tensor models.
+
+## References
+
+* Stacks Project, Tags 07A4, 08J9.
 -/
 
 @[expose] public section
@@ -135,19 +146,10 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 open CategoryTheory.RingedDerivedNative
 
 -- Compare the two Hom-complex models without unfolding the derived internal Hom.
-/-- Unsigned representative uncurrying agrees with the normalized right-tensor adjunction.
-
-Source: Stacks Tags 07A4 and 08J9; blueprint coefficient-extension paragraph 2.
-(blueprint: lem-sf-integral-hom-representative-uncurry).
-
-Proof: uncurry the chain map by the existing chain tensor-Hom equivalence; its
-product-projection formula is ordinary evaluation, without a sign in the order
-(source of q) tensor (source of Hom). Compose q with the fixed injective-resolution
-augmentation and apply the normalization of T. Pure-tensor generation identifies
-the resulting chain map with uncurrying of the augmented q. Naturality of chain
-uncurrying identifies this map with the original uncurry followed by augmentation.
-After localization, the augmentation followed by its fixed inverse is the identity.
-This gives the comparison equation into the original target complex. -/
+/-- A chain map `φ : P ⟶ Hom(L, I)` between flat complexes uncurries to a chain map
+`a : P ⊗ L ⟶ I` given on generators by unsigned evaluation, `x ⊗ y ↦ φ(x)(y)`, and after
+localization `a` agrees with the transpose of `φ` under the normalized right-tensor
+adjunction. -/
 theorem representative_uncurry_evaluation
     (S : CoefficientClosedStructure
       (derivedInternalHomOfUniverses.{t + 1, t, u, (max u (t + 1)) + 1}

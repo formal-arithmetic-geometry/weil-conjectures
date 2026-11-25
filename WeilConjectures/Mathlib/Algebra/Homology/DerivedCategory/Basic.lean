@@ -38,10 +38,7 @@ lemma isZero_of_forall_isZero (h : ∀ X : C, IsZero X) (K : DerivedCategory C) 
 /-- **The derived category is a localization.** For an abelian category `C`, the derived category
 `D(C) = DerivedCategory C` is the localization of the category of cochain complexes
 `CochainComplex C ℤ` at the quasi-isomorphisms (the morphisms inducing isomorphisms on all
-cohomology objects), with localization functor `DerivedCategory.Q`; the universe of its
-morphisms is fixed by `HasDerivedCategory.{w} C`.
-
-(blueprint: `def-weil-abstract-derived-category`) -/
+cohomology objects), with localization functor `DerivedCategory.Q`. -/
 theorem isLocalization_Q :
     (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ)) :=
   inferInstance

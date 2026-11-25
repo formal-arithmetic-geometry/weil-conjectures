@@ -28,6 +28,13 @@ into pairwise disjoint opens (`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_hom_disj
 and there the local lifts glue
 (`AlgebraicGeometry.Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom`).
 
+## Implementation details
+
+Detection of the zero sheaf: for a geometric point `x` of `X` over the geometric point `y` of
+`Y`, the stalk `G_x` is a colimit of factors of the sections of `G` over the integral base
+change of the strict henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a
+quotient of `(f_* G)_y`.
+
 ## Main statements
 
 - `AlgebraicGeometry.Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom`: the direct
@@ -156,8 +163,7 @@ theorem Etale.preservesEpimorphisms_lowerStar_of_isIntegralHom :
       exact epi_comp _ _
     exact this
 
-/-- Blueprint `lemma-integral-changes-source-base`: Étale direct image is exact for
-integral morphisms.
+/-- Étale direct image is exact for integral morphisms.
 
 The direct image `f_*` along an integral morphism `f` is exact on étale sheaves of
 `Λ`-modules: it is left exact for every morphism, and it preserves epimorphisms by
@@ -229,12 +235,7 @@ private lemma surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω]
   erw [(pointSmallEtale t.1).toPresheafFiber_w_apply α p G.obj, hα]
 
 /-- The direct image along an integral morphism detects the zero sheaf: if `f_* G = 0` then
-`G = 0`. This is the conservativity step of the proof of blueprint
-`lemma-integral-changes-source-base--2`. For a geometric point `x` of `X` over the geometric point
-`y` of `Y`, the stalk `G_x` is a colimit of factors of the sections of `G` over the integral base
-change of the strict henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of
-`(f_* G)_y`.  (blueprint: lem-sbc-integral-direct-image-detects-zero)
--/
+`G = 0`. -/
 theorem Etale.isZero_of_isZero_lowerStar_obj
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by

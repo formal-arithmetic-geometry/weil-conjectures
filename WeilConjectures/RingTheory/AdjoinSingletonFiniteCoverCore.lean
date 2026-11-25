@@ -16,7 +16,15 @@ import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.RingTheory.AdjoinSingletonSplittingCover
 
 /-! # Structural finite cover for a fractional monogenic algebra
-Source: Stacks Project, Algebra, Tag 0334, Step 5. -/
+
+For a Nagata normal domain `R` with fraction field `K`, `x ∈ K` and a maximal ideal `m` of
+`R[x]`, we construct a finite injective extension of `R[x]_m` whose local rings at maximal ideals
+are monogenic local rings in which the generator lies in the maximal ideal.
+
+## References
+
+* [Stacks Project, Tag 0334], Step 5
+-/
 
 @[expose] public section
 
@@ -168,27 +176,12 @@ private theorem adjoin_singleton_shift_local_presentation
   apply Subtype.ext
   rfl
 
-/-- The splitting-field construction gives a finite cover and monogenic local presentations.
-Source: Stacks Project, Algebra, Tag 0334, Step 5, lines 46137--46173.
-(blueprint: lem-weil-pbc-monogenic-maximal-finite-cover-core).
-
-Proof: Contract the chosen maximal ideal to R. Zariski's lemma makes the residue of x
-algebraic over the contracted residue field. Lift its monic minimal polynomial and invert
-one product of coefficient denominators outside the contracted prime. Take a finite
-splitting field L of the lifted polynomial and the integral closure R' of the localized R
-in L. Nagata finiteness makes R' finite, normal, Noetherian and Nagata, with fraction field
-L. The ring R'[x] is finite over the localized R[x]. Localize it at R[x] minus m to obtain
-B. Localization preserves finiteness, injectivity and the domain property. At every maximal
-ideal of B, integrality identifies its local ring with R'[x] at a maximal ideal over m.
-The split polynomial evaluates into that ideal, so some root r satisfies x-r in the ideal.
-The equality R'[x]=R'[x-r] gives the stated local presentation with y=x-r. The construction
-through the maximal contraction and root witness is isolated in
-`exists_adjoin_singleton_splitting_cover`. Noetherianity, the shift of generator and the
-local ring isomorphisms are proved here. Finally write the image z of x as b/a over R'.
-Inverting the nonzero image of a turns R'[z] into R'_a.
-The corresponding principal open in B, and all its prime localizations, are normal domains.
-The constructions use finite extensions and localizations in Type(max u v), with universe
-lifts for R and K if necessary. No analytic-unramified assertion is used here. -/
+/-- Let `R` be a Nagata normal domain with fraction field `K`, `x ∈ K`, and `m` a maximal ideal of
+`R[x]`. There is a Noetherian domain `B`, finite over `R[x]_m` with injective structure map,
+having a nonzero `f` such that all prime localizations of `B_f` are normal domains, and such that
+each local ring of `B` at a maximal ideal is isomorphic to `R'[y]_n` for a Noetherian Nagata
+normal domain `R'` with fraction field `K'`, some `y ∈ K'` with `R'[y]` Noetherian, and a maximal
+ideal `n` of `R'[y]` containing `y`. -/
 theorem exists_finite_cover_adjoin_singleton_core
     (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)

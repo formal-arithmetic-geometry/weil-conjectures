@@ -21,7 +21,8 @@ henselian neighbourhood of the boundary point
 module of inertia invariants `V ^ (I_z)`, the Frobenius of the stalk corresponding to the residue
 Frobenius lift `ρ(Frob_z)`
 (`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk`).
-This is blueprint `lemma-boundary-stalk--1`.
+
+## Implementation details
 
 The proof identifies, Frobenius-equivariantly, the stalk with the `Gal(Ω / K')`-invariant
 sections over the geometric generic point `Spec Ω`
@@ -242,8 +243,7 @@ strictly henselian neighbourhood of the boundary point `z` with closed point `x`
 degree zero of the Weil group and a Frobenius lift `σ_F` mapping to an element of degree `deg x`,
 there is an injective linear map from the boundary stalk `(j_* F)_x̄` to the Weil fundamental
 representation `F_t`, with image the invariants of the image of `I`, intertwining the Frobenius of
-the stalk with the image of `σ_F`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+the stalk with the image of `σ_F`. -/
 theorem exists_linearMap_stalk_directImage_fundamentalRep_of_neighbourhood
     (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
     (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
@@ -328,8 +328,7 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep_of_neighbourhood
 neighbourhood of the boundary point `z` with closed point `x`, there is an injective linear map
 from the boundary stalk `(j_* F)_x̄` to the Weil fundamental representation `F_t` (at the base
 point data adapted to the geometric generic point), with image the invariants of the inertia
-group `I_z`, intertwining the Frobenius of the stalk with the residue Frobenius lift at `z`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+group `I_z`, intertwining the Frobenius of the stalk with the residue Frobenius lift at `z`. -/
 theorem exists_linearMap_stalk_directImage_fundamentalRep
     (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
     (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
@@ -386,8 +385,7 @@ point `x` for the inertia group of a translate `γ • Q` of the chosen point `Q
 conjugate `γ σ_F γ⁻¹` of the residue Frobenius lift, `γ` mapping to `T` in the Weil group, there
 is an injective linear map from the boundary stalk `(j_* F)_x̄` to the Weil fundamental
 representation `F_t`, with image the vectors fixed by `T I_z T⁻¹`, intertwining the Frobenius of
-the stalk with `T Frob_z T⁻¹`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+the stalk with `T Frob_z T⁻¹`. -/
 theorem exists_linearMap_stalk_directImage_fundamentalRep_conj
     (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
     (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
@@ -482,12 +480,10 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep_conj
 end Rep
 
 include τ GC in
-/-- Blueprint `lemma-boundary-stalk--1`, together with
-`definition-weil-representation--1`.
-
-Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
-geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius
-lifts (`AlgebraicGeometry.WeilGroup.boundaryDatum`). Assume that every boundary point `z` has a
+/-- **Boundary stalks as inertia invariants.** Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth
+geometrically connected curve over `𝔽_q`, `U₀` geometrically connected, with the boundary datum
+of actual inertia groups and residue Frobenius lifts
+(`AlgebraicGeometry.WeilGroup.boundaryDatum`). Assume that every boundary point `z` has a
 strictly henselian neighbourhood (`AlgebraicGeometry.WeilGroup.BoundaryNeighbourhood`). There is
 a lisse sheaf–representation equivalence `ℱ ↦ (V, ρ)` for `W(U₀)`, identifying the stalk `ℱ_x̄`
 with its local Frobenius with `V` with `ρ (Frob_x)` at the closed points of `U₀`, such that at
@@ -566,10 +562,8 @@ theorem exists_equivalence_isLisse_stalk_directImage_boundaryStalk
 
 
 include τ GC in
-/-- Blueprint `lemma-boundary-stalk--1`, together with
-`definition-weil-representation--1`, for conjugated neighbourhoods.
-
-As `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk`, but
+/-- **Boundary stalks as inertia invariants, for conjugated neighbourhoods.** As
+`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_stalk_directImage_boundaryStalk`, but
 assuming at every boundary point `z` a strictly henselian neighbourhood for the inertia group of
 a Galois translate `γ • Q` of the chosen point `Q` over `z` and the conjugate `γ σ_F γ⁻¹` of the
 residue Frobenius lift, `γ` mapping into the Weil group: the boundary stalk `(j_* ℱ)_x̄` is

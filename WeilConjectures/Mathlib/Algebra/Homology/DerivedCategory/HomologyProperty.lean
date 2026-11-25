@@ -47,7 +47,7 @@ section Abelian
 variable {A : Type u} [Category.{v} A] [Abelian A] (P : ObjectProperty A)
 
 /-- **The middle term of a five-term exact sequence with outer terms in a weak Serre class lies
-in the class**: it is an extension of the kernel of `X₃ ⟶ X₄` by the cokernel of `X₀ ⟶ X₁`. -/
+in the class.** -/
 lemma ObjectProperty.prop_of_exact_of_exact_of_exact [P.IsClosedUnderKernels]
     [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions]
     {X₀ X₁ X₂ X₃ X₄ : A} {f₀ : X₀ ⟶ X₁} {f₁ : X₁ ⟶ X₂} {f₂ : X₂ ⟶ X₃} {f₃ : X₃ ⟶ X₄}
@@ -106,9 +106,7 @@ instance [P.IsClosedUnderIsomorphisms] : (homologyProperty P).IsStableUnderShift
     ⟨fun M hM n ↦ P.prop_of_iso
       (((homologyFunctor A 0).shiftIso a n (a + n) rfl).app M).symm (hM (a + n))⟩
 
-/-- **Complexes with homology in a weak Serre class form a triangulated subcategory**: the
-middle term of a distinguished triangle has homology sitting in the five-term exact sequence
-`Hⁿ⁻¹ M ⟶ Hⁿ K ⟶ Hⁿ L ⟶ Hⁿ M ⟶ Hⁿ⁺¹ K`. -/
+/-- **Complexes with homology in a weak Serre class form a triangulated subcategory.** -/
 instance homologyProperty_isTriangulatedClosed₂ [P.IsClosedUnderIsomorphisms]
     [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] :
     (homologyProperty P).IsTriangulatedClosed₂ where
@@ -119,10 +117,9 @@ instance homologyProperty_isTriangulatedClosed₂ [P.IsClosedUnderIsomorphisms]
       ((homologyFunctor A 0).homologySequence_exact₃ T hT n (n + 1) rfl)
       (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
-/-- Blueprint `corollary-ambient-ind-derived--1`, general form: in the derived category
-of an abelian category, the complexes whose homology objects lie in a class containing zero,
-closed under isomorphisms, kernels, cokernels and extensions form a triangulated
-subcategory. -/
+/-- In the derived category of an abelian category, the complexes whose homology objects lie
+in a class containing zero, closed under isomorphisms, kernels, cokernels and extensions form a
+triangulated subcategory. -/
 instance homologyProperty_isTriangulated [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] :
     (homologyProperty P).IsTriangulated where
@@ -130,7 +127,7 @@ instance homologyProperty_isTriangulated [P.ContainsZero] [P.IsClosedUnderIsomor
 variable {P}
 
 /-- The truncation `τ^{≤ n} M` of an object whose homology objects satisfy `P` has homology
-objects satisfying `P`: they are those of `M` in degrees `≤ n`, and zero above. -/
+objects satisfying `P`. -/
 lemma homologyProperty_truncLE [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     {M : DerivedCategory A} (hM : homologyProperty P M) (n : ℤ) :
     homologyProperty P ((TStructure.t.truncLE n).obj M) := by
@@ -145,7 +142,7 @@ lemma homologyProperty_truncLE [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
   · exact P.prop_of_isZero (isZero_of_isLE _ n _ (by lia))
 
 /-- The truncation `τ^{≥ n} M` of an object whose homology objects satisfy `P` has homology
-objects satisfying `P`: they are those of `M` in degrees `≥ n`, and zero below. -/
+objects satisfying `P`. -/
 lemma homologyProperty_truncGE [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
     {M : DerivedCategory A} (hM : homologyProperty P M) (n : ℤ) :
     homologyProperty P ((TStructure.t.truncGE n).obj M) := by

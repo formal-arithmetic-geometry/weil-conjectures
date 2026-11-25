@@ -16,7 +16,9 @@ Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with 
 `Λ` a Noetherian ring. If `K ∈ D(X_ét, Λ)` has Tor amplitude in `[a, b]` and is killed by a
 nonzero integer `N`, then `Rf_* K` has Tor amplitude in `[a, b + 2d]`
 (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_nsmul_id_eq_zero`). This is the
-case of blueprint `sk-thm-sf-direct-image-tor-amplitude` used at the integral coefficient stage.
+case used at the integral coefficient stage.
+
+## Implementation details
 
 The proof follows the one for finite coefficients
 (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_finite`), with two changes:
@@ -24,8 +26,7 @@ The proof follows the one for finite coefficients
 * the bound `Rf_* D^{≤ n} ⊆ D^{≤ n + 2d}` is only available for bounded complexes killed by `N`
   (`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_nsmul_id_eq_zero`); the complexes
   `K ⊗ᴸ M_X` met in the way-out argument proving the projection formula for a finitely generated
-  `M` (blueprint `proposition-open-direct-image-preserves-finite--1`) are of this kind, by the Tor
-  amplitude of `K`;
+  `M` are of this kind, by the Tor amplitude of `K`;
 * the residue test is replaced by the test on finitely generated constant sheaves
   (`AlgebraicGeometry.Etale.torAmplitudeIn_of_forall_finite_constantSheaf`).
 -/
@@ -65,17 +66,13 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] {X Y : Scheme.
   (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
 
 include hf hd in
-/-- Blueprint `proposition-open-direct-image-preserves-finite--1`: The projection formula with a
-finitely presented constant coefficient, for Noetherian coefficients and complexes killed by an
-integer.
+/-- The projection formula with a finitely presented constant coefficient, for Noetherian
+coefficients and complexes killed by an integer.
 
 Let `f : X ⟶ Y` be a morphism of `k`-schemes of finite type with `dim X ≤ d`, `Λ` a Noetherian
 ring, `K ∈ D(X_ét, Λ)` of Tor amplitude in `[a, b]` and killed by a nonzero integer `N`, and `M`
 a finitely generated `Λ`-module. Then the projection map `Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is
-an isomorphism. The proof is the way-out argument of
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle`: both
-sides vanish above `b + 2d`, as `K` and the `K ⊗ᴸ M'_X` are bounded and killed by `N`
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_nsmul_id_eq_zero`). -/
+an isomorphism. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nsmul_id_eq_zero
     [IsNoetherianRing Λ] {a b : ℤ}
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (N : ℕ)
@@ -121,17 +118,11 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nsmul
       isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_pi Λ f K n⟩
 
 include hf hd in
-/-- Blueprint `sk-thm-sf-direct-image-tor-amplitude`: Direct image with finite Tor amplitude,
-for Noetherian coefficients.
+/-- Direct image with finite Tor amplitude, for Noetherian coefficients.
 
 Let `f : X ⟶ Y` be a morphism of `k`-schemes of finite type with `dim X ≤ d`, `Λ` a Noetherian
 ring and `K ∈ D(X_ét, Λ)` of Tor amplitude in `[a, b]`, killed by a nonzero integer `N`. Then
-`Rf_* K` has Tor amplitude in `[a, b + 2d]`. For a finitely generated `Λ`-module `M`, the
-projection formula
-(`isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nsmul_id_eq_zero`)
-gives `Rf_* K ⊗ᴸ M_Y ≅ Rf_*(K ⊗ᴸ M_X)`, which has homology in `[a, b + 2d]`; and Tor amplitude
-is tested on finitely generated constant sheaves
-(`AlgebraicGeometry.Etale.torAmplitudeIn_of_forall_finite_constantSheaf`). -/
+`Rf_* K` has Tor amplitude in `[a, b + 2d]`. -/
 theorem torAmplitudeIn_rightDerivedLowerStar_of_nsmul_id_eq_zero [IsNoetherianRing Λ] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (N : ℕ)
     [NeZero N] (hN : N • 𝟙 K = 0) (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :

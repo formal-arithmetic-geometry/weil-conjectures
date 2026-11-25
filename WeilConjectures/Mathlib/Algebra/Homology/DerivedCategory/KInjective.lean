@@ -34,8 +34,7 @@ namespace CochainComplex.IsKInjective
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
 /-- Two K-injective resolutions `s : K ⟶ I`, `t : K ⟶ J` of the same complex are isomorphic in
-the homotopy category: the isomorphism `Q(I) ≅ Q(K) ≅ Q(J)` of the derived category lifts,
-since `Qh` is bijective on morphisms with K-injective target. -/
+the homotopy category. -/
 theorem nonempty_iso_quotient_obj {K I J : CochainComplex C ℤ} (s : K ⟶ I) (t : K ⟶ J)
     [QuasiIso s] [QuasiIso t] [I.IsKInjective] [J.IsKInjective] :
     Nonempty ((HomotopyCategory.quotient C (.up ℤ)).obj I ≅
@@ -52,10 +51,7 @@ theorem nonempty_iso_quotient_obj {K I J : CochainComplex C ℤ} (s : K ⟶ I) (
 
 /-- **Resolution independence.** If `s : K ⟶ I` and `t : K ⟶ J` are two K-injective resolutions
 of a cochain complex `K` and `G` is an additive functor, then `Hᵠ(G(I)) ≅ Hᵠ(G(J))` for every
-`q`: the two resolutions are homotopy equivalent, and `G` preserves homotopies. For
-`G = Γ(T, -)` and `K = F[0]` this says that the étale cohomology groups `Hᵠ(T_ét, F)` do not
-depend on the chosen K-injective resolution of `F`.
-(blueprint: `prop-weil-pbc-cohomology-resolution-independent`) -/
+`q`. -/
 theorem nonempty_homology_iso {D : Type*} [Category* D] [Abelian D] (G : C ⥤ D) [G.Additive]
     {K I J : CochainComplex C ℤ} (s : K ⟶ I) (t : K ⟶ J) [QuasiIso s] [QuasiIso t]
     [I.IsKInjective] [J.IsKInjective] (q : ℤ) :
@@ -70,7 +66,7 @@ theorem nonempty_homology_iso {D : Type*} [Category* D] [Abelian D] (G : C ⥤ D
     (HomotopyCategory.homologyFunctorFactors D (.up ℤ) q).app _⟩
 
 /-- A morphism between K-injective complexes in the homotopy category is an isomorphism as soon
-as its image in the derived category is: `Qh` is fully faithful on K-injective complexes. -/
+as its image in the derived category is. -/
 theorem isIso_of_isIso_Qh_map {I J : CochainComplex C ℤ} [I.IsKInjective] [J.IsKInjective]
     (f : (HomotopyCategory.quotient C (.up ℤ)).obj I ⟶ (HomotopyCategory.quotient C (.up ℤ)).obj J)
     [IsIso (Qh.map f)] : IsIso f := by

@@ -16,8 +16,19 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 /-!
 # Conormal stabilization by zero variables
 
-Source: Stacks Project, Tag 07EZ, proof of part (e), stabilization paragraph
-(blueprint: lem-weil-pbc-zero-variable-conormal-stabilization).
+Adjoining `r` variables sent to zero to a presentation adds `r` free summands to its
+(localized) conormal module.
+
+## Implementation details
+
+The presentation of `A` over itself with `r` variables sent to zero and relations `X_i` is
+submersive with identity Jacobian, so its conormal module is `A^r`. Setting the new variables to
+zero gives a retraction of the first map in the conormal exact sequence for the composed
+presentation, which therefore splits.
+
+## References
+
+* Stacks Project, Tag 07EZ, proof of part (e), stabilization paragraph.
 -/
 
 @[expose] public section
@@ -151,26 +162,7 @@ private noncomputable def zeroCompCotangentEquiv
     Q.cotangentEquiv)
 
 /-- Adjoining exactly `r` variables sent to zero adds `r` free summands to the
-localized conormal module. No freeness hypothesis on the old module is needed.
-
-Source: Stacks Project, Tag 07EZ, proof of part (e), stabilization paragraph
-(blueprint: lem-weil-pbc-zero-variable-conormal-stabilization).
-
-Proof: construct the presentation Q of A over itself with r variables sent to zero
-and relations X_i. Polynomial induction shows that the X_i generate its kernel.
-Its Jacobian matrix is the identity, so Mathlib's submersive-presentation conormal
-isomorphism identifies Cotangent(Q) with A^r. Compose Q with the old presentation.
-Mathlib's conormal exact sequence for composed generators gives
-A ⊗_A Cotangent(P₀) → Cotangent(Q.comp P₀) → Cotangent(Q) → 0.
-Setting the new variables to zero gives a homomorphism back to P₀ whose composite
-with the inclusion of the old variables is the identity. Functoriality of conormal
-maps and the tensor unit isomorphism therefore give a retraction of the first map.
-Split the exact sequence using this retraction and identify its two factors with
-Cotangent(P₀) and A^r. Reindex variables and relations by Fin (n₀+r) and Fin (m₀+r);
-the inverse renaming homomorphisms induce inverse conormal maps. Tensor the resulting
-equivalence with A_a, distribute tensor over the product, and identify A_a ⊗_A A^r
-with (A_a)^r. All steps allow r=0 and zero rings or zero localizations. Only
-existential theorem data are produced. -/
+localized conormal module. No freeness hypothesis on the old module is needed. -/
 theorem exists_zero_variable_presentation_localized_cotangent_equiv
     (R : Type u) (A : Type v) [CommRing R] [CommRing A] [Algebra R A]
     (a : A) {n₀ m₀ : ℕ} (P₀ : Presentation R A (Fin n₀) (Fin m₀)) (r : ℕ) :

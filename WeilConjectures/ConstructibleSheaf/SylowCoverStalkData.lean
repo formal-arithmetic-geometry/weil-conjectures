@@ -20,6 +20,29 @@ import WeilConjectures.ConstructibleSheaf.ConnectedTorsorSubgroupQuotient
 import WeilConjectures.ConstructibleSheaf.ConnectedTorsorModuleDescent
 import Mathlib.GroupTheory.Sylow
 
+/-!
+# Sylow covers of finite locally constant sheaves
+
+A finite locally constant sheaf `G` of `ZMod ℓ`-modules on a connected scheme `U` becomes, after
+pullback along a connected finite étale cover `V ⟶ U` of degree prime to `ℓ`, the sheaf
+associated with a finite-dimensional representation of a finite `ℓ`-group.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data`
+
+## Implementation details
+
+The finite monodromy correspondence gives a connected finite `Q`-torsor on which `G` is
+constant. For an `ℓ`-Sylow subgroup `H` of `Q`, the subgroup quotient gives the cover `V ⟶ U`,
+of degree `[Q : H]`, and a connected `H`-torsor over `V` with the same total space. Module
+descent along this `H`-torsor produces the representation and the associated-sheaf functor.
+
+## References
+
+- Stacks Project, Tags 0A3R, 0DV5 and 0DV6.
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -28,25 +51,12 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 open Etale
 
-/-- Construct the Sylow cover and the associated-sheaf functor with its stalk description.
-Source: Stacks Project, Tags 0A3R, 0DV5 and 0DV6.
-(blueprint: lem-weil-pbc-sylow-cover-stalk-data)
-
-Proof:
-1. The finite monodromy correspondence gives a connected finite Q-torsor c on
-which G is constant with a finite-dimensional coefficient module A.
-2. Choose an l-Sylow subgroup H of Q. The subgroup quotient gives a connected
-finite etale v : V -> U, all of whose geometric fibres have cardinality [Q:H],
-and a connected H-torsor cH with total space isomorphic to that of c over U.
-Mathlib's Sylow theorem says H is an l-group and l does not divide its index.
-3. Compose the pullback composition isomorphisms with the total-space isomorphism
-and the constant-sheaf pullback isomorphism. This transports the trivialization
-of c*G to a trivialization of cH*(v*G) by the same A. Module descent on this
-connected torsor recovers M from that trivialization and constructs the additive
-associated-sheaf functor T, its natural stalk comparisons, and both object
-comparisons. Thus M and v*G are related by their common descent datum.
-For G = 0 the monodromy torsor can be the identity with Q = 1 and A = 0.
-No preservation of global finite limits or colimits is asserted here. -/
+/-- **Sylow cover of a finite locally constant sheaf.** For a finite locally constant sheaf `G`
+of `ZMod ℓ`-modules on a connected scheme `U`, there is a connected finite étale `v : V ⟶ U`
+whose geometric fibres all have cardinality `d` prime to `ℓ`, a finite `ℓ`-group `P`, a
+finite-dimensional representation `M` of `P` and an additive functor `T` from representations
+of `P` to sheaves on `V_ét`, compatible with stalks, such that `T M ≅ v^* G` and `T` sends the
+trivial representation to the constant sheaf. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_sylow_cover_stalk_data
     {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

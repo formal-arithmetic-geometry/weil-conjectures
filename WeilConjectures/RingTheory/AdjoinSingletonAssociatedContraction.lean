@@ -20,9 +20,13 @@ import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
 /-!
 # Contraction of associated primes of a fractional monogenic principal quotient
 
-Source: Stacks Project, Algebra, Tag 0334, Step 5, the quotient presentation and
-associated-prime comparison used to verify (2) and (3)(a).
-(blueprint: lem-weil-pbc-monogenic-associated-contraction).
+Let `R` be a Noetherian normal domain with fraction field `K`, `0 ≠ x ∈ K` and `S = R[x]`.
+Associated primes of `S_m / x S_m` contract to associated primes of `R / (R ∩ xR)`.
+
+## References
+
+* [Stacks Project, Tag 0334], Step 5
+* [Stacks Project, Tag 00PQ], [Stacks Project, Tag 0310]
 -/
 
 @[expose] public section
@@ -76,31 +80,9 @@ private theorem base_mem_principal_iff
     apply Subtype.ext
     simpa only [Subalgebra.coe_mul, Subalgebra.coe_algebraMap, Algebra.smul_def] using hc
 
-/-- Associated primes of the localized monogenic principal quotient contract to
-associated primes of the fractional principal quotient of the base domain.
-
-Source: Stacks Project, Algebra, Tag 0334, Step 5, the paragraphs identifying
-`S/xS = R/J` and contracting associated primes; Tag 00PQ and Tag 0310.
-(blueprint: lem-weil-pbc-monogenic-associated-contraction).
-
-Proof:
-1. Put `S = R[x]` and `J = R ∩ xR`. The map `R → S/xS` is surjective:
-   adjoin induction reduces this to constants, sums, products and the generator,
-   whose image is zero.
-2. Its kernel is `J`. One inclusion is immediate. For the other, write a constant
-   `r` in `xS` as `r = x f(x)` and put `P = C r - X f`. If `r = 0`, membership
-   in `J` is automatic. Otherwise `P` has constant coefficient `r`; its reverse
-   polynomial vanishes at `x⁻¹` and has leading coefficient `r`. Tag 00PQ says
-   `r/x` is integral over `R`, hence in `R` by normality. Thus `r ∈ xR`.
-   The first isomorphism theorem now gives `R/J ≃ S/xS`.
-3. Let `p` be the given associated prime of `S_m/xS_m`, and contract it to
-   `qS` in `S`. The quotient `S_m/xS_m` is the localization of `S/xS`.
-   Since `S` is Noetherian and `S/xS` is finite, associated primes commute
-   with localization (Tag 0310), so `qS` is associated to `S/xS`.
-4. Choose a nonzero class whose annihilator over `S` is `qS`. Its annihilator
-   over `R` is `qS ∩ R`; transport the class across the isomorphism of step 2.
-   Hence `qS ∩ R` is associated to `R/J`. If the principal quotient is zero,
-   there are no associated primes and the assertion is vacuous. -/
+/-- Let `R` be a Noetherian normal domain with fraction field `K`, `0 ≠ x ∈ K` with `R[x]`
+Noetherian, and `m` a maximal ideal of `R[x]` containing `x`. Every associated prime of
+`R[x]_m / (x)` contracts to an associated prime of `R / (R ∩ xR)`. -/
 theorem adjoin_singleton_associated_contraction
     (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [IsNoetherianRing R] [Field K] [Algebra R K] [IsFractionRing R K]

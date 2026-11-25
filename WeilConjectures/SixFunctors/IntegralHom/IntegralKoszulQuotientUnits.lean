@@ -14,8 +14,22 @@ import all WeilConjectures.DeligneLaumon.QuotientTensorScalarTowerComparison
 
 /-! # Koszul quotient comparisons preserve units
 
-Source: the finite-free quotient resolution in the first paragraph of the current
-blueprint `lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY, 08J7 and 07A6.
+We show that, on a K-flat representative `P`, the strict Koszul replacement of the reduction
+tower is isomorphic to the integral reduction tower of `P`, compatibly with the quotient units
+at every level.
+
+## Implementation details
+
+The cone inclusion followed by its quotient augmentation is the degree-zero quotient map (by
+`mappingCone.inr_descShortComplex` and `cokernel.π_desc`). Tensoring with `P` and using the
+pure-tensor formula for scalar normalization identifies its composite with the scalar-extension
+unit. Tensoring the Koszul augmentation with the K-flat `P` is a quasi-isomorphism, so its
+localization and the scalar tower isomorphism give the comparison. No boundedness of `P` is
+needed.
+
+## References
+
+* Stacks Project, Tags 06YY, 08J7, 07A6.
 -/
 
 @[expose] public section
@@ -142,20 +156,9 @@ private theorem scalarReductionTowerIso_hom_app
 
 attribute [local irreducible] scalarReductionTowerIso
 
-/-- On a K-flat representative the strict Koszul comparison preserves quotient units.
-
-Source: the finite-free quotient resolution in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY and 07A6
-(blueprint: lem-sf-integral-koszul-quotient-units).
-
-Proof: the cone inclusion followed by its quotient augmentation is the degree-zero
-quotient map, by `mappingCone.inr_descShortComplex` and `cokernel.π_desc`.
-Tensor this identity with P. The pure-tensor formula for scalar normalization
-identifies its composite with the actual scalar-extension unit. Tensoring the
-Koszul augmentation with K-flat P is a quasi-isomorphism, so its localization
-and the scalar tower isomorphism give the desired isomorphism. Mapping the
-unit identity through localization proves compatibility at every level.
-This uses exponent n+1 and applies without boundedness of P, including P=0. -/
+/-- On a K-flat representative `P` the strict Koszul comparison preserves quotient units:
+there is an isomorphism from the Koszul source tower of `P` to the integral reduction tower
+of `P` carrying the level unit to the integral tower unit at every level `n`. -/
 theorem integralReductionTower_koszul_quotient_units
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

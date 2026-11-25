@@ -12,7 +12,24 @@ import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicSiteHomTransport
 
 /-! # A component of finite Hom site descent
 
-Source: blueprint `lem-coef-finite-hom-site-descent`, final site comparison argument.
+The comparison from the inverse image of the etale Hom to the intrinsic Hom is invertible on
+a finite-Tor constructible first input and a bounded constructible second input.
+
+## Main results
+
+- `finiteHomSiteHomInvertible`
+
+## Implementation details
+
+Ordinary finite duality and `intrinsicSiteHom_transport` give an object isomorphism from the
+inverse image of the etale Hom to the intrinsic Hom of the two inverse images. The derived
+inverse image is fully faithful (finite primary unbounded comparison, composed with the exact
+realization equivalence). For a fully faithful functor with an invertible tensor comparison,
+transposition identifies postcomposition by the canonical Hom comparison with a bijection on
+Hom sets from every object in its image; testing at the inverse image of the etale Hom, the
+object isomorphism and surjectivity give a right inverse and injectivity the left inverse.
+Thus the specified arrow itself is invertible, without choosing an evaluation-normalized
+presentation isomorphism.
 -/
 
 @[expose] public section
@@ -95,22 +112,7 @@ attribute [local irreducible] coefficientBaseChangeHom finiteHomEtaleClosed
   finiteIntrinsicClosed finiteHomNuTensor
 
 /-- The specified evaluation comparison into the intrinsic category is invertible
-on a finite-Tor constructible first input and bounded constructible second input.
-Source: blueprint `lem-coef-finite-hom-site-descent`, proof step 5; finite-duality
-site comparison (blueprint: lem-coef-finite-hom-site-hom-invertible).
-
-Proof: ordinary finite duality and intrinsicSiteHom_transport give an object
-isomorphism from inverse image of the etale Hom to the intrinsic Hom of the two
-inverse images. The derived inverse image is fully faithful: apply finite primary
-unbounded comparison, compose with the exact realization equivalence, and use the
-exact-derived composition isomorphism. For any fully faithful functor with an
-invertible tensor comparison, transposition and its Hom bijections identify
-postcomposition by the canonical Hom comparison with a bijection on Hom sets
-from every object in its image. Test at the inverse image of the etale Hom. The
-object isomorphism and surjectivity provide a right inverse to the canonical
-comparison; injectivity then gives the left inverse. Thus the actual specified
-arrow is invertible, without choosing an evaluation-normalized presentation
-isomorphism. The second input only requires bounded constructibility. -/
+on a finite-Tor constructible first input and bounded constructible second input. -/
 theorem finiteHomSiteHomInvertible
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
