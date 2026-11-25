@@ -174,7 +174,6 @@ section Basic
 Elementary facts about proper morphisms and closed immersions, recorded under findable names;
 all of them are instances or direct consequences of results of Mathlib. -/
 
-
 variable {X Y Z : Scheme.{u}}
 
 /-- A closed immersion is proper. -/

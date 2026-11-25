@@ -183,7 +183,6 @@ finite presentation and smooth at `x : X`. Then there are `d : ℕ` and affine o
 `V ∋ x` and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U` such that `g.resLE U V hVU` factors as an étale
 morphism `e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`:
 
-
 ```
 V --e--> 𝔸(d; U)
  \          |

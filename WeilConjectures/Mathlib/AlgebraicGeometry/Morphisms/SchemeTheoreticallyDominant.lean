@@ -112,7 +112,6 @@ definition of scheme-theoretic density; for a quasi-compact open immersion `j : 
 formulation "`𝒪_X → j_* 𝒪_U` is injective".
 -/
 
-
 @[expose] public section
 
 noncomputable section
