@@ -18,8 +18,19 @@ import Mathlib.RingTheory.Localization.Submodule
 /-!
 # Uniform containment of local maximal-ideal powers
 
-Source: Stacks Project, Tags 07N9 and 0394.
-(blueprint: lem-weil-pbc-local-tensor-quotient-power-bound)
+For `S` finite over a Noetherian ring `R` and a prime `p`, one positive exponent `c` satisfies
+`N_q^c ⊆ m S_q` for all primes `q` of `S` over `p`, where `N_q` is the maximal ideal of `S_q`.
+
+## Implementation details
+
+The closed fibre of `R_p ⊗_R S` is Artinian with finitely many primes, corresponding to the `q`.
+Each `S_q/m S_q` is Artinian local, so `m S_q` has radical `N_q`, and some power of the finitely
+generated `N_q` lies in `m S_q`. Take the maximum of these exponents and one.
+
+## References
+
+* [Stacks, Tag 0394] (radical-power argument)
+* [Stacks, Tag 07N9] (finite fibre)
 -/
 
 @[expose] public section
@@ -27,19 +38,7 @@ Source: Stacks Project, Tags 07N9 and 0394.
 universe u v
 namespace AdicCompletion
 
-/-- One positive exponent works for all primes over a fixed base prime.
-Source: Stacks Project, Tag 0394 (radical-power argument) and Tag 07N9 (finite fibre).
-(blueprint: lem-weil-pbc-local-tensor-quotient-power-bound)
-
-Proof: Set A = R_p and B = A tensor_R S. B is finite over the Noetherian local
-ring A. Its closed fibre is a finite-dimensional algebra over A/m, hence Artinian.
-Its finitely many primes correspond to Q = p.primesOver S. For q in Q, localizing
-this fibre gives S_q/mS_q, an Artinian local ring. Thus its only prime is its maximal
-ideal, so the radical of mS_q is N_q. The ring S_q is Noetherian, hence N_q is finitely
-generated. The radical-power lemma gives c_q with N_q^c_q contained in mS_q.
-Increase c_q to at least one. Take c to be the maximum of one and these finitely
-many exponents. Ideal powers decrease with the exponent, so c works for every q.
-When Q is empty take c = 1; the containment is vacuous. -/
+/-- One positive exponent works for all primes over a fixed base prime. -/
 theorem local_tensor_quotient_power_bound
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

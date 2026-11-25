@@ -9,8 +9,21 @@ module
 public import WeilConjectures.RingTheory.KoszulConormalComparison
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 
-/-! Auxiliary linear independence and spanning result for conormal generators.
-(blueprint: lem-sc-koszul-conormal-basis-data)
+/-!
+# Linear independence and spanning of conormal generators
+
+The conormal classes of a Koszul-regular generating sequence are linearly independent and span
+the cotangent module.
+
+## Implementation details
+
+The cotangent module is identified with the cokernel of the second Koszul differential after
+tensoring with `A ⧸ I`. Vanishing of `H_1` shows that every coefficient of a relation among the
+generators lies in `I`, since the contraction of `e_i ∧ e_j` is `f_i e_j - f_j e_i`.
+
+## References
+
+* [Stacks, Tag 062I]
 -/
 
 @[expose] public section
@@ -46,23 +59,7 @@ private theorem boundary_two
   rfl
 
 /-- Every coefficient of an exact relation of an H₁-regular sequence belongs to
-its generated ideal.
-
-Source: Stacks Project, Tag 062I, first paragraph, the displayed exact sequence.
-
-Proof: identify degree one of the Koszul complex with the free module using
-`exteriorPower.oneEquiv`. The inclusion of degree zero into the exterior
-algebra is injective, and contraction of a vector is its linear combination
-embedded by `algebraMap`.
-The degree-one differential is the linear combination with coefficients `f`.
-Thus the vector with coordinates `a` is a cycle. Vanishing of first homology
-expresses it as a boundary of an element of the second exterior power.
-This exterior power is spanned by wedges of two basis vectors. Contraction
-sends `e_i ∧ e_j` to `f_i e_j - f_j e_i`, whose coordinates all belong to
-`Ideal.span (Set.range f)`. The submodule of vectors with coordinates in that
-ideal is closed under sums and scalar multiplication, so every boundary,
-and hence every coordinate of `a`, belongs to that ideal. This also covers
-the empty sequence and the zero ring. -/
+its generated ideal. -/
 private theorem koszulRelation_coefficients_mem
     (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsH1Regular f)
@@ -171,13 +168,6 @@ private theorem conormal_generators_span
 
 /-- The conormal classes of a Koszul-regular generating sequence are linearly
 independent and span the cotangent module.
-
-Source: Stacks Project, More on Algebra, Tag 062I, first paragraph of the proof.
-The proof identifies the cotangent module with the cokernel of the second
-Koszul differential after tensoring with `A ⧸ I`; regularity makes the kernel
-of the generator map equal to that image, while every coefficient of that
-differential lies in `I`, so the induced map has zero source differential.
-(blueprint: lem-sc-koszul-conormal-basis-data)
 -/
 theorem koszulConormalVector_linearIndependent_and_span
     (A : Type u) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)

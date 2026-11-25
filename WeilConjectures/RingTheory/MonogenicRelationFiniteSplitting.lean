@@ -15,8 +15,22 @@ import WeilConjectures.RingTheory.NagataDomainN2
 import WeilConjectures.RingTheory.FiniteOverNagata
 
 /-! # Monogenic residue polynomial and finite splitting data
-Source: Stacks Project, Algebra, Tag 0334, Step 5.
-(blueprint: lem-weil-pbc-monogenic-relation-finite-splitting). -/
+
+A monic relation `f(x) ∈ I` of a monogenic algebra `R[x]` over a normal Nagata domain splits
+after passing to a finite normal Nagata coefficient extension `R'`, with `R'[z]` finite over
+`R[x]`.
+
+## Implementation details
+
+`R'` is the integral closure of `R` in a splitting field of `f`, which is finite by N-2, normal
+and Nagata; the roots are integral since `f` is monic. Module generators of `R'` over `R` generate
+`R'[z]` over `R[x]`. The splitting field is built over `Frac(R)` to stay in the universe of `R`
+and `K`.
+
+## References
+
+* [Stacks, Tag 0334] (step 5)
+-/
 
 @[expose] public section
 
@@ -25,22 +39,7 @@ universe u
 open scoped TensorProduct nonZeroDivisors
 
 /-- Split a given monic relation by a finite normal Nagata coefficient extension.
-The ideal need not be prime or maximal; evaluation membership is transported by the map.
-Source: Stacks Project, Algebra, Tag 0334, Step 5.
-(blueprint: lem-weil-pbc-monogenic-relation-finite-splitting).
-
-Proof: Choose a finite splitting field L of f mapped to K. The roots are integral
-over R because f is monic. The integral closure R' of R in L is finite by the N-2
-condition, normal with fraction field L, and Nagata by finite ascent. Every root
-belongs to R', and the factorization in L descends to R'[X] by injectivity. Write
-z for the image of x and map R[x] injectively into R'[z]. To see finiteness, take
-finite R-module generators b_i of R'. Every polynomial in z with coefficients in
-R' is a sum of b_i times polynomials in z with coefficients in R, so these b_i
-generate R'[z] over R[x]. Map f coefficientwise to R'. Evaluation commutes with
-this map and the map R[x] to R'[z], so its evaluation belongs to the extension
-of I. Mapping through the injective coefficient map preserves monicity and degree.
-Use Frac(R) as the splitting-field base, so the constructed coefficient ring and
-field stay in the same universe as R and K. -/
+The ideal need not be prime or maximal; evaluation membership is transported by the map. -/
 theorem exists_monogenic_relation_finite_splitting
     (R : Type u) (K : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [Field K] [Algebra R K] [IsFractionRing R K] (hR : IsNagataRing R) (x : K)

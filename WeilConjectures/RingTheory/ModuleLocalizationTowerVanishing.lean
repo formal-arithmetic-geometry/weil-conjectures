@@ -22,8 +22,13 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 /-!
 # Localization detects vanishing of the multiplication tower
 
-Source: Stacks Project, More on Algebra, Tag 091P, equivalence (1) and (3)
-(auxiliary; not a blueprint node).
+For an `ℕ`-indexed diagram `E` in an abelian category, the telescope sequence
+`0 → ⨁ E_n → ⨁ E_n → colim E → 0`, with first map `1 - shift`, is short exact. This is used to
+show that localization detects vanishing of a multiplication tower.
+
+## References
+
+* [Stacks, Tag 091P] (equivalence of (1) and (3))
 -/
 
 @[expose] public section

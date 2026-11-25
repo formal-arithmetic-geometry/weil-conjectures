@@ -25,13 +25,22 @@ import Mathlib.Algebra.Homology.SingleHomology
 /-!
 # Duality for a Koszul-regular quotient
 
-Source: Stacks Project, duality.tex, Tag 0BQZ, lemma-regular-immersion-ext, local
-Koszul computation (blueprint: lem-sc-koszul-regular-sequence-dual-complex).
+For a Koszul-regular sequence generating `I ⊆ A`, the dual Koszul complex is quasi-isomorphic to
+`⋀^r N[-r]`, where `N` is the normal module, and this gives a generator-independent
+identification of `Ext^r_A(A/I, A)`.
 
-The comparison is normalized by the determinant pairing on the conormal module,
-with the sign `(-1)^(r*(r-1)/2)` from the ordered contraction composition in Stacks.
-A complex supported in degree `r` represents `⋀^r N[-r]`. The Ext comparison is
-specified on roofs from the Koszul resolution, so it is independent of generators.
+## Implementation details
+
+The comparison is normalized by the determinant pairing on the conormal module, with the sign
+`(-1)^(r*(r-1)/2)` from the ordered contraction composition in Stacks. A complex supported in
+degree `r` represents `⋀^r N[-r]`. The Ext comparison is specified on roofs from the Koszul
+resolution, so it is independent of generators.
+
+The proofs follow four steps: Koszul-regularity makes the Koszul complex a resolution of
+`A/I`; the complementary exterior-power pairing identifies the signed dual complex with the
+shifted Koszul complex, so only degree `r` survives; reduction modulo `I` identifies the
+surviving cohomology with the determinant of the dual conormal module; and the formulas commute
+with localization and with determinant changes of generators.
 
 ## Main statements
 
@@ -41,6 +50,10 @@ specified on roofs from the Koszul resolution, so it is independent of generator
 * `exists_intrinsic_koszul_ext_determinant`: the generator-independent Ext identification.
 * `koszul_conormal_comparison_change_generators`: change-of-resolution compatibility.
 * `koszul_conormal_comparison_localization`: compatibility with arbitrary localization.
+
+## References
+
+* [Stacks, Tag 0BQZ]
 -/
 
 @[expose] public section
@@ -133,20 +146,7 @@ private theorem conormalVector_surjective
   apply LinearMap.range_eq_top.mp
   simpa only [koszulConormalVector, Finsupp.range_linearCombination] using hspan
 
-/-- The uniquely normalized comparison is a quasi-isomorphism.
-Source: Stacks Project, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-
-Proof: (1) Koszul-regularity makes the finite free Koszul complex a resolution of
-`A/I`, using `def-weil-pbc-koszul-complex` and `def-weil-pbc-koszul-regular-sequence`.
-(2) The determinant pairing of `lem-sc-exterior-power-dual-pairing` identifies the
-complementary exterior-power duals. (3) Evaluation on the top wedge identifies the
-signed dual complex with the shifted Koszul complex; correct an anticommuting map
-by a degreewise sign when the length is even. Thus only degree `r` survives.
-(4) Reduction modulo `I` identifies the surviving classes with the determinant of
-the dual conormal module. Ordered contractions on the top wedge contribute
-`(-1)^(r*(r-1)/2)`; this evaluation formula fixes the comparison uniquely.
-The formulas commute with localization and determinant changes of generators. -/
+/-- The uniquely normalized comparison is a quasi-isomorphism. -/
 theorem exists_unique_koszul_conormal_comparison
     (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :
@@ -175,17 +175,9 @@ theorem exists_unique_koszul_conormal_comparison
 
 /-- The canonical comparison `φ`, extended by zero to integer degrees, becomes an
 isomorphism in `D(A)` onto the determinant placed in degree `r`; all cohomology
-vanishing outside degree `r`, and the degree-`r` identification as a `B`-module.
+vanishes outside degree `r`, and the degree-`r` cohomology is identified as a `B`-module.
 The restricted module `M` realizes the induced `B = A/I` action on cohomology;
-the last equality ties its isomorphism to the actual canonical comparison.
-Source: Stacks Project, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-
-Proof: Steps 1--3 of the node identify the dual with the shifted Koszul resolution,
-so the only cohomology is in degree `r`. Step 4 identifies that cohomology with the
-dual conormal determinant by reduction modulo `I` and the determinant pairing.
-The normalized comparison is an `A`-linear quasi-isomorphism to the restriction
-of this `B`-module; its localization in `D(A)` is the asserted isomorphism. -/
+the last equality ties its isomorphism to the actual canonical comparison. -/
 theorem koszul_conormal_comparison_cohomology
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
     (I : Ideal A) (r : ℕ) (f : Fin r → A)
@@ -274,14 +266,7 @@ private theorem koszulBoundary_zero_formula
   exact LinearMap.congr_fun he x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The Koszul augmentation is a quasi-isomorphism to the quotient in degree zero.
-Source: Stacks Project, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-
-Proof: Step 1 uses Koszul-regularity to kill positive homology. Degree zero is the
-cokernel of `d₁`, whose image is the ideal generated by `f`; the augmentation is
-therefore the quotient map. Extension along `embeddingDownNat` puts degree `n`
-in cohomological degree `-n`, with zero terms outside the image. -/
+/-- The Koszul augmentation is a quasi-isomorphism to the quotient in degree zero. -/
 theorem exists_koszul_quotient_augmentation
     (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I) :
@@ -373,14 +358,7 @@ theorem exists_koszul_quotient_augmentation
   rw [hi]
   exact hq x
 
-/-- The intrinsic Ext determinant satisfies the normalized Koszul roof formula.
-Source: Stacks Project, Tag 0BQZ.
-(blueprint: lem-sc-koszul-ext-determinant-roof).
-Proof: choose one generating sequence and a roof-normalized Ext/dual-homology
-comparison. Compose it with the normalized conormal homology isomorphism.
-Represent an arbitrary Ext class on this fixed resolution. Independence of
-normalized roof values compares it with any other generating sequence, and the
-conormal comparison formula gives the required determinant evaluation. -/
+/-- The intrinsic Ext determinant satisfies the normalized Koszul roof formula. -/
 theorem intrinsic_ext_determinant_roof
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
     (I : Ideal A) (r : ℕ)
@@ -463,12 +441,7 @@ theorem intrinsic_ext_determinant_roof
         (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (-(r : ℤ))
           (ModuleCat.of A A)).hom) v
 
-/-- The intrinsic Ext determinant is linear for the quotient action.
-Source: Stacks Project, Tag 0BQZ.
-(blueprint: lem-sc-koszul-ext-determinant-multiplication).
-Proof: take the roof-normalized equivalence. Lift a quotient scalar to A;
-its multiplication endomorphism is the lift times the identity. Ext scalar
-composition and A-linearity give the restricted quotient action on the target. -/
+/-- The intrinsic Ext determinant is linear for the quotient action. -/
 theorem intrinsic_ext_determinant_multiplication
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
     (I : Ideal A) (r : ℕ)
@@ -498,10 +471,6 @@ theorem intrinsic_ext_determinant_multiplication
   rfl
 
 /-- The intrinsic Ext determinant isomorphism, normalized on every Koszul roof.
-Source: Stacks Project, Tag 0BQZ.
-(blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-The proof takes the roof-normalized equivalence and proves its quotient linearity
-by lifting quotient scalars to A and applying the Ext scalar-composition formulas.
 -/
 theorem exists_intrinsic_koszul_ext_determinant
     (A : Type uT) [CommRing A] [HasDerivedCategory.{uT + 1} (ModuleCat.{uT} A)]
@@ -560,14 +529,7 @@ theorem exists_intrinsic_koszul_ext_determinant
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The normalized comparisons commute with a change of Koszul generators.
-Source: Stacks Project, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-
-Proof: Step 4 uses the determinant change-of-generators identity. A map `t` lifting
-identity on the quotient induces the identity on conormal classes. Evaluating the
-two composites on wedges gives the same determinant pairing, hence the same value.
-This is the comparison of resolutions used in the intrinsic Ext isomorphism. -/
+/-- The normalized comparisons commute with a change of Koszul generators. -/
 theorem koszul_conormal_comparison_change_generators
     (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f g : Fin r → A)
     (hregf : RingTheory.Sequence.IsKoszulRegular f)
@@ -617,16 +579,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Localization preserves regularity and the determinant-normalized comparison.
 The maps `χ` and `ν` are the coefficient-extension maps on the degree-`r` dual
 and normal determinant. Their evaluation equations specify the canonical maps,
-and the last equation is the commutative comparison square. Since the comparison
-target has only degree `r`, this is the complete complex-level compatibility.
-Source: Stacks Project, Tag 0BQZ
-(blueprint: lem-sc-koszul-regular-sequence-dual-complex).
-
-Proof: Steps 1--3 use exact localization on the Koszul resolution, giving regularity
-of the localized sequence. Step 4 localizes the conormal determinant pairing.
-Its evaluation matrix is obtained by applying the localization ring map entrywise,
-so the determinant and top dual evaluations commute with that map. The two
-normalized comparison maps therefore give the asserted commutative square. -/
+and the last equation is the commutative comparison square. -/
 theorem koszul_conormal_comparison_localization
     (A : Type uT) [CommRing A] (I : Ideal A) (r : ℕ) (f : Fin r → A)
     (hreg : RingTheory.Sequence.IsKoszulRegular f) (hf : Ideal.span (Set.range f) = I)

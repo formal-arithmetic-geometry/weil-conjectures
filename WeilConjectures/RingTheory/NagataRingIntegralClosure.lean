@@ -11,9 +11,9 @@ public import WeilConjectures.RingTheory.NagataRing
 # Normalizations of quotients of Nagata rings
 
 For a Nagata ring `R` (`IsNagataRing`, [Stacks, Tag 032R]) the normalization of every `R / 𝔭`
-is finite (`IsNagataRing.finite_integralClosure_quotient`); this is the only consequence of
-excellence used in the blueprint for `lem-exc-punctured-curve-branches` (excellent rings are
-Nagata, [Stacks, Tag 07QV]).
+is finite (`IsNagataRing.finite_integralClosure_quotient`); this is the consequence of
+excellence used for the branches of punctured curves (excellent rings are Nagata,
+[Stacks, Tag 07QV]).
 
 Fields are Nagata (`IsNagataRing.of_field`).
 -/
@@ -31,8 +31,7 @@ theorem isNoetherianRing (hR : IsNagataRing R) : IsNoetherianRing R :=
   hR.1
 
 /-- In a Nagata ring `R`, the normalization of `R / 𝔭` (its integral closure in its fraction
-field) is a finite `R / 𝔭`-module for every prime `𝔭` ([Stacks, Tag 032R]). This is the
-finiteness of normalization used for `lem-exc-punctured-curve-branches`. -/
+field) is a finite `R / 𝔭`-module for every prime `𝔭`. -/
 theorem finite_integralClosure_quotient (hR : IsNagataRing R) (p : Ideal R) [p.IsPrime] :
     Module.Finite (R ⧸ p) (integralClosure (R ⧸ p) (FractionRing (R ⧸ p))) :=
   isN1_of_isN2 _ _ (hR.2 p)

@@ -17,8 +17,20 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 /-!
 # Local rings as directed colimits of essentially finite type rings
 
-Source: Stacks Project, Tag 00QU, proof (construction of the base-ring system).
-(blueprint: lemma-quasi-finite-coordinates--1)
+Every local ring is a directed colimit of local rings essentially of finite type over `ℤ`, with
+local transition and cocone maps.
+
+## Implementation details
+
+The system is indexed by finite subsets `A ⊆ R`; the stage ring is `ℤ[A]` localized at the
+contraction of the maximal ideal of `R`. Transitions and cocone maps are given by fraction
+formulas; the cocone maps are injective, so the colimit property is checked on representatives
+at a common stage, with the empty subset supplying zero and one.
+
+## References
+
+* [Stacks, Tag 00QU] (proof, construction of the base-ring system)
+* [Stacks, Tag 00QT]
 -/
 
 @[expose] public section
@@ -158,29 +170,7 @@ private noncomputable def localCoconeIsColimit (R : Type u) [CommRing R] [IsLoca
     rwa [localToRing_algebraMap] at he
 
 /-- Every local ring is a directed colimit in commutative rings of local rings essentially
-of finite type over `ℤ`, with local transition maps and local cocone maps.
-Source: Stacks Project, Tag 00QU, proof, base-ring construction; also Tag 00QT.
-(blueprint: lemma-quasi-finite-coordinates--1)
-
-Proof: Index by finite subsets `A` of `R`, including the empty subset; union supplies common
-upper bounds. Let `C_A = ℤ[A]` and contract the maximal ideal of `R` to a prime `q_A` of `C_A`.
-Localize `C_A` at `q_A` (def-weil-pbc-localization-at-prime). The resulting local ring `R_A`
-is essentially of finite type over `ℤ`, since `A` generates `C_A`
-(def-weil-pbc-finite-type-algebra, def-weil-pbc-essentially-finite-type-algebra).
-For `A ⊆ B`, the fraction map `a/s ↦ a/s` is well defined: any denominator and any witness
-of equality outside `q_A` remain outside `q_B`. This map preserves ring operations and
-sends the maximal ideal into the maximal ideal. Its formula gives identity and composition.
-Every denominator outside `q_A` is a unit in `R`
-(lem-weil-pbc-local-ring-unit-criterion), so `a/s ↦ a * s⁻¹` defines a local ring map to `R`.
-The fraction equality criterion proves well-definedness and compatibility. These maps are
-injective: equality of images implies `at - bs = 0` already in the subring `C_A`.
-Every `x : R` occurs at the singleton subset `{x}`. For any compatible cocone into any
-commutative ring `T`, send an element of `R` to its image from any stage representing it.
-Two representations agree in the union stage by injectivity into `R`, so this rule is
-independent of the representation. Using a common stage proves it preserves sums and
-products; the empty stage supplies zero and one. It factors the cocone maps and is unique
-by the singleton representations, proving the universal property
-(def-weil-pbc-category-colimit). -/
+of finite type over `ℤ`, with local transition maps and local cocone maps. -/
 theorem exists_local_essFiniteType_colimit (R : Type u) [CommRing R] [IsLocalRing R] :
     ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·))
       (F : I ⥤ CommRingCat.{u}) (π : F ⟶ (Functor.const I).obj (CommRingCat.of R)),

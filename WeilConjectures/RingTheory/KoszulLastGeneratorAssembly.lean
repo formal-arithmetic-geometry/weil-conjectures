@@ -13,8 +13,18 @@ import WeilConjectures.AlgebraicGeometry.KoszulComplex
 /-!
 # Assembly of the last-generator exterior-power summands
 
-Source: Stacks Project, Tags 0628 and 0629.
-(blueprint: lem-weil-pbc-koszul-last-generator-assembly).
+For a free module with an extra last generator, every exterior power splits as
+`⋀^(n+1) R^(r+1) ≃ ⋀^(n+1) R^r ⊕ ⋀^n R^r` via `(a, b) ↦ j(a) + e_last ∧ j(b)`.
+
+## Implementation details
+
+The inverse is `x ↦ (⋀(p)(x), ⋀(p)(contractLeft δ x))`, where `p` restricts to the prefix and
+`δ` is the last coordinate. Contraction by `δ` kills the exterior algebra of the prefix, and
+left induction proves `T(x) + e_last ∧ T(contractLeft δ x) = x` for `T = ⋀(j) ∘ ⋀(p)`.
+
+## References
+
+* [Stacks, Tags 0628, 0629]
 -/
 
 @[expose] public section
@@ -25,15 +35,11 @@ namespace ExteriorAlgebra
 
 variable (R : Type u) [CommRing R] (r : ℕ)
 
-/-- The prefix inclusion sends the standard generator `i` to `i.castSucc`.
-Source: Stacks Project, Tag 0628
-(blueprint: lem-weil-pbc-koszul-last-generator-assembly). -/
+/-- The prefix inclusion sends the standard generator `i` to `i.castSucc`. -/
 noncomputable def koszulPrefixInclusion : (Fin r →₀ R) →ₗ[R] Fin (r + 1) →₀ R :=
   Finsupp.lmapDomain R R Fin.castSucc
 
-/-- Wedge on the left with the final standard generator, after prefix inclusion.
-Source: Stacks Project, Tags 0628 and 0629
-(blueprint: lem-weil-pbc-koszul-last-generator-assembly). -/
+/-- Wedge on the left with the final standard generator, after prefix inclusion. -/
 noncomputable def koszulLastWedge (n : ℕ) :
     ⋀[R]^n (Fin r →₀ R) →ₗ[R] ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
   (LinearMap.codRestrict (⋀[R]^(n + 1) (Fin (r + 1) →₀ R))
@@ -46,9 +52,7 @@ noncomputable def koszulLastWedge (n : ℕ) :
       exact Submodule.mul_mem_mul (LinearMap.mem_range_self (ι R) _) x.property)).comp
     (exteriorPower.map n (koszulPrefixInclusion R r))
 
-/-- The explicit assembly map `(a,b) ↦ inclusion(a) + e_last ∧ inclusion(b)`.
-Source: Stacks Project, Tags 0628 and 0629
-(blueprint: lem-weil-pbc-koszul-last-generator-assembly). -/
+/-- The explicit assembly map `(a,b) ↦ inclusion(a) + e_last ∧ inclusion(b)`. -/
 noncomputable def koszulLastAssembly (n : ℕ) :
     (⋀[R]^(n + 1) (Fin r →₀ R) × ⋀[R]^n (Fin r →₀ R)) →ₗ[R]
       ⋀[R]^(n + 1) (Fin (r + 1) →₀ R) :=
@@ -178,25 +182,8 @@ private theorem exterior_split (x : ExteriorAlgebra R (Fin (r + 1) →₀ R)) :
     abel_nf
     simp only [mul_smul_comm, ← mul_assoc]
 
-/-- Source: Stacks Project, Tags 0628 and 0629, splitting the exterior algebra on
-adjoining the last generator
-(blueprint: lem-weil-pbc-koszul-last-generator-assembly).
-
-Proof: let `p` be restriction of a finitely supported vector to the prefix and
-let `δ` evaluate its last coordinate. Inclusion `j` and restriction satisfy
-`p ∘ j = id`, and `p(e_last)=0`. Define the inverse on degree `n+1` by
-`x ↦ (Λ^(n+1)(p)(x), Λ^n(p)(contractLeft δ x))`. Contraction kills the exterior
-algebra of the prefix: prove this by left induction using its defining Leibniz
-rule. Consequently contracting `j(a) + e_last ∧ j(b)` gives `j(b)`, so both
-components of the proposed inverse recover `(a,b)`.
-
-For the other inverse identity put `T=Λ(j) ∘ Λ(p)` on the full exterior algebra
-and `L=ι(e_last)`. Left induction proves `T(x) + L*T(contractLeft δ x) = x`.
-The scalar and addition cases are immediate. For `ι(v)*x`, decompose the vector
-as `j(p(v)) + δ(v)*e_last`; use the contraction rule, the induction hypothesis,
-anticommutation of `ι(j(p(v)))` with `L`, and `L*L=0`. Restrict this identity to
-degree `n+1`. All maps are genuine constructions and the identities hold also
-for `r=0`, the zero ring, and degrees above the rank. -/
+/-- The last-generator assembly map `(a,b) ↦ inclusion(a) + e_last ∧ inclusion(b)` is
+bijective in every degree. -/
 theorem koszulLastAssembly_bijective (n : ℕ) :
     Function.Bijective (koszulLastAssembly R r n) := by
   let δ : Fin (r + 1) → R := fun i ↦ if i = Fin.last r then 1 else 0

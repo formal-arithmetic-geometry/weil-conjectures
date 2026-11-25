@@ -41,7 +41,7 @@ lemma coeffIdeal_mono {E F : Fin r →₀ ℕ} (h : F ≤ E) : coeffIdeal i g F 
   Ideal.span_mono <| Set.image_mono fun j ⟨hj, hF⟩ ↦ ⟨hj, lt_of_lt_of_le hF (h j)⟩
 
 /-- A polynomial lies in `J = (g_j x_j : j < i)` if and only if each coefficient `c_E` lies in
-`I_E`. (blueprint: `lem-weil-pbc-polynomial-ideal-coefficients-monomial`) -/
+`I_E`. -/
 theorem mem_span_C_mul_X_iff (f : MvPolynomial (Fin r) R) :
     f ∈ Ideal.span (Set.range fun j : {j : Fin r // (j : ℕ) < i} ↦ C (g j) * X (j : Fin r)) ↔
       ∀ E, f.coeff E ∈ coeffIdeal i g E := by
@@ -81,8 +81,7 @@ theorem mem_span_C_mul_X_iff (f : MvPolynomial (Fin r) R) :
 
 
 /-- The `R`-linear map `R[x] → ⨁_E R ⧸ I_E`, `∑ c_E x^E ↦ (c_E mod I_E)_E`, is surjective with
-kernel `J = (g_j x_j : j < i)`, so `R[x] ⧸ J ≅ ⨁_E (R ⧸ I_E) x^E`.
-(blueprint: `lem-weil-pbc-polynomial-ideal-coefficients-monomial`) -/
+kernel `J = (g_j x_j : j < i)`, so `R[x] ⧸ J ≅ ⨁_E (R ⧸ I_E) x^E`. -/
 theorem exists_linearMap_dfinsupp_quotient :
     ∃ φ : MvPolynomial (Fin r) R →ₗ[R] Π₀ E : Fin r →₀ ℕ, R ⧸ coeffIdeal i g E,
       (∀ f E, φ f E = Ideal.Quotient.mk _ (f.coeff E)) ∧ Function.Surjective φ ∧

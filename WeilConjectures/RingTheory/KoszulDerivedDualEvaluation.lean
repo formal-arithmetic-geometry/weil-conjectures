@@ -15,8 +15,20 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 
 /-! # Evaluation of derived maps from the Koszul complex
 
-Source: Stacks Project, Tag 0BQZ, the finite free Koszul computation.
-(blueprint: lem-sc-koszul-derived-dual-evaluation).
+Maps in the derived category from the Koszul complex to `A[r]` are computed by the cohomology
+of the signed dual Koszul complex, compatibly with evaluation of representatives.
+
+## Implementation details
+
+Every Koszul term is free, so the Koszul complex is K-projective and derived maps out of it are
+homotopy classes of chain maps (`IsKProjective.Qh_map_bijective`). A chain map to the single
+complex is a cocycle of the signed dual complex, and null homotopies correspond to the incoming
+dual image (absorbing the sign `(-1)^r` into the homotopy). No ideal, augmentation or
+regularity hypothesis is used.
+
+## References
+
+* [Stacks, Tag 0BQZ]
 -/
 
 @[expose] public section
@@ -79,37 +91,7 @@ set_option backward.defeqAttrib.useBackward true in
 open CochainComplex HomComplex in
 /-- Signed-dual homology computes maps out of the Koszul complex, with the
 actual component evaluation on representatives. This requires neither an
-augmentation nor Koszul regularity.
-Source: Stacks Project, Tag 0BQZ, finite free Koszul computation, and Mathlib's
-K-projective Hom-complex comparison.
-(blueprint: lem-sc-koszul-derived-dual-evaluation).
-
-Proof: The exterior basis makes every Koszul term projective, so the extension
-E is K-projective by CochainComplex's natural-number extension instance. Maps
-from E in the derived category are homotopy classes of complex maps, by
-IsKProjective.Qh_map_bijective. Evaluate a map z to single(A,-r) in degree -r,
-transporting by extendXIso.inv and singleObjXSelf.hom. The chain-map equation
-identifies its evaluation with an element of the kernel of the signed dual
-outgoing differential: that differential is a unit sign times precomposition
-with d_(r+1,r). Conversely every such kernel element a gives a unique map z,
-by mkHomToSingle applied to extendXIso.hom followed by a. A null homotopy of z
-has in degree -r the equation a=d_(r,r-1) followed by its degree (-r+1,-r)
-component, since the target differential vanishes. For r>0 this is precisely
-membership in the incoming dual image: absorb the unit sign (-1)^r into
-the homotopy component. Conversely an incoming-image element defines a null
-homotopy with this component, all other components zero. For r=0 the source
-term in degree 1 is zero, hence a null homotopy forces a=0, and the incoming
-natural-number differential is zero. Alternatively these same equations are
-Cocycle.toSingleMk_mem_coboundaries_iff and Cochain.delta_toSingleMk. Thus
-evaluation induces a bijection from homotopy classes to the kernel/image
-quotient. moduleCatCyclesIso and moduleCatHomologyIso identify this quotient
-with abstract signed-dual homology. All maps are additive and A-linear;
-Qh preserves scalars, so composing with its inverse gives e. If y has the
-specified evaluation, the quotient projection equation forces
-e(Q.map z)=homologyPi(y). No choice of y matters because iCycles is injective.
-For r=0 this is ordinary Hom evaluation; for the zero ring all modules vanish.
-This argument uses no ideal, augmentation or regularity hypothesis, because
-E itself is K-projective for every f. -/
+augmentation nor Koszul regularity. -/
 theorem exists_koszul_derived_dual_evaluation
     (A : Type u) [CommRing A] [HasDerivedCategory.{u + 1} (ModuleCat.{u} A)]
     (r : ℕ) (f : Fin r → A) :

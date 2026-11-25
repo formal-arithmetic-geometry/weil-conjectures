@@ -16,27 +16,25 @@ import Mathlib.RingTheory.Ideal.BigOperators
 /-!
 # Coefficient reduction of power series modulo a finitely generated ideal
 
-Source: Stacks Project, Tag 0EYB, the power-series closed-fibre calculation.
-(blueprint: lem-sbc-mv-power-series-quotient-kernel)
+Reduction of all coefficients of a power series modulo a finitely generated ideal `I` has kernel
+the extension of `I`.
+
+## Implementation details
+
+Every coefficient of a series in the kernel is written in finitely many generators of `I`;
+assembling the coefficients of each generator into a power series writes the series as a finite
+sum of multiples of the constant series of the generators.
+
+## References
+
+* [Stacks, Tag 0EYB] (the power-series closed-fibre calculation)
 -/
 
 @[expose] public section
 
 namespace MvPowerSeries
 
-/-- Reduction of all coefficients has kernel the extension of a finitely generated ideal.
-
-Source: Stacks Project, Tag 0EYB, the calculation underlying the extended maximal ideal.
-(blueprint: lem-sbc-mv-power-series-quotient-kernel)
-
-Proof: Constants from I reduce to zero, so their generated ideal lies in the kernel.
-Conversely every coefficient of a series in the kernel belongs to I. Choose a finite
-family of generators of I and express each coefficient as a linear combination of
-these generators. For each generator assemble its coefficients in these expressions
-into a power series. The original series is the finite sum of these power series
-multiplied by the constant series of the generators, hence belongs to the extended
-ideal. The empty generating family gives the zero series. The argument allows an
-empty variable set and the unit ideal. -/
+/-- Reduction of all coefficients has kernel the extension of a finitely generated ideal. -/
 theorem ker_map_quotient_of_fg {R : Type*} [CommRing R] (σ : Type*)
     (I : Ideal R) (hI : I.FG) :
     RingHom.ker (map (σ := σ) (Ideal.Quotient.mk I)) = I.map C := by

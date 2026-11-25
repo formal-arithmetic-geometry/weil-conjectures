@@ -12,7 +12,20 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 /-!
 # Naturality of the residue H₁-to-conormal comparison
 
-Source: Stacks Project, More on Algebra, Tag 07E6, the commutative square in the proof.
+A local algebra map induces a scalar-extended map of conormal modules `m/m²`, compatible with
+the canonical maps from residue-field `H₁`.
+
+## Implementation details
+
+The canonical `H₁`-to-conormal maps factor as presentation `H₁` maps followed by kernel
+inclusions (`h1CotangentEquivCotangent_comp_map`); the two composite presentation morphisms
+induce the same `H₁` map (`map_eq`), so the square commutes on pure tensors. No geometric
+regularity or coordinate basis is required.
+
+## References
+
+* [Stacks, Tag 07E6]
+* [Stacks, Tag 00S2]
 -/
 
 @[expose] public section
@@ -24,24 +37,7 @@ namespace Algebra
 
 set_option backward.isDefEq.respectTransparency false in
 /-- A local algebra map induces the natural scalar-extended conormal comparison,
-compatible with the canonical maps from residue-field H₁.
-Source: Stacks Project, More on Algebra, Tag 07E6, the commutative square in the proof;
-Algebra, Tag 00S2, presentation independence and the surjection-to-conormal comparison.
-(blueprint: lem-weil-pbc-local-cotangent-comparison-naturality).
-
-Proof: The local map B → A sends m_B into m_A and m_B² into m_A². Its map on
-quotients is semilinear for the induced embedding κ(B) → κ(A). Tensor balancing
-therefore defines μ, with the displayed formula, from κ(A) tensor_κ(B) m_B/m_B².
-The extension cotangent modules are the same quotients with scalar action defined by
-lifts through the residue maps, so the same construction gives the displayed μ.
-For the square, view the residue surjections also as extensions over k. The canonical
-H₁-to-conormal maps then factor as presentation H₁ maps followed by the kernel
-inclusions, by h1CotangentEquivCotangent_comp_map. The conormal map commutes with
-those inclusions. The two composite presentation morphisms from k[κ(B)] to the
-residue surjection A → κ(A) induce the same H₁ map by map_eq; map_comp_apply
-expresses the two factorizations. Consequently the square commutes on pure tensors.
-Tensor induction, additivity and linearity prove equality on the entire tensor product.
-The result requires no geometric regularity or coordinate basis. -/
+compatible with the canonical maps from residue-field H₁. -/
 theorem exists_localCotangentComparison_naturality
     (k : Type u) (B : Type v) (A : Type w)
     [CommRing k] [CommRing B] [CommRing A]

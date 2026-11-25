@@ -15,8 +15,24 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import WeilConjectures.RingTheory.BaseChangeDiagramElementwise
 /-!
 # Cokernels of a descended matrix on a later tail
-Source: Stacks Project, Algebra, Tag 00QX (the choice of λ₂), and Tag 00R1.
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-data)
+
+Given a ring diagram descending a local algebra `T` and a finitely presented `T`-module `N`,
+the cokernels of a descended presentation matrix form a module system with colimit `N` on a
+later tail.
+
+## Implementation details
+
+The finitely many entries of the `t × s` presentation matrix lift to a common stage `i₁ ≥ i₀`;
+the tail above `i₁` is cofinal, so the ring colimit and localization hypotheses restrict to it.
+The stage modules are the quotients `B₁(i)^t / range Hᵢ`, lifted to universe `max u v`, with
+entrywise semilinear transitions. Right exactness of the tensor product identifies their base
+changes. The colimit property is checked on representatives using the eventual-equality
+criterion for the ring colimit.
+
+## References
+
+* [Stacks, Tag 00QX] (the choice of `λ₂`)
+* [Stacks, Tag 00R1]
 -/
 
 @[expose] public section
@@ -362,37 +378,7 @@ private theorem presentation_diagram
     have he := IsBaseChange.comp_equiv (E j) ql hb
     exact ⟨he.equiv, fun y x ↦ he.equiv_tmul y x⟩
 
-/-- Presentation-cokernel module data after restricting a descended ring diagram.
-Source: Stacks Project, Algebra, Tag 00QX, presentation-matrix paragraph; Tag 00R1.
-Proof:
-1. Express H using the standard bases as its finite t-by-s matrix. The ring colimit
-   represents each entry at some stage of B. Directedness supplies a common stage
-   i₁ ≥ i₀ for all entries. For an empty matrix take i₁ = i₀. Restrict B, β, κ and
-   τ₀ to the tail above i₁. That tail is cofinal: every old index has a common upper
-   bound with i₁. Hence its ring colimit is still T, and both ring-localization
-   hypotheses restrict to it. They are hypotheses, not consequences of colimitness.
-2. Map the lifted matrix at i₁ into each later ring B₁(i), obtaining Hᵢ. Define
-   D(i) as the additive group of the actual quotient B₁(i)^t / range Hᵢ (lifted
-   to universe max u v). Ring transitions send matrix columns to matrix columns,
-   so entrywise maps descend to semilinear quotient maps. Composition and identity
-   follow on representatives. The presentation equivalence at T identifies the
-   limit quotient with N and induces δ and ν. Their naturality and scalar formulas
-   also follow on representatives. The t standard basis classes generate D(i).
-3. Tensoring a cokernel is right exact. Base change carries the finite free modules
-   and the lifted matrix to the later free modules and matrices. Thus it identifies
-   B₁(j) ⊗[B₁(i)] D(i) with D(j) and T ⊗[B₁(i)] D(i) with N. On pure tensors the
-   maps are precisely multiplication by the scalar followed by the quotient map.
-4. A vector representing an element of N has finitely many coordinates, so it
-   lifts to a common stage. If a stage vector maps to zero in N, it is H applied
-   to a finite vector over T. Lift that vector's coordinates to a later stage;
-   the finitely many equalities with the original vector hold at a still later
-   stage by the eventual-equality criterion for the ring colimit. Consequently
-   the quotient class is zero there. For any additive cocone define its map from
-   N by a representative. Two choices become equal at a common later stage by
-   applying the zero criterion to their difference. This gives a well-defined
-   additive map, factoring each leg, and representatives prove uniqueness.
-   Therefore the displayed additive cocone has colimit N on the chosen later tail.
-(blueprint: lem-weil-pbc-limit-module-essentially-finite-presentation-over-system-module-data) -/
+/-- Presentation-cokernel module data after restricting a descended ring diagram. -/
 theorem exists_limit_module_presentation_cokernel_data
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (c : Cocone F) (hc : IsColimit c)

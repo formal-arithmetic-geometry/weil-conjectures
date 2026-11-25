@@ -22,8 +22,19 @@ import WeilConjectures.RingTheory.FGFractionFieldSubmoduleLatticePresentation
 /-!
 # The finite case of the fraction-field quotient length estimate
 
-Source: Stacks Project, Algebra, Tag 00PE, the finite-module paragraph
-(blueprint: lem-weil-pbc-dim-one-fg-submodule-quotient-length-bound).
+For a one-dimensional Noetherian local domain `R` and a finitely generated `R`-submodule `M` of
+`K^r`, the length of `M/xM` is at most `r · length(R/xR)` for nonzero `x`.
+
+## Implementation details
+
+A lattice presentation gives `M ≃ N ⊆ F = R^s` with `s ≤ r` and `F/N` of finite length. The
+exact sequences `0 → F/N → F/xN → F/xF → 0` and `0 → N/xN → F/xN → F/N → 0` give
+`length(N/xN) = length(F/xF) = s · length(R/xR)` after cancelling the finite `length(F/N)`; this
+replaces the power-of-`x` sandwich of the source.
+
+## References
+
+* [Stacks, Tag 00PE]
 -/
 
 @[expose] public section
@@ -112,22 +123,7 @@ private theorem length_quotSMulTop_pi
   rw [e.length_eq]
   simp
 
-/-- The quotient length bound for a finitely generated fraction-field submodule.
-Source: Stacks Project, Algebra, Tag 00PE, proof, finite-module paragraph
-(blueprint: lem-weil-pbc-dim-one-fg-submodule-quotient-length-bound).
-
-Proof: The lattice presentation theorem supplies s ≤ r, a submodule N of F = R^s,
-a nonzero d with dF ⊆ N, and an isomorphism M ≃ N. The ring quotient R/dR has finite
-length by Noetherianity and dimension one. Coordinatewise reduction gives
-length(F/dF) = s length(R/dR), and the surjection F/dF → F/N makes length(F/N) finite.
-Multiplication by x on F is injective. Consequently the sequences
-0 → F/N → F/xN → F/xF → 0 and 0 → N/xN → F/xN → F/N → 0 are exact.
-Additivity gives length(F/N) + length(F/xF) = length(N/xN) + length(F/N).
-Cancel the finite length(F/N) to obtain length(N/xN) = length(F/xF).
-Coordinatewise reduction identifies F/xF with (R/xR)^s, whose length is
-s length(R/xR). Transport along M ≃ N and use s ≤ r to obtain the bound.
-This uses the finite-cokernel assertion of the source directly, replacing its
-power-of-x sandwich by two short exact sequences and finite cancellation. -/
+/-- The quotient length bound for a finitely generated fraction-field submodule. -/
 theorem length_quotSMulTop_le_of_fg_of_ringKrullDim_eq_one_of_isLocalRing
     {R : Type u} [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R]
     {K : Type v} [Field K] [Algebra R K] [IsFractionRing R K]

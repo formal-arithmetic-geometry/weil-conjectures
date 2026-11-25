@@ -21,7 +21,21 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-!
 # Comparisons of minimal free models after reduction
 
-Source: Stacks Project, More on Algebra, Tag 0BCC, uniqueness paragraph.
+Two bounded above free representatives of the same object of the derived category with minimal
+ranks admit a chain comparison that is an isomorphism in every degree after reduction to the
+residue field.
+
+## Implementation details
+
+Bounded above free complexes are K-projective, so the derived isomorphism is represented by a
+chain homotopy equivalence, which remains one after extending scalars. Minimality of the ranks
+forces all reduced differentials to vanish, since
+`dim C_i = dim H_i + rank d_(i-1) + rank d_i`, so the reduced comparison is an isomorphism in each
+degree. The Nakayama argument lifting these isomorphisms is done separately.
+
+## References
+
+* [Stacks, Tag 0BCC] (uniqueness paragraph)
 -/
 
 @[expose] public section
@@ -123,23 +137,7 @@ private theorem component_isIso_of_zeroDifferential
   exact IsIso.of_isIso_comp_left (F.iCycles i) (f.f i)
 
 /-- Two bounded above free representatives with minimal ranks admit a chain comparison
-which is an isomorphism in every degree after reduction to the residue field.
-Source: Stacks Project, More on Algebra, Tag 0BCC, uniqueness paragraph
-(blueprint: lem-sc-minimal-free-comparison-residue).
-
-Proof: The bounded above free complexes F and G are K-projective. The bijection from
-homotopy classes of chain maps to derived morphisms represents the derived isomorphism
-between them and its inverse by chain maps β and α. Injectivity of that bijection shows
-that αβ and βα are homotopic to the identities. Extending scalars preserves these
-homotopies. Hence the reduced comparison β is a homotopy equivalence.
-The same applies to comparisons with the bounded above free representative chosen by
-hK, so the reduced F and G have cohomology dimensions d_i. Their term dimensions are
-also d_i, by base change of the given free bases. In each degree, the equality between
-term dimension and cohomology dimension forces both the incoming and outgoing
-reduced differentials to vanish: dim C_i = dim H_i + rank d_(i-1) + rank d_i.
-The reduced comparison is a quasi-isomorphism between zero-differential complexes,
-so each of its components is an isomorphism. This theorem stops before the Nakayama
-argument which lifts these component isomorphisms to the original ring. -/
+which is an isomorphism in every degree after reduction to the residue field. -/
 theorem exists_minimalFree_comparison_residue
     {R : Type u} [CommRing R] [IsLocalRing R]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]

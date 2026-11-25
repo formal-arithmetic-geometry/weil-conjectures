@@ -16,35 +16,27 @@ import Mathlib.RingTheory.Algebraic.Basic
 /-!
 # Monogenic extensions of Nagata domains are Japanese
 
-Source: Stacks Project, Algebra, Proposition Tag 0334, claim (*) and Steps 3--4
-(blueprint: lem-weil-pbc-monogenic-nagata-domain-n2).
+An injective monogenic extension `B = A[x]` of a Nagata domain `A`, with `B` a domain, is N-2.
+
+## Implementation details
+
+If `x` is transcendental, `B ≅ A[X]` is N-2 by Stacks 032O. Otherwise, for a finite extension
+`M` of `L = Frac(B)`, the integral closure `A'` of `A` in `M` is finite, normal and Nagata, and
+`T = A'[x]` is finite over `B` with fraction field `M`. Claim (***) of Stacks 0334 makes the
+integral closure of `T` in `M`, which is the integral closure of `B`, finite over `T`. No nonzero
+or transcendence hypothesis on `x` is required.
+
+## References
+
+* [Stacks, Tag 0334] (claim (*) and steps 3–4)
+* [Stacks, Tags 032O, 032T]
 -/
 
 @[expose] public section
 
 universe u
 
-/-- An injective monogenic extension of Nagata domains is N-2.
-
-Source: Stacks Project, Algebra, Proposition Tag 0334, claim (*) and Steps 3--4
-(blueprint: lem-weil-pbc-monogenic-nagata-domain-n2).
-
-Proof: Write `K = Frac(A)` and `L = Frac(B)` and view `K` inside `L` using
-injectivity. If `x` is transcendental over `K`, evaluation identifies `B` with
-`A[X]`. The zero prime in the Nagata definition makes `A` N-2, and Tag 032O makes
-`A[X]` N-2. Otherwise `L = K(x)` is finite over `K`. For an arbitrary finite field
-extension `M/L`, the tower law makes `M/K` finite. The integral closure `A'` of `A`
-in `M` is finite over `A` by N-2, normal with fraction field `M`, and Nagata by
-Tag 032T. Put `T = A'[x]` inside `M`. Module generators of `A'` over `A` generate
-`T` over `B`, so `T/B` is finite. Its fraction field is `M` since it contains `A'`.
-Integrality transitivity identifies the integral closure of `B` in `M` with the
-integral closure of `T` in `M`. Claim (***) of Tag 0334, namely normalization
-finiteness for a monogenic subalgebra of the fraction field of a normal Nagata
-domain, makes this closure finite over `T`. Finiteness transitivity makes it finite
-over `B`. This proves N-2 for every finite extension `M/L`.
-
-The cases `x = 0` and `x` in the image of `A` fall in the algebraic case, where
-`B` equals the image of `A`; no nonzero or transcendence hypothesis is required. -/
+/-- An injective monogenic extension of Nagata domains is N-2. -/
 theorem isN2_of_monogenic_nagata_domain (A B : Type u) [CommRing A] [IsDomain A]
     [CommRing B] [IsDomain B] [Algebra A B] (hA : IsNagataRing A)
     (hinj : Function.Injective (algebraMap A B)) (x : B)

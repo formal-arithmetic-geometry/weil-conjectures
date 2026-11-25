@@ -8,27 +8,31 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.Away.Basic
+
+/-!
+# Core of the localization of a polynomial algebra with one linear relation
+
+For `B = A[x₁, …, x_r]/(∑ f_j x_j - 1)`, the localization `B_{f_i}` is a polynomial algebra
+over `A_{f_i}` in the variables `x_j` with `j ≠ i`.
+
+## Implementation details
+
+The inverse sends `x_i` to `z = f_i⁻¹ (1 - ∑_{j ≠ i} f_j y_j)` and the other variables to `y_j`;
+it factors through the linear relation since `f_i z + ∑_{j ≠ i} f_j y_j - 1 = 0`. The universal
+properties of polynomial rings, quotients and localizations show both composites are
+identities.
+
+## References
+
+* [Stacks, Tag 07EU]
+-/
+
 @[expose] public section
 universe u
 namespace MvPolynomial
-/-- Core existence and inverse-on-free-variables part of the localization computation.
-
-The source is Stacks Project, Tag 07EU, `lemma-final-solve`, where the
-calculation is omitted. Construct the forward map by the polynomial universal
-property, sending each free variable to the corresponding class in the
-localization. For the inverse, put
-`z = fᵢ⁻¹ (1 - ∑ j ≠ i, fⱼ yⱼ)`, evaluate the original polynomial ring by
-sending `xᵢ` to `z` and the other variables to `yⱼ`, and factor through the
-linear relation because `fᵢ z + ∑ j ≠ i fⱼ yⱼ - 1 = 0`. The image of `fᵢ`
-is a unit, so the localization universal property extends this map to `Bf`.
-The inverse followed by the forward map fixes each free polynomial variable.
-The forward followed by the inverse fixes the classes of the other variables,
-and fixes `xᵢ` because the relation gives
-`1 - ∑ j ≠ i, fⱼ xⱼ = fᵢ xᵢ`, so multiplying by `fᵢ⁻¹` recovers `xᵢ`.
-Polynomial uniqueness, quotient surjectivity and localization uniqueness now
-show both composites are identities. The inverse therefore sends every free
-class to its variable, as claimed.
-(blueprint: theorem-finite-etale-covers-proper-henselian--2) -/
+/-- Core existence and inverse-on-free-variables part of the localization computation:
+`B_{f_i}` is a polynomial algebra over `A_{f_i}` in the free variables, with inverse sending
+every free class to its variable. -/
 theorem linearEquationLocalizationPolynomialCore (A : Type u) [CommRing A]
     (r : ℕ) (f : Fin r → A) (i : Fin r) :
     let I : Ideal (MvPolynomial (Fin r) A) :=

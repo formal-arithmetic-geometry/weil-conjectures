@@ -15,6 +15,23 @@ import WeilConjectures.RingTheory.MinimalComponentDimensionMaximumCore
 public import Mathlib.Algebra.EuclideanDomain.Field
 public import Mathlib.RingTheory.PrincipalIdealDomain
 
+/-!
+# Finite data for the dimensions of minimal components
+
+The minimal primes below a prime `p` of a finite type algebra over a field are finite and
+nonempty; the maximal dimension of the corresponding components is `dim S_p + trdeg κ(p)`.
+
+## Implementation details
+
+Prime correspondence in the localization identifies chains below `p` with chains in `S_p`.
+Concatenating with a maximal chain above `p` of length `trdeg κ(p)` gives the dimension of a
+component attaining the maximum, and bounds every other component.
+
+## References
+
+* [Stacks, Tag 00P1] (proof)
+-/
+
 @[expose] public section
 
 universe u v
@@ -22,15 +39,6 @@ universe u v
 namespace AlgebraicGeometry
 
 /-- Auxiliary finite-component form of the prime-chain dimension argument.
-
-Source: Stacks Project, Algebra, proof of Tag 00P1, lines 28238-28267.
-(blueprint: lem-weil-pbc-minimal-component-dimension-maximum-data).
-
-Proof: the minimal primes below `p` are finite and nonempty by Noetherianity.
-Prime correspondence in the localization identifies chains below `p` with chains
-in the local ring.  The maximal chain length is `d`; concatenating a maximal
-chain above `p` of length `r` gives quotient dimension `d+r` for a component
-attaining the maximum, and bounds every other component by the same number.
 -/
 theorem minimal_component_dimension_maximum_data
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]

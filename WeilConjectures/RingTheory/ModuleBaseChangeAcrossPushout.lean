@@ -10,8 +10,19 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-! # Module base change across a ring tensor equivalence
-Source: Stacks Project, Algebra, Tag 00R1, the final displayed isomorphisms.
-(blueprint: lem-weil-pbc-module-base-change-across-pushout).
+
+A canonical ring tensor equivalence `B ⊗_A R ≃ S` allows module base change from `B` to `S` to be
+computed over the smaller ring `A`.
+
+## Implementation details
+
+The ring isomorphism identifies `B ⊗_A R` with `S` as a `B`-module and as an `R`-module, and
+tensor cancellation identifies `N ⊗_B (B ⊗_A R)` with `N ⊗_A R`; composing with the assumed
+module base-change equivalence gives the result.
+
+## References
+
+* [Stacks, Tag 00R1] (the final displayed isomorphisms)
 -/
 
 @[expose] public section
@@ -22,20 +33,6 @@ open scoped TensorProduct
 namespace TensorProduct
 
 /-- A canonical ring tensor equivalence allows module base change over the smaller ring.
-Source: Stacks Project, Algebra, Tag 00R1, the second final displayed isomorphism.
-(blueprint: lem-weil-pbc-module-base-change-across-pushout)
-
-Proof:
-Give N its A-module structure through f and M its R-module structure through R → S.
-The given ring
-isomorphism identifies B tensor_A R with S as a B-module and as an R-module:
-check the scalar identities on pure tensors, using its prescribed formula.
-Tensor cancellation identifies N tensor_B (B tensor_A R) with N tensor_A R.
-Invert this equivalence, tensor the ring equivalence with N, and apply the assumed
-module base-change equivalence, swapping tensor factors as necessary. Each map
-is R-linear. On y tensor x the composite is x tensor (1 tensor y), then x tensor
-algebraMap R S y, then algebraMap R S y times q x. This proves both bijectivity
-and the asserted formula, including zero modules and zero rings.
 -/
 theorem moduleBaseChangeAcrossPushout
     (A B R S : Type u) (N M : Type v)

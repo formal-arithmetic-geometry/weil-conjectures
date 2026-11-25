@@ -18,7 +18,21 @@ import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 
 /-! # Localizing a filtered ring system at a local target
 
-Source: Stacks Project, Algebra, Tags 037D and 00QV.
+A local localization `T` of a filtered colimit of rings is the colimit of the stage rings
+localized at the inverse images of its maximal ideal, with local, essentially finite type
+stage maps.
+
+## Implementation details
+
+Since `T` is local, it is also the localization at the contraction `q` of its maximal ideal.
+The prime-localization colimit theorem at `q` is then transported along the unique algebra
+equivalence with `T`; a fraction maps to a unit exactly when its numerator avoids the
+contracted prime, so the stage maps are local.
+
+## References
+
+* [Stacks, Tag 037D] (proof)
+* [Stacks, Tag 00QV]
 -/
 
 @[expose] public section
@@ -28,21 +42,8 @@ open CategoryTheory CategoryTheory.Limits
 namespace RingHom
 
 /-- A localization of a filtered ring colimit which is local is the colimit of
-stage localizations at the inverse images of its maximal ideal.
-
-Source: Stacks Project, Algebra, proof of Tag 037D and Tag 00QV.
-(blueprint: lem-weil-pbc-localize-filtered-ring-system)
-
-Proof: Contract the maximal ideal of T to q in colimit D. Since T is a
-localization and local, it is also the localization at q: enlarge the original
-denominators to all elements mapping to units. Apply the prime-localization
-colimit theorem at q. Its stage rings are localizations at contracted primes,
-so their localization maps are essentially of finite type. Identify the
-localization of colimit D at q with T by the unique algebra equivalence.
-Postcompose the cocone with this equivalence. The induced stage maps to T
-are local, because a fraction maps to a unit precisely when its numerator
-avoids the contracted prime. The cocone remains a colimit under the equivalence.
-The transformation λ consists of the canonical stage localization maps. -/
+stage localizations at the inverse images of its maximal ideal. The transformation `λ` consists
+of the canonical stage localization maps. -/
 theorem exists_localized_filtered_ring_system
     {J : Type u} [SmallCategory J] [IsFiltered J]
     (D : J ⥤ CommRingCat.{u}) (T : CommRingCat.{u}) [IsLocalRing T]

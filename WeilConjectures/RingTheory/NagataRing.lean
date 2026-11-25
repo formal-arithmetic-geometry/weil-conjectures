@@ -14,8 +14,11 @@ public import Mathlib.RingTheory.Ideal.Quotient.Basic
 /-!
 # Universally Japanese and Nagata rings
 
-Source: Stacks Project, Algebra, Definition 10.162.1 (Tag 032R)
-(blueprint: def-weil-pbc-nagata-ring).
+This file defines universally Japanese rings and Nagata rings.
+
+## References
+
+* [Stacks, Tag 032R]
 -/
 
 @[expose] public section
@@ -23,13 +26,13 @@ Source: Stacks Project, Algebra, Definition 10.162.1 (Tag 032R)
 universe u
 
 /-- A commutative ring is universally Japanese if every finite type algebra that is an
-integral domain is N-2 (Stacks, Tag 032R) (blueprint: def-weil-pbc-nagata-ring). -/
+integral domain is N-2. -/
 def IsUniversallyJapanese (R : Type u) [CommRing R] : Prop :=
   ∀ (S : Type u) [CommRing S] [IsDomain S] [Algebra R S]
     [Algebra.FiniteType R S], IsN2 S (FractionRing S)
 
 /-- A commutative ring is Nagata if it is Noetherian and each quotient by a prime ideal
-is N-2 (Stacks, Tag 032R) (blueprint: def-weil-pbc-nagata-ring). -/
+is N-2. -/
 def IsNagataRing (R : Type u) [CommRing R] : Prop :=
   IsNoetherianRing R ∧
     ∀ (p : Ideal R) [p.IsPrime], IsN2 (R ⧸ p) (FractionRing (R ⧸ p))
