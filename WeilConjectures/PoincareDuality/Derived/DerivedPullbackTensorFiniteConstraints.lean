@@ -16,9 +16,9 @@ import WeilConjectures.SmoothPurity.CompletedOperations.NormalizedCompletedOpera
 
 /-! # Finite normalized pullback tensor constraints
 
-We construct the composition, associator and braiding constraints for derived pullback and
-tensor product with integral, rational and common-stage coefficients, each normalized by its
-finite reductions.
+We construct the composition constraints for derived pullback and tensor product with integral,
+rational and common-stage coefficients, and the associator and braiding constraints with integral
+and rational coefficients. The integral constraints are normalized by their finite reductions.
 
 ## Implementation details
 
