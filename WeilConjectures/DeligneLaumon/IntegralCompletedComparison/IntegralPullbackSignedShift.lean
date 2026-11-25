@@ -15,8 +15,12 @@ set_option linter.privateModule false
 
 /-! # Signed shifts for integral pullback
 
-Source: Stacks Project, Tags 011G, 014E, 06YS, 06YT and 0941.
-(blueprint: lem-a1-integral-pullback-signed-shift).
+Auxiliary constructions of the levelwise and product shifts of integral pullback and of the
+signed chain-level shift compatible with the tower transitions.
+
+## References
+
+* Stacks Project, Tags 011G, 014E, 06YS, 06YT and 0941
 -/
 
 @[expose] public noncomputable section

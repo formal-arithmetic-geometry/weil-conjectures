@@ -37,20 +37,21 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Composition of intrinsic rational scalar extensions
 
-Source: Weil conjectures blueprint, sec-smooth-purity/sk-def-sf-operations,
-order 1469; current main snapshot sec-proper-base-change/sk-thm-properbasechange,
-order 1828 (blueprint: lem-weil-scalar-extension-composition).
-
-The ordinary balanced tensor associator and unit are reused from the legacy module.
-Their quotient-completion normalization is transported to the current intrinsic integral
-subcategory and then to its raw Hom scalar localization. No identification with the legacy
-integral constructibility predicate is assumed.
+We construct the composition and identity comparisons for the rational scalar extensions of
+intrinsic constructible complexes and prove the unit laws and the pentagon.
 
 ## Main statements
 
 - `sfRationalScalarComp`: canonical composition on the currently recorded rational stages.
 - `sfRationalScalarUnit`: the normalized identity-extension comparison.
 - `sfRationalScalar_coherence`: both unit equations and the pentagon.
+
+## Implementation details
+
+The ordinary balanced tensor associator and unit are reused. Their quotient-completion
+normalization is transported to the intrinsic integral subcategory and then to its raw Hom
+scalar localization. No identification with the older integral constructibility predicate is
+assumed.
 -/
 
 @[expose] public section
@@ -655,18 +656,9 @@ variable (l : ℕ) [Fact l.Prime]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- The normalized ordinary-to-completed comparison on intrinsic integral objects.
-Source: blueprint order 1828, proof, first paragraph
-(blueprint: lem-weil-scalar-extension-composition).
-Proof: the finite-free completed-scalar comparison in the DAG identifies ordinary derived
-extension and completed extension on every derived-complete input. On a K-flat complex
-with flat terms, its map is the quotient-completion chain map: its unshifted cone
-coordinates are the finite quotient tensor maps, and its shifted coordinate is zero.
-Finite freeness commutes with the products in the Roos complex; completeness and cofinality
-of the two uniformizer filtrations show this very map is invertible. The intrinsic predicate
-includes derived completeness, so this applies without a finite-field structure on Y.
-Naturality for good complexes descends through roofs. Every object has a good resolution,
-so the displayed representative characterization determines the comparison uniquely. -/
+/-- There is a unique comparison between ordinary derived and completed scalar extension on
+intrinsic integral objects that is compatible with the quotient-completion chain maps on good
+complexes. -/
 theorem sfIntegralOrdinaryComparison_existsUnique :
     ∃! c : (sfIntegralConstructible l E Y).ι ⋙ integralOrdinaryDerivedScalar l E L ι Y ≅
         (sfIntegralConstructible l E Y).ι ⋙ integralScalarExtension l E L ι Y,
@@ -729,8 +721,7 @@ theorem sfIntegralOrdinaryComparison_existsUnique :
       ((congrArg (fun z ↦ z ≫ (F ⋙ integralScalarExtension l E L ι Y).map a.hom)
         heq).trans (c.hom.naturality a.hom).symm)
 
-/-- The uniquely normalized comparison; its data is fixed by quotient maps on good complexes.
-Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The uniquely normalized comparison; its data is fixed by quotient maps on good complexes. -/
 noncomputable def sfIntegralOrdinaryComparison :=
   (sfIntegralOrdinaryComparison_existsUnique l E L ι Y).exists.choose
 
@@ -738,17 +729,9 @@ variable (p : ℕ) (hl : l ≠ p)
   (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]
   (j : L →ₐ[Padic l] M)
 
-/-- Completed integral associativity, uniquely fixed by ordinary balanced tensor and the
-normalized quotient-completion comparisons.
-Source: blueprint order 1828, proof, first paragraph
-(blueprint: lem-weil-scalar-extension-composition).
-Proof: on a K-flat resolution, ordinary associativity sends c tensor (b tensor x) to
-c*j(b) tensor x, with inverse c tensor x to c tensor (1 tensor x). These maps commute
-with restrictions, differentials and chain maps, hence descend through roofs. Conjugate
-this fixed ordinary associator by the three normalized ordinary-to-completed comparisons.
-Completed extension preserves the intrinsic subcategories, so full faithfulness of their
-inclusions lifts this isomorphism and its inverse uniquely. The displayed equation specifies
-that lift, rather than choosing an unnormalized natural isomorphism. -/
+/-- There is a unique associativity isomorphism for completed integral scalar extension given
+by the ordinary balanced tensor associator conjugated by the normalized ordinary-to-completed
+comparisons. -/
 theorem sfIntegralScalarComp_existsUnique :
     ∃! a : sfConstructibleIntegralScalarExtension p l hl E L ι Y ⋙
         sfConstructibleIntegralScalarExtension p l hl L M j Y ≅
@@ -773,18 +756,12 @@ theorem sfIntegralScalarComp_existsUnique :
     (sfIntegralOrdinaryComparison l E M (j.comp ι) Y)
     (integralOrdinaryDerivedScalarComp l E L ι Y M j)
 
-/-- The intrinsic completed integral associator with its fixed tensor normalization.
-Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The intrinsic completed integral associator with its fixed tensor normalization. -/
 noncomputable def sfIntegralScalarComp :=
   (sfIntegralScalarComp_existsUnique l E L ι Y p hl M j).exists.choose
 
-/-- The completed integral identity comparison, uniquely normalized by multiplication.
-Source: blueprint order 1828, proof, identity-extension clause
-(blueprint: lem-weil-scalar-extension-composition).
-Proof: the ordinary unit sends s tensor x to s*x, with inverse x to 1 tensor x.
-Conjugating it by the identity ordinary-to-completed comparison gives the actual
-completeness-unit normalization. Full faithfulness lifts it uniquely to the intrinsic
-subcategory; the inverse is the lift of the inverse ambient map. -/
+/-- There is a unique identity comparison for completed integral scalar extension given by
+the ordinary multiplication unit conjugated by the ordinary-to-completed comparison. -/
 theorem sfIntegralScalarUnit_existsUnique :
     ∃! a : sfConstructibleIntegralScalarExtension p l hl E E (AlgHom.id (Padic l) E) Y ≅
         𝟭 (sfIntegralConstructibleCategory l E Y),
@@ -798,8 +775,7 @@ theorem sfIntegralScalarUnit_existsUnique :
     (sfIntegralOrdinaryComparison l E E (AlgHom.id (Padic l) E) Y)
     (integralOrdinaryDerivedScalarUnit l E Y)
 
-/-- The normalized intrinsic integral unit.
-Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The normalized intrinsic integral unit. -/
 noncomputable def sfIntegralScalarUnit :=
   (sfIntegralScalarUnit_existsUnique l E Y p hl).exists.choose
 
@@ -892,17 +868,8 @@ private theorem integral_pentagon
     (sfIntegralScalarComp_existsUnique l E L ι Y p hl N (k.comp j)).exists.choose_spec
     (ordinary_derived_pentagon l E L ι Y M j N k) K
 
-/-- The rational associator is uniquely specified as the image of the normalized
-completed integral associator on every unchanged integral object.
-Source: blueprint order 1828, proof, second paragraph
-(blueprint: lem-weil-scalar-extension-composition).
-Proof: rationalization has the same objects, and its morphisms are generated by pure
-tensors f tensor a. Tensor each component of the integral associator and its inverse
-with one. Integral naturality is linear over the source integers, so multiplying it
-by a and adding proves naturality for every rational morphism. The inverse equations
-survive localization. The published scalar functor has precisely the prescribed integral
-object map; transport along that equality gives the displayed HEq. Every object is an
-integral representative, so the component condition uniquely determines the isomorphism. -/
+/-- There is a unique rational associator whose component at every integral object is the
+image of the normalized completed integral associator. -/
 theorem sfRationalScalarComp_existsUnique :
     ∃! a : sfRationalScalarExtension l E Y p hl L ι ⋙
         sfRationalScalarExtension l L Y p hl M j ≅
@@ -941,20 +908,14 @@ theorem sfRationalScalarComp_existsUnique :
         sfRationalScalarExtension, F₀, G₀, G, Functor.comp_obj, Functor.comp_map] using hn)
   · exact hH.2.2
 
-/-- Canonical composition for the currently recorded rational scalar extensions.
-Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- Canonical composition for the currently recorded rational scalar extensions. -/
 noncomputable def sfRationalScalarComp :
     sfRationalScalarExtension l E Y p hl L ι ⋙ sfRationalScalarExtension l L Y p hl M j ≅
       sfRationalScalarExtension l E Y p hl M (j.comp ι) :=
   (sfRationalScalarComp_existsUnique l E L ι Y p hl M j).exists.choose
 
-/-- The rational unit is the localized normalized integral unit on every object.
-Source: blueprint order 1828, proof, identity-extension clause
-(blueprint: lem-weil-scalar-extension-composition).
-Proof: localize the integral unit and inverse. Integral naturality multiplied by each
-coefficient proves rational naturality on pure tensors and hence on every morphism.
-The scalar functor's specified object equalities identify the endpoints, giving HEq.
-All objects are integral representatives, so this condition proves uniqueness. -/
+/-- There is a unique rational unit whose component at every object is the localized
+normalized integral unit. -/
 theorem sfRationalScalarUnit_existsUnique :
     ∃! a : sfRationalScalarExtension l E Y p hl E (AlgHom.id (Padic l) E) ≅
         𝟭 (sfRationalConstructibleCategory l E Y),
@@ -981,8 +942,7 @@ theorem sfRationalScalarUnit_existsUnique :
   · intro K K' f a
     rfl
 
-/-- The rational identity comparison, retaining the completeness-unit normalization.
-Source: blueprint order 1828 (blueprint: lem-weil-scalar-extension-composition). -/
+/-- The rational identity comparison, retaining the completeness-unit normalization. -/
 noncomputable def sfRationalScalarUnit :
     sfRationalScalarExtension l E Y p hl E (AlgHom.id (Padic l) E) ≅
       𝟭 (sfRationalConstructibleCategory l E Y) :=
@@ -1046,20 +1006,7 @@ private theorem rational_unit_component
 attribute [local irreducible] sfRationalScalarComp
   sfRationalScalarUnit sfIntegralScalarComp sfIntegralScalarUnit
 
-/-- Both identity-extension laws and the pentagon for the canonical intrinsic comparisons.
-Source: blueprint order 1828, proof, unit and pentagon clauses
-(blueprint: lem-weil-scalar-extension-composition).
-Proof: check ordinary sheaf tensor generators. For a source identity, the associator
-sends c tensor (b tensor x) to cb tensor x, which equals c tensor (b*x). For a target
-identity, it is the multiplication unit at the extended object. Both paths for three
-extensions send d tensor (c tensor (b tensor x)) to d*k(c)*k(j(b)) tensor x.
-Associativity in the final completed coefficient ring proves equality, and local tensor
-generation extends it to sheaves. Derived localization preserves these equations.
-Expand the completed comparisons as conjugates by the normalized quotient-completion
-maps; naturality moves intermediate comparisons past tensor maps and cancels adjacent
-inverse factors, leaving the ordinary equations. Full-subcategory faithfulness and
-rationalization preserve them. These arguments also cover identity embeddings and
-E=L=M, the zero object, and the empty scheme. -/
+/-- Both identity-extension laws and the pentagon for the canonical intrinsic comparisons. -/
 theorem sfRationalScalar_coherence :
     (∀ K : sfRationalConstructibleCategory l E Y,
       (sfRationalScalarComp l E E (AlgHom.id (Padic l) E) Y p hl L ι).hom.app K =

@@ -14,8 +14,8 @@ public import WeilConjectures.WeilSheaf.StalkAtPurity
 
 Let `X₀` be a smooth geometrically connected affine scheme of dimension `d ≥ 2` over a finite
 field `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `X₀`. Every irreducible lisse subquotient of
-`𝒢` is punctually `ι`-pure (blueprint `theorem-real-constructible-sheaves-are-mixed--1`, the lisse
-stratum).
+`𝒢` is punctually `ι`-pure. This file provides the curve case and the Frobenius-module and
+geometric-point lemmas used for it.
 
 ## Main statements
 
@@ -143,13 +143,11 @@ variable {ι : PadicAlgCl l →+* ℂ} {C : Scheme.{u}} [C.Over (Spec (CommRingC
   [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
-/-- **Purity of real lisse sheaves on curves**, subobject form (blueprint:
-`theorem-purity-real-sheaves-curves--1`, as used in
-`theorem-real-constructible-sheaves-are-mixed--1`). Let `C₀` be a smooth geometrically connected
-curve over `k₀`, `𝒢` an `ι`-real lisse Weil sheaf on `C₀` and `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` lisse subsheaves. Every
-irreducible lisse subsheaf `W` of `𝒢₂ / 𝒢₁` is punctually `ι`-pure: it is the irreducible
-constituent `P / K` of `𝒢`, where `P ⊆ 𝒢₂` is the preimage of `W` and `K ⊆ P` the kernel of
-`P ⟶ W`. -/
+/-- **Purity of real lisse sheaves on curves**, subobject form. Let `C₀` be a smooth geometrically
+connected curve over `k₀`, `𝒢` an `ι`-real lisse Weil sheaf on `C₀` and `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` lisse
+subsheaves. Every irreducible lisse subsheaf `W` of `𝒢₂ / 𝒢₁` is punctually `ι`-pure: it is the
+irreducible constituent `P / K` of `𝒢`, where `P ⊆ 𝒢₂` is the preimage of `W` and `K ⊆ P` the
+kernel of `P ⟶ W`. -/
 theorem IsReal.exists_isPunctuallyPureOfWeight_of_mono_cokernel {𝒢 : WeilSheaf k₀ l C}
     (h𝒢 : 𝒢.IsLisse) (hreal : 𝒢.IsReal ι) {𝒢₁ 𝒢₂ : WeilSheaf k₀ l C} (i : 𝒢₁ ⟶ 𝒢₂)
     (j : 𝒢₂ ⟶ 𝒢) [Mono i] [Mono j] (h₁ : 𝒢₁.IsLisse) (h₂ : 𝒢₂.IsLisse)

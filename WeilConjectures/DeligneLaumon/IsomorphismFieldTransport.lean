@@ -16,9 +16,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Exact isomorphism transport at integral and field coefficient stages
 
-Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, sentence 1, through prose-10-20,
-first paragraph (blueprint: lem-pod-isomorphism-field-transport).
+For an isomorphism of schemes of finite type over a finite field, this file constructs exact
+inverse transport data through the completed integral, raw rational and common-stage
+coefficient categories.
+
+## Implementation details
 
 All functors, coefficient maps, scalar comparisons and quotient Hom constructors
 below are the published constructions. The clause records specify comparisons,
@@ -85,28 +87,9 @@ private theorem transport_scalarLaw
   exact heq_of_eq h
 
 /-- Exact inverse transport through the completed integral, raw rational and common-stage
-categories, with both normalized inverse comparisons and their scalar equations.
-Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md sentence 1 through prose-10-20 paragraph 1
-(blueprint: lem-pod-isomorphism-field-transport).
-
-Proof: the finite-field cardinality gives characteristic p on k₀. Since l is a
-prime distinct from p, it is a unit in k₀, in k and in every stalk of X and Y.
-Map these stalk units to their residue fields and use their canonical invertibility
-data. Apply isomorphismFieldTransportFiniteStage to g and inv g at each finite E.
-For the integral scalar equations choose a normalized comparison system, use
-pullbackIdentities_scalarExtension, and replace its two scalar comparisons by the
-specified tensor/completion comparisons using isomorphismScalarComparisonAgreement.
-The changed auxiliary completeness proofs are proof irrelevant. Choose the finite
-stages at the small coefficient models and apply isomorphismFieldTransportRationalScalar
-to their integral scalar equations. Finally apply isomorphismFieldTransportCommonStage
-after obtaining noetherian and finite-dimension bounds from finite type,
-to the two families and both scalar equations. Repeat with inv g, constructing its
-normalized opposite family directly at inv (inv g). These three lemmas separate
-the finite-stage construction,
-localization of a scalar equation, and descent of the resulting family; they do not
-change the specified functors, comparisons, or the categories in the conclusion.
--/
+categories, with both normalized inverse comparisons and their scalar equations, for an
+isomorphism `g` of schemes of finite type over a finite field and a prime `l` different from
+its characteristic. -/
 theorem isomorphismFieldTransport
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

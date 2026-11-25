@@ -12,9 +12,15 @@ import all WeilConjectures.SmoothPurity.Sf.SfCompleteDirectImageReduction
 import WeilConjectures.SixFunctors.Open.OpenQuotientKoszulCompleteness
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenDvrRingedIdentification
 
-/-! Quasi-compact open extension preserves derived completeness.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-(blueprint: lem-qcqs-compact-support-image-complete-open).
+/-! # Quasi-compact open extension preserves derived completeness
+
+We show that completed extension by a quasi-compact open immersion preserves derived
+completeness. This is the open factor of the proper/open compact-support completeness argument.
+
+## References
+
+* Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13
+* Stacks Project, Tags 0E8I and 0F7J
 -/
 
 @[expose] public noncomputable section
@@ -40,15 +46,8 @@ variable (l : ℕ) [Fact l.Prime]
 include K₀ hl Xbase Ybase Xft Xqc Yft Yqc fbase fs fft fqc
 
 set_option linter.unusedSectionVars false in
-/-- The completed extension by a quasi-compact open immersion preserves the
-completion unit. This is the open factor of the proper/open compact-support
-completeness argument.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-Proof: transport the completion unit through the normalized quotient tower for
-quasi-compact open extension. Exactness and preservation of countable products
-identify the target Roos triangle with the image of the source triangle, and the
-unit equation then gives the required derived completeness.
-(blueprint: lem-qcqs-compact-support-image-complete-open). -/
+/-- The completed extension by the quasi-compact open immersion of a compactification sends an
+integral constructible object to a derived complete object. -/
 theorem sfQcqsCompactSupport_open_complete
     (K : sfIntegralConstructibleCategory l E X) :
     IsSfDerivedComplete l E c.Z
