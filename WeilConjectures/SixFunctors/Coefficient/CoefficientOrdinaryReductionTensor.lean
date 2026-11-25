@@ -12,14 +12,19 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedE
 
 /-! # The ordinary quotient system commutes with total tensor products
 
-Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941.
-
 For an ordinary quotient-system model `M`, we construct a natural isomorphism of chain
 complexes on the ringed sequence site
 `M.quotient (P ⊗ Q) ≅ M.quotient P ⊗ M.quotient Q`, whose finite evaluations are the
 ordinary scalar tensor comparisons. Both sides are presented levelwise by the finite
 scalar extensions of `P ⊗ Q`, compatibly with the strict transitions, and maps of
 modules on the sequence site are assembled from compatible finite evaluations.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 03EK]
 -/
 
 @[expose] public section
@@ -49,8 +54,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf
   integralCoefficientCommRingSheaf CategoryTheory.sheafCompose
   CommRingCat.hasForgetToRingCat
 
-/-- Chain maps on the ringed sequence site are determined by their finite evaluations.
-Source: Stacks 0941. -/
+/-- Chain maps on the ringed sequence site are determined by their finite evaluations. -/
 theorem coefficientSequenceComplex_hom_ext
     {C D : CochainComplex (coefficientSequenceModules l E W) ℤ} {f g : C ⟶ D}
     (h : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map f =
@@ -68,7 +72,7 @@ variable {C D : CochainComplex (coefficientSequenceModules l E W) ℤ}
   {T : CochainComplex (scalarReductionSource l E W) ℤ}
 
 /-- Two compatible presentations of strict system complexes by the same scalar complex
-give compatible maps between their finite evaluations. Source: Stacks 0941. -/
+give compatible maps between their finite evaluations. -/
 theorem presentation_degree_transition
     (κC : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
       ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj T)
@@ -106,7 +110,7 @@ theorem presentation_degree_transition
   erw [hDi, hCi, reassoc_of% hDm]
 
 /-- The chain map between two compatible presentations of strict system complexes,
-assembled from the finite comparisons. Source: Stacks 03CZ, 0941. -/
+assembled from the finite comparisons. -/
 def presentationHom
     (κC : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
       ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj T)
@@ -136,8 +140,7 @@ def presentationHom
     simp only [Functor.mapHomologicalComplex_obj_d] at hc
     exact hc
 
-/-- The finite evaluations of the assembled presentation map.
-Source: Stacks 0941. -/
+/-- The finite evaluations of the assembled presentation map. -/
 theorem presentationHom_evaluation
     (κC : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
       ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj T)
@@ -160,8 +163,7 @@ theorem presentationHom_evaluation
   exact OrdinaryReductionTensor.coefficientSequenceAssemble_evaluation l E W _
     (fun h ↦ presentation_degree_transition κC κD hC hD i h) n
 
-/-- The isomorphism between two compatible presentations of strict system complexes.
-Source: Stacks 03CZ, 0941. -/
+/-- The isomorphism between two compatible presentations of strict system complexes. -/
 def presentationIso
     (κC : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
       ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj T)
@@ -196,7 +198,7 @@ def presentationIso
 end Presentation
 
 /-- The ordinary quotient system of a complex, presented by its finite evaluations,
-commutes with the strict transitions. Source: Stacks 0941. -/
+commutes with the strict transitions. -/
 theorem OrdinaryModel.quotient_transition (M : OrdinaryModel l E W)
     (X : CochainComplex (scalarReductionSource l E W) ℤ) {m n : ℕ} (h : n ≤ m) :
     (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h) (.up ℤ)).app
@@ -208,8 +210,7 @@ theorem OrdinaryModel.quotient_transition (M : OrdinaryModel l E W)
   ext i : 1
   exact M.transition (X.X i) h
 
-/-- The ordinary evaluation tensor comparison is natural in both complexes.
-Source: Stacks 03EK, 0941. -/
+/-- The ordinary evaluation tensor comparison is natural in both complexes. -/
 theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
     {P P' Q Q' : CochainComplex (coefficientSequenceModules l E W) ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
     ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
@@ -229,8 +230,7 @@ theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
   exact h
 
 -- Instantiating the generic naturality checks the concrete scalar extension interfaces.
-/-- The ordinary scalar tensor comparison is natural in both complexes.
-Source: Stacks 03EK, 07A4. -/
+/-- The ordinary scalar tensor comparison is natural in both complexes. -/
 theorem coefficientScalarTensorIso_naturality (n : ℕ)
     {P P' Q Q' : CochainComplex (scalarReductionSource l E W) ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
     ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map
@@ -253,8 +253,7 @@ theorem coefficientScalarTensorIso_naturality (n : ℕ)
     (coefficientScalarTensorIso_generators l E W n P' Q')
 
 /-- A presentation of a tensor product, assembled from natural evaluation and scalar tensor
-comparisons and a natural comparison `θ`, is natural in both inputs.
-Source: Stacks 07A4. -/
+comparisons and a natural comparison `θ`, is natural in both inputs. -/
 theorem evaluated_tensor_presentation_naturality {A S L : Type*} [Category* A] [Category* S]
     [Category* L] (tA : A × A ⥤ A) (tS : S × S ⥤ S) (tL : L × L ⥤ L) (K : A ⥤ S)
     (Ev : S ⥤ L) (F : A ⥤ L) (θ : K ⋙ Ev ≅ F)
@@ -286,8 +285,7 @@ theorem evaluated_tensor_presentation_naturality {A S L : Type*} [Category* A] [
     Category.assoc]
   rw [reassoc_of% (he (K.map f) (K.map g)), reassoc_of% hθ, hs']
 
-/-- The finite presentations of system tensor products are natural.
-Source: Stacks 03EK, 07A4 and 0941. -/
+/-- The finite presentations of system tensor products are natural. -/
 theorem OrdinaryModel.tensorPresentation_naturality (M : OrdinaryModel l E W) (n : ℕ)
     {P P' Q Q' : CochainComplex (scalarReductionSource l E W) ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
     ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
@@ -317,7 +315,7 @@ theorem OrdinaryModel.tensorPresentation_naturality (M : OrdinaryModel l E W) (n
 
 /-- The component of the tensor comparison for the ordinary quotient system: the strict
 comparison between the presentations of `M.quotient (P ⊗ Q)` and
-`M.quotient P ⊗ M.quotient Q`. Source: Stacks 07A4 and 0941. -/
+`M.quotient P ⊗ M.quotient Q`. -/
 def OrdinaryModel.quotientTensorApp (M : OrdinaryModel l E W)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     (M.quotient l E W).obj ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -334,8 +332,7 @@ def OrdinaryModel.quotientTensorApp (M : OrdinaryModel l E W)
     (fun h ↦ M.quotient_transition l E W _ h)
     (fun h ↦ M.tensorPresentation_transition l E W P Q h)
 
-/-- The finite evaluations of `OrdinaryModel.quotientTensorApp`.
-Source: Stacks 07A4 and 0941. -/
+/-- The finite evaluations of `OrdinaryModel.quotientTensorApp`. -/
 theorem OrdinaryModel.quotientTensorApp_evaluation (M : OrdinaryModel l E W) (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
@@ -348,8 +345,7 @@ theorem OrdinaryModel.quotientTensorApp_evaluation (M : OrdinaryModel l E W) (n 
     (fun h ↦ M.tensorPresentation_transition l E W P Q h) n
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The tensor comparison for the ordinary quotient system.
-Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941. -/
+/-- The tensor comparison for the ordinary quotient system. -/
 def OrdinaryModel.quotientTensor (M : OrdinaryModel l E W) :
     coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
@@ -372,8 +368,7 @@ def OrdinaryModel.quotientTensor (M : OrdinaryModel l E W) :
 set_option backward.isDefEq.respectTransparency false in
 /-- **Tensor comparison for the ordinary quotient system.** There is a natural isomorphism
 `M.quotient (P ⊗ Q) ≅ M.quotient P ⊗ M.quotient Q` whose finite evaluations are the
-ordinary scalar tensor comparisons, under the evaluation tensor comparisons.
-Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941. -/
+ordinary scalar tensor comparisons, under the evaluation tensor comparisons. -/
 theorem OrdinaryModel.quotientTensor_exists (M : OrdinaryModel l E W) :
     ∃ b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅

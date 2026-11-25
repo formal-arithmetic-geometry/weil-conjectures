@@ -111,10 +111,17 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalculusSupplement
 import WeilConjectures.SixFunctors.CoefSupportOpenTensor.CoefNativeFiniteTensorSupport
 
-/-! Finite coefficient evaluation of the native ordinary tensor counit.
+/-! # Finite coefficient evaluation of the native ordinary tensor counit
 
-Source: Stacks, Modules on Sites, Tag 0E8I.
-(blueprint: new-coef-native-open-tensor-ordinary-counit-evaluation).
+## Implementation details
+
+The proof identifies the evaluated sequence-site adjunction with the localized ordinary
+extension adjunction for the corresponding coefficient quotient and applies the ordinary
+projection formula on each coefficient quotient.
+
+## References
+
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -153,11 +160,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /--
 The ordinary native open tensor counit is invertible after every coefficient
-level evaluation. The proof identifies the evaluated sequence-site adjunction
-with the localized ordinary extension adjunction for the corresponding
-coefficient quotient and applies the ordinary projection formula of Tag 0E8I.
-Source: Stacks, sites-modules.tex, Tag 0E8I, proof on each coefficient quotient.
-(blueprint: new-coef-native-open-tensor-ordinary-counit-evaluation).
+level evaluation.
 -/
 theorem nativeOpenTensor_ordinary_counit_evaluation_isIso
     {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]

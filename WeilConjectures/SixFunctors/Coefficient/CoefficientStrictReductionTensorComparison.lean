@@ -11,8 +11,12 @@ import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryStrictTensorNo
 
 /-! # Strict reduction tensor comparison and its representative normalization
 
-Source: Stacks 06YS, 06YY, 07A4 and 0941.
-(blueprint: lem-coef-strict-reduction-tensor-comparison).
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -30,9 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 has the simultaneous representative normalization square. The finite projections
 are the prescribed scalar tensor maps on every flat-term K-flat pair.
 The comparison is asserted to exist, not quantified over: an arbitrary comparison
-need not be normalized (its negative has the same type but not the square).
-Source: Stacks 06YS, 06YY, 07A4 and 0941, representative tensor descent.
-(blueprint: lem-coef-strict-reduction-tensor-normalization-fixed). -/
+need not be normalized (its negative has the same type but not the square). -/
 theorem coefficientStrictReductionTensorNormalization_of
     (R : CoefficientDerivedSystemReduction l E W) :
     ∃ μ : R.integralClosed.tensor ⋙ R.reduction ≅

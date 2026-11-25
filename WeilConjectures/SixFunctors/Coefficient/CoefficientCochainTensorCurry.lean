@@ -79,7 +79,19 @@ import WeilConjectures.Algebra.Homology.HomTensorDifferential
 
 /-! # Currying chain maps by the signed sheaf tensor and Hom complex
 
-Source: Stacks Project, Tags 03EO, 0A8X and 0A90.
+## Implementation details
+
+The normalized degreewise tensor-Hom maps assemble into a chain isomorphism from
+`Hom(P, Hom(Q, I))` to `Hom(Tot(P, Q), I)`. A chain map is regarded as a closed degree-zero
+cochain, transported through this isomorphism via global sections, and transported back;
+uniqueness follows because identity evaluations determine a local Hom section. The construction
+works for unbounded complexes without a boundedness or generation assumption.
+
+## References
+
+* [Stacks, Tag 03EO]
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 0A90]
 -/
 
 @[expose] public section
@@ -108,16 +120,14 @@ local notation "Mod" => SheafOfModules.{max c v u}
 
 omit [HasSheafify J AddCommGrpCat.{max c v u}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}] in
-/-- Evaluate a local internal-Hom section on the identity object of its slice.
-Source: Stacks 03EO (blueprint: lem-sf-coefficient-cochain-tensor-curry). -/
+/-- Evaluate a local internal-Hom section on the identity object of its slice. -/
 noncomputable def coefficientHomSectionApply (L M : Mod) (U : Cᵒᵖ)
     (φ : (SheafOfModules.homObj (R := R) L M).val.obj U) (y : L.val.obj U) :
     M.val.obj U :=
   (φ.app (op (Over.mk (𝟙 U.unop)))) y
 
 /-- Literal evaluation of the curried chain map, before sheafification of each
-summand. Source: Stacks 03EO, 0A90
-(blueprint: lem-sf-coefficient-cochain-tensor-curry). -/
+summand. -/
 def IsCoefficientTensorCurry (P Q I : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{u, c, v} J R).obj (P, Q) ⟶ I)
     (g : P ⟶ homComplex (R := R) Q I) : Prop :=
@@ -292,25 +302,7 @@ private theorem sheafHom_ext (A B N : Mod)
   intro y x
   with_unfolding_all exact h U x y
 
-/-- Currying on complexes, with literal componentwise evaluation.
-Source: Stacks Project, Modules on Sites, Tag 03EO, and Cohomology on Sites,
-Tags 0A8X and 0A90
-(blueprint: lem-sf-coefficient-cochain-tensor-curry).
-
-Proof: the normalized degreewise tensor-Hom maps are isomorphisms and commute
-with the signed differentials. They assemble into a chain isomorphism from
-Hom(P,Hom(Q,I)) to Hom(Tot(P,Q),I). The product projections identify global
-sections of each Hom-complex term with ordinary cochains, and this identification
-commutes with differentials. Regard f as a closed degree-zero cochain. Transfer
-it to a global section, pull that section back through the chain isomorphism,
-and transfer back to a closed degree-zero cochain. Its associated chain map is g.
-The component formula for the global-section identification and the normalized
-degreewise tensor-Hom equation give exactly the displayed evaluation formula;
-transport along a+0=a aligns the dependent component indices. For uniqueness,
-identity evaluations determine a local Hom section: apply the presheaf tensor-Hom
-adjunction and test pure tensors. Thus all product projections of the two maps
-agree, and product extensionality gives equality. The construction works for
-unbounded complexes and zero summands without a boundedness or generation assumption. -/
+/-- Currying on complexes, with literal componentwise evaluation. -/
 theorem coefficientCochainTensorCurry_exists
     (P Q I : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{0, u + 1, u} J R).obj (P, Q) ⟶ I) :
