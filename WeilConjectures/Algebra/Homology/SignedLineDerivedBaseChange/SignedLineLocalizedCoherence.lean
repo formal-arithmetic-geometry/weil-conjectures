@@ -26,7 +26,6 @@ set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 set_option genSizeOf false
 set_option genInjectivity false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -468,6 +467,8 @@ variable
   (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
   (t : (pull a).obj P ≅ Q)
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+  [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem section_map {M N : KFlatFixedTensor.Modules R} (f : M ⟶ N)
     (V : C) (x : M.val.obj (op V)) :
     ((pull a).map f).val.app (op (U.obj V))
@@ -478,6 +479,8 @@ private theorem section_map {M N : KFlatFixedTensor.Modules R} (f : M ⟶ N)
   exact (congrArg (fun g ↦ g.val.app (op V) x)
     ((pullbackPushforwardAdjunction a).unit.naturality f)).symm
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat] [K.WEqualsLocallyBijective AddCommGrpCat]
+  [HasWeakSheafify J AddCommGrpCat] [HasWeakSheafify K AddCommGrpCat] in
 private theorem section_smul (M : KFlatFixedTensor.Modules R) (V : C)
     (r : R.obj.obj (op V)) (x : M.val.obj (op V)) :
     ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
@@ -487,6 +490,8 @@ private theorem section_smul (M : KFlatFixedTensor.Modules R) (V : C)
   let := module_pushforward_isRightAdjoint_of_universes a
   exact (((pullbackPushforwardAdjunction a).unit.app M).val.app (op V)).hom.map_smul r x
 
+omit [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
+  [K.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private theorem action_square
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules R)]
     [HasDerivedCategory.{z} (KFlatFixedTensor.Modules S)]

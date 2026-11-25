@@ -32,7 +32,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
@@ -79,6 +78,9 @@ variable
   (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
   (t : (pull a).obj P ≅ Q)
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v w}] in
 /-- Pullback with invertible structural ring map preserves finite limits. -/
 theorem identified_ring_pullback_presentations
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
@@ -205,6 +207,9 @@ theorem identified_ring_pullback_presentations
     (CategoryTheory.SignedLinePullbackConstruction.sheafPullbackForgetIso_unit
       J K U (CategoryTheory.forget AddCommGrpCat.{max u v w}) ((toSheaf A).obj M))
 
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v w}] in
 /-- Coefficient-identified module pullback preserves finite limits. -/
 theorem identified_ring_pullback_finiteLimits
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]

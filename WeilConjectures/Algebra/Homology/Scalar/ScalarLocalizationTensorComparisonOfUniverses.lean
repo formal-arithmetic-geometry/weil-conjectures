@@ -35,7 +35,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 set_option maxRecDepth 2048
 universe uC vC u v w uD vD uT vT uB vB r a b
@@ -122,7 +121,8 @@ private noncomputable def restrictionSheafificationComparisonAux
     ((PresheafOfModules.restrictScalars α.hom).map
       ((PresheafOfModules.sheafificationAdjunction (𝟙 B₀.obj)).unit.app P))
 
-omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
+omit [EssentiallySmall.{u} C] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [HasSheafify J CommRingCat.{u}] in
 private theorem restrictionSheafificationComparison_isIsoAux
     (α : R₀ ⟶ B₀) (P : PresheafOfModules.{u} B₀.obj) :
     IsIso (restrictionSheafificationComparisonAux α P) := by
@@ -140,7 +140,8 @@ private theorem restrictionSheafificationComparison_isIsoAux
   rw [he]
   infer_instance
 
-omit [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})] in
+omit [EssentiallySmall.{u} C] [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+  [HasSheafify J CommRingCat.{u}] in
 private theorem restrictionSheafificationComparison_unitAux
     (α : R₀ ⟶ B₀) (P : PresheafOfModules.{u} B₀.obj)
     (W : Cᵒᵖ) (x : P.obj W) :
@@ -171,6 +172,7 @@ def scalarTelescopeTensorUnitOfUniverses
 
 set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
+omit [HasSheafify J CommRingCat.{u}] in
 /-- Restricted extension of scalars is tensoring with the restricted target ring. -/
 theorem exists_scalarTelescopeTensorComparisonOfUniverses (φ : R ⟶ S)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
@@ -249,6 +251,7 @@ def scalarTelescopeRegularTensorIsoOfUniverses
     (asIso (PresheafOfModules.sheafificationAdjunction
       (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)).counit).app M
 
+omit [HasSheafify J CommRingCat.{u}] in
 private lemma whiskerRight_tensorObjIsoSheafification_homAux {A A' : SheafOfModules.{u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
     (f : A' ⟶ A) (T : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
@@ -269,6 +272,7 @@ private lemma whiskerRight_tensorObjIsoSheafification_homAux {A A' : SheafOfModu
   rw [← Category.assoc, ← h, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
   rfl
 
+omit [HasSheafify J CommRingCat.{u}] in
 /-- Pure tensor sections commute with maps of the first factor. -/
 theorem scalarTelescopeTensorUnit_naturalityOfUniverses
     {L L' : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
@@ -291,6 +295,7 @@ theorem scalarTelescopeTensorUnit_naturalityOfUniverses
 
 set_option maxHeartbeats 50000 in
 -- Elaborating the tensor unitor requires additional coefficient comparisons.
+omit [HasSheafify J CommRingCat.{u}] in
 /-- The inverse regular tensor unitor sends a section to the local tensor of one with it. -/
 theorem scalarTelescopeRegularTensorIso_inv_applyOfUniverses
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))

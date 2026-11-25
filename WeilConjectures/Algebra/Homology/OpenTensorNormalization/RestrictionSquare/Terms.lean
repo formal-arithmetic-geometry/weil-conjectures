@@ -72,6 +72,7 @@ def suffix (P Q : CochainComplex (FiniteModules A X) ℤ)
       ((total (finiteInput A gU j' j g sq).R).obj
         ((finiteComplexRealization e.realizeX).obj P, (finiteComplexRealization e.realizeX).obj Q))
 
+-- The linter misses the use of `IsOpenImmersion j'` inside the proof.
 set_option linter.unusedSectionVars false in
 /-- The cancellable suffix is invertible. -/
 theorem suffix_isIso (P Q : CochainComplex (FiniteModules A X) ℤ)

@@ -80,6 +80,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
+-- Dropping the unused tower hypotheses would change the theorem statement.
 set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
 /-- The localized comparison commutes with the characterized coefficient map. -/

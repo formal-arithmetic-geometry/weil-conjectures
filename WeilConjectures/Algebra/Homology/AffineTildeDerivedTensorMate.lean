@@ -183,8 +183,6 @@ attribute [local irreducible] tilde Functor.mapDerivedCategory affineTildePushfo
   schemeDerivedBaseChangeMap affineTildeTensorDerivedCounit affineTildeTensorOrdinaryTargetMap
   affineTildeDerivedTensorToPushforward
 
-
-set_option linter.unusedVariables false in
 /-- The affine base-change mate on the derived scalar-extension object, before
 applying any homology functor. Its source comparison is independent of D. -/
 theorem exists_affineTildeDerivedTensorMate
@@ -196,8 +194,8 @@ theorem exists_affineTildeDerivedTensorMate
         Spec.map (CommRingCat.ofHom (algebraMap R A)) =
       Spec.map (CommRingCat.ofHom ψ) ≫
         Spec.map (CommRingCat.ofHom (algebraMap R B)))
-    (hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M)
-    (hK : schemeDerivedQCohProperty (Spec (.of A))
+    (_hM : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat M)
+    (_hK : schemeDerivedQCohProperty (Spec (.of A))
       (DerivedCategory.Q.obj
         (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj M)))
     (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app
@@ -219,7 +217,7 @@ theorem exists_affineTildeDerivedTensorMate
         (Spec.map (CommRingCat.ofHom φ)) hw K =
       affineTildeDerivedTensorToPushforward R A B D M m φ ψ hφ hψ ≫
         (schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom ψ))).map t.hom := by
-  clear hM hK
+  clear _hM _hK
   let f := Spec.map (CommRingCat.ofHom (algebraMap R A))
   let g := Spec.map (CommRingCat.ofHom (algebraMap R B))
   let p := Spec.map (CommRingCat.ofHom φ)
