@@ -11,8 +11,18 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorChainCompositionProof
 
 /-! # Composition of normalized strict tensor Roos maps
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-roos).
+We show that the strict tensor Roos maps are compatible with composition of reindexings along
+isomorphisms, before localization (`podCompositionTensorRoos`).
+
+## Implementation details
+
+The strict tensor-tower square is checked on pure tensors in each quotient and homogeneous
+summand. For the Roos realization, the two coordinates of the mapping cocone are compared using
+the `RoosFst` and `RoosSnd` formulas; they are jointly monic.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941
 -/
 
 @[expose] public noncomputable section
@@ -53,24 +63,8 @@ attribute [local implicit_reducible] integralOperationsRoosFunctor
 
 -- The three coefficient actions and their whole-tower comparisons elaborate together.
 /-- Composition before localization of the strict tensor Roos maps.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-roos).
-
-Proof: in each positive quotient and each homogeneous summand, the three tensor
-maps send x tensor y to the tensor of the quotient comparison images. The quotient
-comparison sends a tensor x to the transported coefficient tensor x. Naturality
-of the sheafification units and the section formula for the compositor show that
-successive restrictions equal restriction along the composite. Pure tensors,
-scalar-reduction generators and the direct-sum inclusions determine the entire
-maps. Thus the strict tensor-tower square commutes, including all transitions.
-For the Roos realization, each product projection identifies the composite
-product comparison with the product comparison for the composite reindexing.
-The RoosFst and RoosSnd formulas identify both coordinates of the cone maps;
-RoosNaturality moves the intermediate tower map past the second Roos comparison.
-The mapping-cocone decomposition of the identity makes these two coordinates
-jointly monic. This proves the displayed equality of chain maps. No localization,
-representative comparison, derived tensor map or constructibility is involved.
-The same calculation covers zero complexes and empty schemes. -/
+For isomorphisms `h : Z ⟶ W` and `f : W ⟶ V`, the strict tensor Roos maps of `f`, `h` and
+`h ≫ f` satisfy the composition equation `PodTensorChainComposition`, as chain maps. -/
 theorem podCompositionTensorRoos
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

@@ -11,8 +11,18 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # The strict tensor quotient augmentation
 
-The constructed map retains both coordinates of the strict Roos complex.
-Source: Stacks 03EL, 07A4 and 0941.
+We construct the strict natural map from the ordinary to the completed tensor product, built
+from the normalized quotient tower.
+
+## Implementation details
+
+The constructed map retains both coordinates of the strict Roos complex. Naturality of the
+quotient completion unit holds because the product augmentation is natural and the second
+coordinate vanishes.
+
+## References
+
+* [Stacks, Tags 03EL, 07A4, 08TC, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -40,9 +50,7 @@ attribute [local irreducible] completedIntegralCommRingSheafUnrestricted
 attribute [local implicit_reducible] IntegralOnSlice.ring IntegralOnSlice.restrict
   IntegralOnSlice.topology IntegralOnSlice.Site IntegralOnSlice.roos IntegralAmbient.tensorTower
 
-/-- Naturality of the fixed quotient completion unit.
-Source: Stacks 08TC (blueprint: lem-pur-strict-tensor-augmentation-construction).
-Proof: the product augmentation is natural and the second coordinate vanishes. -/
+/-- Naturality of the fixed quotient completion unit. -/
 theorem unit_naturality (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) {P Q : IntegralOnSlice.Cx.{u, u} l E T none} (f : P ⟶ Q) :
@@ -51,8 +59,7 @@ theorem unit_naturality (l : ℕ) [Fact l.Prime]
         (IntegralOnSlice.roos.{u, u} l E T none).map f :=
   IntegralOnSlice.sliceRoosUnit_natural.{u, u} l E T none f
 
-/-- The natural quotient completion unit.
-Source: Stacks 08TC (blueprint: lem-pur-strict-tensor-augmentation-construction). -/
+/-- The natural quotient completion unit. -/
 def unit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) :
@@ -60,9 +67,7 @@ def unit (l : ℕ) [Fact l.Prime]
   app := IntegralOnSlice.roosUnit.{u, u} l E T none
   naturality _ _ f := unit_naturality l E T f
 
-/-- The strict ordinary-to-completed tensor map built from the normalized quotient tower.
-Source: Stacks 03EL, 07A4 and 0941
-(blueprint: lem-pur-strict-tensor-augmentation-construction). -/
+/-- The strict ordinary-to-completed tensor map built from the normalized quotient tower. -/
 def map (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) :
@@ -81,9 +86,7 @@ def map (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] IntegralOnSlice.roosUnit IntegralAmbient.tensorTowerIso
 
-/-- The constructed transformation has the recorded strict augmentation as each component.
-Source: Stacks 03EL and 08TC
-(blueprint: lem-pur-strict-tensor-augmentation-construction). -/
+/-- The constructed transformation has the recorded strict augmentation as each component. -/
 theorem map_app (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) (P Q : CochainComplex (integralTowerModules.{u, u} l E T) ℤ) :

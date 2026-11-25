@@ -9,8 +9,23 @@ public import WeilConjectures.ProperBaseChange.ProperIntegralOrdinaryData
 
 /-! # Coordinates of the transported ordinary completion chain
 
-Source: Stacks Tags 08TC and 0941; Bhatt--Scholze Lemma 6.5.9(4).
-(blueprint: lem-weil-pbc-integral-completion-transport-coordinates).
+Coefficient transport takes the ordinary completion chain of an integral pullback to the actual
+quotient augmentation in the first coordinate of the Roos complex, and to zero in the second.
+
+## Main results
+
+- `WeilConjectures.pbc_integral_completion_transport_coordinates`: the coordinate description.
+
+## Implementation details
+
+The proof composes the inverse module identification, the transported ordinary chain and the
+identification `z`, then compares coordinates using the lift formulas for mapping cones and
+products. No resolution or derived-unit formula enters.
+
+## References
+
+- Stacks Project, Tags 08TC and 0941.
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4).
 -/
 
 @[expose] public noncomputable section
@@ -27,22 +42,7 @@ private abbrev boundary {A : Type*} [Category* A] [Abelian A]
     (integralOperationsTowerStep C)
 
 /-- Coefficient transport takes the ordinary completion chain to the actual
-quotient augmentation in the first coordinate and zero in the second.
-
-Source: Stacks Tags 08TC and 0941; Bhatt--Scholze Lemma 6.5.9(4).
-(blueprint: lem-weil-pbc-integral-completion-transport-coordinates).
-
-Proof: define c by composing the inverse module identification, the transported
-ordinary chain and z. Cancel the module identification for the first equality.
-For each first product projection, the coordinate identity of z reduces the
-composite to scalar restriction of the ordinary chain followed by its first
-projection and the inverse component of t. The mapping-cocone lift formula and
-product lift formula identify this with the transported quotient augmentation.
-The assumed augmentation equation and the two inverse identities give the actual
-augmentation. For the shifted coordinate use product extensionality, the second
-coordinate identity of z, and the zero shifted coordinate of the ordinary lift.
-Scalar restriction preserves zero. No resolution or derived-unit formula enters.
-The argument applies to zero complexes and empty schemes. -/
+quotient augmentation in the first coordinate and zero in the second. -/
 theorem pbc_integral_completion_transport_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

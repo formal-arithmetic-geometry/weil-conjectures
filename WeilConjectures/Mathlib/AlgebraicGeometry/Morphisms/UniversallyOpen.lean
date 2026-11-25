@@ -21,8 +21,7 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-- A flat morphism locally of finite presentation `f : X ⟶ Y` is an open map, and the same holds
-after every base change `X ×_Y Y' ⟶ Y'` (Stacks `01UA`).
-(blueprint: `lem-weil-pbc-flat-lfp-open`) -/
+after every base change `X ×_Y Y' ⟶ Y'` (Stacks `01UA`). -/
 theorem Flat.isOpenMap_and_isOpenMap_pullback_snd {X Y : Scheme} (f : X ⟶ Y) [Flat f]
     [LocallyOfFinitePresentation f] :
     IsOpenMap f.base ∧ ∀ ⦃Y' : Scheme⦄ (g : Y' ⟶ Y), IsOpenMap (pullback.snd f g).base :=

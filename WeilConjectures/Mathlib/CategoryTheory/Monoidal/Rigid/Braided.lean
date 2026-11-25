@@ -57,6 +57,9 @@ and `End (𝟙_ C) = R`.
 In a merely braided category the two ways of turning `X ⊗ Xᘁ` into `Xᘁ ⊗ X` differ, and
 `trace` uses `(β_ X Xᘁ).hom`. In the symmetric case, which is the one the trace formula
 uses, the two agree.
+
+Internal homs out of dualizable objects are tensor products with their duals; this is how the
+external Hom isomorphisms at the end of the file are built.
 -/
 
 @[expose] public section
@@ -75,10 +78,7 @@ composite
   𝟙_ C ──────→ X ⊗ Xᘁ ──────→ X ⊗ Xᘁ ──────→ Xᘁ ⊗ X ──────→ 𝟙_ C
 ```
 
-of the coevaluation, `f ⊗ 𝟙`, the braiding and the evaluation. For the symmetric monoidal
-category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R` this is
-`tr_R(f | P)`, an element of `End (𝟙_ C) = R`
-(blueprint: `definition-categorical-trace--2`). -/
+of the coevaluation, `f ⊗ 𝟙`, the braiding and the evaluation. -/
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
 
@@ -144,8 +144,8 @@ theorem trace_comp_comm {X Y : C} [HasRightDual X] [HasRightDual Y] (g : X ⟶ Y
     BraidedCategory.braiding_naturality_right_assoc, rightAdjointMate_comp_evaluation,
     ← BraidedCategory.braiding_naturality_left_assoc]
 
-/-- Blueprint `proposition-properties-trace` (1), conjugacy invariance of the trace: if
-`w : X ≅ X'` intertwines `f : X ⟶ X` and `f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
+/-- Conjugacy invariance of the trace: if `w : X ≅ X'` intertwines `f : X ⟶ X` and
+`f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
 theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅ X') (f : X ⟶ X)
     (f' : X' ⟶ X') (h : f ≫ w.hom = w.hom ≫ f') : trace f = trace f' := by
   have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]
@@ -320,13 +320,8 @@ lemma IsPerfectPairing.evaluation_exactPairing {X Y : C} (hX : IsDualizable X)
     ε_ Y X = b :=
   uncurry_curry b
 
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`definition-perfect-pairing--1`): perfectness of a pairing is symmetric in the two variables.
-
-If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
-swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`: `b` is the
-evaluation of an exact pairing of `Y` and `X`, and the braiding turns it into an exact pairing
-of `X` and `Y` whose evaluation is the swapped pairing. -/
+/-- If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
+swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`. -/
 theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
     {b : X ⊗ Y ⟶ 𝟙_ C} (h : IsPerfectPairing b) : IsPerfectPairing ((β_ Y X).hom ≫ b) := by
   let := h.exactPairing hX
@@ -336,11 +331,8 @@ theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
     rfl
   exact ⟨hε ▸ isIso_curry_evaluation X Y⟩
 
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`definition-perfect-pairing--1`): perfectness of a pairing is symmetric in the two variables.
-
-In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
-(for instance perfect point complexes) is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped
+/-- In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
+is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped
 pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect, `X ≅ [Y, 𝟙_ C]`. -/
 theorem isPerfectPairing_braiding_hom_comp_iff {C : Type*} [Category C] [MonoidalCategory C]
     [SymmetricCategory C] [MonoidalClosed C] {X Y : C} (hX : IsDualizable X)
@@ -382,8 +374,7 @@ end MonoidalClosed
 
 /-- **Duality into an invertible object.** In a braided monoidal closed category, for a
 dualizable `K` and an invertible `ω`, the double `ω`-dual of `K` is `K`:
-`[[K, ω], ω] ≅ K`. Indeed `[K, ω] ≅ Kᘁ ⊗ ω`, whose left dual is `M ⊗ K` for a tensor inverse `M`
-of `ω`, so `[[K, ω], ω] ≅ (M ⊗ K) ⊗ ω ≅ K ⊗ (M ⊗ ω) ≅ K`. -/
+`[[K, ω], ω] ≅ K`. -/
 theorem nonempty_iso_ihom_obj_ihom_obj_of_isInvertible {K ω : C} (hK : IsDualizable K)
     (hω : IsInvertible ω) :
     Nonempty ((ihom ((ihom K).obj ω)).obj ω ≅ K) := by
@@ -412,9 +403,7 @@ noncomputable def tensorTensorRearrangeIso (a b c d : C) :
 
 /-- **The external Hom map for dualizable objects.** For monoidal functors `F₁ : C₁ ⥤ C`,
 `F₂ : C₂ ⥤ C` into a braided monoidal closed category and dualizable `E₁`, `E₂`,
-`F₁ [E₁, N₁] ⊗ F₂ [E₂, N₂] ≅ [F₁ E₁ ⊗ F₂ E₂, F₁ N₁ ⊗ F₂ N₂]`: both sides are
-`F₂ E₂ᘁ ⊗ F₁ E₁ᘁ ⊗ F₁ N₁ ⊗ F₂ N₂` up to rearrangement, internal homs out of dualizable objects
-being tensor products with their duals. -/
+`F₁ [E₁, N₁] ⊗ F₂ [E₂, N₂] ≅ [F₁ E₁ ⊗ F₂ E₂, F₁ N₁ ⊗ F₂ N₂]`. -/
 theorem nonempty_iso_tensorObj_map_ihom_obj {E₁ N₁ : C₁} {E₂ N₂ : C₂} (h₁ : IsDualizable E₁)
     (h₂ : IsDualizable E₂) :
     Nonempty (F₁.obj ((ihom E₁).obj N₁) ⊗ F₂.obj ((ihom E₂).obj N₂) ≅
@@ -436,7 +425,7 @@ theorem nonempty_iso_tensorObj_map_ihom_obj {E₁ N₁ : C₁} {E₂ N₂ : C₂
 omit [MonoidalCategory C₁] [BraidedCategory C₁] [MonoidalClosed C₁] [F₁.Monoidal] in
 /-- **The Künneth–Verdier map for a dualizable second factor.** For monoidal functors
 `F₁ : C₁ ⥤ C`, `F₂ : C₂ ⥤ C` into a braided monoidal closed category and a dualizable `N`,
-`F₁ M ⊗ F₂ [N, ω] ≅ [F₂ N, F₁ M ⊗ F₂ ω]`: both sides are `F₂ Nᘁ ⊗ F₁ M ⊗ F₂ ω`. -/
+`F₁ M ⊗ F₂ [N, ω] ≅ [F₂ N, F₁ M ⊗ F₂ ω]`. -/
 theorem nonempty_iso_tensorObj_map_ihom_obj_right (M : C₁) {N : C₂} (ω : C₂)
     (hN : IsDualizable N) :
     Nonempty (F₁.obj M ⊗ F₂.obj ((ihom N).obj ω) ≅

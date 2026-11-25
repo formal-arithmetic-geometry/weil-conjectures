@@ -88,8 +88,22 @@ import WeilConjectures.ProperBaseChange.CompletedPullbackStrictNormalization
 
 /-! # Actual completion unit in Roos coordinates
 
-Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-integral-actual-unit-roos-normalization).
+On a good representative, the strict completion unit of the integral coefficients is computed
+by any chain augmentation into the Roos complex with quotient first coordinates and zero second
+coordinate.
+
+## Implementation details
+
+The proof transports the complex along the quotient-normalized coefficient equivalence, expands
+the completed pullback comparison into the constant-derived-limit unit and the pulled strict
+quotient augmentation, and identifies the resulting chain map with the composite of the given
+augmentation and the Roos map coordinatewise, using whole strict towers rather than derived
+level projections.
+
+## References
+
+* [B. Bhatt, P. Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4), Remark 6.8.15]
+* [Stacks Project, Tags 0941 and 099N]
 -/
 
 @[expose] public noncomputable section
@@ -328,31 +342,8 @@ private theorem lift_roos
       ← Category.assoc, hc₂, zero_comp]
 
 /-- On a good representative, the actual strict completion unit is computed by
-any chain augmentation with quotient first coordinates and zero second coordinate.
-This concerns only the actual completed coefficients; no ordinary integral model
-comparison or pullback identification is an input.
-
-Source: Stacks 0941, proof of lemma-derived-limit-is-ok, and 099N(5);
-Bhatt--Scholze, Lemma 6.5.9(4).
-(blueprint: lem-weil-pbc-integral-actual-unit-roos-normalization).
-
-Proof: transport P by the quotient-normalized coefficient equivalence, which
-preserves flat terms and K-flatness. Expand completedPullbackComparison into the
-constant-derived-limit unit and the pulled strict quotient augmentation. Apply
-the representative normalizations of completedPullbackConstantIso and
-completedReductionTowerUnit, retaining their universal counits. Naturality of
-the tower pullback counit identifies their composite with the actual module
-quotient augmentation. The constant/limit adjunction sends this strict
-augmentation followed by r to its compatible-family lift into the termwise
-limit of I. Naturality of the right-derived unit and its computation on I
-therefore give the left side as ordinary pullback's computation counit followed
-by the localized compatible-family lift and localized iota. The first
-coordinates of this chain composite are augmentation_n followed by r_n; its
-second coordinate is zero. The same equations hold for c followed by the Roos
-map of r, by diagonal functoriality of the mapping cocone. Product and cocone
-extensionality identify the chain maps. Localize to get the displayed formula.
-The argument uses whole strict towers; equality of derived level projections
-alone is not used. Zero complexes and empty schemes obey the same formulas. -/
+any chain augmentation `c` into the Roos complex with quotient first coordinates and zero second
+coordinate. -/
 theorem pbc_integral_actual_unit_roos_normalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

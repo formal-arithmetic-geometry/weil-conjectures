@@ -9,10 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.NoetherianSpace
 
-/-! Geometric factorization used by the topological locally closed extension.
-The conclusion is the scheme level open--closed factorization; coefficient transport
-and module exactness are handled by the parent theorem.
-(blueprint: lem-sfb-topological-locally-closed-extension)
+/-! # Open–closed factorization of immersions into Noetherian schemes
+
+An immersion into a scheme with Noetherian underlying space factors as an open immersion
+followed by a closed immersion. This is the geometric input for extension along topologically
+locally closed immersions.
 -/
 
 @[expose] public section
@@ -21,7 +22,8 @@ universe u
 
 open CategoryTheory AlgebraicGeometry
 
-/-- A topologically Noetherian target turns an immersion into an open--closed factor. -/
+/-- An immersion `f : T ⟶ X` into a scheme with Noetherian underlying space factors as an open
+immersion followed by a closed immersion. -/
 theorem exists_open_closed_factorization {T X : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace X] (f : T ⟶ X) [IsImmersion f] :
     ∃ (Z : Scheme.{u}) (j : T ⟶ Z) (i : Z ⟶ X),

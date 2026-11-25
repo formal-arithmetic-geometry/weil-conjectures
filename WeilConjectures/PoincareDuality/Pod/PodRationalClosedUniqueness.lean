@@ -9,14 +9,23 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Uniqueness of the rational normalized partial closed datum
 
-Source: Stacks Project, Tag 08J9; the rational localization step in the
-blueprint `lem-pod-derived-automorphism-hom-evaluation`.
-(blueprint: lem-pod-rational-closed-uniqueness)
+We show that a rational partial closed datum is determined by its pure-tensor
+normalization.
 
-Pure tensors generate the localized Hom groups. Equality on the prescribed
-pure-tensor inverse transposes therefore determines every transpose, and
-`podPartialClosed_ext` turns equality of those transposes into equality of the
-partial closed data.
+## Main statements
+
+* `podRationalClosed_unique`: two normalized rational partial closed data are equal.
+
+## Implementation details
+
+The recorded rational Hom object equals the integral Hom object tensored with the
+localization, so pure tensors generate the localized Hom groups. Equality of the inverse
+transposes on pure tensors therefore determines every transpose, and `podPartialClosed_ext`
+turns equality of those transposes into equality of the partial closed data.
+
+## References
+
+* [Stacks Project, Tag 08J9](https://stacks.math.columbia.edu/tag/08J9)
 -/
 
 @[expose] public noncomputable section
@@ -48,17 +57,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
   [∀ w : W, Invertible (l : W.residueField w)]
 
-/-- Two rational partial closed data satisfying the pure-tensor normalization
-are equal. This is the uniqueness part of `podRationalClosed_existsUnique`.
-Source: Stacks Project, Tag 08J9; the assigned localization normalization in
-`lem-pod-derived-automorphism-hom-evaluation` (agent refinement of coefficient transport).
-Proof: the recorded rational Hom object equals the unchanged integral Hom
-object. Transport along this equality and induct on its tensor-product Hom
-module. The normalization makes the two inverse transposes equal on every
-pure tensor; additivity gives equality on zero and sums. Injectivity of the
-inverse equivalences then gives equality of the forward transposes. Apply
-`podPartialClosed_ext`; its naturality fields are propositions.
-(blueprint: lem-pod-rational-closed-uniqueness). -/
+/-- Two rational partial closed data satisfying the pure-tensor normalization are equal.
+This is the uniqueness part of `podRationalClosed_existsUnique`. -/
 theorem podRationalClosed_unique
     (S S' : PodPartialClosed (rationalDerivedTensor l E W)
       (constructibleRationalHomPairs l E W) (rationalDerivedInternalHom l E W))

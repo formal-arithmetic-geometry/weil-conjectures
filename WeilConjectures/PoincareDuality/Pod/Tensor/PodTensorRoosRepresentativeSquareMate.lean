@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.Products.Basic
 
 /-! # The adjunction calculation behind the canonical representative square
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5
-(blueprint: lem-pod-tensor-roos-representative-square).
-
 Two reduction/limit adjunctions, a limit comparison `δ` and a reduction comparison `a`
 satisfying the transported unit and counit laws identify the coherent tensor arrow,
 followed by the ordinary-to-completed maps, with the ordinary-to-completed map
@@ -32,8 +29,7 @@ variable {CY : Type u₁} {CX : Type u₂} {AY : Type u₃} {AX : Type u₄}
 
 /-- One input factor of the representative square: the reduction comparison followed by
 the reduction of the ordinary-to-completed map is the inverse target counit followed by the
-reduction of the pullback model.
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5. -/
+reduction of the pullback model. -/
 theorem podMate_factor
     (F : CY ⥤ CX) (Pb : CY ⥤ CX) (V₁ V₂ : AY ⥤ AX) (j : V₂ ≅ V₁)
     {RY : CY ⥤ AY} {LY : AY ⥤ CY} (adjY : RY ⊣ LY)
@@ -66,8 +62,7 @@ theorem podMate_factor
   simp only [Category.assoc]
 /-- The unit and counit bookkeeping on the source side: the ordinary-to-completed map of a
 completed tensor, followed by the reduction of its tensor model and the source counit, is the
-reindexed tensor model followed by the limit comparison.
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5. -/
+reindexed tensor model followed by the limit comparison. -/
 theorem podMate_source
     (F : CY ⥤ CX) (V₁ V₂ : AY ⥤ AX) (j : V₂ ≅ V₁)
     {RY : CY ⥤ AY} {LY : AY ⥤ CY} (adjY : RY ⊣ LY) {LX : AX ⥤ CX}
@@ -88,9 +83,7 @@ theorem podMate_source
     Category.comp_id]
 /-- The representative square in adjunction form. The coherent tensor arrow `κ`,
 followed by the tensor of the two ordinary-to-completed maps, is the ordinary-to-completed
-map of the tensor followed by the counit-conjugated system tensor comparison.
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5
-(blueprint: lem-pod-tensor-roos-representative-square). -/
+map of the tensor followed by the counit-conjugated system tensor comparison. -/
 theorem podMate_square
     (F : CY ⥤ CX) (Pb : CY ⥤ CX) (V₁ V₂ : AY ⥤ AX) (j : V₂ ≅ V₁)
     {RY : CY ⥤ AY} {LY : AY ⥤ CY} (adjY : RY ⊣ LY)

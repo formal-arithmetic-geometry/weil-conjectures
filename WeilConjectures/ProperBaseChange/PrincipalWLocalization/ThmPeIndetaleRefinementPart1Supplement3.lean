@@ -12,13 +12,21 @@ public import Mathlib.Algebra.Algebra.Pi
 
 /-! # The finite-partition principal w-localization
 
-Source: blueprint, proper base change, definition of the affine w-localization, order 1222
-(blueprint: theorem-existence-contractible-covers--1).
+The affine principal w-localization of a commutative ring `A` is the filtered colimit, over
+finite constructible partitions of `Spec A` equipped with one nonvanishing denominator per part,
+of the products of the corresponding principal localizations. It is ind-Zariski in the
+principal-localization sense.
+
+## Implementation details
 
 The indices remember both the finite constructible partition and its denominators.
 Refinement requires divisibility of denominators, so the component localization maps exist.
 This construction is distinct from the upstream `WLocalization`, whose stages use localizations
 at larger submonoids. No geometric property or comparison with that construction is asserted.
+
+The index category is filtered: it is inhabited by the one-part partition with denominator one
+when the spectrum is nonempty, and by the empty partition otherwise; two indices are refined by
+all nonempty intersections, with denominator the product of the two denominators.
 -/
 
 @[expose] public section
@@ -32,8 +40,7 @@ namespace PrincipalWLocalization
 variable (A : Type u) [CommRing A]
 
 /-- A finite constructible partition of `Spec A` with one nonvanishing denominator per part.
-The unique-membership condition allows the empty partition precisely for an empty spectrum.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+The unique-membership condition allows the empty partition precisely for an empty spectrum. -/
 structure Index where
   parts : Finset (Set (PrimeSpectrum A))
   nonempty : ∀ E ∈ parts, Set.Nonempty E
@@ -44,20 +51,16 @@ structure Index where
 
 variable {A}
 
-/-- Refinement together with divisibility from each parent denominator to the child denominator.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- `Refines i j`: every part of `j` lies in a part of `i` whose denominator divides its own. -/
 def Refines (i j : Index A) : Prop :=
   ∀ F : j.parts, ∃ E : i.parts, F.val ⊆ E.val ∧ i.denominator E ∣ j.denominator F
 
-/-- Refinement is reflexive: use each part itself and reflexivity of subset and divisibility.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- Refinement is reflexive. -/
 theorem refines_refl (i : Index A) : Refines i i := by
   intro F
   exact ⟨F, Set.Subset.rfl, dvd_refl _⟩
 
-/-- Refinement is transitive: choose the intermediate parent, then its parent, and compose
-subset inclusions and divisibility relations. Source: blueprint order 1222
-(blueprint: theorem-existence-contractible-covers--1). -/
+/-- Refinement is transitive. -/
 theorem refines_trans (i j k : Index A) (hij : Refines i j) (hjk : Refines j k) :
     Refines i k := by
   intro F
@@ -65,36 +68,30 @@ theorem refines_trans (i j k : Index A) (hij : Refines i j) (hjk : Refines j k) 
   obtain ⟨D, hED, hdED⟩ := hij E
   exact ⟨D, hFE.trans hED, hdED.trans hdFE⟩
 
-/-- The index preorder, with exactly the refinement/divisibility relation as its order.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- The index preorder, with exactly the refinement/divisibility relation as its order. -/
 instance indexPreorder : Preorder (Index A) where
   le := Refines
   le_refl := refines_refl
   le_trans := refines_trans
 
 /-- The product of principal localizations at an index; the empty product is the zero ring.
-Its ring operations and its diagonal algebra structure are the standard Pi structures.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+Its ring operations and its diagonal algebra structure are the standard Pi structures. -/
 abbrev Stage (i : Index A) : Type u :=
   (E : i.parts) → Localization.Away (i.denominator E)
 
-/-- Choose the parent supplied by refinement. It is unique because the child is nonempty
-and different parts of a partition are disjoint. Source: blueprint order 1222
-(blueprint: theorem-existence-contractible-covers--1). -/
+/-- The parent part supplied by refinement. It is unique because the child is nonempty
+and different parts of a partition are disjoint. -/
 noncomputable def parent {i j : Index A} (h : i ≤ j) (F : j.parts) : i.parts :=
   Classical.choose (h F)
 
-/-- The chosen parent's denominator divides the child's denominator, by the refinement data.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1).
-Proof: take the divisibility clause of the witness selected by `parent`. -/
+/-- The chosen parent's denominator divides the child's denominator. -/
 theorem parent_dvd {i j : Index A} (h : i ≤ j) (F : j.parts) :
     i.denominator (parent h F) ∣ j.denominator F := by
   exact (Classical.choose_spec (h F)).2
 
-/-- The component map is projection to the parent followed by the unique localization map.
-The parent's denominator is a unit in the child localization by divisibility. The lift sends
-`a/f^n` to `(a/1)(f/1)^(-n)`. Source: blueprint order 1222
-(blueprint: theorem-existence-contractible-covers--1). -/
+/-- The component map is projection to the parent followed by the unique localization map,
+sending `a/f^n` to `(a/1)(f/1)^(-n)`; the parent's denominator is a unit in the child
+localization by divisibility. -/
 noncomputable def transition {i j : Index A} (h : i ≤ j) : Stage i →ₐ[A] Stage j :=
   AlgHom.pi fun F ↦
     (IsLocalization.Away.liftAlgHom (i.denominator (parent h F))
@@ -120,9 +117,7 @@ private theorem component_eq {B : Type u} [CommRing B] [Algebra A B]
     (Subsingleton.elim (h := IsLocalization.algHom_subsingleton
       (Submonoid.powers (i.denominator E))) φ ψ) (x E)
 
-/-- Identity transitions are identities. A nonempty part has itself as its unique parent;
-localization uniqueness identifies its component map with the identity.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- Identity transitions are identities. -/
 theorem transition_id (i : Index A) : transition (le_refl i) = AlgHom.id A (Stage i) := by
   apply AlgHom.ext
   intro x
@@ -133,10 +128,8 @@ theorem transition_id (i : Index A) : transition (le_refl i) = AlgHom.id A (Stag
       (IsLocalization.Away.isUnit_of_dvd (i.denominator E) (parent_dvd (le_refl i) E)))
     (AlgHom.id A _) x
 
-/-- Transitions compose. For each final child the two successive parents equal its direct
-parent by the partition property. The resulting localization maps agree on `A`, so
-`IsLocalization.ringHom_ext` identifies them; product extensionality finishes.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- Transitions compose: `transition (le_trans hij hjk)` is the composite of the two
+transitions. -/
 theorem transition_comp {i j k : Index A} (hij : i ≤ j) (hjk : j ≤ k) :
     transition (le_trans hij hjk) = (transition hjk).comp (transition hij) := by
   apply AlgHom.ext
@@ -159,21 +152,14 @@ theorem transition_comp {i j k : Index A} (hij : i ≤ j) (hjk : j ≤ k) :
           (IsLocalization.Away.isUnit_of_dvd (j.denominator (parent hjk F))
             (parent_dvd hij (parent hjk F))))) x
 
-/-- The diagram of commutative `A`-algebras with the specified component localization maps.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- The diagram of commutative `A`-algebras with the specified component localization maps. -/
 noncomputable def diagram : Index A ⥤ CommAlgCat.{u} A where
   obj i := CommAlgCat.of A (Stage i)
   map h := CommAlgCat.ofHom (transition h.le)
   map_id i := congrArg CommAlgCat.ofHom (transition_id i)
   map_comp h g := congrArg CommAlgCat.ofHom (transition_comp h.le g.le)
 
-/-- The index category is filtered. It is inhabited by the one-part partition with denominator
-one when the spectrum is nonempty, and by the empty partition otherwise. For two indices,
-take all nonempty intersections, with denominator the product of the two denominators.
-Constructibility is closed under intersections; primality gives nonvanishing of the product.
-Each factor divides that product, giving both refinement arrows. Parallel arrows are equal
-because the category is a preorder. Source: blueprint order 1222
-(blueprint: theorem-existence-contractible-covers--1). -/
+/-- The index category is filtered. -/
 theorem index_isFiltered : IsFiltered (Index A) := by
   classical
   have hnonempty : Nonempty (Index A) := by
@@ -257,15 +243,11 @@ attribute [instance] index_isFiltered
 
 /-- The affine principal w-localization is the colimit of the partition/denominator diagram
 in commutative `A`-algebras. Its algebra structure is the structural map induced by the diagonal
-maps into the stages. Source: blueprint order 1222 (blueprint:
-theorem-existence-contractible-covers--1). -/
+maps into the stages. -/
 noncomputable def algebra (A : Type u) [CommRing A] : CommAlgCat.{u} A :=
   colimit (diagram (A := A))
 
-/-- This colimit is ind-Zariski in the principal-localization sense. Use the filtered diagram
-above and its colimit cocone; enumerate each finite set of parts by `Fin n` and transport the
-product along that enumeration. The empty set gives `n = 0`.
-Source: blueprint order 1222 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- The affine principal w-localization is ind-Zariski in the principal-localization sense. -/
 theorem isIndPrincipalZariski : Algebra.IsIndPrincipalZariski A (algebra A) := by
   classical
   refine ⟨Index A, inferInstance, inferInstance,

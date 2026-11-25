@@ -10,8 +10,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Prime charts of the principal w-localization
 
-Source: blueprint order 1223, proof steps 1–7
-(blueprint: lem-weil-pbc-principal-w-localization-prime-charts).
+The primes of the principal w-localization `algebra A` of a ring `A` correspond to pairs of
+primes `y ⊆ x` of `A`, the first coordinate is continuous for the constructible topology, and
+the fibre over `x` is the closed image of `Spec A_x`.
+
+## Main results
+
+- `PrincipalWLocalization.primeCharts`: the prime-pair correspondence and its charts.
+
+## Implementation details
+
+A prime of `algebra A` selects one factor of each finite product in the colimit, giving a point
+`x` of the patch space, and contracts to a prime `y ⊆ x`. Conversely the prime over `(x, y)` is
+pulled back from `A_x` along the explicit evaluation map (`pairPoint`). Characteristic elements
+of constructible sets separate first coordinates and show that the first-coordinate map is
+continuous; surjectivity of the evaluation map gives the closed immersions.
 -/
 
 @[expose] public section
@@ -24,10 +37,8 @@ namespace PrincipalWLocalization
 
 variable {A : Type u} [CommRing A]
 
-/-- The prime over `(x,y)` is the inverse image of the prime of `A_x` contracting to `y`.
-This uses the explicit evaluation map and the localization prime correspondence.
-Source: blueprint order 1223, step 3
-(blueprint: lem-weil-pbc-principal-w-localization-prime-charts). -/
+/-- The prime over `(x,y)`: the inverse image, under the evaluation map to `A_x`, of the prime
+of `A_x` contracting to `y`. -/
 noncomputable def pairPoint (p :
     {p : PrimeSpectrum A × PrimeSpectrum A // p.2.asIdeal ≤ p.1.asIdeal}) :
     PrimeSpectrum (algebra A) :=
@@ -278,32 +289,10 @@ private theorem pairPoint_injective : Function.Injective (pairPoint (A := A)) :=
       characteristic _ hE ∉ q.asIdeal) hpr).to_iff.trans (pairPoint_characteristic _ hE r))
   exact not_iff_not.mp hh
 
-/-- The prime-pair correspondence, its contraction, the continuous patch coordinate, and the
-closed affine charts of its fibres.
-
-Source: blueprint order 1223, proof steps 1–7
-(blueprint: lem-weil-pbc-principal-w-localization-prime-charts).
-Proof:
-1. A prime of each finite product selects exactly one factor, by the finite-product spectrum
-bijection. Compatibility of the colimit injections makes the selected parts refine each other.
-2. The selected constructible parts are closed in the compact patch space. They form a directed
-nonempty family, so they have a common point `x`.
-3. For `f` outside `x`, use the cut by `D(f)` with denominator `f`. The selected factor inverts
-`f`, so the contracted prime `y` does not contain `f`. Thus `y` is contained in `x`.
-4. The prime over `(x,y)` is obtained from the explicit evaluation to `A_x` and the localization
-prime correspondence. Its selected part at each stage is the part containing `x`. Two primes
-with the same selected parts and the same contraction coincide, since localization primes are
-determined by contraction and every colimit element has a stage representative.
-5. The characteristic tuple of any constructible set evaluates to one at its points and zero
-elsewhere. Thus it distinguishes the first coordinates. Contraction distinguishes the second,
-so the correspondence is bijective.
-6. The preimage of a constructible set under the first-coordinate map is the basic open of its
-characteristic element. In particular the preimages of the patch subbasis are open, proving
-continuity.
-7. The evaluation map to `A_x` is surjective by `evaluation_surjective`, so its spectrum map is a
-closed immersion. The prime correspondence identifies its range exactly with first coordinate
-`x`, by the localization prime correspondence. This includes the zero ring: then no prime is
-present and the statements about individual fibres are vacuous. -/
+/-- The primes of `algebra A` are in bijection `e` with pairs of primes `y ⊆ x` of `A`, where
+`y` is the contraction to `A`; the first coordinate `x` is continuous for the constructible
+topology; and for each `x` there is an `A`-algebra map `algebra A → A_x` whose spectrum map is a
+closed immersion with image the fibre `{q | (e q).1 = x}`. -/
 theorem primeCharts (A : Type u) [CommRing A] :
     ∃ e : PrimeSpectrum (algebra A) ≃
       {p : PrimeSpectrum A × PrimeSpectrum A // p.2.asIdeal ≤ p.1.asIdeal},

@@ -10,8 +10,16 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRawComposition
 
 /-! # The localized tensor Roos composition equation
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+This file states the composition equation for the localized tensor Roos maps along a composite
+of isomorphisms of schemes.
+
+## Implementation details
+
+This equation precedes the tensor model squares and constructible representatives.
+
+## References
+
+* Stacks Project, Tags 015F, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -46,11 +54,9 @@ attribute [local implicit_reducible] podGoodReindex integralOperationsTensorComp
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Composition of the localized tensor Roos maps with their exact-functor factors.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4, 0941
-(blueprint: def-pod-tensor-derived-composition).
-The three maps are the explicit localizations of the specified strict chain maps.
-This equation precedes the tensor Model squares and constructible representatives. -/
+/-- The equation for the composition of the localized tensor Roos maps with their
+exact-functor factors, where the three maps are the localizations of the specified strict
+chain maps. -/
 def PodTensorDerivedComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

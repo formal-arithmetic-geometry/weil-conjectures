@@ -36,8 +36,7 @@ sets of its sheafification `P⁺` is a sheaf, and `P ⟶ P⁺` is, on underlying
 a sheafification: every morphism of presheaves of sets from the underlying presheaf of `P` to a
 sheaf of sets `H` factors uniquely through it. In particular, for a commutative ring `R`, the
 underlying sheaf of sets of the constant sheaf of rings `R` is the constant sheaf of sets on
-`R`, compatibly with the canonical maps from the constant presheaves.
-(blueprint: `lem-weil-pbc-ring-sheafification-underlying-sets`) -/
+`R`, compatibly with the canonical maps from the constant presheaves. -/
 theorem sheafify_comp_forget_commRingCat_isSheafification (P : Cᵒᵖ ⥤ CommRingCat.{w}) :
     Presheaf.IsSheaf J (sheafify J P ⋙ forget CommRingCat.{w}) ∧
       (∀ (H : Cᵒᵖ ⥤ Type w), Presheaf.IsSheaf J H →
