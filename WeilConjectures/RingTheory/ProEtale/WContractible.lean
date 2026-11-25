@@ -29,6 +29,27 @@ has a retraction.
 
 The ind-étale site has enough contractible objects, in the sense that every ring admits a
 faithfully flat, ind-étale algebra that is w-contractible.
+
+## Implementation details
+
+A w-strictly-local ring `R` gets a w-contractible cover as follows: choose an extremally
+disconnected cover `T → π₀(Spec R)` (Gleason) and let `D` be the ind-Zariski `R`-algebra
+realizing `Spec D = Spec R ×_{π₀(Spec R)} T` from `WContractification.PullbackProfinite`
+(Stacks 097D). Then `Spec D` is w-local with closed points lying over closed points of `Spec R`
+(Stacks 096C), so the local rings of `D` at maximal ideals are isomorphic to those of `R`
+(ind-Zariski maps identify local rings) and hence strictly henselian; finally
+`π₀(Spec D) ≃ T` is extremally disconnected.
+
+The retraction in `exists_retraction_of_isClosed_of_bijOn` is obtained by restricting `S` to the
+components in `T` (via `WContractification.Restriction`) and showing that the resulting map
+`R → Restriction T` is bijective.
+
+## References
+
+* [Stacks, Tag 097D]
+* [Stacks, Tag 0983]
+* [Stacks, Tag 09AZ]
+* [Stacks, Tag 096C]
 -/
 
 @[expose] public section
@@ -450,8 +471,7 @@ Spec D --→ T
   ↓        ↓
 Spec R --→ π₀(Spec R)
 ```
-is cartesian in the category of topological spaces. This is
-`thm:modify-pi0-profinite-properties` (Stacks 097D) in the blueprint. -/
+is cartesian in the category of topological spaces. -/
 @[stacks 097D]
 theorem isPullback :
     CategoryTheory.IsPullback (ofHom (projT R T i)) (ofHom (projSpec R T i)) (ofHom i)
@@ -505,9 +525,7 @@ variable {R : Type u} [CommRing R]
 /-- Auxiliary step for `exists_retraction_of_bijectiveOnStalks`: if `R → S` is a map of
 w-local rings that is bijective on stalks, maps closed points of `Spec S` to closed points of
 `Spec R`, and if there is a closed subset `T ⊆ π₀(Spec S)` mapping bijectively onto
-`π₀(Spec R)`, then `R → S` has a retraction. The retraction is obtained by restricting `S` to
-the components in `T` (via `WContractification.Restriction`) and showing that the resulting
-map `R → Restriction T` is bijective. -/
+`π₀(Spec R)`, then `R → S` has a retraction. -/
 theorem exists_retraction_of_isClosed_of_bijOn [IsWLocalRing R]
     {S : Type u} [CommRing S] [Algebra R S] [IsWLocalRing S]
     (hbos : (algebraMap R S).BijectiveOnStalks)
@@ -628,10 +646,9 @@ theorem exists_retraction_of_isClosed_of_bijOn [IsWLocalRing R]
   rw [← IsScalarTower.algebraMap_apply R S (Restriction T)]
   exact e.symm_apply_apply r
 
-/-- Stacks 09AZ (second part of the proof of (3) => (1)), blueprint
-`thm:ff-identifies-local-rings-plus-c-has-retraction-if`: a faithfully flat map identifying
-local rings from a w-local ring with extremally disconnected π₀ to a w-local ring whose
-closed points are cut out by the pulled-back ideal has a retraction. -/
+/-- A faithfully flat map identifying local rings from a w-local ring with extremally
+disconnected π₀ to a w-local ring whose closed points are cut out by the pulled-back ideal has
+a retraction. -/
 @[stacks 09AZ "second part of the proof of (3) => (1)"]
 theorem exists_retraction_of_bijectiveOnStalks [IsWLocalRing R]
     [ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R))]
@@ -686,7 +703,6 @@ theorem IsWContractibleRing.exists_retraction_of_zeroLocus_map_eq_closedPoints
     [Algebra R S] [Algebra.IndEtale R S] [Module.FaithfullyFlat R S] [IsWLocalRing S]
     (hS : zeroLocus (I.map (algebraMap R S)) = closedPoints (PrimeSpectrum S)) :
     ∃ (f : S →+* R), f.comp (algebraMap R S) = RingHom.id R := by
-  -- thm:ind-etale-plus-c-has-retraction-if-w-contractible
   have : ExtremallyDisconnected (ConnectedComponents (PrimeSpectrum R)) :=
     IsWContractibleRing.extremallyDisconnected_connectedComponents
   -- `R → S` identifies local rings: it is weakly étale (being ind-étale) and every prime of
@@ -733,16 +749,7 @@ theorem IsWContractibleRing.exists_retraction [IsWContractibleRing R]
   exact hg
 
 /-- Any w-strictly-local ring has an ind-Zariski, faithfully flat cover that is
-w-contractible.
-
-Following the blueprint (`thm:ind-etale-w-contractible-cover-of-w-strictly-local`,
-Stacks 0983): choose an extremally disconnected cover `T → π₀(Spec R)` (Gleason), let
-`D` be the ind-Zariski `R`-algebra realizing `Spec D = Spec R ×_{π₀(Spec R)} T` from
-`WContractification.PullbackProfinite` (Stacks 097D). Then `Spec D` is w-local with
-closed points lying over closed points of `Spec R` (Stacks 096C), so the local rings
-of `D` at maximal ideals are isomorphic to those of `R` (ind-Zariski maps identify
-local rings) and hence strictly henselian; finally `π₀(Spec D) ≃ T` is extremally
-disconnected. -/
+w-contractible. -/
 lemma exists_isWContractibleRing_of_isWStrictlyLocal
     [IsWStrictlyLocalRing R] :
     ∃ (S : Type u) (_ : CommRing S) (_ : Algebra R S),

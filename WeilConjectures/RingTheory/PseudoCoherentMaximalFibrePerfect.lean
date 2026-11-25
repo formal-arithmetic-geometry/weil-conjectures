@@ -12,13 +12,24 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTo
 /-!
 # Perfectness detected by uniformly bounded maximal residue fibres
 
-Source: Stacks Project, More on Algebra, Tag 068V, lemma-check-perfect-pointwise,
-implication (3) to (1) (auxiliary; not a blueprint node).
+A pseudo-coherent complex whose derived fibres at all maximal ideals have cohomology in a fixed
+interval `[a, b]` is perfect, with tor amplitude in `[a, b]`.
+
+## Implementation details
 
 The derived tensor is the existing monoidal structure on the module derived category.
 For a maximal ideal, its quotient ring is regarded as an R-module in degree zero.
 Vanishing of the underlying R-module cohomology is equivalent to vanishing of the
 residue-field cohomology of derived scalar extension.
+
+A bounded-above finite-free model `P` is K-flat, so derived tensors are computed termwise. Outside
+`[a, b]`, degree cancellation on a principal neighbourhood of each maximal ideal makes every
+module tensor exact, and exactness descends along the principal cover. This gives the tor
+amplitude, and `isPerfect_of_pseudoCoherent_finiteTorAmplitude` gives perfectness.
+
+## References
+
+* [Stacks, Tag 068V] ((3) implies (1))
 -/
 
 @[expose] public section
@@ -30,24 +41,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace DerivedCategory
 
 /-- A pseudo-coherent complex with maximal residue fibres concentrated in the fixed interval
-is perfect, and its derived tensor with every module has cohomology in that same interval.
-
-Source: Stacks Project, Tag 068V, implication (3) to (1).
-Proof:
-1. Choose a bounded-above finite-free model P supplied by pseudo-coherence. Its free
-   terms are flat, so the proved bounded-above flat-complex criterion makes it K-flat.
-   QObjTensorSingleFunctorObjIso identifies each derived module tensor with ordinary
-   termwise tensor, compatibly with the chosen isomorphism Q(P) ≅ C.
-2. For every degree outside [a,b], apply the single-degree finite-free residue criterion
-   isZero_homology_tensor_of_residue. It uses degree cancellation on a principal
-   neighborhood of each maximal ideal. Tensor preserves its homotopy equivalences,
-   so all module tensors are exact locally in that degree; exactness descends along
-   the principal cover. Transfer the result through the K-flat homology comparisons.
-3. These vanishing statements give torAmplitudeIn R a b C using isGE_iff and isLE_iff.
-   Apply isPerfect_of_pseudoCoherent_finiteTorAmplitude, which is already proved by
-   good truncation with a finite projective bottom cokernel. Its bounded finite
-   projective model witnesses IsPerfect C; the vanishing assertion is step 2.
-(auxiliary; not a blueprint node) -/
+is perfect, and its derived tensor with every module has cohomology in that same interval. -/
 theorem isPerfect_and_tensor_homology_vanish_of_maximal_fibres
     {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
     (C : DerivedCategory (ModuleCat.{u} R)) (hC : C.IsPseudoCoherent)

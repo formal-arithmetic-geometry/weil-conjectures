@@ -16,8 +16,21 @@ import WeilConjectures.RingTheory.GenericFormalFiberPurelyInseparableRegular
 /-!
 # Generic formal fibres of regular power-series models
 
-Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs
-(blueprint: lem-weil-pbc-regular-power-series-generic-formal-fibre).
+The generic formal fibre of a regular local domain presented as a finite-variable power series
+ring over a field or a Cohen ring is geometrically regular.
+
+## Implementation details
+
+The completion of the localization at `P` is regular local (Tag 07NY), hence regular (Tag 0AFS),
+and the generic fibre is a localization of it. In characteristic zero, finite purely inseparable
+extensions are trivial. In positive characteristic the Cohen-ring case is impossible, since a
+Cohen ring has characteristic zero, so `A ≅ k[[X_1, …, X_d]]` and Tag 07PR (with no polynomial
+variables) applies after transporting along the induced isomorphisms.
+
+## References
+
+* [Stacks, Tag 07PS] (last two paragraphs)
+* [Stacks, Tags 0AFS, 07NY, 07PR]
 -/
 
 @[expose] public section
@@ -25,26 +38,7 @@ Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs
 universe u
 
 /-- The generic formal fibre of a regular local domain presented as a finite-variable
-power series ring over a field or a Cohen ring is geometrically regular.
-Source: Stacks Project, More on Algebra, Proposition 07PS, last two paragraphs.
-(blueprint: lem-weil-pbc-regular-power-series-generic-formal-fibre).
-
-Proof: Localize the regular local ring A at P, using Algebra 0AFS. Its completion C is
-regular local by More on Algebra 07NY, and hence regular by 0AFS applied at every prime.
-The generic fibre is the localization of C at the images of the nonzero elements of A;
-therefore it is Noetherian and regular. If the fraction field has characteristic zero,
-every finite purely inseparable extension is trivial. Tensoring with such an extension
-thus preserves this regular ring, proving geometric regularity. In positive characteristic
-p, the Cohen-ring presentation is impossible: a Cohen ring is a domain with nonzero
-prime-number uniformizer l. Characteristic l would kill this uniformizer, while a different
-positive prime characteristic would make it a unit by Bezout's identity. Thus a Cohen ring
-has characteristic zero, as do its power series ring and fraction field. Consequently A
-is isomorphic to k[[X_1,...,X_d]] for a field k of characteristic p. Apply More on Algebra
-07PR with no polynomial variables (m = 0). The power-series isomorphism and the isomorphism
-from the polynomial ring in zero variables induce compatible isomorphisms of prime
-localizations, maximal-ideal completions and fraction fields. Tensoring these isomorphisms
-with finite purely inseparable extensions transports regularity to the displayed fibre.
-The Noetherianity already obtained completes the geometric-regularity condition. -/
+power series ring over a field or a Cohen ring is geometrically regular. -/
 theorem isGeometricallyRegular_genericFormalFiber_of_regular_powerSeries
     (A : Type u) [CommRing A] [IsDomain A] [IsRegularLocalRing A]
     (hmodel :

@@ -19,8 +19,21 @@ import Mathlib.RingTheory.Ideal.GoingUp
 /-!
 # Finite quotient fraction fields over a principal prime
 
-Source: Stacks Project, Tags 032P and 031F, residue-field finiteness.
-(blueprint: lem-weil-pbc-principal-prime-quotient-fraction-finite).
+Primes over a principal prime in a finite extension of fraction fields have finite residue
+field extensions.
+
+## Implementation details
+
+If `x = 0`, localizing `S` at the nonzero elements of `R` gives a field, so the only prime over
+zero is zero. Otherwise `xR` has height one by the principal ideal theorem; localizing at it gives
+a one-dimensional Noetherian local domain, and Tag 031F gives a finite residue field extension,
+transported to the fraction fields of the quotient domains. No integrality or normality of `S` is
+needed.
+
+## References
+
+* [Stacks, Tag 032P]
+* [Stacks, Tag 031F]
 -/
 
 @[expose] public section
@@ -44,22 +57,7 @@ private theorem finite_fraction_transport
 
 /-- A prime over a principal prime in a finite extension of fraction fields has
 finite quotient fraction field extension.
-Source: Stacks Project, Tag 032P, localization and application of Tag 031F.
-(blueprint: lem-weil-pbc-principal-prime-quotient-fraction-finite).
-
-Proof: If x = 0, the contraction of Q is zero. Localizing S at the nonzero
- elements of R gives a K-subalgebra of L. Each element is algebraic over K,
- so this domain is a field. Consequently the only prime over zero is zero,
- and the quotient fraction fields identify with K and L. If x is nonzero,
- the principal prime xR has height one by the principal ideal theorem and
- the strict chain (0) < xR. Its localization is a one-dimensional Noetherian
- local domain. Localize S at Q; the fraction fields are still K and L,
- and the localized maximal ideal contracts to the base maximal ideal.
- Apply Tag 031F to obtain a finite extension of residue fields. For any
- prime ideal, its residue field is a fraction field of the quotient domain.
- Transport the finite-dimensionality along the canonical equivalences with
- the fraction fields of R/(Q ∩ R) and S/Q. No integrality or normality of S
- is needed for this residue-field argument. -/
+finite quotient fraction field extension. -/
 theorem principal_prime_quotient_fraction_finite
     (R : Type uR) (S : Type uS) (K : Type uK) (L : Type uL)
     [CommRing R] [IsDomain R] [IsNoetherianRing R]

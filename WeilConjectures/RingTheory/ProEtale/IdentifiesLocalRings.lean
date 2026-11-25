@@ -35,7 +35,7 @@ identifying local rings to topological spaces over `Spec A`.
   hom-sets.
 * `Algebra.BijectiveOnStalks.algHom_of_continuousMap`: the inverse direction.
 
-## Proof sketch for the inverse direction
+## Implementation details
 
 Given a continuous map `φ : Spec C → Spec B` over `Spec A`, we construct a ring map
 `B →+* C` as follows. For each prime `p` of `C`, both localized maps
@@ -382,9 +382,7 @@ theorem continuousMap_of_algHom_bijective
     exact HomOver.ext fun p ↦ comap_ringHomOfHomOver φ p
 
 /-- The hom-set bijection `(B →ₐ[A] C) ≃ HomOver A B C` when both `A → B` and
-`A → C` identify local rings. This formalizes Stacks 096L
-(`thm:identifies-local-ring-to-top-fully-faithful` and
-`def:identifies-local-ring-hom-set-bijection` in the blueprint). -/
+`A → C` identify local rings. -/
 @[stacks 096L]
 noncomputable def algHomEquivContinuousMap
     [Algebra.BijectiveOnStalks A B] [Algebra.BijectiveOnStalks A C] :

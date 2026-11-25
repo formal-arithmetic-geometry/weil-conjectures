@@ -13,8 +13,18 @@ import WeilConjectures.RingTheory.RegularLocalOfFormallySmoothAdic
 /-!
 # Smooth algebras over fields have regular local rings
 
-Source: Stacks Project, Algebra, Lemma Tag 00TT (blueprint:
-lem-weil-pbc-smooth-over-field-regular-local).
+Every localization at a prime of a smooth algebra over a field is a regular local ring.
+
+## Implementation details
+
+`A` is Noetherian, and formal smoothness over `k` passes to `A_q` and makes it formally smooth
+for the maximal-ideal-adic topology; then `Algebra.isRegularLocalRing_of_formallySmoothAdic`
+(Stacks 07EI) applies.
+
+## References
+
+* [Stacks, Tag 00TT]
+* [Stacks, Tag 07EI]
 -/
 
 @[expose] public section
@@ -24,20 +34,7 @@ universe u v
 namespace Algebra
 
 /-- If `A` is a smooth algebra over a field, every localization at a prime ideal
-is a regular local ring (blueprint: lem-weil-pbc-smooth-over-field-regular-local).
-
-Source: Stacks Project, Algebra, Lemma Tag 00TT, final assertion.
-Proof:
-1. Smoothness gives finite type, so `A` is Noetherian. Localization makes `A_q`
-   Noetherian and local.
-2. Smoothness gives formal smoothness over `k`, which is preserved by localization.
-   Its square-zero lifting property applies to every algebra map, hence in particular
-   to the maps killing a power of the maximal ideal. Thus `A_q` is formally smooth
-   for the maximal-ideal-adic topology.
-3. Apply Stacks Project, More on Algebra, Lemma Tag 07EI, as stated in
-   `Algebra.isRegularLocalRing_of_formallySmoothAdic`. This is a generic local-algebra
-   regularity criterion; no dimension or residue-field comparison is necessary.
--/
+is a regular local ring. -/
 theorem smooth_over_field_regular_local
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [Algebra.Smooth k A] (q : Ideal A) [q.IsPrime] :

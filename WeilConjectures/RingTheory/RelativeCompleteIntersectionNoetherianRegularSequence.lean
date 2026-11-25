@@ -17,7 +17,19 @@ import WeilConjectures.RingTheory.RegularSequenceFlatClosedFiber
 
 /-! # The Noetherian case of local complete-intersection regularity
 
-Source: Stacks Project, Algebra, Tag 00SV, first paragraph of the proof.
+Over a Noetherian base, the equations of a relative complete intersection form a regular
+sequence in the localization of the polynomial ring at every prime containing them.
+
+## Implementation details
+
+The map `R_p → P_Q` is a flat local map of Noetherian local rings. The equations are regular in
+its closed fibre (via base change, Tag 00SS, and the field case, Tag 00SC), and the flat
+closed-fibre lifting lemma (Tag 00MG) lifts regularity. For `c = 0` all lists are empty.
+
+## References
+
+* [Stacks, Tag 00SV] (first paragraph of the proof)
+* [Stacks, Tags 00SC, 00SS, 00MG]
 -/
 
 @[expose] public section
@@ -27,23 +39,7 @@ universe u
 namespace Algebra
 
 /-- Over a Noetherian base the specified equations are regular at every polynomial prime
-containing their ideal.
-Source: Stacks Project, Algebra, Tag 00SV, first paragraph of the proof.
-(blueprint: lem-weil-pbc-relative-ci-noetherian-local-regular-sequence).
-
-Proof: Put `P = R[x]`, `p = Q ∩ R`, and `B = P_Q`. The polynomial ring is free over `R`
-and Noetherian, so the canonical map `R_p → B` is flat and local between Noetherian local
-rings. Polynomial scalar extension identifies the polynomial fibre with `κ(p)[x]`.
-The fibre-prime correspondence gives a prime over `Q`; since `Q` contains the equations,
-the induced quotient fibre is nonzero. Base change (00SS) preserves the specified relative
-complete-intersection presentation, hence its dimension is `n-c`, with `c ≤ n`.
-Apply the field-case local regular-sequence lemma (00SC) at this fibre prime. The natural
-fibre-local-ring isomorphism identifies its localized polynomial ring with the closed
-fibre of `R_p → B`, and sends each displayed equation to its closed-fibre image.
-Transport regularity through this isomorphism and apply the flat closed-fibre lifting
-lemma (00MG). Its regularity conclusion is the assertion here. For `c=0`, all lists are
-empty and `B` is nonzero because `Q` is prime. The zero quotient has no such prime `Q`.
--/
+containing their ideal. -/
 theorem isRegular_localization_of_relativeCompleteIntersection_of_noetherian
     {R : Type u} [CommRing R] [IsNoetherianRing R] {n c : ℕ}
     (f : Fin c → MvPolynomial (Fin n) R)

@@ -15,9 +15,18 @@ import WeilConjectures.RingTheory.ProperBaseChange.SeparableFieldGeometricallyNo
 /-!
 # Normal algebras under separable scalar extension
 
-Source: Stacks Project, Varieties, Tag 0C3M, lemma-base-change-normal-by-separable;
-Algebra, Tags 0C30 and 06DF
-(blueprint: lem-weil-pbc-normal-algebra-separable-scalar-extension).
+A normal algebra over a field `k` remains normal after a separable field extension `K/k`.
+
+## Implementation details
+
+A separable `K/k` is geometrically normal, so `K ⊗[k] B` is normal by the tensor normality
+theorem for geometrically normal and normal algebras; swapping the tensor factors transports
+normality to `B ⊗[k] K`.
+
+## References
+
+* [Stacks, Tag 0C3M]
+* [Stacks, Tags 0C30, 06DF]
 -/
 
 @[expose] public section
@@ -32,26 +41,7 @@ namespace Algebra
 Separability means that every finitely generated intermediate field is separably generated.
 Normality means that every prime localization is an integrally closed domain.
 There is no algebraicity, finite-generation, domain or nonzero assumption on the algebra.
-Source: Stacks Project, Varieties, Tag 0C3M, lemma-base-change-normal-by-separable;
-Algebra, Tags 0C30 and 06DF
-(blueprint: lem-weil-pbc-normal-algebra-separable-scalar-extension).
-
-Proof:
-1. Apply `lem-weil-pbc-separable-field-geometrically-normal` to `K/k`. Its separability
-   hypothesis is precisely `IsSeparableExtension k K`, not algebraic separability. Thus
-   `K` is geometrically normal: `K ⊗[k] E` is normal for every field extension `E/k`.
-2. Apply `lem-weil-pbc-geometrically-normal-tensor-normal` with `A = K` and the given `B`.
-   Step 1 and the normality hypothesis on `B` give normality of `K ⊗[k] B`.
-3. Swap the tensor factors by the balanced map `c ⊗ b ↦ b ⊗ c`. Its reverse is inverse
-   on pure tensors, so the universal property and generation by pure tensors of
-   `def-weil-pbc-module-tensor-product` give inverse maps. The tensor multiplication and
-   unit formulas make these ring maps. The resulting ring isomorphism identifies primes
-   and their localizations, sending `x/s` to `f(x)/f(s)`. It preserves domains and
-   integral closedness: the induced fraction-field isomorphism preserves monic equations
-   and their roots. Hence every prime localization of `B ⊗[k] K` is an integrally closed
-   domain, as required by `def-weil-pbc-normal-ring`. If `B` is zero there are no primes;
-   disconnected normal rings are covered prime by prime.
--/
+There is no algebraicity, finite-generation, domain or nonzero assumption on the algebra. -/
 theorem isNormal_tensorProduct_of_separableExtension
     (k : Type u) (B : Type v) (K : Type w)
     [Field k] [CommRing B] [Field K] [Algebra k B] [Algebra k K]

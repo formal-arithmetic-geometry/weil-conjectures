@@ -17,8 +17,21 @@ import WeilConjectures.RingTheory.FormallySmoothAdicPowerSeriesMap
 /-!
 # Adically formally smooth local algebras over fields are regular
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07EI (lemma-fs-implies-regular)
-(blueprint: lem-weil-pbc-fs-adic-field-regular-local).
+A Noetherian local algebra over a field, formally smooth for the maximal-ideal-adic topology,
+is a regular local ring.
+
+## Implementation details
+
+Reduce to the prime field and pass to the completion, from which regularity descends. Choose a
+coefficient field `K` and a basis `x_i` of `m/m²`, and let `T = K[[X_1, …, X_n]]`, so that
+`A/m² ≅ T/n²`. Formal smoothness lifts `A → T/n²` successively through `T/n^(r+2) → T/n^(r+1)`,
+and completeness of `T` gives a local map `f : A → T` (not necessarily `K`-linear). The
+`f(x_i)` generate `n`, and completeness of `A` makes `f` surjective, so `dim A ≥ n`; Nakayama
+gives `dim A ≤ n`.
+
+## References
+
+* [Stacks, Tag 07EI]
 -/
 
 @[expose] public section
@@ -28,34 +41,7 @@ universe u v
 namespace Algebra
 
 /-- A Noetherian local algebra over a field, formally smooth for the maximal-ideal-adic
- topology, is a regular local ring. Source: Stacks Project, More on Algebra, Tag 07EI
-(blueprint: lem-weil-pbc-fs-adic-field-regular-local).
-
-Proof (the six steps of the blueprint node):
-1. Reduce to the prime field using lem-weil-pbc-char-zero-field-extension-formally-smooth
-   or lem-weil-pbc-field-char-p-nilpotent-lifting. Lift the field map first and then the
-   algebra map by theorem-finite-etale-covers-proper-henselian--2. If the original map kills m^q,
-   the lift kills m^(2q), because the obstruction ideal is square-zero.
-2. Pass to the maximal-ideal-adic completion using def-weil-pbc-adic-completion,
-   lem-weil-pbc-adic-completion-noetherian and lem-weil-pbc-fs-adic-completion.
-   Regularity descends by lem-weil-pbc-completion-regular-local.
-3. Use lem-weil-pbc-cohen-coefficient-ring-exists to choose a coefficient field K.
-   Choose a basis x_i of m/m^2, and form T = K[[X_1,...,X_n]] using
-   def-weil-pbc-multivariate-power-series. The ring T is complete regular local of
-   dimension n by lem-weil-pbc-power-series-field-cohen-regular-complete.
-   Sending x_i to X_i identifies A/m^2 with T/n^2 as K-algebras.
-4. Starting with A → T/n^2, lift successively through the square-zero kernels of
-   T/n^(r+2) → T/n^(r+1) using theorem-finite-etale-covers-proper-henselian--2.
-   Each map kills a power of m. Completeness of T gives a local prime-field-algebra
-   map f : A → T; these lifts need not be K-linear.
-5. By lem-weil-pbc-nakayama-local-generators, the f(x_i) generate n.
-   Approximate every t in T degree by degree with polynomials in the f(x_i), lifting
-   coefficients to A. The corrections in m^r converge in complete A. Separatedness
-   of T gives f(a) = t, so f is surjective.
-6. Pullback of prime chains gives dim A ≥ dim T = n. Nakayama says that the x_i
-   generate m, so lem-weil-pbc-noetherian-local-dimension-le-generators gives dim A ≤ n.
-   Therefore dim A = n, proving regularity by def-weil-regular-scheme. Step 2 then
-   gives regularity of the original A. -/
+ topology, is a regular local ring. -/
 theorem isRegularLocalRing_of_formallySmoothAdic (k : Type u) (A : Type v)
     [Field k] [CommRing A] [Algebra k A] [IsNoetherianRing A] [IsLocalRing A]
     (h : FormallySmoothAdic k A (IsLocalRing.maximalIdeal A)) : IsRegularLocalRing A := by

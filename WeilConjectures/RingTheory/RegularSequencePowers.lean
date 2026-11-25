@@ -12,8 +12,20 @@ public import Mathlib.Data.List.OfFn
 /-!
 # Positive powers of a regular sequence
 
-Source: Stacks Project, Algebra, Lemma 10.68.9, Tag 07DV
-(blueprint: lem-weil-pbc-regular-sequence-powers).
+Replacing each term of a sequence by a positive power preserves and reflects regularity on any
+module.
+
+## Implementation details
+
+Weak regularity and nonvanishing of the final quotient are treated separately. For a single
+term, the short exact sequence `0 → N/fN → N/f^(k+1)N → N/f^kN → 0` (the first map being
+multiplication by `f^k`) transports weak regularity of the tail between `N/fN` and `N/f^eN`, in
+both directions, using the four-term exactness lemmas for `QuotSMulTop`. Nonvanishing reduces
+to surjectivity of multiplication by a term, which is equivalent to surjectivity of its powers.
+
+## References
+
+* [Stacks, Tag 07DV]
 -/
 
 @[expose] public section
@@ -263,35 +275,7 @@ private theorem weak_ofFn_pow_iff {R : Type u} [CommRing R]
       exact (ih _ _ _ (fun i ↦ he i.succ)).mpr
         (weak_quot_of_pow M (f 0) hf' _ (he 0) ht)
 
-/-- Taking a positive power of each term preserves and reflects regularity on any module.
-Source: Stacks Project, Algebra, Lemma 10.68.9, Tag 07DV
-(blueprint: lem-weil-pbc-regular-sequence-powers).
-
-Proof (following Stacks Tag 07DV, with the omitted details made explicit).
-1. Separate weak regularity from nonvanishing using `isRegular_iff`, and use
-`isWeaklyRegular_cons_iff` to pass to the tail on the quotient by the first term.
-2. `IsSMulRegular.pow_iff` identifies injectivity of a term with that of its positive
-power. Construct the maps in `0 -> N/fN -> N/f^(k+1)N -> N/f^kN -> 0` using `mapQ`
-and `factor`. The first map multiplies by `f^k`; cancel this power to prove injectivity.
-A representative computation identifies its image with the projection's kernel.
-3. For nonvanishing, quotient first by the ideal of the tail. The final quotient is
-zero iff multiplication by the first term on this module is surjective. A map is
-surjective iff its positive iterate is surjective. Induct on the sequence length,
-using the two orders of iterated quotients, to power every term.
-4. Weak regularity ascends a short exact sequence: induct on the list, using
-`isSMulRegular_of_range_eq_ker` for the head. The right head is regular, so
-`QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last` preserves
-injectivity of the left map; `map_exact` and `map_surjective` give the remaining
-properties of the quotient row. Apply the list induction to that row. Then induct
-on the exponent in the row from step 2 to transport a weakly regular tail from
-`N/fN` to `N/f^eN`.
-5. For reflection, strongly induct on the position in the tail. The preceding
-positions are weakly regular on `A = N/fN` and hence, by step 4, on `C = N/f^(e-1)N`.
-Mathlib's `map_first_exact_on_four_term_right_exact_of_isSMulRegular_last`, applied
-to `0 -> A -> B -> C -> 0`, makes `A/K_iA -> B/K_iB` injective. Transfer injectivity
-of the next tail term on `B/K_iB` to `A/K_iA`. The case `e = 1` is immediate.
-6. Induct on sequence length to power the tail on `M/f_1M`, and then apply steps
-4 and 5 to power the first term. Combine weak regularity with step 3. -/
+/-- Taking a positive power of each term preserves and reflects regularity on any module. -/
 theorem isRegular_ofFn_pow_iff {R : Type u} [CommRing R]
     (M : Type v) [AddCommGroup M] [Module R M] {r : ℕ}
     (f : Fin r → R) (e : Fin r → ℕ) (he : ∀ i : Fin r, 0 < e i) :

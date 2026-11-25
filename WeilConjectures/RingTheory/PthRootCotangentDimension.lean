@@ -18,7 +18,23 @@ import Mathlib.Algebra.Field.ULift
 
 /-! # Cotangent dimensions of a geometrically regular p-root extension
 
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4).
+If the coefficients have independent differentials, the `p`-root quotient `B` of a geometrically
+regular local algebra `A` is a regular base change of the same dimension, with finite residue
+extension and the same cotangent dimension after residue extension.
+
+## Implementation details
+
+Adjoining `p`-th roots of the `n` coefficients gives a purely inseparable extension `k'/k` of
+degree `p^n` (Tag 07DZ), and `B ≅ A ⊗_k k'` is regular. The base-change locality theorem gives a
+finite free map `A → B` with finite residue extension and zero-dimensional closed fibre, so
+`dim B = dim A` by the flat height formula (Tag 00ON), and the regular-local criterion identifies
+dimensions with cotangent finranks. For `n = 0` the extension is `k` itself. No finiteness of
+absolute differentials is used.
+
+## References
+
+* [Stacks, Tag 07E5] (proof of (2) ⇒ (4))
+* [Stacks, Tags 07DZ, 00ON]
 -/
 
 @[expose] public section
@@ -31,27 +47,7 @@ namespace Algebra
 
 /-- Independent coefficient differentials make the p-root quotient a regular base
 change of the same local dimension. Its residue extension is finite and its
-cotangent dimension equals that of the lower local ring after residue extension.
-
-Source: Stacks Project, More on Algebra, Tag 07E5, proof of (2) ⇒ (4), construction
-of k' and A'; Algebra, Tags 07DZ and 00ON, and the regular-local dimension criterion.
-(blueprint: lem-weil-pbc-pth-root-cotangent-dimension).
-
-Proof: Adjoin p-th roots of the n coefficients in an algebraic closure of k.
-Independence of their differentials gives degree p^n by 07DZ. The polynomial
-quotient over k is spanned by the p^n reduced monomials and surjects onto this
-field, so comparing dimensions makes it isomorphic to that field. Taking p-th
-powers of reduced polynomials shows the extension is purely inseparable. Tensor
-the presentation with A to identify B with A tensor_k k'. The trivial extension
-in geometric regularity makes A regular (use a universe lift of k if required).
-The extension k'/k makes B regular. The base-change locality theorem supplies a
-finite free map A -> B, a finite residue extension L/K, and a zero-dimensional
-closed fibre. The flat height formula 00ON gives dim B = dim A. The regular-local
-criterion identifies each dimension with the finrank of its cotangent space.
-Scalar extension K -> L preserves the finrank of the finite-dimensional lower
-cotangent space, giving the displayed equality. For n = 0 the extension is k
-itself and B is the identity quotient; both assertions still hold. No finiteness
-of absolute differentials is asserted or used. -/
+cotangent dimension equals that of the lower local ring after residue extension. -/
 theorem pthRoot_cotangent_dimension
     (k : Type u) (A : Type v) [Field k] [CommRing A] [Algebra k A]
     [IsLocalRing A] [IsNoetherianRing A] (p : ℕ) [Fact p.Prime] [CharP k p]

@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 /-!
 # Weakly étale algebras are ind-étale locally ind-étale
 
-In this file we prove Stacks 097Z (blueprint `thm:weakly-etale-ind-etale`):
+In this file we prove Stacks 097Z:
 if `R → S` is weakly étale, there exists a faithfully flat ind-étale `S → T`
 such that `R → T` is ind-étale.
 
@@ -31,10 +31,8 @@ The proof follows the Stacks project:
    Stacks 097F (`Algebra.BijectiveOnStalks.indZariski_of_isWLocal`).
 5. Thus `T = D` works: `S → D` is faithfully flat ind-étale and `R → C → D` is ind-étale.
 
-The ring `D` is `Algebra.WeaklyEtale.refinement R S` (blueprint
-`theorem-pro-etale-refinements-weakly-etale`), and its properties are
-`Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`
-(blueprint `theorem-pro-etale-refinements-weakly-etale--1`).
+The ring `D` is `Algebra.WeaklyEtale.refinement R S`, and its properties are
+`Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`.
 -/
 
 @[expose] public section
@@ -203,8 +201,7 @@ noncomputable def refinementIdeal : Ideal (WStrictLocalization R ⊗[R] S) :=
   ((closedIdeal R).map (algebraMap (WLocalization R) (WStrictLocalization R))).map
     (algebraMap (WStrictLocalization R) (WStrictLocalization R ⊗[R] S))
 
-/-- The canonical refinement of an `R`-algebra `S` (blueprint
-`theorem-pro-etale-refinements-weakly-etale`): the w-localization of `C ⊗[R] S` along
+/-- The canonical refinement of an `R`-algebra `S`: the w-localization of `C ⊗[R] S` along
 `J · (C ⊗[R] S)`, where `C = WStrictLocalization R` and `J ⊆ C` cuts out the closed points of
 `Spec C`. If `S` is weakly étale over `R`, it is faithfully flat and ind-étale over `S`, and
 ind-étale over `R` (`Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement`). -/
@@ -267,9 +264,9 @@ attribute [local instance] Algebra.TensorProduct.rightAlgebra
 variable (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
 
 open WStrictLocalization in
-/-- **Stacks 097Z** (blueprint `theorem-pro-etale-refinements-weakly-etale--1`): if `S` is a weakly
-étale `R`-algebra, its canonical refinement `Algebra.WeaklyEtale.refinement R S` is ind-étale and
-faithfully flat over `S`, and ind-étale over `R`. -/
+/-- **Stacks 097Z**: if `S` is a weakly étale `R`-algebra, its canonical refinement
+`Algebra.WeaklyEtale.refinement R S` is ind-étale and faithfully flat over `S`, and ind-étale
+over `R`. -/
 theorem Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement [Algebra.WeaklyEtale R S] :
     Algebra.IndEtale S (refinement R S) ∧ Module.FaithfullyFlat S (refinement R S) ∧
       Algebra.IndEtale R (refinement R S) := by
@@ -402,9 +399,8 @@ theorem Algebra.WeaklyEtale.indEtale_faithfullyFlat_refinement [Algebra.WeaklyEt
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 open WStrictLocalization in
-/-- **Stacks 097Z** (blueprint `thm:weakly-etale-ind-etale`): if `S` is a weakly étale
-`R`-algebra, there exists a faithfully flat, ind-étale `S`-algebra `T` such that `T` is an
-ind-étale `R`-algebra. -/
+/-- **Stacks 097Z**: if `S` is a weakly étale `R`-algebra, there exists a
+faithfully flat, ind-étale `S`-algebra `T` such that `T` is an ind-étale `R`-algebra. -/
 theorem Algebra.WeaklyEtale.exists_indEtale [Algebra.WeaklyEtale R S] :
     ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T) (_ : Algebra S T) (_ : IsScalarTower R S T),
       Algebra.IndEtale S T ∧ Module.FaithfullyFlat S T ∧ Algebra.IndEtale R T :=

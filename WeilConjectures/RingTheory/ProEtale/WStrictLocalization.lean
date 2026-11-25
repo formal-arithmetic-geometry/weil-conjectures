@@ -14,7 +14,7 @@ public import WeilConjectures.RingTheory.ProEtale.IndEtale
 # w-strict-localization
 
 In this file we show that every ring admits a faithfully flat, ind-étale w-strictly-local
-algebra, following the blueprint (`thm:ind-etale-w-strictly-local-cover`, Stacks 097X):
+algebra (Stacks 097X):
 starting from `R`, pass to the w-localization `R_w`, take the ind-étale contraction
 `T = IndEtaleContraction R_w` (whose local rings at maximal ideals are strictly henselian),
 and finally w-localize `T` along the pullback of the ideal `I` cutting out the closed points

@@ -14,8 +14,18 @@ import Mathlib.RingTheory.ZariskisMainTheorem
 /-!
 # Local dimension inequality for quasi-finite ring maps
 
-Source: Stacks Project, Algebra, Lemma 10.125.4, Tag 00QF
-(blueprint: lem-weil-pbc-dimension-inequality-quasi-finite).
+A finite-type ring map quasi-finite at `q` satisfies `dim S_q ≤ dim R_{q ∩ R}`.
+
+## Implementation details
+
+With `T` the integral closure of `R` in `S` and `q'` the contraction of `q`, Zariski's Main
+Theorem and `Localization.localRingHom_bijective_of_saturated_inf_eq_top` identify `T_q'` with
+`S_q`. Integral incomparability makes contraction to `R` strictly monotone, which bounds the
+height of `q'` by that of `q ∩ R`. Infinite dimensions are covered.
+
+## References
+
+* [Stacks, Tag 00QF]
 -/
 
 @[expose] public section
@@ -25,24 +35,7 @@ universe u v
 namespace Algebra
 
 /-- A finite-type ring map that is quasi-finite at `q` does not increase the dimension of
-local rings. Source: Stacks Project, Algebra, Tag 00QF
-(blueprint: lem-weil-pbc-dimension-inequality-quasi-finite).
-
-Proof: Let `T` be the integral closure of `R` in `S`, and `q'` the contraction
-of `q` to `T`. The pointwise Zariski Main Theorem
-(`lem-weil-pbc-integral-closure-zariski-main-away`) gives `r` outside `q` such that
-for every `x : S`, some `r ^ n * x` is integral over `R`. Thus `T` saturated at
-its elements outside `q` is all of `S`. Mathlib's
-`Localization.localRingHom_bijective_of_saturated_inf_eq_top` identifies `T_q'`
-and `S_q` as rings, so their Krull dimensions agree.
-
-Integral incomparability (`lem-weil-pbc-integral-incomparability`) makes contraction
-`PrimeSpectrum T → PrimeSpectrum R` strictly monotone. The height of `q'` is therefore
-at most the height of its contraction to `R`, namely `q ∩ R`, by
-`Order.height_le_height_apply_of_strictMono`. Finally,
-`IsLocalization.AtPrime.ringKrullDim_eq_height`
-(`lem-weil-pbc-localization-dimension-chains-below-prime`) identifies these heights
-with the dimensions of the local rings. This also covers infinite dimensions. -/
+local rings. -/
 theorem ringKrullDim_le_of_isQuasiFiniteAtPrime
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.FiniteType R S] (q : PrimeSpectrum S) (hq : IsQuasiFiniteAtPrime R S q) :

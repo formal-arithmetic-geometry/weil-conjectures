@@ -217,10 +217,10 @@ open IsLocalRing
 
 variable {A B : Type u} [CommRing A] [CommRing B] [Algebra A B]
 
-/-- Blueprint `thm:ind-etale-strictly-henselian-localization-isom`, weakly étale version
-(which covers the ind-étale case): if `A` is strictly henselian and `B` is weakly étale
-over `A`, then for every prime `n` of `B` lying over the maximal ideal of `A` the canonical
-map `A → B_n` is bijective. -/
+/-- Weakly étale version (which covers the ind-étale case) of the bijectivity of strictly
+henselian localizations: if `A` is strictly henselian and `B` is weakly étale over `A`, then for
+every prime `n` of `B` lying over the maximal ideal of `A` the canonical map `A → B_n` is
+bijective. -/
 theorem Algebra.WeaklyEtale.bijective_algebraMap_localization_atPrime
     [IsStrictlyHenselianLocalRing A] [Algebra.WeaklyEtale A B] (n : Ideal B) [n.IsPrime]
     (hn : n.comap (algebraMap A B) = maximalIdeal A) :
@@ -263,11 +263,7 @@ theorem Algebra.WeaklyEtale.bijective_localRingHom_of_isStrictlyHenselianLocalRi
   exact Algebra.WeaklyEtale.bijective_of_isStrictlyHenselianLocalRing
 
 /-- A weakly étale algebra `B` over `A` is bijective on stalks as soon as every prime of `B` is
-contained in a prime `n` for which the localization of `A` at `n ∩ A` is strictly henselian.
-
-This is the key step of the blueprint lemma
-`thm:ind-etale-plus-c-has-retraction-if-w-contractible`: the stalk maps at such primes `n` are
-bijective, and stalk maps at smaller primes are further localizations of these. -/
+contained in a prime `n` for which the localization of `A` at `n ∩ A` is strictly henselian. -/
 theorem Algebra.WeaklyEtale.bijectiveOnStalks [Algebra.WeaklyEtale A B]
     (hmax : ∀ (q : Ideal B) [q.IsPrime], ∃ (n : Ideal B) (hn : n.IsPrime), q ≤ n ∧
       (letI := hn
@@ -362,5 +358,4 @@ lemma RingHom.IndEtale.weaklyEtale {R S : Type u} [CommRing R] [CommRing S] {f :
   infer_instance
 
 /- `Algebra.WeaklyEtale.exists_indEtale` and `RingHom.WeaklyEtale.exists_indEtale_comp`
-(blueprint `thm:weakly-etale-ind-etale`) are proved in
-`Proetale.Algebra.WeaklyEtaleIndEtale`, which builds on this file. -/
+are proved in `Proetale.Algebra.WeaklyEtaleIndEtale`, which builds on this file. -/

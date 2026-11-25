@@ -13,8 +13,20 @@ public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-!
 # Regularity along a flat local map with regular closed fibre
 
-Source: Stacks Project, Algebra, Lemma 031E
-(blueprint: lem-weil-pbc-flat-over-regular-with-regular-fibre).
+A flat local map of Noetherian local rings with regular source and regular closed fibre has
+regular target.
+
+## Implementation details
+
+The flat height formula (Tag 00ON) gives `dim S = dim R + dim(S/m_R S)`. Lifts of minimal
+generators of the fibre's maximal ideal, together with the images of minimal generators of
+`m_R`, generate `m_S`, so `IsRegularLocalRing.of_spanFinrank_maximalIdeal_le` applies. Either
+generating set may be empty.
+
+## References
+
+* [Stacks, Tag 031E]
+* [Stacks, Tag 00ON]
 -/
 
 @[expose] public section
@@ -24,24 +36,7 @@ universe u v
 namespace IsRegularLocalRing
 
 /-- A flat local map of Noetherian local rings with regular source and regular closed fibre
-has regular target. Source: Stacks Project, Algebra, Lemma 031E
-(blueprint: lem-weil-pbc-flat-over-regular-with-regular-fibre).
-
-Proof:
-1. The regular closed-fibre hypothesis already supplies its local and Noetherian
-   structures. Locality gives f⁻¹(m_S) = m_R and m_R S ⊆ m_S, and the surjective
-   quotient map sends m_S to the closed fibre's maximal ideal.
-2. Apply lem-weil-pbc-flat-height-formula (Stacks 00ON) directly at m_R and m_S.
-   The height of a local ring's maximal ideal is its Krull dimension, giving
-   dim S = dim R + dim(S/m_R S) without an explicit localization isomorphism.
-3. Choose minimal finite generating sets for m_R and for the fibre's maximal ideal.
-   Lift the latter to a finite set in m_S on which the quotient map is injective.
-   The union of these lifts and the images of the base generators generates m_S:
-   its quotient image agrees with that of m_S, and it contains the quotient kernel.
-   Its cardinality is at most the sum of the two minimal generator counts.
-4. Regularity identifies those counts with the two dimensions. The dimension formula
-   and IsRegularLocalRing.of_spanFinrank_maximalIdeal_le give regularity of S.
-   The finite-set argument also covers either generating set being empty. -/
+has regular target. -/
 theorem of_flat_of_regular_closedFiber
     {R : Type u} {S : Type v} [CommRing R] [CommRing S]
     [IsRegularLocalRing R] [IsLocalRing S] [IsNoetherianRing S]

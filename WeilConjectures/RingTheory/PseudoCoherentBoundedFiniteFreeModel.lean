@@ -13,8 +13,19 @@ import Mathlib.Algebra.Category.ModuleCat.Projective
 /-!
 # Finite free models at a cohomological upper bound
 
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U
-(blueprint: lem-pc-pseudo-coherent-bounded-finite-free-model).
+A pseudo-coherent object of `D(R)` with no cohomology above `b` has a finite free model with no
+terms above `b`.
+
+## Implementation details
+
+Start from a finite free representative supported in degrees at most `n` and induct on `n - b`.
+At each step the top differential is a split epimorphism, and
+`CochainComplex.exists_finiteFree_cancel_split_top` truncates and adds a contractible two-term
+complex to keep the top term free.
+
+## References
+
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -26,22 +37,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- A pseudo-coherent object of `D(R)` with no cohomology above `b` admits a finite free
-representative with no terms above `b`.
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U, final assertion
-(blueprint: lem-pc-pseudo-coherent-bounded-finite-free-model).
-
-Proof:
-1. Unpack pseudo-coherence to obtain a finite free representative `E` supported in
-   degrees at most some integer `n`. Induct on the nonnegative excess of `n` over `b`.
-2. At each successor step, transfer the vanishing of cohomology from `C` to the current
-   representative. Its differential into the top degree is an epimorphism: the complex
-   is exact there and the outgoing differential has zero target. Freeness of the top
-   term gives a section of this epimorphism.
-3. Apply `CochainComplex.exists_finiteFree_cancel_split_top`. It truncates at the preceding
-   degree and adds a contractible two-term complex to restore freeness of the new top
-   term. The projection and truncation inclusion form a quasi-isomorphism. Compose its
-   image under `Q` with the current derived isomorphism, and use the induction hypothesis.
-   At excess zero, the current representative already has the desired bound. -/
+representative with no terms above `b`. -/
 theorem exists_finiteFree_model_isStrictlyLE
     {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (C : DerivedCategory (ModuleCat.{v} R)) (b : ℤ) (hC : IsPseudoCoherent C)
