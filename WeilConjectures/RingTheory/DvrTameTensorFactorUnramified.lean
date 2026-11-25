@@ -22,42 +22,22 @@ import WeilConjectures.RingTheory.DvrTameTensorFactorResidueSeparable
 
 /-! # The tame ramification step for a finite normalization
 
-Source: Stacks Project, Tags 0BRM, 09E7, 00UW and 02FM.
-(blueprint: lem-sbc-dvr-tame-tensor-factor-unramified) -/
+## References
+
+* Stacks Project, Tags 0BRM, 09E7, 00UW and 02FM
+-/
 
 @[expose] public section
 universe u
 open scoped TensorProduct
 namespace RingTheory
 
-/-- A DVR base extension with sufficiently divisible index kills tame ramification.
-
-Source: Stacks Project, Tags 0BRM, 09E7, 00UW and 02FM.
-(blueprint: lem-sbc-dvr-tame-tensor-factor-unramified)
-
-Proof: Since A is finite and faithful over B and both rings are DVRs, their
-fraction fields form a finite extension. The displayed maximal-ideal power
-identity shows that its ramification index is n.
-The normalization C of B in E is finite, normal, and one-dimensional by the
-separable trace-pairing theorem and integral dimension preservation, hence its
-localizations at the primes above the closed point are DVRs. The assumed bounds
-make their ramification indices and residue degrees
-divide n. Since n is a unit in B,
-the indices are prime to the residue characteristic and the residue extensions
-are separable. Apply Abhyankar's lemma 0BRM to each of these DVRs and
-Frac(A)/Frac(B). The map A -> F is injective, since its kernel contracts to
-zero in B and A is integral over B. Thus F is a field factor after extending
-the generic tensor product to Frac(A). Since A is integral over B, integrality
-over A in F is equivalent to integrality over B; localization of integral closure
-identifies the chosen S_Q with a normalized tensor factor from 0BRM.
-Every such factor over the closed point of A has index one and separable residue
-extension, by 09E7. The assumed finite
-normalization makes the local maps essentially of finite type. The local
-unramified criterion (00UW, 02FM) then gives formal unramifiedness. This
-statement takes normalization finiteness and the divisibility bounds as inputs
-and applies to any finite faithful DVR extension with the displayed ideal identity.
-It neither constructs a root algebra nor proves the Galois divisibility bounds
-or finiteness of the generic tensor factor's normalization. -/
+/-- A DVR base extension with sufficiently divisible index kills tame ramification: let `B → A`
+be a finite extension of DVRs with `m_B A = m_A ^ n` and `n` a unit in `B`, and let `E` be a
+finite separable extension of `Frac B` such that every prime of the normalization of `B` in `E`
+over `m_B` has ramification index and inertia degree dividing `n`. Then for every field factor
+`F = (E ⊗[B] A) ⧸ P`, with the normalization `S` of `A` in `F` finite over `A`, and every prime
+`Q` of `S` over `m_A`, the map `A → S_Q` is formally unramified. -/
 theorem dvr_tame_tensor_factor_formallyUnramified
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (hn : IsUnit (n : B))

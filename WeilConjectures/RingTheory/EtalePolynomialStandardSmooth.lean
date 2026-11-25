@@ -14,8 +14,16 @@ import Mathlib.RingTheory.Kaehler.Polynomial
 /-!
 # Standard smoothness of an étale polynomial algebra
 
-Source: Stacks Project, Algebra, Lemma 00U9, and composition of standard smooth maps.
-(blueprint: lem-weil-pbc-etale-polynomial-standard-smooth).
+An étale algebra over a finite polynomial algebra is standard smooth over the base.
+
+## Implementation details
+
+An étale algebra is standard smooth of relative dimension zero, a polynomial algebra is standard
+smooth, and standard smooth maps compose.
+
+## References
+
+* Stacks Project, Algebra, Lemma 00U9; the final paragraph of Lemma 07CH
 -/
 
 @[expose] public section
@@ -26,15 +34,7 @@ universe u v
 
 namespace Algebra
 
-/-- An étale algebra over a finite polynomial algebra is standard smooth over the base.
-Source: Stacks Project, Algebra, Lemma 00U9; the final paragraph of Lemma 07CH.
-(blueprint: lem-weil-pbc-etale-polynomial-standard-smooth).
-
-Proof. An étale algebra is standard smooth of relative dimension zero by Mathlib's
-`Etale.iff_isStandardSmoothOfRelativeDimension_zero`. The polynomial algebra is standard
-smooth because its Kähler differential basis consists of the differentials of its variables
-(`IsStandardSmooth.of_basis_kaehlerDifferential`). The algebra homomorphism supplies the
-scalar tower, and `IsStandardSmooth.trans` composes the two standard smooth maps. -/
+/-- An étale algebra over a finite polynomial algebra is standard smooth over the base. -/
 theorem isStandardSmooth_of_etale_polynomial
     (R : Type u) (B : Type v) [CommRing R] [CommRing B] [Algebra R B] (n : ℕ)
     (θ : MvPolynomial (Fin n) R →ₐ[R] B)

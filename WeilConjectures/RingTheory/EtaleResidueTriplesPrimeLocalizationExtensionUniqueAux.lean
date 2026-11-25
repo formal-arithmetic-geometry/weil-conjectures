@@ -10,6 +10,26 @@ public import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 import WeilConjectures.RingTheory.PrimeLocalizationEtaleAlgebraModel
 
+/-! # Epic global models of pointed étale triples over a prime localization
+
+Every pointed étale triple over `R_p` is the target of an epic compatible pointed map from a
+pointed étale triple over `(R, p)`.
+
+## Implementation details
+
+The model is obtained by descending the étale `R_p`-algebra to an affine étale model `C` over
+some principal localization `R_s`, so that the given algebra is a localization of `C`. Keeping
+this localization property during descent is essential: it is what makes the map epic.
+
+## References
+
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+* [Stacks: Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
+* [Stacks: Tag 07RP](https://stacks.math.columbia.edu/tag/07RP)
+* [Stacks: Tag 01Z6](https://stacks.math.columbia.edu/tag/01Z6)
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits
@@ -47,27 +67,8 @@ private lemma pointing_over (A B : CommRingCat.{u}) (q : Spec A)
     (fun f : Spec (CommRingCat.of K) ⟶ Spec A ↦ f (IsLocalRing.closedPoint K)) h
   simpa using h'
 
-/-- A fixed local pointed étale triple admits a global pointed model whose map is epic.
-Source: Stacks Project, Tags 00CR, 01ZM, 07RP, 01Z6 and 04GW.
-(blueprint: new-lem-sbc-etale-triples-prime-localization-component-extension-unique-aux)
-
-This is the descent-and-localization part of the uniqueness proof: the global model
-maps to the prescribed local triple, and its underlying ring map is an epimorphism.
-
-Proof: Write A = R_p and S = R minus p. Descend the finitely presented etale
-A-algebra t.B to an etale algebra over R_s for some s in S (01ZM, 07RP).
-The affine-limit theorem (01Z6) supplies an affine descended model C after
-enlarging s. Since R_s is etale over R, C is etale over R. The base-change
-identification makes t.B the localization of C at the image of S, with map i.
-Restrict the pointing t.B → K along i. Its prime kernel defines the point of
-Spec C; the induced injection from C modulo that kernel into K extends to the
-fraction field, giving its residue-field pointing. The equations hψ and hK
-ensure this point lies over p and its pointing is compatible with χ. Thus C
-and its pointing form the required triple. Its map i satisfies both displayed
-equations and is epic by localization extensionality. It is essential to retain
-this localization property during descent; an arbitrary compatible model is
-insufficient.
--/
+/-- Every pointed étale triple over `R_p` receives a compatible pointed map from some pointed
+étale triple over `(R, p)` whose underlying ring map is an epimorphism. -/
 theorem etaleResidueTriples_primeLocalization_component_extension_unique_aux
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

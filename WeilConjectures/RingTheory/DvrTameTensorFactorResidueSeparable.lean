@@ -24,8 +24,10 @@ import WeilConjectures.RingTheory.DvrNormalizedCompositumLocalDiagram
 
 /-! # A local consequence of tame DVR base change
 
-Source: Stacks Project, Tags 032L, 0BRM and 09E7.
-(blueprint: lem-sbc-dvr-tame-tensor-factor-residue-separable) -/
+## References
+
+* Stacks Project, Tags 032L, 0BRM and 09E7
+-/
 
 @[expose] public section
 universe u
@@ -55,35 +57,12 @@ private theorem isSeparable_of_isUnit_finrank
           (hr ▸ hdiv)))
   exact aux (ringExpChar k)
 
-/-- Residue separability after tame DVR base change.
-
-Source: Stacks Project, Tags 032L, 0BRM and 09E7.
-(blueprint: lem-sbc-dvr-tame-tensor-factor-residue-separable)
-
-Proof: Finite faithfulness gives an injection B -> A and a finite extension
-Frac(A)/Frac(B); normality of A identifies A with the normalization of B in
-Frac(A). The maximal-ideal identity gives ramification index n. The kernel of
-A -> F is prime and contracts to zero in B, since B embeds in E and the map
-from the field E to the nonzero tensor quotient F is injective. Incomparability
-for the integral extension B -> A then makes that kernel zero. Inverting the
-nonzero elements identifies F with a field factor of E tensor_Frac(B) Frac(A).
-The normalization C of B in E is finite by Stacks 032L (the separable trace
-argument); it is a Dedekind domain, so C localized at a prime over m_B is a DVR.
-At each such prime, the two divisibility bounds and the unit n imply that the
-ramification index and the residue degree are prime to the residue characteristic.
-The inseparable residue degree is a power of that characteristic and divides
-the residue degree, hence is one; in characteristic zero separability is automatic.
-Apply Abhyankar's lemma 0BRM to these tame DVRs and Frac(A)/Frac(B): their
-ramification indices divide n, the base-change index. Integrality over A and B
-in F agrees by transitivity and the integral extension A/B. Localization of
-normalization therefore identifies S_Q with the normalized field factor of
-0BRM. Finiteness of S over A, its normality, and the fact that Q lies over m_A
-ensure that S_Q is a DVR. Abhyankar gives adic formal smoothness of A -> S_Q;
-Stacks 09E7 identifies its two consequences as index one and residue separability.
-The residue-separability consequence of 09E7 is separability for the residue
-map induced by A -> S_Q. The explicit local-hom proof only supplies that map's
-Lean algebra structure; it adds no ramification hypothesis. This is only the
-residue-field conclusion and makes no assertion about the maximal ideal. -/
+/-- Residue separability after tame DVR base change: let `B → A` be a finite extension of DVRs
+with `m_B A = m_A ^ n` and `n` a unit in `B`, and let `E` be a finite separable extension of
+`Frac B` such that every prime of the normalization of `B` in `E` over `m_B` has ramification
+index and inertia degree dividing `n`. Then for every field factor `F = (E ⊗[B] A) ⧸ P`, with the
+normalization `S` of `A` in `F` finite over `A`, and every prime `Q` of `S` over `m_A`, the
+residue field extension of `A → S_Q` is separable. -/
 theorem dvr_tame_tensor_factor_residue_isSeparable
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (n : ℕ) (hnpos : 0 < n) (hn : IsUnit (n : B))

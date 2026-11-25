@@ -13,8 +13,14 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-! # Etale ring maps and the conormal criterion
 
-Source: literature/stacks-project/algebra.tex, Definition Tag 00U1 and Lemma Tag 00U9
-(blueprint: `lem-weil-pbc-etale-ring-map-conormal-criterion`)
+For a finitely presented quotient `S` of a polynomial ring over `R`, the map `Spec S → Spec R`
+is étale if and only if the derivative map from the conormal module `J/J²` to `S^n` is
+bijective.
+
+## References
+
+* Stacks Project, Definition Tag 00U1, Lemma Tag 00U9, text before Tag 00S1
+* Stacks Project, Tag 02GJ
 -/
 
 @[expose] public section
@@ -23,12 +29,9 @@ universe u
 
 namespace Algebra
 
-/-- The derivative formula descends to an S-linear map on J/J², and etaleness is
- equivalent to its bijectivity. The S-action is transported along P/J ≃ S.
-
-Source: literature/stacks-project/algebra.tex, Definition Tag 00U1, text before Tag 00S1,
-Lemma Tag 00U9; morphisms.tex, Tag 02GJ
-(blueprint: `lem-weil-pbc-etale-ring-map-conormal-criterion`). -/
+/-- For a surjection `α` from a polynomial ring onto `S` with finitely generated kernel `J`,
+ the derivative formula `g ↦ (α (∂ g / ∂ xᵢ))ᵢ` descends to an `S`-linear map on `J/J²`, and
+ `Spec S → Spec R` is étale if and only if this map is bijective. -/
 theorem etale_specMap_iff_bijective_conormalMap
     {R : Type u} {S : Type u} [CommRing R] [CommRing S] [Algebra R S]
     (n : ℕ) (α : MvPolynomial (Fin n) R →ₐ[R] S)

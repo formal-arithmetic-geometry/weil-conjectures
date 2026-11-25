@@ -11,27 +11,26 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationCoconeRelation
 import WeilConjectures.RingTheory.EtaleResidueTriplesPrimeLocalizationComponentExtension
 
-/-! # Compatible cocone legs across prime localization -/
+/-! # Compatible cocone legs across prime localization
+
+Every cocone on the pointed étale ring diagram over `(R, p)` extends uniquely to a compatible
+cocone on the pointed étale ring diagram over `R_p`.
+
+## References
+
+* [Stacks: Tag 00CR](https://stacks.math.columbia.edu/tag/00CR)
+* [Stacks: Tag 01ZM](https://stacks.math.columbia.edu/tag/01ZM)
+* [Stacks: Tag 07RP](https://stacks.math.columbia.edu/tag/07RP)
+* [Stacks: Tag 04GW](https://stacks.math.columbia.edu/tag/04GW)
+-/
 
 @[expose] public section
 
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
-/-- Every global cocone has a unique local cocone with compatible pointed legs.
-Source: Stacks Project, Tags 00CR, 01ZM, 07RP and 04GW.
-(blueprint: new-lem-sbc-etale-triples-prime-localization-cocone-extension)
-
-Proof: Express R_p as the filtered colimit of R_s for s outside p. Descend each
-finitely presented etale R_p-algebra to an etale R_s-algebra. Restrict its pointing
-into K; its kernel and residue field factorization make it an R-triple. The global
-cocone leg on this model inverts the other denominators, by naturality on pointed
-principal refinements. Extend it uniquely to the original local algebra. Descend
-morphisms, equalities, and both directions and inverse relations of comparison
-isomorphisms to common principal stages. These facts imply independence of model,
-naturality of the extended legs, and compatibility with every pointed R-map into
-a local triple. Every local triple has such a descended model, and the localization
-extension is unique, so any other compatible local cocone has exactly these legs. -/
+/-- Every cocone on the pointed étale ring diagram over `(R, p)` has a unique cocone on the
+pointed étale ring diagram over `R_p` with the same vertex and compatible legs. -/
 theorem etaleResidueTriples_primeLocalization_cocone_extension
     (R : CommRingCat.{u}) (p : Spec R) (K : Type u) [Field K]
     (χ : (Spec R).residueField p ⟶ CommRingCat.of K)

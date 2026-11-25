@@ -23,8 +23,21 @@ import WeilConjectures.RingTheory.DvrTameTensorFactorUnramified
 
 /-! # The algebraic tame root calculation in a generic tensor factor
 
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
-(blueprint: lem-sbc-dvr-galois-root-factor-uniformizer) -/
+For `A = B[t]/(t^n - π)` over a discrete valuation ring `B` with `n` invertible, and a finite
+Galois extension `E` of `Frac B` of degree dividing `n`, the root `t` generates the maximal ideal
+of every local ring above `(t)` of the integral closure of `A` in a field factor of `E ⊗_B A`
+(`RingTheory.dvr_galois_root_factor_uniformizer`).
+
+## Implementation details
+
+The primes of the integral closure of `B` in `E` above `π` are tame, so by Abhyankar's lemma the
+local rings above `(t)` are formally unramified over `A`. No finiteness of a scheme normalization
+is assumed.
+
+## References
+
+* Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
+-/
 
 @[expose] public section
 
@@ -41,26 +54,11 @@ private theorem maximalIdeal_eq_span_of_unramified
   rw [← Algebra.FormallyUnramified.map_maximalIdeal (R := R), ht,
     Ideal.map_span, Set.image_singleton]
 
-/-- The root generates the maximal ideal of an integral-closure local factor.
-
-Source: Stacks Project, Tags 09EV, 09EB, 0BRM and 09E7.
-(blueprint: lem-sbc-dvr-galois-root-factor-uniformizer)
-
-Proof: Write K = Frac(B), A = B[t]/(t^n-pi), and F = (E tensor_B A)/P.
-For n > 1, 09EV makes A a DVR with uniformizer t, fraction field K1, and
-ramification index n over B. For n = 1 evaluation identifies A with B.
-Since pi is invertible in E, E tensor_B A is E tensor_K K1. It is a finite
-product of fields, as E/K is finite separable. Thus F is one such field.
-The integral closure of B in E has DVR local rings at its primes above (pi).
-By 09EB their ramification index and residue degree divide [E:K], hence n.
-Invertibility of n forces the ramification index to be prime to the residue
-characteristic and the residue inseparable degree to be one. Apply 0BRM to
-these tame DVR extensions and K1/K: every local ring of the integral closure
-of A in F above (t) is adically formally smooth over A. By 09E7 its index is
-one. Since t is a uniformizer of A, its image generates the local maximal ideal.
-All maps used here are the structural maps induced by the right tensor inclusion. No finiteness
-of a scheme normalization is assumed. Degree-one extensions and n = 1 give
-the same index-one conclusion. -/
+/-- The root generates the maximal ideal of an integral-closure local factor. Let `π` be a
+uniformizer of the discrete valuation ring `B`, `n ≥ 1` a unit in `B`, `A = B[t]/(t^n - π)`, and
+`E` a finite Galois extension of `Frac B` with `[E : Frac B] ∣ n`. For a maximal ideal `P` of
+`E ⊗_B A`, let `S` be the integral closure of `A` in `F = (E ⊗_B A)/P`. Then for every prime `Q`
+of `S` lying over `(t)`, the image of `t` generates the maximal ideal of `S_Q`. -/
 theorem dvr_galois_root_factor_uniformizer
     (B : Type u) [CommRing B] [IsDomain B] [IsDiscreteValuationRing B]
     (pi : B) (hpi : Irreducible pi) (n : ℕ) (hnpos : 0 < n)
