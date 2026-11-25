@@ -24,8 +24,6 @@ open SheafOfModules.GeometricConstruction
 namespace SheafOfModules.ScalarIndependent
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedTactic false
-set_option linter.unreachableTactic false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true

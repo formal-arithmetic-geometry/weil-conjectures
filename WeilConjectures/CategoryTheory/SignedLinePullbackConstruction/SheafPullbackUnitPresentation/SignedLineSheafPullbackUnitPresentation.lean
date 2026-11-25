@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 @[expose] public section
 set_option autoImplicit false
 set_option Elab.async false
-set_option linter.unusedSectionVars false
 universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open CategoryTheory.Functor.sheafPullbackConstruction

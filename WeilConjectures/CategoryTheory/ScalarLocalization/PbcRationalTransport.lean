@@ -170,7 +170,6 @@ end CategoryTheory.ScalarLocalization
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.defProp false in
 /-- Inherited integral triangulation. -/
 abbrev pbcIntegralTriangulated (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -215,7 +214,6 @@ instance pbcIntegralIsTriangulated :
   letI := pbcIntegralTriangulated l E T hDim hInv
   inferInstance
 
-set_option linter.defProp false in
 /-- The existing scalar-localization theorem, with its tensor-induced shift and precisely
 its isomorphic image triangles. -/
 abbrev pbcRationalTriangulationData :=

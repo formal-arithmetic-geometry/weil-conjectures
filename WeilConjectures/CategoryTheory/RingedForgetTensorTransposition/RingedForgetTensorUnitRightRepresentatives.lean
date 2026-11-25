@@ -437,8 +437,8 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
   (cA : RingedDerivedTensorCoherence.{d, vd, s, wa} J' R' SA TA βA)
 
 include u SB TB βB cB SA TA βA cA
--- Retain the inherited comparison parameters in the existing public signature.
-set_option linter.unusedSectionVars false in
+omit [∀ (I : Type (max c v r)), PreservesLimitsOfShape (Discrete I) U]
+    [U.PreservesKInjectiveComplexes] in
 /--
 The representative unit calculation for the right unitor is reduced to the
 componentwise model equation for the normalized tensor comparison. -/

@@ -83,14 +83,13 @@ noncomputable def FilteredComplexPageDifferential.page
   shape := D.shape
   d_comp_d' i j k _ _ := D.square_zero i j k
 
-set_option linter.unusedVariables false in
 /-- The differential induced by K exists and is uniquely specified by its action
 on filtered cycle representatives. This assertion concerns only one page; it
 asserts neither a successor page nor a homology identification.
 Source: Stacks Project, Tag 012K, the displayed differential formula preceding. -/
 theorem filteredComplex_page_differential_exists_unique
     (K : CochainComplex C ℤ) (F : DecreasingFiltration K) (r : ℤ) (hr : 1 ≤ r) :
-    ∃! D : FilteredComplexPageDifferential K F r, True := by
+    ∃! _D : FilteredComplexPageDifferential K F r, True := by
   classical
   have hex := fun i j hij ↦ filteredComplex_single_differential_descent K F r hr i j hij
   choose δ hδ using hex

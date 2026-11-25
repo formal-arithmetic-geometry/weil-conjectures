@@ -202,7 +202,6 @@ end DerivedDefinitions
 
 section OrdinaryHelpers
 
-set_option linter.unusedSectionVars false
 
 variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 
@@ -236,6 +235,7 @@ private noncomputable def ordinaryPure (A B : Mod) (U : Cᵒᵖ)
     (SheafOfModules.tensorObjIsoSheafification (R := R) A B).inv.val).app U)
     (x ⊗ₜ[R.obj.obj U] y)
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryTotalHom_ext (P Q : CochainComplex Mod ℤ)
     (A B : Mod) (n : ℤ)
     (f g : ((coefficientTotalTensor.{u, c, v} J R).obj (P, Q)).X n ⟶
@@ -254,12 +254,14 @@ private theorem ordinaryTotalHom_ext (P Q : CochainComplex Mod ℤ)
     J R (P.X p) (Q.X q) A B
   exact h p q hpq
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryPure_map {A A' B B' : Mod} (f : A ⟶ A') (g : B ⟶ B')
     (U : Cᵒᵖ) (x : A.val.obj U) (y : B.val.obj U) :
     (f ⊗ₘ g).val.app U (ordinaryPure.{c, v, u} J R A B U x y) =
       ordinaryPure.{c, v, u} J R A' B' U (f.val.app U x) (g.val.app U y) := by
   exact WeilConjectures.SfbHomFilteredColimit.pure_map.{c, v, u} J R f g U x y
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryTotal_map
     {P P' Q Q' : CochainComplex Mod ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
     (coefficientTotalTensor.{u, c, v} J R).map (X := (P, Q)) (Y := (P', Q')) (f, g) =
@@ -267,6 +269,7 @@ private theorem ordinaryTotal_map
   erw [RingedDerivedNative.totalTensor_map_eq.{c, v, u} J R P' P Q' Q f g]
   rfl
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryGenerator_map
     {P P' Q Q' : CochainComplex Mod ℤ} (f : P ⟶ P') (g : Q ⟶ Q')
     (p q n : ℤ) (h : p + q = n) (U : Cᵒᵖ)
@@ -303,6 +306,7 @@ private theorem ordinaryGenerator_map
   rw [ordinaryPure_map.{c, v, u}] at he
   exact he
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryGenerator_zero_right
     (P Q : CochainComplex Mod ℤ) (p q n : ℤ) (h : p + q = n)
     (U : Cᵒᵖ) (x : (P.X p).val.obj U) :
@@ -365,6 +369,7 @@ private theorem ordinaryCurry_apply
   subst n
   exact (ordinaryCurry_spec.{c, v, u} J R P E F f p a U y x).symm
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryUnit_zero (n : ℤ) (hn : n ≠ 0) (U : Cᵒᵖ)
     (x : ((ringedTensorUnitComplex.{c, v, u} J R).X n).val.obj U) : x = 0 := by
   have hz := HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0
@@ -422,6 +427,7 @@ private noncomputable def ordinaryRightUnitor (P : CochainComplex Mod ℤ) :
   by
     with_unfolding_all exact HomologicalComplex.rightUnitor P
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryAssociator_apply
     (P Q L : CochainComplex Mod ℤ)
     (p q a n r b : ℤ) (hpq : p + q = n) (hqa : q + a = r)
@@ -437,6 +443,7 @@ private theorem ordinaryAssociator_apply
   exact (RingedDerivedNative.complexConstraints.{c, v, u} J R).associator
     P Q L p q a n r b hpq hqa hn hb U x y z
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryRightUnitor_apply
     (P : CochainComplex Mod ℤ) (n : ℤ) (h : n + 0 = n) (U : Cᵒᵖ)
     (a : R.obj.obj U) (x : (P.X n).val.obj U) :
@@ -472,6 +479,7 @@ private theorem ordinaryAssociator_unique
     (ordinaryAssociator_apply.{c, v, u} J R
       P Q L p q a n (q + a) b hn rfl (by omega) (by omega) U x y z).symm
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryRightUnitor_unique (P : CochainComplex Mod ℤ)
     (f : (coefficientTotalTensor.{u, c, v} J R).obj
       (P, ringedTensorUnitComplex.{c, v, u} J R) ⟶ P)
@@ -540,6 +548,7 @@ private noncomputable def ordinaryEvaluation
       (Y := (F, ringedTensorUnitComplex.{c, v, u} J R)) (𝟙 F, ev) ≫
       (ordinaryRightUnitor.{c, v, u} J R F).hom)
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryEvaluation_eq (E F : CochainComplex Mod ℤ) :
     ordinaryEvaluation.{c, v, u} J R E F =
       let D := homComplex (R := R) E (ringedTensorUnitComplex.{c, v, u} J R)
@@ -620,6 +629,7 @@ private theorem ordinaryEvaluation_formula (E F : CochainComplex Mod ℤ) :
         (coefficientTensorGenerator.{u, c, v} J R D E q a (q + a) rfl U φ x))
     rw [hz, ordinaryGenerator_zero_right, map_zero]
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryFormula_ext
     (E F : CochainComplex Mod ℤ)
     (f g : (coefficientTotalTensor.{u, c, v} J R).obj
@@ -650,6 +660,7 @@ private theorem ordinaryFormula_ext
   · exact ((hf p q n a b hpq hab U y φ x).2 h).trans
       ((hg p q n a b hpq hab U y φ x).2 h).symm
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem ordinaryCurry_pre (P E L F : CochainComplex Mod ℤ)
     (s : L ⟶ E) (g : P ⟶ homComplex (R := R) E F) :
     (ordinaryCurry.{c, v, u} J R P L F).symm
@@ -666,6 +677,7 @@ private theorem monoidalEvaluation_pre {D : Type*} [Category D] [MonoidalCategor
       (α_ F P L).hom ≫ (F ◁ (P ◁ s ≫ ev)) ≫ (ρ_ F).hom := by
   simp only [whiskerLeft_comp, associator_naturality_right_assoc, Category.assoc]
 
+omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 set_option backward.isDefEq.respectTransparency true in
 private theorem ordinaryEvaluation_uncurry_pre
     (E F L : CochainComplex Mod ℤ) (s : L ⟶ E) :

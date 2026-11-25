@@ -172,7 +172,6 @@ noncomputable def braiding (M N : Mod C R) : M ⊗ N ≅ N ⊗ M where
   hom := braidingHom M N
   inv := braidingHom N M
 
-set_option linter.flexible false in
 /-- The relative tensor product over a commutative algebra object in a symmetric monoidal
 category is braided. -/
 noncomputable instance braidedCategory : BraidedCategory (Mod C R) where
@@ -188,13 +187,19 @@ noncomputable instance braidedCategory : BraidedCategory (Mod C R) where
   hexagon_forward M N P := by
     ext
     rw [← cancel_epi (tensorObjπ M N ▷ P.X ≫ tensorObjπ (M ⊗ N) P)]
-    simp [tensorObjπ_associator_hom_assoc, tensorObjπ_whiskerRight_assoc]
+    simp only [braiding_hom, comp_hom', braidingHom_hom, Category.assoc,
+      tensorObjπ_associator_hom_assoc, tensorObjπ_braidingHomX_assoc,
+      braiding_naturality_right_assoc, braiding_tensor_right_hom, Iso.hom_inv_id_assoc,
+      tensorObjπ_whiskerRight_assoc, tensorObjπ_whiskerRight_braidingHomX_assoc]
     erw [tensorObjπ_associator_hom, tensorObjπ_whiskerLeft]
     simp
   hexagon_reverse M N P := by
     ext
     rw [← cancel_epi (M.X ◁ tensorObjπ N P ≫ tensorObjπ M (N ⊗ P))]
-    simp [tensorObjπ_associator_inv_assoc, tensorObjπ_whiskerLeft_assoc]
+    simp only [braiding_hom, comp_hom', braidingHom_hom, Category.assoc,
+      tensorObjπ_associator_inv_assoc, tensorObjπ_braidingHomX_assoc,
+      braiding_naturality_left_assoc, braiding_tensor_left_hom, Iso.inv_hom_id_assoc,
+      tensorObjπ_whiskerLeft_assoc, whiskerLeft_tensorπ_braidingHomX_assoc]
     erw [tensorObjπ_associator_inv, tensorObjπ_whiskerRight]
     simp
 

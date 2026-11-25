@@ -112,7 +112,6 @@ private theorem liftExact {C : Type u} [SmallCategory C] {T : Type*} {U : C}
   change S.differentialValue F q (fun t ↦ d (ULift.down ∘ t)) t = c t
   exact hh
 
-set_option linter.unusedVariables false in
 /-- Injective module sheaves are Čech-acyclic; finite-basis Čech-acyclic module sheaves
 have zero positive derived sections. The last clause computes derived sections on every
 injective resolution in module sheaves, rather than resolving the underlying abelian sheaf.
@@ -125,7 +124,7 @@ theorem module_cech_acyclicity_criterion
     [J.IsStableUnderBaseChange] [J.HasPullbacks]
     (R : Sheaf J.toGrothendieck RingCat.{u})
     (B : Set C)
-    (hbasis : ∀ U : C, ∃ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),
+    (_hbasis : ∀ U : C, ∃ (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),
       Presieve.ofArrows V f ∈ J U ∧ ∀ t, V t ∈ B)
     (products : ∀ (U : C) (T : Type u) (V : T → C) (f : ∀ t, V t ⟶ U),
       U ∈ B → (∀ t, V t ∈ B) → Presieve.ofArrows V f ∈ J U → SiteCechComplex V f)

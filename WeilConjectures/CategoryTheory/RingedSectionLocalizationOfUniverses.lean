@@ -41,7 +41,8 @@ abbrev ringedSectionLocalizationCarrierOfUniverses
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) :=
   Localization.Away (M := O.obj.obj X) (s.val X)
 
-set_option linter.unusedSectionVars false in
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+  [HasSheafify J CommRingCat] [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 /-- The image of a global section is invertible after localization on the target object.
 Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalization_isUnitOfUniverses
@@ -64,6 +65,8 @@ def ringedSectionLocalizationMapOfUniverses
       (O.obj.map a).hom)
     (ringedSectionLocalization_isUnitOfUniverses O s a)
 
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+  [HasSheafify J CommRingCat] [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 /-- Localization restriction is semilinear over restriction of coefficients.
 Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationMap_smulOfUniverses
@@ -89,6 +92,8 @@ def ringedSectionLocalizationLinearMapOfUniverses
       map_add' := (ringedSectionLocalizationMapOfUniverses O s a).map_add
       map_smul' := ringedSectionLocalizationMap_smulOfUniverses O s a }
 
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+  [HasSheafify J CommRingCat] [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 /-- Identity compatibility of sectionwise localization restriction.
 Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationLinearMap_idOfUniverses
@@ -106,6 +111,8 @@ theorem ringedSectionLocalizationLinearMap_idOfUniverses
   change ringedSectionLocalizationMapOfUniverses O s (𝟙 X) x = x
   exact DFunLike.congr_fun h x
 
+omit [HasSheafify J AddCommGrpCat] [J.WEqualsLocallyBijective AddCommGrpCat]
+  [HasSheafify J CommRingCat] [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 /-- Composition compatibility of sectionwise localization restriction.
 Source: Stacks Project, algebraization.tex, Tag 0996. -/
 theorem ringedSectionLocalizationLinearMap_compOfUniverses
@@ -162,7 +169,6 @@ section
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
-set_option linter.unusedSectionVars false
 
 /- The additive sheafification has a canonical multiplication: multiply local representatives
 and glue. Local injectivity makes the product independent of the representatives. The ring laws

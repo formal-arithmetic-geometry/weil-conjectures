@@ -31,11 +31,16 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
   [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
   [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
 
-set_option linter.unusedSectionVars false in
 section
 
 open CategoryTheory.Category
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [HasZeroObject S.PairCategory]
+  [∀ n : ℤ, (shiftFunctor S.PairCategory n).Additive]
+  [∀ i, (S.ι i).Additive]
+  [Preadditive S.PairCategory] in
 private theorem commonStage_image_completion {i j : I}
     (τ₁ : Triangle (C i)) (τ₂ : Triangle (C j))
     (h₁ : τ₁ ∈ distTriang (C i)) (h₂ : τ₂ ∈ distTriang (C j))
@@ -119,6 +124,12 @@ private theorem commonStage_image_completion {i j : I}
     rw [ha] at hh
     exact hh
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [HasZeroObject S.PairCategory]
+  [∀ n : ℤ, (shiftFunctor S.PairCategory n).Additive]
+  [∀ i, (S.ι i).Additive]
+  [Preadditive S.PairCategory] in
 /-- A commuting square between the first arrows of common-stage distinguished
 triangles extends to a triangle morphism. -/
 private theorem commonStage_complete_triangle_morphism
@@ -149,12 +160,27 @@ private theorem commonStage_nonempty_octahedron_rfl
   subst comm
   exact ⟨H⟩
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [HasZeroObject S.PairCategory]
+  [∀ n : ℤ, (shiftFunctor S.PairCategory n).Additive]
+  [∀ i, (S.ι i).Additive]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
+  [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
+  [Preadditive S.PairCategory]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ] in
 private theorem commonStage_iso_closed (T₁ T₂ : Triangle S.PairCategory)
     (h₁ : S.CommonStageDistinguished T₁) (e : T₂ ≅ T₁) :
     S.CommonStageDistinguished T₂ := by
   obtain ⟨i, U, hU, ⟨e'⟩⟩ := h₁
   exact ⟨i, U, hU, ⟨e ≪≫ e'⟩⟩
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [∀ n : ℤ, (shiftFunctor S.PairCategory n).Additive]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
+  [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ] in
 private theorem commonStage_contractible (X : S.PairCategory) :
     S.CommonStageDistinguished (contractibleTriangle X) := by
   have hz := (S.ι X.stage).map_isZero (isZero_zero (C X.stage))
@@ -168,6 +194,15 @@ private theorem commonStage_contractible (X : S.PairCategory) :
   · exact hz.eq_of_tgt _ _
   · exact (isZero_zero _).eq_of_src _ _
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [HasZeroObject S.PairCategory]
+  [∀ n : ℤ, (shiftFunctor S.PairCategory n).Additive]
+  [∀ i, (S.ι i).Additive]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
+  [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
+  [Preadditive S.PairCategory]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ] in
 private theorem commonStage_cocone {X Y : S.PairCategory} (f : X ⟶ Y) :
     ∃ (Z : S.PairCategory) (g : Y ⟶ Z) (h : Z ⟶ X⟦(1 : ℤ)⟧),
       S.CommonStageDistinguished (Triangle.mk f g h) := by
@@ -181,6 +216,12 @@ private theorem commonStage_cocone {X Y : S.PairCategory} (f : X ⟶ Y) :
     (by simp [Functor.mapTriangle, mkHom_eq_isoToStage])
     (by simp [Functor.mapTriangle]) (by simp [Functor.mapTriangle])
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [HasZeroObject S.PairCategory]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
+  [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ] in
 private theorem commonStage_rotate (T : Triangle S.PairCategory) :
     S.CommonStageDistinguished T ↔ S.CommonStageDistinguished T.rotate := by
   constructor
@@ -192,6 +233,16 @@ private theorem commonStage_rotate (T : Triangle S.PairCategory) :
       ⟨(rotCompInvRot (C := S.PairCategory)).app T ≪≫ (invRotate _).mapIso e ≪≫
         (S.ι i).mapTriangleInvRotateIso.app U⟩⟩
 
+omit [Nonempty I]
+  [∀ i, IsTriangulated (C i)]
+  [∀ i, (S.ι i).Additive]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
+  [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
+  [∀ i, Pretriangulated (C i)]
+  [∀ i, (S.ι i).CommShift ℤ]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ i, HasZeroObject (C i)] [∀ i, ∀ n : ℤ, (shiftFunctor (C i) n).Additive]
+  [∀ i, Preadditive (C i)] [∀ i, HasShift (C i) ℤ] in
 private theorem pretriangulated_eq_of_distinguished
     (t₁ t₂ : Pretriangulated S.PairCategory)
     (h : t₁.distinguishedTriangles = t₂.distinguishedTriangles) : t₁ = t₂ := by
@@ -203,16 +254,16 @@ private theorem pretriangulated_eq_of_distinguished
 
 end
 
-set_option linter.unusedVariables false in
+omit [Nonempty I] in
 /-- Common-stage triangles satisfy TR1--TR4; stage inclusions and transition
 identifications are exact. The distinguished set uniquely fixes the pretriangulation. -/
 theorem commonStage_verdier_existsUnique :
     ∃! t : Pretriangulated S.PairCategory,
-      (fun [triInst : Pretriangulated S.PairCategory] ↦
+      (fun [_triInst : Pretriangulated S.PairCategory] ↦
         (∀ T : Triangle S.PairCategory,
           T ∈ distTriang S.PairCategory ↔ S.CommonStageDistinguished T) ∧
         IsTriangulated S.PairCategory ∧ ∀ i : I, (S.ι i).IsTriangulated)
-        (triInst := t) := by
+        (_triInst := t) := by
   let t : Pretriangulated S.PairCategory :=
     { distinguishedTriangles := S.CommonStageDistinguished
       isomorphic_distinguished := fun T₁ h₁ T₂ e ↦ commonStage_iso_closed S T₁ T₂ h₁ e

@@ -137,7 +137,6 @@ including the coefficient sequence site, before evaluation or inverse limit.
 
 @[expose] public section
 set_option autoImplicit false
-set_option linter.checkUnivs false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types true
@@ -433,18 +432,17 @@ private theorem resolving_resolution (X : Site.{u, v, r, d})
 
 end
 
-set_option linter.style.haveILetI false in
 /-- Every resolving model, not just the chosen replacement, computes every word.
 Source: Stacks 0G7E, 06YY, 0D6D. -/
 theorem word_computation [Finite I] {i j : I} (w : Word E i j)
     (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ) (hP :
       Resolving (S i) P) :
     Resolving (S j) ((w.complex S E A).obj P) ∧ IsIso (w.counit S E A P) := by
-  letI (i : I) : (S i).J.HasSheafCompose
+  let (i : I) : (S i).J.HasSheafCompose
       (forget₂ CommRingCat.{r} RingCat.{r}) := siteHasSheafCompose (S i)
-  letI (i : I) : HasSheafify (S i).J AddCommGrpCat.{r} := siteHasSheafify (S i)
-  letI (i : I) : (S i).J.WEqualsLocallyBijective AddCommGrpCat.{r} := siteWEquals (S i)
-  letI (i : I) : Abelian (CochainPullback.Modules.{r, u, v} (S i).R) := siteAbelian (S i)
+  let (i : I) : HasSheafify (S i).J AddCommGrpCat.{r} := siteHasSheafify (S i)
+  let (i : I) : (S i).J.WEqualsLocallyBijective AddCommGrpCat.{r} := siteWEquals (S i)
+  let (i : I) : Abelian (CochainPullback.Modules.{r, u, v} (S i).R) := siteAbelian (S i)
   induction w with
   | nil i =>
       refine ⟨?_, ?_⟩
@@ -531,17 +529,16 @@ private theorem counit_naturality {i j : I} (w : Word E i j)
 end
 
 -- Inline these canonical instances to avoid repeated dependent instance reduction.
-set_option linter.style.haveILetI false in
 /-- Unique descent with the required resolving-representative equation.
 Source: Stacks 04VC, 04VK, 05RT, 06YS and 06YY. -/
 theorem descent_existsUnique [Finite I] {i j : I} {w v : Word E i j}
     (t : w.ordinary S E A ⟶ v.ordinary S E A) :
     ∃! tL : w.derived S E A ⟶ v.derived S E A, Normalized S E A t tL := by
-  letI (i : I) : (S i).J.HasSheafCompose
+  let (i : I) : (S i).J.HasSheafCompose
       (forget₂ CommRingCat.{r} RingCat.{r}) := siteHasSheafCompose (S i)
-  letI (i : I) : HasSheafify (S i).J AddCommGrpCat.{r} := siteHasSheafify (S i)
-  letI (i : I) : (S i).J.WEqualsLocallyBijective AddCommGrpCat.{r} := siteWEquals (S i)
-  letI (i : I) : Abelian (CochainPullback.Modules.{r, u, v} (S i).R) := siteAbelian (S i)
+  let (i : I) : HasSheafify (S i).J AddCommGrpCat.{r} := siteHasSheafify (S i)
+  let (i : I) : (S i).J.WEqualsLocallyBijective AddCommGrpCat.{r} := siteWEquals (S i)
+  let (i : I) : Abelian (CochainPullback.Modules.{r, u, v} (S i).R) := siteAbelian (S i)
   let εw : DerivedCategory.Q ⋙ w.derived S E A ⟶
       w.complex S E A ⋙ DerivedCategory.Q :=
     { app := w.counit S E A
@@ -644,7 +641,6 @@ private theorem identity_normalization
 end
 
 -- Inline these canonical instances to avoid repeated dependent instance reduction.
-set_option linter.style.haveILetI false in
 set_option backward.isDefEq.respectTransparency.types false
 
 section ScalarFormulas

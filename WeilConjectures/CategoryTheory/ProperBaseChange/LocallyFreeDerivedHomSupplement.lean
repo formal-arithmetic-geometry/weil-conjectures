@@ -44,10 +44,6 @@ specifies evaluation, rather than only asserting the existence of abstract group
 @[expose] public section
 
 set_option autoImplicit false
-set_option linter.unusedTactic false
-set_option linter.unusedVariables false
-set_option linter.unusedSimpArgs false
-set_option linter.unusedSectionVars false
 set_option synthInstance.maxSize 2048
 universe u v w
 
@@ -197,11 +193,13 @@ private noncomputable def abstract_dualTensorComparison
     (genericDualTensor P).obj N ⟶ (ihom P).obj N := by
   exact MonoidalClosed.ihomUnitTensorToIhom P N
 
+omit [Abelian A] [∀ P : A, (tensorLeft P).Additive] in
 private theorem abstract_dualTensorComparison_isIso (P N : A)
     (hP : ∀ N, IsIso (MonoidalClosed.ihomUnitTensorToIhom P N)) :
     IsIso (abstract_dualTensorComparison P N) := hP N
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [∀ P : A, (tensorLeft P).Additive] in
 private theorem abstract_dualTensorComparison_naturality
     (P P' N N' : A) (p : P' ⟶ P) (f : N ⟶ N') :
     genericDualTensorMap P P' N N' p f ≫ abstract_dualTensorComparison P' N' =
@@ -210,6 +208,7 @@ private theorem abstract_dualTensorComparison_naturality
   exact abstract_closed_comparison_naturality P P' N N' p f
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [∀ P : A, (tensorLeft P).Additive] in
 private theorem abstract_dualTensorMap_identity
     (P M N : A) (f : M ⟶ N) :
     genericDualTensorMap P P M N (𝟙 P) f = (genericDualTensor P).map f := by
@@ -218,6 +217,7 @@ private theorem abstract_dualTensorMap_identity
   exact MonoidalCategory.id_tensorHom _ f
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [∀ P : A, (tensorLeft P).Additive] in
 private theorem abstract_evaluate_eq_uncurry
     (P N : A)
     (z : 𝟙_ A ⟶ (genericDualTensor P).obj N) :
@@ -227,6 +227,7 @@ private theorem abstract_evaluate_eq_uncurry
   exact pairing_eq_uncurry P N z
 
 set_option backward.isDefEq.respectTransparency false in
+omit [Abelian A] [∀ P : A, (tensorLeft P).Additive] in
 private theorem abstract_evaluate_naturality
     (P P' N N' : A) (p : P' ⟶ P) (f : N ⟶ N')
     (z : 𝟙_ A ⟶ (genericDualTensor P).obj N) :
@@ -377,8 +378,7 @@ private noncomputable def abstract_singleMapCycle
     ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 P).inv ≫ f.f 0) 1 (by simp) (by
       change ((HomologicalComplex.singleObjXSelf (.up ℤ) 0 P).inv ≫ f.f 0) ≫ K.d 0 1 = 0
       erw [Category.assoc, f.comm]
-      simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
-        HomologicalComplex.single_obj_d])
+      simp [CochainComplex.singleFunctor, HomologicalComplex.single_obj_d])
 
 private theorem abstract_singleMapCycle_i
     {A : Type*} [Category A] [Abelian A] (P : A) (K : CochainComplex A ℤ)
@@ -424,8 +424,7 @@ private theorem abstract_singleHomologyEquiv_naturality
   rw [hi, ht, ← hz]
   simp only [HomologicalComplex.comp_f, Category.assoc]
   rw [← Category.assoc (HomologicalComplex.singleObjXSelf (.up ℤ) 0 P').inv]
-  simp [CochainComplex.singleFunctor, CochainComplex.singleFunctors,
-    HomologicalComplex.single_map_f_self, Category.assoc]
+  simp [CochainComplex.singleFunctor, HomologicalComplex.single_map_f_self, Category.assoc]
 
 variable [HasDerivedCategory.{w} A] [IsGrothendieckAbelian.{u} A]
 

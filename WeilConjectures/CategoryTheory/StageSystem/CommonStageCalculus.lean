@@ -46,7 +46,6 @@ tensor construction rather than supplied as an independent comparison.
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-set_option linter.unusedSectionVars false
 universe c w u v
 open CategoryTheory
 open scoped ZeroObject
@@ -496,6 +495,7 @@ private theorem cscIntegralTriangulated (l : ℕ) [Fact l.Prime]
   rw [hPredicate]
   exact ⟨inferInstance, inferInstance⟩
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- Signed reindexing preserves completion, bounded constructible reductions and
 compatible etale origins. -/
 @[instance] theorem pbcIntegralStableShift (E : Padic.FiniteCoefficientFields l Ω) :
@@ -504,6 +504,7 @@ compatible etale origins. -/
   have := (cscIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T).2
   infer_instance
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The inherited shift remains linear for the actual constant-section action. -/
 @[instance] theorem pbcIntegralShiftLinear (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) n).Linear
@@ -546,6 +547,7 @@ def PbcRationalShiftNormalized (E : Padic.FiniteCoefficientFields l Ω)
           ((shiftFunctorAdd
             (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) n m).hom.app K.obj)))
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- Tensoring the integral shift and its comparisons gives the unique normalized
 rational shift. -/
 theorem pbcRationalShift_exists (E : Padic.FiniteCoefficientFields l Ω) :
@@ -562,6 +564,7 @@ instance pbcRationalHasShift (E : Padic.FiniteCoefficientFields l Ω) :
     HasShift (PbcRationalCategory T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)) ℤ :=
   (pbcRationalShift_exists l Ω T E).exists.choose
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The tensor Hom shift is additive. -/
 @[instance] theorem pbcRationalShiftAdditive (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
@@ -569,12 +572,12 @@ instance pbcRationalHasShift (E : Padic.FiniteCoefficientFields l Ω) :
   rw [((pbcRationalShift_exists l Ω T E).exists.choose_spec).1 n]
   infer_instance
 
-set_option linter.unusedVariables false in
+omit [IsAlgClosure (Padic l) Ω] in
 /-- Localization commutes with shifts through the identity component comparison. -/
 theorem pbcRationalizationShift_exists (E : Padic.FiniteCoefficientFields l Ω) :
     ∃! q : (pbcRationalization T (pbcStageDatum.{u} l Ω E)
         (pbcStageUniformizer.{u} l Ω E)).CommShift ℤ,
-      (fun [qInst : (pbcRationalization T (pbcStageDatum.{u} l Ω E)
+      (fun [_qInst : (pbcRationalization T (pbcStageDatum.{u} l Ω E)
           (pbcStageUniformizer.{u} l Ω E)).CommShift ℤ] ↦
         ∀ (n : ℤ) (K : PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)),
           HEq (((pbcRationalization T (pbcStageDatum.{u} l Ω E)
@@ -582,7 +585,7 @@ theorem pbcRationalizationShift_exists (E : Padic.FiniteCoefficientFields l Ω) 
             (𝟙 ((pbcRationalization T (pbcStageDatum.{u} l Ω E)
               (pbcStageUniformizer.{u} l Ω E)).obj
                 ((shiftFunctor (PbcBoundedConstructibleComplete T
-                  (pbcStageDatum.{u} l Ω E)) n).obj K)))) (qInst := q) := by
+                  (pbcStageDatum.{u} l Ω E)) n).obj K)))) (_qInst := q) := by
   have h := (pbcRationalShift_exists l Ω T E).exists.choose_spec
   exact ScalarLocalization.tensorLocalizationShift_exists
     (PbcIntegralRing l (pbcFiniteField.{u} l Ω E))
@@ -615,13 +618,12 @@ instance pbcIntegralScalarCommShift (h : E ≤ F) :
       (PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) ⋙
         pbcAmbientScalarExtension l Ω T h)) ℤ
 
-set_option linter.unusedVariables false in
 /-- The rational tensor shift comparison is fixed by the actual integral comparison. -/
 theorem pbcScalarShift_exists (h : E ≤ F) :
     ∃! q : (pbcScalarExtension l Ω T hdim hl h).CommShift ℤ,
-      (fun [qInst : (pbcScalarExtension l Ω T hdim hl h).CommShift ℤ] ↦
+      (fun [_qInst : (pbcScalarExtension l Ω T hdim hl h).CommShift ℤ] ↦
         NatTrans.CommShift (pbcScalarIntegralComparison l Ω T hdim hl h).hom ℤ)
-          (qInst := q) := by
+          (_qInst := q) := by
   have hE := cscIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T
   have := hE.1
   have := hE.2
@@ -703,6 +705,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
+omit [IsAlgClosure (Padic l) Ω] in
 /-- The actual raw rational stages have finite biproducts and a zero object. -/
 @[instance] theorem pbcStageFiniteBiproducts (E : Padic.FiniteCoefficientFields l Ω) :
     Limits.HasFiniteBiproducts (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
@@ -732,6 +735,7 @@ variable [stageShift : ∀ i, HasShift (C i) ℤ]
       NatTrans.CommShift (S.assoc h h').hom ℤ]
 include associatorShift
 
+omit [IsDirectedOrder I] in
 /-- Compatibility of the shift comparisons with associators. -/
 theorem pbcStageShift_coherence (n : ℤ) {i j k : I}
     (h : i ≤ j) (h' : j ≤ k) (X : C i) :
@@ -914,6 +918,7 @@ attribute [instance] pbcPairShift_additive
 
 variable [∀ i, Limits.HasZeroObject (C i)]
 
+omit associatorShift transitionShift stageShiftAdditive stageShift in
 /-- An included finite-stage zero object is a genuine zero object of the pair category. -/
 theorem pbcPairZero_isZero (i : I) :
     Limits.IsZero ((S.ι i).obj (0 : C i)) := by
@@ -995,6 +1000,9 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
     [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
       NatTrans.CommShift (S.assoc h h').hom ℤ]
 
+omit [∀ i, Preadditive (C i)] [∀ {i j : I} (h : i ≤ j), (S.T h).Additive]
+  [∀ i, HasShift (C i) ℤ] [∀ {i j : I} (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k), NatTrans.CommShift (S.assoc h h').hom ℤ] in
 /-- All finitely many asserted equalities are detected simultaneously at one
 further stage. -/
 theorem pbcFiniteEqualities_detection {A : Type c} [Finite A]

@@ -264,8 +264,7 @@ private theorem extendMap_app (S : Site J s R a) :
     Iso.inv_hom_id, op_id]
   simp
 
--- Preserve the original continuity instance in the public theorem interface.
-set_option linter.unusedSectionVars false in
+omit [s.functor.IsContinuous J J] in
 /-- An intertwining map on the base extends to the integer-action site.
 Source: Stacks 03CV (module linearity). -/
 theorem moduleMorphismExtension (S : Site J s R a) :

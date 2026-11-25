@@ -30,7 +30,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B]
   [HasDerivedCategory B] [HasDerivedCategory C]
   (G : B ⥤ C) [G.Additive]
 
-set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Shift transport of the derived unit on a single object.
@@ -45,7 +44,7 @@ theorem rightDerivedPlusSingleUnit_shift_transport (X : B) (n : ℕ) :
       DerivedCategory.Plus.ι.preimageIso
         ((DerivedCategory.singleFunctorIsoCompQ B n).app X ≪≫
           (DerivedCategory.quotientCompQhIso B).symm.app _)
-    let GS := G.mapCochainComplexPlus.obj S
+    let _GS := G.mapCochainComplexPlus.obj S
     let H₀ := DerivedCategory.Plus.homologyFunctor C 0
     let RG := G.rightDerivedFunctorPlus
     let c := Functor.isoWhiskerRight
