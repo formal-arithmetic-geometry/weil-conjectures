@@ -15,8 +15,11 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 /-! # Integral coefficient compatibility of compact-support composition
 
 The two-field integral step of the normalized compact-support composition argument.
-Source: Stacks 0F7J and Bhatt--Scholze Definition 6.7.6.
-(blueprint: lem-zl-integral-composition-coefficient-square).
+
+## References
+
+* Stacks Project, Tag 0F7J
+* Bhatt--Scholze, Definition 6.7.6
 -/
 
 @[expose] public noncomputable section

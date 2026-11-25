@@ -19,8 +19,12 @@ set_option linter.privateModule false
 
 /-! # Signed shifts of the recoded strict Roos comparison
 
-Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
-(blueprint: lem-a1-strict-integral-roos-transport-shifts).
+Auxiliary lemmas on the compatibility with shifts of the recoded strict Roos comparison for
+integral pullback.
+
+## References
+
+* Stacks Project, Tags 03EK, 03EL and 099N(5)
 -/
 
 @[expose] public noncomputable section

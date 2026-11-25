@@ -17,8 +17,17 @@ import all WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportNormalizedIsoExis
 
 /-! # Normalized completed refinement comparisons
 
-Source: Stacks 0F7B and 0F7J; Bhatt--Scholze Definition 6.7.6.
-(blueprint: lem-zl-qcqs-completed-refinement).
+## Implementation details
+
+The comparison `ε : d.i_! K ⟶ Rr_* c.i_! K` is the open-adjunction transpose of the canonical
+restriction map. Its finite reductions are the finite proper/open comparisons, hence
+invertible; since the completed cone has zero reductions and is complete, `ε` is invertible.
+The construction does not require separatedness of the structure maps.
+
+## References
+
+* Stacks Project, Tags 0F7B and 0F7J
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 6.7.6 and Lemma 6.7.7
 -/
 
 @[expose] public noncomputable section
@@ -99,21 +108,9 @@ variable (l : ℕ) [Fact l.Prime]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
 include hl in
-/-- A proper refinement has its open-adjunction-normalized completed comparison.
-Source: Stacks 0F7B, 0F7J, and Bhatt--Scholze Definition 6.7.6 and Lemma 6.7.7
-(blueprint: lem-zl-qcqs-completed-refinement).
-
-Proof: for the square c.i followed by r.hom equals d.i, the canonical restriction
-map is proper base change followed by the clopen-support identification over X.
-The open adjunction transposes its inverse composed with the open unit to the
-map epsilon from d.i_! K to Rr_* c.i_! K. On the normalized strict reduction
-system its evaluations are the finite proper/open comparisons, hence invertible.
-The completed cone has zero reductions and is complete, so epsilon is invertible.
-Push epsilon inverse along d.g and insert the inverse canonical proper compositor
-for r.hom followed by d.g. This is rho, and the transpose equation and compositor
-formula are exactly SfCompletedRefinementSpec. Finite-type schemes over the field
-are qcqs; this construction requires no separatedness of their structure maps.
-For empty X both extension objects are zero and the same normalization applies. -/
+/-- A refinement `r` of compactifications of `f` gives an isomorphism between the completed
+compactly supported direct images of `K` along the two compactifications, normalized by the
+open adjunction (`SfCompletedRefinementSpec`). -/
 theorem sfQcqsCompletedRefinement_exists
     {c d : Compactification f} (r : c.Refinement d)
     (K : sfIntegralConstructibleCategory l E X) :
