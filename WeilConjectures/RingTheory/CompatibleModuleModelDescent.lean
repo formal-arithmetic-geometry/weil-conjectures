@@ -14,8 +14,21 @@ import WeilConjectures.RingTheory.TensorTailColimitElementwise
 
 /-! # Descending a module comparison along compatible coefficient maps
 
-Source: Stacks Project, Algebra, Tag 05N7 (2), (3), used in Tag 02JO (3).
-(blueprint: lem-pc-compatible-module-model-descent)
+An equivalence between two finitely presented module base changes over the colimit of a directed
+system of rings descends to a late enough stage, along compatible coefficient maps.
+
+## Implementation details
+
+On the cofinal tail above `k`, the algebras `B_j = F(j) ⊗ B` have colimit `c.pt ⊗ B`, and the
+compatibility assumptions make them `Q`-algebras with `Q`-linear coprojections. At `k` the modules
+`B_k ⊗_Q L` and `B_k ⊗_B M` are finitely presented over `B_k`, and their base changes to the
+colimit are the two modules in `eM` by tensor cancellation. The equivalence descends to a stage
+`j₀` (Tag 05N7 (2), (3)) and is then base changed to every later stage. No flatness is used.
+
+## References
+
+* [Stacks, Tag 05N7] (2), (3)
+* [Stacks, Tag 02JO] (3), final paragraph
 -/
 
 @[expose] public section
@@ -46,30 +59,7 @@ private theorem cancel_comparison
 set_option linter.unusedVariables false in
 /-- An equivalence between two finitely presented module base changes descends
 along a compatible family of coefficient maps. No algebra model or flatness
-hypothesis is needed.
-
-Source: Stacks Project, Algebra, Tag 05N7 (2), (3); Tag 02JO (3), final paragraph.
-(blueprint: lem-pc-compatible-module-model-descent)
-
-Proof:
-1. On the cofinal tail above k, the algebras B_j = F(j) tensor B have colimit
-   c.pt tensor B. The compatibility assumptions make them Q-algebras and make
-   their coprojections Q-linear. This colimit assertion follows by tensor
-   representatives and eventual equality. If the index is only a preorder,
-   take its poset reflection: mutually comparable indices give inverse ring
-   maps, so both the diagram and its colimit descend up to canonical isomorphism.
-2. At k the modules B_k tensor_Q L and B_k tensor_B M are finitely presented
-   over B_k, by finite presentation under base change. Their base changes to
-   the colimit are the two modules in eM, by tensor cancellation.
-3. Apply Tag 05N7 (2) to eM and its inverse, take a common later stage, and apply
-   part (3) to their two composites and the identity maps. At a common upper
-   bound the descended maps are inverse, hence define a linear equivalence.
-4. Base change this equivalence to every later stage. Compatibility of q
-   and tensor cancellation identify those modules with the displayed ones.
-   Transport from the poset reflection to original indices if necessary.
-   Empty presentations and zero modules need no separate argument, and no
-   flatness is used to descend maps, equalities, or inverse identities.
--/
+hypothesis is needed. -/
 theorem exists_eventually_compatible_module_equiv
     {I : Type v} [Preorder I] [IsDirectedOrder I]
     (F : I ⥤ CommRingCat.{v}) (c : Cocone F) (hc : IsColimit c)

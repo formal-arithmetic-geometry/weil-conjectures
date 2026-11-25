@@ -12,34 +12,29 @@ public import Mathlib.RingTheory.LocalRing.Module
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import WeilConjectures.RingTheory.BoundedResolutionUnitEntryCancellation
 
-/-! One cancellation step for a bounded finite free resolution. -/
+/-! # One cancellation step for a bounded finite free resolution
+
+A bounded finite free resolution over a Noetherian local ring which is not minimal admits one
+cancellation that strictly decreases the sum of the ranks.
+
+## Implementation details
+
+A differential coefficient outside the maximal ideal is a unit, and
+`ChainComplex.exists_splitting_of_isUnit_entry` splits off a contractible two-term complex. The
+complement is again a resolution with the ranks in two degrees decreased by one. This is a
+single cancellation, not the iteration or the assertion that the result is minimal.
+
+## References
+
+* [Stacks, Tag 00MT], as used in the proof of [Stacks, Tag 00OA]
+-/
 @[expose] public section
 universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
 
 /-- A nonminimal bounded finite free resolution admits one rank-decreasing cancellation.
-Source: Stacks Project, Algebra, Tag 00MT, as used in the proof of Tag 00OA.
-
-Proof: Choose finite bases in degrees zero through `d`. If every matrix coefficient
-of every differential under consideration belongs to the maximal ideal, expansion
-in the source basis expresses each image as a sum of maximal-ideal multiples of
-basis vectors. This contradicts `hnot`, so some coefficient lies outside that ideal
-and is a unit. Extend the complex by zero to negative integer degrees and apply
-`ChainComplex.exists_splitting_of_isUnit_entry` at this coefficient. Restrict the
-complementary complex back to natural degrees. Its terms have the same bases except
-in the two affected degrees, where their ranks decrease by one. All degrees above
-`d` remain zero. The removed identity complex is contractible, so the complement
-has zero positive homology. The augmentation vanishes on the removed summand: at
-index zero this summand is a differential image; at larger indices the degree-zero
-term is unchanged. Restrict the augmentation to the complement. It still induces
-an isomorphism on degree-zero homology, since the removed summand has zero homology.
-The finite free terms are projective, giving the claimed resolution `P'`.
-A local ring is nontrivial and has invariant basis number, so finite basis sizes
-are their `Module.finrank`. Both affected indices belong to `Fin (d + 1)`; the sum
-therefore decreases by two, in particular strictly. This is a single cancellation,
-not the iteration or the assertion that the resulting resolution is minimal.
-(blueprint: stage3-s2-bounded-resolution-cancellation-decreases-rank) -/
+The resulting resolution `P'` has finite free terms whose ranks sum to strictly less. -/
 theorem bounded_resolution_cancellation_decreases_rank {R : Type u} [CommRing R]
     [IsNoetherianRing R] [IsLocalRing R] (M : ModuleCat.{max u v} R)
     (d : ℕ) (P : ProjectiveResolution M)

@@ -18,11 +18,6 @@ adds that the corresponding weight vanishes on the derived algebra.
 
 * `LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable`: a common eigenvector whose weight
   vanishes on `⁅L, L⁆`.
-
-## Blueprint
-
-`LieModule.exists_ne_zero_forall_lie_eq_smul_of_isSolvable` implements
-`lemma-lie-s-theorem--1`.
 -/
 
 @[expose] public section
@@ -36,8 +31,7 @@ variable (k L M : Type*) [Field k] [CharZero k] [LieRing L] [LieAlgebra k L]
 
 /-- **Common eigenvector for a solvable Lie algebra.** A solvable Lie algebra `L` acting
 triangularizably on a nonzero finite-dimensional module `M` over a field of characteristic zero
-has a common eigenvector `v`, with weight `χ` vanishing on the derived algebra `⁅L, L⁆`.
-(blueprint: `lemma-lie-s-theorem--1`) -/
+has a common eigenvector `v`, with weight `χ` vanishing on the derived algebra `⁅L, L⁆`. -/
 theorem exists_ne_zero_forall_lie_eq_smul_of_isSolvable [Nontrivial M] [IsSolvable L]
     [IsTriangularizable k L M] :
     ∃ (χ : Module.Dual k L) (v : M), v ≠ 0 ∧ (∀ x, ⁅x, v⁆ = χ x • v) ∧

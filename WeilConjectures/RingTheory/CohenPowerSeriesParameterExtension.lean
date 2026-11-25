@@ -23,8 +23,28 @@ import WeilConjectures.RingTheory.PowerSeriesQuotientVariables
 /-!
 # Extending a Cohen power series parameter list along a local map
 
-Source: Stacks Project, More on Algebra, Lemma 07NN, proof, lifting and adjoining variables.
-(blueprint: lem-weil-pbc-cohen-power-series-parameter-extension)
+A local map `g` from a field or Cohen power series ring `Λ[[X₁,…,Xₙ]]` to a complete Noetherian
+local ring `B` factors through a surjection from a larger Cohen power series ring, in which the
+image of the canonical parameter list extends to a regular system of parameters. This is the
+lifting-and-adjoining-variables construction of [Stacks, Tag 07NN]; flatness and regularity of
+the closed fibre are not asserted.
+
+## Implementation details
+
+1. Choose a Cohen power series presentation `v₀ : S₀ → B`. The residue map of `g` is injective,
+   so the coefficient characteristics agree.
+2. The kernel `J = ker v₀` is closed in the maximal-ideal topology of `S₀`, by separatedness of
+   the complete ring `B`.
+3. Formal smoothness over `ℤ` of the source and the complete-target lifting lemma lift `g` to a
+   local map `φ : R → S₀`.
+4. Adjoining variables `Y₁,…,Yₙ` to `S₀` and sending `Xᵢ` to `φ(Xᵢ) + Yᵢ` gives `h`, and `v`
+   kills the `Y` variables (`exists_power_series_parameter_perturbation`).
+5. The image of the parameter list together with the old variables `Z` generates the maximal
+   ideal and has the right length, so it is a regular system of parameters.
+
+## References
+
+* [Stacks, Tag 07NN]
 -/
 
 @[expose] public section
@@ -130,34 +150,10 @@ private theorem power_series_maximalIdeal
     · rw [← hk]
       exact Ideal.comap_mono bot_le
 
-/-- Extend the canonical parameters of a fixed power series source along a local map.
-This is the construction part of Stacks Project, More on Algebra, Lemma 07NN: it does not
-assert flatness or regularity of the closed fibre.
-(blueprint: lem-weil-pbc-cohen-power-series-parameter-extension)
-
-Proof:
-1. Choose a Cohen power series presentation `v₀ : S₀ → B`. The residue map of the given
-   local map is injective, so the coefficient characteristics agree: in case `c = 0`
-   both coefficient rings are fields, and otherwise both are Cohen rings for `c`.
-2. Write `J = ker v₀`. Surjectivity and locality imply `J ≤ m₀` and
-   `map v₀ (m₀ ^ k) = mB ^ k`. Thus `J` is closed in the maximal-ideal topology:
-   an element of every `J + m₀ ^ k` maps into every `mB ^ k`, hence maps to zero
-   by separatedness of the complete ring `B`.
-3. Formal smoothness over the integers of the given field or Cohen power series ring,
-   and the complete-target lifting lemma with `I = m₀`, `t = r = 1`, lift the given
-   map to a local map `φ : R → S₀`. Identify `S₀ / J` with `B` using `v₀`.
-4. If `S₀ = ΛB[[Z₁,...,Zₑ]]`, take `S = ΛB[[Y₁,...,Yₙ,Z₁,...,Zₑ]]` and let `v`
-   kill the `Y` variables and agree with `v₀` on `S₀`. Evaluation in the complete
-   ring `S` gives `h` agreeing with `φ` on coefficients and sending `Xᵢ` to
-   `φ(Xᵢ) + Yᵢ`. The power series evaluation uniqueness theorem gives `v h = g`.
-   The maximal ideal generators show that `v` and `h` are local; `v` is surjective
-   because the map killing `Y` is surjective.
-5. Put `z = [Z₁,...,Zₑ]`. The list `t.map h ++ z` generates the maximal ideal:
-   it contains the `Z` variables and, in the Cohen case, `c`; these generate the
-   ideal containing each `φ(Xᵢ)`. Subtracting from `h(Xᵢ)` then gives each `Yᵢ`.
-   Its length is `n + e` in the field case and `n + e + 1` in the Cohen case,
-   exactly the dimension of `S`. It is therefore a regular system of parameters.
-   This calculation also applies when either variable set is empty. -/
+/-- Extend the canonical parameters of a fixed power series source along a local map: a local
+map `g : Λ[[X₁,…,Xₙ]] → B` to a complete Noetherian local ring factors as `v ∘ h` with `v`
+a surjection from a field or Cohen power series ring `ΛB[[…]]` of the same characteristic type,
+such that `t.map h` extends to a regular system of parameters. -/
 theorem exists_cohen_power_series_parameter_extension
     {Λ : Type u} [CommRing Λ] (n c : ℕ)
     [IsRegularLocalRing (MvPowerSeries (Fin n) Λ)]

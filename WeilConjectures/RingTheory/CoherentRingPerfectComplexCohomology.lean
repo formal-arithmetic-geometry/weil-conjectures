@@ -14,13 +14,23 @@ import WeilConjectures.RingTheory.FinitePresentationKerRangeCokernel
 
 /-! # Cohomology of finite projective complexes over coherent rings
 
-Source: Stacks Project, More on Algebra, Lemma 0EWZ and Algebra, Lemma 05CX
-(blueprint: lem-sc-coherent-ring-perfect-complex-cohomology).
+Every cohomology module of a bounded complex of finite projective modules over a coherent ring
+is finitely presented. The complex is a complex of modules, not of sheaves. Coherence is
+expressed by the defining ideal condition (every finitely generated ideal is finitely
+presented).
 
-The complex here is the affine module complex mentioned in
-`lemma-coherent-base-change-invertible-sheaves--1`, not its associated complex of sheaves. Coherence
-is expressed by the defining ideal condition of Stacks, Algebra, Definition 10.90.1 (section Tag
-05CU).
+## Implementation details
+
+Kernels and images of the differentials are finitely presented by closure of finitely presented
+modules under kernels and cokernels over a coherent ring, and so is the cokernel of boundaries
+into cycles.
+
+## References
+
+* [Stacks, Tag 0EWZ]
+* [Stacks, Tag 05CW]
+* [Stacks, Tag 05CX]
+* [Stacks, Tag 05CU] (Algebra, Definition 10.90.1)
 -/
 
 @[expose] public section
@@ -33,17 +43,7 @@ namespace CochainComplex
 
 /-- Every cohomology module of a bounded complex of finite projective modules over a
 commutative coherent ring is finitely presented.
-Source: Stacks Project, More on Algebra, Lemma 0EWZ; Algebra, Lemmas 05CW and 05CX
-(blueprint: lem-sc-coherent-ring-perfect-complex-cohomology).
-
-Proof: Each term is finitely presented by
-`lem-weil-pbc-finite-projective-finitely-presented`. Apply
-`lem-sc-coherent-ring-fp-kernel-cokernel` to the differentials: their kernels (cycles)
-and images (boundaries) are finitely presented. The differential squares to zero, so
-boundaries include into cycles. Apply the same closure lemma to that inclusion; its
-cokernel, the cohomology module, is finitely presented. This is also the strictly
-perfect specialization of 0EWZ, using 05CX to identify coherent and finitely presented
-modules. -/
+commutative coherent ring is finitely presented. -/
 theorem finitePresentation_homology_of_coherent
     {R : Type u} [CommRing R]
     (hR : ∀ I : Ideal R, I.FG → Module.FinitePresentation R I)

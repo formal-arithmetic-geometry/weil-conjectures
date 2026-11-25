@@ -17,8 +17,26 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
 
 /-! # Representatives in a diagram with tensor base-change isomorphisms
-Source: Stacks Project, Algebra, Tags 00D6, 00D7 and 00DD, used in Tag 00QX.
-(blueprint: lem-weil-pbc-base-change-diagram-elementwise).
+
+Let `B` be a directed diagram of rings with colimit `S`, and `D` a compatible diagram of
+modules with `B(j) ⊗_{B(i)} D(i) ≃ D(j)` and `S ⊗_{B(i)} D(i) ≃ M`. Then every element of `M`
+comes from some `D(i)`, and an element of `D(i)` vanishing in `M` vanishes at some later stage.
+
+## Implementation details
+
+Fix a stage `i₀` and regard the rings of its upper tail as `B(i₀)`-modules. Their module direct
+limit maps isomorphically to `S`; tensoring with `D(i₀)` and using
+`TensorProduct.directLimitLeft` identifies the tensor direct limit with `S ⊗ D(i₀) ≃ M`, and the
+representative and eventual-zero assertions are transported through the equivalences
+`B(j) ⊗ D(i₀) ≃ D(j)`. No finite presentation or finite generation is used, and there is no
+restriction on the relative sizes of `u` and `v`.
+
+## References
+
+* [Stacks, Tag 00D6]
+* [Stacks, Tag 00D7]
+* [Stacks, Tag 00DD]
+* [Stacks, Tag 00QX]
 -/
 
 @[expose] public section
@@ -30,26 +48,9 @@ open scoped TensorProduct
 
 namespace Module
 
-/-- A compatible tensor base-change diagram has representatives and eventual zero.
-Source: Stacks Project, Algebra, Tags 00D6, 00D7 and 00DD.
-(blueprint: lem-weil-pbc-base-change-diagram-elementwise)
-
-Proof: Fix a stage i₀ and restrict to its upper tail. Regard its rings as B(i₀)-modules.
-Map their module direct limit to S using κ. Ring-colimit representatives and eventual
-equality make this map a linear equivalence. Tensor it with D(i₀) and compose with
-`TensorProduct.directLimitLeft` to identify the tensor direct limit with S tensor D(i₀).
-Tensor induction checks the comparison on each stage.
-Transport its representative assertion through the equivalences
-B(j) tensor D(i₀) ≃ D(j) for j ≥ i₀ and S tensor D(i₀) ≃ M. The transport
-intertwines the ring-induced tensor maps with D and ν, since both sides agree on
-pure tensors by the assumed formulas, cocone naturality and scalar compatibility.
-This gives representatives for every element of M. For an element x of D(i) with
-ν(i)(x) = 0, apply the same argument with i₀ = i and the pure tensor 1 tensor x.
-Its image in S tensor D(i) is zero, by injectivity of the given equivalence with M.
-The eventual-zero assertion gives j ≥ i where its image in B(j) tensor D(i) vanishes.
-The equivalence to D(j) carries this tensor to D(i → j)(x), proving eventual zero.
-This argument uses neither finite presentation nor finite generation, and no additive
-colimit criterion or restriction on the relative sizes of u and v.
+/-- A compatible tensor base-change diagram has representatives and eventual zero: every
+element of `M` is the image of some element of some `D(i)`, and an element of `D(i)` with zero
+image in `M` becomes zero in some `D(j)`, `j ≥ i`.
 -/
 theorem baseChange_diagram_elementwise
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]

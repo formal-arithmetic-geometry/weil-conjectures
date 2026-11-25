@@ -14,29 +14,34 @@ import WeilConjectures.RingTheory.ProjectiveResolutionKernelProjective
 import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.FiniteFreeExactSequenceResolution
 
-/-! Bounded finite free resolution construction.
-(blueprint: stage3-b4-bounded-finite-free-resolution) -/
+/-!
+# Bounded finite free resolutions
+
+A finite module `M` over a noetherian local ring with a projective resolution of length at most
+`d` has a finite free resolution of length at most `d`
+(`ModuleCat.exists_bounded_finite_free_resolution`).
+
+## Implementation details
+
+If `d = 0`, `M` is projective, hence free, and is its own resolution. If `d > 0`, resolve `M` by
+finite free modules and let `K` be the kernel of the map out of degree `d - 1`. By the length
+bound `K` is projective; it is finite as a submodule of a finite module over a noetherian ring,
+hence free. Replacing the degree `d` term by `K` and truncating above gives the resolution.
+
+## References
+
+* [Stacks, Tag 0CXF]
+* [Stacks, Tag 00NX]
+* [Stacks, Tag 00LP]
+* [Stacks, Tag 00O5]
+* [Stacks, Tag 00IK]
+-/
 @[expose] public section
 universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
-/-- Construction from the infinite finite-free resolution and the projective d-th syzygy.
-Source: Stacks Project, Algebra, Tag 0CXF.
-Proof:
-If `d = 0`, the augmentation of the given length-zero projective resolution is an
-isomorphism, so `M` is projective. A finite projective module over a local ring is free
-(Tag 00NX); put `M` in degree zero, with identity augmentation and zero terms above it.
-If `d > 0`, use Tag 00LP to resolve `M` by finite free modules. Let `K` be the kernel
-of the map out of degree `d - 1`, using the augmentation when `d = 1`. Tag 00O5 and
-the given length bound imply that `K` is projective. Since it is a submodule of a finite
-module over a Noetherian ring, it is finite (Tag 00IK), and hence free by Tag 00NX.
-Replace the term of degree `d` by `K`, with differential the kernel inclusion, and
-put zero modules above degree `d`. Exactness at degree `d - 1` follows from the
-kernel-image equality, and at degree `d` from injectivity of the inclusion. Exactness
-in lower degrees and surjectivity of the augmentation are inherited. All terms are
-projective since they are free, so the augmented complex gives a ProjectiveResolution.
-The zero modules are finite and free as well.
-(blueprint: stage3-b4-bounded-finite-free-resolution) -/
+/-- A finite module over a noetherian local ring with a projective resolution of length at most
+`d` has a projective resolution by finite free modules vanishing above degree `d`. -/
 theorem exists_bounded_finite_free_resolution {R : Type u} [CommRing R]
     [IsNoetherianRing R] [IsLocalRing R] (M : ModuleCat.{max u v} R) [Module.Finite R M]
     (d : ℕ) (h : HasProjectiveResolutionLE M d) :

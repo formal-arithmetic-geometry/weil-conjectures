@@ -11,6 +11,29 @@ import WeilConjectures.RingTheory.GoodElementCuttingParameter
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.Support
 
+/-!
+# Regular sequences adapted to a cutting element on a Cohen--Macaulay module
+
+For a finite Cohen--Macaulay module `M` over a noetherian local ring and an element `g` of the
+maximal ideal cutting the support dimension by one, we construct a maximal `M`-regular sequence
+`fs` such that each `g :: fs.take i` cuts the support dimension exactly
+(`Module.exists_good_sequence_for_cm_element`). This is the data used by
+`isSMulRegular_of_good_sequence`.
+
+## Implementation details
+
+The depth is a natural number `d` by finiteness of the Krull dimension, and `d ≥ 1` since
+`M / g M` is nonzero by Nakayama. The proof inducts on `d`: for `d ≥ 2`, prime avoidance gives
+an element `x` good for a regular sequence of length `d` and cutting the support modulo `g`;
+`M / x M` is Cohen--Macaulay of dimension `d - 1`, and `x` is prepended to the adapted sequence
+obtained there.
+
+## References
+
+* [Stacks, Tag 00N5]
+* [Stacks, Tag 00N4]
+-/
+
 @[expose] public section
 
 universe u v
@@ -111,24 +134,10 @@ private theorem exists_adapted_sequence_of_dimension
           rw [heq]
           simpa [Nat.succ_eq_add_one, Nat.sub_sub] using hqgood j (by omega)
 
-/-! Auxiliary setup for the Cohen--Macaulay good-element argument
-(blueprint: lem-weil-pbc-cm-module-good-element-setup).
-Its conclusion records precisely the data used by `isSMulRegular_of_good_sequence`.
-The proof constructs a regular sequence adapted to the prescribed element by
-induction on the finite support dimension. -/
-/-- Existence of the regular sequence and goodness data.
-Source: Stacks Project, Algebra, Tag 00N5, using Tag 00N4.
-(blueprint: lem-weil-pbc-cm-module-good-element-setup)
-
-Proof: finite local Krull dimension and the Cohen--Macaulay equality make depth a
-natural number d. Nakayama makes M/gM nonzero, so the dimension-cut hypothesis
-forces d to be positive. A finite depth supremum is attained, giving a regular
-sequence of length d. Induct on d: at d = 1 the cut hypothesis is already goodness.
-For d >= 2, prime avoidance chooses x good for this sequence and cutting the
-support modulo g. The good-sequence theorem makes x regular and makes M/xM
-Cohen--Macaulay of dimension d - 1. Apply induction there and prepend x to its
-adapted sequence. The regular-cons equivalence proves regularity, and the quotient
-support formula transfers each positive-prefix goodness equality back to M. -/
+/-- If `M` is a finite Cohen--Macaulay module and `g` in the maximal ideal cuts the support
+dimension by one, then the support dimension is some `d ≥ 1` and there is an `M`-regular sequence
+`fs` of length `d` in the maximal ideal such that the support of `M` cut by `g :: fs.take i` has
+dimension `d - i - 1` for every `i < d`. -/
 theorem exists_good_sequence_for_cm_element
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]

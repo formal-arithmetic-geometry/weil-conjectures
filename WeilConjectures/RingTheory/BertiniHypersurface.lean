@@ -16,8 +16,8 @@ Let `A` be a smooth algebra of finite type over an algebraically closed field `k
 `f : A` lie outside `m²` for every maximal ideal `m` containing it. Then `A ⧸ (f)` is again
 smooth over `k`, and when `A` is a domain of relative dimension `e + 1` and `A ⧸ (f)` is a domain,
 the relative dimension of `A ⧸ (f)` is `e`. This is the step "a hypersurface section which is
-smooth at each of its points is smooth" of the Bertini argument (blueprint
-`lemma-curve-preserving-finite-cover--1`).
+smooth at each of its points is smooth" of the Bertini argument for curve-preserving finite
+covers.
 
 ## Main results
 
@@ -112,10 +112,9 @@ theorem Algebra.exists_derivation_sub_one_mem_span [FormallySmooth k A] {f : A}
   rw [← hyz, sub_add_cancel_right]
   exact neg_mem hy
 
-/-- (D) A hypersurface section `A ⧸ (f)` of a smooth domain `A` of finite type over an
+/-- A hypersurface section `A ⧸ (f)` of a smooth domain `A` of finite type over an
 algebraically closed field, such that `f ∉ m²` at every maximal ideal `m` containing `f`, is
-smooth, and its relative dimension is one less than that of `A` (when it is a domain).
-Part of the Bertini argument, blueprint `lemma-curve-preserving-finite-cover--1`. -/
+smooth, and its relative dimension is one less than that of `A` (when it is a domain). -/
 theorem Algebra.Smooth.quotient_span_singleton [IsDomain A] [Algebra.Smooth k A] {e : ℕ}
     (he : Module.rank A Ω[A⁄k] = e + 1) (f : A)
     (hf : ∀ m : Ideal A, m.IsMaximal → f ∈ m → f ∉ m ^ 2) :

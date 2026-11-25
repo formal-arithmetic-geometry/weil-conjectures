@@ -12,6 +12,25 @@ public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Artinian.Defs
 import Mathlib.RingTheory.Unramified.LocalStructure
 
+/-!
+# Capturing a separable residue element by a finite étale local extension
+
+Given a local homomorphism `D → S` of Artinian local rings and a residue element `b` of `S`
+separable over the residue field of `D`, we construct a finite étale local `D`-algebra `D'` with a
+local map to `S` over `D` whose image captures `b` on residue fields.
+
+## Implementation details
+
+The separable minimal polynomial of `b` is lifted to a monic polynomial over `D`; inverting its
+derivative gives a standard étale algebra with the desired residue point, which lifts across the
+nilpotent maximal ideal of `S`, and one selects the corresponding local factor. Artinianness of
+`D'` is not part of the statement; it follows from finiteness over the Artinian base.
+
+## References
+
+* [Stacks, Tag 07FI], finite étale and henselian factorization paragraphs
+-/
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -19,15 +38,9 @@ universe u v z
 
 namespace Algebra
 
-/-- The finite étale local residue capture data, before deriving Artinianness.
-Source: Stacks Project, Smoothing Ring Maps, Tag 07FI, finite étale and henselian
-factorization paragraphs.  The omitted Artinian conclusion is derived from finiteness.
-(blueprint: lem-weil-pbc-artinian-separable-residue-lift-capture).
-
-Proof: Construct the finite étale lift of the finite separable subextension of the
-residue fields, then use henselian factorization and lift the chosen residue element.
-This is the construction part of the core theorem; Artinianness of the lifted ring is
-separate and follows from its finite module structure over the Artinian base. -/
+/-- The finite étale local residue capture data, before deriving Artinianness:
+a finite étale local `D`-algebra `D'` with a local map `g' : D' →+* S` over `D` such that `b` is
+the residue of `g' d` for some `d : D'`. -/
 theorem exists_finiteEtale_artinian_residue_lift_capture
     (D : Type u) (S : Type v) [CommRing D] [CommRing S]
     [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]

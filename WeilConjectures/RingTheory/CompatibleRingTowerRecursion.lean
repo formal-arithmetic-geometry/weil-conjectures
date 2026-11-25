@@ -14,12 +14,23 @@ import Mathlib.SetTheory.Cardinal.Order
 /-!
 # Compatible ring towers by well-founded recursion
 
-Source: Stacks Project, Algebra, Lemma 10.159.1 (Tag 03C3), fourth proof paragraph.
-(blueprint: new-compatible-ring-tower-recursion)
-
 The private records keep all carriers in a fixed universe, together with tagged incoming
 algebra maps. A local coherence predicate allows ordinary well-founded recursion to choose
 compatible stages; diagonal transition maps are identities.
+
+## Implementation details
+
+In `exists_compatible_ring_tower`, a well-order is chosen on `I` and a record type in a fixed
+universe is defined. A record stores its stage carrier, ring and `R`-algebra structures, its map
+to `K`, and for every index an incoming algebra map with its domain. At index `i` one tests
+whether the earlier records form a coherent diagram; if so, `hstep` is applied to the strict
+initial segment (or to the singleton base diagram when there are no predecessors), otherwise the
+base record is used as a default. Well-founded induction shows that the default branch is never
+used. All choices are made inside the existence proof, not used to define any ring.
+
+## References
+
+* [Stacks, Tag 03C3] (Algebra, Lemma 10.159.1, fourth proof paragraph)
 -/
 
 @[expose] public section
@@ -203,29 +214,10 @@ private theorem extendRecord_map {R : Type u} [CommRing R]
   simp only [recordMap, extendRecord, dite_eq_left h]
   exact castTowerHom_cancel _ _
 
-/-- Source: Stacks Project, Algebra, Lemma 10.159.1 (Tag 03C3), fourth proof paragraph.
-(blueprint: new-compatible-ring-tower-recursion)
-
-Proof: Choose a well-order on I and a base stage from hbase. Use ordinary well-founded
-recursion on a fixed type of records. A record stores its stage carrier, ring and
-R-algebra structures, its map to K, and, for every index of I, an incoming algebra map
-with its domain carrier and structures. At index i, test whether the earlier records
-form a coherent diagram: their incoming-map domains must agree with the stored earlier
-stages, their maps must satisfy the identity and composition laws, and their maps to K
-must commute. If they do, and there are predecessors, apply hstep to that diagram on
-the strict initial segment and x = q i. Store the resulting stage and cocone maps. If
-there are no predecessors, apply hstep to the singleton base diagram and x = q i.
-Fill unused incoming-map entries with the identity of the new stage. If the earlier
-records are incoherent, use the base record as a default. Fix these choices before
-recursing. All records form a type in universe w+1 (or larger to hold the parameters),
-so well-founded recursion applies without increasing any carrier's universe.
-By well-founded induction the default branch is never used. The cocone equations give
-composition with all preceding transitions and compatibility with K; identities give
-the diagonal maps. The domains stored in the new record are exactly the previously
-chosen carriers. Thus the recursively chosen records give one coherent diagram.
-The new stage satisfies P and contains q i by hstep. This also covers finite orders,
-orders with limit stages, and the empty order (where the final diagram is empty).
-Choices are made inside this existence proof, not used to define any ring. -/
+/-- Given a base stage satisfying `P` and a step that extends any directed system of stages
+satisfying `P` (compatibly mapping to `K`) by a stage satisfying `P` which hits a prescribed
+element of `K`, there is an order on `I` and a directed system of `R`-algebras `A i` satisfying
+`P`, with compatible maps `A i → K` whose image at `i` contains `q i`. -/
 theorem exists_compatible_ring_tower
     (R : Type u) [CommRing R] (K : Type v) [CommRing K]
     (I : Type w) (q : I → K)

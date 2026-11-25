@@ -17,7 +17,19 @@ import Mathlib.RingTheory.HopkinsLevitzki
 /-!
 # A component of the transcendental polynomial localization argument
 
-Source: Stacks Project, Smoothing Ring Maps, proof of Tag 07FI.
+Structural properties of the localization of `D[t]` at the prime pulled back from an Artinian
+local `D`-algebra along a transcendental element.
+
+## Implementation details
+
+Transcendence shows that `P = m_D[t]`, so `D[t]_P` is Noetherian local with nilpotent maximal
+ideal, hence Artinian; the polynomial algebra is smooth, so the localization is essentially
+smooth. All properties are transported across the `ULift` ring equivalence. The flatness
+assumption is not needed for this component.
+
+## References
+
+* [Stacks, Tag 07FI] (Smoothing Ring Maps, proof)
 -/
 
 @[expose] public section
@@ -25,19 +37,9 @@ set_option autoImplicit false
 universe u v z
 namespace Algebra
 
-/-- The structural properties of the transcendental polynomial localization.
-Source: Stacks Project, Smoothing Ring Maps, Tag 07FI, lines 2642--2675.
-(blueprint: lem-weil-pbc-artinian-transcendental-localization-core-structural)
-Proof: Write F = D/m_D and K = S/m_S. Reduction of evaluation factors through
-F[t] -> K. Transcendence makes this map injective, so its kernel in D[t] is
-exactly m_D[t], and therefore P = m_D[t]. Since D is Artinian it is Noetherian
-and m_D is nilpotent. Consequently D[t]_P is Noetherian and local, and its
-maximal ideal m_D D[t]_P is nilpotent. A Noetherian local ring with nilpotent
-maximal ideal is Artinian. The contraction of this maximal ideal to D is m_D,
-so D -> D[t]_P is local. The polynomial algebra is smooth and localization
-makes its structure map essentially smooth. Transport all properties across
-the canonical ULift ring equivalence. The flatness assumption is not needed
-for this component. In the field case the localization is F(t), as expected. -/
+/-- Let `D → S` be a local map of Artinian local rings and `x ∈ S` with transcendental residue
+over the residue field of `D`. The localization of `D[t]` at the inverse image `P` of the
+maximal ideal of `S` under `t ↦ x` is Artinian local, local and essentially smooth over `D`. -/
 theorem localization_artinian_transcendental_properties
     (D : Type u) (S : Type v) [CommRing D] [CommRing S]
     [IsLocalRing D] [IsArtinianRing D] [IsLocalRing S] [IsArtinianRing S]

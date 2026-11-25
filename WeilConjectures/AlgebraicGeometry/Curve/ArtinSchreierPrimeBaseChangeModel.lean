@@ -14,7 +14,24 @@ public import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 
 import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierFrobeniusExactRows
 
-/-! # Prime-coefficient Artin--Schreier comparison under field extension -/
+/-! # Prime-coefficient Artin--Schreier comparison under field extension
+
+For a smooth proper connected curve `C` over an algebraically closed field of characteristic
+`p`, `H¹(C, ℤ/p)` is the kernel of `F - 1` on `H¹(C, 𝒪_C)`, compatibly with base change to an
+algebraically closed extension.
+
+## Implementation details
+
+The identification comes from the Artin--Schreier long exact sequence, whose degree-zero map
+`F - 1` is onto. Flat base change gives `H¹(C', 𝒪_{C'}) = k' ⊗ V`, and naturality of the
+connecting maps identifies the pullback with `v ↦ 1 ⊗ v` on kernels. For a curve of dimension
+zero both degree-one groups vanish.
+
+## References
+
+* [Stacks, Tag 0A3P], proof
+* [Stacks, Tag 02KH]
+-/
 
 @[expose] public section
 
@@ -74,24 +91,10 @@ theorem exists_fixedPoints_equiv_of_exact_row
       rw [hx, AddEquiv.apply_symm_apply]
   exact ⟨AddEquiv.ofBijective j hj, fun _ ↦ rfl⟩
 
-/-- Prime-coefficient first cohomology is the Frobenius kernel, naturally under base change.
-Source: Stacks Project, Tag 0A3P, proof, and Tag 02KH, flat base change.
-(blueprint: proposition-p-torsion-smooth-proper-curve--2)
-
-Proof: Use H¹(C,O_C) as V, with its scalar action and finite-dimensionality from proper
-coherent cohomology and the étale/Zariski quasi-coherent comparison. The sectionwise
-p-th power map induces a p-semilinear endomorphism F: the identity
-(cx)^p = c^p x^p gives semilinearity after applying additive cohomology. Apply the
-Artin--Schreier long exact sequence. Its degree-zero F-1 map is onto by the proper
-degree-zero theorem, so the next map identifies H¹(C,Z/p) with ker(F-1). Transport
-this identification through the natural Ext/derived comparison. Flat base change gives
-H¹(C',O_C') = k' tensor V. Transport its Frobenius across this linear equivalence to F'.
-The p-th power maps commute with pullback of functions, giving the displayed tensor
-identity. Naturality of the connecting sequence then identifies cohomology pullback
-with v mapping to 1 tensor v on kernels. No invariance of kernels is used. For a
-connected smooth curve of dimension zero, it is Spec k, and coherent H¹ vanishes;
-the same sequence makes both degree-one groups zero, giving V = 0. Thus the
-exact-dimension-one scalar-model theorem is only used in the dimension-one case. -/
+/-- For a smooth proper connected curve `C` over an algebraically closed field of characteristic
+`p`, `H¹(C, ℤ/p)` is the kernel of `F - 1` on `V = H¹(C, 𝒪_C)` for the `p`-linear Frobenius `F`,
+naturally under base change to an algebraically closed extension `k'`, where
+`H¹(C', 𝒪_{C'}) = k' ⊗ V`. -/
 theorem exists_constantZMod_one_frobenius_baseChange_model
     {k k' : Type u}
     [Field k] [IsAlgClosed k] [Field k'] [IsAlgClosed k'] [Algebra k k']

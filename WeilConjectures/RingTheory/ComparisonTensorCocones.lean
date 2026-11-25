@@ -14,9 +14,25 @@ import WeilConjectures.RingTheory.ComparisonTensorLocalSystem
 
 /-! # Coherent cocones for a base-changed tensor comparison
 
-Source: Stacks Project, Algebra, Tag 02JO (3), construction of Ψ;
-Tag 00DD for the tensor identifications.
-(blueprint: lem-weil-pbc-comparison-tensor-cocones-n3)
+We construct, along a directed system of rings, the comparison diagrams of a tensor comparison map
+`ζ` after base change, together with their canonical tensor cocones.
+
+## Implementation details
+
+Write `Bⱼ = F(j) ⊗_{F(i₀)} B₀` and similarly `Cⱼ`. Transport `P` to `Bⱼ` through the canonical
+`Bᵢ → Bⱼ`. Take `Dⱼ = ULift (Bⱼ ⊗_P Q)`, `Eⱼ = ULift Cⱼ`, and conjugate their tensor transition
+maps by the `ULift` ring equivalences. The identity `hψ` makes `ψ` `F(i)`-linear; tensoring `ψ`
+with `F(j)` over `F(i)` and cancelling gives `αⱼ`, with `αⱼ(b ⊗ q) = φⱼ(b) · ψ(1 ⊗ q)`. The
+canonical maps `Bⱼ → B` are `P`-linear by `hμB`; call them `μs`. The maps `μs ⊗ id_Q` and
+`Cⱼ → C` define the two cocones. The identity `hlim` checks the comparison on the `Q`-inclusion
+and `he` checks it on `Bⱼ`. Cancellation identifies the vertices at `k` with base changes of the
+vertices at `j` along `Bⱼ → Bₖ`, so each transition square is a pushout. No invertibility of `ζ`,
+finite presentation or nontriviality of any ring is used.
+
+## References
+
+* [Stacks, Tag 02JO] (3), construction of `Ψ`
+* [Stacks, Tag 00DD] for the tensor identifications
 -/
 
 @[expose] public section
@@ -29,30 +45,9 @@ universe v w x y
 namespace RingHom
 
 /-- Construct the comparison diagrams and their canonical tensor cocones, without
-claiming that the cocones are colimits or that the limiting comparison is bijective.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), the displayed comparison maps Ψ.
-(blueprint: lem-weil-pbc-comparison-tensor-cocones-n3)
-
-Proof: write Bⱼ = F(j) tensor_{F(i₀)} B₀ and similarly Cⱼ. Transport P to Bⱼ
-through the canonical Bᵢ → Bⱼ. Take Dⱼ = ULift (Bⱼ tensor_P Q), Eⱼ = ULift Cⱼ,
-and conjugate their tensor transition maps by the ULift ring equivalences.
-The identity hψ makes ψ F(i)-linear. Tensor ψ with F(j) over F(i), and use
-cancellation to obtain αⱼ. Equivalently αⱼ(b tensor q) is φⱼ(b) times the image
-of ψ(1 tensor q) in Cⱼ. This is P-balanced because hψ identifies the P-images.
-This formula on pure tensors proves naturality and the left-inclusion identity.
-The canonical maps Bⱼ → B are P-linear by hμB and cocone naturality; call them
-μs. The maps μs tensor id_Q and Cⱼ → C define the two cocones, with points the
-ULifts of B tensor_P Q and C and with equivalences dLim and cLim given by down.
-The identities for their legs and transitions follow on pure tensors. The
-identity hlim checks their comparison on the Q-inclusion; the global
-left-inclusion identity he checks it on Bⱼ, including the new F(j) elements.
-Tensor extensionality then gives the stated identity
-with ζ at every stage. Finally cancellation identifies both vertices at k
-with base changes of the vertices at j along Bⱼ → Bₖ, so the tensor universal
-property proves each transition square is a pushout. No use of invertibility
-of ζ, finite presentation, or nontriviality of any ring occurs.
--/
+claiming that the cocones are colimits or that the limiting comparison is bijective. The
+comparison maps `αⱼ : Dⱼ ⟶ Eⱼ` are compatible with `ζ` at every stage and the transition squares
+are pushouts. -/
 theorem exists_comparison_tensor_cocones
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

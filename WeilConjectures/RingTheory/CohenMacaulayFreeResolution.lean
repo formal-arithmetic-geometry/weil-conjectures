@@ -19,8 +19,24 @@ import WeilConjectures.RingTheory.CohenMacaulayFreeResolutionMCM
 /-!
 # Finite free resolutions ending in maximal Cohen–Macaulay modules
 
-Source: Stacks Project, Algebra, Tags 00NG, 00NE, 00NF and 00LK
-(blueprint: lem-weil-pbc-cm-local-free-resolution-to-mcm).
+Over a Noetherian local Cohen–Macaulay ring of dimension `d`, a nonzero finite module `M` of
+depth `e` has a finite free resolution of length `d - e` ending in a module that is zero or
+maximal Cohen–Macaulay.
+
+## Implementation details
+
+Depth is bounded by support dimension, so `e ≤ d`. The proof is by induction on `d - e`: the
+kernel of a finite free surjection onto a module of depth below `d` has depth one larger, and
+the induction hypothesis is spliced with this presentation. The linear equivalence identifies
+the penultimate object with `M` even when `R` and `M` have different universes.
+
+## References
+
+* [Stacks, Tag 00NG]
+* [Stacks, Tag 00NE]
+* [Stacks, Tag 00NF]
+* [Stacks, Tag 00LK]
+* [Stacks, Tag 00LX]
 -/
 
 @[expose] public section
@@ -34,27 +50,7 @@ namespace IsLocalRing
 /-- Over a Noetherian local Cohen–Macaulay ring of dimension `d`, a nonzero finite module
 has depth `e ≤ d` and an exact sequence `0 → K → F_{d-e-1} → ⋯ → F₀ → M → 0`,
 with the `Fᵢ` finite free and `K` finite and either zero or of depth `d`.
-Source: Stacks Project, Algebra, Tags 00NG, 00NE, 00NF and 00LK
-(blueprint: lem-weil-pbc-cm-local-free-resolution-to-mcm).
-
-Proof plan (the seven steps of the node):
-1. Tag 00LK (lem-weil-pbc-depth-le-support-dimension) bounds depth by support dimension,
-   which is at most `d`; hence depth is a natural number `e ≤ d`.
-2. An `R`-regular sequence of length `d` acts componentwise regularly on each nonzero
-   finite free module, so such modules have depth at least `d`.
-3. Induct on `k = d - e`. At `k = 0`, take `K = M` and the identity map.
-4. Choose a finite free surjection onto the module. Its kernel is finite by
-   lem-weil-pbc-noetherian-submodule-finite and is nonzero if the module has depth below `d`.
-5. Parts (2) and (3) of Tag 00LX (lem-weil-pbc-depth-in-ses) show that this first kernel
-   has depth exactly one larger, using the free module's depth bound.
-6. Apply the induction hypothesis to the kernel and splice with its inclusion in the
-   free module. Surjectivity, the kernel-image equality and injectivity give exactness.
-7. This gives the required length `d - e` and the maximal Cohen–Macaulay last kernel.
-
-For `k = d - e`, the objects of `S` in order are `0, K, F_{k-1}, …, F₀, M, 0`.
-The linear equivalence identifies its penultimate object with the original `M`, even
-when `R` and `M` have different universes. At `k = 0` there are no free terms; exactness
-between the zero endpoints makes the map `K → M` an isomorphism. -/
+For `k = d - e`, the objects of `S` in order are `0, K, F_{k-1}, …, F₀, M, 0`. -/
 theorem exists_finite_free_resolution_to_maximalCohenMacaulay
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]

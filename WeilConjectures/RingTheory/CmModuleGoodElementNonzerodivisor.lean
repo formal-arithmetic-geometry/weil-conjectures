@@ -17,8 +17,22 @@ import WeilConjectures.RingTheory.CmModuleGoodElementSetup
 /-!
 # A dimension-cutting element on a Cohen–Macaulay module
 
-Source: Stacks Project, Algebra, Lemma 10.103.3 (Tag 00N5), and Definition 10.103.1
-(Tag 00N3) (blueprint: lem-weil-pbc-cm-module-good-element-nonzerodivisor).
+An element cutting the support dimension of a nonzero finite Cohen–Macaulay module by one is a
+nonzerodivisor on it, and the quotient is again Cohen–Macaulay.
+
+## Implementation details
+
+Dimension drops are written as successor equalities to avoid truncated subtraction at zero.
+The proof is by induction on the dimension `d`. For `d ≥ 2`, prime avoidance gives an element
+`h` of the maximal ideal avoiding the minimal primes of the relevant supports; then `h` is good
+for a maximal regular sequence, induction applies to `g` on `M/hM`, and the regular sequence
+`(h, g)` is permuted to show that `g` is regular on `M`. Prepending `h` to a regular sequence
+on `M/(g,h)M` bounds the depth of `M/gM` from below.
+
+## References
+
+* [Stacks, Tag 00N5] (Algebra, Lemma 10.103.3)
+* [Stacks, Tag 00N3] (Algebra, Definition 10.103.1)
 -/
 
 @[expose] public section
@@ -27,49 +41,10 @@ universe u v
 
 namespace Module
 
-/-- Source: Stacks Project, Algebra, Tag 00N5
-(blueprint: lem-weil-pbc-cm-module-good-element-nonzerodivisor).
-A dimension-cutting element is a nonzerodivisor (`IsSMulRegular`: multiplication by it
-is injective) on a nonzero finite Cohen–Macaulay module;
-its quotient is Cohen–Macaulay and has depth one less. Cohen–Macaulayness is written
-as the equality of depth and support dimension, as in Tag 00N3. Dimension drops are
-written as successor equalities to avoid truncated subtraction at zero.
-
-Proof (the nine steps of the node, following Tag 00N5):
-1. The maximal ideal belongs to the support: localization there is an isomorphism,
-since every denominator is a unit (def-weil-pbc-module-localization). Thus the
-support dimension d is nonnegative and finite by
-lem-weil-pbc-noetherian-local-finite-krull-dimension and
- def-weil-pbc-krull-dimension-ring. The dimension-drop hypothesis rules out d = 0.
-By def-weil-pbc-depth and def-weil-pbc-regular-sequence, choose a regular sequence
-f₁, ..., f_d of length d in the maximal ideal.
-2. Induct on the positive integer d, proving both conclusions simultaneously.
-3. If g is good for this sequence, use
-lem-weil-pbc-cm-module-good-sequence-element-nonzerodivisor. This proves d = 1.
-4. Set M_i = M/(f₁, ..., f_i)M. By
-lem-weil-pbc-support-quotient-ideal-module its support is Supp(M) intersected with
-V(f₁, ..., f_i). Regularity and
-lem-weil-pbc-support-dimension-quotient-element-equality give dimension d - i.
-The support of M/gM likewise has dimension d - 1.
-5. The finitely many minimal primes of these supports for i < d, together with
-those of M/gM, do not include the maximal ideal, since these supports have positive
-dimension. Use lem-weil-pbc-finite-module-support-annihilator,
-lem-weil-pbc-noetherian-finitely-many-minimal-primes,
-def-weil-pbc-noetherian-ring and lem-weil-pbc-prime-avoidance to choose h in the
-maximal ideal avoiding all these primes.
-6. By lem-weil-pbc-support-dimension-quotient-element-equality and
-lem-weil-pbc-support-quotient-ideal-module, h is good for the chosen sequence and
-Supp(M) intersected with V(h,g) has dimension d - 2.
-7. The good-sequence lemma makes h regular and M/hM Cohen–Macaulay of dimension
-d - 1. Apply induction to g on M/hM, using the support-quotient lemma: g is regular
-there, and M/(h,g)M is Cohen–Macaulay of depth d - 2.
-8. By def-weil-pbc-regular-sequence, (h,g) is regular. Use
-lem-weil-pbc-regular-sequence-permutation-noetherian-local to swap it: g is regular
-on M and h is regular on M/gM.
-9. Prepend h to a regular sequence of length d - 2 on M/(g,h)M, obtaining depth
-at least d - 1 on M/gM (def-weil-pbc-depth, def-weil-pbc-regular-sequence).
-The reverse bound is lem-weil-pbc-depth-le-support-dimension. Hence its depth and
-support dimension both equal d - 1, proving the two assertions. -/
+/-- On a nonzero finite Cohen–Macaulay module over a Noetherian local ring, an element of the
+maximal ideal that cuts the support dimension by one is a nonzerodivisor (`IsSMulRegular`), and
+the quotient is Cohen–Macaulay of depth one less. Cohen–Macaulayness is written as the equality
+of depth and support dimension; dimension drops are written as successor equalities. -/
 theorem cm_module_good_element_nonzerodivisor
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] [Nontrivial M]

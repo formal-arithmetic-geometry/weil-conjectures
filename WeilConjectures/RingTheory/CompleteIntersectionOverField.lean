@@ -12,8 +12,7 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 /-!
 # Complete intersections over a field
 
-Source: Stacks Project, Algebra, Definition 10.135.1 (Tag 00S9)
-(blueprint: def-weil-pbc-complete-intersection-over-field).
+We define global and local complete intersections over a field, following Stacks.
 
 ## Main definitions
 
@@ -21,6 +20,10 @@ Source: Stacks Project, Algebra, Definition 10.135.1 (Tag 00S9)
   including the zero ring by convention.
 * `Algebra.IsLocalCompleteIntersection`: a cover by principal opens whose localizations are
   global complete intersections.
+
+## References
+
+* [Stacks, Tag 00S9] (Algebra, Definition 10.135.1)
 -/
 
 @[expose] public section
@@ -29,11 +32,9 @@ universe u v
 
 namespace Algebra
 
-/-- (blueprint: def-weil-pbc-complete-intersection-over-field) Stacks Project, Algebra,
-Definition 10.135.1 (Tag 00S9), part (1): a commutative `k`-algebra is a global complete
-intersection if it is the zero ring, or is isomorphic as a `k`-algebra to a quotient of
-`k[x₁, ..., xₙ]` by `c` polynomials and has Krull dimension `n - c`. The inequality `c ≤ n`
-expresses that this integer difference is nonnegative for a nonzero ring. -/
+/-- A commutative `k`-algebra is a global complete intersection if it is the zero ring, or is
+isomorphic as a `k`-algebra to a quotient of `k[x₁, ..., xₙ]` by `c ≤ n` polynomials and has Krull
+dimension `n - c`. -/
 def IsGlobalCompleteIntersection (k : Type u) (T : Type v) [Field k] [CommRing T]
     [Algebra k T] : Prop :=
   Subsingleton T ∨
@@ -42,10 +43,9 @@ def IsGlobalCompleteIntersection (k : Type u) (T : Type v) [Field k] [CommRing T
         Nonempty ((MvPolynomial (Fin n) k ⧸ Ideal.span (Set.range f)) ≃ₐ[k] T) ∧
         topologicalKrullDim (PrimeSpectrum T) = (↑(n - c) : WithBot ℕ∞)
 
-/-- (blueprint: def-weil-pbc-complete-intersection-over-field) Stacks Project, Algebra,
-Definition 10.135.1 (Tag 00S9), part (2): a finite type `k`-algebra is a local complete
-intersection if its spectrum is covered by principal opens `D(g)` and every corresponding
-localization is a global complete intersection over `k`. -/
+/-- A finite type `k`-algebra is a local complete intersection if its spectrum is covered by
+principal opens `D(g)` and every corresponding localization is a global complete intersection
+over `k`. -/
 def IsLocalCompleteIntersection (k : Type u) (S : Type v) [Field k] [CommRing S]
     [Algebra k S] [Algebra.FiniteType k S] : Prop :=
   ∃ s : Set S,

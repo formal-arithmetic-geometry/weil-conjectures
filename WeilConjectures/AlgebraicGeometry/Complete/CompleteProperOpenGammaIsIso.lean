@@ -22,8 +22,30 @@ on complete objects with compatible bounded-below etale origins. The proof passe
 strict quotient tower after constant-coefficient restriction, where the strict proper/open
 gamma is invertible by finite compact-support base change.
 
-Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
-step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
+## Implementation details
+
+The main theorem `cbcProperOpenGamma_app_isIso` runs as follows: both sides are quotient-tower
+complete, so it suffices that the strict reduction of gamma is invertible, and
+constant-coefficient restriction reflects this. After restriction, gamma is conjugate to the
+strict gamma (`cbcProperOpenGamma_strictConjugate`), which is invertible levelwise by finite
+compact-support base change on the retained etale origins.
+
+The conjugation holds because strict reduction followed by restriction commutes with inverse
+image (the normalized reduction/pullback comparison and `exchangeResPull`), with direct image
+(`towerProjection` and `exchangeResPush`, the mates of the former) and with open extension
+(`cbcRingedOpenStrictReduction`). These comparisons are compatible with the adjunction units and
+counits and with the inverse-image and open compositors, so they carry the open base-change
+comparison, the clopen projection and alpha to their strict versions, and the proper-adjunction
+mate gamma to the strict gamma.
+
+## References
+
+* [Stacks, Tag 01JR]
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 05RT]
+* [Stacks, Tag 099N]
+* [Stacks, Tag 09C9]
+* [Stacks, Tag 0F7B]
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +87,7 @@ private theorem derivedReflectsIso
       infer_instance)
   exact isIso_of_reflects_iso _ F
 
-/-- Termwise constant-coefficient restriction of strict towers reflects isomorphisms.
-Source: Stacks 03DA (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Termwise constant-coefficient restriction of strict towers reflects isomorphisms. -/
 theorem exchangeTowerModuleRes_reflectsIsomorphisms (T : Scheme.{t}) :
     (exchangeTowerModuleRes d T).ReflectsIsomorphisms where
   reflects {M N} f hf := by
@@ -77,8 +98,7 @@ theorem exchangeTowerModuleRes_reflectsIsomorphisms (T : Scheme.{t}) :
       exact isIso_of_reflects_iso (f.app n) (proEtaleRingRestrictScalars (exchangeScalar d T))
     exact NatIso.isIso_of_isIso_app f
 
-/-- Derived constant-coefficient restriction of strict towers reflects isomorphisms.
-Source: Stacks 05RT, 03DA (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Derived constant-coefficient restriction of strict towers reflects isomorphisms. -/
 theorem exchangeTowerRes_isIso_iff (T : Scheme.{t})
     {M N : DerivedCategory (exchangeTowers T (d.completedRing T))} (f : M ⟶ N) :
     IsIso ((exchangeTowerRes d T).map f) ↔ IsIso f := by
@@ -86,9 +106,7 @@ theorem exchangeTowerRes_isIso_iff (T : Scheme.{t})
   have := exchangeTowerModuleRes_reflectsIsomorphisms d T
   exact derivedReflectsIso (exchangeTowerModuleRes d T) f h
 
-/-- A map of quotient-tower complete objects is invertible if its reduction tower is.
-Source: Stacks 099N; blueprint step 8 (blueprint:
-proposition-composition-base-change-rf-shriek--4). -/
+/-- A map of quotient-tower complete objects is invertible if its reduction tower is. -/
 theorem isIso_of_reductionTower_isIso (T : Scheme.{t}) {K L : d.derived T} (f : K ⟶ L)
     (hK : d.TowerComplete T K) (hL : d.TowerComplete T L)
     (hf : IsIso ((completedReductionTower T d).map f)) : IsIso f := by
@@ -101,8 +119,7 @@ theorem isIso_of_reductionTower_isIso (T : Scheme.{t}) {K L : d.derived T} (f : 
 
 end Reflection
 
-/-- Intrinsic completeness implies quotient-tower completeness.
-Source: blueprint order 1587 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Intrinsic completeness implies quotient-tower completeness. -/
 theorem cbcTowerComplete_of_completeProperty (T : Scheme.{t})
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (K : d.derived T) (hK : cbcCompleteProperty d T r a ha K) :
@@ -118,8 +135,7 @@ theorem cbcTowerComplete_of_completeProperty (T : Scheme.{t})
   rw [← hc]
   infer_instance
 
-/-- Quotient-tower completeness implies intrinsic completeness.
-Source: blueprint order 1587 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- Quotient-tower completeness implies intrinsic completeness. -/
 theorem cbcCompleteProperty_of_towerComplete (T : Scheme.{t})
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (K : d.derived T) (hK : d.TowerComplete T K) :
@@ -138,8 +154,7 @@ theorem cbcCompleteProperty_of_towerComplete (T : Scheme.{t})
     exact hK
   exact IsIso.of_isIso_comp_right _ c.hom
 
-/-- The trivial Cartesian square of an open immersion over the identity.
-Source: Stacks 01JR (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The trivial Cartesian square of an open immersion over the identity. -/
 def cbcIdOpenImmersionSquare {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
     OpenImmersionSquare (𝟙 U) j j (𝟙 T) :=
   let sq : IsPullback (𝟙 U) j j (𝟙 T) := IsPullback.of_horiz_isIso ⟨by simp⟩
@@ -151,9 +166,7 @@ def cbcIdOpenImmersionSquare {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j
     isOpenImmersion' := inferInstance }
 
 /-- Extension by zero along a quasi-compact open immersion preserves quotient-tower
-completeness. This is the completeness assertion of `completedExtensionZeroComparison`.
-Source: blueprint lem-cbc-completed-extension-zero-comparison, Stacks 099N
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+completeness. This is the completeness assertion of `completedExtensionZeroComparison`. -/
 theorem cbcJ_towerComplete {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     [QuasiCompact j] (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
     (M : d.derived U) (hM : d.TowerComplete U M) :
@@ -164,16 +177,7 @@ theorem cbcJ_towerComplete {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
 
 
 /-- After strict reduction and constant-coefficient restriction, the completed proper/open
-gamma is conjugate to the strict-tower proper/open gamma.
-Source: blueprint step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
-Proof sketch: strict reduction followed by restriction commutes with inverse image (the
-normalized reduction/pullback comparison and `exchangeResPull`), with direct image
-(`towerProjection` and `exchangeResPush`, the mates of the former) and with open
-extension (`cbcRingedOpenStrictReduction`). These comparisons are compatible with the
-adjunction units and counits, with the inverse-image compositors and hence with the open
-compositors. Therefore they carry the open base-change comparison, the clopen projection
-and alpha to their strict versions, and the proper-adjunction mate gamma to the strict
-gamma. -/
+gamma is conjugate to the strict-tower proper/open gamma. -/
 theorem cbcProperOpenGamma_strictConjugate {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
@@ -258,20 +262,14 @@ theorem cbcProperOpenGamma_strictConjugate {V W S T : Scheme.{t}} (k : V ⟶ W) 
   · exact cbcStrictPull_comp_hom d s (pullback.snd p i) (pullback.lift_snd k r h)
 
 /-- Compatible etale origins of a completed object give finite constant-coefficient etale
-origins of every level of its restricted strict reduction tower.
-Source: blueprint step 8 (blueprint: proposition-composition-base-change-rf-shriek--4). -/
+origins of every level of its restricted strict reduction tower. -/
 theorem cbcStrictReduction_scalarEtaleOrigin (V : Scheme.{t}) (K : d.derived V)
     (origins : PbcHasCompatibleEtaleOrigins V d K) (n : ℕ) :
     Nonempty (ProEtale.StrictTower.ScalarEtaleOrigin A V
       ((ProEtale.StrictTower.ev A V n).obj ((cbcStrictReduction d V).obj K))) :=
   cbcStrictReductionLevel_scalarEtaleOrigin d V K origins n
 
-/-- The proper/open gamma is invertible on complete objects with compatible etale origins.
-Source: blueprint proof step 8; Stacks 0F7B, 09C9 (blueprint:
-proposition-composition-base-change-rf-shriek--4). Proof: both sides are quotient-tower complete, so
-it suffices that the strict reduction of gamma is invertible; constant-coefficient restriction
-reflects this. After restriction gamma is conjugate to the strict gamma, which is invertible
-levelwise by finite compact-support base change on the retained etale origins. -/
+/-- The proper/open gamma is invertible on complete objects with compatible etale origins. -/
 theorem cbcProperOpenGamma_app_isIso {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
     [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]

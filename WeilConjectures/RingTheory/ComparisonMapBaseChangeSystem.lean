@@ -17,8 +17,33 @@ import WeilConjectures.RingTheory.DirectedTensorCoconesColimit
 
 /-! # Extending a tensor comparison by base change
 
-Source: Stacks Project, Algebra, Tags 02JO (3) and 00DD.
-(blueprint: lem-weil-pbc-comparison-map-base-change-system)
+Given a directed system of rings `F` with colimit `colim F`, an `F(i₀)`-algebra map
+`φ₀ : B₀ → C₀`, and a comparison isomorphism `(colim F ⊗ B₀) ⊗_P Q ≃ colim F ⊗ C₀` which is
+already realised at a stage `i`, we extend the comparison by base change to a directed system
+of pushout squares whose colimit comparison map is bijective
+(`RingHom.exists_comparison_map_base_change_system`).
+
+## Implementation details
+
+For `j ≥ i`, the `P`-structure of `Bᵢ = F(i) ⊗ B₀` is transported to `Bⱼ` by the tensor
+transition map. `Dⱼ` is a common-universe `ULift` of `Bⱼ ⊗_P Q` and `Eⱼ` one of
+`Cⱼ = F(j) ⊗ C₀`, with transitions given by tensor maps. Tensor cancellation identifies `Bⱼ`
+with `F(j) ⊗_{F(i)} Bᵢ` and `Cⱼ` with `F(j) ⊗_{F(i)} Cᵢ`, and `αⱼ` is the base change of `ψ`
+along `F(i) → F(j)`; on pure tensors it is `b ⊗ q ↦ φⱼ(b) · τⱼᵢ(qᵢ(q))` with
+`qᵢ(q) = ψ(1 ⊗ q)`. Since both sides at `k` are obtained from those at `j` by tensoring with
+`Bₖ` over `Bⱼ`, the transition squares are pushouts. The colimits of the `B`- and `C`-diagrams
+are the limit tensor rings, and a compatible family of maps out of the `Dⱼ` is a compatible
+family out of the `Bⱼ` together with a map out of `Q` agreeing on `P`, so the colimit of `D` is
+`B ⊗_P Q`. The colimit comparison is the conjugate of `e`, hence bijective. No
+finite-presentation assumption is needed, and `Q` and `φ₀` are arbitrary (zero rings allowed).
+
+The private lemmas at the start of the file record that the scalar compatibility hypotheses
+cannot be dropped: without them a terminal stage `ℤ → (ℕ → ℤ)` gives a counterexample.
+
+## References
+
+* [Stacks, Tag 02JO]
+* [Stacks, Tag 00DD]
 -/
 
 @[expose] public section
@@ -130,37 +155,8 @@ private theorem comparison_terminal_tensor_obstruction
   exact hs
 
 
-/-- Extend a single comparison map by base change to a pushout system with its colimits.
-
-Source: Stacks Project, Algebra, Tag 02JO (3), the displayed maps Ψ and their
-colimit; tensor universal properties and Tag 00DD.
-(blueprint: lem-weil-pbc-comparison-map-base-change-system)
-
-Proof: for j ≥ i, transport the P-structure of Bᵢ to Bⱼ by the tensor transition
-map. Define Dⱼ as the common-universe ULift of Bⱼ tensor_P Q and Eⱼ as the ULift
-of Cⱼ. Define their transitions by tensor maps. Tensor cancellation identifies
-Bⱼ with F(j) tensor_{F(i)} Bᵢ and Cⱼ with F(j) tensor_{F(i)} Cᵢ.
-Base change ψ along F(i) → F(j), and use these cancellation equivalences to
-obtain αⱼ. The identity hψ makes ψ F(i)-linear, and also proves left-inclusion
-compatibility after base change. Checking the B and Q inclusions proves
-naturality. Explicitly, if qᵢ(q) = ψ(1 tensor q), the component on pure
-tensors is b tensor q ↦ φⱼ(b) · τⱼᵢ(qᵢ(q)), where τ is the C transition.
-The transported P-structure makes this balanced. For j → k, both source
-and target at k are obtained from their
-values at j by tensoring with Bₖ over Bⱼ; tensor associativity therefore proves
-the transition square is a pushout. These identifications also define the
-canonical d and c after the ULift conjugations.
-The B and C tensor diagrams have their limit tensor rings as colimits, by the
-elementwise representative and eventual-equality lemma. A compatible family
-of maps from Dⱼ is exactly a compatible family of maps from Bⱼ and a map from
-Q agreeing on P. Thus its colimit is B tensor_P Q. Construct cD and cE using
-these universal properties and lift their points to the common universe.
-Their comparison is the conjugate of e: he identifies its restriction to B,
-and hlim identifies its restriction to Q by evaluation on 1 tensor q.
-Tensor extensionality proves this identity at the limit. Consequently f
-is bijective. This construction uses no finite-presentation assumptions and
-works for arbitrary Q and φ₀, including zero rings.
--/
+/-- Extend a single comparison map by base change to a directed system of pushout squares whose
+comparison map of colimits is bijective. -/
 theorem exists_comparison_map_base_change_system
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

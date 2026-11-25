@@ -14,8 +14,20 @@ import WeilConjectures.RingTheory.AdicFieldDifferentialsInjective
 
 /-! # Extension of absolute derivations vanishing on the base maximal ideal
 
-Source: Stacks Project, Tags 07NQ and 07EL.
-(blueprint: lem-weil-pbc-closed-fiber-module-derivation-extension)
+An absolute derivation of `R` into a `T`-module supported at the closed point extends to `T` if
+it vanishes on `m_R` and the closed fibre `T/m_R T` is adically formally smooth.
+
+## Implementation details
+
+The derivation descends to `k = R/m_R`. By [Stacks, Tag 07EL] the map
+`K ⊗_k Ω_{k/ℤ} → K ⊗_C Ω_{C/ℤ}` (with `C = T/m_R T` and `K` its residue field) is injective,
+so the induced functional extends along it using a linear left inverse; composing with the
+universal derivation of `C` gives the extension. The construction also works for `M = 0`.
+
+## References
+
+* [Stacks, Tag 07NQ]
+* [Stacks, Tag 07EL]
 -/
 
 @[expose] public section
@@ -29,23 +41,7 @@ namespace Derivation
 /-- An absolute derivation into a module supported at the closed point extends from
 the base if it vanishes on the base maximal ideal and the closed fibre is adically
 formally smooth.
-Source: Stacks Project, Tags 07NQ and 07EL, differential extension argument.
-(blueprint: lem-weil-pbc-closed-fiber-module-derivation-extension)
-
-Proof: Set C = T/(m_R T). Locality gives m_R T contained in m_T, so C is a
-nonzero Noetherian local ring with maximal ideal the image of m_T. The action on M
-factors first through C and then through K = C/m_C, since these ideals annihilate M.
-Give M its k = R/m_R action through k -> C. Since d kills m_R, its additive map
-descends to k; quotient induction verifies the Leibniz rule. The universal property
-of differentials and extension of scalars give a K-linear functional on
-K tensor_k Omega_(k/Z). By Tag 07EL the differential map from
-K tensor_k Omega_(k/Z) to K tensor_C Omega_(C/Z) is injective. A linear functional
-into any K-vector space extends along this injection: take a linear left inverse
-of the injection, supplied by the vector-space basis theorem, and compose the
-functional with it.
-Composition with the universal differential of C and T -> C gives an absolute
-derivation on T restricting to d. The construction also works for M = 0.
--/
+formally smooth. -/
 theorem exists_extension_of_closedFiber
     (R : Type u) (T : Type v) [CommRing R] [CommRing T]
     [IsLocalRing R] [IsLocalRing T] [IsNoetherianRing T]

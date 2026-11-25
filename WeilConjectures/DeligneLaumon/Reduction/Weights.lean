@@ -17,12 +17,11 @@ public import WeilConjectures.WeilSheaf.Triangle
 /-!
 # Mixed weight bounds for constructible Weil sheaves and complexes
 
-This file sets up the language in which the Deligne–Laumon reduction to the affine line
-(blueprint section `chap-The-Deligne-Laumon-theorem-in-general`) is stated. A constructible Weil
-sheaf is `ι`-*mixed of weights at most* `w` if it admits a finite filtration whose successive
-quotients are punctually `ι`-pure of some weight at most `w`, and a bounded constructible Weil
-complex `K` is mixed of weights at most `w` if `𝓗ᵇK` is mixed of weights at most `w + b` for every
-`b`.
+This file sets up the language in which the Deligne–Laumon reduction to the affine line is
+stated. A constructible Weil sheaf is `ι`-*mixed of weights at most* `w` if it admits a finite
+filtration whose successive quotients are punctually `ι`-pure of some weight at most `w`, and a
+bounded constructible Weil complex `K` is mixed of weights at most `w` if `𝓗ᵇK` is mixed of
+weights at most `w + b` for every `b`.
 
 ## Conventions
 
@@ -35,9 +34,9 @@ Frobenius, the punctual weight conditions
 `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost`, the reality condition
 `AlgebraicGeometry.WeilSheaf.IsReal`, and the direct images with compact support
 `AlgebraicGeometry.WeilSheaf.higherLowerShriek` (`Rʳf₀!`) and
-`AlgebraicGeometry.WeilComplex.derivedLowerShriek` (`Rf₀!`). The notions that other blueprint
-blocks own are opaque placeholders there, each tagged `TODO(unify)` with the node that owns it;
-what this block owns is the mixed upper bounds defined below.
+`AlgebraicGeometry.WeilComplex.derivedLowerShriek` (`Rf₀!`). The notions defined elsewhere are
+opaque placeholders there, each tagged `TODO(unify)`; this file defines the mixed upper bounds
+below.
 
 Cohomological indexing is used throughout: `AlgebraicGeometry.WeilComplex.homologySheaf b` is
 the `b`-th *cohomology* sheaf `𝓗ᵇK`, as in `DerivedCategory.homologyFunctor`, so the bound for
@@ -51,14 +50,15 @@ a complex of weights at most `w` is `w + b` in degree `b`, Deligne's convention.
 - `AlgebraicGeometry.WeilSheaf.IsMixed`: mixed, that is, mixed of weights at most `w` for some
   `w`.
 - `AlgebraicGeometry.HasDirectImageWeightBound`: the direct-image weight assertion for a single
-  morphism, the statement the reductions of `chap-The-Deligne-Laumon-theorem-in-general` propagate,
-  and its complex form `AlgebraicGeometry.HasDirectImageComplexWeightBound`.
+  morphism, the statement the reductions of the Deligne–Laumon theorem propagate along
+  compositions and open–closed decompositions, and its complex form
+  `AlgebraicGeometry.HasDirectImageComplexWeightBound`.
 
 Monotonicity in the bound and the bound for a zero sheaf are proved
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.mono_weight` and
-`AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_of_isZero`), and the closure properties the
-blueprint records alongside the definition — under subobjects, quotients and extensions — are
-proved: `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
+`AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_of_isZero`), and so are the closure
+properties under subobjects, quotients and extensions:
+`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_mono`, `.of_epi` and
 `.of_mono_cokernel`. They come from the general closure properties of objects with a finite
 filtration (`CategoryTheory.ObjectProperty.filtrationClosure`), applied to the property
 `AlgebraicGeometry.WeilSheaf.isPunctuallyPureOfWeightLE` of being punctually pure of some weight
@@ -71,9 +71,16 @@ filtration whose successive quotients are
 (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_filtration`).
 
 A mixed sheaf whose local Frobenius eigenvalues are bounded by `q_y ^ (v / 2)` is mixed of
-weights at most `v` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`,
-blueprint `lemma-bounding-weights-mixed-sheaf--1`), and exact functors raising punctual weights by
-`c` raise mixed weight bounds by `c` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.map_add`).
+weights at most `v` (`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.of_hasWeightsAtMost`),
+and exact functors raising punctual weights by `c` raise mixed weight bounds by `c`
+(`AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.map_add`).
+
+## Implementation details
+
+The passage from sheaves to complexes is proved by induction on the length of a bounded complex
+`K`, using the truncation triangle `τ_{<b}K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶` and the extension stability of
+complex weights. This replaces the hypercohomology spectral sequence
+`E₂^{a,b} = 𝓗ᵃ(Φ 𝓗ᵇ(K)) ⇒ 𝓗ᵃ⁺ᵇ(Φ K)`.
 
 ## References
 
@@ -104,8 +111,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
       coker φ 0   ⋯      coker φ (n-1)
 ```
 
-whose successive quotients `coker φᵢ` are punctually `ι`-pure of some weight at most `w`
-(blueprint: `definition-weights`, `definition-weights--2`). -/
+whose successive quotients `coker φᵢ` are punctually `ι`-pure of some weight at most `w`. -/
 def WeilSheaf.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) (w : ℝ) :
     Prop :=
   ∃ (n : ℕ) (G : Fin (n + 1) → WeilSheaf k₀ l X)
@@ -114,8 +120,7 @@ def WeilSheaf.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (F : WeilShea
         ∀ i : Fin n, ∃ v ≤ w, (cokernel (φ i)).IsPunctuallyPureOfWeight ι v
 
 /-- `F` is `ι`-*mixed* if it is mixed of weights at most `w` for some `w`, that is, if it admits
-a finite filtration with punctually `ι`-pure quotients
-(blueprint: `definition-weights`). -/
+a finite filtration with punctually `ι`-pure quotients. -/
 def WeilSheaf.IsMixed (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) : Prop :=
   ∃ w : ℝ, F.IsMixedOfWeightsAtMost ι w
 
@@ -126,7 +131,7 @@ variable {ι : PadicAlgCl l →+* ℂ} {F G : WeilSheaf k₀ l X} {w w' : ℝ}
 theorem IsMixedOfWeightsAtMost.isMixed (h : F.IsMixedOfWeightsAtMost ι w) : F.IsMixed ι :=
   ⟨w, h⟩
 
-/-- Mixed upper bounds are monotone in the bound (blueprint: `definition-weights`). -/
+/-- Mixed upper bounds are monotone in the bound. -/
 theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (hw : w ≤ w') :
     F.IsMixedOfWeightsAtMost ι w' := by
   obtain ⟨n, G, φ, h0, hlast, hmono, hpure⟩ := h
@@ -134,8 +139,7 @@ theorem IsMixedOfWeightsAtMost.mono_weight (h : F.IsMixedOfWeightsAtMost ι w) (
   obtain ⟨v, hv, hvpure⟩ := hpure i
   exact ⟨v, hv.trans hw, hvpure⟩
 
-/-- A zero sheaf is mixed of weights at most `w`, for every `w`: the filtration of length zero
-exhibits it (blueprint: `definition-weights`). -/
+/-- A zero sheaf is mixed of weights at most `w`, for every `w`. -/
 theorem isMixedOfWeightsAtMost_of_isZero (hF : IsZero F) (w : ℝ) :
     F.IsMixedOfWeightsAtMost ι w :=
   ⟨0, fun _ ↦ F, fun i ↦ i.elim0, hF, ⟨Iso.refl F⟩, fun i ↦ i.elim0, fun i ↦ i.elim0⟩
@@ -172,22 +176,20 @@ theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost (h : F.IsPunctuallyPureO
   rw [isMixedOfWeightsAtMost_iff_filtrationClosure]
   exact ObjectProperty.le_filtrationClosure _ ⟨w, le_rfl, h⟩
 
-/-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: intersect
-the filtration (blueprint: `definition-weights`). -/
+/-- A subobject of a sheaf mixed of weights at most `w` is mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_mono (i : G ⟶ F) [Mono i] (h : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w := by
   rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
   exact ObjectProperty.prop_of_mono _ i h
 
-/-- A quotient of a sheaf mixed of weights at most `w` is mixed of weights at most `w`: take the
-images of the filtration (blueprint: `definition-weights`). -/
+/-- A quotient of a sheaf mixed of weights at most `w` is mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_epi (p : F ⟶ G) [Epi p] (h : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w := by
   rw [isMixedOfWeightsAtMost_iff_filtrationClosure] at h ⊢
   exact ObjectProperty.prop_of_epi _ p h
 
 /-- An extension of a sheaf mixed of weights at most `w` by another one is mixed of weights at
-most `w`: splice the two filtrations (blueprint: `definition-weights`). -/
+most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_mono_cokernel (i : G ⟶ F) [Mono i]
     (hG : G.IsMixedOfWeightsAtMost ι w) (hQ : (cokernel i).IsMixedOfWeightsAtMost ι w) :
     F.IsMixedOfWeightsAtMost ι w := by
@@ -196,7 +198,7 @@ theorem IsMixedOfWeightsAtMost.of_mono_cokernel (i : G ⟶ F) [Mono i]
     (ShortComplex.ShortExact.mk' (ShortComplex.exact_cokernel i) inferInstance inferInstance)
     hG hQ
 
-/-- Mixed upper bounds are invariant under isomorphism (blueprint: `definition-weights`). -/
+/-- Mixed upper bounds are invariant under isomorphism. -/
 theorem IsMixedOfWeightsAtMost.of_iso (e : F ≅ G) (h : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w := by
   obtain ⟨n, H, φ, h0, ⟨e'⟩, hmono, hpure⟩ := h
@@ -220,29 +222,26 @@ theorem IsMixedOfWeightsAtMost.of_shortExact {S : ShortComplex (WeilSheaf k₀ l
   .of_exact hS.exact h₁ h₃
 
 /-- A direct summand, more generally a retract, of a Weil sheaf mixed of weights at most `w` is
-mixed of weights at most `w`: it is a Weil subsheaf (blueprint:
-`proposition-weights-under-usual-operations--2`, part 3). -/
+mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_retract (h : Retract G F) (hF : F.IsMixedOfWeightsAtMost ι w) :
     G.IsMixedOfWeightsAtMost ι w :=
   have : Mono h.i := mono_of_mono_fac h.retract
   hF.of_mono h.i
 
-/-- A subobject of a Weil sheaf with weights at most `v` has weights at most `v`: its stalks are
-Frobenius-stable subspaces. -/
+/-- A subobject of a Weil sheaf with weights at most `v` has weights at most `v`. -/
 theorem HasWeightsAtMost.of_mono {v : ℝ} (f : F ⟶ G) [Mono f] (h : G.HasWeightsAtMost ι v) :
     F.HasWeightsAtMost ι v := fun x ↦
   FrobeniusModule.HasWeightsAtMost.of_injective _ (stalkAtMap_frobenius _ _ _ f)
     (injective_stalkAtMap _ _ _ f) (h x)
 
-/-- A quotient of a Weil sheaf with weights at most `v` has weights at most `v`: its stalks are
-Frobenius-equivariant quotients. -/
+/-- A quotient of a Weil sheaf with weights at most `v` has weights at most `v`. -/
 theorem HasWeightsAtMost.of_epi {v : ℝ} (f : F ⟶ G) [Epi f] (h : F.HasWeightsAtMost ι v) :
     G.HasWeightsAtMost ι v := fun x ↦
   FrobeniusModule.HasWeightsAtMost.of_surjective _ (stalkAtMap_frobenius _ _ _ f)
     (surjective_stalkAtMap _ _ _ f) (h x)
 
 omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
-/-- A zero Weil sheaf is punctually pure of every weight: its stalks vanish. -/
+/-- A zero Weil sheaf is punctually pure of every weight. -/
 theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
     F.IsPunctuallyPureOfWeight ι w := fun x α hα ↦ by
   have : x ∉ F.support := by rw [support_eq_empty_of_isZero hF]; exact id
@@ -251,8 +250,7 @@ theorem isPunctuallyPureOfWeight_of_isZero (hF : IsZero F) (w : ℝ) :
   exact (hv.2 (Subsingleton.elim _ _)).elim
 
 
-/-- A nonzero Weil sheaf punctually pure of weight `u` with weights at most `v` has `u ≤ v`: it has
-a nonzero stalk at some closed point, and an eigenvalue there. -/
+/-- A nonzero Weil sheaf punctually pure of weight `u` with weights at most `v` has `u ≤ v`. -/
 theorem IsPunctuallyPureOfWeight.le_of_hasWeightsAtMost {u v : ℝ}
     (hu : F.IsPunctuallyPureOfWeight ι u) (hv : F.HasWeightsAtMost ι v) (hF : ¬ IsZero F) :
     u ≤ v := by
@@ -271,9 +269,7 @@ theorem IsPunctuallyPureOfWeight.le_of_hasWeightsAtMost {u v : ℝ}
 /-- **Punctual cutoff for an already mixed sheaf.** Let `G` be a constructible Weil sheaf on a
 separated `k₀`-scheme of finite type, mixed of weights at most some `u`. If every eigenvalue
 `α` of the local Frobenius of `G` at every closed point `y` satisfies `|ι α| ≤ q_y ^ (v / 2)`,
-then `G` is mixed of weights at most `v`: a nonzero pure quotient of a mixed filtration has a
-nonzero stalk at some closed point, and its eigenvalues there are eigenvalues of `G`
-(blueprint: `lemma-bounding-weights-mixed-sheaf--1`). -/
+then `G` is mixed of weights at most `v`. -/
 theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] {u v : ℝ}
@@ -292,9 +288,7 @@ theorem IsMixedOfWeightsAtMost.of_hasWeightsAtMost
     · exact ⟨w', hpure.le_of_hasWeightsAtMost (hv.of_epi (cokernel.π i)) hz, hpure⟩
 
 /-- A sheaf with a finite filtration `0 = G 0 ↪ G 1 ↪ ⋯ ↪ G n ≅ F` whose successive quotients
-`coker φᵢ` are mixed of weights at most `w` is mixed of weights at most `w`: splice the filtrations
-of the quotients along the filtration of `F` (blueprint: `theorem-direct-image-mixed-sheaf--1`, the
-extension step along the abutment filtration). -/
+`coker φᵢ` are mixed of weights at most `w` is mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_filtration {n : ℕ} (G : Fin (n + 1) → WeilSheaf k₀ l X)
     (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ) (h0 : IsZero (G 0))
     (hlast : IsIsomorphic (G (Fin.last n)) F) [∀ i, Mono (φ i)]
@@ -319,7 +313,7 @@ variable {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
 namespace WeilSheaf
 
 /-- An exact functor between Weil sheaves which raises punctual purity weights by `c` raises
-mixed upper weight bounds by `c`: it carries a mixed filtration to a mixed filtration. -/
+mixed upper weight bounds by `c`. -/
 theorem IsMixedOfWeightsAtMost.map_add (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y) [Φ.Additive]
     [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] (c : ℝ)
     (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsPunctuallyPureOfWeight ι v →
@@ -335,7 +329,7 @@ theorem IsMixedOfWeightsAtMost.map_add (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k�
     exact ⟨v + c, by linarith, (hΦ v _ h).of_epi (PreservesCokernel.iso Φ (φ i)).hom⟩
 
 /-- An exact functor between Weil sheaves which preserves punctual purity of every weight
-preserves mixed upper weight bounds: it carries a mixed filtration to a mixed filtration. -/
+preserves mixed upper weight bounds. -/
 theorem IsMixedOfWeightsAtMost.map (Φ : WeilSheaf k₀ l X ⥤ WeilSheaf k₀ l Y) [Φ.Additive]
     [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
     (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsPunctuallyPureOfWeight ι v →
@@ -352,13 +346,12 @@ end Map
 
 /-- A bounded constructible Weil complex `K` is `ι`-*mixed of weights at most* `w` if its `b`-th
 cohomology sheaf `𝓗ᵇK` is mixed of weights at most `w + b`, for every `b`; equivalently, the
-bound in total degree `n` is `w + n` (blueprint: `definition-weights`). -/
+bound in total degree `n` is `w + n`. -/
 def WeilComplex.IsMixedOfWeightsAtMost (ι : PadicAlgCl l →+* ℂ) (K : WeilComplex k₀ l X)
     (w : ℝ) : Prop :=
   ∀ b : ℤ, ((WeilComplex.homologySheaf b).obj K).IsMixedOfWeightsAtMost ι (w + (b : ℝ))
 
-/-- Mixed upper bounds of Weil complexes are invariant under isomorphism
-(blueprint: `definition-weights`). -/
+/-- Mixed upper bounds of Weil complexes are invariant under isomorphism. -/
 theorem WeilComplex.IsMixedOfWeightsAtMost.of_iso {ι : PadicAlgCl l →+* ℂ}
     {K L : WeilComplex k₀ l X} {w : ℝ} (e : K ≅ L) (h : K.IsMixedOfWeightsAtMost ι w) :
     L.IsMixedOfWeightsAtMost ι w :=
@@ -368,24 +361,20 @@ namespace WeilComplex
 
 variable {ι : PadicAlgCl l →+* ℂ} {K L : WeilComplex k₀ l X} {w : ℝ}
 
-/-- Mixed upper bounds of Weil complexes are monotone in the bound
-(blueprint: `definition-weights`). -/
+/-- Mixed upper bounds of Weil complexes are monotone in the bound. -/
 theorem IsMixedOfWeightsAtMost.mono_weight {w' : ℝ} (h : K.IsMixedOfWeightsAtMost ι w)
     (hw : w ≤ w') : K.IsMixedOfWeightsAtMost ι w' :=
   fun b ↦ (h b).mono_weight (by linarith)
 
 /-- **Extension stability of complex weights.** If `K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` is a distinguished
-triangle of Weil complexes and `K₁`, `K₃` are mixed of weights at most `w`, then so is `K₂`: in
-each degree `j` the exact sequence `𝓗ʲK₁ ⟶ 𝓗ʲK₂ ⟶ 𝓗ʲK₃` exhibits `𝓗ʲK₂` as an extension of a
-subsheaf of `𝓗ʲK₃` by a quotient of `𝓗ʲK₁` (blueprint: `lemma-weights-exact-sequence`). -/
+triangle of Weil complexes and `K₁`, `K₃` are mixed of weights at most `w`, then so is `K₂`. -/
 theorem IsMixedOfWeightsAtMost.of_distTriang (T : Triangle (WeilComplex k₀ l X))
     (hT : T ∈ distTriang _) (h₁ : T.obj₁.IsMixedOfWeightsAtMost ι w)
     (h₃ : T.obj₃.IsMixedOfWeightsAtMost ι w) : T.obj₂.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ WeilSheaf.IsMixedOfWeightsAtMost.of_exact (homologySheaf_exact₂ T b hT) (h₁ b) (h₃ b)
 
 /-- **Retract stability of complex weights.** A direct summand, more generally a retract, of a
-Weil complex mixed of weights at most `w` is mixed of weights at most `w`: its cohomology sheaves
-are retracts of those of the ambient complex. -/
+Weil complex mixed of weights at most `w` is mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.of_retract (h : Retract K L) (hL : L.IsMixedOfWeightsAtMost ι w) :
     K.IsMixedOfWeightsAtMost ι w :=
   fun b ↦ (hL b).of_retract (h.map (homologySheaf b))
@@ -405,7 +394,7 @@ theorem IsMixedOfWeightsAtMost.of_shift {n : ℤ} (hK : (K⟦n⟧).IsMixedOfWeig
     (by push_cast; linarith)
 
 /-- A Weil sheaf placed in degree `a` is mixed of weights at most `w` as a complex if and only if
-the sheaf is mixed of weights at most `w + a` (blueprint: `definition-weights--6`). -/
+the sheaf is mixed of weights at most `w + a`. -/
 theorem isMixedOfWeightsAtMost_singleComplex_iff (a : ℤ) (G : WeilSheaf k₀ l X) :
     (singleComplex a G).IsMixedOfWeightsAtMost ι w ↔ G.IsMixedOfWeightsAtMost ι (w + a) := by
   refine ⟨fun h ↦ (h a).of_iso (homologySheafSingleComplexIso a G), fun h b ↦ ?_⟩
@@ -416,7 +405,7 @@ theorem isMixedOfWeightsAtMost_singleComplex_iff (a : ℤ) (G : WeilSheaf k₀ l
       (isZero_homologySheaf_singleComplex hb G) _
 
 /-- A Weil sheaf, viewed as a complex in degree zero, is mixed of weights at most `w` if and only
-if the sheaf is (blueprint: `definition-weights--6`). -/
+if the sheaf is. -/
 theorem isMixedOfWeightsAtMost_toComplex_iff (G : WeilSheaf k₀ l X) :
     (WeilSheaf.toComplex.obj G).IsMixedOfWeightsAtMost ι w ↔ G.IsMixedOfWeightsAtMost ι w := by
   rw [WeilSheaf.toComplex_obj, isMixedOfWeightsAtMost_singleComplex_iff]
@@ -424,12 +413,9 @@ theorem isMixedOfWeightsAtMost_toComplex_iff (G : WeilSheaf k₀ l X) :
 
 end WeilComplex
 
-/-- The direct-image weight assertion of the blueprint theorem
-`theorem-direct-image-mixed-sheaf--1`, for a single morphism `f : X ⟶ Y` of `k₀`-schemes: every
+/-- The direct-image weight assertion for a single morphism `f : X ⟶ Y` of `k₀`-schemes: every
 constructible Weil sheaf `F` on `X` that is mixed of weights at most `w` has `Rʳf₀!F` mixed of
-weights at most `w + r`, for every `r`. The reductions of the blueprint section
-`chap-The-Deligne-Laumon-theorem-in-general` propagate this assertion along compositions and
-open–closed decompositions. -/
+weights at most `w + r`, for every `r`. -/
 def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (ι : PadicAlgCl l →+* ℂ) {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
@@ -445,8 +431,7 @@ def HasDirectImageWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : �
 
 /-- The complex form of the direct-image weight assertion, for a single morphism `f : X ⟶ Y` of
 `k₀`-schemes: `Rf₀!` carries every Weil complex on `X` that is mixed of weights at most `w` to a
-Weil complex mixed of weights at most `w`, for every `w`
-(blueprint: `lemma-weight-bounds-partitions`). -/
+Weil complex mixed of weights at most `w`, for every `w`. -/
 def HasDirectImageComplexWeightBound (k₀ : Type u) [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (ι : PadicAlgCl l →+* ℂ) {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
@@ -503,11 +488,7 @@ open _root_.DerivedCategory in
 /-- **Passage from sheaves to complexes.** Let `Φ` be a triangulated functor between Weil
 complexes which carries every Weil sheaf mixed of weights at most `v`, placed in degree zero, to a
 Weil complex mixed of weights at most `v`, for every `v`. Then `Φ` carries every Weil complex
-mixed of weights at most `w` to a Weil complex mixed of weights at most `w`: by induction on the
-length of a bounded complex `K`, using the truncation triangle `τ_{<b}K ⟶ K ⟶ 𝓗ᵇ(K)[-b] ⟶`
-and the extension stability of complex weights. This is the output of the hypercohomology
-spectral sequence `E₂^{a,b} = 𝓗ᵃ(Φ 𝓗ᵇ(K)) ⇒ 𝓗ᵃ⁺ᵇ(Φ K)` used in the blueprint
-(blueprint: `lemma-finite-quasi-finite-direct-images--2`). -/
+mixed of weights at most `w` to a Weil complex mixed of weights at most `w`. -/
 theorem IsMixedOfWeightsAtMost.map_of_forall_toComplex
     (Φ : WeilComplex k₀ l X ⥤ WeilComplex k₀ l Y) [Φ.CommShift ℤ] [Φ.IsTriangulated]
     (hΦ : ∀ (v : ℝ) (G : WeilSheaf k₀ l X), G.IsMixedOfWeightsAtMost ι v →

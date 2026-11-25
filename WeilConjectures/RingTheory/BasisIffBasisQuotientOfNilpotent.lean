@@ -14,8 +14,18 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 /-!
 # Lifting bases over a local ring with nilpotent maximal ideal
 
-Source: Stacks Project, Algebra, Lemma 10.101.1, Tag 051F
-(blueprint: lem-weil-pbc-local-artinian-basis-when-flat).
+A family in a flat module over a local ring with nilpotent maximal ideal is a basis if and only
+if its reductions form a basis over the residue field.
+
+## Implementation details
+
+Linear independence of the lift follows from `Module.IsLocalRing.linearIndependent_of_flat`,
+without any finiteness assumption; spanning follows from nilpotent Nakayama applied to the span
+of the family.
+
+## References
+
+* [Stacks, Tag 051F] (Algebra, Lemma 10.101.1)
 -/
 
 @[expose] public section
@@ -27,22 +37,7 @@ namespace Module
 /-- A family in a flat module over a local ring with nilpotent maximal ideal is a basis
 if and only if its reductions form a basis over the residue field. No finite generation
 of the module or finiteness of the index type is assumed.
-
-Source: Stacks Project, Algebra, Lemma 10.101.1, Tag 051F
-(blueprint: lem-weil-pbc-local-artinian-basis-when-flat).
-
-Proof: Identify (R/m) tensor M with M/mM by
-TensorProduct.quotTensorEquivQuotSMul, upgraded to an R/m-linear equivalence using
-surjectivity of R -> R/m. A basis of M reduces to a basis by Basis.baseChange and
-this equivalence. Conversely, transport a basis of M/mM to (R/m) tensor M.
-Mathlib's Module.IsLocalRing.linearIndependent_of_flat shows that the lifted
-family x is R-linearly independent, without any finiteness assumption.
-Let L be the R-span of x. Since R -> R/m is surjective, the R-span of the reduced
-family is also all of M/mM (Submodule.restrictScalars_span). Thus the image of
-L under M -> M/mM is all of M/mM, and the induced map L/mL -> M/mM is surjective.
-Apply nilpotent Nakayama (lem-weil-pbc-nakayama-nilpotent) to the inclusion L -> M
-to obtain L = M. Basis.mk combines this spanning assertion with independence,
-and its value at each index is x at that index. -/
+of the module or finiteness of the index type is assumed. -/
 theorem basis_iff_basisQuotient_of_nilpotent
     {R : Type u} [CommRing R] [IsLocalRing R]
     {M : Type v} [AddCommGroup M] [Module R M] [Module.Flat R M]

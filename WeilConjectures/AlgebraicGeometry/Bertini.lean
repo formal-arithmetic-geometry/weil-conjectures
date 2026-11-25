@@ -30,7 +30,7 @@ Galois Frobenius of `X`.
 
 ## Implementation notes
 
-The blueprint lemma is stated over an arbitrary algebraically closed field `k`, with a
+The statement in the literature is over an arbitrary algebraically closed field `k`, with a
 complement on descent when `k = 𝔽̄_q`. Only the case `k = 𝔽̄_q` is used, and it is stated here
 directly for the geometric fiber of a scheme `X₀` over `𝔽_q`: "defined over a finite extension
 `𝔽_{qᵐ}`" is rendered as stability of `C` under the `m`-th power of the geometric Galois Frobenius

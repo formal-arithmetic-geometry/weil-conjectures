@@ -17,8 +17,7 @@ For a non-zero-divisor `a` of a commutative ring `R` and `J = (a)`, each graded 
 induces `R / (a) ≃ J^r / J^{r+1}`.
 
 Applied to `J = (x^m) ⊂ k[x]` this is the computation of the normal cone of the nonreduced point
-`Z = V(x^m) ⊂ 𝔸¹` in blueprint `example-normal-cone-point`: every `I^r/I^{r+1}` is free of rank
-one over `𝒪_Z = k[x]/(x^m)`.
+`Z = V(x^m) ⊂ 𝔸¹`: every `I^r/I^{r+1}` is free of rank one over `𝒪_Z = k[x]/(x^m)`.
 
 ## Main results
 
@@ -83,9 +82,8 @@ namespace Polynomial
 
 variable {R : Type u} [CommRing R]
 
-/-- **Normal cone of a nonreduced point** (blueprint `example-normal-cone-point`): for
-`Z = V(x^m) ⊂ 𝔸¹` with ideal `I = (x^m)`, every graded piece `I^r / I^{r+1}` is free of rank one
-over `𝒪_Z = R[x]/(x^m)`. -/
+/-- **Normal cone of a nonreduced point**: for `Z = V(x^m) ⊂ 𝔸¹` with ideal `I = (x^m)`,
+every graded piece `I^r / I^{r+1}` is free of rank one over `𝒪_Z = R[x]/(x^m)`. -/
 noncomputable def associatedGradedPieceEquivXPow (m r : ℕ) :
     (R[X] ⧸ Ideal.span {(X : R[X]) ^ m}) ≃ₗ[R[X]]
       Ideal.associatedGradedPiece (Ideal.span {(X : R[X]) ^ m}) r :=

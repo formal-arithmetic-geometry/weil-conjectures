@@ -17,7 +17,7 @@ filtration by lisse Weil subsheaves with irreducible lisse quotients
 (`AlgebraicGeometry.WeilSheaf.IsLisse.exists_filtration_isIrreducibleLisse`); each quotient is an
 irreducible constituent, hence punctually pure
 (`AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel`), so the sheaf is
-mixed. This is the curve case of `theorem-real-constructible-sheaves-are-mixed--1`.
+mixed. This is the curve case of the theorem that real constructible sheaves are mixed.
 -/
 
 @[expose] public section
