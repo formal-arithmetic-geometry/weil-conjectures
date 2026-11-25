@@ -734,7 +734,7 @@ private theorem exceptionalKey_rational
   rationalExceptionalInverseImage_exists (hcd := hcd) Λ ℓ k g hr
 
 /-- The canonical Brown right adjoint has finite cohomological amplitude on bounded
-constructible inputs.  -/
+constructible inputs. -/
 private theorem canonical_isBounded_of_key (hkey : ExceptionalKey Λ g)
     (hF : (ellAdicLocalizingLowerStar Λ ℓ g hΛ).IsLeftAdjoint)
     (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
