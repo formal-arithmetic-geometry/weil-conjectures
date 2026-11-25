@@ -53,7 +53,7 @@ module imports all of them.
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure`: if `BC(p, Λ, q')` holds universally for
   `q' < q` and `BC(p, Λ, q)` fails, a counterexample over a field exists.
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`: the same
-  conclusion when `BC(p, Λ, q)` only fails after some base change, as in the blueprint.
+  conclusion when `BC(p, Λ, q)` only fails after some base change.
 - `AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a`: if `S` is separated, the base change
   `S' ⟶ S` of such a counterexample is affine.
 

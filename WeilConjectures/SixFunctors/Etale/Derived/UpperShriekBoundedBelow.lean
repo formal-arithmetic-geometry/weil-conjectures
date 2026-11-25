@@ -21,8 +21,10 @@ unbounded derived categories has finite cohomological amplitude: it sends `D^{�
 exceptional inverse image `Rf^!`, sends `D^{≥ n}` into `D^{≥ n - N}` and preserves bounded below
 objects [SGA 4, Exp. XVIII, 3.1.7].
 
-The amplitude bound is a uniform, unbounded variant of blueprint
-`theorem-results-from-etale-theory--5`, bounded by the fibres of the compactification:
+## Implementation details
+
+The amplitude bound is uniform, holds on the unbounded derived categories, and is bounded by the
+fibres of the compactification rather than those of `f`:
 
 * the geometric fibres of the proper morphism `g` have uniformly bounded dimension `e`, as `Y` is
   quasi-compact (`AlgebraicGeometry.exists_topologicalKrullDim_le_of_isPullback_of_compactSpace`);
@@ -56,12 +58,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- At a geometric point `t` of `T`, the higher direct images `R^q p_* G` along a proper
 morphism `p : S ⟶ T` vanish for `q > 2d` as soon as the geometric fibre `S ×_T Spec Ω` has
-dimension at most `d`: by proper base change
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`) they are the
-higher direct images along the geometric fibre
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`). This is the argument of
-`AlgebraicGeometry.Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper` with an
-explicit dimension bound. -/
+dimension at most `d`. -/
 theorem isZero_upperStar_rightDerived_lowerStar_of_isProper_of_le (hΛ : IsAddTorsion Λ)
     {S T : Scheme.{u}} (p : S ⟶ T) [IsProper p] (t : T) (d : ℕ)
     (hd : topologicalKrullDim ↥(pullback p (T.algClosurePoint t) : Scheme.{u}) ≤
@@ -93,11 +90,7 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_isProper_of_le (hΛ : IsAddTo
 /-- **Proper pushforward has finite cohomological dimension over a quasi-compact base**, for a
 coefficient ring `Λ` which is torsion as an additive group: for `p : S ⟶ T` proper with `T`
 quasi-compact there is `d` with `R^q p_* G = 0` for every étale sheaf `G` of `Λ`-modules on `S`
-and every `q > d`. The geometric fibres of `p` have dimension bounded by some `e`
-(`AlgebraicGeometry.exists_topologicalKrullDim_le_of_isPullback_of_compactSpace`), and one takes
-`d = 2e` (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerived_lowerStar_of_isProper_of_le`);
-geometric points detect zero sheaves
-(`AlgebraicGeometry.Etale.isZero_of_forall_isZero_upperStar_algClosurePoint`). -/
+and every `q > d`. -/
 theorem exists_isZero_rightDerived_lowerStar_of_isProper_of_compactSpace (hΛ : IsAddTorsion Λ)
     {S T : Scheme.{u}} (p : S ⟶ T) [IsProper p] [CompactSpace T] :
     ∃ d : ℕ, ∀ (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
@@ -107,15 +100,10 @@ theorem exists_isZero_rightDerived_lowerStar_of_isProper_of_compactSpace (hΛ : 
   exact isZero_upperStar_rightDerived_lowerStar_of_isProper_of_le Λ hΛ p t e
     (he _ _ _ _ (IsPullback.of_hasPullback p (T.algClosurePoint t))) G q hq
 
-/-- **Finite cohomological amplitude of `Rf_!`** over a quasi-compact base, a uniform
-unbounded variant of blueprint `theorem-results-from-etale-theory--5` with the fibres of the
-compactification in place of those of `f`. For a finite coefficient ring `Λ` and a
-compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` with `Y` quasi-compact, there is `N`
-such that the derived lower shriek `Rf_! = Rg_* ∘ D(i_!)` on the unbounded derived categories
-sends objects `≤ n` to objects `≤ n + N`, for every `n`. The extension by zero is exact, and
-`Rg_*` has amplitude `N = 2e` for `e` a bound on the dimension of the geometric fibres of `g`
-(`AlgebraicGeometry.Etale.exists_isZero_rightDerived_lowerStar_of_isProper_of_compactSpace`,
-`CategoryTheory.Functor.isLE_rightDerivedFunctor_obj`). -/
+/-- **Finite cohomological amplitude of `Rf_!`** over a quasi-compact base. For a finite
+coefficient ring `Λ` and a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f` with `Y`
+quasi-compact, there is `N` such that the derived lower shriek `Rf_! = Rg_* ∘ D(i_!)` on the
+unbounded derived categories sends objects `≤ n` to objects `≤ n + N`, for every `n`. -/
 theorem exists_isLE_rightDerivedLowerShriekOfCompactification_obj [Finite Λ] {X Y : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) [CompactSpace Y] :
     ∃ N : ℕ, ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ),
@@ -132,9 +120,7 @@ theorem exists_isLE_rightDerivedLowerShriekOfCompactification_obj [Finite Λ] {X
 For a finite coefficient ring `Λ`, `f : X ⟶ Y` admitting a compactification with `Y`
 quasi-compact, and any right adjoint `G` of the derived lower shriek `Rf_!` on the unbounded
 derived categories (such as the exceptional inverse image `Rf^!`), `G` sends bounded below objects
-to bounded below objects: if `Rf_!` sends `D^{≤ n}` into `D^{≤ n + N}`
-(`AlgebraicGeometry.Etale.exists_isLE_rightDerivedLowerShriekOfCompactification_obj`), then `G`
-sends `D^{≥ n}` into `D^{≥ n - N}` (`CategoryTheory.Adjunction.isGE_obj_of_isLE`). -/
+to bounded below objects. -/
 theorem plus_obj_of_rightDerivedLowerShriek_adjunction [Finite Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
     {G : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤

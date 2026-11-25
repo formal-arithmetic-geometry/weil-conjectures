@@ -62,7 +62,7 @@ description it is a computation with pullbacks of schemes.
 
 The main application is to a refinement `r : c.Refinement d` of compactifications of a
 morphism `f : S ⟶ Y` whose square over `S` is cartesian; this is part of the data of a
-refinement of dense compactifications in the blueprint, and it is the geometric input for
+refinement of dense compactifications, and it is the geometric input for
 the comparison of the two derived lower shrieks attached to `c` and to `d`.
 
 ## Main definitions
@@ -290,15 +290,7 @@ set_option backward.defeqAttrib.useBackward true in
 include hk in
 /-- The base change map `q_* ⋙ k^* ⟶ j^*` built from the counit of `q^* ⊣ q_*` agrees with
 the map `Etale.openImmersionRestrictionBaseChange` induced by the comparison of site
-functors.
-
-Both are mates, under the adjunctions `j^* ⊣ j_*` and `k^* ⊣ k_*`, of natural
-transformations `j_* ⋙ q_* ⟶ k_*`, and `CategoryTheory.mateEquiv` is a bijection, so it
-suffices to identify those with the composition isomorphism `Etale.lowerStarComp`. For the
-counit description this is formal: it is `CategoryTheory.iterated_mateEquiv_conjugateEquiv`
-together with the construction of `Etale.upperStarComp` as a conjugate of
-`Etale.lowerStarComp`. For the site description it is a computation on the small étale
-sites, where all functors and both adjunctions come from the sites. -/
+functors. -/
 lemma Etale.upperStarBaseChange_eq :
     Etale.upperStarBaseChange A j q k hk =
       Functor.whiskerLeft (q)_*[A] (Etale.upperStarIsoOpenImmersionRestriction A k).hom ≫
@@ -528,8 +520,7 @@ noncomputable def Compactification.Refinement.openImmersionLowerShriekBaseChange
   Etale.openImmersionLowerShriekBaseChange A c.i r.hom d.i r.i_hom
 
 /-- If the square of a refinement `r` over `S` is cartesian, i.e. `r.hom ⁻¹ (S) = S`, then
-the base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` is an isomorphism.
-(blueprint: `BA43-DENSE-DATA`) -/
+the base change comparison `(c.i)_! ⟶ (d.i)_! ⋙ (r.hom)^*` is an isomorphism. -/
 lemma Compactification.Refinement.isIso_openImmersionLowerShriekBaseChange
     (hcart : IsPullback c.i (𝟙 S) r.hom d.i) :
     IsIso (r.openImmersionLowerShriekBaseChange A) :=

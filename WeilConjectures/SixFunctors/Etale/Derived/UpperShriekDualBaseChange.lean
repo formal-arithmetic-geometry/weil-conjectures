@@ -28,9 +28,10 @@ inverse is the *dual base change isomorphism*
 ```
   β^∨ : Rf^! Rg_* ≅ Rg'_* Rf'^!
 ```
-of blueprint `prop-exc-ambient-dual-base-change`. Here the right adjoint `Rf^!` of `Rf_!` exists
-unconditionally (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`), so the
-ambient exceptional right adjoint datum of the blueprint is automatic.
+Here the right adjoint `Rf^!` of `Rf_!` exists unconditionally
+(`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`).
+
+## Implementation details
 
 The pro-étale analogue is not stated: the pro-étale compact-support base change
 `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekBaseChangeMap` is only known to be invertible
@@ -61,16 +62,11 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- Blueprint `prop-exc-ambient-dual-base-change`: Dual base change for the ambient right
-adjoint is formal.
-
-For a cartesian square `g' ≫ f = f' ≫ g` with `f`, `f'` admitting compactifications (and `f'`
-quasi-compact) and `g` arbitrary, and torsion coefficients `Λ`, the right-adjoint mate
-`β^∨ : Rf^! Rg_* ⟶ Rg'_* Rf'^!` of the inverse of the compact-support base change isomorphism
-is an isomorphism. It is the inverse of the exchange isomorphism
-`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeMap`, the conjugate of
-`Ex_!`. In the diagrammatic order of composition of functors used here, it is
-`Rg_* ⋙ Rf^! ≅ Rf'^! ⋙ Rg'_*`. -/
+/-- **Dual base change.** For a cartesian square `g' ≫ f = f' ≫ g` with `f`, `f'` admitting
+compactifications (and `f'` quasi-compact) and `g` arbitrary, and torsion coefficients `Λ`, the
+dual base change isomorphism `β^∨ : Rf^! Rg_* ≅ Rg'_* Rf'^!`: the right-adjoint mate of the inverse
+of the compact-support base change isomorphism. In the diagrammatic order of composition of
+functors used here, it is `Rg_* ⋙ Rf^! ≅ Rf'^! ⋙ Rg'_*`. -/
 noncomputable def rightDerivedUpperShriekDualBaseChangeIso (sq : IsPullback g' f' f g) :
     R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] ≅
       R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=

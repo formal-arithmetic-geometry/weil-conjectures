@@ -21,12 +21,12 @@ projection map followed by the counit; at `M = Λ_Y` it is the canonical map
 `θ_{f,N} : ω_f ⊗ᴸ Lf^* N ⟶ G N`, `ω_f = G Λ_Y`
 (`AlgebraicGeometry.Etale.lowerShriekRightAdjointUnitTensorMap`).
 This file derives, for any coefficient category, the formal properties of `τ` and its behaviour
-under composition used for cohomologically smooth morphisms
-(`lem-pur-co-smooth-composition`, `lem-pur-co-smooth-etale-locality`), from two coherence
+under composition used for cohomologically smooth morphisms (composition and étale locality),
+from two coherence
 properties of the projection map: its compatibility with the associativity of `⊗ᴸ`
 (`AlgebraicGeometry.Etale.ProjectionMapAssociativity`) and with a composition isomorphism
 `Rh_! ≅ Rf_! ⋙ Rg_!` (`CategoryTheory.Adjunction.ProjectionCompCompatible`). Both hold for
-finite coefficients (`proposition-composition-base-change-rf-shriek--1`).
+finite coefficients.
 
 ## Main statements
 
@@ -249,10 +249,7 @@ theorem lowerShriekRightAdjointTensorMap_comp
 
 /-- **Composition of the canonical maps.** For `h = f ≫ g` with a composition isomorphism
 compatible with the projection maps and an associative projection map of `f`: if `ω_g = Gg Λ`
-is invertible and `θ_{g, K}` and `θ_{f, Lg^* K}` are isomorphisms, then so is `θ_{h, K}`. The
-tensor map of `h` at `(Λ, K)` factors through `τ_f(ω_g, Lg^* K)` and `Gf θ_{g, K}`; the first
-is an isomorphism since `ω_g` is invertible and `θ_f` is invertible at
-`Lg^* K ⊗ᴸ ω_g ≅ ω_g ⊗ᴸ Lg^* K` (`lem-pur-co-smooth-composition`). -/
+is invertible and `θ_{g, K}` and `θ_{f, Lg^* K}` are isomorphisms, then so is `θ_{h, K}`. -/
 theorem isIso_lowerShriekRightAdjointUnitTensorMap_comp (hassoc : ProjectionMapAssociativity A f)
     (K : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
     (hf : IsIso (lowerShriekRightAdjointUnitTensorMap adjf ((L((g)^*[A])).obj K)))
@@ -287,7 +284,7 @@ theorem isIso_lowerShriekRightAdjointUnitTensorMap_comp (hassoc : ProjectionMapA
 /-- **Descent of the canonical maps along a composite.** For `h = u ≫ f` with a composition
 isomorphism compatible with the projection maps and an associative projection map of `u`: if
 `θ_u` is an isomorphism at every object and `θ_{h, K}` is an isomorphism, then so is
-`Gu θ_{f, K}` (`lem-pur-co-smooth-etale-locality`, step 3). -/
+`Gu θ_{f, K}`. -/
 theorem isIso_map_lowerShriekRightAdjointUnitTensorMap_of_comp
     (hassoc : ProjectionMapAssociativity A f)
     (hf : ∀ P, IsIso (lowerShriekRightAdjointUnitTensorMap adjf P))
@@ -318,8 +315,7 @@ variable {U X : Scheme.{u}} {u : U ⟶ X} [HasCompactification u] [IsIso (projec
     _root_.DerivedCategory (Sheaf U.smallEtaleTopology A)} (adj : R(u)_![A] ⊣ G)
 
 /-- If `θ_u` is an isomorphism at every object and `ω_u = G Λ` is invertible, then the right
-adjoint `G` of `Ru_!` (for finite coefficients, `Ru^!`) reflects isomorphisms to `Lu^*`:
-`G ≅ ω_u ⊗ᴸ Lu^*(-)`, and tensoring with an invertible object reflects isomorphisms. -/
+adjoint `G` of `Ru_!` (for finite coefficients, `Ru^!`) reflects isomorphisms to `Lu^*`. -/
 theorem isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
     (hu : ∀ P, IsIso (lowerShriekRightAdjointUnitTensorMap adj P))
     (hω : IsInvertible (G.obj (𝟙_ _)))

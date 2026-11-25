@@ -62,40 +62,39 @@ X ------p------>  S
 When `S` is separated the base change `a : S' ⟶ S` is affine, see
 `AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a`. -/
 structure Etale.FieldFailure (q : ℤ) where
-  /-- the affine base of the counterexample -/
+  /-- The affine base of the counterexample -/
   S' : Scheme.{u}
   [isAffine : IsAffine S']
-  /-- the base change morphism -/
+  /-- The base change morphism -/
   a : S' ⟶ S
-  /-- the total space of the base change of `p` -/
+  /-- The total space of the base change of `p` -/
   X' : Scheme.{u}
-  /-- the base change of `p` -/
+  /-- The base change of `p` -/
   p' : X' ⟶ S'
-  /-- the morphism covering `a` -/
+  /-- The morphism covering `a` -/
   b : X' ⟶ X
   /-- `p'` is the base change of `p` along `a` -/
   isPullback : IsPullback b p' p a
-  /-- the field over which the failure happens -/
+  /-- The field over which the failure happens -/
   K : Type u
   [field : Field K]
-  /-- the point of `S'` -/
+  /-- The point of `S'` -/
   g : Spec (CommRingCat.of K) ⟶ S'
-  /-- the fibre of `p'` over that point -/
+  /-- The fibre of `p'` over that point -/
   Y' : Scheme.{u}
-  /-- the projection of the fibre to the point -/
+  /-- The projection of the fibre to the point -/
   e : Y' ⟶ Spec (CommRingCat.of K)
-  /-- the projection of the fibre to `X'` -/
+  /-- The projection of the fibre to `X'` -/
   h : Y' ⟶ X'
-  /-- the fibre square is Cartesian -/
+  /-- The fibre square is Cartesian -/
   isPullback_fibre : IsPullback e h g p'
-  /-- the coefficient sheaf witnessing the failure -/
+  /-- The coefficient sheaf witnessing the failure -/
   F : Sheaf (Spec (CommRingCat.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
-  /-- the base-change map is not an isomorphism -/
+  /-- The base-change map is not an isomorphism -/
   not_isIso : ¬ IsIso (Etale.baseChangeHomologyMap Λ isPullback_fibre q F)
 
 variable {Λ p} in
-/-- Blueprint `lemma-reduction-field--1` (last clause): if `S` is separated, the base change
-`S' ⟶ S` of a counterexample over a field is affine, since `S'` is affine. -/
+/-- If `S` is separated, the base change `S' ⟶ S` of a counterexample over a field is affine. -/
 lemma Etale.FieldFailure.isAffineHom_a [S.IsSeparated] {q : ℤ} (F : Etale.FieldFailure Λ p q) :
     IsAffineHom F.a :=
   have := F.isAffine
