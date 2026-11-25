@@ -10,21 +10,29 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.LocalRing.RingHom.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 
+/-!
+# Completion maps induced by local homomorphisms
+
+A local homomorphism of local rings induces a homomorphism of their maximal-ideal-adic
+completions.
+
+## Implementation details
+
+The map is built with `AdicCompletion.liftRingHom` from the induced maps on the quotients by
+powers of the maximal ideals.
+
+## References
+
+* [Stacks, Tag 07ED]
+-/
+
 @[expose] public section
 
 universe u v
 
 namespace RingHom
 
-/-- A local homomorphism induces the coordinatewise homomorphism of maximal-ideal completions.
-Source: Stacks Project, Tag 07ED, the induced map between completions.
-(blueprint: lem-weil-pbc-fs-adic-completion-map-local)
-
-Proof: Locality sends the source maximal ideal into the target maximal ideal and therefore
-sends every power into the corresponding power. Lift the ring map to each quotient and
-compose with the source completion's evaluation. These maps commute with quotient
-projections; the inverse-limit universal property `AdicCompletion.liftRingHom` constructs
-the completion map, and its evaluation formula gives the stated compatibility. -/
+/-- A local homomorphism induces the coordinatewise homomorphism of maximal-ideal completions. -/
 theorem exists_adicCompletion_map_of_local
     {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [IsLocalRing A] [IsLocalRing B]

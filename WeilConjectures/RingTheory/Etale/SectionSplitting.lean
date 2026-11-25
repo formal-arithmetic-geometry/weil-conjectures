@@ -24,8 +24,7 @@ variable {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
 
 /-- Let `s : S →ₐ[R] R` be a section of an `R`-algebra `S` and `e ∈ S` an idempotent with
 `ker s = (1 - e)` (which forces `s e = 1`). Then `s` induces an `R`-algebra isomorphism
-`S[1/e] ≅ R` sending `x / 1` to `s x`.
-(blueprint: `lem-weil-pbc-etale-section-localization`) -/
+`S[1/e] ≅ R` sending `x / 1` to `s x`. -/
 theorem exists_awayAlgEquiv_of_isIdempotentElem (s : S →ₐ[R] R) {e : S}
     (he : IsIdempotentElem e) (hker : RingHom.ker s = Ideal.span {1 - e}) :
     ∃ φ : Localization.Away e ≃ₐ[R] R, ∀ x : S, φ (algebraMap S _ x) = s x := by

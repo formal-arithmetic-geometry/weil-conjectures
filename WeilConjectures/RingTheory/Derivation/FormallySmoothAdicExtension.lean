@@ -15,9 +15,22 @@ import Mathlib.Algebra.DualNumber
 /-!
 # Extending derivations along formally smooth adic maps
 
-Source: Stacks Project, More on Algebra, Lemma 15.50.1 (Tag 07PL), using
-Lemma 15.38.5 (Tag 07NJ), in the generality of its dual-number proof
-(blueprint: lem-weil-pbc-fs-adic-lift-derivation).
+An absolute derivation of `R` extends along an `R`-algebra `S` that is `n`-adically complete
+and formally smooth for the `n`-adic topology.
+
+## Implementation details
+
+Absolute derivations are represented by `Derivation ℤ`: additivity implies ℤ-linearity, and
+the Leibniz identity implies vanishing at one. The proof needs no locality or Noetherian
+hypotheses. It uses the dual numbers `A = DualNumber S`, with `R`-algebra structure
+`r ↦ φ(r) + ε φ(D r)`, checks that `A` is complete for `n A` with `⋂ (ε S + (n A)^m) = ε S`,
+and lifts the identity of `S = A/εS` to a section `σ : S → A` by formal smoothness. Writing
+`σ(s) = s + ε D'(s)` gives the extension `D'`.
+
+## References
+
+* [Stacks, Tag 07PL]
+* [Stacks, Tag 07NJ]
 -/
 
 @[expose] public section
@@ -102,37 +115,7 @@ private theorem dual_mem_map {S : Type v} [CommRing S]
 namespace Derivation
 
 /-- An absolute derivation of `R` extends to an absolute derivation of an `R`-algebra `S`
-that is `n`-adically complete and formally smooth for the `n`-adic topology.
-Absolute derivations are represented by `Derivation ℤ`: additivity implies ℤ-linearity,
-and the Leibniz identity implies vanishing at one.
-Source: Stacks Project, More on Algebra, Lemma 15.50.1 (Tag 07PL), using Tag 07NJ.
-(blueprint: lem-weil-pbc-fs-adic-lift-derivation)
-
-Proof (the node's six steps, without locality or Noetherian hypotheses):
-1. Use Mathlib's concrete dual numbers `A = DualNumber S = TrivSqZeroExt S S`:
-   elements are pairs `(a,b)` representing `a + ε b`, with componentwise addition
-   and multiplication `(a,b)(c,d) = (ac,ad + bc)`. No polynomial division is needed.
-   The ideal `J = ε S` has square zero; the projection `q(a + ε b) = a` has kernel `J`
-   and identifies `A/J` with `S`.
-2. Give `A` its `R`-algebra structure through `ψ(r) = φ(r) + ε φ(D(r))`, where
-   `φ = algebraMap R S`. Additivity and the Leibniz rule make `ψ` a ring map:
-   `D(1) = 0`, and the ε-coefficient of `ψ(a)ψ(b)` is `φ(D(ab))`. Since `qψ = φ`,
-   the identity of `S = A/J` is an `R`-algebra map (def-weil-pbc-algebra-hom-quotient).
-3. Put `I = n A`. As an `S`-module, `n^m A` consists of pairs with both coordinates
-   in `n^m`: project to get the forward implication, and write a pair as `a • 1 + b • ε`
-   for the reverse. Both coordinates of an `n`-adic Cauchy sequence converge in `S`;
-   their pair is a limit in `A`. Separatedness also holds coordinatewise. Mathlib's
-   `IsAdicComplete.map_algebraMap_iff` changes scalars to give `I`-adic completeness.
-4. We have `J² = 0 ⊆ I`. Also `J + I^m` consists of pairs with first coordinate in
-   `n^m`; separatedness of `S` gives `⋂ n^m = 0`, hence `⋂ (J + I^m) = J`.
-   Finally the identity of `S = A/J` maps `n` into `q(I) = n`.
-5. Apply lem-weil-pbc-fs-adic-lift-into-complete (Tag 07NJ), using
-   theorem-finite-etale-covers-proper-henselian--2 and the completeness and closedness just checked.
-   It gives an `R`-algebra map `σ : S → A` with `qσ = id`. The discrete lifting
-   condition alone does not directly apply to this identity map unless `n` is nilpotent.
-6. Write `σ(s) = s + ε D'(s)`. Additivity and multiplicativity of `σ` show that `D'`
-   is additive and satisfies the Leibniz rule. The equality `σφ = ψ` gives
-   `D'(φ(r)) = φ(D(r))` by comparing ε-coefficients. -/
+that is `n`-adically complete and formally smooth for the `n`-adic topology. -/
 theorem exists_extension_of_formallySmoothAdic
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     (n : Ideal S) [IsAdicComplete n S] (h : Algebra.FormallySmoothAdic R S n)

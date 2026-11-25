@@ -13,8 +13,18 @@ import Mathlib.RingTheory.HopkinsLevitzki
 /-!
 # Surjectivity of a finite coefficient tensor map modulo the model maximal ideal
 
-Source: Stacks Project, Remark 07NS (parts (1), (3)), finite nilpotent reduction.
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-reduction-surjective)
+For local rings with `A` finite over `A₀`, surjectivity of `C → B / m_A B` implies surjectivity
+of the tensor map `C ⊗[A₀] A → B / m_C B`.
+
+## Implementation details
+
+The closed fibre `A / m₀ A` is Artinian local, so `m_A ^ N ⊆ m₀ A` for some `N > 0`. Induction
+gives `B = F(D) + m_A ^ N B`, and `m_A ^ N B ⊆ m₀ B ⊆ m_C B` because `γ` is local. Neither
+completeness nor flatness is used.
+
+## References
+
+* [Stacks, Remark 07NS] (1), (3)
 -/
 
 @[expose] public section
@@ -60,22 +70,8 @@ private theorem finite_local_power
   have hle := Ideal.map_le_iff_le_comap.mp (le_of_eq hm)
   simpa only [← RingHom.ker_eq_comap_bot, Ideal.mk_ker] using hle
 
-/-- Surjectivity on the closed fibre implies surjectivity modulo m_C B.
-Source: Stacks Project, Remark 07NS (parts (1), (3)), the nilpotent Nakayama argument.
-(blueprint: lem-weil-pbc-finite-coefficient-tensor-reduction-surjective)
-
-Proof:
-1. Finiteness makes A/m₀A a finite-dimensional k₀-algebra, hence Artinian local.
-   Nilpotence of its maximal ideal gives m_A^N ⊆ m₀A for some positive N.
-2. Surjectivity of C → B/m_A B says B = ψ(C) + m_A B. The image of F is a
-   subring containing ψ(C) and φ(A), since F(c ⊗ 1) = ψ(c) and F(1 ⊗ a) = φ(a).
-   For b in m_A^i B expand b as a finite sum φ(x_j)b_j. Decompose each b_j as
-   ψ(c_j) plus an element of m_A B; the first terms belong to F(D), the second
-   to m_A^(i+1) B. Induction gives B = F(D) + m_A^N B.
-3. Compatibility ψγ = φα sends m₀B into m_C B because γ is local. Hence
-   m_A^N B ⊆ m₀B ⊆ m_C B. Every class in B/m_C B is therefore the image of
-   some tensor under F. Neither completeness nor flatness is used.
--/
+/-- If `C → B / m_A B` is surjective and `A` is finite over `A₀`, then `C ⊗[A₀] A → B / m_C B`
+is surjective. -/
 theorem finite_coefficient_tensor_reduction_surjective
     {A₀ : Type u} {A : Type v} {B : Type w} {C : Type z}
     [CommRing A₀] [CommRing A] [CommRing B] [CommRing C]

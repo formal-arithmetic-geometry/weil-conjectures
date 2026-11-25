@@ -23,8 +23,23 @@ import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 /-!
 # Compatible Cohen presentations of complete local homomorphisms
 
-Source: Stacks Project, Lemma 07NN and the proof of Proposition 07NQ
-(blueprint: lem-weil-pbc-complete-local-map-cohen-presentation).
+A local homomorphism of complete Noetherian local rings admits compatible presentations as
+quotients of power-series rings over fields or Cohen rings, linked by a flat map with regular
+closed fibre.
+
+## Implementation details
+
+Both rings are presented by power-series rings `R` and `S₀`. The composite `R → A → B` lifts
+to `S₀` by formal smoothness, since the kernel of `S₀ → B` is closed. Adjoining variables `Y`
+and setting `u(Xᵢ) = φ(Xᵢ) + Yᵢ` gives a map `u : R → S` sending the parameters of `R`, followed
+by further variables, to a regular system of parameters of `S` (starting with `p` in the Cohen
+case). Flatness and regularity of the closed fibre follow because an initial segment of a
+regular system of parameters is a regular sequence with regular quotient.
+
+## References
+
+* [Stacks, Tag 07NN]
+* [Stacks, Tag 07NQ], for the choice of the first parameter in positive residue characteristic
 -/
 
 @[expose] public section
@@ -59,31 +74,8 @@ private theorem flat_and_regular_fibre_of_parameters
   exact ⟨hflat, hquot⟩
 
 /-- A complete local homomorphism admits compatible power-series presentations with a flat
-map carrying parameters into parameters and regular closed fibre. Source: Stacks, Lemma 07NN;
-the first parameter in positive residue characteristic is chosen as in Proposition 07NQ
-(blueprint: lem-weil-pbc-complete-local-map-cohen-presentation).
-
-Proof:
-1. Use `lem-weil-pbc-cohen-power-series-presentation` to present A and B by power-series
-rings R and S₀ over fields or Cohen rings. By
-`lem-weil-pbc-power-series-field-cohen-regular-complete` they are regular, complete and local;
-the surjection S₀ → B has kernel J contained in the maximal ideal.
-2. Lift fq to φ : R → S₀ using `lem-weil-pbc-field-cohen-power-series-formally-smooth` and
-`lem-weil-pbc-fs-adic-lift-into-complete`. The kernel J is closed, since completeness of B
-makes the intersection of its maximal-ideal powers zero. The lift maps maximal ideals into
-maximal ideals.
-3. Adjoin variables Y to S₀ and let S = Λ_B[[Y,Z]]. Set v(Y) = 0 and set
-u(X_i) = φ(X_i) + Y_i, using `lem-weil-pbc-power-series-adic-evaluation`.
-The uniqueness clause of that lemma gives vu = fq; quotienting the Y variables uses
-`lem-weil-pbc-power-series-quotient-variables`.
-4. The images of the parameters of R, followed by the Z variables, generate the maximal
-ideal of S: they generate each φ(X_i), hence each Y_i. Their number equals dim S. In the
-Cohen case the list starts with p. Thus the images extend to a regular system of parameters.
-5. By `lem-weil-pbc-regular-local-generators-regular-sequence`, the initial segment is a
-regular sequence and its quotient is regular local. Apply `lem-weil-pbc-flat-over-regular`
-to obtain flatness. The quotient is S modulo the extension of the maximal ideal of R.
-This includes the empty parameter list.
--/
+map carrying parameters into parameters and regular closed fibre. In positive residue
+characteristic `p`, the parameter list of the source starts with `p`. -/
 theorem exists_complete_local_map_cohen_presentation
     {A : Type u} {B : Type v} [CommRing A] [CommRing B]
     [IsLocalRing A] [IsLocalRing B] [IsNoetherianRing A] [IsNoetherianRing B]

@@ -13,29 +13,29 @@ import Mathlib.RingTheory.Localization.Finiteness
 import Mathlib.RingTheory.Ideal.GoingUp
 
 /-! # Localizing a finite extension of a principal open at a maximal ideal
-Source: Stacks Project, Algebra, Tag 0334, Step 5.
-(blueprint: lem-weil-pbc-finite-away-maximal-localization). -/
+
+Given a finite injective extension `S_s → T` with `s` outside a maximal ideal `m` of `S`,
+inverting the image of `S \ m` in `T` gives a finite extension of `S_m` whose maximal ideals
+contract to maximal ideals of `T` containing the image of `m`.
+
+## Implementation details
+
+With `S0 = S_s` and `p = m S0`, the ideal `p` is maximal with contraction `m`. The canonical
+map from `S_m` to the localization of `T` is injective and finite, hence integral; every maximal
+ideal of the localization therefore contracts to a prime of `T` lying over `p`, which is maximal
+since `T` is integral over `S0`.
+
+## References
+
+* [Stacks, Tag 0334] (Step 5)
+-/
 
 @[expose] public section
 
 universe u v
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Localize a finite extension after inverting one element outside a maximal ideal.
-Source: Stacks Project, Algebra, Tag 0334, Step 5, localization of S subset S'.
-(blueprint: lem-weil-pbc-finite-away-maximal-localization).
-
-Proof: Put S0 = S_s and p = mS0. Since s is outside m, p is maximal, its contraction
-is m, and (S0)_p is canonically S_m. Put h = g composed with S -> S0 and invert the
-image M = h(S minus m) in T. The localization universal property gives the canonical
-map S_m -> M^-1 T. It is injective since S -> S0 and g are injective. Localizing the
-finite set of S0-module generators of T gives finite generation over S_m, because s
-is already invertible there. Thus this map is integral. Every maximal ideal q of M^-1 T
-contracts to the unique maximal ideal of S_m. The contraction n0 of q to T is prime,
-and its contraction to S0 is p. Indeed the elements of m map into q by the contraction
-to S_m, and every element outside m maps to a unit; clearing powers of s gives the
-assertion on S0. Since T is integral over S0 and p is maximal, n0 is maximal. The same
-contraction identity gives m.map h <= n0. -/
+/-- Localize a finite extension after inverting one element outside a maximal ideal. -/
 theorem exists_finite_away_maximal_localization
     (S : Type u) (T : Type v) [CommRing S] [IsDomain S] [CommRing T] [IsDomain T]
     (m : Ideal S) [m.IsMaximal] (s : S) (hs : s ∉ m)

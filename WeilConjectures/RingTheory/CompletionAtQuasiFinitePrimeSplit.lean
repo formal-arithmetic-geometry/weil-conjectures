@@ -21,8 +21,20 @@ import WeilConjectures.RingTheory.FiniteCompletionFactorIdempotent
 /-!
 # A completion factor from a finite subalgebra agreeing away from an element
 
-Source: Stacks Project, Algebra, proof of Lemma Tag 07NC after choosing the finite
-subalgebra (blueprint: lem-weil-pbc-completion-finite-subalgebra-away-split).
+If a finite subalgebra `S'` of `S` agrees with `S` after inverting some `g ∉ q`, then the
+completion of `S_q` is a direct factor of `R_p^∧ ⊗[R] S`.
+
+## Implementation details
+
+The idempotent `e` and the element `v` with `v γ = e` (where `γ = 1 ⊗ g`) come from the finite
+tensor product `R_p^∧ ⊗[R] S'`. Surjectivity of the away map lets one clear a common power of
+`γ` from every element of `R_p^∧ ⊗[R] S`, which is enough to transfer the kernel comparison;
+no tensor-localization theorem is needed. The complementary factor `B` is the corner of
+`1 - δ`, where `δ` is the image of `e`.
+
+## References
+
+* [Stacks, Tag 07NC], the proof after the choice of the finite subalgebra
 -/
 
 @[expose] public section
@@ -138,33 +150,9 @@ private theorem split_factor_of_clear_denominators
     RingEquiv.ofBijective (RingHom.prod φ β) hbij, rfl⟩
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A finite subalgebra agreeing away from an element gives a direct completion factor.
-Source: Stacks Project, Algebra, proof of Lemma Tag 07NC, after the choice of the
-finite subalgebra (blueprint: lem-weil-pbc-completion-finite-subalgebra-away-split).
-
-Proof: the coordinate formula for psi implies compatibility with R: evaluate
-psi on the completion image of r in R at every quotient, apply the local base
-map's formula, and use extensionality of completion. The tensor universal property
-therefore constructs phi with the required formula on pure tensors.
-The finite-factor idempotent theorem supplies e and v in T = Rph tensor S',
-where e is idempotent, v gamma = e, phi(j(e)) = 1, phi j is surjective,
-and phi(j(t)) = 0 implies e t = 0. Here gamma = 1 tensor g and j is the
-tensor inclusion. These are data on the finite tensor, before any transfer to U.
-Surjectivity of the away map clears a power of g from every element of S.
-Tensor induction then clears a common power of j(gamma) from every u in U:
-for pure tensors use the numerator supplied by the away map; for a sum with
-exponents n and m multiply the first numerator by gamma^m and the second by
-gamma^n, giving the common exponent n+m. No tensor-localization theorem is needed.
-Put delta = j(e). If phi(x) = phi(y), write j(t) = j(gamma)^n (x-y).
-Then phi(j(t)) = 0, so e t = 0. Multiply its image by j(v)^n and use
-delta j(v)^n j(gamma)^n = delta to deduce delta(x-y) = 0. Conversely,
-delta x = delta y implies phi(x) = phi(y), since phi(delta) = 1.
-Take B to be the corner of 1-delta, with its actual inherited ring structure
-and unit 1-delta. The map beta sends x to (1-delta)x. The pair (phi,beta)
-is injective by the kernel comparison and x = delta x + (1-delta)x.
-For (c,b), choose t with phi(j(t)) = c. The element delta j(t) + b maps
-to (c,b), since phi vanishes on the complementary corner. Thus the pair is
-bijective and RingEquiv.ofBijective gives the specified equivalence. -/
+/-- A finite subalgebra agreeing with `S` away from an element `g ∉ q` gives a direct
+completion factor: for any map `ψ` of completions compatible with the local map, the natural
+map `φ : R_p^∧ ⊗[R] S → S_q^∧` is the first component of an isomorphism with `S_q^∧ × B`. -/
 theorem completion_split_of_finite_subalgebra_away
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] (q : PrimeSpectrum S)

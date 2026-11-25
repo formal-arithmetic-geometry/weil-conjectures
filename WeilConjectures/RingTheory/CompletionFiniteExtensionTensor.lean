@@ -13,6 +13,22 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
 import WeilConjectures.RingTheory.CompletionFiniteExtensionTensorBijective
 
+/-!
+# Completed tensor product of a finite algebra
+
+For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, the tensor product
+`R_p^∧ ⊗[R] S` is isomorphic to the `p`-adic completion of `R_p ⊗[R] S`.
+
+## Implementation details
+
+The isomorphism is `AdicCompletion.completionFiniteExtensionTensorMap`, which is bijective by
+the completion-tensor equivalence for finite modules over a Noetherian ring.
+
+## References
+
+* [Stacks, Tag 07N9]
+-/
+
 @[expose] public section
 universe u v
 open scoped TensorProduct
@@ -20,18 +36,9 @@ namespace AdicCompletion
 
 -- The inherited statement binds an unused D; keep its signature unchanged.
 set_option linter.unusedVariables false in
-/-- The completed tensor product is nonempty as an algebra equivalence to the completed
-localized finite algebra. Source: Stacks Project, Algebra, Lemma 10.97.8 (Tag 07N9), step 5.
-(blueprint: lem-weil-pbc-completion-finite-extension-tensor)
-
-The proof uses the completion-tensor equivalence for a finite module over a
-Noetherian ring. Apply it after localizing `R` at `p` and identify the resulting
-finite module tensor with `B = A ⊗[R] S` by tensor cancellation. The ideal induced
-by `p` on `B` is the ideal used for the target completion, while the maximal ideal
-of `A` induces the same adic filtration after localization. Naturality of the
-completion map supplies the canonical algebra structure, and composing these two
-identifications yields an `S`-algebra equivalence
-`(C ⊗[R] S) ≃ₐ[S] AdicCompletion J B`; wrapping it in `Nonempty` gives the claim. -/
+/-- For a finite algebra `S` over a Noetherian ring `R` and a prime `p`, there is an
+`S`-algebra equivalence between `R_p^∧ ⊗[R] S` and the `p`-adic completion of
+`R_p ⊗[R] S`. -/
 theorem completion_finite_extension_tensor
     (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [IsNoetherianRing R] [Module.Finite R S] (p : Ideal R) [p.IsPrime] :

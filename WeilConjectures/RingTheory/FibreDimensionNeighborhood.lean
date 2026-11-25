@@ -17,8 +17,23 @@ import WeilConjectures.RingTheory.FibreDimensionLocalizedBound
 /-!
 # A principal neighbourhood bounding all fibre dimensions
 
-Source: Stacks Project, Algebra, Tag 00QH and Tag 00ST, proof (3)
-(blueprint: lem-weil-pbc-fibre-dimension-neighborhood).
+For a finite type algebra `S` over `R`, a prime `q` of `S` whose fibre has local dimension `d`
+admits `g ∉ q` such that all nonempty fibres of `R → S_g` have dimension at most `d`.
+
+## Implementation details
+
+The fibre point `Q` is given by `PrimeSpectrum.preimageEquivFiber`: its ideal is the kernel of
+the canonical map `κ(p) ⊗[R] S → κ(q)`, `a ⊗ s ↦ ā * s̄`. Mathlib places the residue field on
+the left of the tensor product.
+
+The proof takes an open neighbourhood `V` of `q` on which all local fibre dimensions are at most
+`d` (Tag 00QH), shrinks it to a basic open `D(g)` and applies
+`Algebra.localized_fibre_dimension_le_of_basicOpen`.
+
+## References
+
+* [Stacks, Tag 00QH]
+* [Stacks, Tag 00ST], proof of (3)
 -/
 
 @[expose] public section
@@ -28,33 +43,7 @@ universe u v
 namespace Algebra
 
 /-- For a finite type algebra, a prime whose fibre has local dimension `d` admits a
-principal neighbourhood all of whose nonempty fibres have dimension at most `d`.
-Source: Stacks Project, Algebra, Tag 00QH and Tag 00ST, proof (3)
-(blueprint: lem-weil-pbc-fibre-dimension-neighborhood).
-
-The point `Q` is constructed by `PrimeSpectrum.preimageEquivFiber`: its ideal is the
-kernel of the canonical map from `κ(p) ⊗[R] S` to `κ(q)`, sending `a ⊗ s` to `ā * s̄`.
-Mathlib places the residue field on the left; the tensor-factor swap identifies this
-with `S ⊗[R] κ(p)` in the source, including the specified kernel.
-
-Proof:
-1. Apply `lem-weil-pbc-fibre-dimension-bounded-open-upstairs` (00QH) to obtain an open
-   neighbourhood `V` of `q` where all local fibre dimensions are at most `d`.
-   By `lem-weil-pbc-spec-localization-away-basic-open` (i), choose `g` with
-   `q ∈ D(g) ⊆ V`, hence `g ∉ q`.
-2. Fix any prime `p'` of `R`. By `lem-weil-pbc-algebra-localization-away-base-change`,
-   the fibre of `S_g` is the localization of the fibre of `S` at `g ⊗ 1`.
-   By `lem-weil-pbc-spec-localization-away-basic-open` (ii) and `def-weil-affine-spectrum`,
-   its spectrum is homeomorphic to the open subspace `O = D(g ⊗ 1)` of that fibre.
-3. For each point of `O`, `lem-weil-pbc-fibre-ring-primes-bijection` gives a prime `q'`
-   of `S` above `p'`. Since `g ∉ q'`, this prime is in `V`, so its local fibre dimension
-   is at most `d`. By `lem-weil-pbc-dimension-at-point-open-subspace`, its dimension in
-   `O` is the same and is at most `d`.
-4. By `lem-weil-pbc-dimension-supremum-local-dimensions` (0B7I), the dimension of `O`
-   is the supremum of these local dimensions, hence at most `d`. The homeomorphism
-   preserves chains of irreducible closed subsets and thus Krull dimension
-   (`def-kun-topological-krull-dimension`). This gives the bound on the nonempty fibre.
-   If `O` is empty, its dimension and the empty supremum are both minus infinity. -/
+principal neighbourhood `D(g)` of `q` all of whose nonempty fibres have dimension at most `d`. -/
 theorem exists_away_fibre_dimension_le
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]
     [FiniteType R S] (q : PrimeSpectrum S) (d : ℕ) :

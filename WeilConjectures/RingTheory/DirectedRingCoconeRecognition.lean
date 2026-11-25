@@ -14,9 +14,18 @@ import Mathlib.Algebra.Category.Ring.FilteredColimits
 
 /-! # Recognition and functoriality of directed ring colimit cocones
 
-Source: Stacks Project, Categories, Tags 04AX and 002F; the algebraic verification
-for `equation-sections-of-intersection` in `more-groupoids.tex`.
-(blueprint: lem-a1-directed-ring-cocone-recognition)
+## Implementation details
+
+Universality is expressed by `IsColimit.desc`, `fac`, and `uniq`. The descended map is defined
+by choosing representatives; the eventual-equality hypothesis makes it well defined, and
+additivity and multiplicativity are checked at a common stage. Neither nontriviality nor
+injectivity of the transition maps is used. Naturality squares commute by uniqueness, since
+both composites agree on every coprojection.
+
+## References
+
+* [Stacks, Tag 04AX]
+* [Stacks, Tag 002F]
 -/
 
 @[expose] public section
@@ -64,35 +73,7 @@ private theorem comparison_naturality
 /-- A directed ring cocone is a colimit in rings, additive groups and sets when
 its elements have representatives and equality at a stage holds eventually.
 The canonical identifications with any other colimit cocones are natural for
-compatible maps of ring diagrams and their cocones, in all three categories.
-Here `IsColimit.desc`, `fac`, and `uniq` express exactly the existence and
-uniqueness of the maps to every compatible ring, additive, or set cocone.
-
-Source: Stacks Project, Categories, Tags 04AX (`section-directed-colimits`)
-and 002F (`definition-colimit`); algebraic verification for
-`equation-sections-of-intersection` in `more-groupoids.tex`.
-(blueprint: lem-a1-directed-ring-cocone-recognition)
-
-Proof:
-1. If two representatives from different stages have equal images, move them
-   to a common upper bound. The same-stage equality assumption then makes
-   their images equal at a further stage, using the functor composition law.
-2. For any set cocone, define the descended map on an element by choosing a
-   representative. Step 1 and compatibility make this independent of the
-   representative. Every descended map must have these values, giving uniqueness.
-3. For an additive cocone, represent two elements at a common stage to check
-   additivity. Nonemptiness supplies a stage at which to check zero; negatives
-   are checked on a representative. The descended function is an additive map.
-4. For a ring cocone, the same common-stage calculation checks multiplication;
-   checking the unit at any stage gives a unital ring map. Thus Steps 2--4 give
-   the three universal properties of `def-weil-pbc-category-colimit`. Neither
-   nontriviality nor injectivity is used.
-5. By `def-weil-pbc-category-colimit`, comparisons between colimit cocones are
-   isomorphisms: both composites fix every coprojection. For a map of diagrams,
-   the two composites in each asserted naturality square agree on every source
-   coprojection by the equation relating the cocone maps. Uniqueness makes the
-   square commute, in rings, additive groups and sets alike.
--/
+compatible maps of ring diagrams and their cocones, in all three categories. -/
 theorem directed_cocone_recognition
     {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (c : Cocone F)

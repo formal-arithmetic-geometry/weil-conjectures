@@ -17,8 +17,16 @@ import WeilConjectures.RingTheory.LengthQuotSMulTopFractionFieldSubmodule
 /-!
 # Residue fields above a one-dimensional local domain
 
-Source: Stacks Project, Algebra, Tag 031F, Lemma 10.119.10
-(blueprint: lem-weil-pbc-dim-one-residue-field-extensions-finite).
+## Implementation details
+
+For a nonzero `x` in the maximal ideal `m`, viewing `S` inside `L ≅ K^n` shows that `S/xS`, and
+hence the closed fibre `S/mS`, has finite length, so the fibre is a finite-dimensional
+`R/m`-algebra. It is Artinian with finitely many primes, all maximal, corresponding to the
+primes above `m`; each residue field is a quotient of the fibre.
+
+## References
+
+* [Stacks, Tag 031F]
 -/
 
 @[expose] public section
@@ -29,24 +37,9 @@ universe uR uS uK uL
 
 namespace Ideal
 
-/-- Stacks Project, Tag 031F
-(blueprint: lem-weil-pbc-dim-one-residue-field-extensions-finite).
-For an injection of domains inducing a finite extension of fraction fields, with the base
+/-- For an injection of domains inducing a finite extension of fraction fields, with the base
 Noetherian local of dimension one, primes above its maximal ideal are maximal, there are
-finitely many, and their residue fields are finite extensions via the induced field map.
-
-Proof: choose a nonzero element `x` of the maximal ideal. View `S` as an `R`-submodule of
-`L`, and identify `L` with a finite direct sum of `K` using a basis. Apply
-lem-weil-pbc-dim-one-submodule-quotient-finite-length to get finite length of `S/xS`.
-The surjection onto `S/mS` preserves finite length: strict chains lift to strict chains.
-Since the action factors through `R/m`, submodules are its vector subspaces, so this
-closed fibre is finite dimensional. Apply lem-weil-pbc-finite-dim-algebra-artinian and
-lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum to the fibre, then
-lem-weil-pbc-spec-quotient-homeomorphism-zero-locus to identify its primes with the primes
-above `m`. They are finitely many and maximal, including the case of the zero fibre.
-Each quotient by such a prime is a quotient of the finite-dimensional fibre. Maximality
-identifies it with the localization residue field, by sending a fraction to the quotient
-of its numerator and denominator. This gives the finite residue extension. -/
+finitely many, and their residue fields are finite extensions via the induced field map. -/
 theorem dim_one_residue_fields_finite
     (R : Type uR) (S : Type uS) (K : Type uK) (L : Type uL)
     [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R]

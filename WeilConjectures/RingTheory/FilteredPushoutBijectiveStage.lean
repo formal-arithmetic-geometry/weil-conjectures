@@ -14,7 +14,25 @@ import Mathlib.Algebra.Category.Ring.FinitePresentation
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import Mathlib.CategoryTheory.Filtered.Final
 
-/-! # Bijectivity at a stage of a filtered system of pushout ring maps -/
+/-!
+# Bijectivity at a stage of a filtered system of pushout ring maps
+
+Given a natural transformation `α : D ⟶ E` of filtered diagrams of commutative rings whose
+components are finitely presented and whose naturality squares are pushouts, if the induced map
+on colimits is bijective then some component `α.app j` is bijective.
+
+## Implementation details
+
+We restrict to the cofinal category `Under i` for some object `i`, factor the inverse of the
+colimit map on `E.obj i` through a stage of `D` using finite presentation, make the two
+resulting maps agree at a later stage `l`, and use the pushout square at `i ⟶ l` to build an
+inverse of `α.app l`.
+
+## References
+
+* [Stacks, Tag 05N9]
+* [Stacks, Tag 02JO]
+-/
 
 @[expose] public section
 
@@ -25,27 +43,7 @@ universe v u
 namespace CommRingCat
 
 /-- A finitely presented map in a cartesian system of rings is bijective at a stage
-if its colimit map is bijective.
-
-Source: Stacks Project, Algebra, Tag 05N9 (2), (3), as used in Tag 02JO (3).
-(blueprint: lem-weil-pbc-filtered-pushout-bijective-stage)
-
-Proof: choose an object i. Its target is finitely presented over its source.
-Restrict to objects equipped with an arrow from i; this filtered category is cofinal.
-Whisker both colimit cocones along this final forgetful functor. The structure
-maps from the source at i make the restricted diagrams algebras over that ring.
-The inverse of the colimit map, restricted to the target at i, is an algebra map.
-Factor it through a source stage using finite presentation, Tag 05N9 (2). The composite
-on the target at i agrees with its transition map at the colimit. Finite generation
-of that target over the source
-and Tag 05N9 (3) make them agree at a later stage l. The pushout property at
-i → l extends the inverse candidate and the identity of the source at l to a
-map from the target at l to the source at l. One inverse identity is its
-restriction to the source leg. For the other, check the source and target legs
-of the pushout; on the target leg use the eventual equality just obtained.
-The two identities give bijectivity there. Empty presentations and zero rings
-require no separate argument; nonemptiness follows from filteredness.
--/
+if its colimit map is bijective. -/
 theorem exists_bijective_stage_of_filtered_pushouts
     {J : Type v} [SmallCategory J] [IsFiltered J] [UnivLE.{v, u}]
     (D E : J ⥤ CommRingCat.{u}) (α : D ⟶ E)

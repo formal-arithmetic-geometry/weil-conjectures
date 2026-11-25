@@ -11,21 +11,25 @@ public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.RingTheory.NonzerodivisorIfMaximalNotAssociated
 
+/-!
+# Positive depth when the maximal ideal is not associated
+
+A finite module over a Noetherian local ring whose associated primes do not include the
+maximal ideal has depth at least one.
+
+## References
+
+* [Stacks, Tag 00LL]
+* [Stacks, Tag 00LI]
+-/
+
 @[expose] public section
 
 universe u
 namespace AlgebraicGeometry.Scheme
 
-/-- Positive depth from exclusion of the maximal associated prime.
-
-Source: Stacks Project, Algebra, Tag 00LL, and the definition of depth (Tag 00LI).
-(blueprint: stage3-depth-one-from-no-maximal-associated)
-
-Proof: If the module is zero, its maximal-ideal multiple is the whole module,
-so its depth is infinity. Otherwise Tag 00LL supplies an element of the maximal
-ideal acting injectively. Its singleton is weakly regular and, by Nakayama for
-finite nonzero modules, regular. This length-one sequence belongs to the set
-whose supremum defines depth, giving the claimed lower bound. -/
+/-- A finite module over a Noetherian local ring whose associated primes do not include the
+maximal ideal has depth at least one. -/
 theorem depth_one_of_finite_localized_module_of_no_maximal_associated
     {R M : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
     [AddCommGroup M] [Module R M] [Module.Finite R M]

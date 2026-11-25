@@ -12,7 +12,19 @@ public import WeilConjectures.RingTheory.IsStrictHenselization
 /-!
 # Comparison of the two pointed étale colimit presentations
 
-Source: Stacks Project, Algebra, Tag 04GW (lemma-strict-henselization-different).
+A colimit of pointed étale residue triples over a local ring `R` is a strict henselization of `R`
+in the sense of the pointed étale algebra presentation.
+
+## Implementation details
+
+An étale algebra with a map to `K` determines a unique prime and residue embedding, and a residue
+triple determines the map to `K` by evaluation; morphisms on both sides are the ring maps
+commuting with `R` and `K`. The universal ring cocone is transported along this equivalence and
+the descended ring maps are checked to respect `R` on the identity triple.
+
+## References
+
+* [Stacks, Tag 04GW]
 -/
 
 @[expose] public section
@@ -119,19 +131,9 @@ private noncomputable def tripleHom {R : CommRingCat.{u}} {p : Spec R}
     apply Over.OverMorphism.ext
     exact ha))
 
-/-- A colimit of residue triples is a strict henselization in the pointed algebra
-presentation. Source: Stacks Project, Tag 04GW (lemma-strict-henselization-different).
-(blueprint: lem-sc-etale-triples-colimit-is-strict-henselization).
-
-Proof: An étale algebra equipped with a map to `K` determines a unique prime and
-residue embedding, by the equivalence between maps from `Spec K` and residue-field
-points. Conversely a residue triple determines the map to `K` by evaluation. The
-compatibility equation is precisely the algebra-map equation over `R`, and the
-morphisms on both sides are the ring maps commuting with `R` and `K`. Transport
-the universal ring cocone along this equivalence. Its legs are algebra maps by `hρ`.
-The descended ring map to any algebra cocone respects `R`, as checked on the identity
-triple. Thus the transported cocone is universal in `CommAlgCat R`, has vertex `c.pt`,
-and witnesses `IsStrictHenselization`. No Noetherianity or completion is involved. -/
+/-- Let `R` be a local ring and `c` a colimit of pointed étale residue triples whose legs are
+compatible with the algebra maps from `R`. Then `c.pt` is a strict henselization of `R` with
+respect to the separable closure `K` of its residue field. -/
 theorem etaleResidueTriples_colimit_isStrictHenselization
     (R : CommRingCat.{u}) [IsLocalRing R] (p : Spec R)
     (K : Type u) [Field K]

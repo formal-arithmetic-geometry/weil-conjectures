@@ -89,9 +89,7 @@ lemma Fiber.exists_residueField_ringEquiv (q : Ideal S) [q.IsPrime] (hq : q.unde
 3. for a prime `Q` of `C`, `ker ψ_{j⁻¹(Q)} = Q`; so `Q ↦ j⁻¹(Q)` is a bijection onto the primes
    of `S` over `p` with inverse `q ↦ ker ψ_q`;
 4. `Q ↦ j⁻¹(Q)` preserves and reflects inclusions;
-5. `ψ_q` induces an isomorphism `κ(ker ψ_q) ≃ κ(q)` through which it factors.
-
-(blueprint: `theorem-finite-etale-covers-proper-henselian--2`) -/
+5. `ψ_q` induces an isomorphism `κ(ker ψ_q) ≃ κ(q)` through which it factors. -/
 theorem Fiber.primes_residueField :
     (∀ Q : Ideal (p.Fiber S), Q.IsPrime →
       (Q.comap includeRight.toRingHom).IsPrime ∧ (Q.comap includeRight.toRingHom).under R = p) ∧

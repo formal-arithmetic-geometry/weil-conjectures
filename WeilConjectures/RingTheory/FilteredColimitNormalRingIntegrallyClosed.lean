@@ -18,8 +18,21 @@ import WeilConjectures.AlgebraicGeometry.FilteredColimitLocalizationAtPrime
 /-!
 # Integral closedness of filtered colimits of normal domains
 
-Source: Stacks Project, Algebra, Tag 037D (lemma-colimit-normal-ring).
-The common-stage argument is applied only to colimit cocones of domains.
+A filtered colimit of integrally closed domains is integrally closed. Consequently, the
+localization of a filtered colimit at a prime is integrally closed when every stage localization
+at the contracted prime is an integrally closed domain.
+
+## Implementation details
+
+The common-stage argument is applied only to colimit cocones of domains. An integral fraction
+`a / b` is handled by lifting `a`, `b` and the coefficients of a monic annihilating polynomial
+to a common stage. The denominator-cleared evaluation `(q.scaleRoots b).eval a` vanishes at a
+later stage, where `b` is nonzero; integral closedness there gives `a = b * y`, and `y` maps to
+the original fraction.
+
+## References
+
+* [Stacks, Tag 037D]
 -/
 
 @[expose] public section
@@ -57,21 +70,7 @@ private theorem lift_fin_after
       exact (ConcreteCategory.congr_hom (c.w g) (y t)).trans (hy t)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A filtered colimit of integrally closed domains is integrally closed.
-Source: Stacks Project, Algebra, Tag 037D (lemma-colimit-normal-ring),
-the common-stage argument after localization.
-(blueprint: lem-weil-pbc-filtered-colimit-normal-ring-integrally-closed-common-stage)
-
-First the colimit is a domain by `isDomain_of_filtered_colimit_cocone`.
-Represent an integral fraction as a/b, and lift a, b and the finitely many lower
-coefficients of a monic annihilating polynomial p to a common stage. The lifted
-polynomial q is monic and maps to p. Its denominator-cleared evaluation
-(q.scaleRoots b).eval a has image zero, so it becomes zero at a later stage.
-The denominator there is nonzero because its image is the nonzero b. In that
-stage's fraction field, the scaleRoots evaluation identity and cancellation
-of b^degree show that q annihilates a/b. Integral closedness supplies y with
-a = b*y at that stage. Mapping this equality into the colimit and cancelling
-the denominator shows that the original fraction is the image of y. -/
+/-- A filtered colimit of integrally closed domains is integrally closed. -/
 theorem integrallyClosed_of_localization_cocone
     {I : Type u} [SmallCategory I] [IsFiltered I]
     {R : Type u} [CommRing R]
@@ -193,11 +192,6 @@ theorem integrallyClosed_of_localization_cocone
 
 /-- The localization of a filtered colimit at a prime is integrally closed when
 every stage localization at a contracted prime is an integrally closed domain.
-(blueprint: proposition-proper-direct-image-constructible-complexes)
-
-This is the integral-closedness part of the proof of Stacks Project, Algebra,
-Tag 037D. A monic relation and a fraction are lifted to one common stage;
-normality there puts the fraction in that stage, hence in the colimit.
 -/
 theorem filtered_colimit_localization_isIntegrallyClosed
     {I : Type u} [SmallCategory I] [IsFiltered I]

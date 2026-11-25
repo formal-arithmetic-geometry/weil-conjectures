@@ -10,13 +10,22 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
+/-!
+# Exterior powers of the conormal module
+
+The exterior powers `⋀^n (I/I²)` of the conormal module of an ideal `I ⊆ A`, regarded as
+`A`-modules.
+
+## References
+
+* [Stacks, Tag 062I]
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
-/-- The exterior conormal, regarded as a module over the ambient ring.
-Source: Stacks Project, Tag 062I.
-(blueprint: new-r4-self-tor-conormal-comparison).
-(blueprint: new-r4-conormal-exterior-module)
+/-- The exterior power `⋀^n (I/I²)` over `A/I`, regarded as a module over the ambient
+ring `A`.
 -/
 noncomputable abbrev conormalExteriorModule (A : Type u) [CommRing A]
     (I : Ideal A) (n : ℕ) : ModuleCat.{u} A :=

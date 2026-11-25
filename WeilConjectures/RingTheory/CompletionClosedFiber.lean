@@ -13,8 +13,17 @@ import Mathlib.RingTheory.TensorProduct.Quotient
 /-!
 # Geometric regularity of the closed fibre of a local completion
 
-Source: Stacks Project, More on Algebra, Proposition Tag 07PX
-(blueprint: lem-weil-pbc-completion-closed-fiber).
+The closed fibre of the completion of a Noetherian local ring is geometrically regular.
+
+## Implementation details
+
+The closed fibre is identified with the residue field as an algebra over itself, via the
+evaluation of the completion at level one. Its base change to any finite purely inseparable
+extension `k'` is `k'` itself, hence regular.
+
+## References
+
+* [Stacks, Tag 07PX]
 -/
 
 @[expose] public section
@@ -25,19 +34,7 @@ open scoped TensorProduct
 
 namespace AdicCompletion
 
-/-- The closed fibre of a Noetherian local ring's completion is geometrically regular.
-
-Proof: The residue field at the maximal ideal is canonically A/m since localization
-at the maximal ideal of a local ring inverts only units. Tensoring the completion
-with A/m is canonically the quotient by the extended maximal ideal. The completion
-map induces an isomorphism A/m to this quotient, by its evaluation at level one.
-These identifications respect the residue-field algebra structures, so the closed
-fibre is the residue field as an algebra over itself. It is thus Noetherian. For any
-finite purely inseparable extension k'/k, tensoring this algebra with k' gives k'
-itself, a field and hence a regular ring. No characteristic hypothesis is required.
-
-Source: Stacks Project, More on Algebra, Proposition Tag 07PX
-(blueprint: lem-weil-pbc-completion-closed-fiber). -/
+/-- The closed fibre of a Noetherian local ring's completion is geometrically regular. -/
 theorem isGeometricallyRegular_closedFiber
     (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] :
     Algebra.IsGeometricallyRegular (IsLocalRing.maximalIdeal A).ResidueField

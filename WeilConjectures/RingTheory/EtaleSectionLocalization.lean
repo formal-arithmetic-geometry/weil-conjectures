@@ -11,7 +11,18 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Localization of an idempotent section
 
-Source: Stacks Project, Tag 00EH (blueprint: lem-weil-pbc-etale-section-localization).
+An `R`-algebra section `s : S → R` with `s e = 1` and kernel `(1 - e)` for an idempotent `e`
+identifies the localization `S[1/e]` with `R`.
+
+## Implementation details
+
+With the `S`-algebra structure on `R` through `s`, the map is surjective with kernel `(1 - e)`,
+so `IsLocalization.away_of_isIdempotentElem` makes `R` a localization of `S` away from `e`.
+
+## References
+
+* [Stacks, Tag 00U8]
+* [Stacks, Tag 00EH]
 -/
 
 @[expose] public section
@@ -20,19 +31,8 @@ universe u v
 
 namespace Algebra.Etale
 
-/-- Localization identification induced by a section and an idempotent kernel.
-Source: Stacks Project, Tag 00U8 and Tag 00EH.
-(blueprint: lem-weil-pbc-etale-section-localization)
-
-Proof: Give R its S-algebra structure through s. Since s(e)=1, each r is the
-image of e*algebraMap R S r, so this algebra map is surjective. Its kernel is
-(1-e), and e is idempotent. The Mathlib criterion
-IsLocalization.away_of_isIdempotentElem therefore makes R a localization of S
-away from e. Uniqueness of localization gives an S-algebra equivalence from
-Localization.Away e to R, which sends the image of x to s(x). Its underlying
-ring equivalence is an R-algebra equivalence: on an R-scalar r, the scalar-tower
-formula expresses its image as the image of algebraMap R S r, and s sends that
-element to r. This proves both the equivalence and the required extension formula.
+/-- Let `s : S → R` be an `R`-algebra section and `e` an idempotent with `s e = 1` and
+`ker s = (1 - e)`. Then there is an `R`-algebra equivalence `S[1/e] ≃ R` extending `s`.
 -/
 theorem exists_localization_equiv_of_idempotent
     {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S]

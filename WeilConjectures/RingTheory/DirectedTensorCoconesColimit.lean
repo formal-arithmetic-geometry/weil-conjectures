@@ -14,8 +14,19 @@ import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
 
 /-! # Colimits of coherent iterated tensor diagrams
 
-Source: Stacks Project, Algebra, Tags 00D6, 00D7 and 00DD.
-(blueprint: lem-weil-pbc-directed-tensor-cocones-colimit-n3)
+## Implementation details
+
+The proof identifies the module direct limit of the `Bⱼ` with `B`, tensors this equivalence
+over `P` with `Q` (`directLimitLeft`), and transports representatives and eventual vanishing to
+the ring cocones; the filtered colimit criterion for types and reflection of colimits by the
+forgetful functor from commutative rings conclude. Zero rings and the singleton tail are
+included, and no finite presentation hypothesis or comparison map is used.
+
+## References
+
+* [Stacks, Tag 00D6]
+* [Stacks, Tag 00D7]
+* [Stacks, Tag 00DD]
 -/
 
 @[expose] public section
@@ -184,34 +195,7 @@ private theorem tensor_rep_zero
       exact ht
     exact Module.DirectLimit.of.zero_exact hz
 
-/-- Canonical cocones of coherent tensor diagrams over a directed upper tail are colimits.
-
-Source: Stacks Project, Algebra, Tags 00D6, 00D7 and 00DD.
-(blueprint: lem-weil-pbc-directed-tensor-cocones-colimit-n3)
-
-Proof:
-1. Restrict the tensor representative theorem to the tail above i. Move any
-   representative at j to a common upper bound of i and j; cocone naturality
-   identifies its image with the original representative. The eventual-zero
-   assertion already stays in this tail.
-2. Choose the P-linear transitions β supplied by hDt. Their underlying maps
-   are the canonical tensor transitions. Tensor induction and F.map_comp prove
-   the directed-system laws; hμs and colimit.w prove compatibility with μs.
-3. The module direct limit of the Bⱼ with these transitions maps linearly to B.
-   Tensor representatives prove surjectivity. Represent a difference in the
-   direct limit; eventual vanishing and DirectLimit.of_f prove injectivity.
-   Tensor this linear equivalence over P with Q and use directLimitLeft.
-   Representatives and eventual vanishing in this tensor direct limit give
-   the same assertions for Bⱼ tensor_P Q and B tensor_P Q.
-4. Transport representatives and eventual zero through d, dLim, c and cLim,
-   using hcD, hcE, hDt and hEt. Apply the filtered colimit criterion for types:
-   equality at one stage is eventual vanishing of the difference. The forgetful
-   functor from commutative rings preserves these filtered colimits and reflects
-   isomorphisms, hence reflects the two colimit cocones. The common ring universe
-   admits the required colimits by universe shrinking.
-The argument includes zero rings and the singleton tail and uses no finite
-presentation hypothesis or comparison map.
--/
+/-- Canonical cocones of coherent tensor diagrams over a directed upper tail are colimits. -/
 theorem isColimit_directed_tensor_cocones
     {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{v}) [HasColimit F]

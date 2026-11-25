@@ -11,8 +11,19 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 /-!
 # The natural local-ring map of a fibre
 
-Source: Stacks Project, Algebra, Remarks 0H9M and 00E6
-(blueprint: lem-weil-pbc-fibre-ring-local-ring-natural-iso).
+For a prime `Q` of the fibre ring `κ(p) ⊗[A] B` with contraction `q` in `B`, the canonical map
+`B_q → (κ(p) ⊗[A] B)_Q` is surjective with kernel `p B_q`.
+
+## Implementation details
+
+Mathlib uses `κ(p) ⊗[A] B` for the fibre, so `j(b) = 1 ⊗ b`. The proof identifies the fibre
+with a quotient of `(A \ p)⁻¹ B` via `Ideal.Fiber.algEquivAux₁` and follows the construction of
+`Ideal.Fiber.algEquivAux₂`, keeping `B` as the scalar ring, to obtain an equivalence
+`C_Q ≃ₐ[B] B_q / p B_q`; localization uniqueness identifies it with the local-ring map.
+
+## References
+
+* [Stacks, Tag 0H9M], [Stacks, Tag 00E6]
 -/
 
 @[expose] public section
@@ -22,26 +33,7 @@ universe u v
 namespace Ideal
 
 /-- The canonical map from `B_q` to the local ring of the fibre at `Q` is surjective,
-with kernel `p B_q`, and induces the quotient isomorphism with its natural fraction formula.
-Source: Stacks Project, Algebra, Remarks 0H9M and 00E6
-(blueprint: lem-weil-pbc-fibre-ring-local-ring-natural-iso).
-
-Proof:
-1. Use `Fiber.algEquivAux₁` to identify the fibre with the quotient of
-   `D = (A \ p)⁻¹ B`. Pull `Q` back along this `B`-algebra isomorphism.
-2. Follow the construction of Mathlib's `Fiber.algEquivAux₂`, retaining `B` as the
-   scalar ring: localization of a localization and localization of a quotient give
-   `e : C_Q ≃ₐ[B] B_q / p B_q`. The quotient localization instance and uniqueness of
-   localization supply the second factor of this equivalence.
-3. Since `e.symm` commutes with the maps from `B`, localization uniqueness identifies
-   `e.symm` composed with the quotient map with the canonical local-ring map `θ`.
-   Its fraction formula is `Localization.localRingHom_mk`. Surjectivity follows from
-   quotient surjectivity and the equivalence; injectivity of the equivalence reduces
-   the kernel assertion to `Ideal.Quotient.eq_zero_iff_mem`. Finally `e.symm` itself
-   is the required quotient equivalence, with compatibility already proved.
-
-Mathlib uses `κ(p) ⊗[A] B` for the fibre; tensor symmetry identifies `j(b) = 1 ⊗ b`
-with the source's `b ⊗ 1`. The algebra structure encodes the arbitrary ring map `A → B`. -/
+with kernel `p B_q`, and induces the quotient isomorphism with its natural fraction formula. -/
 theorem Fiber.localRingHom_surjective_ker_quotientEquiv
     {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B]
     (p : Ideal A) [p.IsPrime] (Q : Ideal (p.Fiber B)) [Q.IsPrime] :

@@ -19,9 +19,24 @@ import Mathlib.LinearAlgebra.Basis.Prod
 
 /-! # Attaching finite free cone cycles detected by additive functors
 
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent,
-cone-cycle attachment, and Tag 064U, descending construction.
-(blueprint: lem-sc-finite-cone-cycle-attachment-functors).
+Given a finite free module `P` with a map to the degree `n - 1` cone cycles of `f : F ⟶ C` whose
+image generates the cone cohomology after applying each functor of a family of additive
+functors, we attach `P` to `F` in degree `n - 1` so that the new cone has vanishing cohomology
+in degrees `≥ n - 1` after applying each functor.
+
+## Implementation details
+
+The map `q` decomposes into `a : P → F^n` and `c : P → C^(n-1)`; the new complex is the cone of
+the map `P[n] → F` defined by `a`, mapped to `C` using `-c` and `f`. There is a cone map `t` from
+the old obstruction cone to the new one, invertible on terms in degrees `≥ n - 1`, so its
+homology map is epic there. In degree `n - 1` the composite of the generator map with `H(t)` is
+zero, which forces the new cohomology to vanish after each functor. All data is constructed
+explicitly.
+
+## References
+
+* [Stacks, Tag 08EE]
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -49,28 +64,7 @@ private theorem epi_homologyMap_of_two_isIso
     ShortComplex.isIso_cyclesMap_of_isIso_of_mono' S h2 h3
   exact ShortComplex.epi_homologyMap_of_epi_cyclesMap' S inferInstance
 
-/-- Attach supplied cone cycles whose images generate after each detecting functor.
-
-Source: Stacks Project, Tag 08EE, proof of lemma-lift-pseudo-coherent, the attachment
-following denominator clearing; Tag 064U, descending construction.
-(blueprint: lem-sc-finite-cone-cycle-attachment-functors).
-
-Proof: Decompose q into a : P → F^n and c : P → C^(n-1). The cycle equations are
- a d_F = 0 and a f + c d_C = 0. Form the cone of the map P[n] → F defined by a,
-and map that cone to C using -c and f. Its old-term inclusion j commutes with f
-and is invertible in degrees at least n. Its terms are finite free, and its support
-lies between n-1 and b. There is a cone map t from the old obstruction cone D to
-the new obstruction cone E, invertible on terms in degrees at least n-1. Thus its
-homology map is epic in these degrees. The image of q in H^(n-1)(D) maps to zero:
-its image in E is the boundary of minus the newly attached P-term. After applying
-any L, epimorphisms stay epic. In degree n-1 both the chosen-generator map and the
-map H(t) are epic, while their composite is zero, forcing L(H^(n-1)(E)) = 0.
-Above n-1, use the epimorphism L(H(t)) from the zero object supplied by hvan.
-This proof constructs all terms and maps; no chosen existence witness defines data.
-For an empty family, any supplied P and q satisfying the cycle equations still
-construct an attachment, and the detection claims are vacuous. The zero module P
-and zero rings satisfy the same construction.
--/
+/-- Attach supplied cone cycles whose images generate after each detecting functor. -/
 theorem exists_finiteFree_cone_cycle_attachment_functors (R : Type u) [CommRing R]
     (r : ℕ) (B : Fin r → Type u) [∀ j, CommRing (B j)]
     (L : ∀ j, ModuleCat.{u} R ⥤ ModuleCat.{u} (B j))

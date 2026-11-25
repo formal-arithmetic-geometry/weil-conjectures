@@ -18,8 +18,21 @@ import WeilConjectures.RingTheory.FilteredColimitNormalRingIntegrallyClosed
 /-!
 # A filtered colimit of normal rings is normal
 
-Source: Stacks Project, Algebra, Lemma Tag 037D (lemma-colimit-normal-ring)
-(blueprint: lem-weil-pbc-filtered-colimit-normal-ring).
+A filtered colimit of normal rings is normal, with no condition on the transition maps.
+
+## Implementation details
+
+Normality is reduced to the localizations at primes: the localization of the colimit at a prime
+is the filtered colimit of the localizations at the contracted primes. Finitely many elements
+and relations lift to a common stage, so this colimit is a domain, and a monic equation cleared
+of denominators lifts to a stage where normality puts the root back.
+
+The reference states the result for directed systems; it is formalized here for filtered
+diagrams.
+
+## References
+
+* [Stacks, Tag 037D]
 -/
 
 @[expose] public section
@@ -30,18 +43,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CommRingCat
 
-/-- A filtered colimit of normal rings is normal, with no condition on transition maps.
-Source: Stacks Project, Algebra, Lemma Tag 037D (lemma-colimit-normal-ring),
-stated there for a directed system; the filtered formulation is the one used in the
-blueprint (blueprint: lem-weil-pbc-filtered-colimit-normal-ring).
-
-Proof: reduce normality to the localizations at prime ideals.  The localization at a
-prime of the colimit is the filtered colimit of the corresponding localizations at the
-contracted primes.  Finitely many elements and relations lift to one common index, so
-the colimit is a domain; clearing denominators in a monic equation and lifting it to one
-stage, normality of that stage puts the root back in the colimit.  This proves each
-localization is a normal domain.
--/
+/-- A filtered colimit of normal rings is normal, with no condition on transition maps:
+all localizations of the colimit at primes are integrally closed domains. -/
 theorem isNormal_of_filtered_colimit
     {I : Type u} [SmallCategory I] [IsFiltered I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

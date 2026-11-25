@@ -27,8 +27,18 @@ namespace AlgebraicGeometry
 /-!
 # Dimension at a point from irreducible components
 
-Source: Stacks Project, Algebra, Lemma Tag 00OT
-(blueprint: lem-weil-pbc-dimension-at-point-components).
+## Implementation details
+
+Let `N = max dim S/q_i` over the minimal primes `q_i ⊆ p`. Chains through `S/q_j` give
+`dim S_m ≥ N` for every maximal `m ⊇ p`; every open neighbourhood of `p` contains such a maximal
+ideal (Jacobson), so every neighbourhood has dimension `≥ N`. The open `U` obtained by removing
+the components not through `p` has dimension `≤ N`, and a maximal `m₀ ⊇ p` in `U` has
+`dim S_{m₀} = N`.
+
+## References
+
+* [Stacks, Tag 00OT]
+* [Stacks, Tag 00OS]
 -/
 
 private theorem zeroLocus_dimension {S : Type v} [CommRing S] (q : Ideal S) :
@@ -191,19 +201,10 @@ private theorem exists_open_dimension_le_quotient_bound
   rw [hdim] at hz
   exact hz.trans (hbound q hqmem)
 
-/-- Source: Stacks Project, Algebra, Lemma Tag 00OT
-(blueprint: lem-weil-pbc-dimension-at-point-components).
-The local Krull dimension of a finite type affine scheme over a field is the maximum of the
+/-- The local Krull dimension of a finite type affine scheme over a field is the maximum of the
  dimensions of the irreducible components through the point, equivalently the maximum of the
  dimensions of the quotients by the minimal primes contained in the point, and is the minimum of
- the dimensions of the localizations at maximal ideals above the point.
-
-Proof (Stacks 00OT): the components of `Spec S` are the `V(q_j)` for the finitely many minimal
-primes, and `dim V(q_j) = dim S/q_j`; chains through `S/q_j` (00OS) give `dim S_m ≥ N` for every
-maximal `m ⊇ p`, where `N = max dim S/q_i` over the minimal primes `q_i ⊆ p`; every open
-neighbourhood of `p` contains a maximal ideal over `p` (Jacobson), so every neighbourhood has
-dimension `≥ N`; the open `U` obtained by removing the components not through `x` has dimension
-`≤ N`, so `dim_x X = N`, and a maximal `m₀ ⊇ p` in `U` has `dim S_{m₀} = N`. -/
+ the dimensions of the localizations at maximal ideals above the point. -/
 theorem dimension_at_point_components
     {k : Type u} [Field k] {S : Type v} [CommRing S] [Algebra k S]
     [Algebra.FiniteType k S] (p : Ideal S) [p.IsPrime] :

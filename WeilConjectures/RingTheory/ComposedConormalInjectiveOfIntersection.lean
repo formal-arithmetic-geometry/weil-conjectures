@@ -13,8 +13,19 @@ import Mathlib.RingTheory.Flat.Basic
 /-!
 # Injectivity of a composed conormal map from an ideal intersection
 
-Source: Stacks Project, More on Algebra, Tag 07D4, proof's tensor identification
-(blueprint: lem-weil-pbc-composed-conormal-injective-of-intersection).
+For presentations `P` of `B` over `A` and `Q` of `C` over `B`, the base change to `C` of the
+map from the conormal module of `P` to that of the composed presentation is injective as soon
+as `J ∩ K² = J K`, where `J` is the kernel of the comparison map and `K` the composed kernel.
+
+## Implementation details
+
+Coefficientwise multiplication identifies `T ⊗ I` with `J` (`T` the composed polynomial ring,
+`I = P.ker`), so `C ⊗_B (I/I²)` is `J/JK`. The conormal map sends the class of `j ∈ J` to its
+class in `K/K²`, hence has kernel `(J ∩ K²)/JK`.
+
+## References
+
+* [Stacks, Tag 07D4]
 -/
 
 @[expose] public section
@@ -102,21 +113,9 @@ end Algebra
 namespace Algebra.Generators
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The ideal-intersection identity suffices for injectivity of the conormal map.
-Source: Stacks Project, More on Algebra, Tag 07D4, proof's final tensor calculation
-(blueprint: lem-weil-pbc-composed-conormal-injective-of-intersection).
-
-Proof: Write `I = P.ker`, `T = (Q.comp P).Ring`, `J = ker (Q.ofComp P)` and
-`K = (Q.comp P).ker`. The coefficient map is surjective and has kernel the
-extension of `I` to `T`. The inclusion of the polynomial variables of `P` makes
-`T` a free `P.Ring`-algebra. Coefficientwise multiplication therefore identifies
-`T ⊗[P.Ring] I` with `J`. Right exactness of tensor, followed by cancellation
-of scalars through `P.Ring → B → C`, identifies `C ⊗[B] (I/I²)` with `J/JK`:
-`I²T` is contained in `JK`, and passage to `C = T/K` kills precisely `JK`.
-Under this identification the displayed conormal map sends the class of
-`j ∈ J` to its class in `K/K²`. A class maps to zero exactly when `j ∈ K²`.
-Its kernel is thus `(J ∩ K²)/JK`, which vanishes by the assumed identity.
-This proves injectivity on the whole conormal module, before taking homology. -/
+/-- If `J ∩ K² = J K`, where `J` is the kernel of `Q.ofComp P` and `K` the kernel of the
+composed presentation, then the base change to `C` of the conormal map induced by
+`Q.toComp P` is injective. -/
 theorem Cotangent.toComp_injective_of_intersection
     {A : Type u} {B : Type v} {C : Type w}
     [CommRing A] [CommRing B] [CommRing C]

@@ -14,8 +14,22 @@ import WeilConjectures.RingTheory.StabilizingConeTower
 /-!
 # Finite obstruction groups give a finite free model
 
-Source: Stacks Project, More on Algebra, Tag 064U, descending construction.
-(blueprint: lem-pc-ring-finite-cone-free-model).
+If `C` has no cohomology above `b` and the cones of bounded finite free approximations of `C`
+always have finitely generated top cohomology, then `C` is quasi-isomorphic to a complex of
+finite free modules concentrated in degrees `≤ b`.
+
+## Implementation details
+
+Starting from the zero complex in degree `b + 1`, we repeatedly apply
+`exists_finiteFree_cone_extension` (using dependent choice) and pass to the degreewise colimit
+with `exists_model_of_stabilizing_cone_tower`. In each degree a sufficiently late stage is
+isomorphic to the colimit, so finite freeness and the upper bound transfer. The ring is assumed
+small in the module universe, so finite free modules on finite sets of generators can be
+constructed there.
+
+## References
+
+* [Stacks, Tag 064U]
 -/
 
 @[expose] public section
@@ -61,33 +75,7 @@ private theorem zero_cone_inr_isIso (R : Type u) [CommRing R]
   exact HomologicalComplex.Hom.isIso_of_components _
 
 /-- Construct a bounded above finite free model from finite top cohomology of the cones
-of bounded finite free approximations. The ring fits in the module universe, so finite
-free modules on finite sets of generators can be constructed in that universe.
-
-Source: Stacks Project, More on Algebra, Lemma 15.66.5, Tag 064U, construction in the
-proof of (2) implies (1), after the finite obstruction group has been established.
-(blueprint: lem-pc-ring-finite-cone-free-model).
-
-Proof: start at degree `b + 1` with the zero complex and the zero map to `C`. Since
-`H^i(C) = 0` for `i > b`, this map is an isomorphism above `b + 1` and surjective at
-`b + 1`. Suppose `F` is zero below `n` and above `b`, is finite free termwise, and its
-map to `C` is an isomorphism above `n` and surjective at `n`. The cone long exact
-sequence makes the cone zero in cohomology above `n - 1`. Its degree-`n - 1`
-cohomology is finite by `hcone`. Choose finitely many generating classes and represent
-them by cone cycles. A cone cycle is a pair in `F^n` and `C^(n - 1)` satisfying the
-cycle and chain-map equations. Adjoin a finite free module in degree `n - 1`, mapping
-its basis to these pairs (with the sign prescribed by the cone convention). The
-cohomology sequence shows that this kills the kernel in degree `n` and covers the
-cokernel in degree `n - 1`, giving an isomorphism at `n` and a surjection at `n - 1`.
-All terms, maps and differentials in degrees at least `n` remain unchanged.
-Use dependent choice to iterate these compatible extensions for `n = b + 1 - k`.
-Apply `exists_model_of_stabilizing_cone_tower`, which constructs the degreewise
-colimit complex and a quasi-isomorphism to C. In each degree an inclusion from a
-sufficiently late stage is invertible. Transport finite freeness and the upper support
-bound across those termwise isomorphisms. The zero ring and an acyclic C are covered
-by the same construction, with empty generating sets when the obstruction is zero.
-The only postponed part is `exists_finiteFree_cone_extension`, the single finite
-extension step; no object is defined by selecting a witness of this postponed theorem. -/
+of bounded finite free approximations. -/
 theorem exists_finiteFree_model_of_finite_cones (R : Type u) [CommRing R] [Small.{v} R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (C : CochainComplex (ModuleCat.{v} R) ℤ) (b : ℤ)

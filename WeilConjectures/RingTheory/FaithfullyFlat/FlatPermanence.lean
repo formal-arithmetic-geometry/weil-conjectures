@@ -29,8 +29,7 @@ open TensorProduct
 namespace Module.Flat
 
 /-- Let `R → S` be a ring map and `M` an `S`-module. If `M` is flat as an `R`-module and
-faithfully flat as an `S`-module, then `S` is flat over `R`.
-(blueprint: `lem-weil-pbc-flat-permanence`) -/
+faithfully flat as an `S`-module, then `S` is flat over `R`. -/
 theorem of_flat_of_faithfullyFlat_module (R S M : Type*) [CommRing R] [CommRing S] [Algebra R S]
     [AddCommGroup M] [Module R M] [Module S M] [IsScalarTower R S M] [Module.Flat R M]
     [Module.FaithfullyFlat S M] : Module.Flat R S := by

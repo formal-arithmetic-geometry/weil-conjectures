@@ -13,8 +13,12 @@ import WeilConjectures.RingTheory.PseudoCoherentDistinguishedTriangle
 /-!
 # Pseudo-coherence in a distinguished triangle
 
-Source: Stacks Project, `more-algebra.tex`, Tag 064R, label
-`lemma-cone-pseudo-coherent` (blueprint: lem-sc-cone-pseudo-coherent).
+If `K ⟶ L ⟶ M ⟶ K[1]` is distinguished, `K` is `(m + 1)`-pseudo-coherent and `L` is
+`m`-pseudo-coherent, then `M` is `m`-pseudo-coherent.
+
+## References
+
+* [Stacks, Tag 064R]
 -/
 
 @[expose] public section
@@ -29,14 +33,7 @@ namespace CategoryTheory
 
 /-- If `K ⟶ L ⟶ M ⟶ K[1]` is distinguished in the derived category of a ring,
 then `(m + 1)`-pseudo-coherence of `K` and `m`-pseudo-coherence of `L` imply
-`m`-pseudo-coherence of `M` (Stacks, Tag 064R).
-(blueprint: lem-sc-cone-pseudo-coherent)
-
-Proof: apply the first clause of the ring-level distinguished-triangle lemma
-(lem-pc-ring-pseudo-coherent-distinguished-triangle, Tag 064R) to the triangle `T`:
-if `T.obj₁` is `(m + 1)`-pseudo-coherent and `T.obj₂` is `m`-pseudo-coherent, then
-`T.obj₃` is `m`-pseudo-coherent.
--/
+`m`-pseudo-coherence of `M`. -/
 theorem isMPseudoCoherent_cone
     (R : Type u) [CommRing R]
     [HasDerivedCategory.{w} (ModuleCat.{v} R)]
