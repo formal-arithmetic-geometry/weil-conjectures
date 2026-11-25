@@ -180,8 +180,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 
 /-! # Continuous matrices for the sheet embeddings
 
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-finite-etale-sheet-matrices)
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -388,32 +389,7 @@ private theorem range_of_integral_frame
     exact hmul (G (a z)) (f z)
 
 /-- Local integral and rational frames describe the sheet embeddings by invertible
-continuous matrices. No matrix coset is asserted to be constant.
-
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
-Bhatt--Scholze, Section 6.8, the continuous coefficient realization and local bases.
-(blueprint: lem-sfb-continuous-finite-etale-sheet-matrices)
-
-Proof. Split p on an etale covering using finite_etale_etale_local_split.
-Replace each summand by its isomorphism with the base and reindex by Fin d.
-On a nonempty member surjectivity of p makes d positive; omit empty members.
-Pull back a rational free cover for P. Pull back the integral free cover for M
-along each of the finitely many sections and take their common refinement.
-Normalize all pullbacks by condensedPullbackHom and upperStarComp. The chosen
-e and the scalar-extension comparison identify the rationalized integral
-frames with the rational frame. Evaluation at a point shows that each integral
-frame has the rational rank r. The coordinate matrix and its inverse have
-continuous entries, since the continuous coefficient encoding takes a finite
-free internal module to the corresponding sheaf of continuous vectors.
-Use the inverse coordinate matrix to test whether a rational section is in
-the image of the integral frame: every coordinate must lie in the integral
-subring. This test is sufficient on every pro-etale object, since a continuous
-function with values in a subspace is continuous into that subspace. Restrict
-the same rational frame to every open W. Naturality of the extension unit and
-of the composition comparisons gives the displayed test for the actual sheet
-map, rather than an abstract isomorphic lattice. Coproduct splittings are stable
-under this open base change, yielding the cofan assertion for W. Rank zero uses
-empty matrices, and an empty base uses the empty cover. -/
+continuous matrices. No matrix coset is asserted to be constant. -/
 theorem continuousFiniteEtaleLattice_sheet_matrices
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

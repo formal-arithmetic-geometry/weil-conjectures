@@ -19,20 +19,7 @@ public import WeilConjectures.WeilSheaf.LisseLocus
 Let `i : Z ⟶ Y` be a surjective closed immersion of schemes, for instance the inclusion of the
 reduced subscheme. A sheaf `G` of `ℚ̄_ℓ`-modules on `Y_proét` is lisse as soon as `i^* G` is
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.of_adicUpperStar_of_surjective`). This is the part
-of the topological invariance of the pro-étale site (Stacks 09BK) needed for lissity.
-
-Lissity being Zariski local, we may assume `Y = Spec B` affine and `Z = Spec (B ⧸ J)` with `J`
-contained in every prime ideal. A trivialising cover of `i^* G` is refined by finitely many
-`Spec C_a` with `C_a` ind-étale over `B ⧸ J`
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_indEtale_cover`). Their closed lifts
-`Spec H_B(C_a)` (`Algebra.ClosedLift`), together with basic opens `D(f)`, `f ∈ J`, which are
-empty, form a pro-étale cover of `Y`
-(`AlgebraicGeometry.exists_ofArrows_closedLiftCover_mem_proetalePrecoverage`). The morphism
-`Spec C_a ⟶ Spec H_B(C_a)` is a surjective closed immersion, being a base change of `i`,
-and the pullback along a surjective closed immersion `s` reflects isomorphism classes, the
-unit `M ⟶ s_* s^* M` being invertible
-(`AlgebraicGeometry.ProEtale.isIso_adicUpperStarLowerStarAdjunction_unit_app_of_surjective`).
-Hence the trivialisation of `i^* G` on `Spec C_a` comes from one of `G` on `Spec H_B(C_a)`.
+of the topological invariance of the pro-étale site needed for lissity.
 
 As a consequence, lissity near generic points of constructible sheaves holds without
 reducedness (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_opens_isAdicLisseSheaf'`).
@@ -43,6 +30,11 @@ reducedness (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_opens_i
 - `AlgebraicGeometry.ProEtale.isoOfAdicUpperStarIso`
 - `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.upperStar_opensι_of_subset_range'`
 - `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_opens_isAdicLisseSheaf'`
+
+## References
+
+* [Stacks, Tag 09BK](https://stacks.math.columbia.edu/tag/09BK)
+* [Stacks, Tag 097Z](https://stacks.math.columbia.edu/tag/097Z)
 -/
 
 @[expose] public section
@@ -130,8 +122,8 @@ theorem IsAdicLisseSheaf.of_upperStar_of_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) 
 
 /-- **Ind-étale affine trivialising covers.** A lisse sheaf on an affine scheme `Spec R` is
 trivialised on finitely many jointly surjective `Spec T_a ⟶ Spec R` with `T_a` ind-étale over
-`R`: refine a trivialising cover by finitely many affine opens of its members, and apply Stacks
-097Z (`RingHom.WeaklyEtale.exists_indEtale_comp`) to each of them. -/
+`R`: refine a trivialising cover by finitely many affine opens of its members, and apply
+`RingHom.WeaklyEtale.exists_indEtale_comp` to each of them. -/
 theorem IsAdicLisseSheaf.exists_indEtale_cover {R : CommRingCat.{u}}
     {F : AdicSheaf l (Spec R)} (hF : IsAdicLisseSheaf F) :
     ∃ (ι : Type u) (_ : Finite ι) (T : ι → CommRingCat.{u}) (φ : ∀ a, R ⟶ T a),
@@ -249,17 +241,7 @@ theorem IsAdicLisseSheaf.of_adicUpperStar_of_surjective_of_spec {R : CommRingCat
 
 /-- **Nil-invariance of lissity.** Let `i : Z ⟶ Y` be a surjective closed immersion, for
 instance the inclusion of the reduced subscheme. A sheaf `G` of `ℚ̄_ℓ`-modules on `Y_proét` is
-lisse as soon as its pullback `i^* G` is.
-
-Lissity being Zariski local, we may assume `Y = Spec B` affine, so that `Z = Spec (B ⧸ J)` with
-`J` contained in every prime ideal. A trivialising cover of `i^* G` is refined by finitely many
-`Spec C_a`, `C_a` ind-étale over `B ⧸ J`. Their closed lifts `Spec H_B(C_a)` together with
-basic opens `D(f)`, `f ∈ J`, which are empty, form a pro-étale cover of `Y`
-(`exists_ofArrows_closedLiftCover_mem_proetalePrecoverage`), and `Spec C_a ⟶ Spec H_B(C_a)` is
-a surjective closed immersion, being the base change of `i`. Pullback along a surjective closed
-immersion is fully faithful on isomorphism classes
-(`isoOfAdicUpperStarIso`), so the trivialisation of `i^* G` on `Spec C_a` lifts to one of `G` on
-`Spec H_B(C_a)`. -/
+lisse as soon as its pullback `i^* G` is. -/
 theorem IsAdicLisseSheaf.of_adicUpperStar_of_surjective {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     [IsClosedImmersion i] [Surjective i] {G : AdicSheaf l Y}
     (hG : IsAdicLisseSheaf ((i)^*ᵃ[l].obj G)) : IsAdicLisseSheaf G := by

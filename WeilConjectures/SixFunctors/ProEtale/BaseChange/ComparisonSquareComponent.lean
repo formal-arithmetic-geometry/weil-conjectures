@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
 import all WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
 
-/-! # Underived square coherence for arbitrary commutative coefficient rings -/
+/-! # Underived square coherence for arbitrary commutative coefficient rings
+
+## References
+
+* [Stacks, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
+-/
 
 @[expose] public section
 
@@ -21,15 +26,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical underived coefficient comparison square is coherent for modules over any
-commutative ring. This specializes the already proved generic `comparison_coherent`, accessed
-through the proof-only `import all`; no finiteness assumption is needed.
-Source: `ComparisonPullbackCoherence.lean`, `comparison_coherent`, third conjunct;
-Stacks Project, Tag 0B65.
-
-Proof: the generic coherence theorem applies to the category of modules over Λ, which has
-colimits and sheafification on both sites. Its third conjunct gives the square equation for
-all schemes, all four edges, every chosen Cartesian square and every input sheaf. Specialize
-these quantifiers to the supplied data. -/
+commutative ring. -/
 theorem comparison_square_component_of_commRing
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

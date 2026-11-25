@@ -28,9 +28,9 @@ its right derived functors form a natural distinguished triangle
 The cohomology sheaves of the last two terms, evaluated on module objects placed in degree `0`,
 commute with `u + 1`-small filtered colimits: for `j_* j^*` because the higher direct images of
 abelian pro-étale sheaves along a quasi-compact quasi-separated morphism do
-(`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`, blueprint
-`corollary-continuity-cohomology--2`), and the underlying abelian sheaves of the derived
-pushforward of module objects are the derived pushforward of the underlying abelian sheaves
+(`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`),
+and the underlying abelian sheaves of the derived pushforward of module objects are the derived
+pushforward of the underlying abelian sheaves
 (`ProEtale.CondensedRing.rightDerivedLowerStarCompMapDerivedCategoryForgetIso`).
 -/
 

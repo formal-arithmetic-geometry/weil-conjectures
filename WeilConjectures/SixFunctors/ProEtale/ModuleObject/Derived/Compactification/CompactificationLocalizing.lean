@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureE
 /-!
 # Compact support along a single compactification on the localizing category
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-proposition-construction-independence-rf-shriek and its three-paragraph proof
-(blueprint: proposition-construction-independence-rf-shriek).
-
 Restriction to the full localizing subcategories is expressed using their object predicates.
 Exactness means preservation of their ambient distinguished triangles, with the canonical
 composite shift comparison. Coproduct preservation means preservation of each ambient discrete
@@ -97,29 +93,7 @@ private theorem properImage_localizing_of_hypotheses
 /-- For each specified compactification, `Rp_*` after exact extension by zero restricts
 exactly to the localizing closures, preserves their direct sums, and preserves Dctf.
 The four conjuncts express restriction, exactness, sums, and preservation of Dctf.
-All categories are the ordinary unbounded derived categories of internal module objects.
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-proposition-construction-independence-rf-shriek, statement and proof
-(blueprint: proposition-construction-independence-rf-shriek).
-
-Proof plan:
-1. Apply proposition-proper-direct-image-extension-zero to the quasi-compact open immersion c.i.
-Extension by zero preserves Dctf, all direct sums, and distinguished triangles; its
-restriction maps the source localizing closure into the middle localizing closure.
-2. Apply det-sf-comp-proper-admissible-hypotheses to the proper map c.g. Its proved
-coefficient-isomorphism transport uses proposition-proper-direct-image-extension-zero--1 for the
-six representatives, including the finite-subextension-valued algebraic closure.
-The full continuous algebraic-closure case uses its separate proper-image theorem.
-Coefficient isomorphisms are transported by exact module equivalences. These hypotheses
-preserve Dctf and ambient sums on the middle closure. Intersect that closure with the inverse
-image of the target closure; the restricted sum hypothesis makes the intersection
-localizing. Minimality then gives objectwise preservation of the closure.
-3. Compose the two restricted functors. The middle closure is the same in both steps.
-Each distinguished triangle is sent to a distinguished triangle twice, with the
-composite shift comparison. The two coproduct comparisons compose to the comparison
-for Rp_* j_!. A Dctf object first stays Dctf under j_! and then under Rp_*.
-These arguments include the empty family and the zero complex. -/
+All categories are the ordinary unbounded derived categories of internal module objects. -/
 theorem compactification_localizing
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

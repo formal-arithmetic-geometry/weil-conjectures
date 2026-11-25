@@ -18,11 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactificatio
 /-!
 # Composition of rational lower shriek on localizing constructible categories
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-comp-composition,
-clause (1), rational cases, and its proof, paragraphs "The composition isomorphism" and
-"Canonicity and associativity"
-(blueprint: lem-sfb-localizing-lower-shriek-composition).
-
 The statement is recorded here as the canonical project interface for this composition.
 
 The coefficients are exactly a finite subextension or the finite-subextension-valued
@@ -115,22 +110,7 @@ private theorem transportComposition
 
 /-- There is a natural composition isomorphism on the ordinary localizing closures for
 rational condensed coefficients, compatible with change of compactification. The witnesses
-`hf`, `hg`, `hgf` only certify preservation by the actual ambient compactification functors;
-`localizingLowerShriek` uses those same objects and maps. The equation is an equality in the
-ambient derived category, hence also in its full localizing subcategory. Its refinement
-maps are exactly those used to normalize the comparisons in
-`compactification_coherence_cocycle`, rather than arbitrary isomorphisms of their endpoints.
-
-Source: blueprint proposition-composition-base-change-rf-shriek--1, clause (1), rational cases, and
-its proof (blueprint: proposition-composition-base-change-rf-shriek--1).
-
-Proof: obtain preservation from compactification_localizing. Construct an isomorphism
-on one compactification triple using the model lemma, then lift it to the full localizing
-target. Conjugate it by the three compactification comparison cocycles to define every
-other component. Naturality of the middle comparison and the three cocycle equations
-give the simultaneous comparison square. The identity-refinement law identifies each
-comparison to a dense model with the prescribed canonical refinement component,
-so this square is exactly the equation displayed below. -/
+`hf`, `hg`, `hgf` only certify preservation by the ambient compactification functors. -/
 theorem exists_localizingLowerShriekComposition
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

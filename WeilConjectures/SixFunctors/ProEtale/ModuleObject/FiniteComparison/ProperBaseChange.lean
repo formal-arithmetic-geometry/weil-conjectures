@@ -28,8 +28,7 @@ module objects *bounded below of étale origin* if `Φ C` is
   below of étale origin
   (`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_finiteCoefficient`).
   This is the finite-level pro-étale proper base change
-  (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`, blueprint
-  `proposition-proper-direct-image-constructible-complexes--5`) read through `Φ`
+  (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`) read through `Φ`
   (`ProEtale.isIso_baseChangeMap_app_finiteCoefficient_iff`). No hypothesis is made on `g`.
 -/
 
@@ -69,8 +68,7 @@ namespace CondensedRing
 
 variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **Proper base change for module objects with finite coefficients** (blueprint
-`proposition-proper-direct-image-constructible-complexes--5`, read on module objects): for a
+/-- **Proper base change for module objects with finite coefficients** : for a
 cartesian square `g' ≫ f = f' ≫ g` with `f` proper and a complex `M` of module objects over `T̲_X`
 bounded below of étale origin, the base change morphism `Lg^* Rf_* M ⟶ Rf'_* Lg'^* M` is an
 isomorphism. It is the finite-level pro-étale proper base change

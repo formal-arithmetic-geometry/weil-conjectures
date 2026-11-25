@@ -14,10 +14,7 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 
 /-! # closed immersion projection formula
 
-Source: the open and closed immersion paragraphs and the derived version of
-`literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/`
-`det-lem-int-tensor-projection.proof.md`
-(blueprint: lem-sfb-closed-immersion-derived-tensor-projection).
+The closed immersion case of the relative derived tensor projection formula.
 -/
 
 @[expose] public section
@@ -71,22 +68,7 @@ private noncomputable def supportTensorNatIso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The closed immersion case of the relative derived projection formula.
-Source: `det-lem-int-tensor-projection.proof.md`, closed immersions and Derived version
-(blueprint: lem-sfb-closed-immersion-derived-tensor-projection).
-
-Proof: the standing hypotheses make X Noetherian, hence its open complement of the
-closed image is quasi-compact. Apply openClosedSupportProjectionFormula to f and this
-complement; its first component makes the canonical closed projection invertible.
-Assemble the normalized supportDerivedTensorComparison into a natural isomorphism of
-curried bifunctors. Form the rightAdjointProjectionMap of the closed pullback
-adjunction with this comparison. Its components equal the normalized closed projection
-maps, by the unit formula for homEquiv and functoriality of composition. They are
-therefore isomorphisms; pointwise detection twice makes the bifunctor map an
-isomorphism. Transport the pullback along supportPullbackIsoUpperStar and the exact
-closed direct image along rightDerivedFunctorIsoMapDerivedCategory. These operations
-preserve both naturality variables. Empty complements, zero coefficients and unbounded
-complexes require no separate argument. -/
+/-- The closed immersion case of the relative derived projection formula. -/
 theorem closedImmersionTensorProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (k : Type u) [Field k] {S X : Scheme.{u}}

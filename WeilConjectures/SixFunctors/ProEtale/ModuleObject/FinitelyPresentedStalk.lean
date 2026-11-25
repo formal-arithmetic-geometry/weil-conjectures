@@ -90,11 +90,7 @@ noncomputable def comapUpperStarObjIso {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 /-- **Stalks of constructible module objects are finitely presented.** For a separably closed
 field `Ω`, the pullback of a constructible `Λ_X`-module along a point `x̄ : Spec Ω ⟶ X` is a
-finitely presented `Λ_{Spec Ω}`-module.
-
-The field `Ω` is given as a commutative ring which is a field, so that `Spec (.of Ω)` is formed
-with the ring structure of `Ω` itself; this avoids comparing two ring structures on `Ω` inside the
-large categories of module objects. -/
+finitely presented `Λ_{Spec Ω}`-module. -/
 theorem isFinitelyPresented_upperStar_of_isConstructibleModuleObject {Ω : Type u} [CommRing Ω]
     (hΩ : IsField Ω) (hsep : letI := hΩ.toField; IsSepClosed Ω) {X : Scheme.{u}}
     {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}

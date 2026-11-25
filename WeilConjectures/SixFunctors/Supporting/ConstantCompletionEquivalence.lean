@@ -267,17 +267,26 @@ public import WeilConjectures.AlgebraicGeometry.Constant.ConstantCompletionPullb
 /-!
 # Constant coefficients and their sheafwise adic completion
 
-Source: Stacks Project, Tags 093M, 099I, 099L, 099M, 0A0E, 06YY and 0940.
+This module re-exports the declarations of the modules `Sheaf.Paper.ConstantCompletion*`
+imported above, which develop the comparison between constant coefficients and their
+sheafwise adic completion.
+
+## Implementation details
 
 Positive exponents are indexed by `n : ℕ`, meaning `n+1`. All localizations below use
-Mathlib's standard derived category. The extra names only specify the canonical objects,
-strict towers and representative normalizations in this node; they introduce no replacement
+Mathlib's standard derived category.
 
-The declarations live in the modules `Sheaf.Paper.ConstantCompletion*` imported above (split
-on 2026-10-27 so that each theorem has its own module); this module re-exports them.
-Their private helpers are reached with `import all` of the part that defines them
-(`Sheaf.Paper.ConstantCompletionCore`, `...InverseImage`, `...DerivedPull`, `...FinitePull`).
+## References
+
+* [Stacks, Tag 093M](https://stacks.math.columbia.edu/tag/093M)
+* [Stacks, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0940](https://stacks.math.columbia.edu/tag/0940)
 -/
+
 
 @[expose] public noncomputable section
 

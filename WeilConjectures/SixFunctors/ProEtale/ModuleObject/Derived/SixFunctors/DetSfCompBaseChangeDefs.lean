@@ -16,9 +16,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShr
 /-!
 # Specified compact-support base-change maps
 
-Source: blueprint proposition-composition-base-change-rf-shriek--4, definitions used in clauses
-(1)--(3). These are the existing constructions, separated so refinement pasting can use their exact
-maps. (blueprint: def-sfb-compact-support-base-change-maps).
+These are the existing constructions, separated so refinement pasting can use their exact
+maps.
 -/
 
 @[expose] public section
@@ -30,9 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 namespace CategoryTheory.Functor
 
-/-- The two-factor exchange with its component API.
-Source: blueprint beta is the proper exchange followed by the image of the open comparison.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+/-- The two-factor exchange with its component API. -/
 structure CompactSupportExchangeData
     {A B C D E F : Type*} [Category A] [Category B] [Category C]
     [Category D] [Category E] [Category F]
@@ -43,9 +40,7 @@ structure CompactSupportExchangeData
   component (K : A) : map.app K = b.app (J.obj K) ≫ Q.map (o.hom.app K)
   isIso (K : A) : IsIso (b.app (J.obj K)) → IsIso (map.app K)
 
-/-- Construct the two-factor exchange and prove its component properties.
-Source: the displayed proper/open composite defining beta.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+/-- Construct the two-factor exchange and prove its component properties. -/
 def compactSupportExchangeData
     {A B C D E F : Type*} [Category A] [Category B] [Category C]
     [Category D] [Category E] [Category F]
@@ -62,9 +57,7 @@ end CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 open AlgebraicGeometry Scheme
 
-/-- The module-object derived pullback used in the base-change statement.
-Source: the module-object six-functor definitions
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The module-object derived pullback used in the base-change statement. -/
 noncomputable abbrev detSfDerivedPullback
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {A B : Scheme.{u}} (h : A ⟶ B) :
@@ -74,9 +67,7 @@ noncomputable abbrev detSfDerivedPullback
         (Mod (Sheaf (Scheme.ProEt.topology A) Ab.{u + 1}) (condensedRingObj Λ A)) :=
   L((h)^*⟦Λ⟧)
 
-/-- The derived lower-shriek functor attached to a compactification.
-Source: the module-object six-functor definitions
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The derived lower-shriek functor attached to a compactification. -/
 noncomputable abbrev detSfCompactSupport
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {A B : Scheme.{u}} {h : A ⟶ B}
@@ -87,9 +78,7 @@ noncomputable abbrev detSfCompactSupport
         (Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B)) :=
   rightDerivedLowerShriekOfCompactification Λ d
 
-/-- The specified Cartesian realization of the literal proper pullback square.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proper exchange.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+/-- The specified Cartesian realization of the literal proper pullback square. -/
 def detSfProperBaseChangeSquare
     {Z Y Y' : Scheme.{u}} (p : Z ⟶ Y) (v : Y' ⟶ Y) :
     ChosenCartesianSquare (pullback.fst p v) (pullback.snd p v) p v :=
@@ -100,9 +89,7 @@ def detSfProperBaseChangeSquare
 
 /-- The published ambient base-change mate for the literal proper pullback square.
 This abbreviation only supplies the identity identification with the chosen fibre product;
-it makes no new choice of exchange map. Source: blueprint
- proposition-composition-base-change-rf-shriek--4, proof step 4
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+it makes no new choice of exchange map. -/
 noncomputable abbrev detSfProperBaseChangeMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -111,11 +98,12 @@ noncomputable abbrev detSfProperBaseChangeMap
       (detSfDerivedPullback Λ (pullback.fst p v) ⋙ R((pullback.snd p v)_*⟦Λ⟧)) :=
   condensedAmbientExchange Λ (detSfProperBaseChangeSquare p v)
 
-/-- The canonical open exchange arrow, in the inverse direction to clause (1).
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof steps 1--2. Insert the
-open unit, transport the pullback square, and contract the base-changed open counit. Thus an
-isomorphism whose inverse equals this arrow has a specified normalization
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+/-- The canonical open exchange arrow `Lv^* ⋙ (i')_! ⟶ i_! ⋙ Lv'^*`, where `i` is the open
+immersion of the compactification `c` of `f`, `i'` is its base change along `v`, and `Lv^*`,
+`Lv'^*` are the derived pullbacks along the base changes of `v` to `X` and to the compactifying
+scheme. It points in the inverse direction of the open base-change isomorphism. It is built by
+inserting the open unit, transporting the pullback square, and contracting the base-changed open
+counit. Thus an isomorphism whose inverse equals this arrow has a specified normalization. -/
 def detSfOpenBaseChangeMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -143,9 +131,7 @@ def detSfOpenBaseChangeMap
     (Functor.rightUnitor _).hom
 
 /-- Regard a compactification of a quasi-compact morphism as an object of the published
-boundary-refinement category. Its open is quasi-compact by the existing factorization lemma.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof step 5
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+boundary-refinement category. Its open is quasi-compact by the existing factorization lemma. -/
 def detSfBoundaryCompactification
     {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f) :
     Compactification.BoundaryCompactification f :=
@@ -155,9 +141,7 @@ def detSfBoundaryCompactification
 coherence theorem, evaluated on the existing compactification objects. The theorem determines
 this family uniquely by its equation against every common dense refinement; identity and
 cocycle laws alone would not determine it. No comparison on the whole unbounded category is
-chosen. Source: blueprint proposition-construction-independence-rf-shriek and
- proposition-composition-base-change-rf-shriek--4, proof steps 5 and 8
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+chosen. -/
 noncomputable def detSfCanonicalCompactificationComparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
@@ -194,9 +178,7 @@ attribute [local irreducible] derivedOpenImmersionLowerShriekUpperStarAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Package the specified map with its component properties.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, displayed beta.
-(blueprint: def-sfb-compact-support-base-change-maps). -/
+/-- Package the specified map with its component properties. -/
 noncomputable def detSfCompactSupportExchangeData
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -217,9 +199,7 @@ noncomputable def detSfCompactSupportExchangeData
     (detSfProperBaseChangeMap Λ c.g v) o
 
 /-- The specified compact-support exchange composite: the published proper-base-change mate
-followed by `Rp'_*` applied to the normalized open/base-change comparison.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, clause (2) and proof steps 3--4
-(blueprint: proposition-composition-base-change-rf-shriek--4). -/
+followed by `Rp'_*` applied to the normalized open/base-change comparison. -/
 noncomputable def detSfCompactSupportBaseChangeComposite
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

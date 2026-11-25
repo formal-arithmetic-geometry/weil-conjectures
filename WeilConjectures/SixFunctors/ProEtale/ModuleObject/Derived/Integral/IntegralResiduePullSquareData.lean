@@ -9,8 +9,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 
 /-! # The scalar-adjunction normalization of the derived residue pull square
 
-Source: Bhatt--Scholze, Remark 6.8.15, and associativity of derived scalar extension.
-(blueprint: new-integral-residue-pull-square-data)
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
 -/
 
 @[expose] public section

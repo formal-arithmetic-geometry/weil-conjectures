@@ -32,13 +32,15 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformCompleteTriangulated
 /-!
 # Constructible tensor and its normalized Koszul completion unit
 
-Source: blueprint sec-six-functors/sk-rem-sf-pf-done,
-fix-prop-projection-formula.proof.md, Weil-equivariance sentence;
-Bhatt--Scholze, Lemma 6.5.5 and Proposition 6.6.11; Stacks Tags 099M and 0A0E
-(blueprint: lem-wf-constructible-tensor-koszul-unit).
-
 The statements retain the actual quotient augmentation and intrinsic (u,0) unit.
 The coefficient comparison is the published projection-normalized transport.
+
+## References
+
+* [Stacks, Tag 099B](https://stacks.math.columbia.edu/tag/099B)
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* Bhatt--Scholze, Lemma 6.5.5, Proposition 6.6.11
 -/
 
 @[expose] public noncomputable section
@@ -129,20 +131,7 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
 include hsep
 
 /-- Ordinary tensor and its intrinsic completion are bounded constructible; the
-specified intrinsic unit is invertible and natural for arbitrary integral arrows.
-Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Tags 099B and 0A0E
-(blueprint: lem-wf-constructible-tensor-koszul-unit).
-Proof (steps 1--5): the category identification in step 1 permits application of
-constructibleTensorCompletion. Its quotient comparison is invertible; strict scalar
-reassociation identifies it with the quotient unit used here (step 2). The natural
-quotient/Koszul comparison of step 3 identifies that unit with the intrinsic unit.
-IntegralOperationsPreserveConstructible applied to the identity morphism makes the
-completed tensor constructible. Transfer the retained bounds, strata, local models,
-compatible etale witnesses and their cocycles along the normalized isomorphisms to
-obtain constructibility of the ordinary and Koszul tensors (step 4). Finally the Koszul
-degree-zero inclusions commute with tensor of any two integral arrows; the induced
-product/fiber map carries (u,0) to (u',0). Localization and the reflector unit's
-naturality give the displayed equation, without any invertibility assumption on f,g. -/
+specified intrinsic unit is invertible and natural for arbitrary integral arrows. -/
 theorem wfConstructibleTensorKoszulUnit :
     (∀ M N : PbcBoundedConstructibleComplete (D.geometricFiber W₀).left
         (pbcStageDatum.{u} c.l c.Qbar E),

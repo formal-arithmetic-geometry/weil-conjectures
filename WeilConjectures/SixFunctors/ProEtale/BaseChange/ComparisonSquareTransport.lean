@@ -12,9 +12,12 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareProEtaleP
 
 /-! # Derived transport of a coherent comparison square
 
-These statements use the defining expressions of the comparison isomorphisms of
-`SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean`; they are the inputs of
-`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap` there.
+These statements use the defining expressions of the comparison isomorphisms of the smooth base
+change file; they are the inputs of `AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`.
+
+## References
+
+* [Stacks, Tag 0B65](https://stacks.math.columbia.edu/tag/0B65)
 -/
 
 @[expose] public section
@@ -27,24 +30,7 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.ComparisonCore
 
 /-- Derived pullback comparisons transport an underived coherent square to the bounded-below
-comparison square. This is the categorical transport portion of
-`comparison_square`; the underived square is supplied separately so that arbitrary commutative
-coefficient rings are allowed.
-Source: Stacks Project, Tag 0B65.
-
-Proof: the component equations make the two pasted natural transformations equal by
-extensionality. Apply the exact functors degreewise to complexes and localize at
-quasi-isomorphisms. The naturality and associativity equations for
-`mapDerivedCategoryCompIso` identify the resulting pasted maps with the induced maps on
-unbounded derived categories. Conjugate the pro-étale pullbacks by
-`leftDerivedUpperStarIsoMapDerivedCategory`; its composition and equality-transport
-compatibilities identify the conjugated square with `leftDerivedUpperStarSquareIso`.
-On the étale side restrict along the bounded-below inclusion and use
-`mapDerivedCategoryPlusCompatibility` for each edge and each composition. Cancel the
-invertible comparison factors. The remaining composites are exactly the displayed equation.
-Only the supplied component equations enter this calculation; it does not invoke the theorem
-`comparison_square` or a theorem asserting underived coherence.
--/
+comparison square. -/
 theorem comparison_square_of_component
     (Λ : Type (u + 1)) [CommRing Λ]
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}

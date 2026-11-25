@@ -17,8 +17,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafModuleZSMul
 
 Let `X` be a noetherian scheme and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`. A morphism of
 bounded constructible `𝒪_E`-complexes on `X_proét` is an isomorphism as soon as its first derived
-reduction `K ↦ K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is one (`ProEtale.isIso_of_isIso_derivedReduction_map`,
-blueprint `lemma-reduction-derived-nakayama`).
+reduction `K ↦ K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is one (`ProEtale.isIso_of_isIso_derivedReduction_map`).
 
 The mapping cone `C` of such a morphism is bounded constructible, and its derived reduction
 vanishes. A bounded complex whose derived extension of scalars vanishes and whose cohomology
@@ -26,7 +25,6 @@ objects satisfy the abelian Nakayama lemma is zero
 (`CategoryTheory.Mod.isZero_of_isZero_leftDerivedFunctor_extendScalars`), and the cohomology
 sheaves of `C` are constructible `𝒪_{E,X}`-modules, for which the abelian Nakayama lemma holds
 (`ProEtale.isZero_of_isConstructibleModuleObject_of_isZero_extendScalars`).
-
 -/
 
 @[expose] public section
@@ -82,7 +80,7 @@ instance isTriangulated_leftDerivedFunctor_extendScalars_residueField :
 
 variable [IsNoetherian X]
 
-/-- Blueprint `lemma-reduction-derived-nakayama` (section `chap-The-pro-etale-site`): a morphism
+/-- **Derived Nakayama for the reduction**: a morphism
 between derived complete `𝒪_{E,X}`-complexes is an isomorphism whenever its first derived
 reduction `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` is one. Here it is proved for bounded constructible
 `𝒪_E`-complexes on a noetherian scheme. -/

@@ -69,15 +69,7 @@ attribute [local irreducible] constructibleToPadicAlgCl constructibleToQbarPullI
 
 set_option maxHeartbeats 150000 in
 -- The canonical module-object comparisons require repeated exactness instance inference.
-/-- Composition coherence of the restricted coefficient pull comparison.
-Source: ChangeOfCoefficients.lean, derivedPullIso; ContinuousIntegralPullComposition.lean,
-derived_pull_comp and bounded_comp_hom (blueprint: lem-weil-pbc-qbar-condensed-pullback-cube).
-
-Proof in words. Apply faithfulness of the bounded-constructible inclusion to the hom
-components. The map of scalar extension is the ambient derived extension map, and the
-bounded pullback composition maps have the ambient leftDerivedUpperStarComp components.
-The composition equation derived_pull_comp, evaluated at K.obj, is precisely the resulting
-ambient equation after removing the identity associator components. -/
+/-- Composition coherence of the restricted coefficient pull comparison. -/
 private theorem qbarPullIso_comp
     {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
@@ -184,16 +176,7 @@ attribute [local irreducible] constructibleToPadicAlgCl
   boundedConstructibleUpperStar boundedConstructibleLowerStar
   boundedConstructibleUpperStarComp
 
-/-- Paste composition coherence across the two paths of the commutative square.
-Source: ContinuousIntegralExchangeTargetAdjunct.lean, mapped_iso_rectangle;
-MorphismDefs.lean, boundedConstructiblePullbackSquareComparison_app
-(blueprint: lem-weil-pbc-qbar-condensed-pullback-cube).
-
-Proof in words. Apply qbarPullIso_comp to (g', f) and (f', g), and qbarPull_eq to the equal
-composites, using sq.w.symm. Expand each pullback-square comparison into the inverse
-composition comparison, equality transport and forward composition comparison. Paste
-these three equations with mapped_iso_rectangle, cancelling the common composite
-comparison. This proves the displayed equality of isomorphisms. -/
+/-- Paste composition coherence across the two paths of the commutative square. -/
 private lemma qbarPull_square_cube_iso
     (sq : CommSq g' f' f g) (M : PadicSubfieldConstructible Y ℓ E) :
     (constructibleToPadicAlgCl X' ℓ E).mapIso
@@ -249,34 +232,7 @@ attribute [local irreducible] constructibleToPadicAlgCl constructibleToQbarPullI
   boundedConstructibleUpperStarComp boundedConstructiblePullbackSquareComparison
   coefficientPullbackCube
 
-/-- Coefficient pullback comparisons commute with the specified geometric square comparison.
-Source: ChangeOfCoefficients.lean, derivedPullIso and derivedComapLowerStarIso;
-UpperLowerStar/Defs.lean, upperStarComp; Derived/UpperLowerStar.lean, leftDerivedUpperStarComp;
-TwoColimit.lean, final transport paragraph
-(blueprint: lem-weil-pbc-qbar-condensed-pullback-cube).
-
-Proof in words. Restriction of scalars followed by geometric direct image and geometric
-direct image followed by restriction have the same underlying sheaf functor; the natural
-isomorphism comapLowerStarIso is the identity on underlying sheaves. Its compatibility
-with direct-image composition follows by forgetting the action, which is faithful, and
-using associativity of direct-image composition. The change-of-coefficients square for
-the coefficient maps follows from their naturality. Derive these commuting diagrams using
-K-injective resolutions: restriction is exact and preserves K-injectives since its left
-adjoint is exact, and direct images preserve K-injectives. The universal property of the
-right derived functor identifies the resulting comparison with derivedComapLowerStarIso
-and preserves its composition equation. Conjugate that equation along the two geometric
-adjunctions and the extension/restriction adjunctions. Conjugation respects composition
-and associators, giving compatibility of derivedPullIso with geometric composition.
-The geometric composition maps are the specified leftDerivedUpperStarComp: derive the
-underived adjunction-conjugate composition equation and use uniqueness of derived
-adjunctions, with exact pullbacks computed termwise. Apply this composition equation to
-(f', g) and (g', f), transport along sq.w, and cancel the common comparison for the equal
-composite. Naturality under equality and proof irrelevance handle the commutativity proof.
-This gives the pullback cube in the displayed inverse-alpha_f' orientation. Restrict along
-the fully faithful bounded constructible inclusions, whose composition constraints are
-restrictions of these same maps. This proof uses no base-change exchange morphism, no
-push comparison, and no properness or Cartesianity. For identity morphisms the equation
-reduces to the unit coherence; for a zero object both sides are its unique morphism. -/
+/-- Coefficient pullback comparisons commute with the specified geometric square comparison. -/
 theorem constructibleToQbar_pullback_cube
     (sq : CommSq g' f' f g) (V : PadicSubfieldConstructible Y ℓ E) :
     coefficientPullbackCube

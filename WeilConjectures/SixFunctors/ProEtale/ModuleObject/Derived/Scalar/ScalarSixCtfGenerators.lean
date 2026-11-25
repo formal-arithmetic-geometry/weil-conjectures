@@ -124,9 +124,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 
 /-! # The canonical locally closed scalar-perfect generators
 
-These are the unchanged definitions used in scalar-six-ctf, factored out so their
-coefficient-presentation comparisons do not depend on the assembly theorem.
-Source: blueprint scalar-six-ctf (1) (blueprint: def-sfb-scalar-perfect-generators).
+These are the definitions used in the scalar six-functor `D_ctf` comparison, factored out so
+their coefficient-presentation comparisons do not depend on the assembly theorem.
 -/
 
 @[expose] public noncomputable section
@@ -144,9 +143,7 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 /-- Extension through the scheme-theoretic closure is exactly i_* u_!: exact open
 extension followed by the ordinary derived module pushforward, whose action is
-restriction along the published coefficient adjunct. No extension functor is chosen.
-Source: blueprint scalar-six-ctf, final paragraph
-(blueprint: def-sfb-scalar-perfect-generators). -/
+restriction along the published coefficient adjunct. No extension functor is chosen. -/
 def sfbLocallyClosedDerivedExtension (Λ : ScalarSixRing.{u})
     {k : Type u} [Field k] {X : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

@@ -182,12 +182,12 @@ lemma isIso_connectedComponentsAlongPullbackHom
 `k_Y : Y ⟶ Spec ℤ`, and `V` an object of `Y_proét` such that
 
 * the presheaves `V ↦ Λ(π₀ V)` on `Y_proét` and on `X_proét` agree with their sheafifications on
-  sections over `V` and over `X ×_Y V` (e.g. both are affine and weakly contractible), and
+  sections over `V` and over `X ×_Y V`, and
 * precomposition with the projection `X ×_Y V ⟶ V` is bijective on morphisms to the schemes
-  `Spec LC(S, ℤ)` (i.e. `π₀(X ×_Y V) ≅ π₀(V)`).
+  `Spec LC(S, ℤ)`.
 
 Then the morphism `k_Y^* p^* Λ ⟶ f_* (f ≫ k_Y)^* p^* Λ` adjoint to the composition isomorphism of
-the pullbacks is bijective on sections over `V`: both sides are `Λ(π₀ V)`. -/
+the pullbacks is bijective on sections over `V`. -/
 theorem bijective_unitCompUpperStarCompInv_app
     (hV : Function.Bijective
       ((toSheafify (ProEt.topology Y) ((connectedComponentsAlong kY).op ⋙ Λ.obj)).app (op V)))

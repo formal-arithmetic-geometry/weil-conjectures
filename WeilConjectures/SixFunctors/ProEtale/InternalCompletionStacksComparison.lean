@@ -11,8 +11,11 @@ import WeilConjectures.SixFunctors.ProEtale.InternalQuotientKoszulUnitComparison
 
 /-! # Actual Roos completeness and constant-coefficient completeness
 
-Source: integral-models proof (1), Stacks Tags 099I, 099L and 099M.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
 -/
 
 @[expose] public noncomputable section
@@ -25,23 +28,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
-/-- The canonical scalar restriction identifies the actual Roos completeness predicate.
-Source: integral-models proof (1); constant-coefficient criterion proof (2)--(3),
-Stacks Tags 099I, 099L and 099M.
-(auxiliary; not a blueprint node).
-
-Proof: use pointComparison to transport the absolute-value integer coefficient ring to
-its spectral-norm presentation. The normalized section-ring comparison identifies the
-latter with the positive constant-quotient limit. Flat common-quotient comparison
-identifies every reduction after constant scalar restriction, with its actual quotient
-map. Exact section-action and small-site equivalences preserve products, shifts and
-cones. On flat K-flat representatives their derived reduction comparisons identify
-pure tensors and carry the quotient units and transitions to the same maps. They
-therefore identify the augmented Roos triangle, including the canonical augmentation.
-The quotient-tower/local-kernel completeness comparison for the principal uniformizer
-ideal identifies invertibility of this augmentation with ConstantCompletion.IsComplete.
-Reflection through the exact equivalences proves the reverse implication as well.
-This argument applies to arbitrary unbounded K, including zero, and to empty X. -/
+/-- The canonical scalar restriction identifies the actual Roos completeness predicate. -/
 theorem internal_completion_stacks_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

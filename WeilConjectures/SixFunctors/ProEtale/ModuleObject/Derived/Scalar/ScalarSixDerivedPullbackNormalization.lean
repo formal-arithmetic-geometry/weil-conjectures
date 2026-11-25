@@ -13,7 +13,14 @@ import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 public import WeilConjectures.SixFunctors.ScalarSixDerivedPullbackNormalization
 
-/-! # Normalized non-flat derived pullback comparison -/
+/-!
+# Normalized non-flat derived pullback comparison
+
+## References
+
+* [Stacks, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
+* [Stacks, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -511,23 +518,7 @@ private theorem scalarSixPullHomComp
     (scalarSixRestrictionComp a f g ((scalarSixChange a W).obj K))).symm
 
 /-- The canonical non-flat scalar mate is invertible and satisfies both coherences.
-
-Source: blueprint det-prop-scalar-six-pullback.proof.md, (1) and (3);
-Stacks, Cohomology on Sites, Tags 0G7E and 0D6D.
-(blueprint: lem-sfb-scalar-six-derived-pullback-normalization).
-
-Proof: the generic inverse-mate unit formula identifies each component of the specified
-scalarSixPullHom with the existing free-parameter scalar pullback comparison. Its
-non-flat invertibility theorem therefore makes scalarSixPullHom invertible. Use asIso
-for theta, so its normalization is reflexivity. For geometric composition, use the
-ordinary comapUpperStarIso composition equation and exact derived square composition.
-The unit-mate pasting calculation transposes this to the displayed theta composition
-law. For a coefficient tower, take geometric mates of the ordinary restriction
-comparisons. Their direct-image mates and the restriction compositor have identity
-underlying sheaf maps, so faithfulness of the module forgetful functor proves their
-pasting equation. Apply exact derived square composition and then scalar mates. The
-conjugate of derived restriction transitivity is precisely scalarSixTower by its
-definition. Thus its square is the required theta/tower equation. -/
+-/
 theorem scalarSixPullbackData_exists : Nonempty ScalarSixPullbackData.{u} := by
   have (Λ Λ' : ScalarSixRing.{u}) (a : Λ ⟶ Λ') (X Y : Scheme.{u}) (f : X ⟶ Y) :
       IsIso (scalarSixPullHom a f) := by

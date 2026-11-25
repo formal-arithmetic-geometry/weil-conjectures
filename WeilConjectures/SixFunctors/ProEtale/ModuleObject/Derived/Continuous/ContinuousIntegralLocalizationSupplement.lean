@@ -8,7 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalization
 public import Mathlib.CategoryTheory.Functor.OfSequence
 
-/-! # The localization telescope of integral continuous coefficients -/
+/-! # The localization telescope of integral continuous coefficients
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2
+-/
 
 @[expose] public section
 
@@ -20,16 +25,12 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The sequential diagram obtained by repeatedly multiplying an object by ℓ.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(blueprint: def-weil-pbc-integral-localization-telescope). -/
+/-- The sequential diagram obtained by repeatedly multiplying an object by ℓ. -/
 abbrev integralLocalizationSequence {C : Type v} [Category.{w} C] [Preadditive C] (K : C) :
     ℕ ⥤ C :=
   Functor.ofSequence (fun _ ↦ ℓ • 𝟙 K)
 
-/-- Additive functors carry the scalar telescope to the same scalar telescope.
-Source: functoriality of scalar multiplication in a preadditive category.
-(blueprint: def-weil-pbc-integral-localization-telescope). -/
+/-- Additive functors carry the scalar telescope to the same scalar telescope. -/
 noncomputable def integralLocalizationSequenceMapIso
     {A B : Type*} [Category A] [Category B] [Preadditive A] [Preadditive B]
     (F : A ⥤ B) [F.Additive] (K : A) :

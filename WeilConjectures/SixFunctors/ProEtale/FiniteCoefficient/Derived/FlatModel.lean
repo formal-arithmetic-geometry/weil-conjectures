@@ -13,9 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tor
 # Bounded flat models on the pro-étale site
 
 Finite Tor amplitude in `[a, b]` of a bounded constructible complex of pro-étale sheaves is the
-same as admitting a bounded flat model concentrated in `[a, b]` (`lemma-flat-models-generators`,
-`lemma-flat-models-generators--1`). This is the pro-étale counterpart of
-`AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`.
+same as admitting a bounded flat model concentrated in `[a, b]`. This is the pro-étale counterpart
+of `AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatModel`.
 
 ## Main statements
 
@@ -42,17 +41,9 @@ variable {X : Scheme.{u}}
 
 namespace ProEtale.DerivedCategory
 
-/-- Blueprint `lemma-flat-models-generators` (also `lemma-flat-models-generators--1`): Bounded flat
-model of finite Tor amplitude, on the small pro-étale site.
-
-For `K ∈ D^b_c(X_proét, A)` and integers `a ≤ b` the following are equivalent: `K` has Tor
+/-- For `K ∈ D^b_c(X_proét, A)` and integers `a ≤ b` the following are equivalent: `K` has Tor
 amplitude in `[a, b]`; and `K` is isomorphic in `D(X_proét, A)` to a bounded complex `P` of flat
-pro-étale sheaves with `P^q = 0` for `q ∉ [a, b]`.
-
-A bounded complex of flat sheaves is K-flat, so its derived tensor product with a sheaf is the
-tensor product of complexes, concentrated in `[a, b]`. Conversely one truncates a bounded above
-flat resolution in degree `a`, whose term in degree `a` is flat by the Tor criterion
-(`DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat`). -/
+pro-étale sheaves with `P^q = 0` for `q ∉ [a, b]`. -/
 theorem torAmplitudeIn_iff_exists_flatModel (a b : ℤ) (_hab : a ≤ b)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (_hK : DerivedCategory.boundedConstructible A X K) :
@@ -94,10 +85,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
 
 -- the instances `WEqualsLocallyBijective` and `HasSheafCompose` on the small pro-étale site
 -- take long to synthesize
-/-- Blueprint `lem-sf-reduction-flat-model`: Reduction of the flat model, on the small
-pro-étale site.
-
-Let `Λ` be Noetherian (for instance `Λ = A_{E,n}`), `I` an ideal (for instance `ϖ^m`, so that
+/-- Let `Λ` be Noetherian (for instance `Λ = A_{E,n}`), `I` an ideal (for instance `ϖ^m`, so that
 `Λ ⧸ I = A_{E,m}`), `K ∈ D^b_c(X_proét, Λ)` and `P ≅ K` a complex of flat pro-étale sheaves
 with `P^q = 0` for `q ∉ [a, b]`. Its termwise reduction `P' = P / I P` is a complex of flat
 sheaves of `Λ ⧸ I`-modules vanishing outside `[a, b]`; the reduction

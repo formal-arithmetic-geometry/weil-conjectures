@@ -32,12 +32,7 @@ variable {l : ℕ} [Fact l.Prime]
 attribute [local instance] Abelian.hasFiniteBiproducts
 
 /-- **A morphism `ℚ̄_ℓ ⟶ H` into a lisse sheaf with enough vanishing stalks vanishes**, the
-geometric points being allowed to take values in different algebraically closed fields. The proof
-is that of
-`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_globalSectionsToUpperStar_eq_zero`:
-the rank of the column of locally finite functions representing `β` on a trivialising cover
-descends to `Y`, is constant along specializations and vanishes at the images of the geometric
-points. -/
+geometric points being allowed to take values in different algebraically closed fields. -/
 theorem IsAdicLisseSheaf.eq_zero_of_globalSectionsToUpperStar_eq_zero' {Y : Scheme.{u}}
     {H : AdicSheaf l Y} (hH : IsAdicLisseSheaf H) (β : AdicSheaf.unit l Y ⟶ H)
     (h : ∀ y : Y, ∃ (η : Y) (K : Type u) (_ : Field K) (_ : IsAlgClosed K)

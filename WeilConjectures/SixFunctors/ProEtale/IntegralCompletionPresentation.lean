@@ -59,13 +59,16 @@ import WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares
 
 /-! # Canonical completeness in the completed integral presentation
 
-Stacks Project, Tags 06YY, 0941, 08TC and 0145
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 06YY, 0941, 08TC and 0145.
 
 The coefficient identification is normalized by every finite restriction square.
 Finite comparisons retain their finite coefficient action.
 Their restriction squares are normalized on underlying abelian sheaves, and their
 units fix the derived comparisons uniquely. The index n denotes exponent n+1.
+
+## References
+
+* [Stacks, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
 -/
 
 @[expose] public noncomputable section
@@ -87,9 +90,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralPresentation
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) (A : Encoding l E X)
 
-/-- The existing finite continuous-to-constant encoding, at exponent n+1.
-Source: blueprint integral-limit and finite-coefficient conventions; Stacks 00YV
-(auxiliary; not a blueprint node). -/
+/-- The existing finite continuous-to-constant encoding, at exponent n+1. -/
 abbrev FiniteEncoding (n : ℕ) :=
   letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   FiniteDiscreteOrdinary.Encoding (Padic.coefficientExtensionRing l E (n + 1)) X

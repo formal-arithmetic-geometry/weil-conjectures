@@ -15,7 +15,15 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.Algebra.Category.ModuleCat.EpiMono
 import Mathlib.CategoryTheory.Limits.Types.Limits
 
-/-! # Convergence of integral Cauchy morphisms -/
+/-! # Convergence of integral Cauchy morphisms
+
+Gluing of compatible families of integral morphisms through the ordinary quotient tower.
+
+## References
+
+* Hemo, Richarz, Scholbach, Theorem 7.7
+* Bhatt, Scholze, Section 6.1
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -81,23 +89,8 @@ private theorem lift_sectionwise
   exact hg U x n
 
 set_option linter.unusedVariables false in
-/-- Gluing of compatible lifts through the ordinary quotient tower.
-
-Source: Hemo--Richarz--Scholbach, Theorem 7.7; Bhatt--Scholze, Section 6.1.
-(blueprint: lem-sp-original-integral-ordinary-quotient-compatible-limit).
-
-The hypothesis supplies agreement of all later integral maps with a_n modulo
-ell^(n+1). The caller derives this by telescoping consecutive differences.
-Proof: pass through the section-module equivalence. The quotient projections
-jointly detect equality of sections, because the augmentation into the product
-of the ordinary quotients is a monomorphism by constructible kernel-separatedness
-and evaluation at a test preserves the product. For each test U and section x of
-W, the sections a_n(x) form a compatible family; finite-presentation chart
-convergence and constructible reassembly give a section g(x) with every
-prescribed reduction. Joint detection shows that g is additive, linear and
-natural, so it is a morphism of section modules; the equivalence transports it
-back to a morphism W -> M with the prescribed reductions.
--/
+/-- Gluing of compatible lifts through the ordinary quotient tower. The hypothesis supplies
+agreement of all later integral maps with `a_n` modulo `ell^(n+1)`. -/
 theorem originalIntegralOrdinaryQuotient_compatibleLimit
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))

@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 
 Let `i : Z ⟶ X` be a closed immersion and `j : U ⟶ X` the complementary quasi-compact open
 immersion. This file proves the sheaf-level and derived-level facts behind the closed-support
-triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` (blueprint `lemma-local-cohomology-right-adjoint--2`) for
+triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` for
 sheaves of modules over the constant `ℓ`-adic sheaf, `AlgebraicGeometry.ProEtale.AdicSheaf`.
 
 ## A recollement criterion on derived categories
@@ -181,18 +181,16 @@ lemma isZero_adicUpperStar_obj_adicLowerStar_obj (i : Z ⟶ X) (j : U ⟶ X) [Is
 variable (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
 omit [IsOpenImmersion j] in
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` for `ℓ`-adic sheaves: for a
-closed immersion `i` with quasi-compact open complement `j`, a sheaf `F` of `ℚ̄_ℓ,X`-modules with
-`i^* F = 0` and `j^* F = 0` is zero
-(`AlgebraicGeometry.ProEtale.isZero_of_isZero_upperStar_of_isCompl` on the underlying sheaf). -/
+/-- For `ℓ`-adic sheaves: for a closed immersion `i` with quasi-compact open complement `j`, a
+sheaf `F` of `ℚ̄_ℓ,X`-modules with `i^* F = 0` and `j^* F = 0` is zero. -/
 theorem AdicSheaf.isZero_of_isZero_adicUpperStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X)
     (hi : IsZero ((i)^*ᵃ[l].obj F)) (hj : IsZero ((j)^*ᵃ[l].obj F)) : IsZero F :=
   AdicSheaf.isZero_of_isZero_X (isZero_of_isZero_upperStar_of_isCompl i j hij F.X
     ((AdicSheaf.forget Z).map_isZero hi) ((AdicSheaf.forget U).map_isZero hj))
 
-/-- Blueprint `lemma-passing-schematic-closure--1` for `ℓ`-adic sheaves: a sheaf `F` of
-`ℚ̄_ℓ,X`-modules lies in the essential image of `i_*` if and only if `j^* F = 0`. -/
+/-- For `ℓ`-adic sheaves: a sheaf `F` of `ℚ̄_ℓ,X`-modules lies in the essential image of `i_*` if
+and only if `j^* F = 0`. -/
 theorem adicLowerStar_essImage_iff_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X) :
     ((i)_*ᵃ[l]).essImage F ↔ IsZero ((j)^*ᵃ[l].obj F) := by

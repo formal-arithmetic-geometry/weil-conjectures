@@ -15,8 +15,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! K-flat quasi-isomorphism preservation of the terminal scalar realization.
 
-Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-kflat-data).
+## References
+
+* Hemo--Richarz--Scholbach, Lemma 4.1(1), Remark 3.2
 -/
 
 @[expose] public noncomputable section
@@ -242,22 +243,7 @@ private theorem scalarRealization_acyclic
 end Presentation
 
 /-- The terminal scalar realization `L` preserves quasi-isomorphisms between categorical
-K-flat complexes.
-
-Source: Hemo--Richarz--Scholbach, Lemma 4.1(1), Remark 3.2.
-(blueprint: new-lem-zl-contractible-realization-kflat-data).
-
-Proof: write `A = O_sec(U)` and `E` for the internal/section module equivalence. As in
-the braided-data node, `E L(M)` is naturally the sheafification of
-`P_M : V ↦ O_sec(V) ⊗_A M`. Let `f : K → K'` be a quasi-isomorphism between K-flat
-complexes of `A`-modules. Its cone is acyclic by the cone criterion and K-flat by the
-triangulated closure of K-flat complexes. The change-of-rings lemma for `A → O_sec(V)`,
-applied to `0 → Cone f`, shows that `O_sec(V) ⊗_A Cone f` is acyclic for every `V`.
-Hence `P_{Cone f}` is acyclic sectionwise, and by exactness of module sheafification
-its sheafification is acyclic. The presentation is natural, so it holds termwise for
-the cone, and `E L(Cone f)` is acyclic; `E` reflects acyclicity, so `L(Cone f)` is
-acyclic. As `L` is additive, `L(Cone f) ≅ Cone(L f)`, and the cone criterion shows
-that `L f` is a quasi-isomorphism. -/
+K-flat complexes. -/
 theorem contractible_realization_kflat_data
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]

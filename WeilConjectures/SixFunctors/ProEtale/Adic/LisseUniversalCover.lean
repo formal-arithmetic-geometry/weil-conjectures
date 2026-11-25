@@ -23,32 +23,16 @@ at a geometric point `y` (`AlgebraicGeometry.Scheme.UniversalCovers`). Every lis
 (`IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk`; the regular
 case is `AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_iso_upperStar_universalCover`).
 
-This is the `ℚ̄_ℓ`-part of the blueprint `proposition-lattices-representations-normal-scheme` in the
-form needed here. The blueprint deduces it from the case of finite coefficients by passing to the
-coefficient stages; in the Bhatt–Scholze model of lisse sheaves used in this project
-(pro-étale locally free `ℚ̄_ℓ,Y`-modules, whose sections are *locally finite* continuous
-`ℚ̄_ℓ`-valued functions) we argue with the descent data of a trivialisation instead, following
-Bhatt–Scholze (*The pro-étale topology for schemes*, §7.4):
+## Implementation details
 
-1. `G` is trivialised on a single affine pro-étale cover `f : V ⟶ Y`, `f^* G ≅ ℚ̄_ℓⁿ`
-   (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.exists_affine_cover_iso`); its transition
-   matrix on the compact `V ×_Y V` takes values in `GL_n(E)` for a finite extension `E` of
-   `ℚ_ℓ` (`PadicAlgCl.exists_finiteDimensional_forall_mem_locallyFinite`), and is a cocycle `γ`
-   (`AlgebraicGeometry.ProEtale.AdicSheaf.transitionMatrix_trans`,
-   `AlgebraicGeometry.ProEtale.AdicSheaf.transitionMatrix_comp`).
-2. For every congruence subgroup `K_k ⊆ GL_n(𝒪_E)` (`PadicAlgCl.congruenceSubgroup`), `γ`
-   twists the discrete set `GL_n(E) ⧸ K_k` into a pro-étale locally constant sheaf of sets on
-   `Y`, which is constant on `Ỹ_y`
-   (`AlgebraicGeometry.exists_isTwistedSection_universalCover_of_isIntegrallyClosed_stalk`,
-   Bhatt–Scholze, Lemma 7.4.10). For `k = 0` this is the existence of an `𝒪_E`-lattice, and for
-   `k ≥ 1` the triviality on `Ỹ_y` of its reductions modulo `ℓᵏ`.
-3. Sections over the connected `Ỹ_y` are determined by one value
-   (`AlgebraicGeometry.IsTwistedSection.apply_eq_of_preconnectedSpace`); König's lemma and the
-   completeness of `GL_n(E)` give a trivialisation of `γ` over `V ×_Y Ỹ_y`
-   (`CocycleTrivialization.exists_cocycle_trivialization`).
-4. Correcting the pulled back trivialisation by it, the descent datum becomes trivial and the
-   trivialisation descends to `Ỹ_y`
-   (`AlgebraicGeometry.ProEtale.AdicSheaf.nonempty_iso_of_transitionMatrix_eq_one`).
+In the Bhatt–Scholze model of lisse sheaves used in this project (pro-étale locally free
+`ℚ̄_ℓ,Y`-modules, whose sections are *locally finite* continuous `ℚ̄_ℓ`-valued functions) the
+statement is proved from the descent data of a trivialisation on an affine pro-étale cover, whose
+transition matrix is a cocycle with values in `GL_n(E)` for a finite extension `E` of `ℚ_ℓ`.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, §7.4
 -/
 
 @[expose] public section
@@ -72,11 +56,10 @@ lemma matrix_ext_eval {T : Type*} [TopologicalSpace T] {n : ℕ}
     A = B :=
   Matrix.ext fun i j ↦ Subtype.ext (ContinuousMap.ext fun t ↦ congrFun (congrFun (h t) i) j)
 
-/-- **Lisse sheaves are constant on the universal cover** (blueprint:
-`proposition-lattices-representations-normal-scheme`, the case `Λ = ℚ̄_ℓ`). On a connected normal
-Noetherian scheme `Y` (its local rings are integrally closed domains), the pullback of a lisse
-`ℓ`-adic sheaf to the universal profinite étale cover `Ỹ_y` at a geometric point `y` is isomorphic
-to `ℚ̄_ℓⁿ` for some `n`. -/
+/-- **Lisse sheaves are constant on the universal cover.** On a connected normal Noetherian scheme
+`Y` (its local rings are integrally closed domains), the pullback of a lisse `ℓ`-adic sheaf to the
+universal profinite étale cover `Ỹ_y` at a geometric point `y` is isomorphic to `ℚ̄_ℓⁿ` for some
+`n`. -/
 theorem IsAdicLisseSheaf.exists_iso_upperStar_universalCover_of_isIntegrallyClosed_stalk
     [IsLocallyNoetherian Y] [CompactSpace Y] [ConnectedSpace Y]
     (hY : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y))

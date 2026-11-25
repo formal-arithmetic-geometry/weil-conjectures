@@ -54,9 +54,6 @@ private theorem continuous_liftedPi_linearMap
     ((f.comp e.symm.toLinearMap).continuous_on_pi.comp he)
 
 /-- The finite resolution maps remain exact after applying them to lifted continuous sections.
-
-Source: the compact-image inverse and finite-discrete-fibre part of the continuous point
-resolution proof (blueprint: lem-s3-integral-finite-point-resolution-continuous).
 The section carriers are stated with the canonical universe lifts used by `ModuleCat`.
 -/
 theorem integralFinitePointResolution_continuous_sections

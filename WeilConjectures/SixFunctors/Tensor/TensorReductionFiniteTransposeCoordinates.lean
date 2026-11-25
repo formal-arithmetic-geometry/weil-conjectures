@@ -13,6 +13,12 @@ import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTensorAugm
 
 The finite adjunction unit identifies the normalized tensor comparison with the
 product coordinate of the strict Roos augmentation.
+
+## References
+
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -43,18 +49,7 @@ private theorem scalar_unit_section (W : Scheme.{u}) (n : ℕ)
   rfl
 
 /-- The finite scalar-adjunction transpose of the normalized tensor comparison is
-exactly the corresponding product coordinate of the strict tensor augmentation.
-
-Source: Stacks 03EK, 07A4 and 0941; scalar-extension tensor units and the strict
-quotient augmentation. Proof: in each total degree, maps out of the total tensor
-are determined by its homogeneous pure tensors. The finite adjunction transpose
-first applies the scalar unit. Its underlying section is `1 tensor z`. The defining
-generator formula of `coefficientScalarTensorIso` sends the unit of `x tensor y`
-to the tensor of the units of `x` and `y`. These are exactly the specified product
-coordinates of `StrictTensorAugmentation.map`. Apply tensor-generator extensionality
-and then complex hom extensionality. This argument also covers zero complexes and
-the first finite coefficient level, since it uses the same universal formulas.
-(blueprint: lem-coef-tensor-reduction-finite-transpose-coordinates). -/
+exactly the corresponding product coordinate of the strict tensor augmentation. -/
 theorem tensorReduction_finiteTransposeCoordinates (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

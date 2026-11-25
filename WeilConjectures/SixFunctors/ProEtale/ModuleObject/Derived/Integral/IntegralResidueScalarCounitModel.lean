@@ -15,6 +15,10 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueScalarCounitModel
 
 The tensor presentation on X has already been normalized to its defining counit.
 Only the scalar mate and the ordinary balanced tensor comparison occur below.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -219,60 +223,7 @@ set_option linter.unusedVariables false in
 -- Preserve the original public statement, including its auxiliary SX let.
 -- The counit calculation compares several composed concrete module functors.
 /-- The scalar pull square, followed by the tensor-presentation counit on X,
-computes the ordinary pullback model map. No derived tensor comparison occurs.
-
-Source: Bhatt--Scholze, Remark 6.8.15 and the tensor-pullback identity in the
-proof of Lemma 6.5.9(5), p. 51. The counit normalization below is the explicit
-formal comparison argument, rather than a separately stated lemma of the paper.
-(blueprint: new-integral-residue-scalar-counit-model)
-
-Proof. Write F for integral pullback, G for residue pullback, S for restriction,
-and T for extension of scalars; append subscripts X and Y for the sites. Write
-Fh, Gh, Sh, Th for their homotopy functors and LF, LG, LT for the derived ones.
-Let gamma denote their left-derived counits. Restriction and both pullbacks
-are exact. Let q : SY then F -> G then SX be the ordinary restriction/pullback
-isomorphism, and let p : F then TX -> TY then G be its inverse scalar-adjunction
-mate. Its homotopy version is ph and its derived version is pd. The latter is
-exactly residueExchangePullComparisons.pull.hom by the definition of PullHom.
-
-First apply the mate unit identity and the defining unit identity of the
-derived extension/restriction adjunction. Naturality of gamma and the triangle
-identities give, at P,
-pd(Qh P) followed by LG(gamma_TY(P)) followed by gamma_G(ThY P)
-= LTX(gamma_F(P)) followed by gamma_TX(Fh P) followed by Qh(ph(P)).
-To see this without choosing resolutions, transpose both sides along the
-extension/restriction adjunction on X. Both transposes are q at the image of
-P, followed by the ordinary extension unit; the exact-functor comparisons
-commute with these units by the derived adjunction's defining unit formula.
-The adjunction hom-equivalence is injective, giving the displayed equality.
-Use the inverse of pd to rewrite it in the direction needed here, apply SX,
-and compose with the exact restriction/pullback comparison.
-
-Next expand epsilon_X = tensorPresentationDerivedCounit: it is the extension
-counit gamma_TX, followed by exact restriction's comparison, followed by the
-ordinary extendComapTensorIso. The previous identity cancels the scalar mate
-in the claimed composite. What remains is the ordinary comparison between
-pullback of the balanced tensor presentation on Y and that presentation on X.
-The coefficient isomorphism e is q on the residue regular module, followed by
-restriction of the inverse monoidal unit of G; eH is its homotopy image.
-Consequently this remaining comparison is the ordinary tensor comparison for
-F, after F applied to the Y presentation and after eH inverse on the first
-factor. Explicitly, after forgetting module actions and precomposing with the
-balanced tensor coequalizer epimorphism, both morphisms pull back the residue
-coefficient and the module argument and apply the same scalar action. The
-relations agree by naturality of coefficientMap. The inverse unit in e cancels
-the pulled-back regular residue module. The coequalizer universal property
-and faithfulness of forgetting actions therefore give equality of module
-morphisms. Naturality makes this equality compatible with the differentials,
-so it passes to homotopy complexes and then to Qh.
-
-Finally combine this ordinary equality with the preceding counit identity.
-The resulting composite is LF applied to the Y tensor-presentation counit,
-then gamma_F, then Qh applied to Fh of homotopyTensorSingleIso inverse and the
-ordinary oplax tensor comparison. This is tensorModelMap by definition, hence
-residueExchangeTensorModelMap. No tensor-model target, tensor comparison, or
-extension counit has been inverted. In particular the argument applies to
-arbitrary P and requires no flatness hypothesis. -/
+computes the ordinary pullback model map. No derived tensor comparison occurs. -/
 theorem integralResidue_scalarCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :

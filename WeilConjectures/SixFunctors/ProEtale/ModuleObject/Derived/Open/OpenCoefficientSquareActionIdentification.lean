@@ -13,11 +13,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
 /-! # The identity action normalization of the open coefficient square
 
-Source: main-20261015 blueprint, chap-Construction-of-f,
-sk-def-sfb-coefficient-comparisons/def-sfb-comap-upper-star-iso.proof.md and
- def-sfb-derived-comap-upper-star-iso.proof.md
-(blueprint: lem-sfb-open-coefficient-square-action-identification).
-
 The auxiliary constructions retain the specified balanced collapse and build the reverse
 comparison from restriction along the inverse coefficient maps. No coefficient flatness is used.
 -/
@@ -36,18 +31,14 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {U X : Scheme.{u}} (j : U ⟶ X)
 
-/-- Pullback written using restriction along the inverse coefficient isomorphism.
-Source: def-sfb-comap-upper-star-iso.proof.md, inverse-coefficient identification
-(blueprint: lem-sfb-open-coefficient-square-action-identification). -/
+/-- Pullback written using restriction along the inverse coefficient isomorphism. -/
 noncomputable def openCoefficientRestriction :
     Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤
       Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U) :=
   (ProEtale.upperStar Ab.{u + 1} j).mapMod (condensedRingObj Λ X) ⋙
     Mod.comap (asIso (condensedPullbackHom Λ j)).inv
 
-/-- The specified extension-to-inverse-restriction collapse, natural in the module.
-Source: def-sfb-comap-upper-star-iso.proof.md and extension-iso quotient normalization
-(blueprint: lem-sfb-open-coefficient-square-action-identification). -/
+/-- The specified extension-to-inverse-restriction collapse, natural in the module. -/
 noncomputable def openCoefficientCollapse :
     upperStar Λ j ≅ openCoefficientRestriction Λ j :=
   Functor.isoWhiskerLeft ((ProEtale.upperStar Ab.{u + 1} j).mapMod (condensedRingObj Λ X))

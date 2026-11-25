@@ -8,7 +8,12 @@ public import Mathlib.CategoryTheory.Products.Basic
 import Mathlib.CategoryTheory.Whiskering
 import Mathlib.Tactic.CategoryTheory.Slice
 /-! # Transport of tensor-composition coherence along natural isomorphisms
-Source: the naturality and inverse-compositor cancellation in Stacks 07A4 and 07A7. -/
+
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -20,16 +25,7 @@ private theorem mkHom_comp {C D : Type*} [Category C] [Category D]
     Prod.mkHom (f ≫ f') (g ≫ g') = Prod.mkHom f g ≫ Prod.mkHom f' g' := rfl
 
 /-- Tensor-composition coherence is invariant under compatible isomorphisms of the
-three pullback functors and their tensor comparisons.
-Source: naturality and categorical cancellation, Stacks 07A4 and 07A7
-(blueprint: lem-sf-tensor-comparison-transport).
-Proof: whisker the first two functor isomorphisms to obtain D : F⋙G ≅ F'⋙G'.
-Naturality of the second tensor comparison, the two individual comparison squares,
-and naturality of the second functor isomorphism give the composite comparison square.
-Postcompose the desired equation with the tensor square of D followed by the ambient
-compositor. This is invertible. The compositor-identification square and ambient
-coherence turn both sides into the third individual comparison square. Cancel the
-invertible postcomposition. -/
+three pullback functors and their tensor comparisons. -/
 theorem transfer_tensor_composition
     {A B C : Type*} [Category A] [Category B] [Category C]
     (TA : A × A ⥤ A) (TB : B × B ⥤ B) (TC : C × C ⥤ C)

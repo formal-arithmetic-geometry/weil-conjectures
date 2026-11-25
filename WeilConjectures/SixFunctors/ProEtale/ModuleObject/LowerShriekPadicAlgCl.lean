@@ -19,8 +19,6 @@ schemes with a compactification `X ⟶[i] Z ⟶[g] Y`. The comparison **(Shriek)
 (Push) for the proper `g` at `Di_! K`, which is bounded below since `i_!` is exact
 (`ProEtale.CondensedRing.isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE`),
 followed by the (Shriek) isomorphism for the open immersion `i`.
-
-This is the (Shriek) part of item 3 of blueprint `sk-prop-sfb-finite-extension-compatibility`.
 -/
 
 @[expose] public section

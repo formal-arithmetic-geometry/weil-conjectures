@@ -18,9 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTens
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 
 /-! Bounded constructibility of the condensed Fourier kernels.
-
-Source: Fourier specialization paragraph of `proposition-fourier-inversion`
-(blueprint: proposition-fourier-inversion), using `lemma-artin-schreier-character-sheaf`.
 -/
 
 @[expose] public noncomputable section
@@ -33,20 +30,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 -- The recorded statement binds `hp` and `hk`, which the proof does not use.
 set_option linter.unusedVariables false in
 /-- Every displayed condensed Fourier kernel placed in degree zero is bounded
-constructible, including the noninvertible-cardinality branch of its definition.
-
-Source: latest blueprint Fourier specialization in `lem-fd-kernel-composition.md`,
-`lemma-artin-schreier-character-sheaf`, and the actual projector definition of
-`lemma-artin-schreier-character-sheaf--1` (blueprint: lem-fd-fourier-kernel-bounded).
-
-Proof: if the finite-field cardinality is invertible in the scalar coefficient ring,
-lemma-artin-schreier-character-sheaf gives a cover on which the kernel is the regular module.
-Identify the regular module with the free module of rank one; local freeness gives finite
-presentation on the trivial stratification, hence constructibility. The degree-zero
-single functor then gives bounded constructibility. If the cardinality is not a unit,
-Ring.inverse is zero, so every term of the character projector vanishes. Its image
-is zero; pullback preserves zero and a zero sheaf is constructible. No characteristic
-relation between the two fields is needed for this second branch. -/
+constructible, including the noninvertible-cardinality branch of its definition. -/
 theorem condensedFourierKernel_boundedConstructible
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

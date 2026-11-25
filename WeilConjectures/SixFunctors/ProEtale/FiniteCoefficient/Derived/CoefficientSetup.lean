@@ -14,20 +14,20 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 
 # Coefficients and geometric categories
 
-This file formalises the coefficient setup of the trace formula (blueprint `sk-d-setup`): the
+This file formalises the coefficient setup of the trace formula: the
 subcategories `Dᵇctf(X, A) ⊂ D(X_proét, A)` of bounded constructible complexes of finite Tor
 amplitude are triangulated, closed under isomorphisms, stable under `Lf^*` for every morphism
 `f` and under `Rf_!` for compactifiable quasi-compact morphisms to schemes of finite type over
-the base field (the blueprint asks for every compactifiable morphism).
+the base field.
 
-The blueprint fixes `A = 𝒪_E/ϖ_Eⁿ` for a finite extension `E/ℚ_ℓ` and `ℓ` invertible on the base
-field `k`. Here `A` is generalised to an arbitrary finite commutative ring `Λ` whose exponent is
+The coefficients `A = 𝒪_E/ϖ_Eⁿ` (for a finite extension `E/ℚ_ℓ` with `ℓ` invertible on the base
+field `k`) are generalised to an arbitrary finite commutative ring `Λ` whose exponent is
 invertible on `k` (`AlgebraicGeometry.HasInvertibleExponent`).
 
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.IsCoefficientSetup`: the properties required of a family of
-  subcategories `P X ⊂ D(X_proét, Λ)` in the blueprint.
+  subcategories `P X ⊂ D(X_proét, Λ)`.
 
 ## Main statements
 
@@ -58,17 +58,13 @@ instance DerivedCategory.isTriangulated_constructibleFiniteTor [Finite Λ] (X : 
   inferInstanceAs (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
     DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X).IsTriangulated
 
-/-- Blueprint `sk-d-setup`: the coefficient data of the trace formula.
+/-- The coefficient data of the trace formula.
 
 A family `P X ⊂ D(X_proét, Λ)` of subcategories, indexed by all schemes `X`, is a *coefficient
 setup* over the field `k` if every `P X` is a triangulated subcategory of `D(X_proét, Λ)`,
 closed under isomorphisms, the family is stable under `Lf^*` for every morphism `f`, and stable
 under `Rf_!` for every compactifiable quasi-compact morphism `f : X ⟶ Y` whose target `Y` is
-locally of finite type and quasi-compact over `Spec k`.
-
-The blueprint takes `Λ = 𝒪_E/ϖ_Eⁿ`; this predicate makes sense for any coefficient ring, and
-`AlgebraicGeometry.ProEtale.isCoefficientSetup_constructibleFiniteTor` proves it for
-`P = Dᵇctf(-, Λ)` with `Λ` finite of exponent invertible on `k`. -/
+locally of finite type and quasi-compact over `Spec k`. -/
 structure IsCoefficientSetup (k : Type u) [Field k]
     (P : ∀ X : Scheme.{u},
       ObjectProperty (_root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)))) :
@@ -83,18 +79,16 @@ structure IsCoefficientSetup (k : Type u) [Field k]
     P Y (L((g)^*[ModuleCat.{u + 1} Λ]).obj K)
   /-- Stability under the compact-support direct image `Rf_!` along a compactifiable
   quasi-compact morphism `f` whose target is locally of finite type and quasi-compact over
-  `Spec k`. This deviates from the blueprint, which asks for every compactifiable `f`; the
-  geometric schemes of the blueprint are of finite type over `k`, so this is the case used. -/
+  `Spec k`. -/
   rightDerivedLowerShriek_obj {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [HasCompactification f]
     [QuasiCompact f]
     {K : _root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ))} (hK : P X K) :
     P Y ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K)
 
-/-- Blueprint `sk-d-setup`: the subcategories `Dᵇctf(X, Λ)` of bounded constructible complexes
+/-- The subcategories `Dᵇctf(X, Λ)` of bounded constructible complexes
 of finite Tor amplitude form a coefficient setup over `k`, for a finite commutative ring `Λ`
-whose exponent is invertible on `k`. This generalises the blueprint's `A = 𝒪_E/ϖ_Eⁿ` with `ℓ`
-invertible in `k`. -/
+whose exponent is invertible on `k`. -/
 theorem isCoefficientSetup_constructibleFiniteTor [Finite Λ] (k : Type u) [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] :
     IsCoefficientSetup Λ k fun X ↦ DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X

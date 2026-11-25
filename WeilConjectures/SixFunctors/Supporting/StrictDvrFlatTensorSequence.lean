@@ -17,9 +17,12 @@ import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 
 /-! # Flat tensor realization of the strict DVR coefficient sequence
 
-Source: Stacks Project, Tag 0942, proof of lemma-bounded (1); Modules on Sites,
-Tags 03EK and 03ER.
-(blueprint: lem-sf-strict-dvr-flat-tensor-sequence)
+## References
+
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 03EO](https://stacks.math.columbia.edu/tag/03EO)
+* [Stacks, Tag 03ER](https://stacks.math.columbia.edu/tag/03ER)
+* [Stacks, Tag 0942](https://stacks.math.columbia.edu/tag/0942)
 -/
 
 @[expose] public noncomputable section
@@ -277,30 +280,7 @@ private theorem reductionTensorMap_shortExact {n m k : ℕ}
       (A := completedIntegralCommRingSheafUnrestricted l E X) M))
 
 /-- Tensor an exact coefficient sequence with a flat-term complex, using the actual
-unrestricted reduction complexes and their prescribed quotient chain transitions.
-
-Source: Stacks Project, Tag 0942, proof of lemma-bounded (1); Modules on Sites,
-Tags 03EK, 03ER and 03EO.
-(blueprint: lem-sf-strict-dvr-flat-tensor-sequence)
-
-Proof: Write C_m for strictDvrFiniteCoefficient m and let T_m be the functor
-C_m tensor -. Its value on P^j is canonically isomorphic to the restriction of
-scalar extension along the completion projection. The isomorphism is induced by
-the identity on the sectionwise scalar-first tensor product and normalized by the
-sheafification unit. It is natural in the module variable, so it identifies the
-complex obtained by applying T_m to P with unrestrictedTowerComplex m P.
-Apply the bifunctorial sheaf tensor to the given coefficient injection and to the
-quotient. Transport these natural transformations through the preceding isomorphisms,
-and then apply mapHomologicalComplex to obtain chain maps. The injection has exactly
-the stated formula by the normalization on all local pure tensors. The quotient
-has formula s tensor x maps to q(s) tensor x; the uniqueness clause for the
-published unrestrictedIntegralTransition identifies its chain map with the actual
-unrestrictedTowerTransition. The composite is zero by functoriality and the given
-coefficient zero equation. In degree j, the sequence is the given short exact
-sequence mapped by - tensor P^j. IsFlatOnSite says this functor is exact; hence
-its image is short exact. Transporting by the normalized isomorphisms preserves
-short exactness and proves the asserted evaluated rows. This argument requires
-only flatness of the terms, without K-flatness or any boundedness condition. -/
+unrestricted reduction complexes and their prescribed quotient chain transitions. -/
 theorem strictDvrFlatTensorSequence
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
     (hflat : ∀ j : ℤ, SheafOfModules.IsFlatOnSite

@@ -15,8 +15,9 @@ import Mathlib.Algebra.Category.ModuleCat.Biproducts
 
 /-! # Global scalar-compatible frames with independent ranks
 
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
-(blueprint: lem-sfb-continuous-free-sheet-global-coordinates)
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +29,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor Matrix
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Include integral continuous vector coordinates in rational continuous coordinates.
-Source: the coefficient inclusion in the blueprint local computation.
-(blueprint: lem-sfb-continuous-free-sheet-global-coordinates) -/
+/-- Include integral continuous vector coordinates in rational continuous coordinates. -/
 def continuousIntegralVector {E : Type} [NormedField E] (A : Subring E)
     {Z : Type u} [TopologicalSpace Z] {r : ℕ} (x : C(Z, Fin r → A)) :
     C(Z, Fin r → E) :=
@@ -648,31 +647,7 @@ attribute [local semireducible] continuousRingModuleEquivalence continuousRingRe
 
 -- Instantiate the abstract frames with the concrete module pullback constructions.
 /-- Global free frames give natural rational coordinate changes before extracting matrices.
-This assertion concerns the base Y itself, with no restriction to open subschemes.
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
-Bhatt--Scholze, Section 6.8.
-(blueprint: lem-sfb-continuous-free-sheet-global-coordinates)
-
-Proof. Choose a finite free rational frame and integral frames for the finitely
-many pulled-back modules. Extend each integral frame to E and compare it with the
-rational frame as follows. The component of pullIso on M identifies the extension
-of t_j*M with t_j*Ext(M); follow by t_j*e, then by the inverse of upperStarComp
-normalized by w j, obtaining an isomorphism q_j from Ext(t_j*M) to g*P.
-The continuous coefficient encoding takes these finite biproducts to finite products
-of the continuous coefficient sheaf. Keep the rank r of the rational frame and
-the independent ranks n j of the integral frames. No rank identification or
-pointwise evaluation is needed.
-The encoded rational coordinate changes are the E-linear equivalences F on every
-test object. Their naturality is that of the encoded frame isomorphisms.
-Restriction of the rational frame
-along the coefficient inclusion gives c, while the integral frames give b.
-In rational coordinates F is the rational frame map, composed with q_j and
-with the inverse of the rationalized integral frame map. The regular-module
-scalar-extension unit equation sends integral coordinates to the same vector in E.
-The one-map mate equation for comapUpperStarIso identifies the adjoint of q_j with
-the specified normalized sheet map, after the composition normalization by w j. This proves the
-global equation; no matrix or open restriction
-assertion is being assumed here. -/
+This assertion concerns the base Y itself, with no restriction to open subschemes. -/
 theorem continuousFreeSheet_globalCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

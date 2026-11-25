@@ -16,8 +16,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstruc
 Let `K` be an algebraically closed field of characteristic different from `ℓ`, `Y` a scheme
 locally of finite type over `K` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism
 locally of finite type. The *finiteness theorem* (SGA 4½, *Th. finitude*, Th. 1.1, with
-`ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8; blueprint
-`proposition-six-operations-dctf` (3), the `ℚ̄_ℓ` stage of `sk-prop-sf-finiteness`)
+`ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8)
 asserts that for a constructible `ℓ`-adic sheaf `F` on `X_proét`:
 
 - the pushforward `f_* F` is constructible
@@ -28,7 +27,7 @@ asserts that for a constructible `ℓ`-adic sheaf `F` on `X_proét`:
   (`AlgebraicGeometry.ProEtale.bounded_rightDerivedFunctor_lowerStar`,
   `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`).
 
-## Proof
+## Implementation details
 
 The case of an affine source and an affine target,
 `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine`, is deduced from Deligne's
@@ -43,6 +42,12 @@ follows by the reductions of `WeilConjectures.SixFunctors.ProEtale.Adic.LowerSta
 
 These results are in a separate file from those reductions because the condensed finiteness
 theorem imports `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`.
+
+## References
+
+* SGA 4, Exp. X
+* SGA 4½, *Th. finitude*, Th. 1.1
+* Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8
 -/
 
 @[expose] public section
@@ -65,13 +70,10 @@ variable {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
 -- The statement keeps the standing hypothesis that `K` is algebraically closed; the comparison
 -- with module objects over `ℚ̲̄_ℓ` only uses that `ℓ` is invertible in `K`.
 set_option linter.unusedSectionVars false in
-/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf, affine case**
-(SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the
-derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
-finite type between affine schemes, with target of finite type, is bounded with constructible
-cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of clause (3) of blueprint
-`proposition-six-operations-dctf` (subsection `proposition-six-operations-dctf`: `Rf_*`
-preserves `Dᵇc(-, ℚ̄_ℓ)`); blueprint `sk-prop-sf-finiteness` is the finite-coefficient case. -/
+/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf, affine case**:
+over an algebraically closed field of characteristic `≠ ℓ`, the derived pushforward `Rg_* F` of a
+constructible `ℓ`-adic sheaf along a morphism `g` locally of finite type between affine schemes,
+with target of finite type, is bounded with constructible cohomology sheaves `Rⁿg_* F`. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
@@ -105,10 +107,8 @@ theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [Local
       ((adicRightDerivedLowerStarCompIso (l := l) (X := Y) g).app _).symm h)
 
 
-/-- **Finiteness over an affine target** (SGA 4½, *Th. finitude*): the case of a quasi-compact
-quasi-separated source reduces to that of an affine source
-(`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine`) by the Čech argument
-of `AlgebraicGeometry.ProEtale.FiniteFor.of_quasiSeparatedSpace`. -/
+/-- **Finiteness over an affine target**: the finiteness theorem for a quasi-compact
+quasi-separated source and affine target `Y` of finite type over `K`. -/
 theorem finiteFor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s] [IsAffine Y]
     [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f] : FiniteFor l f := by
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian s
@@ -118,13 +118,10 @@ theorem finiteFor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s] [I
     finiteLowerStar_of_bounded g' (fun F hF ↦ finiteLowerStar_singleFunctor_of_isAffine s hK g' hF)
       K hb hc
 
-/-- **Finiteness for the higher direct images of a constructible `ℓ`-adic sheaf** (SGA 4½,
-*Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the higher direct
-images `Rⁿf_* F` of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated
-morphism locally of finite type, with target locally of finite type, are constructible.
-Constructibility being local on `Y` and the higher direct images commuting with restriction
-to an open subscheme (`AlgebraicGeometry.ProEtale.adicDerivedBaseChangeIso`), this is the case
-of an affine target, `AlgebraicGeometry.ProEtale.finiteFor_of_isAffine`. -/
+/-- **Finiteness for the higher direct images of a constructible `ℓ`-adic sheaf**: over an
+algebraically closed field of characteristic `≠ ℓ`, the higher direct images `Rⁿf_* F` of a
+constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism locally of finite
+type, with target locally of finite type, are constructible. -/
 theorem isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l)
     [LocallyOfFiniteType s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F) (n : ℤ) :
@@ -141,12 +138,10 @@ theorem isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar (hK : ri
       (mapDerivedCategoryUpperStarRightDerivedFunctorLowerStarIso f j F).symm ≪≫
     (((j)^*ᵃ[l].mapDerivedCategoryHomologyFunctorIso n).app _).symm
 
-/-- **Finiteness for the pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
-*Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the pushforward
-of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism locally of
-finite type, with target locally of finite type, is constructible: it is the degree `0` case
-of `AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar`,
-`f_*` being left exact. -/
+/-- **Finiteness for the pushforward of a constructible `ℓ`-adic sheaf**: over an algebraically
+closed field of characteristic `≠ ℓ`, the pushforward of a constructible `ℓ`-adic sheaf along a
+quasi-compact quasi-separated morphism locally of finite type, with target locally of finite
+type, is constructible. -/
 theorem IsAdicConstructibleSheaf.lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : AdicSheaf l X}
@@ -156,13 +151,10 @@ theorem IsAdicConstructibleSheaf.lowerStar (hK : ringChar K ≠ l) [LocallyOfFin
     ((f)_*ᵃ[l].homologyRightDerivedFunctorObjSingleFunctorIso F 0 ≪≫
       (f)_*ᵃ[l].rightDerivedZeroIsoSelf.app F)
 
-/-- **Cohomological dimension of the pushforward of a constructible `ℓ`-adic sheaf**
-(SGA 4½, *Th. finitude*; SGA 4, Exp. X): over an algebraically closed field of characteristic
-`≠ ℓ`, the higher direct images `Rⁿf_* F` of a constructible `ℓ`-adic sheaf along a
-quasi-compact quasi-separated morphism locally of finite type, with target quasi-compact and
-locally of finite type, vanish in large degrees. Over each member of a finite affine cover of
-`Y` this is `AlgebraicGeometry.ProEtale.finiteFor_of_isAffine`, and restrictions to an open
-cover detect vanishing. -/
+/-- **Cohomological dimension of the pushforward of a constructible `ℓ`-adic sheaf**: over an
+algebraically closed field of characteristic `≠ ℓ`, the higher direct images `Rⁿf_* F` of a
+constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism locally of finite
+type, with target quasi-compact and locally of finite type, vanish in large degrees. -/
 theorem exists_isLE_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : AdicSheaf l X}
@@ -199,10 +191,10 @@ theorem exists_isLE_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [Local
     exact (((DerivedCategory.isLE_iff _ (b O)).1 (hb O) n hO)).of_iso
       (((O.1.ι)^*ᵃ[l].mapDerivedCategoryHomologyFunctorIso n).app _)
 
-/-- **Boundedness of the derived pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
-*Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the derived
-pushforward of a constructible `ℓ`-adic sheaf along a quasi-compact quasi-separated morphism
-locally of finite type, with target quasi-compact and locally of finite type, is bounded. -/
+/-- **Boundedness of the derived pushforward of a constructible `ℓ`-adic sheaf**: over an
+algebraically closed field of characteristic `≠ ℓ`, the derived pushforward of a constructible
+`ℓ`-adic sheaf along a quasi-compact quasi-separated morphism locally of finite type, with target
+quasi-compact and locally of finite type, is bounded. -/
 theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : AdicSheaf l X}
@@ -213,9 +205,8 @@ theorem bounded_rightDerivedFunctor_lowerStar (hK : ringChar K ≠ l) [LocallyOf
   ⟨⟨0, (f)_*ᵃ[l].isGE_rightDerivedFunctor_obj_singleFunctor F⟩,
     exists_isLE_rightDerivedFunctor_lowerStar s f hK hF⟩
 
-/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf** (SGA 4½,
-*Th. finitude*): over a quasi-compact target, `Rf_* F` is bounded with constructible cohomology
-sheaves. -/
+/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf**: over a
+quasi-compact target, `Rf_* F` is bounded with constructible cohomology sheaves. -/
 theorem finiteLowerStar_singleFunctor (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [QuasiCompact s] [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]
     {F : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F) :

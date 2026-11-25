@@ -10,7 +10,12 @@ public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupp
 import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenSlicePresentation
 import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensorPiece
 
-/-! # Invertibility of the derived open-extension unit -/
+/-! # Invertibility of the derived open-extension unit
+
+## References
+
+* Stacks Project, Tags `03DI`, `08BS`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,17 +27,7 @@ universe u
 
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall in
-/-- The derived open-extension unit is invertible.
-
-Source: Stacks Tags 03DI and 08BS; the slice-presentation and subterminality
-argument used in `openProjectionInverse_isIso`.
-(blueprint: lem-sf-ring-open-map-open-unit).
-
-Proof: identify `openExtension` with a localized module extension on the
-pro-etale slice. The localized module extension has invertible unit by
-subterminality. Transport full faithfulness across the slice presentation and
-apply `Adjunction.unit_isIso_of_L_fully_faithful` to the specified derived
-adjunction. This applies to empty and identity open immersions as well. -/
+/-- The derived open-extension unit is invertible. -/
 theorem openDerivedAdjunction_unit_isIso
     (R : Coefficients.{u}) {U V : Scheme.{u}}
     (j : U ⟶ V) [IsOpenImmersion j] :

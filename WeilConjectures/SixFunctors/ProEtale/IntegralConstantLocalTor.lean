@@ -11,8 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.PadicConstantLocalModelTor
 
 /-! # The two-term Tor bound for integral finite constant local models
 
-Source: integral-models opening equality; Stacks Tags 0651 and 06YY.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 0651](https://stacks.math.columbia.edu/tag/0651)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -248,23 +250,7 @@ private theorem integralCounitExtension_leftExact
   have : (Mod.extendScalars (inv f)).IsEquivalence := extension_equivalence (inv f)
   exact preservesFiniteLimits_of_natIso i.symm
 
-/-- Finite constant integral local models have the common Tor interval [-1,0].
-Source: integral-models opening equality and the localizing-closure proof, Local models
-and Locality paragraphs; Stacks Tags 0651 and 06YY.
-(auxiliary; not a blueprint node).
-
-Proof: the scalar ring of integers is a DVR. A finite presentation of a scalar module
-has a finite free kernel, since a finitely generated submodule of a finite free module
-over a PID is finite free. It therefore has a resolution by finite free modules in
-degrees -1 and 0. The constant-to-continuous coefficient extension is flat: its sections
-are torsion-free over the DVR, hence flat, and exact sheafification preserves injections.
-Exact inverse image to a scheme carries the scalar resolution to a two-term finite
-free coefficient resolution. Tensoring this bounded flat resolution with any degree-zero
-module has no terms outside [-1,0], hence no cohomology outside that interval. Restrict
-to the cover exhibiting the finite constant local model, use its model isomorphisms,
-and detect vanishing of each tensor homology sheaf on that cover. This gives the same
-interval for every test module globally. Rank-zero models, torsion scalar modules and
-empty covers satisfy the same argument; no Noetherian assumption is needed. -/
+/-- Finite constant integral local models have the common Tor interval [-1,0]. -/
 theorem integral_constant_local_tor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

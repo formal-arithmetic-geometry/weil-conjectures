@@ -38,21 +38,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- The external product `M ⊠ N = Lp_X^* M ⊗ᴸ Lp_Y^* N` on the fibre product `X ×_s Y`:
-
-```
-          X ×_s Y
-         ↙       ↘
-      p_X         p_Y
-      ↙             ↘
-     X               Y
-      ↘             ↙
-       a_X       a_Y
-         ↘       ↙
-             s
-```
-
-(blueprint: `sk-d-six`, `prose-11-08`). -/
+/-- The external product `M ⊠ N = Lp_X^* M ⊗ᴸ Lp_Y^* N` on the fibre product `X ×_s Y`, where
+`p_X`, `p_Y` are the projections to `X` and `Y`. -/
 noncomputable def externalProduct {s X Y : Scheme.{u}} (aX : X ⟶ s) (aY : Y ⟶ s)
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
     (N : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :

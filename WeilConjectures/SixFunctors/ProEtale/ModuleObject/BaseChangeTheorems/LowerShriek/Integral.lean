@@ -27,8 +27,7 @@ Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, w
 
 The constructions are the generic ones of those files. The only coefficient-specific input is the
 proper base change theorem for bounded constructible `𝒪_E`-sheaves
-(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`,
-blueprint `proposition-proper-direct-image-constructible-complexes`, in
+(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`, in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper`).
 
 ## Main statements
@@ -145,11 +144,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
 
 /-- The *compact-support base-change morphism* `Ex_! : Rf_! ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_!` on bounded
 constructible `𝒪_E`-sheaves for a cartesian square `sq`, where `Rf_!` and `Rf'_!` are the lower
-shrieks `boundedConstructibleLowerShriek` for the chosen compactifications `c_f` and `c_{f'}`:
-the morphism `boundedConstructibleLowerShriekOfCompactificationBaseChangePasting` into
-`Rf'_!^{c_f.ofIsPullback sq}`, followed by its identification
-`boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers` with
-`Rf'_! = Rf'_!^{c_{f'}}`. -/
+shrieks `boundedConstructibleLowerShriek` for the chosen compactifications of `f` and `f'`. -/
 @[no_expose]
 noncomputable def boundedConstructibleLowerShriekBaseChange_padicIntegers
     (sq : IsPullback g' f' f g) :

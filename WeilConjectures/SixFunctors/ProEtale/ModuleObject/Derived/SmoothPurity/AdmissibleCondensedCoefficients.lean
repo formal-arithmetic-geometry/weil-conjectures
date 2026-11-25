@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 /-!
 # Admissible condensed coefficient rings
 
-Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
-sk-lem-formal-closed-support-stratum-hom.md, opening coefficient hypothesis
-(blueprint: def-pur-admissible-condensed-ring).
+The family of coefficient rings admissible for the smooth purity results.
 -/
 
 @[expose] public section
@@ -27,9 +25,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The stated coefficient family, invariant under isomorphism of condensed rings.
 Finite rings have the discrete topology; finite extensions have their induced ell-adic
- topology. The algebraic closure is the existing finite-subextension-valued condensed ring.
-Source: blueprint stratum Hom lemma, admissible coefficients
-(blueprint: def-pur-admissible-condensed-ring). -/
+ topology. The algebraic closure is the existing finite-subextension-valued condensed ring. -/
 def IsAdmissibleCoefficient
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop :=
   ∃ (l : ℕ) (_hl : Fact l.Prime),

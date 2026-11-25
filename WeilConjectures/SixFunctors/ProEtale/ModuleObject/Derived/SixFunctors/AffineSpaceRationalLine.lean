@@ -36,10 +36,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRe
 /-!
 # Rational affine-line compact-support adjunction
 
-Source: `literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-  sk-cor-affine-space-rational/sk-cor-affine-space-rational-line.md`
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
-
 ## Main declarations
 
 * `rationalLocalizingCategory`, `rationalLocalizingInclusion`: literal Loc(Dbc) and inclusion.
@@ -72,9 +68,7 @@ attribute [local irreducible] upperStar Functor.leftDerivedFunctor Functor.mapDe
 
 /-- The recorded Nagata choice for the affine projection as a morphism over k.
 The instance arguments are the existing affine-space and composition instances, written
-explicitly because typeclass search does not unfold the Over-object projections here.
-Source: blueprint `sk-def-sfb-dc-setting`, chosen compactification convention
-(blueprint: theorem-f-shriek-ell-adic-coefficients). -/
+explicitly because typeclass search does not unfold the Over-object projections here. -/
 noncomputable def affineLineChosenCompactification
     (k : Type u) [Field k] (V : Scheme.{u}) [V.Over (Spec (.of k))]
     [LocallyOfFiniteType (V ↘ Spec (.of k))]
@@ -96,8 +90,6 @@ noncomputable def affineLineChosenCompactification
 attribute [local irreducible] affineLineChosenCompactification
 
 /-- The complete assertion for one of the two rational coefficient conventions.
-Source: blueprint `sk-cor-affine-space-rational-line`
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
 The comparison isomorphisms to the ambient derived categories make every displayed functor
 be the specified module-object functor, rather than an unrelated functor between subcategories.
 -/
@@ -374,45 +366,9 @@ end
 attribute [local semireducible] RationalP1.coefficient RationalP1.line
 
 /-- Rational affine-line compact-support adjunction, for every finite coefficient
-subextension and for the finite-subextension-valued algebraic closure.  The three assertions
-are respectively clauses (1), (2), and (3) of the source statement.
-Source: blueprint `sk-cor-affine-space-rational-line`
-(blueprint: theorem-f-shriek-ell-adic-coefficients).
-
-Proof (the ten steps of the DAG node):
-1. The standard-chart theorem gives j and qj = p; finite-coordinate projective-space
-properness gives proper q (`lemma-nagata-relative-affine-space-open-immersion`,
-`lemma-nagata-projective-space-base-change-proper`).
-2. On Spec R the affine projection is Spec R[t] -> Spec R, hence affine and locally of
-finite type (`def-nagata-relative-affine-space`, `def-weil-finite-type-morphism`).
-3. Affine-morphism permanence gives p quasi-compact and separated; proper q is separated
-and quasi-compact. The qcqs-over-affine and qcqs permanence nodes give quasi-compact
-V, affine line and projective line (`lem-weil-pbc-affine-morphism-permanence`,
-`lem-weil-pbc-qcqs-over-affine`, `lem-weil-pbc-qcqs-morphism-permanence`).
-4. Composition preserves separatedness and local finite type; quasi-compactness over
-Spec k follows from its quasi-separatedness. Both total spaces are separated finite-type
-k-schemes and qcqs (`lem-weil-pbc-proper-fp-permanence`,
-`lem-weil-pbc-affine-scheme-qcqs`, `lem-weil-pbc-qcqs-morphism-permanence`).
-5. A map from a quasi-compact scheme to a quasi-separated scheme is quasi-compact, so j
-is quasi-compact and (j,q) is a compactification (`definition-compactification-refinement`).
-6. For these rational coefficients Dctf = Dbc and their localizing closures agree.
-Apply clause 1 of `proposition-composition-open-restriction-compactifications-f` and transport
-across this equality (`det-def-localizing-closure-ctf-equals-bc`). This proves preservation and J
-adjoint R.
-7. For (j,q), lower shriek is Rq_* j_! by definition. Compare the chosen compactification
-to this one by `proposition-construction-independence-rf-shriek`, then use step 6 to obtain F
-isomorphic JQ.
-8. Strong monoidality of derived pullback, its single-functor comparison and the
-canonical rational Tate-line pullback identify tensoring with the pulled-back line.
-The pullback CommShift comparison moves shift two, and derived pullback composition
-identifies the result with p-star followed by the Tate twist and shift two.
-9. Supply the canonical diagonal data to the projective-line triangle theorem through
-`lem-sfb-rational-p1-adjunction-assembly`. Compose its adjunction Q adjoint S with
-J adjoint R to obtain JQ adjoint SR. Steps 7 and 8 identify the ambient functors.
-10. For any other right adjoint G of F, Mathlib's `Adjunction.rightAdjointUniq` gives
-the isomorphism G to P and the counit identity. Injectivity of the adjunction Hom
-bijection proves uniqueness, component by component.
--/
+subextension and for the finite-subextension-valued algebraic closure.  The first conjunct is
+`affineLineRationalAssertion` for every finite subextension `E`, the second is the same
+assertion for `ℚ̄_ℓ`. -/
 theorem det_cor_affine_space_rational_line
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

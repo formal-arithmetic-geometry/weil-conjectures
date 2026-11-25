@@ -39,7 +39,6 @@ This is the analogue, without flatness, of
 `ProEtale.CondensedRing.nonempty_arrowIso_map_exchangeRight_derivedExtendScalars`; the proof is
 the same application of the cube law of mates
 (`CategoryTheory.Adjunction.nonempty_arrowIso_map_exchangeRight_app`).
-
 -/
 
 @[expose] public section

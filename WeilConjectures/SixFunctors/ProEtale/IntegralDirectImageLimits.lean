@@ -15,8 +15,9 @@ import WeilConjectures.SixFunctors.ProEtale.InternalRoosCompleteness
 
 /-! # Integral direct image and the canonical finite reduction
 
-Source: Stacks 099N and blueprint direct-image-limits, finite-projection and completion clauses.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 099N](https://stacks.math.columbia.edu/tag/099N)
 -/
 
 @[expose] public noncomputable section
@@ -179,33 +180,7 @@ private theorem map_roos_complete
       Category.comp_id (B.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app K)
 
 /-- Direct image preserves canonical integral completeness and its specified residue mate
-is invertible, without a finiteness or properness hypothesis on the scheme morphism.
-Source: Stacks 099N; blueprint proposition-proper-base-change-complete-integral--1, finite-reduction
-and completion-unit clauses.
-(auxiliary; not a blueprint node).
-
-Proof: pass from internal modules to sectionwise modules by the exact section-action
- equivalence. The integral coefficient limit identifies the ring with the completed adic
- ring for the lifted ring of integers and the principal uniformizer ideal. Quotient
- isomorphisms are induced by ULift.down and fix all scalar representatives. Each quotient
- is finite and perfect, by its two-term finite free resolution; the residue is torsion.
- These data form the adic coefficient datum of CompletedDirectImageLimits.
- Normalize the finite restriction squares by the identity on underlying sections. Their
- derived left-adjoint comparisons identify the actual finite reductions. The geometric
- adjunction comparisons identify the inverse scalar mate displayed here with the
- coefficient reduction/pullback isomorphism chi. In particular it is invertible.
- The finiteProjection_isIso theorem then identifies its geometric mate, computed as
- the residue homEquiv of inverse chi followed by reduction of the integral counit,
- with the invertible finite projection. This equality follows by the scalar and
- geometric adjunction Hom bijections; it retains the quotient action and fixes the
- displayed morphism rather than choosing an arbitrary isomorphism of cones.
- For completeness, use all positive finite projections, with their quotient transitions.
- Exact equivalences transport products and the signed Roos cone. The theorem push_complete
- applies to the resulting reduction tower. The completion-unit equation in
- towerProjection_properties identifies the transported map with the canonical
- augmentation used by IsDerivedComplete. Thus completeness of K implies completeness
- of its direct image. This argument applies to unbounded complexes, arbitrary scheme
- morphisms, empty schemes and zero complexes. -/
+is invertible, without a finiteness or properness hypothesis on the scheme morphism. -/
 theorem internal_integral_direct_image_limits
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

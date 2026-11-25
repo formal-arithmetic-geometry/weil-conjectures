@@ -9,14 +9,14 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Adjunct transport through a conjugate and an open factor
 
-Source: Stacks Project, Tag 07A7, abstract mate normalization
-(blueprint: lem-sf-adjunct-conjugate-open-factor).
+The categorical argument is stated as a public interface independent of the geometric
+realization.
 
-The existing categorical argument is extracted from
-`WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProperOpenMatePasting`
-so it is a public interface
-independent of the geometric realization.
+## References
+
+* [Stacks, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,9 +70,7 @@ private theorem homEquiv_open_factor
   simp only [← P₀.map_comp_assoc, Iso.hom_inv_id_app]
   erw [P₀.map_id, Category.id_comp, IsIso.hom_inv_id, Category.comp_id]
 
-/-- Transport an adjunct through a conjugate isomorphism and cancel an open factor.
-Source: Stacks Project, Tag 07A7, abstract mate normalization
-(blueprint: lem-sf-adjunct-conjugate-open-factor). -/
+/-- Transport an adjunct through a conjugate isomorphism and cancel an open factor. -/
 theorem adjunct_transport
     {A B D E F : Type*}
     [Category A] [Category B] [Category D] [Category E] [Category F]

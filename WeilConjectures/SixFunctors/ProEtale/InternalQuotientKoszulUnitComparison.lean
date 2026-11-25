@@ -11,8 +11,12 @@ import WeilConjectures.SixFunctors.ProEtale.InternalQuotientRoosLimit
 
 /-! # Normalized quotient to Koszul augmentation comparison
 
-Source: integral-models proof (1), Stacks Tags 099I, 099L and 0A0E.
-(auxiliary; not a blueprint node).
+## References
+
+* [Stacks, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
 -/
 
 @[expose] public noncomputable section
@@ -34,29 +38,7 @@ local instance internalQuotientKoszulUnitComparisonInst2
   HasDerivedCategory.standard _
 
 /-- Comparison of augmented actual quotient Roos complexes with the singleton
-Koszul completion, after the specified exact constant-coefficient transport.
-
-Source: integral-models proof (1); normalized integral coefficient limit;
-constant-coefficient criterion (1),(3); Stacks Tags 099I, 099L, 099M and 0A0E.
-(auxiliary; not a blueprint node).
-
-Proof: the point coefficient isomorphism identifies actual integral coefficients with
-the normalized inverse limit of the constant positive quotients. Flatness and the
-common quotient isomorphisms identify each tensor reduction of the K-flat P after
-restriction with its constant quotient reduction. Both maps on pure tensors send
-x to x tensor 1, so these identifications commute with all quotient transitions and
-with the augmentation. The section-action and small-site equivalences preserve the
-products, shift and signed cone defining the Roos complex; restriction of scalars
-preserves the same products. The singleton generating-list hypothesis identifies the
-residue kernel with (a), so its powers give the same positive quotients. Multiplication
-by a is regular (the coefficient uniformizer is regular and the constant coefficient
-inverse image is flat). The negative two-term free Koszul resolution of each quotient
-therefore identifies its tensor reduction with the dual singleton Koszul tower, with
-transition components (a,1) and degree-zero unit. The normalized total derived inverse
-limit comparison for D identifies the two augmented limits. K-flatness makes the
-quotient tensors derived tensors, without boundedness assumptions. All comparisons
-retain the unit, giving the displayed equality, including for P=0 and empty X.
--/
+Koszul completion, after the specified exact constant-coefficient transport. -/
 theorem quotient_koszul_unit_comparison [IsNoetherian X]
     (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)
     (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,
