@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SixFunctors.IntegralHom.Two.TwoTermTensorCoordinates
 import all WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSupplement
 
-/-! Evaluation of the two surviving tensor coordinates. Source: Stacks 03EK and 0A8X. -/
+/-! # Evaluation of the two surviving tensor coordinates
+
+For a complex `Q` concentrated in degrees `-1` and `0` with both terms identified with the unit,
+the total tensor `A ⊗ Q` in degree `n` is `A^(n+1) ⊕ A^n`. We compute the two coordinates of
+this decomposition on pure tensors of local sections.
+
+## References
+
+* Stacks Project, Tags 03EK, 0A8X.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,13 +61,11 @@ local instance twoTermTensorCoordinateSectionsLocal6 (K L : CochainComplex (Modu
 
 namespace TwoTermCoordinates
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- A section of the unit module, viewed as a section of the structure sheaf. -/
 def unitSection (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) :
     (𝟙_ (Modules.{t, u} Y R)).val.obj U → R.obj.obj U := fun a ↦ a
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The right unitor sends the pure tensor `x ⊗ a` to `a • x`. -/
 theorem unitor_pair (M : Modules.{t, u} Y R)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : M.val.obj U) (a : (𝟙_ (Modules.{t, u} Y R)).val.obj U) :
@@ -68,14 +75,13 @@ theorem unitor_pair (M : Modules.{t, u} Y R)
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The zero morphism of modules vanishes on every local section. -/
 theorem zero_apply (M N : Modules.{t, u} Y R)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : M.val.obj U) :
     (0 : M ⟶ N).val.app U x = 0 := rfl
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- Tensoring with an isomorphism `e : N ≅ 𝟙` followed by the right unitor sends `x ⊗ z`
+to `e(z) • x`. -/
 theorem contract_pair (M N : Modules.{t, u} Y R)
     (e : N ≅ (𝟙_ (Modules.{t, u} Y R)))
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
@@ -95,8 +101,8 @@ variable (A Q : CochainComplex (Modules.{t, u} Y R) ℤ)
   (eNeg : Q.X (-1) ≅ (𝟙_ (Modules.{t, u} Y R)))
   (eZero : Q.X 0 ≅ (𝟙_ (Modules.{t, u} Y R)))
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The first (degree `-1`) coordinate of the two-term tensor decomposition, restricted to
+the summand `A^a ⊗ Q^b`: it is contraction with `eNeg` if `b = -1` and zero otherwise. -/
 theorem neg_coordinate (a b n : ℤ) (hab : a + b = n) :
     CochainComplex.ιMapBifunctor A Q (ordinaryTensor Y R) a b n hab ≫
       (twoTermTensorIso Y R A Q hzero eNeg eZero n).hom ≫ biprod.fst =
@@ -120,8 +126,8 @@ theorem neg_coordinate (a b n : ℤ) (hab : a + b = n) :
     · exact (((ordinaryTensor Y R).obj (A.X a)).map_isZero
         (hzero b hb hb')).eq_of_src _ _
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The second (degree `0`) coordinate of the two-term tensor decomposition, restricted to
+the summand `A^a ⊗ Q^b`: it is contraction with `eZero` if `b = 0` and zero otherwise. -/
 theorem zero_coordinate (a b n : ℤ) (hab : a + b = n) :
     CochainComplex.ιMapBifunctor A Q (ordinaryTensor Y R) a b n hab ≫
       (twoTermTensorIso Y R A Q hzero eNeg eZero n).hom ≫ biprod.snd =
@@ -144,8 +150,8 @@ theorem zero_coordinate (a b n : ℤ) (hab : a + b = n) :
     · exact (((ordinaryTensor Y R).obj (A.X a)).map_isZero
         (hzero b hb' hb)).eq_of_src _ _
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The pure tensor `x ⊗ z` of local sections, as a section of the total tensor in degree
+`n = a + b`. -/
 noncomputable def generator (a b n : ℤ) (hab : a + b = n)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X a).val.obj U) (z : (Q.X b).val.obj U) :
@@ -153,8 +159,7 @@ noncomputable def generator (a b n : ℤ) (hab : a + b = n)
   (CochainComplex.ιMapBifunctor A Q (ordinaryTensor Y R) a b n hab).val.app U
     (pair Y R (A.X a) (Q.X b) U x z)
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- Transporting a total pure tensor along `a + b = n` gives `generator`. -/
 theorem generator_transport (a b n : ℤ) (h : a + b = n)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X a).val.obj U) (z : (Q.X b).val.obj U) :
@@ -163,8 +168,7 @@ theorem generator_transport (a b n : ℤ) (h : a + b = n)
   subst n
   rfl
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The first coordinate of `x ⊗ z` with `z` in degree `-1` is `eNeg(z) • x`. -/
 theorem generator_neg_fst (n : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X (n + 1)).val.obj U) (z : (Q.X (-1)).val.obj U) :
@@ -176,8 +180,7 @@ theorem generator_neg_fst (n : ℤ)
   simp only [dite_true, eqToHom_refl, Category.id_comp] at h
   exact h.trans (contract_pair Y R _ _ eNeg U x z)
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The first coordinate of `x ⊗ z` with `z` in degree `0` vanishes. -/
 theorem generator_zero_fst (n : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X n).val.obj U) (z : (Q.X 0).val.obj U) :
@@ -188,8 +191,7 @@ theorem generator_zero_fst (n : ℤ)
   simp only [dite_eq_right (by omega : (0 : ℤ) ≠ -1)] at h
   exact h.trans (zero_apply Y R _ _ U _)
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The second coordinate of `x ⊗ z` with `z` in degree `-1` vanishes. -/
 theorem generator_neg_snd (n : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X (n + 1)).val.obj U) (z : (Q.X (-1)).val.obj U) :
@@ -200,8 +202,7 @@ theorem generator_neg_snd (n : ℤ)
   simp only [dite_eq_right (by omega : (-1 : ℤ) ≠ 0)] at h
   exact h.trans (zero_apply Y R _ _ U _)
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- The second coordinate of `x ⊗ z` with `z` in degree `0` is `eZero(z) • x`. -/
 theorem generator_zero_snd (n : ℤ)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X n).val.obj U) (z : (Q.X 0).val.obj U) :
@@ -213,8 +214,7 @@ theorem generator_zero_snd (n : ℤ)
   simp only [dite_true, eqToHom_refl, Category.id_comp] at h
   exact h.trans (contract_pair Y R _ _ eZero U x z)
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- Version of `generator_neg_fst` for `x` in degree `a` with `a + (-1) = n`. -/
 theorem generator_neg_fst_transport (n a : ℤ) (h : a + (-1) = n)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X a).val.obj U) (z : (Q.X (-1)).val.obj U) :
@@ -226,8 +226,7 @@ theorem generator_neg_fst_transport (n a : ℤ) (h : a + (-1) = n)
   simpa only [eqToHom_refl, SheafOfModules.id_val, PresheafOfModules.id_app,
     ModuleCat.id_apply] using generator_neg_fst Y R A Q hzero eNeg eZero n U x z
 
-/-- Sectionwise coordinate calculus. Source: Stacks 03EK and 0A8X.
-(blueprint: lem-sf-two-term-tensor-coordinate-sections). -/
+/-- Version of `generator_neg_snd` for `x` in degree `a` with `a + (-1) = n`. -/
 theorem generator_neg_snd_general (n a : ℤ) (h : a + (-1) = n)
     (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ)
     (x : (A.X a).val.obj U) (z : (Q.X (-1)).val.obj U) :

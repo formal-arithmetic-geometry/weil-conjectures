@@ -81,8 +81,23 @@ import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedT
 
 /-! # One-level representative formula for the tensor mate
 
-Source: Stacks Project, Modules on Sites, Tag 03CZ, and Cohomology on Sites,
-Tag 07A4; the coefficient calculation in the integral Verdier proof.
+We show that, for a K-flat first factor `P`, the scalar-adjunction tensor mate at a fixed
+coefficient level is represented by the ordinary contraction `x ⊗ (s ⊗ y) ↦ s ⊗ (x ⊗ y)`.
+
+## Implementation details
+
+Tensoring with the K-flat `P` preserves quasi-isomorphisms, so `a.representative` extends along
+the K-flat localization in the second argument to a natural isomorphism `e` on all complexes.
+To compute the mate, resolve the restricted extension of `Q` by a K-flat complex `S`, transpose
+through the scalar adjunction (whose ordinary counit multiplies scalar factors), and cancel the
+tensor comparisons fixed by `ReductionPresentation.normalization` on `(P, S)` and `(P, Q)`. The
+resulting chain map is identified with `b` on homogeneous pure tensors, using the tensor
+universal property, sheafification and total-summand extensionality. The construction of `e`
+is independent of the coefficient level, and no compatibility between levels is assumed.
+
+## References
+
+* Stacks Project, Tags 03CZ, 06YY, 07A4, 05V4.
 -/
 
 @[expose] public noncomputable section
@@ -1077,29 +1092,10 @@ attribute [local implicit_reducible] completedIntegralCommRingSheaf
   integralCoefficientSheaf
 
 -- Keep the coefficient wrappers folded while elaborating the comparison squares.
-/-- The scalar-adjunction tensor mate is represented by the ordinary contraction.
-This is a one-level calculation: no consecutive quotient map occurs in it.
-
-Source: Stacks 03CZ, lemma-adjointness-tensor-restrict; 06YY,
-lemma-derived-base-change; 07A4, lemma-pullback-tensor-product.
-
-Proof: fix the K-flat first factor P. Tensoring with P sends acyclic complexes
-to acyclic complexes, hence preserves quasi-isomorphisms, by the native K-flat
-tensor API. Extend a.representative in the second argument along the K-flat
-localization. This gives e, natural on all complexes, with its prescribed value
-on K-flat Q. To calculate the mate, resolve the restricted extension of Q by a
-K-flat complex S. Use naturality to replace e there by its value on S. Transpose
-through the scalar adjunction. Its ordinary counit multiplies scalar factors.
-ReductionPresentation.normalization fixes the two tensor comparisons on the
-K-flat pairs (P, S) and (P, Q). Cancel these comparisons and the resolution of S.
-On each homogeneous pure tensor the resulting chain map sends
-x tensor (s tensor y) to s tensor (x tensor y). Thus it is b by the tensor
-universal property, sheafification, and total-summand extensionality. Localize
-this identity. The restriction comparison is the exact-restriction factor of
-the scalar counit, giving precisely the displayed equation. The construction
-of e is independent of the coefficient level; the calculation applies separately
-to every n and every normalized m, so it assumes no compatibility between them.
-(blueprint: lem-sf-integral-tensor-restriction-mate-model). -/
+/-- The scalar-adjunction tensor mate is represented by the ordinary contraction: there is
+a natural isomorphism `e` extending `a.representative` on K-flat `Q`, and at every level `n`,
+for every chain map `b` sending `x ⊗ (s ⊗ y)` to `s ⊗ (x ⊗ y)`, the mate of `e` is the image
+of `b`. -/
 theorem restrictionTensor_mate_model
     (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
