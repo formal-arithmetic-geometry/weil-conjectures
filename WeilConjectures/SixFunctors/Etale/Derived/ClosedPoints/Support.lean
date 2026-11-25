@@ -32,11 +32,18 @@ complement of `S`. The sheaves `F_S` are globally generated
 
 - `AlgebraicGeometry.Etale.exists_finite_forall_mem_sectionVanishingLocus`: a section over a
   quasi-compact étale `X`-scheme is supported over finitely many closed points.
-- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_sheafFiber`
-(`corollary-open-direct-image-over-field--2`):
-  `F` is globally generated.
+- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_sheafFiber`: `F` is globally generated.
 - `AlgebraicGeometry.Etale.isZero_of_isZero_sheafFiber_of_subsingleton`: if moreover `F` has
   no nonzero global sections, then `F = 0`.
+
+## Implementation details
+
+A point `w` of `W` near which a section `z` does not vanish lies over a closed point: otherwise
+the germ of `z` at a geometric point over `w` lies in a vanishing stalk. The locus of such points
+is closed in the Noetherian space `W`, hence a finite union of irreducible closed sets, each of
+which maps to the closure of the image of its generic point, a closed point.
+
+One could argue with the finitely generated subsheaves of `F` instead of the `F_S`.
 -/
 
 @[expose] public section
@@ -106,13 +113,7 @@ variable {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
 type over a field, `F` an étale sheaf of `Λ`-modules on `X` whose stalks at the geometric points
 over non-closed points vanish, and `z` a section of `F` over an étale `X`-scheme `W` with
 quasi-compact underlying space. Then there is a finite set `S` of closed points of `X` such that
-`z` vanishes near every point of `W` not lying over `S`.
-
-A point `w` of `W` near which `z` does not vanish lies over a closed point: otherwise the germ
-of `z` at a geometric point over `w` lies in a vanishing stalk
-(`AlgebraicGeometry.Etale.toPresheafFiber_eq_zero_iff`). The locus of such points is closed in
-the Noetherian space `W`, hence a finite union of irreducible closed sets, and each of these
-maps to the closure of the image of its generic point, a closed point. -/
+`z` vanishes near every point of `W` not lying over `S`. -/
 theorem exists_finite_forall_mem_sectionVanishingLocus {K : Type u} [Field K]
     (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (hF : ∀ x ∉ closedPoints X,
@@ -299,19 +300,10 @@ theorem exists_supportedSectionsι_app_eq_map (p : X ⟶ Spec (.of K)) [LocallyO
     (F.obj.map g.op s) fun v hv ↦ hS v hv
   exact ⟨V, g, ⟨⟨w, hwO⟩, rfl⟩, S, hSf, hSc, z, hz⟩
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **global generation for sheaves supported
-on closed points.** Let `K` be a separably closed field, `X` a scheme locally of finite type over
-`K` and `F` an étale sheaf of `Λ`-modules on `X` whose stalks at the geometric points over the
-non-closed points of `X` vanish. Then `F` is globally generated.
-
-For a finite set `S` of closed points (whose residue fields are separably closed,
-`AlgebraicGeometry.Scheme.Hom.residueField_of_isClosed_of_isSepClosed`) the subsheaf `F_S` of
-sections supported on `S` is globally generated
-(`AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_upperStar`). Every section of `F` over
-an affine étale `X`-scheme lies in some `F_S`
-(`AlgebraicGeometry.Etale.exists_finite_forall_mem_sectionVanishingLocus`), so the `F_S` cover
-`F` and `F` is globally generated (`AlgebraicGeometry.Etale.isGloballyGenerated_of_epi_sigmaDesc`).
-The blueprint argues with the finitely generated subsheaves of `F` instead of the `F_S`. -/
+/-- **Global generation for sheaves supported on closed points.** Let `K` be a separably closed
+field, `X` a scheme locally of finite type over `K` and `F` an étale sheaf of `Λ`-modules on `X`
+whose stalks at the geometric points over the non-closed points of `X` vanish. Then `F` is globally
+generated. -/
 theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (hF : ∀ x ∉ closedPoints X,
       IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F)) :
@@ -346,7 +338,7 @@ theorem isGloballyGenerated_of_isZero_sheafFiber (p : X ⟶ Spec (.of K)) [Local
 
 /-- An étale sheaf of `Λ`-modules on a scheme locally of finite type over a separably closed
 field, with vanishing stalks at the non-closed points and without nonzero global sections, is
-zero: it is globally generated (`corollary-open-direct-image-over-field--2`). -/
+zero. -/
 theorem isZero_of_isZero_sheafFiber_of_subsingleton (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (hF : ∀ x ∉ closedPoints X,
       IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F))

@@ -20,7 +20,9 @@ sections of `N` with support in `Z` form the kernel `Γ_Z N = ker(N ⟶ j_* j^* 
 `j^* ⊣ j_*`, and `i^! N = i^* Γ_Z N`. This file shows that `i^!` is right adjoint to `i_*` on
 sheaves, for arbitrary coefficients, and that the right derived functor of `i^!` is right
 adjoint to the direct image `Ri_* = i_*` on the unbounded derived categories of étale sheaves
-of modules (blueprint `lemma-local-cohomology-right-adjoint--1`). No constructibility is involved.
+of modules. No constructibility is involved.
+
+## Implementation details
 
 The sheaf-level adjunction is the composite of three bijections
 ```
@@ -29,7 +31,9 @@ The sheaf-level adjunction is the composite of three bijections
 given by the full faithfulness of `i_*`, the unit `Γ_Z N ≅ i_* i^* Γ_Z N` (an isomorphism since
 `Γ_Z N` restricts to zero on `U`, hence is a pushforward from `Z`,
 `AlgebraicGeometry.Etale.mem_essImage_lowerStar_of_isZero_upperStar`), and the universal property
-of the kernel (`j^* i_* M = 0`).
+of the kernel (`j^* i_* M = 0`). As `i_*` is exact, `Ri_*` is `i_*` applied termwise and
+`CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction` gives the derived adjunction,
+with `Ri^!` computed on K-injective resolutions.
 
 ## Main definitions
 
@@ -37,7 +41,7 @@ of the kernel (`j^* i_* M = 0`).
 - `AlgebraicGeometry.Etale.closedUpperShriek`: `i^! = i^* ∘ Γ_Z`.
 - `AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction`: `i_* ⊣ i^!` on sheaves.
 - `AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`: `Ri_* ⊣ Ri^!` on the
-  unbounded derived categories (blueprint `lemma-local-cohomology-right-adjoint--1`).
+  unbounded derived categories.
 -/
 
 @[expose] public section
@@ -223,20 +227,11 @@ section Derived
 variable {R : Type (u + 1)} [Ring R] {Z U X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--1`: Closed-immersion right adjoint before
-restriction.
-
-Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X`. On the unbounded
-derived categories of étale sheaves of modules, the direct image `Ri_*` has a right adjoint, the
-right derived functor `Ri^!` of the sheaf-level `i^! = i^* Γ_Z`
-(`AlgebraicGeometry.Etale.closedUpperShriek`). No constructibility is assumed of the values of
-this right adjoint.
-
-On sheaves `i_* ⊣ i^!` (`AlgebraicGeometry.Etale.lowerStarClosedUpperShriekAdjunction`), and
-`i_*` is exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), so
-`Ri_*` is `i_*` applied termwise and
-`CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction` applies: `i^!` is computed
-on K-injective resolutions. -/
+/-- Closed-immersion right adjoint: let `i : Z ⟶ X` be a closed immersion with open complement
+`j : U ⟶ X`. On the unbounded derived categories of étale sheaves of modules, the direct image
+`Ri_*` has a right adjoint, the right derived functor `Ri^!` of the sheaf-level `i^! = i^* Γ_Z`
+(`AlgebraicGeometry.Etale.closedUpperShriek`). No constructibility is assumed of the values of this
+right adjoint. -/
 noncomputable def derivedLowerStarClosedUpperShriekAdjunction
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctor ⊣
