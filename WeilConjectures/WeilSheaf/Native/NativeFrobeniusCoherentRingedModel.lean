@@ -24,9 +24,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 attribute [local irreducible] SheafOfModules.monoidalCategory
   ProEtale.NativeFrobenius.equivalence
 
-/-- The canonical Frobenius model, constructed independently of tensor coherence.
-Source: the explicit native_frobenius_ringed_model construction
-(blueprint: new-sf-native-frobenius-coherent-ringed-model). -/
+/-- The canonical Frobenius model, constructed independently of tensor coherence. -/
 def canonicalFrobeniusRingedModel
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
@@ -126,14 +124,7 @@ private theorem coherent_model_mk
   exact hc
 
 -- The two native and ringed module presentations require substantial type conversion.
-/-- Retain tensor coherence of the explicitly constructed canonical Frobenius model.
-Source: canonical section tensor comparison
-(blueprint: new-sf-native-frobenius-coherent-ringed-model).
-
-Proof: unfold the explicit model's site, equivalence and Hom maps. They are
-precisely those of the canonical ordinary coherence theorem for the proved
-comparison core. Apply that theorem. The model definition uses no tensor
-coherence theorem; this result supplies only its coherence property. -/
+/-- Retain tensor coherence of the explicitly constructed canonical Frobenius model. -/
 theorem native_frobenius_coherent_ringed_model
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :

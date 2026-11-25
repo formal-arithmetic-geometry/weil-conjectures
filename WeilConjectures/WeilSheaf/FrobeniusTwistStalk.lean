@@ -182,11 +182,9 @@ theorem isPureOfWeightOn_stalkSubspace_congr
   subst h
   rfl
 
-/-- **Purity on the Frobenius translates of a geometric point** (blueprint:
-`theorem-real-constructible-sheaves-are-mixed--1`, "the weight obtained on this curve is independent
-of the curve"). Let `s` be a geometric point with `σᵃ ≫ s = t ≫ Frᵃ`, e.g. the translate
-`σ⁻ᵃ ≫ t ≫ Frᵃ` of `t`. If the stalk of `P` at `s` is pure of weight `w`, so is the stalk of the
-`a`-th Frobenius twist `Tᵃ P` at `t`. -/
+/-- **Purity on the Frobenius translates of a geometric point**. Let `s` be a geometric point
+with `σᵃ ≫ s = t ≫ Frᵃ`, e.g. the translate `σ⁻ᵃ ≫ t ≫ Frᵃ` of `t`. If the stalk of `P` at `s`
+is pure of weight `w`, so is the stalk of the `a`-th Frobenius twist `Tᵃ P` at `t`. -/
 theorem isPureOfWeightOn_stalkSubspace_frobeniusTwist_iterate
     {t s : Spec (.of (AlgebraicClosure k₀)) ⟶ (X ↘ Spec (CommRingCat.of k₀)).geometricFiber}
     {m : ℕ} (ht : t ≫ ((X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).asIso.hom =

@@ -25,23 +25,18 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 The direct image with compact support `Rf₀! = Rḡ_* ∘ ī_!` of Weil complexes
 (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`) is defined through the compactification
-`X ⟶[i] Z ⟶[g] Y` of `f` chosen by Nagata's theorem. This file records the compatibilities of
-`Rf₀!` collected in the blueprint theorem `prop-functor-package` of the six-functor chapter that
-the Deligne–Laumon reduction (`chap-The-Deligne-Laumon-theorem-in-general`) uses:
+`X ⟶[i] Z ⟶[g] Y` of `f` chosen by Nagata's theorem. This file records the following
+compatibilities of `Rf₀!`, used in the Deligne–Laumon reduction:
 
-- *independence of the compactification* (clause 2), in the case of the compactification
+- *independence of the compactification*, in the case of the compactification
   `U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`: `Rj₀!` is the extension by zero;
-- *composition* (clause 3): `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`, and the distinguished triangle
+- *composition*: `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`, and the distinguished triangle
   `R(j ≫ f)₀! j^*K ⟶ Rf₀!K ⟶ R(i ≫ f)₀! i^*K ⟶` obtained by applying `Rf₀!` to the
   localization triangle of an open immersion `j` and its closed complement `i`;
-- *base change* (clause 4): `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square;
+- *base change*: `h^* Rf₀! ≅ Rf'₀! g^*` for a cartesian square;
 
-as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex
-(`proposition-extension-zero-restriction-closed-subscheme--8`), as well as the identification of
-`Rf₀!` with `Rf₀*` for proper `f`. The extension by zero, the open–closed triangle and the
-composition are deduced from the native comparisons of `Sheaf.WeilSheaf`; the base change is deduced
-from the native proper and open base changes (`Sheaf.WeilSheaf.NativeProperNaturalBaseChange`,
-`Sheaf.WeilSheaf.NativeOpenNaturalBaseChange`) and the compactification model comparison.
+as well as the open–closed triangle `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶` of a Weil complex and the
+identification of `Rf₀!` with `Rf₀*` for proper `f`.
 
 ## Main statements
 
@@ -50,10 +45,21 @@ from the native proper and open base changes (`Sheaf.WeilSheaf.NativeProperNatur
 - `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion`,
   `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_comp_iso`,
   `AlgebraicGeometry.WeilComplex.exists_distTriang_derivedLowerShriek_openClosed` and
-  `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: clauses 2, 3 and 4 of
-  `prop-functor-package`.
-- `AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed`: the open–closed triangle
-  (`proposition-extension-zero-restriction-closed-subscheme--8`).
+  `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso`: extension by zero,
+  composition, the localization triangle and base change.
+- `AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed`: the open–closed triangle.
+
+## Implementation details
+
+The extension by zero, the open–closed triangle and the composition are deduced from the native
+comparisons of `Sheaf.WeilSheaf`; the base change is deduced from the native proper and open base
+changes (`Sheaf.WeilSheaf.NativeProperNaturalBaseChange`,
+`Sheaf.WeilSheaf.NativeOpenNaturalBaseChange`) and the compactification model comparison. For
+proper `f`, the open immersion `i` of the chosen compactification is proper, hence a closed
+immersion, so that `Rf₀!K = Rg_*(i_!K) ≅ Rg_*(i_*K) ≅ Rf₀*K`.
+
+In `exists_distTriang_openClosed` the vertices of the triangle are only identified up to
+isomorphism, and the first two arrows are not asserted to be the canonical counit and unit.
 -/
 
 @[expose] public section
@@ -79,10 +85,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [IsProper f] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **For a proper morphism, the direct image with compact support is the direct image**: for the
-chosen compactification `X ⟶[i] Z ⟶[g] Y` of the proper morphism `f`, the open immersion `i` is
-proper, hence a closed immersion, so that `Rf₀!K = Rg_*(i_!K) ≅ Rg_*(i_*K) ≅ Rf₀*K`
-(blueprint: `prop-functor-package`, clause 3, "for proper `f`, `Rf_! ≃ Rf_*`"). -/
+/-- **For a proper morphism, the direct image with compact support is the direct image**:
+`Rf₀!K ≅ Rf₀*K` for a proper morphism `f` and a Weil complex `K`. -/
 noncomputable def derivedLowerShriekObjIsoDerivedLowerStar (K : WeilComplex k₀ l X) :
     (derivedLowerShriek k₀ l f).obj K ≅ (derivedLowerStar f).obj K := by
   let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
@@ -116,9 +120,7 @@ noncomputable def derivedLowerShriekObjIsoDerivedLowerStar (K : WeilComplex k₀
       K.obj
 
 /-- **For a proper morphism, the direct image with compact support is the direct image**, as an
-isomorphism of functors on Weil complexes; its components are
-`AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoDerivedLowerStar` (blueprint:
-`prop-functor-package`, clause 3, "for proper `f`, `Rf_! ≃ Rf_*`"). -/
+isomorphism of functors `Rf₀! ≅ Rf₀*` on Weil complexes. -/
 noncomputable def derivedLowerShriekIsoDerivedLowerStar :
     derivedLowerShriek k₀ l f ≅ derivedLowerStar f := by
   let c := HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
@@ -285,11 +287,9 @@ private theorem exists_native_localization_triangle (j : U ⟶ X)
     (ProEtaleWeilSheaf.upperStar k₀ l i) (ProEtaleWeilSheaf.lowerStar k₀ l i)
     aj.counit ai.unit hlocal.2.2.2.2 K
 
-/-- **The direct image with compact support along an open immersion is the extension by zero**
-(blueprint: `prop-functor-package`, clause 2, compactification comparisons for
-`Rf_! = Rf̄_* j_!` are independent of the refinement, applied to the compactification
-`U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`; and `def-weil-extension-by-zero`). For a
-quasi-compact open immersion `j` and a Weil sheaf `G` on `U`, `Rj₀!G ≅ j₀!G` in degree zero. -/
+/-- **The direct image with compact support along an open immersion is the extension by zero**:
+for a quasi-compact open immersion `j` and a Weil sheaf `G` on `U`, `Rj₀!G ≅ j₀!G` in degree
+zero. -/
 theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ X)
     [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -302,15 +302,10 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
   exact (e.app (WeilSheaf.toComplex.obj G)).symm ≪≫
     ((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategorySingleFunctor 0).app G.obj
 
-/-- **The open–closed triangle** (blueprint:
-`proposition-extension-zero-restriction-closed-subscheme--8`): for a quasi-compact open immersion
-`j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K` on `X`, the open counit and
-the closed unit extend to a distinguished triangle of Weil complexes
-`j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`.
-
-This is a weakening of the blueprint node: the vertices of the triangle are only identified up
-to some isomorphism, and the first two arrows are not asserted to be the canonical counit and
-unit. -/
+/-- **The open–closed triangle**: for a quasi-compact open immersion `j : U ⟶ X` with closed
+complement `i : Z ⟶ X` and a Weil complex `K` on `X`, there is a distinguished triangle of Weil
+complexes `j₀!j₀^*K ⟶ K ⟶ i₀*i₀^*K ⟶ j₀!j₀^*K[1]`, with vertices identified up to
+isomorphism. -/
 theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range j.base) (Set.range i.base))
@@ -347,10 +342,8 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
     ((derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) K
     ((derivedLowerStar i).obj ((upperStar i).obj K)) T hT (e₁ ≪≫ c₁) e₂ (e₃ ≪≫ c₃)
 
-/-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,
-clause 3: `R(gf)_! ≃ Rg_!Rf_!`; this is `proposition-composition-base-change-rf-shriek--1` of
-`chap-The-Deligne-Laumon-theorem-in-general`). For composable separated morphisms of finite type
-`X ⟶[f] Y ⟶[g] Z` of `k₀`-schemes, `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`. -/
+/-- **Composition of direct images with compact support**: for composable separated morphisms
+of finite type `X ⟶[f] Y ⟶[g] Z` of `k₀`-schemes, `R(f ≫ g)₀! ≅ Rg₀! ∘ Rf₀!`. -/
 theorem nonempty_derivedLowerShriek_comp_iso (f : X ⟶ Y) (g : Y ⟶ Z)
     [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
     [QuasiCompact f] [g.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated g]
@@ -428,9 +421,9 @@ theorem nonempty_derivedLowerShriek_comp_iso (f : X ⟶ Y) (g : Y ⟶ Z)
       Functor.associator F' IY G ≪≫ Functor.isoWhiskerLeft F' eg ≪≫
       (Functor.associator F' G' IZ).symm)⟩
 
-/-- **Direct image with compact support of the localization triangle** (blueprint:
-`prop-functor-package`, clause 3: for a closed immersion `i` with open complement `j`, applying
-`Rf_!` to the localization triangle gives `R(fj)_!j^*K ⟶ Rf_!K ⟶ R(fi)_!i^*K ⟶`). -/
+/-- **Direct image with compact support of the localization triangle**: for a closed immersion
+`i` with open complement `j`, applying `Rf₀!` to the localization triangle gives a distinguished
+triangle `R(j ≫ f)₀!j^*K ⟶ Rf₀!K ⟶ R(i ≫ f)₀!i^*K ⟶`. -/
 theorem exists_distTriang_derivedLowerShriek_openClosed (j : U ⟶ X) [IsOpenImmersion j]
     [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) [IsClosedImmersion i]
     [i.IsOver (Spec (CommRingCat.of k₀))] (hij : IsCompl (Set.range j.base) (Set.range i.base))
@@ -455,8 +448,7 @@ theorem exists_distTriang_derivedLowerShriek_openClosed (j : U ⟶ X) [IsOpenImm
     ⟨F.mapIso e₂⟩, ⟨F.mapIso (e₃ ≪≫ (derivedLowerShriekObjIsoDerivedLowerStar i _).symm) ≪≫
       (ci.app _).symm⟩⟩
 
-/-- **Base change for the direct image with compact support** (blueprint: `prop-functor-package`,
-clause 4, `g^*Rf_! ≃ Rf'_!g'^*` for arbitrary base change): for a cartesian
+/-- **Base change for the direct image with compact support**: for a cartesian
 square
 ```
 X' --- g ---> X

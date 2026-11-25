@@ -31,6 +31,14 @@ at `x` (`AlgebraicGeometry.WeilSheaf.exists_hasEigenvalue_stalk_of_hasEigenvalue
 For `G = F^∨`, whose stalks are the duals of those of `F`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_dual`), this shows that every eigenvalue of
 the Frobenius on `Γ(X̄, F^∨)` has weight `-w`, so that its dual has weight `w`.
+
+## Implementation details
+
+The purity statement is often stated for `X` a nonempty smooth geometrically connected curve;
+here `X` is only assumed locally of finite type over `k₀`, which is what provides the closed
+points used above. Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the
+points of `X.finitePoints`, so for `X = Spec 𝔽_q(t)` it holds for every `w`, while the
+coinvariants of a rank-one sheaf need not be pure of every weight.
 -/
 
 @[expose] public section
@@ -259,19 +267,7 @@ theorem exists_hasEigenvalue_stalk_of_hasEigenvalue_globalSections (G : WeilShea
 
 /-- *Purity of the geometric coinvariants.* If `F` is a lisse Weil sheaf, punctually `ι`-pure of
 weight `w`, then its geometric coinvariants `V_{π₁(X̄)}` with the induced Frobenius are `ι`-pure
-of weight `w` (possibly zero). Every eigenvalue `β` of the Frobenius on the global sections of
-the dual `F^∨` is, up to the power `deg x`, an eigenvalue of the local Frobenius of `F^∨` at
-some closed point `x`
-(`AlgebraicGeometry.WeilSheaf.exists_hasEigenvalue_stalk_of_hasEigenvalue_globalSections`),
-whose stalk is the dual of the stalk of `F`; so `β` has weight `-w`, and its inverse, an
-eigenvalue of the coinvariants, has weight `w`.
-
-The blueprint states this for `X` a nonempty smooth geometrically connected curve; here `X` is
-only assumed locally of finite type over `k₀`, which is what provides these closed points.
-Some such hypothesis is needed: `IsPunctuallyPureOfWeight` only sees the points of
-`X.finitePoints`, so for `X = Spec 𝔽_q(t)` it holds for every `w`, while the coinvariants of a
-rank-one sheaf need not be pure of every weight.
-(blueprint: `lemma-degree-zero-top-cohomology--7`) -/
+of weight `w` (possibly zero). -/
 theorem isPureOfWeightOver_geometricCoinvariants (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l X) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
     (F.geometricCoinvariants hF).IsPureOfWeightOver k₀ ι w := by

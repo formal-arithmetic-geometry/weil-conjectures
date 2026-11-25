@@ -22,8 +22,12 @@ import all WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalCom
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 
 /-! # Flatness under ordinary geometric open restriction
-Source: Stacks 05VD and 0E8I.
-(blueprint: lem-sf-native-adic-restriction-flat).
+
+Ordinary inverse image along the geometric open preserves flat module objects.
+
+## References
+
+* Stacks Project, Tags 05VD and 0E8I
 -/
 
 @[expose] public section
@@ -34,17 +38,7 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 variable (l : ℕ) [Fact l.Prime] {U Z : Scheme.{u}}
   (j : U ⟶ Z) [IsOpenImmersion j]
 
-/-- Ordinary inverse image along the geometric open preserves flat module objects.
-Source: Stacks 05VD, inverse image of flat modules, and 0E8I, localization of sites.
-(blueprint: lem-sf-native-adic-restriction-flat).
-
-Proof: extension by zero is exact and fully faithful. The open-restriction
-internal-Hom comparison and uniqueness of left adjoints give the projection
-formula identifying extension by zero after tensoring with the restriction of M
-with tensoring by M after extension by zero. For flat M the latter composite is
-exact. Exactness of tensoring by its restriction follows by reflection through
-the fully faithful extension-by-zero functor. Symmetry gives exactness in the
-other variable. This argument also applies to the empty open and zero modules. -/
+/-- Ordinary inverse image along the geometric open preserves flat module objects. -/
 theorem native_adic_restriction_flat :
     (ProEtale.adicUpperStar l j).PreservesFlat := by
   let f := j

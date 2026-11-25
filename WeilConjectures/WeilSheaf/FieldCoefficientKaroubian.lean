@@ -18,8 +18,8 @@ t-structure on `D^b_{c,W}(X, E)` (`AlgebraicGeometry.FieldWeilComplex.tStructure
 `D^b_{c,W}(X, E)` is idempotent complete and its canonical functor into its Karoubi envelope is
 an exact equivalence, by the Karoubian bounded-t theorem.
 
-The common-stage category `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` of blueprint
-`definition-weil-structure` (`AlgebraicGeometry.WeilComplexTwoColimit`) is then idempotent
+The common-stage category `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)`
+(`AlgebraicGeometry.WeilComplexTwoColimit`) is then idempotent
 complete as well, a filtered `2`-colimit of idempotent complete categories being idempotent
 complete (`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`); hence its canonical
 functor into its Karoubi envelope is an equivalence.
@@ -27,6 +27,11 @@ functor into its Karoubi envelope is an equivalence.
 This file also records the forgetful functor `For` and the derived Frobenius isomorphism `θ` of
 the `2`-colimit model, through its comparison functor to the direct `ℚ̄_ℓ`-stage
 `AlgebraicGeometry.WeilComplex`.
+
+The exactness of the equivalence with the Karoubi envelope of the `2`-colimit, for its
+triangulated structure, is
+`WeilComplexTwoColimit.isIdempotentComplete_and_isEquivalence_toKaroubi_and_isTriangulated`
+(in `WeilConjectures.WeilSheaf.FieldCoefficientTriangulated`).
 -/
 
 @[expose] public section
@@ -84,17 +89,9 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fa
   (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Idempotent completeness of the Weil category, for the `2`-colimit model.
-
+/-- Idempotent completeness of the Weil category, for the `2`-colimit model:
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` (`AlgebraicGeometry.WeilComplexTwoColimit`) is
-idempotent complete, and the canonical functor into its Karoubi envelope is an equivalence: every
-stage `D^b_{c,W}(X, E)` is idempotent complete
-(`AlgebraicGeometry.FieldWeilComplex.isIdempotentComplete`), and an idempotent of the
-`2`-colimit is represented, and splits, at a finite stage
-(`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`). The exactness of this
-equivalence, for the triangulated structure of the `2`-colimit, is
-`WeilComplexTwoColimit.isIdempotentComplete_and_isEquivalence_toKaroubi_and_isTriangulated`
-(in `WeilConjectures.WeilSheaf.FieldCoefficientTriangulated`). -/
+idempotent complete, and the canonical functor into its Karoubi envelope is an equivalence. -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     IsIdempotentComplete (WeilComplexTwoColimit k₀ l X) ∧
@@ -104,7 +101,7 @@ theorem isIdempotentComplete_and_isEquivalence_toKaroubi
 
 variable {k₀ l X}
 
-/-- Blueprint `definition-weil-structure`: the forgetful functor
+/-- The forgetful functor
 `For : D^b_{c,W}(X, ℚ̄_ℓ) ⥤ D(X̄_proét, ℚ̄_ℓ)` of the `2`-colimit model, `(E, K) ↦ For(ℚ̄_ℓ ⊗_E K)`:
 the comparison functor to the direct `ℚ̄_ℓ`-stage
 (`AlgebraicGeometry.WeilComplexTwoColimit.toWeilComplex`) followed by its forgetful functor
@@ -113,7 +110,7 @@ noncomputable def forget :=
   toWeilComplex (l := l) k₀ X ⋙ WeilComplex.forget (X := X)
 
 variable (X) in
-/-- Blueprint `definition-weil-structure`: the derived Frobenius isomorphism
+/-- The derived Frobenius isomorphism
 `θ_K : Fr_X^* For(K) ≅ For(K)` of an object `K` of the `2`-colimit model, natural in `K`: that of
 its image `ℚ̄_ℓ ⊗_E K` in the direct `ℚ̄_ℓ`-stage (`AlgebraicGeometry.WeilComplex.frobeniusIso`). -/
 noncomputable def frobeniusIso :

@@ -31,8 +31,7 @@ counit `i_! i^* E ⟶ E` is an isomorphism, `i^*` and the pullback to the comple
 detecting isomorphisms; and `i^* E ≅ Rq_* K` by proper base change along `i`, since `X'` is open
 and closed in `b⁻¹(Y')`, on which `q` factors.
 
-This is the comparison of the blueprint (`proposition-construction-independence-rf-shriek`,
-`proposition-composition-base-change-rf-shriek--1`) behind the compatibilities of
+This comparison is behind the compatibilities of
 `Rf₀! = Rḡ_* ∘ ī_!` (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`):
 
 - for a refinement `c' ⟶ c` of compactifications of `f`, `R^{c'} f_! ≅ R^c f_!`, hence the
@@ -101,8 +100,7 @@ variable {X' W Z C : Scheme.{u}} [X'.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]
 
 /-- For an open immersion `a`, a proper `b` and a morphism `ι` whose range misses that of
-`a ≫ b`, the pullback along `ι` of `Rb_* a_! K` vanishes for a Weil complex `K`: by proper base
-change it is `Rb'_*` of the pullback of `a_! K` to `W ×_Z C`, which misses the range of `a`. -/
+`a ≫ b`, the pullback along `ι` of `Rb_* a_! K` vanishes for a Weil complex `K`. -/
 lemma ProEtaleWeilSheaf.isZero_upperStar_obj_rightDerivedLowerStar_obj_extensionByZero_obj
     (h : Disjoint (Set.range (a ≫ b).base) (Set.range ι.base)) (K : WeilComplex k₀ l X') :
     IsZero ((ProEtaleWeilSheaf.upperStar k₀ l ι).mapDerivedCategory.obj
@@ -196,9 +194,7 @@ omit [IsProper q] [q.IsOver (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))] in
 /-- For a commutative square `a ≫ b = q ≫ i` with `a`, `i` open immersions and `b`, `q` proper,
-the counit `i_! i^* E ⟶ E` is an isomorphism for `E = Rb_* a_! K`, `K` a Weil complex: its
-pullback along `i` is invertible, `D(i_!)` being fully faithful, and its pullback to the closed
-complement of `i` is a morphism between zero objects. -/
+the counit `i_! i^* E ⟶ E` is an isomorphism for `E = Rb_* a_! K`, `K` a Weil complex. -/
 lemma ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZero_obj
     (w : a ≫ b = q ≫ i) (K : WeilComplex k₀ l X') :
     IsIso ((ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l i).counit.app
@@ -214,14 +210,9 @@ lemma ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZe
   exact isCompl_compl.symm
 
 variable (k₀ l) in
-/-- **The proper direct image of an extension by zero** (blueprint
-`proposition-construction-independence-rf-shriek`): for a commutative square `a ≫ b = q ≫ i` of
-`k₀`-schemes with `a`, `i` quasi-compact open immersions and `b`, `q` proper,
-`Rb_* ∘ a_! ≅ i_! ∘ Rq_*` on Weil complexes. With `W' = W ×_Z Y'`, the counit
-`i_! i^* E ⟶ E` is an isomorphism for `E = Rb_* a_! K`, `i^* Rb_* ≅ Rb'_* k^*` by proper base
-change, `k^* a_! ≅ a'_!` for the factorization `a = a' ≫ k` through the open immersion
-`k : W' ⟶ W`, and `a'_! ≅ a'_*` since `a'` is also proper (it is a section of `b'` over `X'`),
-so that `Rb'_* a'_! ≅ R(a' ≫ b')_* = Rq_*`. -/
+/-- **The proper direct image of an extension by zero**: for a commutative square
+`a ≫ b = q ≫ i` of `k₀`-schemes with `a`, `i` quasi-compact open immersions and `b`, `q` proper,
+`Rb_* ∘ a_! ≅ i_! ∘ Rq_*` on Weil complexes. -/
 noncomputable def ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso
     (w : a ≫ b = q ≫ i) :
     (WeilComplex.objectProperty k₀ l X').ι ⋙
@@ -329,11 +320,8 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 variable (k₀ l) in
 /-- **The direct image with compact support does not change under refinement of the
-compactification** (blueprint `proposition-construction-independence-rf-shriek`): for a refinement
-`r : c ⟶ d` of compactifications of `f`, `R^c f_! ≅ R^d f_!` on Weil complexes, since
-`Rr_* ∘ c.i_! ≅ d.i_!`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso`
-for the square `c.i ≫ r = 𝟙 ≫ d.i`) and `c.g = r ≫ d.g`. -/
+compactification**: for a refinement `r : c ⟶ d` of compactifications of `f`,
+`R^c f_! ≅ R^d f_!` on Weil complexes. -/
 noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIsoOfRefinement
     {c d : Compactification f} (r : c.Refinement d) :
     (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ≅
@@ -366,10 +354,8 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIsoOfRefinement
       Functor.leftUnitor _)) _ ≪≫ Functor.associator _ _ _
 
 variable (k₀ l) in
-/-- **Independence of the compactification** (blueprint
-`proposition-construction-independence-rf-shriek`, `prop-functor-package` clause 2): for two
-compactifications `c`, `d` of `f`, `R^c f_! ≅ R^d f_!` on Weil complexes, through their common
-refinement (`AlgebraicGeometry.Compactification.inf`). -/
+/-- **Independence of the compactification**: for two compactifications `c`, `d` of `f`,
+`R^c f_! ≅ R^d f_!` on Weil complexes. -/
 noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIsoOfCompactification
     (c d : Compactification f) :
     (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ≅
@@ -383,7 +369,7 @@ variable [IsSeparated f] [LocallyOfFiniteType f] [QuasiSeparated (Y ↘ Spec (Co
 variable (k₀ l) in
 /-- The direct image with compact support `Rf₀!` of Weil complexes, defined through the chosen
 compactification of `f`, is computed by any compactification `c` of `f`:
-`Rf₀! ≅ R^c f_! = Rc.g_* ∘ c.i_!` (`prop-functor-package`, clause 2). -/
+`Rf₀! ≅ R^c f_! = Rc.g_* ∘ c.i_!`. -/
 noncomputable def WeilComplex.derivedLowerShriekCompιIso (c : Compactification f) :
     WeilComplex.derivedLowerShriek k₀ l f ⋙ (WeilComplex.objectProperty k₀ l Y).ι ≅
       (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c :=
@@ -403,7 +389,7 @@ variable {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The direct image with compact support `Rf₀!` of Weil complexes is computed by any
 factorization `f = i ≫ g` of `f` into an open immersion `i` followed by a proper morphism `g`
-of `k₀`-schemes: `Rf₀! ≅ Rg_* ∘ i_!` (`prop-functor-package`, clause 2). -/
+of `k₀`-schemes: `Rf₀! ≅ Rg_* ∘ i_!`. -/
 theorem WeilComplex.nonempty_derivedLowerShriek_comp_ι_iso [hZ : Z.Over (Spec (CommRingCat.of k₀))]
     (i : X ⟶ Z) (g : Z ⟶ Y) [IsOpenImmersion i] [IsProper g]
     [i.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
@@ -455,8 +441,7 @@ instance WeilComplex.isIso_extensionByZeroUpperStarAdjunction_unit :
 variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The direct image with compact support along an open immersion is the extension by zero**
-(`prop-functor-package`, clause 2, for the compactification `U ⟶[j] X ⟶[𝟙] X`):
+/-- **The direct image with compact support along an open immersion is the extension by zero**:
 `Rj₀! ≅ j_!` on Weil complexes. -/
 theorem WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero :
     Nonempty (WeilComplex.derivedLowerShriek k₀ l j ≅ WeilComplex.extensionByZero j) := by
@@ -537,8 +522,7 @@ lemma ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj_aux
 variable (k₀ l) in
 /-- **Base change for the extension by zero** of pro-étale Weil sheaves, on derived categories:
 for a cartesian square `g ≫ i = i' ≫ p` with `i` and `i'` open immersions,
-`D(p^*) ∘ D(i_!) ≅ D(i'_!) ∘ D(g^*)`. The counit `i'_! i'^* E ⟶ E` is an isomorphism for
-`E = p^* i_! K`, which vanishes off the range of `i'`, and `i'^* p^* i_! ≅ g^* i^* i_! ≅ g^*`. -/
+`D(p^*) ∘ D(i_!) ≅ D(i'_!) ∘ D(g^*)`. -/
 noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroUpperStarIso
     (hsq : IsPullback g i' i p) :
     (ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory ⋙

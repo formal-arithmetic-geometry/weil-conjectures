@@ -23,10 +23,15 @@ inside `O` (given by an open immersion), with `j' : U ∩ O' ⟶ O'`,
 
 `R⁰j'_* ℤ/ℓ ≅ ℤ/ℓ`, `R¹j'_* ℤ/ℓ ≅ i'_* ℤ/ℓ` and `R^q j'_* ℤ/ℓ = 0` for `q ≥ 2`,
 
-for a closed immersion `i'` with the same support as `D ∩ O'` (blueprint
-`lemma-punctured-surface-punctured-curve--1`, *the surface*).
+for a closed immersion `i'` with the same support as `D ∩ O'`.
 
-*Local chart.* A local equation of `D` at `y` comes from a function `t` on an open `V` of some
+## Main statements
+
+- `Scheme.exists_hasDivisorComplementDirectImages_of_isEtaleLimitOfSmoothSurfaces`
+
+## Implementation details
+
+A local equation of `D` at `y` comes from a function `t` on an open `V` of some
 stage `Zᵢ` of the limit, whose germ at the image of `y` lies in `𝔪 \ 𝔪²`
 (`AlgebraicGeometry.Scheme.exists_isLimit_chart`). Purity on the smooth surface `Zᵢ` computes the
 direct images from the complement of `V(t)` near the image of `y`
@@ -35,10 +40,6 @@ inverse image `O` of `X₀` in `Z` is the limit of the inverse images of `X₀` 
 which are étale over `X₀`, and the direct images commute with base change along `O ⟶ X₀`
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_etale`) and along the open
 immersions `O' ⟶ O`.
-
-## Main statements
-
-- `Scheme.exists_hasDivisorComplementDirectImages_of_isEtaleLimitOfSmoothSurfaces`
 -/
 
 @[expose] public section
@@ -53,11 +54,10 @@ namespace AlgebraicGeometry.Scheme
 
 open AlgebraicGeometry.Etale
 
-/-- **Direct images from the complement of a regular divisor** (blueprint
-`lemma-punctured-surface-punctured-curve--1`, *the surface*). Let `Z` be an étale limit of smooth
-surfaces over an algebraically closed field `k`, `i : D ⟶ Z` a regular divisor with `D` regular
-and `j : U ⟶ Z` its open complement. Every point `y` of `D` has an open neighbourhood `O` such
-that for every open immersion `f : O' ⟶ Z` with image in `O` and every open immersion
+/-- **Direct images from the complement of a regular divisor**. Let `Z` be an étale limit of
+smooth surfaces over an algebraically closed field `k`, `i : D ⟶ Z` a regular divisor with `D`
+regular and `j : U ⟶ Z` its open complement. Every point `y` of `D` has an open neighbourhood
+`O` such that for every open immersion `f : O' ⟶ Z` with image in `O` and every open immersion
 `j' : U' ⟶ O'` onto `f⁻¹(U)`, there is a closed immersion `i'` onto `f⁻¹(D)` with
 
 `R⁰j'_* ℤ/ℓ ≅ ℤ/ℓ`, `R¹j'_* ℤ/ℓ ≅ i'_* ℤ/ℓ` and `R^q j'_* ℤ/ℓ = 0` for `q ≥ 2`. -/

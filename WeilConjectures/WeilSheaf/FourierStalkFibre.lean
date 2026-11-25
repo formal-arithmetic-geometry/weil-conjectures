@@ -14,8 +14,7 @@ public import WeilConjectures.WeilSheaf.FourierInversion.Composite
 Let `g : T ⟶ 𝔸¹` be a point of the dual affine line with values in a `k₀`-scheme `T` (for
 instance `T = Spec 𝔽_{qⁿ}`), and let `V_T = 𝔸² ×_{pr₂, 𝔸¹, g} T` be the fibre of the second
 projection over it, with projections `g' : V_T ⟶ 𝔸²` and `π' : V_T ⟶ T`. The pullback of the
-Fourier–Deligne transform to `T` is the compactly supported cohomology of the fibre
-(blueprint `proposition-base-change-fourier-inversion--3`):
+Fourier–Deligne transform to `T` is the compactly supported cohomology of the fibre:
 
 `g^* FT_ψ(K) ≅ Rπ'₀!(K|_{V_T} ⊗ ℒ_ψ(⟨x, g⟩))[1]`,
 
@@ -36,16 +35,13 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- **The fibres of the Fourier transform are fibre integrals** (blueprint
-`proposition-base-change-fourier-inversion--3`). For a point `g : T ⟶ 𝔸¹` of the dual line and the
-fibre `V_T` of `pr₂ : 𝔸² ⟶ 𝔸¹` over it (a cartesian square `g' : V_T ⟶ 𝔸²`,
+/-- **The fibres of the Fourier transform are fibre integrals**. For a point `g : T ⟶ 𝔸¹` of the
+dual line and the fibre `V_T` of `pr₂ : 𝔸² ⟶ 𝔸¹` over it (a cartesian square `g' : V_T ⟶ 𝔸²`,
 `π' : V_T ⟶ T`),
 
 `g^* FT_ψ(K) ≅ Rπ'₀!((g' ≫ pr₁)^* K ⊗ ℒ_ψ(g'^*(x ξ)))[1]`
 
-naturally in the Weil complex `K`: compact-support base change along `g`
-(`AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_upperStar`), the compatibility
-of pullback with the tensor product by a lisse sheaf, and `g'^* ℒ_ψ(x ξ) ≅ ℒ_ψ(g'^*(x ξ))`. -/
+naturally in the Weil complex `K`. -/
 theorem nonempty_iso_fourierTransform_comp_upperStar (ψ : AddChar k₀ (PadicAlgCl l))
     {T V : Scheme.{u}} [T.Over (Spec (CommRingCat.of k₀))] [V.Over (Spec (CommRingCat.of k₀))]
     (g : T ⟶ affineLine k₀) (g' : V ⟶ affinePlane k₀) (π' : V ⟶ T)

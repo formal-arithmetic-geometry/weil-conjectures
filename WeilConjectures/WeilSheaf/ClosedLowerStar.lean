@@ -34,12 +34,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 
 omit [Fact (ringChar k₀ ≠ l)] in
-/-- The derived pushforward of a Weil complex along a closed immersion is a Weil complex: its
-underlying complex is `Rī_*` of the underlying complex
-(`CategoryTheory.Endofunctor.IsoAlgebra.rightDerivedFunctorMapOfNatIsoCompForgetIso`), which lies
-in `Dᵇc` as `ī_*` is exact and preserves constructible sheaves (`AlgebraicGeometry.ProEtale.`
-`boundedConstructibleAdic_rightDerivedFunctor_adicLowerStar_obj_of_isClosedImmersion`).
-This does not use the finiteness theorem. -/
+/-- The derived pushforward of a Weil complex along a closed immersion is a Weil complex. -/
 theorem WeilComplex.objectProperty_rightDerivedLowerStar_of_isClosedImmersion
     (K : DerivedCategory (ProEtaleWeilSheaf k₀ l Z)) (hK : WeilComplex.objectProperty k₀ l Z K) :
     WeilComplex.objectProperty k₀ l X
@@ -55,10 +50,8 @@ theorem WeilComplex.objectProperty_rightDerivedLowerStar_of_isClosedImmersion
       _ hK)
 
 /-- The derived pushforward `Ri_*` of Weil complexes along a closed immersion `i`: the total
-right derived functor of the pushforward of pro-étale Weil sheaves, restricted to Weil complexes
-(`AlgebraicGeometry.WeilComplex.objectProperty_rightDerivedLowerStar_of_isClosedImmersion`).
-Unlike `AlgebraicGeometry.WeilComplex.derivedLowerStar`, its definition does not use the
-finiteness theorem. -/
+right derived functor of the pushforward of pro-étale Weil sheaves, restricted to Weil
+complexes. -/
 noncomputable def WeilComplex.derivedLowerStarOfIsClosedImmersion :
     WeilComplex k₀ l Z ⥤ WeilComplex k₀ l X :=
   (WeilComplex.objectProperty k₀ l Z).liftFullSubcategory (WeilComplex.objectProperty k₀ l X)
@@ -74,20 +67,10 @@ noncomputable def WeilComplex.derivedLowerStarIsoDerivedLowerStarOfIsClosedImmer
       WeilComplex.derivedLowerStarOfIsClosedImmersion i :=
   Iso.refl _
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--8` and
-`proposition-extension-zero-restriction-closed-subscheme` (open–closed recollement), for Weil
-complexes. Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
-complementary open immersion. There is a natural transformation `K ⟶ Ri_* i^* K` (the closed
-unit) which is an isomorphism at every `K` with `j^* K = 0`: in the recollement triangle
-`j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`, the first term vanishes. Here `Ri_*` is
-`AlgebraicGeometry.WeilComplex.derivedLowerStarOfIsClosedImmersion`.
-
-The closed unit is the unit of `i^* ⊣ Ri_*`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction`); it is invertible at
-`K` with `j^* K = 0` by
-`DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero`, using that
-`i_*` is exact, `j^* i_* = 0` and that `i^*`, `j^*` jointly detect zero objects. The open
-immersion `j` is quasi-compact since `X` is Noetherian. -/
+/-- **Open–closed recollement for Weil complexes, closed part.** Let `i : Z ⟶ X` be a closed
+immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the complementary open immersion. There
+is a natural transformation `K ⟶ Ri_* i^* K` which is an isomorphism at every `K` with
+`j^* K = 0`. -/
 theorem WeilComplex.exists_isIso_app_of_isZero_upperStar_of_isClosedImmersion {U : Scheme.{u}}
     [U.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] (hij : Set.range j = (Set.range i)ᶜ)

@@ -13,13 +13,23 @@ import WeilConjectures.TraceFormula.Supporting.NormalizedIntegralScalarCoherence
 import WeilConjectures.TraceFormula.Supporting.QuotientSystemMixedCoherence
 /-! # One normalized pullback comparison system for every coefficient inclusion
 
-Source: Stacks Project, Tags 099N, 0D6D, 06YY and 0941; blueprint trace-transport,
-prop-trf-karoubi-independence.proof.md, final common-stage transport paragraph.
-(blueprint: lem-trf-integral-pullback-comparison-realization).
-
 The existing structures specify the actual quotient diagrams, counits and realization
-maps. This interface puts their single simultaneous system outside the coefficient
+maps. This file puts their single simultaneous system outside the coefficient
 quantifiers, as required for descent and coefficient towers.
+
+## Implementation details
+
+Flat-term K-flat representatives and their actual quotient complexes are chosen once; whole
+towers are resolved by K-injectives and the ordinary limit-cone map defines the derived-limit
+counit. Levelwise change of rings and the quotient-module action give the comparison arrows,
+whose realizations `eta`, `lambda`, `mu` are invertible on constructible inputs by derived
+completeness and the reduction theorem. Since the construction is made before any
+coefficient field or inclusion is fixed, all naturality, unit, tower and mixed squares hold
+for this one system simultaneously. No perfectness or finite Tor-amplitude condition is used.
+
+## References
+
+* Stacks Project, Tags 099N, 0D6D, 06YY, 0941.
 -/
 
 @[expose] public section
@@ -130,25 +140,7 @@ private theorem system_scalar_scheme_unit
     simp only [Category.assoc]
 
 /-- There is one specified quotient-diagram comparison system for all coefficient fields
-and inclusions, with all the existing naturality, mixed, unit and tower equations.
-Source: Stacks 099N, 0D6D, 06YY, 0941; blueprint final common-stage transport paragraph
-(blueprint: lem-trf-integral-pullback-comparison-realization).
-
-Proof: choose flat-term K-flat representatives and their simultaneous actual quotient
-complexes, with the quotient transition maps. Resolve whole towers by K-injectives and
-use the ordinary limit-cone map to define the derived-limit counit. Levelwise change of
-rings and the quotient-module action give the entire-diagram comparison arrows. Their
-realizations are eta, lambda and mu; derived completeness and the reduction theorem
-make these invertible on every constructible input. This construction uses the same
-reduction calculus and counit for every field and every inclusion, before either is
-fixed. Inverse eta after realization of the finite compositor gives c; inverse mu after
-lambda gives a. Naturality, equality of scheme maps, composition and all finite
-iterations hold on the whole quotient diagrams, so realization preserves them. For
-identity coefficients the quotient counit and completeness map give multiplication.
-For a tower of inclusions the scalar comparison is the ordinary tensor associator
-conjugated by the same completion comparisons chi. Thus all unit, tower and mixed
-squares hold for this one system simultaneously. Localization preserves these
-equalities. No perfectness or finite Tor-amplitude condition was used. -/
+and inclusions, with all the existing naturality, mixed, unit and tower equations. -/
 theorem integralPullbackComparisonRealization_simultaneous (l : ℕ) [Fact l.Prime] :
     ∃ C : IntegralComparisonSystem.{u} l,
       ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

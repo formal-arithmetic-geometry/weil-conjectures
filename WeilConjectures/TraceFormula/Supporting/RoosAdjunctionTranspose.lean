@@ -11,8 +11,21 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Strict compatible families and their Roos adjuncts
 
-Source: Stacks Project, Tags 06YY and 0941.
-(blueprint: lem-trf-roos-adjunction-transpose)
+The normalized derived-limit comparison sends the adjunct of a strict compatible family to its
+ordinary limit lift followed by the Roos inclusion.
+
+## Implementation details
+
+The family `b` is transposed through the ordinary constant/limit adjunction to a map `a` into
+the termwise limit; the derived adjunction formula identifies the adjunct of `Q(b)` with
+`Q(a)` followed by the right-derived limit unit. On K-injective towers the normalization of
+`rho` identifies that unit followed by `rho` with the ordinary limit-to-Roos inclusion; the
+general case follows from a simultaneous K-injective resolution, by naturality and
+cancellation of the resolution quasi-isomorphism. No boundedness is imposed.
+
+## References
+
+* Stacks Project, Tags 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -157,20 +170,7 @@ private theorem derivedUnit_comparison
       rw [← Functor.map_comp, inclusion_natural l E X f, Functor.map_comp]
 
 /-- The normalized derived-limit comparison sends the adjunct of an entire strict
-compatible family to its ordinary limit lift followed by the zero-shifted Roos inclusion.
-Source: Stacks 06YY and 0941; scalar-model-unit proof step 3.
-(blueprint: lem-trf-roos-adjunction-transpose).
-
-Proof: transpose b through the ordinary constant/limit adjunction to obtain a map a
-into the termwise limit. The derived adjunction formula identifies the adjunct of
-Q(b), preceded by the exact constant-functor comparison, with Q(a) followed by the
-right-derived limit unit. On K-injective towers the normalization of rho identifies
-that derived unit followed by rho with Q of the ordinary limit-to-Roos inclusion.
-For a general tower choose a simultaneous K-injective resolution. Naturality of the
-right-derived unit, rho and the limit-to-Roos inclusion transports this identity
-back along the resolution; its Roos map is a quasi-isomorphism because rho is a
-natural isomorphism. Cancel it. Composing with Q(a) proves the formula. This uses
-entire strict families and both cone coordinates, and imposes no boundedness. -/
+compatible family to its ordinary limit lift followed by the zero-shifted Roos inclusion. -/
 theorem integralComparisonRoosTranspose
     (ρ : IntegralComparisonRoosModel l E X)
     (P : CochainComplex (scalarReductionSource l E X) ℤ)

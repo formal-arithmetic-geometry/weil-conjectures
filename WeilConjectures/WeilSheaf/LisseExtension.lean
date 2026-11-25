@@ -25,7 +25,7 @@ Let `j : U₀ ⟶ C₀` be a dense open immersion into a smooth curve over the f
   the restriction of a lisse Weil sheaf on `C₀`
   (`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`). For `C₀ = U₀ ∪ {x}`
   the kernel is the local inertia at `x`: a lisse sheaf with trivial local monodromy at `x`
-  extends over `x` (blueprint `corollary-unramified-boundary-point--2`).
+  extends over `x`.
 -/
 
 @[expose] public section
@@ -44,9 +44,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 /-- **Weil structures descend from a dense open.** Let `j : U₀ ⟶ C₀` be a dense quasi-compact
 open immersion into a smooth `k₀`-scheme, `F` a Weil sheaf on `U₀` and `G` a lisse `ℓ`-adic sheaf
 on `C̄` with `j̄^* G ≅ F`. Then `G` carries a Weil structure making it a lisse Weil sheaf `G'` on
-`C₀` with `j^* G' ≅ F`: the Weil structure of `F` transported to `j̄^* Fr^* G ≅ j̄^* G` is the
-restriction of a unique isomorphism `Fr^* G ≅ G`, since `j̄^*` is fully faithful on lisse
-sheaves (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.adicUpperStar_map_bijective`). -/
+`C₀` with `j^* G' ≅ F`. -/
 theorem exists_isLisse_upperStar_iso_of_adicUpperStar_iso
     [Smooth (C ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
     (j : U ⟶ C) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]
@@ -92,15 +90,7 @@ theorem exists_isLisse_upperStar_iso_of_adicUpperStar_iso
 finite type, `F` a lisse Weil sheaf on `U₀` and `t` a geometric point of the geometric fibre `Ū`.
 If the monodromy representation of `F` on `Ū` at `t`
 (`AlgebraicGeometry.ProEtale.universalLisseMonodromy`) is trivial on the kernel of
-`π₁(Ū, t) → π₁(C̄, t)`, then `F` is the restriction of a lisse Weil sheaf on `C₀`: the underlying
-sheaf extends to `C̄`
-(`AlgebraicGeometry.ProEtale.LisseMonodromy.exists_upperStar_iso_of_rep_eq_self`, the map of
-fundamental groups being surjective since `C̄` is regular), and so does the Weil structure
-(`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_adicUpperStar_iso`).
-
-For `C₀ = U₀ ∪ {x}` the kernel is the local inertia at `x`: this is the extension of a lisse sheaf
-with trivial local monodromy over `x`, used in blueprint
-`corollary-unramified-boundary-point--2`. -/
+`π₁(Ū, t) → π₁(C̄, t)`, then `F` is the restriction of a lisse Weil sheaf on `C₀`. -/
 theorem exists_isLisse_upperStar_iso_of_rep_eq_self [Smooth (C ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (C ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (C ↘ Spec (CommRingCat.of k₀))]

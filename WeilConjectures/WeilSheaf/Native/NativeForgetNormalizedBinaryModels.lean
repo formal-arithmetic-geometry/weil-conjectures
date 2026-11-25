@@ -27,12 +27,22 @@ import all WeilConjectures.WeilSheaf.Native.Weil.NativeWeilRepresentativeUncurry
 
 /-! # Forgetting the evaluation-normalized binary tensor model
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A96 and 08J9; the fixed native
-signed model comparison (blueprint: lem-sf-native-forget-normalized-binary-models).
+For K-flat native complexes `P` and `T`, the forgotten native tensor model agrees with the
+canonical ordinary localization tensorator.
 
-The comparison `c` below is specified on every balanced tensor summand. These equations
+## Implementation details
+
+The comparison `c` is specified on every balanced tensor summand. These equations
 uniquely determine the chain isomorphism, so the existential records the canonical
 comparison and its normalization together, without choosing unrelated tensor data.
+
+The proof chooses a K-injective resolution of the native total, curries it into the product
+Hom complex, and compares the signed uncurry maps summandwise (each side carries the sign
+`(-1)^(pq)` on the reversed summand); exact forgetting then cancels the ordinary uncurry.
+
+## References
+
+* Stacks Project, sites-cohomology.tex, Tags 0A96 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -279,46 +289,7 @@ private theorem native_normalized_uncurry_map
 -- The fixed representative squares involve several nested localization functors.
 /-- The fixed native tensor model forgets to the canonical ordinary localization tensorator.
 The first conjunct specifies the canonical total comparison on all balanced summands;
-the second is the asserted equality with the fixed tensor-forgetting comparison.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 0A96 and 08J9, K-flat/K-injective
-transposition, with the native signed normalization.
-(blueprint: lem-sf-native-forget-normalized-binary-models).
-
-Proof:
-1. The native category is Grothendieck abelian by
-lem-sf-native-weil-constructible-abelian. Its countable products exist by
-lem-coef-grothendieck-small-limits. Choose a K-injective resolution j of the actual
-native total using prose-03-02. Both forgotten inputs are K-flat
-by lem-sf-native-two-sided-kflat-forget, without any termwise-flatness hypothesis.
-2. The parametrized adjunction in def-sf-native-derived-tensor-layer and the chain-map
-bijection of lem-sf-kflat-bifunctor-kinjective-currying curry j into the fixed product
-Hom complex. Its signed uncurry is j itself. The chosen nativeOpenTensorModel has this
-evaluation normalization by lem-sf-native-normalized-tensor-models.
-3. Let O be ordinaryTensorTotal(uT,uP). The normalized models in d identify their model
-followed by Q(kappa) with the canonical lax localization tensorator. Totalizing the
-underlying balanced tensor identifications gives c with the first conjunct. The map
-v = c followed by kappa inverse has coefficient (-1)^(pq) on the reversed summand.
-The signed exchange and kappa each contribute this sign, so their composite c has
-coefficient 1. Naturality of the sheaf maps preserves both signed differentials.
-The underived adjunction agrees under forgetting by lem-sf-native-weil-underived-tensor.
-4. Apply lem-sf-native-hom-evaluation-square-all-sources to the Hom comparison of the
-fixed nativeDerivedClosedComparison, which is Compatible by native_closed_forgetful.
-Its product projections identify forgotten currying with ordinary currying, and its
-representative square identifies the corresponding localized Hom arrows. The exact
-factors of situation-conventions supply their naturality.
-5. Unsigned NativeAdjunctionNormalization in d.models supplies the ordinary uncurry
-psi on O. On each left-first (p,q) summand, both u(j) and v followed by psi have the
-same sign (-1)^(pq). The Hom projections and the underlying counits agree, so the
-coproduct universal property gives u(j) = v followed by psi, also on unbounded totals.
-6. Expand derived uncurrying as tensoring with the identity followed by evaluation.
-Naturality and evaluation compatibility of the fixed tensorComparison, followed by
-counit preservation of d.tensorIso, identify its forgotten native uncurry with the
-ordinary one. Substitute steps 2 and 5 and the naturality of the exact factors.
-7. Exact forgetting carries j to a quasi-isomorphism. Since v is an isomorphism,
-Q(psi) is invertible. Cancel Q(psi), then postcompose with Q(kappa). The two identities
-in step 3 give exactly the second conjunct. Zero complexes and the empty scheme use
-the same coproduct and localization arguments. -/
+the second is the asserted equality with the fixed tensor-forgetting comparison. -/
 theorem native_forget_normalized_binary_models
     (P T : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
     (hP : NativeIsKFlat k₀ l X P) (hT : NativeIsKFlat k₀ l X T)

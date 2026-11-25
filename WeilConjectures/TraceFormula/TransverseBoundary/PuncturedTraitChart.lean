@@ -30,12 +30,16 @@ divisors and `X_S - z = X_S ∩ (S - Y_S)` the punctured trait. Through an affin
   `X` and `Y` meet transversely,
 - `X_S - z = Spec B_t = Spec K`, with `K` the fraction field of `B`.
 
-This is the part "the punctured trait" of the proof of blueprint
-`lemma-punctured-surface-punctured-curve--1`.
-
 ## Main statements
 
 - `AlgebraicGeometry.Scheme.TransverseCorner.exists_puncturedTrait_iso_spec_fractionRing`
+
+## Implementation details
+
+The case of a separably closed `Ω` reduces to the case of an algebraically closed `Ω`
+(`exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed`): the strict localization does not
+change when `Ω` is replaced by its algebraic closure
+(`AlgebraicGeometry.Scheme.exists_strictLocalization_iso_of_precomp`).
 -/
 
 @[expose] public section
@@ -101,11 +105,11 @@ variable {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (zbar : Spec (.of Ω) ⟶ C.Z
 
 -- The computation of the iterated pullbacks through the chart is a long chain of rewrites.
 /-- **The punctured trait is the spectrum of the fraction field of a strictly henselian
-trait** (blueprint `lemma-punctured-surface-punctured-curve--1`, the punctured trait). For a
-geometric point `z̄` over the corner point (with `Ω` algebraically closed) there are a strictly
-henselian discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of `B`, an
-isomorphism `X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on `S - Y_S` (a
-local equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is connected. -/
+trait**. For a geometric point `z̄` over the corner point (with `Ω` algebraically closed) there
+are a strictly henselian discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π`
+of `B`, an isomorphism `X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on
+`S - Y_S` (a local equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is
+connected. -/
 theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
     (hz : Set.range zbar = {C.z}) :
     ∃ (B : Type u) (_ : CommRing B) (_ : IsDomain B) (_ : IsDiscreteValuationRing B)
@@ -270,16 +274,11 @@ theorem exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed
 
 omit [IsAlgClosed Ω] in
 /-- **The punctured trait is the spectrum of the fraction field of a strictly henselian
-trait** (blueprint `lemma-punctured-surface-punctured-curve--1`, the punctured trait). For a
-geometric point `z̄` over the corner point (with `Ω` separably closed) there are a strictly
-henselian discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of `B`, an
-isomorphism `X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on `S - Y_S` (a
-local equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is connected.
-
-This reduces to the case of an algebraically closed `Ω`
-(`exists_puncturedTrait_iso_spec_fractionRing_of_isAlgClosed`):
-the strict localization does not change when `Ω` is replaced by its algebraic closure
-(`AlgebraicGeometry.Scheme.exists_strictLocalization_iso_of_precomp`). -/
+trait**. For a geometric point `z̄` over the corner point (with `Ω` separably closed) there are
+a strictly henselian discrete valuation ring `B` with a ring map `k →+* B`, a uniformizer `π` of
+`B`, an isomorphism `X_S - z ≅ Spec K` with `K` the fraction field of `B`, and a unit `u` on
+`S - Y_S` (a local equation of `Y`) whose restriction to `X_S - z` is `π`. Moreover `S - Y_S` is
+connected. -/
 theorem exists_puncturedTrait_iso_spec_fractionRing [IsSepClosed Ω]
     (hz : Set.range zbar = {C.z}) :
     ∃ (B : Type u) (_ : CommRing B) (_ : IsDomain B) (_ : IsDiscreteValuationRing B)

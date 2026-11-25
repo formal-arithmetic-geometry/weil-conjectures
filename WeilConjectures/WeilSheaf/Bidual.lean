@@ -70,8 +70,7 @@ theorem bidual_comm (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
     rfl
   exact Mod.uncurryHom_injective key
 
-/-- **Biduality of a lisse sheaf** (blueprint: `proposition-six-operations-dctf--15`, "the canonical
-map `P ⟶ P^∨∨` is an isomorphism"). -/
+/-- **Biduality of a lisse sheaf.** A lisse Weil sheaf `P` is isomorphic to its bidual `P^∨∨`. -/
 theorem nonempty_iso_dual_dual (P : WeilSheaf k₀ l X) (hP : P.IsLisse) :
     Nonempty (P ≅ (P.dual hP).dual hP.dual) := by
   have : IsIso (Mod.bidual P.obj.carrier (adicConstant k₀ l X).obj.carrier) :=

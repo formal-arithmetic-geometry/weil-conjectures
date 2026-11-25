@@ -15,8 +15,7 @@ public import WeilConjectures.WeilSheaf.LisseLocus
 Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible
 `ℓ`-adic sheaf on the pro-étale site of `X`. Then `F` is lisse on an open subscheme `U` whose
 complement has strictly smaller dimension than `X`
-(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt`,
-the pro-étale clause of blueprint `proposition-purity-lisse-part-fourier-transform`).
+(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt`).
 
 The lisse locus `L` of `F` (the union of all opens on which `F` is lisse) is open, `F` is lisse
 on it by Zariski locality of lissity, and it contains every generic point of an irreducible
@@ -30,6 +29,11 @@ of a dense open has smaller dimension (`topologicalKrullDim_compl_lt_of_dense`).
 
 - `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_dense_isAdicLisseSheaf`
 - `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt`
+
+## Implementation details
+
+The space `X` is assumed nonempty: for `X` empty both dimensions are `⊥` and the strict
+inequality cannot hold.
 -/
 
 @[expose] public section
@@ -45,9 +49,7 @@ namespace ProEtale
 variable {l : ℕ} [Fact l.Prime] {X : Scheme.{u}}
 
 /-- **Generic lissity on a dense open.** On a scheme whose underlying space is Noetherian, a
-constructible `ℓ`-adic sheaf is lisse on a dense open subscheme: its lisse locus, the union of
-all opens on which it is lisse, is open, the sheaf is lisse on it by Zariski locality of lissity,
-and it contains every generic point of an irreducible component. -/
+constructible `ℓ`-adic sheaf is lisse on a dense open subscheme. -/
 theorem IsAdicConstructibleSheaf.exists_dense_isAdicLisseSheaf
     [TopologicalSpace.NoetherianSpace X] {F : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F) :
     ∃ U : X.Opens, Dense (U : Set X) ∧ IsAdicLisseSheaf ((U.ι)^*ᵃ[l].obj F) := by
@@ -67,19 +69,9 @@ theorem IsAdicConstructibleSheaf.exists_dense_isAdicLisseSheaf
     h₂.of_iso ((adicUpperStarCongr l (morphismRestrict_ι U.ι W)).app F)
   exact h₃.of_iso ((adicUpperStarComp l (U.ι ⁻¹ᵁ W).ι U.ι).app F)
 
-/-- Blueprint `proposition-purity-lisse-part-fourier-transform` (2): A lisse locus for a
-constructible `ℓ`-adic sheaf.
-
-Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible `ℓ`-adic
-sheaf on `X_proet`. Then there is an open subscheme `U ⊆ X` with `dim (X \ U) < dim X` on which
-the restriction `F|_U` is lisse.
-
-(For `X` empty both dimensions are `⊥` and the strict inequality cannot hold, which is why `X`
-is assumed nonempty.)
-
-The proof takes the dense lisse locus of `IsAdicConstructibleSheaf.exists_dense_isAdicLisseSheaf`
-and uses that the complement of a dense open in the Noetherian space `X`, of finite dimension,
-has smaller dimension (`topologicalKrullDim_compl_lt_of_dense`). -/
+/-- A lisse locus for a constructible `ℓ`-adic sheaf: let `X` be a nonempty scheme of finite type
+over a field `k` and `F` a constructible `ℓ`-adic sheaf on `X_proet`. Then there is an open
+subscheme `U ⊆ X` with `dim (X \ U) < dim X` on which the restriction `F|_U` is lisse. -/
 theorem IsAdicConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt {k : Type u} [Field k]
     (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] [Nonempty X]
     {F : AdicSheaf l X} (hF : IsAdicConstructibleSheaf F) :

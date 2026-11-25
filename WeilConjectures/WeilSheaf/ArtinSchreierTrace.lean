@@ -28,9 +28,7 @@ Artin–Schreier covering as the translation by `Tr_{𝔽_{qⁿ}/k₀}(a x)`, si
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`
-(`lemma-artin-schreier-character-sheaf--6`): the trace
-  function of `ℒ_{ψ(a x)}`.
+- `AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`: the trace function of `ℒ_{ψ(a x)}`.
 - `AlgebraicGeometry.affineLine.frobeniusEnd_stalkAt_artinSchreierImage`: the local Frobenius of
   `ℒ_ψ` at a geometric point `s = ĀS ∘ t` with `σⁿ ∘ t = Frⁿ ∘ σ̄_d ∘ t` is the scalar `ψ(-d)`.
 - `AlgebraicGeometry.affineLine.exists_comp_geometricArtinSchreierMap_eq`: the geometric point
@@ -86,10 +84,7 @@ noncomputable def affineLine.artinSchreierImageι :
 
 /-- **The trivialisation of `ĀS^* ℒ_ψ`.** After pullback along the geometric Artin–Schreier map,
 the `ψ`-isotypic component `ℒ_ψ` becomes `ℚ̄_ℓ`: there is an isomorphism `E : ĀS^* ℒ_ψ ≅ ℚ̄_ℓ`
-through which the evaluation along `x ↦ (x, σ̄_c x)` is multiplication by `ψ(c)`. It comes from
-the two epi-mono factorisations of `ĀS^* e_ψ`, through `ĀS^* ℒ_ψ` and through the averaging and
-splitting maps
-(`AlgebraicGeometry.affineLine.artinSchreierAverageModHom_splitModHom_of_restriction`). -/
+through which the evaluation along `x ↦ (x, σ̄_c x)` is multiplication by `ψ(c)`. -/
 theorem affineLine.exists_iso_artinSchreierImage :
     ∃ E : (ĀS)^*[WeilCoefficients.{u} l].obj
         (image (WeilSheaf.artinSchreierIdempotent ψ)).obj.carrier.X ≅
@@ -150,9 +145,7 @@ noncomputable def affineLine.artinSchreierImageEval (c : k₀) :
       affineLine.artinSchreierCounit k₀ l
 
 /-- The trivialisation `ĀS^* ℒ_ψ ≅ ℚ̄_ℓ` is compatible with the Weil structures of `ℒ_ψ` and of
-`ℚ̄_ℓ`, in the form required by
-`AlgebraicGeometry.WeilSheaf.globalSectionsTransport_frobeniusPowStr_comp_stalkObjHomOfUpperStar`.
--/
+`ℚ̄_ℓ`. -/
 lemma affineLine.artinSchreierImageEval_frobenius :
     (ProEtale.upperStarComp _
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.hom
@@ -215,10 +208,7 @@ lemma affineLine.artinSchreierImageEval_translation (c : k₀) :
 /-- **The local Frobenius of `ℒ_ψ`.** Let `t` be a geometric point of the geometric affine line,
 `s = ĀS ∘ t` its image, fixed by `Frⁿ` up to `σⁿ`, and suppose that `σⁿ ∘ t = Frⁿ ∘ σ̄_d ∘ t`:
 the two lifts `σⁿ ∘ t` and `Frⁿ ∘ t` of `σⁿ ∘ s = Frⁿ ∘ s` differ by the translation `σ̄_d`.
-Then the Frobenius of the stalk of `ℒ_ψ` at `s` relative to `𝔽_{qⁿ}` is the scalar `ψ(-d)`, the
-stalk being a line. Through the trivialisation `ĀS^* ℒ_ψ ≅ ℚ̄_ℓ`, which is compatible with the Weil
-structures, the Frobenius becomes the transport of the stalk of `ℚ̄_ℓ` from `t` to `σ̄_d ∘ t`,
-trivial on `ℚ̄_ℓ`, while moving back along `σ̄_d` multiplies the trivialisation by `ψ(d)`. -/
+Then the Frobenius of the stalk of `ℒ_ψ` at `s` relative to `𝔽_{qⁿ}` is the scalar `ψ(-d)`. -/
 theorem affineLine.frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤ n)
     (t : Spec (.of (AlgebraicClosure k₀)) ⟶
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) (d : k₀)
@@ -327,8 +317,7 @@ theorem affineLine.frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤
       (ProEtale.finrank_globalSections_upperStar_adicConstantSheaf t)
 
 /-- The trace of the local Frobenius of `ℒ_ψ` at a geometric point `s = ĀS ∘ t` with
-`σⁿ ∘ t = Frⁿ ∘ σ̄_d ∘ t` is `ψ(-d)`
-(`AlgebraicGeometry.affineLine.frobeniusEnd_stalkAt_artinSchreierImage`). -/
+`σⁿ ∘ t = Frⁿ ∘ σ̄_d ∘ t` is `ψ(-d)`. -/
 theorem affineLine.trace_frobeniusEnd_stalkAt_artinSchreierImage {n : ℕ} (hn : 1 ≤ n)
     {s : Spec (.of (AlgebraicClosure k₀)) ⟶
       (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber}
@@ -416,8 +405,7 @@ lemma affineLine.pointCoord_comp_artinSchreierMap {Ω : Type u} [CommRing Ω]
 
 variable [Finite k₀] in
 /-- If `y ^ q - y = w` in `k̄` and `∑_{i < n} w ^ (q ^ i) = c ∈ k₀`, then the `n`-th power of the
-geometric Frobenius maps `y` to `y - c`: the arithmetic Frobenius maps `y ^ (q ^ i)` to
-`y ^ (q ^ (i + 1)) = y ^ (q ^ i) + w ^ (q ^ i)`, so `y ^ (q ^ n) = y + c`. -/
+geometric Frobenius maps `y` to `y - c`. -/
 lemma geometricFrobeniusAlgEquivOfAlgebraic_pow_apply_of_sub_eq {n : ℕ}
     {y w : AlgebraicClosure k₀} (h : y ^ Nat.card k₀ - y = w) {c : k₀}
     (hw : ∑ i ∈ Finset.range n, w ^ (Nat.card k₀ ^ i) = algebraMap k₀ (AlgebraicClosure k₀) c) :
@@ -455,8 +443,7 @@ variable [Finite k₀] in
 point of the affine line with coordinate `z`, and `s` the geometric point over `x` for an embedding
 `ι : 𝔽_{qⁿ} ↪ k̄`. Then `s` lifts along `ĀS` to a geometric point `t`, given by a root `y` of
 `y ^ q - y = ι z`, and the two lifts `σⁿ ∘ t` and `Frⁿ ∘ t` of `σⁿ ∘ s = Frⁿ ∘ s` differ by the
-translation by `Tr_{𝔽_{qⁿ}/k₀}(z)`: the geometric Frobenius maps `y` to `y - Tr(z)`, since
-`y ^ (q ^ n) = y + Tr(z)`. -/
+translation by `Tr_{𝔽_{qⁿ}/k₀}(z)`. -/
 theorem affineLine.exists_comp_geometricArtinSchreierMap_eq {n : ℕ} (hn : n ≠ 0)
     (ι : FiniteField.galoisExtension k₀ n →ₐ[k₀] AlgebraicClosure k₀)
     (x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints
@@ -530,8 +517,7 @@ end Points
 
 /-- **Trace function of the Artin–Schreier sheaf.** For an additive character `ψ` of `k₀`,
 `a ∈ k₀` and `n ≠ 0`, the trace function of `ℒ_{ψ(a x)}` at an `𝔽_{qⁿ}`-rational point `x` of
-the affine line is `ψ(Tr_{𝔽_{qⁿ}/k₀}(a x))`, for the local geometric Frobenius.
-(blueprint: `lemma-artin-schreier-character-sheaf--6`) -/
+the affine line is `ψ(Tr_{𝔽_{qⁿ}/k₀}(a x))`, for the local geometric Frobenius. -/
 theorem WeilSheaf.traceFunction_artinSchreier (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) {n : ℕ}
     (hn : n ≠ 0)
     (x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints

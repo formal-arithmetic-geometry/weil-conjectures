@@ -19,22 +19,22 @@ divisor with `D` regular, `j : U ⟶ Z` its open complement, `ℓ` a prime inver
 `ybar` a geometric point of `Z` lying on `D`. Let `S = Z_(ybar)` be the strict localization and
 `P = U ×_Z S = S - D_S`. Then
 
-`H^q(P, ℤ/ℓ) = 0` for `q ≥ 2`, and `H⁰(P, ℤ/ℓ) ≅ H¹(P, ℤ/ℓ) ≅ ℤ/ℓ`
+`H^q(P, ℤ/ℓ) = 0` for `q ≥ 2`, and `H⁰(P, ℤ/ℓ) ≅ H¹(P, ℤ/ℓ) ≅ ℤ/ℓ`.
 
-(blueprint `lemma-punctured-surface-punctured-curve--1`, *the surface*).
+## Main statements
 
-*Proof.* By the stalk formula (Stacks 03Q9,
+- `AlgebraicGeometry.Scheme.subsingleton_sheafH_pullback_strictLocalizationToBase`
+- `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_pullback_strictLocalizationToBase`
+
+## Implementation details
+
+By the stalk formula (Stacks 03Q9,
 `AlgebraicGeometry.Etale.nonempty_addEquiv_sheafH_constantZMod_sheafFiber`),
 `H^q(P, ℤ/ℓ)` is the stalk at `ybar` of `R^q j_* ℤ/ℓ`. Near the image of `ybar`, purity on a
 smooth chart computes these direct images: `ℤ/ℓ` in degree `0`, `i'_* ℤ/ℓ` (that is,
 `i_* ℤ/ℓ(-1)`) in degree `1`, and `0` above
 (`Scheme.exists_hasDivisorComplementDirectImages_of_isEtaleLimitOfSmoothSurfaces`).
 Their stalks at a geometric point of `D` are `ℤ/ℓ`, `ℤ/ℓ` and `0`.
-
-## Main statements
-
-- `AlgebraicGeometry.Scheme.subsingleton_sheafH_pullback_strictLocalizationToBase`
-- `AlgebraicGeometry.Scheme.nonempty_addEquiv_sheafH_pullback_strictLocalizationToBase`
 -/
 
 @[expose] public section
@@ -57,11 +57,10 @@ variable {k : Type u} [Field k] [IsAlgClosed k] {Z D U : Scheme.{u}} (aZ : Z ⟶
   (hy : Set.range ybar ⊆ Set.range iD)
 
 include hZ hj hℓ hy in
-/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: for a geometric point `ybar` on a
-regular divisor `D` of an étale limit of smooth surfaces, the cohomology `H^q(S - D_S, ℤ/ℓ)` of the
-punctured strict localization is the stalk at `ybar` of `R^q j_* ℤ/ℓ`, and there is an open
-neighbourhood of the image of `ybar` over which `j` has the higher direct images of the
-complement of a divisor through which `ybar` factors. -/
+/-- For a geometric point `ybar` on a regular divisor `D` of an étale limit of smooth surfaces,
+the cohomology `H^q(S - D_S, ℤ/ℓ)` of the punctured strict localization is the stalk at `ybar`
+of `R^q j_* ℤ/ℓ`, and there is an open neighbourhood of the image of `ybar` over which `j` has
+the higher direct images of the complement of a divisor through which `ybar` factors. -/
 theorem exists_hasDivisorComplementDirectImages_addEquiv_sheafH :
     ∃ (O : Z.Opens) (D' : Scheme.{u}) (i' : D' ⟶ O) (_ : IsClosedImmersion i')
       (s : Spec (.of Ω) ⟶ D'),
@@ -111,9 +110,8 @@ theorem exists_hasDivisorComplementDirectImages_addEquiv_sheafH :
   exact ⟨e₁.trans e₃⟩
 
 include hZ hj hℓ hy in
-/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: for a geometric point `ybar` on a
-regular divisor `D` of an étale limit of smooth surfaces, `H^q(S - D_S, ℤ/ℓ) = 0` for `q ≥ 2`, where
-`S = Z_(ybar)`. -/
+/-- For a geometric point `ybar` on a regular divisor `D` of an étale limit of smooth surfaces,
+`H^q(S - D_S, ℤ/ℓ) = 0` for `q ≥ 2`, where `S = Z_(ybar)`. -/
 theorem subsingleton_sheafH_pullback_strictLocalizationToBase (q : ℕ) (hq : 2 ≤ q) :
     Subsingleton (Sheaf.H ((pullback j (strictLocalizationToBase ybar)).constantZMod ℓ) q) := by
   obtain ⟨O, D', i', _, s, hdi, he⟩ :=
@@ -123,8 +121,8 @@ theorem subsingleton_sheafH_pullback_strictLocalizationToBase (q : ℕ) (hq : 2 
   exact e.injective.subsingleton
 
 include hZ hj hℓ hy in
-/-- Blueprint `lemma-punctured-surface-punctured-curve--1`: for a geometric point `ybar` on a
-regular divisor `D` of an étale limit of smooth surfaces, `H⁰(S - D_S, ℤ/ℓ)` and
+/-- For a geometric point `ybar` on a regular divisor `D` of an étale limit of smooth surfaces,
+`H⁰(S - D_S, ℤ/ℓ)` and
 `H¹(S - D_S, ℤ/ℓ) ≅ 𝔽_ℓ(-1)` are free of rank one over `𝔽_ℓ`, where `S = Z_(ybar)`. -/
 theorem nonempty_addEquiv_sheafH_pullback_strictLocalizationToBase (q : ℕ) (hq : q ≤ 1) :
     Nonempty (Sheaf.H ((pullback j (strictLocalizationToBase ybar)).constantZMod ℓ) q ≃+

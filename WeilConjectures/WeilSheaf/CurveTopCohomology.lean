@@ -27,10 +27,11 @@ The geometric coinvariants are `AlgebraicGeometry.WeilSheaf.geometricCoinvariant
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`
-  (`lemma-degree-zero-top-cohomology--2`), from the lisse Poincaré pairing
-  `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul` (from the
-  lisse case of `corollary-degreewise-duality-over-fields--1`).
+- `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`: the description
+  `H_c²(U, F) ≃ V_{π₁(U)}(-1)`, from the lisse Poincaré pairing
+  `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul`.
+- `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`: purity of
+  `H_c²(U, F)`.
 -/
 
 @[expose] public section
@@ -49,7 +50,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (U ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (U ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on a smooth curve.
+/-- Description of `H_c²` on a smooth curve.
 
 Let `U₀` be a smooth separated curve of finite type over `k₀ = 𝔽_q` and `F` a lisse Weil
 sheaf on `U₀`, with local generic fibre `V`. There is a Frobenius-equivariant isomorphism
@@ -68,14 +69,11 @@ theorem nonempty_equiv_compactlySupportedCohomology_two
     rw [hPF, neg_neg, zpow_one, pow_one]).trans
       ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--7`: Purity of `H_c²` on a smooth curve.
+/-- Purity of `H_c²` on a smooth curve.
 
 Let `U₀` be a smooth separated curve of finite type over `k₀` and `F` a lisse Weil sheaf on `U₀`,
 punctually `ι`-pure of weight `w`. Then `H_c²(U, F)` is `ι`-pure of weight `w + 2` (possibly
-zero): it is the Tate twist `(-1)` of the geometric coinvariants
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`), which are pure
-of weight `w` (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_geometricCoinvariants`), and the
-twist `(-1)` raises weights by two. -/
+zero). -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_two
     [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))] (ι : PadicAlgCl l →+* ℂ)
     (F : WeilSheaf k₀ l U) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :

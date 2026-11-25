@@ -10,7 +10,22 @@ import WeilConjectures.TraceFormula.Supporting.QuotientSystemMixedCoherence
 
 /-! # NormalizedIntegralGeometricCoherence
 
-(blueprint: lem-trf-normalized-integral-geometric-coherence). -/
+The counit-normalized integral pullback comparisons satisfy the geometric composition laws
+of an integral comparison system.
+
+## Implementation details
+
+Each pullback letter is embedded into the word calculus, with coordinate the primitive
+realization `b`; the composite coordinate is `b_h` followed by the realization of the
+whole-system `h`-counit. Naturality and the adjunction triangle identify cutting a word with
+inserting that counit, and the primitive compositor squares are pasted. Associativity cancels
+the invertible common coordinate; the unit laws use the completion unit, the triangle identity
+and the quotient unit laws. The ordinary system laws are the quotient composition coherence.
+
+## References
+
+* Stacks 0D6D, 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -293,18 +308,8 @@ private theorem composition_naturality {V W Z : Scheme.{u}}
   rw [Category.assoc, ← hn]
   simp only [Category.assoc]
 
-/-- The counit-normalized pullback comparisons obey geometric composition laws.
-Source: Stacks 0D6D and 0941, geometric part of common-stage transport.
-Proof: embed each pullback letter into the word calculus. Its coordinate is the
-primitive realization b. The composite coordinate is b_h followed by realization
-of the whole-system h-counit. Naturality and the adjunction triangle identify
-cutting a word with insertion of that counit. Paste the primitive compositor squares.
-For three letters both paths have the same system arrow by quotient associativity;
-cancel the invertible common coordinate. For an identity letter the coordinate
-is the completion unit; the triangle identity and quotient unit laws give both
-units. Naturality follows from naturality of b, the counit and the quotient
-compositor. Ordinary system laws are precisely quotient composition coherence.
-(blueprint: lem-trf-normalized-integral-geometric-coherence). -/
+/-- The counit-normalized pullback comparisons of an integral comparison system obey the
+geometric composition laws (associativity, unit laws and naturality). -/
 theorem normalizedIntegralGeometricCoherence
     (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

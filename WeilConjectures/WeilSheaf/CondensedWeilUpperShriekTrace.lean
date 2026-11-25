@@ -199,8 +199,8 @@ lemma condensedCompactifiedExchange_hom_app (K) :
   simp [condensedCompactifiedExchange]
 
 set_option linter.unusedSectionVars false in
-/-- The exchange of `D(ī_!)` is the left mate of the exchange of `ī^*` (at the level of
-isomorphisms; stated to be rewritten before any component is unfolded). -/
+/-- The exchange of `D(ī_!)` is the left mate of the exchange of `ī^*`, at the level of
+isomorphisms. -/
 lemma condensedOpenImmersionShriekExchange_eq :
     condensedOpenImmersionShriekExchange k₀ l f =
       IsoAlgebra.leftMateIso
@@ -293,8 +293,7 @@ lemma isWeilEquivariant_condensedForgetObjIso_hom (L : WeilComplex k₀ l X) :
 variable {f} [HasUpperShriek k₀ l f]
 
 set_option linter.style.longLine false in
-/-- **The Weil orientation from the trace square, condensed model** (the uniqueness route,
-blueprint `proposition-purity-trace-commute-frobenius`): let
+/-- **The Weil orientation from the trace square, condensed model**: let
 `o : f̄^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` be an orientation on `X̄` in the condensed model
 (`f̄^! = ī^* ∘ ḡ^!` for the compactification, `ℚ̄_ℓ(d)[2d]` the condensed model of the Tate twist),
 whose trace `f̄_! ℚ̄_ℓ(d)[2d] ⟶ ℚ̄_ℓ` is Frobenius equivariant for the composite exchange of `f̄_!`

@@ -19,6 +19,10 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 The public result is the cone criterion for the native acyclic-test predicate.
 Private helpers assemble tensor models and descend natural comparisons.
+
+## References
+
+* Stacks 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -108,15 +112,7 @@ private instance nativeTensor_hasTotal (X : Scheme.{u})
     (P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     P.HasMapBifunctor Q (nativeTensorBifunctor k₀ l X) := inferInstance
 
-/-- The acyclic-test native tensor predicate implies both quasi-isomorphism tests.
-
-Source: Stacks 06YN, lemma-K-flat-quasi-isomorphism, and total tensor symmetry.
-(blueprint: new-sf-native-tensor-acyclic-test-comparison).
-
-Proof: use the native-to-ringed total comparison to exchange tensor factors.
-The equivalence is exact and faithful, so it preserves and reflects acyclicity.
-Apply tensor to the cone of a quasi-isomorphism and use the two tensor/cone
-isomorphisms. Acyclicity of both resulting cones proves both tests. -/
+/-- The acyclic-test native tensor predicate implies both quasi-isomorphism tests. -/
 theorem native_tensor_acyclic_test_kflat (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]

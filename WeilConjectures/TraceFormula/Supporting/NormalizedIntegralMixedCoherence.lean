@@ -10,7 +10,21 @@ import WeilConjectures.TraceFormula.Supporting.QuotientSystemMixedCoherence
 
 /-! # NormalizedIntegralMixedCoherence
 
-(blueprint: lem-trf-normalized-integral-mixed-coherence). -/
+The mixed (scalar extension versus pullback) comparison of an integral comparison system is
+natural and commutes with geometric composition.
+
+## Implementation details
+
+The words `S U_h U_k` and `U_h U_k S` are given their counit coordinates; the primitive mixed
+square is `lambda` followed by the inverse of `mu`, so naturality follows by cancelling `mu`.
+For compatibility with composition, the compositor and mixed squares are pasted in both
+orders, whole-system mixed coherence identifies the system transformations, and the common
+invertible coordinate is cancelled.
+
+## References
+
+* Stacks 06YY, 0D6D, 0941.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -177,16 +191,8 @@ private theorem scalar_reduction
     Functor.comp_map, Functor.comp_obj, Functor.id_obj, Category.assoc,
     Iso.inv_hom_id_app, Category.comp_id] using h
 
-/-- The mixed comparison is natural and commutes with geometric composition.
-Source: Stacks 06YY, 0D6D and 0941, mixed common-stage transport.
-Proof: give the words S U_h U_k and U_h U_k S their counit coordinates. The
-primitive mixed square is exactly lambda followed by inverse mu. Naturality of
-these two transformations proves the first assertion by cancelling mu. For the
-second, paste the compositor and mixed squares in the two orders. Whole-system
-mixed coherence identifies the resulting system transformations. Word cut and
-counit naturality identify each whiskered coordinate; cancel the common invertible
-coordinate. Full-subcategory morphism extensionality yields the asserted equation.
-(blueprint: lem-trf-normalized-integral-mixed-coherence). -/
+/-- The mixed comparison between scalar extension and integral pullback is natural and
+commutes with geometric composition of pullback comparisons. -/
 theorem normalizedIntegralMixedCoherence
     (l : ℕ) [Fact l.Prime] (D : IntegralComparisonSystem.{u} l)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

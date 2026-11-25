@@ -12,10 +12,9 @@ public import WeilConjectures.WeilSheaf.HomotopyInvariance.Restriction
 # Homotopy invariance for Weil complexes along trivial line bundles
 
 Let `π : Y ≅ Z ×_{k₀} 𝔸¹ ⟶ Z` be the trivial line bundle over a `k₀`-scheme `Z` of finite type.
-The unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism for every Weil complex `K` on `Z`
-(blueprint `lem-pur-a1-direct-image`, extended to all Weil complexes). This file proves it for
-reduced `Z` by Noetherian induction on the closed subsets of an ambient scheme `X` containing
-`Z` as a closed subscheme
+The unit `K ⟶ Rπ_* π^* K` of `π^* ⊣ Rπ_*` is an isomorphism for every Weil complex `K` on `Z`.
+This file proves it for reduced `Z` by Noetherian induction on the closed subsets of an ambient
+scheme `X` containing `Z` as a closed subscheme
 (`AlgebraicGeometry.WeilComplex.isIso_unit_app_of_isClosedImmersion_of_isReduced`); the general
 case,
 `AlgebraicGeometry.WeilComplex.isIso_upperStarDerivedLowerStarAdjunction_unit_app_of_isPullback`
@@ -47,8 +46,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 /-- **Homotopy invariance on reduced closed subschemes.** Let `X` be a scheme and `C` a closed
 subset of `X`. For every reduced `k₀`-scheme `Z` of finite type with a closed immersion
 `i : Z ⟶ X` whose image lies in `C`, every trivial line bundle `π : Y ≅ Z ×_{k₀} 𝔸¹ ⟶ Z` and every
-Weil complex `K` on `Z`, the unit `K ⟶ Rπ_* π^* K` is an isomorphism. The proof is a Noetherian
-induction on `C`. -/
+Weil complex `K` on `Z`, the unit `K ⟶ Rπ_* π^* K` is an isomorphism. -/
 theorem isIso_unit_app_of_isClosedImmersion_of_isReduced {X : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace X] (C : TopologicalSpace.Closeds X) (Z : Scheme.{u})
     [Z.Over (Spec (CommRingCat.of k₀))] [IsReduced Z]

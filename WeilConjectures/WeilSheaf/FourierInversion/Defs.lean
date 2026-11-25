@@ -15,7 +15,12 @@ public import WeilConjectures.WeilSheaf.LisseLocus
 The Artin–Schreier sheaf `ℒ_{ψ,a}` of a function `a`
 (`AlgebraicGeometry.artinSchreierOf`) and the triple product `𝔸³` with points `(x, ξ, y)`
 (`AlgebraicGeometry.affineTripleProduct`) with its projections, used in the proof that the
-Fourier–Deligne transform of Weil complexes is an equivalence (blueprint `sec-Fourier-inversion`).
+Fourier–Deligne transform of Weil complexes is an equivalence.
+
+## Implementation details
+
+Rewriting with `AlgebraicGeometry.artinSchreierOf_eq` rather than unfolding
+`AlgebraicGeometry.artinSchreierOf` keeps the kernel from unfolding the pullback functor.
 -/
 
 @[expose] public section
@@ -42,7 +47,7 @@ instance (a : Γ(X, ⊤)) :
   ⟨AffineSpace.homOfVector_over _ _⟩
 
 /-- The Artin–Schreier sheaf `ℒ_{ψ,a}` of a global function `a` on a `k₀`-scheme `X`: the
-pullback of `ℒ_ψ` along `a : X ⟶ 𝔸¹` (blueprint `lemma-artin-schreier-character-sheaf--1`). -/
+pullback of `ℒ_ψ` along `a : X ⟶ 𝔸¹`. -/
 noncomputable def artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     WeilSheaf k₀ l X :=
   (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1)
@@ -67,8 +72,7 @@ theorem affinePlane.mul_eq_homOfSection :
   · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_over]
   · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
 
-/-- Unfolding `AlgebraicGeometry.artinSchreierOf`. Rewriting with this equation (rather than
-unfolding the definition) keeps the kernel from unfolding the pullback functor. -/
+/-- Unfolding `AlgebraicGeometry.artinSchreierOf`. -/
 theorem artinSchreierOf_eq (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     artinSchreierOf ψ a =
       (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1) :=

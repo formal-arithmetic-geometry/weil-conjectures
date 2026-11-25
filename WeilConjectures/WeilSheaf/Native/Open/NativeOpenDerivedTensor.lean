@@ -12,10 +12,10 @@ import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorNormalization
 
 /-! # Native open derived tensor and balanced pullback composition
 
-Source: Stacks Tags 0GL1 and 0E8I; blueprint fix-lem-tensor-adjunction.proof.md,
-Step 1, second Hom bijection (blueprint: lem-sf-native-open-derived-tensor).
+For an open immersion `j : U ⟶ Z`, this file constructs the native comparisons between the
+derived tensor product and the extension/restriction functors along `j`.
 
-All functors act on the ambient derived categories of actual pro-etale Weil
+All functors act on the ambient derived categories of actual pro-étale Weil
 module sheaves. The record retains sheaf, total-complex and derived normalization.
 The ordinary inverse is pinned by the open unit, as in openTensorNormalization.
 
@@ -29,6 +29,18 @@ The ordinary inverse is pinned by the open unit, as in openTensorNormalization.
 ## Main statements
 
 * `native_open_derived_tensor`: existence of the normalized native comparisons.
+
+## Implementation details
+
+The sheaf-level comparison sends `[x] ⊗ y` to `[x ⊗ y|U]`; its inverse is the open-unit
+transpose. Applied in each bidegree it gives a chain isomorphism of total tensor complexes, which
+shows that extension and restriction preserve K-flatness. Localizing the natural chain map and its
+inverse gives the derived comparison, independently of the chosen resolutions. No lisse,
+boundedness or degree-zero hypothesis is used.
+
+## References
+
+* [Stacks Project, Tags 0GL1, 0E8I and 03D8](https://stacks.math.columbia.edu)
 -/
 
 @[expose] public noncomputable section
@@ -57,64 +69,9 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-/-- The equivariant open tensor theorem, on arbitrary unbounded ambient inputs.
-Source: Stacks Tags 0E8I, 0GL1, 03D8; blueprint fix-lem-tensor-adjunction.proof.md,
-Step 1, second Hom bijection (blueprint: lem-sf-native-open-derived-tensor).
-
-Proof:
-1. Geometric base change makes the open Frobenius-stable. On its localized site the
-coefficient functions are the same functions, so restriction and extension are the
-actual exact module functors. Their unit sends x to [x], and counit [x] to x. These
-formulas commute with Frobenius, giving the lifted adjunction and invertible unit.
-Use [def-sf-native-weil-derived-framework],
-[lem-weil-proetale-weakly-etale-localization],
-[lem-pur-site-restriction-module-adjunction-exact],
-[lem-sf-native-adic-open-restrictions], and [lem-sf-fixed-pair-created-abelian-structure].
-2. The balanced sheaf map sends [x] tensor y to [x tensor y|U]. Its inverse is
-exactly the open-unit transpose under restriction/tensor comparison. The tensor
-universal property proves they are inverse and natural; both commute with Frobenius.
-Use [lem-sf-ringed-slice-tensor-generators] and
-[def-sf-derived-weil-category-and-operations].
-3. Apply these maps in each bidegree and take direct sums. Both differential
-composites are [dx tensor y|U] + (-1)^p [x tensor dy|U]. Thus summands
-specifies a chain isomorphism with precisely the recorded total-tensor convention.
-Use [lem-sf-ringed-open-total-tensor-kflat] and
-[lem-sf-fixed-pair-created-abelian-structure].
-4. For a K-flat P, restrict a quasi-isomorphism, tensor with P and extend. The
-chain comparison proves extension preserves K-flatness. Conversely extend a
-quasi-isomorphism on the open and tensor with a K-flat T. Restricting back and
-the invertible unit reflect acyclicity, proving restriction preserves K-flatness.
-These are the two elementary tests in [def-sf-derived-weil-category-and-operations].
-5. Equivariant flat-term K-flat resolutions exist on the twisted action site.
-The locally finite coefficient functions agree with the finite-subextension
-coefficient description: finitely many spanning values lie in a finite compositum,
-and a quasi-compact test object needs only finitely many such neighborhoods.
-Use [lem-sf-weil-frobenius-action-resolutions] and
-[def-sf-derived-weil-category-and-operations].
-6. Flat sheaves are preserved too: apply exact restriction, tensor and extension
-to a short exact sequence, and use the sheaf comparison; for restriction use the
-invertible unit to reflect exactness. Thus these functors preserve the resolving
-subcategories. Localization of the natural chain map and its inverse gives gamma,
-its naturality and the displayed representative square, independently of resolutions.
-Use [lem-sf-twisted-action-ringed-site], [lem-sf-weil-frobenius-action-resolutions],
-[lem-weil-pbc-site-derived-tensor-descent], and
-[lem-weil-pbc-localization-universal-property].
-7. Localize the unit-transpose equation through the exact derived adjunction. This
-gives inverse_unit. Forgetting the maps of step 3 gives the ordinary maps, with
-unchanged signs and unit. The unit-normalized ordinary theorem therefore identifies
-them with gamma' and its inverse, giving compatibility. Restriction comparison
-is fixed on sheaf summands, then on K-flat representatives; the ordinary comparison
-agrees with it on forgotten inputs under the specified tensor comparisons.
-Use [lem-sf-ringed-slice-tensor-generators],
-[lem-sfb-localized-site-tensor-restriction], [def-weil-exact-derived-adjunction],
-[lem-sf-weil-native-closed-forgetful], and [lem-sf-open-tensor-normalization].
-8. The nativeOpenPullComp defined above localizes the existing module compositor.
-On balanced tensors it multiplies b j*(c); the inverse inserts 1. Balancing proves
-both inverse identities, Frobenius commutes with multiplication and fixes 1, and
-termwise localization proves naturality on every derived input. No lisse,
-boundedness or degree-zero restriction has entered any step.
-Use [def-sf-native-weil-derived-framework] and
-[lem-sf-native-adic-pullback-exact-lisse]. -/
+/-- The equivariant open tensor theorem, on arbitrary unbounded ambient inputs: there exist native
+open tensor data, a derived tensor comparison and a total-complex presentation that are
+compatible. -/
 theorem native_open_derived_tensor :
     ∃ (s : NativeOpenTensorData k₀ l j) (d : NativeOpenDerivedTensorData k₀ l j s)
       (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z)),

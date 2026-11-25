@@ -30,9 +30,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- If `F` is lisse and punctually `ι`-pure of weight `w` and `2 log_q |ι b| = c`, then the
-constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`: at a closed point of degree
-`m` every eigenvalue `α` of the local Frobenius becomes `bᵐ α`, of absolute value
-`q^{mc/2} q^{mw/2}`. (blueprint: `proposition-weights-under-usual-operations--12`) -/
+constant twist `F ⊗ 𝓑_b` is punctually `ι`-pure of weight `w + c`. -/
 theorem IsPunctuallyPureOfWeight.constantTwist {ι : PadicAlgCl l →+* ℂ} {F : WeilSheaf k₀ l X}
     {w : ℝ} (h : F.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ} {c : ℝ}
     (hb : 2 * Real.logb (Nat.card k₀) ‖ι b‖ = c) :
@@ -65,9 +63,7 @@ theorem IsPunctuallyPureOfWeight.constantTwist_zero {ι : PadicAlgCl l →+* ℂ
 
 variable (ι : PadicAlgCl l →+* ℂ) in
 /-- A Weil sheaf punctually `ι`-pure of weight `w` is punctually `ι`-pure of some weight `w'`
-for which there is a unit `b ∈ ℚ̄_ℓˣ` with `|ι b| = q ^ (-w' / 2)`: if `F` has a local
-Frobenius eigenvalue `α` at a closed point of degree `d`, then `|ι α| = q ^ (d w / 2)` and a
-`d`-th root of `α⁻¹` will do; otherwise `F` is pure of every weight, and `w' = 0`, `b = 1`. -/
+for which there is a unit `b ∈ ℚ̄_ℓˣ` with `|ι b| = q ^ (-w' / 2)`. -/
 theorem IsPunctuallyPureOfWeight.exists_units_norm_eq {F : WeilSheaf k₀ l X} {w : ℝ}
     (hw : F.IsPunctuallyPureOfWeight ι w) :
     ∃ (w' : ℝ) (b : (PadicAlgCl l)ˣ), F.IsPunctuallyPureOfWeight ι w' ∧

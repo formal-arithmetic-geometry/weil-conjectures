@@ -20,8 +20,26 @@ import WeilConjectures.TraceFormula.Sequence.SequenceDerivedScalarTower
 
 /-! # Mixed geometric and scalar coherence on strict quotient systems
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence).
+The canonical pullback, composition, unit and scalar-extension operations on strict quotient
+systems, both on ordinary module systems and on their derived counterparts, satisfy the mixed
+geometric/scalar coherence laws.
+
+## Implementation details
+
+The identities are first proved on the ringed sequence site rather than for towers in a
+derived category: the adjunctions determine inverse-image maps on unit sections and
+scalar-linear maps on unit tensors, so both routes of each square agree on generators.
+Finite-string coherence follows by induction on binary assemblies. The resulting equalities
+of module-system transformations give equal cochain maps after `mapHomologicalComplex`.
+For the derived versions, one chooses a flat-term K-flat resolution of the whole system
+(preserved by ringed-topos pullback and by scalar extension); the universal cochain counits
+of derived change of rings identify the derived maps with the localized ordinary maps on this
+simultaneous model, and localization preserves the equalities. No normalization,
+boundedness, finite Tor-amplitude or flatness of a quotient coefficient map is used.
+
+## References
+
+* Stacks Project, Tag 0D6D.
 -/
 
 @[expose] public noncomputable section
@@ -53,9 +71,7 @@ attribute [local irreducible] integralComparisonSequenceComposition integralComp
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The geometric/scalar square, as transformations of whole diagrams.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The geometric/scalar square, as transformations of whole diagrams. -/
 def integralQuotientClauseOrdinaryMixed (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -76,9 +92,7 @@ def integralQuotientClauseOrdinaryMixed (l : ℕ) [Fact l.Prime] : Prop :=
       Functor.whiskerLeft ((integralComparisonSequenceScalarModel l E L ι V).E)
         (integralComparisonSequenceComposition l L h k).hom
 
-/-- Multiplication is compatible with the scalar/pullback comparison.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Multiplication is compatible with the scalar/pullback comparison. -/
 def integralQuotientClauseOrdinaryScalarUnit (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -91,9 +105,7 @@ def integralQuotientClauseOrdinaryScalarUnit (l : ℕ) [Fact l.Prime] : Prop :=
     Functor.whiskerLeft (integralComparisonSequencePullback l E f)
       (integralComparisonSequenceScalarUnit l E X).hom
 
-/-- The associator multiplies successive coefficient factors, including equal fields.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The associator multiplies successive coefficient factors, including equal fields. -/
 def integralQuotientClauseOrdinaryScalarTower (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -113,9 +125,7 @@ def integralQuotientClauseOrdinaryScalarTower (l : ℕ) [Fact l.Prime] : Prop :=
         (integralComparisonSequenceScalarComposition l E L ι M j X).hom ≫
       (integralComparisonSequenceScalarPullback l E M (j.comp ι) f).hom
 
-/-- Three-arrow associativity, with the canonical identification of equal composites.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Three-arrow associativity, with the canonical identification of equal composites. -/
 def integralQuotientClauseOrdinaryAssociative (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -133,9 +143,7 @@ def integralQuotientClauseOrdinaryAssociative (l : ℕ) [Fact l.Prime] : Prop :=
       Functor.whiskerRight (integralComparisonSequenceComposition l E g h).hom
         (integralComparisonSequencePullback l E f)
 
-/-- Both geometric unit laws, with their scheme-morphism equality identifications.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Both geometric unit laws, with their scheme-morphism equality identifications. -/
 def integralQuotientClauseOrdinaryUnital (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -151,9 +159,7 @@ def integralQuotientClauseOrdinaryUnital (l : ℕ) [Fact l.Prime] : Prop :=
         (integralComparisonSequencePullback l E f) =
     eqToHom (congrArg (fun k ↦ integralComparisonSequencePullback l E k) (Category.comp_id f)))
 
-/-- All parenthesizations of every finite string give the same comparison.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- All parenthesizations of every finite string give the same comparison. -/
 def integralQuotientClauseOrdinaryFinite (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -172,9 +178,7 @@ def integralQuotientClauseOrdinaryFinite (l : ℕ) [Fact l.Prime] : Prop :=
       (integralComparisonSequenceComposition.{t, u} l E)
       (integralComparisonSequenceUnit.{t, u} l E) b
 
-/-- The geometric/scalar square, as transformations of whole diagrams.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The geometric/scalar square, as transformations of whole diagrams. -/
 def integralQuotientClauseDerivedMixed (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -195,9 +199,7 @@ def integralQuotientClauseDerivedMixed (l : ℕ) [Fact l.Prime] : Prop :=
       Functor.whiskerLeft (integralComparisonDerivedSequenceScalar l E L ι V)
         (integralComparisonSystemComposition l L h k).hom
 
-/-- Multiplication is compatible with the scalar/pullback comparison.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Multiplication is compatible with the scalar/pullback comparison. -/
 def integralQuotientClauseDerivedScalarUnit (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -210,9 +212,7 @@ def integralQuotientClauseDerivedScalarUnit (l : ℕ) [Fact l.Prime] : Prop :=
     Functor.whiskerLeft (integralComparisonDerivedSequencePullback l E f)
       (integralComparisonSystemScalarUnit l E X).hom
 
-/-- The associator multiplies successive coefficient factors, including equal fields.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The associator multiplies successive coefficient factors, including equal fields. -/
 def integralQuotientClauseDerivedScalarTower (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -232,9 +232,7 @@ def integralQuotientClauseDerivedScalarTower (l : ℕ) [Fact l.Prime] : Prop :=
         (integralComparisonSystemScalarComposition l E L M ι j X).hom ≫
       (integralComparisonSystemScalarPullback l E M (j.comp ι) f).hom
 
-/-- Three-arrow associativity, with the canonical identification of equal composites.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Three-arrow associativity, with the canonical identification of equal composites. -/
 def integralQuotientClauseDerivedAssociative (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -253,9 +251,7 @@ def integralQuotientClauseDerivedAssociative (l : ℕ) [Fact l.Prime] : Prop :=
       Functor.whiskerRight (integralComparisonSystemComposition l E g h).hom
         (integralComparisonDerivedSequencePullback l E f)
 
-/-- Both geometric unit laws, with their scheme-morphism equality identifications.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- Both geometric unit laws, with their scheme-morphism equality identifications. -/
 def integralQuotientClauseDerivedUnital (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -273,9 +269,7 @@ def integralQuotientClauseDerivedUnital (l : ℕ) [Fact l.Prime] : Prop :=
     eqToHom (congrArg (fun k ↦ integralComparisonDerivedSequencePullback l E k) (Category.comp_id
       f)))
 
-/-- All parenthesizations of every finite string give the same comparison.
-Source: Stacks 0D6D
-(blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- All parenthesizations of every finite string give the same comparison. -/
 def integralQuotientClauseDerivedFinite (l : ℕ) [Fact l.Prime] : Prop :=
   ∀
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -294,8 +288,7 @@ def integralQuotientClauseDerivedFinite (l : ℕ) [Fact l.Prime] : Prop :=
         (integralComparisonSystemComposition.{t, u} l E) (integralComparisonSystemUnit.{t, u} l E)
         b
 
-/-- Clause-by-clause packaging with shared clause types.
-Source: Stacks 0D6D (blueprint: lem-trf-quotient-system-mixed-coherence). -/
+/-- The mixed coherence laws of strict quotient systems, packaged clause by clause. -/
 structure IntegralQuotientMixedCoherence (l : ℕ) [Fact l.Prime] : Prop where
   /-- The geometric/scalar square, as transformations of whole diagrams. -/
   ordinary_mixed : integralQuotientClauseOrdinaryMixed.{t, u} l
@@ -851,34 +844,8 @@ private theorem sequencePrimeStalkUnit (l : ℕ) (X : Scheme.{t})
   change (X.residue x).hom (l : X.presheaf.stalk x) ≠ 0
   simpa only [map_natCast] using (isUnit_of_invertible (l : X.residueField x)).ne_zero
 
-/-- Mixed geometric/scalar coherence of the canonical operations on strict quotient systems.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6D, and the node's eight proof steps
-(blueprint: lem-trf-quotient-system-mixed-coherence).
-
-Proof: (1) Work on the ringed sequence site, not in towers in a derived category.
-The adjunction determines inverse-image maps on unit sections; the tensor adjunction
-then determines scalar-linear maps on unit tensors. (2) The two three-arrow compositors
-send a unit to the same successive units. Identity units insert the identity map.
-Induction on a binary assembly proves finite-string coherence, including the empty
-and singleton paths. Transport along an equality of scheme arrows uses that same mate.
-(3) In the mixed square both routes send 1 tensor gamma_hk(x) to
- gamma_h gamma_k(1 tensor x). (4) For the scalar unit both routes send
-1 tensor gamma_f(x) to gamma_f(x), and scalar linearity handles general coefficients.
-(5) In a coefficient tower both routes send c tensor (b tensor gamma_f(x)) to
- gamma_f(c*j(b) tensor x). This includes identity and equal coefficient extensions.
-(6) Unit naturality and tensor functoriality commute with every vertical restriction
-and horizontal quotient transition; quotient ring homomorphisms preserve products.
-The resulting equalities are equalities of module-system transformations, so applying
-mapHomologicalComplex gives equal cochain maps in all degrees, commuting with the
-differential and without signs. (7) Choose one flat-term K-flat resolution of the
-entire system, using lem-pc-kflat-resolution. Ringed-topos pullback preserves K-flat
-complexes with flat terms (lem-weil-pbc-ringed-topos-kflat-pullback), as does scalar
-extension, including for nonflat coefficient maps. Iterate this for the finite diagram.
-The universal cochain counits of lem-pur-derived-change-of-rings identify the specified
-derived maps with the localized ordinary maps on this simultaneous model.
-(8) Localization preserves the equalities. Naturality and cancellation of the
-resolution isomorphism prove them on every input. No normalization, boundedness,
-finite Tor-amplitude or flatness of a quotient coefficient map was used. -/
+/-- Mixed geometric/scalar coherence of the canonical operations on strict quotient systems,
+for both ordinary module systems and derived systems. -/
 theorem integralQuotientMixedCoherence (l : ℕ) [Fact l.Prime] :
     IntegralQuotientMixedCoherence.{t, u} l := by
   refine {

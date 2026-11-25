@@ -13,11 +13,8 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Internal Hom under the native geometric realization
 
-Source: current blueprint, `lem-fix-weil-operations.proof.md`, internal-Hom paragraph;
-the coefficient realization and native closed-forgetful comparison.
-(blueprint: lem-sf-native-geometric-hom-comparison).
-
-This is an ambient derived-object comparison. It asserts no constructibility,
+The comparison combines the coefficient realization with the native closed-forgetful
+comparison. This is an ambient derived-object comparison. It asserts no constructibility,
 boundedness, dualizing-object identification, or biduality.
 -/
 
@@ -44,32 +41,7 @@ private noncomputable def homComparisonOfEquivalence
     E.counitIso.app (H'.obj (E.functor.obj Q))
 
 /-- Native geometric realization carries the actual product-total derived internal Hom
-to the internal Hom over the realized condensed coefficient ring.
-
-Source: current blueprint, `lem-fix-weil-operations.proof.md`, internal-Hom paragraph;
-`lem-sf-weil-native-closed-forgetful`, comparison of product-total Hom; and
-`lem-sf-weil-verdier-module-constructibility-comparison`, coefficient-module equivalence.
-(blueprint: lem-sf-native-geometric-hom-comparison).
-
-Proof: Let Y be the geometric fiber. Forget Frobenius first. The exact orbit-sum induction
-is left adjoint to this forgetting functor, so forgetting preserves K-injective complexes.
-The native closed-forgetful comparison identifies the forgotten native product-Hom with
-the ordinary relative derived sheaf Hom, naturally in its derived arguments. This uses
-internal sheaf Hom with contragredient action, without taking invariant global Hom groups.
-Next apply F = AdicSheaf.forgetAb followed by comap along nativeModuleCoefficientIso.
-The coefficient realization identifies the two sheaves of rings on the same site. Scalar
-linearity is recovered from the constant coefficient sections, so F is an exact equivalence
-of module categories. Its relative tensor comparison identifies pure tensors, hence also
-evaluation. The inverse equivalence preserves acyclic complexes, and the tensor comparison
-shows that F preserves K-flat resolutions; equivalences also preserve K-injective resolutions
-and products. Apply F to the product-Hom complex on these representatives. The closed
-adjunction, with the same evaluation, identifies it with the ordinary derived internal Hom
-over the condensed coefficient ring: both represent the same relative tensor functor.
-Uniqueness of right adjoints gives inverse comparison maps, natural on derived morphisms.
-Compose this coefficient comparison with the forgotten native Hom comparison. The resulting
-object on the left is exactly nativeGeometricForget applied to derivedHom. No finite rank
-or boundedness hypothesis is used, so zero objects, empty fibers, shifts, and arbitrary
-unbounded complexes are included. -/
+to the internal Hom over the realized condensed coefficient ring. -/
 theorem nativeGeometricForget_derivedHomComparison
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
     [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]

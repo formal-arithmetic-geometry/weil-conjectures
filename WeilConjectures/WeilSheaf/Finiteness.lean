@@ -31,8 +31,6 @@ then `H⁰(X ⊗ k̄, ℚ̄_ℓ)` is `ℚ̄_ℓ` with trivial Frobenius.
 
 ## Main statements
 
-All of them are blueprint `prop-cohomological-finiteness`.
-
 - `AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology`,
   `AlgebraicGeometry.WeilComplex.exists_subsingleton_cohomology`: the cohomology vanishes
   outside a finite interval.
@@ -47,7 +45,7 @@ All of them are blueprint `prop-cohomological-finiteness`.
 
 ## Implementation notes
 
-The blueprint states the proposition for Weil complexes with coefficients in a finite
+The statements are classically formulated for Weil complexes with coefficients in a finite
 extension `E` of `ℚ_ℓ`; the Weil complexes of the repository have coefficients in `ℚ̄_ℓ`. The
 finite dimensionality of the cohomology groups is part of the structure `FrobeniusModule` that
 they are valued in, so it is not restated here.
@@ -193,18 +191,13 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--5`: Compact-support finiteness and
-Frobenius.
-
-The compactly supported cohomology `Hʳ_c(X ⊗ k̄, K)` of a Weil complex vanishes outside a finite
+/-- The compactly supported cohomology `Hʳ_c(X ⊗ k̄, K)` of a Weil complex vanishes outside a finite
 interval of degrees `r`. -/
 theorem exists_subsingleton_compactlySupportedCohomology (K : WeilComplex k₀ l X) :
     ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (K.compactlySupportedCohomology r).carrier :=
   exists_subsingleton_cohomologyFrobeniusModule _
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-The ordinary cohomology `Hʳ(X ⊗ k̄, K)` of a Weil complex vanishes outside a finite interval of
+/-- The ordinary cohomology `Hʳ(X ⊗ k̄, K)` of a Weil complex vanishes outside a finite interval of
 degrees `r`. -/
 theorem exists_subsingleton_cohomology (K : WeilComplex k₀ l X) :
     ∃ a b : ℤ, ∀ r, r < a ∨ b < r → Subsingleton (K.cohomology r).carrier :=
@@ -216,9 +209,7 @@ namespace WeilSheaf
 
 variable (k₀ l X)
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-If the geometric fiber `X ⊗ k̄` has dimension at most `e`, the compactly supported cohomology
+/-- If the geometric fiber `X ⊗ k̄` has dimension at most `e`, the compactly supported cohomology
 `Hʳ_c(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`. -/
 theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
@@ -226,12 +217,7 @@ theorem subsingleton_compactlySupportedCohomology_adicConstant (e : ℕ)
     Subsingleton ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier :=
   subsingleton_compactlySupportedCohomology_adicConstant_of_two_mul_lt k₀ l X e he r hr
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-If `X` is geometrically connected over `k₀`, then `H⁰(X ⊗ k̄, ℚ̄_ℓ)` is one-dimensional: the
-constant sheaf is the lisse sheaf of the trivial representation of the fundamental group of the
-connected scheme `X ⊗ k̄`, whose invariants are `ℚ̄_ℓ`. Neither properness nor smoothness is
-needed. -/
+/-- If `X` is geometrically connected over `k₀`, then `H⁰(X ⊗ k̄, ℚ̄_ℓ)` is one-dimensional. -/
 theorem finrank_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
     Module.finrank (PadicAlgCl l) ((adicConstant k₀ l X).cohomology 0).carrier =
@@ -252,11 +238,8 @@ theorem finrank_cohomology_zero_adicConstant
     (ProEtale.finrank_globalSections_adicConstantSheaf _)
 
 open MonoidalCategory Functor.LaxMonoidal ProEtale in
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-If `X` is geometrically connected over `k₀`, the geometric Frobenius acts as the identity on
-`H⁰(X ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`: the Weil structure of the constant Weil sheaf is the identity on the
-constants. -/
+/-- If `X` is geometrically connected over `k₀`, the geometric Frobenius acts as the identity on
+`H⁰(X ⊗ k̄, ℚ̄_ℓ) ≅ ℚ̄_ℓ`. -/
 theorem frobenius_cohomology_zero_adicConstant
     [GeometricallyConnected (X ↘ Spec (CommRingCat.of k₀))] :
     ((adicConstant k₀ l X).cohomology 0).frobenius = LinearEquiv.refl _ _ := by
@@ -308,15 +291,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
 
-/-- Blueprint `theorem-trace-formula-euler-product--6`: Compact-support finiteness and Frobenius.
-
-If `X` is proper over `k₀`, the compactly supported and the ordinary cohomology
-`Hʳ_c(X ⊗ k̄, K)` and `Hʳ(X ⊗ k̄, K)` are isomorphic as Frobenius modules.
-
-The isomorphism is induced by `Ra_! ≅ Ra_*` for the proper `a`
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriekObjIsoOfIsProper`): for the chosen
-compactification `X ⟶[i] Z ⟶[g] Spec k₀` the open immersion `i` is also closed, so that
-`Rg_*(i_! K) ≅ Rg_*(i_* K) ≅ Ra_* K`. -/
+/-- If `X` is proper over `k₀`, the compactly supported and the ordinary cohomology
+`Hʳ_c(X ⊗ k̄, K)` and `Hʳ(X ⊗ k̄, K)` are isomorphic as Frobenius modules. -/
 theorem nonempty_equiv_compactlySupportedCohomology_cohomology
     (K : WeilComplex k₀ l X) (r : ℤ) :
     Nonempty ((K.compactlySupportedCohomology r).Equiv (K.cohomology r)) :=
@@ -329,12 +305,8 @@ namespace WeilSheaf
 
 variable (k₀ l X)
 
-/-- Blueprint `prop-cohomological-finiteness`: Compact-support finiteness and Frobenius.
-
-If `X` is proper over `k₀` and the geometric fiber `X ⊗ k̄` has dimension at most `e`, the
-cohomology `Hʳ(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`.
-For `X` smooth of pure dimension `d` the same vanishing, without properness, is
-`AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant`. -/
+/-- If `X` is proper over `k₀` and the geometric fiber `X ⊗ k̄` has dimension at most `e`, the
+cohomology `Hʳ(X ⊗ k̄, ℚ̄_ℓ)` of the constant Weil sheaf vanishes for `r < 0` and for `r > 2e`. -/
 theorem subsingleton_cohomology_adicConstant_of_isProper (e : ℕ)
     (he : topologicalKrullDim (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ≤ (e : WithBot ℕ∞))
     (r : ℤ) (hr : r < 0 ∨ 2 * (e : ℤ) < r) :

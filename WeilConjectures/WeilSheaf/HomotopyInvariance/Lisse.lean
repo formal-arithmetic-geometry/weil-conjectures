@@ -72,8 +72,7 @@ omit [Finite k₀] [IsSeparated π] [LocallyOfFiniteType π] [QuasiCompact π]
 include hπ in
 /-- The base change `π̄ : Ȳ ⟶ X̄` of the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` to the
 algebraic closure of `k₀` is the affine line over the geometric fibre `X̄`: there is an
-isomorphism `Ȳ ≅ 𝔸¹_X̄` over `X̄`. Both are base changes of `𝔸¹_{k₀} ⟶ Spec k₀` along
-`X̄ ⟶ X ⟶ Spec k₀`. -/
+isomorphism `Ȳ ≅ 𝔸¹_X̄` over `X̄`. -/
 lemma exists_iso_affineSpace_geometricFiber_of_isPullback :
     ∃ e : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
       𝔸(ULift.{u} (Fin 1); (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),
@@ -89,18 +88,9 @@ lemma exists_iso_affineSpace_geometricFiber_of_isPullback :
 
 set_option linter.unusedSectionVars false in
 include hπ in
-/-- Blueprint `lem-pur-a1-direct-image` (for lisse Weil sheaves): **homotopy invariance for lisse
-Weil sheaves**. For the trivial line bundle `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a lisse Weil sheaf
-`L` on `X`, the unit `L ⟶ Rπ_* π^* L` of `π^* ⊣ Rπ_*` is an isomorphism.
-
-Forgetting the Weil structures reflects isomorphisms and carries the unit to the unit of the
-derived adjunction `π̄^* ⊣ Rπ̄_*` of `ℓ`-adic sheaves on the geometric fibres
-(`AlgebraicGeometry.NativeBaseChange.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isIso`).
-The base change `π̄` is the affine line over `X̄`
-(`AlgebraicGeometry.WeilComplex.exists_iso_affineSpace_geometricFiber_of_isPullback`), and the
-underlying `ℓ`-adic sheaf of `L` is lisse, so this is homotopy invariance for lisse `ℓ`-adic
-sheaves over the algebraically closed field `k̄`
-(`AlgebraicGeometry.ProEtale.isIso_adicUnit_app_singleFunctor_of_isAdicLisseSheaf`). -/
+/-- **Homotopy invariance for lisse Weil sheaves**. For the trivial line bundle
+`π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a lisse Weil sheaf `L` on `X`, the unit `L ⟶ Rπ_* π^* L` of
+`π^* ⊣ Rπ_*` is an isomorphism. -/
 theorem isIso_unit_app_toComplex_of_isLisse (L : WeilSheaf k₀ l X) (hL : L.IsLisse) :
     IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app
       (WeilSheaf.toComplex.obj L)) := by
@@ -122,9 +112,7 @@ theorem isIso_unit_app_toComplex_of_isLisse (L : WeilSheaf k₀ l X) (hL : L.IsL
 include hπ in
 /-- **Homotopy invariance for Weil complexes with lisse cohomology.** For the trivial line bundle
 `π : Y ≅ X ×_{k₀} 𝔸¹ ⟶ X` and a Weil complex `K` on `X` whose cohomology sheaves are lisse, the
-unit `K ⟶ Rπ_* π^* K` is an isomorphism. By dévissage along the truncation triangles, this
-reduces to lisse Weil sheaves placed in degree zero
-(`AlgebraicGeometry.WeilComplex.isIso_unit_app_toComplex_of_isLisse`). -/
+unit `K ⟶ Rπ_* π^* K` is an isomorphism. -/
 theorem isIso_unit_app_of_isLisse_homologySheaf (K : WeilComplex k₀ l X)
     (hK : ∀ n : ℤ, ((homologySheaf n).obj K).IsLisse) :
     IsIso ((upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) π).unit.app K) := by

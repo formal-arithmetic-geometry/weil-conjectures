@@ -55,9 +55,13 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 /-!
 # Point sections and finite coefficient reduction
 
-Source: literature/blueprint/main-20261015/blueprint/sec-trace-formula/
-`sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md`, Proof (1)
-(blueprint: lem-trf-point-sections-finite-reduction).
+Models of the point site, its constant coefficient sheaves and derived sections, together with
+the exactness of sections with finite coefficients, used to reduce point sections to finite
+coefficients.
+
+## References
+
+* Stacks Tags 0982, 00W1, 093J, 0946, 06YY, 05RU.
 -/
 
 @[expose] public noncomputable section
@@ -74,21 +78,18 @@ open scoped TensorProduct ChangeOfRings
 
 namespace WeilConjectures
 
-/-- The standard small model of the point site in the coefficient universe.
-Source: Stacks Tag 0982 (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- The standard small model of the point site in the coefficient universe. -/
 noncomputable instance pointFiniteReductionSiteSmall (k : Type u) [Field k] :
     EssentiallySmall.{u + 1} (Scheme.ProEt (Spec (.of k))) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-/-- Ring sheafification in the standard coefficient universe.
-Source: Stacks Tag 00W1 (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- Ring sheafification in the standard coefficient universe. -/
 noncomputable instance (priority := 2000) pointFiniteReductionRingSheafify
     (k : Type u) [Field k] :
     HasSheafify (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1} :=
   hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
 
-/-- The constant coefficient ring sheaf at an algebraically closed point.
-Source: Stacks Tags 093J and 0982 (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- The constant coefficient ring sheaf at an algebraically closed point. -/
 noncomputable abbrev pointFiniteReductionRingSheaf (k : Type u) [Field k]
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -97,8 +98,7 @@ noncomputable abbrev pointFiniteReductionRingSheaf (k : Type u) [Field k]
     CommRingCat.{u + 1}).obj
     (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))
 
-/-- Exactness of finite coefficient sections at kernels.
-Source: Stacks Tags 0982 and 0946 (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- Exactness of finite coefficient sections at kernels. -/
 noncomputable instance pointFiniteReductionSectionsLimits (k : Type u) [Field k]
     [IsAlgClosed k] (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -112,8 +112,7 @@ noncomputable instance pointFiniteReductionSectionsLimits (k : Type u) [Field k]
     (pointModuleSections k _ ⋙ ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
       (pointConstantSectionMap k (Padic.coefficientExtensionRing l E n))))
 
-/-- Exactness of finite coefficient sections at cokernels.
-Source: Stacks Tags 0982 and 0946 (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- Exactness of finite coefficient sections at cokernels. -/
 noncomputable instance pointFiniteReductionSectionsColimits (k : Type u) [Field k]
     [IsAlgClosed k] (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -131,8 +130,7 @@ noncomputable instance pointFiniteReductionSectionsColimits (k : Type u) [Field 
     (pointModuleSections k _ ⋙ ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
       (pointConstantSectionMap k (Padic.coefficientExtensionRing l E n))))
 
-/-- Derived sections at the final point with the canonical finite coefficient action.
-Source: Stacks Tags 0946 and 0982 (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- Derived sections at the final point with the canonical finite coefficient action. -/
 noncomputable def pointFiniteReductionSections (k : Type u) [Field k] [IsAlgClosed k]
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :
@@ -144,8 +142,7 @@ noncomputable def pointFiniteReductionSections (k : Type u) [Field k] [IsAlgClos
         (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) :=
   (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).mapDerivedCategory
 
-/-- The existing module-sheaf category on the small pro-etale point site.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
+/-- The module-sheaf category on the small pro-etale point site. -/
 noncomputable abbrev pointFiniteReductionSheaves (k : Type u) [Field k]
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (n : ℕ) :=
@@ -156,8 +153,7 @@ noncomputable abbrev pointFiniteReductionSheaves (k : Type u) [Field k]
 variable (k : Type u) [Field k] (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The standard localization in the established point-sheaf Hom universe.
-Source: Stacks Tag 05RU (blueprint: lem-trf-point-finite-reduction-sheaf-model). -/
+/-- The standard localization in the point-sheaf Hom universe. -/
 local instance (priority := 30000) pointFiniteReductionDataDerived (n : ℕ) :
     HasDerivedCategory.{u + 2} (pointFiniteReductionSheaves k l E n) :=
   HasDerivedCategory.standard _
