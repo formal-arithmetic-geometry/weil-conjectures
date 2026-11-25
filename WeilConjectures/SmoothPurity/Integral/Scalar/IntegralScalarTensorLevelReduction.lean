@@ -15,7 +15,10 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQu
 
 /-! # Consecutive reduction for integral scalar tensor comparisons
 
-Source: Stacks 03EL and 07A4; Bhatt--Scholze, Definition 3.4.10.
+## References
+
+* Stacks Project, Tags 03EL and 07A4.
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.4.10.
 -/
 
 @[expose] public noncomputable section
@@ -112,29 +115,7 @@ private theorem finite_tensor_ext (W : AlgebraicGeometry.Scheme.{u}) (n : ℕ)
   rw [hb]
   exact h p q rfl V (r • x) y
 
-/-- Normalized scalar tensor level maps commute with a single quotient reduction.
-Source: Stacks, Modules on Sites, Tag 03EL, tensor products; Cohomology on Sites,
-Tag 07A4; Bhatt--Scholze, Definition 3.4.10.
-(blueprint: lem-pur-integral-scalar-tensor-level-reduction).
-Proof: precompose in each total degree with the scalar extensions of all tensor
-summand injections. Use the scalar-extension adjunction, the sheafification unit,
-and the balanced tensor universal property to reduce equality to
-1 tensor ((1 tensor x) tensor (1 tensor y)). The assumed normalization describes
-both level maps on these generators. The recorded quotient transition carries
-1 tensor x to 1 tensor x at the next quotient, and the tensor transition reduces
-both entries. Naturality of ordinary scalar extension on tensor sections therefore
-makes both composites equal to
-(1 tensor (1 tensor x)) tensor (1 tensor (1 tensor y)) at level n.
-Completed-ring linearity extends this equality to scalar multiples: the projection
-onto the finite quotient is locally surjective, so finite coefficients can be lifted
-locally. Additivity, tensor generation, and separatedness of the target sheaf prove
-equality of the summand maps. Coproduct, chain-map, and natural-transformation
-extensionality give the asserted consecutive square. This argument needs no
-flatness, and includes zero inputs and the empty site.
-Lean proof: test the two composites on scalar-extended total tensor generators.
-Naturality of the scalar unit and the prescribed transition and normalization formulas
-identify their values. The adjunction, local tensor generation and coproduct
-extensionality give the equality of natural transformations. -/
+/-- Normalized scalar tensor level maps commute with a single quotient reduction. -/
 theorem integralScalarTensorLevelReduction (W : AlgebraicGeometry.Scheme.{u})
     (α : ∀ n : ℕ, integralOperationsTensorLevel l E W n ⋙
         (integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ) ⟶

@@ -18,16 +18,22 @@ transition cocycle of a trivialisation of a lisse sheaf,
 `AlgebraicGeometry.ProEtale.AdicSheaf.isDescentCocycle_smul_compactOpenLattice`). Then `γ` has a
 twisted section with values in the lattices
 (`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice`): a lisse sheaf on a regular
-scheme has a lattice (blueprint `proposition-lattices-representations-normal-scheme` (4), used in
-`theorem-purity-higher-direct-images-under`).
+scheme has a lattice.
 
 More generally, this holds on a connected Noetherian scheme whose local rings are integrally
 closed domains
-(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`):
-the orbit of a lattice is contained in a finite invariant set of lattices
-(`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`, Bhatt–Scholze,
-Lemma 7.4.10), whose sum is an invariant lattice. On a regular scheme the sections over the
-finitely many connected components glue.
+(`AlgebraicGeometry.exists_isTwistedSection_compactOpenLattice_of_isIntegrallyClosed_stalk`).
+
+## Implementation details
+
+On a connected normal scheme, the orbit of a lattice is contained in a finite invariant set of
+lattices (`AlgebraicGeometry.exists_finite_invariant_subset_of_isIntegrallyClosed_stalk`), whose
+sum is an invariant lattice. On a regular scheme the sections over the finitely many connected
+components glue.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 7.4.10
 -/
 
 @[expose] public section

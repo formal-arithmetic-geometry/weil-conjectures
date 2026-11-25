@@ -16,9 +16,9 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficien
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleRootsOfUnityInverseImageSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingMap
 
-/-! Definitions of integral signed inverse-image comparison.
-Source: main-20261015 twist-preservation proof, final sentence
-(blueprint: def-weil-integral-twist-inverse-comparison).
+/-! # Integral signed inverse-image comparison
+
+Definitions of the integral signed inverse-image comparison for twists.
 -/
 
 @[expose] public noncomputable section

@@ -185,14 +185,13 @@ import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 
 /-! # Integral operations and finite coefficient extension
 
-Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations,
-`prose-03-02`, integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension).
+## Implementation details
 
 The comparison predicate records all three natural isomorphisms and their actual
 composition and identity diagrams. Scalar associators are normalized by the published
-ordinary tensor associator and the published strict quotient-completion chain map.
-This normalization also applies to complete internal Homs that are not constructible.
+ordinary tensor associator and the published strict quotient-completion chain map,
+rather than supplied as arbitrary comparison isomorphisms. This normalization also
+applies to complete internal Homs that are not constructible.
 -/
 
 @[expose] public section
@@ -212,49 +211,33 @@ namespace WeilConjectures.IntegralScalarOperations
 variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω]
   [IsAlgClosure ℚ_[l] Ω]
 
-/-- An abbreviation for the recorded ambient completed-coefficient category.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- An abbreviation for the recorded ambient completed-coefficient category. -/
 abbrev Ambient (E : Padic.FiniteCoefficientFields l Ω) (W : AlgebraicGeometry.Scheme.{u}) :=
   DerivedCategory (integralTowerModules.{u, u} l E.val W)
 
-/-- The recorded completed scalar functor for the actual intermediate-field inclusion.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The recorded completed scalar functor for the actual intermediate-field inclusion. -/
 noncomputable abbrev extend {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (W : AlgebraicGeometry.Scheme.{u}) :=
   integralScalarExtension l E.val L.val (IntermediateField.inclusion h) W
 
-/-- The published exact ordinary finite-free scalar model.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The published exact ordinary finite-free scalar model. -/
 noncomputable abbrev ordinary {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (W : AlgebraicGeometry.Scheme.{u}) :=
   integralOrdinaryDerivedScalar l E.val L.val (IntermediateField.inclusion h) W
 
-/-- The recorded intrinsic bounded constructible predicate, with no finite-field datum.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The recorded intrinsic bounded constructible predicate, with no finite-field datum. -/
 noncomputable abbrev constructible (E : Padic.FiniteCoefficientFields l Ω)
     (W : AlgebraicGeometry.Scheme.{u}) := sfIntegralConstructible l E.val W
 
-/-- The recorded derived-complete predicate, also for nonconstructible outputs.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The recorded derived-complete predicate, also for nonconstructible outputs. -/
 noncomputable abbrev complete (E : Padic.FiniteCoefficientFields l Ω)
     (W : AlgebraicGeometry.Scheme.{u}) := IsSfDerivedComplete l E.val W
 
-/-- The two schemes occurring in the statement; false selects Y and true selects X.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+/-- The two schemes occurring in the statement; false selects Y and true selects X. -/
 def site (X Y : AlgebraicGeometry.Scheme.{u}) (w : Bool) := if w then X else Y
 
 /-- Exactly the three comparison families, with naturality, scalar-composition
-compatibility and identity normalization. The auxiliary scalar maps are fixed by their
-quotient-completion comparison and ordinary tensor multiplication, rather than supplied
-as arbitrary comparison isomorphisms. The site flag ranges over precisely X and Y.
-Source: blueprint integral/common-stage paragraph
-(blueprint: lem-pur-integral-operations-scalar-extension). -/
+compatibility and identity normalization. The site flag ranges over precisely X and Y. -/
 noncomputable def Comparisons (X Y : AlgebraicGeometry.Scheme.{u}) (f : X ⟶ Y) : Prop :=
   ∃ (completion : ∀ (E L : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) (w : Bool),
     ordinary l Ω h (site X Y w) ⟶ extend l Ω h (site X Y w)),

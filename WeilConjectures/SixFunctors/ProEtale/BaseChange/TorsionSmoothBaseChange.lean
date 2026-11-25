@@ -12,11 +12,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 # Pro-étale smooth base change for complexes killed by an integer invertible on the base
 
 This file extends the finite-coefficient pro-étale smooth base change
-`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth` (blueprint
-`theorem-smooth-base-change-all-admissible--1`) from coefficient rings killed by an integer `N`
-invertible on the base to complexes killed by such an integer, over an arbitrary coefficient ring
-`Λ`. This is the form needed at the finite levels of the adic theorem, where the coefficient ring
-is `𝒪_E` and the reductions `K ⊗ᴸ 𝒪_E/𝔪ⁿ` are killed by `ℓⁿ`.
+`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth` from coefficient rings
+killed by an integer `N` invertible on the base to complexes killed by such an integer, over an
+arbitrary coefficient ring `Λ`. This is the form needed at the finite levels of the adic
+theorem, where the coefficient ring is `𝒪_E` and the reductions `K ⊗ᴸ 𝒪_E/𝔪ⁿ` are killed by `ℓⁿ`.
 
 Fix a Cartesian square of schemes
 
@@ -37,8 +36,7 @@ with `p` smooth and `g` quasi-compact and quasi-separated.
   below étale complex `L` whose cohomology sheaves are torsion of orders invertible on `S`.
 - `AlgebraicGeometry.ProEtale.isIso_homologyFunctor_map_derivedBaseChangeMap_app_of_smooth`: the
   degree-`q` base change map `p^* R^q g_* F ⟶ R^q h_* e^* F` is an isomorphism for a classical
-  pro-étale sheaf `F ≅ ν^* G` with `G` torsion of orders invertible on `S` (blueprint
-  `theorem-smooth-base-change-classical-torsion`).
+  pro-étale sheaf `F ≅ ν^* G` with `G` torsion of orders invertible on `S`.
 - `AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth_of_nsmul_eq_zero`: it is an
   isomorphism at every bounded constructible pro-étale complex (one of étale origin) killed by an
   integer invertible on `S`.
@@ -79,9 +77,7 @@ variable {S T Y X : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y
 variable (Λ) in
 /-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` of a Cartesian square with `g`
 quasi-compact and quasi-separated is an isomorphism at `K ≅ ν^* L`, for a bounded below étale
-complex `L` at which the étale exchange map `p⁻¹ Rg_* L ⟶ Rh_* e⁻¹ L` is an isomorphism: the
-two exchange maps correspond under the site comparison
-(`AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap`). -/
+complex `L` at which the étale exchange map `p⁻¹ Rg_* L ⟶ Rh_* e⁻¹ L` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app [QuasiCompact g]
     [QuasiSeparated g] (sq : IsPullback e h g p)
     (L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -105,11 +101,7 @@ theorem isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app [QuasiCompact g]
 variable (Λ p) in
 /-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` of a Cartesian square with `p` smooth
 and `g` quasi-compact and quasi-separated is an isomorphism at `K ≅ ν^* L`, for a bounded below
-étale complex `L` whose cohomology sheaves are torsion of orders invertible on `S`. As for
-`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_smooth`, this is the étale smooth
-base change
-(`AlgebraicGeometry.Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder`)
-transported along the site comparison. -/
+étale complex `L` whose cohomology sheaves are torsion of orders invertible on `S`. -/
 theorem isIso_derivedBaseChangeMap_app_of_smooth_of_torsion [Smooth p] [QuasiCompact g]
     [QuasiSeparated g] (sq : IsPullback e h g p)
     (L : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -123,8 +115,7 @@ theorem isIso_derivedBaseChangeMap_app_of_smooth_of_torsion [Smooth p] [QuasiCom
     (Etale.isIso_baseChange_app_of_smooth_of_isTorsionSheafOfInvertibleOrder Λ p sq L hL) K eK
 
 variable (Λ p) in
-/-- Blueprint `theorem-smooth-base-change-classical-torsion`: smooth base change for classical
-torsion sheaves. For a Cartesian square
+/-- Smooth base change for classical torsion sheaves. For a Cartesian square
 
 ```
 Y --e--> T
@@ -138,13 +129,8 @@ with `p` smooth and `g` quasi-compact and quasi-separated, let `F` be a classica
 of `Λ`-modules on `T`, that is `F ≅ ν^* G` for a sheaf `G` on `T_ét`, with `G` torsion of orders
 invertible on `S` (equivalently, `G` is the filtered union of its subsheaves `G[n]` for the
 positive integers `n` invertible on `S`). Then for every `q` the degree-`q` base change map
-`p^* R^q g_* F ⟶ R^q h_* e^* F`, the degree-`q` cohomology of the pro-étale exchange map (4.5) at
-`F` placed in degree `0`, is an isomorphism. Abelian sheaves are the case `Λ = ℤ`.
-
-The pro-étale map is the étale one transported along the site comparison
-(`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_isIso_baseChange_app`), and the
-étale map is an isomorphism by the étale smooth base change theorem
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_smooth`. -/
+`p^* R^q g_* F ⟶ R^q h_* e^* F`, the degree-`q` cohomology of the pro-étale exchange map at `F`
+placed in degree `0`, is an isomorphism. Abelian sheaves are the case `Λ = ℤ`. -/
 theorem isIso_homologyFunctor_map_derivedBaseChangeMap_app_of_smooth [Smooth p]
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
     (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionSheafOfInvertibleOrder S G]
@@ -166,8 +152,6 @@ variable (Λ p) in
 /-- The pro-étale exchange map `p^* Rg_* K ⟶ Rh_* e^* K` of a Cartesian square with `p` smooth
 and `g` quasi-compact and quasi-separated is an isomorphism at every bounded constructible
 pro-étale complex `K` of `Λ`-modules (one of étale origin) killed by a nonzero integer `N`
-invertible on `S`. The étale complex `L` with `ν^* L ≅ K` is then also killed by `N`, `ν^*` being
-faithful on bounded below complexes, so that its cohomology sheaves are torsion of orders
 invertible on `S`. -/
 theorem isIso_derivedBaseChangeMap_app_of_smooth_of_nsmul_eq_zero [Smooth p] [QuasiCompact g]
     [QuasiSeparated g] (sq : IsPullback e h g p) {N : ℕ} (hN₀ : N ≠ 0)

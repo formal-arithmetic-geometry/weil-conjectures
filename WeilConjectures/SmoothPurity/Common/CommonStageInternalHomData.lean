@@ -14,9 +14,9 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-! # Common-stage internal Hom objects and comparisons
 
-The existing common-stage Hom definitions, extracted without changing their bodies.
-Source: prose-03-02, common-stage internal-Hom paragraph.
-(blueprint: def-weil-common-stage-internal-hom-data).
+This file defines the permitted common-stage internal-Hom pairs, the internal-Hom object at
+the coefficient compositum, its extension to larger finite stages, and the comparison
+isomorphisms between these.
 -/
 
 @[expose] public noncomputable section
@@ -75,10 +75,7 @@ set_option backward.isDefEq.respectTransparency.types false
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- The recorded stage transition is the specified rational scalar functor.
-The equality is part of the existing stage-system uniqueness specification.
-Source: blueprint common-stage coefficient construction
-(blueprint: prose-03-02). -/
+/-- The recorded stage transition is the specified rational scalar functor. -/
 def operationStageTransitionIso (W : Scheme.{u})
     (E L : Index l Ω) (h : E ≤ L) :
     (stageSystem l Ω W).T h ≅ transition l Ω W E L h :=
@@ -133,9 +130,7 @@ private noncomputable def operationStageIntegralAssociator (W : Scheme.{u})
 attribute [local irreducible] operationStageIntegralAssociator
 
 /-- The permitted common-stage Hom pairs: extend both entries to their compositum,
-then require exactly the integral-Hom constructibility predicate there.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02). -/
+then require exactly the integral-Hom constructibility predicate there. -/
 def commonStageHomPairs (W : Scheme.{u}) :
     ObjectProperty ((generalAlgebraicallyClosedConstructibleCategory l Ω W)ᵒᵖ ×
       generalAlgebraicallyClosedConstructibleCategory l Ω W) :=
@@ -146,9 +141,7 @@ def commonStageHomPairs (W : Scheme.{u}) :
       P.2.toStage
         ((Padic.finiteCoefficientFields_properties l Ω).1 P.1.unop.stage P.2.stage).2)
 
-/-- The literal permitted rational pair at the compositum, with no choice of lift.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02). -/
+/-- The literal permitted rational pair at the compositum, with no choice of lift. -/
 def commonStageHomRationalPair (W : Scheme.{u})
     (P : (commonStageHomPairs l Ω W).FullSubcategory) :
     (constructibleRationalHomPairs l
@@ -160,9 +153,7 @@ def commonStageHomRationalPair (W : Scheme.{u})
     P.obj.2.toStage ((Padic.finiteCoefficientFields_properties l Ω).1
       P.obj.1.unop.stage P.obj.2.stage).2), P.property⟩
 
-/-- Common-stage internal Hom is the literal pair at the coefficient compositum.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02). -/
+/-- Common-stage internal Hom is the literal pair at the coefficient compositum. -/
 def commonStageHomObject (W : Scheme.{u})
     (P : (commonStageHomPairs l Ω W).FullSubcategory) :
     generalAlgebraicallyClosedConstructibleCategory l Ω W :=
@@ -171,15 +162,7 @@ def commonStageHomObject (W : Scheme.{u})
       (Padic.finiteCoefficientCompositum l Ω P.obj.1.unop.stage P.obj.2.stage)) W).obj
         (commonStageHomRationalPair l Ω W P)⟩
 
-/-- A permitted compositum pair remains permitted at every larger finite stage.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02).
-Proof: rationalHomScalarPair_permitted first extends the permitted integral pair.
-The two integral scalar associators identify its entries with the entries extended
-directly from their original stages. Internal Hom uses the inverse first
-associator and the second associator. Its underlying integral isomorphism preserves
-constructibility. Thus the displayed predicate holds before rationalization,
-including identity inclusions and every further stage. -/
+/-- A permitted compositum pair remains permitted at every larger finite stage. -/
 theorem commonStageHomPairAtStage_permitted (W : Scheme.{u})
     (P : (commonStageHomPairs l Ω W).FullSubcategory)
     (L : Index l Ω) (h : (commonStageHomObject l Ω W P).stage ≤ L) :
@@ -204,9 +187,7 @@ theorem commonStageHomPairAtStage_permitted (W : Scheme.{u})
       ((sfIntegralConstructible l B W).ι.mapIso e₂))
   exact (sfIntegralConstructible l B W).prop_of_iso e hP
 
-/-- The permitted pair at a larger stage, using the actual scalar extensions.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02). -/
+/-- The permitted pair at a larger stage, using the actual scalar extensions. -/
 def commonStageHomPairAtStage (W : Scheme.{u})
     (P : (commonStageHomPairs l Ω W).FullSubcategory)
     (L : Index l Ω) (h : (commonStageHomObject l Ω W P).stage ≤ L) :
@@ -220,9 +201,7 @@ def commonStageHomPairAtStage (W : Scheme.{u})
 section ComparisonElaboration
 attribute [local irreducible] ObjectProperty.FullSubcategory.category
 
-/-- The Hom comparison includes the inverse first-variable scalar associator.
-Source: blueprint common-stage internal-Hom paragraph
-(blueprint: prose-03-02). -/
+/-- The Hom comparison includes the inverse first-variable scalar associator. -/
 def commonStageHomComparison (W : Scheme.{u})
     (P : (commonStageHomPairs l Ω W).FullSubcategory)
     (L : Index l Ω) (h : (commonStageHomObject l Ω W P).stage ≤ L) :

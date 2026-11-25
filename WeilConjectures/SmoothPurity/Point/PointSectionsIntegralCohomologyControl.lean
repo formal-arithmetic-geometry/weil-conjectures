@@ -58,8 +58,11 @@ import Mathlib.RingTheory.Ideal.Operations
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Cohomological control of integral point sections
-Source: Stacks Project, Tags 091W, 093M and 091P;
-(blueprint: lem-weil-point-sections-integral-cohomology-control). -/
+
+## References
+
+* Stacks Project, Tags 091P, 091W and 093M.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -440,25 +443,7 @@ private theorem finite_quotient_of_finite_cone
       (CochainComplex.mappingCone (r • 𝟙 C))).toLinearEquiv.symm.toEquiv
   exact Finite.of_injective g hg
 
-/-- Integral sections have bounded derived-complete cohomology and finite residue.
-Source: the point evaluation assertion in blueprint `lemma-perfect-complexes-geometric-point`,
-steps 3--5 of `lem-weil-point-sections-finiteness`; Stacks Tags 091W, 093M and 091P.
-(blueprint: lem-weil-point-sections-integral-cohomology-control).
-
-Proof: choose the common cohomological interval [a,b] for the derived reductions.
-Exact point sections and finite-torsion finiteness give finite reduction cohomology in
-that interval. Sections preserve products and the Roos triangle defining integral
-completeness. Products of modules are exact coordinatewise; their homology is the
-product of the homologies. The Roos long exact sequence therefore bounds sections
-in [a,b+1]. Every element of the uniformizer ideal acts nilpotently on each reduction,
-so the nilpotent-torsion derived-limit criterion gives derived completeness of sections.
-Finally specialize the existing point-sections derived-reduction comparison to
-exponent one. Its cone assertion identifies the first reduced section object, after
-restriction of scalars, with the uniformizer cone. Exact finite sections identify
-its cohomology with the finite sections of reduced constructible cohomology sheaves.
-The cone long exact sequence injects cohomology modulo the uniformizer into this
-finite cohomology module. Thus each residue module is finite. No surjectivity of
-transition maps on cohomology is asserted or needed. -/
+/-- Integral sections have bounded derived-complete cohomology and finite residue. -/
 theorem point_sections_integral_cohomology_control (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

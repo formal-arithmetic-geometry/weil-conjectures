@@ -11,7 +11,19 @@ import WeilConjectures.SmoothPurity.Coefficient.CoefficientExtensionAssociationS
 
 /-! # Ordinary association of strict scalar tensor complexes
 
-Source: Stacks 03D7, 03EK and 0941.
+This file shows that the levelwise ordinary tensor association isomorphisms glue to a
+chain isomorphism of strict scalar tensor complexes over the sequence site.
+
+## Implementation details
+
+The chain isomorphism is built levelwise from scalar evaluation, the termwise scalar
+extension of the evaluation of the ordinary model, and the given balanced association;
+compatibility with the successor transitions makes these strict inverse-system maps.
+No derived functor or derived comparison is involved.
+
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 0941
 -/
 
 @[expose] public noncomputable section
@@ -387,28 +399,9 @@ end Glue
 
 attribute [local irreducible] integralScalarReduction
 
-/-- Ordinary tensor association glues over the strict sequence site.
-
-Source: Stacks sites-modules.tex, tensor/restriction adjunction (03D7),
-tensor products (03EK), and sites-cohomology.tex, inverse systems (0941);
-step 3 of stage3-pur-extension-strict-derived-comparison.
-(blueprint: stage3-pur-extension-ordinary-association-chain).
-
-Proof: at level n compose scalar evaluation rho, the termwise scalar extension
-of M.evaluation n, and the given balanced association. These give the indicated
-finite chain isomorphisms. The unit equation for rho identifies its action on
-local scalar tensors with the identity on b tensor x. M.transition and the
-balanced formula hassociation then identify the transported successor map with
-the actual quotient tensor transition. The hypothesis htransition gives that
-same map for direct. Thus these finite isomorphisms commute with every successor;
-composition gives the equality for every arrow of the natural-number poset.
-View modules on the sequence site as strict systems. The finite maps and their
-inverses define inverse system maps degreewise; they commute with the cochain
-differentials by naturality of tensor association. They therefore define the
-chain isomorphism beta. Naturality in the input complex follows levelwise in the
-ordinary module category, whose evaluations are jointly faithful. The displayed
-equation is exactly its construction. This argument contains no derived functor
-or derived comparison, and works for zero complexes and ramified inclusions. -/
+/-- Ordinary tensor association glues over the strict sequence site: the levelwise
+association isomorphisms, compatible with the successor transitions, assemble to a natural
+chain isomorphism of strict scalar tensor complexes. -/
 theorem coefficientExtensionOrdinaryAssociationChain
     (A : CoefficientExtensionSystems l E L ι W)
     (M : CompletionUnit.OrdinaryModel l E W)

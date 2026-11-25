@@ -19,17 +19,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- Finite-stage representative calculation for common-stage pullback/tensor composition.
-
-Source: Stacks 07A4 and 0941, and the finite-stage representative paragraph of the
-common-stage composition proof.  At a coefficient field containing the stages of
-all objects in the displayed diagram, expand every common-stage map by its prescribed
-rational representative formula.  The two composites then become the same rational
-composite after cancellation of the adjacent comparison isomorphisms.  Directedness
-of the coefficient stages gives one common representative for the two resulting maps.
-
-This is the finite-stage calculation used by the colimit descent theorem below.
-(blueprint: lem-pur-pullback-tensor-common-stage-composition-coherence-finite-representative). -/
+/-- Finite-stage representative calculation for common-stage pullback/tensor composition. -/
 theorem commonStageCompositionFiniteRepresentative {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]

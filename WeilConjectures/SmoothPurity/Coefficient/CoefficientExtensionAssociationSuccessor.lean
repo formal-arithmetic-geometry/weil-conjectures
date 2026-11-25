@@ -12,7 +12,18 @@ import WeilConjectures.SmoothPurity.CoefficientExtensionAssociation.CoefficientE
 
 /-! # Successor maps of ordinary composite scalar tensors
 
-Source: Stacks 03D7, 03EK and the sequence-site construction preceding 0941.
+Scalar extension of an ordinary quotient tensor model has the published successor transition in
+the balanced finite tensor coordinates.
+
+## Implementation details
+
+The two transported successor maps are compared on local tensors `b ⊗ x`, using the
+tensor/restriction Hom equivalence and sheafification. The argument is termwise and uses no
+differential, flatness or good-complex condition.
+
+## References
+
+* [Stacks, Tags 03D7, 03EK and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -112,35 +123,8 @@ private theorem tensorTransition_of_generators
     (normalizedDVRQuotient l L W (Nat.le_succ n)) (ψ (n + 1)) (ψ n)
     (e (n + 1)) (e n) τ σ hab U x
 
-/-- Scalar extension of an ordinary quotient tensor model has the published
-successor transition in the balanced finite tensor coordinates.
-
-Source: Stacks sites-modules.tex, tensor/restriction adjunction (03D7) and
-section-tensor-product (03EK); sites-cohomology.tex, section-derived-limits,
-the sequence-site construction preceding lemma-derived-limit-is-ok (0941).
-This is the tensor calculation in step 1 of
-stage3-pur-extension-ordinary-association-chain.
-(blueprint: stage3-pur-extension-association-successor).
-
-Proof: write a_n for the displayed composite of rho, scalar extension of the
-ordinary quotient evaluation, and balanced association. Transport the source
-successor map by a_(n+1) and a_n. Compare the resulting completed-L-linear map
-with the published integralScalarTransition. Maps from the sheafified direct
-tensor B_(n+1) tensor_R P^i agree if they agree on every local tensor b tensor x:
-apply the ordinary tensor/restriction Hom equivalence and sheafification.
-The unit equation for rho identifies its inverse on a finite unit tensor with
-the finite evaluation of the system scalar-adjunction unit. Naturality of that
-system unit with respect to the horizontal sequence-site arrow identifies its
-successor with the scalar unit at the lower level applied to the original
-quotient successor. The transition clause of M, transported by M.evaluation,
-identifies this original successor with coefficientOrdinaryQuotient. Its
-normalized quotient-tensor formula reduces the coefficient and keeps x.
-The balanced formula hassociation then sends both nested tensors to
-red(b) tensor x. The defining tensor formula for integralScalarTransition gives
-the same section. Thus the transported maps agree on generators and hence on
-all sections. Conjugating by the two a_n gives the displayed HEq. This proof is
-termwise and uses no differential, flatness or good-complex condition; zero
-terms, n=0, empty sites and ramified extensions are included. -/
+/-- Scalar extension of an ordinary quotient tensor model has the published successor transition in
+the balanced finite tensor coordinates. -/
 theorem coefficientExtensionAssociation_successor
     (A : CoefficientExtensionSystems l E L ι W)
     (M : CompletionUnit.OrdinaryModel l E W)

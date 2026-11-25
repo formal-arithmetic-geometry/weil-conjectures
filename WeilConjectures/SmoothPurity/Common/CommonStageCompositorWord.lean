@@ -13,8 +13,8 @@ import WeilConjectures.SmoothPurity.Common.CommonStageNormalizedComposition
 
 /-! # The literal-stage representative of the common compositor
 
-Source: purity/trace equivariance proof Step 1, canonical pullback compositors.
-(blueprint: lem-pur-common-stage-compositor-representative).
+At the original coefficient stage, the normalized common-stage compositor of rational
+pullbacks is represented by the rational pullback composition map.
 -/
 
 @[expose] public noncomputable section
@@ -126,13 +126,7 @@ private theorem comparison_self (l : ℕ) [Fact l.Prime]
   exact commonStagePullbackComparison_self_unit l Ω f P
 
 /-- The normalized common-stage compositor word equals the rational pullback
-composition map at the original coefficient stage.
-Source: blueprint purity/trace equivariance Step 1, normalized composition.
-(blueprint: lem-pur-common-stage-compositor-word).
-Proof: apply the generic normalized-composition cancellation theorem to the three
-common-stage boundary comparisons. Their self-transition equations come from the
-coefficient-unit theorem. Rational pullback naturality supplies the composition
-isomorphism component. -/
+composition map at the original coefficient stage. -/
 -- The component is now assembled at the literal stage.
 theorem commonStageCompositor_word (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

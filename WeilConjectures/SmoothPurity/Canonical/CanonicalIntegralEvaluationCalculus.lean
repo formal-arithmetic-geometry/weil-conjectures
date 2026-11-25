@@ -78,10 +78,24 @@ import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Coherent reduction with the fixed integral closed tensor
 
-Source: Stacks 06YS, 07A4, 08JD and 0941, and step 1 of the compatible
-open-tensor context construction. This is the presentation-normalization refinement
-of the coherent coefficient calculus, on a single scheme.
-(blueprint: lem-pur-canonical-integral-evaluation-calculus).
+We choose a coherent coefficient reduction calculus on a single scheme whose integral closed
+structure is literally the fixed normalized duality structure. This is the
+presentation-normalization refinement of the coherent coefficient calculus.
+
+## Implementation details
+
+Starting from the existing coherent calculus, `CanonicalCoefficient.tensors` fixes the integral,
+sequence and finite closed structures to the normalized ringed-site duality structures. Each
+tensor comparison `μ` for `F` is conjugated to `F(a⁻¹) ≫ μ ≫ b`, keeping the reduction
+functor, adjunction, finite evaluations and all non-tensor quotient data. The representative
+equations follow by inverse cancellation and naturality
+(`CanonicalCoefficient.representativeLaws`), the base-change morphism is unchanged
+(`CanonicalCoefficient.baseChange_eq`), and the global-limit data and enriched maps are kept
+literally. No invertibility assumption on `l` on `W` is used.
+
+## References
+
+* Stacks 06YS, 07A4, 08JD, 0941
 -/
 
 @[expose] public noncomputable section
@@ -309,39 +323,8 @@ private def resolutionCoherence (S : CoefficientDerivedSystemCalculus l E W)
 
 end CanonicalCoefficient
 
-/-- Choose the coherent reduction calculus with its integral closed structure literally
-equal to the fixed normalized duality structure. No open immersion, ordinary reduction
-model, completion model, completion comparison or open comparison occurs here.
-
-Source: Stacks 06YS, 07A4, 08JD and 0941; the coefficient-calculus construction
-and step 1 of lem-pur-completed-open-tensor-context.
-(blueprint: lem-pur-canonical-integral-evaluation-calculus).
-
-Proof: start with the existing coherent calculus. CanonicalCoefficient.tensors fixes
-its integral closed field to IntegralOnSlice.duality.closed and its sequence and
-finite closed fields to normalized ringed-site duality structures. Transport each
-old tensor-model comparison by the evaluation-preserving adjoint comparison;
-comparison_transpose proves its ordinary uncurrying with the same chain map.
-Conjugate each tensor comparison mu for F by F(a inverse); mu; b, retaining the
-reduction functor, adjunction, finite evaluations and all non-tensor quotient data.
-CanonicalCoefficient.representativeLaws proves the five representative equations
-by inverse cancellation and naturality, with the same strict complexes and maps.
-
-CanonicalCoefficient.baseChange_eq identifies the new base-change morphism with
-the old one. Thus its naturality, transpose formula, quotient transition formula,
-fiber evaluation and beta evaluation transport. Apply compositionLaws for the
-internal-composition equations on the fixed normalized associators. This is the
-only separate internal-composition input; it asserts no existence of a calculus.
-Assemble the new fiber record with the old fiber Hom and global evaluations.
-
-Keep the old globalLimit and resolution coherence. The enriched map is unchanged
-by enriched_eq, so gamma.hom is literally the old morphism. Its projection,
-naturality and degree-zero Hom equations transfer. Enriched invertibility is
-coefficientClosedEnriched_isIso. Prove mapping composition by naturality of the
-reduction adjunction and tensor comparison (parameter_composition). Assemble the
-coherence record. The integral closed equality is reflexivity. These arguments
-include empty schemes, zero objects and unbounded complexes; no invertibility
-assumption on l on W is used. -/
+/-- There is a coherent coefficient reduction calculus on `W` whose integral closed structure is
+equal to the fixed normalized duality structure `(IntegralOnSlice.duality l E W none).closed`. -/
 theorem canonicalIntegralEvaluationCalculus :
     ∃ (S : CoefficientDerivedSystemCalculus l E W)
       (_coherence : CoefficientDerivedSystemCoherence l E W S),

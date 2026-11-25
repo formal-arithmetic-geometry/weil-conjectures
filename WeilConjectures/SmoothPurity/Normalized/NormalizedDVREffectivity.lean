@@ -16,13 +16,20 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Effectivity of normalized DVR towers
 
-Source: Weil conjectures blueprint, chap-The-six-operations-on-Dbctf, sk-prop-sf-biduality-general,
-order 2132 (blueprint: lemma-sp-tower-adjunction-foundation--2).
+A normalized DVR tower is recovered by derived reduction of its derived inverse limit, and
+that inverse limit is derived complete.
+
+## Implementation details
 
 The derived limit is specified by its Roos triangle on actual derived evaluations.
 Comparisons are adjoints of the specified limit projections. Coherence is an equality
 in the finite-coefficient derived category, including both identity and longer quotient
 maps. No constructibility, boundedness, or Tor-amplitude hypothesis is imposed.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4--3.5.7.
+* Stacks Project, Tags 06YY and 0DVC.
 -/
 
 @[expose] public noncomputable section
@@ -59,17 +66,13 @@ abbrev normalizedDVREffectivityLocal3 :
 attribute [local instance] normalizedDVREffectivityLocal3
 
 /-- The actual completed-coefficient tensor-restriction adjunction, normalized on
-K-flat representatives by the tensor unit x ↦ x tensor 1.
-Source: Stacks Tags 06YY and 0DVC; blueprint order 2132
-(blueprint: lemma-sp-tower-adjunction-foundation--2). -/
+K-flat representatives by the tensor unit x ↦ x tensor 1. -/
 def normalizedDVRIntegralAdjunction (n : ℕ) :
     scalarReductionDerivedExtension l E X n ⊣ scalarReductionDerivedRestriction l E X n :=
   (derivedScalarExtensionRestrictionAdjunction l E X n).choose
 
 /-- The canonical reduction transition is adjoint to the smaller quotient unit,
-transported through the canonical composition comparison for restrictions.
-Source: blueprint order 2132, last proof paragraph
-(blueprint: lemma-sp-tower-adjunction-foundation--2). -/
+transported through the canonical composition comparison for restrictions. -/
 def normalizedDVRReductionTransition (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
     {m n : ℕ} (h : n ≤ m)
     (M : completedIntegralDerivedCategory l E X D hl) :
@@ -81,9 +84,7 @@ def normalizedDVRReductionTransition (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
       (normalizedDVRResCompletedComp l E X D hl h).inv.app
         ((scalarReductionDerivedExtension l E X n).obj M))
 
-/-- The counit comparison at a finite level is the adjoint of that limit projection.
-Source: blueprint order 2132, comparison in the statement
-(blueprint: lemma-sp-tower-adjunction-foundation--2). -/
+/-- The counit comparison at a finite level is the adjoint of that limit projection. -/
 def normalizedDVRCounitComparison (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)
     [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]
@@ -416,23 +417,7 @@ private theorem normalizedDVRComplete_of_isIso
 
 /-- A normalized DVR tower is recovered by derived reduction of its derived inverse
 limit, through coherent canonical counit isomorphisms; that inverse limit is derived
-complete. Source: blueprint order 2132; Bhatt--Scholze, Lemmas 3.5.4--3.5.7
-(blueprint: lemma-sp-tower-adjunction-foundation--2).
-
-Proof: use the strict normalized adic cone model for the restricted derived finite
-reduction. The adopted theorem on strict normalized adic towers makes its augmented
-projection invertible, and exact faithful scalar restriction detects isomorphisms in
-the derived category. This gives each canonical finite comparison.
-The Roos triangle says that consecutive projections commute with the transitions;
-induction gives this for every pair of levels. Naturality and injectivity of the
-adjunction Hom equivalences give exactly the stated coherence equation.
-Choose a K-flat representative of M. Its universal scalar-extension counits give
-isomorphisms to the termwise reductions, and the tensor-unit normalization identifies
-its units with the canonical chain-level units. The K-flat transition lemma makes
-these identifications commute with consecutive transitions. Conjugate the finite
-comparisons by these isomorphisms and transfer the original Roos triangle along their
-product. Its first map is precisely the canonical augmentation used in
-IsDerivedComplete. No boundedness or constructibility hypothesis is used. -/
+complete. -/
 theorem normalizedDVRTower_effectivity (T : NormalizedDVRTower l E X D hl)
     (M : completedIntegralDerivedCategory l E X D hl)
     [HasProduct (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E X D hl n).obj T.tower)]

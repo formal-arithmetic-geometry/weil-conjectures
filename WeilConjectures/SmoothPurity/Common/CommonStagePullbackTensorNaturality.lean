@@ -9,8 +9,18 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorComp
 
 /-! # Naturality of the prescribed common-stage pullback tensor comparison
 
-Source: recorded blueprint coefficient conventions, the common-stage paragraph of
-`prose-03-02`; Stacks 07A4.
+If the canonical pullback-tensor comparison is natural for rational coefficients at every finite
+stage, then the canonical common-stage pullback-tensor comparison is natural.
+
+## Implementation details
+
+Both input arrows are represented over a common finite coefficient field that also contains the
+source and target tensor-object stages; there the square is rational naturality conjugated by the
+endpoint comparisons.
+
+## References
+
+* [Stacks Project, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -85,19 +95,9 @@ attribute [local irreducible] Scheme.residueField Padic ScalarLocalization.compo
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Rational comparison naturality implies naturality of the prescribed common-stage class.
-
-Source: recorded blueprint, derived-pullback-tensor-hom, common-stage passage;
-Stacks 07A4 (blueprint: lem-pur-common-stage-pullback-tensor-naturality).
-
-Proof: Represent the two input arrows over finite coefficient fields and enlarge
-both fields so that they also contain the source and target tensor-object stages.
-Use the defining representative formulas for tensor and pullback on each arrow,
-and for the canonical comparison on each pair of objects. At this common stage,
-composition is represented by composition. The adjacent tensor and pullback
-comparison inverses cancel, and the remaining square is rational naturality,
-conjugated by the endpoint comparisons. Taking the common-stage morphism class
-gives the asserted equality. No faithfulness of coefficient extension is used. -/
+/-- If the canonical rational pullback-tensor comparisons are natural for every finite
+extension `E`, then the canonical common-stage comparison `f^*(M ⊗ N) ≅ f^*M ⊗ f^*N` is
+natural in `M` and `N`. -/
 theorem commonStagePullbackTensor_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

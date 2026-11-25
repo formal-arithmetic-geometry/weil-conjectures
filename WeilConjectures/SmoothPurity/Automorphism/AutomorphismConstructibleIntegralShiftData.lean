@@ -12,8 +12,16 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerUnrestrictedSupplement
 import all WeilConjectures.SmoothPurity.Completed.CompletedScalarShiftDescent
 
-/-! Auxiliary signed shifts for every integral pullback.
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence) -/
+/-! # Signed shifts for integral pullbacks
+
+Auxiliary signed shifts for every integral pullback.
+
+## Implementation details
+
+The shifts are obtained by choosing a normalized strict finite pullback tower, applying the
+signed mapping-cocone construction, and descending the resulting shift through the derived
+comparison.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -179,11 +187,7 @@ end AutomorphismIntegralShiftProof
 
 attribute [local irreducible] AutomorphismIntegralShiftProof.chainShift
 
-/-- Signed Roos shifts exist for every scheme morphism.
-Source: the canonical shift paragraph of the Weil-structures proof
-(blueprint: lem-sf-automorphism-constructible-stage-equivalence).
-Choose a normalized strict finite pullback tower, apply the signed mapping-cocone
-construction, and descend the resulting shift through the derived comparison. -/
+/-- Signed Roos shifts exist for every scheme morphism. -/
 theorem automorphismConstructibleStage_integral_shift_data
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

@@ -9,7 +9,12 @@ public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponent
 
 /-! # Localization of the finite-stage common pullback compositor
 
-(blueprint: lem-pur-common-stage-pullback-composition-localization).
+We identify the explicit finite-stage common pullback compositor with the localized integral
+compositor.
+
+## References
+
+* [Stacks Project, Tags 07A4, 0941]
 -/
 
 @[expose] public noncomputable section
@@ -20,12 +25,7 @@ open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures
 
 /-- The explicit finite-stage compositor is the localized integral compositor under the
-prescribed rational-pullback object equalities.
-Source: Stacks 07A4, 0941; the finite-stage composition convention.
-(blueprint: lem-pur-common-stage-pullback-composition-localization).
-Proof: The compositor is the localization of the integral isomorphism, conjugated by
-`eqToIso` for the source and target object equalities. The hom of this conjugate is
-heterogeneously equal to the localized hom by `conj_eqToHom_iff_heq`. -/
+prescribed rational-pullback object equalities. -/
 theorem commonStagePullbackRationalComposition_localization
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Z ⟶ X)

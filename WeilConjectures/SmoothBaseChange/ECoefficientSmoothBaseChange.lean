@@ -38,18 +38,21 @@ import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientRea
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 
 /-! # Smooth base change with finite-extension rational coefficients
-Source: blueprint, sec-smooth-base-change/sk-rem-rest, order 1445
-(blueprint: sbc-thm-e-coefficient-smooth-base-change).
-The exchange lives in the raw rationalization of the ambient complete category.
-Constructible landing is represented through the fully faithful integral inclusion
-and the specified lattice presentation. It makes no integral constructibility claim
-about an arbitrary representative merely rationally isomorphic to a constructible one.
+
+We prove smooth base change for rational coefficients in a finite extension `E`.
 
 ## Main statements
 
 - `sbcRationalExchange`: the localized canonical integral mate.
 - `sbcTransportedExchange`: transport along a specified presentation.
 - `eCoefficientSmoothBaseChange`: invertibility, independence and constructible landing.
+
+## Implementation details
+
+The exchange lives in the raw rationalization of the ambient complete category.
+Constructible landing is represented through the fully faithful integral inclusion
+and the specified lattice presentation. It makes no integral constructibility claim
+about an arbitrary representative merely rationally isomorphic to a constructible one.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -63,23 +66,18 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y ⟶ T}
     (sq : ChosenCartesianSquare h e f g)
 
-/-- The scalar localization of the left integral composite, on all complete complexes.
-Equivalently this is successive rational direct image and rational completed pullback:
-both send a tensor r tensor a to r tensor P_f(D_g(a)).
-Source: blueprint order 1445 (blueprint: sbc-thm-e-coefficient-smooth-base-change). -/
+/-- The scalar localization of the left integral composite, on all complete complexes. -/
 def sbcRationalLeft : PbcRationalComplete l E T ⥤ PbcRationalComplete l E X :=
   ScalarLocalization.between (PbcIntegralRing l E)
     (pbcUniformizer l E) (sbcPush l E g ⋙ sbcPull l E f)
 
 /-- The scalar localization of the right integral composite, without constructibility
-assumptions on its outputs. Source: blueprint order 1445
-(blueprint: sbc-thm-e-coefficient-smooth-base-change). -/
+assumptions on its outputs. -/
 def sbcRationalRight : PbcRationalComplete l E T ⥤ PbcRationalComplete l E X :=
   ScalarLocalization.between (PbcIntegralRing l E)
     (pbcUniformizer l E) (sbcPull l E e ⋙ sbcPush l E h)
 
-/-- Rational exchange is exactly scalar localization of the specified integral mate.
-Source: blueprint order 1445 (blueprint: sbc-thm-e-coefficient-smooth-base-change). -/
+/-- The rational exchange map: the scalar localization of the specified integral mate. -/
 def sbcRationalExchange : sbcRationalLeft l E (f := f) (g := g) ⟶
     sbcRationalRight l E (e := e) (h := h) :=
   ScalarLocalization.betweenNat (PbcIntegralRing l E)

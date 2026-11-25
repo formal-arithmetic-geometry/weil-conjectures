@@ -10,13 +10,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
 /-! # The canonical sections-tensor comparison commutes with shifts
 
-Source: Stacks Project, Tag 03EK, sectionwise tensor and sheafification; blueprint
-`lemma-perfect-complexes-geometric-point`, final-display argument
-(blueprint: lem-weil-point-sections-tensor-shift).
+## Implementation details
 
 The comparison itself is the existing `pointDerivedSectionsTensor`. The shift on
 ordinary derived scalar extension is transported from exact termwise scalar extension
 through its canonical, representative-normalized comparison, independently of theta.
+
+## References
+
+* Stacks Project, Tag 03EK.
 -/
 
 @[expose] public noncomputable section

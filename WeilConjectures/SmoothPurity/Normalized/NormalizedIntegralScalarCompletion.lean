@@ -13,11 +13,15 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 /-! # The normalized integral scalar-completion comparison
 
-Source: Bhatt--Scholze, Proposition 3.5.1 and Lemma 6.8.2(1)
-(blueprint: lem-weil-normalized-scalar-completion).
+## Implementation details
 
 The ordinary coefficient model and its universal derived counit transport the existing
 finite-free comparison to the specified quotient-completion chain map.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 3.5.1 and
+  Lemma 6.8.2(1).
 -/
 
 @[expose] public noncomputable section
@@ -59,20 +63,7 @@ private local instance (W : AlgebraicGeometry.Scheme.{u}) :
       AddCommGrpCat.{u+1} := integralCoefficientAbLocallyBijective.{u, u} W
 
 /-- The unique scalar-completion transformation with the specified counit square,
-isomorphic on every derived-complete input.
-Source: Bhatt--Scholze, Proposition 3.5.1 and Lemma 6.8.2(1)
-(blueprint: lem-weil-normalized-scalar-completion).
-Proof: identify the two ordinary sheafified scalar models by their completed coefficient
-maps and lift this isomorphism to complexes. The universal left-derived comparison gives
-a natural isomorphism of their derived functors and preserves the counits. Compose with
-the existing normalized completed-scalar comparison. Its counit equation and the strict
-chain transport identify the resulting square with the required quotient-completion
-normalization, including the zero shifted coordinate. Intrinsic derived completeness
-agrees with the legacy augmented-tower predicate; choose an auxiliary finite field in a
-prime characteristic different from l to apply the finite-free comparison, which makes
-this specified component invertible. Finally, good complexes localize to the derived
-category. The normalization forces equality on every good representative by cancellation
-of its representative comparison, and localization forces equality on all objects. -/
+isomorphic on every derived-complete input. -/
 theorem normalizedIntegralScalarCompletion (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]

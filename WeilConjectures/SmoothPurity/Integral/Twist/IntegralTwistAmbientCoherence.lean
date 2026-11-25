@@ -8,10 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.Twist.IntegralTwistDerivedScalarCanonical
 public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 
-/-! # Ambient tower and unit laws for the published twist comparison
-
-Source: blueprint `definition-tate-twists--10`, final integral/common-stage sentence.
--/
+/-! # Ambient tower and unit laws for the published twist comparison -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

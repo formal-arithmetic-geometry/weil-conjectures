@@ -11,7 +11,13 @@ import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # The evaluation-preserving comparison of closed tensor presentations
 
-Source: Stacks 08J9; uniqueness of adjoints applied in both tensor variables.
+Two closed tensor structures for the same internal Hom are canonically isomorphic, by uniqueness
+of adjoints applied in both tensor variables; the comparison preserves evaluation and the
+tensor-Hom bijection.
+
+## References
+
+* Stacks 08J9
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +29,7 @@ open CategoryTheory Opposite
 namespace WeilConjectures.CoefficientClosedStructure
 variable {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
 
-/-- Transposing a tensor map is natural in both arguments.
-Source: tensor-Hom adjunction naturality; Stacks 08J9.
-(blueprint: lem-coef-closed-tensor-comparison). -/
+/-- Transposing a tensor map is natural in both arguments. -/
 theorem transpose_tensor (S : CoefficientClosedStructure H)
     {A A' P P' Q : D} (f : A ⟶ A') (g : P ⟶ P')
     (h : S.tensor.obj (A', P') ⟶ Q) :
@@ -39,9 +43,7 @@ theorem transpose_tensor (S : CoefficientClosedStructure H)
   rw [ht, Category.assoc, ringedSiteTranspose_left, ringedSiteTranspose_source]
 
 /-- Two closed tensors for the same internal Hom have a canonical comparison,
-fixed by their adjunction units and counits. It is natural in both tensor arguments.
-Source: the uniqueness of adjoints, applied parametrically; Stacks 08J9.
-(blueprint: lem-coef-closed-tensor-comparison). -/
+fixed by their adjunction units and counits. It is natural in both tensor arguments. -/
 def comparison (S T : CoefficientClosedStructure H) : S.tensor ≅ T.tensor :=
   NatIso.ofComponents
     (fun X ↦ (Adjunction.leftAdjointUniq (S.adjunction X.2) (T.adjunction X.2)).app X.1)
@@ -74,9 +76,7 @@ def comparison (S T : CoefficientClosedStructure H) : S.tensor ≅ T.tensor :=
       rw [hy, Category.comp_id, Adjunction.homEquiv_unit] at h
       exact h.symm)
 
-/-- On equal presentations the canonical comparison is the equality transport.
-Source: uniqueness of adjoints; Stacks 08J9.
-(blueprint: lem-coef-closed-tensor-comparison). -/
+/-- On equal presentations the canonical comparison is the equality transport. -/
 theorem comparison_eqToIso (S T : CoefficientClosedStructure H) (h : S = T) :
     comparison S T = eqToIso (congrArg CoefficientClosedStructure.tensor h) := by
   subst T
@@ -85,17 +85,13 @@ theorem comparison_eqToIso (S T : CoefficientClosedStructure H) (h : S = T) :
     Adjunction.leftAdjointUniq_refl, Iso.refl_hom, NatTrans.id_app, eqToIso_refl]
   rfl
 
-/-- The canonical comparison intertwines evaluation in the entire derived category.
-Source: adjunction uniqueness; Stacks 08J9.
-(blueprint: lem-coef-closed-tensor-comparison). -/
+/-- The canonical comparison intertwines evaluation in the entire derived category. -/
 theorem comparison_evaluation (S T : CoefficientClosedStructure H) (P Q : D) :
     (comparison S T).hom.app (H.obj (op P, Q), P) ≫ T.evaluation P Q =
       S.evaluation P Q :=
   Adjunction.leftAdjointUniq_hom_app_counit (S.adjunction P) (T.adjunction P) Q
 
-/-- The comparison preserves the entire tensor-Hom bijection.
-Source: uniqueness of adjoints; Stacks 08J9.
-(blueprint: lem-coef-closed-tensor-comparison). -/
+/-- The comparison preserves the entire tensor-Hom bijection. -/
 theorem comparison_transpose (S T : CoefficientClosedStructure H)
     (A P Q : D) (f : T.tensor.obj (A, P) ⟶ Q) :
     S.transpose A P Q ((comparison S T).hom.app (A, P) ≫ f) =
@@ -106,9 +102,7 @@ theorem comparison_transpose (S T : CoefficientClosedStructure H)
     Adjunction.homEquiv_leftAdjointUniq_hom_app]
   exact ((T.adjunction P).homEquiv_unit _ _ _).symm
 
-/-- Inverse transport preserves the same tensor-Hom bijection.
-Source: uniqueness of adjoints; Stacks 08J9.
-(blueprint: lem-coef-closed-tensor-comparison). -/
+/-- Inverse transport preserves the same tensor-Hom bijection. -/
 theorem comparison_inv_transpose (S T : CoefficientClosedStructure H)
     (A P Q : D) (f : S.tensor.obj (A, P) ⟶ Q) :
     T.transpose A P Q ((comparison S T).inv.app (A, P) ≫ f) =

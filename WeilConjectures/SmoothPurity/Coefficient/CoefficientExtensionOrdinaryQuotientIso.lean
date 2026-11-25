@@ -50,8 +50,18 @@ import all WeilConjectures.SmoothPurity.Coefficient.CoefficientSequenceRoosModel
 
 /-! # Ordinary quotient association for a strict scalar tensor complex
 
-Source: Stacks 03D7, 03D8, and 03EK; the ordinary part of steps 1--2 of
-stage3-pur-extension-strict-tensor-normalized.
+For a strict scalar tensor complex, the ordinary finite quotient extension of its level-`m`
+evaluation is identified with its level-`n` evaluation, compatibly with the transition map.
+
+## Implementation details
+
+The isomorphism is the scalar associator obtained from uniqueness of left adjoints, applied to
+the composite of the level-`m` scalar adjunction with the supplied quotient adjunction. Since
+this uses the supplied adjunction, the normalization hypothesis `hunit` is not needed.
+
+## References
+
+* [Stacks Project, Tags 03D7, 03D8 and 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -403,31 +413,10 @@ private def scalarAssociationData {m n : ℕ} (h : n ≤ m)
 
 attribute [local irreducible] scalarAssociationData
 
-/-- Ordinary scalar association transposes to the actual strict transition.
-
-Source: Stacks Tags 03D7, 03D8, and 03EK; ordinary parts of steps 1--2 of
-stage3-pur-extension-strict-tensor-normalized
-(blueprint: stage3-pur-extension-ordinary-quotient-iso).
-
-Proof: the completed coefficient map to level m followed by the quotient to n is
-its level-n map. This follows by induction from the successor formula and the
-functoriality of the actual quotient maps. Restriction along these maps therefore
-composes canonically. Compose the ordinary level-m scalar adjunction with the
-supplied quotient adjunction and use uniqueness of left adjoints to obtain the
-scalar associator. Its unit equation identifies the image of the level-m unit
-under the quotient unit and associator with the level-n unit.
-
-For successors, the given transition compatibility, the tensor formula, and the
-inverse evaluation isomorphism identify the actual transition on 1 tensor x.
-The actual sequence identity and composition equations extend this to all n ≤ m.
-Map the associator to complexes and conjugate by the evaluation isomorphisms.
-Precompose the desired equation by the inverse level-m evaluation isomorphism
-and apply the injective level-m adjunction Hom equivalence in each degree.
-Naturality of the quotient unit and the associator unit equation reduce its
-left side to the inverse level-n evaluation of 1 tensor x; the transition
-calculation gives its right side. Since the associator uses the supplied
-adjunction, its extra normalization hypothesis hunit is unnecessary here.
-No boundedness, flatness, or ramification condition is used. -/
+/-- For `n ≤ m` and a complex `X` whose finite evaluations are identified with the strict
+scalar tensor complexes of `P`, compatibly with transitions, there is an isomorphism `a` from the
+quotient extension of the level-`m` evaluation of `X` to its level-`n` evaluation such that the
+adjunction unit followed by the restriction of `a` is the transition map of `X`. -/
 theorem coefficientExtensionOrdinaryQuotientIso
     {m n : ℕ} (h : n ≤ m)
     (adj : coefficientFiniteQuotientExtension l L W h ⊣ normalizedDVRModuleRes l L W h)

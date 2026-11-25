@@ -11,8 +11,9 @@ import all Mathlib.Logic.Small.Defs
 
 /-! # Generic normalized composition cancellation
 
-Source: purity/trace equivariance proof Step 1, canonical pullback compositors.
-(blueprint: lem-pur-common-stage-normalized-composition).
+A coherence lemma for normalized compositors: three unit comparisons compatible with given
+isomorphisms `S ≅ 𝟭`, `T ≅ 𝟭`, `U ≅ 𝟭` cancel against a composition isomorphism
+`H ≅ G ⋙ F`.
 -/
 
 @[expose] public noncomputable section
@@ -52,13 +53,9 @@ attribute [local irreducible] commonStageDerivedPullback rationalDerivedPullback
   scalarReductionDerivedExistence
   sfRationalScalarExtension rationalPullbackScalarComparison sfRationalScalarComp
 
-/-- Three compatible unit comparisons cancel in a normalized compositor.
-Source: blueprint purity/trace equivariance Step 1, canonical composition coherence.
-(blueprint: lem-pur-common-stage-normalized-composition).
-Proof: solve each boundary comparison for its forward or inverse component. Substitute
-these equations into the compositor word, use naturality of the composition
-isomorphism, and cancel inverse unit components. The remaining expression is the
-unit functor applied to the composition component. -/
+/-- Three compatible unit comparisons cancel in a normalized compositor: if
+`aH`, `aG`, `aF` are compatible with the unit isomorphisms `s`, `t`, `u`, then
+`aH ≫ α_{S K} ≫ F(aG⁻¹) ≫ aF⁻¹ = U(α_K)`. -/
 theorem commonStageNormalizedComposition
     {C D B : Type*} [Category* C] [Category* D] [Category* B]
     (G : C ⥤ D) (F : D ⥤ B) (H : C ⥤ B)

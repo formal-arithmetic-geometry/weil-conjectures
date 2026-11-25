@@ -11,9 +11,14 @@ import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunction
 
 /-! # Fixed-scalar coordinates of finite adic exchange
 
-Source: Stacks Tag 07A7; blueprint finite pro-etale smooth base change, coefficient
-realization in the last proof step.
-(blueprint: lem-sbc-adic-finite-exchange-encoding).
+Auxiliary private lemmas expressing finite adic exchange in fixed-scalar coordinates,
+including the compatibility of coefficient realization with ordinary direct image.
+
+## References
+
+- Stacks Project, Tag 07A7.
+- Stacks Project, sites-modules.tex: sheafification of presheaves of modules and
+  pushforward of modules.
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -215,21 +220,7 @@ private noncomputable def restrictionDirectImageIso
     ext U x
     rfl
 
-/-- Realization commutes with ordinary direct image through the specified scalar map.
-Source: Stacks Project, sites-modules.tex, lemma-sheafification-presheaf-modules
-and definition-pushforward; blueprint proper finiteness, proof step 2.
-(blueprint: lem-weil-pbc-finite-coefficient-realization-direct-image)
-
-Proof: restrict both module actions along constant scalar sections. The realization
-unit identifies each underlying sheaf with the original fixed-ring module sheaf.
-Both direct images evaluate on the same fibre product, with the same restriction
-maps. The coefficient map is precomposition of continuous functions along its
-projection, so on constant scalars it is the identity on the coefficient ring.
-The identity on these sections is therefore linear for constant scalars. Every
-continuous scalar function is locally constant, and sheaf gluing extends this
-linearity to the sheafified coefficient ring. It gives a natural isomorphism,
-whose inverse is the same identity in the opposite presentation. The construction
-also applies to the empty scheme and zero ring. -/
+/-- Realization commutes with ordinary direct image through the specified scalar map. -/
 private theorem pbcFunctionRealization_directImage
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :

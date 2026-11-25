@@ -12,9 +12,9 @@ import all WeilConjectures.TraceFormula.Isomorphism.IsomorphismStrictQuotientMul
 
 /-! # Normalized isomorphism of ordinary quotient towers
 
-Source: Stacks Tags 03D2 and 03EL; expanded clause 4 of
-prose-10-21.
-(blueprint: lem-pur-isomorphism-ordinary-quotient-tower-normalization).
+## References
+
+* Stacks Project, Tags 03D2 and 03EL.
 -/
 
 @[expose] public noncomputable section
@@ -32,12 +32,7 @@ attribute [local instance_reducible] IntegralOnSlice.Site IntegralOnSlice.topolo
   IntegralOnSlice.restrict IntegralOnSlice.ring
 attribute [local instance_reducible] integralCoefficientSheaf integralCoefficientCommRingSheaf
 
-/-- The quotient tower isomorphism has the specified insertion at every level.
-Source: Stacks Tag 03EL; the existing unrestricted quotient-insertion construction.
-(blueprint: lem-pur-isomorphism-ordinary-quotient-tower-normalization).
-Proof: the slice-none and unrestricted chosen tower presentations are definitionally
-identical. Apply the already proved unrestricted insertion isomorphism directly; its
-component is the specified insertion by reflexivity. -/
+/-- The quotient tower isomorphism has the specified insertion at every level. -/
 theorem isomorphismOrdinaryQuotientTowerNormalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

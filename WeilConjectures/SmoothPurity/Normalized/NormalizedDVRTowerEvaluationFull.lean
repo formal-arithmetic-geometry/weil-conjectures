@@ -35,11 +35,21 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Lifting compatible derived maps of sequential towers
 
-Source: Stacks Project, Injectives, Tag 079P, and Derived Categories, Tag 070I;
-sequential homotopy correction as written in the DAG proof
-(blueprint: lem-pur-normalized-dvr-tower-evaluation-full).
+## Implementation details
 
 The natural-number index `n` denotes the positive level `n + 1` of the source.
+The derived transition between evaluations is the localization lift of the degreewise
+tower transition, using the canonical factorizations of the exact evaluation functors.
+
+The lift is constructed by sequential homotopy correction: resolve the target tower by a
+degreewise injective K-injective complex, whose transition maps split degreewise; represent
+each prescribed derived map by a chain map and inductively subtract a lifted null-homotopy
+of the adjacent commutation defect. The corrected maps assemble into a strict tower chain
+map. No equality of the raw site and coefficient universes is used.
+
+## References
+
+* Stacks Project, Tags 05RU, 070I, 079P and 08TC.
 -/
 
 @[expose] public section
@@ -239,20 +249,13 @@ private theorem towerCategory_grothendieck
 variable (A : Type u) [Category.{v} A] [Abelian A]
   [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ A)]
 
-/-- Exact evaluation of a strict tower induces evaluation on its derived category.
-Source: Stacks Project, Derived Categories, Tag 05RU, and the levelwise exactness of
-functor categories (blueprint: lem-pur-normalized-dvr-tower-evaluation-full).
-Here `n` denotes positive level `n + 1`. -/
+/-- Exact evaluation of a strict tower induces evaluation on its derived category. -/
 private noncomputable abbrev grothendieckTowerEvaluation (n : ℕ) :
     DerivedCategory (ℕᵒᵖ ⥤ A) ⥤
       DerivedCategory (A) :=
   ((evaluation ℕᵒᵖ (A)).obj (op n)).mapDerivedCategory
 
-/-- The canonical derived transition from level `n + 2` to level `n + 1`.
-Source: Stacks Project, Derived Categories, Tags 05RU and 08TC
-(blueprint: lem-pur-normalized-dvr-tower-evaluation-full).
-This is the localization lift of the degreewise tower transition, using the canonical
-factorizations of the exact evaluation functors. No arbitrary transition is chosen. -/
+/-- The canonical derived transition from level `n + 2` to level `n + 1`. -/
 private noncomputable def grothendieckTowerTransition (n : ℕ) :
     grothendieckTowerEvaluation A (n + 1) ⟶ grothendieckTowerEvaluation A n :=
   Localization.liftNatTrans DerivedCategory.Q
@@ -314,37 +317,7 @@ private theorem grothendieckTowerTransition_transport
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Compatible derived evaluation maps lift to a map of strict derived towers; every
-levelwise invertible lift is invertible. Source: Stacks Project, Injectives, Tag 079P,
-and Derived Categories, Tag 070I, with the sequential correction argument below
-(blueprint: lem-pur-normalized-dvr-tower-evaluation-full).
-
-Proof plan:
-1. Represent `X,Y` by strict tower complexes `P,V`. The small module diagram category
-is Grothendieck abelian by `lem-weil-pbc-small-module-diagrams-grothendieck`. Resolve `V`
-by a K-injective tower complex `J` with injective tower objects in each degree, using
-`lem-pur-kinjective-degreewise-existence`. Exact evaluation preserves quasi-isomorphisms
-by `lem-weil-tower-category-levelwise-abelian`; transport the specified maps to `P_n,J_n`.
-2. For an injective tower `T`, extend the map from the staircase `L_n(T_n)` to `T` across
-its monic inclusion into `L_{n+1}(T_n)` by `def-sp-injective-resolutions`. At level `n`
-this extension is the identity, so its next component splits `T_{n+1} → T_n`.
-Choose these sections in every degree of `J`, without requiring differential compatibility.
-3. By `lem-weil-tower-evaluation-kinjective`, each `J_n` is K-injective. The bijection
-`lem-weil-pbc-kinjective-hom-derived` represents each specified map by a chain map `a_n`
-and makes each adjacent commutation defect null-homotopic.
-4. Inductively set `b_0 = a_0`. Given `b_n`, choose a homotopy `H` for
-`t a_{n+1} - b_n t`, lift it degreewise using the sections, and subtract
-`d H̃ + H̃ d` from `a_{n+1}`. This is a null-homotopic chain-map correction. Since
-`t H̃ = H` and `t` commutes with differentials, the corrected map commutes strictly
-with the adjacent transition and still represents the prescribed derived map.
-5. Adjacent commutation implies all naturality equations. Assemble the corrected maps
-into a strict tower chain map, localize, and transport back to `X,Y` by
-`def-weil-abstract-derived-category`. Its evaluations are the prescribed maps.
-Individual homotopies need not assemble into a tower homotopy; no uniqueness is claimed.
-6. For ANY lift with invertible evaluations, represent it by a chain map into `J`
-using `lem-weil-pbc-kinjective-hom-derived` in the tower category. All evaluated cohomology
-maps are invertible. Cohomology is levelwise by `lem-weil-tower-category-levelwise-abelian`,
-and component inverses are natural. Thus the tower chain map is a quasi-isomorphism,
-so its localization, and hence the lift, is invertible. -/
+levelwise invertible lift is invertible. -/
 private theorem grothendieckTowerEvaluation_full
     [IsGrothendieckAbelian.{g} A]
     (X Y : DerivedCategory (ℕᵒᵖ ⥤ A))
@@ -451,20 +424,7 @@ namespace WeilConjectures
 universe d t r
 
 /-- Compatible maps between evaluations of actual strict completed-coefficient towers
-lift to the derived category of those towers, with independent site/coefficient universes.
-Source: Stacks 079P and 070I, and the chain-map proof of sequential evaluation fullness
-(blueprint: lem-pur-normalized-dvr-tower-evaluation-full).
-
-Proof: the pro-etale site is essentially small in the module universe, so module
-sheaves are Grothendieck there. Evaluation left adjoints give a separator for towers
-and AB5 is pointwise. Resolve the target tower by a degreewise injective K-injective
-complex. Its transition maps split degreewise and its evaluations are K-injective.
-Represent each prescribed derived map by a chain map. Inductively subtract a lifted
-null-homotopy of the adjacent commutation defect; the correction preserves its derived
-class and makes the adjacent square commute strictly. Assemble the corrected maps as
-a strict tower chain map and localize. The canonical evaluation factorizations give
-exactly the prescribed maps. This is the same sequential homotopy correction as for
-a small ringed site; no equality of the raw site and coefficient universes is used. -/
+lift to the derived category of those towers, with independent site/coefficient universes. -/
 theorem normalizedDVRTowerEvaluation_full
     (l : ℕ) [Fact l.Prime] (E : Type r) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

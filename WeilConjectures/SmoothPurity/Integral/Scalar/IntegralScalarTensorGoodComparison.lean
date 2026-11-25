@@ -13,8 +13,9 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorChainNat
 
 /-! # Scalar tensor comparison on good representatives
 
-Source: Stacks 07A4 and 0941; categories.tex, Tag 04VK.
-(blueprint: lem-pur-integral-scalar-tensor-good-comparison).
+## References
+
+* Stacks Project, Tags 07A4, 0941, 08TC and 04VK.
 -/
 
 @[expose] public noncomputable section
@@ -75,12 +76,7 @@ local notation "s" => Functor.prod (ObjectProperty.ι (integralOperationsGoodCom
   (ObjectProperty.ι (integralOperationsGoodComplex l L W)) ⋙
     integralOperationsTensorComplexFunctor l L W
 
-/-- The Q-images of the specified scalar tensor chain maps form a natural isomorphism.
-Source: Stacks 07A4, 0941 and 08TC.
-(blueprint: lem-pur-integral-scalar-tensor-good-comparison).
-Proof: each component is invertible by scalarTensorChainQuasiIso. Naturality is
-scalarTensorChain_naturality mapped by Q, so NatIso.ofComponents assembles the
-components. Its component equation follows from the definition of asIso. -/
+/-- The Q-images of the specified scalar tensor chain maps form a natural isomorphism. -/
 theorem integralScalarTensorGoodComparison :
     ∃! c : t ⋙ S ⋙ DerivedCategory.Q ≅ (Functor.prod k k) ⋙ s ⋙ DerivedCategory.Q,
       ∀ P, c.hom.app P =

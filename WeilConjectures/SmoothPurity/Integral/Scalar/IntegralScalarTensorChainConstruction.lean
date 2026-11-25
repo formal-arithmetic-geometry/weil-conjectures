@@ -15,8 +15,9 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarFiniteRedu
 
 /-! # Normalized scalar chain maps on finite tensor levels
 
-Source: Stacks, Modules on Sites, Tags 03CZ and 03EL.
-(blueprint: lem-pur-integral-scalar-tensor-chain-construction).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CZ and 03EL.
 -/
 
 -- After pruning, this module only keeps private declarations.

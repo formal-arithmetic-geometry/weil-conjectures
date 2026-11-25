@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurryNorm
 
 /-! # Compatibility of normalized representative tensor models
 
-Source: Stacks 0A90, 0A95 and 08J9.
+## References
+
+- Stacks Project, Tags 0A90, 0A95 and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -47,15 +49,7 @@ private theorem coefficientTensorModelComparison_of_normalize
     ((T.transpose A P Q).apply_symm_apply h).symm
 
 -- The identity total tensor has to be compared across the two site universe parameters.
-/-- The representative tensor models commute with the canonical closed-tensor comparison.
-Source: Stacks 0A90, 0A95 and 08J9
-(blueprint: lem-coef-representative-tensor-model-comparison).
-
-Proof: curry the identity of the ordinary total tensor. The representative
-normalization in both closed structures identifies its uncurrying with the inverse
-representative tensor isomorphism. The canonical comparison preserves transpose;
-apply the two tensor-Hom bijections and their inverse laws to identify these maps.
-The argument applies also to zero complexes and the empty scheme. -/
+/-- The representative tensor models commute with the canonical closed-tensor comparison. -/
 theorem coefficientTensorModelComparison (W : Scheme.{u})
     (S T : CoefficientDerivedSystemCalculus.{u, u} l E W)
     (C D : CochainComplex (coefficientSequenceModules.{u, u} l E W) ℤ)

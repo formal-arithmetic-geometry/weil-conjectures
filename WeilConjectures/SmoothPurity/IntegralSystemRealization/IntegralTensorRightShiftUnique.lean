@@ -10,7 +10,12 @@ import all WeilConjectures.SixFunctors.Completed.CompletedTensorShiftRight
 import WeilConjectures.SixFunctors.Completed.CompletedTensorFiniteShift
 import WeilConjectures.SmoothPurity.IntegralSystemRealization.IntegralTensorRightShiftExt
 
-/-! # Unique normalized shift in the signed completed second slot -/
+/-! # Unique normalized shift in the signed completed second slot
+
+## References
+
+* Stacks Project, Tags 011G, 014E, 06YU and 0941.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,15 +49,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   integralOperationsGoodComplex completedTensorShiftOneSub completedTensorShiftProductIso
   completedTensorShiftRoosIso integralOperationsRoos integralOperationsRoosMap DerivedCategory.Q
 
-/-- Existence and uniqueness for the signed completed second slot.
-Source: Stacks 011G, 014E, 06YU, 0941; blueprint purity transport, Step 2
-(blueprint: lem-pur-integral-tensor-right-shift-unique).
-
-Proof: use the already proved finite tower comparison, good-model shift and
-normalized product/cone descent from CompletedTensorShiftRight. None of those
-construction helpers requires invertibility of l on W. Its component equation
-is precisely the required normalization. The separate representative
-extensionality theorem identifies any other normalized comparison with it. -/
+/-- Existence and uniqueness for the signed completed second slot. -/
 theorem integralTensorRightShift_existsUnique (W : Scheme.{u}) (r : ℤ) :
     ∃! σ : completedTensorShiftSecond (Integral l E W) r ⋙ integralCompletedTensor l E W ≅
       integralCompletedTensor l E W ⋙ shiftFunctor (Integral l E W) r,

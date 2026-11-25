@@ -12,7 +12,9 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 
 /-! # Signed powers and ordinary scalar extension
 
-(blueprint: lem-pur-integral-line-power-comparisons).
+## References
+
+* Stacks Project, Tags 03EL and 04TT.
 -/
 
 @[expose] public noncomputable section
@@ -220,21 +222,7 @@ private theorem ordinary_evaluations
     exact line_evaluation_tmul X R P U x φ
 
 /-- Signed powers commute with ordinary quotient extension, and opposite powers
-have the prescribed sheaf evaluations.
-Source: Stacks 03EL, 04TT; blueprint proof (3), local signed bases.
-(blueprint: lem-pur-integral-line-power-comparisons).
-
-Proof: trivialize L with a basis e. Its positive tensor powers have the tensor basis,
-the zeroth power has basis 1, and its negative powers have the dual basis. Opposite
-powers pair by multiplication in these bases; the inverse sends a to a times the
-first basis tensored with the second. A basis change by a unit acts in degree m by
-its mth power, so the pairings glue. On extension of scalars use the unit comparison
-at zero and the identity at one. Recursively balance the positive tensor powers.
-For a negative power extend the functional and precompose with the inverse positive
-comparison. Evaluation cancels that inverse and gives residue(phi(x))*a*c. These
-maps are isomorphisms in each basis and hence globally. Their positive formulas are
-the binary balancing formulas, and the three evaluation formulas are multiplication
-at zero and functional evaluation in the two orders. -/
+have the prescribed sheaf evaluations. -/
 theorem integral_line_power_comparisons
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1] :
     ∃ (b : PowerComparisons l E X L) (e : Evaluations l E X L),

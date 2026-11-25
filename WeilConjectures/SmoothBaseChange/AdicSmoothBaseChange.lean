@@ -28,17 +28,21 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Adic smooth base change
 
-Source: blueprint, sec-smooth-base-change/sk-rem-rest, order 1443;
-Stacks Tags 0EYU, 099N, 099M and 09AL
-(blueprint: sbc-thm-adic-smooth-base-change).
-
-The exchange is the published completed adjunction mate. The conditional clause
-retains all four finite outputs and a single interval for every level.
+Smooth base change for adic coefficients.
 
 ## Main definitions and statements
 
 - `sbcAdicFiniteCohomology`: the canonical finite coefficient presentation of cohomology.
 - `adicSmoothBaseChange`: invertibility and conditional constructible landing.
+
+## Implementation details
+
+The exchange is the published completed adjunction mate. The conditional clause
+retains all four finite outputs and a single interval for every level.
+
+## References
+
+* Stacks 0EYU, 099N, 099M, 09AL
 -/
 
 @[expose] public noncomputable section

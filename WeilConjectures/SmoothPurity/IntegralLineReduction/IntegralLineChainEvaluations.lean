@@ -12,8 +12,9 @@ import all WeilConjectures.SmoothPurity.Supporting.SignedLineTensorEquivalence
 
 /-! # Chain cancellation for signed integral lines
 
-Source: latest blueprint, Tate-twist local freeness, proof (3), final two sentences.
-(blueprint: lem-pur-integral-line-chain-evaluations).
+## References
+
+* Stacks Project, Tags 06YU, 0B8N and 0B8Q.
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +32,7 @@ open IntegralOnSlice
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Total tensor by the degree-zero signed line, before localization.
-Source: Stacks 06YU (blueprint: lem-pur-integral-line-chain-evaluations). -/
+/-- Total tensor by the degree-zero signed line, before localization. -/
 def chainTensor (L : scalarReductionSource.{u, u} l E X) (m : ℤ) :
     Cx.{u, u} l E X none ⥤ Cx.{u, u} l E X none :=
   Prod.sectL (Cx.{u, u} l E X none)
@@ -40,8 +40,7 @@ def chainTensor (L : scalarReductionSource.{u, u} l E X) (m : ℤ) :
     coefficientTotalTensor.{u, u + 1, u} (ProEt.topology X)
       (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)
 
-/-- The ordinary cancellation formula on every total-complex generator.
-Source: Stacks 06YU (blueprint: lem-pur-integral-line-chain-evaluations). -/
+/-- The ordinary cancellation formula on every total-complex generator. -/
 def ChainEvaluationFormula (L : scalarReductionSource.{u, u} l E X) (m k : ℤ)
     (e : (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
       (A := completedIntegralCommRingSheafUnrestricted.{u, u} l E X) (power l E X L k)).obj
@@ -641,27 +640,7 @@ private theorem liftCancellation_formula
   erw [chainCollapse_generator l E X L m P i U x y]
   exact moduleCancellation_pure l E X L m k e (P.X i) U x y z
 
-/-- Opposite signed-line tensors cancel already on unbounded complexes.
-
-Source: latest blueprint, `sk-def-sp-tate-twist-locally-free.proof.md`, (3),
-final two sentences; Stacks Project, Tags 0B8N, 0B8Q, and 06YU.
-(blueprint: lem-pur-integral-line-chain-evaluations).
-
-Proof: collapse tensor with each degree-zero line to termwise tensor. Reassociate
-and apply e(m), respectively the reversed evaluation, followed by the right unit
-constraint; transport these termwise isomorphisms back through the collapses.
-This defines natural chain isomorphisms: the collapse and termwise constraints
-commute with the differentials. Their value on a total generator is e(y,z) times x,
-since the two line degrees are zero, so every sign is one. On a covering where
-the positive power is free with basis p, its dual has the basis phi with phi(p)=1.
-EvaluationFormula identifies both given pairings with functional evaluation.
-The inverse cancellation inserts p and phi, in the indicated order. The first
-triangle on x tensor cp inserts p,phi then evaluates phi(cp)=c, giving the same
-tensor by balancing. Pure tensors generate after sheafification and equality is
-local, so the triangle holds globally in each degree. For m=0 the same calculation
-is multiplication in the coefficient ring, and for a negative m the two orders
-are exchanged. The transport -(-m)=m in reverseEvaluation changes no generator.
-The computations hold also on empty covering members, where all sections agree. -/
+/-- Opposite signed-line tensors cancel already on unbounded complexes. -/
 theorem integral_line_chain_evaluations
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (e : Evaluations l E X L) (he : EvaluationFormula l E X L e) (m : ℤ) :

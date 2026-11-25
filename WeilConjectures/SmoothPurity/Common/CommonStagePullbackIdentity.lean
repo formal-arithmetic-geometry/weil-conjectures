@@ -13,8 +13,13 @@ set_option linter.privateModule false
 
 /-! # Identity comparison for common-stage pullback
 
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 099N.
-(blueprint: lem-sf-common-stage-pullback-identity).
+Transport of morphisms along equalities of objects, used for the identity comparison of
+common-stage pullback.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+* [Stacks: Tag 099N](https://stacks.math.columbia.edu/tag/099N)
 -/
 
 @[expose] public noncomputable section

@@ -13,8 +13,18 @@ import WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitOrdinaryAdjunct
 
 /-! # Derived comparison for an already strict coefficient tensor model
 
-Source: Stacks 03EK, 03D7, 06YY, 07A6 and 0941; the integral-operations
-coefficient-extension proof, step 2 of stage3-pur-extension-strict-representatives.
+A strict tensor model computes the specified composite derived coefficient extension.
+
+## Implementation details
+
+The comparison is the derived transpose of the ordinary quotient tensor/limit adjunction, computed
+with flat-term K-flat resolutions. It is invertible by joint conservativity of the finite derived
+evaluations. Naturality is obtained before localization from the adjunction units and tensor maps,
+not from faithfulness of derived evaluations.
+
+## References
+
+* [Stacks, Tags 03EK, 03D7, 06YY, 07A6 and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -29,30 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (W : Scheme.{t})
 
-/-- A strict tensor model computes the specified composite derived extension.
-
-Source: Stacks 06YY and 07A6; step 2 of
-stage3-pur-extension-strict-representatives
-(blueprint: stage3-pur-extension-strict-derived-comparison).
-
-Proof: form the ordinary quotient tensor system over the completed E-coefficients
-and its tensor/limit adjunction (the ringed sequence projection). Transpose its
-ordinary unit through reduction and scalar restriction. Derive this composite
-adjunction using a flat-term K-flat resolution; the scalar restriction functors
-are exact. The normalized units make the finite evaluation of this comparison
-SE.reductionEvaluation followed by the finite K-flat counits, then the given
-ordinary association. The latter equality follows on local tensors from
-hassociation and extends through sheafification and termwise totalization.
-Change of rings preserves K-flat complexes with flat terms, so both finite
-counits are invertible on the input good complexes. Joint conservativity of the
-finite derived evaluations makes the system comparison invertible. The given
-strict transitions identify its ordinary target with direct: conjugate the
-component evaluation isomorphisms and use the successor equations, then compose
-them to treat every horizontal arrow. This is an isomorphism of complexes on the
-sequence site. Naturality is obtained before localization from the adjunction
-units and tensor maps, then descends through K-flat localization; it is not
-inferred from faithfulness of derived evaluations. This yields the natural
-model and exactly its stated finite evaluation equation. -/
+/-- A strict tensor model computes the specified composite derived extension. -/
 theorem coefficientExtensionStrictDerivedComparison
     (A : CoefficientExtensionSystems l E L ι W)
     (SE : CoefficientDerivedSystemCalculus l E W)

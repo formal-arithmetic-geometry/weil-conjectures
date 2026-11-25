@@ -10,8 +10,12 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarComparis
 
 /-! # Finite-level data for the strict open scalar comparison
 
-Source: Stacks Project, Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-level-data).
+Families of finite-level scalar comparison isomorphisms compatible with the quotient transitions,
+and their construction from normalized finite comparisons.
+
+## References
+
+* [Stacks, Tags 0E8I and 0941]
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +29,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- A family of finite-level scalar comparison isomorphisms, with their
-component formula and compatibility with every quotient transition.
-Source: Stacks Tags 0E8I and 0941; degreewise comparison and transition coherence.
-(blueprint: lem-sf-open-quotient-scalar-comparison-level-data). -/
+/-- A family of finite-level scalar comparison isomorphisms, with their component formula and
+compatibility with every quotient transition. -/
 structure ScalarComparisonLevelData
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)
@@ -52,11 +54,8 @@ structure ScalarComparisonLevelData
         ((OpenSemilinearTensor.extensionComplex l E j o).map
           ((unrestrictedIntegralTransition l E U n).app Q)).f i
 
-/-- The finite-level comparison data can be constructed from the normalized finite
-comparison and scalar compatibility maps. The proof is the degreewise generator
-calculation followed by transition naturality.
-Source: Stacks Tags 0E8I and 0941.
-(blueprint: lem-sf-open-quotient-scalar-comparison-level-data). -/
+/-- The finite-level comparison data can be constructed from the normalized finite comparison and
+scalar compatibility maps. -/
 theorem openQuotientScalarComparisonLevelData
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

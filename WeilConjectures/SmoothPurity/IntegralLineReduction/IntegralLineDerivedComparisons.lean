@@ -11,7 +11,9 @@ import WeilConjectures.SmoothPurity.IntegralLineReduction.IntegralLineSupportPre
 
 /-! # Derived signed line reduction
 
-(blueprint: lem-pur-integral-line-derived-comparisons).
+## References
+
+* Stacks Project, Tags 06YY and 07A4.
 -/
 
 @[expose] public noncomputable section
@@ -30,21 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
 /-- Derived quotient extension of a signed line twist is normalized by balancing,
-commutes with the strict transitions, and preserves every uniform support interval.
-Source: Stacks 06YY, 07A4; blueprint proof (3).
-(blueprint: lem-pur-integral-line-derived-comparisons).
-
-Proof: every signed power is a line, so its single complex is K-flat and its tensor
-is exact. Apply the normalized ringed-topos derived tensor pullback comparison to
-the quotient ring map and compose with b. On good representatives its chain map is
-balancing followed by b on the line factor. This gives ChainFormula. Quotient
-reduction on both factors gives the transition map, with TransitionFormula; the
-square follows on generating tensors, since both routes apply the same quotient
-ring homomorphism to every scalar. Descent through the K-flat localization gives
-the natural isomorphism d and its representative equation. Cohomology of exact
-line tensor is cohomology tensored with the finite line. It takes a zero sheaf to
-zero, so after the derived comparison every cohomology degree outside the original
-interval still vanishes, with precisely the same endpoints. -/
+commutes with the strict transitions, and preserves every uniform support interval. -/
 theorem integral_line_derived_comparisons
     (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (b : PowerComparisons l E X L) (hb : PowerFormula l E X L b) :

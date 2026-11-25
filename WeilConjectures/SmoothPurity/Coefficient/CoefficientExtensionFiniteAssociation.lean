@@ -47,7 +47,16 @@ import all WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefin
 
 /-! # Balanced association for the finite coefficient-extension models
 
-Source: the integral-operations tensor associator; Stacks 03EK and 03D7.
+The balanced association isomorphism between iterated and direct finite scalar extension.
+
+## Implementation details
+
+The isomorphism comes from uniqueness of left adjoints: both functors are left adjoint to
+restriction along the composite ring map. The unit equation fixes its value on unit tensors.
+
+## References
+
+* [Stacks, Tags 03EK and 03D7]
 -/
 
 @[expose] public noncomputable section
@@ -114,13 +123,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 variable (A : CoefficientExtensionSystems l E L ι W)
 
-/-- Balanced association between iterated and direct finite scalar extension.
-Source: integral operations; Stacks 03EK, 03D7
-(blueprint: stage3-pur-finite-extension-association).
-Proof: compose the ordinary extension/restriction adjunctions. Their right adjoints
-are the same restriction along the composite ring map. Uniqueness of the left
-adjoint gives a natural isomorphism. Its unit equation identifies its value on
-unit tensors. Linearity then gives the stated formula for arbitrary coefficients. -/
+/-- Balanced association between iterated and direct finite scalar extension. -/
 theorem coefficientExtensionFiniteAssociation_exists :
     Nonempty (CoefficientExtensionAssociationData l E L ι W A) := by
   classical

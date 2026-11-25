@@ -59,13 +59,18 @@ set_option linter.privateModule false
 
 /-! # Exact completed extension and sections at a point
 
-Source: Stacks Project, Modules on Sites, Tags 03EI and 093M; blueprint
-main-20261015, prose-10-04, proof, second sentence
-(blueprint: lem-pod-point-exact-extension-sections).
+Exactness of the completed extension functors at a point and their sections, in the finite and
+integral coefficient cases.
+
+## Implementation details
 
 The extension objects, their maps, local tensor generators and scalar-restricted
 sections are the published PointDerivedHom constructions. Both the finite and integral
 cases use arbitrary modules and sheaves. Cochain complexes may be unbounded.
+
+## References
+
+* [Stacks, Tags 03EI and 093M]
 -/
 
 @[expose] public noncomputable section

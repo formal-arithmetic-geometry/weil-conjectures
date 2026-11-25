@@ -28,8 +28,12 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Recursive strict-to-derived expression comparison
 
-Source: Stacks 07A4 and 0941. The comparison is constructed recursively from
-cochain tensor models and exact-localization factors, before completion.
+The comparison is constructed recursively from cochain tensor models and
+exact-localization factors, before completion.
+
+## References
+
+* Stacks Project, Tags 07A4, 0941 and 0G7E.
 -/
 
 @[expose] public noncomputable section
@@ -92,9 +96,7 @@ private theorem good_unit (M : CompletedOperations.Models l E W) (a : S) :
     exact (exactFunctor _ _).prop_of_iso
       (SheafOfModules.siteSheafTensorRightIso R _).symm h.2
 
-/-- Tensor and inverse image preserve flat-term K-flat strict expression models.
-Source: Stacks 07A4 and 0G7E
-(blueprint: stage3-pur-integral-expression-system-comparison). -/
+/-- Tensor and inverse image preserve flat-term K-flat strict expression models. -/
 theorem goodExpression (M : CompletedOperations.Models l E W)
     {I : Type i} {location : I → S} (N : ∀ k : I, Complex l E (W (location k)))
     (hN : ∀ k, Good l E (W := W) (location k) (N k))
@@ -106,9 +108,7 @@ theorem goodExpression (M : CompletedOperations.Models l E W)
   | tensor P Q hp hq => exact good_tensor l E _ _ hp hq
   | pullback f P hp => exact good_pull l E f _ hp
 
-/-- The specified recursive comparison, formed before any derived inverse limit.
-Source: Stacks 07A4 and 0941
-(blueprint: stage3-pur-integral-expression-system-comparison). -/
+/-- The specified recursive comparison, formed before any derived inverse limit. -/
 def systemComparison (M : CompletedOperations.Models l E W)
     {I : Type i} {location : I → S} (N : ∀ k : I, Complex l E (W (location k)))
     (hN : ∀ k, Good l E (W := W) (location k) (N k))

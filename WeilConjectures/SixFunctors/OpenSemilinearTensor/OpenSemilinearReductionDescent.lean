@@ -12,7 +12,19 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Augmented open reduction descent
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I and 03DI.
+An ordinary strict comparison between open extension and reduction descends, through the
+augmented computations of the reductions, to a natural isomorphism `j_! ⋙ red_X ≅ red_U ⋙ J`
+of derived functors.
+
+## Implementation details
+
+The isomorphism is first defined on the localization of the flat-term K-flat complexes, by
+conjugating the localized ordinary chain comparison with the augmented computation isomorphisms;
+since this localization is equivalent to the derived category, it descends uniquely.
+
+## References
+
+* [Stacks Project, Tags 0E8I, 03DI, 06YS, 06YY, 0941 and 0GL1]
 -/
 
 @[expose] public noncomputable section
@@ -38,20 +50,9 @@ private theorem cancellation
   simp only [Category.assoc, ← F.map_comp_assoc, e.inv_hom_id,
     F.map_id, Category.id_comp, d.inv_hom_id, Category.comp_id]
 
-/-- Descent of an ordinary strict open scalar comparison through augmented computations.
-Source: Stacks 06YS, 06YY, 0941 and 0GL1
-(blueprint: lem-sf-open-semilinear-reduction-descent).
-
-Proof: Compute ordinary quotient tensor simultaneously on flat-term K-flat complexes.
-The scalar-unit maps give a strict augmentation whose transpose under the fixed reduction
-and total-limit adjunction determines the computation comparison uniquely. Exact open
-extension and the K-flat preservation hypothesis supply the same computation on the
-extended complex. Conjugate the localization of the ordinary chain comparison by these
-two computation isomorphisms. Naturality holds first for chain maps, then for inverses of
-quasi-isomorphisms. The localization of flat-term K-flat models is equivalent to the
-ordinary derived category, so this descends uniquely to all derived arrows. Each component
-is an isomorphism, hence the descended transformation is a natural isomorphism. Its
-construction gives the representative square, with the actual scalar-unit augmentation. -/
+/-- Descent of an ordinary strict open scalar comparison through augmented computations:
+there is a natural isomorphism `j_! ⋙ SX.reduction ≅ SU.reduction ⋙ J` satisfying the
+representative square for the given ordinary comparison. -/
 theorem openSemilinearReductionDescent
     (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U)

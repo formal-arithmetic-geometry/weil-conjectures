@@ -17,8 +17,9 @@ comparisons satisfy the cocycle equation, and the stagewise unitor representativ
 common-stage tensor with the unit are compatible with transport. This is the categorical part
 of the construction of the common-stage unitors.
 
-Source: Stacks Project, Tag 0FFK (coherence for unit constraints); blueprint coefficient
-conventions (blueprint: lem-pur-derived-pullback-tensor-constraints).
+## References
+
+* [Stacks Project, Tag 0FFK] (coherence for unit constraints)
 -/
 
 @[expose] public section
